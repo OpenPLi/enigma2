@@ -107,6 +107,7 @@ def saveResumePoints():
 	try:
 		f = open('/home/root/resumepoints.pkl', 'wb')
 		cPickle.dump(resumePointCache, f, cPickle.HIGHEST_PROTOCOL)
+		f.close()
 	except Exception, ex:
 		print "[InfoBar] Failed to write resumepoints:", ex
 	resumePointCacheLast = int(time())
@@ -114,7 +115,10 @@ def saveResumePoints():
 def loadResumePoints():
 	import cPickle
 	try:
-		return cPickle.load(open('/home/root/resumepoints.pkl', 'rb'))
+		file = open('/home/root/resumepoints.pkl', 'rb')
+		PickleFile = cPickle.load(file)
+		file.close()
+		return PickleFile
 	except Exception, ex:
 		print "[InfoBar] Failed to load resumepoints:", ex
 		return {}
