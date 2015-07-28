@@ -37,7 +37,10 @@ def getGStreamerVersionString():
 
 def getKernelVersionString():
 	try:
-		return open("/proc/version","r").read().split(' ', 4)[2].split('-',2)[0]
+		f = open("/proc/version","r")
+		kernelversion = f.read().split(' ', 4)[2].split('-',2)[0]
+		f.close()
+		return kernelversion
 	except:
 		return _("unknown")
 
