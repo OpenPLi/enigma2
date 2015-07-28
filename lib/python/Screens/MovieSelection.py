@@ -15,23 +15,19 @@ from Components.Sources.ServiceEvent import ServiceEvent
 from Components.Sources.StaticText import StaticText
 import Components.Harddisk
 from Components.UsageConfig import preferredTimerPath
-
 from Plugins.Plugin import PluginDescriptor
-
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
 from Screens.LocationBox import MovieLocationBox
 from Screens.HelpMenu import HelpableScreen
 from Screens.InputBox import PinInput
 import Screens.InfoBar
-
 from Tools import NumericalTextInput
 from Tools.Directories import resolveFilename, SCOPE_HDD
 from Tools.BoundFunction import boundFunction
 import Tools.Trashcan
 import NavigationInstance
 import RecordTimer
-
 from enigma import eServiceReference, eServiceCenter, eTimer, eSize, iPlayableService, iServiceInformation, getPrevAsciiCode, eRCInput
 import os
 import time
@@ -1174,7 +1170,9 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		if config.movielist.settings_per_directory.value:
 			try:
 				path = os.path.join(config.movielist.last_videodir.value, ".e2settings.pkl")
-				pickle.dump(self.settings, open(path, "wb"))
+				file = open(path, "wb")
+				pickle.dump(self.settings, file)
+				file.close()
 			except Exception, e:
 				print "Failed to save settings to %s: %s" % (path, e)
 		# Also set config items, in case the user has a read-only disk
@@ -1191,7 +1189,9 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		if config.movielist.settings_per_directory.value:
 			try:
 				path = os.path.join(config.movielist.last_videodir.value, ".e2settings.pkl")
-				updates = pickle.load(open(path, "rb"))
+				file = open(path, "rb")
+				updates = pickle.load(file)
+				file.close()
 				self.applyConfigSettings(updates)
 			except IOError, e:
 				updates = {

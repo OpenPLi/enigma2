@@ -2,7 +2,6 @@
 from datasource import genericdatasource
 from satxml import satxml
 from lamedb import lamedb
-
 import sys
 
 if len(sys.argv) != 3:
@@ -18,4 +17,3 @@ gen.source = db
 gen.destination = xml
 gen.docopymerge(action = "copy")
 xml.write()
-

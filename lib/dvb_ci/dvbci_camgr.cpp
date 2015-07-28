@@ -70,4 +70,3 @@ int eDVBCICAManagerSession::sendCAPMT(unsigned char *data, int len)
 
 	return 0;
 }
-

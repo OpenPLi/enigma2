@@ -1394,4 +1394,3 @@ class NetworkAdapterTest(Screen):
 			pass
 		else:
 			iStatus.stopWlanConsole()
-

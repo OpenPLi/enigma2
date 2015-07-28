@@ -277,4 +277,3 @@ void eWindowStyleSkinned::setTitleFont(gFont *fnt)
 {
 	m_fnt = fnt;
 }
-

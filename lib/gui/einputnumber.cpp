@@ -204,4 +204,3 @@ void eInputContentNumber::insertDigit(int pos, int dig)
 	left += right;
 	m_value = left;
 }
-

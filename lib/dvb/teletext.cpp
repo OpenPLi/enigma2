@@ -668,4 +668,3 @@ void eDVBTeletextParser::addSubtitleString(int color, std::string string, int so
 
 	m_subtitle_page.m_elements.push_back(eDVBTeletextSubtitlePageElement(pal[color], string, source_line));
 }
-

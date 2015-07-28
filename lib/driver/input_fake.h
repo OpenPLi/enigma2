@@ -81,4 +81,3 @@
 
 #endif  /* !defined(KEY_OK)  */
 #endif  /* _INPUT_FAKE_H */
-

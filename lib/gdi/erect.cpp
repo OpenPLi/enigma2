@@ -203,4 +203,3 @@ void eRect::scale(int x_n, int x_d, int y_n, int y_d)
 	y1 *= y_n; y1 /= y_d;
 	y2 *= y_n; y2 /= y_d;
 }
-

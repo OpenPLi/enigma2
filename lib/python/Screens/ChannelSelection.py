@@ -1,5 +1,4 @@
 from Tools.Profile import profile
-
 from Screen import Screen
 import Screens.InfoBar
 import Components.ParentalControl

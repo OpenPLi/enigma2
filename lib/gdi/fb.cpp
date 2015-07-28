@@ -268,4 +268,3 @@ void fbClass::disableManualBlit()
 	else
 		m_manual_blit = 0;
 }
-

@@ -7,12 +7,9 @@ from Components.config import configfile
 from Components.PluginComponent import plugins
 from Components.config import config
 from Components.SystemInfo import SystemInfo
-
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import resolveFilename, SCOPE_SKIN
-
 import xml.etree.cElementTree
-
 from Screens.Setup import Setup, getSetupTitle
 
 # read the menu

@@ -113,4 +113,3 @@ int eWindow::event(int event, void *data, void *data2)
 	}
 	return eWidget::event(event, data, data2);
 }
-

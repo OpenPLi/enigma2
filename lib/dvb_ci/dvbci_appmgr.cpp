@@ -96,4 +96,3 @@ int eDVBCIApplicationManagerSession::startMMI()
 	sendAPDU(tag);
 	return 0;
 }
-
