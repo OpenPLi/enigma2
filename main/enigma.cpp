@@ -170,6 +170,9 @@ void catchTermSignal()
 
 int main(int argc, char **argv)
 {
+	printf("STB : %s\n", BOXTYPE);
+	printf("Image : Open PLi\n");
+
 #ifdef MEMLEAK_CHECK
 	atexit(DumpUnfreed);
 #endif

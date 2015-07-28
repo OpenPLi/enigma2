@@ -1,3 +1,4 @@
+#include <linux/version.h>
 #include <linux/dvb/version.h>
 
 #include <lib/dvb/dvb.h>
@@ -142,6 +143,7 @@ void eDVBFrontendParametersCable::set(const CableDeliverySystemDescriptor &descr
 		case 7: fec_inner = FEC_3_5; break;
 		case 8: fec_inner = FEC_4_5; break;
 		case 9: fec_inner = FEC_9_10; break;
+		case 10: fec_inner = FEC_6_7; break;
 	}
 	modulation = descriptor.getModulation();
 	if (modulation > Modulation_QAM256)
@@ -931,6 +933,8 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 		snr = 0xFF - (snr & 0xFF);
 		if (snr != 0)
 			ret = 10 * (int)(-100 * (log10(snr) - log10(255)));
+		else
+			ret = 2700;
 	}
 	else if (strstr(m_description, "BCM4506") || strstr(m_description, "BCM4505"))
 	{
@@ -952,13 +956,25 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 	{
 		ret = (int)((((double(snr) / (65536.0 / 100.0)) * 0.1244) + 2.5079) * 100);
 	}
+	else if (!strcmp(m_description, "BCM7356 DVB-S2 NIM (internal)")) // VU+ Solo2
+	{
+		ret = (int)((((double(snr) / (65536.0 / 100.0)) * 0.1800) - 1.0000) * 100);
+	}
 	else if (!strcmp(m_description, "BCM7346 (internal)")) // MaxDigital XP1000
 	{
 		ret = (int)((((double(snr) / (65536.0 / 100.0)) * 0.1880) + 0.1959) * 100);
 	}
-	else if (!strcmp(m_description, "BCM7356 DVB-S2 NIM (internal)")) // VU+ Solo2
+	else if (!strcmp(m_description, "BCM7346 DVB-S2 NIM (internal)")) // Gigablue
 	{
 		ret = (int)((((double(snr) / (65536.0 / 100.0)) * 0.1800) - 1.0000) * 100);
+	}
+	else if (!strcmp(m_description, "BCM7358 DVB-S2 NIM (internal)")) // Gigablue
+	{
+		ret = (int)((((double(snr) / (65536.0 / 100.0)) * 0.1710) - 1.0000) * 100);
+	}
+	else if (!strcmp(m_description, "GIGA DVB-S2 NIM (Internal)")) // Gigablue
+	{
+		ret = (int)((((double(snr) / (65536.0 / 100.0)) * 0.1710) - 1.0000) * 100);
 	}
 	else if (!strcmp(m_description, "Genpix"))
 	{
@@ -966,17 +982,29 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 	}
 	else if (!strcmp(m_description, "CXD1981"))
 	{
-		eDVBFrontendParametersCable parm;
 		int mse = (~snr) & 0xFF;
-		oparm.getDVBC(parm);
-		switch (parm.modulation)
+		int type = -1;
+		oparm.getSystem(type);
+		switch (type)
 		{
-		case eDVBFrontendParametersCable::Modulation_QAM16:
-		case eDVBFrontendParametersCable::Modulation_QAM64:
-		case eDVBFrontendParametersCable::Modulation_QAM256: ret = (int)(-950 * log(((double)mse) / 760)); break;
-		case eDVBFrontendParametersCable::Modulation_QAM32:
-		case eDVBFrontendParametersCable::Modulation_QAM128: ret = (int)(-875 * log(((double)mse) / 650)); break;
-		default: break;
+		case feCable: 
+			eDVBFrontendParametersCable parm;
+			oparm.getDVBC(parm);
+			switch (parm.modulation)
+			{
+			case eDVBFrontendParametersCable::Modulation_Auto:
+			case eDVBFrontendParametersCable::Modulation_QAM16:
+			case eDVBFrontendParametersCable::Modulation_QAM64:
+			case eDVBFrontendParametersCable::Modulation_QAM256: ret = (int)(-950 * log(((double)mse) / 760)); break;
+			case eDVBFrontendParametersCable::Modulation_QAM32:
+			case eDVBFrontendParametersCable::Modulation_QAM128: ret = (int)(-875 * log(((double)mse) / 650)); break;
+			}
+			break;
+		case feTerrestrial: 
+			ret = (mse * 25) / 2;
+			break;
+		default:
+			break;
 		}
 	}
 
@@ -1779,6 +1807,7 @@ void eDVBFrontend::setFrontend(bool recvEvents)
 				case eDVBFrontendParametersCable::FEC_3_5: p[cmdseq.num].u.data = FEC_3_5; break;
 				case eDVBFrontendParametersCable::FEC_4_5: p[cmdseq.num].u.data = FEC_4_5; break;
 				case eDVBFrontendParametersCable::FEC_9_10: p[cmdseq.num].u.data = FEC_9_10; break;
+				case eDVBFrontendParametersCable::FEC_6_7: p[cmdseq.num].u.data = FEC_6_7; break;
 			}
 			cmdseq.num++;
 

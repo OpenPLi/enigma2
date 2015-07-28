@@ -187,7 +187,7 @@ void bsodFatal(const char *component)
 
 		xml.string("skin", getConfigString("config.skin.primary_skin", "Default Skin"));
 		xml.string("sourcedate", enigma2_date);
-		xml.string("branch", enigma2_branch);
+//		xml.string("branch", enigma2_branch);
 		xml.string("rev", enigma2_rev);
 		xml.string("version", PACKAGE_VERSION);
 		xml.close();

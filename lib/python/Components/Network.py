@@ -274,8 +274,11 @@ class Network:
 				self.wlan_interfaces.append(iface)
 		else:
 			if iface not in self.lan_interfaces:
-				name = _("LAN connection")
-				if len(self.lan_interfaces):
+				if iface == "eth1":
+					name = _("VLAN connection")
+				else:	
+					name = _("LAN connection")	
+				if len(self.lan_interfaces) and not iface == "eth1":
 					name += " " + str(len(self.lan_interfaces)+1)
 				self.lan_interfaces.append(iface)
 		return name
@@ -287,14 +290,34 @@ class Network:
 		moduledir = self.getWlanModuleDir(iface)
 		if moduledir:
 			name = os.path.basename(os.path.realpath(moduledir))
-			if name in ('ath_pci','ath5k'):
+			if name.startswith('ath') or name.startswith('carl'):
 				name = 'Atheros'
-			elif name in ('rt73','rt73usb','rt3070sta'):
+			elif name.startswith('rt2') or name.startswith('rt3') or name.startswith('rt5') or name.startswith('rt6') or name.startswith('rt7'):
 				name = 'Ralink'
-			elif name == 'zd1211b':
+			elif name.startswith('zd'):
 				name = 'Zydas'
-			elif name == 'r871x_usb_drv':
+			elif name.startswith('rtl') or name.startswith('r8'):
 				name = 'Realtek'
+			elif name.startswith('smsc'):
+				name = 'SMSC'
+			elif name.startswith('peg'):
+				name = 'Pegasus'
+			elif name.startswith('rn'):
+				name = 'RNDIS'
+			elif name.startswith('mw') or name.startswith('libertas'):
+				name = 'Marvel'
+			elif name.startswith('p5'):
+				name = 'Prism'
+			elif name.startswith('as') or name.startswith('ax'):
+				name = 'ASIX'
+			elif name.startswith('dm'):
+				name = 'Davicom'
+			elif name.startswith('mcs'):
+				name = 'MosChip'
+			elif name.startswith('at'):
+				name = 'Atmel'
+			elif name.startswith('iwm'):
+				name = 'Intel'
 		else:
 			name = _('Unknown')
 
@@ -404,9 +427,9 @@ class Network:
 
 	def checkNetworkState(self,statecallback):
 		self.NetworkState = 0
-		cmd1 = "ping -c 1 www.openpli.org"
-		cmd2 = "ping -c 1 www.google.nl"
-		cmd3 = "ping -c 1 www.google.com"
+		cmd1 = "ping -c 1 www.google.com"
+		cmd2 = "ping -c 1 www.yahoo.com"
+		cmd3 = "ping -c 1 www.microsoft.com"
 		self.PingConsole = Console()
 		self.PingConsole.ePopen(cmd1, self.checkNetworkStateFinished,statecallback)
 		self.PingConsole.ePopen(cmd2, self.checkNetworkStateFinished,statecallback)

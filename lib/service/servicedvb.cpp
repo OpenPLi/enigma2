@@ -1771,9 +1771,9 @@ RESULT eDVBServicePlay::timeshift(ePtr<iTimeshiftService> &ptr)
 				return -2;
 			}
 
-			if (((off_t)fs.f_bavail) * ((off_t)fs.f_bsize) < 200*1024*1024LL)
+			if (((off_t)fs.f_bavail) * ((off_t)fs.f_bsize) < 1024*1024*1024LL)
 			{
-				eDebug("[eDVBServicePlay] timeshift not enough diskspace for timeshift! (less than 200MB)");
+				eDebug("[eDVBServicePlay] timeshift not enough diskspace for timeshift! (less than 1GB)");
 				return -3;
 			}
 		}
