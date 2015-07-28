@@ -16,7 +16,6 @@ class slot:
 timers = set()
 
 import time
-
 from events import eventfnc
 
 ##################### ENIGMA BASE

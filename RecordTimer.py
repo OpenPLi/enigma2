@@ -1,22 +1,18 @@
 import os
 from enigma import eEPGCache, getBestPlayableServiceReference, \
 	eServiceReference, iRecordableService, quitMainloop, eActionMap, setPreferredTuner
-
 from Components.config import config
 from Components.UsageConfig import defaultMoviePath
 from Components.TimerSanityCheck import TimerSanityCheck
-
 from Screens.MessageBox import MessageBox
 import Screens.Standby
 import Screens.InfoBar
 from Tools import Directories, Notifications, ASCIItranslit, Trashcan
 from Tools.XMLTools import stringToXML
-
 import timer
 import xml.etree.cElementTree
 import NavigationInstance
 from ServiceReference import ServiceReference
-
 from time import localtime, strftime, ctime, time
 from bisect import insort
 from sys import maxint

@@ -1,6 +1,5 @@
 from time import localtime, time
 
-
 def FuzzyTime(t, inPast = False):
 	d = localtime(t)
 	nt = time()
@@ -29,8 +28,6 @@ def FuzzyTime(t, inPast = False):
 	timeres = "%d:%02d" % (d[3], d[4])
 
 	return (date, timeres)
-
-
 
 if __name__ == "__main__":
 	def _(x): return x

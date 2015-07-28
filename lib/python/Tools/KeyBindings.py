@@ -1,9 +1,8 @@
-
-keyBindings = { }
-
 from keyids import KEYIDS
 from Components.config import config
 from Components.RcModel import rc_model
+
+keyBindings = { }
 
 keyDescriptions = [{
 		KEYIDS["BTN_0"]: ("UP", "fp"),

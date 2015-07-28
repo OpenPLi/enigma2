@@ -14,20 +14,26 @@ def readFile(filename):
 def getProcMounts():
 	try:
 		mounts = open("/proc/mounts", 'r')
+		result = []
+		tmp = [line.strip().split(' ') for line in mounts]
+		mounts.close()
+		for item in tmp:
+			# Spaces are encoded as \040 in mounts
+			item[1] = item[1].replace('\\040', ' ')
+			result.append(item)
+		return result
 	except IOError, ex:
 		print "[Harddisk] Failed to open /proc/mounts", ex
 		return []
-	result = [line.strip().split(' ') for line in mounts]
-	for item in result:
-		# Spaces are encoded as \040 in mounts
-		item[1] = item[1].replace('\\040', ' ')
-	return result
 
 def isFileSystemSupported(filesystem):
 	try:
-		for fs in open('/proc/filesystems', 'r'):
+		file = open('/proc/filesystems', 'r')
+		for fs in file:
 			if fs.strip().endswith(filesystem):
+				file.close()
 				return True
+		file.close()
 		return False
 	except Exception, ex:
 		print "[Harddisk] Failed to read /proc/filesystems:", ex
@@ -235,9 +241,9 @@ class Harddisk:
 		try:
 			fstab = open("/etc/fstab")
 			lines = fstab.readlines()
+			fstab.close()
 		except IOError:
 			return -1
-		fstab.close()
 		for line in lines:
 			parts = line.strip().split(" ")
 			fspath = os.path.realpath(parts[0])
@@ -450,12 +456,14 @@ class Harddisk:
 	# any access has been made to the disc. If there has been no access over a specifed time,
 	# we set the hdd into standby.
 	def readStats(self):
-		try:
-			l = open("/sys/block/%s/stat" % self.device).read()
-		except IOError:
+		if os.path.exists("/sys/block/%s/stat" % self.device):
+			f = open("/sys/block/%s/stat" % self.device)
+			l = f.read()
+			f.close()
+			data = l.split(None,5)
+			return int(data[0]), int(data[4])
+		else:
 			return -1,-1
-		data = l.split(None,5)
-		return (int(data[0]), int(data[4]))
 
 	def startIdle(self):
 		from enigma import eTimer

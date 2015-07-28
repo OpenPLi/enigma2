@@ -210,4 +210,3 @@ RESULT eComponentScan::getCurrentTransponder(ePtr<iDVBFrontendParameters> &tp)
 	tp = 0;
 	return -1;
 }
-

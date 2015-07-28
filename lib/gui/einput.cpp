@@ -197,4 +197,3 @@ void eInputContent::setInput(eInput *widget)
 {
 	m_input = widget;
 }
-

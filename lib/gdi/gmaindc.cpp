@@ -25,4 +25,3 @@ gMainDC::~gMainDC()
 {
 	m_instance = 0;
 }
-

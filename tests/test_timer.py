@@ -1,7 +1,6 @@
 import enigma
 import sys
 import time
-
 import tests
 
 #enigma.reset()
@@ -80,11 +79,8 @@ enigma.init_nav()
 enigma.init_record_config()
 enigma.init_parental_control()
 
-
 from events import log
-
 import calendar
-
 
 import os
 # we are operating in CET/CEST

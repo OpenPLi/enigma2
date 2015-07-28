@@ -6,4 +6,3 @@ DEFINE_REF(gCompositingData);
 gContext::~gContext()
 {
 }
-

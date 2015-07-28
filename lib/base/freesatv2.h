@@ -17,4 +17,3 @@ public:
 	std::string decode(const unsigned char *src, size_t size);
 };
 #endif
-

@@ -284,4 +284,3 @@ int pipe(int modus[2])
 	}
 	return ret;
 }
-

@@ -2,12 +2,9 @@ from Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.ActionMap import NumberActionMap
 from Components.Label import Label
-
 from Components.config import config, ConfigSubsection, ConfigSelection, ConfigSubList, getConfigListEntry, KEY_LEFT, KEY_RIGHT, KEY_0, ConfigNothing, ConfigPIN
 from Components.ConfigList import ConfigList
-
 from Components.SystemInfo import SystemInfo
-
 from enigma import eTimer, eDVBCI_UI, eDVBCIInterfaces
 
 MAX_NUM_CI = 4

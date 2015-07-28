@@ -1,4 +1,3 @@
-
 def elementsWithTag(el, tag):
 
 	"""filters all elements of childNode with the specified function

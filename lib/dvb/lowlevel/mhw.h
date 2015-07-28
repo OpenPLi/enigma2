@@ -112,4 +112,3 @@ typedef struct mhw_summary {
 } mhw_summary_t;
 
 #endif
-

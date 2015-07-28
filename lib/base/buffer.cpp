@@ -195,4 +195,3 @@ int eIOBuffer::searchchr(char ch) const
 	}
 	return -1;
 }
-

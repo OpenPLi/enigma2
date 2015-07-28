@@ -8,7 +8,6 @@ from Components.NimManager import nimmanager, InitNimManager
 from Components.TuneTest import Tuner
 from enigma import eDVBFrontendParametersSatellite, eDVBResourceManager, eTimer
 
-
 class AutoDiseqc(Screen, ConfigListScreen):
 	skin = """
 		<screen position="c-250,c-100" size="500,250" title=" ">

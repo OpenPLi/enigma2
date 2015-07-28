@@ -629,4 +629,3 @@ void Cexif::process_SOFn (const unsigned char * Data, int marker)
 
 	m_exifinfo->Process = marker;
 }
-
