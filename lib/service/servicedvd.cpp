@@ -1099,7 +1099,14 @@ void eServiceDVD::saveCuesheet()
 			}
 		}
 		eDebug("[eServiceDVD] saveCuesheet filename=%s",filename);
-		f = fopen(filename, "wb");
+		/* CVR it does not make sense to keep a resume file with position 0 */
+		if (m_cue_pts == 0)
+		{
+			if (::access(filename, F_OK) == 0)
+				remove(filename);
+		}
+		else
+			f = fopen(filename, "wb");
 	}
 
 	if (f)
