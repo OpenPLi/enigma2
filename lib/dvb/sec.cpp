@@ -2,6 +2,7 @@
 #include <lib/dvb/sec.h>
 #include <lib/dvb/rotor_calc.h>
 #include <lib/dvb/dvbtime.h>
+#include <ansidebug.h>
 
 #include <set>
 
@@ -14,6 +15,8 @@
 #else
 #define eSecDebug(arg...)
 #endif
+
+extern const uint32_t crc32_table[256];
 
 DEFINE_REF(eDVBSatelliteEquipmentControl);
 
@@ -284,6 +287,91 @@ bool need_turn_fast(int turn_speed)
 			eDebug(x); \
 	} while(0)
 
+//round value to multiple of m
+int roundMulti(int value, int m)
+{
+	volatile int tmp = (m + 2 * value) / (2 * m);
+	return (m * tmp);
+}
+
+int heterodyne(iDVBFrontend &frontend, int rf, int lof)
+{
+	long inv;
+	int ifreq = rf - lof;
+	if (ifreq < 0)
+	{
+		ifreq = -ifreq;
+		frontend.getData(eDVBFrontend::SPECTINV_CNT, inv);
+		frontend.setData(eDVBFrontend::SPECTINV_CNT, ++inv);
+	}
+	return ifreq;
+}
+
+RESULT eDVBSatelliteEquipmentControl::prepareRFmagicCSS(iDVBFrontend &frontend, eDVBSatelliteLNBParameters &lnb_param, long band, int ifreq, int &tunerfreq, unsigned int &tuningword)
+{
+	bool simulate = ((eDVBFrontend*)&frontend)->is_simulate();
+	int vco = roundMulti(lnb_param.SatCRvco + ifreq, 1000);
+	tunerfreq = heterodyne(frontend, ifreq, vco);
+	unsigned int positions = lnb_param.SatCR_positions ? lnb_param.SatCR_positions : 1;
+	unsigned int posnum = (lnb_param.SatCR_positionnumber > 0)										// position == 0 -> use first position
+				&& (lnb_param.SatCR_positionnumber <= MAX_EN50607_POSITIONS) ?  (lnb_param.SatCR_positionnumber - 1) % positions : 0;
+
+	tuningword = (((roundMulti(vco - lnb_param.SatCRvco - 100000, 1000)/1000)&0x07FF)<<8)
+			| (band & 0x3)						//Bit0:HighLow  Bit1:VertHor
+			| (posnum << 2)						//position number (0..63)
+			| ((lnb_param.SatCR_idx & 0x1F) << 19);			//adresse of SatCR (0..31)
+
+	eDebugNoSimulate(ANSI_CYAN ANSI_BOLD"[%s] "ANSI_RESET \
+		ANSI_YELLOW"polarisation: %c "ANSI_RESET \
+		ANSI_YELLOW"band: %c "ANSI_RESET \
+		ANSI_YELLOW"position: %d "ANSI_RESET \
+		ANSI_YELLOW"satcr: %d "ANSI_RESET \
+		ANSI_YELLOW"tunerfreq: %dMHz "ANSI_RESET \
+		ANSI_YELLOW"vco: %dMHz "ANSI_RESET \
+		ANSI_CYAN  "tuningword 0x%06x"ANSI_RESET \
+		, __func__, (band & 2)?'H':'V', (band & 1)?'H':'L', posnum, lnb_param.SatCR_idx, tunerfreq/1000, vco /1000, tuningword);
+	return vco;
+}
+
+RESULT eDVBSatelliteEquipmentControl::prepareSTelectronicSatCR(iDVBFrontend &frontend, eDVBSatelliteLNBParameters &lnb_param, long band, int ifreq, int &tunerfreq, unsigned int &tuningword)
+{
+	bool simulate = ((eDVBFrontend*)&frontend)->is_simulate();
+	int vco = roundMulti(lnb_param.SatCRvco + ifreq, 4000);
+	tunerfreq = heterodyne(frontend, ifreq, vco);
+	unsigned int positions = lnb_param.SatCR_positions ? lnb_param.SatCR_positions : 1;
+	unsigned int posnum = (lnb_param.SatCR_positionnumber > 0)							// position == 0 -> use position A
+				&& (lnb_param.SatCR_positionnumber <= MAX_FIXED_LNB_POSITIONS) 				// rotor with unicablelnb -> use only position A
+				&& (lnb_param.SatCR_positions == 2)							// has only one position -> use only position A
+				&& ((lnb_param.SatCR_positionnumber - 1) % positions) ?  1 : 0;				// odd numbers use position A; even numbers use position B
+
+	tuningword = ((vco - 1400000)/4000)
+			|(posnum << 12)
+			|((band & 3) <<10)
+			|((lnb_param.SatCR_idx & 7) << 13);
+
+	eDebugNoSimulate(ANSI_CYAN ANSI_BOLD"[%s] "ANSI_RESET \
+		ANSI_YELLOW"polarisation: %c "ANSI_RESET \
+		ANSI_YELLOW"band: %c "ANSI_RESET \
+		ANSI_YELLOW"position: %d "ANSI_RESET \
+		ANSI_YELLOW"satcr: %d "ANSI_RESET \
+		ANSI_YELLOW"tunerfreq: %dMHz "ANSI_RESET \
+		ANSI_YELLOW"vco: %dMHz "ANSI_RESET \
+		ANSI_CYAN  "tuningword 0x%04x"ANSI_RESET \
+		, __func__, (band & 2)?'H':'V', (band & 1)?'H':'L', posnum, lnb_param.SatCR_idx, tunerfreq/1000, vco /1000, tuningword);
+	return  vco;
+}
+
+
+/**
+ * @brief prepare for tune
+ * 
+ * @param frontend reference tu current frontend
+ * @param sat reference to current sattelite parameters
+ * @param frequency reference to tuner frequency. Initial value is ignored, committing new frequency on tuner
+ * @param slot_id ...
+ * @param tunetimeout 5000 ms currenly hardcoded in eDVBFrontend::tune()
+ * @return RESULT
+ */
 RESULT eDVBSatelliteEquipmentControl::prepare(iDVBFrontend &frontend, const eDVBFrontendParametersSatellite &sat, int &frequency, int slot_id, unsigned int tunetimeout)
 {
 	bool simulate = ((eDVBFrontend*)&frontend)->is_simulate();
@@ -322,6 +410,7 @@ RESULT eDVBSatelliteEquipmentControl::prepare(iDVBFrontend &frontend, const eDVB
 			eDVBSatelliteSwitchParameters::t_voltage_mode voltage_mode = sw_param.m_voltage_mode;
 			bool diseqc13V = voltage_mode == eDVBSatelliteSwitchParameters::HV_13;
 			bool is_unicable = lnb_param.SatCR_idx != -1;
+			frontend.setData(eDVBFrontend::SPECTINV_CNT, 0);
 
 			bool useGotoXX = false;
 			int RotorCmd=-1;
@@ -336,8 +425,6 @@ RESULT eDVBSatelliteEquipmentControl::prepare(iDVBFrontend &frontend, const eDVB
 
 			frontend.getData(eDVBFrontend::SATPOS_DEPENDS_PTR, satposDependPtr);
 
-			if (diseqc_mode == eDVBSatelliteDiseqcParameters::V1_2)
-				m_target_orbital_position = sat.orbital_position;
 			if (!(m_not_linked_slot_mask & slot_id))  // frontend with direct connection?
 			{
 				long linked_prev_ptr;
@@ -388,13 +475,14 @@ RESULT eDVBSatelliteEquipmentControl::prepare(iDVBFrontend &frontend, const eDVB
 
 			int lof = (band&1)?lnb_param.m_lof_hi:lnb_param.m_lof_lo;
 
+			int ifreq = heterodyne(frontend, sat.frequency, lof);
+
 			if(!is_unicable)
 			{
 				// calc Frequency
-				int local= abs(sat.frequency
-					- lof);
-				frequency = ((((local * 2) / 125) + 1) / 2) * 125;
-				frontend.setData(eDVBFrontend::FREQ_OFFSET, sat.frequency - frequency);
+				frequency = roundMulti(ifreq, 125); //round to multiple of 125
+
+				frontend.setData(eDVBFrontend::FREQ_OFFSET, lof);
 
 				/* Dishpro bandstacking HACK */
 				if (lnb_param.m_lof_threshold == 1000)
@@ -416,20 +504,18 @@ RESULT eDVBSatelliteEquipmentControl::prepare(iDVBFrontend &frontend, const eDVB
 			}
 			else
 			{
-				int tmp1 = abs(sat.frequency
-						-lof)
-						+ lnb_param.SatCRvco
-						- 1400000
-						+ lnb_param.guard_offset;
-				int tmp2 = ((((tmp1 * 2) / 4000) + 1) / 2) * 4000;
-				frequency = lnb_param.SatCRvco - (tmp1-tmp2) + lnb_param.guard_offset;
-				lnb_param.UnicableTuningWord = ((tmp2 / 4000)
-						| ((band & 1) ? 0x400 : 0)			//HighLow
-						| ((band & 2) ? 0x800 : 0)			//VertHor
-						| ((lnb_param.LNBNum & 1) ? 0 : 0x1000)			//Umschaltung LNB1 LNB2
-						| (lnb_param.SatCR_idx << 13));		//Adresse des SatCR
-						eDebug("[eDVBSatelliteEquipmentControl] [prepare] UnicableTuningWord %#04x, guard_offset %d",lnb_param.UnicableTuningWord ,lnb_param.guard_offset);
-				frontend.setData(eDVBFrontend::FREQ_OFFSET, (lnb_param.UnicableTuningWord & 0x3FF) *4000 + 1400000 + lof - (2 * (lnb_param.SatCRvco - (tmp1-tmp2))) );
+				switch(lnb_param.SatCR_format)
+				{
+					case 1:
+						eDebugNoSimulate(ANSI_CYAN ANSI_BOLD"[%s] "ANSI_RESET ANSI_YELLOW"JESS (EN50607)"ANSI_RESET, __func__);
+						frontend.setData(eDVBFrontend::FREQ_OFFSET, lof + prepareRFmagicCSS(frontend, lnb_param, band, ifreq, frequency, lnb_param.TuningWord));
+						break;
+					case 0:
+					default:
+						eDebugNoSimulate(ANSI_CYAN ANSI_BOLD"[%s] "ANSI_RESET ANSI_YELLOW"Unicable (EN50494)"ANSI_RESET, __func__);
+						frontend.setData(eDVBFrontend::FREQ_OFFSET, lof + prepareSTelectronicSatCR(frontend, lnb_param, band, ifreq, frequency, lnb_param.TuningWord));
+				}
+//				eDebugNoSimulate("[prepare] frequency %d",frequency);
 				voltage = VOLTAGE(13);
 			}
 
@@ -721,12 +807,119 @@ RESULT eDVBSatelliteEquipmentControl::prepare(iDVBFrontend &frontend, const eDVB
 
 				eDVBDiseqcCommand diseqc;
 				memset(diseqc.data, 0, MAX_DISEQC_LENGTH);
-				diseqc.len = 5;
-				diseqc.data[0] = 0xE0;
-				diseqc.data[1] = 0x10;
-				diseqc.data[2] = 0x5A;
-				diseqc.data[3] = lnb_param.UnicableTuningWord >> 8;
-				diseqc.data[4] = lnb_param.UnicableTuningWord;
+				long oldSatcr, oldPin, oldDiction;
+
+				frontend.getData(eDVBFrontend::SATCR, oldSatcr);
+				frontend.getData(eDVBFrontend::PIN, oldPin);
+				frontend.getData(eDVBFrontend::DICTION, oldDiction);
+
+				if((oldSatcr == -1) || (oldSatcr != lnb_param.SatCR_idx))
+				{
+					frontend.setData(eDVBFrontend::LFSR, ((lnb_param.SatCR_idx +1) << 17) | ((lnb_param.SatCR_idx + 1) << 5));  //reinit LSFR
+				}
+				else
+				{
+					long lfsr;
+					frontend.getData(eDVBFrontend::LFSR, lfsr);
+					lfsr = (lfsr << 8) ^ crc32_table[((lfsr >> 24) ^ (lnb_param.SatCR_idx +1)) & 0xFF];
+					frontend.setData(eDVBFrontend::LFSR, lfsr);
+					tunetimeout += (lfsr & 0x3FF);		// add random value 0..1023 ms
+				}
+				eDebugNoSimulate(ANSI_CYAN ANSI_BOLD"[%s] "ANSI_RESET ANSI_YELLOW"tunetimeout %dms"ANSI_RESET,__func__, tunetimeout);
+
+				if((oldSatcr != -1) && (oldSatcr != lnb_param.SatCR_idx))
+				{
+					switch (oldDiction)
+					{
+						case 1:
+							if(oldPin < 1)
+							{
+								diseqc.len = 4;
+								diseqc.data[0] = 0x70;
+							}
+							else
+							{
+								diseqc.len = 5;
+								diseqc.data[0] = 0x71;
+								diseqc.data[4] = oldPin;
+							}
+							diseqc.data[1] = oldSatcr << 3;
+							diseqc.data[2] = 0x00;
+							diseqc.data[3] = 0x00;
+							break;
+						case 0:
+						default:
+							if(oldPin < 1)
+							{
+								diseqc.len = 5;
+								diseqc.data[2] = 0x5A;
+							}
+							else
+							{
+								diseqc.len = 6;
+								diseqc.data[2] = 0x5C;
+								diseqc.data[5] = oldPin;
+							}
+							diseqc.data[0] = 0xE0;
+							diseqc.data[1] = 0x10;
+							diseqc.data[3] = oldSatcr << 5;
+							diseqc.data[4] = 0x00;
+							break;
+					}
+					sec_sequence.push_back( eSecCommand(eSecCommand::SEND_DISEQC, diseqc) );
+					sec_sequence.push_back( eSecCommand(eSecCommand::SLEEP, m_params[DELAY_AFTER_LAST_DISEQC_CMD]) );
+					frontend.setData(eDVBFrontend::SATCR, -1);
+				}
+
+				sec_sequence.push_back( eSecCommand(eSecCommand::SET_VOLTAGE, VOLTAGE(18)) );
+				sec_sequence.push_back( eSecCommand(eSecCommand::SLEEP, m_params[DELAY_AFTER_VOLTAGE_CHANGE_BEFORE_SWITCH_CMDS] ) );
+
+				frontend.setData(eDVBFrontend::DICTION, lnb_param.SatCR_format);
+//TODO				frontend.setData(eDVBFrontend::PIN, lnb_param.SatCR_pin);
+
+//>>> HACK adenin20150421
+				long pin = 0;
+//<<<
+				switch(lnb_param.SatCR_format)
+				{
+					case 1: //JESS
+						if(pin < 1)
+						{
+							diseqc.len = 4;
+							diseqc.data[0] = 0x70;
+							diseqc.data[1] = lnb_param.TuningWord >> 16;
+							diseqc.data[2] = lnb_param.TuningWord >> 8;
+							diseqc.data[3] = lnb_param.TuningWord;
+						}
+						else
+						{
+							diseqc.len = 5;
+							diseqc.data[0] = 0x71;
+							diseqc.data[4] = pin;
+						}
+						diseqc.data[1] = lnb_param.TuningWord >> 16;
+						diseqc.data[2] = lnb_param.TuningWord >> 8;
+						diseqc.data[3] = lnb_param.TuningWord;
+						break;
+					case 0: //DiSEqC
+					default:
+						if(pin < 1)
+						{
+							diseqc.len = 5;
+							diseqc.data[2] = 0x5A;
+						}
+						else
+						{
+							diseqc.len = 6;
+							diseqc.data[2] = 0x5C;
+							diseqc.data[5] = pin;
+						}
+						diseqc.data[0] = 0xE0;
+						diseqc.data[1] = 0x10;
+						diseqc.data[3] = lnb_param.TuningWord >> 8;
+						diseqc.data[4] = lnb_param.TuningWord;
+				}
+				frontend.setData(eDVBFrontend::SATCR, lnb_param.SatCR_idx);
 
 				sec_sequence.push_back( eSecCommand(eSecCommand::SEND_DISEQC, diseqc) );
 				sec_sequence.push_back( eSecCommand(eSecCommand::SLEEP, m_params[DELAY_AFTER_LAST_DISEQC_CMD]) );
@@ -961,8 +1154,9 @@ RESULT eDVBSatelliteEquipmentControl::prepare(iDVBFrontend &frontend, const eDVB
 	return -1;
 }
 
-void eDVBSatelliteEquipmentControl::prepareTurnOffSatCR(iDVBFrontend &frontend, int satcr)
+void eDVBSatelliteEquipmentControl::prepareTurnOffSatCR(iDVBFrontend &frontend)
 {
+	long satcr, diction, pin;
 	eSecCommandList sec_sequence;
 
 	// check if voltage is disabled
@@ -980,12 +1174,48 @@ void eDVBSatelliteEquipmentControl::prepareTurnOffSatCR(iDVBFrontend &frontend, 
 
 	eDVBDiseqcCommand diseqc;
 	memset(diseqc.data, 0, MAX_DISEQC_LENGTH);
-	diseqc.len = 5;
-	diseqc.data[0] = 0xE0;
-	diseqc.data[1] = 0x10;
-	diseqc.data[2] = 0x5A;
-	diseqc.data[3] = satcr << 5;
-	diseqc.data[4] = 0x00;
+	frontend.getData(eDVBFrontend::SATCR, satcr);
+	frontend.getData(eDVBFrontend::DICTION, diction);
+	frontend.getData(eDVBFrontend::PIN, pin);
+
+	switch (diction)
+	{
+		case 1:
+			if(pin < 1)
+			{
+				diseqc.len = 4;
+				diseqc.data[0] = 0x70;
+			}
+			else
+			{
+				diseqc.len = 5;
+				diseqc.data[0] = 0x71;
+				diseqc.data[4] = pin;
+			}
+			diseqc.data[1] = satcr << 3;
+			diseqc.data[2] = 0x00;
+			diseqc.data[3] = 0x00;
+			break;
+		case 0:
+		default:
+			if(pin < 1)
+			{
+				diseqc.len = 5;
+				diseqc.data[2] = 0x5A;
+			}
+			else
+			{
+				diseqc.len = 6;
+				diseqc.data[2] = 0x5C;
+				diseqc.data[5] = pin;
+			}
+			diseqc.data[0] = 0xE0;
+			diseqc.data[1] = 0x10;
+			diseqc.data[3] = satcr << 5;
+			diseqc.data[4] = 0x00;
+			break;
+	}
+	frontend.setData(eDVBFrontend::SATCR, -1);
 
 	sec_sequence.push_back( eSecCommand(eSecCommand::SEND_DISEQC, diseqc) );
 	sec_sequence.push_back( eSecCommand(eSecCommand::SLEEP, m_params[DELAY_AFTER_LAST_DISEQC_CMD]) );
@@ -1106,13 +1336,13 @@ RESULT eDVBSatelliteEquipmentControl::setLNBPrio(int prio)
 	return 0;
 }
 
-RESULT eDVBSatelliteEquipmentControl::setLNBNum(int LNBNum)
+RESULT eDVBSatelliteEquipmentControl::setLNBSatCRpositionnumber(int SatCR_positionnumber)
 {
-	eSecDebug("[eDVBSatelliteEquipmentControl::setLNBNum] lnbnum=%d", LNBNum);
-	if(!((LNBNum >= 1) && (LNBNum <= MAX_LNBNUM)))
-		return -EPERM;
+	eSecDebug("eDVBSatelliteEquipmentControl::setLNBSatCRpositionnumber(%d)", SatCR_positionnumber);
+//	if(!((SatCR_positionnumber > 0) && (SatCR_positionnumber <= MAX_FIXED_LNB_POSITIONS)))
+//		return -EPERM;
 	if ( currentLNBValid() )
-		m_lnbs[m_lnbidx].LNBNum = LNBNum;
+		m_lnbs[m_lnbidx].SatCR_positionnumber = SatCR_positionnumber;
 	else
 		return -ENOENT;
 	return 0;
@@ -1261,6 +1491,18 @@ RESULT eDVBSatelliteEquipmentControl::setInputpowerDelta(int delta)
 }
 
 /* Unicable Specific Parameters */
+RESULT eDVBSatelliteEquipmentControl::setLNBSatCRformat(int SatCR_format)
+{
+	eSecDebug("eDVBSatelliteEquipmentControl::setLNBSatCRformat(%d)", SatCR_format);
+	if(!((SatCR_format >-1) && (SatCR_format < 2)))
+		return -EPERM;
+	if ( currentLNBValid() )
+		m_lnbs[m_lnbidx].SatCR_format = SatCR_format;
+	else
+		return -ENOENT;
+	return 0;
+}
+
 RESULT eDVBSatelliteEquipmentControl::setLNBSatCR(int SatCR_idx)
 {
 	eSecDebug("[eDVBSatelliteEquipmentControl::setLNBSatCR] idx=%d", SatCR_idx);
@@ -1303,6 +1545,13 @@ RESULT eDVBSatelliteEquipmentControl::getLNBSatCRpositions()
 {
 	if ( currentLNBValid() )
 		return m_lnbs[m_lnbidx].SatCR_positions;
+	return -ENOENT;
+}
+
+RESULT eDVBSatelliteEquipmentControl::getLNBSatCRformat()
+{
+	if ( currentLNBValid() )
+		return m_lnbs[m_lnbidx].SatCR_format;
 	return -ENOENT;
 }
 
