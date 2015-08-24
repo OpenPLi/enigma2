@@ -427,24 +427,22 @@ static unsigned char *jpeg_load(const char *file, int *ox, int *oy, unsigned int
 	jpeg_stdio_src(ciptr, fh);
 	jpeg_read_header(ciptr, TRUE);
 	ciptr->out_color_space = JCS_RGB;
-	int s = 8;
+
 	if (max_x == 0) max_x = 1280; // sensible default
 	if (max_y == 0) max_y = 720;
-	while (s != 1)
-	{
-		if ((ciptr->image_width >= (s * max_x)) ||
-		    (ciptr->image_height >= (s * max_y)))
-			break;
-		s /= 2;
-	}
-	ciptr->scale_num = 1;
-	ciptr->scale_denom = s;
+	// define scale to always fit vertically or horizontally in all orientations
+	ciptr->scale_denom = 8;
+	unsigned int screenmax = max_x > max_y ? max_x : max_y;
+	unsigned int imagemin  = ciptr->image_width < ciptr->image_height ? ciptr->image_width : ciptr->image_height;
+	ciptr->scale_num = (ciptr->scale_denom * screenmax + imagemin -1) / imagemin;
+	if (ciptr->scale_num < 1)  ciptr->scale_num = 1;
+	if (ciptr->scale_num > 16) ciptr->scale_num = 16;
 
 	jpeg_start_decompress(ciptr);
 
 	*ox=ciptr->output_width;
 	*oy=ciptr->output_height;
-	// eDebug("[jpeg_load] ox=%d oy=%d w=%d (%d), h=%d (%d) scale=%d rec_outbuf_height=%d", ciptr->output_width, ciptr->output_height, ciptr->image_width, max_x, ciptr->image_height, max_y, ciptr->scale_denom, ciptr->rec_outbuf_height);
+	//eDebug("[jpeg_load] ox=%d oy=%d w=%d (%d), h=%d (%d) scale=%d rec_outbuf_height=%d", ciptr->output_width, ciptr->output_height, ciptr->image_width, max_x, ciptr->image_height, max_y, ciptr->scale_num, ciptr->rec_outbuf_height);
 
 	if(ciptr->output_components == 3)
 	{
