@@ -947,7 +947,8 @@ PyObject *ePicLoad::getInfo(const char *filename)
 	getExif(filename);
 	if(m_exif && m_exif->m_exifinfo->IsExif)
 	{
-		char tmp[256]
+		char tmp[256];
+		int pos = 0;
 		list = PyList_New(23);
 		PyList_SET_ITEM(list, pos++,  PyString_FromString(filename));
 		PyList_SET_ITEM(list, pos++,  PyString_FromString(m_exif->m_exifinfo->Version));
