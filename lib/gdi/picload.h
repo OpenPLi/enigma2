@@ -2,6 +2,7 @@
 #define __picload_h__
 
 #include <lib/gdi/gpixmap.h>
+#include <lib/gdi/picexif.h>
 #include <lib/base/thread.h>
 #include <lib/python/python.h>
 #include <lib/base/message.h>
@@ -58,6 +59,7 @@ class ePicLoad: public eMainloop, public eThread, public Object, public iObject
 	void resizePic();
 
 	Cfilepara *m_filepara;
+	Cexif *m_exif;
 	bool threadrunning;
 
 	struct PConf
@@ -92,6 +94,7 @@ class ePicLoad: public eMainloop, public eThread, public Object, public iObject
 	void thread();
 	int startThread(int what, const char *file, int x, int y, bool async=true);
 	void thread_finished();
+	bool getExif(const char *filename);
 public:
 	void waitFinished();
 	PSignal1<void, const char*> PictureData;
