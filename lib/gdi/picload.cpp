@@ -1040,7 +1040,7 @@ int ePicLoad::getData(ePtr<gPixmap> &result)
 	// after aspect calc : scrx, scry
 	// center image      : xoff, yoff
 	int scrx, scry; // Aspect ratio calculation
-	int orientation = m_conf.auto_orientation ? (m_exif->m_exifinfo->Orient ? m_exif->m_exifinfo->Orient : 1) : 1;
+	int orientation = m_conf.auto_orientation ? (m_exif && m_exif->m_exifinfo->Orient ? m_exif->m_exifinfo->Orient : 1) : 1;
 	if (m_conf.aspect_ratio == 0)  // do not keep aspect ratio but just fill the destination area
 	{
 		scrx = m_filepara->max_x;
