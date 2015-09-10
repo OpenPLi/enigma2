@@ -518,7 +518,7 @@ inline void m_rend_gif_decodecolormap(unsigned char *cmb, unsigned char *rgbb, C
 	}
 }
 
-static void gif_load(Cfilepara* filepara)
+static void gif_load(Cfilepara* filepara, bool forceRGB = false)
 {
 	unsigned char *pic_buffer = NULL;
 	int px, py, i, j;
@@ -583,6 +583,26 @@ static void gif_load(Cfilepara* filepara)
 								if (DGifGetLine(gft, pic_buffer + i*px, px) == GIF_ERROR)
 									goto ERROR_R;
 							}
+						}
+					}
+					if (forceRGB) {
+						unsigned char *pic_buffer2 = new unsigned char[px * py * 3];
+						if (pic_buffer2 != NULL) {
+							unsigned char *slb2 = pic_buffer2;
+							slb = pic_buffer;
+							for (j = 0; j < py; j++) {
+								for (i = 0; i < px; i++) {
+									int c = *slb++;
+									*slb2++ = filepara->palette[c].r;
+									*slb2++ = filepara->palette[c].g;
+									*slb2++ = filepara->palette[c].b;
+								}
+							}
+							filepara->bits = 24;
+							filepara->pic_buffer = pic_buffer2;
+							delete [] pic_buffer;
+							delete filepara->palette;
+							filepara->palette = NULL;
 						}
 					}
 				}
@@ -762,7 +782,7 @@ void ePicLoad::decodeThumb()
 				break;
 		case F_BMP:	m_filepara->pic_buffer = bmp_load(m_filepara->file, &m_filepara->ox, &m_filepara->oy);
 				break;
-		case F_GIF:	gif_load(m_filepara);
+		case F_GIF:	gif_load(m_filepara, true);
 				break;
 	}
 
