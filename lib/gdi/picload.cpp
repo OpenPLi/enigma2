@@ -1022,11 +1022,11 @@ PyObject *ePicLoad::getInfo(const char *filename)
 	return list ? (PyObject*)list : (PyObject*)PyList_New(0);
 }
 
-bool ePicLoad::getExif(const char *filename)
+bool ePicLoad::getExif(const char *filename, int Thumb)
 {
 	if (!m_exif) {
 		m_exif = new Cexif;
-		return m_exif->DecodeExif(filename);
+		return m_exif->DecodeExif(filename, Thumb);
 	}
 	return true;
 }
@@ -1134,7 +1134,8 @@ int ePicLoad::getData(ePtr<gPixmap> &result)
 				int y;
 				#pragma omp parallel for
 				for (y = 1; y < yoff; ++y) // copy from first line
-					memcpy(tmp_buffer + y*surface->stride, tmp_buffer, m_filepara->max_x * surface->bypp);
+					memcpy(tmp_buffer + y*surface->stride, tmp_buffer,
+						m_filepara->max_x * surface->bypp);
 				#pragma omp parallel for
 				for (y = yoff + scry; y < m_filepara->max_y; ++y)
 					memcpy(tmp_buffer + y * surface->stride, tmp_buffer,

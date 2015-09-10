@@ -95,7 +95,7 @@ class ePicLoad: public eMainloop, public eThread, public Object, public iObject
 	void thread();
 	int startThread(int what, const char *file, int x, int y, bool async=true);
 	void thread_finished();
-	bool getExif(const char *filename);
+	bool getExif(const char *filename, int Thumb=0);
 public:
 	void waitFinished();
 	PSignal1<void, const char*> PictureData;
