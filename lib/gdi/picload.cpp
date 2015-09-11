@@ -27,55 +27,6 @@ static std::string getSize(const char* file)
 	return tmp;
 }
 
-static unsigned char *simple_resize_24(unsigned char *orgin, int ox, int oy, int dx, int dy)
-{
-	unsigned char *cr = new unsigned char[dx * dy * 3];
-	if (cr == NULL)
-	{
-		eDebug("[ePicLoad] resize24 Error malloc");
-		return orgin;
-	}
-	const int stride = 3 * dx;
-	#pragma omp parallel for
-	for (int j = 0; j < dy; ++j)
-	{
-		unsigned char* k = cr + (j * stride);
-		const unsigned char* p = orgin + (j * oy / dy * ox) * 3;
-		for (int i = 0; i < dx; i++)
-		{
-			const unsigned char* ip = p + (i * ox / dx) * 3;
-			*k++ = ip[0];
-			*k++ = ip[1];
-			*k++ = ip[2];
-		}
-	}
-	delete [] orgin;
-	return cr;
-}
-
-static unsigned char *simple_resize_8(unsigned char *orgin, int ox, int oy, int dx, int dy)
-{
-	unsigned char* cr = new unsigned char[dx * dy];
-	if (cr == NULL)
-	{
-		eDebug("[ePicLoad] resize8 Error malloc");
-		return(orgin);
-	}
-	const int stride = dx;
-	#pragma omp parallel for
-	for (int j = 0; j < dy; ++j)
-	{
-		unsigned char* k = cr + (j * stride);
-		const unsigned char* p = orgin + (j * oy / dy * ox);
-		for (int i = 0; i < dx; i++)
-		{
-			*k++ = p[i * ox / dx];
-		}
-	}
-	delete [] orgin;
-	return cr;
-}
-
 static unsigned char *color_resize(unsigned char * orgin, int ox, int oy, int dx, int dy)
 {
 	unsigned char* cr = new unsigned char[dx * dy * 3];
@@ -797,10 +748,7 @@ void ePicLoad::decodeThumb()
 				imy = (int)( (m_conf.thumbnailsize * ((double)m_filepara->oy)) / ((double)m_filepara->ox) );
 			}
 
-			if (m_filepara->bits == 8)
-				m_filepara->pic_buffer = simple_resize_8(m_filepara->pic_buffer, m_filepara->ox, m_filepara->oy, imx, imy);
-			else
-				m_filepara->pic_buffer = color_resize(m_filepara->pic_buffer, m_filepara->ox, m_filepara->oy, imx, imy);
+			m_filepara->pic_buffer = color_resize(m_filepara->pic_buffer, m_filepara->ox, m_filepara->oy, imx, imy);
 			m_filepara->ox = imx;
 			m_filepara->oy = imy;
 
@@ -808,37 +756,6 @@ void ePicLoad::decodeThumb()
 				eDebug("[ePicLoad] error saving cachefile");
 		}
 	}
-}
-
-void ePicLoad::resizePic()
-{
-	int imx, imy;
-
-	if (m_conf.aspect_ratio == 0)  // do not keep aspect ratio but just fill the destination area
-	{
-		imx = m_filepara->max_x;
-		imy = m_filepara->max_y;
-	}
-	else if ((m_conf.aspect_ratio * m_filepara->oy * m_filepara->max_x / m_filepara->ox) <= m_filepara->max_y)
-	{
-		imx = m_filepara->max_x;
-		imy = (int)(m_conf.aspect_ratio * m_filepara->oy * m_filepara->max_x / m_filepara->ox);
-	}
-	else
-	{
-		imx = (int)((1.0/m_conf.aspect_ratio) * m_filepara->ox * m_filepara->max_y / m_filepara->oy);
-		imy = m_filepara->max_y;
-	}
-
-	if (m_filepara->bits == 8)
-		m_filepara->pic_buffer = simple_resize_8(m_filepara->pic_buffer, m_filepara->ox, m_filepara->oy, imx, imy);
-	else if (m_conf.resizetype)
-		m_filepara->pic_buffer = color_resize(m_filepara->pic_buffer, m_filepara->ox, m_filepara->oy, imx, imy);
-	else
-		m_filepara->pic_buffer = simple_resize_24(m_filepara->pic_buffer, m_filepara->ox, m_filepara->oy, imx, imy);
-
-	m_filepara->ox = imx;
-	m_filepara->oy = imy;
 }
 
 void ePicLoad::gotMessage(const Message &msg)
