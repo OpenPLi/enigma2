@@ -709,35 +709,27 @@ void ePicLoad::decodeThumb()
 	std::string cachefile = "";
 	std::string cachedir = "/.Thumbnails";
 
-	if(m_filepara->id == F_JPEG)
+	getExif(m_filepara->file, 1);
+	if (m_exif && m_exif->m_exifinfo->IsExif)
 	{
-		Cexif *exif = new Cexif;
-		if(exif->DecodeExif(m_filepara->file, 1))
+		if (m_exif->m_exifinfo->Thumnailstate == 2)
 		{
-			if(exif->m_exifinfo->IsExif)
-			{
-				if(exif->m_exifinfo->Thumnailstate == 2)
-				{
-					free(m_filepara->file);
-					m_filepara->file = strdup(THUMBNAILTMPFILE);
-					exif_thumbnail = true;
-					eDebug("[ePicLoad] Exif Thumbnail found");
-				}
-				m_filepara->addExifInfo(exif->m_exifinfo->CameraMake);
-				m_filepara->addExifInfo(exif->m_exifinfo->CameraModel);
-				m_filepara->addExifInfo(exif->m_exifinfo->DateTime);
-				char buf[20];
-				snprintf(buf, 20, "%d x %d", exif->m_exifinfo->Width, exif->m_exifinfo->Height);
-				m_filepara->addExifInfo(buf);
-			}
-			exif->ClearExif();
+			free(m_filepara->file);
+			m_filepara->file = strdup(THUMBNAILTMPFILE);
+			exif_thumbnail = true;
+			eDebug("[ePicLoad] Exif Thumbnail found");
 		}
-		delete exif;
+		m_filepara->addExifInfo(m_exif->m_exifinfo->CameraMake);
+		m_filepara->addExifInfo(m_exif->m_exifinfo->CameraModel);
+		m_filepara->addExifInfo(m_exif->m_exifinfo->DateTime);
+		char buf[20];
+		snprintf(buf, 20, "%d x %d", m_exif->m_exifinfo->Width, m_exif->m_exifinfo->Height);
+		m_filepara->addExifInfo(buf);
 	}
 
-	if((! exif_thumbnail) && m_conf.usecache)
+	if (!exif_thumbnail && m_conf.usecache)
 	{
-		if(FILE *f = fopen(m_filepara->file, "rb"))
+		if (FILE *f = fopen(m_filepara->file, "rb"))
 		{
 			int c;
 			int count = 1024*100; // get checksum data out of max 100kB
@@ -745,11 +737,8 @@ void ePicLoad::decodeThumb()
 			char crcstr[9];
 			*crcstr = 0;
 
-			while ((c = getc(f)) != EOF)
-			{
+			while (count-- > 0 && (c = getc(f)) != EOF)
 				crc32 = crc32_table[((crc32) ^ (c)) & 0xFF] ^ ((crc32) >> 8);
-				if (--count < 0) break;
-			}
 
 			fclose(f);
 			crc32 = ~crc32;
@@ -761,7 +750,7 @@ void ePicLoad::decodeThumb()
 				cachedir = cachedir.substr(0, pos) + "/.Thumbnails";
 
 			cachefile = cachedir + std::string("/pc_") + crcstr;
-			if(!access(cachefile.c_str(), R_OK))
+			if (!access(cachefile.c_str(), R_OK))
 			{
 				cachefile_found = true;
 				free(m_filepara->file);
@@ -772,7 +761,7 @@ void ePicLoad::decodeThumb()
 		}
 	}
 
-	switch(m_filepara->id)
+	switch (m_filepara->id)
 	{
 		case F_PNG:	png_load(m_filepara, m_conf.background, true);
 				break;
@@ -784,18 +773,18 @@ void ePicLoad::decodeThumb()
 				break;
 	}
 
-	if(exif_thumbnail)
+	if (exif_thumbnail)
 		::unlink(THUMBNAILTMPFILE);
 
-	if(m_filepara->pic_buffer != NULL)
+	if (m_filepara->pic_buffer != NULL)
 	{
-		//save cachefile
-		if(m_conf.usecache && (!exif_thumbnail) && (!cachefile_found))
+		// Save cachefile
+		if (m_conf.usecache && !exif_thumbnail && !cachefile_found)
 		{
-			if(access(cachedir.c_str(), R_OK))
+			if (access(cachedir.c_str(), R_OK))
 				::mkdir(cachedir.c_str(), 0755);
 
-			//resize for Thumbnail
+			// Resize for Thumbnail
 			int imx, imy;
 			if (m_filepara->ox <= m_filepara->oy)
 			{
@@ -815,11 +804,9 @@ void ePicLoad::decodeThumb()
 			m_filepara->ox = imx;
 			m_filepara->oy = imy;
 
-			if(jpeg_save(cachefile.c_str(), m_filepara->ox, m_filepara->oy, m_filepara->pic_buffer))
+			if (jpeg_save(cachefile.c_str(), m_filepara->ox, m_filepara->oy, m_filepara->pic_buffer))
 				eDebug("[ePicLoad] error saving cachefile");
 		}
-
-		resizePic();
 	}
 }
 
