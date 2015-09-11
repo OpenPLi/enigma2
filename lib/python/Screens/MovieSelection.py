@@ -237,9 +237,11 @@ def buildMovieLocationList(bookmarks):
 		else:
 			bookmarks.append((p.tabbedDescription(), d))
 		inlist.append(d)
-	for d in last_selected_dest:
-		if d not in inlist:
-			bookmarks.append((d,d))
+# The last selected destination becomes invalid or just an empty map
+# if the concerned media (usb hdd,usb stick,cd,dvd) is removed.
+#	for d in last_selected_dest:
+#		if d not in inlist:
+#			bookmarks.append((d,d))
 
 class MovieBrowserConfiguration(ConfigListScreen,Screen):
 	skin = """
