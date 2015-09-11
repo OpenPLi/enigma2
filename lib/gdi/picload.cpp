@@ -345,15 +345,13 @@ static void png_load(Cfilepara* filepara, int background, bool forceRGB = false)
 	}
 	else
 	{
-		if (png_get_valid(png_ptr, info_ptr, PNG_INFO_tRNS))
-			png_set_expand(png_ptr);
 		if (bit_depth == 16)
 			png_set_strip_16(png_ptr);
 		if (color_type == PNG_COLOR_TYPE_GRAY || color_type == PNG_COLOR_TYPE_GRAY_ALPHA)
 			png_set_gray_to_rgb(png_ptr);
-		if (color_type == PNG_COLOR_TYPE_PALETTE)
+		if (color_type & PNG_COLOR_MASK_PALETTE)
 			png_set_palette_to_rgb(png_ptr);
-		if ((color_type == PNG_COLOR_TYPE_RGB_ALPHA) || (color_type == PNG_COLOR_TYPE_GRAY_ALPHA))
+		if (color_type & PNG_COLOR_MASK_ALPHA || png_get_valid(png_ptr, info_ptr, PNG_INFO_tRNS))
 		{
 			png_set_strip_alpha(png_ptr);
 			png_color_16 bg;
@@ -364,7 +362,6 @@ static void png_load(Cfilepara* filepara, int background, bool forceRGB = false)
 			bg.index = 0;
 			png_set_background(png_ptr, &bg, PNG_BACKGROUND_GAMMA_SCREEN, 0, 1.0);
 		}
-		int number_passes = png_set_interlace_handling(png_ptr);
 		png_read_update_info(png_ptr, info_ptr);
 
 		if (width * 3 != png_get_rowbytes(png_ptr, info_ptr))
@@ -379,6 +376,7 @@ static void png_load(Cfilepara* filepara, int background, bool forceRGB = false)
 		filepara->oy = height;
 		filepara->pic_buffer = pic_buffer;
 
+		int number_passes = png_set_interlace_handling(png_ptr);
 		for(int pass = 0; pass < number_passes; pass++)
 		{
 			fbptr = (png_byte *)pic_buffer;
