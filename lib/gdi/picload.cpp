@@ -988,17 +988,19 @@ int ePicLoad::getData(ePtr<gPixmap> &result)
 
 	unsigned char *tmp_buffer = ((unsigned char *)(surface->data));
 	unsigned char *origin = m_filepara->pic_buffer;
+	if (m_filepara->bits == 8) {
+		surface->clut.data = m_filepara->palette;
+		surface->clut.colors = m_filepara->palette_size;
+		m_filepara->palette = NULL; // transfer ownership
+	}
+
 	// fill borders with background color
 	if (xoff != 0 || yoff != 0) {
 		unsigned int background;
 		if (m_filepara->bits == 8) {
-			surface->clut.data = m_filepara->palette;
-			surface->clut.colors = m_filepara->palette_size;
-			m_filepara->palette = NULL; // transfer ownership
-
 			gRGB bg(m_conf.background);
 			background = surface->clut.findColor(bg);
-                }
+		}
 		else {
 			background = m_conf.background;
 		}
