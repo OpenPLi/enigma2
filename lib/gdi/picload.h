@@ -56,7 +56,6 @@ class ePicLoad: public eMainloop, public eThread, public Object, public iObject
 
 	void decodePic();
 	void decodeThumb();
-	void resizePic();
 
 	Cfilepara *m_filepara;
 	Cexif *m_exif;
