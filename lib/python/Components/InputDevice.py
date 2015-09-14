@@ -1,6 +1,7 @@
 from config import config, ConfigSlider, ConfigSubsection, ConfigYesNo, ConfigText, ConfigInteger
 from os import listdir, open as os_open, close as os_close, write as os_write, O_RDWR, O_NONBLOCK
 from Tools.Directories import pathExists
+from SystemInfo import SystemInfo
 from fcntl import ioctl
 import struct
 
@@ -196,7 +197,7 @@ config.plugins.remotecontroltype.rctype = ConfigInteger(default = 0)
 
 class RcTypeControl():
 	def __init__(self):
-		if pathExists('/proc/stb/ir/rc/type') and pathExists('/proc/stb/info/boxtype'):
+		if SystemInfo["RcTypeChangable"] and pathExists('/proc/stb/info/boxtype'):
 			self.isSupported = True
 
 			fd = open('/proc/stb/info/boxtype', 'r')
