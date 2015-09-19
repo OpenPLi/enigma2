@@ -30,9 +30,11 @@ class HardwareInfo:
 
 		# Name ... bit odd, but history prevails
 		try:
-			self.device_name = open("/proc/stb/info/model").read().strip()
+			self.device_name = open("/proc/stb/info/hwmodel").read().strip()
 		except:
 			pass
+		else:
+			self.device_name = open("/proc/stb/info/model").read().strip()
 
 		# Model
 		for line in open((resolveFilename(SCOPE_SKIN, 'hw_info/hw_info.cfg')), 'r'):

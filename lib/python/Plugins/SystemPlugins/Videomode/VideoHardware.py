@@ -3,6 +3,7 @@ from Components.config import config, ConfigSelection, ConfigSubDict, ConfigYesN
 
 from Tools.CList import CList
 from Tools.HardwareInfo import HardwareInfo
+from Tools.Directories import fileExists
 from os import path
 
 # The "VideoHardware" is the interface to /proc/stb/video.
@@ -58,8 +59,9 @@ class VideoHardware:
 		"640x480" : { 60: "640x480" }
 	}
 
-	modes["Scart"] = ["PAL", "NTSC", "Multi"]
-	modes["YPbPr"] = ["720p", "1080i", "576p", "480p", "576i", "480i"]
+	if not fileExists("/proc/stb/info/hwmodel") and not HardwareInfo().get_device_name == "fusionhd":
+		modes["Scart"] = ["PAL", "NTSC", "Multi"]
+		modes["YPbPr"] = ["720p", "1080i", "576p", "480p", "576i", "480i"]
 	modes["DVI"] = ["720p", "1080p", "1080i", "576p", "480p", "576i", "480i"]
 	modes["DVI-PC"] = ["PC"]
 
@@ -251,11 +253,15 @@ class VideoHardware:
 
 			# create list of available modes
 			modes = self.getModeList(port)
+			print "[mode+**********+++++++]", modes
 			if len(modes):
 				config.av.videomode[port] = ConfigSelection(choices = [mode for (mode, rates) in modes])
 			for (mode, rates) in modes:
 				config.av.videorate[mode] = ConfigSelection(choices = rates)
 		config.av.videoport = ConfigSelection(choices = lst)
+                if HardwareInfo().get_device_model == "fusionhd":
+                        config.av.videoport = ConfigSelection(choices = dest)
+		print "[createConfig]+++++++******+++++]", lst
 
 	def setConfiguredMode(self):
 		port = config.av.videoport.value
