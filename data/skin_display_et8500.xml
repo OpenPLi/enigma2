@@ -57,13 +57,16 @@
 		<widget source="session.CurrentService" render="Picon" zPosition="13" position="224,394" size="242,142" transparent="1" alphatest="blend">
 			<convert type="ServiceName">Reference</convert>
 		</widget>
+		<widget source="session.HddSleepingState" render="Pixmap" pixmap="skin_default/icons/hdd.png" foregroundColor="#ff0000" size="50,60"  position="600,400" zPosition="1" alphatest="blend" >
+			<convert type="ConditionalShowHide"/>
+		</widget>
 	</screen>
 <!-- normal radiomodus-->
 	<screen name="ChannelSelectionRadio_summary" position="0,0" size="720,576">
 		<widget source="parent.RdsDecoder" render="Label" position="15,20" foregroundColor="#e5b243" size="670,220" font="FdLcD;40" halign="center" valign="top">
 			<convert type="RdsInfo">RtpText</convert>
 		</widget>
-		<widget source="parent.Service" render="Picon" zPosition="13" position="200,300" size="400,240" transparent="1" alphatest="blend">	
+		<widget source="parent.Service" render="Picon" zPosition="13" position="200,300" size="400,240" transparent="1" alphatest="blend">
 			<convert type="ServiceName">Reference</convert>
 		</widget>
 	</screen>
@@ -284,6 +287,9 @@
 		</widget>
 		<widget source="session.RecordState" render="FixedLabel" text="&#174;" position="600,470" foregroundColor="#ff0000" size="80,80" font="FdLcD;80" halign="center" valign="center" zPosition="1">
 			<convert type="ConditionalShowHide">Blink</convert>
+		</widget>
+		<widget source="session.HddSleepingState" render="Pixmap" pixmap="skin_default/icons/hdd.png" foregroundColor="#ff0000" size="50,60"  position="600,400" zPosition="1" alphatest="blend" >
+			<convert type="ConditionalShowHide"/>
 		</widget>
 	</screen>
 <!-- plugin browser -->
