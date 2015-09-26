@@ -10,8 +10,8 @@ class HardwareInfo:
 	device_hdmi = False
 
 	def __init__(self):
-                global hw_info
-		if hw_info is not None:
+		global hw_info
+		if hw_info:
 			return
 		hw_info = self
 
@@ -49,17 +49,12 @@ class HardwareInfo:
 				except:
 					pass
 
-		if self.device_model is None:
-			self.device_model = self.device_name
+		self.device_model = self.device_model or self.device_name
 
-		# HDMI capbility
-		self.device_hdmi = (	self.device_name == 'dm7020hd' or
-					self.device_name == 'dm800se' or
-					self.device_name == 'dm500hd' or
-					(self.device_name == 'dm8000' and self.device_version != None))
+		# only some early DMM boxes do not have HDMI hardware
+		self.device_hdmi =  self.device_model not in ("dm7025", "dm800", "dm8000")
 
 		print "Detected: " + self.get_device_string()
-
 
 	def get_device_name(self):
 		return hw_info.device_name
@@ -74,12 +69,11 @@ class HardwareInfo:
 		return hw_info.device_revision
 
 	def get_device_string(self):
-		s = hw_info.device_model
-		if hw_info.device_revision != "":
-			s += " (" + hw_info.device_revision + "-" + hw_info.device_version + ")"
-		elif hw_info.device_version != "":
-			s += " (" + hw_info.device_version + ")"
-		return s
+		if hw_info.device_revision:
+			return "%s (%s-%s)" % (hw_info.device_model, hw_info.device_revision, hw_info.device_version)
+		elif hw_info.device_version:
+			return "%s (%s)" % (hw_info.device_model, hw_info.device_version)
+		return hw_info.device_model
 
 	def has_hdmi(self):
 		return hw_info.device_hdmi
