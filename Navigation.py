@@ -35,14 +35,21 @@ class Navigation:
 		self.currentlyPlayingService = None
 		self.RecordTimer = RecordTimer.RecordTimer()
 		self.__wasTimerWakeup = getFPWasTimerWakeup()
+		startup_to_standby = config.usage.startup_to_standby.value
+		wakeup_time_type = config.misc.prev_wakeup_time_type.value
 		if self.__wasTimerWakeup:
 			RecordTimer.RecordTimerEntry.setWasInDeepStandby()
 		if config.misc.RestartUI.value:
 			config.misc.RestartUI.value = False
 			config.misc.RestartUI.save()
 			configfile.save()
-		elif config.usage.startup_to_standby.value or self.__wasTimerWakeup:
-			Notifications.AddNotification(Screens.Standby.Standby)
+		elif startup_to_standby == "yes" or self.__wasTimerWakeup and config.misc.prev_wakeup_time.value and ((wakeup_time_type == 0 or wakeup_time_type == 1) or ( wakeup_time_type == 3 and startup_to_standby == "except")):
+			if not Screens.Standby.inTryQuitMainloop:
+				Notifications.AddNotification(Screens.Standby.Standby)
+		if config.misc.prev_wakeup_time.value:
+			config.misc.prev_wakeup_time.value = 0
+			config.misc.prev_wakeup_time.save()
+			configfile.save()
 
 	def wasTimerWakeup(self):
 		return self.__wasTimerWakeup
