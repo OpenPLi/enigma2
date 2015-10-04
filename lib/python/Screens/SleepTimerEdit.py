@@ -7,7 +7,7 @@ from Components.Label import Label
 from Components.Sources.StaticText import StaticText
 from Components.config import config, getConfigListEntry
 from enigma import eEPGCache
-from time import time
+from time import time, localtime, mktime 
 
 class SleepTimerEdit(ConfigListScreen, Screen):
 	def __init__(self, session):
@@ -83,10 +83,16 @@ class SleepTimerEdit(ConfigListScreen, Screen):
 				self.list.append(getConfigListEntry(_("End time to ignore shutdown in standby"),
 					config.usage.standby_to_shutdown_timer_blocktime_end,
 					_("Specify the end time to ignore the shutdown timer when the receiver is in standby mode")))
+		self.list.append(getConfigListEntry(_("Wakeup timer"),
+			config.usage.wakeup_menu,
+			_("Press OK and configure the days and times wakeup receiver from deep standby mode.")))
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
 	def ok(self):
+		if self.getCurrentEntry() == _("Wakeup timer"):
+			self.session.open(WakeupTimerEdit)
+			return
 		if self["config"].isChanged():
 			for x in self["config"].list:
 				x[1].save()
@@ -145,3 +151,101 @@ class SleepTimerEdit(ConfigListScreen, Screen):
 					end = start + duration
 					remaining = end - now
 		return remaining + config.recording.margin_after.value * 60
+
+weekdays = [
+	_("Monday"),
+	_("Tuesday"),
+	_("Wednesday"),
+	_("Thursday"),
+	_("Friday"),
+	_("Saturday"),
+	_("Sunday"),
+	]
+
+class WakeupTimerEdit(ConfigListScreen, Screen):
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		self.skinName = ["WakeupTimerSetup", "Setup"]
+		self.setup_title = _("WakeupTimer Configuration")
+
+		self["key_red"] = StaticText(_("Cancel"))
+		self["key_green"] = StaticText(_("Save"))
+		self["description"] = Label("")
+
+		self.list = []
+		ConfigListScreen.__init__(self, self.list, session = session)
+		self.createSetup()
+
+		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
+		{
+		    "green": self.ok,
+		    "red": self.cancel,
+		    "cancel": self.cancel,
+		    "ok": self.ok,
+		}, -2)
+
+		self.onLayoutFinish.append(self.layoutFinished)
+
+	def layoutFinished(self):
+		self.setTitle(self.setup_title)
+
+	def createSetup(self):
+		self.list = []
+		self.list.append(getConfigListEntry(_("Enable wakeup timer"),
+			config.usage.wakeup_enabled,
+			_("Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'.")))
+		if config.usage.wakeup_enabled.value:
+			for i in range(7):
+				self.list.append(getConfigListEntry(weekdays[i], config.usage.wakeup_day[i]))
+				if config.usage.wakeup_day[i].value:
+					self.list.append(getConfigListEntry(_("Wakeup time"), config.usage.wakeup_time[i]))
+		self["config"].list = self.list
+		self["config"].l.setList(self.list)
+
+	def ok(self):
+		if self["config"].isChanged():
+			for x in self["config"].list:
+				x[1].save()
+		self.close()
+
+	def cancel(self, answer = None):
+		if answer is None:
+			if self["config"].isChanged():
+				self.session.openWithCallback(self.cancel, MessageBox, _("Really close without saving settings?"))
+			else:
+				self.close()
+		elif answer:
+			for x in self["config"].list:
+				x[1].cancel()
+			self.close()
+
+	def keyLeft(self):
+		ConfigListScreen.keyLeft(self)
+		self.createSetup()
+
+	def keyRight(self):
+		ConfigListScreen.keyRight(self)
+		self.createSetup()
+
+def isNextWakeupTime():
+	if config.usage.wakeup_enabled.value:
+		wakeup_day, wakeup_time = WakeupDayTimeOfWeek()
+		if wakeup_day == -1:
+				return -1
+		elif wakeup_day == 0:
+			return wakeup_time
+		return wakeup_time + (86400 * wakeup_day)
+	return -1
+
+def WakeupDayTimeOfWeek():
+	now = localtime()
+	current_day = int(now.tm_wday)
+	if current_day >= 0:
+		if config.usage.wakeup_day[current_day].value:
+			wakeup_time = int(mktime((now.tm_year, now.tm_mon, now.tm_mday, config.usage.wakeup_time[current_day].value[0], config.usage.wakeup_time[current_day].value[1], 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
+			if wakeup_time > time():
+				return 0, wakeup_time
+		for i in range(1,8):
+			if config.usage.wakeup_day[(current_day+i)%7].value:
+				return i, int(mktime((now.tm_year, now.tm_mon, now.tm_mday, config.usage.wakeup_time[(current_day+i)%7].value[0], config.usage.wakeup_time[(current_day+i)%7].value[1], 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
+	return -1, None
