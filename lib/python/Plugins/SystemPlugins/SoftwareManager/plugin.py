@@ -1,3 +1,6 @@
+import os
+import time
+import cPickle
 from Plugins.Plugin import PluginDescriptor
 from Screens.Console import Console
 from Screens.ChoiceBox import ChoiceBox
@@ -27,18 +30,12 @@ from Components.PackageInfo import PackageInfoHandler
 from Components.Language import language
 from Components.AVSwitch import AVSwitch
 from Components.Task import job_manager
-from Tools.Directories import pathExists, fileExists, resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_PLUGIN, SCOPE_CURRENT_SKIN, SCOPE_METADIR
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_PLUGIN, SCOPE_CURRENT_SKIN, SCOPE_METADIR
 from Tools.LoadPixmap import LoadPixmap
 from Tools.NumericalTextInput import NumericalTextInput
 from enigma import eTimer, RT_HALIGN_LEFT, RT_VALIGN_CENTER, eListboxPythonMultiContent, eListbox, gFont, getDesktop, ePicLoad, eRCInput, getPrevAsciiCode, eEnv, iRecordableService
-from cPickle import dump, load
-from os import path as os_path, system as os_system, unlink, stat, mkdir, popen, makedirs, listdir, access, rename, remove, W_OK, R_OK, F_OK
-from time import time, gmtime, strftime, localtime
-from stat import ST_MTIME
-from datetime import date
 from twisted.web import client
 from twisted.internet import reactor
-
 from ImageWizard import ImageWizard
 from BackupRestore import BackupSelection, RestoreMenu, BackupScreen, RestoreScreen, getBackupPath, getBackupFilename
 from SoftwareTools import iSoftwareTools
@@ -59,34 +56,28 @@ config.plugins.softwaremanager.onBlueButton = ConfigYesNo(default=False)
 config.plugins.softwaremanager.epgcache = ConfigYesNo(default=False)
 
 def write_cache(cache_file, cache_data):
-	#Does a cPickle dump
-	if not os_path.isdir( os_path.dirname(cache_file) ):
-		try:
-			mkdir( os_path.dirname(cache_file) )
-		except OSError:
-			    print os_path.dirname(cache_file), 'is a file'
-	fd = open(cache_file, 'w')
-	dump(cache_data, fd, -1)
-	fd.close()
+	try:
+		path = os.path.dirname(cache_file)
+		if not os.path.isdir(path):
+			os.mkdir(path)
+		cPickle.dump(cache_data, open(cache_file, 'w'), -1)
+	except Exception, ex:
+		print "Failed to write cache data to %s:" % cache_file, ex
 
 def valid_cache(cache_file, cache_ttl):
 	#See if the cache file exists and is still living
 	try:
-		mtime = stat(cache_file)[ST_MTIME]
+		mtime = os.stat(cache_file)[os.stat.ST_MTIME]
 	except:
 		return 0
-	curr_time = time()
+	curr_time = time.time()
 	if (curr_time - mtime) > cache_ttl:
 		return 0
 	else:
 		return 1
 
 def load_cache(cache_file):
-	#Does a cPickle load
-	fd = open(cache_file)
-	cache_data = load(fd)
-	fd.close()
-	return cache_data
+	return cPickle.load(open(cache_file))
 
 
 class UpdatePluginMenu(Screen):
@@ -267,7 +258,7 @@ class UpdatePluginMenu(Screen):
 				elif (currentEntry == "system-backup"):
 					self.session.openWithCallback(self.backupDone,BackupScreen, runBackup = True)
 				elif (currentEntry == "system-restore"):
-					if os_path.exists(self.fullbackupfilename):
+					if os.path.exists(self.fullbackupfilename):
 						self.session.openWithCallback(self.startRestore, MessageBox, _("Are you sure you want to restore the backup?\nYour receiver will restart after the backup has been restored!"))
 					else:
 						self.session.open(MessageBox, _("Sorry, no backups found!"), MessageBox.TYPE_INFO, timeout = 10)
@@ -288,7 +279,7 @@ class UpdatePluginMenu(Screen):
 				elif (currentEntry == "backuplocation"):
 					parts = [ (r.description, r.mountpoint, self.session) for r in harddiskmanager.getMountedPartitions(onlyhotplug = False)]
 					for x in parts:
-						if not access(x[1], F_OK|R_OK|W_OK) or x[1] == '/':
+						if not os.access(x[1], os.F_OK|os.R_OK|os.W_OK) or x[1] == '/':
 							parts.remove(x)
 					if len(parts):
 						self.session.openWithCallback(self.backuplocation_choosen, ChoiceBox, title = _("Please select medium to use as backup location"), list = parts)
@@ -323,8 +314,8 @@ class UpdatePluginMenu(Screen):
 		print "Creating backup folder if not already there..."
 		self.backuppath = getBackupPath()
 		try:
-			if (os_path.exists(self.backuppath) == False):
-				makedirs(self.backuppath)
+			if (os.path.exists(self.backuppath) == False):
+				os.makedirs(self.backuppath)
 		except OSError:
 			self.session.open(MessageBox, _("Sorry, your backup destination is not writeable.\nPlease select a different one."), MessageBox.TYPE_INFO, timeout = 10)
 
@@ -674,7 +665,7 @@ class PluginManager(Screen, PackageInfoHandler):
 					else:
 						self["status"].setText(_("No network connection available."))
 				else:
-					iSoftwareTools.lastDownloadDate = time()
+					iSoftwareTools.lastDownloadDate = time.time()
 					iSoftwareTools.list_updating = True
 					self.setState('update')
 					iSoftwareTools.getUpdates(self.getUpdateInfosCB)
@@ -772,7 +763,7 @@ class PluginManager(Screen, PackageInfoHandler):
 					self["list"].updateList(self.list)
 					self.selectionChanged()
 			elif self.currList == "status":
-				iSoftwareTools.lastDownloadDate = time()
+				iSoftwareTools.lastDownloadDate = time.time()
 				iSoftwareTools.list_updating = True
 				self.setState('update')
 				iSoftwareTools.getUpdates(self.getUpdateInfosCB)
@@ -783,7 +774,7 @@ class PluginManager(Screen, PackageInfoHandler):
 			if self.currList == "packages":
 				if current[7] is not '':
 					detailsfile = iSoftwareTools.directory[0] + "/" + current[1]
-					if (os_path.exists(detailsfile) == True):
+					if (os.path.exists(detailsfile) == True):
 						self.saved_currentSelectedPackage = self.currentSelectedPackage
 						self.session.openWithCallback(self.detailsClosed, PluginDetails, self.skin_path, current)
 					else:
@@ -797,7 +788,7 @@ class PluginManager(Screen, PackageInfoHandler):
 		if result is not None:
 			if result is not False:
 				self.setState('sync')
-				iSoftwareTools.lastDownloadDate = time()
+				iSoftwareTools.lastDownloadDate = time.time()
 				for entry in self.selectedFiles:
 					if entry == self.saved_currentSelectedPackage:
 						self.selectedFiles.remove(entry)
@@ -919,7 +910,7 @@ class PluginManager(Screen, PackageInfoHandler):
 		if self.selectedFiles and len(self.selectedFiles):
 			for plugin in self.selectedFiles:
 				detailsfile = iSoftwareTools.directory[0] + "/" + plugin[0]
-				if (os_path.exists(detailsfile) == True):
+				if (os.path.exists(detailsfile) == True):
 					iSoftwareTools.fillPackageDetails(plugin[0])
 					self.package = iSoftwareTools.packageDetails[0]
 					if self.package[0].has_key("attributes"):
@@ -1401,10 +1392,10 @@ class IPKGMenu(Screen):
 	def fill_list(self):
 		flist = []
 		self.path = '/etc/opkg/'
-		if (os_path.exists(self.path) == False):
+		if (os.path.exists(self.path) == False):
 			self.entry = False
 			return
-		for file in listdir(self.path):
+		for file in os.listdir(self.path):
 			if file.endswith(".conf"):
 				if file not in ('arch.conf', 'opkg.conf'):
 					flist.append((file))
@@ -1636,8 +1627,8 @@ class PacketManager(Screen, NumericalTextInput):
 		self.close()
 
 	def reload(self):
-		if (os_path.exists(self.cache_file) == True):
-			remove(self.cache_file)
+		if (os.path.exists(self.cache_file) == True):
+			os.unlink(self.cache_file)
 			self.list_updating = True
 			self.rebuildList()
 
