@@ -16,9 +16,10 @@ public:
 	eConfigManager();
 	virtual ~eConfigManager();
 
-	static std::string getConfigValue(const char *key);
-	static int getConfigIntValue(const char *key, int defaultvalue = 0);
-	static bool getConfigBoolValue(const char *key, bool defaultvalue = false);
+	static std::string getString(const char *key, const char *defaultvalue = "");
+	static std::string getString(const std::string &key, const char *defaultvalue = "");
+	static int getInt(const char *key, int defaultvalue = 0);
+	static bool getBool(const char *key, bool defaultvalue = false);
 };
 
 #endif /* __lib_base_nconfig_h_ */

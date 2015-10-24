@@ -12,7 +12,7 @@ void ePythonConfigQuery::setQueryFunc(ePyObject queryFunc)
 		Py_INCREF(m_queryFunc);
 }
 
-RESULT ePythonConfigQuery::getConfigValue(const char *key, std::string &value)
+RESULT ePythonConfigQuery::getString(const char *key, std::string &value)
 {
 	if (key && PyCallable_Check(m_queryFunc))
 	{
@@ -37,6 +37,6 @@ RESULT ePythonConfigQuery::getConfigValue(const char *key, std::string &value)
 std::string ePythonConfigQuery::getConfig(const char *key)
 {
 	std::string value;
-	getConfigValue(key, value);
+	getString(key, value);
 	return value;
 }

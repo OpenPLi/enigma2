@@ -1178,7 +1178,7 @@ void eDVBServicePlay::serviceEvent(int event)
 		updateEpgCacheNowNext();
 
 		/* default behaviour is to start an eit reader, and wait for now/next info, unless this is disabled */
-		if (eConfigManager::getConfigBoolValue("config.usage.show_eit_nownext", true))
+		if (eConfigManager::getBool("config.usage.show_eit_nownext", true))
 		{
 			ePtr<iDVBDemux> m_demux;
 			if (!m_service_handler.getDataDemux(m_demux))
@@ -1368,7 +1368,7 @@ RESULT eDVBServicePlay::start()
 		 * streams are considered to be descrambled by default;
 		 * user can indicate a stream is scrambled, by using servicetype id + 0x100
 		 */
-		bool config_descramble_client = eConfigManager::getConfigBoolValue("config.streaming.descramble_client", false);
+		bool config_descramble_client = eConfigManager::getBool("config.streaming.descramble_client", false);
 
 		scrambled = (m_reference.type == eServiceFactoryDVB::id + 0x100);
 
@@ -1725,7 +1725,7 @@ RESULT eDVBServicePlay::timeshift(ePtr<iTimeshiftService> &ptr)
 		if (!m_timeshift_enabled)
 		{
 			/* query config path */
-			std::string tspath = eConfigManager::getConfigValue("config.usage.timeshift_path");
+			std::string tspath = eConfigManager::getString("config.usage.timeshift_path");
 			if(tspath == "")
 			{
 				eDebug("[eDVBServicePlay] timeshift could not query ts path from config");
@@ -2294,8 +2294,8 @@ bool eDVBServiceBase::tryFallbackTuner(eServiceReferenceDVB &service, bool &is_s
 	int system;
 	size_t index;
 
-	bool remote_fallback_enabled = eConfigManager::getConfigBoolValue("config.usage.remote_fallback_enabled", false);
-	std::string remote_fallback_url = eConfigManager::getConfigValue("config.usage.remote_fallback");
+	bool remote_fallback_enabled = eConfigManager::getBool("config.usage.remote_fallback_enabled", false);
+	std::string remote_fallback_url = eConfigManager::getString("config.usage.remote_fallback");
 
 	if(is_stream || is_pvr || simulate ||
 			!remote_fallback_enabled || (remote_fallback_url.length() == 0) ||
@@ -2420,7 +2420,7 @@ RESULT eDVBServicePlay::startTimeshift()
 	if (!m_record)
 		return -3;
 
-	std::string tspath = eConfigManager::getConfigValue("config.usage.timeshift_path");
+	std::string tspath = eConfigManager::getString("config.usage.timeshift_path");
 	if (tspath == "")
 	{
 		eDebug("[eDVBServicePlay] could not query timeshift path");
@@ -2890,12 +2890,12 @@ void eDVBServicePlay::updateDecoder(bool sendSeekableStateChanged)
 		else
 		{
 			std::string value;
-			bool showRadioBackground = eConfigManager::getConfigBoolValue("config.misc.showradiopic", true);
+			bool showRadioBackground = eConfigManager::getBool("config.misc.showradiopic", true);
 			std::string radio_pic;
 			if (showRadioBackground)
-				radio_pic = eConfigManager::getConfigValue("config.misc.radiopic");
+				radio_pic = eConfigManager::getString("config.misc.radiopic");
 			else
-				radio_pic = eConfigManager::getConfigValue("config.misc.blackradiopic");
+				radio_pic = eConfigManager::getString("config.misc.blackradiopic");
 			m_decoder->setRadioPic(radio_pic);
 		}
 
@@ -3177,7 +3177,7 @@ RESULT eDVBServicePlay::getCachedSubtitle(struct SubtitleTrack &track)
 		eDVBServicePMTHandler &h = m_timeshift_active ? m_service_handler_timeshift : m_service_handler;
 		if (!h.getProgramInfo(program))
 		{
-			bool usecache = eConfigManager::getConfigBoolValue("config.autolanguage.subtitle_usecache");
+			bool usecache = eConfigManager::getBool("config.autolanguage.subtitle_usecache");
 			int stream=program.defaultSubtitleStream;
 			int tmp = m_dvb_service->getCacheEntry(eDVBService::cSUBTITLE);
 
@@ -3315,12 +3315,12 @@ void eDVBServicePlay::newSubtitlePage(const eDVBTeletextSubtitlePage &page)
 		if (m_is_pvr || m_timeshift_enabled)
 		{
 			eDebug("[eDVBServicePlay] Subtitle in recording/timeshift");
-			subtitledelay = eConfigManager::getConfigIntValue("config.subtitles.subtitle_noPTSrecordingdelay", 315000);
+			subtitledelay = eConfigManager::getInt("config.subtitles.subtitle_noPTSrecordingdelay", 315000);
 		}
 		else
 		{
 			/* check the setting for subtitle delay in live playback, either with pts, or without pts */
-			subtitledelay = eConfigManager::getConfigIntValue("config.subtitles.subtitle_bad_timing_delay", 0);
+			subtitledelay = eConfigManager::getInt("config.subtitles.subtitle_bad_timing_delay", 0);
 		}
 
 		// eDebug("[eDVBServicePlay] Subtitle get  TTX have_pts=%d pvr=%d timeshift=%d page.pts=%lld pts=%lld delay=%d", page.m_have_pts, m_is_pvr, m_timeshift_enabled, page.m_pts, pts, subtitledelay);
@@ -3406,7 +3406,7 @@ void eDVBServicePlay::newDVBSubtitlePage(const eDVBSubtitlePage &p)
 		if ( abs(pos-p.m_show_time)>1800000 && (m_is_pvr || m_timeshift_enabled))
 		{
 			eDebug("[eDVBServicePlay] Subtitle without PTS and recording");
-			int subtitledelay = eConfigManager::getConfigIntValue("config.subtitles.subtitle_noPTSrecordingdelay", 315000);
+			int subtitledelay = eConfigManager::getInt("config.subtitles.subtitle_noPTSrecordingdelay", 315000);
 
 			eDVBSubtitlePage tmppage;
 			tmppage = p;
@@ -3415,7 +3415,7 @@ void eDVBServicePlay::newDVBSubtitlePage(const eDVBSubtitlePage &p)
 		}
 		else
 		{
-			int subtitledelay = eConfigManager::getConfigIntValue("config.subtitles.subtitle_bad_timing_delay", 0);
+			int subtitledelay = eConfigManager::getInt("config.subtitles.subtitle_bad_timing_delay", 0);
 			if (subtitledelay != 0)
 			{
 				eDVBSubtitlePage tmppage;
@@ -3456,7 +3456,7 @@ void eDVBServicePlay::setAC3Delay(int delay)
 		m_dvb_service->setCacheEntry(eDVBService::cAC3DELAY, delay ? delay : -1);
 	if (m_decoder)
 	{
-		m_decoder->setAC3Delay(delay + eConfigManager::getConfigIntValue("config.av.generalAC3delay"));
+		m_decoder->setAC3Delay(delay + eConfigManager::getInt("config.av.generalAC3delay"));
 	}
 }
 
@@ -3466,7 +3466,7 @@ void eDVBServicePlay::setPCMDelay(int delay)
 		m_dvb_service->setCacheEntry(eDVBService::cPCMDELAY, delay ? delay : -1);
 	if (m_decoder)
 	{
-		m_decoder->setPCMDelay(delay + eConfigManager::getConfigIntValue("config.av.generalPCMdelay"));
+		m_decoder->setPCMDelay(delay + eConfigManager::getInt("config.av.generalPCMdelay"));
 	}
 }
 
