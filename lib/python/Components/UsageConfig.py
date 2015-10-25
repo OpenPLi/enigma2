@@ -196,8 +196,12 @@ def InitUsageConfig():
 		("5", "DVB-T/-S/-C"),
 		("127", _("No priority")) ])
 
+	def systeminfoFallbackTunerChanged(configElement):
+		SystemInfo["Fallback_remote_tuner"] = config.usage.remote_fallback_enabled.value and "http" in config.usage.remote_fallback.value
 	config.usage.remote_fallback_enabled = ConfigYesNo(default = False);
+	config.usage.remote_fallback_enabled.addNotifier(systeminfoFallbackTunerChanged)
 	config.usage.remote_fallback = ConfigText(default = "", fixed_size = False);
+	config.usage.remote_fallback.addNotifier(systeminfoFallbackTunerChanged)
 	config.usage.timer_sanity_check_enabled = ConfigYesNo(default = True);
 
 	dvbs_nims = [("-2", _("Disabled"))]
