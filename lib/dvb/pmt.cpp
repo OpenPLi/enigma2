@@ -399,16 +399,16 @@ int eDVBServicePMTHandler::getProgramInfo(program &program)
 
 		std::string configvalue;
 		std::vector<std::string> autoaudio_languages;
-		configvalue = eConfigManager::getConfigValue("config.autolanguage.audio_autoselect1");
+		configvalue = eConfigManager::getString("config.autolanguage.audio_autoselect1");
 		if (configvalue != "" && configvalue != "None")
 			autoaudio_languages.push_back(configvalue);
-		configvalue = eConfigManager::getConfigValue("config.autolanguage.audio_autoselect2");
+		configvalue = eConfigManager::getString("config.autolanguage.audio_autoselect2");
 		if (configvalue != "" && configvalue != "None")
 			autoaudio_languages.push_back(configvalue);
-		configvalue = eConfigManager::getConfigValue("config.autolanguage.audio_autoselect3");
+		configvalue = eConfigManager::getString("config.autolanguage.audio_autoselect3");
 		if (configvalue != "" && configvalue != "None")
 			autoaudio_languages.push_back(configvalue);
-		configvalue = eConfigManager::getConfigValue("config.autolanguage.audio_autoselect4");
+		configvalue = eConfigManager::getString("config.autolanguage.audio_autoselect4");
 		if (configvalue != "" && configvalue != "None")
 			autoaudio_languages.push_back(configvalue);
 
@@ -419,16 +419,16 @@ int eDVBServicePMTHandler::getProgramInfo(program &program)
 		int autosub_level =4;
 
 		std::vector<std::string> autosub_languages;
-		configvalue = eConfigManager::getConfigValue("config.autolanguage.subtitle_autoselect1");
+		configvalue = eConfigManager::getString("config.autolanguage.subtitle_autoselect1");
 		if (configvalue != "" && configvalue != "None")
 			autosub_languages.push_back(configvalue);
-		configvalue = eConfigManager::getConfigValue("config.autolanguage.subtitle_autoselect2");
+		configvalue = eConfigManager::getString("config.autolanguage.subtitle_autoselect2");
 		if (configvalue != "" && configvalue != "None")
 			autosub_languages.push_back(configvalue);
-		configvalue = eConfigManager::getConfigValue("config.autolanguage.subtitle_autoselect3");
+		configvalue = eConfigManager::getString("config.autolanguage.subtitle_autoselect3");
 		if (configvalue != "" && configvalue != "None")
 			autosub_languages.push_back(configvalue);
-		configvalue = eConfigManager::getConfigValue("config.autolanguage.subtitle_autoselect4");
+		configvalue = eConfigManager::getString("config.autolanguage.subtitle_autoselect4");
 		if (configvalue != "" && configvalue != "None")
 			autosub_languages.push_back(configvalue);
 
@@ -527,9 +527,9 @@ int eDVBServicePMTHandler::getProgramInfo(program &program)
 			}
 		}
 
-		bool defaultac3 = eConfigManager::getConfigBoolValue("config.autolanguage.audio_defaultac3");
-		bool defaultddp = eConfigManager::getConfigBoolValue("config.autolanguage.audio_defaultddp");
-		bool useaudio_cache = eConfigManager::getConfigBoolValue("config.autolanguage.audio_usecache");
+		bool defaultac3 = eConfigManager::getBool("config.autolanguage.audio_defaultac3");
+		bool defaultddp = eConfigManager::getBool("config.autolanguage.audio_defaultddp");
+		bool useaudio_cache = eConfigManager::getBool("config.autolanguage.audio_usecache");
 
 		if (useaudio_cache && audio_cached != -1)
 			program.defaultAudioStream = audio_cached;
@@ -553,10 +553,10 @@ int eDVBServicePMTHandler::getProgramInfo(program &program)
 				program.defaultAudioStream = first_non_mpeg;
 		}
 
-		bool allow_hearingimpaired = eConfigManager::getConfigBoolValue("config.autolanguage.subtitle_hearingimpaired");
-		bool default_hearingimpaired = eConfigManager::getConfigBoolValue("config.autolanguage.subtitle_defaultimpaired");
-		bool defaultdvb = eConfigManager::getConfigBoolValue("config.autolanguage.subtitle_defaultdvb");
-		int equallanguagemask = eConfigManager::getConfigIntValue("config.autolanguage.equal_languages");
+		bool allow_hearingimpaired = eConfigManager::getBool("config.autolanguage.subtitle_hearingimpaired");
+		bool default_hearingimpaired = eConfigManager::getBool("config.autolanguage.subtitle_defaultimpaired");
+		bool defaultdvb = eConfigManager::getBool("config.autolanguage.subtitle_defaultdvb");
+		int equallanguagemask = eConfigManager::getInt("config.autolanguage.equal_languages");
 
 		if (defaultdvb)
 		{
@@ -846,7 +846,7 @@ int eDVBServicePMTHandler::tuneExt(eServiceReferenceDVB &ref, int use_decode_dem
 			if (ref.path.empty())
 			{
 				m_dvb_scan = new eDVBScan(m_channel, true, false);
-				if (!eConfigManager::getConfigBoolValue("config.misc.disable_background_scan"))
+				if (!eConfigManager::getBool("config.misc.disable_background_scan"))
 				{
 					/*
 					 * not starting a dvb scan triggers what appears to be a
@@ -878,7 +878,7 @@ int eDVBServicePMTHandler::tuneExt(eServiceReferenceDVB &ref, int use_decode_dem
 
 			if (m_service_type == offline)
 			{
-				m_pvr_channel->setOfflineDecodeMode(eConfigManager::getConfigIntValue("config.recording.offline_decode_delay"));
+				m_pvr_channel->setOfflineDecodeMode(eConfigManager::getInt("config.recording.offline_decode_delay"));
 			}
 		}
 	}

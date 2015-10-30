@@ -199,7 +199,7 @@ bool eDVBService::isCrypted()
 int eDVBService::isPlayable(const eServiceReference &ref, const eServiceReference &ignore, bool simulate)
 {
 	ePtr<eDVBResourceManager> res_mgr;
-	bool remote_fallback_enabled = eConfigManager::getConfigBoolValue("config.usage.remote_fallback_enabled", false);
+	bool remote_fallback_enabled = eConfigManager::getBool("config.usage.remote_fallback_enabled", false);
 
 	if (eDVBResourceManager::getInstance(res_mgr))
 		eDebug("[eDVBService] isPlayble... no res manager!!");

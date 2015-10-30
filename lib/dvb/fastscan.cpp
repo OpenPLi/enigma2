@@ -619,7 +619,7 @@ void eFastScan::parseResult()
 		}
 	}
 
-	bool multibouquet = eConfigManager::getConfigBoolValue("config.usage.multibouquet");
+	bool multibouquet = eConfigManager::getBool("config.usage.multibouquet");
 
 	if (multibouquet)
 	{

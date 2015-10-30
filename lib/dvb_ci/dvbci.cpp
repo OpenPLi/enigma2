@@ -350,7 +350,7 @@ static bool canDescrambleMultipleServices(int slotid)
 {
 	char configStr[255];
 	snprintf(configStr, 255, "config.ci.%d.canDescrambleMultipleServices", slotid);
-	std::string str = eConfigManager::getConfigValue(configStr);
+	std::string str = eConfigManager::getString(configStr);
 	if ( str == "auto" )
 	{
 		std::string appname = eDVBCI_UI::getInstance()->getAppName(slotid);

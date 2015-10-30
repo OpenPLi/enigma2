@@ -8,7 +8,7 @@ class ePythonConfigQuery : public eConfigManager
 {
 	static ePyObject m_queryFunc;
 #ifndef SWIG
-	RESULT getConfigValue(const char *key, std::string &value);
+	RESULT getString(const char *key, std::string &value);
 	std::string getConfig(const char *key);
 #endif
 public:

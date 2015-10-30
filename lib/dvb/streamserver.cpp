@@ -72,7 +72,7 @@ void eStreamClient::notifier(int what)
 	if (request.substr(0, 5) == "GET /")
 	{
 		size_t pos;
-		if (eConfigManager::getConfigBoolValue("config.streaming.authentication"))
+		if (eConfigManager::getBool("config.streaming.authentication"))
 		{
 			bool authenticated = false;
 			if ((pos = request.find("Authorization: Basic ")) != std::string::npos)

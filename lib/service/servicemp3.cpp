@@ -507,13 +507,8 @@ eServiceMP3::eServiceMP3(eServiceReference ref):
 		CONNECT(m_streamingsrc_timeout->timeout, eServiceMP3::sourceTimeout);
 
 		std::string config_str;
-		if (eConfigManager::getConfigBoolValue("config.mediaplayer.useAlternateUserAgent"))
-		{
-			m_useragent = eConfigManager::getConfigValue("config.mediaplayer.alternateUserAgent");
-		}
-		if (m_useragent.empty())
-			m_useragent = "Enigma2 Mediaplayer";
-		m_extra_headers = eConfigManager::getConfigValue("config.mediaplayer.extraHeaders");
+		m_useragent = eConfigManager::getString("config.mediaplayer.alternateUserAgent", "Enigma2 Mediaplayer");
+		m_extra_headers = eConfigManager::getString("config.mediaplayer.extraHeaders");
 		if ( m_ref.getData(7) & BUFFERING_ENABLED )
 		{
 			m_use_prefillbuffer = true;
@@ -2463,8 +2458,8 @@ void eServiceMP3::pullSubtitle(GstBuffer *buffer)
 		{
 			if ( subType < stVOB )
 			{
-				int delay = eConfigManager::getConfigIntValue("config.subtitles.pango_subtitles_delay");
-				int subtitle_fps = eConfigManager::getConfigIntValue("config.subtitles.pango_subtitles_fps");
+				int delay = eConfigManager::getInt("config.subtitles.pango_subtitles_delay");
+				int subtitle_fps = eConfigManager::getInt("config.subtitles.pango_subtitles_fps");
 
 				double convert_fps = 1.0;
 				if (subtitle_fps > 1 && m_framerate > 0)
@@ -2644,7 +2639,7 @@ RESULT eServiceMP3::disableSubtitles()
 RESULT eServiceMP3::getCachedSubtitle(struct SubtitleTrack &track)
 {
 
-	bool autoturnon = eConfigManager::getConfigBoolValue("config.subtitles.pango_autoturnon", true);
+	bool autoturnon = eConfigManager::getBool("config.subtitles.pango_autoturnon", true);
 	if (!autoturnon)
 		return -1;
 
@@ -2792,7 +2787,7 @@ void eServiceMP3::setAC3Delay(int delay)
 		 */
 		if (videoSink)
 		{
-			config_delay_int += eConfigManager::getConfigIntValue("config.av.generalAC3delay");
+			config_delay_int += eConfigManager::getInt("config.av.generalAC3delay");
 		}
 		else
 		{
@@ -2823,7 +2818,7 @@ void eServiceMP3::setPCMDelay(int delay)
 		 */
 		if (videoSink)
 		{
-			config_delay_int += eConfigManager::getConfigIntValue("config.av.generalPCMdelay");
+			config_delay_int += eConfigManager::getInt("config.av.generalPCMdelay");
 		}
 		else
 		{

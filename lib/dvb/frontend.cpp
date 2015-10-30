@@ -2123,7 +2123,7 @@ RESULT eDVBFrontend::tune(const iDVBFrontendParameters &where)
 		char configStr[255];
 		snprintf(configStr, 255, "config.Nims.%d.terrestrial_5V", m_slotid);
 		m_sec_sequence.push_back( eSecCommand(eSecCommand::START_TUNE_TIMEOUT, timeout) );
-		if (eConfigManager::getConfigBoolValue(configStr))
+		if (eConfigManager::getBool(configStr))
 			m_sec_sequence.push_back( eSecCommand(eSecCommand::SET_VOLTAGE, iDVBFrontend::voltage13) );
 		else
 			m_sec_sequence.push_back( eSecCommand(eSecCommand::SET_VOLTAGE, iDVBFrontend::voltageOff) );

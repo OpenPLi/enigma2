@@ -107,13 +107,13 @@ int eDVBServiceStream::doPrepare()
 		/* allocate a ts recorder if we don't already have one. */
 	if (m_state == stateIdle)
 	{
-		m_stream_ecm = eConfigManager::getConfigBoolValue("config.streaming.stream_ecm");
-		m_stream_eit = eConfigManager::getConfigBoolValue("config.streaming.stream_eit");
-		m_stream_ait = eConfigManager::getConfigBoolValue("config.streaming.stream_ait");
+		m_stream_ecm = eConfigManager::getBool("config.streaming.stream_ecm");
+		m_stream_eit = eConfigManager::getBool("config.streaming.stream_eit");
+		m_stream_ait = eConfigManager::getBool("config.streaming.stream_ait");
 		m_pids_active.clear();
 		m_state = statePrepared;
 		eDVBServicePMTHandler::serviceType servicetype = m_stream_ecm ? eDVBServicePMTHandler::scrambled_streamserver : eDVBServicePMTHandler::streamserver;
-		bool descramble = eConfigManager::getConfigBoolValue("config.streaming.descramble", true);
+		bool descramble = eConfigManager::getBool("config.streaming.descramble", true);
 		return m_service_handler.tune(m_ref, 0, 0, 0, NULL, servicetype, descramble);
 	}
 	return 0;

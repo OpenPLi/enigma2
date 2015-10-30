@@ -345,8 +345,7 @@ void eCableScan::createBouquets()
 	}
 	bouquetFilename = replace_all(providerName, " ", "");
 
-	bool multibouquet = eConfigManager::getConfigBoolValue("config.usage.multibouquet");
-
+	bool multibouquet = eConfigManager::getBool("config.usage.multibouquet");
 	if (multibouquet)
 	{
 		std::string bouquetname = "userbouquet." + bouquetFilename + ".tv";
