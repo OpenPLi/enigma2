@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-21 19:20+0300\n"
+"POT-Creation-Date: 2015-11-01 21:38+0200\n"
 "PO-Revision-Date: 2014-11-12 00:49+0200\n"
 "Last-Translator: Tapat <taapat@gmail.com>\n"
 "Language-Team: Taapat <taapat@gmail.com>\n"
@@ -764,7 +764,13 @@ msgid "Always ask"
 msgstr "Vienmēr jautāt"
 
 msgid "Always hide infobar"
-msgstr "vienmēr slēpt infojoslu"
+msgstr "Vienmēr slēpt infojoslu"
+
+msgid "Always include ECM in recordings"
+msgstr "Vienmēr iekļaut ECM ierakstos"
+
+msgid "Always include ECM messages in recordings. This overrides the individual timer settings globally. It allows recordings to be always decrypted afterwards (sometimes called offline decoding), if supported by your receiver. Default: off."
+msgstr "Vienmēr iekļaut ECM informāciju ierakstos. Globāli ignorē individuālus taimeru iestatījumus. Tas nodrošina ierakstu atšifrēšanu (veikt bezsaistes dekodēšanu), ja jūsu uztvērējs to nodrošina. Pēc noklusējuma izslēgts."
 
 msgid "An empty filename is illegal."
 msgstr "Faila nosaukums nevar būt tukšs."
@@ -1977,8 +1983,11 @@ msgstr "Dzēsts"
 msgid "Depth"
 msgstr "Dziļi"
 
-msgid "Descramble http streams"
-msgstr "Dekodēt http plūsmas"
+msgid "Descramble receiving http streams"
+msgstr "Dekodēt saņemtās http straumes"
+
+msgid "Descramble sending http streams"
+msgstr "Dekodēt sūtītās http straumes"
 
 msgid "Description"
 msgstr "Apraksts"
@@ -2369,6 +2378,9 @@ msgstr "Aktivizēt Enigma2 uztvērēju, kuru izmatot lai mēģinātu uztvert kan
 
 msgid "Enable teletext caching"
 msgstr "Aktivizēt teleteksta kešošanu"
+
+msgid "Enable timer conflict detection"
+msgstr "Aktivizēt taimeru konflikta noteikšanu"
 
 msgid "Enable volume control with arrow buttons"
 msgstr "Aktivizēt skaļuma regulēšanu ar virziena pogām"
@@ -3698,6 +3710,12 @@ msgstr "Tīkla vednis"
 
 msgid "Network:"
 msgstr "Tīkls:"
+
+msgid "Never decrypt the content while recording. This overrides the individual timer settings globally. If enabled, recordings are stored in crypted presentation and must be decrypted afterwards (sometimes called offline decoding). Default: off."
+msgstr "Neveikt satura atšifrēšanu kad ieraksta. Globāli ignorē individuālus taimeru iestatījumus. Ja iespējots, tad ieraksti tiks saglabāti šifrēti un tos vajadzēs pēc tam atšifrēt (veikt bezsaistes dekodēšanu). Pēc noklusējuma izslēgts."
+
+msgid "Never decrypt while recording"
+msgstr "Neveikt atšifrēšanu kad ieraksta"
 
 msgid "New"
 msgstr "Jauns"
@@ -7304,6 +7322,9 @@ msgstr "Ja ieslēgts, tiks atļauts ieraksts ignorējot tiešās pārraides ja n
 msgid "When enabled, a warning will be displayed and the user will get an option to stop or to continue the timeshift."
 msgstr "Ja ieslēgts, tiks parādīts brīdinājums un lietotājs varēs izvēlēties vai apstādīnāt, vai turpināt laika aizturi."
 
+msgid "When enabled, always descramble receiving http streams. This takes up more resources (descrambling demuxers), only enable if necessary. Individual streams are always descrambled if 0x100 is added to the service type, regardless of this setting. Default off."
+msgstr "Ja ieslēgts, http straumes tiks dekodētas. Tas prasa vairāk resursus dekodēsanai un demuksēšanai tādēļ lietojiet tikai tad ja nepieciešmas. Neatkarīgi no šī iestatījuma straumes tiks dekodētas ja 0x100 norādīts pie servisa tipa. Pēc noklusējuma izslēgts."
+
 msgid "When enabled, authentication is required to watch http streams."
 msgstr "Ja ieslēgts, nepieciešama autentifikācija lai skatītos http straumējumu"
 
@@ -7346,8 +7367,8 @@ msgstr "Ja ieslēgts, grafiskie DVB subtitri tiks parādīti to oriģinālajā p
 msgid "When enabled, graphical DVB subtitles will be displayed in yellow, instead of the original color."
 msgstr "Ja ieslēgts, grafiskie DVB subtitri tiks rādīti dzeltenā krāsā, neatkarīgi no oriģinālās."
 
-msgid "When enabled, http streams are descrambled on the server side. The (remote) client receiver does not have to do descrambling."
-msgstr "Ja ieslēgts, http plūsmas tiks dekodētas serverī. Attālinātiem klientu uztvērējiem nebūs jādekodē."
+msgid "When enabled, http streams are descrambled on the server side. The (remote) client receiver does not have to do descrambling. Default on."
+msgstr "Ja ieslēgts, http straumes tiks dekodētas serverī. Klientiem nebūs jādekodē. Pēc noklusējuma ieslēgts."
 
 msgid "When enabled, it is possible to leave the movieplayer with exit."
 msgstr "Ja ieslēgts, ir iespējams iziet no filmu atskaņotāja ar exit taustiņu."
@@ -7451,6 +7472,9 @@ msgstr ""
 "Pēc rūpnīcas iestatījumu atjaunošanas, ierīce automātiski pārstartēsies!\n"
 "\n"
 "Vai tiešām atjaunot rūpnīcas iestatījumus?"
+
+msgid "When you use the remote fallback tuner to do recording, the timer conflict detection can't handle remote fallback tuners. This option allows you to turn off the timer confict detection"
+msgstr "Ja jūs ierakstam lietojat citu uztvērēju, tad taimeru konflikta noteikšanu var veikt šis uztvērējs. Šis iestatījums atļauj izslēgt taimeru konflikta noteikšanu."
 
 msgid "Where do you want to backup your settings?"
 msgstr "Kur Jūs vēlaties veidot savu iestatījumu dublējumkopiju?"
