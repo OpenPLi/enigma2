@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-18 22:09+0200\n"
-"PO-Revision-Date: 2015-10-18 22:25+0200\n"
+"POT-Creation-Date: 2015-10-31 13:05+0100\n"
+"PO-Revision-Date: 2015-10-31 13:38+0100\n"
 "Last-Translator: Pr2 <dummy@dummy.com>\n"
 "Language-Team: french\n"
 "Language: fr\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Poedit 1.8.5\n"
+"X-Generator: Poedit 1.8.6\n"
 
 msgid ""
 "\n"
@@ -752,6 +752,12 @@ msgstr "Toujours demander"
 
 msgid "Always hide infobar"
 msgstr "Toujours cacher la barre d'infos"
+
+msgid "Always include ECM in recordings"
+msgstr "Toujours inclure ECM dans les enregistrements"
+
+msgid "Always include ECM messages in recordings. This overrides the individual timer settings globally. It allows recordings to be always decrypted afterwards (sometimes called offline decoding), if supported by your receiver. Default: off."
+msgstr "Toujours inclure des messages ECM dans des enregistrements. Cela remplace les paramètres de temporisation globaux. Il permet aux enregistrements d’être toujours décryptés après (parfois appelé décodage hors ligne), si supporté par votre récepteur. Par défaut: désactivé."
 
 msgid "An empty filename is illegal."
 msgstr "Un nom de fichier vide est illégal."
@@ -1964,8 +1970,11 @@ msgstr "Eléments supprimés"
 msgid "Depth"
 msgstr "Profondeur"
 
-msgid "Descramble http streams"
-msgstr "Décrypter les flux HTTP"
+msgid "Descramble receiving http streams"
+msgstr "Décrypter les flux HTTP reçus"
+
+msgid "Descramble sending http streams"
+msgstr "Décrypter les flux HTTP envoyés"
 
 msgid "Description"
 msgstr "Description"
@@ -2355,6 +2364,9 @@ msgstr "Activer un récepteur enigma2 distant pour essayer de syntoniser les ser
 
 msgid "Enable teletext caching"
 msgstr "Activer la mise en cache du télétexte"
+
+msgid "Enable timer conflict detection"
+msgstr "Activer la détection des conflits de la minuterie"
 
 msgid "Enable volume control with arrow buttons"
 msgstr "Activer le contrôle du volume avec les flèches"
@@ -3608,7 +3620,7 @@ msgid "NFI image flashing"
 msgstr "Flash de l'image NFI"
 
 msgid "NFI image flashing completed. Press Yellow to Reboot!"
-msgstr "Flash de l'image NFI terminé. Presser le bouton Jaune pour Redémarrer!"
+msgstr "Flash de l'image NFI terminé. Presser le bouton jaune pour redémarrer!"
 
 msgid "NIM"
 msgstr "Tuner"
@@ -3680,6 +3692,12 @@ msgstr "Assistant Réseau"
 
 msgid "Network:"
 msgstr "Réseau: "
+
+msgid "Never decrypt the content while recording. This overrides the individual timer settings globally. If enabled, recordings are stored in crypted presentation and must be decrypted afterwards (sometimes called offline decoding). Default: off."
+msgstr "Ne jamais déchiffrer le contenu lors de l’enregistrement. Cela remplace les paramètres de temporisation globaux. Si elle est activée, les enregistrements sont stockés encryptés et doivent donc être décryptés après (parfois appelé décodage hors-ligne). Par défaut: désactivé."
+
+msgid "Never decrypt while recording"
+msgstr "Ne jamais décrypter pendant l’enregistrement"
 
 msgid "New"
 msgstr "Nouvelle"
@@ -7289,6 +7307,9 @@ msgstr "Lorsqu'elle est activée, un enregistrement est autorisé à interrompre
 msgid "When enabled, a warning will be displayed and the user will get an option to stop or to continue the timeshift."
 msgstr "Lorsqu'elle est activée, un avertissement sera affiché et l'utilisateur aura l'option d'arrêter ou de continuer la PauseDirect."
 
+msgid "When enabled, always descramble receiving http streams. This takes up more resources (descrambling demuxers), only enable if necessary. Individual streams are always descrambled if 0x100 is added to the service type, regardless of this setting. Default off."
+msgstr "Lorsqu’il est activé, toujours décrypter la réception de flux http. Cela prend plus de ressources (de demuxers de décodages), n’activer que si c’est nécessaire. Les flux individuels sont toujours décryptés si 0x100 est ajouté au type de service, indépendamment de ce paramètre. Désactivé par défaut."
+
 msgid "When enabled, authentication is required to watch http streams."
 msgstr "Lorsqu'elle est activée, une authentification est nécessaire pour regarder les flux (streams) http"
 
@@ -7331,8 +7352,8 @@ msgstr "Lorsqu'elle est activée, les sous-titres graphiques DVB seront affiché
 msgid "When enabled, graphical DVB subtitles will be displayed in yellow, instead of the original color."
 msgstr "Lorsqu'elle est activée, les sous-titres graphiques DVB seront affichés en jaune, au lieu de la couleur d'origine."
 
-msgid "When enabled, http streams are descrambled on the server side. The (remote) client receiver does not have to do descrambling."
-msgstr "Lorsqu'elle est activée, les flux http sont décryptés du côté serveur. Le récepteur client (distant) n'aura pas a décrypter."
+msgid "When enabled, http streams are descrambled on the server side. The (remote) client receiver does not have to do descrambling. Default on."
+msgstr "Lorsqu'elle est activée, les flux http sont décryptés du côté serveur. Le récepteur client (distant) n'aura pas a décrypter. Par défaut: actif."
 
 msgid "When enabled, it is possible to leave the movieplayer with exit."
 msgstr "Lorsqu'elle est activée, il est possible de quitter le lecteur de film avec exit."
@@ -7436,6 +7457,9 @@ msgstr ""
 "Lorsque la réinitialisation usine sera accomplie, votre récepteur redémarrera automatiquement!\n"
 "\n"
 "Voulez-vous vraiment faire une réinitialisation usine?"
+
+msgid "When you use the remote fallback tuner to do recording, the timer conflict detection can't handle remote fallback tuners. This option allows you to turn off the timer confict detection"
+msgstr "Lorsque vous utilisez le tuner distant de repli pour effectuer l’enregistrement, la détection des conflits de programmation ne peut pas gérer à distance les tuners de repli. Cette option vous permet de désactiver la détection des conflicts de programmation."
 
 msgid "Where do you want to backup your settings?"
 msgstr "Où voulez-vous sauver vos paramètres ?"
