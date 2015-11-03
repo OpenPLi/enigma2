@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-07 15:29+0200\n"
-"PO-Revision-Date: 2015-10-25 14:55+0100\n"
+"POT-Creation-Date: 2015-10-31 13:05+0100\n"
+"PO-Revision-Date: 2015-11-01 16:01+0100\n"
 "Last-Translator: Andy1 <dmmm8000hdpvr@gmail.com>\n"
 "Language-Team: none\n"
 "MIME-Version: 1.0\n"
@@ -505,9 +505,6 @@ msgstr ""
 "Et opptak er igang.\n"
 "Hva skal gjøres?"
 
-msgid "A recording is currently running. Please stop the recording before trying to configure the positioner."
-msgstr "Et opptak er igang. Stopp opptaket før konfigurering av posisjonerer."
-
 msgid "A recording is currently running. Please stop the recording before trying to scan."
 msgstr "Et opptak er igang. Stopp opptaket før søket kan startes."
 
@@ -560,6 +557,9 @@ msgstr "AAC nedskalering"
 
 msgid "AC3 downmix"
 msgstr "AC3 nedskalering"
+
+msgid "AGC:"
+msgstr ""
 
 #
 msgid "Abort"
@@ -938,6 +938,10 @@ msgstr "Tilgjengelige formater"
 #
 msgid "B"
 msgstr ""
+
+#
+msgid "BER:"
+msgstr "Signalfeil (BER):"
 
 #
 msgid "Back"
@@ -1403,7 +1407,7 @@ msgstr "Koblet til"
 
 #
 msgid "Console"
-msgstr ""
+msgstr "Konsoll"
 
 #
 msgid "Constellation"
@@ -1501,6 +1505,10 @@ msgstr ""
 #, python-format
 msgid "Current mode: %s \n"
 msgstr "Gjeldende modus: %s \n"
+
+#
+msgid "Current rotor position: "
+msgstr "Nåværende motorposisjon:"
 
 #
 msgid "Current settings:"
@@ -1738,17 +1746,17 @@ msgid "DiSEqC 1.1 repeats"
 msgstr "DiSEqC 1.1 gjentakelser"
 
 msgid "DiSEqC A/B"
-msgstr "DiSEqC A/B"
+msgstr ""
 
 msgid "DiSEqC A/B/C/D"
-msgstr "DiSEqC A/B/C/D"
+msgstr ""
 
 msgid "DiSEqC mode"
 msgstr "DiSEqC modus"
 
 #, python-format
 msgid "DiSEqC port %s: %s"
-msgstr "DiSEqC port %s: %s"
+msgstr ""
 
 msgid "DiSEqC-tester settings"
 msgstr "DiSEqC test innstilling"
@@ -2213,6 +2221,10 @@ msgid "Exit network wizard"
 msgstr "Avslutt nettverksveiviser"
 
 #
+msgid "Exit/OK"
+msgstr "Avslutt/OK"
+
+#
 msgid "Expert"
 msgstr "Ekspert"
 
@@ -2268,6 +2280,10 @@ msgstr ""
 #
 msgid "FEC"
 msgstr "Feilkorreksjon FEC"
+
+#
+msgid "FEC:"
+msgstr ""
 
 msgid "FTA"
 msgstr ""
@@ -2379,6 +2395,10 @@ msgstr "Frekvenssøk trinn størrelse(khz)"
 #
 msgid "Frequency steps"
 msgstr "Frekvenstrinn"
+
+#
+msgid "Frequency:"
+msgstr "Frekvens:"
 
 #
 msgid "Fri"
@@ -3046,6 +3066,10 @@ msgstr "Plassering for direkte opptak"
 msgid "Lock ratio"
 msgstr "Låsforhold"
 
+#
+msgid "Lock:"
+msgstr "Lås:"
+
 msgid "Log results to harddisk"
 msgstr "Lagre resultatene på lagringsenhet"
 
@@ -3118,6 +3142,9 @@ msgstr "Maks antall minne-posisjoner"
 
 msgid "Max. bitrate: "
 msgstr "Maksimal bithastighet:"
+
+msgid "Maybe the reason that recording is currently running. Please stop the recording before trying to configure the positioner."
+msgstr "Kanskje årsaken er et pågående opptak.. Stopp opptaket før konfigurering av motor posisjonerer."
 
 #
 msgid "Media player"
@@ -3667,6 +3694,10 @@ msgstr "Åpne valg lokasjon som tidtaker navn"
 msgid "Open service list"
 msgstr "Åpne kanalliste"
 
+#
+msgid "Open setup tuner "
+msgstr "Åpne oppsettstuner"
+
 msgid "Open the movie list"
 msgstr "Åpne opptaksliste"
 
@@ -3957,7 +3988,7 @@ msgstr ""
 "Trykk OK for tilbake til TV eller EXIT for ikke å flytte."
 
 msgid "Please use the UP and DOWN keys to select your language. Afterwards press the OK button."
-msgstr "Bruk OPP/NED tastene for å velge språk. Trykk OK for å fortsette."
+msgstr "Bruk OPP og NED tastene for å velge språk. Trykk OK for å velge."
 
 #
 msgid "Please wait"
@@ -4060,6 +4091,10 @@ msgstr "Posisjonerer (satellitt velger)"
 msgid "Positioner setup"
 msgstr "Motoroppsett"
 
+#
+msgid "Positioner setup log"
+msgstr "Posisjonerers oppsetts logg"
+
 msgid "Power threshold in mA"
 msgstr "Strømverdi i mA"
 
@@ -4075,7 +4110,7 @@ msgid "Preparing... Please wait"
 msgstr "Forbereder.. Vent litt"
 
 msgid "Press '0' to toggle PiP mode"
-msgstr "Trykk '0' for av/på PiP modus (Bilde i bilde)."
+msgstr "Trykk '0' for å gå til neste PiP modus"
 
 msgid "Press INFO on your remote control for additional information."
 msgstr "Trykk INFO på fjernkontrollen for ytterligere informasjon."
@@ -4122,6 +4157,9 @@ msgstr "Trykk OK for veksle valg"
 
 msgid "Press OK to toggle the selection."
 msgstr "Trykk OK for veksle valg."
+
+msgid "Press OK, save and exit..."
+msgstr "Trykk OK, lagre og avslutt..."
 
 msgid "Press yellow to set this interface as default interface."
 msgstr "Trykk gul for å velge dette som standard grensesnitt."
@@ -4236,7 +4274,7 @@ msgid "Put receiver in standby"
 msgstr "Slå av mottakeren"
 
 msgid "Python frontend for /tmp/mmi.socket"
-msgstr ""
+msgstr "Python grensesnitt for /tmp/mmi.kontakt"
 
 #
 msgid "Python version: "
@@ -4294,6 +4332,11 @@ msgstr "Start på nytt nå?"
 
 msgid "Really shutdown now?"
 msgstr "Slå av nå?"
+
+#
+#, python-format
+msgid "Really store at index %2d for current position?"
+msgstr "Lagre ved index %2d for denne posisjon?"
 
 msgid "Really upgrade the frontprocessor and reboot now?"
 msgstr "Skal frontprosessor oppdateres og starte på nytt nå?"
@@ -4610,6 +4653,10 @@ msgid "SINGLE LAYER DVD"
 msgstr "ETTLAGS DVD"
 
 #
+msgid "SNR:"
+msgstr ""
+
+#
 msgid "SSID:"
 msgstr ""
 
@@ -4892,6 +4939,10 @@ msgstr "Velg satellitter"
 #
 msgid "Select service to add..."
 msgstr "Velg kanal som skal legges til..."
+
+#
+msgid "Select slot"
+msgstr "Velg spor"
 
 #
 msgid "Select sort method:"
@@ -5351,6 +5402,9 @@ msgstr "Beklager, fant ingen sikkerhetskopi!"
 msgid "Sorry, no details available!"
 msgstr "Beklager, ingen detaljer er tilgjengelig!"
 
+msgid "Sorry, this tuner is in use."
+msgstr "Denne tuner er allerede i bruk."
+
 #
 msgid ""
 "Sorry, your backup destination is not writeable.\n"
@@ -5731,6 +5785,9 @@ msgstr "Valgbar tuner:"
 msgid "Symbol rate"
 msgstr "Symbolrate"
 
+msgid "Symbol rate:"
+msgstr ""
+
 msgid "Sync failure moving back to origin !"
 msgstr "Synkroniseringsfeil, går tilbake til start!"
 
@@ -5740,7 +5797,7 @@ msgstr "System"
 
 #. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
 msgid "TRANSLATOR_INFO"
-msgstr "Norsk bokmålsoversettelse 26.10.2015"
+msgstr "Norsk bokmålsoversettelse 01.11.2015"
 
 #
 msgid "TS file is too large for ISO9660 level 1!"
@@ -6832,6 +6889,9 @@ msgstr "Skrivefeil under opptak. Er disken full?\n"
 msgid "Write failed!"
 msgstr "Skriving feilet!"
 
+msgid "Write to /tmp/positionersetup.log"
+msgstr "Skriv til /tmp/positionersetup.log"
+
 #
 msgid "YPbPr"
 msgstr ""
@@ -6847,6 +6907,9 @@ msgstr "Gul"
 #
 msgid "Yes"
 msgstr "Ja"
+
+msgid "Yes (save index in setup tuner)"
+msgstr "Ja (lagre index i oppsetts tuner)"
 
 msgid "Yes and save"
 msgstr "Ja og lagre"
@@ -8314,6 +8377,12 @@ msgstr "Alternativt nummervalg"
 msgid "Alternative services tuner priority"
 msgstr "Alternativt tunervalg for kanaler"
 
+msgid "Always include ECM in recordings"
+msgstr "Lagre ECM data i opptakene"
+
+msgid "Always include ECM messages in recordings. This overrides the individual timer settings globally. It allows recordings to be always decrypted afterwards (sometimes called offline decoding), if supported by your receiver. Default: off."
+msgstr "Lagre ECM data i opptakene. Dette overstyrer individuelle globale tidtaker innstillinger. Dette tillater opptak og bli dekryptert i ettertid (offline dekoding), hvis støttet av mottaker. Standardinnstilling: av."
+
 msgid "Audio language selection 1"
 msgstr "Språkvalg 1"
 
@@ -8496,7 +8565,7 @@ msgid "Configure the function of the '0' button do when PIP is active."
 msgstr "Still inn funksjonen for '0' tasten når PiP (bilde i bilde) er aktiv."
 
 msgid "Configure the gateway."
-msgstr "Still inn inngangsport."
+msgstr "Still inn gateway."
 
 msgid "Configure the hard disk drive to go to standby after the specified idle time."
 msgstr "Still inn når lagringsdisken skal å gå i standby etter angitt ubrukt tid."
@@ -8653,8 +8722,11 @@ msgstr "Forsinkelse i millisekunder før skrolling av tekst på display."
 msgid "Delay in miliseconds between scrolling characters on display."
 msgstr "Forsinkelse i millisekunder under skrolling av bokstaver på display."
 
-msgid "Descramble http streams"
-msgstr "Dekode http strømmer"
+msgid "Descramble receiving http streams"
+msgstr "Dekode mottatte http strømmer"
+
+msgid "Descramble sending http streams"
+msgstr "Dekode http strømmer som sendes"
 
 msgid "DiSEqC"
 msgstr "DiSEqC (Digital Satellite Equipment Control)"
@@ -8728,6 +8800,9 @@ msgstr "Aktiver ekstern enigma2 mottaker som kan brukes til å søke opp kanaler
 
 msgid "Enable teletext caching"
 msgstr "Aktiver tekst-TV mellomlagring"
+
+msgid "Enable timer conflict detection"
+msgstr "Aktiver tidtakerkonflikt deteksjon"
 
 msgid "Enable volume control with arrow buttons"
 msgstr "Aktiver lyd kontroll med piltastene"
@@ -8849,6 +8924,12 @@ msgstr "Full-EPG i kanallister"
 #
 msgid "Network setup"
 msgstr "Nettverks instillinger"
+
+msgid "Never decrypt the content while recording. This overrides the individual timer settings globally. If enabled, recordings are stored in crypted presentation and must be decrypted afterwards (sometimes called offline decoding). Default: off."
+msgstr "Aldri dekrypter innhold under opptak. Dette overstyrer individuelle globale tidtaker innstillinger. Når dette er på, vil opptak lagres kryptert og må dekrypteres i ettertid (offline dekoding). Standardinnstilling: av."
+
+msgid "Never decrypt while recording"
+msgstr "Ikke dekode under opptak"
 
 msgid "Number of repeating text on display."
 msgstr "Nummer av gjentatt tekst på display."
@@ -9200,6 +9281,9 @@ msgstr "Når dette er på, vil et opptak kunne avbryte direktesendt TV hvis det 
 msgid "When enabled, a warning will be displayed and the user will get an option to stop or to continue the timeshift."
 msgstr "Når dette er på, vil en advarsel vises på skjermen med valget stopp eller fortsett tidsskift."
 
+msgid "When enabled, always descramble receiving http streams. This takes up more resources (descrambling demuxers), only enable if necessary. Individual streams are always descrambled if 0x100 is added to the service type, regardless of this setting. Default off."
+msgstr "Når dette er på, vil mottatt http strøm bli dekryptert. Dette opptar store data ressurser (dekryptere, demuxe bilde) og brukes bare når nødvendig. Individuelle strømmer er alltid dekryptert hvis 0x100 er lagt til i service typen, uansett denne innstillingen. Standardinnstilling: av."
+
 msgid "When enabled, authentication is required to watch http streams."
 msgstr "Når dette er på, kreves autentisering for å se http strømmer."
 
@@ -9239,8 +9323,8 @@ msgstr "Når dette er på, vises DVB undertekst på sin opprinnelige posisjon."
 msgid "When enabled, graphical DVB subtitles will be displayed in yellow, instead of the original color."
 msgstr "Når dette er på, vises DVB undertekst i gult i stedet for den opprinnelige fargen."
 
-msgid "When enabled, http streams are descrambled on the server side. The (remote) client receiver does not have to do descrambling."
-msgstr "Når dette er på, vil http strømmen bli dekodet på serversiden. (Ekstern) Klient mottaker trenger ikke foreta dekodingen."
+msgid "When enabled, http streams are descrambled on the server side. The (remote) client receiver does not have to do descrambling. Default on."
+msgstr "Når dette er på, vil http strømmer bli dekodet på serversiden. Ekstern fjernmottaker trenger ikke foreta dekodingen. Standardinnstilling: på."
 
 msgid "When enabled, it is possible to leave the movieplayer with exit."
 msgstr "Når dette er på, kan mediespiller avsluttes med exit tasten."
@@ -9323,6 +9407,9 @@ msgstr "Når annet tall enn null er valgt vil et opptak starte tidligere enn sta
 msgid "When nonzero, a recording will stop later than the ending time indicated by the EPG."
 msgstr "Når annet tall enn null er valgt vil et opptak stoppe senere enn sluttidspunktet angitt av EPG."
 
+msgid "When you use the remote fallback tuner to do recording, the timer conflict detection can't handle remote fallback tuners. This option allows you to turn off the timer confict detection"
+msgstr "Når det brukes ekstern reserve mottaker til opptakene, vil ikke deteksjon av tidtakerkonflikter kunne håndteres av eksternmottaker. Med dette valget kan tidtaker konflikten skrues av"
+
 msgid "Yellow DVB subtitles"
 msgstr "Gul DVB undertekst"
 
@@ -9377,10 +9464,6 @@ msgid "Audio"
 msgstr "Lyd"
 
 #
-msgid "BER:"
-msgstr "Signalfeil (BER):"
-
-#
 msgid "Channellist menu"
 msgstr "Kanalliste meny"
 
@@ -9412,10 +9495,6 @@ msgid "Event view menu"
 msgstr "Meny programoversikt"
 
 #
-msgid "Frequency:"
-msgstr "Frekvens:"
-
-#
 msgid "Index"
 msgstr "Innholdsfortegnelse"
 
@@ -9426,10 +9505,6 @@ msgstr "Installerer programvare..."
 #
 msgid "Job overview"
 msgstr "Arbeidsoversikt"
-
-#
-msgid "Lock:"
-msgstr "Lås:"
 
 #
 msgid "MORE"
@@ -9485,13 +9560,6 @@ msgstr "PiP-bilde i bilde oppsett"
 msgid "Plugin browser"
 msgstr "Oversikt over programtillegg"
 
-msgid "Polarisation:"
-msgstr "Polarisasjon:"
-
-#
-msgid "Positioner Setup"
-msgstr "Posisjons oppsett"
-
 #
 msgid "Radio"
 msgstr "Radio"
@@ -9499,10 +9567,6 @@ msgstr "Radio"
 #
 msgid "Reception settings"
 msgstr "Mottakerfohold"
-
-#
-msgid "SNR:"
-msgstr ""
 
 #
 msgid "Seek"
@@ -9536,9 +9600,6 @@ msgstr "Kanal info"
 #
 msgid "Subservices"
 msgstr "Underkanaler"
-
-msgid "Symbol rate:"
-msgstr ""
 
 #
 msgid "Timer edit"
@@ -9922,12 +9983,5 @@ msgstr ""
 msgid "Video mode selection."
 msgstr "Innstilling for bilde."
 
-#~ msgid "A demo plugin for TPM usage."
-#~ msgstr "En test- app til TPM bruk."
-
-#~ msgid ""
-#~ "A recording is currently running. Please stop the recording before trying "
-#~ "to start the satfinder."
-#~ msgstr ""
-#~ "Et opptak er igang. Vennligst stopp opptaket før du starter et "
-#~ "satellittsøk."
+#~ msgid "Polarisation:"
+#~ msgstr "Polarisasjon:"
