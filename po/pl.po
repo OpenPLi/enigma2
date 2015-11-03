@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-17 13:25+0200\n"
+"POT-Creation-Date: 2015-10-29 19:20+0100\n"
 "PO-Revision-Date: 2015-10-17 15:21+0100\n"
 "Last-Translator: blzr <blzr@o2.pl>\n"
 "Language-Team: \n"
@@ -763,6 +763,12 @@ msgstr "Zawsze pytaj"
 msgid "Always hide infobar"
 msgstr "Zawsze ukrywaj infobar"
 
+msgid "Always include ECM in recordings"
+msgstr "Zawsze zawieraj ECMy w nagraniach"
+
+msgid "Always include ECM messages in recordings. This overrides the individual timer settings globally. It allows recordings to be always decrypted afterwards (sometimes called offline decoding), if supported by your receiver. Default: off."
+msgstr "Gdy włączone, w nagraniach zawsze będą zawarte ECMy. Globalnie nadpisuje ustawienia dla poszczególnych timerów. Pozwala na późniejsze odkodowanie ('dekodowanie offline'), jeżeli wspierane przez odbiornik. Domyślnie: wyłączone."
+
 msgid "An empty filename is illegal."
 msgstr "Pusta nazwa pliku jest niedozwolona."
 
@@ -1130,7 +1136,7 @@ msgid "Cannot move files on a different disk or system to the trash can"
 msgstr "Plików z innego dysku/systemu nie można przenieść do kosza."
 
 msgid "Cannot move to trash can"
-msgstr "Nie można przenieść do 'Kosza'"
+msgstr "Nie można przenieść do kosza"
 
 msgid "Capacity: "
 msgstr "Pojemność:"
@@ -1945,37 +1951,40 @@ msgid "Delay in miliseconds between scrolling characters on display."
 msgstr "Opóźnienie w milisekundach pomiędzy przewijanymi literami na wyświetlaczu"
 
 msgid "Delete"
-msgstr "Skasuj"
+msgstr "Usuń"
 
 msgid "Delete entry"
 msgstr "Skasuj wpis"
 
 msgid "Delete failed!"
-msgstr "Kasowanie nie powiodło się!"
+msgstr "Usuwanie nie powiodło się!"
 
 msgid "Delete file"
-msgstr "Skasuj plik"
+msgstr "Usuń plik"
 
 msgid "Delete playlist entry"
-msgstr "Skasuj pozycję playlisty"
+msgstr "Usuń pozycję playlisty"
 
 msgid "Delete saved playlist"
-msgstr "Skasuj zachowaną playlistę"
+msgstr "Usuń zachowaną playlistę"
 
 msgid "Delete timer"
-msgstr "Skasuj timer"
+msgstr "Usuń timer"
 
 msgid "Deleted"
-msgstr "Skasowano"
+msgstr "Usunięto"
 
 msgid "Deleted items"
-msgstr "Skasowane pliki"
+msgstr "Usunięte pliki"
 
 msgid "Depth"
 msgstr "Głębia"
 
-msgid "Descramble http streams"
-msgstr "Dekoduj strumień http"
+msgid "Descramble receiving http streams"
+msgstr "Dekoduj odbierany strumienie http"
+
+msgid "Descramble sending http streams"
+msgstr "Dekoduj wysyłane strumienie http"
 
 msgid "Description"
 msgstr "Opis"
@@ -2366,6 +2375,9 @@ msgstr "Włącz, aby zdalny odbiornik (na enigma2), był ewentualnym 'źródłem
 
 msgid "Enable teletext caching"
 msgstr "Włącz pamięć telegazety"
+
+msgid "Enable timer conflict detection"
+msgstr "Włącz wykrywanie konfliktów timera"
 
 msgid "Enable volume control with arrow buttons"
 msgstr "Regulacja głośności strzałkami L/P"
@@ -3696,6 +3708,12 @@ msgstr "Kreator konfiguracji sieci"
 msgid "Network:"
 msgstr "Sieć:"
 
+msgid "Never decrypt the content while recording. This overrides the individual timer settings globally. If enabled, recordings are stored in crypted presentation and must be decrypted afterwards (sometimes called offline decoding). Default: off."
+msgstr "Nigdy nie dekoduj materiału podczas nagrywania. Globalnie nadpisuje ustawienia dla poszczególnych timerów. Gdy włączone, nagrania są zapisywane w wersji zakodowanej i muszą być później zdekodowane ('dekodowanie offline'). Domyślnie: wyłączone."
+
+msgid "Never decrypt while recording"
+msgstr "Nigdy nie dekoduj w trakcie nagrywania"
+
 msgid "New"
 msgstr "Nowe"
 
@@ -4084,10 +4102,10 @@ msgid "Percentage right"
 msgstr "Procenty po prawej"
 
 msgid "Permanently delete all recordings in the trash can?"
-msgstr "Trwale usunąć wszystkie nagrania z 'Kosza'?"
+msgstr "Trwale usunąć wszystkie nagrania z kosza?"
 
 msgid "Permanently remove all deleted items"
-msgstr "Usuń wszystkie pliki z 'Kosza'"
+msgstr "Usuń wszystkie pliki z kosza"
 
 msgid "Persian"
 msgstr "Perski"
@@ -4779,7 +4797,7 @@ msgid "Remove currently selected title"
 msgstr "Usuń aktualnie wybrany tytuł"
 
 msgid "Remove items from trash can after (days)"
-msgstr "Usuń pliki z 'Kosza' po (dni)"
+msgstr "Usuń pliki z kosza po (dni)"
 
 msgid "Remove plugins"
 msgstr "Usuń wtyczki"
@@ -5770,7 +5788,7 @@ msgid "Sorry, %s has not been installed!"
 msgstr "Niestety, %s nie został zainstalowany!"
 
 msgid "Sorry, deleting directories can (for now) only be done through the trash can."
-msgstr "Niestety usuwanie katalogów możliwe (na razie) tylko przez 'kosz'. "
+msgstr "Niestety usuwanie katalogów możliwe (na razie) tylko przez kosz."
 
 msgid "Sorry, no backups found!"
 msgstr "Nie znaleziono kopii zapasowych!"
@@ -6922,7 +6940,7 @@ msgid "Use this video enhancement settings?"
 msgstr "Użyć tych ustawień korekcji obrazu?"
 
 msgid "Use trash can in movielist"
-msgstr "Użyj 'Kosza' w liście filmów"
+msgstr "Użyj kosza w liście filmów"
 
 msgid "Used service scan type"
 msgstr "Używany typ skanowania kanałów"
@@ -7286,6 +7304,9 @@ msgstr "Gdy włączone, nagrywanie może przerwać oglądanie 'na żywo', gdy br
 msgid "When enabled, a warning will be displayed and the user will get an option to stop or to continue the timeshift."
 msgstr "Gdy właczone, wyświetli się ostrzeżenie i użytkownik będzie miał możliwość wyboru czy zatrzymać czy kontynuować timeshift"
 
+msgid "When enabled, always descramble receiving http streams. This takes up more resources (descrambling demuxers), only enable if necessary. Individual streams are always descrambled if 0x100 is added to the service type, regardless of this setting. Default off."
+msgstr "Gdy, włączone, zawsze dekoduje odbierane strumienie http. Zabiera więcej zasobów (deskramblery dekodujące), włącz tylko wtedy gdy konieczne. Indywidualne strumienie są zawsze odkodowywane, jeśli 0x100 jest dodane do typu serwisu, niezależnie od ustawienia tej opcji. Domyślnie: wyłączone."
+
 msgid "When enabled, authentication is required to watch http streams."
 msgstr "Gdy włączone, aby uruchmić stream http z odbiornika wymagane będzie uwierzytelnienie."
 
@@ -7299,7 +7320,7 @@ msgid "When enabled, continue to the next bouquet when the last channel of the c
 msgstr "Gdy włączone, po dojściu do ostatniego kanału w danym bukiecie podczas przełączania, automatycznie nastąpi przejście do kolejnego bukietu."
 
 msgid "When enabled, deleted recordings are moved to the trash can, instead of being deleted immediately."
-msgstr "Gdy włączone, usunięte nagrania zostaną przeniesione do 'Kosza', zamiast natychmiastowego usunięcia."
+msgstr "Gdy włączone, usunięte nagrania zostaną przeniesione do kosza, zamiast natychmiastowego usunięcia."
 
 msgid "When enabled, display the EIT now/next eventdata in infobar. When disabled, display now/next eventdata from the EPG cache instead."
 msgstr "Gdy włączone, w paski info są wyświetlane dane EIT teraz/następnie dla danej audycji. Gdy wyłączone, wyświetlane są dane z cache EPG."
@@ -7328,8 +7349,8 @@ msgstr "Gdy włączone, graficzne napisy DVB będą wyświetlane w oryginalnym p
 msgid "When enabled, graphical DVB subtitles will be displayed in yellow, instead of the original color."
 msgstr "Gdy włączone, graficzne napisy DVB będą wyświetlane na żółto zamiast oryginalnego koloru."
 
-msgid "When enabled, http streams are descrambled on the server side. The (remote) client receiver does not have to do descrambling."
-msgstr "Gdy włączone, streamy http będą odkodowywane po stronie serwera. Zdalny odbiornik (klient) nie będzie musiał wykonywać odkodowywania."
+msgid "When enabled, http streams are descrambled on the server side. The (remote) client receiver does not have to do descrambling. Default on."
+msgstr "Gdy włączone, strumień http będzie odkodowywany po stronie serwera. Zdalny odbiornik (klient) nie będzie musiał wykonywać odkodowywania. Domyślnie włączone."
 
 msgid "When enabled, it is possible to leave the movieplayer with exit."
 msgstr "Gdy właczone, można wyjść z odtwarzacza za pomocą klawisza exit"
@@ -7433,6 +7454,9 @@ msgstr ""
 "Po przywróceniu ustawień fabrycznych twój tuner zrestartuje się!\n"
 "\n"
 "Czy chcesz przywrócić ustawienia fabryczne?"
+
+msgid "When you use the remote fallback tuner to do recording, the timer conflict detection can't handle remote fallback tuners. This option allows you to turn off the timer confict detection"
+msgstr "Gdy używasz rezerwowego zdalnego odbiornika do wykonania nagrania, narzędzie wykrywanie konfliktów timera nie potrafi obsłużyć zdalnego tunera. Ta opcja pozwala wyłączyć wykrywanie konfliktów timera."
 
 msgid "Where do you want to backup your settings?"
 msgstr "Gdzie chcesz zapisać kopię zapasową ustawień?"
