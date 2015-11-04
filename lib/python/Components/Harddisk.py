@@ -289,8 +289,8 @@ class Harddisk:
 
 		task = Task.LoggingTask(job, _("Rereading partition table"))
 		task.weighting = 1
-		task.setTool('sfdisk')
-		task.args.append('-R')
+		task.setTool('hdparm')
+		task.args.append('-z')
 		task.args.append(self.disk_path)
 
 		task = Task.ConditionTask(job, _("Waiting for partition"), timeoutCount=20)
