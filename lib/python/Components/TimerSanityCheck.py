@@ -15,15 +15,18 @@ class TimerSanityCheck:
 		self.nrep_eventlist = []
 		self.bflag = -1
 		self.eflag = 1
+		self.fallback_tuner = config.usage.remote_fallback_enabled.value and "http" in config.usage.remote_fallback.value
 
 	def check(self, ext_timer=1):
-		if not config.usage.timer_sanity_check_enabled.value:
+		if not config.usage.timer_sanity_check_enabled.value: # Warning! maybe so --> and self.fallback_tuner
 			return True
 		if ext_timer != 1:
 			self.newtimer = ext_timer
 		if self.newtimer is None:
 			self.simultimer = []
 		else:
+			if self.fallback_tuner and not self.newtimer.conflict_detection:
+				return True
 			self.simultimer = [ self.newtimer ]
 		return self.checkTimerlist()
 
@@ -94,6 +97,8 @@ class TimerSanityCheck:
 		idx = 0
 		for timer in self.timerlist:
 			if (timer != self.newtimer) and (not timer.disabled):
+				if self.fallback_tuner and not timer.conflict_detection:
+					continue
 				if timer.repeated:
 					rflags = timer.repeated
 					rflags = ((rflags & 0x7F)>> 3)|((rflags & 0x07)<<4)
