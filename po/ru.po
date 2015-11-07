@@ -2990,13 +2990,13 @@ msgid "Inactivity Sleeptimer"
 msgstr "Таймер неактивности"
 
 msgid "Include AIT in http streams"
-msgstr "Включать AIT в http стрим"
+msgstr "Включать AIT в http стрим потоки"
 
 msgid "Include ECM in http streams"
-msgstr "Включать ECM в http стрим"
+msgstr "Включать ECM в http стрим потоки"
 
 msgid "Include EIT in http streams"
-msgstr "Включать EIT в http стрим"
+msgstr "Включать EIT в http стрим потоки"
 
 msgid "Incorrect type service for PiP!"
 msgstr "Некорректный тип сервиса для PiP!"
@@ -9376,3 +9376,24 @@ msgstr "AGC:"
 
 msgid "Maybe the reason that recording is currently running. Please stop the recording before trying to configure the positioner."
 msgstr "Может быть причина этого, что сейчас идет запись. Остановите пожалуйста запись,перед настройкой позиционера."
+
+msgid "Audio plugins"
+msgstr "Аудио плагины"
+
+msgid "Enable timer conflict detection"
+msgstr "Включить обнаружение конфликтов таймера"
+
+msgid "Descramble sending http streams"
+msgstr "Декодировать отправленные http стрим потоки"
+
+msgid "Descramble receiving http streams"
+msgstr "Декодировать полученные http стрим потоки"
+
+msgid "When enabled, always descramble receiving http streams. This takes up more resources (descrambling demuxers), only enable if necessary. Individual streams are always descrambled if 0x100 is added to the service type, regardless of this setting. Default off."
+msgstr "Если это включено, то полученные http стрим потоки будут всегда декодироватся.Это занимает больше ресурсов (декодирование демультиплексорами), включить только при необходимости. Индивидуальные стрим потоки всегда декодируются, если 0x100 добавляется к типу сервиса, независимо от этого параметра. По дефолту выключено."
+
+msgid "When enabled, http streams are descrambled on the server side. The (remote) client receiver does not have to do descrambling. Default on."
+msgstr "Если это включено, то http стрим потоки декодируются на стороне сервера. (Дистанционный) клиент получатель стрим потока не должен делать декодирование. По дефолту включено."
+
+msgid "When you use the remote fallback tuner to do recording, the timer conflict detection can't handle remote fallback tuners. This option allows you to turn off the timer confict detection"
+msgstr "При использовании дистанционного резервного тюнера для записей, обнаружение конфликтов таймеров не может сделать исключение для резервного тюнера. Эта опция позволяет отключить обнаружение конфликтов таймеров глобально. Не рекомендуется!"
