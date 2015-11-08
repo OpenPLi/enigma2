@@ -52,8 +52,6 @@ class ePicLoad: public eMainloop, public eThread, public Object, public iObject
 {
 	DECLARE_REF(ePicLoad);
 
-	enum{ F_PNG, F_JPEG, F_BMP, F_GIF};
-
 	void decodePic();
 	void decodeThumb();
 
@@ -94,7 +92,7 @@ class ePicLoad: public eMainloop, public eThread, public Object, public iObject
 	void thread();
 	int startThread(int what, const char *file, int x, int y, bool async=true);
 	void thread_finished();
-	bool getExif(const char *filename, int Thumb=0);
+	bool getExif(const char *filename, int fileType=F_JPEG, int Thumb=0);
 	int getFileType(const char * file);
 public:
 	void waitFinished();
