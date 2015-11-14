@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-01 21:38+0200\n"
+"POT-Creation-Date: 2015-11-14 18:55+0200\n"
 "PO-Revision-Date: 2014-11-12 00:49+0200\n"
 "Last-Translator: Tapat <taapat@gmail.com>\n"
 "Language-Team: Taapat <taapat@gmail.com>\n"
@@ -519,6 +519,9 @@ msgstr ""
 msgid "A recording is currently running. Please stop the recording before trying to scan."
 msgstr "Pašreiz notiek ieraksts. Pirms mēģināt meklēt lūdzu apturiet ierakstu."
 
+msgid "A recording is currently running. Please stop the recording before trying to start a testing DiSEqC."
+msgstr "Pašreiz notiek ieraksts. Lūdzu apturiet ierakstu pirms mēģiniet testēt DiSEqC."
+
 #, python-format
 msgid "A required tool (%s) was not found."
 msgstr "Vajadzīgais rīks (%s) netika atrasts."
@@ -904,6 +907,9 @@ msgstr "Audio valodas izvēle 4"
 msgid "Audio options..."
 msgstr "Skaņas opcijas..."
 
+msgid "Audio plugins"
+msgstr "Audio spraudņi"
+
 #, python-format
 msgid "Audio track (%s) format"
 msgstr "Skaņas celiņa (%s) formāts"
@@ -1189,11 +1195,11 @@ msgstr "Kanāls"
 msgid "Channel Info"
 msgstr "Info par kanālu"
 
+msgid "Channel in not in services list"
+msgstr "Kanāls nav kanālu sarakstā"
+
 msgid "Channel list type"
 msgstr "Kanālu saraksta veids"
-
-msgid "Channel not in services list"
-msgstr "Kanāls nav kanālu sarakstā"
 
 msgid "Channel selection"
 msgstr "Kanālu izvēle"
@@ -1654,9 +1660,6 @@ msgstr "Konfigurē"
 msgid "Conflict not resolved!"
 msgstr "Konflikts nav novērsts!"
 
-msgid "Conflicting timer"
-msgstr "Konfliktējošs taimeris"
-
 msgid "Connect"
 msgstr "Savienoties"
 
@@ -2024,6 +2027,9 @@ msgstr "DiSEqC A/B"
 
 msgid "DiSEqC A/B/C/D"
 msgstr "DiSEqC A/B/C/D"
+
+msgid "DiSEqC Tester"
+msgstr "DiSEqC tests"
 
 msgid "DiSEqC mode"
 msgstr "DiSEqC režīms"
@@ -2475,6 +2481,9 @@ msgstr "Notikuma apskats"
 msgid "Event view menu"
 msgstr "Notikuma apskata izvēlne"
 
+msgid "Every known"
+msgstr "Zināms"
+
 msgid "Everywhere"
 msgstr "Jebkur"
 
@@ -2604,6 +2613,9 @@ msgstr "Neizdevās"
 
 msgid "Failed to write /tmp/positionersetup.log: "
 msgstr "Neizdevās ierakstīt /tmp/positionersetup.log: "
+
+msgid "Failed:"
+msgstr "Neizdevās:"
 
 msgid "Fallback remote receiver URL"
 msgstr "Rezerves uztvērēja adrese"
@@ -3012,6 +3024,9 @@ msgstr ""
 "Pašreiz nepievērsiet uzmanību spilgtajiem toņiem. Tie tiks instalēti nākamajā solī.\n"
 "Ja esat apmierināts ar rezultātu, spiediet OK."
 
+msgid "Ignore conflict"
+msgstr "Ignorēt konfliktus"
+
 msgid "Image: "
 msgstr "Imidžs: "
 
@@ -3382,8 +3397,8 @@ msgstr "Noenkurošanās attiecība"
 msgid "Lock:"
 msgstr "Noenkuroties:"
 
-msgid "Log results to harddisk"
-msgstr "Žurnalēt rezultātus uz cietā diska"
+msgid "Log results to /tmp"
+msgstr "Žurnalēt rezultātus /tmp"
 
 msgid "Long filenames"
 msgstr "Garie failu vārdi"
@@ -3801,6 +3816,9 @@ msgstr "Nav atrasts pozicionierim piemērots pavadonis."
 msgid "No priority"
 msgstr "Bez prioritātes"
 
+msgid "No satellite frontend found!"
+msgstr "Nav atrasts piemērots pavadonis!"
+
 msgid "No satellite, terrestrial or cable tuner is configured. Please check your tuner setup."
 msgstr "Nav nokonfigurētu pavadoņu, televīzijas vai kabeļu pieslēgumu. Lūdzu pārbaudiet uztvērēja uzstādījumus."
 
@@ -3911,6 +3929,9 @@ msgstr "Nav konfigurēts"
 #, python-format
 msgid "Not enough disk space. Please free up some disk space and try again. (%d MB required, %d MB available)"
 msgstr "Nav pietiekami vietas uz diska. Lūdzu atbrīvot vietu uz diska un mēģināt vēlreiz. (%d MB ir nepieciešami, bet %d MB pieejami)"
+
+msgid "Not tested:"
+msgstr "Nav pārbaudīts:"
 
 msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'."
 msgstr "Ja iespējots, bet vēlaties pāriet gaidstāvē pēc ieslēgšanas iestatījumā 'Ieslēdzot pāriet gaidstāvē' norādiet 'Lietojot pamodināšanas taimeri'"
@@ -4024,6 +4045,9 @@ msgstr "Cits"
 
 msgid "Output"
 msgstr "Izeja"
+
+msgid "Overall progress:"
+msgstr "Izpilda:"
 
 msgid "Overwrite configuration files during software upgrade?"
 msgstr "Pārrakstīt konfigurācijas failus atjaunojot programmatūru?"
@@ -4559,6 +4583,9 @@ msgstr "Progresa josla pa kreisi"
 msgid "Progress bar right"
 msgstr "Progresa josla pa labi"
 
+msgid "Progress:"
+msgstr "Progress:"
+
 msgid "Properties of current title"
 msgstr "Aktīvā nosaukuma parametri"
 
@@ -4627,6 +4654,9 @@ msgstr "Ātrais"
 
 msgid "Quick zap"
 msgstr "Ātrā pārslēgšana"
+
+msgid "REC"
+msgstr "IER"
 
 msgid "RF output"
 msgstr "RF izeja"
@@ -6107,6 +6137,9 @@ msgstr "Subtitri"
 msgid "Subtitles Settings"
 msgstr "Subtitru izvēle"
 
+msgid "Succeeded:"
+msgstr "Izdevās:"
+
 msgid "Sun"
 msgstr "Sv"
 
@@ -6346,8 +6379,8 @@ msgid "The pin code you entered is wrong."
 msgstr "Jūsu ievadītais PIN kods ir nepareizs."
 
 #, python-format
-msgid "The results have been written to %s."
-msgstr "Rezultāti saglabāti %s."
+msgid "The results have been written to %s"
+msgstr "Rezultāti tiks ierakstīti %s"
 
 msgid "The sleep timer has been activated."
 msgstr "Miega taimeris tika aktivizēts."
@@ -7473,9 +7506,6 @@ msgstr ""
 "\n"
 "Vai tiešām atjaunot rūpnīcas iestatījumus?"
 
-msgid "When you use the remote fallback tuner to do recording, the timer conflict detection can't handle remote fallback tuners. This option allows you to turn off the timer confict detection"
-msgstr "Ja jūs ierakstam lietojat citu uztvērēju, tad taimeru konflikta noteikšanu var veikt šis uztvērējs. Šis iestatījums atļauj izslēgt taimeru konflikta noteikšanu."
-
 msgid "Where do you want to backup your settings?"
 msgstr "Kur Jūs vēlaties veidot savu iestatījumu dublējumkopiju?"
 
@@ -7499,6 +7529,9 @@ msgstr "Bezvadu tīkla savienojuma iestatījumi."
 
 msgid "Wireless network state"
 msgstr "Bezvadu tīkla statuss"
+
+msgid "With errors:"
+msgstr "Ar kļūdām:"
 
 msgid "With popup"
 msgstr "Ar uznirstošo logu"
@@ -8123,6 +8156,9 @@ msgstr "iziet no tīkla adaptera iestatīšanas izvēlnes"
 msgid "experimental film/video"
 msgstr "eksperimentālās filmas/video"
 
+msgid "failed"
+msgstr "neizdevās"
+
 msgid "false"
 msgstr "nepatiess"
 
@@ -8387,8 +8423,14 @@ msgstr "nav noenkurojies"
 msgid "not supported"
 msgstr "nav atbalstīts"
 
+msgid "not tested"
+msgstr "nav testēts"
+
 msgid "not used"
 msgstr "neizmantots"
+
+msgid "not_tested"
+msgstr ""
 
 msgid "nothing connected"
 msgstr "nekas nav pievienots"
@@ -8666,6 +8708,9 @@ msgstr "stereo"
 msgid "stop using as startup service"
 msgstr "pārtraukt lietot kā ieslēgšanas kanālu"
 
+msgid "successful"
+msgstr "veiksmīgi"
+
 msgid "switch to bookmarks"
 msgstr "iet uz grāmatzīmēm"
 
@@ -8735,6 +8780,9 @@ msgstr "nezināms kanāls"
 msgid "unpublished"
 msgstr "nepublicēts"
 
+msgid "untestable"
+msgstr "netestēts"
+
 msgid "until standby/restart"
 msgstr "līdz gaidstāvei/pārstartēšanai"
 
@@ -8790,11 +8838,17 @@ msgstr[0] "ar %d kļūdu"
 msgstr[1] "ar %d kļūdām"
 msgstr[2] "ar %d kļūdām"
 
+msgid "with errors"
+msgstr "ar kļūdām"
+
 msgid "with text"
 msgstr "ar tekstu"
 
 msgid "with tuner name"
 msgstr "ar uztvērēja nosaukumu"
+
+msgid "with_errors"
+msgstr ""
 
 msgid "working"
 msgstr "darbojas"
