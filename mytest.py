@@ -504,7 +504,7 @@ def runScreenTest():
 			setRTCtime(nowTime)
 		print "set wakeup time to", strftime("%Y/%m/%d %H:%M", localtime(wptime))
 		setFPWakeuptime(wptime)
-		config.misc.prev_wakeup_time.value = startTime[0]
+		config.misc.prev_wakeup_time.value = int(startTime[0])
 		config.misc.prev_wakeup_time_type.value = startTime[1]
 		config.misc.prev_wakeup_time_type.save()
 	else:
