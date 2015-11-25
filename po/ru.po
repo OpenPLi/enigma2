@@ -2004,9 +2004,6 @@ msgstr "DiSEqC режим"
 msgid "DiSEqC port %s: %s"
 msgstr "DiSEqC порт %s: %s"
 
-msgid "DiSEqC-tester settings"
-msgstr "Тест настроек DiSEqC"
-
 msgid "Digital contour removal"
 msgstr "Цифровое удаление контура"
 
@@ -4417,9 +4414,6 @@ msgstr "Нажмите OK для активации настроек."
 msgid "Press OK to edit the settings."
 msgstr "Нажмите OK, для измения настройки."
 
-#, python-format
-msgid "Press OK to get further details for %s"
-msgstr "Нажмите ОК, для получения подробной информации для %s"
 
 msgid "Press OK to scan"
 msgstr "Нажмите OK для сканирования."
@@ -5928,12 +5922,6 @@ msgstr "Остановить сервис и вернуться к списку 
 msgid "Stop test"
 msgstr "Остановить тест"
 
-msgid "Stop testing plane after # failed transponders"
-msgstr "Остановить тестирование после # ошибки транспондера"
-
-msgid "Stop testing plane after # successful transponders"
-msgstr "Остановить тестирование после # исправного транспондера"
-
 msgid "Stop timer recording"
 msgstr "Остановка записей по таймеру"
 
@@ -6135,9 +6123,6 @@ msgstr "Наземный"
 
 msgid "Terrestrial provider"
 msgstr "Наземный провайдер"
-
-msgid "Test DiSEqC settings"
-msgstr "Тест настроек DiSEqC"
 
 msgid "Test mode"
 msgstr "Режим теста"
@@ -8678,9 +8663,6 @@ msgstr "с текстом"
 msgid "with tuner name"
 msgstr "с именем тюнера"
 
-msgid "working"
-msgstr "работающий"
-
 msgid "xp1000"
 msgstr "xp1000"
 
@@ -9396,4 +9378,84 @@ msgid "When enabled, http streams are descrambled on the server side. The (remot
 msgstr "Если это включено, то http стрим потоки декодируются на стороне сервера. (Дистанционный) клиент получатель стрим потока не должен делать декодирование. По дефолту включено."
 
 msgid "When you use the remote fallback tuner to do recording, the timer conflict detection can't handle remote fallback tuners. This option allows you to turn off the timer confict detection"
-msgstr "При использовании дистанционного резервного тюнера для записей, обнаружение конфликтов таймеров не может сделать исключение для резервного тюнера. Эта опция позволяет отключить обнаружение конфликтов таймеров глобально. Не рекомендуется!"
+msgstr "При использовании дистанционного резервного тюнера для записей, обнаружение конфликтов таймеров не может сделать исключение для резервного тюнера. Эта опция позволяет отключить обнаружение конфликта таймера. Не рекомендуется!"
+
+
+msgid "A recording is currently running. Please stop the recording before trying to start a testing DiSEqC."
+msgstr "В текущее время идет запись. Пожалуйста остановите запись перед началом тестирования DiSEqC."
+
+msgid "DiSEqC Tester"
+msgstr "Тестирование DiSEqC"
+
+msgid "DiSEqC-tester settings"
+msgstr "Настройки DiSEqC-тестер"
+
+msgid "Failed:"
+msgstr "Неудачно:"
+
+msgid "Log results to /tmp"
+msgstr "Запись результата лога в /tmp"
+
+msgid "Not tested:"
+msgstr "Без теста:"
+
+msgid "Overall progress:"
+msgstr "Общий прогресс:"
+
+msgid "Press OK to get further details for %s"
+msgstr "Нажмите ОК, чтобы получить подробную информацию для %s"
+
+msgid "Progress:"
+msgstr "Прогресс:"
+
+msgid "Stop testing plane after # failed transponders"
+msgstr "Остановка теста после # неудачного транспондера"
+
+msgid "Stop testing plane after # successful transponders"
+msgstr "Остановка теста после # успешного транспондера"
+
+msgid "Succeeded:"
+msgstr "Успешных:"
+
+msgid "Test DiSEqC settings"
+msgstr "Настройки теста DiSEqC"
+
+
+msgid "The results have been written to %s"
+msgstr "Результаты были записаны в %s"
+
+msgid "With errors:"
+msgstr "С ошибками:"
+
+msgid "failed"
+msgstr "неудачно"
+
+msgid "not tested"
+msgstr "без теста"
+
+msgid "successful"
+msgstr "успешно"
+
+msgid "with errors"
+msgstr "с ошибками"
+
+msgid "working"
+msgstr "в работе"
+
+msgid ""
+"Warning!\n"
+"This is an option for advanced users.\n"
+"Really disable timer conflict detection?"
+msgstr ""
+"Внимание!\n"
+"Это вариант для продвинутых пользователей, нужен только при использовании запасного ресивера.\n"
+"Действительно отключить обнаружение конфликтов таймера?"
+
+msgid "and never ask this again"
+msgstr "и никогда больше не спрашивать опять"
+
+msgid "Ignore conflict"
+msgstr "Игнорировать конфликт"
+
+msgid "Show warning before set 'Ignore conflict'"
+msgstr "Показать предупреждение перед установкой 'Игнорировать конфликт'"
