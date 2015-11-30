@@ -415,10 +415,12 @@ eServiceMP3::eServiceMP3(eServiceReference ref):
 	m_use_prefillbuffer = false;
 	m_paused = false;
 	m_seek_paused = false;
-	m_cuesheet_loaded = false; /* cuesheet CVR */
+	m_cuesheet_loaded = false; /* cuesheet */
+	m_file_source = false;
 #if GST_VERSION_MAJOR >= 1
-	m_use_chapter_entries = false; /* TOC chapter support CVR */
-	m_last_seek_pos = 0; /* CVR last seek position */
+	m_use_chapter_entries = false; /* TOC chapter support */
+	m_last_seek_pos = 0; /* last seek position */
+	m_user_paused = false;
 #endif
 	m_extra_headers = "";
 	m_download_buffer_path = "";
@@ -561,7 +563,9 @@ eServiceMP3::eServiceMP3(eServiceReference ref):
 	else
 		uri = g_filename_to_uri(filename, NULL, NULL);
 
-	eDebug("[eServiceMP3] playbin uri=%s", uri);
+	if(!strncmp(uri, "file://", 7))
+		m_file_source = true;
+	eDebug("[eServiceMP3] playbin uri=%s %d", uri, m_file_source);
 #if GST_VERSION_MAJOR < 1
 	m_gst_playbin = gst_element_factory_make("playbin2", "playbin");
 #else
@@ -1662,6 +1666,13 @@ void eServiceMP3::gstBusCall(GstMessage *msg)
 			{
 				case GST_STATE_CHANGE_NULL_TO_READY:
 				{
+#if GST_VERSION_MAJOR >= 1
+					if(m_file_source && m_gst_playbin)
+					{
+						gst_element_set_state(m_gst_playbin, GST_STATE_PAUSED);
+						m_paused = true;
+					}
+#endif
 					m_event(this, evStart);
 				}	break;
 				case GST_STATE_CHANGE_READY_TO_PAUSED:
@@ -1747,6 +1758,10 @@ void eServiceMP3::gstBusCall(GstMessage *msg)
 				{
 					if ( m_sourceinfo.is_streaming && m_streamingsrc_timeout )
 						m_streamingsrc_timeout->stop();
+#if GST_VERSION_MAJOR >= 1
+						if(m_file_source)
+							m_user_paused = false;
+#endif
 					m_paused = false;
 					if (m_seek_paused)
 					{
@@ -1758,6 +1773,10 @@ void eServiceMP3::gstBusCall(GstMessage *msg)
 				}	break;
 				case GST_STATE_CHANGE_PLAYING_TO_PAUSED:
 				{
+#if GST_VERSION_MAJOR >= 1
+						if(m_file_source)
+							m_user_paused = true;
+#endif
 					m_paused = true;
 				}	break;
 				case GST_STATE_CHANGE_PAUSED_TO_READY:
@@ -2030,6 +2049,14 @@ void eServiceMP3::gstBusCall(GstMessage *msg)
 				if (m_errorInfo.missing_codec.find("video/") == 0 || (m_errorInfo.missing_codec.find("audio/") == 0 && m_audioStreams.empty()))
 					m_event((iPlayableService*)this, evUser+12);
 			}
+#if GST_VERSION_MAJOR >= 1
+			/* now all audio,video and subsettings are done playbin may go to playing */
+			if(m_file_source && m_paused && !m_user_paused)
+			{
+				gst_element_set_state (m_gst_playbin, GST_STATE_PLAYING);
+				m_paused = false;
+			}
+#endif
 			break;
 		}
 		case GST_MESSAGE_ELEMENT:
