@@ -101,7 +101,7 @@ class SkinSelector(Screen):
 
 		print "Skinselector: Selected Skin: "+self.root+self.skinfile
 		restartbox = self.session.openWithCallback(self.restartGUI,MessageBox,_("GUI needs a restart to apply a new skin\nDo you want to restart the GUI now?"), MessageBox.TYPE_YESNO)
-		restartbox.setTitle(_("Restart GUI"))
+		restartbox.setTitle(_("Restart GUI now?"))
 
 	def loadPreview(self):
 		if self["SkinList"].getCurrent() == DEFAULTSKIN:
@@ -129,9 +129,9 @@ def SkinSelMain(session, **kwargs):
 
 def SkinSelSetup(menuid, **kwargs):
 	if menuid == "system":
-		return [(_("Skin selector"), SkinSelMain, "skin_selector", None)]
+		return [(_("Skin"), SkinSelMain, "skin_selector", None)]
 	else:
 		return []
 
 def Plugins(**kwargs):
-	return PluginDescriptor(name="Skin selector", description= _("Select your Skin"), where = PluginDescriptor.WHERE_MENU, needsRestart = False, fnc=SkinSelSetup)
+	return PluginDescriptor(name="Skin", description= _("Select your Skin"), where = PluginDescriptor.WHERE_MENU, needsRestart = False, fnc=SkinSelSetup)
