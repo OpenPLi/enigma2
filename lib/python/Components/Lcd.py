@@ -50,7 +50,7 @@ def standbyCounterChanged(configElement):
 	config.lcd.standby.apply()
 
 def InitLcd():
-	detected = eDBoxLCD.getInstance().detected()
+	detected = eDBoxLCD.getInstance() and eDBoxLCD.getInstance().detected()
 	SystemInfo["Display"] = detected
 	config.lcd = ConfigSubsection();
 	if detected:
