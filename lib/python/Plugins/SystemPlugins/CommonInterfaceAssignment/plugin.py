@@ -14,7 +14,7 @@ from xml.etree.cElementTree import parse as ci_parse
 from Tools.XMLTools import elementsWithTag, mergeText, stringToXML
 from enigma import eDVBCI_UI, eDVBCIInterfaces, eEnv
 
-from os import system, path as os_path
+import os
 
 class CIselectMainMenu(Screen):
 	skin = """
@@ -255,28 +255,27 @@ class CIconfigMenu(Screen):
 			fp.write("</ci>\n")
 			fp.close()
 		except:
-			print "[CI_Config_CI%d] xml not written" %self.ci_slot
+			print "[CI_Config_CI%d] xml not written" % self.ci_slot
 			os.unlink(self.filename)
 
 	def loadXML(self):
-		if not os_path.exists(self.filename):
+		if not os.path.exists(self.filename):
+			self.setServiceListInfo()
 			return
 
 		def getValue(definitions, default):
 			ret = ""
 			Len = len(definitions)
 			return Len > 0 and definitions[Len-1].text or default
-
+		self.read_services = []
+		self.read_providers = []
+		self.usingcaid = []
+		self.ci_config = []
 		try:
 			tree = ci_parse(self.filename).getroot()
-			self.read_services = []
-			self.read_providers = []
-			self.usingcaid = []
-			self.ci_config = []
 			for slot in tree.findall("slot"):
 				read_slot = getValue(slot.findall("id"), False).encode("UTF-8")
 				print "ci " + read_slot
-
 				i=0
 				for caid in slot.findall("caid"):
 					read_caid = caid.get("id").encode("UTF-8")
@@ -296,7 +295,11 @@ class CIconfigMenu(Screen):
 
 				self.ci_config.append((int(read_slot), (self.read_services, self.read_providers, self.usingcaid)))
 		except:
-			print "[CI_Config_CI%d] error parsing xml..." %self.ci_slot
+			print "[CI_Config_CI%d] error parsing xml..." % self.ci_slot
+			try:
+				os.remove(self.filename)
+			except:
+				print "[CI_Activate_Config_CI%d] error remove damaged xml..." % self.ci_slot
 
 		for item in self.read_services:
 			if len(item):
@@ -310,7 +313,6 @@ class CIconfigMenu(Screen):
 		self.finishedCAidSelection(self.selectedcaid)
 		self["ServiceList"].l.setList(self.servicelist)
 		self.setServiceListInfo()
-
 
 class easyCIconfigMenu(CIconfigMenu):
 	skin = """
@@ -560,10 +562,7 @@ def activate_all(session):
 	NUM_CI = eDVBCIInterfaces.getInstance().getNumOfSlots()
 	print "[CI_Activate] FOUND %d CI Slots " % NUM_CI
 	if NUM_CI and NUM_CI > 0:
-		ci_config=[]
 		def getValue(definitions, default):
-			# Initialize Output
-			ret = ""
 			# How many definitions are present
 			Len = len(definitions)
 			return Len > 0 and definitions[Len-1].text or default
@@ -571,8 +570,9 @@ def activate_all(session):
 		for ci in range(NUM_CI):
 			filename = eEnv.resolve("${sysconfdir}/enigma2/ci") + str(ci) + ".xml"
 
-			if not os_path.exists(filename):
+			if not os.path.exists(filename):
 				print "[CI_Activate_Config_CI%d] no config file found" %ci
+				continue
 
 			try:
 				tree = ci_parse(filename).getroot()
@@ -595,18 +595,19 @@ def activate_all(session):
 						read_provider_dvbname = provider.get("dvbnamespace").encode("UTF-8")
 						read_providers.append((read_provider_name,long(read_provider_dvbname,16)))
 
-					ci_config.append((int(read_slot), (read_services, read_providers, usingcaid)))
+					if read_slot is not False and (read_services or read_providers or usingcaid):
+						print "[CI_Activate] activate CI%d with following settings:" % int(read_slot)
+						print read_services, read_providers, usingcaid
+						try:
+							eDVBCIInterfaces.getInstance().setDescrambleRules(int(read_slot), (read_services, read_providers, usingcaid))
+						except:
+							print "[CI_Activate_Config_CI%d] error setting DescrambleRules..." % int(read_slot)
 			except:
-				print "[CI_Activate_Config_CI%d] error parsing xml..." %ci
-
-		for item in ci_config:
-			print "[CI_Activate] activate CI%d with following settings:" %item[0]
-			print item[0]
-			print item[1]
-			try:
-				eDVBCIInterfaces.getInstance().setDescrambleRules(item[0],item[1])
-			except:
-				print "[CI_Activate_Config_CI%d] error setting DescrambleRules..." %item[0]
+				print "[CI_Activate_Config_CI%d] error parsing xml or setting DescrambleRules..." % ci
+				try:
+					os.remove(filename)
+				except:
+					print "[CI_Activate_Config_CI%d] error remove damaged xml..." % ci
 
 def find_in_list(list, search, listpos=0):
 	for item in list:
