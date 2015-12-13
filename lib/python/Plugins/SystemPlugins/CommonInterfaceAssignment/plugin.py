@@ -180,7 +180,7 @@ class CIconfigMenu(Screen):
 
 	def cancel(self):
 		self.saveXML()
-		activate_all(self)
+		activate_all(self, editcallback=True)
 		self.close()
 
 	def setServiceListInfo(self):
@@ -558,14 +558,11 @@ class myChannelSelection(ChannelSelectionBase):
 	def cancel(self):
 		self.close(None)
 
-def activate_all(session):
+def activate_all(session, editcallback=False):
 	NUM_CI = eDVBCIInterfaces.getInstance().getNumOfSlots()
 	print "[CI_Activate] FOUND %d CI Slots " % NUM_CI
 	if NUM_CI and NUM_CI > 0:
-		ci_config=[]
 		def getValue(definitions, default):
-			# Initialize Output
-			ret = ""
 			# How many definitions are present
 			Len = len(definitions)
 			return Len > 0 and definitions[Len-1].text or default
@@ -598,22 +595,19 @@ def activate_all(session):
 						read_provider_dvbname = provider.get("dvbnamespace").encode("UTF-8")
 						read_providers.append((read_provider_name,long(read_provider_dvbname,16)))
 
-					ci_config.append((int(read_slot), (read_services, read_providers, usingcaid)))
+					if editcallback or (read_slot is not False and (read_services or read_providers or usingcaid)):
+						print "[CI_Activate] activate CI%d with following settings:" % int(read_slot)
+						print read_services, read_providers, usingcaid
+						try:
+							eDVBCIInterfaces.getInstance().setDescrambleRules(int(read_slot), (read_services, read_providers, usingcaid))
+						except:
+							print "[CI_Activate_Config_CI%d] error setting DescrambleRules..." % int(read_slot)
 			except:
 				print "[CI_Activate_Config_CI%d] error parsing xml..." % ci
 				try:
 					os.remove(filename)
 				except:
 					print "[CI_Activate_Config_CI%d] error remove damaged xml..." % ci
-		for item in ci_config:
-			if len(item) > 1 and len(item[1]) > 0:
-				print "[CI_Activate] activate CI%d with following settings:" % item[0]
-				print item[0]
-				print item[1]
-				try:
-					eDVBCIInterfaces.getInstance().setDescrambleRules(item[0],item[1])
-				except:
-					print "[CI_Activate_Config_CI%d] error setting DescrambleRules..." %item[0]
 
 def find_in_list(list, search, listpos=0):
 	for item in list:
