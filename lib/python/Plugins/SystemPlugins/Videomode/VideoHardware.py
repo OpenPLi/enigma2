@@ -42,6 +42,10 @@ class VideoHardware:
 								"60Hz":		{ 60: "1080p" },
 								"multi":	{ 50: "1080p50", 60: "1080p" } }
 
+	rates["2160p"] =		{ "50Hz":	{ 50: "2160p50" },
+								"60Hz":		{ 60: "2160p" },
+								"multi":	{ 50: "2160p50", 60: "2160p" } }
+
 	rates["PC"] = {
 		"1024x768": { 60: "1024x768" }, # not possible on DM7025
 		"800x600" : { 60: "800x600" },  # also not possible
@@ -60,7 +64,7 @@ class VideoHardware:
 
 	modes["Scart"] = ["PAL", "NTSC", "Multi"]
 	modes["YPbPr"] = ["720p", "1080i", "576p", "480p", "576i", "480i"]
-	modes["DVI"] = ["720p", "1080p", "1080i", "576p", "480p", "576i", "480i"]
+	modes["DVI"] = ["720p", "1080p", "2160p", "1080i", "576p", "480p", "576i", "480i"]
 	modes["DVI-PC"] = ["PC"]
 
 	def getOutputAspect(self):
@@ -98,6 +102,7 @@ class VideoHardware:
 		self.current_port = None
 
 		self.readAvailableModes()
+		self.widescreen_modes = set(["720p", "1080i", "1080p", "2160p"]).intersection(*[self.modes_available])
 
 		if self.modes.has_key("DVI-PC") and not self.getModeList("DVI-PC"):
 			print "[VideoHardware] remove DVI-PC because of not existing modes"
@@ -105,18 +110,6 @@ class VideoHardware:
 
 		self.createConfig()
 		self.readPreferredModes()
-
-		portlist = self.getPortList()
-		has1080p50 = False
-		for port in portlist:
-			if port == 'DVI' and HardwareInfo().has_hdmi():
-				if "1080p50" in self.modes_available:
-					has1080p50 = True
-
-		if has1080p50:
-			self.widescreen_modes = set(["720p", "1080i", "1080p"])
-		else:
-			self.widescreen_modes = set(["720p", "1080i"])
 
 		# take over old AVSwitch component :)
 		from Components.AVSwitch import AVSwitch
