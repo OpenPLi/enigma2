@@ -1556,7 +1556,7 @@ def InitNimManager(nimmgr):
 			if len(nimmgr.canConnectTo(x)) > 0:
 				config_mode_choices.append(("loopthrough", _("loopthrough to")))
 			nim.advanced = ConfigNothing()
-			tmp = ConfigSelection(config_mode_choices, "nothing")
+			tmp = ConfigSelection(config_mode_choices, "simple")
 			tmp.slot_id = x
 			tmp.addNotifier(configModeChanged, initial_call = False)
 			nim.configMode = tmp
