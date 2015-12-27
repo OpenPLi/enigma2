@@ -1135,7 +1135,7 @@ def InitSecParams():
 # the C(++) part should can handle this
 # the configElement should be only visible when diseqc 1.2 is disabled
 
-def InitNimManager(nimmgr):
+def InitNimManager(nimmgr, update_slots = []):
 	hw = HardwareInfo()
 	addNimConfig = False
 	try:
@@ -1636,6 +1636,9 @@ def InitNimManager(nimmgr):
 		x = slot.slot
 		nim = config.Nims[x]
 		empty = True
+
+		if update_slots and (x not in update_slots):
+			continue
 
 		if slot.canBeCompatible("DVB-S"):
 			createSatConfig(nim, x, empty_slots)

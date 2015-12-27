@@ -470,8 +470,10 @@ int eDVBFrontend::PreferredFrontendIndex = -1;
 eDVBFrontend::eDVBFrontend(const char *devicenodename, int fe, int &ok, bool simulate, eDVBFrontend *simulate_fe)
 	:m_simulate(simulate), m_enabled(false), m_simulate_fe(simulate_fe), m_dvbid(fe), m_slotid(fe)
 	,m_fd(-1), m_dvbversion(0), m_rotor_mode(false), m_need_rotor_workaround(false)
-	,m_state(stateClosed), m_timeout(0), m_tuneTimer(0)
+	,m_state(stateClosed), m_timeout(0), m_tuneTimer(0), m_fbc(false)
 {
+	char filename[64];
+
 	m_filename = devicenodename;
 
 	m_timeout = eTimer::create(eApp);
@@ -484,6 +486,11 @@ eDVBFrontend::eDVBFrontend(const char *devicenodename, int fe, int &ok, bool sim
 		m_data[i] = -1;
 
 	m_idleInputpower[0]=m_idleInputpower[1]=0;
+
+	sprintf(filename, "/proc/stb/frontend/%d/fbc_id", m_slotid);
+
+	if (access(filename, F_OK) == 0)
+		m_fbc = true;
 
 	ok = !openFrontend();
 	closeFrontend();
