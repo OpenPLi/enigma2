@@ -1,4 +1,3 @@
-/* FBC Manager */
 #include <lib/dvb/fbc.h>
 #include <lib/dvb/dvb.h>
 #include <lib/dvb/sec.h>
@@ -6,15 +5,6 @@
 
 #include <unistd.h>
 #include <fcntl.h>
-
-//#define FBC_DEBUG
-
-#ifdef FBC_DEBUG
-#define eFecDebug(arg...) eDebug(arg)
-#else
-#define eFecDebug(arg...)
-#endif
-
 
 DEFINE_REF(eFBCTunerManager);
 
@@ -85,7 +75,6 @@ int eFBCTunerManager::getFBCTunerNum()
 
 int eFBCTunerManager::setProcFBCID(int fe_id, int fbc_id)
 {
-	eFecDebug("[*][eFBCTunerManager::setProcFBCID] %d -> %d %s", fe_id, fbc_id, !isRootFeSlot(fe_id)?"(linked)":"");
 	char filename[128];
 	char data[4];
 	sprintf(filename, "/proc/stb/frontend/%d/fbc_id", fe_id);
@@ -222,8 +211,6 @@ int eFBCTunerManager::connectLinkByIndex(int link_fe_index, int prev_fe_index, i
 {
 	eSmartPtrList<eDVBRegisteredFrontend> &frontends = simulate ? m_res_mgr->m_simulate_frontend : m_res_mgr->m_frontend;
 
-	eFecDebug("	[*][eFBCTunerManager::connectLinkByIndex] try to link %d->%d->%d %s", prev_fe_index, link_fe_index, next_fe_index, simulate?"(simulate)":"");
-
 	eDVBRegisteredFrontend *link_fe=NULL;
 	eDVBRegisteredFrontend *prev_fe=NULL;
 	eDVBRegisteredFrontend *next_fe=NULL;
@@ -269,8 +256,6 @@ int eFBCTunerManager::connectLinkByIndex(int link_fe_index, int prev_fe_index, b
 {
 	eSmartPtrList<eDVBRegisteredFrontend> &frontends = simulate ? m_res_mgr->m_simulate_frontend : m_res_mgr->m_frontend;
 
-	eFecDebug("	[*][eFBCTunerManager::connectLinkByIndex] try to link %d->%d %s", prev_fe_index, link_fe_index, simulate?"(simulate)":"");
-
 	eDVBRegisteredFrontend *link_fe=NULL;
 	eDVBRegisteredFrontend *prev_fe=NULL;
 
@@ -307,8 +292,6 @@ int eFBCTunerManager::connectLinkByIndex(int link_fe_index, int prev_fe_index, b
 int eFBCTunerManager::disconnectLinkByIndex(int link_fe_index, int prev_fe_index, int next_fe_index, bool simulate)
 {
 	eSmartPtrList<eDVBRegisteredFrontend> &frontends = simulate ? m_res_mgr->m_simulate_frontend : m_res_mgr->m_frontend;
-
-	eFecDebug("	[*][eFBCTunerManager::connectLinkByIndex] try to unlink %d->%d->%d %s", prev_fe_index, link_fe_index, next_fe_index, simulate?"(simulate)":"");
 
 	eDVBRegisteredFrontend *link_fe=NULL;
 	eDVBRegisteredFrontend *prev_fe=NULL;
@@ -354,8 +337,6 @@ int eFBCTunerManager::disconnectLinkByIndex(int link_fe_index, int prev_fe_index
 {
 	eSmartPtrList<eDVBRegisteredFrontend> &frontends = simulate ? m_res_mgr->m_simulate_frontend : m_res_mgr->m_frontend;
 
-	eFecDebug("	[*][eFBCTunerManager::connectLinkByIndex] try to unlink %d->%d %s", prev_fe_index, link_fe_index, simulate?"(simulate)":"");
-
 	eDVBRegisteredFrontend *link_fe=NULL;
 	eDVBRegisteredFrontend *prev_fe=NULL;
 
@@ -391,7 +372,6 @@ int eFBCTunerManager::disconnectLinkByIndex(int link_fe_index, int prev_fe_index
 
 int eFBCTunerManager::connectLink(eDVBRegisteredFrontend *link_fe, eDVBRegisteredFrontend *prev_fe, eDVBRegisteredFrontend *next_fe, bool simulate)
 {
-	eFecDebug("	[*][eFBCTunerManager::connectLink] try to link %d->%d->%d %s", fe_slot_id(prev_fe), fe_slot_id(link_fe), fe_slot_id(next_fe), simulate?"(simulate)":"");
 	int ret = connectLinkByIndex(fe_slot_id(link_fe), fe_slot_id(prev_fe), fe_slot_id(next_fe), !simulate);
 
 	if(!ret)
@@ -411,7 +391,6 @@ int eFBCTunerManager::connectLink(eDVBRegisteredFrontend *link_fe, eDVBRegistere
 
 int eFBCTunerManager::connectLink(eDVBRegisteredFrontend *link_fe, eDVBRegisteredFrontend *prev_fe, bool simulate)
 {
-	eFecDebug("	[*][eFBCTunerManager::connectLink] try to link %d->%d %s", fe_slot_id(prev_fe), fe_slot_id(link_fe), simulate?"(simulate)":"");
 	int ret = connectLinkByIndex(fe_slot_id(link_fe), fe_slot_id(prev_fe), !simulate);
 	if(!ret)
 	{
@@ -427,7 +406,6 @@ int eFBCTunerManager::connectLink(eDVBRegisteredFrontend *link_fe, eDVBRegistere
 
 int eFBCTunerManager::disconnectLink(eDVBRegisteredFrontend *link_fe, eDVBRegisteredFrontend *prev_fe, eDVBRegisteredFrontend *next_fe, bool simulate)
 {
-	eFecDebug("	[*][eFBCTunerManager::disconnectLink] disconnect %d->%d->%d %s", fe_slot_id(prev_fe), fe_slot_id(link_fe), fe_slot_id(next_fe), simulate?"(simulate)":"");
 	int ret = disconnectLinkByIndex(fe_slot_id(link_fe), fe_slot_id(prev_fe), fe_slot_id(next_fe), !simulate);
 	if(!ret)
 	{
@@ -445,7 +423,6 @@ int eFBCTunerManager::disconnectLink(eDVBRegisteredFrontend *link_fe, eDVBRegist
 
 int eFBCTunerManager::disconnectLink(eDVBRegisteredFrontend *link_fe, eDVBRegisteredFrontend *prev_fe, bool simulate)
 {
-	eFecDebug("	[*][eFBCTunerManager::disconnectLink] disconnect %d->%d %s", fe_slot_id(prev_fe), fe_slot_id(link_fe), simulate?"(simulate)":"");
 	int ret = disconnectLinkByIndex(fe_slot_id(link_fe), fe_slot_id(prev_fe), !simulate);
 	if(!ret)
 	{
@@ -480,7 +457,6 @@ void eFBCTunerManager::disconnectLinkNoSimulate(eDVBRegisteredFrontend *link_fe)
 {
 	if(getNext(link_fe))
 	{
-		eFecDebug("[*][eFBCTunerManager::disconnectLinkNoSimulate] link fe is no last.");
 		return;
 	}
 
@@ -488,7 +464,6 @@ void eFBCTunerManager::disconnectLinkNoSimulate(eDVBRegisteredFrontend *link_fe)
 
 	if(!prev_fe)
 	{
-		eFecDebug("[*][eFBCTunerManager::disconnectLinkNoSimulate] can not found prev fe.");
 		return;
 	}
 
@@ -593,7 +568,6 @@ int eFBCTunerManager::isCompatibleWith(ePtr<iDVBFrontendParameters> &feparm, eDV
 
 		/* get score */
 		int c = link_fe->m_frontend->isCompatibleWith(feparm);
-		eFecDebug("[*][eFBCTunerManager::isCompatibleWith] score : %d (%d->%d)", c, fe_slot_id(it), fe_slot_id(link_fe));
 		if (c > best_score)
 		{
 			best_score = c;
@@ -604,8 +578,6 @@ int eFBCTunerManager::isCompatibleWith(ePtr<iDVBFrontendParameters> &feparm, eDV
 		disconnectLinkNoSimulate(link_fe);
 	}
 
-	eFecDebug("[*][eFBCTunerManager::isCompatibleWith] fe : %p(%d), score : %d %s", link_fe, fe_slot_id(link_fe), best_score, simulate?"(simulate)":"");
-
 	return best_score;
 }
 
@@ -615,11 +587,8 @@ void eFBCTunerManager::connectSortedLink(eDVBRegisteredFrontend *link_fe, eDVBRe
 	int top_fe_id = fe_slot_id(top_fe);
 	int prev_fe_id = link_fe_id - 1;
 
-	eFecDebug("	[*][eFBCTunerManager::connectSortedLink] link_id : %d, top_id : %d %s", link_fe_id, top_fe_id, simulate?"(simulate)":"");
-
 	if (prev_fe_id < 0)
 	{
-		eFecDebug("	[*][eFBCTunerManager::connectSortedLink] link failed! link_id : %d, top_id : %d %s", link_fe_id, top_fe_id, simulate?"(simulate)":"");
 		return;
 	}
 
@@ -670,18 +639,10 @@ void eFBCTunerManager::connectSortedLink(eDVBRegisteredFrontend *link_fe, eDVBRe
 /* attach link_fe to tail of fe linked list */
 void eFBCTunerManager::addLink(eDVBRegisteredFrontend *link_fe, eDVBRegisteredFrontend *top_fe, bool simulate)
 {
-	eFecDebug("	[*][eFBCTunerManager::addLink] addLink : %p(%d)->%p(%d) %s", top_fe, fe_slot_id(top_fe), link_fe, fe_slot_id(link_fe), simulate?"(simulate)":"");
-
 	if (!isRootFe(top_fe))
 		return;
 
-//	eDVBRegisteredFrontend *top_fe = a_top_fe;
-//	if (!checkTop(top_fe))
-//		top_fe = getTop(top_fe);
-
-//	printLinks(top_fe);
 	connectSortedLink(link_fe, top_fe, simulate);
-//	printLinks(top_fe);
 }
 
 /* if fe, fe_simulated is unused, unlink current frontend from linked things. */
@@ -698,11 +659,6 @@ void eFBCTunerManager::unset(eDVBRegisteredFrontend *fe)
 
 	if(isUnicable(fe))
 		return;
-
-	eFecDebug("	[*][eFBCTunerManager::unset] fe id : %p(%d) %s", fe, fe_slot_id(fe), simulate?"(simulate)":"");
-
-	
-//	printLinks(fe);
 
 	eDVBRegisteredFrontend *linked_prev_fe = getPrev(fe);
 	eDVBRegisteredFrontend *linked_next_fe = getNext(fe);
@@ -736,8 +692,6 @@ void eFBCTunerManager::unset(eDVBRegisteredFrontend *fe)
 
 	/* remove slot mask*/
 	updateLNBSlotMask(fe_slot_id(fe), fe_slot_id(linked_prev_fe), true);
-
-//	printLinks(fe);
 }
 
 bool eFBCTunerManager::canAllocateLink(eDVBRegisteredFrontend *fe, bool simulate)
@@ -770,20 +724,14 @@ int eFBCTunerManager::updateLNBSlotMask(int dest_slot, int src_slot, bool remove
 		eDVBSatelliteLNBParameters &lnb_param = sec->m_lnbs[idx];
 		if ( lnb_param.m_slot_mask & (1 << src_slot) )
 		{
-			eFecDebug("[*][eFBCTunerManager::updateLNBSlotMask] m_slot_mask : %d", lnb_param.m_slot_mask);
-
 			if (!remove)
 				lnb_param.m_slot_mask |= (1 << dest_slot);
 			else
 				lnb_param.m_slot_mask &= ~(1 << dest_slot);
 
-			eFecDebug("[*][eFBCTunerManager::updateLNBSlotMask] changed m_slot_mask : %d", lnb_param.m_slot_mask);
 			found = 1;
 		}
 	}
-
-	if (!found)
-		eFecDebug("[*][eFBCTunerManager::updateLNBSlotMask] src %d not found", src_slot);
 
 	return 0;
 }
@@ -807,79 +755,5 @@ int eFBCTunerManager::getLinkedSlotID(int fe_id)
 		}
 	}
 
-	eFecDebug(" [*][eFBCTunerManager::getLinkedSlotID] fe_id : %d, link : %d", fe_id, link);
-
 	return link;
 }
-
-void eFBCTunerManager::printLinks(eDVBRegisteredFrontend *fe)
-{
-	long linked_prev_ptr = -1;
-	eDVBRegisteredFrontend *linked_prev_fe = fe;
-	fe->m_frontend->getData(eDVBFrontend::LINKED_PREV_PTR, linked_prev_ptr);
-	while (linked_prev_ptr != -1)
-	{
-		linked_prev_fe = (eDVBRegisteredFrontend*) linked_prev_ptr;
-		linked_prev_fe->m_frontend->getData(eDVBFrontend::LINKED_PREV_PTR, (long&)linked_prev_ptr);
-	}
-
-	long linked_next_ptr = -1;
-	eDVBRegisteredFrontend *linked_next_fe = linked_prev_fe;
-	eFecDebug("	[*][eFBCTunerManager::printLinks] fe id : %d (%p), inuse : %d, enabled : %d, fbc : %d", fe_slot_id(linked_next_fe), linked_next_fe, linked_next_fe->m_inuse, linked_next_fe->m_frontend->getEnabled(), linked_next_fe->m_frontend->is_FBCTuner());
-	linked_prev_fe->m_frontend->getData(eDVBFrontend::LINKED_NEXT_PTR, linked_next_ptr);
-	while (linked_next_ptr != -1)
-	{
-		linked_next_fe = (eDVBRegisteredFrontend*) linked_next_ptr;
-		eFecDebug("	[*][eFBCTunerManager::printLinks] fe id : %d (%p), inuse : %d, enabled : %d, fbc : %d", fe_slot_id(linked_next_fe), linked_next_fe, linked_next_fe->m_inuse, linked_next_fe->m_frontend->getEnabled(), linked_next_fe->m_frontend->is_FBCTuner());
-		linked_next_fe->m_frontend->getData(eDVBFrontend::LINKED_NEXT_PTR, (long&)linked_next_ptr);
-	}
-
-	eSmartPtrList<eDVBRegisteredFrontend> &frontends = m_res_mgr->m_frontend;
-	for (eSmartPtrList<eDVBRegisteredFrontend>::iterator it(frontends.begin()); it != frontends.end(); ++it)
-	{
-		int prev = -1;
-		int next = -1;
-		long prev_ptr = -1;
-		long next_ptr = -1;
-		it->m_frontend->getData(eDVBFrontend::LINKED_PREV_PTR, prev_ptr);
-		it->m_frontend->getData(eDVBFrontend::LINKED_NEXT_PTR, next_ptr);
-		if (prev_ptr != -1)
-		{
-			eDVBRegisteredFrontend *prev_fe = (eDVBRegisteredFrontend *)prev_ptr;
-			prev = fe_slot_id(prev_fe);
-		}
-
-		if (next_ptr != -1)
-		{
-			eDVBRegisteredFrontend *next_fe = (eDVBRegisteredFrontend *)next_ptr;
-			next = fe_slot_id(next_fe);
-		}
-		
-		eFecDebug("	[*][eFBCTunerManager::printLinks] fe_id : %d, inuse : %d, enabled : %d, fbc : %d, prev : %d, next : %d", fe_slot_id(it), it->m_inuse, it->m_frontend->getEnabled(), it->m_frontend->is_FBCTuner(), prev, next);
-	}
-
-	eSmartPtrList<eDVBRegisteredFrontend> &simulate_frontends = m_res_mgr->m_simulate_frontend;
-	for (eSmartPtrList<eDVBRegisteredFrontend>::iterator it(simulate_frontends.begin()); it != simulate_frontends.end(); ++it)
-	{
-		int prev = -1;
-		int next = -1;
-		long prev_ptr = -1;
-		long next_ptr = -1;
-		it->m_frontend->getData(eDVBFrontend::LINKED_PREV_PTR, prev_ptr);
-		it->m_frontend->getData(eDVBFrontend::LINKED_NEXT_PTR, next_ptr);
-		if (prev_ptr != -1)
-		{
-			eDVBRegisteredFrontend *prev_fe = (eDVBRegisteredFrontend *)prev_ptr;
-			prev = fe_slot_id(prev_fe);
-		}
-
-		if (next_ptr != -1)
-		{
-			eDVBRegisteredFrontend *next_fe = (eDVBRegisteredFrontend *)next_ptr;
-			next = fe_slot_id(next_fe);
-		}
-		
-		eFecDebug("	[*][eFBCTunerManager::printLinks] fe_id : %2d, inuse : %d, enabled : %d, fbc : %d, prev : %2d, cur : %2d, next : %2d (simulate)", fe_slot_id(it), it->m_inuse, it->m_frontend->getEnabled(), it->m_frontend->is_FBCTuner(), prev, fe_slot_id(it), next);
-	}
-}
-
