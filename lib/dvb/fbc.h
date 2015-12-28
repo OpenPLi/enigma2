@@ -47,6 +47,8 @@ private:
 	int updateLNBSlotMask(int dest_slot, int src_slot, bool remove);
 	void printLinks(eDVBRegisteredFrontend *fe);
 
+	int fe_slot_id(const eDVBRegisteredFrontend *fe) const;
+
 public:
 	eFBCTunerManager();
 	virtual ~eFBCTunerManager();
