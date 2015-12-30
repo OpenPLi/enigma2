@@ -12,7 +12,7 @@ from Components.Label import Label
 from Components.ProgressBar import ProgressBar
 
 from Tools.StbHardware import getFPVersion
-from enigma import eTimer, eLabel
+from enigma import eTimer, eLabel, eConsoleAppContainer
 
 from Components.HTMLComponent import HTMLComponent
 from Components.GUIComponent import GUIComponent
@@ -284,9 +284,8 @@ class MemoryInfo(Screen):
 			print "[About] getMemoryInfo FAIL:", e
 
 	def clearMemory(self):
-		from os import system
-		system("sync")
-		system("echo 3 > /proc/sys/vm/drop_caches")
+		eConsoleAppContainer().execute("sync")
+		open("/proc/sys/vm/drop_caches", "w").write("3")
 		self.getMemoryInfo()
 
 class MemoryInfoSkinParams(HTMLComponent, GUIComponent):
