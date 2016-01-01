@@ -629,7 +629,6 @@ int eFBCTunerManager::updateLNBSlotMask(int dest_slot, int src_slot, bool remove
 
 	int sec_lnbidx = sec->m_lnbidx;
 
-	int found = 0;
 	for (int idx=0; idx <= sec_lnbidx; ++idx )
 	{
 		eDVBSatelliteLNBParameters &lnb_param = sec->m_lnbs[idx];
@@ -640,8 +639,6 @@ int eFBCTunerManager::updateLNBSlotMask(int dest_slot, int src_slot, bool remove
 				lnb_param.m_slot_mask |= (1 << dest_slot);
 			else
 				lnb_param.m_slot_mask &= ~(1 << dest_slot);
-
-			found = 1;
 		}
 	}
 
