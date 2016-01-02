@@ -72,17 +72,6 @@ if test x"$withtextlcd" != xno ; then
 fi
 AM_CONDITIONAL(HAVE_TEXTLCD, test x"$withtextlcd" != xno)
 
-AC_ARG_WITH(colorlcd,
-	AC_HELP_STRING([--with-colorlcd], [use 96x64 16bpp color display, yes or no]),
-	[[withcolorlcd=$withval]],
-	[[withcolorlcd=no]]
-)
-if test x"$withcolorlcd" != xno ; then
-	AC_DEFINE(HAVE_COLORLCD, 1,[Define when using a 96x64 color display device])
-fi
-AM_CONDITIONAL(HAVE_COLORLCD, test x"$withcolorlcd" != xno)
-
-
 AC_ARG_WITH(oldpvr,
 	AC_HELP_STRING([--with-oldpvr], [use /dev/misc/pvr instead of /dev/dvb/adapterX/dvrX, yes or no]),
 	[[witholdpvr=$withval]],
@@ -184,8 +173,8 @@ fi
 
 AC_ARG_WITH(lcddev,
 	AC_HELP_STRING([--with-lcddev=devicename], [use devicename for lcd framebuffer device, e.g. /dev/fb1 ]),
-	[[with_fbdev=$withval]],
-	[[with_fbdev=no]]
+	[[with_lcddev=$withval]],
+	[[with_lcddev=no]]
 )
 if test x"$with_lcddev" != xno ; then
 	AC_DEFINE_UNQUOTED(LCD_DEV, "$withval", [Defines which device to use for lcd (e.g. /dev/fb1)])
