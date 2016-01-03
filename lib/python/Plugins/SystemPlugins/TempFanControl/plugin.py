@@ -170,4 +170,3 @@ def startMenu(menuid):
 
 def Plugins(**kwargs):
 	return PluginDescriptor(name = _("Temperature and fan control"), description = _("Temperature and fan control"), where = PluginDescriptor.WHERE_MENU, needsRestart = False, fnc = startMenu)
-
