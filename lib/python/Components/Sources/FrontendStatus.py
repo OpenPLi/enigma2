@@ -51,4 +51,3 @@ class FrontendStatus(Source):
 	def destroy(self):
 		self.poll_timer.callback.remove(self.updateFrontendStatus)
 		Source.destroy(self)
-
