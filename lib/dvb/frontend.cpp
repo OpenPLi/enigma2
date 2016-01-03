@@ -487,7 +487,7 @@ eDVBFrontend::eDVBFrontend(const char *devicenodename, int fe, int &ok, bool sim
 
 	m_idleInputpower[0]=m_idleInputpower[1]=0;
 
-	sprintf(filename, "/proc/stb/frontend/%d/fbc_id", m_slotid);
+	snprintf(filename, sizeof(filename), "/proc/stb/frontend/%d/fbc_id", m_slotid);
 
 	if (access(filename, F_OK) == 0)
 		m_fbc = true;
