@@ -2,14 +2,14 @@ from Screen import Screen
 from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import NumberActionMap
 from Components.config import config, getConfigListEntry, ConfigNothing, NoSave, ConfigPIN, configfile
-
+from Components.ServiceList import refreshServiceList
 from Components.Sources.StaticText import StaticText
 from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
 from Screens.InputBox import PinInput
 from Screens.ChannelSelection import service_types_tv
 from Tools.BoundFunction import boundFunction
-from enigma import eServiceCenter, eTimer, eServiceReference
+from enigma import eServiceCenter, eTimer, eServiceReference, eDVBDB
 from operator import itemgetter
 
 class ProtectedScreen:
@@ -40,6 +40,7 @@ class ParentalControlSetup(Screen, ConfigListScreen, ProtectedScreen):
 
 		self.list = []
 		ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.changedEntry)
+		self.hideBlacklist_prev_value = config.ParentalControl.hideBlacklist.value
 		self.createSetup(initial=True)
 
 		self["actions"] = NumberActionMap(["SetupActions", "MenuActions"],
@@ -63,6 +64,8 @@ class ParentalControlSetup(Screen, ConfigListScreen, ProtectedScreen):
 
 	def createSetup(self, initial=False):
 		self.reloadLists = None
+		self.unhideAllServices = None
+		show_unhide = True
 		self.list = []
 		if config.ParentalControl.servicepin[0].value or config.ParentalControl.servicepinactive.value or config.ParentalControl.setuppinactive.value or not initial:
 			self.changePin = getConfigListEntry(_("Change PIN"), NoSave(ConfigNothing()))
@@ -72,9 +75,14 @@ class ParentalControlSetup(Screen, ConfigListScreen, ProtectedScreen):
 				self.list.append(getConfigListEntry(_("Remember service PIN"), config.ParentalControl.storeservicepin))
 				if config.ParentalControl.storeservicepin.value != "never":
 					self.list.append(getConfigListEntry(_("Hide parentel locked services"), config.ParentalControl.hideBlacklist))
+					if config.ParentalControl.hideBlacklist.value:
+						show_unhide = False
 				self.list.append(getConfigListEntry(_("Protect on epg age"), config.ParentalControl.age))
 				self.reloadLists = getConfigListEntry(_("Reload blacklists"), NoSave(ConfigNothing()))
 				self.list.append(self.reloadLists)
+			if show_unhide:
+				self.unhideAllServices = getConfigListEntry(_("Unhide all services"), NoSave(ConfigNothing()))
+				self.list.append(self.unhideAllServices)
 			self.list.append(getConfigListEntry(_("Protect Screens"), config.ParentalControl.setuppinactive))
 			if config.ParentalControl.setuppinactive.value:
 				self.list.append(getConfigListEntry(_("Protect main menu"), config.ParentalControl.config_sections.main_menu))
@@ -102,9 +110,23 @@ class ParentalControlSetup(Screen, ConfigListScreen, ProtectedScreen):
 			from Components.ParentalControl import parentalControl
 			parentalControl.open()
 			self.session.open(MessageBox, _("Lists reloaded!"), MessageBox.TYPE_INFO, timeout=3)
+		elif self["config"].l.getCurrentSelection() == self.unhideAllServices:
+			self.session.openWithCallback(self.unhideAllServicesCallback, MessageBox, _("Really remove flag hidden for all services?"))
 		else:
 			ConfigListScreen.keyRight(self)
 			self.createSetup()
+
+	def unhideAllServicesCallback(self, answer):
+		if answer:
+			servicepinactive_prev_value = config.ParentalControl.servicepinactive.value
+			hideBlacklist_prev_value = config.ParentalControl.hideBlacklist.value
+			config.ParentalControl.servicepinactive.value = True
+			config.ParentalControl.hideBlacklist.value = True
+			eDVBDB.getInstance().reloadServicelist()
+			eDVBDB.getInstance().reloadBouquets()
+			refreshServiceList()
+			config.ParentalControl.servicepinactive.value = servicepinactive_prev_value
+			config.ParentalControl.hideBlacklist.value = hideBlacklist_prev_value
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -121,21 +143,31 @@ class ParentalControlSetup(Screen, ConfigListScreen, ProtectedScreen):
 		if self["config"].isChanged():
 			self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Really close without saving settings?"))
 		else:
+			self.sethideBlacklist()
 			self.close()
 
 	def cancelConfirm(self, answer):
 		if answer:
 			for x in self["config"].list:
 				x[1].cancel()
+			self.sethideBlacklist()
 			self.close()
 
+	def sethideBlacklist(self):
+		from Components.ParentalControl import parentalControl
+		parentalControl.hideBlacklist()
+
 	def keySave(self):
+		if config.ParentalControl.hideBlacklist.value and (not config.ParentalControl.servicepinactive.value or config.ParentalControl.storeservicepin.value == "never"):
+			config.ParentalControl.hideBlacklist.value = False
 		if self["config"].isChanged():
 			for x in self["config"].list:
 				x[1].save()
 			configfile.save()
-			from Components.ParentalControl import parentalControl
-			parentalControl.hideBlacklist()
+			if self.hideBlacklist_prev_value and self.hideBlacklist_prev_value != config.ParentalControl.hideBlacklist.value:
+				from Components.ParentalControl import parentalControl
+				parentalControl.unhideBlacklist()
+		self.sethideBlacklist()
 		self.close(self.recursive)
 
 	def closeRecursive(self):
