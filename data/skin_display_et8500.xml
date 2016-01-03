@@ -23,8 +23,9 @@
 	</fonts>
 
 <!-- main-->
-	<screen name="InfoBarSummary" position="0,0" size="720,576"> 
-		<widget source="session.CurrentService" render="Label" position="15,21" size="675,70" foregroundColor="#e5b243" font="FdLcD; 50" halign="center" zPosition="14">
+	<screen name="InfoBarSummary" position="0,0" size="720,576">
+		<widget source="session.CurrentService" render="ChannelNumber" position="20,31" size="120,45" foregroundColor="#99ff99" font="FdLcD; 40" halign="left" zPosition="14" />
+		<widget source="session.CurrentService" render="Label" position="0,21" size="720,55" foregroundColor="#e5b243" font="FdLcD; 50" halign="center" zPosition="13">
 			<convert type="ServiceName">Name</convert>
 		</widget>
 		<widget source="session.Event_Now" render="Label" position="48,189" foregroundColor="#dedede" size="675,192" font="FdLcDLight; 45" halign="left" valign="center">
@@ -75,8 +76,11 @@
 		</widget>
 	</screen>
 <!-- channelselection-->
-	<screen name="ChannelSelection_summary" position="0,0" size="720,576"> 
-		<widget source="parent.ServiceEvent" render="Label" position="17,21" size="675,70" foregroundColor="#e5b243" font="FdLcD; 50" halign="center">
+	<screen name="ChannelSelection_summary" position="0,0" size="720,576">
+		<widget source="parent.ServiceEvent" render="Label" position="20,31" size="120,45" foregroundColor="#99ff99" font="FdLcD; 40" halign="left" zPosition="14" >
+			<convert type="ServiceName">Number</convert>
+		</widget>
+		<widget source="parent.ServiceEvent" render="Label" position="0,21" size="720,55" foregroundColor="#e5b243" font="FdLcD; 50" halign="center" zPosition="13" >
 			<convert type="ServiceName">Name</convert>
 		</widget>
 		<widget source="parent.ServiceEvent" render="Label" position="18,189" foregroundColor="#dedede" size="675,192" font="FdLcDLight; 45" halign="center" valign="center">
@@ -109,8 +113,7 @@
 		<widget source="global.CurrentTime" render="Label" position="500,490" size="182,52" halign="right" font="FdLcD;50">
 			<convert type="ClockToText">Default</convert>
 		</widget>
-		<widget source="parent.Service" render="ChannelNumber" position="17,481" size="169,61" zPosition="8" font="FdLcD;40" halign="center" valign="top" transparent="1" />
-		<widget source="parent.Service" render="Picon" zPosition="13" position="224,394" size="242,142" transparent="1" alphatest="blend">	
+		<widget source="parent.Service" render="Picon" zPosition="13" position="224,394" size="242,142" transparent="1" alphatest="blend">
 			<convert type="ServiceName">Reference</convert>
 		</widget>
 	</screen>
