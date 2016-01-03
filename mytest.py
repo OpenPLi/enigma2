@@ -20,17 +20,18 @@ from Screens.SimpleSummary import SimpleSummary
 
 from sys import stdout, exc_info
 
-profile("Bouquets")
 from Components.config import config, configfile, ConfigText, ConfigYesNo, ConfigInteger, NoSave
+
+profile("ParentalControl")
+import Components.ParentalControl
+Components.ParentalControl.InitParentalControl()
+profile("Bouquets")
 config.misc.load_unlinked_userbouquets = ConfigYesNo(default=True)
 def setLoadUnlinkedUserbouquets(configElement):
 	enigma.eDVBDB.getInstance().setLoadUnlinkedUserbouquets(configElement.value)
 config.misc.load_unlinked_userbouquets.addNotifier(setLoadUnlinkedUserbouquets)
 enigma.eDVBDB.getInstance().reloadBouquets()
 
-profile("ParentalControl")
-import Components.ParentalControl
-Components.ParentalControl.InitParentalControl()
 
 profile("LOAD:Navigation")
 from Navigation import Navigation

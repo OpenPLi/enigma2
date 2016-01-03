@@ -356,6 +356,8 @@ void eDVBDB::reloadServicelist()
 
 void eDVBDB::parseServiceData(ePtr<eDVBService> s, std::string str)
 {
+	bool servicepinactive = eConfigManager::getConfigBoolValue("config.ParentalControl.servicepinactive", false);
+	bool hideblacklist = eConfigManager::getConfigBoolValue("config.ParentalControl.hideBlacklist", false);
 	while ((!str.empty()) && str[1]==':') // new: p:, f:, c:%02d...
 	{
 		size_t c=str.find(',');
@@ -376,7 +378,8 @@ void eDVBDB::parseServiceData(ePtr<eDVBService> s, std::string str)
 		else if (p == 'f')
 		{
 			sscanf(v.c_str(), "%x", &s->m_flags);
-			s->m_flags &= ~eDVBService::dxDontshow;
+			if (servicepinactive && hideblacklist)
+				s->m_flags &= ~eDVBService::dxDontshow;
 		} else if (p == 'c')
 		{
 			int cid, val;
