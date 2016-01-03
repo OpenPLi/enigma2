@@ -8,10 +8,9 @@
 #include <lib/dvb/idvb.h>
 #include <lib/dvb/dvb.h>
 #include <lib/dvb/sec.h>
+#include <lib/dvb/fbc.h>
 #include <lib/dvb/specs.h>
 #include "filepush.h"
-
-#include <lib/dvb/fbc.h>
 
 #include <errno.h>
 #include <sys/types.h>
@@ -787,6 +786,7 @@ RESULT eDVBResourceManager::allocateFrontend(ePtr<eDVBAllocatedFrontend> &fe, eP
 	{
 		int c = 0;
 		fbc_fe = NULL;
+
 		if (!check_fbc_linked && i->m_frontend->is_FBCTuner() && fbcmng && fbcmng->canLink(*i))
 		{
 			check_fbc_linked = 1;
