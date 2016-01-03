@@ -791,8 +791,6 @@ RESULT eDVBResourceManager::allocateFrontend(ePtr<eDVBAllocatedFrontend> &fe, eP
 		{
 			check_fbc_linked = 1;
 			c = fbcmng->isCompatibleWith(feparm, *i, fbc_fe, simulate);
-
-//			eDebug("[eDVBResourceManager::allocateFrontend] fbcmng->isCompatibleWith slotid : %p (%d), fbc_fe : %p (%d), score : %d", (eDVBRegisteredFrontend *)*i,  i->m_frontend->getSlotID(), fbc_fe, fbc_fe?fbc_fe->m_frontend->getSlotID():-1, c);			
 		}
 		else
 			c = i->m_frontend->isCompatibleWith(feparm);
@@ -802,7 +800,6 @@ RESULT eDVBResourceManager::allocateFrontend(ePtr<eDVBAllocatedFrontend> &fe, eP
 
 		if (!i->m_inuse)
 		{
-//			eDebug("[eDVBResourceManager] Slot %d, score %d", i->m_frontend->getSlotID(), c);
 			if (c > bestval)
 			{
 				bestval = c;
@@ -810,8 +807,6 @@ RESULT eDVBResourceManager::allocateFrontend(ePtr<eDVBAllocatedFrontend> &fe, eP
 				best_fbc_fe = fbc_fe;
 			}
 		}
-//		else
-//			eDebug("[eDVBResourceManager] Slot %d, score %d... but BUSY!!!!!!!!!!!", i->m_frontend->getSlotID(), c);
 
 		eDVBRegisteredFrontend *tmp = *i;
 	}
