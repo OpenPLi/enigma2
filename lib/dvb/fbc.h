@@ -22,7 +22,7 @@ private:
 	DECLARE_REF(eFBCTunerManager);
 	ePtr<eDVBResourceManager> m_res_mgr;
 	int m_fbc_tuner_num;
-	static bool isDestroyed;
+	static eFBCTunerManager* instance;
 	static const int FBC_TUNER_SET = 8;
 
 	int getFBCTunerNum();
@@ -73,18 +73,7 @@ public:
 	void addLink(eDVBRegisteredFrontend *link_fe, eDVBRegisteredFrontend *top_fe, bool simulate);
 	void unset(eDVBRegisteredFrontend *fe);
 	bool canAllocateLink(eDVBRegisteredFrontend *fe, bool simulate);
-
-	static eFBCTunerManager* getInstance()
-	{
-		if (isDestroyed == true)
-		{
-			eDebug("eFBCTunerManager is already destroyed!");
-			return 0;
-		}
-		static eFBCTunerManager instance;
-		return &instance;
-	}
-
+	static eFBCTunerManager* getInstance() { return instance; }
 	int getLinkedSlotID(int feid);
 };
 

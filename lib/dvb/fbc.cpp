@@ -8,7 +8,7 @@
 
 DEFINE_REF(eFBCTunerManager);
 
-bool eFBCTunerManager::isDestroyed = false;
+eFBCTunerManager* eFBCTunerManager::instance = (eFBCTunerManager*)0;
 
 eFBCTunerManager::eFBCTunerManager()
 {
@@ -19,11 +19,13 @@ eFBCTunerManager::eFBCTunerManager()
 	/* number of fbc tuners in one set */
 	m_fbc_tuner_num = getFBCTunerNum();
 	procInit();
+
+	instance = this;
 }
 
 eFBCTunerManager::~eFBCTunerManager()
 {
-	isDestroyed = true;
+	instance = (eFBCTunerManager*)0;
 }
 
 int eFBCTunerManager::fe_slot_id(const eDVBRegisteredFrontend *fe) const
