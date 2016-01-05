@@ -1,5 +1,4 @@
 from config import config, ConfigSlider, ConfigSubsection, ConfigYesNo, ConfigText, ConfigInteger
-from Tools.Directories import pathExists
 from SystemInfo import SystemInfo
 from fcntl import ioctl
 import os
@@ -197,15 +196,10 @@ config.plugins.remotecontroltype.rctype = ConfigInteger(default = 0)
 
 class RcTypeControl():
 	def __init__(self):
-		if SystemInfo["RcTypeChangable"] and pathExists('/proc/stb/info/boxtype'):
+		if SystemInfo["RcTypeChangable"] and os.path.exists('/proc/stb/info/boxtype'):
 			self.isSupported = True
-
-			fd = open('/proc/stb/info/boxtype', 'r')
-			self.boxType = fd.read()
-			fd.close()
-
-			if config.plugins.remotecontroltype.rctype.value != 0:
-				self.writeRcType(config.plugins.remotecontroltype.rctype.value)
+			self.boxType = open('/proc/stb/info/boxtype', 'r').read().strip()
+			self.writeRcType(config.plugins.remotecontroltype.rctype.value)
 		else:
 			self.isSupported = False
 
@@ -216,8 +210,6 @@ class RcTypeControl():
 		return self.boxType
 
 	def writeRcType(self, rctype):
-		fd = open('/proc/stb/ir/rc/type', 'w')
-		fd.write('%d' % (rctype))
-		fd.close()
+		open('/proc/stb/ir/rc/type', 'w').write(rctype and '%d' % rctype or '0')
 
 iRcTypeControl = RcTypeControl()
