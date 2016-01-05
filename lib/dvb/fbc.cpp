@@ -106,7 +106,7 @@ int eFBCTunerManager::getFBCTunerNum()
 	return (fbc_tuner_num / (FBC_TUNER_SET / 2));
 }
 
-int eFBCTunerManager::setProcFBCID(int fe_id, int fbc_id)
+void eFBCTunerManager::setProcFBCID(int fe_id, int fbc_id)
 {
 	char tmp[64];
 	snprintf(tmp, sizeof(tmp), "/proc/stb/frontend/%d/fbc_id", fe_id);
@@ -114,7 +114,7 @@ int eFBCTunerManager::setProcFBCID(int fe_id, int fbc_id)
 	if(isLinkedByIndex(fe_id))
 		fbc_id += 0x10; // 0x10 mask: linked, 0x0f (?) mask: fbc_id // FIXME: shouldn't this be |=?
 
-	return CFile::writeIntHex(tmp, fbc_id);
+	CFile::writeIntHex(tmp, fbc_id);
 }
 
 bool eFBCTunerManager::isRootFeSlot(int fe_slot_id)
@@ -142,12 +142,12 @@ int eFBCTunerManager::getFBCID(int top_fe_id)
 	return (((2 * top_fe_id) / FBC_TUNER_SET) + (top_fe_id % FBC_TUNER_SET)); /* (0,1,8,9,16,17...) -> (0,1,2,3,4,5...) */
 }
 
-int eFBCTunerManager::setDefaultFBCID(eDVBRegisteredFrontend *fe)
+void eFBCTunerManager::setDefaultFBCID(eDVBRegisteredFrontend *fe)
 {
 	if (!isRootFe(fe))
-		return -1;
+		return;
 
-	return setProcFBCID(fe_slot_id(fe), getFBCID(fe_slot_id(fe)));
+	setProcFBCID(fe_slot_id(fe), getFBCID(fe_slot_id(fe)));
 }
 
 void eFBCTunerManager::updateFBCID(eDVBRegisteredFrontend *next_fe, eDVBRegisteredFrontend *prev_fe)
