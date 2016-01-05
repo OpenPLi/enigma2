@@ -53,12 +53,16 @@ def getImageTypeString():
 def getCPUInfoString():
 	try:
 		cpu_count = 0
+		cpu_speed = _("-")
 		for line in open("/proc/cpuinfo").readlines():
 			line = [x.strip() for x in line.strip().split(":")]
 			if line[0] == "system type":
 				processor = line[1].split()[0]
-			if line[0] == "cpu MHz":
+			elif line[0] == "cpu MHz":
 				cpu_speed = "%1.0f" % float(line[1])
+				cpu_count += 1
+			elif line[0] == "model name":
+				processor = line[1].split()[0]
 				cpu_count += 1
 		if os.path.isfile('/proc/stb/fp/temp_sensor_avs'):
 			temperature = open("/proc/stb/fp/temp_sensor_avs").readline().replace('\n','')
