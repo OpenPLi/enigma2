@@ -58,7 +58,7 @@ private:
 	void frontend_set_linkptr(const eDVBRegisteredFrontend *fe, link_ptr_t link_type, long data) const;
 
 public:
-	eFBCTunerManager();
+	eFBCTunerManager(ePtr<eDVBResourceManager> res_mgr);
 	virtual ~eFBCTunerManager();
 	void setProcFBCID(int fe_id, int fbc_id);
 	void setDefaultFBCID(eDVBRegisteredFrontend *fe);

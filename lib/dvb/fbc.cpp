@@ -11,17 +11,14 @@ DEFINE_REF(eFBCTunerManager);
 
 eFBCTunerManager* eFBCTunerManager::instance = (eFBCTunerManager*)0;
 
-eFBCTunerManager::eFBCTunerManager()
+eFBCTunerManager::eFBCTunerManager(ePtr<eDVBResourceManager> res_mgr)
+	:m_res_mgr(res_mgr)
 {
-	ePtr<eDVBResourceManager> res_mgr;
-	eDVBResourceManager::getInstance(res_mgr);
-	m_res_mgr = res_mgr;
+	instance = this;
 
 	/* number of fbc tuners in one set */
 	m_fbc_tuner_num = getFBCTunerNum();
 	procInit();
-
-	instance = this;
 }
 
 eFBCTunerManager::~eFBCTunerManager()

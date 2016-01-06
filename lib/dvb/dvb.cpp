@@ -106,6 +106,8 @@ eDVBResourceManager::eDVBResourceManager()
 	eDebug("[eDVBResourceManager] found %zd adapter, %zd frontends(%zd sim) and %zd demux",
 		m_adapter.size(), m_frontend.size(), m_simulate_frontend.size(), m_demux.size());
 
+	m_fbcmng = new eFBCTunerManager(instance);
+
 	CONNECT(m_releaseCachedChannelTimer->timeout, eDVBResourceManager::releaseCachedChannel);
 }
 
@@ -771,12 +773,10 @@ RESULT eDVBResourceManager::allocateFrontend(ePtr<eDVBAllocatedFrontend> &fe, eP
 {
 	eSmartPtrList<eDVBRegisteredFrontend> &frontends = simulate ? m_simulate_frontend : m_frontend;
 	eDVBRegisteredFrontend *best, *fbc_fe, *best_fbc_fe;
-	eFBCTunerManager* fbcmng;
 	int bestval, foundone, check_fbc_linked, c;
 
 	fbc_fe  = NULL;
 	best_fbc_fe = NULL;
-	fbcmng = eFBCTunerManager::getInstance();
 	best = NULL;
 	bestval = 0;
 	foundone = 0;
@@ -786,10 +786,10 @@ RESULT eDVBResourceManager::allocateFrontend(ePtr<eDVBAllocatedFrontend> &fe, eP
 	{
 		fbc_fe = NULL;
 
-		if (!check_fbc_linked && i->m_frontend->is_FBCTuner() && fbcmng && fbcmng->canLink(*i))
+		if (!check_fbc_linked && i->m_frontend->is_FBCTuner() && m_fbcmng->canLink(*i))
 		{
 			check_fbc_linked = 1;
-			c = fbcmng->isCompatibleWith(feparm, *i, fbc_fe, simulate);
+			c = m_fbcmng->isCompatibleWith(feparm, *i, fbc_fe, simulate);
 		}
 		else
 			c = i->m_frontend->isCompatibleWith(feparm);
@@ -812,8 +812,8 @@ RESULT eDVBResourceManager::allocateFrontend(ePtr<eDVBAllocatedFrontend> &fe, eP
 
 	if (best)
 	{
-		if (fbcmng && best_fbc_fe)
-			fbcmng->addLink(best, best_fbc_fe, simulate);
+		if (best_fbc_fe)
+			m_fbcmng->addLink(best, best_fbc_fe, simulate);
 
 		fe = new eDVBAllocatedFrontend(best);
 		return 0;
@@ -1188,20 +1188,18 @@ int eDVBResourceManager::canAllocateFrontend(ePtr<iDVBFrontendParameters> &fepar
 	eSmartPtrList<eDVBRegisteredFrontend> &frontends = simulate ? m_simulate_frontend : m_frontend;
 	ePtr<eDVBRegisteredFrontend> best;
 	int bestval, check_fbc_link, c;
-	eFBCTunerManager *fbcmng;
 
 	bestval = 0;
 	check_fbc_link = 0;
-	fbcmng = eFBCTunerManager::getInstance();
 
 	for (eSmartPtrList<eDVBRegisteredFrontend>::iterator i(frontends.begin()); i != frontends.end(); ++i)
 	{
 		if (!i->m_inuse)
 		{
-			if(fbcmng && i->m_frontend->is_FBCTuner() && fbcmng->canLink(*i) && !check_fbc_link)
+			if(i->m_frontend->is_FBCTuner() && m_fbcmng->canLink(*i) && !check_fbc_link)
 			{
 				check_fbc_link = 1;
-				c = fbcmng->isCompatibleWith(feparm, *i, simulate);
+				c = m_fbcmng->isCompatibleWith(feparm, *i, simulate);
 			}
 			else
 				c = i->m_frontend->isCompatibleWith(feparm);
