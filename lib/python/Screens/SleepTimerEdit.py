@@ -7,7 +7,7 @@ from Components.Label import Label
 from Components.Sources.StaticText import StaticText
 from Components.config import config, getConfigListEntry
 from enigma import eEPGCache
-from time import time, localtime, mktime 
+from time import time, localtime, mktime
 
 class SleepTimerEdit(ConfigListScreen, Screen):
 	def __init__(self, session):

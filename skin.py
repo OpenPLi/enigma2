@@ -94,12 +94,8 @@ if not name or not res:
 addSkin('skin_box.xml')
 # add optional discrete second infobar
 addSkin('skin_second_infobar.xml')
-# Only one of these is present, compliments of AM_CONDITIONAL
 display_skin_id = 1
 addSkin('skin_display.xml')
-if addSkin('skin_display96.xml'):
-	# Color OLED
-	display_skin_id = 2
 addSkin('skin_text.xml')
 
 addSkin('skin_subtitles.xml')

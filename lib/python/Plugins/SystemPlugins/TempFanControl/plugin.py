@@ -12,7 +12,7 @@ from Components.FanControl import fancontrol
 
 class TempFanControl(Screen, ConfigListScreen):
 	skin = """
-		<screen position="center,center" size="570,420" title="Fan Control" >
+		<screen position="center,center" size="570,420" title="Temperature and fan control" >
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
@@ -94,6 +94,8 @@ class TempFanControl(Screen, ConfigListScreen):
 	def __init__(self, session, args = None):
 		Screen.__init__(self, session)
 
+		self.setTitle(_("Temperature and fan control"))
+
 		templist = sensors.getSensorsList(sensors.TYPE_TEMPERATURE)
 		tempcount = len(templist)
 		fanlist = sensors.getSensorsList(sensors.TYPE_FAN_RPM)
@@ -168,4 +170,3 @@ def startMenu(menuid):
 
 def Plugins(**kwargs):
 	return PluginDescriptor(name = _("Temperature and fan control"), description = _("Temperature and fan control"), where = PluginDescriptor.WHERE_MENU, needsRestart = False, fnc = startMenu)
-

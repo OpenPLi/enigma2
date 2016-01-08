@@ -62,7 +62,7 @@ fbClass::fbClass(const char *fb)
 
 	available=fix.smem_len;
 	m_phys_mem = fix.smem_start;
-	eDebug("[fb] %dk video mem", available/1024);
+	eDebug("[fb] %s: %dk video mem", fb, available/1024);
 	lfb=(unsigned char*)mmap(0, available, PROT_WRITE|PROT_READ, MAP_SHARED, fbFd, 0);
 	if (!lfb)
 	{
@@ -80,7 +80,7 @@ nolfb:
 		::close(fbFd);
 		fbFd = -1;
 	}
-	eDebug("[fb] framebuffer not available");
+	eDebug("[fb] framebuffer %s not available", fb);
 	return;
 }
 
@@ -151,7 +151,7 @@ int fbClass::SetMode(int nxRes, int nyRes, int nbpp)
 
 	ioctl(fbFd, FBIOGET_VSCREENINFO, &screeninfo);
 
-	if ((screeninfo.xres!=nxRes) && (screeninfo.yres!=nyRes) && (screeninfo.bits_per_pixel!=nbpp))
+	if ((screeninfo.xres!=nxRes) || (screeninfo.yres!=nyRes) || (screeninfo.bits_per_pixel!=nbpp))
 	{
 		eDebug("[fb] SetMode failed: wanted: %dx%dx%d, got %dx%dx%d",
 			nxRes, nyRes, nbpp,

@@ -1,6 +1,6 @@
 from Components.config import config, ConfigSubsection, ConfigSlider, ConfigSelection, ConfigNothing, NoSave
 from Tools.CList import CList
-from os import path as os_path
+import os
 # The "VideoEnhancement" is the interface to /proc/stb/vmpeg/0.
 
 class VideoEnhancement:
@@ -14,7 +14,7 @@ class VideoEnhancement:
 		config.pep = ConfigSubsection()
 		config.pep.configsteps = NoSave(ConfigSelection(choices=[1, 5, 10, 25], default = 1))
 
-		if os_path.exists("/proc/stb/vmpeg/0/pep_contrast"):
+		if os.path.exists("/proc/stb/vmpeg/0/pep_contrast"):
 			def setContrast(config):
 				myval = int(config.value*256)
 				try:
@@ -31,7 +31,7 @@ class VideoEnhancement:
 		else:
 			config.pep.contrast = NoSave(ConfigNothing())
 
-		if os_path.exists("/proc/stb/vmpeg/0/pep_saturation"):
+		if os.path.exists("/proc/stb/vmpeg/0/pep_saturation"):
 			def setSaturation(config):
 				myval = int(config.value*256)
 				try:
@@ -48,7 +48,7 @@ class VideoEnhancement:
 		else:
 			config.pep.saturation = NoSave(ConfigNothing())
 
-		if os_path.exists("/proc/stb/vmpeg/0/pep_hue"):
+		if os.path.exists("/proc/stb/vmpeg/0/pep_hue"):
 			def setHue(config):
 				myval = int(config.value*256)
 				try:
@@ -65,7 +65,7 @@ class VideoEnhancement:
 		else:
 			config.pep.hue = NoSave(ConfigNothing())
 
-		if os_path.exists("/proc/stb/vmpeg/0/pep_brightness"):
+		if os.path.exists("/proc/stb/vmpeg/0/pep_brightness"):
 			def setBrightness(config):
 				myval = int(config.value*256)
 				try:
@@ -82,7 +82,7 @@ class VideoEnhancement:
 		else:
 			config.pep.brightness = NoSave(ConfigNothing())
 
-		if os_path.exists("/proc/stb/vmpeg/0/pep_block_noise_reduction"):
+		if os.path.exists("/proc/stb/vmpeg/0/pep_block_noise_reduction"):
 			def setBlock_noise_reduction(config):
 				myval = int(config.value)
 				try:
@@ -99,7 +99,7 @@ class VideoEnhancement:
 		else:
 			config.pep.block_noise_reduction = NoSave(ConfigNothing())
 
-		if os_path.exists("/proc/stb/vmpeg/0/pep_mosquito_noise_reduction"):
+		if os.path.exists("/proc/stb/vmpeg/0/pep_mosquito_noise_reduction"):
 			def setMosquito_noise_reduction(config):
 				myval = int(config.value)
 				try:
@@ -116,7 +116,7 @@ class VideoEnhancement:
 		else:
 			config.pep.mosquito_noise_reduction = NoSave(ConfigNothing())
 
-		if os_path.exists("/proc/stb/vmpeg/0/pep_digital_contour_removal"):
+		if os.path.exists("/proc/stb/vmpeg/0/pep_digital_contour_removal"):
 			def setDigital_contour_removal(config):
 				myval = int(config.value)
 				try:
@@ -133,7 +133,7 @@ class VideoEnhancement:
 		else:
 			config.pep.digital_contour_removal = NoSave(ConfigNothing())
 
-		if os_path.exists("/proc/stb/vmpeg/0/pep_split"):
+		if os.path.exists("/proc/stb/vmpeg/0/pep_split"):
 			def setSplitMode(config):
 				try:
 					print "--> setting splitmode to:",str(config.value)
@@ -153,7 +153,7 @@ class VideoEnhancement:
 		else:
 			config.pep.split = NoSave(ConfigNothing())
 
-		if os_path.exists("/proc/stb/vmpeg/0/pep_sharpness"):
+		if os.path.exists("/proc/stb/vmpeg/0/pep_sharpness"):
 			def setSharpness(config):
 				myval = int(config.value*256)
 				try:
@@ -170,7 +170,7 @@ class VideoEnhancement:
 		else:
 			config.pep.sharpness = NoSave(ConfigNothing())
 
-		if os_path.exists("/proc/stb/vmpeg/0/pep_auto_flesh"):
+		if os.path.exists("/proc/stb/vmpeg/0/pep_auto_flesh"):
 			def setAutoflesh(config):
 				myval = int(config.value)
 				try:
@@ -187,7 +187,7 @@ class VideoEnhancement:
 		else:
 			config.pep.auto_flesh = NoSave(ConfigNothing())
 
-		if os_path.exists("/proc/stb/vmpeg/0/pep_green_boost"):
+		if os.path.exists("/proc/stb/vmpeg/0/pep_green_boost"):
 			def setGreenboost(config):
 				myval = int(config.value)
 				try:
@@ -204,7 +204,7 @@ class VideoEnhancement:
 		else:
 			config.pep.green_boost = NoSave(ConfigNothing())
 
-		if os_path.exists("/proc/stb/vmpeg/0/pep_blue_boost"):
+		if os.path.exists("/proc/stb/vmpeg/0/pep_blue_boost"):
 			def setBlueboost(config):
 				myval = int(config.value)
 				try:
@@ -221,7 +221,7 @@ class VideoEnhancement:
 		else:
 			config.pep.blue_boost = NoSave(ConfigNothing())
 
-		if os_path.exists("/proc/stb/vmpeg/0/pep_dynamic_contrast"):
+		if os.path.exists("/proc/stb/vmpeg/0/pep_dynamic_contrast"):
 			def setDynamic_contrast(config):
 				myval = int(config.value)
 				try:
@@ -241,7 +241,7 @@ class VideoEnhancement:
 		try:
 			x = config.av.scaler_sharpness.value
 		except KeyError:
-			if os_path.exists("/proc/stb/vmpeg/0/pep_scaler_sharpness"):
+			if os.path.exists("/proc/stb/vmpeg/0/pep_scaler_sharpness"):
 				def setScaler_sharpness(config):
 					myval = int(config.value)
 					try:

@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from os import path as os_path, walk as os_walk, unlink as os_unlink
-
 from Plugins.Plugin import PluginDescriptor
 
 from Screens.Screen import Screen
@@ -16,6 +14,8 @@ from Components.ActionMap import ActionMap
 
 from enigma import eFastScan, eDVBFrontendParametersSatellite, eTimer
 
+import os
+
 config.misc.fastscan = ConfigSubsection()
 config.misc.fastscan.last_configuration = ConfigText(default = "()")
 config.misc.fastscan.auto = ConfigYesNo(default = True)
@@ -30,6 +30,7 @@ class FastScanStatus(Screen):
 
 	def __init__(self, session, scanTuner=0, transponderParameters=None, scanPid=900, keepNumbers=False, keepSettings=False, providerName='Favorites'):
 		Screen.__init__(self, session)
+		self.setTitle(_("Fast Scan"))
 		self.scanPid = scanPid
 		self.scanTuner = scanTuner
 		self.transponderParameters = transponderParameters
@@ -72,17 +73,17 @@ class FastScanStatus(Screen):
 		self.scan.scanProgress.get().append(self.scanProgress)
 		fstfile = None
 		fntfile = None
-		for root, dirs, files in os_walk('/tmp/'):
+		for root, dirs, files in os.walk('/tmp/'):
 			for f in files:
 				if f.endswith('.bin'):
 					if '_FST' in f:
-						fstfile = os_path.join(root, f)
+						fstfile = os.path.join(root, f)
 					elif '_FNT' in f:
-						fntfile = os_path.join(root, f)
+						fntfile = os.path.join(root, f)
 		if fstfile and fntfile:
 			self.scan.startFile(fntfile, fstfile)
-			os_unlink(fstfile)
-			os_unlink(fntfile)
+			os.unlink(fstfile)
+			os.unlink(fntfile)
 		else:
 			self.scan.start(self.scanTuner)
 
@@ -146,6 +147,8 @@ class FastScanScreen(ConfigListScreen, Screen):
 
 	def __init__(self, session, nimList):
 		Screen.__init__(self, session)
+
+		self.setTitle(_("Fast Scan"))
 
 		self["actions"] = ActionMap(["SetupActions", "MenuActions"],
 		{

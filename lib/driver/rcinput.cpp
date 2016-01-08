@@ -169,7 +169,8 @@ public:
 		{
 			char filename[32];
 			sprintf(filename, "/dev/input/event%d", i);
-			if (::access(filename, R_OK) < 0) break;
+			if (::access(filename, R_OK) < 0)
+				break;
 			add(filename);
 			++i;
 		}
@@ -187,6 +188,7 @@ public:
 
 	void add(const char* filename)
 	{
+		eDebug("[eInputDeviceInit] adding device %s", filename);
 		eRCInputEventDriver *p = new eRCInputEventDriver(filename);
 		items.push_back(new element(filename, p, new eRCDeviceInputDev(p, consoleFd)));
 	}
