@@ -83,9 +83,16 @@ class SleepTimerEdit(ConfigListScreen, Screen):
 				self.list.append(getConfigListEntry(_("End time to ignore shutdown in standby"),
 					config.usage.standby_to_shutdown_timer_blocktime_end,
 					_("Specify the end time to ignore the shutdown timer when the receiver is in standby mode")))
-		self.list.append(getConfigListEntry(_("Wakeup timer"),
-			config.usage.wakeup_menu,
-			_("Press OK and configure the days and times wakeup receiver from deep standby mode.")))
+		self.list.append(getConfigListEntry(_("Enable wakeup timer"),
+			config.usage.wakeup_enabled,
+			_("Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'.")))
+		if config.usage.wakeup_enabled.value:
+			for i in range(7):
+				self.list.append(getConfigListEntry([_("Monday"), _("Tuesday"), _("Wednesday"), _("Thursday"), _("Friday"), _("Saturday"), _("Sunday")][i],
+					config.usage.wakeup_day[i]))
+				if config.usage.wakeup_day[i].value:
+					self.list.append(getConfigListEntry(_("Wakeup time"),
+						config.usage.wakeup_time[i]))
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
@@ -151,81 +158,6 @@ class SleepTimerEdit(ConfigListScreen, Screen):
 					end = start + duration
 					remaining = end - now
 		return remaining + config.recording.margin_after.value * 60
-
-weekdays = [
-	_("Monday"),
-	_("Tuesday"),
-	_("Wednesday"),
-	_("Thursday"),
-	_("Friday"),
-	_("Saturday"),
-	_("Sunday"),
-	]
-
-class WakeupTimerEdit(ConfigListScreen, Screen):
-	def __init__(self, session):
-		Screen.__init__(self, session)
-		self.skinName = ["WakeupTimerSetup", "Setup"]
-		self.setup_title = _("WakeupTimer Configuration")
-
-		self["key_red"] = StaticText(_("Cancel"))
-		self["key_green"] = StaticText(_("Save"))
-		self["description"] = Label("")
-
-		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = session)
-		self.createSetup()
-
-		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
-		{
-		    "green": self.ok,
-		    "red": self.cancel,
-		    "cancel": self.cancel,
-		    "ok": self.ok,
-		}, -2)
-
-		self.onLayoutFinish.append(self.layoutFinished)
-
-	def layoutFinished(self):
-		self.setTitle(self.setup_title)
-
-	def createSetup(self):
-		self.list = []
-		self.list.append(getConfigListEntry(_("Enable wakeup timer"),
-			config.usage.wakeup_enabled,
-			_("Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'.")))
-		if config.usage.wakeup_enabled.value:
-			for i in range(7):
-				self.list.append(getConfigListEntry(weekdays[i], config.usage.wakeup_day[i]))
-				if config.usage.wakeup_day[i].value:
-					self.list.append(getConfigListEntry(_("Wakeup time"), config.usage.wakeup_time[i]))
-		self["config"].list = self.list
-		self["config"].l.setList(self.list)
-
-	def ok(self):
-		if self["config"].isChanged():
-			for x in self["config"].list:
-				x[1].save()
-		self.close()
-
-	def cancel(self, answer = None):
-		if answer is None:
-			if self["config"].isChanged():
-				self.session.openWithCallback(self.cancel, MessageBox, _("Really close without saving settings?"))
-			else:
-				self.close()
-		elif answer:
-			for x in self["config"].list:
-				x[1].cancel()
-			self.close()
-
-	def keyLeft(self):
-		ConfigListScreen.keyLeft(self)
-		self.createSetup()
-
-	def keyRight(self):
-		ConfigListScreen.keyRight(self)
-		self.createSetup()
 
 def isNextWakeupTime():
 	if config.usage.wakeup_enabled.value:
