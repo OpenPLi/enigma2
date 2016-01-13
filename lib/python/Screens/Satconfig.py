@@ -665,7 +665,7 @@ class NimSelection(Screen):
 		self.updateList()
 
 	def showNim(self, nim):
-		return not nim.isFBCLink()
+		return True
 
 	def updateList(self, index=None):
 		self.list = [ ]
