@@ -40,11 +40,7 @@ class HdmiCec:
 		HdmiCec.instance = self
 
 		self.wait = eTimer()
-		self.wait.callback.append(self.sendCmd)
-		self.repeat_wakeupMessages = eTimer()
-		self.repeat_wakeupMessages.callback.append(self.wakeupMessages)
-
-
+		self.wait.timeout.get().append(self.sendCmd)
 		self.queue = []
 
 		eHdmiCEC.getInstance().messageReceived.get().append(self.messageReceived)
@@ -162,11 +158,8 @@ class HdmiCec:
 				self.sendMessage(5, "keypoweron")
 				self.sendMessage(5, "setsystemaudiomode")
 
-			self.repeat_wakeupMessages.startLongTimer(3)
-
 	def standbyMessages(self):
 		if config.hdmicec.enabled.value:
-			self.repeat_wakeupMessages.stop()
 			messages = []
 			if config.hdmicec.control_tv_standby.value:
 				messages.append("standby")
