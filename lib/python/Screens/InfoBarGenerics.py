@@ -415,7 +415,7 @@ class NumberZap(Screen):
 				self.startBouquet = self.bouquet
 
 	def keyBlue(self):
-		self.Timer.start(3000, True)
+		self.startTimer()
 		if self.searchNumber:
 			if self.startBouquet == self.bouquet:
 				self.service, self.bouquet = self.searchNumber(int(self["number"].getText()), firstBouquetOnly = True)
@@ -424,7 +424,7 @@ class NumberZap(Screen):
 			self["servicename"].text = self["servicename_summary"].text = ServiceReference(self.service).getServiceName()
 
 	def keyNumberGlobal(self, number):
-		self.Timer.start(1000, True)
+		self.startTimer(repeat=True)
 		self.numberString = self.numberString + str(number)
 		self["number"].text = self["number_summary"].text = self.numberString
 
@@ -466,8 +466,18 @@ class NumberZap(Screen):
 			})
 
 		self.Timer = eTimer()
-		self.Timer.callback.append(self.keyOK)
-		self.Timer.start(3000, True)
+		self.Timer.callback.append(self.endTimer)
+		self.Timer.start(250)
+		self.startTimer()
+
+	def startTimer(self, repeat=False):
+		self.timer_target = repeat and self.timer_counter < 6 and [4,4,4,5,8,10][self.timer_counter] or 12
+		self.timer_counter = 0
+
+	def endTimer(self):
+		self.timer_counter += 1
+		if self.timer_counter > self.timer_target:
+			self.keyOK()
 
 class InfoBarNumberZap:
 	""" Handles an initial number for NumberZapping """
