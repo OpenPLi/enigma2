@@ -30,7 +30,7 @@ class FrontendInfo(Converter, object):
 		elif type.startswith("STRING"):
 			self.type = self.STRING
 			type = type.split(",")
-			self.space_for_tuners = len(type) > 1 and int(type[1]) or 5
+			self.space_for_tuners = len(type) > 1 and int(type[1]) or 6
 		else:
 			self.type = self.LOCK
 
@@ -58,7 +58,9 @@ class FrontendInfo(Converter, object):
 			return self.source.frontend_type and self.frontend_type or "Unknown"
 		elif self.type == self.STRING:
 			string = ""
+			slot_num = 0
 			for n in nimmanager.nim_slots:
+				slot_num += 1
 				if n.type:
 					if string:
 						string += " "
@@ -66,7 +68,7 @@ class FrontendInfo(Converter, object):
 						string += "\c0000??00"
 					elif self.source.tuner_mask & 1 << n.slot:
 						string += "\c00????00"
-					elif len(nimmanager.nim_slots) <= self.space_for_tuners:
+					elif slot_num <= self.space_for_tuners:
 						string += "\c007?7?7?"
 					else:
 						continue
