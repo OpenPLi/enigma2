@@ -75,7 +75,7 @@ class eDVBAllocatedFrontend
 	DECLARE_REF(eDVBAllocatedFrontend);
 public:
 
-	eDVBAllocatedFrontend(eDVBRegisteredFrontend *fe);
+	eDVBAllocatedFrontend(eDVBRegisteredFrontend *fe, eFBCTunerManager *fbcmng);
 	~eDVBAllocatedFrontend();
 	eDVBFrontend &get() { return *m_fe->m_frontend; }
 	operator eDVBRegisteredFrontend*() { return m_fe; }

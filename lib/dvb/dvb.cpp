@@ -27,13 +27,11 @@ DEFINE_REF(eDVBRegisteredDemux);
 
 DEFINE_REF(eDVBAllocatedFrontend);
 
-eDVBAllocatedFrontend::eDVBAllocatedFrontend(eDVBRegisteredFrontend *fe): m_fe(fe)
+eDVBAllocatedFrontend::eDVBAllocatedFrontend(eDVBRegisteredFrontend *fe, eFBCTunerManager *fbcmng): m_fe(fe)
 {
-	eFBCTunerManager* fbcmng;
-
 	m_fe->inc_use();
 
-	if (m_fe->m_frontend->is_FBCTuner() && ((fbcmng = eFBCTunerManager::getInstance())))
+	if (m_fe->m_frontend->is_FBCTuner() && fbcmng)
 		fbcmng->unset(m_fe);
 }
 
@@ -815,7 +813,7 @@ RESULT eDVBResourceManager::allocateFrontend(ePtr<eDVBAllocatedFrontend> &fe, eP
 		if (best_fbc_fe)
 			m_fbcmng->addLink(best, best_fbc_fe, simulate);
 
-		fe = new eDVBAllocatedFrontend(best);
+		fe = new eDVBAllocatedFrontend(best, m_fbcmng);
 		return 0;
 	}
 
@@ -873,7 +871,7 @@ RESULT eDVBResourceManager::allocateFrontendByIndex(ePtr<eDVBAllocatedFrontend> 
 					prev->m_frontend->getData(eDVBFrontend::LINKED_PREV_PTR, tmp);
 				}
 			}
-			fe = new eDVBAllocatedFrontend(i);
+			fe = new eDVBAllocatedFrontend(i, m_fbcmng);
 			return 0;
 		}
 alloc_fe_by_id_not_possible:
