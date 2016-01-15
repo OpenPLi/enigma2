@@ -27,6 +27,20 @@ DEFINE_REF(eDVBRegisteredDemux);
 
 DEFINE_REF(eDVBAllocatedFrontend);
 
+void eDVBRegisteredFrontend::closeFrontend()
+{
+	eFBCTunerManager *fbctunermgr;
+
+	if(m_frontend->is_FBCTuner()) 	//	ugly hack
+	{								//	other checks are in unset()
+		fbctunermgr = eFBCTunerManager::getInstance();
+		fbctunermgr->unset(this);	// make sure all links are cleared
+	}								// otherwise the FBC leaf tuner won't be reconnected in the future
+
+	if (!m_inuse && m_frontend->closeFrontend()) // frontend busy
+		disable->start(60000, true);  // retry close in 60secs
+}
+
 eDVBAllocatedFrontend::eDVBAllocatedFrontend(eDVBRegisteredFrontend *fe, eFBCTunerManager *fbcmng): m_fe(fe)
 {
 	m_fe->inc_use();

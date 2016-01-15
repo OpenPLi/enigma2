@@ -27,11 +27,7 @@ class eDVBRegisteredFrontend: public iObject, public Object
 {
 	DECLARE_REF(eDVBRegisteredFrontend);
 	ePtr<eTimer> disable;
-	void closeFrontend()
-	{
-		if (!m_inuse && m_frontend->closeFrontend()) // frontend busy
-			disable->start(60000, true);  // retry close in 60secs
-	}
+	void closeFrontend();
 public:
 	Signal0<void> stateChanged;
 	eDVBRegisteredFrontend(eDVBFrontend *fe, iDVBAdapter *adap)
