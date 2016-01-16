@@ -635,7 +635,12 @@ class NimSelection(Screen):
 			nimConfig = nimmanager.getNimConfig(x.slot)
 			configMode = nimConfig.configMode.value
 			if self.showNim(x) and x.isCompatible("DVB-S") and x.isFBCLink() and configMode != "advanced":
+				link = getLinkedSlotID(x.slot)
+				if link == -1:
 					nimConfig.configMode.value = "nothing"
+				else:
+					nimConfig.configMode.value = "loopthrough"
+					nimConfig.connectedTo.value = str(link)
 
 	def exit(self):
 		self.close(True)
