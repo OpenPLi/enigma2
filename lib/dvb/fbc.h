@@ -22,7 +22,7 @@ private:
 	DECLARE_REF(eFBCTunerManager);
 	ePtr<eDVBResourceManager> m_res_mgr;
 	int m_fbc_tuner_num;
-	static eFBCTunerManager* instance;
+	static eFBCTunerManager* m_instance;
 	static const int FBC_TUNER_SET = 8;
 
 	bool isSameFbcSet(int a, int b);
@@ -69,8 +69,9 @@ public:
 	int isCompatibleWith(ePtr<iDVBFrontendParameters> &feparm, eDVBRegisteredFrontend *link_fe, eDVBRegisteredFrontend *&fbc_fe, bool simulate);
 	void addLink(eDVBRegisteredFrontend *link_fe, eDVBRegisteredFrontend *top_fe, bool simulate);
 	void unset(eDVBRegisteredFrontend *fe);
-	static eFBCTunerManager* getInstance() { return instance; }
 	int getLinkedSlotID(int feid);
+
+	static eFBCTunerManager* getInstance();
 };
 
 #endif /* __dvb_fbc_h */

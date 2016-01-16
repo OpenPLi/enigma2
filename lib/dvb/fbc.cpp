@@ -9,7 +9,12 @@
 
 DEFINE_REF(eFBCTunerManager);
 
-eFBCTunerManager* eFBCTunerManager::instance = (eFBCTunerManager*)0;
+eFBCTunerManager* eFBCTunerManager::m_instance = (eFBCTunerManager*)0;
+
+eFBCTunerManager* eFBCTunerManager::getInstance()
+{
+	return m_instance;
+}
 
 eFBCTunerManager::eFBCTunerManager(ePtr<eDVBResourceManager> res_mgr)
 	:m_res_mgr(res_mgr)
@@ -17,7 +22,7 @@ eFBCTunerManager::eFBCTunerManager(ePtr<eDVBResourceManager> res_mgr)
 	char tmp[128];
 	eSmartPtrList<eDVBRegisteredFrontend> &frontends = m_res_mgr->m_frontend;
 
-	instance = this;
+	m_instance = this;
 
 	// FIXME
 	// This finds the number of virtual tuners even though we want to know
@@ -46,7 +51,7 @@ eFBCTunerManager::eFBCTunerManager(ePtr<eDVBResourceManager> res_mgr)
 
 eFBCTunerManager::~eFBCTunerManager()
 {
-	instance = (eFBCTunerManager*)0;
+	m_instance = (eFBCTunerManager*)0;
 }
 
 int eFBCTunerManager::fe_slot_id(const eDVBRegisteredFrontend *fe) const
