@@ -141,10 +141,7 @@ int eFBCTunerManager::getFBCID(int top_fe_id)
 
 void eFBCTunerManager::setDefaultFBCID(eDVBRegisteredFrontend *fe)
 {
-	if (!isRootFe(fe))
-		return;
-
-	setProcFBCID(fe_slot_id(fe), getFBCID(fe_slot_id(fe)));
+	setProcFBCID(fe_slot_id(fe), isRootFe(fe) ? getFBCID(fe_slot_id(fe)) : 0);
 }
 
 void eFBCTunerManager::updateFBCID(eDVBRegisteredFrontend *next_fe, eDVBRegisteredFrontend *prev_fe)
