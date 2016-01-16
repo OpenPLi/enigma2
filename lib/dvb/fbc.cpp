@@ -627,6 +627,7 @@ void eFBCTunerManager::unset(eDVBRegisteredFrontend *fe)
 			return;
 	}
 
+	setProcFBCID(fe_slot_id(fe), 0);
 	updateLNBSlotMask(fe_slot_id(fe), fe_slot_id(linked_prev_fe), true);
 }
 
