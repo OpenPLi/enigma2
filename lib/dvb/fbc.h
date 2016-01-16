@@ -25,7 +25,6 @@ private:
 	static eFBCTunerManager* instance;
 	static const int FBC_TUNER_SET = 8;
 
-	int getFBCTunerNum();
 	void procInit();
 	bool isSameFbcSet(int a, int b);
 	bool isSupportDVBS(eDVBRegisteredFrontend *fe);

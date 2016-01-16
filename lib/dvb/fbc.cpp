@@ -14,10 +14,25 @@ eFBCTunerManager* eFBCTunerManager::instance = (eFBCTunerManager*)0;
 eFBCTunerManager::eFBCTunerManager(ePtr<eDVBResourceManager> res_mgr)
 	:m_res_mgr(res_mgr)
 {
+	char tmp[128];
+
 	instance = this;
 
+	// FIXME
+	// This finds the number of virtual tuners even though we want to know
+	// the number of physical ("root") tuners. The calculation in the return
+	// statement is just a guess and works for now.
+
+	for(m_fbc_tuner_num = 0; m_fbc_tuner_num < 128; m_fbc_tuner_num++)
+	{
+		snprintf(tmp, sizeof(tmp), "/proc/stb/frontend/%d/fbc_id", m_fbc_tuner_num);
+
+		if(access(tmp, F_OK))
+			break;
+	}
+
 	/* number of fbc tuners in one set */
-	m_fbc_tuner_num = getFBCTunerNum();
+	m_fbc_tuner_num /= (FBC_TUNER_SET / 2);
 	procInit();
 }
 
@@ -80,27 +95,6 @@ void eFBCTunerManager::procInit()
 		if (isRootFe(*it))
 			setProcFBCID(fe_slot_id(it), getFBCID(fe_slot_id(it)));
 	}
-}
-
-int eFBCTunerManager::getFBCTunerNum()
-{
-	char tmp[128];
-	int fbc_tuner_num;
-
-	// FIXME
-	// This finds the number of virtual tuners even though we want to know
-	// the number of physical ("root") tuners. The calculation in the return
-	// statement is just a guess and works for now.
-
-	for(fbc_tuner_num = 0; fbc_tuner_num < 128; fbc_tuner_num++)
-	{
-		snprintf(tmp, sizeof(tmp), "/proc/stb/frontend/%d/fbc_id", fbc_tuner_num);
-
-		if(access(tmp, F_OK))
-			break;
-	}
-
-	return (fbc_tuner_num / (FBC_TUNER_SET / 2));
 }
 
 void eFBCTunerManager::setProcFBCID(int fe_id, int fbc_id)
