@@ -117,8 +117,6 @@ eDVBResourceManager::eDVBResourceManager()
 	eDebug("[eDVBResourceManager] found %zd adapter, %zd frontends(%zd sim) and %zd demux",
 		m_adapter.size(), m_frontend.size(), m_simulate_frontend.size(), m_demux.size());
 
-	m_fbcmng = new eFBCTunerManager(instance);
-
 	CONNECT(m_releaseCachedChannelTimer->timeout, eDVBResourceManager::releaseCachedChannel);
 }
 
