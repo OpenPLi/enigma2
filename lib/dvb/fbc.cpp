@@ -15,6 +15,7 @@ eFBCTunerManager::eFBCTunerManager(ePtr<eDVBResourceManager> res_mgr)
 	:m_res_mgr(res_mgr)
 {
 	char tmp[128];
+	eSmartPtrList<eDVBRegisteredFrontend> &frontends = m_res_mgr->m_frontend;
 
 	instance = this;
 
@@ -33,7 +34,20 @@ eFBCTunerManager::eFBCTunerManager(ePtr<eDVBResourceManager> res_mgr)
 
 	/* number of fbc tuners in one set */
 	m_fbc_tuner_num /= (FBC_TUNER_SET / 2);
-	procInit();
+
+	/* each FBC set has 8 tuners */
+	/* first set: 0-7 */
+	/* second set: 8-16 */
+	/* first, second frontend is top on a set */
+
+	for (eSmartPtrList<eDVBRegisteredFrontend>::iterator it(frontends.begin()); it != frontends.end(); ++it)
+	{
+		if (!it->m_frontend->is_FBCTuner())
+			continue;
+
+		if (isRootFe(*it))
+			setProcFBCID(fe_slot_id(it), getFBCID(fe_slot_id(it)));
+	}
 }
 
 eFBCTunerManager::~eFBCTunerManager()
@@ -76,25 +90,6 @@ void eFBCTunerManager::frontend_set_linkptr(const eDVBRegisteredFrontend *fe, li
 	}
 
 	fe->m_frontend->setData(data_type, data);
-}
-
-void eFBCTunerManager::procInit()
-{
-	eSmartPtrList<eDVBRegisteredFrontend> &frontends = m_res_mgr->m_frontend;
-
-	/* each FBC set has 8 tuners */
-	/* first set: 0-7 */
-	/* second set: 8-16 */
-	/* first, second frontend is top on a set */
-
-	for (eSmartPtrList<eDVBRegisteredFrontend>::iterator it(frontends.begin()); it != frontends.end(); ++it)
-	{
-		if (!it->m_frontend->is_FBCTuner())
-			continue;
-
-		if (isRootFe(*it))
-			setProcFBCID(fe_slot_id(it), getFBCID(fe_slot_id(it)));
-	}
 }
 
 void eFBCTunerManager::setProcFBCID(int fe_id, int fbc_id)
