@@ -30,7 +30,8 @@ class FrontendInfo(Converter, object):
 		elif type.startswith("STRING"):
 			self.type = self.STRING
 			type = type.split(",")
-			self.space_for_tuners = len(type) > 1 and int(type[1]) or 5
+			self.space_for_tuners = len(type) > 1 and int(type[1]) or 10
+			self.space_for_tuners_with_spaces = len(type) > 2 and int(type[1]) or 6
 		else:
 			self.type = self.LOCK
 
@@ -68,7 +69,9 @@ class FrontendInfo(Converter, object):
 						color = "\c007?7?7?"
 					else:
 						continue
-					string += (string and " ") + color + chr(ord("A")+n.slot)
+					if string and len(nimmanager.nim_slots) <= self.space_for_tuners_with_spaces:
+						string += " "
+					string += color + chr(ord("A")+n.slot)
 			return string
 		if percent is None:
 			return "N/A"
