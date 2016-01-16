@@ -31,7 +31,7 @@ class FrontendInfo(Converter, object):
 			self.type = self.STRING
 			type = type.split(",")
 			self.space_for_tuners = len(type) > 1 and int(type[1]) or 10
-			self.space_for_tuners_with_spaces = len(type) > 2 and int(type[1]) or 6
+			self.space_for_tuners_with_spaces = len(type) > 2 and int(type[2]) or 6
 		else:
 			self.type = self.LOCK
 
