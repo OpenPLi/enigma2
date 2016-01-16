@@ -41,13 +41,7 @@ eFBCTunerManager::eFBCTunerManager(ePtr<eDVBResourceManager> res_mgr)
 	/* first, second frontend is top on a set */
 
 	for (eSmartPtrList<eDVBRegisteredFrontend>::iterator it(frontends.begin()); it != frontends.end(); ++it)
-	{
-		if (!it->m_frontend->is_FBCTuner())
-			continue;
-
-		if (isRootFe(*it))
-			setProcFBCID(fe_slot_id(it), getFBCID(fe_slot_id(it)));
-	}
+		setDefaultFBCID(*it);
 }
 
 eFBCTunerManager::~eFBCTunerManager()
