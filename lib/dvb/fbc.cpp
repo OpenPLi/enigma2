@@ -117,11 +117,6 @@ bool eFBCTunerManager::isSameFbcSet(int a, int b)
 	return((a / FBC_TUNER_SET) == (b / FBC_TUNER_SET));
 }
 
-bool eFBCTunerManager::isSupportDVBS(eDVBRegisteredFrontend *fe)
-{
-	return((fe->m_frontend->supportsDeliverySystem(SYS_DVBS, true) || fe->m_frontend->supportsDeliverySystem(SYS_DVBS2, true)));
-}
-
 int eFBCTunerManager::getFBCID(int top_fe_id)
 {
 	return (((2 * top_fe_id) / FBC_TUNER_SET) + (top_fe_id % FBC_TUNER_SET)); /* (0,1,8,9,16,17...) -> (0,1,2,3,4,5...) */
