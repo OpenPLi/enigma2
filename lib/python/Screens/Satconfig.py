@@ -89,7 +89,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 				choices["loopthrough"] = _("Loop through to")
 			if self.nim.isFBCLink():
 				choices = { "nothing": _("FBC automatic loop through"), "advanced": _("FBC Unicable")}
-			self.nimConfig.configMode.setChoices(choices, default = "simple")
+			self.nimConfig.configMode.setChoices(choices, self.nim.isFBCLink() and "nothing" or "simple")
 
 	def createSetup(self):
 		print "Creating setup"
@@ -616,7 +616,6 @@ class NimSelection(Screen):
 
 		self.list = [None] * nimmanager.getSlotCount()
 		self["nimlist"] = List(self.list)
-		self.loadFBCLinks()
 		self.updateList()
 
 		self.setResultClass()
@@ -628,19 +627,6 @@ class NimSelection(Screen):
 			"menu": self.exit,
 		}, -2)
 		self.setTitle(_("Choose Tuner"))
-
-	def loadFBCLinks(self):
-		for x in nimmanager.nim_slots:
-			slotid = x.slot
-			nimConfig = nimmanager.getNimConfig(x.slot)
-			configMode = nimConfig.configMode.value
-			if self.showNim(x) and x.isCompatible("DVB-S") and x.isFBCLink() and configMode != "advanced":
-				link = getLinkedSlotID(x.slot)
-				if link == -1:
-					nimConfig.configMode.value = "nothing"
-				else:
-					nimConfig.configMode.value = "loopthrough"
-					nimConfig.connectedTo.value = str(link)
 
 	def exit(self):
 		self.close(True)
@@ -660,7 +646,6 @@ class NimSelection(Screen):
 			self.session.openWithCallback(boundFunction(self.NimSetupCB, self["nimlist"].getIndex()), self.resultclass, nim.slot)
 
 	def NimSetupCB(self, index=None):
-		self.loadFBCLinks()
 		self.updateList()
 
 	def showNim(self, nim):
@@ -675,16 +660,18 @@ class NimSelection(Screen):
 			if self.showNim(x):
 				if x.isCompatible("DVB-S"):
 					if nimConfig.configMode.value in ("loopthrough", "equal", "satposdepends"):
-						if x.isFBCLink():
-							text = "FBC automatic loop through\nlinked to"
-						else:
-							text = { "loopthrough": _("Loop through to"),
-									"equal": _("Equal to"),
-									"satposdepends": _("Second cable of motorized LNB") } [nimConfig.configMode.value]
+						text = { "loopthrough": _("Loop through to"),
+								"equal": _("Equal to"),
+								"satposdepends": _("Second cable of motorized LNB") } [nimConfig.configMode.value]
 						text += " " + nimmanager.getNim(int(nimConfig.connectedTo.value)).slot_name
 					elif nimConfig.configMode.value == "nothing":
 						if x.isFBCLink():
-							text = _("FBC automatic loop through\ninactive")
+							link = getLinkedSlotID(x.slot)
+							if link == -1:
+								text = _("FBC automatic loop through\ninactive")
+							else:
+								link = nimmanager.getNim(link).slot_name
+								text = _("FBC automatic loop through\nlinked to %s") % link
 						else:
 							text = _("not configured")
 					elif nimConfig.configMode.value == "simple":
