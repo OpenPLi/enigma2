@@ -102,14 +102,9 @@ void eFBCTunerManager::setProcFBCID(int fe_id, int fbc_id)
 	CFile::writeIntHex(tmp, fbc_id);
 }
 
-bool eFBCTunerManager::isRootFeSlot(int fe_slot_id)
-{
-	return((fe_slot_id % FBC_TUNER_SET) < m_fbc_tuner_num);
-}
-
 bool eFBCTunerManager::isRootFe(eDVBRegisteredFrontend *fe)
 {
-	return isRootFeSlot(fe_slot_id(fe));
+	return (fe_slot_id(fe) % FBC_TUNER_SET) < m_fbc_tuner_num;
 }
 
 bool eFBCTunerManager::isSameFbcSet(int a, int b)
