@@ -66,7 +66,6 @@ public:
 	bool isRootFe(eDVBRegisteredFrontend *fe);
 	bool canLink(eDVBRegisteredFrontend *fe);
 	bool isUnicable(eDVBRegisteredFrontend *fe);
-	int isCompatibleWith(ePtr<iDVBFrontendParameters> &feparm, eDVBRegisteredFrontend *link_fe, bool simulate);
 	int isCompatibleWith(ePtr<iDVBFrontendParameters> &feparm, eDVBRegisteredFrontend *link_fe, eDVBRegisteredFrontend *&fbc_fe, bool simulate);
 	void addLink(eDVBRegisteredFrontend *link_fe, eDVBRegisteredFrontend *top_fe, bool simulate);
 	void unset(eDVBRegisteredFrontend *fe);

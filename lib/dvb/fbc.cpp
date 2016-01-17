@@ -471,13 +471,6 @@ bool eFBCTunerManager::isUnicable(eDVBRegisteredFrontend *fe)
 	return is_unicable;
 }
 
-int eFBCTunerManager::isCompatibleWith(ePtr<iDVBFrontendParameters> &feparm, eDVBRegisteredFrontend *link_fe, bool simulate)
-{
-	eDVBRegisteredFrontend *best_fbc_fe;
-
-	return isCompatibleWith(feparm, link_fe, best_fbc_fe, simulate);
-}
-
 int eFBCTunerManager::isCompatibleWith(ePtr<iDVBFrontendParameters> &feparm, eDVBRegisteredFrontend *link_fe, eDVBRegisteredFrontend *&fbc_fe, bool simulate)
 {
 	int best_score = 0;

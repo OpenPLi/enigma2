@@ -1194,6 +1194,7 @@ int eDVBResourceManager::canAllocateFrontend(ePtr<iDVBFrontendParameters> &fepar
 {
 	eSmartPtrList<eDVBRegisteredFrontend> &frontends = simulate ? m_simulate_frontend : m_frontend;
 	ePtr<eDVBRegisteredFrontend> best;
+	eDVBRegisteredFrontend *dummy;
 	int bestval, check_fbc_link, c;
 
 	bestval = 0;
@@ -1206,7 +1207,7 @@ int eDVBResourceManager::canAllocateFrontend(ePtr<iDVBFrontendParameters> &fepar
 			if(i->m_frontend->is_FBCTuner() && m_fbcmng->canLink(*i) && !check_fbc_link)
 			{
 				check_fbc_link = 1;
-				c = m_fbcmng->isCompatibleWith(feparm, *i, simulate);
+				c = m_fbcmng->isCompatibleWith(feparm, *i, dummy, simulate);
 			}
 			else
 				c = i->m_frontend->isCompatibleWith(feparm);
