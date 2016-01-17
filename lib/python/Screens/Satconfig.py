@@ -676,17 +676,15 @@ class NimSelection(Screen):
 				if x.isCompatible("DVB-S"):
 					if nimConfig.configMode.value in ("loopthrough", "equal", "satposdepends"):
 						if x.isFBCLink():
-							text = "FBC automatic loop through (currently connected to "
+							text = "FBC automatic loop through\nlinked to"
 						else:
 							text = { "loopthrough": _("Loop through to"),
 									"equal": _("Equal to"),
 									"satposdepends": _("Second cable of motorized LNB") } [nimConfig.configMode.value]
 						text += " " + nimmanager.getNim(int(nimConfig.connectedTo.value)).slot_name
-						if x.isFBCLink():
-							text += ")"
 					elif nimConfig.configMode.value == "nothing":
 						if x.isFBCLink():
-							text = _("FBC automatic loop through (currently inactive)")
+							text = _("FBC automatic loop through\ninactive")
 						else:
 							text = _("not configured")
 					elif nimConfig.configMode.value == "simple":
