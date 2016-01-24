@@ -3,9 +3,10 @@ from Components.ActionMap import ActionMap
 from Components.ScrollLabel import ScrollLabel
 
 class TextBox(Screen):
-	def __init__(self, session, text="", title=None):
+	def __init__(self, session, text="", title=None, skin=None):
 		Screen.__init__(self, session)
-
+		if skin:
+			self.skinName=[skin, "TextBox"]
 		self.text = text
 		self["text"] = ScrollLabel(self.text)
 
