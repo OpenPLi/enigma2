@@ -30,7 +30,8 @@ dvb_libenigma_dvb_a_SOURCES = \
 	dvb/volume.cpp \
 	dvb/streamserver.cpp \
 	dvb/pmtparse.cpp \
-	dvb/encoder.cpp
+	dvb/encoder.cpp \
+	dvb/fbc.cpp
 
 dvbincludedir = $(pkgincludedir)/lib/dvb
 dvbinclude_HEADERS = \
@@ -68,4 +69,5 @@ dvbinclude_HEADERS = \
 	dvb/volume.h \
 	dvb/streamserver.h \
 	dvb/pmtparse.h \
-	dvb/encoder.h
+	dvb/encoder.h \
+	dvb/fbc.h
