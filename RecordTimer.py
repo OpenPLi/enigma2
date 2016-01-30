@@ -194,6 +194,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 		self.InfoBarInstance = Screens.InfoBar.InfoBar.instance
 		self.ts_dialog = None
 		self.log_entries = []
+		self.flags = set()
 		self.resetState()
 
 	def __repr__(self):
@@ -837,11 +838,12 @@ class RecordTimer(timer.Timer):
 				}[timer.afterEvent])) + '"')
 			if timer.eit is not None:
 				list.append(' eit="' + str(timer.eit) + '"')
-			if timer.dirname is not None:
+			if timer.dirname:
 				list.append(' location="' + str(stringToXML(timer.dirname)) + '"')
-			if timer.tags is not None:
+			if timer.tags:
 				list.append(' tags="' + str(stringToXML(' '.join(timer.tags))) + '"')
-			list.append(' disabled="' + str(int(timer.disabled)) + '"')
+			if timer.disabled:
+				list.append(' disabled="' + str(int(timer.disabled)) + '"')
 			list.append(' justplay="' + str(int(timer.justplay)) + '"')
 			list.append(' always_zap="' + str(int(timer.always_zap)) + '"')
 			list.append(' zap_wakeup="' + str(timer.zap_wakeup) + '"')
@@ -849,6 +851,8 @@ class RecordTimer(timer.Timer):
 			list.append(' conflict_detection="' + str(int(timer.conflict_detection)) + '"')
 			list.append(' descramble="' + str(int(timer.descramble)) + '"')
 			list.append(' record_ecm="' + str(int(timer.record_ecm)) + '"')
+			if timer.flags:
+				list.append(' flags="' + ' '.join([stringToXML(x) for x in timer.flags]) + '"')
 			list.append('>\n')
 
 			if config.recording.debug.value:
