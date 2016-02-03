@@ -1944,6 +1944,7 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 			if Components.ParentalControl.parentalControl.isServicePlayable(ref, self.bouquetParentalControlCallback, self.session):
 				self.enterPath(ref)
 				self.gotoCurrentServiceOrProvider(ref)
+				self.revertMode = None
 		elif self.bouquet_mark_edit != OFF:
 			if not (self.bouquet_mark_edit == EDIT_ALTERNATIVES and ref.flags & eServiceReference.isGroup):
 				self.doMark()
@@ -1966,6 +1967,7 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 	def bouquetParentalControlCallback(self, ref):
 		self.enterPath(ref)
 		self.gotoCurrentServiceOrProvider(ref)
+		self.revertMode = None
 
 	def togglePipzap(self):
 		assert(self.session.pip)
