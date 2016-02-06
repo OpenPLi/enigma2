@@ -6,10 +6,11 @@ from timer import TimerEntry
 import RecordTimer
 
 class TimerSanityCheck:
-	def __init__(self, timerlist, newtimer=None):
+	def __init__(self, timerlist, newtimer=None, visible_conflict=False):
 		self.localtimediff = 25*3600 - mktime(gmtime(25*3600))
 		self.timerlist = timerlist
 		self.newtimer = newtimer
+		self.visible_conflict = visible_conflict
 		self.simultimer = []
 		self.rep_eventlist = []
 		self.nrep_eventlist = []
@@ -21,7 +22,7 @@ class TimerSanityCheck:
 			self.newtimer = ext_timer
 		self.simultimer = []
 		if self.newtimer:
-			if not self.newtimer.conflict_detection or (self.newtimer.service_ref and '%3a//' in self.newtimer.service_ref.ref.toString()):
+			if (not self.newtimer.conflict_detection and not self.visible_conflict) or (self.newtimer.service_ref and '%3a//' in self.newtimer.service_ref.ref.toString()):
 				return True
 			self.simultimer = [self.newtimer]
 		return self.checkTimerlist()
@@ -71,7 +72,7 @@ class TimerSanityCheck:
 			self.newtimer = ext_timer
 		if not self.newtimer or self.newtimer.disabled or not self.newtimer.service_ref or not self.newtimer.service_ref.ref.valid():
 			return False
-		elif not self.newtimer.conflict_detection or '%3a//' in self.newtimer.service_ref.ref.toString():
+		elif (not self.newtimer.conflict_detection and not self.visible_conflict) or '%3a//' in self.newtimer.service_ref.ref.toString():
 			return True
 		rflags = self.newtimer.repeated
 		rflags = ((rflags & 0x7F)>> 3)|((rflags & 0x07)<<4)
@@ -93,7 +94,7 @@ class TimerSanityCheck:
 # now process existing timers
 		self.check_timerlist = []
 		for timer in self.timerlist:
-			 if not timer.disabled and timer.conflict_detection and timer.service_ref and '%3a//' not in timer.service_ref.ref.toString() and timer.state < TimerEntry.StateEnded:
+			 if not timer.disabled and (timer.conflict_detection or self.visible_conflict) and timer.service_ref and '%3a//' not in timer.service_ref.ref.toString() and timer.state < TimerEntry.StateEnded:
 				self.check_timerlist.append(timer)
 		self.timerlist = self.check_timerlist[:]
 		idx = 0
