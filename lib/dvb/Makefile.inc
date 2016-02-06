@@ -73,7 +73,7 @@ dvbinclude_HEADERS = \
 	dvb/volume.h \
 	dvb/streamserver.h \
 	dvb/pmtparse.h \
-	dvb/encoder.h
+	dvb/encoder.h \
 	dvb/fbc.h
 if HAVE_AMLOGIC
 dvbinclude_HEADERS += dvb/amldecoder.h
