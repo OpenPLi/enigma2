@@ -41,9 +41,7 @@ class TimerEditList(Screen):
 		self["key_yellow"] = Button(" ")
 		self["key_blue"] = Button(" ")
 
-		print "[TimerEditList] key_red_choice:",self.key_red_choice
-
-		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ShortcutActions", "TimerEditActions"],
+		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ShortcutActions", "TimerEditActions", "MenuActions"],
 			{
 				"ok": self.openEdit,
 				"cancel": self.leave,
@@ -52,7 +50,8 @@ class TimerEditList(Screen):
 				"left": self.left,
 				"right": self.right,
 				"up": self.up,
-				"down": self.down
+				"down": self.down,
+				"menu": self.openExtendedSetup
 			}, -1)
 		self.setTitle(_("Timer overview"))
 		self.session.nav.RecordTimer.on_state_change.append(self.onStateChange)
@@ -215,6 +214,46 @@ class TimerEditList(Screen):
 		else:
 			list.sort(key = lambda x: x[0].begin)
 
+	def openExtendedSetup(self):
+		cur = self["timerlist"].getCurrent()
+		if cur:
+			menu = []
+			currentSimulTimerList = []
+			conflict_timer = None
+			if not cur.conflict_detection:
+				current_timerlist = []
+				begin = cur.begin
+				end= cur.end
+				for timer in self.session.nav.RecordTimer.timer_list:
+					if (begin < timer.begin <= end) or (timer.begin <= begin <= timer.end):
+						current_timerlist.append(timer)
+				if len(current_timerlist) > 1:
+					timersanitycheck = TimerSanityCheck(current_timerlist, cur, True)
+					if not timersanitycheck.check():
+						currentSimulTimerList = timersanitycheck.getSimulTimerList()
+						if cur in currentSimulTimerList:
+							conflict_timer = cur
+							menu.append((_("Current timer"), "current"))
+			timer_list = self.session.nav.RecordTimer.timer_list[:]
+			if conflict_timer:
+				timer_list.remove(conflict_timer)
+			for timer in timer_list:
+				if not timer.conflict_detection:
+					timersanitycheck = TimerSanityCheck(timer_list, timer, True)
+					if not timersanitycheck.check():
+						simulTimerList = timersanitycheck.getSimulTimerList()
+						if conflict_timer is None or currentSimulTimerList != simulTimerList:
+							menu.append((_("Any first timer"), "any"))
+							break
+			def conflictAction(choice):
+				if choice is not None:
+					if choice[1] == "current":
+						self.session.openWithCallback(self.updateList, TimerSanityConflict, currentSimulTimerList, True)
+					if choice[1] == "any":
+						self.session.openWithCallback(self.updateList, TimerSanityConflict, simulTimerList, True)
+			if menu:
+				self.session.openWithCallback(conflictAction, ChoiceBox, title= _("Checking with conflict detection enabled for"), list=menu)
+
 	def showLog(self):
 		cur=self["timerlist"].getCurrent()
 		if cur:
@@ -286,6 +325,9 @@ class TimerEditList(Screen):
 	def addTimer(self, timer):
 		self.session.openWithCallback(self.finishedAdd, TimerEntry, timer)
 
+	def updateList(self, answer=None):
+		self.fillTimerList()
+		self.updateState()
 
 	def finishedEdit(self, answer):
 		print "[TimerEditList] finished edit"
@@ -313,8 +355,7 @@ class TimerEditList(Screen):
 				print "[TimerEditList] sanity check passed"
 				self.session.nav.RecordTimer.timeChanged(entry)
 
-			self.fillTimerList()
-			self.updateState()
+			self.updateList()
 		else:
 			print "[TimerEditList] timer edit aborted"
 
@@ -330,8 +371,7 @@ class TimerEditList(Screen):
 				simulTimerList = self.session.nav.RecordTimer.record(entry)
 				if simulTimerList is not None:
 					self.session.openWithCallback(self.finishSanityCorrection, TimerSanityConflict, simulTimerList)
-			self.fillTimerList()
-			self.updateState()
+			self.updateList()
 		else:
 			print "[TimerEditList] timer edit aborted"
 
@@ -347,20 +387,25 @@ class TimerEditList(Screen):
 		self.updateState()
 
 class TimerSanityConflict(Screen):
-	def __init__(self, session, timer):
+	def __init__(self, session, timer, simulate=False):
 		Screen.__init__(self, session)
 		self.skinName = "TimerEditList"
 		self.timer = timer
+		self.simulate = simulate
 
 		self.list = []
 		count = 0
 		for x in timer:
 			self.list.append((timer[count], False))
 			count += 1
+		title_text = (": total conflicts %s") % (count - 1)
+		if simulate:
+			title_text = _(": only notification")
 		if count == 1:
-			self.setTitle((_("Channel not in services list")))
+			title_text = _("Channel not in services list") + title_text
 		else:
-			self.setTitle(_("Timer sanity error"))
+			title_text = _("Timer sanity error") + title_text
+		self.setTitle(title_text)
 
 		self["timerlist"] = TimerList(self.list)
 
@@ -408,13 +453,13 @@ class TimerSanityConflict(Screen):
 			self.leave_ok()
 
 	def ignoreConflict(self):
-			selected_timer = self["timerlist"].getCurrent()
-			if selected_timer and selected_timer.conflict_detection:
-				if config.usage.show_timer_conflict_warning.value:
-					list = [(_("yes"), True), (_("no"), False), (_("yes") + " " + _("and never ask this again"), "never")]
-					self.session.openWithCallback(self.ignoreConflictConfirm, MessageBox, _("Warning!\nThis is an option for advanced users.\nReally disable timer conflict detection?"), list=list)
-				else:
-					self.ignoreConflictConfirm(True)
+		selected_timer = self["timerlist"].getCurrent()
+		if selected_timer and selected_timer.conflict_detection:
+			if config.usage.show_timer_conflict_warning.value:
+				list = [(_("yes"), True), (_("no"), False), (_("yes") + " " + _("and never ask this again"), "never")]
+				self.session.openWithCallback(self.ignoreConflictConfirm, MessageBox, _("Warning!\nThis is an option for advanced users.\nReally disable timer conflict detection?"), list=list)
+			else:
+				self.ignoreConflictConfirm(True)
 
 	def ignoreConflictConfirm(self, answer):
 		selected_timer = self["timerlist"].getCurrent()
@@ -428,7 +473,7 @@ class TimerSanityConflict(Screen):
 			self.leave_ok()
 
 	def leave_ok(self):
-		if self.isResolvedConflict():
+		if self.simulate or self.isResolvedConflict():
 			self.close((True, self.timer[0]))
 		else:
 			self.timer[0].disabled = True
@@ -438,7 +483,7 @@ class TimerSanityConflict(Screen):
 
 	def leave_cancel(self):
 		isTimerSave = self.timer[0] in self.session.nav.RecordTimer.timer_list
-		if self.isResolvedConflict() or not isTimerSave:
+		if self.simulate or self.isResolvedConflict() or not isTimerSave:
 			self.close((False, self.timer[0]))
 		else:
 			timer_text = ""
