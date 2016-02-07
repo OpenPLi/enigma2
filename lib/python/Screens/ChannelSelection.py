@@ -1983,6 +1983,8 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 			lastservice = eServiceReference(self.lastservice.value)
 			if lastservice.valid() and self.getCurrentSelection() != lastservice:
 				self.setCurrentSelection(lastservice)
+				if self.getCurrentSelection() != lastservice:
+					self.servicelist.setCurrent(lastservice)
 
 			title += _(" (TV)")
 		else:
