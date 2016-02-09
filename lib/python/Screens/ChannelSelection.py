@@ -1935,10 +1935,9 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 		if self.movemode and (self.isBasePathEqual(self.bouquet_root) or "userbouquet." in ref.toString()):
 			self.toggleMoveMarked()
 		elif (ref.flags & eServiceReference.flagDirectory) == eServiceReference.flagDirectory:
-			if Components.ParentalControl.parentalControl.isServicePlayable(ref, self.bouquetParentalControlCallback, self.session):
-				self.enterPath(ref)
-				self.gotoCurrentServiceOrProvider(ref)
-				self.revertMode = None
+			self.enterPath(ref)
+			self.gotoCurrentServiceOrProvider(ref)
+			self.revertMode = None
 		elif self.bouquet_mark_edit != OFF:
 			if not (self.bouquet_mark_edit == EDIT_ALTERNATIVES and ref.flags & eServiceReference.isGroup):
 				self.doMark()
@@ -1957,11 +1956,6 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 					self.editMode = False
 					self.protectContextMenu = True
 					self.close(ref)
-
-	def bouquetParentalControlCallback(self, ref):
-		self.enterPath(ref)
-		self.gotoCurrentServiceOrProvider(ref)
-		self.revertMode = None
 
 	def togglePipzap(self):
 		assert(self.session.pip)
