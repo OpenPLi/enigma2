@@ -191,8 +191,6 @@ int main(int argc, char **argv)
 		debugLvl = 0;
 	printf("ENIGMA2_DEBUG settings: Level=%d\n", debugLvl);
 
-	bsodLogInit();
-
 	ePython python;
 	eMain main;
 
