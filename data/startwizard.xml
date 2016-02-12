@@ -136,7 +136,7 @@ self.selectKey("RIGHT")
 from Components.NimManager import nimmanager
 self.condition = len(nimmanager.nim_slots) > 6 and not nimmanager.nim_slots[6].empty and not nimmanager.nim_slots[6].isFBCLink()
 			</condition>
-			<text value="Please set up tuner D" />
+			<text value="Please set up tuner G" />
 			<config screen="NimSetup" module="Satconfig" args="6" type="ConfigList" />
 			<code>
 self.clearSelectedKeys()
