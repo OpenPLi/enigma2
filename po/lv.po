@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-11 00:34+0200\n"
+"POT-Creation-Date: 2016-02-16 23:02+0200\n"
 "PO-Revision-Date: 2014-11-12 00:49+0200\n"
 "Last-Translator: Tapat <taapat@gmail.com>\n"
 "Language-Team: Taapat <taapat@gmail.com>\n"
@@ -449,6 +449,9 @@ msgstr "9"
 #, python-format
 msgid ": %s"
 msgstr ": %s"
+
+msgid ": 0000 - default (disabled)"
+msgstr ": 0000 - pēc noklusējuma (nedarbosies)"
 
 msgid "<Current movielist location>"
 msgstr "<Tekošā filmu saraksta atrašanās vieta>"
@@ -2363,7 +2366,10 @@ msgid "Enable bouquet selection in multi-EPG"
 msgstr "Aktivizēt buķešu izvēli multi-EPG"
 
 msgid "Enable fallback remote receiver"
-msgstr "Aktivizēt papildus rezeves uztvērēju"
+msgstr "Izmantot citu rezeves uztvērēju"
+
+msgid "Enable fallback remote receiver for recordings"
+msgstr "Izmantot citu rezeves uztvērēju ierakstiem"
 
 msgid "Enable freesat EPG"
 msgstr "Aktivizēt freesat EPG"
@@ -2375,7 +2381,10 @@ msgid "Enable parental protection"
 msgstr "Aktivizēt vecāku kontroli"
 
 msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
-msgstr "Aktivizēt Enigma2 uztvērēju, kuru izmatot lai mēģinātu uztvert kanālu kurš nav uztverams lokāli (piem. uztvērējs ir aizņemts vai kanāla tips nav pieejams lokālajā uztvērējā). Norādiet pilnu adresi ieskaitot http:// un porta numuru (pēc nolkusējuma ...:8001), piem. http://second_box:8001."
+msgstr "Izmantot citu Enigma2 uztvērēju, kuru lietot lai mēģinātu uztvert kanālu kurš nav uztverams lokāli (piem. uztvērējs ir aizņemts vai kanāla tips nav pieejams lokālajā uztvērējā). Norādiet pilnu adresi ieskaitot http:// un porta numuru (pēc nolkusējuma ...:8001), piem. http://second_box:8001."
+
+msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally for recordings (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
+msgstr "Izmantot citu Enigma2 uztvērēju, kuru lietot ierakstiem lai mēģinātu uztvert kanālu kurš nav uztverams lokāli (piem. uztvērējs ir aizņemts vai kanāla tips nav pieejams lokālajā uztvērējā). Norādiet pilnu adresi ieskaitot http:// un porta numuru (pēc nolkusējuma ...:8001), piem. http://second_box:8001."
 
 msgid "Enable teletext caching"
 msgstr "Aktivizēt teleteksta kešošanu"
@@ -2602,6 +2611,27 @@ msgstr "F"
 
 msgid "F1/F3"
 msgstr "F1/F3"
+
+msgid "FBC Unicable"
+msgstr "FBC Unicable"
+
+msgid "FBC automatic loop through"
+msgstr "FBC automātiski loop cauri"
+
+msgid ""
+"FBC automatic loop through\n"
+"inactive"
+msgstr ""
+"FBC automātiski loop cauri\n"
+"neaktīvs"
+
+#, python-format
+msgid ""
+"FBC automatic loop through\n"
+"linked to %s"
+msgstr ""
+"FBC automātiski loop cauri\n"
+"saistīts ar %s"
 
 msgid "FEC"
 msgstr "FEC"
@@ -3835,6 +3865,9 @@ msgstr "Kanāli/operatori nav izvēlēti"
 msgid "No standby"
 msgstr "Nav gaidstāves"
 
+msgid "No stream clients"
+msgstr "Nav neviena straumēšanas klienta"
+
 msgid "No suitable sat tuner found!"
 msgstr "Nav atrasts piemērots sat uztvērējs!"
 
@@ -4329,6 +4362,27 @@ msgstr "Lūdzu iestatiet uztvērēju C"
 
 msgid "Please set up tuner D"
 msgstr "Lūdzu iestatiet uztvērēju D"
+
+msgid "Please set up tuner E"
+msgstr "Lūdzu iestatiet uztvērēju E"
+
+msgid "Please set up tuner F"
+msgstr "Lūdzu iestatiet uztvērēju F"
+
+msgid "Please set up tuner G"
+msgstr "Lūdzu iestatiet uztvērēju G"
+
+msgid "Please set up tuner H"
+msgstr "Lūdzu iestatiet uztvērēju H"
+
+msgid "Please set up tuner I"
+msgstr "Lūdzu iestatiet uztvērēju I"
+
+msgid "Please set up tuner J"
+msgstr "Lūdzu iestatiet uztvērēju J"
+
+msgid "Please set up tuner K"
+msgstr "Lūdzu iestatiet uztvērēju K"
 
 msgid ""
 "Please use direction keys to move the PiP window.\n"
@@ -5386,6 +5440,9 @@ msgstr ""
 msgid "Services"
 msgstr "Kanāli"
 
+msgid "Set PIN"
+msgstr "Iestatīt PIN"
+
 msgid "Set all hotkey to default?"
 msgstr "Iestatīt visu taustiņu noklusētās vērtības?"
 
@@ -6067,6 +6124,9 @@ msgstr "Plūsma"
 
 msgid "Stream request"
 msgstr "Plūsmas pieprasījums"
+
+msgid "Streaming clients info"
+msgstr "Straumēšanas klienti"
 
 msgid "Strongest position"
 msgstr "Ciešā pozīcija"
@@ -6785,13 +6845,13 @@ msgid "Unhide parental control services"
 msgstr "Parādīt servisus ar vecāku aizsardzību"
 
 msgid "Unicable"
-msgstr "Vienkabeļa"
+msgstr "Unicable"
 
 msgid "Unicable LNB"
-msgstr "Vienkabeļa LNB"
+msgstr "Unicable LNB"
 
 msgid "Unicable Martix"
-msgstr "Vienkabeļa Martix"
+msgstr "Unicable Martix"
 
 msgid "Uninstall"
 msgstr "Atinstalēt"
@@ -7568,6 +7628,9 @@ msgstr "Jā, atgriezties uz filmu sarakstu"
 msgid "Yesterday"
 msgstr "Vakar"
 
+msgid "You PIN code is 0000. This is the default PIN code and it disable parental control!\n"
+msgstr "Jūsu PIN kods ir 0000. Tas ir kods pēc noklusējuma un izslēdz vecāku kontroli!\n"
+
 #, python-format
 msgid ""
 "You already have a channel list installed,\n"
@@ -7752,6 +7815,9 @@ msgstr "Pārslēgties uz izvēlēto kanālu, vai parādīt detalizētu pārraide
 
 msgid "Zap up"
 msgstr "Pārslēgt uz augšu"
+
+msgid "Zgemma H.S/H.2S/H.2H"
+msgstr "Zgemma H.S/H.2S/H.2H"
 
 msgid "[REC]"
 msgstr "[IER]"
@@ -8575,6 +8641,9 @@ msgstr "nopietnā mūzika/klasiskā mūzika"
 
 msgid "serious/classical/religious/historical movie/drama"
 msgstr "nopietnā/klasiskā/reliģiskā/vēsturiskā filma/drāma"
+
+msgid "service is in bouquet parental protection"
+msgstr "kanāls ir vecāku kontroles buķetē"
 
 msgid "set as startup service"
 msgstr "iestatīt kā starta kanālu"
