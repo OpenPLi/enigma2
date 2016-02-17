@@ -6,7 +6,7 @@ from Components.Harddisk import internalHDDNotSleeping
 from Components.SystemInfo import SystemInfo
 from Tools import Notifications
 from GlobalActions import globalActionMap
-import RecordTimer
+import RecordTimer, os
 from enigma import eDVBVolumecontrol, eTimer, eDVBLocalTimeHandler, eServiceReference
 from time import time, localtime
 
@@ -40,6 +40,9 @@ class Standby(Screen):
 		self.avswitch = AVSwitch()
 
 		print "enter standby"
+
+		if os.path.exists("/usr/script/standby_enter.sh"):
+			os.system("/usr/script/standby_enter.sh")
 
 		self["actions"] = ActionMap( [ "StandbyActions" ],
 		{
@@ -116,6 +119,8 @@ class Standby(Screen):
 		globalActionMap.setEnabled(True)
 		if RecordTimer.RecordTimerEntry.receiveRecordEvents:
 			RecordTimer.RecordTimerEntry.stopTryQuitMainloop()
+		if os.path.exists("/usr/script/standby_leave.sh"):
+			os.system("/usr/script/standby_leave.sh")
 
 	def __onFirstExecBegin(self):
 		global inStandby
@@ -244,6 +249,8 @@ class TryQuitMainloop(MessageBox):
 			self.hide()
 			if self.retval == 1:
 				config.misc.DeepStandby.value = True
+				if os.path.exists("/usr/script/standby_enter.sh"):
+					os.system("/usr/script/standby_enter.sh")
 			elif not inStandby:
 				config.misc.RestartUI.value = True
 				config.misc.RestartUI.save()
