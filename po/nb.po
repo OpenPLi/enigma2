@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-24 20:42+0100\n"
-"PO-Revision-Date: 2016-01-25 17:21+0100\n"
+"POT-Creation-Date: 2016-02-18 12:44+0100\n"
+"PO-Revision-Date: 2016-02-18 20:32+0100\n"
 "Last-Translator: Andy1 <dmmm8000hdpvr@gmail.com>\n"
 "Language-Team: none\n"
 "MIME-Version: 1.0\n"
@@ -43,7 +43,7 @@ msgid ""
 "Edit the upgrade source address."
 msgstr ""
 "\n"
-"Endre oppdateringens kildeadresse."
+"Endre kildeadresse til oppdateringen."
 
 msgid ""
 "\n"
@@ -433,6 +433,9 @@ msgstr "4:3 Breddereduksjon"
 msgid ": %s"
 msgstr ""
 
+msgid ": 0000 - default (disabled)"
+msgstr ": 0000 - standard (frakoblet)"
+
 msgid "<Current movielist location>"
 msgstr "<Gjeldende opptaks lokasjon>"
 
@@ -553,7 +556,7 @@ msgstr ""
 "Deaktiver TV og prøv igjen?\n"
 
 msgid "A/V settings"
-msgstr "A/V innstilling"
+msgstr "Lyd og bilde innstilling"
 
 msgid "AAC downmix"
 msgstr "AAC nedskalering"
@@ -934,6 +937,9 @@ msgstr "Auto fokusering"
 msgid "Auto focus commencing ..."
 msgstr "Auto fokusering begynner ..."
 
+msgid "Auto play blu-ray file"
+msgstr "Spill av automatisk blu-ray fil"
+
 #
 msgid "Auto scart switching"
 msgstr "Auto scart bytte"
@@ -1087,7 +1093,7 @@ msgstr "CI tildeling"
 
 #
 msgid "CI slot: "
-msgstr ""
+msgstr "CI spor:"
 
 msgid "CPU: "
 msgstr "Prosessor:"
@@ -1382,7 +1388,7 @@ msgid "Configure the transparency of the OSD."
 msgstr "Still inn lysstyrken på skjermmeny."
 
 msgid "Configure the video output mode (or resolution)."
-msgstr "Still inn video utgangen (eller oppløsning)."
+msgstr "Still inn bilde utgang (eller oppløsning)."
 
 msgid "Configure whether multi channel sound tracks should be downmixed to stereo."
 msgstr "Still inn om flerkanals lyd skal nedskaleres til stereolyd."
@@ -1401,7 +1407,7 @@ msgid "Configure your wireless LAN again"
 msgstr "Still inn ditt trådløse nettverk igjen"
 
 msgid "Configures which video output connector will be used."
-msgstr "Still inn video utgang som skal brukes."
+msgstr "Still inn bilde utgang som skal brukes."
 
 #
 msgid "Configuring"
@@ -2079,7 +2085,7 @@ msgid "Enable parental protection"
 msgstr "Aktiver foreldrekontroll"
 
 msgid "Enable timer conflict detection"
-msgstr "Aktiver tidtakerkonflikt deteksjon"
+msgstr "Aktiver oppdagelse av tidtakerkonflikt"
 
 msgid "Enable wakeup timer"
 msgstr "Bruk vekkerklokke"
@@ -2254,7 +2260,7 @@ msgid "Expert"
 msgstr "Ekspert"
 
 msgid "Extend sleeptimer 15 minutes"
-msgstr "Utvid tidtakerlengde med 15 minutter"
+msgstr "Utvid innsovings tidtaker med 15 minutter"
 
 #
 msgid "Extended"
@@ -2305,6 +2311,28 @@ msgstr "Ekstra start tid til ignorering av inaktiv innsovings tidtaker"
 
 msgid "F1/F3"
 msgstr ""
+
+#
+msgid "FBC Unicable"
+msgstr "FBC Unikabel (Full Band Capture)"
+
+msgid "FBC automatic loop through"
+msgstr "FBC automatisk gjennomgang"
+
+msgid ""
+"FBC automatic loop through\n"
+"inactive"
+msgstr ""
+"FBC automatisk gjennomgang\n"
+"inaktiv"
+
+#, python-format
+msgid ""
+"FBC automatic loop through\n"
+"linked to %s"
+msgstr ""
+"FBC automatisk gjennomgang\n"
+"koblet til %s"
 
 #
 msgid "FEC"
@@ -2799,7 +2827,7 @@ msgid "Input"
 msgstr "Inngang"
 
 msgid "Input device setup"
-msgstr "Enhetsinnstilling"
+msgstr "Enhets innstilling"
 
 #
 msgid "Install"
@@ -2903,7 +2931,7 @@ msgstr "Er denne innstilling OK?"
 
 #
 msgid "Is this video mode ok?"
-msgstr "Er denne videoinnstilling OK?"
+msgstr "Er denne bilde innstillingen ok?"
 
 #
 msgid "Italian"
@@ -2978,7 +3006,7 @@ msgid "Last upgrade: "
 msgstr "Siste oppdatering:"
 
 msgid "Latest Commits"
-msgstr "Siste programvare"
+msgstr "Programvareendringer"
 
 #
 msgid "Latitude"
@@ -3195,7 +3223,7 @@ msgid "Memory"
 msgstr "Minne"
 
 msgid "Memory Info"
-msgstr "Minne info"
+msgstr "Minne"
 
 msgid "Memory index"
 msgstr "Minne oversikt"
@@ -3536,6 +3564,9 @@ msgstr "Ingen kanaler/distributører er valgt"
 #
 msgid "No standby"
 msgstr "Ingen standby"
+
+msgid "No stream clients"
+msgstr "Ingen stream klienter"
 
 msgid "No suitable sat tuner found!"
 msgstr "Ingen passende sat tuner ble funnet!"
@@ -4552,11 +4583,11 @@ msgstr "Tilbakestill avspillingsposisjon"
 
 #
 msgid "Reset video enhancement settings to system defaults?"
-msgstr "Skal video innstillingene tilbakestilles til  systemets standardinnstillinger?"
+msgstr "Skal bilde innstillingene tilbakestilles til  systemets standardinnstillinger?"
 
 #
 msgid "Reset video enhancement settings to your last configuration?"
-msgstr "Skal video innstillingene tilbakestilles til din siste innstilling?"
+msgstr "Skal bilde innstillingene tilbakestilles til den forrige innstillingen?"
 
 #
 msgid "Resolution"
@@ -5062,6 +5093,9 @@ msgstr ""
 msgid "Services"
 msgstr "Kanaler"
 
+msgid "Set PIN"
+msgstr "Velg PIN"
+
 msgid "Set all hotkey to default?"
 msgstr "Sette alle snarveistaster til standard?"
 
@@ -5265,7 +5299,7 @@ msgid "Show vertical timelines"
 msgstr "Vis vertikale tidslinjer"
 
 msgid "Show warning before set 'Ignore conflict'"
-msgstr "Vis advarsel før valget av 'Ignorer konflikt'"
+msgstr "Vis advarsel før valget 'Ignorer konflikt'"
 
 #
 msgid "Shows the state of your wireless LAN connection.\n"
@@ -5699,6 +5733,9 @@ msgstr "Datastrøm"
 msgid "Stream request"
 msgstr "Strømme forespørsel"
 
+msgid "Streaming clients info"
+msgstr "Streaming klient info"
+
 msgid "Strongest position"
 msgstr "Sterkeste posisjon"
 
@@ -5837,7 +5874,7 @@ msgstr "System"
 
 #. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
 msgid "TRANSLATOR_INFO"
-msgstr "Oversatt til norsk bokmål. Sist oppdatert den 25.01.2016"
+msgstr "Oversatt til norsk bokmål. Sist oppdatert den 18.02.2016"
 
 #
 msgid "TS file is too large for ISO9660 level 1!"
@@ -5899,7 +5936,7 @@ msgid "The %d min remaining before the end of the event."
 msgstr "%d min gjenstår før slutten av filmen"
 
 msgid "The DVD standard doesn't support H.264 (HDTV) video streams. Do you want to create a special format data DVD (which will not play in stand-alone DVD players) instead?"
-msgstr "DVD-standarden støtter ikke H.264 (HDTV) video. Det kan heller opprettes et spesielt dataformat for DVD? (dette formatet kan ikke spilles i frittstående DVD-spillere)"
+msgstr "DVD-standarden støtter ikke H.264 (HDTV) video. Skal det heller opprettes et spesielt dataformat for DVD? (dette formatet kan ikke spilles i frittstående DVD-spillere)"
 
 msgid ""
 "The OpenPLi team would like to point out that upgrading to the latest nightly build comes not only with the latest features, but also with some risks. After the update, it is possible that your device no longer works as expected. We recommend you create backups with Autobackup or Backupsuite. This allows you to quickly and easily restore your device to its previous state, should you experience any problems. If you encounter a 'bug', please report the issue on www.openpli.org.\n"
@@ -6276,7 +6313,7 @@ msgstr "Transkoding:"
 
 #
 msgid "Translations"
-msgstr "Oversettelser"
+msgstr "Oversettelse"
 
 #
 msgid "Transmission mode"
@@ -6548,7 +6585,7 @@ msgstr "Bruk disse innstillinger?"
 
 #
 msgid "Use this video enhancement settings?"
-msgstr "Bruk disse videoinnstillinger?"
+msgstr "Bruke disse innstillingene for bilde?"
 
 msgid "Used service scan type"
 msgstr "Kanalsøkevalg"
@@ -6780,7 +6817,7 @@ msgid ""
 msgstr ""
 "Advarsel!\n"
 "Dette er en funksjon for viderekommende brukere.\n"
-"Skal tidtakerkonflikt deteksjonen virkelig frakobles?"
+"Skal oppdagelse av tidtakerkonflikt ikke brukes?"
 
 msgid "Warning: no LNB; using factory defaults."
 msgstr "Advarsel: ingen LNB; bruker standardinnstillinger."
@@ -6944,6 +6981,9 @@ msgstr "Ja, returnerer til opptaksliste"
 msgid "Yesterday"
 msgstr "I går"
 
+msgid "You PIN code is 0000. This is the default PIN code and it disable parental control!\n"
+msgstr "PIN koden er 0000. Dette er standard kode og den frakobler foreldrekontrollen!\n"
+
 #, python-format
 msgid ""
 "You already have a channel list installed,\n"
@@ -7086,6 +7126,9 @@ msgstr "Gå til til valgt kanal, eller vis detaljert program info (avhengig av i
 
 msgid "Zap up"
 msgstr "Zap opp"
+
+msgid "Zgemma H.S/H.2S/H.2H"
+msgstr ""
 
 #
 msgid "[alternative edit]"
@@ -7353,6 +7396,9 @@ msgstr "detektime/spenning"
 msgid "disable"
 msgstr "deaktiver"
 
+msgid "disable intro screen"
+msgstr "deaktiver introduksjons skjerm"
+
 msgid "disable move mode"
 msgstr "slå av flytte modus"
 
@@ -7408,6 +7454,9 @@ msgstr "aktiver kanalliste redigering"
 #
 msgid "enable favourite edit"
 msgstr "aktiver favorittliste redigering"
+
+msgid "enable intro screen"
+msgstr "aktiver introduksjons skjerm"
 
 #
 msgid "enable move mode"
@@ -7469,6 +7518,9 @@ msgstr "ET9000/ET9100"
 
 msgid "et9200/9500/6500"
 msgstr "ET9200/ET9500/ET6500"
+
+msgid "execute cuts (requires MovieCut plugin)"
+msgstr "utfør klipp (må ha tillegget MovieCut)"
 
 #
 msgid "exit DVD player or return to file browser"
@@ -8015,6 +8067,9 @@ msgstr "seriøs musikk/klassisk musikk"
 msgid "serious/classical/religious/historical movie/drama"
 msgstr "seriøs/klassisk/religiøs/historisk film/drama"
 
+msgid "service is in bouquet parental protection"
+msgstr "Kanalen er beskyttet av foreldrekontrollen"
+
 msgid "set as startup service"
 msgstr "bruk denne som oppstartskanal"
 
@@ -8312,14 +8367,14 @@ msgid "Filesystem check"
 msgstr "Kontroller filsystem"
 
 msgid "Harddisk"
-msgstr "Disk hdd/ssd innstilling"
+msgstr "Lagrings innstilling"
 
 #
 msgid "Initialization"
 msgstr "Oppstart"
 
 msgid "Input devices"
-msgstr "Enhetsinnstilling"
+msgstr "Enhets innstilling"
 
 #
 msgid "Keyboard"
@@ -8442,7 +8497,7 @@ msgid "Behavior when a movie is stopped"
 msgstr "Oppførsel når avspilling stoppes"
 
 msgid "By default, SNR will be shown in dB (when supported by the tuner). This setting forces SNR to be shown as a percentage instead."
-msgstr "Som standard vil SNR (signalstyrke) vises i dB (desibel) hvis tuneren støtter dette. Velg nei for innstilling som viser SNR i prosent."
+msgstr "Som standard vil SNR (signalstyrke) vises i dB (desibel hvis tuneren støtter dette). Med denne innstillingen vises heller SNR i prosent."
 
 msgid "Can be used for different fps between external subtitles and video."
 msgstr "Kan brukes for forskjellig fps (bilde pr.sekund) mellom ekstern undertekst og video."
@@ -8805,6 +8860,9 @@ msgstr "Aktiver kanallistevalg i multi-EPG"
 msgid "Enable fallback remote receiver"
 msgstr "Bruk ekstern reservemottaker"
 
+msgid "Enable fallback remote receiver for recordings"
+msgstr "Aktiver ekstern fjernmottaker til opptak"
+
 msgid "Enable freesat EPG"
 msgstr "Aktiver freesat EPG"
 
@@ -8814,6 +8872,9 @@ msgstr "Aktiver flere kanallister"
 
 msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
 msgstr "Aktiver ekstern enigma2 mottaker som kan brukes til å søke opp kanaler/tjenester som ikke kan nåes lokalt (eks.tuner er opptatt eller kanal/tjeneste er utenfor rekkevidde for lokal tuner). Tast inn komplett URL inkludert http:// og port nummer (normalt ...:8001), eks. http://andre_boks:8001."
+
+msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally for recordings (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
+msgstr "Aktiver ekstern enigma2 mottaker til å søke inn kanaler/tjenester som ikke kan fåes inn lokalt (eks.tuner er opptatt eller kanal/tjeneste er utenfor rekkevidde for lokal tuner). Tast inn komplett URL inkludert http:// og port nummer (normalt ...:8001), eks. http://andre_boks:8001."
 
 msgid "Enable teletext caching"
 msgstr "Aktiver tekst-TV mellomlagring"
@@ -9048,7 +9109,7 @@ msgid "Show EIT now/next in infobar"
 msgstr "Vis EIT nå/neste på infobar"
 
 msgid "Show SNR percentage instead of dB value"
-msgstr "Vis SNR i dB verdi eller prosent"
+msgstr "Vis SNR signalstyrke i prosent istedenfor dB verdi"
 
 #
 msgid "Show VCR scart on main menu"
@@ -9145,7 +9206,7 @@ msgid "Sound carrier"
 msgstr "Lydbærer"
 
 msgid "StandbyLED"
-msgstr ""
+msgstr "AvslåttLED"
 
 msgid "Startup the set top box in standby"
 msgstr "Velg om mottakeren skal startes fra avslått modus"
@@ -9250,7 +9311,7 @@ msgid "When enabled the arrow buttons around the OK button will follow the 'neut
 msgstr "Når dette er på, vil piltastene rundt OK, følge 'neutrino stil' zapping istedenfor enigma2 stil på fjernkontrollen."
 
 msgid "When enabled the left, right, CH+/-, B+/-, P+/- buttons will follow the 'neutrino' style zap controls instead of the enigma2 style."
-msgstr "Når dette er på, vil tastene venstre, høyre, CH, B og P,følge 'neutrino stil' zapping istedenfor enigma2 stil på fjernkontrollen."
+msgstr "Når dette er på, vil venstre, høyre, opp, ned, + og - tastene følge 'neutrino stil' zapping istedenfor enigma2 stil på fjernkontrollen."
 
 msgid "When enabled the set top box is able to wakeup on LAN"
 msgstr "Når dette er på, kan mottakeren slås på ved ved hjelp av LAN"
@@ -9259,10 +9320,10 @@ msgid "When enabled then when you select a new channel in the channel selection 
 msgstr "Når dette er på, vil kanallisten ikke lukkes selv om det er valgt en ny kanal fra kanallisten. Den lukkes kun når gjeldene kanal velges. Brukes som forhåndsvisning."
 
 msgid "When enabled you can control the volume with the arrow buttons instead of getting the channel selection list"
-msgstr "Når dette er på, brukes fjernkontrollens piltaster til å styre lydvolumet i stedet for å åpne kanallisten."
+msgstr "Når dette er på, brukes fjernkontrollens piltaster til å styre lydvolumet istedenfor å åpne kanallisten."
 
 msgid "When enabled you can zap channels with the  CH+/-, B+/-, P+/- buttons instead of opening the channel selection list."
-msgstr "Når dette er på, kan det zappes kanaler med venstre, høyre, opp, ned, + og - tastene i stedet for å åpne kanallisten."
+msgstr "Når dette er på, kan det zappes kanaler med venstre, høyre, opp, ned, + og - tastene istedenfor å åpne kanallisten."
 
 msgid "When enabled you get the channel selection list via the OK button, the infobar toggle is then transfered to exit button"
 msgstr "Når dette er på, vises kanallisten på OK tast. Infobar skrus av/på ved hjelp av exit tast"
@@ -9292,7 +9353,7 @@ msgid "When enabled, a warning will be displayed and the user will get an option
 msgstr "Når dette er på, vil en advarsel vises på skjermen med valget stopp eller fortsett tidsskift."
 
 msgid "When enabled, always descramble receiving http streams. This takes up more resources (descrambling demuxers), only enable if necessary. Individual streams are always descrambled if 0x100 is added to the service type, regardless of this setting. Default off."
-msgstr "Når dette er på, vil mottatt http strøm bli dekryptert. Dette opptar store data ressurser (dekryptere, demuxe bilde) og brukes bare når nødvendig. Individuelle strømmer er alltid dekryptert hvis 0x100 er lagt til i service typen, uansett denne innstillingen. Standardinnstilling: av."
+msgstr "Når dette er på, vil mottatt http strøm bli dekryptert. Dette opptar store data ressurser (dekryptere, demuxe bilde) og brukes bare når det er nødvendig. Individuelle strømmer er alltid dekryptert hvis 0x100 er tillagt i service typen, uavhengig av denne innstillingen. Standardinnstilling: av."
 
 msgid "When enabled, authentication is required to watch http streams."
 msgstr "Når dette er på, kreves autentisering for å se http strømmer."
@@ -9301,10 +9362,10 @@ msgid "When enabled, channel numbering will start at '1' for each bouquet."
 msgstr "Når dette er på, vil kanal nummer starte på '1' i hver enkelt kanalliste."
 
 msgid "When enabled, continue to the next bouquet when the last channel of the current bouquet is reached while changing channels."
-msgstr "Når dette er på, vil det fortsettes automatisk til neste kanalliste når den siste kanalen i nåværende liste er nådd under zapping."
+msgstr "Når dette er på, fortsettes det automatisk til neste kanalliste når den siste kanalen i nåværende liste er nådd under zapping."
 
 msgid "When enabled, deleted recordings are moved to the trash can, instead of being deleted immediately."
-msgstr "Når dette er på, flyttes slettede opptak til papirkurven i stedet for å bli slettet umiddelbart."
+msgstr "Når dette er på, går slettede opptak i papirkurven istedenfor å bli slettet umiddelbart."
 
 msgid "When enabled, display the EIT now/next eventdata in infobar. When disabled, display now/next eventdata from the EPG cache instead."
 msgstr "Når dette er på, vises EIT data 'nå og neste' TV-program på infobar. Hvis deaktivert, vises istedenfor 'nå og neste' TV-program fra EPG minne."
@@ -9331,7 +9392,7 @@ msgid "When enabled, graphical DVB subtitles will be displayed at their original
 msgstr "Når dette er på, vises DVB undertekst på sin opprinnelige posisjon."
 
 msgid "When enabled, graphical DVB subtitles will be displayed in yellow, instead of the original color."
-msgstr "Når dette er på, vises DVB undertekst i gult i stedet for den opprinnelige fargen."
+msgstr "Når dette er på, vises DVB undertekst i gult istedenfor den opprinnelige fargen."
 
 msgid "When enabled, http streams are descrambled on the server side. The (remote) client receiver does not have to do descrambling. Default on."
 msgstr "Når dette er på, vil http strømmer bli dekodet på serversiden. Ekstern fjernmottaker trenger ikke foreta dekodingen. Standardinnstilling: på."
@@ -9388,10 +9449,10 @@ msgid "When enabled, the receiver will automatically use the audio track which y
 msgstr "Når dette er på, vil mottakeren automatisk bruke lydsporet som tidligere ble valgt av bruker."
 
 msgid "When enabled, the receiver will automatically use the subtitles which you selected before."
-msgstr "Når dette er på, vil mottakeren automatisk bruke undertekster som tidligere ble valgt av bruker."
+msgstr "Når dette er på, vil mottakeren automatisk bruke undertekster som tidligere ble valgt."
 
 msgid "When enabled, the receiver will no longer monitor the tuned transponder for possible changes. Do not use this option unless you know what you are doing."
-msgstr "Når dette er på, vil mottakeren ikke lenger overvåke innstilt transponder for mulige endringer. Ikke bruk dette alternativet ved tvil."
+msgstr "Når dette er på, vil ikke mottakeren overvåke innstilt transponder for mulige endringer. Ikke bruk dette alternativet ved tvil."
 
 msgid "When enabled, the receiver will select an AC3 track (when available)."
 msgstr "Når dette er på, vil mottakeren bruke AC3 lyd (når tilgjengelig)."
@@ -9734,6 +9795,34 @@ msgstr "Still inn tuner C"
 msgid "Please set up tuner D"
 msgstr "Still inn tuner D"
 
+#
+msgid "Please set up tuner E"
+msgstr "Still inn tuner E"
+
+#
+msgid "Please set up tuner F"
+msgstr "Still inn tuner F"
+
+#
+msgid "Please set up tuner G"
+msgstr "Still inn tuner G"
+
+#
+msgid "Please set up tuner H"
+msgstr "Still inn tuner H"
+
+#
+msgid "Please set up tuner I"
+msgstr "Still inn tuner I"
+
+#
+msgid "Please set up tuner J"
+msgstr "Still inn tuner J"
+
+#
+msgid "Please set up tuner K"
+msgstr "Still inn tuner K"
+
 msgid "Skip internet connection check (disables automatic package installation)"
 msgstr "Hopp over oppkoblingssjekk for internett (frakobler automatisk pakke installasjon)"
 
@@ -9993,8 +10082,5 @@ msgstr ""
 msgid "Video mode selection."
 msgstr "Innstilling for bilde."
 
-#~ msgid "Changelog"
-#~ msgstr "Endringslogg"
-
-#~ msgid "Could not connect to receiver .NFI image feed server:"
-#~ msgstr "Kunne ikke koble til mottakeren. NFI programvare feed server:"
+#~ msgid "Video:"
+#~ msgstr "Bilde:"
