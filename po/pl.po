@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-06 19:03+0100\n"
-"PO-Revision-Date: 2016-01-07 19:04+0100\n"
+"POT-Creation-Date: 2016-02-16 18:35+0100\n"
+"PO-Revision-Date: 2016-02-18 19:00+0100\n"
 "Last-Translator: blzr <blzr@o2.pl>\n"
 "Language-Team: \n"
 "Language: pl_PL\n"
@@ -447,6 +447,9 @@ msgstr "9"
 msgid ": %s"
 msgstr ""
 
+msgid ": 0000 - default (disabled)"
+msgstr " "
+
 msgid "<Current movielist location>"
 msgstr "<Bieżąca lokalizacja nagrań>"
 
@@ -575,10 +578,10 @@ msgid "Abort"
 msgstr "Przerwij"
 
 msgid "About"
-msgstr "O tunerze..."
+msgstr "Odbiornik / System"
 
 msgid "About..."
-msgstr "O tunerze..."
+msgstr "Odbiornik / System "
 
 msgid "Accesspoint:"
 msgstr "Punkt dostępowy:"
@@ -946,6 +949,9 @@ msgstr "Auto wyostrzanie rozpoczęte..."
 msgid "Auto language selection"
 msgstr "Automatyczny wybór języka"
 
+msgid "Auto play blu-ray file"
+msgstr "Automatycznie odtwarzaj plik blu-ray"
+
 msgid "Auto scart switching"
 msgstr "Automatyczne przełączanie 'scart'"
 
@@ -1102,6 +1108,9 @@ msgstr "Ustawienia modułu dostępu CI"
 msgid "CI assignment"
 msgstr "Zadania CI"
 
+msgid "CI slot: "
+msgstr "Slot CI:"
+
 msgid "CPU: "
 msgstr ""
 
@@ -1185,9 +1194,6 @@ msgstr "Zmień rozmiar kroku"
 
 msgid "Change timer"
 msgstr "Zmień timer"
-
-msgid "Changelog"
-msgstr ""
 
 msgid "Channel"
 msgstr "Kanał"
@@ -1714,9 +1720,6 @@ msgstr "Konwertuje ext3 do ext4..."
 msgid "Copy"
 msgstr "Kopiuj"
 
-msgid "Could not connect to receiver .NFI image feed server:"
-msgstr ""
-
 msgid "Could not find installed channel list."
 msgstr "Nie znaleziono zainstalowanej listy kanałów. "
 
@@ -1784,12 +1787,6 @@ msgstr "Aktualny transponder"
 
 msgid "Current value: "
 msgstr "Aktualna wartość:"
-
-msgid "Current version:"
-msgstr "Aktualna wersja:"
-
-msgid "Currently installed image"
-msgstr "Aktualnie zainstalowane image"
 
 msgid "Currently the commit log cannot be retrieved - please try later again"
 msgstr "Commit log nie może zostać teraz pobrany - spróbuj ponownie później"
@@ -2185,10 +2182,6 @@ msgstr "Czy chcesz wykonać skanowanie kanałów?"
 msgid "Do you want to do another manual service scan?"
 msgstr "Czy chcesz wykonać kolejne ręczne skanowanie?"
 
-#, python-format
-msgid "Do you want to download the image to %s ?"
-msgstr "Czy chcesz pobrać image do %s ?"
-
 msgid "Do you want to install a channel list?"
 msgstr "Chcesz zainstalować listę kanałów?"
 
@@ -2244,16 +2237,6 @@ msgid_plural "Done - Installed, upgraded or removed %d packages (%s)"
 msgstr[0] "Gotowe - zainstalowano, zaktualizowano lub usunięto %d pakiet (%s)"
 msgstr[1] "Gotowe - zainstalowano, zaktualizowano lub usunięto %d pakiety (%s)"
 msgstr[2] "Gotowe - zainstalowano, zaktualizowano lub usunięto %d pakietów (%s)"
-
-msgid "Download"
-msgstr "Pobierz"
-
-#, python-format
-msgid "Download %s from server"
-msgstr "Pobierz %s z serwera"
-
-msgid "Download .NFI-files for USB-flasher"
-msgstr "Pobierz pliki NFI dla 'USB-flahser'"
 
 msgid "Download plugins"
 msgstr "Pobierz wtyczki"
@@ -2382,6 +2365,9 @@ msgstr "Włącz wybór bukietów w multi-EPG"
 msgid "Enable fallback remote receiver"
 msgstr "Włącz opcję 'rezerwowego' zdalnego odbiornika"
 
+msgid "Enable fallback remote receiver for recordings"
+msgstr "Włącz opcję nagrywania przy użyciu 'rezerwowego' zdalnego odbiornika"
+
 msgid "Enable freesat EPG"
 msgstr "Włącz freesat EPG"
 
@@ -2393,6 +2379,9 @@ msgstr "Włącz kontrolę rodzicielską"
 
 msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
 msgstr "Włącz, aby zdalny odbiornik (na enigma2), był ewentualnym 'źródłem' kanałów, które nie mogą być odebrane lokalnie (np. głowice są zajęte lub typ kanału jest niedostępny na lokalnym tunerze. Wpisz kompletny URL zawierający http:// i numer portu (standardowo ...:8001), np. http://drugi_box:8001"
+
+msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally for recordings (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
+msgstr "Włącz, aby zdalny odbiornik (na e2), był w razie potrzeby wykorzystywany do nagrywania kanałów, które nie mogą być odebrane lokalnie (np. głowice są zajęte lub typ kanału jest niedostępny na lokalnym tunerze. Wpisz kompletny URL zawierający http:// i numer portu (standardowo ...:8001), np. http://drugi_box:8001"
 
 msgid "Enable teletext caching"
 msgstr "Włącz pamięć telegazety"
@@ -2620,17 +2609,31 @@ msgstr ""
 msgid "F1/F3"
 msgstr ""
 
+msgid "FBC Unicable"
+msgstr ""
+
+msgid "FBC automatic loop through"
+msgstr "FBC automatyczna przelotka"
+
+msgid ""
+"FBC automatic loop through\n"
+"inactive"
+msgstr "FBC automatyczna przelotka\n"
+"nieaktywny"
+
+#, python-format
+msgid ""
+"FBC automatic loop through\n"
+"linked to %s"
+msgstr ""
+"FBC automatyczna przelotka\n"
+"podłączony do %s"
+
 msgid "FEC"
 msgstr ""
 
 msgid "FEC:"
 msgstr ""
-
-msgid "FP Upgrade"
-msgstr "Aktualizacja FP"
-
-msgid "FP upgrade required"
-msgstr "Niezbędna aktualizacja FP"
 
 msgid "FTA"
 msgstr ""
@@ -2722,12 +2725,6 @@ msgstr "Fiński"
 msgid "Fixed"
 msgstr "Stała"
 
-msgid "Flash"
-msgstr "Flash"
-
-msgid "Flashing failed"
-msgstr "Flashowanie nie powiodło się"
-
 msgid "Following tasks will be done after you press OK!"
 msgstr "Poniższe zadania będą wykonane po wciśnięciu OK!"
 
@@ -2794,7 +2791,7 @@ msgid ""
 "Do you want to restart the GUI now?"
 msgstr ""
 "GUI musi zostać zrestartowane, aby zastosować nowy skin\n"
-"Czy chcesz zrobić restart teraz?"
+"Czy chcesz wykonać restart teraz?"
 
 msgid "Gateway"
 msgstr "Brama"
@@ -2810,12 +2807,6 @@ msgstr "Gatunek"
 
 msgid "German"
 msgstr "Niemiecki"
-
-msgid "Get latest experimental image"
-msgstr "Pobierz ostatni soft eksprymentalny"
-
-msgid "Get latest release image"
-msgstr "Pobierz ostatni stabilny soft"
 
 msgid "Getting plugin information. Please wait..."
 msgstr "Pobieranie info o wtyczkach. Proszę czekać..."
@@ -3694,12 +3685,6 @@ msgstr "N/A"
 msgid "NEXT"
 msgstr "Następny"
 
-msgid "NFI image flashing"
-msgstr "Wgrywanie image NFI"
-
-msgid "NFI image flashing completed. Press Yellow to Reboot!"
-msgstr ""
-
 msgid "NIM"
 msgstr "Tuner"
 
@@ -3786,9 +3771,6 @@ msgstr "Nigdy nie dekoduj w trakcie nagrywania"
 msgid "New"
 msgstr "Nowe"
 
-msgid "New version:"
-msgstr "Nowa wersja:"
-
 msgid "News Current Affairs"
 msgstr "Wiadomości / Aktualności"
 
@@ -3834,9 +3816,6 @@ msgstr "Brak"
 msgid "No description available."
 msgstr "Brak dostępnego opisu."
 
-msgid "No details for this image file"
-msgstr "Brak opisu dla tego image"
-
 msgid "No displayable files on this medium found!"
 msgstr "Brak plików do wyświetlenia na tym nośniku!"
 
@@ -3881,6 +3860,9 @@ msgstr "Brak wybranych kanałów/nadawców"
 
 msgid "No standby"
 msgstr "Bez stanu czuwania"
+
+msgid "No stream clients"
+msgstr "Aktualnie nikt nie pobiera"
 
 msgid "No suitable sat tuner found!"
 msgstr "Nie znaleziono odpowiedniej głowicy sat!"
@@ -4255,9 +4237,6 @@ msgstr "Dodaj tytuły do kompilacji."
 msgid "Please change recording endtime"
 msgstr "Zmień czas zkończenia nagrywania"
 
-msgid "Please check your network settings!"
-msgstr "Sprawdź ustawienia sieci!"
-
 msgid "Please choose an extension..."
 msgstr "Menu rozszerzeń"
 
@@ -4338,9 +4317,6 @@ msgstr "Wybierz subserwis do nagrania..."
 msgid "Please select a subservice..."
 msgstr "Wybierz subserwis..."
 
-msgid "Please select an NFI file and press green key to flash!"
-msgstr ""
-
 msgid "Please select medium to be scanned"
 msgstr "Wybierz nośnik do przeszukania"
 
@@ -4382,6 +4358,27 @@ msgstr "Skonfiguruj Tuner C"
 
 msgid "Please set up tuner D"
 msgstr "Skonfiguruj Tuner D"
+
+msgid "Please set up tuner E"
+msgstr "Skonfiguruj tuner E"
+
+msgid "Please set up tuner F"
+msgstr "Skonfiguruj tuner F"
+
+msgid "Please set up tuner G"
+msgstr "Skonfiguruj tuner G"
+
+msgid "Please set up tuner H"
+msgstr "Skonfiguruj tuner H"
+
+msgid "Please set up tuner I"
+msgstr "Skonfiguruj tuner I"
+
+msgid "Please set up tuner J"
+msgstr "Skonfiguruj tuner J"
+
+msgid "Please set up tuner K"
+msgstr "Skonfiguruj tuner K"
 
 msgid ""
 "Please use direction keys to move the PiP window.\n"
@@ -4536,9 +4533,6 @@ msgstr "Tuner DVB-T preferowany dla nagrywania"
 msgid "Preferred tuner for recordings"
 msgstr "Tuner preferowany dla nagrywania"
 
-msgid "Prepare another USB stick for image flashing"
-msgstr "Przygotuj inny pen USB do flash'owania"
-
 msgid "Preparing... Please wait"
 msgstr "Przygotowywanie... Prosze czekać"
 
@@ -4550,9 +4544,6 @@ msgstr "Wciśnij INFO aby uzyskać dodatkowe informacje"
 
 msgid "Press MENU on your remote control for additional options."
 msgstr "Wciśnij MENU aby mieć dostęp do dodatkowych opcji"
-
-msgid "Press OK and configure the days and times wakeup receiver from deep standby mode."
-msgstr "Wciśnij OK i skonfiguruj dni i czas wybudzania odbiornika z trybu głębokiego czuwania."
 
 msgid "Press OK on your remote control to continue."
 msgstr "Wciśnij OK, aby kontynuować."
@@ -4758,9 +4749,6 @@ msgstr "Wykonać teraz upgrade frontprocesora i zrestartować STB?"
 
 msgid "Really upgrade your settop box and reboot now?"
 msgstr "Wykonać upgrade odbiornika i zrestartować?"
-
-msgid "Reboot"
-msgstr "Reboot"
 
 msgid "Rec"
 msgstr ""
@@ -4980,9 +4968,6 @@ msgstr "Przywróć"
 
 msgid "Restore backups"
 msgstr "Przywróć backup"
-
-msgid "Restore is running..."
-msgstr "Trwa przywracanie..."
 
 msgid "Restore system settings"
 msgstr "Przywróć ustawienia systemowe"
@@ -5292,9 +5277,6 @@ msgstr "Wybierz działanie dla timera '%s':"
 msgid "Select all"
 msgstr "Wybierz wszystkie"
 
-msgid "Select an image to be downloaded"
-msgstr "Wybierz image do pobrania"
-
 msgid "Select audio track"
 msgstr "Wybierz ścieżkę audio"
 
@@ -5312,9 +5294,6 @@ msgstr "Wybierz kanał z którego nagrywać"
 
 msgid "Select copy destination for:"
 msgstr "Wybierz miejsce docelowe kopii dla:"
-
-msgid "Select desired image from feed list"
-msgstr "Wybierz image z listy"
 
 msgid "Select destination for:"
 msgstr "Wybierz miejsce dla:"
@@ -5407,7 +5386,7 @@ msgid "Serbian"
 msgstr "Serbski"
 
 msgid "Service"
-msgstr "O serwisie..."
+msgstr "Aktualny kanał"
 
 msgid "Service has been added to the favourites."
 msgstr "Kanał został dodany do ulubionych."
@@ -5416,7 +5395,7 @@ msgid "Service has been added to the selected bouquet."
 msgstr "Kanał został dodany do wybranego bukietu."
 
 msgid "Service info"
-msgstr "O serwisie..."
+msgstr "Dane serwisu"
 
 msgid ""
 "Service invalid!\n"
@@ -5456,6 +5435,9 @@ msgstr ""
 
 msgid "Services"
 msgstr "Kanały"
+
+msgid "Set PIN"
+msgstr ""
 
 msgid "Set all hotkey to default?"
 msgstr "Przestawić wszystkie klawisze do ustawień domyślnych?"
@@ -5525,10 +5507,6 @@ msgstr "Konfiguracja pozycjonera"
 
 msgid "Setup your satellite equipment"
 msgstr "Ustawienia wyposażenie SAT"
-
-#, python-format
-msgid "Shall the USB stick wizard proceed and program the image file %s into flash memory?"
-msgstr "Czy kreator pamięci USB powinien rozpocząć proces instalacji image %s do pamięci flash?"
 
 msgid "Sharpness"
 msgstr "Ostrość"
@@ -6143,6 +6121,9 @@ msgstr "Strumień"
 msgid "Stream request"
 msgstr "Żądanie strumienia"
 
+msgid "Streaming clients info"
+msgstr "Klienci streamingu"
+
 msgid "Strongest position"
 msgstr "Najmocniejsza pozycja"
 
@@ -6287,18 +6268,12 @@ msgstr "Błąd synchronizacji, powrót do punktu wyjścia!"
 msgid "System"
 msgstr ""
 
-msgid "System Message"
-msgstr "Wiadomość systemowa"
-
-msgid "System Message Check"
-msgstr "Sprawdzanie wiadomości systemowych"
-
 #. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
 msgid "TRANSLATOR_INFO"
 msgstr ""
 "Specjalnie dla OpenPLi - @blzr\n"
 "http://openpli.org/forums\n"
-"Ostatnia aktualizacja 2016.01.07"
+"Ostatnia aktualizacja 2016.02.18"
 
 msgid "TS file is too large for ISO9660 level 1!"
 msgstr "Plik TS jest za duży dla ISO9660 level 1!"
@@ -6393,11 +6368,6 @@ msgstr "Kod PIN został zmieniony pomyślnie."
 msgid "The PIN codes you entered are different."
 msgstr "Kody PIN które wpisałeś różnią się."
 
-msgid ""
-"The USB stick was prepared to be bootable.\n"
-"Now you can download an NFI image file!"
-msgstr ""
-
 msgid "The backup failed. Please choose a different backup location."
 msgstr "Wykonanie kopii zapasowej nie powiodło się. Wybierz inną lokalizację."
 
@@ -6417,20 +6387,8 @@ msgstr ""
 "Katalog %s jest niezapisywalny.\n"
 "Upewnij się, że zamiast niego wybrałeś zapisywalny katalog."
 
-#, python-format
-msgid ""
-"The following device was found:\n"
-"\n"
-"%s\n"
-"\n"
-"Do you want to write the USB flasher to this stick?"
-msgstr ""
-
 msgid "The following files were found..."
 msgstr "Następujące pliki zostały znalezione..."
-
-msgid "The md5sum validation failed, the file may be corrupted!"
-msgstr "Suma kontrolna md5sum nieprawidłowa, plik może być uszkodzony!"
 
 msgid ""
 "The network wizard extension is not installed!\n"
@@ -6497,10 +6455,6 @@ msgstr ""
 msgid "The wizard can backup your current settings. Do you want to do a backup now?"
 msgstr "Kreator może utworzyć backup aktualnych ustawień. Chcesz zrobić kopię teraz?"
 
-#, python-format
-msgid "The wizard found a configuration backup. Do you want to restore your old settings from %s?"
-msgstr "Kreator znalazł backup plików konfiguracyjnych, Przywrócić stare ustawienia z %s?"
-
 msgid "The wizard is finished now."
 msgstr "Działanie kreatora zostało zakończone."
 
@@ -6534,13 +6488,6 @@ msgid ""
 "This info is for developers only.\n"
 "For a normal users it is not important.\n"
 "Don't panic, please, when here will be displayed any suspicious informations!"
-msgstr ""
-
-msgid ""
-"This plugin creates a USB stick which can be used to update the firmware of your receiver without the need for a network or WLAN connection.\n"
-"First, a USB stick needs to be prepared so that it becomes bootable.\n"
-"In the next step, an NFI image file can be downloaded from the update server and saved on the USB stick.\n"
-"If you already have a prepared bootable USB stick, please insert it now. Otherwise plug in a USB stick with a minimum size of 64 MB!"
 msgstr ""
 
 msgid "This plugin is installed."
@@ -6714,13 +6661,6 @@ msgstr "Przejdź do wyboru ścieżki audio"
 msgid "To subtitle selection"
 msgstr "Przejdź do wyboru napisów"
 
-msgid ""
-"To update your receiver firmware, please follow these steps:\n"
-"1) Turn off your box with the rear power switch and make sure the bootable USB stick is plugged in.\n"
-"2) Turn mains back on and hold the DOWN button on the front panel pressed for 10 seconds.\n"
-"3) Wait for bootup and follow instructions of the wizard."
-msgstr ""
-
 msgid "Today"
 msgstr "Dzisiaj"
 
@@ -6872,9 +6812,6 @@ msgstr "Kalibracja USALS"
 
 msgid "USB stick"
 msgstr "Pen USB"
-
-msgid "USB stick wizard"
-msgstr "Kreator pena USB"
 
 msgid "Ukrainian"
 msgstr "ukraiński"
@@ -7283,9 +7220,6 @@ msgstr "Timer wybudzania"
 msgid "Wakeup type"
 msgstr "Typ wybudzania"
 
-msgid "WakeupTimer Configuration"
-msgstr "Ustawienia timera wybudzania"
-
 msgid "Warning"
 msgstr "Ostrzeżenie"
 
@@ -7690,6 +7624,9 @@ msgstr "Tak, powróć do listy filmów"
 msgid "Yesterday"
 msgstr "Wczoraj"
 
+msgid "You PIN code is 0000. This is the default PIN code and it disable parental control!\n"
+msgstr "Twó kod PIN to 0000. Takie ustawienie powoduje, że  kontrola rodzicielska jest wyłączona!\n"
+
 #, python-format
 msgid ""
 "You already have a channel list installed,\n"
@@ -7727,15 +7664,12 @@ msgstr "Nie wybrałeś kanału z którego nagrywać"
 msgid "You have chosen to backup your settings. Please press OK to start the backup now."
 msgstr "Wybrałeś wykonanie backupu ustawień. Wciśnij OK aby rozpocząć tworzenie kopii zapasowej."
 
-msgid "You have chosen to create a new .NFI flasher bootable USB stick. This will repartition the USB stick and therefore all data on it will be erased."
-msgstr ""
-
 msgid "You have chosen to restore your settings. Enigma2 will restart after restore. Please press OK to start the restore now."
 msgstr "Wybrałeś przywrócenie własnych ustawień. Po przywróceniu enigma zrestartuje się. Wciśnij OK aby rozpocząć."
 
 #, python-format
 msgid "You have to wait %s!"
-msgstr "Musisz poczekać na %s!"
+msgstr "Musisz poczekać %s!"
 
 #, python-format
 msgid "You must switch to the service %s (%s - '%s')!\n"
@@ -7757,13 +7691,6 @@ msgstr "Twoja kolekcja przekracza rozmiar zwykłego nośnika DVD, będziesz potr
 
 msgid "Your current collection will get lost!"
 msgstr "Twoja obecna kolekcja zostanie utracona!"
-
-msgid ""
-"Your frontprocessor firmware must be upgraded.\n"
-"Press OK to start upgrade."
-msgstr ""
-"Frontprocessor musi zostać zaktualizowany.\n"
-"Naciśnij OK aby rozpocząć aktualizację."
 
 msgid ""
 "Your frontprocessor will be upgraded\n"
@@ -7882,6 +7809,9 @@ msgstr "Przełącz na wybrany kanał lub pokaż info o audycji (w zależności o
 
 msgid "Zap up"
 msgstr "Przełącz na kanał wyżej"
+
+msgid "Zgemma H.S/H.2S/H.2H"
+msgstr ""
 
 msgid "[REC]"
 msgstr ""
@@ -8088,9 +8018,6 @@ msgstr "Potwierdzony"
 msgid "connected"
 msgstr "Połączony"
 
-msgid "continue"
-msgstr "Kontynuuj"
-
 msgid "cooking"
 msgstr "Gotowanie"
 
@@ -8099,10 +8026,6 @@ msgstr "Kopiuj do bukietów"
 
 msgid "create directory"
 msgstr "Utwórz katalog"
-
-#, python-format
-msgid "currently installed image: %s"
-msgstr "Aktualnie zainstalowane image: %s"
 
 msgid "daily"
 msgstr "Codziennie"
@@ -8124,6 +8047,9 @@ msgstr "Kryminał/Thriler"
 
 msgid "disable"
 msgstr "Wyłącz"
+
+msgid "disable intro screen"
+msgstr "Wyłącz ekran wstępny"
 
 msgid "disable move mode"
 msgstr "Wyłącz tryb przenoszenia"
@@ -8172,6 +8098,9 @@ msgstr "Włącz edycję bukietu"
 
 msgid "enable favourite edit"
 msgstr "Włącz edycję ulubionych"
+
+msgid "enable intro screen"
+msgstr "Włącz ekran wstępny"
 
 msgid "enable move mode"
 msgstr "Włącz tryb przenoszenia"
@@ -8226,6 +8155,9 @@ msgstr ""
 
 msgid "et9200/9500/6500"
 msgstr ""
+
+msgid "execute cuts (requires MovieCut plugin)"
+msgstr "Wykonaj cięcia (wymaga pluginu MovieCut)"
 
 msgid "exit DVD player or return to file browser"
 msgstr "Zamknij odtwarzacz DVD lub powróć do przeglądarki plików"
@@ -8703,6 +8635,9 @@ msgstr "Muzyka klasyczna"
 
 msgid "serious/classical/religious/historical movie/drama"
 msgstr "Film klasyka/historia/religia"
+
+msgid "service is in bouquet parental protection"
+msgstr "Kanał jest w bukiecie zabezpieczonym kontrolą rodzicielską"
 
 msgid "set as startup service"
 msgstr "Ustaw jako kanał startowy"
