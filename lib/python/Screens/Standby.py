@@ -75,8 +75,8 @@ class Standby(Screen):
 		service = self.prev_running_service and self.prev_running_service.toString()
 		if service:
 			if service.rsplit(":", 1)[1].startswith("/"):
-				self.paused_service = True
-				self.infoBarInstance.pauseService()
+				self.paused_service = self.session.current_dialog
+				self.paused_service.pauseService()
 		if not self.paused_service:
 			self.timeHandler =  eDVBLocalTimeHandler.getInstance()
 			if self.timeHandler.ready():
@@ -111,7 +111,7 @@ class Standby(Screen):
 		self.standbyStopServiceTimer.stop()
 		self.timeHandler and self.timeHandler.m_timeUpdated.get().remove(self.stopService)
 		if self.paused_service:
-			self.infoBarInstance.unPauseService()
+			self.paused_service.unPauseService()
 		elif self.prev_running_service:
 			service = self.prev_running_service.toString()
 			if config.servicelist.startupservice_onstandby.value:
