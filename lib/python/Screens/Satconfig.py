@@ -117,6 +117,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 		self.advancedType = None
 		self.advancedManufacturer = None
 		self.advancedSCR = None
+		self.advancedDiction = None
 		self.advancedConnected = None
 		self.showAdditionalMotorOptions = None
 		self.selectSatsEntry = None
@@ -233,12 +234,12 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 
 	def newConfig(self):
 		self.setTextKeyBlue()
-		checkList = (self.configMode, self.diseqcModeEntry, self.advancedSatsEntry, \
-			self.advancedLnbsEntry, self.advancedDiseqcMode, self.advancedUsalsEntry, \
-			self.advancedLof, self.advancedPowerMeasurement, self.turningSpeed, \
-			self.advancedType, self.advancedSCR, self.advancedManufacturer, self.advancedUnicable, self.advancedConnected, \
-			self.toneburst, self.committedDiseqcCommand, self.uncommittedDiseqcCommand, self.singleSatEntry, \
-			self.commandOrder, self.showAdditionalMotorOptions, self.cableScanType, self.multiType)
+		checkList = (self.configMode, self.diseqcModeEntry, self.advancedSatsEntry,
+					 self.advancedLnbsEntry, self.advancedDiseqcMode, self.advancedUsalsEntry,
+					 self.advancedLof, self.advancedPowerMeasurement, self.turningSpeed,
+					 self.advancedType, self.advancedSCR, self.advancedDiction, self.advancedManufacturer, self.advancedUnicable, self.advancedConnected,
+					 self.toneburst, self.committedDiseqcCommand, self.uncommittedDiseqcCommand, self.singleSatEntry,
+					 self.commandOrder, self.showAdditionalMotorOptions, self.cableScanType, self.multiType)
 		if self["config"].getCurrent() == self.multiType:
 			update_slots = [self.slotid]
 			from Components.NimManager import InitNimManager
@@ -294,6 +295,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 		lnbnum = int(Sat.lnb.value)
 		currLnb = self.nimConfig.advanced.lnb[lnbnum]
 
+		diction = None
 		if isinstance(currLnb, ConfigNothing):
 			currLnb = None
 
@@ -317,34 +319,48 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 				self.advancedUnicable = getConfigListEntry("Unicable "+_("Configuration mode"), currLnb.unicable)
 				self.list.append(self.advancedUnicable)
 				if currLnb.unicable.value == "unicable_user":
-					self.advancedSCR = getConfigListEntry(_("Channel"), currLnb.satcruser)
+					self.advancedDiction = getConfigListEntry(_("Diction"), currLnb.dictionuser)
+					self.list.append(self.advancedDiction)
+					if currLnb.dictionuser.value == "EN50494":
+						satcr = currLnb.satcruserEN50494
+						stcrvco = currLnb.satcrvcouserEN50494[currLnb.satcruserEN50494.index]
+					elif currLnb.dictionuser.value == "EN50607":
+						satcr = currLnb.satcruserEN50607
+						stcrvco = currLnb.satcrvcouserEN50607[currLnb.satcruserEN50607.index]
+					self.advancedSCR = getConfigListEntry(_("Channel"), satcr)
 					self.list.append(self.advancedSCR)
-					self.list.append(getConfigListEntry(_("Frequency"), currLnb.satcrvcouser[currLnb.satcruser.index]))
+					self.list.append(getConfigListEntry(_("Frequency"), stcrvco))
 					self.list.append(getConfigListEntry("LOF/L", currLnb.lofl))
 					self.list.append(getConfigListEntry("LOF/H", currLnb.lofh))
 					self.list.append(getConfigListEntry(_("Threshold"), currLnb.threshold))
 				elif currLnb.unicable.value == "unicable_matrix":
+					nimmanager.sec.reconstructUnicableDate(currLnb.unicableMatrixManufacturer, currLnb.unicableMatrix, currLnb)
 					manufacturer_name = currLnb.unicableMatrixManufacturer.value
 					manufacturer = currLnb.unicableMatrix[manufacturer_name]
 					product_name = manufacturer.product.value
 					self.advancedManufacturer = getConfigListEntry(_("Manufacturer"), currLnb.unicableMatrixManufacturer)
-					self.advancedType = getConfigListEntry(_("Type"), manufacturer.product)
-					self.advancedSCR = getConfigListEntry(_("Channel"), manufacturer.scr[product_name])
 					self.list.append(self.advancedManufacturer)
-					self.list.append(self.advancedType)
-					self.list.append(self.advancedSCR)
-					self.list.append(getConfigListEntry(_("Frequency"), manufacturer.vco[product_name][manufacturer.scr[product_name].index]))
+					if product_name in manufacturer.scr:
+						diction = manufacturer.diction[product_name].value
+						self.advancedType = getConfigListEntry(_("Type"), manufacturer.product)
+						self.advancedSCR = getConfigListEntry(_("Channel"), manufacturer.scr[product_name])
+						self.list.append(self.advancedType)
+						self.list.append(self.advancedSCR)
+						self.list.append(getConfigListEntry(_("Frequency"), manufacturer.vco[product_name][manufacturer.scr[product_name].index]))
 				elif currLnb.unicable.value == "unicable_lnb":
+					nimmanager.sec.reconstructUnicableDate(currLnb.unicableLnbManufacturer, currLnb.unicableLnb, currLnb)
 					manufacturer_name = currLnb.unicableLnbManufacturer.value
 					manufacturer = currLnb.unicableLnb[manufacturer_name]
 					product_name = manufacturer.product.value
 					self.advancedManufacturer = getConfigListEntry(_("Manufacturer"), currLnb.unicableLnbManufacturer)
-					self.advancedType = getConfigListEntry(_("Type"), manufacturer.product)
-					self.advancedSCR = getConfigListEntry(_("Channel"), manufacturer.scr[product_name])
 					self.list.append(self.advancedManufacturer)
-					self.list.append(self.advancedType)
-					self.list.append(self.advancedSCR)
-					self.list.append(getConfigListEntry(_("Frequency"), manufacturer.vco[product_name][manufacturer.scr[product_name].index]))
+					if product_name in manufacturer.scr:
+						diction = manufacturer.diction[product_name].value
+						self.advancedType = getConfigListEntry(_("Type"), manufacturer.product)
+						self.advancedSCR = getConfigListEntry(_("Channel"), manufacturer.scr[product_name])
+						self.list.append(self.advancedType)
+						self.list.append(self.advancedSCR)
+						self.list.append(getConfigListEntry(_("Frequency"), manufacturer.vco[product_name][manufacturer.scr[product_name].index]))
 
 				choices = []
 				connectable = nimmanager.canConnectTo(self.slotid)
@@ -359,13 +375,14 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 					if self.nimConfig.advanced.unicableconnected.value == True:
 						self.nimConfig.advanced.unicableconnectedTo.setChoices(choices)
 						self.list.append(getConfigListEntry(_("Connected to"),self.nimConfig.advanced.unicableconnectedTo))
+				print "[Satconfig] unicableconnectedTo choices : ", choices
 
 			else:	#kein Unicable
 				self.list.append(getConfigListEntry(_("Voltage mode"), Sat.voltage))
 				self.list.append(getConfigListEntry(_("Increased voltage"), currLnb.increased_voltage))
 				self.list.append(getConfigListEntry(_("Tone mode"), Sat.tonemode))
 
-			if lnbnum < 65:
+			if lnbnum < 65 and diction !="EN50607":
 				self.advancedDiseqcMode = getConfigListEntry(_("DiSEqC mode"), currLnb.diseqcMode)
 				self.list.append(self.advancedDiseqcMode)
 			if currLnb.diseqcMode.value != "none":
@@ -444,6 +461,72 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 			self.fillListWithAdvancedSatEntrys(Sat)
 		self["config"].list = self.list
 
+	def unicableconnection(self):
+		if self.nimConfig.configMode.value == "advanced":
+			connect_count = 0
+			dvbs_slots = nimmanager.getNimListOfType('DVB-S')
+			dvbs_slots_len = len(dvbs_slots)
+
+			for x in dvbs_slots:
+				try:
+					nim_slot = nimmanager.nim_slots[x]
+					if nim_slot == self.nimConfig:
+						self_idx = x
+					if nim_slot.config.configMode.value == "advanced":
+						if nim_slot.config.advanced.unicableconnected.value == True:
+							connect_count += 1
+				except: pass
+			print "adenin conections %d %d" %(connect_count, dvbs_slots_len)
+			if connect_count >= dvbs_slots_len:
+				return False
+
+		self.slot_dest_list = []
+		def checkRecursiveConnect(slot_id):
+			if slot_id in self.slot_dest_list:
+				print slot_id
+				return False
+			self.slot_dest_list.append(slot_id)
+			slot_config = nimmanager.nim_slots[slot_id].config
+			if slot_config.configMode.value == "advanced":
+				try:
+					connected = slot_config.advanced.unicableconnected.value
+				except:
+					connected = False
+				if connected == True:
+					return checkRecursiveConnect(int(slot_config.advanced.unicableconnectedTo.value))
+			return True
+
+		return checkRecursiveConnect(self.slotid)
+
+	def checkLoopthrough(self):
+		if self.nimConfig.configMode.value == "loopthrough":
+			loopthrough_count = 0
+			dvbs_slots = nimmanager.getNimListOfType('DVB-S')
+			dvbs_slots_len = len(dvbs_slots)
+
+			for x in dvbs_slots:
+				try:
+					nim_slot = nimmanager.nim_slots[x]
+					if nim_slot == self.nimConfig:
+						self_idx = x
+					if nim_slot.config.configMode.value == "loopthrough":
+						loopthrough_count += 1
+				except: pass
+			if loopthrough_count >= dvbs_slots_len:
+				return False
+
+		self.slot_dest_list = []
+		def checkRecursiveConnect(slot_id):
+			if slot_id in self.slot_dest_list:
+				return False
+			self.slot_dest_list.append(slot_id)
+			slot_config = nimmanager.nim_slots[slot_id].config
+			if slot_config.configMode.value == "loopthrough":
+				return checkRecursiveConnect(int(slot_config.connectedTo.value))
+			return True
+
+		return checkRecursiveConnect(self.slotid)
+
 	def keyOk(self):
 		if self["config"].getCurrent() == self.advancedSelectSatsEntry:
 			conf = self.nimConfig.advanced.sat[int(self.nimConfig.advanced.sats.value)].userSatellitesList
@@ -460,6 +543,12 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 			conf.save()
 
 	def keySave(self):
+		if not self.unicableconnection():
+			self.session.open(MessageBox, _("The unicable connection setting is wrong.\n Maybe recursive connection of tuners."),MessageBox.TYPE_ERROR,timeout=10)
+			return
+		if not self.checkLoopthrough():
+			self.session.open(MessageBox, _("The loopthrough setting is wrong."),MessageBox.TYPE_ERROR,timeout=10)
+			return
 		old_configured_sats = nimmanager.getConfiguredSats()
 		if not self.run():
 			return
