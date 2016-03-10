@@ -90,7 +90,7 @@
 					<convert type="RemainingToText">FOLLOW</convert>
 				</widget>
 			</panel>
-			<panel name="SummaryClockRecPanel" position="bottom" />
+			<panel name="SummaryClockRecPanel" position="bottom" size="*,40" />
 		</panel>
 	</screen>
 
@@ -267,7 +267,7 @@
 	<screen name="MovieContextMenuSummary" position="fill">
 		<widget source="parent.Title" render="Label" position="top" size="*,70" font="Big" halign="left" valign="center" noWrap="1" />
 		<widget source="selected" render="Label" position="fill" font="Medium" />
-		<panel name="SummaryClockRecPanel" position="bottom" />
+		<panel name="SummaryClockRecPanel" position="bottom" size="*,40" />
 	</screen>
 
 	<screen name="MovieSelectionSummary" position="fill">
@@ -282,7 +282,7 @@
 				</widget>
 			</panel>
 			<panel position="bottom" size="*,64">
-				<panel name="SummaryClockRecPanel" position="right" />
+				<panel name="SummaryClockRecPanel" position="right" size="*,40" />
 				<widget source="parent.Service" render="Label" position="fill" font="Medium" halign="left" valign="center" noWrap="1">
 					<convert type="MovieInfo">FileSize</convert>
 				</widget>
