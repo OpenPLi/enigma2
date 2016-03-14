@@ -2224,7 +2224,7 @@ class InfoBarPiP:
 					self.session.pip.servicePath = currentServicePath
 					self.session.pip.servicePath[1] = currentBouquet
 				if slist and slist.dopipzap:
-						slist.setCurrentSelection(self.session.pip.getCurrentService())
+					slist.setCurrentSelection(self.session.pip.getCurrentService())
 
 	def movePiP(self):
 		if self.pipShown():
