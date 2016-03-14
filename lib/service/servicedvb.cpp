@@ -2293,7 +2293,7 @@ ePyObject eDVBServicePlay::getRassInteractiveMask()
 	Py_RETURN_NONE;
 }
 
-bool eDVBServiceBase::tryFallbackTuner(eServiceReferenceDVB &service, bool &is_stream, bool is_pvr, bool simulate, bool is_recording)
+bool eDVBServiceBase::tryFallbackTuner(eServiceReferenceDVB &service, bool &is_stream, bool is_pvr, bool simulate)
 {
 	ePtr<eDVBResourceManager> res_mgr;
 	std::ostringstream remote_service_ref;
@@ -2301,8 +2301,7 @@ bool eDVBServiceBase::tryFallbackTuner(eServiceReferenceDVB &service, bool &is_s
 	int system;
 	size_t index;
 
-	bool remote_fallback_enabled = is_recording ? eConfigManager::getConfigBoolValue("config.usage.remote_fallback_recording_enabled", false) :
-		eConfigManager::getConfigBoolValue("config.usage.remote_fallback_enabled", false);
+	bool remote_fallback_enabled = eConfigManager::getConfigBoolValue("config.usage.remote_fallback_enabled", false);
 	std::string remote_fallback_url = eConfigManager::getConfigValue("config.usage.remote_fallback");
 
 	if(is_stream || is_pvr || simulate ||
