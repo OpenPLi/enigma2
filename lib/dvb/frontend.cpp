@@ -1018,6 +1018,15 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 		ret = (snr * 2000) / 0xFFFF;
 		sat_max = 2000;
 	}
+	else if (!strcmp(m_description, "Broadcom BCM73XX") ||
+			 !strcmp(m_description, "FTS-260 (Montage RS6000)") ||
+			 !strcmp(m_description, "Panasonic MN88473")) //OS mini
+	{
+		ret = snr * 100 / 256;
+
+		if (!strcmp(m_description, "FTS-260 (Montage RS6000)"))
+			sat_max = 1490;
+	}
 
 	signalqualitydb = ret;
 	if (ret == 0x12345678) // no snr db calculation avail.. return untouched snr value..
