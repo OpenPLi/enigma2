@@ -7,4 +7,4 @@ dist_install_DATA = \
 	hd2400.png  hd1100.png  wetekplay.png osmini.png \
 	dmmadv.xml  et4x00.xml  et8000.xml  et9x00.xml  vuultimo.xml  xp1000.xml \
 	dmm.xml     et6x00.xml  et9500.xml  et7x00.xml  vuduo2.xml    vu.xml        formuler1.xml \
-	hd2400.xml  hd1100.xml 	xsarius.xml  xsarius.png wetekplay.xml osmini.xml zgemmah.png zgemmah.xml
+	hd2400.xml  hd1100.xml 	xsarius.xml  xsarius.png wetekplay.xml osmini.xml zgemma.png zgemma.xml
