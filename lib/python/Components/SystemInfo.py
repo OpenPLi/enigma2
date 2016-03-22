@@ -48,4 +48,4 @@ SystemInfo["3DMode"] = fileCheck("/proc/stb/fb/3dmode") or fileCheck("/proc/stb/
 SystemInfo["3DZNorm"] = fileCheck("/proc/stb/fb/znorm") or fileCheck("/proc/stb/fb/primary/zoffset")
 SystemInfo["Blindscan_t2_available"] = fileCheck("/proc/stb/info/vumodel")
 SystemInfo["RcTypeChangable"] = not(HardwareInfo().get_device_model().startswith('et8500') or HardwareInfo().get_device_model().startswith('et7')) and pathExists('/proc/stb/ir/rc/type')
-SystemInfo["HasFullHDSkinSupport"] = not(HardwareInfo().get_device_model().startswith("xp1000") or HardwareInfo().get_device_model().startswith("Zgemma")  or HardwareInfo().get_device_model().startswith("et4") or HardwareInfo().get_device_model().startswith("et5"))
+SystemInfo["HasFullHDSkinSupport"] = HardwareInfo().get_device_model().startswith("et10000") or HardwareInfo().get_device_model().startswith("et8000")  or HardwareInfo().get_device_model().startswith("hd2400") or HardwareInfo().get_device_model().startswith("vusolo4k")
