@@ -117,33 +117,55 @@ except Exception, err:
 addSkin('skin_default.xml')
 profile("LoadSkinDefaultDone")
 
+#
+# Convert a string into a number. Used to convert object position and size attributes into a number
+#    s is the input string.
+#    e is the the parent object size to do relative calculations on parent
+#    size is the size of the object size (e.g. width or height)
+#    font is a font object to calculate relative to font sizes
+# Note some constructs for speeding # up simple cases that are very common.
+# Can do things like:  10+center-10w+4%
+# To center the widget on the parent widget,
+#    but move forward 10 pixels and 4% of parent width
+#    and 10 character widths backward
+# Multiplication, division and subexprsssions are also allowed: 3*(e-c/2)
+#
+# Usage:  center : center the object on parent based on parent size and object size
+#         e      : take the parent size/width
+#         c      : take the center point of parent size/width
+#         %      : take given percentag of parent size/width
+#         w      : multiply by current font width
+#         h      : multiply by current font height
+#
 def parseCoordinate(s, e, size=0, font=None):
 	s = s.strip()
-	if s == "center":
+	if s == "center":		# for speed, can be common case
 		val = (e - size)/2
 	elif s == '*':
-	        return None
+		return None
 	else:
-		if s[0] is 'e':
-			val = e
-			s = s[1:]
-		elif s[0] is 'c':
-			val = e/2
-			s = s[1:]
-		else:
-			val = 0;
-		if s:
-			if s[-1] is '%':
-				val += e * int(s[:-1]) / 100
-			elif s[-1] is 'w':
-			        val += fonts[font][3] * int(s[:-1]);
-			elif s[-1] is 'h':
-			        val += fonts[font][2] * int(s[:-1]);
-			else:
-				val += int(s)
+		try:
+			val = int(s)	# for speed
+		except:
+			if 't' in s:
+				s = s.replace("center", str((e-size)/2.0))
+			if 'e' in s:
+				s = s.replace("e", str(e))
+			if 'c' in s:
+				s = s.replace("c", str(e/2.0))
+			if 'w' in s:
+				s = s.replace("w", "*" + str(fonts[font][3]))
+			if 'h' in s:
+				s = s.replace("h", "*" + str(fonts[font][2]))
+			if '%' in s:
+				s = s.replace("%", "*" + str(e/100.0))
+			try:
+				val = int(s) # for speed
+			except:
+				val = eval(s)
 	if val < 0:
-		val = 0
-	return val
+		return 0
+	return int(val)  # make sure an integer value is returned
 
 
 def getParentSize(object, desktop):
