@@ -68,7 +68,6 @@ config.misc.graph_mepg.event_alignment = ConfigSelection(default = possibleAlign
 config.misc.graph_mepg.show_timelines = ConfigSelection(default = "all", choices = [("nothing", _("no")), ("all", _("all")), ("now", _("actual time only"))])
 config.misc.graph_mepg.servicename_alignment = ConfigSelection(default = possibleAlignmentChoices[0][0], choices = possibleAlignmentChoices)
 config.misc.graph_mepg.extension_menu = ConfigYesNo(default = False)
-config.misc.graph_mepg.silent_bouquet_change = ConfigYesNo(default = True)
 
 listscreen = config.misc.graph_mepg.default_mode.value
 
