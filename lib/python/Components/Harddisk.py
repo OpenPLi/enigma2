@@ -152,7 +152,7 @@ class Harddisk:
 					return cap / 1000 / 1000
 				except:
 					pass
-			return cap
+		return cap
 
 	def capacity(self):
 		cap = self.diskSize()
