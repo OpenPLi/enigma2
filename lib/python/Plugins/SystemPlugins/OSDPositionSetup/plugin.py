@@ -123,6 +123,11 @@ def setConfiguredPosition():
 def main(session, **kwargs):
 	session.open(OSDScreenPosition)
 
+def startSetup(menuid):
+	if menuid != "system":
+		return [ ]
+	return [(_("OSD Position Setup"), main, "sd_position_setup", 0)]
+
 def startup(reason, **kwargs):
 	setConfiguredPosition()
 
@@ -130,6 +135,6 @@ def Plugins(**kwargs):
 	from os import path
 	if path.exists("/proc/stb/fb/dst_left"):
 		from Plugins.Plugin import PluginDescriptor
-		return [PluginDescriptor(name = _("OSD position setup"), description = _("Compensate for overscan"), where = PluginDescriptor.WHERE_PLUGINMENU, fnc = main),
-					PluginDescriptor(name = "OSD position setup", description = "", where = PluginDescriptor.WHERE_SESSIONSTART, fnc = startup)]
+		return [PluginDescriptor(name = "OSD position setup", description = "", where = PluginDescriptor.WHERE_SESSIONSTART, fnc = startup),
+			PluginDescriptor(name = "OSD 3D setup", description = _("Adjust 3D settings"), where = PluginDescriptor.WHERE_MENU, fnc = startSetup)]
 	return []
