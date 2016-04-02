@@ -109,7 +109,6 @@ class OverscanWizard(Screen, ConfigListScreen):
 			self.list.append(getConfigListEntry(_("Do you want to quit the overscan wizard?"), self.yes_no))
 		elif self.step == 6:
 			config.skin.primary_skin.value = "PLi-HD/skin.xml"
-			config.misc.do_overscanwizard.value = False
 			config.save()
 			self["introduction"].setText(_("Enigma2 will be rebooted to select the alternative skin"))
 			quitMainloop(3)
