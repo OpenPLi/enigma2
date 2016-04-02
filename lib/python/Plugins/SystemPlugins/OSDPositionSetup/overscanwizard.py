@@ -25,7 +25,7 @@ class OverscanWizard(Screen, ConfigListScreen):
 
 		self["title"] = Label(_("Overscan Wizard"))
 		self["introduction"] = Label()
-		
+
 		self["actions"] = ActionMap(["SetupActions", "ColorActions", "MenuActions"],
 		{
 			"cancel": self.keyCancel,
@@ -39,12 +39,12 @@ class OverscanWizard(Screen, ConfigListScreen):
 		ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.changedEntry)
 		self.onChangedEntry = []
 		self.setScreen()
-		
+
 		self.countdown = 10
 		self.Timer = eTimer()
 		self.Timer.callback.append(self.TimerTimeout)
 		self.Timer.start(1000)
-		
+
 		self.onLayoutFinish.append(self.__layoutFinished)
 
 	def __layoutFinished(self):
@@ -57,32 +57,32 @@ class OverscanWizard(Screen, ConfigListScreen):
 	def setScreen(self):
 		self.list = []
 		if self.step == 1:
-			self["introduction"].setText(_("This overscan hazerd helps you to setup your TV in a proper way.\n\n"
-				"It seems a lot of TVs remove the overscan area by default. "
-				"This means you're always watching to \"zoomed in\" HD and this also means parts of our new Full-HD skin may be invisible on your TV.\n\n"
-				"The yellow area is 5% underscanned on all sides.\n"
-				"The green area is 10% underscanned on all sides.\n\n"
+			self["introduction"].setText(_("The overscan wizard helps you to setup your TV in the correct way.\n\n"
+				"For the majority of TV's, the factory default is to have overscan enabled. "
+				"This means you are always watching a \"zoomed in\" picture instead of real HD, and parts of the user inferface (skin) may be invisible.\n\n"
+				"The yellow area means a 5% border area of a full HD picture will be invisible.\n"
+				"The green area means a 10% border area of a full HD picture will be invisible.\n\n"
 				"In other words, if the yellow box meets all for sides of your screen, then you have at least 5% overscan on all sides.\n\n"
-				"If you see the tips of all eight arrowheads, then you have 0% overscan.\n\n"
+				"If you see the tips of all eight arrowheads, then your TV has overscan disabled.\n\n"
 				"Test Pattern by TigerDave - www.tigerdave.com/ht_menu.htm"))
 			self.yes_no = ConfigYesNo(default = True)
-			self.list.append(getConfigListEntry(_("Do you see all the eight arrorheads?"), self.yes_no))
+			self.list.append(getConfigListEntry(_("Do you see all the eight arrowheads?"), self.yes_no))
 		elif self.step == 2:
 			self.Timer.stop()
 			self["title"].setText(_("Overscan Wizard"))
-			self["introduction"].setText(_("It seems you did not see all the eight error heads. This means your TV is "
-				"not configured properly -or- your TV always removes the overscan area.\n\n" 
-				"Please refer to your TVs manual or http://openpli.org/forum/ to find how your TV could be configured correctly. "
-				"Find like terms as full-HD, picture-by-picture, enz...\n\n"))
-			self.list.append(getConfigListEntry(_("Did you accomplished to see all eight arrow heads?"), self.yes_no))
+			self["introduction"].setText(_("It seems you did not see all the eight arrow heads. This means your TV is "
+				"has overscan enabled, and is not configured properly.\n\n"
+				"Please refer to your TVs manual to find how you can disable overscan on your TV. Look for terms like 'Just fit', 'Full width', etc. "
+				"If you can't find it, ask other users at http://forums.openpli.org.\n\n"))
+			self.list.append(getConfigListEntry(_("Did you see all eight arrow heads?"), self.yes_no))
 			self.yes_no.value = True
 		elif self.step == 3:
-			self["introduction"].setText(_("You could not accomplished to see all eight error heads. This means your TV does "
-				"zoom-in a full HD screen and you do not see the complete picture. In addition this "
-				"may mean you could miss information of the OSD (e.g. volume bars and more).\n\n"
-				"You can now change the OSD position and size with the options below until you see the eight arrow heads.\n\n"
+			self["introduction"].setText(_("You did not see all eight arrow heads. This means your TV has overscan enabled "
+				"and presents you with a zoomed-in picture, causing you to loose part of a full HD screen. In addition this "
+				"you may also miss parts of the user interface, for example volume bars and more.\n\n"
+				"You can now try to resize and change the position of the user interface until you see the eight arrow heads.\n\n"
 				"When done press OK.\n\n"
-				"Note: you can always repleat this Overscan Wizard via\n\nmenu->installation->system->OSD-setup"))
+				"Note: you can always start the Overscan Wizard later,  via\n\nmenu->installation->system->OSD-setup"))
 			self.dst_left = ConfigSlider(default = config.plugins.OSDPositionSetup.dst_left.value, increment = 1, limits = (0, 720))
 			self.dst_width = ConfigSlider(default = config.plugins.OSDPositionSetup.dst_width.value, increment = 1, limits = (0, 720))
 			self.dst_top = ConfigSlider(default = config.plugins.OSDPositionSetup.dst_top.value, increment = 1, limits = (0, 576))
@@ -92,15 +92,15 @@ class OverscanWizard(Screen, ConfigListScreen):
 			self.list.append(getConfigListEntry(_("top"), self.dst_top))
 			self.list.append(getConfigListEntry(_("height"), self.dst_height))
 		elif self.step == 4:
-			self["introduction"].setText(_("You could not accomplished to see all eight error heads. This means your TV does "
-				"zoom-in a full HD screen and you do not see the complete picture. In addition this "
-				"may mean you could miss information of the OSD (e.g. volume bars and more).\n\n"
-				"You settop box is also not capable to ajust the OSD position and size. When want to have all parts of the skin visible "
-				"you should revert to a skin that does not use the overscan area.\n\n"
-				"When you choose to use an alternative skin enigma2 will be restarted"
-				"Note: you can always repleat this Overscan Wizard via\n\nmenu->installation->system->OSD-setup"))
+			self["introduction"].setText(_("You did not see all eight arrow heads. This means your TV has overscan enabled "
+				"and presents you with a zoomed-in picture, causing you to loose part of a full HD screen. In addition this "
+				"you may also miss parts of the user interface, for example volume bars and more.\n\n"
+				"Unfortunately, your model of receiver is not capable to adjust the dimensions of the user interface. "
+				"If not everything is visible, you should change the installed skin to one that supports the overscan area of your TV.\n\n"
+				"When you select a different skin, the user interface of your receiver will restart.\n\n"
+				"Note: you can always start the Overscan Wizard later,  via\n\nmenu->installation->system->OSD-setup"))
 			self.yes_no.value = False
-			self.list.append(getConfigListEntry(_("Do you want to select an alternative skin?"), self.yes_no))
+			self.list.append(getConfigListEntry(_("Do you want to select a different skin?"), self.yes_no))
 		elif self.step == 5:
 			self.Timer.stop()
 			self["title"].setText(_("Overscan Wizard"))
@@ -110,19 +110,19 @@ class OverscanWizard(Screen, ConfigListScreen):
 		elif self.step == 6:
 			config.skin.primary_skin.value = "PLi-HD/skin.xml"
 			config.save()
-			self["introduction"].setText(_("Enigma2 will be rebooted to select the alternative skin"))
+			self["introduction"].setText(_("The user interface of the receiver will now restart to select the selected skin"))
 			quitMainloop(3)
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 		if self["config"].instance:
 			self.__layoutFinished()
-		
+
 	def TimerTimeout(self):
 		self.countdown -= 1
 		self["title"].setText(_("Overscan Wizard") + " %s" % self.countdown)
 		if not(self.countdown):
 			self.keyCancel()
-		
+
 	def changedEntry(self):
 		for x in self.onChangedEntry:
 			x()
@@ -168,8 +168,8 @@ class OverscanWizard(Screen, ConfigListScreen):
 				self.keyCancel()
 			else:
 				self.step = 1
-		self.setScreen()		
-			
+		self.setScreen()
+
 	def setPreviewPosition(self):
 		setPosition(int(self.dst_left.value), int(self.dst_width.value), int(self.dst_top.value), int(self.dst_height.value))
 
