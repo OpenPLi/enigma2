@@ -102,18 +102,10 @@ def setPosition(dst_left, dst_width, dst_top, dst_height):
 	if dst_top + dst_height > 576:
 		dst_height = 576 - dst_top
 	try:
-		file = open("/proc/stb/fb/dst_left", "w")
-		file.write('%X' % dst_left)
-		file.close()
-		file = open("/proc/stb/fb/dst_width", "w")
-		file.write('%X' % dst_width)
-		file.close()
-		file = open("/proc/stb/fb/dst_top", "w")
-		file.write('%X' % dst_top)
-		file.close()
-		file = open("/proc/stb/fb/dst_height", "w")
-		file.write('%X' % dst_height)
-		file.close()
+		open("/proc/stb/fb/dst_left", "w").write('%X' % dst_left)
+		open("/proc/stb/fb/dst_width", "w").write('%X' % dst_width)
+		open("/proc/stb/fb/dst_top", "w").write('%X' % dst_top)
+		open("/proc/stb/fb/dst_height", "w").write('%X' % dst_height)
 	except:
 		return
 
@@ -123,6 +115,11 @@ def setConfiguredPosition():
 def main(session, **kwargs):
 	session.open(OSDScreenPosition)
 
+def startSetup(menuid):
+	if menuid != "system":
+		return [ ]
+	return [(_("OSD Position Setup"), main, "sd_position_setup", 0)]
+
 def startup(reason, **kwargs):
 	setConfiguredPosition()
 
@@ -130,6 +127,6 @@ def Plugins(**kwargs):
 	from os import path
 	if path.exists("/proc/stb/fb/dst_left"):
 		from Plugins.Plugin import PluginDescriptor
-		return [PluginDescriptor(name = _("OSD position setup"), description = _("Compensate for overscan"), where = PluginDescriptor.WHERE_PLUGINMENU, fnc = main),
-					PluginDescriptor(name = "OSD position setup", description = "", where = PluginDescriptor.WHERE_SESSIONSTART, fnc = startup)]
+		return [PluginDescriptor(name = "OSD position setup", description = "", where = PluginDescriptor.WHERE_SESSIONSTART, fnc = startup),
+			PluginDescriptor(name = "OSD 3D setup", description = _("Adjust 3D settings"), where = PluginDescriptor.WHERE_MENU, fnc = startSetup)]
 	return []
