@@ -118,7 +118,7 @@ def main(session, **kwargs):
 def startSetup(menuid):
 	if menuid != "system":
 		return [ ]
-	return [(_("OSD Position Setup"), main, "sd_position_setup", 0)]
+	return [(_("OSD position setup"), main, "sd_position_setup", 0)]
 
 def startup(reason, **kwargs):
 	setConfiguredPosition()
