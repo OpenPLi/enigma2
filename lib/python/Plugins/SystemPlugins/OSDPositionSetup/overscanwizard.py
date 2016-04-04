@@ -186,7 +186,10 @@ class OverscanWizard(Screen, ConfigListScreen):
 		self.setScreen()
 
 	def setPreviewPosition(self):
+		self.dst_width.max = 720 - self.dst_left.value
+		self.dst_height.max = 576 - self.dst_top.value
 		setPosition(int(self.dst_left.value), int(self.dst_width.value), int(self.dst_top.value), int(self.dst_height.value))
+		self["config"].l.setList(self.list)
 
 	def keyCancel(self):
 		setConfiguredPosition()
