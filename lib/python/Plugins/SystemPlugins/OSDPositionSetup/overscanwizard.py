@@ -4,17 +4,26 @@ from Components.ConfigList import ConfigListScreen
 from Components.config import config, ConfigSlider, getConfigListEntry, ConfigYesNo
 from Components.Label import Label
 from Plugins.SystemPlugins.OSDPositionSetup.plugin import setPosition, setConfiguredPosition
-from enigma import quitMainloop, eTimer
+from enigma import quitMainloop, eTimer, getDesktop
 import os
 
 class OverscanWizard(Screen, ConfigListScreen):
 	def __init__(self, session):
-		self.skin = """<screen position="fill">
+		if getDesktop(0).size().height() == 1080:
+			self.skin = """<screen position="fill" flags="wfNoBorder">
 				<ePixmap pixmap="skin_default/overscan1920x1080.png" position="0,0" size="1920,1080" zPosition="-2" alphatest="on" />
 				<eLabel position="378,180" size="1244,686" zPosition="-1"/>
 				<widget name="title" position="383,185" size="1234,50" font="Regular;40" foregroundColor="blue"/>
 				<widget name="introduction" position="383,235" size="1234,623" halign="center" valign="center" font="Regular;30"/>
 				<widget name="config" position="383,635" size="1234,226" font="Regular;30" itemHeight="40"/>
+			</screen>"""
+		else:
+			self.skin = """<screen position="fill">
+				<ePixmap pixmap="skin_default/overscan1280x720.png" position="0,0" size="1280,720" zPosition="-2" alphatest="on" />
+				<eLabel position="223,120" size="810,475" zPosition="-1"/>
+				<widget name="title" position="228,125" size="800,40" font="Regular;30" foregroundColor="blue"/>
+				<widget name="introduction" position="228,165" size="800,623" halign="center" valign="center" font="Regular;20"/>
+				<widget name="config" position="228,590" size="800,120" font="Regular;20" itemHeight="30"/>
 			</screen>"""
 
 		Screen.__init__(self, session)
@@ -49,10 +58,16 @@ class OverscanWizard(Screen, ConfigListScreen):
 
 	def __layoutFinished(self):
 		from enigma import eSize, ePoint
-		lenlist = len(self.list)*40
-		self["config"].instance.move(ePoint(383, 863 - lenlist))
-		self["config"].instance.resize(eSize(1234, lenlist))
-		self["introduction"].instance.resize(eSize(1234, 623 - lenlist))
+		if getDesktop(0).size().height() == 1080:
+			lenlist = len(self.list)*40
+			self["config"].instance.move(ePoint(383, 863 - lenlist))
+			self["config"].instance.resize(eSize(1234, lenlist))
+			self["introduction"].instance.resize(eSize(1234, 623 - lenlist))
+		else:
+			lenlist = len(self.list)*30
+			self["config"].instance.move(ePoint(228, 590 - lenlist))
+			self["config"].instance.resize(eSize(800, lenlist))
+			self["introduction"].instance.resize(eSize(800, 415 - lenlist))
 
 	def setScreen(self):
 		self.list = []
@@ -119,7 +134,7 @@ class OverscanWizard(Screen, ConfigListScreen):
 
 	def TimerTimeout(self):
 		self.countdown -= 1
-		self["title"].setText(_("Overscan Wizard") + " %s" % self.countdown)
+		self["title"].setText(_("Overscan Wizard") + " (%s)" % self.countdown)
 		if not(self.countdown):
 			self.keyCancel()
 
@@ -165,7 +180,7 @@ class OverscanWizard(Screen, ConfigListScreen):
 			if self.yes_no.value:
 				config.misc.do_overscanwizard.value = False
 				config.save()
-				self.keyCancel()
+				self.close()
 			else:
 				self.step = 1
 		self.setScreen()
@@ -174,6 +189,9 @@ class OverscanWizard(Screen, ConfigListScreen):
 		setPosition(int(self.dst_left.value), int(self.dst_width.value), int(self.dst_top.value), int(self.dst_height.value))
 
 	def keyCancel(self):
-		if not self.step == 3:
-			setConfiguredPosition()
-		self.close()
+		setConfiguredPosition()
+		self.step = self.step in (2, 5) and 1 or self.step in (3, 4) and 2
+		if self.step:
+			self.setScreen()
+		else:
+			self.close()
