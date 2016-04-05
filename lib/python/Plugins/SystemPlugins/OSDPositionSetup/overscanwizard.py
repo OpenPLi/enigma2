@@ -82,6 +82,8 @@ class OverscanWizard(Screen, ConfigListScreen):
 				"Test Pattern by TigerDave - www.tigerdave.com/ht_menu.htm"))
 			self.yes_no = ConfigYesNo(default = True)
 			self.list.append(getConfigListEntry(_("Do you see all the eight arrowheads?"), self.yes_no))
+			self.save_new_position = False
+			setPosition(0, 720, 0, 576)
 		elif self.step == 2:
 			self.Timer.stop()
 			self["title"].setText(_("Overscan Wizard"))
@@ -91,6 +93,7 @@ class OverscanWizard(Screen, ConfigListScreen):
 				"If you can't find it, ask other users at http://forums.openpli.org.\n\n"))
 			self.list.append(getConfigListEntry(_("Did you see all eight arrow heads?"), self.yes_no))
 			self.yes_no.value = True
+			setPosition(0, 720, 0, 576)
 		elif self.step == 3:
 			self["introduction"].setText(_("You did not see all eight arrow heads. This means your TV has overscan enabled "
 				"and presents you with a zoomed-in picture, causing you to loose part of a full HD screen. In addition this "
@@ -106,6 +109,7 @@ class OverscanWizard(Screen, ConfigListScreen):
 			self.list.append(getConfigListEntry(_("right"), self.dst_right))
 			self.list.append(getConfigListEntry(_("top"), self.dst_top))
 			self.list.append(getConfigListEntry(_("bottom"), self.dst_bottom))
+			setConfiguredPosition()
 		elif self.step == 4:
 			self["introduction"].setText(_("You did not see all eight arrow heads. This means your TV has overscan enabled "
 				"and presents you with a zoomed-in picture, causing you to loose part of a full HD screen. In addition this "
@@ -168,18 +172,25 @@ class OverscanWizard(Screen, ConfigListScreen):
 		elif self.step == 2:
 			self.step = self.yes_no.value and 5 or os.path.exists("/proc/stb/fb/dst_left") and 3 or 4
 		elif self.step == 3:
-			config.plugins.OSDPositionSetup.dst_left.value = self.dst_left.value
-			config.plugins.OSDPositionSetup.dst_width.value = self.dst_right.value - self.dst_left.value
-			config.plugins.OSDPositionSetup.dst_top.value = self.dst_top.value
-			config.plugins.OSDPositionSetup.dst_height.value = self.dst_bottom.value - self.dst_top.value
-			config.plugins.OSDPositionSetup.save()
+			self.save_new_position = True
 			self.step = 5
 		elif self.step == 4:
 			self.step = self.yes_no.value and 6 or 5
 		elif self.step == 5:
 			if self.yes_no.value:
+				if self.save_new_position:
+					config.plugins.OSDPositionSetup.dst_left.value = self.dst_left.value
+					config.plugins.OSDPositionSetup.dst_width.value = self.dst_right.value - self.dst_left.value
+					config.plugins.OSDPositionSetup.dst_top.value = self.dst_top.value
+					config.plugins.OSDPositionSetup.dst_height.value = self.dst_bottom.value - self.dst_top.value
+				else:
+					config.plugins.OSDPositionSetup.dst_left.value = 0
+					config.plugins.OSDPositionSetup.dst_width.value = 720
+					config.plugins.OSDPositionSetup.dst_top.value = 0
+					config.plugins.OSDPositionSetup.dst_height.value = 576
 				config.misc.do_overscanwizard.value = False
 				config.save()
+				setConfiguredPosition()
 				self.close()
 			else:
 				self.step = 1
@@ -194,9 +205,9 @@ class OverscanWizard(Screen, ConfigListScreen):
 		setPosition(int(self.dst_left.value), int(self.dst_right.value) - int(self.dst_left.value), int(self.dst_top.value), int(self.dst_bottom.value) - int(self.dst_top.value))
 
 	def keyCancel(self):
-		setConfiguredPosition()
 		self.step = self.step in (2, 5) and 1 or self.step in (3, 4) and 2
 		if self.step:
 			self.setScreen()
 		else:
+			setConfiguredPosition()
 			self.close()
