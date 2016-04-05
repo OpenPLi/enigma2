@@ -93,6 +93,7 @@ class OverscanWizard(Screen, ConfigListScreen):
 				"If you can't find it, ask other users at http://forums.openpli.org.\n\n"))
 			self.list.append(getConfigListEntry(_("Did you see all eight arrow heads?"), self.yes_no))
 			self.yes_no.value = True
+			self.save_new_position = False
 			setPosition(0, 720, 0, 576)
 		elif self.step == 3:
 			self["introduction"].setText(_("You did not see all eight arrow heads. This means your TV has overscan enabled "
