@@ -532,7 +532,7 @@ class TerrestrialTransponderSearchSupport:
 		self.terrestrial_search_container.dataAvail.append(self.getTerrestrialTransponderData)
 		self.terrestrial_tunerName = nimmanager.getNimName(nim_idx)
 		if self.terrestrial_tunerName.startswith("Sundtek"):
-			cmd = "/opt/bin/mediaclient --blindscan /dev/dvb/adapter1/frontend0"
+			cmd = "/opt/bin/mediaclient --blindscan /dev/dvb/adapter0/frontend%d" % nim_idx
 			print "SCAN CMD : ",cmd
 			self.terrestrial_search_container.execute(cmd)
 		else:
