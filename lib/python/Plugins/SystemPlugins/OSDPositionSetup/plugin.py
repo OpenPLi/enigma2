@@ -26,7 +26,7 @@ def setConfiguredPosition():
 
 def main(session, **kwargs):
 	from overscanwizard import OverscanWizard
-	session.open(OverscanWizard)
+	session.open(OverscanWizard, timeOut=False)
 
 def startSetup(menuid):
 	return menuid == "system" and [(_("Overscan Wizard"), main, "sd_position_setup", 0)] or []

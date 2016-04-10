@@ -8,7 +8,7 @@ from enigma import quitMainloop, eTimer, getDesktop
 import os
 
 class OverscanWizard(Screen, ConfigListScreen):
-	def __init__(self, session):
+	def __init__(self, session, timeOut=True):
 		if getDesktop(0).size().height() == 1080:
 			self.skin = """<screen position="fill" flags="wfNoBorder">
 				<ePixmap pixmap="skin_default/overscan1920x1080.png" position="0,0" size="1920,1080" zPosition="-2" alphatest="on" />
@@ -49,10 +49,11 @@ class OverscanWizard(Screen, ConfigListScreen):
 		self.onChangedEntry = []
 		self.setScreen()
 
-		self.countdown = 10
 		self.Timer = eTimer()
-		self.Timer.callback.append(self.TimerTimeout)
-		self.Timer.start(1000)
+		if timeOut:
+			self.countdown = 10
+			self.Timer.callback.append(self.TimerTimeout)
+			self.Timer.start(1000)
 
 		self.onLayoutFinish.append(self.__layoutFinished)
 
@@ -100,8 +101,7 @@ class OverscanWizard(Screen, ConfigListScreen):
 				"and presents you with a zoomed-in picture, causing you to loose part of a full HD screen. In addition this "
 				"you may also miss parts of the user interface, for example volume bars and more.\n\n"
 				"You can now try to resize and change the position of the user interface until you see the eight arrow heads.\n\n"
-				"When done press OK.\n\n"
-				"Note: you can always start the Overscan Wizard later,  via\n\nmenu->installation->system->OSD-setup"))
+				"When done press OK.\n\n"))
 			self.dst_left = ConfigSlider(default = config.plugins.OSDPositionSetup.dst_left.value, increment = 1, limits = (0, 720))
 			self.dst_right = ConfigSlider(default = config.plugins.OSDPositionSetup.dst_left.value + config.plugins.OSDPositionSetup.dst_width.value, increment = 1, limits = (0, 720))
 			self.dst_top = ConfigSlider(default = config.plugins.OSDPositionSetup.dst_top.value, increment = 1, limits = (0, 576))
@@ -118,13 +118,14 @@ class OverscanWizard(Screen, ConfigListScreen):
 				"Unfortunately, your model of receiver is not capable to adjust the dimensions of the user interface. "
 				"If not everything is visible, you should change the installed skin to one that supports the overscan area of your TV.\n\n"
 				"When you select a different skin, the user interface of your receiver will restart.\n\n"
-				"Note: you can always start the Overscan Wizard later,  via\n\nmenu->installation->system->OSD-setup"))
+				"Note: you can always start the Overscan Wizard later,  via\n\nmenu->installation->system->Overscan Wizard"))
 			self.yes_no.value = False
 			self.list.append(getConfigListEntry(_("Do you want to select a different skin?"), self.yes_no))
 		elif self.step == 5:
 			self.Timer.stop()
 			self["title"].setText(_("Overscan Wizard"))
-			self["introduction"].setText(_("The overscan wizard has been completed."))
+			self["introduction"].setText(_("The overscan wizard has been completed.\n\n"
+				"Note: you can always start the Overscan Wizard later,  via\n\nmenu->installation->system->Overscan Wizard"))
 			self.yes_no.value = True
 			self.list.append(getConfigListEntry(_("Do you want to quit the overscan wizard?"), self.yes_no))
 		elif self.step == 6:
