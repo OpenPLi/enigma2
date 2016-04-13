@@ -376,20 +376,14 @@ class SecConfigure:
 							diction = manufacturer.diction[product_name].value
 							positionsoffset = manufacturer.positionsoffset[product_name][0].value
 							if diction !="EN50607" or ((posnum <= (positionsoffset + manufacturer_positions_value) and (posnum > positionsoffset) and x <= maxFixedLnbPositions)): #for every allowed position
-								if diction =="EN50607":
-									sec.setLNBSatCRformat(1)	#JESS
-								else:
-									sec.setLNBSatCRformat(0)	#DiSEqC
+								sec.setLNBSatCRformat(diction =="EN50607" and 1 or 0)
 								sec.setLNBSatCR(manufacturer_scr[product_name].index)
 								sec.setLNBSatCRvco(manufacturer.vco[product_name][manufacturer_scr[product_name].index].value*1000)
 								sec.setLNBSatCRpositions(manufacturer_positions_value)
 								sec.setLNBLOFL(manufacturer.lofl[product_name][position_idx].value * 1000)
 								sec.setLNBLOFH(manufacturer.lofh[product_name][position_idx].value * 1000)
 								sec.setLNBThreshold(manufacturer.loft[product_name][position_idx].value * 1000)
-								if currLnb.unicableTuningAlgo.value == "reliable":
-									sec.setLNBSatCRTuningAlgo(1)
-								else:
-									sec.setLNBSatCRTuningAlgo(0)
+								sec.setLNBSatCRTuningAlgo(currLnb.unicableTuningAlgo.value == "reliable" and 1 or 0)
 								configManufacturer.save_forced = True
 								manufacturer.product.save_forced = True
 								manufacturer.vco[product_name][manufacturer_scr[product_name].index].save_forced = True
@@ -1370,10 +1364,9 @@ def InitNimManager(nimmgr, update_slots = []):
 			positions_append(int(product.get("positions",1)))
 			for cnt in range(positions[0]):
 				lof=[]
-				lof_append = lof.append
-				lof_append(int(product.get("lofl",9750)))
-				lof_append(int(product.get("lofh",10600)))
-				lof_append(int(product.get("threshold",11700)))
+				lof.append(int(product.get("lofl",9750)))
+				lof.append(int(product.get("lofh",10600)))
+				lof.append(int(product.get("threshold",11700)))
 				positions_append(tuple(lof))
 
 			p_update({"positions":tuple(positions)})							#add positons to dict product
@@ -1416,10 +1409,9 @@ def InitNimManager(nimmgr, update_slots = []):
 			positions_append(int(product.get("positions",1)))
 			for cnt in range(positions[0]):
 				lof=[]
-				lof_append = lof.append
-				lof_append(int(product.get("lofl",9750)))
-				lof_append(int(product.get("lofh",10600)))
-				lof_append(int(product.get("threshold",11700)))
+				lof.append(int(product.get("lofl",9750)))
+				lof.append(int(product.get("lofh",10600)))
+				lof.append(int(product.get("threshold",11700)))
 				positions_append(tuple(lof))
 
 			p_update({"positions":tuple(positions)})										#add positons to dict product
@@ -1438,12 +1430,9 @@ def InitNimManager(nimmgr, update_slots = []):
 		"unicable_user": "Unicable "+_("User defined")}
 	unicable_choices_default = "unicable_lnb"
 
-	advanced_lnb_satcr_user_choicesEN50494 = [("1", "SatCR 1"), ("2", "SatCR 2"), ("3", "SatCR 3"), ("4", "SatCR 4"), ("5", "SatCR 5"), ("6", "SatCR 6"), ("7", "SatCR 7"), ("8", "SatCR 8")]
+	advanced_lnb_satcr_user_choicesEN50494 = [("%d" % i, "SatCR %d" % i) for i in range(1,9)]
 
-	advanced_lnb_satcr_user_choicesEN50607 = [("1", "SatCR 1"), ("2", "SatCR 2"), ("3", "SatCR 3"), ("4", "SatCR 4"), ("5", "SatCR 5"), ("6", "SatCR 6"), ("7", "SatCR 7"), ("8", "SatCR 8"),
-								   ("9", "SatCR 9"), ("10", "SatCR 10"), ("11", "SatCR 11"), ("12", "SatCR 12"), ("13", "SatCR 13"), ("14", "SatCR 14"), ("15", "SatCR 15"), ("16", "SatCR 16"),
-								   ("17", "SatCR 17"), ("18", "SatCR 18"), ("19", "SatCR 19"), ("20", "SatCR 20"), ("21", "SatCR 21"), ("22", "SatCR 22"), ("23", "SatCR 23"), ("24", "SatCR 24"),
-								   ("25", "SatCR 25"), ("26", "SatCR 26"), ("27", "SatCR 27"), ("28", "SatCR 28"), ("29", "SatCR 29"), ("30", "SatCR 30"), ("31", "SatCR 31"), ("32", "SatCR 32")]
+	advanced_lnb_satcr_user_choicesEN50607 = [("%d" % i, "SatCR %d" % i) for i in range(1,33)]
 
 	advanced_lnb_diction_user_choices = [("EN50494", "Unicable(EN50494)"), ("EN50607", "JESS(EN50607)")]
 
