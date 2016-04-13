@@ -31,6 +31,11 @@ def main(session, **kwargs):
 def startSetup(menuid):
 	return menuid == "system" and [(_("Overscan Wizard"), main, "sd_position_setup", 0)] or []
 
+def startSetup(menuid):
+	if menuid != "system":
+		return [ ]
+	return [(_("OSD position setup"), main, "sd_position_setup", 0)]
+
 def startup(reason, **kwargs):
 	setConfiguredPosition()
 
