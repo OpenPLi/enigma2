@@ -484,6 +484,24 @@ static ePtr<eDVBFrontendParameters> parseFrontendData(const char* line, int vers
 			feparm->setFlags(flags);
 			return feparm;
 		}
+		case 'a':
+		{
+			eDVBFrontendParametersATSC atsc;
+			int frequency,
+				inversion = eDVBFrontendParametersATSC::Inversion_Unknown,
+				modulation = eDVBFrontendParametersATSC::Modulation_Auto,
+				system = eDVBFrontendParametersATSC::System_ATSC,
+				flags = 0;
+			sscanf(line+2, "%d:%d:%d:%d:%d",
+				&frequency, &inversion, &modulation, &flags, &system);
+			atsc.frequency = frequency;
+			atsc.inversion = inversion;
+			atsc.modulation = modulation;
+			ePtr<eDVBFrontendParameters> feparm = new eDVBFrontendParameters;
+			feparm->setATSC(atsc);
+			feparm->setFlags(flags);
+			return feparm;
+		}
 		default:
 			return NULL;
 	}
@@ -625,6 +643,7 @@ void eDVBDB::saveServicelist(const char *file)
 		eDVBFrontendParametersSatellite sat;
 		eDVBFrontendParametersTerrestrial ter;
 		eDVBFrontendParametersCable cab;
+		eDVBFrontendParametersATSC atsc;
 		unsigned int flags;  // flagOnlyFree yet..
 		ch.m_frontendParameters->getFlags(flags);
 		if (!ch.m_frontendParameters->getDVBS(sat))
@@ -687,6 +706,11 @@ void eDVBDB::saveServicelist(const char *file)
 		{
 			fprintf(f, "\tc %d:%d:%d:%d:%d:%d:%d\n",
 				cab.frequency, cab.symbol_rate, cab.inversion, cab.modulation, cab.fec_inner, flags, cab.system);
+		}
+		else if (!ch.m_frontendParameters->getATSC(atsc))
+		{
+			fprintf(f, "\ta %d:%d:%d:%d:%d\n",
+				atsc.frequency, atsc.inversion, atsc.modulation, flags, atsc.system);
 		}
 		fprintf(f, "/\n");
 		channels++;
@@ -1524,6 +1548,135 @@ PyObject *eDVBDB::readTerrestrials(ePyObject ter_list, ePyObject tp_dict)
 	return Py_True;
 }
 
+PyObject *eDVBDB::readATSC(ePyObject atsc_list, ePyObject tp_dict)
+{
+	if (!PyDict_Check(tp_dict)) {
+		PyErr_SetString(PyExc_StandardError,
+			"type error");
+			eDebug("[eDVBDB] readATSC arg 1 is not a python dict");
+		return NULL;
+	}
+	else if (!PyList_Check(atsc_list))
+	{
+		PyErr_SetString(PyExc_StandardError,
+			"type error");
+			eDebug("[eDVBDB] readATSC arg 0 is not a python list");
+		return NULL;
+	}
+
+	const char* atscFilename = "/etc/enigma2/atsc.xml";
+	if (::access(atscFilename, R_OK) < 0)
+	{
+		atscFilename = "/etc/tuxbox/atsc.xml";
+	}
+
+	xmlDoc *doc = xmlReadFile(atscFilename, NULL, 0);
+	if (!doc)
+	{
+		eDebug("[eDVBDB] couldn't open %s!!", atscFilename);
+		Py_INCREF(Py_False);
+		return Py_False;
+	}
+
+	int tmp, *dest,
+		modulation, freq, inversion, system;
+	char *end_ptr;
+
+	xmlNode *root_element = xmlDocGetRootElement(doc);
+	xmlNode *atsc = root_element ? root_element->children : NULL;
+
+	while(atsc)
+	{
+		ePyObject atsc_name;
+		ePyObject atsc_flags;
+
+		for(xmlAttrPtr attr = atsc->properties; attr; attr = attr->next)
+		{
+			std::string name((const char*)attr->name);
+			if (name == "name")
+				atsc_name = PyString_FromString((const char*)attr->children->content);
+			else if (name == "flags")
+			{
+				tmp = strtol((const char*)attr->children->content, &end_ptr, 10);
+				if (!*end_ptr)
+					atsc_flags = PyInt_FromLong(tmp);
+			}
+		}
+
+		if (atsc_name)
+		{
+			ePyObject tplist = PyList_New(0);
+			ePyObject tuple = PyTuple_New(2);
+			if (!atsc_flags)
+				atsc_flags = PyInt_FromLong(0);
+			PyTuple_SET_ITEM(tuple, 0, atsc_name);
+			PyTuple_SET_ITEM(tuple, 1, atsc_flags);
+			PyList_Append(atsc_list, tuple);
+			Py_DECREF(tuple);
+			PyDict_SetItem(tp_dict, atsc_name, tplist);
+
+			xmlNode *transponder = atsc->children;
+
+			while(transponder)
+			{
+				modulation = eDVBFrontendParametersATSC::Modulation_Auto;
+				system = eDVBFrontendParametersATSC::System_ATSC;
+				inversion = eDVBFrontendParametersATSC::Inversion_Unknown;
+				freq = 0;
+
+				for(xmlAttrPtr attr = transponder->properties; attr; attr = attr->next)
+				{
+					dest = 0;
+					std::string name((const char*)attr->name);
+					if (name == "modulation") dest = &modulation;
+					else if (name == "frequency") dest = &freq;
+					else if (name == "inversion") dest = &inversion;
+					else if (name == "system") dest = &system;
+					else continue;
+
+					if (dest)
+					{
+						tmp = strtol((const char*)attr->children->content, &end_ptr, 10);
+						if (!*end_ptr)
+						{
+							*dest = tmp;
+						}
+					}
+				}
+
+				if (freq)
+				{
+					tuple = PyTuple_New(5);
+					PyTuple_SET_ITEM(tuple, 0, PyInt_FromLong(3));
+					PyTuple_SET_ITEM(tuple, 1, PyInt_FromLong(freq));
+					PyTuple_SET_ITEM(tuple, 2, PyInt_FromLong(modulation));
+					PyTuple_SET_ITEM(tuple, 3, PyInt_FromLong(inversion));
+					PyTuple_SET_ITEM(tuple, 4, PyInt_FromLong(system));
+					PyList_Append(tplist, tuple);
+					Py_DECREF(tuple);
+				}
+
+				// next transponder
+				transponder = transponder->next;
+			}
+
+			Py_DECREF(tplist);
+		}
+		else if (atsc_flags)
+		{
+			Py_DECREF(atsc_flags);
+		}
+
+		// next atsc
+		atsc = atsc->next;
+	}
+
+	xmlFreeDoc(doc);
+
+	Py_INCREF(Py_True);
+	return Py_True;
+}
+
 eDVBDB::~eDVBDB()
 {
 	instance=NULL;
@@ -1576,10 +1729,13 @@ RESULT eDVBDB::removeServices(eDVBChannelID chid, unsigned int orbpos)
 				;
 			else if ( system == iDVBFrontend::feTerrestrial && chid.dvbnamespace.get() == (int)0xEEEE0000 )
 				;
+			else if (system == iDVBFrontend::feATSC &&
+				(chid.dvbnamespace.get() == (int)0xEEEE0000 || chid.dvbnamespace.get() == (int)0xFFFF0000))
+				;
 			else if ( chid.dvbnamespace != ch.dvbnamespace )
 				remove=false;
 		}
-		else if ( system == iDVBFrontend::feCable || system == iDVBFrontend::feTerrestrial )
+		else if ( system == iDVBFrontend::feCable || system == iDVBFrontend::feTerrestrial || system == iDVBFrontend::feATSC )
 			remove=false;
 		if ( remove && chid.original_network_id != eOnid && chid.original_network_id != ch.original_network_id )
 			remove=false;
@@ -1722,6 +1878,9 @@ RESULT eDVBDB::removeFlags(unsigned int flagmask, eDVBChannelID chid, unsigned i
 			if (system == iDVBFrontend::feCable && chid.dvbnamespace.get() == (int)0xFFFF0000)
 				;
 			else if (system == iDVBFrontend::feTerrestrial && chid.dvbnamespace.get() == (int)0xEEEE0000)
+				;
+			else if (system == iDVBFrontend::feATSC &&
+				(chid.dvbnamespace.get() == (int)0xEEEE0000 || chid.dvbnamespace.get() == (int)0xFFFF0000))
 				;
 			else if ( chid.dvbnamespace != ch.dvbnamespace )
 				remove=false;
