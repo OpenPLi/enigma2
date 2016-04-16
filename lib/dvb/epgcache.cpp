@@ -366,6 +366,34 @@ void eventData::cacheCorrupt(const char* context)
 	}
 }
 
+/*!
+ * Utility function to create they key string for the custom eid pid cache map.
+ *
+ * \return string that represents a custom eid pid cache map key.
+ */
+std::string createOpTsidOnidKey(int op, int tsid, int onid)
+{
+	std::string result;
+
+	/*!
+	 * The va format for creating our 'op tsid onid key' contains:
+	 * - unlimited hex representation of 'op' (so max 8 then)
+	 * - hex representation limited to 4 of 'tsid'
+	 * - hex representation limited to 4 of 'onid'
+	 *
+	 * That makes the possible size of the result 16 + '\0'. So the buffer size
+	 * we want would be 16 and we throw in a extra one just to be sure.
+	 */
+	result.resize(17);
+	int written = snprintf(&result[0], 17, "%x%04x%04x", op, tsid, onid);
+	if (written > 0)
+	{
+		// resize the string to the actual size
+		result.resize(written);
+	}
+
+	return result;
+}
 
 eEPGCache* eEPGCache::instance;
 static pthread_mutex_t cache_lock =
@@ -400,7 +428,6 @@ eEPGCache::eEPGCache()
 	{
 		eDebug("[eEPGCache] Custom pidfile found, parsing...");
 		std::string line;
-		char optsidonid[12];
 		int op, tsid, onid, eitpid;
 		while (!pid_file.eof())
 		{
@@ -411,9 +438,9 @@ eEPGCache::eEPGCache()
 				op += 3600;
 			if (eitpid != 0)
 			{
-				sprintf (optsidonid, "%x%04x%04x", op, tsid, onid);
-				customeitpids[std::string(optsidonid)] = eitpid;
-				eDebug("[eEPGCache] %s --> %#x", optsidonid, eitpid);
+				std::string optsidonid = createOpTsidOnidKey(op, tsid, onid);
+				custom_eit_pids.insert(std::make_pair(optsidonid, eitpid));
+				eDebug("[eEPGCache] %s --> %#x", optsidonid.c_str(), eitpid);
 			}
 		}
 		pid_file.close();
@@ -1600,12 +1627,14 @@ void eEPGCache::channel_data::startEPG()
 	mask.flags = eDVBSectionFilterMask::rfCRC;
 
 	eDVBChannelID chid = channel->getChannelID();
-	char optsidonid[12];
-	sprintf (optsidonid, "%x", chid.dvbnamespace.get());
-	optsidonid [strlen(optsidonid) - 4] = '\0';
-	sprintf (optsidonid, "%s%04x%04x", optsidonid, chid.transport_stream_id.get(), chid.original_network_id.get());
-	std::map<std::string,int>::iterator it = cache->customeitpids.find(std::string(optsidonid));
-	if (it != cache->customeitpids.end())
+
+	int op = chid.dvbnamespace.get();
+	int tsid = chid.transport_stream_id.get();
+	int onid = chid.original_network_id.get();
+	std::string optsidonid = createOpTsidOnidKey(op, tsid, onid);
+
+	CustomEitPidsMap::iterator it = cache->custom_eit_pids.find(optsidonid);
+	if (it != cache->custom_eit_pids.end())
 	{
 		mask.pid = it->second;
 		eDebug("[eEPGCache] Using non standart pid %#x", mask.pid);

@@ -258,7 +258,9 @@ private:
 	unsigned int historySeconds;
 
 	std::vector<int> onid_blacklist;
-	std::map<std::string,int> customeitpids;
+
+	typedef std::map<std::string, int> CustomEitPidsMap;
+	CustomEitPidsMap custom_eit_pids;
 	eventCache eventDB;
 	updateMap channelLastUpdated;
 	std::string m_filename;
