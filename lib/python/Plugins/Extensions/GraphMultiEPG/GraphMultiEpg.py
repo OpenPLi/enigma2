@@ -135,6 +135,7 @@ class EPGList(HTMLComponent, GUIComponent):
 
 		self.foreColor = 0xffffff
 		self.foreColorSelected = 0xffc000
+		self.foreColorSelectedRec = 0xff4040
 		self.borderColor = 0x464445
 		self.backColor = 0x595959
 		self.backColorSelected = 0x808080
@@ -168,6 +169,8 @@ class EPGList(HTMLComponent, GUIComponent):
 			self.foreColor = parseColor(value).argb()
 		def EntryForegroundColorSelected(value):
 			self.foreColorSelected = parseColor(value).argb()
+		def EntryForegroundColorSelectedRec(value):
+			self.foreColorSelectedRec = parseColor(value).argb()
 		def EntryBackgroundColor(value):
 			self.backColor = parseColor(value).argb()
 		def EntryBackgroundColorSelected(value):
@@ -516,6 +519,8 @@ class EPGList(HTMLComponent, GUIComponent):
 					backColor = self.backColor
 
 				if selected and self.select_rect.x == xpos + left and self.selEvPix:
+					if rec is not None and rec[1][-1] in (2, 12, 17, 27):
+						foreColorSelected = self.foreColorSelectedRec
 					bgpng = self.selEvPix
 					backColorSel = None
 				elif rec is not None and rec[1][-1] in (2, 12, 17, 27):
