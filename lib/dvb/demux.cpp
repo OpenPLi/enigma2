@@ -1,14 +1,16 @@
 #include <stdio.h>
 #include <fcntl.h>
-#include <sys/ioctl.h>
 #include <errno.h>
 #include <unistd.h>
 #include <signal.h>
+#include <sys/ioctl.h>
 #include <sys/sysinfo.h>
 #include <sys/mman.h>
 #ifdef HAVE_AMLOGIC
 #include <lib/dvb/amldecoder.h>
 #endif
+
+#include <lib/base/crc32.h>
 
 //#define SHOW_WRITE_TIME
 static int determineBufferCount()
@@ -196,7 +198,7 @@ void eDVBSectionReader::data(int)
 	{
 		// this check should never happen unless the driver is crappy!
 		unsigned int c;
-		if ((c = crc32((unsigned)-1, data, r)))
+		if ((c = crc32::crc32((unsigned)-1, data, r)))
 		{
 			//eDebug("[eDVBSectionReader] section crc32 failed! is %x\n", c);
 			return;

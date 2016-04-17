@@ -3,7 +3,6 @@ noinst_LIBRARIES += dvb/libenigma_dvb.a
 dvb_libenigma_dvb_a_SOURCES = \
 	dvb/cablescan.cpp \
 	dvb/cahandler.cpp \
-	dvb/crc32.cpp \
 	dvb/db.cpp \
 	dvb/decoder.cpp \
 	dvb/demux.cpp \
@@ -41,7 +40,6 @@ dvbincludedir = $(pkgincludedir)/lib/dvb
 dvbinclude_HEADERS = \
 	dvb/cablescan.h \
 	dvb/cahandler.h \
-	dvb/crc32.h \
 	dvb/db.h \
 	dvb/decoder.h \
 	dvb/demux.h \
