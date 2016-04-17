@@ -68,6 +68,7 @@ config.misc.graph_mepg.event_alignment = ConfigSelection(default = possibleAlign
 config.misc.graph_mepg.show_timelines = ConfigSelection(default = "all", choices = [("nothing", _("no")), ("all", _("all")), ("now", _("actual time only"))])
 config.misc.graph_mepg.servicename_alignment = ConfigSelection(default = possibleAlignmentChoices[0][0], choices = possibleAlignmentChoices)
 config.misc.graph_mepg.extension_menu = ConfigYesNo(default = False)
+config.misc.graph_mepg.show_record_clocks = ConfigYesNo(default = True)
 
 listscreen = config.misc.graph_mepg.default_mode.value
 
@@ -557,7 +558,7 @@ class EPGList(HTMLComponent, GUIComponent):
 						color = foreColor,
 						color_sel = foreColorSelected))
 				# recording icons
-				if rec is not None:
+				if config.misc.graph_mepg.show_record_clocks.value and rec is not None:
 					for i in range(len(rec[1])):
 						if ewidth < (i + 1) * (self.recIconSize + self.iconXPadding):
 							break
