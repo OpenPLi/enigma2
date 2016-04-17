@@ -21,7 +21,6 @@
 #include <lib/dvb/db.h>
 #include <lib/python/python.h>
 #include <lib/base/nconfig.h>
-#include <lib/base/crc32.h>
 #include <dvbsi++/descriptor_tag.h>
 
 #define HILO(x) (x##_hi << 8 | x##_lo)
@@ -78,6 +77,7 @@ unsigned int eventData::CacheSize = 0;
 bool eventData::isCacheCorrupt = 0;
 DescriptorMap eventData::descriptors;
 uint8_t eventData::data[2 * 4096 + 12];
+extern const uint32_t crc32_table[256];
 
 const eServiceReference &handleGroup(const eServiceReference &ref)
 {
@@ -100,6 +100,14 @@ const eServiceReference &handleGroup(const eServiceReference &ref)
 		}
 	}
 	return ref;
+}
+
+static uint32_t calculate_crc_hash(const uint8_t *data, int size)
+{
+	uint32_t crc = 0;
+	for (int i = 0; i < size; ++i)
+		crc = (crc << 8) ^ crc32_table[((crc >> 24) ^ data[i]) & 0xFF];
+	return crc;
 }
 
 eventData::eventData(const eit_event_struct* e, int size, int _type, int tsidonid)
@@ -131,7 +139,7 @@ eventData::eventData(const eit_event_struct* e, int size, int _type, int tsidoni
 				case PARENTAL_RATING_DESCRIPTOR:
 				case PDC_DESCRIPTOR:
 				{
-					uint32_t crc = crc32::calculate_crc_hash(descr, descr_len);
+					uint32_t crc = calculate_crc_hash(descr, descr_len);
 					DescriptorMap::iterator it = descriptors.find(crc);
 					if ( it == descriptors.end() )
 					{
@@ -186,7 +194,7 @@ eventData::eventData(const eit_event_struct* e, int size, int _type, int tsidoni
 
 						//Calculate the CRC, based on our new data
 						title_len += 2; //add 2 the length to include the 2 bytes in the header
-						uint32_t title_crc = crc32::calculate_crc_hash(title_data, title_len);
+						uint32_t title_crc = calculate_crc_hash(title_data, title_len);
 
 						DescriptorMap::iterator it = descriptors.find(title_crc);
 						if ( it == descriptors.end() )
@@ -219,7 +227,7 @@ eventData::eventData(const eit_event_struct* e, int size, int _type, int tsidoni
 						memcpy(&text_data[8], textUTF8.data(), textUTF8len);
 
 						text_len += 2; //add 2 the length to include the 2 bytes in the header
-						uint32_t text_crc = crc32::calculate_crc_hash(text_data, text_len);
+						uint32_t text_crc = calculate_crc_hash(text_data, text_len);
 
 						DescriptorMap::iterator it = descriptors.find(text_crc);
 						if ( it == descriptors.end() )
@@ -358,34 +366,6 @@ void eventData::cacheCorrupt(const char* context)
 	}
 }
 
-/*!
- * Utility function to create they key string for the custom eid pid cache map.
- *
- * \return string that represents a custom eid pid cache map key.
- */
-std::string createOpTsidOnidKey(int op, int tsid, int onid)
-{
-	std::string result;
-
-	/*!
-	 * The va format for creating our 'op tsid onid key' contains:
-	 * - unlimited hex representation of 'op' (so max 8 then)
-	 * - hex representation limited to 4 of 'tsid'
-	 * - hex representation limited to 4 of 'onid'
-	 *
-	 * That makes the possible size of the result 16 + '\0'. So the buffer size
-	 * we want would be 16 and we throw in a extra one just to be sure.
-	 */
-	result.resize(17);
-	int written = snprintf(&result[0], 17, "%x%04x%04x", op, tsid, onid);
-	if (written > 0)
-	{
-		// resize the string to the actual size
-		result.resize(written);
-	}
-
-	return result;
-}
 
 eEPGCache* eEPGCache::instance;
 static pthread_mutex_t cache_lock =
@@ -420,6 +400,7 @@ eEPGCache::eEPGCache()
 	{
 		eDebug("[eEPGCache] Custom pidfile found, parsing...");
 		std::string line;
+		char optsidonid[12];
 		int op, tsid, onid, eitpid;
 		while (!pid_file.eof())
 		{
@@ -430,9 +411,9 @@ eEPGCache::eEPGCache()
 				op += 3600;
 			if (eitpid != 0)
 			{
-				std::string optsidonid = createOpTsidOnidKey(op, tsid, onid);
-				custom_eit_pids.insert(std::make_pair(optsidonid, eitpid));
-				eDebug("[eEPGCache] %s --> %#x", optsidonid.c_str(), eitpid);
+				sprintf (optsidonid, "%x%04x%04x", op, tsid, onid);
+				customeitpids[std::string(optsidonid)] = eitpid;
+				eDebug("[eEPGCache] %s --> %#x", optsidonid, eitpid);
 			}
 		}
 		pid_file.close();
@@ -1619,19 +1600,17 @@ void eEPGCache::channel_data::startEPG()
 	mask.flags = eDVBSectionFilterMask::rfCRC;
 
 	eDVBChannelID chid = channel->getChannelID();
-
-	int op = chid.dvbnamespace.get();
-	int tsid = chid.transport_stream_id.get();
-	int onid = chid.original_network_id.get();
-	std::string optsidonid = createOpTsidOnidKey(op, tsid, onid);
-
-	CustomEitPidsMap::iterator it = cache->custom_eit_pids.find(optsidonid);
-	if (it != cache->custom_eit_pids.end())
+	char optsidonid[12];
+	sprintf (optsidonid, "%x", chid.dvbnamespace.get());
+	optsidonid [strlen(optsidonid) - 4] = '\0';
+	sprintf (optsidonid, "%s%04x%04x", optsidonid, chid.transport_stream_id.get(), chid.original_network_id.get());
+	std::map<std::string,int>::iterator it = cache->customeitpids.find(std::string(optsidonid));
+	if (it != cache->customeitpids.end())
 	{
 		mask.pid = it->second;
-		eDebug("[eEPGCache] Using non standard pid %#x", mask.pid);
+		eDebug("[eEPGCache] Using non standart pid %#x", mask.pid);
 	}
-
+	
 	if (eEPGCache::getInstance()->getEpgSources() & eEPGCache::NOWNEXT)
 	{
 		mask.data[0] = 0x4E;
@@ -3340,11 +3319,11 @@ PyObject *eEPGCache::search(ePyObject arg)
 				unsigned int cnt = 0;
 				for (uint8_t i = 0; i < evit->second->n_crc; ++i)
 				{
-					uint32_t crc32_hash = evit->second->crc_list[i];
+					uint32_t crc32 = evit->second->crc_list[i];
 					for (std::deque<uint32_t>::const_iterator it = descr.begin();
 						it != descr.end(); ++it)
 					{
-						if (*it == crc32_hash)  // found...
+						if (*it == crc32)  // found...
 						{
 							++cnt;
 							if (querytype)
