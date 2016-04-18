@@ -69,10 +69,7 @@ class SecConfigure:
 		if 0 <= diseqcmode < 3:
 			self.addSatellite(sec, orbpos)
 			if setVoltageTone:
-				if diseqc13V:
-					sec.setVoltageMode(switchParam.HV_13)
-				else:
-					sec.setVoltageMode(switchParam.HV)
+				sec.setVoltageMode(switchParam.HV_13 if diseqc13V else switchParam.HV)
 				sec.setToneMode(switchParam.HILO)
 			else:
 				sec.setVoltageMode(switchParam._14V)
@@ -100,10 +97,7 @@ class SecConfigure:
 			for x in user_satList:
 				print "[SecConfigure] Add sat " + str(x[0])
 				self.addSatellite(sec, int(x[0]))
-				if diseqc13V:
-					sec.setVoltageMode(switchParam.HV_13)
-				else:
-					sec.setVoltageMode(switchParam.HV)
+				sec.setVoltageMode(switchParam.HV_13 if diseqc13V else switchParam.HV)
 				sec.setToneMode(switchParam.HILO)
 				sec.setRotorPosNum(0) # USALS
 
