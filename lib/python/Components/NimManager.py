@@ -1503,7 +1503,7 @@ def InitNimManager(nimmgr, update_slots = []):
 			nim.cable = ConfigSubsection()
 			nim.cable.scan_networkid = ConfigInteger(default = 0, limits = (0, 99999))
 			possible_scan_types = [("bands", _("Frequency bands")), ("steps", _("Frequency steps"))]
-			if n:
+			if list:
 				possible_scan_types.append(("provider", _("Provider")))
 				nim.cable.scan_provider = ConfigSelection(default = "0", choices = list)
 			nim.cable.scan_type = ConfigSelection(default = "bands", choices = possible_scan_types)
