@@ -99,7 +99,7 @@ class Harddisk:
 			self.card = self.device[:2] == "hd" and "host0" not in self.dev_path
 
 		print "[Harddisk] new device", self.device, '->', self.dev_path, '->', self.disk_path
-		if not removable:
+		if not removable and not self.card:
 			self.startIdle()
 
 	def __lt__(self, ob):
@@ -937,22 +937,22 @@ class MkfsTask(Task.LoggingTask):
 
 harddiskmanager = HarddiskManager()
 
-def isSleepStateATA(device):
+def isSleepStateDevice(device):
 	ret = os.popen("hdparm -C %s" % device).read()
-	if 'drive state is:  standby' in ret:
+	if 'SG_IO' in ret or 'HDIO_DRIVE_CMD' in ret:
+		return None
+	if 'drive state is:  standby' in ret or 'drive state is:  idle' in ret:
 		return True
 	elif 'drive state is:  active/idle' in ret:
 		return False
-	return True
+	return None
 
-def internalHDDNotSleeping():
+def internalHDDNotSleeping(external=False):
 	state = False
 	if harddiskmanager.HDDCount():
 		for hdd in harddiskmanager.HDDList():
-			if hdd[1].internal:
-				if hdd[1].removable and hdd[1].max_idle_time and not hdd[1].isSleeping():
-					state = True
-				elif not hdd[1].removable and not hdd[1].rotational and not hdd[1].card and not isSleepStateATA(hdd[1].disk_path):
+			if hdd[1].internal or external:
+				if hdd[1].idle_running and hdd[1].max_idle_time and not hdd[1].isSleeping():
 					state = True
 	return state
 
