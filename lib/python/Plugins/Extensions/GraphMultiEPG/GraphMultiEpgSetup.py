@@ -63,6 +63,7 @@ class GraphMultiEpgSetup(Screen, ConfigListScreen):
 		self.list.append(getConfigListEntry(_("Center time-labels and remove date"), config.misc.graph_mepg.center_timeline))
 		self.list.append(getConfigListEntry(_("Show in extensions menu"), config.misc.graph_mepg.extension_menu))
 		self.list.append(getConfigListEntry(_("Show record clock icons"), config.misc.graph_mepg.show_record_clocks))
+		self.list.append(getConfigListEntry(_("Zap bouquets blindly on zap buttons"), config.misc.graph_mepg.zap_blind_bouquets))
 		if addnotifier is None:
 			addnotifier = config.misc.graph_mepg.extension_menu.addNotifier(plugins.reloadPlugins, initial_call=False)
 
