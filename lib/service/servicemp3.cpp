@@ -884,6 +884,12 @@ RESULT eServiceMP3::getLength(pts_t &pts)
 RESULT eServiceMP3::seekToImpl(pts_t to)
 {
 		/* convert pts to nanoseconds */
+	if (m_paused)
+	{
+		gst_element_set_state(m_gst_playbin, GST_STATE_PLAYING);
+		m_paused = false;
+		m_seek_paused = true;
+	}
 #if GST_VERSION_MAJOR < 1
 	gint64 time_nanoseconds = to * 11111LL;
 	if (!gst_element_seek (m_gst_playbin, m_currentTrickRatio, GST_FORMAT_TIME, (GstSeekFlags)(GST_SEEK_FLAG_FLUSH | GST_SEEK_FLAG_KEY_UNIT),
@@ -898,12 +904,6 @@ RESULT eServiceMP3::seekToImpl(pts_t to)
 	{
 		eDebug("[eServiceMP3] seekTo failed");
 		return -1;
-	}
-
-	if (m_paused)
-	{
-		m_seek_paused = true;
-		gst_element_set_state(m_gst_playbin, GST_STATE_PLAYING);
 	}
 
 	return 0;
@@ -1817,14 +1817,16 @@ void eServiceMP3::gstBusCall(GstMessage *msg)
 				}	break;
 				case GST_STATE_CHANGE_PAUSED_TO_PLAYING:
 				{
-					m_paused = false;
 					if (m_seek_paused)
 					{
 						m_seek_paused = false;
-						gst_element_set_state(m_gst_playbin, GST_STATE_PAUSED);
+						pause();
 					}
 					else
+					{
+						m_paused = false;
 						m_event((iPlayableService*)this, evGstreamerPlayStarted);
+					}
 				}	break;
 				case GST_STATE_CHANGE_PLAYING_TO_PAUSED:
 				{
