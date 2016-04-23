@@ -412,7 +412,6 @@ eServiceMP3::eServiceMP3(eServiceReference ref):
 	m_is_live = false;
 	m_use_prefillbuffer = false;
 	m_paused = false;
-	m_seek_paused = false;
 	m_cuesheet_loaded = false; /* cuesheet CVR */
 #if GST_VERSION_MAJOR >= 1
 	m_use_chapter_entries = false; /* TOC chapter support CVR */
@@ -898,12 +897,6 @@ RESULT eServiceMP3::seekToImpl(pts_t to)
 	{
 		eDebug("[eServiceMP3] seekTo failed");
 		return -1;
-	}
-
-	if (m_paused)
-	{
-		m_seek_paused = true;
-		gst_element_set_state(m_gst_playbin, GST_STATE_PLAYING);
 	}
 
 	return 0;
@@ -1569,18 +1562,12 @@ RESULT eServiceMP3::selectTrack(unsigned int i)
 		if (ppos < 0)
 			ppos = 0;
 	}
-
-	int ret = selectAudioStream(i);
-	if (!ret)
+	if (validposition)
 	{
-		if (validposition)
-		{
-			/* flush */
-			seekTo(ppos);
-		}
+		/* flush */
+		seekTo(ppos);
 	}
-
-	return ret;
+	return selectAudioStream(i);
 }
 
 int eServiceMP3::selectAudioStream(int i)
@@ -1818,13 +1805,7 @@ void eServiceMP3::gstBusCall(GstMessage *msg)
 				case GST_STATE_CHANGE_PAUSED_TO_PLAYING:
 				{
 					m_paused = false;
-					if (m_seek_paused)
-					{
-						m_seek_paused = false;
-						gst_element_set_state(m_gst_playbin, GST_STATE_PAUSED);
-					}
-					else
-						m_event((iPlayableService*)this, evGstreamerPlayStarted);
+					m_event((iPlayableService*)this, evGstreamerPlayStarted);
 				}	break;
 				case GST_STATE_CHANGE_PLAYING_TO_PAUSED:
 				{
