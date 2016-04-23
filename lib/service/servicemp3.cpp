@@ -906,7 +906,7 @@ RESULT eServiceMP3::seekToImpl(pts_t to)
 		eDebug("[eServiceMP3] seekTo failed");
 		if (m_seek_paused)
 		{
-			gst_element_set_state(m_gst_playbin, GST_STATE_PLAYING);
+			gst_element_set_state(m_gst_playbin, GST_STATE_PAUSED);
 			m_paused = true;
 			m_seek_paused = false;
 		}
