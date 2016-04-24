@@ -107,10 +107,14 @@ class EPGSelection(Screen):
 		self.onLayoutFinish.append(self.onCreate)
 
 	def nextBouquet(self):
+		if self.type == EPG_TYPE_SINGLE:
+			self.session.openWithCallback(self.channelSelectionCallback, ChannelSelection.SimpleChannelSelection, _("Select channel"), True, True, self.currentService.ref, self.parent and self.parent.epg_bouquet)
 		if self.bouquetChangeCB:
 			self.bouquetChangeCB(1, self)
 
 	def prevBouquet(self):
+		if self.type == EPG_TYPE_SINGLE:
+			self.session.openWithCallback(self.channelSelectionCallback, ChannelSelection.SimpleChannelSelection, _("Select channel"), True, True, self.currentService.ref, self.parent and self.parent.epg_bouquet)
 		if self.bouquetChangeCB:
 			self.bouquetChangeCB(-1, self)
 
