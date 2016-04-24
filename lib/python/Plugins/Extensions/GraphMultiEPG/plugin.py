@@ -48,6 +48,14 @@ def getBouquetServices(bouquet):
 			services.append(ServiceReference(service))
 	return services
 
+def selectBouquet(bouquet, epg):
+	services = getBouquetServices(bouquet)
+	if services:
+		global epg_bouquet
+		epg_bouquet = bouquet
+		epg.setServices(services)
+		epg.parent.setServices(services)
+
 def cleanup():
 	global Session
 	Session = None
@@ -105,7 +113,7 @@ def runGraphMultiEpg():
 		else:
 			cb = None
 		services = getBouquetServices(epg_bouquet)
-		Session.openWithCallback(reopen, GraphMultiEPG, services, zapToService, cb, ServiceReference(epg_bouquet).getServiceName())
+		Session.openWithCallback(reopen, GraphMultiEPG, services, zapToService, cb, ServiceReference(epg_bouquet).getServiceName(), selectBouquet, epg_bouquet)
 
 def reopen(answer):
 	if answer is None:

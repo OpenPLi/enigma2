@@ -868,6 +868,9 @@ class InfoBarSimpleEventView:
 
 class SimpleServicelist:
 	def __init__(self, services):
+		self.setServices(services)
+
+	def setServices(self, services):
 		self.services = services
 		self.length = len(services)
 		self.current = 0
@@ -995,6 +998,17 @@ class InfoBarEPG:
 				self.epg_bouquet = bouquet
 				epg.setServices(services)
 
+	def selectBouquet(self, bouquetref, epg):
+		services = self.getBouquetServices(bouquetref)
+		if services:
+			self.epg_bouquet = bouquetref
+			self.serviceSel.setServices(services)
+			epg.setServices(services)
+
+	def setService(self, service):
+		if service:
+			self.serviceSel.selectService(service)
+
 	def closed(self, ret=False):
 		closedScreen = self.dlg_stack.pop()
 		if self.bouquetSel and closedScreen == self.bouquetSel:
@@ -1062,7 +1076,7 @@ class InfoBarEPG:
 				self.serviceSel = SimpleServicelist(services)
 				if self.serviceSel.selectService(ref):
 					self.epg_bouquet = current_path
-					self.session.openWithCallback(self.SingleServiceEPGClosed, EPGSelection, ref, self.zapToService, serviceChangeCB=self.changeServiceCB)
+					self.session.openWithCallback(self.SingleServiceEPGClosed, EPGSelection, ref, self.zapToService, serviceChangeCB=self.changeServiceCB, parent=self)
 				else:
 					self.session.openWithCallback(self.SingleServiceEPGClosed, EPGSelection, ref)
 			else:

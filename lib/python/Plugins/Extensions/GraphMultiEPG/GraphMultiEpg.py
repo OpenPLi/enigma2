@@ -808,9 +808,12 @@ class GraphMultiEPG(Screen, HelpableScreen):
 	TIME_CHANGE = 2
 	ZAP = 1
 
-	def __init__(self, session, services, zapFunc=None, bouquetChangeCB=None, bouquetname=""):
+	def __init__(self, session, services, zapFunc=None, bouquetChangeCB=None, bouquetname="", selectBouquet=None, epg_bouquet=None):
 		Screen.__init__(self, session)
 		self.bouquetChangeCB = bouquetChangeCB
+		self.selectBouquet = selectBouquet
+		self.epg_bouquet = epg_bouquet
+		self.serviceref = None
 		now = time() - config.epg.histminutes.getValue() * 60
 		self.ask_time = now - now % int(config.misc.graph_mepg.roundTo.getValue())
 		self["key_red"] = Button("")
@@ -1113,7 +1116,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 	def openSingleServiceEPG(self):
 		ref = self["list"].getCurrent()[1].ref.toString()
 		if ref:
-			self.session.openWithCallback(self.doRefresh, EPGSelection, ref, self.zapFunc, serviceChangeCB=self["list"].moveToFromEPG)
+			self.session.openWithCallback(self.doRefresh, EPGSelection, ref, self.zapFunc, serviceChangeCB=self["list"].moveToFromEPG, parent=self)
 
 	def openMultiServiceEPG(self):
 		if self.services:
@@ -1124,21 +1127,23 @@ class GraphMultiEPG(Screen, HelpableScreen):
 		self["list"].resetOffset()
 		self.onCreate()
 
+	def setService(self, service):
+		self.serviceref = service
+
 	def doRefresh(self, answer):
-		serviceref = Screens.InfoBar.InfoBar.instance.servicelist.getCurrentSelection()
 		l = self["list"]
-		l.moveToService(serviceref)
-		l.setCurrentlyPlaying(serviceref)
+		l.moveToService(self.serviceref)
+		l.setCurrentlyPlaying(Screens.InfoBar.InfoBar.instance.servicelist.getCurrentSelection())
 		self.moveTimeLines()
 
 	def onCreate(self):
-		serviceref = Screens.InfoBar.InfoBar.instance.servicelist.getCurrentSelection()
+		self.serviceref = self.serviceref or Screens.InfoBar.InfoBar.instance.servicelist.getCurrentSelection()
 		l = self["list"]
 		l.setShowServiceMode(config.misc.graph_mepg.servicetitle_mode.value)
 		self["timeline_text"].setDateFormat(config.misc.graph_mepg.servicetitle_mode.value)
 		l.fillMultiEPG(self.services, self.ask_time)
-		l.moveToService(serviceref)
-		l.setCurrentlyPlaying(serviceref)
+		l.moveToService(self.serviceref)
+		l.setCurrentlyPlaying(self.serviceref)
 		self.moveTimeLines()
 
 	def eventViewCallback(self, setEvent, setService, val):
