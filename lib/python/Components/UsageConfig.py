@@ -45,6 +45,12 @@ def InitUsageConfig():
 		("reverseB", _("Reverse bouquet buttons")),
 		("keep reverseB", _("Keep service") + " + " + _("Reverse bouquet buttons"))])
 
+	choicelist = [("by skin", _("As defined by the skin"))]
+	for i in range (5,41):
+		choicelist.append((str(i)))
+	config.usage.servicelist_number_of_services = ConfigSelection(default = "by skin", choices = choicelist)
+	config.usage.servicelist_number_of_services.addNotifier(refreshServiceList)
+
 	config.usage.multiepg_ask_bouquet = ConfigYesNo(default = False)
 
 	config.usage.quickzap_bouquet_change = ConfigYesNo(default = False)
