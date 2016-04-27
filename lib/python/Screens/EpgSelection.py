@@ -571,4 +571,3 @@ class EPGSelection(Screen):
 			self.key_green_choice = self.ADD_TIMER
 		if self.parent and eventid and hasattr(self.parent, "setEvent"):
 			self.parent.setEvent(serviceref, eventid)
-			self.parent.setService(serviceref.ref)
