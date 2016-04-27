@@ -324,9 +324,7 @@ class ServiceList(HTMLComponent, GUIComponent):
 			ServiceInfoFont = self.ServiceInfoFont
 		else:
 			ItemHeight = int(self.instance.size().height() / int(config.usage.servicelist_number_of_services.value))
-			print "          ItemHeight",ItemHeight, self.ItemHeight
 			FontFactor = ItemHeight * 100 / self.ItemHeight
-			print "          FontFactor",FontFactor
 			ServiceNameFont = gFont(self.ServiceNameFont.family, int(self.ServiceNameFont.pointSize * FontFactor/100))
 			ServiceNumberFont = gFont(self.ServiceNumberFont.family, int(self.ServiceNumberFont.pointSize * FontFactor/100))
 			ServiceInfoFont = gFont(self.ServiceInfoFont.family, int(self.ServiceInfoFont.pointSize * FontFactor/100))
