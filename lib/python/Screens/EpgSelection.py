@@ -121,16 +121,10 @@ class EPGSelection(Screen):
 	def nextService(self):
 		if self.serviceChangeCB:
 			self.serviceChangeCB(1, self)
-			if self.parent:
-				current = self["list"].getCurrent()
-				self.parent.setService(current[1].ref)
 
 	def prevService(self):
 		if self.serviceChangeCB:
 			self.serviceChangeCB(-1, self)
-			if self.parent:
-				current = self["list"].getCurrent()
-				self.parent.setService(current[1].ref)
 
 	def enterDateTime(self):
 		if self.type == EPG_TYPE_MULTI:
@@ -294,7 +288,6 @@ class EPGSelection(Screen):
 			serviceref, bouquetref = args[:2]
 			if self.parent:
 				self.parent.selectBouquet(bouquetref, self)
-				self.parent.setService(serviceref)
 			self.setService(ServiceReference(serviceref))
 
 	def removeTimer(self, timer):
@@ -578,3 +571,4 @@ class EPGSelection(Screen):
 			self.key_green_choice = self.ADD_TIMER
 		if self.parent and eventid and hasattr(self.parent, "setEvent"):
 			self.parent.setEvent(serviceref, eventid)
+			self.parent.setService(serviceref.ref)
