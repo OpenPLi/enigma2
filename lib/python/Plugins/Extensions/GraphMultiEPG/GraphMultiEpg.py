@@ -1042,6 +1042,14 @@ class GraphMultiEPG(Screen, HelpableScreen):
 			l.fillMultiEPG(None, self.ask_time)
 			self.moveTimeLines(True)
 
+	def setEvent(self, serviceref, eventid):
+		l = self["list"]
+		event = l.getEventFromId(serviceref, eventid)
+		self.ask_time = event.getBeginTime() - event.getBeginTime() % int(config.misc.graph_mepg.roundTo.getValue())
+		l.resetOffset()
+		l.fillMultiEPG(None, self.ask_time)
+		self.moveTimeLines(True)
+
 	def showSetup(self):
 		self.showhideWindow(True)
 		if self.protectContextMenu and config.ParentalControl.setuppinactive.value and config.ParentalControl.config_sections.context_menus.value:

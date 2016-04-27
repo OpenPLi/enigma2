@@ -576,3 +576,5 @@ class EPGSelection(Screen):
 		elif not isRecordEvent and self.key_green_choice != self.ADD_TIMER:
 			self["key_green"].setText(_("Add timer"))
 			self.key_green_choice = self.ADD_TIMER
+		if self.parent and eventid and hasattr(self.parent, "setEvent"):
+			self.parent.setEvent(serviceref, eventid)
