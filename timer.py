@@ -105,7 +105,7 @@ class TimerEntry:
 
 	# check if a timer entry must be skipped
 	def shouldSkip(self):
-		if self.disabled:
+		if self.disabled and not self.repeated:
 			if self.end <= time():
 				self.disabled = False
 			return True
