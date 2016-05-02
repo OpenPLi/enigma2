@@ -1046,7 +1046,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 		self.setService(serviceref.ref)
 		l = self["list"]
 		event = l.getEventFromId(serviceref, eventid)
-		self.ask_time = event.getBeginTime() - event.getBeginTime() % int(config.misc.graph_mepg.roundTo.getValue())
+		self.ask_time = event.getBeginTime()
 		l.resetOffset()
 		l.fillMultiEPG(None, self.ask_time)
 		self.moveTimeLines(True)
