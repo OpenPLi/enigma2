@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-08-23 18:46+0300\n"
-"PO-Revision-Date: 2016-04-23 12:23+0300\n"
+"PO-Revision-Date: 2016-05-02 19:30+0300\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: openPLi Dimitrij\n"
 "Language: ru\n"
@@ -325,7 +325,7 @@ msgstr "%s/%s: %s"
 
 #, python-format
 msgid "%s:%s"
-msgstr ""
+msgstr "%s:%s"
 
 msgid "(ZAP)"
 msgstr "(Перейти)"
@@ -1432,7 +1432,7 @@ msgid "Configure the contrast level of the front panel display."
 msgstr "Настройка  уровня контрастности дисплея на передней панели."
 
 msgid "Configure the cursor behaviour in the channel selection list. When opening the channel selection list you can keep on the current service or already select up/down and you are able to revert the B+/B- buttons."
-msgstr "Настройка поведения курсора при вызове списка каналов. Вы можете сохранить курсор на текущем сервисе или выбрать положение курсора на один сервис выше/ниже, так же можно назначить кнопки B+/B- в обратном порядке."
+msgstr "Настройка поведения курсора при вызове списка выбора каналов. Вы можете сохранить курсор на текущем сервисе или выбрать положение курсора на один сервис выше/ниже, так же можно назначить кнопки B+/B- в обратном порядке."
 
 msgid "Configure the duration in hours the receiver should go to standby when the receiver is not controlled."
 msgstr "Настройка продолжительности времени в часах, до перехода в режим ожидания, если ресивер находится без управления (использования пульта)."
@@ -5516,8 +5516,8 @@ msgstr "Показать мульти EPG каналов"
 msgid "Show packages to be upgraded"
 msgstr "Показать пакеты, которые будут обновлены"
 
-msgid "Show picons in channel list"
-msgstr "Показать пиконы в списке каналов"
+msgid "Show picons in channel selection list"
+msgstr "Показать пиконы в списке выбора каналов"
 
 msgid "Show positioner movement"
 msgstr "Показать движение позиционера"
@@ -7190,7 +7190,7 @@ msgid "When enabled then when you select a new channel in the channel selection 
 msgstr "Если включено, то при выборе нового канала селектор каналов не закроется. Он закроется кнопкой ОК только при выборе текущего игрового сервиса. Это является своего рода режимом предварительного просмотра."
 
 msgid "When enabled you can control the volume with the arrow buttons instead of getting the channel selection list"
-msgstr "Если включено, то вы можете регулировать управление громкостью на кнопках (лево/право, вверх/вниз) около кнопки OK, вместо выбора списка канала."
+msgstr "Если включено, то вы можете регулировать управление громкостью на кнопках (лево/право, вверх/вниз) около кнопки OK, вместо списка выбора каналов."
 
 msgid "When enabled you can specify a timeframe to ignore the shutdown timer when the receiver is in standby mode"
 msgstr "Если включено, то установите период времени игнорирования действия выключения ресивера в режиме ожидания."
@@ -7202,10 +7202,10 @@ msgid "When enabled you can specify an extra timeframe were the inactivity sleep
 msgstr "Если включено, то установите экстра период времени игнорирования действия для таймера неактивности."
 
 msgid "When enabled you can zap channels with the  CH+/-, B+/-, P+/- buttons instead of opening the channel selection list."
-msgstr "Если включено, то каналы будут переключатся с помощью CH+/-, B+/-, P+/- кнопок, вместо вызова селектора каналов."
+msgstr "Если включено, то каналы будут переключатся с помощью CH+/-, B+/-, P+/- кнопок, вместо списка выбора каналов."
 
 msgid "When enabled you get the channel selection list via the OK button, the infobar toggle is then transfered to exit button"
-msgstr "Если включено, то селектор каналов будет открываться кнопкой OK, а  переключение инфобара будет передано на кнопку выход."
+msgstr "Если включено, то список выбора каналов будет открываться кнопкой OK, а  переключение инфобара будет передано на кнопку выход."
 
 msgid "When enabled, AIT data will be included in http streams. This allows a client receiver to use HbbTV."
 msgstr "Когда эта функция включена, AIT данные будут включены в в http стрим. Это позволит оборудованию клиента использовать HbbTV."
@@ -9644,3 +9644,12 @@ msgstr "Показать иконки записей"
 
 msgid "Zap bouquets blindly on zap buttons"
 msgstr "Смена букетов без выбора канала"
+
+msgid "Number of channels shown in channel selection list"
+msgstr "Количество каналов в списке выбора каналов"
+
+msgid "Configure how many channels are shown in the selection list."
+msgstr "Настройка, сколько каналов показать в списке выбора каналов."
+
+msgid "Repeat leave standby messages"
+msgstr "Повтор команд выхода из режима ожидания"
