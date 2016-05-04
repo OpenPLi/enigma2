@@ -1013,6 +1013,11 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 		ret = (int)(snr / 75);
 		ter_max = 1700;
 	}
+	else if (strstr(m_description, "Sundtek DVB-S/S2 (IV)"))
+	{
+		ret = (int)(snr / 52);
+		sat_max = 1690;
+	}
 	else if(!strcmp(m_description, "TBS-5925") || !strcmp(m_description, "DVBS2BOX"))
 	{
 		ret = (snr * 2000) / 0xFFFF;
@@ -1106,7 +1111,7 @@ int eDVBFrontend::readFrontendData(int type)
 				}
 #endif
 				// fallback to old DVB API
-				if(!signalquality && !signalqualitydb || strstr(m_description, "Sundtek DVB-T (III)"))
+				if(!signalquality && !signalqualitydb || strstr(m_description, "Sundtek"))
 				{
 					int snr = readFrontendData(iFrontendInformation_ENUMS::snrValue);
 					calculateSignalQuality(snr, signalquality, signalqualitydb);
