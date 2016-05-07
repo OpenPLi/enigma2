@@ -2,14 +2,20 @@ from Wizard import wizardManager
 from Screens.WizardLanguage import WizardLanguage
 from Screens.Rc import Rc
 from Tools.HardwareInfo import HardwareInfo
+try:
+	from Plugins.SystemPlugins.OSDPositionSetup.overscanwizard import OverscanWizard
+except:
+	OverscanWizard = None
 
 from Components.Pixmap import Pixmap, MovingPixmap, MultiPixmap
 from Components.config import config, ConfigBoolean, configfile, ConfigSubsection
-
+from Components.SystemInfo import SystemInfo
 from LanguageSelection import LanguageWizard
+from enigma import getDesktop
 
 config.misc.firstrun = ConfigBoolean(default = True)
 config.misc.languageselected = ConfigBoolean(default = True)
+config.misc.do_overscanwizard = ConfigBoolean(default = OverscanWizard and config.skin.primary_skin.value == "PLi-FullNightHD/skin.xml")
 
 class StartWizard(WizardLanguage, Rc):
 	def __init__(self, session, silent = True, showSteps = False, neededTag = None):
@@ -31,4 +37,5 @@ class StartWizard(WizardLanguage, Rc):
 		configfile.save()
 
 wizardManager.registerWizard(LanguageWizard, config.misc.languageselected.value, priority = 5)
+wizardManager.registerWizard(OverscanWizard, config.misc.do_overscanwizard.value, priority = 10)
 wizardManager.registerWizard(StartWizard, config.misc.firstrun.value, priority = 20)
