@@ -121,9 +121,9 @@ int eDVBAudio::startPid(int pid, int type)
 		case aDDP:
 #ifdef DREAMBOX
 		bypass = 7;
-#else		
+#else
 		bypass = 0x22;
-#endif	
+#endif
 		break;
 		}
 
