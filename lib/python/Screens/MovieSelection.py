@@ -382,6 +382,7 @@ class MovieContextMenu(Screen, ProtectedScreen):
 				"cancel": self.cancelClick,
 				"yellow": self.do_showNetworkSetup,
 				"menu": self.do_configure,
+				"1": self.do_unhideParentalServices,
 				"2": self.do_rename,
 				"5": self.do_copy,
 				"6": self.do_move,
@@ -411,7 +412,7 @@ class MovieContextMenu(Screen, ProtectedScreen):
 				if config.ParentalControl.hideBlacklist.value and config.ParentalControl.storeservicepin.value != "never":
 					from Components.ParentalControl import parentalControl
 					if not parentalControl.sessionPinCached:
-						append_to_menu(menu, (_("Unhide parental control services"), csel.unhideParentalServices))
+						append_to_menu(menu, (_("Unhide parental control services"), csel.unhideParentalServices), key="1")
 				# Plugins expect a valid selection, so only include them if we selected a non-dir
 				if not(service.flags & eServiceReference.mustDescent):
 					for p in plugins.getPlugins(PluginDescriptor.WHERE_MOVIELIST):
@@ -459,6 +460,9 @@ class MovieContextMenu(Screen, ProtectedScreen):
 
 	def do_delete(self):
 		self.close(self.csel.do_delete())
+
+	def do_unhideParentalServices(self):
+		self.close(self.csel.unhideParentalServices())
 
 	def do_configure(self):
 		self.close(self.csel.configure())
@@ -1030,21 +1034,21 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		if os.path.isdir(os.path.join(extra_args[0], 'BDMV/STREAM/')):
 			self.itemSelectedCheckTimeshiftCallback('bluray', extra_args[0], True)
 		elif os.path.isdir(os.path.join(extra_args[0], 'VIDEO_TS/')):
-			Console().ePopen('umount -f %s' % extra_args[0], self.umountIsoCallback, extra_args[0])
+			Console().ePopen('umount -f %s' % extra_args[0], self.umountIsoCallback, extra_args)
 		elif remount < 5:
 			remount += 1
 			self.remountTimer = eTimer()
-			self.remountTimer.timeout.callback.append(boundFunction(self.mountIsoCallback, None, None, (extra_args[0], remount)))
+			self.remountTimer.timeout.callback.append(boundFunction(self.mountIsoCallback, None, None, (extra_args[0], remount, extra_args[2])))
 			self.remountTimer.start(1000, False)
 		else:
-			Console().ePopen('umount -f %s' % extra_args[0], self.umountIsoCallback, extra_args[0])
+			Console().ePopen('umount -f %s' % extra_args[0], self.umountIsoCallback, extra_args)
 
 	def umountIsoCallback(self, result, retval, extra_args):
 		try:
-			os.rmdir(extra_args)
+			os.rmdir(extra_args[0])
 		except Exception as e:
-			print "[ML] Cannot remove", extra_args, e
-		self.itemSelectedCheckTimeshiftCallback('.img', extra_args, True)
+			print "[ML] Cannot remove", extra_args[0], e
+		self.itemSelectedCheckTimeshiftCallback('.img', extra_args[2], True)
 
 	def playAsBLURAY(self, path):
 		try:
@@ -1226,7 +1230,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 						os.mkdir(mount_path)
 					except Exception as e:
 						print '[BlurayPlayer] Cannot create', mount_path, e
-				Console().ePopen('mount -r %s %s' % (iso_path, mount_path), self.mountIsoCallback, (mount_path, 0))
+				Console().ePopen('mount -r %s %s' % (iso_path, mount_path), self.mountIsoCallback, (mount_path, 0, path))
 				return
 			elif ext == 'bluray':
 				if self.playAsBLURAY(path):
