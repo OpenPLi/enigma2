@@ -7,7 +7,6 @@ from Components.config import config, getConfigListEntry, ConfigSubsection, conf
 from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import ActionMap
 
-config.mediaplayer = ConfigSubsection()
 config.mediaplayer.repeat = ConfigYesNo(default=False)
 config.mediaplayer.savePlaylistOnExit = ConfigYesNo(default=True)
 config.mediaplayer.saveDirOnExit = ConfigYesNo(default=False)
