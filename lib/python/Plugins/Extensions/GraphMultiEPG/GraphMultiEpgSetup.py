@@ -13,14 +13,14 @@ addnotifier = None
 
 class GraphMultiEpgSetup(Screen, ConfigListScreen):
 	skin = """
-		<screen name="GraphMultiEPGSetup" position="center,center" size="560,435" title="Electronic Program Guide Setup">
+		<screen name="GraphMultiEPGSetup" position="center,center" size="560,490" title="Electronic Program Guide Setup">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
 			<widget name="canceltext" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
 			<widget name="oktext" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
-			<widget name="config" position="10,50" size="550,395" />
+			<widget name="config" position="10,50" size="550,430" />
 		</screen>"""
 
 	def __init__(self, session, args = None):
@@ -62,6 +62,8 @@ class GraphMultiEpgSetup(Screen, ConfigListScreen):
 		self.list.append(getConfigListEntry(_("Show vertical timelines"), config.misc.graph_mepg.show_timelines))
 		self.list.append(getConfigListEntry(_("Center time-labels and remove date"), config.misc.graph_mepg.center_timeline))
 		self.list.append(getConfigListEntry(_("Show in extensions menu"), config.misc.graph_mepg.extension_menu))
+		self.list.append(getConfigListEntry(_("Show record clock icons"), config.misc.graph_mepg.show_record_clocks))
+		self.list.append(getConfigListEntry(_("Zap bouquets blindly on zap buttons"), config.misc.graph_mepg.zap_blind_bouquets))
 		if addnotifier is None:
 			addnotifier = config.misc.graph_mepg.extension_menu.addNotifier(plugins.reloadPlugins, initial_call=False)
 

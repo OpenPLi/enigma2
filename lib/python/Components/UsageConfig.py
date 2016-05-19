@@ -45,6 +45,12 @@ def InitUsageConfig():
 		("reverseB", _("Reverse bouquet buttons")),
 		("keep reverseB", _("Keep service") + " + " + _("Reverse bouquet buttons"))])
 
+	choicelist = [("by skin", _("As defined by the skin"))]
+	for i in range (5,41):
+		choicelist.append((str(i)))
+	config.usage.servicelist_number_of_services = ConfigSelection(default = "by skin", choices = choicelist)
+	config.usage.servicelist_number_of_services.addNotifier(refreshServiceList)
+
 	config.usage.multiepg_ask_bouquet = ConfigYesNo(default = False)
 
 	config.usage.quickzap_bouquet_change = ConfigYesNo(default = False)
@@ -132,16 +138,6 @@ def InitUsageConfig():
 	for i in range(7):
 		config.usage.wakeup_day[i] = ConfigEnableDisable(default = False)
 		config.usage.wakeup_time[i] = ConfigClock(default = ((6 * 60 + 0) * 60))
-
-	config.usage.on_long_powerpress = ConfigSelection(default = "show_menu", choices = [
-		("show_menu", _("Show shutdown menu")),
-		("shutdown", _("Immediate shutdown")),
-		("standby", _("Standby")) ] )
-
-	config.usage.on_short_powerpress = ConfigSelection(default = "standby", choices = [
-		("show_menu", _("Show shutdown menu")),
-		("shutdown", _("Immediate shutdown")),
-		("standby", _("Standby")) ] )
 
 	choicelist = [("0", _("Do nothing"))]
 	for i in range(3600, 21601, 3600):
@@ -451,6 +447,24 @@ def InitUsageConfig():
 		config.usage.vfd_final_scroll_delay = ConfigSelection(default = "1000", choices = choicelist)
 		config.usage.vfd_final_scroll_delay.addNotifier(final_scroll_delay, immediate_feedback = False)
 
+	if SystemInfo["HasForceLNBOn"]:
+		def forceLNBPowerChanged(configElement):
+			open(SystemInfo["HasForceLNBOn"], "w").write(configElement.value)
+		config.misc.forceLnbPower = ConfigSelection(default = "off", choices = [ ("on", _("Yes")), ("off", _("No"))] )
+		config.misc.forceLnbPower.addNotifier(forceLNBPowerChanged)
+
+	if SystemInfo["HasForceToneburst"]:
+		def forceToneBurstChanged(configElement):
+			open(SystemInfo["HasForceToneburst"], "w").write(configElement.value)
+		config.misc.forceToneBurst = ConfigSelection(default = "disable", choices = [ ("enable", _("Yes")), ("disable", _("No"))] )
+		config.misc.forceToneBurst.addNotifier(forceToneBurstChanged)
+
+	if SystemInfo["HasBypassEdidChecking"]:
+		def setHasBypassEdidChecking(configElement):
+			open(SystemInfo["HasBypassEdidChecking"], "w").write(configElement.value)
+		config.av.bypassEdidChecking = ConfigSelection(default = "00000000", choices = [ ("00000001", _("Yes")), ("00000000", _("No"))] )
+		config.av.bypassEdidChecking.addNotifier(setHasBypassEdidChecking)
+
 	config.subtitles = ConfigSubsection()
 	config.subtitles.ttx_subtitle_colors = ConfigSelection(default = "1", choices = [
 		("0", _("original")),
@@ -582,6 +596,10 @@ def InitUsageConfig():
 	config.streaming.stream_eit = ConfigYesNo(default = True)
 	config.streaming.stream_ait = ConfigYesNo(default = True)
 	config.streaming.authentication = ConfigYesNo(default = False)
+
+	config.mediaplayer = ConfigSubsection()
+	config.mediaplayer.useAlternateUserAgent = ConfigYesNo(default=False)
+	config.mediaplayer.alternateUserAgent = ConfigText(default="")
 
 def updateChoices(sel, choices):
 	if choices:

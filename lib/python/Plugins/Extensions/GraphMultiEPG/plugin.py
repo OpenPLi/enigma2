@@ -48,6 +48,14 @@ def getBouquetServices(bouquet):
 			services.append(ServiceReference(service))
 	return services
 
+def selectBouquet(bouquet, epg):
+	services = getBouquetServices(bouquet)
+	if services:
+		global epg_bouquet
+		epg_bouquet = bouquet
+		epg.setServices(services)
+		epg.parent.setServices(services)
+
 def cleanup():
 	global Session
 	Session = None
@@ -71,12 +79,18 @@ def onSelectBouquetClose(*args):
 		epg_bouquet = bouquetref
 		epg.setServices(services)
 		epg.setTitle(ServiceReference(epg_bouquet).getServiceName())
-		epg["list"].moveToService(serviceref)
+		if serviceref:
+			epg["list"].moveToService(serviceref)
 
 def changeBouquetCB(direction, epgcall):
 	global epg
 	epg = epgcall
-	Session.openWithCallback(onSelectBouquetClose, SimpleChannelSelection, _("Select channel"), True, True, epg["list"].getCurrent()[1].ref)
+	if config.misc.graph_mepg.zap_blind_bouquets.value:
+		global bouquets
+		global epg_bouquet
+		onSelectBouquetClose(None, bouquets[([x[1] for x in bouquets].index(epg_bouquet) + (direction > 0 and 1 or -1)) % len(bouquets)][1])
+	else:
+		Session.openWithCallback(onSelectBouquetClose, SimpleChannelSelection, _("Select channel"), True, True, epg["list"].getCurrent()[1].ref)
 
 def main(session, servicelist = None, **kwargs):
 	global Session
@@ -99,7 +113,7 @@ def runGraphMultiEpg():
 		else:
 			cb = None
 		services = getBouquetServices(epg_bouquet)
-		Session.openWithCallback(reopen, GraphMultiEPG, services, zapToService, cb, ServiceReference(epg_bouquet).getServiceName())
+		Session.openWithCallback(reopen, GraphMultiEPG, services, zapToService, cb, ServiceReference(epg_bouquet).getServiceName(), selectBouquet, epg_bouquet)
 
 def reopen(answer):
 	if answer is None:

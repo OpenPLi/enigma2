@@ -868,6 +868,9 @@ class InfoBarSimpleEventView:
 
 class SimpleServicelist:
 	def __init__(self, services):
+		self.setServices(services)
+
+	def setServices(self, services):
 		self.services = services
 		self.length = len(services)
 		self.current = 0
@@ -995,6 +998,17 @@ class InfoBarEPG:
 				self.epg_bouquet = bouquet
 				epg.setServices(services)
 
+	def selectBouquet(self, bouquetref, epg):
+		services = self.getBouquetServices(bouquetref)
+		if services:
+			self.epg_bouquet = bouquetref
+			self.serviceSel.setServices(services)
+			epg.setServices(services)
+
+	def setService(self, service):
+		if service:
+			self.serviceSel.selectService(service)
+
 	def closed(self, ret=False):
 		closedScreen = self.dlg_stack.pop()
 		if self.bouquetSel and closedScreen == self.bouquetSel:
@@ -1062,7 +1076,7 @@ class InfoBarEPG:
 				self.serviceSel = SimpleServicelist(services)
 				if self.serviceSel.selectService(ref):
 					self.epg_bouquet = current_path
-					self.session.openWithCallback(self.SingleServiceEPGClosed, EPGSelection, ref, self.zapToService, serviceChangeCB=self.changeServiceCB)
+					self.session.openWithCallback(self.SingleServiceEPGClosed, EPGSelection, ref, self.zapToService, serviceChangeCB=self.changeServiceCB, parent=self)
 				else:
 					self.session.openWithCallback(self.SingleServiceEPGClosed, EPGSelection, ref)
 			else:
@@ -2477,12 +2491,12 @@ class InfoBarInstantRecord:
 	def changeDuration(self, entry):
 		if entry is not None and entry >= 0:
 			self.selectedEntry = entry
-			self.session.openWithCallback(self.inputCallback, InputBox, title=_("How many minutes do you want to record?"), text="5", maxSize=False, type=Input.NUMBER)
+			self.session.openWithCallback(self.inputCallback, InputBox, title=_("How many minutes do you want to record?"), text="5  ", maxSize=True, type=Input.NUMBER)
 
 	def addRecordingTime(self, entry):
 		if entry is not None and entry >= 0:
 			self.selectedEntry = entry
-			self.session.openWithCallback(self.inputAddRecordingTime, InputBox, title=_("How many minutes do you want add to record?"), text="5", maxSize=False, type=Input.NUMBER)
+			self.session.openWithCallback(self.inputAddRecordingTime, InputBox, title=_("How many minutes do you want add to record?"), text="5  ", maxSize=True, type=Input.NUMBER)
 
 	def inputAddRecordingTime(self, value):
 		if value:

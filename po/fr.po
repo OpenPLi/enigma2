@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-18 14:14+0100\n"
-"PO-Revision-Date: 2016-03-18 14:17+0100\n"
+"POT-Creation-Date: 2016-04-28 12:50+0200\n"
+"PO-Revision-Date: 2016-04-28 14:16+0200\n"
 "Last-Translator: Pr2 <dummy@dummy.com>\n"
 "Language-Team: french\n"
 "Language: fr\n"
@@ -33,6 +33,13 @@ msgid ""
 msgstr ""
 "\n"
 "Sauvegarder les réglages du récepteur."
+
+msgid ""
+"\n"
+"Conflict detection disabled!"
+msgstr ""
+"\n"
+"La détection des conflits est désactivée!"
 
 msgid ""
 "\n"
@@ -851,6 +858,9 @@ msgstr "Artistes"
 msgid "Arts/Culture"
 msgstr "Arts/Culture"
 
+msgid "As defined by the skin"
+msgstr "Comme défini dans le thème/skin"
+
 msgid "Ask user"
 msgstr "Demander à l'utilisateur"
 
@@ -1235,10 +1245,10 @@ msgstr "Vérification de la connexion Internet"
 
 #, python-format
 msgid ""
-"Checking tuner %d\n"
+"Checking tuner %s\n"
 "DiSEqC port %s for %s"
 msgstr ""
-"Vérification tuner %d\n"
+"Vérification tuner %s\n"
 "DiSEqC port %s pour %s"
 
 msgid "Children/Youth"
@@ -1331,9 +1341,6 @@ msgstr "Communication"
 msgid "Compact flash"
 msgstr "Compact Flash"
 
-msgid "Compensate for overscan"
-msgstr "Compensation pour overscan"
-
 msgid "Complete"
 msgstr "Terminé"
 
@@ -1367,6 +1374,9 @@ msgstr "Configure combien de temps la barre d'informations demeure visible aprè
 
 msgid "Configure for how many minutes finished events should remain visible in the EPG. Useful when you need information about an event which has just finished, or has been delayed."
 msgstr "Configure combien de temps un événement terminé doit rester visible dans l'EPG. Utile lorsque vous avez besoin d'informations sur un événement qui vient de se terminer, ou a été retardé."
+
+msgid "Configure how many channels are shown in the selection list."
+msgstr "Configure le nombre de chaînes affichées dans la liste de sélection."
 
 msgid "Configure how recording filenames are constructed."
 msgstr "Configure la façon dont les noms de fichiers d'enregistrement sont construits."
@@ -3978,6 +3988,9 @@ msgstr "Lecture en cours"
 msgid "Now, use the contrast setting to turn up the brightness of the background as much as possible, but make sure that you can still see the difference between the two brightest levels of shades.If you have done that, press OK."
 msgstr "Maintenant, utilisez les paramètres de contraste pour indiquer la luminosité du fond autant que possible, mais assurez-vous que vous pouvez toujours voir la différence entre les deux niveaux les plus lumineux des nuances. Si vous avez fait cela, appuyez sur OK."
 
+msgid "Number of channels shown in channel selection list"
+msgstr "Afficher le numéro des chaînes dans la sélection des chaînes"
+
 msgid "Number of repeating text on display."
 msgstr "Nombre de texte se répétant sur l'écran."
 
@@ -5630,7 +5643,7 @@ msgstr "Afficher l'EPG multi chaîne"
 msgid "Show packages to be upgraded"
 msgstr "Afficher les paquets à mettre à jour"
 
-msgid "Show picons in channel list"
+msgid "Show picons in channel selection list"
 msgstr "Afficher les picons dans la liste des chaînes"
 
 msgid "Show positioner movement"
@@ -5638,6 +5651,9 @@ msgstr "Afficher le mouvement du positionneur"
 
 msgid "Show positioner position"
 msgstr "Afficher la position du positionneur"
+
+msgid "Show record clock icons"
+msgstr "Afficher un icône d’horloge pour les enregistrements"
 
 msgid "Show record indicator"
 msgstr "Afficher l'indication d'enregistrement"
@@ -5693,6 +5709,9 @@ msgstr "Voir la mise en garde avant de définir « Ignorer les conflits »"
 msgid "Show warning when timeshift is stopped"
 msgstr "Afficher un avertissement quand la PauseDirect est arrêtée"
 
+msgid "Show/hide window"
+msgstr "Afficher/masquer fenêtre"
+
 msgid "Shows live tv or informations on LCD."
 msgstr "Afficher la TV en directe ou les informations sur le LCD."
 
@@ -5722,9 +5741,6 @@ msgstr "Force du signal:"
 
 msgid "Signal: "
 msgstr "Signal: "
-
-msgid "Silently zap between bouquets"
-msgstr "Zapper de manière transparente entres les bouquets"
 
 msgid "Similar"
 msgstr "Similaire"
@@ -6471,12 +6487,12 @@ msgstr "Ce support DVD RW est déjà formaté - le reformater effacera tout le c
 
 msgid ""
 "This info is for developers only.\n"
-"For a normal users it is not important.\n"
-"Don't panic, please, when here will be displayed any suspicious informations!"
+"For a normal users it is not relevant.\n"
+"Don't panic please when you see values being displayed that you think look suspicious!"
 msgstr ""
 "Ceci est une info seulement pour les développeurs.\n"
 "Pour les utilisateurs finaux ceci n'est pas important.\n"
-"Ne paniquez pas, SVP, lorsqu'ici sera affiché certaines informations sensibles!"
+"SVP, ne paniquez pas si vous voyez des valeurs que vous pensez étranges."
 
 msgid "This plugin is installed."
 msgstr "Ce plugin est installé."
@@ -6581,9 +6597,6 @@ msgstr "Aperçu des programmations"
 
 msgid "Timer edit"
 msgstr "Édition des programmations"
-
-msgid "Timer editor"
-msgstr "Éditeur programmations"
 
 msgid "Timer entry"
 msgstr "Saisir programmation"
@@ -7778,6 +7791,9 @@ msgstr "Revenir sur le service avant le réglage positionneur?"
 
 msgid "Zap back to service before tuner setup?"
 msgstr "Revenir sur le service avant le réglage tuner?"
+
+msgid "Zap bouquets blindly on zap buttons"
+msgstr "Changer les bouquets directement avec les boutons de zap"
 
 msgid "Zap down"
 msgstr "Zapper vers le bas"

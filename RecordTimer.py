@@ -732,10 +732,22 @@ class RecordTimer(timer.Timer):
 				w.first_try_prepare = True
 				self.addTimerEntry(w)
 			else:
+				# correct wrong running timers
+				self.checkWrongRunningTimers()
+				# check for disabled timers, if time as passed set to completed
+				self.cleanupDisabled()
 				# Remove old timers as set in config
 				self.cleanupDaily(config.recording.keep_timers.value)
 				insort(self.processed_timers, w)
 		self.stateChanged(w)
+
+	def checkWrongRunningTimers(self):
+		now = time() + 100
+		if int(now) > 1072224000:
+			wrong_timers = [entry for entry in (self.processed_timers + self.timer_list) if entry.state in (1, 2) and entry.begin > now]
+			for timer in wrong_timers:
+				timer.state = RecordTimerEntry.StateWaiting
+				self.timeChanged(timer)
 
 	def isRecording(self):
 		for timer in self.timer_list:

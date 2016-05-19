@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-08-23 18:46+0300\n"
-"PO-Revision-Date: 2015-10-22 20:52+0300\n"
+"PO-Revision-Date: 2016-05-10 18:27+0300\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: openPLi Dimitrij\n"
 "Language: ru\n"
@@ -140,6 +140,9 @@ msgstr " (ТВ)"
 
 msgid " (disabled)"
 msgstr " (отключен)"
+
+msgid "0 (disabled)"
+msgstr "0 (отключен)"
 
 msgid " (higher than any auto)"
 msgstr " (выше чем любой авто)"
@@ -325,7 +328,7 @@ msgstr "%s/%s: %s"
 
 #, python-format
 msgid "%s:%s"
-msgstr ""
+msgstr "%s:%s"
 
 msgid "(ZAP)"
 msgstr "(Перейти)"
@@ -1075,7 +1078,7 @@ msgid "C"
 msgstr "C"
 
 msgid "C-Band"
-msgstr "C-диапазон LNB"
+msgstr "LNB C-диапазона"
 
 msgid "CH"
 msgstr "CH"
@@ -1189,7 +1192,7 @@ msgid "Channel not in services list"
 msgstr "Канала нет в списке сервисов"
 
 msgid "Channel selection"
-msgstr "Селектор каналов"
+msgstr "Выбор каналов"
 
 msgid "Channel:"
 msgstr "Канал:"
@@ -1239,7 +1242,7 @@ msgid "Choose which tuner to configure."
 msgstr "Выберите тюнер для настройки."
 
 msgid "Circular LNB"
-msgstr "Круговая LNB"
+msgstr "Круговой LNB"
 
 msgid "Circular left"
 msgstr "Круговая левая"
@@ -1360,7 +1363,7 @@ msgid "Configure how the fan should operate"
 msgstr "Настройка режимов работы вентилятора."
 
 msgid "Configure if and how crypto icons will be shown in the channel selection list."
-msgstr "Настройка иконок для кодированных сервисов в списке селектора каналов."
+msgstr "Настройка иконок для кодированных сервисов в списке выбора каналов."
 
 msgid "Configure if and how long the latest service in the PiP will be remembered."
 msgstr "Настройка - запомнить и на какой период времени последний сервис PiP."
@@ -1393,7 +1396,7 @@ msgid "Configure remote control type"
 msgstr "Настройка типа пульта Д/У"
 
 msgid "Configure the DiSEqC mode for this LNB."
-msgstr "Настройка режима DiSEqC для этой LNB."
+msgstr "Настройка режима DiSEqC для этого LNB."
 
 msgid "Configure the IP address."
 msgstr "Настройка IP-адреса."
@@ -1432,7 +1435,7 @@ msgid "Configure the contrast level of the front panel display."
 msgstr "Настройка  уровня контрастности дисплея на передней панели."
 
 msgid "Configure the cursor behaviour in the channel selection list. When opening the channel selection list you can keep on the current service or already select up/down and you are able to revert the B+/B- buttons."
-msgstr "Настройка поведения курсора при вызове списка каналов. Вы можете сохранить курсор на текущем сервисе или выбрать положение курсора на один сервис выше/ниже, так же можно назначить кнопки B+/B- в обратном порядке."
+msgstr "Настройка поведения курсора при вызове списка выбора каналов. Вы можете сохранить курсор на текущем сервисе или выбрать положение курсора на один сервис выше/ниже, так же можно назначить кнопки B+/B- в обратном порядке."
 
 msgid "Configure the duration in hours the receiver should go to standby when the receiver is not controlled."
 msgstr "Настройка продолжительности времени в часах, до перехода в режим ожидания, если ресивер находится без управления (использования пульта)."
@@ -2301,10 +2304,10 @@ msgid "Enable"
 msgstr "Включить"
 
 msgid "Enable 'neutrino' style channel select controlling"
-msgstr "Включить 'нейтрино' стиль контроля селектора каналов"
+msgstr "Включить стиль 'нейтрино' в списке выбора каналов"
 
 msgid "Enable 'neutrino' style zap controlling"
-msgstr "Включить 'нейтрино' стиль контроля переключения"
+msgstr "Включить стиль 'нейтрино' для переключения сервисов"
 
 msgid "Enable 5V for active antenna"
 msgstr "Включить 5V для активной антенны"
@@ -2319,10 +2322,10 @@ msgid "Enable Netmed EPG"
 msgstr "Включить Netmed EPG"
 
 msgid "Enable OK as preview in channel selection"
-msgstr "Включить ОК как превью, в селекторе каналов"
+msgstr "Включить ОК как превью, в списке выбора каналов"
 
 msgid "Enable OK for channel selection"
-msgstr "Включить OK для селектора каналов"
+msgstr "Включить OK для списка выбора каналов"
 
 msgid "Enable ViaSat EPG"
 msgstr "Включить ViaSat EPG"
@@ -2398,7 +2401,7 @@ msgid "Enigma (re)starts: %d\n"
 msgstr "Энигма (ре)стартов: %d\n"
 
 msgid "Enigma2 skin selector"
-msgstr "Селектор скинов Enigma2"
+msgstr "Выбор скинов Enigma2"
 
 msgid "Enter main menu..."
 msgstr "Войти в главное меню..."
@@ -4276,7 +4279,6 @@ msgstr "Пожалуйста, настройте тюнер I"
 msgid "Please set up tuner J"
 msgstr "Пожалуйста, настройте тюнер J"
 
-
 msgid ""
 "Please use direction keys to move the PiP window.\n"
 "Press Bouquet +/- to resize the window.\n"
@@ -4441,7 +4443,6 @@ msgstr "Нажмите OK для активации настроек."
 
 msgid "Press OK to edit the settings."
 msgstr "Нажмите OK, для измения настройки."
-
 
 msgid "Press OK to scan"
 msgstr "Нажмите OK для сканирования."
@@ -5338,7 +5339,7 @@ msgid "Set startup service"
 msgstr "Установить сервис стартовым"
 
 msgid "Set the type of the progress indication in the channel selection screen."
-msgstr "Установите тип индикации прогресса текущего события в селекторе каналов."
+msgstr "Установите тип индикации прогресса текущего события в списке выбора каналов."
 
 msgid "Set time window to 1 hour"
 msgstr "Установка времени окна на 1 час"
@@ -5435,13 +5436,13 @@ msgid "Show busy indicator when the system is busy."
 msgstr "Показывать индикатор на экране при занятости системы."
 
 msgid "Show channel numbers in channel selection"
-msgstr "Показать номера каналов в селекторе каналов"
+msgstr "Показать номера каналов в списке выбора каналов"
 
 msgid "Show columns"
 msgstr "Показать колонки для названий событий"
 
 msgid "Show crypto icons"
-msgstr "Показать крипто иконки в селекторе каналов"
+msgstr "Показать крипто иконки в списке выбора каналов"
 
 msgid "Show crypto info in infobar"
 msgstr "Показать крипто данные эмулятора в инфобаре"
@@ -5456,7 +5457,7 @@ msgid "Show event details"
 msgstr "Показать детали события"
 
 msgid "Show event-progress in channel selection"
-msgstr "Показать прогресс события в селекторе каналов"
+msgstr "Показать прогресс события в списке выбора каналов"
 
 msgid "Show eventinfo plugins"
 msgstr "Показать плагины события"
@@ -5518,8 +5519,8 @@ msgstr "Показать мульти EPG каналов"
 msgid "Show packages to be upgraded"
 msgstr "Показать пакеты, которые будут обновлены"
 
-msgid "Show picons in channel list"
-msgstr "Показать пиконы в списке каналов"
+msgid "Show picons in channel selection list"
+msgstr "Показать пиконы в списке выбора каналов"
 
 msgid "Show positioner movement"
 msgstr "Показать движение позиционера"
@@ -6739,7 +6740,7 @@ msgid "Uninstall"
 msgstr "Удалить"
 
 msgid "Universal LNB"
-msgstr "Универсальная LNB"
+msgstr "Универсальный LNB"
 
 msgid "Unknown"
 msgstr "Неизвестный"
@@ -6827,7 +6828,7 @@ msgid "Use a gateway"
 msgstr "Использовать шлюз"
 
 msgid "Use circular LNB"
-msgstr "Использовать круговую LNB"
+msgstr "Использовать круговой LNB"
 
 msgid "Use fastscan channel names"
 msgstr "Названия каналов из быстрого поиска"
@@ -6897,7 +6898,7 @@ msgstr "Интерфейс пользователя"
 
 #, python-format
 msgid "Using LNB %d"
-msgstr "Используемая LNB %d"
+msgstr "Используемый LNB %d"
 
 msgid "Using fixed address"
 msgstr "Фиксированный адрес"
@@ -7189,10 +7190,10 @@ msgid "When enabled the set top box is able to wakeup on LAN"
 msgstr "Если включено и если спецификация ресивера позволяет, то можно разбудить ресивер из глубокого ожидания по LAN подключению удаленно."
 
 msgid "When enabled then when you select a new channel in the channel selection the channel selection will not close. It will only close when you select the current playing service. This is a kind of preview mode"
-msgstr "Если включено, то при выборе нового канала селектор каналов не закроется. Он закроется кнопкой ОК только при выборе текущего игрового сервиса. Это является своего рода режимом предварительного просмотра."
+msgstr "Если включено, то при выборе нового канала, список выбора каналов не закроется. Он закроется кнопкой ОК только при выборе текущего игрового сервиса. Это является своего рода режимом предварительного просмотра."
 
 msgid "When enabled you can control the volume with the arrow buttons instead of getting the channel selection list"
-msgstr "Если включено, то вы можете регулировать управление громкостью на кнопках (лево/право, вверх/вниз) около кнопки OK, вместо выбора списка канала."
+msgstr "Если включено, то вы можете регулировать управление громкостью на кнопках (лево/право, вверх/вниз) около кнопки OK, вместо списка выбора каналов."
 
 msgid "When enabled you can specify a timeframe to ignore the shutdown timer when the receiver is in standby mode"
 msgstr "Если включено, то установите период времени игнорирования действия выключения ресивера в режиме ожидания."
@@ -7204,10 +7205,10 @@ msgid "When enabled you can specify an extra timeframe were the inactivity sleep
 msgstr "Если включено, то установите экстра период времени игнорирования действия для таймера неактивности."
 
 msgid "When enabled you can zap channels with the  CH+/-, B+/-, P+/- buttons instead of opening the channel selection list."
-msgstr "Если включено, то каналы будут переключатся с помощью CH+/-, B+/-, P+/- кнопок, вместо вызова селектора каналов."
+msgstr "Если включено, то каналы будут переключатся с помощью CH+/-, B+/-, P+/- кнопок, вместо списка выбора каналов."
 
 msgid "When enabled you get the channel selection list via the OK button, the infobar toggle is then transfered to exit button"
-msgstr "Если включено, то селектор каналов будет открываться кнопкой OK, а  переключение инфобара будет передано на кнопку выход."
+msgstr "Если включено, то список выбора каналов будет открываться кнопкой OK, а  переключение инфобара будет передано на кнопку выход."
 
 msgid "When enabled, AIT data will be included in http streams. This allows a client receiver to use HbbTV."
 msgstr "Когда эта функция включена, AIT данные будут включены в в http стрим. Это позволит оборудованию клиента использовать HbbTV."
@@ -8928,6 +8929,12 @@ msgstr "14065 (выше чем любой авто ротора)"
 msgid "15 (lower than any auto)"
 msgstr "15 (ниже чем любой авто)"
 
+msgid "8 (lower than any auto)"
+msgstr "8 (ниже чем любой авто)"
+
+msgid "9 (lower than any auto)"
+msgstr "9 (ниже чем любой авто)"
+
 msgid "16 (lower than any auto)"
 msgstr "16 (ниже чем любой авто)"
 
@@ -9141,6 +9148,12 @@ msgstr "19065 (выше чем любой авто)"
 msgid "2 (lower than any auto)"
 msgstr "2 (ниже чем любой авто)"
 
+msgid "1 (lower than any auto)"
+msgstr "1 (ниже чем любой авто)"
+
+msgid "3 (lower than any auto)"
+msgstr "3 (ниже чем любой авто)"
+
 msgid "20 (lower than any auto)"
 msgstr "20 (ниже чем любой авто)"
 
@@ -9170,9 +9183,6 @@ msgstr "28 (ниже чем любой авто)"
 
 msgid "29 (lower than any auto)"
 msgstr "29 (ниже чем любой авто)"
-
-msgid "3 (lower than any auto)"
-msgstr "3 (ниже чем любой авто)"
 
 msgid "30 (lower than any auto)"
 msgstr "30 (ниже чем любой авто)"
@@ -9405,7 +9415,6 @@ msgstr "Если это включено, то http стрим потоки де
 msgid "When you use the remote fallback tuner to do recording, the timer conflict detection can't handle remote fallback tuners. This option allows you to turn off the timer confict detection"
 msgstr "При использовании дистанционного резервного тюнера для записей, обнаружение конфликтов таймеров не может сделать исключение для резервного тюнера. Эта опция позволяет отключить обнаружение конфликта таймера. Не рекомендуется!"
 
-
 msgid "A recording is currently running. Please stop the recording before trying to start a testing DiSEqC."
 msgstr "В текущее время идет запись. Пожалуйста остановите запись перед началом тестирования DiSEqC."
 
@@ -9444,7 +9453,6 @@ msgstr "Успешных:"
 
 msgid "Test DiSEqC settings"
 msgstr "Настройки теста DiSEqC"
-
 
 msgid "The results have been written to %s"
 msgstr "Результаты были записаны в %s"
@@ -9639,3 +9647,90 @@ msgstr "DVD меню"
 
 msgid "Auto play blu-ray file"
 msgstr "Авто проигрывание blu-ray файла"
+
+msgid "Show/hide window"
+msgstr "Показать/скрыть окно"
+
+msgid "Show record clock icons"
+msgstr "Показать иконки записей"
+
+msgid "Zap bouquets blindly on zap buttons"
+msgstr "Смена букетов без выбора канала"
+
+msgid "Number of channels shown in channel selection list"
+msgstr "Количество каналов в списке выбора каналов"
+
+msgid "Configure how many channels are shown in the selection list."
+msgstr "Настройка, сколько каналов показать в списке выбора каналов."
+
+msgid "Repeat leave standby messages"
+msgstr "Повтор команд выхода из режима ожидания"
+
+msgid "Input 1"
+msgstr "Вход 1"
+
+msgid "Input 2"
+msgstr "Вход 2"
+
+msgid "Input 3"
+msgstr "Вход 3"
+
+msgid "Input 4"
+msgstr "Вход 4"
+
+msgid "Input 5"
+msgstr "Вход 5"
+
+msgid "Input 6"
+msgstr "Вход 6"
+
+msgid "Input 7"
+msgstr "Вход 7"
+
+msgid "Input 8"
+msgstr "Вход 8"
+
+msgid "Input 9"
+msgstr "Вход 9"
+
+msgid "Input 10"
+msgstr "Вход 10"
+
+msgid "Input 11"
+msgstr "Вход 11"
+
+msgid "Input 12"
+msgstr "Вход 12"
+
+msgid "Input 13"
+msgstr "Вход 13"
+
+msgid "Input 14"
+msgstr "Вход 14"
+
+msgid "Input 15"
+msgstr "Вход 15"
+
+msgid "Input 16"
+msgstr "Вход 16"
+
+msgid "As defined by the skin"
+msgstr "Как определено в скине"
+
+msgid "Force LNB Power"
+msgstr "Принудительное питание LNB"
+
+msgid "Force ToneBurst"
+msgstr "Принудительный тоновый импульс (Tone Burst)"
+
+msgid "When enabled the LNB toneburst will be forced"
+msgstr "Если включено, то тоновый импульс на LNB будет выполнен принудительно"
+
+msgid "When enabled the LNB power will not be switched off in standby"
+msgstr "Если включено, то питание на LNB не будет выключено, когда тюнер находится в режиме ожидания"
+
+msgid "Bypass HDMI EDID checking"
+msgstr "Обход HDMI EDID проверки"
+
+msgid "Configure if the HDMI EDID checking should be bypassed as this might solve issue with some TVs."
+msgstr "Настройка, нужно ли обойти проверку HDMI EDID, так как это может решить вопросы с некоторыми ТВ."

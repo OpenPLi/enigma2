@@ -8,6 +8,7 @@ from Components.ActionMap import NumberActionMap
 from Components.Pixmap import Pixmap
 from Components.Sources.StaticText import StaticText
 from Components.MenuList import MenuList
+from Components.SystemInfo import SystemInfo
 from Plugins.Plugin import PluginDescriptor
 from Components.config import config
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
@@ -34,8 +35,8 @@ class SkinSelector(Screen):
 			self.skinlist.append(DEFAULTSKIN)
 		for root, dirs, files in os.walk(self.root, followlinks=True):
 			for subdir in dirs:
-				dir = os.path.join(root,subdir)
-				if os.path.exists(os.path.join(dir,SKINXML)):
+				file = os.path.join(os.path.join(root, subdir), SKINXML)
+				if os.path.exists(file) and (SystemInfo["HasFullHDSkinSupport"] or not all(x in open(file, "r").read() for x in ('yres="1080"', 'xres="1920"'))):
 					self.skinlist.append(subdir)
 			dirs = []
 

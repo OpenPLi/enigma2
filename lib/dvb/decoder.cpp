@@ -119,8 +119,12 @@ int eDVBAudio::startPid(int pid, int type)
 			bypass = 0x10;
 			break;
 		case aDDP:
-			bypass = 0x22;
-			break;
+#ifdef DREAMBOX
+		bypass = 7;
+#else
+		bypass = 0x22;
+#endif
+		break;
 		}
 
 		eDebugNoNewLineStart("[eDVBAudio%d] AUDIO_SET_BYPASS bypass=%d ", m_dev, bypass);

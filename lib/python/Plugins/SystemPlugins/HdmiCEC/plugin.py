@@ -49,30 +49,36 @@ class HdmiCECSetupScreen(Screen, ConfigListScreen):
 
 		self.list = []
 		ConfigListScreen.__init__(self, self.list, session = self.session)
+		self.createSetup()
+		self.updateAddress()
 
+	def createSetup(self):
+		self.list = []
 		self.list.append(getConfigListEntry(_("Enabled"), config.hdmicec.enabled))
-		self.list.append(getConfigListEntry(_("Put TV in standby"), config.hdmicec.control_tv_standby))
-		self.list.append(getConfigListEntry(_("Wakeup TV from standby"), config.hdmicec.control_tv_wakeup))
-		self.list.append(getConfigListEntry(_("Regard deep standby as standby"), config.hdmicec.handle_deepstandby_events))
-		self.list.append(getConfigListEntry(_("Switch TV to correct input"), config.hdmicec.report_active_source))
-		self.list.append(getConfigListEntry(_("Use TV remote control"), config.hdmicec.report_active_menu))
-		self.list.append(getConfigListEntry(_("Handle standby from TV"), config.hdmicec.handle_tv_standby))
-		self.list.append(getConfigListEntry(_("Handle wakeup from TV"), config.hdmicec.handle_tv_wakeup))
-		self.list.append(getConfigListEntry(_("Wakeup signal from TV"), config.hdmicec.tv_wakeup_detection))
-		self.list.append(getConfigListEntry(_("Forward volume keys"), config.hdmicec.volume_forwarding))
-		self.list.append(getConfigListEntry(_("Put receiver in standby"), config.hdmicec.control_receiver_standby))
-		self.list.append(getConfigListEntry(_("Wakeup receiver from standby"), config.hdmicec.control_receiver_wakeup))
-		self.list.append(getConfigListEntry(_("Minimum send interval"), config.hdmicec.minimum_send_interval))
+		if config.hdmicec.enabled.value:
+			self.list.append(getConfigListEntry(_("Put TV in standby"), config.hdmicec.control_tv_standby))
+			self.list.append(getConfigListEntry(_("Wakeup TV from standby"), config.hdmicec.control_tv_wakeup))
+			self.list.append(getConfigListEntry(_("Regard deep standby as standby"), config.hdmicec.handle_deepstandby_events))
+			self.list.append(getConfigListEntry(_("Switch TV to correct input"), config.hdmicec.report_active_source))
+			self.list.append(getConfigListEntry(_("Use TV remote control"), config.hdmicec.report_active_menu))
+			self.list.append(getConfigListEntry(_("Handle standby from TV"), config.hdmicec.handle_tv_standby))
+			self.list.append(getConfigListEntry(_("Handle wakeup from TV"), config.hdmicec.handle_tv_wakeup))
+			self.list.append(getConfigListEntry(_("Wakeup signal from TV"), config.hdmicec.tv_wakeup_detection))
+			self.list.append(getConfigListEntry(_("Forward volume keys"), config.hdmicec.volume_forwarding))
+			self.list.append(getConfigListEntry(_("Put receiver in standby"), config.hdmicec.control_receiver_standby))
+			self.list.append(getConfigListEntry(_("Wakeup receiver from standby"), config.hdmicec.control_receiver_wakeup))
+			self.list.append(getConfigListEntry(_("Minimum send interval"), config.hdmicec.minimum_send_interval))
+			self.list.append(getConfigListEntry(_("Repeat leave standby messages"), config.hdmicec.repeat_wakeup_timer))
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
-		self.updateAddress()
-
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
+		self.createSetup()
 
 	def keyRight(self):
 		ConfigListScreen.keyRight(self)
+		self.createSetup()
 
 	def keyGo(self):
 		for x in self["config"].list:

@@ -317,8 +317,20 @@ class ServiceList(HTMLComponent, GUIComponent):
 		self.l.setCurrentMarked(state)
 
 	def setMode(self, mode):
+		if config.usage.servicelist_number_of_services.value == "by skin":
+			ItemHeight = self.ItemHeight
+			ServiceNameFont = self.ServiceNameFont
+			ServiceNumberFont = self.ServiceNumberFont
+			ServiceInfoFont = self.ServiceInfoFont
+		else:
+			ItemHeight = int(self.instance.size().height() / int(config.usage.servicelist_number_of_services.value))
+			FontFactor = ItemHeight * 100 / self.ItemHeight
+			ServiceNameFont = gFont(self.ServiceNameFont.family, int(self.ServiceNameFont.pointSize * FontFactor/100))
+			ServiceNumberFont = gFont(self.ServiceNumberFont.family, int(self.ServiceNumberFont.pointSize * FontFactor/100))
+			ServiceInfoFont = gFont(self.ServiceInfoFont.family, int(self.ServiceInfoFont.pointSize * FontFactor/100))
+
 		self.mode = mode
-		self.l.setItemHeight(self.ItemHeight)
+		self.l.setItemHeight(ItemHeight)
 		self.l.setVisualMode(eListboxServiceContent.visModeComplex)
 
 		if config.usage.service_icon_enable.value:
@@ -332,30 +344,30 @@ class ServiceList(HTMLComponent, GUIComponent):
 			channelNumberWidth = 0
 			channelNumberSpace = 0
 		else:
-			channelNumberWidth = config.usage.alternative_number_mode.value and getTextBoundarySize(self.instance, self.ServiceNumberFont, self.instance.size(), "0000").width() or getTextBoundarySize(self.instance, self.ServiceNumberFont, self.instance.size(), "00000").width()
+			channelNumberWidth = config.usage.alternative_number_mode.value and getTextBoundarySize(self.instance, ServiceNumberFont, self.instance.size(), "0000").width() or getTextBoundarySize(self.instance, self.ServiceNumberFont, self.instance.size(), "00000").width()
 			channelNumberSpace = self.fieldMargins
 
-		self.l.setElementPosition(self.l.celServiceNumber, eRect(0, 0, channelNumberWidth, self.ItemHeight))
+		self.l.setElementPosition(self.l.celServiceNumber, eRect(0, 0, channelNumberWidth, ItemHeight))
 
 		progressWidth = self.progressBarWidth
 		if "perc" in config.usage.show_event_progress_in_servicelist.value:
 			progressWidth = self.progressPercentWidth or self.progressBarWidth
 
 		if "left" in config.usage.show_event_progress_in_servicelist.value:
-			self.l.setElementPosition(self.l.celServiceEventProgressbar, eRect(channelNumberWidth+channelNumberSpace, 0, progressWidth , self.ItemHeight))
-			self.l.setElementPosition(self.l.celServiceName, eRect(channelNumberWidth+channelNumberSpace + progressWidth + self.fieldMargins, 0, rowWidth - (channelNumberWidth+channelNumberSpace + progressWidth + self.fieldMargins), self.ItemHeight))
+			self.l.setElementPosition(self.l.celServiceEventProgressbar, eRect(channelNumberWidth+channelNumberSpace, 0, progressWidth , ItemHeight))
+			self.l.setElementPosition(self.l.celServiceName, eRect(channelNumberWidth+channelNumberSpace + progressWidth + self.fieldMargins, 0, rowWidth - (channelNumberWidth+channelNumberSpace + progressWidth + self.fieldMargins), ItemHeight))
 		elif "right" in config.usage.show_event_progress_in_servicelist.value:
-			self.l.setElementPosition(self.l.celServiceEventProgressbar, eRect(rowWidth - progressWidth, 0, progressWidth, self.ItemHeight))
-			self.l.setElementPosition(self.l.celServiceName, eRect(channelNumberWidth+channelNumberSpace, 0, rowWidth - (channelNumberWidth+channelNumberSpace + progressWidth + self.fieldMargins), self.ItemHeight))
+			self.l.setElementPosition(self.l.celServiceEventProgressbar, eRect(rowWidth - progressWidth, 0, progressWidth, ItemHeight))
+			self.l.setElementPosition(self.l.celServiceName, eRect(channelNumberWidth+channelNumberSpace, 0, rowWidth - (channelNumberWidth+channelNumberSpace + progressWidth + self.fieldMargins), ItemHeight))
 		else:
 			self.l.setElementPosition(self.l.celServiceEventProgressbar, eRect(0, 0, 0, 0))
-			self.l.setElementPosition(self.l.celServiceName, eRect(channelNumberWidth+channelNumberSpace, 0, rowWidth - (channelNumberWidth+channelNumberSpace), self.ItemHeight))
+			self.l.setElementPosition(self.l.celServiceName, eRect(channelNumberWidth+channelNumberSpace, 0, rowWidth - (channelNumberWidth+channelNumberSpace), ItemHeight))
 
-		self.l.setElementFont(self.l.celServiceName, self.ServiceNameFont)
-		self.l.setElementFont(self.l.celServiceNumber, self.ServiceNumberFont)
-		self.l.setElementFont(self.l.celServiceInfo, self.ServiceInfoFont)
+		self.l.setElementFont(self.l.celServiceName, ServiceNameFont)
+		self.l.setElementFont(self.l.celServiceNumber, ServiceNumberFont)
+		self.l.setElementFont(self.l.celServiceInfo, ServiceInfoFont)
 		if "perc" in config.usage.show_event_progress_in_servicelist.value:
-			self.l.setElementFont(self.l.celServiceEventProgressbar, self.ServiceInfoFont)
+			self.l.setElementFont(self.l.celServiceEventProgressbar, ServiceInfoFont)
 		self.l.setHideNumberMarker(config.usage.hide_number_markers.value)
 		self.l.setServiceTypeIconMode(int(config.usage.servicetype_icon_mode.value))
 		self.l.setCryptoIconMode(int(config.usage.crypto_icon_mode.value))

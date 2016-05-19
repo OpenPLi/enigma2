@@ -522,6 +522,9 @@ eServiceMP3::eServiceMP3(eServiceReference ref):
 
 	if ( m_sourceinfo.is_streaming )
 	{
+		if (eConfigManager::getConfigBoolValue("config.mediaplayer.useAlternateUserAgent"))
+			m_useragent = eConfigManager::getConfigValue("config.mediaplayer.alternateUserAgent");
+
 		uri = g_strdup_printf ("%s", filename);
 
 		if ( m_ref.getData(7) & BUFFERING_ENABLED )
@@ -902,8 +905,12 @@ RESULT eServiceMP3::seekToImpl(pts_t to)
 
 	if (m_paused)
 	{
+#if GST_VERSION_MAJOR < 1
 		m_seek_paused = true;
 		gst_element_set_state(m_gst_playbin, GST_STATE_PLAYING);
+#else
+		m_event((iPlayableService*)this, evUpdatedInfo);
+#endif
 	}
 
 	return 0;
@@ -1131,7 +1138,11 @@ RESULT eServiceMP3::getPlayPosition(pts_t &pts)
 	if ((pos = get_pts_pcrscr()) > 0)
 		pos *= 11111LL;
 #else
+#if GST_VERSION_MAJOR < 1
 	if (audioSink || videoSink)
+#else
+	if ((audioSink || videoSink) && !m_paused)
+#endif
 	{
 		g_signal_emit_by_name(audioSink ? audioSink : videoSink, "get-decoder-time", &pos);
 		if (!GST_CLOCK_TIME_IS_VALID(pos)) return -1;
@@ -1569,18 +1580,12 @@ RESULT eServiceMP3::selectTrack(unsigned int i)
 		if (ppos < 0)
 			ppos = 0;
 	}
-
-	int ret = selectAudioStream(i);
-	if (!ret)
+	if (validposition)
 	{
-		if (validposition)
-		{
-			/* flush */
-			seekTo(ppos);
-		}
+		/* flush */
+		seekTo(ppos);
 	}
-
-	return ret;
+	return selectAudioStream(i);
 }
 
 int eServiceMP3::selectAudioStream(int i)
@@ -1818,13 +1823,7 @@ void eServiceMP3::gstBusCall(GstMessage *msg)
 				case GST_STATE_CHANGE_PAUSED_TO_PLAYING:
 				{
 					m_paused = false;
-					if (m_seek_paused)
-					{
-						m_seek_paused = false;
-						gst_element_set_state(m_gst_playbin, GST_STATE_PAUSED);
-					}
-					else
-						m_event((iPlayableService*)this, evGstreamerPlayStarted);
+					m_event((iPlayableService*)this, evGstreamerPlayStarted);
 				}	break;
 				case GST_STATE_CHANGE_PLAYING_TO_PAUSED:
 				{
@@ -2086,7 +2085,13 @@ void eServiceMP3::gstBusCall(GstMessage *msg)
 				g_free(g_codec);
 				m_subtitleStreams.push_back(subs);
 			}
+
 			m_event((iPlayableService*)this, evUpdatedInfo);
+			if (m_seek_paused)
+			{
+				m_seek_paused = false;
+				gst_element_set_state(m_gst_playbin, GST_STATE_PAUSED);
+			}
 
 			if ( m_errorInfo.missing_codec != "" )
 			{

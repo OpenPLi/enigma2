@@ -68,6 +68,8 @@ config.misc.graph_mepg.event_alignment = ConfigSelection(default = possibleAlign
 config.misc.graph_mepg.show_timelines = ConfigSelection(default = "all", choices = [("nothing", _("no")), ("all", _("all")), ("now", _("actual time only"))])
 config.misc.graph_mepg.servicename_alignment = ConfigSelection(default = possibleAlignmentChoices[0][0], choices = possibleAlignmentChoices)
 config.misc.graph_mepg.extension_menu = ConfigYesNo(default = False)
+config.misc.graph_mepg.show_record_clocks = ConfigYesNo(default = True)
+config.misc.graph_mepg.zap_blind_bouquets = ConfigYesNo(default = False)
 
 listscreen = config.misc.graph_mepg.default_mode.value
 
@@ -134,6 +136,7 @@ class EPGList(HTMLComponent, GUIComponent):
 
 		self.foreColor = 0xffffff
 		self.foreColorSelected = 0xffc000
+		self.foreColorSelectedRec = 0xff4040
 		self.borderColor = 0x464445
 		self.backColor = 0x595959
 		self.backColorSelected = 0x808080
@@ -167,6 +170,8 @@ class EPGList(HTMLComponent, GUIComponent):
 			self.foreColor = parseColor(value).argb()
 		def EntryForegroundColorSelected(value):
 			self.foreColorSelected = parseColor(value).argb()
+		def EntryForegroundColorSelectedRec(value):
+			self.foreColorSelectedRec = parseColor(value).argb()
 		def EntryBackgroundColor(value):
 			self.backColor = parseColor(value).argb()
 		def EntryBackgroundColorSelected(value):
@@ -515,6 +520,8 @@ class EPGList(HTMLComponent, GUIComponent):
 					backColor = self.backColor
 
 				if selected and self.select_rect.x == xpos + left and self.selEvPix:
+					if rec is not None and rec[1][-1] in (2, 12, 17, 27):
+						foreColorSelected = self.foreColorSelectedRec
 					bgpng = self.selEvPix
 					backColorSel = None
 				elif rec is not None and rec[1][-1] in (2, 12, 17, 27):
@@ -557,7 +564,7 @@ class EPGList(HTMLComponent, GUIComponent):
 						color = foreColor,
 						color_sel = foreColorSelected))
 				# recording icons
-				if rec is not None:
+				if config.misc.graph_mepg.show_record_clocks.value and rec is not None:
 					for i in range(len(rec[1])):
 						if ewidth < (i + 1) * (self.recIconSize + self.iconXPadding):
 							break
@@ -801,9 +808,12 @@ class GraphMultiEPG(Screen, HelpableScreen):
 	TIME_CHANGE = 2
 	ZAP = 1
 
-	def __init__(self, session, services, zapFunc=None, bouquetChangeCB=None, bouquetname=""):
+	def __init__(self, session, services, zapFunc=None, bouquetChangeCB=None, bouquetname="", selectBouquet=None, epg_bouquet=None):
 		Screen.__init__(self, session)
 		self.bouquetChangeCB = bouquetChangeCB
+		self.selectBouquet = selectBouquet
+		self.epg_bouquet = epg_bouquet
+		self.serviceref = None
 		now = time() - config.epg.histminutes.getValue() * 60
 		self.ask_time = now - now % int(config.misc.graph_mepg.roundTo.getValue())
 		self["key_red"] = Button("")
@@ -1032,6 +1042,15 @@ class GraphMultiEPG(Screen, HelpableScreen):
 			l.fillMultiEPG(None, self.ask_time)
 			self.moveTimeLines(True)
 
+	def setEvent(self, serviceref, eventid):
+		self.setService(serviceref.ref)
+		l = self["list"]
+		event = l.getEventFromId(serviceref, eventid)
+		self.ask_time = event.getBeginTime()
+		l.resetOffset()
+		l.fillMultiEPG(None, self.ask_time)
+		self.moveTimeLines(True)
+
 	def showSetup(self):
 		self.showhideWindow(True)
 		if self.protectContextMenu and config.ParentalControl.setuppinactive.value and config.ParentalControl.config_sections.context_menus.value:
@@ -1106,32 +1125,34 @@ class GraphMultiEPG(Screen, HelpableScreen):
 	def openSingleServiceEPG(self):
 		ref = self["list"].getCurrent()[1].ref.toString()
 		if ref:
-			self.session.openWithCallback(self.doRefresh, EPGSelection, ref, self.zapFunc, serviceChangeCB=self["list"].moveToFromEPG)
+			self.session.openWithCallback(self.doRefresh, EPGSelection, ref, self.zapFunc, serviceChangeCB=self["list"].moveToFromEPG, parent=self)
 
 	def openMultiServiceEPG(self):
 		if self.services:
-			self.session.openWithCallback(self.doRefresh, EPGSelection, self.services, self.zapFunc, None, self.bouquetChangeCB)
+			self.session.openWithCallback(self.doRefresh, EPGSelection, self.services, self.zapFunc, None, self.bouquetChangeCB, parent=self)
 
 	def setServices(self, services):
 		self.services = services
 		self["list"].resetOffset()
 		self.onCreate()
 
+	def setService(self, service):
+		self.serviceref = service
+
 	def doRefresh(self, answer):
-		serviceref = Screens.InfoBar.InfoBar.instance.servicelist.getCurrentSelection()
 		l = self["list"]
-		l.moveToService(serviceref)
-		l.setCurrentlyPlaying(serviceref)
+		l.moveToService(self.serviceref)
+		l.setCurrentlyPlaying(Screens.InfoBar.InfoBar.instance.servicelist.getCurrentSelection())
 		self.moveTimeLines()
 
 	def onCreate(self):
-		serviceref = Screens.InfoBar.InfoBar.instance.servicelist.getCurrentSelection()
+		self.serviceref = self.serviceref or Screens.InfoBar.InfoBar.instance.servicelist.getCurrentSelection()
 		l = self["list"]
 		l.setShowServiceMode(config.misc.graph_mepg.servicetitle_mode.value)
 		self["timeline_text"].setDateFormat(config.misc.graph_mepg.servicetitle_mode.value)
 		l.fillMultiEPG(self.services, self.ask_time)
-		l.moveToService(serviceref)
-		l.setCurrentlyPlaying(serviceref)
+		l.moveToService(self.serviceref)
+		l.setCurrentlyPlaying(self.serviceref)
 		self.moveTimeLines()
 
 	def eventViewCallback(self, setEvent, setService, val):
