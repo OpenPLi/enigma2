@@ -1,6 +1,7 @@
 import os
 import time
 from Tools.CList import CList
+from Tools.HardwareInfo import HardwareInfo
 from SystemInfo import SystemInfo
 from Components.Console import Console
 import Task
@@ -44,7 +45,7 @@ DEVTYPE_UDEV = 0
 DEVTYPE_DEVFS = 1
 
 class Harddisk:
-	def __init__(self, device, removable):
+	def __init__(self, device, removable=False):
 		self.device = device
 
 		if os.access("/dev/.udev", 0):
@@ -107,7 +108,10 @@ class Harddisk:
 
 	def partitionPath(self, n):
 		if self.type == DEVTYPE_UDEV:
-			return self.dev_path + n
+			if self.dev_path.startswith('/dev/mmcblk0'):
+				return self.dev_path + "p" + n
+			else:
+				return self.dev_path + n
 		elif self.type == DEVTYPE_DEVFS:
 			return self.dev_path + '/part' + n
 
@@ -255,9 +259,9 @@ class Harddisk:
 		try:
 			fstab = open("/etc/fstab")
 			lines = fstab.readlines()
+			fstab.close()
 		except IOError:
 			return -1
-		fstab.close()
 		for line in lines:
 			parts = line.strip().split(" ")
 			fspath = os.path.realpath(parts[0])
@@ -270,7 +274,7 @@ class Harddisk:
 		res = -1
 		if self.type == DEVTYPE_UDEV:
 			# we can let udev do the job, re-read the partition table
-			res = os.system('sfdisk -R ' + self.disk_path)
+			res = os.system('hdparm -z ' + self.disk_path)
 			# give udev some time to make the mount, which it will do asynchronously
 			from time import sleep
 			sleep(3)
@@ -559,7 +563,7 @@ class Partition:
 			return None
 
 	def tabbedDescription(self):
-		if self.mountpoint.startswith('/media/net'):
+		if self.mountpoint.startswith('/media/net') or self.mountpoint.startswith('/media/autofs'):
 			# Network devices have a user defined name
 			return self.description
 		return self.description + '\t' + self.mountpoint
@@ -573,7 +577,7 @@ class Partition:
 			if mounts is None:
 				mounts = getProcMounts()
 			for parts in mounts:
-				if parts[1] == self.mountpoint:
+				if self.mountpoint.startswith(parts[1]): # use startswith so a mount not ending with '/' is also detected.
 					return True
 		return False
 
@@ -582,8 +586,12 @@ class Partition:
 			if mounts is None:
 				mounts = getProcMounts()
 			for fields in mounts:
-				if fields[1] == self.mountpoint:
-					return fields[2]
+				if self.mountpoint.endswith('/') and not self.mountpoint == '/':
+					if fields[1] + '/' == self.mountpoint:
+						return fields[2]
+				else:
+					if fields[1] == self.mountpoint:
+						return fields[2]
 		return ''
 
 DEVICEDB =  \
@@ -653,9 +661,17 @@ class HarddiskManager:
 		is_cdrom = False
 		partitions = []
 		try:
-			removable = bool(int(readFile(devpath + "/removable")))
-			dev = int(readFile(devpath + "/dev").split(':')[0])
-			if dev in (1, 7, 31, 253): # ram, loop, mtdblock, romblock
+			if os.path.exists(devpath + "/removable"):
+				removable = bool(int(readFile(devpath + "/removable")))
+			if os.path.exists(devpath + "/dev"):
+				dev = int(readFile(devpath + "/dev").split(':')[0])
+			else:
+				dev = None
+			if HardwareInfo().get_device_model().startswith('vusolo4k'):
+				devlist = [1, 7, 31, 253, 254, 179] # ram, loop, mtdblock, romblock, ramzswap, mmc
+			else:
+				devlist = [1, 7, 31, 253, 254] # ram, loop, mtdblock, romblock, ramzswap
+			if dev in devlist:
 				blacklisted = True
 			if blockdev[0:2] == 'sr':
 				is_cdrom = True
@@ -667,7 +683,7 @@ class HarddiskManager:
 				except IOError:
 					error = True
 			# check for partitions
-			if not is_cdrom:
+			if not is_cdrom and os.path.exists(devpath):
 				for partition in os.listdir(devpath):
 					if partition[0:len(blockdev)] != blockdev:
 						continue
@@ -906,7 +922,7 @@ class MountTask(Task.LoggingTask):
 		if self.hdd.type == DEVTYPE_UDEV:
 			# we can let udev do the job, re-read the partition table
 			# Sorry for the sleep 2 hack...
-			self.setCmdline('sleep 2; sfdisk -R ' + self.hdd.disk_path)
+			self.setCmdline('sleep 2; hdparm -z ' + self.hdd.disk_path)
 			self.postconditions.append(Task.ReturncodePostcondition())
 
 
@@ -926,7 +942,7 @@ class MkfsTask(Task.LoggingTask):
 			if '/' in data:
 				try:
 					d = data.strip(' \x08\r\n').split('/',1)
-					if ('\x08' in d[1]):
+					if '\x08' in d[1]:
 						d[1] = d[1].split('\x08',1)[0]
 					self.setProgress(80*int(d[0])/int(d[1]))
 				except Exception, e:

@@ -7,14 +7,13 @@ from Components.config import config, getConfigListEntry, ConfigSubsection, conf
 from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import ActionMap
 
-config.MediaPlayer = ConfigSubsection()
-config.MediaPlayer.repeat = ConfigYesNo(default=False)
-config.MediaPlayer.savePlaylistOnExit = ConfigYesNo(default=True)
-config.MediaPlayer.saveDirOnExit = ConfigYesNo(default=False)
-config.MediaPlayer.defaultDir = ConfigDirectory()
-config.MediaPlayer.sortPlaylists = ConfigYesNo(default=False)
-config.MediaPlayer.alwaysHideInfoBar = ConfigYesNo(default=True)
-config.MediaPlayer.onMainMenu = ConfigYesNo(default=False)
+config.mediaplayer.repeat = ConfigYesNo(default=False)
+config.mediaplayer.savePlaylistOnExit = ConfigYesNo(default=True)
+config.mediaplayer.saveDirOnExit = ConfigYesNo(default=False)
+config.mediaplayer.defaultDir = ConfigDirectory()
+config.mediaplayer.sortPlaylists = ConfigYesNo(default=False)
+config.mediaplayer.alwaysHideInfoBar = ConfigYesNo(default=True)
+config.mediaplayer.onMainMenu = ConfigYesNo(default=False)
 
 class DirectoryBrowser(Screen, HelpableScreen):
 
@@ -73,7 +72,7 @@ class MediaPlayerSettings(Screen,ConfigListScreen):
 		ConfigListScreen.__init__(self, [], session = session, on_change = self.changedEntry)
 		self.parent = parent
 		self.initConfigList()
-		config.MediaPlayer.saveDirOnExit.addNotifier(self.initConfigList)
+		config.mediaplayer.saveDirOnExit.addNotifier(self.initConfigList)
 
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
@@ -91,14 +90,14 @@ class MediaPlayerSettings(Screen,ConfigListScreen):
 		print "[initConfigList]", element
 		try:
 			self.list = []
-			self.list.append(getConfigListEntry(_("repeat playlist"), config.MediaPlayer.repeat))
-			self.list.append(getConfigListEntry(_("save playlist on exit"), config.MediaPlayer.savePlaylistOnExit))
-			self.list.append(getConfigListEntry(_("save last directory on exit"), config.MediaPlayer.saveDirOnExit))
-			if not config.MediaPlayer.saveDirOnExit.getValue():
-				self.list.append(getConfigListEntry(_("start directory"), config.MediaPlayer.defaultDir))
-			self.list.append(getConfigListEntry(_("sorting of playlists"), config.MediaPlayer.sortPlaylists))
-			self.list.append(getConfigListEntry(_("Always hide infobar"), config.MediaPlayer.alwaysHideInfoBar))
-			self.list.append(getConfigListEntry(_("show mediaplayer on mainmenu"), config.MediaPlayer.onMainMenu))
+			self.list.append(getConfigListEntry(_("repeat playlist"), config.mediaplayer.repeat))
+			self.list.append(getConfigListEntry(_("save playlist on exit"), config.mediaplayer.savePlaylistOnExit))
+			self.list.append(getConfigListEntry(_("save last directory on exit"), config.mediaplayer.saveDirOnExit))
+			if not config.mediaplayer.saveDirOnExit.getValue():
+				self.list.append(getConfigListEntry(_("start directory"), config.mediaplayer.defaultDir))
+			self.list.append(getConfigListEntry(_("sorting of playlists"), config.mediaplayer.sortPlaylists))
+			self.list.append(getConfigListEntry(_("Always hide infobar"), config.mediaplayer.alwaysHideInfoBar))
+			self.list.append(getConfigListEntry(_("show mediaplayer on mainmenu"), config.mediaplayer.onMainMenu))
 			self["config"].setList(self.list)
 		except KeyError:
 			print "keyError"
@@ -107,13 +106,13 @@ class MediaPlayerSettings(Screen,ConfigListScreen):
 		self.initConfigList()
 
 	def ok(self):
-		if self["config"].getCurrent()[1] == config.MediaPlayer.defaultDir:
+		if self["config"].getCurrent()[1] == config.mediaplayer.defaultDir:
 			self.session.openWithCallback(self.DirectoryBrowserClosed, DirectoryBrowser, self.parent.filelist.getCurrentDirectory())
 
 	def DirectoryBrowserClosed(self, path):
 		print "PathBrowserClosed:" + str(path)
 		if path != False:
-			config.MediaPlayer.defaultDir.setValue(path)
+			config.mediaplayer.defaultDir.setValue(path)
 
 	def save(self):
 		for x in self["config"].list:
