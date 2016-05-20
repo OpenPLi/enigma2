@@ -981,10 +981,10 @@ class GraphMultiEPG(Screen, HelpableScreen):
 			self.show()
 
 	def getKeyNextBouquetHelptext(self):
-		return config.misc.graph_mepg.silent_bouquet_change.value and _("Switch to next bouquet") or _("Show bouquet selection menu")
+		return config.misc.graph_mepg.zap_blind_bouquets.value and _("Switch to next bouquet") or _("Show bouquet selection menu")
 
 	def getKeyPrevBouquetHelptext(self):
-		return config.misc.graph_mepg.silent_bouquet_change.value and _("Switch to previous bouquet") or _("Show bouquet selection menu")
+		return config.misc.graph_mepg.zap_blind_bouquets.value and _("Switch to previous bouquet") or _("Show bouquet selection menu")
 
 	def nextBouquet(self):
 		self.showhideWindow(True)
