@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-28 12:50+0200\n"
-"PO-Revision-Date: 2016-04-28 14:16+0200\n"
+"POT-Creation-Date: 2016-05-23 19:54+0200\n"
+"PO-Revision-Date: 2016-05-23 20:01+0200\n"
 "Last-Translator: Pr2 <dummy@dummy.com>\n"
 "Language-Team: french\n"
 "Language: fr\n"
@@ -583,12 +583,6 @@ msgstr "A propos..."
 msgid "Accesspoint:"
 msgstr "Point d'accès:"
 
-msgid "Action on long powerbutton press"
-msgstr "Action appui long sur bouton éteindre"
-
-msgid "Action on short powerbutton press"
-msgstr "Action appui court sur bouton éteindre"
-
 msgid "Activate HbbTV (Redbutton)"
 msgstr "Activer HbbTV (bouton rouge)"
 
@@ -1089,6 +1083,9 @@ msgstr "Bus: "
 msgid "By default, SNR will be shown in dB (when supported by the tuner). This setting forces SNR to be shown as a percentage instead."
 msgstr "Par défaut, le SNR sera affiché en dB (quand supporté par le tuner). Si activé, le SNR sera affiché en pourcentage."
 
+msgid "Bypass HDMI EDID checking"
+msgstr "Contourner la vérification HDMI EDID"
+
 msgid "C"
 msgstr "C"
 
@@ -1405,6 +1402,9 @@ msgstr "Configure si derrière les sous-titres un arrière-plan est affiché."
 msgid "Configure if service picons will be shown in the channel selection list."
 msgstr "Configure si les picons des services seront affichés dans la liste des chaînes."
 
+msgid "Configure if the HDMI EDID checking should be bypassed as this might solve issue with some TVs."
+msgstr "Configurer si la vérification HDMI EDID doit être contournée étant donné que cela peut résoudre un problème avec certaines TVs."
+
 msgid "Configure if the subtitle should switch between normal, italic, bold and bolditalic"
 msgstr "Configure si les sous-titres doivent basculer entre normal, italique, gras et gras-italique."
 
@@ -1488,12 +1488,6 @@ msgstr "Configure la quatrième langue audio."
 
 msgid "Configure the fourth subtitle language."
 msgstr "Configure la quatrième langue des sous-titres."
-
-msgid "Configure the function of a long press on the power button."
-msgstr "Configure la fonction 'appui long' sur le bouton d'alimentation."
-
-msgid "Configure the function of a short press on the power button."
-msgstr "Configure la fonction 'appui court' sur le bouton d'alimentation."
 
 msgid "Configure the function of the '0' button do when PIP is active."
 msgstr "Configure la fonction du '0 'quand le bouton PIP est actif."
@@ -2728,6 +2722,12 @@ msgstr "Fixé"
 msgid "Following tasks will be done after you press OK!"
 msgstr "Le suivi des tâches suivantes sera fait après avoir appuyé sur OK!"
 
+msgid "Force LNB Power"
+msgstr "Forcer l’alimentation des LNBs"
+
+msgid "Force ToneBurst"
+msgstr "Forcer Toneburst"
+
 msgid "Format"
 msgstr "Format"
 
@@ -2904,8 +2904,8 @@ msgstr "H"
 msgid "HD list"
 msgstr "Liste HD"
 
-msgid "HD1100/HD1200/et7x00/et8500"
-msgstr "HD1100/HD1200/et7x00/et8500"
+msgid "HD1100/HD1200/HD1265/et7x00/et8500"
+msgstr "HD1100/HD1200/HD1265/et7x00/et8500"
 
 msgid "HD2400"
 msgstr "HD2400"
@@ -3059,9 +3059,6 @@ msgstr "Ignorer les conflits"
 
 msgid "Image: "
 msgstr "Image: "
-
-msgid "Immediate shutdown"
-msgstr "Extinction immédiate"
 
 msgid "In order to record a timer, the TV was switched to the recording service!\n"
 msgstr "Afin d'enregistrer une émission programmée, la TV zappera sur la chaîne enregistrée!\n"
@@ -4487,6 +4484,9 @@ msgstr "Configuration du positionneur log"
 msgid "Power threshold in mA"
 msgstr "Seuil de puissance en mA"
 
+msgid "PowerMenu"
+msgstr "Menu alimentation"
+
 msgid "Predefined transponder"
 msgstr "Transpondeur prédéfini"
 
@@ -4894,6 +4894,9 @@ msgstr "Renommer le nom et la description pour les nouveaux événements"
 
 msgid "Repeat"
 msgstr "Répéter"
+
+msgid "Repeat leave standby messages"
+msgstr "Répéter les messages pour quitter le mode veille"
 
 msgid "Repeat type"
 msgstr "Type de répétition"
@@ -5675,9 +5678,6 @@ msgstr "Afficher les icônes du type de service"
 
 msgid "Show servicelist or movies"
 msgstr "Afficher la liste des services ou des films"
-
-msgid "Show shutdown menu"
-msgstr "Afficher menu éteindre"
 
 msgid "Show single service EPG"
 msgstr "Afficher l'EPG simple du service"
@@ -7311,6 +7311,12 @@ msgstr "Que voulez-vous analyser ?"
 
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are upgraded"
 msgstr "Lorsqu'elle est activée, enigma2 chargera les userbouquets non liés. Cela signifie que les userbouquets qui sont disponibles, mais pas repris dans les fichiers bouquets.tv ou bouquets.radio, seront chargés."
+
+msgid "When enabled the LNB power will not be switched off in standby"
+msgstr "Lorsqu'elle est activée l’alimentation des LNBs ne sera pas éteinte en mode veille"
+
+msgid "When enabled the LNB toneburst will be forced"
+msgstr "Lorsqu'elle est activée, le LNB toneburst sera forcé"
 
 msgid "When enabled the PiP can be closed by the exit button."
 msgstr "Lorsqu'elle est activée, le PiP peut être fermé avec le bouton exit."

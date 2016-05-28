@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-27 19:49+0300\n"
+"POT-Creation-Date: 2016-05-18 19:35+0300\n"
 "PO-Revision-Date: 2014-11-12 00:49+0200\n"
 "Last-Translator: Tapat <taapat@gmail.com>\n"
 "Language-Team: Taapat <taapat@gmail.com>\n"
@@ -596,12 +596,6 @@ msgstr "Par..."
 msgid "Accesspoint:"
 msgstr "Piekļuves punkts:"
 
-msgid "Action on long powerbutton press"
-msgstr "Ilgstoši nospiežot izslēgšanas taustiņu"
-
-msgid "Action on short powerbutton press"
-msgstr "Īsi nospiežot izslēgšanas taustiņu"
-
 msgid "Activate HbbTV (Redbutton)"
 msgstr "Aktivizēt HbbTV"
 
@@ -1102,6 +1096,9 @@ msgstr "Kopne: "
 msgid "By default, SNR will be shown in dB (when supported by the tuner). This setting forces SNR to be shown as a percentage instead."
 msgstr "Pēc noklusējuma SNR tiek attēlots dB (ja atļauj uztvērējs). Šis iestatījums ieslēgs SNR attēlošanu procentos."
 
+msgid "Bypass HDMI EDID checking"
+msgstr "Neveikt HDMI EDID pārbaudi"
+
 msgid "C"
 msgstr "C"
 
@@ -1418,6 +1415,9 @@ msgstr "Uzstāda vai subtitriem lietot tumšu fonu."
 msgid "Configure if service picons will be shown in the channel selection list."
 msgstr "Uzstāda vai kanālu pikonas tiks rādītas kanālu sarakstā."
 
+msgid "Configure if the HDMI EDID checking should be bypassed as this might solve issue with some TVs."
+msgstr "Uzstāda vai netiks veikta HDMI EDID pārbaude lai novērstu problēmas uz dažiem TV."
+
 msgid "Configure if the subtitle should switch between normal, italic, bold and bolditalic"
 msgstr "Uzstāda vai subtitri tiks pārslēgti starp slīpiem, trekniem vai slīpi trekniem"
 
@@ -1501,12 +1501,6 @@ msgstr "Uzstāda nākamo audio valodu."
 
 msgid "Configure the fourth subtitle language."
 msgstr "Uzstāda nākamo subtitru valodu."
-
-msgid "Configure the function of a long press on the power button."
-msgstr "Uzstāda barošanas pogas ilgstošas nospiešanas funkciju."
-
-msgid "Configure the function of a short press on the power button."
-msgstr "Uzstāda barošanas pogas īslaicīgas nospiešanas funkciju."
 
 msgid "Configure the function of the '0' button do when PIP is active."
 msgstr "Uzstāda kādu funkciju veic taustiņš '0' ja PiP ir aktīvs."
@@ -2742,6 +2736,12 @@ msgstr "Fiksēts"
 msgid "Following tasks will be done after you press OK!"
 msgstr "Šādi uzdevumi tiks veikti pēc tam, kad nospiedīsiet OK!"
 
+msgid "Force LNB Power"
+msgstr "Izslēgt LNB barošanu"
+
+msgid "Force ToneBurst"
+msgstr "Piespiedu toņsignāls"
+
 msgid "Format"
 msgstr "Formatēt"
 
@@ -2918,8 +2918,8 @@ msgstr "H"
 msgid "HD list"
 msgstr "HD saraksts"
 
-msgid "HD1100/HD1200/et7x00/et8500"
-msgstr "HD1100/HD1200/et7x00/et8500"
+msgid "HD1100/HD1200/HD1265/et7x00/et8500"
+msgstr "HD1100/HD1200/HD1265/et7x00/et8500"
 
 msgid "HD2400"
 msgstr "HD2400"
@@ -3076,9 +3076,6 @@ msgstr "Ignorēt konfliktus"
 
 msgid "Image: "
 msgstr "Imidžs: "
-
-msgid "Immediate shutdown"
-msgstr "Tūlītēja izslēgšana"
 
 msgid "In order to record a timer, the TV was switched to the recording service!\n"
 msgstr "Lai uzsāktu ierakstu pēc taimera, TV tika pārslēgts uz ierakstāmo kanālu!\n"
@@ -4505,6 +4502,9 @@ msgstr "Pozicioniera iestatījumu logs"
 msgid "Power threshold in mA"
 msgstr "Barošanas robežvērtība mA"
 
+msgid "PowerMenu"
+msgstr "Izslēgšana"
+
 msgid "Predefined transponder"
 msgstr "Definēts transponderis"
 
@@ -4912,6 +4912,9 @@ msgstr "Jauniem notikumiem pārsaukt nosaukumu un aprakstu"
 
 msgid "Repeat"
 msgstr "Atkārtot"
+
+msgid "Repeat leave standby messages"
+msgstr "Atkārtot signālu iziet no gaidstāves"
 
 msgid "Repeat type"
 msgstr "Atkārtošanas veids"
@@ -5695,9 +5698,6 @@ msgstr "Rādīt kanālu tipu ikonas"
 
 msgid "Show servicelist or movies"
 msgstr "Atvērt kanālu saraksu vai ierakstus"
-
-msgid "Show shutdown menu"
-msgstr "Rādīt izslēgšanas izvēlni"
 
 msgid "Show single service EPG"
 msgstr "Rādīt atsevišķa kanāla EPG"
@@ -6958,7 +6958,7 @@ msgid "Use a gateway"
 msgstr "Lietot vārteju"
 
 msgid "Use circular LNB"
-msgstr "Lietot cirkulāro LBN"
+msgstr "Lietot cirkulāro LNB"
 
 msgid "Use fastscan channel names"
 msgstr "Lietot ātrās meklēšanas kanālu nosaukumus"
@@ -7324,6 +7324,12 @@ msgstr "Ko Jūs vēlaties meklēt?"
 
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are upgraded"
 msgstr "Ja ieslēgts, enigma2 ielādēs neiekļutās buķetes. Tas nozīmē ka buķetes tiek izmantotas, bet nav iekļutas bouquets.tv vai bouquets.radio failos. Tas atļuj, piemēram, saglabāt jūsu individuālās buķetes, ja tiek atjaunoti uzstādījumi."
+
+msgid "When enabled the LNB power will not be switched off in standby"
+msgstr "Ja ieslēgts, LNB barošana netiks izslēgta gaidstāvē"
+
+msgid "When enabled the LNB toneburst will be forced"
+msgstr "Ja ieslēgts, LNB toņsignāls tiks lietots piespiedu kārtā"
 
 msgid "When enabled the PiP can be closed by the exit button."
 msgstr "Ja ieslēgts attēls attēlā, var aizvērt ar exit taustiņu."

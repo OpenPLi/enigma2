@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-10 13:01+0300\n"
-"PO-Revision-Date: 2016-05-10 13:26+0300\n"
+"POT-Creation-Date: 2016-05-27 15:33+0300\n"
+"PO-Revision-Date: 2016-05-27 15:50+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
 "Language: lt\n"
@@ -1003,6 +1003,9 @@ msgstr "Įrašyti į DVD"
 msgid "Bus: "
 msgstr "Jungtis: "
 
+msgid "Bypass HDMI EDID checking"
+msgstr "Praleisti HDMI EDID tikrinimą"
+
 msgid "C-Band"
 msgstr "C-juosta"
 
@@ -1235,6 +1238,13 @@ msgstr "Konfigūravimo būdas: %s"
 
 msgid "Configuration..."
 msgstr "Konfigūravimas..."
+
+msgid ""
+"Configure if the HDMI EDID checking should be bypassed as this might solve "
+"issue with some TVs."
+msgstr ""
+"Nustatykite, ar HDMI EDID tikrinimą galima būtų praleisti, nes tai kartais "
+"gali išspręsti problemas su kai kuriais TV."
 
 msgid "Configure nameservers"
 msgstr "Konfigūruokite vardų serverius"
@@ -2355,8 +2365,8 @@ msgstr "Apsaugos intervalas"
 msgid "HD list"
 msgstr "HD sąrašas"
 
-msgid "HD1100/HD1200/et7x00/et8500"
-msgstr "HD1100/HD1200/et7x00/et8500"
+msgid "HD1100/HD1200/HD1265/et7x00/et8500"
+msgstr ""
 
 msgid "HD2400"
 msgstr ""
@@ -2499,9 +2509,6 @@ msgstr "Ignoruoti konfliktą"
 
 msgid "Image: "
 msgstr "Grafinė aplinka: "
-
-msgid "Immediate shutdown"
-msgstr "Išjungti nedelsiant"
 
 msgid ""
 "In order to record a timer, the TV was switched to the recording service!\n"
@@ -3022,7 +3029,7 @@ msgid "Music/Ballet/Dance"
 msgstr "Muzika, baletas, šokiai"
 
 msgid "N/A"
-msgstr ""
+msgstr "N/D"
 
 msgid "NIM"
 msgstr ""
@@ -3740,6 +3747,9 @@ msgstr "Pozicionieriaus nustatymo žurnalas"
 msgid "Power threshold in mA"
 msgstr "Slenkstinė galia (mA)"
 
+msgid "PowerMenu"
+msgstr "Išjungimo meniu"
+
 msgid "Predefined transponder"
 msgstr "Numatytasis transponderis"
 
@@ -4074,6 +4084,9 @@ msgstr "Naujų įvykių pervardijimas ir apibūdinimas"
 
 msgid "Repeat"
 msgstr "Kartoti"
+
+msgid "Repeat leave standby messages"
+msgstr "Kartoti budėjimo pabaigos pranešimus"
 
 msgid "Repeat type"
 msgstr "Kartojimo būdas"
@@ -4714,7 +4727,7 @@ msgid "Show packages to be upgraded"
 msgstr "Rodyti turinčius atnaujinimų paketus"
 
 msgid "Show record clock icons"
-msgstr ""
+msgstr "Su laikrodžiu rodyti įrašų piktogramą"
 
 msgid "Show second InfoBar"
 msgstr "Rodyti antrą infojuostą"
@@ -4724,9 +4737,6 @@ msgstr "Rodyti kanalų sąrašą"
 
 msgid "Show servicelist or movies"
 msgstr "Rodyti kanalų sąrašą, arba filmus"
-
-msgid "Show shutdown menu"
-msgstr "Rodyti išjungimo meniu"
 
 msgid "Show single service EPG"
 msgstr "Rodyti vieno kanalo EPG"
@@ -5002,9 +5012,6 @@ msgstr "Įprastinis sąrašas"
 
 msgid "Standby"
 msgstr "Į budintį režimą"
-
-msgid "Standby / restart"
-msgstr "Paleidimo / išjungimo parinktys"
 
 msgid "Standby after current event"
 msgstr "Po šio įvykio pereiti į budintį režimą"
@@ -7103,7 +7110,7 @@ msgid "not used"
 msgstr "nenaudojamas"
 
 msgid "not_tested"
-msgstr ""
+msgstr "netikrinta"
 
 msgid "nothing connected"
 msgstr "nieko nepajungta"
@@ -7598,6 +7605,9 @@ msgstr "Miego laikmatis"
 msgid "SoftCam / CI"
 msgstr "CI / Emuliatoriai"
 
+msgid "Standby / restart"
+msgstr "Paleidimo / išjungimo parinktys"
+
 msgid "Tuner configuration"
 msgstr "Imtuvų konfigūravimas"
 
@@ -7606,12 +7616,6 @@ msgstr "VCR SCART"
 
 msgid "12V output"
 msgstr "12V išėjimas"
-
-msgid "Action on long powerbutton press"
-msgstr "Veiksmas, ilgai nuspaudus įjungimo mygtuką"
-
-msgid "Action on short powerbutton press"
-msgstr "Veiksmas, trumpai nuspaudus įjungimo mygtuką"
 
 msgid "Activate network settings"
 msgstr "Aktyvuoti tinklo nuostatas"
@@ -7883,12 +7887,6 @@ msgstr "Nustatykite ketvirtą garso kalbą."
 
 msgid "Configure the fourth subtitle language."
 msgstr "Nustatykite ketvirtą subtitrų kalbą."
-
-msgid "Configure the function of a long press on the power button."
-msgstr "Pasirinkite, kas vyks ilgai laikant paspaustą įjungimo mygtuką."
-
-msgid "Configure the function of a short press on the power button."
-msgstr "Pasirinkite, kas vyks trumpai paspaudus įjungimo mygtuką."
 
 msgid "Configure the function of the '0' button do when PIP is active."
 msgstr "Pasirinkite, kas vyks paspaudus '0' mygtuką, kai PIP aktyvuotas."
@@ -8238,6 +8236,12 @@ msgstr "Galutinė slinkties delsa"
 
 msgid "Finetune"
 msgstr "Tikslus derinimas"
+
+msgid "Force LNB Power"
+msgstr "Priverstinai užmaitinti LNB"
+
+msgid "Force ToneBurst"
+msgstr "Priverstinis tono impulsas"
 
 msgid "Hard disk setup"
 msgstr "HDD sąranka"
@@ -8638,6 +8642,12 @@ msgstr ""
 "bouquets.tv, ar  bouquets.radio failus, vis tiek bus įkelti. Tai leidžia "
 "jums pvz. išsaugoti savo vartotojo bukietus, kai bus atnaujinami įdiegti "
 "nustatymai."
+
+msgid "When enabled the LNB power will not be switched off in standby"
+msgstr "Kai čia įjungta, LNB maitinimas liks įjungtas ir budėjimo režime."
+
+msgid "When enabled the LNB toneburst will be forced"
+msgstr "Kai čia įjungta, bus priverstinai paduotas LNB tono impulsas."
 
 msgid "When enabled the PiP can be closed by the exit button."
 msgstr "Kai čia įjungta, PiP gali būti išjungtas su 'EXIT' mygtuku."
@@ -9535,6 +9545,27 @@ msgstr ""
 
 msgid "Video mode selection."
 msgstr "Vaizdo režimo pasirinkimas."
+
+#~ msgid "HD1100/HD1200/et7x00/et8500"
+#~ msgstr "HD1100/HD1200/et7x00/et8500"
+
+#~ msgid "Immediate shutdown"
+#~ msgstr "Išjungti nedelsiant"
+
+#~ msgid "Show shutdown menu"
+#~ msgstr "Rodyti išjungimo meniu"
+
+#~ msgid "Action on long powerbutton press"
+#~ msgstr "Veiksmas, ilgai nuspaudus įjungimo mygtuką"
+
+#~ msgid "Action on short powerbutton press"
+#~ msgstr "Veiksmas, trumpai nuspaudus įjungimo mygtuką"
+
+#~ msgid "Configure the function of a long press on the power button."
+#~ msgstr "Pasirinkite, kas vyks ilgai laikant paspaustą įjungimo mygtuką."
+
+#~ msgid "Configure the function of a short press on the power button."
+#~ msgstr "Pasirinkite, kas vyks trumpai paspaudus įjungimo mygtuką."
 
 #~ msgid "10 (lower than any auto)"
 #~ msgstr "10 (žemiau, nei bet koks auto)"
