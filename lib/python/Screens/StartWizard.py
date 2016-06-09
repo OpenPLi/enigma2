@@ -37,6 +37,6 @@ class StartWizard(WizardLanguage, Rc):
 		configfile.save()
 
 wizardManager.registerWizard(LanguageWizard, config.misc.languageselected.value, priority = 5)
-if OverscanWizard is not None:
+if OverscanWizard:
 	wizardManager.registerWizard(OverscanWizard, config.misc.do_overscanwizard.value, priority = 10)
 wizardManager.registerWizard(StartWizard, config.misc.firstrun.value, priority = 20)
