@@ -18,7 +18,7 @@ import os
 
 config.misc.fastscan = ConfigSubsection()
 config.misc.fastscan.last_configuration = ConfigText(default="()")
-config.misc.fastscan.auto = ConfigSelection(default=True, choices=[("yes", _("yes")), ("", _("no")), ("multi", _("multi"))])
+config.misc.fastscan.auto = ConfigSelection(default="true", choices=[("true", _("yes")), ("false", _("no")), ("multi", _("multi"))])
 config.misc.fastscan.autoproviders = ConfigText(default="()")
 
 class FastScanStatus(Screen):
@@ -124,12 +124,14 @@ class FastScanScreen(ConfigListScreen, Screen):
 		('TV Vlaanderen', (1, 910, True)),
 		('TéléSAT', (0, 920, True)),
 		('HD Austria', (0, 950, False)),
+		('Fast Scan Deutschland', (0, 960, False)),
 		('Skylink Czech Republic', (1, 30, False)),
 		('Skylink Slovak Republic', (1, 31, False)),
 		('AustriaSat Magyarország Eutelsat 9E', (2, 951, False)),
 		('AustriaSat Magyarország Astra 3', (1, 951, False)),
 		('TéléSAT Astra3', (1, 920, True)),
 		('HD Austria Astra3', (1, 950, False)),
+		('Fast Scan Deutschland Astra3', (1, 960, False)),
 		('Canal Digitaal Astra 1', (0, 900, True)),
 		('TV Vlaanderen  Astra 1', (0, 910, True))]
 
@@ -358,7 +360,7 @@ def leaveStandby():
 	FastScanAutoStartTimer.stop()
 
 def standbyCountChanged(value):
-	if config.misc.fastscan.auto.value and config.misc.fastscan.last_configuration.value:
+	if config.misc.fastscan.auto.value != "false" and config.misc.fastscan.last_configuration.value:
 		from Screens.Standby import inStandby
 		inStandby.onClose.append(leaveStandby)
 		FastScanAutoStartTimer.startLongTimer(90)
