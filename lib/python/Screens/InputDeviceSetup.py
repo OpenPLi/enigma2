@@ -305,7 +305,7 @@ class RemoteControlType(Screen, ConfigListScreen):
 			("6", _("DMM advanced")),
 			("14", _("xp1000")),
 			("8", _("VU+")),
-			("18", _("F1/F3")),
+			("18", _("F1/F3/F4")),
 			("16", _("HD1100/HD1200/HD1265/et7x00/et8500")),
 			("19", _("HD2400")),
 			("20", _("Zgemma Star S/2S/H1/H2")),
@@ -325,6 +325,7 @@ class RemoteControlType(Screen, ConfigListScreen):
 			("et10000", 9),
 			("formuler1", 18),
 			("formuler3", 18),
+			("formuler4", 18);
 			("xp1000", 14),
 			("hd1200", 16),
 			("hd1265", 16),
