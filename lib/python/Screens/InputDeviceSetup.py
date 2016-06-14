@@ -325,7 +325,7 @@ class RemoteControlType(Screen, ConfigListScreen):
 			("et10000", 9),
 			("formuler1", 18),
 			("formuler3", 18),
-			("formuler4", 18);
+			("formuler4", 18),
 			("xp1000", 14),
 			("hd1200", 16),
 			("hd1265", 16),
