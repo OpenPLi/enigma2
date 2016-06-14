@@ -84,7 +84,7 @@ def autostart(reason, **kwargs):
 
 def Plugins(**kwargs):
 	return [
-		PluginDescriptor(name=_("Media scanner"), description=_("Scan files..."), where = PluginDescriptor.WHERE_PLUGINMENU, needsRestart = True, fnc=main),
+		PluginDescriptor(name=_("Media scanner"), description=_("Scan files..."), where = PluginDescriptor.WHERE_PLUGINMENU, icon="MediaScanner.png", needsRestart = True, fnc=main),
 #		PluginDescriptor(where = PluginDescriptor.WHERE_MENU, fnc=menuHook),
 		PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, needsRestart = True, fnc = sessionstart),
 		PluginDescriptor(where = PluginDescriptor.WHERE_AUTOSTART, needsRestart = True, fnc = autostart)
