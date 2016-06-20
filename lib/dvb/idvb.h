@@ -264,12 +264,17 @@ public:
 
 class eDVBChannelQuery;
 
+#endif  // SWIG
+
 class eDVBService: public iStaticServiceInformation
 {
 	DECLARE_REF(eDVBService);
+#ifndef SWIG
 	int *m_cache;
 	void initCache();
 	void copyCache(int *source);
+#endif
+	static ePyObject m_queryFunc;
 public:
 	enum cacheID
 	{
@@ -302,9 +307,11 @@ public:
 		dxIsParentalProtected=256,
 	};
 
+	static void setQueryFunc(SWIG_PYOBJECT(ePyObject) func);
 	bool usePMT() const { return !(m_flags & dxNoDVB); }
 	bool isHidden() const { return (m_flags & dxDontshow || m_flags & dxIsParentalProtected); }
 	bool isDedicated3D() const { return m_flags & dxIsDedicated3D; }
+	bool isHidden(const eServiceReference &ref);
 
 	CAID_LIST m_ca;
 
@@ -323,8 +330,9 @@ public:
 	int checkFilter(const eServiceReferenceDVB &ref, const eDVBChannelQuery &query);
 };
 
-//////////////////
+# ifndef SWIG
 
+//////////////////
 class iDVBChannel;
 class iDVBDemux;
 class iDVBFrontendParameters;
