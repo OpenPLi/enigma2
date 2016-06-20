@@ -563,6 +563,7 @@ std::string convertDVBUTF8(const unsigned char *data, int len, int table, int ts
 			break;
 	    	case BIG5_ENCODING:
 			output=Big5ToUTF8((const char *)(data + i), len - i,pconvertedLen);
+			break;
 		default:
 			while (i < len)
 			{
