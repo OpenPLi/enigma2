@@ -439,6 +439,7 @@ def runScreenTest():
 	screensToRun.sort()
 
 	enigma.ePythonConfigQuery.setQueryFunc(configfile.getResolvedKey)
+	enigma.eDVBService.setQueryFunc(Components.ParentalControl.parentalControl.isServiceLocked)
 
 #	eDVBCIInterfaces.getInstance().setDescrambleRules(0 # Slot Number
 #		,(	["1:0:1:24:4:85:C00000:0:0:0:"], #service_list
