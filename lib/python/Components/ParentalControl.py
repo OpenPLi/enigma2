@@ -104,6 +104,16 @@ class ParentalControl:
 			age = age and age <= 15 and age + 3 or 0
 		return (age and age >= int(config.ParentalControl.age.value)) or service and self.blacklist.has_key(service)
 
+	def isServiceLocked(self, service):
+		if not config.ParentalControl.configured.value or not config.ParentalControl.servicepinactive.value:
+			return False
+		if self.configInitialized == False or self.storeServicePin != config.ParentalControl.storeservicepin.value or self.storeServicePinCancel != config.ParentalControl.storeservicepincancel.value:
+			self.getConfigValues()
+		if (config.ParentalControl.type.value == LIST_WHITELIST and not self.whitelist.has_key(service)) or (config.ParentalControl.type.value == LIST_BLACKLIST and self.blacklist.has_key(service)):
+			return True
+		else:
+			return False
+
 	def isServicePlayable(self, ref, callback, session=None):
 		self.session = session
 		if self.isProtected(ref):
