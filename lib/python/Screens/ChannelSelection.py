@@ -268,6 +268,12 @@ class ChannelContextMenu(Screen):
 				else:
 					append_when_current_valid(current, menu, (_("end alternatives edit"), self.bouquetMarkEnd), level=0)
 					append_when_current_valid(current, menu, (_("abort alternatives edit"), self.bouquetMarkAbort), level=0)
+		if config.ParentalControl.configured.value:
+			from Components.ParentalControl import parentalControl
+			if config.ParentalControl.servicepinactive.value == True:
+				append_when_current_valid(current, menu,(_("Disable parental control"), self.disableParentalProtection),level=0)
+			else:
+				append_when_current_valid(current, menu,(_("Enable parental control"), self.enableParentalProtection),level=0)
 
 		menu.append(ChoiceEntryComponent("menu", (_("Configuration..."), self.openSetup)))
 		self["menu"] = ChoiceList(menu)
@@ -419,6 +425,14 @@ class ChannelContextMenu(Screen):
 	def bouquetInputCallback(self, bouquet):
 		if bouquet is not None:
 			self.csel.addBouquet(bouquet, None)
+		self.close()
+
+	def enableParentalProtection(self):
+		config.ParentalControl.servicepinactive.value = True
+		self.close()
+
+	def disableParentalProtection(self):
+		config.ParentalControl.servicepinactive.value = False
 		self.close()
 
 	def addParentalProtection(self, service):
