@@ -49,7 +49,7 @@ bool eServiceEvent::loadLanguage(Event *evt, const std::string &lang, int tsidon
 				{
 					/* stick to this language, avoid merging or mixing descriptors of different languages */
 					language = cc;
-					m_event_name += replace_all(replace_all(convertDVBUTF8(sed->getEventName(), table, tsidonid), "\n", " "), "\t", " ");
+					m_event_name += replace_all(replace_all(convertDVBUTF8(sed->getEventName(), table, tsidonid), "\n", " ",table), "\t", " ",table);
 					m_short_description += convertDVBUTF8(sed->getText(), table, tsidonid);
 					retval=1;
 				}
@@ -188,8 +188,8 @@ RESULT eServiceEvent::parseFrom(Event *evt, int tsidonid)
 		return 0;
 	if (m_language_alternative != "---" && loadLanguage(evt, m_language_alternative, tsidonid))
 		return 0;
-	if (loadLanguage(evt, "eng", tsidonid))
-		return 0;
+//	if (loadLanguage(evt, "eng", tsidonid))
+//		return 0;
 	if (loadLanguage(evt, "---", tsidonid))
 		return 0;
 	return 0;

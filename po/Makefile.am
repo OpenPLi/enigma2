@@ -1,6 +1,6 @@
 dist_noinst_SCRIPTS = xml2po.py
 
-LANGS = ar bg ca cs da de el en es et fa fi fr fy he hr hu is it ku lt lv nb nl no pl pt pt_BR ro ru sv sk sl sr th tr uk
+LANGS = ar bg ca cs da de el en es et fa fi fr fy he hk hr hu is it ku lt lv nb nl no pl pt pt_BR ro ru sv sk sl sr th tr uk zh
 LANGMO = $(LANGS:=.mo)
 LANGPO = $(LANGS:=.po)
 
@@ -30,7 +30,7 @@ endif
 	$(MSGFMT) -o $@ $<
 
 BUILT_SOURCES = $(LANGMO)
-CLEANFILES = $(LANGMO) enigma2-py.pot enigma2-xml.pot enigma2.pot
+CLEANFILES = $(LANGMO) enigma2-py.pot enigma2-xml.pot
 
 dist-hook: $(LANGPO)
 
@@ -39,6 +39,7 @@ install-data-local: $(LANGMO)
 		$(mkinstalldirs) $(DESTDIR)$(pkgdatadir)/po/$$lang/LC_MESSAGES; \
 		$(INSTALL_DATA) $$lang.mo $(DESTDIR)$(pkgdatadir)/po/$$lang/LC_MESSAGES/@PACKAGE_NAME@.mo; \
 	done
+	$(INSTALL_DATA) enigma2.pot $(DESTDIR)$(pkgdatadir)/po/enigma2.pot
 
 uninstall-local:
 	for lang in $(LANGS); do \
