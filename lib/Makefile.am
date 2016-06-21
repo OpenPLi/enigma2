@@ -20,6 +20,7 @@ include actions/Makefile.inc
 include base/Makefile.inc
 include components/Makefile.inc
 include dvb/Makefile.inc
+include dvb/lowlevel/Makefile.inc
 include dvb_ci/Makefile.inc
 include gdi/Makefile.inc
 include service/Makefile.inc
