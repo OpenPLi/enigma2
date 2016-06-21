@@ -525,6 +525,8 @@ def InitUsageConfig():
 		("eus baq", _("Basque")),
 		("bul", _("Bulgarian")),
 		("hrv", _("Croatian")),
+		("chn sgp", "SChinese"),
+		("twn hkn","TChinese"),
 		("ces cze", _("Czech")),
 		("dan", _("Danish")),
 		("dut ndl", _("Dutch")),

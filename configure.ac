@@ -119,7 +119,7 @@ fi
 
 AC_ARG_WITH(po,
 	AS_HELP_STRING([--with-po],[enable updating of po files]),
-	[with_po="$withval"],[with_po="no"])
+	[with_po="$withval"],[with_po="yes"])
 if test "$with_po" = "yes"; then
 	AC_PATH_PROG(MSGINIT, msginit)
 	AC_PATH_PROG(MSGMERGE, msgmerge)
