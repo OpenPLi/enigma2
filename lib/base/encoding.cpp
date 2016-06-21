@@ -77,9 +77,9 @@ eDVBTextEncodingHandler::eDVBTextEncodingHandler()
 				 )
 				m_TransponderDefaultMapping[(tsid<<16)|onid]=BIG5_ENCODING;
 			else if ( ((sscanf( line, "0x%x 0x%x %s", &tsid, &onid, s_table ) == 3 )
-						&& (strcasecmp(s_table, "utf8")==0 || strcasecmp(s_table, "utf-8")==0 ) )
+						&& (strcmp(s_table, "utf8")==0 || strcmp(s_table, "utf-8")==0 ) )
 					||((sscanf( line, "%d %d %s", &tsid, &onid, s_table ) == 3 )
-						&&  (strcasecmp(s_table, "utf8")==0 || strcasecmp(s_table, "utf-8")==0 ) )
+						&&  (strcmp(s_table, "utf8")==0 || strcmp(s_table, "utf-8")==0 ) )
 				 )
 				m_TransponderDefaultMapping[(tsid<<16)|onid]=UTF8_ENCODING;
 			else if ( ((sscanf( line, "0x%x 0x%x %s", &tsid, &onid, s_table ) == 3 )
@@ -89,9 +89,9 @@ eDVBTextEncodingHandler::eDVBTextEncodingHandler()
 				 )
 				m_TransponderDefaultMapping[(tsid<<16)|onid]=UTF16BE_ENCODING;
 			else if ( ((sscanf( line, "0x%x 0x%x %s", &tsid, &onid, s_table ) == 3 )
-						&& strcasecmp(s_table, "utf16le")==0)
+						&& strcmp(s_table, "utf16le")==0)
 					||((sscanf( line, "%d %d %s", &tsid, &onid, s_table ) == 3 )
-						&& strcasecmp(s_table, "utf16le")==0)
+						&& strcmp(s_table, "utf16le")==0)
 				 )
 				m_TransponderDefaultMapping[(tsid<<16)|onid]=UTF16LE_ENCODING;
 			else if ( (sscanf( line, "0x%x 0x%x", &tsid, &onid ) == 2 )
