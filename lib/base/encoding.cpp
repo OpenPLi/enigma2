@@ -37,19 +37,18 @@ eDVBTextEncodingHandler::eDVBTextEncodingHandler()
 		{
 			if ( line[0] == '#' )
 				continue;
-			int i,start;
+			int i, start, flag = 0;		//'start' to find the offset of the first printable char, 'flag' to finished it or not. 
 			for(i=0,start=0;line[i];i++){
 				if(line[i] == '#'){
 					line[i]=0;
 					break;
 				}
-				if(line[start] > 0 && line[start] <= ' ' ){
+				if(flag == 0 && line[start] > 0 && line[start] <= ' '){
 					start++;
-					continue;	//skip blank char, 'start' to find the offset of the first printable char
+					continue;	//skip non-printable char in head
 				}
-				
-				if(line[i] >= 'A' && line[i] <= 'Z')
-					line[i]=line[i] + 0x20;		//lower case the char
+				flag = 1;
+				line[i] = tolower(line[i]);
 			}
 			if( i == start )
 				continue;	//no printable char ,skip this line
