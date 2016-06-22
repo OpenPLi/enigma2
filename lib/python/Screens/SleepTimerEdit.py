@@ -97,9 +97,6 @@ class SleepTimerEdit(ConfigListScreen, Screen):
 		self["config"].l.setList(self.list)
 
 	def ok(self):
-		if self.getCurrentEntry() == _("Wakeup timer"):
-			self.session.open(WakeupTimerEdit)
-			return
 		if self["config"].isChanged():
 			for x in self["config"].list:
 				x[1].save()
