@@ -30,7 +30,7 @@ endif
 	$(MSGFMT) -o $@ $<
 
 BUILT_SOURCES = $(LANGMO)
-CLEANFILES = $(LANGMO) enigma2-py.pot enigma2-xml.pot
+CLEANFILES = $(LANGMO) enigma2-py.pot enigma2-xml.pot enigma2.pot
 
 dist-hook: $(LANGPO)
 
@@ -39,7 +39,6 @@ install-data-local: $(LANGMO)
 		$(mkinstalldirs) $(DESTDIR)$(pkgdatadir)/po/$$lang/LC_MESSAGES; \
 		$(INSTALL_DATA) $$lang.mo $(DESTDIR)$(pkgdatadir)/po/$$lang/LC_MESSAGES/@PACKAGE_NAME@.mo; \
 	done
-	$(INSTALL_DATA) enigma2.pot $(DESTDIR)$(pkgdatadir)/po/enigma2.pot
 
 uninstall-local:
 	for lang in $(LANGS); do \
