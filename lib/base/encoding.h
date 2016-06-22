@@ -9,7 +9,7 @@
 #define BIG5_ENCODING			0x14
 #define UTF8_ENCODING			0x15
 #define UTF16BE_ENCODING		0x16
-#define UNICODE_ENCODING		0x16
+#define UNICODE_ENCODING		0x11
 #define UTF16LE_ENCODING		0x17
 
 class eDVBTextEncodingHandler

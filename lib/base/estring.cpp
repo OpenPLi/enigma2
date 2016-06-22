@@ -467,8 +467,9 @@ std::string convertDVBUTF8(const unsigned char *data, int len, int table, int ts
 	if ( tsidonid )
 		encodingHandler.getTransponderDefaultMapping(tsidonid, table);
 
-	switch(data[0])
-	{
+	if ( table != UNICODE_ENCODING && table != UTF16BE_ENCODING && table != UTF16LE_ENCODING)
+	    switch(data[0])
+	    {
 		case 1 ... 11:
 			// For Thai providers, encoding char is present but faulty.
 			if (table != 11)
@@ -494,7 +495,7 @@ std::string convertDVBUTF8(const unsigned char *data, int len, int table, int ts
 			break;
 		}
 		case 0x11: //  Basic Multilingual Plane of ISO/IEC 10646-1 enc  (UTF-16... Unicode)
-			table = 65;
+			table = UNICODE_ENCODING;
 			tsidonid = 0;
 			++i;
 			break;
@@ -541,7 +542,7 @@ std::string convertDVBUTF8(const unsigned char *data, int len, int table, int ts
 			eDebug("[convertDVBUTF8] reserved %d", data[0]);
 			++i;
 			break;
-	}
+	    }
 
 	bool useTwoCharMapping = !table || (tsidonid && encodingHandler.getTransponderUseTwoCharMapping(tsidonid));
 
@@ -568,12 +569,12 @@ std::string convertDVBUTF8(const unsigned char *data, int len, int table, int ts
 				unsigned long code=0;
 				if ( useTwoCharMapping && i+1 < len && (code=doVideoTexSuppl(data[i], data[i+1])) )
 					i+=2;
-				else if(table==UTF16BE_ENCODING){
+				else if( table == UTF16BE_ENCODING || table == UNICODE_ENCODING ){
 					if((i+2)>len)break;
 					unsigned long w1=((unsigned long)(data[i])<<8) |((unsigned long)(data[i+1]));
 					if(w1<0xD800UL || w1>0xDFFFUL){
 						code=w1;
-						i++;
+						i+=2;
 					}
 					else if(w1>0xDBFFUL)
 						break;
@@ -581,7 +582,7 @@ std::string convertDVBUTF8(const unsigned char *data, int len, int table, int ts
 						unsigned long w2=((unsigned long)(data[i+2])<<8) |((unsigned long)(data[i+3]));
 						if(w2<0xDC00UL || w2>0xDFFFUL)return std::string("");
 						code=0x10000UL + (((w1 & 0x03FFUL)<<10 ) | (w2 & 0x03FFUL));
-						i+=3;
+						i+=4;
 					}
 					else
 						break;
@@ -591,29 +592,22 @@ std::string convertDVBUTF8(const unsigned char *data, int len, int table, int ts
 					unsigned long w1=((unsigned long)(data[i+1])<<8) |((unsigned long)(data[i]));
 					if(w1<0xD800UL || w1>0xDFFFUL){
 						code=w1;
-						i++;
+						i+=2;
 					}
 					else if(w1>0xDBFFUL)
 						break;
 					else if((i+4)<len){
 						unsigned long w2=((unsigned long)(data[i+3])<<8) |((unsigned long)(data[i+2]));
 						if(w2<0xDC00UL || w2>0xDFFFUL)break;
-						code=0x10000UL + (((w1 & 0x03FFUL)<<10 ) | (w2 & 0x03FFUL));
-						i+=3;
+						code=0x10000UL + (((w2 & 0x03FFUL)<<10 ) | (w1 & 0x03FFUL));
+						i+=4;
 					}
 					else
 						break;
 				}
-				if (!code) {
-					if (table == 65) { // unicode
-						if (i+1 < len) {
-							code=(data[i] << 8) | data[i+1];
-							i += 2;
-						}
-					}
-					else
-						code=recode(data[i++], table);
-				}
+				if (!code)
+					code=recode(data[i++], table);
+
 				if (!code)
 					continue;
 				// Unicode->UTF8 encoding
