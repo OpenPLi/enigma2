@@ -161,6 +161,7 @@ public:
 	int openFrontend();
 	int closeFrontend(bool force=false, bool no_delayed=false);
 	const char *getDescription() const { return m_description; }
+	const dvb_frontend_info getFrontendInfo() const { return fe_info; }
 	bool is_simulate() const { return m_simulate; }
 	bool is_FBCTuner() { return m_fbc; }
 	bool getEnabled() { return m_enabled; }
