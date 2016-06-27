@@ -557,9 +557,13 @@ std::string convertDVBUTF8(const unsigned char *data, int len, int table, int ts
 	{
 	    	case GB18030_ENCODING:
 			output=GB18030ToUTF8((const char *)(data + i), len - i,pconvertedLen);
+			if(pconvertedLen)
+				*pconvertedLen += i;
 			break;
 	    	case BIG5_ENCODING:
 			output=Big5ToUTF8((const char *)(data + i), len - i,pconvertedLen);
+			if(pconvertedLen)
+				*pconvertedLen += i;
 			break;
 		default:
 			unsigned char res[2048];
@@ -632,13 +636,13 @@ std::string convertDVBUTF8(const unsigned char *data, int len, int table, int ts
 					res[t++]=(code&0x3F)|0x80;
 				}
 			}
-			if (i < len)
-				eDebug("[convertDVBUTF8] %d chars converted, and %d chars left..",i,len-i);
 			if(pconvertedLen)*pconvertedLen=i;
 		  	output=std::string((char*)res, t);
 		  	break;
 	}
 
+	if (pconvertedLen && *pconvertedLen < len)
+		eDebug("[convertDVBUTF8] %d chars converted, and %d chars left..",*pconvertedLen,len-*pconvertedLen);
 	//eDebug("[convertDVBUTF8] output:%s\n",output.c_str());
 	return output;
 }
