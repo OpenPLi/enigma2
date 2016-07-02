@@ -247,3 +247,4 @@ def Plugins(**kwargs):
 			needsRestart = False,
 			fnc = sessionAnimationSetup),
 		]
+		
