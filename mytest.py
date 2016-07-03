@@ -428,6 +428,7 @@ def runScreenTest():
 	session = Session(desktop = enigma.getDesktop(0), summary_desktop = enigma.getDesktop(1), navigation = nav)
 
 	CiHandler.setSession(session)
+	powerOffTimer.setSession(session)
 
 	screensToRun = [ p.__call__ for p in plugins.getPlugins(PluginDescriptor.WHERE_WIZARD) ]
 
@@ -572,6 +573,9 @@ Screens.Ci.InitCiConfig()
 
 profile("RcModel")
 import Components.RcModel
+
+profile("Init:PowerOffTimer")
+from Components.PowerOffTimer import powerOffTimer
 
 #from enigma import dump_malloc_stats
 #t = eTimer()
