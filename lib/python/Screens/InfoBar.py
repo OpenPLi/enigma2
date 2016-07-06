@@ -50,7 +50,8 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 			{
 				"showMovies": (self.showMovies, _("Play recorded movies...")),
 				"showRadio": (self.showRadio, _("Show the radio player...")),
-				"showTv": (self.TvRadioToggle, _("Show the tv player...")),
+				"showTv": (self.showTv, _("Show the tv player...")),
+				"toggleTvRadio": (self.toggleTvRadio, _("Toggle the tv and the radio player...")),
 			}, prio=2)
 
 		self.radioTV = 0
@@ -108,13 +109,7 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 		self.serviceStarted()
 		self.onShown.remove(self.__checkServiceStarted)
 
-	def TvRadioToggle(self):
-		if about.getHardwareTypeString().startswith('7000S'):
-			self.toogleTvRadio()
-		else:
-			self.showTv()
-
-	def toogleTvRadio(self): 
+	def toggleTvRadio(self): 
 		if self.radioTV == 1:
 			self.radioTV = 0
 			self.showTv() 
