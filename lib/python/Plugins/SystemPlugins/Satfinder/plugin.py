@@ -312,7 +312,7 @@ class Satfinder(ScanSetup, ServiceScan):
 				tps = nimmanager.getTranspondersTerrestrial(region)
 				if len(tps) > self.TerrestrialTransponders.index :
 					transponder = tps[self.TerrestrialTransponders.index]
-					# frequency 1, inversion 9, bandwidth 2, fechigh 4, feclow 5, modulation 3, transmission 7, guard 6, hierarchy 8, system 10, plpid 11
+					# frequency 1, inversion 9, bandwidth 2, fechigh 4, feclow 5, modulation 3, transmission 7, guard 6, hierarchy 8, system 10, plp_id 11
 					if self.initcomplete:
 						self.tuner.tuneTerr(transponder[1], transponder[9], transponder[2], transponder[4], transponder[5], transponder[3], transponder[7], transponder[6], transponder[8], transponder[10], transponder[11])
 					self.transponder = transponder
@@ -382,7 +382,7 @@ class Satfinder(ScanSetup, ServiceScan):
 				self.transponder[6],  # guard
 				self.transponder[8],  # hierarchy
 				self.transponder[10], # system
-				self.transponder[11]  # plpid
+				self.transponder[11]  # plp_id
 			)
 			tlist.append(parm)
 		else: # DVB-C
@@ -422,10 +422,12 @@ def SatfinderMain(session, close=None, **kwargs):
 	for n in nims:
 		if not (n.isCompatible("DVB-S") or n.isCompatible("DVB-T") or n.isCompatible("DVB-C")):
 			continue
-		if n.config_mode  in ("loopthrough", "satposdepends", "nothing"):
+		if n.config_mode in ("loopthrough", "satposdepends", "nothing"):
 			continue
-		if n.isCompatible("DVB-S") and n.config_mode == "advanced" and len(nimmanager.getSatListForNim(n.slot)) < 1:
-				continue
+		if n.isCompatible("DVB-S") and n.config_mode in ("advanced", "simple") and len(nimmanager.getSatListForNim(n.slot)) < 1:
+			config.Nims[n.slot].configMode.value = "nothing"
+			config.Nims[n.slot].configMode.save()
+			continue
 		nimList.append(n)
 
 	if len(nimList) == 0:

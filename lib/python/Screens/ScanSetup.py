@@ -19,7 +19,7 @@ from enigma import eTimer, eDVBFrontendParametersSatellite, eComponentScan, \
 def buildTerTransponder(frequency,
 		inversion=2, bandwidth = 7000000, fechigh = 6, feclow = 6,
 		modulation = 2, transmission = 2, guard = 4,
-		hierarchy = 4, system = 0, plpid = 0):
+		hierarchy = 4, system = 0, plp_id = 0):
 #	print "freq", frequency, "inv", inversion, "bw", bandwidth, "fech", fechigh, "fecl", feclow, "mod", modulation, "tm", transmission, "guard", guard, "hierarchy", hierarchy
 	parm = eDVBFrontendParametersTerrestrial()
 	parm.frequency = frequency
@@ -32,7 +32,7 @@ def buildTerTransponder(frequency,
 	parm.guard_interval = guard
 	parm.hierarchy = hierarchy
 	parm.system = system
-	parm.plpid = plpid
+	parm.plp_id = plp_id
 	return parm
 
 def getInitialTransponderList(tlist, pos):
@@ -397,7 +397,7 @@ class TerrestrialTransponderSearchSupport:
 						parm.guard_interval = parm.GuardInterval_Auto
 						parm.hierarchy = parm.Hierarchy_Auto
 						parm.system = 'DVB-T2' in data[1] and parm.System_DVB_T_T2 or parm.System_DVB_T
-						parm.plpid = 0
+						parm.plp_id = 0
 						self.__tlist.append(parm)
 					tmpstr = _("Try to find used transponders in terrestrial network... please wait...")
 					tmpstr += "\n\n"
@@ -429,7 +429,7 @@ class TerrestrialTransponderSearchSupport:
 					parm.guard_interval = parm.GuardInterval_Auto
 					parm.hierarchy = parm.Hierarchy_Auto
 					parm.system = parm.System_DVB_T
-					parm.plpid = 0
+					parm.plp_id = 0
 					self.__tlist.append(parm)
 				else:
 					plp_list = data[5:]
@@ -451,7 +451,7 @@ class TerrestrialTransponderSearchSupport:
 						parm.guard_interval = parm.GuardInterval_Auto
 						parm.hierarchy = parm.Hierarchy_Auto
 						parm.system = parm.System_DVB_T2
-						parm.plpid = int(plp_id)
+						parm.plp_id = int(plp_id)
 						self.__tlist.append(parm)
 				tmpstr = _("Try to find used transponders in terrestrial network... please wait...")
 				tmpstr += "\n\n"
@@ -532,7 +532,7 @@ class TerrestrialTransponderSearchSupport:
 		self.terrestrial_search_container.dataAvail.append(self.getTerrestrialTransponderData)
 		self.terrestrial_tunerName = nimmanager.getNimName(nim_idx)
 		if self.terrestrial_tunerName.startswith("Sundtek"):
-			cmd = "/opt/bin/mediaclient --blindscan /dev/dvb/adapter1/frontend0"
+			cmd = "/opt/bin/mediaclient --blindscan /dev/dvb/adapter0/frontend%d" % nim_idx
 			print "SCAN CMD : ",cmd
 			self.terrestrial_search_container.execute(cmd)
 		else:
@@ -933,7 +933,9 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 			(eDVBFrontendParametersSatellite.FEC_9_10, "9/10")])
 		self.scan_sat.modulation = ConfigSelection(default = defaultSat["modulation"], choices = [
 			(eDVBFrontendParametersSatellite.Modulation_QPSK, "QPSK"),
-			(eDVBFrontendParametersSatellite.Modulation_8PSK, "8PSK")])
+			(eDVBFrontendParametersSatellite.Modulation_8PSK, "8PSK"),
+			(eDVBFrontendParametersSatellite.Modulation_16APSK, "16APSK"),
+			(eDVBFrontendParametersSatellite.Modulation_32APSK, "32APSK")])
 		self.scan_sat.rolloff = ConfigSelection(default = defaultSat.get("rolloff", eDVBFrontendParametersSatellite.RollOff_alpha_0_35), choices = [
 			(eDVBFrontendParametersSatellite.RollOff_alpha_0_35, "0.35"),
 			(eDVBFrontendParametersSatellite.RollOff_alpha_0_25, "0.25"),
@@ -1245,7 +1247,7 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 						guard = self.scan_ter.guard.value,
 						hierarchy = self.scan_ter.hierarchy.value,
 						system = self.scan_ter.system.value,
-						plpid = self.scan_ter.plp_id.value)
+						plp_id = self.scan_ter.plp_id.value)
 				removeAll = False
 			elif self.scan_typeterrestrial.value == "predefined_transponder":
 				if self.TerrestrialTransponders is not None:
@@ -1453,7 +1455,9 @@ class ScanSimple(ConfigListScreen, Screen, CableTransponderSearchSupport, Terres
 			if not networks and config.Nims[nim.slot].configMode.value == "enabled":
 				networks = [ nim.type ]
 		elif nim.isCompatible("DVB-T"):
-			networks = nimmanager.getTerrestrialDescription(nim.slot)
+			networks = [nimmanager.getTerrestrialDescription(nim.slot)]
+			if not nimmanager.somethingConnected(nim.slot):
+				networks = []
 		elif not nim.empty:
 			networks = [ nim.type ] # "DVB-C" or "DVB-T". TODO: seperate networks for different C/T tuners, if we want to support that.
 		else:

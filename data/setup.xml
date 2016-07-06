@@ -7,6 +7,7 @@
 	</setup>
 	<setup key="usage" title="Customize">
 		<item level="0" text="Setup mode" description="Configure which access level to use for the configuration menu. Expert level gives access to all items.">config.usage.setup_level</item>
+		<item level="0" text="Sort order for menu entries" description="This option allows you to hide and sort menu entries.">config.usage.menu_sort_mode</item>
 		<item level="1" text="Zap mode" requires="ZapMode" description="Configure the way in which the receiver changes channels.">config.misc.zapmode</item>
 		<item level="1" text="Enable teletext caching" description="When enabled, teletext pages will be cached, allowing faster access.">config.usage.enable_tt_caching</item>
 		<item level="1" text="12V output" description="12V output" requires="12V_Output.">config.usage.output_12V</item>
@@ -21,6 +22,8 @@
 		<item level="2" text="Preferred tuner DVB-S for recordings" description="When enabled, this setting has more weight than 'Preferred tuner for recordings'." requires="DVB-S_priority_tuner_available">config.usage.recording_frontend_priority_dvbs</item>
 		<item level="2" text="Preferred tuner DVB-T for recordings" description="When enabled, this setting has more weight than 'Preferred tuner for recordings'." requires="DVB-T_priority_tuner_available">config.usage.recording_frontend_priority_dvbt</item>
 		<item level="2" text="Preferred tuner DVB-C for recordings" description="When enabled, this setting has more weight than 'Preferred tuner for recordings'." requires="DVB-C_priority_tuner_available">config.usage.recording_frontend_priority_dvbc</item>
+		<item level="2" text="Force LNB Power" description="When enabled the LNB power will not be switched off in standby" requires="HasForceLNBOn">config.misc.forceLnbPower</item>
+		<item level="2" text="Force ToneBurst" description="When enabled the LNB toneburst will be forced" requires="HasForceToneburst">config.misc.forceToneBurst</item>		
 		<item level="2" text="Disable background scanning" description="When enabled, the receiver will no longer monitor the tuned transponder for possible changes. Do not use this option unless you know what you are doing.">config.misc.disable_background_scan</item>
 		<item level="2" text="Include EIT in http streams" description="When enabled, EIT data will be included in http streams. This allows a client receiver to show EPG.">config.streaming.stream_eit</item>
 		<item level="2" text="Include AIT in http streams" description="When enabled, AIT data will be included in http streams. This allows a client receiver to use HbbTV.">config.streaming.stream_ait</item>
@@ -49,8 +52,9 @@
 		<item level="1" text="Show crypto icons" description="Configure if and how crypto icons will be shown in the channel selection list.">config.usage.crypto_icon_mode</item>
 		<item level="1" text="Show record indicator" description="Configure if and how the record indicator will be shown in the channel selection list.">config.usage.record_indicator_mode</item>
 		<item level="1" text="Show columns" description="Configure if and how wide columns will be shown in the channel selection list.">config.usage.servicelist_column</item>
-		<item level="1" text="Show picons in channel list" description="Configure if service picons will be shown in the channel selection list.">config.usage.service_icon_enable</item>
+		<item level="1" text="Show picons in channel selection list" description="Configure if service picons will be shown in the channel selection list.">config.usage.service_icon_enable</item>
 		<item level="1" text="Customize channel list cursor behavior" description="Configure the cursor behaviour in the channel selection list. When opening the channel selection list you can keep on the current service or already select up/down and you are able to revert the B+/B- buttons.">config.usage.servicelist_cursor_behavior</item>
+		<item level="1" text="Number of channels shown in channel selection list" description="Configure how many channels are shown in the selection list.">config.usage.servicelist_number_of_services</item>
 		<item level="2" text="Enable 'neutrino' style zap controlling" description="When enabled the arrow buttons around the OK button will follow the 'neutrino' style zap controls instead of the enigma2 style.">config.usage.oldstyle_zap_controls</item>
 		<item level="2" text="Enable 'neutrino' style channel select controlling" description="When enabled the left, right, CH+/-, B+/-, P+/- buttons will follow the 'neutrino' style zap controls instead of the enigma2 style.">config.usage.oldstyle_channel_select_controls</item>
 		<item level="2" text="Enable zapping with CH+/-, B+/-, P+/-" description="When enabled you can zap channels with the  CH+/-, B+/-, P+/- buttons instead of opening the channel selection list.">config.usage.zap_with_ch_buttons</item>
@@ -59,8 +63,6 @@
 		<item level="2" text="Enable OK as preview in channel selection" description="When enabled then when you select a new channel in the channel selection the channel selection will not close. It will only close when you select the current playing service. This is a kind of preview mode">config.usage.channelselection_preview</item>
 		<item level="1" text="Change bouquets in quickzap" description="When enabled, continue to the next bouquet when the last channel of the current bouquet is reached while changing channels.">config.usage.quickzap_bouquet_change</item>
 		<item level="1" text="Hide channel list in radio mode" description="When enabled, the channel selection list will be hidden while listening to a radio channel">config.usage.e1like_radio_mode</item>
-		<item level="1" text="Action on long powerbutton press" description="Configure the function of a long press on the power button.">config.usage.on_long_powerpress</item>
-		<item level="1" text="Action on short powerbutton press" description="Configure the function of a short press on the power button.">config.usage.on_short_powerpress</item>
 		<item level="1" text="Automatically start timeshift after" description="When enabled, timeshift starts automatically in background after specified time.">config.usage.timeshift_start_delay</item>
 		<item level="1" text="Show warning when timeshift is stopped" description="When enabled, a warning will be displayed and the user will get an option to stop or to continue the timeshift.">config.usage.check_timeshift</item>
 		<item level="1" text="Position of completed timers in timerlist" description="Configure where completed timers show up in the timer list.">config.usage.timerlist_finished_timer_position</item>
@@ -72,7 +74,6 @@
 		<item level="2" text="Show background in radio mode" description="When enabled, a radio background image will be visible while listening to a radio channel.">config.misc.showradiopic</item>
 		<item level="2" text="Show screensaver" description="Configure the duration in minutes for the screensaver.">config.usage.screen_saver</item>
 		<item level="2" text="Hide zap errors" description="When enabled, error messages related to zapping will not be shown.">config.usage.hide_zap_errors</item>
-		<item level="2" text="Hide CI messages" description="When enabled, error messages related to the Common Interface module will not be shown.">config.usage.hide_ci_messages</item>
 		<item level="2" text="Show crypto info in infobar" description="When enabled, encryption info will be shown in the infobar (when supported by the skin).">config.usage.show_cryptoinfo</item>
 		<item level="2" text="Infobar frontend data source" description="Configure the source of the frontend data as shown on the infobars. 'Settings' is as stored on the settings. 'Tuner' is as reported by the tuner.">config.usage.infobar_frontend_source</item>
 		<item level="2" text="Show SNR percentage instead of dB value" description="By default, SNR will be shown in dB (when supported by the tuner). This setting forces SNR to be shown as a percentage instead.">config.usage.swap_snr_on_osd</item>

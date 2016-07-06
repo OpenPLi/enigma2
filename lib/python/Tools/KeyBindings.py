@@ -129,7 +129,9 @@ keyDescriptions = [{
 		KEYIDS["KEY_9"]: ("9",),
 		KEYIDS["KEY_EXIT"]: ("EXIT",),
 		KEYIDS["KEY_STOP"]: ("STOP",),
-		KEYIDS["KEY_RECORD"]: ("RECORD",)
+		KEYIDS["KEY_RECORD"]: ("RECORD",),
+		KEYIDS["KEY_PAGEUP"]: ("PAGEUP",),
+		KEYIDS["KEY_PAGEDOWN"]: ("PAGEDOWN",)
 	},
 	{       # XP1000
 		KEYIDS["BTN_0"]: ("UP", "fp"),

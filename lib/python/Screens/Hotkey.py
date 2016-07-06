@@ -30,7 +30,9 @@ def getHotkeys():
 		(_("Blue"), "blue", ""),
 		("Rec", "rec", ""),
 		("Radio", "radio", ""),
+		("Radio" + " " + _("long"), "radio_long", ""),
 		("TV", "showTv", ""),
+		("TV" + " " + _("long"), "showTv_long", SystemInfo["LcdLiveTV"] and "Infobar/ToggleLCDLiveTV" or ""),
 		("Teletext", "text", ""),
 		("Help", "displayHelp", ""),
 		("Help" + " " + _("long"), "displayHelp_long", ""),
@@ -51,6 +53,10 @@ def getHotkeys():
 		("Ok", "ok", ""),
 		("Channel up", "channelup", ""),
 		("Channel down", "channeldown", ""),
+		("Page up", "pageUp", ""),
+		("Page up"  + " " + _("long"), "pageUp_long", ""),
+		("Page down", "pageDown", ""),
+		("Page down" + " " + _("long"), "pageDown_long", ""),
 		("Next", "next", ""),
 		("Previous", "previous", ""),
 		("Audio", "audio", ""),
@@ -79,10 +85,10 @@ def getHotkeys():
 		("Video Mode", "vmode", ""),
 		("Video Mode" + " " + _("long"), "vmode_long", ""),
 		("Home", "home", ""),
-		("Power", "power", ""),
-		("Power" + " " + _("long"), "power_long", ""),
+		("Power", "power", "Module/Screens.Standby/Standby"),
+		("Power" + " " + _("long"), "power_long", "Menu/shutdown"),
 		("HDMIin", "HDMIin", "Infobar/HDMIIn"),
-		("HDMIin" + " " + _("long"), "HDMIin_long", SystemInfo["LcdLiveTV"] and "Infobar/ToggleLCDLiveTV" or "")]
+		("HDMIin" + " " + _("long"), "HDMIin_long", "")]
 
 config.misc.hotkey = ConfigSubsection()
 config.misc.hotkey.additional_keys = ConfigYesNo(default=False)
@@ -152,7 +158,7 @@ def getHotkeyFunctions():
 		hotkeyFunctions.append((_("Swap PIP"), "Infobar/swapPiP", "InfoBar"))
 		hotkeyFunctions.append((_("Move PIP"), "Infobar/movePiP", "InfoBar"))
 		hotkeyFunctions.append((_("Toggle PIPzap"), "Infobar/togglePipzap", "InfoBar"))
-	hotkeyFunctions.append((_("Activate HbbTV (Redbutton)"), "Infobar/activateRedButton", "InfoBar"))		
+	hotkeyFunctions.append((_("Activate HbbTV (Redbutton)"), "Infobar/activateRedButton", "InfoBar"))
 	hotkeyFunctions.append((_("Toggle HDMI In"), "Infobar/HDMIIn", "InfoBar"))
 	if SystemInfo["LcdLiveTV"]:
 		hotkeyFunctions.append((_("Toggle LCD LiveTV"), "Infobar/ToggleLCDLiveTV", "InfoBar"))
@@ -174,6 +180,7 @@ def getHotkeyFunctions():
 	for plugin in plugins.getPluginsForMenu("system"):
 		if plugin[2]:
 			hotkeyFunctions.append((plugin[0], "MenuPlugin/system/" + plugin[2], "Setup"))
+	hotkeyFunctions.append((_("PowerMenu"), "Menu/shutdown", "Power"))
 	hotkeyFunctions.append((_("Standby"), "Module/Screens.Standby/Standby", "Power"))
 	hotkeyFunctions.append((_("Restart"), "Module/Screens.Standby/TryQuitMainloop/2", "Power"))
 	hotkeyFunctions.append((_("Restart enigma"), "Module/Screens.Standby/TryQuitMainloop/3", "Power"))
@@ -328,7 +335,7 @@ class HotkeySetupSelect(Screen):
 		self.prevselected = self.selected[:]
 		self["choosen"] = ChoiceList(list=self.selected, selection=0)
 		self["list"] = ChoiceList(list=self.getFunctionList(), selection=0)
-		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "KeyboardInputActions", "MenuActions"], 
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "KeyboardInputActions", "MenuActions"],
 		{
 			"ok": self.keyOk,
 			"cancel": self.cancel,
@@ -538,7 +545,7 @@ class InfoBarHotkey():
 				pluginlist = plugins.getPlugins(PluginDescriptor.WHERE_EVENTINFO)
 				pluginlist.sort(key=lambda p: p.name)
 				for plugin in pluginlist:
-					if plugin.name not in twinPlugins and plugin.path and 'selectedevent' not in plugin.__call__.func_code.co_varnames:	
+					if plugin.name not in twinPlugins and plugin.path and 'selectedevent' not in plugin.__call__.func_code.co_varnames:
 						if twinPaths.has_key(plugin.path[24:]):
 							twinPaths[plugin.path[24:]] += 1
 						else:
@@ -603,6 +610,16 @@ class InfoBarHotkey():
 				if os.path.isfile(command) and os.path.isdir('/usr/lib/enigma2/python/Plugins/Extensions/PPanel'):
 					from Plugins.Extensions.PPanel.ppanel import Execute
 					self.session.open(Execute, selected[1] + " shellscript", None, command)
+			elif selected[0] == "Menu":
+				from Screens.Menu import MainMenu, mdom
+				root = mdom.getroot()
+				for x in root.findall("menu"):
+					y = x.find("id")
+					if y is not None:
+						id = y.get("val")
+						if id and id == selected[1]:
+							menu_screen = self.session.open(MainMenu, x)
+							break
 
 	def showServiceListOrMovies(self):
 		if hasattr(self, "openServiceList"):

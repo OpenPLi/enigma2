@@ -600,11 +600,10 @@ class Wizard(Screen):
 						self.configInstance["config"] = self["config"]
 						self.configInstance["config"].onSelectionChanged = callbacks
 						print "clearConfigList", self.configInstance["config"], self["config"]
+						self["config"].setCurrentIndex(0)
 				else:
 					self["config"].l.setList([])
 					self.handleInputHelpers()
-
-
 			else:
 				if self.has_key("config"):
 					self["config"].hide()

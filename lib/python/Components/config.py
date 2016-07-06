@@ -2,8 +2,8 @@ from enigma import getPrevAsciiCode
 from Tools.NumericalTextInput import NumericalTextInput
 from Tools.Directories import resolveFilename, SCOPE_CONFIG, fileExists
 from Components.Harddisk import harddiskmanager
-from copy import copy as copy_copy
-from os import path as os_path
+import copy
+import os
 from time import localtime, strftime
 
 # ConfigElement, the base class of all ConfigElements.
@@ -505,7 +505,7 @@ class ConfigSequence(ConfigElement):
 		self.censor_char = censor_char
 
 		self.last_value = self.default = default
-		self.value = copy_copy(default)
+		self.value = copy.copy(default)
 		self.endNotifier = None
 
 	def validate(self):
@@ -647,7 +647,7 @@ class ConfigSequence(ConfigElement):
 	def onDeselect(self, session):
 		if self.last_value != self._value:
 			self.changedFinal()
-			self.last_value = copy_copy(self._value)
+			self.last_value = copy.copy(self._value)
 
 ip_limits = [(0,255),(0,255),(0,255),(0,255)]
 class ConfigIP(ConfigSequence):
@@ -1107,6 +1107,7 @@ class ConfigNumber(ConfigText):
 				self.allmarked = False
 			self.insertChar(newChar, self.marked_pos, False)
 			self.marked_pos += 1
+			self.changed()
 		else:
 			ConfigText.handleKey(self, key)
 		self.conform()
@@ -1290,6 +1291,76 @@ class ConfigSet(ConfigElement):
 
 	description = property(lambda self: descriptionList(self.choices.choices, choicesList.LIST_TYPE_LIST))
 
+class ConfigDictionarySet(ConfigElement):
+	def __init__(self, default = {}):
+		ConfigElement.__init__(self)
+		self.default = default
+		self.dirs = {}
+		self.value = self.default
+
+	def getKeys(self):
+		return self.dir_pathes
+
+	def setValue(self, value):
+		if isinstance(value, dict):
+			self.dirs = value
+			self.changed()
+
+	def getValue(self):
+		return self.dirs
+
+	value = property(getValue, setValue)
+
+	def tostring(self, value):
+		return str(value)
+
+	def fromstring(self, val):
+		return eval(val)
+
+	def load(self):
+		sv = self.saved_value
+		if sv is None:
+			tmp = self.default
+		else:
+			tmp = self.fromstring(sv)
+		self.dirs = tmp
+
+	def changeConfigValue(self, value, config_key, config_value):
+		if isinstance(value, str) and isinstance(config_key, str):
+			if value in self.dirs:
+				self.dirs[value][config_key] = config_value
+			else:
+				self.dirs[value] = {config_key : config_value}
+			self.changed()
+
+	def getConfigValue(self, value, config_key):
+		if isinstance(value, str) and isinstance(config_key, str):
+			if value in self.dirs and config_key in self.dirs[value]:
+				return self.dirs[value][config_key]
+		return None
+
+	def removeConfigValue(self, value, config_key):
+		if isinstance(value, str) and isinstance(config_key, str):
+			if value in self.dirs and config_key in self.dirs[value]:
+				try:
+					del self.dirs[value][config_key]
+				except KeyError:
+					pass
+				self.changed()
+
+	def save(self):
+		del_keys = []
+		for key in self.dirs:
+			if not len(self.dirs[key]):
+				del_keys.append(key)
+		for del_key in del_keys:
+			try:
+				del self.dirs[del_key]
+			except KeyError:
+				pass
+			self.changed()
+		self.saved_value = self.tostring(self.dirs)
+
 class ConfigLocations(ConfigElement):
 	def __init__(self, default = [], visible_width = False):
 		ConfigElement.__init__(self)
@@ -1384,7 +1455,7 @@ class ConfigLocations(ConfigElement):
 				self.addedMount(x)
 
 	def getMountpoint(self, file):
-		file = os_path.realpath(file)+"/"
+		file = os.path.realpath(file)+"/"
 		for m in self.mountpoints:
 			if file.startswith(m):
 				return m

@@ -305,9 +305,11 @@ class RemoteControlType(Screen, ConfigListScreen):
 			("6", _("DMM advanced")),
 			("14", _("xp1000")),
 			("8", _("VU+")),
-			("18", _("F1/F3")),
-			("16", _("HD1100/HD1200/et7x00/et8500")),
-			("19", _("HD2400"))
+			("18", _("F1/F3/F4")),
+			("16", _("HD1100/HD1200/HD1265/et7x00/et8500")),
+			("19", _("HD2400")),
+			("20", _("Zgemma Star S/2S/H1/H2")),
+			("21", _("Zgemma H.S/H.2S/H.2H/H5"))
 		]
 
 	defaultRcList = [
@@ -323,13 +325,18 @@ class RemoteControlType(Screen, ConfigListScreen):
 			("et10000", 9),
 			("formuler1", 18),
 			("formuler3", 18),
+			("formuler4", 18),
 			("xp1000", 14),
 			("hd1200", 16),
+			("hd1265", 16),
 			("hd1100", 16),
 			("hd2400", 19),
 			("et7000", 16),
 			("et7500", 16),
-			("et8500", 16)
+			("et8500", 16),
+			("sh1", 20),
+			("h3", 21),
+			("h5", 21)
 		]
 
 	def __init__(self, session):

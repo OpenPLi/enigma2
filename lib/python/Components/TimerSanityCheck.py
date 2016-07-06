@@ -1,8 +1,10 @@
 import NavigationInstance
 from time import localtime, mktime, gmtime
 from ServiceReference import ServiceReference
-from enigma import iServiceInformation, eServiceCenter, eServiceReference, getBestPlayableServiceReference
+from enigma import iServiceInformation, eServiceCenter, eServiceReference
 from timer import TimerEntry
+import RecordTimer
+from time import time, localtime
 
 class TimerSanityCheck:
 	def __init__(self, timerlist, newtimer=None):
@@ -15,23 +17,23 @@ class TimerSanityCheck:
 		self.bflag = -1
 		self.eflag = 1
 
-	def check(self, ext_timer=1):
-		if ext_timer != 1:
+	def check(self, ext_timer=None):
+		if ext_timer and isinstance(ext_timer, RecordTimer.RecordTimerEntry):
 			self.newtimer = ext_timer
-		if self.newtimer is None:
-			self.simultimer = []
-		else:
-			if not self.newtimer.conflict_detection:
+		self.simultimer = []
+		if self.newtimer:
+			if not self.newtimer.conflict_detection or (self.newtimer.service_ref and '%3a//' in self.newtimer.service_ref.ref.toString()):
+				print "[TimerSanityCheck] Exception - timer does not have to be checked!"
 				return True
-			self.simultimer = [ self.newtimer ]
+			self.simultimer = [self.newtimer]
 		return self.checkTimerlist()
 
 	def getSimulTimerList(self):
 		return self.simultimer
 
 	def doubleCheck(self):
-		if self.newtimer is not None and self.newtimer.service_ref.ref.valid():
-			self.simultimer = [ self.newtimer ]
+		if self.newtimer and self.newtimer.service_ref and self.newtimer.service_ref.ref.valid():
+			self.simultimer = [self.newtimer]
 			for timer in self.timerlist:
 				if timer == self.newtimer:
 					return True
@@ -51,7 +53,7 @@ class TimerSanityCheck:
 						return True
 		return False
 
-	def checkTimerlist(self, ext_timer=1):
+	def checkTimerlist(self, ext_timer=None):
 		#with special service for external plugins
 		# Entries in eventlist
 		# timeindex
@@ -67,33 +69,41 @@ class TimerSanityCheck:
 # process the new timer
 		self.rep_eventlist = []
 		self.nrep_eventlist = []
-		if ext_timer != 1:
+		if ext_timer and isinstance(ext_timer, RecordTimer.RecordTimerEntry):
 			self.newtimer = ext_timer
-		if (self.newtimer is not None) and (not self.newtimer.disabled):
-			if not self.newtimer.service_ref.ref.valid():
-				return False
-			rflags = self.newtimer.repeated
-			rflags = ((rflags & 0x7F)>> 3)|((rflags & 0x07)<<4)
-			if rflags:
-				begin = self.newtimer.begin % 86400 # map to first day
-				if (self.localtimediff > 0) and ((begin + self.localtimediff) > 86400):
-					rflags = ((rflags >> 1)& 0x3F)|((rflags << 6)& 0x40)
-				elif (self.localtimediff < 0) and (begin < self.localtimediff):
-					rflags = ((rflags << 1)& 0x7E)|((rflags >> 6)& 0x01)
-				while rflags: # then arrange on the week
-					if rflags & 1:
-						self.rep_eventlist.append((begin, -1))
-					begin += 86400
-					rflags >>= 1
-			else:
-				self.nrep_eventlist.extend([(self.newtimer.begin,self.bflag,-1),(self.newtimer.end,self.eflag,-1)])
+		if not self.newtimer or not self.newtimer.service_ref or not self.newtimer.service_ref.ref.valid():
+			print "[TimerSanityCheck] Error - timer not valid!"
+			return False
+		if self.newtimer.disabled or not self.newtimer.conflict_detection or '%3a//' in self.newtimer.service_ref.ref.toString():
+			print "[TimerSanityCheck] Exception - timer does not have to be checked!"
+			return True
+		curtime = localtime(time())
+		if curtime.tm_year > 1970 and self.newtimer.end < time():
+			print "[TimerSanityCheck] timer is finished!"
+			return True
+		rflags = self.newtimer.repeated
+		rflags = ((rflags & 0x7F)>> 3)|((rflags & 0x07)<<4)
+		if rflags:
+			begin = self.newtimer.begin % 86400 # map to first day
+			if (self.localtimediff > 0) and ((begin + self.localtimediff) > 86400):
+				rflags = ((rflags >> 1)& 0x3F)|((rflags << 6)& 0x40)
+			elif (self.localtimediff < 0) and (begin < self.localtimediff):
+				rflags = ((rflags << 1)& 0x7E)|((rflags >> 6)& 0x01)
+			while rflags: # then arrange on the week
+				if rflags & 1:
+					self.rep_eventlist.append((begin, -1))
+				begin += 86400
+				rflags >>= 1
+		else:
+			self.nrep_eventlist.extend([(self.newtimer.begin,self.bflag,-1),(self.newtimer.end,self.eflag,-1)])
 
 ##################################################################################
 # now process existing timers
+		self.check_timerlist = []
 		idx = 0
 		for timer in self.timerlist:
-			if (timer != self.newtimer) and (not timer.disabled):
-				if not timer.conflict_detection:
+			if timer != self.newtimer:
+				if timer.disabled or not timer.conflict_detection or not timer.service_ref or '%3a//' in timer.service_ref.ref.toString() or timer.state == TimerEntry.StateEnded:
 					continue
 				if timer.repeated:
 					rflags = timer.repeated
@@ -108,8 +118,9 @@ class TimerSanityCheck:
 							self.rep_eventlist.append((begin, idx))
 						begin += 86400
 						rflags >>= 1
-				elif timer.state < TimerEntry.StateEnded:
+				else:
 					self.nrep_eventlist.extend([(timer.begin,self.bflag,idx),(timer.end,self.eflag,idx)])
+			self.check_timerlist.append(timer)
 			idx += 1
 
 ################################################################################
@@ -119,16 +130,16 @@ class TimerSanityCheck:
 			interval_end = max(self.nrep_eventlist)[0]
 			offset_0 = interval_begin - (interval_begin % 604800)
 			weeks = (interval_end - offset_0) / 604800
-			if ((interval_end - offset_0) % 604800):
+			if (interval_end - offset_0) % 604800:
 				weeks += 1
-			for cnt in range(weeks):
+			for cnt in range(int(weeks)):
 				for event in self.rep_eventlist:
 					if event[1] == -1: # -1 is the identifier of the changed timer
 						event_begin = self.newtimer.begin
 						event_end = self.newtimer.end
 					else:
-						event_begin = self.timerlist[event[1]].begin
-						event_end = self.timerlist[event[1]].end
+						event_begin = self.check_timerlist[event[1]].begin
+						event_end = self.check_timerlist[event[1]].end
 					new_event_begin = event[0] + offset_0 + (cnt * 604800)
 					# summertime correction
 					new_lth = localtime(new_event_begin).tm_hour
@@ -138,7 +149,7 @@ class TimerSanityCheck:
 						if new_event_begin >= self.newtimer.begin: # is the soap already running?
 							self.nrep_eventlist.extend([(new_event_begin, self.bflag, event[1]),(new_event_end, self.eflag, event[1])])
 					else:
-						if new_event_begin >= self.timerlist[event[1]].begin: # is the soap already running?
+						if new_event_begin >= self.check_timerlist[event[1]].begin: # is the soap already running?
 							self.nrep_eventlist.extend([(new_event_begin, self.bflag, event[1]),(new_event_end, self.eflag, event[1])])
 		else:
 			offset_0 = 345600 # the Epoch begins on Thursday
@@ -148,8 +159,8 @@ class TimerSanityCheck:
 						event_begin = self.newtimer.begin
 						event_end = self.newtimer.end
 					else:
-						event_begin = self.timerlist[event[1]].begin
-						event_end = self.timerlist[event[1]].end
+						event_begin = self.check_timerlist[event[1]].begin
+						event_end = self.check_timerlist[event[1]].end
 					new_event_begin = event[0] + offset_0 + (cnt * 604800)
 					new_event_end = new_event_begin + (event_end - event_begin)
 					self.nrep_eventlist.extend([(new_event_begin, self.bflag, event[1]),(new_event_end, self.eflag, event[1])])
@@ -172,21 +183,25 @@ class TimerSanityCheck:
 			if event[2] == -1: # new timer
 				timer = self.newtimer
 			else:
-				timer = self.timerlist[event[2]]
+				timer = self.check_timerlist[event[2]]
 			if event[1] == self.bflag:
-				tunerType = [ ]
-				if timer.service_ref.ref and timer.service_ref.ref.flags & eServiceReference.isGroup:
-					fakeRecService = NavigationInstance.instance.recordService(getBestPlayableServiceReference(timer.service_ref.ref, eServiceReference(), True), True)
-				else:
-					fakeRecService = NavigationInstance.instance.recordService(timer.service_ref, True)
+				tunerType = []
+				ref = timer.service_ref and timer.service_ref.ref
+				fakeRecService = NavigationInstance.instance.recordService(timer.service_ref, True)
 				if fakeRecService:
 					fakeRecResult = fakeRecService.start(True)
 				else:
 					fakeRecResult = -1
+				# TODO
+				#if fakeRecResult == -6 and len(NavigationInstance.instance.getRecordings(True)) < 2:
+				#	print "[TimerSanityCheck] less than two timers in the simulated recording list - timer conflict is not plausible - ignored !"
+				#	fakeRecResult = 0
 				if not fakeRecResult: # tune okay
-					if hasattr(fakeRecService, 'frontendInfo') and hasattr(fakeRecService.frontendInfo(), 'getFrontendData'):
-						feinfo = fakeRecService.frontendInfo().getFrontendData()
-						tunerType.append(feinfo.get("tuner_type"))
+					if hasattr(fakeRecService, 'frontendInfo'):
+						feinfo = fakeRecService.frontendInfo()
+						if feinfo and hasattr(feinfo, 'getFrontendData'):
+							tunerType.append(feinfo.getFrontendData().get("tuner_type"))
+						feinfo = None
 				else: # tune failed.. so we must go another way to get service type (DVB-S, DVB-T, DVB-C)
 
 					def getServiceType(ref): # helper function to get a service type of a service reference
@@ -194,15 +209,14 @@ class TimerSanityCheck:
 						serviceInfo = serviceInfo and serviceInfo.getInfoObject(ref, iServiceInformation.sTransponderData)
 						return serviceInfo and serviceInfo["tuner_type"] or ""
 
-					ref = timer.service_ref.ref
-					if ref.flags & eServiceReference.isGroup: # service group ?
+					if ref and ref.flags & eServiceReference.isGroup: # service group ?
 						serviceList = serviceHandler.list(ref) # get all alternative services
 						if serviceList:
 							for ref in serviceList.getContent("R"): # iterate over all group service references
 								type = getServiceType(ref)
 								if not type in tunerType: # just add single time
 									tunerType.append(type)
-					else:
+					elif ref:
 						tunerType.append(getServiceType(ref))
 
 				if event[2] == -1: # new timer
@@ -223,33 +237,35 @@ class TimerSanityCheck:
 					if entry[1] == timer:
 						overlaplist.remove(entry)
 			else:
-				print "Bug: unknown flag!"
+				print "[TimerSanityCheck] bug: unknown flag!"
 			self.nrep_eventlist[idx] = (event[0],event[1],event[2],cnt,overlaplist[:]) # insert a duplicate into current overlaplist
+			fakeRecService = None
+			fakeRecResult = None
 			idx += 1
 
-		if ConflictTimer is None: # no conflict found :)
+		if ConflictTimer is None:
+			print "[TimerSanityCheck] conflict not found!"
 			return True
 
 ##################################################################################
 # we have detected a conflict, now we must figure out the involved timers
 
-		if self.newtimer is not None: # new timer?
-			if self.newtimer is not ConflictTimer: # the new timer is not the conflicting timer?
-				for event in self.nrep_eventlist:
-					if len(event[4]) > 1: # entry in overlaplist of this event??
-						kt = False
-						nt = False
-						for entry in event[4]:
-							if entry[1] is ConflictTimer:
-								kt = True
-							if entry[1] is self.newtimer:
-								nt = True
-						if nt and kt:
-							ConflictTimer = self.newtimer
-							ConflictTunerType = newTimerTunerType
-							break
+		if self.newtimer is not ConflictTimer: # the new timer is not the conflicting timer?
+			for event in self.nrep_eventlist:
+				if len(event[4]) > 1: # entry in overlaplist of this event??
+					kt = False
+					nt = False
+					for entry in event[4]:
+						if entry[1] is ConflictTimer:
+							kt = True
+						if entry[1] is self.newtimer:
+							nt = True
+					if nt and kt:
+						ConflictTimer = self.newtimer
+						ConflictTunerType = newTimerTunerType
+						break
 
-		self.simultimer = [ ConflictTimer ]
+		self.simultimer = [ConflictTimer]
 		for event in self.nrep_eventlist:
 			if len(event[4]) > 1: # entry in overlaplist of this event??
 				for entry in event[4]:
@@ -265,7 +281,9 @@ class TimerSanityCheck:
 								break
 
 		if len(self.simultimer) < 2:
-			print "Possible Bug: unknown Conflict!"
+			print "[TimerSanityCheck] possible bug: unknown conflict!"
 			return True
 
-		return False # conflict detected!
+		print "[TimerSanityCheck] conflict detected!"
+		return False
+

@@ -12,7 +12,7 @@ from Components.Label import Label
 from Components.ProgressBar import ProgressBar
 
 from Tools.StbHardware import getFPVersion
-from enigma import eTimer, eLabel
+from enigma import eTimer, eLabel, eConsoleAppContainer
 
 from Components.HTMLComponent import HTMLComponent
 from Components.GUIComponent import GUIComponent
@@ -59,7 +59,7 @@ class About(Screen):
 		self["TunerHeader"] = StaticText(_("Detected NIMs:"))
 		AboutText += "\n" + _("Detected NIMs:") + "\n"
 
-		nims = nimmanager.nimList()
+		nims = nimmanager.nimList(showFBCTuners=False)
 		for count in range(len(nims)):
 			if count < 4:
 				self["Tuner" + str(count)] = StaticText(nims[count])
@@ -246,7 +246,7 @@ class MemoryInfo(Screen):
 
 		self["params"] = MemoryInfoSkinParams()
 
-		self['info'] = Label(_("This info is for developers only.\nFor a normal users it is not important.\nDon't panic, please, when here will be displayed any suspicious informations!"))
+		self['info'] = Label(_("This info is for developers only.\nFor a normal users it is not relevant.\nDon't panic please when you see values being displayed that you think look suspicious!"))
 
 		self.setTitle(_("Memory Info"))
 		self.onLayoutFinish.append(self.getMemoryInfo)
@@ -257,36 +257,39 @@ class MemoryInfo(Screen):
 			lvalue = rvalue = ""
 			mem = 1
 			free = 0
-			i = 0
-			for line in open('/proc/meminfo','r'):
-				( name, size, units ) = line.strip().split()
-				if "MemTotal" in name:
+			rows_in_column = self["params"].rows_in_column
+			for i, line in enumerate(open('/proc/meminfo','r')):
+				s = line.strip().split(None, 2)
+				if len(s) == 3:
+					name, size, units = s
+				elif len(s) == 2:
+					name, size = s
+					units = ""
+				else:
+					continue
+				if name.startswith("MemTotal"):
 					mem = int(size)
-				if "MemFree" in name:
-					free = int(size)
-				if i < self["params"].rows_in_column:
+				if name.startswith("MemFree") or name.startswith("Buffers") or name.startswith("Cached"):
+					free += int(size)
+				if i < rows_in_column:
 					ltext += "".join((name,"\n"))
 					lvalue += "".join((size," ",units,"\n"))
 				else:
 					rtext += "".join((name,"\n"))
 					rvalue += "".join((size," ",units,"\n"))
-				i += 1
 			self['lmemtext'].setText(ltext)
 			self['lmemvalue'].setText(lvalue)
 			self['rmemtext'].setText(rtext)
 			self['rmemvalue'].setText(rvalue)
-
 			self["slide"].setValue(int(100.0*(mem-free)/mem+0.25))
 			self['pfree'].setText("%.1f %s" % (100.*free/mem,'%'))
 			self['pused'].setText("%.1f %s" % (100.*(mem-free)/mem,'%'))
-
 		except Exception, e:
 			print "[About] getMemoryInfo FAIL:", e
 
 	def clearMemory(self):
-		from os import system
-		system("sync")
-		system("echo 3 > /proc/sys/vm/drop_caches")
+		eConsoleAppContainer().execute("sync")
+		open("/proc/sys/vm/drop_caches", "w").write("3")
 		self.getMemoryInfo()
 
 class MemoryInfoSkinParams(HTMLComponent, GUIComponent):

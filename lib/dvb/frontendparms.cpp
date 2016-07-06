@@ -273,6 +273,8 @@ int eDVBSatelliteTransponderData::getModulation() const
 	default: eDebug("[eDVBSatelliteTransponderData] got unsupported modulation from frontend! report as QPSK!");
 	case QPSK: return eDVBFrontendParametersSatellite::Modulation_QPSK;
 	case PSK_8: return eDVBFrontendParametersSatellite::Modulation_8PSK;
+	case APSK_16: return eDVBFrontendParametersSatellite::Modulation_16APSK;
+	case APSK_32: return eDVBFrontendParametersSatellite::Modulation_32APSK;
 	}
 }
 
@@ -553,7 +555,7 @@ int eDVBTerrestrialTransponderData::getHierarchyInformation() const
 
 int eDVBTerrestrialTransponderData::getPlpId() const
 {
-	if (originalValues) return transponderParameters.plpid;
+	if (originalValues) return transponderParameters.plp_id;
 
 #if defined DTV_STREAM_ID
 	return getProperty(DTV_STREAM_ID);

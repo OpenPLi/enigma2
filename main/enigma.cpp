@@ -185,7 +185,11 @@ int main(int argc, char **argv)
 	printf("PYTHONPATH: %s\n", getenv("PYTHONPATH"));
 	printf("DVB_API_VERSION %d DVB_API_VERSION_MINOR %d\n", DVB_API_VERSION, DVB_API_VERSION_MINOR);
 
-	bsodLogInit();
+	// get enigma2 debug level
+	debugLvl = getenv("ENIGMA_DEBUG_LVL") ? atoi(getenv("ENIGMA_DEBUG_LVL")) : 3;
+	if (debugLvl < 0)
+		debugLvl = 0;
+	printf("ENIGMA2_DEBUG settings: Level=%d\n", debugLvl);
 
 	ePython python;
 	eMain main;
@@ -212,7 +216,7 @@ int main(int argc, char **argv)
 	eWidgetDesktop dsk_lcd(my_lcd_dc->size());
 
 	dsk.setStyleID(0);
-	dsk_lcd.setStyleID(my_lcd_dc->size().width() == 96 ? 2 : 1);
+	dsk_lcd.setStyleID(1);
 
 /*	if (double_buffer)
 	{

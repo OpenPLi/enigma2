@@ -242,7 +242,7 @@ class PositionerSetup(Screen):
 
 		self.updateColors("tune")
 		self.statusTimer = eTimer()
-		self.rotorStatusTimer = eTimer() 
+		self.rotorStatusTimer = eTimer()
 		self.statusTimer.callback.append(self.updateStatus)
 		self.rotorStatusTimer.callback.append(self.startStatusTimer)
 		self.collectingStatistics = False
@@ -697,16 +697,17 @@ class PositionerSetup(Screen):
 						for sat in self.availablesats:
 							usals = self.advancedsats[sat].usals.value
 							if not usals:
-								self.allocatedIndices.append(int(self.advancedsats[sat].rotorposition.value))
+								current_index = int(self.advancedsats[sat].rotorposition.value)
+								if current_index not in self.allocatedIndices:
+									self.allocatedIndices.append(current_index)
 						if len(self.allocatedIndices) == self.rotorPositions:
 							self.statusMsg(_("No free index available"), timeout = self.STATUS_MSG_TIMEOUT)
 							break
 					index = 1
-					if len(self.allocatedIndices):
-						for i in sorted(self.allocatedIndices):
-							if i != index:
-								break
-							index += 1
+					for i in sorted(self.allocatedIndices):
+						if i != index:
+							break
+						index += 1
 					if index <= self.rotorPositions:
 						self.positioner_storage.value = index
 						self["list"].invalidateCurrent()
@@ -840,7 +841,7 @@ class PositionerSetup(Screen):
 			# of 5000 the interval is multiplied by 3 until 15000 which is seen
 			# as a high symbol rate. Linear interpolation elsewhere.
 			return max(int(round((3 - 1) * (symbolrate - 15000) / (5000 - 15000) + 1)), 1)
- 
+
 		self.symbolrate = tp[1]
 		self.polarisation = tp[2]
 		self.MAX_LOW_RATE_ADAPTER_COUNT = setLowRateAdapterCount(self.symbolrate)
@@ -1386,7 +1387,9 @@ class TunerScreen(ConfigListScreen, Screen):
 			(eDVBFrontendParametersSatellite.FEC_9_10, "9/10")])
 		self.scan_sat.modulation = ConfigSelection(default = defaultSat["modulation"], choices = [
 			(eDVBFrontendParametersSatellite.Modulation_QPSK, "QPSK"),
-			(eDVBFrontendParametersSatellite.Modulation_8PSK, "8PSK")])
+			(eDVBFrontendParametersSatellite.Modulation_8PSK, "8PSK"),
+			(eDVBFrontendParametersSatellite.Modulation_16APSK, "16APSK"),
+			(eDVBFrontendParametersSatellite.Modulation_32APSK, "32APSK")])
 		self.scan_sat.rolloff = ConfigSelection(default = defaultSat.get("rolloff", eDVBFrontendParametersSatellite.RollOff_alpha_0_35), choices = [
 			(eDVBFrontendParametersSatellite.RollOff_alpha_0_35, "0.35"),
 			(eDVBFrontendParametersSatellite.RollOff_alpha_0_25, "0.25"),

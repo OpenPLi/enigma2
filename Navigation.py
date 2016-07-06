@@ -1,4 +1,4 @@
-from enigma import eServiceCenter, eServiceReference, eTimer, pNavigation, getBestPlayableServiceReference, iPlayableService, eActionMap, setPreferredTuner
+from enigma import eServiceCenter, eServiceReference, eTimer, pNavigation, getBestPlayableServiceReference, iPlayableService, eActionMap, setPreferredTuner, eStreamServer
 from Components.ParentalControl import parentalControl
 from Components.SystemInfo import SystemInfo
 from Components.config import config, configfile
@@ -89,8 +89,13 @@ class Navigation:
 				if not playref:
 					alternativeref = getBestPlayableServiceReference(ref, eServiceReference(), True)
 					self.stopService()
-					if alternativeref and self.pnav and self.pnav.playService(alternativeref):
-						print "Failed to start", alternativeref
+					if alternativeref and self.pnav:
+						self.currentlyPlayingServiceReference = alternativeref
+						self.currentlyPlayingServiceOrGroup = ref
+						if self.pnav.playService(alternativeref):
+							print "Failed to start", alternativeref
+							self.currentlyPlayingServiceReference = None
+							self.currentlyPlayingServiceOrGroup = None
 					return 0
 				elif checkParentalControl and not parentalControl.isServicePlayable(playref, boundFunction(self.playService, checkParentalControl = False)):
 					if self.currentlyPlayingServiceOrGroup and InfoBarInstance and InfoBarInstance.servicelist.servicelist.setCurrent(self.currentlyPlayingServiceOrGroup, adjust):
@@ -182,3 +187,6 @@ class Navigation:
 
 	def stopUserServices(self):
 		self.stopService()
+
+	def getClientsStreaming(self):
+		return eStreamServer.getInstance() and eStreamServer.getInstance().getConnectedClients()

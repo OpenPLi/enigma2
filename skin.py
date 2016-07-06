@@ -13,6 +13,7 @@ from Tools.Directories import resolveFilename, SCOPE_SKIN, SCOPE_FONTS, SCOPE_CU
 from Tools.Import import my_import
 from Tools.LoadPixmap import LoadPixmap
 from Components.RcModel import rc_model
+from Components.SystemInfo import SystemInfo
 
 colorNames = {}
 # Predefined fonts, typically used in built-in screens and for components like
@@ -94,12 +95,8 @@ if not name or not res:
 addSkin('skin_box.xml')
 # add optional discrete second infobar
 addSkin('skin_second_infobar.xml')
-# Only one of these is present, compliments of AM_CONDITIONAL
 display_skin_id = 1
 addSkin('skin_display.xml')
-if addSkin('skin_display96.xml'):
-	# Color OLED
-	display_skin_id = 2
 addSkin('skin_text.xml')
 
 addSkin('skin_subtitles.xml')
@@ -120,33 +117,55 @@ except Exception, err:
 addSkin('skin_default.xml')
 profile("LoadSkinDefaultDone")
 
+#
+# Convert a string into a number. Used to convert object position and size attributes into a number
+#    s is the input string.
+#    e is the the parent object size to do relative calculations on parent
+#    size is the size of the object size (e.g. width or height)
+#    font is a font object to calculate relative to font sizes
+# Note some constructs for speeding # up simple cases that are very common.
+# Can do things like:  10+center-10w+4%
+# To center the widget on the parent widget,
+#    but move forward 10 pixels and 4% of parent width
+#    and 10 character widths backward
+# Multiplication, division and subexprsssions are also allowed: 3*(e-c/2)
+#
+# Usage:  center : center the object on parent based on parent size and object size
+#         e      : take the parent size/width
+#         c      : take the center point of parent size/width
+#         %      : take given percentag of parent size/width
+#         w      : multiply by current font width
+#         h      : multiply by current font height
+#
 def parseCoordinate(s, e, size=0, font=None):
 	s = s.strip()
-	if s == "center":
+	if s == "center":		# for speed, can be common case
 		val = (e - size)/2
 	elif s == '*':
-	        return None
+		return None
 	else:
-		if s[0] is 'e':
-			val = e
-			s = s[1:]
-		elif s[0] is 'c':
-			val = e/2
-			s = s[1:]
-		else:
-			val = 0;
-		if s:
-			if s[-1] is '%':
-				val += e * int(s[:-1]) / 100
-			elif s[-1] is 'w':
-			        val += fonts[font][3] * int(s[:-1]);
-			elif s[-1] is 'h':
-			        val += fonts[font][2] * int(s[:-1]);
-			else:
-				val += int(s)
+		try:
+			val = int(s)	# for speed
+		except:
+			if 't' in s:
+				s = s.replace("center", str((e-size)/2.0))
+			if 'e' in s:
+				s = s.replace("e", str(e))
+			if 'c' in s:
+				s = s.replace("c", str(e/2.0))
+			if 'w' in s:
+				s = s.replace("w", "*" + str(fonts[font][3]))
+			if 'h' in s:
+				s = s.replace("h", "*" + str(fonts[font][2]))
+			if '%' in s:
+				s = s.replace("%", "*" + str(e/100.0))
+			try:
+				val = int(s) # for speed
+			except:
+				val = eval(s)
 	if val < 0:
-		val = 0
-	return val
+		return 0
+	return int(val)  # make sure an integer value is returned
 
 
 def getParentSize(object, desktop):
@@ -169,23 +188,23 @@ def getParentSize(object, desktop):
 			size = desktop.size()
 	return size
 
-def parsePosition(s, scale, object = None, desktop = None, size = None):
+def parseValuePair(s, scale, object = None, desktop = None, size = None):
 	x, y = s.split(',')
 	parentsize = eSize()
-	if object and (x[0] in ('c', 'e') or y[0] in ('c', 'e')):
+	if object and ('c' in x or 'c' in y or 'e' in x or 'e' in y or
+	               '%' in x or '%' in y):          # need parent size for ce%
 		parentsize = getParentSize(object, desktop)
-	xval = parseCoordinate(x, parentsize.width(), size and size.width())
-	yval = parseCoordinate(y, parentsize.height(), size and size.height())
-	return ePoint(xval * scale[0][0] / scale[0][1], yval * scale[1][0] / scale[1][1])
+	xval = parseCoordinate(x, parentsize.width(), size and size.width() or 0)
+	yval = parseCoordinate(y, parentsize.height(), size and size.height() or 0)
+	return (xval * scale[0][0] / scale[0][1], yval * scale[1][0] / scale[1][1])
+
+def parsePosition(s, scale, object = None, desktop = None, size = None):
+	(x, y) = parseValuePair(s, scale, object, desktop, size)
+	return ePoint(x, y)
 
 def parseSize(s, scale, object = None, desktop = None):
-	x, y = s.split(',')
-	parentsize = eSize()
-	if object and (x[0] in ('c', 'e') or y[0] in ('c', 'e')):
-		parentsize = getParentSize(object, desktop)
-	xval = parseCoordinate(x, parentsize.width())
-	yval = parseCoordinate(y, parentsize.height())
-	return eSize(xval * scale[0][0] / scale[0][1], yval * scale[1][0] / scale[1][1])
+	(x, y) = parseValuePair(s, scale, object, desktop)
+	return eSize(x, y)
 
 def parseFont(s, scale):
 	try:

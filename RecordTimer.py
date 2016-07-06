@@ -1,5 +1,5 @@
 import os
-from enigma import eEPGCache, getBestPlayableServiceReference, \
+from enigma import eEPGCache, getBestPlayableServiceReference, eStreamServer,\
 	eServiceReference, iRecordableService, quitMainloop, eActionMap, setPreferredTuner
 
 from Components.config import config
@@ -194,6 +194,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 		self.InfoBarInstance = Screens.InfoBar.InfoBar.instance
 		self.ts_dialog = None
 		self.log_entries = []
+		self.flags = set()
 		self.resetState()
 
 	def __repr__(self):
@@ -355,8 +356,10 @@ class RecordTimerEntry(timer.TimerEntry, object):
 				self.next_activation = self.begin
 				self.backoff = 0
 				return True
-
 			self.log(7, "prepare failed")
+			if eStreamServer.getInstance().getConnectedClients():
+				eStreamServer.getInstance().stopStream()
+				return False
 			if self.first_try_prepare or (self.ts_dialog is not None and not self.checkingTimeshiftRunning()):
 				self.first_try_prepare = False
 				cur_ref = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
@@ -580,6 +583,11 @@ class RecordTimerEntry(timer.TimerEntry, object):
 			self.log(13, "ok, zapped away")
 			#NavigationInstance.instance.stopUserServices()
 			NavigationInstance.instance.playService(self.service_ref.ref)
+			if not self.first_try_prepare and self.InfoBarInstance and hasattr(self.InfoBarInstance.session, 'pipshown') and self.InfoBarInstance.session.pipshown:
+				hasattr(self.InfoBarInstance, "showPiP") and self.InfoBarInstance.showPiP()
+				if hasattr(self.InfoBarInstance.session, 'pip'):
+					del self.InfoBarInstance.session.pip
+					self.InfoBarInstance.session.pipshown = False
 		else:
 			self.log(14, "user didn't want to zap away, record will probably fail")
 
@@ -675,6 +683,9 @@ def createTimer(xml):
 	#filename = xml.get("filename").encode("utf-8")
 	entry = RecordTimerEntry(serviceref, begin, end, name, description, eit, disabled, justplay, afterevent, dirname = location, tags = tags, descramble = descramble, record_ecm = record_ecm, always_zap = always_zap, zap_wakeup = zap_wakeup, rename_repeat = rename_repeat, conflict_detection = conflict_detection)
 	entry.repeated = int(repeated)
+	flags = xml.get("flags")
+	if flags:
+		entry.flags = set(flags.encode("utf-8").split(' '))
 
 	for l in xml.findall("log"):
 		time = int(l.get("time"))
@@ -721,10 +732,22 @@ class RecordTimer(timer.Timer):
 				w.first_try_prepare = True
 				self.addTimerEntry(w)
 			else:
+				# correct wrong running timers
+				self.checkWrongRunningTimers()
+				# check for disabled timers, if time as passed set to completed
+				self.cleanupDisabled()
 				# Remove old timers as set in config
 				self.cleanupDaily(config.recording.keep_timers.value)
 				insort(self.processed_timers, w)
 		self.stateChanged(w)
+
+	def checkWrongRunningTimers(self):
+		now = time() + 100
+		if int(now) > 1072224000:
+			wrong_timers = [entry for entry in (self.processed_timers + self.timer_list) if entry.state in (1, 2) and entry.begin > now]
+			for timer in wrong_timers:
+				timer.state = RecordTimerEntry.StateWaiting
+				self.timeChanged(timer)
 
 	def isRecording(self):
 		for timer in self.timer_list:
@@ -733,7 +756,6 @@ class RecordTimer(timer.Timer):
 		return False
 
 	def loadTimer(self):
-		# TODO: PATH!
 		if not Directories.fileExists(self.Filename):
 			return
 		try:
@@ -757,16 +779,20 @@ class RecordTimer(timer.Timer):
 
 		root = doc.getroot()
 
-		# put out a message when at least one timer overlaps
-		checkit = True
+		checkit = False
+		timer_text = ""
 		for timer in root.findall("timer"):
 			newTimer = createTimer(timer)
-			if (self.record(newTimer, ignoreTSC=True, dosave=False) is not None) and checkit:
-				from Tools.Notifications import AddPopup
-				from Screens.MessageBox import MessageBox
-				timer_text = _("\nTimer '%s' disabled!") % newTimer.name
-				AddPopup(_("Timer overlap in timers.xml detected!\nPlease recheck it!") + timer_text, type = MessageBox.TYPE_ERROR, timeout = 0, id = "TimerLoadFailed")
-				checkit = False # at moment it is enough when the message is displayed one time
+			conflict_list = self.record(newTimer, ignoreTSC=True, dosave=False, loadtimer=True)
+			if conflict_list:
+				checkit = True
+				if newTimer in conflict_list:
+					timer_text += _("\nTimer '%s' disabled!") % newTimer.name
+		if checkit:
+			from Tools.Notifications import AddPopup
+			from Screens.MessageBox import MessageBox
+			AddPopup(_("Timer overlap in timers.xml detected!\nPlease recheck it!") + timer_text, type = MessageBox.TYPE_ERROR, timeout = 0, id = "TimerLoadFailed")
+
 
 	def saveTimer(self):
 		#root_element = xml.etree.cElementTree.Element('timers')
@@ -832,11 +858,12 @@ class RecordTimer(timer.Timer):
 				}[timer.afterEvent])) + '"')
 			if timer.eit is not None:
 				list.append(' eit="' + str(timer.eit) + '"')
-			if timer.dirname is not None:
+			if timer.dirname:
 				list.append(' location="' + str(stringToXML(timer.dirname)) + '"')
-			if timer.tags is not None:
+			if timer.tags:
 				list.append(' tags="' + str(stringToXML(' '.join(timer.tags))) + '"')
-			list.append(' disabled="' + str(int(timer.disabled)) + '"')
+			if timer.disabled:
+				list.append(' disabled="' + str(int(timer.disabled)) + '"')
 			list.append(' justplay="' + str(int(timer.justplay)) + '"')
 			list.append(' always_zap="' + str(int(timer.always_zap)) + '"')
 			list.append(' zap_wakeup="' + str(timer.zap_wakeup) + '"')
@@ -844,6 +871,8 @@ class RecordTimer(timer.Timer):
 			list.append(' conflict_detection="' + str(int(timer.conflict_detection)) + '"')
 			list.append(' descramble="' + str(int(timer.descramble)) + '"')
 			list.append(' record_ecm="' + str(int(timer.record_ecm)) + '"')
+			if timer.flags:
+				list.append(' flags="' + ' '.join([stringToXML(x) for x in timer.flags]) + '"')
 			list.append('>\n')
 
 			if config.recording.debug.value:
@@ -907,8 +936,9 @@ class RecordTimer(timer.Timer):
 					return True
 		return False
 
-	def record(self, entry, ignoreTSC=False, dosave=True): # wird von loadTimer mit dosave=False aufgerufen
-		timersanitycheck = TimerSanityCheck(self.timer_list,entry)
+	def record(self, entry, ignoreTSC=False, dosave=True, loadtimer=False):
+		check_timer_list = self.timer_list[:]
+		timersanitycheck = TimerSanityCheck(check_timer_list,entry)
 		answer = None
 		if not timersanitycheck.check():
 			if not ignoreTSC:
@@ -917,9 +947,13 @@ class RecordTimer(timer.Timer):
 				return timersanitycheck.getSimulTimerList()
 			else:
 				print "[RecordTimer] ignore timer conflict..."
-				if not dosave:
-					entry.disabled = True
-					answer = timersanitycheck.getSimulTimerList()
+				if not dosave and loadtimer:
+					simulTimerList = timersanitycheck.getSimulTimerList()
+					if entry in simulTimerList:
+						entry.disabled = True
+						if entry in check_timer_list:
+							check_timer_list.remove(entry)
+					answer = simulTimerList
 		elif timersanitycheck.doubleCheck():
 			print "[RecordTimer] ignore double timer..."
 			return None

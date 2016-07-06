@@ -29,7 +29,7 @@ from Tools.LoadPixmap import LoadPixmap
 from Tools.Alternatives import CompareWithAlternatives
 from Tools import Notifications
 from enigma import eEPGCache, eListbox, gFont, eListboxPythonMultiContent, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER,\
-	RT_VALIGN_CENTER, RT_WRAP, BT_SCALE, BT_KEEP_ASPECT_RATIO, eSize, eRect, eTimer, getBestPlayableServiceReference, loadPNG
+	RT_VALIGN_CENTER, RT_WRAP, BT_SCALE, BT_KEEP_ASPECT_RATIO, eSize, eRect, eTimer, getBestPlayableServiceReference, loadPNG, eServiceReference
 from GraphMultiEpgSetup import GraphMultiEpgSetup
 from time import localtime, time, strftime, mktime
 from Components.PluginComponent import plugins
@@ -68,7 +68,8 @@ config.misc.graph_mepg.event_alignment = ConfigSelection(default = possibleAlign
 config.misc.graph_mepg.show_timelines = ConfigSelection(default = "all", choices = [("nothing", _("no")), ("all", _("all")), ("now", _("actual time only"))])
 config.misc.graph_mepg.servicename_alignment = ConfigSelection(default = possibleAlignmentChoices[0][0], choices = possibleAlignmentChoices)
 config.misc.graph_mepg.extension_menu = ConfigYesNo(default = False)
-config.misc.graph_mepg.silent_bouquet_change = ConfigYesNo(default = True)
+config.misc.graph_mepg.show_record_clocks = ConfigYesNo(default = True)
+config.misc.graph_mepg.zap_blind_bouquets = ConfigYesNo(default = False)
 
 listscreen = config.misc.graph_mepg.default_mode.value
 
@@ -135,6 +136,7 @@ class EPGList(HTMLComponent, GUIComponent):
 
 		self.foreColor = 0xffffff
 		self.foreColorSelected = 0xffc000
+		self.foreColorSelectedRec = 0xff4040
 		self.borderColor = 0x464445
 		self.backColor = 0x595959
 		self.backColorSelected = 0x808080
@@ -168,6 +170,8 @@ class EPGList(HTMLComponent, GUIComponent):
 			self.foreColor = parseColor(value).argb()
 		def EntryForegroundColorSelected(value):
 			self.foreColorSelected = parseColor(value).argb()
+		def EntryForegroundColorSelectedRec(value):
+			self.foreColorSelectedRec = parseColor(value).argb()
 		def EntryBackgroundColor(value):
 			self.backColor = parseColor(value).argb()
 		def EntryBackgroundColorSelected(value):
@@ -516,6 +520,8 @@ class EPGList(HTMLComponent, GUIComponent):
 					backColor = self.backColor
 
 				if selected and self.select_rect.x == xpos + left and self.selEvPix:
+					if rec is not None and rec[1][-1] in (2, 12, 17, 27):
+						foreColorSelected = self.foreColorSelectedRec
 					bgpng = self.selEvPix
 					backColorSel = None
 				elif rec is not None and rec[1][-1] in (2, 12, 17, 27):
@@ -558,7 +564,7 @@ class EPGList(HTMLComponent, GUIComponent):
 						color = foreColor,
 						color_sel = foreColorSelected))
 				# recording icons
-				if rec is not None:
+				if config.misc.graph_mepg.show_record_clocks.value and rec is not None:
 					for i in range(len(rec[1])):
 						if ewidth < (i + 1) * (self.recIconSize + self.iconXPadding):
 							break
@@ -802,9 +808,12 @@ class GraphMultiEPG(Screen, HelpableScreen):
 	TIME_CHANGE = 2
 	ZAP = 1
 
-	def __init__(self, session, services, zapFunc=None, bouquetChangeCB=None, bouquetname=""):
+	def __init__(self, session, services, zapFunc=None, bouquetChangeCB=None, bouquetname="", selectBouquet=None, epg_bouquet=None):
 		Screen.__init__(self, session)
 		self.bouquetChangeCB = bouquetChangeCB
+		self.selectBouquet = selectBouquet
+		self.epg_bouquet = epg_bouquet
+		self.serviceref = None
 		now = time() - config.epg.histminutes.getValue() * 60
 		self.ask_time = now - now % int(config.misc.graph_mepg.roundTo.getValue())
 		self["key_red"] = Button("")
@@ -862,6 +871,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 				"nextService": (self.nextPressed,    _("Goto next page of events")),
 				"prevService": (self.prevPressed,    _("Goto previous page of events")),
 				"preview":     (self.preview,        _("Preview selected channel")),
+				"window":      (self.showhideWindow, _("Show/hide window")),
 				"nextDay":     (self.nextDay,        _("Goto next day of events")),
 				"prevDay":     (self.prevDay,        _("Goto previous day of events"))
 			}, -1)
@@ -892,36 +902,47 @@ class GraphMultiEPG(Screen, HelpableScreen):
 		self.previousref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 
 	def prevPage(self):
+		self.showhideWindow(True)
 		self["list"].moveTo(eListbox.pageUp)
 
 	def nextPage(self):
+		self.showhideWindow(True)
 		self["list"].moveTo(eListbox.pageDown)
 
 	def toTop(self):
+		self.showhideWindow(True)
 		self["list"].moveTo(eListbox.moveTop)
 
 	def toEnd(self):
+		self.showhideWindow(True)
 		self["list"].moveTo(eListbox.moveEnd)
 
 	def prevPressed(self):
+		self.showhideWindow(True)
 		self.updEvent(-2)
 
 	def nextPressed(self):
+		self.showhideWindow(True)
 		self.updEvent(+2)
 
 	def leftPressed(self):
+		self.showhideWindow(True)
 		self.updEvent(-1)
 
 	def rightPressed(self):
+		self.showhideWindow(True)
 		self.updEvent(+1)
 
 	def prevDay(self):
+		self.showhideWindow(True)
 		self.updEvent(-3)
 
 	def nextDay(self):
+		self.showhideWindow(True)
 		self.updEvent(+3)
 
 	def updEvent(self, dir, visible = True):
+		self.showhideWindow(True)
 		ret = self["list"].selEntry(dir, visible)
 		if ret:
 			if self["list"].offs > 0:
@@ -953,27 +974,37 @@ class GraphMultiEPG(Screen, HelpableScreen):
 	def key6(self):
 		self.updEpoch(360)
 
+	def showhideWindow(self, force=False):
+		if self.shown and not force:
+			self.hide()
+		else:
+			self.show()
+
 	def getKeyNextBouquetHelptext(self):
-		return config.misc.graph_mepg.silent_bouquet_change.value and _("Switch to next bouquet") or _("Show bouquet selection menu")
+		return config.misc.graph_mepg.zap_blind_bouquets.value and _("Switch to next bouquet") or _("Show bouquet selection menu")
 
 	def getKeyPrevBouquetHelptext(self):
-		return config.misc.graph_mepg.silent_bouquet_change.value and _("Switch to previous bouquet") or _("Show bouquet selection menu")
+		return config.misc.graph_mepg.zap_blind_bouquets.value and _("Switch to previous bouquet") or _("Show bouquet selection menu")
 
 	def nextBouquet(self):
+		self.showhideWindow(True)
 		if self.bouquetChangeCB:
 			self.bouquetChangeCB(1, self)
 
 	def prevBouquet(self):
+		self.showhideWindow(True)
 		if self.bouquetChangeCB:
 			self.bouquetChangeCB(-1, self)
 
 	def togglePrimeNow(self):
+		self.showhideWindow(True)
 		if self.time_mode == self.TIME_NOW:
 			self.setNewTime("prime_time")
 		elif self.time_mode == self.TIME_PRIME or self.time_mode == self.TIME_CHANGE:
 			self.setNewTime("now_time")
 
 	def enterDateTime(self):
+		self.showhideWindow(True)
 		t = localtime(time())
 		config.misc.graph_mepg.prev_time.value = [t.tm_hour, t.tm_min]
 		self.session.openWithCallback(self.onDateTimeInputClosed, TimeDateInput, config.misc.graph_mepg.prev_time)
@@ -1011,7 +1042,17 @@ class GraphMultiEPG(Screen, HelpableScreen):
 			l.fillMultiEPG(None, self.ask_time)
 			self.moveTimeLines(True)
 
+	def setEvent(self, serviceref, eventid):
+		self.setService(serviceref.ref)
+		l = self["list"]
+		event = l.getEventFromId(serviceref, eventid)
+		self.ask_time = event.getBeginTime()
+		l.resetOffset()
+		l.fillMultiEPG(None, self.ask_time)
+		self.moveTimeLines(True)
+
 	def showSetup(self):
+		self.showhideWindow(True)
 		if self.protectContextMenu and config.ParentalControl.setuppinactive.value and config.ParentalControl.config_sections.context_menus.value:
 			self.session.openWithCallback(self.protectResult, PinInput, pinList=[x.value for x in config.ParentalControl.servicepin], triesEntry=config.ParentalControl.retries.servicepin, title=_("Please enter the correct pin code"), windowTitle=_("Enter pin code"))
 		else:
@@ -1045,7 +1086,9 @@ class GraphMultiEPG(Screen, HelpableScreen):
 		self.close(False)
 
 	def furtherOptions(self):
+		self.showhideWindow(True)
 		menu = []
+		keys = ["blue", "menu"]
 		text = _("Select action")
 		event = self["list"].getCurrent()[0]
 		if event:
@@ -1053,15 +1096,13 @@ class GraphMultiEPG(Screen, HelpableScreen):
 				if 'selectedevent' in p.__call__.func_code.co_varnames]
 			if menu:
 				text += _(": %s") % event.getEventName()
+			keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "red", "green", "yellow"][:len(menu)] + (len(menu) - 13) * [""] + keys
 		menu.append((_("Timer Overview"), self.openTimerOverview))
-		menu.append((_("Setup menu"), self.showSetup))
-		if len(menu) == 1:
-			menu and menu[0][1]()
-		elif len(menu) > 1:
-			def boxAction(choice):
-				if choice:
-					choice[1]()
-			self.session.openWithCallback(boxAction, ChoiceBox, title=text, list=menu)
+		menu.append((_("Setup menu"), self.showSetup, "menu"))
+		def boxAction(choice):
+			if choice:
+				choice[1]()
+		self.session.openWithCallback(boxAction, ChoiceBox, title=text, list=menu, windowTitle=_("Further options"), keys=keys)
 
 	def runPlugin(self, plugin):
 		event = self["list"].getCurrent()
@@ -1071,6 +1112,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 		self.session.open(TimerEditList)
 
 	def infoKeyPressed(self):
+		self.showhideWindow(True)
 		cur = self["list"].getCurrent()
 		event = cur[0]
 		service = cur[1]
@@ -1083,32 +1125,34 @@ class GraphMultiEPG(Screen, HelpableScreen):
 	def openSingleServiceEPG(self):
 		ref = self["list"].getCurrent()[1].ref.toString()
 		if ref:
-			self.session.openWithCallback(self.doRefresh, EPGSelection, ref, self.zapFunc, serviceChangeCB=self["list"].moveToFromEPG)
+			self.session.openWithCallback(self.doRefresh, EPGSelection, ref, self.zapFunc, serviceChangeCB=self["list"].moveToFromEPG, parent=self)
 
 	def openMultiServiceEPG(self):
 		if self.services:
-			self.session.openWithCallback(self.doRefresh, EPGSelection, self.services, self.zapFunc, None, self.bouquetChangeCB)
+			self.session.openWithCallback(self.doRefresh, EPGSelection, self.services, self.zapFunc, None, self.bouquetChangeCB, parent=self)
 
 	def setServices(self, services):
 		self.services = services
 		self["list"].resetOffset()
 		self.onCreate()
 
+	def setService(self, service):
+		self.serviceref = service
+
 	def doRefresh(self, answer):
-		serviceref = Screens.InfoBar.InfoBar.instance.servicelist.getCurrentSelection()
 		l = self["list"]
-		l.moveToService(serviceref)
-		l.setCurrentlyPlaying(serviceref)
+		l.moveToService(self.serviceref)
+		l.setCurrentlyPlaying(Screens.InfoBar.InfoBar.instance.servicelist.getCurrentSelection())
 		self.moveTimeLines()
 
 	def onCreate(self):
-		serviceref = Screens.InfoBar.InfoBar.instance.servicelist.getCurrentSelection()
+		self.serviceref = self.serviceref or Screens.InfoBar.InfoBar.instance.servicelist.getCurrentSelection()
 		l = self["list"]
 		l.setShowServiceMode(config.misc.graph_mepg.servicetitle_mode.value)
 		self["timeline_text"].setDateFormat(config.misc.graph_mepg.servicetitle_mode.value)
 		l.fillMultiEPG(self.services, self.ask_time)
-		l.moveToService(serviceref)
-		l.setCurrentlyPlaying(serviceref)
+		l.moveToService(self.serviceref)
+		l.setCurrentlyPlaying(self.serviceref)
 		self.moveTimeLines()
 
 	def eventViewCallback(self, setEvent, setService, val):
@@ -1123,6 +1167,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 			setEvent(cur[0])
 
 	def preview(self):
+		self.showhideWindow(True)
 		ref = self["list"].getCurrent()[1]
 		if ref:
 			self.zapFunc(ref.ref, preview = True)
@@ -1130,6 +1175,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 			self["list"].l.invalidate()
 
 	def zapTo(self):
+		self.showhideWindow(True)
 		if self.zapFunc and self.key_red_choice == self.ZAP:
 			ref = self["list"].getCurrent()[1]
 			if ref:
@@ -1203,6 +1249,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 				self.key_green_choice = self.ADD_TIMER
 
 	def timerAdd(self):
+		self.showhideWindow(True)
 		cur = self["list"].getCurrent()
 		event = cur[0]
 		serviceref = cur[1]
@@ -1226,7 +1273,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 			prev_state = timer.state
 			isRunning = prev_state in (1, 2)
 			title_text = isRepeat and _("Attention, this is repeated timer!\n") or ""
-			firstNextRepeatEvent = isRepeat and (begin < timer.begin <= end or timer.begin <= begin <= timer.end) and not timer.justplay 
+			firstNextRepeatEvent = isRepeat and (begin < timer.begin <= end or timer.begin <= begin <= timer.end) and not timer.justplay
 			menu = [(_("Delete timer"), "delete"),(_("Edit timer"), "edit")]
 			buttons = ["red", "green"]
 			if not isRunning:
@@ -1293,6 +1340,9 @@ class GraphMultiEPG(Screen, HelpableScreen):
 							entry.end -= 30
 							change_time = True
 						elif entry.begin == conflict_end:
+							entry.begin += 30
+							change_time = True
+						elif entry.begin == conflict_begin and (entry.service_ref and entry.service_ref.ref and entry.service_ref.ref.flags & eServiceReference.isGroup):
 							entry.begin += 30
 							change_time = True
 						if change_time:

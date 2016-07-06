@@ -4,8 +4,8 @@
 #include <aio.h>
 #include <lib/dvb/idvb.h>
 #include <lib/dvb/idemux.h>
-#include <lib/base/filepush.h>
 #include <lib/dvb/pvrparse.h>
+#include "filepush.h"
 
 class eDVBDemux: public iDVBDemux
 {
@@ -46,6 +46,10 @@ private:
 	friend class eDVBTSRecorder;
 	friend class eDVBCAService;
 	friend class eTSMPEGDecoder;
+#ifdef HAVE_AMLOGIC
+	int m_pvr_fd;
+	friend class eAMLTSMPEGDecoder;
+#endif
 	Signal1<void, int> m_event;
 
 	int openDemux(void);

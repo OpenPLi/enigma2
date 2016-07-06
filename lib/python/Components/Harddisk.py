@@ -1,6 +1,7 @@
 import os
 import time
 from Tools.CList import CList
+from Tools.HardwareInfo import HardwareInfo
 from SystemInfo import SystemInfo
 from Components.Console import Console
 import Task
@@ -44,7 +45,7 @@ DEVTYPE_UDEV = 0
 DEVTYPE_DEVFS = 1
 
 class Harddisk:
-	def __init__(self, device, removable):
+	def __init__(self, device, removable=False):
 		self.device = device
 
 		if os.access("/dev/.udev", 0):
@@ -52,7 +53,8 @@ class Harddisk:
 		elif os.access("/dev/.devfsd", 0):
 			self.type = DEVTYPE_DEVFS
 		else:
-			print "Unable to determine structure of /dev"
+			print "[Harddisk] Unable to determine structure of /dev"
+			self.card = False
 
 		self.max_idle_time = 0
 		self.idle_running = False
@@ -67,9 +69,18 @@ class Harddisk:
 		self.mount_device = None
 		self.phys_path = os.path.realpath(self.sysfsPath('device'))
 
+		self.removable = removable
+		self.internal = "pci" in self.phys_path or "ahci" in self.phys_path
+		try:
+			data = open("/sys/block/%s/queue/rotational" % device, "r").read().strip()
+			self.rotational = int(data)
+		except:
+			self.rotational = True
+
 		if self.type == DEVTYPE_UDEV:
 			self.dev_path = '/dev/' + self.device
 			self.disk_path = self.dev_path
+			self.card = "sdhci" in self.phys_path
 
 		elif self.type == DEVTYPE_DEVFS:
 			tmp = readFile(self.sysfsPath('dev')).split(':')
@@ -86,9 +97,10 @@ class Harddisk:
 					self.dev_path = dev_path
 					self.disk_path = disk_path
 					break
+			self.card = self.device[:2] == "hd" and "host0" not in self.dev_path
 
-		print "new Harddisk", self.device, '->', self.dev_path, '->', self.disk_path
-		if not removable:
+		print "[Harddisk] new device", self.device, '->', self.dev_path, '->', self.disk_path
+		if not removable and not self.card:
 			self.startIdle()
 
 	def __lt__(self, ob):
@@ -96,7 +108,10 @@ class Harddisk:
 
 	def partitionPath(self, n):
 		if self.type == DEVTYPE_UDEV:
-			return self.dev_path + n
+			if self.dev_path.startswith('/dev/mmcblk0'):
+				return self.dev_path + "p" + n
+			else:
+				return self.dev_path + n
 		elif self.type == DEVTYPE_DEVFS:
 			return self.dev_path + '/part' + n
 
@@ -112,28 +127,36 @@ class Harddisk:
 		ret = _("External")
 		# SD/MMC(F1 specific)
 		if self.type == DEVTYPE_UDEV:
-			card = "sdhci" in self.phys_path
 			type_name = " (SD/MMC)"
 		# CF(7025 specific)
 		elif self.type == DEVTYPE_DEVFS:
-			card = self.device[:2] == "hd" and "host0" not in self.dev_path
 			type_name = " (CF)"
 
-		internal = "pci" in self.phys_path or "ahci" in self.phys_path
-
-		if card:
+		if self.card:
 			ret += type_name
-		elif internal:
-			ret = _("Internal")
+		else:
+			if self.internal:
+				ret = _("Internal")
+			if not self.rotational:
+				ret += " (SSD)"
 		return ret
 
 	def diskSize(self):
-		line = readFile(self.sysfsPath('size'))
+		cap = 0
 		try:
+			line = readFile(self.sysfsPath('size'))
 			cap = int(line)
+			return cap / 1000 * 512 / 1000
 		except:
-			return 0;
-		return cap / 1000 * 512 / 1000
+			dev = self.findMount()
+			if dev:
+				try:
+					stat = os.statvfs(dev)
+					cap = int(stat.f_blocks * stat.f_bsize)
+					return cap / 1000 / 1000
+				except:
+					pass
+		return cap
 
 	def capacity(self):
 		cap = self.diskSize()
@@ -154,7 +177,7 @@ class Harddisk:
 			elif self.device.startswith('mmcblk0'):
 				return readFile(self.sysfsPath('device/name'))
 			else:
-				raise Exception, "no hdX or sdX or mmcX"
+				raise Exception, "[Harddisk] no hdX or sdX or mmcX"
 		except Exception, e:
 			print "[Harddisk] Failed to get model:", e
 			return "-?-"
@@ -163,7 +186,7 @@ class Harddisk:
 		dev = self.findMount()
 		if dev:
 			stat = os.statvfs(dev)
-			return (stat.f_bfree/1000) * (stat.f_bsize/1000)
+			return (stat.f_bfree/1000) * (stat.f_bsize/1024)
 		return -1
 
 	def numPartitions(self):
@@ -195,6 +218,7 @@ class Harddisk:
 				self.mount_device = parts[0]
 				self.mount_path = parts[1]
 				return parts[1]
+		return None
 
 	def enumMountDevices(self):
 		for parts in getProcMounts():
@@ -235,9 +259,9 @@ class Harddisk:
 		try:
 			fstab = open("/etc/fstab")
 			lines = fstab.readlines()
+			fstab.close()
 		except IOError:
 			return -1
-		fstab.close()
 		for line in lines:
 			parts = line.strip().split(" ")
 			fspath = os.path.realpath(parts[0])
@@ -250,7 +274,7 @@ class Harddisk:
 		res = -1
 		if self.type == DEVTYPE_UDEV:
 			# we can let udev do the job, re-read the partition table
-			res = os.system('sfdisk -R ' + self.disk_path)
+			res = os.system('hdparm -z ' + self.disk_path)
 			# give udev some time to make the mount, which it will do asynchronously
 			from time import sleep
 			sleep(3)
@@ -539,7 +563,7 @@ class Partition:
 			return None
 
 	def tabbedDescription(self):
-		if self.mountpoint.startswith('/media/net'):
+		if self.mountpoint.startswith('/media/net') or self.mountpoint.startswith('/media/autofs'):
 			# Network devices have a user defined name
 			return self.description
 		return self.description + '\t' + self.mountpoint
@@ -553,7 +577,7 @@ class Partition:
 			if mounts is None:
 				mounts = getProcMounts()
 			for parts in mounts:
-				if parts[1] == self.mountpoint:
+				if self.mountpoint.startswith(parts[1]): # use startswith so a mount not ending with '/' is also detected.
 					return True
 		return False
 
@@ -562,8 +586,12 @@ class Partition:
 			if mounts is None:
 				mounts = getProcMounts()
 			for fields in mounts:
-				if fields[1] == self.mountpoint:
-					return fields[2]
+				if self.mountpoint.endswith('/') and not self.mountpoint == '/':
+					if fields[1] + '/' == self.mountpoint:
+						return fields[2]
+				else:
+					if fields[1] == self.mountpoint:
+						return fields[2]
 		return ''
 
 DEVICEDB =  \
@@ -633,9 +661,17 @@ class HarddiskManager:
 		is_cdrom = False
 		partitions = []
 		try:
-			removable = bool(int(readFile(devpath + "/removable")))
-			dev = int(readFile(devpath + "/dev").split(':')[0])
-			if dev in (1, 7, 31, 253): # ram, loop, mtdblock, romblock
+			if os.path.exists(devpath + "/removable"):
+				removable = bool(int(readFile(devpath + "/removable")))
+			if os.path.exists(devpath + "/dev"):
+				dev = int(readFile(devpath + "/dev").split(':')[0])
+			else:
+				dev = None
+			if HardwareInfo().get_device_model().startswith('vusolo4k'):
+				devlist = [1, 7, 31, 253, 254, 179] # ram, loop, mtdblock, romblock, ramzswap, mmc
+			else:
+				devlist = [1, 7, 31, 253, 254] # ram, loop, mtdblock, romblock, ramzswap
+			if dev in devlist:
 				blacklisted = True
 			if blockdev[0:2] == 'sr':
 				is_cdrom = True
@@ -647,7 +683,7 @@ class HarddiskManager:
 				except IOError:
 					error = True
 			# check for partitions
-			if not is_cdrom:
+			if not is_cdrom and os.path.exists(devpath):
 				for partition in os.listdir(devpath):
 					if partition[0:len(blockdev)] != blockdev:
 						continue
@@ -886,7 +922,7 @@ class MountTask(Task.LoggingTask):
 		if self.hdd.type == DEVTYPE_UDEV:
 			# we can let udev do the job, re-read the partition table
 			# Sorry for the sleep 2 hack...
-			self.setCmdline('sleep 2; sfdisk -R ' + self.hdd.disk_path)
+			self.setCmdline('sleep 2; hdparm -z ' + self.hdd.disk_path)
 			self.postconditions.append(Task.ReturncodePostcondition())
 
 
@@ -906,7 +942,7 @@ class MkfsTask(Task.LoggingTask):
 			if '/' in data:
 				try:
 					d = data.strip(' \x08\r\n').split('/',1)
-					if ('\x08' in d[1]):
+					if '\x08' in d[1]:
 						d[1] = d[1].split('\x08',1)[0]
 					self.setProgress(80*int(d[0])/int(d[1]))
 				except Exception, e:
@@ -917,11 +953,23 @@ class MkfsTask(Task.LoggingTask):
 
 harddiskmanager = HarddiskManager()
 
-def internalHDDNotSleeping():
+def isSleepStateDevice(device):
+	ret = os.popen("hdparm -C %s" % device).read()
+	if 'SG_IO' in ret or 'HDIO_DRIVE_CMD' in ret:
+		return None
+	if 'drive state is:  standby' in ret or 'drive state is:  idle' in ret:
+		return True
+	elif 'drive state is:  active/idle' in ret:
+		return False
+	return None
+
+def internalHDDNotSleeping(external=False):
+	state = False
 	if harddiskmanager.HDDCount():
 		for hdd in harddiskmanager.HDDList():
-			if ("pci" in hdd[1].phys_path or "ahci" in hdd[1].phys_path) and hdd[1].max_idle_time and not hdd[1].isSleeping():
-				return True
-	return False
+			if hdd[1].internal or external:
+				if hdd[1].idle_running and hdd[1].max_idle_time and not hdd[1].isSleeping():
+					state = True
+	return state
 
 SystemInfo["ext4"] = isFileSystemSupported("ext4")
