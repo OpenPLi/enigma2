@@ -46,8 +46,8 @@ class InstallWizard(Screen, ConfigListScreen):
 				self.createMenu()
 		elif self.index == self.STATE_CHOISE_CHANNELLIST:
 			self.enabled = ConfigYesNo(default = True)
-			modes = {"19e-23e": "Astra 1 Astra 3", "19e-23e-28e": "Astra 1 Astra 2 Astra 3", "13e-19e-23e-28e": "Astra 1 Astra 2 Astra 3 Hotbird", "kabelnl": "Kabel-NL"}
-			self.channellist_type = ConfigSelection(choices = modes, default = "19e-23e")
+			modes = {"19e-23e-basis": "Astra1 Astra3 basis", "19e-23e": "Astra 1 Astra 3", "19e-23e-28e": "Astra 1 Astra 2 Astra 3", "13e-19e-23e-28e": "Astra 1 Astra 2 Astra 3 Hotbird", "kabelnl": "Kabel-NL"}
+			self.channellist_type = ConfigSelection(choices = modes, default = "19e-23e-basis")
 			self.createMenu()
 		elif self.index == self.STATE_CHOISE_SOFTCAM:
 			self.enabled = ConfigYesNo(default = True)
