@@ -16,30 +16,10 @@ import xml.etree.cElementTree
 
 from Screens.Setup import Setup, getSetupTitle
 
-mainmenu = _("Main menu")
-
 # read the menu
 mdom = xml.etree.cElementTree.parse(resolveFilename(SCOPE_SKIN, 'menu.xml'))
 
-class title_History:
-	def __init__(self):
-		self.thistory = ''
-	def reset(self):
-		self.thistory = ''
-	def reducehistory(self):
-		history_len = len(self.thistory.split('>'))
-		if(history_len < 3):
-			self.reset()
-			return
-		if(self.thistory == ''):
-			return
-		result = self.thistory.rsplit('>',2)
-		if(result[0] == ''):
-			self.reset()
-			return
-		self.thistory = result[0] + '> '
-
-t_history = title_History()
+menu_path = ""
 
 class MenuUpdater:
 	def __init__(self):
@@ -313,34 +293,15 @@ class Menu(Screen, ProtectedScreen):
 			})
 
 		a = parent.get("title", "").encode("UTF-8") or None
-		a = a and _(a)
-		if a is None:
-			a = _(parent.get("text", "").encode("UTF-8"))
-		else:
-			t_history.reset()
+		a = a and _(a) or _(parent.get("text", "").encode("UTF-8"))
 		self["title"] = StaticText(a)
 		Screen.setTitle(self, a)
 		self.menu_title = a
-
-		self["thistory"] = StaticText(t_history.thistory)
-		history_len = len(t_history.thistory)
-		self["title0"] = StaticText('')
-		self["title1"] = StaticText('')
-		self["title2"] = StaticText('')
-		if history_len < 13 :
-			self["title0"] = StaticText(a)
-		elif history_len < 21 :
-			self["title0"] = StaticText('')
-			self["title1"] = StaticText(a)
-		else:
-			self["title0"] = StaticText('')
-			self["title1"] = StaticText('')
-			self["title2"] = StaticText(a)
-
-		if(t_history.thistory ==''):
-			t_history.thistory = str(a) + ' > '
-		else:
-			t_history.thistory = t_history.thistory + str(a) + ' > '
+		global menu_path
+		self.menu_path_compressed = menu_path
+		menu_path = menu_path and menu_path + " > " + a or a
+		self["menu_path"] = StaticText(menu_path)
+		self["menu_path_compressed"] = StaticText(self.menu_path_compressed and self.menu_path_compressed + " >" or "")
 
 	def keyNumberGlobal(self, number):
 		# print "menu keyNumber:", number
@@ -352,11 +313,13 @@ class Menu(Screen, ProtectedScreen):
 			self.okbuttonClick()
 
 	def closeNonRecursive(self):
-		t_history.reducehistory()
+		global menu_path
+		menu_path = self.menu_path_compressed
 		self.close(False)
 
 	def closeRecursive(self):
-		t_history.reset()
+		global menu_path
+		menu_path = ""
 		self.close(True)
 
 	def createSummary(self):

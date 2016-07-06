@@ -28,6 +28,7 @@ class PliExtraInfo(Poll, Converter, object):
 			( "0xb00",  "0xbff", "Conax",    "Co", True  ),
 			( "0xd00",  "0xdff", "CryptoW",  "Cw", True  ),
 			( "0xe00",  "0xeff", "PowerVU",  "P",  False ),
+			("0x1000", "0x10FF", "Tandberg", "TB", False ),
 			("0x1700", "0x17ff", "Beta",     "B",  True  ),
 			("0x1800", "0x18ff", "Nagra",    "N",  True  ),
 			("0x2600", "0x2600", "Biss",     "Bi", False ),
@@ -49,6 +50,7 @@ class PliExtraInfo(Poll, Converter, object):
 			("CryptoCaidDreAvailable",	"D",	False),
 			("CryptoCaidBulCrypt1Available","B1",	False),
 			("CryptoCaidBulCrypt2Available","B2",	False),
+			("CryptoCaidTandbergAvailable", "TB",   False),
 			("CryptoCaidSecaSelected",	"S",	True),
 			("CryptoCaidViaSelected",	"V",	True),
 			("CryptoCaidIrdetoSelected",	"I",	True),
@@ -62,6 +64,7 @@ class PliExtraInfo(Poll, Converter, object):
 			("CryptoCaidDreSelected",	"D",	True),
 			("CryptoCaidBulCrypt1Selected",	"B1",	True),
 			("CryptoCaidBulCrypt2Selected",	"B2",	True),
+			("CryptoCaidTandbergSelected",  "TB",   True),
 		)
 		self.ecmdata = GetEcmInfo()
 		self.feraw = self.fedata = self.updateFEdata = None
