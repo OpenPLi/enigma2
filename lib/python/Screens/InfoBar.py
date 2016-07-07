@@ -24,6 +24,7 @@ from Screens.InfoBarGenerics import InfoBarShowHide, \
 from Screens.Hotkey import InfoBarHotkey
 
 profile("LOAD:InitBar_Components")
+from Components.About import about
 from Components.ActionMap import HelpableActionMap
 from Components.config import config
 from Components.ServiceEventTracker import ServiceEventTracker, InfoBarBase
@@ -50,8 +51,10 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 				"showMovies": (self.showMovies, _("Play recorded movies...")),
 				"showRadio": (self.showRadio, _("Show the radio player...")),
 				"showTv": (self.showTv, _("Show the tv player...")),
+				"toggleTvRadio": (self.toggleTvRadio, _("Toggle the tv and the radio player...")),
 			}, prio=2)
 
+		self.radioTV = 0
 		self.allowPiP = True
 
 		for x in HelpableScreen, \
@@ -105,6 +108,14 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 	def __checkServiceStarted(self):
 		self.serviceStarted()
 		self.onShown.remove(self.__checkServiceStarted)
+
+	def toggleTvRadio(self): 
+		if self.radioTV == 1:
+			self.radioTV = 0
+			self.showTv() 
+		else: 
+			self.radioTV = 1
+			self.showRadio() 
 
 	def showTv(self):
 		self.showTvChannelList(True)
