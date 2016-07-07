@@ -20,7 +20,7 @@ from Screens.Setup import Setup, getSetupTitle
 # read the menu
 mdom = xml.etree.cElementTree.parse(resolveFilename(SCOPE_SKIN, 'menu.xml'))
 
-menu_path = ""
+menu_path = []
 
 class MenuUpdater:
 	def __init__(self):
@@ -199,10 +199,10 @@ class Menu(Screen, ProtectedScreen):
 		Screen.setTitle(self, title)
 		self.menu_title = title
 		global menu_path
-		self.menu_path_compressed = menu_path
-		menu_path = menu_path and menu_path + " > " + title or title
-		self["menu_path"] = StaticText(menu_path)
-		self["menu_path_compressed"] = StaticText(self.menu_path_compressed and self.menu_path_compressed + " >" or "")
+		if not menu_path or menu_path[-1] != title:
+			menu_path.append(title)
+		self["menu_path"] = StaticText(" > ".join(menu_path) + " >")
+		self["menu_path_compressed"] = StaticText(len(menu_path) > 1 and " > ".join(menu_path[:-1]) + " >" or "")
 
 	def createMenuList(self):
 		self.list = []
@@ -288,12 +288,12 @@ class Menu(Screen, ProtectedScreen):
 
 	def closeNonRecursive(self):
 		global menu_path
-		menu_path = self.menu_path_compressed
+		menu_path = menu_path and menu_path[:-1]
 		self.close(False)
 
 	def closeRecursive(self):
 		global menu_path
-		menu_path = ""
+		menu_path = []
 		self.close(True)
 
 	def createSummary(self):
