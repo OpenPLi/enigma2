@@ -108,7 +108,7 @@ int eDVBScan::isValidONIDTSID(int orbital_position, eOriginalNetworkID onid, eTr
 		ret = orbital_position != 3195 || tsid != 21;
 		break;
 	case 126:  // 11221H and 11387H on Utelsat 7.0E with same ONID/TSID (126/40700)
-		ret = orbital_position != 70 || tsid != 40700;
+		ret = orbital_position != 70 || (tsid != 40700 && tsid != 30300);
 		break;
 	case 3622:  // 11881H and 12284V on Badr 26.0E with same ONID/TSID (3622/100)
 		ret = orbital_position != 260 || tsid != 100;
