@@ -29,11 +29,16 @@ def remove_path():
 	menu.path = menu.path and menu.path[:-1]
 
 def setmenu_path(self, title):
-	if not menu.path or menu.path[-1] != title:
-		self.onClose.append(remove_path)
-		menu.path.append(title)
-	self["menu_path"] = StaticText(menu.path and " > ".join(menu.path))
-	self["menu_path_compressed"] = StaticText(len(menu.path) > 1 and " > ".join(menu.path[:-1]) + " >" or "")
+	if config.usage.menu_path.value != "off":
+		if not menu.path or menu.path[-1] != title:
+			self.onClose.append(remove_path)
+			menu.path.append(title)
+		if config.usage.menu_path.value == "small":
+			self["menu_path_compressed"] = StaticText(len(menu.path) > 1 and " > ".join(menu.path[:-1]) + " >" or "")
+		else:
+			self.setTitle(menu.path and " > ".join(menu.path) or "")
+			return
+	self.setTitle(title)
 
 class MenuUpdater:
 	def __init__(self):
@@ -210,7 +215,6 @@ class Menu(Screen, ProtectedScreen):
 		title = title and _(title) or _(parent.get("text", "").encode("UTF-8"))
 		title = self.__class__.__name__ == "MenuSort" and _("Menusort (%s)") % title or title
 		self["title"] = StaticText(title)
-		Screen.setTitle(self, title)
 		self.menu_title = title
 		setmenu_path(self, title)
 
