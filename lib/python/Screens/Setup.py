@@ -106,6 +106,8 @@ class Setup(ConfigListScreen, Screen):
 
 		self.changedEntry()
 		self.onLayoutFinish.append(self.layoutFinished)
+		from Screens.Menu import setmenu_path
+		setmenu_path(self, self.setup_title)
 
 	def layoutFinished(self):
 		self.setTitle(_(self.setup_title))
