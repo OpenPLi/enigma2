@@ -208,6 +208,7 @@ class Menu(Screen, ProtectedScreen):
 
 		title = parent.get("title", "").encode("UTF-8") or None
 		title = title and _(title) or _(parent.get("text", "").encode("UTF-8"))
+		title = self.__class__.__name__ == "MenuSort" and _("Menusort (%s)") % title or title
 		self["title"] = StaticText(title)
 		Screen.setTitle(self, title)
 		self.menu_title = title
@@ -358,6 +359,9 @@ class MenuSort(Menu):
 			"blue": self.resetSortOrder,
 		})
 		self.onLayoutFinish.append(self.selectionChanged)
+
+	def isProtected(self):
+		return config.ParentalControl.setuppinactive.value and config.ParentalControl.config_sections.menu_sort.value
 
 	def resetSortOrder(self, key = None):
 		config.usage.menu_sort_weight.value = { "mainmenu" : {"submenu" : {} }}
