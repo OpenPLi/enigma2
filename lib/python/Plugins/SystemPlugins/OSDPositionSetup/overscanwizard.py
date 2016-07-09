@@ -32,7 +32,7 @@ class OverscanWizard(Screen, ConfigListScreen):
 		from Components.ActionMap import ActionMap
 		from Components.Button import Button
 
-		self["title"] = Label(_("Overscan Wizard"))
+		self["title"] = Label(_("Overscan wizard"))
 		self["introduction"] = Label()
 
 		self["actions"] = ActionMap(["SetupActions", "ColorActions", "MenuActions"],
@@ -82,7 +82,7 @@ class OverscanWizard(Screen, ConfigListScreen):
 				"If you see the tips of all eight arrowheads, then your TV has overscan disabled.\n\n"
 				"Test Pattern by TigerDave - www.tigerdave.com/ht_menu.htm"))
 			self.yes_no = ConfigYesNo(default = True)
-			self.list.append(getConfigListEntry(_("Do you see all the eight arrowheads?"), self.yes_no))
+			self.list.append(getConfigListEntry(_("Did you see all eight arrow heads?"), self.yes_no))
 			self.save_new_position = False
 			setPosition(0, 720, 0, 576)
 		elif self.step == 2:
