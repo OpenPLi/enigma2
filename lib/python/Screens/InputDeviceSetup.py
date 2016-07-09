@@ -306,7 +306,7 @@ class RemoteControlType(Screen, ConfigListScreen):
 			("14", _("xp1000")),
 			("8", _("VU+")),
 			("18", _("F1/F3/F4")),
-			("16", _("HD1100/HD1200/HD1265/et7x00/et8500")),
+			("16", _("HD1100/HD1200/HD1265/et7x00/et8500/et7000mini")),
 			("19", _("HD2400")),
 			("20", _("Zgemma Star S/2S/H1/H2")),
 			("21", _("Zgemma H.S/H.2S/H.2H/H5"))
@@ -336,7 +336,8 @@ class RemoteControlType(Screen, ConfigListScreen):
 			("et8500", 16),
 			("sh1", 20),
 			("h3", 21),
-			("h5", 21)
+			("h5", 21),
+			("et7000mini", 16)
 		]
 
 	def __init__(self, session):
