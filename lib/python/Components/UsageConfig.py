@@ -77,6 +77,10 @@ def InitUsageConfig():
 		("a_z", _("alphabetical")),
 		("default", _("Default")),
 		("user", _("user defined")),])
+	config.usage.menu_path = ConfigSelection(default = "off", choices = [
+		("off", _("Disabled")),
+		("small", _("Small")),
+		("large", _("Large")),])
 	config.usage.enable_tt_caching = ConfigYesNo(default = True)
 	choicelist = []
 	for i in (10, 30):
