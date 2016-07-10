@@ -27,12 +27,12 @@ class OverscanWizard(Screen, ConfigListScreen):
 			</screen>"""
 
 		Screen.__init__(self, session)
-		self.setup_title = _("Overscan wizard")
+		self.setup_title = _("Overscan Wizard")
 
 		from Components.ActionMap import ActionMap
 		from Components.Button import Button
 
-		self["title"] = Label(_("Overscan wizard"))
+		self["title"] = Label(_("Overscan Wizard"))
 		self["introduction"] = Label()
 
 		self["actions"] = ActionMap(["SetupActions", "ColorActions", "MenuActions"],
