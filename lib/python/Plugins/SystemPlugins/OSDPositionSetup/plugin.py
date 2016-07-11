@@ -29,12 +29,12 @@ def main(session, **kwargs):
 	session.open(OverscanWizard, timeOut=False)
 
 def startSetup(menuid):
-	return menuid == "system" and [(_("Overscan Wizard"), main, "sd_position_setup", 0)] or []
+	return menuid == "system" and [(_("Overscan wizard"), main, "sd_position_setup", 0)] or []
 
 def startup(reason, **kwargs):
 	setConfiguredPosition()
 
 def Plugins(**kwargs):
 	from Plugins.Plugin import PluginDescriptor
-	return [PluginDescriptor(name = "Overscan Wizard", description = "", where = PluginDescriptor.WHERE_SESSIONSTART, fnc = startup),
-		PluginDescriptor(name = "Overscan Wizard", description = _("Wizard to arrange the overscan"), where = PluginDescriptor.WHERE_MENU, fnc = startSetup)]
+	return [PluginDescriptor(name = "Overscan wizard", description = "", where = PluginDescriptor.WHERE_SESSIONSTART, fnc = startup),
+		PluginDescriptor(name = "Overscan wizard", description = _("Wizard to arrange the overscan"), where = PluginDescriptor.WHERE_MENU, fnc = startSetup)]
