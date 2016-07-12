@@ -75,6 +75,9 @@ class GUISkin:
 	def clearScreenPath(self):
 		screen.path = []
 
+	def removeScreenPath(self):
+		screen.path = screen.path and screen.path[:-1]
+
 	def setScreenPathMode(self, mode):
 		self.screenPathMode = mode
 
