@@ -207,8 +207,7 @@ class HotkeySetup(Screen):
 	def __init__(self, session, args=None):
 		Screen.__init__(self, session)
 		self.session = session
-		from Screens.Menu import setmenu_path
-		setmenu_path(self, _("Hotkey Setup"))
+		self.setTitle(_("Hotkey Setup"))
 		self["key_red"] = Button(_("Exit"))
 		self["key_green"] = Button(_("Toggle Extra Keys"))
 		self.list = []
@@ -316,8 +315,7 @@ class HotkeySetupSelect(Screen):
 		self.skinName="HotkeySetup"
 		self.session = session
 		self.key = key
-		from Screens.Menu import setmenu_path
-		setmenu_path(self, _("Hotkey Setup") + " " + key[0][0])
+		self.setTitle(_("Hotkey Setup") + " " + key[0][0])
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("Save"))
 		self.mode = "list"
