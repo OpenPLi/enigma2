@@ -258,6 +258,10 @@ class InfoBarShowHide(InfoBarScreenSaver):
 			self.actualSecondInfoBarScreen = config.usage.show_simple_second_infobar.value and self.secondInfoBarScreenSimple.skinAttributes and self.secondInfoBarScreenSimple or self.secondInfoBarScreen
 
 		self.onLayoutFinish.append(self.__layoutFinished)
+		self.onExecBegin.append(self.__onExecBegin)
+
+	def __onExecBegin(self):
+		self.clearScreenPath()
 
 	def __layoutFinished(self):
 		if self.actualSecondInfoBarScreen:

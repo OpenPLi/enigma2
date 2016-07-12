@@ -23,7 +23,7 @@ class RecordPathsSettings(Screen,ConfigListScreen):
 		Screen.__init__(self, session)
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
-
+		self.setTitle(_("Recording paths"))
 		ConfigListScreen.__init__(self, [])
 		self.initConfigList()
 

@@ -36,8 +36,7 @@ class ParentalControlSetup(Screen, ConfigListScreen, ProtectedScreen):
 		# for the skin: first try ParentalControlSetup, then Setup, this allows individual skinning
 		self.skinName = ["ParentalControlSetup", "Setup" ]
 		self.setup_title = _("Parental control setup")
-		from Screens.Menu import setmenu_path
-		setmenu_path(self, self.setup_title)
+		self.setTitle(self.setup_title)
 		self.onChangedEntry = [ ]
 
 		self.list = []
