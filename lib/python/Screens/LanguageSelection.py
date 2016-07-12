@@ -32,8 +32,6 @@ class LanguageSelection(Screen):
 
 		self.updateList()
 		self.onLayoutFinish.append(self.selectActiveLanguage)
-		from Screens.Menu import setmenu_path
-		setmenu_path(self, _("Language selection"))
 
 		self["actions"] = ActionMap(["OkCancelActions"],
 		{
@@ -42,6 +40,7 @@ class LanguageSelection(Screen):
 		}, -1)
 
 	def selectActiveLanguage(self):
+		self.setTitle(_("Language selection"))
 		pos = 0
 		for pos, x in enumerate(self.list):
 			if x[0] == self.oldActiveLanguage:
