@@ -87,7 +87,7 @@ class OverscanWizard(Screen, ConfigListScreen):
 			setPosition(0, 720, 0, 576)
 		elif self.step == 2:
 			self.Timer.stop()
-			self["title"].setText(_("Overscan Wizard"))
+			self["title"].setText(_("Overscan wizard"))
 			self["introduction"].setText(_("It seems you did not see all the eight arrow heads. This means your TV is "
 				"has overscan enabled, and is not configured properly.\n\n"
 				"Please refer to your TVs manual to find how you can disable overscan on your TV. Look for terms like 'Just fit', 'Full width', etc. "
@@ -118,14 +118,14 @@ class OverscanWizard(Screen, ConfigListScreen):
 				"Unfortunately, your model of receiver is not capable to adjust the dimensions of the user interface. "
 				"If not everything is visible, you should change the installed skin to one that supports the overscan area of your TV.\n\n"
 				"When you select a different skin, the user interface of your receiver will restart.\n\n"
-				"Note: you can always start the Overscan Wizard later,  via\n\nmenu->installation->system->Overscan Wizard"))
+				"Note: you can always start the Overscan wizard later,  via\n\nmenu->installation->system->Overscan wizard"))
 			self.yes_no.value = False
 			self.list.append(getConfigListEntry(_("Do you want to select a different skin?"), self.yes_no))
 		elif self.step == 5:
 			self.Timer.stop()
-			self["title"].setText(_("Overscan Wizard"))
+			self["title"].setText(_("Overscan wizard"))
 			self["introduction"].setText(_("The overscan wizard has been completed.\n\n"
-				"Note: you can always start the Overscan Wizard later,  via\n\nmenu->installation->system->Overscan Wizard"))
+				"Note: you can always start the Overscan wizard later,  via\n\nmenu->installation->system->Overscan wizard"))
 			self.yes_no.value = True
 			self.list.append(getConfigListEntry(_("Do you want to quit the overscan wizard?"), self.yes_no))
 		elif self.step == 6:
@@ -140,7 +140,7 @@ class OverscanWizard(Screen, ConfigListScreen):
 
 	def TimerTimeout(self):
 		self.countdown -= 1
-		self["title"].setText(_("Overscan Wizard") + " (%s)" % self.countdown)
+		self["title"].setText(_("Overscan wizard") + " (%s)" % self.countdown)
 		if not(self.countdown):
 			self.keyCancel()
 
