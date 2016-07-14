@@ -7,6 +7,7 @@ from Sources.StaticText import StaticText
 class screenPath():
 	def __init__(self):
 		self.path = []
+		self.lastself = None
 screen = screenPath()
 
 class GUISkin:
@@ -74,9 +75,11 @@ class GUISkin:
 
 	def clearScreenPath(self):
 		screen.path = []
+		screen.lastself = None
 
 	def removeScreenPath(self):
 		screen.path = screen.path and screen.path[:-1]
+		screen.lastself = None
 
 	def setScreenPathMode(self, mode):
 		self.screenPathMode = mode
@@ -86,7 +89,11 @@ class GUISkin:
 		if self.screenPathMode is not None and title and config.usage.menu_path.value != "off":
 			if self.screenPathMode and not screen.path or screen.path and screen.path[-1] != title:
 				self.onClose.append(self.removeScreenPath)
-				screen.path.append(title)
+				if screen.lastself != self:
+					screen.path.append(title)
+					screen.lastself = self
+				elif screen.path:
+					screen.path[-1] = title
 			if config.usage.menu_path.value == "small":
 				path_text = len(screen.path) > 1 and " > ".join(screen.path[:-1]) + " >" or ""
 			else:
