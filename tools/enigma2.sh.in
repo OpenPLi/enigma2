@@ -66,6 +66,12 @@ case $ret in
 		opkg upgrade 2>&1 | tee /home/root/ipkgupgrade.log
 		/sbin/reboot
 		;;
+	43)
+		#auto install and autobackup
+		[ -f /sys/class/vtconsole/vtcon1/bind ] && echo 1 > /sys/class/vtconsole/vtcon1/bind
+		/etc/init.d/autoinstall.sh
+		/etc/init.d/settings-restore.sh
+		;;
 	*)
 		;;
 esac
