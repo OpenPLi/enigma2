@@ -97,7 +97,7 @@ class GUISkin:
 			if config.usage.menu_path.value == "small":
 				path_text = len(screen.path) > 1 and " > ".join(screen.path[:-1]) + " >" or ""
 			else:
-				title = screen.path and " > ".join(screen.path) or ""
+				title = screen.path and " > ".join(screen.path) or title
 		if self.instance:
 			self.instance.setTitle(title)
 		self["Title"].text = title
