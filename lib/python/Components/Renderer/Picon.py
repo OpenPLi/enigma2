@@ -66,10 +66,15 @@ def getPiconName(serviceName):
 	pngname = findPicon(sname)
 	if not pngname:
 		fields = sname.split('_', 3)
-		if len(fields) > 2 and fields[2] != '2':
-			#fallback to 1 for tv services with nonstandard servicetypes
-			fields[2] = '1'
-			pngname = findPicon('_'.join(fields))
+		if len(fields) > 2:
+			if fields[0] == '4097':
+				#fallback to 1 for iptv gstreeamer services
+				fields[0] = '1'
+				pngname = findPicon('_'.join(fields))
+			if not pngname and fields[2] != '2':
+				#fallback to 1 for tv services with nonstandard servicetypes
+				fields[2] = '1'
+				pngname = findPicon('_'.join(fields))
 	if not pngname: # picon by channel name
 		name = ServiceReference(serviceName).getServiceName()
 		name = unicodedata.normalize('NFKD', unicode(name, 'utf_8', errors='ignore')).encode('ASCII', 'ignore')
