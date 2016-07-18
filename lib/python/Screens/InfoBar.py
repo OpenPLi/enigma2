@@ -191,7 +191,7 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 		if not config.movielist.stop_service.value:
 			Screens.InfoBar.InfoBar.instance.callServiceStarted()
 		self.session.nav.playService(self.lastservice)
-		config.usage.last_movie_played.value = self.cur_service.toString()
+		config.usage.last_movie_played.value = self.cur_service and self.cur_service.toString() or ""
 		config.usage.last_movie_played.save()
 
 	def standbyCountChanged(self, value):
