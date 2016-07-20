@@ -105,8 +105,7 @@ class Setup(ConfigListScreen, Screen):
 		ConfigListScreen.__init__(self, list, session = session, on_change = self.changedEntry)
 
 		self.changedEntry()
-		from Screens.Menu import setmenu_path
-		setmenu_path(self, _(self.setup_title))
+		self.setTitle(_(self.setup_title))
 
 	def addItems(self, list, parentNode):
 		for x in parentNode:

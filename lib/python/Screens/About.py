@@ -85,7 +85,10 @@ class About(Screen):
 		else:
 			hddinfo = _("none")
 		self["hddA"] = StaticText(hddinfo)
-		AboutText += hddinfo
+		AboutText += hddinfo + "\n\n" + _("Network Info:")
+		for x in about.GetIPsFromNetworkInterfaces():
+			AboutText += "\n" + x[0] + ": " + x[1]
+
 		self["AboutScrollLabel"] = ScrollLabel(AboutText)
 		self["key_green"] = Button(_("Translations"))
 		self["key_red"] = Button(_("Latest Commits"))
@@ -114,6 +117,7 @@ class About(Screen):
 class TranslationInfo(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
+		self.setTitle(_("Translation"))
 		# don't remove the string out of the _(), or it can't be "translated" anymore.
 
 		# TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
@@ -150,6 +154,7 @@ class TranslationInfo(Screen):
 class CommitInfo(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
+		self.setTitle(_("Latest Commits"))
 		self.skinName = ["CommitInfo", "About"]
 		self["AboutScrollLabel"] = ScrollLabel(_("Please wait"))
 

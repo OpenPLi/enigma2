@@ -202,6 +202,7 @@
 		<key id="KEY_VIDEO" mapto="showMovies" flags="m"/>
 		<key id="KEY_RADIO" mapto="showRadio" flags="b"/>
 		<key id="KEY_TV" mapto="showTv" flags="b"/>
+		<key id="KEY_TV2" mapto="toggleTvRadio" flags="b"/>
 		<key id="KEY_FILE" mapto="showMovies" flags="m"/>
 		<key id="KEY_TEXT" mapto="showText" flags="m"/>
 	</map>
@@ -518,6 +519,7 @@
 
 	<map context="TvRadioActions">
 		<key id="KEY_TV" mapto="keyTV" flags="b"/>
+		<key id="KEY_TV2" mapto="keyTV" flags="b"/>
 		<key id="KEY_RADIO" mapto="keyRadio" flags="b"/>
 	</map>
 
@@ -539,6 +541,7 @@
 		<key id="KEY_PREVIOUS" mapto="prevService" flags="m"/>
 		<key id="KEY_PROGRAM" mapto="timerAdd" flags="m"/>
 		<key id="KEY_TV" mapto="preview" flags="m"/>
+		<key id="KEY_TV2" mapto="preview" flags="m"/>
 		<key id="KEY_REWIND" mapto="prevDay" flags="m"/>
 		<key id="KEY_FASTFORWARD" mapto="nextDay" flags="m"/>
 	</map>
@@ -558,6 +561,7 @@
 		<key id="KEY_PREVIOUS" mapto="prevService" flags="m"/>
 		<key id="KEY_PROGRAM" mapto="timerAdd" flags="m"/>
 		<key id="KEY_TV" mapto="preview" flags="m"/>
+		<key id="KEY_TV2" mapto="preview" flags="m"/>
 		<key id="KEY_RADIO" mapto="window" flags="m"/>
 		<key id="KEY_REWIND" mapto="prevDay" flags="m"/>
 		<key id="KEY_FASTFORWARD" mapto="nextDay" flags="m"/>
@@ -737,6 +741,8 @@
 		<key id="KEY_STOP" mapto="shift_stop" flags="l"/>
 		<key id="KEY_TV" mapto="stop" flags="b"/>
 		<key id="KEY_TV" mapto="shift_stop" flags="l"/>
+		<key id="KEY_TV2" mapto="stop" flags="b"/>
+		<key id="KEY_TV2" mapto="shift_stop" flags="l"/>
 
 		<key id="KEY_MENU" mapto="menu" flags="m"/>
 		<key id="KEY_SPACE" mapto="menu" flags="m"/>
@@ -800,6 +806,8 @@
 		<key id="KEY_RADIO" mapto="radio_long" flags="l"/>
 		<key id="KEY_TV" mapto="showTv" flags="b"/>
 		<key id="KEY_TV" mapto="showTv_long" flags="l"/>
+		<key id="KEY_TV2" mapto="toggleTvRadio" flags="b"/>
+		<key id="KEY_TV2" mapto="toggleTvRadio_long" flags="l"/>
 		<key id="KEY_TEXT" mapto="text" flags="m"/>
 		<key id="KEY_HELP" mapto="displayHelp" flags="b"/>
 		<key id="KEY_HELP" mapto="displayHelp_long" flags="l"/>

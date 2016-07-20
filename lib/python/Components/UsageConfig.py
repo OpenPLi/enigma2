@@ -160,6 +160,20 @@ def InitUsageConfig():
 	config.usage.inactivity_timer_blocktime_extra = ConfigYesNo(default = False)
 	config.usage.inactivity_timer_blocktime_extra_begin = ConfigClock(default = time.mktime((0, 0, 0, 6, 0, 0, 0, 0, 0)))
 	config.usage.inactivity_timer_blocktime_extra_end = ConfigClock(default = time.mktime((0, 0, 0, 9, 0, 0, 0, 0, 0)))
+	config.usage.inactivity_timer_blocktime_by_weekdays = ConfigYesNo(default = False)
+	config.usage.inactivity_timer_blocktime_day = ConfigSubDict()
+	config.usage.inactivity_timer_blocktime_begin_day = ConfigSubDict()
+	config.usage.inactivity_timer_blocktime_end_day = ConfigSubDict()
+	config.usage.inactivity_timer_blocktime_extra_day = ConfigSubDict()
+	config.usage.inactivity_timer_blocktime_extra_begin_day = ConfigSubDict()
+	config.usage.inactivity_timer_blocktime_extra_end_day = ConfigSubDict()
+	for i in range(7):
+		config.usage.inactivity_timer_blocktime_day[i] = ConfigYesNo(default = False)
+		config.usage.inactivity_timer_blocktime_begin_day[i] = ConfigClock(default = time.mktime((0, 0, 0, 18, 0, 0, 0, 0, 0)))
+		config.usage.inactivity_timer_blocktime_end_day[i] = ConfigClock(default = time.mktime((0, 0, 0, 23, 0, 0, 0, 0, 0)))
+		config.usage.inactivity_timer_blocktime_extra_day[i] = ConfigYesNo(default = False)
+		config.usage.inactivity_timer_blocktime_extra_begin_day[i] = ConfigClock(default = time.mktime((0, 0, 0, 6, 0, 0, 0, 0, 0)))
+		config.usage.inactivity_timer_blocktime_extra_end_day[i] = ConfigClock(default = time.mktime((0, 0, 0, 9, 0, 0, 0, 0, 0)))
 
 	choicelist = [("0", _("Disabled")),("event_standby", _("Standby after current event"))]
 	for i in range(900, 7201, 900):
@@ -472,6 +486,15 @@ def InitUsageConfig():
 			open(SystemInfo["HasBypassEdidChecking"], "w").write(configElement.value)
 		config.av.bypassEdidChecking = ConfigSelection(default = "00000000", choices = [ ("00000001", _("Yes")), ("00000000", _("No"))] )
 		config.av.bypassEdidChecking.addNotifier(setHasBypassEdidChecking)
+
+	if SystemInfo["HaveColorspace"]:
+		def setHaveColorspace(configElement):
+			open(SystemInfo["HaveColorspace"], "w").write(configElement.value)
+		if SystemInfo["HaveColorspaceSimple"]:
+			config.av.hdmicolorspace = ConfigSelection(default = "Edid(Auto)", choices={"Edid(Auto)": _("Auto"), "Hdmi_Rgb": _("RGB")})
+		else:
+			config.av.hdmicolorspace = ConfigSelection(default = "auto", choices={"auto": _("auto"), "rgb": _("rgb"), "420": _("420"), "422": _("422"), "444": _("444")})
+		config.av.hdmicolorspace.addNotifier(setHaveColorspace)
 
 	config.subtitles = ConfigSubsection()
 	config.subtitles.ttx_subtitle_colors = ConfigSelection(default = "1", choices = [

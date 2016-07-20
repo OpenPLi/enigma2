@@ -21,35 +21,30 @@ class Screen(dict, GUISkin):
 		self.skinName = self.__class__.__name__
 		self.session = session
 		self.parent = parent
-		GUISkin.__init__(self)
-
 		self.onClose = [ ]
 		self.onFirstExecBegin = [ ]
 		self.onExecBegin = [ ]
 		self.onExecEnd = [ ]
 		self.onShown = [ ]
-
 		self.onShow = [ ]
 		self.onHide = [ ]
-
 		self.execing = False
-
 		self.shown = True
+
 		# already shown is false until the screen is really shown (after creation)
 		self.already_shown = False
-
 		self.renderer = [ ]
 
 		# in order to support screens *without* a help,
 		# we need the list in every screen. how ironic.
 		self.helpList = [ ]
-
 		self.close_on_next_exec = None
 
 		# stand alone screens (for example web screens)
 		# don't care about having or not having focus.
 		self.stand_alone = False
 		self.keyboardMode = None
+		GUISkin.__init__(self)
 
 	def saveKeyboardMode(self):
 		rcinput = eRCInput.getInstance()

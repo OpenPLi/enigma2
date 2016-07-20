@@ -24,7 +24,7 @@ def LanguageEntryComponent(file, name, index):
 class LanguageSelection(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
-
+		self.setTitle(_("Language selection"))
 		self.oldActiveLanguage = language.getActiveLanguage()
 
 		self.list = []
@@ -40,7 +40,6 @@ class LanguageSelection(Screen):
 		}, -1)
 
 	def selectActiveLanguage(self):
-		self.setTitle(_("Language selection"))
 		pos = 0
 		for pos, x in enumerate(self.list):
 			if x[0] == self.oldActiveLanguage:

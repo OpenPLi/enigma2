@@ -9,6 +9,8 @@ current_notifications = [ ]
 def __AddNotification(fnc, screen, id, *args, **kwargs):
 	if ".MessageBox'>" in `screen`:
 		kwargs["simple"] = True
+	if ".Standby'>" in `screen`:
+		removeCIdialog()
 	notifications.append((fnc, screen, args, kwargs, id))
 	for x in notificationAdded:
 		x()
@@ -49,3 +51,12 @@ def AddPopup(text, type, timeout, id = None):
 		RemovePopup(id)
 	print "AddPopup, id =", id
 	AddNotificationWithID(id, MessageBox, text = text, type = type, timeout = timeout, close_on_any_key = True)
+
+def removeCIdialog():
+	import NavigationInstance
+	if NavigationInstance.instance and NavigationInstance.instance.wasTimerWakeup():
+		import Screens.Ci
+		for slot in Screens.Ci.CiHandler.dlgs:
+			if hasattr(Screens.Ci.CiHandler.dlgs[slot], "forceExit"):
+				Screens.Ci.CiHandler.dlgs[slot].tag = "WAIT"
+				Screens.Ci.CiHandler.dlgs[slot].forceExit()

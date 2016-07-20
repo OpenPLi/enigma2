@@ -1,7 +1,14 @@
 from GUIComponent import GUIComponent
+from config import config
 from skin import applyAllAttributes
 from Tools.CList import CList
 from Sources.StaticText import StaticText
+
+class screenPath():
+	def __init__(self):
+		self.path = []
+		self.lastself = None
+screen = screenPath()
 
 class GUISkin:
 	__module__ = __name__
@@ -12,6 +19,7 @@ class GUISkin:
 		self.summaries = CList()
 		self.instance = None
 		self.desktop = None
+		self.screenPathMode = False
 
 	def createGUIScreen(self, parent, desktop, updateonly = False):
 		for val in self.renderer:
@@ -65,10 +73,35 @@ class GUISkin:
 		if summary is not None:
 			self.summaries.remove(summary)
 
+	def clearScreenPath(self):
+		screen.path = []
+		screen.lastself = None
+
+	def removeScreenPath(self):
+		screen.path = screen.path and screen.path[:-1]
+		screen.lastself = None
+
+	def setScreenPathMode(self, mode):
+		self.screenPathMode = mode
+
 	def setTitle(self, title):
+		path_text = ""
+		if self.screenPathMode is not None and title and config.usage.menu_path.value != "off":
+			if self.screenPathMode and not screen.path or screen.path and screen.path[-1] != title:
+				self.onClose.append(self.removeScreenPath)
+				if screen.lastself != self:
+					screen.path.append(title)
+					screen.lastself = self
+				elif screen.path:
+					screen.path[-1] = title
+			if config.usage.menu_path.value == "small":
+				path_text = len(screen.path) > 1 and " > ".join(screen.path[:-1]) + " >" or ""
+			else:
+				title = screen.path and " > ".join(screen.path) or title
 		if self.instance:
 			self.instance.setTitle(title)
 		self["Title"].text = title
+		self["screen_path"] = StaticText(path_text)
 		self.summaries.setTitle(title)
 
 	def getTitle(self):
