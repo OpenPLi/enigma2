@@ -2,30 +2,23 @@ from enigma import eDVBResourceManager, Misc_Options
 from Tools.Directories import fileExists, fileCheck, pathExists
 from Tools.HardwareInfo import HardwareInfo
 
-SystemInfo = { }
+SystemInfo = {}
 
-#FIXMEE...
 def getNumVideoDecoders():
-	idx = 0
-	while fileExists("/dev/dvb/adapter0/video%d"%(idx), 'f'):
-		idx += 1
-	return idx
+	number_of_video_decoders = 0
+	while fileExists("/dev/dvb/adapter0/video%d" % (number_of_video_decoders), 'f'):
+		number_of_video_decoders += 1
+	return number_of_video_decoders
+
+def countFrontpanelLEDs():
+	number_of_leds = fileExists("/proc/stb/fp/led_set_pattern") and 1 or 0
+	while fileExists("/proc/stb/fp/led%d_pattern" % number_of_leds):
+		number_of_leds += 1
+	return number_of_leds
 
 SystemInfo["NumVideoDecoders"] = getNumVideoDecoders()
 SystemInfo["PIPAvailable"] = SystemInfo["NumVideoDecoders"] > 1
 SystemInfo["CanMeasureFrontendInputPower"] = eDVBResourceManager.getInstance().canMeasureFrontendInputPower()
-
-
-def countFrontpanelLEDs():
-	leds = 0
-	if fileExists("/proc/stb/fp/led_set_pattern"):
-		leds += 1
-
-	while fileExists("/proc/stb/fp/led%d_pattern" % leds):
-		leds += 1
-
-	return leds
-
 SystemInfo["12V_Output"] = Misc_Options.getInstance().detected_12V_output()
 SystemInfo["ZapMode"] = fileCheck("/proc/stb/video/zapmode") or fileCheck("/proc/stb/video/zapping_mode")
 SystemInfo["NumFrontpanelLEDs"] = countFrontpanelLEDs()
@@ -52,3 +45,5 @@ SystemInfo["HasFullHDSkinSupport"] = HardwareInfo().get_device_model() not in "e
 SystemInfo["HasForceLNBOn"] = fileCheck("/proc/stb/frontend/fbc/force_lnbon")
 SystemInfo["HasForceToneburst"] = fileCheck("/proc/stb/frontend/fbc/force_toneburst")
 SystemInfo["HasBypassEdidChecking"] = fileCheck("/proc/stb/hdmi/bypass_edid_checking")
+SystemInfo["HaveColorspace"] = fileCheck("/proc/stb/video/hdmi_colorspace")
+SystemInfo["HaveColorspaceSimple"] = SystemInfo["HaveColorspace"] and HardwareInfo().get_device_model() in "vusolo4k"
