@@ -1,6 +1,6 @@
 from Components.VariableText import VariableText
 from Renderer import Renderer
-from enigma import eLabel, eEPGCache, eServiceReference, eSize
+from enigma import eLabel, eEPGCache, eServiceReference
 from time import localtime, strftime
 
 class NextEpgInfo(Renderer, VariableText):
