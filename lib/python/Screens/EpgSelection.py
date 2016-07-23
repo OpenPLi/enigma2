@@ -142,7 +142,7 @@ class EPGSelection(Screen):
 			menu = [(p.name, boundFunction(self.runPlugin, p)) for p in plugins.getPlugins(where = PluginDescriptor.WHERE_EVENTINFO) \
 				if 'selectedevent' in p.__call__.func_code.co_varnames]
 			if menu:
-				text += _(": %s") % event.getEventName()
+				text += ": %s" % event.getEventName()
 		if self.type == EPG_TYPE_MULTI:
 			menu.append((_("Goto specific date/time"),self.enterDateTime))
 		menu.append((_("Timer Overview"), self.openTimerOverview))

@@ -292,7 +292,7 @@ class EventViewBase:
 				def boxAction(choice):
 					if choice:
 						choice[1]()
-				text += _(": %s") % self.event.getEventName()
+				text += ": %s" % self.event.getEventName()
 				self.session.openWithCallback(boxAction, ChoiceBox, title=text, list=menu, windowTitle=_("Event view context menu"))
 
 	def runPlugin(self, plugin):
