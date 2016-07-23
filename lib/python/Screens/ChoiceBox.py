@@ -20,7 +20,9 @@ class ChoiceBox(Screen):
 		self.skinName = skin_name + ["ChoiceBox"]
 
 		self.reorderConfig = reorderConfig
-		self["text"] = Label(title and windowTitle and "%s, %s" % (windowTitle, title) or title or _("Select"))
+		self.windowTitle = windowTitle
+		self["text"] = Label()
+		self.setTitle(title)
 		self.list = []
 		self.summarylist = []
 		if keys is None:
@@ -91,7 +93,10 @@ class ChoiceBox(Screen):
 
 	def layoutFinished(self):
 		#the window title in choicebox is selected by self["text"] widget
-		self.setTitle("")
+		Screen.setTitle(self, "")
+
+	def setTitle(self, title):
+		self["text"].setText(title and self.windowTitle and "%s, %s" % (self.windowTitle, title) or title or _("Select"))
 
 	def autoResize(self):
 		orgwidth = self.instance.size().width()
