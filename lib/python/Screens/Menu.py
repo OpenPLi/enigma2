@@ -234,7 +234,7 @@ class Menu(Screen, ProtectedScreen):
 					if x[2] == plugin_menuid:
 						self.list.remove(x)
 						break
-				self.list.append((l[0], boundFunction(l[1], self.session, self.close), l[2], l[3] or 50))
+				self.list.append((l[0], boundFunction(l[1], self.session, close=self.close), l[2], l[3] or 50))
 
 		if config.usage.menu_sort_mode.value == "user" and self.menuID == "mainmenu":
 			plugin_list = []
