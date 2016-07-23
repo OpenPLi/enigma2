@@ -42,6 +42,9 @@ class VideoHardware:
 								"60Hz":		{ 60: "1080p" },
 								"multi":	{ 50: "1080p50", 60: "1080p" } }
 
+	rates["2160p30"] =		{ "25Hz":	{ 50: "2160p25" },
+								"30Hz":		{ 60: "2160p30"} }
+
 	rates["2160p"] =		{ "50Hz":	{ 50: "2160p50" },
 								"60Hz":		{ 60: "2160p" },
 								"multi":	{ 50: "2160p50", 60: "2160p" } }
@@ -64,7 +67,7 @@ class VideoHardware:
 
 	modes["Scart"] = ["PAL", "NTSC", "Multi"]
 	modes["YPbPr"] = ["720p", "1080i", "576p", "480p", "576i", "480i"]
-	modes["DVI"] = ["720p", "1080p", "2160p", "1080i", "576p", "480p", "576i", "480i"]
+	modes["DVI"] = ["720p", "1080p", "2160p", "2160p30", "1080i", "576p", "480p", "576i", "480i"]
 	modes["DVI-PC"] = ["PC"]
 
 	def getOutputAspect(self):
@@ -102,7 +105,7 @@ class VideoHardware:
 		self.current_port = None
 
 		self.readAvailableModes()
-		self.widescreen_modes = set(["720p", "1080i", "1080p", "2160p"]).intersection(*[self.modes_available])
+		self.widescreen_modes = set(["720p", "1080i", "1080p", "2160p", "2160p30"]).intersection(*[self.modes_available])
 
 		if self.modes.has_key("DVI-PC") and not self.getModeList("DVI-PC"):
 			print "[VideoHardware] remove DVI-PC because of not existing modes"
