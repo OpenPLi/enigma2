@@ -93,14 +93,10 @@ class ChoiceBox(Screen):
 
 	def layoutFinished(self):
 		#the window title in choicebox is selected by self["text"] widget
-<<<<<<< HEAD
-		self.setTitle("")
-=======
 		Screen.setTitle(self, "")
 
 	def setTitle(self, title):
 		self["text"].setText(title and self.windowTitle and "%s, %s" % (self.windowTitle, title) or title or _("Select"))
->>>>>>> master
 
 	def autoResize(self):
 		orgwidth = self.instance.size().width()
