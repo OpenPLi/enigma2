@@ -12,7 +12,7 @@ config.misc.pluginlist.eventinfo_order = ConfigText(default="")
 config.misc.pluginlist.extension_order = ConfigText(default="")
 
 class ChoiceBox(Screen):
-	def __init__(self, session, title="", list=[], keys=None, selection=0, skin_name=[], reorderConfig="", windowTitle=None):
+	def __init__(self, session, title="", list=[], keys=None, selection=0, skin_name=[], reorderConfig="", windowTitle=""):
 		Screen.__init__(self, session)
 
 		if isinstance(skin_name, str):
@@ -20,7 +20,7 @@ class ChoiceBox(Screen):
 		self.skinName = skin_name + ["ChoiceBox"]
 
 		self.reorderConfig = reorderConfig
-		self["text"] = Label(title)
+		self["text"] = Label(title and windowTitle and "%s, %s" % (windowTitle, title) or title or _("Select"))
 		self.list = []
 		self.summarylist = []
 		if keys is None:
@@ -87,15 +87,11 @@ class ChoiceBox(Screen):
 			"moveDown": self.additionalMoveDown,
 			"menu": self.setDefaultChoiceList
 		}, -1)
-		self.windowTitle = windowTitle
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def layoutFinished(self):
-		if self.windowTitle is None:
-			self.windowTitle = _("Select")
-		if not self.getSkinTitle():
-			self.windowTitle = ""
-		self.setTitle(self.windowTitle)
+		#the window title in choicebox is selected by self["text"] widget
+		self.setTitle("")
 
 	def autoResize(self):
 		orgwidth = self.instance.size().width()
