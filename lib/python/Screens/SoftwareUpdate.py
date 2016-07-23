@@ -127,7 +127,8 @@ class UpdatePlugin(Screen, ProtectedScreen):
 		try:
 			# TODO: Use Twisted's URL fetcher, urlopen is evil. And it can
 			# run in parallel to the package update.
-			latestImageTimestamp = re.findall('<dd>(.*?)</dd>', urlopen("http://openpli.org/download/"+getBoxType()+"/").read())[0][:16]
+			downloadpage = [x for x in urlopen("http://openpli.org/").read().split('</a>') if getBoxType() in x][0].split('"')[1]
+			latestImageTimestamp = re.findall('<dd>(.*?)</dd>', urlopen("http://openpli.org/%s" % downloadpage).read())[0][:16]
 			latestImageTimestamp = time.strftime(_("%d-%b-%Y %-H:%M"), time.strptime(latestImageTimestamp, "%Y/%m/%d %H:%M"))
 		except:
 			pass
