@@ -1095,7 +1095,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 			menu = [(p.name, boundFunction(self.runPlugin, p)) for p in plugins.getPlugins(where = PluginDescriptor.WHERE_EVENTINFO) \
 				if 'selectedevent' in p.__call__.func_code.co_varnames]
 			if menu:
-				text += _(": %s") % event.getEventName()
+				text += ": %s" % event.getEventName()
 			keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "red", "green", "yellow"][:len(menu)] + (len(menu) - 13) * [""] + keys
 		menu.append((_("Timer Overview"), self.openTimerOverview))
 		menu.append((_("Setup menu"), self.showSetup, "menu"))
