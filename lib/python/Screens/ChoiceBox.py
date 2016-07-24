@@ -12,7 +12,7 @@ config.misc.pluginlist.eventinfo_order = ConfigText(default="")
 config.misc.pluginlist.extension_order = ConfigText(default="")
 
 class ChoiceBox(Screen):
-	def __init__(self, session, title="", list=[], keys=None, selection=0, skin_name=[], reorderConfig="", windowTitle=_("Select")):
+	def __init__(self, session, title="", list=[], keys=None, selection=0, skin_name=[], reorderConfig="", windowTitle=None):
 		Screen.__init__(self, session)
 
 		if isinstance(skin_name, str):
@@ -87,7 +87,7 @@ class ChoiceBox(Screen):
 			"moveDown": self.additionalMoveDown,
 			"menu": self.setDefaultChoiceList
 		}, -1)
-		self.setTitle(windowTitle)
+		self.setTitle(windowTitle or _("Select"))
 
 	def autoResize(self):
 		orgwidth = self.instance.size().width()
