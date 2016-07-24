@@ -333,12 +333,10 @@ class PowerKey:
 
 	def __init__(self, session):
 		self.session = session
-		globalActionMap.actions["power_down"] = lambda *args: None
-		globalActionMap.actions["power_up"] = self.powerup
-		globalActionMap.actions["power_long"] = self.powerlong
-		globalActionMap.actions["deepstandby"] = self.shutdown # frontpanel long power button press
-		globalActionMap.actions["discrete_off"] = self.standby
-		globalActionMap.prio = -10
+		globalActionMap.actions["power_up"]=self.powerup
+		globalActionMap.actions["power_long"]=self.powerlong
+		globalActionMap.actions["deepstandby"]=self.shutdown # frontpanel long power button press
+		globalActionMap.actions["discrete_off"]=self.standby
 		self.longkeyPressed = False
 
 	def MenuClosed(self, *val):
@@ -357,7 +355,7 @@ class PowerKey:
 	def doAction(self, selected, longkey=False):
 		if self.longkeyPressed:
 			self.longkeyPressed = False
-		elif selected:
+		elif selected and self.session.infobar:
 			if longkey:
 				self.longkeyPressed = True
 			selected = selected.split("/")
