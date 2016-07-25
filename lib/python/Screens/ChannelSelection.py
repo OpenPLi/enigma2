@@ -637,7 +637,6 @@ class ChannelSelectionEPG(InfoBarHotkey):
 		self["ChannelSelectEPGActions"] = hotkeyActionMap(["ChannelSelectEPGActions"], dict((x[1], self.hotkeyGlobal) for x in self.hotkeys))
 		self.eventViewEPG = self.start_bouquet = self.epg_bouquet = None
 		self.currentSavedPath = []
-		self.onExecBegin.append(self.clearLongkeyPressed)
 
 	def getKeyFunctions(self, key):
 		selection = eval("config.misc.hotkey." + key + ".value.split(',')")
