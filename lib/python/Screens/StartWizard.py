@@ -38,7 +38,7 @@ class StartWizard(WizardLanguage, Rc):
 def checkForAvailableAutoBackup():
 	import os
 	for dir in [name for name in os.listdir("/media/") if os.path.isdir(os.path.join("/media/", name))]:
-		if os.path.isfile("/%s/backup/PLi-AutoBackup.tar.gz" % dir):
+		if os.path.isfile("/media/%s/backup/PLi-AutoBackup.tar.gz" % dir):
 			return True
 	return False
 
