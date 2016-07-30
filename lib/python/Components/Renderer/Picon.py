@@ -67,8 +67,8 @@ def getPiconName(serviceName):
 	if not pngname:
 		fields = sname.split('_', 3)
 		if len(fields) > 2:
-			if fields[0] == '4097' or fields[0] == '5002':
-				#fallback to 1 for iptv gstreeamer services
+			if fields[0] != '1':
+				#fallback to 1 for other reftypes
 				fields[0] = '1'
 				pngname = findPicon('_'.join(fields))
 			if not pngname and fields[2] != '2':
