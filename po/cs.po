@@ -790,7 +790,7 @@ msgid "All ages"
 msgstr " "
 
 msgid "All frequency"
-msgstr ""
+msgstr "všechny frekvence"
 
 #
 msgid "All satellites 1 (USALS)"
@@ -1508,7 +1508,7 @@ msgid "Configuring"
 msgstr "Nastavuji"
 
 msgid "Conflict not resolved!"
-msgstr ""
+msgstr "Konflikt nevyřešen!"
 
 #
 msgid "Connect"
@@ -3112,6 +3112,10 @@ msgid ""
 "Please refer to your TVs manual to find how you can disable overscan on your TV. Look for terms like 'Just fit', 'Full width', etc. If you can't find it, ask other users at http://forums.openpli.org.\n"
 "\n"
 msgstr ""
+"Zdá se, že jste neviděli všech osm vrcholů šipek. To znamená, že televizor má povolen OVERSCAN a není správně nakonfigurován.\n"
+"\n"
+"Podívejte se do manuálu a zjistěte, jak můžete zakázat zvětšení na svém televizoru. Hledejte termíny jako \"Just fit\", \"Full width\" (plná šířka) atd. Pokud to nemůžete najít, požádejte ostatní uživatele na http://forums.openpli.org.\n"
+"\n"
 
 #
 msgid "Italian"
@@ -3381,7 +3385,7 @@ msgid "Manufacturer"
 msgstr "Výrobce"
 
 msgid "Mark service as dedicated 3D service"
-msgstr ""
+msgstr "označit program jako 3D program"
 
 msgid "Max memory positions"
 msgstr "Maximum pozic paměti"
@@ -6235,7 +6239,7 @@ msgstr "Systém"
 #
 #. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
 msgid "TRANSLATOR_INFO"
-msgstr "(# Autor: ims <ims21@users.sourceforge.net> 2012-2014)"
+msgstr "(# Autor: ims <ims21@users.sourceforge.net> 2012-2016)"
 
 #
 msgid "TS file is too large for ISO9660 level 1!"
@@ -6312,9 +6316,8 @@ msgstr ""
 msgid "The PIN code has been changed successfully."
 msgstr "PIN kód byl úspěšně změněn."
 
-#, fuzzy
 msgid "The PIN code has been saved successfully."
-msgstr "PIN kód byl úspěšně změněn."
+msgstr "PIN kód byl úspěšně uložen."
 
 msgid "The PIN codes you entered are different."
 msgstr "PIN kód, který jste zadali, je odlišný."
@@ -6356,6 +6359,11 @@ msgid ""
 "\n"
 "menu->installation->system->Overscan wizard"
 msgstr ""
+"Overscan průvodce byl dokončen.\n"
+"\n"
+"Pozn: průvodce můžete vždy spustit znovu pomocí\n"
+"\n"
+"Menu->Nastavení->Systém->Overscan průvodce"
 
 msgid ""
 "The overscan wizard helps you to setup your TV in the correct way.\n"
@@ -6371,6 +6379,18 @@ msgid ""
 "\n"
 "Test Pattern by TigerDave - www.tigerdave.com/ht_menu.htm"
 msgstr ""
+"Overscan průvodce pomáhá správně nastavit Vaší televizi.\n"
+"\n"
+"U většiny televizorů je ve výchozím továrním nastavení overscan povolen. To znamená, že vždy vidíte \"zvětšený\" obrázek namísto skutečného HD a části uživatelského rozhraní (skinu) nemohou být viditelné.\n"
+"\n"
+"Žlutá plocha znamená, že 5% full HD obrazu nebude vidět.\n"
+"Zelená plocha znamená, že 10% full HD obrazu nebude vidět.\n"
+"\n"
+"Jinými slovy, v případě, že máte žlutý rámeček na všech stranách okrajů obrazovky, pak máte nastaveno alespoň 5% zvětšení.\n"
+"\n"
+"Jestliže vidíte vrcholy všech osmi šipek, pak Vaše televize má overscan zakázaný.\n"
+"\n"
+"Testovací obrazec od TigerDave - www.tigerdave.com/ht_menu.htm"
 
 #, python-format
 msgid "The path %s already exists."
@@ -6379,9 +6399,9 @@ msgstr "Cesta %s již existuje."
 msgid "The pin code you entered is wrong."
 msgstr "Zadaný PIN kód je chybný."
 
-#, fuzzy, python-format
+#, python-format
 msgid "The results have been written to %s"
-msgstr "Výsledky byly zapsány do %s."
+msgstr "Výsledky byly zapsány do %s"
 
 msgid "The saved PIN was cleared."
 msgstr ""
@@ -6408,9 +6428,8 @@ msgstr "Stav aktuálního beta image nemohl být ověřen z důvodu nedostupnost
 msgid "The timer file (timers.xml) is corrupt and could not be loaded."
 msgstr "Soubor časovače (timers.xml) je porušený a nemohl být načten."
 
-#, fuzzy
 msgid "The user interface of the receiver will now restart to select the selected skin"
-msgstr "Uživatelské rozhraní se restartuje"
+msgstr "Uživatelské rozhraní bude restartováno kvůli nastavení vybraného skinu"
 
 msgid "The user interface of your receiver is restarting"
 msgstr "Uživatelské rozhraní se restartuje"
@@ -6461,13 +6480,12 @@ msgstr ""
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "DVD RW médium je již naformátováno - nové formátování smaže veškerý obsah na tomto DVD."
 
-#, fuzzy
 msgid ""
 "This info is for developers only.\n"
 "For a normal users it is not relevant.\n"
 "Don't panic please when you see values being displayed that you think look suspicious!"
 msgstr ""
-"Tyto informace jsou určeny vývojářům.\n"
+"Tyto informace jsou určeny pro tvůrce software.\n"
 "Pro běžné uživatele nejsou důležité.\n"
 "Nepanikařte, jestliže uvidíte nějaké podezřelé údaje!"
 
@@ -7365,7 +7383,7 @@ msgid "Without popup"
 msgstr "bez dialogu"
 
 msgid "Wizard to arrange the overscan"
-msgstr ""
+msgstr "Průvodce pomáhající nastavit overscan"
 
 #, python-format
 msgid "Would you save the entered PIN %s persistent?"
@@ -7482,6 +7500,15 @@ msgid ""
 "\n"
 "menu->installation->system->Overscan wizard"
 msgstr ""
+"Neviděli jste všech osm vrcholů šipek. To znamená, že Váš televizor má povolen OVERSCAN a zobrazuje zvětšený obraz, díky čemuž přicházíte o část obrazu v plném HD rozlišení. Navíc také může chybět část uživatelského rozhraní, například ukazatel hlasitosti a další.\n"
+"\n"
+"Bohužel, model Vašeho přijímače není schopen upravit rozměry uživatelského rozhraní. Není-li vše vidět, měli byste změnit instalovaný skin na nějaký, který podporuje oříznutou plochu Vašeho televizoru.\n"
+"\n"
+"Při změně skinu bude uživatelské rozhraní Vašeho přijímače restartováno.\n"
+"\n"
+"Pozn: průvodce můžete vždy spustit znovu pomocí\n"
+"\n"
+"Menu->Nastavení->Systém->Overscan průvodce"
 
 msgid ""
 "You did not see all eight arrow heads. This means your TV has overscan enabled and presents you with a zoomed-in picture, causing you to loose part of a full HD screen. In addition this you may also miss parts of the user interface, for example volume bars and more.\n"
@@ -7491,6 +7518,12 @@ msgid ""
 "When done press OK.\n"
 "\n"
 msgstr ""
+"Neviděli jste všech osm vrcholů šipek. To znamená, že Váš televizor má povolen OVERSCAN a zobrazuje zvětšený obraz, díky čemuž přicházíte o část obrazu v plném HD rozlišení. Navíc také může chybět část uživatelského rozhraní, například ukazatel hlasitosti a další.\n"
+"\n"
+"Nyní můžete zkusit změnit velikost a pozici uživatelského rozhraní, dokud neuvidíte osm šipek.\n"
+"\n"
+"Po dokončení stiskněte OK.\n"
+"\n"
 
 msgid "You didn't select a channel to record from."
 msgstr "Nezvolili jste kanál pro nahrávání."
@@ -7502,7 +7535,7 @@ msgstr "Musíte počkat %s!"
 
 #, python-format
 msgid "You must switch to the service %s (%s - '%s')!\n"
-msgstr ""
+msgstr "Musíte přepnout na program %s (%s - '%s')!\n"
 
 msgid "You system does not support ext4"
 msgstr "Váš systém nepodporuje ext4"
@@ -7801,9 +7834,8 @@ msgstr "blacklist"
 msgid "blue"
 msgstr "Modré"
 
-#, fuzzy
 msgid "bottom"
-msgstr "Nahoru a dolů"
+msgstr "dole"
 
 msgid "broadcasting/press"
 msgstr "vysílání/tisk"
@@ -8175,7 +8207,7 @@ msgstr "opustit přehrávač"
 
 #
 msgid "left"
-msgstr "levý"
+msgstr "vlevo"
 
 msgid "left, wrapped"
 msgstr "vlevo, více řádků"
@@ -8546,7 +8578,7 @@ msgstr ""
 
 #
 msgid "right"
-msgstr "pravý"
+msgstr "vpravo"
 
 msgid "right, wrapped"
 msgstr "vpravo, více řádků"
@@ -9129,9 +9161,8 @@ msgid "Configure if and how wide columns will be shown in the channel selection 
 msgstr "Nastavuje zda a jak široké sloupce budou zobrazeny v seznamu kanálů."
 
 #
-#, fuzzy
 msgid "Configure if behind the subtitles a background is shown."
-msgstr "Nastavuje chování při spuštění přehrávání filmu."
+msgstr "Nastavuje zda se za titulky bude zobrazovat pozadí."
 
 #
 msgid "Configure if service picons will be shown in the channel selection list."
@@ -9822,7 +9853,7 @@ msgid "Slow motion speeds"
 msgstr "Rychlosti zpomaleného přehrávání"
 
 msgid "Sort order for menu entries"
-msgstr "Pořadí řadění položek menu"
+msgstr "Pořadí seřazení položek menu"
 
 #
 msgid "Sound"
