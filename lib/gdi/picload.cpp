@@ -478,7 +478,7 @@ static void gif_load(Cfilepara* filepara, bool forceRGB = false)
 	int cmaps;
 	int extcode;
 
-	gft = DGifOpenFileName(filepara->file);
+	gft = DGifOpenFileName(filepara->file, &extcode);
 	if (gft == NULL)
 		return;
 	do
@@ -568,11 +568,11 @@ static void gif_load(Cfilepara* filepara, bool forceRGB = false)
 	}
 	while (rt != TERMINATE_RECORD_TYPE);
 
-	DGifCloseFile(gft);
+	DGifCloseFile(gft, &extcode);
 	return;
 ERROR_R:
 	eDebug("[ePicLoad] <Error gif>");
-	DGifCloseFile(gft);
+	DGifCloseFile(gft, &extcode);
 }
 
 //---------------------------------------------------------------------------------------------
