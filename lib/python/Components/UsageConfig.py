@@ -487,10 +487,10 @@ def InitUsageConfig():
 		config.av.bypassEdidChecking = ConfigSelection(default = "00000000", choices = [ ("00000001", _("Yes")), ("00000000", _("No"))] )
 		config.av.bypassEdidChecking.addNotifier(setHasBypassEdidChecking)
 
-	if SystemInfo["HaveColorspace"]:
+	if SystemInfo["HasColorspace"]:
 		def setHaveColorspace(configElement):
 			open(SystemInfo["HaveColorspace"], "w").write(configElement.value)
-		if SystemInfo["HaveColorspaceSimple"]:
+		if SystemInfo["HasColorspaceSimple"]:
 			config.av.hdmicolorspace = ConfigSelection(default = "Edid(Auto)", choices={"Edid(Auto)": _("Auto"), "Hdmi_Rgb": _("RGB")})
 		else:
 			config.av.hdmicolorspace = ConfigSelection(default = "auto", choices={"auto": _("auto"), "rgb": _("rgb"), "420": _("420"), "422": _("422"), "444": _("444")})
