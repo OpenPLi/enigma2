@@ -489,7 +489,7 @@ def InitUsageConfig():
 
 	if SystemInfo["HasColorspace"]:
 		def setHaveColorspace(configElement):
-			open(SystemInfo["HaveColorspace"], "w").write(configElement.value)
+			open(SystemInfo["HasColorspace"], "w").write(configElement.value)
 		if SystemInfo["HasColorspaceSimple"]:
 			config.av.hdmicolorspace = ConfigSelection(default = "Edid(Auto)", choices={"Edid(Auto)": _("Auto"), "Hdmi_Rgb": _("RGB")})
 		else:
