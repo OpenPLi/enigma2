@@ -22,7 +22,7 @@ class About(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.setTitle(_("About"))
-		hddsplit, = skin.parameters.get("AboutHddSplit", (0,))
+		hddsplit = skin.parameters.get("AboutHddSplit", 0)
 
 		AboutText = _("Hardware: ") + about.getHardwareTypeString() + "\n"
 		AboutText += _("CPU: ") + about.getCPUInfoString() + "\n"
