@@ -298,11 +298,13 @@ class ChannelContextMenu(Screen):
 	def addHideVBIFlag(self):
 		eDVBDB.getInstance().addFlag(eServiceReference(self.csel.getCurrentSelection().toString()), FLAG_HIDE_VBI)
 		eDVBDB.getInstance().reloadBouquets()
+		Screens.InfoBar.InfoBar.instance.showHideVBI()
 		self.close()
 
 	def removeHideVBIFlag(self):
 		eDVBDB.getInstance().removeFlag(eServiceReference(self.csel.getCurrentSelection().toString()), FLAG_HIDE_VBI)
 		eDVBDB.getInstance().reloadBouquets()
+		Screens.InfoBar.InfoBar.instance.showHideVBI()
 		self.close()
 
 	def isProtected(self):
