@@ -243,11 +243,11 @@ void bsodFatal(const char *component)
 #if defined(__MIPSEL__)
 void oops(const mcontext_t &context)
 {
-	eDebug("PC: %08lx", (unsigned long)context.pc);
+	eLog(lvlFatal, "PC: %08lx", (unsigned long)context.pc);
 	int i;
 	for (i=0; i<32; i += 4)
 	{
-		eDebug("    %08x %08x %08x %08x",
+		eLog(lvlFatal, "    %08x %08x %08x %08x",
 			(int)context.gregs[i+0], (int)context.gregs[i+1],
 			(int)context.gregs[i+2], (int)context.gregs[i+3]);
 	}
@@ -260,7 +260,7 @@ void handleFatalSignal(int signum, siginfo_t *si, void *ctx)
 	ucontext_t *uc = (ucontext_t*)ctx;
 	oops(uc->uc_mcontext);
 #endif
-	eDebug("-------FATAL SIGNAL");
+	eLog(lvlFatal, "-------FATAL SIGNAL");
 	bsodFatal("enigma2, signal");
 }
 
