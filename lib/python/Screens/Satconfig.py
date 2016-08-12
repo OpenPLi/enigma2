@@ -445,7 +445,8 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 		self["config"].list = self.list
 
 	def keyOk(self):
-		self.stopService()
+		if self["config"].isChanged():
+			self.stopService()
 		if self["config"].getCurrent() == self.advancedSelectSatsEntry:
 			conf = self.nimConfig.advanced.sat[int(self.nimConfig.advanced.sats.value)].userSatellitesList
 			self.session.openWithCallback(boundFunction(self.updateConfUserSatellitesList, conf), SelectSatsEntryScreen, userSatlist=conf.value)
@@ -461,7 +462,8 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 			conf.save()
 
 	def keySave(self):
-		self.stopService()
+		if self["config"].isChanged():
+			self.stopService()
 		old_configured_sats = nimmanager.getConfiguredSats()
 		if not self.run():
 			return
