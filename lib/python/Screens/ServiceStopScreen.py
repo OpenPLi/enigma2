@@ -41,7 +41,11 @@ class ServiceStopScreen:
 		else:
 			self.restartPrevService(False)
 
-	def restartPrevService(self, yesno=True):
+	def restartPrevService(self, yesno=True, close=True):
 		if not yesno:
 			self.oldref = None
-		self.close()
+		if close:
+			self.close()
+		else:
+			self.__onClose()
+			self.oldref = None
