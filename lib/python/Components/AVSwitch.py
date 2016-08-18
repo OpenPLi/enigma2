@@ -210,9 +210,8 @@ def InitAVSwitch():
 	else:
 		config.av.scaler_sharpness = NoSave(ConfigNothing())
 
-	SystemInfo["MultichannelPCM"] = os.path.exists("/proc/stb/audio/multichannel_pcm")
-	if SystemInfo["MultichannelPCM"]:
+	if SystemInfo["HasMultichannelPCM"]:
 		def setMultichannelPCM(configElement):
-			open("/proc/stb/audio/multichannel_pcm", "w").write(configElement.value and "enable" or "disable")
+			open(SystemInfo["HasMultichannelPCM"], "w").write(configElement.value and "enable" or "disable")
 		config.av.multichannel_pcm = ConfigYesNo(default = False)
 		config.av.multichannel_pcm.addNotifier(setMultichannelPCM)
