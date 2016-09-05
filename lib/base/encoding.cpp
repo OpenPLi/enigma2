@@ -15,7 +15,20 @@ inline char tolower(char c)
 
 int mapEncoding(char *s_table)
 {
-	int encoding = 0;
+	int encoding = -1;
+	int no_table_id = 0;
+
+	//if encoding string has a option 'N' or 'NOID' first split by ':' , it indicates that the string has no
+	//     encoding id char in the first byte, and the encoding table value will be large than 0x80.
+	for(int i = strlen(s_table) - 1; i >= 0; i--){
+		if(s_table[i] == ':'){
+			if(strncmp(s_table,"n",i) == 0 || strncmp(s_table,"noid",i) == 0 )
+				no_table_id = NOTABLEID;
+			else
+				s_table += i+1;
+			break;
+		}
+	}
 
 	// table name will be in lowercase!
 	if (sscanf(s_table, "iso8859-%d", &encoding) == 1)

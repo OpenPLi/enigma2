@@ -439,6 +439,11 @@ std::string convertDVBUTF8(const unsigned char *data, int len, int table, int ts
 
 	int i = 0;
 	std::string output = "";
+	int no_table_id = 0;
+	if (table >= NOTABLEID){
+		no_table_id = NOTABLEID;
+		table &= ~NOTABLEID;
+	}
 
 	//eDebug("[convertDVBUTF8] table=0x%02X tsidonid=0x%08X len=%d data[0..14]]=%02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X data=%s",
 	//	table, tsidonid, len,
@@ -450,86 +455,87 @@ std::string convertDVBUTF8(const unsigned char *data, int len, int table, int ts
 		encodingHandler.getTransponderDefaultMapping(tsidonid, table);
 
 	// first byte in strings may override general encoding table.
-	switch(data[0])
-	{
-		case ISO8859_5 ... ISO8859_15:
-			// For Thai providers, encoding char is present but faulty.
-			if (table != 11)
-				table = data[i] + 4;
-			++i;
-			// eDebug("[convertDVBUTF8] (1..11)text encoded in ISO-8859-%d", table);
-			break;
-		case ISO8859_xx:
+	if (!no_table_id){
+		switch(data[0])
 		{
-			int n = data[++i] << 8;
-			n |= (data[++i]);
-			// eDebug("[convertDVBUTF8] (0x10)text encoded in ISO-8859-%d", n);
-			++i;
-			switch(n)
+			case ISO8859_5 ... ISO8859_15:
+				// For Thai providers, encoding char is present but faulty.
+				if (table != 11)
+					table = data[i] + 4;
+				++i;
+				// eDebug("[convertDVBUTF8] (1..11)text encoded in ISO-8859-%d", table);
+				break;
+			case ISO8859_xx:
 			{
-				case ISO8859_12:
-					eDebug("[convertDVBUTF8] ISO8859-12 encoding unsupported");
-					break;
-				default:
-					table = n;
-					break;
+				int n = data[++i] << 8;
+				n |= (data[++i]);
+				// eDebug("[convertDVBUTF8] (0x10)text encoded in ISO-8859-%d", n);
+				++i;
+				switch(n)
+				{
+					case ISO8859_12:
+						eDebug("[convertDVBUTF8] ISO8859-12 encoding unsupported");
+						break;
+					default:
+						table = n;
+						break;
+				}
+				break;
 			}
-			break;
+			case UNICODE_ENCODING: //  Basic Multilingual Plane of ISO/IEC 10646-1 enc  (UTF-16... Unicode)
+				table = UNICODE_ENCODING;
+				tsidonid = 0;
+				++i;
+				break;
+			case KSX1001_ENCODING:
+				++i;
+				eDebug("[convertDVBUTF8] KSC 5601 encing unsupported.");
+				break;
+			case GB18030_ENCODING: // GB-2312-1980 enc.
+				++i;
+				table = GB18030_ENCODING;
+				break;
+			case BIG5_ENCODING: // Big5 subset of ISO/IEC 10646-1 enc.
+				++i;
+				table = BIG5_ENCODING;
+				break;
+			case UTF8_ENCODING: // UTF-8 encoding of ISO/IEC 10646-1
+				++i;
+				table = UTF8_ENCODING;
+				break;
+			case UTF16BE_ENCODING:
+				++i;
+				table = UTF16BE_ENCODING;
+				break;
+			case UTF16LE_ENCODING:
+				++i;
+				table = UTF16LE_ENCODING;
+				break;
+			case 0x1F:
+				{
+					// Attempt to decode Freesat Huffman encoded string
+					std::string decoded_string = huffmanDecoder.decode(data, len);
+					if (!decoded_string.empty())
+						return decoded_string;
+				}
+				++i;
+				eDebug("[convertDVBUTF8] failed to decode bbc freesat huffman");
+				break;
+			case 0x0:
+			case 0xC ... 0xF:
+			case 0x18 ... 0x1E:
+				eDebug("[convertDVBUTF8] reserved %d", data[0]);
+				++i;
+				break;
 		}
-		case UNICODE_ENCODING: //  Basic Multilingual Plane of ISO/IEC 10646-1 enc  (UTF-16... Unicode)
-			table = UNICODE_ENCODING;
-			tsidonid = 0;
-			++i;
-			break;
-		case KSX1001_ENCODING:
-			++i;
-			eDebug("[convertDVBUTF8] KSC 5601 encing unsupported.");
-			break;
-		case GB18030_ENCODING: // GB-2312-1980 enc.
-			++i;
-			table = GB18030_ENCODING;
-			break;
-		case BIG5_ENCODING: // Big5 subset of ISO/IEC 10646-1 enc.
-			++i;
-			table = BIG5_ENCODING;
-			break;
-		case UTF8_ENCODING: // UTF-8 encoding of ISO/IEC 10646-1
-			++i;
-			table = UTF8_ENCODING;
-			break;
-		case UTF16BE_ENCODING:
-			++i;
-			table = UTF16BE_ENCODING;
-			break;
-		case UTF16LE_ENCODING:
-			++i;
-			table = UTF16LE_ENCODING;
-			break;
-		case 0x1F:
-			{
-				// Attempt to decode Freesat Huffman encoded string
-				std::string decoded_string = huffmanDecoder.decode(data, len);
-				if (!decoded_string.empty())
-					return decoded_string;
-			}
-			++i;
-			eDebug("[convertDVBUTF8] failed to decode bbc freesat huffman");
-			break;
-		case 0x0:
-		case 0xC ... 0xF:
-		case 0x18 ... 0x1E:
-			eDebug("[convertDVBUTF8] reserved %d", data[0]);
-			++i;
-			break;
 	}
-
 	bool useTwoCharMapping = !table || (tsidonid && encodingHandler.getTransponderUseTwoCharMapping(tsidonid));
 
 	if (useTwoCharMapping && table == 5) { // i hope this dont break other transponders which realy use ISO8859-5 and two char byte mapping...
 //		eDebug("[convertDVBUTF8] Cyfra / Cyfrowy Polsat HACK... override given ISO8859-5 with ISO6937");
 		table = 0;
 	}
-	else if ( !table || table == -1 )
+	else if (table <= 0)
 		table = defaultEncodingTable;
 
 	switch(table)
@@ -551,7 +557,7 @@ std::string convertDVBUTF8(const unsigned char *data, int len, int table, int ts
 			break;
 		default:
 			char res[2048];
-			int t = 0;
+			size_t t = 0;
 			while (i < len && t < sizeof(res))
 			{
 				unsigned long code = 0;
