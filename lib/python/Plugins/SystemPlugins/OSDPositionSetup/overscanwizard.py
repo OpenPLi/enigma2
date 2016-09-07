@@ -11,19 +11,19 @@ class OverscanWizard(Screen, ConfigListScreen):
 	def __init__(self, session, timeOut=True):
 		if getDesktop(0).size().height() == 1080:
 			self.skin = """<screen position="fill" flags="wfNoBorder">
-				<ePixmap pixmap="skin_default/overscan1920x1080.png" position="0,0" size="1920,1080" zPosition="2" alphatest="on" />
+				<ePixmap pixmap="skin_default/overscan1920x1080.png" position="0,0" size="1920,1080" zPosition="3" alphatest="on"/>
 				<eLabel position="378,180" size="1244,686" zPosition="3"/>
-				<widget name="title" position="383,185" size="1234,50" font="Regular;40" foregroundColor="blue"/>
-				<widget name="introduction" position="383,235" size="1234,623" halign="center" valign="center" font="Regular;30"/>
-				<widget name="config" position="383,635" size="1234,226" font="Regular;30" itemHeight="40"/>
+				<widget name="title" position="383,185" size="1234,50" font="Regular;40" foregroundColor="blue" zPosition="4"/>
+				<widget name="introduction" position="383,235" size="1234,623" halign="center" valign="center" font="Regular;30" zPosition="4"/>
+				<widget name="config" position="383,635" size="1234,226" font="Regular;30" itemHeight="40" zPosition="4"/>
 			</screen>"""
 		else:
-			self.skin = """<screen position="fill">
-				<ePixmap pixmap="skin_default/overscan1280x720.png" position="0,0" size="1280,720" zPosition="3" alphatest="on" />
+			self.skin = """<screen position="fill"  flags="wfNoBorder">
+				<ePixmap pixmap="skin_default/overscan1280x720.png" position="0,0" size="1280,720" zPosition="3" alphatest="on"/>
 				<eLabel position="223,120" size="810,475" zPosition="3"/>
-				<widget name="title" position="228,125" size="800,40" font="Regular;30" foregroundColor="blue"/>
-				<widget name="introduction" position="228,165" size="800,623" halign="center" valign="center" font="Regular;20"/>
-				<widget name="config" position="228,590" size="800,120" font="Regular;20" itemHeight="30"/>
+				<widget name="title" position="228,125" size="800,40" font="Regular;30" foregroundColor="blue" zPosition="4"/>
+				<widget name="introduction" position="228,165" size="800,623" halign="center" valign="center" font="Regular;20" zPosition="4"/>
+				<widget name="config" position="228,590" size="800,120" font="Regular;20" itemHeight="30" zPosition="4"/>
 			</screen>"""
 
 		Screen.__init__(self, session)
