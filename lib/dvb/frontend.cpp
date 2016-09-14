@@ -842,6 +842,8 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 	int sat_max = 1600; // for stv0288 / bsbe2
 	int ret = 0x12345678;
 	int ter_max = 2900;
+	int atsc_max = 4200;
+
 	if (!strcmp(m_description, "AVL2108")) // ET9000
 	{
 		ret = (int)(snr / 40.5);
@@ -1077,6 +1079,19 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 		ret = (snr * 2000) / 0xFFFF;
 		sat_max = 2000;
 	}
+	else if(!strcmp(m_description, "WinTV HVR-850") || !strcmp(m_description, "Hauppauge"))
+	{
+		eDVBFrontendParametersATSC parm;
+		oparm.getATSC(parm);
+		switch (parm.modulation)
+		{
+		case eDVBFrontendParametersATSC::Modulation_QAM256: atsc_max = 4000; break;
+		case eDVBFrontendParametersATSC::Modulation_QAM64: atsc_max = 2900; break;
+		case eDVBFrontendParametersATSC::Modulation_VSB_8: atsc_max = 2700; break;
+		default: break;
+		}
+		ret = snr * 10;
+	}
 
 	signalqualitydb = ret;
 	if (ret == 0x12345678) // no snr db calculation avail.. return untouched snr value..
@@ -1099,7 +1114,7 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 			signalquality = (ret >= ter_max ? 65536 : ret * 65536 / ter_max);
 			break;
 		case feATSC: // we assume a max of 42db here
-			signalquality = (ret >= 4200 ? 65536 : ret * 65536 / 4200);
+			signalquality = (ret >= atsc_max ? 65536 : ret * 65536 / atsc_max);
 			break;
 		}
 	}
