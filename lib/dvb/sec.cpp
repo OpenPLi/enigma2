@@ -7,6 +7,8 @@
 
 #include <lib/base/eerror.h>
 
+#include "absdiff.h"
+
 #define SEC_DEBUG
 
 #ifdef SEC_DEBUG
@@ -14,11 +16,6 @@
 #else
 #define eSecDebug(arg...)
 #endif
-
-static inline unsigned int absdiff(unsigned int a, unsigned int b)
-{
-	return a < b ? (b - a) : (a - b);
-}
 
 DEFINE_REF(eDVBSatelliteEquipmentControl);
 

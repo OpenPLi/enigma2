@@ -12,6 +12,8 @@
 
 #include <sstream>
 
+#include "absdiff.h"
+
 #ifndef I2C_SLAVE_FORCE
 #define I2C_SLAVE_FORCE	0x0706
 #endif
@@ -42,11 +44,6 @@
 			eDebugNoNewLine(x); \
 		}
 #endif
-
-static inline unsigned int absdiff(unsigned int a, unsigned int b)
-{
-	return a < b ? (b - a) : (a - b);
-}
 
 void eDVBDiseqcCommand::setCommandString(const char *str)
 {
