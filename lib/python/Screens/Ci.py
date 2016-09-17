@@ -302,7 +302,7 @@ class CiMessageHandler:
 		self.dlgs = { }
 		eDVBCI_UI.getInstance().ciStateChanged.get().append(self.ciStateChanged)
 		SystemInfo["CommonInterface"] = eDVBCIInterfaces.getInstance().getNumOfSlots() > 0
-		SystemInfo["CommonInterfaceSupportsHighBitrates"] = fileCheck("/proc/stb/tsmux/ci0_tsclk"))
+		SystemInfo["CommonInterfaceSupportsHighBitrates"] = fileCheck("/proc/stb/tsmux/ci0_tsclk")
 		SystemInfo["CommonInterfaceCIDelay"] = fileCheck("/proc/stb/tsmux/rmx_delay")
 
 	def setSession(self, session):
