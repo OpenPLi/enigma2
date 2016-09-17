@@ -49,3 +49,4 @@ SystemInfo["HasColorspace"] = fileCheck("/proc/stb/video/hdmi_colorspace")
 SystemInfo["HasColorspaceSimple"] = SystemInfo["HasColorspace"] and HardwareInfo().get_device_model() in "vusolo4k"
 SystemInfo["HasMultichannelPCM"] = fileCheck("/proc/stb/audio/multichannel_pcm")
 SystemInfo["HasMMC"] = HardwareInfo().get_device_model() in ('vusolo4k', 'hd51', 'hd52')
+SystemInfo["OffLCDbrightness"] = HardwareInfo().get_device_model().startswith('vusolo4k') and fileCheck("/proc/stb/fp/oled_brightness")

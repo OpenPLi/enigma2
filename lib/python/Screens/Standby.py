@@ -261,6 +261,8 @@ class TryQuitMainloop(MessageBox):
 			self.session.nav.stopService()
 			self.quitScreen = self.session.instantiateDialog(QuitMainloopScreen,retvalue=self.retval)
 			self.quitScreen.show()
+			if SystemInfo["OffLCDbrightness"]:
+				open(SystemInfo["OffLCDbrightness"], "w").write("0")
 			quitMainloop(self.retval)
 		else:
 			MessageBox.close(self, True)
