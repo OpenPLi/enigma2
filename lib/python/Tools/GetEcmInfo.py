@@ -99,9 +99,11 @@ class GetEcmInfo:
 				else:
 					source = info.get('source', None)
 					if source:
-						# MGcam
-						info['caid'] = info['caid'][2:]
-						info['pid'] = info['pid'][2:]
+						# wicardd - type 2 / mgcamd
+						caid = info.get('caid', None)
+						if caid:
+							info['caid'] = info['caid'][2:]
+							info['pid'] = info['pid'][2:]
 						info['provid'] = info['prov'][2:]
 						time = ""
 						for line in ecm:
@@ -123,7 +125,7 @@ class GetEcmInfo:
 						else:
 							response = info.get('response time', None)
 							if response:
-								# wicardd
+								# wicardd - type 1
 								response = response.split(' ')
 								self.textvalue = "%s (%ss)" % (response[4], float(response[0])/1000)
 							else:
