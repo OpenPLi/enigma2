@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: OpenPLi-enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-08-21 09:29+0200\n"
-"PO-Revision-Date: 2016-09-15 01:11+0200\n"
+"PO-Revision-Date: 2016-09-20 22:31+0200\n"
 "Previous-Translator: ngc1927 <ngc1927@gmail.com> 2016-06-12\n"
 "Last-Translator: Eragon <openpli@outlook.it>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -18,9 +18,35 @@ msgstr ""
 "X-Generator: Poedit 1.8.9\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
 
-
-
 # ----------------------------------------------------------
+#  add by Eragon
+msgid "Automatic settings backup"
+msgstr "Backup automatico delle impostazioni"
+
+#  add by Eragon
+msgid "Backup location"
+msgstr "Destinazione dei backup"
+
+#  add by Eragon
+msgid "Daily automatic backup"
+msgstr "Backup giornaliero automatico"
+
+#  add by Eragon
+msgid "Create Autoinstall"
+msgstr "Creare un backup utilizzabile per il ripristino automatico"
+
+#  add by Eragon
+msgid "EPG cache backup"
+msgstr "Backup della cache EPG"
+
+#  add by Eragon
+msgid "Small"
+msgstr "Carattere piccolo"
+
+#  add by Eragon
+msgid "Large"
+msgstr "Carattere grande"
+
 #  add by Eragon
 msgid "Sort order for menu entries"
 msgstr "Modalità di ordinamento delle voci dei menu"
@@ -55,7 +81,7 @@ msgstr "Tuner DVB-C preferenziale"
 
 #  add by Eragon
 msgid "When enabled, this setting has more weight than 'Preferred tuner'."
-msgstr "Impostare il tuner preferenziale da usare tra quelli dello stesso f. Questa impostazione è prevalente rispetto all'impostazione 'Tuner preferenziale'."
+msgstr "Impostare il tuner preferenziale da usare tra quelli dello stesso tipo. Questa impostazione è prevalente rispetto all'impostazione 'Tuner preferenziale'."
 
 #  add by Eragon
 msgid "Preferred tuner DVB-C for recordings"
@@ -103,7 +129,7 @@ msgstr "Decodificare l'invio degli stream http"
 
 #  add by Eragon
 msgid "When enabled, http streams are descrambled on the server side. The (remote) client receiver does not have to do descrambling. Default on."
-msgstr "Se questa impostazione è attivata, gli stream http sono decodificati sul lato server. Il ricevitore client (remoto) non dovr  effettuare la decodifica. L'impostazione predefinita è 'si'."
+msgstr "Se questa impostazione è attivata, gli stream http sono decodificati sul lato server. Il ricevitore client (remoto) non dovrà effettuare la decodifica. L'impostazione predefinita è 'si'."
 
 #  add by Eragon
 msgid "Descramble receiving http streams"
@@ -359,23 +385,23 @@ msgstr "Programmi simili"
 
 #  add by Eragon
 msgid "TV"
-msgstr "Funzione tasto TV"
+msgstr "TV"
 
 #  add by Eragon
 msgid "Text"
-msgstr "Funzione tasto Text"
+msgstr "Text"
 
 #  add by Eragon
 msgid "F1"
-msgstr "Funzione tasto F1"
+msgstr "F1"
 
 #  add by Eragon
 msgid "F2"
-msgstr "Funzione tasto F2"
+msgstr "F2"
 
 #  add by Eragon
 msgid "F3"
-msgstr "Funzione tasto F3"
+msgstr "F3"
 
 #  add by Eragon
 msgid "Select Softcam"
@@ -445,6 +471,8 @@ msgstr "Editor video"
 msgid "Cuts (an IN OUT IN OUT ... sequence of hour:min:sec)"
 msgstr "Lista dei tagli (sequenza di IN OUT IN OUT ecc. in formato ore:min:sec)"
 
+#  add by Eragon
+#  this translation is not currently read by OpenPLi and the original English "Execute cuts..." is always shown
 msgid "Execute cuts..."
 msgstr "Fare i tagli"
 
@@ -849,8 +877,8 @@ msgstr "%d minuti"
 #, python-format
 msgid "%d pixel wide"
 msgid_plural "%d pixels wide"
-msgstr[0] "%d larghezza pixel"
-msgstr[1] "%d larghezza pixel"
+msgstr[0] "%d pixel"
+msgstr[1] "%d pixel"
 
 #, python-format
 msgid "%d second"
@@ -1089,7 +1117,7 @@ msgstr "<Percorso corrente dei video>"
 
 #  rev by Eragon
 msgid "<Default movie location>"
-msgstr "<Percorso predefinito dei video>"
+msgstr "<Percorso predefinito delle registrazioni>"
 
 #  rev by Eragon
 msgid "<Last timer location>"
@@ -1693,8 +1721,9 @@ msgstr "Ricerca automatica"
 msgid "Automatic scan"
 msgstr "Ricerca automatica"
 
+#  rev by Eragon
 msgid "Automatically start timeshift after"
-msgstr "Avvia timeshift automaticamente dopo"
+msgstr "Avviare timeshift automaticamente dopo"
 
 msgid "Automatically turn on external subtitles"
 msgstr "Attivare automaticamente i sottotitoli esterni"
@@ -1727,8 +1756,9 @@ msgstr "Sfondo"
 msgid "Background color"
 msgstr "Colore di sfondo"
 
+#  rev by Eragon
 msgid "Background delete option"
-msgstr "Rimozione in background"
+msgstr "Cancellazione in background"
 
 msgid "Background delete speed"
 msgstr "Velocità cancellazione in background"
@@ -2233,7 +2263,7 @@ msgstr "Impostare se e come visualizzare l'indicatore di registrazione in corso 
 
 #  rev by Eragon
 msgid "Configure if and how wide columns will be shown in the channel selection list."
-msgstr "Impostare se e quanto larghe devono essere visualizzate le colonne nella lista di selezione dei canali."
+msgstr "Impostare se e di quanti pixel devono essere visualizzate le colonne a larghezza fissa nella lista di selezione dei canali."
 
 #  rev by Eragon
 msgid "Configure if service picons will be shown in the channel selection list."
@@ -2776,7 +2806,7 @@ msgstr "Tagliare"
 
 #  rev by Eragon
 msgid "Cutlist editor..."
-msgstr "Editor video..."
+msgstr "Editor registrazioni..."
 
 #
 msgid "Czech"
@@ -4456,7 +4486,7 @@ msgstr "Registrazione immediata"
 
 #  rev by Eragon
 msgid "Instant recording location"
-msgstr "Posizione delle registrazioni immediate"
+msgstr "Destinazione delle registrazioni immediate"
 
 #  rev by Eragon
 msgid "Instant recording..."
@@ -4734,7 +4764,7 @@ msgstr "Percorso"
 
 #  rev by Eragon
 msgid "Location for instant recordings"
-msgstr "Posizione delle registrazioni immediate"
+msgstr "Destinazione delle registrazioni immediate"
 
 msgid "Lock ratio"
 msgstr "Rapporto di lock"
@@ -4994,7 +5024,7 @@ msgstr "Cinema/Teatro"
 
 #  rev by Eragon
 msgid "Movielist menu"
-msgstr "Menu dell'elenco dei video"
+msgstr "Menu dell'elenco delle registrazioni"
 
 msgid "Moving"
 msgstr "In movimento"
@@ -5172,9 +5202,9 @@ msgctxt "now/next: 'next' event label"
 msgid "Next"
 msgstr "Successivo"
 
-#
+#  rev by Eragon
 msgid "No"
-msgstr "No"
+msgstr "no"
 
 #
 msgid "No (supported) DVDROM found!"
@@ -5457,9 +5487,9 @@ msgstr "Ritardo decodifica offline (ms)"
 msgid "Ok"
 msgstr "Ok"
 
-#
+#  rev by Eragon
 msgid "On"
-msgstr "On"
+msgstr "on"
 
 #  rev by Eragon
 msgid "On end of movie"
@@ -6260,7 +6290,7 @@ msgstr "RGB"
 
 #  rev by Eragon
 msgid "Radio"
-msgstr "Funzione tasto Radio"
+msgstr "Radio"
 
 #
 msgid "Ram disk"
@@ -6572,7 +6602,7 @@ msgid "Restart GUI now?"
 msgstr "Riavviare l'interfaccia utente?"
 
 msgid "Restart enigma"
-msgstr "Riavvio di enigma"
+msgstr "Riavvio di Enigma2"
 
 #
 msgid "Restart network"
@@ -7760,7 +7790,7 @@ msgstr "Ordinare la lista come predefinito ed uscire?"
 
 #  rev by Eragon
 msgid "Sort list:"
-msgstr "Ordinamento della lista:"
+msgstr "Ordinamento della lista delle redistrazioni:"
 
 #  rev by Eragon
 msgid "Sort plugins list to default?"
@@ -8248,9 +8278,9 @@ msgstr ""
 "\n"
 "aggiornato da ngc1927 (ngc1927@gmail.com) il 12/06/2016\n"
 "\n"
-"aggiornato da Eragon (openpli@outlook.it) il 15/09/2016\n"
+"aggiornato da Eragon (openpli@outlook.it) il 20/09/2016\n"
 "\n"
-"ultimo aggiornamento: 15 settembre 2016"
+"ultimo aggiornamento: 20 settembre 2016"
 
 #
 msgid "TS file is too large for ISO9660 level 1!"
@@ -9890,7 +9920,7 @@ msgstr "Sottotitoli DVB gialli"
 
 #
 msgid "Yes"
-msgstr "Sì"
+msgstr "sì"
 
 #  rev by Eragon
 msgid "Yes and save"
@@ -10293,8 +10323,9 @@ msgstr "Alfabetico"
 msgid "alphabetic reverse"
 msgstr "Alfabetico inverso"
 
+#  rev by Eragon
 msgid "alternative"
-msgstr "alternativo"
+msgstr "Alternativo"
 
 msgid "always"
 msgstr "Sempre"
@@ -10374,7 +10405,7 @@ msgstr "lista vietati"
 
 #  rev by Eragon
 msgid "blue"
-msgstr "Funzione tasto blu"
+msgstr "Blu"
 
 msgid "broadcasting/press"
 msgstr "Diffusione radio TV/Stampa"
@@ -10388,7 +10419,7 @@ msgstr "Cartoni/Pupazzi"
 
 #  rev by Eragon
 msgid "center"
-msgstr "centro"
+msgstr "Centro"
 
 msgid "centered"
 msgstr "centrato"
@@ -10445,7 +10476,7 @@ msgstr "Copiare nei bouquet"
 
 #  rev by Eragon
 msgid "create directory"
-msgstr "Creare cartella"
+msgstr "Creare una nuova cartella"
 
 #  rev by Eragon
 #, python-format
@@ -10478,7 +10509,7 @@ msgstr "Polizieschi/Thriller"
 
 #  rev by Eragon
 msgid "disable"
-msgstr "disabilitare"
+msgstr "Disabilitare"
 
 #  rev by Eragon
 msgid "disable move mode"
@@ -10532,7 +10563,7 @@ msgstr "vuoto"
 
 #  rev by Eragon
 msgid "enable"
-msgstr "abilitare"
+msgstr "Abilitare"
 
 #  rev by Eragon
 msgid "enable bouquet edit"
@@ -10707,7 +10738,7 @@ msgstr "Catturare l'mmagine come bitmap"
 
 #  rev by Eragon
 msgid "green"
-msgstr "Funzione tasto verde"
+msgstr "Verde"
 
 msgid "handicraft"
 msgstr "Artigianato"
@@ -10770,7 +10801,7 @@ msgstr "Uscire da player video..."
 
 #  rev by Eragon
 msgid "left"
-msgstr "sinistro"
+msgstr "Sinistro"
 
 #  rev by Eragon
 msgid "left, wrapped"
@@ -10967,7 +10998,7 @@ msgstr "del DVD a singolo strato utilizzato."
 
 #  rev by Eragon
 msgid "off"
-msgstr "off"
+msgstr "no"
 
 #  rev by Eragon
 msgid "offset is"
@@ -10975,7 +11006,7 @@ msgstr "l'offset è"
 
 #  rev by Eragon
 msgid "on"
-msgstr "on"
+msgstr "sì"
 
 #  rev by Eragon
 msgid "on READ ONLY medium."
@@ -10999,7 +11030,7 @@ msgstr "Accedere alla configurazione dei server dei nomi (DNS)"
 
 #  rev by Eragon
 msgid "original"
-msgstr "originale"
+msgstr "Originale"
 
 #  rev by Eragon
 msgid "original language"
@@ -11054,7 +11085,7 @@ msgstr "Registrazione in corso..."
 
 #  rev by Eragon
 msgid "red"
-msgstr "Funzione tasto rosso"
+msgstr "Rosso"
 
 msgid "religion"
 msgstr "Religione"
@@ -11145,7 +11176,7 @@ msgstr "Ritornare al capitolo precedente"
 
 #  rev by Eragon
 msgid "right"
-msgstr "destro"
+msgstr "Destro"
 
 #  rev by Eragon
 msgid "right, wrapped"
@@ -11448,7 +11479,7 @@ msgstr "Quando il cambio canale è abilitato, passare al canale precedente..."
 
 #  rev by Eragon
 msgid "white"
-msgstr "bianco"
+msgstr "Bianco"
 
 #  rev by Eragon
 msgid "width"
@@ -11482,7 +11513,7 @@ msgstr "xp1000"
 
 #  rev by Eragon
 msgid "yellow"
-msgstr "Funzione tasto giallo"
+msgstr "Giallo"
 
 #  rev by Eragon
 msgid "yes"
@@ -11506,7 +11537,6 @@ msgstr "cambio canale effettuato"
 
 msgid "®"
 msgstr "®"
-
 
 #  EPG import
 # ----------------------------------------------------------
@@ -11535,7 +11565,7 @@ msgstr "Importazione automatica dell'EPG"
 
 #: plugin.py:280
 msgid "Automatic start time"
-msgstr "Orario di inizio dell'importazione automatica"
+msgstr "Orario di inizio dell'avvio automatico"
 
 #: plugin.py:284
 msgid "Choice days for start import"
@@ -11742,4 +11772,3 @@ msgstr "Selezione del canale"
 
 msgid "All services provider"
 msgstr "Tutti i provider di canali"
-
