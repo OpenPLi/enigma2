@@ -357,6 +357,8 @@ class InfoBarShowHide(InfoBarScreenSaver):
 
 	def okButtonCheck(self):
 		if config.usage.ok_is_channelselection.value and hasattr(self, "openServiceList"):
+			if isinstance(self, InfoBarTimeshift) and self.timeshiftEnabled() and isinstance(self, InfoBarSeek) and self.seekstate == self.SEEK_STATE_PAUSE:
+				return
 			self.openServiceList()
 		else:
 			self.toggleShow()
