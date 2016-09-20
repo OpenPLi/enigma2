@@ -1398,7 +1398,7 @@ class ChannelSelectionBase(Screen):
 
 	def getServiceName(self, ref):
 		str = self.removeModeStr(ServiceReference(ref).getServiceName())
-		if str in ("Bouquets (Radio)" , "Bouquets (TV)", "User - bouquets"):
+		if 'bouquets' in str.lower():
 			return _("User - bouquets")
 		if not str:
 			pathstr = ref.getPath()
