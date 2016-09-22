@@ -20,16 +20,9 @@ import re
 plugin_path = eEnv.resolve("${libdir}/enigma2/python/Plugins/SystemPlugins/WirelessLan")
 
 
-list = []
-list.append("Unencrypted")
-list.append("WEP")
-list.append("WPA")
-list.append("WPA/WPA2")
-list.append("WPA2")
+list = ["Unencrypted", "WEP", "WPA", "WPA/WPA2", "WPA2"]
 
-weplist = []
-weplist.append("ASCII")
-weplist.append("HEX")
+weplist = ["ASCII", "HEX"]
 
 config.plugins.wlan = ConfigSubsection()
 config.plugins.wlan.essid = NoSave(ConfigText(default = "", fixed_size = False))
@@ -153,7 +146,7 @@ class WlanStatus(Screen):
 						if accesspoint == "Not-Associated":
 							encryption = _("Disabled")
 						else:
-							encryption = _("Unsupported")
+							encryption = _("off or wpa2 on")
 					else:
 						encryption = _("Enabled")
 					if self.has_key("enc"):
