@@ -401,7 +401,7 @@ class EPGList(HTMLComponent, GUIComponent):
 			w = width / 10 * 2;
 		else:     # if self.showPicon:    # this must be set if showServiceTitle is None
 			w = 2 * height - 2 * self.serviceBorderVerWidth  # FIXME: could do better...
-		self.number_width = self.showChannelNumber and 'FROM BOUQUET' in self.epg_bouquet.toString() and getTextBoundarySize(self.instance, self.serviceFont, self.instance.size(), "0000" if config.usage.alternative_number_mode.value else "00000").width() + 3 * self.serviceBorderVerWidth or 0
+		self.number_width = self.showChannelNumber and 'FROM BOUQUET' in self.epg_bouquet.toString() and getTextBoundarySize(self.instance, self.serviceFont, self.instance.size(), "0000" if config.usage.alternative_number_mode.value else "00000").width() + 2 * self.serviceBorderVerWidth or 0
 		w = w + self.number_width
 		self.service_rect = Rect(0, 0, w, height)
 		self.event_rect = Rect(w, 0, width - w, height)
@@ -462,7 +462,7 @@ class EPGList(HTMLComponent, GUIComponent):
 		if self.number_width:
 			res.append(MultiContentEntryText(
 				pos = (r1.x, r1.y + self.serviceBorderHorWidth),
-				size = (self.number_width - 2 * self.serviceBorderVerWidth, r1.h * self.serviceBorderHorWidth),
+				size = (self.number_width - self.serviceBorderVerWidth, r1.h * self.serviceBorderHorWidth),
 				font = 0, flags = RT_HALIGN_RIGHT | RT_VALIGN_CENTER,
 				text = serviceref and serviceref.ref and str(serviceref.ref.getChannelNum()) or "---",
 				color = serviceForeColor, color_sel = serviceForeColor,
