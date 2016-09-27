@@ -37,7 +37,7 @@ def InitCiConfig():
 			config.ci[slot].canHandleHighBitrates.slotid = slot
 			config.ci[slot].canHandleHighBitrates.addNotifier(setCIBitrate)
 		if SystemInfo["CommonInterfaceCIDelay"]:
-			config.ci.dvbCiDelay = ConfigSelection(default = "256", choices = [ ("16", _("16")), ("32", _("32")), ("64", _("64")), ("128", _("128")), ("256", _("256"))] )
+			config.ci.dvbCiDelay = ConfigSelection(default = "256", choices = [("16"), ("32"), ("64"), ("128"), ("256")] )
 			config.ci.dvbCiDelay.addNotifier(setdvbCiDelay)
 
 class MMIDialog(Screen):
