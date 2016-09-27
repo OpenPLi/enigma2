@@ -67,13 +67,13 @@
 		<panel position="left" size="5%,*" />
 		<panel position="right" size="5%,*" />
 		<panel position="fill">
-			<widget source="session.CurrentService" render="Label" position="top" size="*,70" font="Big" halign="center" valign="center" foregroundColor="yellow" >
+			<widget source="session.CurrentService" render="Label" position="top" size="*,60" font="Big" halign="center" valign="center" foregroundColor="yellow" >
 				<convert type="ServiceName">Name</convert>
 			</widget>
 			<widget source="session.Event_Now" render="Label" position="top" size="*,100" font="Medium" halign="center" valign="center" >
 				<convert type="EventName">Name</convert>
 			</widget>
-			<widget source="session.Event_Now" render="Progress" position="top" size="*,20" borderWidth="1" >
+			<widget source="session.Event_Now" render="Progress" position="top" size="*,20" borderWidth="1" foregroundColor="lightcyan" >
 				<convert type="EventTime">Progress</convert>
 			</widget>
 			<panel position="top" size="*,40">
@@ -90,8 +90,23 @@
 					<convert type="RemainingToText">FOLLOW</convert>
 				</widget>
 			</panel>
-			<panel name="SummaryClockRecPanel" position="bottom" size="*,40" />
 		</panel>
+		<widget source="session.FrontendInfo" render="Label" position="2,260" size="130,42" borderWidth="1" borderColor="black" zPosition="1" backgroundColor="transpBlack" transparent="1" font="FdLcD;40">
+			<convert type="FrontendInfo">USE_TUNERS_STRING</convert>
+		</widget>
+		<widget source="session.CurrentService" render="Pixmap" pixmap="skin_default/icons/stream.png" foregroundColor="#ff0000" size="60,50" position="140,250" zPosition="1" alphatest="blend" >
+			<convert type="ClientsStreaming"/>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget source="session.HddSleepingState" render="Pixmap" pixmap="skin_default/icons/hdd.png" foregroundColor="#ff0000" size="50,60" position="210,250" zPosition="1" alphatest="blend" >
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget source="session.RecordState" render="FixedLabel" text="&#174;" position="265,250" foregroundColor="#ff0000" size="40,46" font="FdLcD;50" halign="left" valign="center" zPosition="22">
+			<convert type="ConditionalShowHide">Blink</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="310,250" size="130,52" halign="right" font="FdLcD;50" foregroundColor="lightcyan" >
+			<convert type="ClockToText">Default</convert>
+		</widget>
 	</screen>
 
 <!-- channelselection-->
@@ -226,18 +241,24 @@
 
 <!-- standby -->
 	<screen name="StandbySummary" position="fill">
-		<panel position="top" size="*,70">
-			<panel position="bottom" size="*,30">
-				<widget source="session.RecordState" render="Pixmap" pixmap="skin_default/icons/record.png" position="right" size="30,30">
-					<convert type="ConditionalShowHide"></convert>
-				</widget>
-			</panel>
-		</panel>
-		<widget source="global.CurrentTime" render="Label" position="bottom" size="*,70" font="Medium" foregroundColor="yellow" halign="center" valign="center" noWrap="1">
-			<convert type="ClockToText">LongDate</convert>
+		<widget source="global.CurrentTime" render="Label" position="10,44" size="350,160" font="FdLcD;130" halign="right" valign="top" noWrap="1" foregroundColor="lightcyan" >
+			<convert type="ClockToText">Default</convert>
 		</widget>
-		<widget source="global.CurrentTime" render="Label" position="fill" font="Huge" halign="center" valign="center" noWrap="1">
-			<convert type="ClockToText">Format:%H:%M</convert>
+		<widget source="global.CurrentTime" render="Label" position="390,54" size="80,70" font="FdLcD;65" halign="left" valign="top" noWrap="1" foregroundColor="lightcyan" >
+			<convert type="ClockToText">Format:%S</convert>
+		</widget>
+		<widget source="session.FrontendInfo" render="Label" position="10,260" size="170,42" borderWidth="1" borderColor="black" zPosition="1" backgroundColor="transpBlack" transparent="1" font="FdLcD;40">
+			<convert type="FrontendInfo">USE_TUNERS_STRING</convert>
+		</widget>
+		<widget source="session.CurrentService" render="Pixmap" pixmap="skin_default/icons/stream.png" foregroundColor="#ff0000" size="60,50" position="200,250" zPosition="1" alphatest="blend" >
+			<convert type="ClientsStreaming"/>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget source="session.HddSleepingState" render="Pixmap" pixmap="skin_default/icons/hdd.png" foregroundColor="#ff0000" size="50,60" position="280,250" zPosition="1" alphatest="blend" >
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget source="session.RecordState" render="FixedLabel" text="&#174;" position="360,250" foregroundColor="#ff0000" size="40,46" font="FdLcD;50" halign="left" valign="center" zPosition="22">
+			<convert type="ConditionalShowHide">Blink</convert>
 		</widget>
 	</screen>
 
