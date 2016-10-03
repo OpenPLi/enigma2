@@ -10,7 +10,10 @@ def getFPVersion():
 			fp = open("/dev/dbox/fp0")
 			ret = ioctl(fp.fileno(),0)
 		except IOError:
-			print "getFPVersion failed!"
+			try:
+				ret = open("/sys/firmware/devicetree/base/bolt/tag", "r").read()
+			except:
+				print "getFPVersion failed!"
 	return ret
 
 def setFPWakeuptime(wutime):
