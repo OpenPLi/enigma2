@@ -81,7 +81,7 @@ class CableScanStatus(Screen):
 		self["scan_state"] = Label(_("scan state"))
 
 		service = self.session.nav.getCurrentService()
-		self.prevservice = service and service.frontendInfo().getAll(True)["tuner_number"] == scanTuner and self.session.nav.getCurrentlyPlayingServiceReference()
+		self.prevservice = service and service.frontendInfo().getAll(True)["tuner_number"] == scanTuner and self.session.nav.getCurrentlyPlayingServiceOrGroup()
 		if self.prevservice:
 			self.session.nav.stopService()
 
