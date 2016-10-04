@@ -960,9 +960,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 		self.updEvent(+3)
 
 	def updEvent(self, dir, visible = True):
-		self.showhideWindow(True)
-		ret = self["list"].selEntry(dir, visible)
-		if ret:
+		if self["list"].selEntry(dir, visible):
 			if self["list"].offs > 0:
 				self.time_mode = self.TIME_CHANGE
 			else:
