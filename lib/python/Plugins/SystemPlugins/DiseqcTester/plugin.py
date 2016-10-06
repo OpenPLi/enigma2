@@ -161,7 +161,7 @@ class DiseqcTester(Screen, TuneTest, ResultParser):
 		self.test_type = test_type
 		self.loopsfailed = loopsfailed
 		self.loopssuccessful = loopssuccessful
-		self.oldref = self.session.nav.getCurrentlyPlayingServiceReference()
+		self.oldref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 		self.log = log
 		self["Overall_progress"] = Label(_("Overall progress:"))
 		self["Progress"] = Label(_("Progress:"))
