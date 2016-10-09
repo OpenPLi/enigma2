@@ -3,6 +3,7 @@ from Components.GUIComponent import GUIComponent
 from Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.Label import Label
+from Components.SystemInfo import SystemInfo
 from ServiceReference import ServiceReference
 from enigma import eListboxPythonMultiContent, eListbox, gFont, iServiceInformation, eServiceCenter
 from Tools.Transponder import ConvertToHumanReadable, getChannelNumber
@@ -128,6 +129,8 @@ class ServiceInfo(Screen):
 					resolution += ("i", "p", "")[self.info.getInfo(iServiceInformation.sProgressive)]
 					resolution += str((self.info.getInfo(iServiceInformation.sFrameRate) + 500) / 1000)
 					aspect = self.getServiceInfoValue(iServiceInformation.sAspect)
+					if SystemInfo["AVC_16:9/4:3"] and height < 720 and videocodec == "AVC" and aspect == 3:
+						aspect = 1
 					if aspect in ( 1, 2, 5, 6, 9, 0xA, 0xD, 0xE ):
 						aspect = "4:3"
 					else:
