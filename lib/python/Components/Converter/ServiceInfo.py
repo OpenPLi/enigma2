@@ -1,5 +1,6 @@
 from Components.Converter.Converter import Converter
 from enigma import iServiceInformation, iPlayableService
+from Components.SystemInfo import SystemInfo
 from Components.Element import cached
 
 WIDESCREEN = [3, 4, 7, 8, 0xB, 0xC, 0xF, 0x10]
@@ -98,8 +99,6 @@ class ServiceInfo(Converter, object):
 			return False
 		elif self.type == self.IS_CRYPTED:
 			return info.getInfo(iServiceInformation.sIsCrypted) == 1
-		elif self.type == self.IS_WIDESCREEN:
-			return info.getInfo(iServiceInformation.sAspect) in WIDESCREEN
 		elif self.type == self.SUBSERVICES_AVAILABLE:
 			subservices = service.subServices()
 			return bool(subservices) and subservices.getNumberOfSubservices() > 0
@@ -122,10 +121,18 @@ class ServiceInfo(Converter, object):
 			return info.getInfo(iServiceInformation.sVideoHeight) < 720
 		elif self.type == self.IS_HD:
 			return info.getInfo(iServiceInformation.sVideoHeight) >= 720 and info.getInfo(iServiceInformation.sVideoHeight) < 2160
-		elif self.type == self.IS_SD_AND_WIDESCREEN:
-			return info.getInfo(iServiceInformation.sVideoHeight) < 720 and info.getInfo(iServiceInformation.sAspect) in WIDESCREEN
-		elif self.type == self.IS_SD_AND_NOT_WIDESCREEN:
-			return info.getInfo(iServiceInformation.sVideoHeight) < 720 and info.getInfo(iServiceInformation.sAspect) not in WIDESCREEN
+		elif self.type in (self.IS_WIDESCREEN, self.IS_SD_AND_WIDESCREEN, self.IS_SD_AND_NOT_WIDESCREEN):
+			aspect = info.getInfo(iServiceInformation.sAspect)
+			video_height = info.getInfo(iServiceInformation.sVideoHeight)
+			if SystemInfo["AVC_16:9/4:3"] and 0 < video_height < 720 and info.getInfo(iServiceInformation.sVideoType) == 1 and aspect == 3:
+				aspect = 1
+			if self.type == self.IS_WIDESCREEN:
+				return aspect in WIDESCREEN
+			elif self.type == self.IS_SD_AND_WIDESCREEN:
+				return video_height < 720 and aspect in WIDESCREEN
+			elif self.type == self.IS_SD_AND_NOT_WIDESCREEN:
+				return video_height < 720 and aspect not in WIDESCREEN
+			return False
 		elif self.type == self.IS_4K:
 			return info.getInfo(iServiceInformation.sVideoHeight) >= 2160
 		return False
