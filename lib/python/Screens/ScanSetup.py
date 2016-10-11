@@ -1085,7 +1085,7 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 		self.scan_ter.plp_id = ConfigInteger(default = defaultTer["plp_id"], limits = (0, 255))
 
 		# ATSC
-		self.scan_ats.frequency = ConfigInteger(default = defaultATSC["frequency"], limits = (50000, 999000))
+		self.scan_ats.frequency = ConfigFloat(default = [defaultATSC["frequency"] / 1000, defaultATSC["frequency"] % 1000], limits = [(50, 999), (0,999)])
 		self.scan_ats.inversion = ConfigSelection(default = defaultATSC["inversion"], choices = [
 			(eDVBFrontendParametersATSC.Inversion_Off, _("Off")),
 			(eDVBFrontendParametersATSC.Inversion_On, _("On")),
@@ -1346,7 +1346,7 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 		elif nim.isCompatible("ATSC"):
 			if self.scan_type_atsc.value == "single_transponder":
 				self.addATSCTransponder(tlist,
-						frequency = self.scan_ats.frequency.value * 1000,
+						frequency = self.scan_ats.frequency.floatint * 1000,
 						modulation = self.scan_ats.modulation.value,
 						inversion = self.scan_ats.inversion.value,
 						system = self.scan_ats.system.value)
