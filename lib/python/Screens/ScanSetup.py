@@ -741,15 +741,15 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 				else:
 					self.scan_ter.system.value = eDVBFrontendParametersTerrestrial.System_DVB_T
 				if self.ter_channel_input and self.scan_input_as.value == "channel":
-					channel = getChannelNumber(self.scan_ter.frequency.value*1000, self.ter_tnumber)
+					channel = getChannelNumber(self.scan_ter.frequency.floatint * 1000, self.ter_tnumber)
 					if channel:
 						self.scan_ter.channel.value = int(channel.replace("+","").replace("-",""))
 					self.list.append(getConfigListEntry(_("Channel"), self.scan_ter.channel))
 				else:
-					prev_val = self.scan_ter.frequency.value
-					self.scan_ter.frequency.value = channel2frequency(self.scan_ter.channel.value, self.ter_tnumber)/1000
-					if self.scan_ter.frequency.value == 474000:
-						self.scan_ter.frequency.value = prev_val
+					prev_val = self.scan_ter.frequency.floatint
+					self.scan_ter.frequency.floatint = channel2frequency(self.scan_ter.channel.value, self.ter_tnumber) / 1000
+					if self.scan_ter.frequency.floatint == 474000:
+						self.scan_ter.frequency.floatint = prev_val
 					self.list.append(getConfigListEntry(_("Frequency"), self.scan_ter.frequency))
 				self.list.append(getConfigListEntry(_("Inversion"), self.scan_ter.inversion))
 				self.list.append(getConfigListEntry(_("Bandwidth"), self.scan_ter.bandwidth))
@@ -1015,7 +1015,7 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 			(eDVBFrontendParametersCable.System_DVB_C_ANNEX_C, _("DVB-C ANNEX C"))])
 
 		# terrestial
-		self.scan_ter.frequency = ConfigInteger(default = defaultTer["frequency"], limits = (50000, 999000))
+		self.scan_ter.frequency = ConfigFloat(default = [defaultTer["frequency"] / 1000, defaultTer["frequency"] % 1000], limits = [(50, 999), (0,999)])
 		self.scan_ter.channel = ConfigInteger(default = 21, limits = (1, 99))
 		self.scan_ter.inversion = ConfigSelection(default = defaultTer["inversion"], choices = [
 			(eDVBFrontendParametersTerrestrial.Inversion_Off, _("Off")),
@@ -1308,7 +1308,7 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 				if self.scan_input_as.value == "channel":
 					frequency = channel2frequency(self.scan_ter.channel.value, self.ter_tnumber)
 				else:
-					frequency = self.scan_ter.frequency.value * 1000
+					frequency = self.scan_ter.frequency.floatint * 1000
 				self.addTerTransponder(tlist,
 						frequency,
 						inversion = self.scan_ter.inversion.value,
@@ -1444,7 +1444,7 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 	def predefinedTerrTranspondersList(self):
 		default = None
 		list = []
-		compare = [2, self.scan_ter.frequency.value*1000]
+		compare = [2, self.scan_ter.frequency.floatint*1000]
 		i = 0
 		index_to_scan = int(self.scan_nims.value)
 		channels = supportedChannels(index_to_scan)
