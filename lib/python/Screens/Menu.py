@@ -298,7 +298,8 @@ class Menu(Screen, ProtectedScreen):
 				return True
 
 	def keyBlue(self):
-		self.session.openWithCallback(self.menuSortCallBack, MenuSort, self.parentmenu)
+		if config.usage.menu_sort_mode.value == "user":
+			self.session.openWithCallback(self.menuSortCallBack, MenuSort, self.parentmenu)
 
 	def menuSortCallBack(self, key=False):
 		self.createMenuList()
