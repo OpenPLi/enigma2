@@ -186,6 +186,12 @@ class CableScanScreen(ConfigListScreen, Screen):
 		else:
 			self.session.open(CableScanStatus, scanTuner=int(self.scan_nims.value), scanNetwork=config.plugins.CableScan.networkid.value, scanFrequency=config.plugins.CableScan.frequency.value * 1000, scanSymbolRate=config.plugins.CableScan.symbolrate.value * 1000, scanModulation=int(config.plugins.CableScan.modulation.value), keepNumbers=config.plugins.CableScan.keepnumbering.value, hdList=config.plugins.CableScan.hdlist.value)
 
+	def keyCancel(self):
+		if self["config"].isChanged():
+			for x in self["config"].list:
+				x[1].cancel()
+		self.close()
+
 class CableScanAutoScreen(CableScanScreen):
 	def __init__(self, session, nimlist):
 		print "[AutoCableScan] start"
