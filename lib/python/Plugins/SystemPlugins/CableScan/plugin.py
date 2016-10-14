@@ -59,7 +59,7 @@ class CableScan:
 
 class CableScanStatus(Screen):
 	skin = """
-	<screen position="150,115" size="420,180" title="Cable Scan">
+	<screen position="center,115" size="420,180" title="Cable Scan">
 		<widget name="frontend" pixmap="skin_default/icons/scan-c.png" position="5,5" size="64,64" transparent="1" alphatest="on" />
 		<widget name="scan_state" position="10,120" zPosition="2" size="400,30" font="Regular;18" />
 		<widget name="scan_progress" position="10,155" size="400,15" pixmap="skin_default/progress_big.png" borderWidth="2" borderColor="#cccccc" />
@@ -127,9 +127,13 @@ config.plugins.CableScan.auto = ConfigYesNo(default = True)
 
 class CableScanScreen(ConfigListScreen, Screen):
 	skin = """
-	<screen position="100,115" size="520,290" title="Cable Scan">
+	<screen position="center,115" size="520,390" title="Cable Scan">
 		<widget name="config" position="10,10" size="500,250" scrollbarMode="showOnDemand" />
-		<widget name="introduction" position="10,265" size="500,25" font="Regular;20" halign="center" />
+		<widget name="introduction" position="10,265" size="500,50" font="Regular;20" halign="center" />
+		<ePixmap pixmap="skin_default/buttons/red.png" position="100,330" size="140,40" alphatest="on"/>
+		<ePixmap pixmap="skin_default/buttons/green.png" position="270,330" size="140,40" alphatest="on"/>
+		<widget source="key_red" render="Label" position="100,330" zPosition="1" size="135,40" font="Regular;19" halign="center" valign="center" backgroundColor="#9f1313" transparent="1"/>
+		<widget source="key_green" render="Label" position="270,330" zPosition="1" size="135,40" font="Regular;19" halign="center" valign="center" backgroundColor="#1f771f" transparent="1"/>
 	</screen>"""
 
 	def __init__(self, session, nimlist):
@@ -182,6 +186,9 @@ class CableScanScreen(ConfigListScreen, Screen):
 			self.session.open(CableScanStatus, scanTuner=int(self.scan_nims.value), scanNetwork=config.plugins.CableScan.networkid.value, scanFrequency=config.plugins.CableScan.frequency.floatint, scanSymbolRate=config.plugins.CableScan.symbolrate.value * 1000, scanModulation=int(config.plugins.CableScan.modulation.value), keepNumbers=config.plugins.CableScan.keepnumbering.value, hdList=config.plugins.CableScan.hdlist.value)
 
 	def keyCancel(self):
+		if self["config"].isChanged():
+			for x in self["config"].list:
+				x[1].cancel()
 		self.close()
 
 class CableScanAutoScreen(CableScanScreen):
