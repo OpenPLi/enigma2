@@ -44,7 +44,7 @@ eDVBAudio::eDVBAudio(eDVBDemux *demux, int dev)
 		m_fd_demux = -1;
 	}
 
-#ifndef TUNER_VUSOLO4K
+#ifdef TUNER_VUSOLO4K
 	if (m_dev > 0)
 	{
 		m_fd = -1;
