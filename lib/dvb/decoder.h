@@ -93,7 +93,6 @@ private:
 	static int m_ac3_delay;
 	static int m_audio_channel;
 	std::string m_radio_pic;
-	std::string m_pip_mode;
 	ePtr<eDVBDemux> m_demux;
 	ePtr<eDVBAudio> m_audio;
 	ePtr<eDVBVideo> m_video;
