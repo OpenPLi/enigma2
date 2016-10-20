@@ -4,17 +4,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-01 15:05+0200\n"
-"PO-Revision-Date: 2016-10-01 15:20+0200\n"
+"POT-Creation-Date: 2016-10-15 20:13+0200\n"
+"PO-Revision-Date: 2016-10-16 13:24+0200\n"
 "Last-Translator: andy1 <dummy@dummy.com>\n"
-"Language-Team: none\n"
+"Language-Team: G.Jensen\n"
 "Language: nb\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
-"X-Generator: Poedit 1.8.9\n"
+"X-Generator: Poedit 1.8.10\n"
 "X-Poedit-Bookmarks: -1,-1,-1,-1,-1,31,1959,-1,-1,-1\n"
 
 msgid ""
@@ -22,7 +22,7 @@ msgid ""
 "Advanced options and settings."
 msgstr ""
 "\n"
-"Avanserte alternativer og innstillinger."
+"Ekspert innstillinger."
 
 #
 msgid ""
@@ -134,6 +134,10 @@ msgid ""
 msgstr ""
 "\n"
 "Se gjennom, installere/avinstallere programpakker."
+
+#
+msgid " (0 - all networks)"
+msgstr "(0 - alle nettverk)"
 
 #
 #, python-format
@@ -512,6 +516,13 @@ msgstr ""
 "%s"
 
 msgid ""
+"A recording is currently running on the selected tuner. Please select a "
+"different tuner or consider to stop the recording to try again."
+msgstr ""
+"Et opptak pågår med den valgte tuneren. Vennligst velg en annen tuner eller "
+"vurder og stoppe opptaket og prøv igjen."
+
+msgid ""
 "A recording is currently running.\n"
 "What do you want to do?"
 msgstr ""
@@ -527,13 +538,6 @@ msgid ""
 "A recording is currently running. Please stop the recording before trying to "
 "start a testing DiSEqC."
 msgstr "Et opptak er igang. Stopp opptaket før DiSEqC testing kan utføres."
-
-msgid ""
-"A recording is currently running. When you scan you can corrupt the "
-"recording. Do you still want to scan?"
-msgstr ""
-"Et opptak er igang. Opptaket kan ødelegges hvis det samtidig søkes. Skal "
-"søket fortsettes?"
 
 #
 #, python-format
@@ -587,6 +591,9 @@ msgstr "AC3 nedskalering"
 
 msgid "AGC:"
 msgstr "AGC:"
+
+msgid "ASS file"
+msgstr "ASS fil"
 
 msgid "ATSC"
 msgstr "ATSC"
@@ -824,24 +831,24 @@ msgid "Arabic"
 msgstr "Arabisk"
 
 msgid "Are you sure to purge all deleted userbouquets?"
-msgstr "Slette alle kanallister i papirkurven for godt?"
+msgstr "Er du sikker på å fjerne alle slettede kanallister?"
 
 #
 #, python-format
 msgid "Are you sure to remove all %d.%d%s%s services?"
-msgstr "Slette alle %d.%d%s%s kanaler?"
+msgstr "Er du sikker på å fjerne alle %d.%d%s%s kanaler?"
 
 #
 msgid "Are you sure to remove all cable services?"
-msgstr "Slette alle kabel TV kanaler?"
+msgstr "Er du sikker på å fjerne alle kabel TV kanaler?"
 
 #
 msgid "Are you sure to remove all terrestrial services?"
-msgstr "Slette alle bakkenett kanaler?"
+msgstr "Er du sikker på å fjerne alle bakkenett kanaler?"
 
 #
 msgid "Are you sure to remove this entry?"
-msgstr "Slette kanalen?"
+msgstr "Er du sikker på å fjerne denne oppføringen?"
 
 msgid ""
 "Are you sure you want to activate this network configuration?\n"
@@ -854,7 +861,7 @@ msgstr ""
 msgid ""
 "Are you sure you want to delete\n"
 "the following backup:\n"
-msgstr "Slette følgende backup:\n"
+msgstr "Er du sikker på å slette følgende backup:\n"
 
 #
 msgid "Are you sure you want to exit this wizard?"
@@ -1319,7 +1326,7 @@ msgid "Clear"
 msgstr "Slett"
 
 msgid "Clear before scan"
-msgstr "Slett kanalliste før kanalsøk starter"
+msgstr "Slett kanallisten før kanalsøk starter"
 
 msgid "Clear fixed"
 msgstr "Slett faste elementer"
@@ -1976,7 +1983,7 @@ msgstr ""
 #
 #, python-format
 msgid "Do you really want to delete %s?"
-msgstr "Slette %s?"
+msgstr "Vil du virkelig slette %s?"
 
 #
 #, python-format
@@ -2004,17 +2011,17 @@ msgid ""
 "Do you really want to remove\n"
 "the plugin \"%s\"?"
 msgstr ""
-"Slette\n"
+"Vil du virkelig fjerne\n"
 "tillegget \"%s\"?"
 
 #, python-format
 msgid "Do you really want to remove directory %s from the disk?"
-msgstr "Slette mappen %s fra disken?"
+msgstr "Er du sikker på å fjerne mappen %s fra disken?"
 
 #
 #, python-format
 msgid "Do you really want to remove your bookmark of %s?"
-msgstr "Slette bokmerket %s?"
+msgstr "Er du sikker på å fjerne ditt bokmerke av %s?"
 
 #
 msgid "Do you want this?"
@@ -2049,7 +2056,7 @@ msgstr "Starte mottakeren på nytt?"
 
 #
 msgid "Do you want to remove the package:\n"
-msgstr "Slette pakken:\n"
+msgstr "Vil du fjerne pakken:\n"
 
 #
 msgid "Do you want to restore your settings?"
@@ -2586,8 +2593,8 @@ msgstr "Fra:"
 
 #
 #, python-format
-msgid "Frontprocessor version: %d"
-msgstr "Frontprosessor versjon: %d"
+msgid "Frontprocessor version: %s"
+msgstr "Frontprosessor versjon: %s"
 
 msgid "Full transparency"
 msgstr "Transparent"
@@ -3046,7 +3053,7 @@ msgid "Invalid transponder data"
 msgstr "Ugyldig transponder data"
 
 msgid "Inversion"
-msgstr "Omvending"
+msgstr "Vending"
 
 msgid "Invert"
 msgstr "Vend om"
@@ -3654,6 +3661,9 @@ msgstr "Ingen lagringsdisk ble funnet!"
 msgid "No age block"
 msgstr "Ingen aldersgrense"
 
+msgid "No cable tuner found!"
+msgstr "Ingen kabel-TV tuner er funnet!"
+
 #
 msgid ""
 "No data on transponder!\n"
@@ -3734,7 +3744,7 @@ msgid "No standby"
 msgstr "Ingen standby"
 
 msgid "No stream clients"
-msgstr "Ingen stream klienter"
+msgstr "Ingen strømmings klienter"
 
 msgid "No suitable sat tuner found!"
 msgstr "Ingen passende sat tuner ble funnet!"
@@ -3761,7 +3771,7 @@ msgid ""
 "Please setup your tuner settings before you start a service scan."
 msgstr ""
 "Ingen tuner er aktivert!\n"
-"Vennligst still inn tuner før kanalsøk starter."
+"Vennligst still inn tuner før kanalsøket starter."
 
 msgid "No updates available"
 msgstr "Det finnes ingen nye oppdateringer"
@@ -3927,7 +3937,7 @@ msgid "Only extensions."
 msgstr "Kun utvidelser."
 
 msgid "Only free scan"
-msgstr "Søk kun etter ukodete kanaler"
+msgstr "Bare søk etter ukodete kanaler"
 
 msgid "Only on startup"
 msgstr "Bare ved oppstart"
@@ -3990,6 +4000,9 @@ msgstr "PCR PID"
 
 msgid "PDC"
 msgstr "PDC"
+
+msgid "PGS file"
+msgstr "PGS fil"
 
 #
 msgid "PIDs"
@@ -4695,7 +4708,7 @@ msgid "Remote control type"
 msgstr "Fjernkontroll type"
 
 msgid "Removal has completed."
-msgstr "Sletting er fullført."
+msgstr "Slettingen er fullført."
 
 #
 msgid "Remove"
@@ -4718,22 +4731,22 @@ msgstr "Slett den valgte overskriften"
 
 #
 msgid "Remove plugins"
-msgstr "Slett tillegg"
+msgstr "Fjern tillegg"
 
 #
 msgid "Remove title"
-msgstr "Slett overskrift"
+msgstr "Fjern overskrift"
 
 #
 msgid "Removing"
-msgstr "Sletter"
+msgstr "Fjerner"
 
 #, python-format
 msgid "Removing directory %s failed. (Maybe not empty.)"
 msgstr "Sletting av mappe %s mislyktes. (Kanskje ikke tom.)"
 
 msgid "Removing partition table"
-msgstr "Sletter partisjonstabellen"
+msgstr "Fjerner partisjonstabellen"
 
 #
 msgid "Rename"
@@ -4926,6 +4939,12 @@ msgstr "ETTLAGS DVD"
 msgid "SNR:"
 msgstr "SNR:"
 
+msgid "SRT file"
+msgstr "SRT fil"
+
+msgid "SSA file"
+msgstr "SSA fil"
+
 #
 msgid "SSID:"
 msgstr "SSID:"
@@ -5060,14 +5079,14 @@ msgstr "Søker %s..."
 #, python-format
 msgid "Scanning - %d%% completed"
 msgid_plural "Scanning - %d%% completed"
-msgstr[0] "Kanalsøk pågår, %d%% fullført"
-msgstr[1] "Kanalsøk pågår, %d%% fullført"
+msgstr[0] "Kanalsøk pågår - %d%% fullført"
+msgstr[1] "Kanalsøk pågår - %d%% fullført"
 
 #, python-format
 msgid "Scanning completed, %d channel found"
 msgid_plural "Scanning completed, %d channels found"
-msgstr[0] "Kanalsøket er fullført, %d kanal ble funnet"
-msgstr[1] "Kanalsøket er fullført, %d kanaler ble funnet"
+msgstr[0] "Kanalsøket er ferdig. %d kanal ble funnet."
+msgstr[1] "Kanalsøket er ferdig. %d kanaler ble funnet."
 
 msgid "Scanning failed!"
 msgstr "Kanalsøket feilet!"
@@ -5286,7 +5305,7 @@ msgid ""
 "Service invalid!\n"
 "(Timeout reading PMT)"
 msgstr ""
-"Kanalfeil!\n"
+"Ugyldig kanal!\n"
 "(Tidsavbrudd ved lesing av PMT)"
 
 msgid ""
@@ -5606,7 +5625,7 @@ msgid "Single EPG"
 msgstr "Enkel EPG"
 
 msgid "Single satellite"
-msgstr "En satellitt posisjon"
+msgstr "En satellittposisjon"
 
 #
 msgid "Single step (GOP)"
@@ -5992,13 +6011,13 @@ msgid "Stored position"
 msgstr "Lagret posisjon"
 
 msgid "Stream"
-msgstr "Stream"
+msgstr "Strøm"
 
 msgid "Stream request"
-msgstr "Stream forespørsel"
+msgstr "Strømme forespørsel"
 
 msgid "Streaming clients info"
-msgstr "Aktive streamklienter"
+msgstr "Aktive strømmeklienter"
 
 msgid "Strongest position"
 msgstr "Sterkeste posisjon"
@@ -6138,7 +6157,7 @@ msgstr "System"
 
 #. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
 msgid "TRANSLATOR_INFO"
-msgstr "Oversatt til norsk bokmål. Sist oppdatert 01.10.2016"
+msgstr "Siste oppdatering til norsk bokmål: 16.10.2016"
 
 #
 msgid "TS file is too large for ISO9660 level 1!"
@@ -6204,8 +6223,8 @@ msgid ""
 "create a special format data DVD (which will not play in stand-alone DVD "
 "players) instead?"
 msgstr ""
-"DVD standarden støtter ikke videoprotokollen H.264 (HDTV). Det kan heller "
-"opprettes et spesielt dataformat for DVD? (dette formatet kan ikke spilles i "
+"DVD standarden støtter ikke videoprotokollen H.264 (HDTV). Vil du heller "
+"opprette et spesielt dataformat for DVD? (dette formatet kan ikke spilles i "
 "frittstående DVD-spillere)"
 
 msgid ""
@@ -6448,7 +6467,7 @@ msgstr "Dette tillegget vil bli slettet."
 
 #, python-format
 msgid "This receiver cannot decode %s streams!"
-msgstr "Denne mottakeren kan ikke dekode %s streamer!"
+msgstr "Denne mottakeren kan ikke dekode %s strømmer!"
 
 #
 msgid ""
@@ -6678,7 +6697,7 @@ msgstr "Topp og bunn"
 
 #, python-format
 msgid "Total clients streaming: %d (%s)"
-msgstr "Antall klienter som streamer: %d (%s)"
+msgstr "Antall klienter som strømmer: %d (%s)"
 
 #
 msgid "Track"
@@ -6845,8 +6864,8 @@ msgid "Unicable LNB"
 msgstr "Unikabel LNB"
 
 #
-msgid "Unicable Martix"
-msgstr "Unikabel Martix"
+msgid "Unicable Matrix"
+msgstr "Unikabel Matrix"
 
 #
 msgid "Uninstall"
@@ -6880,7 +6899,7 @@ msgstr "Oppdater og start på nytt automatisk (anbefalt)"
 
 #
 msgid "Update channel list only"
-msgstr "Oppdater kun kanallisten"
+msgstr "Oppdater bare kanallisten"
 
 #, python-format
 msgid "Update completed, %d package was installed."
@@ -7009,6 +7028,9 @@ msgstr "Bruker tuner %s"
 
 msgid "VMGM (intro trailer)"
 msgstr "VMGM (intro trailer)"
+
+msgid "VOB file"
+msgstr "VOB fil"
 
 msgid "VU+"
 msgstr "VU+"
@@ -7748,10 +7770,10 @@ msgid "always"
 msgstr "alltid"
 
 msgid "and never ask again this session again"
-msgstr "og ikke spør om dette igjen"
+msgstr "og ikke spør om denne økten igjen"
 
 msgid "and never ask this again"
-msgstr "og ikke spør dette igjen"
+msgstr "og ikke spør om dette igjen"
 
 msgid "and never show this message again"
 msgstr "og ikke vis denne beskjeden igjen"
@@ -7948,6 +7970,9 @@ msgstr "rediger alternativer"
 
 msgid "education/science/factual topics (general)"
 msgstr "utdanning/vitenskap/faktaprogram (generelt)"
+
+msgid "embedded"
+msgstr ""
 
 #
 msgid "empty"
@@ -8304,10 +8329,10 @@ msgid "never"
 msgstr "aldri"
 
 msgid "new media"
-msgstr "ny media"
+msgstr "nytt media"
 
 msgid "news magazine"
-msgstr "nyhets magasin"
+msgstr "nyhetsmagasin"
 
 msgid "news/current affairs (general)"
 msgstr "nyheter/aktuelt (generelt)"
@@ -8325,7 +8350,7 @@ msgstr "ingen CAId er valgt"
 
 #
 msgid "no CI slots found"
-msgstr "ingen CI slot er funnet"
+msgstr "ingen CI slot ble funnet"
 
 #
 msgid "no channel list"
@@ -8336,7 +8361,7 @@ msgid "no module found"
 msgstr "Ingen modul er funnet"
 
 msgid "no resource manager"
-msgstr "ingen ressurs utdeler"
+msgstr "ingen ressursforvalter"
 
 msgid "no storage devices found"
 msgstr "ingen lagringsenheter er funnet"
@@ -8478,7 +8503,7 @@ msgid "remove all alternatives"
 msgstr "slett alle alternativer"
 
 msgid "remove all new found flags"
-msgstr "slett nye flagg"
+msgstr "fjern alle nye flagg"
 
 msgid "remove before this position"
 msgstr "slett før denne posisjonen"
@@ -8487,14 +8512,14 @@ msgid "remove bookmark"
 msgstr "slett bokmerke"
 
 msgid "remove bouquet from parental protection"
-msgstr "slett kanalliste i foreldrekontrollen"
+msgstr "fjern kanallisten fra foreldrekontroll beskyttelsen"
 
 #
 msgid "remove cable services"
 msgstr "slett kabel TV kanaler"
 
 msgid "remove directory"
-msgstr "slett mappe"
+msgstr "fjern mappe"
 
 msgid "remove entry"
 msgstr "fjern denne kanal fra kanallisten"
@@ -8503,7 +8528,7 @@ msgid "remove from parental protection"
 msgstr "slett fra foreldrekontroll beskyttelsen"
 
 msgid "remove new found flag"
-msgstr "slett nye flagg"
+msgstr "fjern nye flagg"
 
 msgid "remove selected satellite"
 msgstr "slett den valgte satellitt"
@@ -8513,7 +8538,7 @@ msgid "remove terrestrial services"
 msgstr "slett bakkenett kanaler"
 
 msgid "remove this mark"
-msgstr "slett merket"
+msgstr "fjern dette merket"
 
 msgid "rename entry"
 msgstr "endre kanalnavn"
@@ -8914,7 +8939,7 @@ msgid "Plugins"
 msgstr "Tillegg"
 
 msgid "Service searching"
-msgstr "Kanalsøk"
+msgstr "Kanalsøking"
 
 msgid "Shutdown"
 msgstr "Slå av"
@@ -9441,10 +9466,10 @@ msgid "Delay in miliseconds between scrolling characters on display."
 msgstr "Forsinkelse i millisekunder under skrolling av bokstaver på display."
 
 msgid "Descramble receiving http streams"
-msgstr "Dekode mottatte http streams"
+msgstr "Dekode mottatte http strømmer"
 
 msgid "Descramble sending http streams"
-msgstr "Dekode direktesendte http streams"
+msgstr "Dekode direktesendte http strømmer"
 
 msgid "DiSEqC"
 msgstr "DiSEqC (Digital Satellite Equipment Control)"
@@ -9586,13 +9611,13 @@ msgid "Hide zap errors"
 msgstr "Skjul zappefeil"
 
 msgid "Include AIT in http streams"
-msgstr "Inkluder AIT i http streams"
+msgstr "Inkluder AIT i http strøm"
 
 msgid "Include ECM in http streams"
-msgstr "Inkluder ECM i http streams"
+msgstr "Inkluder ECM i http strøm"
 
 msgid "Include EIT in http streams"
-msgstr "Inkluder EIT i http streams"
+msgstr "Inkluder EIT i http strøm"
 
 #
 msgid "Info bar timeout"
@@ -9660,9 +9685,9 @@ msgid ""
 "presentation and must be decrypted afterwards (sometimes called offline "
 "decoding). Default: off."
 msgstr ""
-"Aldri dekrypter innhold under opptak. Dette overstyrer individuelle globale "
-"tidtaker innstillinger. Når dette er på, vil opptak lagres kryptert og må "
-"dekrypteres i ettertid (offline dekoding). Standardinnstilling: av."
+"Aldri dekrypter innholdet under opptak. Dette overstyrer individuelle "
+"globale tidtaker innstillinger. Når dette er på, er opptak lagret kryptert "
+"og må dekrypteres i ettertid (offline dekoding). Standardinnstilling: av."
 
 msgid "Never decrypt while recording"
 msgstr "Ikke dekode under opptak"
@@ -9671,7 +9696,7 @@ msgid "Number of channels shown in channel selection list"
 msgstr "Antall kanaler vist i kanalvalgslisten"
 
 msgid "Number of repeating text on display."
-msgstr "Nummer av gjentatt tekst på display."
+msgstr "Repeterende ganger tekst på display."
 
 #
 msgid "OSD settings"
@@ -9755,7 +9780,7 @@ msgstr ""
 "for hørselshemmede)"
 
 msgid "Require authentication for http streams"
-msgstr "Krev autentisering for http streams"
+msgstr "Krev godkjenning for http strømmer"
 
 #
 msgid "Rewind speeds"
@@ -10035,7 +10060,7 @@ msgid ""
 "'neutrino' style zap controls instead of the enigma2 style."
 msgstr ""
 "Når dette er på, vil venstre, høyre, opp, ned, + og - tastene følge "
-"'neutrino stil' zapping istedenfor enigma2 stil på fjernkontrollen."
+"'neutrino' kanalbyttestil istedenfor enigma2 stil på fjernkontrollen."
 
 msgid "When enabled the set top box is able to wakeup on LAN"
 msgstr ""
@@ -10061,8 +10086,8 @@ msgid ""
 "When enabled you can zap channels with the  CH+/-, B+/-, P+/- buttons "
 "instead of opening the channel selection list."
 msgstr ""
-"Når dette er på, vil zapping av kanaler foregå med venstre, høyre, opp, ned, "
-"+ og - tastene istedenfor å åpne kanallisten."
+"Når dette er på, vil kanalbytte foregå med venstre, høyre, opp, ned, + og - "
+"tastene istedenfor at kanallisten åpnes."
 
 msgid ""
 "When enabled you get the channel selection list via the OK button, the "
@@ -10076,7 +10101,7 @@ msgid ""
 "client receiver to use HbbTV."
 msgstr ""
 "Når dette er på, vil AIT data (Application Information Table) inngå i http "
-"streams. Dette tillater en klient mottaker å bruke HbbTV. (Hybrid broadcast "
+"strømmer. Dette tillater en klient mottaker å bruke HbbTV. (Hybrid broadcast "
 "broadband TV)"
 
 msgid ""
@@ -10084,14 +10109,14 @@ msgid ""
 "client receiver to do the descrambling."
 msgstr ""
 "Når dette er på, vil ECM data (Entitlement Control Message) inngå i http "
-"streams. Dette tillater en klient mottaker å gjøre dekodingen."
+"strømmer. Dette tillater en klient mottaker å gjøre dekodingen."
 
 msgid ""
 "When enabled, EIT data will be included in http streams. This allows a "
 "client receiver to show EPG."
 msgstr ""
 "Når dette er på, vil EIT data (Event Information Table)  inngå i http "
-"streams. Dette tillater en klient mottaker å vise EPG."
+"strømmer. Dette tillater en klient mottaker å vise EPG."
 
 msgid ""
 "When enabled, a popup message will be shown when a movie has finished and "
@@ -10129,13 +10154,13 @@ msgid ""
 "streams are always descrambled if 0x100 is added to the service type, "
 "regardless of this setting. Default off."
 msgstr ""
-"Når dette er på, vil mottatt http stream bli dekryptert. Dette opptar store "
-"data ressurser (dekryptere, demuxe bilde) og brukes bare når det er "
-"nødvendig. Individuelle streams er alltid dekryptert hvis 0x100 er tillagt i "
-"service typen, uavhengig av denne innstillingen. Standardinnstilling: av."
+"Når dette er på, vil mottatt http strøm dekodes. Dette bruker mere data "
+"ressurser (dekode, demuxe bilde) og brukes bare når det er nødvendig. "
+"Individuelle strømmer er alltid dekodet hvis 0x100 er tillagt i service "
+"typen, uavhengig av denne innstillingen. Standardinnstilling er av."
 
 msgid "When enabled, authentication is required to watch http streams."
-msgstr "Når dette er på, vil det kreves autentisering for å se http streams."
+msgstr "Når dette er på, vil det kreves godkjenning for å se på http strømmer."
 
 msgid "When enabled, channel numbering will start at '1' for each bouquet."
 msgstr ""
@@ -10204,8 +10229,8 @@ msgid ""
 "When enabled, http streams are descrambled on the server side. The (remote) "
 "client receiver does not have to do descrambling. Default on."
 msgstr ""
-"Når dette er på, vil http streams bli dekodet på serversiden. Ekstern "
-"fjernmottaker trenger ikke foreta dekodingen. Standardinnstilling: på."
+"Når dette er på, vil http strømmer bli dekodet på serversiden. Ekstern "
+"mottaker trenger ikke foreta dekodingen. Standardinnstilling er på."
 
 msgid "When enabled, it is possible to leave the movieplayer with exit."
 msgstr ""
@@ -10618,10 +10643,10 @@ msgid "Checking the internet connection"
 msgstr "Kontrollerer internett forbindelsen"
 
 msgid "Do you want to do a service scan?"
-msgstr "Utføre et kanalsøk?"
+msgstr "Vil du ta et kanalsøk?"
 
 msgid "Do you want to do another manual service scan?"
-msgstr "Utføre enda et manuelt kanalsøk?"
+msgstr "Vil du ta enda et manuelt kanalsøk?"
 
 #
 msgid "Do you want to install a channel list?"
@@ -10977,8 +11002,12 @@ msgstr ""
 msgid "Video mode selection."
 msgstr "Innstilling for bilde."
 
-#~ msgid "No cable tuner found!"
-#~ msgstr "Ingen kabel-TV tuner er funnet!"
+#~ msgid ""
+#~ "A recording is currently running. When you scan you can corrupt the "
+#~ "recording. Do you still want to scan?"
+#~ msgstr ""
+#~ "Et opptak er igang. Opptaket kan ødelegges hvis det samtidig søkes. Skal "
+#~ "søket fortsettes?"
 
 #~ msgid "%d-%b-%Y %-H:%M"
 #~ msgstr "%d-%b-%Y %-H:%M"
