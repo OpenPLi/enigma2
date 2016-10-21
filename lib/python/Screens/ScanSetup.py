@@ -638,6 +638,8 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 
 		self.tunerEntry = getConfigListEntry(_("Tuner"), self.scan_nims)
 		self.list.append(self.tunerEntry)
+		
+		self.DVB_type = self.nim_type_dict[index_to_scan]["selection"]
 
 		self.DVB_type = self.nim_type_dict[index_to_scan]["selection"]
 
@@ -925,6 +927,24 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 				if n.type == nimmanager.nim_slots[root_id].type: # check if connected from a DVB-S to DVB-S2 Nim or vice versa
 					continue
 			nim_list.append((str(n.slot), n.friendly_full_description))
+			
+			choices = []
+			modes = []
+			if n.isCompatible("DVB-S"):
+				modes.append("DVB-S")
+				choices.append(("DVB-S", _("Satellite")))
+			if n.isCompatible("DVB-T") or (n.isCompatible("DVB-S") and n.canBeCompatible("DVB-T")):
+				modes.append("DVB-T")
+				choices.append(("DVB-T", _("Terrestrial")))
+			if n.isCompatible("DVB-C") or (n.isCompatible("DVB-S") and n.canBeCompatible("DVB-C")):
+				modes.append("DVB-C")
+				choices.append(("DVB-C", _("Cable")))
+			if n.isCompatible("ATSC"):
+				modes.append("ATSC")
+				choices.append(("ATSC", _("ATSC")))
+			self.nim_type_dict[n.slot] = {"modes": modes, "selection": ConfigSelection(choices = choices)}
+			if ttype in modes:
+				self.nim_type_dict[n.slot]["selection"].value = ttype
 
 			choices = []
 			modes = []
