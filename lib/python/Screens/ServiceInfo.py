@@ -95,7 +95,7 @@ class ServiceInfo(Screen):
 			self.feinfo = None
 		else:
 			self.type = TYPE_SERVICE_INFO
-			self["red"] = self["red"] = Label(_("Exit"))
+			self["key_red"] = self["red"] = Label(_("Exit"))
 			self["key_yellow"] = self["yellow"] = Label(_("Service & PIDs"))
 			self["key_blue"] = self["blue"] = Label(_("Tuner setting values"))
 			service = session.nav.getCurrentService()
