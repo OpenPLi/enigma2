@@ -85,6 +85,8 @@ class ServiceInfo(Screen):
 			"blue": self.ShowTransponderInformation
 		}, -1)
 
+		self["key_blue"] = self["blue"] = Label(_("Tuner setting values"))
+
 		if serviceref:
 			self.type = TYPE_TRANSPONDER_INFO
 			self.skinName="ServiceInfoSimple"
@@ -97,7 +99,6 @@ class ServiceInfo(Screen):
 			self.type = TYPE_SERVICE_INFO
 			self["key_red"] = self["red"] = Label(_("Exit"))
 			self["key_yellow"] = self["yellow"] = Label(_("Service & PIDs"))
-			self["key_blue"] = self["blue"] = Label(_("Tuner setting values"))
 			service = session.nav.getCurrentService()
 			if service is not None:
 				self.info = service.info()
