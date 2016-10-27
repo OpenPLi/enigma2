@@ -597,7 +597,12 @@ int eDVBServicePMTHandler::getProgramInfo(program &program)
 	{
 		int cached_pcrpid = m_service->getCacheEntry(eDVBService::cPCRPID),
 			vpidtype = m_service->getCacheEntry(eDVBService::cVTYPE),
+			pmtpid = m_service->getCacheEntry(eDVBService::cPMTPID),
 			cnt=0;
+		if (pmtpid > 0)
+		{
+			program.pmtPid = pmtpid;
+		}
 		if ( vpidtype == -1 )
 			vpidtype = videoStream::vtMPEG2;
 		if ( cached_vpid != -1 )
