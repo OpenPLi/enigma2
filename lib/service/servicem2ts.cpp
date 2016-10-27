@@ -177,11 +177,11 @@ eM2TSFile::eM2TSFile(const char *filename):
 	m_sync_offset(0),
 	m_fd(-1),
 	m_current_offset(0),
-	m_length(0),
-	m_udf(NULL),
-	m_udf_file(NULL)
+	m_length(0)
 {
 #ifdef HAVE_LIBUDFREAD
+	m_udf = NULL;
+	m_udf_file = NULL;
 	std::string iso_file = filename;
 	size_t pos = iso_file.find(".iso/BDMV");
 	if (pos != std::string::npos)
