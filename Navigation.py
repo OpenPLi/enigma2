@@ -11,6 +11,7 @@ import Screens.Standby
 import NavigationInstance
 import ServiceReference
 from Screens.InfoBar import InfoBar
+from Components.Sources.StreamService import StreamServiceList
 from sys import maxint
 
 # TODO: remove pNavgation, eNavigation and rewrite this stuff in python.
@@ -172,7 +173,12 @@ class Navigation:
 		return ret
 
 	def getRecordings(self, simulate=False):
-		return self.pnav and self.pnav.getRecordings(simulate)
+		recs = self.pnav and self.pnav.getRecordings(simulate)
+		if not simulate and StreamServiceList:
+			for rec in recs[:]:
+				if rec.__deref__() in StreamServiceList:
+					recs.remove(rec)
+		return recs
 
 	def getCurrentService(self):
 		if not self.currentlyPlayingService:
