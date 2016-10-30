@@ -304,7 +304,10 @@ void eDVBLocalTimeHandler::setUseDVBTime(bool b)
 					int system;
 					ePtr<iDVBFrontendParameters> parms;
 					it->second.channel->getCurrentFrontendParameters(parms);
-					parms->getSystem(system);
+					if (parms)
+					{
+						parms->getSystem(system);
+					}
 
 					it->second.timetable = NULL;
 					if (system == iDVBFrontend::feATSC)
@@ -334,7 +337,10 @@ void eDVBLocalTimeHandler::syncDVBTime()
 			int system;
 			ePtr<iDVBFrontendParameters> parms;
 			it->second.channel->getCurrentFrontendParameters(parms);
-			parms->getSystem(system);
+			if (parms)
+			{
+				parms->getSystem(system);
+			}
 
 			it->second.timetable = NULL;
 			if (system == iDVBFrontend::feATSC)
@@ -542,7 +548,10 @@ void eDVBLocalTimeHandler::updateTime( time_t tp_time, eDVBChannel *chan, int up
 			int system;
 			ePtr<iDVBFrontendParameters> parms;
 			chan->getCurrentFrontendParameters(parms);
-			parms->getSystem(system);
+			if (parms)
+			{
+				parms->getSystem(system);
+			}
 
 			int updateCount = it->second.timetable->getUpdateCount();
 			it->second.timetable = NULL;
@@ -587,7 +596,10 @@ void eDVBLocalTimeHandler::DVBChannelStateChanged(iDVBChannel *chan)
 			int system;
 			ePtr<iDVBFrontendParameters> parms;
 			it->second.channel->getCurrentFrontendParameters(parms);
-			parms->getSystem(system);
+			if (parms)
+			{
+				parms->getSystem(system);
+			}
 
 			switch (state)
 			{
