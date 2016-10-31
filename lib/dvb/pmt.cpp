@@ -356,6 +356,7 @@ void eDVBServicePMTHandler::getCaIds(std::vector<int> &caids, std::vector<int> &
 int eDVBServicePMTHandler::getProgramInfo(program &program)
 {
 	ePtr<eTable<ProgramMapSection> > ptr;
+	bool has_cache = false;
 	int cached_apid_ac3 = -1;
 	int cached_apid_ddp = -1;
 	int cached_apid_mpeg = -1;
@@ -376,6 +377,7 @@ int eDVBServicePMTHandler::getProgramInfo(program &program)
 
 	if ( m_service && !m_service->cacheEmpty() )
 	{
+		has_cache = true;
 		cached_vpid = m_service->getCacheEntry(eDVBService::cVPID);
 		cached_apid_mpeg = m_service->getCacheEntry(eDVBService::cMPEGAPID);
 		cached_apid_ac3 = m_service->getCacheEntry(eDVBService::cAC3PID);
@@ -388,6 +390,7 @@ int eDVBServicePMTHandler::getProgramInfo(program &program)
 	if ( ((m_service && m_service->usePMT()) || !m_service) && eDVBPMTParser::getProgramInfo(program) >= 0)
 	{
 		unsigned int i;
+		int first_mpeg = -1;
 		int first_non_mpeg = -1;
 		int audio_cached = -1;
 		int autoaudio_mpeg = -1;
@@ -494,6 +497,14 @@ int eDVBServicePMTHandler::getProgramInfo(program &program)
 					}
 				}
 			}
+			if (!has_cache && program.audioStreams[i].type == audioStream::atMPEG && first_mpeg == -1)
+			{
+				first_mpeg = i;
+			}
+			else if (!has_cache && program.audioStreams[i].type != audioStream::atMPEG && first_non_mpeg == -1)
+			{
+				first_non_mpeg = i;
+			}
 		}
 		for (i = 0; i < program.subtitleStreams.size(); i++)
 		{
@@ -549,6 +560,8 @@ int eDVBServicePMTHandler::getProgramInfo(program &program)
 				program.defaultAudioStream = autoaudio_aache;
 			else if (autoaudio_aac != -1)
 				program.defaultAudioStream = autoaudio_aac;
+			else if (first_mpeg != -1)
+				program.defaultAudioStream = first_mpeg;
 			else if (first_non_mpeg != -1)
 				program.defaultAudioStream = first_non_mpeg;
 		}
