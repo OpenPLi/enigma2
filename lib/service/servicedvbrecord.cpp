@@ -46,14 +46,7 @@ void eDVBServiceRecord::serviceEvent(int event)
 		if (!m_service_handler.getDataDemux(m_demux))
 		{
 			eServiceReferenceDVB &ref = (eServiceReferenceDVB&) m_ref;
-			int sid = ref.getParentServiceID().get();
-			if (!sid)
-				sid = ref.getServiceID().get();
-			if ( ref.getParentTransportStreamID().get() &&
-				ref.getParentTransportStreamID() != ref.getTransportStreamID() )
-				m_event_handler.startOther(m_demux, sid);
-			else
-				m_event_handler.start(m_demux, sid);
+			m_event_handler.start(m_demux, ref);
 		}
 
 		if (m_state == stateRecording && m_want_record)
@@ -352,6 +345,11 @@ int eDVBServiceRecord::doRecord()
 				// cached pids
 				for (int x = 0; x < eDVBService::cacheMax; ++x)
 				{
+					if (x == 5)
+					{
+						x += 3; // ignore cVTYPE, cACHANNEL, cAC3DELAY, cPCMDELAY
+						continue;
+					}
 					int entry = service->getCacheEntry((eDVBService::cacheID)x);
 					if (entry != -1)
 					{

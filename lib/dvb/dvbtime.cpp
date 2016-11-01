@@ -301,10 +301,13 @@ void eDVBLocalTimeHandler::setUseDVBTime(bool b)
 				m_knownChannels.begin();
 			for (; it != m_knownChannels.end(); ++it) {
 				if (it->second.m_prevChannelState == iDVBChannel::state_ok) {
-					int system;
+					int system = iDVBFrontend::feSatellite;
 					ePtr<iDVBFrontendParameters> parms;
 					it->second.channel->getCurrentFrontendParameters(parms);
-					parms->getSystem(system);
+					if (parms)
+					{
+						parms->getSystem(system);
+					}
 
 					it->second.timetable = NULL;
 					if (system == iDVBFrontend::feATSC)
@@ -331,10 +334,13 @@ void eDVBLocalTimeHandler::syncDVBTime()
 	{
 		if (it->second.m_prevChannelState == iDVBChannel::state_ok)
 		{
-			int system;
+			int system = iDVBFrontend::feSatellite;
 			ePtr<iDVBFrontendParameters> parms;
 			it->second.channel->getCurrentFrontendParameters(parms);
-			parms->getSystem(system);
+			if (parms)
+			{
+				parms->getSystem(system);
+			}
 
 			it->second.timetable = NULL;
 			if (system == iDVBFrontend::feATSC)
@@ -539,10 +545,13 @@ void eDVBLocalTimeHandler::updateTime( time_t tp_time, eDVBChannel *chan, int up
 			m_knownChannels.find(chan);
 		if ( it != m_knownChannels.end() )
 		{
-			int system;
+			int system = iDVBFrontend::feSatellite;
 			ePtr<iDVBFrontendParameters> parms;
 			chan->getCurrentFrontendParameters(parms);
-			parms->getSystem(system);
+			if (parms)
+			{
+				parms->getSystem(system);
+			}
 
 			int updateCount = it->second.timetable->getUpdateCount();
 			it->second.timetable = NULL;
@@ -584,10 +593,13 @@ void eDVBLocalTimeHandler::DVBChannelStateChanged(iDVBChannel *chan)
 		chan->getState(state);
 		if ( state != it->second.m_prevChannelState )
 		{
-			int system;
+			int system = iDVBFrontend::feSatellite;
 			ePtr<iDVBFrontendParameters> parms;
 			it->second.channel->getCurrentFrontendParameters(parms);
-			parms->getSystem(system);
+			if (parms)
+			{
+				parms->getSystem(system);
+			}
 
 			switch (state)
 			{
