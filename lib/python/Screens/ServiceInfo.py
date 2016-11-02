@@ -87,7 +87,7 @@ class ServiceInfo(Screen):
 
 		self["infolist"] = ServiceInfoList([])
 		self.setTitle(_("Service info"))
-		if serviceref:
+		if serviceref and session.nav.getCurrentlyPlayingServiceReference() != serviceref:
 			self.type = TYPE_TRANSPONDER_INFO
 			self.skinName="ServiceInfoSimple"
 			info = eServiceCenter.getInstance().info(serviceref)
