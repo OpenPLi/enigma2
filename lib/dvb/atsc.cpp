@@ -108,14 +108,17 @@ const std::string StringSegment::getValue(void) const
 		cd = iconv_open("UTF-8", "UTF-16BE");
 		if (cd != (iconv_t)-1)
 		{
-			for (size_t k = 0; k < dataBytes.size(); k += 2)
+			size_t parsed = 2;
+			unsigned char inbuf[4];
+			for (size_t k = 0; k < dataBytes.size(); k += parsed)
 			{
 				char outbuf[8];
-				size_t insize = 2;
 				size_t avail = sizeof(outbuf);
-				unsigned char inbuf[2] = {dataBytes[k], dataBytes[k + 1]};
 				char *inptr = (char*)inbuf;
 				char *wrptr = outbuf;
+				size_t insize = parsed = (dataBytes[k] == 0xd8) ? 4 : 2;
+				if (insize > dataBytes.size() - k) insize = dataBytes.size() - k;
+				memcpy(inbuf, &dataBytes[k], insize);
 				size_t nconv = iconv(cd, &inptr, &insize, &wrptr, &avail);
 				if (nconv != (size_t)-1)
 				{
@@ -301,14 +304,12 @@ VirtualChannelTableSection::VirtualChannelTableSection(const uint8_t * const buf
 	uint16_t pos = 10;
 	uint8_t i;
 	uint8_t numchannels = buffer[9];
-	uint8_t tableid = buffer[0];
 
 	transportStreamId = UINT16(&buffer[3]);
-	versionNumber = (buffer[5] >> 1) & 0x1f;
 
 	for (i = 0; i < numchannels; i++)
 	{
-		VirtualChannel *channel = new VirtualChannel(&buffer[pos], (tableid == 0xc8));
+		VirtualChannel *channel = new VirtualChannel(&buffer[pos], (tableId == 0xc8));
 		channels.push_back(channel);
 		pos += 32 + channel->getDescriptorsLoopLength();
 	}
@@ -318,11 +319,6 @@ VirtualChannelTableSection::~VirtualChannelTableSection(void)
 {
 	for (VirtualChannelListIterator i = channels.begin(); i != channels.end(); ++i)
 		delete *i;
-}
-
-uint8_t VirtualChannelTableSection::getVersion(void) const
-{
-	return versionNumber;
 }
 
 uint16_t VirtualChannelTableSection::getTransportStreamId(void) const
@@ -358,18 +354,12 @@ const std::string ExtendedChannelNameDescriptor::getName(void) const
 
 SystemTimeTableSection::SystemTimeTableSection(const uint8_t * const buffer) : LongCrcSection(buffer)
 {
-	versionNumber = (buffer[5] >> 1) & 0x1f;
 	systemTime = UINT32(&buffer[9]);
 	gpsOffset = buffer[13];
 }
 
 SystemTimeTableSection::~SystemTimeTableSection(void)
 {
-}
-
-uint8_t SystemTimeTableSection::getVersion(void) const
-{
-	return versionNumber;
 }
 
 uint32_t SystemTimeTableSection::getSystemTime(void) const
@@ -425,8 +415,6 @@ MasterGuideTableSection::MasterGuideTableSection(const uint8_t * const buffer) :
 	uint16_t i;
 	uint16_t numtables = UINT16(&buffer[9]);
 
-	versionNumber = (buffer[5] >> 1) & 0x1f;
-
 	for (i = 0; i < numtables; i++)
 	{
 		MasterGuideTable *table = new MasterGuideTable(&buffer[pos]);
@@ -439,11 +427,6 @@ MasterGuideTableSection::~MasterGuideTableSection(void)
 {
 	for (MasterGuideTableListIterator i = tables.begin(); i != tables.end(); ++i)
 		delete *i;
-}
-
-uint8_t MasterGuideTableSection::getVersion(void) const
-{
-	return versionNumber;
 }
 
 const MasterGuideTableList *MasterGuideTableSection::getTables(void) const
@@ -535,8 +518,6 @@ ATSCEventInformationSection::ATSCEventInformationSection(const uint8_t * const b
 	uint8_t i;
 	uint8_t numevents = buffer[9];
 
-	versionNumber = (buffer[5] >> 1) & 0x1f;
-
 	for (i = 0; i < numevents; i++)
 	{
 		ATSCEvent *event = new ATSCEvent(&buffer[pos]);
@@ -551,11 +532,6 @@ ATSCEventInformationSection::~ATSCEventInformationSection(void)
 		delete *i;
 }
 
-uint8_t ATSCEventInformationSection::getVersion(void) const
-{
-	return versionNumber;
-}
-
 const ATSCEventList *ATSCEventInformationSection::getEvents(void) const
 {
 	return &events;
@@ -563,7 +539,6 @@ const ATSCEventList *ATSCEventInformationSection::getEvents(void) const
 
 ExtendedTextTableSection::ExtendedTextTableSection(const uint8_t * const buffer) : LongCrcSection(buffer)
 {
-	versionNumber = (buffer[5] >> 1) & 0x1f;
 	ETMId = UINT32(&buffer[9]);
 
 	message = new MultipleStringStructure(&buffer[13]);
@@ -572,11 +547,6 @@ ExtendedTextTableSection::ExtendedTextTableSection(const uint8_t * const buffer)
 ExtendedTextTableSection::~ExtendedTextTableSection()
 {
 	delete message;
-}
-
-uint8_t ExtendedTextTableSection::getVersion(void) const
-{
-	return versionNumber;
 }
 
 uint32_t ExtendedTextTableSection::getETMId(void) const
