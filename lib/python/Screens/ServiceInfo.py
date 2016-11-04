@@ -90,7 +90,7 @@ class ServiceInfo(Screen):
 
 		self.transponder_info = self.info = self.feinfo = None
 		play_service = session.nav.getCurrentlyPlayingServiceReference()
-		if serviceref and play_service == serviceref:
+		if serviceref and play_service and play_service == serviceref:
 			serviceref = None
 		if serviceref:
 			self.type = TYPE_TRANSPONDER_INFO
