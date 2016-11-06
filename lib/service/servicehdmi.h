@@ -78,7 +78,7 @@ private:
 	Signal2<void,iPlayableService*, int> m_event;
 	eServiceReference m_ref;
 	int m_decoder_index;
-	bool m_pip_decoder;
+	bool m_noaudio;
 	ePtr<iTSMPEGDecoder> m_decoder;
 };
 

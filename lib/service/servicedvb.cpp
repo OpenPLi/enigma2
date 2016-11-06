@@ -1025,7 +1025,7 @@ eDVBServicePlay::eDVBServicePlay(const eServiceReference &ref, eDVBService *serv
 	m_decoder_index(0),
 	m_have_video_pid(0),
 	m_tune_state(-1),
-	m_pip_decoder(false),
+	m_noaudio(false),
 	m_is_stream(ref.path.substr(0, 7) == "http://"),
 	m_is_pvr(!ref.path.empty() && !m_is_stream),
 	m_is_paused(0),
@@ -1452,7 +1452,7 @@ RESULT eDVBServicePlay::setTarget(int target)
 	if (target == -1)
 	{
 		target = 1;
-		m_pip_decoder = (eConfigManager::getConfigValue("config.av.pip_mode") != "external");
+		m_noaudio = true;
 	}
 
 	m_decoder_index = target;
@@ -2858,7 +2858,7 @@ void eDVBServicePlay::updateDecoder(bool sendSeekableStateChanged)
 	{
 		bool wasSeekable = m_decoder->getVideoProgressive() != -1;
 		/* use audio only if not pip */
-		if (!m_pip_decoder)
+		if (!m_noaudio)
 		{
 			if (m_dvb_service)
 			{
@@ -2899,7 +2899,7 @@ void eDVBServicePlay::updateDecoder(bool sendSeekableStateChanged)
 		m_decoder->setVideoPID(vpid, vpidtype);
 		m_have_video_pid = (vpid > 0 && vpid < 0x2000);
 
-		if (!m_pip_decoder)
+		if (!m_noaudio)
 		{
 			selectAudioStream();
 
@@ -2937,7 +2937,7 @@ void eDVBServicePlay::updateDecoder(bool sendSeekableStateChanged)
 		else
 			m_decoder->set();
 
-		if (!m_pip_decoder)
+		if (!m_noaudio)
 			m_decoder->setAudioChannel(achannel);
 
 		if (mustPlay && m_decode_demux && m_decoder_index == 0)
