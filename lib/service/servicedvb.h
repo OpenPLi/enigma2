@@ -206,6 +206,7 @@ protected:
 	int m_decoder_index;
 	int m_have_video_pid;
 	int m_tune_state;
+	bool m_pip_decoder;
 
 		/* in timeshift mode, we essentially have two channels, and thus pmt handlers. */
 	eDVBServicePMTHandler m_service_handler_timeshift;

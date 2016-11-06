@@ -103,7 +103,7 @@ long long eStaticServiceHDMIInfo::getFileSize(const eServiceReference &ref)
 }
 
 eServiceHDMI::eServiceHDMI(eServiceReference ref)
- : m_ref(ref), m_decoder_index(0)
+ : m_ref(ref), m_decoder_index(0), m_pip_decoder(false)
 {
 
 }
@@ -124,7 +124,8 @@ RESULT eServiceHDMI::start()
 {
 	m_decoder = new eTSMPEGDecoder(NULL, m_decoder_index);
 	m_decoder->setVideoPID(1, 0);
-	m_decoder->setAudioPID(1, 0);
+	if (!m_pip_decoder)
+		m_decoder->setAudioPID(1, 0);
 	m_decoder->play();
 	m_event(this, evStart);
 	return 0;
@@ -139,6 +140,13 @@ RESULT eServiceHDMI::stop()
 
 RESULT eServiceHDMI::setTarget(int target)
 {
+	/* target -1 used for pip, change decoder index to 1 */
+	if (target == -1)
+	{
+		target = 1;
+		m_pip_decoder = (eConfigManager::getConfigValue("config.av.pip_mode") != "external");
+	}
+
 	m_decoder_index = target;
 	return 0;
 }

@@ -1025,6 +1025,7 @@ eDVBServicePlay::eDVBServicePlay(const eServiceReference &ref, eDVBService *serv
 	m_decoder_index(0),
 	m_have_video_pid(0),
 	m_tune_state(-1),
+	m_pip_decoder(false),
 	m_is_stream(ref.path.substr(0, 7) == "http://"),
 	m_is_pvr(!ref.path.empty() && !m_is_stream),
 	m_is_paused(0),
@@ -1447,6 +1448,13 @@ RESULT eDVBServicePlay::stop()
 
 RESULT eDVBServicePlay::setTarget(int target)
 {
+	/* target -1 used for pip, change decoder index to 1 */
+	if (target == -1)
+	{
+		target = 1;
+		m_pip_decoder = (eConfigManager::getConfigValue("config.av.pip_mode") != "external");
+	}
+
 	m_decoder_index = target;
 	return 0;
 }
@@ -2849,54 +2857,61 @@ void eDVBServicePlay::updateDecoder(bool sendSeekableStateChanged)
 	if (m_decoder)
 	{
 		bool wasSeekable = m_decoder->getVideoProgressive() != -1;
-		if (m_dvb_service)
+		/* use audio only if not pip */
+		if (!m_pip_decoder)
 		{
-			achannel = m_dvb_service->getCacheEntry(eDVBService::cACHANNEL);
-			ac3_delay = m_dvb_service->getCacheEntry(eDVBService::cAC3DELAY);
-			pcm_delay = m_dvb_service->getCacheEntry(eDVBService::cPCMDELAY);
-		}
-		else // subservice
-		{
-			eServiceReferenceDVB ref;
-			m_service_handler.getServiceReference(ref);
-			eServiceReferenceDVB parent = ref.getParentServiceReference();
-			if (!parent)
-				parent = ref;
-			if (parent)
+			if (m_dvb_service)
 			{
-				ePtr<eDVBResourceManager> res_mgr;
-				if (!eDVBResourceManager::getInstance(res_mgr))
+				achannel = m_dvb_service->getCacheEntry(eDVBService::cACHANNEL);
+				ac3_delay = m_dvb_service->getCacheEntry(eDVBService::cAC3DELAY);
+				pcm_delay = m_dvb_service->getCacheEntry(eDVBService::cPCMDELAY);
+			}
+			else // subservice
+			{
+				eServiceReferenceDVB ref;
+				m_service_handler.getServiceReference(ref);
+				eServiceReferenceDVB parent = ref.getParentServiceReference();
+				if (!parent)
+					parent = ref;
+				if (parent)
 				{
-					ePtr<iDVBChannelList> db;
-					if (!res_mgr->getChannelList(db))
+					ePtr<eDVBResourceManager> res_mgr;
+					if (!eDVBResourceManager::getInstance(res_mgr))
 					{
-						ePtr<eDVBService> origService;
-						if (!db->getService(parent, origService))
+						ePtr<iDVBChannelList> db;
+						if (!res_mgr->getChannelList(db))
 						{
-		 					ac3_delay = origService->getCacheEntry(eDVBService::cAC3DELAY);
-							pcm_delay = origService->getCacheEntry(eDVBService::cPCMDELAY);
+							ePtr<eDVBService> origService;
+							if (!db->getService(parent, origService))
+							{
+			 					ac3_delay = origService->getCacheEntry(eDVBService::cAC3DELAY);
+								pcm_delay = origService->getCacheEntry(eDVBService::cPCMDELAY);
+							}
 						}
 					}
 				}
 			}
-		}
 
-		setAC3Delay(ac3_delay == -1 ? 0 : ac3_delay);
-		setPCMDelay(pcm_delay == -1 ? 0 : pcm_delay);
+			setAC3Delay(ac3_delay == -1 ? 0 : ac3_delay);
+			setPCMDelay(pcm_delay == -1 ? 0 : pcm_delay);
+		}
 
 		m_decoder->setVideoPID(vpid, vpidtype);
 		m_have_video_pid = (vpid > 0 && vpid < 0x2000);
 
-		selectAudioStream();
+		if (!m_pip_decoder)
+		{
+			selectAudioStream();
 
 #if HAVE_AMLOGIC
-		m_decoder->setSyncPCR(pcrpid);
-#else
-		if (!(m_is_pvr || m_is_stream || m_timeshift_active))
 			m_decoder->setSyncPCR(pcrpid);
-		else
-			m_decoder->setSyncPCR(-1);
+#else
+			if (!(m_is_pvr || m_is_stream || m_timeshift_active))
+				m_decoder->setSyncPCR(pcrpid);
+			else
+				m_decoder->setSyncPCR(-1);
 #endif
+		}
 
 		if (m_decoder_index == 0)
 		{
@@ -2922,7 +2937,8 @@ void eDVBServicePlay::updateDecoder(bool sendSeekableStateChanged)
 		else
 			m_decoder->set();
 
-		m_decoder->setAudioChannel(achannel);
+		if (!m_pip_decoder)
+			m_decoder->setAudioChannel(achannel);
 
 		if (mustPlay && m_decode_demux && m_decoder_index == 0)
 		{
