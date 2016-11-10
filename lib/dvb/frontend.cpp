@@ -1181,12 +1181,18 @@ int eDVBFrontend::readFrontendData(int type)
 						{
 							if (prop[0].u.st.stat[i].scale == FE_SCALE_DECIBEL)
 							{
-								valueprovided = type == iFrontendInformation_ENUMS::signalQualitydB;
+								if (!valueprovided)
+								{
+									valueprovided = type == iFrontendInformation_ENUMS::signalQualitydB;
+								}
 								signalqualitydb = prop[0].u.st.stat[i].svalue / 10;
 							}
 							else if (prop[0].u.st.stat[i].scale == FE_SCALE_RELATIVE)
 							{
-								valueprovided = type == iFrontendInformation_ENUMS::signalQuality;
+								if (!valueprovided)
+								{
+									valueprovided = type == iFrontendInformation_ENUMS::signalQuality;
+								}
 								signalquality = prop[0].u.st.stat[i].svalue;
 							}
 						}
