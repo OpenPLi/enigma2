@@ -46,7 +46,7 @@ public:
 	RESULT connectEvent(const Slot2<void, iPlayableService*, int> &event, ePtr<eConnection> &connection);
 	RESULT start();
 	RESULT stop();
-	RESULT setTarget(int target);
+	RESULT setTarget(int target, bool noaudio);
 
 	RESULT pause(ePtr<iPauseableService> &ptr) { ptr = 0; return -1; }
 	RESULT seek(ePtr<iSeekableService> &ptr) { ptr = 0; return -1; }

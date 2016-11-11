@@ -1446,16 +1446,10 @@ RESULT eDVBServicePlay::stop()
 	return 0;
 }
 
-RESULT eDVBServicePlay::setTarget(int target)
+RESULT eDVBServicePlay::setTarget(int target, bool noaudio = false)
 {
-	/* target -1 used for pip, change decoder index to 1 */
-	if (target == -1)
-	{
-		target = 1;
-		m_noaudio = true;
-	}
-
 	m_decoder_index = target;
+	m_noaudio = noaudio;
 	return 0;
 }
 

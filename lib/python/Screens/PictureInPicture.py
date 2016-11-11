@@ -183,12 +183,8 @@ class PictureInPicture(Screen):
 				if not config.usage.hide_zap_errors.value:
 					Notifications.AddPopup(text = "PiP...\n" + _("No free tuner!"), type = MessageBox.TYPE_ERROR, timeout = 5, id = "ZapPipError")
 				return False
-			if config.av.pip_mode.value == "external":
-				useaudio = 1
-			else:
-				useaudio = -1
 			self.pipservice = eServiceCenter.getInstance().play(ref)
-			if self.pipservice and not self.pipservice.setTarget(useaudio):
+			if self.pipservice and not self.pipservice.setTarget(1, True):
 				if hasattr(self, "dishpipActive") and self.dishpipActive is not None:
 					self.dishpipActive.startPiPService(ref)
 				self.pipservice.start()
