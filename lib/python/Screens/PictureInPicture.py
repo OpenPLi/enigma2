@@ -6,7 +6,6 @@ from Components.VideoWindow import VideoWindow
 from Components.Sources.StreamService import StreamServiceList
 from Components.config import config, ConfigPosition, ConfigSelection
 from Tools import Notifications
-from Tools.HardwareInfo import HardwareInfo
 from Screens.MessageBox import MessageBox
 
 MAX_X = 720
