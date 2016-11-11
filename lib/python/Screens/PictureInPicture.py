@@ -178,7 +178,7 @@ class PictureInPicture(Screen):
 			return False
 		ref = self.resolveAlternatePipService(service)
 		if ref:
-			if HardwareInfo().get_device_model().startswith('vusolo4k') and StreamServiceList:
+			if SystemInfo["CanDoTranscodeAndPIP"] and StreamServiceList:
 				self.pipservice = None
 				self.currentService = None
 				self.currentServiceReference = None
