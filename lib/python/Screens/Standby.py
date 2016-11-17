@@ -52,12 +52,15 @@ class Standby(Screen):
 		globalActionMap.setEnabled(False)
 
 		from Screens.InfoBar import InfoBar
+		from Screens.SleepTimerEdit import isNextWakeupTime
 		self.infoBarInstance = InfoBar.instance
 		self.StandbyCounterIncrease = StandbyCounterIncrease
 		self.standbyTimeoutTimer = eTimer()
 		self.standbyTimeoutTimer.callback.append(self.standbyTimeout)
 		self.standbyStopServiceTimer = eTimer()
 		self.standbyStopServiceTimer.callback.append(self.stopService)
+		self.standbyWakeupTimer = eTimer()
+		self.standbyWakeupTimer.callback.append(self.standbyWakeup)
 		self.timeHandler = None
 
 		self.setMute()
@@ -96,6 +99,14 @@ class Standby(Screen):
 		if gotoShutdownTime:
 			self.standbyTimeoutTimer.startLongTimer(gotoShutdownTime)
 
+		gotoWakeupTime = isNextWakeupTime(True)
+		if gotoWakeupTime != -1:
+			curtime = localtime(time())
+			if curtime.tm_year > 1970:
+				wakeup_time = int(gotoWakeupTime - time())
+				if wakeup_time > 0:
+					self.standbyWakeupTimer.startLongTimer(wakeup_time)
+
 		self.onFirstExecBegin.append(self.__onFirstExecBegin)
 		self.onClose.append(self.__onClose)
 
@@ -104,6 +115,7 @@ class Standby(Screen):
 		inStandby = None
 		self.standbyTimeoutTimer.stop()
 		self.standbyStopServiceTimer.stop()
+		self.standbyWakeupTimer.stop()
 		self.timeHandler and self.timeHandler.m_timeUpdated.get().remove(self.stopService)
 		if self.paused_service:
 			self.paused_action and self.paused_service.unPauseService()
@@ -159,6 +171,8 @@ class Standby(Screen):
 			from RecordTimer import RecordTimerEntry
 			RecordTimerEntry.TryQuitMainloop()
 
+	def standbyWakeup(self):
+		self.Power()
 
 class StandbySummary(Screen):
 	skin = """

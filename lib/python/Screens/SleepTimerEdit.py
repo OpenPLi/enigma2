@@ -106,7 +106,7 @@ class SleepTimerEdit(ConfigListScreen, Screen):
 		self.list.append(getConfigListEntry(_("Enable wakeup timer"),
 			config.usage.wakeup_enabled,
 			_("Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'.")))
-		if config.usage.wakeup_enabled.value:
+		if config.usage.wakeup_enabled.value != "no":
 			for i in range(7):
 				self.list.append(getConfigListEntry([_("Monday"), _("Tuesday"), _("Wednesday"), _("Thursday"), _("Friday"), _("Saturday"), _("Sunday")][i],
 					config.usage.wakeup_day[i]))
@@ -152,7 +152,7 @@ class SleepTimerEdit(ConfigListScreen, Screen):
 
 	def currentEventTime(self):
 		remaining = 0
-		ref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
+		ref = self.session.nav.getCurrentlyPlayingServiceReference()
 		if ref:
 			path = ref.getPath()
 			if path: # Movie
@@ -174,10 +174,19 @@ class SleepTimerEdit(ConfigListScreen, Screen):
 					duration = event.getDuration()
 					end = start + duration
 					remaining = end - now
-		return remaining + config.recording.margin_after.value * 60
+		if remaining > 0:
+			return remaining + config.recording.margin_after.value * 60
+		return remaining
 
-def isNextWakeupTime():
-	if config.usage.wakeup_enabled.value:
+def isNextWakeupTime(standby_timer=False):
+	wakeup_enabled = config.usage.wakeup_enabled.value
+	if wakeup_enabled != "no":
+		if not standby_timer:
+			if wakeup_enabled == "standby":
+				return -1
+		else:
+			if wakeup_enabled == "deepstandby":
+				return -1
 		wakeup_day, wakeup_time = WakeupDayTimeOfWeek()
 		if wakeup_day == -1:
 				return -1
