@@ -1178,20 +1178,25 @@ int eDVBFrontend::readFrontendData(int type)
 					{
 						for(unsigned int i=0; i<prop[0].u.st.len; i++)
 						{
-							if (prop[0].u.st.stat[i].scale == FE_SCALE_DECIBEL)
+							if (prop[0].u.st.stat[i].scale == FE_SCALE_DECIBEL &&
+								type == iFrontendInformation_ENUMS::signalQualitydB)
+							{
 								signalqualitydb = prop[0].u.st.stat[i].svalue / 10;
-							else if (prop[0].u.st.stat[i].scale == FE_SCALE_RELATIVE)
+								return signalqualitydb;
+							}
+							else if (prop[0].u.st.stat[i].scale == FE_SCALE_RELATIVE &&
+								type == iFrontendInformation_ENUMS::signalQuality)
+							{
 								signalquality = prop[0].u.st.stat[i].svalue;
+								return signalquality;
+							}
 						}
 					}
 				}
 #endif
-				// fallback to old DVB API
-				if(!signalquality && !signalqualitydb || strstr(m_description, "Sundtek"))
-				{
-					int snr = readFrontendData(iFrontendInformation_ENUMS::snrValue);
-					calculateSignalQuality(snr, signalquality, signalqualitydb);
-				}
+				/* fallback to old DVB API */
+				int snr = readFrontendData(iFrontendInformation_ENUMS::snrValue);
+				calculateSignalQuality(snr, signalquality, signalqualitydb);
 
 				if (type == iFrontendInformation_ENUMS::signalQuality)
 				{

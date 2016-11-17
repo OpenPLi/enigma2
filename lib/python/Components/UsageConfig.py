@@ -577,7 +577,7 @@ def InitUsageConfig():
 		("twn hkn",_("Traditional Chinese")),
 		("ces cze", _("Czech")),
 		("dan", _("Danish")),
-		("dut ndl", _("Dutch")),
+		("dut ndl nld", _("Dutch")),
 		("eng qaa", _("English")),
 		("est", _("Estonian")),
 		("fin", _("Finnish")),
