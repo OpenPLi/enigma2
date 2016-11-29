@@ -127,7 +127,7 @@ class ServiceInfo(Converter, object):
 		elif self.type == self.IS_SD_AND_NOT_WIDESCREEN:
 			return info.getInfo(iServiceInformation.sVideoHeight) < 720 and info.getInfo(iServiceInformation.sAspect) not in WIDESCREEN
 		elif self.type == self.IS_4K:
-			return info.getInfo(iServiceInformation.sVideoHeight) >= 2160
+			return info.getInfo(iServiceInformation.sVideoHeight) >= 2100
 		return False
 
 	boolean = property(getBoolean)
