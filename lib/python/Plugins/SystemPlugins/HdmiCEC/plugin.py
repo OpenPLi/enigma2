@@ -1,7 +1,17 @@
+from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen
-from Components.config import config, getConfigListEntry
+from Components.config import config, getConfigListEntry, configfile
 from Components.Sources.StaticText import StaticText
+from Components.ActionMap import ActionMap
+from Tools.Directories import fileExists
+
+_hdmiCec = None
+def inithdmiCec():
+	global _hdmiCec
+	if fileExists("/dev/hdmi_cec") or fileExists("/dev/misc/hdmi_cec0") and _hdmiCec is None:
+		import Components.HdmiCec
+		_hdmiCec = Components.HdmiCec.hdmi_cec
 
 class HdmiCECSetupScreen(Screen, ConfigListScreen):
 	skin = """
@@ -20,13 +30,8 @@ class HdmiCECSetupScreen(Screen, ConfigListScreen):
 	</screen>"""
 
 	def __init__(self, session):
-		self.skin = HdmiCECSetupScreen.skin
 		Screen.__init__(self, session)
-
 		self.setTitle(_("HDMI-CEC setup"))
-
-		from Components.ActionMap import ActionMap
-		from Components.Button import Button
 
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
@@ -50,7 +55,6 @@ class HdmiCECSetupScreen(Screen, ConfigListScreen):
 		self.list = []
 		ConfigListScreen.__init__(self, self.list, session = self.session)
 		self.createSetup()
-		self.updateAddress()
 
 	def createSetup(self):
 		self.list = []
@@ -71,18 +75,23 @@ class HdmiCECSetupScreen(Screen, ConfigListScreen):
 			self.list.append(getConfigListEntry(_("Repeat leave standby messages"), config.hdmicec.repeat_wakeup_timer))
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
+		self.updateAddress()
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
-		self.createSetup()
+		if self["config"].getCurrent()[0] == _("Enabled"):
+			self.createSetup()
 
 	def keyRight(self):
 		ConfigListScreen.keyRight(self)
-		self.createSetup()
+		if self["config"].getCurrent()[0] == _("Enabled"):
+			self.createSetup()
 
 	def keyGo(self):
-		for x in self["config"].list:
-			x[1].save()
+		if self["config"].isChanged():
+			for x in self["config"].list:
+				x[1].save()
+			configfile.save()
 		self.close()
 
 	def keyCancel(self):
@@ -91,18 +100,15 @@ class HdmiCECSetupScreen(Screen, ConfigListScreen):
 		self.close()
 
 	def setFixedAddress(self):
-		import Components.HdmiCec
-		Components.HdmiCec.hdmi_cec.setFixedPhysicalAddress(Components.HdmiCec.hdmi_cec.getPhysicalAddress())
+		_hdmiCec.setFixedPhysicalAddress(_hdmiCec.getPhysicalAddress())
 		self.updateAddress()
 
 	def clearFixedAddress(self):
-		import Components.HdmiCec
-		Components.HdmiCec.hdmi_cec.setFixedPhysicalAddress("0.0.0.0")
+		_hdmiCec.setFixedPhysicalAddress("0.0.0.0")
 		self.updateAddress()
 
 	def updateAddress(self):
-		import Components.HdmiCec
-		self["current_address"].setText(_("Current CEC address") + ": " + Components.HdmiCec.hdmi_cec.getPhysicalAddress())
+		self["current_address"].setText(_("Current CEC address") + ": " + _hdmiCec.getPhysicalAddress())
 		if config.hdmicec.fixed_physical_address.value == "0.0.0.0":
 			fixedaddresslabel = ""
 		else:
@@ -118,9 +124,7 @@ def startSetup(menuid):
 	return []
 
 def Plugins(**kwargs):
-	from os import path
-	if path.exists("/dev/hdmi_cec") or path.exists("/dev/misc/hdmi_cec0"):
-		import Components.HdmiCec
-		from Plugins.Plugin import PluginDescriptor
+	inithdmiCec()
+	if _hdmiCec is not None:
 		return [PluginDescriptor(where = PluginDescriptor.WHERE_MENU, fnc = startSetup)]
 	return []
