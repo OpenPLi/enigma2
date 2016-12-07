@@ -60,7 +60,16 @@ class HdmiCec:
 		config.hdmicec.volume_forwarding.addNotifier(self.configVolumeForwarding)
 		config.hdmicec.enabled.addNotifier(self.configVolumeForwarding)
 		if config.hdmicec.enabled.value and config.hdmicec.handle_deepstandby_events.value and not getFPWasTimerWakeup():
-			self.onLeaveStandby()
+			if config.hdmicec.repeat_wakeup_timer.value == "0":
+				self.bootwait = eTimer()
+				self.bootwait.timeout.get().append(self.pauseFromBoot)
+				if not self.bootwait.isActive():
+					self.bootwait.startLongTimer(3)
+			else:
+				self.onLeaveStandby()
+
+	def pauseFromBoot(self):
+		self.onLeaveStandby()
 
 	def getPhysicalAddress(self):
 		physicaladdress = eHdmiCEC.getInstance().getPhysicalAddress()
