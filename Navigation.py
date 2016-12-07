@@ -36,6 +36,7 @@ class Navigation:
 		self.currentlyPlayingService = None
 		self.RecordTimer = RecordTimer.RecordTimer()
 		self.__wasTimerWakeup = getFPWasTimerWakeup()
+		self.__isRestartUI = config.misc.RestartUI.value
 		startup_to_standby = config.usage.startup_to_standby.value
 		wakeup_time_type = config.misc.prev_wakeup_time_type.value
 		if self.__wasTimerWakeup:
@@ -54,6 +55,9 @@ class Navigation:
 
 	def wasTimerWakeup(self):
 		return self.__wasTimerWakeup
+
+	def isRestartUI(self):
+		return self.__isRestartUI
 
 	def dispatchEvent(self, i):
 		for x in self.event:
