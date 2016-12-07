@@ -59,9 +59,8 @@ class HdmiCec:
 		eActionMap.getInstance().bindAction('', -maxint - 1, self.keyEvent)
 		config.hdmicec.volume_forwarding.addNotifier(self.configVolumeForwarding)
 		config.hdmicec.enabled.addNotifier(self.configVolumeForwarding)
-		if config.hdmicec.handle_deepstandby_events.value:
-			if not getFPWasTimerWakeup():
-				self.onLeaveStandby()
+		if config.hdmicec.enabled.value and config.hdmicec.handle_deepstandby_events.value and not getFPWasTimerWakeup():
+			self.onLeaveStandby()
 
 	def getPhysicalAddress(self):
 		physicaladdress = eHdmiCEC.getInstance().getPhysicalAddress()
