@@ -51,3 +51,4 @@ SystemInfo["HasMultichannelPCM"] = fileCheck("/proc/stb/audio/multichannel_pcm")
 SystemInfo["HasMMC"] = HardwareInfo().get_device_model() in ('vusolo4k', 'hd51', 'hd52')
 SystemInfo["CommonInterfaceCIDelay"] = fileCheck("/proc/stb/tsmux/rmx_delay")
 SystemInfo["CanDoTranscodeAndPIP"] = HardwareInfo().get_device_model() in "vusolo4k"
+SystemInfo["HasColordepth"] = fileCheck("/proc/stb/video/hdmi_colordepth")
