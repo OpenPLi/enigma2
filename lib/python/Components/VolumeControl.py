@@ -16,6 +16,7 @@ class VolumeControl:
 		globalActionMap.actions["volumeUp"]=self.volUp
 		globalActionMap.actions["volumeDown"]=self.volDown
 		globalActionMap.actions["volumeMute"]=self.volMute
+		globalActionMap.actions["volumeMuteLong"]=self.volMuteLong
 
 		assert not VolumeControl.instance, "only one VolumeControl instance is allowed!"
 		VolumeControl.instance = self
@@ -81,3 +82,6 @@ class VolumeControl:
 			else:
 				self.muteDialog.hide()
 				self.volumeDialog.setValue(vol)
+
+	def volMuteLong(self):
+		self.muteDialog.hide()
