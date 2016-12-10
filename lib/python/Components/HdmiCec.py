@@ -33,9 +33,9 @@ for i in (10, 50, 100, 150, 250):
 	choicelist.append(("%d" % i, "%d ms" % i))
 config.hdmicec.minimum_send_interval = ConfigSelection(default = "0", choices = [("0", _("Disabled"))] + choicelist)
 choicelist = []
-for i in range(5, 65, 5):
+for i in [3] + range(5, 65, 5):
 	choicelist.append(("%d" % i, _("%d sec") % i))
-config.hdmicec.repeat_wakeup_timer = ConfigSelection(default = "0", choices = [("0", _("Disabled"))] + choicelist)
+config.hdmicec.repeat_wakeup_timer = ConfigSelection(default = "3", choices = [("0", _("Disabled"))] + choicelist)
 
 class HdmiCec:
 
