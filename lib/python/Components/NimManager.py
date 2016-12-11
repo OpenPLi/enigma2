@@ -1264,8 +1264,10 @@ def InitNimManager(nimmgr, update_slots = []):
 					else:
 						section.format = ConfigSelection([("unicable", _("Unicable")), ("jess", _("JESS"))])
 						section.format.addNotifier(formatChanged)
-
-				unicable_xml = xml.etree.cElementTree.parse(eEnv.resolve("${datadir}/enigma2/unicable.xml")).getroot()
+				try:
+					unicable_xml = xml.etree.cElementTree.parse(eEnv.resolve("${datadir}/enigma2/unicable.xml")).getroot()
+				except:
+					unicable_xml = ""
 				unicableList = [("unicable_lnb", _("Unicable LNB")), ("unicable_matrix", _("Unicable switch")), ("unicable_user", "Unicable "+_("User defined"))]
 				if not config.unicable.content.items.get("unicable", False):
 					config.unicable.unicable = ConfigSelection(unicableList)
