@@ -1091,9 +1091,6 @@ void eDVBSatelliteEquipmentControl::prepareTurnOffSatCR(iDVBFrontend &frontend)
 	sec_sequence.push_back( eSecCommand(eSecCommand::SET_TONE, iDVBFrontend::toneOff) );
 	sec_sequence.push_back( eSecCommand(eSecCommand::SLEEP, m_params[DELAY_AFTER_VOLTAGE_CHANGE_BEFORE_SWITCH_CMDS]) );
 
-	eDVBDiseqcCommand diseqc;
-	memset(diseqc.data, 0, MAX_DISEQC_LENGTH);
-
 	switch((SatCR_format_t)diction)
 	{
 		case(SatCR_format_unicable):
@@ -1112,6 +1109,9 @@ void eDVBSatelliteEquipmentControl::prepareTurnOffSatCR(iDVBFrontend &frontend)
 			unsigned int position = 0;
 			unsigned int bank = (position << 2) | (mode << 0);
 
+			eDVBDiseqcCommand diseqc;
+			memset(diseqc.data, 0, MAX_DISEQC_LENGTH);
+
 			diseqc.len = 5;
 			diseqc.data[0] = 0xe0;
 			diseqc.data[1] = 0x10;
@@ -1120,6 +1120,8 @@ void eDVBSatelliteEquipmentControl::prepareTurnOffSatCR(iDVBFrontend &frontend)
 			diseqc.data[4] = (unsigned char)(encoded_frequency_T & 0xff);
 
 			eDebug("**** shutdown unicable ub %u", ub);
+
+			sec_sequence.push_back( eSecCommand(eSecCommand::SEND_DISEQC, diseqc) );
 
 			break;
 		}
@@ -1138,6 +1140,9 @@ void eDVBSatelliteEquipmentControl::prepareTurnOffSatCR(iDVBFrontend &frontend)
 			unsigned int mode = 0;
 			unsigned int position = 0;
 
+			eDVBDiseqcCommand diseqc;
+			memset(diseqc.data, 0, MAX_DISEQC_LENGTH);
+
 			diseqc.len = 4;
 			diseqc.data[0] = 0x70;
 			diseqc.data[1] = (unsigned char)((ub << 3) | ((encoded_frequency_T & 0x700) >> 8));
@@ -1146,16 +1151,17 @@ void eDVBSatelliteEquipmentControl::prepareTurnOffSatCR(iDVBFrontend &frontend)
 
 			eDebug("**** shutdown JESS ub %d", ub);
 
+			sec_sequence.push_back( eSecCommand(eSecCommand::SEND_DISEQC, diseqc) );
+
 			break;
 		}
 
 		default:
 		{
-			eDebug("**** shutdown unknown unicable type ub %d!", (int)userband);
+			eDebug("**** ignore shutdown unknown unicable type %u ub %u", (int)diction, (int)userband);
 		}
 	}
 
-	sec_sequence.push_back( eSecCommand(eSecCommand::SEND_DISEQC, diseqc) );
 	sec_sequence.push_back( eSecCommand(eSecCommand::SLEEP, m_params[DELAY_AFTER_LAST_DISEQC_CMD]) );
 	sec_sequence.push_back( eSecCommand(eSecCommand::SET_VOLTAGE, iDVBFrontend::voltage13) );
 	sec_sequence.push_back( eSecCommand(eSecCommand::DELAYED_CLOSE_FRONTEND) );
