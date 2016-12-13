@@ -510,10 +510,16 @@ def InitUsageConfig():
 		def setHaveColorspace(configElement):
 			open(SystemInfo["HasColorspace"], "w").write(configElement.value)
 		if SystemInfo["HasColorspaceSimple"]:
-			config.av.hdmicolorspace = ConfigSelection(default = "Edid(Auto)", choices={"Edid(Auto)": _("Auto"), "Hdmi_Rgb": _("RGB")})
+			config.av.hdmicolorspace = ConfigSelection(default = "Edid(Auto)", choices={"Edid(Auto)": _("Auto"), "Hdmi_Rgb": _("RGB"), "444": _("YCbCr444"), "422": _("YCbCr422"), "420": _("YCbCr420")})
 		else:
 			config.av.hdmicolorspace = ConfigSelection(default = "auto", choices={"auto": _("auto"), "rgb": _("rgb"), "420": _("420"), "422": _("422"), "444": _("444")})
 		config.av.hdmicolorspace.addNotifier(setHaveColorspace)
+
+	if SystemInfo["HasColordepth"]:
+		def setHaveColordepth(configElement):
+			open(SystemInfo["HasColordepth"], "w").write(configElement.value)
+		config.av.hdmicolordepth = ConfigSelection(default = "auto", choices={"auto": _("Auto"), "8bit": _("8bit"), "10bit": _("10bit"), "12bit": _("12bit")})
+		config.av.hdmicolordepth.addNotifier(setHaveColordepth)
 
 	config.subtitles = ConfigSubsection()
 	config.subtitles.ttx_subtitle_colors = ConfigSelection(default = "1", choices = [
