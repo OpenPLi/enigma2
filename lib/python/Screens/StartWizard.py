@@ -11,6 +11,7 @@ except:
 from Components.Pixmap import Pixmap, MovingPixmap, MultiPixmap
 from Components.config import config, ConfigBoolean, configfile, ConfigSubsection
 from LanguageSelection import LanguageWizard
+import os
 
 config.misc.firstrun = ConfigBoolean(default = True)
 config.misc.languageselected = ConfigBoolean(default = True)
@@ -36,7 +37,6 @@ class StartWizard(WizardLanguage, Rc):
 		configfile.save()
 
 def checkForAvailableAutoBackup():
-	import os
 	for dir in [name for name in os.listdir("/media/") if os.path.isdir(os.path.join("/media/", name))]:
 		if os.path.isfile("/media/%s/backup/PLi-AutoBackup.tar.gz" % dir):
 			return True
@@ -44,6 +44,9 @@ def checkForAvailableAutoBackup():
 
 class AutoRestoreWizard(MessageBox):
 	def __init__(self, session):
+		if not os.path.isfile("/etc/installed"):
+			from Components.Console import Console
+			Console().ePopen("opkg list_installed | cut -d ' ' -f 1 > /etc/installed;chmod 444 /etc/installed")
 		MessageBox.__init__(self, session, _("Do you want to autorestore settings?"), type=MessageBox.TYPE_YESNO, timeout=10, default=True, simple=True)
 
 	def close(self, value):
