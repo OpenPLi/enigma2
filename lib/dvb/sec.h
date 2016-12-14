@@ -272,7 +272,7 @@ public:
 #define guard_offset_min -8000
 #define guard_offset_max 8000
 #define guard_offset_step 8000
-#define MAX_SATCR 8
+#define MAX_SATCR 32
 #define MAX_LNBNUM 32
 
 	SatCR_format_t SatCR_format;
