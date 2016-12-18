@@ -744,7 +744,10 @@ class RecordTimer(timer.Timer):
 				self.cleanupDisabled()
 				# Remove old timers as set in config
 				self.cleanupDaily(config.recording.keep_timers.value)
-				insort(self.processed_timers, w)
+				# If we want to keep done timers, re-insert in the active list
+				if config.recording.keep_timers.value > 0:
+					insort(self.processed_timers, w)
+
 		self.stateChanged(w)
 
 	def checkWrongRunningTimers(self):
