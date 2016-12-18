@@ -1267,9 +1267,11 @@ class RecordTimer(timer.Timer):
 			for x in self.timer_list:
 				if x.setAutoincreaseEnd():
 					self.timeChanged(x)
-		# now the timer should be in the processed_timers list. remove it from there.
-		self.processed_timers.remove(entry)
-		self.saveTimer()
+		# If we want to keep done timers, re-insert in the active list
+		if config.recording.keep_timers.value > 0:
+			# now the timer should be in the processed_timers list. remove it from there.
+			self.processed_timers.remove(entry)
+			self.saveTimer()
 
 	def shutdown(self):
 		self.saveTimer()
