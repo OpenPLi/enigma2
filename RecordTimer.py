@@ -745,7 +745,7 @@ class RecordTimer(timer.Timer):
 				# Remove old timers as set in config
 				self.cleanupDaily(config.recording.keep_timers.value)
 				# If we want to keep done timers, re-insert in the active list
-				if config.recording.keep_timers.value > 0:
+				if config.recording.keep_timers.value > 0 and w not in self.processed_timers:
 					insort(self.processed_timers, w)
 
 		self.stateChanged(w)
@@ -1267,11 +1267,10 @@ class RecordTimer(timer.Timer):
 			for x in self.timer_list:
 				if x.setAutoincreaseEnd():
 					self.timeChanged(x)
-		# If we want to keep done timers, re-insert in the active list
-		if config.recording.keep_timers.value > 0:
+		if entry in self.processed_timers:
 			# now the timer should be in the processed_timers list. remove it from there.
 			self.processed_timers.remove(entry)
-			self.saveTimer()
+		self.saveTimer()
 
 	def shutdown(self):
 		self.saveTimer()
