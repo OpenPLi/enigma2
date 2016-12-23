@@ -48,7 +48,6 @@ class Menu(Screen, ProtectedScreen):
 	ALLOW_SUSPEND = True
 
 	def okbuttonClick(self):
-		# print "okbuttonClick"
 		self.resetNumberKey()
 		selection = self["menu"].getCurrent()
 		if selection and selection[1]:
@@ -72,7 +71,7 @@ class Menu(Screen, ProtectedScreen):
 	def nothing(self): #dummy
 		pass
 
-	def openDialog(self, *dialog):			  # in every layer needed
+	def openDialog(self, *dialog): # in every layer needed
 		self.session.openWithCallback(self.menuClosed, *dialog)
 
 	def openSetup(self, dialog):
@@ -208,7 +207,7 @@ class Menu(Screen, ProtectedScreen):
 	def createMenuList(self):
 		self.list = []
 		self.menuID = None
-		for x in self.parentmenu:					       #walk through the actual nodelist
+		for x in self.parentmenu: #walk through the actual nodelist
 			if not x.tag:
 				continue
 			if x.tag == 'item':
