@@ -70,7 +70,7 @@ class Harddisk:
 		self.phys_path = os.path.realpath(self.sysfsPath('device'))
 
 		self.removable = removable
-		self.internal = "pci" in self.phys_path or "ahci" in self.phys_path
+		self.internal = "pci" in self.phys_path or "ahci" in self.phys_path or "sata" in self.phys_path
 		try:
 			data = open("/sys/block/%s/queue/rotational" % device, "r").read().strip()
 			self.rotational = int(data)
