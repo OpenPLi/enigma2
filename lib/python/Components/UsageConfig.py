@@ -77,6 +77,7 @@ def InitUsageConfig():
 		("a_z", _("alphabetical")),
 		("default", _("Default")),
 		("user", _("user defined")),])
+	config.usage.menu_show_numbers = ConfigYesNo(default = False)
 	config.usage.menu_path = ConfigSelection(default = "off", choices = [
 		("off", _("Disabled")),
 		("small", _("Small")),

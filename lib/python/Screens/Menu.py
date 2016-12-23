@@ -266,6 +266,10 @@ class Menu(Screen, ProtectedScreen):
 		else:
 			# Sort by Weight
 			self.list.sort(key=lambda x: int(x[3]))
+
+		if config.usage.menu_show_numbers.value:
+			self.list = [(str(x[0] + 1) + " " +x[1][0], x[1][1], x[1][2]) for x in enumerate(self.list)]
+
 		self["menu"].updateList(self.list)
 
 	def keyNumberGlobal(self, number):
