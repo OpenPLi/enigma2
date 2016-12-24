@@ -70,7 +70,6 @@ case $ret in
 		#auto install and autobackup
 		[ -f /sys/class/vtconsole/vtcon1/bind ] && echo 1 > /sys/class/vtconsole/vtcon1/bind
 		/etc/init.d/settings-restore.sh
-		/etc/init.d/avahi-daemon stop
 		ifdown eth1
 		ip addr flush dev eth1
 		ifdown eth0
@@ -79,7 +78,6 @@ case $ret in
 		killall -9 udhcpc
 		rm /var/run/udhcpc*
 		/etc/init.d/networking start
-		/etc/init.d/avahi-daemon start
 		/etc/init.d/autoinstall.sh
 		;;
 	*)
