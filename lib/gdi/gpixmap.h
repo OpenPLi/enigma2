@@ -15,14 +15,14 @@ struct gRGB
 	union {
 #if BYTE_ORDER == LITTLE_ENDIAN
 		struct {
-			unsigned char b, g, r, a;
+			uint8_t b, g, r, a;
 		};
 #else
 		struct {
-			unsigned char a, r, g, b;
+			uint8_t a, r, g, b;
 		};
 #endif
-		unsigned int value;
+		uint32_t value;
 	};
 	gRGB(int r, int g, int b, int a=0): b(b), g(g), r(r), a(a)
 	{
