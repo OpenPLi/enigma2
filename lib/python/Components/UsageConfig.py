@@ -77,6 +77,7 @@ def InitUsageConfig():
 		("a_z", _("alphabetical")),
 		("default", _("Default")),
 		("user", _("user defined")),])
+	config.usage.menu_show_numbers = ConfigYesNo(default = False)
 	config.usage.menu_path = ConfigSelection(default = "off", choices = [
 		("off", _("Disabled")),
 		("small", _("Small")),
@@ -336,6 +337,12 @@ def InitUsageConfig():
 			open(SystemInfo["StandbyLED"], "w").write(configElement.value and "on" or "off")
 		config.usage.standbyLED = ConfigYesNo(default = True)
 		config.usage.standbyLED.addNotifier(standbyLEDChanged)
+
+	if SystemInfo["PowerOffDisplay"]:
+		def powerOffDisplayChanged(configElement):
+			open(SystemInfo["PowerOffDisplay"], "w").write(configElement.value and "1" or "0")
+		config.usage.powerOffDisplay = ConfigYesNo(default = True)
+		config.usage.powerOffDisplay.addNotifier(powerOffDisplayChanged)
 
 	if SystemInfo["WakeOnLAN"]:
 		def wakeOnLANChanged(configElement):

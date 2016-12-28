@@ -12,6 +12,7 @@ from Components.Label import Label
 from Tools.BoundFunction import boundFunction
 from Plugins.Plugin import PluginDescriptor
 from Tools.Directories import resolveFilename, SCOPE_SKIN
+from enigma import eTimer
 
 import xml.etree.cElementTree
 
@@ -47,7 +48,7 @@ class Menu(Screen, ProtectedScreen):
 	ALLOW_SUSPEND = True
 
 	def okbuttonClick(self):
-		# print "okbuttonClick"
+		self.resetNumberKey()
 		selection = self["menu"].getCurrent()
 		if selection and selection[1]:
 			selection[1]()
@@ -70,7 +71,7 @@ class Menu(Screen, ProtectedScreen):
 	def nothing(self): #dummy
 		pass
 
-	def openDialog(self, *dialog):			  # in every layer needed
+	def openDialog(self, *dialog): # in every layer needed
 		self.session.openWithCallback(self.menuClosed, *dialog)
 
 	def openSetup(self, dialog):
@@ -175,6 +176,7 @@ class Menu(Screen, ProtectedScreen):
 				"ok": self.okbuttonClick,
 				"cancel": self.closeNonRecursive,
 				"menu": self.closeRecursive,
+				"0": self.keyNumberGlobal,
 				"1": self.keyNumberGlobal,
 				"2": self.keyNumberGlobal,
 				"3": self.keyNumberGlobal,
@@ -198,10 +200,14 @@ class Menu(Screen, ProtectedScreen):
 		self.setScreenPathMode(True)
 		self.setTitle(title)
 
+		self.number = 0
+		self.nextNumberTimer = eTimer()
+		self.nextNumberTimer.callback.append(self.okbuttonClick)
+
 	def createMenuList(self):
 		self.list = []
 		self.menuID = None
-		for x in self.parentmenu:					       #walk through the actual nodelist
+		for x in self.parentmenu: #walk through the actual nodelist
 			if not x.tag:
 				continue
 			if x.tag == 'item':
@@ -266,21 +272,33 @@ class Menu(Screen, ProtectedScreen):
 		else:
 			# Sort by Weight
 			self.list.sort(key=lambda x: int(x[3]))
+
+		if config.usage.menu_show_numbers.value:
+			self.list = [(str(x[0] + 1) + " " +x[1][0], x[1][1], x[1][2]) for x in enumerate(self.list)]
+
 		self["menu"].updateList(self.list)
 
 	def keyNumberGlobal(self, number):
-		# print "menu keyNumber:", number
-		# Calculate index
-		number -= 1
+		self.number = self.number * 10 + number
+		if self.number and self.number <= len(self["menu"].list):
+			self["menu"].setIndex(self.number - 1)
+			if len(self["menu"].list) < 10 or self.number >= 10:
+				self.okbuttonClick()
+			else:
+				self.nextNumberTimer.start(1500, True)
+		else:
+			self.number = 0
 
-		if len(self["menu"].list) > number:
-			self["menu"].setIndex(number)
-			self.okbuttonClick()
+	def resetNumberKey(self):
+		self.nextNumberTimer.stop()
+		self.number = 0
 
 	def closeNonRecursive(self):
+		self.resetNumberKey()
 		self.close(False)
 
 	def closeRecursive(self):
+		self.resetNumberKey()
 		self.close(True)
 
 	def createSummary(self):
