@@ -94,7 +94,6 @@ class Picon(Renderer):
 		pngname = findPicon("picon_default")
 		self.defaultpngname = None
 		self.showPicon = True
-		self.show = False
 		if not pngname:
 			tmp = resolveFilename(SCOPE_CURRENT_SKIN, "picon_default.png")
 			if pathExists(tmp):
@@ -139,14 +138,11 @@ class Picon(Renderer):
 						self.instance.setScale(1)
 						self.instance.setPixmapFromFile(pngname)
 						self.instance.show()
-						self.show = True
 					else:
 						self.instance.hide()
-						self.show = False
 					self.pngname = pngname
-			elif self.show:
+			elif self.instance.visible:
 				self.instance.hide()
-				self.show = False
 
 harddiskmanager.on_partition_list_change.append(onPartitionChange)
 initPiconPaths()
