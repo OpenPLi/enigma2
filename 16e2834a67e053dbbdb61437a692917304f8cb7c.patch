@@ -1,0 +1,60 @@
+From 16e2834a67e053dbbdb61437a692917304f8cb7c Mon Sep 17 00:00:00 2001
+From: captain <openatv@gmail.com>
+Date: Tue, 20 Dec 2016 18:39:13 +0100
+Subject: [PATCH] [ci] hide mmi event when active
+
+---
+ lib/dvb_ci/dvbci_mmi.cpp | 8 +++++++-
+ lib/dvb_ci/dvbci_mmi.h   | 1 +
+ 2 files changed, 8 insertions(+), 1 deletion(-)
+
+diff --git a/lib/dvb_ci/dvbci_mmi.cpp b/lib/dvb_ci/dvbci_mmi.cpp
+index 224bae3..6453395 100644
+--- a/lib/dvb_ci/dvbci_mmi.cpp
++++ b/lib/dvb_ci/dvbci_mmi.cpp
+@@ -21,6 +21,7 @@ eDVBCIMMISession::eDVBCIMMISession(eDVBCISlot *tslot)
+ {
+ 	slot = tslot;
+ 	slot->setMMIManager(this);
++	is_mmi_active = false;
+ }
+ 
+ eDVBCIMMISession::~eDVBCIMMISession()
+@@ -29,7 +30,8 @@ eDVBCIMMISession::~eDVBCIMMISession()
+ 	slot->mmiClosed();
+ #endif
+ 	slot->setMMIManager(NULL);
+-	eDVBCI_UI::getInstance()->mmiSessionDestroyed(slot->getSlotID());
++	if (is_mmi_active)
++		eDVBCI_UI::getInstance()->mmiSessionDestroyed(slot->getSlotID());
+ }
+ 
+ int eDVBCIMMISession::receivedAPDU(const unsigned char *tag, const void *data, int len)
+@@ -40,11 +42,15 @@ int eDVBCIMMISession::receivedAPDU(const unsigned char *tag, const void *data, i
+ 	eDebugNoNewLineEnd("");
+ 
+ 	if ((tag[0]==0x9f) && (tag[1]==0x88))
++	{
+ 		if (eDVBCI_UI::getInstance()->processMMIData(slot->getSlotID(), tag, data, len) == 1)
+ 		{
+ 			state=stateDisplayReply;
+ 			return 1;
+ 		}
++		else
++			is_mmi_active = true;
++	}
+ 
+ 	return 0;
+ }
+diff --git a/lib/dvb_ci/dvbci_mmi.h b/lib/dvb_ci/dvbci_mmi.h
+index ee68ff7..4f78885 100644
+--- a/lib/dvb_ci/dvbci_mmi.h
++++ b/lib/dvb_ci/dvbci_mmi.h
+@@ -12,6 +12,7 @@ class eDVBCIMMISession: public eDVBCISession
+ 	int receivedAPDU(const unsigned char *tag, const void *data, int len);
+ 	int doAction();
+ 	eDVBCISlot *slot;
++	bool is_mmi_active;
+ public:
+ 	eDVBCIMMISession(eDVBCISlot *tslot);
+ 	~eDVBCIMMISession();
