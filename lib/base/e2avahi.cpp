@@ -17,20 +17,20 @@ static AvahiPoll avahi_poll_api;
 struct AvahiTimeout: public Object
 {
 	ePtr<eTimer> timer;
-    AvahiTimeoutCallback callback;
-    void *userdata;
+	AvahiTimeoutCallback callback;
+	void *userdata;
 
-    void timeout()
+	void timeout()
 	{
 		eDebug("[Avahi] timeout elapsed");
 		callback(this, userdata);
 	}
 
-    AvahiTimeout(eMainloop *mainloop, AvahiTimeoutCallback _callback, void *_userdata):
+	AvahiTimeout(eMainloop *mainloop, AvahiTimeoutCallback _callback, void *_userdata):
 		timer(eTimer::create(mainloop)),
 		callback(_callback),
 		userdata(_userdata)
-    {
+	{
 		CONNECT(timer->timeout, AvahiTimeout::timeout);
 	}
 };
@@ -168,25 +168,25 @@ static void avahi_client_callback(AvahiClient *client, AvahiClientState state, v
 			 * name on the network, register all our services */
 			avahi_service_try_register_all();
 			break;
-        case AVAHI_CLIENT_FAILURE:
+		case AVAHI_CLIENT_FAILURE:
 			/* Problem? Maybe we have to re-register everything? */
-            eDebug("[Avahi] Client failure: %s\n", avahi_strerror(avahi_client_errno(client)));
-            break;
-        case AVAHI_CLIENT_S_COLLISION:
-            /* Let's drop our registered services. When the server is back
-             * in AVAHI_SERVER_RUNNING state we will register them
-             * again with the new host name. */
-        case AVAHI_CLIENT_S_REGISTERING:
-            /* The server records are now being established. This
-             * might be caused by a host name change. We need to wait
-             * for our own records to register until the host name is
-             * properly esatblished. */
-            avahi_service_reset_all();
-            break;
-        case AVAHI_CLIENT_CONNECTING:
+			eDebug("[Avahi] Client failure: %s\n", avahi_strerror(avahi_client_errno(client)));
+			break;
+		case AVAHI_CLIENT_S_COLLISION:
+			/* Let's drop our registered services. When the server is back
+			 * in AVAHI_SERVER_RUNNING state we will register them
+			 * again with the new host name. */
+		case AVAHI_CLIENT_S_REGISTERING:
+			/* The server records are now being established. This
+			 * might be caused by a host name change. We need to wait
+			 * for our own records to register until the host name is
+			 * properly esatblished. */
+			avahi_service_reset_all();
+			break;
+		case AVAHI_CLIENT_CONNECTING:
 			/* No action... */
-            break;
-    }
+			break;
+	}
 }
 
 /** Create a new watch for the specified file descriptor and for
@@ -311,18 +311,18 @@ static void avahi_resolver_callback(AvahiServiceResolver *resolver,
 {
 	AvahiBrowserEntry *entry = (AvahiBrowserEntry*)d;
 
-    switch (event) {
-        case AVAHI_RESOLVER_FAILURE:
-            eDebug("[Avahi] Failed to resolve service '%s' of type '%s': %s\n",
+	switch (event) {
+		case AVAHI_RESOLVER_FAILURE:
+			eDebug("[Avahi] Failed to resolve service '%s' of type '%s': %s\n",
 				name, type, avahi_strerror(avahi_client_errno(avahi_service_resolver_get_client(resolver))));
-            break;
-        case AVAHI_RESOLVER_FOUND:
+			break;
+		case AVAHI_RESOLVER_FOUND:
 			if (!(flags & (AVAHI_LOOKUP_RESULT_LOCAL | AVAHI_LOOKUP_RESULT_OUR_OWN)))
 				break; /* Skip local/own services, we don't want to see them */
-            eDebug("[Avahi] ADD Service '%s' of type '%s' at %s:%u", name, type, host_name, port);
-            entry->callback(entry->userdata, E2AVAHI_EVENT_ADD, name, type, host_name, port);
-            break;
-    }
+			eDebug("[Avahi] ADD Service '%s' of type '%s' at %s:%u", name, type, host_name, port);
+			entry->callback(entry->userdata, E2AVAHI_EVENT_ADD, name, type, host_name, port);
+			break;
+	}
 
 	avahi_service_resolver_free(resolver);
 }
@@ -348,7 +348,7 @@ static void avahi_browser_callback(AvahiServiceBrowser *browser,
 		eDebug("[Avahi] REMOVE service '%s' of type '%s' in domain '%s'", name, type, domain);
 		entry->callback(entry->userdata, E2AVAHI_EVENT_REMOVE, name, type, NULL, 0);
 		break;
-    case AVAHI_BROWSER_ALL_FOR_NOW:
+	case AVAHI_BROWSER_ALL_FOR_NOW:
 		/* Useless information... */
 		break;
 	case AVAHI_BROWSER_FAILURE:
