@@ -72,9 +72,9 @@ case $ret in
 		/etc/init.d/settings-restore.sh
 		/etc/init.d/avahi-daemon stop
 		ifdown eth1
-		ip addr flush dev eth1
+		ip addr flush dev eth1 scope global
 		ifdown eth0
-		ip addr flush dev eth0
+		ip addr flush dev eth0 scope global
 		/etc/init.d/networking stop
 		killall -9 udhcpc
 		rm /var/run/udhcpc*
