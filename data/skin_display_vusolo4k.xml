@@ -63,7 +63,7 @@
 	</screen>
 
 	<screen name="InfoBarSummary" position="fill">
-			<widget source="session.CurrentService" render="Label" position="10,5" size="354,45" font="Medium" halign="left" valign="center" foregroundColor="yellow" >
+			<widget source="session.CurrentService" render="Label" position="10,5" size="460,45" font="Medium" halign="left" valign="center" foregroundColor="yellow" >
 				<convert type="ServiceName">Name</convert>
 			</widget>
 			<widget source="session.Event_Now" render="Label" position="0,70" size="440,100" font="Medium" halign="center" valign="center" >
@@ -84,9 +84,9 @@
 					<convert type="EventTime">Remaining</convert>
 					<convert type="RemainingToText">FOLLOW</convert>
 				</widget>
-				<widget source="session.CurrentService" render="Picon" isFrontDisplayPicon="1" position="355,5" size="120,55" transparent="1" halign="center" valign="center" alphatest="blend" >
-          <convert type="ServiceName">Reference</convert>
-        </widget>
+				<widget source="session.CurrentService" render="Picon" isFrontDisplayPicon="1" position="355,5" size="92,55" transparent="1" halign="center" valign="center" alphatest="blend" >
+					<convert type="ServiceName">Reference</convert>
+				</widget>
 			<widget source="session.FrontendInfo" render="Label" position="10,240" size="130,82" borderWidth="1" borderColor="black" zPosition="1" backgroundColor="transpBlack" transparent="1" font="FdLcD;28">
 			<convert type="FrontendInfo">USE_TUNERS_STRING</convert>
 		</widget>
