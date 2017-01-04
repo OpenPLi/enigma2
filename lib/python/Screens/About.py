@@ -92,6 +92,7 @@ class About(Screen):
 		self["AboutScrollLabel"] = ScrollLabel(AboutText)
 		self["key_green"] = Button(_("Translations"))
 		self["key_red"] = Button(_("Latest Commits"))
+		self["key_yellow"] = Button(_("Troubleshoot"))
 		self["key_blue"] = Button(_("Memory Info"))
 
 		self["actions"] = ActionMap(["ColorActions", "SetupActions", "DirectionActions"],
@@ -101,6 +102,7 @@ class About(Screen):
 				"red": self.showCommits,
 				"green": self.showTranslationInfo,
 				"blue": self.showMemoryInfo,
+				"yellow": self.showTroubleshoot,
 				"up": self["AboutScrollLabel"].pageUp,
 				"down": self["AboutScrollLabel"].pageDown
 			})
@@ -113,6 +115,9 @@ class About(Screen):
 
 	def showMemoryInfo(self):
 		self.session.open(MemoryInfo)
+
+	def showTroubleshoot(self):
+		self.session.open(Troubleshoot)
 
 class TranslationInfo(Screen):
 	def __init__(self, session):
@@ -318,3 +323,81 @@ class MemoryInfoSkinParams(HTMLComponent, GUIComponent):
 		return GUIComponent.applySkin(self, desktop, screen)
 
 	GUI_WIDGET = eLabel
+
+class Troubleshoot(Screen):
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		self.skinName = ["CommitInfo", "About"]
+		self.setTitle(_("Troubleshoot"))
+		self["AboutScrollLabel"] = ScrollLabel(_("Please wait"))
+
+		self["actions"] = ActionMap(["SetupActions", "DirectionActions"],
+			{
+				"cancel": self.cancel,
+				"ok": self.cancel,
+				"up": self["AboutScrollLabel"].pageUp,
+				"down": self["AboutScrollLabel"].pageDown,
+				"left": self.left,
+				"right": self.right
+			})
+
+		self["key_red"] = Button(_("Cancel"))
+
+		self.container = eConsoleAppContainer()
+		self.container.appClosed.append(self.appClosed)
+		self.container.dataAvail.append(self.dataAvail)
+		self.titles = ["dmesg", "ifconfig", "df"]
+		self.commands = ["dmesg | tail -n 479", "ifconfig", "df"]
+
+		import os
+		def getfiles(path):
+			mtime = lambda f: os.stat(os.path.join(path, f)).st_mtime
+			return list(sorted(os.listdir(path), key=mtime))
+		for fileName in reversed(getfiles("/mnt/hdd")):
+			if fileName.endswith(".log") and os.path.isfile("/mnt/hdd/" + fileName):
+				self.titles.append("logfile " + fileName)
+				self.commands.append("/mnt/hdd/" + fileName)
+		for fileName in reversed(getfiles("/tmp")):
+			if fileName.endswith(".log") and os.path.isfile("/tmp/" + fileName):
+				self.titles.append("logfile " + fileName)
+				self.commands.append("/tmp/" + fileName)
+
+		self.commandIndex = 0
+		self.onLayoutFinish.append(self.run_console)
+
+	def left(self):
+		self.commandIndex = (self.commandIndex - 1) % len(self.commands)
+		self.run_console()
+
+	def right(self):
+		self.commandIndex = (self.commandIndex + 1) % len(self.commands)
+		self.run_console()
+
+	def appClosed(self, retval):
+		if retval:
+			self["AboutScrollLabel"].setText(_("Some error occured - Please try later"))
+
+	def dataAvail(self, data):
+		self["AboutScrollLabel"].appendText(data)
+
+	def run_console(self):
+		self["AboutScrollLabel"].setText("")
+		self.setTitle(_("Troubleshoot") + " - " + _(self.titles[self.commandIndex]))
+		command = self.commands[self.commandIndex]
+		if command.endswith(".log"):
+			try:
+				self["AboutScrollLabel"].setText(open(command, "r").read())
+			except:
+				self["AboutScrollLabel"].setText(_("Logfile does not exist anymore"))
+		else:
+			try:
+				if self.container.execute(command):
+					raise Exception, "failed to execute: ", command
+			except Exception, e:
+				print "[About] FAIL:", e
+
+	def cancel(self):
+		self.container.appClosed.remove(self.appClosed)
+		self.container.dataAvail.remove(self.dataAvail)
+		self.container = None
+		self.close()
