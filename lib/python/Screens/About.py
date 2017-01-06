@@ -345,8 +345,8 @@ class Troubleshoot(Screen):
 		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.appClosed)
 		self.container.dataAvail.append(self.dataAvail)
-		self.titles = ["dmesg", "ifconfig", "df", "top"]
-		self.commands = ["dmesg | tail -n 479", "ifconfig", "df", "top -n 1"]
+		self.titles = ["dmesg", "ifconfig", "df", "top", "ps"]
+		self.commands = ["dmesg | tail -n 479", "ifconfig", "df", "top -n 1", "ps"]
 		self.getLogfiles()
 		self.commandIndex = 0
 		self.onLayoutFinish.append(self.run_console)
