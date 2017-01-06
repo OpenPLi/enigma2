@@ -15,7 +15,7 @@ from Tools.BoundFunction import boundFunction
 from Tools.Directories import fileExists
 from Tools.HardwareInfo import HardwareInfo
 from enigma import eTimer, getBoxType, eDVBDB
-from urllib import urlopen
+from urllib2 import urlopen
 import socket
 import os
 import re
@@ -87,7 +87,14 @@ class UpdatePlugin(Screen, ProtectedScreen):
 		try:
 			# TODO: Use Twisted's URL fetcher, urlopen is evil. And it can
 			# run in parallel to the package update.
-			status = urlopen("http://openpli.org/status/").read().split('!', 1)
+			url = "http://openpli.org/status/"
+			try:
+				status = urlopen(url, timeout=5).read().split('!', 1)
+			except:
+				# OpenPli 5.0 uses python 2.7.11 and here we need to bypass the certificate check
+				from ssl import _create_unverified_context
+				status = urlopen(url, timeout=5, context=_create_unverified_context()).read().split('!', 1)
+				print status
 			if getBoxType() in status[0].split(','):
 				message = len(status) > 1 and status[1] or _("The current beta image might not be stable.\nFor more information see %s.") % ("www.openpli.org")
 				picon = MessageBox.TYPE_ERROR
@@ -130,7 +137,13 @@ class UpdatePlugin(Screen, ProtectedScreen):
 			from datetime import datetime
 			imageVersion = about.getImageTypeString().split(" ")[1]
 			imageVersion = (int(imageVersion) < 5 and "%.1f" or "%s") % int(imageVersion)
-			latestImageTimestamp = datetime.fromtimestamp(int(urlopen("http://openpli.org/download/timestamp/%s~%s" % (HardwareInfo().get_device_model(), imageVersion)).read())).strftime(_("%Y-%m-%d %H:%M"))
+			url = "http://openpli.org/download/timestamp/%s~%s" % (HardwareInfo().get_device_model(), imageVersion)
+			try:
+				latestImageTimestamp = datetime.fromtimestamp(int(urlopen(url, timeout=5).read())).strftime(_("%Y-%m-%d %H:%M"))
+			except:
+				# OpenPli 5.0 uses python 2.7.11 and here we need to bypass the certificate check
+				from ssl import _create_unverified_context
+				latestImageTimestamp = datetime.fromtimestamp(int(urlopen(url, timeout=5, context=_create_unverified_context()).read())).strftime(_("%Y-%m-%d %H:%M"))
 		except:
 			latestImageTimestamp = ""
 		socket.setdefaulttimeout(currentTimeoutDefault)
