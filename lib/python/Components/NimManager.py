@@ -58,7 +58,7 @@ class SecConfigure:
 		sec.setLNBIncreasedVoltage(False)
 		sec.setRepeats(0)
 		sec.setFastDiSEqC(fastDiSEqC)
-		sec.setSeqRepeat(True)
+		sec.setSeqRepeat(False)
 		sec.setCommandOrder(0)
 
 		#user values
@@ -1054,7 +1054,7 @@ def InitSecParams():
 	x.addNotifier(lambda configElement: secClass.setParam(secClass.DELAY_AFTER_FINAL_VOLTAGE_CHANGE, configElement.value))
 	config.sec.delay_after_final_voltage_change = x
 
-	x = ConfigInteger(default=60, limits = (0, 9999))
+	x = ConfigInteger(default=120, limits = (0, 9999))
 	x.addNotifier(lambda configElement: secClass.setParam(secClass.DELAY_BETWEEN_DISEQC_REPEATS, configElement.value))
 	config.sec.delay_between_diseqc_repeats = x
 
