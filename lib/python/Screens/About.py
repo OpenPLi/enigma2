@@ -327,18 +327,17 @@ class MemoryInfoSkinParams(HTMLComponent, GUIComponent):
 class Troubleshoot(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self.skinName = ["CommitInfo", "About"]
 		self.setTitle(_("Troubleshoot"))
 		self["AboutScrollLabel"] = ScrollLabel(_("Please wait"))
 
-		self["actions"] = ActionMap(["SetupActions", "DirectionActions"],
+		self["actions"] = ActionMap(["SetupActions", "DirectionActions", "ColorActions"],
 			{
 				"cancel": self.cancel,
 				"ok": self.cancel,
 				"up": self["AboutScrollLabel"].pageUp,
 				"down": self["AboutScrollLabel"].pageDown,
 				"left": self.left,
-				"right": self.right
+				"right": self.right,
 			})
 
 		self["key_red"] = Button(_("Cancel"))
@@ -346,22 +345,9 @@ class Troubleshoot(Screen):
 		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.appClosed)
 		self.container.dataAvail.append(self.dataAvail)
-		self.titles = ["dmesg", "ifconfig", "df"]
-		self.commands = ["dmesg | tail -n 479", "ifconfig", "df"]
-
-		import os
-		def getfiles(path):
-			mtime = lambda f: os.stat(os.path.join(path, f)).st_mtime
-			return list(sorted(os.listdir(path), key=mtime))
-		for fileName in reversed(getfiles("/mnt/hdd")):
-			if fileName.endswith(".log") and os.path.isfile("/mnt/hdd/" + fileName):
-				self.titles.append("logfile " + fileName)
-				self.commands.append("/mnt/hdd/" + fileName)
-		for fileName in reversed(getfiles("/tmp")):
-			if fileName.endswith(".log") and os.path.isfile("/tmp/" + fileName):
-				self.titles.append("logfile " + fileName)
-				self.commands.append("/tmp/" + fileName)
-
+		self.titles = ["dmesg", "ifconfig", "df", "top"]
+		self.commands = ["dmesg | tail -n 479", "ifconfig", "df", "top -n 1"]
+		self.getLogfiles()
 		self.commandIndex = 0
 		self.onLayoutFinish.append(self.run_console)
 
@@ -382,11 +368,11 @@ class Troubleshoot(Screen):
 
 	def run_console(self):
 		self["AboutScrollLabel"].setText("")
-		self.setTitle(_("Troubleshoot") + " - " + _(self.titles[self.commandIndex]))
+		self.setTitle("%s - %s" % (_("Troubleshoot"), self.titles[self.commandIndex]))
 		command = self.commands[self.commandIndex]
-		if command.endswith(".log"):
+		if command.startswith("cat "):
 			try:
-				self["AboutScrollLabel"].setText(open(command, "r").read())
+				self["AboutScrollLabel"].setText(open(command[4:], "r").read())
 			except:
 				self["AboutScrollLabel"].setText(_("Logfile does not exist anymore"))
 		else:
@@ -394,10 +380,29 @@ class Troubleshoot(Screen):
 				if self.container.execute(command):
 					raise Exception, "failed to execute: ", command
 			except Exception, e:
-				print "[About] FAIL:", e
+				self["AboutScrollLabel"].setText("%s\n%s" % (_("Some error occured - Please try later"), e))
 
 	def cancel(self):
 		self.container.appClosed.remove(self.appClosed)
 		self.container.dataAvail.remove(self.dataAvail)
 		self.container = None
 		self.close()
+
+	def getLogfiles(self):
+		import os
+		path = "/mnt/hdd/"
+		if os.path.isdir(path):
+			mtime = lambda f: os.stat(os.path.join(path, f)).st_mtime
+			fileNames = [x for x in sorted(os.listdir(path), key=mtime) if x.endswith(".log")]
+			totalNumberOfLogfiles = len(fileNames)
+			logfileCounter = 1
+			for fileName in reversed(fileNames):
+				self.titles.append("logfile %s (%s/%s)" % (fileName, logfileCounter, totalNumberOfLogfiles))
+				self.commands.append("cat %s%s" % (path, fileName))
+				logfileCounter += 1
+		else:
+			path = "/home/root/"
+			fileName = "enigma2_crash.log"
+			if os.path.exists(path + fileName):
+				self.titles.append("logfile %s" % fileName)
+				self.commands.append("cat %s%s" % (path, fileName))
