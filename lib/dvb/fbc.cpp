@@ -21,20 +21,12 @@ int eFBCTunerManager::ReadProcInt(int fe_index, const std::string & entry)
 	file.open(path.str().c_str());
 
 	if(!file.is_open())
-	{
-		fprintf(stderr, "**** FBC: proc entry %s cannot be opened for reading\n", path.str().c_str());
 		return(-1);
-	}
 
 	file >> value;
 
 	if(file.bad() || file.fail())
-	{
-		fprintf(stderr, "**** FBC: proc entry %s cannot be read\n", path.str().c_str());
 		return(-1);
-	}
-
-	fprintf(stderr, "**** read %d from %s\n", value, path.str().c_str());
 
 	return(value);
 }
@@ -48,14 +40,9 @@ void eFBCTunerManager::WriteProcInt(int fe_index, const std::string & entry, int
 	file.open(path.str().c_str());
 
 	if(!file.is_open())
-		fprintf(stderr, "**** FBC: proc entry %s cannot be opened for writing\n", path.str().c_str());
+		return;
 
 	file << value;
-
-	if(file.bad() || file.fail())
-		fprintf(stderr, "**** FBC: proc entry %s cannot be written\n", path.str().c_str());
-
-	fprintf(stderr, "**** written %d to %s\n", value, path.str().c_str());
 }
 
 void eFBCTunerManager::LoadConnectChoices(int fe_index, connect_choices_t &choices)
@@ -70,18 +57,12 @@ void eFBCTunerManager::LoadConnectChoices(int fe_index, connect_choices_t &choic
 	file.open(path.str().c_str());
 
 	if(!file.is_open())
-	{
-		fprintf(stderr, "**** FBC: proc entry %s cannot be opened for reading\n", path.str().c_str());
 		return;
-	}
 
 	getline(file, line);
 
 	if(file.bad() || file.fail())
-	{
-		fprintf(stderr, "**** FBC: proc entry %s cannot be read\n", path.str().c_str());
 		return;
-	}
 
 	choices.reset();
 
@@ -95,8 +76,6 @@ void eFBCTunerManager::LoadConnectChoices(int fe_index, connect_choices_t &choic
 				choices.set(fbc_id);
 		}
 	}
-
-	fprintf(stderr, "**** choices: %s\n", choices.to_string().c_str());
 }
 
 DEFINE_REF(eFBCTunerManager);
@@ -390,10 +369,10 @@ void eFBCTunerManager::ConnectLink(eDVBRegisteredFrontend *link_fe, eDVBRegister
 
 void eFBCTunerManager::DisconnectLink(eDVBRegisteredFrontend *link_fe, eDVBRegisteredFrontend *prev_fe, eDVBRegisteredFrontend *next_fe, bool simulate) const
 {
-	if (next_fe)
-		fprintf(stderr, "**** [*][eFBCTunerManager::disconnectLink] disconnect %d->%d->%d %s\n", FESlotID(prev_fe), FESlotID(link_fe), FESlotID(next_fe), simulate?"(simulate)":"");
-	else
-		fprintf(stderr, "**** [*][eFBCTunerManager::disconnectLink] disconnect %d->%d %s\n", FESlotID(prev_fe), FESlotID(link_fe), simulate?"(simulate)":"");
+	//if (next_fe)
+		//fprintf(stderr, "**** [*][eFBCTunerManager::disconnectLink] disconnect %d->%d->%d %s\n", FESlotID(prev_fe), FESlotID(link_fe), FESlotID(next_fe), simulate?"(simulate)":"");
+	//else
+		//fprintf(stderr, "**** [*][eFBCTunerManager::disconnectLink] disconnect %d->%d %s\n", FESlotID(prev_fe), FESlotID(link_fe), simulate?"(simulate)":"");
 
 	FrontendSetLinkPtr(link_fe, link_prev, (eDVBRegisteredFrontend *)0);
 	FrontendSetLinkPtr(link_fe, link_next, (eDVBRegisteredFrontend *)0);
@@ -465,9 +444,9 @@ void eFBCTunerManager::AddLink(eDVBRegisteredFrontend *leaf, eDVBRegisteredFront
 {
 	eDVBRegisteredFrontend *leaf_insert_after, *leaf_insert_before, *leaf_current, *leaf_next;
 
-	fprintf(stderr, "\n**** addLink(leaf: %d, link to top fe: %d, simulate: %d\n", FESlotID(leaf), FESlotID(root), simulate);
+	//fprintf(stderr, "\n**** addLink(leaf: %d, link to top fe: %d, simulate: %d\n", FESlotID(leaf), FESlotID(root), simulate);
 
-	PrintLinks(root);
+	//PrintLinks(root);
 
 	if (IsRootFE(leaf) || !IsRootFE(root))
 		return;
@@ -525,7 +504,7 @@ void eFBCTunerManager::AddLink(eDVBRegisteredFrontend *leaf, eDVBRegisteredFront
 
 	UpdateLNBSlotMask(FESlotID(leaf), FESlotID(root), /*remove*/false);
 
-	PrintLinks(root);
+	//PrintLinks(root);
 }
 
 void eFBCTunerManager::Unlink(eDVBRegisteredFrontend *fe) const
@@ -538,7 +517,7 @@ void eFBCTunerManager::Unlink(eDVBRegisteredFrontend *fe) const
 	if (IsRootFE(fe) || IsFEUsed(fe, simulate) || IsSCR(fe) || !IsLinked(fe))
 		return;
 
-	PrintLinks(fe);
+	//PrintLinks(fe);
 
 	DisconnectLink(fe, FrontendGetLinkPtr(fe, link_prev), FrontendGetLinkPtr(fe, link_next), simulate);
 	fe->m_frontend->setEnabled(false);
@@ -553,7 +532,7 @@ void eFBCTunerManager::Unlink(eDVBRegisteredFrontend *fe) const
 		}
 	}
 
-	PrintLinks(fe);
+	//PrintLinks(fe);
 
 	//setDefaultFBCID(link_fe);
 	UpdateLNBSlotMask(FESlotID(fe), FESlotID(GetHead(fe)), /*remove*/true);
