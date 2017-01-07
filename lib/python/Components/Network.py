@@ -212,7 +212,7 @@ class Network:
 		for ifacename, iface in ifaces.items():
 			if self.ifaces.has_key(ifacename):
 				self.ifaces[ifacename]["dhcp"] = iface["dhcp"]
-		if not len(self.console.appContainers):
+		if not self.console.appContainers:
 			# save configured interfacelist
 			self.configuredNetworkAdapters = self.configuredInterfaces
 			# load ns only once
@@ -412,7 +412,7 @@ class Network:
 				statecallback(self.NetworkState)
 			else:
 				self.NetworkState += 1
-				if len(self.pingConsole.appContainers) == 0:
+				if not self.pingConsole.appContainers:
 					statecallback(self.NetworkState)
 
 	def restartNetwork(self,callback = None):
@@ -442,7 +442,7 @@ class Network:
 
 	def getLinkStateFinished(self, result, retval, extra_args):
 		(callback) = extra_args
-		if not len(self.linkConsole.appContainers):
+		if not self.linkConsole.appContainers:
 			callback(result)
 
 	def stopPingConsole(self):
