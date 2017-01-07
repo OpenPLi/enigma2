@@ -19,14 +19,17 @@ public:
 	PyObject *get();
 };
 
-inline PyObject *PyFrom(int v)
+inline PyObject *PyFrom(int v, int s = 0)
 {
 	return PyInt_FromLong(v);
 }
 
-inline PyObject *PyFrom(const char *c)
+inline PyObject *PyFrom(const char *c, int s = -1)
 {
-	return PyString_FromString(c);
+	if (s == -1)
+		return PyString_FromString(c);
+	else
+		return PyString_FromStringAndSize(c, s);
 }
 
 template <class R>
@@ -49,12 +52,12 @@ template <class R, class V0>
 class PSignal1: public PSignal, public Signal1<R,V0>
 {
 public:
-	R operator()(V0 a0)
+	R operator()(V0 a0, int a1=int(-1))
 	{
 		if (m_list)
 		{
 			PyObject *pArgs = PyTuple_New(1);
-			PyTuple_SET_ITEM(pArgs, 0, PyFrom(a0));
+			PyTuple_SET_ITEM(pArgs, 0, PyFrom(a0, a1));
 			callPython(pArgs);
 			Org_Py_DECREF(pArgs);
 		}
