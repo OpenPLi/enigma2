@@ -1,4 +1,5 @@
 from Screen import Screen
+from Screens.MessageBox import MessageBox
 from Components.config import config
 from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
@@ -16,7 +17,7 @@ from enigma import eTimer, eLabel, eConsoleAppContainer
 
 from Components.HTMLComponent import HTMLComponent
 from Components.GUIComponent import GUIComponent
-import skin
+import skin, os
 
 class About(Screen):
 	def __init__(self, session):
@@ -329,35 +330,62 @@ class Troubleshoot(Screen):
 		Screen.__init__(self, session)
 		self.setTitle(_("Troubleshoot"))
 		self["AboutScrollLabel"] = ScrollLabel(_("Please wait"))
+		self["key_red"] = Button()
+		self["key_green"] = Button()
 
-		self["actions"] = ActionMap(["SetupActions", "DirectionActions", "ColorActions"],
+		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ColorActions"],
 			{
-				"cancel": self.cancel,
-				"ok": self.cancel,
+				"cancel": self.close,
 				"up": self["AboutScrollLabel"].pageUp,
 				"down": self["AboutScrollLabel"].pageDown,
 				"left": self.left,
 				"right": self.right,
+				"red": self.red,
+				"green": self.green,
 			})
-
-		self["key_red"] = Button(_("Cancel"))
 
 		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.appClosed)
 		self.container.dataAvail.append(self.dataAvail)
-		self.titles = ["dmesg", "ifconfig", "df", "top", "ps"]
-		self.commands = ["dmesg | tail -n 479", "ifconfig", "df -h", "top -n 1", "ps"]
-		self.getLogfiles()
 		self.commandIndex = 0
+		self.updateOptions()
 		self.onLayoutFinish.append(self.run_console)
 
 	def left(self):
 		self.commandIndex = (self.commandIndex - 1) % len(self.commands)
+		self.updateKeys()
 		self.run_console()
 
 	def right(self):
 		self.commandIndex = (self.commandIndex + 1) % len(self.commands)
+		self.updateKeys()
 		self.run_console()
+
+	def red(self):
+		if self.commandIndex >= self.numberOfCommands:
+			self.session.openWithCallback(self.removeAllLogfiles, MessageBox, _("Do you want to remove all the crahs logfiles"), default=False)
+		else:
+			self.close()
+
+	def green(self):
+		if self.commandIndex >= self.numberOfCommands:
+			fileNameAndPath = self.commands[self.commandIndex][4:]
+			if os.path.exists(fileNameAndPath):
+				os.remove(fileNameAndPath)
+			self.updateOptions()
+		self.run_console()
+
+	def removeAllLogfiles(self, answer):
+		if answer:
+			path = "/mnt/hdd/"
+			if os.path.isdir(path):
+				for fileName in [x for x in os.listdir(path) if x.endswith(".log")]:
+					os.remove(path + fileName)
+			fileName = "/home/root/enigma2_crash.log"
+			if os.path.exists(fileName):
+				os.remove(fileName)
+			self.updateOptions()
+			self.run_console()
 
 	def appClosed(self, retval):
 		if retval:
@@ -388,8 +416,10 @@ class Troubleshoot(Screen):
 		self.container = None
 		self.close()
 
-	def getLogfiles(self):
-		import os
+	def updateOptions(self):
+		self.titles = ["dmesg", "ifconfig", "df", "top", "ps"]
+		self.commands = ["dmesg | tail -n 479", "ifconfig", "df -h", "top -n 1", "ps"]
+		self.numberOfCommands = len(self.commands)
 		path = "/mnt/hdd/"
 		if os.path.isdir(path):
 			mtime = lambda f: os.stat(os.path.join(path, f)).st_mtime
@@ -406,3 +436,10 @@ class Troubleshoot(Screen):
 			if os.path.exists(path + fileName):
 				self.titles.append("logfile %s" % fileName)
 				self.commands.append("cat %s%s" % (path, fileName))
+		if self.commandIndex >= len(self.commands):
+			self.commandIndex = len(self.commands) - 1
+		self.updateKeys()
+
+	def updateKeys(self):
+		self["key_red"].setText(_("Cancel") if self.commandIndex < self.numberOfCommands else _("Remove all logfiles"))
+		self["key_green"].setText(_("Refresh") if self.commandIndex < self.numberOfCommands else _("Remove this logfile"))
