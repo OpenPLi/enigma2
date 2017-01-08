@@ -61,10 +61,12 @@
 		<widget name="AboutScrollLabel" font="Regular;20" position="0,40" size="540,450" zPosition="2"/>
 	</screen>
 	<!-- Troubleshoot -->
-	<screen name="Troubleshoot" position="center,center" size="540,490" title="Troubleshoot">
+	<screen name="Troubleshoot" position="center,center" size="640,496" title="Troubleshoot">
 		<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on"/>
+		<ePixmap pixmap="skin_default/buttons/green.png" position="135,0" size="140,40" alphatest="on"/>
 		<widget name="key_red" position="0,0" zPosition="1" size="135,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1"/>
-		<widget name="AboutScrollLabel" font="Fixed;18" position="0,40" size="540,450" zPosition="2"/>
+		<widget name="key_green" position="135,0" zPosition="1" size="135,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1"/>
+		<widget name="AboutScrollLabel" font="Fixed;12" position="0,40" size="640,456" zPosition="2"/>
 	</screen>
 	<!-- MemoryInfo screen -->
 	<screen name="MemoryInfo" position="center,center" size="540,453" title="Memory Info">
