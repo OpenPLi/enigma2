@@ -369,21 +369,20 @@ class Troubleshoot(Screen):
 
 	def green(self):
 		if self.commandIndex >= self.numberOfCommands:
-			fileNameAndPath = self.commands[self.commandIndex][4:]
-			if os.path.exists(fileNameAndPath):
-				os.remove(fileNameAndPath)
+			try:
+				os.remove(self.commands[self.commandIndex][4:])
+			except:
+				pass
 			self.updateOptions()
 		self.run_console()
 
 	def removeAllLogfiles(self, answer):
 		if answer:
-			path = "/mnt/hdd/"
-			if os.path.isdir(path):
-				for fileName in [x for x in os.listdir(path) if x.endswith(".log")]:
-					os.remove(path + fileName)
-			fileName = "/home/root/enigma2_crash.log"
-			if os.path.exists(fileName):
-				os.remove(fileName)
+			for fileName in self.getLogFilesList():
+				try:
+					os.remove(fileName)
+				except:
+					pass
 			self.updateOptions()
 			self.run_console()
 
@@ -416,28 +415,23 @@ class Troubleshoot(Screen):
 		self.container = None
 		self.close()
 
+	def getLogFilesList(self):
+		import glob
+		return [x for x in sorted(glob.glob("/mnt/hdd/*.log"), key=lambda x: os.path.isfile(x) and os.path.getmtime(x))] + (os.path.isfile("/home/root/enigma2_crash.log") and ["/home/root/enigma2_crash.log"] or [])
+
 	def updateOptions(self):
 		self.titles = ["dmesg", "ifconfig", "df", "top", "ps"]
-		self.commands = ["dmesg | tail -n 479", "ifconfig", "df -h", "top -n 1", "ps"]
+		self.commands = ["dmesg", "ifconfig", "df -h", "top -n 1", "ps"]
 		self.numberOfCommands = len(self.commands)
-		path = "/mnt/hdd/"
-		if os.path.isdir(path):
-			mtime = lambda f: os.stat(os.path.join(path, f)).st_mtime
-			fileNames = [x for x in sorted(os.listdir(path), key=mtime) if x.endswith(".log")]
+		fileNames = self.getLogFilesList()
+		if fileNames:
 			totalNumberOfLogfiles = len(fileNames)
 			logfileCounter = 1
 			for fileName in reversed(fileNames):
 				self.titles.append("logfile %s (%s/%s)" % (fileName, logfileCounter, totalNumberOfLogfiles))
-				self.commands.append("cat %s%s" % (path, fileName))
+				self.commands.append("cat %s" % (fileName))
 				logfileCounter += 1
-		else:
-			path = "/home/root/"
-			fileName = "enigma2_crash.log"
-			if os.path.exists(path + fileName):
-				self.titles.append("logfile %s" % fileName)
-				self.commands.append("cat %s%s" % (path, fileName))
-		if self.commandIndex >= len(self.commands):
-			self.commandIndex = len(self.commands) - 1
+		self.commandIndex = min(len(self.commands) - 1, self.commandIndex)
 		self.updateKeys()
 
 	def updateKeys(self):
