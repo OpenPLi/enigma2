@@ -157,8 +157,12 @@ class ServiceInfo(Screen):
 				else:
 					fillList = [(_("Service name"), name, TYPE_TEXT),
 						(_("Provider"), self.getServiceInfoValue(iServiceInformation.sProvider), TYPE_TEXT),
-						(_("Videocodec, size & format"), resolution, TYPE_TEXT),
-						(_("Service reference"), refstr, TYPE_TEXT)]
+						(_("Videocodec, size & format"), resolution, TYPE_TEXT)]
+					if "%3a//" in refstr:
+						fillList = fillList + [(_("Service reference"), ":".join(refstr.split(":")[:9]), TYPE_TEXT),
+							(_("URL"), refstr.split(":")[10].replace("%3a", ":"), TYPE_TEXT)]
+					else:
+						fillList = fillList + [(_("Service reference"), refstr, TYPE_TEXT)]
 				fillList = fillList + [(_("Namespace"), self.getServiceInfoValue(iServiceInformation.sNamespace), TYPE_VALUE_HEX, 8),
 					(_("Service ID"), self.getServiceInfoValue(iServiceInformation.sSID), TYPE_VALUE_HEX_DEC, 4),
 					(_("Video PID"), self.getServiceInfoValue(iServiceInformation.sVideoPID), TYPE_VALUE_HEX_DEC, 4),
