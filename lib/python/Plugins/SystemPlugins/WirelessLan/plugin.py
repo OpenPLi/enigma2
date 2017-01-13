@@ -13,7 +13,7 @@ from Components.Console import Console
 from Plugins.Plugin import PluginDescriptor
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 from Tools.LoadPixmap import LoadPixmap
-from Wlan import iWlan, wpaSupplicant, iStatus, getWlanConfigName
+from Wlan import iWlan, wpaSupplicant, iStatus, getWlanConfigName, existBcmWifi
 from time import time
 import re
 
@@ -30,7 +30,6 @@ config.plugins.wlan.hiddenessid = NoSave(ConfigYesNo(default = False))
 config.plugins.wlan.encryption = NoSave(ConfigSelection(list, default = "WPA2"))
 config.plugins.wlan.wepkeytype = NoSave(ConfigSelection(weplist, default = "ASCII"))
 config.plugins.wlan.psk = NoSave(ConfigPassword(default = "", fixed_size = False))
-
 
 
 class WlanStatus(Screen):
@@ -384,10 +383,17 @@ def callFunction(iface):
 def configStrings(iface):
 	driver = iNetwork.detectWlanModule(iface)
 	ret = ""
-	if driver == 'madwifi' and config.plugins.wlan.hiddenessid.value:
-		ret += "\tpre-up iwconfig " + iface + " essid \"" + re.escape(config.plugins.wlan.essid.value) + "\" || true\n"
-	ret += "\tpre-up wpa_supplicant -i" + iface + " -c" + getWlanConfigName(iface) + " -B -dd -D" + driver + " || true\n"
-	ret += "\tpre-down wpa_cli -i" + iface + " terminate || true\n"
+	if existBcmWifi(iface):
+		encryption = config.plugins.wlan.encryption.value
+		psk = config.plugins.wlan.psk.value
+		essid = config.plugins.wlan.essid.value
+		ret += '\tpre-up wl-config.sh -m ' + encryption.lower() + ' -k ' + psk + ' -s "' + essid + '" \n'
+		ret += '\tpost-down wl-down.sh\n'
+	else:
+		if driver == 'madwifi' and config.plugins.wlan.hiddenessid.value:
+			ret += "\tpre-up iwconfig " + iface + " essid \"" + re.escape(config.plugins.wlan.essid.value) + "\" || true\n"
+		ret += "\tpre-up wpa_supplicant -i" + iface + " -c" + getWlanConfigName(iface) + " -B -dd -D" + driver + " || true\n"
+		ret += "\tpre-down wpa_cli -i" + iface + " terminate || true\n"
 	return ret
 
 def Plugins(**kwargs):
