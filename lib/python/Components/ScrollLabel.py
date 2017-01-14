@@ -60,14 +60,15 @@ class ScrollLabel(HTMLComponent, GUIComponent):
 		return ret
 
 	def setPos(self, pos):
-		self.curPos = max(0, min(pos, self.TotalTextHeight - self.pageHeight))
-		self.long_text.move(ePoint(0, -self.curPos))
-		self.split and self.right_text.move(ePoint(self.column, -self.curPos))
+		if self.instance:
+			self.curPos = max(0, min(pos, self.TotalTextHeight - self.pageHeight))
+			self.long_text.move(ePoint(0, -self.curPos))
+			self.split and self.right_text.move(ePoint(self.column, -self.curPos))
 
 	def setText(self, text, showBottom=False):
 		self.message = text
 		text = text.rstrip()
-		if self.pageHeight:
+		if self.instance and self.pageHeight:
 			if self.split:
 				left = []
 				right = []
@@ -112,9 +113,10 @@ class ScrollLabel(HTMLComponent, GUIComponent):
 		return self.TotalTextHeight <= self.pageHeight or self.curPos == self.TotalTextHeight - self.pageHeight
 
 	def updateScrollbar(self):
-		vis = max(100 * self.pageHeight / self.TotalTextHeight, 3)
-		start = (100 - vis) * self.curPos / (self.TotalTextHeight - self.pageHeight)
-		self.scrollbar.setStartEnd(start, start + vis)
+		if self.instance:
+			vis = max(100 * self.pageHeight / self.TotalTextHeight, 3)
+			start = (100 - vis) * self.curPos / (self.TotalTextHeight - self.pageHeight)
+			self.scrollbar.setStartEnd(start, start + vis)
 
 	def GUIcreate(self, parent):
 		self.instance = eWidget(parent)
