@@ -30,9 +30,7 @@ class ScrollLabel(HTMLComponent, GUIComponent):
 					widget_attribs.append((attrib,value))
 				if "split" in attrib:
 					self.split = int(value)
-					if self.split:
-						self.right_text = eLabel(self.instance)
-					self.skinAttributes.remove((attrib, value))	
+					self.skinAttributes.remove((attrib, value))
 				if "colposition" in attrib:
 					self.column = int(value)
 				if "dividechar" in attrib:
@@ -120,6 +118,7 @@ class ScrollLabel(HTMLComponent, GUIComponent):
 		self.instance = eWidget(parent)
 		self.scrollbar = eSlider(self.instance)
 		self.long_text = eLabel(self.instance)
+		self.right_text = eLabel(self.instance)
 
 	def GUIdelete(self):
 		self.long_text = None
