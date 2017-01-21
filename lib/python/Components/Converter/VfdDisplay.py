@@ -31,9 +31,9 @@ class VfdDisplay(Poll, Converter, object):
 				if 'loop' in self.type and self.delay:
 					self.loop = self.delay
 			if 'nozero' in self.type:
-				self.hour = '%'
+				self.hour = '%-'
 			else:
-				self.hour = '%02'
+				self.hour = '%'
 			if '12h' in self.type:
 				self.hour = self.hour + 'I'
 			else:
@@ -54,13 +54,13 @@ class VfdDisplay(Poll, Converter, object):
 				else:
 					self.poll_interval = 1000
 					self.showclock = 3
-				clockformat = self.hour + '%02M'
+				clockformat = self.hour + '%M'
 			elif self.showclock == 2:
 				self.showclock = 3
-				clockformat = self.hour + '%02M'
+				clockformat = self.hour + '%M'
 			else:
 				self.showclock = 2
-				clockformat = self.hour + ':%02M'
+				clockformat = self.hour + ':%M'
 			if self.loop != -1:
 				self.loop -= 1000
 				if self.loop <= 0:
