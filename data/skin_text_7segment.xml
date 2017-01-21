@@ -7,6 +7,13 @@
 		</widget>
 	</screen>
 
+<!-- channelselection-->
+	<screen name="ChannelSelection_summary" position="0,0" size="1,1">
+		<widget source="parent.ServiceEvent" render="Label" position="0,0" size="1,1">
+			<convert type="ServiceName">Number</convert>
+		</widget>
+	</screen>
+
 <!-- movieplayer-->
 	<screen name="InfoBarMoviePlayerSummary" position="0,0" size="1,1">
 		<widget source="session.CurrentService" render="Label" position="0,0" size="1,1">
