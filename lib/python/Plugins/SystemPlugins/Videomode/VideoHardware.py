@@ -111,7 +111,7 @@ class VideoHardware:
 		self.current_port = None
 
 		self.readAvailableModes()
-		self.check24pChoices()
+		self.is24hzAvailable()
 		self.widescreen_modes = set(["720p", "1080i", "1080p", "2160p", "2160p30"]).intersection(*[self.modes_available])
 
 		if self.modes.has_key("DVI-PC") and not self.getModeList("DVI-PC"):
@@ -158,12 +158,12 @@ class VideoHardware:
 			print "[VideoHardware] hotplug on dvi"
 			self.on_hotplug("DVI") # must be DVI
 
-	def check24pChoices(self):
+	def is24hzAvailable(self):
 		try:
-			self.has24pChoices = os.access("/proc/stb/video/videomode_24hz", os.W_OK) and True or False
+			self.has24pAvailable = os.access("/proc/stb/video/videomode_24hz", os.W_OK) and True or False
 		except IOError:
 			print "[VideoHardware] failed to read video choices 24hz ."
-			self.has24pChoices = False
+			self.has24pAvailable = False
 
 	# check if a high-level mode with a given rate is available.
 	def isModeAvailable(self, port, mode, rate):
@@ -211,7 +211,7 @@ class VideoHardware:
 		except IOError:
 			print "[VideoHardware] writing initial videomode to /etc/videomode failed."
 
-		if self.has24pChoices:
+		if self.has24pAvailable:
 			try:
 				open("/proc/stb/video/videomode_24hz", "w").write(mode_24)
 			except IOError:
@@ -282,7 +282,7 @@ class VideoHardware:
 				ratelist = []
 				for rate in rates:
 					if rate in ("multi (50/60/24p)", "multi (25/30/24p)"):
-						if self.has24pChoices:
+						if self.has24pAvailable:
 							ratelist.append((rate, rate))
 					else:
 						ratelist.append((rate, rate))
