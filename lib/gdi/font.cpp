@@ -301,6 +301,10 @@ Font::Font(fontRenderClass *render, FTC_FaceID faceid, int isize, int tw, int re
 //	font.image_type |= ftc_image_flag_autohinted;
 }
 
+Font::~Font()
+{
+}
+
 inline FT_Error Font::getGlyphBitmap(GlyphIndex glyph_index, FTC_SBit *sbit)
 {
 	return renderer->getGlyphBitmap(&font, glyph_index, sbit);
@@ -309,10 +313,6 @@ inline FT_Error Font::getGlyphBitmap(GlyphIndex glyph_index, FTC_SBit *sbit)
 inline FT_Error Font::getGlyphImage(GlyphIndex glyph_index, FT_Glyph *glyph, FT_Glyph *borderglyph, int bordersize)
 {
 	return renderer->getGlyphImage(&font, glyph_index, glyph, borderglyph, bordersize);
-}
-
-Font::~Font()
-{
 }
 
 DEFINE_REF(eTextPara);
