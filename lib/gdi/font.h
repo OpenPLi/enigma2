@@ -19,17 +19,16 @@ typedef FT_UInt GlyphIndex;
 typedef FT_ULong GlyphIndex;
 #endif
 
+#include <string>
 #include <vector>
+#include <list>
+#include <set>
 
 #include <lib/gdi/fb.h>
 #include <lib/gdi/esize.h>
 #include <lib/gdi/epoint.h>
 #include <lib/gdi/erect.h>
-#include <string>
-#include <list>
 #include <lib/base/object.h>
-
-#include <set>
 
 class FontRenderClass;
 class Font;
@@ -38,6 +37,7 @@ class gFont;
 class gRGB;
 
 #endif
+
 class fontRenderClass
 {
 #ifndef SWIG
