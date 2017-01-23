@@ -3,7 +3,7 @@ from Components.config import config, ConfigSelection, ConfigSubDict, ConfigYesN
 
 from Tools.CList import CList
 from Tools.HardwareInfo import HardwareInfo
-from os import path
+import os
 
 # The "VideoHardware" is the interface to /proc/stb/video.
 # It generates hotplug events, and gives you the list of
@@ -32,22 +32,28 @@ class VideoHardware:
 
 	rates["720p"] =			{ "50Hz": 	{ 50: "720p50" },
 								"60Hz": 	{ 60: "720p" },
-								"multi": 	{ 50: "720p50", 60: "720p" } }
+								"multi": 	{ 50: "720p50", 60: "720p" },
+								"multi (50/60/24p)": {50: "720p50", 60: "720p", 24: "720p24" } }
 
 	rates["1080i"] =		{ "50Hz":	{ 50: "1080i50" },
 								"60Hz":		{ 60: "1080i" },
-								"multi":	{ 50: "1080i50", 60: "1080i" } }
+								"multi":	{ 50: "1080i50", 60: "1080i" },
+								"multi (50/60/24p)": {50: "1080i50", 60: "1080i", 24: "1080p24" } }
 
 	rates["1080p"] =		{ "50Hz":	{ 50: "1080p50" },
 								"60Hz":		{ 60: "1080p" },
-								"multi":	{ 50: "1080p50", 60: "1080p" } }
+								"multi":	{ 50: "1080p50", 60: "1080p" },
+								"multi (50/60/24p)": {50: "1080p50", 60: "1080p", 24: "1080p24" } }
 
 	rates["2160p30"] =		{ "25Hz":	{ 50: "2160p25" },
-								"30Hz":		{ 60: "2160p30"} }
+								"30Hz":		{ 60: "2160p30" },
+								"multi": { 50: "2160p25", 60: "2160p30" },
+								"multi (25/30/24p)": { 50: "2160p25", 60: "2160p30", 24: "2160p24" } }
 
 	rates["2160p"] =		{ "50Hz":	{ 50: "2160p50" },
 								"60Hz":		{ 60: "2160p" },
-								"multi":	{ 50: "2160p50", 60: "2160p" } }
+								"multi":	{ 50: "2160p50", 60: "2160p" }, 
+								"multi (50/60/24p)": {50: "2160p50", 60: "2160p", 24: "2160p24" }}
 
 	rates["PC"] = {
 		"1024x768": { 60: "1024x768" }, # not possible on DM7025
@@ -105,6 +111,7 @@ class VideoHardware:
 		self.current_port = None
 
 		self.readAvailableModes()
+		self.is24hzAvailable()
 		self.widescreen_modes = set(["720p", "1080i", "1080p", "2160p", "2160p30"]).intersection(*[self.modes_available])
 
 		if self.modes.has_key("DVI-PC") and not self.getModeList("DVI-PC"):
@@ -151,6 +158,13 @@ class VideoHardware:
 			print "[VideoHardware] hotplug on dvi"
 			self.on_hotplug("DVI") # must be DVI
 
+	def is24hzAvailable(self):
+		try:
+			self.has24pAvailable = os.access("/proc/stb/video/videomode_24hz", os.W_OK) and True or False
+		except IOError:
+			print "[VideoHardware] failed to read video choices 24hz ."
+			self.has24pAvailable = False
+
 	# check if a high-level mode with a given rate is available.
 	def isModeAvailable(self, port, mode, rate):
 		rate = self.rates[mode][rate]
@@ -171,10 +185,16 @@ class VideoHardware:
 
 		mode_50 = modes.get(50)
 		mode_60 = modes.get(60)
+		mode_24 = modes.get(24)
+
 		if mode_50 is None or force == 60:
 			mode_50 = mode_60
 		if mode_60 is None or force == 50:
 			mode_60 = mode_50
+		if mode_24 is None or force:
+			mode_24 = mode_60
+			if force == 50:
+				mode_24 = mode_50
 
 		try:
 			open("/proc/stb/video/videomode_50hz", "w").write(mode_50)
@@ -190,6 +210,12 @@ class VideoHardware:
 			open("/etc/videomode", "w").write(mode_50) # use 50Hz mode (if available) for booting
 		except IOError:
 			print "[VideoHardware] writing initial videomode to /etc/videomode failed."
+
+		if self.has24pAvailable:
+			try:
+				open("/proc/stb/video/videomode_24hz", "w").write(mode_24)
+			except IOError:
+				print "[VideoHardware] cannot open /proc/stb/video/videomode_24hz"
 
 		self.updateAspect(None)
 
@@ -253,7 +279,14 @@ class VideoHardware:
 			if len(modes):
 				config.av.videomode[port] = ConfigSelection(choices = [mode for (mode, rates) in modes])
 			for (mode, rates) in modes:
-				config.av.videorate[mode] = ConfigSelection(choices = rates)
+				ratelist = []
+				for rate in rates:
+					if rate in ("multi (50/60/24p)", "multi (25/30/24p)"):
+						if self.has24pAvailable:
+							ratelist.append((rate, rate))
+					else:
+						ratelist.append((rate, rate))
+				config.av.videorate[mode] = ConfigSelection(choices = ratelist)
 		config.av.videoport = ConfigSelection(choices = lst)
 
 	def setConfiguredMode(self):
