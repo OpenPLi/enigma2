@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-04 10:18+0100\n"
-"PO-Revision-Date: 2016-12-04 10:27+0100\n"
+"POT-Creation-Date: 2017-01-25 12:05+0100\n"
+"PO-Revision-Date: 2017-01-25 13:29+0100\n"
 "Last-Translator: andy1 <dummy@dummy.com>\n"
 "Language-Team: G.Jensen\n"
 "Language: nb\n"
@@ -181,7 +181,7 @@ msgid " packages selected."
 msgstr " valgte pakker."
 
 msgid " updates available."
-msgstr " oppdateringer tilgjengelig."
+msgstr "det finnes nye oppdateringer."
 
 #, python-format
 msgid "%02d:%02d"
@@ -276,6 +276,10 @@ msgstr[0] "%d piksel bredde"
 msgstr[1] "%d pikslers bredde"
 
 #, python-format
+msgid "%d sec"
+msgstr "%d sek"
+
+#, python-format
 msgid "%d second"
 msgid_plural "%d seconds"
 msgstr[0] "%d sekund"
@@ -324,8 +328,8 @@ msgstr "%s er ikke lenger i bruk. Skal den slettes?"
 #, python-format
 msgid "%s updated package available"
 msgid_plural "%s updated packages available"
-msgstr[0] "%s ny oppdatering er tilgjengelig"
-msgstr[1] "%s nye oppdateringer er tilgjengelige"
+msgstr[0] "%s det finnes en ny oppdatering"
+msgstr[1] "%s det finnes nye oppdateringer"
 
 #
 #, python-format
@@ -375,6 +379,12 @@ msgstr "1.1"
 #
 msgid "1.2"
 msgstr "1.2"
+
+msgid "10bit"
+msgstr "10bit"
+
+msgid "12bit"
+msgstr "12bit"
 
 #
 msgid "13 V"
@@ -446,6 +456,9 @@ msgstr "4:3 Brevsprekkformat"
 
 msgid "4:3 PanScan"
 msgstr "4:3 Breddereduksjon"
+
+msgid "8bit"
+msgstr "8bit"
 
 msgid ": 0000 - default (disabled)"
 msgstr ": 0000 - standard (frakoblet)"
@@ -1584,6 +1597,9 @@ msgstr "Lag en DVD-ISO"
 msgid "Create new folder and exit"
 msgstr "Lag ny mappe og avslutt"
 
+msgid "Create seperate radio userbouquet"
+msgstr "Lage separate radio favorittkanaler"
+
 #, python-format
 msgid "Creating directory %s failed."
 msgstr "Oppretter mappe %s feilet."
@@ -1862,7 +1878,7 @@ msgstr "Harddisk type:"
 
 #
 msgid "Detected NIMs:"
-msgstr "Tuner modultyper:"
+msgstr "Tuner type:"
 
 msgid "Devicename:"
 msgstr "Enhetsnavn:"
@@ -1938,6 +1954,9 @@ msgstr "Deaktiver tidtaker"
 #
 msgid "Disabled"
 msgstr "Deaktivert"
+
+msgid "Disclaimer"
+msgstr "Ansvarsfraskrivelse"
 
 #
 msgid "Display 16:9 content as"
@@ -2054,6 +2073,10 @@ msgstr "Avslutte bildestørrelse veiviseren?"
 
 msgid "Do you want to reboot your receiver?"
 msgstr "Starte mottakeren på nytt?"
+
+#
+msgid "Do you want to remove all the crahs logfiles"
+msgstr "Vil du fjerne alle krasj loggfiler"
 
 #
 msgid "Do you want to remove the package:\n"
@@ -2440,26 +2463,34 @@ msgid "F1/F3/F4"
 msgstr "F1/F3/F4"
 
 #
-msgid "FBC Unicable"
-msgstr "FBC Unikabel (Full Band Capture)"
+msgid "FBC SCR (Unicable/JESS)"
+msgstr "FBC SCR (Unicable/JESS)"
 
-msgid "FBC automatic loop through"
-msgstr "FBC automatisk gjennomgang"
+#
+msgid "FBC automatic"
+msgstr "FBC automatisk"
 
 msgid ""
-"FBC automatic loop through\n"
-"inactive"
+"FBC automatic\n"
+"connected to"
 msgstr ""
-"FBC automatisk gjennomgang\n"
-"inaktiv"
+"FBC automatisk\n"
+"koblet til"
 
 #, python-format
 msgid ""
-"FBC automatic loop through\n"
-"linked to %s"
+"FBC automatic\n"
+"connected to %s"
 msgstr ""
-"FBC automatisk gjennomgang\n"
+"FBC automatisk\n"
 "koblet til %s"
+
+msgid ""
+"FBC automatic\n"
+"inactive"
+msgstr ""
+"FBC automatisk\n"
+"inaktiv"
 
 #
 msgid "FEC"
@@ -2513,7 +2544,7 @@ msgstr "Hurtig epoch"
 
 #
 msgid "Favourites"
-msgstr "Favorittliste"
+msgstr "Favorittlister"
 
 msgid "File appears to be busy.\n"
 msgstr "Filen ser ut til å være opptatt.\n"
@@ -2628,6 +2659,13 @@ msgstr "Flere innstillinger"
 
 msgid "Further options"
 msgstr "Flere innstillinger"
+
+msgid ""
+"GUI needs a restart to apply a new language\n"
+"Do you want to restart the GUI now?"
+msgstr ""
+"GUI må startes på nytt for aktivering av et nytt språk\n"
+"Starte GUI på nytt nå?"
 
 msgid ""
 "GUI needs a restart to apply a new skin\n"
@@ -2765,6 +2803,9 @@ msgstr "HD1100/HD1200/HD1265/et7x00/et8500/et7000mini"
 
 msgid "HD2400"
 msgstr "HD2400"
+
+msgid "HDMI Colordepth"
+msgstr "HDMI fargedybde"
 
 msgid "HDMI Colorspace"
 msgstr "HDMI fargesammensetning"
@@ -3310,6 +3351,9 @@ msgstr "Lås:"
 msgid "Log results to /tmp"
 msgstr "Lagre resultatene i /tmp"
 
+msgid "Logfile does not exist anymore"
+msgstr "Loggfilen finnes ikke lenger"
+
 msgid "Long filenames"
 msgstr "Lange filnavn"
 
@@ -3321,8 +3365,8 @@ msgstr "Langt tastetrykk"
 msgid "Longitude"
 msgstr "Lengdegrad"
 
-msgid "Loop through to"
-msgstr "Gjennomgang til"
+msgid "Loop through from"
+msgstr "Gjennomgang fra"
 
 msgid "Luxembourgish"
 msgstr "Luxemburgsk"
@@ -3762,7 +3806,7 @@ msgid "No standby"
 msgstr "Ingen standby"
 
 msgid "No stream clients"
-msgstr "Ingen strømmings klienter"
+msgstr "Ingen strømme klienter"
 
 msgid "No suitable sat tuner found!"
 msgstr "Ingen passende sat tuner ble funnet!"
@@ -4364,6 +4408,10 @@ msgstr "Inngang  D"
 msgid "Portuguese"
 msgstr "Portugisisk"
 
+#
+msgid "Position"
+msgstr "Posisjon"
+
 msgid "Position stored at index"
 msgstr "Posisjon lagret i tabell"
 
@@ -4735,6 +4783,9 @@ msgstr "Slett et merke"
 msgid "Remove a nameserver entry"
 msgstr "Slett en navnetjener"
 
+msgid "Remove all logfiles"
+msgstr "Fjern alle loggfiler"
+
 #
 msgid "Remove bookmark"
 msgstr "Slett bokmerke"
@@ -4746,6 +4797,10 @@ msgstr "Slett den valgte overskriften"
 #
 msgid "Remove plugins"
 msgstr "Fjern tillegg"
+
+#
+msgid "Remove this logfile"
+msgstr "Fjern denne loggfilen"
 
 #
 msgid "Remove title"
@@ -4944,6 +4999,17 @@ msgstr "S-Video"
 
 msgid "SCPC optimized search range"
 msgstr "SCPC optimalisert søkeområde"
+
+#
+msgid "SCR (Unicable/JESS)"
+msgstr "SCR (Unicable/JESS)"
+
+msgid "SCR JESS"
+msgstr "SCR JESS"
+
+#
+msgid "SCR Unicable"
+msgstr "SCR Unicable"
 
 #
 msgid "SINGLE LAYER DVD"
@@ -5311,7 +5377,7 @@ msgid "Service ID"
 msgstr "Kanal ID"
 
 msgid "Service has been added to the favourites."
-msgstr "Kanalen ble lagt til i favorittlisten."
+msgstr "Kanalen har blitt lagt til i favorittliste."
 
 msgid "Service has been added to the selected bouquet."
 msgstr "Kanal ble lagt til i den valgte kanallisten."
@@ -5515,7 +5581,7 @@ msgstr "Vis tillegg..."
 
 #
 msgid "Show favourites list"
-msgstr "Vis favoritt lister"
+msgstr "Vis favorittlister"
 
 msgid "Show help"
 msgstr "Vis hjelp"
@@ -5753,6 +5819,9 @@ msgstr "Programvareoppdatering"
 
 msgid "Softwaremanager information"
 msgstr "Programvareadministrasjon"
+
+msgid "Some error occured - Please try later"
+msgstr "En feil oppstod - Vennligst prøv senere"
 
 #
 msgid "Some plugins are not available:\n"
@@ -6103,6 +6172,9 @@ msgstr "Bytt kanaler"
 msgid "Swedish"
 msgstr "Svensk"
 
+msgid "Switch"
+msgstr "Skift"
+
 msgid "Switch TV to correct input"
 msgstr "Still inn riktig inngang på TV"
 
@@ -6195,7 +6267,7 @@ msgstr "System - Modulasjon"
 
 #. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
 msgid "TRANSLATOR_INFO"
-msgstr "Siste oppdatering til norsk bokmål: 04.12.2016"
+msgstr "Siste oppdatering til norsk bokmål: 25.01.2017"
 
 #
 msgid "TS file is too large for ISO9660 level 1!"
@@ -6456,7 +6528,7 @@ msgid "There are no updates available."
 msgstr "Det finnes ingen oppdateringer nå."
 
 msgid "There is no signal to lock on !"
-msgstr "Det finnes ikke noe signal og låse seg på!"
+msgstr "Det finnes ikke noe låse signal!"
 
 #
 msgid ""
@@ -6483,6 +6555,9 @@ msgstr ""
 "Denne informasjonen er bare for programvare utviklere.\n"
 "For en vanlig bruker er den uvesentlig.\n"
 "Vær vennlig ikke få panikk hvis det vises informasjon som ser mistenkelig ut!"
+
+msgid "This option allows you can config the Colordepth for UHD"
+msgstr "Med dette valget kan du justere fargedybde for UHD"
 
 msgid "This option allows you can config the Colorspace from Auto to RGB"
 msgstr "Dette valget tillater deg å velge fargesammensetning fra Auto til RGB"
@@ -6771,9 +6846,13 @@ msgstr "Papirkurv"
 msgid "Tries left:"
 msgstr "Forsøk igjen:"
 
+msgid "Troubleshoot"
+msgstr "Feilsøk"
+
 #
 msgid "Try to find used transponders in cable network.. please wait..."
-msgstr "Leter etter aktive frekvenser i kabel-TV nettet... vent litt..."
+msgstr ""
+"Leter etter aktive frekvenser i kabel-TV nettet.. vennligst vent litt..."
 
 #
 msgid "Try to find used transponders in terrestrial network... please wait..."
@@ -6895,18 +6974,6 @@ msgstr "Ukryptert"
 #
 msgid "Unhide parental control services"
 msgstr "Opphev foreldrekontroll innstillinger"
-
-#
-msgid "Unicable"
-msgstr "Unikabel"
-
-#
-msgid "Unicable LNB"
-msgstr "Unikabel LNB"
-
-#
-msgid "Unicable Matrix"
-msgstr "Unikabel Matrix"
 
 #
 msgid "Uninstall"
@@ -7415,6 +7482,15 @@ msgstr "Skriving feilet!"
 msgid "Write to /tmp/positionersetup.log"
 msgstr "Skriv til /tmp/positionersetup.log"
 
+msgid "YCbCr420"
+msgstr "YCbCr420"
+
+msgid "YCbCr422"
+msgstr "YCbCr422"
+
+msgid "YCbCr444"
+msgstr "YCbCr444"
+
 msgid "YES"
 msgstr "JA"
 
@@ -7483,7 +7559,7 @@ msgid ""
 "\"%s\"?"
 msgstr ""
 "Det finnes allerede installert en kanalliste,\n"
-"skal det slettes\n"
+"skal den slettes\n"
 "\"%s\"?"
 
 #
@@ -7502,7 +7578,7 @@ msgid "You can install this plugin."
 msgstr "Dette tillegget kan installeres."
 
 msgid "You can only burn receiver recordings!"
-msgstr "Det kan bare (DVD)brennes mottaker opptak!"
+msgstr "Du kan bare DVD brenne mottakerens innspillinger!"
 
 #
 msgid "You can remove this plugin."
@@ -7510,7 +7586,7 @@ msgstr "Dette tillegget kan slettes."
 
 #
 msgid "You cannot delete this!"
-msgstr "Dette kan ikke slettes!"
+msgstr "Du kan ikke slette dette!"
 
 msgid ""
 "You did not see all eight arrow heads. This means your TV has overscan "
@@ -7570,7 +7646,7 @@ msgstr ""
 "\n"
 
 msgid "You didn't select a channel to record from."
-msgstr "Det er ikke valgt kanal for opptak."
+msgstr "Du valgte ingen opptakskanal."
 
 #
 #, python-format
@@ -8431,10 +8507,6 @@ msgid "not tested"
 msgstr "ikke testet"
 
 #
-msgid "not used"
-msgstr "ikke i bruk"
-
-#
 msgid "not_tested"
 msgstr "ikke_testet"
 
@@ -8862,7 +8934,7 @@ msgstr "vertikal"
 
 #
 msgid "wait for ci..."
-msgstr "vent på ci..."
+msgstr "venter på ci..."
 
 #
 msgid "wait for mmi..."
@@ -9182,6 +9254,13 @@ msgstr "Still inn om eller hvordan kolonnenebredden skal vises i kanallisten."
 
 msgid "Configure if behind the subtitles a background is shown."
 msgstr "Still inn bakgrunnsvisning for undertekst."
+
+msgid ""
+"Configure if service picons will be shown in display (when supported by the "
+"skin)."
+msgstr ""
+"Velg om det skal vises kanallogo (picon) i display (hvis støttet av (skin) "
+"utseende)."
 
 msgid ""
 "Configure if service picons will be shown in the channel selection list."
@@ -9748,6 +9827,9 @@ msgstr "Frakoblet dekodingsforsinkelse (ms)"
 msgid "Position of completed timers in timerlist"
 msgstr "Posisjon for ferdige tidtakere i tidtakerliste"
 
+msgid "Power on display"
+msgstr "Slå på display"
+
 msgid "Prefer AC3 track"
 msgstr "Foretrekk AC3 lyd"
 
@@ -9900,6 +9982,10 @@ msgid "Show infobar on skip forward/backward"
 msgstr "Vis infobar ved spoling framover/bakover"
 
 #
+msgid "Show menu numbers"
+msgstr "Vis meny nummer"
+
+#
 msgid "Show menu paths"
 msgstr "Vis meny stier"
 
@@ -9911,6 +9997,9 @@ msgstr "Vis opptakslengde i opptaksliste "
 
 msgid "Show picons in channel selection list"
 msgstr "Vis kanallogo (picons) i kanalvalgslisten"
+
+msgid "Show picons in display"
+msgstr "Vis kanallogo (picon) i display"
 
 #
 msgid "Show positioner movement"
@@ -10012,6 +10101,12 @@ msgstr ""
 "Dette valget tillater å sortere og skjule meny linjer. Valget kan skifte "
 "rekkefølge og skjule meny linjer med blå knappen"
 
+msgid "This option allows you to power off the display."
+msgstr "Med dette valget kan du skru av display."
+
+msgid "This option allows you to show menu number quick links."
+msgstr "Med dette valget kan du vise menynummer snarveiene."
+
 msgid "This option allows you to show menu paths."
 msgstr "Dette valget vil vise meny stiene."
 
@@ -10075,9 +10170,9 @@ msgid ""
 msgstr ""
 "Når dette er på, vil enigma2 laste kanallister som ikke er tilknyttet "
 "mottakeren. Dette kan være kanallister som er tilgjengelig, men ikke "
-"tilknyttet radio eller tv kanallistene for mottakeren. Dette tillater at det "
-"f.eks. kan tas vare på egne favorittlister under oppgradering av "
-"innstillinger"
+"tilknyttet radio eller tv kanallistene for mottakeren. Dette tillater at du "
+"kan lagre for eksempel egne favorittlister mens oppgradering av "
+"innstillingene pågår"
 
 msgid "When enabled the PiP can be closed by the exit button."
 msgstr "Når dette er på, vil PiP (bilde i bilde) avsluttes med exit tast."
@@ -10464,6 +10559,10 @@ msgstr "Kanalliste meny"
 #
 msgid "Command execution..."
 msgstr "Velg gjennomføring..."
+
+#
+msgid "Commit info"
+msgstr "Commit info"
 
 #
 msgid "Continue in background"
@@ -11035,6 +11134,22 @@ msgstr ""
 #
 msgid "Video mode selection."
 msgstr "Innstilling for bilde."
+
+#
+#~ msgid "Unicable"
+#~ msgstr "Unikabel"
+
+#
+#~ msgid "Unicable LNB"
+#~ msgstr "Unikabel LNB"
+
+#
+#~ msgid "Unicable Matrix"
+#~ msgstr "Unikabel Matrix"
+
+#
+#~ msgid "not used"
+#~ msgstr "ikke i bruk"
 
 #
 #~ msgid "Coderate HP"
