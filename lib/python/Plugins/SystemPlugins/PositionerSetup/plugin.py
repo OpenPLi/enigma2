@@ -108,6 +108,12 @@ class PositionerSetup(Screen):
 			if self.oldref and getCurrentTuner is not None:
 				if self.feid == getCurrentTuner:
 					self.oldref_stop = True
+				else:
+					for n in nimmanager.nim_slots:
+						if n.config_mode in ("loopthrough", "satposdepends"):
+							root_id = nimmanager.sec.getRoot(n.slot_id, int(n.config.connectedTo.value))
+							if int(n.config.connectedTo.value) == self.feid:
+								self.oldref_stop = True
 				if self.oldref_stop:
 					self.session.nav.stopService() # try to disable foreground service
 					if getCurrentSat is not None and getCurrentSat in self.availablesats:
@@ -254,7 +260,7 @@ class PositionerSetup(Screen):
 
 	def __onClose(self):
 		self.statusTimer.stop()
-		log.close();
+		log.close()
 		self.session.nav.playService(self.oldref)
 
 	def OrbToStr(self, orbpos):
