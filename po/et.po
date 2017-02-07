@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-02-07 11:32+0330\n"
+"PO-Revision-Date: 2017-02-07 16:10+0330\n"
 "Last-Translator: \n"
 "Language-Team: Raivo, Henkka, eesatfan, rimas, zeros\\n faas, sateks, "
 "valgekotkas, tigekala, rootsikunn\\n kain, i70, mustkass, pelmeen, Scott\\n "
@@ -36,6 +36,13 @@ msgid ""
 msgstr ""
 "\n"
 "Varunda vastuvõtja seaded."
+
+msgid ""
+"\n"
+"Conflict detection disabled!"
+msgstr ""
+"\n"
+"Konflikti avastamine keelatud!"
 
 msgid ""
 "\n"
@@ -124,6 +131,9 @@ msgstr ""
 "\n"
 "Vaata, paigalda ja eemalda saadavaid või paigaldatud tarkvara pakette."
 
+msgid " (0 - all networks)"
+msgstr "(0 - kõik võrgud)"
+
 #, python-format
 msgid " (Channel %s)"
 msgstr " (Kanal %s)"
@@ -143,9 +153,6 @@ msgstr " (TV)"
 
 msgid " (disabled)"
 msgstr "(keelatud)"
-
-msgid "0 (disabled)"
-msgstr ""
 
 msgid " (higher than any auto)"
 msgstr " (suurem kui mistahes auto)"
@@ -168,6 +175,7 @@ msgstr " paketti valitud."
 msgid " updates available."
 msgstr " uuendust saadaval."
 
+#, python-format
 msgid "%02d:%02d"
 msgstr "%02d:%02d"
 
@@ -258,6 +266,10 @@ msgstr[0] "laius %d piksel"
 msgstr[1] "laius %d pikslit"
 
 #, python-format
+msgid "%d sec"
+msgstr ""
+
+#, python-format
 msgid "%d second"
 msgid_plural "%d seconds"
 msgstr[0] "%d sekund"
@@ -275,12 +287,10 @@ msgid_plural "%d wireless networks found!"
 msgstr[0] "%d wifi võrk leitud!"
 msgstr[1] "%d wifi võrku leitud!"
 
-msgid "%d-%b-%Y %-H:%M"
-msgstr "%d-%b-%Y %-H:%M"
-
 msgid "%d-%m"
 msgstr "%d-%m"
 
+#, python-format
 msgid "%d.%02d. %02d:%02d"
 msgstr "%d.%02d. %02d:%02d"
 
@@ -359,8 +369,14 @@ msgstr "1.1"
 msgid "1.2"
 msgstr "1.2"
 
+msgid "10bit"
+msgstr "10bit"
+
 msgid "12V output"
 msgstr "12V väljund"
+
+msgid "12bit"
+msgstr "12bit"
 
 msgid "13 V"
 msgstr "13 V"
@@ -413,6 +429,15 @@ msgstr "3d režiim"
 msgid "4"
 msgstr "4"
 
+msgid "420"
+msgstr "420"
+
+msgid "422"
+msgstr "422"
+
+msgid "444"
+msgstr "444"
+
 msgid "4:3"
 msgstr "4:3"
 
@@ -434,20 +459,14 @@ msgstr "7"
 msgid "8"
 msgstr "8"
 
+msgid "8bit"
+msgstr "8bit"
+
 msgid "9"
 msgstr "9"
 
-msgid ": %s"
-msgstr ": %s"
-
-msgid "5 minutes"
-msgstr ""
-
-msgid "30 minutes"
-msgstr ""
-
-msgid "60 minutes"
-msgstr ""
+msgid ": 0000 - default (disabled)"
+msgstr ":0000 - vakimisi (keelatud)"
 
 msgid "<Current movielist location>"
 msgstr "<Salvestusnimekirja hetkeasukoht >"
@@ -509,6 +528,13 @@ msgstr ""
 "%s"
 
 msgid ""
+"A recording is currently running on the selected tuner. Please select a "
+"different tuner or consider to stop the recording to try again."
+msgstr ""
+"Valitud tuuneri kaudu toimub praegu salvestus. Vali mõni teine tuuner, või "
+"peata salvestus, et uut salvestust alustada."
+
+msgid ""
 "A recording is currently running.\n"
 "What do you want to do?"
 msgstr ""
@@ -517,16 +543,14 @@ msgstr ""
 
 msgid ""
 "A recording is currently running. Please stop the recording before trying to "
-"configure the positioner."
-msgstr ""
-"Hetkel salvestatakse. Peata salvestus, enne kui üritad muuta positsioneeri "
-"sätteid."
-
-msgid ""
-"A recording is currently running. Please stop the recording before trying to "
 "scan."
 msgstr ""
 "Hetkel salvestatakse. Peata salvestamine enne kanaliotsingu alustamist."
+
+msgid ""
+"A recording is currently running. Please stop the recording before trying to "
+"start a testing DiSEqC."
+msgstr "Hetkel salvestatakse. Peata salvestamine enne DiSEqC testimist."
 
 #, python-format
 msgid "A required tool (%s) was not found."
@@ -577,6 +601,18 @@ msgstr "AAC > stereo"
 msgid "AC3 downmix"
 msgstr "AC3 > stereo"
 
+msgid "AGC:"
+msgstr "AGC:"
+
+msgid "ASS file"
+msgstr "ASS fail"
+
+msgid "ATSC"
+msgstr "ATSC"
+
+msgid "ATSC provider"
+msgstr "ATSC levitaja"
+
 msgid "Abort"
 msgstr "Katkesta"
 
@@ -588,12 +624,6 @@ msgstr "Süsteemiinfo"
 
 msgid "Accesspoint:"
 msgstr "WiFi ruuter:"
-
-msgid "Action on long powerbutton press"
-msgstr "Toitenupu pikk vajutus"
-
-msgid "Action on short powerbutton press"
-msgstr "Toitenupu lühike vajutus"
 
 msgid "Activate HbbTV (Redbutton)"
 msgstr "Aktiveeri HbbTV (punane nupp)"
@@ -744,6 +774,9 @@ msgstr "Kõik satelliidid 3 (USALS)"
 msgid "All satellites 4 (USALS)"
 msgstr "Kõik satelliidid 4 (USALS)"
 
+msgid "All services provider"
+msgstr "Kõik levitajad"
+
 msgid "Allocate"
 msgstr "Eralda"
 
@@ -779,6 +812,20 @@ msgstr "Küsi alati"
 
 msgid "Always hide infobar"
 msgstr "Peida alati inforiba"
+
+msgid "Always include ECM in recordings"
+msgstr "Salvestised sisaldavad ka ECM sõnumeid"
+
+msgid ""
+"Always include ECM messages in recordings. This overrides the individual "
+"timer settings globally. It allows recordings to be always decrypted "
+"afterwards (sometimes called offline decoding), if supported by your "
+"receiver. Default: off."
+msgstr ""
+"Salvestised sisaldavad alati ka ECM sõnumeid. See valik alistab üksiku "
+"taimeri seadistused globaalselt ja võimaldab salvestisi hiljem dekrüptida "
+"(offlain dekodeerimine), kui vastuvõtja seda toetab. Vaikimisi: välja "
+"lülitatud."
 
 msgid "An empty filename is illegal."
 msgstr "Tühi failinimi ei ole lubatud."
@@ -863,6 +910,9 @@ msgstr "Esitaja"
 msgid "Arts/Culture"
 msgstr "Kunst/kultuur"
 
+msgid "As defined by the skin"
+msgstr "Nagu välimuse poolt määratud"
+
 msgid "Ask user"
 msgstr "Küsi kasutajalt"
 
@@ -912,6 +962,9 @@ msgstr "Heli keele valik 4"
 msgid "Audio options..."
 msgstr "Heli valikud..."
 
+msgid "Audio plugins"
+msgstr "Audio pluginad"
+
 #, python-format
 msgid "Audio track (%s) format"
 msgstr "heliriba (%s) formaat"
@@ -930,6 +983,12 @@ msgstr "DVD loomine"
 msgid "Auto"
 msgstr "Automaatne"
 
+msgid "Auto Diseqc"
+msgstr "Auto Diseqc"
+
+msgid "Auto EXIF Orientation rotation/flipping"
+msgstr "EXIF orientatsiooni automaatne pööramine/ümberpööramine"
+
 msgid "Auto chapter split every ? minutes (0=never)"
 msgstr "Automaatne peatüki lõikamine iga ? minuti (0=mitte kunagi)"
 
@@ -944,6 +1003,9 @@ msgstr "Autofookus alustades ..."
 
 msgid "Auto language selection"
 msgstr "Automaatsed keele valikud"
+
+msgid "Auto play blu-ray file"
+msgstr "Mängi kohe bluray faili"
 
 msgid "Auto scart switching"
 msgstr "Autom. SCART ümberlülitus"
@@ -1086,6 +1148,9 @@ msgstr ""
 "Vaikimisi näidatakse SNR väärtust dB-s (kui tuuner seda toetab). See valik "
 "annab SNR näidu protsentides dB asemel."
 
+msgid "Bypass HDMI EDID checking"
+msgstr "Möödu HDMI EDID kontrollist"
+
 msgid "C"
 msgstr "C"
 
@@ -1095,6 +1160,7 @@ msgstr "C-sagedusala"
 msgid "CH"
 msgstr "CH"
 
+#, python-format
 msgid "CH%s"
 msgstr "CH%s"
 
@@ -1103,6 +1169,9 @@ msgstr "CI (Common Interface) määrangud"
 
 msgid "CI assignment"
 msgstr "CI määrangud"
+
+msgid "CI slot: "
+msgstr "CI pesa: "
 
 msgid "CPU: "
 msgstr "CPU: "
@@ -1150,6 +1219,9 @@ msgstr "Failide liigutamine prügikasti väliselt kettalt ei ole võimalik"
 msgid "Cannot move to trash can"
 msgstr "Prügikasti saatmine ei ole võimalik"
 
+msgid "Capabilities: "
+msgstr "Võimekused: "
+
 msgid "Capacity: "
 msgstr "Maht: "
 
@@ -1189,9 +1261,6 @@ msgstr "Muuda sammu suurust"
 msgid "Change timer"
 msgstr "Muuda taimerit"
 
-msgid "Changelog"
-msgstr "Muudatuste logi"
-
 msgid "Channel"
 msgstr "Kanal"
 
@@ -1212,6 +1281,15 @@ msgstr "Kanal:"
 
 msgid "Channellist menu"
 msgstr "Kanalinimekirja menüü"
+
+msgid "Channelnumber and picon"
+msgstr "Kanali number ja picon"
+
+msgid "Channelnumber and servicename"
+msgstr "Kanali number ja teenuse nimi"
+
+msgid "Channelnumber, picon and servicename"
+msgstr "Kanali number, picon ja teenuse nimi"
 
 msgid "Chap."
 msgstr "Peatükk."
@@ -1250,6 +1328,9 @@ msgstr "Lapsed/Noored"
 
 msgid "Choose Tuner"
 msgstr "Vali tuuner"
+
+msgid "Choose bouquet"
+msgstr "Vali lemmiknimekiri"
 
 msgid "Choose which tuner to configure."
 msgstr "Vali seadistamiseks tuuner."
@@ -1293,17 +1374,14 @@ msgstr "Sulge PiP väljumisel"
 msgid "Close title selection"
 msgstr "Sulge pealkirja valik"
 
+msgid "Code R. LP-HP & Guard Int."
+msgstr "Kood R.LP-HP&kaitsevahemik"
+
 msgid "Code rate HP"
 msgstr "Veaparandustegur (HP)"
 
 msgid "Code rate LP"
 msgstr "Veaparandustegur (LP)"
-
-msgid "Coderate HP"
-msgstr "Coderate HP"
-
-msgid "Coderate LP"
-msgstr "Coderate LP"
 
 msgid "Collection name"
 msgstr "Valiku nimi"
@@ -1320,6 +1398,9 @@ msgstr "Käskude täitmine"
 msgid "Command order"
 msgstr "Käskude järjekord"
 
+msgid "Commit info"
+msgstr ""
+
 msgid "Common Interface"
 msgstr "CI liides"
 
@@ -1332,9 +1413,6 @@ msgstr "Suhtlus"
 msgid "Compact flash"
 msgstr "Compact flash"
 
-msgid "Compensate for overscan"
-msgstr "Kompenseeri liighälvitus"
-
 msgid "Complete"
 msgstr "Täielik"
 
@@ -1344,14 +1422,14 @@ msgstr "Täielik ( lubab audio radade miksimist )"
 msgid "Composition of the recording filenames"
 msgstr "Salvestuse nimede komponeerimine"
 
+msgid "Config Scan Details"
+msgstr ""
+
 msgid "Config resolution of pictures"
 msgstr "Määra piltide eraldusmäär"
 
 msgid "Configuration mode"
 msgstr "Häälestamine"
-
-msgid "ATSC provider"
-msgstr "ATSC levitaja"
 
 #, python-format
 msgid "Configuration mode: %s"
@@ -1379,6 +1457,9 @@ msgstr ""
 "Määra, mitu minutit lõppenud saated on veel näha EPG nimekirjas. Mugav "
 "juhul, kui soovid infot saate kohta, mis on just lõppenud või mille algus "
 "hilineb."
+
+msgid "Configure how many channels are shown in the selection list."
+msgstr "Määra, palju kanaleid näidatakse valiku nimekirjas"
 
 msgid "Configure how recording filenames are constructed."
 msgstr "Määra, millisel kujul salvestuste nimed luuakse."
@@ -1414,9 +1495,24 @@ msgid ""
 "list."
 msgstr "Määra, kas ja kui laialt näidatakse veerge kanalivaliku nimekirjas."
 
+msgid "Configure if behind the subtitles a background is shown."
+msgstr "Määra, kui subtiitrite tagant on taust näha."
+
+msgid ""
+"Configure if service picons will be shown in display (when supported by the "
+"skin)."
+msgstr ""
+
 msgid ""
 "Configure if service picons will be shown in the channel selection list."
 msgstr "Määra, kas teenuse picon näidatakse kanalivaliku nimekirjas."
+
+msgid ""
+"Configure if the HDMI EDID checking should be bypassed as this might solve "
+"issue with some TVs."
+msgstr ""
+"Määra, kui HDMI EDID kontrollist peaks mööduma, kuivõrd see võib kõrvaldada "
+"probleemi mõne TVga."
 
 msgid ""
 "Configure if the subtitle should switch between normal, italic, bold and "
@@ -1540,12 +1636,6 @@ msgstr "Määra heli keele neljas eelistus."
 
 msgid "Configure the fourth subtitle language."
 msgstr "Määra subtiitrite keele neljas eelistus."
-
-msgid "Configure the function of a long press on the power button."
-msgstr "Määra, mida toitenupu pikk vajutus teeb."
-
-msgid "Configure the function of a short press on the power button."
-msgstr "Määra, mida toitenupu lühike vajutus teeb."
 
 msgid "Configure the function of the '0' button do when PIP is active."
 msgstr "Määra, mida '0' nupp PiP- režiimis teeb."
@@ -1716,6 +1806,9 @@ msgstr ""
 "Määra, kas ja kui kaua teist inforiba näidatakse, kui vajutada kaks korda "
 "OK. Teine inforiba sisaldab käesoleva kanali kohta lisateavet."
 
+msgid "Configure whether multi channel PCM sound should be enabled."
+msgstr "Säti, kas mitme kanali PCM heli peaks olema lubatud."
+
 msgid ""
 "Configure whether multi channel sound tracks should be downmixed to stereo."
 msgstr "Määra, kas mitmekanaline heli tuleks taandada stereoks."
@@ -1782,9 +1875,6 @@ msgstr "Seadistatakse"
 msgid "Conflict not resolved!"
 msgstr "Konflikt pole lahendatud!"
 
-msgid "Conflicting timer"
-msgstr "Vastuolud taimeris"
-
 msgid "Connect"
 msgstr "Ühenda"
 
@@ -1797,8 +1887,14 @@ msgstr "Ühendatud satelliidid"
 msgid "Connected to"
 msgstr "Ühendatud"
 
-msgid "Constellation"
-msgstr "Konstellatsioon"
+msgid "Connected transcoding, limit - no PiP!"
+msgstr "Ühendatud transkoodingu piirang - PIP ei ole võimalik!"
+
+msgid "Console"
+msgstr "Konsool"
+
+msgid "Constellation & FFT mode"
+msgstr "Konstellatsioon ja FFT laad"
 
 msgid "Content does not fit on DVD!"
 msgstr "Sisu ei mahu DVD-le!"
@@ -1833,9 +1929,6 @@ msgstr "Teisenda ext3 > ext4..."
 msgid "Copy"
 msgstr "Kopeeri"
 
-msgid "Could not connect to receiver .NFI image feed server:"
-msgstr "Vastuvõtja ei saa ühendust .NFI-tarkvara serveriga:"
-
 msgid "Could not find installed channel list."
 msgstr "Paigaldatud kanalinimekirja ei leitud."
 
@@ -1853,11 +1946,17 @@ msgstr "Taimerite konflikt %s. Salvestamine nurjus."
 msgid "Could not record due to invalid service %s"
 msgstr "Kehtetu kanal %s. Salvestamine nurjus."
 
+msgid "Cover dashed flickering line for this service"
+msgstr "Peida võbeleva katkendjoonega joon selle teenuse jaoks"
+
 msgid "Create DVD-ISO"
 msgstr "Loo DVD-ISO"
 
 msgid "Create new folder and exit"
 msgstr "Loo uus kaust ja välju"
+
+msgid "Create seperate radio userbouquet"
+msgstr ""
 
 #, python-format
 msgid "Creating directory %s failed."
@@ -1892,6 +1991,9 @@ msgstr ""
 msgid "Current mode: %s \n"
 msgstr "Hetke olek: %s \n"
 
+msgid "Current rotor position: "
+msgstr "Pööraja hetkeasend: "
+
 msgid "Current settings:"
 msgstr "Hetke seaded:"
 
@@ -1900,12 +2002,6 @@ msgstr "Hetke transponder"
 
 msgid "Current value: "
 msgstr "Praegune väärtus: "
-
-msgid "Current version:"
-msgstr "Hetke versioon:"
-
-msgid "Currently installed image"
-msgstr "Paigaldatud tarkvara"
 
 msgid "Currently the commit log cannot be retrieved - please try later again"
 msgstr "Tehtud toimingute logi ei saa hetkel kätte - proovi hiljem uuesti"
@@ -1927,6 +2023,9 @@ msgstr "Kohanda kursori tegutsemist kanalite nimekirjas"
 
 msgid "Cut"
 msgstr "Lõika"
+
+msgid "Cutlist editor"
+msgstr "Lõikekohtade monteerija"
 
 msgid "Cutlist editor..."
 msgstr "Lõikekohtade monteerija..."
@@ -1952,14 +2051,23 @@ msgstr "DTS > stereo"
 msgid "DUAL LAYER DVD"
 msgstr "Kahekihiline DVD"
 
+msgid "DVB CI Delay"
+msgstr "DVB CI viide"
+
 msgid "DVB drivers: "
 msgstr "DVB draiverid: "
 
 msgid "DVB subtitle black transparency"
 msgstr "DVB subtiitrite tausta läbipaistvus"
 
+msgid "DVB type"
+msgstr "DVB tüüp"
+
 msgid "DVB-C"
 msgstr "DVB-C"
+
+msgid "DVB-C ANNEX B"
+msgstr "DVB-C ANNEX B"
 
 msgid "DVB-C ANNEX C"
 msgstr "DVB-C ANNEX C"
@@ -1975,6 +2083,12 @@ msgstr "DVB-T"
 
 msgid "DVB-T2"
 msgstr "DVB-T2"
+
+msgid "DVD Burn"
+msgstr "DVD kirjutamine"
+
+msgid "DVD Menu"
+msgstr "DVD menüü"
 
 msgid "DVD data format"
 msgstr "DVD andmevorming"
@@ -2005,6 +2119,9 @@ msgstr "Sügav ooterežiim"
 
 msgid "Default"
 msgstr "Vaikimisi"
+
+msgid "Default Services Scanner"
+msgstr "Vaikimisi teenuste otsija"
 
 msgid "Default movie location"
 msgstr "Salvestuste tavaasukoht"
@@ -2105,8 +2222,11 @@ msgstr "Prügikast"
 msgid "Depth"
 msgstr "Sügavus"
 
-msgid "Descramble http streams"
-msgstr "Dekodeeri http vood"
+msgid "Descramble receiving http streams"
+msgstr "Dekodeeri sisenevad http vood"
+
+msgid "Descramble sending http streams"
+msgstr "Dekodeeri väljuvad http vood"
 
 msgid "Description"
 msgstr "Kirjeldus"
@@ -2144,12 +2264,21 @@ msgstr "DiSEqC A/B"
 msgid "DiSEqC A/B/C/D"
 msgstr "DiSEqC A/B/C/D"
 
+msgid "DiSEqC Tester"
+msgstr "DiSEqC tester"
+
 msgid "DiSEqC mode"
 msgstr "DiSEqC-olek"
 
 #, python-format
 msgid "DiSEqC port %s: %s"
 msgstr "DiSEqC port %s: %s"
+
+msgid "DiSEqC-tester settings"
+msgstr "DiSEqC-testeri seaded"
+
+msgid "Did you see all eight arrow heads?"
+msgstr "Kas nägid kõiki kaheksat nooletippu?"
 
 msgid "Digital contour removal"
 msgstr "Digitaalne kontuuri kõrvaldamine"
@@ -2274,6 +2403,9 @@ msgstr "Kas soovid kustutada lemmiku %s?"
 msgid "Do you want this?"
 msgstr "Kas soovid seda?"
 
+msgid "Do you want to autorestore settings?"
+msgstr "Kas soovid taastada oma seaded?"
+
 msgid "Do you want to burn this collection to DVD medium?"
 msgstr "Kas kirjutada see valik DVD plaadile?"
 
@@ -2282,10 +2414,6 @@ msgstr "Kas soovid kanaliotsingut teha?"
 
 msgid "Do you want to do another manual service scan?"
 msgstr "Kas soovid uut käsiotsingut teha?"
-
-#, python-format
-msgid "Do you want to download the image to %s ?"
-msgstr "Kas soovid image alla laadida %s ?"
 
 msgid "Do you want to install a channel list?"
 msgstr "Kas paigaldad kanalinimekirja?"
@@ -2299,8 +2427,14 @@ msgstr "Soovid panna DVD mängima?"
 msgid "Do you want to preview this DVD before burning?"
 msgstr "Kas soovid selle DVD eelvaadet enne põletamise alustamist?"
 
+msgid "Do you want to quit the overscan wizard?"
+msgstr "Soovid lahkuda üleskaneerimise abilisest?"
+
 msgid "Do you want to reboot your receiver?"
 msgstr "Kas soovid taaskäivitada vastuvõtja?"
+
+msgid "Do you want to remove all the crahs logfiles"
+msgstr "Kas soovid eemaldada kõik kokkuvarisemise logifailid"
 
 msgid "Do you want to remove the package:\n"
 msgstr "Kas soovid eemaldada paketi:\n"
@@ -2310,6 +2444,9 @@ msgstr "Kas soovid taastada oma seaded?"
 
 msgid "Do you want to resume this playback?"
 msgstr "Kas soovid jätkata vaatamist katkestatud kohalt?"
+
+msgid "Do you want to select a different skin?"
+msgstr "Kas soovid valida teistsuguse kujunduse?"
 
 #, python-format
 msgid "Do you want to update your receiver to %s?"
@@ -2341,16 +2478,6 @@ msgid "Done - Installed, upgraded or removed %d package (%s)"
 msgid_plural "Done - Installed, upgraded or removed %d packages (%s)"
 msgstr[0] "Valmis - paigaldatud, täiendatud või eemaldatud %d pakett (%s)"
 msgstr[1] "Valmis - paigaldatud, täiendatud või eemaldatud %d paketti (%s)"
-
-msgid "Download"
-msgstr "Allalaadimine"
-
-#, python-format
-msgid "Download %s from server"
-msgstr "Laadi alla %s serverist"
-
-msgid "Download .NFI-files for USB-flasher"
-msgstr "Allalaadimine .NFI-failid USB-le"
 
 msgid "Download plugins"
 msgstr "Paigalda laiendusi"
@@ -2473,6 +2600,10 @@ msgstr "Luba automaatne kaabliotsing"
 msgid "Enable auto fast scan"
 msgstr "Luba automaatne kiirotsing"
 
+#, python-format
+msgid "Enable auto fast scan for %s"
+msgstr "Luba kiire automaatotsing %s jaoks"
+
 msgid "Enable bouquet selection in multi-EPG"
 msgstr "Luba multiEPG-s nimekirjade valik."
 
@@ -2502,8 +2633,14 @@ msgstr ""
 msgid "Enable teletext caching"
 msgstr "Luba teleteksti puhverdamine"
 
+msgid "Enable timer conflict detection"
+msgstr "Luba taimerikonflikti tuvastus"
+
 msgid "Enable volume control with arrow buttons"
 msgstr "Luba helitugevuse juhtimine noolenuppudega"
+
+msgid "Enable wakeup timer"
+msgstr "Luba äratustaimer"
 
 msgid "Enable zapping with CH+/-, B+/-, P+/-"
 msgstr "Luba kanalivahetus CH+/-, B+/-, P+/- nuppudega"
@@ -2545,8 +2682,14 @@ msgstr "Enigma (taas)käivitamisi: %d\n"
 msgid "Enigma2 skin selector"
 msgstr "Enigma2 kujunduse valik"
 
+msgid "Enter PIN"
+msgstr "Sisesta PIN"
+
 msgid "Enter main menu..."
 msgstr "Mine peamenüüsse"
+
+msgid "Enter persistent PIN code"
+msgstr "Sisesta püsiv PIN kood"
 
 msgid "Enter pin code"
 msgstr "Sisesta pin kood"
@@ -2589,8 +2732,17 @@ msgstr "Saate tähesuurus"
 msgid "Event view"
 msgstr "Saateinfo"
 
+msgid "Event view context menu"
+msgstr "Sündmuse vaate kontekstimenüü"
+
 msgid "Event view menu"
 msgstr "Saateinfo menüü"
+
+msgid "Events info menu"
+msgstr "Sündmuste info menüü"
+
+msgid "Every known"
+msgstr "Iga tuntud"
 
 msgid "Everywhere"
 msgstr "Igal pool"
@@ -2643,6 +2795,9 @@ msgstr "Välju võrgu häälestusest"
 msgid "Exit the wizard"
 msgstr "Välju juhendatud seadistusabist"
 
+msgid "Exit/OK"
+msgstr "Välju/OK"
+
 msgid "Expert"
 msgstr "Ekspert"
 
@@ -2669,6 +2824,9 @@ msgstr "Laiendused"
 
 msgid "Extensions management"
 msgstr "Laienduste haldamine"
+
+msgid "Extensions menu"
+msgstr "Laienduste menüü"
 
 msgid "External"
 msgstr "Väline"
@@ -2698,11 +2856,39 @@ msgstr "Mootori ekstravõimalused"
 msgid "Extra start time to ignore inactivity sleeptimer"
 msgstr "Lisatud alustamise aeg tegevusetuse unetaimeri vältimiseks"
 
+msgid "F"
+msgstr "F"
+
 msgid "F1/F3/F4"
 msgstr "F1/F3/F4"
 
+msgid "FBC SCR (Unicable/JESS)"
+msgstr ""
+
+msgid "FBC automatic"
+msgstr ""
+
+msgid ""
+"FBC automatic\n"
+"connected to"
+msgstr ""
+
+#, python-format
+msgid ""
+"FBC automatic\n"
+"connected to %s"
+msgstr ""
+
+msgid ""
+"FBC automatic\n"
+"inactive"
+msgstr ""
+
 msgid "FEC"
 msgstr "FEC"
+
+msgid "FEC:"
+msgstr "FEC:"
 
 msgid "FTA"
 msgstr "FTA"
@@ -2715,6 +2901,9 @@ msgstr "Nurjus"
 
 msgid "Failed to write /tmp/positionersetup.log: "
 msgstr "/tmp/positionersetup.logi loomine nurjus: "
+
+msgid "Failed:"
+msgstr "Nurjus:"
 
 msgid "Fallback remote receiver URL"
 msgstr "Kaugvastuvõtja URL"
@@ -2758,6 +2947,9 @@ msgstr "Lemmikud"
 msgid "File appears to be busy.\n"
 msgstr "Fail on hõivatud.\n"
 
+msgid "Filename"
+msgstr "Faili nimi"
+
 msgid "Filesystem check"
 msgstr "Failisüsteemi kontroll"
 
@@ -2791,14 +2983,14 @@ msgstr "Soome"
 msgid "Fixed"
 msgstr "Määratud"
 
-msgid "Flash"
-msgstr "Flash"
-
-msgid "Flashing failed"
-msgstr "Flashimine nurjus"
-
 msgid "Following tasks will be done after you press OK!"
 msgstr "Järgmised toimingud tehakse pärast OK vajutamist!"
+
+msgid "Force LNB Power"
+msgstr "Sunni LNB toide"
+
+msgid "Force ToneBurst"
+msgstr "Sunni toonipurse"
 
 msgid "Format"
 msgstr "Vorming"
@@ -2814,6 +3006,12 @@ msgstr "Prantsuse"
 
 msgid "Frequency"
 msgstr "Sagedus"
+
+msgid "Frequency & Channel"
+msgstr "Sagedus ja kanal"
+
+msgid "Frequency & Polarization"
+msgstr "Sagedus ja polarisatsioon"
 
 msgid "Frequency bands"
 msgstr "Sagedusalad"
@@ -2852,6 +3050,17 @@ msgstr "'OK' nupu toime"
 msgid "Further Options"
 msgstr "Tulevased võimalused"
 
+msgid "Further options"
+msgstr "Täiendavad võimalused"
+
+msgid "G"
+msgstr "G"
+
+msgid ""
+"GUI needs a restart to apply a new language\n"
+"Do you want to restart the GUI now?"
+msgstr ""
+
 msgid ""
 "GUI needs a restart to apply a new skin\n"
 "Do you want to restart the GUI now?"
@@ -2873,12 +3082,6 @@ msgstr "Žanr"
 
 msgid "German"
 msgstr "Saksa"
-
-msgid "Get latest experimental image"
-msgstr "Hangi uusim eksperimentaalne tarkvara"
-
-msgid "Get latest release image"
-msgstr "Hangi uusim stabiilne tarkvara"
 
 msgid "Getting plugin information. Please wait..."
 msgstr "Saadakse laienduse infot. Oota..."
@@ -2970,8 +3173,23 @@ msgstr "Roheline boost"
 msgid "Guard interval"
 msgstr "Kaitsevahemik"
 
+msgid "H"
+msgstr "H"
+
 msgid "HD list"
 msgstr "HD nimekiri"
+
+msgid "HD1100/HD1200/HD1265/et7x00/et8500/et7000mini"
+msgstr "HD1100/HD1200/HD1265/et7x00/et8500/et7000mini"
+
+msgid "HD2400"
+msgstr "HD2400"
+
+msgid "HDMI Colordepth"
+msgstr ""
+
+msgid "HDMI Colorspace"
+msgstr "HDMI värviruum"
 
 msgid "HDMI-CEC setup"
 msgstr "HDMI-CEC seaded"
@@ -3009,12 +3227,6 @@ msgstr "Aitab antenni seadistada"
 msgid "Hidden network"
 msgstr "Varjatud võrk"
 
-msgid "HD1100/HD1200/HD1265/et7x00/et8500/et7000mini"
-msgstr "HD1100/HD1200/HD1265/et7x00/et8500/et7000mini"
-
-msgid "Hide CI messages"
-msgstr "Peida CI teated"
-
 msgid "Hide channel list in radio mode"
 msgstr "Peida raadiorežiimis kanalinimekiri"
 
@@ -3034,9 +3246,6 @@ msgid "Hide zap errors"
 msgstr "Peida veateated kanalivahetusel"
 
 msgid "Hierarchy info"
-msgstr "Hierarhia teave"
-
-msgid "Hierarchy information"
 msgstr "Hierarhia teave"
 
 msgid "High bitrate support"
@@ -3090,6 +3299,9 @@ msgstr "Värvitoon"
 msgid "Hungarian"
 msgstr "Ungari"
 
+msgid "I"
+msgstr "I"
+
 msgid "IP address"
 msgstr "IP aadress"
 
@@ -3128,11 +3340,11 @@ msgstr ""
 "Ära hooli praegu heledatest varjunditest, need seame paika järgmisena. \n"
 "Kui oled tulemusega rahul, vajuta OK."
 
+msgid "Ignore conflict"
+msgstr "Ignoreeri konflikti"
+
 msgid "Image: "
 msgstr "Tarkvara: "
-
-msgid "Immediate shutdown"
-msgstr "Kohene väljalülitus"
 
 msgid ""
 "In order to record a timer, the TV was switched to the recording service!\n"
@@ -3169,24 +3381,6 @@ msgstr "Indeks asetseb:"
 
 msgid "Info"
 msgstr "Info"
-
-msgid "INFO"
-msgstr ""
-
-msgid "ATSC"
-msgstr "ATSC"
-
-msgid "DVB-C ANNEX B"
-msgstr "DVB-C ANNEX B"
-
-msgid "Leave message"
-msgstr ""
-
-msgid "DVB CI Delay"
-msgstr "DVB CI viide"
-
-msgid "Toggle dashed flickering line for this service"
-msgstr "Vaheta võbeleva katkendjoonega joon selle teenuse puhul"
 
 msgid "Info bar"
 msgstr "Inforiba"
@@ -3324,6 +3518,12 @@ msgstr "Kehtetud transponderi andmed"
 msgid "Inversion"
 msgstr "Inversioon"
 
+msgid "Inversion & Bandwidth"
+msgstr "Inversioon ja ribalaius"
+
+msgid "Inversion, Pilot & Roll-off"
+msgstr "Inversioon, piloot ja roll-off"
+
 msgid "Invert"
 msgstr "Vastupidi"
 
@@ -3336,6 +3536,19 @@ msgstr "Kasutad neid seadeid?"
 msgid "Is this video mode ok?"
 msgstr "Kas see videoseadistus sobib?"
 
+msgid ""
+"It seems you did not see all the eight arrow heads. This means your TV is "
+"has overscan enabled, and is not configured properly.\n"
+"\n"
+"Please refer to your TVs manual to find how you can disable overscan on your "
+"TV. Look for terms like 'Just fit', 'Full width', etc. If you can't find it, "
+"ask other users at http://forums.openpli.org.\n"
+"\n"
+msgstr ""
+"Näib et Sa ei näinud kõiki kaheksat nooleotsa. See tähendab et Su TV lubab "
+"üleskaneerimist ja ei ole põhjalikult seadistatud. ­\n"
+"\n"
+
 msgid "Italian"
 msgstr "Itaalia"
 
@@ -3344,6 +3557,9 @@ msgstr "Kirjet lehel"
 
 msgid "Items per page for list screen"
 msgstr "Nimekirja lehekülje sisestuste arv"
+
+msgid "J"
+msgstr "J"
 
 msgid "Job overview"
 msgstr "Töövaade"
@@ -3393,6 +3609,9 @@ msgstr "Keel"
 
 msgid "Language selection"
 msgstr "Keele valik"
+
+msgid "Large"
+msgstr "Täielikult"
 
 msgid "Last config"
 msgstr "Viimane seadistus"
@@ -3523,8 +3742,11 @@ msgstr "Lukusta pildisuhe"
 msgid "Lock:"
 msgstr "Lukus:"
 
-msgid "Log results to harddisk"
-msgstr "Logi tulemused kõvakettale"
+msgid "Log results to /tmp"
+msgstr "Logi tulemused /tmp"
+
+msgid "Logfile does not exist anymore"
+msgstr ""
 
 msgid "Long filenames"
 msgstr "Pikad failinimed"
@@ -3601,6 +3823,13 @@ msgstr "Max. mälu asendid"
 msgid "Max. bitrate: "
 msgstr "Max. bitikiirus: "
 
+msgid ""
+"Maybe the reason that recording is currently running. Please stop the "
+"recording before trying to configure the positioner."
+msgstr ""
+"Võimalik et põhjuseks on hetkel käiv salvestus. Peatage salvestus enne "
+"positsioneeri seadistamise katset."
+
 msgid "Media player"
 msgstr "Meediamängija"
 
@@ -3624,6 +3853,10 @@ msgstr "Mälu indeks"
 
 msgid "Menu"
 msgstr "Menüü"
+
+#, python-format
+msgid "Menusort (%s)"
+msgstr "Menüüsort (%s)"
 
 msgid "Message"
 msgstr "Teade"
@@ -3745,14 +3978,14 @@ msgstr "Mitmekanaline heli > stereo"
 msgid "Multi-EPG bouquet selection"
 msgstr "Lemmiknimekirjade valik kanalite saatekavas"
 
+msgid "Multichannel PCM"
+msgstr "Mitme kanali PCM"
+
 msgid "Multimedia"
 msgstr "Multimeedia"
 
 msgid "Multiple service support"
 msgstr "Mitme programmi tugi"
-
-msgid "Multiplex"
-msgstr "Multipleks"
 
 msgid "Multisat"
 msgstr "Mitu satelliiti"
@@ -3772,14 +4005,11 @@ msgstr "Ei ole kasutusel"
 msgid "NEXT"
 msgstr "JÄRGMINE"
 
-msgid "NFI image flashing"
-msgstr "NFI tarkvara paigaldamine"
+msgid "NIM & Type"
+msgstr "NIM ja tüüp"
 
-msgid "NFI image flashing completed. Press Yellow to Reboot!"
-msgstr "NFI tarkvara on paigaldatud. Taaskäivitamiseks vajuta kollast nuppu !"
-
-msgid "NIM"
-msgstr "NIM"
+msgid "NO"
+msgstr "EI"
 
 msgid "NOW"
 msgstr "PRAEGU"
@@ -3815,6 +4045,12 @@ msgstr "Võrk"
 msgid "Network ID"
 msgstr "Võrgu ID"
 
+msgid "Network Info:"
+msgstr "Võrgu ID"
+
+msgid "Network configuration"
+msgstr "Võrgu seadistamine"
+
 msgid "Network configuration..."
 msgstr "Võrgu seadistamine..."
 
@@ -3849,11 +4085,22 @@ msgstr "Võrgu abimees"
 msgid "Network:"
 msgstr "Võrk:"
 
+msgid ""
+"Never decrypt the content while recording. This overrides the individual "
+"timer settings globally. If enabled, recordings are stored in crypted "
+"presentation and must be decrypted afterwards (sometimes called offline "
+"decoding). Default: off."
+msgstr ""
+"Ära dekrüpti sisu salvestamise ajal. See valik alistab üksiku taimeri "
+"seadistused globaalselt ja selle lubamisel salvestised talletatakse "
+"krüpteeritult. Lahtikrüptida saad hiljem (offlain dekodeerimine). Vaikimisi: "
+"välja lülitatud."
+
+msgid "Never decrypt while recording"
+msgstr "Ära kunagi dekrüpti salvestamise ajal"
+
 msgid "New"
 msgstr "Uus"
-
-msgid "New version:"
-msgstr "Uus versioon:"
 
 msgid "News Current Affairs"
 msgstr "Praeguste sündmuste uudised"
@@ -3900,9 +4147,6 @@ msgstr "Viiteaeg puudub"
 msgid "No description available."
 msgstr "Saatetutvustust ei ole."
 
-msgid "No details for this image file"
-msgstr "Pole täpsemat informatsiooni sellele tarkvarale"
-
 msgid "No displayable files on this medium found!"
 msgstr "Sellel andmekandjal pole kuvatavaid faile!"
 
@@ -3937,6 +4181,9 @@ msgstr "Ei leitud positsioneeri toetavat tuunerit."
 msgid "No priority"
 msgstr "Pole eelistust"
 
+msgid "No satellite frontend found!"
+msgstr "Ei leitud satelliidi tuunerit!"
+
 msgid ""
 "No satellite, terrestrial or cable tuner is configured. Please check your "
 "tuner setup."
@@ -3952,6 +4199,9 @@ msgstr "Kanalit/levitajat pole valitud"
 
 msgid "No standby"
 msgstr "Ooteseisundita"
+
+msgid "No stream clients"
+msgstr "Pole voogedastuse kliente"
 
 msgid "No suitable sat tuner found!"
 msgstr "Pole leitud sobivat SAT tuunerit!"
@@ -4020,6 +4270,9 @@ msgstr "Ei, alusta uuesti algusest"
 msgid "No, do nothing."
 msgstr "Ei, ära tee midagi."
 
+msgid "No, except Wakeup timer"
+msgstr "Ei, välja arvatud äratustaimer"
+
 msgid "No, just start my receiver"
 msgstr "Ei, käivita vastuvõtja"
 
@@ -4059,6 +4312,16 @@ msgstr ""
 "Kõvakettal pole piisavalt ruumi. Kustuta ebavajalik ja proovi uuesti. (%d MB "
 "vaja, %d MB saadaval)"
 
+msgid "Not tested:"
+msgstr "Pole testitud:"
+
+msgid ""
+"Note: when enabled, and you do want standby mode after wake up, set option "
+"'Startup to Standby' as 'No, except Wakeup timer'."
+msgstr ""
+"Märkus: kui lubatud, ja sa tahad ooterežiimi pärast äratust, sea valik "
+"'Ooterežiimis alustamine' kui 'Ei, välja arvatud äratustaimer'."
+
 msgid "Nothing connected"
 msgstr "Midagi pole ühendatud"
 
@@ -4088,6 +4351,9 @@ msgstr ""
 "võimalik, aga veendu, et sa näed siiski erinevust kahe kõige heledama "
 "varjundi vahel. Kui see on tehtud, vajuta OK."
 
+msgid "Number of channels shown in channel selection list"
+msgstr "Kanalivaliku nimekirjas näidatav kanalite arv"
+
 msgid "Number of repeating text on display."
 msgstr "Näidikul korduva teksti arv."
 
@@ -4105,9 +4371,6 @@ msgstr "Ekraanigraafika 3D seadistus"
 
 msgid "OSD name request"
 msgstr "Ekraanigraafika nime päring"
-
-msgid "OSD position setup"
-msgstr "Ekraanigraafika asetuse seadistus"
 
 msgid "OSD settings"
 msgstr "Ekraanigraafika seaded"
@@ -4154,6 +4417,9 @@ msgstr "Ava valitud asukoht nagu taimeri nimetus"
 msgid "Open service list"
 msgstr "Ava kanalinimekiri"
 
+msgid "Open setup tuner "
+msgstr "Ava tuuneri seadistamine "
+
 msgid "Open the movie list"
 msgstr "Ava filmilist"
 
@@ -4172,6 +4438,12 @@ msgstr "Miski muu"
 msgid "Output"
 msgstr "Väljund"
 
+msgid "Overall progress:"
+msgstr "Üldine edenemine:"
+
+msgid "Overscan wizard"
+msgstr "Üleskaneerimise abiline"
+
 msgid "Overwrite configuration files during software upgrade?"
 msgstr "Kas tarkvara uuendamisel kirjutada üle konfiguratsioonifailid?"
 
@@ -4187,8 +4459,8 @@ msgstr "PCR PID"
 msgid "PDC"
 msgstr "PDC"
 
-msgid "PIDs"
-msgstr "PIDid"
+msgid "PGS file"
+msgstr "PGS fail"
 
 msgid "PIN code needed"
 msgstr "Vajalik on pin-kood"
@@ -4327,9 +4599,6 @@ msgstr "Palun lisa pealkirjad kogumikku."
 msgid "Please change recording endtime"
 msgstr "Muuda salvestamise lõpuaega"
 
-msgid "Please check your network settings!"
-msgstr "Palun kontrolli oma võrguseadeid!"
-
 msgid "Please choose an extension..."
 msgstr "Vali laiendus"
 
@@ -4416,9 +4685,6 @@ msgstr "Vali alamteenus salvestamiseks"
 msgid "Please select a subservice..."
 msgstr "Vali alamteenus"
 
-msgid "Please select an NFI file and press green key to flash!"
-msgstr "Palun vali NFI fail ja vajuta flashimiseks rohelist nuppu!"
-
 msgid "Please select medium to be scanned"
 msgstr "Vali andmekandja"
 
@@ -4479,6 +4745,9 @@ msgstr "Seadista tuuner I"
 
 msgid "Please set up tuner J"
 msgstr "Seadista tuuner J"
+
+msgid "Please set up tuner K"
+msgstr "Seadista tuuner K"
 
 msgid ""
 "Please use direction keys to move the PiP window.\n"
@@ -4548,9 +4817,6 @@ msgstr "Pluginad"
 msgid "Polarisation"
 msgstr "Polarisatsioon"
 
-msgid "Polarisation:"
-msgstr "Polarisatsioon:"
-
 msgid "Polarization"
 msgstr "Polarisatsioon"
 
@@ -4572,6 +4838,9 @@ msgstr "Port D"
 msgid "Portuguese"
 msgstr "Portugali"
 
+msgid "Position"
+msgstr ""
+
 msgid "Position of completed timers in timerlist"
 msgstr "Lõpetatud taimerite asukoht nimekirjas"
 
@@ -4584,14 +4853,20 @@ msgstr "Positsioneer"
 msgid "Positioner (selecting satellites)"
 msgstr "Positsioneer (valimaks satelliite)"
 
-msgid "Positioner Setup"
-msgstr "Positsioneeri seadistamine"
-
 msgid "Positioner setup"
 msgstr "Positsioneeri seadistus"
 
+msgid "Positioner setup log"
+msgstr "Positsioneeri seadistuse logi"
+
+msgid "Power on display"
+msgstr ""
+
 msgid "Power threshold in mA"
 msgstr "Tuvastusvool mA"
+
+msgid "PowerMenu"
+msgstr "Powermenüü"
 
 msgid "Predefined transponder"
 msgstr "Eelmääratud transponder"
@@ -4617,11 +4892,32 @@ msgstr "Eelista teenuse salvestatud subtiitreid"
 msgid "Preferred tuner"
 msgstr "Eelistatud tuuner"
 
+msgid "Preferred tuner ATSC"
+msgstr "Eelistatud ATSC tuuner"
+
+msgid "Preferred tuner ATSC for recordings"
+msgstr "Eelistatud ATSC tuuner salvestustele"
+
+msgid "Preferred tuner DVB-C"
+msgstr "Eelistatud DVB-C tuuner"
+
+msgid "Preferred tuner DVB-C for recordings"
+msgstr "Eelistatud DVB-C tuuner salvestusteks"
+
+msgid "Preferred tuner DVB-S"
+msgstr "Eelistatud DVB-S tuuner"
+
+msgid "Preferred tuner DVB-S for recordings"
+msgstr "Eelistatud DVB-S tuuner salvestusteks"
+
+msgid "Preferred tuner DVB-T"
+msgstr "Eelistatud DVB-T tuuner"
+
+msgid "Preferred tuner DVB-T for recordings"
+msgstr "Eelistatud DVB-T tuuner salvestusteks"
+
 msgid "Preferred tuner for recordings"
 msgstr "Eelistatud tuuner salvestusteks"
-
-msgid "Prepare another USB stick for image flashing"
-msgstr "Valmista ette teine USB pulk image flashimiseks"
 
 msgid "Preparing... Please wait"
 msgstr "Ettevalmistus...Oota"
@@ -4647,6 +4943,10 @@ msgstr "Seadete aktiveerimiseks vajuta OK."
 msgid "Press OK to edit the settings."
 msgstr "Sätete muutmiseks vajuta OK."
 
+#, python-format
+msgid "Press OK to get further details for %s"
+msgstr "Vajuta OK %s üksikasjade nägemiseks"
+
 msgid "Press OK to scan"
 msgstr "Otsingu alustamiseks vajuta OK"
 
@@ -4667,6 +4967,9 @@ msgstr "Vajuta OK valiku muutmiseks"
 
 msgid "Press OK to toggle the selection."
 msgstr "Valiku muutmiseks vajuta OK."
+
+msgid "Press OK, save and exit..."
+msgstr "Vajuta OK, salvesta ning välju..."
 
 msgid "Press yellow to set this interface as default interface."
 msgstr "Vajutage kollast nuppu, valimaks see liides vaikimisi liideseks."
@@ -4708,6 +5011,9 @@ msgstr "Edenemisriba vasakul"
 msgid "Progress bar right"
 msgstr "Edenemisriba paremal"
 
+msgid "Progress:"
+msgstr "Edenemine:"
+
 msgid "Properties of current title"
 msgstr "Muuda seda pealkirja"
 
@@ -4725,6 +5031,9 @@ msgstr "Kaitse peamenüüd"
 
 msgid "Protect manufacturer reset screen"
 msgstr "Kaitse algseadistuse taastamise eest"
+
+msgid "Protect menu sort"
+msgstr "Kaitse filmide nimekirja"
 
 msgid "Protect movie list"
 msgstr "Kaitse filmide nimekirja"
@@ -4777,6 +5086,9 @@ msgstr "Kiire"
 msgid "Quick zap"
 msgstr "Kiire kanalivalik"
 
+msgid "REC"
+msgstr "REC"
+
 msgid "RF output"
 msgstr "RF-väljund"
 
@@ -4817,23 +5129,21 @@ msgstr "Teeme taaskäivituse kohe?"
 msgid "Really shutdown now?"
 msgstr "Lülitame välja?"
 
+#, python-format
+msgid "Really store at index %2d for current position?"
+msgstr "Kas salvestada indeks %2d  selle asukoha jaoks?"
+
 msgid "Really upgrade the frontprocessor and reboot now?"
 msgstr "Uuendad esiprotsessori ja taaskäivitad vastuvõtja?"
 
 msgid "Really upgrade your settop box and reboot now?"
 msgstr "Kas uuendad ja taaskäivitad vastuvõtja?"
 
-msgid "Reboot"
-msgstr "Taaskäivitus"
-
 msgid "Rec"
 msgstr "Salvesta"
 
 msgid "Recall to previous service"
 msgstr "Tagasi eelmise teenuse juurde"
-
-msgid "Reception Settings"
-msgstr "Vastuvõtu seaded"
 
 msgid "Reception settings"
 msgstr "Vastuvõtu seaded"
@@ -4880,6 +5190,9 @@ msgstr "Punane nupp..."
 
 msgid "Red colored"
 msgstr "Punast värvi"
+
+msgid "Reenter PIN"
+msgstr "Sisesta PIN uuesti"
 
 msgid "Reflash recommended!"
 msgstr "On soovitav uuesti flashida!"
@@ -4935,6 +5248,9 @@ msgstr "Kustuta märk"
 msgid "Remove a nameserver entry"
 msgstr "Kustuta kirje nimeserverist"
 
+msgid "Remove all logfiles"
+msgstr "Eemalda kõik logifailid"
+
 msgid "Remove bookmark"
 msgstr "Kustuta järjehoidja"
 
@@ -4949,6 +5265,9 @@ msgstr "Salvestiste kõrvaldamine prügikastist pärast (päeva)"
 
 msgid "Remove plugins"
 msgstr "Eemalda laiendusi"
+
+msgid "Remove this logfile"
+msgstr "Eemalda see logifail"
 
 msgid "Remove title"
 msgstr "Eemalda pealkiri"
@@ -4971,6 +5290,9 @@ msgstr "Nimeta ümber uute sündmuste nimed ja kirjeldused"
 
 msgid "Repeat"
 msgstr "Korda"
+
+msgid "Repeat leave standby messages"
+msgstr "Korda ootele jäämise sõnumeid"
 
 msgid "Repeat type"
 msgstr "Kordamise liik"
@@ -5013,6 +5335,12 @@ msgstr "Lähtesta"
 msgid "Reset and renumerate title names"
 msgstr "Sisesta uus faili nimi"
 
+msgid "Reset order (All)"
+msgstr "Nulli järjekord (Kõik)"
+
+msgid "Reset persistent PIN code"
+msgstr "Nulli püsiv PIN kood"
+
 msgid "Reset playback position"
 msgstr "Nulli taasesituse algpunkt"
 
@@ -5048,9 +5376,6 @@ msgstr "Taasta"
 
 msgid "Restore backups"
 msgstr "Taasta varukoopia"
-
-msgid "Restore is running..."
-msgstr "Taastamine..."
 
 msgid "Restore system settings"
 msgstr "Taasta seaded"
@@ -5126,8 +5451,17 @@ msgstr "Vene"
 msgid "S-Video"
 msgstr "S-video (Y/C)"
 
-msgid "SID"
-msgstr "SID"
+msgid "SCPC optimized search range"
+msgstr "SCPC optimeeritud otsivahemik"
+
+msgid "SCR (Unicable/JESS)"
+msgstr "SCR (Unicable/JESS)"
+
+msgid "SCR JESS"
+msgstr "SCR JESS"
+
+msgid "SCR Unicable"
+msgstr "SCR Unicable"
 
 msgid "SINGLE LAYER DVD"
 msgstr "ÜHEKIHILINE DVD"
@@ -5137,6 +5471,12 @@ msgstr "SNR"
 
 msgid "SNR:"
 msgstr "SNR:"
+
+msgid "SRT file"
+msgstr "SRT fail"
+
+msgid "SSA file"
+msgstr "SSA fail"
 
 msgid "SSID:"
 msgstr "SSID:"
@@ -5188,6 +5528,9 @@ msgstr "Salvesta ajanihe ja alusta uuesti"
 
 msgid "Save and stop timeshift"
 msgstr "Salvesta ajanihe ja peata see"
+
+msgid "Save changes"
+msgstr "Salvesta muutused"
 
 msgid "Save playlist"
 msgstr "Salvesta esitusloend"
@@ -5365,9 +5708,6 @@ msgstr "Vali taimeri tegevus '%s'."
 msgid "Select all"
 msgstr "Vali kõik"
 
-msgid "Select an image to be downloaded"
-msgstr "Vali tarkvara allalaadimiseks"
-
 msgid "Select audio track"
 msgstr "Vali helikanal"
 
@@ -5385,9 +5725,6 @@ msgstr "Vali salvestatav kanal"
 
 msgid "Select copy destination for:"
 msgstr "Vali kopeerimise asukoht:"
-
-msgid "Select desired image from feed list"
-msgstr "Vali soovitud tarkvara feedide nimekirjast"
 
 msgid "Select destination for:"
 msgstr "Vali asukoht:"
@@ -5425,6 +5762,9 @@ msgstr "Vali satelliidid"
 msgid "Select service to add..."
 msgstr "Vali kanal lisamiseks"
 
+msgid "Select slot"
+msgstr "Vali pesa"
+
 msgid "Select sort method:"
 msgstr "Vali järjestusviis:"
 
@@ -5448,6 +5788,9 @@ msgstr "Vali video töörežiim"
 
 msgid "Select wireless network"
 msgstr "Vali WiFi võrk"
+
+msgid "Select your Skin"
+msgstr "Vali Enigma2 kujundus"
 
 msgid "Select your provider, and press OK to start the scan"
 msgstr "Vali teenusepakkuja ja vajuta otsingu alustamiseks OK"
@@ -5476,6 +5819,12 @@ msgstr "Serbia"
 msgid "Service"
 msgstr "Kanaliinfo"
 
+msgid "Service & PIDs"
+msgstr "Teenus ja PIDid"
+
+msgid "Service ID"
+msgstr "Teenuse ID"
+
 msgid "Service has been added to the favourites."
 msgstr "Kanal on lisatud lemmiknimekirja."
 
@@ -5484,6 +5833,15 @@ msgstr "Kanal on lisatud valitud nimekirja."
 
 msgid "Service info"
 msgstr "Kanaliinfo"
+
+msgid "Service info - service & PIDs"
+msgstr "Teenuse info - teenus ja PIDid"
+
+msgid "Service info - tuner live values"
+msgstr "Teenuse info - tuuneri tegevasetused"
+
+msgid "Service info - tuner setting values"
+msgstr "Teenuse info - tuuneri seadeasetused"
 
 msgid ""
 "Service invalid!\n"
@@ -5521,14 +5879,26 @@ msgstr ""
 "Pole kanalit!\n"
 "Kontrolli tuuneri seadeid!"
 
+msgid "Servicename"
+msgstr "Teenuse nimi"
+
 msgid "Services"
 msgstr "Kanalid"
+
+msgid "Set PIN"
+msgstr "Määra PIN"
 
 msgid "Set all hotkey to default?"
 msgstr "Kas seada kõik kiirnupud vaikeseadesse?"
 
+msgid "Set blocktimes by weekday"
+msgstr "Sea keeluajad nädalapäeviti"
+
 msgid "Set default"
 msgstr "Sea vaikeseadesse"
+
+msgid "Set default settings?"
+msgstr "Määrata vaikimisi seaded?"
 
 msgid "Set end time"
 msgstr "Määra lõppaeg"
@@ -5544,6 +5914,9 @@ msgstr "Määra vaikimisi võrguliideseks"
 
 msgid "Set limits"
 msgstr "Määra piirid"
+
+msgid "Set pin code persistent"
+msgstr "Sea PIN kood püsivaks"
 
 msgid "Set startup service"
 msgstr "Määra algusteenus"
@@ -5591,14 +5964,6 @@ msgstr "Mootori häälestamine"
 msgid "Setup your satellite equipment"
 msgstr "Satelliidiseadmed"
 
-#, python-format
-msgid ""
-"Shall the USB stick wizard proceed and program the image file %s into flash "
-"memory?"
-msgstr ""
-"Kas USB pulga abiline alustab toimingut ja salvestab tarkvara %s flash "
-"mälusse?"
-
 msgid "Sharpness"
 msgstr "Teravus"
 
@@ -5610,6 +5975,9 @@ msgstr "Lühikesed failinimed"
 
 msgid "Show Audioselection"
 msgstr "Näita helivalikut"
+
+msgid "Show CI messages"
+msgstr "Näita CI teateid"
 
 msgid "Show EIT now/next in infobar"
 msgstr "Näita nüüd/järgmine inforibal"
@@ -5640,6 +6008,9 @@ msgstr "Näita WiFi Olekut"
 
 msgid "Show animation while busy"
 msgstr "Näita hõivatud oleku puhul animatsiooni"
+
+msgid "Show background behind subtitles"
+msgstr "Näita tausta subtiitrite taga"
 
 msgid "Show background in radio mode"
 msgstr "Näita raadioolekus taustapilti"
@@ -5719,6 +6090,12 @@ msgstr "Näita viimaseid kandeid"
 msgid "Show latest upgrade log"
 msgstr "Näita viimast uuenduslogi"
 
+msgid "Show menu numbers"
+msgstr ""
+
+msgid "Show menu paths"
+msgstr "Kuva asukoht menüüs"
+
 msgid "Show message when recording starts"
 msgstr "Teavita salvestuse algamisest"
 
@@ -5737,11 +6114,17 @@ msgstr "Näita pakette mida peaks uuendama"
 msgid "Show picons in channel selection list"
 msgstr "Näita piconeid kanalivaliku nimekirjas"
 
+msgid "Show picons in display"
+msgstr ""
+
 msgid "Show positioner movement"
 msgstr "Näita positsioneeri liikumist"
 
 msgid "Show positioner position"
 msgstr "Näita positsioneeri asendit"
+
+msgid "Show record clock icons"
+msgstr "Näita salvestuse kella ikoone"
 
 msgid "Show record indicator"
 msgstr "Näita salvestuse indikaatorit"
@@ -5763,9 +6146,6 @@ msgstr "Näita teenuse tüübi ikoone"
 
 msgid "Show servicelist or movies"
 msgstr "Näita teenusnimekirja või filme"
-
-msgid "Show shutdown menu"
-msgstr "Kuva seiskamismenüü"
 
 msgid "Show single service EPG"
 msgstr "Näita üksiku kanali EPG"
@@ -5791,8 +6171,14 @@ msgstr "Näita TV-d"
 msgid "Show vertical timelines"
 msgstr "Näita vertikaalseid ajajooni"
 
+msgid "Show warning before set 'Ignore conflict'"
+msgstr "Kuva hoiatust enne 'Ignoreeri konflikti' seadmist"
+
 msgid "Show warning when timeshift is stopped"
 msgstr "Näita hoiatust kui ajanihe on peatunud"
+
+msgid "Show/hide window"
+msgstr "Näita/peida aken"
 
 msgid "Shows live tv or informations on LCD."
 msgstr "Näitab TV pilti või informatsiooni LCD peal."
@@ -5824,11 +6210,11 @@ msgstr "Signaali tugevus:"
 msgid "Signal: "
 msgstr "Signaal: "
 
-msgid "Silently zap between bouquets"
-msgstr "Vaheta vaikselt lemmiknimekirjade vahel"
-
 msgid "Similar"
 msgstr "Sarnased"
+
+msgid "Similar EPG"
+msgstr "Sarnane EPG"
 
 msgid "Similar broadcasts:"
 msgstr "Sarnased saated:"
@@ -5838,6 +6224,9 @@ msgstr "Lihtne"
 
 msgid "Simple titleset (compatibility for legacy players)"
 msgstr "Lihtne pealkiri (vanemate pleieritega ühilduv)"
+
+msgid "Simplified Chinese"
+msgstr "Lihtsustatud Hiina"
 
 msgid "Single"
 msgstr "Üksik"
@@ -5909,8 +6298,14 @@ msgstr "Aeglane"
 msgid "Slow motion speeds"
 msgstr "Aeglustuskiirused"
 
+msgid "Small"
+msgstr "Lühidalt"
+
 msgid "Small progress"
 msgstr "Väike edenemisriba"
+
+msgid "Smartcard PIN"
+msgstr "Kiipkaardi PIN"
 
 msgid "Social/Political/Economics"
 msgstr "Ühiskond/Poliitika/Majandus"
@@ -5939,6 +6334,9 @@ msgstr "Tarkvara uuendamine"
 msgid "Softwaremanager information"
 msgstr "Tarkvarahalduri informatsioon"
 
+msgid "Some error occured - Please try later"
+msgstr ""
+
 msgid "Some plugins are not available:\n"
 msgstr "Mõned laiendused pole saadaval:\n"
 
@@ -5955,6 +6353,9 @@ msgstr "Varukoopiat ei leitud!"
 
 msgid "Sorry, no details available!"
 msgstr "Üksikasju pole saadaval!"
+
+msgid "Sorry, this tuner is in use."
+msgstr "See tuuner on kasutusel."
 
 msgid ""
 "Sorry, your backup destination is not writeable.\n"
@@ -5978,6 +6379,9 @@ msgstr "Järjestada nimekiri vaikimisi ja väljuda?"
 
 msgid "Sort list:"
 msgstr "Järjesta nimekiri:"
+
+msgid "Sort order for menu entries"
+msgstr "Sea menüü sisestuste järjekord"
 
 msgid "Sort plugins list to default?"
 msgstr "Järjestada laienduste nimekiri vaikimisi?"
@@ -6003,6 +6407,9 @@ msgstr "Hispaania"
 
 msgid "Specify extra timeframe to ignore inactivity sleeptimer"
 msgstr "Määra ekstra ajaaken tegevusetuse unetaimeri vältimiseks"
+
+msgid "Specify if you want to set the blocktimes separately by weekday"
+msgstr "Määra kui soovid seada keeluaegu eraldi nädalapäeviti"
 
 msgid ""
 "Specify the end time to ignore the shutdown timer when the receiver is in "
@@ -6066,6 +6473,7 @@ msgstr "Ooterežiimis pärast praegust sündmust"
 msgid "Standby fan %d PWM"
 msgstr "Vent. %d PWM ooterežiimil"
 
+#, python-format
 msgid "Standby fan %d voltage"
 msgstr "Vent. %d pinge ooterežiimil"
 
@@ -6180,6 +6588,12 @@ msgstr "Peata teenus filminimekirja tagasi pöördumisel"
 msgid "Stop test"
 msgstr "Peata test"
 
+msgid "Stop testing plane after # failed transponders"
+msgstr "Peata testimine pärast # ebaõnnestunud transponderit"
+
+msgid "Stop testing plane after # successful transponders"
+msgstr "Peata testimine pärast # leitud transponderit"
+
 msgid "Stop timer recording"
 msgstr "Peata taimerisalvestus"
 
@@ -6206,6 +6620,9 @@ msgstr "Voog"
 
 msgid "Stream request"
 msgstr "Striimi päring"
+
+msgid "Streaming clients info"
+msgstr "Voogedastuse klientide info"
 
 msgid "Strongest position"
 msgstr "Tugevaim asukoht"
@@ -6264,6 +6681,9 @@ msgstr "Subtiitrid"
 msgid "Subtitles Settings"
 msgstr "Subtiitrite seaded"
 
+msgid "Succeeded:"
+msgstr "Õnnestus:"
+
 msgid "Sun"
 msgstr "P"
 
@@ -6281,6 +6701,9 @@ msgstr "Vaheta kanalid omavahel"
 
 msgid "Swedish"
 msgstr "Rootsi"
+
+msgid "Switch"
+msgstr ""
 
 msgid "Switch TV to correct input"
 msgstr "Lülita TV õigele sisendile"
@@ -6339,6 +6762,9 @@ msgstr "Vahetatavate tuunerite tüübid:"
 msgid "Symbol rate"
 msgstr "Sümbolikiirus"
 
+msgid "Symbol rate & FEC"
+msgstr "Sümbolikiirus ja FEC"
+
 msgid "Symbol rate:"
 msgstr "Sümbolikiirus:"
 
@@ -6348,6 +6774,10 @@ msgstr "Sünkro viga, tagasi originaali juurde!"
 msgid "System"
 msgstr "Süsteem"
 
+msgid "System & Modulation"
+msgstr "Süsteem ja modulatsioon"
+
+#. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
 msgid "TRANSLATOR_INFO"
 msgstr ""
 " \n"
@@ -6362,6 +6792,9 @@ msgstr "TS fail on liiga suur ISO9660/1-le!"
 
 msgid "TSID"
 msgstr "TSID"
+
+msgid "TUNER:"
+msgstr "Tuuner:"
 
 msgid "TV physical address report"
 msgstr "TV füüsilise aadressi raport"
@@ -6378,11 +6811,17 @@ msgstr "Võtmesõnad"
 msgid "Teletext subtitle color"
 msgstr "Teleteksti subtiitrite värv"
 
+msgid "Temperature and fan control"
+msgstr "Jahutus"
+
 msgid "Terrestrial"
 msgstr "Maapealne TV (DVB-T)"
 
 msgid "Terrestrial provider"
 msgstr "DVB-T levitaja"
+
+msgid "Test DiSEqC settings"
+msgstr "Testi DiSEqC seadeid"
 
 msgid "Test mode"
 msgstr "Testpilt"
@@ -6455,15 +6894,11 @@ msgstr ""
 msgid "The PIN code has been changed successfully."
 msgstr "PIN kood on muudetud."
 
+msgid "The PIN code has been saved successfully."
+msgstr "PIN kood on edukalt salvestatud"
+
 msgid "The PIN codes you entered are different."
 msgstr "Sisestatud PIN koodid on erinevad."
-
-msgid ""
-"The USB stick was prepared to be bootable.\n"
-"Now you can download an NFI image file!"
-msgstr ""
-"USB pulk oli ette valmistatud käivitatavana.\n"
-"Nüüd saad NFI tarkvara faili alla laadida!"
 
 msgid "The backup failed. Please choose a different backup location."
 msgstr "Varukoopia loomine nurjus. Vali uus varukoopia asukoht."
@@ -6484,25 +6919,8 @@ msgstr ""
 "Kataloog %s ei ole salvestatav.\n"
 "Vali kindlasti selle asemel salvestatav kataloog."
 
-#, python-format
-msgid ""
-"The following device was found:\n"
-"\n"
-"%s\n"
-"\n"
-"Do you want to write the USB flasher to this stick?"
-msgstr ""
-"Leitud järgnev seade:\n"
-"\n"
-"%s\n"
-"\n"
-"Kas soovid USB flasherit kirjutada sellele mälupulgale?"
-
 msgid "The following files were found..."
 msgstr "Leitud järgmised failid"
-
-msgid "The md5sum validation failed, the file may be corrupted!"
-msgstr "md5sum kontroll ebaõnnestus, fail võib olla rikutud!"
 
 msgid ""
 "The network wizard extension is not installed!\n"
@@ -6510,6 +6928,40 @@ msgid ""
 msgstr ""
 "NetworkWizard laiendus ei ole paigaldatud! \n"
 "Paigalda see."
+
+msgid ""
+"The overscan wizard has been completed.\n"
+"\n"
+"Note: you can always start the Overscan wizard later,  via\n"
+"\n"
+"menu->installation->system->Overscan wizard"
+msgstr ""
+"Üleskaneerimise abiline on seadistatud \n"
+"\n"
+"saad alati alustada üleskaneerimisabilisega hiljem läbi \n"
+"\n"
+"menüü-> seadistamine-> süsteem -> üleskaneerimise abiline"
+
+msgid ""
+"The overscan wizard helps you to setup your TV in the correct way.\n"
+"\n"
+"For the majority of TV's, the factory default is to have overscan enabled. "
+"This means you are always watching a \"zoomed in\" picture instead of real "
+"HD, and parts of the user inferface (skin) may be invisible.\n"
+"\n"
+"The yellow area means a 5% border area of a full HD picture will be "
+"invisible.\n"
+"The green area means a 10% border area of a full HD picture will be "
+"invisible.\n"
+"\n"
+"In other words, if the yellow box meets all for sides of your screen, then "
+"you have at least 5% overscan on all sides.\n"
+"\n"
+"If you see the tips of all eight arrowheads, then your TV has overscan "
+"disabled.\n"
+"\n"
+"Test Pattern by TigerDave - www.tigerdave.com/ht_menu.htm"
+msgstr ""
 
 #, python-format
 msgid "The path %s already exists."
@@ -6519,8 +6971,11 @@ msgid "The pin code you entered is wrong."
 msgstr "Vale kood."
 
 #, python-format
-msgid "The results have been written to %s."
-msgstr "Tulemused on salvestatud %s."
+msgid "The results have been written to %s"
+msgstr "Tulemused on salvestatud %s"
+
+msgid "The saved PIN was cleared."
+msgstr "Salvestatud PIN kood kustutati"
 
 msgid "The sleep timer has been activated."
 msgstr "Unetaimer on aktiveeritud."
@@ -6543,6 +6998,11 @@ msgstr "Praeguse beta image olekut ei õnnestunud kontrollida,  %s ei vasta"
 
 msgid "The timer file (timers.xml) is corrupt and could not be loaded."
 msgstr "Taimerite fail (timers.xml) on katki ja seda ei saa laadida."
+
+msgid ""
+"The user interface of the receiver will now restart to select the selected "
+"skin"
+msgstr "Vastuvõtja kasutajaliides taaskäivitub."
 
 msgid "The user interface of your receiver is restarting"
 msgstr "Vastuvõtja kasutajaliides taaskäivitub."
@@ -6571,13 +7031,6 @@ msgstr ""
 msgid ""
 "The wizard can backup your current settings. Do you want to do a backup now?"
 msgstr "Praegustest seadetest saab teha varukoopia. Kas teha seda nüüd?"
-
-msgid ""
-"The wizard found a configuration backup. Do you want to restore your old "
-"settings from %s?"
-msgstr ""
-"Abiline leidis konfiguratsiooni varukoopia. Kas soovid taastada vanad seaded "
-"%s?"
 
 msgid "The wizard is finished now."
 msgstr "Toiming on nüüd lõpetatud. Vajuta OK."
@@ -6622,22 +7075,27 @@ msgstr ""
 "Tavakasutajatele pole see oluline.\n"
 "Ära muretse kui näed väärtusi, mis tunduvad imelikena!"
 
-msgid ""
-"This plugin creates a USB stick which can be used to update the firmware of "
-"your receiver without the need for a network or WLAN connection.\n"
-"First, a USB stick needs to be prepared so that it becomes bootable.\n"
-"In the next step, an NFI image file can be downloaded from the update server "
-"and saved on the USB stick.\n"
-"If you already have a prepared bootable USB stick, please insert it now. "
-"Otherwise plug in a USB stick with a minimum size of 64 MB!"
+msgid "This option allows you can config the Colordepth for UHD"
 msgstr ""
-"See laiendus valmistab ette USB pulga, mida saab kasutada vastuvõtja "
-"tarkvara uuendamiseks ilma võrgu- või WLAN ühenduseta. \n"
-"Algul tuleb USB pulk teha alglaetavaks. \n"
-"Siis saab uuenduste serverist alla laadida NFI tarkvara faili ja salvestada "
-"selle USB pulgale. \n"
-"Kui oled juba ette valmistanud alglaetava USB pulga, siis ühenda see nüüd. "
-"Vastasel korral ühenda min. 64 MB USB pulk!"
+
+msgid "This option allows you can config the Colorspace from Auto to RGB"
+msgstr "Saad muuta HDMI värviruumi suurust."
+
+msgid ""
+"This option allows you to hide and sort menu entries. When selecting user "
+"you can change order and hide menu items via the blue button"
+msgstr ""
+"See valik lubab peita ja järjestada menüü sisestusi. Valides kasutaja saad "
+"muuta järjekorda ja peita menüü sisestusi sinise nupu abil."
+
+msgid "This option allows you to power off the display."
+msgstr ""
+
+msgid "This option allows you to show menu number quick links."
+msgstr ""
+
+msgid "This option allows you to show menu paths."
+msgstr "Saad kuvada menüüde täieliku asukoha."
 
 msgid "This plugin is installed."
 msgstr "Laiendus on paigaldatud."
@@ -6750,9 +7208,6 @@ msgstr "Taimeri ülevaade"
 msgid "Timer edit"
 msgstr "Taimeri muutmine"
 
-msgid "Timer editor"
-msgstr "Taimeri muutja"
-
 msgid "Timer entry"
 msgstr "Taimeri sisestus"
 
@@ -6817,21 +7272,6 @@ msgstr "Heli valik"
 msgid "To subtitle selection"
 msgstr "Subtiitrite valik"
 
-msgid ""
-"To update your receiver firmware, please follow these steps:\n"
-"1) Turn off your box with the rear power switch and make sure the bootable "
-"USB stick is plugged in.\n"
-"2) Turn mains back on and hold the DOWN button on the front panel pressed "
-"for 10 seconds.\n"
-"3) Wait for bootup and follow instructions of the wizard."
-msgstr ""
-"Vastuvõtja püsivara uuendamiseks toimi järgnevalt: \n"
-"1) Lülita vastuvõtja tagumisest lülitist välja ja veendu, et alglaaditav USB "
-"pulk on ühendatud. \n"
-"2) Lülita vastuvõtja sisse, hoides CH- nuppu esipaneelil vajutatuna 10 "
-"sekundi jooksul. \n"
-"3) Oota alglaadimiseni ja jälgi abilise juhendeid ekraanil."
-
 msgid "Today"
 msgstr "Täna"
 
@@ -6847,11 +7287,23 @@ msgstr "Lülita LCD LiveTV"
 msgid "Toggle PIPzap"
 msgstr "Lülita PiP valikut"
 
+msgid "Toggle TV/RADIO mode"
+msgstr "Vaheta TV/RADIO vahel"
+
 msgid "Toggle a cut mark at the current position"
 msgstr "Pane lõikemärk praegusele kohale"
 
+msgid "Toggle dashed flickering line for this service"
+msgstr "Vaheta võbeleva katkendjoonega joon selle teenuse puhul"
+
 msgid "Toggle infoBar"
 msgstr "Lülita inforiba"
+
+msgid "Toggle show/hide"
+msgstr "Vaheta näita/peida"
+
+msgid "Toggle the tv and the radio player..."
+msgstr "Kuula raadiot"
 
 msgid "Tone amplitude"
 msgstr "Tooni amplituud"
@@ -6868,8 +7320,18 @@ msgstr "Toonipursked A/B"
 msgid "Top and bottom"
 msgstr "Üleval ja all"
 
+#, python-format
+msgid "Total clients streaming: %d (%s)"
+msgstr "Kliente kokku striimimas: %d (%s)"
+
 msgid "Track"
 msgstr "Rada"
+
+msgid "Traditional Chinese"
+msgstr "Traditsiooniline Hiina"
+
+msgid "Transcoding: "
+msgstr "Transkodeerimine: "
 
 msgid "Translation"
 msgstr "Tõlge"
@@ -6886,14 +7348,14 @@ msgstr "Edastamise moodus"
 msgid "Transponder"
 msgstr "Transponder"
 
-msgid "Transponder type"
-msgstr "Transponderi tüüp"
-
 msgid "Trash can"
 msgstr "Prügikast"
 
 msgid "Tries left:"
 msgstr "Katseid järel:"
+
+msgid "Troubleshoot"
+msgstr "Tõrkeotsing"
 
 msgid "Try to find used transponders in cable network.. please wait..."
 msgstr "Otsin kaabelvõrgu sagedusi. Oota."
@@ -6931,14 +7393,17 @@ msgstr "Tuuneri seaded"
 msgid "Tuner is not supported"
 msgstr "Tuuner pole toetatud"
 
+msgid "Tuner live values"
+msgstr "tegevasetused"
+
 msgid "Tuner not available."
 msgstr "Pole tuunerit."
 
+msgid "Tuner setting values"
+msgstr "Tuuneri seaded"
+
 msgid "Tuner slot"
 msgstr "Tuuneri pesa"
-
-msgid "Tuner status"
-msgstr "Tuuneri olek"
 
 #, python-format
 msgid "Tuner status %s"
@@ -6965,6 +7430,9 @@ msgstr "Tüüp"
 msgid "Type of scan"
 msgstr "Otsingu tüüp"
 
+msgid "URL"
+msgstr "URL"
+
 msgid "URL of fallback remote receiver"
 msgstr "Kaugvastuvõtja URL"
 
@@ -6977,9 +7445,6 @@ msgstr "USALS kalibreerimine"
 msgid "USB stick"
 msgstr "USB mälupulk"
 
-msgid "USB stick wizard"
-msgstr "USB-mälupulga juhis"
-
 msgid "Ukrainian"
 msgstr "Ukraina"
 
@@ -6991,6 +7456,9 @@ msgstr ""
 "Toimub automatiseeritud uuendamine\n"
 "Oota vastuvõtja taaskäivitamist\n"
 "Selleks võib kuluda mõni minut"
+
+msgid "Uncover dashed flickering line for this service"
+msgstr "Näita võbeleva katkendjoonega joon selle teenuse puhul"
 
 msgid "Undo install"
 msgstr "Tühista paigaldamine"
@@ -7194,6 +7662,9 @@ msgstr "VCR scart"
 msgid "VMGM (intro trailer)"
 msgstr "VMGM (intro trailer)"
 
+msgid "VOB file"
+msgstr "VOB fail"
+
 msgid "VU+"
 msgstr "VU+"
 
@@ -7205,6 +7676,9 @@ msgstr "Vertikaalse pööramise kiirus"
 
 msgid "Video PID"
 msgstr "Video PID"
+
+msgid "Video clipping setup"
+msgstr "Video lõikamise seadistamine"
 
 msgid "Video enhancement preview"
 msgstr "Pildi paranduste eelvaade"
@@ -7248,14 +7722,8 @@ msgstr "Video: %s fps"
 msgid "VideoMode"
 msgstr "Videorežiim"
 
-msgid "Videocodec"
-msgstr "Videokoodek"
-
-msgid "Videoformat"
-msgstr "Videoformaat"
-
-msgid "Videosize"
-msgstr "Videosuurus"
+msgid "Videocodec, size & format"
+msgstr "Videokoodek, reso.& formaat"
 
 msgid "View Rass interactive..."
 msgstr "Vaata Rass interactive"
@@ -7313,9 +7781,6 @@ msgstr "Vaata video CD..."
 
 msgid "Virtual keyboard"
 msgstr "Virtuaalklahvistik"
-
-msgid "Virtual Keyboard"
-msgstr ""
 
 msgid "Voltage mode"
 msgstr "Pinge tüüp"
@@ -7377,11 +7842,23 @@ msgstr "Käivita vastuvõtja"
 msgid "Wakeup signal from TV"
 msgstr "Äratussignaal telerist"
 
+msgid "Wakeup time"
+msgstr "Äratuse aeg"
+
 msgid "Wakeup type"
 msgstr "Äratuse tüüp"
 
 msgid "Warning"
 msgstr "Hoiatus"
+
+msgid ""
+"Warning!\n"
+"This is an option for advanced users.\n"
+"Really disable timer conflict detection?"
+msgstr ""
+"Hoiatus!\n"
+"See on valik edasijõudnud kasutajatele.\n"
+"Kas keelata taimerikonflikti tuvastus?"
 
 msgid "Warning: no LNB; using factory defaults."
 msgstr "Hoiatus: LNB puudub; kasutatakse algseadeid."
@@ -7601,6 +8078,17 @@ msgstr ""
 "Määrates 'jah' näidatakse hoiatust ja kasutaja saab võimaluse kas peatada "
 "või jätkata ajanihet."
 
+msgid ""
+"When enabled, always descramble receiving http streams. This takes up more "
+"resources (descrambling demuxers), only enable if necessary. Individual "
+"streams are always descrambled if 0x100 is added to the service type, "
+"regardless of this setting. Default off."
+msgstr ""
+"Määrates 'jah', dekodeeritakse sisenevad http vood alati. See võtab rohkem "
+"ressursse, luba ainult vajadusel. Iga voog dekodeeritakse hoolimata "
+"seadistustes määratust alati, kui teenuseliigile lisatakse 0x100. "
+"Vaikeväärtus on 'ei'."
+
 msgid "When enabled, authentication is required to watch http streams."
 msgstr "Määrates 'jah' on http striimide vaatamiseks autentimine nõutav."
 
@@ -7640,11 +8128,6 @@ msgid ""
 msgstr ""
 "Määrates 'jah', näidatakse salastatust inforibal (kui kujundus seda toetab)."
 
-msgid ""
-"When enabled, error messages related to the Common Interface module will not "
-"be shown."
-msgstr "Määrates 'jah', ei näidata CI mooduliga seotud veateateid."
-
 msgid "When enabled, error messages related to zapping will not be shown."
 msgstr "Määrates 'jah', ei näidata kanalivahetusega seotud veateateid."
 
@@ -7678,10 +8161,10 @@ msgstr ""
 
 msgid ""
 "When enabled, http streams are descrambled on the server side. The (remote) "
-"client receiver does not have to do descrambling."
+"client receiver does not have to do descrambling. Default on."
 msgstr ""
 "Määrates 'jah', dekodeeritakse http vood serveri poolt. Klientvastuvõtja ei "
-"pea neid enam dekodeerima."
+"pea neid enam dekodeerima. Vaikimisi sees."
 
 msgid "When enabled, it is possible to leave the movieplayer with exit."
 msgstr "Määrates 'jah' saab väljuda filmimängijast EXIT nupuga."
@@ -7778,6 +8261,16 @@ msgid "When enabled, the receiver will select an AC3+ track (when available)."
 msgstr "Määrates 'jah', valib vastuvõtja AC3­­+ helirea (võimaluse korral)"
 
 msgid ""
+"When enabled, this setting has more weight than 'Preferred tuner for "
+"recordings'."
+msgstr ""
+"Määrates 'jah' on see seadistus eelistatum kui 'Eelistatud tuuner "
+"salvestamiseks'."
+
+msgid "When enabled, this setting has more weight than 'Preferred tuner'."
+msgstr "Määrates 'jah' on see seadistus eelistatum kui 'Eelistatud tuuner'."
+
+msgid ""
 "When enabled, timeshift starts automatically in background after specified "
 "time."
 msgstr ""
@@ -7848,20 +8341,45 @@ msgstr "Wifi võrgu seadistus."
 msgid "Wireless network state"
 msgstr "Wifi võrgu olek"
 
+msgid "With errors:"
+msgstr "Vigadega:"
+
 msgid "With popup"
 msgstr "Hüpikaknaga"
 
 msgid "Without popup"
 msgstr "Ilma hüpikaknata"
 
+msgid "Wizard to arrange the overscan"
+msgstr "Üleskaneerimise korraldamise abiline"
+
 msgid "Would you like to install a softcam?"
 msgstr "Kas paigaldad EMU?"
+
+#, python-format
+msgid "Would you save the entered PIN %s persistent?"
+msgstr "Kas soovid salvestada sisestatud PIN %s püsivana?"
 
 msgid "Write error while recording. Disk full?\n"
 msgstr "Kirjutamise viga. Kõvaketas täis?\n"
 
 msgid "Write failed!"
 msgstr "Kirjutamine nurjus!"
+
+msgid "Write to /tmp/positionersetup.log"
+msgstr "Kirjuta /tmp/positionersetup.log  faili"
+
+msgid "YCbCr420"
+msgstr "YCbCr420"
+
+msgid "YCbCr422"
+msgstr "YCbCr422"
+
+msgid "YCbCr444"
+msgstr "YCbCr444"
+
+msgid "YES"
+msgstr "JAH"
 
 msgid "YPbPr"
 msgstr "YPbPr"
@@ -7877,6 +8395,9 @@ msgstr "Kollased DVB subtiitrid"
 
 msgid "Yes"
 msgstr "Jah"
+
+msgid "Yes (save index in setup tuner)"
+msgstr "Jah (salvesta indeks seadistavas tuuneris)"
 
 msgid "Yes and save"
 msgstr "Jah ning salvesta"
@@ -7908,6 +8429,12 @@ msgstr "Jah, tee nüüd automaatotsing"
 msgid "Yes, do another manual scan now"
 msgstr "Jah, tee nüüd uus käsiotsing"
 
+msgid "Yes, only from deep standby"
+msgstr "Jah, ainult sügavootelt"
+
+msgid "Yes, only from standby"
+msgstr "Jah, ainult ootelt"
+
 msgid "Yes, perform a shutdown now."
 msgstr "Jah, lülita välja."
 
@@ -7919,6 +8446,12 @@ msgstr "Jah, tagasi salvestiste nimekirja"
 
 msgid "Yesterday"
 msgstr "Eile"
+
+msgid ""
+"You PIN code is 0000. This is the default PIN code and it disable parental "
+"control!\n"
+msgstr ""
+"Sinu PIN kood on 0000. See on vaikimisi PIN kood ja eemaldab lapseluku\n"
 
 #, python-format
 msgid ""
@@ -7951,6 +8484,38 @@ msgstr "Selle laienduse saab eemaldada."
 msgid "You cannot delete this!"
 msgstr "Seda ei saa kustutada!"
 
+msgid ""
+"You did not see all eight arrow heads. This means your TV has overscan "
+"enabled and presents you with a zoomed-in picture, causing you to loose part "
+"of a full HD screen. In addition this you may also miss parts of the user "
+"interface, for example volume bars and more.\n"
+"\n"
+"Unfortunately, your model of receiver is not capable to adjust the "
+"dimensions of the user interface. If not everything is visible, you should "
+"change the installed skin to one that supports the overscan area of your "
+"TV.\n"
+"\n"
+"When you select a different skin, the user interface of your receiver will "
+"restart.\n"
+"\n"
+"Note: you can always start the Overscan wizard later,  via\n"
+"\n"
+"menu->installation->system->Overscan wizard"
+msgstr ""
+
+msgid ""
+"You did not see all eight arrow heads. This means your TV has overscan "
+"enabled and presents you with a zoomed-in picture, causing you to loose part "
+"of a full HD screen. In addition this you may also miss parts of the user "
+"interface, for example volume bars and more.\n"
+"\n"
+"You can now try to resize and change the position of the user interface "
+"until you see the eight arrow heads.\n"
+"\n"
+"When done press OK.\n"
+"\n"
+msgstr ""
+
 msgid "You didn't select a channel to record from."
 msgstr "Salvestatavat kanalit pole valitud."
 
@@ -7959,13 +8524,6 @@ msgid ""
 "now."
 msgstr ""
 "Oled otsustanud luua turvakoopia kõvakettale. Vajuta OK alustamiseks nüüd."
-
-msgid ""
-"You have chosen to create a new .NFI flasher bootable USB stick. This will "
-"repartition the USB stick and therefore all data on it will be erased."
-msgstr ""
-"Soovid luua uue alglaetava USB-pulga tarkvarale. Kõik vana info USB pulgal "
-"läheb kaduma !!!"
 
 msgid ""
 "You have chosen to restore your settings. Enigma2 will restart after "
@@ -7984,11 +8542,15 @@ msgstr "Pead lülitama teenusele %s (%s - '%s')!\n"
 
 msgid ""
 "You need a PC connected to your receiver. If you need further instructions, "
-"please visit the website https://openpli.org\n"
+"please visit the website http://www.dm7025.de.\n"
 "Your receiver will now be halted. After you have performed the update "
 "instructions from the website, your new firmware will ask you to restore "
 "your settings."
 msgstr ""
+"Vastuvõtja tuleb ühendada arvutiga. Kui on vaja abi, siis vaata : http://www."
+"dm7025.de.\n"
+"Vastuvõtja on nüüd peatatud.Kui on täidetud uuendamise juhised veebilehelt, "
+"siis uus tarkvara palub taastada seadeid."
 
 msgid "You system does not support ext4"
 msgstr "See süsteem ei toeta ext4"
@@ -8007,13 +8569,6 @@ msgstr ""
 
 msgid "Your current collection will get lost!"
 msgstr "Praegune valik kustutatakse!"
-
-msgid ""
-"Your frontprocessor firmware must be upgraded.\n"
-"Press OK to start upgrade."
-msgstr ""
-"Frontprotsessori tarkvara tuleb uuendada.\n"
-"Uuendamiseks vajuta OK."
 
 msgid ""
 "Your frontprocessor will be upgraded\n"
@@ -8110,8 +8665,8 @@ msgstr "Tagasi vaadatud kanalile?"
 msgid "Zap back to service before positioner setup?"
 msgstr "Tagasi vaadatud kanalile?"
 
-msgid "Zap back to service before tuner setup?"
-msgstr "Tagasi vaadatud kanalile?"
+msgid "Zap bouquets blindly on zap buttons"
+msgstr "Vaheta lemmiknimekirju pimesi vahetusnuppudega"
 
 msgid "Zap down"
 msgstr "Kanalivahetus +"
@@ -8138,6 +8693,12 @@ msgstr "Mine valitud kanalile või näita saateinfot (sõltub seadistusest)"
 
 msgid "Zap up"
 msgstr "Kanalivahetus -"
+
+msgid "Zgemma H.S/H.2S/H.2H/H5"
+msgstr "Zgemma H.S/H.2S/H.2H/H5"
+
+msgid "Zgemma Star S/2S/H1/H2"
+msgstr "Zgemma Star S/2S/H1/H2"
 
 msgid "[REC]"
 msgstr "[REC]"
@@ -8226,6 +8787,9 @@ msgstr "tähestikujärjekord"
 msgid "alphabetic reverse"
 msgstr "tagurpidi tähestikujärjekord"
 
+msgid "alphabetical"
+msgstr "tähestikuline"
+
 msgid "alternative"
 msgstr "alternatiivne"
 
@@ -8234,6 +8798,9 @@ msgstr "alati"
 
 msgid "and never ask again this session again"
 msgstr "ja selle seansi jooksul enam ei küsita"
+
+msgid "and never ask this again"
+msgstr "ja ära seda selle seansi jooksul enam küsi"
 
 msgid "and never show this message again"
 msgstr "ja ära kunagi enam näita seda teadet"
@@ -8293,6 +8860,9 @@ msgstr "keelatud"
 msgid "blue"
 msgstr "sinine"
 
+msgid "bottom"
+msgstr "Üleval ja all"
+
 msgid "broadcasting/press"
 msgstr "ringhääling/ajakirjandus"
 
@@ -8323,6 +8893,9 @@ msgstr "ringpolarisatsioon vasak"
 msgid "circular right"
 msgstr "ringpolarisatsioon parem"
 
+msgid "clip overscan / letterbox borders"
+msgstr "lõika overscan / letterboxi äärised"
+
 msgid "comedy"
 msgstr "komöödia"
 
@@ -8341,9 +8914,6 @@ msgstr "kinnitatud"
 msgid "connected"
 msgstr "ühendatud"
 
-msgid "continue"
-msgstr "jätka"
-
 msgid "cooking"
 msgstr "kokasaade"
 
@@ -8352,10 +8922,6 @@ msgstr "kopeeri nimekirjadesse"
 
 msgid "create directory"
 msgstr "Loo kataloog"
-
-#, python-format
-msgid "currently installed image: %s"
-msgstr "praegu paigaldatud tarkvara: %s"
 
 msgid "daily"
 msgstr "iga päev"
@@ -8377,6 +8943,9 @@ msgstr "detektiiv/triller"
 
 msgid "disable"
 msgstr "keela"
+
+msgid "disable intro screen"
+msgstr "keela tervitusaken"
 
 msgid "disable move mode"
 msgstr "keela liigutamine nimekirjades"
@@ -8414,6 +8983,9 @@ msgstr "asenduskanalite muutmine"
 msgid "education/science/factual topics (general)"
 msgstr "haridus/teadus"
 
+msgid "embedded"
+msgstr ""
+
 msgid "empty"
 msgstr "tühi"
 
@@ -8425,6 +8997,9 @@ msgstr "luba nimekirjade muutmine"
 
 msgid "enable favourite edit"
 msgstr "luba lemmikute muutmine"
+
+msgid "enable intro screen"
+msgstr "luba tervitusaken"
 
 msgid "enable move mode"
 msgstr "luba liigutamine nimekirjades"
@@ -8480,6 +9055,9 @@ msgstr "et9000/et9100"
 msgid "et9200/9500/6500"
 msgstr "et9200/9500/6500"
 
+msgid "execute cuts (requires MovieCut plugin)"
+msgstr "teosta lõiked (nõuab MovieCut laiendust)"
+
 msgid "exit DVD player or return to file browser"
 msgstr "välju DVD-mängijast või mine tagasi failisirvijasse"
 
@@ -8491,6 +9069,9 @@ msgstr "välju võrgukaardi seadistusmenüüst"
 
 msgid "experimental film/video"
 msgstr "eksperimentaalne film/video"
+
+msgid "failed"
+msgstr "nurjus"
 
 msgid "false"
 msgstr "väär"
@@ -8569,6 +9150,9 @@ msgstr "kõrgus"
 
 msgid "help..."
 msgstr "abi"
+
+msgid "hide"
+msgstr "peida"
 
 msgid "horizontal"
 msgstr "horisontaal"
@@ -8693,6 +9277,9 @@ msgstr "liigu eelmisele reale"
 msgid "movie/drama (general)"
 msgstr "film/draama (üldine)"
 
+msgid "multi"
+msgstr "multi"
+
 msgid "multinorm"
 msgstr "multinorm"
 
@@ -8756,8 +9343,11 @@ msgstr "pole lukustatud"
 msgid "not supported"
 msgstr "pole toetatud"
 
-msgid "not used"
-msgstr "pole lukustatud"
+msgid "not tested"
+msgstr "pole testitud"
+
+msgid "not_tested"
+msgstr "pole_testitud"
 
 msgid "nothing connected"
 msgstr "pole ühendatud"
@@ -8770,6 +9360,9 @@ msgstr "kasutatud ühekihilisest kettast."
 
 msgid "off"
 msgstr "väljas"
+
+msgid "off or wpa2 on"
+msgstr "välja, või wpa2 sisse"
 
 msgid "offset is"
 msgstr "hüvitus on"
@@ -8903,6 +9496,9 @@ msgstr "tagurpidi kuupäevajärj."
 msgid "rewind to the previous chapter"
 msgstr "tagasi eelmisele peatükile"
 
+msgid "rgb"
+msgstr "RGB"
+
 msgid "right"
 msgstr "parem"
 
@@ -8948,8 +9544,14 @@ msgstr "süvamuusika/klassikaline muusika"
 msgid "serious/classical/religious/historical movie/drama"
 msgstr "tõsielu/klassika/usklik/ajalooline film/draama"
 
+msgid "service is in bouquet parental protection"
+msgstr "Kanal on lapselukuga kaitstud lemmiknimekirjas"
+
 msgid "set as startup service"
 msgstr "käivita vastuvõtja sellel kanalil"
+
+msgid "show"
+msgstr "näita"
 
 msgid "show DVD main menu"
 msgstr "näita DVD peamenüüd"
@@ -9035,6 +9637,9 @@ msgstr "stereo"
 msgid "stop using as startup service"
 msgstr "ära kasuta käivituskanalina"
 
+msgid "successful"
+msgstr "edukas"
+
 msgid "switch to bookmarks"
 msgstr "mine lemmikute-loendisse"
 
@@ -9098,11 +9703,17 @@ msgstr "määramata"
 msgid "unknown"
 msgstr "tundmatu"
 
+msgid "unknown error"
+msgstr "Leitud tundmatu viga, proovi uuesti!"
+
 msgid "unknown service"
 msgstr "tundmatu kanal"
 
 msgid "unpublished"
 msgstr "avaldamata"
+
+msgid "untestable"
+msgstr "ebastabiilne"
 
 msgid "until standby/restart"
 msgstr "kuni ooterežiimini/taaskäivitamiseni"
@@ -9158,11 +9769,20 @@ msgid_plural "with %d errors"
 msgstr[0] "koos %d veaga"
 msgstr[1] "koos %d vigadega"
 
+msgid "with errors"
+msgstr "vigadega"
+
 msgid "with text"
 msgstr "koos tekstiga"
 
 msgid "with tuner name"
 msgstr "koos tuuneri nimega"
+
+msgid "with_errors"
+msgstr "vigadega"
+
+msgid "working"
+msgstr "töös"
 
 msgid "xp1000"
 msgstr "xp1000"
@@ -9185,1693 +9805,8 @@ msgstr "kanalivahetus ja salvesta"
 msgid "zapped"
 msgstr "vahetatud"
 
-msgid "10 (lower than any auto)"
-msgstr ""
-
-msgid "11 (lower than any auto)"
-msgstr ""
-
-msgid "12 (lower than any auto)"
-msgstr ""
-
-msgid "13 (lower than any auto)"
-msgstr ""
-
-msgid "14 (lower than any auto)"
-msgstr ""
-
-msgid "14000 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14001 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14002 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14003 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14004 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14005 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14006 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14007 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14008 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14009 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14010 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14011 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14012 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14013 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14014 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14015 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14016 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14017 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14018 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14019 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14020 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14021 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14022 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14023 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14024 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14025 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14026 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14027 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14028 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14029 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14030 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14031 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14032 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14033 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14034 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14035 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14036 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14037 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14038 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14039 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14040 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14041 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14042 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14043 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14044 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14045 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14046 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14047 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14048 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14049 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14050 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14051 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14052 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14053 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14054 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14055 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14056 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14057 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14058 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14059 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14060 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14061 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14062 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14063 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14064 (higher than rotor any auto)"
-msgstr ""
-
-msgid "14065 (higher than rotor any auto)"
-msgstr ""
-
-msgid "15 (lower than any auto)"
-msgstr ""
-
-msgid "8 (lower than any auto)"
-msgstr ""
-
-msgid "9 (lower than any auto)"
-msgstr ""
-
-msgid "16 (lower than any auto)"
-msgstr ""
-
-msgid "17 (lower than any auto)"
-msgstr ""
-
-msgid "18 (lower than any auto)"
-msgstr ""
-
-msgid "19 (lower than any auto)"
-msgstr ""
-
-msgid "19000 (higher than any auto)"
-msgstr ""
-
-msgid "19001 (higher than any auto)"
-msgstr ""
-
-msgid "19002 (higher than any auto)"
-msgstr ""
-
-msgid "19003 (higher than any auto)"
-msgstr ""
-
-msgid "19004 (higher than any auto)"
-msgstr ""
-
-msgid "19005 (higher than any auto)"
-msgstr ""
-
-msgid "19006 (higher than any auto)"
-msgstr ""
-
-msgid "19007 (higher than any auto)"
-msgstr ""
-
-msgid "19008 (higher than any auto)"
-msgstr ""
-
-msgid "19009 (higher than any auto)"
-msgstr ""
-
-msgid "19010 (higher than any auto)"
-msgstr ""
-
-msgid "19011 (higher than any auto)"
-msgstr ""
-
-msgid "19012 (higher than any auto)"
-msgstr ""
-
-msgid "19013 (higher than any auto)"
-msgstr ""
-
-msgid "19014 (higher than any auto)"
-msgstr ""
-
-msgid "19015 (higher than any auto)"
-msgstr ""
-
-msgid "19016 (higher than any auto)"
-msgstr ""
-
-msgid "19017 (higher than any auto)"
-msgstr ""
-
-msgid "19018 (higher than any auto)"
-msgstr ""
-
-msgid "19019 (higher than any auto)"
-msgstr ""
-
-msgid "19020 (higher than any auto)"
-msgstr ""
-
-msgid "19021 (higher than any auto)"
-msgstr ""
-
-msgid "19022 (higher than any auto)"
-msgstr ""
-
-msgid "19023 (higher than any auto)"
-msgstr ""
-
-msgid "19024 (higher than any auto)"
-msgstr ""
-
-msgid "19025 (higher than any auto)"
-msgstr ""
-
-msgid "19026 (higher than any auto)"
-msgstr ""
-
-msgid "19027 (higher than any auto)"
-msgstr ""
-
-msgid "19028 (higher than any auto)"
-msgstr ""
-
-msgid "19029 (higher than any auto)"
-msgstr ""
-
-msgid "19030 (higher than any auto)"
-msgstr ""
-
-msgid "19031 (higher than any auto)"
-msgstr ""
-
-msgid "19032 (higher than any auto)"
-msgstr ""
-
-msgid "19033 (higher than any auto)"
-msgstr ""
-
-msgid "19034 (higher than any auto)"
-msgstr ""
-
-msgid "19035 (higher than any auto)"
-msgstr ""
-
-msgid "19036 (higher than any auto)"
-msgstr ""
-
-msgid "19037 (higher than any auto)"
-msgstr ""
-
-msgid "19038 (higher than any auto)"
-msgstr ""
-
-msgid "19039 (higher than any auto)"
-msgstr ""
-
-msgid "19040 (higher than any auto)"
-msgstr ""
-
-msgid "19041 (higher than any auto)"
-msgstr ""
-
-msgid "19042 (higher than any auto)"
-msgstr ""
-
-msgid "19043 (higher than any auto)"
-msgstr ""
-
-msgid "19044 (higher than any auto)"
-msgstr ""
-
-msgid "19045 (higher than any auto)"
-msgstr ""
-
-msgid "19046 (higher than any auto)"
-msgstr ""
-
-msgid "19047 (higher than any auto)"
-msgstr ""
-
-msgid "19048 (higher than any auto)"
-msgstr ""
-
-msgid "19049 (higher than any auto)"
-msgstr ""
-
-msgid "19050 (higher than any auto)"
-msgstr ""
-
-msgid "19051 (higher than any auto)"
-msgstr ""
-
-msgid "19052 (higher than any auto)"
-msgstr ""
-
-msgid "19053 (higher than any auto)"
-msgstr ""
-
-msgid "19054 (higher than any auto)"
-msgstr ""
-
-msgid "19055 (higher than any auto)"
-msgstr ""
-
-msgid "19056 (higher than any auto)"
-msgstr ""
-
-msgid "19057 (higher than any auto)"
-msgstr ""
-
-msgid "19058 (higher than any auto)"
-msgstr ""
-
-msgid "19059 (higher than any auto)"
-msgstr ""
-
-msgid "19060 (higher than any auto)"
-msgstr ""
-
-msgid "19061 (higher than any auto)"
-msgstr ""
-
-msgid "19062 (higher than any auto)"
-msgstr ""
-
-msgid "19063 (higher than any auto)"
-msgstr ""
-
-msgid "19064 (higher than any auto)"
-msgstr ""
-
-msgid "19065 (higher than any auto)"
-msgstr ""
-
-msgid "2 (lower than any auto)"
-msgstr ""
-
-msgid "1 (lower than any auto)"
-msgstr ""
-
-msgid "3 (lower than any auto)"
-msgstr ""
-
-msgid "20 (lower than any auto)"
-msgstr ""
-
-msgid "21 (lower than any auto)"
-msgstr ""
-
-msgid "22 (lower than any auto)"
-msgstr ""
-
-msgid "23 (lower than any auto)"
-msgstr ""
-
-msgid "24 (lower than any auto)"
-msgstr ""
-
-msgid "25 (lower than any auto)"
-msgstr ""
-
-msgid "26 (lower than any auto)"
-msgstr ""
-
-msgid "27 (lower than any auto)"
-msgstr ""
-
-msgid "28 (lower than any auto)"
-msgstr ""
-
-msgid "29 (lower than any auto)"
-msgstr ""
-
-msgid "30 (lower than any auto)"
-msgstr ""
-
-msgid "31 (lower than any auto)"
-msgstr ""
-
-msgid "32 (lower than any auto)"
-msgstr ""
-
-msgid "33 (lower than any auto)"
-msgstr ""
-
-msgid "34 (lower than any auto)"
-msgstr ""
-
-msgid "35 (lower than any auto)"
-msgstr ""
-
-msgid "36 (lower than any auto)"
-msgstr ""
-
-msgid "37 (lower than any auto)"
-msgstr ""
-
-msgid "38 (lower than any auto)"
-msgstr ""
-
-msgid "39 (lower than any auto)"
-msgstr ""
-
-msgid "4 (lower than any auto)"
-msgstr ""
-
-msgid "40 (lower than any auto)"
-msgstr ""
-
-msgid "41 (lower than any auto)"
-msgstr ""
-
-msgid "42 (lower than any auto)"
-msgstr ""
-
-msgid "43 (lower than any auto)"
-msgstr ""
-
-msgid "44 (lower than any auto)"
-msgstr ""
-
-msgid "45 (lower than any auto)"
-msgstr ""
-
-msgid "46 (lower than any auto)"
-msgstr ""
-
-msgid "47 (lower than any auto)"
-msgstr ""
-
-msgid "48 (lower than any auto)"
-msgstr ""
-
-msgid "49 (lower than any auto)"
-msgstr ""
-
-msgid "5 (lower than any auto)"
-msgstr ""
-
-msgid "50 (lower than any auto)"
-msgstr ""
-
-msgid "51 (lower than any auto)"
-msgstr ""
-
-msgid "52 (lower than any auto)"
-msgstr ""
-
-msgid "53 (lower than any auto)"
-msgstr ""
-
-msgid "54 (lower than any auto)"
-msgstr ""
-
-msgid "55 (lower than any auto)"
-msgstr ""
-
-msgid "56 (lower than any auto)"
-msgstr ""
-
-msgid "57 (lower than any auto)"
-msgstr ""
-
-msgid "58 (lower than any auto)"
-msgstr ""
-
-msgid "59 (lower than any auto)"
-msgstr ""
-
-msgid "6 (lower than any auto)"
-msgstr ""
-
-msgid "60 (lower than any auto)"
-msgstr ""
-
-msgid "61 (lower than any auto)"
-msgstr ""
-
-msgid "62 (lower than any auto)"
-msgstr ""
-
-msgid "63 (lower than any auto)"
-msgstr ""
-
-msgid "64 (lower than any auto)"
-msgstr ""
-
-msgid "7 (lower than any auto)"
-msgstr ""
-
-msgid "Console"
-msgstr "Konsool"
-
-msgid "Auto EXIF Orientation rotation/flipping"
-msgstr "EXIF orientatsiooni automaatne pööramine/ümberpööramine"
-
-msgid "Preferred tuner DVB-S"
-msgstr "Eelistatud DVB-S tuuner"
-
-msgid "Preferred tuner DVB-T"
-msgstr "Eelistatud DVB-T tuuner"
-
-msgid "Preferred tuner DVB-C"
-msgstr "Eelistatud DVB-C tuuner"
-
-msgid "Preferred tuner ATSC"
-msgstr "Eelistatud ATSC tuuner"
-
-msgid "Preferred tuner ATSC for recordings"
-msgstr "Eelistatud ATSC tuuner salvestustele"
-
-msgid "Preferred tuner DVB-S for recordings"
-msgstr "Eelistatud DVB-S tuuner salvestusteks"
-
-msgid "Preferred tuner DVB-T for recordings"
-msgstr "Eelistatud DVB-T tuuner salvestusteks"
-
-msgid "Preferred tuner DVB-C for recordings"
-msgstr "Eelistatud DVB-C tuuner salvestusteks"
-
-msgid "When enabled, this setting has more weight than 'Preferred tuner'."
-msgstr "Määrates 'jah' on see seadistus eelistatum kui 'Eelistatud tuuner'."
-
-msgid ""
-"When enabled, this setting has more weight than 'Preferred tuner for "
-"recordings'."
-msgstr ""
-"Määrates 'jah' on see seadistus eelistatum kui 'Eelistatud tuuner "
-"salvestamiseks'."
-
-msgid "Show background behind subtitles"
-msgstr "Näita tausta subtiitrite taga"
-
-msgid "Configure if behind the subtitles a background is shown."
-msgstr "Määra, kui subtiitrite tagant on taust näha."
-
-msgid "WakeupTimer Configuration"
-msgstr "Äratustaimeri seadistus"
-
-msgid "Enable wakeup timer"
-msgstr "Luba äratustaimer"
-
-msgid "No, except Wakeup timer"
-msgstr "Ei, välja arvatud äratustaimer"
-
-msgid "Wakeup time"
-msgstr "Äratuse aeg"
-
-msgid "Wakeup timer"
-msgstr "Äratustaimer"
-
-msgid ""
-"Press OK and configure the days and times wakeup receiver from deep standby "
-"mode."
-msgstr "Vajuta OK ning määra vastuvõtja sügavootest ärkamise päevad ja ajad."
-
-msgid ""
-"Note: when enabled, and you do want standby mode after wake up, set option "
-"'Startup to Standby' as 'No, except Wakeup timer'."
-msgstr ""
-"Märkus: kui lubatud, ja sa tahad ooterežiimi pärast äratust, sea valik "
-"'Ooterežiimis alustamine' kui 'Ei, välja arvatud äratustaimer'."
-
-msgid "Press OK, save and exit..."
-msgstr "Vajuta OK, salvesta ning välju..."
-
-msgid "Exit/OK"
-msgstr "Välju/OK"
-
-msgid "Current rotor position: "
-msgstr "Pööraja hetkeasend: "
-
-msgid "Select slot"
-msgstr "Vali pesa"
-
-msgid "Write to /tmp/positionersetup.log"
-msgstr "Kirjuta /tmp/positionersetup.log  faili"
-
-msgid "Positioner setup log"
-msgstr "Positsioneeri seadistuse logi"
-
-msgid "Open setup tuner "
-msgstr "Ava tuuneri seadistamine "
-
-msgid "Yes (save index in setup tuner)"
-msgstr "Jah (salvesta indeks seadistavas tuuneris)"
-
-msgid "Really store at index %2d for current position?"
-msgstr "Kas salvestada indeks %2d  selle asukoha jaoks?"
-
-msgid "Sorry, this tuner is in use."
-msgstr "See tuuner on kasutusel."
-
-msgid "AGC:"
-msgstr "AGC:"
-
-msgid ""
-"Maybe the reason that recording is currently running. Please stop the "
-"recording before trying to configure the positioner."
-msgstr ""
-"Võimalik et põhjuseks on hetkel käiv salvestus. Peatage salvestus enne "
-"positsioneeri seadistamise katset."
-
-msgid "Audio plugins"
-msgstr "Audio pluginad"
-
-msgid "Enable timer conflict detection"
-msgstr "Luba taimerikonflikti tuvastus"
-
-msgid "Descramble sending http streams"
-msgstr "Dekodeeri väljuvad http vood"
-
-msgid "Descramble receiving http streams"
-msgstr "Dekodeeri sisenevad http vood"
-
-msgid ""
-"When enabled, always descramble receiving http streams. This takes up more "
-"resources (descrambling demuxers), only enable if necessary. Individual "
-"streams are always descrambled if 0x100 is added to the service type, "
-"regardless of this setting. Default off."
-msgstr ""
-"Määrates 'jah', dekodeeritakse sisenevad http vood alati. See võtab rohkem "
-"ressursse, luba ainult vajadusel. Iga voog dekodeeritakse hoolimata "
-"seadistustes määratust alati, kui teenuseliigile lisatakse 0x100. "
-"Vaikeväärtus on 'ei'."
-
-msgid ""
-"When enabled, http streams are descrambled on the server side. The (remote) "
-"client receiver does not have to do descrambling. Default on."
-msgstr ""
-"Määrates 'jah', dekodeeritakse http vood serveri poolt. Klientvastuvõtja ei "
-"pea neid enam dekodeerima. Vaikimisi sees."
-
-msgid ""
-"When you use the remote fallback tuner to do recording, the timer conflict "
-"detection can't handle remote fallback tuners. This option allows you to "
-"turn off the timer confict detection"
-msgstr ""
-
-msgid ""
-"A recording is currently running. Please stop the recording before trying to "
-"start a testing DiSEqC."
-msgstr "Hetkel salvestatakse. Peata salvestamine enne DiSEqC testimist."
-
-msgid "DiSEqC Tester"
-msgstr "DiSEqC tester"
-
-msgid "DiSEqC-tester settings"
-msgstr "DiSEqC-testeri seaded"
-
-msgid "Failed:"
-msgstr "Nurjus:"
-
-msgid "Log results to /tmp"
-msgstr "Logi tulemused /tmp"
-
-msgid "Not tested:"
-msgstr "Pole testitud:"
-
-msgid "Overall progress:"
-msgstr "Üldine edenemine:"
-
-msgid "Press OK to get further details for %s"
-msgstr "Vajuta OK %s üksikasjade nägemiseks"
-
-msgid "Progress:"
-msgstr "Edenemine:"
-
-msgid "Stop testing plane after # failed transponders"
-msgstr "Peata testimine pärast # ebaõnnestunud transponderit"
-
-msgid "Stop testing plane after # successful transponders"
-msgstr "Peata testimine pärast # leitud transponderit"
-
-msgid "Succeeded:"
-msgstr "Õnnestus:"
-
-msgid "Test DiSEqC settings"
-msgstr "Testi DiSEqC seadeid"
-
-msgid "The results have been written to %s"
-msgstr "Tulemused on salvestatud %s"
-
-msgid "With errors:"
-msgstr "Vigadega:"
-
-msgid "failed"
-msgstr "nurjus"
-
-msgid "not tested"
-msgstr "pole testitud"
-
-msgid "successful"
-msgstr "edukas"
-
-msgid "with errors"
-msgstr "vigadega"
-
-msgid "working"
-msgstr "töös"
-
-msgid ""
-"Warning!\n"
-"This is an option for advanced users.\n"
-"Really disable timer conflict detection?"
-msgstr ""
-"Hoiatus!\n"
-"See on valik edasijõudnud kasutajatele.\n"
-"Kas keelata taimerikonflikti tuvastus?"
-
-msgid "and never ask this again"
-msgstr "ja ära seda selle seansi jooksul enam küsi"
-
-msgid "Ignore conflict"
-msgstr "Ignoreeri konflikti"
-
-msgid "Show warning before set 'Ignore conflict'"
-msgstr "Kuva hoiatust enne 'Ignoreeri konflikti' seadmist"
-
-msgid "Choose bouquet"
-msgstr "Vali lemmiknimekiri"
-
-msgid "Cutlist editor"
-msgstr "Lõikekohtade monteerija"
-
-msgid "Default Services Scanner"
-msgstr "Vaikimisi teenuste otsija"
-
-msgid "FP upgrade required"
-msgstr "FP ajakohastamine on nõutav"
-
-msgid "System Message"
-msgstr "Süsteemi teade"
-
-msgid "FP Upgrade"
-msgstr "FP moderniseerimine"
-
-msgid "System Message Check"
-msgstr "Süsteemi teate kontroll"
-
-msgid "Select your Skin"
-msgstr "Vali Enigma2 kujundus"
-
-msgid "DVD Burn"
-msgstr "DVD kirjutamine"
-
-msgid "Skin selector"
-msgstr ""
-
-msgid "Temperature and fan control"
-msgstr "Jahutus"
-
-msgid "Video clipping setup"
-msgstr "Video lõikamise seadistamine"
-
-msgid "clip overscan / letterbox borders"
-msgstr "lõika overscan / letterboxi äärised"
-
-msgid "EPG Selection"
-msgstr ""
-
-msgid "Network configuration"
-msgstr "Võrgu seadistamine"
-
-msgid "Service Info"
-msgstr ""
-
-msgid "Further options"
-msgstr "Täiendavad võimalused"
-
-msgid "Similar EPG"
-msgstr "Sarnane EPG"
-
-msgid "Event view context menu"
-msgstr "Sündmuse vaate kontekstimenüü"
-
-msgid "Extensions menu"
-msgstr "Laienduste menüü"
-
-msgid "Events info menu"
-msgstr "Sündmuste info menüü"
-
-msgid "Set default settings?"
-msgstr "Määrata vaikimisi seaded?"
-
-msgid "Always include ECM in recordings"
-msgstr "Salvestised sisaldavad ka ECM sõnumeid"
-
-msgid ""
-"Never decrypt the content while recording. This overrides the individual "
-"timer settings globally. If enabled, recordings are stored in crypted "
-"presentation and must be decrypted afterwards (sometimes called offline "
-"decoding). Default: off."
-msgstr ""
-"Ära dekrüpti sisu salvestamise ajal. See valik alistab üksiku taimeri "
-"seadistused globaalselt ja selle lubamisel salvestised talletatakse "
-"krüpteeritult. Lahtikrüptida saad hiljem (offlain dekodeerimine). Vaikimisi: "
-"välja lülitatud."
-
-msgid ""
-"Always include ECM messages in recordings. This overrides the individual "
-"timer settings globally. It allows recordings to be always decrypted "
-"afterwards (sometimes called offline decoding), if supported by your "
-"receiver. Default: off."
-msgstr ""
-"Salvestised sisaldavad alati ka ECM sõnumeid. See valik alistab üksiku "
-"taimeri seadistused globaalselt ja võimaldab salvestisi hiljem dekrüptida "
-"(offlain dekodeerimine), kui vastuvõtja seda toetab. Vaikimisi: välja "
-"lülitatud."
-
-msgid "Never decrypt while recording"
-msgstr "Ära kunagi dekrüpti salvestamise ajal"
-
-msgid "All services provider"
-msgstr "Kõik levitajad"
-
-msgid "CI slot: "
-msgstr "CI pesa: "
-
-msgid "execute cuts (requires MovieCut plugin)"
-msgstr "teosta lõiked (nõuab MovieCut laiendust)"
-
-msgid "enable intro screen"
-msgstr "luba tervitusaken"
-
-msgid "disable intro screen"
-msgstr "keela tervitusaken"
-
-msgid "service is in bouquet parental protection"
-msgstr "Kanal on lapselukuga kaitstud lemmiknimekirjas"
-
-msgid "Streaming clients info"
-msgstr "Voogedastuse klientide info"
-
-msgid "Transcoding: "
-msgstr "Transkodeerimine: "
-
-msgid "Total clients streaming: %d (%s)"
-msgstr "Kliente kokku striimimas: %d (%s)"
-
-msgid ": 0000 - default (disabled)"
-msgstr ":0000 - vakimisi (keelatud)"
-
-msgid "Enable fallback remote receiver for recordings"
-msgstr ""
-
-msgid ""
-"Enable remote enigma2 receiver to be tried to tune into services that cannot "
-"be tuned into locally for recordings (e.g. tuner is occupied or service type "
-"is unavailable on the local tuner. Specify complete URL including http:// "
-"and port number (normally ...:8001), e.g. http://second_box:8001."
-msgstr ""
-
-msgid "FBC SCR (Unicable or JESS)"
-msgstr ""
-
-msgid ""
-"FBC automatic\n"
-"connected to"
-msgstr ""
-
-msgid "FBC automatic"
-msgstr ""
-
-msgid ""
-"FBC automatic\n"
-"inactive"
-msgstr ""
-
-msgid ""
-"FBC automatic\n"
-"connected to %s"
-msgstr ""
-
-msgid "Set PIN"
-msgstr "Määra PIN"
-
-msgid ""
-"You PIN code is 0000. This is the default PIN code and it disable parental "
-"control!\n"
-msgstr ""
-"Sinu PIN kood on 0000. See on vaikimisi PIN kood ja eemaldab lapseluku\n"
-
-msgid "Zgemma H.S/H.2S/H.2H"
-msgstr ""
-
-msgid "No stream clients"
-msgstr "Pole voogedastuse kliente"
-
-msgid "Capabilities: "
-msgstr "Võimekused: "
-
-msgid "DVD Menu"
-msgstr "DVD menüü"
-
-msgid "Auto play blu-ray file"
-msgstr "Mängi kohe bluray faili"
-
-msgid "Show/hide window"
-msgstr "Näita/peida aken"
-
-msgid "Show record clock icons"
-msgstr "Näita salvestuse kella ikoone"
-
-msgid "Zap bouquets blindly on zap buttons"
-msgstr "Vaheta lemmiknimekirju pimesi vahetusnuppudega"
-
-msgid "Number of channels shown in channel selection list"
-msgstr "Kanalivaliku nimekirjas näidatav kanalite arv"
-
-msgid "Configure how many channels are shown in the selection list."
-msgstr "Määra, palju kanaleid näidatakse valiku nimekirjas"
-
-msgid "Repeat leave standby messages"
-msgstr "Korda ootele jäämise sõnumeid"
-
-msgid "Input 1"
-msgstr ""
-
-msgid "Input 2"
-msgstr ""
-
-msgid "Input 3"
-msgstr ""
-
-msgid "Input 4"
-msgstr ""
-
-msgid "Input 5"
-msgstr ""
-
-msgid "Input 6"
-msgstr ""
-
-msgid "Input 7"
-msgstr ""
-
-msgid "Input 8"
-msgstr ""
-
-msgid "Input 9"
-msgstr ""
-
-msgid "Input 10"
-msgstr ""
-
-msgid "Input 11"
-msgstr ""
-
-msgid "Input 12"
-msgstr ""
-
-msgid "Input 13"
-msgstr ""
-
-msgid "Input 14"
-msgstr ""
-
-msgid "Input 15"
-msgstr ""
-
-msgid "Input 16"
-msgstr ""
-
-msgid "As defined by the skin"
-msgstr "Nagu välimuse poolt määratud"
-
-msgid "Force LNB Power"
-msgstr "Sunni LNB toide"
-
-msgid "Force ToneBurst"
-msgstr "Sunni toonipurse"
-
-msgid "When enabled the LNB toneburst will be forced"
-msgstr "Kui lubatud siis LNB toonipurse saab olema sunnitud"
-
-msgid "When enabled the LNB power will not be switched off in standby"
-msgstr "Kui lubatud siis LNB toidet ei lülitata välja vastuvõtja ooterežiimis"
-
-msgid "Bypass HDMI EDID checking"
-msgstr "Möödu HDMI EDID kontrollist"
-
-msgid ""
-"Configure if the HDMI EDID checking should be bypassed as this might solve "
-"issue with some TVs."
-msgstr ""
-"Määra, kui HDMI EDID kontrollist peaks mööduma, kuivõrd see võib kõrvaldada "
-"probleemi mõne TVga."
-
-msgid "Set pin code persistent"
-msgstr "Sea PIN kood püsivaks"
-
-msgid "Enter persistent PIN code"
-msgstr "Sisesta püsiv PIN kood"
-
-msgid "Enter PIN"
-msgstr "Sisesta PIN"
-
-msgid "Reset persistent PIN code"
-msgstr "Nulli püsiv PIN kood"
-
-msgid "Reenter PIN"
-msgstr "Sisesta PIN uuesti"
-
-msgid "Reenter new PIN"
-msgstr ""
-
-msgid "The saved PIN was cleared."
-msgstr "Salvestatud PIN kood kustutati"
-
-msgid "Would you save the entered PIN %s persistent?"
-msgstr "Kas soovid salvestada sisestatud PIN %s püsivana?"
-
-msgid "Show CI messages"
-msgstr "Näita CI teateid"
-
-msgid "Smartcard PIN"
-msgstr "Kiipkaardi PIN"
-
-msgid "The PIN code has been saved successfully."
-msgstr "PIN kood on edukalt salvestatud"
-
-msgid "Sort order for menu entries"
-msgstr "Sea menüü sisestuste järjekord"
-
-msgid "alphabetical"
-msgstr "tähestikuline"
-
-msgid ""
-"This option allows you to hide and sort menu entries. When selecting user "
-"you can change order and hide menu items via the blue button"
-msgstr ""
-"See valik lubab peita ja järjestada menüü sisestusi. Valides kasutaja saad "
-"muuta järjekorda ja peita menüü sisestusi sinise nupu abil."
-
-msgid "Menusort (%s)"
-msgstr "Menüüsort (%s)"
-
-msgid "Protect menu sort"
-msgstr "Kaitse filmide nimekirja"
-
-msgid "Overscan wizard"
-msgstr "Üleskaneerimise abiline"
-
-msgid "Toggle TV/RADIO mode"
-msgstr "Vaheta TV/RADIO vahel"
-
-msgid "Toggle the tv and the radio player..."
-msgstr "Kuula raadiot"
-
-msgid "Show menu paths"
-msgstr "Kuva asukoht menüüs"
-
-msgid "This option allows you to show menu paths."
-msgstr "Saad kuvada menüüde täieliku asukoha."
-
-msgid "Small"
-msgstr "Lühidalt"
-
-msgid "Large"
-msgstr "Täielikult"
-
-msgid "Do you want to autorestore settings?"
-msgstr "Kas soovid taastada oma seaded?"
-
-msgid "Network Info:"
-msgstr "Võrgu ID"
-
-msgid "Did you see all eight arrow heads?"
-msgstr "Kas nägid kõiki kaheksat nooletippu?"
-
-msgid "Wizard to arrange the overscan"
-msgstr "Üleskaneerimise korraldamise abiline"
-
-msgid "Save changes"
-msgstr "Salvesta muutused"
-
-msgid "Do you see all the eight arrowheads?"
-msgstr ""
-
-msgid "Do you want to quit the overscan wizard?"
-msgstr "Soovid lahkuda üleskaneerimise abilisest?"
-
-msgid "Do you want to select a different skin?"
-msgstr "Kas soovid valida teistsuguse kujunduse?"
-
-msgid "Enable auto fast scan for %s"
-msgstr "Luba kiire automaatotsing %s jaoks"
-
-msgid ""
-"It seems you did not see all the eight arrow heads. This means your TV is "
-"has overscan enabled, and is not configured properly.\n"
-"\n"
-"Please refer to your TVs manual to find how you can disable overscan on your "
-"TV. Look for terms like 'Just fit', 'Full width', etc. If you can't find it, "
-"ask other users at http://forums.openpli.org.\n"
-"\n"
-msgstr ""
-"Näib et Sa ei näinud kõiki kaheksat nooleotsa. See tähendab et Su TV lubab "
-"üleskaneerimist ja ei ole põhjalikult seadistatud. ­\n"
-"\n"
-
-msgid "Reset order (All)"
-msgstr "Nulli järjekord (Kõik)"
-
-msgid ""
-"The overscan wizard has been completed.\n"
-"\n"
-"Note: you can always start the Overscan wizard later,  via\n"
-"\n"
-"menu->installation->system->Overscan wizard"
-msgstr ""
-"Üleskaneerimise abiline on seadistatud \n"
-"\n"
-"saad alati alustada üleskaneerimisabilisega hiljem läbi \n"
-"\n"
-"menüü-> seadistamine-> süsteem -> üleskaneerimise abiline"
-
-msgid ""
-"The overscan wizard helps you to setup your TV in the correct way.\n"
-"\n"
-"For the majority of TV's, the factory default is to have overscan enabled. "
-"This means you are always watching a \"zoomed in\" picture instead of real "
-"HD, and parts of the user inferface (skin) may be invisible.\n"
-"\n"
-"The yellow area means a 5% border area of a full HD picture will be "
-"invisible.\n"
-"The green area means a 10% border area of a full HD picture will be "
-"invisible.\n"
-"\n"
-"In other words, if the yellow box meets all for sides of your screen, then "
-"you have at least 5% overscan on all sides.\n"
-"\n"
-"If you see the tips of all eight arrowheads, then your TV has overscan "
-"disabled.\n"
-"\n"
-"Test Pattern by TigerDave - www.tigerdave.com/ht_menu.htm"
-msgstr ""
-
-msgid ""
-"The user interface of the receiver will now restart to select the selected "
-"skin"
-msgstr "Vastuvõtja kasutajaliides taaskäivitub."
-
-msgid "Toggle show/hide"
-msgstr "Vaheta näita/peida"
-
-msgid ""
-"You did not see all eight arrow heads. This means your TV has overscan "
-"enabled and presents you with a zoomed-in picture, causing you to loose part "
-"of a full HD screen. In addition this you may also miss parts of the user "
-"interface, for example volume bars and more.\n"
-"\n"
-"Unfortunately, your model of receiver is not capable to adjust the "
-"dimensions of the user interface. If not everything is visible, you should "
-"change the installed skin to one that supports the overscan area of your "
-"TV.\n"
-"\n"
-"When you select a different skin, the user interface of your receiver will "
-"restart.\n"
-"\n"
-"Note: you can always start the Overscan wizard later,  via\n"
-"\n"
-"menu->installation->system->Overscan wizard"
-msgstr ""
-
-msgid ""
-"You did not see all eight arrow heads. This means your TV has overscan "
-"enabled and presents you with a zoomed-in picture, causing you to loose part "
-"of a full HD screen. In addition this you may also miss parts of the user "
-"interface, for example volume bars and more.\n"
-"\n"
-"You can now try to resize and change the position of the user interface "
-"until you see the eight arrow heads.\n"
-"\n"
-"When done press OK.\n"
-"\n"
-msgstr ""
-
-msgid "bottom"
-msgstr "Üleval ja all"
-
-msgid "hide"
-msgstr "peida"
-
-msgid "show"
-msgstr "näita"
-
-msgid "multi"
-msgstr "multi"
-
-msgid "Set blocktimes by weekday"
-msgstr "Sea keeluajad nädalapäeviti"
-
-msgid "Specify if you want to set the blocktimes separately by weekday"
-msgstr "Määra kui soovid seada keeluaegu eraldi nädalapäeviti"
-
-msgid "HDMI Colorspace"
-msgstr "HDMI värviruum"
-
-msgid "rgb"
-msgstr "RGB"
-
-msgid "This option allows you can config the Colorspace from Auto to RGB"
-msgstr "Saad muuta HDMI värviruumi suurust."
-
-msgid "420"
-msgstr "420"
-
-msgid "422"
-msgstr "422"
-
-msgid "444"
-msgstr "444"
-
-msgid "November"
-msgstr ""
-
-msgid "January"
-msgstr ""
-
-msgid "February"
-msgstr ""
-
-msgid "March"
-msgstr ""
-
-msgid "April"
-msgstr ""
-
-msgid "May"
-msgstr ""
-
-msgid "June"
-msgstr ""
-
-msgid "July"
-msgstr ""
-
-msgid "August"
-msgstr ""
-
-msgid "September"
-msgstr ""
-
-msgid "October"
-msgstr ""
-
-msgid "December"
-msgstr ""
-
-msgid "Config Scan Details"
-msgstr ""
-
-msgid "Auto Diseqc"
-msgstr "Auto Diseqc"
-
-msgid "Cover dashed flickering line for this service"
-msgstr "Peida võbeleva katkendjoonega joon selle teenuse jaoks"
-
-msgid "Uncover dashed flickering line for this service"
-msgstr "Näita võbeleva katkendjoonega joon selle teenuse puhul"
-
-msgid "Multichannel PCM"
-msgstr "Mitme kanali PCM"
-
-msgid "Simplified Chinese"
-msgstr "Lihtsustatud Hiina"
-
-msgid "Traditional Chinese"
-msgstr "Traditsiooniline Hiina"
-
-msgid "Channel Selection"
-msgstr ""
-
-msgid "Bitrate viewer"
-msgstr ""
-
-msgid "Lets you view the bitrate"
-msgstr ""
-
-msgid "PowerMenu"
-msgstr "Powermenüü"
-
-msgid "embedded"
-msgstr ""
-
-msgid "SSA file"
-msgstr "SSA fail"
-
-msgid "VOB file"
-msgstr "VOB fail"
-
-msgid "SRT fails"
-msgstr ""
-
-msgid "PGS fails"
-msgstr ""
-
-msgid "ASS file"
-msgstr "ASS fail"
-
-msgid "off or wpa2 on"
-msgstr "välja, või wpa2 sisse"
-
-msgid "Symbolrate:"
-msgstr ""
-
-msgid "Servicename"
-msgstr "Teenuse nimi"
-
-msgid "Channelnumber and servicename"
-msgstr "Kanali number ja teenuse nimi"
-
-msgid "Channelnumber, picon and servicename"
-msgstr "Kanali number, picon ja teenuse nimi"
-
-msgid "Channelnumber and picon"
-msgstr "Kanali number ja picon"
-
-msgid "Configure whether multi channel PCM sound should be enabled."
-msgstr "Säti, kas mitme kanali PCM heli peaks olema lubatud."
-
-msgid ""
-"A recording is currently running on the selected tuner. Please select a "
-"different tuner or consider to stop the recording to try again."
-msgstr ""
-"Valitud tuuneri kaudu toimub praegu salvestus. Vali mõni teine tuuner, või "
-"peata salvestus, et uut salvestust alustada."
-
-msgid " (0 - all networks)"
-msgstr "(0 - kõik võrgud)"
-
-msgid "Code R. LP-HP & Guard Int"
-msgstr ""
-
-msgid "Constellation & FFT mode"
-msgstr "Konstellatsioon ja FFT laad"
-
-msgid "Frequency & Channel"
-msgstr "Sagedus ja kanal"
-
-msgid "Frequency & Polarization"
-msgstr "Sagedus ja polarisatsioon"
-
-msgid "Inversion & Bandwidth"
-msgstr "Inversioon ja ribalaius"
-
-msgid "Inversion, Pilot & Roll-off"
-msgstr "Inversioon, piloot ja roll-off"
-
-msgid "NIM & Type"
-msgstr "NIM ja tüüp"
-
-msgid "Service & PIDs"
-msgstr "Teenus ja PIDid"
-
-msgid "Service ID"
-msgstr "Teenuse ID"
-
-msgid "Service info - service & PIDs"
-msgstr "Teenuse info - teenus ja PIDid"
-
-msgid "Service info - tuner live values"
-msgstr "Teenuse info - tuuneri tegevasetused"
-
-msgid "Service info - tuner setting values"
-msgstr "Teenuse info - tuuneri seadeasetused"
-
-msgid "Symbol rate & FEC"
-msgstr "Sümbolikiirus ja FEC"
-
-msgid "System & Modulation"
-msgstr "Süsteem ja modulatsioon"
-
-msgid "Tuner live values"
-msgstr "tegevasetused"
-
-msgid "Tuner setting values"
-msgstr "Tuuneri seaded"
-
-msgid "Videocodec, size & format"
-msgstr "Videokoodek, reso.& formaat"
-
-msgid "Connected transcoding, limit - no PiP!"
-msgstr "Ühendatud transkoodingu piirang - PIP ei ole võimalik!"
-
-msgid "Yes, only from standby"
-msgstr "Jah, ainult ootelt"
-
-msgid "Yes, only from deep standby"
-msgstr "Jah, ainult sügavootelt"
-
-msgid "DVB type"
-msgstr "DVB tüüp"
-
-msgid "Filename"
-msgstr "Faili nimi"
-
-msgid "%d ms"
-msgstr ""
-
-msgid "%d sec"
-msgstr ""
-
-msgid "HDMI Colordepth"
-msgstr ""
-
-msgid "This option allows you can config the Colordepth for UHD"
-msgstr ""
-
-msgid "Switch"
-msgstr ""
-
-msgid "Position"
-msgstr ""
-
-msgid "Show menu numbers"
-msgstr ""
-
-msgid "This option allows you to show menu number quick links."
-msgstr ""
-
-msgid ""
-"GUI needs a restart to apply a new language\n"
-"Do you want to restart the GUI now?"
-msgstr ""
-
-msgid "Power on display"
-msgstr ""
-
-msgid "This option allows you to power off the display."
-msgstr ""
-
-msgid "Show picons in display"
-msgstr ""
-
-msgid ""
-"Configure if service picons will be shown in display (when supported by the "
-"skin)."
-msgstr ""
-
-msgid "Create seperate radio userbouquet"
-msgstr ""
-
-msgid "Remove all logfiles"
-msgstr "Eemalda kõik logifailid"
-
-msgid "Remove this logfile"
-msgstr "Eemalda see logifail"
-
-msgid "Some error occured - Please try later"
-msgstr ""
-
-msgid "Troubleshoot"
-msgstr "Tõrkeotsing"
-
-msgid "Logfile does not exist anymore"
-msgstr ""
-
-msgid "Disclaimer"
-msgstr ""
-
-#~ msgid ""
-#~ "\n"
-#~ "Conflict detection disabled!"
-#~ msgstr ""
-#~ "\n"
-#~ "Konflikti avastamine keelatud!"
-
-#~ msgid "10bit"
-#~ msgstr "10bit"
-
-#~ msgid "12bit"
-#~ msgstr "12bit"
-
-#~ msgid "8bit"
-#~ msgstr "8bit"
-
-#~ msgid "Code R. LP-HP & Guard Int."
-#~ msgstr "Kood R.LP-HP&kaitsevahemik"
-
-#~ msgid "Do you want to remove all the crahs logfiles"
-#~ msgstr "Kas soovid eemaldada kõik kokkuvarisemise logifailid"
-
-#~ msgid "Every known"
-#~ msgstr "Iga tuntud"
-
-#~ msgid "FEC:"
-#~ msgstr "FEC:"
-
-#~ msgid "HD2400"
-#~ msgstr "HD2400"
-
-#~ msgid "NO"
-#~ msgstr "EI"
-
-#~ msgid "No satellite frontend found!"
-#~ msgstr "Ei leitud satelliidi tuunerit!"
-
-#~ msgid "PGS file"
-#~ msgstr "PGS fail"
-
-#~ msgid "SCPC optimized search range"
-#~ msgstr "SCPC optimeeritud otsivahemik"
-
-#~ msgid "SCR (Unicable/JESS)"
-#~ msgstr "SCR (Unicable/JESS)"
-
-#~ msgid "SCR JESS"
-#~ msgstr "SCR JESS"
-
-#~ msgid "SCR Unicable"
-#~ msgstr "SCR Unicable"
-
-#~ msgid "SRT file"
-#~ msgstr "SRT fail"
-
-#~ msgid "URL"
-#~ msgstr "URL"
-
-#~ msgid "YCbCr420"
-#~ msgstr "YCbCr420"
-
-#~ msgid "YCbCr422"
-#~ msgstr "YCbCr422"
-
-#~ msgid "YCbCr444"
-#~ msgstr "YCbCr444"
-
-#~ msgid "YES"
-#~ msgstr "JAH"
-
-#~ msgid "Zgemma H.S/H.2S/H.2H/H5"
-#~ msgstr "Zgemma H.S/H.2S/H.2H/H5"
-
-#~ msgid "Zgemma Star S/2S/H1/H2"
-#~ msgstr "Zgemma Star S/2S/H1/H2"
-
-#~ msgid "not_tested"
-#~ msgstr "pole_testitud"
-
-#~ msgid "unknown error"
-#~ msgstr "Leitud tundmatu viga, proovi uuesti!"
-
-#~ msgid "untestable"
-#~ msgstr "ebastabiilne"
-
-#~ msgid "with_errors"
-#~ msgstr "vigadega"
-
 #~ msgid "®"
 #~ msgstr "®"
-
-#~ msgid "F"
-#~ msgstr "F"
-
-#~ msgid "G"
-#~ msgstr "G"
-
-#~ msgid "H"
-#~ msgstr "H"
-
-#~ msgid "I"
-#~ msgstr "I"
-
-#~ msgid "J"
-#~ msgstr "J"
-
-#~ msgid "TUNER:"
-#~ msgstr "Tuuner:"
-
-#~ msgid "REC"
-#~ msgstr "REC"
-
-#~ msgid "Please set up tuner K"
-#~ msgstr "Seadista tuuner K"
-
-#~ msgid ""
-#~ "You need a PC connected to your receiver. If you need further "
-#~ "instructions, please visit the website http://www.dm7025.de.\n"
-#~ "Your receiver will now be halted. After you have performed the update "
-#~ "instructions from the website, your new firmware will ask you to restore "
-#~ "your settings."
-#~ msgstr ""
-#~ "Vastuvõtja tuleb ühendada arvutiga. Kui on vaja abi, siis vaata : http://"
-#~ "www.dm7025.de.\n"
-#~ "Vastuvõtja on nüüd peatatud.Kui on täidetud uuendamise juhised "
-#~ "veebilehelt, siis uus tarkvara palub taastada seadeid."
 
 #~ msgid "FBC Unicable"
 #~ msgstr "FBC Unicable"
@@ -10905,14 +9840,78 @@ msgstr ""
 #~ msgid "Unicable Matrix"
 #~ msgstr "Unicable Matrix"
 
+#~ msgid "not used"
+#~ msgstr "pole lukustatud"
+
+#~ msgid "Coderate HP"
+#~ msgstr "Coderate HP"
+
+#~ msgid "Coderate LP"
+#~ msgstr "Coderate LP"
+
+#~ msgid "Constellation"
+#~ msgstr "Konstellatsioon"
+
 #~ msgid "Frontprocessor version: %d"
 #~ msgstr "Esipaneeli protsessori versioon: %d"
+
+#~ msgid "Hierarchy information"
+#~ msgstr "Hierarhia teave"
+
+#~ msgid "Multiplex"
+#~ msgstr "Multipleks"
+
+#~ msgid "NIM"
+#~ msgstr "NIM"
+
+#~ msgid "PIDs"
+#~ msgstr "PIDid"
 
 #~ msgid "Picon and service name"
 #~ msgstr "Kanalilogo ja nimi"
 
+#~ msgid "SID"
+#~ msgstr "SID"
+
+#~ msgid "Transponder type"
+#~ msgstr "Transponderi tüüp"
+
+#~ msgid "Tuner status"
+#~ msgstr "Tuuneri olek"
+
 #~ msgid "Unicable Martix"
 #~ msgstr "Unicable Martix"
+
+#~ msgid "Videocodec"
+#~ msgstr "Videokoodek"
+
+#~ msgid "Videoformat"
+#~ msgstr "Videoformaat"
+
+#~ msgid "Videosize"
+#~ msgstr "Videosuurus"
+
+#~ msgid "When enabled the LNB power will not be switched off in standby"
+#~ msgstr ""
+#~ "Kui lubatud siis LNB toidet ei lülitata välja vastuvõtja ooterežiimis"
+
+#~ msgid "When enabled the LNB toneburst will be forced"
+#~ msgstr "Kui lubatud siis LNB toonipurse saab olema sunnitud"
+
+#~ msgid "%d-%b-%Y %-H:%M"
+#~ msgstr "%d-%b-%Y %-H:%M"
+
+#~ msgid ": %s"
+#~ msgstr ": %s"
+
+#~ msgid "Reception Settings"
+#~ msgstr "Vastuvõtu seaded"
+
+#~ msgid "Zap back to service before tuner setup?"
+#~ msgstr "Tagasi vaadatud kanalile?"
+
+#~ msgid "OSD position setup"
+#~ msgstr "Ekraanigraafika asetuse seadistus"
 
 #~ msgid ""
 #~ "Checking tuner %d\n"
@@ -10921,11 +9920,23 @@ msgstr ""
 #~ "Kontrollitakse tuuneri %d\n"
 #~ "DiSEqC porti %s / %s"
 
+#~ msgid "Compensate for overscan"
+#~ msgstr "Kompenseeri liighälvitus"
+
 #~ msgid "F1/F3"
 #~ msgstr "F1/F3"
 
 #~ msgid "HD1100/HD1200/et7x00/et8500"
 #~ msgstr "HD1100/HD1200/et7x00/et8500"
+
+#~ msgid "Immediate shutdown"
+#~ msgstr "Kohene väljalülitus"
+
+#~ msgid "Show shutdown menu"
+#~ msgstr "Kuva seiskamismenüü"
+
+#~ msgid "Silently zap between bouquets"
+#~ msgstr "Vaheta vaikselt lemmiknimekirjade vahel"
 
 #~ msgid ""
 #~ "This info is for developers only.\n"
@@ -10937,8 +9948,250 @@ msgstr ""
 #~ "Tavakasutajatele ei ole see oluline.\n"
 #~ "Ära satu paanikasse, kui siia ilmub kahtlustäratav info!"
 
+#~ msgid "Wakeup timer"
+#~ msgstr "Äratustaimer"
+
+#~ msgid "Action on long powerbutton press"
+#~ msgstr "Toitenupu pikk vajutus"
+
+#~ msgid "Action on short powerbutton press"
+#~ msgstr "Toitenupu lühike vajutus"
+
+#~ msgid "Configure the function of a long press on the power button."
+#~ msgstr "Määra, mida toitenupu pikk vajutus teeb."
+
+#~ msgid "Configure the function of a short press on the power button."
+#~ msgstr "Määra, mida toitenupu lühike vajutus teeb."
+
+#~ msgid "Hide CI messages"
+#~ msgstr "Peida CI teated"
+
 #~ msgid "Show picons in channel list"
 #~ msgstr "Näita piconeid kanalinimekirjas"
 
+#~ msgid ""
+#~ "When enabled, error messages related to the Common Interface module will "
+#~ "not be shown."
+#~ msgstr "Määrates 'jah', ei näidata CI mooduliga seotud veateateid."
+
+#~ msgid "Timer editor"
+#~ msgstr "Taimeri muutja"
+
+#~ msgid "Changelog"
+#~ msgstr "Muudatuste logi"
+
+#~ msgid "Could not connect to receiver .NFI image feed server:"
+#~ msgstr "Vastuvõtja ei saa ühendust .NFI-tarkvara serveriga:"
+
+#~ msgid "Current version:"
+#~ msgstr "Hetke versioon:"
+
+#~ msgid "Currently installed image"
+#~ msgstr "Paigaldatud tarkvara"
+
+#~ msgid "Do you want to download the image to %s ?"
+#~ msgstr "Kas soovid image alla laadida %s ?"
+
+#~ msgid "Download"
+#~ msgstr "Allalaadimine"
+
+#~ msgid "Download %s from server"
+#~ msgstr "Laadi alla %s serverist"
+
+#~ msgid "Download .NFI-files for USB-flasher"
+#~ msgstr "Allalaadimine .NFI-failid USB-le"
+
+#~ msgid "FP Upgrade"
+#~ msgstr "FP moderniseerimine"
+
+#~ msgid "FP upgrade required"
+#~ msgstr "FP ajakohastamine on nõutav"
+
+#~ msgid "Flash"
+#~ msgstr "Flash"
+
+#~ msgid "Flashing failed"
+#~ msgstr "Flashimine nurjus"
+
+#~ msgid "Get latest experimental image"
+#~ msgstr "Hangi uusim eksperimentaalne tarkvara"
+
+#~ msgid "Get latest release image"
+#~ msgstr "Hangi uusim stabiilne tarkvara"
+
+#~ msgid "NFI image flashing"
+#~ msgstr "NFI tarkvara paigaldamine"
+
+#~ msgid "NFI image flashing completed. Press Yellow to Reboot!"
+#~ msgstr ""
+#~ "NFI tarkvara on paigaldatud. Taaskäivitamiseks vajuta kollast nuppu !"
+
+#~ msgid "New version:"
+#~ msgstr "Uus versioon:"
+
+#~ msgid "No details for this image file"
+#~ msgstr "Pole täpsemat informatsiooni sellele tarkvarale"
+
+#~ msgid "Please check your network settings!"
+#~ msgstr "Palun kontrolli oma võrguseadeid!"
+
+#~ msgid "Please select an NFI file and press green key to flash!"
+#~ msgstr "Palun vali NFI fail ja vajuta flashimiseks rohelist nuppu!"
+
+#~ msgid "Prepare another USB stick for image flashing"
+#~ msgstr "Valmista ette teine USB pulk image flashimiseks"
+
+#~ msgid ""
+#~ "Press OK and configure the days and times wakeup receiver from deep "
+#~ "standby mode."
+#~ msgstr ""
+#~ "Vajuta OK ning määra vastuvõtja sügavootest ärkamise päevad ja ajad."
+
+#~ msgid "Reboot"
+#~ msgstr "Taaskäivitus"
+
+#~ msgid "Restore is running..."
+#~ msgstr "Taastamine..."
+
+#~ msgid "Select an image to be downloaded"
+#~ msgstr "Vali tarkvara allalaadimiseks"
+
+#~ msgid "Select desired image from feed list"
+#~ msgstr "Vali soovitud tarkvara feedide nimekirjast"
+
+#~ msgid ""
+#~ "Shall the USB stick wizard proceed and program the image file %s into "
+#~ "flash memory?"
+#~ msgstr ""
+#~ "Kas USB pulga abiline alustab toimingut ja salvestab tarkvara %s flash "
+#~ "mälusse?"
+
+#~ msgid "System Message"
+#~ msgstr "Süsteemi teade"
+
+#~ msgid "System Message Check"
+#~ msgstr "Süsteemi teate kontroll"
+
+#~ msgid ""
+#~ "The USB stick was prepared to be bootable.\n"
+#~ "Now you can download an NFI image file!"
+#~ msgstr ""
+#~ "USB pulk oli ette valmistatud käivitatavana.\n"
+#~ "Nüüd saad NFI tarkvara faili alla laadida!"
+
+#~ msgid ""
+#~ "The following device was found:\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Do you want to write the USB flasher to this stick?"
+#~ msgstr ""
+#~ "Leitud järgnev seade:\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Kas soovid USB flasherit kirjutada sellele mälupulgale?"
+
+#~ msgid "The md5sum validation failed, the file may be corrupted!"
+#~ msgstr "md5sum kontroll ebaõnnestus, fail võib olla rikutud!"
+
+#~ msgid ""
+#~ "The wizard found a configuration backup. Do you want to restore your old "
+#~ "settings from %s?"
+#~ msgstr ""
+#~ "Abiline leidis konfiguratsiooni varukoopia. Kas soovid taastada vanad "
+#~ "seaded %s?"
+
+#~ msgid ""
+#~ "This plugin creates a USB stick which can be used to update the firmware "
+#~ "of your receiver without the need for a network or WLAN connection.\n"
+#~ "First, a USB stick needs to be prepared so that it becomes bootable.\n"
+#~ "In the next step, an NFI image file can be downloaded from the update "
+#~ "server and saved on the USB stick.\n"
+#~ "If you already have a prepared bootable USB stick, please insert it now. "
+#~ "Otherwise plug in a USB stick with a minimum size of 64 MB!"
+#~ msgstr ""
+#~ "See laiendus valmistab ette USB pulga, mida saab kasutada vastuvõtja "
+#~ "tarkvara uuendamiseks ilma võrgu- või WLAN ühenduseta. \n"
+#~ "Algul tuleb USB pulk teha alglaetavaks. \n"
+#~ "Siis saab uuenduste serverist alla laadida NFI tarkvara faili ja "
+#~ "salvestada selle USB pulgale. \n"
+#~ "Kui oled juba ette valmistanud alglaetava USB pulga, siis ühenda see "
+#~ "nüüd. Vastasel korral ühenda min. 64 MB USB pulk!"
+
+#~ msgid ""
+#~ "To update your receiver firmware, please follow these steps:\n"
+#~ "1) Turn off your box with the rear power switch and make sure the "
+#~ "bootable USB stick is plugged in.\n"
+#~ "2) Turn mains back on and hold the DOWN button on the front panel pressed "
+#~ "for 10 seconds.\n"
+#~ "3) Wait for bootup and follow instructions of the wizard."
+#~ msgstr ""
+#~ "Vastuvõtja püsivara uuendamiseks toimi järgnevalt: \n"
+#~ "1) Lülita vastuvõtja tagumisest lülitist välja ja veendu, et alglaaditav "
+#~ "USB pulk on ühendatud. \n"
+#~ "2) Lülita vastuvõtja sisse, hoides CH- nuppu esipaneelil vajutatuna 10 "
+#~ "sekundi jooksul. \n"
+#~ "3) Oota alglaadimiseni ja jälgi abilise juhendeid ekraanil."
+
+#~ msgid "USB stick wizard"
+#~ msgstr "USB-mälupulga juhis"
+
+#~ msgid "WakeupTimer Configuration"
+#~ msgstr "Äratustaimeri seadistus"
+
+#~ msgid ""
+#~ "You have chosen to create a new .NFI flasher bootable USB stick. This "
+#~ "will repartition the USB stick and therefore all data on it will be "
+#~ "erased."
+#~ msgstr ""
+#~ "Soovid luua uue alglaetava USB-pulga tarkvarale. Kõik vana info USB "
+#~ "pulgal läheb kaduma !!!"
+
+#~ msgid ""
+#~ "Your frontprocessor firmware must be upgraded.\n"
+#~ "Press OK to start upgrade."
+#~ msgstr ""
+#~ "Frontprotsessori tarkvara tuleb uuendada.\n"
+#~ "Uuendamiseks vajuta OK."
+
+#~ msgid "continue"
+#~ msgstr "jätka"
+
+#~ msgid "currently installed image: %s"
+#~ msgstr "praegu paigaldatud tarkvara: %s"
+
+#~ msgid "Conflicting timer"
+#~ msgstr "Vastuolud taimeris"
+
 #~ msgid "HD1100/et7x00/et8500"
 #~ msgstr "HD1100/et7x00/et8500"
+
+#~ msgid "Log results to harddisk"
+#~ msgstr "Logi tulemused kõvakettale"
+
+#~ msgid "The results have been written to %s."
+#~ msgstr "Tulemused on salvestatud %s."
+
+#~ msgid "Descramble http streams"
+#~ msgstr "Dekodeeri http vood"
+
+#~ msgid ""
+#~ "When enabled, http streams are descrambled on the server side. The "
+#~ "(remote) client receiver does not have to do descrambling."
+#~ msgstr ""
+#~ "Määrates 'jah', dekodeeritakse http vood serveri poolt. Klientvastuvõtja "
+#~ "ei pea neid enam dekodeerima."
+
+#~ msgid ""
+#~ "A recording is currently running. Please stop the recording before trying "
+#~ "to configure the positioner."
+#~ msgstr ""
+#~ "Hetkel salvestatakse. Peata salvestus, enne kui üritad muuta "
+#~ "positsioneeri sätteid."
+
+#~ msgid "Polarisation:"
+#~ msgstr "Polarisatsioon:"
+
+#~ msgid "Positioner Setup"
+#~ msgstr "Positsioneeri seadistamine"
