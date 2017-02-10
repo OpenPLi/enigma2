@@ -182,10 +182,12 @@ class ServiceInfo(Screen):
 				if self["key_blue"].text == _("Tuner setting values"):
 					self["Title"].text = _("Service info - tuner setting values")
 					self["key_blue"].text = self["blue"].text = _("Tuner live values")
+					data = True
 				else:
 					self["Title"].text = _("Service info - tuner live values")
 					self["key_blue"].text = self["blue"].text = _("Tuner setting values")
-				frontendData = self.feinfo and self.feinfo.getAll(self.getTitle() == _("Service info - tuner setting values"))
+					data = False
+				frontendData = self.feinfo and self.feinfo.getAll(data)
 				self.fillList(self.getFEData(frontendData))
 			elif self.transponder_info:
 				self["Title"].text = _("Service info - tuner setting values")
