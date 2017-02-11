@@ -19,7 +19,6 @@ inStandby = None
 class Standby(Screen):
 	def Power(self):
 		print "[Standby] leave standby"
-		self.leaveMute()
 		self.close(True)
 
 	def setMute(self):
@@ -132,6 +131,7 @@ class Standby(Screen):
 		if RecordTimer.RecordTimerEntry.receiveRecordEvents:
 			RecordTimer.RecordTimerEntry.stopTryQuitMainloop()
 		self.avswitch.setInput("ENCODER")
+		self.leaveMute()
 		if os.path.exists("/usr/script/standby_leave.sh"):
 			Console().ePopen("/usr/script/standby_leave.sh")
 
