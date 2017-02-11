@@ -165,6 +165,17 @@ void eActionMap::bindToggle(const std::string &domain, const std::string &device
 	}
 }
 
+void eActionMap::unbindNativeKey(const std::string &context, int action)
+{
+	for (std::multimap<std::string, eNativeKeyBinding>::iterator i(m_native_keys.begin()); i != m_native_keys.end(); ++i)
+	{
+		if (i->first == context && i->second.m_action == action)
+		{
+			m_native_keys.erase(i);
+			i = m_native_keys.begin();
+		}
+	}
+}
 
 void eActionMap::unbindKeyDomain(const std::string &domain)
 {
