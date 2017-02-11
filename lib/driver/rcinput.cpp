@@ -20,6 +20,8 @@ void eRCDeviceInputDev::handleCode(long rccode)
 	if (ev->type != EV_KEY)
 		return;
 
+	eDebug("[eRCDeviceInputDev] %x %x %x", ev->value, ev->code, ev->type);
+
 	int km = iskeyboard ? input->getKeyboardMode() : eRCInput::kmNone;
 
 	switch (ev->code)
@@ -91,7 +93,7 @@ void eRCDeviceInputDev::handleCode(long rccode)
 #if KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE
 	if (ev->code == KEY_PLAY)
 	{
-		if (id == "dreambox advanced remote control (native)")
+		if ((id == "dreambox advanced remote control (native)")  || (id == "bcm7325 remote control"))
 		{
 			/* 8k rc has a KEY_PLAYPAUSE key, which sends KEY_PLAY events. Correct this, so we do not have to place hacks in the keymaps. */
 			ev->code = KEY_PLAYPAUSE;
@@ -206,6 +208,35 @@ public:
 		}
 		eDebug("[eInputDeviceInit] Remove '%s', not found", filename);
 	}
+
+	void addAll(void)
+	{
+		int i = 0;
+		if (consoleFd < 0)
+		{
+			consoleFd = ::open("/dev/tty0", O_RDWR);
+			printf("consoleFd %d\n", consoleFd);
+		}
+		while (1)
+		{
+			char filename[32];
+			sprintf(filename, "/dev/input/event%d", i);
+			if (::access(filename, R_OK) < 0) break;
+			add(filename);
+			++i;
+		}
+		eDebug("[eInputDeviceInit] Found %d input devices.", i);
+	}
+
+	void removeAll(void)
+	{
+		int size = items.size();
+		for (itemlist::iterator it = items.begin(); it != items.end(); ++it)
+		{
+			delete *it;
+		}
+		items.clear();
+	}
 };
 
 eAutoInitP0<eInputDeviceInit> init_rcinputdev(eAutoInitNumbers::rc+1, "input device driver");
@@ -218,4 +249,14 @@ void addInputDevice(const char* filename)
 void removeInputDevice(const char* filename)
 {
 	init_rcinputdev->remove(filename);
+}
+
+void addAllInputDevices(void)
+{
+	init_rcinputdev->addAll();
+}
+
+void removeAllInputDevices(void)
+{
+	init_rcinputdev->removeAll();
 }
