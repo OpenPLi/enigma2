@@ -73,16 +73,16 @@
 		<widget source="session.RecordState" render="FixedLabel" text="&#174;" position="380,10" foregroundColor="#ff0000" size="55,45" font="FdLcD;40" halign="left" valign="center" zPosition="22">
 			<convert type="ConditionalShowHide"></convert>
 		</widget>
-		<widget source="session.FrontendInfo" render="Label" position="240,102" size="540,50" halign="center" valign="bottom" font="FdLcD;42">
+		<widget source="session.FrontendInfo" render="Label" position="240,102" size="540,50" halign="right" valign="bottom" font="FdLcD;42">
 			<convert type="FrontendInfo">STRING,24,0</convert>
 		</widget>
-		<widget source="session.CurrentService" render="Label" position="10,200" size="780,70" font="Medium" halign="center" valign="top" foregroundColor="yellow" >
+		<widget source="session.CurrentService" render="Label" position="10,150" size="780,70" font="Medium" halign="center" valign="top" foregroundColor="yellow" >
 			<convert type="ServiceName">Name</convert>
 		</widget>
-		<widget source="session.Event_Now" render="Progress" position="10,270" size="780,15" borderWidth="0" foregroundColor="lightcyan" backgroundColor="darkgrey" >
+		<widget source="session.Event_Now" render="Progress" position="10,220" size="780,15" borderWidth="0" foregroundColor="lightcyan" backgroundColor="darkgrey" >
 			<convert type="EventTime">Progress</convert>
 		</widget>
-		<widget source="session.Event_Now" render="Label" position="10,290" size="780,70" font="Medium" halign="center" valign="bottom" >
+		<widget source="session.Event_Now" render="Label" position="10,240" size="780,140" font="Medium" halign="center" valign="top" >
 			<convert type="EventName">Name</convert>
 		</widget>
 		<widget source="session.Event_Now" render="Label" position="10,405" size="150,55" font="Small" valign="bottom" foregroundColor="lightgrey">
@@ -114,16 +114,16 @@
 		<widget source="session.RecordState" render="FixedLabel" text="&#174;" position="380,10" foregroundColor="#ff0000" size="55,45" font="FdLcD;40" halign="left" valign="center" zPosition="22">
 			<convert type="ConditionalShowHide"></convert>
 		</widget>
-		<widget source="session.FrontendInfo" render="Label" position="240,102" size="540,50" halign="center" valign="bottom" font="FdLcD;42">
+		<widget source="session.FrontendInfo" render="Label" position="240,102" size="540,50" halign="right" valign="bottom" font="FdLcD;42">
 			<convert type="FrontendInfo">STRING,24,0</convert>
 		</widget>
-		<widget source="parent.ServiceEvent" render="Label" position="10,200" size="780,70" font="Medium" halign="center" valign="top" foregroundColor="yellow" >
+		<widget source="parent.ServiceEvent" render="Label" position="10,150" size="780,70" font="Medium" halign="center" valign="top" foregroundColor="yellow" >
 			<convert type="ServiceName">Name</convert>
 		</widget>
-		<widget source="parent.ServiceEvent" render="Progress" position="10,270" size="780,15" borderWidth="0" foregroundColor="lightcyan" backgroundColor="darkgrey" >
+		<widget source="parent.ServiceEvent" render="Progress" position="10,230" size="780,15" borderWidth="0" foregroundColor="lightcyan" backgroundColor="darkgrey" >
 			<convert type="EventTime">Progress</convert>
 		</widget>
-		<widget source="parent.ServiceEvent" render="Label" position="10,290" size="780,70" font="Medium" halign="center" valign="bottom" >
+		<widget source="parent.ServiceEvent" render="Label" position="10,240" size="780,140" font="Medium" halign="center" valign="top" >
 			<convert type="EventName">Name</convert>
 		</widget>
 		<widget source="parent.ServiceEvent" render="Label" position="10,405" size="150,55" font="Small" valign="bottom" foregroundColor="lightgrey">
@@ -155,16 +155,16 @@
 		<widget source="session.RecordState" render="FixedLabel" text="&#174;" position="380,10" foregroundColor="#ff0000" size="55,45" font="FdLcD;40" halign="left" valign="center" zPosition="22">
 			<convert type="ConditionalShowHide"></convert>
 		</widget>
-		<widget source="session.FrontendInfo" render="Label" position="240,102" size="540,50" halign="center" valign="bottom" font="FdLcD;42">
+		<widget source="session.FrontendInfo" render="Label" position="240,102" size="540,50" halign="right" valign="bottom" font="FdLcD;42">
 			<convert type="FrontendInfo">STRING,24,0</convert>
 		</widget>
-		<widget source="parent.Service" render="Label" position="10,200" size="780,70" font="Medium" halign="center" valign="top" foregroundColor="yellow">
+		<widget source="parent.Service" render="Label" position="10,150" size="780,70" font="Medium" halign="center" valign="top" foregroundColor="yellow">
 			<convert type="ServiceName">Name</convert>
 		</widget>
-		<widget source="parent.Event" render="Progress" position="10,270" size="780,15" borderWidth="0" foregroundColor="lightcyan" backgroundColor="darkgrey">
+		<widget source="parent.Event" render="Progress" position="10,220" size="780,15" borderWidth="0" foregroundColor="lightcyan" backgroundColor="darkgrey">
 			<convert type="EventTime">Progress</convert>
 		</widget>
-		<widget source="parent.Event" render="Label" position="10,290" size="780,70" font="Medium" halign="center" valign="bottom" >
+		<widget source="parent.Event" render="Label" position="10,240" size="780,140" font="Medium" halign="center" valign="top" >
 			<convert type="EventName">Name</convert>
 		</widget>
 		<widget source="parent.Event" render="Label" position="10,405" size="150,55" font="Small" valign="bottom" foregroundColor="lightgrey">
@@ -180,16 +180,10 @@
 			<convert type="RemainingToText">FOLLOW</convert>
 		</widget>
 	</screen>
+	<screen name="GraphMultiEPG_summary" position="fill">
+		<panel name="EPGSelection_summary" />
+	</screen>
 	<screen name="QuickEPG_summary" position="fill">
-		<panel name="EPGSelection_summary" />
-	</screen>
-	<screen name="GraphicalEPG_summary" position="fill">
-		<panel name="EPGSelection_summary" />
-	</screen>
-	<screen name="GraphicalEPGPIG_summary" position="fill">
-		<panel name="EPGSelection_summary" />
-	</screen>
-	<screen name="GraphicalInfoBarEPG_summary" position="fill">
 		<panel name="EPGSelection_summary" />
 	</screen>
 	<screen name="EPGSelectionMulti_summary" position="fill">
