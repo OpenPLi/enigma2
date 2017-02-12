@@ -532,7 +532,7 @@ def InitUsageConfig():
 	if SystemInfo["HasHDMIpreemphasis"]:
 		def setHDMIpreemphasis(configElement):
 			open(SystemInfo["HasHDMIpreemphasis"], "w").write(configElement.value)
-		config.av.hdmipreemphasis = ConfigSelection(default = "off", choices = [ ("on", _("Yes")), ("off", _("No"))] 
+		config.av.hdmipreemphasis = ConfigSelection(default = "off", choices = [ ("on", _("Yes")), ("off", _("No"))] )
 		config.av.hdmipreemphasis.addNotifier(setHDMIpreemphasis)
 
 	config.subtitles = ConfigSubsection()
