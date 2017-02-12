@@ -141,11 +141,12 @@ void eDVBFrontendParametersCable::set(const CableDeliverySystemDescriptor &descr
 		case 2: fec_inner = FEC_2_3; break;
 		case 3: fec_inner = FEC_3_4; break;
 		case 4: fec_inner = FEC_5_6; break;
-		case 5: fec_inner = FEC_7_8; break;
-		case 6: fec_inner = FEC_8_9; break;
-		case 7: fec_inner = FEC_3_5; break;
-		case 8: fec_inner = FEC_4_5; break;
-		case 9: fec_inner = FEC_9_10; break;
+		case 5: fec_inner = FEC_6_7; break;
+		case 6: fec_inner = FEC_7_8; break;
+		case 7: fec_inner = FEC_8_9; break;
+		case 8: fec_inner = FEC_3_5; break;
+		case 9: fec_inner = FEC_4_5; break;
+		case 10: fec_inner = FEC_9_10; break;
 	}
 	modulation = descriptor.getModulation();
 	if (modulation > Modulation_QAM256)
@@ -1959,6 +1960,7 @@ void eDVBFrontend::setFrontend(bool recvEvents)
 				case eDVBFrontendParametersCable::FEC_2_3: p[cmdseq.num].u.data = FEC_2_3; break;
 				case eDVBFrontendParametersCable::FEC_3_4: p[cmdseq.num].u.data = FEC_3_4; break;
 				case eDVBFrontendParametersCable::FEC_5_6: p[cmdseq.num].u.data = FEC_5_6; break;
+				case eDVBFrontendParametersCable::FEC_6_7: p[cmdseq.num].u.data = FEC_6_7; break;
 				case eDVBFrontendParametersCable::FEC_7_8: p[cmdseq.num].u.data = FEC_7_8; break;
 				case eDVBFrontendParametersCable::FEC_8_9: p[cmdseq.num].u.data = FEC_8_9; break;
 				case eDVBFrontendParametersCable::FEC_3_5: p[cmdseq.num].u.data = FEC_3_5; break;
