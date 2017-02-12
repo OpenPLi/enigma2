@@ -54,4 +54,4 @@ SystemInfo["CommonInterfaceCIDelay"] = fileCheck("/proc/stb/tsmux/rmx_delay")
 SystemInfo["CanDoTranscodeAndPIP"] = HardwareInfo().get_device_model() in "vusolo4k"
 SystemInfo["HasColordepth"] = fileCheck("/proc/stb/video/hdmi_colordepth")
 SystemInfo["HasFrontDisplayPicon"] = HardwareInfo().get_device_model() in ("vusolo4k", "et8500")
-
+SystemInfo["HasHDMIpreemphasis"] = fileCheck("/proc/stb/hdmi/preemphasis")

@@ -123,6 +123,8 @@ class VideoSetup(Screen, ConfigListScreen):
 			self.list.append(getConfigListEntry(_("HDMI Colorspace"), config.av.hdmicolorspace, _("This option allows you can config the Colorspace from Auto to RGB")))
 		if SystemInfo["HasColordepth"]:
 			self.list.append(getConfigListEntry(_("HDMI Colordepth"), config.av.hdmicolordepth, _("This option allows you can config the Colordepth for UHD")))
+		if SystemInfo["HasHDMIpreemphasis"]:
+			self.list.append(getConfigListEntry(_("Use HDMI pre-emphasis"), config.av.hdmipreemphasis, _("This option can be useful for long HDMI cables.")))
 
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
