@@ -38,7 +38,7 @@ class SkinError(Exception):
 		self.msg = message
 
 	def __str__(self):
-		return "{%s}: %s. Please contact the skin's author!" % config.skin.primary_skin.value, self.msg
+		return "{%s}: %s. Please contact the skin's author!" % (config.skin.primary_skin.value, self.msg)
 
 dom_skins = [ ]
 
