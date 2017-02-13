@@ -45,7 +45,7 @@ def parseEvent(ev, description = True):
 	eit = ev.getEventId()
 	begin -= config.recording.margin_before.value * 60
 	end += config.recording.margin_after.value * 60
-	return begin, end, name, description, eit
+	return (begin, end, name, description, eit)
 
 class AFTEREVENT:
 	def __init__(self):
