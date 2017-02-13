@@ -287,14 +287,34 @@ class Network:
 		moduledir = self.getWlanModuleDir(iface)
 		if moduledir:
 			name = os.path.basename(os.path.realpath(moduledir))
-			if name in ('ath_pci','ath5k'):
+			if name.startswith('ath') or name.startswith('carl'):
 				name = 'Atheros'
-			elif name in ('rt73','rt73usb','rt3070sta'):
+			elif name.startswith('rt2') or name.startswith('rt3') or name.startswith('rt5') or name.startswith('rt6') or name.startswith('rt7'):
 				name = 'Ralink'
-			elif name == 'zd1211b':
+			elif name.startswith('zd'):
 				name = 'Zydas'
-			elif name == 'r871x_usb_drv':
+			elif name.startswith('rtl') or name.startswith('r8'):
 				name = 'Realtek'
+			elif name.startswith('smsc'):
+				name = 'SMSC'
+			elif name.startswith('peg'):
+				name = 'Pegasus'
+			elif name.startswith('rn'):
+				name = 'RNDIS'
+			elif name.startswith('mw') or name.startswith('libertas'):
+				name = 'Marvel'
+			elif name.startswith('p5'):
+				name = 'Prism'
+			elif name.startswith('as') or name.startswith('ax'):
+				name = 'ASIX'
+			elif name.startswith('dm'):
+				name = 'Davicom'
+			elif name.startswith('mcs'):
+				name = 'MosChip'
+			elif name.startswith('at'):
+				name = 'Atmel'
+			elif name.startswith('iwm'):
+				name = 'Intel'				
 		else:
 			name = _('Unknown')
 
