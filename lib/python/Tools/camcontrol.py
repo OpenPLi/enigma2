@@ -21,7 +21,8 @@ class CamControl:
 	def current(self):
 		try:
 			l = os.readlink(self.link)
-			return os.path.split(l)[1].split('.', 2)[1]
+			prefix = self.name + '.'
+			return os.path.split(l)[1].split(prefix, 2)[1]
 		except:
 			pass
 		return None
