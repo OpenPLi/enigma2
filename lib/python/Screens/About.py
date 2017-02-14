@@ -417,7 +417,9 @@ class Troubleshoot(Screen):
 
 	def getLogFilesList(self):
 		import glob
-		return [x for x in sorted(glob.glob("/mnt/hdd/*.log"), key=lambda x: os.path.isfile(x) and os.path.getmtime(x))] + (os.path.isfile("/home/root/enigma2_crash.log") and ["/home/root/enigma2_crash.log"] or [])
+		home_root = "/home/root/enigma2_crash.log"
+		tmp = "/tmp/enigma2_crash.log"
+		return [x for x in sorted(glob.glob("/mnt/hdd/*.log"), key=lambda x: os.path.isfile(x) and os.path.getmtime(x))] + (os.path.isfile(home_root) and [home_root] or []) + (os.path.isfile(tmp) and [tmp] or [])
 
 	def updateOptions(self):
 		self.titles = ["dmesg", "ifconfig", "df", "top", "ps"]
