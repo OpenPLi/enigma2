@@ -1,4 +1,5 @@
-import sys, os
+import sys
+import os
 if os.path.isfile("/usr/lib/enigma2/python/enigma.zip"):
 	sys.path.append("/usr/lib/enigma2/python/enigma.zip")
 
@@ -406,7 +407,6 @@ class AutoScartControl:
 				self.scartDialog.switchToTV()
 
 profile("Load:CI")
-from enigma import eDVBCIInterfaces
 from Screens.Ci import CiHandler
 
 profile("Load:VolumeControl")
@@ -435,12 +435,6 @@ def runScreenTest():
 	screensToRun.sort()
 
 	enigma.ePythonConfigQuery.setQueryFunc(configfile.getResolvedKey)
-
-#	eDVBCIInterfaces.getInstance().setDescrambleRules(0 # Slot Number
-#		,(	["1:0:1:24:4:85:C00000:0:0:0:"], #service_list
-#			["PREMIERE"], #provider_list,
-#			[] #caid_list
-#		));
 
 	def runNextScreen(session, screensToRun, *result):
 		if result:
@@ -477,7 +471,7 @@ def runScreenTest():
 
 	profile("wakeup")
 	from time import time, strftime, localtime
-	from Tools.StbHardware import setFPWakeuptime, getFPWakeuptime, setRTCtime
+	from Tools.StbHardware import setFPWakeuptime, setRTCtime
 	from Screens.SleepTimerEdit import isNextWakeupTime
 	#get currentTime
 	nowTime = time()
