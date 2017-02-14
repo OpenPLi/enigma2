@@ -17,7 +17,7 @@ def getHotkeys():
 	return [(_("Red") + " " + _("long"), "red_long", ""),
 		(_("Green") + " " + _("long"), "green_long", ""),
 		(_("Yellow") + " " + _("long"), "yellow_long", ""),
-		(_("Blue") + " " + _("long"), "blue_long", "Plugins/PLi/SoftcamSetup/1"),
+		(_("Blue") + " " + _("long"), "blue_long", "Module/Screens.SoftcamSetup/SoftcamSetup"),
 		("F1/LAN", "f1", ""),
 		("F1" + " " + _("long"), "f1_long", ""),
 		("F2", "f2", ""),
