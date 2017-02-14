@@ -146,6 +146,7 @@ void eDVBFrontendParametersCable::set(const CableDeliverySystemDescriptor &descr
 		case 7: fec_inner = FEC_3_5; break;
 		case 8: fec_inner = FEC_4_5; break;
 		case 9: fec_inner = FEC_9_10; break;
+		case 10: fec_inner = FEC_6_7; break;
 	}
 	modulation = descriptor.getModulation();
 	if (modulation > Modulation_QAM256)
@@ -519,8 +520,6 @@ eDVBFrontend::eDVBFrontend(const char *devicenodename, int fe, int &ok, bool sim
 	,m_fd(-1), m_dvbversion(0), m_rotor_mode(false), m_need_rotor_workaround(false), m_multitype(false)
 	,m_state(stateClosed), m_timeout(0), m_tuneTimer(0)
 {
-	char filename[64];
-
 	m_filename = devicenodename;
 
 	m_timeout = eTimer::create(eApp);
@@ -535,14 +534,9 @@ eDVBFrontend::eDVBFrontend(const char *devicenodename, int fe, int &ok, bool sim
 	m_data[FREQ_OFFSET] = 0;
 	m_idleInputpower[0]=m_idleInputpower[1]=0;
 
-	snprintf(filename, sizeof(filename), "/proc/stb/frontend/%d/fbc_id", m_slotid);
-
-	if (access(filename, F_OK) == 0)
-		m_fbc = true;
-
 	ok = !openFrontend();
 	closeFrontend();
-}
+};
 
 void eDVBFrontend::reopenFrontend()
 {
@@ -1007,36 +1001,36 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 	}
 	else if (!strcmp(m_description, "Vuplus DVB-S NIM(AVL2108)")) // VU+Ultimo/VU+Uno DVB-S2 NIM
 	{
-		ret = (int)((((double(snr) / (65536.0 / 100.0)) * 0.1600) + 0.2100) * 100);
+		ret = (int)((((double(snr) / (65535.0 / 100.0)) * 0.1600) + 0.2100) * 100);
 	}
 	else if (!strcmp(m_description, "Vuplus DVB-S NIM(AVL6222)")) // VU+ DVB-S2 Dual NIM
 	{
-		ret = (int)((((double(snr) / (65536.0 / 100.0)) * 0.1244) + 2.5079) * 100);
+		ret = (int)((((double(snr) / (65535.0 / 100.0)) * 0.1244) + 2.5079) * 100);
 		sat_max = 1490;
 	}
 	else if (!strcmp(m_description, "Vuplus DVB-S NIM(AVL6211)")) // VU+ DVB-S2 Dual NIM
 	{
-		ret = (int)((((double(snr) / (65536.0 / 100.0)) * 0.1244) + 2.5079) * 100);
+		ret = (int)((((double(snr) / (65535.0 / 100.0)) * 0.1244) + 2.5079) * 100);
 	}
 	else if (!strcmp(m_description, "BCM7335 DVB-S2 NIM (internal)")) // VU+DUO DVB-S2 NIM
 	{
-		ret = (int)((((double(snr) / (65536.0 / 100.0)) * 0.1244) + 2.5079) * 100);
+		ret = (int)((((double(snr) / (65535.0 / 100.0)) * 0.1244) + 2.5079) * 100);
 	}
 	else if (!strcmp(m_description, "BCM7346 (internal)")) // MaxDigital XP1000
 	{
-		ret = (int)((((double(snr) / (65536.0 / 100.0)) * 0.1880) + 0.1959) * 100);
+		ret = (int)((((double(snr) / (65535.0 / 100.0)) * 0.1880) + 0.1959) * 100);
 	}
 	else if (!strcmp(m_description, "BCM7356 DVB-S2 NIM (internal)")) // VU+ Solo2
 	{
-		ret = (int)((((double(snr) / (65536.0 / 100.0)) * 0.1800) - 1.0000) * 100);
+		ret = (int)((((double(snr) / (65535.0 / 100.0)) * 0.1800) - 1.0000) * 100);
 	}
 	else if (!strcmp(m_description, "Vuplus DVB-S NIM(7376 FBC)")) // VU+ Solo4k
 	{
-		ret = (int)((((double(snr) / (65536.0 / 100.0)) * 0.1480) + 0.9560) * 100);
+		ret = (int)((((double(snr) / (65535.0 / 100.0)) * 0.1480) + 0.9560) * 100);
 	}
 	else if (!strcmp(m_description, "BCM7362 (internal) DVB-S2")) // Xsarius
 	{
-		ret = (int)((((double(snr) / (65536.0 / 100.0)) * 0.28) - 10.0) * 100);
+		ret = (int)((((double(snr) / (65535.0 / 100.0)) * 0.28) - 10.0) * 100);
 	}
 	else if (!strcmp(m_description, "Genpix"))
 	{
@@ -1056,6 +1050,15 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 		case eDVBFrontendParametersCable::Modulation_QAM128: ret = (int)(-875 * log(((double)mse) / 650)); break;
 		default: break;
 		}
+	}
+	else if (!strcmp(m_description, "Broadcom BCM73XX") ||
+			 !strcmp(m_description, "FTS-260 (Montage RS6000)") ||
+			 !strcmp(m_description, "Panasonic MN88472") ||
+			 !strcmp(m_description, "Panasonic MN88473"))
+	{
+		ret = snr * 100 / 256;
+		if (!strcmp(m_description, "FTS-260 (Montage RS6000)"))
+			sat_max = 1490;
 	}
 	else if (!strcmp(m_description, "Si216x"))
 	{
@@ -1112,16 +1115,16 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 		switch (type)
 		{
 		case feSatellite:
-			signalquality = (ret >= sat_max ? 65536 : ret * 65536 / sat_max);
+			signalquality = (ret >= sat_max ? 65535 : ret * 65535 / sat_max);
 			break;
 		case feCable: // we assume a max of 42db here
-			signalquality = (ret >= 4200 ? 65536 : ret * 65536 / 4200);
+			signalquality = (ret >= 4200 ? 65535 : ret * 65535 / 4200);
 			break;
 		case feTerrestrial: // we assume a max of 29db here
-			signalquality = (ret >= ter_max ? 65536 : ret * 65536 / ter_max);
+			signalquality = (ret >= ter_max ? 65535 : ret * 65535 / ter_max);
 			break;
 		case feATSC: // we assume a max of 42db here
-			signalquality = (ret >= atsc_max ? 65536 : ret * 65536 / atsc_max);
+			signalquality = (ret >= atsc_max ? 65535 : ret * 65535 / atsc_max);
 			break;
 		}
 	}
@@ -1962,6 +1965,7 @@ void eDVBFrontend::setFrontend(bool recvEvents)
 				case eDVBFrontendParametersCable::FEC_3_5: p[cmdseq.num].u.data = FEC_3_5; break;
 				case eDVBFrontendParametersCable::FEC_4_5: p[cmdseq.num].u.data = FEC_4_5; break;
 				case eDVBFrontendParametersCable::FEC_9_10: p[cmdseq.num].u.data = FEC_9_10; break;
+				case eDVBFrontendParametersCable::FEC_6_7: p[cmdseq.num].u.data = FEC_6_7; break;
 			}
 			cmdseq.num++;
 

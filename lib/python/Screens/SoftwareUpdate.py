@@ -114,7 +114,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 		if config.usage.show_update_disclaimer.value or justShow:
 			message = _("The OpenPLi team would like to point out that upgrading to the latest nightly build comes not only with the latest features, but also with some risks. After the update, it is possible that your device no longer works as expected. We recommend you create backups with Autobackup or Backupsuite. This allows you to quickly and easily restore your device to its previous state, should you experience any problems. If you encounter a 'bug', please report the issue on www.openpli.org.\n\nDo you understand this?")
 			list = not justShow and [(_("no"), False), (_("yes"), True), (_("yes") + " " + _("and never show this message again"), "never")] or []
-			self.session.openWithCallback(boundFunction(self.disclaimerCallback, justShow), MessageBox, message, list=list)
+			self.session.openWithCallback(boundFunction(self.disclaimerCallback, justShow), MessageBox, message, list=list,  title=_("Disclaimer"))
 		else:
 			self.startActualUpdate(True)
 
@@ -230,7 +230,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 				if not config.usage.show_update_disclaimer.value:
 					choices.append((_("Show disclaimer"), "disclaimer"))
 				choices.append((_("Cancel"), ""))
-				self.session.openWithCallback(self.startActualUpgrade, ChoiceBox, title=message, list=choices)
+				self.session.openWithCallback(self.startActualUpgrade, ChoiceBox, title=message, list=choices, windowTitle=self.title)
 			elif self.channellist_only > 0:
 				if self.channellist_only == 1:
 					self.setEndMessage(_("Could not find installed channel list."))

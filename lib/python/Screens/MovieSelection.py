@@ -1196,7 +1196,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 
 	def itemSelectedCheckTimeshiftCallback(self, ext, path, answer):
 		if answer:
-			if ext == '.iso' and BlurayPlayer is not None:
+			if ext in (".iso", ".img", ".nrg") and BlurayPlayer is not None:
 				try:
 					from Plugins.Extensions.BlurayPlayer import blurayinfo
 					if blurayinfo.isBluray(path) == 1:

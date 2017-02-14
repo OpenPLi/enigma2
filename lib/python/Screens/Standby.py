@@ -19,20 +19,16 @@ inStandby = None
 class Standby(Screen):
 	def Power(self):
 		print "[Standby] leave standby"
-		self.leaveMute()
 		self.close(True)
 
 	def setMute(self):
-		if (eDVBVolumecontrol.getInstance().isMuted()):
-			self.wasMuted = 1
-			print "[Standby] mute already active"
-		else:
-			self.wasMuted = 0
-			eDVBVolumecontrol.getInstance().volumeToggleMute()
+		self.wasMuted = eDVBVolumecontrol.getInstance().isMuted()
+		if not self.wasMuted:
+			eDVBVolumecontrol.getInstance().volumeMute()
 
 	def leaveMute(self):
-		if self.wasMuted == 0:
-			eDVBVolumecontrol.getInstance().volumeToggleMute()
+		if not self.wasMuted:
+			eDVBVolumecontrol.getInstance().volumeUnMute()
 
 	def __init__(self, session, StandbyCounterIncrease=True):
 		Screen.__init__(self, session)
@@ -132,6 +128,7 @@ class Standby(Screen):
 		if RecordTimer.RecordTimerEntry.receiveRecordEvents:
 			RecordTimer.RecordTimerEntry.stopTryQuitMainloop()
 		self.avswitch.setInput("ENCODER")
+		self.leaveMute()
 		if os.path.exists("/usr/script/standby_leave.sh"):
 			Console().ePopen("/usr/script/standby_leave.sh")
 
