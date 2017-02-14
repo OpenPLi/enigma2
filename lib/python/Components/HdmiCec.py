@@ -60,7 +60,7 @@ class HdmiCec:
 		config.hdmicec.volume_forwarding.addNotifier(self.configVolumeForwarding)
 		config.hdmicec.enabled.addNotifier(self.configVolumeForwarding)
 		if config.hdmicec.enabled.value and config.hdmicec.handle_deepstandby_events.value and not getFPWasTimerWakeup():
-			self.onLeaveStandby()
+			self.onLeaveStandby(True)
 
 	def getPhysicalAddress(self):
 		physicaladdress = eHdmiCEC.getInstance().getPhysicalAddress()
@@ -180,10 +180,11 @@ class HdmiCec:
 				self.sendMessage(5, "keypoweroff")
 				self.sendMessage(5, "standby")
 
-	def onLeaveStandby(self):
+	def onLeaveStandby(self, force=False):
 		self.wakeupMessages()
-		if int(config.hdmicec.repeat_wakeup_timer.value):
-			self.repeat.startLongTimer(int(config.hdmicec.repeat_wakeup_timer.value))
+		repeat_wakeup_timer = int(config.hdmicec.repeat_wakeup_timer.value)
+		if repeat_wakeup_timer or force:
+			self.repeat.startLongTimer(repeat_wakeup_timer or 1)
 
 	def onEnterStandby(self, configElement):
 		from Screens.Standby import inStandby
