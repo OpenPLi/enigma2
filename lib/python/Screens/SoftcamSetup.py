@@ -161,9 +161,6 @@ class SoftcamSetup(Screen, ConfigListScreen):
 		if what:
 			self.restart(what)
 		else:
-			from Components.PluginComponent import plugins
-			plugins.reloadPlugins()
-			config.misc.softcam_setup.extension_menu.save()
 			self.close()
 
 	def cancel(self):
