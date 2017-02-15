@@ -1,6 +1,5 @@
 from time import localtime, time
 
-
 def FuzzyTime(t, inPast = False):
 	d = localtime(t)
 	nt = time()
@@ -20,17 +19,15 @@ def FuzzyTime(t, inPast = False):
 		# same year
 		if inPast:
 			# I want the day in the movielist
-			date = "%s %d.%d" % (dayOfWeek[d[6]], d[2], d[1])
+			date = _("%s %02d.%02d.") % (dayOfWeek[d[6]], d[2], d[1])
 		else:
-			date = "%d.%d" % (d[2], d[1])
+			date = _("%02d.%02d.") % (d[2], d[1])
 	else:
-		date = "%d.%d.%d" % (d[2], d[1], d[0])
+		date = _("%02d.%02d.%d") % (d[2], d[1], d[0])
 
-	timeres = "%d:%02d" % (d[3], d[4])
+	timeres = _("%02d:%02d") % (d[3], d[4])
 
-	return (date, timeres)
-
-
+	return date, timeres
 
 if __name__ == "__main__":
 	def _(x): return x
