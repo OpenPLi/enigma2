@@ -90,12 +90,21 @@ class SoftcamSetup(Screen, ConfigListScreen):
 
 	def ppanelShortcut(self):
 		if "oscam" in self.softcams.value.lower() and os.path.isfile('/usr/lib/enigma2/python/Plugins/Extensions/OscamStatus/plugin.py'):
-			from Plugins.Extensions.OscamStatus.plugin import OscamStatus
-			self.session.open(OscamStatus)
+			try:
+				from Plugins.Extensions.OscamStatus.plugin import OscamStatus
+				self.session.open(OscamStatus)
+			except:
+				pass
 		ppanelFileName = '/etc/ppanels/' + self.softcams.value + '.xml'
 		if os.path.isfile(ppanelFileName) and os.path.isfile('/usr/lib/enigma2/python/Plugins/Extensions/PPanel/plugin.py'):
 			from Plugins.Extensions.PPanel.ppanel import PPanel
 			self.session.open(PPanel, name = self.softcams.value + ' PPanel', node = None, filename = ppanelFileName, deletenode = None)
+		elif "cccam" in self.softcams.value.lower() and os.path.isfile('/usr/lib/enigma2/python/Plugins/Extensions/CCcamInfo/plugin.py'):
+			try:
+				from Plugins.Extensions.CCcamInfo.plugin import CCcamInfoMain
+				self.session.open(CCcamInfoMain)
+			except:
+				pass
 		else:
 			return 0
 
@@ -119,7 +128,7 @@ class SoftcamSetup(Screen, ConfigListScreen):
 			self.cardserver.command('stop')
 		if "s" in self.what:
 			self.softcam.command('stop')
-		self.oldref = self.session.nav.getCurrentlyPlayingServiceReference()
+		self.oldref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 		self.session.nav.stopService()
 		self.activityTimer = eTimer()
 		self.activityTimer.timeout.get().append(self.doStart)
