@@ -18,32 +18,41 @@ def getFPVersion():
 
 def setFPWakeuptime(wutime):
 	try:
-		open("/proc/stb/fp/wakeup_time", "w").write(str(wutime))
+		f = open("/proc/stb/fp/wakeup_time", "w")
+		f.write(str(wutime))
+		f.close()
 	except IOError:
 		try:
 			fp = open("/dev/dbox/fp0")
 			ioctl(fp.fileno(), 6, pack('L', wutime)) # set wake up
+			fp.close()
 		except IOError:
 			print "setFPWakeupTime failed!"
 
 def setRTCtime(wutime):
 	try:
-		open("/proc/stb/fp/rtc", "w").write(str(wutime))
+		f = open("/proc/stb/fp/rtc", "w")
+		f.write(str(wutime))
+		f.close()
 	except IOError:
 		try:
 			fp = open("/dev/dbox/fp0")
 			ioctl(fp.fileno(), 0x101, pack('L', wutime)) # set wake up
+			fp.close()
 		except IOError:
 			print "setRTCtime failed!"
 
 def getFPWakeuptime():
 	ret = 0
 	try:
-		ret = long(open("/proc/stb/fp/wakeup_time", "r").read())
+		f = open("/proc/stb/fp/wakeup_time", "r")
+		ret = long(f.read())
+		f.close()
 	except IOError:
 		try:
 			fp = open("/dev/dbox/fp0")
 			ret = unpack('L', ioctl(fp.fileno(), 5, '    '))[0] # get wakeuptime
+			fp.close()
 		except IOError:
 			print "getFPWakeupTime failed!"
 	return ret
@@ -56,11 +65,15 @@ def getFPWasTimerWakeup():
 		return wasTimerWakeup
 	wasTimerWakeup = False
 	try:
-		wasTimerWakeup = int(open("/proc/stb/fp/was_timer_wakeup", "r").read()) and True or False
+		f = open("/proc/stb/fp/was_timer_wakeup", "r")
+		file = f.read()
+		f.close()
+		wasTimerWakeup = int(file) and True or False
 	except:
 		try:
 			fp = open("/dev/dbox/fp0")
 			wasTimerWakeup = unpack('B', ioctl(fp.fileno(), 9, ' '))[0] and True or False
+			fp.close()
 		except IOError:
 			print "wasTimerWakeup failed!"
 	if wasTimerWakeup:
@@ -70,10 +83,13 @@ def getFPWasTimerWakeup():
 
 def clearFPWasTimerWakeup():
 	try:
-		open("/proc/stb/fp/was_timer_wakeup", "w").write('0')
+		f = open("/proc/stb/fp/was_timer_wakeup", "w")
+		f.write('0')
+		f.close()
 	except:
 		try:
 			fp = open("/dev/dbox/fp0")
 			ioctl(fp.fileno(), 10)
+			fp.close()
 		except IOError:
 			print "clearFPWasTimerWakeup failed!"
