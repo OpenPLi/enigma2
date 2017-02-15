@@ -673,6 +673,9 @@ def InitUsageConfig():
 	config.mediaplayer.useAlternateUserAgent = ConfigYesNo(default=False)
 	config.mediaplayer.alternateUserAgent = ConfigText(default="")
 
+	config.misc.softcam_setup = ConfigSubsection()
+	config.misc.softcam_setup.extension_menu = ConfigYesNo(default = True)
+
 def updateChoices(sel, choices):
 	if choices:
 		defval = None
