@@ -1,19 +1,15 @@
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
-from Components.FileList import FileEntryComponent, FileList
 from Components.ConfigList import ConfigListScreen
-from Components.ActionMap import ActionMap, NumberActionMap
-from Components.Button import Button
+from Components.ActionMap import ActionMap
 from Components.Label import Label
-from Components.config import config, ConfigElement, ConfigSubsection, ConfigSelection, ConfigSubList, getConfigListEntry, KEY_LEFT, KEY_RIGHT, KEY_OK
-from Components.ConfigList import ConfigList
-from Components.Pixmap import Pixmap
+from Components.config import ConfigElement, ConfigSelection, getConfigListEntry, KEY_OK
 from Components.ScrollLabel import ScrollLabel
 from Tools.GetEcmInfo import GetEcmInfo
 
 import os
 from Tools.camcontrol import CamControl
-from enigma import eTimer, eDVBCI_UI, eListboxPythonStringContent, eListboxPythonConfigContent
+from enigma import eTimer
 
 class ConfigAction(ConfigElement):
 	def __init__(self, action, *args):
@@ -125,7 +121,6 @@ class SoftcamSetup(Screen, ConfigListScreen):
 			self.softcam.command('stop')
 		self.oldref = self.session.nav.getCurrentlyPlayingServiceReference()
 		self.session.nav.stopService()
-		# Delay a second to give 'em a chance to stop
 		self.activityTimer = eTimer()
 		self.activityTimer.timeout.get().append(self.doStart)
 		self.activityTimer.start(1000, False)
@@ -142,8 +137,7 @@ class SoftcamSetup(Screen, ConfigListScreen):
 		if self.mbox:
 			self.mbox.close()
 		self.close()
-		self.session.nav.playService(self.oldref)
-		del self.oldref
+		self.session.nav.playService(self.oldref, adjust=False)
 
 	def restartCardServer(self):
 		if hasattr(self, 'cardservers'):
