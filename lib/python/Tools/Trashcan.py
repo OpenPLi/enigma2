@@ -53,7 +53,7 @@ class Trashcan:
 		self.dirty.add(trash)
 
 	def gotRecordEvent(self, service, event):
-		if (event == enigma.iRecordableService.evEnd):
+		if event == enigma.iRecordableService.evEnd:
 			self.cleanIfIdle()
 
 	def destroy(self):
