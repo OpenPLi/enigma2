@@ -10,6 +10,9 @@ ecm = ''
 data = EMPTY_ECM_INFO
 
 class GetEcmInfo:
+	def __init__(self):
+		pass
+
 	def pollEcmData(self):
 		global data
 		global old_ecm_time
@@ -25,9 +28,7 @@ class GetEcmInfo:
 		if ecm_time != old_ecm_time:
 			oecmi1 = info.get('ecminterval1','')
 			oecmi0 = info.get('ecminterval0','')
-			info = {}
-			info['ecminterval2'] = oecmi1
-			info['ecminterval1'] = oecmi0
+			info = {'ecminterval2': oecmi1, 'ecminterval1': oecmi0}
 			old_ecm_time = ecm_time
 			try:
 				ecm = open(ECM_INFO, 'rb').readlines()
@@ -92,7 +93,7 @@ class GetEcmInfo:
 					if ecm[1].startswith('SysID'):
 						info['prov'] = ecm[1].strip()[6:]
 					if info['response'] and 'CaID 0x' in ecm[0] and 'pid 0x' in ecm[0]:
-						self.textvalue = self.textvalue + " (0.%ss)" % info['response']
+						self.textvalue += " (0.%ss)" % info['response']
 						info['caid'] = ecm[0][ecm[0].find('CaID 0x')+7:ecm[0].find(',')]
 						info['pid'] = ecm[0][ecm[0].find('pid 0x')+6:ecm[0].find(' =')]
 						info['provid'] = info.get('prov', '0')[:4]
