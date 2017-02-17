@@ -2,7 +2,7 @@
 ## P(icture)i(n)g(raphics) renderer
 ##
 from Renderer import Renderer
-from enigma import eVideoWidget, eSize, eRect, ePoint, getDesktop
+from enigma import eVideoWidget, getDesktop
 from Screens.PictureInPicture import PipPigMode
 
 class Pig(Renderer):
