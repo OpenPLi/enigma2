@@ -1,6 +1,5 @@
-from Components.config import config, ConfigSubsection, ConfigSelection, ConfigPIN, ConfigText, ConfigYesNo, ConfigSubList, ConfigInteger
+from Components.config import config, ConfigSubsection, ConfigSelection, ConfigPIN, ConfigYesNo, ConfigSubList, ConfigInteger
 from Components.ServiceList import refreshServiceList
-#from Screens.ChannelSelection import service_types_tv
 from Screens.InputBox import PinInput
 from Screens.MessageBox import MessageBox
 from Tools.BoundFunction import boundFunction
@@ -109,7 +108,7 @@ class ParentalControl:
 		self.session = session
 		if self.isProtected(ref):
 			#Check if the session pin is cached
-			if self.sessionPinCached == True:
+			if self.sessionPinCached:
 				return True
 			self.callback = callback
 			service = ref.toCompareString()
@@ -241,7 +240,6 @@ class ParentalControl:
 	def readServicesFromBouquet(self,sBouquetSelection,formatstring):
 		#This method gives back a list of services for a given bouquet
 		from enigma import eServiceCenter, eServiceReference
-		from Screens.ChannelSelection import service_types_tv
 		serviceHandler = eServiceCenter.getInstance()
 		refstr = sBouquetSelection
 		root = eServiceReference(refstr)
