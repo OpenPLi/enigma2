@@ -185,15 +185,15 @@ class EPGList(HTMLComponent, GUIComponent):
 				x += self.col[1]
 				self.descr_rect = Rect(x, 0, width-x, height)
 			else:
-				xpos = 0;
-				w = width/10*3;
+				xpos = 0
+				w = width/10*3
 				self.service_rect = Rect(xpos, 0, w-10, height)
-				xpos += w;
-				w = width/10*2;
+				xpos += w
+				w = width/10*2
 				self.start_end_rect = Rect(xpos, 0, w-10, height)
 				self.progress_rect = Rect(xpos, 4, w-10, height-8)
 				xpos += w
-				w = width/10*5;
+				w = width/10*5
 				self.descr_rect = Rect(xpos, 0, width, height)
 		else: # EPG_TYPE_SIMILAR
 			if self.skinColumns:
