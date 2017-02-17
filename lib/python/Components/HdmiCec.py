@@ -40,8 +40,9 @@ config.hdmicec.repeat_wakeup_timer = ConfigSelection(default = "3", choices = [(
 class HdmiCec:
 
 	def __init__(self):
-		assert not HdmiCec.instance, "only one HdmiCec instance is allowed!"
-		HdmiCec.instance = self
+		if config.hdmicec.enabled.value:
+			assert not HdmiCec.instance, "only one HdmiCec instance is allowed!"
+			HdmiCec.instance = self
 
 		self.wait = eTimer()
 		self.wait.timeout.get().append(self.sendCmd)
@@ -202,7 +203,7 @@ class HdmiCec:
 			Notifications.AddNotification(Standby)
 
 	def wakeup(self):
-		from Screens.Standby import Standby, inStandby
+		from Screens.Standby import inStandby
 		if inStandby:
 			inStandby.Power()
 
