@@ -24,10 +24,14 @@ KNOWN_EXTENSIONS = MOVIE_EXTENSIONS.union(IMAGE_EXTENSIONS, DVD_EXTENSIONS, AUDI
 cutsParser = struct.Struct('>QI') # big-endian, 64-bit PTS and 32-bit type
 
 class MovieListData:
-	pass
+	def __init__(self):
+		pass
 
 # iStaticServiceInformation
 class StubInfo:
+	def __init__(self):
+		pass
+
 	def getName(self, serviceref):
 		return os.path.split(serviceref.getPath())[1]
 	def getLength(self, serviceref):
@@ -607,7 +611,7 @@ class MovieList(GUIComponent):
 			return
 		realtags = set()
 		autotags = {}
-		rootPath = os.path.normpath(root.getPath());
+		rootPath = os.path.normpath(root.getPath())
 		parent = None
 		# Don't navigate above the "root"
 		if len(rootPath) > 1 and (os.path.realpath(rootPath) != os.path.realpath(config.movielist.root.value)):
