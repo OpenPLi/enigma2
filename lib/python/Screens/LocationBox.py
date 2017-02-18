@@ -192,7 +192,7 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 
 	def showHideRename(self):
 		# Don't allow renaming when filename is empty
-		if self.filename == "":
+		if not self.filename:
 			self["key_yellow"].hide()
 
 	def switchToFileList(self):

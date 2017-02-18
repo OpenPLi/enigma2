@@ -76,14 +76,11 @@ try:
 except Exception as e:
 	print "[ML] BlurayPlayer not installed:", e
 	BlurayPlayer = None
-	
+
 
 def defaultMoviePath():
-	result = config.usage.default_path.value
-	if not os.path.isdir(result):
-		from Tools import Directories
-		return Directories.defaultRecordingLocation()
-	return result
+	from Tools import Directories
+	return Directories.defaultRecordingLocation(config.usage.default_path.value)
 
 def setPreferredTagEditor(te):
 	global preferredTagEditor
