@@ -343,7 +343,7 @@ class MultiFileSelectList(FileList):
 				realPathname = x[0][0]
 			else:
 				realPathname = self.current_directory + x[0][0]
-			if x[0][2] == True:
+			if x[0][2]:
 				SelectState = False
 				try:
 					self.selectedFiles.remove(realPathname)
