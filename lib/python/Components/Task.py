@@ -91,7 +91,7 @@ class Job(object):
 			if cb_idx in self.resident_tasks:
 				print "resident task finished:", task
 				self.resident_tasks.remove(cb_idx)
-		if res == []:
+		if not res:
 			self.state_changed()
 			self.current_task += 1
 			self.runNext()
