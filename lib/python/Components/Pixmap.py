@@ -35,7 +35,7 @@ class MovingPixmap(Pixmap):
 		self.moveTimer.callback.append(self.doMove)
 
 	def clearPath(self, repeated = False):
-		if (self.moving):
+		if self.moving:
 			self.moving = False
 			self.moveTimer.stop()
 
@@ -72,12 +72,12 @@ class MovingPixmap(Pixmap):
 		except: # moving not possible... widget not there any more... stop moving
 			self.stopMoving()
 
-		if (self.time == 0):
+		if self.time == 0:
 			self.currDest += 1
 			self.moveTimer.stop()
 			self.moving = False
-			if (self.currDest >= len(self.path)): # end of path
-				if (self.repeated):
+			if self.currDest >= len(self.path): # end of path
+				if self.repeated:
 					self.currDest = 0
 					self.moving = False
 					self.startMoving()
