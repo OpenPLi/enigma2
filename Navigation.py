@@ -3,7 +3,7 @@ from Components.ParentalControl import parentalControl
 from Components.SystemInfo import SystemInfo
 from Components.config import config, configfile
 from Tools.BoundFunction import boundFunction
-from Tools.StbHardware import setFPWakeuptime, getFPWakeuptime, getFPWasTimerWakeup
+from Tools.StbHardware import getFPWasTimerWakeup
 from Tools import Notifications
 from time import time, localtime
 import RecordTimer
