@@ -607,7 +607,7 @@ class MovieList(GUIComponent):
 			return
 		realtags = set()
 		autotags = {}
-		rootPath = os.path.normpath(root.getPath());
+		rootPath = os.path.normpath(root.getPath())
 		parent = None
 		# Don't navigate above the "root"
 		if len(rootPath) > 1 and (os.path.realpath(rootPath) != os.path.realpath(config.movielist.root.value)):
