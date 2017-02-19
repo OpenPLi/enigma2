@@ -5,7 +5,7 @@ from skin import parseFont
 from Tools.FuzzyDate import FuzzyTime
 
 from enigma import eListboxPythonMultiContent, eListbox, gFont, getBestPlayableServiceReference, eServiceReference, \
-	RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, RT_VALIGN_TOP, RT_VALIGN_BOTTOM
+	RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_TOP, RT_VALIGN_BOTTOM
 from Tools.Alternatives import GetWithAlternative
 from Tools.LoadPixmap import LoadPixmap
 from Tools.TextBoundary import getTextBoundarySize
@@ -35,9 +35,9 @@ class TimerList(HTMLComponent, GUIComponent, object):
 			repeatedtext = []
 			flags = timer.repeated
 			for x in (0, 1, 2, 3, 4, 5, 6):
-				if (flags & 1 == 1):
+				if flags & 1 == 1:
 					repeatedtext.append(days[x])
-				flags = flags >> 1
+				flags >>= 1
 			repeatedtext = ", ".join(repeatedtext)
 			if self.iconRepeat:
 				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, self.iconMargin / 2, self.rowSplit + (self.itemHeight - self.rowSplit - self.iconHeight) / 2, self.iconWidth, self.iconHeight, self.iconRepeat))
