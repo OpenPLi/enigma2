@@ -137,7 +137,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 	def __init__(self, serviceref, begin, end, name, description, eit, disabled = False, justplay = False, afterEvent = AFTEREVENT.AUTO, checkOldTimers = False, dirname = None, tags = None, descramble = True, record_ecm = False, always_zap = False, zap_wakeup = "always", rename_repeat = True, conflict_detection = True):
 		timer.TimerEntry.__init__(self, int(begin), int(end))
 
-		if checkOldTimers == True:
+		if checkOldTimers:
 			if self.begin < time() - 1209600:
 				self.begin = int(time())
 
@@ -585,7 +585,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 
 	def failureCB(self, answer):
 		self.ts_dialog = None
-		if answer == True:
+		if answer:
 			self.log(13, "ok, zapped away")
 			#NavigationInstance.instance.stopUserServices()
 			NavigationInstance.instance.playService(self.service_ref.ref)
