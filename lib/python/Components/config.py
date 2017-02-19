@@ -367,7 +367,7 @@ class ConfigSelection(ConfigElement):
 			else:
 				checked = ''
 			res += '<input type="radio" name="' + id + '" ' + checked + 'value="' + v + '">' + descr + "</input></br>\n"
-		return res;
+		return res
 
 	def unsafeAssign(self, value):
 		# setValue does check if value is in choices. This is safe enough.
@@ -452,9 +452,9 @@ class ConfigDateTime(ConfigElement):
 
 	def handleKey(self, key):
 		if key == KEY_LEFT:
-			self.value = self.value - self.increment
+			self.value -= self.increment
 		elif key == KEY_RIGHT:
-			self.value = self.value + self.increment
+			self.value += self.increment
 		elif key == KEY_HOME or key == KEY_END:
 			self.value = self.default
 
@@ -592,7 +592,7 @@ class ConfigSequence(ConfigElement):
 	def genText(self):
 		value = ""
 		mPos = self.marked_pos
-		num = 0;
+		num = 0
 		for i in self._value:
 			if value:	#fixme no heading separator possible
 				value += self.seperator
@@ -1134,7 +1134,7 @@ class ConfigDirectory(ConfigText):
 			return ConfigText.getValue(self)
 
 	def setValue(self, val):
-		if val == None:
+		if val is None:
 			val = ""
 		ConfigText.setValue(self, val)
 
@@ -1421,7 +1421,7 @@ class ConfigLocations(ConfigElement):
 		for x in self.locations:
 			if x[1] == mp:
 				x[2] = True
-			elif x[1] == None and fileExists(x[0]):
+			elif x[1] is None and fileExists(x[0]):
 				x[1] = self.getMountpoint(x[0])
 				x[2] = True
 
