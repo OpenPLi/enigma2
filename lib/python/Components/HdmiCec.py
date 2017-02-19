@@ -202,7 +202,7 @@ class HdmiCec:
 			Notifications.AddNotification(Standby)
 
 	def wakeup(self):
-		from Screens.Standby import Standby, inStandby
+		from Screens.Standby import inStandby
 		if inStandby:
 			inStandby.Power()
 
