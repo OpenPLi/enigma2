@@ -1,6 +1,5 @@
 from Wizard import Wizard
 from Components.Label import Label
-from Components.Language import language
 from LanguageSelection import LanguageWizard
 
 class WizardLanguage(Wizard):
