@@ -3,7 +3,7 @@ from Tools.Profile import profile
 from Screens.Volume import Volume
 from Screens.Mute import Mute
 from GlobalActions import globalActionMap
-from config import config, ConfigSubsection, ConfigInteger
+from config import config, ConfigSubsection, ConfigInteger, ConfigSelectionNumber
 
 profile("VolumeControl")
 #TODO .. move this to a own .py file
@@ -12,7 +12,6 @@ class VolumeControl:
 	"""Volume control, handles volUp, volDown, volMute actions and display
 	a corresponding dialog"""
 	def __init__(self, session):
-		global globalActionMap
 		globalActionMap.actions["volumeUp"] = self.volUp
 		globalActionMap.actions["volumeDown"] = self.volDown
 		globalActionMap.actions["volumeMute"] = self.volMute
@@ -23,6 +22,7 @@ class VolumeControl:
 
 		config.audio = ConfigSubsection()
 		config.audio.volume = ConfigInteger(default = 50, limits = (0, 100))
+		config.audio.volume_stepsize = ConfigSelectionNumber(1, 10, 1, default = 5)
 
 		self.volumeDialog = session.instantiateDialog(Volume)
 		self.muteDialog = session.instantiateDialog(Mute)
@@ -49,11 +49,11 @@ class VolumeControl:
 		self.setVolume(-1)
 
 	def setVolume(self, direction):
-		oldvol = self.volctrl.getVolume()
+		val = int(config.audio.volume_stepsize.value)
 		if direction > 0:
-			self.volctrl.volumeUp()
+			self.volctrl.volumeUp(val, val)
 		else:
-			self.volctrl.volumeDown()
+			self.volctrl.volumeDown(val, val)
 		is_muted = self.volctrl.isMuted()
 		vol = self.volctrl.getVolume()
 		self.volumeDialog.show()
