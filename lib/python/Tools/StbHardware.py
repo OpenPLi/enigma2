@@ -1,6 +1,6 @@
 from fcntl import ioctl
 from struct import pack, unpack
-from time import time, localtime
+from time import time, localtime, gmtime
 
 def getFPVersion():
 	ret = None
