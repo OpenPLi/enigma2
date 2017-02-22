@@ -11,7 +11,7 @@ def getFPVersion():
 			ret = ioctl(fp.fileno(),0)
 		except IOError:
 			try:
-				ret = open("/sys/firmware/devicetree/base/bolt/tag", "r").read()
+				ret = open("/sys/firmware/devicetree/base/bolt/tag", "r").read().rstrip("\0")
 			except:
 				print "getFPVersion failed!"
 	return ret
