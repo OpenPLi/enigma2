@@ -2,7 +2,7 @@ from fcntl import ioctl
 from struct import pack, unpack
 
 def getFPVersion():
-	ret = ""
+	ret = None
 	try:
 		ret = long(open("/proc/stb/fp/version", "r").read())
 	except IOError:
@@ -11,7 +11,7 @@ def getFPVersion():
 			ret = ioctl(fp.fileno(),0)
 		except IOError:
 			try:
-				ret = open("/sys/firmware/devicetree/base/bolt/tag", "r").read().rstrip("\0")
+				ret = open("/sys/firmware/devicetree/base/bolt/tag", "r").read()
 			except:
 				print "getFPVersion failed!"
 	return ret
