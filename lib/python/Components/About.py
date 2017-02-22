@@ -71,8 +71,12 @@ def getCPUInfoString():
 					cpu_speed = int(int(binascii.hexlify(open('/sys/firmware/devicetree/base/cpus/cpu@0/clock-frequency', 'rb').read()), 16) / 100000000) * 100
 				except:
 					cpu_speed = "-"
+		temperature = 0
 		if os.path.isfile('/proc/stb/fp/temp_sensor_avs'):
 			temperature = open("/proc/stb/fp/temp_sensor_avs").readline().replace('\n','')
+		if os.path.isfile("/sys/devices/virtual/thermal/thermal_zone0/temp"):
+			temperature = int(open("/sys/devices/virtual/thermal/thermal_zone0/temp").read().strip())/1000
+		if temperature > 0:
 			return "%s %s MHz (%s) %s°C" % (processor, cpu_speed, ngettext("%d core", "%d cores", cpu_count) % cpu_count, temperature)
 		return "%s %s MHz (%s)" % (processor, cpu_speed, ngettext("%d core", "%d cores", cpu_count) % cpu_count)
 	except:
