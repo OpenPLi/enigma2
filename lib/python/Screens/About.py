@@ -49,9 +49,7 @@ class About(Screen):
 		AboutText += _("Python version: ") + about.getPythonVersionString() + "\n"
 
 		fp_version = getFPVersion()
-		if fp_version is None:
-			fp_version = ""
-		else:
+		if fp_version:
 			fp_version = _("Frontprocessor version: %s") % fp_version
 			AboutText += fp_version + "\n"
 
