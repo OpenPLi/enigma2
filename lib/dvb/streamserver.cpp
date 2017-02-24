@@ -51,6 +51,12 @@ static void set_tcp_buffer_size(int fd, int optname, int buf_size)
 		eDebug("Failed to set TCP SNDBUF or RCVBUF size: %m");
 }
 
+static void set_tcp_parameter(int fd, int optname, int parameter)
+{
+	if (::setsockopt(fd, SOL_TCP, optname, &parameter, sizeof(parameter)))
+		eDebug("Failed to set TCP paramter: %m");
+}
+
 void eStreamClient::notifier(int what)
 {
 	if (!(what & eSocketNotifier::Read))
@@ -139,6 +145,8 @@ void eStreamClient::notifier(int what)
 				set_tcp_buffer_size(streamFd, SO_RCVBUF, 1 * 1024);
 				 /* We like 188k packets, so set the TCP window size to that */
 				set_tcp_buffer_size(streamFd, SO_SNDBUF, 188 * 1024);
+				/* Set 30 seconds timeout */
+				set_tcp_parameter(streamFd, TCP_USER_TIMEOUT, 30 * 1000);
 				if (serviceref.substr(0, 10) == "file?file=") /* convert openwebif stream reqeust back to serviceref */
 					serviceref = "1:0:1:0:0:0:0:0:0:0:" + serviceref.substr(10);
 				pos = serviceref.find('?');
