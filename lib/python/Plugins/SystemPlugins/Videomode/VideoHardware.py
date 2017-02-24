@@ -114,10 +114,10 @@ class VideoHardware:
 		self.is24hzAvailable()
 		self.widescreen_modes = set(["720p", "1080i", "1080p", "2160p", "2160p30"]).intersection(*[self.modes_available])
 
-		if self.modes.has_key("DVI-PC") and not self.getModeList("DVI-PC"):
+		if "DVI-PC" in self.modes and not self.getModeList("DVI-PC"):
 			print "[VideoHardware] remove DVI-PC because of not existing modes"
 			del self.modes["DVI-PC"]
-		if self.modes.has_key("Scart") and not self.getModeList("Scart"):
+		if "Scart" in self.modes and not self.getModeList("Scart"):
 			print "[VideoHardware] remove Scart because of not existing modes"
 			del self.modes["Scart"]
 
