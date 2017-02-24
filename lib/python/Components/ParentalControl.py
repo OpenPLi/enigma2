@@ -102,7 +102,7 @@ class ParentalControl:
 			rating = event and event.getParentalData()
 			age = rating and rating.getRating()
 			age = age and age <= 15 and age + 3 or 0
-		return (age and age >= int(config.ParentalControl.age.value)) or service and self.blacklist.has_key(service)
+		return (age and age >= int(config.ParentalControl.age.value)) or service and service in self.blacklist
 
 	def isServicePlayable(self, ref, callback, session=None):
 		self.session = session
@@ -125,20 +125,20 @@ class ParentalControl:
 			return True
 
 	def protectService(self, service):
-		if not self.blacklist.has_key(service):
+		if service not in self.blacklist:
 			self.serviceMethodWrapper(service, self.addServiceToList, self.blacklist)
 			if config.ParentalControl.hideBlacklist.value and not self.sessionPinCached and config.ParentalControl.storeservicepin.value != "never":
 				eDVBDB.getInstance().addFlag(eServiceReference(service), FLAG_IS_PARENTAL_PROTECTED_HIDDEN)
 
 	def unProtectService(self, service):
-		if self.blacklist.has_key(service):
+		if service in self.blacklist:
 			self.serviceMethodWrapper(service, self.removeServiceFromList, self.blacklist)
 
 	def getProtectionLevel(self, service):
-		return not self.blacklist.has_key(service) and -1 or 0
+		return service not in self.blacklist and -1 or 0
 
 	def isServiceProtectionBouquet(self, service):
-		return self.blacklist.has_key(service) and TYPE_BOUQUETSERVICE in self.blacklist[service]
+		return service in self.blacklist and TYPE_BOUQUETSERVICE in self.blacklist[service]
 
 	def getConfigValues(self):
 		#Read all values from configuration
@@ -223,7 +223,7 @@ class ParentalControl:
 		#Replaces addWhitelistService and addBlacklistService
 		#The lists are not only lists of service references any more.
 		#They are named lists with the service as key and an array of types as value:
-		if vList.has_key(service):
+		if service in vList:
 			if not type in vList[service]:
 				vList[service].append(type)
 		else:
@@ -231,7 +231,7 @@ class ParentalControl:
 
 	def removeServiceFromList(self, service, type, vList):
 		#Replaces deleteWhitelistService and deleteBlacklistService
-		if vList.has_key(service):
+		if service in vList:
 			if type in vList[service]:
 				vList[service].remove(type)
 			if not vList[service]:
