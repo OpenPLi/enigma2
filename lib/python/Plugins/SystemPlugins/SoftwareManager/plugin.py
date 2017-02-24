@@ -128,14 +128,14 @@ class UpdatePluginMenu(Screen):
 			self.list.append(("system-restore",_("Restore system settings"), _("\nRestore your receiver settings." ) + self.oktext, None))
 			self.list.append(("ipkg-install", _("Install local extension"),  _("\nScan for local extensions and install them." ) + self.oktext, None))
 			for p in plugins.getPlugins(PluginDescriptor.WHERE_SOFTWAREMANAGER):
-				if p.__call__.has_key("SoftwareSupported"):
+				if "SoftwareSupported" in p.__call__:
 					callFnc = p.__call__["SoftwareSupported"](None)
 					if callFnc is not None:
-						if p.__call__.has_key("menuEntryName"):
+						if "menuEntryName" in p.__call__:
 							menuEntryName = p.__call__["menuEntryName"](None)
 						else:
 							menuEntryName = _('Extended Software')
-						if p.__call__.has_key("menuEntryDescription"):
+						if "menuEntryDescription" in p.__call__:
 							menuEntryDescription = p.__call__["menuEntryDescription"](None)
 						else:
 							menuEntryDescription = _('Extended Software Plugin')
@@ -150,14 +150,14 @@ class UpdatePluginMenu(Screen):
 				self.list.append(("ipkg-manager", _("Packet management"),  _("\nView, install and remove available or installed packages." ) + self.oktext, None))
 			self.list.append(("ipkg-source",_("Select upgrade source"), _("\nEdit the upgrade source address." ) + self.oktext, None))
 			for p in plugins.getPlugins(PluginDescriptor.WHERE_SOFTWAREMANAGER):
-				if p.__call__.has_key("AdvancedSoftwareSupported"):
+				if "AdvancedSoftwareSupported" in p.__call__:
 					callFnc = p.__call__["AdvancedSoftwareSupported"](None)
 					if callFnc is not None:
-						if p.__call__.has_key("menuEntryName"):
+						if "menuEntryName" in p.__call__:
 							menuEntryName = p.__call__["menuEntryName"](None)
 						else:
 							menuEntryName = _('Advanced software')
-						if p.__call__.has_key("menuEntryDescription"):
+						if "menuEntryDescription" in p.__call__:
 							menuEntryDescription = p.__call__["menuEntryDescription"](None)
 						else:
 							menuEntryDescription = _('Advanced software plugin')
@@ -816,11 +816,11 @@ class PluginManager(Screen, PackageInfoHandler):
 			self.packetlist = []
 			for package in iSoftwareTools.packagesIndexlist[:]:
 				prerequisites = package[0]["prerequisites"]
-				if prerequisites.has_key("tag"):
+				if "tag" in prerequisites:
 					for foundtag in prerequisites["tag"]:
 						if categorytag == foundtag:
 							attributes = package[0]["attributes"]
-							if attributes.has_key("packagetype"):
+							if "packagetype" in attributes:
 								if attributes["packagetype"] == "internal":
 									continue
 								self.packetlist.append([attributes["name"], attributes["details"], attributes["shortdescription"], attributes["packagename"]])
@@ -836,7 +836,7 @@ class PluginManager(Screen, PackageInfoHandler):
 					description = "No description available."
 				packagename = x[3].strip()
 				selectState = self.getSelectionState(details)
-				if iSoftwareTools.installed_packetlist.has_key(packagename):
+				if packagename in iSoftwareTools.installed_packetlist:
 					if selectState == True:
 						status = "remove"
 					else:
@@ -861,7 +861,7 @@ class PluginManager(Screen, PackageInfoHandler):
 		self.categoryList = []
 		for package in iSoftwareTools.packagesIndexlist[:]:
 			prerequisites = package[0]["prerequisites"]
-			if prerequisites.has_key("tag"):
+			if "tag" in prerequisites:
 				for foundtag in prerequisites["tag"]:
 					attributes = package[0]["attributes"]
 					if foundtag not in self.categories:
@@ -913,11 +913,11 @@ class PluginManager(Screen, PackageInfoHandler):
 				if (os.path.exists(detailsfile) == True):
 					iSoftwareTools.fillPackageDetails(plugin[0])
 					self.package = iSoftwareTools.packageDetails[0]
-					if self.package[0].has_key("attributes"):
+					if "attributes" in self.package[0]:
 						self.attributes = self.package[0]["attributes"]
-						if self.attributes.has_key("needsRestart"):
+						if "needsRestart" in self.attributes:
 							self.restartRequired = True
-					if self.attributes.has_key("package"):
+					if "package" in self.attributes:
 						self.packagefiles = self.attributes["package"]
 					if plugin[1] == 'installed':
 						if self.packagefiles:
@@ -1198,7 +1198,7 @@ class PluginDetails(Screen, PackageInfoHandler):
 		self["divpic"].hide()
 
 		self.package = self.packageDetails[0]
-		if self.package[0].has_key("attributes"):
+		if "attributes" in self.package[0]:
 			self.attributes = self.package[0]["attributes"]
 		self.restartRequired = False
 		self.cmdList = []
@@ -1224,20 +1224,20 @@ class PluginDetails(Screen, PackageInfoHandler):
 		pass
 
 	def setInfos(self):
-		if self.attributes.has_key("screenshot"):
+		if "screenshot" in self.attributes:
 			self.loadThumbnail(self.attributes)
 
-		if self.attributes.has_key("name"):
+		if "name" in self.attributes:
 			self.pluginname = self.attributes["name"]
 		else:
 			self.pluginname = _("unknown")
 
-		if self.attributes.has_key("author"):
+		if "author" in self.attributes:
 			self.author = self.attributes["author"]
 		else:
 			self.author = _("unknown")
 
-		if self.attributes.has_key("description"):
+		if "description" in self.attributes:
 			self.description = _(self.attributes["description"].replace("\\n", "\n"))
 		else:
 			self.description = _("No description available.")
@@ -1254,7 +1254,7 @@ class PluginDetails(Screen, PackageInfoHandler):
 
 	def loadThumbnail(self, entry):
 		thumbnailUrl = None
-		if entry.has_key("screenshot"):
+		if "screenshot" in entry:
 			thumbnailUrl = entry["screenshot"]
 			if self.language == "de":
 				if thumbnailUrl[-7:] == "_en.jpg":
@@ -1296,9 +1296,9 @@ class PluginDetails(Screen, PackageInfoHandler):
 			self.setThumbnail(noScreenshot = True)
 
 	def go(self):
-		if self.attributes.has_key("package"):
+		if "package" in self.attributes:
 			self.packagefiles = self.attributes["package"]
-		if self.attributes.has_key("needsRestart"):
+		if "needsRestart" in self.attributes:
 			self.restartRequired = True
 		self.cmdList = []
 		if self.pluginstate in ('installed', 'remove'):
@@ -1815,8 +1815,8 @@ class PacketManager(Screen, NumericalTextInput):
 			print 'rebuilding fresh package list'
 			for x in self.packetlist:
 				status = ""
-				if self.installed_packetlist.has_key(x[0]):
-					if self.upgradeable_packages.has_key(x[0]):
+				if x[0] in self.installed_packetlist:
+					if x[0] in self.upgradeable_packages:
 						status = "upgradeable"
 					else:
 						status = "installed"
