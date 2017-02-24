@@ -223,7 +223,7 @@ class CommitInfo(Screen):
 		self["AboutScrollLabel"].setText(commitlog)
 
 	def updateCommitLogs(self):
-		if self.cachedProjects.has_key(self.projects[self.project][1]):
+		if self.projects[self.project][1] in self.cachedProjects:
 			self["AboutScrollLabel"].setText(self.cachedProjects[self.projects[self.project][1]])
 		else:
 			self["AboutScrollLabel"].setText(_("Please wait"))

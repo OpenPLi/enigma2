@@ -57,7 +57,7 @@ class SetupSummary(Screen):
 	def selectionChanged(self):
 		self["SetupEntry"].text = self.parent.getCurrentEntry()
 		self["SetupValue"].text = self.parent.getCurrentValue()
-		if hasattr(self.parent,"getCurrentDescription") and self.parent.has_key("description"):
+		if hasattr(self.parent,"getCurrentDescription") and "description" in self.parent:
 			self.parent["description"].text = self.parent.getCurrentDescription()
 
 class Setup(ConfigListScreen, Screen):

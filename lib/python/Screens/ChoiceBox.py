@@ -159,7 +159,7 @@ class ChoiceBox(Screen):
 
 	# lookups a key in the keymap, then runs it
 	def goKey(self, key):
-		if self.keymap.has_key(key):
+		if key in self.keymap:
 			entry = self.keymap[key]
 			self.goEntry(entry)
 
@@ -197,7 +197,7 @@ class ChoiceBox(Screen):
 		if self.reorderConfig:
 			if len(self.list) > 0 and self.config_type.value != "":
 				self.session.openWithCallback(self.setDefaultChoiceListCallback, MessageBox, _("Sort list to default and exit?"), MessageBox.TYPE_YESNO)
-		elif self.keymap.has_key("menu"):
+		elif "menu" in self.keymap:
 			self.goKey("menu")
 		else:
 			self.cancel()
