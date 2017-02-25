@@ -89,6 +89,10 @@ class ChoiceBox(Screen):
 		}, -1)
 		self.setTitle(windowTitle or _("Select"))
 
+		if windowTitle is None:
+			windowTitle = _("Select")
+		self.setTitle(windowTitle)
+
 	def autoResize(self):
 		orgwidth = self.instance.size().width()
 		orgpos = self.instance.position()
