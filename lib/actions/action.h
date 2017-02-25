@@ -32,6 +32,7 @@ public:
 	void bindKey(const std::string &domain, const std::string &device, int key, int flags, const std::string &context, const std::string &action);
 	void bindTranslation(const std::string &domain, const std::string &device, int keyin, int keyout, int toggle);
 	void bindToggle(const std::string &domain, const std::string &device, int togglekey);
+	void unbindNativeKey(const std::string &context, int action);
 	void unbindKeyDomain(const std::string &domain);
 
 	void keyPressed(const std::string &device, int key, int flags);
