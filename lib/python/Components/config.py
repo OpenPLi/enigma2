@@ -350,11 +350,15 @@ class ConfigSelection(ConfigElement):
 	def getText(self):
 		if self._descr is None:
 			self._descr = self.description[self.value]
+		if self._descr:
+			return _(self._descr)
 		return self._descr
 
 	def getMulti(self, selected):
 		if self._descr is None:
 			self._descr = self.description[self.value]
+		if self._descr:
+			return ("text", _(self._descr))
 		return ("text", self._descr)
 
 	# HTML
@@ -395,10 +399,16 @@ class ConfigBoolean(ConfigElement):
 			self.value = True
 
 	def getText(self):
-		return self.descriptions[self.value]
+		descr = self.descriptions[self.value]
+		if descr:
+			return _(descr)
+		return descr
 
 	def getMulti(self, selected):
-		return ("text", self.descriptions[self.value])
+		descr = self.descriptions[self.value]
+		if descr:
+			return ("text", _(descr))
+		return ("text", descr)
 
 	def tostring(self, value):
 		if not value:
