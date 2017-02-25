@@ -133,6 +133,20 @@ class VirtualKeyBoard(Screen):
 				[u"A", u"S", u"D", u"F", u"G", u"H", u"J", u"K", u"L", u"Ö", u"Ä", u"'"],
 				[u">", u"Y", u"X", u"C", u"V", u"B", u"N", u"M", u";", u":", u"_", u"CLEAR"],
 				[u"SHIFT", u"SPACE", u"?", u"\\", u"OK", u"LEFT", u"RIGHT"]]
+		        self.nextLang = 'ar_AE'
+                elif self.lang == 'ar_AE':
+                        self.keys_list = [
+                                [u"EXIT", u"1", u"2", u"3", u"4", u"5", u"6", u"7", u"8", u"9", u"0", u"BACKSPACE"],
+                                [u"\u0636", u"\u0635", u"\u062b", u"\u0642", u"\u0641", u"\u063a", u"\u0639", u"\u0647", u"\u062e", u"\u062d", u"\u062c", u"\u062f"],
+                                [u"\u0634", u"\u0633", u"\u064a", u"\u0628", u"\u0644", u"\u0627", u"\u062a", u"\u0646", u"\u0645", u"\u0643", u"\u0637", u"\u0630"],
+                                [u"\u0626", u"\u0621", u"\u0624", u"\u0631", u"\u0644\u0627", u"\u0649", u"\u0629", u"\u0648", u"\u0632", "\xd8\xb8", u"#", u"ALL"],
+                                [u"SHIFT", u"SPACE", u"-", u"@", u".", u"\u0644\u0622", u"\u0622", u"\u0644\u0623", u"\u0644\u0625", u"\u0625", u"\u0623", u"OK", u"LEFT", u"RIGHT"]]
+                        self.shiftkeys_list = [
+                                [u"EXIT", u"!", u'"', u"\xa7", u"$", u"^", u"<", u">", u"(", u")", u"=", u"BACKSPACE"],
+                                [u"\u064e", u"\u064b", u"\u064f", u"\u064c", u"%", u"\u060c", u"\u2018", u"\xf7", u"\xd7", u"\u061b", u"<", u">"],
+                                [u"\u0650", u"\u064d", u"]", u"[", u"*", u"+", u"\u0640", u"\u060c", u"/", u":", u"~", u"'"],
+                                [u"\u0652", u"}", u"{", u"-", u"/", u"\u2019", u",", u".", u"\u061f", u":", u"_", u"CLEAR"],
+                                [u"SHIFT", u"SPACE", u"?", u"\\", u"=", u"\u0651", u"~", u"OK", u"LEFT", u"RIGHT"]]
 			self.nextLang = 'es_ES'
 		elif self.lang == 'es_ES':
 			#still missing keys (u"ùÙ")
