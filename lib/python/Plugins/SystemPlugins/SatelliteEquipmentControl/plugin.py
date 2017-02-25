@@ -55,7 +55,7 @@ class SecParameterSetup(Screen, ConfigListScreen):
 			config.sec.delay_after_continuous_tone_disable_before_diseqc.value = 25
 			config.sec.delay_after_final_continuous_tone_change.value = 10
 			config.sec.delay_after_final_voltage_change.value = 10
-			config.sec.delay_between_diseqc_repeats.value = 120
+			config.sec.delay_between_diseqc_repeats.value = 60
 			config.sec.delay_after_last_diseqc_command.value = 50
 			config.sec.delay_after_toneburst.value = 50
 			config.sec.delay_after_change_voltage_before_switch_command.value = 20
