@@ -51,6 +51,19 @@ MAP_DE = (
 	u"tuvü8TUVÜ",
 	u"wxyz9WXYZ",
 	)
+MAP_AE = (
+	u'0\u060c\u061f!&@=*\'+"()$~%',
+	u' 1.:/-_',
+	u'abc\xe42ABC\xc4',
+	u'def3DEF',
+	u'ghi4GHI',
+	u'jkl5JKL',
+	u'mno\xf66MNO\xd6',
+	u'pqrs7PQRS',
+	u'pqrs\xdf7PQRS\xdf',
+	u'tuv\xfc8TUV\xdc',
+	u'wxyz9WXYZ'
+	)
 MAP_ES = (
 	u"0,?!&@=*'+\"()$~%",
 	u" 1.:;/-_#",
@@ -137,6 +150,7 @@ MAP_LV = (
 	)
 MAPPINGS = {
 	'de_DE': MAP_DE,
+	'ar_AE': MAP_AE,
 	'es_ES': MAP_ES,
 	'sv_SE': MAP_SE,
 	'fi_FI': MAP_SE,
