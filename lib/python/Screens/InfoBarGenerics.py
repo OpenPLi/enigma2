@@ -11,7 +11,7 @@ from Components.ServiceEventTracker import ServiceEventTracker
 from Components.Sources.Boolean import Boolean
 from Components.config import config, ConfigBoolean, ConfigClock, ConfigText
 from Components.SystemInfo import SystemInfo
-from Components.UsageConfig import preferredInstantRecordPath, defaultMoviePath, ConfigSelection
+from Components.UsageConfig import preferredInstantRecordPath, defaultMoviePath
 from Components.VolumeControl import VolumeControl
 from Components.Sources.StaticText import StaticText
 from EpgSelection import EPGSelection
@@ -319,7 +319,7 @@ class InfoBarShowHide(InfoBarScreenSaver):
 			self.hide()
 
 	def hidePipOnExitCallback(self, answer):
-		if answer == True:
+		if answer:
 			self.showPiP()
 
 	def connectShowHideNotifier(self, fnc):
@@ -390,13 +390,13 @@ class InfoBarShowHide(InfoBarScreenSaver):
 			self.hideTimer.stop()
 
 	def lockShow(self):
-		self.__locked = self.__locked + 1
+		self.__locked += 1
 		if self.execing:
 			self.show()
 			self.hideTimer.stop()
 
 	def unlockShow(self):
-		self.__locked = self.__locked - 1
+		self.__locked -= 1
 		if self.execing:
 			self.startHideTimer()
 
@@ -494,7 +494,7 @@ class NumberZap(Screen):
 
 	def keyNumberGlobal(self, number):
 		self.startTimer(repeat=True)
-		self.numberString = self.numberString + str(number)
+		self.numberString += str(number)
 		self["number"].text = self["number_summary"].text = self.numberString
 
 		self.handleServiceName()
@@ -2183,7 +2183,7 @@ class InfoBarPiP:
 				{
 					"activatePiP": (self.activePiP, self.activePiPName),
 				})
-			if (self.allowPiP):
+			if self.allowPiP:
 				self.addExtension((self.getShowHideName, self.showPiP, lambda: True), "blue")
 				self.addExtension((self.getMoveName, self.movePiP, self.pipShown), "green")
 				self.addExtension((self.getSwapName, self.swapPiP, self.pipShown), "yellow")
@@ -2315,7 +2315,7 @@ class InfoBarPiP:
 		elif "stop" == use:
 			self.showPiP()
 
-from RecordTimer import parseEvent, RecordTimerEntry
+from RecordTimer import parseEvent
 
 class InfoBarInstantRecord:
 	"""Instant Record - handles the instantRecord action in order to
@@ -2630,8 +2630,6 @@ class InfoBarInstantRecord:
 			self.session.openWithCallback(self.recordQuestionCallback, ChoiceBox, title=title, list=list)
 		else:
 			return 0
-
-from Tools.ISO639 import LanguageCodes
 
 class InfoBarAudioSelection:
 	def __init__(self):
