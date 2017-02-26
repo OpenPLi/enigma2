@@ -6,10 +6,9 @@ from Screens.ChoiceBox import ChoiceBox
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.ActionMap import NumberActionMap
 from Components.ConfigList import ConfigListScreen
-from Components.ChoiceList import ChoiceList, ChoiceEntryComponent
+from Components.ChoiceList import ChoiceList
 from Components.config import config, ConfigSubsection, getConfigListEntry, ConfigNothing, ConfigSelection, ConfigOnOff
 from Components.Label import Label
-from Components.MultiContent import MultiContentEntryText
 from Components.Sources.List import List
 from Components.Sources.Boolean import Boolean
 from Components.SystemInfo import SystemInfo
@@ -18,7 +17,6 @@ from Components.VolumeControl import VolumeControl
 from enigma import iPlayableService, eTimer, eSize
 
 from Tools.ISO639 import LanguageCodes
-from Tools.BoundFunction import boundFunction
 FOCUS_CONFIG, FOCUS_STREAMS = range(2)
 [PAGE_AUDIO, PAGE_SUBTITLES] = ["audio", "subtitles"]
 
