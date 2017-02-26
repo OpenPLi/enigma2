@@ -293,6 +293,7 @@ def InitUsageConfig():
 	config.usage.movielist_unseen = ConfigYesNo(default = False)
 
 	config.usage.swap_snr_on_osd = ConfigYesNo(default = False)
+	config.usage.use_dvbapi5_statistics = ConfigYesNo(default = True)
 
 	def SpinnerOnOffChanged(configElement):
 		setSpinnerOnOff(int(configElement.value))
