@@ -180,7 +180,7 @@ class ChoiceBox(Screen):
 		pos = 0
 		summarytext = ""
 		for entry in self.summarylist:
-			if pos > curpos-2 and pos < curpos+5:
+			if curpos-2 < pos < curpos+5:
 				if pos == curpos:
 					summarytext += ">"
 					self["summary_selection"].setText(entry[1])
