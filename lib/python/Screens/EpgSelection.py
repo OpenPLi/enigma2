@@ -7,14 +7,12 @@ from Components.Pixmap import Pixmap
 from Components.Label import Label
 from Components.EpgList import EPGList, EPG_TYPE_SINGLE, EPG_TYPE_SIMILAR, EPG_TYPE_MULTI
 from Components.ActionMap import ActionMap
-from Components.TimerSanityCheck import TimerSanityCheck
 from Components.UsageConfig import preferredTimerPath
 from Components.Sources.ServiceEvent import ServiceEvent
 from Components.Sources.Event import Event
 from Screens.ChoiceBox import ChoiceBox
 from Screens.TimerEdit import TimerSanityConflict, TimerEditList
 from Screens.EventView import EventViewSimple
-from Screens.MessageBox import MessageBox
 from TimeDateInput import TimeDateInput
 from enigma import eServiceReference
 from RecordTimer import RecordTimerEntry, parseEvent, AFTEREVENT
