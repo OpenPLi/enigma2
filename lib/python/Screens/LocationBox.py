@@ -236,7 +236,7 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 			self["booklist"].setList(self.bookmarks)
 
 	def createDir(self):
-		if self["filelist"].current_directory != None:
+		if self["filelist"].current_directory is not None:
 			self.session.openWithCallback(
 				self.createDirCallback,
 				InputBox,
