@@ -1,5 +1,4 @@
 from Screens.Screen import Screen
-#from Components.Sources.Source import ObsoleteSource
 
 class SimpleSummary(Screen):
 	skin = """
@@ -15,7 +14,7 @@ class SimpleSummary(Screen):
 
 		names = parent.skinName
 		if not isinstance(names, list):
-		  names = [names]
+			names = [names]
 
 		self.skinName = [ x + "_summary" for x in names ]
 		self.skinName.append("SimpleSummary")
