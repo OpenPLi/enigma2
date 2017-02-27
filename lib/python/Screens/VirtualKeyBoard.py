@@ -296,7 +296,7 @@ class VirtualKeyBoard(Screen):
 		w, h = skin.parameters.get("VirtualKeyboard",(45, 45))
 		key_bg_width = self.key_bg and self.key_bg.size().width() or w
 		key_images = self.shiftMode and self.keyImagesShift or self.keyImages
-		res = [(keys)]
+		res = [keys]
 		text = []
 		x = 0
 		for key in keys:
@@ -413,7 +413,7 @@ class VirtualKeyBoard(Screen):
 		self.smsChar = None
 		self.selectedKey += 12
 		if self.selectedKey > self.max_key:
-			self.selectedKey = self.selectedKey % 12
+			self.selectedKey %= 12
 		self.markSelectedKey()
 
 	def keyNumberGlobal(self, number):
