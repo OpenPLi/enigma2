@@ -7,7 +7,7 @@ from Components.ActionMap import ActionMap
 from Components.FIFOList import FIFOList
 from Components.Sources.FrontendInfo import FrontendInfo
 from Components.config import config
-from enigma import eServiceCenter, eServiceReference
+from enigma import eServiceReference
 
 class ServiceScanSummary(Screen):
 	skin = """
