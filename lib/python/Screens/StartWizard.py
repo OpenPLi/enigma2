@@ -8,8 +8,8 @@ try:
 except:
 	OverscanWizard = None
 
-from Components.Pixmap import Pixmap, MovingPixmap, MultiPixmap
-from Components.config import config, ConfigBoolean, configfile, ConfigSubsection
+from Components.Pixmap import Pixmap
+from Components.config import config, ConfigBoolean, configfile
 from LanguageSelection import LanguageWizard
 import os
 
