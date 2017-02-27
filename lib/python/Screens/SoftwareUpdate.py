@@ -7,7 +7,7 @@ from Screens.TextBox import TextBox
 from Screens.About import CommitInfo
 from Components.config import config
 from Components.About import about
-from Components.ActionMap import ActionMap, NumberActionMap
+from Components.ActionMap import ActionMap
 from Components.Ipkg import IpkgComponent
 from Components.Sources.StaticText import StaticText
 from Components.Slider import Slider
