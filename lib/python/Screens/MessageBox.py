@@ -50,7 +50,7 @@ class MessageBox(Screen):
 		if type == self.TYPE_YESNO:
 			if list:
 				self.list = list
-			elif default == True:
+			elif default:
 				self.list = [ (_("yes"), True), (_("no"), False) ]
 			else:
 				self.list = [ (_("no"), False), (_("yes"), True) ]
