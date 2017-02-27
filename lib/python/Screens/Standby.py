@@ -10,7 +10,6 @@ from Components.AVSwitch import AVSwitch
 from Components.Console import Console
 from Components.Harddisk import internalHDDNotSleeping
 from Components.SystemInfo import SystemInfo
-from Tools import Notifications
 from GlobalActions import globalActionMap
 from enigma import eDVBVolumecontrol, eTimer, eDVBLocalTimeHandler, eServiceReference
 
