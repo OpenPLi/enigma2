@@ -80,7 +80,7 @@ class picshow(Screen):
 
 	def showPic(self, picInfo=""):
 		ptr = self.picload.getData()
-		if ptr != None:
+		if ptr is not None:
 			self["thn"].instance.setPixmap(ptr.__deref__())
 			self["thn"].show()
 
@@ -388,7 +388,7 @@ class Pic_Thumb(Screen):
 			elif self.Thumbnaillist[x][0] == 1:
 				self.Thumbnaillist[x][0] = 2
 				ptr = self.picload.getData()
-				if ptr != None:
+				if ptr is not None:
 					self["thumb" + str(self.Thumbnaillist[x][1])].instance.setPixmap(ptr.__deref__())
 					self["thumb" + str(self.Thumbnaillist[x][1])].show()
 
@@ -542,7 +542,7 @@ class Pic_Full_View(Screen):
 	def finish_decode(self, picInfo=""):
 		self["point"].hide()
 		ptr = self.picload.getData()
-		if ptr != None:
+		if ptr is not None:
 			text = ""
 			try:
 				text = picInfo.split('\n',1)

@@ -43,7 +43,7 @@ class EPGSelection(Screen):
 		self["Service"] = ServiceEvent()
 		self["Event"] = Event()
 		self.session = session
-		if isinstance(service, str) and eventid != None:
+		if isinstance(service, str) and eventid is not None:
 			self.type = EPG_TYPE_SIMILAR
 			self.setTitle(_("Similar EPG"))
 			self["key_yellow"] = Button()

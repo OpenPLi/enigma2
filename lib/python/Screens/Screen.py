@@ -78,7 +78,7 @@ class Screen(dict, GUISkin):
 				if not self.stand_alone and self.session.current_dialog != self:
 					return
 
-#			assert self.session == None, "a screen can only exec once per time"
+#			assert self.session is None, "a screen can only exec once per time"
 #			self.session = session
 
 			for val in self.values() + self.renderer:
@@ -98,7 +98,7 @@ class Screen(dict, GUISkin):
 		self.active_components = None
 		for val in active_components:
 			val.execEnd()
-#		assert self.session != None, "execEnd on non-execing screen!"
+#		assert self.session is not None, "execEnd on non-execing screen!"
 #		self.session = None
 		self.execing = False
 		for x in self.onExecEnd:
