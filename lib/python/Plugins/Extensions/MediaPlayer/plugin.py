@@ -66,7 +66,7 @@ class MediaPixmap(Pixmap):
 
 	def paintCoverArtPixmapCB(self, picInfo=None):
 		ptr = self.picload.getData()
-		if ptr != None:
+		if ptr is not None:
 			self.instance.setPixmap(ptr.__deref__())
 
 	def updateCoverArt(self, path):
