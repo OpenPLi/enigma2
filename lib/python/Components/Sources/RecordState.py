@@ -1,6 +1,7 @@
 from Source import Source
 from Components.Element import cached
 from enigma import iRecordableService
+from Components.SystemInfo import SystemInfo
 
 class RecordState(Source):
 	def __init__(self, session):
@@ -14,6 +15,8 @@ class RecordState(Source):
 		prev_records = self.records_running
 		if event in (iRecordableService.evEnd, iRecordableService.evStart, None):
 			recs = self.session.nav.getRecordings()
+			if SystemInfo["LCDsymbol_circle"]:
+				open(SystemInfo["LCDsymbol_circle"], "w").write(recs and "1" or "0")
 			self.records_running = len(recs)
 			if self.records_running != prev_records:
 				self.changed((self.CHANGED_ALL,))
