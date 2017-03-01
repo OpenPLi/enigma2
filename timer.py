@@ -1,5 +1,5 @@
 from bisect import insort
-from time import strftime, time, localtime, mktime
+from time import time, localtime, mktime
 from enigma import eTimer
 import datetime
 

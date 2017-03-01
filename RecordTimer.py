@@ -1,6 +1,5 @@
 import os
-from enigma import eEPGCache, getBestPlayableServiceReference, eStreamServer,\
-	eServiceReference, iRecordableService, quitMainloop, eActionMap, setPreferredTuner
+from enigma import eEPGCache, getBestPlayableServiceReference, eStreamServer, eServiceReference, iRecordableService, quitMainloop, eActionMap, setPreferredTuner
 
 from Components.config import config
 from Components.UsageConfig import defaultMoviePath

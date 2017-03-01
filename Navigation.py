@@ -1,18 +1,17 @@
-from enigma import eServiceCenter, eServiceReference, eTimer, pNavigation, getBestPlayableServiceReference, iPlayableService, eActionMap, setPreferredTuner, eStreamServer
+from enigma import eServiceCenter, eServiceReference, pNavigation, getBestPlayableServiceReference, iPlayableService, setPreferredTuner, eStreamServer
 from Components.ParentalControl import parentalControl
 from Components.SystemInfo import SystemInfo
 from Components.config import config, configfile
 from Tools.BoundFunction import boundFunction
 from Tools.StbHardware import getFPWasTimerWakeup
 from Tools import Notifications
-from time import time, localtime
+from time import time
 import RecordTimer
 import Screens.Standby
 import NavigationInstance
 import ServiceReference
 from Screens.InfoBar import InfoBar
 from Components.Sources.StreamService import StreamServiceList
-from sys import maxint
 
 # TODO: remove pNavgation, eNavigation and rewrite this stuff in python.
 class Navigation:

@@ -6,7 +6,6 @@ if os.path.isfile("/usr/lib/enigma2/python/enigma.zip"):
 from Tools.Profile import profile, profile_final
 profile("PYTHON_START")
 
-import Tools.RedirectOutput
 import enigma
 import eConsoleImpl
 import eBaseImpl
@@ -24,7 +23,7 @@ profile("SimpleSummary")
 from Screens import InfoBar
 from Screens.SimpleSummary import SimpleSummary
 
-from sys import stdout, exc_info
+from sys import stdout
 
 profile("Bouquets")
 from Components.config import config, configfile, ConfigText, ConfigYesNo, ConfigInteger, NoSave
