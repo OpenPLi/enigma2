@@ -1,6 +1,5 @@
 from Screens.Screen import Screen
-from Components.ConfigList import ConfigListScreen
-from Components.config import config, ConfigSubsection, ConfigInteger, ConfigSlider, getConfigListEntry
+from Components.config import config, ConfigSubsection, ConfigInteger
 
 config.plugins.OSDPositionSetup = ConfigSubsection()
 config.plugins.OSDPositionSetup.dst_left = ConfigInteger(default = 0)

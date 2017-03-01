@@ -1,5 +1,4 @@
 from Screens.Screen import Screen
-from Screens.Standby import QuitMainloopScreen
 from Components.ConfigList import ConfigListScreen
 from Components.config import config, ConfigSlider, getConfigListEntry, ConfigYesNo
 from Components.Label import Label

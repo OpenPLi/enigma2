@@ -1,6 +1,6 @@
 from Screens.Screen import Screen
 from Screens.ChannelSelection import *
-from Components.ActionMap import HelpableActionMap, ActionMap, NumberActionMap
+from Components.ActionMap import ActionMap
 from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText
 from Components.config import ConfigNothing
@@ -11,11 +11,10 @@ from Components.MenuList import MenuList
 from ServiceReference import ServiceReference
 from Plugins.Plugin import PluginDescriptor
 from xml.etree.cElementTree import parse as ci_parse
-from Tools.XMLTools import elementsWithTag, mergeText, stringToXML
+from Tools.XMLTools import stringToXML
 from enigma import eDVBCI_UI, eDVBCIInterfaces, eEnv
 from Screens.ChoiceBox import ChoiceBox
 from Tools.BoundFunction import boundFunction
-from Tools.XMLTools import stringToXML
 
 import os
 
