@@ -1,7 +1,6 @@
 import DVDProject, TitleList, TitleCutter, TitleProperties, ProjectSettings, DVDToolbox, Process
 from Screens.Screen import Screen
 from Screens.ChoiceBox import ChoiceBox
-from Screens.InputBox import InputBox
 from Screens.MessageBox import MessageBox
 from Screens.HelpMenu import HelpableScreen
 from Screens.TaskView import JobView
