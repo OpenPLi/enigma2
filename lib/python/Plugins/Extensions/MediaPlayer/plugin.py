@@ -11,7 +11,7 @@ from Screens.InfoBar import InfoBar
 from Screens.InfoBarGenerics import InfoBarSeek, InfoBarScreenSaver, InfoBarAudioSelection, InfoBarCueSheetSupport, InfoBarNotifications, InfoBarSubtitleSupport
 from Components.ActionMap import NumberActionMap, HelpableActionMap
 from Components.Label import Label
-from Components.Pixmap import Pixmap,MultiPixmap
+from Components.Pixmap import Pixmap, MultiPixmap
 from Components.FileList import FileList
 from Components.MediaPlayer import PlayList
 from Components.MovieList import AUDIO_EXTENSIONS
@@ -19,10 +19,9 @@ from Components.ServicePosition import ServicePositionGauge
 from Components.ServiceEventTracker import ServiceEventTracker, InfoBarBase
 from Components.Playlist import PlaylistIOInternal, PlaylistIOM3U, PlaylistIOPLS
 from Components.AVSwitch import AVSwitch
-from Components.Harddisk import harddiskmanager
 from Components.config import config
 from Components.SystemInfo import SystemInfo
-from Tools.Directories import fileExists, pathExists, resolveFilename, SCOPE_CONFIG, SCOPE_PLAYLIST, SCOPE_CURRENT_SKIN
+from Tools.Directories import fileExists, resolveFilename, SCOPE_CONFIG, SCOPE_PLAYLIST, SCOPE_CURRENT_SKIN
 from Tools.BoundFunction import boundFunction
 from settings import MediaPlayerSettings
 import random

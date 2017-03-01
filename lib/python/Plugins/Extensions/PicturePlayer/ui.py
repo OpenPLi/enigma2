@@ -4,14 +4,14 @@ from Screens.Screen import Screen
 from Tools.Directories import resolveFilename, pathExists, SCOPE_MEDIA, SCOPE_CURRENT_SKIN
 
 from Components.Pixmap import Pixmap, MovingPixmap
-from Components.ActionMap import ActionMap, NumberActionMap
+from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
 from Components.FileList import FileList
 from Components.AVSwitch import AVSwitch
 from Components.Sources.List import List
 from Components.ConfigList import ConfigList, ConfigListScreen
 
-from Components.config import config, ConfigSubsection, ConfigInteger, ConfigSelection, ConfigText, ConfigYesNo, KEY_LEFT, KEY_RIGHT, KEY_0, getConfigListEntry
+from Components.config import config, ConfigSubsection, ConfigInteger, ConfigSelection, ConfigText, ConfigYesNo, KEY_LEFT, KEY_RIGHT, getConfigListEntry
 import skin
 
 def getScale():

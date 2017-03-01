@@ -8,8 +8,7 @@ from Components.VideoWindow import VideoWindow
 from Components.Label import Label
 from Components.config import config, ConfigSubsection, ConfigYesNo
 from Screens.InfoBarGenerics import InfoBarSeek, InfoBarCueSheetSupport
-from Components.GUIComponent import GUIComponent
-from enigma import eListboxPythonMultiContent, eListbox, getDesktop, gFont, iPlayableService, RT_HALIGN_RIGHT
+from enigma import getDesktop, gFont, iPlayableService, RT_HALIGN_RIGHT
 from Screens.FixedMenu import FixedMenu
 from Screens.HelpMenu import HelpableScreen
 from ServiceReference import ServiceReference
