@@ -1,6 +1,6 @@
 import os
 import Components.Task
-from twisted.internet import reactor, threads, task
+from twisted.internet import task
 
 class FailedPostcondition(Components.Task.Condition):
 	def __init__(self, exception):

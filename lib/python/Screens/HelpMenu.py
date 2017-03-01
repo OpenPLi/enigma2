@@ -1,5 +1,4 @@
 from Screen import Screen
-from Components.Pixmap import Pixmap, MovingPixmap
 from Components.Label import Label
 from Components.ActionMap import ActionMap
 from Components.HelpMenuList import HelpMenuList
