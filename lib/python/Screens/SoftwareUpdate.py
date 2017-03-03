@@ -17,8 +17,6 @@ from Tools.HardwareInfo import HardwareInfo
 from enigma import eTimer, getBoxType, eDVBDB
 from urllib2 import urlopen
 import socket
-import os
-import re
 
 class UpdatePlugin(Screen, ProtectedScreen):
 	skin = """
