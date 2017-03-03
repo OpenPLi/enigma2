@@ -176,6 +176,20 @@ class VirtualKeyBoard(Screen):
 				[u"A", u"S", u"D", u"F", u"G", u"H", u"J", u"K", u"L", u"Ó", u"Á", u"'"],
 				[u">", u"Y", u"X", u"C", u"V", u"B", u"N", u"M", u";", u":", u"_", u"CLEAR"],
 				[u"SHIFT", u"SPACE", u"?", u"\\", u"Ŕ", u"É", u"Č", u"Í", u"Ě", u"Ń", u"Ň", u"OK"]]
+			self.nextLang = 'fa_IR'
+		elif self.lang == 'fa_IR':
+			self.keys_list = [
+				[u"EXIT", u"1", u"2", u"3", u"4", u"5", u"6", u"7", u"8", u"9", u"0", u"BACKSPACE"],
+				[u"ض", u"ص", u"ث", u"ق", u"ف", u"غ", u"ع", u"ه", u"خ", u"ح", u"-", u"ج"],
+				[u"ش", u"س", u"ی", u"ب", u"ل", u"ا", u"ت", u"ن", u"م", u"ک", u"گ", u"پ"],
+				[u"چ", u"ظ", u"ط", u"ز", u"ر", u"ذ", u"د", u"ئ", u"و", ".", u"/", u"ALL"],
+				[u"SHIFT", u"SPACE", u"OK", u"LEFT", u"RIGHT", u"*"]]
+			self.shiftkeys_list = [
+				[u"EXIT", u"!", u"@", u"#", u"$", u"%", u"^", u"&", u"(", u")", u"=", u"BACKSPACE"],
+				[u"ً", u"ٌ", u"ٍ", u"ريال", u"،", u"؛", u",", u"]", u"[", u"\", u"+", u"["],
+				[u"َ", u"ُ", u"ِ", u"ّ", u"ۀ", u"آ", u"ـ", u"«", u"»", u"?", u'"', u"|"],
+				[u"]", u"ة", u"ي", u"ژ", u"ؤ", u"إ", u"أ", u"ء", u"<", u">", u"؟", u"CLEAR"],
+				[u"SHIFT", u"SPACE", u"OK", u"LEFT", u"RIGHT", u"~"]]
 			self.nextLang = 'fi_FI'
 		elif self.lang == 'fi_FI':
 			self.keys_list = [
