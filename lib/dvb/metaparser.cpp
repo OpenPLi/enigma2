@@ -66,7 +66,7 @@ int eDVBMetaParser::parseMeta(const std::string &tsname)
 {
 	/* if it's a PVR channel, recover service id. */
 	std::string filename = tsname + ".meta";
-	CFile f(filename.c_str(), "r");
+	CFile f(filename, "r");
 
 	if (!f)
 		return -ENOENT;
@@ -150,7 +150,7 @@ int eDVBMetaParser::parseRecordings(const std::string &filename)
 
 	std::string recordings = filename.substr(0, slash) + "/recordings.epl";
 
-	CFile f(recordings.c_str(), "r");
+	CFile f(recordings, "r");
 	if (!f)
 	{
 //		eDebug("[eDVBMetaParser] no recordings.epl found: %s: %m", recordings.c_str());
@@ -209,7 +209,7 @@ int eDVBMetaParser::updateMeta(const std::string &tsname)
 	eServiceReference ref = m_ref;
 	ref.path = "";
 
-	CFile f(filename.c_str(), "w");
+	CFile f(filename, "w");
 	if (!f)
 		return -ENOENT;
 
