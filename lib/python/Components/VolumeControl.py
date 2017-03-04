@@ -12,7 +12,6 @@ class VolumeControl:
 	"""Volume control, handles volUp, volDown, volMute actions and display
 	a corresponding dialog"""
 	def __init__(self, session):
-		global globalActionMap
 		globalActionMap.actions["volumeUp"] = self.volUp
 		globalActionMap.actions["volumeDown"] = self.volDown
 		globalActionMap.actions["volumeMute"] = self.volMute
@@ -49,7 +48,6 @@ class VolumeControl:
 		self.setVolume(-1)
 
 	def setVolume(self, direction):
-		oldvol = self.volctrl.getVolume()
 		if direction > 0:
 			self.volctrl.volumeUp()
 		else:
