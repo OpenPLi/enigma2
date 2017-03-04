@@ -15,6 +15,7 @@ dist_pkgdata_DATA = \
 	startwizard.xml \
 	freesat.t1 \
 	freesat.t2 \
+	iso-639-3.pck \
 	timezone.xml \
 	unicable.xml
 
@@ -30,3 +31,5 @@ skin_display.xml: $(srcdir)/skin_display_default.xml
 skin_text.xml: $(srcdir)/skin_text_default.xml
 	test -f $(srcdir)/skin_text_$(BOXTYPE).xml && cp $(srcdir)/skin_text_$(BOXTYPE).xml skin_text.xml || cp $(srcdir)/skin_text_$(TEXTSKIN).xml skin_text.xml
 
+iso-639-3.pck: $(srcdir)/iso-639-3.tab
+	python $(srcdir)/convert-iso-639-3.py $< $@
