@@ -12,8 +12,7 @@ from Screens.LocationBox import defaultInhibitDirs
 import NavigationInstance
 import skin
 
-from enigma import eListboxPythonMultiContent, eListbox, gFont, iServiceInformation, \
-	RT_HALIGN_LEFT, RT_HALIGN_RIGHT, eServiceReference, eServiceCenter, eTimer, RT_VALIGN_CENTER
+from enigma import eListboxPythonMultiContent, eListbox, gFont, iServiceInformation, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, eServiceReference, eServiceCenter, eTimer, RT_VALIGN_CENTER
 
 AUDIO_EXTENSIONS = frozenset((".dts", ".mp3", ".wav", ".wave", ".oga", ".ogg", ".flac", ".m4a", ".mp2", ".m2a", ".wma", ".ac3", ".mka", ".aac", ".ape", ".alac"))
 DVD_EXTENSIONS = frozenset((".iso", ".img", ".nrg"))

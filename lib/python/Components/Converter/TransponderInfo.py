@@ -3,7 +3,7 @@ from Components.Converter.Converter import Converter
 from enigma import iServiceInformation, iPlayableService, iPlayableServicePtr, eServiceCenter
 from Components.Element import cached
 from ServiceReference import resolveAlternate,  ServiceReference
-from Tools.Transponder import ConvertToHumanReadable, getChannelNumber
+from Tools.Transponder import ConvertToHumanReadable
 from Components.NimManager import nimmanager
 import Screens.InfoBar
 
