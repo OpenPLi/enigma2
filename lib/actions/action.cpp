@@ -186,11 +186,26 @@ void eActionMap::unbindKeyDomain(const std::string &domain)
 
 struct call_entry
 {
-	ePyObject m_fnc, m_arg;
+	ePyObject m_fnc;
+	ePyObject m_arg;
 	eWidget *m_widget;
-	void *m_widget_arg, *m_widget_arg2;
-	call_entry(ePyObject fnc, ePyObject arg): m_fnc(fnc), m_arg(arg), m_widget(0), m_widget_arg(0) { }
-	call_entry(eWidget *widget, void *arg, void *arg2): m_widget(widget), m_widget_arg(arg), m_widget_arg2(arg2) { }
+	void *m_widget_arg;
+	void *m_widget_arg2;
+
+	call_entry(ePyObject fnc, ePyObject arg)
+		: m_fnc(fnc)
+		, m_arg(arg)
+		, m_widget(nullptr)
+		, m_widget_arg(nullptr)
+		, m_widget_arg2(nullptr)
+	{ }
+	call_entry(eWidget *widget, void *arg, void *arg2)
+		: m_fnc()
+		, m_arg()
+		, m_widget(widget)
+		, m_widget_arg(arg)
+		, m_widget_arg2(arg2)
+	{ }
 };
 
 void eActionMap::keyPressed(const std::string &device, int key, int flags)
