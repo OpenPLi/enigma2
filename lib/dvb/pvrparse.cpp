@@ -60,7 +60,7 @@ int eMPEGStreamInformation::load(const char *filename)
 	m_access_points.clear();
 	m_pts_to_offset.clear();
 	m_timestamp_deltas.clear();
-	CFile f(s_filename + ".ap", "rb");
+	CFile f((s_filename + ".ap").c_str(), "rb");
 	if (!f)
 		return -1;
 	while (1)
@@ -648,7 +648,7 @@ int eMPEGStreamInformationWriter::stopSave(void)
 	std::string ap_filename(m_filename);
 	ap_filename += ".ap";
 	{
-		CFile f(ap_filename, "wb");
+		CFile f(ap_filename.c_str(), "wb");
 		if (!f)
 			return -1;
 		for (std::deque<AccessPoint>::const_iterator i(m_streamtime_access_points.begin()); i != m_streamtime_access_points.end(); ++i)

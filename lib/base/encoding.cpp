@@ -48,8 +48,8 @@ eDVBTextEncodingHandler::eDVBTextEncodingHandler()
 		/* no personalized encoding.conf, fallback to the system default */
 		file = eEnv::resolve("${datadir}/enigma2/encoding.conf");
 	}
+	CFile f(file.c_str(), "rt");
 
-	CFile f(file, "rt");
 	if (f)
 	{
 		size_t bufsize = 256;

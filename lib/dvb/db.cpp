@@ -104,7 +104,7 @@ RESULT eBouquet::flushChanges()
 {
 	std::string filename = eEnv::resolve("${sysconfdir}/enigma2/" + m_filename);
 	{
-		CFile f(filename + ".writing", "w");
+		CFile f((filename + ".writing").c_str(), "w");
 		if (!f)
 			goto err;
 		if ( fprintf(f, "#NAME %s\r\n", m_bouquet_name.c_str()) < 0 )
@@ -698,13 +698,11 @@ void eDVBDB::saveServicelist(const char *file)
 	eDebug("[eDVBDB] ---- saving lame channel db");
 	std::string filename = file;
 
-
-	CFile f(filename + ".writing", "w");
-	{
+	CFile f((filename + ".writing").c_str(), "w");
 	int channels=0, services=0;
 	if (!f)
 		eFatal("[eDVBDB] couldn't save lame channel db!");
-	CFile g(filename + "5.writing", "w");
+	CFile g((filename + "5.writing").c_str(), "w");
 
 	fprintf(f, "eDVB services /4/\n");
 	fprintf(f, "transponders\n");
