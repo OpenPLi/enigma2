@@ -44,6 +44,15 @@ eDVBAudio::eDVBAudio(eDVBDemux *demux, int dev)
 		m_fd_demux = -1;
 	}
 
+#ifdef TUNER_VUSOLO4K
+	if (m_dev > 0)
+	{
+		m_fd = -1;
+		m_fd_demux = -1;
+		eWarning("[eDVBAudio] TUNER_VUSOLO4K not use audio for decoder%d", m_dev);
+	}
+#endif
+
 #ifndef DREAMBOX
 	if (m_fd >= 0)
 	{
