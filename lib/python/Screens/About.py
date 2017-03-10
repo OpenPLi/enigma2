@@ -423,10 +423,6 @@ class Troubleshoot(Screen):
 		tmp = "/tmp/enigma2_crash.log"
 		return [x for x in sorted(glob.glob("/mnt/hdd/*.log"), key=lambda x: os.path.isfile(x) and os.path.getmtime(x))] + (os.path.isfile(home_root) and [home_root] or []) + (os.path.isfile(tmp) and [tmp] or [])
 
-	def getAutoinstallLogFile(self):
-		install_log = "/var/log/autoinstall.log"
-		return (os.path.isfile(install_log) and install_log or "")
-
 	def updateOptions(self):
 		self.titles = ["dmesg", "ifconfig", "df", "top", "ps"]
 		self.commands = ["dmesg", "ifconfig", "df -h", "top -n 1", "ps"]
@@ -439,10 +435,10 @@ class Troubleshoot(Screen):
 				self.titles.append("logfile %s (%s/%s)" % (fileName, logfileCounter, totalNumberOfLogfiles))
 				self.commands.append("cat %s" % (fileName))
 				logfileCounter += 1
-		autoinstallLog = self.getAutoinstallLogFile()
-		if autoinstallLog:
-				self.titles.append("%s" % autoinstallLog)
-				self.commands.append("cat %s" % autoinstallLog)
+		install_log = "/var/log/autoinstall.log"
+		if os.path.isfile(install_log):
+				self.titles.append("%s" % install_log)
+				self.commands.append("cat %s" % install_log)
 		self.commandIndex = min(len(self.commands) - 1, self.commandIndex)
 		self.updateKeys()
 
