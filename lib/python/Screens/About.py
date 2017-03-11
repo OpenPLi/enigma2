@@ -426,7 +426,7 @@ class Troubleshoot(Screen):
 	def updateOptions(self):
 		self.titles = ["dmesg", "ifconfig", "df", "top", "ps"]
 		self.commands = ["dmesg", "ifconfig", "df -h", "top -n 1", "ps"]
-		install_log = "/var/log/autoinstall.log"
+		install_log = "/home/root/autoinstall.log"
 		if os.path.isfile(install_log):
 				self.titles.append("%s" % install_log)
 				self.commands.append("cat %s" % install_log)
