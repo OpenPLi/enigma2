@@ -1862,7 +1862,12 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		current = item[0]
 		info = item[1]
 		cur_path = os.path.realpath(current.getPath())
-		st = os.stat(cur_path)
+		try:
+			st = os.stat(cur_path)
+		except OSError, e:
+			msg = _("Cannot move to trash can") + "\n" + str(e) + "\n"
+			self.session.open(MessageBox, msg, MessageBox.TYPE_ERROR)
+			return
 		name = info and info.getName(current) or _("this recording")
 		are_you_sure = _("Do you really want to delete %s?") % (name)
 		if current.flags & eServiceReference.mustDescent:
