@@ -6,6 +6,7 @@ if os.path.isfile("/usr/lib/enigma2/python/enigma.zip"):
 from Tools.Profile import profile, profile_final
 profile("PYTHON_START")
 
+import Tools.RedirectOutput
 import enigma
 import eConsoleImpl
 import eBaseImpl
