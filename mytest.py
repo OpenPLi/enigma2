@@ -6,6 +6,8 @@ if os.path.isfile("/usr/lib/enigma2/python/enigma.zip"):
 from Tools.Profile import profile, profile_final
 profile("PYTHON_START")
 
+# Don't remove this line. It may seem to do nothing, but if removed,
+# it will break output redirection for crash logs.
 import Tools.RedirectOutput
 import enigma
 import eConsoleImpl
