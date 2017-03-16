@@ -16,9 +16,11 @@ config.hdmicec.handle_tv_wakeup = ConfigYesNo(default = True)
 config.hdmicec.tv_wakeup_detection = ConfigSelection(
 	choices = {
 	"wakeup": _("Wakeup"),
+	"requestphysicaladdress": _("Request for physical address report"),
 	"tvreportphysicaladdress": _("TV physical address report"),
 	"sourcerequest": _("Source request"),
 	"streamrequest": _("Stream request"),
+	"requestvendor":  _("Request for vendor report"),
 	"osdnamerequest": _("OSD name request"),
 	"activity": _("Any activity"),
 	},
@@ -267,6 +269,8 @@ class HdmiCec:
 			if config.hdmicec.handle_tv_wakeup.value:
 				if cmd == 0x04 and config.hdmicec.tv_wakeup_detection.value == "wakeup":
 					self.wakeup()
+				elif cmd == 0x83 and config.hdmicec.tv_wakeup_detection.value == "requestphysicaladdress":
+						self.wakeup()
 				elif cmd == 0x84 and config.hdmicec.tv_wakeup_detection.value == "tvreportphysicaladdress":
 					if (ord(data[0]) * 256 + ord(data[1])) == 0 and ord(data[2]) == 0:
 						self.wakeup()
@@ -276,6 +280,8 @@ class HdmiCec:
 					physicaladdress = ord(data[0]) * 256 + ord(data[1])
 					ouraddress = eHdmiCEC.getInstance().getPhysicalAddress()
 					if physicaladdress == ouraddress:
+						self.wakeup()
+				elif cmd == 0x8C and config.hdmicec.tv_wakeup_detection.value == "requestvendor":
 						self.wakeup()
 				elif cmd == 0x46 and config.hdmicec.tv_wakeup_detection.value == "osdnamerequest":
 					self.wakeup()
