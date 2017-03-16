@@ -45,6 +45,9 @@ class HdmiCec:
 
 		self.wait = eTimer()
 		self.wait.timeout.get().append(self.sendCmd)
+		self.waitKeyEvent = eTimer()
+		self.waitKeyEvent.timeout.get().append(self.sendKeyEvent)
+		self.queueKeyEvent = []
 		self.repeat = eTimer()
 		self.repeat.timeout.get().append(self.wakeupMessages)
 		self.queue = []
@@ -312,9 +315,20 @@ class HdmiCec:
 			if keyCode == 115 or keyCode == 114 or keyCode == 113:
 				cmd = 0x45
 		if cmd:
-			eHdmiCEC.getInstance().sendMessage(self.volumeForwardingDestination, cmd, data, len(data))
+			if config.hdmicec.minimum_send_interval.value != "0":
+				self.queueKeyEvent.append((self.volumeForwardingDestination, cmd, data))
+				if not self.waitKeyEvent.isActive():
+					self.waitKeyEvent.start(int(config.hdmicec.minimum_send_interval.value), True)
+			else:
+				eHdmiCEC.getInstance().sendMessage(self.volumeForwardingDestination, cmd, data, len(data))
 			return 1
 		else:
 			return 0
+
+	def sendKeyEvent(self):
+		if len(self.queueKeyEvent):
+			(address, cmd, data) = self.queueKeyEvent.pop(0)
+			eHdmiCEC.getInstance().sendMessage(address, cmd, data, len(data))
+			self.waitKeyEvent.start(int(config.hdmicec.minimum_send_interval.value), True)
 
 hdmi_cec = HdmiCec()
