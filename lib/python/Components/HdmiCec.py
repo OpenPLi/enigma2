@@ -85,14 +85,12 @@ class HdmiCec:
 		elif message == "sourceactive":
 			address = 0x0f # use broadcast for active source command
 			cmd = 0x82
-			physicaladdress = eHdmiCEC.getInstance().getPhysicalAddress()
-			data = str(struct.pack('BB', int(physicaladdress/256), int(physicaladdress%256)))
+			data = self.setData()
 		elif message == "standby":
 			cmd = 0x36
 		elif message == "sourceinactive":
-			physicaladdress = eHdmiCEC.getInstance().getPhysicalAddress()
 			cmd = 0x9d
-			data = str(struct.pack('BB', int(physicaladdress/256), int(physicaladdress%256)))
+			data = self.setData()
 		elif message == "menuactive":
 			cmd = 0x8e
 			data = str(struct.pack('B', 0x00))
@@ -105,8 +103,7 @@ class HdmiCec:
 		elif message == "setsystemaudiomode":
 			cmd = 0x70
 			address = 0x05
-			physicaladdress = eHdmiCEC.getInstance().getPhysicalAddress()
-			data = str(struct.pack('BB', int(physicaladdress/256), int(physicaladdress%256)))
+			data = self.setData()
 		elif message == "osdname":
 			cmd = 0x47
 			data = os.uname()[1]
@@ -120,9 +117,7 @@ class HdmiCec:
 		elif message == "reportaddress":
 			address = 0x0f # use broadcast address
 			cmd = 0x84
-			physicaladdress = eHdmiCEC.getInstance().getPhysicalAddress()
-			devicetype = eHdmiCEC.getInstance().getDeviceType()
-			data = str(struct.pack('BBB', int(physicaladdress/256), int(physicaladdress%256), devicetype))
+			data = self.setData(True)
 		elif message == "vendorid":
 			cmd = 0x87
 			data = '\x00\x00\x00'
@@ -149,6 +144,13 @@ class HdmiCec:
 	def sendMessages(self, address, messages):
 		for message in messages:
 			self.sendMessage(address, message)
+
+	def setData(self, devicetypeSend=False):
+		physicaladdress = eHdmiCEC.getInstance().getPhysicalAddress()
+		if devicetypeSend:
+			devicetype = eHdmiCEC.getInstance().getDeviceType()
+			return str(struct.pack('BBB', int(physicaladdress/256), int(physicaladdress%256), devicetype))
+		return str(struct.pack('BB', int(physicaladdress/256), int(physicaladdress%256)))
 
 	def wakeupMessages(self):
 		if config.hdmicec.enabled.value:
