@@ -1,5 +1,5 @@
 import struct, os, time
-from config import config, ConfigSelection, ConfigYesNo, ConfigSubsection, ConfigText
+from config import config, ConfigSelection, ConfigYesNo, ConfigSubsection, ConfigText, ConfigCECAddress
 from enigma import eHdmiCEC, eActionMap
 from Tools.StbHardware import getFPWasTimerWakeup
 from enigma import eTimer
@@ -38,6 +38,7 @@ choicelist = []
 for i in [3] + range(5, 65, 5):
 	choicelist.append(("%d" % i, _("%d sec") % i))
 config.hdmicec.repeat_wakeup_timer = ConfigSelection(default = "3", choices = [("0", _("Disabled"))] + choicelist)
+config.hdmicec.next_boxes_detect = ConfigYesNo(default=False)
 
 class HdmiCec:
 
@@ -54,6 +55,10 @@ class HdmiCec:
 		self.repeat.timeout.get().append(self.wakeupMessages)
 		self.queue = []
 
+		self.delay = eTimer()
+		self.delay.timeout.get().append(self.sendStandbyMessages)
+		self.useStandby = None #True
+
 		eHdmiCEC.getInstance().messageReceived.get().append(self.messageReceived)
 		config.misc.standbyCounter.addNotifier(self.onEnterStandby, initial_call = False)
 		config.misc.DeepStandby.addNotifier(self.onEnterDeepStandby, initial_call = False)
@@ -61,6 +66,7 @@ class HdmiCec:
 
 		self.volumeForwardingEnabled = False
 		self.volumeForwardingDestination = 0
+		self.wakeup_from_tv = False
 		eActionMap.getInstance().bindAction('', -maxint - 1, self.keyEvent)
 		config.hdmicec.volume_forwarding.addNotifier(self.configVolumeForwarding)
 		config.hdmicec.enabled.addNotifier(self.configVolumeForwarding)
@@ -135,6 +141,10 @@ class HdmiCec:
 		elif message == "requestactivesource":
 			address = 0x0f # use broadcast address
 			cmd = 0x85
+		elif message == "getpowerstatus":
+			self.useStandby = True;
+			address = 0x0f # use broadcast address => boxes will send info
+			cmd = 0x8f
 
 		if cmd:
 			if config.hdmicec.minimum_send_interval.value != "0":
@@ -165,7 +175,9 @@ class HdmiCec:
 		if config.hdmicec.enabled.value:
 			messages = []
 			if config.hdmicec.control_tv_wakeup.value:
-				messages.append("wakeup")
+				if not self.wakeup_from_tv:
+					messages.append("wakeup")
+			self.wakeup_from_tv = False
 			if config.hdmicec.report_active_source.value:
 				messages.append("sourceactive")
 			if config.hdmicec.report_active_menu.value:
@@ -179,9 +191,20 @@ class HdmiCec:
 
 	def standbyMessages(self):
 		if config.hdmicec.enabled.value:
+			if config.hdmicec.next_boxes_detect.value:
+				self.secondBoxActive()
+				self.delay.start(1000, True)
+			else:
+				self.sendStandbyMessages()
+
+	def sendStandbyMessages(self):
 			messages = []
 			if config.hdmicec.control_tv_standby.value:
-				messages.append("standby")
+				if self.useStandby:
+					messages.append("standby")
+				else:
+					messages.append("sourceinactive")
+					self.useStandby = True
 			else:
 				if config.hdmicec.report_active_source.value:
 					messages.append("sourceinactive")
@@ -193,6 +216,9 @@ class HdmiCec:
 			if config.hdmicec.control_receiver_standby.value:
 				self.sendMessage(5, "keypoweroff")
 				self.sendMessage(5, "standby")
+
+	def secondBoxActive(self):
+		self.sendMessage(0, "getpowerstatus")
 
 	def onLeaveStandby(self):
 		self.wakeupMessages()
@@ -207,7 +233,10 @@ class HdmiCec:
 
 	def onEnterDeepStandby(self, configElement):
 		if config.hdmicec.handle_deepstandby_events.value:
-			self.standbyMessages()
+			if config.hdmicec.next_boxes_detect.value:
+				self.delay.start(750, True)
+			else:
+				self.sendStandbyMessages()
 
 	def standby(self):
 		from Screens.Standby import Standby, inStandby
@@ -216,6 +245,7 @@ class HdmiCec:
 			Notifications.AddNotification(Standby)
 
 	def wakeup(self):
+		self.wakeup_from_tv = True
 		from Screens.Standby import inStandby
 		if inStandby:
 			inStandby.Power()
@@ -272,6 +302,10 @@ class HdmiCec:
 						self.sendMessage(message.getAddress(), 'menuinactive')
 					else:
 						self.sendMessage(message.getAddress(), 'menuactive')
+			elif cmd == 0x90: # report power status
+				#self.useStandby = True
+				if ord(data[0]) == 0: # power active
+					self.useStandby = False
 			elif cmd == 0x9F: # request get CEC version
 				self.sendMessage(message.getAddress(), 'sendcecversion')
 
@@ -280,7 +314,7 @@ class HdmiCec:
 				self.standby()
 
 			# handle wakeup requests from the tv
-			if config.hdmicec.handle_tv_wakeup.value:
+			if inStandby and config.hdmicec.handle_tv_wakeup.value:
 				if cmd == 0x04 and config.hdmicec.tv_wakeup_detection.value == "wakeup":
 					self.wakeup()
 				elif cmd == 0x83 and config.hdmicec.tv_wakeup_detection.value == "requestphysicaladdress":
