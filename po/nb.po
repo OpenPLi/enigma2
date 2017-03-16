@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-18 11:02+0100\n"
-"PO-Revision-Date: 2017-02-18 11:15+0100\n"
+"POT-Creation-Date: 2017-03-12 13:16+0100\n"
+"PO-Revision-Date: 2017-03-12 13:23+0100\n"
 "Last-Translator: andy1 <dummy@dummy.com>\n"
 "Language-Team: G.Jensen\n"
 "Language: nb\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 1.8.12\n"
 "X-Poedit-Bookmarks: -1,-1,-1,-1,-1,31,1959,-1,-1,-1\n"
 
 msgid ""
@@ -242,6 +242,14 @@ msgstr "%a %e/%m  %-H:%M"
 msgid "%d B"
 msgstr "%d B"
 
+#, python-format
+msgid "%d GB"
+msgstr "%d GB"
+
+#, python-format
+msgid "%d MB"
+msgstr "%d MB"
+
 #
 #. TRANSLATORS: Intermediate scanning result, '%d' channel(s) have been found so far
 #, python-format
@@ -273,6 +281,10 @@ msgid "%d job is running in the background!"
 msgid_plural "%d jobs are running in the background!"
 msgstr[0] "%d prosess pågår i bakgrunnen!"
 msgstr[1] "%d prosesser pågår i bakgrunnen!"
+
+#, python-format
+msgid "%d kB"
+msgstr "%d kB"
 
 #
 #, python-format
@@ -333,9 +345,25 @@ msgstr "%d.%02d. %02d:%02d"
 msgid "%d.%B %Y"
 msgstr "%d.%B %Y"
 
+#, python-format
+msgid "%d.%d"
+msgstr "%d.%d"
+
+#, python-format
+msgid "%d.%d.%d"
+msgstr "%d.%d.%d"
+
+#, python-format
+msgid "%d:%02d"
+msgstr "%d:%02d"
+
 #. TRANSLATORS: VFD hour:minute daynum short monthname in strftime() format! See 'man strftime'
 msgid "%k:%M %e/%m"
 msgstr "%k:%M %e/%m"
+
+#, python-format
+msgid "%s %d.%d"
+msgstr "%s %d.%d"
 
 #, python-format
 msgid "%s %s free disk space"
@@ -990,6 +1018,9 @@ msgstr "Lydspor (%s) format"
 msgid "Audio track (%s) language"
 msgstr "Lydspor (%s) språk"
 
+msgid "Audio volume step size"
+msgstr "Trinn justering av lydvolum"
+
 #
 msgid "Author: "
 msgstr "Forfatter:"
@@ -1250,6 +1281,10 @@ msgstr "Strekk ut PiP (bilde i bilde)"
 msgid "Center time-labels and remove date"
 msgstr "Sentrer tidsangivelse og fjern dato"
 
+#
+msgid "Change Language"
+msgstr "Endre språk"
+
 msgid "Change PIN"
 msgstr "Endre PIN"
 
@@ -1491,6 +1526,9 @@ msgstr "Still inn ønsket lyd forsinkelse for Dolby digital lyd."
 
 msgid "Configure the general audio delay of stereo sound tracks."
 msgstr "Still inn ønsket lyd forsinkelse for stereo lyd."
+
+msgid "Configure the general audio volume step size (limit 1-10)."
+msgstr "Still inn ønsket trinn for lydvolum (verdi 1-10)."
 
 msgid "Configure the refresh rate of the screen."
 msgstr "Still inn oppfriskningsrate på TV skjermen."
@@ -6093,6 +6131,10 @@ msgstr "Stopp"
 msgid "Stop PiP"
 msgstr "Stopp PiP"
 
+#
+msgid "Stop Streams"
+msgstr "Stopp strømming"
+
 msgid "Stop all current recordings"
 msgstr "Stopp alle pågående opptak"
 
@@ -6330,7 +6372,7 @@ msgstr "System - Modulasjon"
 
 #. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
 msgid "TRANSLATOR_INFO"
-msgstr "Siste oppdatering til norsk bokmål: 17.02.2017"
+msgstr "Siste oppdatering til norsk bokmål: 12.03.2017"
 
 #
 msgid "TS file is too large for ISO9660 level 1!"
