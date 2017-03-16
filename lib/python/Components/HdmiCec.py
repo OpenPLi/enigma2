@@ -129,6 +129,13 @@ class HdmiCec:
 		elif message == "keypoweroff":
 			cmd = 0x44
 			data = str(struct.pack('B', 0x6c))
+		elif message == "sendcecversion":
+			cmd = 0x9E
+			data = str(struct.pack('B', 0x04)) # v1.3a
+		elif message == "requestactivesource":
+			address = 0x0f # use broadcast address
+			cmd = 0x85
+
 		if cmd:
 			if config.hdmicec.minimum_send_interval.value != "0":
 				self.queue.append((address, cmd, data))
@@ -265,6 +272,8 @@ class HdmiCec:
 						self.sendMessage(message.getAddress(), 'menuinactive')
 					else:
 						self.sendMessage(message.getAddress(), 'menuactive')
+			elif cmd == 0x9F: # request get CEC version
+				self.sendMessage(message.getAddress(), 'sendcecversion')
 
 			# handle standby request from the tv
 			if cmd == 0x36 and config.hdmicec.handle_tv_standby.value:
