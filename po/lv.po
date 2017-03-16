@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-11 19:17+0200\n"
+"POT-Creation-Date: 2017-03-16 21:00+0200\n"
 "PO-Revision-Date: 2014-11-12 00:49+0200\n"
 "Last-Translator: Tapat <taapat@gmail.com>\n"
 "Language-Team: Taapat <taapat@gmail.com>\n"
@@ -175,6 +175,22 @@ msgid " updates available."
 msgstr " atjaunojumi pieejami."
 
 #, python-format
+msgid "%.0f GB"
+msgstr "%.0f GB"
+
+#, python-format
+msgid "%.0f MB"
+msgstr "%.0f MB"
+
+#, python-format
+msgid "%.0f kB"
+msgstr "%.0f kB"
+
+#, python-format
+msgid "%.2f GB"
+msgstr "%.2f GB"
+
+#, python-format
 msgid "%02d:%02d"
 msgstr "%02d:%02d"
 
@@ -213,6 +229,18 @@ msgstr "%a %e/%m"
 msgid "%a %e/%m  %-H:%M"
 msgstr "%a %e/%m  %-H:%M"
 
+#, python-format
+msgid "%d B"
+msgstr "%d B"
+
+#, python-format
+msgid "%d GB"
+msgstr "%d GB"
+
+#, python-format
+msgid "%d MB"
+msgstr "%d MB"
+
 #. TRANSLATORS: Intermediate scanning result, '%d' channel(s) have been found so far
 #, python-format
 msgid "%d channel found"
@@ -248,6 +276,10 @@ msgid_plural "%d jobs are running in the background!"
 msgstr[0] "%d darbs tiek veikts fonā!"
 msgstr[1] "%d darbi tiek veikti fonā!"
 msgstr[2] "%d darbi tiek veikti fonā!"
+
+#, python-format
+msgid "%d kB"
+msgstr "%d kB"
 
 #, python-format
 msgid "%d min"
@@ -310,9 +342,25 @@ msgstr "%d.%02d. %02d:%02d"
 msgid "%d.%B %Y"
 msgstr "%d.%B %Y"
 
+#, python-format
+msgid "%d.%d"
+msgstr "%d.%d"
+
+#, python-format
+msgid "%d.%d.%d"
+msgstr "%d.%d.%d"
+
+#, python-format
+msgid "%d:%02d"
+msgstr "%d:%02d"
+
 #. TRANSLATORS: VFD hour:minute daynum short monthname in strftime() format! See 'man strftime'
 msgid "%k:%M %e/%m"
 msgstr "%k:%M %e/%m"
+
+#, python-format
+msgid "%s %d.%d"
+msgstr "%s %d.%d"
 
 #, python-format
 msgid "%s %s free disk space"
@@ -962,6 +1010,9 @@ msgstr "Skaņas celiņa (%s) formāts"
 msgid "Audio track (%s) language"
 msgstr "Skaņas celiņa (%s) valoda"
 
+msgid "Audio volume step size"
+msgstr "Skaļuma regulēšanas soļa lielums"
+
 msgid "Author: "
 msgstr "Autors: "
 
@@ -1220,6 +1271,9 @@ msgstr "Centrēt DVB subtitrus"
 
 msgid "Center time-labels and remove date"
 msgstr "Centrēt laika iezīmes un nomest datumu"
+
+msgid "Change Language"
+msgstr "Nomainīt valodu"
 
 msgid "Change PIN"
 msgstr "Mainīt PIN"
@@ -1565,6 +1619,9 @@ msgstr "Uzstāda vispārējo audio aizturi Dolby Digital skaņu ierakstiem."
 
 msgid "Configure the general audio delay of stereo sound tracks."
 msgstr "Uzstāda vispārējo aizturi stereo skaņu ierakstiem."
+
+msgid "Configure the general audio volume step size (limit 1-10)."
+msgstr "Uzstāda skaļuma regulēšanas soļa lielumu (1-10)."
 
 msgid "Configure the hard disk drive to go to standby after the specified idle time."
 msgstr "Uzstāda lai cietais disks dodas gaidstāvē pēc noteiktā laika."
@@ -2714,8 +2771,8 @@ msgstr "Papildus sākuma laiks neaktivitātes miega taimera ignorēšanai"
 msgid "F"
 msgstr "F"
 
-msgid "F1/F3/F4"
-msgstr "F1/F3/F4"
+msgid "F1/F3/F4/F4-TURBO"
+msgstr "F1/F3/F4/F4-TURBO"
 
 msgid "FBC SCR (Unicable/JESS)"
 msgstr "FBC SCR (Unicable/JESS)"
@@ -3042,8 +3099,8 @@ msgstr "H"
 msgid "HD list"
 msgstr "HD saraksts"
 
-msgid "HD1100/HD1200/HD1265/et7x00/et8500/et7000mini"
-msgstr "HD1100/HD1200/HD1265/et7x00/et8500/et7000mini"
+msgid "HD11/HD51/HD1100/HD1200/HD1265/HD1500/HD500C/HD530C/VS1000/VS1500/et7x00/et8500/et7000mini"
+msgstr "HD11/HD51/HD1100/HD1200/HD1265/HD1500/HD500C/HD530C/VS1000/VS1500/et7x00/et8500/et7000mini"
 
 msgid "HD2400"
 msgstr "HD2400"
@@ -4591,6 +4648,15 @@ msgstr "Lūdzu uzgaidiet kamēr pārbauda tīklu..."
 msgid "Please wait while your network is restarting..."
 msgstr "Lūdzu uzgaidiet kamēr tīkls tiek pārstartēts..."
 
+msgid "Please wait, restarting cardserver."
+msgstr "Lūdzu uzgaidiet, pārstartē karšu serveri."
+
+msgid "Please wait, restarting softcam and cardserver."
+msgstr "Lūdzu uzgaidiet, pārstartē softcam un karšu serveri."
+
+msgid "Please wait, restarting softcam."
+msgstr "Lūdzu uzgaidiet, pārstartē softcam."
+
 msgid "Please wait..."
 msgstr "Lūdzu uzgaidiet..."
 
@@ -5153,11 +5219,20 @@ msgstr "Pārstartēt"
 msgid "Restart GUI now?"
 msgstr "Pārstartēt enigmu?"
 
+msgid "Restart both"
+msgstr "Pārstartēt abus"
+
+msgid "Restart cardserver"
+msgstr "Pārstartēt karšu serveri"
+
 msgid "Restart enigma"
 msgstr "Pārstartēt enigmu"
 
 msgid "Restart network"
 msgstr "Pārstartēt tīklu"
+
+msgid "Restart softcam"
+msgstr "Pārstartēt softcam"
 
 msgid "Restart test"
 msgstr "Atkārtot testu"
@@ -5463,11 +5538,17 @@ msgstr "Izvēlēties"
 msgid "Select CAId"
 msgstr "CAId izvēle"
 
+msgid "Select Card Server"
+msgstr "Izvēlieties karšu serveri"
+
 msgid "Select Channel"
 msgstr "Izvēlieties kanālu"
 
 msgid "Select HDD"
 msgstr "Izvēlieties cieto disku"
+
+msgid "Select Softcam"
+msgstr "Izvēlieties softcam"
 
 msgid "Select a bouquet"
 msgstr "Izvēlieties buķeti"
@@ -5938,6 +6019,9 @@ msgstr "Atvērt kanālu saraksu vai ierakstus"
 msgid "Show single service EPG"
 msgstr "Rādīt atsevišķa kanāla EPG"
 
+msgid "Show softcam setup in extensions menu"
+msgstr "Rādīt softcam iestatījumus paplašinājumu izvēlnē"
+
 msgid "Show status icons in movie list"
 msgstr "Statusa ikona filmu sarakstā"
 
@@ -6097,6 +6181,12 @@ msgstr "Sociālie/Politika/Ekonomika"
 
 msgid "SoftCam / CI"
 msgstr "SoftCam / CI"
+
+msgid "Softcam Setup"
+msgstr "Softcam iestatījumi"
+
+msgid "Softcam setup"
+msgstr "Softcam iestatījumi"
 
 msgid "Softcam type"
 msgstr "Softcam tips"
@@ -6316,6 +6406,9 @@ msgstr "Apturēt"
 
 msgid "Stop PiP"
 msgstr "Apturēt PiP"
+
+msgid "Stop Streams"
+msgstr "Apturēt"
 
 msgid "Stop all current recordings"
 msgstr "Apturēt visus pašreizējos ierakstus"
@@ -6826,6 +6919,9 @@ msgstr "Atļauj iestatīt krāsu dziļumu priekš UHD"
 msgid "This option allows you can config the Colorspace from Auto to RGB"
 msgstr "Atļauj iestatīt HDMI Colorspace Auto vai RGB režīmā"
 
+msgid "This option allows you to add the softcam setup in the extensions menu."
+msgstr "Pievieno softcam iestatījumus paplašinājumu izvēlnē."
+
 msgid "This option allows you to hide and sort menu entries. When selecting user you can change order and hide menu items via the blue button"
 msgstr "Atļauj kārtot un noslēpt iestatījumus. Ja izvēlēts lietotāja, jūs varat kārtot un slēpt iestatījumus izmantojot zilo pogu"
 
@@ -6837,6 +6933,9 @@ msgstr "Attēlo ciparus pie iestatījumiem lai tos izmantotu ātrai piekļuvei."
 
 msgid "This option allows you to show menu paths."
 msgstr "Attēlo iestatījumu ceļu noformējumā."
+
+msgid "This option can be useful for long HDMI cables."
+msgstr "Šī opcija var būt noderīga gariem HDMI kabeļiem."
 
 msgid "This plugin is installed."
 msgstr "Šis spraudnis ir instalēts."
@@ -7279,6 +7378,9 @@ msgstr "Lietot EIT EPG informāciju kad pieejama."
 msgid "Use FreeSat EPG information when it is available."
 msgstr "Lietot FreeSat EPG informāciju kad pieejama."
 
+msgid "Use HDMI pre-emphasis"
+msgstr "Lietot HDMI pre-emphasis"
+
 msgid "Use MHW EPG information when it is available."
 msgstr "Lietot MHW EPG informāciju kad pieejama."
 
@@ -7385,6 +7487,9 @@ msgstr "Parasti, kad subtitru valoda ir tāda pati kā audio valodu, subtitri ne
 
 msgid "VCR scart"
 msgstr "VCR scart"
+
+msgid "VLAN connection"
+msgstr "VLAN savienojums"
 
 msgid "VMGM (intro trailer)"
 msgstr "VMGM (ievada treileris)"
