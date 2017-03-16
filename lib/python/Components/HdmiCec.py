@@ -219,10 +219,15 @@ class HdmiCec:
 			cmd = message.getCommand()
 			data = 16 * '\x00'
 			length = message.getData(data, len(data))
-			if cmd == 0x00: # feature abort
-				if data[0] == '\x44':
-					print 'eHdmiCec: volume forwarding not supported by device %02x'%(message.getAddress())
-					self.volumeForwardingEnabled = False
+
+			if cmd == 0x00:
+				if length == 0: # only polling message ( it's some as ping )
+					print "eHdmiCec: received polling message"
+				else:
+					# feature abort
+					if data[0] == '\x44':
+						print 'eHdmiCec: volume forwarding not supported by device %02x'%(message.getAddress())
+						self.volumeForwardingEnabled = False
 			elif cmd == 0x46: # request name
 				self.sendMessage(message.getAddress(), 'osdname')
 			elif cmd == 0x7e or cmd == 0x72: # system audio mode status
