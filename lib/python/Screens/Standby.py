@@ -272,6 +272,8 @@ class TryQuitMainloop(MessageBox):
 						self.delay = eTimer()
 						self.delay.timeout.callback.append(self.quitMainloop)
 						self.delay.start(1500, True)
+					else:
+						self.quitMainloop()
 			elif not inStandby:
 				config.misc.RestartUI.value = True
 				config.misc.RestartUI.save()
