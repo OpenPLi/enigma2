@@ -102,7 +102,7 @@ class HdmiCec:
 
 		self.delay = eTimer()
 		self.delay.timeout.get().append(self.sendStandbyMessages)
-		self.useStandby = None #True
+		self.useStandby = True
 
 		eHdmiCEC.getInstance().messageReceived.get().append(self.messageReceived)
 		config.misc.standbyCounter.addNotifier(self.onEnterStandby, initial_call = False)
@@ -351,10 +351,10 @@ class HdmiCec:
 						self.sendMessage(message.getAddress(), 'menuinactive')
 					else:
 						self.sendMessage(message.getAddress(), 'menuactive')
-			elif cmd == 0x90: # report power status
-				#self.useStandby = True
-				if ord(data[0]) == 0: # power active
+			elif cmd == 0x90: # receive powerstatus report
+				if ord(data[0]) == 0: # some box is powered
 					self.useStandby = False
+					print "[HDMI-CEC] powered box found"
 			elif cmd == 0x9F: # request get CEC version
 				self.sendMessage(message.getAddress(), 'sendcecversion')
 
