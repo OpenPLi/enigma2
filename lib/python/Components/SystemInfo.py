@@ -57,3 +57,4 @@ SystemInfo["CanDoTranscodeAndPIP"] = HardwareInfo().get_device_model() in "vusol
 SystemInfo["HasColordepth"] = fileCheck("/proc/stb/video/hdmi_colordepth")
 SystemInfo["HasFrontDisplayPicon"] = HardwareInfo().get_device_model() in ("vusolo4k", "et8500")
 SystemInfo["HasHDMIpreemphasis"] = fileCheck("/proc/stb/hdmi/preemphasis")
+SystemInfo["HasColorimetry"] = fileCheck("/proc/stb/video/hdmi_colorimetry")
