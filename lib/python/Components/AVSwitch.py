@@ -216,6 +216,42 @@ def InitAVSwitch():
 		config.av.multichannel_pcm = ConfigYesNo(default = False)
 		config.av.multichannel_pcm.addNotifier(setMultichannelPCM)
 
+	if SystemInfo["HasAutoVolume"]:
+		def setAutoVolume(configElement):
+			open(SystemInfo["HasAutoVolume"], "w").write(configElement.value)
+		config.av.autovolume = ConfigSelection(default = "none", choices = [("none", _("off")), ("hdmi", _("HDMI")), ("spdif", _("SPDIF")), ("dac", _("DAC"))])
+		config.av.autovolume.addNotifier(setAutoVolume)
+
+	if SystemInfo["HasAutoVolumeLevel"]:
+		def setAutoVolumeLevel(configElement):
+			open(SystemInfo["HasAutoVolumeLevel"], "w").write(configElement.value and "enabled" or "disabled")
+		config.av.autovolumelevel = ConfigYesNo(default = False)
+		config.av.autovolumelevel.addNotifier(setAutoVolumeLevel)
+
+	if SystemInfo["Has3DSurround"]:
+		def set3DSurround(configElement):
+			open(SystemInfo["Has3DSurround"], "w").write(configElement.value)
+		config.av.surround_3d = ConfigSelection(default = "none", choices = [("none", _("off")), ("hdmi", _("HDMI")), ("spdif", _("SPDIF")), ("dac", _("DAC"))])
+		config.av.surround_3d.addNotifier(set3DSurround)
+
+	if SystemInfo["Has3DSpeaker"]:
+		def set3DSpeaker(configElement):
+			open(SystemInfo["Has3DSpeaker"], "w").write(configElement.value)
+		config.av.speaker_3d = ConfigSelection(default = "center", choices = [("center", _("center")), ("wide", _("wide")), ("extrawide", _("extra wide"))])
+		config.av.speaker_3d.addNotifier(set3DSpeaker)
+
+	if SystemInfo["Has3DSurroundSpeaker"]:
+		def set3DSurroundSpeaker(configElement):
+			open(SystemInfo["Has3DSurroundSpeaker"], "w").write(configElement.value)
+		config.av.surround_3d_speaker = ConfigSelection(default = "disabled", choices = [("disabled", _("off")), ("center", _("center")), ("wide", _("wide")), ("extrawide", _("extra wide"))])
+		config.av.surround_3d_speaker.addNotifier(set3DSurroundSpeaker)
+
+	if SystemInfo["Has3DSurroundSoftLimiter"]:
+		def set3DSurroundSoftLimiter(configElement):
+			open(SystemInfo["Has3DSurroundSoftLimiter"], "w").write(configElement.value and "enabled" or "disabled")
+		config.av.surround_softlimiter_3d = ConfigYesNo(default = False)
+		config.av.surround_softlimiter_3d.addNotifier(set3DSurroundSoftLimiter)
+
 	def setVolumeStepsize(configElement):
 		eDVBVolumecontrol.getInstance().setVolumeSteps(int(configElement.value))
 	config.av.volume_stepsize = ConfigSelectionNumber(1, 10, 1, default = 5)
