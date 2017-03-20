@@ -167,6 +167,9 @@ def getHotkeyFunctions():
 		hotkeyFunctions.append((_("Toggle LCD LiveTV"), "Infobar/ToggleLCDLiveTV", "InfoBar"))
 	hotkeyFunctions.append((_("Toggle dashed flickering line for this service"), "Infobar/ToggleHideVBI", "InfoBar"))
 	hotkeyFunctions.append((_("Do nothing"), "Void", "InfoBar"))
+	if SystemInfo["HasHDMI-CEC"]:
+		hotkeyFunctions.append((_("HDMI-CEC Source Active"), "Infobar/SourceActiveHdmiCec", "InfoBar"))
+		hotkeyFunctions.append((_("HDMI-CEC Source Inactive"), "Infobar/SourceInactiveHdmiCec", "InfoBar"))
 	hotkeyFunctions.append((_("Softcam Setup"), "Module/Screens.SoftcamSetup/SoftcamSetup", "Setup"))
 	hotkeyFunctions.append((_("HotKey Setup"), "Module/Screens.Hotkey/HotkeySetup", "Setup"))
 	hotkeyFunctions.append((_("Software update"), "Module/Screens.SoftwareUpdate/UpdatePlugin", "Setup"))
@@ -620,3 +623,14 @@ class InfoBarHotkey():
 
 	def ToggleLCDLiveTV(self):
 		config.lcd.showTv.value = not config.lcd.showTv.value
+
+	def SourceActiveHdmiCec(self):
+		self.setHdmiCec("sourceactive")
+
+	def SourceInactiveHdmiCec(self):
+		self.setHdmiCec("sourceinactive")
+
+	def setHdmiCec(self, cmd):
+		if config.hdmicec.enabled.value:
+			import Components.HdmiCec
+			Components.HdmiCec.hdmi_cec.sendMessage(0, cmd)
