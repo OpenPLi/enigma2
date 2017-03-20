@@ -25,6 +25,7 @@ SystemInfo["NumFrontpanelLEDs"] = countFrontpanelLEDs()
 SystemInfo["FrontpanelDisplay"] = fileExists("/dev/dbox/oled0") or fileExists("/dev/dbox/lcd0")
 SystemInfo["LCDsymbol_circle_recording"] = fileCheck("/proc/stb/lcd/symbol_circle") or HardwareInfo().get_device_model() in ("hd51", "vs1500") and fileCheck("/proc/stb/lcd/symbol_recording")
 SystemInfo["LCDsymbol_timeshift"] = fileCheck("/proc/stb/lcd/symbol_timeshift")
+SystemInfo["LCDshow_symbols"] = (HardwareInfo().get_device_model().startswith("et9") or HardwareInfo().get_device_model() in ("hd51", "vs1500")) and fileCheck("/proc/stb/lcd/show_symbols")
 SystemInfo["FrontpanelDisplayGrayscale"] = fileExists("/dev/dbox/oled0")
 SystemInfo["DeepstandbySupport"] = HardwareInfo().get_device_name() != "dm800"
 SystemInfo["Fan"] = fileCheck("/proc/stb/fp/fan")
