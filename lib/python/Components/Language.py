@@ -68,7 +68,7 @@ class Language:
 
 	def activateLanguage(self, index):
 		try:
-			lang = self.lang[index]
+			lang = self.lang.get(index, "en_EN")
 			print "Activating language " + lang[0]
 			self.catalog = gettext.translation('enigma2', resolveFilename(SCOPE_LANGUAGE, ""), languages=[index])
 			self.catalog.install(names=("ngettext", "pgettext"))
