@@ -68,7 +68,10 @@ class Language:
 
 	def activateLanguage(self, index):
 		try:
-			lang = self.lang.get(index, "en_EN")
+			if index not in self.lang:
+				print "Selected language %s does not exist, fallback to en_EN!" % index
+				index = "en_EN"
+			lang = self.lang[index]
 			print "Activating language " + lang[0]
 			self.catalog = gettext.translation('enigma2', resolveFilename(SCOPE_LANGUAGE, ""), languages=[index])
 			self.catalog.install(names=("ngettext", "pgettext"))
@@ -76,7 +79,7 @@ class Language:
 			for x in self.callbacks:
 				x()
 		except:
-			print "Selected language does not exist!"
+			print "Error in activating language!"
 		# NOTE: we do not use LC_ALL, because LC_ALL will not set any of the categories, when one of the categories fails.
 		# We'd rather try to set all available categories, and ignore the others
 		for category in [locale.LC_CTYPE, locale.LC_COLLATE, locale.LC_TIME, locale.LC_MONETARY, locale.LC_MESSAGES, locale.LC_NUMERIC]:
