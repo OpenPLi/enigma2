@@ -719,13 +719,14 @@ def loadSkinData(desktop):
 	del dom_skins
 
 class additionalWidget:
-	pass
+	def __init__(self):
+		pass
 
 # Class that makes a tuple look like something else. Some plugins just assume
 # that size is a string and try to parse it. This class makes that work.
 class SizeTuple(tuple):
 	def split(self, *args):
-		return (str(self[0]), str(self[1]))
+		return str(self[0]), str(self[1])
 	def strip(self, *args):
 		return '%s,%s' % self
 	def __str__(self):
@@ -777,7 +778,7 @@ class SkinContext:
 				size = (w, h)
 				pos = pos.split(',')
 				pos = (self.x + parseCoordinate(pos[0], self.w, size[0], font), self.y + parseCoordinate(pos[1], self.h, size[1], font))
-		return (SizeTuple(pos), SizeTuple(size))
+		return SizeTuple(pos), SizeTuple(size)
 
 class SkinContextStack(SkinContext):
 	# A context that stacks things instead of aligning them
@@ -805,7 +806,7 @@ class SkinContextStack(SkinContext):
 				size = (w, h)
 				pos = pos.split(',')
 				pos = (self.x + parseCoordinate(pos[0], self.w, size[0], font), self.y + parseCoordinate(pos[1], self.h, size[1], font))
-		return (SizeTuple(pos), SizeTuple(size))
+		return SizeTuple(pos), SizeTuple(size)
 
 def readSkin(screen, skin, names, desktop):
 	if not isinstance(names, list):
@@ -909,7 +910,7 @@ def readSkin(screen, skin, names, desktop):
 				if isinstance(source, ObsoleteSource):
 					# however, if we found an "obsolete source", issue warning, and resolve the real source.
 					print "WARNING: SKIN '%s' USES OBSOLETE SOURCE '%s', USE '%s' INSTEAD!" % (name, wsource, source.new_source)
-					print "OBSOLETE SOURCE WILL BE REMOVED %s, PLEASE UPDATE!" % (source.removal_date)
+					print "OBSOLETE SOURCE WILL BE REMOVED %s, PLEASE UPDATE!" % source.removal_date
 					if source.description:
 						print source.description
 					wsource = source.new_source
