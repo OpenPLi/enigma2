@@ -521,7 +521,7 @@ std::string convertDVBUTF8(const unsigned char *data, int len, int table, int ts
 		table = 0;
 	}
 	else if ( !table || table == -1 )
-		table = defaultEncodingTable;
+		table = encodingHandler.getDefaultEncodingTable();
 
 	switch(table)
 	{
@@ -778,7 +778,7 @@ std::string replace_all(const std::string &in, const std::string &entity, const 
 	std::string out = in;
 	std::string::size_type loc = 0;
 	if( table == -1 )
-		table = defaultEncodingTable;
+		table = encodingHandler.getDefaultEncodingTable();
 
 	switch(table){
 	case UTF8_ENCODING:

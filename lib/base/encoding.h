@@ -30,13 +30,16 @@ class eDVBTextEncodingHandler
 	std::map<std::string, int> m_CountryCodeDefaultMapping;
 	std::map<int, int> m_TransponderDefaultMapping;
 	std::set<int> m_TransponderUseTwoCharMapping;
+	int m_DefaultEncodingTable;
 public:
 	eDVBTextEncodingHandler();
 	void getTransponderDefaultMapping(int tsidonid, int &table);
 	bool getTransponderUseTwoCharMapping(int tsidonid);
-	int getCountryCodeDefaultMapping( const std::string &country_code );
+	int getCountryCodeDefaultMapping(const std::string &country_code);
+	int getDefaultEncodingTable();
+private:
+	void __loadEncodingQuirkConfiguration();
 };
 
 extern eDVBTextEncodingHandler encodingHandler;
-extern int defaultEncodingTable;
 #endif // __lib_base_encoding_h__
