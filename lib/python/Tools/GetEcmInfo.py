@@ -10,6 +10,9 @@ ecm = ''
 data = EMPTY_ECM_INFO
 
 class GetEcmInfo:
+	def __init__(self):
+		pass
+
 	def pollEcmData(self):
 		global data
 		global old_ecm_time
@@ -25,9 +28,7 @@ class GetEcmInfo:
 		if ecm_time != old_ecm_time:
 			oecmi1 = info.get('ecminterval1','')
 			oecmi0 = info.get('ecminterval0','')
-			info = {}
-			info['ecminterval2'] = oecmi1
-			info['ecminterval1'] = oecmi0
+			info = {'ecminterval2': oecmi1, 'ecminterval1': oecmi0}
 			old_ecm_time = ecm_time
 			try:
 				ecm = open(ECM_INFO, 'rb').readlines()
