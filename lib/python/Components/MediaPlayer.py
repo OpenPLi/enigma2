@@ -76,7 +76,7 @@ class PlayList(MenuList):
 
 	def updateState(self, state):
 		self.state = state
-		if len(self.list) > self.oldCurrPlaying and self.oldCurrPlaying != -1:
+		if len(self.list) > self.oldCurrPlaying != -1:
 			self.list[self.oldCurrPlaying] = self.PlaylistEntryComponent(self.list[self.oldCurrPlaying][0], STATE_NONE)
 		if self.currPlaying != -1 and self.currPlaying < len(self.list):
 			self.list[self.currPlaying] = self.PlaylistEntryComponent(self.list[self.currPlaying][0], state)
