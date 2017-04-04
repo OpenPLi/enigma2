@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-08 23:20+0100\n"
-"PO-Revision-Date: 2016-11-22 23:22+0100\n"
+"POT-Creation-Date: 2017-04-02 19:09+0200\n"
+"PO-Revision-Date: 2017-04-03 21:06+0200\n"
 "Last-Translator: blzr <blzr@o2.pl>\n"
 "Language-Team: \n"
 "Language: pl_PL\n"
@@ -172,6 +172,22 @@ msgid " updates available."
 msgstr " aktualizacje dostępne."
 
 #, python-format
+msgid "%.0f GB"
+msgstr ""
+
+#, python-format
+msgid "%.0f MB"
+msgstr ""
+
+#, python-format
+msgid "%.0f kB"
+msgstr ""
+
+#, python-format
+msgid "%.2f GB"
+msgstr ""
+
+#, python-format
 msgid "%02d:%02d"
 msgstr ""
 
@@ -210,6 +226,18 @@ msgstr ""
 msgid "%a %e/%m  %-H:%M"
 msgstr ""
 
+#, python-format
+msgid "%d B"
+msgstr ""
+
+#, python-format
+msgid "%d GB"
+msgstr ""
+
+#, python-format
+msgid "%d MB"
+msgstr ""
+
 #. TRANSLATORS: Intermediate scanning result, '%d' channel(s) have been found so far
 #, python-format
 msgid "%d channel found"
@@ -245,6 +273,10 @@ msgid_plural "%d jobs are running in the background!"
 msgstr[0] "%d zadanie jest wykonywane w tle!"
 msgstr[1] "%d zadania są wykonywane w tle!"
 msgstr[2] "%d zadań jest wykonywanych w tle!"
+
+#, python-format
+msgid "%d kB"
+msgstr ""
 
 #, python-format
 msgid "%d min"
@@ -307,8 +339,24 @@ msgstr ""
 msgid "%d.%B %Y"
 msgstr "%d.%B %Y"
 
+#, python-format
+msgid "%d.%d"
+msgstr ""
+
+#, python-format
+msgid "%d.%d.%d"
+msgstr ""
+
+#, python-format
+msgid "%d:%02d"
+msgstr ""
+
 #. TRANSLATORS: VFD hour:minute daynum short monthname in strftime() format! See 'man strftime'
 msgid "%k:%M %e/%m"
+msgstr ""
+
+#, python-format
+msgid "%s %d.%d"
 msgstr ""
 
 #, python-format
@@ -342,6 +390,9 @@ msgstr ""
 #, python-format
 msgid "%s:%s"
 msgstr ""
+
+msgid "(VU+ type)"
+msgstr "(Typ VU+)"
 
 msgid "(ZAP)"
 msgstr "(Przełącz)"
@@ -433,6 +484,15 @@ msgstr "3"
 
 msgid "30"
 msgstr ""
+
+msgid "3D surround"
+msgstr ""
+
+msgid "3D surround softlimiter"
+msgstr "Soft limiter 3D surround"
+
+msgid "3D surround speaker position"
+msgstr "Pozycja głośników 3D surround"
 
 msgid "3d mode"
 msgstr "tryb 3d"
@@ -607,7 +667,7 @@ msgid "AGC:"
 msgstr ""
 
 msgid "ASS file"
-msgstr ""
+msgstr "Plik ASS"
 
 msgid "ATSC"
 msgstr ""
@@ -933,6 +993,9 @@ msgstr "Dźwięk"
 msgid "Audio PID"
 msgstr ""
 
+msgid "Audio auto volume level"
+msgstr "Automatyczny poziom głośności"
+
 msgid "Audio language selection 1"
 msgstr "Preferowana ścieżka audio 1"
 
@@ -958,6 +1021,9 @@ msgstr "Format ścieżki audio (%s)"
 #, python-format
 msgid "Audio track (%s) language"
 msgstr "Język ścieżki audio (%s)"
+
+msgid "Audio volume step size"
+msgstr "Wielkość kroku regulacji głośności."
 
 msgid "Author: "
 msgstr "Autor: "
@@ -1022,6 +1088,15 @@ msgstr "BER"
 
 msgid "BER:"
 msgstr "BER:"
+
+msgid "BT 2020 CL"
+msgstr ""
+
+msgid "BT 2020 NCL"
+msgstr ""
+
+msgid "BT 709"
+msgstr ""
 
 msgid "Back"
 msgstr "Powrót"
@@ -1217,6 +1292,9 @@ msgstr "Wyśrodkuj napisy DVB"
 
 msgid "Center time-labels and remove date"
 msgstr "Wyśrodkuj etykiety czasu i usuń datę"
+
+msgid "Change Language"
+msgstr "Zmień język"
 
 msgid "Change PIN"
 msgstr "Zmień PIN"
@@ -1459,7 +1537,7 @@ msgid "Configure if behind the subtitles a background is shown."
 msgstr "Skonfiguruj czy za napisami ma byc wyświetlane tło."
 
 msgid "Configure if service picons will be shown in display (when supported by the skin)."
-msgstr ""
+msgstr "Skonfiguruj czy picony będą pokazywane na wyświetlaczu (jeśli wspierane przez skin)."
 
 msgid "Configure if service picons will be shown in the channel selection list."
 msgstr "Skonfiguruj czy wyświetlać pikony w liście kanałów."
@@ -1562,6 +1640,9 @@ msgstr "Skonfiguruj ogólne opóźnienie dla ścieżek audio Dolby Digital."
 
 msgid "Configure the general audio delay of stereo sound tracks."
 msgstr "Skonfiguruj ogólne opóźnienie dla ścieżek audio stereo."
+
+msgid "Configure the general audio volume step size (limit 1-10)."
+msgstr "Skonfiguruj ogólny krok regulacji głośności (limit 1-10)."
 
 msgid "Configure the hard disk drive to go to standby after the specified idle time."
 msgstr "Skonfiguruj czas po jakim dysk twardy ma przechodzić w tryb uśpienia."
@@ -1812,7 +1893,7 @@ msgid "Create new folder and exit"
 msgstr "Utwórz nowy katalog i wyjdź"
 
 msgid "Create seperate radio userbouquet"
-msgstr ""
+msgstr "Utwórz osobny bukiet radio"
 
 #, python-format
 msgid "Creating directory %s failed."
@@ -1892,6 +1973,9 @@ msgstr "Czeski"
 msgid "D"
 msgstr "D"
 
+msgid "DAC"
+msgstr ""
+
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -1969,6 +2053,9 @@ msgstr "Data"
 
 msgid "Date/time input"
 msgstr "Czas / Data"
+
+msgid "Debug to file"
+msgstr "Debug do pliku"
 
 msgid "Deep standby"
 msgstr "Głębokie czuwanie"
@@ -2092,6 +2179,9 @@ msgstr "Odznacz"
 
 msgid "Details for plugin: "
 msgstr "Szczegóły dotyczące wtyczki:"
+
+msgid "Detect next boxes before standby"
+msgstr "Wykryj kolejne odbiorniki przed uśpieniem"
 
 msgid "Detected HDD:"
 msgstr "Wykryto HDD:"
@@ -2293,7 +2383,7 @@ msgid "Do you want to reboot your receiver?"
 msgstr "Chcesz uruchomić ponownie odbiornik?"
 
 msgid "Do you want to remove all the crahs logfiles"
-msgstr ""
+msgstr "Czy chcesz usunąć wszystkie crash logi?"
 
 msgid "Do you want to remove the package:\n"
 msgstr "Chcesz usunąć pakiet:\n"
@@ -2561,6 +2651,9 @@ msgstr "Kod błędu"
 msgid "Error executing plugin"
 msgstr "Błąd podczas uruchamiania wtyczki"
 
+msgid "Error stop stream!"
+msgstr "Błąd zatrzymania streamu!"
+
 #, python-format
 msgid ""
 "Error: %s\n"
@@ -2711,30 +2804,36 @@ msgstr "Początek dodatkowego czasu ignorowania sleeptimera bezczynności"
 msgid "F"
 msgstr ""
 
-msgid "F1/F3/F4"
+msgid "F1/F3/F4/F4-TURBO"
 msgstr ""
 
 msgid "FBC SCR (Unicable/JESS)"
 msgstr ""
 
 msgid "FBC automatic"
-msgstr ""
+msgstr "FBC automatyczny"
 
 msgid ""
 "FBC automatic\n"
 "connected to"
 msgstr ""
+"FBC automatyczny\n"
+"podłączony do"
 
 #, python-format
 msgid ""
 "FBC automatic\n"
 "connected to %s"
 msgstr ""
+"FBC automatyczny\n"
+"podłączony do %s"
 
 msgid ""
 "FBC automatic\n"
 "inactive"
 msgstr ""
+"FBC automatyczny\n"
+"nieaktywny"
 
 msgid "FEC"
 msgstr ""
@@ -2912,6 +3011,8 @@ msgid ""
 "GUI needs a restart to apply a new language\n"
 "Do you want to restart the GUI now?"
 msgstr ""
+"GUI musi zostać zrestartowane aby zastosować nowy język.\n"
+"Wykonać restart teraz?"
 
 msgid ""
 "GUI needs a restart to apply a new skin\n"
@@ -3031,17 +3132,29 @@ msgstr ""
 msgid "HD list"
 msgstr "Lista HD"
 
-msgid "HD1100/HD1200/HD1265/et7x00/et8500/et7000mini"
+msgid "HD11/HD51/HD1100/HD1200/HD1265/HD1500/HD500C/HD530C/VS1000/VS1500/et7x00/et8500/et7000mini"
 msgstr ""
 
 msgid "HD2400"
 msgstr ""
 
-msgid "HDMI Colordepth"
+msgid "HDMI"
 msgstr ""
+
+msgid "HDMI Colordepth"
+msgstr "Głębia kolorów HDMI"
+
+msgid "HDMI Colorimetry"
+msgstr "Kolorymetria HDMI"
 
 msgid "HDMI Colorspace"
 msgstr "Przestrzeń kolorów HDMI"
+
+msgid "HDMI-CEC Source Active"
+msgstr "Źródło HDMI-CEC aktywne"
+
+msgid "HDMI-CEC Source Inactive"
+msgstr "Źródło HDMI-CEC nieaktywne"
 
 msgid "HDMI-CEC setup"
 msgstr "Ustawienia HDMI-CEC"
@@ -3271,6 +3384,9 @@ msgstr "Inicjalizacja urządzenia..."
 msgid "Input"
 msgstr "Wejście"
 
+msgid "Input "
+msgstr "Wejście "
+
 msgid "Input device setup"
 msgstr "Konfiguracjia urządzenia wejściowego"
 
@@ -3300,9 +3416,6 @@ msgstr "Instaluj lokalny pakiet"
 
 msgid "Install picons on"
 msgstr "Zainstaluj picony na"
-
-msgid "Install softcam"
-msgstr "Zainstaluj softcam"
 
 msgid "Installation has completed."
 msgstr "Instalacja zakończona."
@@ -3425,6 +3538,9 @@ msgstr "Zostaw na aktualnym"
 msgid "Kernel version: "
 msgstr "Wersja kernela:"
 
+msgid "Key Events"
+msgstr ""
+
 msgid "Keyboard"
 msgstr "Klawiatura"
 
@@ -3450,7 +3566,7 @@ msgid "Language selection"
 msgstr "Wybór języka"
 
 msgid "Large"
-msgstr ""
+msgstr "Duży"
 
 msgid "Last config"
 msgstr "Ostatnie ustawienia"
@@ -3581,7 +3697,7 @@ msgid "Log results to /tmp"
 msgstr "Zapisuj log do /tmp"
 
 msgid "Logfile does not exist anymore"
-msgstr ""
+msgstr "Plik log już nie istnieje"
 
 msgid "Long filenames"
 msgstr "Długie nazwy plików"
@@ -3593,7 +3709,7 @@ msgid "Longitude"
 msgstr "Długość geogr."
 
 msgid "Loop through from"
-msgstr ""
+msgstr "Przez przelotkę z"
 
 msgid "Luxembourgish"
 msgstr "luxemburski"
@@ -3694,6 +3810,9 @@ msgstr "Wiadomość"
 
 msgid "Message..."
 msgstr "Wiadomość..."
+
+msgid "Messages"
+msgstr "Wiadomości"
 
 #, python-format
 msgid "Minimum age %d years"
@@ -4119,6 +4238,9 @@ msgstr "Nie wystarczająca ilość przestrzeni dyskowej. Zwolnij miejsce na dysk
 
 msgid "Not tested:"
 msgstr "Nieprzetestowane:"
+
+msgid "Not yet implemented!"
+msgstr "Jeszcze nie zaimplementowane!"
 
 msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'."
 msgstr "Uwaga: gdy właczone, a chcesz przejść do standby po wybudzeniu, ustaw opcje 'Startup to Standby' na 'Nie, z wyjątkiem timera wybudzania'"
@@ -4555,9 +4677,6 @@ msgstr "Czekaj..."
 msgid "Please wait (downloading channel list)"
 msgstr "Czekaj (pobieranie listy kanałów)"
 
-msgid "Please wait (downloading softcam)"
-msgstr "Czekaj (pobieranie softcamu)"
-
 msgid "Please wait (updating packages)"
 msgstr "Czekaj (aktualizacja pakietów)"
 
@@ -4578,6 +4697,15 @@ msgstr "Czekaj, trwa test sieci..."
 
 msgid "Please wait while your network is restarting..."
 msgstr "Czekaj, sieć jest restartowana..."
+
+msgid "Please wait, restarting cardserver."
+msgstr "Czekaj, trwa restart cardservera."
+
+msgid "Please wait, restarting softcam and cardserver."
+msgstr "Czekaj, trwa restart softcamu i cardservera."
+
+msgid "Please wait, restarting softcam."
+msgstr "Czekaj, trwa restart softcamu."
 
 msgid "Please wait..."
 msgstr "Czekaj..."
@@ -4625,7 +4753,7 @@ msgid "Portuguese"
 msgstr "Portugalski"
 
 msgid "Position"
-msgstr ""
+msgstr "Pozycja"
 
 msgid "Position of completed timers in timerlist"
 msgstr "Pozycja wykonanych timerów w liście"
@@ -4646,7 +4774,7 @@ msgid "Positioner setup log"
 msgstr "Log ustawień pozycjonera"
 
 msgid "Power on display"
-msgstr ""
+msgstr "Włącz wyświetlacz"
 
 msgid "Power threshold in mA"
 msgstr "Próg mocy w mA"
@@ -4992,6 +5120,9 @@ msgstr "Częstotliwość odświeżania"
 msgid "Refresh rate selection."
 msgstr "Częstotliwość odświeżania"
 
+msgid "Refusing to move to the same directory"
+msgstr "Odmowa przeniesienia do tego samego katalogu"
+
 msgid "Regard deep standby as standby"
 msgstr "Traktuj głębokie czuwanie jak standby"
 
@@ -5022,6 +5153,9 @@ msgstr "Pamietaj, wybrałeś zapisywanie pliku timeshift."
 msgid "Remote control type"
 msgstr "Typ pilota"
 
+msgid "Remote control type setup"
+msgstr "Ustawienia typu pilota"
+
 msgid "Removal has completed."
 msgstr "Usuwanie zakończone."
 
@@ -5035,7 +5169,7 @@ msgid "Remove a nameserver entry"
 msgstr "Usuń wpis DNS"
 
 msgid "Remove all logfiles"
-msgstr ""
+msgstr "Usuń wszystkie logi"
 
 msgid "Remove bookmark"
 msgstr "Usuń zakładkę"
@@ -5053,7 +5187,7 @@ msgid "Remove plugins"
 msgstr "Usuń wtyczki"
 
 msgid "Remove this logfile"
-msgstr ""
+msgstr "Usuń ten log"
 
 msgid "Remove title"
 msgstr "Usuń tytuł"
@@ -5099,6 +5233,12 @@ msgstr "Powtórzenia"
 msgid "Replace `- ` in dialogs with colored text per speaker (like teletext subtitles for the hearing impaired)"
 msgstr "Zamienia '- '  w dialogach na różne kolory dla poszczególnych rozmówców (jak w napisach teletekst dla niesłyszących)"
 
+msgid "Request for physical address report"
+msgstr "Żądanie raportowania fizycznego adresu TV"
+
+msgid "Request for vendor report"
+msgstr "Żądanie raportowania producenta"
+
 msgid "Require authentication for http streams"
 msgstr "Wymagaj uwierzytelnienia dla streamów http"
 
@@ -5141,11 +5281,20 @@ msgstr "Restart odbiornika"
 msgid "Restart GUI now?"
 msgstr "Zrestartować GUI teraz?"
 
+msgid "Restart both"
+msgstr "Restartuj oba"
+
+msgid "Restart cardserver"
+msgstr "Restartuj cardserver"
+
 msgid "Restart enigma"
 msgstr "Restart enigmy"
 
 msgid "Restart network"
 msgstr "Restartuj sieć"
+
+msgid "Restart softcam"
+msgstr "Restartuj softcam"
 
 msgid "Restart test"
 msgstr "Powtórz test"
@@ -5252,6 +5401,9 @@ msgid "SNR"
 msgstr ""
 
 msgid "SNR:"
+msgstr ""
+
+msgid "SPDIF"
 msgstr ""
 
 msgid "SRT file"
@@ -5451,11 +5603,17 @@ msgstr "Wybierz"
 msgid "Select CAId"
 msgstr "Wybierz CAId"
 
+msgid "Select Card Server"
+msgstr "Wybierz cardserver"
+
 msgid "Select Channel"
 msgstr "Wybierz kanał"
 
 msgid "Select HDD"
 msgstr "Wybierz HDD"
+
+msgid "Select Softcam"
+msgstr "Wybierz softcam"
 
 msgid "Select a bouquet"
 msgstr "Wybierz bukiet"
@@ -5506,6 +5664,9 @@ msgstr "Wybierz miejsce docelowe kopii dla:"
 msgid "Select destination for:"
 msgstr "Wybierz miejsce dla:"
 
+msgid "Select directory for logfile"
+msgstr "Wybierz katalog dla logów."
+
 msgid "Select files for backup."
 msgstr "Wybierz pliki do backupu"
 
@@ -5526,6 +5687,9 @@ msgstr "Wybierz lokalizację"
 
 msgid "Select movie"
 msgstr "Wybierz film"
+
+msgid "Select path for logfile"
+msgstr "Wybierz ścieżkę do loga"
 
 msgid "Select provider to add..."
 msgstr "Wybierz nadawcę do dodania..."
@@ -5867,7 +6031,7 @@ msgid "Show latest upgrade log"
 msgstr "Ostatni log aktualizacji"
 
 msgid "Show menu numbers"
-msgstr ""
+msgstr "Wyświetlaj numerację menu"
 
 msgid "Show menu paths"
 msgstr "Wyświetlaj ścieżki menu"
@@ -5891,7 +6055,7 @@ msgid "Show picons in channel selection list"
 msgstr "Wyświetlaj pikony w liście kanałów"
 
 msgid "Show picons in display"
-msgstr ""
+msgstr "Wyświetlaj picony na wyświetlaczu"
 
 msgid "Show positioner movement"
 msgstr "Pokaż ruchy pozycjonera"
@@ -5926,6 +6090,9 @@ msgstr "Wyświetl listę kanałów lub nagrań"
 msgid "Show single service EPG"
 msgstr "Wyświetl EPG pojedynczego kanału"
 
+msgid "Show softcam setup in extensions menu"
+msgstr "Skrót do ustawień softcam w menu rozszerzeń"
+
 msgid "Show status icons in movie list"
 msgstr "Ikony stanu w liście filmów"
 
@@ -5937,6 +6104,9 @@ msgstr "Wyświetl wybór subserwisów"
 
 msgid "Show subtitle selection"
 msgstr "Wyświetl wybór napisów"
+
+msgid "Show symbols on display"
+msgstr "Wyświetlaj symbole na wyświetlaczu"
 
 msgid "Show the radio player..."
 msgstr "Przejdź w tryb radio..."
@@ -6086,8 +6256,11 @@ msgstr "Polityka/Ekonomia/Społeczny"
 msgid "SoftCam / CI"
 msgstr "Softcam / CI"
 
-msgid "Softcam type"
-msgstr "Typ softcamu"
+msgid "Softcam Setup"
+msgstr "Ustawienia softcam"
+
+msgid "Softcam setup"
+msgstr "Ustawinia softcam"
 
 msgid "Software"
 msgstr "Oprogramowanie"
@@ -6108,7 +6281,7 @@ msgid "Softwaremanager information"
 msgstr "Informacje Softwaremanagera"
 
 msgid "Some error occured - Please try later"
-msgstr ""
+msgstr "Wystąpił błąd - spróbuj ponownie później"
 
 msgid "Some plugins are not available:\n"
 msgstr "Niektóre wtyczki są niedostępne:\n"
@@ -6308,6 +6481,9 @@ msgstr "Zatrzymaj PiP"
 msgid "Stop all current recordings"
 msgstr "Zatrzymaj wszystkie trwające nagrania"
 
+msgid "Stop all streams"
+msgstr "Zatrzymaj wszystkie streamy"
+
 msgid "Stop and delete all current recordings"
 msgstr "Zatrzymaj i usuń wszystkie trwające nagrania"
 
@@ -6325,6 +6501,9 @@ msgstr "Zatrzymaj aktualne wydarzenie i wyłącz nadchodzące wydarzenia"
 
 msgid "Stop current event but not coming events"
 msgstr "Zatrzymaj aktualne wydarzenie, ale nie nadchodzące"
+
+msgid "Stop current stream"
+msgstr "Zatrzymaj bieżący stream"
 
 msgid "Stop entry"
 msgstr "Zatrzymaj"
@@ -6544,7 +6723,7 @@ msgid "TRANSLATOR_INFO"
 msgstr ""
 "Specjalnie dla OpenPLi - @blzr\n"
 "http://openpli.org/forums\n"
-"Ostatnia aktualizacja 2016.02.18"
+"Ostatnia aktualizacja 2017.04.03"
 
 msgid "TS file is too large for ISO9660 level 1!"
 msgstr "Plik TS jest za duży dla ISO9660 level 1!"
@@ -6556,7 +6735,7 @@ msgid "TUNER:"
 msgstr ""
 
 msgid "TV physical address report"
-msgstr "Raportuj fizyczny adres TV"
+msgstr "Raportowanie fizycznego adresu TV"
 
 msgid "TXT PID"
 msgstr ""
@@ -6811,10 +6990,31 @@ msgid ""
 msgstr ""
 
 msgid "This option allows you can config the Colordepth for UHD"
-msgstr ""
+msgstr "Ta opcja pozwala skonfigurować głębię kolorów dla UHD"
+
+msgid "This option allows you can config the Colorimetry for HDR."
+msgstr "Ta opcja pozwala skonfigurować kolorymetrię dla HDR."
 
 msgid "This option allows you can config the Colorspace from Auto to RGB"
 msgstr "Ta opcja pozwala zmienić ustawienie przestrzeni kolorów od 'Auto'do 'RGB'"
+
+msgid "This option allows you show all symbols on display."
+msgstr "Ta opcja włącza wyświetlanie wszystkich symboli na wyswietlaczu."
+
+msgid "This option allows you to add the softcam setup in the extensions menu."
+msgstr "Ta opcja pozwala dodać ustawienia softcam do menu rozszerzeń."
+
+msgid "This option allows you to change the virtuell loadspeaker position."
+msgstr "Ta opcja pozwala zmienić pozycję wirtualnych głośników."
+
+msgid "This option allows you to disable or change the virtuell loadspeaker position."
+msgstr "Ta opcja pozwala wyłączyć lub zmienić pozycję głośników wirtualnych."
+
+msgid "This option allows you to enable 3D surround softlimiter."
+msgstr "Ta opcja pozwala włączyć 3D soft limiter."
+
+msgid "This option allows you to enable 3D surround sound."
+msgstr "Ta opcja pozwala włączyć dźwięk 3D surround."
 
 msgid "This option allows you to hide and sort menu entries. When selecting user you can change order and hide menu items via the blue button"
 msgstr ""
@@ -6822,13 +7022,19 @@ msgstr ""
 "możesz ukryć / posortować pozycje menu używając niebieskiego klawisza."
 
 msgid "This option allows you to power off the display."
-msgstr ""
+msgstr "Ta opcja pozwala wyłączyć wyświetlacz."
 
 msgid "This option allows you to show menu number quick links."
-msgstr ""
+msgstr "Ta opcja włącza wyświetlanie numerowania pozycji menu."
 
 msgid "This option allows you to show menu paths."
 msgstr "Ta opcja włącza wyświetlanie ścieżek menu."
+
+msgid "This option can be useful for long HDMI cables."
+msgstr "Ta opcja może być przydatna dla długich kabli HDMI."
+
+msgid "This option configures you can set auto volume level."
+msgstr "Ta opcja pozwala skonfigurować automatyczny poziom głośności."
 
 msgid "This plugin is installed."
 msgstr "Wtyczka zainstalowana"
@@ -7271,6 +7477,9 @@ msgstr "Użyj informacji EIT EPG gdy dostępne."
 msgid "Use FreeSat EPG information when it is available."
 msgstr "Użyj informacji EPG FreeSat gdy dostępne."
 
+msgid "Use HDMI pre-emphasis"
+msgstr "Użyj HDMI pre-emphasis"
+
 msgid "Use MHW EPG information when it is available."
 msgstr "Użyj informacji EPG MHW gdy dostępne."
 
@@ -7377,6 +7586,9 @@ msgstr "Normalnie gdy język napisów jest taki sam jak ścieżka audio napisy n
 
 msgid "VCR scart"
 msgstr ""
+
+msgid "VLAN connection"
+msgstr "Połączenie VLAN"
 
 msgid "VMGM (intro trailer)"
 msgstr ""
@@ -7895,9 +8107,6 @@ msgstr "Bez ostrzeżenia"
 msgid "Wizard to arrange the overscan"
 msgstr "Test do sprawdzenia / skorygowania overscan"
 
-msgid "Would you like to install a softcam?"
-msgstr "Czy chcesz zainstalować softcam?"
-
 #, python-format
 msgid "Would you save the entered PIN %s persistent?"
 msgstr "Chcesz zapisać wprowadzony PIN %s na stałe?"
@@ -8077,7 +8286,7 @@ msgid "You must switch to the service %s (%s - '%s')!\n"
 msgstr "Musisz przełączyć na kanał %s (%s - '%s')!\n"
 
 msgid ""
-"You need a PC connected to your receiver. If you need further instructions, please visit the website http://www.dm7025.de.\n"
+"You need a PC connected to your receiver. If you need further instructions, please visit the website https://openpli.org\n"
 "Your receiver will now be halted. After you have performed the update instructions from the website, your new firmware will ask you to restore your settings."
 msgstr ""
 
@@ -8211,7 +8420,7 @@ msgstr "Przełącz na wybrany kanał lub pokaż info o audycji (w zależności o
 msgid "Zap up"
 msgstr "Przełącz na kanał wyżej"
 
-msgid "Zgemma H.S/H.2S/H.2H/H5"
+msgid "Zgemma H.S/H.2S/H.2H/H5/H7"
 msgstr ""
 
 msgid "Zgemma Star S/2S/H1/H2"
@@ -8583,6 +8792,9 @@ msgstr "Zamknij menu konfiguracji adaptera sieciowego"
 
 msgid "experimental film/video"
 msgstr "Film eksprymentalny"
+
+msgid "extra wide"
+msgstr "Bardzo szeroka"
 
 msgid "failed"
 msgstr "nieudane"
@@ -9268,6 +9480,9 @@ msgstr "Przy włączonym PiPzap przełącz w oknie PiP na następny kanał"
 msgid "white"
 msgstr "Biały"
 
+msgid "wide"
+msgstr "Szeroka"
+
 msgid "width"
 msgstr "Szerokość"
 
@@ -9322,26 +9537,3 @@ msgstr "Przełączony"
 
 msgid "®"
 msgstr ""
-
-#~ msgid "FBC automatic loop through"
-#~ msgstr "FBC automatyczna przelotka"
-
-#~ msgid ""
-#~ "FBC automatic loop through\n"
-#~ "inactive"
-#~ msgstr ""
-#~ "FBC automatyczna przelotka\n"
-#~ "nieaktywny"
-
-#~ msgid ""
-#~ "FBC automatic loop through\n"
-#~ "linked to %s"
-#~ msgstr ""
-#~ "FBC automatyczna przelotka\n"
-#~ "podłączony do %s"
-
-#~ msgid "Loop through to"
-#~ msgstr "Przez przelotkę do"
-
-#~ msgid "not used"
-#~ msgstr "Nie wykorzystywany"
