@@ -37,7 +37,7 @@ class HdmiCECSetupScreen(Screen, ConfigListScreen):
 
 		self["actions"] = ActionMap(["SetupActions", "ColorActions", "MenuActions"],
 		{
-			"ok": self.keyGo,
+			"ok": self.keyOk,
 			"save": self.keyGo,
 			"cancel": self.keyCancel,
 			"green": self.keyGo,
@@ -95,6 +95,13 @@ class HdmiCECSetupScreen(Screen, ConfigListScreen):
 			x[1].cancel()
 		self.close()
 
+	def keyOk(self):
+		currentry = self["config"].getCurrent()
+		if currentry == self.logpath_entry:
+			self.set_path()
+		else:
+			self.keyGo()
+
 	def setFixedAddress(self):
 		import Components.HdmiCec
 		Components.HdmiCec.hdmi_cec.setFixedPhysicalAddress(Components.HdmiCec.hdmi_cec.getPhysicalAddress())
@@ -118,17 +125,14 @@ class HdmiCECSetupScreen(Screen, ConfigListScreen):
 		if res is not None:
 			config.hdmicec.log_path.value = res
 
-	def ok(self):
-		currentry = self["config"].getCurrent()
-		if currentry == self.logpath_entry:
-			inhibitDirs = ["/autofs", "/bin", "/boot", "/dev", "/etc", "/lib", "/proc", "/sbin", "/sys", "/tmp", "/usr"]
-			from Screens.LocationBox import LocationBox
-			txt = _("Select directory for logfile")
-			self.session.openWithCallback(self.logPath, LocationBox, text=txt, currDir=config.hdmicec.log_path.value,
-					bookmarks=config.hdmicec.bookmarks, autoAdd=False, editDir=True,
-					inhibitDirs=inhibitDirs, minFree=1 )
-		else:
-			self.keyGo()
+	def set_path(self):
+		inhibitDirs = ["/autofs", "/bin", "/boot", "/dev", "/etc", "/lib", "/proc", "/sbin", "/sys", "/tmp", "/usr"]
+		from Screens.LocationBox import LocationBox
+		txt = _("Select directory for logfile")
+		self.session.openWithCallback(self.logPath, LocationBox, text=txt, currDir=config.hdmicec.log_path.value,
+				bookmarks=config.hdmicec.bookmarks, autoAdd=False, editDir=True,
+				inhibitDirs=inhibitDirs, minFree=1
+				)
 
 def main(session, **kwargs):
 	session.open(HdmiCECSetupScreen)
