@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-21 09:29+0200\n"
-"PO-Revision-Date: 2015-11-01 21:56+0100\n"
+"POT-Creation-Date: 2017-02-08 23:20+0100\n"
+"PO-Revision-Date: 2017-01-28 20:03+0100\n"
 "Last-Translator: daddelfalk <OpenPLi>\n"
 "Language-Team: OpenPLi <openpli.org>\n"
 "Language: de\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Poedit 1.8.6\n"
+"X-Generator: Poedit 1.8.11\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
 msgid ""
@@ -26,7 +26,7 @@ msgid ""
 "After pressing OK, please wait!"
 msgstr ""
 "\n"
-"Nach dem Sie OK gedrückt haben, bitte warten!"
+"Nachdem Sie OK gedrückt haben, bitte warten!"
 
 msgid ""
 "\n"
@@ -34,6 +34,13 @@ msgid ""
 msgstr ""
 "\n"
 "Sichern Ihrer Receiver-Einstellungen."
+
+msgid ""
+"\n"
+"Conflict detection disabled!"
+msgstr ""
+"\n"
+"Konflikterkennung deaktiviert!"
 
 msgid ""
 "\n"
@@ -122,13 +129,16 @@ msgstr ""
 "\n"
 "Anzeigen, Installieren und Entfernen verfügbarer oder installierter Pakete."
 
+msgid " (0 - all networks)"
+msgstr ""
+
 #, python-format
 msgid " (Channel %s)"
 msgstr "(Kanal %s)"
 
 #, python-format
 msgid " (Partition %d)"
-msgstr ""
+msgstr "(Partition %d)"
 
 msgid " (PiP)"
 msgstr " (PiP)"
@@ -161,7 +171,7 @@ msgid " packages selected."
 msgstr " Pakete ausgewählt."
 
 msgid " updates available."
-msgstr " Updates verfügbar. "
+msgstr "Aktualisierungen verfügbar. "
 
 #, python-format
 msgid "%02d:%02d"
@@ -248,10 +258,18 @@ msgid "%d minutes"
 msgstr "%d Minuten"
 
 #, python-format
+msgid "%d ms"
+msgstr ""
+
+#, python-format
 msgid "%d pixel wide"
 msgid_plural "%d pixels wide"
 msgstr[0] "%d Bildpunkt groß"
 msgstr[1] "%d Bildpunkte groß"
+
+#, python-format
+msgid "%d sec"
+msgstr ""
 
 #, python-format
 msgid "%d second"
@@ -262,17 +280,14 @@ msgstr[1] "%d Sekunden"
 #, python-format
 msgid "%d subdirectory"
 msgid_plural "%d subdirectories"
-msgstr[0] "%d Hauptverzeichnis"
-msgstr[1] "%d Hauptverzeichnisse"
+msgstr[0] "%d Unterverzeichnis"
+msgstr[1] "%d Unterverzeichnisse"
 
 #, python-format
 msgid "%d wireless network found!"
 msgid_plural "%d wireless networks found!"
 msgstr[0] "%d Funk-Netzwerk gefunden!"
 msgstr[1] "%d Funk-Netzwerke gefunden!"
-
-msgid "%d-%b-%Y %-H:%M"
-msgstr "%d. %b %Y %-H:%M"
 
 msgid "%d-%m"
 msgstr "%d-%m"
@@ -324,13 +339,13 @@ msgstr "(ZAP)"
 
 #, python-format
 msgid "(activated +%d min)"
-msgstr ""
+msgstr "(Aktiviert  +%d min)"
 
 msgid "(empty)"
 msgstr "(leer)"
 
 msgid "(not activated)"
-msgstr ""
+msgstr "(nicht aktiviert)"
 
 msgid "(show optional DVD audio menu)"
 msgstr "(DVD-Tonmenü zeigen, falls vorh.)"
@@ -356,8 +371,14 @@ msgstr "1.1"
 msgid "1.2"
 msgstr "1.2"
 
+msgid "10bit"
+msgstr "10bit"
+
 msgid "12V output"
 msgstr "12V-Ausgang"
+
+msgid "12bit"
+msgstr "12bit"
 
 msgid "13 V"
 msgstr "13 V"
@@ -410,6 +431,15 @@ msgstr "3D-Modus"
 msgid "4"
 msgstr "4"
 
+msgid "420"
+msgstr "420"
+
+msgid "422"
+msgstr "422"
+
+msgid "444"
+msgstr "444"
+
 msgid "4:3"
 msgstr "4:3"
 
@@ -431,12 +461,14 @@ msgstr "7"
 msgid "8"
 msgstr "8"
 
+msgid "8bit"
+msgstr "8bit"
+
 msgid "9"
 msgstr "9"
 
-#, python-format
-msgid ": %s"
-msgstr ": %s"
+msgid ": 0000 - default (disabled)"
+msgstr ": 0000 - Standard (deaktiviert)"
 
 msgid "<Current movielist location>"
 msgstr "<Aktuelles Filmlisten-Verzeichnis>"
@@ -462,7 +494,7 @@ msgid ""
 "Do you want to keep your modifications?"
 msgstr ""
 "Eine Konfigurationsdatei (%s) wurde seit der Installation verändert.\n"
-"Wollen Sie diese Version behalten?"
+"Wollen Sie diese Änderungen beibehalten?"
 
 #, python-format
 msgid ""
@@ -497,6 +529,9 @@ msgstr ""
 "Eine Aufnahme wurde gestartet:\n"
 "%s"
 
+msgid "A recording is currently running on the selected tuner. Please select a different tuner or consider to stop the recording to try again."
+msgstr "Zurzeit läuft eine Aufnahme über den ausgewählten Tuner. Bitte wählen Sie einen anderen Tuner aus, oder beenden Sie die Aufnahme und versuchen es erneut."
+
 msgid ""
 "A recording is currently running.\n"
 "What do you want to do?"
@@ -504,11 +539,11 @@ msgstr ""
 "Zurzeit läuft eine Aufnahme.\n"
 "Was möchten Sie tun?"
 
-msgid "A recording is currently running. Please stop the recording before trying to configure the positioner."
-msgstr "Zurzeit läuft eine Aufnahme. Bitte beenden Sie die Aufnahme, bevor Sie das Rotor-Setup ausführen."
-
 msgid "A recording is currently running. Please stop the recording before trying to scan."
-msgstr "Zurzeit sind Aufnahmen aktiv. Bitte beenden Sie die Aufnahme, bevor Sie scannen."
+msgstr "Zurzeit läuft eine Aufnahme. Bitte vor einem Suchlauf erst die Aufnahme beenden."
+
+msgid "A recording is currently running. Please stop the recording before trying to start a testing DiSEqC."
+msgstr "Es läuft gerade eine Aufnahme. Bitte beenden Sie zuerst die Aufnahme bevor Sie DiSEqC testen."
 
 #, python-format
 msgid "A required tool (%s) was not found."
@@ -559,6 +594,18 @@ msgstr "AAC downmix"
 msgid "AC3 downmix"
 msgstr "AC3 downmix"
 
+msgid "AGC:"
+msgstr "AGC:"
+
+msgid "ASS file"
+msgstr "ASS Datei"
+
+msgid "ATSC"
+msgstr "ATSC"
+
+msgid "ATSC provider"
+msgstr "ATSC Provider"
+
 msgid "Abort"
 msgstr "Abbrechen"
 
@@ -570,12 +617,6 @@ msgstr "Über..."
 
 msgid "Accesspoint:"
 msgstr "Zugangspunkt:"
-
-msgid "Action on long powerbutton press"
-msgstr "Aktion nach langem Drücken auf Power"
-
-msgid "Action on short powerbutton press"
-msgstr "Aktion beim kurzen Druck auf Power"
 
 msgid "Activate HbbTV (Redbutton)"
 msgstr "HbbTV aktivieren (Rote Taste)"
@@ -656,7 +697,7 @@ msgid "Add to favourites"
 msgstr "Zu Favoriten hinzufügen"
 
 msgid "Add/remove change timer for current event"
-msgstr "Setze/Entferne Timer für aktuelle Sendung"
+msgstr "Setze/Entferne Timer für diese Sendung"
 
 msgid "Adjust 3D settings"
 msgstr "3D Einstellungen"
@@ -665,7 +706,7 @@ msgid "Adjust the color settings so that all the color shades are distinguishabl
 msgstr "Verändern Sie die Farbeinstellungen, sodass Sie alle Farbabstufungen voneinander unterscheiden können, diese aber so gesättigt wie möglich dargestellt werden. Wenn Sie mit dem Ergebnis zufrieden sind, drücken Sie OK, um die Feineinstellungen zu beenden. Mit den Zahlentasten können Sie weitere Testbilder auswählen."
 
 msgid "Advanced"
-msgstr "erweitert"
+msgstr "Erweitert"
 
 msgid "Advanced options"
 msgstr "Erweiterte Optionen"
@@ -718,6 +759,9 @@ msgstr "Alle Satelliten 3 (USALS)"
 msgid "All satellites 4 (USALS)"
 msgstr "Alle Satelliten 4 (USALS)"
 
+msgid "All services provider"
+msgstr ""
+
 msgid "Allocate"
 msgstr "Zuweisen"
 
@@ -737,7 +781,7 @@ msgid "Alpha"
 msgstr "Transparenz"
 
 msgid "Also on standby"
-msgstr "auch in Bereitschaft"
+msgstr "Auch in Bereitschaft"
 
 msgid "Alternative"
 msgstr "Alternativen hinzufügen"
@@ -753,6 +797,12 @@ msgstr "Immer nachfragen"
 
 msgid "Always hide infobar"
 msgstr "Infobar immer ausblenden"
+
+msgid "Always include ECM in recordings"
+msgstr ""
+
+msgid "Always include ECM messages in recordings. This overrides the individual timer settings globally. It allows recordings to be always decrypted afterwards (sometimes called offline decoding), if supported by your receiver. Default: off."
+msgstr ""
 
 msgid "An empty filename is illegal."
 msgstr "Leerer Dateiname nicht erlaubt."
@@ -773,17 +823,17 @@ msgid "Arabic"
 msgstr "Arabisch"
 
 msgid "Are you sure to purge all deleted userbouquets?"
-msgstr ""
+msgstr "Sind Sie sicher, alle gelöschten Userbouquets zu entfernen?"
 
 #, python-format
 msgid "Are you sure to remove all %d.%d%s%s services?"
-msgstr ""
+msgstr "Sind Sie sicher, dass %d.%d%s%s entfernt werden soll?"
 
 msgid "Are you sure to remove all cable services?"
-msgstr ""
+msgstr "Sind Sie sicher, dass alle Kabel-Dienste entfernt werden sollen?"
 
 msgid "Are you sure to remove all terrestrial services?"
-msgstr ""
+msgstr "Sind Sie sicher, dass alle Terrestrischen Dienste entfernt werden sollen?"
 
 msgid "Are you sure to remove this entry?"
 msgstr "Soll dieser Eintrag wirklich gelöscht werden?"
@@ -836,8 +886,11 @@ msgstr "Künstler"
 msgid "Arts/Culture"
 msgstr "Kunst/Kultur"
 
+msgid "As defined by the skin"
+msgstr "Wie im Skin definiert"
+
 msgid "Ask user"
-msgstr "Nutzer fragen"
+msgstr "Benutzer fragen"
 
 msgid "Aspect ratio"
 msgstr "Seitenverhältnis"
@@ -868,7 +921,7 @@ msgid "Audio"
 msgstr "Ton"
 
 msgid "Audio PID"
-msgstr "Ton PID"
+msgstr "Audio PID"
 
 msgid "Audio language selection 1"
 msgstr "Ton Sprachwahl 1"
@@ -884,6 +937,9 @@ msgstr "Ton Sprachwahl 4"
 
 msgid "Audio options..."
 msgstr "Ton-Optionen..."
+
+msgid "Audio plugins"
+msgstr "Ton-Plugins"
 
 #, python-format
 msgid "Audio track (%s) format"
@@ -903,6 +959,12 @@ msgstr "Autorenmodus"
 msgid "Auto"
 msgstr "Auto"
 
+msgid "Auto Diseqc"
+msgstr "Auto Diseqc"
+
+msgid "Auto EXIF Orientation rotation/flipping"
+msgstr ""
+
 msgid "Auto chapter split every ? minutes (0=never)"
 msgstr "Automatische Kapitelwechsel alle ? Minuten (0=nie)"
 
@@ -917,6 +979,9 @@ msgstr "Auto-Fokusierung beginnt ..."
 
 msgid "Auto language selection"
 msgstr "Automatische Sprachauswahl"
+
+msgid "Auto play blu-ray file"
+msgstr "Autoplay Bluray Datei"
 
 msgid "Auto scart switching"
 msgstr "Automatische Scart-Umschaltung"
@@ -988,7 +1053,7 @@ msgid "Begin time"
 msgstr "Startzeit"
 
 msgid "Behavior of 'pause and ok' when paused"
-msgstr "Verhalten von 'Pause und OK' wenn abgehalten"
+msgstr "Verhalten von 'Pause und OK' wenn pausiert"
 
 msgid "Behavior of 0 key in PiP-mode"
 msgstr "Verhalten der '0'-Taste bei Bild im Bild"
@@ -1050,10 +1115,13 @@ msgid "Burn to DVD"
 msgstr "Auf DVD brennen"
 
 msgid "Bus: "
-msgstr "Bus:"
+msgstr "Bus: "
 
 msgid "By default, SNR will be shown in dB (when supported by the tuner). This setting forces SNR to be shown as a percentage instead."
-msgstr "Standardmässig wird SNR in Dezibel angezeigt (falls vom Tuner unterstütztDiese Einstellung erzwingt die Darstellung von SNR in Prozent."
+msgstr "Standardmässig wird SNR in Dezibel angezeigt (falls vom Tuner unterstützt). Diese Einstellung erzwingt die Darstellung von SNR in Prozent."
+
+msgid "Bypass HDMI EDID checking"
+msgstr "Überspringe HDMI-EDID Prüfung"
 
 msgid "C"
 msgstr "C"
@@ -1066,13 +1134,16 @@ msgstr "Kanal"
 
 #, python-format
 msgid "CH%s"
-msgstr ""
+msgstr "CH%s"
 
 msgid "CI (Common Interface) Setup"
 msgstr "CI (Common Interface) Einstellungen"
 
 msgid "CI assignment"
 msgstr "CI-Zuweisung"
+
+msgid "CI slot: "
+msgstr "CI-Slot: "
 
 msgid "CPU: "
 msgstr "Prozessor: "
@@ -1114,10 +1185,13 @@ msgid "Cannot find any signal ..., aborting !"
 msgstr "Kein Signal erkannt ..., Abbruch !"
 
 msgid "Cannot move files on a different disk or system to the trash can"
-msgstr "Dateien auf einem anderen System können nicht in den Mülleimer verschoben werden!"
+msgstr "Dateien auf einem anderen System können nicht in den Papierkorb verschoben werden!"
 
 msgid "Cannot move to trash can"
-msgstr "Die Datei konnte nicht in den Mülleimer verschoben werden"
+msgstr "Die Datei konnte nicht in den Papierkorb verschoben werden"
+
+msgid "Capabilities: "
+msgstr "Fähigkeiten: "
 
 msgid "Capacity: "
 msgstr "Kapazität: "
@@ -1158,9 +1232,6 @@ msgstr "Schrittweite ändern."
 msgid "Change timer"
 msgstr "Timer ändern"
 
-msgid "Changelog"
-msgstr "Versionshistorie"
-
 msgid "Channel"
 msgstr "Kanal"
 
@@ -1181,6 +1252,15 @@ msgstr "Kanal:"
 
 msgid "Channellist menu"
 msgstr "Kanallisten-Menü"
+
+msgid "Channelnumber and picon"
+msgstr "Kanalnummer und Picon"
+
+msgid "Channelnumber and servicename"
+msgstr "Kanalnummer und Sendername"
+
+msgid "Channelnumber, picon and servicename"
+msgstr "Kanalnummer, Picon und Sendername"
 
 msgid "Chap."
 msgstr "Kap."
@@ -1208,17 +1288,20 @@ msgstr "Überprüfung der Internet-Verbindung"
 
 #, python-format
 msgid ""
-"Checking tuner %d\n"
+"Checking tuner %s\n"
 "DiSEqC port %s for %s"
 msgstr ""
-"Überprüfe Tuner %d\n"
-"DiSEqC Port %s auf %s"
+"Prüfe Tuner %s\n"
+"DiSEqC Port %s für %s"
 
 msgid "Children/Youth"
 msgstr "Kinder/Jugend"
 
 msgid "Choose Tuner"
 msgstr "Wähle Tuner"
+
+msgid "Choose bouquet"
+msgstr "Favoritenliste auswählen"
 
 msgid "Choose which tuner to configure."
 msgstr "Wählen Sie den Tuner aus."
@@ -1262,16 +1345,13 @@ msgstr "Schließe PiP mit Exit"
 msgid "Close title selection"
 msgstr "Titelauswahl schließen"
 
+msgid "Code R. LP-HP & Guard Int."
+msgstr ""
+
 msgid "Code rate HP"
 msgstr "Empfangsrate HP"
 
 msgid "Code rate LP"
-msgstr "Empfangsrate LP"
-
-msgid "Coderate HP"
-msgstr "Empfangsrate HP"
-
-msgid "Coderate LP"
 msgstr "Empfangsrate LP"
 
 msgid "Collection name"
@@ -1289,6 +1369,9 @@ msgstr "Befehl wird ausgeführt..."
 msgid "Command order"
 msgstr "Befehlsfolge"
 
+msgid "Commit info"
+msgstr "Änderungsinfos"
+
 msgid "Common Interface"
 msgstr "Common Interface"
 
@@ -1301,9 +1384,6 @@ msgstr "Kommunikation"
 msgid "Compact flash"
 msgstr "Compact Flash"
 
-msgid "Compensate for overscan"
-msgstr ""
-
 msgid "Complete"
 msgstr "Komplett"
 
@@ -1313,9 +1393,11 @@ msgstr "Komplex (erlaubt Mischen versch. Ton-u. Bildformate)"
 msgid "Composition of the recording filenames"
 msgstr "Zusammensetzung des Aufnahme-Dateinamens"
 
-#, fuzzy
+msgid "Config Scan Details"
+msgstr "Konfiguriere Suchdetails"
+
 msgid "Config resolution of pictures"
-msgstr "Auflösung der Bilder konfigurieren"
+msgstr "Auflösung von Bildern konfigurieren"
 
 msgid "Configuration mode"
 msgstr "Konfiguration"
@@ -1337,31 +1419,43 @@ msgid "Configure for how long the infobar will remain visible after activation."
 msgstr "Konfigurieren Sie wie lange die Infoleiste nach Einblendung sichtbar bleibt."
 
 msgid "Configure for how many minutes finished events should remain visible in the EPG. Useful when you need information about an event which has just finished, or has been delayed."
-msgstr "Konfigurieren Sie wie viele Minuten eine abgeschlossene Sendung in der EPG sichtbar bleiben soll. Nützlich wenn Sie Informationen zu einer Sendung benötigen, die bereits abgeschlossen war bzw. eine Sendung länger dauerte."
+msgstr "Konfigurieren Sie wie viele Minuten eine abgeschlossene Sendung im EPG sichtbar bleiben soll. Nützlich, wenn Sie Informationen zu einer Sendung benötigen, die vor Kurzem endete bzw. etwas länger als geplant andauert."
+
+msgid "Configure how many channels are shown in the selection list."
+msgstr "Konfiguriere wie viele Sender in der Kanalauswahlliste angezeigt werden sollen."
 
 msgid "Configure how recording filenames are constructed."
-msgstr "Aufnahme-Dateiname konfigurieren"
+msgstr "Zusammensetzung des Dateinamens einer Aufnahme festlegen."
 
 msgid "Configure how the fan should operate"
 msgstr "Lüfterverhalten konfigurieren"
 
 msgid "Configure if and how crypto icons will be shown in the channel selection list."
-msgstr "Konfiguriere, ob und wie die Verschlüsselungssymbole in der Kanalliste angezeigt werden."
+msgstr "Konfigurieren, ob Verschlüsselungssymbole in der Kanalauswahlliste angezeigt werden sollen."
 
 msgid "Configure if and how long the latest service in the PiP will be remembered."
 msgstr "Konfiguriere, ob und wie lange der letzte PiP-Kanal gespeichert wird."
 
 msgid "Configure if and how service type icons will be shown in the channel selection list."
-msgstr "Konfiguriert, ob und wie Service-Typ Icons in der Kanalliste angezeigt werden."
+msgstr "Konfiguriere, ob Servicetyp-Symbole in der Kanalauswahlliste angezeigt werden sollen."
 
 msgid "Configure if and how the record indicator will be shown in the channel selection list."
-msgstr "Konfigurieren ob und wie Icons für die Aufnahme in der Senderliste gezeigt werden."
+msgstr "Konfiguriere, ob Aufnahmesymbole in der Kanalauswahlliste angezeigt werden sollen."
 
 msgid "Configure if and how wide columns will be shown in the channel selection list."
-msgstr "Konfiguriere, ob und wie große Spalten in der Kanalliste angezeigt werden."
+msgstr "Konfiguriere, ob und wie große Spalten in der Kanalauswahlliste angezeigt werden sollen."
+
+msgid "Configure if behind the subtitles a background is shown."
+msgstr "Konfiguriere, ob hinter Untertiteln ein Untergrund gezeigt werden soll."
+
+msgid "Configure if service picons will be shown in display (when supported by the skin)."
+msgstr ""
 
 msgid "Configure if service picons will be shown in the channel selection list."
 msgstr "Falls aktiviert, werden Picons in der Kanalauswahlliste angezeigt."
+
+msgid "Configure if the HDMI EDID checking should be bypassed as this might solve issue with some TVs."
+msgstr "Konfiguriere, ob die HDMI-EDID Überprüfung übersprungen werden soll, da dies womöglich Probleme mit einigen TVs löst."
 
 msgid "Configure if the subtitle should switch between normal, italic, bold and bolditalic"
 msgstr "Konfiguriere ob Untertitel zwischen normal, kursiv, fett und fettkursiv wechseln sollen"
@@ -1373,10 +1467,10 @@ msgid "Configure nameservers"
 msgstr "DNS-Server konfigurieren"
 
 msgid "Configure on which devices the background delete option should be used."
-msgstr "Einstellung der Geräte bei denen die Hintergrund-Löschung aktiviert werden soll."
+msgstr "Auswahl der Speichermedien, bei denen die Hintergrund-Löschung aktiviert werden soll."
 
 msgid "Configure remote control type"
-msgstr "Fernbedienungtyp einstellen"
+msgstr "Fernbedienungstyp einstellen"
 
 msgid "Configure the DiSEqC mode for this LNB."
 msgstr "DiSEqC Modus Einstellung für diesen LNB."
@@ -1388,7 +1482,7 @@ msgid "Configure the aspect ratio of the screen."
 msgstr "Bildformat des Bildschirms konfigurieren."
 
 msgid "Configure the behavior of the 'pause and ok' key when movie playback is already paused."
-msgstr "Konfiguriere das Verhalten der 'Pause und OK-Taste, wenn die Filmwiedergabe bereits gestoppt wurde."
+msgstr "Konfiguriere das Verhalten der 'Pause' & 'OK' Taste, wenn eine Medienwiedergabe pausiert wurde."
 
 msgid "Configure the behavior when movie playback is manually stopped."
 msgstr "Verhalten beim Stoppen eines Films"
@@ -1424,7 +1518,7 @@ msgid "Configure the duration in hours the receiver should go to standby when th
 msgstr "Konfiguriere den Zeitraum in Stunden, nachdem der Receiver in den Standby wechseln soll, wenn dieser nicht mehr gesteuert wird."
 
 msgid "Configure the duration in minutes for the screensaver."
-msgstr "Konfiguriert die Dauer in Minuten bis zum Start des Screensavers."
+msgstr "Konfiguriert die Dauer in Minuten bis zum Start des Bildschirmschoners."
 
 msgid "Configure the duration in minutes for the sleeptimer. Select this entry and click OK or green to start/stop the sleeptimer"
 msgstr "Konfiguriere den Zeitraum in Minuten für den Ausschalt-Timer. Wähle diesen Eintrag aus und drücke OK oder die grüne Taste, um den Ausschalt-Timer zu staren/beenden."
@@ -1447,12 +1541,6 @@ msgstr "Wahl der vierten Audiospur-Sprache."
 msgid "Configure the fourth subtitle language."
 msgstr "Wahl der vierten Untertitel Sprache."
 
-msgid "Configure the function of a long press on the power button."
-msgstr "Funktion bei längerem Drücken der Einschalt-Taste."
-
-msgid "Configure the function of a short press on the power button."
-msgstr "Funktion dei kurzem Drücken der Einschalt-Taste."
-
 msgid "Configure the function of the '0' button do when PIP is active."
 msgstr "Funktion der '0' Taste während Bild im Bild aktiv ist."
 
@@ -1472,7 +1560,7 @@ msgid "Configure the horizontal alignment of the subtitles."
 msgstr "Horizontale Ausrichtung der Untertitel."
 
 msgid "Configure the initial fast forward speed. When you press the fast forward button, winding will start at this speed."
-msgstr "Anfängliche Schnellvorlauf-Geschwindigkeit. Wenn die Schnellvorlauf-Taste betätigt wird, wird diese Geschwindigkeit zum Spulen verwendet."
+msgstr "Anfängliche Vorspul-Geschwindigkeit. Wenn die Vorspul-Taste betätigt wird, wird diese Geschwindigkeit zum Spulen verwendet."
 
 msgid "Configure the initial rewind speed. When you press the rewind button, winding will start at this speed."
 msgstr "Anfängliche Rückspul-Geschwindigkeit. Wenn die Rückspultaste betätigt wird, wird diese Geschwindigkeit zum Spulen verwendet."
@@ -1484,7 +1572,7 @@ msgid "Configure the longitude of your location."
 msgstr "Längengrad Ihres Standortes."
 
 msgid "Configure the minimum amount of disk space to be available for recordings. When the amount of space drops below this value, deleted items will be removed from the trash can."
-msgstr "Minimaler Festplatten-Speicher der vor Aufnahme zur Verfügung stehen muss. Wenn dieser Wert unterschritten wird, werden Elemente vom Mülleimer endgültig entfernt."
+msgstr "Minimaler Festplatten-Speicher der vor Aufnahme zur Verfügung stehen muss. Wenn dieser Wert unterschritten wird, werden Elemente im Papierkorb endgültig entfernt."
 
 msgid "Configure the nameserver (DNS)."
 msgstr "DNS-Server konfigurieren"
@@ -1493,19 +1581,19 @@ msgid "Configure the netmask."
 msgstr "Netzmaske konfigurieren"
 
 msgid "Configure the number of days after which items are automaticaly removed from the trash can."
-msgstr "Anzahl von Tagen nach denen Elemente aus dem Mülleimer automatisch gelöscht werden."
+msgstr "Anzahl von Tagen, nach denen Elemente im Papierkorb automatisch entfernt werden sollen."
 
 msgid "Configure the number of days old timers are kept before they are automatically removed from the timer list."
-msgstr "Anzahl von Tagen nach denen Timers von der Timer-Liste automatischgelöscht werden sollen."
+msgstr "Anzahl von Tagen, nach denen erledigte Timer aus der Timer-Übersicht automatisch entfernt werden sollen."
 
 msgid "Configure the offline decoding delay in milliseconds. The configured delay is observed at each control word parity change."
 msgstr "Lokale Dekodierungsverzögerung in Millisekunden. Die gesetzte Verzögerung wird bei jedem Kontrollwortparität-Wechsel beachtet."
 
 msgid "Configure the possible fast forward speeds."
-msgstr "Mögliche Schnellvorlauf-Geschwindigkeit"
+msgstr "Mögliche Vorspul-Geschwindigkeiten."
 
 msgid "Configure the possible rewind speeds."
-msgstr "Mögliche Rücklauf-Geschwindigkeit"
+msgstr "Mögliche Rückspul-Geschwindigkeiten."
 
 msgid "Configure the primary EPG language."
 msgstr "Primäre EPG Sprache."
@@ -1529,19 +1617,19 @@ msgid "Configure the sharpness of the video scaling."
 msgstr "Schärfe der Bildschirmskalierung."
 
 msgid "Configure the skip time interval for the '1'/'3' buttons."
-msgstr "Sprunginterval der '1'/'3' Tasten."
+msgstr "Sprungintervall in Sekunden beim Betätigen der '1' oder '3' Taste während einer Medienwiedergabe."
 
 msgid "Configure the skip time interval for the '4'/'6' buttons."
-msgstr "Sprunginterval der '4'/'6' Tasten."
+msgstr "Sprungintervall in Sekunden beim Betätigen der '4' oder '6' Taste während einer Medienwiedergabe."
 
 msgid "Configure the skip time interval for the '7'/'9' buttons."
-msgstr "Sprunginterval der '7'/'9' Tasten."
+msgstr "Sprungintervall in Sekunden beim Betätigen der '7' oder '9' Taste während einer Medienwiedergabe."
 
 msgid "Configure the slow motion speeds."
-msgstr "Zeitlupen-Geschwindigkeiten."
+msgstr "Mögliche Zeitlupen-Geschwindigkeiten."
 
 msgid "Configure the source of the frontend data as shown on the infobars. 'Settings' is as stored on the settings. 'Tuner' is as reported by the tuner."
-msgstr "Konfiguriere die Frontend Datenquelle, die in der Infobar angezeigt wird. Das Feld  'Einstellungen' (Settings) kann konfiguriert werden. Das Feld 'Tuner' wird vom Tuner übernommen."
+msgstr "Konfiguriere die Frontend Datenquelle, die in der Infoleiste angezeigt wird. Das Feld  'Einstellungen' (Settings) kann konfiguriert werden. Das Feld 'Tuner' wird vom Tuner übernommen."
 
 msgid "Configure the speed of the background deletion process. Lower speed will consume less hard disk drive performance."
 msgstr "Schnelligkeit des Hintergrund-Löschprozesses. Ein langsamerer Löschvorgang verbraucht weniger Festplatten-Performanz."
@@ -1580,19 +1668,22 @@ msgid "Configure the way in which the receiver changes channels."
 msgstr "Anpassung des Vorganges bei Kanalwechsel."
 
 msgid "Configure where completed timers show up in the timer list."
-msgstr "Position beendeter Timer in der Timerliste"
+msgstr "Position beendeter Timer in der Timerliste."
 
 msgid "Configure whether (and for how long) a second infobar will be shown when OK is pressed twice. The second infobar contains additional information about the current channel."
 msgstr "Anpassung ob (und wie lange) eine zweite Infoleiste bei erneuter Betätigung der OK Taste angezeigt werden soll. Diese zeigt zusätzliche Informationen über den Kanal an."
+
+msgid "Configure whether multi channel PCM sound should be enabled."
+msgstr ""
 
 msgid "Configure whether multi channel sound tracks should be downmixed to stereo."
 msgstr "Heruntermischen von Multi-Kanal-Sound in Stereo."
 
 msgid "Configure whether or not an icon should be shown when your motorized dish is moving."
-msgstr "Anzeige eines Hinweissymbols bei Bewegung der mororisierten Antennenschüssel."
+msgstr "Anzeige eines Hinweissymbols bei Bewegung der motorisierten Antennenschüssel."
 
 msgid "Configure whether or not an rotor position will be displayed on infobar"
-msgstr "Einstellen ob die Rotorposition in InfoBar angezeigt werden soll"
+msgstr "Einstellen, ob die Rotorposition in der Infoleiste angezeigt werden soll."
 
 msgid "Configure which access level to use for the configuration menu. Expert level gives access to all items."
 msgstr "Zugriff-Level des Konfigurationsmenüs einstellen. Expertenlevel erlaubt den Zugriff auf alle Elemente."
@@ -1601,14 +1692,13 @@ msgid "Configure which color format should be used on the SCART output."
 msgstr "Farbformat am SCART Ausgang."
 
 msgid "Configure which tuner for recordings will be preferred, when more than one tuner is available."
-msgstr "Konfiguriere den Tuner, der für Aufnahmen bevorzugt wird, falls mehrere Tuner zur Verfügung stehen."
+msgstr "Legt den Tuner fest, der für Aufnahmen bevorzugt werden soll, falls mehrere Tuner zur Verfügung stehen."
 
-#, fuzzy
 msgid "Configure which tuner type will be preferred, when the same service is available on different types of tuners. Choose 'no priority' to try each alternative one by one independent from tuner type."
-msgstr "Einstellen, welche Tunerart bevorzugt werden soll, wenn der gleiche Sender auf verschiedenen Tunern verfügbar ist. \\\"Keine Priorität\\\" bedeutet, alle Alternativen werden unabhängig von der Tunerart nacheinander durchprobiert."
+msgstr "Einstellen, welcher Tunertyp bevorzugt werden soll, wenn der gleiche Sender auf verschiedenen Tunertypen verfügbar ist. 'Keine Priorität' bedeutet, dass alle Alternativen unabhängig vom Tunertyp nacheinander durchprobiert werden."
 
 msgid "Configure which tuner will be preferred, when more than one tuner is available. If set to 'auto' the system will give priority to the tuner having the lowest number of channels/satellites."
-msgstr "Bevorzugter Tuner falls mehr als einer verfügbar ist. Bei 'auto' wird der Tuner mit den wenigsten Kanälen/Satelliten bevorzugt.."
+msgstr "Bevorzugter Tuner, falls mehr als einer verfügbar ist. Bei 'Automatisch' wird der Tuner mit den wenigsten Kanälen/Satelliten bevorzugt."
 
 msgid "Configure your internal LAN"
 msgstr "Internes Netzwerk konfigurieren"
@@ -1631,9 +1721,6 @@ msgstr "Konfiguriere"
 msgid "Conflict not resolved!"
 msgstr "Konflikt nicht behoben!"
 
-msgid "Conflicting timer"
-msgstr "In Konflikt stehender Timer"
-
 msgid "Connect"
 msgstr "Verbinden"
 
@@ -1646,8 +1733,14 @@ msgstr "Angeschlossene Satelliten"
 msgid "Connected to"
 msgstr "Verbunden mit"
 
-msgid "Constellation"
-msgstr "Konstellation"
+msgid "Connected transcoding, limit - no PiP!"
+msgstr ""
+
+msgid "Console"
+msgstr "Konsole"
+
+msgid "Constellation & FFT mode"
+msgstr ""
 
 msgid "Content does not fit on DVD!"
 msgstr "Inhalt passt nicht auf die DVD!"
@@ -1682,9 +1775,6 @@ msgstr "Wandle ext3 nach ext4 um..."
 msgid "Copy"
 msgstr "Kopieren"
 
-msgid "Could not connect to receiver .NFI image feed server:"
-msgstr "Verbindung zum Receiver .NFI Image Feed Server konnte nicht hergestellt werden:"
-
 msgid "Could not find installed channel list."
 msgstr "Programmierte Kanalliste konnte nicht gefunden werden."
 
@@ -1702,11 +1792,17 @@ msgstr "Aufnahme wegen in Konflikt stehendem Timer %s fehlgeschlagen"
 msgid "Could not record due to invalid service %s"
 msgstr "Aufnahme wegen ungültigem Kanal %s fehlgeschlagen"
 
+msgid "Cover dashed flickering line for this service"
+msgstr "Gestrichelte Linie für diesen Kanal verdecken"
+
 msgid "Create DVD-ISO"
 msgstr "DVD-ISO erstellen"
 
 msgid "Create new folder and exit"
 msgstr "Neuen Ordner erstellen und beenden"
+
+msgid "Create seperate radio userbouquet"
+msgstr "Erzeuge seperates Radiobouquet"
 
 #, python-format
 msgid "Creating directory %s failed."
@@ -1725,12 +1821,11 @@ msgid "Current CEC address"
 msgstr "Aktuelle CEC-Adresse"
 
 msgid "Current device: "
-msgstr "Aktuelles Gerät:"
+msgstr "Aktuelles Gerät: "
 
 msgid "Current event EPG"
 msgstr "Aktuelle Sendung EPG"
 
-#, fuzzy
 msgid ""
 "Current event is over.\n"
 "Select an option to save the timeshift file."
@@ -1742,6 +1837,9 @@ msgstr ""
 msgid "Current mode: %s \n"
 msgstr "Aktueller Modus: %s \n"
 
+msgid "Current rotor position: "
+msgstr "Aktuelle Rotor-Position: "
+
 msgid "Current settings:"
 msgstr "Aktuelle Einstellungen:"
 
@@ -1749,13 +1847,7 @@ msgid "Current transponder"
 msgstr "Aktueller Transponder"
 
 msgid "Current value: "
-msgstr "Aktueller Wert:"
-
-msgid "Current version:"
-msgstr "Derzeitige Version:"
-
-msgid "Currently installed image"
-msgstr "Aktuell installiertes Image"
+msgstr "Aktueller Wert: "
 
 msgid "Currently the commit log cannot be retrieved - please try later again"
 msgstr "Derzeit kann die Liste der Code-Veränderungen nicht geladen werden - Bitte versuchen Sie es später erneut"
@@ -1773,10 +1865,13 @@ msgid "Customize"
 msgstr "Anpassen"
 
 msgid "Customize channel list cursor behavior"
-msgstr "Cursor-Verhalten in Kanalliste einstellen"
+msgstr "Cursor-Verhalten in Kanalauswahlliste einstellen"
 
 msgid "Cut"
 msgstr "Schneiden"
+
+msgid "Cutlist editor"
+msgstr "Schnitteditor"
 
 msgid "Cutlist editor..."
 msgstr "Schnitteditor..."
@@ -1802,14 +1897,23 @@ msgstr "DTS downmix"
 msgid "DUAL LAYER DVD"
 msgstr "Doppelschicht DVD (DUAL LAYER)"
 
+msgid "DVB CI Delay"
+msgstr ""
+
 msgid "DVB drivers: "
 msgstr "DVB Treiber: "
 
 msgid "DVB subtitle black transparency"
 msgstr "Schwarztransparenz DVB-Untertitel"
 
+msgid "DVB type"
+msgstr ""
+
 msgid "DVB-C"
 msgstr "DVB-C"
+
+msgid "DVB-C ANNEX B"
+msgstr "DVB-C ANNEX B"
 
 msgid "DVB-C ANNEX C"
 msgstr "DVB-C ANNEX C"
@@ -1825,6 +1929,12 @@ msgstr "DVB-T"
 
 msgid "DVB-T2"
 msgstr "DVB-T2"
+
+msgid "DVD Burn"
+msgstr "DVD Brennen"
+
+msgid "DVD Menu"
+msgstr "DVD Menü"
 
 msgid "DVD data format"
 msgstr "DVD Format"
@@ -1856,8 +1966,11 @@ msgstr "Tiefschlaf / Ausschalten"
 msgid "Default"
 msgstr "Standard"
 
+msgid "Default Services Scanner"
+msgstr ""
+
 msgid "Default movie location"
-msgstr "Standard Filmlisten Ort"
+msgstr "Standard Filmlisten-Verzeichnis"
 
 msgid "Default settings"
 msgstr "Voreinstellungen"
@@ -1933,7 +2046,7 @@ msgid "Delete entry"
 msgstr "Eintrag löschen"
 
 msgid "Delete failed!"
-msgstr "Löschen fehlgeschlagen."
+msgstr "Löschen fehlgeschlagen!"
 
 msgid "Delete file"
 msgstr "Datei löschen"
@@ -1956,8 +2069,11 @@ msgstr "Gelöschte Objekte"
 msgid "Depth"
 msgstr "Tiefe"
 
-msgid "Descramble http streams"
-msgstr "Entschlüssele HTTP-Streams"
+msgid "Descramble receiving http streams"
+msgstr "Empfangene HTTP-Streams entschlüsseln"
+
+msgid "Descramble sending http streams"
+msgstr "Gesendete HTTP-Streams entschlüsseln"
 
 msgid "Description"
 msgstr "Beschreibung"
@@ -1995,6 +2111,9 @@ msgstr "DiSEqC A/B"
 msgid "DiSEqC A/B/C/D"
 msgstr "DiSEqC A/B/C/D"
 
+msgid "DiSEqC Tester"
+msgstr "DiSEqC Tester"
+
 msgid "DiSEqC mode"
 msgstr "DiSEqC-Modus"
 
@@ -2004,6 +2123,9 @@ msgstr "DiSEqC Port %s: %s"
 
 msgid "DiSEqC-tester settings"
 msgstr "DiSEqC-Tester Einstellungen"
+
+msgid "Did you see all eight arrow heads?"
+msgstr "Konnten Sie alle acht Pfeilspitzen sehen?"
 
 msgid "Digital contour removal"
 msgstr "Entfernen digitaler Konturen"
@@ -2043,6 +2165,9 @@ msgstr "Timer deaktivieren"
 msgid "Disabled"
 msgstr "Deaktiviert"
 
+msgid "Disclaimer"
+msgstr "Haftungsausschluss"
+
 msgid "Disk space to reserve for recordings (in GB)"
 msgstr "Reservierter Speicherplatz für Aufnahmen (in GB)"
 
@@ -2071,7 +2196,7 @@ msgid "Do not record"
 msgstr "Nicht aufnehmen"
 
 msgid "Do nothing"
-msgstr "Nichts"
+msgstr "Nichts tun"
 
 msgid ""
 "Do you really want to check the filesystem?\n"
@@ -2124,6 +2249,9 @@ msgstr "Wollen Sie das Lesezeichen %s wirklich löschen?"
 msgid "Do you want this?"
 msgstr "Wollen Sie dieses wirklich?"
 
+msgid "Do you want to autorestore settings?"
+msgstr "Wollen Sie Settings automatisch wiederherstellen?"
+
 msgid "Do you want to burn this collection to DVD medium?"
 msgstr "Soll diese Zusammenstellung auf DVD gebrannt werden?"
 
@@ -2132,10 +2260,6 @@ msgstr "Jetzt nach Kanälen suchen?"
 
 msgid "Do you want to do another manual service scan?"
 msgstr "Wollen Sie eine weitere manuelle Suche durchführen?"
-
-#, python-format
-msgid "Do you want to download the image to %s ?"
-msgstr "Wollen Sie das Image nach %s herunterladen?"
 
 msgid "Do you want to install a channel list?"
 msgstr "Möchten Sie eine Kanalliste hinzufügen?"
@@ -2149,8 +2273,14 @@ msgstr "Wollen Sie die DVD im Laufwerk abspielen?"
 msgid "Do you want to preview this DVD before burning?"
 msgstr "Wollen Sie vor dem Brennen eine Vorschau der DVD ansehen?"
 
+msgid "Do you want to quit the overscan wizard?"
+msgstr "Wollen Sie den Overscan-Assistenten beenden?"
+
 msgid "Do you want to reboot your receiver?"
 msgstr "Wollen Sie Ihren Receiver neu starten?"
+
+msgid "Do you want to remove all the crahs logfiles"
+msgstr "Möchten Sie alle Crash-Logs entfernen?"
 
 msgid "Do you want to remove the package:\n"
 msgstr "Wollen Sie das Paket entfernen:\n"
@@ -2160,6 +2290,9 @@ msgstr "Wollen Sie die Einstellungen wiederherstellen?"
 
 msgid "Do you want to resume this playback?"
 msgstr "Möchten Sie die Wiedergabe an der letzten Stelle fortsetzen?"
+
+msgid "Do you want to select a different skin?"
+msgstr "Möchten Sie einen anderen Skin auswählen?"
 
 #, python-format
 msgid "Do you want to update your receiver to %s?"
@@ -2192,16 +2325,6 @@ msgid_plural "Done - Installed, upgraded or removed %d packages (%s)"
 msgstr[0] "Abgeschlossen - %d Paket installiert, aktualisiert oder entfernt (%s)"
 msgstr[1] "Abgeschlossen - %d Pakete installiert, aktualisiert oder entfernt (%s)"
 
-msgid "Download"
-msgstr "Herunterladen"
-
-#, python-format
-msgid "Download %s from server"
-msgstr "%s vom Server herunterladen"
-
-msgid "Download .NFI-files for USB-flasher"
-msgstr ".NFI-Files für USB-Flasher runterladen"
-
 msgid "Download plugins"
 msgstr "Plugins herunterladen"
 
@@ -2218,11 +2341,12 @@ msgid "Downloading plugin information. Please wait..."
 msgstr "Lade Plugin-Informationen herunter. Bitte warten..."
 
 msgid "Dutch"
-msgstr "Holländisch"
+msgstr "Niederländisch"
 
 msgid "Dynamic contrast"
 msgstr "Dynamischer Kontrast"
 
+#, fuzzy
 msgid "E"
 msgstr "O"
 
@@ -2264,10 +2388,10 @@ msgid "Edit settings"
 msgstr "Einstellungen bearbeiten"
 
 msgid "Edit the nameserver configuration of your receiver.\n"
-msgstr "Bearbeiten Sie die Nameserver-Einstellungen Ihres Receivers.\n"
+msgstr "Bearbeiten Sie die DNS-Einstellungen Ihres Receivers.\n"
 
 msgid "Edit the network configuration of your receiver.\n"
-msgstr "Bearbeiten Sie die Netzwerk-Konfiguration Ihres Receivers.\n"
+msgstr "Bearbeiten Sie die Netzwerkkonfiguration Ihres Receivers.\n"
 
 msgid "Edit timer"
 msgstr "Timer editieren"
@@ -2323,15 +2447,18 @@ msgstr "Automatischen Kabelscan aktivieren"
 msgid "Enable auto fast scan"
 msgstr "Aktiviere automatischen schnellen Kanalscan"
 
+#, python-format
+msgid "Enable auto fast scan for %s"
+msgstr "Aktiviere automatischen schnellen Kanalscan für %s"
+
 msgid "Enable bouquet selection in multi-EPG"
 msgstr "Aktiviere Bouquet-Auswahl im Multi-EPG"
 
-#, fuzzy
 msgid "Enable fallback remote receiver"
-msgstr "Aktiviere Fallback Remote Receiver"
+msgstr "Aktiviere Fallback-Remote-Receiver"
 
 msgid "Enable freesat EPG"
-msgstr "Aktiviere freesat EPG"
+msgstr "Aktiviere Freesat EPG"
 
 msgid "Enable multiple bouquets"
 msgstr "Mehrere Bouquets erlauben"
@@ -2340,13 +2467,19 @@ msgid "Enable parental protection"
 msgstr "Jugendschutz aktivieren"
 
 msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
-msgstr ""
+msgstr "Aktiviere einen Fallback-Remote-Receiver, der versucht wird wenn ein Sender lokal nicht empfangen werden kann. (z.B. wenn Tuner belegt oder Sender lokal nicht verfügbar ist). Gebe komplette URL inklusive http:// und Portnummer (normal ...:8001), z.B. http://zweite_box:8001."
 
 msgid "Enable teletext caching"
 msgstr "Aktiviere Teletext Cache"
 
+msgid "Enable timer conflict detection"
+msgstr "Aktiviere Timer-Konflikt-Erkennung"
+
 msgid "Enable volume control with arrow buttons"
 msgstr "Aktiviere Lautstärkeregelung mit Pfeiltasten"
+
+msgid "Enable wakeup timer"
+msgstr "Aktiviere Aufwach-Timer"
 
 msgid "Enable zapping with CH+/-, B+/-, P+/-"
 msgstr "Aktiviere Kanalumschalten mit CH+/-, B+/-, P+/-"
@@ -2386,10 +2519,16 @@ msgid "Enigma (re)starts: %d\n"
 msgstr "Benutzeroberfläche (Enigma) startet neu: %d\n"
 
 msgid "Enigma2 skin selector"
-msgstr "Benutzeroberfläche Auswahl"
+msgstr "Enigma2 Skin-Auswahl"
+
+msgid "Enter PIN"
+msgstr "PIN eingeben"
 
 msgid "Enter main menu..."
 msgstr "Öffne Hauptmenü..."
+
+msgid "Enter persistent PIN code"
+msgstr "Dauerhaften PIN-Code eingeben"
 
 msgid "Enter pin code"
 msgstr "PIN-Code eingeben"
@@ -2432,8 +2571,17 @@ msgstr "Sendung Schriftgröße (relativ zur Skingröße)"
 msgid "Event view"
 msgstr "Sendungsübersicht"
 
+msgid "Event view context menu"
+msgstr ""
+
 msgid "Event view menu"
 msgstr "Sendungsübersicht Menü"
+
+msgid "Events info menu"
+msgstr ""
+
+msgid "Every known"
+msgstr "Alle bekannten"
 
 msgid "Everywhere"
 msgstr "Überall"
@@ -2486,6 +2634,9 @@ msgstr "Netzwerkassistent verlassen"
 msgid "Exit the wizard"
 msgstr "Assistent beenden"
 
+msgid "Exit/OK"
+msgstr "Beenden/OK"
+
 msgid "Expert"
 msgstr "Experte"
 
@@ -2512,6 +2663,9 @@ msgstr "Erweiterungen"
 
 msgid "Extensions management"
 msgstr "Erweiterungsverwaltung"
+
+msgid "Extensions menu"
+msgstr "Erweiterungs-Menü"
 
 msgid "External"
 msgstr "Extern"
@@ -2541,11 +2695,45 @@ msgstr "Zusätzliche Motor-Optionen"
 msgid "Extra start time to ignore inactivity sleeptimer"
 msgstr ""
 
-msgid "F1/F3"
-msgstr "F1/F3"
+msgid "F"
+msgstr "F"
+
+msgid "F1/F3/F4"
+msgstr "F1/F3/F4"
+
+msgid "FBC SCR (Unicable/JESS)"
+msgstr "FBC SCR (Unicable/JESS)"
+
+msgid "FBC automatic"
+msgstr "FBC automatisch"
+
+msgid ""
+"FBC automatic\n"
+"connected to"
+msgstr ""
+"FBC automatisch\n"
+"verbunden mit"
+
+#, python-format
+msgid ""
+"FBC automatic\n"
+"connected to %s"
+msgstr ""
+"FBC automatisch\n"
+"verbunden mit %s"
+
+msgid ""
+"FBC automatic\n"
+"inactive"
+msgstr ""
+"FBC automatisch\n"
+"inaktiv"
 
 msgid "FEC"
 msgstr "FEC"
+
+msgid "FEC:"
+msgstr "FEC:"
 
 msgid "FTA"
 msgstr "FTA"
@@ -2557,11 +2745,13 @@ msgid "Failed"
 msgstr "Fehlgeschlagen"
 
 msgid "Failed to write /tmp/positionersetup.log: "
-msgstr "Fehler beim Schreiben: /tmp/positionersetup.log"
+msgstr "Fehler beim Schreiben: /tmp/positionersetup.log "
 
-#, fuzzy
+msgid "Failed:"
+msgstr "Fehlgeschlagen:"
+
 msgid "Fallback remote receiver URL"
-msgstr "Fallback remote receiver URL"
+msgstr "Fallback-Remote-Receiver URL"
 
 #, python-format
 msgid "Fan %d"
@@ -2594,13 +2784,16 @@ msgid "Fast epoch"
 msgstr "Schnell Zeitraum"
 
 msgid "Fast forward speeds"
-msgstr "Schnellvorlauf-Geschwindigkeiten"
+msgstr "Vorspul-Geschwindigkeiten"
 
 msgid "Favourites"
 msgstr "Favoriten"
 
 msgid "File appears to be busy.\n"
 msgstr "Die Datei ist gerade in Verwendung.\n"
+
+msgid "Filename"
+msgstr "Dateiname"
 
 msgid "Filesystem check"
 msgstr "Dateisystemüberprüfung"
@@ -2635,14 +2828,14 @@ msgstr "Finnisch"
 msgid "Fixed"
 msgstr "Fixiert"
 
-msgid "Flash"
-msgstr "Flash"
-
-msgid "Flashing failed"
-msgstr "Flashen fehlgeschlagen"
-
 msgid "Following tasks will be done after you press OK!"
 msgstr "Folgendes wird ausgeführt, nachdem Sie OK gedrückt haben!"
+
+msgid "Force LNB Power"
+msgstr ""
+
+msgid "Force ToneBurst"
+msgstr ""
 
 msgid "Format"
 msgstr "Formatieren"
@@ -2658,6 +2851,12 @@ msgstr "Französisch"
 
 msgid "Frequency"
 msgstr "Frequenz"
+
+msgid "Frequency & Channel"
+msgstr "Frequenz & Kanal"
+
+msgid "Frequency & Polarization"
+msgstr "Frequenz & Polarisation"
 
 msgid "Frequency bands"
 msgstr "Frequenzbänder"
@@ -2681,8 +2880,8 @@ msgid "From :"
 msgstr "Von:"
 
 #, python-format
-msgid "Frontprocessor version: %d"
-msgstr "Frontprozessor-Version: %d"
+msgid "Frontprocessor version: %s"
+msgstr "Frontprozessor-Version: %s"
 
 msgid "Full transparency"
 msgstr "Volle Transparenz"
@@ -2696,12 +2895,25 @@ msgstr "Funktion der OK Taste"
 msgid "Further Options"
 msgstr "Weitere Optionen"
 
+msgid "Further options"
+msgstr "Weitere Optionen"
+
+msgid "G"
+msgstr "G"
+
+msgid ""
+"GUI needs a restart to apply a new language\n"
+"Do you want to restart the GUI now?"
+msgstr ""
+"Zur Übernahme der neuen Sprache muss die Benutzerobfläche neu gestartet werden\n"
+"Möchten Sie die Benutzerobfläche neu starten?"
+
 msgid ""
 "GUI needs a restart to apply a new skin\n"
 "Do you want to restart the GUI now?"
 msgstr ""
 "Das System muss neu gestartet werden,\n"
-"um das neue Aussehen übernehmen zu können.\n"
+"um den neuen Skin übernehmen zu können.\n"
 "Wollen Sie jetzt neu starten?"
 
 msgid "Gateway"
@@ -2718,12 +2930,6 @@ msgstr "Kategorie"
 
 msgid "German"
 msgstr "Deutsch"
-
-msgid "Get latest experimental image"
-msgstr "Neuestes Experimental-Image"
-
-msgid "Get latest release image"
-msgstr "Neuestes Release-Image"
 
 msgid "Getting plugin information. Please wait..."
 msgstr "Lade Plugin-Informationen. Bitte warten..."
@@ -2789,7 +2995,7 @@ msgid "Goto previous page of events"
 msgstr "Springe zur vorherigen Seite mit Sendungen"
 
 msgid "Goto primetime / now"
-msgstr ""
+msgstr "Springe zur Primetime / Jetzt"
 
 msgid "Goto specific date/time"
 msgstr "Springe zum angegebenen Datum/Uhrzeit"
@@ -2812,17 +3018,27 @@ msgstr "Grün"
 msgid "Green boost"
 msgstr "Grünanteil erhöhen"
 
+#, fuzzy
 msgid "Guard interval"
 msgstr "Guard Intervall"
+
+msgid "H"
+msgstr "H"
 
 msgid "HD list"
 msgstr "HD Liste"
 
-msgid "HD1100/et7x00/et8500"
-msgstr "HD1100/et7x00/et8500"
+msgid "HD1100/HD1200/HD1265/et7x00/et8500/et7000mini"
+msgstr "HD1100/HD1200/HD1265/et7x00/et8500/et7000mini"
 
 msgid "HD2400"
 msgstr "HD2400"
+
+msgid "HDMI Colordepth"
+msgstr "HDMI Farbtiefe"
+
+msgid "HDMI Colorspace"
+msgstr "HDMI Farbraum"
 
 msgid "HDMI-CEC setup"
 msgstr "HDMI-CEC Konfiguration"
@@ -2855,13 +3071,10 @@ msgid "Hebrew"
 msgstr "Hebräisch"
 
 msgid "Helps setting up your antenna"
-msgstr "Hilft die Schüssel einzurichten"
+msgstr "Hilft Ihre Antenne einzurichten"
 
 msgid "Hidden network"
 msgstr "Verstecktes Netzwerk"
-
-msgid "Hide CI messages"
-msgstr "Verberge CI Nachrichten"
 
 msgid "Hide channel list in radio mode"
 msgstr "Verberge Senderliste im Radio-Modus"
@@ -2873,29 +3086,25 @@ msgid "Hide number markers"
 msgstr "Verberge Nummer-Marker"
 
 msgid "Hide parentel locked services"
-msgstr ""
+msgstr "Jugendschutz gesperrte Kanäle verbergen"
 
 msgid "Hide player"
 msgstr "Player ausblenden"
 
-#, fuzzy
 msgid "Hide zap errors"
 msgstr "Verberge Zap Fehler"
 
 msgid "Hierarchy info"
-msgstr "Hierarchie Information"
-
-msgid "Hierarchy information"
-msgstr "Hierarchie Information"
+msgstr "Hierarchie Info"
 
 msgid "High bitrate support"
 msgstr "Kann hohe Datenraten verarbeiten"
 
 msgid "History back"
-msgstr "Vergangenheit vorheriger"
+msgstr "History zurück"
 
 msgid "History next"
-msgstr "Vergangenheit nächster"
+msgstr "History weiter"
 
 msgid "Hold screen"
 msgstr "Bild halten"
@@ -2916,13 +3125,13 @@ msgid "HotKey Setup"
 msgstr "Tastenkombination Einstellungen"
 
 msgid "Hotkey"
-msgstr "Tastenkombination"
+msgstr "Tastenbelegung"
 
 msgid "Hotkey Panic"
 msgstr "Tastenkombination \"Panik-Taste\""
 
 msgid "Hotkey Setup"
-msgstr "Tastenkombination \"Einstellungen\""
+msgstr "Hotkey-Tastenbelegung"
 
 msgid "Hotkey zap"
 msgstr "Tastenkombination \"umschalten\""
@@ -2939,11 +3148,14 @@ msgstr "Farbton"
 msgid "Hungarian"
 msgstr "Ungarisch"
 
+msgid "I"
+msgstr "I"
+
 msgid "IP address"
 msgstr "IP-Adresse"
 
 msgid "ISO file is too large for this filesystem!"
-msgstr "Die ISO-Datei passt nicht auf das Dateisystem!"
+msgstr "Die ISO-Datei ist für dieses Dateisystem zu groß!"
 
 msgid "ISO path"
 msgstr "ISO-Ausgabepfad"
@@ -2969,11 +3181,11 @@ msgstr ""
 "Verringern Sie anschließend die Helligkeit soweit wie möglich. Stellen Sie dabei sicher, dass die beiden untersten Grauschattierungen erkennbar bleiben. Die hellen Schattierungen werden im folgenden Schritt eingestellt.\n"
 "Drücken Sie OK, wenn Sie mit dem Ergebnis zufrieden sind."
 
+msgid "Ignore conflict"
+msgstr "Ignoriere Konflikt"
+
 msgid "Image: "
 msgstr "Image: "
-
-msgid "Immediate shutdown"
-msgstr "Direkt runterfahren"
 
 msgid "In order to record a timer, the TV was switched to the recording service!\n"
 msgstr "Um die Timeraufnahme durchführen zu können, wurde auf den aufzunehmenden Sender umgeschaltet!\n"
@@ -2982,7 +3194,7 @@ msgid "In progress"
 msgstr "In Bearbeitung"
 
 msgid "Inactivity Sleeptimer"
-msgstr "Inaktivität-Sleeptimer"
+msgstr "Inaktivitäts-Sleeptimer"
 
 msgid "Include AIT in http streams"
 msgstr "Integriere AIT in HTTP-Streams"
@@ -3015,7 +3227,7 @@ msgid "Info bar timeout"
 msgstr "Infoleiste-Anzeigedauer"
 
 msgid "Infobar frontend data source"
-msgstr "Infobar Frontend Datenquelle"
+msgstr "Infoleiste Frontend Datenquelle"
 
 msgid "Information"
 msgstr "Informationen"
@@ -3024,7 +3236,7 @@ msgid "Init"
 msgstr "Initialisieren"
 
 msgid "Initial fast forward speed"
-msgstr "Initiale Schnellvorlauf-Geschwindigkeit"
+msgstr "Initiale Vorspul-Geschwindigkeit"
 
 msgid "Initial location in new timers"
 msgstr "Initialer Ort für neue Timer"
@@ -3033,7 +3245,7 @@ msgid "Initial lock ratio"
 msgstr "Initiales Signalverhältnis"
 
 msgid "Initial rewind speed"
-msgstr "Initiale Rücklauf-Geschwindigkeit"
+msgstr "Initiale Rückspul-Geschwindigkeit"
 
 msgid "Initial scroll delay"
 msgstr "Anfangsscrollverzögerung"
@@ -3144,6 +3356,12 @@ msgstr "Ungültige Transponderdaten"
 msgid "Inversion"
 msgstr "Inversion"
 
+msgid "Inversion & Bandwidth"
+msgstr "Inversion & Bandbreite "
+
+msgid "Inversion, Pilot & Roll-off"
+msgstr "Inversion, Pilot & Roll-off"
+
 msgid "Invert"
 msgstr "Umkehren"
 
@@ -3156,6 +3374,18 @@ msgstr "Diese Einstellungen übernehmen?"
 msgid "Is this video mode ok?"
 msgstr "Diesen Videomodus beibehalten?"
 
+msgid ""
+"It seems you did not see all the eight arrow heads. This means your TV is has overscan enabled, and is not configured properly.\n"
+"\n"
+"Please refer to your TVs manual to find how you can disable overscan on your TV. Look for terms like 'Just fit', 'Full width', etc. If you can't find it, ask other users at http://forums.openpli.org.\n"
+"\n"
+msgstr ""
+"Sie konnten anscheinend nicht alle acht Pfeilspitzen sehen. Das bedeutet bei Ihrem TV ist Overscan aktiviert, oder der TV ist nicht richtig konfiguriert.\n"
+"\n"
+"Bitte überprüfen Sie in Ihrer TV-Bedienungsanleitung wie Sie Overscan deaktivieren können.\n"
+"\n"
+"\n"
+
 msgid "Italian"
 msgstr "Italienisch"
 
@@ -3164,6 +3394,9 @@ msgstr "Objekte pro Seite"
 
 msgid "Items per page for list screen"
 msgstr "Objekte pro Seite für Listen Modus"
+
+msgid "J"
+msgstr "J"
 
 msgid "Job overview"
 msgstr "Jobansicht"
@@ -3213,6 +3446,9 @@ msgstr "Sprache"
 
 msgid "Language selection"
 msgstr "Sprachauswahl"
+
+msgid "Large"
+msgstr "Groß"
 
 msgid "Last config"
 msgstr "Letzte Konfiguration"
@@ -3338,8 +3574,11 @@ msgstr "Signalverhältnis"
 msgid "Lock:"
 msgstr "Signal:"
 
-msgid "Log results to harddisk"
-msgstr "Ergebnisse auf die Festplatte schreiben"
+msgid "Log results to /tmp"
+msgstr "Log Resultate nach /tmp"
+
+msgid "Logfile does not exist anymore"
+msgstr "Log-Datei nicht mehr vorhanden"
 
 msgid "Long filenames"
 msgstr "Lange Dateinamen"
@@ -3350,8 +3589,8 @@ msgstr "langer Tastendruck"
 msgid "Longitude"
 msgstr "Längengrad"
 
-msgid "Loop through to"
-msgstr "Durchschleifen zu"
+msgid "Loop through from"
+msgstr "Verbunden mit"
 
 msgid "Luxembourgish"
 msgstr "Luxemburgisch"
@@ -3416,6 +3655,9 @@ msgstr "Höchste Position speichern"
 msgid "Max. bitrate: "
 msgstr "Max. Bitrate: "
 
+msgid "Maybe the reason that recording is currently running. Please stop the recording before trying to configure the positioner."
+msgstr ""
+
 msgid "Media player"
 msgstr "Media Player"
 
@@ -3438,7 +3680,11 @@ msgid "Memory index"
 msgstr "Index speichern"
 
 msgid "Menu"
-msgstr "Menu"
+msgstr "Menü"
+
+#, python-format
+msgid "Menusort (%s)"
+msgstr "Menüsortierung (%s)"
 
 msgid "Message"
 msgstr "Nachricht"
@@ -3465,7 +3711,7 @@ msgid "Mode"
 msgstr "Modus"
 
 msgid "Model: "
-msgstr "Modell:"
+msgstr "Modell: "
 
 msgid "Modulation"
 msgstr "Modulation"
@@ -3483,7 +3729,7 @@ msgid "Monday"
 msgstr "Montag"
 
 msgid "Mosquito noise reduction"
-msgstr "Mosquito Noise Reduzierung"
+msgstr "Mosquito-Rauschreduzierung"
 
 #, fuzzy
 msgid "Motor command retries"
@@ -3530,7 +3776,7 @@ msgid "Movie list configuration"
 msgstr "Filmlisten Einstellungen"
 
 msgid "Movie location"
-msgstr "Film Verzeichnis"
+msgstr "Filmverzeichnis"
 
 msgid "Movie selection"
 msgstr "Filmauswahl"
@@ -3562,14 +3808,14 @@ msgstr "Multi channel downmix"
 msgid "Multi-EPG bouquet selection"
 msgstr "Multi-EPG Bouquet Auswahl"
 
+msgid "Multichannel PCM"
+msgstr "Multichannel PCM"
+
 msgid "Multimedia"
 msgstr "Multimedia"
 
 msgid "Multiple service support"
 msgstr "Kann mehrere Sender entschlüsseln"
-
-msgid "Multiplex"
-msgstr "Multiplex"
 
 msgid "Multisat"
 msgstr "Multisat"
@@ -3589,16 +3835,11 @@ msgstr "N/V"
 msgid "NEXT"
 msgstr "Danach"
 
-msgid "NFI image flashing"
-msgstr "NFI Image Flashing"
+msgid "NIM & Type"
+msgstr "NIM & Typ"
 
-msgid "NFI image flashing completed. Press Yellow to Reboot!"
-msgstr ""
-"NFI Image Flashen beendet.\n"
-"Drücken Sie Gelb für einen Neustart!"
-
-msgid "NIM"
-msgstr "NIM"
+msgid "NO"
+msgstr "NEIN"
 
 msgid "NOW"
 msgstr "Jetzt"
@@ -3634,6 +3875,12 @@ msgstr "Netzwerk"
 msgid "Network ID"
 msgstr "Netzwerk ID"
 
+msgid "Network Info:"
+msgstr "Netzwerk-Information: "
+
+msgid "Network configuration"
+msgstr "Netzwerk-Konfiguration"
+
 msgid "Network configuration..."
 msgstr "Netzwerk-Konfiguration"
 
@@ -3660,19 +3907,22 @@ msgid "Network test..."
 msgstr "Netzwerk Test..."
 
 msgid "Network test: "
-msgstr "Netzwerk Test:"
+msgstr "Netzwerk Test: "
 
 msgid "Network wizard"
 msgstr "Netzwerkassistent"
 
 msgid "Network:"
-msgstr "Netzwerk:"
+msgstr "Netzwerk: "
+
+msgid "Never decrypt the content while recording. This overrides the individual timer settings globally. If enabled, recordings are stored in crypted presentation and must be decrypted afterwards (sometimes called offline decoding). Default: off."
+msgstr ""
+
+msgid "Never decrypt while recording"
+msgstr ""
 
 msgid "New"
 msgstr "Neu"
-
-msgid "New version:"
-msgstr "Neue Version:"
 
 msgid "News Current Affairs"
 msgstr "Nachrichten/Aktuelles Tagesgeschehen"
@@ -3706,7 +3956,7 @@ msgid "No backup needed"
 msgstr "Keine Sicherung benötigt"
 
 msgid "No cable tuner found!"
-msgstr "Kein Kabelempfänger gefunden!"
+msgstr "Kein Kabeltuner gefunden!"
 
 msgid ""
 "No data on transponder!\n"
@@ -3721,9 +3971,6 @@ msgstr "Keine Verzögerung"
 msgid "No description available."
 msgstr "Keine Beschreibung verfügbar."
 
-msgid "No details for this image file"
-msgstr "Keine Details zum Image verfügbar"
-
 msgid "No displayable files on this medium found!"
 msgstr "Keine anzeigbaren Dateien auf diesem Medium gefunden!"
 
@@ -3737,7 +3984,7 @@ msgid "No free index available"
 msgstr "Kein freier Index verfügbar"
 
 msgid "No free tuner!"
-msgstr "Kein freier Tuner"
+msgstr "Kein freier Tuner!"
 
 msgid "No network connection available."
 msgstr "Keine Netzwerkverbindung verfügbar."
@@ -3754,6 +4001,9 @@ msgstr "Keinen rotortauglichen Tuner gefunden."
 msgid "No priority"
 msgstr "Keine Priorität"
 
+msgid "No satellite frontend found!"
+msgstr "Keinen Satellitentuner gefunden!"
+
 msgid "No satellite, terrestrial or cable tuner is configured. Please check your tuner setup."
 msgstr "Keine Tuner konfiguriert. Bitte überprüfen Sie die Tuner-Einstellungen."
 
@@ -3765,6 +4015,9 @@ msgstr "Keine Sender/Anbieter ausgewählt"
 
 msgid "No standby"
 msgstr "Kein Standby"
+
+msgid "No stream clients"
+msgstr "Keine Stream-Clients"
 
 msgid "No suitable sat tuner found!"
 msgstr "Kein verwendbarer Sat Tuner gefunden!"
@@ -3792,10 +4045,10 @@ msgstr ""
 "Bitte die Tuner konfigurieren, bevor die Kanalsuche gestartet wird."
 
 msgid "No updates available"
-msgstr "Keine Updates verfügbar"
+msgstr "Keine Aktualisierungen verfügbar"
 
 msgid "No updates available. Please try again later."
-msgstr "Keine Updates verfügbar. Bitte später nochmal versuchen."
+msgstr "Keine Aktualisierungen verfügbar. Bitte später nochmal versuchen."
 
 msgid "No wireless networks found! Searching..."
 msgstr "Keine Funk-Netzwerke gefunden! Suche ..."
@@ -3826,6 +4079,9 @@ msgstr "Nein, aber von Anfang an neu beginnen"
 
 msgid "No, do nothing."
 msgstr "Nein, nichts tun"
+
+msgid "No, except Wakeup timer"
+msgstr "Nein, außer Aufwach-Timer"
 
 msgid "No, just start my receiver"
 msgstr "Nein, starte nur den Receiver"
@@ -3862,6 +4118,12 @@ msgstr "Nicht konfiguriert"
 msgid "Not enough disk space. Please free up some disk space and try again. (%d MB required, %d MB available)"
 msgstr "Nicht genügend freier Speicherplatz. Bitte löschen Sie nicht mehr benötigte Dateien und versuchen es erneut. (%d MB benötigt, %d MB verfügbar)"
 
+msgid "Not tested:"
+msgstr "Nicht getestet:"
+
+msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'."
+msgstr ""
+
 msgid "Nothing connected"
 msgstr "Nichts angeschlossen"
 
@@ -3875,7 +4137,6 @@ msgstr ""
 msgid "Now"
 msgstr "Jetzt"
 
-#, fuzzy
 msgctxt "now/next: 'now' event label"
 msgid "Now"
 msgstr "Jetzt"
@@ -3885,6 +4146,9 @@ msgstr "Wiedergabe läuft"
 
 msgid "Now, use the contrast setting to turn up the brightness of the background as much as possible, but make sure that you can still see the difference between the two brightest levels of shades.If you have done that, press OK."
 msgstr "Benutzen Sie jetzt die Kontrastregelung, um die Helligkeit des Hintergrunds so weit wie möglich zu erhöhen. Achten Sie darauf, dass der Unterschied zwischen den beiden hellsten Schattierungen erkennbar bleibt. Drücken Sie anschließend OK."
+
+msgid "Number of channels shown in channel selection list"
+msgstr "Anzahl der Kanäle in der Kanalauswahlliste"
 
 msgid "Number of repeating text on display."
 msgstr ""
@@ -3903,9 +4167,6 @@ msgstr "OSD 3D Einstellungen"
 
 msgid "OSD name request"
 msgstr "Benutzeroberflächen Anfrage"
-
-msgid "OSD position setup"
-msgstr "OSD Position Einstellungen"
 
 msgid "OSD settings"
 msgstr "OSD-Einstellungen"
@@ -3952,6 +4213,9 @@ msgstr ""
 msgid "Open service list"
 msgstr "Kanalliste öffnen"
 
+msgid "Open setup tuner "
+msgstr ""
+
 msgid "Open the movie list"
 msgstr "Zurück zur Videoliste"
 
@@ -3971,6 +4235,12 @@ msgstr "Andere"
 msgid "Output"
 msgstr "Ausgabe"
 
+msgid "Overall progress:"
+msgstr "Gesamtfortschritt: "
+
+msgid "Overscan wizard"
+msgstr "Overscan Assistent"
+
 msgid "Overwrite configuration files during software upgrade?"
 msgstr "Konfigurationsdateien beim Software-Update überschreiben?"
 
@@ -3986,8 +4256,8 @@ msgstr "PCR PID"
 msgid "PDC"
 msgstr "PDC "
 
-msgid "PIDs"
-msgstr "PIDs"
+msgid "PGS file"
+msgstr "PGS Datei"
 
 msgid "PIN code needed"
 msgstr "PIN-Code benötigt"
@@ -4052,7 +4322,7 @@ msgid "Percentage right"
 msgstr "Prozentangabe rechts"
 
 msgid "Permanently delete all recordings in the trash can?"
-msgstr "Alle Aufnahmen im Mülleimer löschen?"
+msgstr "Alle Aufnahmen im Papierkorb löschen?"
 
 msgid "Permanently remove all deleted items"
 msgstr "Gelöschte Filme endgültig entfernen"
@@ -4066,8 +4336,8 @@ msgstr "Bild im Bild (PiP) - Einstellung"
 msgid "Picon"
 msgstr "Picon"
 
-msgid "Picon and service name"
-msgstr "Picon und Kanalname"
+msgid "Picon and servicename"
+msgstr "Picon und Sendername"
 
 msgid "Picture player"
 msgstr "Bildbetrachter"
@@ -4127,9 +4397,6 @@ msgstr "Bitte fügen Sie Titel zur Ihrer Zusammenstellung hinzu."
 msgid "Please change recording endtime"
 msgstr "Bitte Aufnahmeendzeit ändern"
 
-msgid "Please check your network settings!"
-msgstr "Bitte überprüfen Sie Ihre Netzwerkeinstellungen"
-
 msgid "Please choose an extension..."
 msgstr "Bitte eine Erweiterung auswählen..."
 
@@ -4178,7 +4445,7 @@ msgid "Please enter the correct pin code"
 msgstr "Bitte den korrekten PIN-Code eingeben"
 
 msgid "Please enter the new PIN code"
-msgstr "Bitte den neuen PIN Code eingeben"
+msgstr "Bitte den neuen PIN-Code eingeben"
 
 msgid "Please enter the old PIN code"
 msgstr "Bitte den alten PIN-Code eingeben"
@@ -4193,7 +4460,7 @@ msgid "Please press OK to continue."
 msgstr "Zum Fortfahren bitte OK drücken."
 
 msgid "Please re-enter the new PIN code"
-msgstr "Bitte den neuen PIN Code erneut eingeben"
+msgstr "Bitte den neuen PIN-Code erneut eingeben"
 
 msgid "Please select a playlist to delete..."
 msgstr "Bitte wählen Sie eine Wiedergabeliste zum Löschen..."
@@ -4209,9 +4476,6 @@ msgstr "Bitte einen Unterkanal zur Aufnahme auswählen..."
 
 msgid "Please select a subservice..."
 msgstr "Bitte einen Unterkanal auswählen..."
-
-msgid "Please select an NFI file and press green key to flash!"
-msgstr "Bitte wählen Sie eine NFI-Datei aus und drücken Sie die grüne Taste zum Flashen!"
 
 msgid "Please select medium to be scanned"
 msgstr "Bitte Medium zum Scannen auswählen"
@@ -4244,16 +4508,37 @@ msgstr ""
 "Drücken Sie OK zum Fortfahren."
 
 msgid "Please set up tuner A"
-msgstr "Einstellungen für Tuner A."
+msgstr "Einstellungen für Tuner A"
 
 msgid "Please set up tuner B"
-msgstr "Einstellungen für Tuner B."
+msgstr "Einstellungen für Tuner B"
 
 msgid "Please set up tuner C"
-msgstr "Einstellungen für Tuner C."
+msgstr "Einstellungen für Tuner C"
 
 msgid "Please set up tuner D"
-msgstr "Einstellungen für Tuner D."
+msgstr "Einstellungen für Tuner D"
+
+msgid "Please set up tuner E"
+msgstr "Einstellungen für Tuner E"
+
+msgid "Please set up tuner F"
+msgstr "Einstellungen für Tuner F"
+
+msgid "Please set up tuner G"
+msgstr "Einstellungen für Tuner G"
+
+msgid "Please set up tuner H"
+msgstr "Einstellungen für Tuner H"
+
+msgid "Please set up tuner I"
+msgstr "Einstellungen für Tuner I"
+
+msgid "Please set up tuner J"
+msgstr "Einstellungen für Tuner J"
+
+msgid "Please set up tuner K"
+msgstr "Einstellungen für Tuner K"
 
 msgid ""
 "Please use direction keys to move the PiP window.\n"
@@ -4274,7 +4559,7 @@ msgid "Please wait (downloading channel list)"
 msgstr "Bitte warten (Kanalliste wird geladen)..."
 
 msgid "Please wait (downloading softcam)"
-msgstr "Bitte warten (softcam wird heruntergeladen)..."
+msgstr "Bitte warten (Softcam wird heruntergeladen)..."
 
 msgid "Please wait (updating packages)"
 msgstr "Bitte warten (Paketupdates)..."
@@ -4322,9 +4607,6 @@ msgstr "Plugins"
 msgid "Polarisation"
 msgstr "Polarisation"
 
-msgid "Polarisation:"
-msgstr "Polarisation:"
-
 msgid "Polarization"
 msgstr "Polarisation"
 
@@ -4346,6 +4628,9 @@ msgstr "Port D"
 msgid "Portuguese"
 msgstr "Portugiesisch"
 
+msgid "Position"
+msgstr ""
+
 msgid "Position of completed timers in timerlist"
 msgstr "Position beendeter Timer in der Timerliste"
 
@@ -4358,14 +4643,20 @@ msgstr "Rotor"
 msgid "Positioner (selecting satellites)"
 msgstr "Positioner (Auswahl der Satelliten)"
 
-msgid "Positioner Setup"
-msgstr "Rotor-Einstellungen"
-
 msgid "Positioner setup"
 msgstr "Rotor-Einstellungen"
 
+msgid "Positioner setup log"
+msgstr ""
+
+msgid "Power on display"
+msgstr "Display einschalten"
+
 msgid "Power threshold in mA"
 msgstr "Strom Schwellwert in mA"
+
+msgid "PowerMenu"
+msgstr "Power Menü"
 
 msgid "Predefined transponder"
 msgstr "Vordefinierte Transponder"
@@ -4383,7 +4674,7 @@ msgid "Prefer graphical DVB subtitles"
 msgstr "Bevorzuge DVB-grafische Untertitel"
 
 msgid "Prefer subtitles for hearing impaired"
-msgstr "Bevorzuge Untertitel für Hörgeschädigte"
+msgstr "Bevorzuge Untertitel für Hörgeschädigte."
 
 msgid "Prefer subtitles stored by service"
 msgstr "Bevorzuge gespeicherten Untertitel des Senders"
@@ -4391,11 +4682,32 @@ msgstr "Bevorzuge gespeicherten Untertitel des Senders"
 msgid "Preferred tuner"
 msgstr "Bevorzugter Tuner"
 
+msgid "Preferred tuner ATSC"
+msgstr "Bevorzugter Tuner ATSC"
+
+msgid "Preferred tuner ATSC for recordings"
+msgstr "Bevorzugter Tuner ATSC für Aufnahmen"
+
+msgid "Preferred tuner DVB-C"
+msgstr "Bevorzugter Tuner DVB-C"
+
+msgid "Preferred tuner DVB-C for recordings"
+msgstr "Bevorzugter Tuner DVB-C für Aufnahmen"
+
+msgid "Preferred tuner DVB-S"
+msgstr "Bevorzugter Tuner DVB-S"
+
+msgid "Preferred tuner DVB-S for recordings"
+msgstr "Bevorzugter Tuner DVB-S für Aufnahmen"
+
+msgid "Preferred tuner DVB-T"
+msgstr "Bevorzugter Tuner DVB-T"
+
+msgid "Preferred tuner DVB-T for recordings"
+msgstr "Bevorzugter Tuner DVB-T für Aufnahmen"
+
 msgid "Preferred tuner for recordings"
 msgstr "Bevorzugter Tuner für Aufnahmen"
-
-msgid "Prepare another USB stick for image flashing"
-msgstr "Weiteren USB-Stick zum Image-Flashen vorbereiten"
 
 msgid "Preparing... Please wait"
 msgstr "Vorbereitung läuft... Bitte warten"
@@ -4407,7 +4719,7 @@ msgid "Press INFO on your remote control for additional information."
 msgstr "INFO drücken für zusätzliche Informationen."
 
 msgid "Press MENU on your remote control for additional options."
-msgstr "Menu drücken für zusätzliche Optionen."
+msgstr "MENU drücken für zusätzliche Optionen."
 
 msgid "Press OK on your remote control to continue."
 msgstr "OK drücken zum Fortfahren."
@@ -4446,6 +4758,9 @@ msgstr "Drücke OK zum Umschalten der Auswahl"
 msgid "Press OK to toggle the selection."
 msgstr "Drücken Sie OK, um die Auswahl umzuschalten."
 
+msgid "Press OK, save and exit..."
+msgstr "Drücke OK zum Speichern und Beenden..."
+
 msgid "Press yellow to set this interface as default interface."
 msgstr "Drücken Sie Gelb, um diese Schnittstelle als Standard zu setzen."
 
@@ -4481,10 +4796,13 @@ msgid "Progress"
 msgstr "Fortschritt"
 
 msgid "Progress bar left"
-msgstr "Fortschrittsbalken links"
+msgstr "Balken links"
 
 msgid "Progress bar right"
-msgstr "Fortschrittsbalken rechts"
+msgstr "Balken rechts"
+
+msgid "Progress:"
+msgstr "Fortschritt:"
 
 msgid "Properties of current title"
 msgstr "Details zum ausgewählten Titel"
@@ -4504,6 +4822,9 @@ msgstr "Hauptmenü schützen"
 
 msgid "Protect manufacturer reset screen"
 msgstr "Werkseinstellungen (zurück)setzen schützen"
+
+msgid "Protect menu sort"
+msgstr "Menüsortierung schützen"
 
 msgid "Protect movie list"
 msgstr "Filmliste schützen"
@@ -4547,11 +4868,17 @@ msgstr "Python frontend für /tmp/mmi.socket"
 msgid "Python version: "
 msgstr "Python Version: "
 
+msgid "Question"
+msgstr "Frage"
+
 msgid "Quick"
 msgstr "Schnell"
 
 msgid "Quick zap"
 msgstr "Schnellumschalter"
+
+msgid "REC"
+msgstr "REC"
 
 msgid "RF output"
 msgstr "RF-Ausgang"
@@ -4593,23 +4920,21 @@ msgstr "Wollen Sie trotzdem neu starten?"
 msgid "Really shutdown now?"
 msgstr "Wollen Sie trotzdem ausschalten?"
 
+#, python-format
+msgid "Really store at index %2d for current position?"
+msgstr ""
+
 msgid "Really upgrade the frontprocessor and reboot now?"
 msgstr "Wollen Sie den Frontprozessor wirklich aktualisieren und anschließend neu starten?"
 
 msgid "Really upgrade your settop box and reboot now?"
 msgstr "Wollen Sie Ihren Receiver wirklich aktualisieren und anschließend neu starten?"
 
-msgid "Reboot"
-msgstr "Neustart"
-
 msgid "Rec"
 msgstr "Rec"
 
 msgid "Recall to previous service"
 msgstr "Zurück zum letzten Sender"
-
-msgid "Reception Settings"
-msgstr "Empfangseinstellungen"
 
 msgid "Reception settings"
 msgstr "Empfangseinstellungen"
@@ -4656,6 +4981,9 @@ msgstr "Rote Taste..."
 
 msgid "Red colored"
 msgstr "rot gefärbt"
+
+msgid "Reenter PIN"
+msgstr "PIN-Eingabe wiederholen"
 
 msgid "Reflash recommended!"
 msgstr "Neu flashen wird empfohlen!"
@@ -4713,6 +5041,9 @@ msgstr "Markierung entfernen"
 msgid "Remove a nameserver entry"
 msgstr "DNS-Servereintrag entfernen"
 
+msgid "Remove all logfiles"
+msgstr "Alle Log-Dateien entfernen"
+
 msgid "Remove bookmark"
 msgstr "Lesezeichen entfernen"
 
@@ -4723,10 +5054,13 @@ msgid "Remove currently selected title"
 msgstr "Entferne aktuell ausgewählten Titel"
 
 msgid "Remove items from trash can after (days)"
-msgstr "Löschen aus Mülleimer nach (Tagen)"
+msgstr "Entfernen aus Papierkorb nach (Tagen)"
 
 msgid "Remove plugins"
 msgstr "Plugins entfernen"
+
+msgid "Remove this logfile"
+msgstr "Diese Log-Datei entfernen"
 
 msgid "Remove title"
 msgstr "Titel entfernen"
@@ -4750,6 +5084,9 @@ msgstr "Ändere für neue Timer den Namen und die Beschreibung"
 
 msgid "Repeat"
 msgstr "Wiederholen"
+
+msgid "Repeat leave standby messages"
+msgstr ""
 
 msgid "Repeat type"
 msgstr "Wiederholungstyp"
@@ -4790,6 +5127,12 @@ msgstr "Zurücksetzen"
 msgid "Reset and renumerate title names"
 msgstr "Titelnamen zurücksetzen und neu nummerieren"
 
+msgid "Reset order (All)"
+msgstr "Reihenfolge zurücksetzen (Alle)"
+
+msgid "Reset persistent PIN code"
+msgstr "Persistenten PIN-Code zurücksetzen"
+
 msgid "Reset playback position"
 msgstr "Wiedergabeposition zurücksetzen"
 
@@ -4825,9 +5168,6 @@ msgstr "Zurückspielen"
 
 msgid "Restore backups"
 msgstr "Einstellungen wiederherstellen"
-
-msgid "Restore is running..."
-msgstr "Wiederherstellung wird ausgeführt..."
 
 msgid "Restore system settings"
 msgstr "Einstellungen wiederherstellen"
@@ -4865,7 +5205,7 @@ msgid "Reverse list"
 msgstr "Liste umdrehen"
 
 msgid "Rewind speeds"
-msgstr "Rücklauf-Geschwindigkeiten"
+msgstr "Rückspul-Geschwindigkeiten"
 
 msgid "Rewrap subtitles"
 msgstr "Untertitel umbrechen"
@@ -4903,8 +5243,17 @@ msgstr "Russisch"
 msgid "S-Video"
 msgstr "S-Video"
 
-msgid "SID"
-msgstr "SID"
+msgid "SCPC optimized search range"
+msgstr ""
+
+msgid "SCR (Unicable/JESS)"
+msgstr "SCR (Unicable/JESS)"
+
+msgid "SCR JESS"
+msgstr "SCR JESS"
+
+msgid "SCR Unicable"
+msgstr "SCR Unicable"
 
 msgid "SINGLE LAYER DVD"
 msgstr "SINGLE LAYER DVD"
@@ -4914,6 +5263,12 @@ msgstr "SNR"
 
 msgid "SNR:"
 msgstr "SNR:"
+
+msgid "SRT file"
+msgstr "SRT Datei"
+
+msgid "SSA file"
+msgstr "SSA Datei"
 
 msgid "SSID:"
 msgstr "SSID:"
@@ -4965,6 +5320,9 @@ msgstr "Speichern und Timeshift neustarten"
 
 msgid "Save and stop timeshift"
 msgstr "Speichern und Timeshift stoppen"
+
+msgid "Save changes"
+msgstr "Änderungen speichern"
 
 msgid "Save playlist"
 msgstr "Wiedergabeliste speichern"
@@ -5136,9 +5494,6 @@ msgstr "Wähle Aktion für Timer %s:"
 msgid "Select all"
 msgstr "Alle auswählen"
 
-msgid "Select an image to be downloaded"
-msgstr "Image zum Download auswählen"
-
 msgid "Select audio track"
 msgstr "Wählen Sie eine Tonspur"
 
@@ -5156,9 +5511,6 @@ msgstr "Kanal auswählen, von dem aufgenommen werden soll"
 
 msgid "Select copy destination for:"
 msgstr "Wähle Zielverzeichnis für:"
-
-msgid "Select desired image from feed list"
-msgstr "Bestimmtes Image vom Feed-Server herunterladen"
 
 msgid "Select destination for:"
 msgstr "Wähle Ziel für:"
@@ -5178,6 +5530,9 @@ msgstr "Eingabegerät auswählen."
 msgid "Select interface"
 msgstr "Netzwerkkarte auswählen"
 
+msgid "Select location"
+msgstr "Speicherort auswählen"
+
 msgid "Select movie"
 msgstr "Filmauswahl"
 
@@ -5192,6 +5547,9 @@ msgstr "Wähle Satelliten"
 
 msgid "Select service to add..."
 msgstr "Wählen Sie einen Kanal zum Hinzufügen"
+
+msgid "Select slot"
+msgstr "Slot auswählen"
 
 msgid "Select sort method:"
 msgstr "Sortierungmodus festlegen:"
@@ -5216,6 +5574,9 @@ msgstr "Wählen Sie den Video-Modus"
 
 msgid "Select wireless network"
 msgstr "Funk-Netzwerk auswählen"
+
+msgid "Select your Skin"
+msgstr "Ihren Skin auswählen"
 
 msgid "Select your provider, and press OK to start the scan"
 msgstr "Bitte wählen Sie den Anbieter aus und bestätigen Sie mit OK, um die Suche zu starten"
@@ -5244,6 +5605,12 @@ msgstr "Serbisch"
 msgid "Service"
 msgstr "Kanal"
 
+msgid "Service & PIDs"
+msgstr ""
+
+msgid "Service ID"
+msgstr ""
+
 msgid "Service has been added to the favourites."
 msgstr "Kanal wurde zu Favoriten hinzugefügt."
 
@@ -5252,6 +5619,15 @@ msgstr "Kanal wurde zum gewählten Bouquet hinzugefügt."
 
 msgid "Service info"
 msgstr "Kanal-Infos"
+
+msgid "Service info - service & PIDs"
+msgstr ""
+
+msgid "Service info - tuner live values"
+msgstr ""
+
+msgid "Service info - tuner setting values"
+msgstr ""
 
 msgid ""
 "Service invalid!\n"
@@ -5271,7 +5647,7 @@ msgstr ""
 "(SID nicht in PAT gefunden)"
 
 msgid "Service reference"
-msgstr "Kanal Referenz"
+msgstr "Kanal-Referenz"
 
 msgid "Service scan"
 msgstr "Kanalsuche"
@@ -5289,14 +5665,26 @@ msgstr ""
 "Kanal nicht verfügbar!\n"
 "Bitte Tuner-Konfiguration überprüfen!"
 
+msgid "Servicename"
+msgstr "Sendername"
+
 msgid "Services"
 msgstr "Kanäle"
 
+msgid "Set PIN"
+msgstr "PIN speichern"
+
 msgid "Set all hotkey to default?"
+msgstr "Alle Hotkeys auf standard setzen?"
+
+msgid "Set blocktimes by weekday"
 msgstr ""
 
 msgid "Set default"
 msgstr "Als Standard setzen"
+
+msgid "Set default settings?"
+msgstr ""
 
 msgid "Set end time"
 msgstr "End-Zeit eingeben"
@@ -5313,11 +5701,14 @@ msgstr "Netzwerkadapter als Standard festlegen"
 msgid "Set limits"
 msgstr "Limits setzen"
 
+msgid "Set pin code persistent"
+msgstr "PIN-Code dauerhaft speichern"
+
 msgid "Set startup service"
 msgstr "Als Startsender benutzen"
 
 msgid "Set the type of the progress indication in the channel selection screen."
-msgstr "Zeige Sendungs-Fortschritt in der Kanal-Liste"
+msgstr "Zeige Sendungs-Fortschritt in der Kanalauswahlliste"
 
 msgid "Set time window to 1 hour"
 msgstr "Setze das Zeitfenster auf 1 Stunde"
@@ -5358,10 +5749,6 @@ msgstr "Einstellung des Rotors"
 msgid "Setup your satellite equipment"
 msgstr "Satelliten-Ausrüstung"
 
-#, python-format
-msgid "Shall the USB stick wizard proceed and program the image file %s into flash memory?"
-msgstr "Soll der Assistent fortfahren und die Image-Datei %s in den Flashspeicher schreiben?"
-
 msgid "Sharpness"
 msgstr "Schärfe"
 
@@ -5371,9 +5758,11 @@ msgstr "Shell-Skript"
 msgid "Short filenames"
 msgstr "Kurze Dateinamen"
 
-#, fuzzy
 msgid "Show Audioselection"
 msgstr "Zeige Ton-Auswahl"
+
+msgid "Show CI messages"
+msgstr "CI Meldungen anzeigen"
 
 msgid "Show EIT now/next in infobar"
 msgstr "Zeige EIT Now/Next in Infoleiste"
@@ -5405,6 +5794,9 @@ msgstr "Zeige WLAN-Status"
 msgid "Show animation while busy"
 msgstr "Zeige Animation bei Beschäftigung"
 
+msgid "Show background behind subtitles"
+msgstr "Zeige Hintergrund hinter Untertiteln"
+
 msgid "Show background in radio mode"
 msgstr "Zeige Hintergrund im Radio-Modus"
 
@@ -5415,13 +5807,13 @@ msgid "Show busy indicator when the system is busy."
 msgstr "Zeige Ladesymbol bei System-Beschäftigung."
 
 msgid "Show channel numbers in channel selection"
-msgstr "Zeige Kanalnummer in Kanalauswahl"
+msgstr "Zeige Kanalnummer in Kanalauswahlliste"
 
 msgid "Show columns"
 msgstr "Zeige Spalten"
 
 msgid "Show crypto icons"
-msgstr "Zeige Verschlüsselungssymbole"
+msgstr "Zeige Verschlüsselungs-Symbole"
 
 msgid "Show crypto info in infobar"
 msgstr "Verschlüsselung in Infoleiste anzeigen"
@@ -5436,7 +5828,7 @@ msgid "Show event details"
 msgstr "Sendungsdetails anzeigen"
 
 msgid "Show event-progress in channel selection"
-msgstr "Zeige Sendungs-Fortschritt in der Kanal-Liste"
+msgstr "Zeige Sendungs-Fortschritt in der Kanalauswahlliste"
 
 msgid "Show eventinfo plugins"
 msgstr "Eventinfo Erweiterungen anzeigen"
@@ -5483,6 +5875,12 @@ msgstr "Zeige letzte Änderungen"
 msgid "Show latest upgrade log"
 msgstr "Zeige Log der letzten Aktualisierung"
 
+msgid "Show menu numbers"
+msgstr "Zeige Menü-Nummern"
+
+msgid "Show menu paths"
+msgstr "Zeige Menü-Pfade"
+
 msgid "Show message when recording starts"
 msgstr "Benachrichtigung anzeigen, wenn eine Aufnahme startet"
 
@@ -5499,8 +5897,11 @@ msgstr "Zeige Multi-Channel-EPG"
 msgid "Show packages to be upgraded"
 msgstr "Zu aktualisierende Pakete"
 
-msgid "Show picons in channel list"
-msgstr "Zeige Picons in Kanalliste"
+msgid "Show picons in channel selection list"
+msgstr "Zeige Picons in Kanalauswahlliste"
+
+msgid "Show picons in display"
+msgstr "Zeige Picons im Display"
 
 msgid "Show positioner movement"
 msgstr "Rotorbewegung anzeigen"
@@ -5508,12 +5909,14 @@ msgstr "Rotorbewegung anzeigen"
 msgid "Show positioner position"
 msgstr "Rotorposition anzeigen"
 
-#, fuzzy
+msgid "Show record clock icons"
+msgstr ""
+
 msgid "Show record indicator"
-msgstr "Zeige Aufnahmesymbol"
+msgstr "Zeige Aufnahme-Symbole"
 
 msgid "Show screensaver"
-msgstr "Zeige Screensaver"
+msgstr "Zeige Bildschirmschoner"
 
 msgid "Show second InfoBar"
 msgstr "Zeige zweite Infoleiste"
@@ -5525,13 +5928,10 @@ msgid "Show service list"
 msgstr "Zeige Senderliste"
 
 msgid "Show service type icons"
-msgstr "Zeige Service-Typ Icons"
+msgstr "Zeige Servicetyp-Symbole"
 
 msgid "Show servicelist or movies"
 msgstr "Zeige Senderliste oder Filme"
-
-msgid "Show shutdown menu"
-msgstr "Ausschaltmenü anzeigen"
 
 msgid "Show single service EPG"
 msgstr "Zeige Einzel-Kanal-EPG"
@@ -5557,8 +5957,14 @@ msgstr "TV-Wiedergabemodus..."
 msgid "Show vertical timelines"
 msgstr ""
 
+msgid "Show warning before set 'Ignore conflict'"
+msgstr ""
+
 msgid "Show warning when timeshift is stopped"
-msgstr "Zeige eine Warning beim Stoppen des Timeshifts"
+msgstr "Zeige eine Warnung beim Stoppen des Timeshifts"
+
+msgid "Show/hide window"
+msgstr "Zeige/verberge Fenster"
 
 msgid "Shows live tv or informations on LCD."
 msgstr "Zeige Live TV oder Information auf dem LCD."
@@ -5590,11 +5996,11 @@ msgstr "Signalstärke:"
 msgid "Signal: "
 msgstr "Signal: "
 
-msgid "Silently zap between bouquets"
-msgstr "Ohne Meldung zwischen Bouquets wechseln"
-
 msgid "Similar"
 msgstr "Ähnlich"
+
+msgid "Similar EPG"
+msgstr "Ähnlicher EPG"
 
 msgid "Similar broadcasts:"
 msgstr "Ähnliche Sendungen:"
@@ -5604,6 +6010,9 @@ msgstr "Einfach"
 
 msgid "Simple titleset (compatibility for legacy players)"
 msgstr "Schlicht (bessere Kompatibilität mit alten DVD-Playern)"
+
+msgid "Simplified Chinese"
+msgstr "Kurzzeichen Chinesisch"
 
 msgid "Single"
 msgstr "Einzeln"
@@ -5672,8 +6081,14 @@ msgstr "Langsam"
 msgid "Slow motion speeds"
 msgstr "Zeitlupen-Geschwindigkeiten"
 
+msgid "Small"
+msgstr "Klein"
+
 msgid "Small progress"
 msgstr "Geringer Fortschritt"
+
+msgid "Smartcard PIN"
+msgstr "Smartcard PIN"
 
 msgid "Social/Political/Economics"
 msgstr "Soziales/Politik/Wirtschaft"
@@ -5702,6 +6117,9 @@ msgstr "Software aktualisieren"
 msgid "Softwaremanager information"
 msgstr "Softwaremanager Information"
 
+msgid "Some error occured - Please try later"
+msgstr "Ein Fehler ist aufgetreten - Versuchen Sie es später"
+
 msgid "Some plugins are not available:\n"
 msgstr "Einige Plugins sind nicht verfügbar:\n"
 
@@ -5716,7 +6134,10 @@ msgid "Sorry, no backups found!"
 msgstr "Entschuldigung, keine Sicherungen gefunden!"
 
 msgid "Sorry, no details available!"
-msgstr "Entschuldigung, keine Details verfügbar"
+msgstr "Entschuldigung, keine Details verfügbar!"
+
+msgid "Sorry, this tuner is in use."
+msgstr "Entschuldigung, dieser Tuner ist in Benutzung."
 
 msgid ""
 "Sorry, your backup destination is not writeable.\n"
@@ -5742,6 +6163,9 @@ msgstr "Sortiere Liste nach Standard und verlassen?"
 msgid "Sort list:"
 msgstr "Sortiere Liste:"
 
+msgid "Sort order for menu entries"
+msgstr "Sortiere Reihenfolge der Menü-Einträge"
+
 msgid "Sort plugins list to default?"
 msgstr "Sortiere Erweiterungsliste nach Standard?"
 
@@ -5764,9 +6188,11 @@ msgstr "Süd"
 msgid "Spanish"
 msgstr "Spanisch"
 
-#, fuzzy
 msgid "Specify extra timeframe to ignore inactivity sleeptimer"
-msgstr "Spezifiziere den Zeitbereich, in dem der Inaktivität-Ausschalt-Timer ignoriert werden soll"
+msgstr "Spezifiziere den Extra-Zeitbereich, in dem der Inaktivitäts-Ausschalttimer ignoriert werden soll."
+
+msgid "Specify if you want to set the blocktimes separately by weekday"
+msgstr ""
 
 msgid "Specify the end time to ignore the shutdown timer when the receiver is in standby mode"
 msgstr "Angabe der Endzeit, bis wann der Ausschalt-Timer ignoriert werden soll, wenn sich der Receiver im Standby-Modus befindet"
@@ -5787,7 +6213,7 @@ msgid "Specify the start time when the inactivity sleeptimer should be ignored"
 msgstr "Spezifiziere die Anfangszeit, aber wann der Inaktivität-Sleeptimer ignoriert werden soll"
 
 msgid "Specify timeframe to ignore inactivity sleeptimer"
-msgstr "Spezifiziere den Zeitbereich, in dem der Inaktivität-Sleeptimer ignoriert werden soll"
+msgstr "Spezifiziere den Zeitbereich, in dem der Inaktivitäts-Ausschalttimer ignoriert werden soll."
 
 msgid "Specify timeframe to ignore the shutdown in standby"
 msgstr "Angabe des Zeitfensters indem nicht vom Standby-Modus in den Deep-Standby gewechselt wird"
@@ -5867,7 +6293,7 @@ msgid "Starting on"
 msgstr "Beginnend ab"
 
 msgid "Startup the set top box in standby"
-msgstr "Starte den Receiver im Standby-Modus"
+msgstr "Starte den Receiver im Standby-Modus."
 
 msgid "Startup to Standby"
 msgstr "Start im Standby-Modus"
@@ -5891,7 +6317,7 @@ msgid "Stop PiP"
 msgstr "Beende Bild im Bild"
 
 msgid "Stop all current recordings"
-msgstr "Alle aktuellen Aufnahme beenden"
+msgstr "Alle aktuellen Aufnahmen beenden"
 
 msgid "Stop and delete all current recordings"
 msgstr "Alle aktuellen Aufnahmen beenden und löschen"
@@ -5968,6 +6394,9 @@ msgstr "Stream"
 msgid "Stream request"
 msgstr "Stream Anfrage"
 
+msgid "Streaming clients info"
+msgstr "Stream-Clients Info"
+
 msgid "Strongest position"
 msgstr "Beste Position"
 
@@ -6025,6 +6454,9 @@ msgstr "Untertitel"
 msgid "Subtitles Settings"
 msgstr "Untertitel Einstellungen"
 
+msgid "Succeeded:"
+msgstr "Erfolgreich:"
+
 msgid "Sun"
 msgstr "So"
 
@@ -6042,6 +6474,9 @@ msgstr "Kanäle tauschen"
 
 msgid "Swedish"
 msgstr "Schwedisch"
+
+msgid "Switch"
+msgstr ""
 
 msgid "Switch TV to correct input"
 msgstr "Fernseher auf Receiver HDMI-Eingang schalten"
@@ -6102,6 +6537,9 @@ msgstr "Umschaltbare Tuner-Typen:"
 msgid "Symbol rate"
 msgstr "Symbolrate"
 
+msgid "Symbol rate & FEC"
+msgstr "Symbolrate & FEC"
+
 msgid "Symbol rate:"
 msgstr "Symbolrate:"
 
@@ -6110,6 +6548,9 @@ msgstr "Sync Fehler, bewege zur Anfangsposition!"
 
 msgid "System"
 msgstr "System"
+
+msgid "System & Modulation"
+msgstr ""
 
 #. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
 msgid "TRANSLATOR_INFO"
@@ -6120,6 +6561,9 @@ msgstr "TS-Datei ist zu groß für ISO9660 level 1!"
 
 msgid "TSID"
 msgstr "TSID"
+
+msgid "TUNER:"
+msgstr "TUNER:"
 
 msgid "TV physical address report"
 msgstr "TV physikalischer Adressenverkündung"
@@ -6196,19 +6640,18 @@ msgid ""
 "\n"
 "Do you understand this?"
 msgstr ""
+"Das OpenPLi Team möchte Sie darauf aufmerksam machen, dass das Aktualisieren auf das letzte Nightly Build nicht nur die neuesten Funktionen mitbringt, sondern auch mit Risiken verbunden ist. Es kann auch passieren, dass Ihr Receiver danach nicht mehr erwartungsgemäß läuft. Wir empfehlen Ihnen zuerst eine Sicherung mit Autobackup oder Backupsuite zu erstellen. Dies erlaubt es Ihnen zügig Ihr Gerät in den vorherigen Zustand wiederherzustellen, sollten nach der Aktualisierung Probleme auftretten. Wenn Sie einen Softwarefehler feststellen, dann teilen Sie uns diesen auf www.openpli.org mit.\n"
+"\n"
+"Haben Sie dies verstanden?"
 
 msgid "The PIN code has been changed successfully."
 msgstr "Der PIN-Code wurde erfolgreich geändert."
 
+msgid "The PIN code has been saved successfully."
+msgstr "Der PIN-Code wurde erfolgreich gespeichert."
+
 msgid "The PIN codes you entered are different."
 msgstr "Die eingegebenen PIN-Codes sind unterschiedlich."
-
-msgid ""
-"The USB stick was prepared to be bootable.\n"
-"Now you can download an NFI image file!"
-msgstr ""
-"Der USB-Stick wurde bootfähig gemacht.\n"
-"Sie können nun eine NFI-Imagedatei herunterladen!"
 
 msgid "The backup failed. Please choose a different backup location."
 msgstr "Die Sicherung ist fehlgeschlagen. Bitte einen anderen Sicherungsort auswählen."
@@ -6229,25 +6672,8 @@ msgstr ""
 "Das Verzeichnis %s ist nicht beschreibbar.\n"
 "Stellen Sie sicher, dass Sie ein beschreibbares Verzeichnis angegeben haben."
 
-#, python-format
-msgid ""
-"The following device was found:\n"
-"\n"
-"%s\n"
-"\n"
-"Do you want to write the USB flasher to this stick?"
-msgstr ""
-"Das folgende Medium wurde gefunden:\n"
-"\n"
-"%s\n"
-"\n"
-"Soll der USB-Flasher auf diesen Stick installiert werden?"
-
 msgid "The following files were found..."
 msgstr "Die folgenden Dateien wurden gefunden..."
-
-msgid "The md5sum validation failed, the file may be corrupted!"
-msgstr "Die md5sum Überprüfung ist fehlgeschlagen. Die Datei könnte fehlerhaft sein!"
 
 msgid ""
 "The network wizard extension is not installed!\n"
@@ -6256,16 +6682,59 @@ msgstr ""
 "Das Netzwerk-Assistent-Plugin ist nicht installiert!\n"
 "Bitte installieren Sie es."
 
+msgid ""
+"The overscan wizard has been completed.\n"
+"\n"
+"Note: you can always start the Overscan wizard later,  via\n"
+"\n"
+"menu->installation->system->Overscan wizard"
+msgstr ""
+"Der Overscan Assistent wurde abgeschlossen.\n"
+"\n"
+"Sie können den Overscan Assistenten jederzeit erneut starten, via\n"
+"\n"
+"Menü->Installation->System->Overscan Assistent"
+
+msgid ""
+"The overscan wizard helps you to setup your TV in the correct way.\n"
+"\n"
+"For the majority of TV's, the factory default is to have overscan enabled. This means you are always watching a \"zoomed in\" picture instead of real HD, and parts of the user inferface (skin) may be invisible.\n"
+"\n"
+"The yellow area means a 5% border area of a full HD picture will be invisible.\n"
+"The green area means a 10% border area of a full HD picture will be invisible.\n"
+"\n"
+"In other words, if the yellow box meets all for sides of your screen, then you have at least 5% overscan on all sides.\n"
+"\n"
+"If you see the tips of all eight arrowheads, then your TV has overscan disabled.\n"
+"\n"
+"Test Pattern by TigerDave - www.tigerdave.com/ht_menu.htm"
+msgstr ""
+"Der Overscan Assistent hilft Ihnen den TV korrekt zu skalieren.\n"
+"\n"
+"Die meisten TV's sind werkseitig mit aktiviertem Overscan eingestellt. Dies bedeutet Sie sehen immer ein leicht \"hereingezoomtes\" anstatt das volle Bild, Teile der Bedienoberfläche (Skin) könnten für Sie nicht sichtbar sein.\n"
+"\n"
+"Der gelbe Bereich bedeutet, dass 5% Bildrand vom vollen HD Bild unsichtbar bleibt.\n"
+"Der grüne Bereich bedeutet, dass 10% Bildrand vom vollen HD Bild unsichtbar bleibt.\n"
+"\n"
+"In andern Worten, wenn die gelbe Box an den Rändern ihres Bildschirms anliegt, dann hat Ihr TV 5% Overscan an allen Seiten.\n"
+"\n"
+"Wenn Sie die Spitzen aller acht Pfeile sehen, dann ist bei Ihrem TV Overscan deaktiviert.\n"
+"\n"
+"Testbild von TigerDave - www.tigerdave.com/ht_menu.htm"
+
 #, python-format
 msgid "The path %s already exists."
 msgstr "Der Pfad %s existiert bereits."
 
 msgid "The pin code you entered is wrong."
-msgstr "Der eingegebene PIN-Code ist falsch"
+msgstr "Der eingegebene PIN-Code ist falsch."
 
 #, python-format
-msgid "The results have been written to %s."
-msgstr "Die Ergebnisse des Tests wurden in der Datei %s gespeichert."
+msgid "The results have been written to %s"
+msgstr "Die Ergebnisse des Tests wurden in der Datei %s gespeichert"
+
+msgid "The saved PIN was cleared."
+msgstr "Die PIN wurde zurückgesetzt."
 
 msgid "The sleep timer has been activated."
 msgstr "Der Sleeptimer wurde aktiviert."
@@ -6286,6 +6755,9 @@ msgstr "Der Status des aktuellen Beta-Image konnte nicht ermittelt werden, da %s
 
 msgid "The timer file (timers.xml) is corrupt and could not be loaded."
 msgstr "Die Timer-Datei (timers.xml) ist defekt und konnte nicht geladen werden."
+
+msgid "The user interface of the receiver will now restart to select the selected skin"
+msgstr "Die Benutzeroberfläche des Receivers wird für den ausgewählten Skin neu gestartet"
 
 msgid "The user interface of your receiver is restarting"
 msgstr "Die Benutzeroberfläche des Receivers wird neu gestartet"
@@ -6314,10 +6786,6 @@ msgstr ""
 msgid "The wizard can backup your current settings. Do you want to do a backup now?"
 msgstr "Der Assistent kann jetzt Ihre Einstellungen sichern. Wollen Sie dies nun durchführen?"
 
-#, python-format
-msgid "The wizard found a configuration backup. Do you want to restore your old settings from %s?"
-msgstr "Der Assistent hat eine Konfigurations-Sicherungsdatei entdeckt. Wollen Sie Ihre Einstellungen von %s wiederherstellen?"
-
 msgid "The wizard is finished now."
 msgstr "Der Assistent ist nun abgeschlossen."
 
@@ -6326,13 +6794,13 @@ msgstr "Es sind mindestens "
 
 #, python-format
 msgid "There are at least %s updates available."
-msgstr "Es sind mindestens %s Updates verfügbar."
+msgstr "Es sind mindestens %s Aktualisierungen verfügbar."
 
 msgid "There are currently no outstanding actions."
 msgstr "Es sind keine Aktivitäten geplant."
 
 msgid "There are no updates available."
-msgstr "Es sind keine Updates verfügbar."
+msgstr "Es sind keine Aktualisierungen verfügbar."
 
 msgid "There is no signal to lock on !"
 msgstr "Es liegt kein Signal an !"
@@ -6350,16 +6818,30 @@ msgstr "Dieses wiederbeschreibbare Medium ist bereits formatiert - durch eine Ne
 
 msgid ""
 "This info is for developers only.\n"
-"For a normal users it is not important.\n"
-"Don't panic, please, when here will be displayed any suspicious informations!"
+"For a normal users it is not relevant.\n"
+"Don't panic please when you see values being displayed that you think look suspicious!"
 msgstr ""
+"Diese Information richtet sich nur an Entwickler.\n"
+"Sie ist für den normalen Benutzer nicht relevant.\n"
+"Es besteht kein Grund zur Beunruhigung, wenn Werte angezeigt werden, die suspekt erscheinen!"
 
-msgid ""
-"This plugin creates a USB stick which can be used to update the firmware of your receiver without the need for a network or WLAN connection.\n"
-"First, a USB stick needs to be prepared so that it becomes bootable.\n"
-"In the next step, an NFI image file can be downloaded from the update server and saved on the USB stick.\n"
-"If you already have a prepared bootable USB stick, please insert it now. Otherwise plug in a USB stick with a minimum size of 64 MB!"
-msgstr "Dieses Plugin erzeugt einen USB-Stick, mit dessen Hilfe die Firmware Ihres Receivers aktualisiert werden kann, ohne dass dafür eine Netzwerk- oder WLAN-Verbindung notwendig ist. Zuerst muss ein USB-Stick vorbereitet und bootfähig gemacht werden. Im nächsten Schritt kann eine NFI-Imagedatei vom Update-Server heruntergeladen und auf diesem Stick gespeichert werden. Wenn Sie bereits einen bootfähigen USB-Stick vorbereitet haben, stecken Sie ihn bitte jetzt ein. Anderenfalls stecken Sie bitte einen USB-Stick mit einer Mindestgröße von 64 MB ein."
+msgid "This option allows you can config the Colordepth for UHD"
+msgstr "Mit dieser Option können Sie die Farbtiefe für UHD einstellen."
+
+msgid "This option allows you can config the Colorspace from Auto to RGB"
+msgstr "Diese Option erlaubt Ihnen die Konfiguration des Farbraums von Auto zu RGB"
+
+msgid "This option allows you to hide and sort menu entries. When selecting user you can change order and hide menu items via the blue button"
+msgstr "Diese Option erlaubt Ihnen Menü-Einträge zu verstecken und zu sortieren. Bei Auswahl 'Benutzerdefiniert' kann das Verändern der Reihenfolge und das Verstecken von Menü-Einträgen über die blaue Taste realisiert werden."
+
+msgid "This option allows you to power off the display."
+msgstr "Mit dieser Option können Sie das Display ausschalten."
+
+msgid "This option allows you to show menu number quick links."
+msgstr "Mit dieser Option können Sie Menüeinträge mit den Zifferntasten auswählen."
+
+msgid "This option allows you to show menu paths."
+msgstr "Diese Option erlaubt das Anzeigen von Menü-Pfaden."
 
 msgid "This plugin is installed."
 msgstr "Dieses Plugin ist installiert."
@@ -6465,9 +6947,6 @@ msgstr "Timer-Übersicht"
 msgid "Timer edit"
 msgstr "Timer bearbeiten"
 
-msgid "Timer editor"
-msgstr "Timer-Editor"
-
 msgid "Timer entry"
 msgstr "Timer-Eintrag"
 
@@ -6485,7 +6964,7 @@ msgid "Timer overview"
 msgstr "Timer-Übersicht"
 
 msgid "Timer recording location"
-msgstr "Timer-Aufnahmeverzeichnis"
+msgstr "Timeraufnahme-Verzeichnis"
 
 msgid "Timer sanity error"
 msgstr "Fehler bei Timerprüfung"
@@ -6523,6 +7002,7 @@ msgstr "Titel"
 msgid "Title properties"
 msgstr "Titeldetails"
 
+#, fuzzy
 msgid "Titleset mode"
 msgstr "Titleset"
 
@@ -6530,24 +7010,13 @@ msgid "To audio selection"
 msgstr "Zur Ton-Auswahl"
 
 msgid "To subtitle selection"
-msgstr "Zur Untertitel Auswahl"
-
-msgid ""
-"To update your receiver firmware, please follow these steps:\n"
-"1) Turn off your box with the rear power switch and make sure the bootable USB stick is plugged in.\n"
-"2) Turn mains back on and hold the DOWN button on the front panel pressed for 10 seconds.\n"
-"3) Wait for bootup and follow instructions of the wizard."
-msgstr ""
-"Um Ihre Receiver-Firmware zu aktualisieren, folgen Sie bitte diesen Anweisungen:\n"
-"1) Schalten Sie Ihren Receiver mit dem Schalter auf der Rückseite aus und achten Sie darauf, dass der bootfähige USB-Stick eingesteckt ist.\n"
-"2) Schalten Sie den Netzschalter wieder ein und halten dabei den \"nach unten\"-Knopf auf der Vorderseite für 10 Sekunden gedrückt.\n"
-"3) Nach dem Bootvorgang folgen Sie bitte den Instruktionen des Assistenten."
+msgstr "Zur Untertitel-Auswahl"
 
 msgid "Today"
 msgstr "Heute"
 
 msgid "Toggle Extra Keys"
-msgstr ""
+msgstr "Schaltfläche Extra Tasten"
 
 msgid "Toggle HDMI In"
 msgstr ""
@@ -6558,10 +7027,23 @@ msgstr ""
 msgid "Toggle PIPzap"
 msgstr ""
 
+msgid "Toggle TV/RADIO mode"
+msgstr "Schalte TV/Radio Modus"
+
+#, fuzzy
 msgid "Toggle a cut mark at the current position"
 msgstr "Toggle Marker an der aktuellen Position"
 
+msgid "Toggle dashed flickering line for this service"
+msgstr ""
+
 msgid "Toggle infoBar"
+msgstr "Schalte Infoleiste"
+
+msgid "Toggle show/hide"
+msgstr ""
+
+msgid "Toggle the tv and the radio player..."
 msgstr ""
 
 msgid "Tone amplitude"
@@ -6579,8 +7061,18 @@ msgstr "Toneburst A/B"
 msgid "Top and bottom"
 msgstr "Oben und Unten"
 
+#, python-format
+msgid "Total clients streaming: %d (%s)"
+msgstr ""
+
 msgid "Track"
 msgstr "Spur"
+
+msgid "Traditional Chinese"
+msgstr "Langzeichen Chinesisch"
+
+msgid "Transcoding: "
+msgstr "Transkodierung: "
 
 msgid "Translation"
 msgstr "Übersetzung:"
@@ -6589,7 +7081,7 @@ msgid "Translation:"
 msgstr "Übersetzung:"
 
 msgid "Translations"
-msgstr "Übersetzung"
+msgstr "Übersetzungen"
 
 msgid "Transmission mode"
 msgstr "Übertragungstyp"
@@ -6597,20 +7089,20 @@ msgstr "Übertragungstyp"
 msgid "Transponder"
 msgstr "Transponder"
 
-msgid "Transponder type"
-msgstr "Transponder Typ"
-
 msgid "Trash can"
-msgstr "Mülleimer"
+msgstr "Papierkorb"
 
 msgid "Tries left:"
 msgstr "Übrige Versuche:"
+
+msgid "Troubleshoot"
+msgstr "Fehlersuche"
 
 msgid "Try to find used transponders in cable network.. please wait..."
 msgstr "Suche benutzte Transponder im Kabel Netzwerk.. bitte warten..."
 
 msgid "Try to find used transponders in terrestrial network... please wait..."
-msgstr ""
+msgstr "Suche benutzte Transponder im terrestrischen Netzwerk.. bitte warten..."
 
 msgid "Trying to download a new packetlist. Please wait..."
 msgstr "Versuche eine neue Aktualisierungsliste herunterzuladen. Bitte warten Sie..."
@@ -6642,14 +7134,17 @@ msgstr "Tuner-Konfiguration"
 msgid "Tuner is not supported"
 msgstr "Tuner nicht unterstützt"
 
+msgid "Tuner live values"
+msgstr ""
+
 msgid "Tuner not available."
+msgstr "Tuner nicht verfügbar."
+
+msgid "Tuner setting values"
 msgstr ""
 
 msgid "Tuner slot"
 msgstr "Tuner-Slot"
-
-msgid "Tuner status"
-msgstr "Tuner-Status"
 
 #, python-format
 msgid "Tuner status %s"
@@ -6676,8 +7171,11 @@ msgstr "Typ"
 msgid "Type of scan"
 msgstr "Art der Suche"
 
+msgid "URL"
+msgstr "URL"
+
 msgid "URL of fallback remote receiver"
-msgstr ""
+msgstr "URL vom Fallback-Remote-Receiver."
 
 msgid "USALS"
 msgstr "USALS"
@@ -6688,11 +7186,8 @@ msgstr "USALS Kalibrierung"
 msgid "USB stick"
 msgstr "USB-Stick"
 
-msgid "USB stick wizard"
-msgstr "USB-Stick-Assistent"
-
 msgid "Ukrainian"
-msgstr ""
+msgstr "Ukrainisch"
 
 msgid ""
 "Unattended upgrade in progress\n"
@@ -6701,7 +7196,10 @@ msgid ""
 msgstr ""
 "Stille Aktualisierung wird durchgeführt.\n"
 "Bitte warten Sie, bis Ihr Receiver automatisch neu startet.\n"
-"Das könnte einige Minuten in Anspruch nehmen."
+"Das kann einige Minuten in Anspruch nehmen."
+
+msgid "Uncover dashed flickering line for this service"
+msgstr "Gestrichelte Linie für diesen Kanal aufdecken"
 
 msgid "Undo install"
 msgstr "Installation zurücksetzen."
@@ -6716,16 +7214,7 @@ msgid "UnhandledKey"
 msgstr "UnhandledKey"
 
 msgid "Unhide parental control services"
-msgstr ""
-
-msgid "Unicable"
-msgstr "Unicable"
-
-msgid "Unicable LNB"
-msgstr "Unicable LNB"
-
-msgid "Unicable Martix"
-msgstr "Unicable Matrix"
+msgstr "Jugendschutz gesperrte Kanäle sichtbar machen"
 
 msgid "Uninstall"
 msgstr "Deinstallieren"
@@ -6737,7 +7226,7 @@ msgid "Unknown"
 msgstr "Unbekannt"
 
 msgid "Unmark service as dedicated 3D service"
-msgstr ""
+msgstr "Sender als Sender mit 3D-Inhalt unmarkieren"
 
 msgid "Unmount"
 msgstr "Aushängen"
@@ -6791,16 +7280,16 @@ msgid "Use DHCP"
 msgstr "Adresse automatisch beziehen (DHCP)"
 
 msgid "Use EIT EPG information when it is available."
-msgstr "Verwende EIT EPG Information falls vorhanden."
+msgstr "Verwende EIT EPG Information, wenn sie verfügbar ist."
 
 msgid "Use FreeSat EPG information when it is available."
-msgstr "Verwende FreeSat EPG Information falls vorhanden."
+msgstr "Verwende FreeSat EPG Information, wenn sie verfügbar ist."
 
 msgid "Use MHW EPG information when it is available."
-msgstr "Verwende MHW EPG Information falls vorhanden."
+msgstr "Verwende MHW EPG Information, wenn sie verfügbar ist."
 
 msgid "Use Netmed EPG information when it is available."
-msgstr "Verwende Netmed EPG Information falls vorhanden."
+msgstr "Verwende Netmed EPG Information, wenn sie verfügbar ist."
 
 msgid "Use TV remote control"
 msgstr "Fernbedienungsbefehle des Fernsehers weiterleiten"
@@ -6809,10 +7298,10 @@ msgid "Use USALS for this sat"
 msgstr "USALS für diesen Sat benutzen"
 
 msgid "Use ViaSat EPG information when it is available."
-msgstr "Verwende ViaSat EPG Infromation falls vorhanden."
+msgstr "Verwende ViaSat EPG Information, wenn sie verfügbar ist."
 
 msgid "Use Virgin EPG information when it is available."
-msgstr "Nutzte Virgin EPG-Informationen, sofern verfügbar."
+msgstr "Verwende Virgin EPG Information, wenn sie verfügbar ist."
 
 msgid "Use a gateway"
 msgstr "Einen Gateway verwenden?"
@@ -6869,7 +7358,7 @@ msgid "Use this video enhancement settings?"
 msgstr "Diese erweiterten A/V-Einstellungen benutzen?"
 
 msgid "Use trash can in movielist"
-msgstr "Verwende Mülleimer in der Filmliste"
+msgstr "Verwende Papierkorb in der Filmliste"
 
 msgid "Used service scan type"
 msgstr "Typ der Kanalsuche"
@@ -6898,13 +7387,16 @@ msgid "Using tuner %s"
 msgstr "Verwende Tuner %s"
 
 msgid "Usually when the subtitle language is the same as the audio language, the subtitles will not be used. Enable this option to allow these subtitles to be used."
-msgstr "Falls die Untertitelsprache mit der Audiospur-Sprache identisch ist, werden Untertitel standartmässig nicht eingeblendet. Bei Aktivierung dieser Option werden diese Untertitel trotzdem verwendet/angezeigt."
+msgstr "Falls die Untertitelsprache mit der Audiospur-Sprache identisch ist, werden Untertitel standardmäßig nicht eingeblendet. Bei Aktivierung dieser Option werden diese Untertitel trotzdem verwendet/angezeigt."
 
 msgid "VCR scart"
 msgstr "Scart-Videorekorder"
 
 msgid "VMGM (intro trailer)"
 msgstr "VMGM (Intro-Trailer)"
+
+msgid "VOB file"
+msgstr "VOB Datei"
 
 msgid "VU+"
 msgstr "VU+"
@@ -6917,6 +7409,9 @@ msgstr "Vertikale Drehgeschwindigkeit"
 
 msgid "Video PID"
 msgstr "Video PID"
+
+msgid "Video clipping setup"
+msgstr "Video Clipping Einstellungen"
 
 msgid "Video enhancement preview"
 msgstr "Erweiterte A/V-Einstellungen Vorschau"
@@ -6959,14 +7454,8 @@ msgstr "Video: %s fps"
 msgid "VideoMode"
 msgstr "Video-Modus"
 
-msgid "Videocodec"
-msgstr "Videocodec"
-
-msgid "Videoformat"
-msgstr "Videoformat"
-
-msgid "Videosize"
-msgstr "Videogröße"
+msgid "Videocodec, size & format"
+msgstr "Codec, Auflösung & Format"
 
 msgid "View Rass interactive..."
 msgstr "RaSS Interaktiv anzeigen..."
@@ -7085,8 +7574,23 @@ msgstr "A/V-Receiver aus Standby anschalten"
 msgid "Wakeup signal from TV"
 msgstr "Anschaltsignal vom Fernseher"
 
+msgid "Wakeup time"
+msgstr "Aufwachzeit"
+
 msgid "Wakeup type"
 msgstr "Aufweck-Modus"
+
+msgid "Warning"
+msgstr "Warnung"
+
+msgid ""
+"Warning!\n"
+"This is an option for advanced users.\n"
+"Really disable timer conflict detection?"
+msgstr ""
+"Warnung!\n"
+"Diese Option ist für fortgeschrittene Benutzer.\n"
+"Wirklich Timer-Konflikt-Erkennung ausschalten?"
 
 msgid "Warning: no LNB; using factory defaults."
 msgstr "Warnung: kein LNB; verwende Werkseinstellung"
@@ -7162,7 +7666,7 @@ msgid "What do you want to scan?"
 msgstr "Was wollen Sie scannen?"
 
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are upgraded"
-msgstr ""
+msgstr "Wenn Sie diese Option aktivieren, werden alle vorhandenen Kanallisten geladen, auch wenn diese nicht in der bouquets.tv oder bouquets.radio verlinkt sind. Dies erlaubt Ihnen z.B. Ihre eigenen Kanallisten zu erhalten, wenn eine Aktualisierung von installierten Kanallisten erfolgt."
 
 msgid "When enabled the PiP can be closed by the exit button."
 msgstr "Falls aktiviert, kann PiP mit der Exit-Taste geschlossen werden."
@@ -7177,10 +7681,10 @@ msgid "When enabled the set top box is able to wakeup on LAN"
 msgstr ""
 
 msgid "When enabled then when you select a new channel in the channel selection the channel selection will not close. It will only close when you select the current playing service. This is a kind of preview mode"
-msgstr ""
+msgstr "Falls aktiviert, dann wird bei Auswahl eines Senders in der Kanalauswahlliste, die Kanalauswahlliste nicht geschlossen. Die Kanalauswahlliste schließt nur wenn der aktuell laufende Sender ausgewählt wird. Das ist eine Art Vorschau-Modus."
 
 msgid "When enabled you can control the volume with the arrow buttons instead of getting the channel selection list"
-msgstr ""
+msgstr "Falls aktiviert, dann lässt sich die Lautstärke über die Pfeiltasten regeln, anstatt die Kanalauswahlliste aufzurufen."
 
 msgid "When enabled you can specify a timeframe to ignore the shutdown timer when the receiver is in standby mode"
 msgstr "Falls aktiviert, kann ein Zeitfenster angegeben werden, indem der Ausschalt-Timer nicht beachtet wird, auch wenn sich der Receiver im Standby-Modus befindet."
@@ -7195,31 +7699,34 @@ msgid "When enabled you can zap channels with the  CH+/-, B+/-, P+/- buttons ins
 msgstr "Falls aktiviert, kann mit den links, rechts,  CH+/-, B+/-, P+/- Tasten zwischen den Kanälen umgeschaltet werden anstelle die Kanalliste zu öffnen."
 
 msgid "When enabled you get the channel selection list via the OK button, the infobar toggle is then transfered to exit button"
-msgstr "Beim Betätigen der OK-Taste wird die Kanalliste angezeigt und die Anzeige der Infobar auf die EXIT-Taste gelegt, wenn diese Einstellung aktiviert ist."
+msgstr "Beim Betätigen der OK-Taste wird die Kanalauswahlliste angezeigt und die Anzeige der Infoleiste auf die EXIT-Taste gelegt, wenn diese Einstellung aktiviert ist."
 
 msgid "When enabled, AIT data will be included in http streams. This allows a client receiver to use HbbTV."
-msgstr "Bei Aktivierung werden AIT Daten im HTTP Stream eingebaut. Dies erlaubt die Verwendung von HbbTV mit Ihrem Receiver."
+msgstr "Wenn aktiviert, werden AIT Daten in HTTP-Streams eingefügt. Dies ermöglicht Client-Receivern HbbTV zu benutzen."
 
 msgid "When enabled, ECM data will be included in http streams. This allows a client receiver to do the descrambling."
-msgstr "Bei Aktivierung werden ECM Daten im HTTP Stream eingebaut. Dies erlaubt das Entschlüsseln der empfangenen Daten."
+msgstr "Wenn aktiviert, werden ECM Daten in HTTP-Streams eingefügt. Dies ermöglicht Client-Receivern den Stream selbst zu entschlüsseln."
 
 msgid "When enabled, EIT data will be included in http streams. This allows a client receiver to show EPG."
-msgstr "Bei Aktivierung werden EIT Daten im HTTP Stream eingebaut. Dies erlaubt die Darstellung der EPG am Receiver."
+msgstr "Wenn aktiviert, werden EIT Daten in HTTP-Streams eingefügt. Dies ermöglicht Client-Receivern ein EPG anzuzeigen."
 
 msgid "When enabled, a popup message will be shown when a movie has finished and the next one will start."
 msgstr "Anzeige eines Popups wenn ein Film fertig wiedergegeben wurde und die nächste Wiedergabe startet."
 
 msgid "When enabled, a popup message will be shown when a recording starts."
-msgstr "Benachrichtigung anzeigen, wenn eine Aufnahme startet"
+msgstr "Bei Einstellung 'Ja' wird eine Meldung angezeigt, die auf den Start einer Aufnahme hinweist."
 
 msgid "When enabled, a radio background image will be visible while listening to a radio channel."
-msgstr "Anzeige eines Radio-Hintergrundsymbols bei Wiedergabe eines Radio-Kanals."
+msgstr "Anzeige eines Radio-Hintergrundbildes bei Wiedergabe eines Radio-Kanals."
 
 msgid "When enabled, a recording is allowed to interrupt live tv, when there are no free tuners."
 msgstr "Ein geplanter Aufnahme-Timer kann die aktuelle Live-Sendung unterbrechen, wenn ansonsten keine freien Tuner zur Verfügung stehen."
 
 msgid "When enabled, a warning will be displayed and the user will get an option to stop or to continue the timeshift."
-msgstr "Fall aktiviert, wird eine Warnung angezeigt und der Benutzer kann wählen zwischen dem Beenden oder Fortfahren der Timeshift-Aufnahme."
+msgstr "Falls aktiviert, dann wird eine Warnung angezeigt und der Benutzer kann wählen zwischen dem Beenden oder Fortfahren der Timeshift-Aufnahme."
+
+msgid "When enabled, always descramble receiving http streams. This takes up more resources (descrambling demuxers), only enable if necessary. Individual streams are always descrambled if 0x100 is added to the service type, regardless of this setting. Default off."
+msgstr "Wenn aktiviert, dann werden empfangene HTTP-Streams immer entschlüsselt. Dies verbraucht mehr Ressourcen (Demuxer). Aktivieren Sie diese Option nur, wenn es notwendig ist. Individuelle Streams sind immer entschlüsselt, wenn 0x100 zum Servicetyp hinzugefügt wurde, unabhängig von dieser Einstellung."
 
 msgid "When enabled, authentication is required to watch http streams."
 msgstr "Eine Authentifizierung ist erforderlich, um HTTP-Streams zu sehen, wenn diese Einstellung aktiviert ist."
@@ -7234,16 +7741,13 @@ msgid "When enabled, continue to the next bouquet when the last channel of the c
 msgstr "Wechselt zum nächsten Bouquet wenn der letzte Kanal bei Kanalwechsel erreicht wurde."
 
 msgid "When enabled, deleted recordings are moved to the trash can, instead of being deleted immediately."
-msgstr "Verschiebe Aufnahmem in den Mülleimer bevor sie endgültig gelöscht werden."
+msgstr "Verschiebe Aufnahmen in den Papierkorb bevor sie endgültig entfernt werden."
 
 msgid "When enabled, display the EIT now/next eventdata in infobar. When disabled, display now/next eventdata from the EPG cache instead."
 msgstr "EIT jetzt/danach Sendungsdaten in Infoleiste anzeigen. Bei Deaktivierung zeigt jetzt/danach Sendungsdaten des EPG Caches an."
 
 msgid "When enabled, encryption info will be shown in the infobar (when supported by the skin)."
 msgstr "Verschlüsselungsinformationen in der Infoleiste anzeigen, wenn vom Skin unterstützt."
-
-msgid "When enabled, error messages related to the Common Interface module will not be shown."
-msgstr "Fehlermeldungen des allgemeinen Schnittstellen Modules (CI) werden nicht angezeigt."
 
 msgid "When enabled, error messages related to zapping will not be shown."
 msgstr "Zapping-Fehler nicht anzeigen."
@@ -7263,8 +7767,8 @@ msgstr "DVB grafische DVB Untertitel immer in ihrer ursprünglichen Position anz
 msgid "When enabled, graphical DVB subtitles will be displayed in yellow, instead of the original color."
 msgstr "DVB grafische Untertitel immer gelb anzeigen, anstatt in ihrer ursprünglichen Farbe."
 
-msgid "When enabled, http streams are descrambled on the server side. The (remote) client receiver does not have to do descrambling."
-msgstr "HTTP Streams am Server entschlüsseln. Der empfangende Receiver muss keine Art von Entschlüsselung selbst vornehmen."
+msgid "When enabled, http streams are descrambled on the server side. The (remote) client receiver does not have to do descrambling. Default on."
+msgstr "Wenn aktiviert, dann werden HTTP-Streams serverseitig entschlüsselt. Der Client-Receiver muss die Entschlüsselung nicht selbst durchführen. "
 
 msgid "When enabled, it is possible to leave the movieplayer with exit."
 msgstr "Falls aktiviert, kann der Movieplayer mit der Exit-Taste geschlossen werden."
@@ -7282,7 +7786,7 @@ msgid "When enabled, services may be grouped in multiple bouquets."
 msgstr "Sender können in mehreren Bouqets gruppiert werden."
 
 msgid "When enabled, show channel numbers in the channel selection screen."
-msgstr "Zeige Kanalnummer in Kanalauswahl"
+msgstr "Zeige Kanalnummer in Kanalauswahlliste."
 
 msgid "When enabled, subtitles for the hearing impaired can be used."
 msgstr "Bevorzuge Untertitel für Hörgeschädigte"
@@ -7309,7 +7813,7 @@ msgid "When enabled, the infobar will be displayed when changing channels."
 msgstr "Infoleiste bei Kanalwechsel anzeigen."
 
 msgid "When enabled, the infobar will be displayed when skipping forwards/backwards during media playback."
-msgstr "Infoleiste beim Spulen in der Medienwiedergabe anzeigen ."
+msgstr "Infoleiste beim Spulen während der Medienwiedergabe anzeigen."
 
 msgid "When enabled, the lenght of each recording will be shown in the movielist (this might cause some additional loading time)."
 msgstr "Spielzeit aller Aufnahmen in der Filmliste anzeigen (verursacht höhere Ladezeiten)."
@@ -7329,6 +7833,12 @@ msgstr "AC3 Tonspur verwenden (falls vorhanden)."
 msgid "When enabled, the receiver will select an AC3+ track (when available)."
 msgstr "Der Receiver wählt (falls verfügbar) die AC3+ Tonspur aus, wenn diese Einstellung aktiviert ist."
 
+msgid "When enabled, this setting has more weight than 'Preferred tuner for recordings'."
+msgstr ""
+
+msgid "When enabled, this setting has more weight than 'Preferred tuner'."
+msgstr ""
+
 msgid "When enabled, timeshift starts automatically in background after specified time."
 msgstr "Falls aktiviert, startet im Hintergrund automatisch die Timeshift-Aufnahme nach der eingestellten Zeit."
 
@@ -7339,10 +7849,10 @@ msgid "When enabled, your receiver will detect activity on the VCR SCART input."
 msgstr "Der Receiver erkennt Aktivitäten am Video-SCART Eingang."
 
 msgid "When nonzero, a recording will start earlier than the starting time indicated by the EPG."
-msgstr "Aufnahme früher beginnen, als Startzeit die EPG zur Verfügung stellt (falls nicht 0)."
+msgstr "Legt standardmäßig fest, um wie viele Minuten eine Aufnahme früher beginnen soll, als von den EPG Informationen angedacht."
 
 msgid "When nonzero, a recording will stop later than the ending time indicated by the EPG."
-msgstr "Aufnahme früher stoppen, als Endzeit die EPG zur Verfügung stellt (falls nicht 0)."
+msgstr "Legt standardmäßig fest, um wie viele Minuten eine Aufnahme später enden soll, als von den EPG Informationen angedacht. "
 
 msgid "When the content has an aspect ratio of 16:9, choose whether to scale/stretch the picture."
 msgstr "Skalieren/Strecken wenn Inhalt ein Bildformat von 16:9 aufweist."
@@ -7387,20 +7897,45 @@ msgstr "Funk-Netzwerk Konfiguration."
 msgid "Wireless network state"
 msgstr "Funk-Netzwerk Status"
 
+msgid "With errors:"
+msgstr "Mit Fehlern:"
+
 msgid "With popup"
 msgstr "mit Popup"
 
 msgid "Without popup"
 msgstr "ohne Popup"
 
+msgid "Wizard to arrange the overscan"
+msgstr "Assistent zur Overscan-Einrichtung"
+
 msgid "Would you like to install a softcam?"
 msgstr "Möchten Sie Softcam installieren?"
+
+#, python-format
+msgid "Would you save the entered PIN %s persistent?"
+msgstr "Wollen Sie die eingegebene PIN %s dauerhaft speichern?"
 
 msgid "Write error while recording. Disk full?\n"
 msgstr "Schreibfehler bei der Aufnahme. Festplatte voll?\n"
 
 msgid "Write failed!"
 msgstr "Schreiben fehlgeschlagen!"
+
+msgid "Write to /tmp/positionersetup.log"
+msgstr "Schreibe in /tmp/positionersetup.log"
+
+msgid "YCbCr420"
+msgstr "YCbCr420"
+
+msgid "YCbCr422"
+msgstr "YCbCr422"
+
+msgid "YCbCr444"
+msgstr "YCbCr444"
+
+msgid "YES"
+msgstr "JA"
 
 msgid "YPbPr"
 msgstr "YPbPr"
@@ -7416,6 +7951,9 @@ msgstr "Gelbe DVB Untertitel"
 
 msgid "Yes"
 msgstr "Ja"
+
+msgid "Yes (save index in setup tuner)"
+msgstr ""
 
 msgid "Yes and save"
 msgstr "Ja und Speichern"
@@ -7447,6 +7985,12 @@ msgstr "Ja, eine automatische Suche durchführen"
 msgid "Yes, do another manual scan now"
 msgstr "Ja, eine weitere manuelle Suche durchführen"
 
+msgid "Yes, only from deep standby"
+msgstr "Ja, nur aus dem Deep-Standby"
+
+msgid "Yes, only from standby"
+msgstr "Ja, nur aus dem Standby"
+
 msgid "Yes, perform a shutdown now."
 msgstr "Ja, jetzt herunterfahren."
 
@@ -7458,6 +8002,9 @@ msgstr "Ja, zurück zur Filmauswahl"
 
 msgid "Yesterday"
 msgstr "Gestern"
+
+msgid "You PIN code is 0000. This is the default PIN code and it disable parental control!\n"
+msgstr "Ihr PIN-Code ist 0000. Das ist der Standard PIN-Code und er deaktiviert auch den Jugendschutz!\n"
 
 #, python-format
 msgid ""
@@ -7489,14 +8036,48 @@ msgstr "Sie können dieses Plugin deinstallieren."
 msgid "You cannot delete this!"
 msgstr "Löschen nicht möglich!"
 
+msgid ""
+"You did not see all eight arrow heads. This means your TV has overscan enabled and presents you with a zoomed-in picture, causing you to loose part of a full HD screen. In addition this you may also miss parts of the user interface, for example volume bars and more.\n"
+"\n"
+"Unfortunately, your model of receiver is not capable to adjust the dimensions of the user interface. If not everything is visible, you should change the installed skin to one that supports the overscan area of your TV.\n"
+"\n"
+"When you select a different skin, the user interface of your receiver will restart.\n"
+"\n"
+"Note: you can always start the Overscan wizard later,  via\n"
+"\n"
+"menu->installation->system->Overscan wizard"
+msgstr ""
+"Sie konnten anscheinend nicht alle acht Pfeilspitzen sehen. Das bedeutet bei Ihrem TV ist Overscan aktiviert. Sie sehen damit ein leicht \"hereingezoomtes\" anstatt das volle Bild. Teile der Bedienoberfläche (Skin), wie z.B. die Lautstärkeleiste, könnten für Sie nicht sichtbar sein.\n"
+"\n"
+"Leider ist Ihr Receiver Modell nicht fähig die Maße der Bedienoberfläche anzupassen. Wenn nicht alles sichtbar ist, sollten Sie zu einem installierten Skin wechseln, der den Overscan-Bereich Ihres TV´s berücksichtigt.\n"
+"\n"
+"Wenn Sie einen anderen Skin auswählen, wird die Bedienoberfläche Ihres Receiver neu gestartet.\n"
+"\n"
+"Sie können den Overscan Assistenten jederzeit erneut starten, via\n"
+"\n"
+"Menü->Installation->System->Overscan Assistent"
+
+msgid ""
+"You did not see all eight arrow heads. This means your TV has overscan enabled and presents you with a zoomed-in picture, causing you to loose part of a full HD screen. In addition this you may also miss parts of the user interface, for example volume bars and more.\n"
+"\n"
+"You can now try to resize and change the position of the user interface until you see the eight arrow heads.\n"
+"\n"
+"When done press OK.\n"
+"\n"
+msgstr ""
+"Sie konnten anscheinend nicht alle acht Pfeilspitzen sehen. Das bedeutet bei Ihrem TV ist Overscan aktiviert. Sie sehen damit ein leicht \"hereingezoomtes\" anstatt das volle Bild. Teile der Bedienoberfläche (Skin), wie z.B. die Lautstärkeleiste, könnten für Sie nicht sichtbar sein.\n"
+"\n"
+"Sie können nun die Position der Bedienoberfläche skalieren, bis Sie die acht Pfeilspitzen sehen.\n"
+"\n"
+"Wenn erledigt OK drücken.\n"
+"\n"
+"\n"
+
 msgid "You didn't select a channel to record from."
 msgstr "Sie haben keinen Sender zum Aufnehmen ausgewählt."
 
 msgid "You have chosen to backup your settings. Please press OK to start the backup now."
 msgstr "Sie haben sich entschieden Ihre Einstellungen zu sichern. Drücken Sie OK, um den Vorgang zu starten."
-
-msgid "You have chosen to create a new .NFI flasher bootable USB stick. This will repartition the USB stick and therefore all data on it will be erased."
-msgstr "Sie möchten einen bootfähigen USB-Stick zum Flashen von NFI-Images erstellen. Dabei wird der USB-Stick repartitioniert, wodurch alle darauf enthaltenen Daten verloren gehen."
 
 msgid "You have chosen to restore your settings. Enigma2 will restart after restore. Please press OK to start the restore now."
 msgstr "Sie haben sich entschlossen, Ihre Einstellungen wiederherzustellen. Die Benutzeroberfläche wird nach der Wiederherstellung neu starten. Bitte drücken Sie OK, um mit der Wiederherstellung zu beginnen."
@@ -7527,13 +8108,6 @@ msgstr "Die Zusammenstellung überschreitet die Größe eines einfachen Mediums,
 
 msgid "Your current collection will get lost!"
 msgstr "Ihre aktuelle Zusammenstellung geht dabei verloren!"
-
-msgid ""
-"Your frontprocessor firmware must be upgraded.\n"
-"Press OK to start upgrade."
-msgstr ""
-"Ihre Frontprozessor-Firmware muss aktualisiert werden.\n"
-"Drücken Sie OK, um das Upgrade zu starten."
 
 msgid ""
 "Your frontprocessor will be upgraded\n"
@@ -7628,11 +8202,11 @@ msgstr ""
 "Zurückschalten zum Sender der vor dem\n"
 "Öffnen der Motor-Einstellungen lief?"
 
-msgid "Zap back to service before tuner setup?"
-msgstr "Zurückschalten zum vorher laufenden Sender?"
+msgid "Zap bouquets blindly on zap buttons"
+msgstr ""
 
 msgid "Zap down"
-msgstr ""
+msgstr "Kanal +"
 
 msgid "Zap focus to Picture in Picture"
 msgstr "Fokus auf Bild im Bild legen"
@@ -7644,7 +8218,7 @@ msgid "Zap mode"
 msgstr "Zap Modus"
 
 msgid "Zap to"
-msgstr ""
+msgstr "Umschalten"
 
 msgid "Zap to selected channel"
 msgstr "Schalte zum ausgewählten Sender um"
@@ -7653,7 +8227,13 @@ msgid "Zap to selected channel, or show detailed event info (depends on configur
 msgstr "Schalte zum ausgewählten Sender um oder zeige detaillierte Sendungsinformation an (von Ihrer Einstellung abhängig)."
 
 msgid "Zap up"
-msgstr ""
+msgstr "Kanal -"
+
+msgid "Zgemma H.S/H.2S/H.2H/H5"
+msgstr "Zgemma H.S/H.2S/H.2H/H5"
+
+msgid "Zgemma Star S/2S/H1/H2"
+msgstr "Zgemma Star S/2S/H1/H2"
 
 msgid "[REC]"
 msgstr "[REC]"
@@ -7704,7 +8284,7 @@ msgid "add bouquet"
 msgstr "Bouquet einfügen"
 
 msgid "add bouquet to parental protection"
-msgstr ""
+msgstr "Bouquet zum Jugendschutz hinzufügen"
 
 msgid "add marker"
 msgstr "Marker einfügen"
@@ -7742,6 +8322,9 @@ msgstr "Alphabet"
 msgid "alphabetic reverse"
 msgstr "Umgekehrtes Alphabet"
 
+msgid "alphabetical"
+msgstr "alphabetisch"
+
 msgid "alternative"
 msgstr "alternativ"
 
@@ -7749,10 +8332,13 @@ msgid "always"
 msgstr "immer"
 
 msgid "and never ask again this session again"
-msgstr ""
+msgstr "und nicht erneut in dieser Sitzung nachfragen"
+
+msgid "and never ask this again"
+msgstr "und dies nicht erneut nachfragen"
 
 msgid "and never show this message again"
-msgstr ""
+msgstr "und nicht erneut diese Nachricht anzeigen"
 
 msgid "and select next channel"
 msgstr "und nachfolgenden Kanal auswählen"
@@ -7761,7 +8347,7 @@ msgid "and select previous channel"
 msgstr "und vorherigen Kanal auswählen"
 
 msgid "are you sure to cancel all changes"
-msgstr ""
+msgstr "Sie Sie sicher, dass Sie alle Änderungen verwerfen wollen?"
 
 msgid "arts/culture (without music, general)"
 msgstr "Kunst/Kultur (ohne Musik, Allgemeines)"
@@ -7809,6 +8395,9 @@ msgstr "Negativliste"
 msgid "blue"
 msgstr "Blau"
 
+msgid "bottom"
+msgstr "Unten"
+
 msgid "broadcasting/press"
 msgstr "Rundsendung/Presse"
 
@@ -7839,6 +8428,9 @@ msgstr "Links-zirkular"
 msgid "circular right"
 msgstr "Rechts-zirkular"
 
+msgid "clip overscan / letterbox borders"
+msgstr ""
+
 msgid "comedy"
 msgstr "Komödie"
 
@@ -7846,16 +8438,13 @@ msgid "config menu"
 msgstr "Konfigurationsmenü"
 
 msgid "configure in which resolution pictures are displayed with the picture viewer and movieplayer"
-msgstr ""
+msgstr "Konfiguriere in welcher Auflösung Bilder im Picture Viewer und Movieplayer angezeigt werden sollen."
 
 msgid "confirmed"
 msgstr "Bestätigt"
 
 msgid "connected"
 msgstr "Verbunden"
-
-msgid "continue"
-msgstr "Weiter"
 
 msgid "cooking"
 msgstr "Kochen"
@@ -7865,10 +8454,6 @@ msgstr "In Bouquets kopieren"
 
 msgid "create directory"
 msgstr "Verzeichnis erstellen"
-
-#, python-format
-msgid "currently installed image: %s"
-msgstr "Derzeit installiertes Image: %s"
 
 msgid "daily"
 msgstr "Täglich"
@@ -7890,6 +8475,9 @@ msgstr "Krimi/Thriller"
 
 msgid "disable"
 msgstr "Deaktivieren"
+
+msgid "disable intro screen"
+msgstr "deaktiviere Introbild"
 
 msgid "disable move mode"
 msgstr "Verschiebemodus ausschalten"
@@ -7927,6 +8515,9 @@ msgstr "Alternativen bearbeiten"
 msgid "education/science/factual topics (general)"
 msgstr "Bildung/Wissenschaft/Sachbezogene Themen (Allgemein)"
 
+msgid "embedded"
+msgstr "integriert"
+
 msgid "empty"
 msgstr "Leer"
 
@@ -7938,6 +8529,9 @@ msgstr "Bouqueteditieren anschalten"
 
 msgid "enable favourite edit"
 msgstr "Favoriteneditor anschalten"
+
+msgid "enable intro screen"
+msgstr "aktiviere Introbild"
 
 msgid "enable move mode"
 msgstr "Verschiebemodus aktivieren"
@@ -7976,7 +8570,7 @@ msgid "error starting scanning"
 msgstr ""
 
 msgid "error while scanning"
-msgstr ""
+msgstr "Fehler während Suche"
 
 msgid "et4000"
 msgstr "et4000"
@@ -7993,6 +8587,9 @@ msgstr "et9000/et9100"
 msgid "et9200/9500/6500"
 msgstr "et9200/9500/6500"
 
+msgid "execute cuts (requires MovieCut plugin)"
+msgstr "Filmschnitt ausführen (benötigt MovieCut Plugin)"
+
 msgid "exit DVD player or return to file browser"
 msgstr "DVD Player verlassen oder zurück zum Dateimanager"
 
@@ -8004,6 +8601,9 @@ msgstr "Netzwerkadaptermenü verlassen"
 
 msgid "experimental film/video"
 msgstr "Experimentelle Filme/Video"
+
+msgid "failed"
+msgstr "fehlgeschlagen"
 
 msgid "false"
 msgstr "Nein"
@@ -8021,7 +8621,7 @@ msgid "film/cinema"
 msgstr "Film/Kino"
 
 msgid "find currently played service"
-msgstr ""
+msgstr "Springe zum aktuellen Kanal"
 
 msgid "fine arts"
 msgstr "Kunstwissenschaft"
@@ -8082,6 +8682,9 @@ msgstr "Höhe"
 
 msgid "help..."
 msgstr "Hilfe..."
+
+msgid "hide"
+msgstr "verberge"
 
 msgid "horizontal"
 msgstr "Horizontal"
@@ -8156,7 +8759,7 @@ msgid "locked"
 msgstr "gesperrt"
 
 msgid "long"
-msgstr ""
+msgstr "lang"
 
 msgid "loopthrough to"
 msgstr "Verbunden mit"
@@ -8206,6 +8809,9 @@ msgstr "Zum vorherigen Eintrag gehen"
 msgid "movie/drama (general)"
 msgstr "Film/Drama (Allgemein)"
 
+msgid "multi"
+msgstr "multi"
+
 msgid "multinorm"
 msgstr "Multinorm"
 
@@ -8243,13 +8849,13 @@ msgid "no CI slots found"
 msgstr "Kein CI Slot gefunden"
 
 msgid "no channel list"
-msgstr ""
+msgstr "keine Kanalliste"
 
 msgid "no module found"
 msgstr "Kein Modul gefunden"
 
 msgid "no resource manager"
-msgstr ""
+msgstr "Kein Resourcen-Manager"
 
 msgid "no storage devices found"
 msgstr "Kein Laufwerk gefunden"
@@ -8269,8 +8875,11 @@ msgstr "Kein Signal"
 msgid "not supported"
 msgstr "Nicht unterstützt"
 
-msgid "not used"
-msgstr "Nicht verwendet"
+msgid "not tested"
+msgstr "nicht getestet"
+
+msgid "not_tested"
+msgstr "nicht_getestet"
 
 msgid "nothing connected"
 msgstr "Nichts angeschlossen"
@@ -8283,6 +8892,9 @@ msgstr "eines Einschicht-Mediums (Single Layer) benutzt."
 
 msgid "off"
 msgstr "Aus"
+
+msgid "off or wpa2 on"
+msgstr ""
 
 msgid "offset is"
 msgstr "Endstellung auf"
@@ -8336,7 +8948,7 @@ msgid "pre-school children's program"
 msgstr "Vorschul Kinderprogramm"
 
 msgid "purge deleted userbouquets"
-msgstr ""
+msgstr "Gelöschte Userbouquets entfernen"
 
 msgid "receiver software because updates are available."
 msgstr "Receiver Software, weil Updates verfügbar sind."
@@ -8372,10 +8984,10 @@ msgid "remove bookmark"
 msgstr "Lesezeichen entfernen"
 
 msgid "remove bouquet from parental protection"
-msgstr ""
+msgstr "Bouquet aus Jugendschutz entfernen"
 
 msgid "remove cable services"
-msgstr ""
+msgstr "Kabel-Dienste entfernen"
 
 msgid "remove directory"
 msgstr "Verzeichnis entfernen"
@@ -8393,7 +9005,7 @@ msgid "remove selected satellite"
 msgstr "Entferne gewählten Satellit"
 
 msgid "remove terrestrial services"
-msgstr ""
+msgstr "Terrestrische-Dienste entfernen"
 
 msgid "remove this mark"
 msgstr "Diese Markierung entfernen"
@@ -8408,13 +9020,16 @@ msgid "repeated"
 msgstr "Wiederholend"
 
 msgid "restore deleted userbouquets"
-msgstr ""
+msgstr "Gelöschte Userbouquets wiederherstellen"
 
 msgid "reverse by date"
 msgstr "Umgekehrt nach Datum"
 
 msgid "rewind to the previous chapter"
 msgstr "Zum vorherigen Kapitel zurück"
+
+msgid "rgb"
+msgstr "rgb"
 
 msgid "right"
 msgstr "Rechts"
@@ -8461,8 +9076,14 @@ msgstr "Ernste Musik/Klassische Musik"
 msgid "serious/classical/religious/historical movie/drama"
 msgstr "Ernst/Klassisch/Religiös/Historischer Film/Drama"
 
+msgid "service is in bouquet parental protection"
+msgstr "Kanal ist in Jugendschutz-Bouquet"
+
 msgid "set as startup service"
 msgstr "Als Anschalt-Kanal setzen"
+
+msgid "show"
+msgstr "zeige"
 
 msgid "show DVD main menu"
 msgstr "Zeige das DVD Hauptmenü"
@@ -8548,6 +9169,9 @@ msgstr "Stereo"
 msgid "stop using as startup service"
 msgstr "Nicht mehr als Anschaltkanal nutzen"
 
+msgid "successful"
+msgstr "erfolgreich"
+
 msgid "switch to bookmarks"
 msgstr "Gehe zu den Lesezeichen"
 
@@ -8611,11 +9235,17 @@ msgstr "Nicht bekannt"
 msgid "unknown"
 msgstr "Unbekannt"
 
+msgid "unknown error"
+msgstr "unbekannter Fehler"
+
 msgid "unknown service"
 msgstr "Unbekannter Kanal"
 
 msgid "unpublished"
 msgstr "Unveröffentlicht"
+
+msgid "untestable"
+msgstr "untestbar"
 
 msgid "until standby/restart"
 msgstr "Bis zum Standby/Neustart"
@@ -8671,11 +9301,17 @@ msgid_plural "with %d errors"
 msgstr[0] "mit %d Fehler"
 msgstr[1] "mit %d Fehlern"
 
+msgid "with errors"
+msgstr "mit Fehlern"
+
 msgid "with text"
-msgstr ""
+msgstr "mit Text"
 
 msgid "with tuner name"
-msgstr ""
+msgstr "mit Tuner Namen"
+
+msgid "with_errors"
+msgstr "mit_Fehlern"
 
 msgid "working"
 msgstr "Arbeite"
@@ -8703,3 +9339,288 @@ msgstr "umgeschaltet"
 
 msgid "®"
 msgstr "®"
+
+#~ msgid "%d-%b-%Y %-H:%M"
+#~ msgstr "%d. %b %Y %-H:%M"
+
+#~ msgid ": %s"
+#~ msgstr ": %s"
+
+#~ msgid "A recording is currently running. Please stop the recording before trying to configure the positioner."
+#~ msgstr "Zurzeit läuft eine Aufnahme. Bitte beenden Sie die Aufnahme, bevor Sie das Rotor-Setup ausführen."
+
+#~ msgid "Action on long powerbutton press"
+#~ msgstr "Aktion nach langem Drücken auf Power"
+
+#~ msgid "Action on short powerbutton press"
+#~ msgstr "Aktion beim kurzen Druck auf Power"
+
+#~ msgid "Changelog"
+#~ msgstr "Versionshistorie"
+
+#~ msgid ""
+#~ "Checking tuner %d\n"
+#~ "DiSEqC port %s for %s"
+#~ msgstr ""
+#~ "Überprüfe Tuner %d\n"
+#~ "DiSEqC Port %s auf %s"
+
+#~ msgid "Coderate HP"
+#~ msgstr "Empfangsrate HP"
+
+#~ msgid "Coderate LP"
+#~ msgstr "Empfangsrate LP"
+
+#~ msgid "Configure the function of a long press on the power button."
+#~ msgstr "Funktion bei längerem Drücken der Einschalt-Taste."
+
+#~ msgid "Configure the function of a short press on the power button."
+#~ msgstr "Funktion dei kurzem Drücken der Einschalt-Taste."
+
+#~ msgid "Conflicting timer"
+#~ msgstr "In Konflikt stehender Timer"
+
+#~ msgid "Constellation"
+#~ msgstr "Konstellation"
+
+#~ msgid "Could not connect to receiver .NFI image feed server:"
+#~ msgstr "Verbindung zum Receiver .NFI Image Feed Server konnte nicht hergestellt werden:"
+
+#~ msgid "Current version:"
+#~ msgstr "Derzeitige Version:"
+
+#~ msgid "Currently installed image"
+#~ msgstr "Aktuell installiertes Image"
+
+#~ msgid "Descramble http streams"
+#~ msgstr "Entschlüssele HTTP-Streams"
+
+#~ msgid "Do you want to download the image to %s ?"
+#~ msgstr "Wollen Sie das Image nach %s herunterladen?"
+
+#~ msgid "Download"
+#~ msgstr "Herunterladen"
+
+#~ msgid "Download %s from server"
+#~ msgstr "%s vom Server herunterladen"
+
+#~ msgid "Download .NFI-files for USB-flasher"
+#~ msgstr ".NFI-Files für USB-Flasher runterladen"
+
+#~ msgid "F1/F3"
+#~ msgstr "F1/F3"
+
+#~ msgid "FBC Unicable"
+#~ msgstr "FBC Unikabel"
+
+#~ msgid "Flash"
+#~ msgstr "Flash"
+
+#~ msgid "Flashing failed"
+#~ msgstr "Flashen fehlgeschlagen"
+
+#~ msgid "Frontprocessor version: %d"
+#~ msgstr "Frontprozessor-Version: %d"
+
+#~ msgid "Get latest experimental image"
+#~ msgstr "Neuestes Experimental-Image"
+
+#~ msgid "Get latest release image"
+#~ msgstr "Neuestes Release-Image"
+
+#~ msgid "HD1100/et7x00/et8500"
+#~ msgstr "HD1100/et7x00/et8500"
+
+#~ msgid "Hide CI messages"
+#~ msgstr "Verberge CI Nachrichten"
+
+#~ msgid "Hierarchy information"
+#~ msgstr "Hierarchie Information"
+
+#~ msgid "Immediate shutdown"
+#~ msgstr "Direkt runterfahren"
+
+#~ msgid "Log results to harddisk"
+#~ msgstr "Ergebnisse auf die Festplatte schreiben"
+
+#~ msgid "Loop through to"
+#~ msgstr "Durchschleifen zu"
+
+#~ msgid "Multiplex"
+#~ msgstr "Multiplex"
+
+#~ msgid "NFI image flashing"
+#~ msgstr "NFI Image Flashing"
+
+#~ msgid "NFI image flashing completed. Press Yellow to Reboot!"
+#~ msgstr ""
+#~ "NFI Image Flashen beendet.\n"
+#~ "Drücken Sie Gelb für einen Neustart!"
+
+#~ msgid "NIM"
+#~ msgstr "NIM"
+
+#~ msgid "New version:"
+#~ msgstr "Neue Version:"
+
+#~ msgid "No details for this image file"
+#~ msgstr "Keine Details zum Image verfügbar"
+
+#~ msgid "OSD position setup"
+#~ msgstr "OSD Position Einstellungen"
+
+#~ msgid "PIDs"
+#~ msgstr "PIDs"
+
+#~ msgid "Picon and service name"
+#~ msgstr "Picon und Kanalname"
+
+#~ msgid "Please check your network settings!"
+#~ msgstr "Bitte überprüfen Sie Ihre Netzwerkeinstellungen"
+
+#~ msgid "Please select an NFI file and press green key to flash!"
+#~ msgstr "Bitte wählen Sie eine NFI-Datei aus und drücken Sie die grüne Taste zum Flashen!"
+
+#~ msgid "Polarisation:"
+#~ msgstr "Polarisation:"
+
+#~ msgid "Positioner Setup"
+#~ msgstr "Rotor-Einstellungen"
+
+#~ msgid "Prepare another USB stick for image flashing"
+#~ msgstr "Weiteren USB-Stick zum Image-Flashen vorbereiten"
+
+#~ msgid "Reboot"
+#~ msgstr "Neustart"
+
+#~ msgid "Reception Settings"
+#~ msgstr "Empfangseinstellungen"
+
+#~ msgid "Restore is running..."
+#~ msgstr "Wiederherstellung wird ausgeführt..."
+
+#~ msgid "SID"
+#~ msgstr "SID"
+
+#~ msgid "Select an image to be downloaded"
+#~ msgstr "Image zum Download auswählen"
+
+#~ msgid "Select desired image from feed list"
+#~ msgstr "Bestimmtes Image vom Feed-Server herunterladen"
+
+#~ msgid "Shall the USB stick wizard proceed and program the image file %s into flash memory?"
+#~ msgstr "Soll der Assistent fortfahren und die Image-Datei %s in den Flashspeicher schreiben?"
+
+#~ msgid "Show picons in channel list"
+#~ msgstr "Zeige Picons in Kanalliste"
+
+#~ msgid "Show shutdown menu"
+#~ msgstr "Ausschaltmenü anzeigen"
+
+#~ msgid "Silently zap between bouquets"
+#~ msgstr "Ohne Meldung zwischen Bouquets wechseln"
+
+#~ msgid ""
+#~ "The USB stick was prepared to be bootable.\n"
+#~ "Now you can download an NFI image file!"
+#~ msgstr ""
+#~ "Der USB-Stick wurde bootfähig gemacht.\n"
+#~ "Sie können nun eine NFI-Imagedatei herunterladen!"
+
+#~ msgid ""
+#~ "The following device was found:\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Do you want to write the USB flasher to this stick?"
+#~ msgstr ""
+#~ "Das folgende Medium wurde gefunden:\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Soll der USB-Flasher auf diesen Stick installiert werden?"
+
+#~ msgid "The md5sum validation failed, the file may be corrupted!"
+#~ msgstr "Die md5sum Überprüfung ist fehlgeschlagen. Die Datei könnte fehlerhaft sein!"
+
+#~ msgid "The results have been written to %s."
+#~ msgstr "Die Ergebnisse des Tests wurden in der Datei %s gespeichert."
+
+#~ msgid "The wizard found a configuration backup. Do you want to restore your old settings from %s?"
+#~ msgstr "Der Assistent hat eine Konfigurations-Sicherungsdatei entdeckt. Wollen Sie Ihre Einstellungen von %s wiederherstellen?"
+
+#~ msgid ""
+#~ "This plugin creates a USB stick which can be used to update the firmware of your receiver without the need for a network or WLAN connection.\n"
+#~ "First, a USB stick needs to be prepared so that it becomes bootable.\n"
+#~ "In the next step, an NFI image file can be downloaded from the update server and saved on the USB stick.\n"
+#~ "If you already have a prepared bootable USB stick, please insert it now. Otherwise plug in a USB stick with a minimum size of 64 MB!"
+#~ msgstr "Dieses Plugin erzeugt einen USB-Stick, mit dessen Hilfe die Firmware Ihres Receivers aktualisiert werden kann, ohne dass dafür eine Netzwerk- oder WLAN-Verbindung notwendig ist. Zuerst muss ein USB-Stick vorbereitet und bootfähig gemacht werden. Im nächsten Schritt kann eine NFI-Imagedatei vom Update-Server heruntergeladen und auf diesem Stick gespeichert werden. Wenn Sie bereits einen bootfähigen USB-Stick vorbereitet haben, stecken Sie ihn bitte jetzt ein. Anderenfalls stecken Sie bitte einen USB-Stick mit einer Mindestgröße von 64 MB ein."
+
+#~ msgid "Timer editor"
+#~ msgstr "Timer-Editor"
+
+#~ msgid ""
+#~ "To update your receiver firmware, please follow these steps:\n"
+#~ "1) Turn off your box with the rear power switch and make sure the bootable USB stick is plugged in.\n"
+#~ "2) Turn mains back on and hold the DOWN button on the front panel pressed for 10 seconds.\n"
+#~ "3) Wait for bootup and follow instructions of the wizard."
+#~ msgstr ""
+#~ "Um Ihre Receiver-Firmware zu aktualisieren, folgen Sie bitte diesen Anweisungen:\n"
+#~ "1) Schalten Sie Ihren Receiver mit dem Schalter auf der Rückseite aus und achten Sie darauf, dass der bootfähige USB-Stick eingesteckt ist.\n"
+#~ "2) Schalten Sie den Netzschalter wieder ein und halten dabei den \"nach unten\"-Knopf auf der Vorderseite für 10 Sekunden gedrückt.\n"
+#~ "3) Nach dem Bootvorgang folgen Sie bitte den Instruktionen des Assistenten."
+
+#~ msgid "Transponder type"
+#~ msgstr "Transponder Typ"
+
+#~ msgid "Tuner status"
+#~ msgstr "Tuner-Status"
+
+#~ msgid "USB stick wizard"
+#~ msgstr "USB-Stick-Assistent"
+
+#~ msgid "Unicable"
+#~ msgstr "Unikabel"
+
+#~ msgid "Unicable LNB"
+#~ msgstr "Unikabel LNB"
+
+#~ msgid "Unicable Martix"
+#~ msgstr "Unikabel Matrix"
+
+#~ msgid "Videocodec"
+#~ msgstr "Videocodec"
+
+#~ msgid "Videoformat"
+#~ msgstr "Videoformat"
+
+#~ msgid "Videosize"
+#~ msgstr "Videogröße"
+
+#~ msgid "When enabled, error messages related to the Common Interface module will not be shown."
+#~ msgstr "Fehlermeldungen des allgemeinen Schnittstellen Modules (CI) werden nicht angezeigt."
+
+#~ msgid "When enabled, http streams are descrambled on the server side. The (remote) client receiver does not have to do descrambling."
+#~ msgstr "HTTP Streams am Server entschlüsseln. Der empfangende Receiver muss keine Art von Entschlüsselung selbst vornehmen."
+
+#~ msgid "You have chosen to create a new .NFI flasher bootable USB stick. This will repartition the USB stick and therefore all data on it will be erased."
+#~ msgstr "Sie möchten einen bootfähigen USB-Stick zum Flashen von NFI-Images erstellen. Dabei wird der USB-Stick repartitioniert, wodurch alle darauf enthaltenen Daten verloren gehen."
+
+#~ msgid ""
+#~ "Your frontprocessor firmware must be upgraded.\n"
+#~ "Press OK to start upgrade."
+#~ msgstr ""
+#~ "Ihre Frontprozessor-Firmware muss aktualisiert werden.\n"
+#~ "Drücken Sie OK, um das Upgrade zu starten."
+
+#~ msgid "Zap back to service before tuner setup?"
+#~ msgstr "Zurückschalten zum vorher laufenden Sender?"
+
+#~ msgid "continue"
+#~ msgstr "Weiter"
+
+#~ msgid "currently installed image: %s"
+#~ msgstr "Derzeit installiertes Image: %s"
+
+#~ msgid "not used"
+#~ msgstr "Nicht verwendet"

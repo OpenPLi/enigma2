@@ -6,18 +6,17 @@ from Screens.Standby import TryQuitMainloop
 from Screens.TextBox import TextBox
 from Screens.About import CommitInfo
 from Components.config import config
-from Components.ActionMap import ActionMap, NumberActionMap
+from Components.About import about
+from Components.ActionMap import ActionMap
 from Components.Ipkg import IpkgComponent
 from Components.Sources.StaticText import StaticText
 from Components.Slider import Slider
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import fileExists
+from Tools.HardwareInfo import HardwareInfo
 from enigma import eTimer, getBoxType, eDVBDB
-from urllib import urlopen
+from urllib2 import urlopen
 import socket
-import os
-import re
-import time
 
 class UpdatePlugin(Screen, ProtectedScreen):
 	skin = """
@@ -75,7 +74,6 @@ class UpdatePlugin(Screen, ProtectedScreen):
 			config.ParentalControl.config_sections.software_update.value
 
 	def checkTraficLight(self):
-
 		self.activityTimer.callback.remove(self.checkTraficLight)
 		self.activityTimer.start(100, False)
 
@@ -87,7 +85,14 @@ class UpdatePlugin(Screen, ProtectedScreen):
 		try:
 			# TODO: Use Twisted's URL fetcher, urlopen is evil. And it can
 			# run in parallel to the package update.
-			status = urlopen("http://openpli.org/status/").read().split('!', 1)
+			url = "http://openpli.org/status/"
+			try:
+				status = urlopen(url, timeout=5).read().split('!', 1)
+			except:
+				# OpenPli 5.0 uses python 2.7.11 and here we need to bypass the certificate check
+				from ssl import _create_unverified_context
+				status = urlopen(url, timeout=5, context=_create_unverified_context()).read().split('!', 1)
+				print status
 			if getBoxType() in status[0].split(','):
 				message = len(status) > 1 and status[1] or _("The current beta image might not be stable.\nFor more information see %s.") % ("www.openpli.org")
 				picon = MessageBox.TYPE_ERROR
@@ -107,7 +112,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 		if config.usage.show_update_disclaimer.value or justShow:
 			message = _("The OpenPLi team would like to point out that upgrading to the latest nightly build comes not only with the latest features, but also with some risks. After the update, it is possible that your device no longer works as expected. We recommend you create backups with Autobackup or Backupsuite. This allows you to quickly and easily restore your device to its previous state, should you experience any problems. If you encounter a 'bug', please report the issue on www.openpli.org.\n\nDo you understand this?")
 			list = not justShow and [(_("no"), False), (_("yes"), True), (_("yes") + " " + _("and never show this message again"), "never")] or []
-			self.session.openWithCallback(boundFunction(self.disclaimerCallback, justShow), MessageBox, message, list=list)
+			self.session.openWithCallback(boundFunction(self.disclaimerCallback, justShow), MessageBox, message, list=list,  title=_("Disclaimer"))
 		else:
 			self.startActualUpdate(True)
 
@@ -123,14 +128,22 @@ class UpdatePlugin(Screen, ProtectedScreen):
 	def getLatestImageTimestamp(self):
 		currentTimeoutDefault = socket.getdefaulttimeout()
 		socket.setdefaulttimeout(3)
-		latestImageTimestamp = ""
 		try:
 			# TODO: Use Twisted's URL fetcher, urlopen is evil. And it can
 			# run in parallel to the package update.
-			latestImageTimestamp = re.findall('<dd>(.*?)</dd>', urlopen("http://openpli.org/download/"+getBoxType()+"/").read())[0][:16]
-			latestImageTimestamp = time.strftime(_("%d-%b-%Y %-H:%M"), time.strptime(latestImageTimestamp, "%Y/%m/%d %H:%M"))
+			from time import strftime
+			from datetime import datetime
+			imageVersion = about.getImageTypeString().split(" ")[1]
+			imageVersion = (int(imageVersion) < 5 and "%.1f" or "%s") % int(imageVersion)
+			url = "http://openpli.org/download/timestamp/%s~%s" % (HardwareInfo().get_device_model(), imageVersion)
+			try:
+				latestImageTimestamp = datetime.fromtimestamp(int(urlopen(url, timeout=5).read())).strftime(_("%Y-%m-%d %H:%M"))
+			except:
+				# OpenPli 5.0 uses python 2.7.11 and here we need to bypass the certificate check
+				from ssl import _create_unverified_context
+				latestImageTimestamp = datetime.fromtimestamp(int(urlopen(url, timeout=5, context=_create_unverified_context()).read())).strftime(_("%Y-%m-%d %H:%M"))
 		except:
-			pass
+			latestImageTimestamp = ""
 		socket.setdefaulttimeout(currentTimeoutDefault)
 		return latestImageTimestamp
 
@@ -154,7 +167,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 		if event == IpkgComponent.EVENT_DOWNLOAD:
 			self.status.setText(_("Downloading"))
 		elif event == IpkgComponent.EVENT_UPGRADE:
-			if self.sliderPackages.has_key(param):
+			if param in self.sliderPackages:
 				self.slider.setValue(self.sliderPackages[param])
 			self.package.setText(param)
 			self.status.setText(_("Upgrading") + ": %s/%s" % (self.packages, self.total_packages))
@@ -215,7 +228,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 				if not config.usage.show_update_disclaimer.value:
 					choices.append((_("Show disclaimer"), "disclaimer"))
 				choices.append((_("Cancel"), ""))
-				self.session.openWithCallback(self.startActualUpgrade, ChoiceBox, title=message, list=choices)
+				self.session.openWithCallback(self.startActualUpgrade, ChoiceBox, title=message, list=choices, windowTitle=self.title)
 			elif self.channellist_only > 0:
 				if self.channellist_only == 1:
 					self.setEndMessage(_("Could not find installed channel list."))

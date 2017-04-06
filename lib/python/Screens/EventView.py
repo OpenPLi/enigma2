@@ -1,13 +1,11 @@
 from Screen import Screen
 from Screens.TimerEdit import TimerSanityConflict
-from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
 from Components.ActionMap import ActionMap
 from Components.Button import Button
 from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
 from Components.PluginComponent import plugins
-from Components.MenuList import MenuList
 from Components.TimerList import TimerList
 from Components.UsageConfig import preferredTimerPath
 from Components.Sources.ServiceEvent import ServiceEvent
@@ -292,7 +290,7 @@ class EventViewBase:
 				def boxAction(choice):
 					if choice:
 						choice[1]()
-				text += _(": %s") % self.event.getEventName()
+				text += ": %s" % self.event.getEventName()
 				self.session.openWithCallback(boxAction, ChoiceBox, title=text, list=menu, windowTitle=_("Event view context menu"))
 
 	def runPlugin(self, plugin):

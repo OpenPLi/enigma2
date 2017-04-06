@@ -1,17 +1,10 @@
 from Screens.Screen import Screen
-from Screens.ChoiceBox import ChoiceBox
-from Screens.InputBox import InputBox
-from Screens.MessageBox import MessageBox
-from Screens.HelpMenu import HelpableScreen
-from Components.ActionMap import HelpableActionMap, ActionMap
+from Components.ActionMap import ActionMap
 from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText
-from Components.Sources.Progress import Progress
-from Components.FileList import FileList
 from Components.Pixmap import Pixmap
 from enigma import ePicLoad
-from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS, SCOPE_FONTS, SCOPE_HDD
-from Components.config import config, getConfigListEntry, ConfigInteger, ConfigSubsection, ConfigSelection
+from Components.config import config, getConfigListEntry, ConfigInteger
 from Components.ConfigList import ConfigListScreen
 from Components.AVSwitch import AVSwitch
 import DVDTitle
@@ -121,7 +114,7 @@ class TitleProperties(Screen,ConfigListScreen):
 
 	def paintThumbPixmapCB(self, picInfo=None):
 		ptr = self.picload.getData()
-		if ptr != None:
+		if ptr is not None:
 			self["thumbnail"].instance.setPixmap(ptr.__deref__())
 
 	def changedConfigList(self):

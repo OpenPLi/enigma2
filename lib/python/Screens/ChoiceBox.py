@@ -87,15 +87,7 @@ class ChoiceBox(Screen):
 			"moveDown": self.additionalMoveDown,
 			"menu": self.setDefaultChoiceList
 		}, -1)
-		self.windowTitle = windowTitle
-		self.onLayoutFinish.append(self.layoutFinished)
-
-	def layoutFinished(self):
-		if self.windowTitle is None:
-			self.windowTitle = _("Select")
-		if not self.getSkinTitle():
-			self.windowTitle = ""
-		self.setTitle(self.windowTitle)
+		self.setTitle(windowTitle or _("Select"))
 
 	def autoResize(self):
 		orgwidth = self.instance.size().width()
@@ -167,7 +159,7 @@ class ChoiceBox(Screen):
 
 	# lookups a key in the keymap, then runs it
 	def goKey(self, key):
-		if self.keymap.has_key(key):
+		if key in self.keymap:
 			entry = self.keymap[key]
 			self.goEntry(entry)
 
@@ -188,7 +180,7 @@ class ChoiceBox(Screen):
 		pos = 0
 		summarytext = ""
 		for entry in self.summarylist:
-			if pos > curpos-2 and pos < curpos+5:
+			if curpos-2 < pos < curpos+5:
 				if pos == curpos:
 					summarytext += ">"
 					self["summary_selection"].setText(entry[1])
@@ -205,7 +197,7 @@ class ChoiceBox(Screen):
 		if self.reorderConfig:
 			if len(self.list) > 0 and self.config_type.value != "":
 				self.session.openWithCallback(self.setDefaultChoiceListCallback, MessageBox, _("Sort list to default and exit?"), MessageBox.TYPE_YESNO)
-		elif self.keymap.has_key("menu"):
+		elif "menu" in self.keymap:
 			self.goKey("menu")
 		else:
 			self.cancel()

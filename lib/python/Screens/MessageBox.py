@@ -13,7 +13,7 @@ class MessageBox(Screen):
 	TYPE_ERROR = 3
 	TYPE_MESSAGE = 4
 
-	def __init__(self, session, text, type=TYPE_YESNO, timeout=-1, close_on_any_key=False, default=True, enable_input=True, msgBoxID=None, picon=None, simple=False, list=[], timeout_default=None):
+	def __init__(self, session, text, type=TYPE_YESNO, timeout=-1, close_on_any_key=False, default=True, enable_input=True, msgBoxID=None, picon=None, simple=False, list=[], timeout_default=None, title=None):
 		self.type = type
 		Screen.__init__(self, session)
 		self.setScreenPathMode(None)
@@ -46,11 +46,11 @@ class MessageBox(Screen):
 			self["InfoPixmap"].hide()
 		if picon != self.TYPE_WARNING:
 			self["WarningPixmap"].hide()
-		self.title = self.type < self.TYPE_MESSAGE and [_("Question"), _("Information"), _("Warning"), _("Error")][self.type] or _("Message")
+		self.title = title or self.type < self.TYPE_MESSAGE and [_("Question"), _("Information"), _("Warning"), _("Error")][self.type] or _("Message")
 		if type == self.TYPE_YESNO:
 			if list:
 				self.list = list
-			elif default == True:
+			elif default:
 				self.list = [ (_("yes"), True), (_("no"), False) ]
 			else:
 				self.list = [ (_("no"), False), (_("yes"), True) ]

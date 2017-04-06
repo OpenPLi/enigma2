@@ -57,7 +57,7 @@ class SetupSummary(Screen):
 	def selectionChanged(self):
 		self["SetupEntry"].text = self.parent.getCurrentEntry()
 		self["SetupValue"].text = self.parent.getCurrentValue()
-		if hasattr(self.parent,"getCurrentDescription") and self.parent.has_key("description"):
+		if hasattr(self.parent,"getCurrentDescription") and "description" in self.parent:
 			self.parent["description"].text = self.parent.getCurrentDescription()
 
 class Setup(ConfigListScreen, Screen):
@@ -77,7 +77,7 @@ class Setup(ConfigListScreen, Screen):
 		for x in xmldata.findall("setup"):
 			if x.get("key") != self.setup:
 				continue
-			self.addItems(list, x);
+			self.addItems(list, x)
 			self.setup_title = x.get("title", "").encode("UTF-8")
 			self.seperation = int(x.get('separation', '0'))
 

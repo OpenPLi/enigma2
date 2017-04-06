@@ -2,7 +2,6 @@ from Screen import Screen
 from Components.Button import Button
 from Components.ActionMap import HelpableActionMap, ActionMap, NumberActionMap
 from Components.ChoiceList import ChoiceList, ChoiceEntryComponent
-from Components.MenuList import MenuList
 from Components.MovieList import MovieList, resetMoviePlayState, AUDIO_EXTENSIONS, DVD_EXTENSIONS, IMAGE_EXTENSIONS, moviePlayState
 from Components.DiskInfo import DiskInfo
 from Components.Pixmap import Pixmap, MultiPixmap
@@ -76,14 +75,11 @@ try:
 except Exception as e:
 	print "[ML] BlurayPlayer not installed:", e
 	BlurayPlayer = None
-	
+
 
 def defaultMoviePath():
-	result = config.usage.default_path.value
-	if not os.path.isdir(result):
-		from Tools import Directories
-		return Directories.defaultRecordingLocation()
-	return result
+	from Tools import Directories
+	return Directories.defaultRecordingLocation(config.usage.default_path.value)
 
 def setPreferredTagEditor(te):
 	global preferredTagEditor
@@ -150,7 +146,7 @@ def createMoveList(serviceref, dest):
 	srcPath, srcName = os.path.split(src)
 	if os.path.normpath(srcPath) == dest:
 		# move file to itself is allowed, so we have to check it
-		raise Exception, "Refusing to move to the same directory"
+		raise Exception, _("Refusing to move to the same directory")
 	# Make a list of items to move
 	moveList = [(src, os.path.join(dest, srcName))]
 	if isinstance(serviceref, str) or not serviceref.flags & eServiceReference.mustDescent:
@@ -517,7 +513,7 @@ class MovieSelectionSummary(Screen):
 				name = ".."
 			else:
 				name = item[1].getName(item[0])
-			if (item[0].flags & eServiceReference.mustDescent):
+			if item[0].flags & eServiceReference.mustDescent:
 				if len(name) > 12:
 					name = os.path.split(os.path.normpath(name))[1]
 				name = "> " + name
@@ -1196,7 +1192,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 
 	def itemSelectedCheckTimeshiftCallback(self, ext, path, answer):
 		if answer:
-			if ext == '.iso' and BlurayPlayer is not None:
+			if ext in (".iso", ".img", ".nrg") and BlurayPlayer is not None:
 				try:
 					from Plugins.Extensions.BlurayPlayer import blurayinfo
 					if blurayinfo.isBluray(path) == 1:
@@ -1661,9 +1657,12 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				# if path ends in '/', p is blank.
 				p = os.path.split(p[0])
 			name = p[1]
+			self.extension = ""
 		else:
 			info = item[1]
 			name = info.getName(item[0])
+			name, self.extension = os.path.splitext(name)
+
 		from Screens.VirtualKeyBoard import VirtualKeyBoard
 		self.session.openWithCallback(self.renameCallback, VirtualKeyBoard,
 			title = _("Rename"),
@@ -1688,7 +1687,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 	def renameCallback(self, name):
 		if not name:
 			return
-		name = name.strip()
+		name = "".join((name.strip(), self.extension))
 		item = self.getCurrentSelection()
 		if item and item[0]:
 			try:
@@ -1863,7 +1862,12 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		current = item[0]
 		info = item[1]
 		cur_path = os.path.realpath(current.getPath())
-		st = os.stat(cur_path)
+		try:
+			st = os.stat(cur_path)
+		except OSError, e:
+			msg = _("Cannot move to trash can") + "\n" + str(e) + "\n"
+			self.session.open(MessageBox, msg, MessageBox.TYPE_ERROR)
+			return
 		name = info and info.getName(current) or _("this recording")
 		are_you_sure = _("Do you really want to delete %s?") % (name)
 		if current.flags & eServiceReference.mustDescent:

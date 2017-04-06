@@ -2,7 +2,6 @@ from Components.ActionMap import ActionMap
 from Components.Button import Button
 from Components.Label import Label
 from Components.config import config
-from Components.MenuList import MenuList
 from Components.TimerList import TimerList
 from Components.TimerSanityCheck import TimerSanityCheck
 from Components.UsageConfig import preferredTimerPath
@@ -94,7 +93,8 @@ class TimerEditList(Screen):
 		timer_changed = True
 		if cur:
 			t = cur
-			if t.disabled and t.repeated and t.isRunning() and not t.justplay:
+			stateRunning = t.state in (1, 2)
+			if t.disabled and t.repeated and stateRunning and not t.justplay:
 				return
 			if t.disabled:
 				print "[TimerEditList] try to ENABLE timer"
@@ -112,8 +112,8 @@ class TimerEditList(Screen):
 					if timersanitycheck.doubleCheck():
 						t.disable()
 			else:
-				if t.isRunning():
-					if t.repeated:
+				if stateRunning:
+					if t.isRunning() and t.repeated:
 						list = (
 							(_("Stop current event but not coming events"), "stoponlycurrent"),
 							(_("Stop current event and disable coming events"), "stopall"),
@@ -156,13 +156,14 @@ class TimerEditList(Screen):
 			if not cur.conflict_detection:
 				text += _("\nConflict detection disabled!")
 			self["description"].setText(text)
+			stateRunning = cur.state in (1, 2)
 			if self.key_red_choice != self.DELETE:
 				self["actions"].actions.update({"red":self.removeTimerQuestion})
 				self["key_red"].setText(_("Delete"))
 				self.key_red_choice = self.DELETE
 
 			if cur.disabled and (self.key_yellow_choice != self.ENABLE):
-				if cur.isRunning() and cur.repeated and not cur.justplay:
+				if stateRunning and cur.repeated and not cur.justplay:
 					self.removeAction("yellow")
 					self["key_yellow"].setText(" ")
 					self.key_yellow_choice = self.EMPTY
@@ -170,11 +171,11 @@ class TimerEditList(Screen):
 					self["actions"].actions.update({"yellow":self.toggleDisabledState})
 					self["key_yellow"].setText(_("Enable"))
 					self.key_yellow_choice = self.ENABLE
-			elif cur.isRunning() and not cur.repeated and (self.key_yellow_choice != self.EMPTY):
+			elif stateRunning and (not cur.repeated or cur.state == 1) and (self.key_yellow_choice != self.EMPTY):
 				self.removeAction("yellow")
 				self["key_yellow"].setText(" ")
 				self.key_yellow_choice = self.EMPTY
-			elif (not cur.isRunning() or cur.repeated) and not cur.disabled and (self.key_yellow_choice != self.DISABLE):
+			elif (not stateRunning or cur.repeated and cur.isRunning()) and not cur.disabled and (self.key_yellow_choice != self.DISABLE):
 				self["actions"].actions.update({"yellow":self.toggleDisabledState})
 				self["key_yellow"].setText(_("Disable"))
 				self.key_yellow_choice = self.DISABLE

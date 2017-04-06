@@ -4,8 +4,8 @@ from skin import parseFont
 
 from Tools.FuzzyDate import FuzzyTime
 
-from enigma import eListboxPythonMultiContent, eListbox, gFont,\
-	RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, RT_VALIGN_TOP, RT_VALIGN_BOTTOM
+from enigma import eListboxPythonMultiContent, eListbox, gFont, getBestPlayableServiceReference, eServiceReference, \
+	RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_TOP, RT_VALIGN_BOTTOM
 from Tools.Alternatives import GetWithAlternative
 from Tools.LoadPixmap import LoadPixmap
 from Tools.TextBoundary import getTextBoundarySize
@@ -35,9 +35,9 @@ class TimerList(HTMLComponent, GUIComponent, object):
 			repeatedtext = []
 			flags = timer.repeated
 			for x in (0, 1, 2, 3, 4, 5, 6):
-				if (flags & 1 == 1):
+				if flags & 1 == 1:
 					repeatedtext.append(days[x])
-				flags = flags >> 1
+				flags >>= 1
 			repeatedtext = ", ".join(repeatedtext)
 			if self.iconRepeat:
 				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, self.iconMargin / 2, self.rowSplit + (self.itemHeight - self.rowSplit - self.iconHeight) / 2, self.iconWidth, self.iconHeight, self.iconRepeat))
@@ -78,7 +78,7 @@ class TimerList(HTMLComponent, GUIComponent, object):
 			icon = self.iconDone
 
 		icon and res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, self.iconMargin / 2, (self.rowSplit - self.iconHeight) / 2, self.iconWidth, self.iconHeight, icon))
-		orbpos = self.getOrbitalPos(timer.service_ref)
+		orbpos = self.getOrbitalPos(timer.service_ref, timer.state)
 		orbposWidth = getTextBoundarySize(self.instance, self.font, self.l.getItemSize(), orbpos).width()
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, self.satPosLeft, self.rowSplit, orbposWidth, self.itemHeight - self.rowSplit, 1, RT_HALIGN_LEFT|RT_VALIGN_TOP, orbpos))
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, self.iconWidth + self.iconMargin, self.rowSplit, self.satPosLeft - self.iconWidth - self.iconMargin, self.itemHeight - self.rowSplit, 1, RT_HALIGN_LEFT|RT_VALIGN_TOP, state))
@@ -165,22 +165,32 @@ class TimerList(HTMLComponent, GUIComponent, object):
 	def entryRemoved(self, idx):
 		self.l.entryRemoved(idx)
 
-	def getOrbitalPos(self, ref):
+	def getOrbitalPos(self, ref, state):
 		refstr = ''
+		alternative = ''
 		if hasattr(ref, 'sref'):
 			refstr = str(ref.sref)
 		else:
 			refstr = str(ref)
-		refstr = refstr and GetWithAlternative(refstr)
+		if refstr and refstr.startswith('1:134:'):
+			alternative = " (A)"
+			if state in (1, 2) and not hasattr(ref, 'sref'):
+				current_ref = getBestPlayableServiceReference(ref.ref, eServiceReference())
+				if not current_ref:
+					return "N/A" + alternative
+				else:
+					refstr = current_ref.toString()
+			else:
+				refstr = GetWithAlternative(refstr)
 		if '%3a//' in refstr:
-			return "%s" % _("Stream")
+			return "%s" % _("Stream") + alternative
 		op = int(refstr.split(':', 10)[6][:-4] or "0",16)
 		if op == 0xeeee:
-			return "%s" % _("DVB-T")
+			return "%s" % _("DVB-T") + alternative
 		if op == 0xffff:
-			return "%s" % _("DVB-C")
+			return "%s" % _("DVB-C") + alternative
 		direction = 'E'
 		if op > 1800:
 			op = 3600 - op
 			direction = 'W'
-		return ("%d.%d\xc2\xb0%s") % (op // 10, op % 10, direction)
+		return ("%d.%d\xc2\xb0%s") % (op // 10, op % 10, direction) + alternative

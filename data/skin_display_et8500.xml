@@ -55,7 +55,7 @@
 		<widget source="global.CurrentTime" render="Label" position="500,490" size="182,52" halign="right" font="FdLcD;50">
 			<convert type="ClockToText">Default</convert>
 		</widget>
-		<widget source="session.CurrentService" render="Picon" zPosition="13" position="224,394" size="242,142" transparent="1" alphatest="blend">
+		<widget source="session.CurrentService" render="Picon" isFrontDisplayPicon="1" zPosition="13" position="224,394" size="242,142" transparent="1" alphatest="blend">
 			<convert type="ServiceName">Reference</convert>
 		</widget>
 		<widget source="session.CurrentService" render="Pixmap" pixmap="skin_default/icons/stream.png" foregroundColor="#ff0000" size="60,50"  position="60,400" zPosition="1" alphatest="blend" >
@@ -113,7 +113,7 @@
 		<widget source="global.CurrentTime" render="Label" position="500,490" size="182,52" halign="right" font="FdLcD;50">
 			<convert type="ClockToText">Default</convert>
 		</widget>
-		<widget source="parent.Service" render="Picon" zPosition="13" position="224,394" size="242,142" transparent="1" alphatest="blend">
+		<widget source="parent.Service" render="Picon" isFrontDisplayPicon="1" zPosition="13" position="224,394" size="242,142" transparent="1" alphatest="blend">
 			<convert type="ServiceName">Reference</convert>
 		</widget>
 	</screen>

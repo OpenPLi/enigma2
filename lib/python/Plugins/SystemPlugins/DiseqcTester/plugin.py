@@ -5,7 +5,6 @@ from Screens.MessageBox import MessageBox
 from Plugins.Plugin import PluginDescriptor
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.NimManager import nimmanager
-from Components.ResourceManager import resourcemanager
 from Components.TuneTest import TuneTest
 from Components.Label import Label
 from Components.Sources.List import List
@@ -161,7 +160,7 @@ class DiseqcTester(Screen, TuneTest, ResultParser):
 		self.test_type = test_type
 		self.loopsfailed = loopsfailed
 		self.loopssuccessful = loopssuccessful
-		self.oldref = self.session.nav.getCurrentlyPlayingServiceReference()
+		self.oldref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 		self.log = log
 		self["Overall_progress"] = Label(_("Overall progress:"))
 		self["Progress"] = Label(_("Progress:"))
@@ -423,7 +422,7 @@ class DiseqcTester(Screen, TuneTest, ResultParser):
 		print "finishedChecking"
 		TuneTest.finishedChecking(self)
 
-		if not self.results.has_key(self.currentlyTestedIndex):
+		if self.currentlyTestedIndex not in self.results:
 			self.results[self.currentlyTestedIndex] = {"failed": [], "successful": [], "status": None, "internalstatus": None}
 
 		if len(self.failedTune) > 0 and len(self.successfullyTune) > 0:

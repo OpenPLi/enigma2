@@ -5,8 +5,6 @@ import Screens.InfoBar
 from enigma import eServiceCenter, eServiceReference
 from ServiceReference import ServiceReference
 from Screens.Screen import Screen
-from Components.ActionMap import ActionMap
-from Components.MenuList import MenuList
 from Components.config import config
 
 Session = None

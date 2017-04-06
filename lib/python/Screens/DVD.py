@@ -55,7 +55,7 @@ class ChapterZap(Screen):
 
 	def keyNumberGlobal(self, number):
 		self.Timer.start(3000, True)
-		self.field = self.field + str(number)
+		self.field += str(number)
 		self["number"].setText(self.field)
 		if len(self.field) >= 4:
 			self.keyOK()
@@ -527,7 +527,7 @@ class DVDPlayer(Screen, InfoBarBase, InfoBarNotifications, InfoBarSeek, InfoBarP
 			self.session.openWithCallback(self.playPhysicalCB, MessageBox, text=_("Do you want to play DVD in drive?"), timeout=5 )
 
 	def playPhysicalCB(self, answer):
-		if answer == True:
+		if answer:
 			harddiskmanager.setDVDSpeed(harddiskmanager.getCD(), 1)
 			self.FileBrowserClosed(harddiskmanager.getAutofsMountpoint(harddiskmanager.getCD()))
 
@@ -601,9 +601,9 @@ class DVDPlayer(Screen, InfoBarBase, InfoBarNotifications, InfoBarSeek, InfoBarP
 			isNTSC = (video_attr_high & 0x10 == 0)
 			isLowResolution = (video_attr_low & 0x18 == 0x18)
 		except:
-#			If the service is an .iso or .img file we assume it is PAL
+#			If the service is an .iso or .img or .nrg file we assume it is PAL
 #			Sorry we cannot open image files here.
-			print "[DVD] Cannot read file or is ISO/IMG"
+			print "[DVD] Cannot read file or is ISO/IMG/NRG"
 		finally:
 			if ifofile is not None:
 				ifofile.close()
@@ -634,7 +634,7 @@ class DVDPlayer(Screen, InfoBarBase, InfoBarNotifications, InfoBarSeek, InfoBarP
 	def playLastCB(self, answer): # overwrite infobar cuesheet function
 		print "[DVD] playLastCB", answer, self.resume_point
 		if self.service:
-			if answer == True:
+			if answer:
 				self.resumeDvd()
 				seekable = self.getSeek()
 				if seekable:

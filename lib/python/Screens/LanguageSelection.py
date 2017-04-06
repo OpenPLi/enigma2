@@ -1,4 +1,3 @@
-import gettext
 from Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.Language import language
@@ -8,15 +7,16 @@ from Components.Label import Label
 from Components.Pixmap import Pixmap
 from Screens.InfoBar import InfoBar
 from Screens.Rc import Rc
-from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN, SCOPE_LANGUAGE
+from Screens.MessageBox import MessageBox
+from Screens.Standby import TryQuitMainloop
+from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
 from Tools.LoadPixmap import LoadPixmap
-import enigma
 
 def LanguageEntryComponent(file, name, index):
 	png = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "countries/" + index + ".png"))
-	if png == None:
+	if png is None:
 		png = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "countries/" + file + ".png"))
-		if png == None:
+		if png is None:
 			png = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "countries/missing.png"))
 	res = (index, name, png)
 	return res
@@ -48,10 +48,16 @@ class LanguageSelection(Screen):
 
 	def save(self):
 		self.commit(self.run())
-		if InfoBar.instance and self.oldActiveLanguage != config.osd.language.value:
-			self.close(True)
+		if self.oldActiveLanguage != config.osd.language.value:
+			if InfoBar.instance:
+				self.session.openWithCallback(self.restartGUI, MessageBox,_("GUI needs a restart to apply a new language\nDo you want to restart the GUI now?"), MessageBox.TYPE_YESNO, title=_("Restart GUI now?"))
+			else:
+				self.restartGUI()
 		else:
 			self.close()
+
+	def restartGUI(self, answer=True):
+		answer and self.session.open(TryQuitMainloop, 3)
 
 	def cancel(self):
 		language.activateLanguage(self.oldActiveLanguage)

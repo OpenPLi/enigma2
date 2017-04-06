@@ -1,5 +1,4 @@
 from Screen import Screen
-from Components.Pixmap import Pixmap, MovingPixmap
 from Components.Label import Label
 from Components.ActionMap import ActionMap
 from Components.HelpMenuList import HelpMenuList
@@ -8,6 +7,7 @@ from Screens.Rc import Rc
 class HelpMenu(Screen, Rc):
 	def __init__(self, session, list):
 		Screen.__init__(self, session)
+		self.setTitle(_("help..."))
 		self.onSelChanged = [ ]
 		self["list"] = HelpMenuList(list, self.close)
 		self["list"].onSelChanged.append(self.SelectionChanged)

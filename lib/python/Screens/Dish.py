@@ -4,13 +4,10 @@ from Components.Pixmap import Pixmap
 from Components.config import config, ConfigInteger
 from Components.Sources.Boolean import Boolean
 from Components.Label import Label
-from Components.ProgressBar import ProgressBar
 from Components.ServiceEventTracker import ServiceEventTracker
-from enigma import eDVBSatelliteEquipmentControl, eTimer, iPlayableService
+from enigma import eDVBSatelliteEquipmentControl, eTimer, iPlayableService, eServiceCenter, iServiceInformation
 from Components.NimManager import nimmanager
 from Components.Sources.FrontendStatus import FrontendStatus
-from enigma import eServiceCenter, iServiceInformation
-from ServiceReference import ServiceReference
 
 INVALID_POSITION = 9999
 config.misc.lastrotorposition = ConfigInteger(INVALID_POSITION)
@@ -180,9 +177,9 @@ class Dish(Screen):
 	def getTurnTime(self, start, end, pol=0):
 		mrt = abs(start - end) if start and end else 0
 		if mrt > 0:
-			if (mrt > 1800):
+			if mrt > 1800:
 				mrt = 3600 - mrt
-			if (mrt % 10):
+			if mrt % 10:
 				mrt += 10
 			mrt = round((mrt * 1000 / self.getTurningSpeed(pol) ) / 10000) + 3
 		return mrt
@@ -224,10 +221,7 @@ class Dish(Screen):
 	def getTunerName(self):
 		nr = self.getCurrentTuner()
 		if nr is not None:
-			nims = nimmanager.nimList()
-			if nr < 4:
-				return "".join(nims[nr].split(':')[:1])
-			return " ".join((_("Tuner"),str(nr)))
+			return _("Tuner") + " " + chr(nr+65)
 		return ""
 
 	def OrbToStr(self, orbpos):

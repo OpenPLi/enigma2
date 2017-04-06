@@ -12,6 +12,7 @@ class FrontendInfo(Converter, object):
 	SLOT_NUMBER = 5
 	TUNER_TYPE = 6
 	STRING = 7
+	USE_TUNERS_STRING = 8
 
 	def __init__(self, type):
 		Converter.__init__(self, type)
@@ -32,6 +33,8 @@ class FrontendInfo(Converter, object):
 			type = type.split(",")
 			self.space_for_tuners = len(type) > 1 and int(type[1]) or 10
 			self.space_for_tuners_with_spaces = len(type) > 2 and int(type[2]) or 6
+		elif type == "USE_TUNERS_STRING":
+			self.type = self.USE_TUNERS_STRING
 		else:
 			self.type = self.LOCK
 
@@ -73,9 +76,23 @@ class FrontendInfo(Converter, object):
 						string += " "
 					string += color + chr(ord("A")+n.slot)
 			return string
+		if self.type == self.USE_TUNERS_STRING:
+			string = ""
+			for n in nimmanager.nim_slots:
+				if n.type:
+					if n.slot == self.source.slot_number:
+						color = "\c0000??00"
+					elif self.source.tuner_mask & 1 << n.slot:
+						color = "\c00????00"
+					else:
+						continue
+					if string:
+						string += " "
+					string += color + chr(ord("A")+n.slot)
+			return string
 		if percent is None:
 			return "N/A"
-		return "%d %%" % (percent * 100 / 65536)
+		return "%d %%" % (percent * 100 / 65535)
 
 	@cached
 	def getBool(self):
@@ -122,5 +139,5 @@ class FrontendInfo(Converter, object):
 			num = self.source.slot_number
 			return num is None and -1 or num
 
-	range = 65536
+	range = 65535
 	value = property(getValue)

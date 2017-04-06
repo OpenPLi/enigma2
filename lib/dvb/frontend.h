@@ -69,6 +69,7 @@ public:
 		CUR_VOLTAGE,          // current voltage
 		CUR_TONE,             // current continuous tone
 		SATCR,                // current SatCR
+		DICTION,              // current "diction" (0 = normal, 1 = Unicable, 2 = JESS)
 		NUM_DATA_ENTRIES
 	};
 	Signal1<void,iDVBFrontend*> m_stateChanged;
@@ -78,6 +79,7 @@ private:
 	bool m_enabled;
 	bool m_fbc;
 	eDVBFrontend *m_simulate_fe; // only used to set frontend type in dvb.cpp
+	int m_type;
 	int m_dvbid;
 	int m_slotid;
 	int m_fd;
@@ -85,6 +87,7 @@ private:
 	int m_dvbversion;
 	bool m_rotor_mode;
 	bool m_need_rotor_workaround;
+	bool m_multitype;
 	std::map<fe_delivery_system_t, bool> m_delsys, m_delsys_whitelist;
 	std::string m_filename;
 	char m_description[128];
@@ -114,6 +117,7 @@ private:
 	int tuneLoopInt();
 	void setFrontend(bool recvEvents=true);
 	bool setSecSequencePos(int steps);
+	void calculateSignalPercentage(int signalqualitydb, int &signalquality);
 	void calculateSignalQuality(int snr, int &signalquality, int &signalqualitydb);
 
 	static int PriorityOrder;
@@ -164,6 +168,7 @@ public:
 	const dvb_frontend_info getFrontendInfo() const { return fe_info; }
 	bool is_simulate() const { return m_simulate; }
 	bool is_FBCTuner() { return m_fbc; }
+	void set_FBCTuner(bool yesno) { m_fbc = yesno; }
 	bool getEnabled() { return m_enabled; }
 	void setEnabled(bool enable) { m_enabled = enable; }
 	bool is_multistream();

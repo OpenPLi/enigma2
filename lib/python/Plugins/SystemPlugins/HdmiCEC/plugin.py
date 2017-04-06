@@ -37,7 +37,7 @@ class HdmiCECSetupScreen(Screen, ConfigListScreen):
 
 		self["actions"] = ActionMap(["SetupActions", "ColorActions", "MenuActions"],
 		{
-			"ok": self.keyGo,
+			"ok": self.keyOk,
 			"save": self.keyGo,
 			"cancel": self.keyCancel,
 			"green": self.keyGo,
@@ -69,6 +69,11 @@ class HdmiCECSetupScreen(Screen, ConfigListScreen):
 			self.list.append(getConfigListEntry(_("Wakeup receiver from standby"), config.hdmicec.control_receiver_wakeup))
 			self.list.append(getConfigListEntry(_("Minimum send interval"), config.hdmicec.minimum_send_interval))
 			self.list.append(getConfigListEntry(_("Repeat leave standby messages"), config.hdmicec.repeat_wakeup_timer))
+			self.list.append(getConfigListEntry(_("Detect next boxes before standby"), config.hdmicec.next_boxes_detect))
+			self.list.append(getConfigListEntry(_("Debug to file"), config.hdmicec.debug))
+			self.logpath_entry = getConfigListEntry(_("Select path for logfile"), config.hdmicec.log_path)
+			if config.hdmicec.debug.value != "0":
+				self.list.append(self.logpath_entry)
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
@@ -90,6 +95,13 @@ class HdmiCECSetupScreen(Screen, ConfigListScreen):
 			x[1].cancel()
 		self.close()
 
+	def keyOk(self):
+		currentry = self["config"].getCurrent()
+		if currentry == self.logpath_entry:
+			self.set_path()
+		else:
+			self.keyGo()
+
 	def setFixedAddress(self):
 		import Components.HdmiCec
 		Components.HdmiCec.hdmi_cec.setFixedPhysicalAddress(Components.HdmiCec.hdmi_cec.getPhysicalAddress())
@@ -108,6 +120,19 @@ class HdmiCECSetupScreen(Screen, ConfigListScreen):
 		else:
 			fixedaddresslabel = _("Using fixed address") + ": " + config.hdmicec.fixed_physical_address.value
 		self["fixed_address"].setText(fixedaddresslabel)
+
+	def logPath(self, res):
+		if res is not None:
+			config.hdmicec.log_path.value = res
+
+	def set_path(self):
+		inhibitDirs = ["/autofs", "/bin", "/boot", "/dev", "/etc", "/lib", "/proc", "/sbin", "/sys", "/tmp", "/usr"]
+		from Screens.LocationBox import LocationBox
+		txt = _("Select directory for logfile")
+		self.session.openWithCallback(self.logPath, LocationBox, text=txt, currDir=config.hdmicec.log_path.value,
+				bookmarks=config.hdmicec.bookmarks, autoAdd=False, editDir=True,
+				inhibitDirs=inhibitDirs, minFree=1
+				)
 
 def main(session, **kwargs):
 	session.open(HdmiCECSetupScreen)

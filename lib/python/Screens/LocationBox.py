@@ -192,7 +192,7 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 
 	def showHideRename(self):
 		# Don't allow renaming when filename is empty
-		if self.filename == "":
+		if not self.filename:
 			self["key_yellow"].hide()
 
 	def switchToFileList(self):
@@ -236,7 +236,7 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 			self["booklist"].setList(self.bookmarks)
 
 	def createDir(self):
-		if self["filelist"].current_directory != None:
+		if self["filelist"].current_directory is not None:
 			self.session.openWithCallback(
 				self.createDirCallback,
 				InputBox,

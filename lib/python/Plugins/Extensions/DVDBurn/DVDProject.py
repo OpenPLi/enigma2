@@ -1,5 +1,5 @@
 from Tools.Directories import fileExists
-from Components.config import config, ConfigSubsection, ConfigInteger, ConfigText, ConfigSelection, getConfigListEntry, ConfigSequence, ConfigSubList
+from Components.config import config, ConfigSubsection, ConfigInteger, ConfigText, ConfigSelection, ConfigSequence, ConfigSubList
 import DVDTitle
 import xml.dom.minidom
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_FONTS

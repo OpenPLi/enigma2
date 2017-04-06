@@ -91,7 +91,7 @@ class ServiceInfo(Converter, object):
 				idx = 0
 				while idx < n:
 					i = audio.getTrackInfo(idx)
-					description = i.getDescription();
+					description = i.getDescription()
 					if "AC3" in description or "AC-3" in description or "DTS" in description:
 						return True
 					idx += 1
@@ -127,7 +127,7 @@ class ServiceInfo(Converter, object):
 		elif self.type == self.IS_SD_AND_NOT_WIDESCREEN:
 			return info.getInfo(iServiceInformation.sVideoHeight) < 720 and info.getInfo(iServiceInformation.sAspect) not in WIDESCREEN
 		elif self.type == self.IS_4K:
-			return info.getInfo(iServiceInformation.sVideoHeight) >= 2160
+			return info.getInfo(iServiceInformation.sVideoHeight) >= 2100
 		return False
 
 	boolean = property(getBoolean)

@@ -1,10 +1,8 @@
 import NavigationInstance
-from time import localtime, mktime, gmtime
-from ServiceReference import ServiceReference
-from enigma import iServiceInformation, eServiceCenter, eServiceReference
+from time import localtime, mktime, gmtime, time
+from enigma import iServiceInformation, eServiceCenter, eServiceReference, getBestPlayableServiceReference
 from timer import TimerEntry
 import RecordTimer
-from time import time, localtime
 
 class TimerSanityCheck:
 	def __init__(self, timerlist, newtimer=None):
@@ -48,7 +46,7 @@ class TimerSanityCheck:
 					getUnsignedDataRef2 = self.newtimer.service_ref.ref.getUnsignedData
 					for x in (1, 2, 3, 4):
 						if getUnsignedDataRef1(x) != getUnsignedDataRef2(x):
-							break;
+							break
 					else:
 						return True
 		return False
@@ -187,7 +185,10 @@ class TimerSanityCheck:
 			if event[1] == self.bflag:
 				tunerType = []
 				ref = timer.service_ref and timer.service_ref.ref
-				fakeRecService = NavigationInstance.instance.recordService(timer.service_ref, True)
+				timer_ref = timer.service_ref
+				if ref and ref.flags & eServiceReference.isGroup and timer.isRunning():
+					timer_ref = getBestPlayableServiceReference(timer.service_ref.ref, eServiceReference())
+				fakeRecService = NavigationInstance.instance.recordService(timer_ref, True)
 				if fakeRecService:
 					fakeRecResult = fakeRecService.start(True)
 				else:

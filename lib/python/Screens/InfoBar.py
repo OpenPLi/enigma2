@@ -1,5 +1,4 @@
 from Tools.Profile import profile
-from Tools.BoundFunction import boundFunction
 from enigma import eServiceReference
 
 # workaround for required config entry dependencies.
@@ -119,13 +118,13 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 			from Screens.ChannelSelection import ChannelSelectionRadio
 			self.session.openWithCallback(self.ChannelSelectionRadioClosed, ChannelSelectionRadio, self)
 
-	def toggleTvRadio(self): 
+	def toggleTvRadio(self):
 		if self.radioTV == 1:
 			self.radioTV = 0
-			self.showTv() 
-		else: 
+			self.showTv()
+		else:
 			self.radioTV = 1
-			self.showRadio() 
+			self.showRadio()
 
 	def ChannelSelectionRadioClosed(self, *arg):
 		self.rds_display.show()  # in InfoBarRdsDecoder
@@ -201,7 +200,7 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 		if not config.movielist.stop_service.value:
 			Screens.InfoBar.InfoBar.instance.callServiceStarted()
 		self.session.nav.playService(self.lastservice)
-		config.usage.last_movie_played.value = self.cur_service.toString()
+		config.usage.last_movie_played.value = self.cur_service and self.cur_service.toString() or ""
 		config.usage.last_movie_played.save()
 
 	def standbyCountChanged(self, value):
@@ -253,12 +252,12 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 			self.leavePlayerOnExitCallback(True)
 
 	def leavePlayerOnExitCallback(self, answer):
-		if answer == True:
+		if answer:
 			setResumePoint(self.session)
 			self.handleLeave("quit")
 
 	def hidePipOnExitCallback(self, answer):
-		if answer == True:
+		if answer:
 			self.showPiP()
 
 	def deleteConfirmed(self, answer):

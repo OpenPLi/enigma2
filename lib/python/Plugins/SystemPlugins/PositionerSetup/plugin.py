@@ -1,6 +1,4 @@
-from enigma import eTimer, eDVBSatelliteEquipmentControl, eDVBResourceManager, \
-	eDVBDiseqcCommand, eDVBFrontendParametersSatellite, eDVBFrontendParameters,\
-	iDVBFrontend
+from enigma import eTimer, eDVBSatelliteEquipmentControl, eDVBResourceManager, eDVBDiseqcCommand, eDVBFrontendParametersSatellite, eDVBFrontendParameters, iDVBFrontend
 
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -17,8 +15,7 @@ from Components.ActionMap import NumberActionMap, ActionMap
 from Components.NimManager import nimmanager
 from Components.MenuList import MenuList
 from Components.ScrollLabel import ScrollLabel
-from Components.config import config, ConfigSatlist, ConfigNothing, ConfigSelection, \
-	 ConfigSubsection, ConfigInteger, ConfigFloat, KEY_LEFT, KEY_RIGHT, KEY_0, getConfigListEntry
+from Components.config import config, ConfigSatlist, ConfigNothing, ConfigSelection, ConfigSubsection, ConfigInteger, ConfigFloat, KEY_LEFT, KEY_RIGHT, KEY_0, getConfigListEntry
 from Components.TuneTest import Tuner
 from Components.Pixmap import Pixmap
 from Tools.Transponder import ConvertToHumanReadable
@@ -106,8 +103,14 @@ class PositionerSetup(Screen):
 			del feInfo
 			del service
 			if self.oldref and getCurrentTuner is not None:
-				if getCurrentTuner < 4 and self.feid == getCurrentTuner:
+				if self.feid == getCurrentTuner:
 					self.oldref_stop = True
+				else:
+					for n in nimmanager.nim_slots:
+						if n.config_mode in ("loopthrough", "satposdepends"):
+							root_id = nimmanager.sec.getRoot(n.slot_id, int(n.config.connectedTo.value))
+							if int(n.config.connectedTo.value) == self.feid:
+								self.oldref_stop = True
 				if self.oldref_stop:
 					self.session.nav.stopService() # try to disable foreground service
 					if getCurrentSat is not None and getCurrentSat in self.availablesats:
@@ -125,7 +128,7 @@ class PositionerSetup(Screen):
 						frontendData = feInfo.getAll(True)
 						getCurrentTuner = frontendData and frontendData.get("tuner_number", None)
 						getCurrentSat = cur_pip_info.get('orbital_position', None)
-						if getCurrentTuner is not None and getCurrentTuner < 4 and self.feid == getCurrentTuner:
+						if getCurrentTuner is not None and self.feid == getCurrentTuner:
 							if getCurrentSat is not None and getCurrentSat in self.availablesats:
 								cur = cur_pip_info
 							else:
@@ -254,7 +257,7 @@ class PositionerSetup(Screen):
 
 	def __onClose(self):
 		self.statusTimer.stop()
-		log.close();
+		log.close()
 		self.session.nav.playService(self.oldref)
 
 	def OrbToStr(self, orbpos):

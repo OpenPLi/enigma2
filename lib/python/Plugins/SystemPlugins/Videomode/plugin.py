@@ -2,7 +2,7 @@ from Screens.Screen import Screen
 from Plugins.Plugin import PluginDescriptor
 from Components.SystemInfo import SystemInfo
 from Components.ConfigList import ConfigListScreen
-from Components.config import getConfigListEntry, config, ConfigBoolean, ConfigNothing, ConfigSlider
+from Components.config import getConfigListEntry, config, ConfigBoolean, ConfigNothing
 from Components.Label import Label
 from Components.Sources.StaticText import StaticText
 
@@ -99,6 +99,7 @@ class VideoSetup(Screen, ConfigListScreen):
 					self.list.append(getConfigListEntry(_("Auto scart switching"), config.av.vcrswitch, _("When enabled, your receiver will detect activity on the VCR SCART input.")))
 
 		if level >= 1:
+			self.list.append(getConfigListEntry(_("Audio volume step size"), config.av.volume_stepsize, _("Configure the general audio volume step size (limit 1-10).")))
 			if SystemInfo["CanDownmixAC3"]:
 				self.list.append(getConfigListEntry(_("AC3 downmix"), config.av.downmix_ac3, _("Configure whether multi channel sound tracks should be downmixed to stereo.")))
 			if SystemInfo["CanDownmixDTS"]:
@@ -109,15 +110,34 @@ class VideoSetup(Screen, ConfigListScreen):
 				getConfigListEntry(_("General AC3 delay"), config.av.generalAC3delay, _("Configure the general audio delay of Dolby Digital sound tracks.")),
 				getConfigListEntry(_("General PCM delay"), config.av.generalPCMdelay, _("Configure the general audio delay of stereo sound tracks."))
 			))
+			if SystemInfo["HasMultichannelPCM"]:
+				self.list.append(getConfigListEntry(_("Multichannel PCM"), config.av.multichannel_pcm, _("Configure whether multi channel PCM sound should be enabled.")))
+			if SystemInfo["HasAutoVolume"] or SystemInfo["HasAutoVolumeLevel"]:
+				self.list.append(getConfigListEntry(_("Audio auto volume level"), SystemInfo["HasAutoVolume"] and config.av.autovolume or config.av.autovolumelevel, _("This option configures you can set auto volume level.")))
+			if SystemInfo["Has3DSurround"]:
+				self.list.append(getConfigListEntry(_("3D surround"), config.av.surround_3d, _("This option allows you to enable 3D surround sound.")))
+				if SystemInfo["Has3DSpeaker"] and config.av.surround_3d.value != "none":
+					self.list.append(getConfigListEntry(_("3D surround speaker position"), config.av.speaker_3d, _("This option allows you to change the virtuell loadspeaker position.")))
+			if SystemInfo["Has3DSurroundSpeaker"]:
+				self.list.append(getConfigListEntry(_("3D surround speaker position"), config.av.surround_3d_speaker, _("This option allows you to disable or change the virtuell loadspeaker position.")))
+				if SystemInfo["Has3DSurroundSoftLimiter"] and config.av.surround_3d_speaker.value != "disabled":
+					self.list.append(getConfigListEntry(_("3D surround softlimiter"), config.av.surround_softlimiter_3d, _("This option allows you to enable 3D surround softlimiter.")))
 
 		if SystemInfo["CanChangeOsdAlpha"]:
 			self.list.append(getConfigListEntry(_("OSD transparency"), config.av.osd_alpha, _("Configure the transparency of the OSD.")))
 
 		if not isinstance(config.av.scaler_sharpness, ConfigNothing):
 			self.list.append(getConfigListEntry(_("Scaler sharpness"), config.av.scaler_sharpness, _("Configure the sharpness of the video scaling.")))
-
 		if SystemInfo["HasBypassEdidChecking"]:
 			self.list.append(getConfigListEntry(_("Bypass HDMI EDID checking"), config.av.bypassEdidChecking, _("Configure if the HDMI EDID checking should be bypassed as this might solve issue with some TVs.")))
+		if SystemInfo["HasColorspace"]:
+			self.list.append(getConfigListEntry(_("HDMI Colorspace"), config.av.hdmicolorspace, _("This option allows you can config the Colorspace from Auto to RGB")))
+		if SystemInfo["HasColordepth"]:
+			self.list.append(getConfigListEntry(_("HDMI Colordepth"), config.av.hdmicolordepth, _("This option allows you can config the Colordepth for UHD")))
+		if SystemInfo["HasColorimetry"]:
+			self.list.append(getConfigListEntry(_("HDMI Colorimetry"), config.av.hdmicolorimetry, _("This option allows you can config the Colorimetry for HDR.")))
+		if SystemInfo["HasHDMIpreemphasis"]:
+			self.list.append(getConfigListEntry(_("Use HDMI pre-emphasis"), config.av.hdmipreemphasis, _("This option can be useful for long HDMI cables.")))
 
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
@@ -243,5 +263,5 @@ def Plugins(**kwargs):
 		PluginDescriptor(name=_("Video setup"), description=_("Advanced video setup"), where = PluginDescriptor.WHERE_MENU, needsRestart = False, fnc=startSetup)
 	]
 	if config.misc.videowizardenabled.value:
-		list.append(PluginDescriptor(name=_("Video wizard"), where = PluginDescriptor.WHERE_WIZARD, needsRestart = False, fnc=(0, VideoWizard)))
+		list.append(PluginDescriptor(name=_("Video wizard"), where = PluginDescriptor.WHERE_WIZARD, needsRestart = False, fnc=(20, VideoWizard)))
 	return list

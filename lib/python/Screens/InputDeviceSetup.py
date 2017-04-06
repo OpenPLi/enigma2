@@ -200,16 +200,16 @@ class InputDeviceSetup(Screen, ConfigListScreen):
 		self.list = [ ]
 		label = _("Change repeat and delay settings?")
 		cmd = "self.enableEntry = getConfigListEntry(label, config.inputDevices." + self.inputDevice + ".enabled)"
-		exec (cmd)
+		exec cmd
 		label = _("Interval between keys when repeating:")
 		cmd = "self.repeatEntry = getConfigListEntry(label, config.inputDevices." + self.inputDevice + ".repeat)"
-		exec (cmd)
+		exec cmd
 		label = _("Delay before key repeat starts:")
 		cmd = "self.delayEntry = getConfigListEntry(label, config.inputDevices." + self.inputDevice + ".delay)"
-		exec (cmd)
+		exec cmd
 		label = _("Devicename:")
 		cmd = "self.nameEntry = getConfigListEntry(label, config.inputDevices." + self.inputDevice + ".name)"
-		exec (cmd)
+		exec cmd
 		if self.enableEntry:
 			if isinstance(self.enableEntry[1], ConfigYesNo):
 				self.enableConfigEntry = self.enableEntry[1]
@@ -260,7 +260,7 @@ class InputDeviceSetup(Screen, ConfigListScreen):
 		else:
 			self.nameEntry[1].setValue(iInputDevices.getDeviceAttribute(self.inputDevice, 'name'))
 			cmd = "config.inputDevices." + self.inputDevice + ".name.save()"
-			exec (cmd)
+			exec cmd
 			self.keySave()
 
 	def apply(self):
@@ -298,20 +298,20 @@ class InputDeviceSetup(Screen, ConfigListScreen):
 class RemoteControlType(Screen, ConfigListScreen):
 	rcList = [
 			("0", _("Default")),
-			("11", _("et9200/9500/6500")),
-			("13", _("et4000")),
-			("7", _("et5000/6000")),
-			("9", _("et8000/et10000")),
 			("4", _("DMM normal")),
 			("5", _("et9000/et9100")),
 			("6", _("DMM advanced")),
-			("14", _("xp1000")),
+			("7", _("et5000/6000")),
 			("8", _("VU+")),
-			("18", _("F1/F3/F4")),
-			("16", _("HD1100/HD1200/HD1265/et7x00/et8500/et7000mini")),
+			("9", _("et8000/et10000")),
+			("11", _("et9200/9500/6500")),
+			("13", _("et4000")),
+			("14", _("xp1000")),
+			("16", _("HD11/HD51/HD1100/HD1200/HD1265/HD1500/HD500C/HD530C/VS1000/VS1500/et7x00/et8500/et7000mini")),
+			("18", _("F1/F3/F4/F4-TURBO")),
 			("19", _("HD2400")),
 			("20", _("Zgemma Star S/2S/H1/H2")),
-			("21", _("Zgemma H.S/H.2S/H.2H/H5"))
+			("21", _("Zgemma H.S/H.2S/H.2H/H5/H7"))
 		]
 
 	defaultRcList = [
@@ -328,7 +328,14 @@ class RemoteControlType(Screen, ConfigListScreen):
 			("formuler1", 18),
 			("formuler3", 18),
 			("formuler4", 18),
+			("formuler4turbo", 18),
 			("xp1000", 14),
+			("vs1000", 16),
+			("vs1500", 16),
+			("hd500c", 16),
+			("hd530c", 16),
+			("hd11", 16),
+			("hd51", 16),
 			("hd1200", 16),
 			("hd1265", 16),
 			("hd1100", 16),
@@ -339,12 +346,14 @@ class RemoteControlType(Screen, ConfigListScreen):
 			("sh1", 20),
 			("h3", 21),
 			("h5", 21),
+			("h7", 21),
 			("et7000mini", 16)
 		]
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.skinName = ["RemoteControlType", "Setup" ]
+		self.setTitle(_("Remote control type setup"))
 
 		self["actions"] = ActionMap(["SetupActions"],
 		{
@@ -363,7 +372,7 @@ class RemoteControlType(Screen, ConfigListScreen):
 		self.list.append(getConfigListEntry(_("Remote control type"), self.rctype))
 		self["config"].list = self.list
 
-		self.defaultRcType = None
+		self.defaultRcType = 0
 		self.getDefaultRcType()
 
 	def getDefaultRcType(self):
@@ -372,6 +381,8 @@ class RemoteControlType(Screen, ConfigListScreen):
 			if x[0] in data:
 				self.defaultRcType = x[1]
 				break
+		if self.defaultRcType == 0:
+			self.defaultRcType = iRcTypeControl.readRcType()
 
 	def setDefaultRcType(self):
 		iRcTypeControl.writeRcType(self.defaultRcType)

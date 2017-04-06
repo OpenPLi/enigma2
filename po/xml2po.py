@@ -46,7 +46,7 @@ if not no_comments:
 for arg in sys.argv[1:]:
 	if os.path.isdir(arg):
 		for file in os.listdir(arg):
-			if (file.endswith(".xml")):
+			if file.endswith(".xml"):
 				parser.parse(os.path.join(arg, file))
 	else:
 		parser.parse(arg)

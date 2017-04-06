@@ -7,14 +7,12 @@ from Components.Pixmap import Pixmap
 from Components.Label import Label
 from Components.EpgList import EPGList, EPG_TYPE_SINGLE, EPG_TYPE_SIMILAR, EPG_TYPE_MULTI
 from Components.ActionMap import ActionMap
-from Components.TimerSanityCheck import TimerSanityCheck
 from Components.UsageConfig import preferredTimerPath
 from Components.Sources.ServiceEvent import ServiceEvent
 from Components.Sources.Event import Event
 from Screens.ChoiceBox import ChoiceBox
 from Screens.TimerEdit import TimerSanityConflict, TimerEditList
 from Screens.EventView import EventViewSimple
-from Screens.MessageBox import MessageBox
 from TimeDateInput import TimeDateInput
 from enigma import eServiceReference
 from RecordTimer import RecordTimerEntry, parseEvent, AFTEREVENT
@@ -45,7 +43,7 @@ class EPGSelection(Screen):
 		self["Service"] = ServiceEvent()
 		self["Event"] = Event()
 		self.session = session
-		if isinstance(service, str) and eventid != None:
+		if isinstance(service, str) and eventid is not None:
 			self.type = EPG_TYPE_SIMILAR
 			self.setTitle(_("Similar EPG"))
 			self["key_yellow"] = Button()
@@ -142,7 +140,7 @@ class EPGSelection(Screen):
 			menu = [(p.name, boundFunction(self.runPlugin, p)) for p in plugins.getPlugins(where = PluginDescriptor.WHERE_EVENTINFO) \
 				if 'selectedevent' in p.__call__.func_code.co_varnames]
 			if menu:
-				text += _(": %s") % event.getEventName()
+				text += ": %s" % event.getEventName()
 		if self.type == EPG_TYPE_MULTI:
 			menu.append((_("Goto specific date/time"),self.enterDateTime))
 		menu.append((_("Timer Overview"), self.openTimerOverview))

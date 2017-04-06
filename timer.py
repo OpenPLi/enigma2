@@ -1,5 +1,5 @@
 from bisect import insort
-from time import strftime, time, localtime, mktime
+from time import time, localtime, mktime
 from enigma import eTimer
 import datetime
 
@@ -56,7 +56,7 @@ class TimerEntry:
 
 	# update self.begin and self.end according to the self.repeated-flags
 	def processRepeated(self, findRunningEvent=True, findNextEvent=False):
-		if (self.repeated != 0):
+		if self.repeated != 0:
 			now = int(time()) + 1
 			if findNextEvent:
 				now = self.end + 120
@@ -71,11 +71,11 @@ class TimerEntry:
 			day = []
 			flags = self.repeated
 			for x in (0, 1, 2, 3, 4, 5, 6):
-				if (flags & 1 == 1):
+				if flags & 1 == 1:
 					day.append(0)
 				else:
 					day.append(1)
-				flags = flags >> 1
+				flags >>= 1
 
 			# if day is NOT in the list of repeated days
 			# OR if the day IS in the list of the repeated days, check, if event is currently running... then if findRunningEvent is false, go to the next event
@@ -177,10 +177,12 @@ class Timer:
 		# don't go trough waiting/running/end-states, but sort it
 		# right into the processedTimers.
 		if entry.shouldSkip() or entry.state == TimerEntry.StateEnded or (entry.state == TimerEntry.StateWaiting and entry.disabled):
-			insort(self.processed_timers, entry)
+			if entry not in self.processed_timers:
+				insort(self.processed_timers, entry)
 			entry.state = TimerEntry.StateEnded
 		else:
-			insort(self.timer_list, entry)
+			if entry not in self.timer_list:
+				insort(self.timer_list, entry)
 			if not noRecalc:
 				self.calcNextActivation()
 
@@ -245,7 +247,8 @@ class Timer:
 		print "time changed"
 		timer.timeChanged()
 		if timer.state == TimerEntry.StateEnded:
-			self.processed_timers.remove(timer)
+			if timer in self.processed_timers:
+				self.processed_timers.remove(timer)
 		else:
 			try:
 				self.timer_list.remove(timer)
@@ -282,7 +285,8 @@ class Timer:
 				w.state = TimerEntry.StateWaiting
 				self.addTimerEntry(w)
 			else:
-				insort(self.processed_timers, w)
+				if w not in self.processed_timers:
+					insort(self.processed_timers, w)
 
 		self.stateChanged(w)
 

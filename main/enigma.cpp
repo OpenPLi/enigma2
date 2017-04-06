@@ -9,6 +9,7 @@
 #include <lib/actions/action.h>
 #include <lib/driver/rc.h>
 #include <lib/base/ioprio.h>
+#include <lib/base/e2avahi.h>
 #include <lib/base/ebase.h>
 #include <lib/base/eenv.h>
 #include <lib/base/eerror.h>
@@ -29,6 +30,7 @@
 #include <lib/python/connections.h>
 #include <lib/python/python.h>
 #include <lib/python/pythonconfig.h>
+#include <lib/service/servicepeer.h>
 
 #include "bsod.h"
 #include "version_info.h"
@@ -95,6 +97,9 @@ void keyEvent(const eRCKey &key)
 #include <lib/dvb/dvbtime.h>
 #include <lib/dvb/epgcache.h>
 
+/* Defined in eerror.cpp */
+void setDebugTime(bool enable);
+
 class eMain: public eApplication, public Object
 {
 	eInit init;
@@ -108,6 +113,8 @@ class eMain: public eApplication, public Object
 public:
 	eMain()
 	{
+		e2avahi_init(this);
+		init_servicepeer();
 		init.setRunlevel(eAutoInitNumbers::main);
 		/* TODO: put into init */
 		m_dvbdb = new eDVBDB();
@@ -121,6 +128,8 @@ public:
 	{
 		m_dvbdb->saveServicelist();
 		m_mgr->releaseCachedChannel();
+		done_servicepeer();
+		e2avahi_close();
 	}
 };
 
@@ -185,16 +194,17 @@ int main(int argc, char **argv)
 	printf("PYTHONPATH: %s\n", getenv("PYTHONPATH"));
 	printf("DVB_API_VERSION %d DVB_API_VERSION_MINOR %d\n", DVB_API_VERSION, DVB_API_VERSION_MINOR);
 
-	// get enigma2 debug level
+	// get enigma2 debug level settings
 	debugLvl = getenv("ENIGMA_DEBUG_LVL") ? atoi(getenv("ENIGMA_DEBUG_LVL")) : 3;
 	if (debugLvl < 0)
 		debugLvl = 0;
-	printf("ENIGMA2_DEBUG settings: Level=%d\n", debugLvl);
+	printf("ENIGMA_DEBUG_LVL=%d\n", debugLvl);
+	if (getenv("ENIGMA_DEBUG_TIME"))
+		setDebugTime(atoi(getenv("ENIGMA_DEBUG_TIME")) != 0);
 
 	ePython python;
 	eMain main;
 
-#if 1
 	ePtr<gMainDC> my_dc;
 	gMainDC::getInstance(my_dc);
 
@@ -231,7 +241,6 @@ int main(int argc, char **argv)
 	dsk_lcd.setDC(my_lcd_dc);
 
 	dsk.setBackgroundColor(gRGB(0,0,0,0xFF));
-#endif
 
 		/* redrawing is done in an idle-timer, so we have to set the context */
 	dsk.setRedrawTask(main);

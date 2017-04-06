@@ -5,6 +5,7 @@ from Tools.Alternatives import GetWithAlternative
 from Tools.Directories import pathExists, SCOPE_SKIN_IMAGE, SCOPE_CURRENT_SKIN, resolveFilename
 from Components.Harddisk import harddiskmanager
 from ServiceReference import ServiceReference
+from Components.config import config
 
 searchPaths = []
 lastPiconPath = None
@@ -66,10 +67,15 @@ def getPiconName(serviceName):
 	pngname = findPicon(sname)
 	if not pngname:
 		fields = sname.split('_', 3)
-		if len(fields) > 2 and fields[2] != '2':
-			#fallback to 1 for tv services with nonstandard servicetypes
-			fields[2] = '1'
-			pngname = findPicon('_'.join(fields))
+		if len(fields) > 2:
+			if fields[0] != '1':
+				#fallback to 1 for other reftypes
+				fields[0] = '1'
+				pngname = findPicon('_'.join(fields))
+			if not pngname and fields[2] != '2':
+				#fallback to 1 for tv services with nonstandard servicetypes
+				fields[2] = '1'
+				pngname = findPicon('_'.join(fields))
 	if not pngname: # picon by channel name
 		name = ServiceReference(serviceName).getServiceName()
 		name = unicodedata.normalize('NFKD', unicode(name, 'utf_8', errors='ignore')).encode('ASCII', 'ignore')
@@ -87,6 +93,7 @@ class Picon(Renderer):
 		self.lastPath = None
 		pngname = findPicon("picon_default")
 		self.defaultpngname = None
+		self.showPicon = True
 		if not pngname:
 			tmp = resolveFilename(SCOPE_CURRENT_SKIN, "picon_default.png")
 			if pathExists(tmp):
@@ -110,6 +117,9 @@ class Picon(Renderer):
 			if attrib == "path":
 				self.addPath(value)
 				attribs.remove((attrib,value))
+			elif attrib == "isFrontDisplayPicon":
+				self.showPicon = value == "0"
+				attribs.remove((attrib,value))
 		self.skinAttributes = attribs
 		return Renderer.applySkin(self, desktop, parent)
 
@@ -117,19 +127,22 @@ class Picon(Renderer):
 
 	def changed(self, what):
 		if self.instance:
-			pngname = ""
-			if what[0] != self.CHANGED_CLEAR:
-				pngname = getPiconName(self.source.text)
-			if not pngname: # no picon for service found
-				pngname = self.defaultpngname
-			if self.pngname != pngname:
-				if pngname:
-					self.instance.setScale(1)
-					self.instance.setPixmapFromFile(pngname)
-					self.instance.show()
-				else:
-					self.instance.hide()
-				self.pngname = pngname
+			if self.showPicon or config.usage.show_picon_in_display.value:
+				pngname = ""
+				if what[0] != self.CHANGED_CLEAR:
+					pngname = getPiconName(self.source.text)
+				if not pngname: # no picon for service found
+					pngname = self.defaultpngname
+				if self.pngname != pngname:
+					if pngname:
+						self.instance.setScale(1)
+						self.instance.setPixmapFromFile(pngname)
+						self.instance.show()
+					else:
+						self.instance.hide()
+					self.pngname = pngname
+			elif self.visible:
+				self.instance.hide()
 
 harddiskmanager.on_partition_list_change.append(onPartitionChange)
 initPiconPaths()

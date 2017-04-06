@@ -92,16 +92,18 @@ class GetEcmInfo:
 					if ecm[1].startswith('SysID'):
 						info['prov'] = ecm[1].strip()[6:]
 					if info['response'] and 'CaID 0x' in ecm[0] and 'pid 0x' in ecm[0]:
-						self.textvalue = self.textvalue + " (0.%ss)" % info['response']
+						self.textvalue += " (0.%ss)" % info['response']
 						info['caid'] = ecm[0][ecm[0].find('CaID 0x')+7:ecm[0].find(',')]
 						info['pid'] = ecm[0][ecm[0].find('pid 0x')+6:ecm[0].find(' =')]
 						info['provid'] = info.get('prov', '0')[:4]
 				else:
 					source = info.get('source', None)
 					if source:
-						# MGcam
-						info['caid'] = info['caid'][2:]
-						info['pid'] = info['pid'][2:]
+						# wicardd - type 2 / mgcamd
+						caid = info.get('caid', None)
+						if caid:
+							info['caid'] = info['caid'][2:]
+							info['pid'] = info['pid'][2:]
 						info['provid'] = info['prov'][2:]
 						time = ""
 						for line in ecm:
@@ -123,7 +125,7 @@ class GetEcmInfo:
 						else:
 							response = info.get('response time', None)
 							if response:
-								# wicardd
+								# wicardd - type 1
 								response = response.split(' ')
 								self.textvalue = "%s (%ss)" % (response[4], float(response[0])/1000)
 							else:

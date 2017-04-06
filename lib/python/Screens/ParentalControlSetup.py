@@ -1,16 +1,12 @@
 from Screen import Screen
 from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import NumberActionMap
-from Components.config import config, getConfigListEntry, ConfigNothing, NoSave, ConfigPIN, configfile
+from Components.config import config, getConfigListEntry, ConfigNothing, NoSave, configfile
 
 from Components.Sources.StaticText import StaticText
-from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
 from Screens.InputBox import PinInput
-from Screens.ChannelSelection import service_types_tv
 from Tools.BoundFunction import boundFunction
-from enigma import eServiceCenter, eTimer, eServiceReference
-from operator import itemgetter
 
 class ProtectedScreen:
 	def __init__(self):

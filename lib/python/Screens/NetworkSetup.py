@@ -1,26 +1,22 @@
 import os
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
-from Screens.InputBox import InputBox
-from Screens.Standby import *
-from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Screens.HelpMenu import HelpableScreen
 from Components.Network import iNetwork
 from Components.Sources.StaticText import StaticText
 from Components.Sources.Boolean import Boolean
 from Components.Sources.List import List
-from Components.Label import Label,MultiColorLabel
-from Components.Pixmap import Pixmap,MultiPixmap
+from Components.Label import Label, MultiColorLabel
+from Components.Pixmap import Pixmap, MultiPixmap
 from Components.MenuList import MenuList
-from Components.config import config, ConfigYesNo, ConfigIP, NoSave, ConfigText, ConfigPassword, ConfigSelection, getConfigListEntry, ConfigNothing, ConfigBoolean
+from Components.config import config, ConfigYesNo, ConfigIP, NoSave, ConfigText, ConfigPassword, ConfigSelection, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
 from Components.PluginComponent import plugins
-from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
 from Components.ActionMap import ActionMap, NumberActionMap, HelpableActionMap
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_SKIN
 from Tools.LoadPixmap import LoadPixmap
 from Plugins.Plugin import PluginDescriptor
-from enigma import eTimer, ePoint, eSize, RT_HALIGN_LEFT, eListboxPythonMultiContent, gFont
+from enigma import eTimer
 
 class NetworkAdapterSelection(Screen,HelpableScreen):
 	def __init__(self, session):
@@ -412,7 +408,8 @@ class AdapterSetup(Screen, ConfigListScreen, HelpableScreen):
 			self.encryptionlist.append(("Unencrypted", _("Unencrypted")))
 			self.encryptionlist.append(("WEP", _("WEP")))
 			self.encryptionlist.append(("WPA", _("WPA")))
-			self.encryptionlist.append(("WPA/WPA2", _("WPA or WPA2")))
+			if not os.path.exists("/tmp/bcm/" + self.iface):
+				self.encryptionlist.append(("WPA/WPA2", _("WPA or WPA2")))
 			self.encryptionlist.append(("WPA2", _("WPA2")))
 			self.weplist = []
 			self.weplist.append("ASCII")
@@ -463,24 +460,26 @@ class AdapterSetup(Screen, ConfigListScreen, HelpableScreen):
 			for p in plugins.getPlugins(PluginDescriptor.WHERE_NETWORKSETUP):
 				callFnc = p.__call__["ifaceSupported"](self.iface)
 				if callFnc is not None:
-					if p.__call__.has_key("WlanPluginEntry"): # internally used only for WLAN Plugin
+					if "WlanPluginEntry" in p.__call__: # internally used only for WLAN Plugin
 						self.extended = callFnc
-						if p.__call__.has_key("configStrings"):
+						if "configStrings" in p.__call__:
 							self.configStrings = p.__call__["configStrings"]
-
-						self.hiddenSSID = getConfigListEntry(_("Hidden network"), config.plugins.wlan.hiddenessid)
-						self.list.append(self.hiddenSSID)
+						isExistBcmWifi = os.path.exists("/tmp/bcm/" + self.iface)
+						if not isExistBcmWifi:
+							self.hiddenSSID = getConfigListEntry(_("Hidden network"), config.plugins.wlan.hiddenessid)
+							self.list.append(self.hiddenSSID)
 						self.wlanSSID = getConfigListEntry(_("Network name (SSID)"), config.plugins.wlan.essid)
 						self.list.append(self.wlanSSID)
 						self.encryption = getConfigListEntry(_("Encryption"), config.plugins.wlan.encryption)
 						self.list.append(self.encryption)
-
-						self.encryptionType = getConfigListEntry(_("Encryption key type"), config.plugins.wlan.wepkeytype)
+						if not isExistBcmWifi:
+							self.encryptionType = getConfigListEntry(_("Encryption key type"), config.plugins.wlan.wepkeytype)
 						self.encryptionKey = getConfigListEntry(_("Encryption key"), config.plugins.wlan.psk)
 
 						if config.plugins.wlan.encryption.value != "Unencrypted":
 							if config.plugins.wlan.encryption.value == 'WEP':
-								self.list.append(self.encryptionType)
+								if not isExistBcmWifi:
+									self.list.append(self.encryptionType)
 							self.list.append(self.encryptionKey)
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
@@ -518,7 +517,7 @@ class AdapterSetup(Screen, ConfigListScreen, HelpableScreen):
 				self.close('cancel')
 
 	def keySaveConfirm(self, ret = False):
-		if (ret == True):
+		if ret:
 			num_configured_if = len(iNetwork.getConfiguredAdapters())
 			if num_configured_if >= 1:
 				if self.iface in iNetwork.getConfiguredAdapters():
@@ -546,7 +545,7 @@ class AdapterSetup(Screen, ConfigListScreen, HelpableScreen):
 			self.applyConfig(True)
 
 	def applyConfig(self, ret = False):
-		if (ret == True):
+		if ret:
 			self.applyConfigRef = None
 			iNetwork.setAdapterAttribute(self.iface, "up", self.activateInterfaceEntry.value)
 			iNetwork.setAdapterAttribute(self.iface, "dhcp", self.dhcpConfigEntry.value)
@@ -557,7 +556,7 @@ class AdapterSetup(Screen, ConfigListScreen, HelpableScreen):
 			else:
 				iNetwork.removeAdapterAttribute(self.iface, "gateway")
 
-			if (self.extended is not None and self.configStrings is not None):
+			if self.extended is not None and self.configStrings is not None:
 				iNetwork.setAdapterAttribute(self.iface, "configStrings", self.configStrings(self.iface))
 				self.ws.writeConfig(self.iface)
 
@@ -847,16 +846,16 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 			callFnc = p.__call__["ifaceSupported"](self.iface)
 			if callFnc is not None:
 				self.extended = callFnc
-				if p.__call__.has_key("WlanPluginEntry"): # internally used only for WLAN Plugin
+				if "WlanPluginEntry" in p.__call__: # internally used only for WLAN Plugin
 					menu.append((_("Scan wireless networks"), "scanwlan"))
 					if iNetwork.getAdapterAttribute(self.iface, "up"):
 						menu.append((_("Show WLAN status"), "wlanstatus"))
 				else:
-					if p.__call__.has_key("menuEntryName"):
+					if "menuEntryName" in p.__call__:
 						menuEntryName = p.__call__["menuEntryName"](self.iface)
 					else:
 						menuEntryName = _('Extended setup...')
-					if p.__call__.has_key("menuEntryDescription"):
+					if "menuEntryDescription" in p.__call__:
 						menuEntryDescription = p.__call__["menuEntryDescription"](self.iface)
 					else:
 						menuEntryDescription = _('Extended network setup plugin...')
@@ -900,7 +899,7 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 			self.updateStatusbar()
 
 	def restartLan(self, ret = False):
-		if (ret == True):
+		if ret:
 			iNetwork.restartNetwork(self.restartLanDataAvail)
 			self.restartLanRef = self.session.openWithCallback(self.restartfinishedCB, MessageBox, _("Please wait while your network is restarting..."), type = MessageBox.TYPE_INFO, enable_input = False)
 
@@ -926,7 +925,7 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 					self.LinkState = True
 				else:
 					self.LinkState = False
-		if self.LinkState == True:
+		if self.LinkState:
 			iNetwork.checkNetworkState(self.checkNetworkCB)
 		else:
 			self["statuspic"].setPixmapNum(1)
@@ -1186,11 +1185,11 @@ class NetworkAdapterTest(Screen):
 	def KeyGreenRestart(self):
 		self.nextstep = 0
 		self.layoutFinished()
-		self["Adapter"].setText((""))
-		self["Network"].setText((""))
-		self["Dhcp"].setText((""))
-		self["IP"].setText((""))
-		self["DNS"].setText((""))
+		self["Adapter"].setText("")
+		self["Network"].setText("")
+		self["Dhcp"].setText("")
+		self["IP"].setText("")
+		self["DNS"].setText("")
 		self["AdapterInfo_Text"].setForegroundColorNum(0)
 		self["NetworkInfo_Text"].setForegroundColorNum(0)
 		self["DhcpInfo_Text"].setForegroundColorNum(0)

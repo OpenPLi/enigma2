@@ -9,7 +9,7 @@ class Keyboard:
 		self.kpath = eEnv.resolve('${datadir}/keymaps')
 		eq = re.compile('^\s*(\w+)\s*=\s*(.*)\s*$')
 		for keymapfile in os.listdir(self.kpath):
-			if (keymapfile.endswith(".info")):
+			if keymapfile.endswith(".info"):
 				mapfile = None
 				mapname = None
 				for line in open(os.path.join(self.kpath, keymapfile)):

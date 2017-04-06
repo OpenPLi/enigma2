@@ -11,7 +11,7 @@ class ConfigList(HTMLComponent, GUIComponent, object):
 	def __init__(self, list, session = None):
 		GUIComponent.__init__(self)
 		self.l = eListboxPythonConfigContent()
-		seperation, = skin.parameters.get("ConfigListSeperator", (200, ))
+		seperation = skin.parameters.get("ConfigListSeperator", 200)
 		self.l.setSeperation(seperation)
 		self.timer = eTimer()
 		self.list = list
@@ -188,20 +188,20 @@ class ConfigListScreen:
 	def handleInputHelpers(self):
 		if self["config"].getCurrent() is not None:
 			if isinstance(self["config"].getCurrent()[1], ConfigText) or isinstance(self["config"].getCurrent()[1], ConfigPassword):
-				if self.has_key("VKeyIcon"):
+				if "VKeyIcon" in self:
 					self["VirtualKB"].setEnabled(True)
 					self["VKeyIcon"].boolean = True
-				if self.has_key("HelpWindow"):
+				if "HelpWindow" in self:
 					if self["config"].getCurrent()[1].help_window.instance is not None:
 						helpwindowpos = self["HelpWindow"].getPosition()
 						from enigma import ePoint
 						self["config"].getCurrent()[1].help_window.instance.move(ePoint(helpwindowpos[0],helpwindowpos[1]))
 			else:
-				if self.has_key("VKeyIcon"):
+				if "VKeyIcon" in self:
 					self["VirtualKB"].setEnabled(False)
 					self["VKeyIcon"].boolean = False
 		else:
-			if self.has_key("VKeyIcon"):
+			if "VKeyIcon" in self:
 				self["VirtualKB"].setEnabled(False)
 				self["VKeyIcon"].boolean = False
 

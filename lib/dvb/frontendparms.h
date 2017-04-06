@@ -6,6 +6,7 @@
 #include <dvbsi++/satellite_delivery_system_descriptor.h>
 #include <dvbsi++/cable_delivery_system_descriptor.h>
 #include <dvbsi++/terrestrial_delivery_system_descriptor.h>
+#include <dvbsi++/t2_delivery_system_descriptor.h>
 
 #include <lib/python/swig.h>
 #include <lib/dvb/idvb.h>
@@ -67,7 +68,7 @@ struct eDVBFrontendParametersCable
 	 * The values are the same as those in eDVBFrontendParametersSatellite.
 	 */
 	enum {
-		FEC_Auto=0, FEC_1_2=1, FEC_2_3=2, FEC_3_4=3, FEC_5_6=4, FEC_7_8=5, FEC_8_9=6, FEC_3_5=7, FEC_4_5=8, FEC_9_10=9, FEC_None=15
+		FEC_Auto=0, FEC_1_2=1, FEC_2_3=2, FEC_3_4=3, FEC_5_6=4, FEC_7_8=5, FEC_8_9=6, FEC_3_5=7, FEC_4_5=8, FEC_9_10=9, FEC_6_7=10, FEC_None=15
 	};
 
 	enum {
@@ -87,6 +88,7 @@ struct eDVBFrontendParametersTerrestrial
 {
 #ifndef SWIG
 	void set(const TerrestrialDeliverySystemDescriptor  &);
+	void set(const T2DeliverySystemDescriptor &);
 #endif
 	enum {
 		Bandwidth_8MHz, Bandwidth_7MHz, Bandwidth_6MHz, Bandwidth_Auto, Bandwidth_5MHz, Bandwidth_1_712MHz, Bandwidth_10MHz

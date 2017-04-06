@@ -2,7 +2,7 @@ from Screens.Screen import Screen
 from Screens.LocationBox import MovieLocationBox, TimeshiftLocationBox
 from Screens.MessageBox import MessageBox
 from Components.Label import Label
-from Components.config import config, ConfigSelection, getConfigListEntry, configfile
+from Components.config import config, ConfigSelection, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import ActionMap
 from Tools.Directories import fileExists
@@ -37,16 +37,16 @@ class RecordPathsSettings(Screen,ConfigListScreen):
 		}, -2)
 
 	def checkReadWriteDir(self, configele):
-		print "checkReadWrite: ", configele.value
-		if configele.value in [x[0] for x in self.styles] or fileExists(configele.value, "w"):
-			configele.last_value = configele.value
+		value = configele.value
+		print "checkReadWrite: ", value
+		if not value or value in [x[0] for x in self.styles] or fileExists(value, "w"):
+			configele.last_value = value
 			return True
 		else:
-			dir = configele.value
 			configele.value = configele.last_value
 			self.session.open(
 				MessageBox,
-				_("The directory %s is not writable.\nMake sure you select a writable directory instead.")%dir,
+				_("The directory %s is not writable.\nMake sure you select a writable directory instead.") % value,
 				type = MessageBox.TYPE_ERROR
 				)
 			return False
@@ -56,11 +56,11 @@ class RecordPathsSettings(Screen,ConfigListScreen):
 		styles_keys = [x[0] for x in self.styles]
 		tmp = config.movielist.videodirs.value
 		default = config.usage.default_path.value
-		if default not in tmp:
+		if default and default not in tmp:
 			tmp = tmp[:]
 			tmp.append(default)
 		print "DefaultPath: ", default, tmp
-		self.default_dirname = ConfigSelection(default = default, choices = tmp)
+		self.default_dirname = ConfigSelection(default = default, choices = [("", _("<Default movie location>"))] + tmp)
 		tmp = config.movielist.videodirs.value
 		default = config.usage.timer_path.value
 		if default not in tmp and default not in styles_keys:
@@ -149,10 +149,10 @@ class RecordPathsSettings(Screen,ConfigListScreen):
 				styles_keys = [x[0] for x in self.styles]
 				tmp = config.movielist.videodirs.value
 				default = self.default_dirname.value
-				if default not in tmp:
+				if default and default not in tmp:
 					tmp = tmp[:]
 					tmp.append(default)
-				self.default_dirname.setChoices(tmp, default=default)
+				self.default_dirname.setChoices([("", _("<Default movie location>"))] + tmp, default=default)
 				tmp = config.movielist.videodirs.value
 				default = self.timer_dirname.value
 				if default not in tmp and default not in styles_keys:

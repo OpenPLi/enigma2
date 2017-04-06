@@ -44,7 +44,7 @@ eDVBAllocatedFrontend::~eDVBAllocatedFrontend()
 	m_fe->dec_use();
 
 	if (m_fe->m_frontend->is_FBCTuner() && m_fbcmng)
-		m_fbcmng->unlink(m_fe);
+		m_fbcmng->Unlink(m_fe);
 }
 
 DEFINE_REF(eDVBAllocatedDemux);
@@ -491,7 +491,7 @@ void *eDVBUsbAdapter::vtunerPump()
 		unsigned char pad[64]; /* nobody knows the much data the driver will try to copy into our struct, add some padding to be sure */
 	};
 
-#define DEMUX_BUFFER_SIZE (8 * ((188 / 4) * 4096)) /* 1.5MB */
+#define DEMUX_BUFFER_SIZE (16 * 1024 * 188 ) /* 3 MB */
 	ioctl(demuxFd, DMX_SET_BUFFER_SIZE, DEMUX_BUFFER_SIZE);
 
 	while (running)
@@ -821,23 +821,37 @@ RESULT eDVBResourceManager::allocateFrontend(ePtr<eDVBAllocatedFrontend> &fe, eP
 {
 	eSmartPtrList<eDVBRegisteredFrontend> &frontends = simulate ? m_simulate_frontend : m_frontend;
 	eDVBRegisteredFrontend *best, *fbc_fe, *best_fbc_fe;
-	int bestval, foundone, check_fbc_linked, c;
+	int bestval, foundone, current_fbc_setid, fbc_setid, c;
+	bool check_fbc_leaf_linkable;
 
 	fbc_fe  = NULL;
 	best_fbc_fe = NULL;
 	best = NULL;
 	bestval = 0;
 	foundone = 0;
-	check_fbc_linked = 0;
+	check_fbc_leaf_linkable = false;
+	current_fbc_setid = -1;
 
 	for (eSmartPtrList<eDVBRegisteredFrontend>::iterator i(frontends.begin()); i != frontends.end(); ++i)
 	{
 		fbc_fe = NULL;
 
-		if (!check_fbc_linked && i->m_frontend->is_FBCTuner() && m_fbcmng->canLink(*i))
+		if (i->m_frontend->is_FBCTuner() && m_fbcmng->CanLink(*i))
 		{
-			check_fbc_linked = 1;
-			c = m_fbcmng->isCompatibleWith(feparm, *i, fbc_fe, simulate);
+			fbc_setid = m_fbcmng->GetFBCSetID(i->m_frontend->getSlotID());
+
+			if (fbc_setid != current_fbc_setid)
+			{
+				current_fbc_setid = fbc_setid;
+				check_fbc_leaf_linkable = false;
+			}
+
+			if (!check_fbc_leaf_linkable)
+			{
+				c = m_fbcmng->IsCompatibleWith(feparm, *i, fbc_fe, simulate);
+				check_fbc_leaf_linkable = true;
+				//eDebug("[eDVBResourceManager::allocateFrontend] m_fbcmng->isCompatibleWith slotid : %p (%d), fbc_fe : %p (%d), score : %d", (eDVBRegisteredFrontend *)*i, i->m_frontend->ge);
+			}
 		}
 		else
 			c = i->m_frontend->isCompatibleWith(feparm);
@@ -859,7 +873,7 @@ RESULT eDVBResourceManager::allocateFrontend(ePtr<eDVBAllocatedFrontend> &fe, eP
 	if (best)
 	{
 		if (best_fbc_fe)
-			m_fbcmng->addLink(best, best_fbc_fe, simulate);
+			m_fbcmng->AddLink(best, best_fbc_fe, simulate);
 
 		fe = new eDVBAllocatedFrontend(best, m_fbcmng);
 		return 0;
@@ -1205,6 +1219,7 @@ RESULT eDVBResourceManager::allocatePVRChannel(const eDVBChannelID &channelid, e
 		 * (allowing e.g. epgcache to be started)
 		 */
 		ePtr<iDVBFrontendParameters> feparm;
+		if (m_list) m_list->getChannelFrontendData(channelid, feparm);
 		ch->setChannel(channelid, feparm);
 	}
 	channel = ch;
@@ -1265,20 +1280,33 @@ int eDVBResourceManager::canAllocateFrontend(ePtr<iDVBFrontendParameters> &fepar
 {
 	eSmartPtrList<eDVBRegisteredFrontend> &frontends = simulate ? m_simulate_frontend : m_frontend;
 	ePtr<eDVBRegisteredFrontend> best;
-	eDVBRegisteredFrontend *dummy;
-	int bestval, check_fbc_link, c;
+	int bestval, current_fbc_setid, fbc_setid, c;
+	bool check_fbc_leaf_linkable;
 
 	bestval = 0;
-	check_fbc_link = 0;
+	check_fbc_leaf_linkable = false;
+	current_fbc_setid = -1;
 
 	for (eSmartPtrList<eDVBRegisteredFrontend>::iterator i(frontends.begin()); i != frontends.end(); ++i)
 	{
 		if (!i->m_inuse)
 		{
-			if(i->m_frontend->is_FBCTuner() && m_fbcmng->canLink(*i) && !check_fbc_link)
+			if(i->m_frontend->is_FBCTuner() && m_fbcmng->CanLink(*i))
 			{
-				check_fbc_link = 1;
-				c = m_fbcmng->isCompatibleWith(feparm, *i, dummy, simulate);
+				fbc_setid = m_fbcmng->GetFBCSetID(i->m_frontend->getSlotID());
+
+				if (fbc_setid != current_fbc_setid)
+				{
+					current_fbc_setid = fbc_setid;
+					check_fbc_leaf_linkable = false;
+				}
+
+				if (!check_fbc_leaf_linkable)
+				{
+					eDVBRegisteredFrontend *dummy;
+					c = m_fbcmng->IsCompatibleWith(feparm, *i, dummy, simulate);
+					check_fbc_leaf_linkable = true;
+				}
 			}
 			else
 				c = i->m_frontend->isCompatibleWith(feparm);
@@ -1308,6 +1336,8 @@ int tuner_type_channel_default(ePtr<iDVBChannelList> &channellist, const eDVBCha
 						return 40000;
 					case iDVBFrontend::feTerrestrial:
 						return 30000;
+					case iDVBFrontend::feATSC:
+						return 20000;
 					default:
 						break;
 				}
@@ -1950,6 +1980,8 @@ RESULT eDVBChannel::setChannel(const eDVBChannelID &channelid, ePtr<iDVBFrontend
 	m_channel_id = channelid;
 	m_mgr->addChannel(channelid, this);
 
+	m_current_frontend_parameters = feparm;
+
 	if (!m_frontend)
 	{
 		/* no frontend, no need to tune (must be a streamed service) */
@@ -1960,7 +1992,6 @@ RESULT eDVBChannel::setChannel(const eDVBChannelID &channelid, ePtr<iDVBFrontend
 			/* if tuning fails, shutdown the channel immediately. */
 	int res;
 	res = m_frontend->get().tune(*feparm);
-	m_current_frontend_parameters = feparm;
 
 	if (res)
 	{

@@ -1,17 +1,17 @@
-from enigma import eServiceCenter, eServiceReference, eTimer, pNavigation, getBestPlayableServiceReference, iPlayableService, eActionMap, setPreferredTuner, eStreamServer
+from enigma import eServiceCenter, eServiceReference, pNavigation, getBestPlayableServiceReference, iPlayableService, setPreferredTuner, eStreamServer
 from Components.ParentalControl import parentalControl
 from Components.SystemInfo import SystemInfo
 from Components.config import config, configfile
 from Tools.BoundFunction import boundFunction
-from Tools.StbHardware import setFPWakeuptime, getFPWakeuptime, getFPWasTimerWakeup
+from Tools.StbHardware import getFPWasTimerWakeup
 from Tools import Notifications
-from time import time, localtime
+from time import time
 import RecordTimer
 import Screens.Standby
 import NavigationInstance
 import ServiceReference
 from Screens.InfoBar import InfoBar
-from sys import maxint
+from Components.Sources.StreamService import StreamServiceList
 
 # TODO: remove pNavgation, eNavigation and rewrite this stuff in python.
 class Navigation:
@@ -35,6 +35,7 @@ class Navigation:
 		self.currentlyPlayingService = None
 		self.RecordTimer = RecordTimer.RecordTimer()
 		self.__wasTimerWakeup = getFPWasTimerWakeup()
+		self.__isRestartUI = config.misc.RestartUI.value
 		startup_to_standby = config.usage.startup_to_standby.value
 		wakeup_time_type = config.misc.prev_wakeup_time_type.value
 		if self.__wasTimerWakeup:
@@ -53,6 +54,9 @@ class Navigation:
 
 	def wasTimerWakeup(self):
 		return self.__wasTimerWakeup
+
+	def isRestartUI(self):
+		return self.__isRestartUI
 
 	def dispatchEvent(self, i):
 		for x in self.event:
@@ -110,22 +114,30 @@ class Navigation:
 				if InfoBarInstance and InfoBarInstance.servicelist.servicelist.setCurrent(ref, adjust):
 					self.currentlyPlayingServiceOrGroup = InfoBarInstance.servicelist.servicelist.getCurrent()
 				setPriorityFrontend = False
-				if SystemInfo["DVB-T_priority_tuner_available"] or SystemInfo["DVB-C_priority_tuner_available"] or SystemInfo["DVB-S_priority_tuner_available"]:
+				if SystemInfo["DVB-T_priority_tuner_available"] or SystemInfo["DVB-C_priority_tuner_available"] or SystemInfo["DVB-S_priority_tuner_available"] or SystemInfo["ATSC_priority_tuner_available"]:
 					str_service = playref.toString()
 					if '%3a//' not in str_service and not str_service.rsplit(":", 1)[1].startswith("/"):
 						type_service = playref.getUnsignedData(4) >> 16
 						if type_service == 0xEEEE:
-							if config.usage.frontend_priority_dvbt.value != "-2":
+							if SystemInfo["DVB-T_priority_tuner_available"] and config.usage.frontend_priority_dvbt.value != "-2":
 								if config.usage.frontend_priority_dvbt.value != config.usage.frontend_priority.value:
 									setPreferredTuner(int(config.usage.frontend_priority_dvbt.value))
 									setPriorityFrontend = True
+							if SystemInfo["ATSC_priority_tuner_available"] and config.usage.frontend_priority_atsc.value != "-2":
+								if config.usage.frontend_priority_atsc.value != config.usage.frontend_priority.value:
+									setPreferredTuner(int(config.usage.frontend_priority_atsc.value))
+									setPriorityFrontend = True
 						elif type_service == 0xFFFF:
-							if config.usage.frontend_priority_dvbc.value != "-2":
+							if SystemInfo["DVB-C_priority_tuner_available"] and config.usage.frontend_priority_dvbc.value != "-2":
 								if config.usage.frontend_priority_dvbc.value != config.usage.frontend_priority.value:
 									setPreferredTuner(int(config.usage.frontend_priority_dvbc.value))
 									setPriorityFrontend = True
+							if SystemInfo["ATSC_priority_tuner_available"] and config.usage.frontend_priority_atsc.value != "-2":
+								if config.usage.frontend_priority_atsc.value != config.usage.frontend_priority.value:
+									setPreferredTuner(int(config.usage.frontend_priority_atsc.value))
+									setPriorityFrontend = True
 						else:
-							if config.usage.frontend_priority_dvbs.value != "-2":
+							if SystemInfo["DVB-S_priority_tuner_available"] and config.usage.frontend_priority_dvbs.value != "-2":
 								if config.usage.frontend_priority_dvbs.value != config.usage.frontend_priority.value:
 									setPreferredTuner(int(config.usage.frontend_priority_dvbs.value))
 									setPriorityFrontend = True
@@ -164,7 +176,12 @@ class Navigation:
 		return ret
 
 	def getRecordings(self, simulate=False):
-		return self.pnav and self.pnav.getRecordings(simulate)
+		recs = self.pnav and self.pnav.getRecordings(simulate)
+		if not simulate and StreamServiceList:
+			for rec in recs[:]:
+				if rec.__deref__() in StreamServiceList:
+					recs.remove(rec)
+		return recs
 
 	def getCurrentService(self):
 		if not self.currentlyPlayingService:

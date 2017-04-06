@@ -1,4 +1,4 @@
-from Components.config import config, ConfigSubsection, ConfigSubList, ConfigInteger, ConfigText, ConfigSelection, getConfigListEntry, ConfigSequence, ConfigYesNo
+from Components.config import config, ConfigSubsection, ConfigSubList, ConfigInteger, ConfigText, ConfigSelection
 import TitleCutter
 
 class ConfigFixedText(ConfigText):
@@ -85,7 +85,7 @@ class DVDTitle:
 			if active:
 				trackstring = audiotrack.format.getValue()
 				language = audiotrack.language.getValue()
-				if languageChoices.langdict.has_key(language):
+				if language in languageChoices:
 					trackstring += ' (' + languageChoices.langdict[language] + ')'
 				audiolist.append(trackstring)
 		audiostring = ', '.join(audiolist)

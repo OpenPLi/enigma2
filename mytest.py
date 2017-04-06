@@ -1,10 +1,13 @@
-import sys, os
+import sys
+import os
 if os.path.isfile("/usr/lib/enigma2/python/enigma.zip"):
 	sys.path.append("/usr/lib/enigma2/python/enigma.zip")
 
 from Tools.Profile import profile, profile_final
 profile("PYTHON_START")
 
+# Don't remove this line. It may seem to do nothing, but if removed,
+# it will break output redirection for crash logs.
 import Tools.RedirectOutput
 import enigma
 import eConsoleImpl
@@ -14,11 +17,16 @@ enigma.eSocketNotifier = eBaseImpl.eSocketNotifier
 enigma.eConsoleAppContainer = eConsoleImpl.eConsoleAppContainer
 
 from traceback import print_exc
+
+profile("SetupDevices")
+import Components.SetupDevices
+Components.SetupDevices.InitSetupDevices()
+
 profile("SimpleSummary")
 from Screens import InfoBar
 from Screens.SimpleSummary import SimpleSummary
 
-from sys import stdout, exc_info
+from sys import stdout
 
 profile("Bouquets")
 from Components.config import config, configfile, ConfigText, ConfigYesNo, ConfigInteger, NoSave
@@ -112,7 +120,7 @@ def dump(dir, p = ""):
 			dump(val, p + "(dict)/" + entry)
 	if hasattr(dir, "__dict__"):
 		for name, value in dir.__dict__.items():
-			if not had.has_key(str(value)):
+			if str(value) not in had:
 				had[str(value)] = 1
 				dump(value, p + "/" + str(name))
 			else:
@@ -333,31 +341,26 @@ class PowerKey:
 
 	def __init__(self, session):
 		self.session = session
-		globalActionMap.actions["power_up"]=self.powerup
-		globalActionMap.actions["power_long"]=self.powerlong
-		globalActionMap.actions["deepstandby"]=self.shutdown # frontpanel long power button press
-		globalActionMap.actions["discrete_off"]=self.standby
-		self.longkeyPressed = False
-
-	def MenuClosed(self, *val):
-		self.session.infobar = None
+		globalActionMap.actions["power_down"] = lambda *args: None
+		globalActionMap.actions["power_up"] = self.powerup
+		globalActionMap.actions["power_long"] = self.powerlong
+		globalActionMap.actions["deepstandby"] = self.shutdown # frontpanel long power button press
+		globalActionMap.actions["discrete_off"] = self.standby
 
 	def shutdown(self):
 		print "PowerOff - Now!"
 		if not Screens.Standby.inTryQuitMainloop and self.session.current_dialog and self.session.current_dialog.ALLOW_SUSPEND:
 			self.session.open(Screens.Standby.TryQuitMainloop, 1)
 
-	def powerlong(self):
-		if Screens.Standby.inTryQuitMainloop or (self.session.current_dialog and not self.session.current_dialog.ALLOW_SUSPEND):
-			return
-		self.doAction(config.misc.hotkey.power_long.value, True)
+	def powerup(self):
+		self.doAction(config.misc.hotkey.power.value)
 
-	def doAction(self, selected, longkey=False):
-		if self.longkeyPressed:
-			self.longkeyPressed = False
-		elif selected and self.session.infobar:
-			if longkey:
-				self.longkeyPressed = True
+	def powerlong(self):
+		if not(Screens.Standby.inTryQuitMainloop or (self.session.current_dialog and not self.session.current_dialog.ALLOW_SUSPEND)):
+			self.doAction(config.misc.hotkey.power_long.value)
+
+	def doAction(self, selected):
+		if selected:
 			selected = selected.split("/")
 			if selected[0] == "Module":
 				try:
@@ -373,11 +376,7 @@ class PowerKey:
 					if y is not None:
 						id = y.get("val")
 						if id and id == selected[1]:
-							menu_screen = self.session.openWithCallback(self.MenuClosed, MainMenu, x)
-							return
-
-	def powerup(self):
-		self.doAction(config.misc.hotkey.power.value)
+							self.session.open(MainMenu, x)
 
 	def standby(self):
 		if not Screens.Standby.inStandby and self.session.current_dialog and self.session.current_dialog.ALLOW_SUSPEND and self.session.in_exec:
@@ -410,7 +409,6 @@ class AutoScartControl:
 				self.scartDialog.switchToTV()
 
 profile("Load:CI")
-from enigma import eDVBCIInterfaces
 from Screens.Ci import CiHandler
 
 profile("Load:VolumeControl")
@@ -439,12 +437,6 @@ def runScreenTest():
 	screensToRun.sort()
 
 	enigma.ePythonConfigQuery.setQueryFunc(configfile.getResolvedKey)
-
-#	eDVBCIInterfaces.getInstance().setDescrambleRules(0 # Slot Number
-#		,(	["1:0:1:24:4:85:C00000:0:0:0:"], #service_list
-#			["PREMIERE"], #provider_list,
-#			[] #caid_list
-#		));
 
 	def runNextScreen(session, screensToRun, *result):
 		if result:
@@ -481,7 +473,7 @@ def runScreenTest():
 
 	profile("wakeup")
 	from time import time, strftime, localtime
-	from Tools.StbHardware import setFPWakeuptime, getFPWakeuptime, setRTCtime
+	from Tools.StbHardware import setFPWakeuptime, setRTCtime
 	from Screens.SleepTimerEdit import isNextWakeupTime
 	#get currentTime
 	nowTime = time()
@@ -532,10 +524,6 @@ profile("InputDevice")
 import Components.InputDevice
 Components.InputDevice.InitInputDevices()
 import Components.InputHotplug
-
-profile("SetupDevices")
-import Components.SetupDevices
-Components.SetupDevices.InitSetupDevices()
 
 profile("AVSwitch")
 import Components.AVSwitch

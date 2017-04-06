@@ -17,6 +17,13 @@
 
 /************************************************/
 
+static const char *crash_emailaddr =
+#ifndef CRASH_EMAILADDR
+	"the OpenPLi forum";
+#else
+	CRASH_EMAILADDR;
+#endif
+
 /* Defined in bsod.cpp */
 void retrieveLogBuffer(const char **p1, unsigned int *s1, const char **p2, unsigned int *s2);
 
@@ -169,7 +176,7 @@ void bsodFatal(const char *component)
 	os.clear();
 	os << "We are really sorry. Your STB encountered "
 		"a software problem, and needs to be restarted.\n"
-		"Please send the logfile " << crashlog_name << " to the OpenPLi forum.\n"
+		"Please send the logfile " << crashlog_name << " to " << crash_emailaddr << ".\n"
 		"Your STB restarts in 10 seconds!\n"
 		"Component: " << component;
 
@@ -243,11 +250,11 @@ void bsodFatal(const char *component)
 #if defined(__MIPSEL__)
 void oops(const mcontext_t &context)
 {
-	eDebug("PC: %08lx", (unsigned long)context.pc);
+	eLog(lvlFatal, "PC: %08lx", (unsigned long)context.pc);
 	int i;
 	for (i=0; i<32; i += 4)
 	{
-		eDebug("    %08x %08x %08x %08x",
+		eLog(lvlFatal, "    %08x %08x %08x %08x",
 			(int)context.gregs[i+0], (int)context.gregs[i+1],
 			(int)context.gregs[i+2], (int)context.gregs[i+3]);
 	}
@@ -260,7 +267,7 @@ void handleFatalSignal(int signum, siginfo_t *si, void *ctx)
 	ucontext_t *uc = (ucontext_t*)ctx;
 	oops(uc->uc_mcontext);
 #endif
-	eDebug("-------FATAL SIGNAL");
+	eLog(lvlFatal, "-------FATAL SIGNAL");
 	bsodFatal("enigma2, signal");
 }
 

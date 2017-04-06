@@ -209,6 +209,9 @@ public:
 	eTransportStreamID getParentTransportStreamID() const { return eTransportStreamID(data[6]); }
 	void setParentTransportStreamID( eTransportStreamID tsid ) { data[6]=tsid.get(); }
 
+	int getSourceID() const { return data[7]; }
+	void setSourceID(int sourceid) { data[7] = sourceid; }
+
 	eServiceReferenceDVB getParentServiceReference() const
 	{
 		eServiceReferenceDVB tmp(*this);
@@ -223,7 +226,7 @@ public:
 		return tmp;
 	}
 
-	eServiceReferenceDVB(eDVBNamespace dvbnamespace, eTransportStreamID transport_stream_id, eOriginalNetworkID original_network_id, eServiceID service_id, int service_type)
+	eServiceReferenceDVB(eDVBNamespace dvbnamespace, eTransportStreamID transport_stream_id, eOriginalNetworkID original_network_id, eServiceID service_id, int service_type, int source_id = 0)
 		:eServiceReference(eServiceReference::idDVB, 0)
 	{
 		setTransportStreamID(transport_stream_id);
@@ -231,6 +234,7 @@ public:
 		setDVBNamespace(dvbnamespace);
 		setServiceID(service_id);
 		setServiceType(service_type);
+		setSourceID(source_id);
 	}
 
 	void set(const eDVBChannelID &chid)
@@ -275,7 +279,8 @@ public:
 	{
 		cVPID, cMPEGAPID, cTPID, cPCRPID, cAC3PID,
 		cVTYPE, cACHANNEL, cAC3DELAY, cPCMDELAY,
-		cSUBTITLE, cAACHEAPID=12, cDDPPID, cAACAPID, cacheMax
+		cSUBTITLE, cAACHEAPID=12, cDDPPID, cAACAPID,
+		cDATAPID, cPMTPID, cacheMax
 	};
 
 	int getCacheEntry(cacheID);
@@ -300,11 +305,13 @@ public:
 		dxNewFound=64,
 		dxIsDedicated3D=128,
 		dxIsParentalProtected=256,
+		dxHideVBI=512,
 	};
 
 	bool usePMT() const { return !(m_flags & dxNoDVB); }
 	bool isHidden() const { return (m_flags & dxDontshow || m_flags & dxIsParentalProtected); }
 	bool isDedicated3D() const { return m_flags & dxIsDedicated3D; }
+	bool doHideVBI() const { return m_flags & dxHideVBI; }
 
 	CAID_LIST m_ca;
 
@@ -416,6 +423,7 @@ public:
 	virtual SWIG_VOID(RESULT) getDVBT(eDVBFrontendParametersTerrestrial &SWIG_OUTPUT) const = 0;
 	virtual SWIG_VOID(RESULT) getATSC(eDVBFrontendParametersATSC &SWIG_OUTPUT) const = 0;
 	virtual SWIG_VOID(RESULT) getFlags(unsigned int &SWIG_OUTPUT) const = 0;
+	virtual RESULT setDVBT(const eDVBFrontendParametersTerrestrial &p) = 0;
 #ifndef SWIG
 	virtual SWIG_VOID(RESULT) calculateDifference(const iDVBFrontendParameters *parm, int &, bool exact) const = 0;
 	virtual SWIG_VOID(RESULT) getHash(unsigned long &) const = 0;
@@ -536,7 +544,7 @@ class iDVBSatelliteEquipmentControl: public iObject
 {
 public:
 	virtual RESULT prepare(iDVBFrontend &frontend, const eDVBFrontendParametersSatellite &sat, int &frequency, int frontend_id, unsigned int timeout)=0;
-	virtual void prepareTurnOffSatCR(iDVBFrontend &frontend, int satcr)=0;
+	virtual void prepareTurnOffSatCR(iDVBFrontend &frontend)=0;
 	virtual int canTune(const eDVBFrontendParametersSatellite &feparm, iDVBFrontend *fe, int frontend_id, int *highest_score_lnb=0)=0;
 	virtual void setRotorMoving(int slotid, bool)=0;
 };

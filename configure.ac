@@ -38,13 +38,21 @@ PKG_CHECK_MODULES(GSTREAMER, gstreamer-$GST_MAJORMINOR gstreamer-pbutils-$GST_MA
 PKG_CHECK_MODULES(BASE, [freetype2 fribidi gstreamer-$GST_MAJORMINOR gstreamer-pbutils-$GST_MAJORMINOR libdvbsi++ libpng libxml-2.0 sigc++-1.2 libssl libcrypto])
 PKG_CHECK_MODULES(LIBDDVD, libdreamdvd, HAVE_LIBDDVD="yes", HAVE_LIBDDVD="no")
 AM_CONDITIONAL(HAVE_LIBDDVD, test "$HAVE_LIBDDVD" = "yes")
+PKG_CHECK_MODULES(AVAHI, avahi-client)
 
+AC_CHECK_LIB([udfread], [udfread_init])
 AC_CHECK_LIB([dl], [dlopen], [LIBDL_LIBS="-ldl"], [AC_MSG_ERROR([Could not find libdl])])
 AC_SUBST(LIBDL_LIBS)
 AC_CHECK_LIB([jpeg], [jpeg_set_defaults], [LIBJPEG_LIBS="-ljpeg"], [AC_MSG_ERROR([Could not find libjpeg])])
 AC_SUBST(LIBJPEG_LIBS)
 AC_CHECK_LIB([ungif], [DGifOpen], [LIBGIF_LIBS="-lungif"], [AC_CHECK_LIB([gif], [DGifOpen], [LIBGIF_LIBS="-lgif"], [AC_MSG_ERROR([Could not find libgif or libungif])])])
 AC_SUBST(LIBGIF_LIBS)
+
+AC_ARG_WITH(crashlogemail,
+	[  --with-crashlogemail=crash log email address],
+	[CRASHLOGEMAIL="$withval"],[CRASHLOGEMAIL="the OpenPLi forum"])
+AC_SUBST(CRASHLOGEMAIL)
+AC_DEFINE_UNQUOTED(CRASH_EMAILADDR,"$CRASHLOGEMAIL",[crash log email address])
 
 AC_ARG_WITH(boxtype,
 	[  --with-boxtype=NAME box type [[none,dm7025,dm800...]]],
@@ -58,7 +66,7 @@ if test `echo "$BOXTYPE" | cut -b 1-2` == "dm"; then
 	AC_DEFINE(DREAMBOX, 1, [Dreambox hardware])
 	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
 fi
-if test "$BOXTYPE" == "vusolo2" -o "$BOXTYPE" == "vuduo2" -o "$BOXTYPE" == "vusolose" -o "$BOXTYPE" == "vusolo4k" -o "$BOXTYPE" == "vuzero"; then
+if test "$BOXTYPE" == "vusolo2" -o "$BOXTYPE" == "vuduo2" -o "$BOXTYPE" == "vusolose" -o "$BOXTYPE" == "vusolo4k" -o "$BOXTYPE" == "vuzero" -o "$BOXTYPE" == "vuuno4k" -o "$BOXTYPE" == "vuultimo4k"; then
 	AC_DEFINE(VUPLUS_RC_WORKAROUND, 1, [workaround for problem with vuplus event/rc driver])
 fi
 
@@ -71,6 +79,13 @@ if test x"$withtextlcd" != xno ; then
 	AC_DEFINE(HAVE_TEXTLCD, 1,[Define when using an ascii based lcd device])
 fi
 AM_CONDITIONAL(HAVE_TEXTLCD, test x"$withtextlcd" != xno)
+
+AC_ARG_WITH(7segment,
+	AC_HELP_STRING([--with-7segment], [use 7 segment lcd, yes or no]),
+	[[TEXTSKIN="7segment"]],
+	[[TEXTSKIN="default"]]
+)
+AC_SUBST(TEXTSKIN)
 
 if test `echo "$BOXTYPE" | cut -b 1-7` == "mbmicro"; then
 	AC_DEFINE(FORCE_NO_BLENDING_ACCELERATION, 1,[define when the framebuffer acceleration does not have alphablending support, though the autodetection might indicate that it does])

@@ -9,6 +9,8 @@
 		<item level="0" text="Setup mode" description="Configure which access level to use for the configuration menu. Expert level gives access to all items.">config.usage.setup_level</item>
 		<item level="0" text="Sort order for menu entries" description="This option allows you to hide and sort menu entries. When selecting user you can change order and hide menu items via the blue button">config.usage.menu_sort_mode</item>
 		<item level="0" text="Show menu paths" description="This option allows you to show menu paths.">config.usage.menu_path</item>
+		<item level="0" text="Show menu numbers" description="This option allows you to show menu number quick links.">config.usage.menu_show_numbers</item>
+		<item level="0" text="Show softcam setup in extensions menu" description="This option allows you to add the softcam setup in the extensions menu.">config.misc.softcam_setup.extension_menu</item>
 		<item level="1" text="Zap mode" requires="ZapMode" description="Configure the way in which the receiver changes channels.">config.misc.zapmode</item>
 		<item level="1" text="Enable teletext caching" description="When enabled, teletext pages will be cached, allowing faster access.">config.usage.enable_tt_caching</item>
 		<item level="1" text="12V output" description="12V output" requires="12V_Output.">config.usage.output_12V</item>
@@ -19,12 +21,12 @@
 		<item level="2" text="Preferred tuner DVB-S" description="When enabled, this setting has more weight than 'Preferred tuner'." requires="DVB-S_priority_tuner_available">config.usage.frontend_priority_dvbs</item>
 		<item level="2" text="Preferred tuner DVB-T" description="When enabled, this setting has more weight than 'Preferred tuner'." requires="DVB-T_priority_tuner_available">config.usage.frontend_priority_dvbt</item>
 		<item level="2" text="Preferred tuner DVB-C" description="When enabled, this setting has more weight than 'Preferred tuner'." requires="DVB-C_priority_tuner_available">config.usage.frontend_priority_dvbc</item>
+		<item level="2" text="Preferred tuner ATSC" description="When enabled, this setting has more weight than 'Preferred tuner'." requires="ATSC_priority_tuner_available">config.usage.frontend_priority_atsc</item>
 		<item level="2" text="Preferred tuner for recordings" description="Configure which tuner for recordings will be preferred, when more than one tuner is available.">config.usage.recording_frontend_priority</item>
 		<item level="2" text="Preferred tuner DVB-S for recordings" description="When enabled, this setting has more weight than 'Preferred tuner for recordings'." requires="DVB-S_priority_tuner_available">config.usage.recording_frontend_priority_dvbs</item>
 		<item level="2" text="Preferred tuner DVB-T for recordings" description="When enabled, this setting has more weight than 'Preferred tuner for recordings'." requires="DVB-T_priority_tuner_available">config.usage.recording_frontend_priority_dvbt</item>
 		<item level="2" text="Preferred tuner DVB-C for recordings" description="When enabled, this setting has more weight than 'Preferred tuner for recordings'." requires="DVB-C_priority_tuner_available">config.usage.recording_frontend_priority_dvbc</item>
-		<item level="2" text="Force LNB Power" description="When enabled the LNB power will not be switched off in standby" requires="HasForceLNBOn">config.misc.forceLnbPower</item>
-		<item level="2" text="Force ToneBurst" description="When enabled the LNB toneburst will be forced" requires="HasForceToneburst">config.misc.forceToneBurst</item>		
+		<item level="2" text="Preferred tuner ATSC for recordings" description="When enabled, this setting has more weight than 'Preferred tuner for recordings'." requires="ATSC_priority_tuner_available">config.usage.recording_frontend_priority_atsc</item>
 		<item level="2" text="Disable background scanning" description="When enabled, the receiver will no longer monitor the tuned transponder for possible changes. Do not use this option unless you know what you are doing.">config.misc.disable_background_scan</item>
 		<item level="2" text="Include EIT in http streams" description="When enabled, EIT data will be included in http streams. This allows a client receiver to show EPG.">config.streaming.stream_eit</item>
 		<item level="2" text="Include AIT in http streams" description="When enabled, AIT data will be included in http streams. This allows a client receiver to use HbbTV.">config.streaming.stream_ait</item>
@@ -76,6 +78,7 @@
 		<item level="2" text="Show screensaver" description="Configure the duration in minutes for the screensaver.">config.usage.screen_saver</item>
 		<item level="2" text="Hide zap errors" description="When enabled, error messages related to zapping will not be shown.">config.usage.hide_zap_errors</item>
 		<item level="2" text="Show crypto info in infobar" description="When enabled, encryption info will be shown in the infobar (when supported by the skin).">config.usage.show_cryptoinfo</item>
+		<item level="2" text="Show picons in display" description="Configure if service picons will be shown in display (when supported by the skin)." requires="HasFrontDisplayPicon">config.usage.show_picon_in_display</item>
 		<item level="2" text="Infobar frontend data source" description="Configure the source of the frontend data as shown on the infobars. 'Settings' is as stored on the settings. 'Tuner' is as reported by the tuner.">config.usage.infobar_frontend_source</item>
 		<item level="2" text="Show SNR percentage instead of dB value" description="By default, SNR will be shown in dB (when supported by the tuner). This setting forces SNR to be shown as a percentage instead.">config.usage.swap_snr_on_osd</item>
 		<item level="2" text="Show EIT now/next in infobar" description="When enabled, display the EIT now/next eventdata in infobar. When disabled, display now/next eventdata from the EPG cache instead.">config.usage.show_eit_nownext</item>
@@ -205,6 +208,8 @@
 		<item level="2" text="Scroll delay" description="Delay in miliseconds between scrolling characters on display." requires="VFD_scroll_delay">config.usage.vfd_scroll_delay</item>
 		<item level="2" text="Initial scroll delay" description="Delay in miliseconds before start of scrolling text on display." requires="VFD_initial_scroll_delay">config.usage.vfd_initial_scroll_delay</item>
 		<item level="2" text="Final scroll delay" description="Delay in miliseconds after finish scrolling text on display." requires="VFD_final_scroll_delay">config.usage.vfd_final_scroll_delay</item>
+		<item level="0" text="Power on display" description="This option allows you to power off the display." requires="PowerOffDisplay">config.usage.powerOffDisplay</item>
+		<item level="2" text="Show symbols on display" description="This option allows you show all symbols on display." requires="LCDshow_symbols">config.usage.lcd_show_symbols</item>
 	</setup>
 	<setup key="satconfig" title="Satellite dish setup">
 		<item text="Tuner slot" description="Choose which tuner to configure.">config.sat.tunerslot</item>

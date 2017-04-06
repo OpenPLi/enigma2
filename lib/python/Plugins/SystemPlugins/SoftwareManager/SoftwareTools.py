@@ -1,5 +1,4 @@
 # -*- coding: iso-8859-1 -*-
-from enigma import eConsoleAppContainer
 from Components.Console import Console
 from Components.About import about
 from Components.PackageInfo import PackageInfoHandler
@@ -7,7 +6,7 @@ from Components.Language import language
 from Components.Sources.List import List
 from Components.Ipkg import IpkgComponent
 from Components.Network import iNetwork
-from Tools.Directories import pathExists, fileExists, resolveFilename, SCOPE_METADIR
+from Tools.Directories import resolveFilename, SCOPE_METADIR
 from Tools.HardwareInfo import HardwareInfo
 from time import time
 
@@ -29,7 +28,7 @@ class SoftwareTools(PackageInfoHandler):
 		else:
 			self.ImageVersion = 'Stable'
 		self.language = language.getLanguage()[:2] # getLanguage returns e.g. "fi_FI" for "language_country"
-		PackageInfoHandler.__init__(self, self.statusCallback, blocking = False, neededTag = 'ALL_TAGS', neededFlag = self.ImageVersion)
+		PackageInfoHandler.__init__(self, self.statusCallback, neededTag = 'ALL_TAGS', neededFlag = self.ImageVersion)
 		self.directory = resolveFilename(SCOPE_METADIR)
 		self.list = List([])
 		self.NotifierCallback = None
@@ -135,12 +134,12 @@ class SoftwareTools(PackageInfoHandler):
 					self.startInstallMetaPackage()
 				else:
 					if self.UpdateConsole:
-						if len(self.UpdateConsole.appContainers) == 0:
+						if not self.UpdateConsole.appContainers:
 								callback(True)
 		else:
 			self.list_updating = False
 			if self.UpdateConsole:
-				if len(self.UpdateConsole.appContainers) == 0:
+				if not self.UpdateConsole.appContainers:
 					if callback is not None:
 						callback(False)
 
@@ -164,12 +163,12 @@ class SoftwareTools(PackageInfoHandler):
 				self.startIpkgListInstalled()
 			else:
 				if self.UpdateConsole:
-					if len(self.UpdateConsole.appContainers) == 0:
+					if not self.UpdateConsole.appContainers:
 							callback(True)
 		else:
 			self.list_updating = False
 			if self.UpdateConsole:
-				if len(self.UpdateConsole.appContainers) == 0:
+				if not self.UpdateConsole.appContainers:
 					if callback is not None:
 						callback(False)
 
@@ -198,19 +197,19 @@ class SoftwareTools(PackageInfoHandler):
 					self.packagesIndexlist.remove(package)
 			for package in self.packagesIndexlist[:]:
 				attributes = package[0]["attributes"]
-				if attributes.has_key("packagetype"):
+				if "packagetype" in attributes:
 					if attributes["packagetype"] == "internal":
 						self.packagesIndexlist.remove(package)
 			if callback is None:
 				self.countUpdates()
 			else:
 				if self.UpdateConsole:
-					if len(self.UpdateConsole.appContainers) == 0:
+					if not self.UpdateConsole.appContainers:
 							callback(True)
 		else:
 			self.list_updating = False
 			if self.UpdateConsole:
-				if len(self.UpdateConsole.appContainers) == 0:
+				if not self.UpdateConsole.appContainers:
 					if callback is not None:
 						callback(False)
 
@@ -222,14 +221,14 @@ class SoftwareTools(PackageInfoHandler):
 			packagename = attributes["packagename"]
 			for x in self.available_packetlist:
 				if x[0] == packagename:
-					if self.installed_packetlist.has_key(packagename):
+					if packagename in self.installed_packetlist:
 						if self.installed_packetlist[packagename] != x[1]:
 							self.available_updates +=1
 							self.available_updatelist.append([packagename])
 
 		self.list_updating = False
 		if self.UpdateConsole:
-			if len(self.UpdateConsole.appContainers) == 0:
+			if not self.UpdateConsole.appContainers:
 				if callback is not None:
 					callback(True)
 					callback = None
@@ -247,7 +246,7 @@ class SoftwareTools(PackageInfoHandler):
 		(callback) = extra_args
 		if result:
 			if self.Console:
-				if len(self.Console.appContainers) == 0:
+				if not self.Console.appContainers:
 					if callback is not None:
 						callback(True)
 						callback = None
@@ -258,16 +257,12 @@ class SoftwareTools(PackageInfoHandler):
 			self.NotifierCallback = None
 		self.ipkg.stop()
 		if self.Console is not None:
-			if len(self.Console.appContainers):
-				for name in self.Console.appContainers.keys():
-					self.Console.kill(name)
+			self.Console.killAll()
 		if self.UpdateConsole is not None:
-			if len(self.UpdateConsole.appContainers):
-				for name in self.UpdateConsole.appContainers.keys():
-					self.UpdateConsole.kill(name)
+			self.UpdateConsole.killAll()
 
 	def verifyPrerequisites(self, prerequisites):
-		if prerequisites.has_key("hardware"):
+		if "hardware" in prerequisites:
 			hardware_found = False
 			for hardware in prerequisites["hardware"]:
 				if hardware == HardwareInfo().device_name:

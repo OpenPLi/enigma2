@@ -76,6 +76,11 @@ void eDVBServicePMTHandler::channelStateChanged(iDVBChannel *channel)
 					{
 						registerCAService();
 					}
+					if (m_ca_servicePtr && !m_service->usePMT())
+					{
+						eDebug("[eDVBServicePMTHandler] create cached caPMT");
+						eDVBCAHandler::getInstance()->handlePMT(m_reference, m_service);
+					}
 				}
 			}
 
@@ -549,7 +554,7 @@ int eDVBServicePMTHandler::getProgramInfo(program &program)
 				program.defaultAudioStream = autoaudio_aache;
 			else if (autoaudio_aac != -1)
 				program.defaultAudioStream = autoaudio_aac;
-			else if (first_non_mpeg != -1)
+			else if (first_non_mpeg != -1 && (defaultac3 || defaultddp))
 				program.defaultAudioStream = first_non_mpeg;
 		}
 
@@ -597,7 +602,13 @@ int eDVBServicePMTHandler::getProgramInfo(program &program)
 	{
 		int cached_pcrpid = m_service->getCacheEntry(eDVBService::cPCRPID),
 			vpidtype = m_service->getCacheEntry(eDVBService::cVTYPE),
+			pmtpid = m_service->getCacheEntry(eDVBService::cPMTPID),
+			subpid = m_service->getCacheEntry(eDVBService::cSUBTITLE),
 			cnt=0;
+		if (pmtpid > 0)
+		{
+			program.pmtPid = pmtpid;
+		}
 		if ( vpidtype == -1 )
 			vpidtype = videoStream::vtMPEG2;
 		if ( cached_vpid != -1 )
@@ -663,15 +674,35 @@ int eDVBServicePMTHandler::getProgramInfo(program &program)
 			++cnt;
 			program.textPid = cached_tpid;
 		}
+		if (subpid > 0)
+		{
+			subtitleStream s;
+			s.pid = (subpid & 0xffff0000) >> 16;
+			if (s.pid != program.textPid)
+			{
+				s.subtitling_type = 0x10;
+				s.composition_page_id = (subpid >> 8) & 0xff;
+				s.ancillary_page_id = subpid & 0xff;
+				program.subtitleStreams.push_back(s);
+				++cnt;
+			}
+		}
+		if (cnt)
+		{
+			ret = 0;
+		}
+	}
+
+	if (m_service && program.caids.empty()) // Add CAID from cache
+	{
 		CAID_LIST &caids = m_service->m_ca;
-		for (CAID_LIST::iterator it(caids.begin()); it != caids.end(); ++it) {
+		for (CAID_LIST::iterator it(caids.begin()); it != caids.end(); ++it)
+		{
 			program::capid_pair pair;
 			pair.caid = *it;
 			pair.capid = -1; // not known yet
 			program.caids.push_back(pair);
 		}
-		if ( cnt )
-			ret = 0;
 	}
 
 	if (m_demux)
@@ -745,15 +776,24 @@ void eDVBServicePMTHandler::SDTScanEvent(int event)
 				eDebug("[eDVBServicePMTHandler] no channel list");
 			else
 			{
-				eDVBChannelID chid;
+				eDVBChannelID chid, curr_chid;
 				m_reference.getChannelID(chid);
-				if (chid == m_dvb_scan->getCurrentChannelID())
+				curr_chid = m_dvb_scan->getCurrentChannelID();
+				if (chid == curr_chid)
 				{
 					m_dvb_scan->insertInto(db, true);
 					eDebug("[eDVBServicePMTHandler] sdt update done!");
 				}
 				else
+				{
 					eDebug("[eDVBServicePMTHandler] ignore sdt update data.... incorrect transponder tuned!!!");
+					if (chid.dvbnamespace != curr_chid.dvbnamespace)
+						eDebug("[eDVBServicePMTHandler] incorrect namespace. expected: %x current: %x",chid.dvbnamespace.get(), curr_chid.dvbnamespace.get());
+					if (chid.transport_stream_id != curr_chid.transport_stream_id)
+						eDebug("[eDVBServicePMTHandler] incorrect transport_stream_id. expected: %x current: %x",chid.transport_stream_id.get(), curr_chid.transport_stream_id.get());
+					if (chid.original_network_id != curr_chid.original_network_id)
+						eDebug("[eDVBServicePMTHandler] incorrect namespace. expected: %x current: %x",chid.original_network_id.get(), curr_chid.original_network_id.get());
+				}
 			}
 			break;
 		}

@@ -13,7 +13,7 @@ class OverscanTestScreen(Screen):
 		Screen.__init__(self, session)
 
 		self.skin = """<screen position="fill">
-				<ePixmap pixmap="skin_default/%s" position="0,0" size="%s,%s" zPosition="1" alphatest="on" />
+				<ePixmap pixmap="skin_default/%s" position="0,0" size="%s,%s" zPosition="2" alphatest="on"/>
 			</screen>""" % (getDesktop(0).size().height() == 1080 and ("overscan1920x1080.png", 1920, 1080) or ("overscan1280x720.png", 1280, 720))
 
 		self["actions"] = NumberActionMap(["InputActions", "OkCancelActions"],
@@ -40,7 +40,7 @@ class OverscanTestScreen(Screen):
 class FullHDTestScreen(OverscanTestScreen):
 	skin = """
 		<screen position="fill">
-			<ePixmap pixmap="skin_default/testscreen.png" position="0,0" size="1920,1080" zPosition="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/testscreen.png" position="0,0" size="1920,1080" zPosition="2" alphatest="on"/>
 		</screen>"""
 
 	def __init__(self, session):
@@ -72,7 +72,7 @@ class FullHDTestScreen(OverscanTestScreen):
 class VideoFinetune(Screen):
 	skin = """
 		<screen position="fill">
-			<widget source="Canvas" render="Canvas" position="fill" />
+			<widget source="Canvas" render="Canvas" position="fill" zPosition="2"/>
 		</screen>"""
 
 	def __init__(self, session):
