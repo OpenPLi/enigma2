@@ -83,7 +83,6 @@ config.hdmicec.bookmarks = ConfigLocations(default=[LOGPATH])
 config.hdmicec.log_path = ConfigDirectory(LOGPATH)
 config.hdmicec.next_boxes_detect = ConfigYesNo(default=False)
 
-LOGPATH = config.hdmicec.log_path.value
 
 class HdmiCec:
 
@@ -492,8 +491,9 @@ class HdmiCec:
 
 	def fdebug(self, output):
 		from Tools.Directories import pathExists
-		path = os.path.join(LOGPATH, LOGFILE)
-		if pathExists(LOGPATH):
+		log_path = config.hdmicec.log_path.value
+		path = os.path.join(log_path, LOGFILE)
+		if pathExists(log_path):
 			fp=file(path,'a');fp.write(output);fp.close()
 
 hdmi_cec = HdmiCec()
