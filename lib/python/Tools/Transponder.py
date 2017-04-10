@@ -112,6 +112,11 @@ def ConvertToHumanReadable(tp, type = None):
 				eDVBFrontendParametersSatellite.Pilot_Unknown : _("Auto"),
 				eDVBFrontendParametersSatellite.Pilot_On : _("On"),
 				eDVBFrontendParametersSatellite.Pilot_Off : _("Off")}.get(tp.get("pilot"))
+			ret["pls_mode"] = {
+				eDVBFrontendParametersSatellite.PLS_Root : _("Root"),
+				eDVBFrontendParametersSatellite.PLS_Gold : _("Gold"),
+				eDVBFrontendParametersSatellite.PLS_Combo : _("Combo"),
+				eDVBFrontendParametersSatellite.PLS_Unknown : _("Unknown")}.get(tp.get("pls_mode"))
 	elif type == "DVB-C":
 		ret["tuner_type"] = _("Cable")
 		ret["modulation"] = {
