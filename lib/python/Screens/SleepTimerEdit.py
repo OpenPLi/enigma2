@@ -40,6 +40,10 @@ class SleepTimerEdit(ConfigListScreen, Screen):
 		self.list.append(getConfigListEntry(_("Sleeptimer") + " " + statusSleeptimerText,
 			config.usage.sleep_timer,
 			_("Configure the duration in minutes for the sleeptimer. Select this entry and click OK or green to start/stop the sleeptimer")))
+		if config.usage.sleep_timer.value != "0":
+			self.list.append(getConfigListEntry(_("Sleeptimer action"),
+				config.usage.sleep_timer_action,
+				_("Select the sleeptimer action.")))
 		self.list.append(getConfigListEntry(_("Inactivity Sleeptimer"),
 			config.usage.inactivity_timer,
 			_("Configure the duration in hours the receiver should go to standby when the receiver is not controlled.")))
@@ -127,7 +131,7 @@ class SleepTimerEdit(ConfigListScreen, Screen):
 			else:
 				sleepTimer = int(sleepTimer)
 			if sleepTimer or not self.getCurrentEntry().endswith(_("(not activated)")):
-				InfoBar.instance.setSleepTimer(sleepTimer)
+				InfoBar.instance and InfoBar.instance.setSleepTimer(sleepTimer)
 			self.close(True)
 		self.close()
 
