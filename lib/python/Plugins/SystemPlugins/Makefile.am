@@ -9,6 +9,10 @@ SUBDIRS = SoftwareManager PositionerSetup Satfinder \
 if HAVE_TEMPFANCONTROL
 SUBDIRS += TempFanControl
 endif
+if HAVE_LIBVUGLES2
+SUBDIRS += AnimationSetup
+endif
+ 
 
 install_PYTHON =	\
 	__init__.py
