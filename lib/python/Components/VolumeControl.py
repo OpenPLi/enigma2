@@ -25,6 +25,8 @@ class VolumeControl:
 
 		self.volumeDialog = session.instantiateDialog(Volume)
 		self.muteDialog = session.instantiateDialog(Mute)
+		self.muteDialog.setSubScreen()
+		self.volumeDialog.setSubScreen()
 
 		self.hideVolTimer = eTimer()
 		self.hideVolTimer.callback.append(self.volHide)
