@@ -24,8 +24,10 @@ class VolumeControl:
 		config.audio.volume = ConfigInteger(default = 50, limits = (0, 100))
 
 		self.volumeDialog = session.instantiateDialog(Volume)
+		self.volumeDialog.setAnimationMode(0)
 		self.muteDialog = session.instantiateDialog(Mute)
 		self.muteDialog.setSubScreen()
+		self.muteDialog.setAnimationMode(0)
 		self.volumeDialog.setSubScreen()
 
 		self.hideVolTimer = eTimer()
