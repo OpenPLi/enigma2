@@ -298,6 +298,17 @@ class AttributeParser:
 			self.guiObject.resize(parseSize(value, self.scaleTuple, self.guiObject, self.desktop))
 	def title(self, value):
 		self.guiObject.setTitle(_(value))
+	def animationPaused(self, value):
+		pass
+	def animationMode(self, value):
+		guiObject.setAnimationMode(
+			{ "disable": 0x00,
+				"off": 0x00,
+				"offshow": 0x10,
+				"offhide": 0x01,
+				"onshow": 0x01,
+				"onhide": 0x10,
+			}[value])	
 	def text(self, value):
 		self.guiObject.setText(_(value))
 	def font(self, value):
