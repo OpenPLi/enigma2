@@ -163,9 +163,9 @@ class Screen(dict, GUISkin):
 			if isinstance(val, GUIComponent) or isinstance(val, Source):
 				val.onHide()
 
-	def setSubScreen(self):
- 		if self.instance:
- 			self.instance.setToSub()
+	def setAnimationMode(self, mode):
+		if self.instance:
+			self.instance.setAnimationMode(mode)
  				
 	def __repr__(self):
 		return str(type(self))
