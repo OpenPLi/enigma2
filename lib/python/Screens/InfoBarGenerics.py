@@ -1226,8 +1226,8 @@ class InfoBarRdsDecoder:
 	"""provides RDS and Rass support/display"""
 	def __init__(self):
 		self.rds_display = self.session.instantiateDialog(RdsInfoDisplay)
-		self.session.instantiateSummaryDialog(self.rds_display)
 		self.rds_display.setAnimationMode(0)
+		self.session.instantiateSummaryDialog(self.rds_display)
 		self.rass_interactive = None
 
 		self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
@@ -3244,7 +3244,6 @@ class InfoBarSubtitleSupport(object):
 
 		if isStandardInfoBar(self):
 			self.subtitle_window = self.session.instantiateDialog(SubtitleDisplay)
-			self.subtitle_window.setSubScreen()
 		else:
 			from Screens.InfoBar import InfoBar
 			self.subtitle_window = InfoBar.instance.subtitle_window
