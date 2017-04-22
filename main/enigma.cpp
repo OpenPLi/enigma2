@@ -366,7 +366,12 @@ void setAnimation_speed(int speed)
 {
  	gles_set_animation_speed(speed);
 }
+void setAnimation_current_listbox(int a)
+{
+	gles_set_animation_listbox_func(a);
+}
 #else
 void setAnimation_current(int a) {}
 void setAnimation_speed(int speed) {}
+void setAnimation_current_listbox(int a) {}
 #endif
