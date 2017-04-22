@@ -18,6 +18,7 @@ public:
 
         void show();
         void hide();
+	
 	enum {
 		wfNoBorder = 1
 	};
