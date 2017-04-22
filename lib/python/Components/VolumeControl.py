@@ -26,7 +26,6 @@ class VolumeControl:
 		self.volumeDialog = session.instantiateDialog(Volume)
 		self.volumeDialog.setAnimationMode(0)
 		self.muteDialog = session.instantiateDialog(Mute)
-		self.muteDialog.setSubScreen()
 		self.muteDialog.setAnimationMode(0)
 		self.volumeDialog.setSubScreen()
 
