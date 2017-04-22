@@ -433,6 +433,7 @@ extern const char *getGStreamerVersionString();
 extern void dump_malloc_stats(void);
 extern void setAnimation_current(int a);
 extern void setAnimation_speed(int speed);
+extern void setAnimation_current_listbox(int a);
 %}
 
 extern void addFont(const char *filename, const char *alias, int scale_factor, int is_replacement, int renderflags = 0);
@@ -446,6 +447,7 @@ extern const char *getGStreamerVersionString();
 extern void dump_malloc_stats(void);
 extern void setAnimation_current(int a);
 extern void setAnimation_speed(int speed);
+extern void setAnimation_current_listbox(int a);
 
 %include <lib/python/python_console.i>
 %include <lib/python/python_base.i>
