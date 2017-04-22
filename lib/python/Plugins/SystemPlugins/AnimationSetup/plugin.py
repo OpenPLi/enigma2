@@ -9,21 +9,16 @@ from Plugins.Plugin import PluginDescriptor
  
 from enigma import setAnimation_current, setAnimation_speed, setAnimation_current_listbox
  
-# default = slide to left
-g_default = {
-         "current": 6,
-         "speed"  : 20,
-}
-g_max_speed = 30
- 
 g_animation_paused = False
 g_orig_show = None
 g_orig_doClose = None
  
-config.misc.window_animation_default = ConfigNumber(default=g_default["current"])
+config.misc.window_animation_default = ConfigNumber(default = 6)
+config.misc.window_animation_speed = ConfigSelectionNumber(1, 30, 1, default = 20)
 config.misc.listbox_animation_default = ConfigSelection(default = "0", choices = [("0", _("Disable")), ("1", _("Enable")), ("2", _("Same behavior as current animation"))])
+
 class AnimationSetupConfig(ConfigListScreen, Screen):
- 	skin=   """
+ 	skin =   """
  		<screen position="center,center" size="600,140" title="Animation Settings">
  			<widget name="config" position="0,0" size="600,100" scrollbarMode="showOnDemand" />
  
@@ -31,9 +26,12 @@ class AnimationSetupConfig(ConfigListScreen, Screen):
  			<ePixmap pixmap="skin_default/buttons/green.png" position="140,100" size="140,40" alphatest="on" />
  			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,100" size="140,40" alphatest="on" />
  
- 			<widget source="key_red" render="Label" position="0,100" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" foregroundColor="#ffffff" backgroundColor="#9f1313" transparent="1" />
- 			<widget source="key_green" render="Label" position="140,100" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" foregroundColor="#ffffff" backgroundColor="#1f771f" transparent="1" />
- 			<widget source="key_yellow" render="Label" position="280,100" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" foregroundColor="#ffffff" backgroundColor="#a08500" transparent="1" />
+ 			<widget source="key_red" render="Label" position="0,100" zPosition="1" size="140,40" \
+ 				font="Regular;20" halign="center" valign="center" transparent="1" />
+ 			<widget source="key_green" render="Label" position="140,100" zPosition="1" size="140,40" \
+ 				font="Regular;20" halign="center" valign="center" transparent="1" />
+ 			<widget source="key_yellow" render="Label" position="280,100" zPosition="1" size="140,40" \
+ 				font="Regular;20" halign="center" valign="center" transparent="1" />
  		</screen>
  		"""
  
@@ -64,7 +62,7 @@ class AnimationSetupConfig(ConfigListScreen, Screen):
  	def keyGreen(self):
  		config.misc.window_animation_speed.save()
                 setAnimation_speed(int(config.misc.window_animation_speed.value))
-		setAnimation_speed(int(config.misc.window_animation_speed.value))
+ 		setAnimation_speed(int(config.misc.window_animation_speed.value))
  		config.misc.listbox_animation_default.save()
  		setAnimation_current_listbox(int(config.misc.listbox_animation_default.value))
  		self.close()
@@ -75,9 +73,8 @@ class AnimationSetupConfig(ConfigListScreen, Screen):
  		self.close()
  
  	def keyYellow(self):
-                global g_default
-                config.misc.window_animation_speed.value = g_default["speed"]
-		config.misc.listbox_animation_default.value = "0"
+                config.misc.window_animation_speed.value = 20
+ 		config.misc.listbox_animation_default.value = "0"
  		self.makeConfigList()
  
  	def keyLeft(self):
@@ -90,7 +87,7 @@ class AnimationSetupConfig(ConfigListScreen, Screen):
  		self.entrylist = []
  
 		self.entrylist.append(getConfigListEntry(_("Animation Speed"), config.misc.window_animation_speed))
-	        self.entrylist.append(getConfigListEntry(_("Enable Focus Animation"), config.misc.listbox_animation_default)) 
+		self.entrylist.append(getConfigListEntry(_("Enable Focus Animation"), config.misc.listbox_animation_default))
  		self["config"].list = self.entrylist
  		self["config"].l.setList(self.entrylist)
  
@@ -110,19 +107,25 @@ class AnimationSetupConfig(ConfigListScreen, Screen):
  
  	skin = """
  		<screen name="AnimationSetup" position="center,center" size="580,400" title="Animation Setup">
- 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" zPosition="1" alphatest="on" />
- 			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" zPosition="1" alphatest="on" />
- 			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" zPosition="1" alphatest="on" />
- 			<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" zPosition="1" alphatest="on" />
+ 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+ 			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+ 			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
+ 			<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
  
- 			<widget source="key_red" render="Label" position="0,0" zPosition="2" size="140,40" font="Regular;20" halign="center" valign="center" foregroundColor="#ffffff" backgroundColor="#9f1313" transparent="1" />
- 			<widget source="key_green" render="Label" position="140,0" zPosition="2" size="140,40" font="Regular;20" halign="center" valign="center" foregroundColor="#ffffff" backgroundColor="#1f771f" transparent="1" />
- 			<widget source="key_yellow" render="Label" position="280,0" zPosition="2" size="140,40" font="Regular;20" halign="center" valign="center" foregroundColor="#ffffff" backgroundColor="#a08500" transparent="1" />
- 			<widget source="key_blue" render="Label" position="420,0" zPosition="2" size="140,40" font="Regular;20" halign="center" valign="center" foregroundColor="#ffffff" backgroundColor="#18188b" transparent="1" />
+ 			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" \
+ 				font="Regular;20" halign="center" valign="center" transparent="1" />
+ 			<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" \
+ 				font="Regular;20" halign="center" valign="center" transparent="1" />
+ 			<widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" \
+ 				font="Regular;20" halign="center" valign="center" transparent="1" />
+ 			<widget source="key_blue" render="Label" position="420,0" zPosition="1" size="140,40" \
+ 				font="Regular;20" halign="center" valign="center" transparent="1" />
  
  			<widget name="list" position="10,60" size="560,364" scrollbarMode="showOnDemand" />
- 	                <widget source="introduction" render="Label" position="0,370" size="560,40" zPosition="10" font="Regular;20" valign="center" backgroundColor="#25062748" transparent="1" />
- 		</screen>"""
+ 	    		<widget source="introduction" render="Label" position="0,370" size="560,40" \
+ 				font="Regular;20" valign="center" transparent="1" />
+ 		</screen>
+ 		"""
  
  	def __init__(self, session):
  
@@ -134,7 +137,7 @@ class AnimationSetupConfig(ConfigListScreen, Screen):
  		self["introduction"] = StaticText(_("* current animation"))
  		self["key_red"] = StaticText(_("Cancel"))
  		self["key_green"] = StaticText(_("Save"))
- 		self["key_yellow"] = StaticText(_("Setting"))
+ 		self["key_yellow"] = StaticText(_("Settings"))
  		self["key_blue"] = StaticText(_("Preview"))
  
  		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
@@ -171,14 +174,14 @@ class AnimationSetupConfig(ConfigListScreen, Screen):
 			setAnimation_current_listbox(int(config.misc.listbox_animation_default.value))
  		self.close()
  
-         def keyclose(self):
+	def keyclose(self):
  		setAnimation_current(config.misc.window_animation_default.value)
-                setAnimation_speed(int(config.misc.window_animation_speed.value))
-		setAnimation_current_listbox(int(config.misc.listbox_animation_default.value))
+               	setAnimation_speed(int(config.misc.window_animation_speed.value))
+ 		setAnimation_current_listbox(int(config.misc.listbox_animation_default.value))
  		self.close()
  
  	def config(self):
-                 self.session.open(AnimationSetupConfig)
+                self.session.open(AnimationSetupConfig)
  
  	def preview(self):
  		current = self["list"].getCurrent()
@@ -192,11 +195,13 @@ class AnimationSetupConfig(ConfigListScreen, Screen):
  			g_animation_paused = tmp
  
  def checkAttrib(self, paused):
- 	global g_animation_paused
- 	if g_animation_paused is paused and self.skinAttributes is not None:
- 		for (attr, value) in self.skinAttributes:
- 			if attr == "animationPaused" and value in ("1", "on"):
- 				return True
+	if g_animation_paused is paused:
+ 		try:
+ 			for (attr, value) in self.skinAttributes:
+ 				if attr == "animationPaused" and value in ("1", "on"):
+ 					return True
+ 		except:
+ 			pass
  	return False
  
  def screen_show(self):
@@ -220,10 +225,9 @@ def animationSetupMain(session, **kwargs):
  	session.open(AnimationSetupScreen)
  
 def startAnimationSetup(menuid):
- 	if menuid != "system":
- 		return []
- 
- 	return [( _("Animations"), animationSetupMain, "animation_setup", None)]
+ 	if menuid == "system":
+ 		return [( _("Animations"), animationSetupMain, "animation_setup", None)]
+ 	return []
  
 def sessionAnimationSetup(session, reason, **kwargs):
  	setAnimation_current(config.misc.window_animation_default.value)
@@ -239,7 +243,7 @@ def sessionAnimationSetup(session, reason, **kwargs):
  	Screen.doClose = screen_doClose
  
 def Plugins(**kwargs):
- 	plugin_list = [
+ 	return [
  		PluginDescriptor(
  			name = "Animations",
  			description = "Setup UI animations",
@@ -250,5 +254,4 @@ def Plugins(**kwargs):
  			where = PluginDescriptor.WHERE_SESSIONSTART,
  			needsRestart = False,
  			fnc = sessionAnimationSetup),
- 	]
- 	return plugin_list; 
+		] 
