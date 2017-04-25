@@ -20,6 +20,14 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit autotools pkgconfig pythonnative
 
+do_unpack[noexec] = "1"
+do_populate_sysroot[noexec] = "1"
+do_populate_lic[noexec] = "1"
+do_packagedata[noexec] = "1"
+do_package_write_ipk[noexec] = "1"
+do_rm_work[noexec] = "1"
+do_rm_work_all[noexec] = "1"
+
 ACLOCALDIR = "${B}/aclocal-copy"
 e2_copy_aclocal () {
 	rm -rf ${ACLOCALDIR}/
@@ -41,6 +49,7 @@ EXTRA_OECONF = "\
 	--enable-maintainer-mode --with-target=native --with-libsdl=no --with-boxtype=${MACHINE} \
 	--enable-dependency-tracking \
 	${@base_contains("MACHINE_FEATURES", "textlcd", "--with-textlcd" , "", d)} \
+	${@base_contains("GST_VERSION", "1.0", "--with-gstversion=1.0", "", d)} \
 	BUILD_SYS=${BUILD_SYS} \
 	HOST_SYS=${HOST_SYS} \
 	STAGING_INCDIR=${STAGING_INCDIR} \
