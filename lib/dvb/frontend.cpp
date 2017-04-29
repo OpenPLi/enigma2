@@ -1243,7 +1243,7 @@ int eDVBFrontend::readFrontendData(int type)
 							{
 								return signalqualitydb;
 							}
-							if(!signalquality)
+							if(!signalquality || !strstr(m_description, "AVL6211"))
 							{
 								/* provide an estimated percentage when drivers lack this info */
 								calculateSignalPercentage(signalqualitydb, signalquality);
