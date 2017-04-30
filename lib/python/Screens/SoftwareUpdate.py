@@ -293,7 +293,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 			text = ""
 			for i in open("/home/root/ipkgupgrade.log", "r").readlines():
 				text += i
-			self.session.openWithCallback(boundFunction(self.ipkgCallback, IpkgComponent.EVENT_DONE, None), TextBox, text, _("Packages to update"), True)
+			self.session.openWithCallback(boundFunction(self.ipkgCallback, IpkgComponent.EVENT_DONE, None), TextBox, text, _("Latest upgrade log"), True)
 		else:
 			self.ipkg.startCmd(IpkgComponent.CMD_UPGRADE, args = {'test_only': False})
 
