@@ -7,7 +7,7 @@ class FactoryReset(MessageBox, ProtectedScreen):
 		MessageBox.__init__(self, session, _("When you do a factory reset, you will lose ALL your configuration data\n"
 			"(including bouquets, services, satellite data ...)\n"
 			"After completion of factory reset, your receiver will restart automatically!\n\n"
-			"Really do a factory reset?"), MessageBox.TYPE_YESNO)
+			"Really do a factory reset?"), MessageBox.TYPE_YESNO, default=False)
 		self.skinName = "MessageBox"
 		ProtectedScreen.__init__(self)
 
