@@ -100,8 +100,9 @@ class SkinSelector(Screen):
 			self.skinfile = self["SkinList"].getCurrent()
 		self.skinfile = os.path.join(self.skinfile, SKINXML)
 
-		print "Skinselector: Selected Skin: "+self.root+self.skinfile
-		restartbox = self.session.openWithCallback(self.restartGUI,MessageBox,_("GUI needs a restart to apply a new skin\nDo you want to restart the GUI now?"), MessageBox.TYPE_YESNO)
+		print "Skinselector: Selected Skin: " + self.root + self.skinfile
+		list = [ (_("Yes"), True), (_("Only save"), "save"), (_("No"), False) ]
+		restartbox = self.session.openWithCallback(self.restartGUI, MessageBox, _("GUI needs a restart to apply a new skin\nDo you want to restart the GUI now?"), simple=True, list=list)
 		restartbox.setTitle(_("Restart GUI now?"))
 
 	def loadPreview(self):
@@ -120,10 +121,11 @@ class SkinSelector(Screen):
 		self["Preview"].instance.setPixmapFromFile(self.previewPath)
 
 	def restartGUI(self, answer):
-		if answer is True:
+		if answer:
 			config.skin.primary_skin.value = self.skinfile
 			config.skin.primary_skin.save()
-			self.session.open(TryQuitMainloop, 3)
+			if answer is True:
+				self.session.open(TryQuitMainloop, 3)
 
 def SkinSelMain(session, **kwargs):
 	session.open(SkinSelector)
