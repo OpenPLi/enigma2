@@ -2,7 +2,7 @@ from ChannelSelection import ChannelSelection, BouquetSelector, SilentBouquetSel
 
 from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.ActionMap import NumberActionMap
-from Components.Harddisk import harddiskmanager
+from Components.Harddisk import harddiskmanager, internalHDDNotSleeping
 from Components.Input import Input
 from Components.Label import Label
 from Components.MovieList import AUDIO_EXTENSIONS, MOVIE_EXTENSIONS, DVD_EXTENSIONS
@@ -45,7 +45,7 @@ import os
 from bisect import insort
 from sys import maxint
 
-from RecordTimer import RecordTimerEntry, RecordTimer, findSafeRecordPath
+from RecordTimer import RecordTimerEntry, RecordTimer, findSafeRecordPath, checkForRecordings
 
 # hack alert!
 from Menu import MainMenu, mdom
@@ -3399,7 +3399,7 @@ class InfoBarPowersaver:
 
 	def inactivityTimeoutCallback(self, answer):
 		if answer:
-			self.goStandby()
+			self.goStandby(True)
 		else:
 			print "[InfoBarPowersaver] abort"
 
@@ -3408,39 +3408,72 @@ class InfoBarPowersaver:
 			return (self.sleepStartTime - time()) / 60
 		return 0
 
-	def setSleepTimer(self, sleepTime):
+	def setSleepTimer(self, sleepTime, show_popup=True):
 		print "[InfoBarPowersaver] set sleeptimer", sleepTime
 		if sleepTime:
 			m = abs(sleepTime / 60)
-			message = _("The sleep timer has been activated.") + "\n" + _("And will put your receiver in standby over ") + ngettext("%d minute", "%d minutes", m) % m
+			if config.usage.sleep_timer_action.value == "standby":
+				text = _("And will put your receiver in standby over ")
+			else:
+				text = _("And will put your receiver in deep standby over ")
+			message = _("The sleep timer has been activated.") + "\n" + text + ngettext("%d minute", "%d minutes", m) % m
 			self.sleepTimer.startLongTimer(sleepTime)
 			self.sleepStartTime = time() + sleepTime
 		else:
 			message = _("The sleep timer has been disabled.")
 			self.sleepTimer.stop()
-		Notifications.AddPopup(message, type = MessageBox.TYPE_INFO, timeout = 5)
+		if  show_popup and not Screens.Standby.inStandby:
+			Notifications.AddPopup(message, type=MessageBox.TYPE_INFO, timeout=5)
 
 	def sleepTimerTimeout(self):
+		if config.usage.sleep_timer_action.value == "deepstandby":
+			if checkForRecordings():
+				self.setSleepTimer(900, False)
+				if not Screens.Standby.inStandby:
+					message = _("Recording(s) are in progress or coming up in few seconds!") + '\n' + _("Extend sleeptimer 15 minutes") + ".\n" + _("And will put your receiver in deep standby after recording event. Goto standby now?")
+					title = _("Deep standby")
+					self.session.openWithCallback(self.goStandby, MessageBox, message, MessageBox.TYPE_YESNO, timeout=60, simple=True, default=True, timeout_default=True, title=title)
+				return
 		if not Screens.Standby.inStandby:
 			list = [ (_("Yes"), True), (_("Extend sleeptimer 15 minutes"), "extend"), (_("No"), False) ]
-			message = _("Your receiver will got to stand by due to the sleeptimer.")
+			if config.usage.sleep_timer_action.value == "standby":
+				message = _("Your receiver will got to stand by due to the sleeptimer.")
+				title = _("Standby")
+			else:
+				message = _("Your receiver will got to deep standby due to the sleeptimer.")
+				title = _("Deep standby")
 			message += "\n" + _("Do you want this?")
-			self.session.openWithCallback(self.sleepTimerTimeoutCallback, MessageBox, message, timeout=60, simple=True, list=list, default=False, timeout_default=True)
+			self.session.openWithCallback(self.sleepTimerTimeoutCallback, MessageBox, message, timeout=60, simple=True, list=list, default=False, timeout_default=True, title=title)
+		else:
+			self.goStandby()
 
 	def sleepTimerTimeoutCallback(self, answer):
 		if answer == "extend":
 			print "[InfoBarPowersaver] extend sleeptimer"
-			self.setSleepTimer(900)
+			self.setSleepTimer(900, False)
 		elif answer:
 			self.goStandby()
 		else:
 			print "[InfoBarPowersaver] abort"
 			self.setSleepTimer(0)
 
-	def goStandby(self):
-		if not Screens.Standby.inStandby:
-			print "[InfoBarPowersaver] goto standby"
-			self.session.open(Screens.Standby.Standby)
+	def goStandby(self, answer=None):
+		if config.usage.sleep_timer_action.value == "standby" or answer:
+			if not Screens.Standby.inStandby:
+				print "[InfoBarPowersaver] goto standby"
+				self.session.open(Screens.Standby.Standby)
+		elif config.usage.sleep_timer_action.value == "deepstandby" and answer is None:
+			if not Screens.Standby.inStandby:
+				if not Screens.Standby.inTryQuitMainloop:
+					print "[InfoBarPowersaver] goto deep standby"
+					self.session.open(Screens.Standby.TryQuitMainloop, 1)
+			else:
+				if self.session.screen["TunerInfo"].tuner_use_mask or internalHDDNotSleeping():
+					print "[InfoBarPowersaver] extend 10 min. deep standby - tuner or hdd in use"
+					self.setSleepTimer(600, False)
+				else:
+					print "[InfoBarPowersaver] goto deep standby"
+					RecordTimerEntry.TryQuitMainloop()
 
 class InfoBarHDMI:
 	def HDMIIn(self):
