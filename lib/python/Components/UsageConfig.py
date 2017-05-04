@@ -179,11 +179,13 @@ def InitUsageConfig():
 		config.usage.inactivity_timer_blocktime_extra_begin_day[i] = ConfigClock(default = time.mktime((0, 0, 0, 6, 0, 0, 0, 0, 0)))
 		config.usage.inactivity_timer_blocktime_extra_end_day[i] = ConfigClock(default = time.mktime((0, 0, 0, 9, 0, 0, 0, 0, 0)))
 
-	choicelist = [("0", _("Disabled")),("event_standby", _("Standby after current event"))]
+	config.usage.sleep_timer_action = ConfigSelection(default = "standby", choices = [("standby", _("Standby")),("deepstandby", _("Deep standby"))])
+
+	choicelist = [("0", _("Disabled")),("event_standby", _("Execute after current event"))]
 	for i in range(900, 7201, 900):
 		m = abs(i / 60)
 		m = ngettext("%d minute", "%d minutes", m) % m
-		choicelist.append((str(i), _("Standby in ") + m))
+		choicelist.append((str(i), _("Execute in ") + m))
 	config.usage.sleep_timer = ConfigSelection(default = "0", choices = choicelist)
 
 	choicelist = [("0", _("Disabled"))]
