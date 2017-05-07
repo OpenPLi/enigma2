@@ -501,7 +501,7 @@ def SatfinderMain(session, close=None, **kwargs):
 	if len(nimList) == 0:
 		session.open(MessageBox, _("No satellite, terrestrial or cable tuner is configured. Please check your tuner setup."), MessageBox.TYPE_ERROR)
 	else:
-		session.openWithCallback(close, Satfinder)
+		session.open(Satfinder)
 
 def SatfinderStart(menuid, **kwargs):
 	if menuid == "scan":
