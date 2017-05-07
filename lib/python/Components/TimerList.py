@@ -4,8 +4,7 @@ from skin import parseFont
 
 from Tools.FuzzyDate import FuzzyTime
 
-from enigma import eListboxPythonMultiContent, eListbox, gFont, getBestPlayableServiceReference, eServiceReference, \
-	RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_TOP, RT_VALIGN_BOTTOM
+from enigma import eListboxPythonMultiContent, eListbox, gFont, getBestPlayableServiceReference, eServiceReference, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_TOP, RT_VALIGN_BOTTOM
 from Tools.Alternatives import GetWithAlternative
 from Tools.LoadPixmap import LoadPixmap
 from Tools.TextBoundary import getTextBoundarySize
