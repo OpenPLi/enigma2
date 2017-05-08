@@ -68,7 +68,7 @@ class ServiceInfo(Converter, object):
 	def getServiceInfoString(self, info, what, convert = lambda x: "%d" % x):
 		v = info.getInfo(what)
 		if v == -1:
-			return "N/A"
+			return _("N/A")
 		if v == -2:
 			return info.getInfoString(what)
 		return convert(v)
@@ -160,9 +160,9 @@ class ServiceInfo(Converter, object):
 		elif self.type == self.SID:
 			return self.getServiceInfoString(info, iServiceInformation.sSID)
 		elif self.type == self.FRAMERATE:
-			return self.getServiceInfoString(info, iServiceInformation.sFrameRate, lambda x: "%d fps" % ((x+500)/1000))
+			return self.getServiceInfoString(info, iServiceInformation.sFrameRate, lambda x: _("%d fps") % ((x+500)/1000)))
 		elif self.type == self.TRANSFERBPS:
-			return self.getServiceInfoString(info, iServiceInformation.sTransferBPS, lambda x: "%d kB/s" % (x/1024))
+			return self.getServiceInfoString(info, iServiceInformation.sTransferBPS, lambda x: _("%d KB/s") % (x/1024))
 		elif self.type == self.HAS_HBBTV:
 			return info.getInfoString(iServiceInformation.sHBBTVUrl)
 		return ""
