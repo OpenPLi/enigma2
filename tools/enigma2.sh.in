@@ -37,6 +37,9 @@ sync
 # in case sysctl.conf is not properly loaded - load sysctl.conf here again
 sysctl -p
 
+(sleep 2; echo "enigma2 is the main application, Adjust oom score!"; PID=$(pidof enigma2); \
+        [ -e /proc/$PID/oom_score_adj ] && echo "-999" > /proc/$PID/oom_score_adj || echo "-17" > /proc/$PID/oom_adj;) &
+
 LD_PRELOAD=$LIBS @bindir@/enigma2
 
 # enigma2 exit codes:
