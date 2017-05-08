@@ -491,7 +491,7 @@ class ToolExistsPrecondition(Condition):
 
 class AbortedPostcondition(Condition):
 	def getErrorMessage(self, task):
-		return "Cancelled upon user request"
+		return _("Cancelled upon user request")
 
 class ReturncodePostcondition(Condition):
 	def check(self, task):

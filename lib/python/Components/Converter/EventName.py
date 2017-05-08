@@ -134,18 +134,18 @@ class EventName(Converter, object):
 			if event.getPdcPil():
 				running_status = event.getRunningStatus()
 				if running_status == 1:
-					return "not running"
+					return _("not running")
 				if running_status == 2:
-					return "starts in a few seconds"
+					return _("starts in a few seconds")
 				if running_status == 3:
-					return "pausing"
+					return _("pausing")
 				if running_status == 4:
-					return "running"
+					return _("running")
 				if running_status == 5:
-					return "service off-air"
+					return _("service off-air")
 				if running_status in (6,7):
-					return "reserved for future use"
-				return "undefined"
+					return _("reserved for future use")
+				return _("undefined")
 			return ""
 
 	text = property(getText)

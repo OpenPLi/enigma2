@@ -176,7 +176,7 @@ class TimerList(HTMLComponent, GUIComponent, object):
 			if state in (1, 2) and not hasattr(ref, 'sref'):
 				current_ref = getBestPlayableServiceReference(ref.ref, eServiceReference())
 				if not current_ref:
-					return "N/A" + alternative
+					return _("N/A") + alternative
 				else:
 					refstr = current_ref.toString()
 			else:
