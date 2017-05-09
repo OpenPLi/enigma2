@@ -48,14 +48,14 @@ class FrontendInfo(Converter, object):
 			if count is not None:
 				return str(count)
 			else:
-				return "N/A"
+				return _("N/A")
 		elif self.type == self.AGC:
 			percent = self.source.agc
 		elif (self.type == self.SNR and not swapsnr) or (self.type == self.SNRdB and swapsnr):
 			percent = self.source.snr
 		elif self.type  == self.SNR or self.type == self.SNRdB:
 			if self.source.snr_db is not None:
-				return "%3.01f dB" % (self.source.snr_db / 100.0)
+				return _("%3.01f dB") % (self.source.snr_db / 100.0)
 			elif self.source.snr is not None: #fallback to normal SNR...
 				percent = self.source.snr
 		elif self.type == self.TUNER_TYPE:
@@ -91,7 +91,7 @@ class FrontendInfo(Converter, object):
 					string += color + chr(ord("A")+n.slot)
 			return string
 		if percent is None:
-			return "N/A"
+			return _("N/A")
 		return "%d %%" % (percent * 100 / 65535)
 
 	@cached

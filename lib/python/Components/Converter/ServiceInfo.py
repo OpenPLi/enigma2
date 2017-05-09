@@ -68,7 +68,7 @@ class ServiceInfo(Converter, object):
 	def getServiceInfoString(self, info, what, convert = lambda x: "%d" % x):
 		v = info.getInfo(what)
 		if v == -1:
-			return "N/A"
+			return _("N/A")
 		if v == -2:
 			return info.getInfoString(what)
 		return convert(v)
