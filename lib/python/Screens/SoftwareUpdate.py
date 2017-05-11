@@ -285,14 +285,10 @@ class UpdatePlugin(Screen, ProtectedScreen):
 		elif answer[1] == "disclaimer":
 			self.showDisclaimer(justShow=True)
 		elif answer[1] == "showlist":
-			text = ""
-			for i in [x[0] for x in sorted(self.ipkg.getFetchedList(), key=lambda d: d[0])]:
-				text = text and text + "\n" + i or i
+			text = "\n".join([x[0] for x in sorted(self.ipkg.getFetchedList(), key=lambda d: d[0])])
 			self.session.openWithCallback(boundFunction(self.ipkgCallback, IpkgComponent.EVENT_DONE, None), TextBox, text, _("Packages to update"), True)
 		elif answer[1] == "log":
-			text = ""
-			for i in open("/home/root/ipkgupgrade.log", "r").readlines():
-				text += i
+			text = open("/home/root/ipkgupgrade.log", "r").read()
 			self.session.openWithCallback(boundFunction(self.ipkgCallback, IpkgComponent.EVENT_DONE, None), TextBox, text, _("Latest upgrade log"), True)
 		else:
 			self.ipkg.startCmd(IpkgComponent.CMD_UPGRADE, args = {'test_only': False})
