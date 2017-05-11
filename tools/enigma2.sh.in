@@ -78,6 +78,7 @@ case $ret in
 		/etc/init.d/networking stop
 		killall -9 udhcpc
 		rm /var/run/udhcpc*
+		/etc/init.d/dbus-1 reload
 		/etc/init.d/networking start
 		/etc/init.d/avahi-daemon start
 		/etc/init.d/autoinstall.sh
