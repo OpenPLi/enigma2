@@ -663,10 +663,10 @@ class NimManager:
 		return []
 
 	def getCableDescription(self, nim):
-		return self.cablesList[config.Nims[nim].scan_provider.index][0]
+		return self.cablesList[config.Nims[nim].cable.scan_provider.index][0]
 
 	def getCableFlags(self, nim):
-		return self.cablesList[config.Nims[nim].scan_provider.index][1]
+		return self.cablesList[config.Nims[nim].cable.scan_provider.index][1]
 
 	def getTerrestrialDescription(self, nim):
 		return self.terrestrialsList[config.Nims[nim].terrestrial.index][0]
