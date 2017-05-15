@@ -1500,7 +1500,8 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 		i = 0
 		index_to_scan = int(self.scan_nims.value)
 		channels = supportedChannels(index_to_scan)
-		region = self.TerrestrialRegion.description[self.TerrestrialRegion.value]
+		terrestrialRegion = nimmanager.nim_slots[index_to_scan].config.terrestrial
+		region = terrestrialRegion.description[terrestrialRegion.value]
 		tps = nimmanager.getTranspondersTerrestrial(region)
 		for tp in tps:
 			if tp[0] == 2: #TERRESTRIAL
