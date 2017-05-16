@@ -30,8 +30,8 @@ class Wizard(Screen):
 	instance = None
 
 	def createSummary(self):
-			print "WizardCreateSummary"
-			return WizardSummary
+		print "WizardCreateSummary"
+		return WizardSummary
 
 	class parseWizard(ContentHandler):
 		def __init__(self, wizard):
@@ -144,7 +144,7 @@ class Wizard(Screen):
 					else:
 						self.wizard[self.lastStep]["code"] = self.wizard[self.lastStep]["code"] + ch
 			elif self.currContent == "condition":
-				 self.wizard[self.lastStep]["condition"] = self.wizard[self.lastStep]["condition"] + ch
+				self.wizard[self.lastStep]["condition"] = self.wizard[self.lastStep]["condition"] + ch
 
 	def __init__(self, session, showSteps = True, showStepSlider = True, showList = True, showConfig = True):
 		Screen.__init__(self, session)
@@ -578,9 +578,9 @@ class Wizard(Screen):
 				print "showing config"
 				self["config"].instance.setZPosition(1)
 				if self.wizard[self.currStep]["config"]["type"] == "dynamic":
-						print "config type is dynamic"
-						self["config"].instance.setZPosition(2)
-						self["config"].l.setList(eval("self." + self.wizard[self.currStep]["config"]["source"])())
+					print "config type is dynamic"
+					self["config"].instance.setZPosition(2)
+					self["config"].l.setList(eval("self." + self.wizard[self.currStep]["config"]["source"])())
 				elif self.wizard[self.currStep]["config"]["screen"] is not None:
 					if self.wizard[self.currStep]["config"]["type"] == "standalone":
 						print "Type is standalone"
