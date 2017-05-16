@@ -25,10 +25,10 @@ class SleepTimerEdit(ConfigListScreen, Screen):
 
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
-		    "green": self.ok,
-		    "red": self.cancel,
-		    "cancel": self.cancel,
-		    "ok": self.ok,
+			"green": self.ok,
+			"red": self.cancel,
+			"cancel": self.cancel,
+			"ok": self.ok,
 		}, -2)
 
 	def createSetup(self):
