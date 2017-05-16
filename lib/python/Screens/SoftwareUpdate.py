@@ -308,7 +308,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 
 	def exitAnswer(self, result):
 		if result is not None and result:
-			self.session.open(TryQuitMainloop,retvalue=2)
+			self.session.open(TryQuitMainloop, retvalue=2)
 		self.close()
 
 	def __close(self):
