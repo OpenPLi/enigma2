@@ -468,12 +468,12 @@ class TerrestrialTransponderSearchSupport:
 						parm.system = parm.System_DVB_T2
 						parm.plp_id = int(plp_id)
 						self.__tlist.append(parm)
-				tmpstr = _("Try to find used transponders in terrestrial network... please wait...")
-				tmpstr += "\n\n"
-				tmpstr += data[1][:-3]
-				tmpstr += " kHz "
-				tmpstr += data[0]
-				self.terrestrial_search_session["text"].setText(tmpstr)
+			tmpstr = _("Try to find used transponders in terrestrial network... please wait...")
+			tmpstr += "\n\n"
+			tmpstr += data[1][:-3]
+			tmpstr += " kHz "
+			tmpstr += data[0]
+			self.terrestrial_search_session["text"].setText(tmpstr)
 
 	def terrestrialTransponderInitSearchList(self, searchList, region):
 		tpList = nimmanager.getTranspondersTerrestrial(region)
@@ -1078,7 +1078,7 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 			(6000000, "6MHz"),
 			(7000000, "7MHz"),
 			(8000000, "8MHz"),
-			(10000000,"10MHz")
+			(10000000, "10MHz")
 			])
 		#, (eDVBFrontendParametersTerrestrial.Bandwidth_Auto, _("Auto"))))
 		self.scan_ter.fechigh = ConfigSelection(default = defaultTer["fechigh"], choices = [

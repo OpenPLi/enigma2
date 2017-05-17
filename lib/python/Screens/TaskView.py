@@ -38,11 +38,11 @@ class JobView(InfoBarNotifications, Screen, ConfigListScreen):
 
 		self["setupActions"] = ActionMap(["ColorActions", "SetupActions"],
 		{
-		    "green": self.ok,
-		    "red": self.abort,
-		    "blue": self.background,
-		    "cancel": self.ok,
-		    "ok": self.ok,
+			"green": self.ok,
+			"red": self.abort,
+			"blue": self.background,
+			"cancel": self.ok,
+			"ok": self.ok,
 		}, -2)
 
 		self.settings = ConfigSubsection()
@@ -78,7 +78,7 @@ class JobView(InfoBarNotifications, Screen, ConfigListScreen):
 	def windowHide(self):
 		job_manager.visible = False
 		if len(self.job.state_changed) > 0:
-		    self.job.state_changed.remove(self.state_changed)
+			self.job.state_changed.remove(self.state_changed)
 
 	def state_changed(self):
 		j = self.job

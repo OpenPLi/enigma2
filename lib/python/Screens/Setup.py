@@ -27,11 +27,11 @@ def getConfigMenuItem(configElement):
 	return "", None
 
 class SetupError(Exception):
-    def __init__(self, message):
-        self.msg = message
+	def __init__(self, message):
+		self.msg = message
 
-    def __str__(self):
-        return self.msg
+	def __str__(self):
+		return self.msg
 
 class SetupSummary(Screen):
 
@@ -123,7 +123,7 @@ class Setup(ConfigListScreen, Screen):
 
 				requires = x.get("requires")
 				if requires and not SystemInfo.get(requires, False):
-					continue;
+					continue
 
 				item_text = _(x.get("text", "??").encode("UTF-8"))
 				item_description = _(x.get("description", " ").encode("UTF-8"))
@@ -135,7 +135,7 @@ class Setup(ConfigListScreen, Screen):
 				# the first b is the item itself, ignored by the configList.
 				# the second one is converted to string.
 				if not isinstance(item, ConfigNothing):
-					list.append( (item_text, item, item_description) )
+					list.append((item_text, item, item_description))
 
 def getSetupTitle(id):
 	xmldata = setupdom.getroot()
