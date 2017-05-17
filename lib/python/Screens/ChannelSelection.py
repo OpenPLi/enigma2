@@ -978,7 +978,7 @@ class ChannelSelectionEdit:
 				else:
 					print "get mutable list for new created bouquet failed"
 				# do some voodoo to check if current_root is equal to bouquet_root
-				cur_root = self.getRoot();
+				cur_root = self.getRoot()
 				str1 = cur_root and cur_root.toString()
 				pos1 = str1 and str1.find("FROM BOUQUET") or -1
 				pos2 = self.bouquet_rootstr.find("FROM BOUQUET")
@@ -1185,7 +1185,7 @@ class ChannelSelectionEdit:
 			if not mutableList.addService(service):
 				mutableList.flushChanges()
 				# do some voodoo to check if current_root is equal to dest
-				cur_root = self.getRoot();
+				cur_root = self.getRoot()
 				str1 = cur_root and cur_root.toString() or -1
 				str2 = dest.toString()
 				pos1 = str1.find("FROM BOUQUET")
@@ -1500,17 +1500,17 @@ class ChannelSelectionBase(Screen):
 			refstr = '%s FROM SATELLITES ORDER BY satellitePosition'%(self.service_types)
 			if not self.preEnterPath(refstr):
 				ref = eServiceReference(refstr)
-				justSet=False
+				justSet = False
 				prev = None
 
 				if self.isBasePathEqual(ref):
 					if self.isPrevPathEqual(ref):
-						justSet=True
+						justSet = True
 					prev = self.pathUp(justSet)
 				else:
 					currentRoot = self.getRoot()
 					if currentRoot is None or currentRoot != ref:
-						justSet=True
+						justSet = True
 						self.clearPath()
 						self.enterPath(ref, True)
 					if changeMode and currentRoot and currentRoot == ref:
