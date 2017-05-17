@@ -1308,10 +1308,10 @@ class NetworkAdapterTest(Screen):
 			try:
 				from Plugins.SystemPlugins.WirelessLan.Wlan import iStatus
 			except:
-					self["Network"].setForegroundColorNum(1)
-					self["Network"].setText(_("disconnected"))
-					self["NetworkInfo_Check"].setPixmapNum(1)
-					self["NetworkInfo_Check"].show()
+				self["Network"].setForegroundColorNum(1)
+				self["Network"].setText(_("disconnected"))
+				self["NetworkInfo_Check"].setPixmapNum(1)
+				self["NetworkInfo_Check"].show()
 			else:
 				iStatus.getDataForInterface(self.iface,self.getInfoCB)
 		else:
