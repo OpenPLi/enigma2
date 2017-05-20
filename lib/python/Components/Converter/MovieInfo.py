@@ -54,7 +54,7 @@ class MovieInfo(Converter, object):
 					elif filesize >= 1048576:
 						return _("%.0f MB") % (filesize / 1048576.0)
 					elif filesize >= 1024:
-						return _("%.0f kB") % (filesize / 1024.0)
+						return _("%.0f KB") % (filesize / 1024.0)
 					return _("%d B") % filesize
 		return ""
 
