@@ -214,7 +214,7 @@ class TitleList(Screen, HelpableScreen):
 		if source is None:
 			return None
 		if not source.getPath().endswith(".ts"):
-			self.session.open(MessageBox,text = _("You can only burn receiver recordings!"), type = MessageBox.TYPE_ERROR)
+			self.session.open(MessageBox,text = _("You can only burn STB recordings!"), type = MessageBox.TYPE_ERROR)
 			return None
 		t = self.project.addService(source)
 		try:

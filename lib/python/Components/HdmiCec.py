@@ -317,7 +317,7 @@ class HdmiCec:
 				self.sendMessage(message.getAddress(), 'osdname')
 			elif cmd == 0x7e or cmd == 0x72: # system audio mode status
 				if data[0] == '\x01':
-					self.volumeForwardingDestination = 5 # on: send volume keys to receiver
+					self.volumeForwardingDestination = 5 # on: send volume keys to STB
 				else:
 					self.volumeForwardingDestination = 0 # off: send volume keys to tv
 				if config.hdmicec.volume_forwarding.value:

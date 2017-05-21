@@ -70,7 +70,7 @@ class InstallWizard(Screen, ConfigListScreen):
 			if config.misc.installwizard.hasnetwork.value:
 				self.list.append(getConfigListEntry(_("Your internet connection is working (ip: %s)") % (self.ipConfigEntry.getText()), self.enabled))
 			else:
-				self.list.append(getConfigListEntry(_("Your receiver does not have an internet connection"), self.enabled))
+				self.list.append(getConfigListEntry(_("Your STB does not have an internet connection"), self.enabled))
 		elif self.index == self.STATE_CHOISE_CHANNELLIST:
 			self.list.append(getConfigListEntry(_("Install channel list"), self.enabled))
 			if self.enabled.value:

@@ -114,9 +114,9 @@ class OverscanWizard(Screen, ConfigListScreen):
 			self["introduction"].setText(_("You did not see all eight arrow heads. This means your TV has overscan enabled "
 				"and presents you with a zoomed-in picture, causing you to loose part of a full HD screen. In addition this "
 				"you may also miss parts of the user interface, for example volume bars and more.\n\n"
-				"Unfortunately, your model of receiver is not capable to adjust the dimensions of the user interface. "
+				"Unfortunately, your model of STB is not capable to adjust the dimensions of the user interface. "
 				"If not everything is visible, you should change the installed skin to one that supports the overscan area of your TV.\n\n"
-				"When you select a different skin, the user interface of your receiver will restart.\n\n"
+				"When you select a different skin, the user interface of your STB will restart.\n\n"
 				"Note: you can always start the Overscan wizard later,  via\n\nmenu->installation->system->Overscan wizard"))
 			self.yes_no.value = False
 			self.list.append(getConfigListEntry(_("Do you want to select a different skin?"), self.yes_no))
@@ -130,7 +130,7 @@ class OverscanWizard(Screen, ConfigListScreen):
 		elif self.step == 6:
 			config.skin.primary_skin.value = "PLi-HD/skin.xml"
 			config.save()
-			self["introduction"].setText(_("The user interface of the receiver will now restart to select the selected skin"))
+			self["introduction"].setText(_("The user interface of the STB will now restart to select the selected skin"))
 			quitMainloop(3)
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)

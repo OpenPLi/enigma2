@@ -387,12 +387,12 @@ void eDVBLocalTimeHandler::updateTime( time_t tp_time, eDVBChannel *chan, int up
 					now.tm_sec);
 				time_t linuxTime=time(0);
 				localtime_r(&linuxTime, &now);
-				eDebug("[eDVBLocalTimerHandler] Receiver time is %02d:%02d:%02d",
+				eDebug("[eDVBLocalTimerHandler] STB time is %02d:%02d:%02d",
 					now.tm_hour,
 					now.tm_min,
 					now.tm_sec);
 				time_difference = rtc_time - linuxTime;
-				eDebug("[eDVBLocalTimerHandler] RTC to Receiver time difference is %ld seconds", linuxTime - rtc_time );
+				eDebug("[eDVBLocalTimerHandler] RTC to STB time difference is %ld seconds", linuxTime - rtc_time );
 				if ( time_difference )
 				{
 					eDebug("[eDVBLocalTimerHandler] set Linux Time to RTC Time");

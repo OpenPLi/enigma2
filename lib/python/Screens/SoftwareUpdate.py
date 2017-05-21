@@ -105,7 +105,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 		if default:
 			self.showDisclaimer()
 		else:
-			message += "\n" + _("Do you want to update your receiver?")
+			message += "\n" + _("Do you want to update your STB?")
 			self.session.openWithCallback(self.startActualUpdate, MessageBox, message, default = default, picon = picon)
 
 	def showDisclaimer(self, justShow=False):
@@ -209,9 +209,9 @@ class UpdatePlugin(Screen, ProtectedScreen):
 				if self.total_packages:
 					latestImageTimestamp = self.getLatestImageTimestamp()
 					if latestImageTimestamp:
-						message = _("Do you want to update your receiver to %s?") % self.getLatestImageTimestamp() + "\n"
+						message = _("Do you want to update your STB to %s?") % self.getLatestImageTimestamp() + "\n"
 					else:
-						message = _("Do you want to update your receiver?") + "\n"
+						message = _("Do you want to update your STB?") + "\n"
 					message += "(" + (ngettext("%s updated package available", "%s updated packages available", self.total_packages) % self.total_packages) + ")"
 					if self.total_packages > 150:
 						message += " " + _("Reflash recommended!")
@@ -249,11 +249,11 @@ class UpdatePlugin(Screen, ProtectedScreen):
 			else:
 				self.activityTimer.stop()
 				self.activityslider.setValue(0)
-				error = _("Your receiver might be unusable now. Please consult the manual for further assistance before rebooting your receiver.")
+				error = _("Your STB might be unusable now. Please consult the manual for further assistance before rebooting your STB.")
 				if self.packages == 0:
 					error = _("No updates available. Please try again later.")
 				if self.updating:
-					error = _("Update failed. Your receiver does not have a working internet connection.")
+					error = _("Update failed. Your STB does not have a working internet connection.")
 				self.status.setText(_("Error") +  " - " + error)
 		elif event == IpkgComponent.EVENT_LISTITEM:
 			if 'enigma2-plugin-settings-' in param[0] and self.channellist_only > 0:
@@ -299,7 +299,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 	def exit(self):
 		if not self.ipkg.isRunning():
 			if self.packages != 0 and self.error == 0 and self.channellist_only == 0:
-				self.session.openWithCallback(self.exitAnswer, MessageBox, _("Update completed. Do you want to reboot your receiver?"))
+				self.session.openWithCallback(self.exitAnswer, MessageBox, _("Update completed. Do you want to reboot your STB?"))
 			else:
 				self.close()
 		else:
