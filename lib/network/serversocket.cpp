@@ -35,29 +35,27 @@ void eServerSocket::notifier(int)
 
 	switch(client_addr.sock.sa_family)
 	{
-		case(PF_LOCAL):
+		case(AF_LOCAL):
 		{
 			strRemoteHost = "(local)";
 			break;
 		}
 
-		case(PF_INET):
+		case(AF_INET):
 		{
-			strRemoteHost = inet_ntop(PF_INET, &client_addr.sock_in.sin_addr, straddr, sizeof(straddr));
+			strRemoteHost = inet_ntop(AF_INET, &client_addr.sock_in.sin_addr, straddr, sizeof(straddr));
 			break;
 		}
 
-		case(PF_INET6):
+		case(AF_INET6):
 		{
-			static uint8_t ipv4_mapped_pattern[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff };
-
-			if(!memcmp(&client_addr.sock_in6.sin6_addr, ipv4_mapped_pattern, sizeof(ipv4_mapped_pattern)))
+			if(IN6_IS_ADDR_V4MAPPED(&client_addr.sock_in6.sin6_addr))
 			{
 				 // ugly hack to get real ipv4 address without the ::ffff:, inet_ntop doesn't have an option for it
-				strRemoteHost = inet_ntop(PF_INET, (sockaddr_in *)&client_addr.sock_in6.sin6_addr.s6_addr[12], straddr, sizeof(straddr));
+				strRemoteHost = inet_ntop(AF_INET, (sockaddr_in *)&client_addr.sock_in6.sin6_addr.s6_addr[12], straddr, sizeof(straddr));
 			}
 			else
-				strRemoteHost = inet_ntop(PF_INET6, &client_addr.sock_in6.sin6_addr, straddr, sizeof(straddr));
+				strRemoteHost = inet_ntop(AF_INET6, &client_addr.sock_in6.sin6_addr, straddr, sizeof(straddr));
 
 			break;
 		}
