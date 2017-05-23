@@ -540,7 +540,7 @@ class NIM(object):
 		return connectable[self.getType()]
 
 	def getSlotID(self, slot=None):
-		return chr(ord('A') + (slot or self.slot))
+		return chr(ord('A') + (slot if slot is not None else self.slot))
 
 	def getSlotName(self):
 		# get a friendly description for a slot name.
