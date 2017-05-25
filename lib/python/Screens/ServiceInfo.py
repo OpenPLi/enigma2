@@ -23,7 +23,7 @@ TYPE_VALUE_BITRATE = 8
 def to_unsigned(x):
 	return x & 0xFFFFFFFF
 
-def ServiceInfoListEntry(a, b, valueType=TYPE_TEXT, param=4):
+def ServiceInfoListEntry(a, b="", valueType=TYPE_TEXT, param=4):
 	print "b:", b
 	if not isinstance(b, str):
 		if valueType == TYPE_VALUE_HEX:
@@ -47,12 +47,19 @@ def ServiceInfoListEntry(a, b, valueType=TYPE_TEXT, param=4):
 	x, y, w, h = skin.parameters.get("ServiceInfo",(0, 0, 300, 30))
 	xa, ya, wa, ha = skin.parameters.get("ServiceInfoLeft",(0, 0, 300, 25))
 	xb, yb, wb, hb = skin.parameters.get("ServiceInfoRight",(300, 0, 600, 25))
-	return [
-		#PyObject *type, *px, *py, *pwidth, *pheight, *pfnt, *pstring, *pflags;
-		(eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, RT_HALIGN_LEFT, ""),
-		(eListboxPythonMultiContent.TYPE_TEXT, xa, ya, wa, ha, 0, RT_HALIGN_LEFT, a),
-		(eListboxPythonMultiContent.TYPE_TEXT, xb, yb, wb, hb, 0, RT_HALIGN_LEFT, b)
-	]
+	if b:
+		return [
+			#PyObject *type, *px, *py, *pwidth, *pheight, *pfnt, *pstring, *pflags;
+			(eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, RT_HALIGN_LEFT, ""),
+			(eListboxPythonMultiContent.TYPE_TEXT, xa, ya, wa, ha, 0, RT_HALIGN_LEFT, a),
+			(eListboxPythonMultiContent.TYPE_TEXT, xb, yb, wb, hb, 0, RT_HALIGN_LEFT, b)
+		]
+	else:
+		return [
+			#PyObject *type, *px, *py, *pwidth, *pheight, *pfnt, *pstring, *pflags;
+			(eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, RT_HALIGN_LEFT, ""),
+			(eListboxPythonMultiContent.TYPE_TEXT, xa, ya, wa + wb, ha + hb, 0, RT_HALIGN_LEFT, a)
+		]
 
 class ServiceInfoList(HTMLComponent, GUIComponent):
 	def __init__(self, source):
@@ -81,6 +88,7 @@ class ServiceInfo(Screen):
 			"ok": self.close,
 			"cancel": self.close,
 			"red": self.close,
+			"green": self.ShowECMInformation,
 			"yellow": self.ShowServiceInformation,
 			"blue": self.ShowTransponderInformation
 		}, -1)
@@ -88,6 +96,7 @@ class ServiceInfo(Screen):
 		self["infolist"] = ServiceInfoList([])
 		self.setTitle(_("Service info"))
 		self["key_red"] = self["red"] = Label(_("Exit"))
+		self["key_green"] = self["green"] = Label(_("ECM Info"))
 
 		self.transponder_info = self.info = self.feinfo = None
 		play_service = session.nav.getCurrentlyPlayingServiceReference()
@@ -250,3 +259,30 @@ class ServiceInfo(Screen):
 				v = _("N/A")
 			return v
 		return ""
+
+	def ShowECMInformation(self):
+		from Components.Converter.PliExtraInfo import caid_data
+		self["Title"].text = _("Service info - ECM Info")
+		tlist = []
+		for caid in set(list(self.info.getInfoObject(iServiceInformation.sCAIDPIDs))):
+			CaIdDescription = _("Undefined")
+			extra_info = ""
+			for caid_entry in caid_data:
+				if int(caid_entry[0], 16) <= caid[0] <= int(caid_entry[1], 16):
+					CaIdDescription = caid_entry[2]
+					break
+			if caid[2]:
+				provid = ""
+				if CaIdDescription == "Seca":
+					provid = caid[2][:4]
+				if CaIdDescription == "Nagra":
+					provid = caid[2][-4:]
+				if CaIdDescription == "Via":
+					provid = caid[2][-6:]
+				if provid:
+					extra_info = "provid=%s" % provid
+				else:
+					extra_info = "extra data=%s" % caid[2]
+			tlist.append(ServiceInfoListEntry("ECMPid %04X (%d) %04X-%s %s" % (caid[1], caid[1], caid[0], CaIdDescription, extra_info)))
+		self["infolist"].l.setList(tlist)
+
