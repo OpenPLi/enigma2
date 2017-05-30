@@ -21,6 +21,7 @@
 		<alias name="Bigger" font="FdLcD" size="106" height="106" />
 		<alias name="Big" font="FdLcD" size="84" height="84" />
 		<alias name="Medium" font="FdLcD" size="60" height="60" />
+		<alias name="Smaller" font="FdLcD" size="54" height="60" />
 		<alias name="Small" font="FdLcD" size="48" height="48" />
 	</fonts>
 	<colors>
@@ -237,7 +238,7 @@
 		<widget source="session.RecordState" render="FixedLabel" text="&#174;" position="380,10" foregroundColor="#ff0000" size="55,45" font="FdLcD;40" halign="left" valign="center" zPosition="22">
 			<convert type="ConditionalShowHide"></convert>
 		</widget>
-		<widget source="session.CurrentService" render="Label" position="10,110" size="770,260" font="Medium" halign="center" valign="center" >
+		<widget source="session.CurrentService" render="Label" position="10,170" size="770,182" font="Smaller" halign="center" valign="center" >
 			<convert type="ServiceName">Name</convert>
 		</widget>
 		<widget source="session.CurrentService" render="Progress" position="10,370" size="770,15" borderWidth="0" foregroundColor="lightcyan" backgroundColor="darkgrey">
