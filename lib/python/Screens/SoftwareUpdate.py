@@ -85,7 +85,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 		try:
 			# TODO: Use Twisted's URL fetcher, urlopen is evil. And it can
 			# run in parallel to the package update.
-			url = "http://openpli.org/status/"
+			url = "https://openpli.org/status/"
 			try:
 				status = urlopen(url, timeout=5).read().split('!', 1)
 			except:
