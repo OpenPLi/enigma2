@@ -135,7 +135,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 			from datetime import datetime
 			imageVersion = about.getImageTypeString().split(" ")[1]
 			imageVersion = (int(imageVersion) < 5 and "%.1f" or "%s") % int(imageVersion)
-			url = "http://openpli.org/download/timestamp/%s~%s" % (HardwareInfo().get_device_model(), imageVersion)
+			url = "https://openpli.org/download/timestamp/%s~%s" % (HardwareInfo().get_device_model(), imageVersion)
 			try:
 				latestImageTimestamp = datetime.fromtimestamp(int(urlopen(url, timeout=5).read())).strftime(_("%Y-%m-%d %H:%M"))
 			except:
