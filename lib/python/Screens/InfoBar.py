@@ -50,6 +50,9 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 				"showRadio": (self.showRadio, _("Show the radio player...")),
 				"showTv": (self.showTv, _("Show the tv player...")),
 				"toggleTvRadio": (self.toggleTvRadio, _("Toggle the tv and the radio player...")),
+				"showPluginBrowser": (self.showPluginBrowser, _("Go to Plug-ins")),
+				"openSleepTimer": (self.openSleepTimer, _("Show/Add Sleep Timers")),
+				"openBouquetList": (self.openBouquetList, _("Show Favorite Lists")),
 			}, prio=2)
 
 		self.radioTV = 0
@@ -144,6 +147,18 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 			from Components.ParentalControl import parentalControl
 			if parentalControl.isServicePlayable(service, self.openMoviePlayer):
 				self.openMoviePlayer(service)
+
+	def openSleepTimer(self):
+		from Screens.SleepTimerEdit import SleepTimerEdit
+		self.session.open(SleepTimerEdit)
+
+	def showPluginBrowser(self):
+		from Screens.PluginBrowser import PluginBrowser
+		self.session.open(PluginBrowser)
+		
+	def openBouquetList(self):
+		self.showTvChannelList(True)
+		self.servicelist.showFavourites()
 
 	def openMoviePlayer(self, ref):
 		self.session.open(MoviePlayer, ref, slist=self.servicelist, lastservice=self.session.nav.getCurrentlyPlayingServiceOrGroup(), infobar=self)
