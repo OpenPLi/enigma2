@@ -4,6 +4,12 @@ prefix=@prefix@
 exec_prefix=@exec_prefix@
 datarootdir=@datarootdir@
 
+# workaround for corrupt ssl files
+if [ ! "$(grep config.misc.firstrun /etc/enigma2/settings)" == "config.misc.firstrun=false" ]; then
+	rm -rf /etc/enigma2/cert.pem &
+	rm -rf /etc/enigma2/key.pem &
+fi
+
 if [ -x @bindir@/showiframe ]; then
 	if [ -f @sysconfdir@/enigma2/backdrop.mvi ]; then
 		@bindir@/showiframe @sysconfdir@/enigma2/backdrop.mvi
@@ -27,6 +33,13 @@ fi
 LIBS=@libdir@/libopen.so.0.0.0
 
 sync
+
+# in case sysctl.conf is not properly loaded - load sysctl.conf here again
+sysctl -p
+
+(sleep 2; echo "enigma2 is the main application, Adjust oom score!"; PID=$(pidof enigma2); \
+        [ -e /proc/$PID/oom_score_adj ] && echo "-999" > /proc/$PID/oom_score_adj || echo "-17" > /proc/$PID/oom_adj;) &
+
 LD_PRELOAD=$LIBS @bindir@/enigma2
 
 # enigma2 exit codes:
