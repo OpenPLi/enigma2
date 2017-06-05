@@ -307,12 +307,14 @@ public:
 		dxIsParentalProtected=256,
 		dxHideVBI=512,
 		dxIsScrambledPMT=1024,
+		dxCenterDVBSubs=2048,
 	};
 
 	bool usePMT() const { return !(m_flags & dxNoDVB); }
 	bool isHidden() const { return (m_flags & dxDontshow || m_flags & dxIsParentalProtected); }
 	bool isDedicated3D() const { return m_flags & dxIsDedicated3D; }
 	bool doHideVBI() const { return m_flags & dxHideVBI; }
+	bool doCenterDVBSubs() const { return m_flags & dxCenterDVBSubs; }
 
 	CAID_LIST m_ca;
 
