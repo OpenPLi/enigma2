@@ -206,7 +206,7 @@ class TimerEntry(Screen, ConfigListScreen):
 		self.list.append(self.entryStartTime)
 
 		self.entryShowEndTime = getConfigListEntry(_("Set end time"), self.timerentry_showendtime)
-		self.entryZapWakeup = getConfigListEntry(_("Wakeup receiver for start timer"), self.timerentry_zapwakeup)
+		self.entryZapWakeup = getConfigListEntry(_("Wakeup STB for start timer"), self.timerentry_zapwakeup)
 		if self.timerentry_justplay.value == "zap":
 			self.list.append(self.entryZapWakeup)
 			self.list.append(self.entryShowEndTime)

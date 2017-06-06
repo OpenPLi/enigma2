@@ -3409,7 +3409,7 @@ class InfoBarPowersaver:
 		if Screens.Standby.inStandby:
 			self.inactivityTimeoutCallback(True)
 		else:
-			message = _("Your receiver will got to standby due to inactivity.") + "\n" + _("Do you want this?")
+			message = _("Your STB will got to standby due to inactivity.") + "\n" + _("Do you want this?")
 			self.session.openWithCallback(self.inactivityTimeoutCallback, MessageBox, message, timeout=60, simple=True, default=False, timeout_default=True)
 
 	def inactivityTimeoutCallback(self, answer):
@@ -3427,7 +3427,7 @@ class InfoBarPowersaver:
 		print "[InfoBarPowersaver] set sleeptimer", sleepTime
 		if sleepTime:
 			m = abs(sleepTime / 60)
-			message = _("The sleep timer has been activated.") + "\n" + _("And will put your receiver in standby over ") + ngettext("%d minute", "%d minutes", m) % m
+			message = _("The sleep timer has been activated.") + "\n" + _("And will put your STB in standby over ") + ngettext("%d minute", "%d minutes", m) % m
 			self.sleepTimer.startLongTimer(sleepTime)
 			self.sleepStartTime = time() + sleepTime
 		else:
@@ -3438,7 +3438,7 @@ class InfoBarPowersaver:
 	def sleepTimerTimeout(self):
 		if not Screens.Standby.inStandby:
 			list = [ (_("Yes"), True), (_("Extend sleeptimer 15 minutes"), "extend"), (_("No"), False) ]
-			message = _("Your receiver will got to stand by due to the sleeptimer.")
+			message = _("Your STB will got to stand by due to the sleeptimer.")
 			message += "\n" + _("Do you want this?")
 			self.session.openWithCallback(self.sleepTimerTimeoutCallback, MessageBox, message, timeout=60, simple=True, list=list, default=False, timeout_default=True)
 

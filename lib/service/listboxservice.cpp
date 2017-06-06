@@ -716,7 +716,7 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 			}
 			else
 			{
-				if (isplayable_value == 2) // fallback receiver service
+				if (isplayable_value == 2) // fallback STB service
 				{
 					if (m_color_set[serviceItemFallback])
 						painter.setForegroundColor(m_color[serviceItemFallback]);
@@ -797,7 +797,7 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 							else
 								painter.setForegroundColor(gRGB(0xe7b53f));
 
-							if (serviceFallback && !selected && m_color_set[eventForegroundFallback]) // fallback receiver
+							if (serviceFallback && !selected && m_color_set[eventForegroundFallback]) // fallback STB
 								painter.setForegroundColor(m_color[eventForegroundFallback]);
 							else if (serviceFallback && selected && m_color_set[eventForegroundSelectedFallback])
 								painter.setForegroundColor(m_color[eventForegroundSelectedFallback]);

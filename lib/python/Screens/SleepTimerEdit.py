@@ -42,7 +42,7 @@ class SleepTimerEdit(ConfigListScreen, Screen):
 			_("Configure the duration in minutes for the sleeptimer. Select this entry and click OK or green to start/stop the sleeptimer")))
 		self.list.append(getConfigListEntry(_("Inactivity Sleeptimer"),
 			config.usage.inactivity_timer,
-			_("Configure the duration in hours the receiver should go to standby when the receiver is not controlled.")))
+			_("Configure the duration in hours the STB should go to standby when the STB is not controlled.")))
 		if int(config.usage.inactivity_timer.value):
 			self.list.append(getConfigListEntry(_("Specify timeframe to ignore inactivity sleeptimer"),
 				config.usage.inactivity_timer_blocktime,
@@ -91,18 +91,18 @@ class SleepTimerEdit(ConfigListScreen, Screen):
 							_("Specify the extra end time until the inactivity sleeptimer should be ignored")))
 		self.list.append(getConfigListEntry(_("Shutdown when in Standby"),
 			config.usage.standby_to_shutdown_timer,
-			_("Configure the duration when the receiver should go to shut down in case the receiver is in standby mode.")))
+			_("Configure the duration when the STB should go to shut down in case the STB is in standby mode.")))
 		if int(config.usage.standby_to_shutdown_timer.value):
 			self.list.append(getConfigListEntry(_("Specify timeframe to ignore the shutdown in standby"),
 				config.usage.standby_to_shutdown_timer_blocktime,
-				_("When enabled you can specify a timeframe to ignore the shutdown timer when the receiver is in standby mode")))
+				_("When enabled you can specify a timeframe to ignore the shutdown timer when the STB is in standby mode")))
 			if config.usage.standby_to_shutdown_timer_blocktime.value:
 				self.list.append(getConfigListEntry(_("Start time to ignore shutdown in standby"),
 					config.usage.standby_to_shutdown_timer_blocktime_begin,
-					_("Specify the start time to ignore the shutdown timer when the receiver is in standby mode")))
+					_("Specify the start time to ignore the shutdown timer when the STB is in standby mode")))
 				self.list.append(getConfigListEntry(_("End time to ignore shutdown in standby"),
 					config.usage.standby_to_shutdown_timer_blocktime_end,
-					_("Specify the end time to ignore the shutdown timer when the receiver is in standby mode")))
+					_("Specify the end time to ignore the shutdown timer when the STB is in standby mode")))
 		self.list.append(getConfigListEntry(_("Enable wakeup timer"),
 			config.usage.wakeup_enabled,
 			_("Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'.")))

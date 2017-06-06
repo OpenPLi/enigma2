@@ -162,7 +162,7 @@ public:
 	std::vector<T>* getVector()
 	{
 		// Creates an vector and copys all elements to this vector
-		// returns a pointer to this new vector ( the reserved memory must deletet from the receiver !! )
+		// returns a pointer to this new vector ( the reserved memory must deleted from the STB !! )
 		std::vector<T>* v=new std::vector<T>();
 		v->reserve( std::list<T>::size() );
 		for ( std_list_T_iterator it( std::list<T*>::begin() ); it != std::list<T*>::end(); it++)
@@ -810,7 +810,7 @@ public:
 	std::vector<T>* getVector()
 	{
 		// Creates an vector and copys all elements to this vector
-		// returns a pointer to this new vector ( the reserved memory must deletet from the receiver !! )
+		// returns a pointer to this new vector ( the reserved memory must deleted from the STB !! )
 		std::vector<T>* v=new std::vector<T>();
 		v->reserve( std::list<T>::size() );
     for ( std_list_T_iterator it( std::list<ePtr<T> >::begin() ); it != std::list<ePtr<T> >::end(); it++)
