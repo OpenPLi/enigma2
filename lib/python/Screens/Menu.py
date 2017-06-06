@@ -282,7 +282,7 @@ class Menu(Screen, ProtectedScreen):
 		self.number = self.number * 10 + number
 		if self.number and self.number <= len(self["menu"].list):
 			self["menu"].setIndex(self.number - 1)
-			if len(self["menu"].list) < 10 or self.number >= 10:
+			if number * 10 > len(self["menu"].list) or self.number >= 10:
 				self.okbuttonClick()
 			else:
 				self.nextNumberTimer.start(1500, True)
