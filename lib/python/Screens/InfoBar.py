@@ -11,15 +11,7 @@ profile("LOAD:enigma")
 import enigma
 
 profile("LOAD:InfoBarGenerics")
-from Screens.InfoBarGenerics import InfoBarShowHide, \
-	InfoBarNumberZap, InfoBarChannelSelection, InfoBarMenu, InfoBarRdsDecoder, \
-	InfoBarEPG, InfoBarSeek, InfoBarInstantRecord, InfoBarRedButton, InfoBarTimerButton, InfoBarVmodeButton, \
-	InfoBarAudioSelection, InfoBarAdditionalInfo, InfoBarNotifications, InfoBarDish, InfoBarUnhandledKey, \
-	InfoBarSubserviceSelection, InfoBarShowMovies, InfoBarTimeshift,  \
-	InfoBarServiceNotifications, InfoBarPVRState, InfoBarCueSheetSupport, InfoBarBuffer, \
-	InfoBarSummarySupport, InfoBarMoviePlayerSummarySupport, InfoBarTimeshiftState, InfoBarTeletextPlugin, InfoBarExtensions, \
-	InfoBarSubtitleSupport, InfoBarPiP, InfoBarPlugins, InfoBarServiceErrorPopupSupport, InfoBarJobman, InfoBarPowersaver, \
-	InfoBarHDMI, setResumePoint, delResumePoint
+from Screens.InfoBarGenerics import InfoBarShowHide, InfoBarNumberZap, InfoBarChannelSelection, InfoBarMenu, InfoBarRdsDecoder, InfoBarEPG, InfoBarSeek, InfoBarInstantRecord, InfoBarRedButton, InfoBarTimerButton, InfoBarVmodeButton, InfoBarAudioSelection, InfoBarAdditionalInfo, InfoBarNotifications, InfoBarDish, InfoBarUnhandledKey, InfoBarSubserviceSelection, InfoBarShowMovies, InfoBarTimeshift, InfoBarServiceNotifications, InfoBarPVRState, InfoBarCueSheetSupport, InfoBarBuffer, InfoBarSummarySupport, InfoBarMoviePlayerSummarySupport, InfoBarTimeshiftState, InfoBarTeletextPlugin, InfoBarExtensions, InfoBarSubtitleSupport, InfoBarPiP, InfoBarPlugins, InfoBarServiceErrorPopupSupport, InfoBarJobman, InfoBarPowersaver, InfoBarHDMI, setResumePoint, delResumePoint
 from Screens.Hotkey import InfoBarHotkey
 
 profile("LOAD:InitBar_Components")
@@ -55,14 +47,7 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 		self.radioTV = 0
 		self.allowPiP = True
 
-		for x in HelpableScreen, \
-				InfoBarBase, InfoBarShowHide, \
-				InfoBarNumberZap, InfoBarChannelSelection, InfoBarMenu, InfoBarEPG, InfoBarRdsDecoder, \
-				InfoBarInstantRecord, InfoBarAudioSelection, InfoBarRedButton, InfoBarTimerButton, InfoBarUnhandledKey, InfoBarVmodeButton,\
-				InfoBarAdditionalInfo, InfoBarNotifications, InfoBarDish, InfoBarSubserviceSelection, InfoBarBuffer, \
-				InfoBarTimeshift, InfoBarSeek, InfoBarCueSheetSupport, InfoBarSummarySupport, InfoBarTimeshiftState, \
-				InfoBarTeletextPlugin, InfoBarExtensions, InfoBarPiP, InfoBarSubtitleSupport, InfoBarJobman, InfoBarPowersaver, \
-				InfoBarPlugins, InfoBarServiceErrorPopupSupport, InfoBarHotkey:
+		for x in HelpableScreen, InfoBarBase, InfoBarShowHide, InfoBarNumberZap, InfoBarChannelSelection, InfoBarMenu, InfoBarEPG, InfoBarRdsDecoder, InfoBarInstantRecord, InfoBarAudioSelection, InfoBarRedButton, InfoBarTimerButton, InfoBarUnhandledKey, InfoBarVmodeButton, InfoBarAdditionalInfo, InfoBarNotifications, InfoBarDish, InfoBarSubserviceSelection, InfoBarBuffer, InfoBarTimeshift, InfoBarSeek, InfoBarCueSheetSupport, InfoBarSummarySupport, InfoBarTimeshiftState, InfoBarTeletextPlugin, InfoBarExtensions, InfoBarPiP, InfoBarSubtitleSupport, InfoBarJobman, InfoBarPowersaver, InfoBarPlugins, InfoBarServiceErrorPopupSupport, InfoBarHotkey:
 			x.__init__(self)
 
 		self.helpList.append((self["actions"], "InfobarActions", [("showMovies", _("Watch recordings..."))]))
