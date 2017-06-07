@@ -23,7 +23,7 @@
 			<item level="2" text="Streaming clients info" entryID="streaming_clients_info_screen"><screen module="StreamingClientsInfo"/></item>
 		</menu>
 
-		<item level="1" text="Plugins" entryID="plugin_selection"><screen module="PluginBrowser" screen="PluginBrowser"/></item>
+		<item level="0" text="Plugins" entryID="plugin_selection"><screen module="PluginBrowser" screen="PluginBrowser"/></item>
 		<menu level="0" text="Setup" flushConfigOnClose="1" entryID="setup_selection" >
 			<id val="setup"/>
 			<menu weight="7" level="0" text="Service searching" entryID="service_searching_selection">
@@ -36,11 +36,15 @@
 				<id val="system"/>
 				<item level="0" entryID="usage_setup"><setup id="usage"/></item>
 				<item level="0" entryID="user_interface"><setup id="userinterface"/></item>
-				<item level="0" entryID="epg_settings"><setup id="epgsettings"/></item>
+
+				
+				<menu level="0" text="Expert Settings" entryID="expert_selection">
+					<id val="expert"/>
+				<item level="2" entryID="epg_settings"><setup id="epgsettings"/></item>
 				<item level="0" entryID="recording_setup"><setup id="recording"/></item>
 				<item level="2" entryID="subtitle_setup"><setup id="subtitlesetup"/></item>
-				<item level="1" entryID="autolanguage_setup"><setup id="autolanguagesetup"/></item>
-				<item level="0" entryID="av_setup"><setup id="avsetup"/></item>
+				<item level="0" entryID="autolanguage_setup"><setup id="autolanguagesetup"/></item>
+				<item level="1" entryID="av_setup"><setup id="avsetup"/></item>
 				<item level="1" entryID="rfmod_setup" requires="RfModulator"><setup id="RFmod"/></item>
 				<menu level="0" text="Harddisk" entryID="hardisk_selection" requires="Harddisk">
 					<id val="harddisk"/>
@@ -56,7 +60,10 @@
 				<item level="2" text="Recording paths" entryID="RecordPaths"><screen module="RecordPaths" screen="RecordPathsSettings"/></item>
 				<item level="0" text="Language" entryID="language_setup"><screen module="LanguageSelection"/></item>
 				<item level="0" entryID="timezone_setup"><setup id="timezone"/></item>
-				<item level="0" text="Hotkey" entryID="hotkey_setup"><screen module="Hotkey" screen="HotkeySetup"/></item>
+				<item level="1" text="Hotkey" entryID="hotkey_setup"><screen module="Hotkey" screen="HotkeySetup"/></item>
+
+				</menu>
+
 			</menu>
 			<menu weight="10" text="SoftCam / CI" entryID="cam_setup">
 				<id val="cam"/>

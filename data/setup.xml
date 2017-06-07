@@ -7,14 +7,14 @@
 	</setup>
 	<setup key="usage" title="Customize">
 		<item level="0" text="Setup mode" description="Configure which access level to use for the configuration menu. Expert level gives access to all items.">config.usage.setup_level</item>
-		<item level="0" text="Sort order for menu entries" description="This option allows you to hide and sort menu entries. When selecting user you can change order and hide menu items via the blue button">config.usage.menu_sort_mode</item>
-		<item level="0" text="Show menu paths" description="This option allows you to show menu paths.">config.usage.menu_path</item>
+		<item level="1" text="Sort order for menu entries" description="This option allows you to hide and sort menu entries. When selecting user you can change order and hide menu items via the blue button">config.usage.menu_sort_mode</item>
+		<item level="1" text="Show menu paths" description="This option allows you to show menu paths.">config.usage.menu_path</item>
 		<item level="0" text="Show menu numbers" description="This option allows you to show menu number quick links.">config.usage.menu_show_numbers</item>
 		<item level="0" text="Show softcam setup in extensions menu" description="This option allows you to add the softcam setup in the extensions menu.">config.misc.softcam_setup.extension_menu</item>
 		<item level="1" text="Zap mode" requires="ZapMode" description="Configure the way in which the receiver changes channels.">config.misc.zapmode</item>
-		<item level="1" text="Enable teletext caching" description="When enabled, teletext pages will be cached, allowing faster access.">config.usage.enable_tt_caching</item>
+		<item level="2" text="Enable teletext caching" description="When enabled, teletext pages will be cached, allowing faster access.">config.usage.enable_tt_caching</item>
 		<item level="1" text="12V output" description="12V output" requires="12V_Output.">config.usage.output_12V</item>
-		<item level="2" text="Alternative services tuner priority" description="Configure which tuner type will be preferred, when the same service is available on different types of tuners. Choose 'no priority' to try each alternative one by one independent from tuner type.">config.usage.alternatives_priority</item>
+		<item level="1" text="Alternative services tuner priority" description="Configure which tuner type will be preferred, when the same service is available on different types of tuners. Choose 'no priority' to try each alternative one by one independent from tuner type.">config.usage.alternatives_priority</item>
 		<item level="2" text="Enable fallback remote receiver" description="Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001.">config.usage.remote_fallback_enabled</item>
 		<item level="2" text="Fallback remote receiver URL" description="URL of fallback remote receiver">config.usage.remote_fallback</item>
 		<item level="2" text="Preferred tuner" description="Configure which tuner will be preferred, when more than one tuner is available. If set to 'auto' the system will give priority to the tuner having the lowest number of channels/satellites.">config.usage.frontend_priority</item>
@@ -37,7 +37,7 @@
 		<item level="2" text="Fan operation" description="Configure how the fan should operate" requires="Fan">config.usage.fan</item>
 		<item level="2" text="Fan speed" description="Configure the speed of the fan" requires="FanPWM">config.usage.fanspeed</item>
 		<item level="2" text="Wake On LAN" description="When enabled the set top box is able to wakeup on LAN" requires="WakeOnLAN">config.usage.wakeOnLAN</item>
-		<item level="2" text="Startup to Standby" description="Startup the set top box in standby">config.usage.startup_to_standby</item>
+		<item level="0" text="Startup to Standby" description="Startup the set top box in standby">config.usage.startup_to_standby</item>
 		<item level="2" text="Config resolution of pictures" description="configure in which resolution pictures are displayed with the picture viewer and movieplayer">config.usage.pic_resolution</item>
 		<item level="2" text="Load unlinked userbouquets" description="When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are upgraded">config.misc.load_unlinked_userbouquets</item>
 	</setup>
@@ -47,16 +47,16 @@
 		<item level="1" text="Show positioner position" description="Configure whether or not an rotor position will be displayed on infobar">config.misc.showrotorposition</item>
 		<item level="1" text="Enable multiple bouquets" description="When enabled, services may be grouped in multiple bouquets.">config.usage.multibouquet</item>
 		<item level="1" text="Multi-EPG bouquet selection" description="Enable bouquet selection in multi-EPG">config.usage.multiepg_ask_bouquet</item>
-		<item level="1" text="Alternative numbering mode" description="When enabled, channel numbering will start at '1' for each bouquet.">config.usage.alternative_number_mode</item>
-		<item level="1" text="Hide number markers" description="When enabled, number markers will be hiden.">config.usage.hide_number_markers</item>
+		<item level="0" text="Alternative numbering mode" description="When enabled, channel numbering will start at '1' for each bouquet.">config.usage.alternative_number_mode</item>
+		<item level="2" text="Hide number markers" description="When enabled, number markers will be hiden.">config.usage.hide_number_markers</item>
 		<item level="0" text="Show channel numbers in channel selection" description="When enabled, show channel numbers in the channel selection screen.">config.usage.show_channel_numbers_in_servicelist</item>
 		<item level="0" text="Show event-progress in channel selection" description="Set the type of the progress indication in the channel selection screen.">config.usage.show_event_progress_in_servicelist</item>
-		<item level="1" text="Show service type icons" description="Configure if and how service type icons will be shown in the channel selection list.">config.usage.servicetype_icon_mode</item>
-		<item level="1" text="Show crypto icons" description="Configure if and how crypto icons will be shown in the channel selection list.">config.usage.crypto_icon_mode</item>
+		<item level="2" text="Show service type icons" description="Configure if and how service type icons will be shown in the channel selection list.">config.usage.servicetype_icon_mode</item>
+		<item level="2" text="Show crypto icons" description="Configure if and how crypto icons will be shown in the channel selection list.">config.usage.crypto_icon_mode</item>
 		<item level="1" text="Show record indicator" description="Configure if and how the record indicator will be shown in the channel selection list.">config.usage.record_indicator_mode</item>
 		<item level="1" text="Show columns" description="Configure if and how wide columns will be shown in the channel selection list.">config.usage.servicelist_column</item>
 		<item level="1" text="Show picons in channel selection list" description="Configure if service picons will be shown in the channel selection list.">config.usage.service_icon_enable</item>
-		<item level="1" text="Customize channel list cursor behavior" description="Configure the cursor behaviour in the channel selection list. When opening the channel selection list you can keep on the current service or already select up/down and you are able to revert the B+/B- buttons.">config.usage.servicelist_cursor_behavior</item>
+		<item level="2" text="Customize channel list cursor behavior" description="Configure the cursor behaviour in the channel selection list. When opening the channel selection list you can keep on the current service or already select up/down and you are able to revert the B+/B- buttons.">config.usage.servicelist_cursor_behavior</item>
 		<item level="1" text="Number of channels shown in channel selection list" description="Configure how many channels are shown in the selection list.">config.usage.servicelist_number_of_services</item>
 		<item level="2" text="Enable 'neutrino' style zap controlling" description="When enabled the arrow buttons around the OK button will follow the 'neutrino' style zap controls instead of the enigma2 style.">config.usage.oldstyle_zap_controls</item>
 		<item level="2" text="Enable 'neutrino' style channel select controlling" description="When enabled the left, right, CH+/-, B+/-, P+/- buttons will follow the 'neutrino' style zap controls instead of the enigma2 style.">config.usage.oldstyle_channel_select_controls</item>
@@ -73,9 +73,9 @@
 		<item level="2" text="Show infobar on channel change" description="When enabled, the infobar will be displayed when changing channels.">config.usage.show_infobar_on_zap</item>
 		<item level="2" text="Show infobar on skip forward/backward" description="When enabled, the infobar will be displayed when skipping forwards/backwards during media playback.">config.usage.show_infobar_on_skip</item>
 		<item level="2" text="Show infobar on event change" description="When enabled, the infobar will be displayed when a new event starts.">config.usage.show_infobar_on_event_change</item>
-		<item level="2" text="Show second infobar" description="Configure whether (and for how long) a second infobar will be shown when OK is pressed twice. The second infobar contains additional information about the current channel.">config.usage.show_second_infobar</item>
+		<item level="0" text="Show second infobar" description="Configure whether (and for how long) a second infobar will be shown when OK is pressed twice. The second infobar contains additional information about the current channel.">config.usage.show_second_infobar</item>
 		<item level="2" text="Show background in radio mode" description="When enabled, a radio background image will be visible while listening to a radio channel.">config.misc.showradiopic</item>
-		<item level="2" text="Show screensaver" description="Configure the duration in minutes for the screensaver.">config.usage.screen_saver</item>
+		<item level="0" text="Show screensaver" description="Configure the duration in minutes for the screensaver.">config.usage.screen_saver</item>
 		<item level="2" text="Hide zap errors" description="When enabled, error messages related to zapping will not be shown.">config.usage.hide_zap_errors</item>
 		<item level="2" text="Show crypto info in infobar" description="When enabled, encryption info will be shown in the infobar (when supported by the skin).">config.usage.show_cryptoinfo</item>
 		<item level="2" text="Show picons in display" description="Configure if service picons will be shown in display (when supported by the skin)." requires="HasFrontDisplayPicon">config.usage.show_picon_in_display</item>
@@ -88,7 +88,7 @@
 		<item level="2" text="Show VCR scart on main menu" description="When enabled, the VCR scart option will be shown on the main menu" requires="ScartSwitch">config.usage.show_vcr_scart</item>
 	</setup>
 	<setup key="epgsettings" title="EPG settings">
-		<item level="2" text="Enable EIT EPG" description="Use EIT EPG information when it is available.">config.epg.eit</item>
+		<item level="0" text="Enable EIT EPG" description="Use EIT EPG information when it is available.">config.epg.eit</item>
 		<item level="2" text="Enable MHW EPG" description="Use MHW EPG information when it is available.">config.epg.mhw</item>
 		<item level="2" text="Enable freesat EPG" description="Use FreeSat EPG information when it is available.">config.epg.freesat</item>
 		<item level="2" text="Enable ViaSat EPG" description="Use ViaSat EPG information when it is available.">config.epg.viasat</item>
@@ -97,7 +97,7 @@
 		<item level="2" text="Maintain old EPG data for" description="Configure for how many minutes finished events should remain visible in the EPG. Useful when you need information about an event which has just finished, or has been delayed.">config.epg.histminutes</item>
 	</setup>
 	<setup key="subtitlesetup" title="Subtitle settings">
-		<item level="2" text="Teletext subtitle color" description="Configure the color of the teletext subtitles.">config.subtitles.ttx_subtitle_colors</item>
+		<item level="0" text="Teletext subtitle color" description="Configure the color of the teletext subtitles.">config.subtitles.ttx_subtitle_colors</item>
 		<item level="2" text="Use original teletext position" description="When enabled, teletext subtitles will be displayed at their original position.">config.subtitles.ttx_subtitle_original_position</item>
 		<item level="2" text="Rewrap subtitles" description="When enabled, reformat subtitles to match the width of the screen.">config.subtitles.subtitle_rewrap</item>
 		<item level="2" text="Subtitle position" description="Configure the vertical position of the subtitles, measured from the bottom of the screen.">config.subtitles.subtitle_position</item>
@@ -108,6 +108,7 @@
 		<item level="2" text="Subtitle delay when timing lacks" description="Configure the subtitle delay when timing information is not available.">config.subtitles.subtitle_noPTSrecordingdelay</item>
 		<item level="2" text="Yellow DVB subtitles" description="When enabled, graphical DVB subtitles will be displayed in yellow, instead of the original color.">config.subtitles.dvb_subtitles_yellow</item>
 		<item level="2" text="Use original DVB subtitle position" description="When enabled, graphical DVB subtitles will be displayed at their original position.">config.subtitles.dvb_subtitles_original_position</item>
+		<item level="2" text="Center DVB subtitles" description="When enabled, graphical DVB subtitles will be centered horizontally.">config.subtitles.dvb_subtitles_centered</item>
 		<item level="2" text="Subtitle delay when timing is bad" description="Configure an additional delay to improve subtitle synchronisation.">config.subtitles.subtitle_bad_timing_delay</item>
 		<item level="2" text="DVB subtitle black transparency" description="Configure the transparency of the black background of graphical DVB subtitles.">config.subtitles.dvb_subtitles_backtrans</item>
 		<item level="2" text="External subtitle color" description="Configure the color of the external subtitles, alternative (normal in white, italic in yellow, bold in cyan, underscore in green), white or yellow.">config.subtitles.pango_subtitle_colors</item>
@@ -118,14 +119,14 @@
 		<item level="2" text="Automatically turn on external subtitles" description="When enabled, external subtitles will be always turned on for playback movie.">config.subtitles.pango_autoturnon</item>
 	</setup>
 	<setup key="autolanguagesetup" title="Auto language selection">
-		<item level="1" text="Audio language selection 1" description="Configure the first audio language (highest priority).">config.autolanguage.audio_autoselect1</item>
+		<item level="0" text="Audio language selection 1" description="Configure the first audio language (highest priority).">config.autolanguage.audio_autoselect1</item>
 		<item level="1" text="Audio language selection 2" description="Configure the second audio language.">config.autolanguage.audio_autoselect2</item>
 		<item level="1" text="Audio language selection 3" description="Configure the third audio language.">config.autolanguage.audio_autoselect3</item>
 		<item level="1" text="Audio language selection 4" description="Configure the fourth audio language.">config.autolanguage.audio_autoselect4</item>
 		<item level="1" text="Prefer AC3 track" description="When enabled, the receiver will select an AC3 track (when available).">config.autolanguage.audio_defaultac3</item>
 		<item level="1" text="Prefer AC3+ track" description="When enabled, the receiver will select an AC3+ track (when available).">config.autolanguage.audio_defaultddp</item>
 		<item level="1" text="Prefer audio track stored by service" description="When enabled, the receiver will automatically use the audio track which you selected before.">config.autolanguage.audio_usecache</item>
-		<item level="1" text="Subtitle language selection 1" description="Configure the first subtitle language (highest priority).">config.autolanguage.subtitle_autoselect1</item>
+		<item level="0" text="Subtitle language selection 1" description="Configure the first subtitle language (highest priority).">config.autolanguage.subtitle_autoselect1</item>
 		<item level="1" text="Subtitle language selection 2" description="Configure the second subtitle language.">config.autolanguage.subtitle_autoselect2</item>
 		<item level="1" text="Subtitle language selection 3" description="Configure the third subtitle language.">config.autolanguage.subtitle_autoselect3</item>
 		<item level="1" text="Subtitle language selection 4" description="Configure the fourth subtitle language.">config.autolanguage.subtitle_autoselect4</item>
