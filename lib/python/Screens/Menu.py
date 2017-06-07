@@ -48,6 +48,8 @@ class Menu(Screen, ProtectedScreen):
 	ALLOW_SUSPEND = True
 
 	def okbuttonClick(self):
+		if self.number:
+			self["menu"].setIndex(self.number - 1)
 		self.resetNumberKey()
 		selection = self["menu"].getCurrent()
 		if selection and selection[1]:
@@ -281,13 +283,12 @@ class Menu(Screen, ProtectedScreen):
 	def keyNumberGlobal(self, number):
 		self.number = self.number * 10 + number
 		if self.number and self.number <= len(self["menu"].list):
-			self["menu"].setIndex(self.number - 1)
-			if len(self["menu"].list) < 10 or self.number >= 10:
+			if number * 10 > len(self["menu"].list) or self.number >= 10:
 				self.okbuttonClick()
 			else:
 				self.nextNumberTimer.start(1500, True)
 		else:
-			self.number = 0
+			self.resetNumberKey()
 
 	def resetNumberKey(self):
 		self.nextNumberTimer.stop()
