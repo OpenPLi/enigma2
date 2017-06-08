@@ -261,32 +261,33 @@ class ServiceInfo(Screen):
 		return ""
 
 	def ShowECMInformation(self):
-		from Components.Converter.PliExtraInfo import caid_data
-		self["Title"].text = _("Service info - ECM Info")
-		tlist = []
-		for caid in sorted(set(self.info.getInfoObject(iServiceInformation.sCAIDPIDs)), key=lambda x: (x[0], x[1])):
-			CaIdDescription = _("Undefined")
-			extra_info = ""
-			for caid_entry in caid_data:
-				if int(caid_entry[0], 16) <= caid[0] <= int(caid_entry[1], 16):
-					CaIdDescription = caid_entry[2]
-					break
-			if caid[2]:
-				provid = ""
-				if CaIdDescription == "Seca":
-					provid = caid[2][:4]
-				if CaIdDescription == "Nagra":
-					provid = caid[2][-4:]
-				if CaIdDescription == "Via":
-					provid = caid[2][-6:]
-				if provid:
-					extra_info = "provid=%s" % provid
-				else:
-					extra_info = "extra data=%s" % caid[2]
-			from Tools.GetEcmInfo import GetEcmInfo
-			ecmdata = GetEcmInfo().getEcmData()
-			color = "\c00??;?00" if caid[1] == int(ecmdata[3], 16) and caid[0] == int(ecmdata[1], 16) else ""
-			tlist.append(ServiceInfoListEntry("%sECMPid %04X (%d) %04X-%s %s" % (color, caid[1], caid[1], caid[0], CaIdDescription, extra_info)))
-		if not tlist:
-			tlist.append(ServiceInfoListEntry(_("No ECMPids available (FTA Service)")))
-		self["infolist"].l.setList(tlist)
+		if self.info:
+			from Components.Converter.PliExtraInfo import caid_data
+			self["Title"].text = _("Service info - ECM Info")
+			tlist = []
+			for caid in sorted(set(self.info.getInfoObject(iServiceInformation.sCAIDPIDs)), key=lambda x: (x[0], x[1])):
+				CaIdDescription = _("Undefined")
+				extra_info = ""
+				for caid_entry in caid_data:
+					if int(caid_entry[0], 16) <= caid[0] <= int(caid_entry[1], 16):
+						CaIdDescription = caid_entry[2]
+						break
+				if caid[2]:
+					provid = ""
+					if CaIdDescription == "Seca":
+						provid = caid[2][:4]
+					if CaIdDescription == "Nagra":
+						provid = caid[2][-4:]
+					if CaIdDescription == "Via":
+						provid = caid[2][-6:]
+					if provid:
+						extra_info = "provid=%s" % provid
+					else:
+						extra_info = "extra data=%s" % caid[2]
+				from Tools.GetEcmInfo import GetEcmInfo
+				ecmdata = GetEcmInfo().getEcmData()
+				color = "\c00??;?00" if caid[1] == int(ecmdata[3], 16) and caid[0] == int(ecmdata[1], 16) else ""
+				tlist.append(ServiceInfoListEntry("%sECMPid %04X (%d) %04X-%s %s" % (color, caid[1], caid[1], caid[0], CaIdDescription, extra_info)))
+			if not tlist:
+				tlist.append(ServiceInfoListEntry(_("No ECMPids available (FTA Service)")))
+			self["infolist"].l.setList(tlist)
