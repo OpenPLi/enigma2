@@ -1758,7 +1758,7 @@ class ScanSimple(ConfigListScreen, Screen, CableTransponderSearchSupport, Terres
 					skip_t2 = False
 					if SystemInfo["Blindscan_t2_available"]:
 						skip_t2 = True
-						if nim.isCompatible("DVB-T2"):
+						if nim.canBeCompatible("DVB-T2"):
 							if len(self.terrestrialTransponderGetCmd(nim.slot)):
 								action = SEARCH_TERRESTRIAL2_TRANSPONDERS
 							else:
