@@ -28,7 +28,7 @@ def main(session, **kwargs):
 	session.open(OverscanWizard, timeOut=False)
 
 def startSetup(menuid):
-	return menuid == "system" and [(_("Overscan wizard"), main, "sd_position_setup", 0)] or []
+	return menuid == "video" and [(_("Overscan wizard"), main, "sd_position_setup", 0)] or []
 
 def startup(reason, **kwargs):
 	setConfiguredPosition()
