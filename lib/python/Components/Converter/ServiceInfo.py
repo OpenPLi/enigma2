@@ -34,6 +34,8 @@ class ServiceInfo(Converter, object):
 	IS_4K = 26
 	IS_STEREO = 27
 	IS_NOT_WIDESCREEN = 28
+	IS_1080 = 29
+	IS_720 = 30
 
 	def __init__(self, type):
 		Converter.__init__(self, type)
@@ -67,6 +69,8 @@ class ServiceInfo(Converter, object):
 				"IsSDAndWidescreen": (self.IS_SD_AND_WIDESCREEN, (iPlayableService.evVideoSizeChanged,)),
 				"IsSDAndNotWidescreen": (self.IS_SD_AND_NOT_WIDESCREEN, (iPlayableService.evVideoSizeChanged,)),
 				"Is4K": (self.IS_4K, (iPlayableService.evVideoSizeChanged,)),
+				"Is1080": (self.IS_1080, (iPlayableService.evVideoSizeChanged,)),
+				"Is720": (self.IS_720, (iPlayableService.evVideoSizeChanged,)),
 			}[type]
 
 	def getServiceInfoString(self, info, what, convert = lambda x: "%d" % x):
@@ -134,13 +138,17 @@ class ServiceInfo(Converter, object):
 		elif self.type == self.IS_SD:
 			return info.getInfo(iServiceInformation.sVideoHeight) < 720
 		elif self.type == self.IS_HD:
-			return info.getInfo(iServiceInformation.sVideoHeight) >= 720 and info.getInfo(iServiceInformation.sVideoHeight) < 2160
+			return info.getInfo(iServiceInformation.sVideoHeight) >= 720 and info.getInfo(iServiceInformation.sVideoHeight) < 2100
 		elif self.type == self.IS_SD_AND_WIDESCREEN:
 			return info.getInfo(iServiceInformation.sVideoHeight) < 720 and info.getInfo(iServiceInformation.sAspect) in WIDESCREEN
 		elif self.type == self.IS_SD_AND_NOT_WIDESCREEN:
 			return info.getInfo(iServiceInformation.sVideoHeight) < 720 and info.getInfo(iServiceInformation.sAspect) not in WIDESCREEN
 		elif self.type == self.IS_4K:
 			return info.getInfo(iServiceInformation.sVideoHeight) >= 2100
+		elif self.type == self.IS_1080:
+			return info.getInfo(iServiceInformation.sVideoHeight) > 1000 and info.getInfo(iServiceInformation.sVideoHeight) <= 1080
+		elif self.type == self.IS_720:
+			return info.getInfo(iServiceInformation.sVideoHeight) = 720
 		return False
 
 	boolean = property(getBoolean)
