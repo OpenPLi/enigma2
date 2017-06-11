@@ -33,6 +33,7 @@ class ServiceInfo(Converter, object):
 	IS_SD_AND_NOT_WIDESCREEN = 25
 	IS_4K = 26
 	IS_STEREO = 27
+	IS_NOT_WIDESCREEN = 28
 
 	def __init__(self, type):
 		Converter.__init__(self, type)
@@ -42,6 +43,7 @@ class ServiceInfo(Converter, object):
 				"IsStereo": (self.IS_STEREO, (iPlayableService.evUpdatedInfo,)),
 				"IsCrypted": (self.IS_CRYPTED, (iPlayableService.evUpdatedInfo,)),
 				"IsWidescreen": (self.IS_WIDESCREEN, (iPlayableService.evVideoSizeChanged,)),
+				"IsNotWidescreen": (self.IS_NOT_WIDESCREEN, (iPlayableService.evVideoSizeChanged,)),
 				"SubservicesAvailable": (self.SUBSERVICES_AVAILABLE, (iPlayableService.evUpdatedEventInfo,)),
 				"VideoWidth": (self.XRES, (iPlayableService.evVideoSizeChanged,)),
 				"VideoHeight": (self.YRES, (iPlayableService.evVideoSizeChanged,)),
@@ -109,6 +111,8 @@ class ServiceInfo(Converter, object):
 			return info.getInfo(iServiceInformation.sIsCrypted) == 1
 		elif self.type == self.IS_WIDESCREEN:
 			return info.getInfo(iServiceInformation.sAspect) in WIDESCREEN
+		elif self.type == self.IS_NOT_WIDESCREEN:
+			return info.getInfo(iServiceInformation.sAspect) not in WIDESCREEN
 		elif self.type == self.SUBSERVICES_AVAILABLE:
 			subservices = service.subServices()
 			return bool(subservices) and subservices.getNumberOfSubservices() > 0
