@@ -148,7 +148,7 @@ class ServiceInfo(Converter, object):
 		elif self.type == self.IS_1080:
 			return info.getInfo(iServiceInformation.sVideoHeight) > 1000 and info.getInfo(iServiceInformation.sVideoHeight) <= 1080
 		elif self.type == self.IS_720:
-			return info.getInfo(iServiceInformation.sVideoHeight) = 720
+			return info.getInfo(iServiceInformation.sVideoHeight) == 720
 		return False
 
 	boolean = property(getBoolean)
