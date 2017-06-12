@@ -35,9 +35,11 @@
 			<menu weight="5" level="0" text="System" entryID="system_selection">
 				<id val="system"/>
 
-				<menu level="0" text="Video settings" entryID="video_selection">
+				<menu level="0" text="Audio / Video" entryID="video_selection">
 				<id val="video"/>
 				<item level="0" entryID="av_setup"><setup id="avsetup"/></item>
+				<item level="2" entryID="subtitle_setup"><setup id="subtitlesetup"/></item>
+				<item level="0" entryID="autolanguage_setup"><setup id="autolanguagesetup"/></item>
 				</menu>
 
 				<item level="0" entryID="usage_setup"><setup id="usage"/></item>
@@ -48,8 +50,7 @@
 				<id val="expert"/>
 				<item level="2" entryID="epg_settings"><setup id="epgsettings"/></item>
 				<item level="0" entryID="recording_setup"><setup id="recording"/></item>
-				<item level="2" entryID="subtitle_setup"><setup id="subtitlesetup"/></item>
-				<item level="0" entryID="autolanguage_setup"><setup id="autolanguagesetup"/></item>
+
 
 					<menu level="0" text="Harddisk" entryID="hardisk_selection" requires="Harddisk">
 					<id val="harddisk"/>

@@ -130,7 +130,7 @@ def SkinSelMain(session, **kwargs):
 
 def SkinSelSetup(menuid, **kwargs):
 	if menuid == "video":
-		return [(_("Skin"), SkinSelMain, "skin_selector", None)]
+		return [(_("Skin"), SkinSelMain, "skin_selector", 1)]
 	else:
 		return []
 

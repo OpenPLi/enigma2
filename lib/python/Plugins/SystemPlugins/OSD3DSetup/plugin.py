@@ -131,7 +131,7 @@ def main(session, **kwargs):
 def startSetup(menuid):
 	if menuid != "video":
 		return [ ]
-	return [(_("OSD 3D setup"), main, "auto_3d_setup", 0)]
+	return [(_("OSD 3D setup"), main, "auto_3d_setup", 2)]
 
 def autostart(reason, **kwargs):
 	"session" in kwargs and kwargs["session"].open(auto3D)

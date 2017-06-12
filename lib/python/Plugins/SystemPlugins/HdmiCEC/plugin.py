@@ -139,7 +139,7 @@ def main(session, **kwargs):
 
 def startSetup(menuid):
 	if menuid == "video":
-		return [(_("HDMI-CEC setup"), main, "hdmi_cec_setup", 0)]
+		return [(_("HDMI-CEC setup"), main, "hdmi_cec_setup", 1)]
 	return []
 
 def Plugins(**kwargs):
