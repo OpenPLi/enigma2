@@ -132,8 +132,8 @@ def InitUsageConfig():
 		("no", _("No")), ("popup", _("With popup")), ("without popup", _("Without popup")), ("movielist", _("Return to movie list")) ])
 
 	config.usage.setup_level = ConfigSelection(default = "simple", choices = [
-		("simple", _("Simple")),
-		("intermediate", _("Intermediate")),
+		("simple", _("Normal")),
+		("intermediate", _("Advanced")),
 		("expert", _("Expert")) ])
 
 	config.usage.startup_to_standby = ConfigSelection(default = "no", choices = [
