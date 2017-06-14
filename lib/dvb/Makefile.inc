@@ -9,6 +9,7 @@ dvb_libenigma_dvb_a_SOURCES = \
 	dvb/demux.cpp \
 	dvb/dvb.cpp \
 	dvb/dvbtime.cpp \
+	dvb/ecm.cpp \
 	dvb/eit.cpp \
 	dvb/epgcache.cpp \
 	dvb/esection.cpp \
@@ -49,6 +50,7 @@ dvbinclude_HEADERS = \
 	dvb/demux.h \
 	dvb/dvb.h \
 	dvb/dvbtime.h \
+	dvb/ecm.h \
 	dvb/eit.h \
 	dvb/epgcache.h \
 	dvb/esection.h \

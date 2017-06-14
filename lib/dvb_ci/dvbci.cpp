@@ -345,7 +345,10 @@ void eDVBCIInterfaces::ciRemoved(eDVBCISlot *slot)
 		if (slot->linked_next)
 			slot->linked_next->setSource(slot->current_source);
 		else // last CI in chain
+		{
 			setInputSource(slot->current_tuner, slot->current_source);
+			slot->removeVtunerPid();
+		}
 		slot->linked_next = 0;
 		slot->use_count=0;
 		slot->plugged=true;
@@ -508,6 +511,7 @@ void eDVBCIInterfaces::recheckPMTHandlers()
 							eDebug("[CI] The CI in Slot %d has said it can handle caid %04x... so use it", ci_it->getSlotID(), *z);
 							useThis = true;
 							user_mapped = false;
+							ci_it->addVtunerPid(pmthandler);
 							break;
 						}
 					}
@@ -692,7 +696,10 @@ void eDVBCIInterfaces::removePMTHandler(eDVBServicePMTHandler *pmthandler)
 				if (slot->linked_next)
 					slot->linked_next->setSource(slot->current_source);
 				else
+				{
 					setInputSource(slot->current_tuner, slot->current_source);
+					slot->removeVtunerPid();
+				}
 
 				if (base_slot != slot)
 				{
@@ -1091,6 +1098,7 @@ eDVBCISlot::eDVBCISlot(eMainloop *context, int nr)
 eDVBCISlot::~eDVBCISlot()
 {
 	eDVBCISession::deleteSessions(this);
+	removeVtunerPid();
 }
 
 void eDVBCISlot::setAppManager( eDVBCIApplicationManagerSession *session )
@@ -1321,6 +1329,40 @@ int eDVBCISlot::setClockRate(int rate)
 	if(CFile::write(buf, rate ? "high" : "normal") == -1)
 		return -1;
 	return 0;
+}
+
+void eDVBCISlot::addVtunerPid(eDVBServicePMTHandler *pmthandler)
+{
+	ePtr<iDVBDemux> demux;
+	eDVBServicePMTHandler::program p;
+	int ecm_num = m_ecm.size();
+
+	if (ecm_num || pmthandler->getDataDemux(demux))
+		return;
+	if (pmthandler->getProgramInfo(p))
+		return;
+
+	for (std::list<eDVBServicePMTHandler::program::capid_pair>::const_iterator i(p.caids.begin());
+				i != p.caids.end(); ++i)
+	{
+		if (i->capid)
+		{
+			eDebug("[eDVBCISlot] addVtunerPid PES Start ECM PID = %d Caid = %d ecm_num=%d", i->capid, i->caid, ecm_num);
+			eDVBECMParser *ecm = new eDVBECMParser(demux);
+			ecm->start(i->capid);
+			m_ecm.push_back(ecm);
+		}
+	}
+}
+
+void eDVBCISlot::removeVtunerPid(void)
+{
+	for (ePtrList<eDVBECMParser>::iterator it = m_ecm.begin(); it != m_ecm.end();)
+	{
+		(*it)->stop();
+		delete *it;
+		it = m_ecm.erase(it);
+	}
 }
 
 eAutoInitP0<eDVBCIInterfaces> init_eDVBCIInterfaces(eAutoInitNumbers::dvb, "CI Slots");

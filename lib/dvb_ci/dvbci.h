@@ -4,6 +4,7 @@
 #ifndef SWIG
 
 #include <lib/base/ebase.h>
+#include <lib/dvb/ecm.h>
 #include <lib/service/iservice.h>
 #include <lib/python/python.h>
 #include <set>
@@ -63,6 +64,8 @@ class eDVBCISlot: public iObject, public sigc::trackable
 	bool user_mapped;
 	void data(int);
 	bool plugged;
+
+	ePtrList<eDVBECMParser> m_ecm;
 public:
 	enum {stateRemoved, stateInserted, stateInvalid, stateResetted};
 	eDVBCISlot(eMainloop *context, int nr);
@@ -93,6 +96,8 @@ public:
 	int setSource(const std::string &source);
 	int setClockRate(int);
 	static std::string getTunerLetter(int tuner_no) { return std::string(1, char(65 + tuner_no)); }
+	void addVtunerPid(eDVBServicePMTHandler *pmthandler);
+	void removeVtunerPid(void);
 };
 
 struct CIPmtHandler
