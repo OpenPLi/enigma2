@@ -476,7 +476,7 @@ def loadSingleSkinData(desktop, skin, path_prefix):
 					parameters["ServiceInfoRight"] = (450,0,1000,45)
 					parameters["SelectionListDescr"] = (45,3,1000,32)
 					parameters["SelectionListLock"] = (0,2,36,36)
-					parameters["ConfigListSeperator"] = 300
+					parameters["ConfigListSeperator"] = 500
 					parameters["VirtualKeyboard"] = (68,68)
 					parameters["PartnerBoxEntryListName"] = (8,2,225,38)
 					parameters["PartnerBoxEntryListIP"] = (180,2,225,38)
