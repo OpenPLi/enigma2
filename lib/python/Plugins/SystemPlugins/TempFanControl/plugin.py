@@ -9,6 +9,7 @@ from Screens.Screen import Screen
 
 from Plugins.Plugin import PluginDescriptor
 from Components.FanControl import fancontrol
+import skin
 
 class TempFanControl(Screen, ConfigListScreen):
 	skin = """
@@ -133,7 +134,8 @@ class TempFanControl(Screen, ConfigListScreen):
 		ConfigListScreen.__init__(self, self.list, session = self.session)
 		#self["config"].list = self.list
 		#self["config"].setList(self.list)
-		self["config"].l.setSeperation(300)
+		seperation = skin.parameters.get("ConfigListSeperator", 300)
+		self["config"].l.setSeperation(seperation)
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "MenuActions"],
 		{

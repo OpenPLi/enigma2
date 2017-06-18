@@ -7,6 +7,7 @@ from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 import VideoEnhancement
 import os
+import skin
 
 class VideoEnhancementSetup(Screen, ConfigListScreen):
 
@@ -51,6 +52,7 @@ class VideoEnhancementSetup(Screen, ConfigListScreen):
 		self["key_blue"] = StaticText(_("Default"))
 		self["introduction"] = StaticText()
 
+		self.seperation = skin.parameters.get("ConfigListSeperator", 300)
 		self.createSetup()
 		self.rememberOldSettings()
 		self.onLayoutFinish.append(self.layoutFinished)
@@ -104,7 +106,7 @@ class VideoEnhancementSetup(Screen, ConfigListScreen):
 		self.digital_contour_removalEntry = addToConfigList(_("Digital contour removal"), config.pep.digital_contour_removal, add_to_xtdlist)
 
 		self["config"].list = self.list
-		self["config"].l.setSeperation(300)
+		self["config"].l.setSeperation(self.seperation)
 		self["config"].l.setList(self.list)
 		if not self.selectionChanged in self["config"].onSelectionChanged:
 			self["config"].onSelectionChanged.append(self.selectionChanged)
