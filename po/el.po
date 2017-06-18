@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPLI Enigma2 Official Greek Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-04 21:46+0300\n"
+"POT-Creation-Date: 2017-06-16 22:12+0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: MCelliot_g <mcelliot_g@hotmail.com>\n"
 "Language-Team: MCelliot_g <mcelliot_g@hotmail.com>\n"
@@ -10,7 +10,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.8\n"
+"X-Generator: Poedit 2.0.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -19,7 +19,7 @@ msgid ""
 "Advanced options and settings."
 msgstr ""
 "\n"
-"Προχωρημένες επιλογές και ρυθμίσεις"
+"Προχωρημένες επιλογές και ρυθμίσεις."
 
 msgid ""
 "\n"
@@ -47,7 +47,7 @@ msgid ""
 "Edit the upgrade source address."
 msgstr ""
 "\n"
-" Επεξεργασία διεύθυνσης πηγής αναβαθμίσεων"
+" Επεξεργασία διεύθυνσης πηγής αναβαθμίσεων."
 
 msgid ""
 "\n"
@@ -96,7 +96,7 @@ msgid ""
 "Restore your receiver with a new firmware."
 msgstr ""
 "\n"
-"Επαναφορά του δέκτη σας με ένα νέο υλικολογισμικό"
+"Επαναφορά του δέκτη σας με ένα νέο υλικολογισμικό."
 
 msgid ""
 "\n"
@@ -127,7 +127,7 @@ msgid ""
 "View, install and remove available or installed packages."
 msgstr ""
 "\n"
-"Εμφάνιση, εγκατάσταση και διαγραφή διαθέσιμων ή εγκατεστημένων προσθέτων"
+"Εμφάνιση, εγκατάσταση και διαγραφή διαθέσιμων ή εγκατεστημένων προσθέτων."
 
 msgid " (0 - all networks)"
 msgstr " (0 - όλα τα δίκτυα)"
@@ -193,6 +193,11 @@ msgstr "%.2f GB"
 msgid "%02d:%02d"
 msgstr "%02d:%02d"
 
+#, python-format
+#| msgid "%d MB"
+msgid "%03d MB"
+msgstr "%03d MB"
+
 #. TRANSLATORS: short time representation hour:minute
 #, python-format
 msgid "%2d:%02d"
@@ -202,6 +207,10 @@ msgstr "%2d:%02d"
 #, python-format
 msgid "%2d:%02d:%02d"
 msgstr "%2d:%02d:%02d"
+
+#, python-format
+msgid "%3.01f dB"
+msgstr "%3.01f dB"
 
 msgid "%A %d %B"
 msgstr "%A %d %B"
@@ -260,6 +269,12 @@ msgstr[0] "%d αρχείο"
 msgstr[1] "%d αρχεία"
 
 #, python-format
+#| msgid "%d file"
+#| msgid_plural "%d files"
+msgid "%d fps"
+msgstr "%d fps"
+
+#, python-format
 msgid "%d hour"
 msgid_plural "%d hours"
 msgstr[0] "%d ώρα"
@@ -274,6 +289,11 @@ msgstr[1] "%d εργασίες στο παρασκήνιο!"
 #, python-format
 msgid "%d kB"
 msgstr "%d kB"
+
+#, python-format
+#| msgid "%d kB"
+msgid "%d kB/s"
+msgstr "%d kB/s"
 
 #, python-format
 msgid "%d min"
@@ -327,6 +347,11 @@ msgstr "%d-%m"
 #, python-format
 msgid "%d.%02d. %02d:%02d"
 msgstr "%d.%02d. %02d:%02d"
+
+#, python-format
+#| msgid "%d GB"
+msgid "%d.%03d GB"
+msgstr "%d.%03d GB"
 
 msgid "%d.%B %Y"
 msgstr "%d.%B %Y"
@@ -401,11 +426,27 @@ msgstr "(μη ενεργό)"
 msgid "(show optional DVD audio menu)"
 msgstr "(εμφάνιση προαιρετικού μενού ήχου DVD)"
 
+msgid "(unknown)"
+msgstr "(άγνωστο)"
+
 msgid "* Only available if more than one interface is active."
 msgstr "* Διαθέσιμο μόνο εάν είναι ενεργές περισσότερες από μία διεπαφές."
 
+msgid "-NO SERVICE\n"
+msgstr "-ΧΩΡΙΣ ΥΠΗΡΕΣΙΑ\n"
+
+#, python-format
+msgid "-SERVICE ERROR:%d\n"
+msgstr "-ΣΦΑΛΜΑ ΥΠΗΡΕΣΙΑΣ:%d\n"
+
 msgid "/s"
 msgstr "/s"
+
+msgid "0"
+msgstr "0"
+
+msgid "1"
+msgstr "1"
 
 msgid "1.0"
 msgstr "1.0"
@@ -418,6 +459,9 @@ msgstr "1.2"
 
 msgid "10bit"
 msgstr "10bit"
+
+msgid "12V output"
+msgstr "έξοδος 12V"
 
 msgid "12bit"
 msgstr "12bit"
@@ -446,6 +490,9 @@ msgstr "πάντα 16:9"
 msgid "18 V"
 msgstr "18 V"
 
+msgid "2"
+msgstr "2"
+
 msgid "23.976"
 msgstr "23.976"
 
@@ -457,6 +504,9 @@ msgstr "25"
 
 msgid "29.97"
 msgstr "29.97"
+
+msgid "3"
+msgstr "3"
 
 msgid "30"
 msgstr "30"
@@ -472,6 +522,9 @@ msgstr "Θέση ηχείου περιφερικού 3D"
 
 msgid "3d mode"
 msgstr "λειτουργία 3d"
+
+msgid "4"
+msgstr "4"
 
 msgid "420"
 msgstr "420"
@@ -491,8 +544,23 @@ msgstr "4:3 Μπάρες πάνω - κάτω"
 msgid "4:3 PanScan"
 msgstr "4:3 Πανοραμική&Σάρωση"
 
+msgid "5"
+msgstr "5"
+
+msgid "6"
+msgstr "6"
+
+msgid "7"
+msgstr "7"
+
+msgid "8"
+msgstr "8"
+
 msgid "8bit"
 msgstr "8bit"
+
+msgid "9"
+msgstr "9"
 
 msgid ": 0000 - default (disabled)"
 msgstr ": 0000 - προεπιλογή (ανενεργό)"
@@ -508,6 +576,9 @@ msgstr "<Τελευταία τοποθεσία χρονοδιακόπτη>"
 
 msgid "<unknown>"
 msgstr "<άγνωστο>"
+
+msgid "=NO STREAM\n"
+msgstr "=ΧΩΡΙΣ ΡΟΗ\n"
 
 msgid "??"
 msgstr ";;"
@@ -666,6 +737,12 @@ msgstr "Ενεργοποίηση Picture in Picture"
 msgid "Activate current configuration"
 msgstr "Ενεργοποίηση τρέχουσας ρύθμισης"
 
+msgid "Activate network settings"
+msgstr "Ενεργοποίηση ρυθμίσεων δικτύου"
+
+msgid "Activate the configured network settings."
+msgstr "Ενεργοποίηση των παραμετροποιημένων ρυθμίσεων δικτύου"
+
 msgid "Activate timeshift End"
 msgstr "Ενεργοποίηση τέλους χρονομετατόπισης"
 
@@ -811,17 +888,46 @@ msgstr "Κατανομή μη χρησιμοποιημένων θέσεων μν
 msgid "Allow quit movieplayer with exit"
 msgstr "Να επιτρέπεται η έξοδος από την αναπαραγωγή με το exit"
 
+msgid "Allow subtitle language to equal audio language"
+msgstr "Να επιτρέπεται η εξίσωση υποτίτλων και γλώσσας ήχου"
+
+msgid "Allow subtitles for hearing impaired"
+msgstr "Να επιτρέπονται υπότιτλοι για άτομα με προβλήματα ακοής"
+
+msgid "Alpha"
+msgstr "Alpha"
+
 msgid "Also on standby"
 msgstr "Επίσης στην αναμονή"
 
 msgid "Alternative"
 msgstr "Προσθήκη εναλλακτικών"
 
+msgid "Alternative numbering mode"
+msgstr "Εναλλακτική λειτουργία αρίθμησης"
+
+msgid "Alternative services tuner priority"
+msgstr "Προτεραιότητα tuner εναλλακτικών υπηρεσιών"
+
 msgid "Always ask"
 msgstr "Πάντα ερώτηση"
 
 msgid "Always hide infobar"
 msgstr "Πάντα απόκρυψη της μπάρας πληροφοριών"
+
+msgid "Always include ECM in recordings"
+msgstr "Συμπερίληψη πάντα του ECM στις εγγραφές"
+
+msgid ""
+"Always include ECM messages in recordings. This overrides the individual "
+"timer settings globally. It allows recordings to be always decrypted "
+"afterwards (sometimes called offline decoding), if supported by your "
+"receiver. Default: off."
+msgstr ""
+"Να συμπεριλαμβάνονται πάντα τα μηνύματα ECM στις εγγραφές. Αυτό παρακάμπτει "
+"όλες τις ιδιαίτερες ρυθμίσεις χρονοδιακοπτών γενικά. Επιτρέπει στις εγγραφές "
+"να είναι πάντα αποκωδικοποιημένες μετέπειτα (ενίοτε ονομάζεται κωδικοποίηση "
+"εκτός σύνδεσης), εάν υποστηρίζεται από το δέκτη σας. Προεπιλογή: ανενεργό."
 
 msgid "An empty filename is illegal."
 msgstr "Η κενή ονομασία είναι άκυρη."
@@ -934,11 +1040,29 @@ msgstr ""
 "Προσοχή, ο χρονοδιακόπτης είναι σε επανάληψη!\n"
 "Τι θέλετε να γίνει;"
 
+msgid "Audio"
+msgstr "Ήχος"
+
+msgid "Audio / Video"
+msgstr "Ήχος / Εικόνα"
+
 msgid "Audio PID"
 msgstr "PID ήχου"
 
 msgid "Audio auto volume level"
 msgstr "Αυτόματο επίπεδο έντασης ήχου"
+
+msgid "Audio language selection 1"
+msgstr "Επιλογή γλώσσας ήχου 1"
+
+msgid "Audio language selection 2"
+msgstr "Επιλογή γλώσσας ήχου 2"
+
+msgid "Audio language selection 3"
+msgstr "Επιλογή γλώσσας ήχου 3"
+
+msgid "Audio language selection 4"
+msgstr "Επιλογή γλώσσας ήχου 4"
 
 msgid "Audio options..."
 msgstr "Επιλογές ήχου..."
@@ -985,6 +1109,9 @@ msgstr "Αυτόματη εστίαση"
 msgid "Auto focus commencing ..."
 msgstr "Έναρξη αυτόματης εστίασης..."
 
+msgid "Auto language selection"
+msgstr "Αυτόματη επιλογή γλώσσας"
+
 msgid "Auto play blu-ray file"
 msgstr "Αυτόματη αναπαραγωγή αρχείου blu-ray"
 
@@ -1000,11 +1127,20 @@ msgstr "Αυτόματη Ανίχνευση"
 msgid "Automatic scan"
 msgstr "Αυτόματη ανίχνευση"
 
+msgid "Automatically start timeshift after"
+msgstr "Αυτόματη εκκίνηση της χρονομετατόπισης μετά από"
+
+msgid "Automatically turn on external subtitles"
+msgstr "Αυτόματη ενεργοποίηση των εξωτερικών υποτίτλων"
+
 msgid "Available format variables"
 msgstr "Διαθέσιμα εναλλακτικά φορμά"
 
 msgid "B"
 msgstr "B"
+
+msgid "BER"
+msgstr "BER"
 
 msgid "BER:"
 msgstr "BER:"
@@ -1026,6 +1162,12 @@ msgstr "Φόντο"
 
 msgid "Background color"
 msgstr "Χρώμα φόντου"
+
+msgid "Background delete option"
+msgstr "Επιλογή διαγραφής στο παρασκήνιο"
+
+msgid "Background delete speed"
+msgstr "Ταχύτητα διαγραφής στο παρασκήνιο"
 
 msgid "Backup completed."
 msgstr "Η εφεδρεία ολοκληρώθηκε"
@@ -1050,6 +1192,18 @@ msgstr "Βασκικά"
 
 msgid "Begin time"
 msgstr "Ώρα έναρξης"
+
+msgid "Behavior of 'pause and ok' when paused"
+msgstr "Συμπεριφορά των 'pause και ok' κατά την παύση"
+
+msgid "Behavior of 0 key in PiP-mode"
+msgstr "Συμπεριφορά του πλήκτρου 0 στη λειτουργία PiP"
+
+msgid "Behavior when a movie is started"
+msgstr "Συμπεριφορά όταν μια ταινία παίζει"
+
+msgid "Behavior when a movie is stopped"
+msgstr "Συμπεριφορά όταν μια ταινία έχει σταματήσει"
 
 msgid "Behavior when a movie reaches the end"
 msgstr "Συμπεριφορά όταν μια ταινία έχει φτάσει στο τέλος"
@@ -1104,8 +1258,18 @@ msgstr "Εγγραφή σε DVD"
 msgid "Bus: "
 msgstr "Bus: "
 
+msgid ""
+"By default, SNR will be shown in dB (when supported by the tuner). This "
+"setting forces SNR to be shown as a percentage instead."
+msgstr ""
+"Από προεπιλογή, το SNR θα εμφανίζεται σε dB (αν υποστηρίζεται από το tuner). "
+"Αυτή η ρύθμιση αναγκάζει το SNR να εμφανίζεται ως ποσοστό."
+
 msgid "Bypass HDMI EDID checking"
 msgstr "Παράκαμψη ελέγχου HDMI EDID"
+
+msgid "C"
+msgstr "C"
 
 msgid "C-Band"
 msgstr "Μπάντα C"
@@ -1153,8 +1317,16 @@ msgstr "Ο υπολογισμός ολοκληρώθηκε"
 msgid "Calibrate"
 msgstr "Βαθμονόμηση"
 
+msgid "Can be used for different fps between external subtitles and video."
+msgstr ""
+"Μπορεί να χρησιμοποιηθεί όταν οι υπότιτλοι έχουν διαφορετικό fps από το "
+"βίντεο."
+
 msgid "Cancel"
 msgstr "Ακύρωση"
+
+msgid "Cancelled upon user request"
+msgstr "Ακύρωση με εντολή χρήστη"
 
 msgid "Cannot determine"
 msgstr "Αδυναμία προσδιορισμού"
@@ -1180,6 +1352,9 @@ msgstr "Κάρτα"
 msgid "Cascade PiP"
 msgstr "Διαδοχικό PiP"
 
+msgid "Center DVB subtitles"
+msgstr "Στοίχιση υποτίτλων DVB στο κέντρο"
+
 msgid "Center time-labels and remove date"
 msgstr "Κεντράρισμα ετικετών χρόνου και αφαίρεση ημερομηνίας"
 
@@ -1188,6 +1363,9 @@ msgstr "Αλλαγή Γλώσσας"
 
 msgid "Change PIN"
 msgstr "Αλλαγή PIN"
+
+msgid "Change bouquets in quickzap"
+msgstr "Αλλαγή μπουκέτου στο γρήγορο ζάπινγκ"
 
 msgid "Change recording (add time)"
 msgstr "Προσθήκη χρόνου εγγραφής"
@@ -1225,6 +1403,9 @@ msgstr "Επιλογή Καναλιού"
 msgid "Channel:"
 msgstr "Κανάλι:"
 
+msgid "Channellist menu"
+msgstr "Μενού λίστας καναλιών"
+
 msgid "Channelnumber and picon"
 msgstr "Αριθμός καναλιού και λογότυπο"
 
@@ -1246,8 +1427,17 @@ msgstr "Κεφάλαιο:"
 msgid "Check"
 msgstr "Έλεγχος"
 
+msgid "Check the internet connection"
+msgstr "Έλεγχος σύνδεσης στο διαδίκτυο"
+
+msgid "Check the internet connection again"
+msgstr "Έλεγχος σύνδεσης στο διαδίκτυο εκ νέου"
+
 msgid "Checking filesystem..."
 msgstr "Έλεγχος συστήματος αρχείων ..."
+
+msgid "Checking the internet connection"
+msgstr "Έλεγχος της σύνδεσης στο διαδίκτυο"
 
 #, python-format
 msgid ""
@@ -1265,6 +1455,9 @@ msgstr "Επιλογή Tuner"
 
 msgid "Choose bouquet"
 msgstr "Επιλογή μπουκέτου"
+
+msgid "Choose which tuner to configure."
+msgstr "Επιλέξτε ποιο tuner θα ρυθμίσετε."
 
 msgid "Circular LNB"
 msgstr "Κυκλικό LNB"
@@ -1293,8 +1486,14 @@ msgstr "Εκκαθάριση καταγραφολογίου"
 msgid "Clear playlist"
 msgstr "Εκκαθάριση λίστας αναπαραγωγής"
 
+msgid "Clone TV screen to LCD"
+msgstr "Κλωνοποίηση TV στο LCD"
+
 msgid "Close"
 msgstr "Κλείσιμο"
+
+msgid "Close PiP on exit"
+msgstr "Κλείσιμο του PiP κατά την έξοδο"
 
 msgid "Close title selection"
 msgstr "Κλείσιμο επιλογής τίτλου"
@@ -1317,8 +1516,17 @@ msgstr "Επιλογές συλλογής"
 msgid "Color format"
 msgstr "Φορμά χρώματος"
 
+msgid "Combo"
+msgstr "Combo"
+
+msgid "Command execution..."
+msgstr "Εκτέλεση εντολής..."
+
 msgid "Command order"
 msgstr "Σειρά εντολών"
+
+msgid "Commit info"
+msgstr "Πληροφορίες Αλλαγών"
 
 msgid "Common Interface"
 msgstr "Κοινή Διεπαφή"
@@ -1338,8 +1546,14 @@ msgstr "Πλήρης"
 msgid "Complex (allows mixing audio tracks and aspects)"
 msgstr "Σύνθετη (επιτρέπει τη μίξη καναλιών ήχου και λόγου πλευρών)"
 
+msgid "Composition of the recording filenames"
+msgstr "Σύνθεση ονομάτων των εγγραφών"
+
 msgid "Config Scan Details"
 msgstr "Ρύθμιση Πληροφοριών Ανίχνευσης"
+
+msgid "Config resolution of pictures"
+msgstr "Ρύθμιση ανάλυσης των εικόνων"
 
 msgid "Configuration mode"
 msgstr "Τύπος ρύθμισης"
@@ -1352,20 +1566,184 @@ msgid "Configuration..."
 msgstr "Παραμετροποίηση..."
 
 msgid ""
+"Configure an additional delay to improve external subtitle synchronisation."
+msgstr ""
+"Ρύθμιση πρόσθετης καθυστέρησης για βελτίωση του συγχρονισμού των εξωτερικών "
+"υποτίτλων."
+
+msgid "Configure an additional delay to improve subtitle synchronisation."
+msgstr ""
+"Ρύθμιση πρόσθετης καθυστέρησης για βελτίωση του συγχρονισμού των υποτίτλων."
+
+msgid ""
+"Configure for how long the infobar will remain visible after activation."
+msgstr ""
+"Ρυθμίστε για πόσο χρόνο η μπάρα πληροφοριών θα παραμένει ορατή μετά την "
+"ενεργοποίηση."
+
+msgid ""
+"Configure for how many minutes finished events should remain visible in the "
+"EPG. Useful when you need information about an event which has just "
+"finished, or has been delayed."
+msgstr ""
+"Ρυθμίστε για πόσα λεπτά τα προγράμματα που έχουν ολοκληρωθεί θα παραμένουν "
+"ορατά στο EPG. Χρήσιμο όταν χρειάζεστε πληροφορίες για ένα πρόγραμμα που "
+"τελείωσε ή καθυστέρησε."
+
+msgid "Configure how many channels are shown in the selection list."
+msgstr "Ρυθμίστε πόσα κανάλια θα εμφανίζονται στη λίστα επιλογής."
+
+msgid "Configure how recording filenames are constructed."
+msgstr "Ρύθμιση του τρόπου σύνθεσης των ονομάτων των εγγραφών."
+
+msgid "Configure how the fan should operate"
+msgstr "Ρύθμιση του τρόπου λειτουργίας του ανεμιστήρα"
+
+msgid ""
+"Configure if and how crypto icons will be shown in the channel selection "
+"list."
+msgstr ""
+"Ρυθμίστε εάν και πώς θα εμφανίζονται τα κρυπτοεικονίδια στη λίστα επιλογής "
+"καναλιών."
+
+msgid ""
+"Configure if and how long the latest service in the PiP will be remembered."
+msgstr ""
+"Ρυθμίστε εάν και για πόσο θα γίνεται υπενθύμιση της τελευταίας υπηρεσίας στο "
+"PIP."
+
+msgid ""
+"Configure if and how service type icons will be shown in the channel "
+"selection list."
+msgstr ""
+"Ρυθμίστε εάν και πώς θα εμφανίζονται τα εικονίδια τύπου υπηρεσίας στη λίστα "
+"επιλογής καναλιών."
+
+msgid ""
+"Configure if and how the record indicator will be shown in the channel "
+"selection list."
+msgstr ""
+"Ρυθμίστε εάν και πώς θα εμφανίζεται το εικονίδιο εγγραφής στη λίστα επιλογής "
+"καναλιών."
+
+msgid ""
+"Configure if and how wide columns will be shown in the channel selection "
+"list."
+msgstr ""
+"Ρυθμίστε εάν και πόσο πλατιές θα εμφανίζονται οι στήλες στη λίστα επιλογής "
+"καναλιών."
+
+msgid "Configure if behind the subtitles a background is shown."
+msgstr "Ρυθμίστε εάν θα εμφανίζεται ένα φόντο πίσω από τους υπότιτλους."
+
+msgid ""
+"Configure if service picons will be shown in display (when supported by the "
+"skin)."
+msgstr ""
+"Ρυθμίστε εάν τα λογότυπα υπηρεσίας θα εμφανίζονται στην οθόνη πρόσοψης (όταν "
+"υποστηρίζεται από το θέμα)."
+
+msgid ""
+"Configure if service picons will be shown in the channel selection list."
+msgstr ""
+"Ρυθμίστε εάν τα λογότυπα υπηρεσίας θα εμφανίζονται στη λίστα επιλογής "
+"καναλιών."
+
+msgid ""
 "Configure if the HDMI EDID checking should be bypassed as this might solve "
 "issue with some TVs."
 msgstr ""
 "Ρυθμίστε εάν ο έλεγχος HDMI EDID θα πρέπει να παρακάμπτεται καθώς αυτό λύνει "
 "κάποια θέματα με μερικές TV."
 
+msgid ""
+"Configure if the subtitle should switch between normal, italic, bold and "
+"bolditalic"
+msgstr ""
+"Ρυθμίστε εάν ο υπότιτλος θα πρέπει να αλλάζει μεταξύ του κανονικού, πλάγιου, "
+"έντονου ή έντονου πλάγιου"
+
+msgid "Configure interface"
+msgstr "Ρύθμιση διεπαφής"
+
 msgid "Configure nameservers"
 msgstr "Ρύθμιση nameservers"
+
+msgid "Configure on which devices the background delete option should be used."
+msgstr ""
+"Ρυθμίστε σε ποιες συσκευές η δυνατότητα διαγραφής παρασκήνιου θα πρέπει να "
+"χρησιμοποιείται."
 
 msgid "Configure remote control type"
 msgstr "Ρύθμιση τύπου τηλεχειριστηρίου"
 
+msgid "Configure the DiSEqC mode for this LNB."
+msgstr "Ρύθμιση λειτουργίας DiSEqC για αυτό το LNB."
+
+msgid "Configure the IP address."
+msgstr "Ρύθμιση της διεύθυνσης IP."
+
 msgid "Configure the aspect ratio of the screen."
 msgstr "Ρύθμιση της αναλογίας διαστάσεων της οθόνης."
+
+msgid ""
+"Configure the behavior of the 'pause and ok' key when movie playback is "
+"already paused."
+msgstr ""
+"Ρύθμιση της συμπεριφοράς του πλήκτρου 'pause και ok' όταν μία ταινία "
+"βρίσκεται ήδη σε παύση."
+
+msgid "Configure the behavior when movie playback is manually stopped."
+msgstr "Συμπεριφορά όταν μια ταινία έχει σταματήσει χειροκίνητα."
+
+msgid "Configure the behavior when movie playback is started."
+msgstr "Συμπεριφορά όταν μια ταινία ξεκινήσει."
+
+msgid ""
+"Configure the behavior when reaching the end of a movie, during movie "
+"playback."
+msgstr ""
+"Συμπεριφορά όταν μια ταινία φτάσει στο τέλος, κατά τη διάρκεια της "
+"αναπαραγωγής."
+
+msgid ""
+"Configure the border width of the subtitles. The dark border makes the "
+"subtitles easier to read on a light background."
+msgstr ""
+"Ρύθμιση του πλάτους του περιγράμματος των υποτίτλων. Το σκοτεινό περίγραμμα "
+"κάνει τους υπότιτλους πιο ευανάγνωστους σε ένα ανοιχτόχρωμο φόντο."
+
+msgid ""
+"Configure the brightness level of the front panel display during standby."
+msgstr ""
+"Ρύθμιση του επιπέδου φωτεινότητας στην οθόνη πρόσοψης κατά τη διάρκεια της "
+"αναμονής."
+
+msgid "Configure the brightness level of the front panel display."
+msgstr "Ρύθμιση του επιπέδου φωτεινότητας στην οθόνη πρόσοψης."
+
+msgid ""
+"Configure the color of the external subtitles, alternative (normal in white, "
+"italic in yellow, bold in cyan, underscore in green), white or yellow."
+msgstr ""
+"Ρύθμιση του χρώματος των εξωτερικών υποτίτλων, εναλλασσόμενο (κανονικά σε "
+"λευκό, πλάγια σε κίτρινο, έντονα σε γαλάζιο, υπογραμμισμένα σε πράσινο), "
+"λευκό ή κίτρινο."
+
+msgid "Configure the color of the teletext subtitles."
+msgstr "Ρύθμιση χρώματος των υποτίτλων τηλεκειμένου."
+
+msgid "Configure the contrast level of the front panel display."
+msgstr "Ρύθμιση επιπέδου αντίθεσης στην οθόνη πρόσοψης."
+
+msgid ""
+"Configure the cursor behaviour in the channel selection list. When opening "
+"the channel selection list you can keep on the current service or already "
+"select up/down and you are able to revert the B+/B- buttons."
+msgstr ""
+"Ρύθμιση της συμπεριφοράς του κέρσορα στη λίστα καναλιών. Όταν ανοίγει η "
+"λίστα μπορείτε να κρατήσετε την τρέχουσα υπηρεσία ή να επιλέξετε ήδη τα πάνω/"
+"κάτω και θα μπορείτε έτσι να αντιμεταθέσετε τα πλήκτρα B+/B-"
 
 msgid ""
 "Configure the duration in hours the receiver should go to standby when the "
@@ -1373,6 +1751,9 @@ msgid ""
 msgstr ""
 "Ρύθμιση της διάρκειας σε ώρες όπου ο δέκτης θα μεταβεί σε κατάσταση αναμονής "
 "όταν δεν ελέγχεται."
+
+msgid "Configure the duration in minutes for the screensaver."
+msgstr "Ρύθμιση της διάρκειας της προστασίας οθόνης σε λεπτά."
 
 msgid ""
 "Configure the duration in minutes for the sleeptimer. Select this entry and "
@@ -1389,6 +1770,27 @@ msgstr ""
 "Ρύθμιση της διάρκειας κατά την οποία θα κλείσει ο δέκτης σε περίπτωση που "
 "βρίσκεται σε αναμονή."
 
+msgid "Configure the first audio language (highest priority)."
+msgstr "Ρύθμιση της πρώτης γλώσσας του ήχου (ύψιστη προτεραιότητα)."
+
+msgid "Configure the first subtitle language (highest priority)."
+msgstr "Ρύθμιση της πρώτης γλώσσας των υποτίτλων (ύψιστη προτεραιότητα)."
+
+msgid "Configure the font size of the subtitles."
+msgstr "Ρύθμιση του μεγέθους της γραμματοσειράς των υποτίτλων."
+
+msgid "Configure the fourth audio language."
+msgstr "Ρύθμιση της τέταρτης γλώσσας ήχου."
+
+msgid "Configure the fourth subtitle language."
+msgstr "Ρύθμιση της τέταρτης γλώσσας υποτίτλων."
+
+msgid "Configure the function of the '0' button do when PIP is active."
+msgstr "Ρύθμιση λειτουργίας του πλήκτρου '0' όταν το PIP είναι ενεργό."
+
+msgid "Configure the gateway."
+msgstr "Ρύθμιση πύλης δικτύου."
+
 msgid "Configure the general audio delay of Dolby Digital sound tracks."
 msgstr "Ρύθμιση γενικής καθυστέρησης των καναλιών ήχου Dolby Digital."
 
@@ -1398,20 +1800,178 @@ msgstr "Ρύθμιση γενικής καθυστέρησης των στερε
 msgid "Configure the general audio volume step size (limit 1-10)."
 msgstr "Ρύθμιση του γενικού μεγέθους βήματος έντασης ήχου"
 
+msgid ""
+"Configure the hard disk drive to go to standby after the specified idle time."
+msgstr ""
+"Ρυθμίστε το σκληρό δίσκο να μεταβαίνει σε αναμονή έπειτα από το καθορισμένο "
+"χρόνο αδράνειας."
+
+msgid "Configure the horizontal alignment of the subtitles."
+msgstr "Ρύθμιση της οριζόντιας στοίχισης των υποτίτλων."
+
+msgid ""
+"Configure the initial fast forward speed. When you press the fast forward "
+"button, winding will start at this speed."
+msgstr ""
+"Ρύθμιση της αρχικής ταχύτητας προώθησης εμπρός. Όταν πιέζετε το πλήκτρο "
+"προώθησης εμπρός, η προώθηση θα ξεκινά με αυτή την ταχύτητα."
+
+msgid ""
+"Configure the initial rewind speed. When you press the rewind button, "
+"winding will start at this speed."
+msgstr ""
+"Ρύθμιση της αρχικής ταχύτητας προώθησης προς τα πίσω. Όταν πιέζετε το "
+"πλήκτρο προώθησης προς τα πίσω, η προώθηση θα ξεκινά με αυτή την ταχύτητα."
+
+msgid "Configure the latitude of your location."
+msgstr "Ρύθμιση του γεωγραφικού πλάτους της τοποθεσίας σας."
+
+msgid "Configure the longitude of your location."
+msgstr "Ρύθμιση του γεωγραφικού μήκους της θέσης σας."
+
+msgid ""
+"Configure the minimum amount of disk space to be available for recordings. "
+"When the amount of space drops below this value, deleted items will be "
+"removed from the trash can."
+msgstr ""
+"Ρύθμιση της ελάχιστης διαθέσιμης χωρητικότητας του δίσκου για εγγραφές. Όταν "
+"η χωρητικότητα πέσει κάτω από αυτή την τιμή, τα διαγραμμένα αντικείμενα θα "
+"αφαιρούνται από τον κάδο αχρήστων."
+
+msgid "Configure the nameserver (DNS)."
+msgstr "Ρύθμιση των nameservers (DNS)."
+
+msgid "Configure the netmask."
+msgstr "Ρύθμιση μάσκας δικτύου."
+
+msgid ""
+"Configure the number of days after which items are automaticaly removed from "
+"the trash can."
+msgstr ""
+"Ρύθμιση του αριθμού ημερών μετά τις οποίες τα αντικείμενα θα αφαιρούνται "
+"αυτόματα από τον κάδο αχρήστων."
+
+msgid ""
+"Configure the number of days old timers are kept before they are "
+"automatically removed from the timer list."
+msgstr ""
+"Ρύθμιση του αριθμού ημερών μετά τις οποίες οι παλιοί χρονοδιακόπτες θα "
+"διατηρούνται πριν διαγραφούν από τη λίστα."
+
+msgid ""
+"Configure the offline decoding delay in milliseconds. The configured delay "
+"is observed at each control word parity change."
+msgstr ""
+"Ρύθμιση της εκτός σύνδεσης αποκωδικοποίησης σε χιλιοστά του δευτερολέπτου. Η "
+"ρυθμισμένη καθυστέρηση παρατηρείται σε κάθε αλλαγή ισοτιμίας της λέξης "
+"ελέγχου."
+
+msgid "Configure the possible fast forward speeds."
+msgstr "Ρύθμιση ταχυτήτων προώθησης εμπρός."
+
+msgid "Configure the possible rewind speeds."
+msgstr "Ρύθμιση ταχυτήτων προώθησης προς τα πίσω."
+
+msgid "Configure the primary EPG language."
+msgstr "Ρύθμισης της κύριας γλώσσας του EPG."
+
 msgid "Configure the refresh rate of the screen."
 msgstr "Ρύθμιση του ρυθμού ανανέωσης της οθόνης."
 
 msgid "Configure the screen resolution in PC output mode."
 msgstr "Ρύθμιση της ανάλυσης οθόνης σε λειτουργία εξόδου PC."
 
+msgid "Configure the second audio language."
+msgstr "Ρύθμιση της δεύτερης γλώσσας ήχου."
+
+msgid "Configure the second subtitle language."
+msgstr "Ρύθμιση της δεύτερης γλώσσας υποτίτλων."
+
+msgid "Configure the secondary EPG language."
+msgstr "Ρύθμιση της δευτερεύουσας γλώσσας του EPG."
+
 msgid "Configure the sharpness of the video scaling."
 msgstr "Ρύθμιση της οξύτητας κλιμάκωσης της εικόνας."
+
+msgid "Configure the skip time interval for the '1'/'3' buttons."
+msgstr "Ρύθμιση του μεσοδιαστήματος υπερπήδησης για τα πλήκτρα '1'/'3'."
+
+msgid "Configure the skip time interval for the '4'/'6' buttons."
+msgstr "Ρύθμιση του μεσοδιαστήματος υπερπήδησης για τα πλήκτρα '4'/'6'."
+
+msgid "Configure the skip time interval for the '7'/'9' buttons."
+msgstr "Ρύθμιση του μεσοδιαστήματος υπερπήδησης για τα πλήκτρα '7'/'9'."
+
+msgid "Configure the slow motion speeds."
+msgstr "Ρύθμιση ταχυτήτων αργής κίνησης."
+
+msgid ""
+"Configure the source of the frontend data as shown on the infobars. "
+"'Settings' is as stored on the settings. 'Tuner' is as reported by the tuner."
+msgstr ""
+"Ρυθμίστε την πηγή των δεδομένων από το tuner που θα εμφανίζονται στις μπάρες "
+"πληροφοριών. Οι \"Ρυθμίσεις\" είναι από τις αποθηκευμένες ρυθμίσεις. Το "
+"\"Tuner\" είναι ό,τι αναφέρει το tuner."
+
+msgid ""
+"Configure the speed of the background deletion process. Lower speed will "
+"consume less hard disk drive performance."
+msgstr ""
+"Ρύθμιση της ταχύτητας της διαδικασίας διαγραφής στο παρασκήνιο. Χαμηλότερη "
+"ταχύτητα θα καταναλώνει λιγότερο τις επιδόσεις του σκληρού δίσκου."
+
+msgid "Configure the speed of the fan"
+msgstr "Ρύθμιση της ταχύτητας του ανεμιστήρα"
+
+msgid "Configure the subtitle delay when timing information is not available."
+msgstr ""
+"Ρύθμιση της καθυστέρησης των υποτίτλων, όταν η πληροφορία χρονισμού δεν "
+"είναι διαθέσιμη."
+
+msgid "Configure the third audio language."
+msgstr "Ρύθμιση της τρίτης γλώσσας ήχου."
+
+msgid "Configure the third subtitle language."
+msgstr "Ρύθμιση της τρίτης γλώσσας υποτίτλων."
 
 msgid "Configure the transparency of the OSD."
 msgstr "Ρύθμιση της διαφάνειας του OSD."
 
+msgid ""
+"Configure the transparency of the black background of graphical DVB "
+"subtitles."
+msgstr "Ρύθμιση της διαφάνειας του μαύρου φόντου των γραφικών υποτίτλων DVB."
+
+msgid "Configure the tuner mode."
+msgstr "Ρύθμιση λειτουργίας του tuner."
+
+msgid "Configure the type of status indication icons shown in the movielist."
+msgstr "Ρύθμιση των εικονιδίων ένδειξης κατάστασης στη λίστα ταινιών."
+
+msgid ""
+"Configure the vertical position of the subtitles, measured from the bottom "
+"of the screen."
+msgstr ""
+"Ρύθμιση της κάθετης θέσης των υποτίτλων σε σχέση με το κάτω μέρος της οθόνης."
+
 msgid "Configure the video output mode (or resolution)."
 msgstr "Ρύθμιση της λειτουργίας (ή ανάλυσης) της εξόδου βίντεο."
+
+msgid "Configure the way in which the receiver changes channels."
+msgstr "Ρύθμιση του τρόπου αλλαγής των καναλιών από το δέκτη."
+
+msgid "Configure where completed timers show up in the timer list."
+msgstr ""
+"Ρυθμίστε πού θα εμφανίζονται οι ολοκληρωμένοι χρονοδιακόπτες στη λίστα."
+
+msgid ""
+"Configure whether (and for how long) a second infobar will be shown when OK "
+"is pressed twice. The second infobar contains additional information about "
+"the current channel."
+msgstr ""
+"Ρυθμίστε εάν (και για πόσο χρονικό διάστημα) η δεύτερη μπάρα πληροφοριών θα "
+"εμφανίζεται όταν πατηθεί το OK δύο φορές. Η δεύτερη μπάρα πληροφοριών "
+"περιέχει πρόσθετες πληροφορίες σχετικά με το τρέχον κανάλι."
 
 msgid "Configure whether multi channel PCM sound should be enabled."
 msgstr "Ρυθμίστε εάν ο πολυκάναλος ήχος PCM πρέπει να ενεργοποιηθεί."
@@ -1421,11 +1981,56 @@ msgid ""
 msgstr ""
 "Ρυθμίστε εάν οι πολυκάναλες φέρουσες ήχου πρέπει να υποβιβάζονται σε στέρεο."
 
+msgid ""
+"Configure whether or not an icon should be shown when your motorized dish is "
+"moving."
+msgstr ""
+"Ρυθμίστε εάν θα εμφανίζεται ή όχι ένα εικονίδιο κατά την κίνηση του μοτέρ."
+
+msgid "Configure whether or not an rotor position will be displayed on infobar"
+msgstr ""
+"Ρυθμίστε εάν θα εμφανίζεται ή όχι η θέση του μοτέρ στη μπάρα πληροφοριών"
+
+msgid ""
+"Configure which access level to use for the configuration menu. Expert level "
+"gives access to all items."
+msgstr ""
+"Ρύθμιση του επιπέδου πρόσβασης στο μενού παραμετροποίησης. Το εξειδικευμένο "
+"επίπεδο δίνει πρόσβαση σε όλες τις λειτουργίες."
+
 msgid "Configure which color format should be used on the SCART output."
 msgstr "Ρυθμίστε ποιο φορμά χρώματος θα χρησιμοποιείται στην έξοδο SCART."
 
+msgid ""
+"Configure which tuner for recordings will be preferred, when more than one "
+"tuner is available."
+msgstr ""
+"Ρυθμίστε ποιο tuner θα επιλέγεται για εγγραφές, όταν περισσότερα του ενός "
+"είναι διαθέσιμα."
+
+msgid ""
+"Configure which tuner type will be preferred, when the same service is "
+"available on different types of tuners. Choose 'no priority' to try each "
+"alternative one by one independent from tuner type."
+msgstr ""
+"Ρυθμίστε ποιο tuner θα προτιμάται, όταν η ίδια υπηρεσία θα είναι διαθέσιμη "
+"σε διαφορετικούς τύπους tuner. Επιλέξτε το 'χωρίς προτεραιότητα' για να "
+"δοκιμάζεται το κάθε εναλλακτικό ένα προς ένα ανεξαρτήτως του τύπου του."
+
+msgid ""
+"Configure which tuner will be preferred, when more than one tuner is "
+"available. If set to 'auto' the system will give priority to the tuner "
+"having the lowest number of channels/satellites."
+msgstr ""
+"Ρυθμίστε ποιο tuner θα προτιμάται, όταν περισσότερα του ενός είναι "
+"διαθέσιμα. Στο 'αυτόματο', το σύστημα θα δίνει προτεραιότητα στο tuner με το "
+"μικρότερο αριθμό καναλιών/δορυφόρων."
+
 msgid "Configure your internal LAN"
 msgstr "Ρυθμίσεις εσωτερικού δικτύου"
+
+msgid "Configure your network again"
+msgstr "Ρύθμιση του δικτύου εκ νέου"
 
 msgid "Configure your network settings, and press OK to start the scan"
 msgstr "Ρυθμίστε το δίκτυο και πιέστε ΟΚ για ξεκινήσει η ανίχνευση"
@@ -1469,6 +2074,9 @@ msgstr "Το περιεχόμενο δεν χωράει σε DVD!"
 msgid "Continue"
 msgstr "Συνέχεια"
 
+msgid "Continue in background"
+msgstr "Συνέχεια στο παρασκήνιο"
+
 msgid "Continue playback"
 msgstr "Συνέχιση αναπαραγωγής"
 
@@ -1480,6 +2088,9 @@ msgstr "Συνέχιση αναπαραγωγής (επανάληψη)"
 
 msgid "Contrast"
 msgstr "Αντίθεση"
+
+msgid "Convert ext3 filesystem to ext4"
+msgstr "Μετατροπή συστήματος αρχείων ext3 σε ext4"
 
 msgid "Convert ext3 to ext4"
 msgstr "Μετατροπή ext3 σε ext4"
@@ -1569,6 +2180,21 @@ msgstr ""
 "Αυτή τη στιγμή είναι αδύνατη η ανάκτηση του καταγραφολογίου - δοκιμάστε "
 "αργότερα"
 
+msgid "Custom skip time for '1'/'3' buttons"
+msgstr "Χρόνος υπερπήδησης για τα πλήκτρα '1'/'3'"
+
+msgid "Custom skip time for '4'/'6' buttons"
+msgstr "Χρόνος υπερπήδησης για τα πλήκτρα '4'/'6'"
+
+msgid "Custom skip time for '7'/'9' buttons"
+msgstr "Χρόνος υπερπήδησης για τα πλήκτρα '7'/'9'"
+
+msgid "Customize"
+msgstr "Παραμετροποίηση"
+
+msgid "Customize channel list cursor behavior"
+msgstr "Ρύθμιση της συμπεριφοράς του κέρσορα στη λίστα καναλιών"
+
 msgid "Cut"
 msgstr "Αποκοπή"
 
@@ -1580,6 +2206,9 @@ msgstr "Επεξεργασία σημείων αποκοπής..."
 
 msgid "Czech"
 msgstr "Τσέχικα"
+
+msgid "D"
+msgstr "D"
 
 msgid "DAC"
 msgstr "DAC"
@@ -1604,6 +2233,9 @@ msgstr "Καθυστέρηση DVB CI"
 
 msgid "DVB drivers: "
 msgstr "Οδηγοί DVB:"
+
+msgid "DVB subtitle black transparency"
+msgstr "Διαφάνεια υποτίτλων DVB"
 
 msgid "DVB type"
 msgstr "Τύπος DVB"
@@ -1728,6 +2360,18 @@ msgstr "Καθυστέρηση μεταξύ εντολών diseqc"
 msgid "Delay between switch and motor command"
 msgstr "Καθυστέρηση μεταξύ διακόπτη και εντολής μοτέρ"
 
+msgid "Delay for external subtitles"
+msgstr "Καθυστέρηση εξωτερικών υποτίτλων"
+
+msgid "Delay in miliseconds after finish scrolling text on display."
+msgstr "Καθυστέρηση σε ms μετά τη λήξη της κύλισης του κειμένου στην οθόνη."
+
+msgid "Delay in miliseconds before start of scrolling text on display."
+msgstr "Καθυστέρηση σε ms πριν την έναρξη της κύλισης του κειμένου στην οθόνη."
+
+msgid "Delay in miliseconds between scrolling characters on display."
+msgstr "Καθυστέρηση σε ms μεταξύ της κύλισης χαρακτήρων στην οθόνη."
+
 msgid "Delete"
 msgstr "Διαγραφή"
 
@@ -1758,6 +2402,12 @@ msgstr "Διεγραμμένα αντικείμενα"
 msgid "Depth"
 msgstr "Βάθος"
 
+msgid "Descramble receiving http streams"
+msgstr "Αποκωδικοποίηση των λαμβανομένων ροών http"
+
+msgid "Descramble sending http streams"
+msgstr "Αποκωδικοποίηση των απεσταλμένων ροών http"
+
 msgid "Description"
 msgstr "Περιγραφή"
 
@@ -1778,6 +2428,9 @@ msgstr "Εντοπισμένα NIMs:"
 
 msgid "Devicename:"
 msgstr "Όνομα συσκευής:"
+
+msgid "DiSEqC"
+msgstr "DiSEqC"
 
 msgid "DiSEqC 1.0 command"
 msgstr "Εντολή DiSEqC 1.0"
@@ -1836,6 +2489,9 @@ msgstr "Απενεργοποίηση"
 msgid "Disable Picture in Picture"
 msgstr "Απενεργοποίηση Εικόνας σε Εικόνα"
 
+msgid "Disable background scanning"
+msgstr "Απενεργοποίηση αναζήτησης στο παρασκήνιο"
+
 msgid "Disable current event but not coming events"
 msgstr "Απενεργοποίηση τρέχοντος προγράμματος αλλά όχι των επόμενων"
 
@@ -1848,6 +2504,9 @@ msgstr "Ανενεργό"
 msgid "Disclaimer"
 msgstr "Αποποίηση ευθύνης"
 
+msgid "Disk space to reserve for recordings (in GB)"
+msgstr "Χώρος δίσκου που διατίθεται για εγγραφές (σε GB)"
+
 msgid "Display 16:9 content as"
 msgstr "Εμφάνιση περιεχομένου 16:9 ως"
 
@@ -1859,6 +2518,18 @@ msgstr "Εμφάνιση περιεχομένου >16:9 ως"
 
 msgid "Display and userinterface"
 msgstr "Οθόνη και επιφάνεια χρήστη"
+
+msgid "Display message before playing next movie"
+msgstr "Εμφάνιση μηνύματος πριν από την αναπαραγωγή της επόμενης ταινίας"
+
+msgid "Display setup"
+msgstr "Ρυθμίσεις οθόνης πρόσοψης"
+
+msgid "Do center DVB subs on this service"
+msgstr "Κεντράρισμα υποτίτλων DVB σε αυτή την υπηρεσία"
+
+msgid "Do not center DVB subs on this service"
+msgstr "Μη κεντράρισμα υποτίτλων DVB σε αυτή την υπηρεσία"
 
 msgid "Do not change"
 msgstr "Να μη γίνει αλλαγή"
@@ -1930,6 +2601,15 @@ msgstr "Θέλετε να γίνει αυτόματη επαναφορά των 
 msgid "Do you want to burn this collection to DVD medium?"
 msgstr "Θέλετε να γίνει εγγραφή αυτής της συλλογής σε DVD;"
 
+msgid "Do you want to do a service scan?"
+msgstr "Θέλετε να γίνει ανίχνευση υπηρεσιών;"
+
+msgid "Do you want to do another manual service scan?"
+msgstr "Θέλετε να γίνει μία ακόμα χειροκίνητη ανίχνευση;"
+
+msgid "Do you want to install a channel list?"
+msgstr "Θέλετε να γίνει εγκατάσταση μιας λίστας καναλιών;"
+
 msgid "Do you want to install the package:\n"
 msgstr "Θέλετε να εγκαταστήσετε το πακέτο:\n"
 
@@ -1997,6 +2677,9 @@ msgstr "Λήψη προσθέτων"
 msgid "Downloadable new plugins"
 msgstr "Νέα πρόσθετα για λήψη"
 
+msgid "Downloadable plugins"
+msgstr "Πρόσθετα για λήψη"
+
 msgid "Downloading"
 msgstr "Λήψη"
 
@@ -2012,8 +2695,23 @@ msgstr "Δυναμική αντίθεση"
 msgid "E"
 msgstr "Ε"
 
+msgid "ECM Info"
+msgstr "Πληροφορίες ECM"
+
 msgid "EPG"
 msgstr "EPG"
+
+msgid "EPG language selection 1"
+msgstr "Επιλογή γλώσσας EPG 1"
+
+msgid "EPG language selection 2"
+msgstr "Επιλογή γλώσσας EPG 2"
+
+msgid "EPG selection"
+msgstr "Επιλογή EPG"
+
+msgid "EPG settings"
+msgstr "Ρυθμίσεις EPG"
 
 #, python-format
 msgid "ERROR - failed to scan (%s)!"
@@ -2050,7 +2748,7 @@ msgid "Edit title"
 msgstr "Επεξεργασία τίτλου"
 
 msgid "Edit upgrade source url."
-msgstr "Επιλέξτε πηγή αναβάθμισης για επεξεργασία"
+msgstr "Επιλέξτε πηγή αναβάθμισης για επεξεργασία."
 
 msgid "Education/Science/..."
 msgstr "Εκπαίδευση/Επιστήμη/..."
@@ -2061,8 +2759,35 @@ msgstr "Ηλεκτρονικός Οδηγός Προγράμματος"
 msgid "Enable"
 msgstr "Ενεργοποίηση"
 
+msgid "Enable 'neutrino' style channel select controlling"
+msgstr "Ενεργοποίηση στυλ ελέγχου επιλογής καναλιών 'neutrino'"
+
+msgid "Enable 'neutrino' style zap controlling"
+msgstr "Ενεργοποίηση στυλ ελέγχου ζάπινγκ 'neutrino'"
+
 msgid "Enable 5V for active antenna"
 msgstr "Ενεργοποίηση των 5V για την ενεργή κεραία"
+
+msgid "Enable EIT EPG"
+msgstr "Ενεργοποίηση EIT EPG"
+
+msgid "Enable MHW EPG"
+msgstr "Ενεργοποίηση MHW EPG"
+
+msgid "Enable Netmed EPG"
+msgstr "Ενεργοποίηση Netmed EPG"
+
+msgid "Enable OK as preview in channel selection"
+msgstr "Ενεργοποίηση OK ως προεπισκόπηση στην επιλογή καναλιών"
+
+msgid "Enable OK for channel selection"
+msgstr "Ενεργοποίηση ΟΚ για επιλογή καναλιών"
+
+msgid "Enable ViaSat EPG"
+msgstr "Ενεργοποίηση ViaSat EPG"
+
+msgid "Enable Virgin EPG"
+msgstr "Ενεργοποίηση Virgin EPG"
 
 msgid "Enable auto cable scan"
 msgstr "Ενεργοποίηση αυτόματης καλωδιακής ανίχνευσης"
@@ -2074,14 +2799,47 @@ msgstr "Ενεργοποίηση της αυτόματης γρήγορης αν
 msgid "Enable auto fast scan for %s"
 msgstr "Ενεργοποίηση αυτόματης γρήγορης ανίχνευσης για το %s"
 
+msgid "Enable bouquet selection in multi-EPG"
+msgstr "Ενεργοποίηση της επιλογής μπουκέτων στον πολλαπλό EPG"
+
+msgid "Enable fallback remote receiver"
+msgstr "Ενεργοποίηση εφεδρικού απομακρυσμένου δέκτη"
+
+msgid "Enable freesat EPG"
+msgstr "Ενεργοποίηση freesat EPG"
+
+msgid "Enable multiple bouquets"
+msgstr "Ενεργοποίηση πολλαπλών μπουκέτων"
+
 msgid "Enable parental protection"
 msgstr "Ενεργοποίηση γονικής προστασίας"
+
+msgid ""
+"Enable remote enigma2 receiver to be tried to tune into services that cannot "
+"be tuned into locally (e.g. tuner is occupied or service type is unavailable "
+"on the local tuner. Specify complete URL including http:// and port number "
+"(normally ...:8001), e.g. http://second_box:8001."
+msgstr ""
+"Ενεργοποίηση προσπάθειας συντονισμού του enigma2 δέκτη σε υπηρεσίες που δεν "
+"δύναται να συντονιστούν τοπικά (π.χ. το tuner είναι απασχολημένο ή ο τύπος "
+"της υπηρεσίας δεν είναι διαθέσιμος στο τοπικό tuner). Πρέπει να οριστεί μία "
+"διεύθυνση URL που να συμπεριλαμβάνει το http:// και τον αριθμό θύρας "
+"(συνήθως...:8001), π.χ. http://δεύτερος_δέκτης:8001."
+
+msgid "Enable teletext caching"
+msgstr "Ενεργοποίηση αποθήκευσης τηλεκειμένου"
 
 msgid "Enable timer conflict detection"
 msgstr "Ενεργοποίηση εντοπισμού διενέξεων των χρονοδιακοπτών"
 
+msgid "Enable volume control with arrow buttons"
+msgstr "Ενεργοποίηση ελέγχου ήχου με τα πλήκτρα βέλη"
+
 msgid "Enable wakeup timer"
 msgstr "Ενεργοποίηση χρονοδιακόπτη αφύπνισης"
+
+msgid "Enable zapping with CH+/-, B+/-, P+/-"
+msgstr "Ενεργοποίηση ζάπινγκ με τα CH+/-, B+/-, P+/-"
 
 msgid "Enabled"
 msgstr "Ενεργό"
@@ -2161,6 +2919,9 @@ msgstr ""
 msgid "Estonian"
 msgstr "Εσθονικά"
 
+msgid "EtPortal"
+msgstr "EtPortal"
+
 msgid "Ethernet network interface"
 msgstr "Διεπαφή ενσύρματου δικτύου"
 
@@ -2168,8 +2929,14 @@ msgid "Event font size (relative to skin size)"
 msgstr ""
 "Μέγεθος γραμματοσειράς προγράμματος (σε σχέση με το μέγεθος του θέματος)"
 
+msgid "Event view"
+msgstr "Επισκόπηση προγραμμάτων"
+
 msgid "Event view context menu"
 msgstr "Μενού περιεχομένων προεπισκόπησης καναλιών"
+
+msgid "Event view menu"
+msgstr "Μενού προγραμμάτων"
 
 msgid "Events info menu"
 msgstr "Μενού πληροφοριών εκπομπών"
@@ -2225,11 +2992,17 @@ msgstr "Έξοδος από τη λίστα διεπαφών δικτύου"
 msgid "Exit network wizard"
 msgstr "Έξοδος από τον οδηγό δικτύου"
 
+msgid "Exit the wizard"
+msgstr "Έξοδος από τον οδηγό"
+
 msgid "Exit/OK"
 msgstr "Έξοδος/OK"
 
 msgid "Expert"
-msgstr "Προχωρημένο"
+msgstr "Εξειδικευμένο"
+
+msgid "Expert settings"
+msgstr "Προχωρημένες ρυθμίσεις"
 
 msgid "Extend sleeptimer 15 minutes"
 msgstr "Επέκταση χρονοδιακόπτη 15 λεπτά"
@@ -2249,6 +3022,9 @@ msgstr "Πρόσθετο προχωρημένης ρύθμισης δικτύο�
 msgid "Extended setup..."
 msgstr "Προχωρημένες ρύθμισεις..."
 
+msgid "Extensions"
+msgstr "Επεκτάσεις"
+
 msgid "Extensions management"
 msgstr "Διαχείριση επεκτάσεων"
 
@@ -2265,6 +3041,15 @@ msgstr "Εξωτερικό PiP"
 msgid "External Storage %s"
 msgstr "Εξωτερικός χώρος αποθήκευσης %s"
 
+msgid "External subtitle color"
+msgstr "Χρώμα εξωτερικών υποτίτλων"
+
+msgid "External subtitle dialog colorisation"
+msgstr "Χρωματισμός διαλόγων εξωτερικών υποτίτλων"
+
+msgid "External subtitle switch fonts"
+msgstr "Αλλαγή γραμματοσειρών εξωτερικού υπότιτλου"
+
 msgid "Extra end time to ignore inactivity sleeptimer"
 msgstr ""
 "Πρόσθετος χρόνος λήξης για αγνόηση της αδράνειας του χρονοδιακόπτη ύπνου"
@@ -2275,6 +3060,9 @@ msgstr "Πρόσθετες επιλογές μοτέρ"
 msgid "Extra start time to ignore inactivity sleeptimer"
 msgstr ""
 "Πρόσθετος χρόνος εκκίνησης για αγνόηση της αδράνειας του χρονοδιακόπτη ύπνου"
+
+msgid "F"
+msgstr "F"
 
 msgid "F1/F3/F4/F4-TURBO"
 msgstr "F1/F3/F4/F4-TURBO/TRIPLEX"
@@ -2316,6 +3104,9 @@ msgstr "FEC:"
 msgid "FTA"
 msgstr "FTA"
 
+msgid "Factory reset"
+msgstr "Επαναφορά εργοστασιακών ρυθμίσεων"
+
 msgid "Failed"
 msgstr "Απέτυχε"
 
@@ -2324,6 +3115,9 @@ msgstr "Αποτυχία εγγραφής του /tmp/positionersetup.log: "
 
 msgid "Failed:"
 msgstr "Αποτυχία:"
+
+msgid "Fallback remote receiver URL"
+msgstr "Εφεδρική απομακρυσμένη URL δέκτη"
 
 #, python-format
 msgid "Fan %d"
@@ -2337,6 +3131,12 @@ msgstr "Ανεμιστήρας %d PWM"
 msgid "Fan %d voltage"
 msgstr "Τάση Ανεμιστήρα %d"
 
+msgid "Fan operation"
+msgstr "Λειτουργία ανεμιστήρα"
+
+msgid "Fan speed"
+msgstr "Ταχύτητα ανεμιστήρα"
+
 msgid "Fast"
 msgstr "Γρήγορο"
 
@@ -2349,6 +3149,9 @@ msgstr "Γρήγορη Ανίχνευση"
 msgid "Fast epoch"
 msgstr "Γρήγορη εποχή"
 
+msgid "Fast forward speeds"
+msgstr "Ταχύτητες προώθησης εμπρός"
+
 msgid "Favourites"
 msgstr "Αγαπημένα"
 
@@ -2358,14 +3161,23 @@ msgstr "Το αρχείο είναι απασχολημένο. \n"
 msgid "Filename"
 msgstr "Όνομα αρχείου"
 
+msgid "Filesystem check"
+msgstr "Έλεγχος συστήματος αρχείων"
+
 msgid "Final position at"
 msgstr "Τελική θέση σε"
 
 msgid "Final position at index"
 msgstr "Τελευταία αποθηκευμένη θέση"
 
+msgid "Final scroll delay"
+msgstr "Τελική καθυστέρηση κύλισης"
+
 msgid "Fine movement"
 msgstr "Μικροκίνηση"
+
+msgid "Finetune"
+msgstr "Μικρορύθμιση"
 
 msgid "Finished"
 msgstr "Ολοκληρώθηκε"
@@ -2452,6 +3264,9 @@ msgstr "Περαιτέρω Επιλογές"
 msgid "Further options"
 msgstr "Περαιτέρω επιλογές"
 
+msgid "G"
+msgstr "G"
+
 msgid ""
 "GUI needs a restart to apply a new language\n"
 "Do you want to restart the GUI now?"
@@ -2515,6 +3330,9 @@ msgstr "Επιστροφή στην προηγούμενη σελίδα υπηρ
 msgid "Go up the list"
 msgstr "Μετάβαση προς τα πάνω"
 
+msgid "Gold"
+msgstr "Gold"
+
 msgid "Goto"
 msgstr "Μετάβαση"
 
@@ -2572,6 +3390,9 @@ msgstr "Ενίσχυση του πράσινου"
 msgid "Guard interval"
 msgstr "Διάστημα φύλαξης"
 
+msgid "H"
+msgstr "H"
+
 msgid "HD list"
 msgstr "Λίστα HD"
 
@@ -2615,6 +3436,15 @@ msgstr "Χειρισμός εκκίνησης από TV"
 msgid "Hard disk"
 msgstr "Σκληρός δίσκος"
 
+msgid "Hard disk setup"
+msgstr "Ρύθμιση σκληρού δίσκου"
+
+msgid "Hard disk standby after"
+msgstr "Σκληρός δίσκος σε αναμονή μετά από"
+
+msgid "Harddisk"
+msgstr "Σκληρός δίσκος"
+
 msgid "Harddisk Setup"
 msgstr "Ρύθμιση Σκληρού Δίσκου"
 
@@ -2630,14 +3460,23 @@ msgstr "Βοήθεια ρύθμισης της κεραίας σας"
 msgid "Hidden network"
 msgstr "Κρυφό δίκτυο"
 
+msgid "Hide channel list in radio mode"
+msgstr "Απόκρυψη της λίστας καναλιών σε λειτουργία ραδιοφώνου"
+
 msgid "Hide known extensions"
 msgstr "Απόκρυψη γνωστών επεκτάσεων"
+
+msgid "Hide number markers"
+msgstr "Απόκρυψη σημειωτών των αριθμών"
 
 msgid "Hide parentel locked services"
 msgstr "Απόκρυψη υπηρεσιών με γονικό κλείδωμα"
 
 msgid "Hide player"
 msgstr "Απόκρυψη αναπαραγωγού"
+
+msgid "Hide zap errors"
+msgstr "Απόκρυψη σφαλμάτων του ζάπινγκ"
 
 msgid "Hierarchy info"
 msgstr "Πληροφορίες ιεραρχίας"
@@ -2693,6 +3532,9 @@ msgstr "Απόχρωση"
 msgid "Hungarian"
 msgstr "Ουγγρικά"
 
+msgid "I"
+msgstr "I"
+
 msgid "IP address"
 msgstr "Διεύθυνση IP"
 
@@ -2704,6 +3546,12 @@ msgstr "Διαδρομή ISO"
 
 msgid "Icons"
 msgstr "Εικονίδια"
+
+msgid ""
+"If enabled, display shows 12 chars instead 8, but in latin-1/translit only."
+msgstr ""
+"Όταν είναι ενεργό, η οθόνη πρόσοψης δείχνει 12 χαρακτήρες αντί 8, αλλά μόνο "
+"σε κωδικοποίηση latin-1."
 
 msgid ""
 "If you see this, something is wrong with\n"
@@ -2749,11 +3597,23 @@ msgstr "Σε εξέλιξη"
 msgid "Inactivity Sleeptimer"
 msgstr "Χρονοδιακόπτης αδράνειας"
 
+msgid "Include AIT in http streams"
+msgstr "Συμπερίληψη του AIT στις ροές http"
+
+msgid "Include ECM in http streams"
+msgstr "Συμπερίληψη του ECM στις ροές http"
+
+msgid "Include EIT in http streams"
+msgstr "Συμπερίληψη του ΕΙΤ στις ροές http"
+
 msgid "Incorrect type service for PiP!"
 msgstr "Λανθασμένος τύπος υπηρεσίας για PiP!"
 
 msgid "Increased voltage"
 msgstr "Αυξημένη τάση"
+
+msgid "Index"
+msgstr "Ευρετήριο"
 
 msgid "Index allocated:"
 msgstr "Κατανεμημένη θέση:"
@@ -2761,11 +3621,23 @@ msgstr "Κατανεμημένη θέση:"
 msgid "Info"
 msgstr "Πληροφορίες"
 
+msgid "Info bar"
+msgstr "Μπάρα πληροφοριών"
+
+msgid "Info bar timeout"
+msgstr "Χρόνος εμφάνισης πληροφοριών"
+
+msgid "Infobar frontend data source"
+msgstr "Πηγή δεδομένων tuner στη μπάρα πληροφοριών"
+
 msgid "Information"
 msgstr "Πληροφορίες"
 
 msgid "Init"
 msgstr "Αρχ."
+
+msgid "Initial fast forward speed"
+msgstr "Αρχική ταχύτητα προώθησης εμπρός"
 
 msgid "Initial location in new timers"
 msgstr "Αρχική τοποθεσία σε νέους χρονοδιακόπτες"
@@ -2773,11 +3645,20 @@ msgstr "Αρχική τοποθεσία σε νέους χρονοδιακόπτ
 msgid "Initial lock ratio"
 msgstr "Αρχική αναλογία κλειδώματος"
 
+msgid "Initial rewind speed"
+msgstr "Αρχική ταχύτητα προώθησης προς τα πίσω"
+
+msgid "Initial scroll delay"
+msgstr "Αρχική καθυστέρηση κύλισης"
+
 msgid "Initial signal quality"
 msgstr "Αρχική ποιότητα σήματος"
 
 msgid "Initial signal quality:"
 msgstr "Αρχική ποιότητα σήματος:"
+
+msgid "Initialization"
+msgstr "Αρχικοποίηση"
 
 msgid "Initialize"
 msgstr "Αρχικοποίηση "
@@ -2791,11 +3672,23 @@ msgstr "Μενού επιλογών"
 msgid "Input "
 msgstr "Εισαγωγή "
 
+msgid "Input Stream ID"
+msgstr "ID Ροής Εισόδου"
+
 msgid "Input device setup"
 msgstr "Ρύθμιση συσκευής εισόδου"
 
+msgid "Input devices"
+msgstr "Συσκευές εισόδου"
+
 msgid "Install"
 msgstr "Εγκατάσταση"
+
+msgid "Install a new image with a USB stick"
+msgstr "Εγκατάσταση νέου λογισμικού μέσω usb στικ"
+
+msgid "Install a new image with your web browser"
+msgstr "Εγκατάσταση νέου λογισμικού μέσω πλοηγού web"
 
 msgid "Install channel list"
 msgstr "Εγκατάσταση λίστας καναλιών"
@@ -2824,6 +3717,9 @@ msgstr "Εγκαταστάθηκε: "
 msgid "Installing"
 msgstr "Εγκατάσταση"
 
+msgid "Installing software..."
+msgstr "Εγκατάσταση λογισμικού..."
+
 msgid "Instant record"
 msgstr "Άμεση εγγραφή"
 
@@ -2835,9 +3731,6 @@ msgstr "Άμεση εγγραφή..."
 
 msgid "Interface: "
 msgstr "Διεπαφή: "
-
-msgid "Intermediate"
-msgstr "Ενδιάμεσο"
 
 msgid "Internal"
 msgstr "Εσωτερικός"
@@ -2909,6 +3802,9 @@ msgstr "Αντικείμενα ανά σελίδα "
 msgid "Items per page for list screen"
 msgstr "Αντικείμενα ανά σελίδα για λίστα οθόνης"
 
+msgid "J"
+msgstr "J"
+
 msgid "Job overview"
 msgstr "Επισκόπηση εργασιών"
 
@@ -2928,6 +3824,9 @@ msgstr "Μετάβαση στην προηγούμενη μαρκαρισμέν�
 msgid "Just scale"
 msgstr "Κλιμάκωση"
 
+msgid "KA-SAT"
+msgstr "KA-SAT"
+
 msgid "Keep service"
 msgstr "Διατήρηση υπηρεσίας"
 
@@ -2936,6 +3835,15 @@ msgstr "Έκδοση kernel: "
 
 msgid "Key Events"
 msgstr "Βασικά Προγράμματα"
+
+msgid "Keyboard"
+msgstr "Πληκτρολόγιο"
+
+msgid "Keyboard map"
+msgstr "Χάρτης πληκτρολογίου"
+
+msgid "Keyboard setup"
+msgstr "Ρύθμιση πληκτρολογίου"
 
 msgid "LAN adapter"
 msgstr "Προσαρμογέας LAN"
@@ -2967,6 +3875,9 @@ msgstr "Τελευταία αναβάθμιση: "
 msgid "Latest Commits"
 msgstr "Τελευταίες Αλλαγές"
 
+msgid "Latest upgrade log"
+msgstr "Kαταγραφής τελευταίας αναβάθμισης"
+
 msgid "Latitude"
 msgstr "Γεωγραφικό πλάτος"
 
@@ -2992,8 +3903,20 @@ msgstr "Μπάρες πάνω - κάτω"
 msgid "Letterbox zoom"
 msgstr "Ζουμάρισμα σε μπάρες πάνω - κάτω"
 
+msgid "Limit character set for recording filenames"
+msgstr "Περιορισμένο πλήθος χαρακτήρων για ονόματα εγγραφών"
+
 msgid "Limit east"
 msgstr "Ανατολικό όριο"
+
+msgid ""
+"Limit the characters that can be used in recording filenames to (7 bit) "
+"ascii. This ensures compatibility with operating systems or file systems "
+"with limited character sets."
+msgstr ""
+"Περιορισμός των χαρακτήρων για χρήση στα ονόματα των εγγραφών σε (7 bit) "
+"ascii. Αυτό διασφαλίζει τη συμβατότητα με λειτουργικά συστήματα ή με "
+"συστήματα αρχείων με περιορισμένους χαρακτήρες."
 
 msgid "Limit west"
 msgstr "Δυτικό όριο"
@@ -3018,6 +3941,9 @@ msgstr "Σύνδεση:"
 
 msgid "Linked titles with a DVD menu"
 msgstr "Τίτλοι συνδεδεμένοι με μενού DVD"
+
+msgid "List available networks"
+msgstr "Λίστα διαθέσιμων δικτύων"
 
 msgid "List mode"
 msgstr "Λειτουργία λίστας"
@@ -3051,6 +3977,9 @@ msgstr "Φόρτωση διάρκειας ταινιών στη λίστα"
 
 msgid "Load playlist"
 msgstr "Φόρτωση λίστας αναπαραγωγής"
+
+msgid "Load unlinked userbouquets"
+msgstr "Φόρτωση ασύνδετων μπουκέτων χρήστη"
 
 msgid "Local network"
 msgstr "Τοπικό δίκτυο"
@@ -3091,8 +4020,14 @@ msgstr "Λουξεμβουργιανά"
 msgid "MMC card"
 msgstr "Κάρτα MMC"
 
+msgid "MORE"
+msgstr "ΠΕΡΙΣΣΟΤΕΡΑ"
+
 msgid "Main menu"
 msgstr "Κύριο μενού"
+
+msgid "Maintain old EPG data for"
+msgstr "Διατήρηση των παλιών δεδομένων EPG για"
 
 msgid "Make this mark an 'in' point"
 msgstr "Μαρκάρισμα αυτού του σημαδιού ως σημείο εσόδου"
@@ -3115,11 +4050,23 @@ msgstr "Χειροκίνητη"
 msgid "Manual Scan"
 msgstr "Χειροκίνητη Ανίχνευση"
 
+msgid "Manual configuration"
+msgstr "Χειροκίνητη ρύθμιση"
+
+msgid "Manual scan"
+msgstr "Χειροκίνητη ανίχνευση"
+
 msgid "Manual transponder"
 msgstr "Χειροκίνητος αναμεταδότης"
 
 msgid "Manufacturer"
 msgstr "Κατασκευαστής"
+
+msgid "Margin after recording (minutes)"
+msgstr "Περιθώριο μετά την εγγραφή (λεπτά)"
+
+msgid "Margin before recording (minutes)"
+msgstr "Περιθώριο πριν την εγγραφή (λεπτά)"
 
 msgid "Mark service as dedicated 3D service"
 msgstr "Μαρκάρισμα υπηρεσίας ως σταθερή υπηρεσία 3D"
@@ -3168,6 +4115,9 @@ msgstr "Ταξινόμηση μενού (%s)"
 msgid "Message"
 msgstr "Μήνυμα"
 
+msgid "Message..."
+msgstr "Μήνυμα..."
+
 msgid "Messages"
 msgstr "Μηνύματα"
 
@@ -3189,11 +4139,17 @@ msgctxt "Video output mode"
 msgid "Mode"
 msgstr "Λειτουργία"
 
+msgid "Model"
+msgstr "Μοντέλο"
+
 msgid "Model: "
 msgstr "Μοντέλο: "
 
 msgid "Modulation"
 msgstr "Διαμόρφωση"
+
+msgid "Modulator"
+msgstr "Διαμορφωτής"
 
 msgid "Mon"
 msgstr "Δευ"
@@ -3258,6 +4214,9 @@ msgstr "Επιλογή ταινιών"
 msgid "Movie/Drama"
 msgstr "Ταινία/Δράμα"
 
+msgid "Movielist menu"
+msgstr "Μένου λίστας ταινιών"
+
 msgid "Moving"
 msgstr "Μετακίνηση"
 
@@ -3275,6 +4234,9 @@ msgstr "Πολλαπλός EPG"
 
 msgid "Multi channel downmix"
 msgstr "Μίξη πολλαπλών καναλιών ήχου"
+
+msgid "Multi-EPG bouquet selection"
+msgstr "Επιλογή μπουκέτων πολλαπλού EPG"
 
 msgid "Multichannel PCM"
 msgstr "Πολυκάναλο PCM"
@@ -3294,14 +4256,23 @@ msgstr "Επιλογή όλων των δορυφόρων"
 msgid "Music/Ballet/Dance"
 msgstr "Μουσική/Μπαλέτο/Χορός"
 
+msgid "Mute"
+msgstr "Σίγαση"
+
 msgid "N/A"
 msgstr "Μ/Δ"
+
+msgid "NEXT"
+msgstr "ΕΠΟΜΕΝΟ"
 
 msgid "NIM & Type"
 msgstr "Μονάδα tuner & Τύπος"
 
 msgid "NO"
 msgstr "ΟΧΙ"
+
+msgid "NOW"
+msgstr "ΤΩΡΑ"
 
 msgid "NTSC"
 msgstr "NTSC"
@@ -3318,6 +4289,9 @@ msgstr "Nameserver %d"
 
 msgid "Nameserver settings"
 msgstr "Ρυθμίσεις Nameserver"
+
+msgid "Nameserver setup"
+msgstr "Ρύθμιση Nameserver"
 
 msgid "Namespace"
 msgstr "Χώρος ονόματος"
@@ -3336,6 +4310,9 @@ msgstr "Πληροφορίες Δικτύου:"
 
 msgid "Network configuration"
 msgstr "Ρύθμιση δικτύου"
+
+msgid "Network configuration..."
+msgstr "Διαμόρφωση δικτύου..."
 
 msgid "Network mount"
 msgstr "Προσάρτηση δικτύου"
@@ -3356,6 +4333,9 @@ msgstr "Ρύθμιση δικτύου"
 msgid "Network test"
 msgstr "Έλεγχος δικτύου"
 
+msgid "Network test..."
+msgstr "Έλεγχος δικτύου..."
+
 msgid "Network test: "
 msgstr "Έλεγχος δικτύου: "
 
@@ -3364,6 +4344,21 @@ msgstr "Οδηγός δικτύου"
 
 msgid "Network:"
 msgstr "Δίκτυο:"
+
+msgid ""
+"Never decrypt the content while recording. This overrides the individual "
+"timer settings globally. If enabled, recordings are stored in crypted "
+"presentation and must be decrypted afterwards (sometimes called offline "
+"decoding). Default: off."
+msgstr ""
+"Να μη γίνεται ποτέ αποκωδικοποίηση του περιεχομένου κατά την εγγραφή. Αυτό "
+"παρακάμπτει όλες τις ιδιαίτερες ρυθμίσεις χρονοδιακοπτών γενικά. Όταν είναι "
+"ενεργό, οι εγγραφές αποθηκεύονται ως κωδικοποιημένες και πρέπει να "
+"αποκωδικοποιηθούν μετέπειτα (ενίοτε ονομάζεται κωδικοποίηση εκτός σύνδεσης). "
+"Προεπιλογή: ανενεργό."
+
+msgid "Never decrypt while recording"
+msgstr "Να μη γίνεται ποτέ αποκωδικοποίηση κατά την εγγραφή"
 
 msgid "New"
 msgstr "Νέο"
@@ -3388,11 +4383,17 @@ msgstr "Δεν βρέθηκε (υποστηριζόμενο) DVDROM!"
 msgid "No Connection"
 msgstr "Δεν υπάρχει σύνδεση"
 
+msgid "No ECMPids available (FTA Service)"
+msgstr "Μη διαθέσιμα ECMPids (FTA Υπηρεσία)"
+
 msgid "No HDD found or HDD not initialized!"
 msgstr "Δεν βρέθηκε σκληρός δίσκος ή δεν έχει γίνει αρχικοποίηση!"
 
 msgid "No age block"
 msgstr "Χωρίς ηλικιακό μπλοκάρισμα"
+
+msgid "No backup needed"
+msgstr "Δεν απαιτείται εφεδρεία"
 
 msgid "No cable tuner found!"
 msgstr "Δεν βρέθηκε καλωδιακό tuner!"
@@ -3492,7 +4493,7 @@ msgstr ""
 "Ρυθμίστε το tuner πριν την ανίχνευση υπηρεσιών."
 
 msgid "No updates available"
-msgstr "Δεν υπάρχουν διαθέσιμες ενημερώσεις."
+msgstr "Δεν υπάρχουν διαθέσιμες ενημερώσεις"
 
 msgid "No updates available. Please try again later."
 msgstr "Δεν υπάρχουν ενημερώσεις διαθέσιμες. Παρακαλώ δοκιμάστε αργότερα."
@@ -3528,10 +4529,16 @@ msgstr ""
 "τη διεπαφή δικτύου."
 
 msgid "No, but restart from begin"
-msgstr "Όχι, επανεκκίνηση από την αρχή."
+msgstr "Όχι, επανεκκίνηση από την αρχή"
+
+msgid "No, do nothing."
+msgstr "Όχι, να μη γίνει τίποτα."
 
 msgid "No, except Wakeup timer"
 msgstr "Όχι, εκτός του χρονοδιακόπτη αφύπνισης"
+
+msgid "No, just start my receiver"
+msgstr "Όχι, απλά εκκίνηση του δέκτη"
 
 msgid "No, never"
 msgstr "Όχι, ποτέ"
@@ -3542,6 +4549,9 @@ msgstr "Κανένα"
 #. TRANSLATORS: (aspect ratio policy: display as fullscreen, with stretching the left/right)
 msgid "Nonlinear"
 msgstr "Μη γραμμικό"
+
+msgid "Normal"
+msgstr "Kανονικό"
 
 msgid "Normal mode"
 msgstr "Κανονική λειτουργία"
@@ -3581,7 +4591,7 @@ msgid ""
 msgstr ""
 "Σημείωση: όταν είναι ενεργό, και θέλετε λειτουργία αναμονής μετά την "
 "αφύπνιση, θέστε την επιλογή στο \"Εκκίνηση από Αναμονή\" στο \"Όχι, εκτός "
-"του χρονοδιακόπτη αφύπνισης\""
+"του χρονοδιακόπτη αφύπνισης\"."
 
 msgid "Nothing connected"
 msgstr "Δεν έχει συνδεθεί τίποτα"
@@ -3600,6 +4610,9 @@ msgctxt "now/next: 'now' event label"
 msgid "Now"
 msgstr "Τώρα"
 
+msgid "Now playing"
+msgstr "Αναπαραγωγή τώρα"
+
 msgid ""
 "Now, use the contrast setting to turn up the brightness of the background as "
 "much as possible, but make sure that you can still see the difference "
@@ -3609,23 +4622,38 @@ msgstr ""
 "φωτεινότητα του φόντου, αλλά βεβαιωθείτε ότι μπορείτε να διακρίνετε τη "
 "διαφορά ανάμεσα στις δύο φωτεινότερες σκιές. Εάν το κάνατε, πιέστε ΟΚ."
 
+msgid "Number of channels shown in channel selection list"
+msgstr "Αριθμός καναλιών που εμφανίζονται στη λίστα επιλογής"
+
+msgid "Number of repeating text on display."
+msgstr "Αριθμός επανάληψης κειμένου στην οθόνη."
+
 msgid "OK"
 msgstr "OK"
+
+msgid "OK, guide me through the upgrade process"
+msgstr "ΟΚ, να οδηγηθώ στη διαδικασία αναβάθμισης"
 
 msgid "ONID"
 msgstr "ONID"
 
 msgid "OSD 3D setup"
-msgstr "Ρυθμίσεις OSD 3D "
+msgstr "Ρυθμίσεις OSD 3D"
 
 msgid "OSD name request"
 msgstr "Απαίτηση ονόματος OSD"
+
+msgid "OSD settings"
+msgstr "Ρυθμίσεις OSD"
 
 msgid "OSD transparency"
 msgstr "Διαφάνεια OSD"
 
 msgid "Off"
 msgstr "Κλειστό"
+
+msgid "Offline decode delay (ms)"
+msgstr "Καθυστέρηση αποκωδικοποίησης εκτός σύνδεσης (ms)"
 
 msgid "Ok"
 msgstr "Ok"
@@ -3705,8 +4733,17 @@ msgstr "PDC"
 msgid "PGS file"
 msgstr "αρχείο PGS"
 
+msgid "PIN code needed"
+msgstr "Απαιτείται κωδικός PIN"
+
 msgid "PLP ID"
 msgstr "PLP ID"
+
+msgid "PLS Code"
+msgstr "PLS Κωδικός"
+
+msgid "PLS Mode"
+msgstr "PLS Λειτουργία"
 
 msgid "PMT PID"
 msgstr "PMT PID"
@@ -3739,6 +4776,9 @@ msgstr "Γονικός φάκελος"
 msgid "Parental control"
 msgstr "Γονικός έλεγχος"
 
+msgid "Parental control services editor"
+msgstr "Επεξεργασία υπηρεσιών γονικού έλεγχου"
+
 msgid "Parental control setup"
 msgstr "Παραμετροποίηση γονικού ελέγχου"
 
@@ -3768,6 +4808,9 @@ msgstr "Οριστική διαγραφή όλων των διεγραμμένω
 
 msgid "Persian"
 msgstr "Περσικά"
+
+msgid "PiP setup"
+msgstr "Ρύθμιση PiP"
 
 msgid "Picon"
 msgstr "Λογότυπο (picon)"
@@ -3836,6 +4879,27 @@ msgstr "Παρακαλώ αλλάξτε την ώρα τερματισμού"
 msgid "Please choose an extension..."
 msgstr "Παρακαλώ επιλέξτε μία επέκταση..."
 
+msgid ""
+"Please configure or verify your Nameservers by filling out the required "
+"values.\n"
+"When you are ready press OK to continue."
+msgstr ""
+"Παρακαλώ ρυθμίστε ή επιβεβαιώστε τους Nameservers συμπλρώνοντας τις "
+"απαιτούμενες τιμές.\n"
+"Όταν είστε έτοιμοι, πιέστε ΟΚ για συνέχεια."
+
+msgid ""
+"Please configure your internet connection by filling out the required "
+"values.\n"
+"When you are ready press OK to continue."
+msgstr ""
+"Παρακαλώ ρυθμίστε τη σύνδεση στο διαδίκτυο συμπληρώνοντας τις απαιτούμενες "
+"τιμές.\n"
+"Όταν είστε έτοιμοι, πιέστε ΟΚ για συνέχεια."
+
+msgid "Please connect your receiver to the internet"
+msgstr "Παρακαλώ συνδέστε το δέκτη σας στο διαδίκτυο"
+
 msgid "Please do not change any values unless you know what you are doing!"
 msgstr "Παρακαλώ μην αλλάζετε τιμές εάν δεν γνωρίζετε τι κάνετε!"
 
@@ -3869,6 +4933,9 @@ msgstr "Εισαγωγή νέου κωδικού PIN"
 msgid "Please enter the old PIN code"
 msgstr "Εισάγετε το παλιό PIN"
 
+msgid "Please follow the instructions on the TV"
+msgstr "Παρακαλώ ακολουθήστε τις οδηγίες στην οθόνη"
+
 msgid ""
 "Please note that the previously selected media could not be accessed and "
 "therefore the default directory is being used instead."
@@ -3889,13 +4956,13 @@ msgid "Please select a playlist..."
 msgstr "Παρακαλώ επιλέξτε λίστα αναπαραγωγής..."
 
 msgid "Please select a sub service..."
-msgstr "Επιλέξτε μια υπό-υπηρεσία"
+msgstr "Επιλέξτε μια υπό-υπηρεσία..."
 
 msgid "Please select a subservice to record..."
 msgstr "Επέλεξε μια υπό-υπηρεσία για εγγραφή..."
 
 msgid "Please select a subservice..."
-msgstr "Επιλέξτε μια υπό-υπηρεσία"
+msgstr "Επιλέξτε μια υπό-υπηρεσία..."
 
 msgid "Please select medium to be scanned"
 msgstr "Παρακαλώ επιλέξτε μέσο για ανίχνευση"
@@ -3910,6 +4977,59 @@ msgstr "Παρακαλώ επιλέξτε ετικέτα προς φιλτράρ
 
 msgid "Please select the movie path..."
 msgstr "Παρακαλώ επιλέξτε διαδρομή ταινιών..."
+
+msgid ""
+"Please select the network interface that you want to use for your internet "
+"connection.\n"
+"\n"
+"Please press OK to continue."
+msgstr ""
+"Παρακαλώ επιλέξτε τη διεπαφή δικτύου που θέλετε να χρησιμοποιήσετε για το "
+"διαδίκτυο.\n"
+"\n"
+"Πιέστε ΟΚ για συνέχεια."
+
+msgid ""
+"Please select the wireless network that you want to connect to.\n"
+"\n"
+"Please press OK to continue."
+msgstr ""
+"Παρακαλώ επιλέξτε το ασύρματο δίκτυο στο οποίο θα συνδεθείτε.\n"
+"\n"
+"Πιέστε ΟΚ για συνέχεια."
+
+msgid "Please set up tuner A"
+msgstr "Παρακαλώ ρυθμίστε το tuner A"
+
+msgid "Please set up tuner B"
+msgstr "Παρακαλώ ρυθμίστε το tuner B"
+
+msgid "Please set up tuner C"
+msgstr "Παρακαλώ ρυθμίστε το tuner C"
+
+msgid "Please set up tuner D"
+msgstr "Παρακαλώ ρυθμίστε το tuner D"
+
+msgid "Please set up tuner E"
+msgstr "Παρακαλώ ρυθμίστε το tuner E"
+
+msgid "Please set up tuner F"
+msgstr "Παρακαλώ ρυθμίστε το tuner F"
+
+msgid "Please set up tuner G"
+msgstr "Παρακαλώ ρυθμίστε το tuner G"
+
+msgid "Please set up tuner H"
+msgstr "Παρακαλώ ρυθμίστε το tuner H"
+
+msgid "Please set up tuner I"
+msgstr "Παρακαλώ ρυθμίστε το tuner I"
+
+msgid "Please set up tuner J"
+msgstr "Παρακαλώ ρυθμίστε το tuner J"
+
+msgid "Please set up tuner K"
+msgstr "Παρακαλώ ρυθμίστε το tuner K"
 
 msgid ""
 "Please use direction keys to move the PiP window.\n"
@@ -3981,6 +5101,9 @@ msgstr "Πληροφορίες ενεργειών διαχείρισης προ�
 msgid "Plugin manager help"
 msgstr "Βοήθεια διαχείρισης προσθέτων"
 
+msgid "Plugins"
+msgstr "Πρόσθετα"
+
 msgid "Polarisation"
 msgstr "Πόλωση"
 
@@ -4008,6 +5131,9 @@ msgstr "Πορτογαλικά"
 msgid "Position"
 msgstr "Θέση"
 
+msgid "Position of completed timers in timerlist"
+msgstr "Θέση ολοκληρωμένων χρονοδιακοπτών στη λίστα"
+
 msgid "Position stored at index"
 msgstr "Αποθήκευση θέσης στο"
 
@@ -4023,6 +5149,9 @@ msgstr "Ρύθμιση μοτέρ"
 msgid "Positioner setup log"
 msgstr "Καταγραφή ρυθμίσεων tuner"
 
+msgid "Power on display"
+msgstr "Ενεργοποίηση οθόνης πρόσοψης"
+
 msgid "Power threshold in mA"
 msgstr "Όριο ρεύματος σε mA"
 
@@ -4031,6 +5160,54 @@ msgstr "Μενού Τερματισμού"
 
 msgid "Predefined transponder"
 msgstr "Προρυθμισμένος αναμεταδότης"
+
+msgid "Prefer AC3 track"
+msgstr "Να προτιμάται ο ήχος AC3"
+
+msgid "Prefer AC3+ track"
+msgstr "Να προτιμάται ο ήχος AC3+"
+
+msgid "Prefer audio track stored by service"
+msgstr "Να προτιμάται ο ήχος που έχει αποθηκευτεί από την υπηρεσία"
+
+msgid "Prefer graphical DVB subtitles"
+msgstr "Να προτιμώνται γραφικοί υπότιτλοι DVB"
+
+msgid "Prefer subtitles for hearing impaired"
+msgstr "Να προτιμώνται υπότιτλοι για άτομα με προβλήματα ακοής"
+
+msgid "Prefer subtitles stored by service"
+msgstr "Να προτιμώνται υπότιτλοι αποθηκευμένοι από την υπηρεσία"
+
+msgid "Preferred tuner"
+msgstr "Προτιμώμενο tuner"
+
+msgid "Preferred tuner ATSC"
+msgstr "Προτιμώμενο tuner ATSC"
+
+msgid "Preferred tuner ATSC for recordings"
+msgstr "Προτιμώμενο tuner ATSC  για τις εγγραφές"
+
+msgid "Preferred tuner DVB-C"
+msgstr "Προτιμώμενο tuner DVB-C"
+
+msgid "Preferred tuner DVB-C for recordings"
+msgstr "Προτιμώμενο tuner DVB-C για τις εγγραφές"
+
+msgid "Preferred tuner DVB-S"
+msgstr "Προτιμώμενο tuner DVB-S"
+
+msgid "Preferred tuner DVB-S for recordings"
+msgstr "Προτιμώμενο tuner DVB-S για τις εγγραφές"
+
+msgid "Preferred tuner DVB-T"
+msgstr "Προτιμώμενο tuner DVB-T"
+
+msgid "Preferred tuner DVB-T for recordings"
+msgstr "Προτιμώμενο tuner DVB-T για τις εγγραφές"
+
+msgid "Preferred tuner for recordings"
+msgstr "Προτιμώμενο tuner για εγγραφές"
 
 msgid "Preparing... Please wait"
 msgstr "Παρακαλώ περιμένετε, προετοιμασία…"
@@ -4064,7 +5241,7 @@ msgid "Press OK to scan"
 msgstr "Πιέστε OK για ανίχνευση"
 
 msgid "Press OK to select a provider."
-msgstr "Πιέστε ΟΚ για επιλογή παρόχου"
+msgstr "Πιέστε ΟΚ για επιλογή παρόχου."
 
 msgid "Press OK to select satellites"
 msgstr "Πιέστε ΟΚ για επιλογή δορυφόρων"
@@ -4199,8 +5376,17 @@ msgstr "Γρήγορο"
 msgid "Quick zap"
 msgstr "Γρήγορο ζάπινγκ"
 
+msgid "REC"
+msgstr "ΕΓΓΡ"
+
+msgid "RF output"
+msgstr "Έξοδος RF"
+
 msgid "RGB"
 msgstr "RGB"
+
+msgid "Radio"
+msgstr "Ραδιόφωνο"
 
 msgid "Ram disk"
 msgstr "Δίσκος RAM"
@@ -4244,8 +5430,14 @@ msgstr ""
 msgid "Really upgrade your settop box and reboot now?"
 msgstr "Να γίνει σίγουρα ενημέρωση του δέκτη και επανεκκίνηση;"
 
+msgid "Rec"
+msgstr "Εγγρ."
+
 msgid "Recall to previous service"
 msgstr "Επιστροφή στην προηγούμενη υπηρεσία"
+
+msgid "Reception settings"
+msgstr "Ρυθμίσεις λήψης"
 
 msgid "Record"
 msgstr "Εγγραφή"
@@ -4278,6 +5470,9 @@ msgstr "Εκτελούνται εγγραφές ή θα ξεκινήσουν σ�
 msgid "Recordings"
 msgstr "Εγγραφές"
 
+msgid "Recordings always have priority"
+msgstr "Οι εγγραφές έχουν πάντα προτεραιότητα"
+
 msgid "Red"
 msgstr "Κόκκινο"
 
@@ -4299,6 +5494,9 @@ msgstr "Ανανέωση"
 msgid "Refresh rate"
 msgstr "Συχνότητα ανανέωσης"
 
+msgid "Refresh rate selection."
+msgstr "Επιλογή συχνότητας ανανέωσης."
+
 msgid "Refusing to move to the same directory"
 msgstr "Άρνηση μετακίνησης στον ίδιο φάκελο"
 
@@ -4319,6 +5517,9 @@ msgstr "Επαναφόρτωση μαύρων λιστών"
 
 msgid "Reloading bouquets and services..."
 msgstr "Επαναφόρτωση μπουκέτων και υπηρεσιών..."
+
+msgid "Remember last service in PiP"
+msgstr "Υπενθύμιση τελευταίας υπηρεσίας στο PiP"
 
 msgid "Remember service PIN"
 msgstr "Αποθήκευση PIN υπηρεσίας"
@@ -4350,8 +5551,14 @@ msgstr "Διαγραφή όλων των αρχείων καταγραφής"
 msgid "Remove bookmark"
 msgstr "Διαγραφή σελιδοδείκτη"
 
+msgid "Remove completed timers after (days)"
+msgstr "Διαγραφή ολοκληρωμένων χρονοδιακοπτών μετά από (ημέρες)"
+
 msgid "Remove currently selected title"
 msgstr "Διαγραφή επιλεγμένου τίτλου"
+
+msgid "Remove items from trash can after (days)"
+msgstr "Διαγραφή αντικειμένων από τον κάδο αχρήστων σε (ημέρες)"
 
 msgid "Remove plugins"
 msgstr "Απεγκατάσταση προσθέτων"
@@ -4400,11 +5607,21 @@ msgstr "Επανάληψη προγράμματος που εγγράφεται.
 msgid "Repeats"
 msgstr "Επαναλήψεις"
 
+msgid ""
+"Replace `- ` in dialogs with colored text per speaker (like teletext "
+"subtitles for the hearing impaired)"
+msgstr ""
+"Αντικατάσταση του `- ` στους διαλόγους με χρωματιστό κείμενο ανά ομιλούντα "
+"(όπως στους υπότιτλους τηλεκειμένου για άτομα με προβλήματα ακοής)"
+
 msgid "Request for physical address report"
 msgstr "Αίτηση αναφοράς φυσικής διεύθυνσης"
 
 msgid "Request for vendor report"
 msgstr "Αίτηση αναφοράς κατασκευαστή"
+
+msgid "Require authentication for http streams"
+msgstr "Απαίτηση πιστοποίησης για ροές http"
 
 msgid "Required medium type:"
 msgstr "Απαιτούμενος τύπος μέσου:"
@@ -4507,6 +5724,12 @@ msgstr "Αντιμετάθεση πλήκτρων μπουκέτου"
 msgid "Reverse list"
 msgstr "Αντιστροφή λίστας"
 
+msgid "Rewind speeds"
+msgstr "Ταχύτητα προώθησης προς τα πίσω"
+
+msgid "Rewrap subtitles"
+msgstr "Επαναδίπλωση υποτίτλων"
+
 msgid "Right"
 msgstr "Δεξιά"
 
@@ -4518,6 +5741,9 @@ msgstr "Roll-off"
 
 msgid "Romanian"
 msgstr "Ρουμανικά"
+
+msgid "Root"
+msgstr "Root"
 
 msgid "Root directory"
 msgstr "Αρχικός φάκελος"
@@ -4555,6 +5781,9 @@ msgstr "SCR Unicable"
 msgid "SINGLE LAYER DVD"
 msgstr "DVD ΜΟΝΗΣ ΣΤΡΩΣΗΣ"
 
+msgid "SNR"
+msgstr "SNR"
+
 msgid "SNR:"
 msgstr "SNR:"
 
@@ -4578,6 +5807,9 @@ msgstr "Σαβ"
 
 msgid "Satellite"
 msgstr "Δορυφόρος"
+
+msgid "Satellite dish setup"
+msgstr "Ρύθμιση κατόπτρου"
 
 msgid "Satellite equipment"
 msgstr "Δορυφορικός εξοπλισμός"
@@ -4706,6 +5938,12 @@ msgstr ""
 "Εκτελεί σάρωση των αρχικών βάσεων δεδομένων ταξινομημένων κατά δορυφόρο με "
 "συνδεδεμένο μοτέρ"
 
+msgid "Scroll delay"
+msgstr "Καθυστέρηση κύλισης"
+
+msgid "Scroll repeats"
+msgstr "Επαναλήψεις κύλισης"
+
 msgid "Search east"
 msgstr "Αναζήτηση ανατολικά"
 
@@ -4734,6 +5972,9 @@ msgstr "Δεύτερο καλώδιο από LNB σε μοτέρ"
 msgid "Secondary DNS"
 msgstr "Δευτερεύον DNS"
 
+msgid "Seek"
+msgstr "Αναζήτηση"
+
 msgid "Seek backward"
 msgstr "Μεταπήδηση προς τα πίσω"
 
@@ -4758,11 +5999,26 @@ msgstr "Επιλογή Card Server"
 msgid "Select Channel"
 msgstr "Επιλογή Καναλιού"
 
+msgid "Select HDD"
+msgstr "Επιλογή HDD"
+
 msgid "Select Softcam"
 msgstr "Επιλογή Softcam"
 
+msgid "Select a bouquet"
+msgstr "Επιλογή μπουκέτου"
+
+msgid "Select a movie"
+msgstr "Επιλογή ταινίας"
+
 msgid "Select a network adapter"
 msgstr "Επιλογή προσαρμογέα δικτύου"
+
+msgid "Select a skin"
+msgstr "Επιλογή θέματος"
+
+msgid "Select a tuner"
+msgstr "Επιλογή tuner"
 
 msgid "Select a wireless network"
 msgstr "Επιλογή ασύρματου δίκτυου"
@@ -4828,6 +6084,9 @@ msgstr "Επιλογή διαδρομής για το αρχείο καταγρ�
 msgid "Select provider to add..."
 msgstr "Επιλογή παρόχου για προσθήκη..."
 
+msgid "Select refresh rate"
+msgstr "Επιλογή ρυθμού ανανέωσης"
+
 msgid "Select satellites"
 msgstr "Επιλογή δορυφόρων"
 
@@ -4851,6 +6110,15 @@ msgstr "Επιλογή πηγής αναβαθμίσεων"
 
 msgid "Select upgrade source to edit."
 msgstr "Επιλογή πηγής αναβάθμισης για επεξεργασία."
+
+msgid "Select video input with up/down buttons"
+msgstr "Επιλογή εισόδου εικόνας με τα πλήκτρα πάνω/κάτω"
+
+msgid "Select video mode"
+msgstr "Επιλογή λειτουργίας εικόνας"
+
+msgid "Select wireless network"
+msgstr "Επιλογή ασύρματου δικτύου"
 
 msgid "Select your Skin"
 msgstr "Επιλογή θέματος"
@@ -4879,6 +6147,9 @@ msgstr "Επανάληψη ακολουθίας εντολών"
 msgid "Serbian"
 msgstr "Σερβικά"
 
+msgid "Service"
+msgstr "Υπηρεσία"
+
 msgid "Service & PIDs"
 msgstr "Υπηρεσία & PIDs"
 
@@ -4893,6 +6164,9 @@ msgstr "Η υπηρεσία προστέθηκε στo επιλεγμένο μπ
 
 msgid "Service info"
 msgstr "Πληροφορίες υπηρεσίας"
+
+msgid "Service info - ECM Info"
+msgstr "Πληροφορίες υπηρεσίας - Πληροφορίες ECM"
 
 msgid "Service info - service & PIDs"
 msgstr "Πληροφορίες υπηρεσίας - υπηρεσία & PIDs"
@@ -4925,6 +6199,9 @@ msgstr "Αναφορά υπηρεσίας"
 
 msgid "Service scan"
 msgstr "Ανίχνευση υπηρεσιών"
+
+msgid "Service searching"
+msgstr "Αναζήτηση υπηρεσιών"
 
 msgid "Service title mode"
 msgstr "Λειτουργία τίτλου υπηρεσίας"
@@ -4963,6 +6240,9 @@ msgstr "Ρύθμιση χρόνου τερματισμού"
 msgid "Set fixed"
 msgstr "Σταθερή ρύθμιση"
 
+msgid "Set fps for external subtitles"
+msgstr "Ορισμός fps για τους εξωτερικούς υπότιτλους"
+
 msgid "Set interface as default Interface"
 msgstr "Ορισμός διεπαφής ως προεπιλεγμένης"
 
@@ -4974,6 +6254,10 @@ msgstr "Ορισμός μόνιμου κωδικού pin"
 
 msgid "Set startup service"
 msgstr "Ορισμός υπηρεσίας εκκίνησης"
+
+msgid ""
+"Set the type of the progress indication in the channel selection screen."
+msgstr "Ρύθμιση τύπου εμφάνισης προόδου στη λίστα καναλιών."
 
 msgid "Set time window to 1 hour"
 msgstr "Ρύθμιση χρονικού παραθύρου έως 1 ώρα"
@@ -5005,6 +6289,9 @@ msgstr "Εγκατάσταση"
 msgid "Setup menu"
 msgstr "Μενού εγκατάστασης"
 
+msgid "Setup mode"
+msgstr "Επίπεδο εγκατάστασης"
+
 msgid "Setup your positioner"
 msgstr "Εγκατάσταση μοτέρ"
 
@@ -5026,6 +6313,9 @@ msgstr "Εμφάνιση επιλογής ήχου"
 msgid "Show CI messages"
 msgstr "Εμφάνιση μηνυμάτων CI"
 
+msgid "Show EIT now/next in infobar"
+msgstr "Εμφάνιση ΕΙΤ τρέχον/επόμενο στη μπάρα πληροφοριών"
+
 msgid "Show EPG for current channel..."
 msgstr "Εμφάνιση μπάρας πληροφοριών σε αλλαγή προγράμματος"
 
@@ -5041,11 +6331,41 @@ msgstr "Εμφάνιση μπάρας πληροφοριών"
 msgid "Show PIP"
 msgstr "Εμφάνιση PIP"
 
+msgid "Show SNR percentage instead of dB value"
+msgstr "Εμφάνιση τιμής SNR σε ποσοστό αντί για dB"
+
+msgid "Show VCR scart on main menu"
+msgstr "Εμφάνιση VCR scart στο κύριο μενού"
+
 msgid "Show WLAN status"
 msgstr "Εμφάνιση κατάστασης ασύρματου δικτύου"
 
+msgid "Show animation while busy"
+msgstr "Εμφάνιση κινούμενου γραφικού όταν είναι απασχολημένο"
+
+msgid "Show background behind subtitles"
+msgstr "Εμφάνιση φόντου πίσω από τους υπότιτλους"
+
+msgid "Show background in radio mode"
+msgstr "Εμφάνιση φόντου στη λειτουργία ραδιοφώνου"
+
 msgid "Show bouquet selection menu"
 msgstr "Εμφάνιση του μενού επιλογής μπουκέτου"
+
+msgid "Show busy indicator when the system is busy."
+msgstr "Εμφάνιση ένδειξης απασχολημένου όταν το σύστημα είναι απασχολημένο."
+
+msgid "Show channel numbers in channel selection"
+msgstr "Εμφάνιση αριθμού καναλιού στην επιλογή καναλιού"
+
+msgid "Show columns"
+msgstr "Εμφάνιση στηλών"
+
+msgid "Show crypto icons"
+msgstr "Εμφάνιση κρυπτοεικονιδίων"
+
+msgid "Show crypto info in infobar"
+msgstr "Εμφάνιση πληροφοριών κρυπτοποίησης στη μπάρα πληροφοριών"
 
 msgid "Show detailed event info"
 msgstr "Εμφάνιση αναλυτικών πληροφοριών προγράμματος"
@@ -5055,6 +6375,9 @@ msgstr "Εμφάνιση αποποίησης ευθυνών"
 
 msgid "Show event details"
 msgstr "Εμφάνιση λεπτομερειών προγράμματος"
+
+msgid "Show event-progress in channel selection"
+msgstr "Εμφάνιση μπάρας προόδου στην επιλογή καναλιού"
 
 msgid "Show eventinfo plugins"
 msgstr "Εμφάνιση προσθέτων πληροφοριών προγραμμάτων"
@@ -5086,11 +6409,32 @@ msgstr "Εμφάνιση πληροφοριών"
 msgid "Show info line"
 msgstr "Εμφάνιση γραμμής πληροφοριών"
 
+msgid "Show infobar on channel change"
+msgstr "Εμφάνιση μπάρας πληροφοριών σε αλλαγή καναλιού"
+
+msgid "Show infobar on event change"
+msgstr "Εμφάνιση μπάρας πληροφοριών σε αλλαγή εκπομπής"
+
+msgid "Show infobar on skip forward/backward"
+msgstr "Εμφάνιση της μπάρας πληροφοριών κατά τα εμπρός/πίσω"
+
 msgid "Show latest commits"
 msgstr "Εμφάνιση τελευταίων αλλαγών"
 
 msgid "Show latest upgrade log"
 msgstr "Εμφάνιση καταγραφής τελευταίας ενημέρωσης"
+
+msgid "Show menu numbers"
+msgstr "Εμφάνιση αριθμών μενού"
+
+msgid "Show menu paths"
+msgstr "Εμφάνιση διαδρομών μενού"
+
+msgid "Show message when recording starts"
+msgstr "Εμφάνιση μηνύματος στην εκκίνηση της εγραφής"
+
+msgid "Show movie lengths in movielist"
+msgstr "Εμφάνιση διάρκειας στη λίστα ταινιών"
 
 msgid "Show movies"
 msgstr "Εμφάνιση ταινιών"
@@ -5101,14 +6445,38 @@ msgstr "Εμφάνιση EPG πολλαπλών καναλιών"
 msgid "Show packages to be upgraded"
 msgstr "Εμφάνιση πακέτων προς αναβάθμιση"
 
+msgid "Show picons in channel selection list"
+msgstr "Εμφάνιση λογότυπων (picons) στη λίστα επιλογής καναλιών"
+
+msgid "Show picons in display"
+msgstr "Εμφάνιση λογότυπων (picons) στην οθόνη πρόσοψης"
+
+msgid "Show positioner movement"
+msgstr "Εμφάνιση κίνησης του μοτέρ"
+
+msgid "Show positioner position"
+msgstr "Εμφάνιση θέσης του μοτέρ"
+
 msgid "Show record clock icons"
 msgstr "Εμφάνιση εικονιδίων ρολογιού εγγραφής"
+
+msgid "Show record indicator"
+msgstr "Εμφάνιση εικονιδίου εγγραφής"
+
+msgid "Show screensaver"
+msgstr "Εμφάνιση προστασίας οθόνης"
 
 msgid "Show second InfoBar"
 msgstr "Εμφάνιση της δεύτερης μπάρας πληροφοριών"
 
+msgid "Show second infobar"
+msgstr "Εμφάνιση της δεύτερης μπάρας πληροφοριών"
+
 msgid "Show service list"
 msgstr "Εμφάνιση λίστας υπηρεσιών"
+
+msgid "Show service type icons"
+msgstr "Εμφάνιση εικονιδίων τύπου υπηρεσίας"
 
 msgid "Show servicelist or movies"
 msgstr "Εμφάνιση λίστας υπηρεσιών ή ταινιών"
@@ -5116,7 +6484,13 @@ msgstr "Εμφάνιση λίστας υπηρεσιών ή ταινιών"
 msgid "Show single service EPG"
 msgstr "Εμφάνιση EPG μίας μόνο υπηρεσίας"
 
+msgid "Show softcam setup in extensions menu"
+msgstr "Εμφάνιση των ρυθμίσεων softcam στο μενού επεκτάσεων"
+
 msgid "Show status icons in movie list"
+msgstr "Εμφάνιση εικονιδίων κατάστασης στη λίστα ταινιών"
+
+msgid "Show status icons in movielist"
 msgstr "Εμφάνιση εικονιδίων κατάστασης στη λίστα ταινιών"
 
 msgid "Show subservice selection"
@@ -5124,6 +6498,9 @@ msgstr "Εμφάνιση επιλογής υπό-υπηρεσιών"
 
 msgid "Show subtitle selection"
 msgstr "Εμφάνιση επιλογής υποτίτλων"
+
+msgid "Show symbols on display"
+msgstr "Εμφάνιση συμβόλων στην οθόνη πρόσοψης"
 
 msgid "Show the radio player..."
 msgstr "Εμφάνιση ραδιοφώνου..."
@@ -5137,14 +6514,23 @@ msgstr "Εμφάνιση κάθετων χρονοδιαγραμμάτων"
 msgid "Show warning before set 'Ignore conflict'"
 msgstr "Εμφάνιση προειδοποίησης πριν τον ορισμό του 'Αγνόηση διένεξης'"
 
+msgid "Show warning when timeshift is stopped"
+msgstr "Εμφάνιση προειδοποίησης όταν η χρονομετατόπιση έχει σταματήσει"
+
 msgid "Show/hide window"
 msgstr "Εμφάνιση/απόκρυψη παραθύρου"
+
+msgid "Shows live tv or informations on LCD."
+msgstr "Εμφανίζει την εικόνα της TV ή πληροφορίες στο LCD."
 
 msgid "Shows the state of your wireless LAN connection.\n"
 msgstr "Εμφάνιση της κατάστασης του ασύρματου δικτύου.\n"
 
 msgid "Shuffle playlist"
 msgstr "Τυχαία αναπαραγωγή"
+
+msgid "Shutdown"
+msgstr "Τερματισμός"
 
 msgid "Shutdown when in Standby"
 msgstr "Τερματισμός σε κατάσταση αναμονής"
@@ -5212,6 +6598,15 @@ msgstr "Θέματα"
 msgid "Skip empty services"
 msgstr "Παράλειψη άδειων υπηρεσιών"
 
+msgid ""
+"Skip internet connection check (disables automatic package installation)"
+msgstr ""
+"Παράλειψη ελέγχου σύνδεσης στο διαδίκτυο (απενεργοποιεί την αυτόματη "
+"εγκατάσταση πακέτων)"
+
+msgid "Sleep timer"
+msgstr "Χρονοδιακόπτης ύπνου"
+
 msgid "SleepTimer Configuration"
 msgstr "Ρύθμιση Χρονοδιακόπτη Ύπνου"
 
@@ -5240,6 +6635,9 @@ msgstr "Σλοβενικά"
 msgid "Slow"
 msgstr "Αργά"
 
+msgid "Slow motion speeds"
+msgstr "Ταχύτητες αργής κίνησης"
+
 msgid "Small"
 msgstr "Μικρό"
 
@@ -5251,6 +6649,9 @@ msgstr "PIN έξυπνης κάρτας"
 
 msgid "Social/Political/Economics"
 msgstr "Κοινωνία/Πολιτική/Οικονομία"
+
+msgid "SoftCam / CI"
+msgstr "SoftCam / CI"
 
 msgid "Softcam Setup"
 msgstr "Ρυθμίσεις Softcam"
@@ -5324,12 +6725,21 @@ msgstr "Ταξινόμηση λίστας στις προεπιλογές και
 msgid "Sort list:"
 msgstr "Ταξινόμηση λίστας:"
 
+msgid "Sort order for menu entries"
+msgstr "Ταξινόμηση σειράς των στοιχείων του μενού"
+
 msgid "Sort plugins list to default?"
 msgstr "Ταξινόμηση λίστας προσθέτων στις προεπιλογές;"
 
 #. TRANSLATORS: This must fit into the header button in the EPG-List
 msgid "Sort time"
 msgstr "Ταξινόμηση κατά χρόνο"
+
+msgid "Sound"
+msgstr "Ήχος"
+
+msgid "Sound carrier"
+msgstr "Φέρουσα ήχου"
 
 msgid "Source request"
 msgstr "Επιλογή πηγής αναβάθμισης"
@@ -5407,6 +6817,9 @@ msgstr "Στάνταρ λίστα"
 msgid "Standby"
 msgstr "Αναμονή"
 
+msgid "Standby / restart"
+msgstr "Αναμονή / επανεκκίνηση"
+
 msgid "Standby after current event"
 msgstr "Αναμονή μετά το τρέχον πρόγραμμα"
 
@@ -5420,6 +6833,9 @@ msgstr "Τάση αναμονής ανεμιστήρα %d"
 
 msgid "Standby in "
 msgstr "Αναμονή σε "
+
+msgid "StandbyLED"
+msgstr "LED Αναμονής"
 
 msgid "Start from the beginning"
 msgstr "Έναρξη  από την αρχή"
@@ -5458,6 +6874,12 @@ msgstr "Έναρξη με την οθόνη λίστας"
 
 msgid "Starting on"
 msgstr "Έναρξη από το"
+
+msgid "Startup the set top box in standby"
+msgstr "Εκκίνηση του δέκτη από την αναμονή"
+
+msgid "Startup to Standby"
+msgstr "Εκκίνηση από Αναμονή"
 
 msgid "Step east"
 msgstr "Βήμα ανατολικά"
@@ -5576,11 +6998,44 @@ msgstr "Υπό-υπηρεσίες"
 msgid "Subtitle Quickmenu"
 msgstr "Γρήγορο Μενού Υποτίτλων"
 
+msgid "Subtitle alignment"
+msgstr "Στοίχιση υποτίτλου"
+
+msgid "Subtitle border width"
+msgstr "Μέγεθος περιγράμματος υποτίτλου"
+
+msgid "Subtitle delay when timing is bad"
+msgstr "Καθυστέρηση υποτίτλων σε κακό χρονισμό"
+
+msgid "Subtitle delay when timing lacks"
+msgstr "Καθυστέρηση κειμένου όταν δεν υπάρχει χρονισμός"
+
+msgid "Subtitle font size"
+msgstr "Μέγεθος γραμματοσειράς υποτίτλου"
+
+msgid "Subtitle language selection 1"
+msgstr "Επιλογή γλώσσας υποτίτλων 1"
+
+msgid "Subtitle language selection 2"
+msgstr "Επιλογή γλώσσας υποτίτλων 2"
+
+msgid "Subtitle language selection 3"
+msgstr "Επιλογή γλώσσας υποτίτλων 3"
+
+msgid "Subtitle language selection 4"
+msgstr "Επιλογή γλώσσας υποτίτλων 4"
+
+msgid "Subtitle position"
+msgstr "Θέση υποτίτλου"
+
 msgid "Subtitle selection"
 msgstr "Επιλογή υποτίτλων"
 
 msgid "Subtitle selection..."
 msgstr "Επιλογή υποτίτλων..."
+
+msgid "Subtitle settings"
+msgstr "Ρυθμίσεις υποτίτλων"
 
 msgid "Subtitles"
 msgstr "Υπότιτλοι"
@@ -5696,6 +7151,9 @@ msgstr "Το αρχείο TS είναι πολύ μεγάλο για το ISO966
 msgid "TSID"
 msgstr "TSID"
 
+msgid "TUNER:"
+msgstr "TUNER:"
+
 msgid "TV physical address report"
 msgstr "Φυσική διεύθυνση τηλεόρασης"
 
@@ -5708,6 +7166,9 @@ msgstr "Πίνακας περιεχομένων για συλλογή"
 msgid "Tags"
 msgstr "Ετικέτες"
 
+msgid "Teletext subtitle color"
+msgstr "Χρώμα υποτίτλων τηλεκειμένου"
+
 msgid "Temperature and fan control"
 msgstr "Έλεγχος θερμοκρασίας και ανεμιστήρα"
 
@@ -5719,6 +7180,9 @@ msgstr "Επίγειος πάροχος"
 
 msgid "Test DiSEqC settings"
 msgstr "Έλεγχος ρυθμίσεων DiSEqC"
+
+msgid "Test mode"
+msgstr "Κατάσταση ελέγχου"
 
 msgid "Test the network configuration of your receiver.\n"
 msgstr "Έλεγχος των ρυθμίσεων δικτύου του δέκτη σας.\n"
@@ -5737,6 +7201,21 @@ msgstr "Χρώμα κειμένου"
 
 msgid "Thai"
 msgstr "Ταϊλανδικά"
+
+msgid ""
+"Thank you for using the wizard.\n"
+"Please press OK to continue."
+msgstr ""
+"Σας ευχαριστούμε που χρησιμοποιήσατε τον οδηγό.\n"
+"Παρακαλώ πιέστε ΟΚ για συνέχεια."
+
+msgid ""
+"Thank you for using the wizard. Your receiver is now ready for use.\n"
+"Press OK to start using your receiver."
+msgstr ""
+"Σας ευχαριστούμε που χρησιμοποιήσατε τον οδηγό. Ο δέκτης σας είναι πλέον "
+"έτοιμος για χρήση.\n"
+"Παρακαλώ πιέστε ΟΚ για να ξεκινήσετε."
 
 #, python-format
 msgid "The %d min remaining before the end of the event."
@@ -5781,6 +7260,10 @@ msgstr "Ο κωδικός PIN αποθηκεύτηκε με επιτυχία."
 
 msgid "The PIN codes you entered are different."
 msgstr "Τα PIN που εισάγατε είναι διαφορετικά."
+
+msgid "The backup failed. Please choose a different backup location."
+msgstr ""
+"Το αντίγραφο ασφαλείας απέτυχε. Επιλέξτε άλλη τοποθεσία για το αντίγραφο."
 
 #, python-format
 msgid ""
@@ -5918,10 +7401,26 @@ msgstr ""
 
 msgid ""
 "The wireless LAN plugin is not installed!\n"
+"Please install it and choose what you want to do next."
+msgstr ""
+"Το πρόσθετο ασύρματου LAN δεν είναι εγκατεστημένο!\n"
+"Παρακαλώ εγκαταστήστε το και επιλέξτε τι θέλετε να συμβεί στη συνέχεια."
+
+msgid ""
+"The wireless LAN plugin is not installed!\n"
 "Please install it."
 msgstr ""
 "Το πρόσθετο ασύρματου LAN δεν είναι εγκατεστημένο!\n"
 "Παρακαλώ εγκαταστήστε το."
+
+msgid ""
+"The wizard can backup your current settings. Do you want to do a backup now?"
+msgstr ""
+"Ο οδηγός μπορεί να κρατήσει αντίγραφο των ρυθμίσεων. Να κρατήσει αντίγραφο "
+"τώρα;"
+
+msgid "The wizard is finished now."
+msgstr "Ο οδηγός ολοκληρώθηκε."
 
 msgid "There are at least "
 msgstr "Υπάρχουν τουλάχιστον "
@@ -5975,6 +7474,15 @@ msgstr ""
 "Αυτή η επιλογή επιτρέπει τη ρύθμιση του Χρωματικού Εύρους από το Αυτόματο σε "
 "RGB"
 
+msgid "This option allows you show all symbols on display."
+msgstr ""
+"Αυτή η επιλογή επιτρέπει την εμφάνιση όλων των συμβόλων στην οθόνη πρόσοψης."
+
+msgid "This option allows you to add the softcam setup in the extensions menu."
+msgstr ""
+"Αυτή η επιλογή σας επιτρέπει να προσθέσετε τις ρυθμίσεις softcam στο μενού "
+"επεκτάσεων."
+
 msgid "This option allows you to change the virtuell loadspeaker position."
 msgstr "Αυτή η επιλογή επιτρέπει την αλλαγή της θέσης του εικονικού ηχείου."
 
@@ -5992,6 +7500,24 @@ msgstr ""
 
 msgid "This option allows you to enable 3D surround sound."
 msgstr "Αυτή η επιλογή επιτρέπει την ενεργοποίηση του περιφερικού ήχου 3D."
+
+msgid ""
+"This option allows you to hide and sort menu entries. When selecting user "
+"you can change order and hide menu items via the blue button"
+msgstr ""
+"Αυτή η επιλογή επιτρέπει την απόκρυψη και την ταξινόμηση των στοιχείων των "
+"μενού. Κατά την επιλογή από το χρήστη, μπορείτε να αλλάξετε τη σειρά και να "
+"αποκρύψετε τα στοιχεία των μενού μέσω του μπλε πλήκτρου."
+
+msgid "This option allows you to power off the display."
+msgstr "Αυτή η επιλογή επιτρέπει την απενεργοποίηση της οθόνης πρόσοψης."
+
+msgid "This option allows you to show menu number quick links."
+msgstr ""
+"Αυτή η επιλογή επιτρέπει την εμφάνιση αριθμών δίπλα στα στοιχεία των μενού."
+
+msgid "This option allows you to show menu paths."
+msgstr "Αυτή η επιλογή εμφανίζει τις διαδρομές των μενού."
 
 msgid "This option can be useful for long HDMI cables."
 msgstr "Αυτή η επιλογή μπορεί να είναι χρήσιμη για μακριά καλώδια HDMI."
@@ -6111,6 +7637,9 @@ msgstr "Χρονοδιακόπτης"
 msgid "Timer Overview"
 msgstr "Επισκόπηση Χρονοδιακοπτών"
 
+msgid "Timer edit"
+msgstr "Επεξεργασία χρονοδιακόπτη"
+
 msgid "Timer entry"
 msgstr "Στοιχείο χρονοδιακόπτη"
 
@@ -6142,6 +7671,12 @@ msgstr "Επιλογή χρονοδιακόπτη..."
 msgid "Timer type"
 msgstr "Τύπος χρονοδιακόπτη"
 
+msgid "Timeshift"
+msgstr "Χρονομετατόπιση"
+
+msgid "Timeshift Live"
+msgstr "Ζωντανή Χρονομετατόπιση"
+
 msgid "Timeshift is running. Select an action.\n"
 msgstr "Χρονομετατόπιση σε εξέλιξη. Επιλέξτε μία ενέργεια.\n"
 
@@ -6150,6 +7685,9 @@ msgstr "Τοποθεσία χρονομετατόπισης"
 
 msgid "Timeshift not possible!"
 msgstr "Αδυναμία χρονομετατόπισης!"
+
+msgid "Timezone"
+msgstr "Χρονική ζώνη"
 
 msgid "Title"
 msgstr "Τίτλος"
@@ -6230,6 +7768,9 @@ msgstr "Διακωδικοποίηση: "
 msgid "Translation"
 msgstr "Μετάφραση"
 
+msgid "Translation:"
+msgstr "Μετάφραση:"
+
 msgid "Translations"
 msgstr "Μεταφράσεις"
 
@@ -6282,6 +7823,9 @@ msgstr "Tuner"
 msgid "Tuner Configuration"
 msgstr "Ρυθμίσεις Tuner"
 
+msgid "Tuner configuration"
+msgstr "Ρύθμιση tuner"
+
 msgid "Tuner is not supported"
 msgstr "Μη υποστηριζόμενο tuner"
 
@@ -6294,6 +7838,9 @@ msgstr "Μη διαθέσιμο tuner."
 msgid "Tuner setting values"
 msgstr "Τιμές ρύθμισης tuner"
 
+msgid "Tuner slot"
+msgstr "Υποδοχή tuner"
+
 #, python-format
 msgid "Tuner status %s"
 msgstr "Κατάσταση tuner %s"
@@ -6303,6 +7850,9 @@ msgstr "Τύπος tuner"
 
 msgid "Turkish"
 msgstr "Τουρκικά"
+
+msgid "Turn on the power LED during standby."
+msgstr "Ενεργοποίηση LED κατά την αναμονή."
 
 msgid "Turning step size"
 msgstr "Μέγεθος βήματος περιστροφής"
@@ -6318,6 +7868,9 @@ msgstr "Τύπος ανίχνευσης"
 
 msgid "URL"
 msgstr "Διεύθυνση"
+
+msgid "URL of fallback remote receiver"
+msgstr "Διεύθυνση URL του εφεδρικού απομακρυσμένου δέκτη"
 
 msgid "USALS"
 msgstr "USALS"
@@ -6343,6 +7896,9 @@ msgstr ""
 msgid "Uncover dashed flickering line for this service"
 msgstr "Αποκάλυψη διακεκομμένης τρεμοσβηνόμενης γραμμής για αυτή την υπηρεσία"
 
+msgid "Undefined"
+msgstr "Απροσδιόριστο"
+
 msgid "Undo install"
 msgstr "Αναίρεση εγκατάστασης"
 
@@ -6351,6 +7907,9 @@ msgstr "Αναίρεση απεγκατάστασης"
 
 msgid "Unencrypted"
 msgstr "Χωρίς κωδικοποίηση"
+
+msgid "UnhandledKey"
+msgstr "Μη διαχειρίσιμο πλήκτρο"
 
 msgid "Unhide parental control services"
 msgstr "Ακύρωση απόκρυψης των υπηρεσιών με γονικό κλείδωμα"
@@ -6417,17 +7976,38 @@ msgstr "Ρυθμίσεις Χρήσης"
 msgid "Use"
 msgstr "Χρήση"
 
+msgid "Use 12 characters display mode"
+msgstr "Χρήση λειτουργίας απεικόνισης 12 χαρακτήρων"
+
 msgid "Use DHCP"
 msgstr "Χρήση DHCP"
 
+msgid "Use EIT EPG information when it is available."
+msgstr "Χρήση πληροφοριών EIT EPG όταν είναι διαθέσιμες."
+
+msgid "Use FreeSat EPG information when it is available."
+msgstr "Χρήση πληροφοριών FreeSat EPG όταν είναι διαθέσιμες."
+
 msgid "Use HDMI pre-emphasis"
 msgstr "Χρήση προέμφασης HDMI"
+
+msgid "Use MHW EPG information when it is available."
+msgstr "Χρήση πληροφοριών MHW όταν είναι διαθέσιμες."
+
+msgid "Use Netmed EPG information when it is available."
+msgstr "Χρήση πληροφοριών Netmed EPG όταν είναι διαθέσιμες."
 
 msgid "Use TV remote control"
 msgstr "Χρήση τηλεχειριστηρίου TV"
 
 msgid "Use USALS for this sat"
 msgstr "Χρήση USALS για αυτόν το δορυφόρο"
+
+msgid "Use ViaSat EPG information when it is available."
+msgstr "Χρήση πληροφοριών ViaSat EPG όταν είναι διαθέσιμες."
+
+msgid "Use Virgin EPG information when it is available."
+msgstr "Χρήση πληροφοριών Virgin EPG όταν είναι διαθέσιμες."
 
 msgid "Use a gateway"
 msgstr "Χρήση πύλης"
@@ -6453,6 +8033,12 @@ msgstr "Χρήση διεπαφής"
 msgid "Use official channel numbering"
 msgstr "Χρήση της επίσημης αρίθμησης των καναλιών"
 
+msgid "Use original DVB subtitle position"
+msgstr "Χρήση αρχικής θέσης υποτίτλων DVB"
+
+msgid "Use original teletext position"
+msgstr "Χρήση αρχικής θέσης τηλεκειμένου"
+
 msgid "Use power measurement"
 msgstr "Χρήση μέτρησης ισχύος"
 
@@ -6462,6 +8048,16 @@ msgstr "Χρήση του οδηγού δικτύου για τη ρύθμιση
 msgid "Use the network wizard to configure your network\n"
 msgstr "Χρήση οδηγού δικτύου για τη ρύθμιση του δικτύου\n"
 
+msgid ""
+"Use the up/down keys on your remote control to select an option. After that, "
+"press OK."
+msgstr ""
+"Πιέστε τα πλήκτρα πάνω/κάτω του τηλεχειριστηρίου για επιλογή. Μετά, πιέστε "
+"ΟΚ."
+
+msgid "Use the wizard to set up basic features"
+msgstr "Χρήση οδηγού για τις απλές ρυθμίσεις"
+
 msgid "Use these input device settings?"
 msgstr "Χρήση αυτών των ρυθμίσεων συσκευής εισόδου;"
 
@@ -6470,6 +8066,9 @@ msgstr "Χρήση αυτών των ρυθμίσεων;"
 
 msgid "Use this video enhancement settings?"
 msgstr "Χρήση αυτών των ρυθμίσεων βελτίωσης της εικόνας;"
+
+msgid "Use trash can in movielist"
+msgstr "Χρήση του κάδου αχρήστων στη λίστα ταινιών"
 
 msgid "Used service scan type"
 msgstr "Χρησιμοποιημένος τύπος ανίχνευσης υπηρεσιών"
@@ -6496,6 +8095,18 @@ msgstr "Χρήση σταθερής διεύθυνσης"
 #, python-format
 msgid "Using tuner %s"
 msgstr "Χρήση του tuner %s"
+
+msgid ""
+"Usually when the subtitle language is the same as the audio language, the "
+"subtitles will not be used. Enable this option to allow these subtitles to "
+"be used."
+msgstr ""
+"Συνήθως, όταν η γλώσσα υποτίτλων είναι η ίδια με τη γλώσσα ήχου, οι "
+"υπότιτλοι δεν θα χρησιμοποιηθούν. Ενεργοποιήστε αυτή την επιλογή ώστε να "
+"επιτραπεί η χρήση αυτών των υποτίτλων."
+
+msgid "VCR scart"
+msgstr "VCR scart"
 
 msgid "VLAN connection"
 msgstr "Σύνδεση VLAN"
@@ -6530,6 +8141,24 @@ msgstr "Ρυθμίσεις βελτίωσης εικόνας"
 msgid "Video enhancement setup"
 msgstr "Ρύθμιση βελτίωσης εικόνας"
 
+msgid ""
+"Video input selection\n"
+"\n"
+"Please press OK if you can see this page on your TV (or select a different "
+"input port).\n"
+"\n"
+"The next input port will be automatically probed in 20 seconds."
+msgstr ""
+"Επιλογή εισόδου εικόνας\n"
+"\n"
+"Παρακαλώ πιέστε ΟΚ εάν μπορείτε να δείτε αυτή τη σελίδα στην TV (ή επιλέξτε "
+"διαφορετική είσοδο).\n"
+"\n"
+"Η επόμενη είσοδος εικόνας θα εμφανιστεί αυτόματα σε 20 δευτερόλεπτα."
+
+msgid "Video mode selection."
+msgstr "Επιλογή λειτουργίας εικόνας"
+
 msgid "Video output"
 msgstr "Έξοδος εικόνας"
 
@@ -6542,6 +8171,9 @@ msgstr "Οδηγός εικόνας"
 #, python-format
 msgid "Video: %s fps"
 msgstr "Βίντεο: %s fps"
+
+msgid "VideoMode"
+msgstr "Λειτουργία εικόνας"
 
 msgid "Videocodec, size & format"
 msgstr "Κωδικοποίηση βίντεο, μέγεθος & φορμά"
@@ -6559,19 +8191,19 @@ msgid "View list of available CommonInterface extensions"
 msgstr "Εμφάνιση λίστας διαθέσιμων επεκτάσεων Κοινής Διεπαφής"
 
 msgid "View list of available EPG extensions."
-msgstr "Εμφάνιση λίστας διαθέσιμων επεκτάσεων EPG"
+msgstr "Εμφάνιση λίστας διαθέσιμων επεκτάσεων EPG."
 
 msgid "View list of available Satellite equipment extensions."
-msgstr "Εμφάνιση λίστας διαθέσιμων επεκτάσεων δορυφορικού εξοπλισμού"
+msgstr "Εμφάνιση λίστας διαθέσιμων επεκτάσεων δορυφορικού εξοπλισμού."
 
 msgid "View list of available communication extensions."
-msgstr "Εμφάνιση λίστας διαθέσιμων επεκτάσεων επικοινωνίας"
+msgstr "Εμφάνιση λίστας διαθέσιμων επεκτάσεων επικοινωνίας."
 
 msgid "View list of available default settings"
-msgstr "Εμφάνιση λίστας διαθέσιμων επεκτάσεων προεπιλεγμένων ρυθμίσεων."
+msgstr "Εμφάνιση λίστας διαθέσιμων επεκτάσεων προεπιλεγμένων ρυθμίσεων"
 
 msgid "View list of available display and userinterface extensions."
-msgstr "Εμφάνιση λίστας διαθέσιμων επεκτάσεων οθόνης και επιφάνειας χρήστη"
+msgstr "Εμφάνιση λίστας διαθέσιμων επεκτάσεων οθόνης και επιφάνειας χρήστη."
 
 msgid "View list of available multimedia extensions."
 msgstr "Εμφάνιση λίστας διαθέσιμων επεκτάσεων πολυμέσων"
@@ -6605,6 +8237,9 @@ msgstr "Εικονικό πληκτρολόγιο"
 
 msgid "Voltage mode"
 msgstr "Tάση λειτουργίας"
+
+msgid "Volume"
+msgstr "Ένταση"
 
 msgid "Volume down"
 msgstr "Μείωση έντασης ήχου"
@@ -6641,6 +8276,9 @@ msgstr "Αναμονή για προσάρτηση"
 
 msgid "Waiting for partition"
 msgstr "Αναμονή για κατάτμηση"
+
+msgid "Wake On LAN"
+msgstr "Αφύπνιση στο LAN"
 
 msgid "Wakeup"
 msgstr "Αφύπνιση"
@@ -6712,11 +8350,104 @@ msgstr ""
 "Στη συνέχεια αναζητήστε το τέλος του τμήματος, πιέστε ΟΚ, επιλέξτε \"τέλος "
 "αποκοπής\". Αυτό ήταν!"
 
+msgid ""
+"Welcome to the image upgrade wizard. The wizard will assist you in upgrading "
+"the firmware of your receiver by providing a backup facility for your "
+"current settings and a short explanation of how to upgrade your firmware."
+msgstr ""
+"Καλωσορίσατε στον οδηγό αναβάθμισης λογισμικού. Αυτός ο οδηγός θα σας "
+"βοηθήσει να αναβαθμίσετε το υλικολογισμικό του δέκτη, παρέχοντας ευκολίες "
+"εφεδρείας για τις τρέχουσες ρυθμίσεις σας και μια σύντομη επεξήγηση για το "
+"πώς να αναβαθμίσετε το υλικολογισμικό."
+
+msgid ""
+"Welcome.\n"
+"\n"
+"If you want to connect your receiver to the Internet, this wizard will guide "
+"you through the basic network setup of your receiver.\n"
+"\n"
+"Press OK to start configuring your network"
+msgstr ""
+"Καλώς ήρθατε.\n"
+"\n"
+"Αν θέλετε να συνδέσετε το δέκτη σας στο Internet, αυτός ο οδηγός θα σας "
+"καθοδηγήσει στις βασικές ρυθμίσεις του δικτύου του δέκτη σας.\n"
+"\n"
+"Πατήστε OK για να ξεκινήσετε τη ρύθμιση του δικτύου σας"
+
+msgid ""
+"Welcome.\n"
+"\n"
+"This start wizard will guide you through the basic setup of your receiver.\n"
+"Press the OK button on your remote control to move to the next step."
+msgstr ""
+"Καλώς ήρθατε. \n"
+"\n"
+"Αυτός ο οδηγός εκκίνησης θα σας καθοδηγήσει στις βασικές ρυθμίσεις του δέκτη "
+"σας.\n"
+"Πατήστε το πλήκτρο OK στο τηλεχειριστήριο για να προχωρήσετε στο επόμενο "
+"βήμα."
+
+msgid "Welcome..."
+msgstr "Καλώς ορίσατε..."
+
 msgid "West"
 msgstr "Δυτικά"
 
 msgid "West limit set"
 msgstr "Δυτικό όριο"
+
+msgid "What do you want to scan?"
+msgstr "Τι θέλετε να ανιχνεύσετε;"
+
+msgid ""
+"When enabled enigma2 will load unlinked userbouquets. This means that "
+"userbouquets that are available, but not included in the bouquets.tv or "
+"bouquets.radio files, will still be loaded. This allows you for example to "
+"keep your own user bouquet while installed settings are upgraded"
+msgstr ""
+"Όταν είναι ενεργό, το enigma2 θα φορτώνει τα ασύνδετα μπουκέτα χρήστη. Αυτό "
+"σημαίνει ότι τα μπουκέτα που είναι διαθέσιμα, αλλά δεν συμπεριλαμβάνονται "
+"στα αρχεία bouquets.tv ή bouquets.radio, θα φορτώνονται επίσης. Αυτό σας "
+"επιτρέπει για παράδειγμα να διατηρείτε το δικό σας μπουκέτο χρήστη όταν τα "
+"εγκατεστημένα θα αναβαθμίζονται."
+
+msgid "When enabled the PiP can be closed by the exit button."
+msgstr "Όταν είναι ενεργό, το PiP μπορεί να τερματιστεί με το πλήκτρο εξόδου."
+
+msgid ""
+"When enabled the arrow buttons around the OK button will follow the "
+"'neutrino' style zap controls instead of the enigma2 style."
+msgstr ""
+"Όταν είναι ενεργό, τα πλήκτρα βέλη γύρω από το ΟΚ θα ακολουθούν το στυλ "
+"ελέγχου ζάπινγκ 'neutrino' αντί του enigma2."
+
+msgid ""
+"When enabled the left, right, CH+/-, B+/-, P+/- buttons will follow the "
+"'neutrino' style zap controls instead of the enigma2 style."
+msgstr ""
+"Όταν είναι ενεργό, τα αριστερά και δεξιά CH+/-, B+/-, P+/- πλήκτρα θα "
+"ακολουθούν το στυλ ελέγχου ζάπινγκ 'neutrino' αντί του enigma2."
+
+msgid "When enabled the set top box is able to wakeup on LAN"
+msgstr ""
+"Όταν είναι ενεργό, ο δέκτης θα μπορεί να αφυπνίζεται στο τοπικό σας δίκτυο"
+
+msgid ""
+"When enabled then when you select a new channel in the channel selection the "
+"channel selection will not close. It will only close when you select the "
+"current playing service. This is a kind of preview mode"
+msgstr ""
+"Όταν είναι ενεργό, όταν θα επιλέγεται ένα νέο κανάλι στη λίστα, η επιλογή "
+"καναλιών δεν θα κλείνει. Θα κλείνει μόνο όταν θα έχετε επιλέξει την τρέχουσα "
+"υπηρεσία. Πρόκειται για ένα είδος προεπισκόπησης"
+
+msgid ""
+"When enabled you can control the volume with the arrow buttons instead of "
+"getting the channel selection list"
+msgstr ""
+"Όταν είναι ενεργό, μπορείτε να ελέγχετε την ένταση του ήχου με τα πλήκτρα "
+"βέλη αντί να μεταβαίνετε στη λίστα επιλογής καναλιών"
 
 msgid ""
 "When enabled you can specify a timeframe to ignore the shutdown timer when "
@@ -6745,6 +8476,95 @@ msgstr ""
 "αγνόησης αυτής."
 
 msgid ""
+"When enabled you can zap channels with the  CH+/-, B+/-, P+/- buttons "
+"instead of opening the channel selection list."
+msgstr ""
+"Όταν είναι ενεργό, μπορείτε να μεταβαίνετε στα κανάλια με τα πλήκτρα  CH+/-, "
+"B+/-, P+/- αντί να ανοίγετε τη λίστα επιλογής καναλιών."
+
+msgid ""
+"When enabled you get the channel selection list via the OK button, the "
+"infobar toggle is then transfered to exit button"
+msgstr ""
+"Όταν είναι ενεργό, η μετάβαση στη λίστα επιλογής καναλιών γίνεται με το ΟΚ "
+"και η μπάρα πληροφοριών μεταφέρεται στο πλήκτρο εξόδου"
+
+msgid ""
+"When enabled, AIT data will be included in http streams. This allows a "
+"client receiver to use HbbTV."
+msgstr ""
+"Όταν είναι ενεργό, τα AIT δεδομένα θα περιλαμβάνονται στις ροές http. Αυτό "
+"επιτρέπει σε ένα δέκτη - πελάτη να χρησιμοποιήσει το HbbTV."
+
+msgid ""
+"When enabled, ECM data will be included in http streams. This allows a "
+"client receiver to do the descrambling."
+msgstr ""
+"Όταν είναι ενεργό, τα ECM δεδομένα θα περιλαμβάνονται  στις ροές http. Αυτό "
+"επιτρέπει σε ένα δέκτη - πελάτη να κάνει την αποκρυπτογράφηση."
+
+msgid ""
+"When enabled, EIT data will be included in http streams. This allows a "
+"client receiver to show EPG."
+msgstr ""
+"Όταν είναι ενεργό, τα ΕΙΤ δεδομένα θα περιλαμβάνονται στις ροές http. Αυτό "
+"επιτρέπει σε ένα δέκτη - πελάτη vα εμφανίσει EPG."
+
+msgid ""
+"When enabled, a popup message will be shown when a movie has finished and "
+"the next one will start."
+msgstr ""
+"Όταν είναι ενεργό, ένα αναδυόμενο μήνυμα θα εμφανίζεται όταν μια ταινία έχει "
+"τελειώσει και αρχίζει η επόμενη."
+
+msgid "When enabled, a popup message will be shown when a recording starts."
+msgstr ""
+"Όταν είναι ενεργό, ένα αναδυόμενο μήνυμα θα εμφανίζεται όταν ξεκινά μια "
+"εγγραφή."
+
+msgid ""
+"When enabled, a radio background image will be visible while listening to a "
+"radio channel."
+msgstr ""
+"Όταν είναι ενεργό, μια εικόνα φόντου ραδιοφώνου θα είναι ορατή, ενώ ακούτε "
+"ένα ραδιοφωνικό σταθμό."
+
+msgid ""
+"When enabled, a recording is allowed to interrupt live tv, when there are no "
+"free tuners."
+msgstr ""
+"Όταν είναι ενεργό, μία εγγραφή θα επιτρέπεται να διακόψει την TV, όταν δεν "
+"υπάρχουν ελεύθερα tuners."
+
+msgid ""
+"When enabled, a warning will be displayed and the user will get an option to "
+"stop or to continue the timeshift."
+msgstr ""
+"Όταν είναι ενεργό, θα εμφανίζεται μία προειδοποίηση και ο χρήστης θα έχει "
+"την επιλογή να σταματήσει ή να συνεχίσει τη χρονομετατόπιση."
+
+msgid ""
+"When enabled, always descramble receiving http streams. This takes up more "
+"resources (descrambling demuxers), only enable if necessary. Individual "
+"streams are always descrambled if 0x100 is added to the service type, "
+"regardless of this setting. Default off."
+msgstr ""
+"Όταν είναι ενεργό, οι λαμβανόμενες ροές http αποκωδικοποιούνται πάντα. Αυτό "
+"καταναλώνει περισσότερους πόρους (αποκωδικοποίηση των αποπλεκτών), και "
+"πρέπει να είναι ενεργό μόνο όταν απαιτείται. Οι ιδιαίτερες εγγραφές "
+"αποκωδικοποιούνται πάντοτε όταν στον τύπο υπηρεσίας προστίθεται το 0x100, "
+"ανεξαρτήτως ρύθμισης. Προεπιλογή ανενεργό."
+
+msgid "When enabled, authentication is required to watch http streams."
+msgstr ""
+"Όταν είναι ενεργό, απαιτείται πιστοποίηση για την παρακολούθηση ροών http."
+
+msgid "When enabled, channel numbering will start at '1' for each bouquet."
+msgstr ""
+"Όταν είναι ενεργό, η αρίθμηση των καναλιών θα ξεκινά από το '1' για κάθε "
+"μπουκέτο."
+
+msgid ""
 "When enabled, content with an aspect ratio of 4:3 will be stretched to fit "
 "the screen."
 msgstr ""
@@ -6752,10 +8572,235 @@ msgstr ""
 "ταιριάξει στην οθόνη."
 
 msgid ""
+"When enabled, continue to the next bouquet when the last channel of the "
+"current bouquet is reached while changing channels."
+msgstr ""
+"Όταν είναι ενεργό, θα μεταβείτε στο επόμενο μπουκέτο όταν έχετε φτάσει στο "
+"τελευταίο κανάλι του τρέχοντος κατά το ζάπινγκ."
+
+msgid ""
+"When enabled, deleted recordings are moved to the trash can, instead of "
+"being deleted immediately."
+msgstr ""
+"Όταν είναι ενεργό, οι διαγραμμένες εγγραφές μετακινούνται στον κάδο "
+"αχρήστων, αντί να διαγράφονται άμεσα."
+
+msgid ""
+"When enabled, display the EIT now/next eventdata in infobar. When disabled, "
+"display now/next eventdata from the EPG cache instead."
+msgstr ""
+"Όταν είναι ενεργό, οι πληροφορίες ΕΙΤ τώρα/επόμενο θα εμφανίζονται στη μπάρα "
+"πληροφοριών. Αν είναι ανενεργό, θα εμφανίζονται από το αποθηκευμένο EPG."
+
+msgid ""
+"When enabled, encryption info will be shown in the infobar (when supported "
+"by the skin)."
+msgstr ""
+"Όταν είναι ενεργό, οι πληροφορίες κρυπτογράφησης θα εμφανίζονται στη μπάρα "
+"πληροφοριών (όταν υποστηρίζεται από το θέμα)."
+
+msgid "When enabled, error messages related to zapping will not be shown."
+msgstr ""
+"Όταν είναι ενεργό, δεν θα εμφανίζονται τα μηνύματα σφάλματος κατά το ζάπινγκ."
+
+msgid ""
+"When enabled, external subtitles will be always turned on for playback movie."
+msgstr ""
+"Όταν είναι ενεργό, οι εξωτερικοί υπότιτλοι θα εμφανίζονται πάντα κατά την "
+"αναπαραγωγή."
+
+msgid ""
+"When enabled, graphical DVB subtitles are preferred over teletext subtitles, "
+"when both types are available."
+msgstr ""
+"Όταν είναι ενεργό, οι γραφικοί υπότιτλοι DVB θα προτιμώνται αντί αυτών του "
+"τηλεκειμένου, όταν και οι δύο είναι διαθέσιμοι."
+
+msgid "When enabled, graphical DVB subtitles will be centered horizontally."
+msgstr ""
+"Όταν είναι ενεργό, οι γραφικοί υπότιτλοι DVB θα κεντράρονται οριζόντια."
+
+msgid ""
+"When enabled, graphical DVB subtitles will be displayed at their original "
+"position."
+msgstr ""
+"Όταν είναι ενεργό, οι γραφικοί υπότιτλοι DVB θα εμφανίζονται στην αρχική "
+"τους θέση."
+
+msgid ""
+"When enabled, graphical DVB subtitles will be displayed in yellow, instead "
+"of the original color."
+msgstr ""
+"Όταν είναι ενεργό, οι γραφικοί υπότιτλοι DVB θα εμφανίζονται σε κίτρινο "
+"χρώμα αντί του κανονικού τους."
+
+msgid ""
+"When enabled, http streams are descrambled on the server side. The (remote) "
+"client receiver does not have to do descrambling. Default on."
+msgstr ""
+"Όταν είναι ενεργό, οι ροές http αποκωδικοποιούνται στην πλευρά του "
+"διακομιστή. Ο (απομακρυσμένος) δέκτης-πελάτης δεν χρειάζεται να "
+"αποκωδικοποιήσει. Προεπιλογή ενεργό."
+
+msgid "When enabled, it is possible to leave the movieplayer with exit."
+msgstr ""
+"Όταν είναι ενεργό, είναι δυνατή η έξοδος από την αναπαραγωγή ταινιών με το "
+"πλήκτρο εξόδου."
+
+msgid ""
+"When enabled, measure power consumption to detect when the rotor stops "
+"turning (when supported by the tuner)."
+msgstr ""
+"Όταν είναι ενεργό, θα μετράται η κατανάλωση ενέργειας για να εντοπιστεί το "
+"σταμάτημα κίνησης του μοτέρ (όταν υποστηρίζεται από το tuner)."
+
+msgid "When enabled, number markers will be hiden."
+msgstr "Όταν είναι ενεργό, δεν θα εμφανίζονται οι σημειωτές των αριθμών."
+
+msgid "When enabled, reformat subtitles to match the width of the screen."
+msgstr ""
+"Όταν είναι ενεργό, οι υπότιτλοι θα αναδιπλώνονται έτσι ώστε να ταιριάζουν "
+"στο πλάτος της οθόνης."
+
+msgid "When enabled, services may be grouped in multiple bouquets."
+msgstr ""
+"Όταν είναι ενεργό, οι υπηρεσίες μπορούν να ομαδοποιηθούν σε πολλαπλά "
+"μπουκέτα."
+
+msgid "When enabled, show channel numbers in the channel selection screen."
+msgstr ""
+"Όταν είναι ενεργό, οι αριθμοί των καναλιών θα εμφανίζονται στη λίστα "
+"επιλογής καναλιών."
+
+msgid "When enabled, subtitles for the hearing impaired can be used."
+msgstr ""
+"Όταν είναι ενεργό, μπορεί να χρησιμοποιηθούν υπότιτλοι για άτομα με "
+"προβλήματα ακοής ."
+
+msgid ""
+"When enabled, subtitles for the hearing impaired will be preferred over "
+"normal subtitles, when both types are available."
+msgstr ""
+"Όταν είναι ενεργό, οι υπότιτλοι για άτομα με προβλήματα ακοής θα προτιμώνται "
+"έναντι των φυσιολογικών υποτίτλων, όταν και οι δύο τύποι είναι διαθέσιμοι."
+
+msgid "When enabled, teletext pages will be cached, allowing faster access."
+msgstr ""
+"Όταν είναι ενεργό, οι σελίδες τηλεκειμένου θα αποθηκεύονται προσωρινά, "
+"επιτρέποντας την ταχύτερη πρόσβαση."
+
+msgid ""
+"When enabled, teletext subtitles will be displayed at their original "
+"position."
+msgstr ""
+"Όταν είναι ενεργό, οι υπότιτλοι τηλεκειμένου θα εμφανίζονται στην αρχική "
+"τους θέση."
+
+msgid "When enabled, the VCR scart option will be shown on the main menu"
+msgstr "Όταν είναι ενεργό, η επιλογή VCR scart θα εμφανίζεται στο κύριο μενού"
+
+msgid ""
+"When enabled, the channel selection list will be hidden while listening to a "
+"radio channel"
+msgstr ""
+"Όταν είναι ενεργό, η λίστα επιλογής καναλιών δεν θα εμφανίζεται κατά την "
+"ακρόαση ραδιοφώνου."
+
+msgid "When enabled, the infobar will be displayed when a new event starts."
+msgstr ""
+"Όταν είναι ενεργό, η μπάρα πληροφοριών θα εμφανίζεται όταν ένα νέο πρόγραμμα "
+"αρχίζει."
+
+msgid "When enabled, the infobar will be displayed when changing channels."
+msgstr ""
+"Όταν είναι ενεργό, η μπάρα πληροφοριών θα εμφανίζεται κατά την αλλαγή "
+"καναλιών."
+
+msgid ""
+"When enabled, the infobar will be displayed when skipping forwards/backwards "
+"during media playback."
+msgstr ""
+"Όταν είναι ενεργό, η μπάρα πληροφοριών θα εμφανίζεται κατά την υπερπήδηση "
+"μπροστά/πίσω στην αναπαραγωγή πολυμέσων."
+
+msgid ""
+"When enabled, the lenght of each recording will be shown in the movielist "
+"(this might cause some additional loading time)."
+msgstr ""
+"Όταν είναι ενεργό, η διάρκεια κάθε εγγραφής θα εμφανίζεται στη λίστα (μπορεί "
+"να αυξηθεί ο χρόνος φόρτωσης)."
+
+msgid ""
+"When enabled, the receiver will automatically use the audio track which you "
+"selected before."
+msgstr ""
+"Όταν είναι ενεργό, ο δέκτης θα χρησιμοποιεί αυτόματα το κανάλι ήχου που "
+"είχατε προεπιλέξει."
+
+msgid ""
+"When enabled, the receiver will automatically use the subtitles which you "
+"selected before."
+msgstr ""
+"Όταν είναι ενεργό, ο δέκτης θα χρησιμοποιεί τους υπότιτλους που είχατε "
+"προεπιλέξει."
+
+msgid ""
+"When enabled, the receiver will no longer monitor the tuned transponder for "
+"possible changes. Do not use this option unless you know what you are doing."
+msgstr ""
+"Όταν είναι ενεργό, ο δέκτης δεν θα ελέγχει πλέον το συντονισμένο αναμεταδότη "
+"για πιθανές αλλαγές. Μην αλλάζετε αυτή την επιλογή αν δεν ξέρετε τι κάνετε."
+
+msgid "When enabled, the receiver will select an AC3 track (when available)."
+msgstr ""
+"Όταν είναι ενεργό, ο δέκτης θα επιλέγει έναν ήχο AC3 (όταν είναι διαθέσιμος)."
+
+msgid "When enabled, the receiver will select an AC3+ track (when available)."
+msgstr ""
+"Όταν είναι ενεργό, ο δέκτης θα επιλέγει έναν ήχο AC3+ (όταν είναι "
+"διαθέσιμος)."
+
+msgid ""
+"When enabled, this setting has more weight than 'Preferred tuner for "
+"recordings'."
+msgstr ""
+"Όταν είναι ενεργό, αυτή η ρύθμιση έχει προτεραιότητα αντί του 'Προτιμώμενο "
+"tuner για εγγραφές'."
+
+msgid "When enabled, this setting has more weight than 'Preferred tuner'."
+msgstr ""
+"Όταν είναι ενεργό, αυτή η ρύθμιση έχει προτεραιότητα αντί του 'Προτιμώμενο "
+"tuner'."
+
+msgid ""
+"When enabled, timeshift starts automatically in background after specified "
+"time."
+msgstr ""
+"Όταν είναι ενεργό, η χρονομετατόπιση θα ξεκινά αυτόματα στο παρασκήνιο μετά "
+"από ορισμένο χρόνο."
+
+msgid "When enabled, use DHCP for the IP configuration."
+msgstr "Όταν είναι ενεργό, θα γίνεται χρήση του DHCP για τη ρύθμιση IP."
+
+msgid ""
 "When enabled, your receiver will detect activity on the VCR SCART input."
 msgstr ""
 "Όταν είναι ενεργό, ο δέκτης θα εντοπίζει δραστηριότητα στην είσοδο του VCR "
 "SCART."
+
+msgid ""
+"When nonzero, a recording will start earlier than the starting time "
+"indicated by the EPG."
+msgstr ""
+"Όταν δεν είναι μηδέν, μία εγγραφή θα ξεκινά νωρίτερα από την ώρα που "
+"αναγράφεται στο EPG."
+
+msgid ""
+"When nonzero, a recording will stop later than the ending time indicated by "
+"the EPG."
+msgstr ""
+"Όταν δεν είναι μηδέν, μία εγγραφή θα σταματά μετά την ώρα που αναγράφεται "
+"στο EPG."
 
 msgid ""
 "When the content has an aspect ratio of 16:9, choose whether to scale/"
@@ -6785,6 +8830,9 @@ msgstr ""
 "\n"
 "Θέλετε σίγουρα να γίνει η επαναφορά στις εργοστασιακές ρυθμίσεις;"
 
+msgid "Where do you want to backup your settings?"
+msgstr "Που θέλετε να γίνει η αντιγραφή των ρυθμίσεων;"
+
 msgid "Where to save temporary timeshift recordings?"
 msgstr "Που θέλετε να αποθηκεύονται προσωρινά οι χρονομετατοπισμένες εγγραφές;"
 
@@ -6796,6 +8844,12 @@ msgstr "Ασύρματο δίκτυο"
 
 msgid "Wireless network configuration..."
 msgstr "Ρύθμιση σύνδεσης ασύρματου δικτύου..."
+
+msgid "Wireless network connection setup"
+msgstr "Ρύθμιση σύνδεσης ασύρματου δικτύου"
+
+msgid "Wireless network connection setup."
+msgstr "Ρύθμιση σύνδεσης ασύρματου δικτύου."
 
 msgid "Wireless network state"
 msgstr "Κατάσταση ασύρματου δικτύου"
@@ -6846,6 +8900,9 @@ msgstr "Έτος"
 msgid "Yellow"
 msgstr "Κίτρινο"
 
+msgid "Yellow DVB subtitles"
+msgstr "Κίτρινοι υπότιτλοι"
+
 msgid "Yes"
 msgstr "Ναι"
 
@@ -6867,14 +8924,32 @@ msgstr "Ναι, πάντα"
 msgid "Yes, and delete this movie"
 msgstr "Ναι, και διαγραφή αυτής της ταινίας"
 
+msgid "Yes, backup my settings!"
+msgstr "Ναι, να δημιουργηθεί αντίγραφο των ρυθμίσεων!"
+
 msgid "Yes, delete this movie and return to movie list"
 msgstr "Ναι, διαγραφή της ταινίας και επιστροφή στη λίστα"
+
+msgid "Yes, do a manual scan now"
+msgstr "Ναι, να γίνει χειροκίνητη ανίχνευση τώρα"
+
+msgid "Yes, do an automatic scan now"
+msgstr "Ναι, να γίνει αυτόματη ανίχνευση τώρα"
+
+msgid "Yes, do another manual scan now"
+msgstr "Ναι, να γίνει ακόμα μία χειροκίνητη ανίχνευση τώρα"
 
 msgid "Yes, only from deep standby"
 msgstr "Ναι, μόνο από την κατάσταση βαθιάς αναμονής"
 
 msgid "Yes, only from standby"
 msgstr "Ναι, μόνο από την κατάσταση αναμονής"
+
+msgid "Yes, perform a shutdown now."
+msgstr "Ναι, τερματισμός τώρα."
+
+msgid "Yes, restore the settings now"
+msgstr "Ναι, επαναφορά ρυθμίσεων τώρα"
 
 msgid "Yes, returning to movie list"
 msgstr "Ναι, επιστροφή στη λίστα ταινιών"
@@ -6980,6 +9055,20 @@ msgstr ""
 msgid "You didn't select a channel to record from."
 msgstr "Δεν επιλέξατε κανάλι για εγγραφή."
 
+msgid ""
+"You have chosen to backup your settings. Please press OK to start the backup "
+"now."
+msgstr ""
+"Επιλέξατε να κρατηθεί αντίγραφο ασφαλείας των ρυθμίσεων. Πιέστε ΟΚ για να "
+"ξεκινήσει η διαδικασία τώρα."
+
+msgid ""
+"You have chosen to restore your settings. Enigma2 will restart after "
+"restore. Please press OK to start the restore now."
+msgstr ""
+"Επιλέξατε επαναφορά των ρυθμίσεων. Το Enigma2 θα επανεκκινηθεί μετά την "
+"επαναφορά. Πιέστε ΟΚ για να ξεκινήσει η διαδικασία τώρα."
+
 #, python-format
 msgid "You have to wait %s!"
 msgstr "Περιμένετε για το %s!"
@@ -6988,8 +9077,27 @@ msgstr "Περιμένετε για το %s!"
 msgid "You must switch to the service %s (%s - '%s')!\n"
 msgstr "Πρέπει να γίνει αλλαγή στην υπηρεσία %s (%s - '%s')!\n"
 
+msgid ""
+"You need a PC connected to your receiver. If you need further instructions, "
+"please visit the website https://openpli.org\n"
+"Your receiver will now be halted. After you have performed the update "
+"instructions from the website, your new firmware will ask you to restore "
+"your settings."
+msgstr ""
+"Απαιτείται ένα PC συνδεδεμένο με το δέκτη. Αν χρειάζεστε περισσότερες "
+"οδηγίες, παρακαλούμε επισκεφτείτε τον ιστότοπο https://openpli.org\n"
+"Ο δέκτης σας τώρα θα παγώσει. Αν έχετε ακολουθήσει τις οδηγίες από τον "
+"ιστότοπο, το νέο υλικολογισμικό θα ζητήσει να επαναφέρετε τις ρυθμίσεις σας."
+
 msgid "You system does not support ext4"
 msgstr "Το σύστημά σας δεν υποστηρίζει ext4"
+
+msgid ""
+"Your backup succeeded. We will now continue to explain the further upgrade "
+"process."
+msgstr ""
+"Το αντίγραφο ασφαλείας ολοκληρώθηκε. Ση συνέχεια θα επεξηγηθεί η υπόλοιπη "
+"διαδικασία."
 
 msgid ""
 "Your collection exceeds the size of a single layer medium, you will need a "
@@ -7009,6 +9117,12 @@ msgstr ""
 "Θα γίνει αναβάθμιση του μετωπαίου επεξεργαστή\n"
 "Παρακαλώ περιμένετε μέχρι την επανεκκίνηση του δέκτη σας\n"
 "Αυτό μπορεί να διαρκέσει μερικά λεπτά"
+
+msgid ""
+"Your internet connection is not working!\n"
+"Please choose what you want to do next."
+msgstr ""
+"Η σύνδεση στο διαδίκτυο δεν λειτουργεί! Επιλέξτε τι θέλετε να ακολουθήσει."
 
 #, python-format
 msgid "Your internet connection is working (ip: %s)"
@@ -7031,11 +9145,27 @@ msgstr ""
 "Η σύνδεση με το διαδίκτυο λειτουργεί.\n"
 "\n"
 
+msgid ""
+"Your receiver is now ready to use.\n"
+"\n"
+"Your internet connection is working now.\n"
+"\n"
+"Please press OK to continue."
+msgstr ""
+"Ο δέκτης σας είναι πλέον έτοιμος για χρήση. \n"
+"\n"
+"Η σύνδεσή σας στο διαδίκτυο λειτουργεί τώρα. \n"
+"\n"
+"Παρακαλώ πατήστε OK για να συνεχίσετε."
+
 msgid "Your receiver is rebooting"
 msgstr "Γίνεται επανεκκίνηση του δέκτη σας"
 
 msgid "Your receiver is shutting down"
 msgstr "Ο δέκτης σας απενεργοποιείται"
+
+msgid "Your receiver is shutting down. Please stand by..."
+msgstr "Ο δέκτης σας απενεργοποιείται. Παρακαλώ περιμένετε..."
 
 msgid ""
 "Your receiver might be unusable now. Please consult the manual for further "
@@ -7052,6 +9182,17 @@ msgstr "Ο δέκτης σας θα μεταβεί σε αναμονή εξαι�
 
 msgid "Your receiver will restart after pressing OK on your remote control."
 msgstr "Ο δέκτης σας θα επανεκκινηθεί πατώντας το OK στο τηλεχειριστήριο."
+
+msgid ""
+"Your wireless LAN internet connection could not be started!\n"
+"Have you attached your USB WLAN Stick?\n"
+"\n"
+"Please choose what you want to do next."
+msgstr ""
+"Αδυναμία εκκίνησης της ασύρματης σύνδεσης δικτύου!\n"
+"Έχετε συνδέσει το USB στικ;\n"
+"\n"
+"Επιλέξτε τι θέλετε να γίνει μετά."
 
 msgid "Zap"
 msgstr "Μετάβαση"
@@ -7074,6 +9215,9 @@ msgstr "Μετάβαση εστίασης σε Εικόνα σε Εικόνα"
 msgid "Zap focus to main screen"
 msgstr "Μετάβαση εστίασης στην κύρια οθόνη"
 
+msgid "Zap mode"
+msgstr "Λειτουργία μετάβασης"
+
 msgid "Zap to"
 msgstr "Μετάβαση σε"
 
@@ -7095,6 +9239,9 @@ msgstr "Zgemma H.S/H.2S/H.2H/H5/H7"
 
 msgid "Zgemma Star S/2S/H1/H2"
 msgstr "Zgemma H.S/H.2S/H.2H/H5"
+
+msgid "[REC]"
+msgstr "[ΕΓΓΡ]"
 
 msgid "[alternative edit]"
 msgstr "[επεξεργασία εναλλακτικών]"
@@ -7292,6 +9439,16 @@ msgstr "υπερσάρωση κομματιού / όρια μπαρών πάνω
 
 msgid "comedy"
 msgstr "κωμωδία"
+
+msgid "config menu"
+msgstr "μενού ρύθμισης"
+
+msgid ""
+"configure in which resolution pictures are displayed with the picture viewer "
+"and movieplayer"
+msgstr ""
+"ρυθμίστε σε ποια ανάλυση οι εικόνες θα απεικονίζονται με την προβολή "
+"φωτογραφιών και τον αναπαραγωγό ταινιών"
 
 msgid "confirmed"
 msgstr "επιβεβαιωμένο"
@@ -7728,6 +9885,9 @@ msgstr "μη ρυθμισμένο"
 msgid "not locked"
 msgstr "μη κλειδωμένο"
 
+msgid "not running"
+msgstr "δεν εκτελείται"
+
 msgid "not supported"
 msgstr "δεν υποστηρίζεται"
 
@@ -7781,6 +9941,9 @@ msgstr "αρχική γλώσσα"
 
 msgid "pass"
 msgstr "περνάει"
+
+msgid "pausing"
+msgstr "σε παύση"
 
 msgid "performing arts"
 msgstr "τέχνες και θεάματα"
@@ -7875,6 +10038,9 @@ msgstr "επανάληψη λίστας αναπαραγωγής"
 msgid "repeated"
 msgstr "επαναλαμβανόμενο"
 
+msgid "reserved for future use"
+msgstr "δεσμευμένο για μελλοντική χρήση"
+
 msgid "restore deleted userbouquets"
 msgstr "επαναφορά διαγραμμένων μπουκέτων χρήστη"
 
@@ -7898,6 +10064,9 @@ msgstr "ροκ/ποπ"
 
 msgid "romance"
 msgstr "ρομάντζο"
+
+msgid "running"
+msgstr "εκτελείται"
 
 msgid "save last directory on exit"
 msgstr "αποθήκευση τελευταίου φακέλου κατά την έξοδο"
@@ -7934,6 +10103,9 @@ msgstr "σοβαρή/κλασική/θρησκευτική/ιστορική τα
 
 msgid "service is in bouquet parental protection"
 msgstr "η υπηρεσία βρίσκεται στο μπουκέτο γονικού ελέγχου"
+
+msgid "service off-air"
+msgstr "υπηρεσία εκτός λειτουργίας"
 
 msgid "set as startup service"
 msgstr "ορισμός ως υπηρεσία εκκίνησης"
@@ -8016,6 +10188,9 @@ msgstr "εκκίνηση αποκοπής εδώ"
 msgid "start directory"
 msgstr "φάκελος εκκίνησης"
 
+msgid "starts in a few seconds"
+msgstr "ξεκινά σε λίγα δευτερόλεπτα"
+
 msgid "stepsize"
 msgstr "μέγεθος βήματος"
 
@@ -8078,6 +10253,9 @@ msgstr "τουρισμός/ταξίδια"
 
 msgid "true"
 msgstr "αληθές"
+
+msgid "type"
+msgstr "τύπος"
 
 msgid "unavailable"
 msgstr "μη διαθέσιμο"
@@ -8196,2064 +10374,11 @@ msgstr "μετάβαση και εγγραφή"
 msgid "zapped"
 msgstr "έγινε μετάβαση"
 
-msgid "Convert ext3 filesystem to ext4"
-msgstr "Μετατροπή συστήματος αρχείων ext3 σε ext4"
-
-msgid "Factory reset"
-msgstr "Επαναφορά εργοστασιακών ρυθμίσεων"
-
-msgid "Filesystem check"
-msgstr "Έλεγχος συστήματος αρχείων"
-
-msgid "Harddisk"
-msgstr "Σκληρός δίσκος"
-
-msgid "Initialization"
-msgstr "Αρχικοποίηση"
-
-msgid "Input devices"
-msgstr "Συσκευές εισόδου"
-
-msgid "Keyboard"
-msgstr "Πληκτρολόγιο"
-
-msgid "Manual scan"
-msgstr "Χειροκίνητη ανίχνευση"
-
-msgid "Plugins"
-msgstr "Πρόσθετα"
-
-msgid "Service"
-msgstr "Υπηρεσία"
-
-msgid "Service searching"
-msgstr "Αναζήτηση υπηρεσιών"
-
-msgid "Shutdown"
-msgstr "Τερματισμός"
-
-msgid "Sleep timer"
-msgstr "Χρονοδιακόπτης ύπνου"
-
-msgid "SoftCam / CI"
-msgstr "SoftCam / CI"
-
-msgid "Standby / restart"
-msgstr "Αναμονή / επανεκκίνηση"
-
-msgid "Tuner configuration"
-msgstr "Ρύθμιση tuner"
-
-msgid "VCR scart"
-msgstr "VCR scart"
-
-msgid "12V output"
-msgstr "έξοδος 12V"
-
-msgid "Activate network settings"
-msgstr "Ενεργοποίηση ρυθμίσεων δικτύου"
-
-msgid "Activate the configured network settings."
-msgstr "Ενεργοποίηση των παραμετροποιημένων ρυθμίσεων δικτύου"
-
-msgid "Allow subtitle language to equal audio language"
-msgstr "Να επιτρέπεται η εξίσωση υποτίτλων και γλώσσας ήχου"
-
-msgid "Allow subtitles for hearing impaired"
-msgstr "Να επιτρέπονται υπότιτλοι για άτομα με προβλήματα ακοής"
-
-msgid "Alpha"
-msgstr "Alpha"
-
-msgid "Alternative numbering mode"
-msgstr "Εναλλακτική λειτουργία αρίθμησης"
-
-msgid "Alternative services tuner priority"
-msgstr "Προτεραιότητα tuner εναλλακτικών υπηρεσιών"
-
-msgid "Always include ECM in recordings"
-msgstr "Συμπερίληψη πάντα του ECM στις εγγραφές"
-
-msgid ""
-"Always include ECM messages in recordings. This overrides the individual "
-"timer settings globally. It allows recordings to be always decrypted "
-"afterwards (sometimes called offline decoding), if supported by your "
-"receiver. Default: off."
-msgstr ""
-"Να συμπεριλαμβάνονται πάντα τα μηνύματα ECM στις εγγραφές. Αυτό παρακάμπτει "
-"όλες τις ιδιαίτερες ρυθμίσεις χρονοδιακοπτών γενικά. Επιτρέπει στις εγγραφές "
-"να είναι πάντα αποκωδικοποιημένες μετέπειτα (ενίοτε ονομάζεται κωδικοποίηση "
-"εκτός σύνδεσης), εάν υποστηρίζεται από το δέκτη σας. Προεπιλογή: ανενεργό."
-
-msgid "Audio language selection 1"
-msgstr "Επιλογή γλώσσας ήχου 1"
-
-msgid "Audio language selection 2"
-msgstr "Επιλογή γλώσσας ήχου 2"
-
-msgid "Audio language selection 3"
-msgstr "Επιλογή γλώσσας ήχου 3"
-
-msgid "Audio language selection 4"
-msgstr "Επιλογή γλώσσας ήχου 4"
-
-msgid "Auto language selection"
-msgstr "Αυτόματη επιλογή γλώσσας"
-
-msgid "Automatically start timeshift after"
-msgstr "Αυτόματη εκκίνηση της χρονομετατόπισης μετά από"
-
-msgid "Automatically turn on external subtitles"
-msgstr "Αυτόματη ενεργοποίηση των εξωτερικών υποτίτλων"
-
-msgid "Background delete option"
-msgstr "Επιλογή διαγραφής στο παρασκήνιο"
-
-msgid "Background delete speed"
-msgstr "Ταχύτητα διαγραφής στο παρασκήνιο"
-
-msgid "Behavior of 'pause and ok' when paused"
-msgstr "Συμπεριφορά των 'pause και ok' κατά την παύση"
-
-msgid "Behavior of 0 key in PiP-mode"
-msgstr "Συμπεριφορά του πλήκτρου 0 στη λειτουργία PiP"
-
-msgid "Behavior when a movie is started"
-msgstr "Συμπεριφορά όταν μια ταινία παίζει"
-
-msgid "Behavior when a movie is stopped"
-msgstr "Συμπεριφορά όταν μια ταινία έχει σταματήσει"
-
-msgid ""
-"By default, SNR will be shown in dB (when supported by the tuner). This "
-"setting forces SNR to be shown as a percentage instead."
-msgstr ""
-"Από προεπιλογή, το SNR θα εμφανίζεται σε dB (αν υποστηρίζεται από το tuner). "
-"Αυτή η ρύθμιση αναγκάζει το SNR να εμφανίζεται ως ποσοστό."
-
-msgid "Can be used for different fps between external subtitles and video."
-msgstr ""
-"Μπορεί να χρησιμοποιηθεί όταν οι υπότιτλοι έχουν διαφορετικό fps από το "
-"βίντεο."
-
-msgid "Center DVB subtitles"
-msgstr "Στοίχιση υποτίτλων DVB στο κέντρο"
-
-msgid "Change bouquets in quickzap"
-msgstr "Αλλαγή μπουκέτου στο γρήγορο ζάπινγκ"
-
-msgid "Choose which tuner to configure."
-msgstr "Επιλέξτε ποιο tuner θα ρυθμίσετε."
-
-msgid "Clone TV screen to LCD"
-msgstr "Κλωνοποίηση TV στο LCD"
-
-msgid "Close PiP on exit"
-msgstr "Κλείσιμο του PiP κατά την έξοδο"
-
-msgid "Composition of the recording filenames"
-msgstr "Σύνθεση ονομάτων των εγγραφών"
-
-msgid "Config resolution of pictures"
-msgstr "Ρύθμιση ανάλυσης των εικόνων"
-
-msgid ""
-"Configure an additional delay to improve external subtitle synchronisation."
-msgstr ""
-"Ρύθμιση πρόσθετης καθυστέρησης για βελτίωση του συγχρονισμού των εξωτερικών "
-"υποτίτλων."
-
-msgid "Configure an additional delay to improve subtitle synchronisation."
-msgstr ""
-"Ρύθμιση πρόσθετης καθυστέρησης για βελτίωση του συγχρονισμού των υποτίτλων."
-
-msgid ""
-"Configure for how long the infobar will remain visible after activation."
-msgstr ""
-"Ρυθμίστε για πόσο χρόνο η μπάρα πληροφοριών θα παραμένει ορατή μετά την "
-"ενεργοποίηση."
-
-msgid ""
-"Configure for how many minutes finished events should remain visible in the "
-"EPG. Useful when you need information about an event which has just "
-"finished, or has been delayed."
-msgstr ""
-"Ρυθμίστε για πόσα λεπτά τα προγράμματα που έχουν ολοκληρωθεί θα παραμένουν "
-"ορατά στο EPG. Χρήσιμο όταν χρειάζεστε πληροφορίες για ένα πρόγραμμα που "
-"τελείωσε ή καθυστέρησε."
-
-msgid "Configure how many channels are shown in the selection list."
-msgstr "Ρυθμίστε πόσα κανάλια θα εμφανίζονται στη λίστα επιλογής."
-
-msgid "Configure how recording filenames are constructed."
-msgstr "Ρύθμιση του τρόπου σύνθεσης των ονομάτων των εγγραφών."
-
-msgid "Configure how the fan should operate"
-msgstr "Ρύθμιση του τρόπου λειτουργίας του ανεμιστήρα"
-
-msgid ""
-"Configure if and how crypto icons will be shown in the channel selection "
-"list."
-msgstr ""
-"Ρυθμίστε εάν και πώς θα εμφανίζονται τα κρυπτοεικονίδια στη λίστα επιλογής "
-"καναλιών."
-
-msgid ""
-"Configure if and how long the latest service in the PiP will be remembered."
-msgstr ""
-"Ρυθμίστε εάν και για πόσο θα γίνεται υπενθύμιση της τελευταίας υπηρεσίας στο "
-"PIP."
-
-msgid ""
-"Configure if and how service type icons will be shown in the channel "
-"selection list."
-msgstr ""
-"Ρυθμίστε εάν και πώς θα εμφανίζονται τα εικονίδια τύπου υπηρεσίας στη λίστα "
-"επιλογής καναλιών."
-
-msgid ""
-"Configure if and how the record indicator will be shown in the channel "
-"selection list."
-msgstr ""
-"Ρυθμίστε εάν και πώς θα εμφανίζεται το εικονίδιο εγγραφής στη λίστα επιλογής "
-"καναλιών."
-
-msgid ""
-"Configure if and how wide columns will be shown in the channel selection "
-"list."
-msgstr ""
-"Ρυθμίστε εάν και πόσο πλατιές θα εμφανίζονται οι στήλες στη λίστα επιλογής "
-"καναλιών."
-
-msgid "Configure if behind the subtitles a background is shown."
-msgstr "Ρυθμίστε εάν θα εμφανίζεται ένα φόντο πίσω από τους υπότιτλους."
-
-msgid ""
-"Configure if service picons will be shown in display (when supported by the "
-"skin)."
-msgstr ""
-"Ρυθμίστε εάν τα λογότυπα υπηρεσίας θα εμφανίζονται στην οθόνη πρόσοψης (όταν "
-"υποστηρίζεται από το θέμα)."
-
-msgid ""
-"Configure if service picons will be shown in the channel selection list."
-msgstr ""
-"Ρυθμίστε εάν τα λογότυπα υπηρεσίας θα εμφανίζονται στη λίστα επιλογής "
-"καναλιών."
-
-msgid ""
-"Configure if the subtitle should switch between normal, italic, bold and "
-"bolditalic"
-msgstr ""
-"Ρυθμίστε εάν ο υπότιτλος θα πρέπει να αλλάζει μεταξύ του κανονικού, πλάγιου, "
-"έντονου ή έντονου πλάγιου"
-
-msgid "Configure on which devices the background delete option should be used."
-msgstr ""
-"Ρυθμίστε σε ποιες συσκευές η δυνατότητα διαγραφής παρασκήνιου θα πρέπει να "
-"χρησιμοποιείται."
-
-msgid "Configure the DiSEqC mode for this LNB."
-msgstr "Ρύθμιση λειτουργίας DiSEqC για αυτό το LNB."
-
-msgid "Configure the IP address."
-msgstr "Ρύθμιση της διεύθυνσης IP."
-
-msgid ""
-"Configure the behavior of the 'pause and ok' key when movie playback is "
-"already paused."
-msgstr ""
-"Ρύθμιση της συμπεριφοράς του πλήκτρου 'pause και ok' όταν μία ταινία "
-"βρίσκεται ήδη σε παύση."
-
-msgid "Configure the behavior when movie playback is manually stopped."
-msgstr "Συμπεριφορά όταν μια ταινία έχει σταματήσει χειροκίνητα."
-
-msgid "Configure the behavior when movie playback is started."
-msgstr "Συμπεριφορά όταν μια ταινία ξεκινήσει."
-
-msgid ""
-"Configure the behavior when reaching the end of a movie, during movie "
-"playback."
-msgstr ""
-"Συμπεριφορά όταν μια ταινία φτάσει στο τέλος, κατά τη διάρκεια της "
-"αναπαραγωγής."
-
-msgid ""
-"Configure the border width of the subtitles. The dark border makes the "
-"subtitles easier to read on a light background."
-msgstr ""
-"Ρύθμιση του πλάτους του περιγράμματος των υποτίτλων. Το σκοτεινό περίγραμμα "
-"κάνει τους υπότιτλους πιο ευανάγνωστους σε ένα ανοιχτόχρωμο φόντο."
-
-msgid ""
-"Configure the brightness level of the front panel display during standby."
-msgstr ""
-"Ρύθμιση του επιπέδου φωτεινότητας στην οθόνη πρόσοψης κατά τη διάρκεια της "
-"αναμονής."
-
-msgid "Configure the brightness level of the front panel display."
-msgstr "Ρύθμιση του επιπέδου φωτεινότητας στην οθόνη πρόσοψης."
-
-msgid ""
-"Configure the color of the external subtitles, alternative (normal in white, "
-"italic in yellow, bold in cyan, underscore in green), white or yellow."
-msgstr ""
-"Ρύθμιση του χρώματος των εξωτερικών υποτίτλων, εναλλασσόμενο (κανονικά σε "
-"λευκό, πλάγια σε κίτρινο, έντονα σε γαλάζιο, υπογραμμισμένα σε πράσινο), "
-"λευκό ή κίτρινο."
-
-msgid "Configure the color of the teletext subtitles."
-msgstr "Ρύθμιση χρώματος των υποτίτλων τηλεκειμένου."
-
-msgid "Configure the contrast level of the front panel display."
-msgstr "Ρύθμιση επιπέδου αντίθεσης στην οθόνη πρόσοψης."
-
-msgid ""
-"Configure the cursor behaviour in the channel selection list. When opening "
-"the channel selection list you can keep on the current service or already "
-"select up/down and you are able to revert the B+/B- buttons."
-msgstr ""
-"Ρύθμιση της συμπεριφοράς του κέρσορα στη λίστα καναλιών. Όταν ανοίγει η "
-"λίστα μπορείτε να κρατήσετε την τρέχουσα υπηρεσία ή να επιλέξετε ήδη τα πάνω/"
-"κάτω και θα μπορείτε έτσι να αντιμεταθέσετε τα πλήκτρα B+/B-"
-
-msgid "Configure the duration in minutes for the screensaver."
-msgstr "Ρύθμιση της διάρκειας της προστασίας οθόνης σε λεπτά."
-
-msgid "Configure the first audio language (highest priority)."
-msgstr "Ρύθμιση της πρώτης γλώσσας του ήχου (ύψιστη προτεραιότητα)."
-
-msgid "Configure the first subtitle language (highest priority)."
-msgstr "Ρύθμιση της πρώτης γλώσσας των υποτίτλων (ύψιστη προτεραιότητα)."
-
-msgid "Configure the font size of the subtitles."
-msgstr "Ρύθμιση του μεγέθους της γραμματοσειράς των υποτίτλων."
-
-msgid "Configure the fourth audio language."
-msgstr "Ρύθμιση της τέταρτης γλώσσας ήχου."
-
-msgid "Configure the fourth subtitle language."
-msgstr "Ρύθμιση της τέταρτης γλώσσας υποτίτλων."
-
-msgid "Configure the function of the '0' button do when PIP is active."
-msgstr "Ρύθμιση λειτουργίας του πλήκτρου '0' όταν το PIP είναι ενεργό."
-
-msgid "Configure the gateway."
-msgstr "Ρύθμιση πύλης δικτύου."
-
-msgid ""
-"Configure the hard disk drive to go to standby after the specified idle time."
-msgstr ""
-"Ρυθμίστε το σκληρό δίσκο να μεταβαίνει σε αναμονή έπειτα από το καθορισμένο "
-"χρόνο αδράνειας."
-
-msgid "Configure the horizontal alignment of the subtitles."
-msgstr "Ρύθμιση της οριζόντιας στοίχισης των υποτίτλων."
-
-msgid ""
-"Configure the initial fast forward speed. When you press the fast forward "
-"button, winding will start at this speed."
-msgstr ""
-"Ρύθμιση της αρχικής ταχύτητας προώθησης εμπρός. Όταν πιέζετε το πλήκτρο "
-"προώθησης εμπρός, η προώθηση θα ξεκινά με αυτή την ταχύτητα."
-
-msgid ""
-"Configure the initial rewind speed. When you press the rewind button, "
-"winding will start at this speed."
-msgstr ""
-"Ρύθμιση της αρχικής ταχύτητας προώθησης προς τα πίσω. Όταν πιέζετε το "
-"πλήκτρο προώθησης προς τα πίσω, η προώθηση θα ξεκινά με αυτή την ταχύτητα."
-
-msgid "Configure the latitude of your location."
-msgstr "Ρύθμιση του γεωγραφικού πλάτους της τοποθεσίας σας."
-
-msgid "Configure the longitude of your location."
-msgstr "Ρύθμιση του γεωγραφικού μήκους της θέσης σας."
-
-msgid ""
-"Configure the minimum amount of disk space to be available for recordings. "
-"When the amount of space drops below this value, deleted items will be "
-"removed from the trash can."
-msgstr ""
-"Ρύθμιση της ελάχιστης διαθέσιμης χωρητικότητας του δίσκου για εγγραφές. Όταν "
-"η χωρητικότητα πέσει κάτω από αυτή την τιμή, τα διαγραμμένα αντικείμενα θα "
-"αφαιρούνται από τον κάδο αχρήστων."
-
-msgid "Configure the nameserver (DNS)."
-msgstr "Ρύθμιση των nameservers (DNS)."
-
-msgid "Configure the netmask."
-msgstr "Ρύθμιση μάσκας δικτύου."
-
-msgid ""
-"Configure the number of days after which items are automaticaly removed from "
-"the trash can."
-msgstr ""
-"Ρύθμιση του αριθμού ημερών μετά τις οποίες τα αντικείμενα θα αφαιρούνται "
-"αυτόματα από τον κάδο αχρήστων."
-
-msgid ""
-"Configure the number of days old timers are kept before they are "
-"automatically removed from the timer list."
-msgstr ""
-"Ρύθμιση του αριθμού ημερών μετά τις οποίες οι παλιοί χρονοδιακόπτες θα "
-"διατηρούνται πριν διαγραφούν από τη λίστα."
-
-msgid ""
-"Configure the offline decoding delay in milliseconds. The configured delay "
-"is observed at each control word parity change."
-msgstr ""
-"Ρύθμιση της εκτός σύνδεσης αποκωδικοποίησης σε χιλιοστά του δευτερολέπτου. Η "
-"ρυθμισμένη καθυστέρηση παρατηρείται σε κάθε αλλαγή ισοτιμίας της λέξης "
-"ελέγχου."
-
-msgid "Configure the possible fast forward speeds."
-msgstr "Ρύθμιση ταχυτήτων προώθησης εμπρός."
-
-msgid "Configure the possible rewind speeds."
-msgstr "Ρύθμιση ταχυτήτων προώθησης προς τα πίσω."
-
-msgid "Configure the primary EPG language."
-msgstr "Ρύθμισης της κύριας γλώσσας του EPG."
-
-msgid "Configure the second audio language."
-msgstr "Ρύθμιση της δεύτερης γλώσσας ήχου."
-
-msgid "Configure the second subtitle language."
-msgstr "Ρύθμιση της δεύτερης γλώσσας υποτίτλων."
-
-msgid "Configure the secondary EPG language."
-msgstr "Ρύθμιση της δευτερεύουσας γλώσσας του EPG."
-
-msgid "Configure the skip time interval for the '1'/'3' buttons."
-msgstr "Ρύθμιση του μεσοδιαστήματος υπερπήδησης για τα πλήκτρα '1'/'3'."
-
-msgid "Configure the skip time interval for the '4'/'6' buttons."
-msgstr "Ρύθμιση του μεσοδιαστήματος υπερπήδησης για τα πλήκτρα '4'/'6'."
-
-msgid "Configure the skip time interval for the '7'/'9' buttons."
-msgstr "Ρύθμιση του μεσοδιαστήματος υπερπήδησης για τα πλήκτρα '7'/'9'."
-
-msgid "Configure the slow motion speeds."
-msgstr "Ρύθμιση ταχυτήτων αργής κίνησης."
-
-msgid ""
-"Configure the source of the frontend data as shown on the infobars. "
-"'Settings' is as stored on the settings. 'Tuner' is as reported by the tuner."
-msgstr ""
-"Ρυθμίστε την πηγή των δεδομένων από το tuner που θα εμφανίζονται στις μπάρες "
-"πληροφοριών. Οι \"Ρυθμίσεις\" είναι από τις αποθηκευμένες ρυθμίσεις. Το "
-"\"Tuner\" είναι ό,τι αναφέρει το tuner."
-
-msgid ""
-"Configure the speed of the background deletion process. Lower speed will "
-"consume less hard disk drive performance."
-msgstr ""
-"Ρύθμιση της ταχύτητας της διαδικασίας διαγραφής στο παρασκήνιο. Χαμηλότερη "
-"ταχύτητα θα καταναλώνει λιγότερο τις επιδόσεις του σκληρού δίσκου."
-
-msgid "Configure the speed of the fan"
-msgstr "Ρύθμιση της ταχύτητας του ανεμιστήρα"
-
-msgid "Configure the subtitle delay when timing information is not available."
-msgstr ""
-"Ρύθμιση της καθυστέρησης των υποτίτλων, όταν η πληροφορία χρονισμού δεν "
-"είναι διαθέσιμη."
-
-msgid "Configure the third audio language."
-msgstr "Ρύθμιση της τρίτης γλώσσας ήχου."
-
-msgid "Configure the third subtitle language."
-msgstr "Ρύθμιση της τρίτης γλώσσας υποτίτλων."
-
-msgid ""
-"Configure the transparency of the black background of graphical DVB "
-"subtitles."
-msgstr "Ρύθμιση της διαφάνειας του μαύρου φόντου των γραφικών υποτίτλων DVB."
-
-msgid "Configure the tuner mode."
-msgstr "Ρύθμιση λειτουργίας του tuner."
-
-msgid "Configure the type of status indication icons shown in the movielist."
-msgstr "Ρύθμιση των εικονιδίων ένδειξης κατάστασης στη λίστα ταινιών."
-
-msgid ""
-"Configure the vertical position of the subtitles, measured from the bottom "
-"of the screen."
-msgstr ""
-"Ρύθμιση της κάθετης θέσης των υποτίτλων σε σχέση με το κάτω μέρος της οθόνης."
-
-msgid "Configure the way in which the receiver changes channels."
-msgstr "Ρύθμιση του τρόπου αλλαγής των καναλιών από το δέκτη."
-
-msgid "Configure where completed timers show up in the timer list."
-msgstr ""
-"Ρυθμίστε πού θα εμφανίζονται οι ολοκληρωμένοι χρονοδιακόπτες στη λίστα."
-
-msgid ""
-"Configure whether (and for how long) a second infobar will be shown when OK "
-"is pressed twice. The second infobar contains additional information about "
-"the current channel."
-msgstr ""
-"Ρυθμίστε εάν (και για πόσο χρονικό διάστημα) η δεύτερη μπάρα πληροφοριών θα "
-"εμφανίζεται όταν πατηθεί το OK δύο φορές. Η δεύτερη μπάρα πληροφοριών "
-"περιέχει πρόσθετες πληροφορίες σχετικά με το τρέχον κανάλι."
-
-msgid ""
-"Configure whether or not an icon should be shown when your motorized dish is "
-"moving."
-msgstr ""
-"Ρυθμίστε εάν θα εμφανίζεται ή όχι ένα εικονίδιο κατά την κίνηση του μοτέρ."
-
-msgid "Configure whether or not an rotor position will be displayed on infobar"
-msgstr ""
-"Ρυθμίστε εάν θα εμφανίζεται ή όχι η θέση του μοτέρ στη μπάρα πληροφοριών"
-
-msgid ""
-"Configure which access level to use for the configuration menu. Expert level "
-"gives access to all items."
-msgstr ""
-"Ρύθμιση του επιπέδου πρόσβασης στο μενού παραμετροποίησης. Το προχωρημένο "
-"επίπεδο δίνει πρόσβαση σε όλες τις λειτουργίες."
-
-msgid ""
-"Configure which tuner for recordings will be preferred, when more than one "
-"tuner is available."
-msgstr ""
-"Ρυθμίστε ποιο tuner θα επιλέγεται για εγγραφές, όταν περισσότερα του ενός "
-"είναι διαθέσιμα."
-
-msgid ""
-"Configure which tuner type will be preferred, when the same service is "
-"available on different types of tuners. Choose 'no priority' to try each "
-"alternative one by one independent from tuner type."
-msgstr ""
-"Ρυθμίστε ποιο tuner θα προτιμάται, όταν η ίδια υπηρεσία θα είναι διαθέσιμη "
-"σε διαφορετικούς τύπους tuner. Επιλέξτε το 'χωρίς προτεραιότητα' για να "
-"δοκιμάζεται το κάθε εναλλακτικό ένα προς ένα ανεξαρτήτως του τύπου του."
-
-msgid ""
-"Configure which tuner will be preferred, when more than one tuner is "
-"available. If set to 'auto' the system will give priority to the tuner "
-"having the lowest number of channels/satellites."
-msgstr ""
-"Ρυθμίστε ποιο tuner θα προτιμάται, όταν περισσότερα του ενός είναι "
-"διαθέσιμα. Στο 'αυτόματο', το σύστημα θα δίνει προτεραιότητα στο tuner με το "
-"μικρότερο αριθμό καναλιών/δορυφόρων."
-
-msgid "Custom skip time for '1'/'3' buttons"
-msgstr "Χρόνος υπερπήδησης για τα πλήκτρα '1'/'3'"
-
-msgid "Custom skip time for '4'/'6' buttons"
-msgstr "Χρόνος υπερπήδησης για τα πλήκτρα '4'/'6'"
-
-msgid "Custom skip time for '7'/'9' buttons"
-msgstr "Χρόνος υπερπήδησης για τα πλήκτρα '7'/'9'"
-
-msgid "Customize"
-msgstr "Παραμετροποίηση"
-
-msgid "Customize channel list cursor behavior"
-msgstr "Ρύθμιση της συμπεριφοράς του κέρσορα στη λίστα καναλιών"
-
-msgid "DVB subtitle black transparency"
-msgstr "Διαφάνεια υποτίτλων DVB"
-
-msgid "Delay for external subtitles"
-msgstr "Καθυστέρηση εξωτερικών υποτίτλων"
-
-msgid "Delay in miliseconds after finish scrolling text on display."
-msgstr "Καθυστέρηση σε ms μετά τη λήξη της κύλισης του κειμένου στην οθόνη."
-
-msgid "Delay in miliseconds before start of scrolling text on display."
-msgstr "Καθυστέρηση σε ms πριν την έναρξη της κύλισης του κειμένου στην οθόνη."
-
-msgid "Delay in miliseconds between scrolling characters on display."
-msgstr "Καθυστέρηση σε ms μεταξύ της κύλισης χαρακτήρων στην οθόνη."
-
-msgid "Descramble receiving http streams"
-msgstr "Αποκωδικοποίηση των λαμβανομένων ροών http"
-
-msgid "Descramble sending http streams"
-msgstr "Αποκωδικοποίηση των απεσταλμένων ροών http"
-
-msgid "DiSEqC"
-msgstr "DiSEqC"
-
-msgid "Disable background scanning"
-msgstr "Απενεργοποίηση αναζήτησης στο παρασκήνιο"
-
-msgid "Disk space to reserve for recordings (in GB)"
-msgstr "Χώρος δίσκου που διατίθεται για εγγραφές (σε GB)"
-
-msgid "Display message before playing next movie"
-msgstr "Εμφάνιση μηνύματος πριν από την αναπαραγωγή της επόμενης ταινίας"
-
-msgid "Display setup"
-msgstr "Ρυθμίσεις οθόνης πρόσοψης"
-
-msgid "EPG language selection 1"
-msgstr "Επιλογή γλώσσας EPG 1"
-
-msgid "EPG language selection 2"
-msgstr "Επιλογή γλώσσας EPG 2"
-
-msgid "EPG settings"
-msgstr "Ρυθμίσεις EPG"
-
-msgid "Enable 'neutrino' style channel select controlling"
-msgstr "Ενεργοποίηση στυλ ελέγχου επιλογής καναλιών 'neutrino'"
-
-msgid "Enable 'neutrino' style zap controlling"
-msgstr "Ενεργοποίηση στυλ ελέγχου ζάπινγκ 'neutrino'"
-
-msgid "Enable EIT EPG"
-msgstr "Ενεργοποίηση EIT EPG"
-
-msgid "Enable MHW EPG"
-msgstr "Ενεργοποίηση MHW EPG"
-
-msgid "Enable Netmed EPG"
-msgstr "Ενεργοποίηση Netmed EPG"
-
-msgid "Enable OK as preview in channel selection"
-msgstr "Ενεργοποίηση OK ως προεπισκόπηση στην επιλογή καναλιών"
-
-msgid "Enable OK for channel selection"
-msgstr "Ενεργοποίηση ΟΚ για επιλογή καναλιών"
-
-msgid "Enable ViaSat EPG"
-msgstr "Ενεργοποίηση ViaSat EPG"
-
-msgid "Enable Virgin EPG"
-msgstr "Ενεργοποίηση Virgin EPG"
-
-msgid "Enable bouquet selection in multi-EPG"
-msgstr "Ενεργοποίηση της επιλογής μπουκέτων στον πολλαπλό EPG"
-
-msgid "Enable fallback remote receiver"
-msgstr "Ενεργοποίηση εφεδρικού απομακρυσμένου δέκτη"
-
-msgid "Enable freesat EPG"
-msgstr "Ενεργοποίηση freesat EPG"
-
-msgid "Enable multiple bouquets"
-msgstr "Ενεργοποίηση πολλαπλών μπουκέτων"
-
-msgid ""
-"Enable remote enigma2 receiver to be tried to tune into services that cannot "
-"be tuned into locally (e.g. tuner is occupied or service type is unavailable "
-"on the local tuner. Specify complete URL including http:// and port number "
-"(normally ...:8001), e.g. http://second_box:8001."
-msgstr ""
-"Ενεργοποίηση προσπάθειας συντονισμού του enigma2 δέκτη σε υπηρεσίες που δεν "
-"δύναται να συντονιστούν τοπικά (π.χ. το tuner είναι απασχολημένο ή ο τύπος "
-"της υπηρεσίας δεν είναι διαθέσιμος στο τοπικό tuner). Πρέπει να οριστεί μία "
-"διεύθυνση URL που να συμπεριλαμβάνει το http:// και τον αριθμό θύρας "
-"(συνήθως...:8001), π.χ. http://δεύτερος_δέκτης:8001."
-
-msgid "Enable teletext caching"
-msgstr "Ενεργοποίηση αποθήκευσης τηλεκειμένου"
-
-msgid "Enable volume control with arrow buttons"
-msgstr "Ενεργοποίηση ελέγχου ήχου με τα πλήκτρα βέλη"
-
-msgid "Enable zapping with CH+/-, B+/-, P+/-"
-msgstr "Ενεργοποίηση ζάπινγκ με τα CH+/-, B+/-, P+/-"
-
-msgid "External subtitle color"
-msgstr "Χρώμα εξωτερικών υποτίτλων"
-
-msgid "External subtitle dialog colorisation"
-msgstr "Χρωματισμός διαλόγων εξωτερικών υποτίτλων"
-
-msgid "External subtitle switch fonts"
-msgstr "Αλλαγή γραμματοσειρών εξωτερικού υπότιτλου"
-
-msgid "Fallback remote receiver URL"
-msgstr "Εφεδρική απομακρυσμένη URL δέκτη"
-
-msgid "Fan operation"
-msgstr "Λειτουργία ανεμιστήρα"
-
-msgid "Fan speed"
-msgstr "Ταχύτητα ανεμιστήρα"
-
-msgid "Fast forward speeds"
-msgstr "Ταχύτητες προώθησης εμπρός"
-
-msgid "Final scroll delay"
-msgstr "Τελική καθυστέρηση κύλισης"
-
-msgid "Finetune"
-msgstr "Μικρορύθμιση"
-
-msgid "Hard disk setup"
-msgstr "Ρύθμιση σκληρού δίσκου"
-
-msgid "Hard disk standby after"
-msgstr "Σκληρός δίσκος σε αναμονή μετά από"
-
-msgid "Hide channel list in radio mode"
-msgstr "Απόκρυψη της λίστας καναλιών σε λειτουργία ραδιοφώνου"
-
-msgid "Hide number markers"
-msgstr "Απόκρυψη σημειωτών των αριθμών"
-
-msgid "Hide zap errors"
-msgstr "Απόκρυψη σφαλμάτων του ζάπινγκ"
-
-msgid "Include AIT in http streams"
-msgstr "Συμπερίληψη του AIT στις ροές http"
-
-msgid "Include ECM in http streams"
-msgstr "Συμπερίληψη του ECM στις ροές http"
-
-msgid "Include EIT in http streams"
-msgstr "Συμπερίληψη του ΕΙΤ στις ροές http"
-
-msgid "Info bar timeout"
-msgstr "Χρόνος εμφάνισης πληροφοριών"
-
-msgid "Infobar frontend data source"
-msgstr "Πηγή δεδομένων tuner στη μπάρα πληροφοριών"
-
-msgid "Initial fast forward speed"
-msgstr "Αρχική ταχύτητα προώθησης εμπρός"
-
-msgid "Initial rewind speed"
-msgstr "Αρχική ταχύτητα προώθησης προς τα πίσω"
-
-msgid "Initial scroll delay"
-msgstr "Αρχική καθυστέρηση κύλισης"
-
-msgid "Keyboard map"
-msgstr "Χάρτης πληκτρολογίου"
-
-msgid "Keyboard setup"
-msgstr "Ρύθμιση πληκτρολογίου"
-
-msgid "Limit character set for recording filenames"
-msgstr "Περιορισμένο πλήθος χαρακτήρων για ονόματα εγγραφών"
-
-msgid ""
-"Limit the characters that can be used in recording filenames to (7 bit) "
-"ascii. This ensures compatibility with operating systems or file systems "
-"with limited character sets."
-msgstr ""
-"Περιορισμός των χαρακτήρων για χρήση στα ονόματα των εγγραφών σε (7 bit) "
-"ascii. Αυτό διασφαλίζει τη συμβατότητα με λειτουργικά συστήματα ή με "
-"συστήματα αρχείων με περιορισμένους χαρακτήρες."
-
-msgid "Load unlinked userbouquets"
-msgstr "Φόρτωση ασύνδετων μπουκέτων χρήστη"
-
-msgid "Maintain old EPG data for"
-msgstr "Διατήρηση των παλιών δεδομένων EPG για"
-
-msgid "Margin after recording (minutes)"
-msgstr "Περιθώριο μετά την εγγραφή (λεπτά)"
-
-msgid "Margin before recording (minutes)"
-msgstr "Περιθώριο πριν την εγγραφή (λεπτά)"
-
-msgid "Modulator"
-msgstr "Διαμορφωτής"
-
-msgid "Multi-EPG bouquet selection"
-msgstr "Επιλογή μπουκέτων πολλαπλού EPG"
-
-msgid ""
-"Never decrypt the content while recording. This overrides the individual "
-"timer settings globally. If enabled, recordings are stored in crypted "
-"presentation and must be decrypted afterwards (sometimes called offline "
-"decoding). Default: off."
-msgstr ""
-"Να μη γίνεται ποτέ αποκωδικοποίηση του περιεχομένου κατά την εγγραφή. Αυτό "
-"παρακάμπτει όλες τις ιδιαίτερες ρυθμίσεις χρονοδιακοπτών γενικά. Όταν είναι "
-"ενεργό, οι εγγραφές αποθηκεύονται ως κωδικοποιημένες και πρέπει να "
-"αποκωδικοποιηθούν μετέπειτα (ενίοτε ονομάζεται κωδικοποίηση εκτός σύνδεσης). "
-"Προεπιλογή: ανενεργό."
-
-msgid "Never decrypt while recording"
-msgstr "Να μη γίνεται ποτέ αποκωδικοποίηση κατά την εγγραφή"
-
-msgid "Number of channels shown in channel selection list"
-msgstr "Αριθμός καναλιών που εμφανίζονται στη λίστα επιλογής"
-
-msgid "Number of repeating text on display."
-msgstr "Αριθμός επανάληψης κειμένου στην οθόνη."
-
-msgid "OSD settings"
-msgstr "Ρυθμίσεις OSD"
-
-msgid "Offline decode delay (ms)"
-msgstr "Καθυστέρηση αποκωδικοποίησης εκτός σύνδεσης (ms)"
-
-msgid "Position of completed timers in timerlist"
-msgstr "Θέση ολοκληρωμένων χρονοδιακοπτών στη λίστα"
-
-msgid "Power on display"
-msgstr "Ενεργοποίηση οθόνης πρόσοψης"
-
-msgid "Prefer AC3 track"
-msgstr "Να προτιμάται ο ήχος AC3"
-
-msgid "Prefer AC3+ track"
-msgstr "Να προτιμάται ο ήχος AC3+"
-
-msgid "Prefer audio track stored by service"
-msgstr "Να προτιμάται ο ήχος που έχει αποθηκευτεί από την υπηρεσία"
-
-msgid "Prefer graphical DVB subtitles"
-msgstr "Να προτιμώνται γραφικοί υπότιτλοι DVB"
-
-msgid "Prefer subtitles for hearing impaired"
-msgstr "Να προτιμώνται υπότιτλοι για άτομα με προβλήματα ακοής"
-
-msgid "Prefer subtitles stored by service"
-msgstr "Να προτιμώνται υπότιτλοι αποθηκευμένοι από την υπηρεσία"
-
-msgid "Preferred tuner"
-msgstr "Προτιμώμενο tuner"
-
-msgid "Preferred tuner ATSC"
-msgstr "Προτιμώμενο tuner ATSC"
-
-msgid "Preferred tuner ATSC for recordings"
-msgstr "Προτιμώμενο tuner ATSC  για τις εγγραφές"
-
-msgid "Preferred tuner DVB-C"
-msgstr "Προτιμώμενο tuner DVB-C"
-
-msgid "Preferred tuner DVB-C for recordings"
-msgstr "Προτιμώμενο tuner DVB-C για τις εγγραφές"
-
-msgid "Preferred tuner DVB-S"
-msgstr "Προτιμώμενο tuner DVB-S"
-
-msgid "Preferred tuner DVB-S for recordings"
-msgstr "Προτιμώμενο tuner DVB-S για τις εγγραφές"
-
-msgid "Preferred tuner DVB-T"
-msgstr "Προτιμώμενο tuner DVB-T"
-
-msgid "Preferred tuner DVB-T for recordings"
-msgstr "Προτιμώμενο tuner DVB-T για τις εγγραφές"
-
-msgid "Preferred tuner for recordings"
-msgstr "Προτιμώμενο tuner για εγγραφές"
-
-msgid "RF output"
-msgstr "Έξοδος RF"
-
-msgid "Recordings always have priority"
-msgstr "Οι εγγραφές έχουν πάντα προτεραιότητα"
-
-msgid "Remember last service in PiP"
-msgstr "Υπενθύμιση τελευταίας υπηρεσίας στο PiP"
-
-msgid "Remove completed timers after (days)"
-msgstr "Διαγραφή ολοκληρωμένων χρονοδιακοπτών μετά από (ημέρες)"
-
-msgid "Remove items from trash can after (days)"
-msgstr "Διαγραφή αντικειμένων από τον κάδο αχρήστων σε (ημέρες)"
-
-msgid ""
-"Replace `- ` in dialogs with colored text per speaker (like teletext "
-"subtitles for the hearing impaired)"
-msgstr ""
-"Αντικατάσταση του `- ` στους διαλόγους με χρωματιστό κείμενο ανά ομιλούντα "
-"(όπως στους υπότιτλους τηλεκειμένου για άτομα με προβλήματα ακοής)"
-
-msgid "Require authentication for http streams"
-msgstr "Απαίτηση πιστοποίησης για ροές http"
-
-msgid "Rewind speeds"
-msgstr "Ταχύτητα προώθησης προς τα πίσω"
-
-msgid "Rewrap subtitles"
-msgstr "Επαναδίπλωση υποτίτλων"
-
-msgid "Satellite dish setup"
-msgstr "Ρύθμιση κατόπτρου"
-
-msgid "Scroll delay"
-msgstr "Καθυστέρηση κύλισης"
-
-msgid "Scroll repeats"
-msgstr "Επαναλήψεις κύλισης"
-
-msgid "Set fps for external subtitles"
-msgstr "Ορισμός fps για τους εξωτερικούς υπότιτλους"
-
-msgid ""
-"Set the type of the progress indication in the channel selection screen."
-msgstr "Ρύθμιση τύπου εμφάνισης προόδου στη λίστα καναλιών."
-
-msgid "Setup mode"
-msgstr "Λειτουργία εγκατάστασης"
-
-msgid "Show EIT now/next in infobar"
-msgstr "Εμφάνιση ΕΙΤ τρέχον/επόμενο στη μπάρα πληροφοριών"
-
-msgid "Show SNR percentage instead of dB value"
-msgstr "Εμφάνιση τιμής SNR σε ποσοστό αντί για dB"
-
-msgid "Show VCR scart on main menu"
-msgstr "Εμφάνιση VCR scart στο κύριο μενού"
-
-msgid "Show animation while busy"
-msgstr "Εμφάνιση κινούμενου γραφικού όταν είναι απασχολημένο"
-
-msgid "Show background behind subtitles"
-msgstr "Εμφάνιση φόντου πίσω από τους υπότιτλους"
-
-msgid "Show background in radio mode"
-msgstr "Εμφάνιση φόντου στη λειτουργία ραδιοφώνου"
-
-msgid "Show busy indicator when the system is busy."
-msgstr "Εμφάνιση ένδειξης απασχολημένου όταν το σύστημα είναι απασχολημένο."
-
-msgid "Show channel numbers in channel selection"
-msgstr "Εμφάνιση αριθμού καναλιού στην επιλογή καναλιού"
-
-msgid "Show columns"
-msgstr "Εμφάνιση στηλών"
-
-msgid "Show crypto icons"
-msgstr "Εμφάνιση κρυπτοεικονιδίων"
-
-msgid "Show crypto info in infobar"
-msgstr "Εμφάνιση πληροφοριών κρυπτοποίησης στη μπάρα πληροφοριών"
-
-msgid "Show event-progress in channel selection"
-msgstr "Εμφάνιση μπάρας προόδου στην επιλογή καναλιού"
-
-msgid "Show infobar on channel change"
-msgstr "Εμφάνιση μπάρας πληροφοριών σε αλλαγή καναλιού"
-
-msgid "Show infobar on event change"
-msgstr "Εμφάνιση μπάρας πληροφοριών σε αλλαγή εκπομπής"
-
-msgid "Show infobar on skip forward/backward"
-msgstr "Εμφάνιση της μπάρας πληροφοριών κατά τα εμπρός/πίσω"
-
-msgid "Show menu numbers"
-msgstr "Εμφάνιση αριθμών μενού"
-
-msgid "Show menu paths"
-msgstr "Εμφάνιση διαδρομών μενού"
-
-msgid "Show message when recording starts"
-msgstr "Εμφάνιση μηνύματος στην εκκίνηση της εγραφής"
-
-msgid "Show movie lengths in movielist"
-msgstr "Εμφάνιση διάρκειας στη λίστα ταινιών"
-
-msgid "Show picons in channel selection list"
-msgstr "Εμφάνιση λογότυπων (picons) στη λίστα επιλογής καναλιών"
-
-msgid "Show picons in display"
-msgstr "Εμφάνιση λογότυπων (picons) στην οθόνη πρόσοψης"
-
-msgid "Show positioner movement"
-msgstr "Εμφάνιση κίνησης του μοτέρ"
-
-msgid "Show positioner position"
-msgstr "Εμφάνιση θέσης του μοτέρ"
-
-msgid "Show record indicator"
-msgstr "Εμφάνιση εικονιδίου εγγραφής"
-
-msgid "Show screensaver"
-msgstr "Εμφάνιση προστασίας οθόνης"
-
-msgid "Show second infobar"
-msgstr "Εμφάνιση της δεύτερης μπάρας πληροφοριών"
-
-msgid "Show service type icons"
-msgstr "Εμφάνιση εικονιδίων τύπου υπηρεσίας"
-
-msgid "Show softcam setup in extensions menu"
-msgstr "Εμφάνιση των ρυθμίσεων softcam στο μενού επεκτάσεων"
-
-msgid "Show status icons in movielist"
-msgstr "Εμφάνιση εικονιδίων κατάστασης στη λίστα ταινιών"
-
-msgid "Show symbols on display"
-msgstr "Εμφάνιση συμβόλων στην οθόνη πρόσοψης"
-
-msgid "Show warning when timeshift is stopped"
-msgstr "Εμφάνιση προειδοποίησης όταν η χρονομετατόπιση έχει σταματήσει"
-
-msgid "Shows live tv or informations on LCD."
-msgstr "Εμφανίζει την εικόνα της TV ή πληροφορίες στο LCD."
-
-msgid "Slow motion speeds"
-msgstr "Ταχύτητες αργής κίνησης"
-
-msgid "Sort order for menu entries"
-msgstr "Ταξινόμηση σειράς των στοιχείων του μενού"
-
-msgid "Sound"
-msgstr "Ήχος"
-
-msgid "Sound carrier"
-msgstr "Φέρουσα ήχου"
-
-msgid "StandbyLED"
-msgstr "LED Αναμονής"
-
-msgid "Startup the set top box in standby"
-msgstr "Εκκίνηση του δέκτη από την αναμονή"
-
-msgid "Startup to Standby"
-msgstr "Εκκίνηση από Αναμονή"
-
-msgid "Subtitle alignment"
-msgstr "Στοίχιση υποτίτλου"
-
-msgid "Subtitle border width"
-msgstr "Μέγεθος περιγράμματος υποτίτλου"
-
-msgid "Subtitle delay when timing is bad"
-msgstr "Καθυστέρηση υποτίτλων σε κακό χρονισμό"
-
-msgid "Subtitle delay when timing lacks"
-msgstr "Καθυστέρηση κειμένου όταν δεν υπάρχει χρονισμός"
-
-msgid "Subtitle font size"
-msgstr "Μέγεθος γραμματοσειράς υποτίτλου"
-
-msgid "Subtitle language selection 1"
-msgstr "Επιλογή γλώσσας υποτίτλων 1"
-
-msgid "Subtitle language selection 2"
-msgstr "Επιλογή γλώσσας υποτίτλων 2"
-
-msgid "Subtitle language selection 3"
-msgstr "Επιλογή γλώσσας υποτίτλων 3"
-
-msgid "Subtitle language selection 4"
-msgstr "Επιλογή γλώσσας υποτίτλων 4"
-
-msgid "Subtitle position"
-msgstr "Θέση υποτίτλου"
-
-msgid "Subtitle settings"
-msgstr "Ρυθμίσεις υποτίτλων"
-
-msgid "Teletext subtitle color"
-msgstr "Χρώμα υποτίτλων τηλεκειμένου"
-
-msgid "Test mode"
-msgstr "Κατάσταση ελέγχου"
-
-msgid "This option allows you show all symbols on display."
-msgstr ""
-"Αυτή η επιλογή επιτρέπει την εμφάνιση όλων των συμβόλων στην οθόνη πρόσοψης."
-
-msgid "This option allows you to add the softcam setup in the extensions menu."
-msgstr ""
-"Αυτή η επιλογή σας επιτρέπει να προσθέσετε τις ρυθμίσεις softcam στο μενού "
-"επεκτάσεων."
-
-msgid ""
-"This option allows you to hide and sort menu entries. When selecting user "
-"you can change order and hide menu items via the blue button"
-msgstr ""
-"Αυτή η επιλογή επιτρέπει την απόκρυψη και την ταξινόμηση των στοιχείων των "
-"μενού. Κατά την επιλογή από το χρήστη, μπορείτε να αλλάξετε τη σειρά και να "
-"αποκρύψετε τα στοιχεία των μενού μέσω του μπλε πλήκτρου."
-
-msgid "This option allows you to power off the display."
-msgstr "Αυτή η επιλογή επιτρέπει την απενεργοποίηση της οθόνης πρόσοψης."
-
-msgid "This option allows you to show menu number quick links."
-msgstr ""
-"Αυτή η επιλογή επιτρέπει την εμφάνιση αριθμών δίπλα στα στοιχεία των μενού."
-
-msgid "This option allows you to show menu paths."
-msgstr "Αυτή η επιλογή εμφανίζει τις διαδρομές των μενού."
-
-msgid "Timezone"
-msgstr "Χρονική ζώνη"
-
-msgid "Tuner slot"
-msgstr "Υποδοχή tuner"
-
-msgid "Turn on the power LED during standby."
-msgstr "Ενεργοποίηση LED κατά την αναμονή."
-
-msgid "URL of fallback remote receiver"
-msgstr "Διεύθυνση URL του εφεδρικού απομακρυσμένου δέκτη"
-
-msgid "Use EIT EPG information when it is available."
-msgstr "Χρήση πληροφοριών EIT EPG όταν είναι διαθέσιμες."
-
-msgid "Use FreeSat EPG information when it is available."
-msgstr "Χρήση πληροφοριών FreeSat EPG όταν είναι διαθέσιμες."
-
-msgid "Use MHW EPG information when it is available."
-msgstr "Χρήση πληροφοριών MHW όταν είναι διαθέσιμες."
-
-msgid "Use Netmed EPG information when it is available."
-msgstr "Χρήση πληροφοριών Netmed EPG όταν είναι διαθέσιμες."
-
-msgid "Use ViaSat EPG information when it is available."
-msgstr "Χρήση πληροφοριών ViaSat EPG όταν είναι διαθέσιμες."
-
-msgid "Use Virgin EPG information when it is available."
-msgstr "Χρήση πληροφοριών Virgin EPG όταν είναι διαθέσιμες."
-
-msgid "Use original DVB subtitle position"
-msgstr "Χρήση αρχικής θέσης υποτίτλων DVB"
-
-msgid "Use original teletext position"
-msgstr "Χρήση αρχικής θέσης τηλεκειμένου"
-
-msgid "Use trash can in movielist"
-msgstr "Χρήση του κάδου αχρήστων στη λίστα ταινιών"
-
-msgid ""
-"Usually when the subtitle language is the same as the audio language, the "
-"subtitles will not be used. Enable this option to allow these subtitles to "
-"be used."
-msgstr ""
-"Συνήθως, όταν η γλώσσα υποτίτλων είναι η ίδια με τη γλώσσα ήχου, οι "
-"υπότιτλοι δεν θα χρησιμοποιηθούν. Ενεργοποιήστε αυτή την επιλογή ώστε να "
-"επιτραπεί η χρήση αυτών των υποτίτλων."
-
-msgid "Wake On LAN"
-msgstr "Αφύπνιση στο LAN"
-
-msgid ""
-"When enabled enigma2 will load unlinked userbouquets. This means that "
-"userbouquets that are available, but not included in the bouquets.tv or "
-"bouquets.radio files, will still be loaded. This allows you for example to "
-"keep your own user bouquet while installed settings are upgraded"
-msgstr ""
-"Όταν είναι ενεργό, το enigma2 θα φορτώνει τα ασύνδετα μπουκέτα χρήστη. Αυτό "
-"σημαίνει ότι τα μπουκέτα που είναι διαθέσιμα, αλλά δεν συμπεριλαμβάνονται "
-"στα αρχεία bouquets.tv ή bouquets.radio, θα φορτώνονται επίσης. Αυτό σας "
-"επιτρέπει για παράδειγμα να διατηρείτε το δικό σας μπουκέτο χρήστη όταν τα "
-"εγκατεστημένα θα αναβαθμίζονται."
-
-msgid "When enabled the PiP can be closed by the exit button."
-msgstr "Όταν είναι ενεργό, το PiP μπορεί να τερματιστεί με το πλήκτρο εξόδου."
-
-msgid ""
-"When enabled the arrow buttons around the OK button will follow the "
-"'neutrino' style zap controls instead of the enigma2 style."
-msgstr ""
-"Όταν είναι ενεργό, τα πλήκτρα βέλη γύρω από το ΟΚ θα ακολουθούν το στυλ "
-"ελέγχου ζάπινγκ 'neutrino' αντί του enigma2."
-
-msgid ""
-"When enabled the left, right, CH+/-, B+/-, P+/- buttons will follow the "
-"'neutrino' style zap controls instead of the enigma2 style."
-msgstr ""
-"Όταν είναι ενεργό, τα αριστερά και δεξιά CH+/-, B+/-, P+/- πλήκτρα θα "
-"ακολουθούν το στυλ ελέγχου ζάπινγκ 'neutrino' αντί του enigma2."
-
-msgid "When enabled the set top box is able to wakeup on LAN"
-msgstr ""
-"Όταν είναι ενεργό, ο δέκτης θα μπορεί να αφυπνίζεται στο τοπικό σας δίκτυο"
-
-msgid ""
-"When enabled then when you select a new channel in the channel selection the "
-"channel selection will not close. It will only close when you select the "
-"current playing service. This is a kind of preview mode"
-msgstr ""
-"Όταν είναι ενεργό, όταν θα επιλέγεται ένα νέο κανάλι στη λίστα, η επιλογή "
-"καναλιών δεν θα κλείνει. Θα κλείνει μόνο όταν θα έχετε επιλέξει την τρέχουσα "
-"υπηρεσία. Πρόκειται για ένα είδος προεπισκόπησης"
-
-msgid ""
-"When enabled you can control the volume with the arrow buttons instead of "
-"getting the channel selection list"
-msgstr ""
-"Όταν είναι ενεργό, μπορείτε να ελέγχετε την ένταση του ήχου με τα πλήκτρα "
-"βέλη αντί να μεταβαίνετε στη λίστα επιλογής καναλιών"
-
-msgid ""
-"When enabled you can zap channels with the  CH+/-, B+/-, P+/- buttons "
-"instead of opening the channel selection list."
-msgstr ""
-"Όταν είναι ενεργό, μπορείτε να μεταβαίνετε στα κανάλια με τα πλήκτρα  CH+/-, "
-"B+/-, P+/- αντί να ανοίγετε τη λίστα επιλογής καναλιών."
-
-msgid ""
-"When enabled you get the channel selection list via the OK button, the "
-"infobar toggle is then transfered to exit button"
-msgstr ""
-"Όταν είναι ενεργό, η μετάβαση στη λίστα επιλογής καναλιών γίνεται με το ΟΚ "
-"και η μπάρα πληροφοριών μεταφέρεται στο πλήκτρο εξόδου"
-
-msgid ""
-"When enabled, AIT data will be included in http streams. This allows a "
-"client receiver to use HbbTV."
-msgstr ""
-"Όταν είναι ενεργό, τα AIT δεδομένα θα περιλαμβάνονται στις ροές http. Αυτό "
-"επιτρέπει σε ένα δέκτη - πελάτη να χρησιμοποιήσει το HbbTV."
-
-msgid ""
-"When enabled, ECM data will be included in http streams. This allows a "
-"client receiver to do the descrambling."
-msgstr ""
-"Όταν είναι ενεργό, τα ECM δεδομένα θα περιλαμβάνονται  στις ροές http. Αυτό "
-"επιτρέπει σε ένα δέκτη - πελάτη να κάνει την αποκρυπτογράφηση."
-
-msgid ""
-"When enabled, EIT data will be included in http streams. This allows a "
-"client receiver to show EPG."
-msgstr ""
-"Όταν είναι ενεργό, τα ΕΙΤ δεδομένα θα περιλαμβάνονται στις ροές http. Αυτό "
-"επιτρέπει σε ένα δέκτη - πελάτη vα εμφανίσει EPG."
-
-msgid ""
-"When enabled, a popup message will be shown when a movie has finished and "
-"the next one will start."
-msgstr ""
-"Όταν είναι ενεργό, ένα αναδυόμενο μήνυμα θα εμφανίζεται όταν μια ταινία έχει "
-"τελειώσει και αρχίζει η επόμενη."
-
-msgid "When enabled, a popup message will be shown when a recording starts."
-msgstr ""
-"Όταν είναι ενεργό, ένα αναδυόμενο μήνυμα θα εμφανίζεται όταν ξεκινά μια "
-"εγγραφή."
-
-msgid ""
-"When enabled, a radio background image will be visible while listening to a "
-"radio channel."
-msgstr ""
-"Όταν είναι ενεργό, μια εικόνα φόντου ραδιοφώνου θα είναι ορατή, ενώ ακούτε "
-"ένα ραδιοφωνικό σταθμό."
-
-msgid ""
-"When enabled, a recording is allowed to interrupt live tv, when there are no "
-"free tuners."
-msgstr ""
-"Όταν είναι ενεργό, μία εγγραφή θα επιτρέπεται να διακόψει την TV, όταν δεν "
-"υπάρχουν ελεύθερα tuners."
-
-msgid ""
-"When enabled, a warning will be displayed and the user will get an option to "
-"stop or to continue the timeshift."
-msgstr ""
-"Όταν είναι ενεργό, θα εμφανίζεται μία προειδοποίηση και ο χρήστης θα έχει "
-"την επιλογή να σταματήσει ή να συνεχίσει τη χρονομετατόπιση."
-
-msgid ""
-"When enabled, always descramble receiving http streams. This takes up more "
-"resources (descrambling demuxers), only enable if necessary. Individual "
-"streams are always descrambled if 0x100 is added to the service type, "
-"regardless of this setting. Default off."
-msgstr ""
-"Όταν είναι ενεργό, οι λαμβανόμενες ροές http αποκωδικοποιούνται πάντα. Αυτό "
-"καταναλώνει περισσότερους πόρους (αποκωδικοποίηση των αποπλεκτών), και "
-"πρέπει να είναι ενεργό μόνο όταν απαιτείται. Οι ιδιαίτερες εγγραφές "
-"αποκωδικοποιούνται πάντοτε όταν στον τύπο υπηρεσίας προστίθεται το 0x100, "
-"ανεξαρτήτως ρύθμισης. Προεπιλογή ανενεργό."
-
-msgid "When enabled, authentication is required to watch http streams."
-msgstr ""
-"Όταν είναι ενεργό, απαιτείται πιστοποίηση για την παρακολούθηση ροών http."
-
-msgid "When enabled, channel numbering will start at '1' for each bouquet."
-msgstr ""
-"Όταν είναι ενεργό, η αρίθμηση των καναλιών θα ξεκινά από το '1' για κάθε "
-"μπουκέτο."
-
-msgid ""
-"When enabled, continue to the next bouquet when the last channel of the "
-"current bouquet is reached while changing channels."
-msgstr ""
-"Όταν είναι ενεργό, θα μεταβείτε στο επόμενο μπουκέτο όταν έχετε φτάσει στο "
-"τελευταίο κανάλι του τρέχοντος κατά το ζάπινγκ."
-
-msgid ""
-"When enabled, deleted recordings are moved to the trash can, instead of "
-"being deleted immediately."
-msgstr ""
-"Όταν είναι ενεργό, οι διαγραμμένες εγγραφές μετακινούνται στον κάδο "
-"αχρήστων, αντί να διαγράφονται άμεσα."
-
-msgid ""
-"When enabled, display the EIT now/next eventdata in infobar. When disabled, "
-"display now/next eventdata from the EPG cache instead."
-msgstr ""
-"Όταν είναι ενεργό, οι πληροφορίες ΕΙΤ τώρα/επόμενο θα εμφανίζονται στη μπάρα "
-"πληροφοριών. Αν είναι ανενεργό, θα εμφανίζονται από το αποθηκευμένο EPG."
-
-msgid ""
-"When enabled, encryption info will be shown in the infobar (when supported "
-"by the skin)."
-msgstr ""
-"Όταν είναι ενεργό, οι πληροφορίες κρυπτογράφησης θα εμφανίζονται στη μπάρα "
-"πληροφοριών (όταν υποστηρίζεται από το θέμα)."
-
-msgid "When enabled, error messages related to zapping will not be shown."
-msgstr ""
-"Όταν είναι ενεργό, δεν θα εμφανίζονται τα μηνύματα σφάλματος κατά το ζάπινγκ."
-
-msgid ""
-"When enabled, external subtitles will be always turned on for playback movie."
-msgstr ""
-"Όταν είναι ενεργό, οι εξωτερικοί υπότιτλοι θα εμφανίζονται πάντα κατά την "
-"αναπαραγωγή."
-
-msgid ""
-"When enabled, graphical DVB subtitles are preferred over teletext subtitles, "
-"when both types are available."
-msgstr ""
-"Όταν είναι ενεργό, οι γραφικοί υπότιτλοι DVB θα προτιμώνται αντί αυτών του "
-"τηλεκειμένου, όταν και οι δύο είναι διαθέσιμοι."
-
-msgid "When enabled, graphical DVB subtitles will be centered horizontally."
-msgstr ""
-"Όταν είναι ενεργό, οι γραφικοί υπότιτλοι DVB θα κεντράρονται οριζόντια."
-
-msgid ""
-"When enabled, graphical DVB subtitles will be displayed at their original "
-"position."
-msgstr ""
-"Όταν είναι ενεργό, οι γραφικοί υπότιτλοι DVB θα εμφανίζονται στην αρχική "
-"τους θέση."
-
-msgid ""
-"When enabled, graphical DVB subtitles will be displayed in yellow, instead "
-"of the original color."
-msgstr ""
-"Όταν είναι ενεργό, οι γραφικοί υπότιτλοι DVB θα εμφανίζονται σε κίτρινο "
-"χρώμα αντί του κανονικού τους."
-
-msgid ""
-"When enabled, http streams are descrambled on the server side. The (remote) "
-"client receiver does not have to do descrambling. Default on."
-msgstr ""
-"Όταν είναι ενεργό, οι ροές http αποκωδικοποιούνται στην πλευρά του "
-"διακομιστή. Ο (απομακρυσμένος) δέκτης-πελάτης δεν χρειάζεται να "
-"αποκωδικοποιήσει. Προεπιλογή ενεργό."
-
-msgid "When enabled, it is possible to leave the movieplayer with exit."
-msgstr ""
-"Όταν είναι ενεργό, είναι δυνατή η έξοδος από την αναπαραγωγή ταινιών με το "
-"πλήκτρο εξόδου."
-
-msgid ""
-"When enabled, measure power consumption to detect when the rotor stops "
-"turning (when supported by the tuner)."
-msgstr ""
-"Όταν είναι ενεργό, θα μετράται η κατανάλωση ενέργειας για να εντοπιστεί το "
-"σταμάτημα κίνησης του μοτέρ (όταν υποστηρίζεται από το tuner)."
-
-msgid "When enabled, number markers will be hiden."
-msgstr "Όταν είναι ενεργό, δεν θα εμφανίζονται οι σημειωτές των αριθμών."
-
-msgid "When enabled, reformat subtitles to match the width of the screen."
-msgstr ""
-"Όταν είναι ενεργό, οι υπότιτλοι θα αναδιπλώνονται έτσι ώστε να ταιριάζουν "
-"στο πλάτος της οθόνης."
-
-msgid "When enabled, services may be grouped in multiple bouquets."
-msgstr ""
-"Όταν είναι ενεργό, οι υπηρεσίες μπορούν να ομαδοποιηθούν σε πολλαπλά "
-"μπουκέτα."
-
-msgid "When enabled, show channel numbers in the channel selection screen."
-msgstr ""
-"Όταν είναι ενεργό, οι αριθμοί των καναλιών θα εμφανίζονται στη λίστα "
-"επιλογής καναλιών."
-
-msgid "When enabled, subtitles for the hearing impaired can be used."
-msgstr ""
-"Όταν είναι ενεργό, μπορεί να χρησιμοποιηθούν υπότιτλοι για άτομα με "
-"προβλήματα ακοής ."
-
-msgid ""
-"When enabled, subtitles for the hearing impaired will be preferred over "
-"normal subtitles, when both types are available."
-msgstr ""
-"Όταν είναι ενεργό, οι υπότιτλοι για άτομα με προβλήματα ακοής θα προτιμώνται "
-"έναντι των φυσιολογικών υποτίτλων, όταν και οι δύο τύποι είναι διαθέσιμοι."
-
-msgid "When enabled, teletext pages will be cached, allowing faster access."
-msgstr ""
-"Όταν είναι ενεργό, οι σελίδες τηλεκειμένου θα αποθηκεύονται προσωρινά, "
-"επιτρέποντας την ταχύτερη πρόσβαση."
-
-msgid ""
-"When enabled, teletext subtitles will be displayed at their original "
-"position."
-msgstr ""
-"Όταν είναι ενεργό, οι υπότιτλοι τηλεκειμένου θα εμφανίζονται στην αρχική "
-"τους θέση."
-
-msgid "When enabled, the VCR scart option will be shown on the main menu"
-msgstr "Όταν είναι ενεργό, η επιλογή VCR scart θα εμφανίζεται στο κύριο μενού"
-
-msgid ""
-"When enabled, the channel selection list will be hidden while listening to a "
-"radio channel"
-msgstr ""
-"Όταν είναι ενεργό, η λίστα επιλογής καναλιών δεν θα εμφανίζεται κατά την "
-"ακρόαση ραδιοφώνου."
-
-msgid "When enabled, the infobar will be displayed when a new event starts."
-msgstr ""
-"Όταν είναι ενεργό, η μπάρα πληροφοριών θα εμφανίζεται όταν ένα νέο πρόγραμμα "
-"αρχίζει."
-
-msgid "When enabled, the infobar will be displayed when changing channels."
-msgstr ""
-"Όταν είναι ενεργό, η μπάρα πληροφοριών θα εμφανίζεται κατά την αλλαγή "
-"καναλιών."
-
-msgid ""
-"When enabled, the infobar will be displayed when skipping forwards/backwards "
-"during media playback."
-msgstr ""
-"Όταν είναι ενεργό, η μπάρα πληροφοριών θα εμφανίζεται κατά την υπερπήδηση "
-"μπροστά/πίσω στην αναπαραγωγή πολυμέσων."
-
-msgid ""
-"When enabled, the lenght of each recording will be shown in the movielist "
-"(this might cause some additional loading time)."
-msgstr ""
-"Όταν είναι ενεργό, η διάρκεια κάθε εγγραφής θα εμφανίζεται στη λίστα (μπορεί "
-"να αυξηθεί ο χρόνος φόρτωσης)."
-
-msgid ""
-"When enabled, the receiver will automatically use the audio track which you "
-"selected before."
-msgstr ""
-"Όταν είναι ενεργό, ο δέκτης θα χρησιμοποιεί αυτόματα το κανάλι ήχου που "
-"είχατε προεπιλέξει."
-
-msgid ""
-"When enabled, the receiver will automatically use the subtitles which you "
-"selected before."
-msgstr ""
-"Όταν είναι ενεργό, ο δέκτης θα χρησιμοποιεί τους υπότιτλους που είχατε "
-"προεπιλέξει."
-
-msgid ""
-"When enabled, the receiver will no longer monitor the tuned transponder for "
-"possible changes. Do not use this option unless you know what you are doing."
-msgstr ""
-"Όταν είναι ενεργό, ο δέκτης δεν θα ελέγχει πλέον το συντονισμένο αναμεταδότη "
-"για πιθανές αλλαγές. Μην αλλάζετε αυτή την επιλογή αν δεν ξέρετε τι κάνετε."
-
-msgid "When enabled, the receiver will select an AC3 track (when available)."
-msgstr ""
-"Όταν είναι ενεργό, ο δέκτης θα επιλέγει έναν ήχο AC3 (όταν είναι διαθέσιμος)."
-
-msgid "When enabled, the receiver will select an AC3+ track (when available)."
-msgstr ""
-"Όταν είναι ενεργό, ο δέκτης θα επιλέγει έναν ήχο AC3+ (όταν είναι "
-"διαθέσιμος)."
-
-msgid ""
-"When enabled, this setting has more weight than 'Preferred tuner for "
-"recordings'."
-msgstr ""
-"Όταν είναι ενεργό, αυτή η ρύθμιση έχει προτεραιότητα αντί του 'Προτιμώμενο "
-"tuner για εγγραφές'."
-
-msgid "When enabled, this setting has more weight than 'Preferred tuner'."
-msgstr ""
-"Όταν είναι ενεργό, αυτή η ρύθμιση έχει προτεραιότητα αντί του 'Προτιμώμενο "
-"tuner'."
-
-msgid ""
-"When enabled, timeshift starts automatically in background after specified "
-"time."
-msgstr ""
-"Όταν είναι ενεργό, η χρονομετατόπιση θα ξεκινά αυτόματα στο παρασκήνιο μετά "
-"από ορισμένο χρόνο."
-
-msgid "When enabled, use DHCP for the IP configuration."
-msgstr "Όταν είναι ενεργό, θα γίνεται χρήση του DHCP για τη ρύθμιση IP."
-
-msgid ""
-"When nonzero, a recording will start earlier than the starting time "
-"indicated by the EPG."
-msgstr ""
-"Όταν δεν είναι μηδέν, μία εγγραφή θα ξεκινά νωρίτερα από την ώρα που "
-"αναγράφεται στο EPG."
-
-msgid ""
-"When nonzero, a recording will stop later than the ending time indicated by "
-"the EPG."
-msgstr ""
-"Όταν δεν είναι μηδέν, μία εγγραφή θα σταματά μετά την ώρα που αναγράφεται "
-"στο EPG."
-
-msgid "Yellow DVB subtitles"
-msgstr "Κίτρινοι υπότιτλοι"
-
-msgid "Zap mode"
-msgstr "Λειτουργία μετάβασης"
-
-msgid ""
-"configure in which resolution pictures are displayed with the picture viewer "
-"and movieplayer"
-msgstr ""
-"ρυθμίστε σε ποια ανάλυση οι εικόνες θα απεικονίζονται με την προβολή "
-"φωτογραφιών και τον αναπαραγωγό ταινιών"
-
-msgid "0"
-msgstr "0"
-
-msgid "1"
-msgstr "1"
-
-msgid "2"
-msgstr "2"
-
-msgid "3"
-msgstr "3"
-
-msgid "4"
-msgstr "4"
-
-msgid "5"
-msgstr "5"
-
-msgid "6"
-msgstr "6"
-
-msgid "7"
-msgstr "7"
-
-msgid "8"
-msgstr "8"
-
-msgid "9"
-msgstr "9"
-
-msgid "Audio"
-msgstr "Ήχος"
-
-msgid "Channellist menu"
-msgstr "Μενού λίστας καναλιών"
-
-msgid "Command execution..."
-msgstr "Εκτέλεση εντολής..."
-
-msgid "Commit info"
-msgstr "Πληροφορίες Αλλαγών"
-
-msgid "Continue in background"
-msgstr "Συνέχεια στο παρασκήνιο"
-
-msgid "Downloadable plugins"
-msgstr "Πρόσθετα για λήψη"
-
-msgid "EPG selection"
-msgstr "Επιλογή EPG"
-
-msgid "Event view"
-msgstr "Επισκόπηση προγραμμάτων"
-
-msgid "Event view menu"
-msgstr "Μενού προγραμμάτων"
-
-msgid "Index"
-msgstr "Ευρετήριο"
-
-msgid "Installing software..."
-msgstr "Εγκατάσταση λογισμικού..."
-
-msgid "MORE"
-msgstr "ΠΕΡΙΣΣΟΤΕΡΑ"
-
-msgid "Message..."
-msgstr "Μήνυμα..."
-
-msgid "Movielist menu"
-msgstr "Μένου λίστας ταινιών"
-
-msgid "Mute"
-msgstr "Σίγαση"
-
-msgid "NEXT"
-msgstr "ΕΠΟΜΕΝΟ"
-
-msgid "NOW"
-msgstr "ΤΩΡΑ"
-
-msgid "Nameserver setup"
-msgstr "Ρύθμιση Nameserver"
-
-msgid "Network configuration..."
-msgstr "Διαμόρφωση δικτύου..."
-
-msgid "Network test..."
-msgstr "Έλεγχος δικτύου..."
-
-msgid "Now playing"
-msgstr "Αναπαραγωγή τώρα"
-
-msgid "PIN code needed"
-msgstr "Απαιτείται κωδικός PIN"
-
-msgid "Parental control services editor"
-msgstr "Επεξεργασία υπηρεσιών γονικού έλεγχου"
-
-msgid "PiP setup"
-msgstr "Ρύθμιση PiP"
-
-msgid "Radio"
-msgstr "Ραδιόφωνο"
-
-msgid "Reception settings"
-msgstr "Ρυθμίσεις λήψης"
-
-msgid "Seek"
-msgstr "Αναζήτηση"
-
-msgid "Select HDD"
-msgstr "Επιλογή HDD"
-
-msgid "Select a bouquet"
-msgstr "Επιλογή μπουκέτου"
-
-msgid "Select a movie"
-msgstr "Επιλογή ταινίας"
-
-msgid "Select a skin"
-msgstr "Επιλογή θέματος"
-
-msgid "Select a tuner"
-msgstr "Επιλογή tuner"
-
-msgid "Timer edit"
-msgstr "Επεξεργασία χρονοδιακόπτη"
-
-msgid "Timeshift Live"
-msgstr "Ζωντανή Χρονομετατόπιση"
-
-msgid "Translation:"
-msgstr "Μετάφραση:"
-
-msgid "UnhandledKey"
-msgstr "Μη διαχειρίσιμο πλήκτρο"
-
-msgid "VideoMode"
-msgstr "Λειτουργία εικόνας"
-
-msgid "Volume"
-msgstr "Ένταση"
-
-msgid "Welcome..."
-msgstr "Καλώς ορίσατε..."
-
-msgid "config menu"
-msgstr "μενού ρύθμισης"
-
-msgid "Rec"
-msgstr "Εγγρ."
-
-msgid "[REC]"
-msgstr "[ΕΓΓΡ]"
-
-msgid "EtPortal"
-msgstr "EtPortal"
-
 msgid "®"
 msgstr "®"
 
-msgid "C"
-msgstr "C"
-
-msgid "D"
-msgstr "D"
-
-msgid "F"
-msgstr "F"
-
-msgid "G"
-msgstr "G"
-
-msgid "H"
-msgstr "H"
-
-msgid "I"
-msgstr "I"
-
-msgid "J"
-msgstr "J"
-
-msgid "TUNER:"
-msgstr "TUNER:"
-
-msgid "REC"
-msgstr "ΕΓΓΡ"
-
-msgid "BER"
-msgstr "BER"
-
-msgid "Extensions"
-msgstr "Επεκτάσεις"
-
-msgid "Info bar"
-msgstr "Μπάρα πληροφοριών"
-
-msgid "SNR"
-msgstr "SNR"
-
-msgid "Timeshift"
-msgstr "Χρονομετατόπιση"
-
-msgid "Check the internet connection"
-msgstr "Ελέγξτε τη σύνδεση στο διαδύκτιο"
-
-msgid "Check the internet connection again"
-msgstr "Ελέγξτε τη σύνδεση στο διαδίκτυο εκ νέου"
-
-msgid "Checking the internet connection"
-msgstr "Έλεγχος της σύνδεσης στο διαδίκτυο"
-
-msgid "Do you want to do a service scan?"
-msgstr "Θέλετε να γίνει ανίχνευση υπηρεσιών;"
-
-msgid "Do you want to do another manual service scan?"
-msgstr "Θέλετε να γίνει μία ακόμα χειροκίνητη ανίχνευση;"
-
-msgid "Do you want to install a channel list?"
-msgstr "Θέλετε να γίνει εγκατάσταση μιας λίστας καναλιών;"
-
-msgid "Exit the wizard"
-msgstr "Έξοδος από τον οδηγό"
-
-msgid "Please connect your receiver to the internet"
-msgstr "Παρακαλώ συνδέστε το δέκτη σας στο διαδίκτυο"
-
-msgid "Please set up tuner A"
-msgstr "Παρακαλώ ρυθμίστε το tuner A"
-
-msgid "Please set up tuner B"
-msgstr "Παρακαλώ ρυθμίστε το tuner B"
-
-msgid "Please set up tuner C"
-msgstr "Παρακαλώ ρυθμίστε το tuner C"
-
-msgid "Please set up tuner D"
-msgstr "Παρακαλώ ρυθμίστε το tuner D"
-
-msgid "Please set up tuner E"
-msgstr "Παρακαλώ ρυθμίστε το tuner E"
-
-msgid "Please set up tuner F"
-msgstr "Παρακαλώ ρυθμίστε το tuner F"
-
-msgid "Please set up tuner G"
-msgstr "Παρακαλώ ρυθμίστε το tuner G"
-
-msgid "Please set up tuner H"
-msgstr "Παρακαλώ ρυθμίστε το tuner H"
-
-msgid "Please set up tuner I"
-msgstr "Παρακαλώ ρυθμίστε το tuner I"
-
-msgid "Please set up tuner J"
-msgstr "Παρακαλώ ρυθμίστε το tuner J"
-
-msgid "Please set up tuner K"
-msgstr "Παρακαλώ ρυθμίστε το tuner K"
-
-msgid ""
-"Skip internet connection check (disables automatic package installation)"
-msgstr ""
-"Παράλειψη ελέγχου σύνδεσης στο διαδίκτυο (απενεργοποιεί την αυτόματη "
-"εγκατάσταση πακέτων)"
-
-msgid ""
-"Thank you for using the wizard. Your receiver is now ready for use.\n"
-"Press OK to start using your receiver."
-msgstr ""
-"Σας ευχαριστούμε που χρησιμοποιήσατε τον οδηγό. Ο δέκτης σας είναι πλέον "
-"έτοιμος για χρήση.\n"
-"Παρακαλώ πιέστε ΟΚ για να ξεκινήσετε."
-
-msgid ""
-"Use the up/down keys on your remote control to select an option. After that, "
-"press OK."
-msgstr ""
-"Πιέστε τα πλήκτρα πάνω/κάτω του τηλεχειριστηρίου για επιλογή. Μετά, πιέστε "
-"ΟΚ."
-
-msgid "Use the wizard to set up basic features"
-msgstr "Χρήση οδηγού για τις απλές ρυθμίσεις"
-
-msgid ""
-"Welcome.\n"
-"\n"
-"This start wizard will guide you through the basic setup of your receiver.\n"
-"Press the OK button on your remote control to move to the next step."
-msgstr ""
-"Καλώς ήρθατε. \n"
-"\n"
-"Αυτός ο οδηγός εκκίνησης θα σας καθοδηγήσει στις βασικές ρυθμίσεις του δέκτη "
-"σας.\n"
-"Πατήστε το πλήκτρο OK στο τηλεχειριστήριο για να προχωρήσετε στο επόμενο "
-"βήμα."
-
-msgid "What do you want to scan?"
-msgstr "Τι θέλετε να ανιχνεύσετε;"
-
-msgid "Yes, do a manual scan now"
-msgstr "Ναι, να γίνει χειροκίνητη ανίχνευση τώρα"
-
-msgid "Yes, do an automatic scan now"
-msgstr "Ναι, να γίνει αυτόματη ανίχνευση τώρα"
-
-msgid "Yes, do another manual scan now"
-msgstr "Ναι, να γίνει ακόμα μία χειροκίνητη ανίχνευση τώρα"
-
-msgid "Configure interface"
-msgstr "Ρύθμιση διεπαφής"
-
-msgid "Configure your network again"
-msgstr "Ρύθμιση του δικτύου εκ νέου"
-
-msgid "List available networks"
-msgstr "Λίστα διαθέσιμων δικτύων"
-
-msgid "Manual configuration"
-msgstr "Χειροκίνητη ρύθμιση"
-
-msgid ""
-"Please configure or verify your Nameservers by filling out the required "
-"values.\n"
-"When you are ready press OK to continue."
-msgstr ""
-"Παρακαλώ ρυθμίστε ή επιβεβαιώστε τους Nameservers συμπλρώνοντας τις "
-"απαιτούμενες τιμές.\n"
-"Όταν είστε έτοιμοι, πιέστε ΟΚ για συνέχεια."
-
-msgid ""
-"Please configure your internet connection by filling out the required "
-"values.\n"
-"When you are ready press OK to continue."
-msgstr ""
-"Παρακαλώ ρυθμίστε τη σύνδεση στο διαδίκτυο συμπληρώνοντας τις απαιτούμενες "
-"τιμές.\n"
-"Όταν είστε έτοιμοι, πιέστε ΟΚ για συνέχεια."
-
-msgid "Please follow the instructions on the TV"
-msgstr "Παρακαλώ ακολουθήστε τις οδηγίες στην οθόνη"
-
-msgid ""
-"Please select the network interface that you want to use for your internet "
-"connection.\n"
-"\n"
-"Please press OK to continue."
-msgstr ""
-"Παρακαλώ επιλέξτε τη διεπαφή δικτύου που θέλετε να χρησιμοποιήσετε για το "
-"διαδίκτυο.\n"
-"\n"
-"Πιέστε ΟΚ για συνέχεια."
-
-msgid ""
-"Please select the wireless network that you want to connect to.\n"
-"\n"
-"Please press OK to continue."
-msgstr ""
-"Παρακαλώ επιλέξτε το ασύρματο δίκτυο στο οποίο θα συνδεθείτε.\n"
-"\n"
-"Πιέστε ΟΚ για συνέχεια."
-
-msgid "Select wireless network"
-msgstr "Επιλογή ασύρματου δικτύου"
-
-msgid ""
-"Thank you for using the wizard.\n"
-"Please press OK to continue."
-msgstr ""
-"Σας ευχαριστούμε που χρησιμοποιήσατε τον οδηγό.\n"
-"Παρακαλώ πιέστε ΟΚ για συνέχεια."
-
-msgid ""
-"The wireless LAN plugin is not installed!\n"
-"Please install it and choose what you want to do next."
-msgstr ""
-"Το πρόσθετο ασύρματου LAN δεν είναι εγκατεστημένο!\n"
-"Παρακαλώ εγκαταστήστε το και επιλέξτε τι θέλετε να συμβεί στη συνέχεια."
-
-msgid ""
-"Welcome.\n"
-"\n"
-"If you want to connect your receiver to the Internet, this wizard will guide "
-"you through the basic network setup of your receiver.\n"
-"\n"
-"Press OK to start configuring your network"
-msgstr ""
-"Καλώς ήρθατε.\n"
-"\n"
-"Αν θέλετε να συνδέσετε το δέκτη σας στο Internet, αυτός ο οδηγός θα σας "
-"καθοδηγήσει στις βασικές ρυθμίσεις του δικτύου του δέκτη σας.\n"
-"\n"
-"Πατήστε OK για να ξεκινήσετε τη ρύθμιση του δικτύου σας"
-
-msgid "Wireless network connection setup"
-msgstr "Ρύθμιση σύνδεσης ασύρματου δικτύου"
-
-msgid "Wireless network connection setup."
-msgstr "Ρύθμιση σύνδεσης ασύρματου δικτύου."
-
-msgid ""
-"Your internet connection is not working!\n"
-"Please choose what you want to do next."
-msgstr ""
-"Η σύνδεση στο διαδίκτυο δεν λειτουργεί! Επιλέξτε τι θέλετε να ακολουθήσει."
-
-msgid ""
-"Your receiver is now ready to use.\n"
-"\n"
-"Your internet connection is working now.\n"
-"\n"
-"Please press OK to continue."
-msgstr ""
-"Ο δέκτης σας είναι πλέον έτοιμος για χρήση. \n"
-"\n"
-"Η σύνδεσή σας στο διαδίκτυο λειτουργεί τώρα. \n"
-"\n"
-"Παρακαλώ πατήστε OK για να συνεχίσετε."
-
-msgid ""
-"Your wireless LAN internet connection could not be started!\n"
-"Have you attached your USB WLAN Stick?\n"
-"\n"
-"Please choose what you want to do next."
-msgstr ""
-"Αδυναμία εκκίνησης της ασύρματης σύνδεσης δικτύου!\n"
-"Έχετε συνδέσει το USB στικ;\n"
-"\n"
-"Επιλέξτε τι θέλετε να γίνει μετά."
-
-msgid "Install a new image with a USB stick"
-msgstr "Εγκατάσταση νέου λογισμικού μέσω usb στικ"
-
-msgid "Install a new image with your web browser"
-msgstr "Εγκατάσταση νέου λογισμικού μέσω πλοηγού web"
-
-msgid "No backup needed"
-msgstr "Δεν απαιτείται εφεδρεία"
-
-msgid "No, do nothing."
-msgstr "Όχι, να μη γίνει τίποτα."
-
-msgid "No, just start my receiver"
-msgstr "Όχι, απλά εκκίνηση του δέκτη"
-
-msgid "OK, guide me through the upgrade process"
-msgstr "ΟΚ, να οδηγηθώ στη διαδικασία αναβάθμισης"
-
-msgid "The backup failed. Please choose a different backup location."
-msgstr ""
-"Το αντίγραφο ασφαλείας απέτυχε. Επιλέξτε άλλη τοποθεσία για το αντίγραφο."
-
-msgid ""
-"The wizard can backup your current settings. Do you want to do a backup now?"
-msgstr ""
-"Ο οδηγός μπορεί να κρατήσει αντίγραφο των ρυθμίσεων. Να κρατήσει αντίγραφο "
-"τώρα;"
-
-msgid "The wizard is finished now."
-msgstr "Ο οδηγός ολοκληρώθηκε."
-
-msgid ""
-"Welcome to the image upgrade wizard. The wizard will assist you in upgrading "
-"the firmware of your receiver by providing a backup facility for your "
-"current settings and a short explanation of how to upgrade your firmware."
-msgstr ""
-"Καλωσορίσατε στον οδηγό αναβάθμισης λογισμικού. Αυτός ο οδηγός θα σας "
-"βοηθήσει να αναβαθμίσετε το υλικολογισμικό του δέκτη, παρέχοντας ευκολίες "
-"εφεδρείας για τις τρέχουσες ρυθμίσεις σας και μια σύντομη επεξήγηση για το "
-"πώς να αναβαθμίσετε το υλικολογισμικό."
-
-msgid "Where do you want to backup your settings?"
-msgstr "Που θέλετε να γίνει η αντιγραφή των ρυθμίσεων;"
-
-msgid "Yes, backup my settings!"
-msgstr "Ναι, να δημιουργηθεί αντίγραφο των ρυθμίσεων!"
-
-msgid "Yes, perform a shutdown now."
-msgstr "Ναι, τερματισμός τώρα."
-
-msgid "Yes, restore the settings now"
-msgstr "Ναι, επαναφορά ρυθμίσεων τώρα"
-
-msgid ""
-"You have chosen to backup your settings. Please press OK to start the backup "
-"now."
-msgstr ""
-"Επιλέξατε να κρατηθεί αντίγραφο ασφαλείας των ρυθμίσεων. Πιέστε ΟΚ για να "
-"ξεκινήσει η διαδικασία τώρα."
-
-msgid ""
-"You have chosen to restore your settings. Enigma2 will restart after "
-"restore. Please press OK to start the restore now."
-msgstr ""
-"Επιλέξατε επαναφορά των ρυθμίσεων. Το Enigma2 θα επανεκκινηθεί μετά την "
-"επαναφορά. Πιέστε ΟΚ για να ξεκινήσει η διαδικασία τώρα."
-
-msgid ""
-"You need a PC connected to your receiver. If you need further instructions, "
-"please visit the website https://openpli.org\n"
-"Your receiver will now be halted. After you have performed the update "
-"instructions from the website, your new firmware will ask you to restore "
-"your settings."
-msgstr ""
-"Απαιτείται ένα PC συνδεδεμένο με το δέκτη. Αν χρειάζεστε περισσότερες "
-"οδηγίες, παρακαλούμε επισκεφτείτε τον ιστότοπο https://openpli.org\n"
-"Ο δέκτης σας τώρα θα παγώσει. Αν έχετε ακολουθήσει τις οδηγίες από τον "
-"ιστότοπο, το νέο υλικολογισμικό θα ζητήσει να επαναφέρετε τις ρυθμίσεις σας."
-
-msgid ""
-"Your backup succeeded. We will now continue to explain the further upgrade "
-"process."
-msgstr ""
-"Το αντίγραφο ασφαλείας ολοκληρώθηκε. Ση συνέχεια θα επεξηγηθεί η υπόλοιπη "
-"διαδικασία."
-
-msgid "Your receiver is shutting down. Please stand by..."
-msgstr "Ο δέκτης σας απενεργοποιείται. Παρακαλώ περιμένετε..."
-
-msgid "Refresh rate selection."
-msgstr "Επιλογή συχνότητας ανανέωσης."
-
-msgid "Select refresh rate"
-msgstr "Επιλογή ρυθμού ανανέωσης"
-
-msgid "Select video input with up/down buttons"
-msgstr "Επιλογή εισόδου εικόνας με τα πλήκτρα πάνω/κάτω"
-
-msgid "Select video mode"
-msgstr "Επιλογή λειτουργίας εικόνας"
-
-msgid ""
-"Video input selection\n"
-"\n"
-"Please press OK if you can see this page on your TV (or select a different "
-"input port).\n"
-"\n"
-"The next input port will be automatically probed in 20 seconds."
-msgstr ""
-"Επιλογή εισόδου εικόνας\n"
-"\n"
-"Παρακαλώ πιέστε ΟΚ εάν μπορείτε να δείτε αυτή τη σελίδα στην TV (ή επιλέξτε "
-"διαφορετική είσοδο).\n"
-"\n"
-"Η επόμενη είσοδος εικόνας θα εμφανιστεί αυτόματα σε 20 δευτερόλεπτα."
-
-msgid "Video mode selection."
-msgstr "Επιλογή λειτουργίας εικόνας"
+msgid "Intermediate"
+msgstr "Ενδιάμεσο"
 
 msgid "Audio:"
 msgstr "Ήχος:"
@@ -10263,15 +10388,6 @@ msgstr "Ελληνικά, Νέα (1453-)"
 
 msgid "Modern Greek (1453-)"
 msgstr "Νέα Ελληνικά (1453-)"
-
-msgid "Input Stream ID"
-msgstr "ID Ροής Εισόδου"
-
-msgid "PLS Code"
-msgstr "PLS Κωδικός"
-
-msgid "PLS Mode"
-msgstr "PLS Λειτουργία"
 
 msgid "Video:"
 msgstr "Βίντεο:"
