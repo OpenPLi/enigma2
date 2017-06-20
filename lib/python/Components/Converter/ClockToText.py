@@ -16,6 +16,7 @@ class ClockToText(Converter, object):
 	VFD = 10
 	AS_LENGTHHOURS = 11
 	AS_LENGTHSECONDS = 12
+	FULL_DATE = 13
 
 	# add: date, date as string, weekday, ...
 	# (whatever you need!)
@@ -47,6 +48,8 @@ class ClockToText(Converter, object):
 			self.type = self.SHORT_DATE
 		elif type == "LongDate":
 			self.type = self.LONG_DATE
+		elif type == "FullDate":
+			self.type = self.FULL_DATE
 		elif type == "VFD":
 			self.type = self.VFD
 		elif "Format" in type:
@@ -107,6 +110,9 @@ class ClockToText(Converter, object):
 		elif self.type == self.LONG_DATE:
 			# TRANSLATORS: long date representations dayname daynum monthname in strftime() format! See 'man strftime'
 			d = _("%A %e %B")
+		elif self.type == self.FULL_DATE:
+			# TRANSLATORS: full date representations short dayname daynum monthname long year in strftime() format! See 'man strftime'
+			d = _("%a %e %B %Y")
 		elif self.type == self.VFD:
 			# TRANSLATORS: VFD hour:minute daynum short monthname in strftime() format! See 'man strftime'
 			d = _("%k:%M %e/%m")
