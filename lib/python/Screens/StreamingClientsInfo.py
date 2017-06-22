@@ -4,6 +4,7 @@ from Components.MenuList import MenuList
 from Components.ActionMap import ActionMap
 from Components.Sources.StreamService import StreamServiceList
 from Components.Button import Button
+from Components.Label import Label
 from enigma import eStreamServer
 from ServiceReference import ServiceReference
 import socket
@@ -18,9 +19,10 @@ class StreamingClientsInfo(Screen):
 		self.streamServer = eStreamServer.getInstance()
 		self.clients = []
 		self["menu"] = MenuList(self.clients)
-		self["key_red"] = Button(_("Exit"))
+		self["key_red"] = Button(_("Close"))
 		self["key_green"] = Button("")
 		self["key_yellow"] = Button("")
+		self["info"] = Label()
 		self.updateClients()
 		self["actions"] = ActionMap(["ColorActions", "SetupActions"],
 		{
@@ -63,10 +65,11 @@ class StreamingClientsInfo(Screen):
 			self.clients.append((info,(-1, x)))
 		self["menu"].setList(self.clients)
 		if self.clients:
+			self["info"].setText("")
 			self["key_green"].setText(_("Stop all streams"))
 			self["key_yellow"].setText(_("Stop current stream"))
 		else:
-			self.setTitle(_("No stream clients"))
+			self["info"].setText(_("No stream clients"))
 
 	def stopCurrentStream(self):
 		self.updateClients()

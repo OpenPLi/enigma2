@@ -176,10 +176,21 @@ class CommitInfo(Screen):
 
 		self["key_red"] = Button(_("Cancel"))
 
+		# get the branch to display from the Enigma version
+		try:
+			branch = about.getEnigmaVersionString().split("-")[-1]
+			# capture beta images which don't have branchname versions
+			if branch.isdigit():
+				branch = "?sha=master"
+			else:
+				branch = "?sha=" + branch
+		except:
+			branch = ""
+
 		self.project = 0
 		self.projects = [
-			("https://api.github.com/repos/openpli/enigma2/commits", "Enigma2"),
-			("https://api.github.com/repos/openpli/openpli-oe-core/commits", "Openpli Oe Core"),
+			("https://api.github.com/repos/openpli/enigma2/commits" + branch, "Enigma2"),
+			("https://api.github.com/repos/openpli/openpli-oe-core/commits" + branch, "Openpli Oe Core"),
 			("https://api.github.com/repos/openpli/enigma2-plugins/commits", "Enigma2 Plugins"),
 			("https://api.github.com/repos/openpli/aio-grab/commits", "Aio Grab"),
 			("https://api.github.com/repos/openpli/gst-plugin-dvbmediasink/commits", "Gst Plugin Dvbmediasink"),

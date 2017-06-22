@@ -520,7 +520,7 @@ std::string convertDVBUTF8(const unsigned char *data, int len, int table, int ts
 //		eDebug("[convertDVBUTF8] Cyfra / Cyfrowy Polsat HACK... override given ISO8859-5 with ISO6937");
 		table = 0;
 	}
-	else if ( !table || table == -1 )
+	else if ( table == -1 )
 		table = defaultEncodingTable;
 
 	switch(table)
