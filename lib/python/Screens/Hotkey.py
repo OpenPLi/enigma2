@@ -582,13 +582,10 @@ class InfoBarHotkey():
 				except:
 					print "[Hotkey] error during executing module %s, screen %s" % (selected[1], selected[2])
 			elif selected[0] == "SoftcamSetup" and SystemInfo["HasSoftcamInstalled"]:
-				try:
-					exec "from Screens.SoftcamSetup import *"
-					exec "self.session.open(SoftcamSetup)"
-				except:
-					print "[Hotkey] error during executing module Sceens.SoftcamSetup, screen SoftcamSetup"
+				from Screens.SoftcamSetup import SoftcamSetup
+				self.session.open(SoftcamSetup)
 			elif selected[0] == "Setup":
-				exec "from Screens.Setup import *"
+				from Screens.Setup import *
 				exec "self.session.open(Setup, \"" + selected[1] + "\")"
 			elif selected[0].startswith("Zap"):
 				if selected[0] == "ZapPanic":
