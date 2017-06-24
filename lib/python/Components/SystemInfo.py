@@ -16,6 +16,11 @@ def countFrontpanelLEDs():
 		number_of_leds += 1
 	return number_of_leds
 
+def hassoftcaminstalled():
+	from Tools.camcontrol import CamControl
+	return len(CamControl('softcam').getList()) > 1
+
+SystemInfo["HasSoftcamInstalled"] = hassoftcaminstalled()
 SystemInfo["NumVideoDecoders"] = getNumVideoDecoders()
 SystemInfo["PIPAvailable"] = SystemInfo["NumVideoDecoders"] > 1
 SystemInfo["CanMeasureFrontendInputPower"] = eDVBResourceManager.getInstance().canMeasureFrontendInputPower()
