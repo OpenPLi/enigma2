@@ -3,7 +3,7 @@ from Screens.MessageBox import MessageBox
 from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import ActionMap
 from Components.Label import Label
-from Components.config import ConfigElement, ConfigSelection, getConfigListEntry, ConfigAction
+from Components.config import ConfigSelection, getConfigListEntry, ConfigAction
 from Components.ScrollLabel import ScrollLabel
 from Tools.GetEcmInfo import GetEcmInfo
 
