@@ -634,7 +634,7 @@ def InitUsageConfig():
 		("nor", _("Norwegian")),
 		("pol", _("Polish")),
 		("por dub Dub DUB ud1", _("Portuguese")),
-		("fas per", _("Persian")),
+		("fas per fa pes", _("Persian")),
 		("ron rum", _("Romanian")),
 		("rus", _("Russian")),
 		("srp", _("Serbian")),
