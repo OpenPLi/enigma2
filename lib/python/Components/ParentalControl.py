@@ -9,6 +9,7 @@ from Tools.Directories import resolveFilename, SCOPE_CONFIG
 from Tools.Notifications import AddPopup
 from enigma import eTimer, eServiceCenter, iServiceInformation, eServiceReference, eDVBDB
 import time
+import fileinput
 
 TYPE_SERVICE = "SERVICE"
 TYPE_BOUQUETSERVICE = "BOUQUETSERVICE"
@@ -30,6 +31,7 @@ def InitParentalControl():
 	config.ParentalControl.servicepin.append(ConfigPIN(default = 0))
 	config.ParentalControl.age = ConfigSelection(default = "18", choices = [("0", _("No age block"))] + list((str(x), "%d+" % x) for x in range(3,19)))
 	config.ParentalControl.hideBlacklist = ConfigYesNo(default = False)
+	config.ParentalControl.hideBouquets = ConfigYesNo(default = False)
 	config.ParentalControl.config_sections = ConfigSubsection()
 	config.ParentalControl.config_sections.main_menu = ConfigYesNo(default = False)
 	config.ParentalControl.config_sections.configuration = ConfigYesNo(default = False)
@@ -61,7 +63,7 @@ class ParentalControl:
 
 	def serviceMethodWrapper(self, service, method, *args):
 		if "FROM BOUQUET" in service:
-			method( service, TYPE_BOUQUET, *args)
+			method(service, TYPE_BOUQUET, *args)
 			servicelist = self.readServicesFromBouquet(service, "C")
 			for ref in servicelist:
 				sRef = str(ref[0])
@@ -116,11 +118,42 @@ class ParentalControl:
 		if service not in self.blacklist:
 			self.serviceMethodWrapper(service, self.addServiceToList, self.blacklist)
 			if config.ParentalControl.hideBlacklist.value and not self.sessionPinCached and config.ParentalControl.storeservicepin.value != "never":
-				eDVBDB.getInstance().addFlag(eServiceReference(service), FLAG_IS_PARENTAL_PROTECTED_HIDDEN)
+				if TYPE_BOUQUET not in service:
+					eDVBDB.getInstance().addFlag(eServiceReference(service), FLAG_IS_PARENTAL_PROTECTED_HIDDEN)
+				elif config.ParentalControl.hideBouquets.value and TYPE_BOUQUETSERVICE not in service:
+					if self.setUnsetFlagisInvisible(service):
+						self.hideBouquets += 1
+						eDVBDB.getInstance().reloadBouquets()
+
+	def setUnsetFlagisInvisible(self, service, set=True):
+		changed = False
+		serviceString = service[20:]
+		file = '.tv' in serviceString and '/etc/enigma2/bouquets.tv' or '/etc/enigma2/bouquets.radio'
+		for line in fileinput.input(file, inplace=True):
+			if serviceString in line:
+				if set:
+					if '1:7:' in line:
+						changed = True
+					print line.replace('1:7:', '1:519:').rstrip()
+				else:
+					if '1:519:' in line:
+						changed = True
+					print line.replace('1:519:', '1:7:').rstrip()
+			else:
+				print line.rstrip()
+		return changed
 
 	def unProtectService(self, service):
 		if service in self.blacklist:
 			self.serviceMethodWrapper(service, self.removeServiceFromList, self.blacklist)
+			if TYPE_BOUQUET not in service:
+				eDVBDB.getInstance().removeFlag(eServiceReference(service), FLAG_IS_PARENTAL_PROTECTED_HIDDEN)
+			elif TYPE_BOUQUETSERVICE not in service:
+				if self.setUnsetFlagisInvisible(service, False):
+					if self.hideBouquets > 0:
+						self.hideBouquets -= 1
+					eDVBDB.getInstance().reloadBouquets()
+					refreshServiceList()
 
 	def getProtectionLevel(self, service):
 		return service not in self.blacklist and -1 or 0
@@ -136,6 +169,7 @@ class ParentalControl:
 		self.sessionPinCached = False
 		self.pinIntervalSeconds = 0
 		self.pinIntervalSecondsCancel = 0
+		self.hideBouquets = 0
 
 		self.storeServicePin = config.ParentalControl.storeservicepin.value
 
@@ -171,18 +205,18 @@ class ParentalControl:
 		if result:
 			self.setSessionPinCached()
 			self.hideBlacklist()
-			self.callback(ref = service)
+			self.callback(ref=service)
 		elif result == False:
 			messageText = _("The pin code you entered is wrong.")
 			if self.session:
 				self.session.open(MessageBox, messageText, MessageBox.TYPE_INFO, timeout=3)
 			else:
-				AddPopup(messageText, MessageBox.TYPE_ERROR, timeout = 3)
+				AddPopup(messageText, MessageBox.TYPE_ERROR, timeout=3)
 
 	def saveListToFile(self, sWhichList, vList):
 		file = open(resolveFilename(SCOPE_CONFIG, sWhichList), 'w')
 		for sService,sType in vList.iteritems():
-			if TYPE_SERVICE in sType or TYPE_BOUQUET in sType:
+			if (TYPE_SERVICE in sType or TYPE_BOUQUET in sType) and not sService.startswith("-"):
 				file.write(str(sService) + "\n")
 		file.close()
 
@@ -238,13 +272,27 @@ class ParentalControl:
 		raise AttributeError, name
 
 	def hideBlacklist(self):
+		self.hideBouquets = 0
 		if self.blacklist:
+			refresh = reload = False
 			if config.ParentalControl.servicepinactive.value and config.ParentalControl.storeservicepin.value != "never" and config.ParentalControl.hideBlacklist.value and not self.sessionPinCached:
 				for ref in self.blacklist:
 					if TYPE_BOUQUET not in ref:
 						eDVBDB.getInstance().addFlag(eServiceReference(ref), FLAG_IS_PARENTAL_PROTECTED_HIDDEN)
+						refresh = True
+					elif config.ParentalControl.hideBouquets.value and TYPE_BOUQUETSERVICE not in ref:
+						if self.setUnsetFlagisInvisible(ref):
+							self.hideBouquets += 1
+							reload = True
 			else:
 				for ref in self.blacklist:
 					if TYPE_BOUQUET not in ref:
 						eDVBDB.getInstance().removeFlag(eServiceReference(ref), FLAG_IS_PARENTAL_PROTECTED_HIDDEN)
-			refreshServiceList()
+						refresh = True
+					elif TYPE_BOUQUETSERVICE not in ref:
+						if self.setUnsetFlagisInvisible(ref, False):
+							reload = True
+			if refresh:
+				refreshServiceList()
+			if reload:
+				eDVBDB.getInstance().reloadBouquets()
