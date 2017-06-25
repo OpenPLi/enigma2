@@ -14,10 +14,12 @@ from Components.ServiceList import refreshServiceList
 
 from enigma import eCableScan, eDVBFrontendParametersCable, eTimer
 
+Session = None
+
 class CableScan:
 	def __init__(self, text, progressbar, scanTuner, scanNetwork, scanFrequency, scanSymbolRate, scanModulation, keepNumbers, hdList):
-		self.text = text;
-		self.progressbar = progressbar;
+		self.text = text
+		self.progressbar = progressbar
 		self.scanTuner = scanTuner
 		self.scanNetwork = scanNetwork
 		self.scanFrequency = scanFrequency
@@ -219,7 +221,7 @@ class CableScanAutoScreen(CableScanScreen):
 		if self.getFreeTuner():
 			self.scan.start(self.freeTuner)
 		else:
-			close(False)
+			self.close(False)
 
 	def __onClose(self):
 		if self.scan:
@@ -250,9 +252,9 @@ def getNimList():
 def CableScanMain(session, **kwargs):
 	nimlist = getNimList()
 	if nimlist:
-		Session.open(CableScanScreen, nimlist)
+		session.open(CableScanScreen, nimlist)
 	else:
-		Session.open(MessageBox, _("No cable tuner found!"), type=MessageBox.TYPE_ERROR)
+		session.open(MessageBox, _("No cable tuner found!"), type=MessageBox.TYPE_ERROR)
 
 def restartScanAutoStartTimer(reply=False):
 	if reply:
@@ -263,7 +265,7 @@ def restartScanAutoStartTimer(reply=False):
 
 def CableScanAuto():
 	nimlist = getNimList()
-	if nimlist:
+	if nimlist and Session:
 		if Session.nav.RecordTimer.isRecording():
 			restartScanAutoStartTimer()
 		else:
@@ -282,11 +284,12 @@ def standbyCountChanged(value):
 
 def startSession(session, **kwargs):
 	global Session
-	Session = session
-	config.misc.standbyCounter.addNotifier(standbyCountChanged, initial_call=False)
+	if Session is None:
+		Session = session
+		config.misc.standbyCounter.addNotifier(standbyCountChanged, initial_call=False)
 
 def CableScanStart(menuid, **kwargs):
-	if menuid == "scan":
+	if menuid == "scan" and getNimList():
 		return [(_("Cable Scan"), CableScanMain, "cablescan", None)]
 	else:
 		return []
