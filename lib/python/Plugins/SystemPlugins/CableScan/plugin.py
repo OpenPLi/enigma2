@@ -16,8 +16,8 @@ from enigma import eCableScan, eDVBFrontendParametersCable, eTimer
 
 class CableScan:
 	def __init__(self, text, progressbar, scanTuner, scanNetwork, scanFrequency, scanSymbolRate, scanModulation, keepNumbers, hdList):
-		self.text = text;
-		self.progressbar = progressbar;
+		self.text = text
+		self.progressbar = progressbar
 		self.scanTuner = scanTuner
 		self.scanNetwork = scanNetwork
 		self.scanFrequency = scanFrequency
