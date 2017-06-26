@@ -367,8 +367,9 @@ def standbyCountChanged(value):
 
 def startSession(session, **kwargs):
 	global Session
-	Session = session
-	config.misc.standbyCounter.addNotifier(standbyCountChanged, initial_call=False)
+	if Session is None:
+		Session = session
+		config.misc.standbyCounter.addNotifier(standbyCountChanged, initial_call=False)
 
 def FastScanStart(menuid, **kwargs):
 	if menuid == "scan":
@@ -378,7 +379,7 @@ def FastScanStart(menuid, **kwargs):
 
 def Plugins(**kwargs):
 	if (nimmanager.hasNimType("DVB-S")):
-		return [PluginDescriptor(name=_("Fast Scan"), description="Scan Dutch/Belgian sat provider", where = PluginDescriptor.WHERE_MENU, fnc=FastScanStart),
+		return [PluginDescriptor(name=_("Fast Scan"), description="Scan Dutch/Belgian sat provider", where = PluginDescriptor.WHERE_MENU, fnc=FastScanStart, needsRestart=True),
 			PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=startSession)]
 	else:
 		return []
