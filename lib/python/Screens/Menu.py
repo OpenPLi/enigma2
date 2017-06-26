@@ -105,6 +105,8 @@ class Menu(Screen, ProtectedScreen):
 	def menuClosed(self, *res):
 		if res and res[0]:
 			self.close(True)
+		else:
+			self.createMenuList()
 
 	def addItem(self, destList, node):
 		requires = node.get("requires")
