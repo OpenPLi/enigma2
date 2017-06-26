@@ -14,8 +14,6 @@ from Components.ServiceList import refreshServiceList
 
 from enigma import eCableScan, eDVBFrontendParametersCable, eTimer
 
-Session = None
-
 class CableScan:
 	def __init__(self, text, progressbar, scanTuner, scanNetwork, scanFrequency, scanSymbolRate, scanModulation, keepNumbers, hdList):
 		self.text = text
@@ -250,11 +248,7 @@ def getNimList():
 	return [x for x in nimmanager.getNimListOfType("DVB-C") if config.Nims[x].configMode.value != "nothing"]
 
 def CableScanMain(session, **kwargs):
-	nimlist = getNimList()
-	if nimlist:
-		session.open(CableScanScreen, nimlist)
-	else:
-		session.open(MessageBox, _("No cable tuner found!"), type=MessageBox.TYPE_ERROR)
+	session.open(CableScanScreen, getNimList())
 
 def restartScanAutoStartTimer(reply=False):
 	if reply:
