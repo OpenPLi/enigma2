@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-02 19:09+0200\n"
-"PO-Revision-Date: 2017-04-03 21:06+0200\n"
+"POT-Creation-Date: 2017-06-27 18:03+0200\n"
+"PO-Revision-Date: 2017-06-27 19:13+0200\n"
 "Last-Translator: blzr <blzr@o2.pl>\n"
 "Language-Team: \n"
 "Language: pl_PL\n"
@@ -191,6 +191,10 @@ msgstr ""
 msgid "%02d:%02d"
 msgstr ""
 
+#, python-format
+msgid "%03d MB"
+msgstr ""
+
 #. TRANSLATORS: short time representation hour:minute
 #, python-format
 msgid "%2d:%02d"
@@ -199,6 +203,10 @@ msgstr ""
 #. TRANSLATORS: full time representation hour:minute:seconds
 #, python-format
 msgid "%2d:%02d:%02d"
+msgstr ""
+
+#, python-format
+msgid "%3.01f dB"
 msgstr ""
 
 msgid "%A %d %B"
@@ -216,6 +224,10 @@ msgid "%H:%M"
 msgstr "%H:%M"
 
 msgid "%Y-%m-%d %H:%M"
+msgstr ""
+
+#. TRANSLATORS: full date representations short dayname daynum monthname long year in strftime() format! See 'man strftime'
+msgid "%a %e %B %Y"
 msgstr ""
 
 #. TRANSLATORS: short date representation short dayname daynum short monthname in strftime() format! See 'man strftime'
@@ -261,6 +273,10 @@ msgstr[1] "%d pliki"
 msgstr[2] "%d plików"
 
 #, python-format
+msgid "%d fps"
+msgstr ""
+
+#, python-format
 msgid "%d hour"
 msgid_plural "%d hours"
 msgstr[0] "%d godzina"
@@ -276,6 +292,10 @@ msgstr[2] "%d zadań jest wykonywanych w tle!"
 
 #, python-format
 msgid "%d kB"
+msgstr ""
+
+#, python-format
+msgid "%d kB/s"
 msgstr ""
 
 #, python-format
@@ -334,6 +354,10 @@ msgstr ""
 
 #, python-format
 msgid "%d.%02d. %02d:%02d"
+msgstr ""
+
+#, python-format
+msgid "%d.%03d GB"
 msgstr ""
 
 msgid "%d.%B %Y"
@@ -410,8 +434,18 @@ msgstr "(nieaktywny)"
 msgid "(show optional DVD audio menu)"
 msgstr "(pokaż opcjonalne menu audio DVD)"
 
+msgid "(unknown)"
+msgstr "(nieznany)"
+
 msgid "* Only available if more than one interface is active."
 msgstr "* Dostępne tylko gdy więcej niż jeden interfejs jest aktywny."
+
+msgid "-NO SERVICE\n"
+msgstr ""
+
+#, python-format
+msgid "-SERVICE ERROR:%d\n"
+msgstr ""
 
 msgid "/s"
 msgstr ""
@@ -550,6 +584,9 @@ msgstr "<Ostatnia lokalizacja timera>"
 
 msgid "<unknown>"
 msgstr "<nieznany>"
+
+msgid "=NO STREAM\n"
+msgstr ""
 
 msgid "??"
 msgstr "??"
@@ -775,7 +812,7 @@ msgid "Adjust the color settings so that all the color shades are distinguishabl
 msgstr "Dostosuj ustawienia koloru, tak aby wszystkie odcienie były rozróżnialne, ale jak najbardziej nasycone. Jeśli jesteś zadowolony z rezultatu wciśnij OK aby wyjść z tego menu lub użyj klawiszy numerycznych aby zobaczyć inne ekrany testowe."
 
 msgid "Advanced"
-msgstr "Zaawansowane"
+msgstr "Zaawansowany"
 
 msgid "Advanced options"
 msgstr "Opcje zaawansowane"
@@ -989,6 +1026,9 @@ msgstr ""
 
 msgid "Audio"
 msgstr "Dźwięk"
+
+msgid "Audio / Video"
+msgstr ""
 
 msgid "Audio PID"
 msgstr ""
@@ -1263,6 +1303,9 @@ msgstr "Można użyć tej opcji gdy fps w napisach zewnętrznych i w filmie ró�
 msgid "Cancel"
 msgstr "Anuluj"
 
+msgid "Cancelled upon user request"
+msgstr "Anulowano na żądanie użytkownika"
+
 msgid "Cannot determine"
 msgstr "Nie można określić"
 
@@ -1385,6 +1428,12 @@ msgstr ""
 msgid "Children/Youth"
 msgstr "Dla dzieci/młodzieży"
 
+msgid "Chinese - Simplified"
+msgstr "Chiński uproszczony"
+
+msgid "Chinese - Traditional"
+msgstr "Chiński tradycyjny"
+
 msgid "Choose Tuner"
 msgstr "Wybierz tuner"
 
@@ -1450,6 +1499,9 @@ msgstr "Ustawienia kolekcji"
 
 msgid "Color format"
 msgstr "Format koloru"
+
+msgid "Combo"
+msgstr ""
 
 msgid "Command execution..."
 msgstr "Wykonywanie polecenia..."
@@ -2288,6 +2340,12 @@ msgstr "Wyświetlaj info przed odtworzeniem kolejnego filmu"
 msgid "Display setup"
 msgstr "Wyświetlacz"
 
+msgid "Do center DVB subs on this service"
+msgstr "Wyśrodkuj napisy na tym kanale"
+
+msgid "Do not center DVB subs on this service"
+msgstr "Nie wyśrodkowuj napisów na tym kanale"
+
 msgid "Do not change"
 msgstr "Nie zmieniaj"
 
@@ -2365,6 +2423,9 @@ msgid "Do you want to do another manual service scan?"
 msgstr "Czy chcesz wykonać kolejne ręczne skanowanie?"
 
 msgid "Do you want to install a channel list?"
+msgstr "Chcesz zainstalować listę kanałów?"
+
+msgid "Do you want to install plugins"
 msgstr "Chcesz zainstalować listę kanałów?"
 
 msgid "Do you want to install the package:\n"
@@ -2452,6 +2513,9 @@ msgstr "Dynamiczny kontrast"
 
 msgid "E"
 msgstr "E"
+
+msgid "ECM Info"
+msgstr ""
 
 msgid "EPG"
 msgstr ""
@@ -2745,6 +2809,9 @@ msgstr "Wyjście/OK"
 
 msgid "Expert"
 msgstr "Ekspert"
+
+msgid "Expert settings"
+msgstr "Ustawienia zaawansowane"
 
 msgid "Extend sleeptimer 15 minutes"
 msgstr "Wydłuż sleeptimer o 15 minut"
@@ -3069,6 +3136,9 @@ msgstr "Idź do poprzedniej strony z audycjami"
 msgid "Go up the list"
 msgstr "Idź w górę listy"
 
+msgid "Gold"
+msgstr ""
+
 msgid "Goto"
 msgstr "Idź do"
 
@@ -3279,6 +3349,9 @@ msgstr "Ścieżka ISO"
 msgid "Icons"
 msgstr "Ikony"
 
+msgid "If enabled, display shows 12 chars instead 8, but in latin-1/translit only."
+msgstr "Gdy włączone, wyświetlacz pokazuje 12 znaków zamiast 8, ale tylko w transliteracji latin-1."
+
 msgid ""
 "If you see this, something is wrong with\n"
 "your scart connection. Press OK to return."
@@ -3387,6 +3460,9 @@ msgstr "Wejście"
 msgid "Input "
 msgstr "Wejście "
 
+msgid "Input Stream ID"
+msgstr ""
+
 msgid "Input device setup"
 msgstr "Konfiguracjia urządzenia wejściowego"
 
@@ -3423,9 +3499,6 @@ msgstr "Instalacja zakończona."
 msgid "Installation or removal has completed."
 msgstr "Instalacja lub usuwanie zakończone."
 
-msgid "Installed: "
-msgstr "Zainstalowano:"
-
 msgid "Installing"
 msgstr "Instalowanie"
 
@@ -3443,9 +3516,6 @@ msgstr "Natychmiastowe nagranie..."
 
 msgid "Interface: "
 msgstr "Interfejs: "
-
-msgid "Intermediate"
-msgstr "Pośredni"
 
 msgid "Internal"
 msgstr "Wewnętrzny"
@@ -3532,6 +3602,9 @@ msgstr "Skocz do poprzedniej zaznaczonej pozycji"
 msgid "Just scale"
 msgstr "Po prostu skaluj"
 
+msgid "KA-SAT"
+msgstr ""
+
 msgid "Keep service"
 msgstr "Zostaw na aktualnym"
 
@@ -3579,6 +3652,9 @@ msgstr "Ostatnia aktualizacja:"
 
 msgid "Latest Commits"
 msgstr "Ostatnie commit'y"
+
+msgid "Latest upgrade log"
+msgstr "Ostatni log aktualizacji"
 
 msgid "Latitude"
 msgstr "Szerokość geogr."
@@ -3832,6 +3908,9 @@ msgctxt "Video output mode"
 msgid "Mode"
 msgstr "Tryb"
 
+msgid "Model"
+msgstr ""
+
 msgid "Model: "
 msgstr "Model: "
 
@@ -4064,6 +4143,9 @@ msgstr "Nie znaleziono (obsługiwanego) napędu DVDROM!"
 msgid "No Connection"
 msgstr "Brak połączenia"
 
+msgid "No ECMPids available (FTA Service)"
+msgstr "Brak ECM pid (kanał FTA)"
+
 msgid "No HDD found or HDD not initialized!"
 msgstr "Nie znaleziono HDD lub dysk nie jest zainicjowany!"
 
@@ -4072,9 +4154,6 @@ msgstr "Brak ograniczeń"
 
 msgid "No backup needed"
 msgstr "Nie ma potrzeby wykonywania backupu"
-
-msgid "No cable tuner found!"
-msgstr "Nie znaleziono tunera kablowego"
 
 msgid ""
 "No data on transponder!\n"
@@ -4213,6 +4292,9 @@ msgstr "Brak"
 #. TRANSLATORS: (aspect ratio policy: display as fullscreen, with stretching the left/right)
 msgid "Nonlinear"
 msgstr "Nielinearny"
+
+msgid "Normal"
+msgstr "Prosty"
 
 msgid "Normal mode"
 msgstr "Tryb standardowy"
@@ -4384,6 +4466,12 @@ msgstr "Wymagany kod PIN"
 
 msgid "PLP ID"
 msgstr ""
+
+msgid "PLS Code"
+msgstr ""
+
+msgid "PLS Mode"
+msgstr "Tryb PLS"
 
 msgid "PMT PID"
 msgstr ""
@@ -4656,8 +4744,8 @@ msgstr "Skonfiguruj tuner I"
 msgid "Please set up tuner J"
 msgstr "Skonfiguruj tuner J"
 
-msgid "Please set up tuner K"
-msgstr "Skonfiguruj tuner K"
+msgid "Please set up tuner Q"
+msgstr "Skonfiguruj tuner Q"
 
 msgid ""
 "Please use direction keys to move the PiP window.\n"
@@ -4718,6 +4806,9 @@ msgstr "Przeglądarka wtyczek"
 
 msgid "Plugin browser"
 msgstr "Przeglądarka wtyczek"
+
+msgid "Plugin install"
+msgstr "Instalacja wtyczek"
 
 msgid "Plugin manager activity information"
 msgstr "Informacja o działaniu menadżera wtyczek"
@@ -5361,6 +5452,9 @@ msgstr ""
 msgid "Romanian"
 msgstr "Rumuński"
 
+msgid "Root"
+msgstr ""
+
 msgid "Root directory"
 msgstr "Katalog root"
 
@@ -5775,6 +5869,9 @@ msgstr "Kanał został dodany do wybranego bukietu."
 msgid "Service info"
 msgstr "Parametry kanału"
 
+msgid "Service info - ECM Info"
+msgstr "Parametry kanału - ECM Info"
+
 msgid "Service info - service & PIDs"
 msgstr "Parametry serwisu - kanał i PIDy"
 
@@ -6170,9 +6267,6 @@ msgstr "Prosty"
 
 msgid "Simple titleset (compatibility for legacy players)"
 msgstr "Proste tytuły (kompatybilne z odtwarzaczami)"
-
-msgid "Simplified Chinese"
-msgstr "Chiński uproszczony"
 
 msgid "Single"
 msgstr "Pojedynczy"
@@ -6723,7 +6817,7 @@ msgid "TRANSLATOR_INFO"
 msgstr ""
 "Specjalnie dla OpenPLi - @blzr\n"
 "http://openpli.org/forums\n"
-"Ostatnia aktualizacja 2017.04.03"
+"Ostatnia aktualizacja 2017.06.27"
 
 msgid "TS file is too large for ISO9660 level 1!"
 msgstr "Plik TS jest za duży dla ISO9660 level 1!"
@@ -7259,9 +7353,6 @@ msgstr "Wszyscy klienci pobierający stream: %d (%s)"
 msgid "Track"
 msgstr "Ścieżka"
 
-msgid "Traditional Chinese"
-msgstr "Chiński tradycyjny"
-
 msgid "Transcoding: "
 msgstr ""
 
@@ -7287,7 +7378,7 @@ msgid "Tries left:"
 msgstr "Pozostało prób:"
 
 msgid "Troubleshoot"
-msgstr ""
+msgstr "Rozwiązywanie problemów"
 
 msgid "Try to find used transponders in cable network.. please wait..."
 msgstr "Próbuje odnaleźć transpondery używane w sieci kablowej... Proszę czekać..."
@@ -7392,6 +7483,9 @@ msgstr ""
 msgid "Uncover dashed flickering line for this service"
 msgstr "Odkryj przerywaną linię dla tego kanału"
 
+msgid "Undefined"
+msgstr "Niezdefiniowany"
+
 msgid "Undo install"
 msgstr "Anuluj instalację"
 
@@ -7467,6 +7561,9 @@ msgstr "Ustawienia"
 
 msgid "Use"
 msgstr "Użyj"
+
+msgid "Use 12 characters display mode"
+msgstr "Użyj 12 znakowego trybu wyświetlacza"
 
 msgid "Use DHCP"
 msgstr "Użyj DHCP"
@@ -9066,6 +9163,9 @@ msgstr "Nieskonfigurowany"
 msgid "not locked"
 msgstr "Nie zablokowany"
 
+msgid "not running"
+msgstr "nieuruchomiony"
+
 msgid "not supported"
 msgstr "Nieobsługiwany"
 
@@ -9119,6 +9219,9 @@ msgstr "Język oryginalny"
 
 msgid "pass"
 msgstr "Przejście"
+
+msgid "pausing"
+msgstr "zatrzymany"
 
 msgid "performing arts"
 msgstr "Sztuka"
@@ -9213,6 +9316,9 @@ msgstr "Powtórz playlistę"
 msgid "repeated"
 msgstr "Powtórzone"
 
+msgid "reserved for future use"
+msgstr "zarezerwowany do wykorzystania w przyszłości"
+
 msgid "restore deleted userbouquets"
 msgstr "Przywróć usunięte bukiety"
 
@@ -9236,6 +9342,9 @@ msgstr "Rock/Pop"
 
 msgid "romance"
 msgstr "Romans"
+
+msgid "running"
+msgstr "uruchomiony"
 
 msgid "save last directory on exit"
 msgstr "Zapisz ostatni katalog przy wyjściu"
@@ -9272,6 +9381,9 @@ msgstr "Film klasyka/historia/religia"
 
 msgid "service is in bouquet parental protection"
 msgstr "Kanał jest w bukiecie zabezpieczonym kontrolą rodzicielską"
+
+msgid "service off-air"
+msgstr "serwis wyłączony"
 
 msgid "set as startup service"
 msgstr "Ustaw jako kanał startowy"
@@ -9354,6 +9466,9 @@ msgstr "Rozpocznij cięcie tutaj"
 msgid "start directory"
 msgstr "Katalog początkowy"
 
+msgid "starts in a few seconds"
+msgstr "rozpocznie się za kilka sekund"
+
 msgid "stepsize"
 msgstr "Rozmiar kroku"
 
@@ -9416,6 +9531,9 @@ msgstr "Podróże/Turystyka"
 
 msgid "true"
 msgstr "tak"
+
+msgid "type"
+msgstr "typ "
 
 msgid "unavailable"
 msgstr "Niedostępny"
