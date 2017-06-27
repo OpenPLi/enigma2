@@ -3,25 +3,13 @@ from Screens.MessageBox import MessageBox
 from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import ActionMap
 from Components.Label import Label
-from Components.config import ConfigElement, ConfigSelection, getConfigListEntry, KEY_OK
+from Components.config import ConfigSelection, getConfigListEntry, ConfigAction
 from Components.ScrollLabel import ScrollLabel
 from Tools.GetEcmInfo import GetEcmInfo
 
 import os
 from Tools.camcontrol import CamControl
 from enigma import eTimer
-
-class ConfigAction(ConfigElement):
-	def __init__(self, action, *args):
-		ConfigElement.__init__(self)
-		self.value = "(OK)"
-		self.action = action
-		self.actionargs = args
-	def handleKey(self, key):
-		if (key == KEY_OK):
-			self.action(*self.actionargs)
-	def getMulti(self, dummy):
-		pass
 
 class SoftcamSetup(Screen, ConfigListScreen):
 	skin = """
