@@ -329,7 +329,7 @@ def restartScanAutoStartTimer(reply=False):
 	if not reply:
 		print "[AutoFastScan] Scan was not succesfully retry in one hour"
 		FastScanAutoStartTimer.startLongTimer(3600)
-	else:
+	elif Session:
 		global autoproviders
 		if autoproviders:
 			provider = autoproviders.pop(0)
@@ -341,18 +341,19 @@ def restartScanAutoStartTimer(reply=False):
 		FastScanAutoStartTimer.startLongTimer(86400)
 
 def FastScanAuto():
-	lastConfiguration = eval(config.misc.fastscan.last_configuration.value)
-	if not lastConfiguration or Session.nav.RecordTimer.isRecording():
-		restartScanAutoStartTimer()
-	else:
-		if config.misc.fastscan.auto.value == "multi":
-			global autoproviders
-			autoproviders = config.misc.fastscan.autoproviders.value.split(",")
-			if autoproviders:
-				provider = autoproviders.pop(0)
-				if provider:
-					lastConfiguration = (lastConfiguration[0], provider, lastConfiguration[2], lastConfiguration[3], lastConfiguration[4], len(lastConfiguration) > 5 and lastConfiguration[5])
-		Session.openWithCallback(restartScanAutoStartTimer, FastScanAutoScreen, lastConfiguration)
+	if Session:
+		lastConfiguration = eval(config.misc.fastscan.last_configuration.value)
+		if not lastConfiguration or Session.nav.RecordTimer.isRecording():
+			restartScanAutoStartTimer()
+		else:
+			if config.misc.fastscan.auto.value == "multi":
+				global autoproviders
+				autoproviders = config.misc.fastscan.autoproviders.value.split(",")
+				if autoproviders:
+					provider = autoproviders.pop(0)
+					if provider:
+						lastConfiguration = (lastConfiguration[0], provider, lastConfiguration[2], lastConfiguration[3], lastConfiguration[4], len(lastConfiguration) > 5 and lastConfiguration[5])
+			Session.openWithCallback(restartScanAutoStartTimer, FastScanAutoScreen, lastConfiguration)
 
 FastScanAutoStartTimer.callback.append(FastScanAuto)
 
@@ -365,10 +366,14 @@ def standbyCountChanged(value):
 		inStandby.onClose.append(leaveStandby)
 		FastScanAutoStartTimer.startLongTimer(90)
 
-def startSession(session, **kwargs):
+def autostart(reason, **kwargs):
 	global Session
-	Session = session
-	config.misc.standbyCounter.addNotifier(standbyCountChanged, initial_call=False)
+	if reason == 0 and "session" in kwargs and Session is None:
+		Session = kwargs["session"]
+		config.misc.standbyCounter.addNotifier(standbyCountChanged, initial_call=False)
+	elif reason == 1:
+		Session = None
+		config.misc.standbyCounter.removeNotifier(standbyCountChanged)
 
 def FastScanStart(menuid, **kwargs):
 	if menuid == "scan":
@@ -379,6 +384,6 @@ def FastScanStart(menuid, **kwargs):
 def Plugins(**kwargs):
 	if (nimmanager.hasNimType("DVB-S")):
 		return [PluginDescriptor(name=_("Fast Scan"), description="Scan Dutch/Belgian sat provider", where = PluginDescriptor.WHERE_MENU, fnc=FastScanStart),
-			PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=startSession)]
+			PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=autostart)]
 	else:
 		return []
