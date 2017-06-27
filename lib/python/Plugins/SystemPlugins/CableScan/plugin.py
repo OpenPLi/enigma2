@@ -248,7 +248,7 @@ def getNimList():
 	return [x for x in nimmanager.getNimListOfType("DVB-C") if config.Nims[x].configMode.value != "nothing"]
 
 def CableScanMain(session, **kwargs):
-		Session.open(CableScanScreen, getNimList())
+	session.open(CableScanScreen, getNimList())
 
 def restartScanAutoStartTimer(reply=False):
 	if reply:
@@ -259,7 +259,7 @@ def restartScanAutoStartTimer(reply=False):
 
 def CableScanAuto():
 	nimlist = getNimList()
-	if nimlist:
+	if nimlist and Session:
 		if Session.nav.RecordTimer.isRecording():
 			restartScanAutoStartTimer()
 		else:
@@ -278,8 +278,9 @@ def standbyCountChanged(value):
 
 def startSession(session, **kwargs):
 	global Session
-	Session = session
-	config.misc.standbyCounter.addNotifier(standbyCountChanged, initial_call=False)
+	if Session is None:
+		Session = session
+		config.misc.standbyCounter.addNotifier(standbyCountChanged, initial_call=False)
 
 def CableScanStart(menuid, **kwargs):
 	if menuid == "scan" and getNimList():
