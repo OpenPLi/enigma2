@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-03 22:01+0100\n"
-"PO-Revision-Date: 2017-03-03 22:11+0100\n"
-"Last-Translator: Pr2 <dummy@dummy.com>\n"
+"POT-Creation-Date: 2017-06-29 17:37+0200\n"
+"PO-Revision-Date: 2017-06-29 17:51+0200\n"
+"Last-Translator: Pr2\n"
 "Language-Team: french\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -192,6 +192,10 @@ msgstr "%.2f GB"
 msgid "%02d:%02d"
 msgstr "%02d:%02d"
 
+#, python-format
+msgid "%03d MB"
+msgstr "%03d MB"
+
 #. TRANSLATORS: short time representation hour:minute
 #, python-format
 msgid "%2d:%02d"
@@ -201,6 +205,10 @@ msgstr "%2d:%02d"
 #, python-format
 msgid "%2d:%02d:%02d"
 msgstr "%2d:%02d:%02d"
+
+#, python-format
+msgid "%3.01f dB"
+msgstr "%3.01f dB"
 
 msgid "%A %d %B"
 msgstr "%A %d %B"
@@ -218,6 +226,10 @@ msgstr "%H:%M"
 
 msgid "%Y-%m-%d %H:%M"
 msgstr "%Y-%m-%d %H:%M"
+
+#. TRANSLATORS: full date representations short dayname daynum monthname long year in strftime() format! See 'man strftime'
+msgid "%a %e %B %Y"
+msgstr "%a %e %B %Y"
 
 #. TRANSLATORS: short date representation short dayname daynum short monthname in strftime() format! See 'man strftime'
 msgid "%a %e/%m"
@@ -259,6 +271,10 @@ msgstr[0] "%d fichier"
 msgstr[1] "%d fichiers"
 
 #, python-format
+msgid "%d fps"
+msgstr "%d fps"
+
+#, python-format
 msgid "%d hour"
 msgid_plural "%d hours"
 msgstr[0] "%d heure"
@@ -273,6 +289,10 @@ msgstr[1] "%d taches fonctionnent en arrière-plan!"
 #, python-format
 msgid "%d kB"
 msgstr "%d kB"
+
+#, python-format
+msgid "%d kB/s"
+msgstr "%d kB/s"
 
 #, python-format
 msgid "%d min"
@@ -326,6 +346,10 @@ msgstr "%d-%m"
 #, python-format
 msgid "%d.%02d. %02d:%02d"
 msgstr "%d.%02d. %02d:%02d"
+
+#, python-format
+msgid "%d.%03d GB"
+msgstr "%d.%03d GB"
 
 msgid "%d.%B %Y"
 msgstr "%d.%B %Y"
@@ -381,6 +405,9 @@ msgstr "%s/%s: %s"
 msgid "%s:%s"
 msgstr "%s:%s"
 
+msgid "(VU+ type)"
+msgstr "(type VU+)"
+
 msgid "(ZAP)"
 msgstr "(ZAP)"
 
@@ -397,8 +424,18 @@ msgstr "(désactivé)"
 msgid "(show optional DVD audio menu)"
 msgstr "(Afficher menu audio DVD optionnel)"
 
+msgid "(unknown)"
+msgstr "(inconnu)"
+
 msgid "* Only available if more than one interface is active."
 msgstr "* Seulement disponible si plus d'une interface est active."
+
+msgid "-NO SERVICE\n"
+msgstr "-PAS DE SERVICE\n"
+
+#, python-format
+msgid "-SERVICE ERROR:%d\n"
+msgstr "-ERREUR AU SERVICE:%d\n"
 
 msgid "/s"
 msgstr "/s"
@@ -472,6 +509,15 @@ msgstr "3"
 msgid "30"
 msgstr "30"
 
+msgid "3D surround"
+msgstr "3D surround"
+
+msgid "3D surround softlimiter"
+msgstr "3D surround limiteur doux"
+
+msgid "3D surround speaker position"
+msgstr "3D surround position des hauts-parleurs"
+
 msgid "3d mode"
 msgstr "Mode 3D"
 
@@ -528,6 +574,9 @@ msgstr "<Emplacement dernière programmation>"
 
 msgid "<unknown>"
 msgstr "<inconnu>"
+
+msgid "=NO STREAM\n"
+msgstr "=PAS DE FLUX (STREAM)\n"
 
 msgid "??"
 msgstr "??"
@@ -827,6 +876,9 @@ msgstr "Autoriser les sous-titres pour malentendants"
 msgid "Alpha"
 msgstr "Transparence"
 
+msgid "Also hide bouquets"
+msgstr "Masquer aussi les bouquets"
+
 msgid "Also on standby"
 msgstr "Aussi en veille"
 
@@ -968,8 +1020,14 @@ msgstr ""
 msgid "Audio"
 msgstr "Audio"
 
+msgid "Audio / Video"
+msgstr "Audio / Vidéo"
+
 msgid "Audio PID"
 msgstr "PID audio"
+
+msgid "Audio auto volume level"
+msgstr "Niveau du volume audio automatique"
 
 msgid "Audio language selection 1"
 msgstr "Sélection de la langue audio 1"
@@ -996,6 +1054,9 @@ msgstr "Format piste audio (%s)"
 #, python-format
 msgid "Audio track (%s) language"
 msgstr "Langue piste audio (%s)"
+
+msgid "Audio volume step size"
+msgstr "Taille du pas du volume audio"
 
 msgid "Author: "
 msgstr "Auteur: "
@@ -1060,6 +1121,15 @@ msgstr "BER"
 
 msgid "BER:"
 msgstr "BER:"
+
+msgid "BT 2020 CL"
+msgstr "BT 2020 CL"
+
+msgid "BT 2020 NCL"
+msgstr "BT 2020 NCL"
+
+msgid "BT 709"
+msgstr "BT 709"
 
 msgid "Back"
 msgstr "Retour"
@@ -1226,6 +1296,9 @@ msgstr "Peut-être utilisé pour différents fps entre les sous-titres externes 
 msgid "Cancel"
 msgstr "Annuler"
 
+msgid "Cancelled upon user request"
+msgstr "Annulé à la demande de l’utilisateur"
+
 msgid "Cannot determine"
 msgstr "Impossible à déterminer"
 
@@ -1348,6 +1421,12 @@ msgstr ""
 msgid "Children/Youth"
 msgstr "Enfant/Jeune"
 
+msgid "Chinese - Simplified"
+msgstr "Chinois - Simplifié"
+
+msgid "Chinese - Traditional"
+msgstr "Chinois - Traditionnel"
+
 msgid "Choose Tuner"
 msgstr "Choisir tuner"
 
@@ -1413,6 +1492,9 @@ msgstr "Paramètres de la collection"
 
 msgid "Color format"
 msgstr "Format de couleur"
+
+msgid "Combo"
+msgstr "Combo"
 
 msgid "Command execution..."
 msgstr "Exécution de la commande..."
@@ -1603,6 +1685,9 @@ msgstr "Configure le retard général des pistes audio Dolby Digital."
 
 msgid "Configure the general audio delay of stereo sound tracks."
 msgstr "Configure le retard général des pistes audio stéréo."
+
+msgid "Configure the general audio volume step size (limit 1-10)."
+msgstr "Configure la taille du pas du volume audio général (limite 1-10). "
 
 msgid "Configure the hard disk drive to go to standby after the specified idle time."
 msgstr "Configure le disque dur pour passer en mode veille après la durée spécifiée d'inactivité."
@@ -1933,6 +2018,9 @@ msgstr "Tchèque"
 msgid "D"
 msgstr "D"
 
+msgid "DAC"
+msgstr "DAC"
+
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -2010,6 +2098,9 @@ msgstr "Date"
 
 msgid "Date/time input"
 msgstr "Entrée Date/Heure"
+
+msgid "Debug to file"
+msgstr "Débogguer vers un fichier"
 
 msgid "Deep standby"
 msgstr "Veille profonde"
@@ -2134,6 +2225,9 @@ msgstr "Désélectionner"
 msgid "Details for plugin: "
 msgstr "Détails pour plugin: "
 
+msgid "Detect next boxes before standby"
+msgstr "Détecter les autres équipements avant de se mettre en veille"
+
 msgid "Detected HDD:"
 msgstr "Disque(s) détecté(s):"
 
@@ -2239,6 +2333,12 @@ msgstr "Afficher un message avant de lancer le prochain film"
 msgid "Display setup"
 msgstr "Paramètres d'affichage"
 
+msgid "Do center DVB subs on this service"
+msgstr "Centrer les subs DVB pour ce service"
+
+msgid "Do not center DVB subs on this service"
+msgstr "Ne pas centrer les subs DVB pour ce service"
+
 msgid "Do not change"
 msgstr "Ne pas changer"
 
@@ -2317,6 +2417,9 @@ msgstr "Voulez-vous faire une autre analyse manuelle des services ?"
 
 msgid "Do you want to install a channel list?"
 msgstr "Voulez-vous installer la liste des chaînes ?"
+
+msgid "Do you want to install plugins"
+msgstr "Voulez-vous installer des extensions/plugins"
 
 msgid "Do you want to install the package:\n"
 msgstr "Voulez-vous installer le paquet:\n"
@@ -2402,6 +2505,9 @@ msgstr "Contraste dynamique"
 
 msgid "E"
 msgstr "E"
+
+msgid "ECM Info"
+msgstr "ECM Info"
 
 msgid "EPG"
 msgstr "EPG"
@@ -2601,6 +2707,9 @@ msgstr "Code d'erreur"
 msgid "Error executing plugin"
 msgstr "Erreur d'exécution de l'extension"
 
+msgid "Error stop stream!"
+msgstr "Erreur arrêt du stream (diffusion)!"
+
 #, python-format
 msgid ""
 "Error: %s\n"
@@ -2693,6 +2802,9 @@ msgstr "Exit/OK"
 msgid "Expert"
 msgstr "Expert"
 
+msgid "Expert settings"
+msgstr "Paramètres experts"
+
 msgid "Extend sleeptimer 15 minutes"
 msgstr "Étendre l'arrêt automatique de 15 minutes"
 
@@ -2751,8 +2863,8 @@ msgstr "Heure de début supplémentaire pour ignorer l'arrêt automatique"
 msgid "F"
 msgstr "F"
 
-msgid "F1/F3/F4"
-msgstr "F1/F3/F4"
+msgid "F1/F3/F4/F4-TURBO"
+msgstr "F1/F3/F4/F4-TURBO"
 
 msgid "FBC SCR (Unicable/JESS)"
 msgstr "FBC SCR (Unicable/JESS)"
@@ -3016,6 +3128,9 @@ msgstr "Aller à la page précédente des services"
 msgid "Go up the list"
 msgstr "Remonter la liste"
 
+msgid "Gold"
+msgstr "Gold"
+
 msgid "Goto"
 msgstr "Aller vers"
 
@@ -3079,17 +3194,29 @@ msgstr "H"
 msgid "HD list"
 msgstr "Liste HD"
 
-msgid "HD1100/HD1200/HD1265/et7x00/et8500/et7000mini"
-msgstr "HD1100/HD1200/HD1265/et7x00/et8500/et7000mini"
+msgid "HD11/HD51/HD1100/HD1200/HD1265/HD1500/HD500C/HD530C/VS1000/VS1500/et7x00/et8500/et7000mini"
+msgstr "HD11/HD51/HD1100/HD1200/HD1265/HD1500/HD500C/HD530C/VS1000/VS1500/et7x00/et8500/et7000mini"
 
 msgid "HD2400"
 msgstr "HD2400"
 
+msgid "HDMI"
+msgstr "HDMI"
+
 msgid "HDMI Colordepth"
 msgstr "Profondeur de couleurs HDMI"
 
+msgid "HDMI Colorimetry"
+msgstr "Colorimétrie HDMI"
+
 msgid "HDMI Colorspace"
 msgstr "Espace colorimétrique HDMI"
+
+msgid "HDMI-CEC Source Active"
+msgstr "HDMI-CEC source active"
+
+msgid "HDMI-CEC Source Inactive"
+msgstr "HDMI-CEC source Inactive"
 
 msgid "HDMI-CEC setup"
 msgstr "Configurer HDMI-CEC"
@@ -3214,6 +3341,9 @@ msgstr "Chemin ISO"
 msgid "Icons"
 msgstr "Icônes"
 
+msgid "If enabled, display shows 12 chars instead 8, but in latin-1/translit only."
+msgstr "Si activé, l’affichage montre 12 caractères à la place de 8, mais en latin-1/translit uniquement."
+
 msgid ""
 "If you see this, something is wrong with\n"
 "your scart connection. Press OK to return."
@@ -3319,6 +3449,9 @@ msgstr "Entrée"
 msgid "Input "
 msgstr "Entrée "
 
+msgid "Input Stream ID"
+msgstr "Entré le Stream ID"
+
 msgid "Input device setup"
 msgstr "Paramètres du périphérique entrée"
 
@@ -3349,17 +3482,11 @@ msgstr "Installer extension locale"
 msgid "Install picons on"
 msgstr "Installer les picons sur"
 
-msgid "Install softcam"
-msgstr "Installer softcam"
-
 msgid "Installation has completed."
 msgstr "L'installation est terminée."
 
 msgid "Installation or removal has completed."
 msgstr "L'installation ou le retrait est terminé."
-
-msgid "Installed: "
-msgstr "Installé:"
 
 msgid "Installing"
 msgstr "Installation"
@@ -3378,9 +3505,6 @@ msgstr "Enregistrement Immédiat..."
 
 msgid "Interface: "
 msgstr "Interface: "
-
-msgid "Intermediate"
-msgstr "Intermédiaire"
 
 msgid "Internal"
 msgstr "Interne"
@@ -3467,11 +3591,17 @@ msgstr "Se rendre à la position marquée précédente"
 msgid "Just scale"
 msgstr "Juste mettre à l'échelle"
 
+msgid "KA-SAT"
+msgstr "KA-SAT"
+
 msgid "Keep service"
 msgstr "Garder le service"
 
 msgid "Kernel version: "
 msgstr "Version du noyau: "
+
+msgid "Key Events"
+msgstr "Evènements clés"
 
 msgid "Keyboard"
 msgstr "Clavier"
@@ -3511,6 +3641,9 @@ msgstr "Dernière mise à jour: "
 
 msgid "Latest Commits"
 msgstr "Derniers changements"
+
+msgid "Latest upgrade log"
+msgstr "Log de la dernière mise à jour"
 
 msgid "Latitude"
 msgstr "Latitude"
@@ -3742,6 +3875,9 @@ msgstr "Message"
 msgid "Message..."
 msgstr "Message..."
 
+msgid "Messages"
+msgstr "Messages"
+
 #, python-format
 msgid "Minimum age %d years"
 msgstr "Age minimum %d ans"
@@ -3759,6 +3895,9 @@ msgstr "Mode"
 msgctxt "Video output mode"
 msgid "Mode"
 msgstr "Mode"
+
+msgid "Model"
+msgstr "Modèle"
 
 msgid "Model: "
 msgstr "Modèle: "
@@ -3992,6 +4131,9 @@ msgstr "Aucun lecteur DVD (supporté) trouvé!"
 msgid "No Connection"
 msgstr "Pas de connexion"
 
+msgid "No ECMPids available (FTA Service)"
+msgstr "Pas de ECMPids disponible (Service en clair (FTA))"
+
 msgid "No HDD found or HDD not initialized!"
 msgstr "Aucun disque dur trouvé, ou disque dur non initialisé!"
 
@@ -4000,9 +4142,6 @@ msgstr "Pas de blocage sur l'âge"
 
 msgid "No backup needed"
 msgstr "Pas de sauvegarde nécessaire"
-
-msgid "No cable tuner found!"
-msgstr "Aucun tuner câble trouvé!"
 
 msgid ""
 "No data on transponder!\n"
@@ -4142,6 +4281,9 @@ msgstr "Aucun"
 msgid "Nonlinear"
 msgstr "Non linéaire"
 
+msgid "Normal"
+msgstr "Normal"
+
 msgid "Normal mode"
 msgstr "Mode normal"
 
@@ -4166,6 +4308,9 @@ msgstr "Espace disque insuffisant. Veuillez libérer de l'espace disque et rées
 
 msgid "Not tested:"
 msgstr "Pas testé:"
+
+msgid "Not yet implemented!"
+msgstr "Pas encore implémenté!"
 
 msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'."
 msgstr "Note: lorsqu’activé, et que vous voulez mettre votre récepteur en veille après un réveil, mettre l’option ‘Démarrer en mode veille ‘ comme ‘Non, excepté la minuterie de réveil’."
@@ -4309,6 +4454,12 @@ msgstr "Code PIN requis"
 
 msgid "PLP ID"
 msgstr "PLP ID"
+
+msgid "PLS Code"
+msgstr "Code PLS"
+
+msgid "PLS Mode"
+msgstr "Mode PLS"
 
 msgid "PMT PID"
 msgstr "PID PMT"
@@ -4581,8 +4732,8 @@ msgstr "Veuillez paramétrer le tuner I"
 msgid "Please set up tuner J"
 msgstr "Veuillez paramétrer le tuner J"
 
-msgid "Please set up tuner K"
-msgstr "Veuillez paramétrer le tuner K"
+msgid "Please set up tuner Q"
+msgstr "Veuillez paramétrer le tuner Q"
 
 msgid ""
 "Please use direction keys to move the PiP window.\n"
@@ -4601,9 +4752,6 @@ msgstr "Veuillez patienter."
 
 msgid "Please wait (downloading channel list)"
 msgstr "Veuillez patienter (téléchargement de la liste des chaînes)"
-
-msgid "Please wait (downloading softcam)"
-msgstr "Veuillez patienter (téléchargement du softcam)"
 
 msgid "Please wait (updating packages)"
 msgstr "Veuillez patienter (mise à jour des paquets)"
@@ -4646,6 +4794,9 @@ msgstr "Navigateur d'extensions"
 
 msgid "Plugin browser"
 msgstr "Navigateur d'extensions"
+
+msgid "Plugin install"
+msgstr "Installation extension/plugin"
 
 msgid "Plugin manager activity information"
 msgstr "Information d'activité gestionnaire plugin"
@@ -5048,6 +5199,9 @@ msgstr "Vitesse de rafraîchissement"
 msgid "Refresh rate selection."
 msgstr "Sélection de vitesse de rafraîchissement "
 
+msgid "Refusing to move to the same directory"
+msgstr "Refus de déplacer vers le même répertoire"
+
 msgid "Regard deep standby as standby"
 msgstr "Gérer la mise en 'veille profonde' comme 'en veille'"
 
@@ -5077,6 +5231,9 @@ msgstr "Rappel, vous avez choisi de sauvegarder votre fichier PauseDirect."
 
 msgid "Remote control type"
 msgstr "Type de télécommande"
+
+msgid "Remote control type setup"
+msgstr "Configuration du type de télécommande"
 
 msgid "Removal has completed."
 msgstr "Suppression terminée."
@@ -5154,6 +5311,12 @@ msgstr "Répétitions"
 
 msgid "Replace `- ` in dialogs with colored text per speaker (like teletext subtitles for the hearing impaired)"
 msgstr "Remplacer `- ` dans les dialogues avec un texte coloré par intervenant (comme les sous-titres télétexte pour les malentendants)."
+
+msgid "Request for physical address report"
+msgstr "Demande du rapport d’adresse physique"
+
+msgid "Request for vendor report"
+msgstr "Demande de rapport du fournisseur"
 
 msgid "Require authentication for http streams"
 msgstr "Exiger une authentification pour les flux HTTP"
@@ -5277,6 +5440,9 @@ msgstr "Sortie"
 msgid "Romanian"
 msgstr "Roumain"
 
+msgid "Root"
+msgstr "Root"
+
 msgid "Root directory"
 msgstr "Répertoire racine"
 
@@ -5318,6 +5484,9 @@ msgstr "SNR"
 
 msgid "SNR:"
 msgstr "SNR:"
+
+msgid "SPDIF"
+msgstr "SPDIF"
 
 msgid "SRT file"
 msgstr "Fichier SRT"
@@ -5575,6 +5744,9 @@ msgstr "Sélectionnez la destination de copie pour:"
 msgid "Select destination for:"
 msgstr "Sélectionnez une destination pour:"
 
+msgid "Select directory for logfile"
+msgstr "Définir le répertoire pour le fichier log"
+
 msgid "Select files for backup."
 msgstr "Choisir fichiers pour la sauvegarde."
 
@@ -5595,6 +5767,9 @@ msgstr "Choisir la localisation"
 
 msgid "Select movie"
 msgstr "Choisir un film"
+
+msgid "Select path for logfile"
+msgstr "Choisir le répertoire pour le fichier log"
 
 msgid "Select provider to add..."
 msgstr "Choisir opérateur à ajouter..."
@@ -5679,6 +5854,9 @@ msgstr "Le service a été ajouté au bouquet sélectionné."
 
 msgid "Service info"
 msgstr "Info service"
+
+msgid "Service info - ECM Info"
+msgstr "Info service - info ECM"
 
 msgid "Service info - service & PIDs"
 msgstr "Info du service - service & PIDs"
@@ -6010,6 +6188,9 @@ msgstr "Afficher sélection sous-service"
 msgid "Show subtitle selection"
 msgstr "Afficher sélection sous-titre"
 
+msgid "Show symbols on display"
+msgstr "Afficher les symbôles sur l'affichage avant"
+
 msgid "Show the radio player..."
 msgstr "Afficher le lecteur radio..."
 
@@ -6072,9 +6253,6 @@ msgstr "Simple"
 
 msgid "Simple titleset (compatibility for legacy players)"
 msgstr "Jeu titre simple (compatibilité descendante lecteurs)"
-
-msgid "Simplified Chinese"
-msgstr "Chinoix simplifié"
 
 msgid "Single"
 msgstr "Unique"
@@ -6163,9 +6341,6 @@ msgstr "Configuration Softcam"
 
 msgid "Softcam setup"
 msgstr "Configuration Softcam"
-
-msgid "Softcam type"
-msgstr "Type softcam"
 
 msgid "Software"
 msgstr "Logiciel"
@@ -6383,11 +6558,11 @@ msgstr "Stop"
 msgid "Stop PiP"
 msgstr "Arrêter PiP"
 
-msgid "Stop Streams"
-msgstr "Stopper les streams (diffusions)"
-
 msgid "Stop all current recordings"
 msgstr "Arrêter tous les enregistrements en cours?"
+
+msgid "Stop all streams"
+msgstr "Stopper tous les streams (diffusions)"
 
 msgid "Stop and delete all current recordings"
 msgstr "Arrêter et effacer tous les enregistrements courants"
@@ -6406,6 +6581,9 @@ msgstr "Stopper événement courant et désactiver les prochains"
 
 msgid "Stop current event but not coming events"
 msgstr "Stopper événement courant mais pas les prochains"
+
+msgid "Stop current stream"
+msgstr "Stopper le stream courant (diffusion)"
 
 msgid "Stop entry"
 msgstr "Arrêter entrée"
@@ -6626,7 +6804,7 @@ msgstr ""
 "Traduction Française\n"
 "Enigma2 - OpenPLi\n"
 "Support: www.openpli.org\n"
-"Dernière MAJ: 3 mars 2017"
+"Dernière MAJ: 29 juin 2017"
 
 msgid "TS file is too large for ISO9660 level 1!"
 msgstr "Fichier TS trop grand pour le niveau 1 ISO9660!"
@@ -6898,11 +7076,29 @@ msgstr ""
 msgid "This option allows you can config the Colordepth for UHD"
 msgstr "Cette option vous permet de configurer la profondeur des couleurs pour UHD"
 
+msgid "This option allows you can config the Colorimetry for HDR."
+msgstr "Cette option vous permet de configurer la colorimétrie pour HDR."
+
 msgid "This option allows you can config the Colorspace from Auto to RGB"
 msgstr "Cette option vous permet de configurer l’espace colorimétrique de Auto vers RGB"
 
+msgid "This option allows you show all symbols on display."
+msgstr "Cette option vous permet d’afficher tous les symboles sur l’affichage avant."
+
 msgid "This option allows you to add the softcam setup in the extensions menu."
 msgstr "Cette option vous permet d'ajouter la configuration softcam dans le menu des extensions."
+
+msgid "This option allows you to change the virtuell loadspeaker position."
+msgstr "Cette option vous permet de changer la position des haut-parleurs virtuels."
+
+msgid "This option allows you to disable or change the virtuell loadspeaker position."
+msgstr "Cette option vous permet de désactiver ou modifier la position des haut-parleurs virtuels."
+
+msgid "This option allows you to enable 3D surround softlimiter."
+msgstr "Cette option vous permet d’activer le limiteur doux du 3D surround"
+
+msgid "This option allows you to enable 3D surround sound."
+msgstr "Cette option vous permet d’activer le son 3D surround."
 
 msgid "This option allows you to hide and sort menu entries. When selecting user you can change order and hide menu items via the blue button"
 msgstr "Cette option vous permet de masquer et trier les entrées des menus. Lorsqu’il est activé vous pouvez changer l’ordre et masquer les entrées des menus via le bouton bleu."
@@ -6918,6 +7114,9 @@ msgstr "Cette option vous permet d'afficher les chemins des menus."
 
 msgid "This option can be useful for long HDMI cables."
 msgstr "Cette option est utile pour les câbles HDMI longs."
+
+msgid "This option configures you can set auto volume level."
+msgstr "Cette option configure le niveau du volume audio automatique."
 
 msgid "This plugin is installed."
 msgstr "Ce plugin est installé."
@@ -7142,9 +7341,6 @@ msgstr "Nombre total de clients de flux (stream) : %d (%s)"
 msgid "Track"
 msgstr "Piste"
 
-msgid "Traditional Chinese"
-msgstr "Chinois traditionnel"
-
 msgid "Transcoding: "
 msgstr "Transcodage: "
 
@@ -7279,6 +7475,9 @@ msgstr ""
 msgid "Uncover dashed flickering line for this service"
 msgstr "Découvrir les scintillements en pointillés pour ce service"
 
+msgid "Undefined"
+msgstr "Indéfini"
+
 msgid "Undo install"
 msgstr "Défaire installation"
 
@@ -7353,6 +7552,9 @@ msgstr "Paramétrer usage"
 
 msgid "Use"
 msgstr "Utiliser"
+
+msgid "Use 12 characters display mode"
+msgstr "Utiliser le mode d’affichage 12 caractères"
 
 msgid "Use DHCP"
 msgstr "Utiliser DHCP"
@@ -7993,9 +8195,6 @@ msgstr "Sans le popup"
 msgid "Wizard to arrange the overscan"
 msgstr "Assistant pour régler l'overscan"
 
-msgid "Would you like to install a softcam?"
-msgstr "Voulez-vous installer un softcam ?"
-
 #, python-format
 msgid "Would you save the entered PIN %s persistent?"
 msgstr "Voulez-vous enregistrer le code PIN %s comme persistant?"
@@ -8311,8 +8510,8 @@ msgstr "Zapper sur la chaîne sélectionnée, ou afficher l'information d'évén
 msgid "Zap up"
 msgstr "Zap haut"
 
-msgid "Zgemma H.S/H.2S/H.2H/H5"
-msgstr "Zgemma H.S/H.2S/H.2H/H5"
+msgid "Zgemma H.S/H.2S/H.2H/H5/H7"
+msgstr "Zgemma H.S/H.2S/H.2H/H5/H7"
 
 msgid "Zgemma Star S/2S/H1/H2"
 msgstr "Zgemma Star S/2S/H1/H2"
@@ -8479,6 +8678,9 @@ msgstr "Bleu"
 
 msgid "bottom"
 msgstr "Bas"
+
+msgid "bouquets"
+msgstr "favoris"
 
 msgid "broadcasting/press"
 msgstr "Diffusion/Presse"
@@ -8683,6 +8885,9 @@ msgstr "Quitter menu réglages adaptateur réseau"
 
 msgid "experimental film/video"
 msgstr "Film expérimental/Vidéo"
+
+msgid "extra wide"
+msgstr "extra large"
 
 msgid "failed"
 msgstr "échoué"
@@ -8954,6 +9159,9 @@ msgstr "Pas configuré"
 msgid "not locked"
 msgstr "Pas verrouillé"
 
+msgid "not running"
+msgstr "Ne fonctionne pas"
+
 msgid "not supported"
 msgstr "Pas supporté"
 
@@ -9007,6 +9215,9 @@ msgstr "Langue originale"
 
 msgid "pass"
 msgstr "Passe"
+
+msgid "pausing"
+msgstr "en pause"
 
 msgid "performing arts"
 msgstr "Arts de la scène"
@@ -9101,6 +9312,9 @@ msgstr "Répéter liste lecture"
 msgid "repeated"
 msgstr "Répété"
 
+msgid "reserved for future use"
+msgstr "réserver pour un futur usage"
+
 msgid "restore deleted userbouquets"
 msgstr "restaurer les userbouquets effacé"
 
@@ -9124,6 +9338,9 @@ msgstr "Rock/Pop"
 
 msgid "romance"
 msgstr "Romance"
+
+msgid "running"
+msgstr "En cours d'éxécution"
 
 msgid "save last directory on exit"
 msgstr "Sauver dernier répertoire en sortant"
@@ -9160,6 +9377,9 @@ msgstr "Classique/Religieux/Film historiques/Théâtre"
 
 msgid "service is in bouquet parental protection"
 msgstr "service est dans un bouquet de la protection parentale"
+
+msgid "service off-air"
+msgstr "Service pas diffusé"
 
 msgid "set as startup service"
 msgstr "Choisir comme service de démarrage"
@@ -9242,6 +9462,9 @@ msgstr "Départ de coupe ici"
 msgid "start directory"
 msgstr "Répertoire départ"
 
+msgid "starts in a few seconds"
+msgstr "démarre dans quelques secondes"
+
 msgid "stepsize"
 msgstr "Taille du pas"
 
@@ -9305,6 +9528,9 @@ msgstr "Tourisme/Voyages"
 msgid "true"
 msgstr "Vrai"
 
+msgid "type"
+msgstr "type"
+
 msgid "unavailable"
 msgstr "Indisponible"
 
@@ -9367,6 +9593,9 @@ msgstr "lorsque PiPzap est activé zapper sur la chaîne précédente..."
 
 msgid "white"
 msgstr "Blanc"
+
+msgid "wide"
+msgstr "large"
 
 msgid "width"
 msgstr "Largeur"
