@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-07 10:24+0200\n"
-"PO-Revision-Date: 2017-04-07 10:40+0200\n"
+"POT-Creation-Date: 2017-06-29 17:37+0200\n"
+"PO-Revision-Date: 2017-06-29 17:51+0200\n"
 "Last-Translator: Pr2\n"
 "Language-Team: french\n"
 "Language: fr\n"
@@ -192,6 +192,10 @@ msgstr "%.2f GB"
 msgid "%02d:%02d"
 msgstr "%02d:%02d"
 
+#, python-format
+msgid "%03d MB"
+msgstr "%03d MB"
+
 #. TRANSLATORS: short time representation hour:minute
 #, python-format
 msgid "%2d:%02d"
@@ -201,6 +205,10 @@ msgstr "%2d:%02d"
 #, python-format
 msgid "%2d:%02d:%02d"
 msgstr "%2d:%02d:%02d"
+
+#, python-format
+msgid "%3.01f dB"
+msgstr "%3.01f dB"
 
 msgid "%A %d %B"
 msgstr "%A %d %B"
@@ -218,6 +226,10 @@ msgstr "%H:%M"
 
 msgid "%Y-%m-%d %H:%M"
 msgstr "%Y-%m-%d %H:%M"
+
+#. TRANSLATORS: full date representations short dayname daynum monthname long year in strftime() format! See 'man strftime'
+msgid "%a %e %B %Y"
+msgstr "%a %e %B %Y"
 
 #. TRANSLATORS: short date representation short dayname daynum short monthname in strftime() format! See 'man strftime'
 msgid "%a %e/%m"
@@ -259,6 +271,10 @@ msgstr[0] "%d fichier"
 msgstr[1] "%d fichiers"
 
 #, python-format
+msgid "%d fps"
+msgstr "%d fps"
+
+#, python-format
 msgid "%d hour"
 msgid_plural "%d hours"
 msgstr[0] "%d heure"
@@ -273,6 +289,10 @@ msgstr[1] "%d taches fonctionnent en arrière-plan!"
 #, python-format
 msgid "%d kB"
 msgstr "%d kB"
+
+#, python-format
+msgid "%d kB/s"
+msgstr "%d kB/s"
 
 #, python-format
 msgid "%d min"
@@ -326,6 +346,10 @@ msgstr "%d-%m"
 #, python-format
 msgid "%d.%02d. %02d:%02d"
 msgstr "%d.%02d. %02d:%02d"
+
+#, python-format
+msgid "%d.%03d GB"
+msgstr "%d.%03d GB"
 
 msgid "%d.%B %Y"
 msgstr "%d.%B %Y"
@@ -400,8 +424,18 @@ msgstr "(désactivé)"
 msgid "(show optional DVD audio menu)"
 msgstr "(Afficher menu audio DVD optionnel)"
 
+msgid "(unknown)"
+msgstr "(inconnu)"
+
 msgid "* Only available if more than one interface is active."
 msgstr "* Seulement disponible si plus d'une interface est active."
+
+msgid "-NO SERVICE\n"
+msgstr "-PAS DE SERVICE\n"
+
+#, python-format
+msgid "-SERVICE ERROR:%d\n"
+msgstr "-ERREUR AU SERVICE:%d\n"
 
 msgid "/s"
 msgstr "/s"
@@ -540,6 +574,9 @@ msgstr "<Emplacement dernière programmation>"
 
 msgid "<unknown>"
 msgstr "<inconnu>"
+
+msgid "=NO STREAM\n"
+msgstr "=PAS DE FLUX (STREAM)\n"
 
 msgid "??"
 msgstr "??"
@@ -839,6 +876,9 @@ msgstr "Autoriser les sous-titres pour malentendants"
 msgid "Alpha"
 msgstr "Transparence"
 
+msgid "Also hide bouquets"
+msgstr "Masquer aussi les bouquets"
+
 msgid "Also on standby"
 msgstr "Aussi en veille"
 
@@ -979,6 +1019,9 @@ msgstr ""
 
 msgid "Audio"
 msgstr "Audio"
+
+msgid "Audio / Video"
+msgstr "Audio / Vidéo"
 
 msgid "Audio PID"
 msgstr "PID audio"
@@ -1253,6 +1296,9 @@ msgstr "Peut-être utilisé pour différents fps entre les sous-titres externes 
 msgid "Cancel"
 msgstr "Annuler"
 
+msgid "Cancelled upon user request"
+msgstr "Annulé à la demande de l’utilisateur"
+
 msgid "Cannot determine"
 msgstr "Impossible à déterminer"
 
@@ -1375,6 +1421,12 @@ msgstr ""
 msgid "Children/Youth"
 msgstr "Enfant/Jeune"
 
+msgid "Chinese - Simplified"
+msgstr "Chinois - Simplifié"
+
+msgid "Chinese - Traditional"
+msgstr "Chinois - Traditionnel"
+
 msgid "Choose Tuner"
 msgstr "Choisir tuner"
 
@@ -1440,6 +1492,9 @@ msgstr "Paramètres de la collection"
 
 msgid "Color format"
 msgstr "Format de couleur"
+
+msgid "Combo"
+msgstr "Combo"
 
 msgid "Command execution..."
 msgstr "Exécution de la commande..."
@@ -2278,6 +2333,12 @@ msgstr "Afficher un message avant de lancer le prochain film"
 msgid "Display setup"
 msgstr "Paramètres d'affichage"
 
+msgid "Do center DVB subs on this service"
+msgstr "Centrer les subs DVB pour ce service"
+
+msgid "Do not center DVB subs on this service"
+msgstr "Ne pas centrer les subs DVB pour ce service"
+
 msgid "Do not change"
 msgstr "Ne pas changer"
 
@@ -2356,6 +2417,9 @@ msgstr "Voulez-vous faire une autre analyse manuelle des services ?"
 
 msgid "Do you want to install a channel list?"
 msgstr "Voulez-vous installer la liste des chaînes ?"
+
+msgid "Do you want to install plugins"
+msgstr "Voulez-vous installer des extensions/plugins"
 
 msgid "Do you want to install the package:\n"
 msgstr "Voulez-vous installer le paquet:\n"
@@ -2441,6 +2505,9 @@ msgstr "Contraste dynamique"
 
 msgid "E"
 msgstr "E"
+
+msgid "ECM Info"
+msgstr "ECM Info"
 
 msgid "EPG"
 msgstr "EPG"
@@ -2734,6 +2801,9 @@ msgstr "Exit/OK"
 
 msgid "Expert"
 msgstr "Expert"
+
+msgid "Expert settings"
+msgstr "Paramètres experts"
 
 msgid "Extend sleeptimer 15 minutes"
 msgstr "Étendre l'arrêt automatique de 15 minutes"
@@ -3058,6 +3128,9 @@ msgstr "Aller à la page précédente des services"
 msgid "Go up the list"
 msgstr "Remonter la liste"
 
+msgid "Gold"
+msgstr "Gold"
+
 msgid "Goto"
 msgstr "Aller vers"
 
@@ -3268,6 +3341,9 @@ msgstr "Chemin ISO"
 msgid "Icons"
 msgstr "Icônes"
 
+msgid "If enabled, display shows 12 chars instead 8, but in latin-1/translit only."
+msgstr "Si activé, l’affichage montre 12 caractères à la place de 8, mais en latin-1/translit uniquement."
+
 msgid ""
 "If you see this, something is wrong with\n"
 "your scart connection. Press OK to return."
@@ -3373,6 +3449,9 @@ msgstr "Entrée"
 msgid "Input "
 msgstr "Entrée "
 
+msgid "Input Stream ID"
+msgstr "Entré le Stream ID"
+
 msgid "Input device setup"
 msgstr "Paramètres du périphérique entrée"
 
@@ -3409,9 +3488,6 @@ msgstr "L'installation est terminée."
 msgid "Installation or removal has completed."
 msgstr "L'installation ou le retrait est terminé."
 
-msgid "Installed: "
-msgstr "Installé:"
-
 msgid "Installing"
 msgstr "Installation"
 
@@ -3429,9 +3505,6 @@ msgstr "Enregistrement Immédiat..."
 
 msgid "Interface: "
 msgstr "Interface: "
-
-msgid "Intermediate"
-msgstr "Intermédiaire"
 
 msgid "Internal"
 msgstr "Interne"
@@ -3518,6 +3591,9 @@ msgstr "Se rendre à la position marquée précédente"
 msgid "Just scale"
 msgstr "Juste mettre à l'échelle"
 
+msgid "KA-SAT"
+msgstr "KA-SAT"
+
 msgid "Keep service"
 msgstr "Garder le service"
 
@@ -3565,6 +3641,9 @@ msgstr "Dernière mise à jour: "
 
 msgid "Latest Commits"
 msgstr "Derniers changements"
+
+msgid "Latest upgrade log"
+msgstr "Log de la dernière mise à jour"
 
 msgid "Latitude"
 msgstr "Latitude"
@@ -3817,6 +3896,9 @@ msgctxt "Video output mode"
 msgid "Mode"
 msgstr "Mode"
 
+msgid "Model"
+msgstr "Modèle"
+
 msgid "Model: "
 msgstr "Modèle: "
 
@@ -4049,6 +4131,9 @@ msgstr "Aucun lecteur DVD (supporté) trouvé!"
 msgid "No Connection"
 msgstr "Pas de connexion"
 
+msgid "No ECMPids available (FTA Service)"
+msgstr "Pas de ECMPids disponible (Service en clair (FTA))"
+
 msgid "No HDD found or HDD not initialized!"
 msgstr "Aucun disque dur trouvé, ou disque dur non initialisé!"
 
@@ -4057,9 +4142,6 @@ msgstr "Pas de blocage sur l'âge"
 
 msgid "No backup needed"
 msgstr "Pas de sauvegarde nécessaire"
-
-msgid "No cable tuner found!"
-msgstr "Aucun tuner câble trouvé!"
 
 msgid ""
 "No data on transponder!\n"
@@ -4198,6 +4280,9 @@ msgstr "Aucun"
 #. TRANSLATORS: (aspect ratio policy: display as fullscreen, with stretching the left/right)
 msgid "Nonlinear"
 msgstr "Non linéaire"
+
+msgid "Normal"
+msgstr "Normal"
 
 msgid "Normal mode"
 msgstr "Mode normal"
@@ -4369,6 +4454,12 @@ msgstr "Code PIN requis"
 
 msgid "PLP ID"
 msgstr "PLP ID"
+
+msgid "PLS Code"
+msgstr "Code PLS"
+
+msgid "PLS Mode"
+msgstr "Mode PLS"
 
 msgid "PMT PID"
 msgstr "PID PMT"
@@ -4641,8 +4732,8 @@ msgstr "Veuillez paramétrer le tuner I"
 msgid "Please set up tuner J"
 msgstr "Veuillez paramétrer le tuner J"
 
-msgid "Please set up tuner K"
-msgstr "Veuillez paramétrer le tuner K"
+msgid "Please set up tuner Q"
+msgstr "Veuillez paramétrer le tuner Q"
 
 msgid ""
 "Please use direction keys to move the PiP window.\n"
@@ -4703,6 +4794,9 @@ msgstr "Navigateur d'extensions"
 
 msgid "Plugin browser"
 msgstr "Navigateur d'extensions"
+
+msgid "Plugin install"
+msgstr "Installation extension/plugin"
 
 msgid "Plugin manager activity information"
 msgstr "Information d'activité gestionnaire plugin"
@@ -5346,6 +5440,9 @@ msgstr "Sortie"
 msgid "Romanian"
 msgstr "Roumain"
 
+msgid "Root"
+msgstr "Root"
+
 msgid "Root directory"
 msgstr "Répertoire racine"
 
@@ -5758,6 +5855,9 @@ msgstr "Le service a été ajouté au bouquet sélectionné."
 msgid "Service info"
 msgstr "Info service"
 
+msgid "Service info - ECM Info"
+msgstr "Info service - info ECM"
+
 msgid "Service info - service & PIDs"
 msgstr "Info du service - service & PIDs"
 
@@ -6153,9 +6253,6 @@ msgstr "Simple"
 
 msgid "Simple titleset (compatibility for legacy players)"
 msgstr "Jeu titre simple (compatibilité descendante lecteurs)"
-
-msgid "Simplified Chinese"
-msgstr "Chinoix simplifié"
 
 msgid "Single"
 msgstr "Unique"
@@ -6707,7 +6804,7 @@ msgstr ""
 "Traduction Française\n"
 "Enigma2 - OpenPLi\n"
 "Support: www.openpli.org\n"
-"Dernière MAJ: 3 mars 2017"
+"Dernière MAJ: 29 juin 2017"
 
 msgid "TS file is too large for ISO9660 level 1!"
 msgstr "Fichier TS trop grand pour le niveau 1 ISO9660!"
@@ -7244,9 +7341,6 @@ msgstr "Nombre total de clients de flux (stream) : %d (%s)"
 msgid "Track"
 msgstr "Piste"
 
-msgid "Traditional Chinese"
-msgstr "Chinois traditionnel"
-
 msgid "Transcoding: "
 msgstr "Transcodage: "
 
@@ -7381,6 +7475,9 @@ msgstr ""
 msgid "Uncover dashed flickering line for this service"
 msgstr "Découvrir les scintillements en pointillés pour ce service"
 
+msgid "Undefined"
+msgstr "Indéfini"
+
 msgid "Undo install"
 msgstr "Défaire installation"
 
@@ -7455,6 +7552,9 @@ msgstr "Paramétrer usage"
 
 msgid "Use"
 msgstr "Utiliser"
+
+msgid "Use 12 characters display mode"
+msgstr "Utiliser le mode d’affichage 12 caractères"
 
 msgid "Use DHCP"
 msgstr "Utiliser DHCP"
@@ -8579,6 +8679,9 @@ msgstr "Bleu"
 msgid "bottom"
 msgstr "Bas"
 
+msgid "bouquets"
+msgstr "favoris"
+
 msgid "broadcasting/press"
 msgstr "Diffusion/Presse"
 
@@ -9056,6 +9159,9 @@ msgstr "Pas configuré"
 msgid "not locked"
 msgstr "Pas verrouillé"
 
+msgid "not running"
+msgstr "Ne fonctionne pas"
+
 msgid "not supported"
 msgstr "Pas supporté"
 
@@ -9109,6 +9215,9 @@ msgstr "Langue originale"
 
 msgid "pass"
 msgstr "Passe"
+
+msgid "pausing"
+msgstr "en pause"
 
 msgid "performing arts"
 msgstr "Arts de la scène"
@@ -9203,6 +9312,9 @@ msgstr "Répéter liste lecture"
 msgid "repeated"
 msgstr "Répété"
 
+msgid "reserved for future use"
+msgstr "réserver pour un futur usage"
+
 msgid "restore deleted userbouquets"
 msgstr "restaurer les userbouquets effacé"
 
@@ -9226,6 +9338,9 @@ msgstr "Rock/Pop"
 
 msgid "romance"
 msgstr "Romance"
+
+msgid "running"
+msgstr "En cours d'éxécution"
 
 msgid "save last directory on exit"
 msgstr "Sauver dernier répertoire en sortant"
@@ -9262,6 +9377,9 @@ msgstr "Classique/Religieux/Film historiques/Théâtre"
 
 msgid "service is in bouquet parental protection"
 msgstr "service est dans un bouquet de la protection parentale"
+
+msgid "service off-air"
+msgstr "Service pas diffusé"
 
 msgid "set as startup service"
 msgstr "Choisir comme service de démarrage"
@@ -9344,6 +9462,9 @@ msgstr "Départ de coupe ici"
 msgid "start directory"
 msgstr "Répertoire départ"
 
+msgid "starts in a few seconds"
+msgstr "démarre dans quelques secondes"
+
 msgid "stepsize"
 msgstr "Taille du pas"
 
@@ -9406,6 +9527,9 @@ msgstr "Tourisme/Voyages"
 
 msgid "true"
 msgstr "Vrai"
+
+msgid "type"
+msgstr "type"
 
 msgid "unavailable"
 msgstr "Indisponible"
