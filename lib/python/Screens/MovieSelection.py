@@ -404,7 +404,7 @@ class MovieContextMenu(Screen, ProtectedScreen):
 						append_to_menu(menu, (_("Start offline decode"), csel.do_decode))
 				elif BlurayPlayer is None and csel.isBlurayFolderAndFile(service):
 					append_to_menu(menu, (_("Auto play blu-ray file"), csel.playBlurayFile))
-				if config.ParentalControl.hideBlacklist.value and config.ParentalControl.storeservicepin.value != "never":
+				if config.ParentalControl.servicepin[0].value and config.ParentalControl.servicepinactive.value and config.ParentalControl.hideBlacklist.value and config.ParentalControl.storeservicepin.value != "never":
 					from Components.ParentalControl import parentalControl
 					if not parentalControl.sessionPinCached:
 						append_to_menu(menu, (_("Unhide parental control services"), csel.unhideParentalServices), key="1")
