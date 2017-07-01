@@ -114,12 +114,8 @@ class TimerEntry(Screen, ConfigListScreen):
 		self.timerentry_justplay = ConfigSelection(choices = [
 			("zap", _("zap")), ("record", _("record")), ("zap+record", _("zap and record"))],
 			default = {0: "record", 1: "zap", 2: "zap+record"}[justplay + 2*always_zap])
-		if SystemInfo["DeepstandbySupport"]:
-			shutdownString = _("go to deep standby")
-			choicelist = [("always", _("always")), ("from_standby", _("only from standby")), ("from_deep_standby", _("only from deep standby")), ("never", _("never"))]
-		else:
-			shutdownString = _("shut down")
-			choicelist = [("always", _("always")), ("never", _("never"))]
+		shutdownString = _("shut down")
+		choicelist = [("always", _("always")), ("never", _("never"))]
 		self.timerentry_zapwakeup = ConfigSelection(choices = choicelist, default = zap_wakeup)
 		self.timerentry_afterevent = ConfigSelection(choices = [("nothing", _("do nothing")), ("standby", _("go to standby")), ("deepstandby", shutdownString), ("auto", _("auto"))], default = afterevent)
 		self.timerentry_recordingtype = ConfigSelection(choices = [("normal", _("normal")), ("descrambled+ecm", _("descramble and record ecm")), ("scrambled+ecm", _("don't descramble, record ecm"))], default = recordingtype)

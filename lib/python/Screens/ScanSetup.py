@@ -279,10 +279,7 @@ class CableTransponderSearchSupport:
 		except:
 			# older API
 			if nim_idx < 2:
-				if HardwareInfo().get_device_name() == "dm500hd":
-					bus = 2
-				else:
-					bus = nim_idx
+				bus = nim_idx
 			else:
 				if nim_idx == 2:
 					bus = 2 # DM8000 first nim is /dev/i2c/2
