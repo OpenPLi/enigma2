@@ -17,11 +17,11 @@ class Keyboard:
 					if m:
 						key, val = m.groups()
 						if key == 'kmap':
-						    mapfile = val
+							mapfile = val
 						if key == 'name':
-						    mapname = val
+							mapname = val
 						if (mapfile is not None) and (mapname is not None):
-						    self.keyboardmaps.append((mapfile, mapname))
+							self.keyboardmaps.append((mapfile, mapname))
 
 	def activateKeyboardMap(self, index):
 		try:
