@@ -1271,3 +1271,4 @@ class RecordTimer(timer.Timer):
 
 	def shutdown(self):
 		self.saveTimer()
+

@@ -52,7 +52,7 @@ class HardwareInfo:
 		self.device_model = self.device_model or self.device_name
 
 		# only some early DMM boxes do not have HDMI hardware
-		self.device_hdmi =  self.device_model not in ("dm7025", "dm800", "dm8000")
+		self.device_hdmi =  self.device_model not in ("dm8000")
 
 		print "Detected: " + self.get_device_string()
 
