@@ -40,7 +40,7 @@ class Network:
 		return self.remoteRootFS
 
 	def isBlacklisted(self, iface):
-		return iface in ('lo', 'wifi0', 'wmaster0', 'sit0', 'tun0', 'sys0')
+		return iface in ('lo', 'wifi0', 'wmaster0', 'sit0', 'tun0', 'sys0', 'tap0', 'p2p0')
 
 	def getInterfaces(self, callback = None):
 		self.configuredInterfaces = []
@@ -314,7 +314,9 @@ class Network:
 			elif name.startswith('at'):
 				name = 'Atmel'
 			elif name.startswith('iwm'):
-				name = 'Intel'				
+				name = 'Intel'
+			elif name.startswith('brcm'):
+				name = 'Broadcom'
 		else:
 			name = _('Unknown')
 
@@ -452,7 +454,10 @@ class Network:
 	def restartNetworkFinished(self,extra_args):
 		( callback ) = extra_args
 		if callback is not None:
-			callback(True)
+			try:
+				callback(True)
+			except:
+				pass
 
 	def getLinkState(self,iface,callback):
 		self.linkConsole.ePopen((self.ethtool_bin, self.ethtool_bin, iface), self.getLinkStateFinished,callback)
@@ -615,6 +620,8 @@ class Network:
 				return 'ralink'
 			if module == 'zd1211b':
 				return 'zydas'
+			if module == 'brcm-systemport':
+				return 'brcm-wl'
 		return 'wext'
 
 	def calc_netmask(self,nmask):
