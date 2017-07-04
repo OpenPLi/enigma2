@@ -1,5 +1,5 @@
 from Components.Harddisk import harddiskmanager
-from config import ConfigSubsection, ConfigYesNo, config, ConfigSelection, ConfigText, ConfigNumber, ConfigSet, ConfigLocations, ConfigSelectionNumber, ConfigClock, ConfigSlider, ConfigEnableDisable, ConfigSubDict, ConfigDictionarySet
+from config import ConfigSubsection, ConfigYesNo, config, ConfigSelection, ConfigText, ConfigNumber, ConfigSet, ConfigLocations, ConfigSelectionNumber, ConfigClock, ConfigSlider, ConfigEnableDisable, ConfigSubDict, ConfigDictionarySet, ConfigInteger, NoSave
 from Tools.Directories import defaultRecordingLocation
 from enigma import setTunerTypePriorityOrder, setPreferredTuner, setSpinnerOnOff, setEnableTtCachingOnOff, eEnv, eDVBDB, Misc_Options, eBackgroundFileEraser, eServiceEvent
 from Components.NimManager import nimmanager
@@ -92,6 +92,36 @@ def InitUsageConfig():
 	for i in (3600, 7200, 14400):
 		h = i / 3600
 		choicelist.append((str(i), ngettext("%d hour", "%d hours", h) % h))
+
+	config.usage.tuxtxt_font_and_res = ConfigSelection(default = "TTF_SD", choices = [("X11_SD", _("Fixed X11 font (SD)")), ("TTF_SD", _("TrueType font (SD)")), ("TTF_HD", _("TrueType font (HD)")), ("TTF_FHD", _("TrueType font (full-HD)")), ("expert_mode", _("Expert mode"))])
+	config.usage.tuxtxt_UseTTF = ConfigSelection(default = "1", choices = [("0", "0"), ("1", "1")])
+	config.usage.tuxtxt_TTFBold = ConfigSelection(default = "1", choices = [("0", "0"), ("1", "1")])
+	config.usage.tuxtxt_TTFScreenResX = ConfigSelection(default = "720", choices = [("720", "720"), ("1280", "1280"), ("1920", "1920")])
+	config.usage.tuxtxt_StartX = ConfigInteger(default=50, limits = (0, 200))
+	config.usage.tuxtxt_EndX = ConfigInteger(default=670, limits = (500, 1920))
+	config.usage.tuxtxt_StartY = ConfigInteger(default=30, limits = (0, 200))
+	config.usage.tuxtxt_EndY = ConfigInteger(default=555, limits = (400, 1080))
+	config.usage.tuxtxt_TTFShiftY = ConfigSelection(default = "2", choices = [("-9", "-9"), ("-8", "-8"), ("-7", "-7"), ("-6", "-6"), ("-5", "-5"), ("-4", "-4"), ("-3", "-3"), ("-2", "-2"), ("-1", "-1"), ("0", "0"), ("1", "1"), ("2", "2"), ("3", "3"), ("4", "4"), ("5", "5"), ("6", "6"), ("7", "7"), ("8", "8"), ("9", "9")])
+	config.usage.tuxtxt_TTFShiftX = ConfigSelection(default = "0", choices = [("-9", "-9"), ("-8", "-8"), ("-7", "-7"), ("-6", "-6"), ("-5", "-5"), ("-4", "-4"), ("-3", "-3"), ("-2", "-2"), ("-1", "-1"), ("0", "0"), ("1", "1"), ("2", "2"), ("3", "3"), ("4", "4"), ("5", "5"), ("6", "6"), ("7", "7"), ("8", "8"), ("9", "9")])
+	config.usage.tuxtxt_TTFWidthFactor16 = ConfigInteger(default=29, limits = (8, 31))
+	config.usage.tuxtxt_TTFHeightFactor16 = ConfigInteger(default=14, limits = (8, 31))
+	config.usage.tuxtxt_CleanAlgo = ConfigInteger(default=0, limits = (0, 9))
+	config.usage.tuxtxt_ConfFileHasBeenPatched = NoSave(ConfigYesNo(default=False))
+
+	config.usage.tuxtxt_font_and_res.addNotifier(patchTuxtxtConfFile, initial_call = False, immediate_feedback = False, call_on_save_or_cancel = True)
+	config.usage.tuxtxt_UseTTF.addNotifier(patchTuxtxtConfFile, initial_call = False, immediate_feedback = False, call_on_save_or_cancel = True)
+	config.usage.tuxtxt_TTFBold.addNotifier(patchTuxtxtConfFile, initial_call = False, immediate_feedback = False, call_on_save_or_cancel = True)
+	config.usage.tuxtxt_TTFScreenResX.addNotifier(patchTuxtxtConfFile, initial_call = False, immediate_feedback = False, call_on_save_or_cancel = True)
+	config.usage.tuxtxt_StartX.addNotifier(patchTuxtxtConfFile, initial_call = False, immediate_feedback = False, call_on_save_or_cancel = True)
+	config.usage.tuxtxt_EndX.addNotifier(patchTuxtxtConfFile, initial_call = False, immediate_feedback = False, call_on_save_or_cancel = True)
+	config.usage.tuxtxt_StartY.addNotifier(patchTuxtxtConfFile, initial_call = False, immediate_feedback = False, call_on_save_or_cancel = True)
+	config.usage.tuxtxt_EndY.addNotifier(patchTuxtxtConfFile, initial_call = False, immediate_feedback = False, call_on_save_or_cancel = True)
+	config.usage.tuxtxt_TTFShiftY.addNotifier(patchTuxtxtConfFile, initial_call = False, immediate_feedback = False, call_on_save_or_cancel = True)
+	config.usage.tuxtxt_TTFShiftX.addNotifier(patchTuxtxtConfFile, initial_call = False, immediate_feedback = False, call_on_save_or_cancel = True)
+	config.usage.tuxtxt_TTFWidthFactor16.addNotifier(patchTuxtxtConfFile, initial_call = False, immediate_feedback = False, call_on_save_or_cancel = True)
+	config.usage.tuxtxt_TTFHeightFactor16.addNotifier(patchTuxtxtConfFile, initial_call = False, immediate_feedback = False, call_on_save_or_cancel = True)
+	config.usage.tuxtxt_CleanAlgo.addNotifier(patchTuxtxtConfFile, initial_call = False, immediate_feedback = False, call_on_save_or_cancel = True)
+
 	config.usage.hdd_standby = ConfigSelection(default = "300", choices = [("0", _("No standby"))] + choicelist)
 	config.usage.output_12V = ConfigSelection(default = "do not change", choices = [
 		("do not change", _("Do not change")), ("off", _("Off")), ("on", _("On")) ])
@@ -725,3 +755,84 @@ def preferredInstantRecordPath():
 
 def defaultMoviePath():
 	return defaultRecordingLocation(config.usage.default_path.value)
+
+def patchTuxtxtConfFile(dummyConfigElement):
+	print "[tuxtxt] Patching tuxtxt2.conf"
+	if config.usage.tuxtxt_font_and_res.value == "X11_SD":
+		tuxtxt2 = [["UseTTF",0],
+		           ["TTFBold",1],
+		           ["TTFScreenResX",720],
+		           ["StartX",50],
+		           ["EndX",670],
+		           ["StartY",30],
+		           ["EndY",555],
+		           ["TTFShiftY",0],
+		           ["TTFShiftX",0],
+		           ["TTFWidthFactor16",26],
+		           ["TTFHeightFactor16",14]]
+	elif config.usage.tuxtxt_font_and_res.value == "TTF_SD":
+		tuxtxt2 = [["UseTTF",1],
+		           ["TTFBold",1],
+		           ["TTFScreenResX",720],
+		           ["StartX",50],
+		           ["EndX",670],
+		           ["StartY",30],
+		           ["EndY",555],
+		           ["TTFShiftY",2],
+		           ["TTFShiftX",0],
+		           ["TTFWidthFactor16",29],
+		           ["TTFHeightFactor16",14]]
+	elif config.usage.tuxtxt_font_and_res.value == "TTF_HD":
+		tuxtxt2 = [["UseTTF",1],
+		           ["TTFBold",0],
+		           ["TTFScreenResX",1280],
+		           ["StartX",80],
+		           ["EndX",1200],
+		           ["StartY",35],
+		           ["EndY",685],
+		           ["TTFShiftY",-3],
+		           ["TTFShiftX",0],
+		           ["TTFWidthFactor16",26],
+		           ["TTFHeightFactor16",14]]
+	elif config.usage.tuxtxt_font_and_res.value == "TTF_FHD":
+		tuxtxt2 = [["UseTTF",1],
+		           ["TTFBold",0],
+		           ["TTFScreenResX",1920],
+		           ["StartX",140],
+		           ["EndX",1780],
+		           ["StartY",52],
+		           ["EndY",1027],
+		           ["TTFShiftY",-6],
+		           ["TTFShiftX",0],
+		           ["TTFWidthFactor16",26],
+		           ["TTFHeightFactor16",14]]
+	elif config.usage.tuxtxt_font_and_res.value == "expert_mode":
+		tuxtxt2 = [["UseTTF",            int(config.usage.tuxtxt_UseTTF.value)],
+		           ["TTFBold",           int(config.usage.tuxtxt_TTFBold.value)],
+		           ["TTFScreenResX",     int(config.usage.tuxtxt_TTFScreenResX.value)],
+		           ["StartX",            config.usage.tuxtxt_StartX.value],
+		           ["EndX",              config.usage.tuxtxt_EndX.value],
+		           ["StartY",            config.usage.tuxtxt_StartY.value],
+		           ["EndY",              config.usage.tuxtxt_EndY.value],
+		           ["TTFShiftY",         int(config.usage.tuxtxt_TTFShiftY.value)],
+		           ["TTFShiftX",         int(config.usage.tuxtxt_TTFShiftX.value)],
+		           ["TTFWidthFactor16",  config.usage.tuxtxt_TTFWidthFactor16.value],
+		           ["TTFHeightFactor16", config.usage.tuxtxt_TTFHeightFactor16.value]]
+	tuxtxt2.append(    ["CleanAlgo",         config.usage.tuxtxt_CleanAlgo.value] )
+
+	TUXTXT_CFG_FILE = "/etc/tuxtxt/tuxtxt2.conf"
+	command = "sed -i -r '"
+	for f in tuxtxt2:
+		#replace keyword (%s) followed by any value ([-0-9]+) by that keyword \1 and the new value %d
+		command += "s|(%s)\s+([-0-9]+)|\\1 %d|;" % (f[0],f[1])
+	command += "' %s" % TUXTXT_CFG_FILE
+	for f in tuxtxt2:
+		#if keyword is not found in file, append keyword and value
+		command += " ; if ! grep -q '%s' %s ; then echo '%s %d' >> %s ; fi"  % (f[0],TUXTXT_CFG_FILE,f[0],f[1],TUXTXT_CFG_FILE)
+	try:
+		os.system(command)
+	except:
+		print "Error: failed to patch %s!" % TUXTXT_CFG_FILE
+	print "[tuxtxt] tuxtxt2.conf patched"
+
+	config.usage.tuxtxt_ConfFileHasBeenPatched.setValue(True)
