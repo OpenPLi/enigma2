@@ -61,7 +61,9 @@ class Network:
 		return [ int(n) for n in ip.split('.') ]
 
 	def getAddrInet(self, iface, callback):
-		cmd = ("/sbin/ip", "/sbin/ip", "-o", "addr", "show", "dev", iface)
+		if not self.Console:
+			self.Console = Console()
+		cmd = "busybox ip -o addr show dev " + iface + " | grep -v inet6"
 		self.console.ePopen(cmd, self.IPaddrFinished, [iface, callback])
 
 	def IPaddrFinished(self, result, retval, extra_args):
@@ -314,7 +316,9 @@ class Network:
 			elif name.startswith('at'):
 				name = 'Atmel'
 			elif name.startswith('iwm'):
-				name = 'Intel'				
+				name = 'Intel'
+			elif name.startswith('brcm'):
+				name = 'Broadcom'
 		else:
 			name = _('Unknown')
 
@@ -419,7 +423,7 @@ class Network:
 	def checkNetworkState(self,statecallback):
 		self.NetworkState = 0
 		self.pingConsole = Console()
-		for server in ("www.openpli.org", "www.google.nl", "www.google.com"):
+		for server in ("www.google.com", "www.openpli.org", "www.google.nl"):
 			self.pingConsole.ePopen(("/bin/ping", "/bin/ping", "-c", "1", server), self.checkNetworkStateFinished,statecallback)
 
 	def checkNetworkStateFinished(self, result, retval,extra_args):
@@ -452,7 +456,10 @@ class Network:
 	def restartNetworkFinished(self,extra_args):
 		( callback ) = extra_args
 		if callback is not None:
-			callback(True)
+			try:
+				callback(True)
+			except:
+				pass
 
 	def getLinkState(self,iface,callback):
 		self.linkConsole.ePopen((self.ethtool_bin, self.ethtool_bin, iface), self.getLinkStateFinished,callback)
@@ -491,7 +498,7 @@ class Network:
 	def checkDNSLookup(self,statecallback):
 		self.DnsState = 0
 		self.dnsConsole = Console()
-		for server in ("www.openpli.org", "www.google.nl", "www.google.com"):
+		for server in ("www.google.com", "www.openpli.org", "www.google.nl"):
 			self.dnsConsole.ePopen(("/usr/bin/nslookup", "/usr/bin/nslookup", server), self.checkDNSLookupFinished, statecallback)
 
 	def checkDNSLookupFinished(self, result, retval,extra_args):
@@ -615,6 +622,8 @@ class Network:
 				return 'ralink'
 			if module == 'zd1211b':
 				return 'zydas'
+			if module == 'brcm-systemport':
+				return 'brcm-wl'
 		return 'wext'
 
 	def calc_netmask(self,nmask):
