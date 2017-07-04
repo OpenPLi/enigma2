@@ -1,6 +1,6 @@
 import xml.etree.cElementTree
 
-import os
+from os import environ, unlink, symlink, path
 import time
 from Tools.Directories import SCOPE_SKIN, resolveFilename
 from Tools.StbHardware import setRTCoffset
@@ -25,13 +25,13 @@ class Timezones:
 		if len(self.timezones) <= index:
 			return
 
-		os.environ['TZ'] = self.timezones[index][1]
+		environ['TZ'] = self.timezones[index][1]
 		try:
-			os.unlink("/etc/localtime")
+			unlink("/etc/localtime")
 		except OSError:
 			pass
 		try:
-			os.symlink("/usr/share/zoneinfo/%s" %(self.timezones[index][1]), "/etc/localtime")
+			symlink("/usr/share/zoneinfo/%s" %(self.timezones[index][1]), "/etc/localtime")
 		except OSError:
 			pass
 		try:
@@ -39,7 +39,7 @@ class Timezones:
 		except:
 			from enigma import e_tzset
 			e_tzset()
-		if os.path.exists("/proc/stb/fp/rtc_offset"):
+		if path.exists("/proc/stb/fp/rtc_offset"):
 			setRTCoffset()
 
 	def getTimezoneList(self):
