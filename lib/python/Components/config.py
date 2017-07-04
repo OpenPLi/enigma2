@@ -33,8 +33,8 @@ class ConfigElement(object):
 		self.save_forced = False
 		self.last_value = None
 		self.save_disabled = False
-		self.__notifiers = None
-		self.__notifiers_final = None
+		self.__notifiers = { }
+		self.__notifiers_final = { }
 		self.enabled = True
 		self.callNotifiersOnSaveAndCancel = False
 
@@ -1089,7 +1089,14 @@ class ConfigNumber(ConfigText):
 		ConfigText.__init__(self, str(default), fixed_size = False)
 
 	def getValue(self):
-		return int(self.text)
+		try:
+			return int(self.text)
+		except ValueError:
+			if self.text == "true":
+				self.text = "1"
+			else:
+				self.text = str(default)
+			return int(self.text)
 
 	def setValue(self, val):
 		self.text = str(val)
@@ -1184,12 +1191,15 @@ class ConfigSlider(ConfigElement):
 		self.max = limits[1]
 		self.increment = increment
 
-	def checkValues(self):
-		if self.value < self.min:
-			self.value = self.min
-
-		if self.value > self.max:
-			self.value = self.max
+	def checkValues(self, value = None):
+		if value is None:
+			value = self.value
+		if value < self.min:
+			value = self.min
+		if value > self.max:
+			value = self.max
+		if self.value != value:		#avoid call of setter if value not changed
+			self.value = value
 
 	def handleKey(self, key):
 		if key == KEY_LEFT:
