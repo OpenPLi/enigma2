@@ -179,7 +179,7 @@ class CommitInfo(Screen):
 
 		# get the branch to display from the Enigma version
 		try:
-			branch = "?sha=" + about.getEnigmaVersionString().split("-")[-1]
+			branch = "?sha=" + "-".join(about.getEnigmaVersionString().split("-")[3:])
 		except:
 			branch = ""
 
