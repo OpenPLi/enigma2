@@ -69,7 +69,7 @@ class AutoInstallWizard(Screen):
 	</screen>"""
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self["AboutScrollLabel"] = ScrollLabel(_("Please wait"))
+		self["AboutScrollLabel"] = ScrollLabel(_("Please wait"), showscrollbar=False)
 		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.appClosed)
 		self.container.dataAvail.append(self.dataAvail)
