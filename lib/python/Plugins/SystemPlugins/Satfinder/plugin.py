@@ -32,7 +32,7 @@ class Satfinder(ScanSetup, ServiceScan):
 		self.systemEntryTerr = None
 
 		ScanSetup.__init__(self, session)
-		self.setTitle(_("Satfinder"))
+		self.setTitle(_("Signal finder"))
 		self["introduction"].setText(_("Press OK to scan"))
 		self["Frontend"] = FrontendStatus(frontend_source = lambda : self.frontend, update_interval = 100)
 
@@ -511,12 +511,12 @@ def SatfinderMain(session, close=None, **kwargs):
 
 def SatfinderStart(menuid, **kwargs):
 	if menuid == "scan":
-		return [(_("Satfinder"), SatfinderMain, "satfinder", None)]
+		return [(_("Signal finder"), SatfinderMain, "satfinder", None)]
 	else:
 		return []
 
 def Plugins(**kwargs):
 	if any([nimmanager.hasNimType(x) for x in "DVB-S", "DVB-T", "DVB-C", "ATSC"]):
-		return PluginDescriptor(name=_("Satfinder"), description=_("Helps setting up your antenna"), where = PluginDescriptor.WHERE_MENU, needsRestart = False, fnc=SatfinderStart)
+		return PluginDescriptor(name=_("Signal finder"), description=_("Helps setting up your antenna"), where = PluginDescriptor.WHERE_MENU, needsRestart = False, fnc=SatfinderStart)
 	else:
 		return []
