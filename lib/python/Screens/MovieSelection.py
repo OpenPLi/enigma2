@@ -375,14 +375,14 @@ class MovieContextMenu(Screen, ProtectedScreen):
 			{
 				"ok": self.okbuttonClick,
 				"cancel": self.cancelClick,
-				"yellow": self.do_showNetworkSetup,
-				"menu": self.do_configure,
-				"1": self.do_unhideParentalServices,
-				"2": self.do_rename,
-				"5": self.do_copy,
-				"6": self.do_move,
-				"7": self.do_createdir,
-				"8": self.do_delete
+				"yellow": csel.showNetworkSetup,
+				"menu": csel.configure,
+				"1": csel.unhideParentalServices,
+				"2": csel.do_rename,
+				"5": csel.do_copy,
+				"6": csel.do_move,
+				"7": csel.do_createdir,
+				"8": csel.do_delete
 			})
 
 		def append_to_menu(menu, args, key=""):
@@ -440,30 +440,6 @@ class MovieContextMenu(Screen, ProtectedScreen):
 
 	def okbuttonClick(self):
 		self.close(self["menu"].getCurrent()[0][1])
-
-	def do_rename(self):
-		self.close(self.csel.do_rename())
-
-	def do_copy(self):
-		self.close(self.csel.do_copy())
-
-	def do_move(self):
-		self.close(self.csel.do_move())
-
-	def do_createdir(self):
-		self.close(self.csel.do_createdir())
-
-	def do_delete(self):
-		self.close(self.csel.do_delete())
-
-	def do_unhideParentalServices(self):
-		self.close(self.csel.unhideParentalServices())
-
-	def do_configure(self):
-		self.close(self.csel.configure())
-
-	def do_showNetworkSetup(self):
-		self.close(self.csel.showNetworkSetup())
 
 	def cancelClick(self):
 		self.close(None)
