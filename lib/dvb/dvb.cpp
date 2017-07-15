@@ -2060,6 +2060,16 @@ int eDVBChannel::reserveDemux()
 	return -1;
 }
 
+int eDVBChannel::getDvrId()
+{
+	ePtr<eDVBAllocatedDemux> dmx = m_decoder_demux ? m_decoder_demux : m_demux;
+	if (dmx)
+	{
+		return dmx->get().getDvrId();
+	}
+	return -1;
+}
+
 RESULT eDVBChannel::requestTsidOnid()
 {
 	if (!getDemux(m_tsid_onid_demux, 0))
@@ -2143,7 +2153,6 @@ RESULT eDVBChannel::playSource(ePtr<iTsSource> &source, const char *streaminfo_f
 	if (m_pvr_thread)
 	{
 		m_pvr_thread->stop();
-		delete m_pvr_thread;
 		m_pvr_thread = 0;
 	}
 
@@ -2196,7 +2205,6 @@ void eDVBChannel::stop()
 	if (m_pvr_thread)
 	{
 		m_pvr_thread->stop();
-		delete m_pvr_thread;
 		m_pvr_thread = 0;
 	}
 	if (m_pvr_fd_dst >= 0)

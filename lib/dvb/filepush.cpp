@@ -6,6 +6,8 @@
 
 //#define SHOW_WRITE_TIME
 
+DEFINE_REF(eFilePushThread);
+
 eFilePushThread::eFilePushThread(int blocksize, size_t buffersize):
 	 m_sg(NULL),
 	 m_stop(1),
@@ -285,12 +287,16 @@ void eFilePushThread::setScatterGather(iFilePushScatterGather *sg)
 
 void eFilePushThread::sendEvent(int evt)
 {
+	/* add a ref, to make sure the object is not destroyed while the messagepump contains unhandled messages */
+	AddRef();
 	m_messagepump.send(evt);
 }
 
 void eFilePushThread::recvEvent(const int &evt)
 {
 	m_event(evt);
+	/* release the ref which we grabbed in sendEvent() */
+	Release();
 }
 
 void eFilePushThread::filterRecordData(const unsigned char *data, int len)

@@ -268,12 +268,12 @@ class ServiceInfo(Screen):
 			for caid in sorted(set(self.info.getInfoObject(iServiceInformation.sCAIDPIDs)), key=lambda x: (x[0], x[1])):
 				CaIdDescription = _("Undefined")
 				extra_info = ""
+				provid = ""
 				for caid_entry in caid_data:
 					if int(caid_entry[0], 16) <= caid[0] <= int(caid_entry[1], 16):
 						CaIdDescription = caid_entry[2]
 						break
 				if caid[2]:
-					provid = ""
 					if CaIdDescription == "Seca":
 						provid = ",".join([caid[2][i:i+4] for i in range(0, len(caid[2]), 30)])
 					if CaIdDescription == "Nagra":

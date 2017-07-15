@@ -404,7 +404,7 @@ class MovieContextMenu(Screen, ProtectedScreen):
 						append_to_menu(menu, (_("Start offline decode"), csel.do_decode))
 				elif BlurayPlayer is None and csel.isBlurayFolderAndFile(service):
 					append_to_menu(menu, (_("Auto play blu-ray file"), csel.playBlurayFile))
-				if config.ParentalControl.hideBlacklist.value and config.ParentalControl.storeservicepin.value != "never":
+				if config.ParentalControl.servicepin[0].value and config.ParentalControl.servicepinactive.value and config.ParentalControl.hideBlacklist.value and config.ParentalControl.storeservicepin.value != "never":
 					from Components.ParentalControl import parentalControl
 					if not parentalControl.sessionPinCached:
 						append_to_menu(menu, (_("Unhide parental control services"), csel.unhideParentalServices), key="1")
@@ -442,28 +442,28 @@ class MovieContextMenu(Screen, ProtectedScreen):
 		self.close(self["menu"].getCurrent()[0][1])
 
 	def do_rename(self):
-		self.close(self.csel.do_rename())
+		self.close(self.csel.do_rename)
 
 	def do_copy(self):
-		self.close(self.csel.do_copy())
+		self.close(self.csel.do_copy)
 
 	def do_move(self):
-		self.close(self.csel.do_move())
+		self.close(self.csel.do_move)
 
 	def do_createdir(self):
-		self.close(self.csel.do_createdir())
+		self.close(self.csel.do_createdir)
 
 	def do_delete(self):
-		self.close(self.csel.do_delete())
+		self.close(self.csel.do_delete)
 
 	def do_unhideParentalServices(self):
-		self.close(self.csel.unhideParentalServices())
+		self.close(self.csel.unhideParentalServices)
 
 	def do_configure(self):
-		self.close(self.csel.configure())
+		self.close(self.csel.configure)
 
 	def do_showNetworkSetup(self):
-		self.close(self.csel.showNetworkSetup())
+		self.close(self.csel.showNetworkSetup)
 
 	def cancelClick(self):
 		self.close(None)
