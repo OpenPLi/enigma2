@@ -1387,7 +1387,7 @@ def InitNimManager(nimmgr, update_slots = []):
 		try:
 			nim.cable
 		except:
-			list = [(str(n), x[0]) for n, x in enumerate(nimmgr.cablesList)]
+			list = [(x[0], x[0]) for x in nimmgr.cablesList]
 			nim.cable = ConfigSubsection()
 			nim.cable.scan_networkid = ConfigInteger(default = 0, limits = (0, 99999))
 			possible_scan_types = [("bands", _("Frequency bands")), ("steps", _("Frequency steps"))]
@@ -1423,7 +1423,7 @@ def InitNimManager(nimmgr, update_slots = []):
 		try:
 			nim.terrestrial
 		except:
-			list = [(str(n), x[0]) for n, x in enumerate(nimmgr.terrestrialsList)]
+			list = [(x[0], x[0]) for x in nimmgr.terrestrialsList]
 			nim.terrestrial = ConfigSelection(choices = list)
 			nim.terrestrial_5V = ConfigOnOff()
 
@@ -1431,7 +1431,7 @@ def InitNimManager(nimmgr, update_slots = []):
 		try:
 			nim.atsc
 		except:
-			list = [(str(n), x[0]) for n, x in enumerate(nimmgr.atscList)]
+			list = [(x[0], x[0]) for x in nimmgr.atscList]
 			nim.atsc = ConfigSelection(choices = list)
 
 	def tunerTypeChanged(nimmgr, configElement, initial=False):
