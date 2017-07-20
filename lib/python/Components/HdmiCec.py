@@ -82,6 +82,7 @@ config.hdmicec.debug = ConfigSelection(default = "0", choices = [("0", _("Disabl
 config.hdmicec.bookmarks = ConfigLocations(default=[LOGPATH])
 config.hdmicec.log_path = ConfigDirectory(LOGPATH)
 config.hdmicec.next_boxes_detect = ConfigYesNo(default=False)
+config.hdmicec.sourceactive_zaptimers = ConfigYesNo(default=False)
 
 
 class HdmiCec:
