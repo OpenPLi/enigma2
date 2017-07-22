@@ -192,7 +192,7 @@ from Components.Task import job_manager
 class QuitMainloopScreen(Screen):
 	def __init__(self, session, retvalue=1):
 		self.skin = """<screen name="QuitMainloopScreen" position="fill" flags="wfNoBorder">
-				<ePixmap pixmap="../logo/logo-white-square.png" position="c-200,c-318" size="400,318" scale="1" alphatest="on"/>
+				<ePixmap pixmap="skin_default/icons/input_info.png" position="c-27,c-60" size="53,53" alphatest="on" />
 				<widget name="text" position="center,c+5" size="720,100" font="Regular;22" halign="center" />
 			</screen>"""
 		Screen.__init__(self, session)
