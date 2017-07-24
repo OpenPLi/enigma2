@@ -54,7 +54,6 @@ def getCPUInfoString():
 	try:
 		cpu_count = 0
 		cpu_speed = 0
-		temperature = None
 		for line in open("/proc/cpuinfo").readlines():
 			line = [x.strip() for x in line.strip().split(":")]
 			if line[0] in ("system type", "model name"):
@@ -72,9 +71,13 @@ def getCPUInfoString():
 					cpu_speed = int(int(binascii.hexlify(open('/sys/firmware/devicetree/base/cpus/cpu@0/clock-frequency', 'rb').read()), 16) / 100000000) * 100
 				except:
 					cpu_speed = "-"
+
+		temperature = None
 		if os.path.isfile('/proc/stb/fp/temp_sensor_avs'):
 			temperature = open("/proc/stb/fp/temp_sensor_avs").readline().replace('\n','')
-		if os.path.isfile("/sys/devices/virtual/thermal/thermal_zone0/temp"):
+		elif os.path.isfile('/proc/stb/power/avs'):
+			temperature = open("/proc/stb/power/avs").readline().replace('\n','')
+		elif os.path.isfile("/sys/devices/virtual/thermal/thermal_zone0/temp"):
 			try:
 				temperature = int(open("/sys/devices/virtual/thermal/thermal_zone0/temp").read().strip())/1000
 			except:
