@@ -660,17 +660,53 @@ class NimManager:
 			return self.transpondersatsc[self.atscList[nimConfig.atsc.index][0]]
 		return []
 
+	def getCablesList(self):
+		return self.cablesList
+
+	def getCablesCountrycodeList(self):
+		countrycodes = []
+		for x in self.cablesList:
+			if x[2] and x[2] not in countrycodes:
+				countrycodes.append(x[2])
+		return countrycodes
+
+	def getCablesByCountrycode(self, countrycode):
+		if countrycode:
+			return [x for x in self.cablesList if x[2] == countrycode]
+		return []
+
 	def getCableDescription(self, nim):
 		return self.cablesList[config.Nims[nim].cable.scan_provider.index][0]
 
 	def getCableFlags(self, nim):
 		return self.cablesList[config.Nims[nim].cable.scan_provider.index][1]
+		
+	def getCableCountrycode(self, nim):
+		return self.cablesList and self.cablesList[config.Nims[nim].cable.scan_provider.index][2] or None
+
+	def getTerrestrialsList(self):
+		return self.terrestrialsList
+
+	def getTerrestrialsCountrycodeList(self):
+		countrycodes = []
+		for x in self.terrestrialsList:
+			if x[2] and x[2] not in countrycodes:
+				countrycodes.append(x[2])
+		return countrycodes
+
+	def getTerrestrialsByCountrycode(self, countrycode):
+		if countrycode:
+			return [x for x in self.terrestrialsList if x[2] == countrycode]
+		return []
 
 	def getTerrestrialDescription(self, nim):
 		return self.terrestrialsList[config.Nims[nim].terrestrial.index][0]
 
 	def getTerrestrialFlags(self, nim):
 		return self.terrestrialsList[config.Nims[nim].terrestrial.index][1]
+
+	def getTerrestrialCountrycode(self, nim):
+		return self.terrestrialsList and self.terrestrialsList[config.Nims[nim].terrestrial.index][2] or None
 
 	def getSatDescription(self, pos):
 		return self.satellites[pos]
