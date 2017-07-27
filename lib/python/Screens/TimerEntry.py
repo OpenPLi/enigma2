@@ -59,6 +59,7 @@ class TimerEntry(Screen, ConfigListScreen):
 		justplay = self.timer.justplay
 		always_zap = self.timer.always_zap
 		zap_wakeup = self.timer.zap_wakeup
+		pipzap = self.timer.pipzap
 		rename_repeat = self.timer.rename_repeat
 		conflict_detection = self.timer.conflict_detection
 
@@ -131,7 +132,7 @@ class TimerEntry(Screen, ConfigListScreen):
 
 		self.timerentry_repeated = ConfigSelection(default = repeated, choices = [("weekly", _("weekly")), ("daily", _("daily")), ("weekdays", _("Mon-Fri")), ("user", _("user defined"))])
 		self.timerentry_renamerepeat = ConfigYesNo(default = rename_repeat)
-
+		self.timerentry_pipzap = ConfigYesNo(default = pipzap)
 		self.timerentry_conflictdetection = ConfigYesNo(default = conflict_detection)
 
 		self.timerentry_date = ConfigDateTime(default = self.timer.begin, formatstring = _("%d.%B %Y"), increment = 86400)
@@ -209,6 +210,8 @@ class TimerEntry(Screen, ConfigListScreen):
 		self.entryZapWakeup = getConfigListEntry(_("Wakeup receiver for start timer"), self.timerentry_zapwakeup)
 		if self.timerentry_justplay.value == "zap":
 			self.list.append(self.entryZapWakeup)
+			if SystemInfo["PIPAvailable"]:
+				self.list.append(getConfigListEntry(_("Use as PiP if possible"), self.timerentry_pipzap))
 			self.list.append(self.entryShowEndTime)
 			self["key_blue"].setText(_("Wakeup type"))
 		else:
@@ -377,6 +380,7 @@ class TimerEntry(Screen, ConfigListScreen):
 		self.timer.justplay = self.timerentry_justplay.value == "zap"
 		self.timer.always_zap = self.timerentry_justplay.value == "zap+record"
 		self.timer.zap_wakeup = self.timerentry_zapwakeup.value
+		self.timer.pipzap = self.timerentry_pipzap.value
 		self.timer.rename_repeat = self.timerentry_renamerepeat.value
 		self.timer.conflict_detection = self.timerentry_conflictdetection.value
 		if self.timerentry_justplay.value == "zap":
