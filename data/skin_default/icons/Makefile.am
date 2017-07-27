@@ -72,6 +72,11 @@ dist_install_DATA = \
 	playlist.png \
 	playlistquit.png \
 	plilogo-fs8.png \
+	pipclock_add.png \
+	pipclock.png \
+	pipclock_post.png \
+	pipclock_pre.png \
+	pipclock_prepost.png \
 	quit.png \
 	network_wired.png \
 	network_wired-active.png \
