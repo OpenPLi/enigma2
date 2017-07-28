@@ -345,7 +345,7 @@ msgid "%s:%s"
 msgstr "%s:%s"
 
 msgid "(ZAP)"
-msgstr "(Перейти)"
+msgstr "(Переключить)"
 
 #, python-format
 msgid "(activated +%d min)"
@@ -4863,7 +4863,7 @@ msgid "Put TV in standby"
 msgstr "Перевести ТВ в режим ожидания"
 
 msgid "Put receiver in standby"
-msgstr "Перевод ресивера в режим ожидания"
+msgstr "Перевод аудио/видео системы в режим ожидания"
 
 msgid "Python frontend for /tmp/mmi.socket"
 msgstr "Пайтон интерфейс для /tmp/mmi.socket"
@@ -6549,9 +6549,8 @@ msgstr "Система"
 msgid "System & Modulation"
 msgstr "Система & Модуляция"
 
-#. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
 msgid "TRANSLATOR_INFO"
-msgstr "Dimitrij - Latvija/Liepaja - 15.06.2017"
+msgstr "Dimitrij - Latvija/Liepaja - 28.07.2017"
 
 msgid "TS file is too large for ISO9660 level 1!"
 msgstr "TS файл слишком большой для ISO9660 level 1!"
@@ -7561,7 +7560,7 @@ msgid "Wakeup receiver for start timer"
 msgstr "Включить ресивер для старта таймера"
 
 msgid "Wakeup receiver from standby"
-msgstr "Включить ресивер при выходе из ожидания"
+msgstr "Включить аудио/видео систему при выходе из ожидания"
 
 msgid "Wakeup signal from TV"
 msgstr "Сигнал включения от ТВ"
@@ -9551,3 +9550,69 @@ msgstr "Использовать режим дисплея в 12 символо�
 
 msgid "If enabled, display shows 12 chars instead 8, but in latin-1/translit only."
 msgstr "Если включено, на дисплее отображается 12 символов вместо 8, но только для кодировки latin-1 или транслита."
+
+msgid "Send 'sourceactive' before zap timers"
+msgstr "Послать 'sourceactive' перед таймерами переключения"
+
+msgid "Flash image"
+msgstr "Прошивка имиджа"
+
+msgid "Select Image"
+msgstr "Выбор имиджа"
+
+msgid "Retreiving image list - Please wait..."
+msgstr "Получение списка имиджей - пожалуйста, подождите..."
+
+msgid "Cannot find images - please try later"
+msgstr "Нет найденых имиджей - пожалуйста, попробуйте позже."
+
+msgid "Cannot create image list - please try later"
+msgstr "Ошибка создания списка имиджей - пожалуйста, попробуйте позже."
+
+msgid "Country"
+msgstr "Страна"
+
+msgid "Zapped to timer service %s as PiP!"
+msgstr "Таймер - переключено на сервис %s как PiP!"
+
+msgid "Zapped to timer service %s!"
+msgstr "Таймер - переключено на сервис %s!"
+
+msgid "(ZAP as PiP)"
+msgstr "(Переключить как PiP)"
+
+msgid "Use as PiP if possible"
+msgstr "Использовать как PiP при возможности"
+
+msgid "Backup settings"
+msgstr "Настройки бекапа"
+
+msgid "Save settinigs and EPG data"
+msgstr "Сохранить настройки и данные EPG"
+
+msgid "Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"
+msgstr "Не удалось выполнить бекап настроек, так как не найден плагин 'AutoBackup', Вы хотите продолжить?"
+
+msgid "Could not find suitable media - Please insert a media (e.g. USB stick) and try again!"
+msgstr "Не удалось найти подходящий накопитель. Пожалуйста, вставьте, например, флешку USB и повторите попытку!"
+
+msgid "Error during backup settings\n%s"
+msgstr "Ошибка при создании бекапа настроек\n%s"
+
+msgid "Downloading Image"
+msgstr "Загрузка имиджа"
+
+msgid "Error during downloading image\n%s\n%s"
+msgstr "Ошибка при загрузке имиджа\n%s\n%s"
+
+msgid "Error during unzipping image\n%s\n%s"
+msgstr "Ошибка при распаковке имиджа\n%s\n%s"
+
+msgid "Image to install is invalid\n%s"
+msgstr "Недопустимый имидж для прошивки\n%s"
+
+msgid "Recording(s) are in progress or coming up in few seconds! Do you stull want to flash an image?"
+msgstr "Запись(и) в процессе или начнется в ближайшие несколько минут/секунд! Вы все еще хотите прошить имидж?"
+
+msgid "Backing up to: %s"
+msgstr "Выполняется бекап на: %s"
