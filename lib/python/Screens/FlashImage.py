@@ -10,7 +10,7 @@ from Components.ProgressBar import ProgressBar
 from Tools.BoundFunction import boundFunction
 from Tools.Downloader import downloadWithProgress
 from Tools.HardwareInfo import HardwareInfo
-import os, urllib2, json
+import os, urllib2, json, time
 from enigma import eTimer, eEPGCache, eConsoleAppContainer
 
 class SelectImage(Screen):
@@ -115,52 +115,64 @@ class FlashImage(Screen):
 		}, -1)
 
 		self.delay = eTimer()
-		self.delay.callback.append(self.backupsettings)
+		self.delay.callback.append(self.checkrecording)
 		self.delay.start(0, True)
 
-	def backupsettings(self):
-		
-		BACKUP_SCRIPT = "/usr/lib/enigma2/python/Plugins/Extensions/AutoBackup/settings-backup.sh"
-		
-		def findmedia(destination):
-			def avail(path):
-				if os.path.isdir(path) and not os.path.islink(path):
-					statvfs = os.statvfs(path)
-					return (statvfs.f_bavail * statvfs.f_frsize) / (1 << 20) >= 500 and path 
-			for path in [destination] + ['/media/%s' % x for x in os.listdir('/media')]:
-				if avail(path):
-					return path
-
-		self.destination = findmedia(os.path.isfile(BACKUP_SCRIPT) and config.plugins.autobackup.where.value or "/media/hdd")
-
-		if self.destination:
-
-			destination = "/".join([self.destination, 'downloaded_image'])
-			self.zippedimage = "://" in self.source and "/".join([destination, 'zippedimage']) or self.source
-			self.unzippedimage = "/".join([destination, 'unzippedimage'])
-			
-			if os.path.isfile(destination):
-				os.remove(destination)
-			if not os.path.isdir(destination):
-				os.mkdir(destination)
-
-			if os.path.isfile(BACKUP_SCRIPT):
-				self["info"].setText(_("Backing up to: %s") % self.destination)
-				configfile.save()
-				if config.plugins.autobackup.epgcache.value:
-					eEPGCache.getInstance().save()
-				self.container = eConsoleAppContainer()
-				self.container.appClosed.append(self.backupsettingsDone)
-				try:
-					if self.container.execute("%s%s'%s' %s" % (BACKUP_SCRIPT, config.plugins.autobackup.autoinstall.value and " -a " or " ", self.destination, int(config.plugins.autobackup.prevbackup.value))):
-						raise Exception, "failed to execute: %s" % cmd
-				except Exception, e:
-					self.backupsettingsDone(e)
-			else:
-				self.session.openWithCallback(self.startDownload, MessageBox, _("Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"), default=False, simple=True)
+	def checkrecording(self):
+		recordings = self.session.nav.getRecordings()
+		if not recordings:
+			next_rec_time = self.session.nav.RecordTimer.getNextRecordingTime()
+		if recordings or (next_rec_time > 0 and (next_rec_time - time.time()) < 360):
+			self.session.openWithCallback(self.backupsettings, MessageBox, _("Recording(s) are in progress or coming up in few seconds! Do you stull want to flash an image?"), default=False, simple=True)
 		else:
-			self.session.openWithCallback(self.abort, MessageBox, _("Could not find suitable media - Please insert a media (e.g. USB stick) and try again!"), type=MessageBox.TYPE_ERROR, simple=True)
+			self.backupsettings()
+
+	def backupsettings(self, retval=True):
+		if retval:
+		
+			BACKUP_SCRIPT = "/usr/lib/enigma2/python/Plugins/Extensions/AutoBackup/settings-backup.sh"
+		
+			def findmedia(destination):
+				def avail(path):
+					if os.path.isdir(path) and not os.path.islink(path):
+						statvfs = os.statvfs(path)
+						return (statvfs.f_bavail * statvfs.f_frsize) / (1 << 20) >= 500 and path
+				for path in [destination] + ['/media/%s' % x for x in os.listdir('/media')]:
+					if avail(path):
+						return path
+
+			self.destination = findmedia(os.path.isfile(BACKUP_SCRIPT) and config.plugins.autobackup.where.value or "/media/hdd")
+
+			if self.destination:
+
+				destination = "/".join([self.destination, 'downloaded_image'])
+				self.zippedimage = "://" in self.source and "/".join([destination, 'zippedimage']) or self.source
+				self.unzippedimage = "/".join([destination, 'unzippedimage'])
 			
+				if os.path.isfile(destination):
+					os.remove(destination)
+				if not os.path.isdir(destination):
+					os.mkdir(destination)
+
+				if os.path.isfile(BACKUP_SCRIPT):
+					self["info"].setText(_("Backing up to: %s") % self.destination)
+					configfile.save()
+					if config.plugins.autobackup.epgcache.value:
+						eEPGCache.getInstance().save()
+					self.container = eConsoleAppContainer()
+					self.container.appClosed.append(self.backupsettingsDone)
+					try:
+						if self.container.execute("%s%s'%s' %s" % (BACKUP_SCRIPT, config.plugins.autobackup.autoinstall.value and " -a " or " ", self.destination, int(config.plugins.autobackup.prevbackup.value))):
+							raise Exception, "failed to execute: %s" % cmd
+					except Exception, e:
+						self.backupsettingsDone(e)
+				else:
+					self.session.openWithCallback(self.startDownload, MessageBox, _("Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"), default=False, simple=True)
+			else:
+				self.session.openWithCallback(self.abort, MessageBox, _("Could not find suitable media - Please insert a media (e.g. USB stick) and try again!"), type=MessageBox.TYPE_ERROR, simple=True)
+		else:
+			self.abort()
+
 	def backupsettingsDone(self, retval):
 		self.container = None
 		if retval == 0:
