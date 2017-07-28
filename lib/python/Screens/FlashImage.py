@@ -115,19 +115,20 @@ class FlashImage(Screen):
 		}, -1)
 
 		self.delay = eTimer()
-		self.delay.callback.append(self.checkrecording)
+		self.delay.callback.append(self.confirmation)
 		self.delay.start(0, True)
 
-	def checkrecording(self):
+	def confirmation(self):
 		recordings = self.session.nav.getRecordings()
 		if not recordings:
 			next_rec_time = self.session.nav.RecordTimer.getNextRecordingTime()
 		if recordings or (next_rec_time > 0 and (next_rec_time - time.time()) < 360):
-			self.session.openWithCallback(self.backupsettings, MessageBox, _("Recording(s) are in progress or coming up in few seconds! Do you stull want to flash an image?"), default=False, simple=True)
+			message = _("Recording(s) are in progress or coming up in few seconds!\nDo you still want to flash image\n%s?") % self.imagename
 		else:
-			self.backupsettings()
+			message = _("Do you want to flash image\n%s?") % self.imagename
+		self.session.openWithCallback(self.backupsettings, MessageBox, message , default=False, simple=True)
 
-	def backupsettings(self, retval=True):
+	def backupsettings(self, retval):
 		if retval:
 		
 			BACKUP_SCRIPT = "/usr/lib/enigma2/python/Plugins/Extensions/AutoBackup/settings-backup.sh"
