@@ -79,11 +79,8 @@ class TimerEntry(Screen, ConfigListScreen):
 
 		weekday_table = ("mon", "tue", "wed", "thu", "fri", "sat", "sun")
 
-		# calculate default values
-		day = []
+		day = list([int(x) for x in reversed('{0:07b}'.format(self.timer.repeated))])
 		weekday = 0
-		for x in (0, 1, 2, 3, 4, 5, 6):
-			day.append(0)
 		if self.timer.repeated: # repeated
 			type = "repeated"
 			if (self.timer.repeated == 31): # Mon-Fri
@@ -91,21 +88,10 @@ class TimerEntry(Screen, ConfigListScreen):
 			elif (self.timer.repeated == 127): # daily
 				repeated = "daily"
 			else:
-				flags = self.timer.repeated
 				repeated = "user"
-				count = 0
-				for x in (0, 1, 2, 3, 4, 5, 6):
-					if flags == 1: # weekly
-						print "Set to weekday " + str(x)
-						weekday = x
-					if flags & 1 == 1: # set user defined flags
-						day[x] = 1
-						count += 1
-					else:
-						day[x] = 0
-						flags >>= 1
-					if count == 1:
-						repeated = "weekly"
+				if day.count("1") == 1:
+					repeated = "weekday"
+					weekday = day.index("1")
 		else: # once
 			type = "once"
 			repeated = None

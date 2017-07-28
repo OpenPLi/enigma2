@@ -87,6 +87,10 @@ class Wlan:
 			for result in scanresults:
 				bssid = result.bssid
 
+				# skip hidden networks
+				if not result.essid:
+					continue
+
 				if result.encode.flags & wififlags.IW_ENCODE_DISABLED > 0:
 					encryption = False
 				elif result.encode.flags & wififlags.IW_ENCODE_NOKEY > 0:
@@ -117,7 +121,7 @@ class Wlan:
 					'bssid': result.bssid,
 					'channel': channel,
 					'encrypted': encryption,
-					'essid': result.essid and strip(self.asciify(result.essid)) or "",
+					'essid': strip(self.asciify(result.essid)),
 					'iface': self.iface,
 					'maxrate' : ifobj._formatBitrate(result.rate[-1][-1]),
 					'noise' : '',#result.quality.nlevel-0x100,
