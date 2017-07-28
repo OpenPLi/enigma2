@@ -45,10 +45,11 @@ class TimerList(HTMLComponent, GUIComponent, object):
 			if "autotimer" in timer.flags:
 				self.iconAutoTimer and res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, self.iconMargin / 2, self.rowSplit + (self.itemHeight - self.rowSplit - self.iconHeight) / 2, self.iconWidth, self.iconHeight, self.iconAutoTimer))
 		if timer.justplay:
-			extra_text = _("(ZAP)")
 			if timer.pipzap:
 				extra_text = _("(ZAP as PiP)")
-			text = repeatedtext + ((" %s "+ extra_text) % (begin[1]))
+			else:
+				extra_text = _("(ZAP)")
+			text = repeatedtext + ((" %s %s") % (begin[1], extra_text))
 		else:
 			text = repeatedtext + ((" %s ... %s (%d " + _("mins") + ")") % (begin[1], FuzzyTime(timer.end)[1], (timer.end - timer.begin) / 60))
 		icon = None
