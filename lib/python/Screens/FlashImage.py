@@ -103,7 +103,7 @@ class FlashImage(Screen):
 		self.imagename = imagename
 
 		self["header"] = Label(_("Backup settings"))
-		self["info"] = Label(_("Save settinigs and EPG data"))
+		self["info"] = Label(_("Save settings and EPG data"))
 		self["progress"] = ProgressBar()
 		self["progress"].setRange((0, 100))
 		self["progress"].setValue(0)
