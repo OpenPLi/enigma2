@@ -224,9 +224,12 @@ class FlashImage(Screen):
 			self.session.openWithCallback(self.abort, MessageBox, _("Image to install is invalid\n%s") % self.imagename, type=MessageBox.TYPE_ERROR, simple=True)
 
 	def flashFinished(self, retval, data):
-		self["header"].setText(_("Flash Finished"))
-		self["info"].setText(_("Press exit to abort"))
-		self["progress"].hide()
+		if retval == 0:
+			self["header"].setText(_("Flash Finished"))
+			self["info"].setText(_("Press exit to abort"))
+			self["progress"].hide()
+		else:
+			self.session.openWithCallback(self.abort, MessageBox, _("Error during flashing image\n%s") % self.imagename, type=MessageBox.TYPE_ERROR, simple=True)
 
 	def abort(self, reply=None):
 		if self.downloader:
