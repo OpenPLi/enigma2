@@ -1,17 +1,17 @@
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Components.Button import Button
-from Components.Console import ePopen
 from Components.ChoiceList import ChoiceList, ChoiceEntryComponent
 from Components.config import config, configfile
 from Components.ActionMap import ActionMap
+from Components.Console import Console
 from Components.Label import Label
 from Components.ProgressBar import ProgressBar
 from Tools.BoundFunction import boundFunction
 from Tools.Downloader import downloadWithProgress
 from Tools.HardwareInfo import HardwareInfo
 import os, urllib2, json, time
-from enigma import eTimer, eEPGCache
+from enigma import eTimer, eEPGCache, eConsoleAppContainer
 
 class SelectImage(Screen):
 	def __init__(self, session, *args):
@@ -160,7 +160,13 @@ class FlashImage(Screen):
 					configfile.save()
 					if config.plugins.autobackup.epgcache.value:
 						eEPGCache.getInstance().save()
-					ePopen((config.plugins.autobackup.autoinstall.value and "%s -a '%s' %s" or "%s '%s' %s")  % (BACKUP_SCRIPT, self.destination, int(config.plugins.autobackup.prevbackup.value)), self.backupsettingsDone)
+					self.container = eConsoleAppContainer()
+					self.container.appClosed.append(self.backupsettingsDone)
+					try:
+						if self.container.execute("%s%s'%s' %s" % (BACKUP_SCRIPT, config.plugins.autobackup.autoinstall.value and " -a " or " ", self.destination, int(config.plugins.autobackup.prevbackup.value))):
+							raise Exception, "failed to execute: %s" % cmd
+					except Exception, e:
+						self.backupsettingsDone(e)
 				else:
 					self.session.openWithCallback(self.startDownload, MessageBox, _("Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"), default=False, simple=True)
 			else:
@@ -168,7 +174,7 @@ class FlashImage(Screen):
 		else:
 			self.abort()
 
-	def backupsettingsDone(self, retval, data):
+	def backupsettingsDone(self, retval):
 		self.container = None
 		if retval == 0:
 			self.startDownload()
@@ -219,14 +225,9 @@ class FlashImage(Screen):
 					return len([x for x in files if 'kernel' in x and '.bin' in x or x in ('uImage', 'rootfs.bin', 'root_cfe_auto.bin', 'root_cfe_auto.jffs2', 'oe_rootfs.bin', 'e2jffs2.img', 'rootfs.tar.bz2')]) == 2 and path
 		imagefiles = findimagefiles(self.unzippedimage)
 		if imagefiles:
-			ePopen("/usr/bin/ofgwrite '%s'" % imagefiles, self.flashFinished)
+			Console().ePopen("/usr/bin/ofgwrite '%s'" % imagefiles)
 		else:
 			self.session.openWithCallback(self.abort, MessageBox, _("Image to install is invalid\n%s") % self.imagename, type=MessageBox.TYPE_ERROR, simple=True)
-
-	def flashFinished(self, retval, data):
-		self["header"].setText(_("Flash Finished"))
-		self["info"].setText(_("Press exit to abort"))
-		self["progress"].hide()
 
 	def abort(self, reply=None):
 		if self.downloader:
@@ -234,3 +235,4 @@ class FlashImage(Screen):
 		if self.container:
 			self.container = None
 		self.close()
+
