@@ -70,30 +70,3 @@ class Console(object):
 		for name, item in self.appContainers.items():
 			print "[Console] killing: ", name
 			item.container.kill()
-
-class ePopen():
-	def __init__(self, command, callback=None, datacallback=None):
-		self.callback = callback
-		self.datacallback = datacallback
-		self.data = []
-		self.container = enigma.eConsoleAppContainer()
-		self.container.dataAvail.append(self.dataAvail)
-		self.container.appClosed.append(self.appClosed)
-		try:
-			if self.container.execute(command):
-				raise Exception, "failed to execute: %s" % command
-		except Exception, e:
-			self.appClosed(e)
-
-	def dataAvail(self, str):
-		if self.datacallback:
-			self.datacallback(str)
-		if self.callback:
-			self.data.append(str)
-
-	def appClosed(self, retval):
-		self.container.dataAvail.remove(self.dataAvail)
-		self.container.appClosed.remove(self.appClosed)
-		del self.container
-		if self.callback:
-			self.callback(retval, "".join(self.data))
