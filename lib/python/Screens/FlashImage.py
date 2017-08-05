@@ -13,6 +13,9 @@ from Tools.HardwareInfo import HardwareInfo
 import os, urllib2, json, time, zipfile
 from enigma import eTimer, eEPGCache, eConsoleAppContainer
 
+def checkimagefiles(files):
+	return len([x for x in files if 'kernel' in x and '.bin' in x or x in ('uImage', 'rootfs.bin', 'root_cfe_auto.bin', 'root_cfe_auto.jffs2', 'oe_rootfs.bin', 'e2jffs2.img', 'rootfs.tar.bz2')]) == 2
+
 class SelectImage(Screen):
 	def __init__(self, session, *args):
 		Screen.__init__(self, session)
@@ -54,7 +57,7 @@ class SelectImage(Screen):
 				self.imagesList = json.load(urllib2.urlopen('https://openpli.org/download/json/%s' % model))
 				for path, dirs, files in [x for x in os.walk('/media') if x[0].count(os.sep) <= 3]:
 					for file in ['/'.join([path, x]) for x in files if x.endswith('.zip') and model in x]:
-						if len([x for x in [x.split(os.sep)[-1] for x in zipfile.ZipFile(file).namelist()] if 'kernel' in x and '.bin' in x or x in ('uImage', 'rootfs.bin', 'root_cfe_auto.bin', 'root_cfe_auto.jffs2', 'oe_rootfs.bin', 'e2jffs2.img', 'rootfs.tar.bz2')]) == 2:
+						if checkimagefiles([x.split(os.sep)[-1] for x in zipfile.ZipFile(file).namelist()]):
 							medium = path.split(os.sep)[-1]
 							if medium not in self.imagesList:
 								self.imagesList[medium] = {}
@@ -228,7 +231,7 @@ class FlashImage(Screen):
 		def findimagefiles(path):
 			for path, subdirs, files in os.walk(path):
 				if not subdirs and files:
-					return len([x for x in files if 'kernel' in x and '.bin' in x or x in ('uImage', 'rootfs.bin', 'root_cfe_auto.bin', 'root_cfe_auto.jffs2', 'oe_rootfs.bin', 'e2jffs2.img', 'rootfs.tar.bz2')]) == 2 and path
+					return checkimagefiles(files) and path
 		imagefiles = findimagefiles(self.unzippedimage)
 		if imagefiles:
 				self.container = eConsoleAppContainer()
