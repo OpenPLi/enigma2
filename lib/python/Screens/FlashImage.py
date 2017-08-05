@@ -220,9 +220,6 @@ class FlashImage(Screen):
 	def unzip(self):
 		try:
 			if self.imagename.endswith(".zip"):
-				self["header"].setText(_("Unzip image"))
-				self["info"].setText(self.imagename)
-				self["progress"].hide()
 				zipfile.ZipFile(self.zippedimage, 'r').extractall(self.unzippedimage)
 			self.flashimage()	
 		except:
@@ -249,6 +246,7 @@ class FlashImage(Screen):
 		if retval == 0:
 				self["header"].setText(_("Flashing image completed"))
 				self["info"].setText(_("Press exit to continue"))
+				self["progress"].hide()
 		else:
 			self.session.openWithCallback(self.abort, MessageBox, _("Flashing image was not succesfull\n%s") % self.imagename, type=MessageBox.TYPE_ERROR, simple=True)
 
