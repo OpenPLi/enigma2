@@ -51,30 +51,30 @@ class SelectImage(Screen):
 
 	def getImagesList(self, reply=None):
 		list = []
-		try:
-			model = HardwareInfo().get_device_model()
-			if not self.imagesList:
+		model = HardwareInfo().get_device_model()
+		if not self.imagesList:
+			try:
 				self.imagesList = json.load(urllib2.urlopen('https://openpli.org/download/json/%s' % model))
-				for path, dirs, files in [x for x in os.walk('/media') if x[0].count(os.sep) <= 3]:
-					for file in ['/'.join([path, x]) for x in files if x.endswith('.zip') and model in x]:
-						if checkimagefiles([x.split(os.sep)[-1] for x in zipfile.ZipFile(file).namelist()]):
-							medium = path.split(os.sep)[-1]
-							if medium not in self.imagesList:
-								self.imagesList[medium] = {}
-							self.imagesList[medium][file] = { 'link': file, 'name': file.split(os.sep)[-1]}
-			for catagorie in reversed(sorted(self.imagesList.keys())):
-				if catagorie in self.expanded:
-					list.append(ChoiceEntryComponent('expanded',((str(catagorie)), "Expander")))
-					for image in reversed(sorted(self.imagesList[catagorie].keys())):
-						list.append(ChoiceEntryComponent('verticalline',((str(self.imagesList[catagorie][image]['name'])), str(self.imagesList[catagorie][image]['link']))))
-				else:
-					list.append(ChoiceEntryComponent('expandable',((str(catagorie)), "Expander")))
-			if list:
-				self["list"].setList(list)
+			except:
+				self.imagesList = {}
+			for path, dirs, files in [x for x in os.walk('/media') if x[0].count(os.sep) <= 3]:
+				for file in ['/'.join([path, x]) for x in files if x.endswith('.zip') and model in x]:
+					if checkimagefiles([x.split(os.sep)[-1] for x in zipfile.ZipFile(file).namelist()]):
+						medium = path.split(os.sep)[-1]
+						if medium not in self.imagesList:
+							self.imagesList[medium] = {}
+						self.imagesList[medium][file] = { 'link': file, 'name': file.split(os.sep)[-1]}
+		for catagorie in reversed(sorted(self.imagesList.keys())):
+			if catagorie in self.expanded:
+				list.append(ChoiceEntryComponent('expanded',((str(catagorie)), "Expander")))
+				for image in reversed(sorted(self.imagesList[catagorie].keys())):
+					list.append(ChoiceEntryComponent('verticalline',((str(self.imagesList[catagorie][image]['name'])), str(self.imagesList[catagorie][image]['link']))))
 			else:
-				self.session.openWithCallback(self.close, MessageBox, _("Cannot find images - please try later"), type=MessageBox.TYPE_ERROR, timeout=3)
-		except:
-			self.session.openWithCallback(self.close, MessageBox, _("Cannot create image list - please try later"), type=MessageBox.TYPE_ERROR, timeout=3)
+				list.append(ChoiceEntryComponent('expandable',((str(catagorie)), "Expander")))
+		if list:
+			self["list"].setList(list)
+		else:
+			self.session.openWithCallback(self.close, MessageBox, _("Cannot find images - please try later"), type=MessageBox.TYPE_ERROR, timeout=3)
 
 	def keyOk(self):
 		currentSelected = self["list"].l.getCurrentSelection()
