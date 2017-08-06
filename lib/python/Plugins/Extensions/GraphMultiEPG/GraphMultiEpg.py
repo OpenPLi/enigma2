@@ -44,7 +44,7 @@ now_time = [x for x in localtime()]
 now_time[3] = 20
 now_time[4] = 30
 config.misc.graph_mepg.prime_time = ConfigClock(default =  mktime(now_time))
-config.misc.graph_mepg.ev_fontsize = ConfigSelectionNumber(default = 0, stepwidth = 1, min = -12, max = 12, wraparound = True)
+config.misc.graph_mepg.ev_fontsize = ConfigSelectionNumber(default = 0, stepwidth = 1, min = -12, max = 32, wraparound = True)
 config.misc.graph_mepg.items_per_page = ConfigSelectionNumber(min = 3, max = 40, stepwidth = 1, default = 6, wraparound = True)
 config.misc.graph_mepg.items_per_page_listscreen = ConfigSelectionNumber(min = 3, max = 60, stepwidth = 1, default = 12, wraparound = True)
 config.misc.graph_mepg.default_mode = ConfigYesNo(default = False)
