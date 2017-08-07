@@ -59,11 +59,14 @@ class SelectImage(Screen):
 				self.imagesList = {}
 			for path, dirs, files in [x for x in os.walk('/media') if x[0].count(os.sep) <= 3]:
 				for file in ['/'.join([path, x]) for x in files if x.endswith('.zip') and model in x]:
-					if checkimagefiles([x.split(os.sep)[-1] for x in zipfile.ZipFile(file).namelist()]):
-						medium = path.split(os.sep)[-1]
-						if medium not in self.imagesList:
-							self.imagesList[medium] = {}
-						self.imagesList[medium][file] = { 'link': file, 'name': file.split(os.sep)[-1]}
+					try:
+						if checkimagefiles([x.split(os.sep)[-1] for x in zipfile.ZipFile(file).namelist()]):
+							medium = path.split(os.sep)[-1]
+							if medium not in self.imagesList:
+								self.imagesList[medium] = {}
+							self.imagesList[medium][file] = { 'link': file, 'name': file.split(os.sep)[-1]}
+					except:
+						pass
 		for catagorie in reversed(sorted(self.imagesList.keys())):
 			if catagorie in self.expanded:
 				list.append(ChoiceEntryComponent('expanded',((str(catagorie)), "Expander")))
