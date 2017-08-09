@@ -111,7 +111,6 @@ class FlashImage(Screen):
 	
 	def __init__(self, session,  imagename, source):
 		Screen.__init__(self, session)
-		self.container = None
 		
 		self.downloader = None
 		self.source = source
@@ -177,11 +176,9 @@ class FlashImage(Screen):
 						eEPGCache.getInstance().save()
 					self.container = eConsoleAppContainer()
 					self.container.appClosed.append(self.backupsettingsDone)
-					try:
-						if self.container.execute("%s%s'%s' %s" % (BACKUP_SCRIPT, config.plugins.autobackup.autoinstall.value and " -a " or " ", self.destination, int(config.plugins.autobackup.prevbackup.value))):
-							raise Exception, "failed to execute backup script"
-					except Exception, e:
-						self.backupsettingsDone(e)
+					retval = self.container.execute("%s%s'%s' %s" % (BACKUP_SCRIPT, config.plugins.autobackup.autoinstall.value and " -a " or " ", self.destination, int(config.plugins.autobackup.prevbackup.value)))
+					if retval:
+						self.backupsettingsDone(retval)
 				else:
 					self.session.openWithCallback(self.startDownload, MessageBox, _("Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"), default=False, simple=True)
 			else:
@@ -190,7 +187,8 @@ class FlashImage(Screen):
 			self.abort()
 
 	def backupsettingsDone(self, retval):
-		self.container = None
+		del self.container.appClosed[:]
+		del self.container
 		if retval == 0:
 			self.startDownload()
 		else:	
@@ -239,11 +237,9 @@ class FlashImage(Screen):
 		if imagefiles:
 				self.container = eConsoleAppContainer()
 				self.container.appClosed.append(self.FlashimageDone)
-				try:
-					if self.container.execute("/usr/bin/ofgwrite '%s'" % imagefiles):
-						raise Exception, "failed to execute ofgwrite"
-				except Exception, e:
-					self.FlashimageDone(e)
+				retval = self.container.execute("/usr/bin/ofgwrite -n '%s'" % imagefiles)
+				if retval:
+					self.FlashimageDone(retval)
 		else:
 			self.session.openWithCallback(self.abort, MessageBox, _("Image to install is invalid\n%s") % self.imagename, type=MessageBox.TYPE_ERROR, simple=True)
 
@@ -258,6 +254,7 @@ class FlashImage(Screen):
 	def abort(self, reply=None):
 		if self.downloader:
 			self.downloader.stop()
-		if self.container:
-			self.container = None
+		if hasattr(self, 'container'):
+			del self.container.appClosed[:]
+			del self.container
 		self.close()
