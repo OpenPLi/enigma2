@@ -7,9 +7,11 @@ from Components.ActionMap import ActionMap
 from Components.Console import Console
 from Components.Label import Label
 from Components.ProgressBar import ProgressBar
+from Components.SystemInfo import SystemInfo
 from Tools.BoundFunction import boundFunction
 from Tools.Downloader import downloadWithProgress
 from Tools.HardwareInfo import HardwareInfo
+from Tools.Multiboot import GetImagelist, GetCurrentImage
 import os, urllib2, json, time, zipfile
 from enigma import eTimer, eEPGCache, eConsoleAppContainer
 
@@ -71,7 +73,8 @@ class SelectImage(Screen):
 			if catagorie in self.expanded:
 				list.append(ChoiceEntryComponent('expanded',((str(catagorie)), "Expander")))
 				for image in reversed(sorted(self.imagesList[catagorie].keys())):
-					list.append(ChoiceEntryComponent('verticalline',((str(self.imagesList[catagorie][image]['name'])), str(self.imagesList[catagorie][image]['link']))))
+					if not SystemInfo["canMultiBoot"] or image.endswith('_multiboot.zip'):
+						list.append(ChoiceEntryComponent('verticalline',((str(self.imagesList[catagorie][image]['name'])), str(self.imagesList[catagorie][image]['link']))))
 			else:
 				list.append(ChoiceEntryComponent('expandable',((str(catagorie)), "Expander")))
 		if list:
@@ -112,7 +115,6 @@ class FlashImage(Screen):
 	def __init__(self, session,  imagename, source):
 		Screen.__init__(self, session)
 		self.container = None
-		
 		self.downloader = None
 		self.source = source
 		self.imagename = imagename
@@ -138,19 +140,38 @@ class FlashImage(Screen):
 		if not recordings:
 			next_rec_time = self.session.nav.RecordTimer.getNextRecordingTime()
 		if recordings or (next_rec_time > 0 and (next_rec_time - time.time()) < 360):
-			message = _("Recording(s) are in progress or coming up in few seconds!\nDo you still want to flash image\n%s?") % self.imagename
+			self.message = _("Recording(s) are in progress or coming up in few seconds!\nDo you still want to flash image\n%s?") % self.imagename
 		else:
-			message = _("Do you want to flash image\n%s?") % self.imagename
-		self.session.openWithCallback(self.backupsettings, MessageBox, message , default=False, simple=True)
+			self.message = _("Do you want to flash image\n%s?") % self.imagename
+		if SystemInfo["canMultiBoot"]:
+			self.getImageList = GetImagelist(self.getImagelistCallback)
+		else:
+			self.session.openWithCallback(self.backupsettings, MessageBox, self.message , default=False, simple=True)
+
+	def getImagelistCallback(self, imagedict):
+		del self.getImageList
+		imagelist = []
+		self.currentimageslot = GetCurrentImage()
+		for x in range(1,5):
+			if x in imagedict:
+				imagelist.append(((_("slot%s - %s (current image)") if x == self.currentimageslot else _("slot%s - %s")) % (x, imagedict[x]['imagename']), x))
+			else:
+				imagelist.append((_("slot%s - empty") % x, x))
+		imagelist.append((_("Do not flash image"), False))
+		self.session.openWithCallback(self.backupsettings, MessageBox, self.message, list=imagelist, default=self.currentimageslot, simple=True)
 
 	def backupsettings(self, retval):
+		
 		if retval:
-		
+
+			if SystemInfo["canMultiBoot"]:
+				self.multibootslot = retval
+
 			BACKUP_SCRIPT = "/usr/lib/enigma2/python/Plugins/Extensions/AutoBackup/settings-backup.sh"
-		
+
 			def findmedia(destination):
 				def avail(path):
-					if os.path.isdir(path) and not os.path.islink(path):
+					if os.path.isdir(path) and not os.path.islink(path) and not(SystemInfo["HasMMC"] and '/mmc' in path):
 						statvfs = os.statvfs(path)
 						return (statvfs.f_bavail * statvfs.f_frsize) / (1 << 20) >= 500 and path
 				for path in [destination] + ['/media/%s' % x for x in os.listdir('/media')]:
@@ -177,11 +198,9 @@ class FlashImage(Screen):
 						eEPGCache.getInstance().save()
 					self.container = eConsoleAppContainer()
 					self.container.appClosed.append(self.backupsettingsDone)
-					try:
-						if self.container.execute("%s%s'%s' %s" % (BACKUP_SCRIPT, config.plugins.autobackup.autoinstall.value and " -a " or " ", self.destination, int(config.plugins.autobackup.prevbackup.value))):
-							raise Exception, "failed to execute backup script"
-					except Exception, e:
-						self.backupsettingsDone(e)
+					retval = self.container.execute("%s%s'%s' %s" % (BACKUP_SCRIPT, config.plugins.autobackup.autoinstall.value and " -a " or " ", self.destination, int(config.plugins.autobackup.prevbackup.value)))
+					if retval:
+						self.backupsettingsDone(retval)
 				else:
 					self.session.openWithCallback(self.startDownload, MessageBox, _("Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"), default=False, simple=True)
 			else:
@@ -239,11 +258,12 @@ class FlashImage(Screen):
 		if imagefiles:
 				self.container = eConsoleAppContainer()
 				self.container.appClosed.append(self.FlashimageDone)
-				try:
-					if self.container.execute("/usr/bin/ofgwrite '%s'" % imagefiles):
-						raise Exception, "failed to execute ofgwrite"
-				except Exception, e:
-					self.FlashimageDone(e)
+				if SystemInfo["canMultiBoot"] and self.multibootslot != self.currentimageslot:
+					retval = self.container.execute("/usr/bin/ofgwrite -k -r -m%s '%s'" % (self.multibootslot, imagefiles))
+				else:
+					retval = self.container.execute("/usr/bin/ofgwrite %s'" % imagefiles)
+				if retval:
+					self.FlashimageDone(retval)
 		else:
 			self.session.openWithCallback(self.abort, MessageBox, _("Image to install is invalid\n%s") % self.imagename, type=MessageBox.TYPE_ERROR, simple=True)
 
@@ -256,8 +276,9 @@ class FlashImage(Screen):
 			self.session.openWithCallback(self.abort, MessageBox, _("Flashing image was not succesfull\n%s") % self.imagename, type=MessageBox.TYPE_ERROR, simple=True)
 
 	def abort(self, reply=None):
-		if self.downloader:
-			self.downloader.stop()
-		if self.container:
-			self.container = None
-		self.close()
+		if not hasattr(self, 'getImageList'):
+			if self.downloader:
+				self.downloader.stop()
+			if self.container:
+				self.container = None
+			self.close()
