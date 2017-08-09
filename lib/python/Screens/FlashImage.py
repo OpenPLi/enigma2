@@ -256,14 +256,14 @@ class FlashImage(Screen):
 					return checkimagefiles(files) and path
 		imagefiles = findimagefiles(self.unzippedimage)
 		if imagefiles:
-				self.container = eConsoleAppContainer()
-				self.container.appClosed.append(self.FlashimageDone)
-				if SystemInfo["canMultiBoot"] and self.multibootslot != self.currentimageslot:
-					retval = self.container.execute("/usr/bin/ofgwrite -k -r -m%s '%s'" % (self.multibootslot, imagefiles))
-				else:
-					retval = self.container.execute("/usr/bin/ofgwrite %s'" % imagefiles)
-				if retval:
-					self.FlashimageDone(retval)
+			self.container = eConsoleAppContainer()
+			self.container.appClosed.append(self.FlashimageDone)
+			if SystemInfo["canMultiBoot"] and self.multibootslot != self.currentimageslot:
+				retval = self.container.execute("/usr/bin/ofgwrite -k -r -m%s '%s'" % (self.multibootslot, imagefiles))
+			else:
+				retval = self.container.execute("/usr/bin/ofgwrite %s'" % imagefiles)
+			if retval:
+				self.FlashimageDone(retval)
 		else:
 			self.session.openWithCallback(self.abort, MessageBox, _("Image to install is invalid\n%s") % self.imagename, type=MessageBox.TYPE_ERROR, simple=True)
 
