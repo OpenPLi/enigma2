@@ -269,9 +269,7 @@ class FlashImage(Screen):
 
 	def FlashimageDone(self, retval):
 		if retval == 0:
-				self["header"].setText(_("Flashing image completed"))
-				self["info"].setText(_("Press exit to continue"))
-				self["progress"].hide()
+			self.session.openWithCallback(self.abort, MessageBox, _("Flashing image was succesfull\n%s") % self.imagename, type=MessageBox.TYPE_ERROR, simple=True)
 		else:
 			self.session.openWithCallback(self.abort, MessageBox, _("Flashing image was not succesfull\n%s") % self.imagename, type=MessageBox.TYPE_ERROR, simple=True)
 
