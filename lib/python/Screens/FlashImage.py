@@ -33,7 +33,7 @@ class SelectImage(Screen):
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "KeyboardInputActions", "MenuActions"],
 		{
 			"ok": self.keyOk,
-			"cancel": boundFunction(self.close, None), 
+			"cancel": boundFunction(self.close, None),
 			"red": boundFunction(self.close, None),
 			"green": self.keyOk,
 			"up": self.keyUp,
@@ -46,7 +46,7 @@ class SelectImage(Screen):
 			"rightRepeated": self.keyRight,
 			"menu": boundFunction(self.close, True),
 		}, -1)
-		
+
 		self.delay = eTimer()
 		self.delay.callback.append(self.getImagesList)
 		self.delay.start(0, True)
@@ -280,3 +280,54 @@ class FlashImage(Screen):
 			if self.container:
 				self.container = None
 			self.close()
+
+class MultibootSelection(SelectImage):
+	def __init__(self, session, *args):
+		Screen.__init__(self, session)
+		self.skinName="ChoiceBox"
+		self.session = session
+		self.imagesList = None
+		self.expanded = []
+		self.setTitle(_("Select Multiboot"))
+		self["key_red"] = Button(_("Cancel"))
+		self["key_green"] = Button(_("Reboot"))
+		self["list"] = ChoiceList(list=[ChoiceEntryComponent('',((_("Retreiving image slots - Please wait...")), "Waiter"))])
+
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "KeyboardInputActions", "MenuActions"],
+		{
+			"ok": self.keyOk,
+			"cancel": boundFunction(self.close, None),
+			"red": boundFunction(self.close, None),
+			"green": self.keyOk,
+			"up": self.keyUp,
+			"down": self.keyDown,
+			"left": self.keyLeft,
+			"right": self.keyRight,
+			"upRepeated": self.keyUp,
+			"downRepeated": self.keyDown,
+			"leftRepeated": self.keyLeft,
+			"rightRepeated": self.keyRight,
+			"menu": boundFunction(self.close, True),
+		}, -1)
+
+		self.delay = eTimer()
+		self.delay.callback.append(self.getImagesList)
+		self.delay.start(0, True)
+
+	def getImagesList(self, reply=None):
+		self.getImageList = GetImagelist(self.getImagelistCallback)
+
+	def getImagelistCallback(self, imagesdict):
+		list = []
+		self.currentimageslot = GetCurrentImage()
+		for x in sorted(imagesdict.keys()):
+			list.append(ChoiceEntryComponent('',((_("slot%s - %s (current image)") if x == self.currentimageslot else _("slot%s - %s")) % (x, imagesdict[x]['imagename']), x)))
+		self["list"].setList(list)
+
+	def keyOk(self):
+		currentSelected = self["list"].l.getCurrentSelection()
+		if currentSelected[0][1] != "Waiter":
+			slot = currentSelected[0][1]
+			open('/media//mmcblk0p1/STARTUP', 'w').write("boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rw rootwait hd51_4.boxmode=1'\n" % (slot, slot * 2 + 1))
+			from Screens.Standby import TryQuitMainloop
+			self.session.open(TryQuitMainloop, 2)
