@@ -13,7 +13,7 @@ from Tools.Downloader import downloadWithProgress
 from Tools.HardwareInfo import HardwareInfo
 from Tools.Multiboot import GetImagelist, GetCurrentImage
 import os, urllib2, json, time, zipfile
-from enigma import eTimer, eEPGCache, eConsoleAppContainer
+from enigma import eTimer, eEPGCache
 
 def checkimagefiles(files):
 	return len([x for x in files if 'kernel' in x and '.bin' in x or x in ('uImage', 'rootfs.bin', 'root_cfe_auto.bin', 'root_cfe_auto.jffs2', 'oe_rootfs.bin', 'e2jffs2.img', 'rootfs.tar.bz2')]) == 2
@@ -114,7 +114,9 @@ class FlashImage(Screen):
 	
 	def __init__(self, session,  imagename, source):
 		Screen.__init__(self, session)
-		self.container = None
+		self.containerbackup = None
+		self.containerofgwrite = None
+		self.getImageList = None
 		self.downloader = None
 		self.source = source
 		self.imagename = imagename
@@ -149,7 +151,7 @@ class FlashImage(Screen):
 			self.session.openWithCallback(self.backupsettings, MessageBox, self.message , default=False, simple=True)
 
 	def getImagelistCallback(self, imagedict):
-		del self.getImageList
+		self.getImageList = None
 		imagelist = []
 		self.currentimageslot = GetCurrentImage()
 		for x in range(1,5):
@@ -196,11 +198,8 @@ class FlashImage(Screen):
 					configfile.save()
 					if config.plugins.autobackup.epgcache.value:
 						eEPGCache.getInstance().save()
-					self.container = eConsoleAppContainer()
-					self.container.appClosed.append(self.backupsettingsDone)
-					retval = self.container.execute("%s%s'%s' %s" % (BACKUP_SCRIPT, config.plugins.autobackup.autoinstall.value and " -a " or " ", self.destination, int(config.plugins.autobackup.prevbackup.value)))
-					if retval:
-						self.backupsettingsDone(retval)
+					self.containerbackup = Console()
+					self.containerbackup.ePopen("%s%s'%s' %s" % (BACKUP_SCRIPT, config.plugins.autobackup.autoinstall.value and " -a " or " ", self.destination, int(config.plugins.autobackup.prevbackup.value)), self.backupsettingsDone)
 				else:
 					self.session.openWithCallback(self.startDownload, MessageBox, _("Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"), default=False, simple=True)
 			else:
@@ -208,8 +207,8 @@ class FlashImage(Screen):
 		else:
 			self.abort()
 
-	def backupsettingsDone(self, retval):
-		self.container = None
+	def backupsettingsDone(self, data, retval, extra_args):
+		self.containerbackup = None
 		if retval == 0:
 			self.startDownload()
 		else:	
@@ -256,30 +255,32 @@ class FlashImage(Screen):
 					return checkimagefiles(files) and path
 		imagefiles = findimagefiles(self.unzippedimage)
 		if imagefiles:
-			self.container = eConsoleAppContainer()
-			self.container.appClosed.append(self.FlashimageDone)
 			if SystemInfo["canMultiBoot"] and self.multibootslot != self.currentimageslot:
-				retval = self.container.execute("/usr/bin/ofgwrite -k -r -m%s '%s'" % (self.multibootslot, imagefiles))
+				command = "/usr/bin/ofgwrite -k -r -m%s '%s'" % (self.multibootslot, imagefiles)
 			else:
-				retval = self.container.execute("/usr/bin/ofgwrite %s'" % imagefiles)
-			if retval:
-				self.FlashimageDone(retval)
+				command = "/usr/bin/ofgwrite %s'" % imagefiles
+			self.containerofgwrite = Console()
+			self.containerofgwrite.ePopen(command, self.FlashimageDone)
 		else:
 			self.session.openWithCallback(self.abort, MessageBox, _("Image to install is invalid\n%s") % self.imagename, type=MessageBox.TYPE_ERROR, simple=True)
 
-	def FlashimageDone(self, retval):
+	def FlashimageDone(self, data, retval, extra_args):
+		self.containerofgwrite = None
 		if retval == 0:
-			self.session.openWithCallback(self.abort, MessageBox, _("Flashing image was succesfull\n%s") % self.imagename, type=MessageBox.TYPE_ERROR, simple=True)
+			self["header"].setText(_("Flashing image succesfull"))
+			self["info"].setText(_("%s\nPress exit to abort") % self.imagename)
+			self["progress"].hide()
 		else:
 			self.session.openWithCallback(self.abort, MessageBox, _("Flashing image was not succesfull\n%s") % self.imagename, type=MessageBox.TYPE_ERROR, simple=True)
 
 	def abort(self, reply=None):
-		if not hasattr(self, 'getImageList'):
-			if self.downloader:
-				self.downloader.stop()
-			if self.container:
-				self.container = None
-			self.close()
+		if self.getImageList or self.containerofgwrite:
+			return 0
+		if self.downloader:
+			self.downloader.stop()
+		if self.containerbackup:
+			self.containerbackup.killAll()
+		self.close()
 
 class MultibootSelection(SelectImage):
 	def __init__(self, session, *args):
