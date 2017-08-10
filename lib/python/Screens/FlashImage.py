@@ -322,13 +322,19 @@ class MultibootSelection(SelectImage):
 		list = []
 		self.currentimageslot = GetCurrentImage()
 		for x in sorted(imagesdict.keys()):
-			list.append(ChoiceEntryComponent('',((_("slot%s - %s (current image)") if x == self.currentimageslot else _("slot%s - %s")) % (x, imagesdict[x]['imagename']), x)))
+			list.append(ChoiceEntryComponent('',((_("slot%s - %s slot 1 (current image)") if x == self.currentimageslot else _("slot%s - %s slot 1")) % (x, imagesdict[x]['imagename']), x)))
+			list.append(ChoiceEntryComponent('',((_("slot%s - %s slot 12 (current image)") if x == self.currentimageslot else _("slot%s - %s slot 12")) % (x, imagesdict[x]['imagename']), x + 12)))
 		self["list"].setList(list)
 
 	def keyOk(self):
 		currentSelected = self["list"].l.getCurrentSelection()
+		slot = currentSelected[0][1]
 		if currentSelected[0][1] != "Waiter":
-			slot = currentSelected[0][1]
-			open('/media//mmcblk0p1/STARTUP', 'w').write("boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rw rootwait hd51_4.boxmode=1'\n" % (slot, slot * 2 + 1))
+			if slot < 12:
+				startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rw rootwait hd51_4.boxmode=1'\n" % (slot, slot * 2 + 1)
+			else:
+				slot -= 12
+				startupFileContents = "boot emmcflash0.kernel%s 'brcm_cma=520M@248M brcm_cma=192M@768M root=/dev/mmcblk0p%s rw rootwait hd51_4.boxmode=12'\n" % (slot, slot * 2 + 1)
+			open('/media//mmcblk0p1/STARTUP', 'w').write(startupFileContents)
 			from Screens.Standby import TryQuitMainloop
 			self.session.open(TryQuitMainloop, 2)
