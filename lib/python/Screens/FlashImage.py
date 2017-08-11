@@ -332,7 +332,7 @@ class MultibootSelection(SelectImage):
 		if currentSelected[0][1] != "Waiter":
 			model = HardwareInfo().get_device_model()
 			if slot < 12:
-				startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rw` rootwait %s_4.boxmode=1'\n" % (slot, slot * 2 + 1, model)
+				startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=1'\n" % (slot, slot * 2 + 1, model)
 			else:
 				slot -= 12
 				startupFileContents = "boot emmcflash0.kernel%s 'brcm_cma=520M@248M brcm_cma=%s@768M root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=12'\n" % (slot, "200M" if model == "h7" else "192M", slot * 2 + 1, model)
