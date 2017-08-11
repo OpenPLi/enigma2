@@ -330,11 +330,12 @@ class MultibootSelection(SelectImage):
 		currentSelected = self["list"].l.getCurrentSelection()
 		slot = currentSelected[0][1]
 		if currentSelected[0][1] != "Waiter":
+			model = HardwareInfo().get_device_model()
 			if slot < 12:
-				startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rw rootwait hd51_4.boxmode=1'\n" % (slot, slot * 2 + 1)
+				startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rw` rootwait %s_4.boxmode=1'\n" % (slot, slot * 2 + 1, model)
 			else:
 				slot -= 12
-				startupFileContents = "boot emmcflash0.kernel%s 'brcm_cma=520M@248M brcm_cma=192M@768M root=/dev/mmcblk0p%s rw rootwait hd51_4.boxmode=12'\n" % (slot, slot * 2 + 1)
+				startupFileContents = "boot emmcflash0.kernel%s 'brcm_cma=520M@248M brcm_cma=%s@768M root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=12'\n" % (slot, "200M" if model == "h7" else "192M", slot * 2 + 1, model)
 			open('/media//mmcblk0p1/STARTUP', 'w').write(startupFileContents)
 			from Screens.Standby import TryQuitMainloop
 			self.session.open(TryQuitMainloop, 2)
