@@ -75,3 +75,4 @@ SystemInfo["Has3DSurroundSoftLimiter"] = fileExists("/proc/stb/audio/3dsurround_
 SystemInfo["hasXcoreVFD"] = HardwareInfo().get_device_model() in ('osmega','spycat4k','spycat4kmini','spycat4kcombo') and fileCheck("/sys/module/brcmstb_%s/parameters/pt6302_cgram" % HardwareInfo().get_device_model())
 SystemInfo["canFlashWithOfgwrite"] = not HardwareInfo().get_device_model().startswith("dm")
 SystemInfo["canMultiBoot"] = HardwareInfo().get_device_model() in ('hd51', 'h7', 'vs1500') and '/media/%s/STARTUP' % ('mmcblk0p1' if HardwareInfo().get_device_model() == "hd51" else 'mmc')
+SystemInfo["canMode12"] = SystemInfo["canMultiBoot"] and '200M' if HardwareInfo().get_device_model() == "h7" else '192M'
