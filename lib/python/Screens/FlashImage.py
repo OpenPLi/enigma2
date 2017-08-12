@@ -52,23 +52,35 @@ class SelectImage(Screen):
 		self.delay.start(0, True)
 
 	def getImagesList(self, reply=None):
-		list = []
+
+		def getImages(path, files):
+			for file in [x for x in files if x.endswith('.zip') and model in x]:
+				try:
+					if checkimagefiles([x.split(os.sep)[-1] for x in zipfile.ZipFile(file).namelist()]):
+						medium = path.split(os.sep)[-1]
+						if medium not in self.imagesList:
+							self.imagesList[medium] = {}
+						self.imagesList[medium][file] = { 'link': file, 'name': file.split(os.sep)[-1]}
+				except:
+					pass
+
 		model = HardwareInfo().get_device_model()
+
 		if not self.imagesList:
 			try:
 				self.imagesList = json.load(urllib2.urlopen('https://openpli.org/download/json/%s' % model))
 			except:
 				self.imagesList = {}
-			for path, dirs, files in [x for x in os.walk('/media') if x[0].count(os.sep) <= 3]:
-				for file in ['/'.join([path, x]) for x in files if x.endswith('.zip') and model in x]:
-					try:
-						if checkimagefiles([x.split(os.sep)[-1] for x in zipfile.ZipFile(file).namelist()]):
-							medium = path.split(os.sep)[-1]
-							if medium not in self.imagesList:
-								self.imagesList[medium] = {}
-							self.imagesList[medium][file] = { 'link': file, 'name': file.split(os.sep)[-1]}
-					except:
-						pass
+
+			for media in ['/media/%s' % x for x in os.listdir('/media')]:
+				if not os.path.islink(media) and not(SystemInfo['HasMMC'] and "/mmc" in media):
+					getImages(media, ["%s/%s" % (media, x) for x in os.listdir(media) if x.endswith('.zip') and model in x])
+					if "downloaded_images" in os.listdir(media):
+						media = "%s/downloaded_images" % media
+						if os.path.isdir(media) and not os.path.islink(media) and not os.path.ismount(media):
+							getImages(media, ["%s/%s" % (media, x) for x in os.listdir(media) if x.endswith('.zip') and model in x])
+
+		list = []
 		for catagorie in reversed(sorted(self.imagesList.keys())):
 			if catagorie in self.expanded:
 				list.append(ChoiceEntryComponent('expanded',((str(catagorie)), "Expander")))
