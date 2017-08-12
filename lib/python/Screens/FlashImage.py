@@ -348,6 +348,6 @@ class MultibootSelection(SelectImage):
 			else:
 				slot -= 12
 				startupFileContents = "boot emmcflash0.kernel%s 'brcm_cma=520M@248M brcm_cma=%s@768M root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=12'\n" % (slot, "200M" if model == "h7" else "192M", slot * 2 + 1, model)
-			open('/media/%s/STARTUP' % ('mmcblk0p1' if model == "hd51" else 'mmc'), 'w').write(startupFileContents)
+			open(SystemInfo["canMultiBoot"], 'w').write(startupFileContents)
 			from Screens.Standby import TryQuitMainloop
 			self.session.open(TryQuitMainloop, 2)
