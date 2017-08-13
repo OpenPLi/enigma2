@@ -1,5 +1,5 @@
 from Components.SystemInfo import SystemInfo
-from enigma import eConsoleAppContainer
+from Components.Console import Console
 import os
 
 def GetCurrentImage():
@@ -15,8 +15,7 @@ class GetImagelist():
 			self.imagelist = {}
 			if not os.path.isdir('/tmp/testmount'):
 				os.mkdir('/tmp/testmount')
-			self.container = eConsoleAppContainer()
-			self.container.appClosed.append(self.appClosed)
+			self.container = Console()
 			self.slot = 1
 			self.phase = self.MOUNT
 			self.run()
@@ -24,11 +23,9 @@ class GetImagelist():
 			callback({})
 	
 	def run(self):
-		retval = self.container.execute('mount /dev/mmcblk0p%s /tmp/testmount' % str(self.slot * 2 + 1) if self.phase == self.MOUNT else 'umount /tmp/testmount')
-		if retval:
-			self.appClosed(retval)
+		self.container.ePopen('mount /dev/mmcblk0p%s /tmp/testmount' % str(self.slot * 2 + 1) if self.phase == self.MOUNT else 'umount /tmp/testmount', self.appClosed)
 			
-	def appClosed(self, retval):
+	def appClosed(self, data, retval, extra_args):
 		if retval == 0 and self.phase == self.MOUNT:
 			if os.path.isfile("/tmp/testmount/usr/bin/enigma2"):
 				self.imagelist[self.slot] =  { 'imagename': open("/tmp/testmount/etc/issue").readlines()[-2].capitalize().strip()[:-6] }
@@ -39,9 +36,7 @@ class GetImagelist():
 			self.phase = self.MOUNT
 			self.run()
 		else:
-			del self.container.appClosed[:]
-			del self.container
+			self.container.killAll()
 			if not os.path.ismount('/tmp/testmount'):
 				os.rmdir('/tmp/testmount')
 			self.callback(self.imagelist)
-
