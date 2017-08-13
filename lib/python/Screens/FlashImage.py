@@ -267,10 +267,10 @@ class FlashImage(Screen):
 					return checkimagefiles(files) and path
 		imagefiles = findimagefiles(self.unzippedimage)
 		if imagefiles:
-			if SystemInfo["canMultiBoot"] and self.multibootslot != self.currentimageslot:
+			if SystemInfo["canMultiBoot"]:
 				command = "/usr/bin/ofgwrite -k -r -m%s '%s'" % (self.multibootslot, imagefiles)
 			else:
-				command = "/usr/bin/ofgwrite %s'" % imagefiles
+				command = "/usr/bin/ofgwrite -k -r '%s'" % imagefiles
 			self.containerofgwrite = Console()
 			self.containerofgwrite.ePopen(command, self.FlashimageDone)
 		else:
