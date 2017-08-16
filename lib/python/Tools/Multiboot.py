@@ -5,6 +5,9 @@ import os
 def GetCurrentImage():
 	return SystemInfo["canMultiBoot"] and int(open('/sys/firmware/devicetree/base/chosen/kerneldev', 'r').read().replace('\0', '')[-1])
 
+def GetCurrentImageMode():
+	return SystemInfo["canMultiBoot"] and int(open('/sys/firmware/devicetree/base/chosen/bootargs', 'r').read().replace('\0', '').split('=')[-1])
+
 class GetImagelist():
 	MOUNT = 0
 	UNMOUNT = 1
