@@ -11,7 +11,7 @@ from Components.SystemInfo import SystemInfo
 from Tools.BoundFunction import boundFunction
 from Tools.Downloader import downloadWithProgress
 from Tools.HardwareInfo import HardwareInfo
-from Tools.Multiboot import GetImagelist, GetCurrentImage
+from Tools.Multiboot import GetImagelist, GetCurrentImage, GetCurrentImageMode
 import os, urllib2, json, time, zipfile
 from enigma import eTimer, eEPGCache
 
