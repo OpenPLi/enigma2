@@ -165,14 +165,14 @@ class FlashImage(Screen):
 	def getImagelistCallback(self, imagedict):
 		self.getImageList = None
 		imagelist = []
-		self.currentimageslot = GetCurrentImage()
+		currentimageslot = GetCurrentImage()
 		for x in range(1,5):
 			if x in imagedict:
-				imagelist.append(((_("slot%s - %s (current image)") if x == self.currentimageslot else _("slot%s - %s")) % (x, imagedict[x]['imagename']), x))
+				imagelist.append(((_("slot%s - %s (current image)") if x == currentimageslot else _("slot%s - %s")) % (x, imagedict[x]['imagename']), x))
 			else:
 				imagelist.append((_("slot%s - empty") % x, x))
 		imagelist.append((_("Do not flash image"), False))
-		self.session.openWithCallback(self.backupsettings, MessageBox, self.message, list=imagelist, default=self.currentimageslot, simple=True)
+		self.session.openWithCallback(self.backupsettings, MessageBox, self.message, list=imagelist, default=currentimageslot, simple=True)
 
 	def backupsettings(self, retval):
 		
@@ -332,12 +332,12 @@ class MultibootSelection(SelectImage):
 
 	def getImagelistCallback(self, imagesdict):
 		list = []
-		self.currentimageslot = GetCurrentImage()
+		currentimageslot = GetCurrentImage()
 		mode = SystemInfo["canMode12"] and GetCurrentImageMode() or 0
 		for x in sorted(imagesdict.keys()):
-			list.append(ChoiceEntryComponent('',((_("slot%s - %s mode 1 (current image)") if x == self.currentimageslot and mode == 1 else _("slot%s - %s mode 1")) % (x, imagesdict[x]['imagename']), x)))
+			list.append(ChoiceEntryComponent('',((_("slot%s - %s mode 1 (current image)") if x == currentimageslot and mode == 1 else _("slot%s - %s mode 1")) % (x, imagesdict[x]['imagename']), x)))
 			if SystemInfo["canMode12"]:
-				list.append(ChoiceEntryComponent('',((_("slot%s - %s mode 12 (current image)") if x == self.currentimageslot and mode == 12 else _("slot%s - %s mode 12")) % (x, imagesdict[x]['imagename']), x + 12)))
+				list.append(ChoiceEntryComponent('',((_("slot%s - %s mode 12 (current image)") if x == currentimageslot and mode == 12 else _("slot%s - %s mode 12")) % (x, imagesdict[x]['imagename']), x + 12)))
 		self["list"].setList(list)
 
 	def keyOk(self):
