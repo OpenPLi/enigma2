@@ -14,6 +14,7 @@ class NextEpgInfo(Renderer, VariableText):
 		self.timecolor = ""
 		self.labelcolor = ""
 		self.foregroundColor = "00?0?0?0"
+		self.numOfSpaces = 1
 
 	GUI_WIDGET = eLabel
 
@@ -25,18 +26,19 @@ class NextEpgInfo(Renderer, VariableText):
 			currentEvent = self.source.getCurrentEvent()
 			if currentEvent:
 				if not self.epgcache.startTimeQuery(eServiceReference(reference.toString()), currentEvent.getBeginTime() + currentEvent.getDuration()):
+					spaces = " "*self.numOfSpaces
 					if self.numberOfItems == 1:
 						event = self.epgcache.getNextTimeEntry()
 						if event:
 							if self.hideLabel:
-								self.text = "%s%s %s%s" % (self.timecolor, strftime("%H:%M", localtime(event.getBeginTime())), self.foregroundColor, event.getEventName())
+								self.text = "%s%s%s%s%s" % (self.timecolor, strftime("%H:%M", localtime(event.getBeginTime())), spaces, self.foregroundColor, event.getEventName())
 							else:
-								self.text = "%s%s: %s%s" % (self.labelcolor, pgettext("now/next: 'next' event label", "Next"), self.foregroundColor, event.getEventName())
+								self.text = "%s%s:%s%s%s" % (self.labelcolor, pgettext("now/next: 'next' event label", "Next"), spaces, self.foregroundColor, event.getEventName())
 					else:
 						for x in range(self.numberOfItems):
 							event = self.epgcache.getNextTimeEntry()
 							if event:
-								self.text += "%s%s %s%s\n" % (self.timecolor, strftime("%H:%M", localtime(event.getBeginTime())), self.foregroundColor, event.getEventName())
+								self.text += "%s%s%s%s%s\n" % (self.timecolor, strftime("%H:%M", localtime(event.getBeginTime())), spaces, self.foregroundColor, event.getEventName())
 						if not self.hideLabel:
 							self.text = self.text and "%s%s\n%s" % (self.labelcolor, pgettext("now/next: 'next' event label", "Next"), self.text) or ""
 
@@ -48,6 +50,9 @@ class NextEpgInfo(Renderer, VariableText):
 				attribs.append((attrib, value))
 			if attrib == "noLabel":
 				self.hideLabel = int(value)
+				attribs.append((attrib, value))
+			if attrib == "numOfSpaces":
+				self.numOfSpaces = int(value)
 				attribs.append((attrib, value))
 			if attrib == "timeColor":
 				self.timecolor = self.hex2strColor(parseColor(value).argb())
