@@ -272,6 +272,8 @@ class TimerSanityCheck:
 				for entry in event[4]:
 					if entry[1] is ConflictTimer:
 						break
+				else:
+					continue
 				for entry in event[4]:
 					if not entry[1] in self.simultimer:
 						for x in entry[2]:
