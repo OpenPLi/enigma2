@@ -72,8 +72,8 @@ def getPiconName(serviceName):
 				#fallback to 1 for other reftypes
 				fields[0] = '1'
 				pngname = findPicon('_'.join(fields))
-			if not pngname and fields[2] != '2':
-				#fallback to 1 for tv services with nonstandard servicetypes
+			if not pngname and fields[2] != '1':
+				#fallback to 1 for services with different service types
 				fields[2] = '1'
 				pngname = findPicon('_'.join(fields))
 	if not pngname: # picon by channel name
