@@ -321,12 +321,12 @@ class HotkeySetup(Screen):
 class HotkeySetupSelect(Screen):
 	def __init__(self, session, key, args=None):
 		Screen.__init__(self, session)
-		self.skinName="HotkeySetup"
 		self.session = session
 		self.key = key
 		self.setTitle(_("Hotkey Setup") + " " + key[0][0])
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("Save"))
+		self["key_yellow"] = Button(_("Remove and order"))
 		self.mode = "list"
 		self.hotkeyFunctions = getHotkeyFunctions()
 		self.config = eval("config.misc.hotkey." + key[0][1])
@@ -350,6 +350,7 @@ class HotkeySetupSelect(Screen):
 			"cancel": self.cancel,
 			"red": self.cancel,
 			"green": self.save,
+			"yellow": self.toggleMode,
 			"up": self.keyUp,
 			"down": self.keyDown,
 			"left": self.keyLeft,
@@ -393,10 +394,12 @@ class HotkeySetupSelect(Screen):
 			self.mode = "choosen"
 			self["choosen"].selectionEnabled(1)
 			self["list"].selectionEnabled(0)
+			self["key_yellow"].setText(_("Select Function"))
 		elif self.mode == "choosen":
 			self.mode = "list"
 			self["choosen"].selectionEnabled(0)
 			self["list"].selectionEnabled(1)
+			self["key_yellow"].setText(_("Remove and order"))
 
 	def keyOk(self):
 		if self.mode == "list":
