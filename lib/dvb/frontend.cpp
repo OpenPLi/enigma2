@@ -677,6 +677,26 @@ int eDVBFrontend::openFrontend()
 		m_sn = eSocketNotifier::create(eApp, m_fd, eSocketNotifier::Read, false);
 		CONNECT(m_sn->activated, eDVBFrontend::feEvent);
 	}
+	else
+	{
+		fe_info.frequency_min = 900000;
+		fe_info.frequency_max = 2200000;
+
+		eDebug("[eDVBFrontend] opening frontend %d", m_dvbid);
+		int tmp_fd = ::open(m_filename.c_str(), O_RDONLY | O_NONBLOCK | O_CLOEXEC);
+		if (tmp_fd < 0)
+		{
+			eWarning("[eDVBFrontend] opening %s failed: %m", m_filename.c_str());
+		}
+		else
+		{
+			if (::ioctl(tmp_fd, FE_GET_INFO, &fe_info) < 0)
+			{
+				eWarning("[eDVBFrontend] ioctl FE_GET_INFO on frontend %s failed: %m", m_filename.c_str());
+			}
+			::close(tmp_fd);
+		}
+	}
 
 	m_multitype = m_delsys[SYS_DVBS] && (m_delsys[SYS_DVBT] || m_delsys[SYS_DVBC_ANNEX_A]);
 
