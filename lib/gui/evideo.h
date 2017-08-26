@@ -9,7 +9,6 @@ class eVideoWidget: public eLabel
 	int m_state;
 	eRect m_user_rect;
 	int m_decoder;
-	bool m_adjust_position;
 	static ePtr<eTimer> fullsizeTimer;
 	static int pendingFullsize;
 	static int posFullsizeLeft;
@@ -22,7 +21,6 @@ public:
 	~eVideoWidget();
 	void setDecoder(int target);
 	void setFBSize(eSize size);
-	void setAdjustPosition(bool value);
 	void setFullScreenPosition(eRect pos);
 	static void setFullsize(bool force = false);
 protected:
