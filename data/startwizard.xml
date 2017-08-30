@@ -196,6 +196,19 @@ self.selectKey("LEFT")
 self.selectKey("RIGHT")
 			</code>
 		</step>
+		<step id="nimr">
+			<condition>
+from Components.NimManager import nimmanager
+self.condition = len(nimmanager.nim_slots) > 17 and not nimmanager.nim_slots[17].empty
+			</condition>
+			<text value="Please set up tuner R" />
+			<config screen="NimSetup" module="Satconfig" args="17" type="ConfigList" />
+			<code>
+self.clearSelectedKeys()
+self.selectKey("LEFT")
+self.selectKey("RIGHT")
+			</code>
+		</step>
 		<step id="channels">
 			<condition>
 from Components.NimManager import nimmanager
@@ -209,53 +222,23 @@ self.selectKey("LEFT")
 self.selectKey("RIGHT")
 			</code>
 		</step>
-		<step id="scanquestion">
-			<text value="Do you want to do a service scan?" />
+		<step id="doscan">
+			<text value="What type of service scan do you want?" />
 			<condition>
 from Components.NimManager import nimmanager
-self.condition = nimmanager.somethingConnected() and not config.misc.installwizard.channellistdownloaded.value
+self.condition = nimmanager.somethingConnected()
 			</condition>
+			<config screen="InstallWizard" module="InstallWizard" args="3" type="ConfigList" />
 			<code>
-self.hideRc()
+self.clearSelectedKeys()
+self.selectKey("OK")
 			</code>
-			<list>
-				<listentry caption="No" step="plugins" />
-				<listentry caption="Yes, do an automatic scan now" step="scan" />
-				<listentry caption="Yes, do a manual scan now" step="manualscan" />
-			</list>
-		</step>
-		<step id="scan" nextstep="plugins">
-			<condition>
-from Components.NimManager import nimmanager
-self.condition = nimmanager.somethingConnected() and not config.misc.installwizard.channellistdownloaded.value
-			</condition>
-			<text value="What do you want to scan?" />
-			<config screen="ScanSimple" module="ScanSetup" type="ConfigList" />
-		</step>
-		<step id="manualscan">
-			<condition>
-from Components.NimManager import nimmanager
-self.condition = nimmanager.somethingConnected() and not config.misc.installwizard.channellistdownloaded.value
-			</condition>
-			<text value="What do you want to scan?" />
-			<config screen="ScanSetup" module="ScanSetup" type="ConfigList" />
-		</step>
-		<step id="nextscan">
-			<condition>
-from Components.NimManager import nimmanager
-self.condition = nimmanager.somethingConnected() and not config.misc.installwizard.channellistdownloaded.value
-			</condition>
-			<text value="Do you want to do another manual service scan?" />
-			<list>
-				<listentry caption="No" step="plugins" />
-				<listentry caption="Yes, do another manual scan now" step="manualscan" />
-			</list>
 		</step>
 		<step id="plugins">
 			<condition>
 self.condition = config.misc.installwizard.hasnetwork.value and config.misc.installwizard.ipkgloaded.value
 			</condition>
-			<text value="Plugin install" />
+			<text value="Do you want to install Plugins?" />
 			<config screen="InstallWizard" module="InstallWizard" args="2" type="ConfigList" />
 			<code>
 self.clearSelectedKeys()
