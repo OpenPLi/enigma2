@@ -25,6 +25,7 @@ class RecordPathsSettings(Screen,ConfigListScreen):
 		self["key_green"] = StaticText(_("Save"))
 		self.setTitle(_("Recording paths"))
 		ConfigListScreen.__init__(self, [])
+		config.movielist.videodirs.load()
 		self.initConfigList()
 
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions", "MenuActions"],
