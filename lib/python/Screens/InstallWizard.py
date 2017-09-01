@@ -12,7 +12,6 @@ config.misc.installwizard.hasnetwork = ConfigBoolean(default = False)
 config.misc.installwizard.ipkgloaded = ConfigBoolean(default = False)
 config.misc.installwizard.channellistdownloaded = ConfigBoolean(default = False)
 
-
 class InstallWizard(Screen, ConfigListScreen):
 
 	STATE_UPDATE = 0
@@ -25,6 +24,7 @@ class InstallWizard(Screen, ConfigListScreen):
 
 		self.index = args
 		self.list = []
+		self.doNextStep = False
 		ConfigListScreen.__init__(self, self.list)
 
 		if self.index == self.STATE_UPDATE:
@@ -115,24 +115,31 @@ class InstallWizard(Screen, ConfigListScreen):
 	def run(self):
 		if self.index == self.STATE_UPDATE and config.misc.installwizard.hasnetwork.value:
 			self.session.open(InstallWizardIpkgUpdater, self.index, _('Please wait (updating packages)'), IpkgComponent.CMD_UPDATE)
-		elif self.index == self.STATE_CHOISE_CHANNELLIST and self.enabled.value:
-			self.session.open(InstallWizardIpkgUpdater, self.index, _('Please wait (downloading channel list)'), IpkgComponent.CMD_REMOVE, {'package': 'enigma2-plugin-settings-hans-' + self.channellist_type.value})
-		elif self.index == self.INSTALL_PLUGINS and self["config"].getCurrent()[1] == self.doplugins:
-			from PluginBrowser import PluginDownloadBrowser
-			self.session.open(PluginDownloadBrowser, 0)
+			self.doNextStep = True
+		elif self.index == self.STATE_CHOISE_CHANNELLIST:
+			if self.enabled.value:
+				self.session.open(InstallWizardIpkgUpdater, self.index, _('Please wait (downloading channel list)'), IpkgComponent.CMD_REMOVE, {'package': 'enigma2-plugin-settings-hans-' + self.channellist_type.value})
+			self.doNextStep = True
+		elif self.index == self.INSTALL_PLUGINS:
+			if self["config"].getCurrent()[1] == self.doplugins:
+				from PluginBrowser import PluginDownloadBrowser
+				self.session.open(PluginDownloadBrowser, 0)
+			self.doNextStep = True
 		elif self.index == self.SCAN:
 			if self["config"].getCurrent()[1] == self.autoscan:
 				from Screens.ScanSetup import ScanSimple
 				self.session.open(ScanSimple)
-			if self["config"].getCurrent()[1] == self.manualscan:
+			elif self["config"].getCurrent()[1] == self.manualscan:
 				from Screens.ScanSetup import ScanSetup
 				self.session.open(ScanSetup)
-			if self["config"].getCurrent()[1] == self.fastscan:
+			elif self["config"].getCurrent()[1] == self.fastscan:
 				from Plugins.SystemPlugins.FastScan.plugin import FastScanMain
 				FastScanMain(self.session)
-			if self["config"].getCurrent()[1] == self.cablescan:
+			elif self["config"].getCurrent()[1] == self.cablescan:
 				from Plugins.SystemPlugins.CableScan.plugin import CableScanMain
 				CableScanMain(self.session)
+			else:
+				self.doNextStep = True
 
 class InstallWizardIpkgUpdater(Screen):
 	skin = """
