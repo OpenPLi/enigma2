@@ -62,6 +62,7 @@ class TimerEntry(Screen, ConfigListScreen):
 		pipzap = self.timer.pipzap
 		rename_repeat = self.timer.rename_repeat
 		conflict_detection = self.timer.conflict_detection
+		config.movielist.videodirs.load()
 
 		afterevent = {
 			AFTEREVENT.NONE: "nothing",
