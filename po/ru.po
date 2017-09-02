@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-08 23:20+0100\n"
-"PO-Revision-Date: 2017-02-20 19:46+0200\n"
+"PO-Revision-Date: 2017-09-02 14:39+0300\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: openPLi Dimitrij\n"
 "Language: ru\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 1.8.9\n"
+"X-Generator: Poedit 2.0.1\n"
 
 msgid ""
 "\n"
@@ -2791,7 +2791,7 @@ msgid "Fast DiSEqC"
 msgstr "Быстрый DiSEqC (без задержки команд)"
 
 msgid "Fast Scan"
-msgstr "Быстрый поиск по провайдеру"
+msgstr "Быстрый поиск - провайдеры 23.5E-19.2E"
 
 msgid "Fast epoch"
 msgstr "Время для быстрой скорости"
@@ -6550,7 +6550,7 @@ msgid "System & Modulation"
 msgstr "Система & Модуляция"
 
 msgid "TRANSLATOR_INFO"
-msgstr "Dimitrij - Latvija/Liepaja - 28.07.2017"
+msgstr "Dimitrij - Latvija/Liepaja - 2.09.2017"
 
 msgid "TS file is too large for ISO9660 level 1!"
 msgstr "TS файл слишком большой для ISO9660 level 1!"
@@ -9596,23 +9596,124 @@ msgstr "Не удалось выполнить бекап настроек, та
 msgid "Could not find suitable media - Please insert a media (e.g. USB stick) and try again!"
 msgstr "Не удалось найти подходящий накопитель. Пожалуйста, вставьте, например, флешку USB и повторите попытку!"
 
-msgid "Error during backup settings\n%s"
-msgstr "Ошибка при создании бекапа настроек\n%s"
+msgid ""
+"Error during backup settings\n"
+"%s"
+msgstr ""
+"Ошибка при создании бекапа настроек\n"
+"%s"
 
 msgid "Downloading Image"
 msgstr "Загрузка имиджа"
 
-msgid "Error during downloading image\n%s\n%s"
-msgstr "Ошибка при загрузке имиджа\n%s\n%s"
+msgid ""
+"Error during downloading image\n"
+"%s\n"
+"%s"
+msgstr ""
+"Ошибка при загрузке имиджа\n"
+"%s\n"
+"%s"
 
-msgid "Error during unzipping image\n%s\n%s"
-msgstr "Ошибка при распаковке имиджа\n%s\n%s"
+msgid ""
+"Error during unzipping image\n"
+"%s"
+msgstr ""
+"Ошибка при распаковке имиджа\n"
+"%s"
 
-msgid "Image to install is invalid\n%s"
-msgstr "Недопустимый имидж для прошивки\n%s"
+msgid ""
+"Image to install is invalid\n"
+"%s"
+msgstr ""
+"Недопустимый имидж для прошивки\n"
+"%s"
 
-msgid "Recording(s) are in progress or coming up in few seconds! Do you stull want to flash an image?"
-msgstr "Запись(и) в процессе или начнется в ближайшие несколько минут/секунд! Вы все еще хотите прошить имидж?"
+msgid ""
+"Recording(s) are in progress or coming up in few seconds!\n"
+"Do you still want to flash image\n"
+"%s?"
+msgstr ""
+"Запись(и) в процессе или начнется в ближайшие несколько минут/секунд! Вы все еще хотите прошить имидж\n"
+"%s?"
 
 msgid "Backing up to: %s"
 msgstr "Выполняется бекап на: %s"
+
+msgid "Do you want to install Plugins?"
+msgstr "Вы хотите установить плагины?"
+
+msgid "What type of service scan do you want?"
+msgstr "Какой тип сканирования Вы хотите выбрать?"
+
+msgid "No, I do not want to install plugins"
+msgstr "Нет, я не хочу устанавливать плагины"
+
+msgid "Yes, I do want to install plugins"
+msgstr "Да, я хочу установить плагины"
+
+msgid "I do not want to perform any service scans"
+msgstr "Я не хочу выполнять никакое сканирование"
+
+msgid "Do an automatic service scan now"
+msgstr "Выполнить автоматический поиск сервисов сейчас"
+
+msgid "Do a manual service scan now"
+msgstr "Выполнить ручной поиск сервисов сейчас"
+
+msgid "Do a fast service scan now"
+msgstr "Выполнить быстрый поиск (23.5E-19.2E) сервисов сейчас"
+
+msgid "Do a cable service scan now"
+msgstr "Выполнить ручной поиск сервисов сейчас"
+
+msgid ""
+"Do you want to flash image\n"
+"%s?"
+msgstr ""
+"Вы хотите прошить имидж\n"
+"%s?"
+
+msgid "slot%s - %s (current image)"
+msgstr "слот%s - %s (текущмй имидж)"
+
+msgid "slot%s - %s"
+msgstr "слот%s - %s"
+
+msgid "slot%s - empty"
+msgstr "слот%s - пустой"
+
+msgid "Do not flash image"
+msgstr "Не прошивать имидж"
+
+msgid ""
+"Flashing image was not succesfull\n"
+"%s"
+msgstr ""
+"Прошивка имиджа не закончилась успехом\n"
+"%s"
+
+msgid ""
+"%s\n"
+"Press exit to close"
+msgstr ""
+"%s\n"
+"Нажать выход и закрыть"
+
+msgid "Flashing image succesfull"
+msgstr "Прошивка имиджа завершена успешна"
+
+msgid "Select Multiboot"
+msgstr "Выбор мультибута"
+
+msgid "Retreiving image slots - Please wait..."
+msgstr "Получение слотов имиджа - пожалуйста, подождите..."
+
+msgid "Reboot"
+msgstr "Перезагрузка"
+
+msgid "slot%s - %s mode 1 (current image)"
+msgstr "слот%s - %s режим 1 (текущий имидж)"
+
+msgid "slot%s - %s mode 12 (current image)"
+msgstr "слот%s - %s режим 12 (текущий имидж)"
