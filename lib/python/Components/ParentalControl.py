@@ -182,7 +182,7 @@ class ParentalControl:
 	def saveListToFile(self, sWhichList, vList):
 		file = open(resolveFilename(SCOPE_CONFIG, sWhichList), 'w')
 		for sService,sType in vList.iteritems():
-			if TYPE_SERVICE in sType or TYPE_BOUQUET in sType:
+			if (TYPE_SERVICE in sType or TYPE_BOUQUET in sType) and not sService.startswith("-"):
 				file.write(str(sService) + "\n")
 		file.close()
 
