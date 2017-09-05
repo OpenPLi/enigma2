@@ -1641,7 +1641,12 @@ class ChannelSelectionBase(Screen):
 				else:
 					self.moveDown()
 				ref = self.getCurrentSelection()
-				self.enterPath(ref)
+				if not self.getMutableList() or Components.ParentalControl.parentalControl.isServicePlayable(ref, self.changeBouquetParentalControlCallback, self.session):
+					self.changeBouquetParentalControlCallback(ref)
+
+	def changeBouquetParentalControlCallback(self, ref):
+		self.enterPath(ref)
+		self.revertMode = None
 
 	def inBouquet(self):
 		if self.servicePath and self.servicePath[0] == self.bouquet_root:
