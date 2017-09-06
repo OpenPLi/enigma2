@@ -2571,3 +2571,6 @@ class SimpleChannelSelection(ChannelSelectionBase, SelectionEventInfo):
 	def setModeRadio(self):
 		self.setRadioMode()
 		self.showFavourites()
+
+	def getMutableList(self, root=None):
+		return None
