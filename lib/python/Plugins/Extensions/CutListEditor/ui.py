@@ -13,6 +13,9 @@ from Screens.FixedMenu import FixedMenu
 from Screens.HelpMenu import HelpableScreen
 from ServiceReference import ServiceReference
 from Components.Sources.List import List
+from Components.Console import Console
+from Screens.ChoiceBox import ChoiceBox
+from time import gmtime, strftime
 
 import bisect
 
@@ -436,12 +439,20 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 	def grabFrame(self):
 		service = self.session.nav.getCurrentlyPlayingServiceReference()
 		if service:
-			path = service.getPath()
-			from Components.Console import Console
-			grabConsole = Console()
-			cmd = 'grab -vblpr%d "%s"' % (180, path.rsplit('.',1)[0] + ".png")
-			grabConsole.ePopen(cmd)
-			self.playpauseService()
+			def grabCallback(choice = None):
+				if choice is None:
+					self.playpauseService()
+					return
+				x_size = choice[1]
+				path = service.getPath()
+				grabConsole = Console()
+				cmd = 'grab -vblpr%d "%s"' % (x_size, path.rsplit('.',1)[0] + strftime("_%Y%m%d%H%M%S", gmtime()) + ".png")
+				grabConsole.ePopen(cmd)
+				self.playpauseService()
+			menu = [("1920",1920),("720",720),("360",360),("180",180)]
+			buttons = ["1","2","3","4"]
+			text = _("Select horizontal resolution:")
+			self.session.openWithCallback(grabCallback, ChoiceBox, title=text, list=menu, keys=buttons)
 
 	def toggleIntro(self):
 		config.plugins.CutListEditor.showIntro.value = not config.plugins.CutListEditor.showIntro.value
