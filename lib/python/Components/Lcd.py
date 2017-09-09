@@ -1,7 +1,7 @@
 from config import config, ConfigSubsection, ConfigSlider, ConfigYesNo, ConfigNothing
 from enigma import eDBoxLCD
 from Components.SystemInfo import SystemInfo
-from Screens.InfoBar import InfoBar
+import Screens.InfoBar
 from Screens.Screen import Screen
 
 class dummyScreen(Screen):
