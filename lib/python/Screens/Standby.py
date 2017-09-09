@@ -9,7 +9,6 @@ from Components.config import config
 from Components.AVSwitch import AVSwitch
 from Components.Console import Console
 from Components.Harddisk import internalHDDNotSleeping
-from Components.Lcd import setLCDLiveTv
 from Components.SystemInfo import SystemInfo
 from GlobalActions import globalActionMap
 from enigma import eDVBVolumecontrol, eTimer, eDVBLocalTimeHandler, eServiceReference
@@ -286,7 +285,6 @@ class TryQuitMainloop(MessageBox):
 		self.session.nav.stopService()
 		self.quitScreen = self.session.instantiateDialog(QuitMainloopScreen, retvalue=self.retval)
 		self.quitScreen.show()
-		setLCDLiveTv(False)
 		quitMainloop(self.retval)
 
 	def __onShow(self):
