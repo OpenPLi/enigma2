@@ -63,6 +63,14 @@ class AutoDiseqc(Screen, ConfigListScreen):
 		eDVBFrontendParametersSatellite.System_DVB_S, eDVBFrontendParametersSatellite.Modulation_Auto, \
 		eDVBFrontendParametersSatellite.RollOff_auto, eDVBFrontendParametersSatellite.Pilot_Unknown, \
 		-1, 0, 1, 706, 1536, "Thor 5/6/7 0.8w"),
+
+		# hispasat 300 tsa
+		( 10890, 27500, \
+		eDVBFrontendParametersSatellite.Polarisation_Vertical, eDVBFrontendParametersSatellite.FEC_3_4, \
+		eDVBFrontendParametersSatellite.Inversion_Off, 3300, \
+		eDVBFrontendParametersSatellite.System_DVB_S, eDVBFrontendParametersSatellite.Modulation_Auto, \
+		eDVBFrontendParametersSatellite.RollOff_auto, eDVBFrontendParametersSatellite.Pilot_Unknown, \
+		-1, 0, 0, 1388, 1388, "Hispasat 30.0w"),
 	]
 
 	SAT_TABLE_FREQUENCY = 0
@@ -252,9 +260,17 @@ class AutoDiseqc(Screen, ConfigListScreen):
 		else:
 			self.tunerStopScan(False)
 			return
-		self["tunerstatusbar"].setText(_("Tuner status %s") % (dict["tuner_state"]))
 
-		if dict["tuner_state"] == "LOSTLOCK" or dict["tuner_state"] == "FAILED":
+		if dict["tuner_state"] == "TUNING":
+			self["tunerstatusbar"].setText(_("Tuner status:") + " " + _("TUNING"))
+		elif dict["tuner_state"] == "LOCKED":
+			self["tunerstatusbar"].setText(_("Tuner status:") + " " + _("ACQUIRING TSID/ONID"))
+		elif dict["tuner_state"] == "IDLE":
+			self["tunerstatusbar"].setText(_("Tuner status:") + " " + _("IDLE"))
+		elif dict["tuner_state"] == "UNKNOWN":
+			self["tunerstatusbar"].setText(_("Tuner status:") + " " + _("UNKNOWN"))
+		elif dict["tuner_state"] == "LOSTLOCK" or dict["tuner_state"] == "FAILED":
+			self["tunerstatusbar"].setText(_("Tuner status:") + " " + _("FAILED"))
 			self.tunerStopScan(False)
 			return
 
