@@ -141,6 +141,7 @@ class ChannelContextMenu(Screen):
 
 		self.removeFunction = False
 		self.addFunction = False
+		self.PiPAvailable = False
 		current = csel.getCurrentSelection()
 		current_root = csel.getRoot()
 		current_sel_path = current.getPath()
@@ -208,11 +209,11 @@ class ChannelContextMenu(Screen):
 							append_when_current_valid(current, menu, (_("add service to favourites"), self.addServiceToBouquetSelected), level=0, key="5")
 							self.addFunction = self.addServiceToBouquetSelected
 					if SystemInfo["PIPAvailable"]:
-						if not self.parentalControlEnabled or self.parentalControl.getProtectionLevel(current.toCompareString()) == -1:
-							if self.csel.dopipzap:
-								append_when_current_valid(current, menu, (_("play in mainwindow"), self.playMain), level=0, key="red")
-							else:
-								append_when_current_valid(current, menu, (_("play as picture in picture"), self.showServiceInPiP), level=0, key="blue")
+						self.PiPAvailable = True
+						if self.csel.dopipzap:
+							append_when_current_valid(current, menu, (_("play in mainwindow"), self.playMain), level=0, key="red")
+						else:
+							append_when_current_valid(current, menu, (_("play as picture in picture"), self.showServiceInPiP), level=0, key="blue")
 					append_when_current_valid(current, menu, (_("find currently played service"), self.findCurrentlyPlayed), level=0, key="3")
 				else:
 					if 'FROM SATELLITES' in current_root.getPath() and current and _("Services") in eServiceCenter.getInstance().info(current).getName(current):
@@ -411,10 +412,12 @@ class ChannelContextMenu(Screen):
 		self.close()
 
 	def playMain(self):
-		sel = self.csel.getCurrentSelection()
-		if sel and sel.valid() and self.csel.dopipzap and (not self.parentalControlEnabled or self.parentalControl.getProtectionLevel(self.csel.getCurrentSelection().toCompareString()) == -1):
+		ref = self.csel.getCurrentSelection()
+		if ref and ref.valid() and self.PiPAvailable and self.csel.dopipzap:
 			self.csel.zap()
-			self.csel.setCurrentSelection(sel)
+			self.csel.startServiceRef = None
+			self.csel.startRoot = None
+			self.csel.correctChannelNumber()
 			self.close(True)
 		else:
 			return 0
@@ -508,16 +511,14 @@ class ChannelContextMenu(Screen):
 		else:
 			self.close()
 
-	def showServiceInPiP(self):
-		if self.csel.dopipzap or (self.parentalControlEnabled and not self.parentalControl.getProtectionLevel(self.csel.getCurrentSelection().toCompareString()) == -1):
-			return 0
-		if self.session.pipshown:
-			del self.session.pip
-		self.session.pip = self.session.instantiateDialog(PictureInPicture)
-		self.session.pip.show()
-		newservice = self.csel.servicelist.getCurrent()
-		currentBouquet = self.csel.servicelist and self.csel.servicelist.getRoot()
-		if newservice and newservice.valid():
+	def showServiceInPiP(self, root=None, ref=None):
+		newservice = ref or self.csel.getCurrentSelection()
+		currentBouquet = root or self.csel.getRoot()
+		if ref and root or (self.PiPAvailable and not self.csel.dopipzap and newservice and newservice.valid() and Components.ParentalControl.parentalControl.isServicePlayable(newservice, boundFunction(self.showServiceInPiP, root=currentBouquet), self.session)):
+			if hasattr(self.session, 'pipshown') and self.session.pipshown and hasattr(self.session, 'pip'):
+				del self.session.pip
+			self.session.pip = self.session.instantiateDialog(PictureInPicture)
+			self.session.pip.show()
 			if self.session.pip.playService(newservice):
 				self.session.pipshown = True
 				self.session.pip.servicePath = self.csel.getCurrentServicePath()
@@ -2037,6 +2038,9 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 			self.__evServiceStart()
 			# Move to playing service
 			lastservice = eServiceReference(self.lastservice.value)
+			ref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
+			if ref and Components.ParentalControl.parentalControl.isProtected(ref):
+				lastservice = ref
 			if lastservice.valid() and self.getCurrentSelection() != lastservice:
 				self.setCurrentSelection(lastservice)
 				if self.getCurrentSelection() != lastservice:
@@ -2107,6 +2111,7 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 				if self.startServiceRef is None or nref != self.startServiceRef:
 					self.addToHistory(nref)
 				if self.dopipzap:
+					self.session.pip.servicePath = self.getCurrentServicePath()
 					self.setCurrentSelection(self.session.pip.getCurrentService())
 				else:
 					self.mainScreenMode = config.servicelist.lastmode.value
@@ -2115,7 +2120,7 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 			else:
 				Notifications.RemovePopup("Parental control")
 				self.setCurrentSelection(nref)
-		else:
+		elif not self.dopipzap:
 			self.setStartRoot(self.curRoot)
 			self.setCurrentSelection(self.session.nav.getCurrentlyPlayingServiceOrGroup())
 		if not preview_zap:
@@ -2272,6 +2277,9 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 				self.setCurrentSelection(self.session.pip.getCurrentService())
 			else:
 				lastservice = eServiceReference(self.lastservice.value)
+				ref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
+				if ref and Components.ParentalControl.parentalControl.isProtected(ref):
+					lastservice = ref
 				if lastservice.valid() and self.getCurrentSelection() != lastservice:
 					self.setCurrentSelection(lastservice)
 		self.asciiOff()

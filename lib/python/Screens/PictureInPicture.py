@@ -179,6 +179,7 @@ class PictureInPicture(Screen):
 		return self.choicelist[config.av.pip_mode.index][1]
 
 	def playService(self, service):
+		Notifications.RemovePopup("ZapPipError")
 		if service is None:
 			return False
 		ref = self.resolveAlternatePipService(service)
