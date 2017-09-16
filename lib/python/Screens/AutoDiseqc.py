@@ -66,8 +66,8 @@ class AutoDiseqc(Screen, ConfigListScreen):
 		(
 			11778,
 			27500,
-			eDVBFrontendParametersSatellite.Polarisation_Horizontal,
-			eDVBFrontendParametersSatellite.FEC_5_6,
+			eDVBFrontendParametersSatellite.Polarisation_Vertical,
+			eDVBFrontendParametersSatellite.FEC_2_3,
 			eDVBFrontendParametersSatellite.Inversion_Off,
 			282,
 			eDVBFrontendParametersSatellite.System_DVB_S,
