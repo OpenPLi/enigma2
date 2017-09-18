@@ -214,8 +214,6 @@ protected:
 	eDVBServiceEITHandler m_event_handler;
 	int m_current_audio_pid;
 
-	bool m_qpip_mode;
-
 	eDVBServicePlay(const eServiceReference &ref, eDVBService *service);
 
 		/* events */

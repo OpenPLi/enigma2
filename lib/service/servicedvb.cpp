@@ -1031,8 +1031,7 @@ eDVBServicePlay::eDVBServicePlay(const eServiceReference &ref, eDVBService *serv
 	m_cutlist_enabled(1),
 	m_subtitle_widget(0),
 	m_subtitle_sync_timer(eTimer::create(eApp)),
-	m_nownext_timer(eTimer::create(eApp)),
-	m_qpip_mode(false)
+	m_nownext_timer(eTimer::create(eApp))
 {
 	CONNECT(m_service_handler.serviceEvent, eDVBServicePlay::serviceEvent);
 	CONNECT(m_service_handler_timeshift.serviceEvent, eDVBServicePlay::serviceEventTimeshift);
@@ -3552,7 +3551,7 @@ ePtr<iStreamData> eDVBServicePlay::getStreamingData()
 
 void eDVBServicePlay::setQpipMode(bool value, bool audio)
 {
-	m_qpip_mode = value;
+	(void) value;
 	m_noaudio = !audio;
 
 	if(m_decoder)
