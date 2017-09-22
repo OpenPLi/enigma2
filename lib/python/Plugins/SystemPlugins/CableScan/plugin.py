@@ -181,8 +181,7 @@ class CableScanScreen(ConfigListScreen, Screen):
 					self.prevservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 					self.session.nav.stopService()
 					freeTunerMask = tunedTunerMask
-		import math
-		self.freeTuner = freeTunerMask and int(math.log(freeTunerMask, 2))
+		self.freeTuner = freeTunerMask and len(bin(freeTunerMask).rsplit("1", 1)[1])
 		return freeTunerMask > 0
 
 	def startScan(self):
