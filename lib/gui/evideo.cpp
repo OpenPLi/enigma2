@@ -145,3 +145,4 @@ void eVideoWidget::setDecoder(int decoder)
 {
 	m_decoder = decoder;
 }
+

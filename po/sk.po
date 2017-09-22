@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-10 09:47+0200\n"
-"PO-Revision-Date: 2017-04-10 10:56+0200\n"
+"POT-Creation-Date: 2017-02-08 23:20+0100\n"
+"PO-Revision-Date: 2017-09-19 13:41+0200\n"
 "Last-Translator: Andrej Tobola <andrej.tobola@gmail.com>\n"
 "Language-Team: \n"
 "Language: sk\n"
@@ -6546,7 +6546,6 @@ msgstr "Systém"
 msgid "System & Modulation"
 msgstr "Systém a Modulácia"
 
-#. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
 msgid "TRANSLATOR_INFO"
 msgstr ""
 "Autori: Andrej <andrej.tobola@gmail.com> 2017 \n"
@@ -9554,7 +9553,179 @@ msgstr "Expertné nastavenia"
 msgid "Use 12 characters display mode"
 msgstr "Použiť 12 znakový režim displeja"
 
+msgid "If enabled, display shows 12 chars instead 8, but in latin-1/translit only."
+msgstr "Ak je povolené, displej zobrazí 12 znakov namiesto 8, ale iba v móde latin-1."
+
+msgid "Send 'sourceactive' before zap timers"
+msgstr "Odoslať 'sourceactive' pred zapnutím časovačov"
+
+msgid "Flash image"
+msgstr "Nahrať image"
+
+msgid "Select Image"
+msgstr "Vybrať image"
+
+msgid "Retreiving image list - Please wait..."
+msgstr "Načítavanie zoznamu image-ov - Prosím čakajte..."
+
+msgid "Cannot find images - please try later"
+msgstr "Nie je možné nájsť image, skúste to prosím neskôr"
+
+msgid "Cannot create image list - please try later"
+msgstr "Nie je možné vytvoriť zoznam image, skúste to prosím neskôr"
+
+msgid "Country"
+msgstr "Krajina"
+
+msgid "Zapped to timer service %s as PiP!"
+msgstr "Program %s prepnutý časovačom do PiP!"
+
+msgid "Zapped to timer service %s!"
+msgstr "Program %s prepnutý časovačom!"
+
+msgid "(ZAP as PiP)"
+msgstr "(Prepnúť do PiP)"
+
+msgid "Use as PiP if possible"
+msgstr "Použiť ako PiP ak je to možné"
+
+msgid "Backup settings"
+msgstr "Záloha nastavení"
+
+msgid "Save settinigs and EPG data"
+msgstr "Uložiť nastavenia a EPG údaje"
+
+msgid "Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"
+msgstr "Nie je možné zálohovať nastavenia z dôvodu chýbajúceho doplnku AutoBackup. Chcete pokračovať?"
+
+msgid "Could not find suitable media - Please insert a media (e.g. USB stick) and try again!"
+msgstr "Nebolo možné nájsť vhodné médium - vložte prosím médium (napr.  USB kľúč) a skúste to znovu!"
+
 msgid ""
-"If enabled, display shows 12 chars instead 8, but in latin-1/translit only."
+"Error during backup settings\n"
+"%s"
 msgstr ""
-"Ak je povolené, displej zobrazí 12 znakov namiesto 8, ale iba v móde latin-1."
+"Chyba počas zálohovania nastavení\n"
+"%s"
+
+msgid "Downloading Image"
+msgstr "Sťahuje sa image"
+
+msgid ""
+"Error during downloading image\n"
+"%s\n"
+"%s"
+msgstr ""
+"Chyba počas sťahovania image\n"
+"%s\n"
+"%s"
+
+msgid ""
+"Error during unzipping image\n"
+"%s"
+msgstr ""
+"Chyba počas rozbalovania image\n"
+"%s"
+
+msgid ""
+"Image to install is invalid\n"
+"%s"
+msgstr ""
+"Inštalačný image nie je platný\n"
+"%s"
+
+msgid ""
+"Recording(s) are in progress or coming up in few seconds!\n"
+"Do you still want to flash image\n"
+"%s?"
+msgstr ""
+"Práve prebieha nahrávanie, alebo začne o niekoľko sekúnd!\n"
+"Chcete do prijímača stále nahrať image\n"
+"%s?"
+
+msgid "Backing up to: %s"
+msgstr "Zálohovanie do: %s"
+
+msgid "Do you want to install Plugins?"
+msgstr "Chcete inštalovať doplnky?"
+
+msgid "What type of service scan do you want?"
+msgstr "Aký typ staníc chcete prehľadať?"
+
+msgid "No, I do not want to install plugins"
+msgstr "Nie, nechcem inštalovať doplnky"
+
+msgid "Yes, I do want to install plugins"
+msgstr "Áno, chcem inštalovať doplnky"
+
+msgid "I do not want to perform any service scans"
+msgstr "Nechcem vykonať žiadne prehľadávanie staníc"
+
+msgid "Do an automatic service scan now"
+msgstr "Vykonať automatické prehľadávanie staníc"
+
+msgid "Do a manual service scan now"
+msgstr "Vykonať manuálne prehľadávanie staníc"
+
+msgid "Do a fast service scan now"
+msgstr "Vykonať rýchle prehľadávanie staníc"
+
+msgid "Do a cable service scan now"
+msgstr "Vykonať prehľadávanie káblových staníc"
+
+msgid ""
+"Do you want to flash image\n"
+"%s?"
+msgstr ""
+"Chcete nahrať image\n"
+"%s?"
+
+msgid "slot%s - %s (current image)"
+msgstr "slot%s - %s (aktuálny image)"
+
+msgid "slot%s - %s"
+msgstr "slot%s - %s"
+
+msgid "slot%s - empty"
+msgstr "slot%s - prázdny"
+
+msgid "Do not flash image"
+msgstr "Nenahrať image"
+
+msgid ""
+"Flashing image was not succesfull\n"
+"%s"
+msgstr ""
+"Nahratie image nebolo úspešné\n"
+"%s"
+
+msgid ""
+"%s\n"
+"Press exit to close"
+msgstr ""
+"%s\n"
+"Stlačte Exit pre ukončenie"
+
+msgid "Flashing image succesfull"
+msgstr "Nahratie image bolo úspešné"
+
+msgid "Select Multiboot"
+msgstr "Zvoliť Multiboot"
+
+msgid "Retreiving image slots - Please wait..."
+msgstr "Načítavam sloty image - Prosím čakajte..."
+
+msgid "Reboot"
+msgstr "Reštart"
+
+msgid "slot%s - %s mode 1 (current image)"
+msgstr "slot%s - %s mód 1 (aktuálny image)"
+
+msgid "slot%s - %s mode 12 (current image)"
+msgstr "slot%s - %s mód 12 (aktuálny image)"
+
+msgid "Event name first"
+msgstr "Názov udalosti na začiatku"
+
+msgid "Select horizontal resolution:"
+msgstr "Voľba horizontálneho rozlíšenia:"
