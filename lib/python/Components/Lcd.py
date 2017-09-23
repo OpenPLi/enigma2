@@ -118,8 +118,11 @@ def setLCDLiveTv(value):
 	else:
 		open(SystemInfo["LcdLiveTV"], "w").write(value and "0" or "1")
 	if not value:
-		InfoBarInstance = InfoBar.instance
-		InfoBarInstance and InfoBarInstance.session.open(dummyScreen)
+		try:
+			InfoBarInstance = InfoBar.instance
+			InfoBarInstance and InfoBarInstance.session.open(dummyScreen)
+		except:
+			pass
 
 def leaveStandbyLCDLiveTV():
 	if config.lcd.showTv.value:
