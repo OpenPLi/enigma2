@@ -402,15 +402,13 @@ class Satfinder(ScanSetup, ServiceScan):
 
 	def retune(self, configElement):
 		if self.DVB_type.value == "DVB-S":
-			return self.retuneSat(configElement)
-		if self.DVB_type.value == "DVB-T":
-			return self.retuneTerr(configElement)
+			self.retuneSat(configElement)
+		elif self.DVB_type.value == "DVB-T":
+			self.retuneTerr(configElement)
 		elif self.DVB_type.value == "DVB-C":
-			return self.retuneCab(configElement)
+			self.retuneCab(configElement)
 		elif self.DVB_type.value == "ATSC":
-			return self.retuneATSC(configElement)
-		else:
-			return
+			self.retuneATSC(configElement)
 
 	def keyGoScan(self):
 		self.frontend = None
