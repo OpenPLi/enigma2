@@ -69,7 +69,7 @@ class Satfinder(ScanSetup, ServiceScan):
 					if not self.openFrontend():
 						self.frontend = None # in normal case this should not happen
 		self.tuner = Tuner(self.frontend)
-		self.retune(None)
+		self.retune()
 
 	def __onClose(self):
 		self.session.nav.playService(self.session.postScanService)
@@ -90,7 +90,7 @@ class Satfinder(ScanSetup, ServiceScan):
 		elif cur == self.satEntry:
 			self.createSetup()
 		else:
-			self.retune(None)
+			self.retune()
 
 	def createSetup(self):
 		self.list = []
@@ -214,7 +214,7 @@ class Satfinder(ScanSetup, ServiceScan):
 				self.scan_nims.value = self.satfinder_scan_nims.value
 				self.predefinedATSCTranspondersList()
 				self.list.append(getConfigListEntry(_('Transponder'), self.ATSCTransponders))
-		self.retune(None)
+		self.retune()
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
@@ -290,7 +290,7 @@ class Satfinder(ScanSetup, ServiceScan):
 	def updatePreDefTransponders(self):
 		ScanSetup.predefinedTranspondersList(self, self.tuning_sat.orbital_position)
 
-	def retuneCab(self, configElement):
+	def retuneCab(self):
 		if not self.initcomplete:
 			return
 		if self.tuning_type.value == "single_transponder":
@@ -312,7 +312,7 @@ class Satfinder(ScanSetup, ServiceScan):
 				self.tuner.tuneCab(transponder)
 				self.transponder = transponder
 
-	def retuneTerr(self, configElement):
+	def retuneTerr(self):
 		if not self.initcomplete:
 			return
 		if self.scan_input_as.value == "channel":
@@ -344,7 +344,7 @@ class Satfinder(ScanSetup, ServiceScan):
 				self.tuner.tuneTerr(transponder[1], transponder[9], transponder[2], transponder[4], transponder[5], transponder[3], transponder[7], transponder[6], transponder[8], transponder[10], transponder[11])
 				self.transponder = transponder
 
-	def retuneATSC(self, configElement):
+	def retuneATSC(self):
 		if not self.initcomplete:
 			return
 		if self.tuning_type.value == "single_transponder":
@@ -364,7 +364,7 @@ class Satfinder(ScanSetup, ServiceScan):
 				self.tuner.tuneATSC(transponder)
 				self.transponder = transponder
 
-	def retuneSat(self, configElement): #satellite
+	def retuneSat(self): #satellite
 		if not self.tuning_sat.value:
 			return
 		satpos = int(self.tuning_sat.value)
@@ -400,15 +400,15 @@ class Satfinder(ScanSetup, ServiceScan):
 					self.tuner.tune(transponder)
 				self.transponder = transponder
 
-	def retune(self, configElement):
+	def retune(self, configElement=None):
 		if self.DVB_type.value == "DVB-S":
-			self.retuneSat(configElement)
+			self.retuneSat()
 		elif self.DVB_type.value == "DVB-T":
-			self.retuneTerr(configElement)
+			self.retuneTerr()
 		elif self.DVB_type.value == "DVB-C":
-			self.retuneCab(configElement)
+			self.retuneCab()
 		elif self.DVB_type.value == "ATSC":
-			self.retuneATSC(configElement)
+			self.retuneATSC()
 
 	def keyGoScan(self):
 		self.frontend = None
