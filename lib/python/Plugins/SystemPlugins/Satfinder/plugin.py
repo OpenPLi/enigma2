@@ -30,6 +30,12 @@ class Satfinder(ScanSetup, ServiceScan):
 		self.typeOfInputEntry = None
 		self.DVB_TypeEntry = None
 		self.systemEntryTerr = None
+		self.preDefTransponderEntry = None
+		self.preDefTransponderCableEntry = None
+		self.preDefTransponderTerrEntry = None
+		self.preDefTransponderAtscEntry = None
+		self.frontend = None
+		self.timer = None
 
 		ScanSetup.__init__(self, session)
 		self.setTitle(_("Signal finder"))
@@ -76,9 +82,19 @@ class Satfinder(ScanSetup, ServiceScan):
 
 	def newConfig(self):
 		cur = self["config"].getCurrent()
-		if cur in (self.typeOfTuningEntry, self.systemEntry, self.typeOfInputEntry, self.systemEntryATSC, self.DVB_TypeEntry, self.systemEntryTerr):
+		if cur in (
+					self.typeOfTuningEntry, 
+					self.systemEntry, 
+					self.typeOfInputEntry, 
+					self.systemEntryATSC, 
+					self.DVB_TypeEntry, 
+					self.systemEntryTerr, 
+					self.satEntry
+					):  # update screen and retune
 			self.createSetup()
-		elif cur == self.satfinderTunerEntry:
+			self.retune()
+		
+		elif cur == self.satfinderTunerEntry: # switching tuners, update screen, get frontend, and retune (in prepareFrontend())
 			self.feid = int(self.satfinder_scan_nims.value)
 			self.createSetup()
 			self.prepareFrontend()
@@ -87,9 +103,8 @@ class Satfinder(ScanSetup, ServiceScan):
 				if self.session.nav.RecordTimer.isRecording():
 					msg += _("\nRecording in progress.")
 				self.session.open(MessageBox, msg, MessageBox.TYPE_ERROR)
-		elif cur == self.satEntry:
-			self.createSetup()
-		else:
+		
+		elif cur in (self.preDefTransponderEntry, self.preDefTransponderCableEntry, self.preDefTransponderTerrEntry, self.preDefTransponderAtscEntry): # retune only
 			self.retune()
 
 	def createSetup(self):
@@ -137,7 +152,8 @@ class Satfinder(ScanSetup, ServiceScan):
 						self.list.append(getConfigListEntry(_('PLS Code'), self.scan_sat.pls_code))
 			elif self.tuning_type.value == "predefined_transponder":
 				self.updatePreDefTransponders()
-				self.list.append(getConfigListEntry(_("Transponder"), self.preDefTransponders))
+				self.preDefTransponderEntry = getConfigListEntry(_("Transponder"), self.preDefTransponders)
+				self.list.append(self.preDefTransponderEntry)
 		elif self.DVB_type.value == "DVB-C":
 			self.typeOfTuningEntry = getConfigListEntry(_('Tune'), self.tuning_type)
 			if config.Nims[self.feid].cable.scan_type.value != "provider" or len(nimmanager.getTranspondersCable(int(self.satfinder_scan_nims.value))) < 1: # only show 'predefined transponder' if in provider mode and transponders exist
@@ -153,7 +169,8 @@ class Satfinder(ScanSetup, ServiceScan):
 			elif self.tuning_type.value == "predefined_transponder":
 				self.scan_nims.value = self.satfinder_scan_nims.value
 				self.predefinedCabTranspondersList()
-				self.list.append(getConfigListEntry(_('Transponder'), self.CableTransponders))
+				self.preDefTransponderCableEntry = getConfigListEntry(_("Transponder"), self.CableTransponders)
+				self.list.append(self.preDefTransponderCableEntry)
 		elif self.DVB_type.value == "DVB-T":
 			self.typeOfTuningEntry = getConfigListEntry(_('Tune'), self.tuning_type)
 			region = nimmanager.getTerrestrialDescription(int(self.satfinder_scan_nims.value))
@@ -196,7 +213,8 @@ class Satfinder(ScanSetup, ServiceScan):
 			elif self.tuning_type.value == "predefined_transponder":
 				self.scan_nims.value = self.satfinder_scan_nims.value
 				self.predefinedTerrTranspondersList()
-				self.list.append(getConfigListEntry(_('Transponder'), self.TerrestrialTransponders))
+				self.preDefTransponderTerrEntry = getConfigListEntry(_('Transponder'), self.TerrestrialTransponders)
+				self.list.append(self.preDefTransponderTerrEntry)
 		elif self.DVB_type.value == "ATSC":
 			self.typeOfTuningEntry = getConfigListEntry(_('Tune'), self.tuning_type)
 			if len(nimmanager.getTranspondersATSC(int(self.satfinder_scan_nims.value))) < 1: # only show 'predefined transponder' if transponders exist
@@ -213,8 +231,8 @@ class Satfinder(ScanSetup, ServiceScan):
 				#FIXME add region
 				self.scan_nims.value = self.satfinder_scan_nims.value
 				self.predefinedATSCTranspondersList()
-				self.list.append(getConfigListEntry(_('Transponder'), self.ATSCTransponders))
-		self.retune()
+				self.preDefTransponderAtscEntry = getConfigListEntry(_('Transponder'), self.ATSCTransponders)
+				self.list.append(self.preDefTransponderAtscEntry)
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
@@ -225,11 +243,13 @@ class Satfinder(ScanSetup, ServiceScan):
 			self.orbital_position = self.frontendData['orbital_position']
 		ScanSetup.createConfig(self, self.frontendData)
 
+		# The following are updated in self.newConfig(). Do not add here. 
+		# self.scan_sat.system, self.tuning_type, self.scan_input_as, self.scan_ats.system, self.DVB_type, self.scan_ter.system, self.satfinder_scan_nims, self.tuning_sat
 		for x in (self.scan_sat.frequency,
 			self.scan_sat.inversion, self.scan_sat.symbolrate,
 			self.scan_sat.polarization, self.scan_sat.fec, self.scan_sat.pilot,
 			self.scan_sat.fec_s2, self.scan_sat.fec, self.scan_sat.modulation,
-			self.scan_sat.rolloff, self.scan_sat.system,
+			self.scan_sat.rolloff, 
 			self.scan_sat.is_id, self.scan_sat.pls_mode, self.scan_sat.pls_code,
 			self.scan_ter.channel, self.scan_ter.frequency, self.scan_ter.inversion,
 			self.scan_ter.bandwidth, self.scan_ter.fechigh, self.scan_ter.feclow,
@@ -237,8 +257,7 @@ class Satfinder(ScanSetup, ServiceScan):
 			self.scan_ter.guard, self.scan_ter.hierarchy, self.scan_ter.plp_id,
 			self.scan_cab.frequency, self.scan_cab.inversion, self.scan_cab.symbolrate,
 			self.scan_cab.modulation, self.scan_cab.fec,
-			self.scan_ats.frequency, self.scan_ats.modulation, self.scan_ats.inversion,
-			self.scan_ats.system):
+			self.scan_ats.frequency, self.scan_ats.modulation, self.scan_ats.inversion):
 			x.addNotifier(self.retune, initial_call = False)
 
 		satfinder_nim_list = []
