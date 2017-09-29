@@ -26,8 +26,8 @@ def getFlashDateString():
 
 def getEnigmaVersionString():
 	import enigma
-	enigma_version = enigma.getEnigmaVersionString()
-	if '-(no branch)' in enigma_version:
+	enigma_version = " ".join(enigma.getEnigmaVersionString().rsplit("-", 1)).title()
+	if ' (no branch)' in enigma_version:
 		enigma_version = enigma_version [:-12]
 	return enigma_version
 
@@ -46,7 +46,8 @@ def getHardwareTypeString():
 
 def getImageTypeString():
 	try:
-		return open("/etc/issue").readlines()[-2].capitalize().strip()[:-6]
+		image_type = open("/etc/issue").readlines()[-2]
+		return " ".join(image_type.split("-")).title().strip()[:-6]
 	except:
 		return _("undefined")
 
