@@ -2,6 +2,7 @@ import struct, os, time
 from config import config, ConfigSelection, ConfigYesNo, ConfigSubsection, ConfigText, ConfigCECAddress, ConfigLocations, ConfigDirectory
 from enigma import eHdmiCEC, eActionMap
 from Tools.StbHardware import getFPWasTimerWakeup
+import NavigationInstance
 from enigma import eTimer
 from sys import maxint
 
@@ -117,7 +118,7 @@ class HdmiCec:
 		config.hdmicec.enabled.addNotifier(self.configVolumeForwarding)
 		if config.hdmicec.enabled.value:
 			if config.hdmicec.report_active_menu.value:
-				if config.hdmicec.report_active_source.value:
+				if config.hdmicec.report_active_source.value and NavigationInstance.instance and not NavigationInstance.instance.isRestartUI():
 					self.sendMessage(0, "sourceinactive")
 				self.sendMessage(0, "menuactive")
 			if config.hdmicec.handle_deepstandby_events.value and not getFPWasTimerWakeup():
