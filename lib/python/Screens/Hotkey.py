@@ -44,6 +44,7 @@ def getHotkeys():
 		("Info (EPG)", "info", "Infobar/openEventView"),
 		("Info (EPG)" + " " + _("long"), "info_long", "Infobar/showEventInfoPlugins"),
 		("List/Fav/PVR", "list", ""),
+		("List/Fav/PVR" + " " + _("long"), "list_long", "Plugins/Extensions/Kodi/1"),
 		("Back/Recall", "back", ""),
 		("Back/Recall" + " " + _("long"), "back_long", ""),
 		("End", "end", ""),
