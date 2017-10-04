@@ -89,7 +89,7 @@ class TimerEntry(Screen, ConfigListScreen):
 			else:
 				repeated = "user"
 				if day.count("1") == 1:
-					repeated = "weekday"
+					repeated = "weekly"
 					weekday = day.index("1")
 		else: # once
 			type = "once"
