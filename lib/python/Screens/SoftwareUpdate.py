@@ -68,6 +68,11 @@ class UpdatePlugin(Screen, ProtectedScreen):
 		self.activityTimer.callback.append(self.doActivityTimer)
 		self.activityTimer.start(100, True)
 
+		# disable the disclaimer, we're in stable release land now
+		config.usage.show_update_disclaimer.value = False
+		config.usage.show_update_disclaimer.save()
+
+
 	def isProtected(self):
 		return config.ParentalControl.setuppinactive.value and\
 			(not config.ParentalControl.config_sections.main_menu.value and not config.ParentalControl.config_sections.configuration.value  or hasattr(self.session, 'infobar') and self.session.infobar is None) and\
