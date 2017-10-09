@@ -650,8 +650,8 @@ class InfoBarHotkey():
 			elif selected[0] == "Shellscript":
 				command = '/usr/script/' + selected[1] + ".sh"
 				if os.path.isfile(command) and os.path.isdir('/usr/lib/enigma2/python/Plugins/Extensions/PPanel'):
-					from Plugins.Extensions.PPanel.ppanel import Execute
-					self.session.open(Execute, selected[1] + " shellscript", None, command)
+					from Screens.Console import Console
+					self.session.open(Console, selected[1] + " shellscript", [command], showStartStopText=False)
 			elif selected[0] == "Menu":
 				from Screens.Menu import MainMenu, mdom
 				root = mdom.getroot()
