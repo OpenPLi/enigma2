@@ -27,7 +27,7 @@ class Console(Screen):
 			"down": self["text"].pageDown
 		}, -1)
 
-		self.cmdlist = cmdlist
+		self.cmdlist = isinstance(cmdlist, list) and cmdlist or [cmdlist]
 		self.newtitle = title == "Console" and _("Console") or title
 
 		self.onShown.append(self.updateTitle)
