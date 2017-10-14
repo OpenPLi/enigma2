@@ -1096,6 +1096,10 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 	{
 		ret = (int)((((double(snr) / (65535.0 / 100.0)) * 0.28) - 10.0) * 100);
 	}
+	else if (!strcmp(m_description, "BCM7584 (internal)"))
+	{
+		ret = snr / 10;
+	}
 	else if (!strcmp(m_description, "Genpix"))
 	{
 		ret = (int)((snr << 1) / 5);
