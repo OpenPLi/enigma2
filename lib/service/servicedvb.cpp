@@ -17,6 +17,7 @@
 #include <lib/dvb/tstools.h>
 #include <lib/python/python.h>
 #include <lib/base/nconfig.h> // access to python config
+#include <lib/base/httpsstream.h>
 #include <lib/base/httpstream.h>
 #include "servicepeer.h"
 
@@ -1031,8 +1032,7 @@ eDVBServicePlay::eDVBServicePlay(const eServiceReference &ref, eDVBService *serv
 	m_cutlist_enabled(1),
 	m_subtitle_widget(0),
 	m_subtitle_sync_timer(eTimer::create(eApp)),
-	m_nownext_timer(eTimer::create(eApp)),
-	m_qpip_mode(false)
+	m_nownext_timer(eTimer::create(eApp))
 {
 	CONNECT(m_service_handler.serviceEvent, eDVBServicePlay::serviceEvent);
 	CONNECT(m_service_handler_timeshift.serviceEvent, eDVBServicePlay::serviceEventTimeshift);
@@ -2778,6 +2778,12 @@ ePtr<iTsSource> eDVBServicePlay::createTsSource(eServiceReferenceDVB &ref, int p
 		f->open(ref.path.c_str());
 		return ePtr<iTsSource>(f);
 	}
+	else if (ref.path.substr(0, 8) == "https://")
+	{
+		eHttpsStream *f = new eHttpsStream();
+		f->open(ref.path.c_str());
+		return ePtr<iTsSource>(f);
+	}
 	else
 	{
 		eRawFile *f = new eRawFile(packetsize);
@@ -3552,7 +3558,7 @@ ePtr<iStreamData> eDVBServicePlay::getStreamingData()
 
 void eDVBServicePlay::setQpipMode(bool value, bool audio)
 {
-	m_qpip_mode = value;
+	(void) value;
 	m_noaudio = !audio;
 
 	if(m_decoder)

@@ -763,7 +763,7 @@ void eDVBDB::saveServicelist(const char *file)
 				if (g)
 					fprintf(g, ":%d:%d:%d:%d", sat.system, sat.modulation, sat.rolloff, sat.pilot);
 
-				if (sat.is_id != NO_STREAM_ID_FILTER ||
+				if (static_cast<unsigned int>(sat.is_id) != NO_STREAM_ID_FILTER ||
 					(sat.pls_code & 0x3FFFF) != 1 ||
 					(sat.pls_mode & 3) != eDVBFrontendParametersSatellite::PLS_Root)
 				{

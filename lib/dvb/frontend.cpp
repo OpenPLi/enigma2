@@ -860,7 +860,7 @@ static inline uint32_t fe_udiv(uint32_t a, uint32_t b)
 	return (a + b / 2) / b;
 }
 
-void eDVBFrontend::calculateSignalPercentage(int signalqualitydb, int &signalquality)
+int eDVBFrontend::calculateSignalPercentage(int signalqualitydb)
 {
 	int maxdb; // assume 100% as 2/3 of maximum dB
 	int type = -1;
@@ -891,8 +891,10 @@ void eDVBFrontend::calculateSignalPercentage(int signalqualitydb, int &signalqua
 			}
 			break;
 		}
+		default:
+			return 0;
 	}
-	signalquality = (signalqualitydb >= maxdb ? 65535 : signalqualitydb * 65535 / maxdb);
+	return signalqualitydb >= maxdb ? 65535 : (signalqualitydb * 65535 / maxdb);
 }
 
 void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &signalqualitydb)
@@ -1094,6 +1096,10 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 	{
 		ret = (int)((((double(snr) / (65535.0 / 100.0)) * 0.28) - 10.0) * 100);
 	}
+	else if (!strcmp(m_description, "BCM7584 (internal)"))
+	{
+		ret = snr / 10;
+	}
 	else if (!strcmp(m_description, "Genpix"))
 	{
 		ret = (int)((snr << 1) / 5);
@@ -1151,7 +1157,7 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 		ret = (snr * 2000) / 0xFFFF;
 		sat_max = 2000;
 	}
-	else if(!strcmp(m_description, "WinTV HVR-850") || !strcmp(m_description, "Hauppauge"))
+	else if(!strcmp(m_description, "WinTV HVR-850") || !strcmp(m_description, "Hauppauge") || !strcmp(m_description, "LG Electronics LGDT3306A VSB/QAM Frontend"))
 	{
 		eDVBFrontendParametersATSC parm;
 		oparm.getATSC(parm);
@@ -1273,7 +1279,7 @@ int eDVBFrontend::readFrontendData(int type)
 							if(!signalquality)
 							{
 								/* provide an estimated percentage when drivers lack this info */
-								calculateSignalPercentage(signalqualitydb, signalquality);
+								signalquality = calculateSignalPercentage(signalqualitydb);
 							}
 							return signalquality;
 						}
@@ -2625,7 +2631,7 @@ int eDVBFrontend::isCompatibleWith(ePtr<iDVBFrontendParameters> &feparm)
 		{
 			return 0;
 		}
-		bool multistream = (parm.is_id != NO_STREAM_ID_FILTER || (parm.pls_code & 0x3FFFF) != 1 ||
+		bool multistream = (static_cast<unsigned int>(parm.is_id) != NO_STREAM_ID_FILTER || (parm.pls_code & 0x3FFFF) != 1 ||
 					(parm.pls_mode & 3) != eDVBFrontendParametersSatellite::PLS_Root);
 		if (parm.system == eDVBFrontendParametersSatellite::System_DVB_S2 && multistream && !is_multistream())
 		{
