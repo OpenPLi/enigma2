@@ -4,17 +4,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-17 20:52+0200\n"
-"PO-Revision-Date: 2017-09-18 21:13+0200\n"
+"POT-Creation-Date: 2017-10-13 19:35+0200\n"
+"PO-Revision-Date: 2017-10-16 17:42+0200\n"
 "Last-Translator: andy1 <dummy@dummy.com>\n"
-"Language-Team: G.Jensen\n"
+"Language-Team: GeirJ\n"
 "Language: nb\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
-"X-Generator: Poedit 2.0.3\n"
+"X-Generator: Poedit 2.0.4\n"
 "X-Poedit-Bookmarks: -1,-1,-1,-1,-1,31,1959,-1,-1,-1\n"
 
 msgid ""
@@ -65,7 +65,7 @@ msgid ""
 "Online update of your receiver software."
 msgstr ""
 "\n"
-"Oppdaterer din mottaker."
+"Online oppdatering av din mottakers programvare."
 
 #
 msgid ""
@@ -87,7 +87,7 @@ msgid ""
 "Restore your backups by date."
 msgstr ""
 "\n"
-"Gjenopprett sikkerhetskopiene etter dato."
+"Gjenopprett dine sikkerhetskopier etter dato."
 
 msgid ""
 "\n"
@@ -133,7 +133,7 @@ msgid ""
 "View, install and remove available or installed packages."
 msgstr ""
 "\n"
-"Se gjennom, installere/avinstallere programpakker."
+"Se gjennom, installer/avinstaller programpakker."
 
 #
 msgid " (0 - all networks)"
@@ -2053,8 +2053,8 @@ msgstr "To lags DVD"
 msgid "DVB CI Delay"
 msgstr "DVB CI forsinkelse"
 
-msgid "DVB drivers: "
-msgstr "DVB driver: "
+msgid "DVB driver version: "
+msgstr "DVB driver versjon: "
 
 msgid "DVB type"
 msgstr "DVB type"
@@ -2710,6 +2710,10 @@ msgstr "Engelsk"
 msgid "Enigma (re)starts: %d\n"
 msgstr "Enigma (re)starter: %d\n"
 
+#
+msgid "Enigma version: "
+msgstr "Enigma versjon: "
+
 msgid "Enigma2 skin selector"
 msgstr "Velger for Enigma2 utseende"
 
@@ -2907,7 +2911,7 @@ msgstr "Utvidet programvare tillegg"
 
 #
 msgid "Extended network setup plugin..."
-msgstr "Utvidet nettverksoppsett..."
+msgstr "Utvidet program innstilling for nettverksoppsett..."
 
 #
 msgid "Extended setup..."
@@ -3182,6 +3186,10 @@ msgstr "Flere innstillinger"
 
 msgid "Further options"
 msgstr "Flere innstillinger"
+
+#
+msgid "GStreamer version: "
+msgstr "Gstreamer versjon: "
 
 msgid ""
 "GUI needs a restart to apply a new language\n"
@@ -4670,7 +4678,7 @@ msgid "No updates available"
 msgstr "Det finnes ingen nye oppdateringer"
 
 msgid "No updates available. Please try again later."
-msgstr "Det finnes ingen nye oppdateringer. Prøv igjen senere."
+msgstr "Det finnes ingen nye oppdateringer. Vennligst prøv igjen senere."
 
 msgid "No wireless networks found! Searching..."
 msgstr "Ingen trådløse nettverk ble funnet! Søker..."
@@ -7380,7 +7388,7 @@ msgstr "System - Modulasjon"
 
 #. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
 msgid "TRANSLATOR_INFO"
-msgstr "Siste oppdatering: 18.09.2017"
+msgstr "Oppdatert: 16.10.2017 av GeirJ"
 
 #
 msgid "TS file is too large for ISO9660 level 1!"
@@ -7648,7 +7656,7 @@ msgid "There are no updates available."
 msgstr "Det finnes ingen oppdateringer nå."
 
 msgid "There is no signal to lock on !"
-msgstr "Det finnes ikke noe låse signal!"
+msgstr "Det finnes ikke noe låsesignal!"
 
 #
 msgid ""
@@ -7794,7 +7802,7 @@ msgid ""
 msgstr ""
 "Dette vil beregne alle parabolmotor posisjoner (på nytt) og kan slette "
 "tidligere lagrede posisjoner og finjusteringer!\n"
-"Er det sikkert?"
+"Er du sikker?"
 
 #
 msgid "Three"
@@ -9300,7 +9308,7 @@ msgid "descramble and record ecm"
 msgstr "avkod og ta opp ecm"
 
 msgid "detective/thriller"
-msgstr "detektime/spenning"
+msgstr "krim/spenning"
 
 #
 msgid "disable"
@@ -11062,6 +11070,9 @@ msgid ""
 msgstr ""
 "Hvis aktivert, display viser 12 tegn istedenfor 8, men bare i latin-1/overs."
 
+msgid "Ignore DVB namespace sub network"
+msgstr "Ignorer DVB namespace sub nettverk"
+
 msgid "Include AIT in http streams"
 msgstr "Inkluder AIT i http strøm"
 
@@ -11156,6 +11167,9 @@ msgstr "OSD instillinger"
 
 msgid "Offline decode delay (ms)"
 msgstr "Frakoblet dekodingsforsinkelse (ms)"
+
+msgid "On valid ONIDs, ignore frequency sub network part"
+msgstr "Ved gyldige ONIDs, ignorer frequency sub network part"
 
 msgid "Position of completed timers in timerlist"
 msgstr "Posisjon for ferdige tidtakere i tidtakerliste"
@@ -11444,8 +11458,8 @@ msgid ""
 "This option allows you to hide and sort menu entries. When selecting user "
 "you can change order and hide menu items via the blue button"
 msgstr ""
-"Dette valget tillater å sortere og skjule meny linjer. Valget kan skifte "
-"rekkefølge og skjule meny linjer med blå tasten"
+"Med dette valget kan du skjule og sortere meny linjene. Du kan skifte "
+"rekkefølge og skjule menyer med blå tasten"
 
 msgid "This option allows you to power off the display."
 msgstr "Med dette valget kan du skru av display."
@@ -11454,7 +11468,7 @@ msgid "This option allows you to show menu number quick links."
 msgstr "Med dette valget kan du vise menynummer snarveiene."
 
 msgid "This option allows you to show menu paths."
-msgstr "Dette valget vil vise meny stiene."
+msgstr "Med dette valget kan du vise meny stiene."
 
 #
 msgid "Timezone"
