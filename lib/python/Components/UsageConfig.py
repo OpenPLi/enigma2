@@ -369,7 +369,7 @@ def InitUsageConfig():
 
 	if SystemInfo["LcdLiveTVMode"]:
 		def setLcdLiveTVMode(configElement):
-			open(SystemInfo["LcdLiveTVMode"], "w").write(int(configElement.value))
+			open(SystemInfo["LcdLiveTVMode"], "w").write(configElement.value)
 		config.usage.LcdLiveTVMode = ConfigSelection(default = "0", choices=[str(x) for x in range(0,8)])
 		config.usage.LcdLiveTVMode.addNotifier(setLcdLiveTVMode)
 
