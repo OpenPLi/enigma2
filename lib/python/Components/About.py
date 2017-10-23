@@ -24,6 +24,14 @@ def getFlashDateString():
 	except:
 		return _("unknown")
 
+def getBuildDateString():
+	try:
+		from glob import glob
+		build = [x.split("-")[-2:-1][0][-8:] for x in open(glob("/var/lib/opkg/info/openpli-bootlogo.control")[0], "r") if x.startswith("Version:")][0]
+		return  "%s-%s-%s" % (build[:4], build[4:6], build[6:])
+	except:
+		return _("unknown")
+
 def getEnigmaVersionString():
 	import enigma
 	enigma_version = enigma.getEnigmaVersionString()
