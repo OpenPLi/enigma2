@@ -93,15 +93,17 @@ class UpdatePlugin(Screen, ProtectedScreen):
 				status = urlopen(url, timeout=5, context=_create_unverified_context()).read().split('!', 1)
 				print status
 			if getBoxType() in status[0].split(','):
-				message = len(status) > 1 and status[1] or _("The current beta image might not be stable.\nFor more information see %s.") % ("www.openpli.org")
+				message = len(status) > 1 and status[1] or _("The current image might not be stable.\nFor more information see %s.") % ("www.openpli.org")
 				picon = MessageBox.TYPE_ERROR
 		except:
 			message = _("The status of the current beta image could not be checked because %s can not be reached.") % ("www.openpli.org")
 			picon = MessageBox.TYPE_ERROR
-			default = False
 		socket.setdefaulttimeout(currentTimeoutDefault)
-		message += "\n" + _("Do you want to update your receiver?")
-		self.session.openWithCallback(self.startActualUpdate, MessageBox, message, default = default, picon = picon)
+		if message != "":
+			message += "\n" + _("Do you want to update your receiver?")
+			self.session.openWithCallback(self.startActualUpdate, MessageBox, message, picon = picon)
+		else:
+			self.startActualUpdate(True)
 
 	def getLatestImageTimestamp(self):
 		currentTimeoutDefault = socket.getdefaulttimeout()
