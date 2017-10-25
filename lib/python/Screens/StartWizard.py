@@ -93,7 +93,7 @@ class AutoInstallWizard(Screen):
 		os.remove("/etc/.doAutoinstall")
 		self.close(3)
 
-if config.misc.firstrun.value:
+if not os.path.isfile("/etc/installed"):
 	from Components.Console import Console
 	Console().ePopen("opkg list_installed | cut -d ' ' -f 1 > /etc/installed;chmod 444 /etc/installed")
 
