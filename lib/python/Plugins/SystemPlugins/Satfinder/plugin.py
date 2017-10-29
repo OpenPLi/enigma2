@@ -35,7 +35,6 @@ class Satfinder(ScanSetup, ServiceScan):
 		self.preDefTransponderTerrEntry = None
 		self.preDefTransponderAtscEntry = None
 		self.frontend = None
-		self.timer = None
 
 		ScanSetup.__init__(self, session)
 		self.setTitle(_("Signal finder"))
