@@ -88,7 +88,10 @@ class SelectImage(Screen):
 					if not SystemInfo["canMultiBoot"] or image.endswith('_multiboot.zip'):
 						list.append(ChoiceEntryComponent('verticalline',((str(self.imagesList[catagorie][image]['name'])), str(self.imagesList[catagorie][image]['link']))))
 			else:
-				list.append(ChoiceEntryComponent('expandable',((str(catagorie)), "Expander")))
+				for image in self.imagesList[catagorie].keys():
+					if not SystemInfo["canMultiBoot"] or image.endswith('_multiboot.zip'):
+						list.append(ChoiceEntryComponent('expandable',((str(catagorie)), "Expander")))
+						break
 		if list:
 			self["list"].setList(list)
 		else:

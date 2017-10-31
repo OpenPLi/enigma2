@@ -48,9 +48,6 @@ def checkForAvailableAutoBackup():
 
 class AutoRestoreWizard(MessageBox):
 	def __init__(self, session):
-		if not os.path.isfile("/etc/installed"):
-			from Components.Console import Console
-			Console().ePopen("opkg list_installed | cut -d ' ' -f 1 > /etc/installed;chmod 444 /etc/installed")
 		MessageBox.__init__(self, session, _("Do you want to autorestore settings?"), type=MessageBox.TYPE_YESNO, timeout=10, default=True, simple=True)
 
 	def close(self, value):
@@ -95,6 +92,10 @@ class AutoInstallWizard(Screen):
 		self.container = None
 		os.remove("/etc/.doAutoinstall")
 		self.close(3)
+
+if not os.path.isfile("/etc/installed"):
+	from Components.Console import Console
+	Console().ePopen("opkg list_installed | cut -d ' ' -f 1 > /etc/installed;chmod 444 /etc/installed")
 
 wizardManager.registerWizard(AutoInstallWizard, os.path.isfile("/etc/.doAutoinstall"), priority=0)
 wizardManager.registerWizard(AutoRestoreWizard, config.misc.languageselected.value and config.misc.firstrun.value and checkForAvailableAutoBackup(), priority=0)

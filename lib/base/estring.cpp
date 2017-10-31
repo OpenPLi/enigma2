@@ -354,22 +354,24 @@ static inline unsigned int recode(unsigned char d, int cp)
 std::string UnicodeToUTF8(long c)
 {
 	if ( c < 0x80 ) {
-		char utf[2] = {c, 0};
-		return std::string((char*)utf, 1);
+		char utf[2] = {static_cast<char>(c), 0};
+		return std::string(utf, 1);
 	}
 	else if ( c < 0x800) {
-                char utf[3] = { 0xc0 | (c >> 6), 0x80 | (c & 0x3f), 0};
-		return std::string((char*)utf, 2);
+		char utf[3] = { static_cast<char>(0xc0 | (c >> 6)), static_cast<char>(0x80 | (c & 0x3f)), 0};
+		return std::string(utf, 2);
 	}
 	else if ( c < 0x10000) {
-                char utf[4] = { 0xe0 | (c >> 12), 0x80 | ((c >> 6) & 0x3f), 0x80 | (c & 0x3f), 0};
-		return std::string((char*)utf, 3);
+		char utf[4] = { static_cast<char>(0xe0 | (c >> 12)), static_cast<char>(0x80 | ((c >> 6) & 0x3f)),
+				static_cast<char>(0x80 | (c & 0x3f)), 0};
+		return std::string(utf, 3);
 	}
 	else if ( c < 0x200000) {
-                char utf[5] = { 0xf0 | (c >> 18), 0x80 | ((c >> 12) & 0x3f), 0x80 | ((c >> 6) & 0x3f), 0x80 | (c & 0x3f), 0};
-		return std::string((char*)utf, 4);
+		char utf[5] = { static_cast<char>(0xf0 | (c >> 18)), static_cast<char>(0x80 | ((c >> 12) & 0x3f)),
+				static_cast<char>(0x80 | ((c >> 6) & 0x3f)), static_cast<char>(0x80 | (c & 0x3f)), 0};
+		return std::string(utf, 4);
 	}
-	eDebug("[UnicodeToUTF8] invalid unicode character: code=0x%08x", c); // not a valid unicode
+	eDebug("[UnicodeToUTF8] invalid unicode character: code=0x%08lx", c); // not a valid unicode
 	return "";
 }
 

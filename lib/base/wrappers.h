@@ -9,5 +9,6 @@ int Select(int maxfd, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, stru
 int Connect(const char *hostname, int port, int timeoutsec);
 std::string base64encode(const std::string str);
 std::string base64decode(const std::string hash);
+std::string readLink(const std::string &link);
 
 #endif
