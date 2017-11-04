@@ -94,28 +94,28 @@ class ClockToText(Converter, object):
 
 		if self.type == self.WITH_SECONDS:
 			# TRANSLATORS: full time representation hour:minute:seconds
-			return fix_space(_("%2d:%02d:%02d") % (t.tm_hour, t.tm_min, t.tm_sec))
+			return fix_space(_("%02d:%02d:%02d") % (t.tm_hour, t.tm_min, t.tm_sec))
 		elif self.type == self.DEFAULT:
 			# TRANSLATORS: short time representation hour:minute
-			return fix_space(_("%2d:%02d") % (t.tm_hour, t.tm_min))
+			return fix_space(_("%02d:%02d") % (t.tm_hour, t.tm_min))
 		elif self.type == self.DATE:
 			# TRANSLATORS: full date representation dayname daynum monthname year in strftime() format! See 'man strftime'
 			d = _("%A %e %B %Y")
 		elif self.type == self.FULL:
 			# TRANSLATORS: long date representation short dayname daynum short monthname hour:minute in strftime() format! See 'man strftime'
-			d = _("%a %e/%m  %-H:%M")
+			d = _("%a %d/%m  %H:%M")
 		elif self.type == self.SHORT_DATE:
 			# TRANSLATORS: short date representation short dayname daynum short monthname in strftime() format! See 'man strftime'
-			d = _("%a %e/%m")
+			d = _("%a %d/%m")
 		elif self.type == self.LONG_DATE:
 			# TRANSLATORS: long date representations dayname daynum monthname in strftime() format! See 'man strftime'
-			d = _("%A %e %B")
+			d = _("%A %d %B")
 		elif self.type == self.FULL_DATE:
 			# TRANSLATORS: full date representations short dayname daynum monthname long year in strftime() format! See 'man strftime'
 			d = _("%a %e %B %Y")
 		elif self.type == self.VFD:
 			# TRANSLATORS: VFD hour:minute daynum short monthname in strftime() format! See 'man strftime'
-			d = _("%k:%M %e/%m")
+			d = _("%H:%M %d/%m")
 		elif self.type == self.FORMAT:
 			d = self.fmt_string
 		else:
