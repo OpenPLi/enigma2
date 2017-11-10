@@ -24,6 +24,7 @@ class SelectImage(Screen):
 		Screen.__init__(self, session)
 		self.skinName = "ChoiceBox"
 		self.session = session
+		self.jsonlist = None
 		self.imagesList = None
 		self.expanded = []
 		self.setTitle(_("Select Image"))
@@ -77,10 +78,12 @@ class SelectImage(Screen):
 		model = HardwareInfo().get_device_model()
 
 		if not self.imagesList:
-			try:
-				self.imagesList = json.load(urllib2.urlopen('https://openpli.org/download/json/%s' % model))
-			except:
-				self.imagesList = {}
+			if not self.jsonlist:
+				try:
+					self.jsonlist = json.load(urllib2.urlopen('https://openpli.org/download/json/%s' % model))
+				except:
+					pass
+			self.imagesList = self.jsonlist if self.jsonlist else {}
 
 			for media in ['/media/%s' % x for x in os.listdir('/media')]:
 				if not os.path.islink(media) and not(SystemInfo['HasMMC'] and "/mmc" in media):
