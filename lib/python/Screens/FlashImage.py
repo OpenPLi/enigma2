@@ -26,6 +26,7 @@ class SelectImage(Screen):
 		self.session = session
 		self.jsonlist = None
 		self.imagesList = None
+		self.setIndex = 0
 		self.expanded = []
 		self.setTitle(_("Select Image"))
 		self["key_red"] = Button(_("Cancel"))
@@ -83,7 +84,7 @@ class SelectImage(Screen):
 					self.jsonlist = json.load(urllib2.urlopen('https://openpli.org/download/json/%s' % model))
 				except:
 					pass
-			self.imagesList = self.jsonlist if self.jsonlist else {}
+			self.imagesList = dict(self.jsonlist) if self.jsonlist else {}
 
 			for media in ['/media/%s' % x for x in os.listdir('/media')]:
 				if not os.path.islink(media) and not(SystemInfo['HasMMC'] and "/mmc" in media):
@@ -107,6 +108,14 @@ class SelectImage(Screen):
 						break
 		if list:
 			self["list"].setList(list)
+			if self.setIndex:
+				self["list"].moveToIndex(self.setIndex if self.setIndex < len(list) else len(list) - 1)
+				if self["list"].l.getCurrentSelection()[0][1] == "Expander":
+					self.setIndex -= 1
+					if self.setIndex:
+						self["list"].moveToIndex(self.setIndex if self.setIndex < len(list) else len(list) - 1)
+				self.setIndex = 0
+				self.selectionChanged()
 		else:
 			self.session.openWithCallback(self.close, MessageBox, _("Cannot find images - please try later"), type=MessageBox.TYPE_ERROR, timeout=3)
 
@@ -129,6 +138,7 @@ class SelectImage(Screen):
 			if os.path.isdir(currentSelected):
 				import shutil
 				shutil.rmtree(currentSelected)
+			self.setIndex = self["list"].getSelectedIndex()
 			self.imagesList = []
 			self["list"].setList([ChoiceEntryComponent('',((_("Refreshing image list - Please wait...")), "Waiter"))])
 			self.delay.start(0, True)
