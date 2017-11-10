@@ -25,14 +25,18 @@ class SelectImage(Screen):
 		self.skinName = "ChoiceBox"
 		self.session = session
 		self.imagesList = None
+		self.index = 0
 		self.expanded = []
 		self.setTitle(_("Select Image"))
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("Flash with backup"))
+		self["key_yellow"] = Button()
 		self["key_blue"] = Button(_("Flash without backup"))
 		self["list"] = ChoiceList(list=[ChoiceEntryComponent('',((_("Retreiving image list - Please wait...")), "Waiter"))])
 		self["h_red"] = Pixmap()
 		self["h_green"] = Pixmap()
+		self["h_yellow"] = Pixmap()
+		self["h_yellow"].hide()
 		self["h_blue"] = Pixmap()
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "KeyboardInputActions", "MenuActions"],
@@ -41,6 +45,7 @@ class SelectImage(Screen):
 			"cancel": boundFunction(self.close, None),
 			"red": boundFunction(self.close, None),
 			"green": self.keyOk,
+			"yellow": self.keyDelete,
 			"blue": boundFunction(self.keyOk, doBackup=False),
 			"up": self.keyUp,
 			"down": self.keyDown,
@@ -57,7 +62,7 @@ class SelectImage(Screen):
 		self.delay.callback.append(self.getImagesList)
 		self.delay.start(0, True)
 
-	def getImagesList(self, reply=None):
+	def getImagesList(self):
 
 		def getImages(path, files):
 			for file in [x for x in files if x.endswith('.zip') and model in x]:
@@ -100,6 +105,7 @@ class SelectImage(Screen):
 						break
 		if list:
 			self["list"].setList(list)
+			self["list"].moveToIndex(self.index if self.index < len(list) else len(list) - 1)
 		else:
 			self.session.openWithCallback(self.close, MessageBox, _("Cannot find images - please try later"), type=MessageBox.TYPE_ERROR, timeout=3)
 
@@ -114,17 +120,42 @@ class SelectImage(Screen):
 		elif currentSelected[0][1] != "Waiter":
 			self.session.openWithCallback(self.getImagesList, FlashImage, currentSelected[0][0], currentSelected[0][1], doBackup)
 
+	def keyDelete(self):
+		currentSelected= self["list"].l.getCurrentSelection()[0][1]
+		os.remove(currentSelected)
+		currentSelected = ".".join([currentSelected[:-4], "unzipped"])
+		if os.path.isdir(currentSelected):
+			import shutil
+			shutil.rmtree(currentSelected)
+		self.index = self["list"].getSelectionIndex()
+		self.imagesList = []
+		self["list"].setList([ChoiceEntryComponent('',((_("Refreshing image list - Please wait...")), "Waiter"))])
+		self.delay.start(0, True)
+
+	def selectionChanged(self):
+		currentSelected = self["list"].l.getCurrentSelection()
+		if "://" in currentSelected[0][1] or currentSelected[0][1] in ["Expander", "Waiter"]:
+			self["h_yellow"].hide()
+			self["key_yellow"].setText("")
+		else:
+			self["h_yellow"].show()
+			self["key_yellow"].setText(_("Delete image"))
+
 	def keyLeft(self):
 		self["list"].instance.moveSelection(self["list"].instance.pageUp)
+		self.selectionChanged()
 
 	def keyRight(self):
 		self["list"].instance.moveSelection(self["list"].instance.pageDown)
+		self.selectionChanged()
 
 	def keyUp(self):
 		self["list"].instance.moveSelection(self["list"].instance.moveUp)
+		self.selectionChanged()
 
 	def keyDown(self):
 		self["list"].instance.moveSelection(self["list"].instance.moveDown)
+		self.selectionChanged()
 
 class FlashImage(Screen):
 	skin = """<screen position="center,center" size="640,150" flags="wfNoBorder" backgroundColor="#54242424">
