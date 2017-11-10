@@ -25,7 +25,6 @@ class SelectImage(Screen):
 		self.skinName = "ChoiceBox"
 		self.session = session
 		self.imagesList = None
-		self.index = 0
 		self.expanded = []
 		self.setTitle(_("Select Image"))
 		self["key_red"] = Button(_("Cancel"))
@@ -105,7 +104,6 @@ class SelectImage(Screen):
 						break
 		if list:
 			self["list"].setList(list)
-			self["list"].moveToIndex(self.index if self.index < len(list) else len(list) - 1)
 		else:
 			self.session.openWithCallback(self.close, MessageBox, _("Cannot find images - please try later"), type=MessageBox.TYPE_ERROR, timeout=3)
 
@@ -127,7 +125,6 @@ class SelectImage(Screen):
 		if os.path.isdir(currentSelected):
 			import shutil
 			shutil.rmtree(currentSelected)
-		self.index = self["list"].getSelectionIndex()
 		self.imagesList = []
 		self["list"].setList([ChoiceEntryComponent('',((_("Refreshing image list - Please wait...")), "Waiter"))])
 		self.delay.start(0, True)
