@@ -6,6 +6,7 @@ from Components.config import config, configfile
 from Components.ActionMap import ActionMap
 from Components.Console import Console
 from Components.Label import Label
+from Components.Pixmap import Pixmap
 from Components.ProgressBar import ProgressBar
 from Components.SystemInfo import SystemInfo
 from Tools.BoundFunction import boundFunction
@@ -21,14 +22,18 @@ def checkimagefiles(files):
 class SelectImage(Screen):
 	def __init__(self, session, *args):
 		Screen.__init__(self, session)
-		self.skinName="ChoiceBox"
+		self.skinName = "ChoiceBox"
 		self.session = session
 		self.imagesList = None
 		self.expanded = []
 		self.setTitle(_("Select Image"))
 		self["key_red"] = Button(_("Cancel"))
-		self["key_green"] = Button(_("Flash Image"))
+		self["key_green"] = Button(_("Flash with backup"))
+		self["key_blue"] = Button(_("Flash without backup"))
 		self["list"] = ChoiceList(list=[ChoiceEntryComponent('',((_("Retreiving image list - Please wait...")), "Waiter"))])
+		self["h_red"] = Pixmap()
+		self["h_green"] = Pixmap()
+		self["h_blue"] = Pixmap()
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "KeyboardInputActions", "MenuActions"],
 		{
@@ -36,6 +41,7 @@ class SelectImage(Screen):
 			"cancel": boundFunction(self.close, None),
 			"red": boundFunction(self.close, None),
 			"green": self.keyOk,
+			"blue": boundFunction(self.keyOk, doBackup=False),
 			"up": self.keyUp,
 			"down": self.keyDown,
 			"left": self.keyLeft,
@@ -97,7 +103,7 @@ class SelectImage(Screen):
 		else:
 			self.session.openWithCallback(self.close, MessageBox, _("Cannot find images - please try later"), type=MessageBox.TYPE_ERROR, timeout=3)
 
-	def keyOk(self):
+	def keyOk(self, doBackup=True):
 		currentSelected = self["list"].l.getCurrentSelection()
 		if currentSelected[0][1] == "Expander":
 			if currentSelected[0][0] in self.expanded:
@@ -106,7 +112,7 @@ class SelectImage(Screen):
 				self.expanded.append(currentSelected[0][0])
 			self.getImagesList()
 		elif currentSelected[0][1] != "Waiter":
-			self.session.openWithCallback(self.getImagesList, FlashImage, currentSelected[0][0], currentSelected[0][1])
+			self.session.openWithCallback(self.getImagesList, FlashImage, currentSelected[0][0], currentSelected[0][1], doBackup)
 
 	def keyLeft(self):
 		self["list"].instance.moveSelection(self["list"].instance.pageUp)
@@ -127,7 +133,7 @@ class FlashImage(Screen):
 		<widget name="progress" position="5,e-39" size="e-10,24" backgroundColor="#54242424"/>
 	</screen>"""
 	
-	def __init__(self, session,  imagename, source):
+	def __init__(self, session,  imagename, source, doBackup):
 		Screen.__init__(self, session)
 		self.containerbackup = None
 		self.containerofgwrite = None
@@ -135,6 +141,7 @@ class FlashImage(Screen):
 		self.downloader = None
 		self.source = source
 		self.imagename = imagename
+		self.doBackup = doBackup
 
 		self["header"] = Label(_("Backup settings"))
 		self["info"] = Label(_("Save settings and EPG data"))
@@ -157,9 +164,14 @@ class FlashImage(Screen):
 		if not recordings:
 			next_rec_time = self.session.nav.RecordTimer.getNextRecordingTime()
 		if recordings or (next_rec_time > 0 and (next_rec_time - time.time()) < 360):
-			self.message = _("Recording(s) are in progress or coming up in few seconds!\nDo you still want to flash image\n%s?") % self.imagename
-		else:
+			if self.doBackup:
+				self.message = _("Recording(s) are in progress or coming up in few seconds!\nDo you still want to flash image\n%s?") % self.imagename
+			else:
+				self.message = _("Recording(s) are in progress or coming up in few seconds!\nDo you still want to flash image\n%s\nwithout backup?") % self.imagename
+		elif self.doBackup:
 			self.message = _("Do you want to flash image\n%s?") % self.imagename
+		else:
+			self.message = _("Do you want to flash image\n%s\nwithout backup?") % self.imagename
 		if SystemInfo["canMultiBoot"]:
 			self.getImageList = GetImagelist(self.getImagelistCallback)
 		else:
@@ -209,12 +221,15 @@ class FlashImage(Screen):
 					os.mkdir(destination)
 
 				if os.path.isfile(BACKUP_SCRIPT):
-					self["info"].setText(_("Backing up to: %s") % self.destination)
-					configfile.save()
-					if config.plugins.autobackup.epgcache.value:
-						eEPGCache.getInstance().save()
-					self.containerbackup = Console()
-					self.containerbackup.ePopen("%s%s'%s' %s" % (BACKUP_SCRIPT, config.plugins.autobackup.autoinstall.value and " -a " or " ", self.destination, int(config.plugins.autobackup.prevbackup.value)), self.backupsettingsDone)
+					if self.doBackup:
+						self["info"].setText(_("Backing up to: %s") % self.destination)
+						configfile.save()
+						if config.plugins.autobackup.epgcache.value:
+							eEPGCache.getInstance().save()
+						self.containerbackup = Console()
+						self.containerbackup.ePopen("%s%s'%s' %s" % (BACKUP_SCRIPT, config.plugins.autobackup.autoinstall.value and " -a " or " ", self.destination, int(config.plugins.autobackup.prevbackup.value)), self.backupsettingsDone)
+					else:
+						self.startDownload()
 				else:
 					self.session.openWithCallback(self.startDownload, MessageBox, _("Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"), default=False, simple=True)
 			else:
