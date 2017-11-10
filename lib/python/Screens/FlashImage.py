@@ -120,18 +120,19 @@ class SelectImage(Screen):
 
 	def keyDelete(self):
 		currentSelected= self["list"].l.getCurrentSelection()[0][1]
-		os.remove(currentSelected)
-		currentSelected = ".".join([currentSelected[:-4], "unzipped"])
-		if os.path.isdir(currentSelected):
-			import shutil
-			shutil.rmtree(currentSelected)
-		self.imagesList = []
-		self["list"].setList([ChoiceEntryComponent('',((_("Refreshing image list - Please wait...")), "Waiter"))])
-		self.delay.start(0, True)
+		if not("://" in currentSelected or currentSelected in ["Expander", "Waiter"]):
+			os.remove(currentSelected)
+			currentSelected = ".".join([currentSelected[:-4], "unzipped"])
+			if os.path.isdir(currentSelected):
+				import shutil
+				shutil.rmtree(currentSelected)
+			self.imagesList = []
+			self["list"].setList([ChoiceEntryComponent('',((_("Refreshing image list - Please wait...")), "Waiter"))])
+			self.delay.start(0, True)
 
 	def selectionChanged(self):
-		currentSelected = self["list"].l.getCurrentSelection()
-		if "://" in currentSelected[0][1] or currentSelected[0][1] in ["Expander", "Waiter"]:
+		currentSelected = self["list"].l.getCurrentSelection()[0][1]
+		if "://" in currentSelected or currentSelected in ["Expander", "Waiter"]:
 			self["h_yellow"].hide()
 			self["key_yellow"].setText("")
 		else:
