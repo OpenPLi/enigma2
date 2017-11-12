@@ -30,15 +30,17 @@ class SelectImage(Screen):
 		self.expanded = []
 		self.setTitle(_("Select Image"))
 		self["key_red"] = Button(_("Cancel"))
-		self["key_green"] = Button(_("Flash with backup"))
+		self["key_green"] = Button()
 		self["key_yellow"] = Button()
-		self["key_blue"] = Button(_("Flash without backup"))
+		self["key_blue"] = Button()
 		self["list"] = ChoiceList(list=[ChoiceEntryComponent('',((_("Retreiving image list - Please wait...")), "Waiter"))])
 		self["h_red"] = Pixmap()
 		self["h_green"] = Pixmap()
+		self["h_green"].hide()
 		self["h_yellow"] = Pixmap()
 		self["h_yellow"].hide()
 		self["h_blue"] = Pixmap()
+		self["h_blue"].hide()
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "KeyboardInputActions", "MenuActions"],
 		{
@@ -151,6 +153,16 @@ class SelectImage(Screen):
 		else:
 			self["h_yellow"].show()
 			self["key_yellow"].setText(_("Delete image"))
+		if currentSelected in ["Expander", "Waiter"]:
+			self["key_green"].setText("")
+			self["key_blue"].setText("")
+			self["h_green"].hide()
+			self["h_blue"].hide()
+		else:
+			self["key_green"].setText(_("Flash with backup"))
+			self["key_blue"].setText(_("Flash without backup"))
+			self["h_green"].show()
+			self["h_blue"].show()
 
 	def keyLeft(self):
 		self["list"].instance.moveSelection(self["list"].instance.pageUp)
