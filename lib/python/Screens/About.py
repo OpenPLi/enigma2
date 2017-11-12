@@ -28,12 +28,16 @@ class About(Screen):
 		AboutText = _("Hardware: ") + about.getHardwareTypeString() + "\n"
 		AboutText += _("CPU: ") + about.getCPUInfoString() + "\n"
 		AboutText += _("Image: ") + about.getImageTypeString() + "\n"
+		AboutText += _("Build date: ") + about.getBuildDateString() + "\n"
+
 		# [WanWizard] Removed until we find a reliable way to determine the installation date
 		# AboutText += _("Installed: ") + about.getFlashDateString() + "\n"
 
+		# [WanWizard] No longer that relevant as we now have an accurate build date
+		# as I'm not sure this variable isn't used elsewhere, I haven't removed it
 		ImageVersion = _("Last upgrade: ") + about.getImageVersionString()
 		self["ImageVersion"] = StaticText(ImageVersion)
-		AboutText += ImageVersion + "\n"
+		# AboutText += ImageVersion + "\n"
 
 		EnigmaVersion = _("Enigma version: ") + about.getEnigmaVersionString()
 		self["EnigmaVersion"] = StaticText(EnigmaVersion)
