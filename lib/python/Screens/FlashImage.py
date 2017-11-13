@@ -369,7 +369,7 @@ class FlashImage(Screen):
 class MultibootSelection(SelectImage):
 	def __init__(self, session, *args):
 		Screen.__init__(self, session)
-		self.skinName="ChoiceBox"
+		self.skinName = "ChoiceBox"
 		self.session = session
 		self.imagesList = None
 		self.expanded = []
@@ -377,6 +377,8 @@ class MultibootSelection(SelectImage):
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("Reboot"))
 		self["list"] = ChoiceList(list=[ChoiceEntryComponent('',((_("Retreiving image slots - Please wait...")), "Waiter"))])
+		self["h_red"] = Pixmap()
+		self["h_green"] = Pixmap()
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "KeyboardInputActions", "MenuActions"],
 		{
