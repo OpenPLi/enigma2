@@ -430,3 +430,6 @@ class MultibootSelection(SelectImage):
 					break
 			from Screens.Standby import TryQuitMainloop
 			self.session.open(TryQuitMainloop, 2)
+
+	def selectionChanged(self):
+		pass
