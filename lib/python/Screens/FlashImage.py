@@ -212,7 +212,7 @@ class FlashImage(Screen):
 		if recordings or (next_rec_time > 0 and (next_rec_time - time.time()) < 360):
 			self.message = _("Recording(s) are in progress or coming up in few seconds!\nDo you still want to flash image\n%s?") % self.imagename
 		else:
-			self.message = _("Do you want to flash image\n%s\nwithout backup?") % self.imagename
+			self.message = _("Do you want to flash image\n%s") % self.imagename
 		if SystemInfo["canMultiBoot"]:
 			self.getImageList = GetImagelist(self.getImagelistCallback)
 		else:
