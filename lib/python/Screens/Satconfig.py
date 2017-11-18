@@ -305,6 +305,10 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 			self.have_advanced = False
 		else:
 			self.have_advanced = False
+
+		if config.usage.setup_level.index > 1:
+			self.list.append(getConfigListEntry(_("Force DVB API 3"), self.nimConfig.force_dvb_api_3))
+
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 		self.setTextKeyYellow()
