@@ -35,7 +35,7 @@ class Satfinder(ScanSetup, ServiceScan):
 		self.preDefTransponderTerrEntry = None
 		self.preDefTransponderAtscEntry = None
 		self.frontend = None
-		self.timer = None
+		self.is_id_boolEntry = None
 
 		ScanSetup.__init__(self, session)
 		self.setTitle(_("Signal finder"))
@@ -106,6 +106,20 @@ class Satfinder(ScanSetup, ServiceScan):
 		
 		elif cur in (self.preDefTransponderEntry, self.preDefTransponderCableEntry, self.preDefTransponderTerrEntry, self.preDefTransponderAtscEntry): # retune only
 			self.retune()
+		elif cur == self.is_id_boolEntry:
+			if self.is_id_boolEntry[1].value:
+				self.scan_sat.is_id.value = 0 if self.is_id_memory < 0 else self.is_id_memory
+				self.scan_sat.pls_mode.value = self.pls_mode_memory
+				self.scan_sat.pls_code.value = self.pls_code_memory
+			else:
+				self.is_id_memory = self.scan_sat.is_id.value
+				self.pls_mode_memory = self.scan_sat.pls_mode.value
+				self.pls_code_memory = self.scan_sat.pls_code.value
+				self.scan_sat.is_id.value = self.NO_STREAM_ID_FILTER
+				self.scan_sat.pls_mode.value = eDVBFrontendParametersSatellite.PLS_Root
+				self.scan_sat.pls_code.value = 1
+			self.createSetup()
+			self.retune()
 
 	def createSetup(self):
 		self.list = []
@@ -147,9 +161,16 @@ class Satfinder(ScanSetup, ServiceScan):
 					self.list.append(getConfigListEntry(_('Roll-off'), self.scan_sat.rolloff))
 					self.list.append(getConfigListEntry(_('Pilot'), self.scan_sat.pilot))
 					if nim.isMultistream():
-						self.list.append(getConfigListEntry(_('Input Stream ID'), self.scan_sat.is_id))
-						self.list.append(getConfigListEntry(_('PLS Mode'), self.scan_sat.pls_mode))
-						self.list.append(getConfigListEntry(_('PLS Code'), self.scan_sat.pls_code))
+						self.is_id_boolEntry = getConfigListEntry(_('Transport Stream Type'), self.scan_sat.is_id_bool)
+						self.list.append(self.is_id_boolEntry)
+						if self.scan_sat.is_id_bool.value:
+							self.list.append(getConfigListEntry(_('Input Stream ID'), self.scan_sat.is_id))
+							self.list.append(getConfigListEntry(_('PLS Mode'), self.scan_sat.pls_mode))
+							self.list.append(getConfigListEntry(_('PLS Code'), self.scan_sat.pls_code))
+					else:
+						self.scan_sat.is_id.value = self.NO_STREAM_ID_FILTER
+						self.scan_sat.pls_mode.value = eDVBFrontendParametersSatellite.PLS_Root
+						self.scan_sat.pls_code.value = 1
 			elif self.tuning_type.value == "predefined_transponder":
 				self.updatePreDefTransponders()
 				self.preDefTransponderEntry = getConfigListEntry(_("Transponder"), self.preDefTransponders)

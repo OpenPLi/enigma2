@@ -666,6 +666,7 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 		self.TerrestrialTransponders = None
 		self.TerrestrialRegionEntry = None
 		self.TerrestrialCompleteEntry = None
+		self.is_id_boolEntry = None
 		nim = nimmanager.nim_slots[index_to_scan]
 		if self.DVB_type.value == "DVB-S":
 			self.typeOfScanEntry = getConfigListEntry(_("Type of scan"), self.scan_type)
@@ -714,9 +715,16 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 					self.list.append(getConfigListEntry(_('Roll-off'), self.scan_sat.rolloff))
 					self.list.append(getConfigListEntry(_('Pilot'), self.scan_sat.pilot))
 					if nim.isMultistream():
-						self.list.append(getConfigListEntry(_('Input Stream ID'), self.scan_sat.is_id))
-						self.list.append(getConfigListEntry(_('PLS Mode'), self.scan_sat.pls_mode))
-						self.list.append(getConfigListEntry(_('PLS Code'), self.scan_sat.pls_code))
+						self.is_id_boolEntry = getConfigListEntry(_('Transport Stream Type'), self.scan_sat.is_id_bool)
+						self.list.append(self.is_id_boolEntry)
+						if self.scan_sat.is_id_bool.value:
+							self.list.append(getConfigListEntry(_('Input Stream ID'), self.scan_sat.is_id))
+							self.list.append(getConfigListEntry(_('PLS Mode'), self.scan_sat.pls_mode))
+							self.list.append(getConfigListEntry(_('PLS Code'), self.scan_sat.pls_code))
+					else:
+						self.scan_sat.is_id.value = self.NO_STREAM_ID_FILTER
+						self.scan_sat.pls_mode.value = eDVBFrontendParametersSatellite.PLS_Root
+						self.scan_sat.pls_code.value = 1
 			elif self.scan_type.value == "predefined_transponder" and self.satList[index_to_scan]:
 				self.updateSatList()
 				self.preDefSatList = getConfigListEntry(_('Satellite'), self.scan_satselection[index_to_scan])
@@ -843,8 +851,22 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 			cur == self.TerrestrialCompleteEntry or \
 			(self.modulationEntry and self.systemEntry[1].value == eDVBFrontendParametersSatellite.System_DVB_S2 and cur == self.modulationEntry):
 			self.createSetup()
+		elif cur == self.is_id_boolEntry:
+			if self.is_id_boolEntry[1].value:
+				self.scan_sat.is_id.value = 0 if self.is_id_memory < 0 else self.is_id_memory
+				self.scan_sat.pls_mode.value = self.pls_mode_memory
+				self.scan_sat.pls_code.value = self.pls_code_memory
+			else:
+				self.is_id_memory = self.scan_sat.is_id.value
+				self.pls_mode_memory = self.scan_sat.pls_mode.value
+				self.pls_code_memory = self.scan_sat.pls_code.value
+				self.scan_sat.is_id.value = self.NO_STREAM_ID_FILTER
+				self.scan_sat.pls_mode.value = eDVBFrontendParametersSatellite.PLS_Root
+				self.scan_sat.pls_code.value = 1
+			self.createSetup()
 
 	def createConfig(self, frontendData):
+		self.NO_STREAM_ID_FILTER = -1
 		defaultSat = {
 			"orbpos": 192,
 			"system": eDVBFrontendParametersSatellite.System_DVB_S,
@@ -855,7 +877,7 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 			"fec": eDVBFrontendParametersSatellite.FEC_Auto,
 			"fec_s2": eDVBFrontendParametersSatellite.FEC_9_10,
 			"modulation": eDVBFrontendParametersSatellite.Modulation_QPSK,
-			"is_id": -1,
+			"is_id": self.NO_STREAM_ID_FILTER,
 			"pls_mode": eDVBFrontendParametersSatellite.PLS_Root,
 			"pls_code": 1 }
 		defaultCab = {
@@ -888,7 +910,7 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 			ttype = frontendData.get("tuner_type", "UNKNOWN")
 			if ttype == "DVB-S":
 				defaultSat["system"] = frontendData.get("system", eDVBFrontendParametersSatellite.System_DVB_S)
-				defaultSat["frequency"] = frontendData.get("frequency", 0) / 1000
+				defaultSat["frequency"] = frontendData.get("frequency", defaultSat["frequency"]*1000) / 1000
 				defaultSat["inversion"] = frontendData.get("inversion", eDVBFrontendParametersSatellite.Inversion_Unknown)
 				defaultSat["symbolrate"] = frontendData.get("symbol_rate", 0) / 1000
 				defaultSat["polarization"] = frontendData.get("polarization", eDVBFrontendParametersSatellite.Polarisation_Horizontal)
@@ -897,7 +919,7 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 					defaultSat["rolloff"] = frontendData.get("rolloff", eDVBFrontendParametersSatellite.RollOff_alpha_0_35)
 					defaultSat["pilot"] = frontendData.get("pilot", eDVBFrontendParametersSatellite.Pilot_Unknown)
 					defaultSat["is_id"] = frontendData.get("is_id", defaultSat["is_id"])
-					defaultSat["pls_mode"] = frontendData.get("pls_mode", eDVBFrontendParametersSatellite.PLS_Root)
+					defaultSat["pls_mode"] = frontendData.get("pls_mode", defaultSat["pls_mode"])
 					defaultSat["pls_code"] = frontendData.get("pls_code", defaultSat["pls_code"])
 				else:
 					defaultSat["fec"] = frontendData.get("fec_inner", eDVBFrontendParametersSatellite.FEC_Auto)
@@ -1031,12 +1053,17 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 			(eDVBFrontendParametersSatellite.Pilot_Off, _("Off")),
 			(eDVBFrontendParametersSatellite.Pilot_On, _("On")),
 			(eDVBFrontendParametersSatellite.Pilot_Unknown, _("Auto"))])
-		self.scan_sat.is_id = ConfigInteger(default = defaultSat.get("is_id",0), limits = (0, 255))
+		self.scan_sat.is_id = ConfigInteger(default = defaultSat["is_id"], limits = (self.NO_STREAM_ID_FILTER, 255))
+		self.scan_sat.is_id_bool = ConfigSelection(default = defaultSat["is_id"] != self.NO_STREAM_ID_FILTER, choices = [(True, _("Multistream")),(False, _("Ordinary"))])
 		self.scan_sat.pls_mode = ConfigSelection(default = defaultSat["pls_mode"], choices = [
 			(eDVBFrontendParametersSatellite.PLS_Root, _("Root")),
 			(eDVBFrontendParametersSatellite.PLS_Gold, _("Gold")),
 			(eDVBFrontendParametersSatellite.PLS_Combo, _("Combo"))])
-		self.scan_sat.pls_code = ConfigInteger(default = defaultSat.get("pls_code",1), limits = (0, 262142))
+		self.scan_sat.pls_code = ConfigInteger(default = defaultSat["pls_code"], limits = (0, 262142))
+		
+		self.is_id_memory = self.scan_sat.is_id.value # used to prevent is_id value being lost when self.scan_sat.is_id_bool state changes
+		self.pls_mode_memory = self.scan_sat.pls_mode.value
+		self.pls_code_memory = self.scan_sat.pls_code.value
 
 		# cable
 		self.scan_cab.frequency = ConfigFloat(default = [defaultCab["frequency"] / 1000, defaultCab["frequency"] % 1000], limits = [(50, 999), (0,999)])
