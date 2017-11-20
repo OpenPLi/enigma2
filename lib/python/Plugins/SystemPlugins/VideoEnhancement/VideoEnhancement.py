@@ -1,6 +1,6 @@
-from Components.config import config, ConfigSubsection, ConfigSlider, ConfigSelection, ConfigNothing, NoSave
-from Tools.CList import CList
+from Components.config import config, ConfigSubsection, ConfigSlider, ConfigSelection, ConfigBoolean, ConfigNothing, NoSave
 import os
+
 # The "VideoEnhancement" is the interface to /proc/stb/vmpeg/0.
 
 class VideoEnhancement:
@@ -16,68 +16,75 @@ class VideoEnhancement:
 
 		if os.path.exists("/proc/stb/vmpeg/0/pep_contrast"):
 			def setContrast(config):
-				myval = int(config.value*256)
+				myval = int(config.value * 256)
 				try:
-					print "--> setting contrast to: %0.8X" % myval
-					open("/proc/stb/vmpeg/0/pep_contrast", "w").write("%0.8X" % myval)
+					print "[VideoEnhancement] setting contrast to: %0.8X" % myval
+					f = open("/proc/stb/vmpeg/0/pep_contrast", "w")
+					f.write("%0.8X\n" % myval)
+					f.close()
 				except IOError:
-					print "couldn't write pep_contrast."
+					print "[VideoEnhancement] couldn't write pep_contrast."
 
 				if not VideoEnhancement.firstRun:
 					self.setConfiguredValues()
 
-			config.pep.contrast = ConfigSlider(default=128, limits=(0,256))
+			config.pep.contrast = ConfigSlider(default=128, limits=(0,255))
 			config.pep.contrast.addNotifier(setContrast)
 		else:
 			config.pep.contrast = NoSave(ConfigNothing())
 
 		if os.path.exists("/proc/stb/vmpeg/0/pep_saturation"):
 			def setSaturation(config):
-				myval = int(config.value*256)
+				myval = int(config.value * 256)
 				try:
-					print "--> setting saturation to: %0.8X" % myval
-					open("/proc/stb/vmpeg/0/pep_saturation", "w").write("%0.8X" % myval)
+					print "[VideoEnhancement] setting saturation to: %0.8X" % myval
+					f = open("/proc/stb/vmpeg/0/pep_saturation", "w")
+					f.write("%0.8X\n" % myval)
+					f.close()
 				except IOError:
-					print "couldn't write pep_saturaion."
+					print "[VideoEnhancement] couldn't write pep_saturaion."
 
 				if not VideoEnhancement.firstRun:
 					self.setConfiguredValues()
 
-			config.pep.saturation = ConfigSlider(default=128, limits=(0,256))
+			config.pep.saturation = ConfigSlider(default=128, limits=(0,255))
 			config.pep.saturation.addNotifier(setSaturation)
 		else:
 			config.pep.saturation = NoSave(ConfigNothing())
 
 		if os.path.exists("/proc/stb/vmpeg/0/pep_hue"):
 			def setHue(config):
-				myval = int(config.value*256)
+				myval = int(config.value * 256)
 				try:
-					print "--> setting hue to: %0.8X" % myval
-					open("/proc/stb/vmpeg/0/pep_hue", "w").write("%0.8X" % myval)
+					print "[VideoEnhancement] setting hue to: %0.8X" % myval
+					f = open("/proc/stb/vmpeg/0/pep_hue", "w")
+					f.write("%0.8X\n" % myval)
+					f.close()
 				except IOError:
-					print "couldn't write pep_hue."
+					print "[VideoEnhancement] couldn't write pep_hue."
 
 				if not VideoEnhancement.firstRun:
 					self.setConfiguredValues()
 
-			config.pep.hue = ConfigSlider(default=128, limits=(0,256))
+			config.pep.hue = ConfigSlider(default=128, limits=(0,255))
 			config.pep.hue.addNotifier(setHue)
 		else:
 			config.pep.hue = NoSave(ConfigNothing())
 
 		if os.path.exists("/proc/stb/vmpeg/0/pep_brightness"):
 			def setBrightness(config):
-				myval = int(config.value*256)
+				myval = int(config.value * 256)
 				try:
-					print "--> setting brightness to: %0.8X" % myval
-					open("/proc/stb/vmpeg/0/pep_brightness", "w").write("%0.8X" % myval)
+					print "[VideoEnhancement] setting brightness to: %0.8X" % myval
+					f = open("/proc/stb/vmpeg/0/pep_brightness", "w")
+					f.write("%0.8X\n" % myval)
+					f.close()
 				except IOError:
-					print "couldn't write pep_brightness."
+					print "[VideoEnhancement] couldn't write pep_brightness."
 
 				if not VideoEnhancement.firstRun:
 					self.setConfiguredValues()
-
-			config.pep.brightness = ConfigSlider(default=128, limits=(0,256))
+			config.pep.brightness = ConfigSlider(default=128, limits=(0,255))
 			config.pep.brightness.addNotifier(setBrightness)
 		else:
 			config.pep.brightness = NoSave(ConfigNothing())
@@ -86,10 +93,12 @@ class VideoEnhancement:
 			def setBlock_noise_reduction(config):
 				myval = int(config.value)
 				try:
-					print "--> setting block_noise_reduction to: %0.8X" % myval
-					open("/proc/stb/vmpeg/0/pep_block_noise_reduction", "w").write("%0.8X" % myval)
+					print "[VideoEnhancement] setting block_noise_reduction to: %0.8X" % myval
+					f = open("/proc/stb/vmpeg/0/pep_block_noise_reduction", "w")
+					f.write("%0.8X\n" % myval)
+					f.close()
 				except IOError:
-					print "couldn't write pep_block_noise_reduction."
+					print "[VideoEnhancement] couldn't write pep_block_noise_reduction."
 
 				if not VideoEnhancement.firstRun:
 					self.setConfiguredValues()
@@ -103,10 +112,12 @@ class VideoEnhancement:
 			def setMosquito_noise_reduction(config):
 				myval = int(config.value)
 				try:
-					print "--> setting mosquito_noise_reduction to: %0.8X" % myval
-					open("/proc/stb/vmpeg/0/pep_mosquito_noise_reduction", "w").write("%0.8X" % myval)
+					print "[VideoEnhancement] setting mosquito_noise_reduction to: %0.8X" % myval
+					f = open("/proc/stb/vmpeg/0/pep_mosquito_noise_reduction", "w")
+					f.write("%0.8X\n" % myval)
+					f.close()
 				except IOError:
-					print "couldn't write pep_mosquito_noise_reduction."
+					print "[VideoEnhancement] couldn't write pep_mosquito_noise_reduction."
 
 				if not VideoEnhancement.firstRun:
 					self.setConfiguredValues()
@@ -120,10 +131,12 @@ class VideoEnhancement:
 			def setDigital_contour_removal(config):
 				myval = int(config.value)
 				try:
-					print "--> setting digital_contour_removal to: %0.8X" % myval
-					open("/proc/stb/vmpeg/0/pep_digital_contour_removal", "w").write("%0.8X" % myval)
+					print "[VideoEnhancement] setting digital_contour_removal to: %0.8X" % myval
+					f = open("/proc/stb/vmpeg/0/pep_digital_contour_removal", "w")
+					f.write("%0.8X\n" % myval)
+					f.close()
 				except IOError:
-					print "couldn't write pep_digital_contour_removal."
+					print "[VideoEnhancement] couldn't write pep_digital_contour_removal."
 
 				if not VideoEnhancement.firstRun:
 					self.setConfiguredValues()
@@ -136,10 +149,12 @@ class VideoEnhancement:
 		if os.path.exists("/proc/stb/vmpeg/0/pep_split"):
 			def setSplitMode(config):
 				try:
-					print "--> setting splitmode to:",str(config.value)
-					open("/proc/stb/vmpeg/0/pep_split", "w").write(str(config.value))
+					print "[VideoEnhancement] setting splitmode to:",str(config.value)
+					f = open("/proc/stb/vmpeg/0/pep_split", "w")
+					f.write(str(config.value))
+					f.close()
 				except IOError:
-					print "couldn't write pep_split."
+					print "[VideoEnhancement] couldn't write pep_split."
 
 				if not VideoEnhancement.firstRun:
 					self.setConfiguredValues()
@@ -155,12 +170,14 @@ class VideoEnhancement:
 
 		if os.path.exists("/proc/stb/vmpeg/0/pep_sharpness"):
 			def setSharpness(config):
-				myval = int(config.value*256)
+				myval = int(config.value * 256)
 				try:
-					print "--> setting sharpness to: %0.8X" % myval
-					open("/proc/stb/vmpeg/0/pep_sharpness", "w").write("%0.8X" % myval)
+					print "[VideoEnhancement] setting sharpness to: %0.8X" % myval
+					f = open("/proc/stb/vmpeg/0/pep_sharpness", "w")
+					f.write("%0.8X\n" % myval)
+					f.close()
 				except IOError:
-					print "couldn't write pep_sharpness."
+					print "[VideoEnhancement] couldn't write pep_sharpness."
 
 				if not VideoEnhancement.firstRun:
 					self.setConfiguredValues()
@@ -174,10 +191,12 @@ class VideoEnhancement:
 			def setAutoflesh(config):
 				myval = int(config.value)
 				try:
-					print "--> setting auto_flesh to: %0.8X" % myval
-					open("/proc/stb/vmpeg/0/pep_auto_flesh", "w").write("%0.8X" % myval)
+					print "[VideoEnhancement] setting auto_flesh to: %0.8X" % myval
+					f = open("/proc/stb/vmpeg/0/pep_auto_flesh", "w")
+					f.write("%0.8X\n" % myval)
+					f.close()
 				except IOError:
-					print "couldn't write pep_auto_flesh."
+					print "[VideoEnhancement] couldn't write pep_auto_flesh."
 
 				if not VideoEnhancement.firstRun:
 					self.setConfiguredValues()
@@ -191,10 +210,12 @@ class VideoEnhancement:
 			def setGreenboost(config):
 				myval = int(config.value)
 				try:
-					print "--> setting green_boost to: %0.8X" % myval
-					open("/proc/stb/vmpeg/0/pep_green_boost", "w").write("%0.8X" % myval)
+					print "[VideoEnhancement] setting green_boost to: %0.8X" % myval
+					f = open("/proc/stb/vmpeg/0/pep_green_boost", "w")
+					f.write("%0.8X\n" % myval)
+					f.close()
 				except IOError:
-					print "couldn't write pep_green_boost."
+					print "[VideoEnhancement] couldn't write pep_green_boost."
 
 				if not VideoEnhancement.firstRun:
 					self.setConfiguredValues()
@@ -208,10 +229,12 @@ class VideoEnhancement:
 			def setBlueboost(config):
 				myval = int(config.value)
 				try:
-					print "--> setting blue_boost to: %0.8X" % myval
-					open("/proc/stb/vmpeg/0/pep_blue_boost", "w").write("%0.8X" % myval)
+					print "[VideoEnhancement] setting blue_boost to: %0.8X" % myval
+					f = open("/proc/stb/vmpeg/0/pep_blue_boost", "w")
+					f.write("%0.8X\n" % myval)
+					f.close()
 				except IOError:
-					print "couldn't write pep_blue_boost."
+					print "[VideoEnhancement] couldn't write pep_blue_boost."
 
 				if not VideoEnhancement.firstRun:
 					self.setConfiguredValues()
@@ -225,15 +248,17 @@ class VideoEnhancement:
 			def setDynamic_contrast(config):
 				myval = int(config.value)
 				try:
-					print "--> setting dynamic_contrast to: %0.8X" % myval
-					open("/proc/stb/vmpeg/0/pep_dynamic_contrast", "w").write("%0.8X" % myval)
+					print "[VideoEnhancement] setting dynamic_contrast to: %0.8X" % myval
+					f = open("/proc/stb/vmpeg/0/pep_dynamic_contrast", "w")
+					f.write("%0.8X\n" % myval)
+					f.close()
 				except IOError:
-					print "couldn't write pep_dynamic_contrast."
+					print "[VideoEnhancement] couldn't write pep_dynamic_contrast."
 
 				if not VideoEnhancement.firstRun:
 					self.setConfiguredValues()
 
-			config.pep.dynamic_contrast = ConfigSlider(default=0, limits=(0,256))
+			config.pep.dynamic_contrast = ConfigSlider(default=0, limits=(0,255))
 			config.pep.dynamic_contrast.addNotifier(setDynamic_contrast)
 		else:
 			config.pep.dynamic_contrast = NoSave(ConfigNothing())
@@ -245,10 +270,12 @@ class VideoEnhancement:
 				def setScaler_sharpness(config):
 					myval = int(config.value)
 					try:
-						print "--> setting scaler_sharpness to: %0.8X" % myval
-						open("/proc/stb/vmpeg/0/pep_scaler_sharpness", "w").write("%0.8X" % myval)
+						print "[VideoEnhancement] setting scaler_sharpness to: %0.8X" % myval
+						f = open("/proc/stb/vmpeg/0/pep_scaler_sharpness", "w")
+						f.write("%0.8X\n" % myval)
+						f.close()
 					except IOError:
-						print "couldn't write pep_scaler_sharpness."
+						print "[VideoEnhancement] couldn't write pep_scaler_sharpness."
 
 					if not VideoEnhancement.firstRun:
 						self.setConfiguredValues()
@@ -258,6 +285,44 @@ class VideoEnhancement:
 			else:
 				config.av.scaler_sharpness = NoSave(ConfigNothing())
 
+		if os.path.exists("/proc/stb/vmpeg/0/pep_scaler_vertical_dejagging"):
+			def setScaler_vertical_dejagging(configElement):
+				myval = configElement.value and "enable" or "disable"
+				try:
+					print "[VideoEnhancement] setting scaler_vertical_dejagging to: %s" % myval
+					f = open("/proc/stb/vmpeg/0/pep_scaler_vertical_dejagging", "w")
+					f.write(myval)
+					f.close()
+				except IOError:
+					print "[VideoEnhancement] couldn't write pep_scaler_vertical_dejagging."
+
+				if not VideoEnhancement.firstRun:
+					self.setConfiguredValues()
+
+			config.pep.scaler_vertical_dejagging = ConfigBoolean(default=False, descriptions = {False: _("Disabled"), True: _("Enabled")} )
+			config.pep.scaler_vertical_dejagging.addNotifier(setScaler_vertical_dejagging)
+		else:
+			config.pep.scaler_vertical_dejagging = NoSave(ConfigNothing())
+
+		if os.path.exists("/proc/stb/vmpeg/0/smooth"):
+			def setSmooth(configElement):
+				myval = configElement.value and "enable" or "disable"
+				try:
+					print "[VideoEnhancement] setting smooth to: %s" % myval
+					f = open("/proc/stb/vmpeg/0/smooth", "w")
+					f.write(myval)
+					f.close()
+				except IOError:
+					print "[VideoEnhancement] couldn't write smooth."
+
+				if not VideoEnhancement.firstRun:
+					self.setConfiguredValues()
+
+			config.pep.smooth = ConfigBoolean(default=False, descriptions = {False: _("Disabled"), True: _("Enabled")} )
+			config.pep.smooth.addNotifier(setSmooth)
+		else:
+			config.pep.smooth = NoSave(ConfigNothing())
+
 		if VideoEnhancement.firstRun:
 			self.setConfiguredValues()
 
@@ -265,9 +330,11 @@ class VideoEnhancement:
 
 	def setConfiguredValues(self):
 		try:
-			print "--> applying pep values"
-			open("/proc/stb/vmpeg/0/pep_apply", "w").write("1")
+			print "[VideoEnhancement] applying pep values"
+			f = open("/proc/stb/vmpeg/0/pep_apply", "w")
+			f.write("1")
+			f.close()
 		except IOError:
-			print "couldn't apply pep values."
+			print "[VideoEnhancement] couldn't apply pep values."
 
 VideoEnhancement()
