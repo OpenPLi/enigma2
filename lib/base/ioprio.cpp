@@ -28,6 +28,12 @@ extern "C" int sys_ioprio_get(int, int);
 #elif defined(__mips__)
 #define __NR_ioprio_set		4284
 #define __NR_ioprio_get		4285
+#elif defined(__arm__) // the correct values for our kernel
+#define __NR_ioprio_set		314
+#define __NR_ioprio_get		315
+#elif defined(__aarch64__) // the correct values for our kernel
+#define __NR_ioprio_set		30
+#define __NR_ioprio_get		31
 #else
 #error "Unsupported arch"
 #endif
