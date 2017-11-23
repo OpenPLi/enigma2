@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-08 23:20+0100\n"
-"PO-Revision-Date: 2017-09-19 13:41+0200\n"
+"PO-Revision-Date: 2017-11-23 12:53+0100\n"
 "Last-Translator: Andrej Tobola <andrej.tobola@gmail.com>\n"
 "Language-Team: \n"
 "Language: sk\n"
@@ -216,9 +216,9 @@ msgstr "%a %e/%m  %-H:%M"
 #, python-format
 msgid "%d channel found"
 msgid_plural "%d channels found"
-msgstr[0] "%d stanica nájdená!"
-msgstr[1] "%d stanice nájdené!"
-msgstr[2] "%d staníc nájdených!"
+msgstr[0] "%d nájdená stanica..."
+msgstr[1] "%d nájdené stanice..."
+msgstr[2] "%d nájdených staníc..."
 
 #, python-format
 msgid "%d core"
@@ -1347,6 +1347,9 @@ msgstr "vymazať zoznam prehrávania"
 msgid "Clone TV screen to LCD"
 msgstr "Duplikovať obrazovku TV na LCD"
 
+msgid "Clone TV screen to LCD mode"
+msgstr "Klonovať TV obraz na režim LCD"
+
 msgid "Close"
 msgstr "Zatvoriť"
 
@@ -1972,7 +1975,7 @@ msgid "Date/time input"
 msgstr "Nastavenie dátumu/času"
 
 msgid "Deep standby"
-msgstr "Hlboký spánok"
+msgstr "Vypnúť prijímač (hlboký spánok)"
 
 msgid "Default"
 msgstr "Predvolené"
@@ -2402,7 +2405,7 @@ msgid "Edit settings"
 msgstr "Upraviť nastavenia"
 
 msgid "Edit the nameserver configuration of your receiver.\n"
-msgstr "Upraviť nastavenie DNS Vášho prijímača.\n"
+msgstr "Upraviť DNS nastavenie prijímača.\n"
 
 msgid "Edit the network configuration of your receiver.\n"
 msgstr "Upraviť nastavenie siete Vášho prijímača.\n"
@@ -5143,7 +5146,7 @@ msgid "Resolution"
 msgstr "Rozlíšenie"
 
 msgid "Restart"
-msgstr "Reštartovať"
+msgstr "Reštartovať prijímač"
 
 msgid "Restart GUI now?"
 msgstr "Teraz reštartovať GUI?"
@@ -5158,7 +5161,7 @@ msgid "Restart test"
 msgstr "Zopakovať test"
 
 msgid "Restart your network connection and interfaces.\n"
-msgstr "Reštartujte sieťové pripojenie a rozhrania.\n"
+msgstr "Reštartovať sieťové pripojenie a rozhrania.\n"
 
 msgid "Restore"
 msgstr "Obnoviť"
@@ -6593,7 +6596,7 @@ msgid "Test mode"
 msgstr "Testovací režim"
 
 msgid "Test the network configuration of your receiver.\n"
-msgstr "Otestujte sieťovú konfiguráciu Vášho prijímača.\n"
+msgstr "Test sieťovej konfigurácie prijímača.\n"
 
 msgid "Test type"
 msgstr "Typ testu"
@@ -6654,10 +6657,10 @@ msgstr "Zálohovanie zlyhalo. Zvoľte iné umiestnenie zálohy."
 
 #, python-format
 msgid ""
-"The current beta image might not be stable.\n"
+"The current image might not be stable.\n"
 "For more information see %s."
 msgstr ""
-"Aktuálny beta image nemusí byť stabilný.\n"
+"Aktuálny image nemusí byť stabilný.\n"
 "Pre viac informácií navštívte %s."
 
 #, python-format
@@ -6683,13 +6686,13 @@ msgid ""
 "\n"
 "Note: you can always start the Overscan wizard later,  via\n"
 "\n"
-"menu->installation->system->Overscan wizard"
+"Menu->Installation->System->Audio/Video->Overscan wizard"
 msgstr ""
-"Sprievodca nastavením veľkosti obrazu je ukončený.\n"
+"Sprievodca nastavením veľkosti obrazu bol ukončený.\n"
 "\n"
-"Poznámka: Sprievodcu môžete spustiť aj neskôr, cez\n"
+"Poznámka: Sprievodcu nastavením veľkosti obrazu môžete spustiť aj neskôr\n"
 "\n"
-"Menu->Nastavenie->Systém->Nastavenie veľkosti obrazu"
+"v Menu->Nastavenie->Systém->Nastavenie veľkosti obrazu"
 
 msgid ""
 "The overscan wizard helps you to setup your TV in the correct way.\n"
@@ -9562,6 +9565,12 @@ msgstr "Odoslať 'sourceactive' pred zapnutím časovačov"
 msgid "Flash image"
 msgstr "Nahrať image"
 
+msgid "Flash with backup"
+msgstr "Preflešovať s vykonaním zálohy"
+
+msgid "Flash without backup"
+msgstr "Preflešovať bez zálohovania"
+
 msgid "Select Image"
 msgstr "Vybrať image"
 
@@ -9643,6 +9652,17 @@ msgstr ""
 "Chcete do prijímača stále nahrať image\n"
 "%s?"
 
+msgid ""
+"Recording(s) are in progress or coming up in few seconds!\n"
+"Do you still want to flash image\n"
+"%s\n"
+"without backup?"
+msgstr ""
+"Práve prebiena nahrávanie(a) alebo o pár sekúnd začne!\n"
+"Chcete naozaj nahrať nový image\n"
+"%s\n"
+"bez zálohy?"
+
 msgid "Backing up to: %s"
 msgstr "Zálohovanie do: %s"
 
@@ -9672,6 +9692,15 @@ msgstr "Vykonať rýchle prehľadávanie staníc"
 
 msgid "Do a cable service scan now"
 msgstr "Vykonať prehľadávanie káblových staníc"
+
+msgid ""
+"Do you want to flash image\n"
+"%s\n"
+"without backup?"
+msgstr ""
+"Chcete nahrať nový image\n"
+"%s\n"
+"bez zálohy?"
 
 msgid ""
 "Do you want to flash image\n"
@@ -9729,3 +9758,71 @@ msgstr "Názov udalosti na začiatku"
 
 msgid "Select horizontal resolution:"
 msgstr "Voľba horizontálneho rozlíšenia:"
+
+msgid "Enigma version: "
+msgstr "Verzia Enigmy:"
+
+msgid "DVB driver version: "
+msgstr "Verzia ovládača DVB:"
+
+msgid "Ignore DVB namespace sub network"
+msgstr "Ignorovať DVB namespace sub network"
+
+msgid "On valid ONIDs, ignore frequency sub network part"
+msgstr "Pre platné ONIDy, ignorovať frekvenciu sub network part"
+
+msgid "Signal finder"
+msgstr "Hľadač signálu"
+
+msgid "Edit selection"
+msgstr "Upraviť výber"
+
+msgid "Select function"
+msgstr "Zvoliť funkciu"
+
+msgid "GStreamer version: "
+msgstr "Verzia GStreamer:"
+
+msgid "Selects the mode how live tv should be shown on the LCD."
+msgstr "Zvoliť režim ako by mala byť zobrazená Live TV na LCD."
+
+msgid "Build date: "
+msgstr "Dátum buildu:"
+
+msgid "Transport Stream Type"
+msgstr "Typ Transport streamu"
+
+msgid "Input Stream ID"
+msgstr "Vstupný Stream ID"
+
+msgid "PLS Mode"
+msgstr "PLS mód"
+
+msgid "PLS Code"
+msgstr "PLS kód"
+
+msgid "Delete image"
+msgstr "Vymazať image"
+
+msgid "Refreshing image list - Please wait..."
+msgstr "Obnovujem zoznam imagov - Prosím čakajte..."
+
+#~ msgid ""
+#~ "The current beta image might not be stable.\n"
+#~ "For more information see %s."
+#~ msgstr ""
+#~ "Aktuálny beta image nemusí byť stabilný.\n"
+#~ "Pre viac informácií navštívte %s."
+
+#~ msgid ""
+#~ "The overscan wizard has been completed.\n"
+#~ "\n"
+#~ "Note: you can always start the Overscan wizard later,  via\n"
+#~ "\n"
+#~ "menu->installation->system->Overscan wizard"
+#~ msgstr ""
+#~ "Sprievodca nastavením veľkosti obrazu je ukončený.\n"
+#~ "\n"
+#~ "Poznámka: Sprievodcu môžete spustiť aj neskôr, cez\n"
+#~ "\n"
+#~ "Menu->Nastavenie->Systém->Nastavenie veľkosti obrazu"
