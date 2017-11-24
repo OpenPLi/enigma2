@@ -206,7 +206,7 @@ if test x"$with_amlogic" = xyes ; then
 fi
 
 
-ENIGMA2_CFLAGS="-fno-rtti -fno-exceptions"
+ENIGMA2_CFLAGS="-fno-rtti -fno-exceptions -rdynamic -funwind-tables"
 AC_SUBST(ENIGMA2_CFLAGS)
 
 CPPFLAGS="$CPPFLAGS $PYTHON_CPPFLAGS"
