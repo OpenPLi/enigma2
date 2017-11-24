@@ -1,6 +1,10 @@
+#include <sys/klog.h>
+#include <vector>
 #include <csignal>
 #include <fstream>
 #include <sstream>
+#include <execinfo.h>
+#include <dlfcn.h>
 #include <lib/base/eenv.h>
 #include <lib/base/eerror.h>
 #include <lib/base/nconfig.h>
@@ -53,6 +57,35 @@ static const std::string getConfigString(const std::string &key, const std::stri
 	}
 
 	return value;
+}
+
+/* get the kernel log aka dmesg */
+static void getKlog(FILE* f)
+{
+	fprintf(f, "\n\ndmesg\n\n");
+
+	ssize_t len = klogctl(10, NULL, 0); /* read ring buffer size */
+	if (len == -1)
+	{
+		fprintf(f, "Error reading klog %d - %m\n", errno);
+		return;
+	}
+	else if(len == 0)
+	{
+		return;
+	}
+
+	std::vector<char> buf(len, 0);
+
+	len = klogctl(4, &buf[0], len); /* read and clear ring buffer */
+	if (len == -1)
+	{
+		fprintf(f, "Error reading klog %d - %m\n", errno);
+		return;
+	}
+
+	buf.resize(len);
+	fprintf(f, "%s\n", &buf[0]);
 }
 
 static void stringFromFile(FILE* f, const char* context, const char* filename)
@@ -152,6 +185,9 @@ void bsodFatal(const char *component)
 			fwrite(logp1, 1, logs1, f);
 		if (logp2)
 			fwrite(logp2, 1, logs2, f);
+
+		/* dump the kernel log */
+		getKlog(f);
 
 		fclose(f);
 	}
@@ -261,12 +297,38 @@ void oops(const mcontext_t &context)
 }
 #endif
 
+/* Use own backtrace print procedure because backtrace_symbols_fd
+ * only writes to files. backtrace_symbols cannot be used because
+ * it's not async-signal-safe and so must not be used in signal
+ * handlers.
+ */
+void print_backtrace()
+{
+	void *array[15];
+	size_t size;
+	int cnt;
+
+	size = backtrace(array, 15);
+	eLog(lvlFatal, "Backtrace:");
+	for (cnt = 1; cnt < size; ++cnt)
+	{
+		Dl_info info;
+
+		if (dladdr(array[cnt], &info)
+			&& info.dli_fname != NULL && info.dli_fname[0] != '\0')
+		{
+			eLog(lvlFatal, "%s(%s) [0x%X]", info.dli_fname, info.dli_sname != NULL ? info.dli_sname : "n/a", (unsigned long int) array[cnt]);
+		}
+	}
+}
+
 void handleFatalSignal(int signum, siginfo_t *si, void *ctx)
 {
 #ifndef NO_OOPS_SUPPORT
 	ucontext_t *uc = (ucontext_t*)ctx;
 	oops(uc->uc_mcontext);
 #endif
+	print_backtrace();
 	eLog(lvlFatal, "-------FATAL SIGNAL");
 	bsodFatal("enigma2, signal");
 }
