@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-15 19:29+0100\n"
+"POT-Creation-Date: 2017-11-23 20:06+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: TechNL <tech@openpli.org>\n"
 "Language-Team: PLiteam <translators@openpli.org>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 1.5.7\n"
 
 msgid ""
 "\n"
@@ -195,6 +195,10 @@ msgstr "%02d:%02d"
 #, python-format
 msgid "%03d MB"
 msgstr "%03d MB"
+
+#, python-format
+msgid "%2.1f sec"
+msgstr "%2.1f sec"
 
 #. TRANSLATORS: short time representation hour:minute
 #, python-format
@@ -460,6 +464,12 @@ msgstr "1.1"
 msgid "1.2"
 msgstr "1.2"
 
+msgid "10 MB/s"
+msgstr "10 MB/s"
+
+msgid "100 MB/s"
+msgstr "100 MB/s"
+
 msgid "10bit"
 msgstr "10 bit"
 
@@ -489,6 +499,9 @@ msgstr "Altijd 16:9"
 
 msgid "18 V"
 msgstr "18V"
+
+msgid "20 MB/s"
+msgstr "20 MB/s"
 
 msgid "23.976"
 msgstr "23.976"
@@ -534,6 +547,9 @@ msgstr "4:3 Letterbox"
 
 msgid "4:3 PanScan"
 msgstr "4:3 PanScan"
+
+msgid "50 MB/s"
+msgstr "50 MB/s"
 
 msgid "8bit"
 msgstr "8 bit"
@@ -1211,9 +1227,6 @@ msgstr "Blokruisvermindering"
 msgid "Blue"
 msgstr "Blauw"
 
-msgid "Blue boost"
-msgstr "Blauwe impuls"
-
 msgid "Bolivia (Plurinational State of)"
 msgstr "Bolivia"
 
@@ -1222,6 +1235,13 @@ msgstr "Bonaire, Sint Eustatius en Saba"
 
 msgid "Bookmarks"
 msgstr "Markeerpunten"
+
+msgid "Boost blue"
+msgstr "blauw"
+
+#, fuzzy
+msgid "Boost green"
+msgstr "groen"
 
 msgid "Bosnia and Herzegovina"
 msgstr "Bosnië Herzegovina"
@@ -1249,7 +1269,7 @@ msgid "Buffering %d%%"
 msgstr "Buffer %d%%"
 
 msgid "Build date: "
-msgstr "Build date::"
+msgstr "Datum van deze build:"
 
 msgid "Bulgaria"
 msgstr "Bulgarije"
@@ -1571,6 +1591,9 @@ msgstr "Compleet"
 
 msgid "Complex (allows mixing audio tracks and aspects)"
 msgstr "Complex (mixen audio sporen en aspecten)"
+
+msgid "Compress"
+msgstr "Verberg details"
 
 msgid "Config Scan Details"
 msgstr "Configureer scan-instellingen"
@@ -2186,9 +2209,6 @@ msgstr "Centreer de DVB ondertitels niet voor deze zender"
 msgid "Do not change"
 msgstr "Niet wijzigen"
 
-msgid "Do not flash image"
-msgstr "Wijzig de image niet"
-
 msgid "Do not record"
 msgstr "Niet opnemen"
 
@@ -2259,20 +2279,10 @@ msgstr "Wilt u de gekozen bestanden op een DVD branden?"
 #, python-format
 msgid ""
 "Do you want to flash image\n"
-"%s\n"
-"without backup?"
+"%s"
 msgstr ""
-"Wilt u een image flashen\n"
-"%s\n"
-"zonder te backuppen?"
-
-#, python-format
-msgid ""
-"Do you want to flash image\n"
-"%s?"
-msgstr ""
-"Wilt u een image flashen\n"
-"%s?"
+"Wilt u een image flashen?\n"
+"%s"
 
 msgid "Do you want to install the package:\n"
 msgstr "Wilt u dit pakket installeren:\n"
@@ -2644,6 +2654,9 @@ msgstr "Verlaat netwerkwizard"
 msgid "Exit/OK"
 msgstr "Exit/OK"
 
+msgid "Expand"
+msgstr "Uitvouwen"
+
 msgid "Expert"
 msgstr "Expert"
 
@@ -2811,11 +2824,8 @@ msgstr "Fins"
 msgid "Fixed"
 msgstr "Vast"
 
-msgid "Flash with backup"
-msgstr "Flashen met backup"
-
-msgid "Flash without backup"
-msgstr "Flashen zonder backup"
+msgid "Flash Image"
+msgstr "Flash de image"
 
 msgid "Flashing image succesfull"
 msgstr "Het flashen van de image is gelukt."
@@ -2833,6 +2843,10 @@ msgstr "Nadat u op OK drukt worden de volgende taken uitgevoerd!"
 
 msgid "Force LNB Power"
 msgstr "Forceer de LNB spanning"
+
+#, fuzzy
+msgid "Force Legacy Signal Stats"
+msgstr "Force Legacy Signal Stats"
 
 msgid "Force ToneBurst"
 msgstr "Forceer ToneBurst"
@@ -3049,9 +3063,6 @@ msgstr "Grieks"
 
 msgid "Green"
 msgstr "Groen"
-
-msgid "Green boost"
-msgstr "Groene impuls"
 
 msgid "Greenland"
 msgstr "Groenland"
@@ -4273,6 +4284,9 @@ msgstr "Ik wil geen extra applicaties installeren."
 msgid "No, but restart from begin"
 msgstr "Nee, maar start opnieuw"
 
+msgid "No, do not flash image"
+msgstr "Nee, flash geen nieuwe image"
+
 msgid "No, except Wakeup timer"
 msgstr "Nee, uitgezonderd Wakeup timer"
 
@@ -5083,18 +5097,6 @@ msgstr "Een opname is bezig of kan elk moment aanvangen!"
 msgid ""
 "Recording(s) are in progress or coming up in few seconds!\n"
 "Do you still want to flash image\n"
-"%s\n"
-"without backup?"
-msgstr ""
-"Een opname is bezig of kan elk moment aanvangen!\n"
-"Wilt u toch beginnen met het flashen van een image\n"
-"%s\n"
-"zonder backup?"
-
-#, python-format
-msgid ""
-"Recording(s) are in progress or coming up in few seconds!\n"
-"Do you still want to flash image\n"
 "%s?"
 msgstr ""
 "Een opname is bezig of kan elk moment aanvangen!\n"
@@ -5526,6 +5528,10 @@ msgstr "Sla de timeshift enkel op voor het lopende programma"
 
 msgid "Scaler sharpness"
 msgstr "Scaler scherpte"
+
+#, fuzzy
+msgid "Scaler vertical dejagging"
+msgstr "Scaler vertical dejagging"
 
 msgid "Scaling mode"
 msgstr "Schaalmodus"
@@ -6172,6 +6178,9 @@ msgstr "Kleine stapjes voorwaarts"
 msgid "Smartcard PIN"
 msgstr "Smartcard PIN"
 
+msgid "Smooth"
+msgstr "Zacht"
+
 msgid "Social/Political/Economics"
 msgstr "Sociaal/Politiek/Economisch"
 
@@ -6646,7 +6655,7 @@ msgstr "Systeem & Modulatie"
 msgid "TRANSLATOR_INFO"
 msgstr ""
 "Deze vertaling wordt u aangeboden door het OpenPLi team.\n"
-"De huidige vertaling is van 15 November 2017.\n"
+"De huidige vertaling is van 23 November 2017.\n"
 "Voor aanvullingen en opmerkingen kunt u een mail sturen naar\n"
 " het bijgaande emailadres. translators@openpli.org."
 
@@ -6914,6 +6923,18 @@ msgstr ""
 "De hier weergegeven informatie is enkel van belang voor ontwikkelaars. Voor "
 "de gewone eindgebruiker is deze informatie niet van belang."
 
+msgid ""
+"This option allows to reduce the block-noise in the picture. Obviously this "
+"is at the cost of the picture's sharpness."
+msgstr ""
+"Deze optie staat toe om ruis in het beeld te blokken. Uiteraard gaat e.e.a. "
+"ten koste van de beeldscherpte."
+
+msgid "This option allows to set the level of dynamic contrast of the picture."
+msgstr ""
+"Met deze optie stelt u het niveau in van het dynamisch contrast van het "
+"beeld."
+
 msgid "This option allows you can config the Colordepth for UHD"
 msgstr ""
 "Deze optie maakt het mogelijk om de kleurdiepte voor UHD in te stellen.\n"
@@ -6929,6 +6950,22 @@ msgid "This option allows you can config the Colorspace from Auto to RGB"
 msgstr ""
 "Deze optie maakt het mogelijk om de kleurruimte van 'auto' naar 'RGB' in te "
 "stellen"
+
+msgid ""
+"This option allows you enable smoothing filter to control the dithering "
+"process."
+msgstr ""
+"Met deze optie activeert u het afvlakfilter om het ditheringsproces te "
+"controleren."
+
+msgid "This option allows you enable the vertical scaler dejagging."
+msgstr "Met deze optie activeert u de verticale scaler dejagging."
+
+msgid "This option allows you to boost the blue tones in the picture."
+msgstr "Met deze optie pept u de blauwe kleur in het beeld op."
+
+msgid "This option allows you to boost the green tones in the picture."
+msgstr "Met deze optie pept u de groene kleur in het beeld op."
 
 msgid "This option allows you to change the virtuell loadspeaker position."
 msgstr ""
@@ -6950,6 +6987,10 @@ msgstr "Met deze optie kunt u de 3D surround begrenzer activeren."
 msgid "This option allows you to enable 3D surround sound."
 msgstr "Met deze optie kunt u het 3D geluid in of uitschakelen."
 
+msgid "This option allows you to view the old and new settings side by side."
+msgstr ""
+"Deze optie biedt de mogelijkheid om de oude en nieuwe settings te vergelijken"
+
 msgid "This option can be useful for long HDMI cables."
 msgstr ""
 "Deze optie is vooral praktisch voor lange HDMI kabels omdat door het gebruik "
@@ -6962,6 +7003,52 @@ msgstr ""
 "\n"
 "Hiermee wordt het volume op een vaste (gemiddelde) waarde per weergegeven "
 "zender ingesteld."
+
+#, fuzzy
+msgid ""
+"This option set the level of surpression of musquito noise (Musquito Noise "
+"is random aliasing as a result of strong compression). Obviously this goes "
+"at the cost of picture details."
+msgstr ""
+"Met deze optie stelt u het niveau van de overdruk van musquito noise. "
+"(Musquito Noise is random aliasing as a result of strong compression). "
+"Uiteraard gaat e.e.a. ten koste van de beelddetails."
+
+msgid "This option sets  the picture contrast."
+msgstr "Met deze optie stelt u het contrast in."
+
+msgid "This option sets the picture brightness."
+msgstr "Met deze optie stelt u de helderheid in."
+
+msgid "This option sets the picture flesh tones."
+msgstr "Met deze optie calibreert u de tint van de huidskleur."
+
+msgid "This option sets the picture hue."
+msgstr "Met deze optie calibreert u de beeld HUE."
+
+msgid "This option sets the picture saturation."
+msgstr "Met deze optie calibreert u de beeldsaturatie."
+
+msgid ""
+"This option sets the scaler sharpness, used when stretching picture from 4:3 "
+"to 16:9."
+msgstr ""
+"Met deze optie stelt u de schaalscherpte in die gebruikt wordt bij het "
+"omzetten van 4:3 naar 16:9."
+
+msgid ""
+"This option sets the surpression of false digital contours, that are the "
+"result of a limited number of discrete values."
+msgstr ""
+"Deze optie onderdrukt foute digitale contouren die a.g.v. het beperkte "
+"aantal discrete waardes ontstaan."
+
+msgid ""
+"This option sets up the picture sharpness, used when the picture is being "
+"upscaled."
+msgstr ""
+"Deze optie regelt de beeldscherpte die gebruikt wordt als het beeld "
+"opgeschaald wordt."
 
 msgid "This plugin is installed."
 msgstr "Deze plugin is geïnstalleerd."
@@ -7940,6 +8027,12 @@ msgstr "Ja, alleen vanuit standby"
 msgid "Yes, returning to movie list"
 msgstr "Ja, terug naar de opname lijst"
 
+msgid "Yes, with backup"
+msgstr "Flashen, maar eerst een backup maken"
+
+msgid "Yes, without backup"
+msgstr "Flashen maar zonder een backup te maken"
+
 msgid "Yesterday"
 msgstr "Gisteren"
 
@@ -8402,7 +8495,7 @@ msgid "detective/thriller"
 msgstr "Detective/Thriller"
 
 msgid "disable"
-msgstr "deactiveren"
+msgstr "gedéactiveerd"
 
 msgid "disable intro screen"
 msgstr "introdutiescherm overslaan"
@@ -8450,7 +8543,7 @@ msgid "empty"
 msgstr "leeg"
 
 msgid "enable"
-msgstr "activeren"
+msgstr "geactiveerd"
 
 msgid "enable bouquet edit"
 msgstr "Bouquet bewerken activeren"
@@ -9075,12 +9168,12 @@ msgid "skip forward"
 msgstr "Vooruit springen"
 
 #, python-format
-msgid "slot%s - %s"
-msgstr "slot%s - %s"
+msgid "slot%s - %s (current image) with, backup"
+msgstr "slot%s - %s (huidige image) met, backup"
 
 #, python-format
-msgid "slot%s - %s (current image)"
-msgstr "slot%s - %s (huidige image)"
+msgid "slot%s - %s (current image), without backup"
+msgstr "slot%s - %s (huidige image), zonder backup"
 
 #, python-format
 msgid "slot%s - %s mode 1"
@@ -9099,8 +9192,20 @@ msgid "slot%s - %s mode 12 (current image)"
 msgstr "slot%s - %s mode 12 (huidige image)"
 
 #, python-format
-msgid "slot%s - empty"
-msgstr "slot%s - leeg"
+msgid "slot%s - %s, with backup"
+msgstr "slot%s - %s, met backup"
+
+#, python-format
+msgid "slot%s - %s, without backup"
+msgstr "slot%s - %s, zonder backup"
+
+#, python-format
+msgid "slot%s - empty, with backup"
+msgstr "slot%s - leeg, met een backup"
+
+#, python-format
+msgid "slot%s - empty, without backup"
+msgstr "slot%s - leeg, zonder backup"
 
 msgid "soap/melodram/folkloric"
 msgstr "Soap/Melodrama/Folklore"
@@ -11649,6 +11754,9 @@ msgstr "Videomodeselectie"
 #~ msgid "Action on short powerbutton press"
 #~ msgstr "Actie na het kort indrukken van de aan / uit toets"
 
+#~ msgid "Blue boost"
+#~ msgstr "Blauwe impuls"
+
 #~ msgid "Cannot create image list - please try later"
 #~ msgstr ""
 #~ "Niet mogelijk een overzicht van de images op te maken - probeer het later "
@@ -11716,6 +11824,15 @@ msgstr "Videomodeselectie"
 #~ msgid "Do you want to do another manual service scan?"
 #~ msgstr "Wil je opnieuw handmatig zoeken?"
 
+#~ msgid ""
+#~ "Do you want to flash image\n"
+#~ "%s\n"
+#~ "without backup?"
+#~ msgstr ""
+#~ "Wilt u een image flashen\n"
+#~ "%s\n"
+#~ "zonder te backuppen?"
+
 #~ msgid "Download"
 #~ msgstr "Downloaden"
 
@@ -11728,9 +11845,6 @@ msgstr "Videomodeselectie"
 #~ msgid "F1/F3"
 #~ msgstr "F1/F3"
 
-#~ msgid "Flash Image"
-#~ msgstr "Flash de image"
-
 #~ msgid "Flashing failed"
 #~ msgstr "Flashen mislukt"
 
@@ -11742,6 +11856,9 @@ msgstr "Videomodeselectie"
 
 #~ msgid "Get latest release image"
 #~ msgstr "Haal de laatste release image"
+
+#~ msgid "Green boost"
+#~ msgstr "Groene impuls"
 
 #~ msgid "HD1100/et7x00/et8500"
 #~ msgstr "HD1100/ET7x00/ET8500"
@@ -11832,6 +11949,17 @@ msgstr "Videomodeselectie"
 
 #~ msgid "Reception Settings"
 #~ msgstr "Instellingen inz. de ontvangst"
+
+#~ msgid ""
+#~ "Recording(s) are in progress or coming up in few seconds!\n"
+#~ "Do you still want to flash image\n"
+#~ "%s\n"
+#~ "without backup?"
+#~ msgstr ""
+#~ "Een opname is bezig of kan elk moment aanvangen!\n"
+#~ "Wilt u toch beginnen met het flashen van een image\n"
+#~ "%s\n"
+#~ "zonder backup?"
 
 #~ msgid "Restore is running..."
 #~ msgstr "Herstellen wordt uitgevoerd..."
@@ -12068,3 +12196,6 @@ msgstr "Videomodeselectie"
 
 #~ msgid "not used"
 #~ msgstr "niet gebruikt"
+
+#~ msgid "slot%s - %s"
+#~ msgstr "slot%s - %s"
