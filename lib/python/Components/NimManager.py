@@ -822,7 +822,7 @@ class NimManager:
 			if "has_outputs" not in entry:
 				entry["has_outputs"] = True
 			if "frontend_device" in entry: # check if internally connectable
-				if os.path.exists("/proc/stb/frontend/%d/rf_switch" % entry["frontend_device"]) and (not current_slot or entries[current_slot]["name"] == entries[current_slot - 1]["name"]):
+				if os.path.exists("/proc/stb/frontend/%d/rf_switch" % entry["frontend_device"]) and (not id or entries[id]["name"] == entries[id - 1]["name"]):
 					entry["internally_connectable"] = entry["frontend_device"] - 1
 				else:
 					entry["internally_connectable"] = None
