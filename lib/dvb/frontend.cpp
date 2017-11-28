@@ -1178,6 +1178,10 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 				break;
 		}
 	}
+	else if (!strncmp(m_description, "Si216", 5)) // New models with SI tuners
+	{
+		ret = snr;
+	}
 
 	signalqualitydb = ret;
 	if (ret == 0x12345678) // no snr db calculation avail.. return untouched snr value..
