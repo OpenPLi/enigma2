@@ -270,8 +270,8 @@ class FlashImage(Screen):
 				if not os.path.isdir(destination):
 					os.mkdir(destination)
 
-				if os.path.isfile(BACKUP_SCRIPT):
-					if doBackup:
+				if doBackup:
+					if os.path.isfile(BACKUP_SCRIPT):
 						self["info"].setText(_("Backing up to: %s") % self.destination)
 						configfile.save()
 						if config.plugins.autobackup.epgcache.value:
@@ -279,9 +279,9 @@ class FlashImage(Screen):
 						self.containerbackup = Console()
 						self.containerbackup.ePopen("%s%s'%s' %s" % (BACKUP_SCRIPT, config.plugins.autobackup.autoinstall.value and " -a " or " ", self.destination, int(config.plugins.autobackup.prevbackup.value)), self.backupsettingsDone)
 					else:
-						self.startDownload()
+						self.session.openWithCallback(self.startDownload, MessageBox, _("Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"), default=False, simple=True)
 				else:
-					self.session.openWithCallback(self.startDownload, MessageBox, _("Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"), default=False, simple=True)
+					self.startDownload()
 			else:
 				self.session.openWithCallback(self.abort, MessageBox, _("Could not find suitable media - Please insert a media (e.g. USB stick) and try again!"), type=MessageBox.TYPE_ERROR, simple=True)
 		else:
