@@ -29,6 +29,7 @@ struct CFile
 	static int writeIntHex(const char *filename, int value);
 	static int writeInt(const char *filename, int value);
 	static int write(const char *filename, const char *value);
+	static std::string read(const std::string &filename);
 };
 
 #endif
