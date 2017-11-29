@@ -135,7 +135,7 @@ class Dish(Screen):
 		tuner_type = data.get("tuner_type")
 		if tuner_type and "DVB-S" in tuner_type:
 			cur_orbpos = data.get("orbital_position", INVALID_POSITION)
-			if cur_orbpos in self.available_sat:
+			if cur_orbpos in self.available_sat and self.getTurningSpeed(only_info=True):
 				self.cur_orbpos = cur_orbpos
 				self.cur_polar  = data.get("polarization", 0)
 				self.rotorTimer.start(500, False)
@@ -185,12 +185,14 @@ class Dish(Screen):
 			mrt = round((mrt * 1000 / self.getTurningSpeed(pol) ) / 10000) + 3
 		return mrt
 
-	def getTurningSpeed(self, pol=0):
+	def getTurningSpeed(self, pol=0, only_info=False):
 		tuner = self.getCurrentTuner()
 		if tuner is not None:
 			nimConfig = nimmanager.getNimConfig(tuner)
 			if nimConfig.configMode.value == "simple":
 				if "positioner" in nimConfig.diseqcMode.value:
+					if only_info:
+						return True
 					nim = config.Nims[tuner]
 					if pol in (1, 3): # vertical
 						return nim.turningspeedV.float
@@ -204,9 +206,13 @@ class Dish(Screen):
 						currLnb = lnbnum and nimConfig.advanced.lnb[lnbnum]
 						diseqcmode = currLnb and currLnb.diseqcMode.value or ""
 						if diseqcmode == "1_2":
+							if only_info:
+								return True
 							if pol in (1, 3): # vertical
 								return currLnb.turningspeedV.float
 							return currLnb.turningspeedH.float
+		if only_info:
+			return False
 		if pol in (1, 3):
 			return 1.0
 		return 1.5

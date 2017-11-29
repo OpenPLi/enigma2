@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-22 23:28+0100\n"
+"POT-Creation-Date: 2017-11-26 10:00+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi <ims21@users.sourceforge.net>\n"
@@ -2427,7 +2427,7 @@ msgstr "Detekován HDD:"
 
 #
 msgid "Detected NIMs:"
-msgstr "Detekován NIMs:"
+msgstr "Detekovány NIMs:"
 
 #
 msgid "Devicename:"
@@ -3320,11 +3320,14 @@ msgid "Following tasks will be done after you press OK!"
 msgstr "Následující úlohy budou provedeny po stisknutí OK!"
 
 msgid "Force LNB Power"
-msgstr ""
+msgstr "Vynutit napájení LNB"
 
 #
 msgid "Force ToneBurst"
 msgstr "Vynutit Toneburst"
+
+msgid "Force Legacy Signal Stats"
+msgstr "Vynutit starší signálové statistiky"
 
 #
 msgid "Format"
@@ -3379,7 +3382,7 @@ msgstr "Z :"
 
 #, python-format
 msgid "Frontprocessor version: %s"
-msgstr "Frontprocessor verze: %s"
+msgstr "Frontprocesor: %s"
 
 #
 msgid "Full transparency"
@@ -5748,8 +5751,20 @@ msgstr "Přepínat A/V receiver do standby"
 msgid "Python frontend for /tmp/mmi.socket"
 msgstr "Python frontend pro /tmp/mmi.socket"
 
+msgid "Build date: "
+msgstr "Datum vytvoření: "
+
+msgid "DVB driver version: "
+msgstr "DVB ovladače: "
+
+msgid "Enigma version: "
+msgstr "Enigma verze: "
+
+msgid "GStreamer version: "
+msgstr "GStreamer: "
+
 msgid "Python version: "
-msgstr "Python verze: "
+msgstr "Python: "
 
 #
 msgid "Question"
@@ -7749,7 +7764,7 @@ msgid "TRANSLATOR_INFO"
 msgstr ""
 "Pro případné korekce můžete kontaktovat autora\n"
 "na výše uvedené adrese.\n"
-"\n®2017"
+"\n®26.11.2017"
 
 #
 msgid "TS file is too large for ISO9660 level 1!"
@@ -11173,8 +11188,14 @@ msgstr "Chyba při rozbalování image\n%s"
 msgid "Image to install is invalid\n%s"
 msgstr "Image pro instalaci je neplatné\n%s"
 
+msgid "Ignore DVB namespace sub network"
+msgstr "Ignorovat DVB namespace podsítě"
+
+msgid "On valid ONIDs, ignore frequency sub network part"
+msgstr "Při platných ONID ignorovat frekvenci podsítě"
+
 msgid "Recording(s) are in progress or coming up in few seconds!\nDo you still want to flash image\n%s?"
-msgstr "Probíhá nebo během několika vteřin začne nahrávání programu!\nChcete stále nahrát image do přijímače\n%s?"
+msgstr "Probíhá nahrávání nebo během několika vteřin začne nahrávání!\nChcete stále nahrát image do přijímače\n%s?"
 
 msgid "Select function"
 msgstr "Výběr funkce"
@@ -11182,8 +11203,8 @@ msgstr "Výběr funkce"
 msgid "Edit selection"
 msgstr "Upravit výběr"
 
-msgid "Do you want to flash image\n%s?"
-msgstr "Chcete nahrát image\n%s?"
+msgid "Do you want to flash image\n%s"
+msgstr "Chcete nahrát image\n%s"
 
 msgid "slot%s - %s (current image)"
 msgstr "Slot%s - %s (aktuální image)"
@@ -11194,8 +11215,14 @@ msgstr "Slot%s - %s"
 msgid "slot%s - empty"
 msgstr "Slot%s - prázdný"
 
-msgid "Do not flash image"
-msgstr "Nenahrávat"
+msgid "Yes, with backup"
+msgstr "Ano, se zálohou"
+
+msgid "Yes, without backup"
+msgstr "Ano, bez zálohy"
+
+msgid "No, do not flash image"
+msgstr "Nenahrávat image"
 
 msgid "Downloading Image"
 msgstr "Stahuje se image"
@@ -11215,8 +11242,38 @@ msgstr "Vyberte Multiboot"
 msgid "Reboot"
 msgstr "Restart"
 
+msgid "Expand"
+msgstr "Rozbalit"
+
+msgid "Flash Image"
+msgstr "Nahrát image"
+
+msgid "Compress"
+msgstr "Sbalit"
+
+msgid "Delete image"
+msgstr "Odstranit image"
+
 msgid "Retreiving image slots - Please wait..."
 msgstr "Načítají se sloty obrazů - Čekejte prosím ..."
+
+msgid "slot%s - empty, with backup"
+msgstr "Slot%s - volný, se zálohou"
+
+msgid "slot%s - empty, without backup"
+msgstr "Slot%s - volný, bez zálohy"
+
+msgid "slot%s - %s (current image) with, backup"
+msgstr "Slot%s - %s (aktuální image), se zálohou"
+
+msgid "slot%s - %s (current image), without backup"
+msgstr "Slot%s - %s (aktuální image), bez zálohy"
+
+msgid "slot%s - %s, with backup"
+msgstr "Slot%s - %s, se zálohou"
+
+msgid "slot%s - %s, without backup"
+msgstr "Slot%s - %s, bez zálohy"
 
 msgid "slot%s - %s mode 1 (current image)"
 msgstr "Slot%s - %s mód 1 (aktuální image)"
