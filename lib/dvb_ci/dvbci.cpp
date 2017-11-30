@@ -193,7 +193,7 @@ eDVBCIInterfaces::eDVBCIInterfaces()
 
 	if (num_ci)
 	{
-		std::string ci_choices = CFile::read("/proc/stb/tsmux/ci_input0_choices");
+		std::string ci_choices = CFile::read("/proc/stb/tsmux/ci0_input_choices");
 
 		if (ci_choices.find("DVR") != std::string::npos)
 		{
