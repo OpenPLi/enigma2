@@ -56,3 +56,18 @@ std::string CFile::read(const std::string &filename)
 	ss << file.rdbuf();
 	return ss.str();
 }
+
+bool CFile::contains_word(const std::string &filename, const std::string &word_to_match)
+{
+	std::string word;
+	std::ifstream file(filename);
+
+	if (!file.good())
+		return false;
+
+	while(file >> word)
+		if(word == word_to_match)
+			return true;
+
+	return false;
+}

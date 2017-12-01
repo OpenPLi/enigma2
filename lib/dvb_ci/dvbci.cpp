@@ -154,6 +154,8 @@ eDVBCIInterfaces::eDVBCIInterfaces()
 
 	instance = this;
 	client = NULL;
+	m_stream_interface = interface_none;
+	m_stream_finish_mode = finish_none;
 
 	eDebug("[CI] scanning for common interfaces..");
 
@@ -193,31 +195,34 @@ eDVBCIInterfaces::eDVBCIInterfaces()
 
 	if (num_ci)
 	{
-		std::string ci_choices = CFile::read("/proc/stb/tsmux/ci0_input_choices");
+		static const char *proc_ci_choices = "/proc/stb/tsmux/ci0_input_choices";
 
-		if (ci_choices.find("DVR") != std::string::npos)
+		if (CFile::contains_word(proc_ci_choices, "PVR"))	// lowest prio = PVR
+			m_stream_interface = interface_use_pvr;
+
+		if (CFile::contains_word(proc_ci_choices, "DVR"))	// low prio = DVR
+			m_stream_interface = interface_use_dvr;
+
+		if (CFile::contains_word(proc_ci_choices, "DVR0"))	// high prio = DVR0
+			m_stream_interface = interface_use_dvr;
+
+		if (m_stream_interface == interface_none)			// fallback = DVR
 		{
-			eDebug("[CI] Offline CI decoding supported via DVR");
-			m_offline_ci = "DVR";
-		}
-		else if (ci_choices.find("PVR") != std::string::npos)
-		{
-			/* support VU+ PVR interface until they switch to DVRx" */
-			eDebug("[CI] Offline CI decoding supported via PVR");
-			m_offline_ci = "PVR";
-		}
-		else
-		{
-			eDebug("[CI] Offline CI decoding not supported, try using with default DVR");
-			m_offline_ci = "DVR";
+			m_stream_interface = interface_use_dvr;
+			eDebug("[CI] Streaming CI routing interface not advertised, assuming DVR method");
 		}
 
-		/* check if default source NONE required or else A */
-		if (ci_choices.find("NONE") != std::string::npos)
-			m_default_source = "NONE";
-		else
-			m_default_source = "A";
+		if (CFile::contains_word(proc_ci_choices, "PVR_NONE"))	// low prio = PVR_NONE
+			m_stream_finish_mode = finish_use_pvr_none;
 
+		if (CFile::contains_word(proc_ci_choices, "NONE"))		// high prio = NONE
+			m_stream_finish_mode = finish_use_none;
+
+		if (m_stream_finish_mode == finish_none)				// fallback = "tuner"
+		{
+			m_stream_finish_mode = finish_use_tuner_a;
+			eDebug("[CI] Streaming CI finish interface not advertised, assuming \"tuner\" method");
+		}
 	}
 }
 
@@ -641,11 +646,29 @@ void eDVBCIInterfaces::recheckPMTHandlers()
 								 *
 								 * No need to set tuner input (setInputSource), because we have no tuner.
 								 */
-								std::stringstream source;
-								source << m_offline_ci;
-								if (m_offline_ci == "DVR")
-									source << channel->getDvrId();
-								ci_it->setSource(source.str());
+
+								switch(m_stream_interface)
+								{
+									case interface_use_dvr:
+									{
+										std::stringstream source;
+										source << "DVR" << channel->getDvrId();
+										ci_it->setSource(source.str());
+										break;
+									}
+
+									case interface_use_pvr:
+									{
+										ci_it->setSource("PVR");
+										break;
+									}
+
+									default:
+									{
+										eDebug("[CI] warning: no valid CI streaming interface");
+										break;
+									}
+								}
 							}
 						}
 						ci_it->current_tuner = tunernum;
@@ -729,9 +752,45 @@ void eDVBCIInterfaces::removePMTHandler(eDVBServicePMTHandler *pmthandler)
 				caids.push_back(0xFFFF);
 				slot->sendCAPMT(pmthandler, caids);  // send a capmt without caids to remove a running service
 				slot->removeService(service_to_remove.getServiceID().get());
-				/* restore ci source to the default (tuner "A" or "NONE") */
+
 				if (slot->current_tuner == -1)
-					slot->setSource(m_default_source);
+				{
+					// no previous tuner to go back to, signal to CI interface CI action is finished
+
+					std::string finish_source;
+
+					switch (m_stream_finish_mode)
+					{
+						case finish_use_tuner_a:
+						{
+							finish_source = "A";
+							break;
+						}
+
+						case finish_use_pvr_none:
+						{
+							finish_source = "PVR_NONE";
+							break;
+						}
+
+						case finish_use_none:
+						{
+							finish_source = "NONE";
+							break;
+						}
+
+						default:
+							(void)0;
+					}
+
+					if(finish_source == "")
+					{
+						eDebug("[CI] warning: CI streaming finish mode not set, assuming \"tuner A\"");
+						finish_source = "A";
+					}
+
+					slot->setSource(finish_source);
+				}
 			}
 
 			if (!--slot->use_count)
