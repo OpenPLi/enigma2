@@ -95,6 +95,10 @@ class UpdatePlugin(Screen, ProtectedScreen):
 				print status
 			if getBoxType() in status[0].split(','):
 				message = len(status) > 1 and status[1] or _("The current beta image might not be stable.\nFor more information see %s.") % ("www.openpli.org")
+				# strip any HTML that may be in the message, but retain line breaks
+				import re
+				message = message.replace("<br />", "\n\n").replace("<br>", "\n\n")
+				message = re.sub('<[^<]+?>', '', re.sub('&#8209;', '-', message))
 				picon = MessageBox.TYPE_ERROR
 				default = False
 		except:
