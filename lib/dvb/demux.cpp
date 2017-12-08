@@ -70,8 +70,12 @@ eDVBDemux::eDVBDemux(int adapter, int demux):
 	m_pvr_fd(-1),
 #endif
 	m_dvr_busy(0),
-	m_dvr_id(-1)
+	m_dvr_id(-1),
+	m_dvr_source_offset(DMX_SOURCE_DVR0)
 {
+	if (CFile::parseInt(&m_dvr_source_offset, "/proc/stb/frontend/dvr_source_offset") == 0)
+		eDebug("[eDVBDemux] using %d for PVR DMX_SET_SOURCE", m_dvr_source_offset);
+
 }
 
 eDVBDemux::~eDVBDemux()
@@ -119,7 +123,7 @@ RESULT eDVBDemux::setSourcePVR(int pvrnum)
 {
 	int fd = openDemux();
 	if (fd < 0) return -1;
-	int n = DMX_SOURCE_DVR0 + pvrnum;
+	int n = m_dvr_source_offset + pvrnum;
 	int res = ::ioctl(fd, DMX_SET_SOURCE, &n);
 	if (res)
 		eDebug("[eDVBDemux] DMX_SET_SOURCE dvr%d failed: %m", pvrnum);
