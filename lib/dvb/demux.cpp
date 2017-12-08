@@ -10,6 +10,17 @@
 #include <lib/dvb/amldecoder.h>
 #endif
 
+#include <linux/dvb/dmx.h>
+
+#include <lib/base/eerror.h>
+#include <lib/base/cfile.h>
+#include <lib/dvb/idvb.h>
+#include <lib/dvb/demux.h>
+#include <lib/dvb/esection.h>
+#include <lib/dvb/decoder.h>
+
+#include "crc32.h"
+
 //#define SHOW_WRITE_TIME
 static int determineBufferCount()
 {
@@ -32,16 +43,6 @@ static int determineBufferCount()
 }
 
 static int recordingBufferCount = determineBufferCount();
-
-#include <linux/dvb/dmx.h>
-
-#include "crc32.h"
-
-#include <lib/base/eerror.h>
-#include <lib/dvb/idvb.h>
-#include <lib/dvb/demux.h>
-#include <lib/dvb/esection.h>
-#include <lib/dvb/decoder.h>
 
 eDVBDemux::eDVBDemux(int adapter, int demux):
 	adapter(adapter),
