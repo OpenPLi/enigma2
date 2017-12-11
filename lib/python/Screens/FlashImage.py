@@ -86,7 +86,7 @@ class SelectImage(Screen):
 			self.imagesList = dict(self.jsonlist) if self.jsonlist else {}
 
 			for media in ['/media/%s' % x for x in os.listdir('/media')]:
-				if not os.path.islink(media) and not(SystemInfo['HasMMC'] and "/mmc" in media):
+				if not os.path.ismount(media) and not os.path.islink(media) and not(SystemInfo['HasMMC'] and "/mmc" in media):
 					getImages(media, ["%s/%s" % (media, x) for x in os.listdir(media) if x.endswith('.zip') and model in x])
 					if "downloaded_images" in os.listdir(media):
 						media = "%s/downloaded_images" % media
@@ -179,7 +179,7 @@ class FlashImage(Screen):
 		<widget name="info" position="5,60" size="e-10,130" font="Regular;24" backgroundColor="#54242424"/>
 		<widget name="progress" position="5,e-39" size="e-10,24" backgroundColor="#54242424"/>
 	</screen>"""
-	
+
 	def __init__(self, session,  imagename, source):
 		Screen.__init__(self, session)
 		self.containerbackup = None
@@ -250,7 +250,7 @@ class FlashImage(Screen):
 
 			def findmedia(destination):
 				def avail(path):
-					if os.path.isdir(path) and not os.path.islink(path) and not(SystemInfo["HasMMC"] and '/mmc' in path):
+					if os.path.isdir(path) and not os.path.ismount(path) and not os.path.islink(path) and not(SystemInfo["HasMMC"] and '/mmc' in path):
 						statvfs = os.statvfs(path)
 						return (statvfs.f_bavail * statvfs.f_frsize) / (1 << 20) >= 500 and path
 				for path in [destination] + ['/media/%s' % x for x in os.listdir('/media')]:
@@ -264,7 +264,7 @@ class FlashImage(Screen):
 				destination = "/".join([self.destination, 'downloaded_images'])
 				self.zippedimage = "://" in self.source and "/".join([destination, self.imagename]) or self.source
 				self.unzippedimage = "/".join([destination, '%s.unzipped' % self.imagename[:-4]])
-			
+
 				if os.path.isfile(destination):
 					os.remove(destination)
 				if not os.path.isdir(destination):
@@ -291,9 +291,9 @@ class FlashImage(Screen):
 		self.containerbackup = None
 		if retval == 0:
 			self.startDownload()
-		else:	
+		else:
 			self.session.openWithCallback(self.abort, MessageBox, _("Error during backup settings\n%s") % reval, type=MessageBox.TYPE_ERROR, simple=True)
-		
+
 	def startDownload(self, reply=True):
 		if reply:
 			if "://" in self.source:
@@ -316,15 +316,15 @@ class FlashImage(Screen):
 	def downloadError(self, reason, status):
 		self.downloader.stop()
 		self.session.openWithCallback(self.abort, MessageBox, _("Error during downloading image\n%s\n%s") % (self.imagename, reason), type=MessageBox.TYPE_ERROR, simple=True)
-		
+
 	def downloadEnd(self):
 		self.downloader.stop()
 		self.unzip()
-		
+
 	def unzip(self):
 		try:
 			zipfile.ZipFile(self.zippedimage, 'r').extractall(self.unzippedimage)
-			self.flashimage()	
+			self.flashimage()
 		except:
 			self.session.openWithCallback(self.abort, MessageBox, _("Error during unzipping image\n%s") % self.imagename, type=MessageBox.TYPE_ERROR, simple=True)
 
