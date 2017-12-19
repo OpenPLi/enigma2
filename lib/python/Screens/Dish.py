@@ -56,7 +56,7 @@ class Dish(Screen):
 
 		self.rotor_pos = self.cur_orbpos = config.misc.lastrotorposition.value
 		config.misc.lastrotorposition.addNotifier(self.rotorPositionChanged)
-		self.turn_time = self.total_time = self.pmt_timeout = self.close_timeout = None
+		self.turn_time = self.total_time = self.pmt_timeout = self.close_timeout = self.rotor_sat = None
 		self.cur_polar = 0
 		self.__state = self.STATE_HIDDEN
 
@@ -79,11 +79,16 @@ class Dish(Screen):
 	def updateRotorMovingState(self):
 		moving = eDVBSatelliteEquipmentControl.getInstance().isRotorMoving()
 		if moving:
-			if self.cur_orbpos != INVALID_POSITION and self.cur_orbpos != config.misc.lastrotorposition.value:
-				config.misc.lastrotorposition.value = self.cur_orbpos
-				config.misc.lastrotorposition.save()
-			if self.__state == self.STATE_HIDDEN:
-				self.show()
+			if self.rotor_sat is None:
+				self.rotor_sat = self.isSatRotorMode()
+			if self.rotor_sat:
+				if self.cur_orbpos != INVALID_POSITION and self.cur_orbpos != config.misc.lastrotorposition.value:
+					config.misc.lastrotorposition.value = self.cur_orbpos
+					config.misc.lastrotorposition.save()
+				if self.__state == self.STATE_HIDDEN:
+					self.show()
+			else:
+				self.__toHide()
 
 	def turnTimerLoop(self):
 		if self.total_time:
@@ -143,6 +148,7 @@ class Dish(Screen):
 	def __toHide(self):
 		self.rotorTimer.stop()
 		self.timeoutTimer.stop()
+		self.rotor_sat = None
 		if self.__state == self.STATE_SHOWN:
 			self.hide()
 
@@ -184,6 +190,16 @@ class Dish(Screen):
 				mrt += 10
 			mrt = round((mrt * 1000 / self.getTurningSpeed(pol) ) / 10000) + 3
 		return mrt
+
+	def isSatRotorMode(self):
+		satRotorMode = False
+		tuner = self.getCurrentTuner()
+		if tuner is not None:
+			for sat in nimmanager.getRotorSatListForNim(tuner):
+				if sat[0] == self.cur_orbpos:
+					satRotorMode = True
+					break
+		return satRotorMode
 
 	def getTurningSpeed(self, pol=0):
 		tuner = self.getCurrentTuner()
