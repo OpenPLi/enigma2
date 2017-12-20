@@ -40,7 +40,9 @@
 		<item level="1" text="Startup to Standby" description="Startup the set top box in standby">config.usage.startup_to_standby</item>
 		<item level="2" text="Config resolution of pictures" description="configure in which resolution pictures are displayed with the picture viewer and movieplayer">config.usage.pic_resolution</item>
 		<item level="2" text="Load unlinked userbouquets" description="When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are upgraded">config.misc.load_unlinked_userbouquets</item>
-		<item level="2" text="Ignore DVB namespace sub network" description="On valid ONIDs, ignore frequency sub network part">config.usage.subnetwork</item>
+		<item level="2" text="Ignore DVB-S namespace sub network" description="On valid ONIDs, ignore frequency sub network part">config.usage.subnetwork</item>
+		<item level="2" text="Ignore DVB-C namespace sub network" description="On valid ONIDs, ignore frequency sub network part">config.usage.subnetwork_cable</item>
+		<item level="2" text="Ignore DVB-T namespace sub network" description="On valid ONIDs, ignore frequency sub network part">config.usage.subnetwork_terrestrial</item>
 	</setup>
 	<setup key="userinterface" title="User interface">
 		<item level="1" text="Show animation while busy" description="Show busy indicator when the system is busy.">config.usage.show_spinner</item>
