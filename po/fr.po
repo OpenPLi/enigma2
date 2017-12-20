@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-20 20:01+0100\n"
-"PO-Revision-Date: 2017-11-20 20:13+0100\n"
+"POT-Creation-Date: 2017-12-19 16:10+0100\n"
+"PO-Revision-Date: 2017-12-19 16:49+0100\n"
 "Last-Translator: Pr2\n"
 "Language-Team: french\n"
 "Language: fr\n"
@@ -1315,9 +1315,6 @@ msgstr "Bloc réduction bruit"
 msgid "Blue"
 msgstr "Bleu"
 
-msgid "Blue boost"
-msgstr "Intensifier le bleu"
-
 msgid "Bolivia (Plurinational State of)"
 msgstr "Bolivie (État plurinational de)"
 
@@ -1326,6 +1323,12 @@ msgstr "Bonaire, Sint Eustatius et Saba"
 
 msgid "Bookmarks"
 msgstr "Marque-pages"
+
+msgid "Boost blue"
+msgstr "Intensifier le bleu"
+
+msgid "Boost green"
+msgstr "Intensifier le vert"
 
 msgid "Bosnia and Herzegovina"
 msgstr "Bosnie et Herzegovine"
@@ -3573,9 +3576,6 @@ msgstr "Grecque"
 
 msgid "Green"
 msgstr "Vert"
-
-msgid "Green boost"
-msgstr "Intensifier le vert"
 
 msgid "Greenland"
 msgstr "Groenland"
@@ -6345,6 +6345,9 @@ msgstr "Sauvegarder la PauseDirect seulement pour l'événement en cours"
 msgid "Scaler sharpness"
 msgstr "Niveau netteté"
 
+msgid "Scaler vertical dejagging"
+msgstr "Mise à l’échelle dejagging vertical"
+
 msgid "Scaling mode"
 msgstr "Mode mise à l'échelle"
 
@@ -7145,6 +7148,9 @@ msgstr "Faible progression"
 msgid "Smartcard PIN"
 msgstr "Code PIN de la carte à puce"
 
+msgid "Smooth"
+msgstr "Adouci"
+
 msgid "Social/Political/Economics"
 msgstr "Société/Politique/Economie"
 
@@ -7661,7 +7667,7 @@ msgstr ""
 "Traduction Française\n"
 "Enigma2 - OpenPLi\n"
 "Support: www.openpli.org\n"
-"Dernière MAJ: 20 novembre 2017"
+"Dernière MAJ: 19 décembre 2017"
 
 msgid "TS file is too large for ISO9660 level 1!"
 msgstr "Fichier TS trop grand pour le niveau 1 ISO9660!"
@@ -7930,6 +7936,12 @@ msgstr ""
 "Pour les utilisateurs finaux ceci n'est pas important.\n"
 "SVP, ne paniquez pas si vous voyez des valeurs que vous pensez étranges!"
 
+msgid "This option allows to reduce the block-noise in the picture. Obviously this is at the cost of the picture's sharpness."
+msgstr "Cette option permet de réduire le bloc-bruit dans l'image. Evidemment, cela est au détriment de la netteté de l'image."
+
+msgid "This option allows to set the level of dynamic contrast of the picture."
+msgstr "Cette option permet de régler le niveau de contraste dynamique de l'image."
+
 msgid "This option allows you can config the Colordepth for UHD"
 msgstr "Cette option vous permet de configurer la profondeur des couleurs pour UHD"
 
@@ -7939,11 +7951,23 @@ msgstr "Cette option vous permet de configurer la colorimétrie pour HDR."
 msgid "This option allows you can config the Colorspace from Auto to RGB"
 msgstr "Cette option vous permet de configurer l’espace colorimétrique de Auto vers RGB"
 
+msgid "This option allows you enable smoothing filter to control the dithering process."
+msgstr "Cette option vous permet d'activer le filtre de lissage pour contrôler le processus de tramage."
+
+msgid "This option allows you enable the vertical scaler dejagging."
+msgstr "Cette option vous permet d'activer la mise à l'échelle verticale dejagging."
+
 msgid "This option allows you show all symbols on display."
 msgstr "Cette option vous permet d’afficher tous les symboles sur l’affichage avant."
 
 msgid "This option allows you to add the softcam setup in the extensions menu."
 msgstr "Cette option vous permet d'ajouter la configuration softcam dans le menu des extensions."
+
+msgid "This option allows you to boost the blue tones in the picture."
+msgstr "Cette option vous permet d'augmenter les tons bleus dans l'image."
+
+msgid "This option allows you to boost the green tones in the picture."
+msgstr "Cette option vous permet d'augmenter les tons verts dans l'image."
 
 msgid "This option allows you to change the virtuell loadspeaker position."
 msgstr "Cette option vous permet de changer la position des haut-parleurs virtuels."
@@ -7969,11 +7993,41 @@ msgstr "Cette option vous permet d'afficher les numéros des menus pour des racc
 msgid "This option allows you to show menu paths."
 msgstr "Cette option vous permet d'afficher les chemins des menus."
 
+msgid "This option allows you to view the old and new settings side by side."
+msgstr "Cette option vous permet de visualiser les anciens et nouveaux paramètres côte-à-côte."
+
 msgid "This option can be useful for long HDMI cables."
 msgstr "Cette option est utile pour les câbles HDMI longs."
 
 msgid "This option configures you can set auto volume level."
 msgstr "Cette option configure le niveau du volume audio automatique."
+
+msgid "This option set the level of surpression of musquito noise (Musquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
+msgstr "Cette option permet de régler le niveau de supression de bruit de moustique (le bruit de moustique est un aliasing aléatoire en raison de la forte compression). Evidemment, cela va au détriment des détails de l'image."
+
+msgid "This option sets  the picture contrast."
+msgstr "Cette option définit le contraste de l'image."
+
+msgid "This option sets the picture brightness."
+msgstr "Cette option définit la luminosité de l'image."
+
+msgid "This option sets the picture flesh tones."
+msgstr "Cette option définit dans l’image les tons de la peau."
+
+msgid "This option sets the picture hue."
+msgstr "Cette option définit la teinte de l'image."
+
+msgid "This option sets the picture saturation."
+msgstr "Cette option définit la saturation de l'image."
+
+msgid "This option sets the scaler sharpness, used when stretching picture from 4:3 to 16:9."
+msgstr "Cette option définit la netteté de mise à l'échelle, utilisé lors de l'étirement image 4:3 à 16:9."
+
+msgid "This option sets the surpression of false digital contours, that are the result of a limited number of discrete values."
+msgstr "Cette option définit la supression de faux contours numériques, qui sont le résultat d'un nombre limité de valeurs discrètes."
+
+msgid "This option sets up the picture sharpness, used when the picture is being upscaled."
+msgstr "Cette option définit la netteté de l'image, utilisée lorsque l'image est rehaussée."
 
 msgid "This plugin is installed."
 msgstr "Ce plugin est installé."
@@ -10644,3 +10698,9 @@ msgstr "Zappé"
 
 msgid "®"
 msgstr "®"
+
+#~ msgid "Blue boost"
+#~ msgstr "Intensifier le bleu"
+
+#~ msgid "Green boost"
+#~ msgstr "Intensifier le vert"
