@@ -1046,7 +1046,7 @@ RESULT eDVBResourceManager::allocateDemux(eDVBRegisteredFrontend *fe, ePtr<eDVBA
 		if (fe)
 			demux->get().setSourceFrontend(fesource);
 		else
-			demux->get().setSourcePVR(d);
+			demux->get().setSourcePVR(0);
 		return 0;
 	}
 
