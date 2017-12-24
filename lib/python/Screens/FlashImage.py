@@ -5,6 +5,7 @@ from Components.ChoiceList import ChoiceList, ChoiceEntryComponent
 from Components.config import config, configfile
 from Components.ActionMap import ActionMap
 from Components.Console import Console
+from Components.Harddisk import getNonNetworkMediaMounts
 from Components.Label import Label
 from Components.Pixmap import Pixmap
 from Components.ProgressBar import ProgressBar
@@ -85,8 +86,8 @@ class SelectImage(Screen):
 					pass
 			self.imagesList = dict(self.jsonlist) if self.jsonlist else {}
 
-			for media in ['/media/%s' % x for x in os.listdir('/media')]:
-				if not os.path.islink(media) and not(SystemInfo['HasMMC'] and "/mmc" in media):
+			for media in getNonNetworkMediaMounts():
+				if not(SystemInfo['HasMMC'] and "/mmc" in media):
 					getImages(media, ["%s/%s" % (media, x) for x in os.listdir(media) if x.endswith('.zip') and model in x])
 					if "downloaded_images" in os.listdir(media):
 						media = "%s/downloaded_images" % media
@@ -204,6 +205,7 @@ class FlashImage(Screen):
 		self.delay = eTimer()
 		self.delay.callback.append(self.confirmation)
 		self.delay.start(0, True)
+		self.hide()
 
 	def confirmation(self):
 		recordings = self.session.nav.getRecordings()
@@ -250,10 +252,10 @@ class FlashImage(Screen):
 
 			def findmedia(destination):
 				def avail(path):
-					if os.path.isdir(path) and not os.path.islink(path) and not(SystemInfo["HasMMC"] and '/mmc' in path):
+					if not(SystemInfo["HasMMC"] and '/mmc' in path):
 						statvfs = os.statvfs(path)
 						return (statvfs.f_bavail * statvfs.f_frsize) / (1 << 20) >= 500 and path
-				for path in [destination] + ['/media/%s' % x for x in os.listdir('/media')]:
+				for path in [destination] + getNonNetworkMediaMounts():
 					if avail(path):
 						return path
 
@@ -295,6 +297,7 @@ class FlashImage(Screen):
 			self.session.openWithCallback(self.abort, MessageBox, _("Error during backup settings\n%s") % reval, type=MessageBox.TYPE_ERROR, simple=True)
 		
 	def startDownload(self, reply=True):
+		self.show()
 		if reply:
 			if "://" in self.source:
 				from Tools.Downloader import downloadWithProgress
