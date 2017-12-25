@@ -5,6 +5,7 @@ from Components.ChoiceList import ChoiceList, ChoiceEntryComponent
 from Components.config import config, configfile
 from Components.ActionMap import ActionMap
 from Components.Console import Console
+from Components.Harddisk import getNonNetworkMediaMounts
 from Components.Label import Label
 from Components.Pixmap import Pixmap
 from Components.ProgressBar import ProgressBar
@@ -30,15 +31,15 @@ class SelectImage(Screen):
 		self.expanded = []
 		self.setTitle(_("Select Image"))
 		self["key_red"] = Button(_("Cancel"))
-		self["key_green"] = Button(_("Flash with backup"))
+		self["key_green"] = Button()
 		self["key_yellow"] = Button()
-		self["key_blue"] = Button(_("Flash without backup"))
+		self["key_blue"] = Button()
 		self["list"] = ChoiceList(list=[ChoiceEntryComponent('',((_("Retreiving image list - Please wait...")), "Waiter"))])
 		self["h_red"] = Pixmap()
 		self["h_green"] = Pixmap()
+		self["h_green"].hide()
 		self["h_yellow"] = Pixmap()
 		self["h_yellow"].hide()
-		self["h_blue"] = Pixmap()
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "KeyboardInputActions", "MenuActions"],
 		{
@@ -47,7 +48,6 @@ class SelectImage(Screen):
 			"red": boundFunction(self.close, None),
 			"green": self.keyOk,
 			"yellow": self.keyDelete,
-			"blue": boundFunction(self.keyOk, doBackup=False),
 			"up": self.keyUp,
 			"down": self.keyDown,
 			"left": self.keyLeft,
@@ -86,8 +86,8 @@ class SelectImage(Screen):
 					pass
 			self.imagesList = dict(self.jsonlist) if self.jsonlist else {}
 
-			for media in ['/media/%s' % x for x in os.listdir('/media')]:
-				if not os.path.islink(media) and not(SystemInfo['HasMMC'] and "/mmc" in media):
+			for media in getNonNetworkMediaMounts():
+				if not(SystemInfo['HasMMC'] and "/mmc" in media):
 					getImages(media, ["%s/%s" % (media, x) for x in os.listdir(media) if x.endswith('.zip') and model in x])
 					if "downloaded_images" in os.listdir(media):
 						media = "%s/downloaded_images" % media
@@ -115,11 +115,11 @@ class SelectImage(Screen):
 					if self.setIndex:
 						self["list"].moveToIndex(self.setIndex if self.setIndex < len(list) else len(list) - 1)
 				self.setIndex = 0
-				self.selectionChanged()
+			self.selectionChanged()
 		else:
 			self.session.openWithCallback(self.close, MessageBox, _("Cannot find images - please try later"), type=MessageBox.TYPE_ERROR, timeout=3)
 
-	def keyOk(self, doBackup=True):
+	def keyOk(self):
 		currentSelected = self["list"].l.getCurrentSelection()
 		if currentSelected[0][1] == "Expander":
 			if currentSelected[0][0] in self.expanded:
@@ -128,7 +128,7 @@ class SelectImage(Screen):
 				self.expanded.append(currentSelected[0][0])
 			self.getImagesList()
 		elif currentSelected[0][1] != "Waiter":
-			self.session.openWithCallback(self.getImagesList, FlashImage, currentSelected[0][0], currentSelected[0][1], doBackup)
+			self.session.openWithCallback(self.getImagesList, FlashImage, currentSelected[0][0], currentSelected[0][1])
 
 	def keyDelete(self):
 		currentSelected= self["list"].l.getCurrentSelection()[0][1]
@@ -144,13 +144,19 @@ class SelectImage(Screen):
 			self.delay.start(0, True)
 
 	def selectionChanged(self):
-		currentSelected = self["list"].l.getCurrentSelection()[0][1]
-		if "://" in currentSelected or currentSelected in ["Expander", "Waiter"]:
+		currentSelected = self["list"].l.getCurrentSelection()
+		if "://" in currentSelected[0][1] or currentSelected[0][1] in ["Expander", "Waiter"]:
 			self["h_yellow"].hide()
 			self["key_yellow"].setText("")
 		else:
 			self["h_yellow"].show()
 			self["key_yellow"].setText(_("Delete image"))
+		if currentSelected[0][1] == "Waiter":
+			self["h_green"].hide()
+			self["key_green"].setText("")
+		else:
+			self["h_green"].show()
+			self["key_green"].setText((_("Compress") if currentSelected[0][0] in self.expanded else _("Expand")) if currentSelected[0][1] == "Expander" else _("Flash Image"))
 
 	def keyLeft(self):
 		self["list"].instance.moveSelection(self["list"].instance.pageUp)
@@ -175,7 +181,7 @@ class FlashImage(Screen):
 		<widget name="progress" position="5,e-39" size="e-10,24" backgroundColor="#54242424"/>
 	</screen>"""
 	
-	def __init__(self, session,  imagename, source, doBackup):
+	def __init__(self, session,  imagename, source):
 		Screen.__init__(self, session)
 		self.containerbackup = None
 		self.containerofgwrite = None
@@ -183,7 +189,6 @@ class FlashImage(Screen):
 		self.downloader = None
 		self.source = source
 		self.imagename = imagename
-		self.doBackup = doBackup
 
 		self["header"] = Label(_("Backup settings"))
 		self["info"] = Label(_("Save settings and EPG data"))
@@ -200,52 +205,57 @@ class FlashImage(Screen):
 		self.delay = eTimer()
 		self.delay.callback.append(self.confirmation)
 		self.delay.start(0, True)
+		self.hide()
 
 	def confirmation(self):
 		recordings = self.session.nav.getRecordings()
 		if not recordings:
 			next_rec_time = self.session.nav.RecordTimer.getNextRecordingTime()
 		if recordings or (next_rec_time > 0 and (next_rec_time - time.time()) < 360):
-			if self.doBackup:
-				self.message = _("Recording(s) are in progress or coming up in few seconds!\nDo you still want to flash image\n%s?") % self.imagename
-			else:
-				self.message = _("Recording(s) are in progress or coming up in few seconds!\nDo you still want to flash image\n%s\nwithout backup?") % self.imagename
-		elif self.doBackup:
-			self.message = _("Do you want to flash image\n%s?") % self.imagename
+			self.message = _("Recording(s) are in progress or coming up in few seconds!\nDo you still want to flash image\n%s?") % self.imagename
 		else:
-			self.message = _("Do you want to flash image\n%s\nwithout backup?") % self.imagename
+			self.message = _("Do you want to flash image\n%s") % self.imagename
 		if SystemInfo["canMultiBoot"]:
 			self.getImageList = GetImagelist(self.getImagelistCallback)
 		else:
-			self.session.openWithCallback(self.backupsettings, MessageBox, self.message , default=False, simple=True)
+			choices = [(_("Yes, with backup"), "with backup"), (_("No, do not flash image"), False), (_("Yes, without backup"), "without backup")]
+			self.session.openWithCallback(self.backupsettings, MessageBox, self.message , list=choices, default=False, simple=True)
 
 	def getImagelistCallback(self, imagedict):
 		self.getImageList = None
-		imagelist = []
+		choices = []
 		currentimageslot = GetCurrentImage()
 		for x in range(1,5):
 			if x in imagedict:
-				imagelist.append(((_("slot%s - %s (current image)") if x == currentimageslot else _("slot%s - %s")) % (x, imagedict[x]['imagename']), x))
+				choices.append(((_("slot%s - %s (current image) with, backup") if x == currentimageslot else _("slot%s - %s, with backup")) % (x, imagedict[x]['imagename']), (x, "with backup")))
 			else:
-				imagelist.append((_("slot%s - empty") % x, x))
-		imagelist.append((_("Do not flash image"), False))
-		self.session.openWithCallback(self.backupsettings, MessageBox, self.message, list=imagelist, default=currentimageslot, simple=True)
+				choices.append((_("slot%s - empty, with backup") % x, (x, "with backup")))
+		choices.append((_("No, do not flash image"), False))
+		for x in range(1,5):
+			if x in imagedict:
+				choices.append(((_("slot%s - %s (current image), without backup") if x == currentimageslot else _("slot%s - %s, without backup")) % (x, imagedict[x]['imagename']), (x, "without backup")))
+			else:
+				choices.append((_("slot%s - empty, without backup") % x, (x, "without backup")))
+		self.session.openWithCallback(self.backupsettings, MessageBox, self.message, list=choices, default=currentimageslot, simple=True)
 
 	def backupsettings(self, retval):
-		
+
 		if retval:
 
 			if SystemInfo["canMultiBoot"]:
-				self.multibootslot = retval
+				self.multibootslot = retval[0]
+				doBackup = retval[1] == "with backup"
+			else:
+				doBackup = retval == "with backup"
 
 			BACKUP_SCRIPT = "/usr/lib/enigma2/python/Plugins/Extensions/AutoBackup/settings-backup.sh"
 
 			def findmedia(destination):
 				def avail(path):
-					if os.path.isdir(path) and not os.path.islink(path) and not(SystemInfo["HasMMC"] and '/mmc' in path):
+					if not(SystemInfo["HasMMC"] and '/mmc' in path):
 						statvfs = os.statvfs(path)
 						return (statvfs.f_bavail * statvfs.f_frsize) / (1 << 20) >= 500 and path
-				for path in [destination] + ['/media/%s' % x for x in os.listdir('/media')]:
+				for path in [destination] + getNonNetworkMediaMounts():
 					if avail(path):
 						return path
 
@@ -262,8 +272,8 @@ class FlashImage(Screen):
 				if not os.path.isdir(destination):
 					os.mkdir(destination)
 
-				if os.path.isfile(BACKUP_SCRIPT):
-					if self.doBackup:
+				if doBackup:
+					if os.path.isfile(BACKUP_SCRIPT):
 						self["info"].setText(_("Backing up to: %s") % self.destination)
 						configfile.save()
 						if config.plugins.autobackup.epgcache.value:
@@ -271,9 +281,9 @@ class FlashImage(Screen):
 						self.containerbackup = Console()
 						self.containerbackup.ePopen("%s%s'%s' %s" % (BACKUP_SCRIPT, config.plugins.autobackup.autoinstall.value and " -a " or " ", self.destination, int(config.plugins.autobackup.prevbackup.value)), self.backupsettingsDone)
 					else:
-						self.startDownload()
+						self.session.openWithCallback(self.startDownload, MessageBox, _("Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"), default=False, simple=True)
 				else:
-					self.session.openWithCallback(self.startDownload, MessageBox, _("Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"), default=False, simple=True)
+					self.startDownload()
 			else:
 				self.session.openWithCallback(self.abort, MessageBox, _("Could not find suitable media - Please insert a media (e.g. USB stick) and try again!"), type=MessageBox.TYPE_ERROR, simple=True)
 		else:
@@ -287,6 +297,7 @@ class FlashImage(Screen):
 			self.session.openWithCallback(self.abort, MessageBox, _("Error during backup settings\n%s") % reval, type=MessageBox.TYPE_ERROR, simple=True)
 		
 	def startDownload(self, reply=True):
+		self.show()
 		if reply:
 			if "://" in self.source:
 				from Tools.Downloader import downloadWithProgress
@@ -357,7 +368,7 @@ class FlashImage(Screen):
 class MultibootSelection(SelectImage):
 	def __init__(self, session, *args):
 		Screen.__init__(self, session)
-		self.skinName="ChoiceBox"
+		self.skinName = "ChoiceBox"
 		self.session = session
 		self.imagesList = None
 		self.expanded = []
@@ -365,6 +376,8 @@ class MultibootSelection(SelectImage):
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("Reboot"))
 		self["list"] = ChoiceList(list=[ChoiceEntryComponent('',((_("Retreiving image slots - Please wait...")), "Waiter"))])
+		self["h_red"] = Pixmap()
+		self["h_green"] = Pixmap()
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "KeyboardInputActions", "MenuActions"],
 		{
@@ -416,3 +429,6 @@ class MultibootSelection(SelectImage):
 					break
 			from Screens.Standby import TryQuitMainloop
 			self.session.open(TryQuitMainloop, 2)
+
+	def selectionChanged(self):
+		pass

@@ -23,6 +23,9 @@ def getProcMounts():
 		item[1] = item[1].replace('\\040', ' ')
 	return result
 
+def getNonNetworkMediaMounts():
+	return [x[1] for x in getProcMounts() if x[1].startswith("/media/") and not x[0].startswith("//")]
+
 def isFileSystemSupported(filesystem):
 	try:
 		for fs in open('/proc/filesystems', 'r'):
@@ -38,7 +41,6 @@ def findMountPoint(path):
 	while not os.path.ismount(path):
 		path = os.path.dirname(path)
 	return path
-
 
 DEVTYPE_UDEV = 0
 DEVTYPE_DEVFS = 1
