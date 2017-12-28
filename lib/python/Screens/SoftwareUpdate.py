@@ -218,11 +218,13 @@ class UpdatePlugin(Screen, ProtectedScreen):
 						message = _("Do you want to update your receiver?") + "\n"
 					message += "(" + (ngettext("%s updated package available", "%s updated packages available", self.total_packages) % self.total_packages) + ")"
 					if self.total_packages > 150:
+						choices = [(_("Update and reboot"), "cold")]
 						message += " " + _("Reflash recommended!")
-					choices = [(_("Update and reboot (recommended)"), "cold"),
-						(_("Update and ask to reboot"), "hot"),
-						(_("Update channel list only"), "channels"),
-						(_("Show packages to be upgraded"), "showlist")]
+					else:
+						choices = [(_("Update and reboot (recommended"), "cold"),
+						(_("Update and ask to reboot"), "hot")]
+					choices.append((_("Update channel list only"), "channels"))
+					choices.append((_("Show packages to be upgraded"), "showlist"))
 				else:
 					message = _("No updates available")
 					choices = []
