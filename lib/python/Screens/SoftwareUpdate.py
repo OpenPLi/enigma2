@@ -100,7 +100,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 				message = re.sub('<[^<]+?>', '', re.sub('&#8209;', '-', message))
 				picon = MessageBox.TYPE_ERROR
 		except:
-			message = _("The status of the current beta image could not be checked because %s can not be reached.") % ("www.openpli.org")
+			message = _("The status of the current image could not be checked because %s can not be reached.") % ("www.openpli.org")
 			picon = MessageBox.TYPE_ERROR
 		socket.setdefaulttimeout(currentTimeoutDefault)
 		if message != "":
