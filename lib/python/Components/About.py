@@ -37,8 +37,8 @@ def getBuildDateString():
 def getEnigmaVersionString():
 	import enigma
 	enigma_version = enigma.getEnigmaVersionString()
-	if len(enigma_version) > 11:
-		enigma_version = enigma_version[:10] + " " + enigma_version[11:]
+	if '-(no branch)' in enigma_version:
+		enigma_version = enigma_version [:-12]
 	return enigma_version
 
 def getGStreamerVersionString():
