@@ -241,8 +241,9 @@ public:
 		containertype_t containertype;
 		bool is_video;
 		bool is_streaming;
+		bool is_hls;
 		sourceStream()
-			:audiotype(atUnknown), containertype(ctNone), is_video(FALSE), is_streaming(FALSE)
+			:audiotype(atUnknown), containertype(ctNone), is_video(FALSE), is_streaming(FALSE), is_hls(FALSE)
 		{
 		}
 	};

@@ -824,7 +824,7 @@ class NimManager:
 			if "has_outputs" not in entry:
 				entry["has_outputs"] = True
 			if "frontend_device" in entry: # check if internally connectable
-				if os.path.exists("/proc/stb/frontend/%d/rf_switch" % entry["frontend_device"]):
+				if os.path.exists("/proc/stb/frontend/%d/rf_switch" % entry["frontend_device"]) and (not id or entries[id]["name"] == entries[id - 1]["name"]):
 					entry["internally_connectable"] = entry["frontend_device"] - 1
 				else:
 					entry["internally_connectable"] = None
@@ -1546,6 +1546,7 @@ def InitNimManager(nimmgr, update_slots = []):
 	for slot in nimmgr.nim_slots:
 		x = slot.slot
 		nim = config.Nims[x]
+		nim.force_legacy_signal_stats = ConfigYesNo(default = False)
 
 		if slot.isCompatible("DVB-S"):
 			createSatConfig(nim, x, empty_slots)

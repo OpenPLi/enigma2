@@ -201,8 +201,10 @@ if test x"$with_amlogic" = xyes ; then
 	PKG_CHECK_MODULES(DVBCSA, libdvbcsa)
 fi
 
+AC_CHECK_HEADERS([sys/klog.h])
+AC_CHECK_FUNCS([klogctl])
 
-ENIGMA2_CFLAGS="-fno-rtti -fno-exceptions"
+ENIGMA2_CFLAGS="-fno-rtti -fno-exceptions -rdynamic -funwind-tables"
 AC_SUBST(ENIGMA2_CFLAGS)
 
 CPPFLAGS="$CPPFLAGS $PYTHON_CPPFLAGS"
