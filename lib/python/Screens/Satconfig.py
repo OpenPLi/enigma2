@@ -840,7 +840,7 @@ class NimSelection(Screen):
 						text += ", ".join(satnames)
 				elif x.isCompatible("DVB-T") or x.isCompatible("DVB-C") or x.isCompatible("ATSC"):
 					if nimConfig.configMode.value == "nothing":
-						text = _("Nothing connected")
+						text = _("Disabled")
 					elif nimConfig.configMode.value == "enabled":
 						text = _("Enabled")
 				if x.isMultiType():
