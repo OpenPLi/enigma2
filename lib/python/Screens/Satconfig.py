@@ -142,7 +142,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 			self.list.append(self.multiType)
 
 		if self.nim.isCompatible("DVB-S"):
-			self.configMode = getConfigListEntry(_("Configuration mode"), self.nimConfig.configMode, _("Configure this tuner using simple or advanced options, or loop it through to another tuner, or copy a configuration from another tuner, or disable it."))
+			self.configMode = getConfigListEntry(_("Configuration mode"), self.nimConfig.configMode, _("Select 'Unicable' if this tuner will use a Unicable device. For all other setups select 'FBC automatic'.") if self.nim.isFBCLink() else _("Configure this tuner using simple or advanced options, or loop it through to another tuner, or copy a configuration from another tuner, or disable it."))
 			self.list.append(self.configMode)
 
 			if self.nimConfig.configMode.value == "simple":			#simple setup
