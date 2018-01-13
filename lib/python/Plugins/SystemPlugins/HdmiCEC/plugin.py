@@ -48,6 +48,7 @@ class HdmiCECSetupScreen(Screen, ConfigListScreen):
 		}, -2)
 
 		self.list = []
+		self.logpath_entry = None
 		ConfigListScreen.__init__(self, self.list, session = self.session)
 		self.createSetup()
 		self.updateAddress()
