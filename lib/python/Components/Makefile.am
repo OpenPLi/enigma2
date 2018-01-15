@@ -5,7 +5,7 @@ SUBDIRS = Sources Converter Renderer
 install_PYTHON = \
 	ActionMap.py GUISkin.py PerServiceDisplay.py components.py              \
 	Button.py HTMLComponent.py ProgressBar.py TimerList.py config.py        \
-	HTMLSkin.py ServiceList.py VariableText.py                              \
+	ServiceList.py VariableText.py                                          \
 	ConfigList.py VariableValue.py                                          \
 	Label.py ServiceScan.py VolumeBar.py VolumeControl.py                   \
 	GUIComponent.py MenuList.py __init__.py MovieList.py                    \
