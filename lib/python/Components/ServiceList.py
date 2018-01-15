@@ -1,4 +1,3 @@
-from HTMLComponent import HTMLComponent
 from GUIComponent import GUIComponent
 from skin import parseColor, parseFont
 
@@ -19,7 +18,7 @@ def refreshServiceList(configElement = None):
 		if servicelist:
 			servicelist.setMode()
 
-class ServiceList(HTMLComponent, GUIComponent):
+class ServiceList(GUIComponent):
 	MODE_NORMAL = 0
 	MODE_FAVOURITES = 1
 
