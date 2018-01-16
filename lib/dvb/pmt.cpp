@@ -282,9 +282,9 @@ void eDVBServicePMTHandler::AITready(int error)
 							{
 								if ((*i)->getApplicationControlCode() == 0x01) /* AUTOSTART */
 								{
-									m_HBBTVUrl = (*interactionit)->getUrlBase()->getUrl();
+									m_HBBTVUrl.insert(0, (*interactionit)->getUrlBase()->getUrl());
 								}
-								aitinfo.url = (*interactionit)->getUrlBase()->getUrl();
+								aitinfo.url.insert(0, (*interactionit)->getUrlBase()->getUrl());
 								break;
 							}
 							break;
@@ -301,7 +301,6 @@ void eDVBServicePMTHandler::AITready(int error)
 							m_HBBTVUrl += applicationlocation->getInitialPath();
 						}
 						aitinfo.url += applicationlocation->getInitialPath();
-						m_aitInfoList.push_back(aitinfo);
 						break;
 					}
 					case APPLICATION_USAGE_DESCRIPTOR:
@@ -310,6 +309,7 @@ void eDVBServicePMTHandler::AITready(int error)
 						break;
 					}
 				}
+				m_aitInfoList.push_back(aitinfo);
 			}
 		}
 		if (!m_HBBTVUrl.empty())
