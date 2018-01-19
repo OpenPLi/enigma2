@@ -286,6 +286,8 @@ class AttributeParser:
 			self.applyOne(attrib, value)
 	def conditional(self, value):
 		pass
+	def objecttypes(self, value):
+		pass
 	def position(self, value):
 		if isinstance(value, tuple):
 			self.guiObject.move(ePoint(*value))
@@ -978,8 +980,12 @@ def readSkin(screen, skin, names, desktop):
 	def process_screen(widget, context):
 		for w in widget.getchildren():
 			conditional = w.attrib.get('conditional')
-			if conditional and not [i for i in conditional.split(",") if i in screen.keys()]:
-				continue
+			if conditional:
+				if not [i for i in conditional.split(",") if i in screen.keys()]:
+					continue
+				objecttypes = w.attrib.get('objecttypes')
+				if objecttypes and not [i for i in objecttypes.split(",") if i == screen[conditional].__class__.__name__]:
+					continue
 			p = processors.get(w.tag, process_none)
 			try:
 				p(w, context)
