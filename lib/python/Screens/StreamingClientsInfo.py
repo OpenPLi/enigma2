@@ -3,7 +3,7 @@ from Screens.MessageBox import MessageBox
 from Components.MenuList import MenuList
 from Components.ActionMap import ActionMap
 from Components.Sources.StreamService import StreamServiceList
-from Components.Button import Button
+from Components.Sources.StaticText import StaticText
 from Components.Label import Label
 from enigma import eStreamServer
 from ServiceReference import ServiceReference
@@ -19,9 +19,9 @@ class StreamingClientsInfo(Screen):
 		self.streamServer = eStreamServer.getInstance()
 		self.clients = []
 		self["menu"] = MenuList(self.clients)
-		self["key_red"] = Button(_("Close"))
-		self["key_green"] = Button("")
-		self["key_yellow"] = Button("")
+		self["key_red"] = StaticText(_("Close"))
+		self["key_green"] = StaticText("")
+		self["key_yellow"] = StaticText("")
 		self["info"] = Label()
 		self.updateClients()
 		self["actions"] = ActionMap(["ColorActions", "SetupActions"],
