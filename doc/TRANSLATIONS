@@ -1,0 +1,32 @@
+enigma2 translations
+====================
+
+Enigma2 uses ".po" extension for translations which you can find them
+in "po" folder and start translating in your desired language using some tools like https://poedit.net
+
+A PO file is made up of many entries, each entry holding the relation
+between an original untranslated string and its corresponding translation.
+All entries in a given PO file usually pertain to a single project,
+and all translations are expressed in a single target language.
+
+Read more about PO files: https://www.gnu.org/software/gettext/manual/html_node/PO-Files.html
+
+Don't forget that a new language file must be considered in "po/Makefile.am"
+as a "po" file is just the source file of a language and it has to be compiled
+into a ".mo" file and then you can define it in enigma2 python files as a new language.
+
+How to create updated "po" files including latest strings?
+
+Follow these steps:
+
+1- git clone https://github.com/OpenPLi/enigma2.git
+2- Find "configure.ac" file and comment first 4 "PKG_CHECK_MODULES" and "AC_CHECK_LIB" lines using "#".
+3- cd enigma2
+4- ./autogen.sh
+5- ./configure --with-po
+6- cd po
+7- make *.po
+
+Now in "po" folder you'll find updated ".pot" and all ".po" files.
+
+Hint: A ".pot" file is the template that you can use to create new ".po" files.

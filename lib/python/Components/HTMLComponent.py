@@ -1,4 +1,3 @@
-# some helper classes first:
+# Just here for old plugins that import it
 class HTMLComponent:
-	def produceHTML(self):
-		return ""
+	pass

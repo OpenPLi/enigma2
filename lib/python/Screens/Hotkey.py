@@ -1,5 +1,5 @@
 from Components.ActionMap import ActionMap, HelpableActionMap, NumberActionMap
-from Components.Button import Button
+from Components.Sources.StaticText import StaticText
 from Components.ChoiceList import ChoiceList, ChoiceEntryComponent
 from Components.SystemInfo import SystemInfo
 from Components.config import config, ConfigSubsection, ConfigText, ConfigYesNo
@@ -225,7 +225,7 @@ class HotkeySetup(Screen):
 		Screen.__init__(self, session)
 		self.session = session
 		self.setTitle(_("Hotkey Setup"))
-		self["key_red"] = Button(_("Exit"))
+		self["key_red"] = StaticText(_("Exit"))
 		self.list = []
 		self.hotkeys = getHotkeys()
 		self.hotkeyFunctions = getHotkeyFunctions()
@@ -319,13 +319,9 @@ class HotkeySetupSelect(Screen):
 		self.session = session
 		self.key = key
 		self.setTitle(_("Hotkey Setup") + " " + key[0][0])
-		self["key_red"] = Button(_("Cancel"))
-		self["key_green"] = Button(_("Save"))
-		self["key_yellow"] = Button()
-		self["h_red"] = Pixmap()
-		self["h_green"] = Pixmap()
-		self["h_yellow"] = Pixmap()
-		self["h_yellow"].hide()
+		self["key_red"] = StaticText(_("Cancel"))
+		self["key_green"] = StaticText(_("Save"))
+		self["key_yellow"] = StaticText()
 		self["h_prev"] = Pixmap()
 		self["h_next"] = Pixmap()
 
@@ -345,7 +341,7 @@ class HotkeySetupSelect(Screen):
 					self.selected.append(ChoiceEntryComponent('',((function[0][0]), function[0][1])))
 		self.prevselected = self.selected[:]
 		if self.prevselected:
-			self.yellowButton(_("Edit selection"))
+			self.yellow = StaticText(_("Edit selection"))
 		self["choosen"] = ChoiceList(list=self.selected, selection=0)
 		self["list"] = ChoiceList(list=self.getFunctionList(), selection=0)
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "KeyboardInputActions", "MenuActions"],
@@ -398,10 +394,6 @@ class HotkeySetupSelect(Screen):
 
 	def yellowButton(self, text=""):
 		self["key_yellow"].setText(text)
-		if text:
-			self["h_yellow"].show()
-		else:
-			self["h_yellow"].hide()
 
 	def toggleMode(self):
 		if self.mode == "list" and self.selected:

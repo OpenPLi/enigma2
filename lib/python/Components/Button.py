@@ -1,10 +1,9 @@
-from HTMLComponent import HTMLComponent
 from GUIComponent import GUIComponent
 from VariableText import VariableText
 
 from enigma import eButton
 
-class Button(VariableText, HTMLComponent, GUIComponent):
+class Button(VariableText, GUIComponent):
 	def __init__(self, text="", onClick = [ ]):
 		GUIComponent.__init__(self)
 		VariableText.__init__(self)
@@ -31,10 +30,6 @@ class Button(VariableText, HTMLComponent, GUIComponent):
 
 	def disconnectDownstream(self, downstream):
 		pass
-
-# html:
-	def produceHTML(self):
-		return "<input type=\"submit\" text=\"" + self.getText() + "\">\n"
 
 	GUI_WIDGET = eButton
 

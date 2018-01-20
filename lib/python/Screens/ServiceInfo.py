@@ -1,4 +1,3 @@
-from Components.HTMLComponent import HTMLComponent
 from Components.GUIComponent import GUIComponent
 from Screen import Screen
 from Components.ActionMap import ActionMap
@@ -61,7 +60,7 @@ def ServiceInfoListEntry(a, b="", valueType=TYPE_TEXT, param=4):
 			(eListboxPythonMultiContent.TYPE_TEXT, xa, ya, wa + wb, ha + hb, 0, RT_HALIGN_LEFT, a)
 		]
 
-class ServiceInfoList(HTMLComponent, GUIComponent):
+class ServiceInfoList(GUIComponent):
 	def __init__(self, source):
 		GUIComponent.__init__(self)
 		self.l = eListboxPythonMultiContent()

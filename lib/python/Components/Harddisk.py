@@ -186,8 +186,11 @@ class Harddisk:
 	def free(self):
 		dev = self.findMount()
 		if dev:
-			stat = os.statvfs(dev)
-			return (stat.f_bfree/1000) * (stat.f_bsize/1024)
+			try:
+				stat = os.statvfs(dev)
+				return (stat.f_bfree/1000) * (stat.f_bsize/1024)
+			except:
+				pass
 		return -1
 
 	def numPartitions(self):
@@ -421,42 +424,6 @@ class Harddisk:
 		task.setTool('fsck.ext3')
 		task.args.append('-f')
 		task.args.append('-p')
-		task.args.append(dev)
-		MountTask(job, self)
-		task = Task.ConditionTask(job, _("Waiting for mount"))
-		task.check = self.mountDevice
-		return job
-
-	def createExt4ConversionJob(self):
-		if not isFileSystemSupported('ext4'):
-			raise Exception, _("You system does not support ext4")
-		job = Task.Job(_("Converting ext3 to ext4..."))
-		if not os.path.exists('/sbin/tune2fs'):
-			addInstallTask(job, 'e2fsprogs-tune2fs')
-		if self.findMount():
-			# Create unmount task if it was not mounted
-			UnmountTask(job, self)
-			dev = self.mount_device
-		else:
-			# otherwise, assume there is one partition
-			dev = self.partitionPath("1")
-		task = Task.LoggingTask(job, "fsck")
-		task.setTool('fsck.ext3')
-		task.args.append('-p')
-		task.args.append(dev)
-		task = Task.LoggingTask(job, "tune2fs")
-		task.setTool('tune2fs')
-		task.args.append('-O')
-		task.args.append('extents,uninit_bg,dir_index')
-		task.args.append('-o')
-		task.args.append('journal_data_writeback')
-		task.args.append(dev)
-		task = Task.LoggingTask(job, "fsck")
-		task.setTool('fsck.ext4')
-		task.postconditions = [] # ignore result, it will always "fail"
-		task.args.append('-f')
-		task.args.append('-p')
-		task.args.append('-D')
 		task.args.append(dev)
 		MountTask(job, self)
 		task = Task.ConditionTask(job, _("Waiting for mount"))
