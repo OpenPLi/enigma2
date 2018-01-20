@@ -1828,9 +1828,11 @@ class InfoBarTimeshift:
 			if pauseable:
 				if self.seekstate == self.SEEK_STATE_PLAY:
 					pauseable.pause()
+					self.pvrStateDialog.show()
 					self.seekstate = self.SEEK_STATE_PAUSE
 				else:
 					pauseable.unpause()
+					self.pvrStateDialog.hide()
 					self.seekstate = self.SEEK_STATE_PLAY
 				return
 		return 0
