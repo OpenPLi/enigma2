@@ -165,7 +165,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 				for id in nimlist:
 					choices.append((str(id), nimmanager.getNimDescription(id)))
 				self.nimConfig.connectedTo.setChoices(choices)
-				self.list.append(getConfigListEntry(_("Tuner"), self.nimConfig.connectedTo), _("Select the tuner that controls the motorised dish."))
+				self.list.append(getConfigListEntry(_("Tuner"), self.nimConfig.connectedTo, _("Select the tuner that controls the motorised dish.")))
 			elif self.nimConfig.configMode.value == "loopthrough":
 				choices = []
 				print "connectable to:", nimmanager.canConnectTo(self.slotid)
