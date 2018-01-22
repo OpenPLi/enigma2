@@ -1818,7 +1818,7 @@ class InfoBarTimeshift:
 		ts = self.getTimeshift()
 		return ts and ts.isTimeshiftActive()
 
-	def playpauseService(self):
+	def playpauseStreamService(self):
 		service = self.session.nav.getCurrentService()
 		playingref = self.session.nav.getCurrentlyPlayingServiceReference()
 		if not playingref or playingref.type < eServiceReference.idUser:
@@ -1844,7 +1844,7 @@ class InfoBarTimeshift:
 			if not pauseService and not int(config.usage.timeshift_start_delay.value):
 				self.session.open(MessageBox, _("Timeshift not possible!"), MessageBox.TYPE_ERROR, simple = True)
 			print "no ts interface"
-			return self.playpauseService()
+			return self.playpauseStreamService()
 
 		if ts.isTimeshiftEnabled():
 			print "hu, timeshift already enabled?"
