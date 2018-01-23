@@ -7,6 +7,7 @@ from Plugins.Plugin import PluginDescriptor
 
 from Components.Sources.FrontendStatus import FrontendStatus
 from Components.ActionMap import ActionMap
+from Components.Label import Label
 from Components.NimManager import nimmanager, getConfigSatlist
 from Components.config import config, ConfigSelection, getConfigListEntry
 from Components.TuneTest import Tuner
@@ -41,6 +42,8 @@ class Satfinder(ScanSetup, ServiceScan):
 		self.setTitle(_("Signal finder"))
 		self["introduction"].setText(_("Press OK to scan"))
 		self["Frontend"] = FrontendStatus(frontend_source = lambda : self.frontend, update_interval = 100)
+		self["key_red"] = Label(_("Cancel"))
+		self["key_green"] = Label(_("Save"))
 
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 		{

@@ -181,6 +181,8 @@ class FastScanScreen(ConfigListScreen, Screen):
 		self.createSetup()
 		self.finished_cb = None
 		self["introduction"] = Label(_("Select your provider, and press OK to start the scan"))
+		self["key_red"] = Label(_("Cancel"))
+		self["key_green"] = Label(_("Save"))
 
 	def createSetup(self):
 		self.list = []
