@@ -1,5 +1,5 @@
 from Components.ActionMap import ActionMap
-from Components.Button import Button
+from Components.Sources.StaticText import StaticText
 from Components.Label import Label
 from Components.config import config
 from Components.TimerList import TimerList
@@ -36,12 +36,12 @@ class TimerEditList(Screen):
 		self.key_yellow_choice = self.EMPTY
 		self.key_blue_choice = self.EMPTY
 
-		self["key_red"] = Button(" ")
-		self["key_green"] = Button(_("Add"))
-		self["key_yellow"] = Button(" ")
-		self["key_blue"] = Button(" ")
+		self["key_red"] = StaticText("")
+		self["key_green"] = StaticText(_("Add"))
+		self["key_yellow"] = StaticText("")
+		self["key_blue"] = StaticText("")
 
-		self["description"] = Label(" ")
+		self["description"] = Label("")
 
 		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ShortcutActions", "TimerEditActions"],
 			{
@@ -165,7 +165,7 @@ class TimerEditList(Screen):
 			if cur.disabled and (self.key_yellow_choice != self.ENABLE):
 				if stateRunning and cur.repeated and not cur.justplay:
 					self.removeAction("yellow")
-					self["key_yellow"].setText(" ")
+					self["key_yellow"].setText("")
 					self.key_yellow_choice = self.EMPTY
 				else:
 					self["actions"].actions.update({"yellow":self.toggleDisabledState})
@@ -173,21 +173,21 @@ class TimerEditList(Screen):
 					self.key_yellow_choice = self.ENABLE
 			elif stateRunning and (not cur.repeated or cur.state == 1) and (self.key_yellow_choice != self.EMPTY):
 				self.removeAction("yellow")
-				self["key_yellow"].setText(" ")
+				self["key_yellow"].setText("")
 				self.key_yellow_choice = self.EMPTY
 			elif (not stateRunning or cur.repeated and cur.isRunning()) and not cur.disabled and (self.key_yellow_choice != self.DISABLE):
 				self["actions"].actions.update({"yellow":self.toggleDisabledState})
 				self["key_yellow"].setText(_("Disable"))
 				self.key_yellow_choice = self.DISABLE
 		else:
-			self["description"].setText(" ")
+			self["description"].setText("")
 			if self.key_red_choice != self.EMPTY:
 				self.removeAction("red")
-				self["key_red"].setText(" ")
+				self["key_red"].setText("")
 				self.key_red_choice = self.EMPTY
 			if self.key_yellow_choice != self.EMPTY:
 				self.removeAction("yellow")
-				self["key_yellow"].setText(" ")
+				self["key_yellow"].setText("")
 				self.key_yellow_choice = self.EMPTY
 
 		showCleanup = True
@@ -203,7 +203,7 @@ class TimerEditList(Screen):
 			self.key_blue_choice = self.CLEANUP
 		elif (not showCleanup) and (self.key_blue_choice != self.EMPTY):
 			self.removeAction("blue")
-			self["key_blue"].setText(" ")
+			self["key_blue"].setText("")
 			self.key_blue_choice = self.EMPTY
 
 	def fillTimerList(self):
@@ -371,10 +371,10 @@ class TimerSanityConflict(Screen):
 
 		self["timerlist"] = TimerList(self.list)
 
-		self["key_red"] = Button(_("Cancel"))
-		self["key_green"] = Button(" ")
-		self["key_yellow"] = Button(" ")
-		self["key_blue"] = Button(" ")
+		self["key_red"] = StaticText(_("Cancel"))
+		self["key_green"] = StaticText("")
+		self["key_yellow"] = StaticText("")
+		self["key_blue"] = StaticText("")
 
 		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ShortcutActions", "TimerEditActions", "MenuActions"],
 			{
@@ -413,7 +413,7 @@ class TimerSanityConflict(Screen):
 
 	def toggleTimer(self):
 		selected_timer = self["timerlist"].getCurrent()
-		if selected_timer and self["key_yellow"].getText() != " " and not selected_timer.isRunning():
+		if selected_timer and self["key_yellow"].getText() != "" and not selected_timer.isRunning():
 			selected_timer.disabled = not selected_timer.disabled
 			if not selected_timer.disabled:
 				if not self.isResolvedConflict(selected_timer):
@@ -516,14 +516,14 @@ class TimerSanityConflict(Screen):
 			if selected_timer.disabled:
 				self["key_yellow"].setText(_("Enable"))
 			elif selected_timer.isRunning() and not selected_timer.repeated:
-				self["key_yellow"].setText(" ")
+				self["key_yellow"].setText("")
 			elif not selected_timer.isRunning() or selected_timer.repeated:
 				self["key_yellow"].setText(_("Disable"))
 			if selected_timer.conflict_detection:
 				self["key_blue"].setText(_("Ignore conflict"))
 			else:
-				self["key_blue"].setText(" ")
+				self["key_blue"].setText("")
 		else:
-			self["key_green"].setText(" ")
-			self["key_yellow"].setText(" ")
-			self["key_blue"].setText(" ")
+			self["key_green"].setText("")
+			self["key_yellow"].setText("")
+			self["key_blue"].setText("")
