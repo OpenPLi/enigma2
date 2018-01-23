@@ -286,7 +286,7 @@ class AttributeParser:
 			self.applyOne(attrib, value)
 	def conditional(self, value):
 		pass
-	def objecttypes(self, value):
+	def objectTypes(self, value):
 		pass
 	def position(self, value):
 		if isinstance(value, tuple):
@@ -983,7 +983,7 @@ def readSkin(screen, skin, names, desktop):
 			if conditional:
 				if not [i for i in conditional.split(",") if i in screen.keys()]:
 					continue
-				objecttypes = w.attrib.get('objecttypes')
+				objecttypes = w.attrib.get('objectTypes')
 				if objecttypes and not [i for i in objecttypes.split(",") if i == screen[conditional].__class__.__name__]:
 					continue
 			p = processors.get(w.tag, process_none)
