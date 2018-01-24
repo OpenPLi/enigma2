@@ -14,6 +14,8 @@ class HarddiskSetup(Screen):
 		self["model"] = Label(_("Model: ") + hdd.model())
 		self["capacity"] = Label(_("Capacity: ") + hdd.capacity())
 		self["bus"] = Label(_("Bus: ") + hdd.bus())
+		self["key_red"] = Label(_("Cancel"))
+		self["key_green"] = Label(_("Save"))
 		self["initialize"] = Pixmap()
 		self["initializetext"] = Label(text)
 		self["actions"] = ActionMap(["OkCancelActions"],
@@ -53,6 +55,7 @@ class HarddiskSelection(Screen):
 			self["hddlist"] = MenuList(tlist)
 		else:
 			self["hddlist"] = MenuList(harddiskmanager.HDDList())
+		self["key_red"] = Label(_("Cancel"))
 		self["actions"] = ActionMap(["OkCancelActions"],
 		{
 			"ok": self.okbuttonClick,
