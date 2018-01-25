@@ -1016,6 +1016,7 @@ def readSkin(screen, skin, names, desktop):
 	}
 
 	try:
+		print "[Skin] Processing screen: %s" % name
 		context.x = 0 # reset offsets, all components are relative to screen
 		context.y = 0 # coordinates.
 		process_screen(myscreen, context)

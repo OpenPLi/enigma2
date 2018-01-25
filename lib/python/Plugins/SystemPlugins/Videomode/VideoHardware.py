@@ -360,7 +360,10 @@ class VideoHardware:
 		print "[VideoHardware] -> setting aspect, policy, policy2, wss", aspect, policy, policy2, wss
 		open("/proc/stb/video/aspect", "w").write(aspect)
 		open("/proc/stb/video/policy", "w").write(policy)
-		open("/proc/stb/denc/0/wss", "w").write(wss)
+		try:
+			open("/proc/stb/denc/0/wss", "w").write(wss)
+		except IOError:
+			pass
 		try:
 			open("/proc/stb/video/policy2", "w").write(policy2)
 		except IOError:
