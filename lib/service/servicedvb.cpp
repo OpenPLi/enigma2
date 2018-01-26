@@ -3251,7 +3251,7 @@ RESULT eDVBServicePlay::getCachedSubtitle(struct SubtitleTrack &track)
 					return 0;
 				}
 			}
-			if (stream != -1 && (tmp != 0 || !usecache))
+			if (stream != -1 && (tmp != 0 && usecache))
 			{
 				if (program.subtitleStreams[stream].subtitling_type == 1)
 				{
