@@ -96,7 +96,9 @@ def getHotkeys():
 		("Media", "media", ""),
 		("Media" + " " + _("long"), "media_long", ""),
 		("Favorites", "favorites", "Infobar/openFavouritesList"),
-		("Favorites" + " " + _("long"), "favorites_long", "")]
+		("Favorites" + " " + _("long"), "favorites_long", "")
+		("WWW Portal", "www", ""),
+		("WWW Portal" + " " _("long"), "www_long", "")]
 
 config.misc.hotkey = ConfigSubsection()
 config.misc.hotkey.additional_keys = ConfigYesNo(default=False)
