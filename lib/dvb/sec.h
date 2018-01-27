@@ -320,7 +320,7 @@ public:
 private:
 #ifndef SWIG
 	static eDVBSatelliteEquipmentControl *instance;
-	eDVBSatelliteLNBParameters m_lnbs[144]; // i think its enough
+	std::vector<eDVBSatelliteLNBParameters> m_lnbs;
 	int m_lnbidx; // current index for set parameters
 	std::map<int, eDVBSatelliteSwitchParameters>::iterator m_curSat;
 	eSmartPtrList<eDVBRegisteredFrontend> &m_avail_frontends, &m_avail_simulate_frontends;
@@ -340,7 +340,7 @@ public:
 	RESULT prepare(iDVBFrontend &frontend, const eDVBFrontendParametersSatellite &sat, int &frequency, int frontend_id, unsigned int tunetimeout);
 	void prepareTurnOffSatCR(iDVBFrontend &frontend);
 	int canTune(const eDVBFrontendParametersSatellite &feparm, iDVBFrontend *, int frontend_id, int *highest_score_lnb=0);
-	bool currentLNBValid() { return m_lnbidx > -1 && m_lnbidx < (int)(sizeof(m_lnbs) / sizeof(eDVBSatelliteLNBParameters)); }
+	bool currentLNBValid() { return m_lnbidx > -1 && m_lnbidx < m_lnbs.size(); }
 #endif
 	static eDVBSatelliteEquipmentControl *getInstance() { return instance; }
 	static void setParam(int param, int value);
