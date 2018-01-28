@@ -3230,8 +3230,10 @@ RESULT eDVBServicePlay::getCachedSubtitle(struct SubtitleTrack &track)
 		if (!h.getProgramInfo(program))
 		{
 			bool usecache = eConfigManager::getConfigBoolValue("config.autolanguage.subtitle_usecache");
-			int stream=program.defaultSubtitleStream;
+			int stream = program.defaultSubtitleStream;
 			int tmp = m_dvb_service->getCacheEntry(eDVBService::cSUBTITLE);
+			if (!usecache)
+				tmp = 0;
 
 			if (usecache || stream == -1)
 			{
