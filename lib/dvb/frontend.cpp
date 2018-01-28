@@ -85,6 +85,22 @@ void eDVBDiseqcCommand::setCommandString(const char *str)
 	len = slen/2;
 }
 
+void eDVBFrontendParametersSatellite::set(const S2SatelliteDeliverySystemDescriptor &descriptor)
+{
+	if(descriptor.getScramblingSequenceSelector()) // EN 300 468 table 41
+	{
+		is_id = descriptor.getInputStreamIdentifier();
+		pls_mode = eDVBFrontendParametersSatellite::PLS_Gold;
+		pls_code = descriptor.getScramblingSequenceIndex();
+	}
+	else // default DVB-S2 physical layer scrambling sequence of index n = 0 is used
+	{
+		is_id = NO_STREAM_ID_FILTER;
+		pls_mode = eDVBFrontendParametersSatellite::PLS_Gold;
+		pls_code = 0;
+	}
+}
+
 void eDVBFrontendParametersSatellite::set(const SatelliteDeliverySystemDescriptor &descriptor)
 {
 	frequency    = descriptor.getFrequency() * 10;
