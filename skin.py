@@ -983,8 +983,8 @@ def readSkin(screen, skin, names, desktop):
 			if conditional:
 				if not [i for i in conditional.split(",") if i in screen.keys()]:
 					continue
-				objecttypes = w.attrib.get('objectTypes')
-				if objecttypes and not [i for i in objecttypes.split(",") if i == screen[conditional].__class__.__name__]:
+			objecttypes = w.attrib.get('objectTypes', '').split(",")
+			if len(objecttypes) > 1 and not [i for i in objecttypes[1:] if i == screen[objecttypes[0]].__class__.__name__]:
 					continue
 			p = processors.get(w.tag, process_none)
 			try:
