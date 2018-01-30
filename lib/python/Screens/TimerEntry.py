@@ -28,12 +28,10 @@ class TimerEntry(Screen, ConfigListScreen):
 		self.entryDate = None
 		self.entryService = None
 
-		self["oktext"] = Label(_("OK"))
-		self["canceltext"] = Label(_("Cancel"))
-		self["ok"] = Pixmap()
-		self["cancel"] = Pixmap()
+		self["key_red"] = StaticText(_("Cancel"))
+		self["key_green"] = StaticText(_("Save"))
 		self["key_yellow"] = StaticText(_("Timer type"))
-		self["key_blue"] = StaticText()
+		self["key_blue"] = StaticText("")
 
 		self.createConfig()
 
@@ -46,6 +44,8 @@ class TimerEntry(Screen, ConfigListScreen):
 			"volumeDown": self.decrementStart,
 			"size+": self.incrementEnd,
 			"size-": self.decrementEnd,
+			"red": self.keyCancel,
+			"green": self.keyGo,
 			"yellow": self.changeTimerType,
 			"blue": self.changeZapWakeupType
 		}, -2)
@@ -523,7 +523,7 @@ class TimerLog(Screen):
 		self["logentry"] = Label()
 
 		self["key_red"] = StaticText(_("Delete entry"))
-		self["key_green"] = StaticText()
+		self["key_green"] = StaticText("")
 		self["key_yellow"] = StaticText("")
 		self["key_blue"] = StaticText(_("Clear log"))
 
