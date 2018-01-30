@@ -7,7 +7,6 @@ from Components.ConfigList import ConfigListScreen
 from Components.MenuList import MenuList
 from Components.Sources.StaticText import StaticText
 from Components.Label import Label
-from Components.Pixmap import Pixmap
 from Components.SystemInfo import SystemInfo
 from Components.UsageConfig import defaultMoviePath
 from Screens.MovieSelection import getPreferredTagEditor
