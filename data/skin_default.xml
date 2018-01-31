@@ -448,6 +448,8 @@ self.autoResize()
 	<!-- Harddisk selection -->
 	<screen name="HarddiskSelection" position="center,center" size="540,285" title="Select HDD">
 		<widget name="hddlist" position="10,10" size="520,275"/>
+		<ePixmap pixmap="skin_default/buttons/button_red.png" position="120,110" zPosition="10" size="15,16" transparent="1" alphatest="on"/>
+		<widget name="key_red" position="140,110" size="140,40" zPosition="10" font="Regular;20" transparent="1"/>
 	</screen>
 	<!-- Harddisk setup -->
 	<screen name="HarddiskSetup" position="center,center" size="420,160" title="Harddisk">
@@ -455,9 +457,9 @@ self.autoResize()
 		<widget name="capacity" position="20,40" size="380,25" font="Regular;23"/>
 		<widget name="bus" position="20,70" size="380,25" font="Regular;23"/>
 		<ePixmap pixmap="skin_default/buttons/button_red.png" position="120,110" zPosition="10" size="15,16" transparent="1" alphatest="on"/>
-		<widget name="initializetext" position="140,110" size="140,40" zPosition="10" font="Regular;20" transparent="1"/>
-		<!--widget name="initialize" pixmap="skin_default/buttons/red.png" position="140,110" size="140,40" alphatest="on"/>
-		<widget name="initializetext" position="140,110" size="140,40" zPosition="1" font="Regular;20" halign="center" valign="center" transparent="1" /-->
+		<ePixmap pixmap="skin_default/buttons/button_green.png" position="260,110" zPosition="10" size="15,16" transparent="1" alphatest="on"/>
+		<widget name="key_red" position="140,110" size="140,40" zPosition="10" font="Regular;20" transparent="1"/>
+		<widget name="key_green" position="280,110" size="140,40" zPosition="10" font="Regular;20" transparent="1"/>
 	</screen>
 	<!-- Harddisk wait -->
 	<screen name="HarddiskWait" position="center,center" size="540,60">
