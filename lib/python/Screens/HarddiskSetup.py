@@ -11,6 +11,7 @@ class HarddiskSetup(Screen):
 		Screen.__init__(self, session)
 		self.action = action
 		self.question = question
+		self.setTitle(_("Setup hard disk"))
 		self["model"] = Label(_("Model: ") + hdd.model())
 		self["capacity"] = Label(_("Capacity: ") + hdd.capacity())
 		self["bus"] = Label(_("Bus: ") + hdd.bus())
@@ -47,6 +48,7 @@ class HarddiskSetup(Screen):
 class HarddiskSelection(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
+		self.setTitle(_("Select hard disk"))
 		self.skinName = "HarddiskSelection" # For derived classes
 		if harddiskmanager.HDDCount() == 0:
 			tlist = []
