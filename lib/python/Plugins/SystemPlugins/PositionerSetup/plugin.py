@@ -163,8 +163,8 @@ class PositionerSetup(Screen):
 			cur.get("rolloff", eDVBFrontendParametersSatellite.RollOff_alpha_0_35),
 			cur.get("pilot", eDVBFrontendParametersSatellite.Pilot_Unknown),
 			cur.get("is_id", 0),
-			cur.get("pls_mode", eDVBFrontendParametersSatellite.PLS_Root),
-			cur.get("pls_code", 1))
+			cur.get("pls_mode", eDVBFrontendParametersSatellite.PLS_Gold),
+			cur.get("pls_code", 0))
 
 		self.tuner.tune(tp)
 		self.isMoving = False
@@ -1342,8 +1342,8 @@ class TunerScreen(ConfigListScreen, Screen):
 			"fec": eDVBFrontendParametersSatellite.FEC_Auto,
 			"fec_s2": eDVBFrontendParametersSatellite.FEC_9_10,
 			"modulation": eDVBFrontendParametersSatellite.Modulation_QPSK,
-			"pls_mode": eDVBFrontendParametersSatellite.PLS_Root,
-			"pls_code": 1 }
+			"pls_mode": eDVBFrontendParametersSatellite.PLS_Gold,
+			"pls_code": 0 }
 		if frontendData is not None:
 			ttype = frontendData.get("tuner_type", "UNKNOWN")
 			defaultSat["system"] = frontendData.get("system", eDVBFrontendParametersSatellite.System_DVB_S)
@@ -1356,8 +1356,8 @@ class TunerScreen(ConfigListScreen, Screen):
 				defaultSat["rolloff"] = frontendData.get("rolloff", eDVBFrontendParametersSatellite.RollOff_alpha_0_35)
 				defaultSat["pilot"] = frontendData.get("pilot", eDVBFrontendParametersSatellite.Pilot_Unknown)
 				defaultSat["is_id"] = frontendData.get("is_id", 0)
-				defaultSat["pls_mode"] = frontendData.get("pls_mode", eDVBFrontendParametersSatellite.PLS_Root)
-				defaultSat["pls_code"] = frontendData.get("pls_code", 1)
+				defaultSat["pls_mode"] = frontendData.get("pls_mode", eDVBFrontendParametersSatellite.PLS_Gold)
+				defaultSat["pls_code"] = frontendData.get("pls_code", 0)
 			else:
 				defaultSat["fec"] = frontendData.get("fec_inner", eDVBFrontendParametersSatellite.FEC_Auto)
 			defaultSat["modulation"] = frontendData.get("modulation", eDVBFrontendParametersSatellite.Modulation_QPSK)
@@ -1411,11 +1411,11 @@ class TunerScreen(ConfigListScreen, Screen):
 			(eDVBFrontendParametersSatellite.Pilot_On, _("On")),
 			(eDVBFrontendParametersSatellite.Pilot_Unknown, _("Auto"))])
 		self.scan_sat.is_id = ConfigInteger(default = defaultSat.get("is_id",0), limits = (0, 255))
-		self.scan_sat.pls_mode = ConfigSelection(default = defaultSat["pls_mode"], choices = [
+		self.scan_sat.pls_mode = ConfigSelection(default = defaultSat.get("pls_mode", eDVBFrontendParametersSatellite.PLS_Gold), choices = [
 			(eDVBFrontendParametersSatellite.PLS_Root, _("Root")),
 			(eDVBFrontendParametersSatellite.PLS_Gold, _("Gold")),
 			(eDVBFrontendParametersSatellite.PLS_Combo, _("Combo"))])
-		self.scan_sat.pls_code = ConfigInteger(default = defaultSat.get("pls_code",1), limits = (0, 262142))
+		self.scan_sat.pls_code = ConfigInteger(default = defaultSat.get("pls_code", 0), limits = (0, 262142))
 
 	def initialSetup(self):
 		currtp = self.transponderToString([None, self.scan_sat.frequency.value, self.scan_sat.symbolrate.value, self.scan_sat.polarization.value])

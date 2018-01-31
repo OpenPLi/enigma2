@@ -723,8 +723,8 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 							self.list.append(getConfigListEntry(_('PLS Code'), self.scan_sat.pls_code))
 					else:
 						self.scan_sat.is_id.value = self.NO_STREAM_ID_FILTER
-						self.scan_sat.pls_mode.value = eDVBFrontendParametersSatellite.PLS_Root
-						self.scan_sat.pls_code.value = 1
+						self.scan_sat.pls_mode.value = eDVBFrontendParametersSatellite.PLS_Gold
+						self.scan_sat.pls_code.value = 0
 			elif self.scan_type.value == "predefined_transponder" and self.satList[index_to_scan]:
 				self.updateSatList()
 				self.preDefSatList = getConfigListEntry(_('Satellite'), self.scan_satselection[index_to_scan])
@@ -861,8 +861,8 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 				self.pls_mode_memory = self.scan_sat.pls_mode.value
 				self.pls_code_memory = self.scan_sat.pls_code.value
 				self.scan_sat.is_id.value = self.NO_STREAM_ID_FILTER
-				self.scan_sat.pls_mode.value = eDVBFrontendParametersSatellite.PLS_Root
-				self.scan_sat.pls_code.value = 1
+				self.scan_sat.pls_mode.value = eDVBFrontendParametersSatellite.PLS_Gold
+				self.scan_sat.pls_code.value = 0
 			self.createSetup()
 
 	def createConfig(self, frontendData):
@@ -878,8 +878,8 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 			"fec_s2": eDVBFrontendParametersSatellite.FEC_9_10,
 			"modulation": eDVBFrontendParametersSatellite.Modulation_QPSK,
 			"is_id": self.NO_STREAM_ID_FILTER,
-			"pls_mode": eDVBFrontendParametersSatellite.PLS_Root,
-			"pls_code": 1 }
+			"pls_mode": eDVBFrontendParametersSatellite.PLS_Gold,
+			"pls_code": 0 }
 		defaultCab = {
 			"frequency": 466000,
 			"inversion": eDVBFrontendParametersCable.Inversion_Unknown,
