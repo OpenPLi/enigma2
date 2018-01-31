@@ -184,7 +184,7 @@ class PictureInPicture(Screen):
 			return False
 		ref = self.resolveAlternatePipService(service)
 		if ref:
-			if SystemInfo["CanDoTranscodeAndPIP"] and StreamServiceList:
+			if SystemInfo["CanNotDoSimultaneousTranscodeAndPIP"] and StreamServiceList:
 				self.pipservice = None
 				self.currentService = None
 				self.currentServiceReference = None
