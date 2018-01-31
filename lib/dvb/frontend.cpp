@@ -2264,7 +2264,28 @@ void eDVBFrontend::setFrontend(bool recvEvents)
 			}
 			cmdseq.num++;
 		}
-		p[cmdseq.num].cmd = DTV_TUNE, cmdseq.num++;
+		p[cmdseq.num].cmd = DTV_TUNE;
+		/*
+		 * NOTE: we use a nonzero DTV_TUNE argument to request a blindscan search.
+		 * This is NOT a linux DVB API standard feature, but it seems like the
+		 * easiest way to pass a variable to the driver, without breaking the API.
+		 *
+		 * When requesting a blindscan search, we assume the following parameters to
+		 * be used in the following way:
+		 *
+		 * DVB-S:
+		 * DTV_FREQUENCY : starting frequency (in kHz)
+		 * DTV_SYMBOL_RATE: frequency range (in MHz, for backward compatibility reasons)
+		 *
+		 * DVB-C:
+		 * DTV_FREQUENCY : starting frequency
+		 *
+		 * DVB-T:
+		 * DTV_FREQUENCY : starting frequency
+		 * DTV_BANDWIDTH_HZ: search bandwidth and search step size
+		 */
+		p[cmdseq.num].u.data = m_blindscan ? 1 : 0;
+		cmdseq.num++;
 		if (ioctl(m_fd, FE_SET_PROPERTY, &cmdseq) == -1)
 		{
 			perror("FE_SET_PROPERTY failed");
@@ -2335,7 +2356,7 @@ RESULT eDVBFrontend::prepare_atsc(const eDVBFrontendParametersATSC &feparm)
 	return 0;
 }
 
-RESULT eDVBFrontend::tune(const iDVBFrontendParameters &where)
+RESULT eDVBFrontend::tune(const iDVBFrontendParameters &where, bool blindscan)
 {
 	unsigned int timeout = 5000;
 	int type;
@@ -2368,7 +2389,16 @@ RESULT eDVBFrontend::tune(const iDVBFrontendParameters &where)
 
 	m_sec_sequence.clear();
 
-	where.calcLockTimeout(timeout);
+	m_blindscan = blindscan;
+	if (m_blindscan)
+	{
+		/* blindscan iterations can take a long time, use a long timeout */
+		timeout = 60000;
+	}
+	else
+	{
+		where.calcLockTimeout(timeout);
+	}
 
 	switch (type)
 	{
