@@ -980,9 +980,8 @@ def readSkin(screen, skin, names, desktop):
 	def process_screen(widget, context):
 		for w in widget.getchildren():
 			conditional = w.attrib.get('conditional')
-			if conditional:
-				if not [i for i in conditional.split(",") if i in screen.keys()]:
-					continue
+			if conditional and not [i for i in conditional.split(",") if i in screen.keys()]:
+				continue
 			objecttypes = w.attrib.get('objectTypes', '').split(",")
 			if len(objecttypes) > 1 and (objecttypes[0] not in screen.keys() or not [i for i in objecttypes[1:] if i == screen[objecttypes[0]].__class__.__name__]):
 					continue
