@@ -1,6 +1,7 @@
 from enigma import eDVBResourceManager, Misc_Options
 from Tools.Directories import fileExists, fileCheck, pathExists
 from Tools.HardwareInfo import HardwareInfo
+import os
 
 SystemInfo = {}
 
@@ -62,8 +63,8 @@ SystemInfo["HasColorspaceSimple"] = SystemInfo["HasColorspace"] and HardwareInfo
 SystemInfo["HasMultichannelPCM"] = fileCheck("/proc/stb/audio/multichannel_pcm")
 SystemInfo["HasMMC"] = HardwareInfo().get_device_model() in ('vusolo4k', 'vuuno4k', 'vuultimo4k', 'vusolo4kse', 'vuuno4kse', 'vuzero4k', 'hd51', 'hd52', 'vs1500', 'et11000', 'h7', 'gb7252')
 SystemInfo["CommonInterfaceCIDelay"] = fileCheck("/proc/stb/tsmux/rmx_delay")
-SystemInfo["HasTranscoding"] = fileCheck("/proc/stb/encoder/0/bitrate")
-SystemInfo["HasTranscodingH265"] = fileExists("/proc/stb/encoder/0/vcodec_choices") and fileCheck("/proc/stb/encoder/0/vcodec")
+SystemInfo["HasTranscoding"] = pathExists("/proc/stb/encoder/0") or fileCheck("/dev/bcm_enc0")
+SystemInfo["HasH265Encoder"] = fileExists("/proc/stb/encoder/0/vcodec_choices") and "h265" in open("/proc/stb/encoder/0/vcodec_choices", "r").read()
 SystemInfo["CanNotDoSimultaneousTranscodeAndPIP"] = HardwareInfo().get_device_model() in "vusolo4k"
 SystemInfo["HasColordepth"] = fileCheck("/proc/stb/video/hdmi_colordepth")
 SystemInfo["HasFrontDisplayPicon"] = HardwareInfo().get_device_model() in ("vusolo4k", "et8500")
