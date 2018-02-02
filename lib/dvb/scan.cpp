@@ -224,7 +224,7 @@ void eDVBScan::stateChange(iDVBChannel *ch)
 							break;
 						}
 						}
-						m_ch_current = feparm;
+						m_ch_current = m_ch_blindscan_result = feparm;
 					}
 				}
 			}
@@ -303,6 +303,7 @@ RESULT eDVBScan::nextChannel()
 	}
 	else
 	{
+		m_ch_blindscan_result = NULL;
 		if (m_ch_toScan.empty())
 		{
 			SCAN_eDebug("[eDVBScan] no channels left: %zd scanned, %zd unavailable, %zd database.",
@@ -1730,7 +1731,12 @@ RESULT eDVBScan::getFrontend(ePtr<iDVBFrontend> &fe)
 
 RESULT eDVBScan::getCurrentTransponder(ePtr<iDVBFrontendParameters> &tp)
 {
-	if (m_ch_current)
+	if (m_ch_blindscan_result)
+	{
+		tp = m_ch_blindscan_result;
+		return 0;
+	}
+	else if (m_ch_current)
 	{
 		tp = m_ch_current;
 		return 0;

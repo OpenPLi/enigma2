@@ -64,7 +64,7 @@ class eDVBScan: public sigc::trackable, public iObject
 	bool m_abort_current_pmt;
 
 	std::list<ePtr<iDVBFrontendParameters> > m_ch_toScan, m_ch_scanned, m_ch_unavailable, m_ch_blindscan;
-	ePtr<iDVBFrontendParameters> m_ch_current;
+	ePtr<iDVBFrontendParameters> m_ch_current, m_ch_blindscan_result;
 	eDVBChannelID m_chid_current;
 	eTransportStreamID m_pat_tsid;
 
