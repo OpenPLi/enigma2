@@ -24,9 +24,12 @@
  *
  * https://github.com/DigitalDevices/dddvb/blob/master/apps/pls.c
  */
-static uint32_t root2gold(uint32_t root)
+static int root2gold(int root)
 {
-	uint32_t x, g;
+	int x, g;
+
+	if (root < 0 || root > 0x3ffff)
+		return 0;
 
 	for (g = 0, x = 1; g < 0x3ffff; g++)
 	{
@@ -34,7 +37,7 @@ static uint32_t root2gold(uint32_t root)
 			return g;
 		x = (((x ^ (x >> 7)) & 1) << 17) | (x >> 1);
 	}
-	return 0xffffffff;
+	return 0;
 }
 
 DEFINE_REF(eDVBService);
@@ -467,7 +470,7 @@ static ePtr<eDVBFrontendParameters> parseFrontendData(char* line, int version)
 			sat.pls_mode = pls_mode & 3;
 			sat.pls_code = pls_code & 0x3FFFF;
 			/* convert Root to Gold */
-			if (sat.pls_mode == eDVBFrontendParametersSatellite::PLS_Root && sat.pls_code > 0 && sat.pls_code < 0x40000)
+			if (sat.pls_mode == eDVBFrontendParametersSatellite::PLS_Root)
 			{
 				sat.pls_mode = eDVBFrontendParametersSatellite::PLS_Gold;
 				sat.pls_code = root2gold(sat.pls_code);
@@ -1381,7 +1384,7 @@ PyObject *eDVBDB::readSatellites(ePyObject sat_list, ePyObject sat_dict, ePyObje
 				if (freq && sr && pol != -1)
 				{
 					/* convert Root to Gold */
-					if (pls_mode == eDVBFrontendParametersSatellite::PLS_Root && pls_code > 0 && pls_code < 0x40000)
+					if (pls_mode == eDVBFrontendParametersSatellite::PLS_Root)
 					{
 						pls_mode = eDVBFrontendParametersSatellite::PLS_Gold;
 						pls_code = root2gold(pls_code);
