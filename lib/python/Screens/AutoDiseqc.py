@@ -36,9 +36,9 @@ class AutoDiseqc(Screen, ConfigListScreen):
 			eDVBFrontendParametersSatellite.Modulation_Auto,
 			eDVBFrontendParametersSatellite.RollOff_auto,
 			eDVBFrontendParametersSatellite.Pilot_Unknown,
-			-1,
-			0,
-			1,
+			-1, # NO_STREAM_ID_FILTER
+			eDVBFrontendParametersSatellite.PLS_Gold,
+			0,  # default gold PLS code
 			1079,
 			1,
 			"Astra 1 19.2e"),
@@ -55,9 +55,9 @@ class AutoDiseqc(Screen, ConfigListScreen):
 			eDVBFrontendParametersSatellite.Modulation_Auto,
 			eDVBFrontendParametersSatellite.RollOff_auto,
 			eDVBFrontendParametersSatellite.Pilot_Unknown,
-			-1,
-			0,
-			1,
+			-1, # NO_STREAM_ID_FILTER
+			eDVBFrontendParametersSatellite.PLS_Gold,
+			0,  # default gold PLS code
 			3224,
 			3,
 			"Astra 3 23.5e"),
@@ -74,9 +74,9 @@ class AutoDiseqc(Screen, ConfigListScreen):
 			eDVBFrontendParametersSatellite.Modulation_Auto,
 			eDVBFrontendParametersSatellite.RollOff_auto,
 			eDVBFrontendParametersSatellite.Pilot_Unknown,
-			-1,
-			0,
-			1,
+			-1, # NO_STREAM_ID_FILTER
+			eDVBFrontendParametersSatellite.PLS_Gold,
+			0,  # default gold PLS code
 			2004,
 			2,
 			"Astra 2 28.2e"),
@@ -92,10 +92,10 @@ class AutoDiseqc(Screen, ConfigListScreen):
 			eDVBFrontendParametersSatellite.System_DVB_S,
 			eDVBFrontendParametersSatellite.Modulation_Auto,
 			eDVBFrontendParametersSatellite.RollOff_auto,
-			eDVBFrontendParametersSatellite.Pilot_Unknown,		
-			-1,
-			0,
-			1,
+			eDVBFrontendParametersSatellite.Pilot_Unknown,
+			-1, # NO_STREAM_ID_FILTER
+			eDVBFrontendParametersSatellite.PLS_Gold,
+			0,  # default gold PLS code
 			12400,
 			318,
 			"Hotbird 13.0e"),
@@ -111,10 +111,10 @@ class AutoDiseqc(Screen, ConfigListScreen):
  			eDVBFrontendParametersSatellite.System_DVB_S,
  			eDVBFrontendParametersSatellite.Modulation_Auto,
  			eDVBFrontendParametersSatellite.RollOff_auto,
- 			eDVBFrontendParametersSatellite.Pilot_Unknown,		
- 			-1,
- 			0,
- 			1,
+			eDVBFrontendParametersSatellite.Pilot_Unknown,
+			-1, # NO_STREAM_ID_FILTER
+			eDVBFrontendParametersSatellite.PLS_Gold,
+			0,  # default gold PLS code
  			20100,
  			366,
  			"Eutelsat 16A 16.0e"),
@@ -131,9 +131,9 @@ class AutoDiseqc(Screen, ConfigListScreen):
 			eDVBFrontendParametersSatellite.Modulation_Auto,
 			eDVBFrontendParametersSatellite.RollOff_auto,
 			eDVBFrontendParametersSatellite.Pilot_Unknown,
-			-1,
-			0,
-			1,
+			-1, # NO_STREAM_ID_FILTER
+			eDVBFrontendParametersSatellite.PLS_Gold,
+			0, # default gold PLS code
 			706,
 			1536,
 			"Thor 5/6/7 0.8w"),
