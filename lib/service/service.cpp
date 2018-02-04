@@ -45,6 +45,7 @@ eServiceReference::eServiceReference(const std::string &string)
 		if ((colon) && !strncmp(colon, "://", 3))
 		{
 			type = idServiceMP3;
+			memset(data, 0, sizeof(data));
 			/* Allow space separated name */
 			const char *space = strchr(colon, ' ');
 			if (space)
