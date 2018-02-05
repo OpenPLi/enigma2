@@ -720,7 +720,6 @@ eServiceMP3::~eServiceMP3()
 
 	if (m_decoder)
 	{
-		delete m_decoder;
 		m_decoder = NULL;
 	}
 
