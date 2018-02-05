@@ -340,7 +340,7 @@ public:
 	RESULT prepare(iDVBFrontend &frontend, const eDVBFrontendParametersSatellite &sat, int &frequency, int frontend_id, unsigned int tunetimeout);
 	void prepareTurnOffSatCR(iDVBFrontend &frontend);
 	int canTune(const eDVBFrontendParametersSatellite &feparm, iDVBFrontend *, int frontend_id, int *highest_score_lnb=0);
-	bool currentLNBValid() { return m_lnbidx > -1 && m_lnbidx < m_lnbs.size(); }
+	bool currentLNBValid() { return m_lnbidx > -1 && static_cast<unsigned int>(m_lnbidx) < m_lnbs.size(); }
 #endif
 	static eDVBSatelliteEquipmentControl *getInstance() { return instance; }
 	static void setParam(int param, int value);
