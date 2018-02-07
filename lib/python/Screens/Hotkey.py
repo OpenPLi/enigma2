@@ -343,7 +343,7 @@ class HotkeySetupSelect(Screen):
 					self.selected.append(ChoiceEntryComponent('',((function[0][0]), function[0][1])))
 		self.prevselected = self.selected[:]
 		if self.prevselected:
-			self.yellow = StaticText(_("Edit selection"))
+			self.yellowButton(_("Edit selection"))
 		self["choosen"] = ChoiceList(list=self.selected, selection=0)
 		self["list"] = ChoiceList(list=self.getFunctionList(), selection=0)
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "KeyboardInputActions", "MenuActions"],
