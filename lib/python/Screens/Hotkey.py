@@ -323,7 +323,7 @@ class HotkeySetupSelect(Screen):
 		self.setTitle(_("Hotkey Setup") + " " + key[0][0])
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
-		self["key_yellow"] = StaticText()
+		self["key_yellow"] = StaticText("")
 		self["h_prev"] = Pixmap()
 		self["h_next"] = Pixmap()
 
@@ -343,7 +343,7 @@ class HotkeySetupSelect(Screen):
 					self.selected.append(ChoiceEntryComponent('',((function[0][0]), function[0][1])))
 		self.prevselected = self.selected[:]
 		if self.prevselected:
-			self.yellowButton(_("Edit selection"))
+			self["key_yellow"].setText(_("Edit selection"))
 		self["choosen"] = ChoiceList(list=self.selected, selection=0)
 		self["list"] = ChoiceList(list=self.getFunctionList(), selection=0)
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "KeyboardInputActions", "MenuActions"],
@@ -394,15 +394,12 @@ class HotkeySetupSelect(Screen):
 				functionslist.append(ChoiceEntryComponent('expandable',((catagorie), "Expander")))
 		return functionslist
 
-	def yellowButton(self, text=""):
-		self["key_yellow"].setText(text)
-
 	def toggleMode(self):
 		if self.mode == "list" and self.selected:
 			self.mode = "choosen"
 			self["choosen"].selectionEnabled(1)
 			self["list"].selectionEnabled(0)
-			self.yellowButton(_("Select function"))
+			self["key_yellow"].setText(_("Select function"))
 			if len(self.selected) > 1:
 				self.showPrevNext(True)
 		elif self.mode == "choosen":
@@ -413,9 +410,9 @@ class HotkeySetupSelect(Screen):
 
 	def toggleText(self):
 		if self.selected:
-			self.yellowButton(_("Edit selection"))
+			self["key_yellow"].setText(_("Edit selection"))
 		else:
-			self.yellowButton("")
+			self["key_yellow"].setText("")
 		self.showPrevNext()
 
 	def showPrevNext(self, show=False):
