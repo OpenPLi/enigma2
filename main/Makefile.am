@@ -47,7 +47,8 @@ enigma2_LDADD = \
 	@AMADEC_LIBS@ \
 	@DVBCSA_LIBS@ \
 	@AVAHI_LIBS@ \
-	-ltuxtxt32bpp -lcrypt -lrt -ldl
+	@LIBDL_LIBS@ \
+	-ltuxtxt32bpp
 
 enigma2_LDFLAGS = -Wl,--export-dynamic
 
