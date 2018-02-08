@@ -118,6 +118,7 @@ class ChannelContextMenu(Screen):
 	def __init__(self, session, csel):
 
 		Screen.__init__(self, session)
+		self.setTitle(_("Channel context menu"))
 		self.csel = csel
 		self.bsel = None
 		if self.isProtected():

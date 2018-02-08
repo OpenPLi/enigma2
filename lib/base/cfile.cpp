@@ -49,7 +49,7 @@ int CFile::write(const char *filename, const char *value)
 
 std::string CFile::read(const std::string &filename)
 {
-	std::ifstream file(filename);
+	std::ifstream file(filename.c_str());
 	if (!file.good())
 		return std::string();
 	std::stringstream ss;
@@ -60,7 +60,7 @@ std::string CFile::read(const std::string &filename)
 bool CFile::contains_word(const std::string &filename, const std::string &word_to_match)
 {
 	std::string word;
-	std::ifstream file(filename);
+	std::ifstream file(filename.c_str());
 
 	if (!file.good())
 		return false;

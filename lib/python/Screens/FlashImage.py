@@ -243,9 +243,12 @@ class FlashImage(Screen):
 
 			def findmedia(destination):
 				def avail(path):
-					if not(SystemInfo["HasMMC"] and '/mmc' in path):
-						statvfs = os.statvfs(path)
-						return (statvfs.f_bavail * statvfs.f_frsize) / (1 << 20) >= 500 and path
+					if not(SystemInfo["HasMMC"] and '/mmc' in path) and not os.path.islink(path):
+						try:
+							statvfs = os.statvfs(path)
+							return (statvfs.f_bavail * statvfs.f_frsize) / (1 << 20) >= 500 and path
+						except:
+							pass
 				for path in [destination] + getNonNetworkMediaMounts():
 					if avail(path):
 						return path

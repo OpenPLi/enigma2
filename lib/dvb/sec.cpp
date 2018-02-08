@@ -34,7 +34,7 @@ void eDVBSatelliteEquipmentControl::setParam(int param, int value)
 }
 
 eDVBSatelliteEquipmentControl::eDVBSatelliteEquipmentControl(eSmartPtrList<eDVBRegisteredFrontend> &avail_frontends, eSmartPtrList<eDVBRegisteredFrontend> &avail_simulate_frontends)
-	:m_lnbidx((sizeof(m_lnbs) / sizeof(eDVBSatelliteLNBParameters))-1), m_curSat(m_lnbs[0].m_satellites.end()), m_avail_frontends(avail_frontends), m_avail_simulate_frontends(avail_simulate_frontends), m_rotorMoving(0)
+	:m_lnbidx(-1), m_curSat(eDVBSatelliteLNBParameters().m_satellites.end()), m_avail_frontends(avail_frontends), m_avail_simulate_frontends(avail_simulate_frontends), m_rotorMoving(0)
 {
 	if (!instance)
 		instance = this;
@@ -1176,11 +1176,8 @@ RESULT eDVBSatelliteEquipmentControl::clear()
 	eSecDebug("eDVBSatelliteEquipmentControl::clear()");
 
 	for (int i=0; i <= m_lnbidx; ++i)
-	{
 		m_lnbs[i].m_satellites.clear();
-		m_lnbs[i].m_slot_mask = 0;
-		m_lnbs[i].m_prio = -1; // auto
-	}
+	m_lnbs.clear();
 	m_lnbidx=-1;
 
 	m_not_linked_slot_mask=0;
@@ -1215,13 +1212,12 @@ RESULT eDVBSatelliteEquipmentControl::clear()
 /* LNB Specific Parameters */
 RESULT eDVBSatelliteEquipmentControl::addLNB()
 {
-	if ( (m_lnbidx+1) < (int)(sizeof(m_lnbs) / sizeof(eDVBSatelliteLNBParameters)))
-		m_curSat=m_lnbs[++m_lnbidx].m_satellites.end();
-	else
-	{
-		eDebug("[eDVBSatelliteEquipmentControl] no more LNB free... cnt is %d", m_lnbidx);
-		return -ENOSPC;
-	}
+	eDVBSatelliteLNBParameters lnb;
+	lnb.m_slot_mask = 0;
+	lnb.m_prio = -1; // auto
+	m_lnbidx++;
+	m_lnbs.push_back(lnb);
+	m_curSat = lnb.m_satellites.end();
 	eSecDebug("[eDVBSatelliteEquipmentControl::addLNB] lnb=%d)", m_lnbidx);
 	return 0;
 }
