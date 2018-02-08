@@ -46,9 +46,9 @@ class CableScan:
 	def scanCompleted(self, result):
 		self.done = True
 		if result < 0:
-			self.text.setText(_('Scanning failed!'))
+			self.text.setText(_('Scan failed!'))
 		else:
-			self.text.setText(ngettext("Scanning completed, %d channel found", "Scanning completed, %d channels found", result) % result)
+			self.text.setText(ngettext("Scan completed, %d channel found.", "Scan completed, %d channels found.", result) % result)
 
 	def destroy(self):
 		pass
@@ -77,7 +77,7 @@ class CableScanStatus(Screen):
 
 		self["frontend"] = Pixmap()
 		self["scan_progress"] = ProgressBar()
-		self["scan_state"] = Label(_("scan state"))
+		self["scan_state"] = Label(_("Scan state"))
 
 		self["actions"] = ActionMap(["OkCancelActions"],
 			{
@@ -154,7 +154,7 @@ class CableScanScreen(ConfigListScreen, Screen):
 		ConfigListScreen.__init__(self, self.list)
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
-		self["introduction"] = Label(_("Configure your network settings, and press OK to start the scan"))
+		self["introduction"] = Label(_("Configure your network settings and press OK to scan"))
 
 	def restoreService(self):
 		if self.prevservice:
@@ -188,7 +188,7 @@ class CableScanScreen(ConfigListScreen, Screen):
 		if self.getFreeTuner():
 			self.session.open(CableScanStatus, scanTuner=self.freeTuner, scanNetwork=config.plugins.CableScan.networkid.value, scanFrequency=config.plugins.CableScan.frequency.floatint, scanSymbolRate=config.plugins.CableScan.symbolrate.value * 1000, scanModulation=int(config.plugins.CableScan.modulation.value), keepNumbers=config.plugins.CableScan.keepnumbering.value, hdList=config.plugins.CableScan.hdlist.value)
 		else:
-			self.session.open(MessageBox, _("A recording is currently running on the selected tuner. Please select a different tuner or consider to stop the recording to try again."), type=MessageBox.TYPE_ERROR)
+			self.session.open(MessageBox, _("A recording is currently running on the selected tuner. Please select a different tuner or stop the recording and try again."), type=MessageBox.TYPE_ERROR)
 
 	def keyCancel(self):
 		refreshServiceList()
@@ -253,7 +253,7 @@ def restartScanAutoStartTimer(reply=False):
 	if reply:
 		CableScanAutoStartTimer.startLongTimer(86400)
 	else:
-		print "[AutoCableScan] Scan was not succesfully retry in one hour"
+		print "[AutoCableScan] Scan was not successful retry in one hour"
 		CableScanAutoStartTimer.startLongTimer(3600)
 
 def CableScanAuto():
