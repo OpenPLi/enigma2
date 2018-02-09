@@ -4,10 +4,11 @@ from Components.config import config
 
 class FactoryReset(MessageBox, ProtectedScreen):
 	def __init__(self, session):
-		MessageBox.__init__(self, session, _("When you do a factory reset, you will lose ALL your configuration data\n"
-			"(including bouquets, services, satellite data ...)\n"
-			"After completion of factory reset, your receiver will restart automatically!\n\n"
-			"Really do a factory reset?"), MessageBox.TYPE_YESNO, default=False)
+		MessageBox.__init__(self, session, _("Factory reset will restore your receiver to its default configuration. "
+			"All user data including system settings, tuner configuration, bouquets, services and plugins will be DELETED. "
+			"Recordings and other files stored on HDD and USB media will remain intact. "
+			"After completion, the system will restart automatically!\n\n"
+			"Do you really want to proceed?"), MessageBox.TYPE_YESNO, default=False)
 		self.skinName = "MessageBox"
 		ProtectedScreen.__init__(self)
 
