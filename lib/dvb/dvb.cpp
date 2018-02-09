@@ -836,6 +836,7 @@ RESULT eDVBResourceManager::allocateFrontend(ePtr<eDVBAllocatedFrontend> &fe, eP
 	foundone = 0;
 	check_fbc_leaf_linkable = false;
 	current_fbc_setid = -1;
+	c = 0;
 
 	for (eSmartPtrList<eDVBRegisteredFrontend>::iterator i(frontends.begin()); i != frontends.end(); ++i)
 	{
