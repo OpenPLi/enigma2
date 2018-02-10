@@ -23,7 +23,6 @@ def checkimagefiles(files):
 class SelectImage(Screen):
 	def __init__(self, session, *args):
 		Screen.__init__(self, session)
-		self.skinName = "ChoiceBox"
 		self.session = session
 		self.jsonlist = None
 		self.imagesList = None
@@ -171,7 +170,7 @@ class FlashImage(Screen):
 		<widget name="info" position="5,60" size="e-10,130" font="Regular;24" backgroundColor="#54242424"/>
 		<widget name="progress" position="5,e-39" size="e-10,24" backgroundColor="#54242424"/>
 	</screen>"""
-	
+
 	def __init__(self, session,  imagename, source):
 		Screen.__init__(self, session)
 		self.containerbackup = None
@@ -260,7 +259,7 @@ class FlashImage(Screen):
 				destination = "/".join([self.destination, 'downloaded_images'])
 				self.zippedimage = "://" in self.source and "/".join([destination, self.imagename]) or self.source
 				self.unzippedimage = "/".join([destination, '%s.unzipped' % self.imagename[:-4]])
-			
+
 				if os.path.isfile(destination):
 					os.remove(destination)
 				if not os.path.isdir(destination):
@@ -287,9 +286,9 @@ class FlashImage(Screen):
 		self.containerbackup = None
 		if retval == 0:
 			self.startDownload()
-		else:	
+		else:
 			self.session.openWithCallback(self.abort, MessageBox, _("Error during backup settings\n%s") % reval, type=MessageBox.TYPE_ERROR, simple=True)
-		
+
 	def startDownload(self, reply=True):
 		self.show()
 		if reply:
@@ -313,15 +312,15 @@ class FlashImage(Screen):
 	def downloadError(self, reason, status):
 		self.downloader.stop()
 		self.session.openWithCallback(self.abort, MessageBox, _("Error during downloading image\n%s\n%s") % (self.imagename, reason), type=MessageBox.TYPE_ERROR, simple=True)
-		
+
 	def downloadEnd(self):
 		self.downloader.stop()
 		self.unzip()
-		
+
 	def unzip(self):
 		try:
 			zipfile.ZipFile(self.zippedimage, 'r').extractall(self.unzippedimage)
-			self.flashimage()	
+			self.flashimage()
 		except:
 			self.session.openWithCallback(self.abort, MessageBox, _("Error during unzipping image\n%s") % self.imagename, type=MessageBox.TYPE_ERROR, simple=True)
 
@@ -362,7 +361,7 @@ class FlashImage(Screen):
 class MultibootSelection(SelectImage):
 	def __init__(self, session, *args):
 		Screen.__init__(self, session)
-		self.skinName = "ChoiceBox"
+		self.skinName = "SelectImage"
 		self.session = session
 		self.imagesList = None
 		self.expanded = []
