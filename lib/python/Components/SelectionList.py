@@ -49,6 +49,12 @@ class SelectionList(MenuList):
 				self.list.pop(self.list.index(it))
 		self.setList(self.list)
 
+	def toggleItemSelection(self, item):
+		idx = item[2]
+		item = self.list[idx][0]
+		self.list[idx] = SelectionEntryComponent(item[0], item[1], item[2], not item[3])
+		self.setList(self.list)
+
 	def sort(self, sortType=False, flag=False):
 		# sorting by sortType:
 		# 0 - description
