@@ -599,7 +599,7 @@ class PositionerSetup(Screen):
 			self.statusMsg(_("Stepped west"), timeout = self.STATUS_MSG_TIMEOUT)
 		elif entry == "storage":
 			if self.getUsals() is False:
-				menu = [(_("Yes"), "yes"), (_("No"), "no")]
+				menu = [(_("yes"), "yes"), (_("no"), "no")]
 				available_orbos = False
 				orbos = None
 				if self.advanced:
