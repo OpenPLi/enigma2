@@ -86,7 +86,7 @@ class AutoInstallWizard(Screen):
 
 	def appClosed(self, retval):
 		if retval:
-			self["AboutScrollLabel"].setText(_("Some error occured - Please try later"))
+			self["AboutScrollLabel"].setText(_("Some error occurred - Please try later"))
 		self.container.appClosed.remove(self.appClosed)
 		self.container.dataAvail.remove(self.dataAvail)
 		self.container = None

@@ -408,7 +408,7 @@ class Troubleshoot(Screen):
 
 	def appClosed(self, retval):
 		if retval:
-			self["AboutScrollLabel"].setText(_("Some error occured - Please try later"))
+			self["AboutScrollLabel"].setText(_("Some error occurred - Please try later"))
 
 	def dataAvail(self, data):
 		self["AboutScrollLabel"].appendText(data)
@@ -427,7 +427,7 @@ class Troubleshoot(Screen):
 				if self.container.execute(command):
 					raise Exception, "failed to execute: ", command
 			except Exception, e:
-				self["AboutScrollLabel"].setText("%s\n%s" % (_("Some error occured - Please try later"), e))
+				self["AboutScrollLabel"].setText("%s\n%s" % (_("Some error occurred - Please try later"), e))
 
 	def cancel(self):
 		self.container.appClosed.remove(self.appClosed)
