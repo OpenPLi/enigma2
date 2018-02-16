@@ -200,13 +200,11 @@ class CommitInfo(Screen):
 			("https://api.github.com/repos/openpli/openpli-oe-core/commits" + branch, "Openpli Oe Core"),
 			("https://api.github.com/repos/openpli/enigma2-plugins/commits", "Enigma2 Plugins"),
 			("https://api.github.com/repos/openpli/aio-grab/commits", "Aio Grab"),
-			("https://api.github.com/repos/openpli/gst-plugin-dvbmediasink/commits", "Gst Plugin Dvbmediasink"),
-			("https://api.github.com/repos/openpli/enigma2-plugin-extensions-xmltvimport/commits", "Plugin Xmltvimport"),
+			("https://api.github.com/repos/openpli/enigma2-plugin-extensions-epgimport/commits", "Plugin EPGImport"),
 			("https://api.github.com/repos/openpli/enigma2-plugin-skins-magic/commits", "Skin Magic SD"),
-			("https://api.github.com/repos/openpli/tuxtxt/commits", "Tuxtxt"),
 			("https://api.github.com/repos/littlesat/skin-PLiHD/commits", "Skin PLi HD"),
 			("https://api.github.com/repos/E2OpenPlugins/e2openplugin-OpenWebif/commits", "OpenWebif"),
-			("https://api.github.com/repos/haroo/HansSettings/commits", "OpenWebif")
+			("https://api.github.com/repos/haroo/HansSettings/commits", "Hans settings")
 		]
 		self.cachedProjects = {}
 		self.Timer = eTimer()
