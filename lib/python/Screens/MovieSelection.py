@@ -2159,8 +2159,8 @@ class MovieSelectionFileManagerList(Screen):
 						index += 1
 		self.list = data
 
-		self["files"] = self.list
-		self["text"] = Label()
+		self["config"] = self.list
+		self["description"] = Label()
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "MovieSelectionActions"],
 			{
@@ -2240,7 +2240,7 @@ class MovieSelectionFileManagerList(Screen):
 			except Exception, e:
 				self.session.open(MessageBox, str(e), MessageBox.TYPE_ERROR)
 		else:
-			item = self["files"].getCurrent()[0]
+			item = self["config"].getCurrent()[0]
 			try:
 				copyServiceFiles(item[1], dest, item[0])
 			except Exception, e:
@@ -2264,7 +2264,7 @@ class MovieSelectionFileManagerList(Screen):
 			except Exception, e:
 				self.session.open(MessageBox, str(e), MessageBox.TYPE_ERROR)
 		else:
-			item = self["files"].getCurrent()[0]
+			item = self["config"].getCurrent()[0]
 			try:
 				moveServiceFiles(item[1], dest, item[0])
 				self.list.removeSelection(item)
