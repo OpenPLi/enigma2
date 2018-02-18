@@ -4,9 +4,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-11 16:09+0100\n"
-"PO-Revision-Date: 2017-11-11 16:30+0100\n"
-"Last-Translator: andy1 <dummy@dummy.com>\n"
+"POT-Creation-Date: 2018-02-17 17:35+0100\n"
+"PO-Revision-Date: 2018-02-18 12:06+0100\n"
+"Last-Translator: GeirJ <dummy@dummy.com>\n"
 "Language-Team: GeirJ\n"
 "Language: nb\n"
 "MIME-Version: 1.0\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
-"X-Generator: Poedit 2.0.4\n"
+"X-Generator: Poedit 2.0.6\n"
 "X-Poedit-Bookmarks: -1,-1,-1,-1,-1,31,1959,-1,-1,-1\n"
 
 msgid ""
@@ -44,21 +44,21 @@ msgid ""
 "Conflict detection disabled!"
 msgstr ""
 "\n"
-"Feilsøking frakoblet!"
+"Konflikt oppdagelse frakoblet!"
 
 msgid ""
 "\n"
 "Edit the upgrade source address."
 msgstr ""
 "\n"
-"Endre oppdaterings-adresse."
+"Endre oppdateringsadressen."
 
 msgid ""
 "\n"
 "Manage extensions or plugins for your receiver"
 msgstr ""
 "\n"
-"Behandle utvidelser og tillegg for din mottaker"
+"Administrer utvidelser eller tillegg for mottakeren din"
 
 msgid ""
 "\n"
@@ -206,6 +206,10 @@ msgstr "%02d:%02d"
 #, python-format
 msgid "%03d MB"
 msgstr "%03d MB"
+
+#, python-format
+msgid "%2.1f sec"
+msgstr "%2.1f sek"
 
 #. TRANSLATORS: short time representation hour:minute
 #, python-format
@@ -482,6 +486,12 @@ msgstr "1.1"
 msgid "1.2"
 msgstr "1.2"
 
+msgid "10 MB/s"
+msgstr "10 MB/s"
+
+msgid "100 MB/s"
+msgstr "100 MB/s"
+
 msgid "10bit"
 msgstr "10bit"
 
@@ -517,6 +527,9 @@ msgstr "16:9 alltid"
 #
 msgid "18 V"
 msgstr "18V"
+
+msgid "20 MB/s"
+msgstr "20 MB/s"
 
 msgid "23.976"
 msgstr "23.976"
@@ -568,6 +581,9 @@ msgstr "4:3 Brevsprekkformat"
 msgid "4:3 PanScan"
 msgstr "4:3 Breddereduksjon"
 
+msgid "50 MB/s"
+msgstr "50 MB/s"
+
 msgid "8bit"
 msgstr "8bit"
 
@@ -575,13 +591,13 @@ msgid ": 0000 - default (disabled)"
 msgstr ": 0000 - standard (frakoblet)"
 
 msgid "<Current movielist location>"
-msgstr "<Gjeldende opptaks mappe>"
+msgstr "<Gjeldende opptaksmappe>"
 
 msgid "<Default movie location>"
-msgstr "<Standard opptaksliste>"
+msgstr "<Standard opptaksmappe>"
 
 msgid "<Last timer location>"
-msgstr "<Siste tidtaker mappe>"
+msgstr "<Siste tidtakermappe>"
 
 #
 msgid "<unknown>"
@@ -620,14 +636,14 @@ msgid ""
 "A finished record timer wants to set your\n"
 "receiver to standby. Do that now?"
 msgstr ""
-"Et tidsopptak er ferdig og ønsker å slå av\n"
-"mottakeren. Slå av nå?"
+"Et tidsopptak er fullført og vil å slå av din\n"
+"mottaker. Slå av nå?"
 
 msgid ""
 "A finished record timer wants to shut down\n"
 "your receiver. Shutdown now?"
 msgstr ""
-"Et tidsopptak er ferdig og ønsker å slå av mottakeren\n"
+"Et tidsopptak er fullført og din mottaker vil bli slått av\n"
 "Slå av nå?"
 
 #
@@ -639,32 +655,34 @@ msgid ""
 "A record has been started:\n"
 "%s"
 msgstr ""
-"Et opptak har startet:\n"
+"Et opptak er i gang:\n"
 "%s"
 
 msgid ""
 "A recording is currently running on the selected tuner. Please select a "
-"different tuner or consider to stop the recording to try again."
+"different tuner or stop the recording and try again."
 msgstr ""
-"Et opptak pågår med den valgte tuneren. Vennligst velg en annen tuner eller "
-"vurder og stoppe opptaket og prøv igjen."
+"Et opptak er i gang på den valgte tuneren. Vennligst velg en annen tuner "
+"eller vurder og stoppe opptaket og prøv igjen."
 
 msgid ""
 "A recording is currently running.\n"
 "What do you want to do?"
 msgstr ""
-"Et opptak er igang.\n"
-"Hva skal gjøres?"
+"Et opptak er i gang.\n"
+"Hva vil du gjøre?"
 
 msgid ""
 "A recording is currently running. Please stop the recording before trying to "
 "scan."
-msgstr "Et opptak er igang. Stopp opptaket før søket kan startes."
+msgstr ""
+"Et opptak er i gang. Vennligst stopp opptaket før kanalsøket kan utføres."
 
 msgid ""
 "A recording is currently running. Please stop the recording before trying to "
 "start a testing DiSEqC."
-msgstr "Et opptak er igang. Stopp opptaket før DiSEqC testing kan utføres."
+msgstr ""
+"Et opptak er i gang. Vennligst stopp opptaket før DiSEqC testing kan utføres."
 
 #
 #, python-format
@@ -842,6 +860,24 @@ msgstr "Legg til i favorittliste"
 msgid "Add/remove change timer for current event"
 msgstr "Legg til/slett tidtaker i nåværende program"
 
+msgid ""
+"Additional motor options allow you to enter details from your motor's spec "
+"sheet so enigma can work out how long it will take to move the dish from one "
+"satellite to another satellite."
+msgstr ""
+"Flere motor alternativer lar deg angi detaljer fra din parabolmotors "
+"spesifikasjoner slik at enigma kan regne ut hvor lang tid det tar å flytte "
+"fra en satellitt til en annen satellitt."
+
+msgid ""
+"Additional motor options allow you to enter details from your motor's spec "
+"sheet so enigma can work out how long it will take to move to another "
+"satellite."
+msgstr ""
+"Flere motor alternativer lar deg angi detaljer fra din parabolmotors "
+"spesifikasjoner slik at enigma kan regne ut hvor lang tid det tar å flytte "
+"til en annen satellitt."
+
 msgid "Adjust 3D settings"
 msgstr "Juster 3D innstillinger"
 
@@ -857,25 +893,25 @@ msgstr ""
 
 #
 msgid "Advanced"
-msgstr "Avansert"
+msgstr "Ekspert"
 
 msgid "Advanced options"
-msgstr "Avansert innstilling"
+msgstr "Ekspert valg"
 
 msgid "Advanced restore"
 msgstr "Gjenoppretting"
 
 msgid "Advanced software"
-msgstr "Avansert programvare"
+msgstr "Ekspert programvare"
 
 msgid "Advanced software plugin"
 msgstr "Ekspert tillegg"
 
 msgid "Advanced video enhancement setup"
-msgstr "Avansert bildeforbedrings innstilling"
+msgstr "Ekspert bildeforbedrings innstilling"
 
 msgid "Advanced video setup"
-msgstr "Avansert bildeinnstilling"
+msgstr "Ekspert bildeinnstilling"
 
 msgid "Afghanistan"
 msgstr "Afghanistan"
@@ -932,6 +968,15 @@ msgstr "Alle distributører"
 msgid "Allocate"
 msgstr "Tildel"
 
+msgid ""
+"Allocate a number to the physical LNB you are configuring. You will be able "
+"to select this LNB again for other satellites (e.g. motorised dishes) to "
+"save setting up the same LNB multiple times."
+msgstr ""
+"Tildel et nummer til den fysiske LNB du stiller inn. Du vil kunne velge "
+"denne LNB igjen for andre satellitter (f.eks motorisert parabol) lagre og "
+"sette opp samme LNB flere ganger."
+
 msgid "Allocate unused memory index"
 msgstr "Tildel ubrukt minneregister"
 
@@ -957,6 +1002,9 @@ msgstr "Amerikansk Samoa"
 #
 msgid "An empty filename is illegal."
 msgstr "Et tomt filnavn er ikke tillatt."
+
+msgid "An error occurred - Please try again later"
+msgstr "Det oppstod en feil, vennligst prøv igjen senere."
 
 msgid "An error occurred while downloading the packetlist. Please try again."
 msgstr "En feil oppstod under nedlasting av programvare. Prøv igjen."
@@ -1093,14 +1141,14 @@ msgid "At end"
 msgstr "Ved slutten"
 
 msgid "Attention, this is repeated timer!\n"
-msgstr "Advarsel, dette er en repeterende tidtaker!\n"
+msgstr "Advarsel, dette er repeterende tidtaker!\n"
 
 msgid ""
 "Attention, this is repeated timer!\n"
 "What do you want to do?"
 msgstr ""
 "Advarsel, dette er repeterende tidtaker!\n"
-"Hva skal gjøres?"
+"Hva vil du gjøre?"
 
 msgid "Audio PID"
 msgstr "Lyd PID"
@@ -1151,7 +1199,7 @@ msgid "Auto Diseqc"
 msgstr "Auto DiSEqC"
 
 msgid "Auto EXIF Orientation rotation/flipping"
-msgstr "Auto bildedata plassering, rotering og tilpassing"
+msgstr "Auto EXIF- retningnormal exif orientering"
 
 #
 msgid "Auto chapter split every ? minutes (0=never)"
@@ -1179,9 +1227,6 @@ msgid "Automatic"
 msgstr "Automatisk"
 
 msgid "Automatic Scan"
-msgstr "Automatisk søk"
-
-msgid "Automatic scan"
 msgstr "Automatisk søk"
 
 #
@@ -1237,7 +1282,7 @@ msgstr "Sikkerhetskopi kjører..."
 
 #
 msgid "Backup settings"
-msgstr "Sikkerhetskopier innstillinger"
+msgstr "Innstillinger for sikkerhetskopier"
 
 #
 msgid "Backup system settings"
@@ -1312,10 +1357,6 @@ msgstr "Slå av støy reduksjon"
 msgid "Blue"
 msgstr "Blå"
 
-#
-msgid "Blue boost"
-msgstr "Blå boost"
-
 msgid "Bolivia (Plurinational State of)"
 msgstr "Bolivia"
 
@@ -1325,6 +1366,13 @@ msgstr "Bonaire, Sint Eustatius og Saba"
 #
 msgid "Bookmarks"
 msgstr "Bokmerker"
+
+msgid "Boost blue"
+msgstr "Øk blåtoner"
+
+#
+msgid "Boost green"
+msgstr "Øk grønn"
 
 msgid "Bosnia and Herzegovina"
 msgstr "Bosnia og Herzegovina"
@@ -1354,7 +1402,7 @@ msgstr "Buffrer %d%%"
 
 #
 msgid "Build date: "
-msgstr "Byggedato:"
+msgstr "Installert dato:"
 
 msgid "Bulgaria"
 msgstr "Bulgaria"
@@ -1380,7 +1428,7 @@ msgstr "Brenn eksisternde avbildning på DVD"
 
 #
 msgid "Burn to DVD"
-msgstr "Brenn på DVD"
+msgstr "Brenn til DVD"
 
 msgid "Burundi"
 msgstr "Burundi"
@@ -1459,7 +1507,7 @@ msgstr "Canada"
 
 #
 msgid "Cancel"
-msgstr "Avbryt"
+msgstr "Tilbake"
 
 msgid "Cancelled upon user request"
 msgstr "Kansellert av bruker"
@@ -1538,7 +1586,7 @@ msgstr "Endre trinn lengde"
 
 #
 msgid "Change timer"
-msgstr "Endre timer"
+msgstr "Endre tidtaker"
 
 #
 msgid "Channel"
@@ -1547,6 +1595,10 @@ msgstr "Kanal"
 #
 msgid "Channel Info"
 msgstr "Kanal info"
+
+#
+msgid "Channel context menu"
+msgstr "Programinnhold"
 
 #
 msgid "Channel list type"
@@ -1725,6 +1777,10 @@ msgstr "Komplett"
 msgid "Complex (allows mixing audio tracks and aspects)"
 msgstr "Kompleks (tillater blanding av lyd spor)"
 
+#
+msgid "Compress"
+msgstr "Komprimer"
+
 msgid "Config Scan Details"
 msgstr "Still inn søkedetaljer"
 
@@ -1802,6 +1858,14 @@ msgstr "Still inn lysstyrke på menyen."
 msgid "Configure the video output mode (or resolution)."
 msgstr "Velg oppløsning på videoutgangen."
 
+msgid ""
+"Configure this tuner using simple or advanced options, or loop it through to "
+"another tuner, or copy a configuration from another tuner, or disable it."
+msgstr ""
+"Innstill denne tuneren med enkle eller avanserte alternativer, gjennomgang "
+"til en annen tuner, eller kopiere en konfigurasjon fra en annen mottaker, "
+"eller deaktivere den."
+
 msgid "Configure whether multi channel PCM sound should be enabled."
 msgstr "Velg dersom PCM flerkanals lyd skal brukes."
 
@@ -1816,14 +1880,14 @@ msgstr "Velg hvilket fargeformat som skal brukes på SCART-utgang."
 msgid "Configure your internal LAN"
 msgstr "Velg ditt lokale LAN nettverk"
 
-msgid "Configure your network settings, and press OK to start the scan"
-msgstr "Velg dine nettverks innstillinger og trykk OK for å søke det fram"
+msgid "Configure your network settings and press OK to scan"
+msgstr "Konfigurer dine nettverksinnstillinger og trykk OK for å søke"
 
 msgid "Configure your wireless LAN again"
 msgstr "Velg ditt trådløse LAN nettverk på nytt"
 
 msgid "Configures which video output connector will be used."
-msgstr "Velg videoutgangs kontakt som skal brukes. "
+msgstr "Velg video utgangskontakt som skal brukes."
 
 #
 msgid "Configuring"
@@ -1846,6 +1910,10 @@ msgstr "Koble til"
 msgid "Connect to a wireless network"
 msgstr "Koble til et trådløst nettverk"
 
+#
+msgid "Connected"
+msgstr "Tilkoblet"
+
 msgid "Connected satellites"
 msgstr "Tilkoblede satellitter"
 
@@ -1863,6 +1931,16 @@ msgstr "Konsoll"
 #
 msgid "Constellation & FFT mode"
 msgstr "Konstellasjon & FFT tilstand"
+
+msgid "Consult your Unicable device spec sheet for this information."
+msgstr "Konsulter din Unicable bruksanvisning for denne informasjonen."
+
+msgid ""
+"Consult your motor's spec sheet for this information, or leave the default "
+"setting."
+msgstr ""
+"Les motorens bruksanvisning for denne informasjonen, eller gå til "
+"standardinnstillingen."
 
 #
 msgid "Content does not fit on DVD!"
@@ -1886,17 +1964,14 @@ msgstr "Fortsetter å spille (om igjen)"
 msgid "Contrast"
 msgstr "Kontrast"
 
-msgid "Convert ext3 to ext4"
-msgstr "Konverter ext3 til ext4"
-
-msgid "Converting ext3 to ext4..."
-msgstr "Konverterer ext3 til ext4..."
-
 msgid "Cook Islands"
 msgstr "Cookøyene"
 
 msgid "Copy"
 msgstr "Kopier"
+
+msgid "Copy to..."
+msgstr "Kopier til..."
 
 msgid "Costa Rica"
 msgstr "Costa Rica"
@@ -1922,7 +1997,7 @@ msgstr "Kunne ikke åpne bilde i bilde"
 
 #, python-format
 msgid "Could not record due to conflicting timer %s"
-msgstr "Kunne ikke spille inn på grunn av motstridende tidtaker%s"
+msgstr "Kunne ikke spille inn på grunn av motstridende tidtaker %s"
 
 #, python-format
 msgid "Could not record due to invalid service %s"
@@ -2248,7 +2323,7 @@ msgid "Details for plugin: "
 msgstr "Detaljer for programtillegg: "
 
 msgid "Detect next boxes before standby"
-msgstr "Oppdag neste hendelser før avslått"
+msgstr "Merk neste hendelser før standby"
 
 #
 msgid "Detected HDD:"
@@ -2376,10 +2451,6 @@ msgid "Do not change"
 msgstr "Ikke endre"
 
 #
-msgid "Do not flash image"
-msgstr "Ikke installer bilde"
-
-#
 msgid "Do not record"
 msgstr "Ikke ta opp"
 
@@ -2394,13 +2465,6 @@ msgid ""
 msgstr ""
 "Kontrollere filsystemet?\n"
 "Dette kan ta veldig lang tid!"
-
-msgid ""
-"Do you really want to convert the filesystem?\n"
-"You cannot go back!"
-msgstr ""
-"Konvertere filsystemet?\n"
-"Dette kan ikke angres!"
 
 #
 #, python-format
@@ -2451,31 +2515,20 @@ msgstr "Gjøre dette?"
 
 #
 msgid "Do you want to autorestore settings?"
-msgstr "Automatisk lagre innstillingene?"
+msgstr "Ønsker du å tilbakestille innstillingene?"
 
 #
 msgid "Do you want to burn this collection to DVD medium?"
-msgstr "Brenne denne samlingen på DVD plate?"
+msgstr "Brenne denne samlingen til DVD plate?"
 
 #
 #, python-format
 msgid ""
 "Do you want to flash image\n"
-"%s\n"
-"without backup?"
+"%s"
 msgstr ""
-"Ønsker du å installere programvare\n"
-"%s\n"
-"uten sikkerhetskopi?"
-
-#
-#, python-format
-msgid ""
-"Do you want to flash image\n"
-"%s?"
-msgstr ""
-"Ønsker du å installere bilde\n"
-"%s?"
+"Vil du å installere systemet\n"
+"%s"
 
 #
 msgid "Do you want to install the package:\n"
@@ -2676,6 +2729,9 @@ msgstr "Aktiver auto hurtig søk for %s"
 msgid "Enable parental protection"
 msgstr "Aktiver foreldrekontroll"
 
+msgid "Enable this setting if your aerial system needs power"
+msgstr "Aktiver denne innstillingen hvis din antenne trenger strøm"
+
 msgid "Enable timer conflict detection"
 msgstr "Aktiver melding om tidtakerkonflikt"
 
@@ -2734,6 +2790,12 @@ msgstr "Velger for Enigma2 utseende"
 msgid "Enter PIN"
 msgstr "Tast inn PIN"
 
+msgid "Enter if you are in the east or west hemisphere."
+msgstr "Skriv inn hvis du er i østlig eller vestlig halvkule."
+
+msgid "Enter if you are north or south of the equator."
+msgstr "Skriv inn hvis du er nord eller sør for ekvator."
+
 #
 msgid "Enter main menu..."
 msgstr "Åpne hovedmenyen..."
@@ -2746,9 +2808,59 @@ msgstr "Tast inn gjeldende PIN kode"
 msgid "Enter pin code"
 msgstr "Tast inn pin kode"
 
+msgid ""
+"Enter the frequency at which you LNB switches between low band and high "
+"band. For more information consult the spec sheet of your LNB."
+msgstr ""
+"Angi frekvensen der LNB bytter mellom lavbånd og høybånd. For mer "
+"informasjon, se spesifikasjonsarket til LNB."
+
+msgid ""
+"Enter the frequency step size for the tuner to use when searching for cable "
+"multiplexes. For more information consult your cable provider's "
+"documentation."
+msgstr ""
+"Angi frekvensstørrelsen for tuneren som skal brukes når du søker etter kabel "
+"multiplekser. For mer informasjon, vennligst kontakt din kabelleverandørs "
+"dokumentasjon."
+
+msgid ""
+"Enter the number stored in the positioner that corresponds to this satellite."
+msgstr ""
+"Skriv inn nummeret som er lagret i posisjonerer som tilsvarer denne "
+"satellitten."
+
 #
 msgid "Enter the service pin"
 msgstr "Tast inn kanal pin"
+
+msgid ""
+"Enter your current latitude. This is the number of degrees you are from the "
+"equator as a decimal."
+msgstr ""
+"Skriv inn din nåværende breddegrad. Dette er antall grader du er fra ekvator "
+"som en desimal."
+
+msgid ""
+"Enter your current longitude. This is the number of degrees you are from "
+"zero meridian as a decimal."
+msgstr ""
+"Skriv inn din nåværende lengdegrad. Dette er antall grader du er fra null "
+"meridian som et desimal."
+
+msgid ""
+"Enter your high band local oscillator frequency. For more information "
+"consult the spec sheet of your LNB."
+msgstr ""
+"Angi din høybånds lokale oscillatorfrekvens. For mer informasjon, se "
+"spesifikasjonsarket til LNB."
+
+msgid ""
+"Enter your low band local oscillator frequency. For more information consult "
+"the spec sheet of your LNB."
+msgstr ""
+"Skriv inn lokale oscillatorfrekvens for lavbåndet ditt. For mer informasjon, "
+"se spesifikasjonsarket til LNB."
 
 #
 msgid "Equal to"
@@ -2886,7 +2998,7 @@ msgid "Exit movie list"
 msgstr "Avslutt opptaksliste"
 
 msgid "Exit movie player?"
-msgstr "Avslutte opptaket?"
+msgstr "Stoppe avspillingen?"
 
 #
 msgid "Exit nameserver configuration"
@@ -2903,6 +3015,9 @@ msgstr "Avslutt nettverksveiviser"
 #
 msgid "Exit/OK"
 msgstr "Avslutt/OK"
+
+msgid "Expand"
+msgstr "Utvid"
 
 #
 msgid "Expert"
@@ -3005,6 +3120,23 @@ msgstr "FEC:"
 msgid "FTA"
 msgstr "Fri"
 
+msgid ""
+"Factory reset will restore your receiver to its default configuration. All "
+"user data including system settings, tuner configuration, bouquets, services "
+"and plugins will be DELETED. Recordings and other files stored on HDD and "
+"USB media will remain intact. After completion, the system will restart "
+"automatically!\n"
+"\n"
+"Do you really want to proceed?"
+msgstr ""
+"Tilbakestilling vil gjenopprette mottakeren til standardkonfigurasjonen. "
+"Alle brukerdata inkludert systeminnstillinger, mottaker konfigurasjon, "
+"favoritter, tjenester og tillegg vil bli slettet. Opptak og andre filer "
+"lagret på HDD og USB media vil være intakt. Etter ferdigstillelse startes "
+"systemet automatisk!\n"
+"\n"
+"Vil du fortsette?"
+
 #
 msgid "Failed"
 msgstr "Feilet"
@@ -3061,6 +3193,10 @@ msgid "File appears to be busy.\n"
 msgstr "Filen ser ut til å være opptatt.\n"
 
 #
+msgid "File manager"
+msgstr "Fil forvalter"
+
+#
 msgid "Filename"
 msgstr "Filnavn"
 
@@ -3093,11 +3229,8 @@ msgstr "Finsk"
 msgid "Fixed"
 msgstr "Fast"
 
-msgid "Flash with backup"
-msgstr "Installere med sikkerhetskopi"
-
-msgid "Flash without backup"
-msgstr "Installere uten sikkerhetskopi"
+msgid "Flash Image"
+msgstr "Installer operativsystem"
 
 msgid "Flashing image succesfull"
 msgstr "Installering av operativsystem gikk fint"
@@ -3118,6 +3251,9 @@ msgstr "Slå på LNB strøm"
 
 msgid "Force ToneBurst"
 msgstr "Bruk ToneBurst"
+
+msgid "Force legacy signal stats"
+msgstr "Tvinge eldre signal statistikk"
 
 #
 msgid "Format"
@@ -3363,10 +3499,6 @@ msgid "Green"
 msgstr "Grønn"
 
 #
-msgid "Green boost"
-msgstr "Grønn boost"
-
-#
 msgid "Greenland"
 msgstr "Grønland"
 
@@ -3575,6 +3707,42 @@ msgid "Icons"
 msgstr "Framdriftsirkel"
 
 msgid ""
+"If set to 'yes' signal values (SNR, etc) will be calculated from API V3. "
+"This is an old API version that has now been superseded."
+msgstr ""
+"Hvis satt til \"ja\" signalverdier (SNR, etc) beregnes fra API V3. Dette er "
+"en gammel API-versjon som nå er erstattet."
+
+msgid ""
+"If using multiple uncommitted switches the DiSEqC commands must be sent "
+"multiple times. Set to the number of uncommitted switches in the chain minus "
+"one."
+msgstr ""
+"Hvis du bruker flere uforpliktede vekslere, må DiSEqC-kommandoene sendes "
+"flere ganger. Angi antall uforpliktede (uncommitted) vekslere i kjeden minus "
+"en."
+
+msgid ""
+"If you are using a Circular polarised LNB select 'yes', otherwise select "
+"'no'."
+msgstr ""
+"Hvis du bruker en sirkulærpolarisert LNB, velg 'ja', ellers velg 'nei'."
+
+msgid ""
+"If you are using a DiSEqC committed switch enter the port letter required to "
+"access the LNB used for this satellite."
+msgstr ""
+"Hvis du bruker en forpliktet DiSEqC veksler, angi LNB portnummer som skal "
+"brukes til denne satellitt."
+
+msgid ""
+"If you are using a DiSEqC uncommitted switch enter the port number required "
+"to access the LNB used for this satellite."
+msgstr ""
+"Hvis du bruker en uforpliktet DiSEqC veksler, angi LNB portnummer som skal "
+"brukes til denne satellitt."
+
+msgid ""
 "If you see this, something is wrong with\n"
 "your scart connection. Press OK to return."
 msgstr ""
@@ -3609,7 +3777,7 @@ msgid ""
 "Image to install is invalid\n"
 "%s"
 msgstr ""
-"Image til installering er korrupt\n"
+"Systemet til installering er ugyldig\n"
 "%s"
 
 msgid "Image: "
@@ -3618,7 +3786,9 @@ msgstr "Operativsystem: "
 #
 msgid ""
 "In order to record a timer, the TV was switched to the recording service!\n"
-msgstr "Et tidsopptak startet og TV kanalen skiftet over til opptaket!\n"
+msgstr ""
+"Et tidsopptak er i gang og tuneren skiftet over til TV kanalen for "
+"opptaket!\n"
 
 #
 msgid "In progress"
@@ -3642,6 +3812,9 @@ msgstr "India"
 
 msgid "Indonesia"
 msgstr "Indonesia"
+
+msgid "Indonesian"
+msgstr "Indonesisk"
 
 #
 msgid "Info"
@@ -3769,7 +3942,7 @@ msgstr "Vending"
 
 #
 msgid "Inversion & Bandwidth"
-msgstr "Omvending - båndbredde"
+msgstr "Inversjon & Båndbredde"
 
 msgid "Inversion, Pilot & Roll-off"
 msgstr "Inversjon, Pilot & Roll-off"
@@ -3795,7 +3968,7 @@ msgstr "Er dette valget ok?"
 
 #
 msgid "Is this video mode ok?"
-msgstr "Er oppfriskingsraten ok?"
+msgstr "Er dette video valg ok?"
 
 msgid "Isle of Man"
 msgstr "Isle of Man"
@@ -3966,6 +4139,11 @@ msgstr "Latvisk"
 msgid "Leave DVD player?"
 msgstr "Avslutte DVD spiller?"
 
+msgid ""
+"Leave this set to 'yes' unless you fully understand why you are adjusting it."
+msgstr ""
+"La dette satt til \"ja\" med mindre du forstår hvorfor du justerer den."
+
 msgid "Lebanon"
 msgstr "Libanon"
 
@@ -4034,6 +4212,10 @@ msgstr "Koblede navn med en DVD-meny"
 
 msgid "List mode"
 msgstr "Vis liste"
+
+#
+msgid "List of files"
+msgstr "Fil liste"
 
 #
 msgid "List of storage devices"
@@ -4360,6 +4542,10 @@ msgid "Move to position X"
 msgstr "Flytt til posisjon X"
 
 #
+msgid "Move to..."
+msgstr "Flytt til..."
+
+#
 msgid "Move west"
 msgstr "Kjør vestover"
 
@@ -4641,7 +4827,7 @@ msgstr "Fant ingen brukbar posisjonsvisning."
 
 #
 msgid "No priority"
-msgstr "Ikke prioritert"
+msgstr "Ingen prioritet"
 
 #
 msgid "No satellite frontend found!"
@@ -4740,6 +4926,10 @@ msgstr "Nei, jeg vil ikke installere tillegg"
 msgid "No, but restart from begin"
 msgstr "Nei, men start på nytt"
 
+#
+msgid "No, do not flash image"
+msgstr "Nei, ikke installer systemet"
+
 msgid "No, except Wakeup timer"
 msgstr "Nei, unntatt vekkerklokke"
 
@@ -4780,14 +4970,10 @@ msgstr "Norsk"
 
 #
 msgid "Not Defined"
-msgstr "Ikke definert"
+msgstr "Ikke angitt"
 
 msgid "Not associated"
 msgstr "Ikke tilknyttet"
-
-#
-msgid "Not configured"
-msgstr "Ikke konfigurert"
 
 #, python-format
 msgid ""
@@ -4810,16 +4996,15 @@ msgstr ""
 "NB: Når dette er på og du ønsker standby etter vekking, brukes valget 'Slå "
 "på til Standby' som 'Nei, unntatt tidtaker tid'."
 
-#
-msgid "Nothing connected"
-msgstr "Ikke noe er tilkoblet"
-
 msgid ""
 "Nothing to scan!\n"
 "Please setup your tuner settings before you start a service scan."
 msgstr ""
-"Ikke noe å søke!\n"
-"Vennligst still inn tuner før søking etter kanaler."
+"Ingenting å skanne!\n"
+"Konfigurer innstillingene for tuner før du starter en service skanning."
+
+msgid "Nothing to scan! Setup your tuner and try again."
+msgstr "Ingenting å søke! Still inn din mottaker og prøv på nytt."
 
 msgid "Now"
 msgstr "Nå"
@@ -4833,9 +5018,9 @@ msgid ""
 "much as possible, but make sure that you can still see the difference "
 "between the two brightest levels of shades.If you have done that, press OK."
 msgstr ""
-"Bruk kontrast innstillingen i TV meny for å justere opp lysstyrken så mye "
-"som mulig. Pass på at det kan skilles mellom de to lyseste skyggenivåene. "
-"Trykk OK for å fortsette."
+"Bruk kontrast innstillingen for å justere opp lysstyrke i bakgrunnen så mye "
+"som mulig, men pass på at du kan skille mellom de to lyseste skyggenivåene. "
+"Når du har gjort det, trykk OK."
 
 #
 msgid "OK"
@@ -4877,6 +5062,15 @@ msgstr "På slutten av filmen (som meny)"
 msgid "One"
 msgstr "En"
 
+msgid ""
+"Only change this setting if you are using a Unicable device that has been "
+"reprogrammed with a custom programmer. For further information check with "
+"the person that reprogrammed the device."
+msgstr ""
+"Bare endre denne innstillingen hvis du bruker en Unicable enhet som har "
+"blitt omprogrammert med egendefinert programmerer. For mer informasjon sjekk "
+"med personen som omprogrammerte enheten."
+
 #
 msgid "Only extensions."
 msgstr "Kun utvidelser."
@@ -4884,8 +5078,21 @@ msgstr "Kun utvidelser."
 msgid "Only free scan"
 msgstr "Bare søk etter ukodete kanaler"
 
+msgid "Only move the dish quickly after this hour."
+msgstr "Bare flytt parabolen raskt etter denne time."
+
+msgid "Only move the dish quickly before this hour."
+msgstr "Bare flytt parabolen raskt før denne time."
+
 msgid "Only on startup"
 msgstr "Bare ved oppstart"
+
+msgid ""
+"Only select 'yes' if you are using a multiswich that requires a DiSEqC Port-"
+"A command signal. For all other setups select 'no'."
+msgstr ""
+"Bare velg 'Ja' Hvis du bruker en multiswich som krever et DiSEqC Port-A "
+"kommando signal. For alle andre oppsett velger du \"nei\"."
 
 #
 msgid "Open select location"
@@ -5364,8 +5571,14 @@ msgstr "Motoroppsett"
 msgid "Positioner setup log"
 msgstr "Posisjonerers oppsetts logg"
 
+msgid "Power management. Consult your receiver's manual for more information."
+msgstr "Strømstyring. Se i din mottakers bruksanvisning for mer informasjon."
+
 msgid "Power threshold in mA"
 msgstr "Strømverdi i mA"
+
+msgid "Power threshold. Consult your receiver's manual for more information."
+msgstr "Strømstyring. Se i din mottakers bruksanvisning for mer informasjon."
 
 msgid "PowerMenu"
 msgstr "Av/på meny"
@@ -5406,6 +5619,10 @@ msgstr "Trykk OK for å få ytterligere detaljer for %s"
 msgid "Press OK to scan"
 msgstr "Trykk OK for søk"
 
+msgid "Press OK to select a group of satellites to configure in one block."
+msgstr ""
+"Trykk OK for å velge en gruppe av satellitter som skal konfigureres i ett."
+
 msgid "Press OK to select a provider."
 msgstr "Trykk OK for valg av distributør ."
 
@@ -5414,9 +5631,6 @@ msgstr "Trykk OK for valg av leverandører"
 
 msgid "Press OK to select/deselect a CAId."
 msgstr "Trykk OK for velg/fjern en CAId."
-
-msgid "Press OK to start the scan"
-msgstr "Trykk OK og start søk"
 
 msgid "Press OK to toggle the selection"
 msgstr "Trykk OK for veksle valg"
@@ -5500,7 +5714,7 @@ msgid "Protect manufacturer reset screen"
 msgstr "Beskytt produsentens oppstarts skjermbilde"
 
 msgid "Protect menu sort"
-msgstr "Beskytt menysortering"
+msgstr "Beskytt meny sortering"
 
 msgid "Protect movie list"
 msgstr "Beskytt opptaksliste"
@@ -5522,7 +5736,7 @@ msgstr "Beskytt programvare oppdaterings skjerm"
 
 #
 msgid "Protect standby menu"
-msgstr "Beskytt  meny"
+msgstr "Beskytt meny i avslått"
 
 #
 msgid "Protect timer menu"
@@ -5658,22 +5872,10 @@ msgstr "Opptak starter opp om få sekunder!"
 msgid ""
 "Recording(s) are in progress or coming up in few seconds!\n"
 "Do you still want to flash image\n"
-"%s\n"
-"without backup?"
-msgstr ""
-"Et opptak er på gang og starter om få sekunder!\n"
-"Ønsker du allikevel å installere programvare\n"
-"%s\n"
-"uten sikkerhetskopi?"
-
-#, python-format
-msgid ""
-"Recording(s) are in progress or coming up in few seconds!\n"
-"Do you still want to flash image\n"
 "%s?"
 msgstr ""
-"Et opptak starter om få sekunder!\n"
-"Ønsker du allikevel å installere et nytt bilde\n"
+"Opptak pågår eller starter om få sekunder!\n"
+"Ønsker du fortsatt å installere et nytt system\n"
 "%s?"
 
 msgid "Recordings"
@@ -6159,6 +6361,9 @@ msgstr "Lagre tidsskift bare for denne handlingen"
 msgid "Scaler sharpness"
 msgstr "Bilde skarphet"
 
+msgid "Scaler vertical dejagging"
+msgstr "Skaler vertikal dejagging"
+
 #
 msgid "Scaling mode"
 msgstr "Fininnstilling"
@@ -6182,12 +6387,24 @@ msgstr "Søk %s bånd"
 msgid "Scan additional SR"
 msgstr "Søk etter flere SR"
 
+#, python-format
+msgid "Scan completed, %d channel found."
+msgid_plural "Scan completed, %d channels found."
+msgstr[0] "Søking er fullført, %d kanal funnet."
+msgstr[1] "Søket er fullført, %d kanaler funnet."
+
+msgid "Scan failed!"
+msgstr "Søket mislyktes!"
+
 msgid "Scan files..."
 msgstr "Søker filer..."
 
 #
 msgid "Scan options"
 msgstr "Søke valg"
+
+msgid "Scan state"
+msgstr "Søke tilstand"
 
 msgid "Scan wireless networks"
 msgstr "Søk etter trådløse nettverk"
@@ -6260,6 +6477,10 @@ msgid "Secondary DNS"
 msgstr "Sekundær DNS"
 
 #
+msgid "Seek"
+msgstr "Søk"
+
+#
 msgid "Seek backward"
 msgstr "Søk bakover"
 
@@ -6279,6 +6500,89 @@ msgstr "Søk framover (skriv inn tid)"
 msgid "Select"
 msgstr "Velg"
 
+msgid ""
+"Select '1.0' for standard committed switches, '1.1' for uncommitted "
+"switches, and '1.2' for systems using a positioner."
+msgstr ""
+"Velg \"1.0\" for standard forpliktet veksler, \"1.1\" for uforpliktet "
+"utvidet veksler og '1.2' for motorsystem."
+
+msgid ""
+"Select 'A' or 'B' if your aerial system requires this, otherwise select "
+"'none'. If you are unsure select 'none'."
+msgstr ""
+"Velg 'A' eller 'B' hvis antenne systemet krever dette, ellers, velger du "
+"ingen. Hvis du er usikker, velger du ingen."
+
+msgid ""
+"Select 'Unicable' if this tuner will use a Unicable device. For all other "
+"setups select 'FBC automatic'."
+msgstr ""
+"Velg 'Unicable' hvis denne mottakeren bruker en Unicable enhet. Velg 'FBC "
+"automatisk' for alle andre oppsett."
+
+msgid ""
+"Select 'band' if using a 'universal' LNB, otherwise consult your LNB spec "
+"sheet."
+msgstr ""
+"Velg 'band' hvis du bruker en universal LNB, ellers les din LNB "
+"bruksanvisning."
+
+msgid ""
+"Select 'enabled' if this tuner has a signal cable connected, otherwise "
+"select 'nothing connected'."
+msgstr ""
+"Velg 'aktivert' hvis mottakeren har en signalkabel tilkoblet. Hvis ikke "
+"velges 'ingenting tilkoblet'."
+
+msgid ""
+"Select 'polarisation' if using a 'universal' LNB, otherwise consult your LNB "
+"spec sheet."
+msgstr ""
+"Velg 'polarisering' hvis du bruker en universal LNB ellers les din LNB "
+"bruksanvisning."
+
+msgid ""
+"Select 'provider' to scan from the predefined list of cable multiplexes. "
+"Select 'bands' to only scan certain parts of the spectrum. Select 'steps' to "
+"scan in steps of a particular frequency bandwidth."
+msgstr ""
+"Velg \"leverandør\" for å skanne fra den forhåndsdefinerte listen over kabel "
+"multiplekser. Velg \"bånd\" for å bare skanne bestemte deler av spekteret. "
+"Velg \"trinn\" for å skanne i trinn med en bestemt frekvensbåndbredde."
+
+msgid ""
+"Select 'yes' if this tuner is connected to the Unicable device through "
+"another tuner, otherwise select 'no'."
+msgstr ""
+"Velg 'Ja' Hvis denne mottakeren er koblet til Unicable enheten via en annen "
+"mottaker, ellers velger \"nei\"."
+
+msgid "Select 'yes' to choose what bands or step sizes will be scanned."
+msgstr ""
+"Velg 'Ja' for å velge hvilke band eller trinn størrelser som skal skannes."
+
+#, python-format
+msgid "Select 'yes' to include %s multiplexes in your search."
+msgstr "Velg 'Ja' for å inkludere %s multiplexer i ditt søk."
+
+#, python-format
+msgid "Select 'yes' to include symbol rate %s in your search."
+msgstr "Velg 'Ja' for å inkludere symbolhastighet %s i søket."
+
+#, python-format
+msgid "Select 'yes' to include the %s band in your search."
+msgstr "Velg 'Ja' for å inkludere %s band i søket."
+
+msgid ""
+"Select 'yes' to only send the DiSEqC command when changing from one "
+"satellite to another, or select 'no' for the DiSEqC command to be resent on "
+"every zap."
+msgstr ""
+"Velg 'Ja' for bare å sende DiSEqC kommando når du endrer fra en satellitt "
+"til en annen, eller velg \"nei\" for å sende DiSEqC kommando ved hvert "
+"kanalbytte."
+
 #
 msgid "Select CAId"
 msgstr "Velg CAId"
@@ -6289,6 +6593,13 @@ msgstr "Velg cardserver"
 #
 msgid "Select Channel"
 msgstr "Velg kanal"
+
+msgid ""
+"Select Fast DiSEqC if your aerial system supports this. If you are unsure "
+"select 'no'."
+msgstr ""
+"Velg Fast DiSEqC hvis antenne systemet støtter dette. Hvis du er usikker "
+"velg \"nei\"."
 
 msgid "Select Image"
 msgstr "Velg Image"
@@ -6342,6 +6653,12 @@ msgstr "Velg kanal for opptak"
 msgid "Select copy destination for:"
 msgstr "Velg kopierings mål for:"
 
+msgid "Select destination for copy selected files..."
+msgstr "Velg kopierings mål for valgte filer..."
+
+msgid "Select destination for move selected files..."
+msgstr "Velg flytte målet for valgte filer..."
+
 msgid "Select destination for:"
 msgstr "Velg målet for:"
 
@@ -6351,6 +6668,9 @@ msgstr "Velg mappe for loggfil"
 msgid "Select files for backup."
 msgstr "Velg filer for sikkerhetskopiering."
 
+msgid "Select files with 'OK' and then use 'Menu' for select operation"
+msgstr "Velg filer med 'OK' og bruk deretter 'Meny' for valg"
+
 msgid "Select files/folders to backup"
 msgstr "Velg filer/mapper for sikkerhetskopiering"
 
@@ -6359,8 +6679,22 @@ msgid "Select function"
 msgstr "Velg funksjon"
 
 #
+msgid "Select hard disk"
+msgstr "Velg harddisk"
+
+#
 msgid "Select horizontal resolution:"
 msgstr "Velg horisontal oppløsning:"
+
+msgid "Select how quickly the dish should move between satellites."
+msgstr "Velg hvor raskt parabolen skal kjøre mellom satellitter."
+
+msgid ""
+"Select how the satellite dish is set up. i.e. fixed dish, single LNB, DiSEqC "
+"switch, positioner, etc."
+msgstr ""
+"Velg hvordan parabolen er konfigurert. dvs. fast parabol, en LNB, DiSEqC "
+"veksler, motor, etc."
 
 msgid "Select input device"
 msgstr "Velg enhet"
@@ -6378,6 +6712,10 @@ msgstr "Velg sted"
 
 msgid "Select movie"
 msgstr "Velg opptak"
+
+#
+msgid "Select operation:"
+msgstr "Velg operasjon:"
 
 #
 msgid "Select path for logfile"
@@ -6406,8 +6744,114 @@ msgstr "Velg sorteringsmetode:"
 msgid "Select target folder"
 msgstr "Velg målmappe"
 
+msgid ""
+"Select the Unicable channel to be assigned to this tuner. This is a unique "
+"value. Be certain that no other device connected to this same Unicable "
+"system is allocated to the same Unicable channel."
+msgstr ""
+"Velg Unicable kanalen som skal tilordnes denne mottakeren. Dette er en unik "
+"verdi. Vær sikker på at ingen annen enhet som er tilkoblet dette samme "
+"Unicable systemet er tilordnet samme Unicable kanal."
+
+msgid ""
+"Select the format of your Unicable device. Choices are 'SCR "
+"Unicable' (Unicable I format), or 'SCR JESS' (Unicable II format)."
+msgstr ""
+"Velg formatet for Unicable enheten. Valgene er 'SCR Unicable' (Unicable I "
+"format) eller 'SCR JESS' (Unicable II-format)."
+
+msgid ""
+"Select the manufacturer of your Unicable device. If the manufacturer is not "
+"listed, set 'SCR' to 'user defined' and enter the device parameters manually "
+"according to its spec sheet."
+msgstr ""
+"Velg produsenten for Unicable enheten. Hvis produsenten ikke er oppført, "
+"sett \"SCR\" til \"brukerdefinert\" og angi enhetsparameterne manuelt etter "
+"bruksanvisningen."
+
+msgid ""
+"Select the model number of your Unicable device. If the model number is not "
+"listed, set 'SCR' to 'user defined' and enter the device parameters manually "
+"according to its spec sheet."
+msgstr ""
+"Velg modellnummeret på Unicable enheten. Hvis modellnummeret ikke er "
+"oppført, sett \"SCR\" til \"brukerdefinert\" og angi enhetsparameterne "
+"manuelt etter bruksanvisningen."
+
 msgid "Select the movie path"
 msgstr "Velg målmappe for opptak"
+
+msgid ""
+"Select the satellite which is connected to Port-A of your switch. If you are "
+"unsure select 'automatic' and the receiver will attempt to determine this "
+"for you. If nothing is connected to this port, select 'nothing connected'."
+msgstr ""
+"Velg satellitten som er koblet til Port-A på din veksler. Hvis du er usikker "
+"velg 'automatisk' og mottakeren vil prøve å finne dette for deg. Hvis "
+"ingenting er tilkoblet denne porten, velg 'ingenting tilkoblet'."
+
+msgid ""
+"Select the satellite which is connected to Port-B of your switch. If you are "
+"unsure select 'automatic' and the receiver will attempt to determine this "
+"for you. If nothing is connected to this port, select 'nothing connected'."
+msgstr ""
+"Velg satellitten som er koblet til Port-B på din veksler. Hvis du er usikker "
+"velg 'automatisk' og mottakeren vil prøve å finne dette for deg. Hvis "
+"ingenting er tilkoblet denne porten, velg 'ingenting tilkoblet'."
+
+msgid ""
+"Select the satellite which is connected to Port-C of your switch. If you are "
+"unsure select 'automatic' and the receiver will attempt to determine this "
+"for you. If nothing is connected to this port, select 'nothing connected'."
+msgstr ""
+"Velg satellitten som er koblet til Port-C på din veksler. Hvis du er usikker "
+"velg 'automatisk' og mottakeren vil prøve å finne dette for deg. Hvis "
+"ingenting er tilkoblet denne porten, velg 'ingenting tilkoblet'."
+
+msgid ""
+"Select the satellite which is connected to Port-D of your switch. If you are "
+"unsure select 'automatic' and the receiver will attempt to determine this "
+"for you. If nothing is connected to this port, select 'nothing connected'."
+msgstr ""
+"Velg satellitten som er koblet til Port-D på din veksler. Hvis du er usikker "
+"velg 'automatisk' og mottakeren vil prøve å finne dette for deg. Hvis "
+"ingenting er tilkoblet denne porten, velg 'ingenting tilkoblet'."
+
+msgid ""
+"Select the satellite you want to configure. Once that satellite is "
+"configured you can select and configure other satellites that will be "
+"accessed using this same tuner."
+msgstr ""
+"Velg satellitten du vil konfigurere. Når satellitten er konfigurert kan du "
+"velge og konfigurere andre satellitter som vil bruke den samme tuner."
+
+msgid ""
+"Select the satellite your dish receives from. If you are unsure select "
+"'automatic' and the receiver will attempt to determine this for you."
+msgstr ""
+"Velg satellitten din parabol mottar fra. Hvis du er usikker velg "
+"'automatisk' og mottakeren vil forsøke å finne denne for deg."
+
+msgid "Select the tuner that controls the motorised dish."
+msgstr "Velg mottakeren som styrer motorisert parabol."
+
+msgid "Select the tuner that this loopthrough depends on."
+msgstr "Velg tuneren som denne gjennomgangssløyfen er avhengig av."
+
+msgid ""
+"Select the tuner to which the signal cable of the Unicable device is "
+"connected."
+msgstr "Velg tuneren som Unicable signalkabel enheten er tilkoblet."
+
+msgid ""
+"Select the type of LNB/device being used (normally 'Universal'). If your LNB "
+"type is not available select 'user defined'."
+msgstr ""
+"Velg LNB type/enhet som blir brukt (normalt 'Universal'). Hvis din LNB type "
+"ikke er tilgjengelig velg 'brukerdefinert'."
+
+msgid "Select the type of Unicable device you are using."
+msgstr "Velg Unicable type enhet du bruker."
 
 msgid "Select upgrade source"
 msgstr "Velg oppdateringssted"
@@ -6416,17 +6860,44 @@ msgid "Select upgrade source to edit."
 msgstr "Rediger oppdateringssted."
 
 #
+msgid "Select your ATSC provider."
+msgstr "Velg din ATSC leverandør."
+
+#
 msgid "Select your Skin"
 msgstr "Velg et utseende"
 
+msgid "Select your country. If not available select 'all'."
+msgstr "Velg ditt land. Hvis ikke tilgjengelig velg 'alle'."
+
+msgid ""
+"Select your provider and region. If not present in this list you will need "
+"to select one of the other 'service scan types'."
+msgstr ""
+"Velg leverandør og region. Hvis den ikke finnes i listen må du velge en av "
+"de andre 'skannings tjenestetypene'."
+
 msgid "Select your provider, and press OK to start the scan"
 msgstr "Velg distributør, tast OK for søk"
+
+msgid ""
+"Select your region. If not available change 'Country' to 'all' and select "
+"one of the default alternatives."
+msgstr ""
+"Velg din region. Hvis ikke tilgjengelig kan du endre 'Land' til 'alle' og "
+"velg ett standard alternativ."
 
 msgid "Selecting satellites 1 (USALS)"
 msgstr "Velger satellitene 1 (USALS)"
 
 msgid "Selecting satellites 2 (USALS)"
 msgstr "Velger satellitene 2 (USALS)"
+
+msgid ""
+"Selecting this option allows you to configure a group of satellites in one "
+"block."
+msgstr ""
+"Dette alternativet lar deg konfigurere en gruppe av satellitter i en blokk."
 
 msgid "Send 'sourceactive' before zap timers"
 msgstr "Utsend 'sourceactive' før zap timere"
@@ -6531,7 +7002,7 @@ msgid "Set PIN"
 msgstr "Velg PIN"
 
 msgid "Set all hotkey to default?"
-msgstr "Sette alle snarveistaster til standard?"
+msgstr "Sett alle snarveistaster til standard?"
 
 msgid "Set blocktimes by weekday"
 msgstr "Still inn blokkeringstid med ukedager"
@@ -6559,6 +7030,16 @@ msgstr "Sett grenser"
 
 msgid "Set pin code persistent"
 msgstr "Velg gyldig PIN kode"
+
+msgid ""
+"Set sequence repeats if your aerial system requires this. Normally if the "
+"aerial system has been configured correctly sequence repeats will not be "
+"necessary. If yours does, recheck you have command order set correctly."
+msgstr ""
+"Sekvens gjentakelse brukes hvis antenne systemet krever dette. Normalt hvis "
+"antenne systemet er konfigurert riktig vil sekvens gjentakelse ikke være "
+"nødvendig. Hvis ditt gjør, må du sjekke på nytt at kommando rekkefølgen er "
+"riktig innstilt."
 
 msgid "Set startup service"
 msgstr "Velg denne som oppstartskanal"
@@ -6590,6 +7071,9 @@ msgstr "Innstillinger"
 #
 msgid "Setup"
 msgstr "Innstilling"
+
+msgid "Setup hard disk"
+msgstr "Oppsett harddisk"
 
 msgid "Setup menu"
 msgstr "Menyoppsett"
@@ -6826,7 +7310,7 @@ msgid "Single step (GOP)"
 msgstr "Enkelt trinn (GOP)"
 
 msgid "Sint Maarten (Dutch part)"
-msgstr "Sint Maarten"
+msgstr "Saint Maarten (nederlandsk del)"
 
 msgid "Site latitude"
 msgstr "Mottakers breddegrad"
@@ -6896,6 +7380,9 @@ msgstr "Liten framdriftsbar"
 msgid "Smartcard PIN"
 msgstr "Smartkort PIN"
 
+msgid "Smooth"
+msgstr "Glatt"
+
 msgid "Social/Political/Economics"
 msgstr "Sosial/Politisk/Økonomisk"
 
@@ -6931,9 +7418,6 @@ msgstr "Solomonøyene"
 
 msgid "Somalia"
 msgstr "Somalia"
-
-msgid "Some error occured - Please try later"
-msgstr "En feil oppstod - Vennligst prøv senere"
 
 #
 msgid "Some plugins are not available:\n"
@@ -7192,6 +7676,9 @@ msgstr "Stopp gjeldende strøm"
 msgid "Stop entry"
 msgstr "Stopp oppføring"
 
+msgid "Stop play TV"
+msgstr "Stopp avspille TV"
+
 msgid "Stop playing this movie?"
 msgstr "Stopp avspillingen?"
 
@@ -7425,7 +7912,7 @@ msgstr "System - Modulasjon"
 
 #. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
 msgid "TRANSLATOR_INFO"
-msgstr "Oppdatert: 11.11.2017 av GeirJ"
+msgstr "Sist oppdatert: 18.02.2018"
 
 #
 msgid "TS file is too large for ISO9660 level 1!"
@@ -7624,11 +8111,9 @@ msgstr ""
 
 #, python-format
 msgid ""
-"The status of the current beta image could not be checked because %s can not "
-"be reached."
-msgstr ""
-"Status for dagens beta oppdatering kan ikke kontrolleres fordi %s ikke "
-"finnes for øyeblikket."
+"The status of the current image could not be checked because %s can not be "
+"reached."
+msgstr "Kan ikke kontrollere status for gjeldende programvare oppdatering %s."
 
 #
 msgid "The timer file (timers.xml) is corrupt and could not be loaded."
@@ -7691,6 +8176,10 @@ msgstr ""
 "Denne DVD RW er allerede formatert - reformatering sletter alt innhold på "
 "platen."
 
+#, python-format
+msgid "This field allows you to search an additional symbol rate up to %s."
+msgstr "Dette feltet lar deg søke en ekstra symbolhastighet opp til %s."
+
 msgid ""
 "This info is for developers only.\n"
 "For a normal users it is not relevant.\n"
@@ -7701,6 +8190,38 @@ msgstr ""
 "For en vanlig bruker er den uvesentlig.\n"
 "Vær vennlig ikke få panikk hvis det vises informasjon som ser mistenkelig ut!"
 
+msgid ""
+"This is a multitype tuner. Available options depend on the hardware. Cable "
+"and terrestrial cannot be configured at the same time. If you want to use as "
+"cable + satellite or terrestrial + satellite, configure cable/terrestrial "
+"first and then save. Re-open and configure again as satellite."
+msgstr ""
+"Dette er en multitype tuner. Tilgjengelige alternativer avhenger av "
+"maskinvaren. Kabel og bakkenett kan ikke konfigureres på samme tid. Hvis du "
+"vil bruke som kabel + satellitt eller bakkenett + satellitt, konfigurer "
+"kabel/bakkenett først og deretter lagre. Åpne på nytt og konfigurer som "
+"satellitt."
+
+msgid ""
+"This is the order in which DiSEqC commands are sent to the aerial system. "
+"The order must correspond exactly with the order the physical devices are "
+"arranged along the signal cable (starting from the receiver end)."
+msgstr ""
+"Dette er rekkefølgen som DiSEqC kommandoene sendes til antenne systemet. "
+"Rekkefølgen må tilsvare nøyaktig rekkefølgen de fysiske enhetene er ordnet "
+"langs signalkabelen (starter fra mottaker og utover)."
+
+msgid ""
+"This option allows to reduce the block-noise in the picture. Obviously this "
+"is at the cost of the picture's sharpness."
+msgstr ""
+"Med dette valget kan du redusere blokk-støy i bildet. Åpenbart går dette på "
+"bekostning av bilde skarpheten."
+
+msgid "This option allows to set the level of dynamic contrast of the picture."
+msgstr ""
+"Med dette valget kan du stille inn nivået for dynamisk kontrast i bildet."
+
 msgid "This option allows you can config the Colordepth for UHD"
 msgstr "Med dette valget kan du justere fargedybde for UHD"
 
@@ -7709,6 +8230,20 @@ msgstr "Med dette valget kan du justere fargespekter for HDR."
 
 msgid "This option allows you can config the Colorspace from Auto to RGB"
 msgstr "Med dette valget kan du velge fargerom fra Auto til RGB"
+
+msgid ""
+"This option allows you enable smoothing filter to control the dithering "
+"process."
+msgstr "Med dette valget kan du finjustere mykheten i utjamnings prosessen."
+
+msgid "This option allows you enable the vertical scaler dejagging."
+msgstr "Med dette valget kan du bruke den vertikale scaler dejagging."
+
+msgid "This option allows you to boost the blue tones in the picture."
+msgstr "Med dette valget kan du øke blå toner i bildet."
+
+msgid "This option allows you to boost the green tones in the picture."
+msgstr "Med dette valget kan øke grønn toner i bildet."
 
 msgid "This option allows you to change the virtuell loadspeaker position."
 msgstr "Med dette valget kan du endre kunstig høyttaler ballanse."
@@ -7724,11 +8259,60 @@ msgstr "Med dette valget kan du velge 3D surround softlimiter."
 msgid "This option allows you to enable 3D surround sound."
 msgstr "Med dette valget kan du velge 3D surround lyd."
 
+msgid "This option allows you to view the old and new settings side by side."
+msgstr ""
+"Med dette valget kan du sammenligne gammel og ny innstilling side ved side."
+
 msgid "This option can be useful for long HDMI cables."
 msgstr "Dette alternativet kan være nyttig for lange HDMI-kabler."
 
 msgid "This option configures you can set auto volume level."
 msgstr "Med dette valget kan du stille inn auto lydstyrke nivå."
+
+msgid ""
+"This option set the level of surpression of mosquito noise (Mosquito Noise "
+"is random aliasing as a result of strong compression). Obviously this goes "
+"at the cost of picture details."
+msgstr ""
+"Med dette valget kan du finjustere mosquito støy (Mosquito støy er tilfeldig "
+"aliasing som følge av kraftig komprimering). Tydeligvis går dette på "
+"bekostning av bildedetaljer."
+
+msgid "This option sets  the picture contrast."
+msgstr "Med dette valget kan du justere bilde kontrast."
+
+msgid "This option sets the picture brightness."
+msgstr "Med dette valget kan du justere bilde lysstyrke."
+
+msgid "This option sets the picture flesh tones."
+msgstr "Med dette valget kan du justere bilde fyldighets styrke."
+
+msgid "This option sets the picture hue."
+msgstr "Med dette valget kan du justere bilde fargetoner."
+
+msgid "This option sets the picture saturation."
+msgstr "Med dette valget kan du justere bilde metning."
+
+msgid ""
+"This option sets the scaler sharpness, used when stretching picture from 4:3 "
+"to 16:9."
+msgstr ""
+"Med dette valget kan du justere bilde skarphet, brukt når du strekker ut "
+"bilde fra 4:3 til 16:9."
+
+msgid ""
+"This option sets the surpression of false digital contours, that are the "
+"result of a limited number of discrete values."
+msgstr ""
+"Med dette valget kan du justere dempning i falske digitale konturer, som er "
+"resultat av et begrenset antall verdier."
+
+msgid ""
+"This option sets up the picture sharpness, used when the picture is being "
+"upscaled."
+msgstr ""
+"Med dette valget kan du justere bilde skarphet, brukt når bildet blir "
+"oppskalert."
 
 #
 msgid "This plugin is installed."
@@ -7749,6 +8333,32 @@ msgstr "Dette tillegget vil bli slettet."
 #, python-format
 msgid "This receiver cannot decode %s streams!"
 msgstr "Denne mottakeren kan ikke dekode %s strømmer!"
+
+msgid ""
+"This setting allows the tuner configuration to be a duplication of how "
+"another tuner is already configured."
+msgstr ""
+"Denne innstillingen dupliserer mottaker konfigurasjonen hvordan en annen "
+"mottaker allerede er konfigurert."
+
+msgid ""
+"This setting depends on your cable provider and location. If you don't know "
+"the correct setting refer to the menu in the official cable receiver, or get "
+"it from your cable provider, or seek help via internet forum."
+msgstr ""
+"Denne innstillingen avhenger av din kabel-leverandør og plassering. Hvis du "
+"ikke kjenner den riktige innstillingen se menyen i den offisielle kabelen "
+"mottakeren, eller få det fra kabelleverandøren din, eller søke hjelp via "
+"Internett forum."
+
+msgid ""
+"This setting is for special setups only. It gives this LNB higher priority "
+"over other LNBs with lower values. The free LNB with the highest priority "
+"will be the first LNB selected for tuning services."
+msgstr ""
+"Denne innstillingen er bare for spesielle oppsett. Det gir denne LNB høyere "
+"prioritet over andre LNBs med lavere verdier. LNB med høyest prioritet vil "
+"være den første LNB valgt for tuning tjenester."
 
 #
 msgid ""
@@ -8125,6 +8735,9 @@ msgstr "To"
 msgid "Type"
 msgstr "Type"
 
+msgid "Type of LNB/device"
+msgstr "Type LNB/enhet"
+
 msgid "Type of scan"
 msgstr "Søketype"
 
@@ -8137,6 +8750,15 @@ msgstr "URL"
 #
 msgid "USALS"
 msgstr "USALS"
+
+msgid ""
+"USALS automatically moves a motorised dish to the correct satellite based on "
+"the coordinates entered by the user. Without USALS each satellite will need "
+"to be setup and saved individually."
+msgstr ""
+"USALS flytter en motorisert parabol til riktig satellitt basert på "
+"koordinatene angitt av brukeren. Uten USALS må hver satellitt installeres og "
+"lagres enkeltvis."
 
 msgid "USALS calibration"
 msgstr "USALS kalibrering"
@@ -8230,12 +8852,15 @@ msgstr "Oppdater"
 msgid "Update and ask to reboot"
 msgstr "Oppdater og start på nytt manuelt"
 
+msgid "Update and reboot"
+msgstr "Oppdater og start på nytt"
+
 msgid "Update and reboot (recommended)"
-msgstr "Oppdater og start på nytt automatisk (anbefalt)"
+msgstr "Oppdater og start på nytt (anbefalt)"
 
 #
 msgid "Update channel list only"
-msgstr "Oppdater bare kanallisten"
+msgstr "Oppdater kun kanallisten"
 
 #, python-format
 msgid "Update completed, %d package was installed."
@@ -8248,7 +8873,9 @@ msgstr "Oppdateringen er ferdig. Vil du starte mottakeren på nytt?"
 
 msgid ""
 "Update failed. Your receiver does not have a working internet connection."
-msgstr "Oppdateringen mislyktes. Mottakeren mangler internettforbindelse."
+msgstr ""
+"Oppdatering mislyktes. Mottakeren din har ikke en fungerende "
+"internettforbindelse."
 
 msgid "Update has completed."
 msgstr "Oppdateringen er ferdig."
@@ -8258,7 +8885,7 @@ msgstr "Oppdateringssted er ikke tilgjengelig."
 
 #
 msgid "Updating software catalog"
-msgstr "Oppdaterer programvare mappe"
+msgstr "Oppdaterer programvarekatalog"
 
 #
 msgid "Upgrading"
@@ -8280,7 +8907,7 @@ msgid "Use DHCP"
 msgstr "Bruk DHCP"
 
 msgid "Use HDMI pre-emphasis"
-msgstr "Bruk HDMI forhåndsfokus"
+msgstr "Bruk HDMI forhåndsvalg"
 
 msgid "Use TV remote control"
 msgstr "Bruk fjernkontroll tilhørende TV"
@@ -8589,7 +9216,7 @@ msgid ""
 msgstr ""
 "Advarsel!\n"
 "Dette er en funksjon for viderekommende brukere.\n"
-"Skal oppdagelse av tidtakerkonflikt ikke brukes?"
+"Virkelig frakoble oppdagelse av tidtakerkonflikt?"
 
 msgid "Warning: no LNB; using factory defaults."
 msgstr "Advarsel: ingen LNB; bruker standardinnstillinger."
@@ -8687,20 +9314,6 @@ msgid ""
 msgstr ""
 "Når bildet har et sideforhold på 4:3 kan du velge om det skal skaleres/"
 "strekkes ut."
-
-msgid ""
-"When you do a factory reset, you will lose ALL your configuration data\n"
-"(including bouquets, services, satellite data ...)\n"
-"After completion of factory reset, your receiver will restart "
-"automatically!\n"
-"\n"
-"Really do a factory reset?"
-msgstr ""
-"Når mottakeren nullstilles, vil ALLE innstilte data slettes\n"
-"(dette gjelder kanallister, tjenester, satellittdata osv...)\n"
-"Når nullstilling er ferdig vil mottakeren automatisk starte på nytt!\n"
-"\n"
-"Starte nullstilling?"
 
 msgid "Where to save temporary timeshift recordings?"
 msgstr "Hvor skal midlertidige tidsskift opptak lagres?"
@@ -8801,7 +9414,7 @@ msgid "Yes, and delete this movie"
 msgstr "Ja, slett denne filmen"
 
 msgid "Yes, delete this movie and return to movie list"
-msgstr "Ja, slett dette opptaket og returner til opptaksliste"
+msgstr "Ja, slett dette opptaket og gå til opptakslisten"
 
 #
 msgid "Yes, only from deep standby"
@@ -8812,6 +9425,12 @@ msgstr "Ja, bare fra avslått modus"
 
 msgid "Yes, returning to movie list"
 msgstr "Ja, returnerer til opptaksliste"
+
+msgid "Yes, with backup"
+msgstr "Ja, med sikkerhetskopi"
+
+msgid "Yes, without backup"
+msgstr "Ja, uten sikkerhetskopi"
 
 msgid "Yesterday"
 msgstr "I går"
@@ -8917,7 +9536,7 @@ msgstr ""
 "\n"
 
 msgid "You didn't select a channel to record from."
-msgstr "Du valgte ingen opptakskanal."
+msgstr "Du valgte ingen kanal til opptak."
 
 #
 #, python-format
@@ -8927,9 +9546,6 @@ msgstr "Vent litt %s!"
 #, python-format
 msgid "You must switch to the service %s (%s - '%s')!\n"
 msgstr "Gå til kanalen %s (%s - '%s')!\n"
-
-msgid "You system does not support ext4"
-msgstr "Systemet ditt støtter ikke ext4"
 
 msgid ""
 "Your collection exceeds the size of a single layer medium, you will need a "
@@ -8959,6 +9575,20 @@ msgstr "Internett forbindelsen fungerer (ip:%s)"
 msgid "Your network configuration has been activated."
 msgstr "Nettverksoppsettet er aktivert."
 
+msgid ""
+"Your receiver can use SCPC optimized search range. Consult your receiver's "
+"manual for more information."
+msgstr ""
+"Mottakeren kan bruke SCPC optimalisert søkeområde. Se din mottakers "
+"bruksanvisning for mer informasjon."
+
+msgid ""
+"Your receiver can use tone amplitude. Consult your receiver's manual for "
+"more information."
+msgstr ""
+"Mottakeren kan bruke tone amplitude. Se din mottakers bruksanvisning for mer "
+"informasjon."
+
 msgid "Your receiver does not have an internet connection"
 msgstr "Mottakeren mangler internett forbindelse"
 
@@ -8987,7 +9617,7 @@ msgstr ""
 "startes på nytt."
 
 msgid "Your receiver will got to stand by due to the sleeptimer."
-msgstr "Din mottaker vil gå i standby pga. sovetidtakeren."
+msgstr "Tidtakeren vil slå av din mottaker."
 
 msgid "Your receiver will got to standby due to inactivity."
 msgstr "Mottakeren slår seg av fordi den har stått ubrukt."
@@ -9039,12 +9669,12 @@ msgstr "Gå opp"
 
 #, python-format
 msgid "Zapped to timer service %s as PiP!"
-msgstr "Gikk til opptak %s som PiP!"
+msgstr "Gikk til tidtakertjeneste %s som PiP!"
 
 #
 #, python-format
 msgid "Zapped to timer service %s!"
-msgstr "Gikk til tidsopptak %s!"
+msgstr "Gikk til tidtakertjeneste %s!"
 
 msgid "Zgemma H.S/H.2S/H.2H/H5/H7"
 msgstr "Zgemma H.S/H.2S/H.2H/H5/H7"
@@ -9089,7 +9719,7 @@ msgstr "avbryt alternativ redigering"
 
 #
 msgid "abort bouquet edit"
-msgstr "avbryt redigering av kanalliste"
+msgstr "avbryt kanalliste redigering"
 
 #
 msgid "abort favourites edit"
@@ -9304,7 +9934,7 @@ msgid "copy to bouquets"
 msgstr "kopiere til kanallister"
 
 msgid "create directory"
-msgstr "opprett mappe"
+msgstr "Opprett mappe"
 
 #
 msgid "daily"
@@ -9589,7 +10219,7 @@ msgid "init modules"
 msgstr "igangsett modulene"
 
 msgid "insert mark here"
-msgstr "sett et merke her"
+msgstr "sett inn merke her"
 
 msgid "invalid type"
 msgstr "ugyldig type"
@@ -10096,12 +10726,12 @@ msgid "skip forward"
 msgstr "gå framover"
 
 #, python-format
-msgid "slot%s - %s"
-msgstr "slot%s - %s"
+msgid "slot%s - %s (current image) with, backup"
+msgstr "plass%s - %s (gjeldende system) med sikkerhetskopi"
 
 #, python-format
-msgid "slot%s - %s (current image)"
-msgstr "slot%s - %s (gjeldende bilde)"
+msgid "slot%s - %s (current image), without backup"
+msgstr "plass%s - %s (gjeldende system) uten sikkerhetskopi"
 
 #, python-format
 msgid "slot%s - %s mode 1"
@@ -10120,8 +10750,20 @@ msgid "slot%s - %s mode 12 (current image)"
 msgstr "slot%s - %s modus 12 (gjeldende bilde)"
 
 #, python-format
-msgid "slot%s - empty"
-msgstr "slot%s - tom"
+msgid "slot%s - %s, with backup"
+msgstr "plass%s - %s, med sikkerhetskopi"
+
+#, python-format
+msgid "slot%s - %s, without backup"
+msgstr "plass%s - %s, uten sikkerhetskopi"
+
+#, python-format
+msgid "slot%s - empty, with backup"
+msgstr "plass%s - tom, med sikkerhetskopi"
+
+#, python-format
+msgid "slot%s - empty, without backup"
+msgstr "plass%s - tom, uten sikkerhetskopi"
 
 msgid "soap/melodram/folkloric"
 msgstr "såpe/melodrama/folklore"
@@ -10370,8 +11012,8 @@ msgstr "gått til"
 msgid "Audio / Video"
 msgstr "Audio / Video innstilling"
 
-msgid "Convert ext3 filesystem to ext4"
-msgstr "Konverter ext3 filsystem til ext4"
+msgid "Automatic scan"
+msgstr "Automatisk søk"
 
 msgid "Expert settings"
 msgstr "Ekspert innstilling"
@@ -10427,7 +11069,7 @@ msgid "SoftCam / CI"
 msgstr "SoftCam / CI"
 
 msgid "Standby / restart"
-msgstr "Av/på strømvalg"
+msgstr "Standby / start på nytt"
 
 msgid "Tuner configuration"
 msgstr "Tuneroppsett"
@@ -11094,8 +11736,14 @@ msgid ""
 msgstr ""
 "Hvis aktivert, display viser 12 tegn istedenfor 8, men bare i latin-1/overs."
 
-msgid "Ignore DVB namespace sub network"
-msgstr "Ignorer DVB namespace sub nettverk"
+msgid "Ignore DVB-C namespace sub network"
+msgstr "Ignorer DVB-C navneområde i nettverket"
+
+msgid "Ignore DVB-S namespace sub network"
+msgstr "Ignorer DVB-S navneområde i nettverket"
+
+msgid "Ignore DVB-T namespace sub network"
+msgstr "Ignorer DVB-T navneområde i nettverket"
 
 msgid "Include AIT in http streams"
 msgstr "Inkluder AIT i http strøm"
@@ -11177,7 +11825,7 @@ msgstr ""
 "dekodes i ettertid (offline dekoding). Standardinnstilling: av."
 
 msgid "Never decrypt while recording"
-msgstr "Ikke dekode under opptak"
+msgstr "Aldri dekryptere under opptak"
 
 msgid "Number of channels shown in channel selection list"
 msgstr "Antall kanaler vist i kanallisten"
@@ -11269,8 +11917,8 @@ msgid ""
 "Replace `- ` in dialogs with colored text per speaker (like teletext "
 "subtitles for the hearing impaired)"
 msgstr ""
-"Erstatt `- ` i dialogboksen med farget tekst for tale (som tekst-TV tekst "
-"for hørselshemmede)"
+"Erstatt `- ` i dialoger med farget tekst per taler (som i tekst-TV tekst for "
+"hørselshemmede)"
 
 msgid "Require authentication for http streams"
 msgstr "Krev godkjenning for http strømmer"
@@ -11513,7 +12161,7 @@ msgid "URL of fallback remote receiver"
 msgstr "URL for ekstra eksternmottaker"
 
 msgid "Use 12 characters display mode"
-msgstr "Bruk 12 tegns display modus"
+msgstr "Bruk 12 tegns display valg"
 
 msgid "Use EIT EPG information when it is available."
 msgstr "Bruk EIT EPG informasjon hvis tilgjengelig."
@@ -11898,7 +12546,7 @@ msgid ""
 "configure in which resolution pictures are displayed with the picture viewer "
 "and movieplayer"
 msgstr ""
-"Still inn oppløsningen til bilde og filmavspiller som skal vises på skjermen"
+"Still inn oppløsningen til bilde og film spiller som skal vises på skjermen"
 
 #
 msgid "0"
@@ -12041,13 +12689,6 @@ msgstr "Radio"
 #
 msgid "Reception settings"
 msgstr "Innstilling mottaksforhold"
-
-msgid "Satfinder"
-msgstr "Satellittsøker"
-
-#
-msgid "Seek"
-msgstr "Søk"
 
 msgid "Select HDD"
 msgstr "Velg hdd/ssd"
@@ -12410,7 +13051,7 @@ msgid "OK, guide me through the upgrade process"
 msgstr "OK, start oppgraderings prosessen"
 
 msgid "The backup failed. Please choose a different backup location."
-msgstr "Sikkerhetskopien feilet. Velg en annen mappe for sikkerhetskopien."
+msgstr "Sikkerhetskopien mislyktes. Vennligst velg en annen reserveplassering."
 
 #
 msgid ""
@@ -12450,7 +13091,8 @@ msgid ""
 "You have chosen to backup your settings. Please press OK to start the backup "
 "now."
 msgstr ""
-"Sikkerhetskopiering av innstillingene er valgt. Trykk OK for å fortsette."
+"Du har valgt å sikkerhetskopiere innstillingene dine. Vennligst trykk OK for "
+"å starte sikkerhetskopien nå."
 
 msgid ""
 "You have chosen to restore your settings. Enigma2 will restart after "
@@ -12475,8 +13117,8 @@ msgid ""
 "Your backup succeeded. We will now continue to explain the further upgrade "
 "process."
 msgstr ""
-"Sikkerhetskopien er lagret. Vi vil nå fortsette videre med "
-"oppdateringsprosessen."
+"Sikkerhetskopien din lyktes. Vi vil nå fortsette å forklare den videre "
+"oppdateringen."
 
 msgid "Your receiver is shutting down. Please stand by..."
 msgstr "Mottakeren slår seg av. Vennligst vent litt..."
@@ -12514,8 +13156,88 @@ msgstr ""
 msgid "Video mode selection."
 msgstr "Innstilling for bilde."
 
-#~ msgid "Flash Image"
-#~ msgstr "Installer operativsystem"
+#~ msgid "Press OK to start the scan"
+#~ msgstr "Trykk OK og start søk"
+
+#~ msgid ""
+#~ "When you do a factory reset, you will lose ALL your configuration data\n"
+#~ "(including bouquets, services, satellite data ...)\n"
+#~ "After completion of factory reset, your receiver will restart "
+#~ "automatically!\n"
+#~ "\n"
+#~ "Really do a factory reset?"
+#~ msgstr ""
+#~ "Når mottakeren nullstilles, vil ALLE innstilte data slettes\n"
+#~ "(dette gjelder kanallister, tjenester, satellittdata osv...)\n"
+#~ "Når nullstilling er ferdig vil mottakeren automatisk starte på nytt!\n"
+#~ "\n"
+#~ "Starte nullstilling?"
+
+#~ msgid "Satfinder"
+#~ msgstr "Satellittsøker"
+
+#~ msgid "Convert ext3 to ext4"
+#~ msgstr "Konverter ext3 til ext4"
+
+#~ msgid "Converting ext3 to ext4..."
+#~ msgstr "Konverterer ext3 til ext4..."
+
+#
+#~ msgid "Diasbled"
+#~ msgstr "Deaktivert"
+
+#~ msgid ""
+#~ "Do you really want to convert the filesystem?\n"
+#~ "You cannot go back!"
+#~ msgstr ""
+#~ "Konvertere filsystemet?\n"
+#~ "Dette kan ikke angres!"
+
+#~ msgid "You system does not support ext4"
+#~ msgstr "Systemet ditt støtter ikke ext4"
+
+#~ msgid "Convert ext3 filesystem to ext4"
+#~ msgstr "Konverter ext3 filsystem til ext4"
+
+#
+#~ msgid "Not configured"
+#~ msgstr "Ikke konfigurert"
+
+#
+#~ msgid "Nothing connected"
+#~ msgstr "Ikke noe er tilkoblet"
+
+#
+#~ msgid "Blue boost"
+#~ msgstr "Blå boost"
+
+#
+#~ msgid ""
+#~ "Do you want to flash image\n"
+#~ "%s\n"
+#~ "without backup?"
+#~ msgstr ""
+#~ "Ønsker du å installere programvare\n"
+#~ "%s\n"
+#~ "uten sikkerhetskopi?"
+
+#
+#~ msgid "Green boost"
+#~ msgstr "Grønn boost"
+
+#~ msgid ""
+#~ "Recording(s) are in progress or coming up in few seconds!\n"
+#~ "Do you still want to flash image\n"
+#~ "%s\n"
+#~ "without backup?"
+#~ msgstr ""
+#~ "Et opptak er på gang og starter om få sekunder!\n"
+#~ "Ønsker du allikevel å installere programvare\n"
+#~ "%s\n"
+#~ "uten sikkerhetskopi?"
+
+#~ msgid "slot%s - %s"
+#~ msgstr "slot%s - %s"
 
 #~ msgid "Disclaimer"
 #~ msgstr "Ansvarsfraskrivelse"
