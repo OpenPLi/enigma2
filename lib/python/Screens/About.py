@@ -235,7 +235,7 @@ class CommitInfo(Screen):
 			commitlog = commitlog.encode('utf-8')
 			self.cachedProjects[self.projects[self.project][1]] = commitlog
 		except:
-			commitlog += _("Currently the commit log cannot be retrieved - please try later again")
+			commitlog += _("Currently the commit log cannot be retrieved, Please try again later")
 		self["AboutScrollLabel"].setText(commitlog)
 
 	def updateCommitLogs(self):
@@ -406,7 +406,7 @@ class Troubleshoot(Screen):
 
 	def appClosed(self, retval):
 		if retval:
-			self["AboutScrollLabel"].setText(_("An error occurred - Please try again later"))
+			self["AboutScrollLabel"].setText(_("An error occurred, Please try again later"))
 
 	def dataAvail(self, data):
 		self["AboutScrollLabel"].appendText(data)
@@ -425,7 +425,7 @@ class Troubleshoot(Screen):
 				if self.container.execute(command):
 					raise Exception, "failed to execute: ", command
 			except Exception, e:
-				self["AboutScrollLabel"].setText("%s\n%s" % (_("An error occurred - Please try again later"), e))
+				self["AboutScrollLabel"].setText("%s\n%s" % (_("An error occurred, Please try again later"), e))
 
 	def cancel(self):
 		self.container.appClosed.remove(self.appClosed)
