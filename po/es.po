@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-13 16:06+0330\n"
+"POT-Creation-Date: 2018-02-18 12:01+0330\n"
 "PO-Revision-Date: 2018-01-04 21:28+0200\n"
 "Last-Translator: Jose Juan <jzapater@gmail.com>\n"
 "Language-Team: Sfteam  angelo2807@hotmail.com\n"
@@ -713,7 +713,8 @@ msgstr ""
 "Una grabación ha comenzado:\n"
 "%s"
 
-msgid "A recording is currently running on the selected tuner. Please select a different tuner or consider to stop the recording to try again."
+#, fuzzy
+msgid "A recording is currently running on the selected tuner. Please select a different tuner or stop the recording and try again."
 msgstr "Se está ejecutando una grabación en el sintonizador seleccionado. Seleccione un sintonizador diferente o considere detener la grabación para intentarlo de nuevo."
 
 #
@@ -930,7 +931,8 @@ msgid "Adjust 3D settings"
 msgstr "Ajustar configuración 3D"
 
 #
-msgid "Adjust the color settings so that all the color shades are distinguishable, but appear as saturated as possible. If you are happy with the result, press OK to close the video fine-tuning, or use the number keys to select other test screens."
+#, fuzzy
+msgid "Adjust the color settings so that all the color shades are distinguishable but appear as saturated as possible. If you are happy with the result press OK to close the video fine-tuning or use the number keys to select other test screens."
 msgstr "Ajuste la configuración del color de forma que todas las sombras de los colores se distingan, pero que estén tan saturadas como sea posible. Si está contento con el resultado, pulse OK para cerrar el ajuste de video fino, o use una tecla numérica para seleccionar otras pantallas de test."
 
 msgid "Advanced"
@@ -1070,6 +1072,10 @@ msgstr "Un nombre de fichero vacío es ilegal."
 #
 msgid "An error occurred while downloading the packetlist. Please try again."
 msgstr "Hay un error descargando la lista de paquetes. Intente de nuevo."
+
+#, fuzzy
+msgid "An error occurred, Please try again later"
+msgstr "Se ha producido un error. Inténtelo más tarde."
 
 #
 msgid "An unknown error occurred!"
@@ -1644,11 +1650,12 @@ msgstr ""
 msgid "Cannot determine"
 msgstr "No se puede determinar"
 
+#, fuzzy
+msgid "Cannot find any images, Please try again later"
+msgstr "No hay actualizaciones disponibles. Por favor, inténtelo de nuevo más tarde"
+
 msgid "Cannot find any signal ..., aborting !"
 msgstr "No se puede encontrar ninguna señal..., ¡abortando!"
-
-msgid "Cannot find images - please try later"
-msgstr ""
 
 msgid "Cannot move files on a different disk or system to the trash can"
 msgstr "No se puede mover los archivos de una unidad o sistema distintos a la papelera"
@@ -1722,6 +1729,11 @@ msgstr "Canal"
 
 msgid "Channel Info"
 msgstr "Información de canal"
+
+#
+#, fuzzy
+msgid "Channel context menu"
+msgstr "Menú lista de canales"
 
 #
 msgid "Channel list type"
@@ -2278,7 +2290,8 @@ msgstr "Configurar su RED interna"
 msgid "Configure your network again"
 msgstr "Configurar su red de nuevo"
 
-msgid "Configure your network settings, and press OK to start the scan"
+#, fuzzy
+msgid "Configure your network settings and press OK to scan"
 msgstr "Configure la configuración de red y pulse OK para iniciar la exploración"
 
 #
@@ -2363,20 +2376,14 @@ msgstr "Reproducir DVD"
 msgid "Contrast"
 msgstr "Contraste"
 
-msgid "Convert ext3 filesystem to ext4"
-msgstr "Convierte el sistema de archivos ext3 a ext4"
-
-msgid "Convert ext3 to ext4"
-msgstr "Convertir ext3 a ext4"
-
-msgid "Converting ext3 to ext4..."
-msgstr "Convertir ext3 a ext4"
-
 msgid "Cook Islands"
 msgstr ""
 
 msgid "Copy"
 msgstr "Copiar"
+
+msgid "Copy to..."
+msgstr ""
 
 msgid "Costa Rica"
 msgstr ""
@@ -2384,11 +2391,11 @@ msgstr ""
 msgid "Cote d'Ivoire"
 msgstr ""
 
+msgid "Could not find any suitable media, Please insert a media (e.g. USB stick) and try again later"
+msgstr ""
+
 msgid "Could not find installed channel list."
 msgstr "No se pudo encontrar la lista de canales instalados."
-
-msgid "Could not find suitable media - Please insert a media (e.g. USB stick) and try again!"
-msgstr ""
 
 #
 msgid "Could not load medium! No disc inserted?"
@@ -2484,7 +2491,8 @@ msgstr "Transponder actual"
 msgid "Current value: "
 msgstr "Valor actual:"
 
-msgid "Currently the commit log cannot be retrieved - please try later again"
+#, fuzzy
+msgid "Currently the commit log cannot be retrieved, Please try again later"
 msgstr "Actualmente no se puede recuperar el registro de confirmación. Vuelve a intentarlo más tarde."
 
 #
@@ -2818,11 +2826,6 @@ msgstr "Puerto DiSEqC %s: %s"
 msgid "DiSEqC-tester settings"
 msgstr "Configuración de DiSEqC-Tester"
 
-#
-#, fuzzy
-msgid "Diasbled"
-msgstr "Desactivado"
-
 msgid "Did you see all eight arrow heads?"
 msgstr "¿Viste las ocho flechas?"
 
@@ -2938,13 +2941,6 @@ msgid ""
 msgstr ""
 "Realmente quiere chequear el sistema de archivos?\n"
 "¡Esto puede tardar mucho tiempo!"
-
-msgid ""
-"Do you really want to convert the filesystem?\n"
-"You cannot go back!"
-msgstr ""
-"¿Realmente quieres convertir el sistema de archivos?\n"
-"No puedes volver!"
 
 #
 #, python-format
@@ -3083,9 +3079,9 @@ msgid "Don't zap and remove timer"
 msgstr "Añadir/eliminar temporizador para el programa actual"
 
 #
-#, python-format
-msgid "Done - Installed, upgraded or removed %d package (%s)"
-msgid_plural "Done - Installed, upgraded or removed %d packages (%s)"
+#, fuzzy, python-format
+msgid "Done! Installed, upgraded or removed %d package (%s)"
+msgid_plural "Done! Installed, upgraded or removed %d packages (%s)"
 msgstr[0] "Hecho - Instalado, actualizado o eliminados %d paquetes con %s errores"
 msgstr[1] "Hecho - Instalado, actualizado o eliminados %d paquetes con %s errores"
 
@@ -3662,6 +3658,12 @@ msgstr "FTA"
 msgid "Factory reset"
 msgstr "Reinicio de fábrica"
 
+msgid ""
+"Factory reset will restore your receiver to its default configuration. All user data including system settings, tuner configuration, bouquets, services and plugins will be DELETED. Recordings and other files stored on HDD and USB media will remain intact. After completion, the system will restart automatically!\n"
+"\n"
+"Do you really want to proceed?"
+msgstr ""
+
 #
 msgid "Failed"
 msgstr "Falló"
@@ -3730,6 +3732,10 @@ msgstr ""
 
 msgid "File appears to be busy.\n"
 msgstr "El archivo parece estar ocupado.\n"
+
+#, fuzzy
+msgid "File manager"
+msgstr "Nombre del archivo"
 
 msgid "Filename"
 msgstr "Nombre del archivo"
@@ -4367,6 +4373,9 @@ msgstr ""
 msgid "Indonesia"
 msgstr ""
 
+msgid "Indonesian"
+msgstr ""
+
 #
 msgid "Info"
 msgstr "Info"
@@ -4814,6 +4823,11 @@ msgid "List mode"
 msgstr "Modo de lista"
 
 #
+#, fuzzy
+msgid "List of files"
+msgstr "cambiar a lista de archivos"
+
+#
 msgid "List of storage devices"
 msgstr "Lista de dispositivos de almacenamiento"
 
@@ -5165,6 +5179,11 @@ msgstr "Mover al este"
 
 msgid "Move to position X"
 msgstr "Mover a la posición X"
+
+#
+#, fuzzy
+msgid "Move to..."
+msgstr "Mover al este"
 
 #
 msgid "Move west"
@@ -5654,6 +5673,13 @@ msgstr "Nota: cuando está activado, y desea que el modo de espera después de d
 msgid ""
 "Nothing to scan!\n"
 "Please setup your tuner settings before you start a service scan."
+msgstr ""
+"¡Nada a buscar!\n"
+"Por favor ponga la configuración del sintonizador antes de buscar un canal."
+
+#
+#, fuzzy
+msgid "Nothing to scan! Setup your tuner and try again."
 msgstr ""
 "¡Nada a buscar!\n"
 "Por favor ponga la configuración del sintonizador antes de buscar un canal."
@@ -6452,10 +6478,6 @@ msgstr "Pulse OK para seleccionar satélites"
 msgid "Press OK to select/deselect a CAId."
 msgstr "Pulse OK para seleccionar/deseleccionar un CAId."
 
-#
-msgid "Press OK to start the scan"
-msgstr "Pulse OK para comenzar la búsqueda"
-
 msgid "Press OK to toggle the selection"
 msgstr "Pulse OK para alternar la selección"
 
@@ -6749,8 +6771,10 @@ msgstr "Velocidad de refresco"
 msgid "Refresh rate selection."
 msgstr "Selección de velocidad de refresco."
 
-msgid "Refreshing image list - Please wait..."
-msgstr ""
+#
+#, fuzzy
+msgid "Refreshing image list, Please wait..."
+msgstr "Buscando actualizaciones disponibles. Por favor, espere..."
 
 msgid "Refusing to move to the same directory"
 msgstr "Se niega a moverse al mismo directorio"
@@ -6996,11 +7020,15 @@ msgstr "Continuar la posición a %s"
 msgid "Resuming playback"
 msgstr "Continuar reproducción"
 
-msgid "Retreiving image list - Please wait..."
-msgstr ""
+#
+#, fuzzy
+msgid "Retreiving image list, Please wait..."
+msgstr "Leyendo información del complemento. Espere..."
 
-msgid "Retreiving image slots - Please wait..."
-msgstr ""
+#
+#, fuzzy
+msgid "Retreiving image slots, Please wait..."
+msgstr "Buscando actualizaciones disponibles. Por favor, espere..."
 
 #
 msgid "Return to movie list"
@@ -7171,10 +7199,6 @@ msgid "Satellites"
 msgstr "Satélites"
 
 #
-msgid "Satfinder"
-msgstr "Buscador de satélites"
-
-#
 msgid "Sats"
 msgstr "Sats"
 
@@ -7261,12 +7285,27 @@ msgstr "Analizar banda% s"
 msgid "Scan additional SR"
 msgstr "Escanear otro SR"
 
+#, fuzzy, python-format
+msgid "Scan completed, %d channel found."
+msgid_plural "Scan completed, %d channels found."
+msgstr[0] "Exploración completada,% d canal encontrado"
+msgstr[1] "Exploración completada,% d canales encontrados"
+
+#, fuzzy
+msgid "Scan failed!"
+msgstr "¡El escaneo ha fallado!"
+
 #
 msgid "Scan files..."
 msgstr "Escanear Ficheros..."
 
 msgid "Scan options"
 msgstr "Opciones de escaneo"
+
+#
+#, fuzzy
+msgid "Scan state"
+msgstr "estado de la búsqueda"
 
 #
 msgid "Scan wireless networks"
@@ -7488,6 +7527,14 @@ msgstr "Seleccione canal a grabar"
 msgid "Select copy destination for:"
 msgstr "Seleccione el destino de la copia para:"
 
+#, fuzzy
+msgid "Select destination for copy selected files..."
+msgstr "Seleccione el destino para:"
+
+#, fuzzy
+msgid "Select destination for move selected files..."
+msgstr "Seleccione el destino para:"
+
 msgid "Select destination for:"
 msgstr "Seleccione el destino para:"
 
@@ -7497,12 +7544,20 @@ msgstr "Seleccionar directorio para archivo de registro"
 msgid "Select files for backup."
 msgstr "Seleccionar ficheros a backup."
 
+msgid "Select files with 'OK' and then use 'Menu' for select operation"
+msgstr ""
+
 #
 msgid "Select files/folders to backup"
 msgstr "Seleccionar ficheros/carpetas a backup"
 
 msgid "Select function"
 msgstr ""
+
+#
+#, fuzzy
+msgid "Select hard disk"
+msgstr "Seleccione un skin"
 
 msgid "Select horizontal resolution:"
 msgstr ""
@@ -7529,6 +7584,10 @@ msgstr "Seleccionar ubicación"
 #
 msgid "Select movie"
 msgstr "Seleccionar  película"
+
+#, fuzzy
+msgid "Select operation:"
+msgstr "Seleccionar ubicación"
 
 msgid "Select path for logfile"
 msgstr "Seleccionar la ruta de acceso para el archivo de registro"
@@ -7574,16 +7633,16 @@ msgstr ""
 msgid "Select the movie path"
 msgstr "Seleccione la ruta de la película"
 
-msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
 msgid "Select the satellite you want to configure. Once that satellite is configured you can select and configure other satellites that will be accessed using this same tuner."
@@ -7843,6 +7902,11 @@ msgstr "Parámetros"
 #
 msgid "Setup"
 msgstr "Configuración"
+
+#
+#, fuzzy
+msgid "Setup hard disk"
+msgstr "Disco duro"
 
 msgid "Setup menu"
 msgstr "Menu de configuracion"
@@ -8299,9 +8363,6 @@ msgstr ""
 
 msgid "Somalia"
 msgstr ""
-
-msgid "Some error occured - Please try later"
-msgstr "Se ha producido un error. Inténtelo más tarde."
 
 #
 msgid "Some plugins are not available:\n"
@@ -9122,7 +9183,8 @@ msgstr ""
 "¿Seguro que quiere continuar?"
 
 #
-msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
+#, fuzzy
+msgid "This DVD RW medium is already formatted, Reformatting will erase all content on the disc."
 msgstr "El disco DVD-RW está ya formateado - reformatear borrará todos los contenidos del disco."
 
 #, python-format
@@ -9216,7 +9278,7 @@ msgstr "Esta opción puede ser útil para cables HDMI largos."
 msgid "This option configures you can set auto volume level."
 msgstr "Esta opción le permite configurar el nivel de volumen automático."
 
-msgid "This option set the level of surpression of musquito noise (Musquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
+msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr ""
 
 msgid "This option sets  the picture contrast."
@@ -9658,6 +9720,11 @@ msgstr "Dos"
 #
 msgid "Type"
 msgstr "Tipo"
+
+#
+#, fuzzy
+msgid "Type of LNB/device"
+msgstr "Tipo de búsqueda"
 
 #
 msgid "Type of scan"
@@ -10497,20 +10564,6 @@ msgid "When the content has an aspect ratio of 4:3, choose whether to scale/stre
 msgstr "Cuando el contenido tiene una relación de aspecto de 4: 3, elija si desea ampliar / ampliar la imagen."
 
 #
-msgid ""
-"When you do a factory reset, you will lose ALL your configuration data\n"
-"(including bouquets, services, satellite data ...)\n"
-"After completion of factory reset, your receiver will restart automatically!\n"
-"\n"
-"Really do a factory reset?"
-msgstr ""
-"Cuando haga un reseteo de fábrica, perderá todos los datos de configuración\n"
-"(incluyendo listas, canales, datos del satélite...)\n"
-"Después de un reseteo, su receptor se reiniciará automáticamente!\n"
-"\n"
-"¿Quiere hacer un reset de fábrica?"
-
-#
 msgid "Where do you want to backup your settings?"
 msgstr "¿Donde quiere backup su configuración?"
 
@@ -10754,9 +10807,6 @@ msgid ""
 "You need a PC connected to your receiver. If you need further instructions, please visit the website https://openpli.org\n"
 "Your receiver will now be halted. After you have performed the update instructions from the website, your new firmware will ask you to restore your settings."
 msgstr "Necesita un PC conectado al receptor. Si necesita más instrucciones, por favor visite el sitio web https://openpli.org que su receptor se detendrá ahora. Después de haber realizado las instrucciones de actualización desde el sitio web, su nuevo firmware le preguntará para restaurar la configuración."
-
-msgid "You system does not support ext4"
-msgstr "El sistema no admite ext4"
 
 #
 msgid "Your backup succeeded. We will now continue to explain the further upgrade process."
@@ -12301,6 +12351,15 @@ msgstr "®"
 #~ msgid "Constellation"
 #~ msgstr "Constelación"
 
+#~ msgid "Convert ext3 filesystem to ext4"
+#~ msgstr "Convierte el sistema de archivos ext3 a ext4"
+
+#~ msgid "Convert ext3 to ext4"
+#~ msgstr "Convertir ext3 a ext4"
+
+#~ msgid "Converting ext3 to ext4..."
+#~ msgstr "Convertir ext3 a ext4"
+
 #
 #~ msgid "Current version:"
 #~ msgstr "Versión actual:"
@@ -12311,8 +12370,20 @@ msgstr "®"
 #~ msgid "DVB drivers: "
 #~ msgstr "DVB-S"
 
+#
+#, fuzzy
+#~ msgid "Diasbled"
+#~ msgstr "Desactivado"
+
 #~ msgid "Disclaimer"
 #~ msgstr "Renuncia"
+
+#~ msgid ""
+#~ "Do you really want to convert the filesystem?\n"
+#~ "You cannot go back!"
+#~ msgstr ""
+#~ "¿Realmente quieres convertir el sistema de archivos?\n"
+#~ "No puedes volver!"
 
 #
 #~ msgid "Do you want to do a service scan?"
@@ -12433,12 +12504,20 @@ msgstr "®"
 #~ msgstr "Prepare otro pendrive USB para flasear la imagen."
 
 #
+#~ msgid "Press OK to start the scan"
+#~ msgstr "Pulse OK para comenzar la búsqueda"
+
+#
 #~ msgid "Provider to scan"
 #~ msgstr "Proveedor a buscar"
 
 #
 #~ msgid "Restore is running..."
 #~ msgstr "Restauración está ejecutándose..."
+
+#
+#~ msgid "Satfinder"
+#~ msgstr "Buscador de satélites"
 
 #, fuzzy
 #~ msgid "Select an image to be downloaded"
@@ -12576,6 +12655,20 @@ msgstr "®"
 #~ msgstr "¿Qué quiere buscar?"
 
 #
+#~ msgid ""
+#~ "When you do a factory reset, you will lose ALL your configuration data\n"
+#~ "(including bouquets, services, satellite data ...)\n"
+#~ "After completion of factory reset, your receiver will restart automatically!\n"
+#~ "\n"
+#~ "Really do a factory reset?"
+#~ msgstr ""
+#~ "Cuando haga un reseteo de fábrica, perderá todos los datos de configuración\n"
+#~ "(incluyendo listas, canales, datos del satélite...)\n"
+#~ "Después de un reseteo, su receptor se reiniciará automáticamente!\n"
+#~ "\n"
+#~ "¿Quiere hacer un reset de fábrica?"
+
+#
 #~ msgid "Yes, do a manual scan now"
 #~ msgstr "Si, haga una búsqueda manual ahora"
 
@@ -12590,6 +12683,9 @@ msgstr "®"
 #
 #~ msgid "You have chosen to create a new .NFI flasher bootable USB stick. This will repartition the USB stick and therefore all data on it will be erased."
 #~ msgstr "Ha elegido crear un nuevo .NFI flasher autoarrancable memoria USB. Esto reparticiona la memoria USB y todos los datos serán borrados."
+
+#~ msgid "You system does not support ext4"
+#~ msgstr "El sistema no admite ext4"
 
 #
 #~ msgid ""

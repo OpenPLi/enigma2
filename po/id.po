@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-13 16:06+0330\n"
+"POT-Creation-Date: 2018-02-18 12:01+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Budiarno\n"
 "Language-Team: \n"
@@ -651,7 +651,8 @@ msgstr ""
 "Rekaman telah dimulai:\n"
 "%s"
 
-msgid "A recording is currently running on the selected tuner. Please select a different tuner or consider to stop the recording to try again."
+#, fuzzy
+msgid "A recording is currently running on the selected tuner. Please select a different tuner or stop the recording and try again."
 msgstr "Perekaman sedang berjalan pada penala yg dipilih saat ini. Mohon pilih penala lainnya atau hentikan rekaman untuk mencoba kembali."
 
 msgid ""
@@ -833,7 +834,8 @@ msgstr ""
 msgid "Adjust 3D settings"
 msgstr "Sesuaikan setelan 3D"
 
-msgid "Adjust the color settings so that all the color shades are distinguishable, but appear as saturated as possible. If you are happy with the result, press OK to close the video fine-tuning, or use the number keys to select other test screens."
+#, fuzzy
+msgid "Adjust the color settings so that all the color shades are distinguishable but appear as saturated as possible. If you are happy with the result press OK to close the video fine-tuning or use the number keys to select other test screens."
 msgstr "Sesuaikan setelah warna sehingga semua nuansa warna mudah dibedakan, tapi terlihat sepenuh mungkin. Jika anda senang dengan hasilnya, tekan OK untuk menutup pengaturan video, atau gunakan tombol angka untuk memilih test layar lainnya."
 
 msgid "Advanced"
@@ -958,6 +960,10 @@ msgstr "Nama berkas kosong tidak diperbolehkan."
 
 msgid "An error occurred while downloading the packetlist. Please try again."
 msgstr "Kesalahan terjadi saat unduh daftar paket. Silakan coba lagi"
+
+#, fuzzy
+msgid "An error occurred, Please try again later"
+msgstr "Pembaruan tidak tersedia. Silakan coba lain waktu."
 
 msgid "An unknown error occurred!"
 msgstr "Kesalahan tak dikenal terjadi!"
@@ -1479,11 +1485,12 @@ msgstr ""
 msgid "Cannot determine"
 msgstr "Tak bisa menentukan"
 
+#, fuzzy
+msgid "Cannot find any images, Please try again later"
+msgstr "Pembaruan tidak tersedia. Silakan coba lain waktu."
+
 msgid "Cannot find any signal ..., aborting !"
 msgstr "Tidak menemukan sinyal..., batalkan!"
-
-msgid "Cannot find images - please try later"
-msgstr ""
 
 msgid "Cannot move files on a different disk or system to the trash can"
 msgstr "Tidak bisa memindahkan berkas pada disk atau sistem yg berbeda ke tong sampah"
@@ -1551,6 +1558,10 @@ msgstr "Kanal"
 
 msgid "Channel Info"
 msgstr "Info Kanal"
+
+#, fuzzy
+msgid "Channel context menu"
+msgstr "Menu daftar kanal"
 
 msgid "Channel list type"
 msgstr "Tipe daftar kanal"
@@ -2064,7 +2075,8 @@ msgstr "Atur LAN internal anda"
 msgid "Configure your network again"
 msgstr "Atur kembali jaringan anda"
 
-msgid "Configure your network settings, and press OK to start the scan"
+#, fuzzy
+msgid "Configure your network settings and press OK to scan"
 msgstr "Atur penyetelan jaringan anda, dan tekan OK untuk mulai memindai"
 
 msgid "Configure your wireless LAN again"
@@ -2137,20 +2149,14 @@ msgstr "Putar terus (loop)"
 msgid "Contrast"
 msgstr "Kontras"
 
-msgid "Convert ext3 filesystem to ext4"
-msgstr "Rubah sistem berkas ext3 ke ext4"
-
-msgid "Convert ext3 to ext4"
-msgstr "Rubah ext3 ke ext4"
-
-msgid "Converting ext3 to ext4..."
-msgstr "Merubah ext3 ke ext4..."
-
 msgid "Cook Islands"
 msgstr ""
 
 msgid "Copy"
 msgstr "Salin"
+
+msgid "Copy to..."
+msgstr ""
 
 msgid "Costa Rica"
 msgstr ""
@@ -2158,11 +2164,11 @@ msgstr ""
 msgid "Cote d'Ivoire"
 msgstr ""
 
+msgid "Could not find any suitable media, Please insert a media (e.g. USB stick) and try again later"
+msgstr ""
+
 msgid "Could not find installed channel list."
 msgstr "Daftar kanal terpasang tidak ditemukan."
-
-msgid "Could not find suitable media - Please insert a media (e.g. USB stick) and try again!"
-msgstr ""
 
 msgid "Could not load medium! No disc inserted?"
 msgstr "Tidak bisa memuat media! Tidak ada piringan dimasukkan?"
@@ -2249,7 +2255,8 @@ msgstr "Transponder saat ini"
 msgid "Current value: "
 msgstr "Nilai saat ini: "
 
-msgid "Currently the commit log cannot be retrieved - please try later again"
+#, fuzzy
+msgid "Currently the commit log cannot be retrieved, Please try again later"
 msgstr "Saat ini log pengerjaan tidak bisa didapatkan - coba lagi nanti"
 
 msgid "Custom skip time for '1'/'3' buttons"
@@ -2548,10 +2555,6 @@ msgstr "Port DiSEqC %s: %s"
 msgid "DiSEqC-tester settings"
 msgstr "Pengaturan Pengecek-DiSEqC"
 
-#, fuzzy
-msgid "Diasbled"
-msgstr "Dimatikan"
-
 msgid "Did you see all eight arrow heads?"
 msgstr "Apakah anda melihat semua kedelapan anak panah?"
 
@@ -2655,13 +2658,6 @@ msgid ""
 msgstr ""
 "Anda yakin ingin memeriksa sistem berkas?\n"
 "Ini memerlukan waktu yang cukup lama!"
-
-msgid ""
-"Do you really want to convert the filesystem?\n"
-"You cannot go back!"
-msgstr ""
-"Anda yakin ingin merubah sistem berkas?\n"
-"Anda tak bisa kembali!"
 
 #, python-format
 msgid "Do you really want to delete %s?"
@@ -2784,9 +2780,9 @@ msgstr "Jangan zap dan matikan pewaktu"
 msgid "Don't zap and remove timer"
 msgstr "Jangan zap dan hapus pewaktu"
 
-#, python-format
-msgid "Done - Installed, upgraded or removed %d package (%s)"
-msgid_plural "Done - Installed, upgraded or removed %d packages (%s)"
+#, fuzzy, python-format
+msgid "Done! Installed, upgraded or removed %d package (%s)"
+msgid_plural "Done! Installed, upgraded or removed %d packages (%s)"
 msgstr[0] "Selesai - Terpasang, dinaiktingkatkan atau dihapus %d paket (%s)"
 msgstr[1] "Selesai - Terpasang, dinaiktingkatkan atau dihapus %d paket (%s)"
 
@@ -3303,6 +3299,12 @@ msgstr "FTA"
 msgid "Factory reset"
 msgstr "Parameter Pabrik"
 
+msgid ""
+"Factory reset will restore your receiver to its default configuration. All user data including system settings, tuner configuration, bouquets, services and plugins will be DELETED. Recordings and other files stored on HDD and USB media will remain intact. After completion, the system will restart automatically!\n"
+"\n"
+"Do you really want to proceed?"
+msgstr ""
+
 msgid "Failed"
 msgstr "Gagal"
 
@@ -3362,6 +3364,10 @@ msgstr ""
 
 msgid "File appears to be busy.\n"
 msgstr "File tampaknya sedang sibuk.\n"
+
+#, fuzzy
+msgid "File manager"
+msgstr "Kelola Emu"
 
 msgid "Filename"
 msgstr ""
@@ -3957,6 +3963,9 @@ msgstr ""
 msgid "Indonesia"
 msgstr ""
 
+msgid "Indonesian"
+msgstr ""
+
 msgid "Info"
 msgstr "Info"
 
@@ -4348,6 +4357,10 @@ msgstr "List available networks"
 msgid "List mode"
 msgstr "List mode"
 
+#, fuzzy
+msgid "List of files"
+msgstr "Switch to filelist"
+
 msgid "List of storage devices"
 msgstr "List of storage devices"
 
@@ -4662,6 +4675,10 @@ msgstr "Move east"
 
 msgid "Move to position X"
 msgstr "Move to position X"
+
+#, fuzzy
+msgid "Move to..."
+msgstr "Move east"
 
 msgid "Move west"
 msgstr "Move west"
@@ -5094,6 +5111,12 @@ msgstr ""
 msgid ""
 "Nothing to scan!\n"
 "Please setup your tuner settings before you start a service scan."
+msgstr ""
+"Tidak ada yg bisa dilacak!\n"
+"Atur pengaturan penala sebelum memulai lacak layanan."
+
+#, fuzzy
+msgid "Nothing to scan! Setup your tuner and try again."
 msgstr ""
 "Tidak ada yg bisa dilacak!\n"
 "Atur pengaturan penala sebelum memulai lacak layanan."
@@ -5795,9 +5818,6 @@ msgstr ""
 msgid "Press OK to select/deselect a CAId."
 msgstr "Press OK to select/deselect a CAId."
 
-msgid "Press OK to start the scan"
-msgstr "Tekan OK untuk memulai pelacakan"
-
 msgid "Press OK to toggle the selection"
 msgstr ""
 
@@ -6056,7 +6076,7 @@ msgid "Refresh rate selection."
 msgstr "Pemilihan refresh rate."
 
 #, fuzzy
-msgid "Refreshing image list - Please wait..."
+msgid "Refreshing image list, Please wait..."
 msgstr "Searching for available updates. Please wait..."
 
 #, fuzzy
@@ -6275,11 +6295,11 @@ msgid "Resuming playback"
 msgstr "Resuming playback"
 
 #, fuzzy
-msgid "Retreiving image list - Please wait..."
+msgid "Retreiving image list, Please wait..."
 msgstr "Mendapatkan info plugin. Silakan tunggu..."
 
 #, fuzzy
-msgid "Retreiving image slots - Please wait..."
+msgid "Retreiving image slots, Please wait..."
 msgstr "Searching for available updates. Please wait..."
 
 msgid "Return to movie list"
@@ -6436,9 +6456,6 @@ msgstr "Satellite longitude:"
 msgid "Satellites"
 msgstr "Satelit"
 
-msgid "Satfinder"
-msgstr "Pelacak Satelit"
-
 msgid "Sats"
 msgstr "Sat"
 
@@ -6515,11 +6532,25 @@ msgstr "Scan %s band"
 msgid "Scan additional SR"
 msgstr "Scan additional SR"
 
+#, fuzzy, python-format
+msgid "Scan completed, %d channel found."
+msgid_plural "Scan completed, %d channels found."
+msgstr[0] "%d kanal ditemukan"
+msgstr[1] "%d kanal ditemukan"
+
+#, fuzzy
+msgid "Scan failed!"
+msgstr "Scanning failed!"
+
 msgid "Scan files..."
 msgstr "Pindai file..."
 
 msgid "Scan options"
 msgstr ""
+
+#, fuzzy
+msgid "Scan state"
+msgstr "scan state"
 
 msgid "Scan wireless networks"
 msgstr "Pindai jaringan nirkabel"
@@ -6720,6 +6751,14 @@ msgstr "Select channel to record from"
 msgid "Select copy destination for:"
 msgstr "Select copy destination for:"
 
+#, fuzzy
+msgid "Select destination for copy selected files..."
+msgstr "Select destination for:"
+
+#, fuzzy
+msgid "Select destination for move selected files..."
+msgstr "Select destination for:"
+
 msgid "Select destination for:"
 msgstr "Select destination for:"
 
@@ -6730,12 +6769,19 @@ msgstr "Membuat direktori %s gagal."
 msgid "Select files for backup."
 msgstr "Select files for backup."
 
+msgid "Select files with 'OK' and then use 'Menu' for select operation"
+msgstr ""
+
 msgid "Select files/folders to backup"
 msgstr "Select files/folders to backup"
 
 #, fuzzy
 msgid "Select function"
 msgstr "Pilih lokasi backup"
+
+#, fuzzy
+msgid "Select hard disk"
+msgstr "Pilih satu tampilan"
 
 msgid "Select horizontal resolution:"
 msgstr ""
@@ -6760,6 +6806,10 @@ msgstr ""
 
 msgid "Select movie"
 msgstr "Pilih film"
+
+#, fuzzy
+msgid "Select operation:"
+msgstr "Select copy destination for:"
 
 #, fuzzy
 msgid "Select path for logfile"
@@ -6801,16 +6851,16 @@ msgstr ""
 msgid "Select the movie path"
 msgstr "Select the movie path"
 
-msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
 msgid "Select the satellite you want to configure. Once that satellite is configured you can select and configure other satellites that will be accessed using this same tuner."
@@ -7046,6 +7096,10 @@ msgstr "Penyetelan"
 
 msgid "Setup"
 msgstr "Pengaturan"
+
+#, fuzzy
+msgid "Setup hard disk"
+msgstr "Hard disk"
 
 msgid "Setup menu"
 msgstr "Menu pengaturan"
@@ -7461,9 +7515,6 @@ msgid "Solomon Islands"
 msgstr ""
 
 msgid "Somalia"
-msgstr ""
-
-msgid "Some error occured - Please try later"
 msgstr ""
 
 msgid "Some plugins are not available:\n"
@@ -8188,7 +8239,8 @@ msgstr ""
 "There might not be enough Space on the selected Partition.\n"
 "Do you really want to continue?"
 
-msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
+#, fuzzy
+msgid "This DVD RW medium is already formatted, Reformatting will erase all content on the disc."
 msgstr "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 
 #, python-format
@@ -8273,7 +8325,7 @@ msgstr ""
 msgid "This option configures you can set auto volume level."
 msgstr ""
 
-msgid "This option set the level of surpression of musquito noise (Musquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
+msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr ""
 
 msgid "This option sets  the picture contrast."
@@ -8661,6 +8713,10 @@ msgstr "Two"
 
 msgid "Type"
 msgstr "Type"
+
+#, fuzzy
+msgid "Type of LNB/device"
+msgstr "Tipe Pelacakan"
 
 msgid "Type of scan"
 msgstr "Tipe Pelacakan"
@@ -9428,19 +9484,6 @@ msgstr "When the content has an aspect ratio of 16:9, choose whether to scale/st
 msgid "When the content has an aspect ratio of 4:3, choose whether to scale/stretch the picture."
 msgstr "When the content has an aspect ratio of 4:3, choose whether to scale/stretch the picture."
 
-msgid ""
-"When you do a factory reset, you will lose ALL your configuration data\n"
-"(including bouquets, services, satellite data ...)\n"
-"After completion of factory reset, your receiver will restart automatically!\n"
-"\n"
-"Really do a factory reset?"
-msgstr ""
-"Ketika anda melakukan parameter pabrik, anda akan kehilangan SEMUA data konfigurasi anda\n"
-"(termasuk data buket, layanan, satelit ...)\n"
-"Setelah parameter pabrik selesai, rx anda akan restart secara otomatis!\n"
-"\n"
-"Yakin ingin melakukan parameter pabrik?"
-
 msgid "Where do you want to backup your settings?"
 msgstr "Where do you want to backup your settings?"
 
@@ -9669,9 +9712,6 @@ msgid ""
 msgstr ""
 "Anda perlu sebuah PC untuk terhubung ke Rx. Jika anda memerlukan instruksi lanjutan, silakan kunjungi website http://www.dm7025.de.\n"
 "Rx anda dihentikan sekarang. Setelah anda melakukan langkah-langkah pembaruan dari website, firmware baru anda akan meminta anda memulihkan pengaturan anda."
-
-msgid "You system does not support ext4"
-msgstr "Sistem anda tidak mendukung ext4"
 
 msgid "Your backup succeeded. We will now continue to explain the further upgrade process."
 msgstr "Backup anda sukses. Kami akan lanjut menjelaskan proses upgrade selanjutnya."
@@ -11106,6 +11146,15 @@ msgstr ""
 #~ msgid "Constellation"
 #~ msgstr "Constellation"
 
+#~ msgid "Convert ext3 filesystem to ext4"
+#~ msgstr "Rubah sistem berkas ext3 ke ext4"
+
+#~ msgid "Convert ext3 to ext4"
+#~ msgstr "Rubah ext3 ke ext4"
+
+#~ msgid "Converting ext3 to ext4..."
+#~ msgstr "Merubah ext3 ke ext4..."
+
 #~ msgid "Could not connect to receiver .NFI image feed server:"
 #~ msgstr "Could not connect to receiver .NFI image feed server:"
 
@@ -11134,8 +11183,19 @@ msgstr ""
 #~ msgid "Devicelist"
 #~ msgstr "Daftar Perangkat"
 
+#, fuzzy
+#~ msgid "Diasbled"
+#~ msgstr "Dimatikan"
+
 #~ msgid "Disclaimer"
 #~ msgstr "Ketentuan"
+
+#~ msgid ""
+#~ "Do you really want to convert the filesystem?\n"
+#~ "You cannot go back!"
+#~ msgstr ""
+#~ "Anda yakin ingin merubah sistem berkas?\n"
+#~ "Anda tak bisa kembali!"
 
 #~ msgid "Do you understand this?"
 #~ msgstr "Anda mengerti hal ini?"
@@ -11151,9 +11211,6 @@ msgstr ""
 
 #~ msgid "Download .NFI-files for USB-flasher"
 #~ msgstr "Download .NFI-files for USB-flasher"
-
-#~ msgid "Emu manager"
-#~ msgstr "Kelola Emu"
 
 #~ msgctxt "Event description unavailable"
 #~ msgid "Event description unavailable"
@@ -11280,6 +11337,9 @@ msgstr ""
 #~ msgid "Prepare another USB stick for image flashing"
 #~ msgstr "Prepare another USB stick for image flashing"
 
+#~ msgid "Press OK to start the scan"
+#~ msgstr "Tekan OK untuk memulai pelacakan"
+
 #~ msgid "Provider to scan"
 #~ msgstr "Penyedia untuk dipindai"
 
@@ -11291,6 +11351,9 @@ msgstr ""
 
 #~ msgid "SID"
 #~ msgstr "SID"
+
+#~ msgid "Satfinder"
+#~ msgstr "Pelacak Satelit"
 
 #~ msgid "Search"
 #~ msgstr "Cari"
@@ -11446,6 +11509,19 @@ msgstr ""
 #~ msgid "When enabled, error messages related to the Common Interface module will not be shown."
 #~ msgstr "Ketika diaktifkan, pesan kesalahan terkait modul CI tidak akan ditampilkan."
 
+#~ msgid ""
+#~ "When you do a factory reset, you will lose ALL your configuration data\n"
+#~ "(including bouquets, services, satellite data ...)\n"
+#~ "After completion of factory reset, your receiver will restart automatically!\n"
+#~ "\n"
+#~ "Really do a factory reset?"
+#~ msgstr ""
+#~ "Ketika anda melakukan parameter pabrik, anda akan kehilangan SEMUA data konfigurasi anda\n"
+#~ "(termasuk data buket, layanan, satelit ...)\n"
+#~ "Setelah parameter pabrik selesai, rx anda akan restart secara otomatis!\n"
+#~ "\n"
+#~ "Yakin ingin melakukan parameter pabrik?"
+
 #~ msgid "Would you like to install a softcam?"
 #~ msgstr "Would you like to install a softcam?"
 
@@ -11454,6 +11530,9 @@ msgstr ""
 
 #~ msgid "You have chosen to create a new .NFI flasher bootable USB stick. This will repartition the USB stick and therefore all data on it will be erased."
 #~ msgstr "You have chosen to create a new .NFI flasher bootable USB stick. This will repartition the USB stick and therefore all data on it will be erased."
+
+#~ msgid "You system does not support ext4"
+#~ msgstr "Sistem anda tidak mendukung ext4"
 
 #~ msgid ""
 #~ "Your frontprocessor firmware must be upgraded.\n"

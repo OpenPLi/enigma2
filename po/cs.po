@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-22 23:45+0100\n"
+"POT-Creation-Date: 2018-02-18 12:01+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi <ims21@users.sourceforge.net>\n"
@@ -949,7 +949,8 @@ msgid "Adjust 3D settings"
 msgstr "Seřídit 3D nastavení"
 
 #
-msgid "Adjust the color settings so that all the color shades are distinguishable, but appear as saturated as possible. If you are happy with the result, press OK to close the video fine-tuning, or use the number keys to select other test screens."
+#, fuzzy
+msgid "Adjust the color settings so that all the color shades are distinguishable but appear as saturated as possible. If you are happy with the result press OK to close the video fine-tuning or use the number keys to select other test screens."
 msgstr "Upravte barevné nastavení tak, aby všechny barevné odstíny byly rozpoznatelné, ale zároveň aby byly co nejvíce nasycené. Pokud jste spokojeni s výsledkem, stiskněte OK pro zavření průvodce nebo použijte numerické klávesy pro výběr jiné testovací scény."
 
 #
@@ -1095,6 +1096,10 @@ msgstr "Neplatný název souboru."
 #
 msgid "An error occurred while downloading the packetlist. Please try again."
 msgstr "Chyba při stahování seznamu balíčků. Prosím, zkuste to znovu."
+
+#, fuzzy
+msgid "An error occurred, Please try again later"
+msgstr "Došlo k chybě - zkuste později, prosím"
 
 #
 msgid "An unknown error occurred!"
@@ -1684,11 +1689,12 @@ msgstr ""
 msgid "Cannot determine"
 msgstr "Nelze určit"
 
+#, fuzzy
+msgid "Cannot find any images, Please try again later"
+msgstr "Nelze najít image - zkuste to později"
+
 msgid "Cannot find any signal ..., aborting !"
 msgstr "Nelze najít žádný signál..., ukončuje se!"
-
-msgid "Cannot find images - please try later"
-msgstr "Nelze najít image - zkuste to později"
 
 msgid "Cannot move files on a different disk or system to the trash can"
 msgstr "Nelze přesunout do koše soubory z jiného disku nebo systému"
@@ -1767,6 +1773,11 @@ msgstr "Kanál"
 
 msgid "Channel Info"
 msgstr "Informace o programu"
+
+#
+#, fuzzy
+msgid "Channel context menu"
+msgstr "Menu seznamu programů"
 
 #
 msgid "Channel list type"
@@ -2416,20 +2427,14 @@ msgstr "Přehrát další (opakování ve smyčce)"
 msgid "Contrast"
 msgstr "Kontrast"
 
-msgid "Convert ext3 filesystem to ext4"
-msgstr "Konvertovat ext3 systém souborů na ext4"
-
-msgid "Convert ext3 to ext4"
-msgstr "Konverze ext3 na ext4"
-
-msgid "Converting ext3 to ext4..."
-msgstr "Konverze ext3 na ext4..."
-
 msgid "Cook Islands"
 msgstr "Cookovy ostrovy"
 
 msgid "Copy"
 msgstr "Kopírovat"
+
+msgid "Copy to..."
+msgstr ""
 
 msgid "Costa Rica"
 msgstr "Kostarika"
@@ -2437,11 +2442,12 @@ msgstr "Kostarika"
 msgid "Cote d'Ivoire"
 msgstr "Pobřeží slonoviny"
 
+#, fuzzy
+msgid "Could not find any suitable media, Please insert a media (e.g. USB stick) and try again later"
+msgstr "Nebylo nalezeno vhodné médium - vložte médium (např. USB stick) a zkuste to znovu!"
+
 msgid "Could not find installed channel list."
 msgstr "Nelze najít nainstalováný seznam kanálů."
-
-msgid "Could not find suitable media - Please insert a media (e.g. USB stick) and try again!"
-msgstr "Nebylo nalezeno vhodné médium - vložte médium (např. USB stick) a zkuste to znovu!"
 
 #
 msgid "Could not load medium! No disc inserted?"
@@ -2539,7 +2545,8 @@ msgstr "Aktuální transpondér"
 msgid "Current value: "
 msgstr "Aktuální hodnota: "
 
-msgid "Currently the commit log cannot be retrieved - please try later again"
+#, fuzzy
+msgid "Currently the commit log cannot be retrieved, Please try again later"
 msgstr "V současné době není možné získat aktuální seznam změn - prosím, zkuste to později"
 
 #
@@ -3013,13 +3020,6 @@ msgstr ""
 "Opravdu chcete zkontrolovat souborový systém?\n"
 "Může to trvat dlouho!"
 
-msgid ""
-"Do you really want to convert the filesystem?\n"
-"You cannot go back!"
-msgstr ""
-"Opravdu chcete převést systém souborů?\n"
-"Nelze vrátit zpět!"
-
 #
 #, python-format
 msgid "Do you really want to delete %s?"
@@ -3164,9 +3164,9 @@ msgid "Don't zap and remove timer"
 msgstr "Nepřepínat a odstranit časovač"
 
 #
-#, python-format
-msgid "Done - Installed, upgraded or removed %d package (%s)"
-msgid_plural "Done - Installed, upgraded or removed %d packages (%s)"
+#, fuzzy, python-format
+msgid "Done! Installed, upgraded or removed %d package (%s)"
+msgid_plural "Done! Installed, upgraded or removed %d packages (%s)"
 msgstr[0] "Dokončeno - instalován, aktualizován nebo odstraněn %d balíček (%s)"
 msgstr[1] "Dokončeno - instalovány, aktualizovány nebo odstraněny %d balíčky (%s)"
 msgstr[2] "Dokončeno - instalováno, aktualizováno nebo odstraněno %d balíčků (%s)"
@@ -3768,6 +3768,16 @@ msgid "Factory reset"
 msgstr "Tovární nastavení"
 
 #
+msgid ""
+"Factory reset will restore your receiver to its default configuration. All user data including system settings, tuner configuration, bouquets, services and plugins will be DELETED. Recordings and other files stored on HDD and USB media will remain intact. After completion, the system will restart automatically!\n"
+"\n"
+"Do you really want to proceed?"
+msgstr ""
+"Tovární nastavení obnoví přijímač do výchozí konfigurace. Veškerá uživatelská data včetně nastavení systému, konfigurace tunerů, přehledů, programů a pluginů budou ODSTRANĚNA. Nahrávky a ostatní soubory uložené na HDD a USB zůstanou neporušené. Po dokončení se systém automaticky zrestartuje!\n"
+"\n"
+"Opravdu chcete pokračovat?"
+
+#
 msgid "Failed"
 msgstr "Selhalo"
 
@@ -3837,6 +3847,10 @@ msgstr "Fidži"
 
 msgid "File appears to be busy.\n"
 msgstr "Soubor se zdá být zaneprázdněn.\n"
+
+#, fuzzy
+msgid "File manager"
+msgstr "Název souboru"
 
 msgid "Filename"
 msgstr "Název souboru"
@@ -4495,6 +4509,10 @@ msgstr "Indie"
 msgid "Indonesia"
 msgstr "Indonésie"
 
+#, fuzzy
+msgid "Indonesian"
+msgstr "Indonésie"
+
 #
 msgid "Info"
 msgstr "Informace"
@@ -4956,6 +4974,11 @@ msgid "List mode"
 msgstr "Seznam"
 
 #
+#, fuzzy
+msgid "List of files"
+msgstr "Přepnout na seznam souborů"
+
+#
 msgid "List of storage devices"
 msgstr "Seznam záznamových zařízení"
 
@@ -5318,6 +5341,11 @@ msgstr "Posun východně"
 
 msgid "Move to position X"
 msgstr "Natáčí se na pozici X"
+
+#
+#, fuzzy
+msgid "Move to..."
+msgstr "Posun východně"
 
 #
 msgid "Move west"
@@ -5820,6 +5848,13 @@ msgstr "Poznámka: jestliže je povoleno a chcete přejít do Standby po probuze
 msgid ""
 "Nothing to scan!\n"
 "Please setup your tuner settings before you start a service scan."
+msgstr ""
+"Nic k prohledávání!\n"
+"Předtím, než začnete prohledávat kanály, nastavte Váš tuner."
+
+#
+#, fuzzy
+msgid "Nothing to scan! Setup your tuner and try again."
 msgstr ""
 "Nic k prohledávání!\n"
 "Předtím, než začnete prohledávat kanály, nastavte Váš tuner."
@@ -6653,10 +6688,6 @@ msgid "Press OK to select/deselect a CAId."
 msgstr "Stiskněte OK pro vybrání/odebrání CAId"
 
 #
-msgid "Press OK to start the scan"
-msgstr "Stiskněte OK pro spuštění prohledávání"
-
-#
 msgid "Press OK to toggle the selection"
 msgstr "Stiskněte OK pro změnu označení"
 
@@ -6961,7 +6992,8 @@ msgstr "Obnovovací frekvence"
 msgid "Refresh rate selection."
 msgstr "Volba obnovovací rychlosti."
 
-msgid "Refreshing image list - Please wait..."
+#, fuzzy
+msgid "Refreshing image list, Please wait..."
 msgstr "Obnovení seznamu image - čekejte, prosím ..."
 
 #
@@ -7215,10 +7247,12 @@ msgstr "Pokračovat od pozice %s"
 msgid "Resuming playback"
 msgstr "Obnovuji přehrávání"
 
-msgid "Retreiving image list - Please wait..."
+#, fuzzy
+msgid "Retreiving image list, Please wait..."
 msgstr "Načítání seznamu image - čekejte, prosím ..."
 
-msgid "Retreiving image slots - Please wait..."
+#, fuzzy
+msgid "Retreiving image slots, Please wait..."
 msgstr "Načítají se sloty obrazů - Čekejte prosím ..."
 
 #
@@ -7398,10 +7432,6 @@ msgid "Satellites"
 msgstr "Satelity"
 
 #
-msgid "Satfinder"
-msgstr "Satfinder"
-
-#
 msgid "Sats"
 msgstr "Satelity"
 
@@ -7488,12 +7518,27 @@ msgstr "Prohledat %s pásmo"
 msgid "Scan additional SR"
 msgstr "Prohledat dodatečný SR"
 
+#, python-format
+msgid "Scan completed, %d channel found."
+msgid_plural "Scan completed, %d channels found."
+msgstr[0] "Prohledávání dokončeno, byl nalezen %d program."
+msgstr[1] "Prohledávání dokončeno, byly nalezeny %d programy."
+msgstr[2] "Prohledávání dokončeno, bylo nalezeno %d programů."
+
+#
+msgid "Scan failed!"
+msgstr "Prohledávání selhalo!"
+
 #
 msgid "Scan files..."
 msgstr "Hledat soubory..."
 
 msgid "Scan options"
 msgstr "Možnosti prohledávání"
+
+#
+msgid "Scan state"
+msgstr "stav prohledávání"
 
 #
 msgid "Scan wireless networks"
@@ -7514,15 +7559,16 @@ msgstr[0] "Prohledávání - %d%% dokončeno"
 msgstr[1] "Prohledávání - %d%% dokončena"
 msgstr[2] "Prohledávání - %d%% dokončeno"
 
-#, python-format
-msgid "Scan completed, %d channel found."
-msgid_plural "Scan completed, %d channels found."
+#, fuzzy, python-format
+msgid "Scanning completed, %d channel found"
+msgid_plural "Scanning completed, %d channels found"
 msgstr[0] "Prohledávání dokončeno, byl nalezen %d program."
 msgstr[1] "Prohledávání dokončeno, byly nalezeny %d programy."
 msgstr[2] "Prohledávání dokončeno, bylo nalezeno %d programů."
 
 #
-msgid "Scan failed!"
+#, fuzzy
+msgid "Scanning failed!"
 msgstr "Prohledávání selhalo!"
 
 #
@@ -7725,6 +7771,16 @@ msgid "Select copy destination for:"
 msgstr "Zvolte umístění kopie pro:"
 
 #
+#, fuzzy
+msgid "Select destination for copy selected files..."
+msgstr "Zvolte umístění pro:"
+
+#
+#, fuzzy
+msgid "Select destination for move selected files..."
+msgstr "Zvolte umístění pro:"
+
+#
 msgid "Select destination for:"
 msgstr "Zvolte umístění pro:"
 
@@ -7734,12 +7790,20 @@ msgstr "Vyberte adresář pro logfile"
 msgid "Select files for backup."
 msgstr "Výběr souborů pro zálohování."
 
+msgid "Select files with 'OK' and then use 'Menu' for select operation"
+msgstr ""
+
 #
 msgid "Select files/folders to backup"
 msgstr "Vyberte soubory/složky pro zálohování"
 
 msgid "Select function"
 msgstr "Výběr funkce"
+
+#
+#, fuzzy
+msgid "Select hard disk"
+msgstr "Vyberte skin"
 
 #
 msgid "Select horizontal resolution:"
@@ -7768,6 +7832,11 @@ msgstr "Zvolte umístění"
 #
 msgid "Select movie"
 msgstr "Vyberte film"
+
+#
+#, fuzzy
+msgid "Select operation:"
+msgstr "Zvolte umístění"
 
 msgid "Select path for logfile"
 msgstr "Vyberte cestu pro logfile"
@@ -8090,6 +8159,11 @@ msgstr "Nastavení"
 #
 msgid "Setup"
 msgstr "Nastavení"
+
+#
+#, fuzzy
+msgid "Setup hard disk"
+msgstr "Pevný disk"
 
 msgid "Setup menu"
 msgstr "Nastavení"
@@ -8560,9 +8634,6 @@ msgstr "Šalamounovy ostrovy"
 
 msgid "Somalia"
 msgstr "Somálsko"
-
-msgid "Some error occured - Please try later"
-msgstr "Došlo k chybě - zkuste později, prosím"
 
 #
 msgid "Some plugins are not available:\n"
@@ -9403,7 +9474,8 @@ msgstr ""
 "Opravdu si přejete pokračovat."
 
 #
-msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
+#, fuzzy
+msgid "This DVD RW medium is already formatted, Reformatting will erase all content on the disc."
 msgstr "DVD RW médium je již naformátováno - nové formátování smaže veškerý obsah na tomto DVD."
 
 #, python-format
@@ -9491,7 +9563,8 @@ msgstr "Nastavení může být užitečné pro dlouhé HDMI kabely."
 msgid "This option configures you can set auto volume level."
 msgstr "Umožňuje nastavit automatickou úroveň hlasitosti."
 
-msgid "This option set the level of surpression of musquito noise (Musquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
+#, fuzzy
+msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr "Nastavuje úroveň potlačení Mosquito Noise (Mosquito Noise je náhodný aliasing v důsledku silné komprese). Samozřejmě na úkor detailů obrazu."
 
 msgid "This option sets  the picture contrast."
@@ -9941,6 +10014,11 @@ msgstr "Dva"
 #
 msgid "Type"
 msgstr "Typ"
+
+#
+#, fuzzy
+msgid "Type of LNB/device"
+msgstr "Typ prohledávání"
 
 #
 msgid "Type of scan"
@@ -10796,16 +10874,6 @@ msgid "When the content has an aspect ratio of 4:3, choose whether to scale/stre
 msgstr "Pro obsah s poměrem stran 4:3 zvolte, zda chcete změnit velikost/roztáhnout obraz."
 
 #
-msgid ""
-"Factory reset will restore your receiver to its default configuration. All user data including system settings, tuner configuration, bouquets, services and plugins will be DELETED. Recordings and other files stored on HDD and USB media will remain intact. After completion, the system will restart automatically!\n"
-"\n"
-"Do you really want to proceed?"
-msgstr ""
-"Tovární nastavení obnoví přijímač do výchozí konfigurace. Veškerá uživatelská data včetně nastavení systému, konfigurace tunerů, přehledů, programů a pluginů budou ODSTRANĚNA. Nahrávky a ostatní soubory uložené na HDD a USB zůstanou neporušené. Po dokončení se systém automaticky zrestartuje!\n"
-"\n"
-"Opravdu chcete pokračovat?"
-
-#
 msgid "Where do you want to backup your settings?"
 msgstr "Kam chcete zazálohovat Vaše nastavení?"
 
@@ -11055,9 +11123,6 @@ msgid ""
 msgstr ""
 "Potřebujete PC připojené k Vašemu přijímači. Pokud potřebujete další informace, navštivte stránku http://openpli-org.\n"
 "Váš přijímač bude nyní zastaven. Poté, co jste provedli aktualizaci pomocí instrukcí popsaných na zmíněné stránce, se Vás přijímač zeptá na obnovu nastavení."
-
-msgid "You system does not support ext4"
-msgstr "Váš systém nepodporuje ext4"
 
 #
 msgid "Your backup succeeded. We will now continue to explain the further upgrade process."
@@ -12209,7 +12274,8 @@ msgid "save playlist on exit"
 msgstr "Při ukončení uložit playlist"
 
 #
-msgid "Scan state"
+#, fuzzy
+msgid "scan state"
 msgstr "stav prohledávání"
 
 msgid "science fiction/fantasy/horror"
@@ -12581,15 +12647,6 @@ msgstr "pracuji"
 msgid "xp1000"
 msgstr ""
 
-msgid "Tuners in Use:"
-msgstr "Použité tunery:"
-
-msgid "Current Time:"
-msgstr "Aktuální čas:"
-
-msgid "Streaming Info:"
-msgstr "Stream:"
-
 #
 msgid "yellow"
 msgstr "Žlutá"
@@ -12623,11 +12680,30 @@ msgstr ""
 #~ msgid "Cannot create image list - please try later"
 #~ msgstr "Nelze vytvořit seznam image - zkuste to později"
 
+#~ msgid "Convert ext3 filesystem to ext4"
+#~ msgstr "Konvertovat ext3 systém souborů na ext4"
+
+#~ msgid "Convert ext3 to ext4"
+#~ msgstr "Konverze ext3 na ext4"
+
+#~ msgid "Converting ext3 to ext4..."
+#~ msgstr "Konverze ext3 na ext4..."
+
+#~ msgid "Current Time:"
+#~ msgstr "Aktuální čas:"
+
 #~ msgid "DVB drivers: "
 #~ msgstr "DVB ovladače: "
 
 #~ msgid "Disclaimer"
 #~ msgstr "Odmítnutí odpovědnosti"
+
+#~ msgid ""
+#~ "Do you really want to convert the filesystem?\n"
+#~ "You cannot go back!"
+#~ msgstr ""
+#~ "Opravdu chcete převést systém souborů?\n"
+#~ "Nelze vrátit zpět!"
 
 #
 #~ msgid "Do you want to do another manual service scan?"
@@ -12669,8 +12745,16 @@ msgstr ""
 #~ msgstr "Prosím, čekejte (nahrává se softcam)"
 
 #
+#~ msgid "Press OK to start the scan"
+#~ msgstr "Stiskněte OK pro spuštění prohledávání"
+
+#
 #~ msgid "Provider to scan"
 #~ msgstr "Poskytovatel k vyhledání"
+
+#
+#~ msgid "Satfinder"
+#~ msgstr "Satfinder"
 
 #
 #~ msgid "Show disclaimer"
@@ -12684,6 +12768,9 @@ msgstr ""
 
 #~ msgid "Softcam type"
 #~ msgstr "Typ softcamu"
+
+#~ msgid "Streaming Info:"
+#~ msgstr "Stream:"
 
 #
 #~ msgid "Terrestrial provider"
@@ -12704,6 +12791,9 @@ msgstr ""
 #~ msgid "Traditional Chinese"
 #~ msgstr "Tradiční čínština"
 
+#~ msgid "Tuners in Use:"
+#~ msgstr "Použité tunery:"
+
 #
 #~ msgid "What do you want to scan?"
 #~ msgstr "Co chcete prohledat?"
@@ -12714,6 +12804,9 @@ msgstr ""
 #
 #~ msgid "Yes, do another manual scan now"
 #~ msgstr "Ano, proveď další ruční prohledávání"
+
+#~ msgid "You system does not support ext4"
+#~ msgstr "Váš systém nepodporuje ext4"
 
 #
 #~ msgid "and never show this message again"

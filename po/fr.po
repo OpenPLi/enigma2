@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-08 11:28+0100\n"
+"POT-Creation-Date: 2018-02-18 12:01+0330\n"
 "PO-Revision-Date: 2018-02-17 12:01+0100\n"
 "Last-Translator: Pr2\n"
 "Language-Team: french\n"
@@ -652,7 +652,8 @@ msgstr ""
 "Un enregistrement a été démarré:\n"
 "%s"
 
-msgid "A recording is currently running on the selected tuner. Please select a different tuner or consider to stop the recording to try again."
+#, fuzzy
+msgid "A recording is currently running on the selected tuner. Please select a different tuner or stop the recording and try again."
 msgstr "Un enregistrement est en cours sur le tuner sélectionné. Veuillez choisir un autre tuner ou envisager d’arrêter l’enregistrement et réessayer."
 
 msgid ""
@@ -834,7 +835,8 @@ msgstr "Les options additionnelles du moteur vous permettent d’entrer les dét
 msgid "Adjust 3D settings"
 msgstr "Ajuster les paramètres 3D"
 
-msgid "Adjust the color settings so that all the color shades are distinguishable, but appear as saturated as possible. If you are happy with the result, press OK to close the video fine-tuning, or use the number keys to select other test screens."
+#, fuzzy
+msgid "Adjust the color settings so that all the color shades are distinguishable but appear as saturated as possible. If you are happy with the result press OK to close the video fine-tuning or use the number keys to select other test screens."
 msgstr "Ajustez les paramètres de couleurs de sorte que toutes les nuances de couleurs soient visibles, mais apparaissent saturées autant que possible. Si vous êtes content du résultat, appuyez sur OK pour fermer le réglage vidéo avancé, ou utilisez les touches numériques pour choisir d'autres écrans de test."
 
 msgid "Advanced"
@@ -959,6 +961,10 @@ msgstr "Un nom de fichier vide est illégal."
 
 msgid "An error occurred while downloading the packetlist. Please try again."
 msgstr "Une erreur s'est produite lors du téléchargement de la liste paquet. S'il vous plaît essayez de nouveau."
+
+#, fuzzy
+msgid "An error occurred, Please try again later"
+msgstr "Certaines erreurs se sont produites - Merci de réessayer plus tard"
 
 msgid "An unknown error occurred!"
 msgstr "Une erreur inconnue est survenue!"
@@ -1474,11 +1480,12 @@ msgstr "Annulé à la demande de l’utilisateur"
 msgid "Cannot determine"
 msgstr "Impossible à déterminer"
 
+#, fuzzy
+msgid "Cannot find any images, Please try again later"
+msgstr "Impossible de trouver des images - essayer plus tard"
+
 msgid "Cannot find any signal ..., aborting !"
 msgstr "Impossible de trouver un signal ..., abandon!"
-
-msgid "Cannot find images - please try later"
-msgstr "Impossible de trouver des images - essayer plus tard"
 
 msgid "Cannot move files on a different disk or system to the trash can"
 msgstr "Impossible de déplacer les fichiers sur un disque ou système différent dans la corbeille"
@@ -2056,7 +2063,8 @@ msgstr "Configure votre réseau interne"
 msgid "Configure your network again"
 msgstr "Configure encore votre réseau"
 
-msgid "Configure your network settings, and press OK to start the scan"
+#, fuzzy
+msgid "Configure your network settings and press OK to scan"
 msgstr "Configure vos paramètres réseau, puis appuyez sur OK pour lancer le scan"
 
 msgid "Configure your wireless LAN again"
@@ -2134,17 +2142,21 @@ msgstr "Îles Cook"
 msgid "Copy"
 msgstr "Copier"
 
+msgid "Copy to..."
+msgstr ""
+
 msgid "Costa Rica"
 msgstr "Costa Rica"
 
 msgid "Cote d'Ivoire"
 msgstr "Côte d'Ivoire"
 
+#, fuzzy
+msgid "Could not find any suitable media, Please insert a media (e.g. USB stick) and try again later"
+msgstr "Impossible de trouver un média qui convient - Veuillez insérer un média (p.e. une clé USB) et essayer à nouveau!"
+
 msgid "Could not find installed channel list."
 msgstr "Impossible de trouver la liste des chaînes installées."
-
-msgid "Could not find suitable media - Please insert a media (e.g. USB stick) and try again!"
-msgstr "Impossible de trouver un média qui convient - Veuillez insérer un média (p.e. une clé USB) et essayer à nouveau!"
 
 msgid "Could not load medium! No disc inserted?"
 msgstr "Impossible de charger le support! Aucun disque inséré?"
@@ -2229,7 +2241,8 @@ msgstr "Transpondeur actuel"
 msgid "Current value: "
 msgstr "Valeur actuelle: "
 
-msgid "Currently the commit log cannot be retrieved - please try later again"
+#, fuzzy
+msgid "Currently the commit log cannot be retrieved, Please try again later"
 msgstr "Actuellement le log des changements ne peut pas être retrouvé - merci de réessayer plus tard"
 
 msgid "Custom skip time for '1'/'3' buttons"
@@ -2745,9 +2758,9 @@ msgstr "Ne pas zapper et désactiver la programmation"
 msgid "Don't zap and remove timer"
 msgstr "Ne pas zapper et supprimer la programmation"
 
-#, python-format
-msgid "Done - Installed, upgraded or removed %d package (%s)"
-msgid_plural "Done - Installed, upgraded or removed %d packages (%s)"
+#, fuzzy, python-format
+msgid "Done! Installed, upgraded or removed %d package (%s)"
+msgid_plural "Done! Installed, upgraded or removed %d packages (%s)"
 msgstr[0] "Terminé - Installé, mis à jour ou retiré %d paquet (%s)"
 msgstr[1] "Terminé - Installé, mis à jour ou retiré %d paquets (%s)"
 
@@ -2900,9 +2913,6 @@ msgstr "Activer la sélection bouquet multi-EPG"
 msgid "Enable fallback remote receiver"
 msgstr "Activer le récepteur distant de repli"
 
-msgid "Enable fallback remote receiver for recordings"
-msgstr "Activer le récepteur distant de repli pour les enregistrements"
-
 msgid "Enable freesat EPG"
 msgstr "Activer EPG freesat"
 
@@ -2913,9 +2923,6 @@ msgid "Enable parental protection"
 msgstr "Activer la protection parentale"
 
 msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
-msgstr "Activer un récepteur enigma2 distant pour essayer de syntoniser les services qui ne peuvent pas l'être localement (p.e. tuners occupés ou le type de service n'est pas disponible sur les tuners locaux. Spécifier l'URL complète http:// et le numéro de port (normalement ...: 8001), p.e. http://second_demo:8001."
-
-msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally for recordings (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
 msgstr "Activer un récepteur enigma2 distant pour essayer de syntoniser les services qui ne peuvent pas l'être localement (p.e. tuners occupés ou le type de service n'est pas disponible sur les tuners locaux. Spécifier l'URL complète http:// et le numéro de port (normalement ...: 8001), p.e. http://second_demo:8001."
 
 msgid "Enable teletext caching"
@@ -3276,6 +3283,12 @@ msgstr "En clair"
 msgid "Factory reset"
 msgstr "Réinitialisation d’usine"
 
+msgid ""
+"Factory reset will restore your receiver to its default configuration. All user data including system settings, tuner configuration, bouquets, services and plugins will be DELETED. Recordings and other files stored on HDD and USB media will remain intact. After completion, the system will restart automatically!\n"
+"\n"
+"Do you really want to proceed?"
+msgstr ""
+
 msgid "Failed"
 msgstr "Échoué"
 
@@ -3335,6 +3348,10 @@ msgstr "Fidji"
 
 msgid "File appears to be busy.\n"
 msgstr "Le fichier semble être occupé.\n"
+
+#, fuzzy
+msgid "File manager"
+msgstr "Nom de fichier"
 
 msgid "Filename"
 msgstr "Nom de fichier"
@@ -4315,6 +4332,10 @@ msgstr "Liste des réseaux disponibles"
 msgid "List mode"
 msgstr "Mode liste"
 
+#, fuzzy
+msgid "List of files"
+msgstr "Basculer vers la liste des fichiers"
+
 msgid "List of storage devices"
 msgstr "Liste des périphériques de stockage"
 
@@ -4621,6 +4642,10 @@ msgstr "Déplacer vers l'est"
 
 msgid "Move to position X"
 msgstr "Déplacer vers position X"
+
+#, fuzzy
+msgid "Move to..."
+msgstr "Déplacer vers l'est"
 
 msgid "Move west"
 msgstr "Déplacer vers l'ouest"
@@ -5047,6 +5072,12 @@ msgstr "Note: lorsqu’activé, et que vous voulez mettre votre récepteur en ve
 msgid ""
 "Nothing to scan!\n"
 "Please setup your tuner settings before you start a service scan."
+msgstr ""
+"Rien à analyser!\n"
+"Veuillez paramétrer votre tuner avant de démarrer une analyse de chaînes."
+
+#, fuzzy
+msgid "Nothing to scan! Setup your tuner and try again."
 msgstr ""
 "Rien à analyser!\n"
 "Veuillez paramétrer votre tuner avant de démarrer une analyse de chaînes."
@@ -5741,9 +5772,6 @@ msgstr "Appuyez sur OK pour sélectionner les satellites"
 msgid "Press OK to select/deselect a CAId."
 msgstr "Appuyez sur OK pour (dé)sélectionner un CAId."
 
-msgid "Press OK to start the scan"
-msgstr "Appuyez sur OK pour commencer l'analyse"
-
 msgid "Press OK to toggle the selection"
 msgstr "Appuyez sur OK pour basculer la sélection"
 
@@ -6004,7 +6032,8 @@ msgstr "Vitesse de rafraîchissement"
 msgid "Refresh rate selection."
 msgstr "Sélection de vitesse de rafraîchissement"
 
-msgid "Refreshing image list - Please wait..."
+#, fuzzy
+msgid "Refreshing image list, Please wait..."
 msgstr "Mise-à-jour de la liste des images - Veuillez patienter ..."
 
 msgid "Refusing to move to the same directory"
@@ -6218,10 +6247,12 @@ msgstr "Reprendre position à %s"
 msgid "Resuming playback"
 msgstr "Reprise de la lecture"
 
-msgid "Retreiving image list - Please wait..."
+#, fuzzy
+msgid "Retreiving image list, Please wait..."
 msgstr "Récupération de la liste des images - Veuillez patienter ..."
 
-msgid "Retreiving image slots - Please wait..."
+#, fuzzy
+msgid "Retreiving image slots, Please wait..."
 msgstr "Récupération des emplacements d'images - Veuillez patienter..."
 
 msgid "Return to movie list"
@@ -6377,9 +6408,6 @@ msgstr "Longitude satellite:"
 msgid "Satellites"
 msgstr "Satellites"
 
-msgid "Satfinder"
-msgstr "Pointeur satellites"
-
 msgid "Sats"
 msgstr "Sats"
 
@@ -6456,11 +6484,25 @@ msgstr "Analyser bande %s"
 msgid "Scan additional SR"
 msgstr "Analyser SR additionnel"
 
+#, fuzzy, python-format
+msgid "Scan completed, %d channel found."
+msgid_plural "Scan completed, %d channels found."
+msgstr[0] "Analyse complète, %d chaînes trouvées"
+msgstr[1] "Analyse complète, %d chaînes trouvées"
+
+#, fuzzy
+msgid "Scan failed!"
+msgstr "Echec de l'analyse!"
+
 msgid "Scan files..."
 msgstr "Parcourir les fichiers..."
 
 msgid "Scan options"
 msgstr "Options de recherche"
+
+#, fuzzy
+msgid "Scan state"
+msgstr "Etat de l'analyse"
 
 msgid "Scan wireless networks"
 msgstr "Scanner réseaux sans fil"
@@ -6657,6 +6699,14 @@ msgstr "Choisir la chaîne à enregistrer"
 msgid "Select copy destination for:"
 msgstr "Sélectionnez la destination de copie pour:"
 
+#, fuzzy
+msgid "Select destination for copy selected files..."
+msgstr "Sélectionnez une destination pour:"
+
+#, fuzzy
+msgid "Select destination for move selected files..."
+msgstr "Sélectionnez une destination pour:"
+
 msgid "Select destination for:"
 msgstr "Sélectionnez une destination pour:"
 
@@ -6665,6 +6715,9 @@ msgstr "Définir le répertoire pour le fichier log"
 
 msgid "Select files for backup."
 msgstr "Choisir fichiers pour la sauvegarde."
+
+msgid "Select files with 'OK' and then use 'Menu' for select operation"
+msgstr ""
 
 msgid "Select files/folders to backup"
 msgstr "Choisir fichiers/dossiers pour sauvegarde"
@@ -6698,6 +6751,10 @@ msgstr "Choisir la localisation"
 
 msgid "Select movie"
 msgstr "Choisir un film"
+
+#, fuzzy
+msgid "Select operation:"
+msgstr "Choisir la localisation"
 
 msgid "Select path for logfile"
 msgstr "Choisir le répertoire pour le fichier log"
@@ -7392,9 +7449,6 @@ msgstr "Îles Salomon"
 
 msgid "Somalia"
 msgstr "Somalie"
-
-msgid "Some error occured - Please try later"
-msgstr "Certaines erreurs se sont produites - Merci de réessayer plus tard"
 
 msgid "Some plugins are not available:\n"
 msgstr "Des plugins ne sont pas disponibles:\n"
@@ -8133,7 +8187,8 @@ msgstr ""
 "Il n'y aura pas assez de place sur la partition sélectionnée.\n"
 "Souhaitez-vous vraiment continuer?"
 
-msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
+#, fuzzy
+msgid "This DVD RW medium is already formatted, Reformatting will erase all content on the disc."
 msgstr "Ce support DVD RW est déjà formaté - le reformater effacera tout le contenu sur le disque."
 
 #, python-format
@@ -8221,7 +8276,8 @@ msgstr "Cette option est utile pour les câbles HDMI longs."
 msgid "This option configures you can set auto volume level."
 msgstr "Cette option configure le niveau du volume audio automatique."
 
-msgid "This option set the level of surpression of musquito noise (Musquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
+#, fuzzy
+msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr "Cette option permet de régler le niveau de supression de bruit de moustique (le bruit de moustique est un aliasing aléatoire en raison de la forte compression). Evidemment, cela va au détriment des détails de l'image."
 
 msgid "This option sets  the picture contrast."
@@ -9376,19 +9432,6 @@ msgstr "Lorsque le contenu a un format d'image 16:9, choisir de redimensionner/�
 
 msgid "When the content has an aspect ratio of 4:3, choose whether to scale/stretch the picture."
 msgstr "Lorsque le contenu a un format d'image 4:3, choisir de redimensionner/étirer l'image."
-
-msgid ""
-"When you do a factory reset, you will lose ALL your configuration data\n"
-"(including bouquets, services, satellite data ...)\n"
-"After completion of factory reset, your receiver will restart automatically!\n"
-"\n"
-"Really do a factory reset?"
-msgstr ""
-"En faisant une réinitialisation usine, vous perdrez TOUTES vos données configurées\n"
-"(y compris bouquets, services, données satellite ...)\n"
-"Lorsque la réinitialisation usine sera accomplie, votre récepteur redémarrera automatiquement!\n"
-"\n"
-"Voulez-vous vraiment faire une réinitialisation usine?"
 
 msgid "Where do you want to backup your settings?"
 msgstr "Où voulez-vous sauver vos paramètres ?"
@@ -10938,3 +10981,28 @@ msgstr "Zappé"
 
 msgid "®"
 msgstr "®"
+
+#~ msgid "Enable fallback remote receiver for recordings"
+#~ msgstr "Activer le récepteur distant de repli pour les enregistrements"
+
+#~ msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally for recordings (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
+#~ msgstr "Activer un récepteur enigma2 distant pour essayer de syntoniser les services qui ne peuvent pas l'être localement (p.e. tuners occupés ou le type de service n'est pas disponible sur les tuners locaux. Spécifier l'URL complète http:// et le numéro de port (normalement ...: 8001), p.e. http://second_demo:8001."
+
+#~ msgid "Press OK to start the scan"
+#~ msgstr "Appuyez sur OK pour commencer l'analyse"
+
+#~ msgid "Satfinder"
+#~ msgstr "Pointeur satellites"
+
+#~ msgid ""
+#~ "When you do a factory reset, you will lose ALL your configuration data\n"
+#~ "(including bouquets, services, satellite data ...)\n"
+#~ "After completion of factory reset, your receiver will restart automatically!\n"
+#~ "\n"
+#~ "Really do a factory reset?"
+#~ msgstr ""
+#~ "En faisant une réinitialisation usine, vous perdrez TOUTES vos données configurées\n"
+#~ "(y compris bouquets, services, données satellite ...)\n"
+#~ "Lorsque la réinitialisation usine sera accomplie, votre récepteur redémarrera automatiquement!\n"
+#~ "\n"
+#~ "Voulez-vous vraiment faire une réinitialisation usine?"

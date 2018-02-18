@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-13 16:06+0330\n"
+"POT-Creation-Date: 2018-02-18 12:01+0330\n"
 "PO-Revision-Date: 2010-03-09 21:03+0100\n"
 "Last-Translator: \n"
 "Language-Team: HDTV ROMANIA(superonic,costel_mbc,neutrin,otheitis,cipy_1982,neutrin,runcanion)\n"
@@ -633,8 +633,9 @@ msgstr ""
 "O registrare a inceput:\n"
 "%s"
 
-msgid "A recording is currently running on the selected tuner. Please select a different tuner or consider to stop the recording to try again."
-msgstr ""
+#, fuzzy
+msgid "A recording is currently running on the selected tuner. Please select a different tuner or stop the recording and try again."
+msgstr "O registrare acuma este activa. Te rog opreste pe registrare inainte sa incerci Sa configurezi pe pozitioner."
 
 msgid ""
 "A recording is currently running.\n"
@@ -822,7 +823,8 @@ msgstr ""
 msgid "Adjust 3D settings"
 msgstr ""
 
-msgid "Adjust the color settings so that all the color shades are distinguishable, but appear as saturated as possible. If you are happy with the result, press OK to close the video fine-tuning, or use the number keys to select other test screens."
+#, fuzzy
+msgid "Adjust the color settings so that all the color shades are distinguishable but appear as saturated as possible. If you are happy with the result press OK to close the video fine-tuning or use the number keys to select other test screens."
 msgstr "Ajustati setarile de culoare,astfel incat toate nuantele de culoare se distingDaca sunteti multumit de rezultat apasati Ok pentru a inchide video fine-tuning, sau foloseste pe tastele numerice pentru a selecta altetestarea screens."
 
 msgid "Advanced"
@@ -954,6 +956,10 @@ msgstr "Este illegal un gol filename."
 
 #, fuzzy
 msgid "An error occurred while downloading the packetlist. Please try again."
+msgstr "A intervenit o eroare in timpul descarcarii listei. Va rugam incercati din nou."
+
+#, fuzzy
+msgid "An error occurred, Please try again later"
 msgstr "A intervenit o eroare in timpul descarcarii listei. Va rugam incercati din nou."
 
 msgid "An unknown error occurred!"
@@ -1479,10 +1485,10 @@ msgstr ""
 msgid "Cannot determine"
 msgstr ""
 
-msgid "Cannot find any signal ..., aborting !"
+msgid "Cannot find any images, Please try again later"
 msgstr ""
 
-msgid "Cannot find images - please try later"
+msgid "Cannot find any signal ..., aborting !"
 msgstr ""
 
 msgid "Cannot move files on a different disk or system to the trash can"
@@ -1552,6 +1558,10 @@ msgstr "Canal"
 
 msgid "Channel Info"
 msgstr ""
+
+#, fuzzy
+msgid "Channel context menu"
+msgstr "Meniul lista de canale"
 
 #, fuzzy
 msgid "Channel list type"
@@ -2077,7 +2087,7 @@ msgstr ""
 msgid "Configure your network again"
 msgstr ""
 
-msgid "Configure your network settings, and press OK to start the scan"
+msgid "Configure your network settings and press OK to scan"
 msgstr ""
 
 msgid "Configure your wireless LAN again"
@@ -2152,19 +2162,13 @@ msgstr ""
 msgid "Contrast"
 msgstr "Contrast"
 
-msgid "Convert ext3 filesystem to ext4"
-msgstr ""
-
-msgid "Convert ext3 to ext4"
-msgstr ""
-
-msgid "Converting ext3 to ext4..."
-msgstr ""
-
 msgid "Cook Islands"
 msgstr ""
 
 msgid "Copy"
+msgstr ""
+
+msgid "Copy to..."
 msgstr ""
 
 msgid "Costa Rica"
@@ -2173,10 +2177,10 @@ msgstr ""
 msgid "Cote d'Ivoire"
 msgstr ""
 
-msgid "Could not find installed channel list."
+msgid "Could not find any suitable media, Please insert a media (e.g. USB stick) and try again later"
 msgstr ""
 
-msgid "Could not find suitable media - Please insert a media (e.g. USB stick) and try again!"
+msgid "Could not find installed channel list."
 msgstr ""
 
 #, fuzzy
@@ -2264,7 +2268,7 @@ msgstr "Transponderul curent"
 msgid "Current value: "
 msgstr ""
 
-msgid "Currently the commit log cannot be retrieved - please try later again"
+msgid "Currently the commit log cannot be retrieved, Please try again later"
 msgstr ""
 
 #, fuzzy
@@ -2577,10 +2581,6 @@ msgstr "DiSEqC in cascada"
 msgid "DiSEqC-tester settings"
 msgstr "Test setari DiSEqC"
 
-#, fuzzy
-msgid "Diasbled"
-msgstr "Dezactivat"
-
 msgid "Did you see all eight arrow heads?"
 msgstr ""
 
@@ -2689,11 +2689,6 @@ msgid ""
 msgstr ""
 "Confirmati verificarea sistemului de fisiere?\n"
 "Aceasta operatiune ar putea dura foarte mult"
-
-msgid ""
-"Do you really want to convert the filesystem?\n"
-"You cannot go back!"
-msgstr ""
 
 #, python-format
 msgid "Do you really want to delete %s?"
@@ -2816,8 +2811,8 @@ msgid "Don't zap and remove timer"
 msgstr ""
 
 #, fuzzy, python-format
-msgid "Done - Installed, upgraded or removed %d package (%s)"
-msgid_plural "Done - Installed, upgraded or removed %d packages (%s)"
+msgid "Done! Installed, upgraded or removed %d package (%s)"
+msgid_plural "Done! Installed, upgraded or removed %d packages (%s)"
 msgstr[0] "S-a finalizat instalarea, actualizarea sau stergerea a %d pachete cu %d erori"
 msgstr[1] "S-a finalizat instalarea, actualizarea sau stergerea a %d pachete cu %d erori"
 
@@ -3348,6 +3343,12 @@ msgstr ""
 msgid "Factory reset"
 msgstr "Restaurare setari de fabrica"
 
+msgid ""
+"Factory reset will restore your receiver to its default configuration. All user data including system settings, tuner configuration, bouquets, services and plugins will be DELETED. Recordings and other files stored on HDD and USB media will remain intact. After completion, the system will restart automatically!\n"
+"\n"
+"Do you really want to proceed?"
+msgstr ""
+
 msgid "Failed"
 msgstr "Esuat"
 
@@ -3408,6 +3409,10 @@ msgstr ""
 
 msgid "File appears to be busy.\n"
 msgstr ""
+
+#, fuzzy
+msgid "File manager"
+msgstr "Manager pachet"
 
 msgid "Filename"
 msgstr ""
@@ -4010,6 +4015,9 @@ msgstr ""
 msgid "Indonesia"
 msgstr ""
 
+msgid "Indonesian"
+msgstr ""
+
 msgid "Info"
 msgstr ""
 
@@ -4426,6 +4434,10 @@ msgid "List mode"
 msgstr ""
 
 #, fuzzy
+msgid "List of files"
+msgstr "mergi la filelist"
+
+#, fuzzy
 msgid "List of storage devices"
 msgstr "Lista cu dispozitive de stocare"
 
@@ -4750,6 +4762,10 @@ msgstr "Misca spre est"
 
 msgid "Move to position X"
 msgstr ""
+
+#, fuzzy
+msgid "Move to..."
+msgstr "Misca spre est"
 
 msgid "Move west"
 msgstr "Misca spre vest"
@@ -5191,6 +5207,12 @@ msgstr ""
 msgid ""
 "Nothing to scan!\n"
 "Please setup your tuner settings before you start a service scan."
+msgstr ""
+"Nu este nimic de scanat!\n"
+"Va rugam configurati setarile tuner-ului inainte de a incepe o scanare."
+
+#, fuzzy
+msgid "Nothing to scan! Setup your tuner and try again."
 msgstr ""
 "Nu este nimic de scanat!\n"
 "Va rugam configurati setarile tuner-ului inainte de a incepe o scanare."
@@ -5908,9 +5930,6 @@ msgstr ""
 msgid "Press OK to select/deselect a CAId."
 msgstr ""
 
-msgid "Press OK to start the scan"
-msgstr "Apasati OK pentru a incepe scanarea"
-
 msgid "Press OK to toggle the selection"
 msgstr ""
 
@@ -6173,7 +6192,7 @@ msgid "Refresh rate selection."
 msgstr "Selectie rata de reimprospatare"
 
 #, fuzzy
-msgid "Refreshing image list - Please wait..."
+msgid "Refreshing image list, Please wait..."
 msgstr "Descarcare a unei noi liste de pachete. Va rugam asteptati..."
 
 #, fuzzy
@@ -6397,11 +6416,11 @@ msgid "Resuming playback"
 msgstr "Reluare redare"
 
 #, fuzzy
-msgid "Retreiving image list - Please wait..."
+msgid "Retreiving image list, Please wait..."
 msgstr "Se descarca informatiile despre plugin. Va rog sa asteptati..."
 
 #, fuzzy
-msgid "Retreiving image slots - Please wait..."
+msgid "Retreiving image slots, Please wait..."
 msgstr "Se descarca informatiile despre plugin. Va rog sa asteptati..."
 
 msgid "Return to movie list"
@@ -6559,9 +6578,6 @@ msgstr ""
 msgid "Satellites"
 msgstr "Sateliti"
 
-msgid "Satfinder"
-msgstr "Satfinder"
-
 msgid "Sats"
 msgstr "Sateliti"
 
@@ -6640,12 +6656,26 @@ msgstr "Scanare banda EU MID"
 msgid "Scan additional SR"
 msgstr "Scanare SR aditional"
 
+#, fuzzy, python-format
+msgid "Scan completed, %d channel found."
+msgid_plural "Scan completed, %d channels found."
+msgstr[0] "%d servicii gasite!"
+msgstr[1] "%d servicii gasite!"
+
+#, fuzzy
+msgid "Scan failed!"
+msgstr "Acordare esuata!"
+
 #, fuzzy
 msgid "Scan files..."
 msgstr "Scanare fisiere..."
 
 msgid "Scan options"
 msgstr ""
+
+#, fuzzy
+msgid "Scan state"
+msgstr "starea scanarii"
 
 #, fuzzy
 msgid "Scan wireless networks"
@@ -6859,6 +6889,12 @@ msgstr "Selectare canal de inregistrat"
 msgid "Select copy destination for:"
 msgstr ""
 
+msgid "Select destination for copy selected files..."
+msgstr ""
+
+msgid "Select destination for move selected files..."
+msgstr ""
+
 msgid "Select destination for:"
 msgstr ""
 
@@ -6869,12 +6905,19 @@ msgstr "Crearea directorului %s a esuat"
 msgid "Select files for backup."
 msgstr ""
 
+msgid "Select files with 'OK' and then use 'Menu' for select operation"
+msgstr ""
+
 msgid "Select files/folders to backup"
 msgstr ""
 
 #, fuzzy
 msgid "Select function"
 msgstr "Alege locatia copiei de siguranta"
+
+#, fuzzy
+msgid "Select hard disk"
+msgstr "Alegeti un film"
 
 msgid "Select horizontal resolution:"
 msgstr ""
@@ -6900,6 +6943,10 @@ msgstr ""
 #, fuzzy
 msgid "Select movie"
 msgstr "Alegeti un film"
+
+#, fuzzy
+msgid "Select operation:"
+msgstr "Alege locatia copiei de siguranta"
 
 #, fuzzy
 msgid "Select path for logfile"
@@ -6943,16 +6990,16 @@ msgstr ""
 msgid "Select the movie path"
 msgstr "selecteaza calea filmului"
 
-msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
 msgid "Select the satellite you want to configure. Once that satellite is configured you can select and configure other satellites that will be accessed using this same tuner."
@@ -7194,6 +7241,10 @@ msgstr "Setari"
 
 msgid "Setup"
 msgstr "Configurare"
+
+#, fuzzy
+msgid "Setup hard disk"
+msgstr "Hard disc"
 
 msgid "Setup menu"
 msgstr ""
@@ -7626,9 +7677,6 @@ msgid "Solomon Islands"
 msgstr ""
 
 msgid "Somalia"
-msgstr ""
-
-msgid "Some error occured - Please try later"
 msgstr ""
 
 msgid "Some plugins are not available:\n"
@@ -8372,7 +8420,8 @@ msgstr ""
 "S-ar putea sa nu existe spatiu suficient pe partitia selectata.\n"
 "Doriti sa continuati?"
 
-msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
+#, fuzzy
+msgid "This DVD RW medium is already formatted, Reformatting will erase all content on the disc."
 msgstr "Acest DVD RW este deja formatat - reformatarea presupune stergerea tuturorfisierelor de pe disc."
 
 #, python-format
@@ -8457,7 +8506,7 @@ msgstr ""
 msgid "This option configures you can set auto volume level."
 msgstr ""
 
-msgid "This option set the level of surpression of musquito noise (Musquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
+msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr ""
 
 msgid "This option sets  the picture contrast."
@@ -8855,6 +8904,10 @@ msgstr "Doi"
 
 msgid "Type"
 msgstr "Tip"
+
+#, fuzzy
+msgid "Type of LNB/device"
+msgstr "Tipul scanarii"
 
 msgid "Type of scan"
 msgstr "Tipul scanarii"
@@ -9631,19 +9684,6 @@ msgstr ""
 msgid "When the content has an aspect ratio of 4:3, choose whether to scale/stretch the picture."
 msgstr ""
 
-msgid ""
-"When you do a factory reset, you will lose ALL your configuration data\n"
-"(including bouquets, services, satellite data ...)\n"
-"After completion of factory reset, your receiver will restart automatically!\n"
-"\n"
-"Really do a factory reset?"
-msgstr ""
-"Cand faci resetare de fabrica, o sa pierzi Toate Setarile\n"
-"(inclusiv Bouquets, servicii, sateliti ...)\n"
-"Dupa resetare receiverul tau va reporni automat!\n"
-"\n"
-"Esti sigur ca vrei sa faci setari de fabrica?"
-
 msgid "Where do you want to backup your settings?"
 msgstr "Unde vrei sa salvezi datele"
 
@@ -9849,9 +9889,6 @@ msgstr ""
 msgid ""
 "You need a PC connected to your receiver. If you need further instructions, please visit the website https://openpli.org\n"
 "Your receiver will now be halted. After you have performed the update instructions from the website, your new firmware will ask you to restore your settings."
-msgstr ""
-
-msgid "You system does not support ext4"
 msgstr ""
 
 msgid "Your backup succeeded. We will now continue to explain the further upgrade process."
@@ -11169,9 +11206,6 @@ msgstr "zapped"
 msgid "®"
 msgstr ""
 
-#~ msgid "A recording is currently running. Please stop the recording before trying to configure the positioner."
-#~ msgstr "O registrare acuma este activa. Te rog opreste pe registrare inainte sa incerci Sa configurezi pe pozitioner."
-
 #~ msgid "Action on long powerbutton press"
 #~ msgstr "Actiune cind apasam prelungit butonul power"
 
@@ -11189,6 +11223,10 @@ msgstr ""
 
 #~ msgid "Current version:"
 #~ msgstr "Versiunea curenta:"
+
+#, fuzzy
+#~ msgid "Diasbled"
+#~ msgstr "Dezactivat"
 
 #~ msgid "Do you want to do another manual service scan?"
 #~ msgstr "Doriti efectuarea unei alte operatiuni de scanare manuala?"
@@ -11238,8 +11276,14 @@ msgstr ""
 #~ msgid "Please check your network settings!"
 #~ msgstr "Va rugam verificati setarile de retea!"
 
+#~ msgid "Press OK to start the scan"
+#~ msgstr "Apasati OK pentru a incepe scanarea"
+
 #~ msgid "Provider to scan"
 #~ msgstr "Furnizor ce urmeaza a fi scanat"
+
+#~ msgid "Satfinder"
+#~ msgstr "Satfinder"
 
 #, fuzzy
 #~ msgid "Show shutdown menu"
@@ -11286,6 +11330,19 @@ msgstr ""
 
 #~ msgid "What do you want to scan?"
 #~ msgstr "Ce vrei sa scanezi"
+
+#~ msgid ""
+#~ "When you do a factory reset, you will lose ALL your configuration data\n"
+#~ "(including bouquets, services, satellite data ...)\n"
+#~ "After completion of factory reset, your receiver will restart automatically!\n"
+#~ "\n"
+#~ "Really do a factory reset?"
+#~ msgstr ""
+#~ "Cand faci resetare de fabrica, o sa pierzi Toate Setarile\n"
+#~ "(inclusiv Bouquets, servicii, sateliti ...)\n"
+#~ "Dupa resetare receiverul tau va reporni automat!\n"
+#~ "\n"
+#~ "Esti sigur ca vrei sa faci setari de fabrica?"
 
 #~ msgid "Yes, do another manual scan now"
 #~ msgstr "Da, scaneaza inca odata manual"

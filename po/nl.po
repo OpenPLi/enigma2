@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-13 17:31+0100\n"
+"POT-Creation-Date: 2018-02-18 12:01+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: TechNL <tech@openpli.org>\n"
 "Language-Team: PLiteam <translators@openpli.org>\n"
@@ -835,7 +835,8 @@ msgstr "Met aanvullende motoropties kunt u details van uw motor invoeren zodat E
 msgid "Adjust 3D settings"
 msgstr "3D instellingen aanpassen"
 
-msgid "Adjust the color settings so that all the color shades are distinguishable, but appear as saturated as possible. If you are happy with the result, press OK to close the video fine-tuning, or use the number keys to select other test screens."
+#, fuzzy
+msgid "Adjust the color settings so that all the color shades are distinguishable but appear as saturated as possible. If you are happy with the result press OK to close the video fine-tuning or use the number keys to select other test screens."
 msgstr "Wijzig de kleuren zodanig dat alle tinten te onderscheiden zijn, maar wel zo verzadigd mogelijk zijn. Zodra het resultaat u bevalt, drukt u op OK om dit menu af te sluiten of selecteert u een ander testscherm d.m.v. de nummertoetsen."
 
 msgid "Advanced"
@@ -960,6 +961,10 @@ msgstr "Een lege bestandsnaam is ongeldig."
 
 msgid "An error occurred while downloading the packetlist. Please try again."
 msgstr "Er is een fout opgetreden bij het downloaden van de pakketlijst. Probeer het aub opnieuw."
+
+#, fuzzy
+msgid "An error occurred, Please try again later"
+msgstr "Fout geconstateerd - probeer het later opnieuw"
 
 msgid "An unknown error occurred!"
 msgstr "Er heeft zich een onbekende fout voorgedaan!"
@@ -1477,11 +1482,12 @@ msgstr "Geannuleerd a.g.v. een verzoek van de gebruiker"
 msgid "Cannot determine"
 msgstr "Kan niet vaststellen"
 
+#, fuzzy
+msgid "Cannot find any images, Please try again later"
+msgstr "Kan geen images vinden - probeer het later nogmaals"
+
 msgid "Cannot find any signal ..., aborting !"
 msgstr "Kan geen signaal vinden..., gestopt!"
-
-msgid "Cannot find images - please try later"
-msgstr "Kan geen images vinden - probeer het later nogmaals"
 
 msgid "Cannot move files on a different disk or system to the trash can"
 msgstr "Kan geen bestanden van een andere schijf of systeem naar de prullenbak verplaatsen"
@@ -2293,17 +2299,21 @@ msgstr "Cook eilanden"
 msgid "Copy"
 msgstr "Kopieër"
 
+msgid "Copy to..."
+msgstr ""
+
 msgid "Costa Rica"
 msgstr "Costa Rica"
 
 msgid "Cote d'Ivoire"
 msgstr "Ivoorkust"
 
+#, fuzzy
+msgid "Could not find any suitable media, Please insert a media (e.g. USB stick) and try again later"
+msgstr "Kon geen geschikt medium vinden - Plaats een geschikt medium (USB stick) en probeer het nogmaals!"
+
 msgid "Could not find installed channel list."
 msgstr "Geen geïnstalleerde zenderlijst gevonden."
-
-msgid "Could not find suitable media - Please insert a media (e.g. USB stick) and try again!"
-msgstr "Kon geen geschikt medium vinden - Plaats een geschikt medium (USB stick) en probeer het nogmaals!"
 
 msgid "Could not load medium! No disc inserted?"
 msgstr "Kon het medium niet laden! Is er geen schijf geplaatst?"
@@ -2388,7 +2398,8 @@ msgstr "Huidige transponder"
 msgid "Current value: "
 msgstr "Huidige waarde:"
 
-msgid "Currently the commit log cannot be retrieved - please try later again"
+#, fuzzy
+msgid "Currently the commit log cannot be retrieved, Please try again later"
 msgstr "Op dit moment kan het commitlog niet bereikt worden - probeer het later opnieuw"
 
 msgid "Custom skip time for '1'/'3' buttons"
@@ -2904,9 +2915,9 @@ msgstr "Niet omschakelen en schakel timer uit"
 msgid "Don't zap and remove timer"
 msgstr "Niet omschakelen en verwijder de timer"
 
-#, python-format
-msgid "Done - Installed, upgraded or removed %d package (%s)"
-msgid_plural "Done - Installed, upgraded or removed %d packages (%s)"
+#, fuzzy, python-format
+msgid "Done! Installed, upgraded or removed %d package (%s)"
+msgid_plural "Done! Installed, upgraded or removed %d packages (%s)"
 msgstr[0] "Gereed - %d pakket geïnstalleerd, vervangen of verwijderd (%s)"
 msgstr[1] "Gereed - %d pakketten geïnstalleerd, vervangen of verwijderd (%s)"
 
@@ -3503,6 +3514,10 @@ msgstr "Fiji"
 
 msgid "File appears to be busy.\n"
 msgstr "Bestand mogelijk in gebruik door ander proces.\n"
+
+#, fuzzy
+msgid "File manager"
+msgstr "Bestandsnaam"
 
 msgid "Filename"
 msgstr "Bestandsnaam"
@@ -4489,6 +4504,10 @@ msgstr "Toon beschikbare netwerken"
 msgid "List mode"
 msgstr "Lijstmode"
 
+#, fuzzy
+msgid "List of files"
+msgstr "Ga naar de bestandenlijst"
+
 msgid "List of storage devices"
 msgstr "Overzicht van opslagmedia"
 
@@ -4795,6 +4814,10 @@ msgstr "Draai oost"
 
 msgid "Move to position X"
 msgstr "Ga naar positie X"
+
+#, fuzzy
+msgid "Move to..."
+msgstr "Draai oost"
 
 msgid "Move west"
 msgstr "Draai west"
@@ -5223,6 +5246,12 @@ msgstr "Nota: indien ingeschakeld en u wilt vanuit 'wake up'naar standby, stelt 
 msgid ""
 "Nothing to scan!\n"
 "Please setup your tuner settings before you start a service scan."
+msgstr ""
+"Niets gevonden!\n"
+"Vóór het zoeken dient uw tuner correct ingesteld te zijn."
+
+#, fuzzy
+msgid "Nothing to scan! Setup your tuner and try again."
 msgstr ""
 "Niets gevonden!\n"
 "Vóór het zoeken dient uw tuner correct ingesteld te zijn."
@@ -5920,9 +5949,6 @@ msgstr "Druk OK om de satellieten te selecteren"
 msgid "Press OK to select/deselect a CAId."
 msgstr "Druk op OK om de CAId aan/uit te zetten."
 
-msgid "Press OK to start the scan"
-msgstr "Druk OK om te zoeken."
-
 msgid "Press OK to toggle the selection"
 msgstr "Druk OK om uw keuze te wijzigen"
 
@@ -6183,7 +6209,8 @@ msgstr "Herhaalfrequentie"
 msgid "Refresh rate selection."
 msgstr "Herhalingsfrequentie"
 
-msgid "Refreshing image list - Please wait..."
+#, fuzzy
+msgid "Refreshing image list, Please wait..."
 msgstr "Overzicht van beschikbare images wordt opgehaald. Een ogenblik geduld aub..."
 
 msgid "Refusing to move to the same directory"
@@ -6401,10 +6428,12 @@ msgstr "Hervat positie op %s"
 msgid "Resuming playback"
 msgstr "Afspelen wordt hervat"
 
-msgid "Retreiving image list - Please wait..."
+#, fuzzy
+msgid "Retreiving image list, Please wait..."
 msgstr "De gegevens worden opgehaald. Een ogenblik geduld aub..."
 
-msgid "Retreiving image slots - Please wait..."
+#, fuzzy
+msgid "Retreiving image slots, Please wait..."
 msgstr "De slotinfo wordt opgehaald. Een ogenblik geduld aub..."
 
 msgid "Return to movie list"
@@ -6559,9 +6588,6 @@ msgstr "Lengtegraad satelliet:"
 
 msgid "Satellites"
 msgstr "Satellieten"
-
-msgid "Satfinder"
-msgstr "Signaalzoeker"
 
 msgid "Sats"
 msgstr "Satellieten"
@@ -6852,6 +6878,14 @@ msgstr "Kies de juiste zender om van op te nemen"
 msgid "Select copy destination for:"
 msgstr "Kies kopieerbestemming voor:"
 
+#, fuzzy
+msgid "Select destination for copy selected files..."
+msgstr "Selecteer bestemming voor:"
+
+#, fuzzy
+msgid "Select destination for move selected files..."
+msgstr "Selecteer bestemming voor:"
+
 msgid "Select destination for:"
 msgstr "Selecteer bestemming voor:"
 
@@ -6860,6 +6894,9 @@ msgstr "Kies de directory t.b.v. het logfile"
 
 msgid "Select files for backup."
 msgstr "Selecteer backup bestanden."
+
+msgid "Select files with 'OK' and then use 'Menu' for select operation"
+msgstr ""
 
 msgid "Select files/folders to backup"
 msgstr "Kies bestanden / mappen voor de backup"
@@ -6893,6 +6930,10 @@ msgstr "Kies locatie"
 
 msgid "Select movie"
 msgstr "Kies een film"
+
+#, fuzzy
+msgid "Select operation:"
+msgstr "Kies locatie"
 
 msgid "Select path for logfile"
 msgstr "Kies de doelmap t.b.v. het logfile"
@@ -7590,9 +7631,6 @@ msgstr "Solomon eilanden"
 
 msgid "Somalia"
 msgstr "Somalië"
-
-msgid "Some error occured - Please try later"
-msgstr "Fout geconstateerd - probeer het later opnieuw"
 
 msgid "Some plugins are not available:\n"
 msgstr "Enkele plugins zijn niet beschikbaar:\n"
@@ -8335,7 +8373,8 @@ msgstr ""
 "Er is mogelijk niet genoeg ruimte vrij op de geselecteerde partitie.\n"
 "Weet u zeker dat u wilt doorgaan?"
 
-msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
+#, fuzzy
+msgid "This DVD RW medium is already formatted, Reformatting will erase all content on the disc."
 msgstr "Dit DVD-RW medium is reeds geformatteerd - herformatteren zal alles wissen op deze disk."
 
 #, python-format
@@ -11397,6 +11436,9 @@ msgstr "®"
 #~ msgid "Prepare another USB stick for image flashing"
 #~ msgstr "Bereid een andere USB stick voor om de image te flashen"
 
+#~ msgid "Press OK to start the scan"
+#~ msgstr "Druk OK om te zoeken."
+
 #~ msgid "Provider to scan"
 #~ msgstr "Zoek op provider"
 
@@ -11419,6 +11461,9 @@ msgstr "®"
 
 #~ msgid "SID"
 #~ msgstr "SID"
+
+#~ msgid "Satfinder"
+#~ msgstr "Signaalzoeker"
 
 #~ msgid "Select an image to be downloaded"
 #~ msgstr "Kies de image die u wilt downloaden"

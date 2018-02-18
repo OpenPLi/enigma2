@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OPENPLi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-13 16:06+0330\n"
+"POT-Creation-Date: 2018-02-18 12:01+0330\n"
 "PO-Revision-Date: 2015-12-18 21:05+0200\n"
 "Last-Translator: Yetkin AYDIN <yetkina@gmail.com>\n"
 "Language-Team: http://www.hurforum.com <yetkina@gmail.com>\n"
@@ -645,8 +645,9 @@ msgstr ""
 "Kayıt başladı:\n"
 "%s"
 
-msgid "A recording is currently running on the selected tuner. Please select a different tuner or consider to stop the recording to try again."
-msgstr ""
+#, fuzzy
+msgid "A recording is currently running on the selected tuner. Please select a different tuner or stop the recording and try again."
+msgstr "Şu anda Kayıt yapılıyor. Tarama yapmak için önce Kaydı durdurunuz."
 
 msgid ""
 "A recording is currently running.\n"
@@ -827,7 +828,8 @@ msgstr ""
 msgid "Adjust 3D settings"
 msgstr "3D Ayarları"
 
-msgid "Adjust the color settings so that all the color shades are distinguishable, but appear as saturated as possible. If you are happy with the result, press OK to close the video fine-tuning, or use the number keys to select other test screens."
+#, fuzzy
+msgid "Adjust the color settings so that all the color shades are distinguishable but appear as saturated as possible. If you are happy with the result press OK to close the video fine-tuning or use the number keys to select other test screens."
 msgstr "Tüm renk tonları ayırt edilebilir, ama mümkün olduğunca doymuş görünür böylece renk ayarlarını yapın. Eğer sonuçtan memnun değilseniz, video ince ayarını kapatmak için OK tuşuna basın, ya da diğer test ekranlarını seçmek için sayı tuşlarını kullanın."
 
 msgid "Advanced"
@@ -952,6 +954,10 @@ msgstr "Dosya Adı boş yada geçersiz."
 
 msgid "An error occurred while downloading the packetlist. Please try again."
 msgstr "Paket listesi indirilirken bir hata oluştu. Lütfen tekrar deneyiniz."
+
+#, fuzzy
+msgid "An error occurred, Please try again later"
+msgstr "Güncelleme yok. Lütfen daha sonra tekrar deneyin."
 
 msgid "An unknown error occurred!"
 msgstr "Bilinmeyen bir hata oluştu!"
@@ -1472,11 +1478,12 @@ msgstr ""
 msgid "Cannot determine"
 msgstr "Belirlenemiyor"
 
+#, fuzzy
+msgid "Cannot find any images, Please try again later"
+msgstr "Güncelleme yok. Lütfen daha sonra tekrar deneyin."
+
 msgid "Cannot find any signal ..., aborting !"
 msgstr "Herhangi bir sinyal bulunamadı... İptal!"
-
-msgid "Cannot find images - please try later"
-msgstr ""
 
 msgid "Cannot move files on a different disk or system to the trash can"
 msgstr "Çöp kutusuna farklı bir disk veya sistem dosyaları taşıyamazsınız"
@@ -1544,6 +1551,10 @@ msgstr "Kanal"
 
 msgid "Channel Info"
 msgstr "Kanal Bilgisi"
+
+#, fuzzy
+msgid "Channel context menu"
+msgstr "Kanal Listesi"
 
 msgid "Channel list type"
 msgstr "Kanal Listesi Tipi"
@@ -2054,7 +2065,8 @@ msgstr "Yerel ağ ayarlarınızı yapılandırın"
 msgid "Configure your network again"
 msgstr "Ağınızı tekrar yapılandırın"
 
-msgid "Configure your network settings, and press OK to start the scan"
+#, fuzzy
+msgid "Configure your network settings and press OK to scan"
 msgstr "Ağ ayarlarınızı yapılandırmak ve taramayı başlatmak için OK tuşuna basın"
 
 msgid "Configure your wireless LAN again"
@@ -2127,20 +2139,14 @@ msgstr "Sürekli oynat (döngü)"
 msgid "Contrast"
 msgstr "Kontrast"
 
-msgid "Convert ext3 filesystem to ext4"
-msgstr "Ext3 dosya sistemini Ext4 e dönüştür."
-
-msgid "Convert ext3 to ext4"
-msgstr "Dönüştür ext3'ü ext4'e"
-
-msgid "Converting ext3 to ext4..."
-msgstr "Dönüştürülüyor ext3 - ext4'e..."
-
 msgid "Cook Islands"
 msgstr ""
 
 msgid "Copy"
 msgstr "Kopyala"
+
+msgid "Copy to..."
+msgstr ""
 
 msgid "Costa Rica"
 msgstr ""
@@ -2148,11 +2154,11 @@ msgstr ""
 msgid "Cote d'Ivoire"
 msgstr ""
 
+msgid "Could not find any suitable media, Please insert a media (e.g. USB stick) and try again later"
+msgstr ""
+
 msgid "Could not find installed channel list."
 msgstr "Yüklü kanal listesi bulunamadı."
-
-msgid "Could not find suitable media - Please insert a media (e.g. USB stick) and try again!"
-msgstr ""
 
 msgid "Could not load medium! No disc inserted?"
 msgstr "Ortam yüklenemedi! Takılı disk yok?"
@@ -2239,7 +2245,8 @@ msgstr "Geçerli transponder"
 msgid "Current value: "
 msgstr "Mevcut değer: "
 
-msgid "Currently the commit log cannot be retrieved - please try later again"
+#, fuzzy
+msgid "Currently the commit log cannot be retrieved, Please try again later"
 msgstr "Şu anda işlemeye günlüğü alınamaz. Lütfen daha sonra tekrar deneyin."
 
 msgid "Custom skip time for '1'/'3' buttons"
@@ -2539,10 +2546,6 @@ msgstr "DiSEqC portu %s: %s"
 msgid "DiSEqC-tester settings"
 msgstr "DiSEqC-test ayarları"
 
-#, fuzzy
-msgid "Diasbled"
-msgstr "Devre dışı"
-
 msgid "Did you see all eight arrow heads?"
 msgstr ""
 
@@ -2646,13 +2649,6 @@ msgid ""
 msgstr ""
 "Dosya sistemini kontrol etmek istiyor musunuz?\n"
 "Bu işlem çok uzun sürebilir!"
-
-msgid ""
-"Do you really want to convert the filesystem?\n"
-"You cannot go back!"
-msgstr ""
-"Gerçekten dosya sistemi dönüştürmek istiyor musunuz?\n"
-"Geri dönüşü yok!"
 
 #, python-format
 msgid "Do you really want to delete %s?"
@@ -2775,9 +2771,9 @@ msgstr "Kanal Değiştirmeyin ve Zaman Kaydırmayı durdurmayın"
 msgid "Don't zap and remove timer"
 msgstr "Kanal Değiştirmeyin ve Zaman Kaydırmayı silmeyin"
 
-#, python-format
-msgid "Done - Installed, upgraded or removed %d package (%s)"
-msgid_plural "Done - Installed, upgraded or removed %d packages (%s)"
+#, fuzzy, python-format
+msgid "Done! Installed, upgraded or removed %d package (%s)"
+msgid_plural "Done! Installed, upgraded or removed %d packages (%s)"
 msgstr[0] "Yüklenen, güncellenen veya silinen %d paket (%s)"
 
 msgid "Download plugins"
@@ -3293,6 +3289,12 @@ msgstr "FTA"
 msgid "Factory reset"
 msgstr "Fabrika ayarlarına dön (RESET)"
 
+msgid ""
+"Factory reset will restore your receiver to its default configuration. All user data including system settings, tuner configuration, bouquets, services and plugins will be DELETED. Recordings and other files stored on HDD and USB media will remain intact. After completion, the system will restart automatically!\n"
+"\n"
+"Do you really want to proceed?"
+msgstr ""
+
 msgid "Failed"
 msgstr "Başarısız"
 
@@ -3352,6 +3354,10 @@ msgstr ""
 
 msgid "File appears to be busy.\n"
 msgstr "Dosya meşgul gibi görünüyor.\n"
+
+#, fuzzy
+msgid "File manager"
+msgstr "Paket Yöneticisi"
 
 msgid "Filename"
 msgstr ""
@@ -3949,6 +3955,9 @@ msgstr ""
 msgid "Indonesia"
 msgstr ""
 
+msgid "Indonesian"
+msgstr ""
+
 msgid "Info"
 msgstr "Bilgi"
 
@@ -4340,6 +4349,10 @@ msgstr "Kullanılabilir ağ listesi"
 msgid "List mode"
 msgstr "Liste modu"
 
+#, fuzzy
+msgid "List of files"
+msgstr "Dosya listesine geç"
+
 msgid "List of storage devices"
 msgstr "Depolama aygıtları listesi"
 
@@ -4651,6 +4664,10 @@ msgstr "Doğuya taşı"
 
 msgid "Move to position X"
 msgstr "'X' pozisyonuna taşı"
+
+#, fuzzy
+msgid "Move to..."
+msgstr "Doğuya taşı"
 
 msgid "Move west"
 msgstr "Batıya taşı"
@@ -5083,6 +5100,12 @@ msgstr "Not:  "
 msgid ""
 "Nothing to scan!\n"
 "Please setup your tuner settings before you start a service scan."
+msgstr ""
+"Kanal araması yapılmadı!\n"
+"Lütfen kanal araması yapmadan önce tuner kurulumunuzu tamamlayın."
+
+#, fuzzy
+msgid "Nothing to scan! Setup your tuner and try again."
 msgstr ""
 "Kanal araması yapılmadı!\n"
 "Lütfen kanal araması yapmadan önce tuner kurulumunuzu tamamlayın."
@@ -5785,9 +5808,6 @@ msgstr "Uydu seçmek için OK tuşuna basın"
 msgid "Press OK to select/deselect a CAId."
 msgstr "CAId seçmek/bırakmak için OK'a basın."
 
-msgid "Press OK to start the scan"
-msgstr "Aramayı başlatmak için OK'a basın"
-
 msgid "Press OK to toggle the selection"
 msgstr "Seçimi tamamlamak için OK bas"
 
@@ -6046,7 +6066,7 @@ msgid "Refresh rate selection."
 msgstr "Yenileme hızı seçimi."
 
 #, fuzzy
-msgid "Refreshing image list - Please wait..."
+msgid "Refreshing image list, Please wait..."
 msgstr "Güncellemeler kontrol ediliyor. Lütfen bekleyin..."
 
 #, fuzzy
@@ -6266,11 +6286,11 @@ msgid "Resuming playback"
 msgstr "Oynatmaya devam ediliyor"
 
 #, fuzzy
-msgid "Retreiving image list - Please wait..."
+msgid "Retreiving image list, Please wait..."
 msgstr "Eklenti bilgisi getiriliyor. Lütfen bekleyin..."
 
 #, fuzzy
-msgid "Retreiving image slots - Please wait..."
+msgid "Retreiving image slots, Please wait..."
 msgstr "Güncellemeler kontrol ediliyor. Lütfen bekleyin..."
 
 msgid "Return to movie list"
@@ -6428,9 +6448,6 @@ msgstr "Uydu Boylam:"
 msgid "Satellites"
 msgstr "Uydular"
 
-msgid "Satfinder"
-msgstr "Uydu Bulucu"
-
 msgid "Sats"
 msgstr "Uydular"
 
@@ -6507,11 +6524,24 @@ msgstr "%s bant Tarama"
 msgid "Scan additional SR"
 msgstr "Eklenen SR'leri ara"
 
+#, fuzzy, python-format
+msgid "Scan completed, %d channel found."
+msgid_plural "Scan completed, %d channels found."
+msgstr[0] "Tarama tamamlandı. %d kanal bulundu."
+
+#, fuzzy
+msgid "Scan failed!"
+msgstr "Tarama başarısız!"
+
 msgid "Scan files..."
 msgstr "Dosyaları Tara..."
 
 msgid "Scan options"
 msgstr "Tarama seçenekleri"
+
+#, fuzzy
+msgid "Scan state"
+msgstr "Kanal arama durumu"
 
 msgid "Scan wireless networks"
 msgstr "Kablosuz ağları Tara"
@@ -6709,6 +6739,14 @@ msgstr "Kaydın yapılacağı kanalı seçin"
 msgid "Select copy destination for:"
 msgstr "Kopyalamak için hedef seçin:"
 
+#, fuzzy
+msgid "Select destination for copy selected files..."
+msgstr "Hedef seç. Bunun için:"
+
+#, fuzzy
+msgid "Select destination for move selected files..."
+msgstr "Hedef seç. Bunun için:"
+
 msgid "Select destination for:"
 msgstr "Hedef seç. Bunun için:"
 
@@ -6719,12 +6757,19 @@ msgstr "%s klasörü oluşturulamadı."
 msgid "Select files for backup."
 msgstr "Yedekleme dosyalarını seçin."
 
+msgid "Select files with 'OK' and then use 'Menu' for select operation"
+msgstr ""
+
 msgid "Select files/folders to backup"
 msgstr "Yedeklenecek dosya/klasörleri seç"
 
 #, fuzzy
 msgid "Select function"
 msgstr "Eylem seçimi"
+
+#, fuzzy
+msgid "Select hard disk"
+msgstr "Bir Arayüz seçin"
 
 #, fuzzy
 msgid "Select horizontal resolution:"
@@ -6750,6 +6795,10 @@ msgstr "Yer seçimi"
 
 msgid "Select movie"
 msgstr "Film seç"
+
+#, fuzzy
+msgid "Select operation:"
+msgstr "Yer seçimi"
 
 #, fuzzy
 msgid "Select path for logfile"
@@ -6791,16 +6840,16 @@ msgstr ""
 msgid "Select the movie path"
 msgstr "Film yolunu seçin"
 
-msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
 msgid "Select the satellite you want to configure. Once that satellite is configured you can select and configure other satellites that will be accessed using this same tuner."
@@ -7036,6 +7085,10 @@ msgstr "Ayarlar"
 
 msgid "Setup"
 msgstr "Kurulum"
+
+#, fuzzy
+msgid "Setup hard disk"
+msgstr "HDD"
 
 msgid "Setup menu"
 msgstr "Kurulum Menüsü"
@@ -7449,9 +7502,6 @@ msgid "Solomon Islands"
 msgstr ""
 
 msgid "Somalia"
-msgstr ""
-
-msgid "Some error occured - Please try later"
 msgstr ""
 
 msgid "Some plugins are not available:\n"
@@ -8183,7 +8233,8 @@ msgstr ""
 "Seçtiğiniz disk bölümü (partition) yeterli boş alana sahip olmayabilir.\n"
 "Devam etmek istiyor musunuz?"
 
-msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
+#, fuzzy
+msgid "This DVD RW medium is already formatted, Reformatting will erase all content on the disc."
 msgstr "DVD-RW medyası zaten biçimlendirilmiş - yeniden biçimlendirme tüm disk içeriğini silecektir."
 
 #, python-format
@@ -8269,7 +8320,7 @@ msgstr ""
 msgid "This option configures you can set auto volume level."
 msgstr ""
 
-msgid "This option set the level of surpression of musquito noise (Musquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
+msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr ""
 
 msgid "This option sets  the picture contrast."
@@ -8657,6 +8708,10 @@ msgstr "İki"
 
 msgid "Type"
 msgstr "Tip"
+
+#, fuzzy
+msgid "Type of LNB/device"
+msgstr "Tarama tipi"
 
 msgid "Type of scan"
 msgstr "Tarama tipi"
@@ -9423,19 +9478,6 @@ msgstr "16:9 en boy oranı varsa, resmi büyütme/uzatma için seçebilirsiniz."
 msgid "When the content has an aspect ratio of 4:3, choose whether to scale/stretch the picture."
 msgstr "4:3 en boy oranı varsa, resmi büyütme/uzatma için seçebilirsiniz."
 
-msgid ""
-"When you do a factory reset, you will lose ALL your configuration data\n"
-"(including bouquets, services, satellite data ...)\n"
-"After completion of factory reset, your receiver will restart automatically!\n"
-"\n"
-"Really do a factory reset?"
-msgstr ""
-"Fabrika ayarlarına geri döndüğünüzde, yapılandırma dosyalarınızın tamamını KAYBEDEBİLİRSİNİZ\n"
-"(buketler, kanallar, uydu verileri ve özel ayar dosyalarınız ...)\n"
-"Fabrika ayarlarına geri dönüldükten sonra, uydu alıcınız otomatik olarak yeniden başlatılacaktır!\n"
-"\n"
-"Fabrika ayarlarına geri dönmek istediğinizden emin misiniz?"
-
 msgid "Where do you want to backup your settings?"
 msgstr "Ayarları nereye yedeklemek istiyorsun?"
 
@@ -9649,9 +9691,6 @@ msgid ""
 msgstr ""
 "Alıcıya bağlı bir PC gerekir. Daha fazla talimatlara ihtiyacınız varsa, web sitesini ziyaret edebilirsiniz http://vuplus.com/sub/sub0107.php\n"
 "Alıcı durdu.  Web sitesindeki güncelleme talimatlarını gerçekleştirerek, yeni firmware yüklediğinizde ayarları geri yüklemek için size soracaktır."
-
-msgid "You system does not support ext4"
-msgstr "Sisteminiz Ext4 dosya sistemi desteklemiyor"
 
 msgid "Your backup succeeded. We will now continue to explain the further upgrade process."
 msgstr "Yedekleme başarılı oldu. Biz şimdi daha yükseltme işlemini anlatmaya devam edeceğiz."
@@ -11034,6 +11073,15 @@ msgstr "®"
 #~ msgid "Constellation"
 #~ msgstr "Takımyıldız"
 
+#~ msgid "Convert ext3 filesystem to ext4"
+#~ msgstr "Ext3 dosya sistemini Ext4 e dönüştür."
+
+#~ msgid "Convert ext3 to ext4"
+#~ msgstr "Dönüştür ext3'ü ext4'e"
+
+#~ msgid "Converting ext3 to ext4..."
+#~ msgstr "Dönüştürülüyor ext3 - ext4'e..."
+
 #~ msgid "Could not connect to receiver .NFI image feed server:"
 #~ msgstr "Alıcı .NFI besleme sunucusuna bağlanamıyor:"
 
@@ -11042,6 +11090,17 @@ msgstr "®"
 
 #~ msgid "Currently installed image"
 #~ msgstr "Yüklü image"
+
+#, fuzzy
+#~ msgid "Diasbled"
+#~ msgstr "Devre dışı"
+
+#~ msgid ""
+#~ "Do you really want to convert the filesystem?\n"
+#~ "You cannot go back!"
+#~ msgstr ""
+#~ "Gerçekten dosya sistemi dönüştürmek istiyor musunuz?\n"
+#~ "Geri dönüşü yok!"
 
 #~ msgid "Do you want to do another manual service scan?"
 #~ msgstr "Başka Manuel servis taramasını yapmak ister misiniz?"
@@ -11154,6 +11213,9 @@ msgstr "®"
 #~ msgid "Press OK and configure the days and times wakeup receiver from deep standby mode."
 #~ msgstr "OK tuşuna basarak derin uykudan uyandırma gün ve saatini yapılandırın."
 
+#~ msgid "Press OK to start the scan"
+#~ msgstr "Aramayı başlatmak için OK'a basın"
+
 #~ msgid "Provider to scan"
 #~ msgstr "Yayıncıya göre ara"
 
@@ -11165,6 +11227,9 @@ msgstr "®"
 
 #~ msgid "SID"
 #~ msgstr "SID"
+
+#~ msgid "Satfinder"
+#~ msgstr "Uydu Bulucu"
 
 #~ msgid "Select an image to be downloaded"
 #~ msgstr "İndirmek için IMAJ seçin"
@@ -11310,6 +11375,19 @@ msgstr "®"
 #~ msgid "When enabled, error messages related to the Common Interface module will not be shown."
 #~ msgstr "Kart/Modül ile hata iletileri gösterilmeyecektir."
 
+#~ msgid ""
+#~ "When you do a factory reset, you will lose ALL your configuration data\n"
+#~ "(including bouquets, services, satellite data ...)\n"
+#~ "After completion of factory reset, your receiver will restart automatically!\n"
+#~ "\n"
+#~ "Really do a factory reset?"
+#~ msgstr ""
+#~ "Fabrika ayarlarına geri döndüğünüzde, yapılandırma dosyalarınızın tamamını KAYBEDEBİLİRSİNİZ\n"
+#~ "(buketler, kanallar, uydu verileri ve özel ayar dosyalarınız ...)\n"
+#~ "Fabrika ayarlarına geri dönüldükten sonra, uydu alıcınız otomatik olarak yeniden başlatılacaktır!\n"
+#~ "\n"
+#~ "Fabrika ayarlarına geri dönmek istediğinizden emin misiniz?"
+
 #~ msgid "When you use the remote fallback tuner to do recording, the timer conflict detection can't handle remote fallback tuners. This option allows you to turn off the timer confict detection"
 #~ msgstr "Eğer kayıt yapmak için uzak yedek tuner kullandığınızda, zamanlayıcı çakışması algılama için uzak alıcıları işleyemez. Bu seçenek, zamanlayıcı çakışmayı algılama için kapatır."
 
@@ -11321,6 +11399,9 @@ msgstr "®"
 
 #~ msgid "You have chosen to create a new .NFI flasher bootable USB stick. This will repartition the USB stick and therefore all data on it will be erased."
 #~ msgstr "Önyükleme yapabilir .NFI flaşlayıcı USB bellek oluşturmayı seçtiniz. Bu işlem USB belleğin yeniden bölümlendirmesini gerektirdiğinden içeriğindeki tüm veriler silinecektir."
+
+#~ msgid "You system does not support ext4"
+#~ msgstr "Sisteminiz Ext4 dosya sistemi desteklemiyor"
 
 #~ msgid ""
 #~ "Your frontprocessor firmware must be upgraded.\n"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1-En-Th\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-13 16:06+0330\n"
+"POT-Creation-Date: 2018-02-18 12:01+0330\n"
 "PO-Revision-Date: 2010-04-08 18:13+0700\n"
 "Last-Translator: Tony - Thaidreambox\n"
 "Language-Team: Tony @ Thai Dreambox <tonyboyth@gmail.com>\n"
@@ -636,8 +636,9 @@ msgstr ""
 "เริ่มบันทึกรายการ:\n"
 "%s"
 
-msgid "A recording is currently running on the selected tuner. Please select a different tuner or consider to stop the recording to try again."
-msgstr ""
+#, fuzzy
+msgid "A recording is currently running on the selected tuner. Please select a different tuner or stop the recording and try again."
+msgstr "กำลังบันทึกรายการอยู่ ให้หยุดการบันทึกก่อนตั้งค่าตัวขับจาน"
 
 msgid ""
 "A recording is currently running.\n"
@@ -825,7 +826,8 @@ msgstr ""
 msgid "Adjust 3D settings"
 msgstr ""
 
-msgid "Adjust the color settings so that all the color shades are distinguishable, but appear as saturated as possible. If you are happy with the result, press OK to close the video fine-tuning, or use the number keys to select other test screens."
+#, fuzzy
+msgid "Adjust the color settings so that all the color shades are distinguishable but appear as saturated as possible. If you are happy with the result press OK to close the video fine-tuning or use the number keys to select other test screens."
 msgstr "ตั้งค่าสีเพื่อแสดงความต่างของสี แต่ยังคงมีความอิ่มตัวอยู่ ถ้าพอใจกับการตั้งค่านี้ให้กดปุ่ม OK เพื่อออกจากตั้งค่าหรือกดปุ่มตัวเลขเพื่อตั้งค่าส่วนอื่นๆ ของหน้าจอ"
 
 msgid "Advanced"
@@ -957,6 +959,10 @@ msgstr "ชื่อไฟล์ห้ามเป็นช่องว่าง
 
 #, fuzzy
 msgid "An error occurred while downloading the packetlist. Please try again."
+msgstr "พบข้อผิดพลาด ไม่สามารถดาวน์โหลดรายการของส่วนประกอบได้ กรุณาลองซ้ำอีกครั้ง...."
+
+#, fuzzy
+msgid "An error occurred, Please try again later"
 msgstr "พบข้อผิดพลาด ไม่สามารถดาวน์โหลดรายการของส่วนประกอบได้ กรุณาลองซ้ำอีกครั้ง...."
 
 msgid "An unknown error occurred!"
@@ -1485,10 +1491,10 @@ msgstr ""
 msgid "Cannot determine"
 msgstr ""
 
-msgid "Cannot find any signal ..., aborting !"
+msgid "Cannot find any images, Please try again later"
 msgstr ""
 
-msgid "Cannot find images - please try later"
+msgid "Cannot find any signal ..., aborting !"
 msgstr ""
 
 msgid "Cannot move files on a different disk or system to the trash can"
@@ -1559,6 +1565,10 @@ msgstr "ช่อง"
 
 msgid "Channel Info"
 msgstr ""
+
+#, fuzzy
+msgid "Channel context menu"
+msgstr "เมนูช่องรายการ"
 
 #, fuzzy
 msgid "Channel list type"
@@ -2088,8 +2098,9 @@ msgstr "ตั้งค่าการ์แลนในเครื่อง"
 msgid "Configure your network again"
 msgstr "ตั้งเครือข่ายอีกครั้ง"
 
-msgid "Configure your network settings, and press OK to start the scan"
-msgstr ""
+#, fuzzy
+msgid "Configure your network settings and press OK to scan"
+msgstr "ตั้งเครือข่ายอีกครั้ง"
 
 msgid "Configure your wireless LAN again"
 msgstr "ตั้งค่าเครือข่ายไร้สายอีกครั้ง"
@@ -2163,19 +2174,13 @@ msgstr ""
 msgid "Contrast"
 msgstr "ความเข้ม"
 
-msgid "Convert ext3 filesystem to ext4"
-msgstr ""
-
-msgid "Convert ext3 to ext4"
-msgstr ""
-
-msgid "Converting ext3 to ext4..."
-msgstr ""
-
 msgid "Cook Islands"
 msgstr ""
 
 msgid "Copy"
+msgstr ""
+
+msgid "Copy to..."
 msgstr ""
 
 msgid "Costa Rica"
@@ -2184,10 +2189,10 @@ msgstr ""
 msgid "Cote d'Ivoire"
 msgstr ""
 
-msgid "Could not find installed channel list."
+msgid "Could not find any suitable media, Please insert a media (e.g. USB stick) and try again later"
 msgstr ""
 
-msgid "Could not find suitable media - Please insert a media (e.g. USB stick) and try again!"
+msgid "Could not find installed channel list."
 msgstr ""
 
 #, fuzzy
@@ -2275,7 +2280,7 @@ msgstr "ทรานสปอนเดอร์ปัจจุบัน"
 msgid "Current value: "
 msgstr "ค่าปัจจุบัน:"
 
-msgid "Currently the commit log cannot be retrieved - please try later again"
+msgid "Currently the commit log cannot be retrieved, Please try again later"
 msgstr ""
 
 #, fuzzy
@@ -2588,10 +2593,6 @@ msgstr "DiSEqC repeats"
 msgid "DiSEqC-tester settings"
 msgstr "ตั้งค่า DiSEqC-Tester"
 
-#, fuzzy
-msgid "Diasbled"
-msgstr "ไม่ใช้งาน"
-
 msgid "Did you see all eight arrow heads?"
 msgstr ""
 
@@ -2700,11 +2701,6 @@ msgid ""
 msgstr ""
 "ท่านแน่ใจหรือไม่ที่จะตรวจสอบระบบไฟล์?\n"
 "เนื่องจากจะใช้เวลานานมากกว่าจะแล้วเสร็จ!"
-
-msgid ""
-"Do you really want to convert the filesystem?\n"
-"You cannot go back!"
-msgstr ""
 
 #, python-format
 msgid "Do you really want to delete %s?"
@@ -2827,8 +2823,8 @@ msgid "Don't zap and remove timer"
 msgstr ""
 
 #, fuzzy, python-format
-msgid "Done - Installed, upgraded or removed %d package (%s)"
-msgid_plural "Done - Installed, upgraded or removed %d packages (%s)"
+msgid "Done! Installed, upgraded or removed %d package (%s)"
+msgid_plural "Done! Installed, upgraded or removed %d packages (%s)"
 msgstr[0] "เสร็จแล้ว - ติดตั้งปรับปรุงหรือลบ %d รายการ พบข้อผิดพลาด %d รายการ"
 msgstr[1] "เสร็จแล้ว - ติดตั้งปรับปรุงหรือลบ %d รายการ พบข้อผิดพลาด %d รายการ"
 
@@ -3361,6 +3357,12 @@ msgstr ""
 msgid "Factory reset"
 msgstr "ตั้งค่าจากโรงงาน"
 
+msgid ""
+"Factory reset will restore your receiver to its default configuration. All user data including system settings, tuner configuration, bouquets, services and plugins will be DELETED. Recordings and other files stored on HDD and USB media will remain intact. After completion, the system will restart automatically!\n"
+"\n"
+"Do you really want to proceed?"
+msgstr ""
+
 msgid "Failed"
 msgstr "ล้มเหลว"
 
@@ -3421,6 +3423,10 @@ msgstr ""
 
 msgid "File appears to be busy.\n"
 msgstr ""
+
+#, fuzzy
+msgid "File manager"
+msgstr "ตัวจัดการส่วนประกอบ"
 
 msgid "Filename"
 msgstr ""
@@ -4029,6 +4035,9 @@ msgstr ""
 msgid "Indonesia"
 msgstr ""
 
+msgid "Indonesian"
+msgstr ""
+
 msgid "Info"
 msgstr "ข้อมูล"
 
@@ -4447,6 +4456,10 @@ msgid "List mode"
 msgstr ""
 
 #, fuzzy
+msgid "List of files"
+msgstr "เข้าสู่สารบัญไฟล์"
+
+#, fuzzy
 msgid "List of storage devices"
 msgstr "อุปกรณ์สำหรับบันทึก"
 
@@ -4772,6 +4785,10 @@ msgstr "เคลื่อนไปทางทิศตะวันออก"
 
 msgid "Move to position X"
 msgstr ""
+
+#, fuzzy
+msgid "Move to..."
+msgstr "เคลื่อนไปทางทิศตะวันออก"
 
 msgid "Move west"
 msgstr "เคลื่อนไปทางทิศตะวันตก"
@@ -5214,6 +5231,12 @@ msgstr ""
 msgid ""
 "Nothing to scan!\n"
 "Please setup your tuner settings before you start a service scan."
+msgstr ""
+"ไม่มีรายการให้ค้นหา\n"
+"กรุณาตั้งค่า Tuner ก่อนการค้นหาช่องรายการใหม่"
+
+#, fuzzy
+msgid "Nothing to scan! Setup your tuner and try again."
 msgstr ""
 "ไม่มีรายการให้ค้นหา\n"
 "กรุณาตั้งค่า Tuner ก่อนการค้นหาช่องรายการใหม่"
@@ -5941,9 +5964,6 @@ msgstr ""
 msgid "Press OK to select/deselect a CAId."
 msgstr "กดปุ่ม OK เพื่อเลือกหรือยกเลิก CAId"
 
-msgid "Press OK to start the scan"
-msgstr "กดปุ่ม OK เพื่อเริ่มค้นหา"
-
 msgid "Press OK to toggle the selection"
 msgstr ""
 
@@ -6206,7 +6226,7 @@ msgid "Refresh rate selection."
 msgstr "เลือกความถี่หน้าจอ"
 
 #, fuzzy
-msgid "Refreshing image list - Please wait..."
+msgid "Refreshing image list, Please wait..."
 msgstr "กำลังดาวน์โหลดข้อมูลติดตั้งใหม่ กรุณารอสักครู่..."
 
 #, fuzzy
@@ -6431,11 +6451,11 @@ msgid "Resuming playback"
 msgstr "กำลังกลับมาเล่นที่เดิม"
 
 #, fuzzy
-msgid "Retreiving image list - Please wait..."
+msgid "Retreiving image list, Please wait..."
 msgstr "กำลังโหลดข้อมูล Plugin กรุณารอสักครู่..."
 
 #, fuzzy
-msgid "Retreiving image slots - Please wait..."
+msgid "Retreiving image slots, Please wait..."
 msgstr "กำลังโหลดข้อมูล Plugin กรุณารอสักครู่..."
 
 msgid "Return to movie list"
@@ -6593,9 +6613,6 @@ msgstr ""
 msgid "Satellites"
 msgstr "ดาวเทียม"
 
-msgid "Satfinder"
-msgstr "ค้นหาดาวเทียม"
-
 msgid "Sats"
 msgstr "ดาว"
 
@@ -6674,12 +6691,26 @@ msgstr "ค้นหา band EU MID"
 msgid "Scan additional SR"
 msgstr "ค้นหา additional SR"
 
+#, fuzzy, python-format
+msgid "Scan completed, %d channel found."
+msgid_plural "Scan completed, %d channels found."
+msgstr[0] "บริการนี้ %d ไม่มี!"
+msgstr[1] "บริการนี้ %d ไม่มี!"
+
+#, fuzzy
+msgid "Scan failed!"
+msgstr "ปรับค่าล้มเหลว!"
+
 #, fuzzy
 msgid "Scan files..."
 msgstr "ค้นหาไฟล์..."
 
 msgid "Scan options"
 msgstr ""
+
+#, fuzzy
+msgid "Scan state"
+msgstr "สถานะการค้นหา"
 
 #, fuzzy
 msgid "Scan wireless networks"
@@ -6893,6 +6924,12 @@ msgstr "เลือกบันทึกรายการจาก"
 msgid "Select copy destination for:"
 msgstr ""
 
+msgid "Select destination for copy selected files..."
+msgstr ""
+
+msgid "Select destination for move selected files..."
+msgstr ""
+
 msgid "Select destination for:"
 msgstr ""
 
@@ -6903,12 +6940,19 @@ msgstr "ไม่สามารถสร้างโฟลเดอร์ %s �
 msgid "Select files for backup."
 msgstr ""
 
+msgid "Select files with 'OK' and then use 'Menu' for select operation"
+msgstr ""
+
 msgid "Select files/folders to backup"
 msgstr "เลือกไฟล์/โฟล์เดอร์ที่จะสำรอง"
 
 #, fuzzy
 msgid "Select function"
 msgstr "เลือกที่ที่จะสำรอง"
+
+#, fuzzy
+msgid "Select hard disk"
+msgstr "เลือกภาพยนต์"
 
 msgid "Select horizontal resolution:"
 msgstr ""
@@ -6934,6 +6978,10 @@ msgstr ""
 #, fuzzy
 msgid "Select movie"
 msgstr "เลือกภาพยนต์"
+
+#, fuzzy
+msgid "Select operation:"
+msgstr "เลือกที่ที่จะสำรอง"
 
 #, fuzzy
 msgid "Select path for logfile"
@@ -6977,16 +7025,16 @@ msgstr ""
 msgid "Select the movie path"
 msgstr "เลือกพาธของภาพยนต์"
 
-msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
 msgid "Select the satellite you want to configure. Once that satellite is configured you can select and configure other satellites that will be accessed using this same tuner."
@@ -7229,6 +7277,10 @@ msgstr "การตั้งค่า"
 
 msgid "Setup"
 msgstr "ตั้งค่า"
+
+#, fuzzy
+msgid "Setup hard disk"
+msgstr "ฮาร์ดดิสก์"
 
 msgid "Setup menu"
 msgstr ""
@@ -7665,9 +7717,6 @@ msgid "Solomon Islands"
 msgstr ""
 
 msgid "Somalia"
-msgstr ""
-
-msgid "Some error occured - Please try later"
 msgstr ""
 
 msgid "Some plugins are not available:\n"
@@ -8412,7 +8461,8 @@ msgstr ""
 "เนื้อที่บนพาร์ทิชั่นที่เลือกไม่พอ\n"
 "ต้องการทำต่อหรือไม่?"
 
-msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
+#, fuzzy
+msgid "This DVD RW medium is already formatted, Reformatting will erase all content on the disc."
 msgstr "แผ่น DVD-RW นี้ได้รับการฟอร์แมทมาแล้ว หากทำซ้ำจะเป็นการลบข้อมูลออกทั้งหมด"
 
 #, python-format
@@ -8497,7 +8547,7 @@ msgstr ""
 msgid "This option configures you can set auto volume level."
 msgstr ""
 
-msgid "This option set the level of surpression of musquito noise (Musquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
+msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr ""
 
 msgid "This option sets  the picture contrast."
@@ -8897,6 +8947,10 @@ msgstr "สอง"
 
 msgid "Type"
 msgstr "ประเภท"
+
+#, fuzzy
+msgid "Type of LNB/device"
+msgstr "ประเภทการค้นหา"
 
 msgid "Type of scan"
 msgstr "ประเภทการค้นหา"
@@ -9673,19 +9727,6 @@ msgstr ""
 msgid "When the content has an aspect ratio of 4:3, choose whether to scale/stretch the picture."
 msgstr ""
 
-msgid ""
-"When you do a factory reset, you will lose ALL your configuration data\n"
-"(including bouquets, services, satellite data ...)\n"
-"After completion of factory reset, your receiver will restart automatically!\n"
-"\n"
-"Really do a factory reset?"
-msgstr ""
-"หากท่านทำการตั้งค่าใหม่ตามโรงงาน ข้อมูลทั้งหมดของท่านจะหายไปทันที\n"
-"(ทั้งนี้รวมทั้ง กลุ่มรายการ รายการต่างๆ ข้อมูลดาวเทียม เป็นต้น...)\n"
-"หลังกระบวนตั้งค่าใหม่เสร็จสิ้น เครื่องจะทำการบูทให้โดยอัตโนมัติ!\n"
-"\n"
-"ยืนการตั้งค่าใหม่ตามโรงงาน หรือไม่?"
-
 msgid "Where do you want to backup your settings?"
 msgstr "ท่านต้องบันทึกข้อมูลที่สำรองไว้ที่ไหน?"
 
@@ -9893,9 +9934,6 @@ msgstr ""
 msgid ""
 "You need a PC connected to your receiver. If you need further instructions, please visit the website https://openpli.org\n"
 "Your receiver will now be halted. After you have performed the update instructions from the website, your new firmware will ask you to restore your settings."
-msgstr ""
-
-msgid "You system does not support ext4"
 msgstr ""
 
 msgid "Your backup succeeded. We will now continue to explain the further upgrade process."
@@ -11220,9 +11258,6 @@ msgstr "เปลี่ยนช่องแล้ว"
 msgid "®"
 msgstr ""
 
-#~ msgid "A recording is currently running. Please stop the recording before trying to configure the positioner."
-#~ msgstr "กำลังบันทึกรายการอยู่ ให้หยุดการบันทึกก่อนตั้งค่าตัวขับจาน"
-
 #~ msgid "Action on long powerbutton press"
 #~ msgstr "เมื่อกดปุ่ม Power ค้างไว้ให้"
 
@@ -11243,6 +11278,10 @@ msgstr ""
 
 #~ msgid "Current version:"
 #~ msgstr "เวอร์ชั่นปัจจุบัน:"
+
+#, fuzzy
+#~ msgid "Diasbled"
+#~ msgstr "ไม่ใช้งาน"
 
 #~ msgid "Do you want to do another manual service scan?"
 #~ msgstr "ท่านต้องการที่จะทำการค้นหารายการอื่นๆ ต่อหรือไม่?"
@@ -11295,11 +11334,17 @@ msgstr ""
 #~ msgid "Please check your network settings!"
 #~ msgstr "กรุณตรวจสอบการตั้งค่าเครือข่าย"
 
+#~ msgid "Press OK to start the scan"
+#~ msgstr "กดปุ่ม OK เพื่อเริ่มค้นหา"
+
 #~ msgid "Provider to scan"
 #~ msgstr "ผู้ให้บริการที่จะค้น"
 
 #~ msgid "Restore is running..."
 #~ msgstr "กำลังนำสำรองกลับมาใช้..."
+
+#~ msgid "Satfinder"
+#~ msgstr "ค้นหาดาวเทียม"
 
 #, fuzzy
 #~ msgid "Show shutdown menu"
@@ -11343,6 +11388,19 @@ msgstr ""
 
 #~ msgid "What do you want to scan?"
 #~ msgstr "ท่านต้องการค้นหาอะไร?"
+
+#~ msgid ""
+#~ "When you do a factory reset, you will lose ALL your configuration data\n"
+#~ "(including bouquets, services, satellite data ...)\n"
+#~ "After completion of factory reset, your receiver will restart automatically!\n"
+#~ "\n"
+#~ "Really do a factory reset?"
+#~ msgstr ""
+#~ "หากท่านทำการตั้งค่าใหม่ตามโรงงาน ข้อมูลทั้งหมดของท่านจะหายไปทันที\n"
+#~ "(ทั้งนี้รวมทั้ง กลุ่มรายการ รายการต่างๆ ข้อมูลดาวเทียม เป็นต้น...)\n"
+#~ "หลังกระบวนตั้งค่าใหม่เสร็จสิ้น เครื่องจะทำการบูทให้โดยอัตโนมัติ!\n"
+#~ "\n"
+#~ "ยืนการตั้งค่าใหม่ตามโรงงาน หรือไม่?"
 
 #~ msgid "Yes, do another manual scan now"
 #~ msgstr "ใช่ - ทำการค้นหาอีกครั้งตอนนี้เลย"
