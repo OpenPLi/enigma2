@@ -77,7 +77,7 @@ class OverscanWizard(Screen, ConfigListScreen):
 				"This means you are always watching a \"zoomed in\" picture instead of real HD, and parts of the user inferface (skin) may be invisible.\n\n"
 				"The yellow area means a 5% border area of a full HD picture will be invisible.\n"
 				"The green area means a 10% border area of a full HD picture will be invisible.\n\n"
-				"In other words, if the yellow box meets all for sides of your screen, then you have at least 5% overscan on all sides.\n\n"
+				"In other words, if the yellow box touches all four sides of your screen, you have at least 5% overscan on all sides.\n\n"
 				"If you see the tips of all eight arrowheads, then your TV has overscan disabled.\n\n"
 				"Test Pattern by TigerDave - www.tigerdave.com/ht_menu.htm"))
 			self.yes_no = ConfigYesNo(default = True)
@@ -87,9 +87,9 @@ class OverscanWizard(Screen, ConfigListScreen):
 		elif self.step == 2:
 			self.Timer.stop()
 			self["title"].setText(_("Overscan wizard"))
-			self["introduction"].setText(_("It seems you did not see all the eight arrow heads. This means your TV is "
+			self["introduction"].setText(_("It seems you did not see all the eight arrow heads. This means your TV "
 				"has overscan enabled, and is not configured properly.\n\n"
-				"Please refer to your TVs manual to find how you can disable overscan on your TV. Look for terms like 'Just fit', 'Full width', etc. "
+				"Please refer to your TV's manual to find how you can disable overscan on your TV. Look for terms like 'Just fit', 'Full width', etc. "
 				"If you can't find it, ask other users at http://forums.openpli.org.\n\n"))
 			self.list.append(getConfigListEntry(_("Did you see all eight arrow heads?"), self.yes_no))
 			self.yes_no.value = True
@@ -97,7 +97,7 @@ class OverscanWizard(Screen, ConfigListScreen):
 			setPosition(0, 720, 0, 576)
 		elif self.step == 3:
 			self["introduction"].setText(_("You did not see all eight arrow heads. This means your TV has overscan enabled "
-				"and presents you with a zoomed-in picture, causing you to loose part of a full HD screen. In addition this "
+				"and presents you with a zoomed-in picture, causing you to loose part of a full HD screen. In addition to this "
 				"you may also miss parts of the user interface, for example volume bars and more.\n\n"
 				"You can now try to resize and change the position of the user interface until you see the eight arrow heads.\n\n"
 				"When done press OK.\n\n"))
