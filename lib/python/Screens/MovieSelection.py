@@ -2179,7 +2179,7 @@ class MovieSelectionFileManagerList(Screen):
 		self["key_blue"] = Button(_("Inversion"))
 
 		self.sort = 0
-		self["text"].setText(_("Select files with 'OK' and then use 'Menu' for select operation"))
+		self["description"].setText(_("Select files with 'OK' and then use 'Menu' or 'Green' for select operation"))
 
 	def changePng(self):
 		from Tools.Directories import SCOPE_CURRENT_SKIN
