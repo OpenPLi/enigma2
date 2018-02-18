@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-27 16:56+0100\n"
-"PO-Revision-Date: 2018-01-27 17:11+0100\n"
+"POT-Creation-Date: 2018-02-17 17:35+0100\n"
+"PO-Revision-Date: 2018-02-18 12:06+0100\n"
 "Last-Translator: GeirJ <dummy@dummy.com>\n"
 "Language-Team: GeirJ\n"
 "Language: nb\n"
@@ -51,14 +51,14 @@ msgid ""
 "Edit the upgrade source address."
 msgstr ""
 "\n"
-"Endre oppdateringens kilde adresse."
+"Endre oppdateringsadressen."
 
 msgid ""
 "\n"
 "Manage extensions or plugins for your receiver"
 msgstr ""
 "\n"
-"Behandle utvidelser og tillegg for din mottaker"
+"Administrer utvidelser eller tillegg for mottakeren din"
 
 msgid ""
 "\n"
@@ -660,7 +660,7 @@ msgstr ""
 
 msgid ""
 "A recording is currently running on the selected tuner. Please select a "
-"different tuner or consider to stop the recording to try again."
+"different tuner or stop the recording and try again."
 msgstr ""
 "Et opptak er i gang på den valgte tuneren. Vennligst velg en annen tuner "
 "eller vurder og stoppe opptaket og prøv igjen."
@@ -893,25 +893,25 @@ msgstr ""
 
 #
 msgid "Advanced"
-msgstr "Avansert"
+msgstr "Ekspert"
 
 msgid "Advanced options"
-msgstr "Avansert innstilling"
+msgstr "Ekspert valg"
 
 msgid "Advanced restore"
 msgstr "Gjenoppretting"
 
 msgid "Advanced software"
-msgstr "Avansert programvare"
+msgstr "Ekspert programvare"
 
 msgid "Advanced software plugin"
 msgstr "Ekspert tillegg"
 
 msgid "Advanced video enhancement setup"
-msgstr "Avansert bildeforbedrings innstilling"
+msgstr "Ekspert bildeforbedrings innstilling"
 
 msgid "Advanced video setup"
-msgstr "Avansert bildeinnstilling"
+msgstr "Ekspert bildeinnstilling"
 
 msgid "Afghanistan"
 msgstr "Afghanistan"
@@ -1002,6 +1002,9 @@ msgstr "Amerikansk Samoa"
 #
 msgid "An empty filename is illegal."
 msgstr "Et tomt filnavn er ikke tillatt."
+
+msgid "An error occurred - Please try again later"
+msgstr "Det oppstod en feil, vennligst prøv igjen senere."
 
 msgid "An error occurred while downloading the packetlist. Please try again."
 msgstr "En feil oppstod under nedlasting av programvare. Prøv igjen."
@@ -1196,7 +1199,7 @@ msgid "Auto Diseqc"
 msgstr "Auto DiSEqC"
 
 msgid "Auto EXIF Orientation rotation/flipping"
-msgstr "Auto bildedata plassering, rotering og tilpassing"
+msgstr "Auto EXIF- retningnormal exif orientering"
 
 #
 msgid "Auto chapter split every ? minutes (0=never)"
@@ -1224,9 +1227,6 @@ msgid "Automatic"
 msgstr "Automatisk"
 
 msgid "Automatic Scan"
-msgstr "Automatisk søk"
-
-msgid "Automatic scan"
 msgstr "Automatisk søk"
 
 #
@@ -1282,7 +1282,7 @@ msgstr "Sikkerhetskopi kjører..."
 
 #
 msgid "Backup settings"
-msgstr "Sikkerhetskopier innstillinger"
+msgstr "Innstillinger for sikkerhetskopier"
 
 #
 msgid "Backup system settings"
@@ -1507,7 +1507,7 @@ msgstr "Canada"
 
 #
 msgid "Cancel"
-msgstr "Avbryt"
+msgstr "Tilbake"
 
 msgid "Cancelled upon user request"
 msgstr "Kansellert av bruker"
@@ -1595,6 +1595,10 @@ msgstr "Kanal"
 #
 msgid "Channel Info"
 msgstr "Kanal info"
+
+#
+msgid "Channel context menu"
+msgstr "Programinnhold"
 
 #
 msgid "Channel list type"
@@ -1876,8 +1880,8 @@ msgstr "Velg hvilket fargeformat som skal brukes på SCART-utgang."
 msgid "Configure your internal LAN"
 msgstr "Velg ditt lokale LAN nettverk"
 
-msgid "Configure your network settings, and press OK to start the scan"
-msgstr "Velg dine nettverks innstillinger og trykk OK for å søke det fram"
+msgid "Configure your network settings and press OK to scan"
+msgstr "Konfigurer dine nettverksinnstillinger og trykk OK for å søke"
 
 msgid "Configure your wireless LAN again"
 msgstr "Velg ditt trådløse LAN nettverk på nytt"
@@ -1965,6 +1969,9 @@ msgstr "Cookøyene"
 
 msgid "Copy"
 msgstr "Kopier"
+
+msgid "Copy to..."
+msgstr "Kopier til..."
 
 msgid "Costa Rica"
 msgstr "Costa Rica"
@@ -2316,7 +2323,7 @@ msgid "Details for plugin: "
 msgstr "Detaljer for programtillegg: "
 
 msgid "Detect next boxes before standby"
-msgstr "Oppdag neste hendelser før avslått"
+msgstr "Merk neste hendelser før standby"
 
 #
 msgid "Detected HDD:"
@@ -2508,7 +2515,7 @@ msgstr "Gjøre dette?"
 
 #
 msgid "Do you want to autorestore settings?"
-msgstr "Automatisk lagre innstillingene?"
+msgstr "Ønsker du å tilbakestille innstillingene?"
 
 #
 msgid "Do you want to burn this collection to DVD medium?"
@@ -3113,6 +3120,23 @@ msgstr "FEC:"
 msgid "FTA"
 msgstr "Fri"
 
+msgid ""
+"Factory reset will restore your receiver to its default configuration. All "
+"user data including system settings, tuner configuration, bouquets, services "
+"and plugins will be DELETED. Recordings and other files stored on HDD and "
+"USB media will remain intact. After completion, the system will restart "
+"automatically!\n"
+"\n"
+"Do you really want to proceed?"
+msgstr ""
+"Tilbakestilling vil gjenopprette mottakeren til standardkonfigurasjonen. "
+"Alle brukerdata inkludert systeminnstillinger, mottaker konfigurasjon, "
+"favoritter, tjenester og tillegg vil bli slettet. Opptak og andre filer "
+"lagret på HDD og USB media vil være intakt. Etter ferdigstillelse startes "
+"systemet automatisk!\n"
+"\n"
+"Vil du fortsette?"
+
 #
 msgid "Failed"
 msgstr "Feilet"
@@ -3167,6 +3191,10 @@ msgstr "Fiji"
 
 msgid "File appears to be busy.\n"
 msgstr "Filen ser ut til å være opptatt.\n"
+
+#
+msgid "File manager"
+msgstr "Fil forvalter"
 
 #
 msgid "Filename"
@@ -3914,7 +3942,7 @@ msgstr "Vending"
 
 #
 msgid "Inversion & Bandwidth"
-msgstr "Omvending - båndbredde"
+msgstr "Inversjon & Båndbredde"
 
 msgid "Inversion, Pilot & Roll-off"
 msgstr "Inversjon, Pilot & Roll-off"
@@ -4184,6 +4212,10 @@ msgstr "Koblede navn med en DVD-meny"
 
 msgid "List mode"
 msgstr "Vis liste"
+
+#
+msgid "List of files"
+msgstr "Fil liste"
 
 #
 msgid "List of storage devices"
@@ -4508,6 +4540,10 @@ msgstr "Kjør østover"
 
 msgid "Move to position X"
 msgstr "Flytt til posisjon X"
+
+#
+msgid "Move to..."
+msgstr "Flytt til..."
 
 #
 msgid "Move west"
@@ -4966,6 +5002,9 @@ msgid ""
 msgstr ""
 "Ingenting å skanne!\n"
 "Konfigurer innstillingene for tuner før du starter en service skanning."
+
+msgid "Nothing to scan! Setup your tuner and try again."
+msgstr "Ingenting å søke! Still inn din mottaker og prøv på nytt."
 
 msgid "Now"
 msgstr "Nå"
@@ -5592,9 +5631,6 @@ msgstr "Trykk OK for valg av leverandører"
 
 msgid "Press OK to select/deselect a CAId."
 msgstr "Trykk OK for velg/fjern en CAId."
-
-msgid "Press OK to start the scan"
-msgstr "Trykk OK og start søk"
 
 msgid "Press OK to toggle the selection"
 msgstr "Trykk OK for veksle valg"
@@ -6351,12 +6387,24 @@ msgstr "Søk %s bånd"
 msgid "Scan additional SR"
 msgstr "Søk etter flere SR"
 
+#, python-format
+msgid "Scan completed, %d channel found."
+msgid_plural "Scan completed, %d channels found."
+msgstr[0] "Søking er fullført, %d kanal funnet."
+msgstr[1] "Søket er fullført, %d kanaler funnet."
+
+msgid "Scan failed!"
+msgstr "Søket mislyktes!"
+
 msgid "Scan files..."
 msgstr "Søker filer..."
 
 #
 msgid "Scan options"
 msgstr "Søke valg"
+
+msgid "Scan state"
+msgstr "Søke tilstand"
 
 msgid "Scan wireless networks"
 msgstr "Søk etter trådløse nettverk"
@@ -6605,6 +6653,12 @@ msgstr "Velg kanal for opptak"
 msgid "Select copy destination for:"
 msgstr "Velg kopierings mål for:"
 
+msgid "Select destination for copy selected files..."
+msgstr "Velg kopierings mål for valgte filer..."
+
+msgid "Select destination for move selected files..."
+msgstr "Velg flytte målet for valgte filer..."
+
 msgid "Select destination for:"
 msgstr "Velg målet for:"
 
@@ -6614,12 +6668,19 @@ msgstr "Velg mappe for loggfil"
 msgid "Select files for backup."
 msgstr "Velg filer for sikkerhetskopiering."
 
+msgid "Select files with 'OK' and then use 'Menu' for select operation"
+msgstr "Velg filer med 'OK' og bruk deretter 'Meny' for valg"
+
 msgid "Select files/folders to backup"
 msgstr "Velg filer/mapper for sikkerhetskopiering"
 
 #
 msgid "Select function"
 msgstr "Velg funksjon"
+
+#
+msgid "Select hard disk"
+msgstr "Velg harddisk"
 
 #
 msgid "Select horizontal resolution:"
@@ -6651,6 +6712,10 @@ msgstr "Velg sted"
 
 msgid "Select movie"
 msgstr "Velg opptak"
+
+#
+msgid "Select operation:"
+msgstr "Velg operasjon:"
 
 #
 msgid "Select path for logfile"
@@ -6937,7 +7002,7 @@ msgid "Set PIN"
 msgstr "Velg PIN"
 
 msgid "Set all hotkey to default?"
-msgstr "Sette alle snarveistaster til standard?"
+msgstr "Sett alle snarveistaster til standard?"
 
 msgid "Set blocktimes by weekday"
 msgstr "Still inn blokkeringstid med ukedager"
@@ -7006,6 +7071,9 @@ msgstr "Innstillinger"
 #
 msgid "Setup"
 msgstr "Innstilling"
+
+msgid "Setup hard disk"
+msgstr "Oppsett harddisk"
 
 msgid "Setup menu"
 msgstr "Menyoppsett"
@@ -7242,7 +7310,7 @@ msgid "Single step (GOP)"
 msgstr "Enkelt trinn (GOP)"
 
 msgid "Sint Maarten (Dutch part)"
-msgstr "Sint Maarten"
+msgstr "Saint Maarten (nederlandsk del)"
 
 msgid "Site latitude"
 msgstr "Mottakers breddegrad"
@@ -7350,9 +7418,6 @@ msgstr "Solomonøyene"
 
 msgid "Somalia"
 msgstr "Somalia"
-
-msgid "Some error occured - Please try later"
-msgstr "En feil oppstod - Vennligst prøv senere"
 
 #
 msgid "Some plugins are not available:\n"
@@ -7847,7 +7912,7 @@ msgstr "System - Modulasjon"
 
 #. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
 msgid "TRANSLATOR_INFO"
-msgstr "Sist oppdatert: 27.01.2018"
+msgstr "Sist oppdatert: 18.02.2018"
 
 #
 msgid "TS file is too large for ISO9660 level 1!"
@@ -8205,13 +8270,13 @@ msgid "This option configures you can set auto volume level."
 msgstr "Med dette valget kan du stille inn auto lydstyrke nivå."
 
 msgid ""
-"This option set the level of surpression of musquito noise (Musquito Noise "
+"This option set the level of surpression of mosquito noise (Mosquito Noise "
 "is random aliasing as a result of strong compression). Obviously this goes "
 "at the cost of picture details."
 msgstr ""
-"Med dette valget kan du finjustere musquito støy (Musquito Noise is random "
-"aliasing as a result of strong compression). Åpenbart går dette på "
-"bekostning av bilde detaljer."
+"Med dette valget kan du finjustere mosquito støy (Mosquito støy er tilfeldig "
+"aliasing som følge av kraftig komprimering). Tydeligvis går dette på "
+"bekostning av bildedetaljer."
 
 msgid "This option sets  the picture contrast."
 msgstr "Med dette valget kan du justere bilde kontrast."
@@ -8670,6 +8735,9 @@ msgstr "To"
 msgid "Type"
 msgstr "Type"
 
+msgid "Type of LNB/device"
+msgstr "Type LNB/enhet"
+
 msgid "Type of scan"
 msgstr "Søketype"
 
@@ -8792,7 +8860,7 @@ msgstr "Oppdater og start på nytt (anbefalt)"
 
 #
 msgid "Update channel list only"
-msgstr "Oppdater bare kanallisten"
+msgstr "Oppdater kun kanallisten"
 
 #, python-format
 msgid "Update completed, %d package was installed."
@@ -8805,7 +8873,9 @@ msgstr "Oppdateringen er ferdig. Vil du starte mottakeren på nytt?"
 
 msgid ""
 "Update failed. Your receiver does not have a working internet connection."
-msgstr "Oppdateringen mislyktes. Mottakeren mangler internettforbindelse."
+msgstr ""
+"Oppdatering mislyktes. Mottakeren din har ikke en fungerende "
+"internettforbindelse."
 
 msgid "Update has completed."
 msgstr "Oppdateringen er ferdig."
@@ -8815,7 +8885,7 @@ msgstr "Oppdateringssted er ikke tilgjengelig."
 
 #
 msgid "Updating software catalog"
-msgstr "Oppdaterer programvare mappe"
+msgstr "Oppdaterer programvarekatalog"
 
 #
 msgid "Upgrading"
@@ -9245,20 +9315,6 @@ msgstr ""
 "Når bildet har et sideforhold på 4:3 kan du velge om det skal skaleres/"
 "strekkes ut."
 
-msgid ""
-"When you do a factory reset, you will lose ALL your configuration data\n"
-"(including bouquets, services, satellite data ...)\n"
-"After completion of factory reset, your receiver will restart "
-"automatically!\n"
-"\n"
-"Really do a factory reset?"
-msgstr ""
-"Når mottakeren nullstilles, vil ALLE innstilte data slettes\n"
-"(dette gjelder kanallister, tjenester, satellittdata osv...)\n"
-"Når nullstilling er ferdig vil mottakeren automatisk starte på nytt!\n"
-"\n"
-"Starte nullstilling?"
-
 msgid "Where to save temporary timeshift recordings?"
 msgstr "Hvor skal midlertidige tidsskift opptak lagres?"
 
@@ -9663,7 +9719,7 @@ msgstr "avbryt alternativ redigering"
 
 #
 msgid "abort bouquet edit"
-msgstr "avbryt redigering av kanalliste"
+msgstr "avbryt kanalliste redigering"
 
 #
 msgid "abort favourites edit"
@@ -10163,7 +10219,7 @@ msgid "init modules"
 msgstr "igangsett modulene"
 
 msgid "insert mark here"
-msgstr "sett et merke her"
+msgstr "sett inn merke her"
 
 msgid "invalid type"
 msgstr "ugyldig type"
@@ -10956,6 +11012,9 @@ msgstr "gått til"
 msgid "Audio / Video"
 msgstr "Audio / Video innstilling"
 
+msgid "Automatic scan"
+msgstr "Automatisk søk"
+
 msgid "Expert settings"
 msgstr "Ekspert innstilling"
 
@@ -11010,7 +11069,7 @@ msgid "SoftCam / CI"
 msgstr "SoftCam / CI"
 
 msgid "Standby / restart"
-msgstr "Av/på strømvalg"
+msgstr "Standby / start på nytt"
 
 msgid "Tuner configuration"
 msgstr "Tuneroppsett"
@@ -12631,9 +12690,6 @@ msgstr "Radio"
 msgid "Reception settings"
 msgstr "Innstilling mottaksforhold"
 
-msgid "Satfinder"
-msgstr "Satellittsøker"
-
 msgid "Select HDD"
 msgstr "Velg hdd/ssd"
 
@@ -12995,7 +13051,7 @@ msgid "OK, guide me through the upgrade process"
 msgstr "OK, start oppgraderings prosessen"
 
 msgid "The backup failed. Please choose a different backup location."
-msgstr "Sikkerhetskopien feilet. Velg en annen mappe for sikkerhetskopien."
+msgstr "Sikkerhetskopien mislyktes. Vennligst velg en annen reserveplassering."
 
 #
 msgid ""
@@ -13035,7 +13091,8 @@ msgid ""
 "You have chosen to backup your settings. Please press OK to start the backup "
 "now."
 msgstr ""
-"Sikkerhetskopiering av innstillingene er valgt. Trykk OK for å fortsette."
+"Du har valgt å sikkerhetskopiere innstillingene dine. Vennligst trykk OK for "
+"å starte sikkerhetskopien nå."
 
 msgid ""
 "You have chosen to restore your settings. Enigma2 will restart after "
@@ -13060,8 +13117,8 @@ msgid ""
 "Your backup succeeded. We will now continue to explain the further upgrade "
 "process."
 msgstr ""
-"Sikkerhetskopien er lagret. Vi vil nå fortsette videre med "
-"oppdateringsprosessen."
+"Sikkerhetskopien din lyktes. Vi vil nå fortsette å forklare den videre "
+"oppdateringen."
 
 msgid "Your receiver is shutting down. Please stand by..."
 msgstr "Mottakeren slår seg av. Vennligst vent litt..."
@@ -13098,6 +13155,26 @@ msgstr ""
 #
 msgid "Video mode selection."
 msgstr "Innstilling for bilde."
+
+#~ msgid "Press OK to start the scan"
+#~ msgstr "Trykk OK og start søk"
+
+#~ msgid ""
+#~ "When you do a factory reset, you will lose ALL your configuration data\n"
+#~ "(including bouquets, services, satellite data ...)\n"
+#~ "After completion of factory reset, your receiver will restart "
+#~ "automatically!\n"
+#~ "\n"
+#~ "Really do a factory reset?"
+#~ msgstr ""
+#~ "Når mottakeren nullstilles, vil ALLE innstilte data slettes\n"
+#~ "(dette gjelder kanallister, tjenester, satellittdata osv...)\n"
+#~ "Når nullstilling er ferdig vil mottakeren automatisk starte på nytt!\n"
+#~ "\n"
+#~ "Starte nullstilling?"
+
+#~ msgid "Satfinder"
+#~ msgstr "Satellittsøker"
 
 #~ msgid "Convert ext3 to ext4"
 #~ msgstr "Konverter ext3 til ext4"
