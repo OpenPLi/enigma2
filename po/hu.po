@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-13 16:06+0330\n"
+"POT-Creation-Date: 2018-02-18 12:01+0330\n"
 "PO-Revision-Date: 2014-02-11 21:04+0100\n"
 "Last-Translator: robertut <robertut@yahoo.com>\n"
 "Language-Team: Mediavox, robertut <info@mediavox.hu, robertut@yahoo.com>\n"
@@ -650,8 +650,9 @@ msgstr ""
 "A következő műsor felvétele elindult:\n"
 "%s"
 
-msgid "A recording is currently running on the selected tuner. Please select a different tuner or consider to stop the recording to try again."
-msgstr ""
+#, fuzzy
+msgid "A recording is currently running on the selected tuner. Please select a different tuner or stop the recording and try again."
+msgstr "Egy felvétel most folyamatban van. Kérem, előbb állítsa azt meg a kereséshez."
 
 msgid ""
 "A recording is currently running.\n"
@@ -832,7 +833,8 @@ msgstr ""
 msgid "Adjust 3D settings"
 msgstr "3D beállítások"
 
-msgid "Adjust the color settings so that all the color shades are distinguishable, but appear as saturated as possible. If you are happy with the result, press OK to close the video fine-tuning, or use the number keys to select other test screens."
+#, fuzzy
+msgid "Adjust the color settings so that all the color shades are distinguishable but appear as saturated as possible. If you are happy with the result press OK to close the video fine-tuning or use the number keys to select other test screens."
 msgstr "Állítsa be úgy a színeket, hogy a színcsíkok megkülönböztethetők legyenek, de a telítettség a lehető legmegfelelőbb legyen. Ha az eredménnyel elégedett, akkor nyomja meg az OK gombot a video finombeállítások bezárásához, vagy a számgombok segítségével válasszon másik teszt ábrát."
 
 msgid "Advanced"
@@ -957,6 +959,10 @@ msgstr "Egy üres fájlnév érvénytelen."
 
 msgid "An error occurred while downloading the packetlist. Please try again."
 msgstr "A szoftvercsomag-lista letöltése hiba miatt lehetetlen. Kérem, próbálja meg újra."
+
+#, fuzzy
+msgid "An error occurred, Please try again later"
+msgstr "Nincs elérhető frissítés. Kérem, próbálja meg később."
 
 msgid "An unknown error occurred!"
 msgstr "Ismeretlen hiba keletkezett!"
@@ -1476,11 +1482,12 @@ msgstr ""
 msgid "Cannot determine"
 msgstr "Nem lehet megállapítani"
 
+#, fuzzy
+msgid "Cannot find any images, Please try again later"
+msgstr "Nincs elérhető frissítés. Kérem, próbálja meg később."
+
 msgid "Cannot find any signal ..., aborting !"
 msgstr "Nem található jel... művelet megszakítva!"
-
-msgid "Cannot find images - please try later"
-msgstr ""
 
 msgid "Cannot move files on a different disk or system to the trash can"
 msgstr "Más meghajtóról származó fájlok nem helyezhetők át a kukába"
@@ -1548,6 +1555,10 @@ msgstr "Csatorna"
 
 msgid "Channel Info"
 msgstr ""
+
+#, fuzzy
+msgid "Channel context menu"
+msgstr "Csatornalista menü"
 
 msgid "Channel list type"
 msgstr "Csatornalista menü"
@@ -2057,7 +2068,8 @@ msgstr "A hálózat konfigurálása"
 msgid "Configure your network again"
 msgstr "A hálózat újrakonfigurálása"
 
-msgid "Configure your network settings, and press OK to start the scan"
+#, fuzzy
+msgid "Configure your network settings and press OK to scan"
 msgstr "Állítsa be a hálózati paramétereket, majd nyomja meg az OK gombot a kereséshez"
 
 msgid "Configure your wireless LAN again"
@@ -2130,20 +2142,14 @@ msgstr "Ismétléses lejátszás"
 msgid "Contrast"
 msgstr "Kontraszt"
 
-msgid "Convert ext3 filesystem to ext4"
-msgstr "Fájlrendszer konvertálása ext3-ról ext4-re"
-
-msgid "Convert ext3 to ext4"
-msgstr "Konvertálás ext3-ról ext4-re"
-
-msgid "Converting ext3 to ext4..."
-msgstr "Konvertálás ext3 > ext4"
-
 msgid "Cook Islands"
 msgstr ""
 
 msgid "Copy"
 msgstr "Másolás"
+
+msgid "Copy to..."
+msgstr ""
 
 msgid "Costa Rica"
 msgstr ""
@@ -2151,11 +2157,11 @@ msgstr ""
 msgid "Cote d'Ivoire"
 msgstr ""
 
+msgid "Could not find any suitable media, Please insert a media (e.g. USB stick) and try again later"
+msgstr ""
+
 msgid "Could not find installed channel list."
 msgstr "Nem található telepített csatornalista."
-
-msgid "Could not find suitable media - Please insert a media (e.g. USB stick) and try again!"
-msgstr ""
 
 msgid "Could not load medium! No disc inserted?"
 msgstr "Nem lehet betölteni a hordozót! Van bennt lemez?"
@@ -2240,7 +2246,7 @@ msgstr "Aktuális transzponder"
 msgid "Current value: "
 msgstr "Aktuális érték:"
 
-msgid "Currently the commit log cannot be retrieved - please try later again"
+msgid "Currently the commit log cannot be retrieved, Please try again later"
 msgstr ""
 
 msgid "Custom skip time for '1'/'3' buttons"
@@ -2539,10 +2545,6 @@ msgstr "DiSEqC port %s: %s"
 msgid "DiSEqC-tester settings"
 msgstr "DiSEqC-Teszter beállításai"
 
-#, fuzzy
-msgid "Diasbled"
-msgstr "Letiltva"
-
 msgid "Did you see all eight arrow heads?"
 msgstr ""
 
@@ -2646,13 +2648,6 @@ msgid ""
 msgstr ""
 "Biztos benne, hogy le szeretné ellenőrizni a fájlrendszert?\n"
 "Ez hosszú ideig is eltarthat!"
-
-msgid ""
-"Do you really want to convert the filesystem?\n"
-"You cannot go back!"
-msgstr ""
-"Biztos benne, hogy konvertálni szeretné a fájlrendszert?\n"
-"Ez visszafordíthatatlan lesz!"
 
 #, python-format
 msgid "Do you really want to delete %s?"
@@ -2775,9 +2770,9 @@ msgstr ""
 msgid "Don't zap and remove timer"
 msgstr ""
 
-#, python-format
-msgid "Done - Installed, upgraded or removed %d package (%s)"
-msgid_plural "Done - Installed, upgraded or removed %d packages (%s)"
+#, fuzzy, python-format
+msgid "Done! Installed, upgraded or removed %d package (%s)"
+msgid_plural "Done! Installed, upgraded or removed %d packages (%s)"
 msgstr[0] "%d szoftvercsomag telepítése, frissítése vagy eltávolítása elkészült (%s)"
 msgstr[1] "%d szoftvercsomag telepítése, frissítése vagy eltávolítása elkészült (%s)"
 
@@ -3294,6 +3289,12 @@ msgstr "FTA"
 msgid "Factory reset"
 msgstr "Gyári alapbeállítások"
 
+msgid ""
+"Factory reset will restore your receiver to its default configuration. All user data including system settings, tuner configuration, bouquets, services and plugins will be DELETED. Recordings and other files stored on HDD and USB media will remain intact. After completion, the system will restart automatically!\n"
+"\n"
+"Do you really want to proceed?"
+msgstr ""
+
 msgid "Failed"
 msgstr "Sikertelen"
 
@@ -3353,6 +3354,10 @@ msgstr ""
 
 msgid "File appears to be busy.\n"
 msgstr "A fájl használatban van.\n"
+
+#, fuzzy
+msgid "File manager"
+msgstr "Szoftvercsomag-kezelő"
 
 msgid "Filename"
 msgstr ""
@@ -3947,6 +3952,9 @@ msgstr ""
 msgid "Indonesia"
 msgstr ""
 
+msgid "Indonesian"
+msgstr ""
+
 msgid "Info"
 msgstr "Információ"
 
@@ -4338,6 +4346,10 @@ msgstr "Elérhető hálózatok listázása"
 msgid "List mode"
 msgstr "Listázás módja"
 
+#, fuzzy
+msgid "List of files"
+msgstr "Váltás fájllistára"
+
 msgid "List of storage devices"
 msgstr "Tárolóeszközök listája"
 
@@ -4650,6 +4662,10 @@ msgstr "Kelet felé"
 
 msgid "Move to position X"
 msgstr "Mozgatás az X pozícióra"
+
+#, fuzzy
+msgid "Move to..."
+msgstr "Kelet felé"
 
 msgid "Move west"
 msgstr "Nyugat felé"
@@ -5082,6 +5098,12 @@ msgstr ""
 msgid ""
 "Nothing to scan!\n"
 "Please setup your tuner settings before you start a service scan."
+msgstr ""
+"Nincs mit lekeresni!\n"
+"Elöbb állítsa be a tunert mielött elindítja a keresést."
+
+#, fuzzy
+msgid "Nothing to scan! Setup your tuner and try again."
 msgstr ""
 "Nincs mit lekeresni!\n"
 "Elöbb állítsa be a tunert mielött elindítja a keresést."
@@ -5783,9 +5805,6 @@ msgstr ""
 msgid "Press OK to select/deselect a CAId."
 msgstr "Nyomja le az OK gombot a CAId ki/bejelöléséhez."
 
-msgid "Press OK to start the scan"
-msgstr "Az OK gombbal indíthatja a keresést"
-
 msgid "Press OK to toggle the selection"
 msgstr ""
 
@@ -6044,7 +6063,7 @@ msgid "Refresh rate selection."
 msgstr "Frissítés kiválasztása."
 
 #, fuzzy
-msgid "Refreshing image list - Please wait..."
+msgid "Refreshing image list, Please wait..."
 msgstr "Elérhető frissítések keresése. Kérem, várjon..."
 
 #, fuzzy
@@ -6263,11 +6282,11 @@ msgid "Resuming playback"
 msgstr "Lejátszás folytatása"
 
 #, fuzzy
-msgid "Retreiving image list - Please wait..."
+msgid "Retreiving image list, Please wait..."
 msgstr "Plugin-lista letöltése. Kérem, várjon..."
 
 #, fuzzy
-msgid "Retreiving image slots - Please wait..."
+msgid "Retreiving image slots, Please wait..."
 msgstr "Elérhető frissítések keresése. Kérem, várjon..."
 
 msgid "Return to movie list"
@@ -6424,9 +6443,6 @@ msgstr "Műhold pozíció:"
 msgid "Satellites"
 msgstr "Műholdak"
 
-msgid "Satfinder"
-msgstr "Műholdkereső"
-
 msgid "Sats"
 msgstr "Műholdak"
 
@@ -6503,11 +6519,25 @@ msgstr "%s sáv szkennelése"
 msgid "Scan additional SR"
 msgstr "Egyéb SR-ek szkennelése"
 
+#, fuzzy, python-format
+msgid "Scan completed, %d channel found."
+msgid_plural "Scan completed, %d channels found."
+msgstr[0] "A keresés befejeződött, és %d csatornát talált"
+msgstr[1] "A keresés befejeződött, és %d csatornát talált"
+
+#, fuzzy
+msgid "Scan failed!"
+msgstr "A keresés sikertelen!"
+
 msgid "Scan files..."
 msgstr "Fájlok keresése..."
 
 msgid "Scan options"
 msgstr ""
+
+#, fuzzy
+msgid "Scan state"
+msgstr "keresési állapot"
 
 msgid "Scan wireless networks"
 msgstr "Vezeték nélküli hálózat keresése"
@@ -6708,6 +6738,14 @@ msgstr "Csatorna kiválasztása melyről fel szeretne venni"
 msgid "Select copy destination for:"
 msgstr "Másolási cél kiválasztása ehhez:"
 
+#, fuzzy
+msgid "Select destination for copy selected files..."
+msgstr "Cél kiválasztása ehhez:"
+
+#, fuzzy
+msgid "Select destination for move selected files..."
+msgstr "Cél kiválasztása ehhez:"
+
 msgid "Select destination for:"
 msgstr "Cél kiválasztása ehhez:"
 
@@ -6718,12 +6756,19 @@ msgstr "A %s mappa létrehozása nem sikerült."
 msgid "Select files for backup."
 msgstr "Biztonsági mentésbe helyezendő fájlok."
 
+msgid "Select files with 'OK' and then use 'Menu' for select operation"
+msgstr ""
+
 msgid "Select files/folders to backup"
 msgstr "Válasszon fájlokat/mappákat a biztonsági mentéshez"
 
 #, fuzzy
 msgid "Select function"
 msgstr "Válasszon mentés-helyet"
+
+#, fuzzy
+msgid "Select hard disk"
+msgstr "Felvétel kiválasztása"
 
 msgid "Select horizontal resolution:"
 msgstr ""
@@ -6748,6 +6793,10 @@ msgstr ""
 
 msgid "Select movie"
 msgstr "Felvétel kiválasztása"
+
+#, fuzzy
+msgid "Select operation:"
+msgstr "Másolási cél kiválasztása ehhez:"
 
 #, fuzzy
 msgid "Select path for logfile"
@@ -6789,16 +6838,16 @@ msgstr ""
 msgid "Select the movie path"
 msgstr "válassza ki a felvételek útvonalát"
 
-msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
 msgid "Select the satellite you want to configure. Once that satellite is configured you can select and configure other satellites that will be accessed using this same tuner."
@@ -7034,6 +7083,10 @@ msgstr "Beállítások"
 
 msgid "Setup"
 msgstr "Beállítások"
+
+#, fuzzy
+msgid "Setup hard disk"
+msgstr "Háttértár"
 
 msgid "Setup menu"
 msgstr "Beállítások menü"
@@ -7449,9 +7502,6 @@ msgid "Solomon Islands"
 msgstr ""
 
 msgid "Somalia"
-msgstr ""
-
-msgid "Some error occured - Please try later"
 msgstr ""
 
 msgid "Some plugins are not available:\n"
@@ -8180,7 +8230,8 @@ msgstr ""
 "Nincs elég hely a kiválasztott partíción.\n"
 "Biztos folytatni szeretné?"
 
-msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
+#, fuzzy
+msgid "This DVD RW medium is already formatted, Reformatting will erase all content on the disc."
 msgstr "Ez a DVD RW medium már meg van formázva - a lemez újraformázásával minden adat el fog veszni."
 
 #, python-format
@@ -8265,7 +8316,7 @@ msgstr ""
 msgid "This option configures you can set auto volume level."
 msgstr ""
 
-msgid "This option set the level of surpression of musquito noise (Musquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
+msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr ""
 
 msgid "This option sets  the picture contrast."
@@ -8653,6 +8704,10 @@ msgstr "Kettő"
 
 msgid "Type"
 msgstr "Típus"
+
+#, fuzzy
+msgid "Type of LNB/device"
+msgstr "Keresés típusa"
 
 msgid "Type of scan"
 msgstr "Keresés típusa"
@@ -9418,19 +9473,6 @@ msgstr "Egy 16:9-es kép méretarányú tartalom nagyítva vagy széthúzva legy
 msgid "When the content has an aspect ratio of 4:3, choose whether to scale/stretch the picture."
 msgstr "Egy 4:3-as kép méretarányú tartalom nagyítva vagy széthúzva legyen."
 
-msgid ""
-"When you do a factory reset, you will lose ALL your configuration data\n"
-"(including bouquets, services, satellite data ...)\n"
-"After completion of factory reset, your receiver will restart automatically!\n"
-"\n"
-"Really do a factory reset?"
-msgstr ""
-"Ha visszaállítja a készüléket a gyári állapotba, minden beállítása el fog veszni\n"
-"(beleérve a bouquet-eket, a kedvenceket, lekeresett csatornákat, műholdakat...)!\n"
-"A gyári állapotba helyezés után, a készülék automatikusan újra fog indulni.\n"
-"\n"
-"Biztos benne, hogy gyári állapotba állítja a készüléket?"
-
 msgid "Where do you want to backup your settings?"
 msgstr "Hova szeretné elmenteni a beállításait?"
 
@@ -9641,9 +9683,6 @@ msgid ""
 "You need a PC connected to your receiver. If you need further instructions, please visit the website https://openpli.org\n"
 "Your receiver will now be halted. After you have performed the update instructions from the website, your new firmware will ask you to restore your settings."
 msgstr ""
-
-msgid "You system does not support ext4"
-msgstr "Az ön rendszere nem támogatja az ext4-et."
 
 msgid "Your backup succeeded. We will now continue to explain the further upgrade process."
 msgstr "A mentés sikerült. Most folytatjuk és elmagyarázom Önnek a további frissítési folyamatot."
@@ -11018,6 +11057,15 @@ msgstr ""
 #~ msgid "Constellation"
 #~ msgstr "Együttállás"
 
+#~ msgid "Convert ext3 filesystem to ext4"
+#~ msgstr "Fájlrendszer konvertálása ext3-ról ext4-re"
+
+#~ msgid "Convert ext3 to ext4"
+#~ msgstr "Konvertálás ext3-ról ext4-re"
+
+#~ msgid "Converting ext3 to ext4..."
+#~ msgstr "Konvertálás ext3 > ext4"
+
 #~ msgid "Could not connect to receiver .NFI image feed server:"
 #~ msgstr "Nem lehet csatlakozni az .NFI Image feed szerverhez: "
 
@@ -11029,6 +11077,17 @@ msgstr ""
 
 #~ msgid "Descramble http streams"
 #~ msgstr "HTTP jelfolyamook dekódolása"
+
+#, fuzzy
+#~ msgid "Diasbled"
+#~ msgstr "Letiltva"
+
+#~ msgid ""
+#~ "Do you really want to convert the filesystem?\n"
+#~ "You cannot go back!"
+#~ msgstr ""
+#~ "Biztos benne, hogy konvertálni szeretné a fájlrendszert?\n"
+#~ "Ez visszafordíthatatlan lesz!"
 
 #~ msgid "Do you want to do another manual service scan?"
 #~ msgstr "Szeretne most egy másik kézi keresést lefuttatni?"
@@ -11117,6 +11176,9 @@ msgstr ""
 #~ msgid "Prepare another USB stick for image flashing"
 #~ msgstr "Egy másuk USB adathordozó előkészítése készülék-frissítésre."
 
+#~ msgid "Press OK to start the scan"
+#~ msgstr "Az OK gombbal indíthatja a keresést"
+
 #~ msgid "Provider to scan"
 #~ msgstr "Lekeresendő szolgáltató"
 
@@ -11125,6 +11187,9 @@ msgstr ""
 
 #~ msgid "SID"
 #~ msgstr "SID"
+
+#~ msgid "Satfinder"
+#~ msgstr "Műholdkereső"
 
 #~ msgid "Select an image to be downloaded"
 #~ msgstr "Válasszon egy letöltendő image-t"
@@ -11220,6 +11285,19 @@ msgstr ""
 #~ msgid "When enabled, http streams are descrambled on the server side. The (remote) client receiver does not have to do descrambling."
 #~ msgstr "A dekódolás a HTTP szerver oldalon történjen. A távoli kliens készülék már nem kell dekódolja a jelfolyamot."
 
+#~ msgid ""
+#~ "When you do a factory reset, you will lose ALL your configuration data\n"
+#~ "(including bouquets, services, satellite data ...)\n"
+#~ "After completion of factory reset, your receiver will restart automatically!\n"
+#~ "\n"
+#~ "Really do a factory reset?"
+#~ msgstr ""
+#~ "Ha visszaállítja a készüléket a gyári állapotba, minden beállítása el fog veszni\n"
+#~ "(beleérve a bouquet-eket, a kedvenceket, lekeresett csatornákat, műholdakat...)!\n"
+#~ "A gyári állapotba helyezés után, a készülék automatikusan újra fog indulni.\n"
+#~ "\n"
+#~ "Biztos benne, hogy gyári állapotba állítja a készüléket?"
+
 #~ msgid "Would you like to install a softcam?"
 #~ msgstr "Szeretne telepíteni egy softcam-et?"
 
@@ -11228,6 +11306,9 @@ msgstr ""
 
 #~ msgid "You have chosen to create a new .NFI flasher bootable USB stick. This will repartition the USB stick and therefore all data on it will be erased."
 #~ msgstr "Azt választotta hogy létrehoz egy új .NFI flasher bootolható USB sticket. Ez az USB sticket újra fogja partícionálni, ezért az azon található összes adat el fog veszni."
+
+#~ msgid "You system does not support ext4"
+#~ msgstr "Az ön rendszere nem támogatja az ext4-et."
 
 #~ msgid ""
 #~ "Your frontprocessor firmware must be upgraded.\n"

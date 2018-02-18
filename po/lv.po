@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-19 22:04+0200\n"
+"POT-Creation-Date: 2018-02-18 12:01+0330\n"
 "PO-Revision-Date: 2014-11-12 00:49+0200\n"
 "Last-Translator: Tapat <taapat@gmail.com>\n"
 "Language-Team: Taapat <taapat@gmail.com>\n"
@@ -665,7 +665,8 @@ msgstr ""
 "Ieraksts ir sācies:\n"
 "%s"
 
-msgid "A recording is currently running on the selected tuner. Please select a different tuner or consider to stop the recording to try again."
+#, fuzzy
+msgid "A recording is currently running on the selected tuner. Please select a different tuner or stop the recording and try again."
 msgstr "Pašreiz notiek ieraksts. Lūdzu izvēlieties citu uztvērēju vai apturiet ierakstu lai mēģinātu vēlreiz."
 
 msgid ""
@@ -847,7 +848,8 @@ msgstr "Papildu motora iespējas ļauj izmantot informāciju no sava motora spec
 msgid "Adjust 3D settings"
 msgstr "Pielāgo 3D iestatījumus"
 
-msgid "Adjust the color settings so that all the color shades are distinguishable, but appear as saturated as possible. If you are happy with the result, press OK to close the video fine-tuning, or use the number keys to select other test screens."
+#, fuzzy
+msgid "Adjust the color settings so that all the color shades are distinguishable but appear as saturated as possible. If you are happy with the result press OK to close the video fine-tuning or use the number keys to select other test screens."
 msgstr "Regulēt krāsu iestatījumus tā, lai visi krāsu toņi ir izšķirami bet, cik iespējams, piesātināti. Ja esat apmierināti ar rezultātu tad spiediet OK, lai aizvērtu video precizēšanu vai izmantojiet ciparu taustiņus, lai izvēlētos citus testēšanas attēlus."
 
 msgid "Advanced"
@@ -972,6 +974,10 @@ msgstr "Faila nosaukums nevar būt tukšs."
 
 msgid "An error occurred while downloading the packetlist. Please try again."
 msgstr "Kļūda lejupielādējot pakotņu sarakstu. Lūdzu mēģiniet vēlreiz."
+
+#, fuzzy
+msgid "An error occurred, Please try again later"
+msgstr "Ir gadījusies kāda kļūda - Lūdzu pamēginiet vēlāk"
 
 msgid "An unknown error occurred!"
 msgstr "Nezināma kļūda!"
@@ -1487,11 +1493,12 @@ msgstr "Atcelts pēc lietotāja pieprasījuma"
 msgid "Cannot determine"
 msgstr "Nevar noteikt"
 
+#, fuzzy
+msgid "Cannot find any images, Please try again later"
+msgstr "Nevar atrast imidžus - lūdzu mēģiniet vēlāk"
+
 msgid "Cannot find any signal ..., aborting !"
 msgstr "Nevar atrast nevienu signālu ..., pārtraukts!"
-
-msgid "Cannot find images - please try later"
-msgstr "Nevar atrast imidžus - lūdzu mēģiniet vēlāk"
 
 msgid "Cannot move files on a different disk or system to the trash can"
 msgstr "Nevar pārvietot failus uz citu disku vai uz sistēmas miskasti"
@@ -1558,6 +1565,10 @@ msgstr "Kanāls"
 
 msgid "Channel Info"
 msgstr "Info par kanālu"
+
+#, fuzzy
+msgid "Channel context menu"
+msgstr "Kanālu saraksta izvēlne"
 
 msgid "Channel list type"
 msgstr "Kanālu saraksta veids"
@@ -2066,7 +2077,8 @@ msgstr "Konfigurēt jūsu tīklu (LAN)"
 msgid "Configure your network again"
 msgstr "Atkārtoti konfigurēt jūsu tīklu"
 
-msgid "Configure your network settings, and press OK to start the scan"
+#, fuzzy
+msgid "Configure your network settings and press OK to scan"
 msgstr "Uztādiet jūsu tīkla iestatījumus un nospiediet OK lai sāktu pārbaudi"
 
 msgid "Configure your wireless LAN again"
@@ -2144,17 +2156,21 @@ msgstr "Kuka salas"
 msgid "Copy"
 msgstr "Kopēt"
 
+msgid "Copy to..."
+msgstr ""
+
 msgid "Costa Rica"
 msgstr "Kostarika"
 
 msgid "Cote d'Ivoire"
 msgstr "Kotdivuāra"
 
+#, fuzzy
+msgid "Could not find any suitable media, Please insert a media (e.g. USB stick) and try again later"
+msgstr "Nav pieejams piemērots datu nesējs - lūdzu pieslēdziet datu nesēju (piemēram USB zibatmiņu) un mēģiniet vēlreiz!"
+
 msgid "Could not find installed channel list."
 msgstr "Nevar atrast instalēto kanālu sarakstu."
-
-msgid "Could not find suitable media - Please insert a media (e.g. USB stick) and try again!"
-msgstr "Nav pieejams piemērots datu nesējs - lūdzu pieslēdziet datu nesēju (piemēram USB zibatmiņu) un mēģiniet vēlreiz!"
 
 msgid "Could not load medium! No disc inserted?"
 msgstr "Nevar ielādēt datu nesēju! Disks nav ievietots?"
@@ -2239,7 +2255,8 @@ msgstr "Pašreizējais transponderis"
 msgid "Current value: "
 msgstr "Pašreizējā vērtība: "
 
-msgid "Currently the commit log cannot be retrieved - please try later again"
+#, fuzzy
+msgid "Currently the commit log cannot be retrieved, Please try again later"
 msgstr "Pašreiz izmaiņu žurnāls nav pieejams- lūdzu mēginiet vēlāk"
 
 msgid "Custom skip time for '1'/'3' buttons"
@@ -2755,9 +2772,9 @@ msgstr "Nepārslēgt izslēgt taimeri"
 msgid "Don't zap and remove timer"
 msgstr "Nepārslēgt un dzēst taimeri"
 
-#, python-format
-msgid "Done - Installed, upgraded or removed %d package (%s)"
-msgid_plural "Done - Installed, upgraded or removed %d packages (%s)"
+#, fuzzy, python-format
+msgid "Done! Installed, upgraded or removed %d package (%s)"
+msgid_plural "Done! Installed, upgraded or removed %d packages (%s)"
 msgstr[0] "Pabeigts - instalēta, atjaunināta vai dzēsta %d pakotne (%s)"
 msgstr[1] "Pabeigts - instalētas, atjauninātas vai dzēstas %d pakotnes (%s)"
 msgstr[2] "Pabeigts - instalētas, atjauninātas vai dzēstas %d pakotnes (%s)"
@@ -3281,6 +3298,12 @@ msgstr "FTA"
 msgid "Factory reset"
 msgstr "Rūpnīcas iestatījumi"
 
+msgid ""
+"Factory reset will restore your receiver to its default configuration. All user data including system settings, tuner configuration, bouquets, services and plugins will be DELETED. Recordings and other files stored on HDD and USB media will remain intact. After completion, the system will restart automatically!\n"
+"\n"
+"Do you really want to proceed?"
+msgstr ""
+
 msgid "Failed"
 msgstr "Neizdevās"
 
@@ -3340,6 +3363,10 @@ msgstr "Fidži"
 
 msgid "File appears to be busy.\n"
 msgstr "Fails šķiet aizņemts.\n"
+
+#, fuzzy
+msgid "File manager"
+msgstr "Fails"
 
 msgid "Filename"
 msgstr "Fails"
@@ -3930,6 +3957,10 @@ msgstr "Indija"
 msgid "Indonesia"
 msgstr "Indonēzija"
 
+#, fuzzy
+msgid "Indonesian"
+msgstr "Indonēzija"
+
 msgid "Info"
 msgstr "Info"
 
@@ -4317,6 +4348,10 @@ msgstr "Skatīt pieejamos tīklus"
 msgid "List mode"
 msgstr "Saraksta režīms"
 
+#, fuzzy
+msgid "List of files"
+msgstr "Iet uz failu sarakstu"
+
 msgid "List of storage devices"
 msgstr "Atmiņas ierīču saraksts"
 
@@ -4624,6 +4659,10 @@ msgstr "Griezt uz austrumiem"
 
 msgid "Move to position X"
 msgstr "Griezt uz pozīciju X"
+
+#, fuzzy
+msgid "Move to..."
+msgstr "Griezt uz austrumiem"
 
 msgid "Move west"
 msgstr "Griezt uz rietumiem"
@@ -5050,6 +5089,12 @@ msgstr "Ja iespējots, bet vēlaties pāriet gaidstāvē pēc ieslēgšanas iest
 msgid ""
 "Nothing to scan!\n"
 "Please setup your tuner settings before you start a service scan."
+msgstr ""
+"Nav ko meklēt!\n"
+"Lūdzu iestatiet uztvērēju pirms sākat meklēt kanālus."
+
+#, fuzzy
+msgid "Nothing to scan! Setup your tuner and try again."
 msgstr ""
 "Nav ko meklēt!\n"
 "Lūdzu iestatiet uztvērēju pirms sākat meklēt kanālus."
@@ -5744,9 +5789,6 @@ msgstr "Spiediet OK, lai izvēlētos pavadoņus"
 msgid "Press OK to select/deselect a CAId."
 msgstr "Spiediet OK, lai izvēlētos/neizvēlētos CAId."
 
-msgid "Press OK to start the scan"
-msgstr "Spiediet OK, lai uzsāktu meklēšanu."
-
 msgid "Press OK to toggle the selection"
 msgstr "Nospiediet OK, lai pārslēgtu izvēli"
 
@@ -6007,7 +6049,8 @@ msgstr "Atjaunināšanas biežums"
 msgid "Refresh rate selection."
 msgstr "Atjaunināšanas ātruma izvēle."
 
-msgid "Refreshing image list - Please wait..."
+#, fuzzy
+msgid "Refreshing image list, Please wait..."
 msgstr "Atjauno imidžu sarakstu - Lūdzu uzgaidiet..."
 
 msgid "Refusing to move to the same directory"
@@ -6221,10 +6264,12 @@ msgstr "Turpinās no vietas %s"
 msgid "Resuming playback"
 msgstr "Turpina atskaņošanu"
 
-msgid "Retreiving image list - Please wait..."
+#, fuzzy
+msgid "Retreiving image list, Please wait..."
 msgstr "Iegūst imidžu srakstu - Lūdzu gaidiet..."
 
-msgid "Retreiving image slots - Please wait..."
+#, fuzzy
+msgid "Retreiving image slots, Please wait..."
 msgstr "Iegūst pieejamos slotus - Lūdzu uzgaidiet..."
 
 msgid "Return to movie list"
@@ -6380,9 +6425,6 @@ msgstr "Pavadoņa garuma pozīcija:"
 msgid "Satellites"
 msgstr "Pavadoņi"
 
-msgid "Satfinder"
-msgstr "Pavadoņu meklēšana"
-
 msgid "Sats"
 msgstr "Pavad"
 
@@ -6459,11 +6501,26 @@ msgstr "Meklē %s diapazonu"
 msgid "Scan additional SR"
 msgstr "Meklēt papildu SR"
 
+#, fuzzy, python-format
+msgid "Scan completed, %d channel found."
+msgid_plural "Scan completed, %d channels found."
+msgstr[0] "Meklēšana pabeigta, %d kanāls atrasts"
+msgstr[1] "Meklēšana pabeigta, %d kanāli atrasti"
+msgstr[2] "Meklēšana pabeigta, %d kanāli atrasti"
+
+#, fuzzy
+msgid "Scan failed!"
+msgstr "Meklēšana pārtraukta!"
+
 msgid "Scan files..."
 msgstr "Meklē failus..."
 
 msgid "Scan options"
 msgstr "Meklēšanas veids"
+
+#, fuzzy
+msgid "Scan state"
+msgstr "meklēšanas statuss"
 
 msgid "Scan wireless networks"
 msgstr "Meklēt bezvadu tīklus"
@@ -6662,6 +6719,14 @@ msgstr "Izvēlieties ierakstāmo kanālu"
 msgid "Select copy destination for:"
 msgstr "Izvēlieties kopijas mērķi no:"
 
+#, fuzzy
+msgid "Select destination for copy selected files..."
+msgstr "Izvēlieties mērķi no:"
+
+#, fuzzy
+msgid "Select destination for move selected files..."
+msgstr "Izvēlieties mērķi no:"
+
 msgid "Select destination for:"
 msgstr "Izvēlieties mērķi no:"
 
@@ -6671,11 +6736,18 @@ msgstr "Izvēlieties mapi žurnāla failam"
 msgid "Select files for backup."
 msgstr "Izvēlieties failus dublējumkopijai"
 
+msgid "Select files with 'OK' and then use 'Menu' for select operation"
+msgstr ""
+
 msgid "Select files/folders to backup"
 msgstr "Izvēlieties failus/mapes dublējumkopijai"
 
 msgid "Select function"
 msgstr "Izvēlieties darbību"
+
+#, fuzzy
+msgid "Select hard disk"
+msgstr "Izvēlieties noformējumu"
 
 msgid "Select horizontal resolution:"
 msgstr "Izvēlieties izšķirtspēju:"
@@ -6700,6 +6772,10 @@ msgstr "Izvēlieties atrašanās vietu"
 
 msgid "Select movie"
 msgstr "Izvēlieties filmu"
+
+#, fuzzy
+msgid "Select operation:"
+msgstr "Izvēlieties atrašanās vietu"
 
 msgid "Select path for logfile"
 msgstr "Izvēlieties ceļu žurnāla failam"
@@ -6740,16 +6816,20 @@ msgstr "Izvēlieties savas Unicable ierīces modeļa numuru. Ja modeļa numurs n
 msgid "Select the movie path"
 msgstr "Izvēlieties ceļu filmām"
 
-msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+#, fuzzy
+msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr "Izvēlieties satelītu, kas ir pievienots slēdža ieejai A. Ja neesat pārliecināts, izvēlieties 'automātiski', un uztvērējs mēģinās to noteikt pats. Ja nekas nav pievienots šai ieejai, izvēlieties 'nekas nav pievienots'"
 
-msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+#, fuzzy
+msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr "Izvēlieties satelītu, kas ir pievienots slēdža ieejai B. Ja neesat pārliecināts, izvēlieties 'automātiski', un uztvērējs mēģinās to noteikt pats. Ja nekas nav pievienots šai ieejai, izvēlieties 'nekas nav pievienots'."
 
-msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+#, fuzzy
+msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr "Izvēlieties satelītu, kas ir pievienots slēdža ieejai C. Ja neesat pārliecināts, izvēlieties 'automātiski', un uztvērējs mēģinās to noteikt pats. Ja nekas nav pievienots šai ieejai, izvēlieties 'nekas nav pievienots'."
 
-msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+#, fuzzy
+msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr "Izvēlieties satelītu, kas ir pievienots slēdža ieejai D. Ja neesat pārliecināts, izvēlieties 'automātiski', un uztvērējs mēģinās to noteikt pats. Ja nekas nav pievienots šai ieejai, izvēlieties 'nekas nav pievienots'."
 
 msgid "Select the satellite you want to configure. Once that satellite is configured you can select and configure other satellites that will be accessed using this same tuner."
@@ -6982,6 +7062,10 @@ msgstr "Iestatījumi"
 
 msgid "Setup"
 msgstr "Iestatījumi"
+
+#, fuzzy
+msgid "Setup hard disk"
+msgstr "Cietais disks"
 
 msgid "Setup menu"
 msgstr "Iestatījumu izvēlne"
@@ -7391,9 +7475,6 @@ msgstr "Zālamana salas"
 
 msgid "Somalia"
 msgstr "Somālija"
-
-msgid "Some error occured - Please try later"
-msgstr "Ir gadījusies kāda kļūda - Lūdzu pamēginiet vēlāk"
 
 msgid "Some plugins are not available:\n"
 msgstr "Daži spraudņi nav pieejami:\n"
@@ -8126,7 +8207,8 @@ msgstr ""
 "Izvēlētajā sadaļā var nebūt pietiekami daudz vietas.\n"
 "Vai tiešām vēlaties turpināt?"
 
-msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
+#, fuzzy
+msgid "This DVD RW medium is already formatted, Reformatting will erase all content on the disc."
 msgstr "Šis DVD RW disks jau ir formatēts - atkārtota formatēšana dzēsīs visu diska saturu."
 
 #, python-format
@@ -8214,7 +8296,8 @@ msgstr "Šī opcija var būt noderīga gariem HDMI kabeļiem."
 msgid "This option configures you can set auto volume level."
 msgstr "Atļauj iestatīt automātiskā skaļuma līmeni."
 
-msgid "This option set the level of surpression of musquito noise (Musquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
+#, fuzzy
+msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr "Iestata musquito trokšņa slāpēšanas līmeni (musquito troksnis ir traucējumi spēcīgas saspiešanas rezultātā). Diemžēl tas samazina attēla detalizāciju."
 
 msgid "This option sets  the picture contrast."
@@ -8598,6 +8681,10 @@ msgstr "Divi"
 
 msgid "Type"
 msgstr "Veids"
+
+#, fuzzy
+msgid "Type of LNB/device"
+msgstr "Meklēšanas veids"
 
 msgid "Type of scan"
 msgstr "Meklēšanas veids"
@@ -9363,19 +9450,6 @@ msgstr "Ja attēla malu attiecība ir 16:9 izvēlieties, kā palielināt/stiept 
 
 msgid "When the content has an aspect ratio of 4:3, choose whether to scale/stretch the picture."
 msgstr "Ja attēla malu attiecība ir 4:3 izvēlieties, kā palielināt/stiept attēlu."
-
-msgid ""
-"When you do a factory reset, you will lose ALL your configuration data\n"
-"(including bouquets, services, satellite data ...)\n"
-"After completion of factory reset, your receiver will restart automatically!\n"
-"\n"
-"Really do a factory reset?"
-msgstr ""
-"Atjaunojot rūpnīcas iestatījumus, jūs zaudēsiet VISUS konfigurācijas datus\n"
-"(ieskaitot buķetes, kanālus, pavadoņu datus ...)\n"
-"Pēc rūpnīcas iestatījumu atjaunošanas, ierīce automātiski pārstartēsies!\n"
-"\n"
-"Vai tiešām atjaunot rūpnīcas iestatījumus?"
 
 msgid "Where do you want to backup your settings?"
 msgstr "Kur Jūs vēlaties veidot savu iestatījumu dublējumkopiju?"
@@ -10926,3 +11000,22 @@ msgstr "pārslēgts"
 
 msgid "®"
 msgstr ""
+
+#~ msgid "Press OK to start the scan"
+#~ msgstr "Spiediet OK, lai uzsāktu meklēšanu."
+
+#~ msgid "Satfinder"
+#~ msgstr "Pavadoņu meklēšana"
+
+#~ msgid ""
+#~ "When you do a factory reset, you will lose ALL your configuration data\n"
+#~ "(including bouquets, services, satellite data ...)\n"
+#~ "After completion of factory reset, your receiver will restart automatically!\n"
+#~ "\n"
+#~ "Really do a factory reset?"
+#~ msgstr ""
+#~ "Atjaunojot rūpnīcas iestatījumus, jūs zaudēsiet VISUS konfigurācijas datus\n"
+#~ "(ieskaitot buķetes, kanālus, pavadoņu datus ...)\n"
+#~ "Pēc rūpnīcas iestatījumu atjaunošanas, ierīce automātiski pārstartēsies!\n"
+#~ "\n"
+#~ "Vai tiešām atjaunot rūpnīcas iestatījumus?"

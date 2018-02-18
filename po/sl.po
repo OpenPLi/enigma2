@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Project Slovenia\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-13 16:06+0330\n"
+"POT-Creation-Date: 2018-02-18 12:01+0330\n"
 "PO-Revision-Date: 2015-08-30 09:00+0200\n"
 "Last-Translator: Taykun345 <support@satnigmo.com>\n"
 "Language-Team: Satnigmo <support@satnigmo.com>\n"
@@ -738,8 +738,9 @@ msgstr ""
 "Pričelo se je snemanje kanala:\n"
 "%s"
 
-msgid "A recording is currently running on the selected tuner. Please select a different tuner or consider to stop the recording to try again."
-msgstr ""
+#, fuzzy
+msgid "A recording is currently running on the selected tuner. Please select a different tuner or stop the recording and try again."
+msgstr "Trenutno v ozadju poteka snemanje. Če želite pričeti s pregledovanjem, ustavite snemanje."
 
 #
 msgid ""
@@ -953,7 +954,7 @@ msgstr ""
 msgid "Adjust 3D settings"
 msgstr "Nastavitve 3D načina"
 
-msgid "Adjust the color settings so that all the color shades are distinguishable, but appear as saturated as possible. If you are happy with the result, press OK to close the video fine-tuning, or use the number keys to select other test screens."
+msgid "Adjust the color settings so that all the color shades are distinguishable but appear as saturated as possible. If you are happy with the result press OK to close the video fine-tuning or use the number keys to select other test screens."
 msgstr ""
 
 #
@@ -1100,6 +1101,10 @@ msgstr "Prazno ime datoteke ni dovoljeno."
 #
 msgid "An error occurred while downloading the packetlist. Please try again."
 msgstr "Prišlo je do napake pri prenosu seznama paketov. Poskusite ponovno."
+
+#, fuzzy
+msgid "An error occurred, Please try again later"
+msgstr "Posodobitve niso na voljo. Prosim, če poizkusite kasneje!"
 
 #
 msgid "An unknown error occurred!"
@@ -1695,11 +1700,12 @@ msgstr ""
 msgid "Cannot determine"
 msgstr "Ni možno določiti"
 
+#, fuzzy
+msgid "Cannot find any images, Please try again later"
+msgstr "Posodobitve niso na voljo. Prosim, če poizkusite kasneje!"
+
 msgid "Cannot find any signal ..., aborting !"
 msgstr "Signala ni možno najti ..., preklicujem!"
-
-msgid "Cannot find images - please try later"
-msgstr ""
 
 msgid "Cannot move files on a different disk or system to the trash can"
 msgstr "Premik datotek na drugo napravo za shranjevanje ni možen!"
@@ -1777,6 +1783,11 @@ msgstr "Kanal"
 
 msgid "Channel Info"
 msgstr "Info. o kanalu"
+
+#
+#, fuzzy
+msgid "Channel context menu"
+msgstr "Seznam"
 
 #
 msgid "Channel list type"
@@ -2336,7 +2347,8 @@ msgstr "Nastavite LAN omrežje"
 msgid "Configure your network again"
 msgstr "Ponovno nastavite omrežje"
 
-msgid "Configure your network settings, and press OK to start the scan"
+#, fuzzy
+msgid "Configure your network settings and press OK to scan"
 msgstr "Nastavite omrežje in za pričetek pregledovanja pritisnite tipko \"OK\"."
 
 #
@@ -2421,16 +2433,6 @@ msgstr "Nadaljevanje predvajanja (zanka)"
 msgid "Contrast"
 msgstr "Kontrast"
 
-#
-msgid "Convert ext3 filesystem to ext4"
-msgstr "Pretvorba ext3 datot. sistem v ext4"
-
-msgid "Convert ext3 to ext4"
-msgstr "Pretvorba ext3 v ext4"
-
-msgid "Converting ext3 to ext4..."
-msgstr "Poteka pretvorba ext3 v ext4 ..."
-
 msgid "Cook Islands"
 msgstr ""
 
@@ -2438,17 +2440,20 @@ msgstr ""
 msgid "Copy"
 msgstr "Kopiranje"
 
+msgid "Copy to..."
+msgstr ""
+
 msgid "Costa Rica"
 msgstr ""
 
 msgid "Cote d'Ivoire"
 msgstr ""
 
+msgid "Could not find any suitable media, Please insert a media (e.g. USB stick) and try again later"
+msgstr ""
+
 msgid "Could not find installed channel list."
 msgstr "Ni možno najti nameščenega seznama kanalov."
-
-msgid "Could not find suitable media - Please insert a media (e.g. USB stick) and try again!"
-msgstr ""
 
 #
 msgid "Could not load medium! No disc inserted?"
@@ -2545,7 +2550,8 @@ msgstr "Trenutni transponder"
 msgid "Current value: "
 msgstr "Trenutna vrednost:"
 
-msgid "Currently the commit log cannot be retrieved - please try later again"
+#, fuzzy
+msgid "Currently the commit log cannot be retrieved, Please try again later"
 msgstr "Seznam sprememb v tem trenutku ni mogoče prenesti - prosim poskusite kasneje!"
 
 #
@@ -2891,11 +2897,6 @@ msgstr "DiSEqC vrata %s: %s"
 msgid "DiSEqC-tester settings"
 msgstr "DiSEqC - tester nastavitve"
 
-#
-#, fuzzy
-msgid "Diasbled"
-msgstr "Onemogočeno"
-
 msgid "Did you see all eight arrow heads?"
 msgstr ""
 
@@ -3021,13 +3022,6 @@ msgid ""
 msgstr ""
 "Res želite preveriti datotečni sistem?\n"
 "Opravilo lahko traja zelo dolgo!"
-
-msgid ""
-"Do you really want to convert the filesystem?\n"
-"You cannot go back!"
-msgstr ""
-"Res želite pretvoriti datotečni sistem?\n"
-"Pot nazaj ne obstaja!"
 
 #
 #, python-format
@@ -3170,9 +3164,9 @@ msgid "Don't zap and remove timer"
 msgstr "Ne preklopi in izbriši časovnik"
 
 #
-#, python-format
-msgid "Done - Installed, upgraded or removed %d package (%s)"
-msgid_plural "Done - Installed, upgraded or removed %d packages (%s)"
+#, fuzzy, python-format
+msgid "Done! Installed, upgraded or removed %d package (%s)"
+msgid_plural "Done! Installed, upgraded or removed %d packages (%s)"
 msgstr[0] "Končano - nameščen, nadgrajen ali izbrisan je bil %d paket (%s)."
 msgstr[1] "Končano - nameščena, nadgrajena ali izbrisana sta bila %d paketa (%s)."
 msgstr[2] "Končano - nameščeni, nadgrajeni ali izbrisani so bili %d paketi (%s)."
@@ -3773,6 +3767,12 @@ msgstr "FTA"
 msgid "Factory reset"
 msgstr "Ponastavitev nastavitev"
 
+msgid ""
+"Factory reset will restore your receiver to its default configuration. All user data including system settings, tuner configuration, bouquets, services and plugins will be DELETED. Recordings and other files stored on HDD and USB media will remain intact. After completion, the system will restart automatically!\n"
+"\n"
+"Do you really want to proceed?"
+msgstr ""
+
 #
 msgid "Failed"
 msgstr "Ni uspelo"
@@ -3844,6 +3844,11 @@ msgstr ""
 
 msgid "File appears to be busy.\n"
 msgstr "Datoteka je v uporabi.\n"
+
+#
+#, fuzzy
+msgid "File manager"
+msgstr "Upravljanje paketkov"
 
 msgid "Filename"
 msgstr ""
@@ -4507,6 +4512,9 @@ msgstr ""
 msgid "Indonesia"
 msgstr ""
 
+msgid "Indonesian"
+msgstr ""
+
 #
 msgid "Info"
 msgstr "Info"
@@ -4965,6 +4973,11 @@ msgid "List mode"
 msgstr "Polni način"
 
 #
+#, fuzzy
+msgid "List of files"
+msgstr "Preklop na seznam datotek"
+
+#
 msgid "List of storage devices"
 msgstr "Seznam naprav za shranjevanje"
 
@@ -5332,6 +5345,11 @@ msgstr "Premikanje proti vzhodu"
 
 msgid "Move to position X"
 msgstr "Premik na položaj X"
+
+#
+#, fuzzy
+msgid "Move to..."
+msgstr "Premikanje proti vzhodu"
 
 #
 msgid "Move west"
@@ -5834,6 +5852,13 @@ msgstr ""
 msgid ""
 "Nothing to scan!\n"
 "Please setup your tuner settings before you start a service scan."
+msgstr ""
+"Iskanje ni možno!\n"
+"Pred začetkom iskanja preverite nastavitve kanalnika."
+
+#
+#, fuzzy
+msgid "Nothing to scan! Setup your tuner and try again."
 msgstr ""
 "Iskanje ni možno!\n"
 "Pred začetkom iskanja preverite nastavitve kanalnika."
@@ -6662,10 +6687,6 @@ msgid "Press OK to select/deselect a CAId."
 msgstr "Za izbiro/opustitev CAId pritisnite tipko OK."
 
 #
-msgid "Press OK to start the scan"
-msgstr "Za začetek iskanja pritisnite OK"
-
-#
 msgid "Press OK to toggle the selection"
 msgstr "Za preklapljanje med izbiro pritisnite tipko OK"
 
@@ -6966,7 +6987,7 @@ msgstr "Izbira hitrosti osveževanja."
 
 #
 #, fuzzy
-msgid "Refreshing image list - Please wait..."
+msgid "Refreshing image list, Please wait..."
 msgstr "Iskanje posodobitev ... Prosim počakajte!"
 
 #
@@ -7230,12 +7251,12 @@ msgstr "Nadaljevanje predvajanja ..."
 
 #
 #, fuzzy
-msgid "Retreiving image list - Please wait..."
+msgid "Retreiving image list, Please wait..."
 msgstr "Poteka pridobivanje informacij o vtičniku... Prosim počakajte!"
 
 #
 #, fuzzy
-msgid "Retreiving image slots - Please wait..."
+msgid "Retreiving image slots, Please wait..."
 msgstr "Iskanje posodobitev ... Prosim počakajte!"
 
 #
@@ -7413,10 +7434,6 @@ msgid "Satellites"
 msgstr "Sateliti"
 
 #
-msgid "Satfinder"
-msgstr "Iskanje satelitov"
-
-#
 msgid "Sats"
 msgstr "Sateliti"
 
@@ -7505,12 +7522,29 @@ msgstr "Iskanje %s pasu"
 msgid "Scan additional SR"
 msgstr "Iskanje dodatnih SR"
 
+#, fuzzy, python-format
+msgid "Scan completed, %d channel found."
+msgid_plural "Scan completed, %d channels found."
+msgstr[0] "Pregledovanje je uspešno zaključeno! Najden je bil %d kanal."
+msgstr[1] "Pregledovanje je uspešno zaključeno! Najdena sta bila %d kanala."
+msgstr[2] "Pregledovanje je uspešno zaključeno! Najdeni so bili %d kanali."
+msgstr[3] "Pregledovanje je uspešno zaključeno! Najdeno je bilo %d kanalov."
+
+#, fuzzy
+msgid "Scan failed!"
+msgstr "Pregledovanje ni uspelo!"
+
 #
 msgid "Scan files..."
 msgstr "Iskanje datotek"
 
 msgid "Scan options"
 msgstr "Možnosti iskanja"
+
+#
+#, fuzzy
+msgid "Scan state"
+msgstr "stanje iskanja"
 
 #
 msgid "Scan wireless networks"
@@ -7748,6 +7782,16 @@ msgid "Select copy destination for:"
 msgstr "Izberite končni cilj za:"
 
 #
+#, fuzzy
+msgid "Select destination for copy selected files..."
+msgstr "Izberite končno pot za:"
+
+#
+#, fuzzy
+msgid "Select destination for move selected files..."
+msgstr "Izberite končno pot za:"
+
+#
 msgid "Select destination for:"
 msgstr "Izberite končno pot za:"
 
@@ -7760,6 +7804,9 @@ msgstr "Ustvarjanje mape %s ni uspelo."
 msgid "Select files for backup."
 msgstr "Izberite datoteke za varnostno kopiranje."
 
+msgid "Select files with 'OK' and then use 'Menu' for select operation"
+msgstr ""
+
 #
 msgid "Select files/folders to backup"
 msgstr "Izberite datoteke za varnostno kopijo"
@@ -7768,6 +7815,11 @@ msgstr "Izberite datoteke za varnostno kopijo"
 #, fuzzy
 msgid "Select function"
 msgstr "Izberi dogodek"
+
+#
+#, fuzzy
+msgid "Select hard disk"
+msgstr "Izberite preobleko"
 
 #
 #, fuzzy
@@ -7798,6 +7850,11 @@ msgstr ""
 #
 msgid "Select movie"
 msgstr "Izberite posnetek"
+
+#
+#, fuzzy
+msgid "Select operation:"
+msgstr "Izberi dogodek"
 
 #
 #, fuzzy
@@ -7847,16 +7904,16 @@ msgstr ""
 msgid "Select the movie path"
 msgstr "Izberite pot do posnetka"
 
-msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
 msgid "Select the satellite you want to configure. Once that satellite is configured you can select and configure other satellites that will be accessed using this same tuner."
@@ -8125,6 +8182,11 @@ msgstr "Nastavitve"
 #
 msgid "Setup"
 msgstr "Nastavitve"
+
+#
+#, fuzzy
+msgid "Setup hard disk"
+msgstr "Trdi disk"
 
 msgid "Setup menu"
 msgstr "Nastavitve"
@@ -8612,9 +8674,6 @@ msgid "Solomon Islands"
 msgstr ""
 
 msgid "Somalia"
-msgstr ""
-
-msgid "Some error occured - Please try later"
 msgstr ""
 
 #
@@ -9449,7 +9508,8 @@ msgstr ""
 "Ali želite nadaljevati?"
 
 #
-msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
+#, fuzzy
+msgid "This DVD RW medium is already formatted, Reformatting will erase all content on the disc."
 msgstr "DVD RW medij je že formatiran-ponovno formatiranje bo izbrisalo vso vsebino na mediju!"
 
 #, python-format
@@ -9534,7 +9594,7 @@ msgstr ""
 msgid "This option configures you can set auto volume level."
 msgstr ""
 
-msgid "This option set the level of surpression of musquito noise (Musquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
+msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr ""
 
 msgid "This option sets  the picture contrast."
@@ -9988,6 +10048,11 @@ msgstr "Dva"
 #
 msgid "Type"
 msgstr "Vrsta"
+
+#
+#, fuzzy
+msgid "Type of LNB/device"
+msgstr "Vrsta iskanja"
 
 #
 msgid "Type of scan"
@@ -10842,18 +10907,6 @@ msgid "When the content has an aspect ratio of 4:3, choose whether to scale/stre
 msgstr "Če ima gledana vsebina razmerje slike 4:3, potem lahko določite, kako naj se slika prilagaja zaslonu. Priporočena nastavitev je \"Samodejno\"."
 
 #
-msgid ""
-"When you do a factory reset, you will lose ALL your configuration data\n"
-"(including bouquets, services, satellite data ...)\n"
-"After completion of factory reset, your receiver will restart automatically!\n"
-"\n"
-"Really do a factory reset?"
-msgstr ""
-"POZOR! Izbrana funkcija izbriše vse nastavitve vašega sprejemnika!\n"
-"Po zaključku brisanja se bo sprejemnik ponovno zagnal.\n"
-"Želite nadaljevati?"
-
-#
 msgid "Where do you want to backup your settings?"
 msgstr "Kam želite shraniti varnostno kopijo vaših nastavitev?"
 
@@ -11092,9 +11145,6 @@ msgid ""
 "You need a PC connected to your receiver. If you need further instructions, please visit the website https://openpli.org\n"
 "Your receiver will now be halted. After you have performed the update instructions from the website, your new firmware will ask you to restore your settings."
 msgstr ""
-
-msgid "You system does not support ext4"
-msgstr "Sprejemnik ne podpira ext4 datotečni sistem."
 
 #
 msgid "Your backup succeeded. We will now continue to explain the further upgrade process."
@@ -12685,6 +12735,16 @@ msgstr "®"
 #~ msgstr "Konstalacija"
 
 #
+#~ msgid "Convert ext3 filesystem to ext4"
+#~ msgstr "Pretvorba ext3 datot. sistem v ext4"
+
+#~ msgid "Convert ext3 to ext4"
+#~ msgstr "Pretvorba ext3 v ext4"
+
+#~ msgid "Converting ext3 to ext4..."
+#~ msgstr "Poteka pretvorba ext3 v ext4 ..."
+
+#
 #~ msgid "Could not connect to receiver .NFI image feed server:"
 #~ msgstr "Povezava z .NFI izvornim strežnikom ni uspela:"
 
@@ -12698,6 +12758,18 @@ msgstr "®"
 #
 #~ msgid "Descramble http streams"
 #~ msgstr "Dekodiranje HTTP tokov"
+
+#
+#, fuzzy
+#~ msgid "Diasbled"
+#~ msgstr "Onemogočeno"
+
+#~ msgid ""
+#~ "Do you really want to convert the filesystem?\n"
+#~ "You cannot go back!"
+#~ msgstr ""
+#~ "Res želite pretvoriti datotečni sistem?\n"
+#~ "Pot nazaj ne obstaja!"
 
 #
 #~ msgid "Do you want to do another manual service scan?"
@@ -12815,6 +12887,10 @@ msgstr "®"
 #~ msgstr "Nastavitve rotorja"
 
 #
+#~ msgid "Press OK to start the scan"
+#~ msgstr "Za začetek iskanja pritisnite OK"
+
+#
 #~ msgid "Provider to scan"
 #~ msgstr "Iskanje ponudnika"
 
@@ -12827,6 +12903,10 @@ msgstr "®"
 
 #~ msgid "SID"
 #~ msgstr "SID"
+
+#
+#~ msgid "Satfinder"
+#~ msgstr "Iskanje satelitov"
 
 #~ msgid "Select an image to be downloaded"
 #~ msgstr "Izberite sliko za prenos"
@@ -12943,6 +13023,18 @@ msgstr "®"
 #~ msgid "When enabled, http streams are descrambled on the server side. The (remote) client receiver does not have to do descrambling."
 #~ msgstr "Nastavitev ni ključnega pomena za delovanje vašega sprejemnika."
 
+#
+#~ msgid ""
+#~ "When you do a factory reset, you will lose ALL your configuration data\n"
+#~ "(including bouquets, services, satellite data ...)\n"
+#~ "After completion of factory reset, your receiver will restart automatically!\n"
+#~ "\n"
+#~ "Really do a factory reset?"
+#~ msgstr ""
+#~ "POZOR! Izbrana funkcija izbriše vse nastavitve vašega sprejemnika!\n"
+#~ "Po zaključku brisanja se bo sprejemnik ponovno zagnal.\n"
+#~ "Želite nadaljevati?"
+
 #~ msgid "Would you like to install a softcam?"
 #~ msgstr "Želite namestiti emulator?"
 
@@ -12953,6 +13045,9 @@ msgstr "®"
 #
 #~ msgid "You have chosen to create a new .NFI flasher bootable USB stick. This will repartition the USB stick and therefore all data on it will be erased."
 #~ msgstr "Izbrali ste možnost izdelave novega .NFI zagonskega USB ključka. Iz ključka bodo izbrisani vsi podatki!"
+
+#~ msgid "You system does not support ext4"
+#~ msgstr "Sprejemnik ne podpira ext4 datotečni sistem."
 
 #
 #~ msgid ""

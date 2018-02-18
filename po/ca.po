@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-13 16:06+0330\n"
+"POT-Creation-Date: 2018-02-18 12:01+0330\n"
 "PO-Revision-Date: 2007-08-14 10:23+0200\n"
 "Last-Translator: Oriol Pellicer <oriol@elsud.org>\n"
 "Language-Team: \n"
@@ -681,8 +681,10 @@ msgstr ""
 "S'ha iniciat una gravació:\n"
 "%s"
 
-msgid "A recording is currently running on the selected tuner. Please select a different tuner or consider to stop the recording to try again."
-msgstr ""
+#
+#, fuzzy
+msgid "A recording is currently running on the selected tuner. Please select a different tuner or stop the recording and try again."
+msgstr "En aquests moments s'està realitzant una gravació. Sisplau, atura-la abans de configurar el motor."
 
 #
 msgid ""
@@ -904,8 +906,7 @@ msgstr ""
 msgid "Adjust 3D settings"
 msgstr ""
 
-#
-msgid "Adjust the color settings so that all the color shades are distinguishable, but appear as saturated as possible. If you are happy with the result, press OK to close the video fine-tuning, or use the number keys to select other test screens."
+msgid "Adjust the color settings so that all the color shades are distinguishable but appear as saturated as possible. If you are happy with the result press OK to close the video fine-tuning or use the number keys to select other test screens."
 msgstr ""
 
 msgid "Advanced"
@@ -1040,6 +1041,9 @@ msgid "An empty filename is illegal."
 msgstr ""
 
 msgid "An error occurred while downloading the packetlist. Please try again."
+msgstr ""
+
+msgid "An error occurred, Please try again later"
 msgstr ""
 
 #
@@ -1608,10 +1612,10 @@ msgstr ""
 msgid "Cannot determine"
 msgstr ""
 
-msgid "Cannot find any signal ..., aborting !"
+msgid "Cannot find any images, Please try again later"
 msgstr ""
 
-msgid "Cannot find images - please try later"
+msgid "Cannot find any signal ..., aborting !"
 msgstr ""
 
 msgid "Cannot move files on a different disk or system to the trash can"
@@ -1690,6 +1694,11 @@ msgstr "Canal"
 
 msgid "Channel Info"
 msgstr ""
+
+#
+#, fuzzy
+msgid "Channel context menu"
+msgstr "Menú de llista de canals"
 
 #
 #, fuzzy
@@ -2247,7 +2256,7 @@ msgstr ""
 msgid "Configure your network again"
 msgstr ""
 
-msgid "Configure your network settings, and press OK to start the scan"
+msgid "Configure your network settings and press OK to scan"
 msgstr ""
 
 #
@@ -2329,19 +2338,13 @@ msgstr ""
 msgid "Contrast"
 msgstr "Contrast"
 
-msgid "Convert ext3 filesystem to ext4"
-msgstr ""
-
-msgid "Convert ext3 to ext4"
-msgstr ""
-
-msgid "Converting ext3 to ext4..."
-msgstr ""
-
 msgid "Cook Islands"
 msgstr ""
 
 msgid "Copy"
+msgstr ""
+
+msgid "Copy to..."
 msgstr ""
 
 msgid "Costa Rica"
@@ -2350,10 +2353,10 @@ msgstr ""
 msgid "Cote d'Ivoire"
 msgstr ""
 
-msgid "Could not find installed channel list."
+msgid "Could not find any suitable media, Please insert a media (e.g. USB stick) and try again later"
 msgstr ""
 
-msgid "Could not find suitable media - Please insert a media (e.g. USB stick) and try again!"
+msgid "Could not find installed channel list."
 msgstr ""
 
 msgid "Could not load medium! No disc inserted?"
@@ -2447,7 +2450,7 @@ msgstr "Transponedor predefinit"
 msgid "Current value: "
 msgstr ""
 
-msgid "Currently the commit log cannot be retrieved - please try later again"
+msgid "Currently the commit log cannot be retrieved, Please try again later"
 msgstr ""
 
 msgid "Custom skip time for '1'/'3' buttons"
@@ -2796,11 +2799,6 @@ msgstr "Repetir DiSEqC"
 msgid "DiSEqC-tester settings"
 msgstr ""
 
-#
-#, fuzzy
-msgid "Diasbled"
-msgstr "Desactivat"
-
 msgid "Did you see all eight arrow heads?"
 msgstr ""
 
@@ -2924,11 +2922,6 @@ msgstr "no facis res"
 msgid ""
 "Do you really want to check the filesystem?\n"
 "This could take lots of time!"
-msgstr ""
-
-msgid ""
-"Do you really want to convert the filesystem?\n"
-"You cannot go back!"
 msgstr ""
 
 #
@@ -3068,8 +3061,8 @@ msgstr ""
 
 #
 #, fuzzy, python-format
-msgid "Done - Installed, upgraded or removed %d package (%s)"
-msgid_plural "Done - Installed, upgraded or removed %d packages (%s)"
+msgid "Done! Installed, upgraded or removed %d package (%s)"
+msgid_plural "Done! Installed, upgraded or removed %d packages (%s)"
 msgstr[0] "Fet. %d paquets instal·lats o actualitzats"
 msgstr[1] "Fet. %d paquets instal·lats o actualitzats"
 
@@ -3657,6 +3650,12 @@ msgstr ""
 msgid "Factory reset"
 msgstr ""
 
+msgid ""
+"Factory reset will restore your receiver to its default configuration. All user data including system settings, tuner configuration, bouquets, services and plugins will be DELETED. Recordings and other files stored on HDD and USB media will remain intact. After completion, the system will restart automatically!\n"
+"\n"
+"Do you really want to proceed?"
+msgstr ""
+
 #
 msgid "Failed"
 msgstr ""
@@ -3724,6 +3723,9 @@ msgid "Fiji"
 msgstr ""
 
 msgid "File appears to be busy.\n"
+msgstr ""
+
+msgid "File manager"
 msgstr ""
 
 msgid "Filename"
@@ -4381,6 +4383,9 @@ msgstr ""
 msgid "Indonesia"
 msgstr ""
 
+msgid "Indonesian"
+msgstr ""
+
 #
 msgid "Info"
 msgstr ""
@@ -4842,6 +4847,11 @@ msgstr ""
 
 #
 #, fuzzy
+msgid "List of files"
+msgstr "canviar a la llista de fitxers"
+
+#
+#, fuzzy
 msgid "List of storage devices"
 msgstr "Dispositius d'emmagatzematge"
 
@@ -5211,6 +5221,11 @@ msgstr "Moure a l'est"
 
 msgid "Move to position X"
 msgstr ""
+
+#
+#, fuzzy
+msgid "Move to..."
+msgstr "Moure a l'est"
 
 #
 msgid "Move west"
@@ -5711,6 +5726,13 @@ msgstr ""
 msgid ""
 "Nothing to scan!\n"
 "Please setup your tuner settings before you start a service scan."
+msgstr ""
+"Res per buscar!\n"
+"Sisplau configura el sintonitzador abans de buscar un canal."
+
+#
+#, fuzzy
+msgid "Nothing to scan! Setup your tuner and try again."
 msgstr ""
 "Res per buscar!\n"
 "Sisplau configura el sintonitzador abans de buscar un canal."
@@ -6530,10 +6552,6 @@ msgstr ""
 msgid "Press OK to select/deselect a CAId."
 msgstr ""
 
-#
-msgid "Press OK to start the scan"
-msgstr "Prem OK per a començar la recerca"
-
 msgid "Press OK to toggle the selection"
 msgstr ""
 
@@ -6831,7 +6849,7 @@ msgstr ""
 
 #
 #, fuzzy
-msgid "Refreshing image list - Please wait..."
+msgid "Refreshing image list, Please wait..."
 msgstr "Llegint la informació del plugin. Espera..."
 
 msgid "Refusing to move to the same directory"
@@ -7091,12 +7109,12 @@ msgstr ""
 
 #
 #, fuzzy
-msgid "Retreiving image list - Please wait..."
+msgid "Retreiving image list, Please wait..."
 msgstr "Llegint la informació del plugin. Espera..."
 
 #
 #, fuzzy
-msgid "Retreiving image slots - Please wait..."
+msgid "Retreiving image slots, Please wait..."
 msgstr "Llegint la informació del plugin. Espera..."
 
 #
@@ -7272,10 +7290,6 @@ msgid "Satellites"
 msgstr "Satèl·lits"
 
 #
-msgid "Satfinder"
-msgstr "Localitzador de satèl·lits"
-
-#
 msgid "Sats"
 msgstr ""
 
@@ -7365,12 +7379,29 @@ msgid "Scan additional SR"
 msgstr "Escanejar SR addicional"
 
 #
+#, fuzzy, python-format
+msgid "Scan completed, %d channel found."
+msgid_plural "Scan completed, %d channels found."
+msgstr[0] "canal següent en l'històric"
+msgstr[1] "canal següent en l'històric"
+
+#
+#, fuzzy
+msgid "Scan failed!"
+msgstr "Ha fallat la sintonització!"
+
+#
 #, fuzzy
 msgid "Scan files..."
 msgstr "Arxius gravats..."
 
 msgid "Scan options"
 msgstr ""
+
+#
+#, fuzzy
+msgid "Scan state"
+msgstr "estat de la recerca"
 
 msgid "Scan wireless networks"
 msgstr ""
@@ -7611,6 +7642,12 @@ msgstr "Selecciona el canal a gravar"
 msgid "Select copy destination for:"
 msgstr ""
 
+msgid "Select destination for copy selected files..."
+msgstr ""
+
+msgid "Select destination for move selected files..."
+msgstr ""
+
 msgid "Select destination for:"
 msgstr ""
 
@@ -7622,6 +7659,9 @@ msgstr "Seleccionar una pel·lícula"
 msgid "Select files for backup."
 msgstr ""
 
+msgid "Select files with 'OK' and then use 'Menu' for select operation"
+msgstr ""
+
 #
 msgid "Select files/folders to backup"
 msgstr ""
@@ -7630,6 +7670,11 @@ msgstr ""
 #, fuzzy
 msgid "Select function"
 msgstr "Localització del backup"
+
+#
+#, fuzzy
+msgid "Select hard disk"
+msgstr "Seleccionar una pel·lícula"
 
 msgid "Select horizontal resolution:"
 msgstr ""
@@ -7657,6 +7702,11 @@ msgstr ""
 #, fuzzy
 msgid "Select movie"
 msgstr "Seleccionar una pel·lícula"
+
+#
+#, fuzzy
+msgid "Select operation:"
+msgstr "Localització del backup"
 
 #
 #, fuzzy
@@ -7706,16 +7756,16 @@ msgstr ""
 msgid "Select the movie path"
 msgstr "Seleccionar una pel·lícula"
 
-msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
 msgid "Select the satellite you want to configure. Once that satellite is configured you can select and configure other satellites that will be accessed using this same tuner."
@@ -7983,6 +8033,11 @@ msgstr "Configuracions"
 #
 msgid "Setup"
 msgstr "Configuració"
+
+#
+#, fuzzy
+msgid "Setup hard disk"
+msgstr "Disc dur"
 
 msgid "Setup menu"
 msgstr ""
@@ -8444,9 +8499,6 @@ msgid "Solomon Islands"
 msgstr ""
 
 msgid "Somalia"
-msgstr ""
-
-msgid "Some error occured - Please try later"
 msgstr ""
 
 #
@@ -9257,8 +9309,7 @@ msgid ""
 "Do you really want to continue?"
 msgstr ""
 
-#
-msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
+msgid "This DVD RW medium is already formatted, Reformatting will erase all content on the disc."
 msgstr ""
 
 #, python-format
@@ -9343,7 +9394,7 @@ msgstr ""
 msgid "This option configures you can set auto volume level."
 msgstr ""
 
-msgid "This option set the level of surpression of musquito noise (Musquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
+msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr ""
 
 msgid "This option sets  the picture contrast."
@@ -9779,6 +9830,11 @@ msgstr "Dos"
 #
 msgid "Type"
 msgstr ""
+
+#
+#, fuzzy
+msgid "Type of LNB/device"
+msgstr "Tipus de recerca"
 
 #
 msgid "Type of scan"
@@ -10609,15 +10665,6 @@ msgid "When the content has an aspect ratio of 4:3, choose whether to scale/stre
 msgstr ""
 
 #
-msgid ""
-"When you do a factory reset, you will lose ALL your configuration data\n"
-"(including bouquets, services, satellite data ...)\n"
-"After completion of factory reset, your receiver will restart automatically!\n"
-"\n"
-"Really do a factory reset?"
-msgstr ""
-
-#
 msgid "Where do you want to backup your settings?"
 msgstr "On vols guardar el backup de la configuració?"
 
@@ -10845,9 +10892,6 @@ msgstr ""
 msgid ""
 "You need a PC connected to your receiver. If you need further instructions, please visit the website https://openpli.org\n"
 "Your receiver will now be halted. After you have performed the update instructions from the website, your new firmware will ask you to restore your settings."
-msgstr ""
-
-msgid "You system does not support ext4"
 msgstr ""
 
 #
@@ -12349,10 +12393,6 @@ msgid "®"
 msgstr ""
 
 #
-#~ msgid "A recording is currently running. Please stop the recording before trying to configure the positioner."
-#~ msgstr "En aquests moments s'està realitzant una gravació. Sisplau, atura-la abans de configurar el motor."
-
-#
 #~ msgid "Coderate HP"
 #~ msgstr "Velocitat de codi HP"
 
@@ -12371,6 +12411,11 @@ msgstr ""
 #
 #~ msgid "Current version:"
 #~ msgstr "Versió actual:"
+
+#
+#, fuzzy
+#~ msgid "Diasbled"
+#~ msgstr "Desactivat"
 
 #
 #~ msgid "Do you want to do another manual service scan?"
@@ -12400,8 +12445,16 @@ msgstr ""
 #~ msgstr "PIDs"
 
 #
+#~ msgid "Press OK to start the scan"
+#~ msgstr "Prem OK per a començar la recerca"
+
+#
 #~ msgid "Provider to scan"
 #~ msgstr "Proveïdor a escanejar"
+
+#
+#~ msgid "Satfinder"
+#~ msgstr "Localitzador de satèl·lits"
 
 #
 #, fuzzy

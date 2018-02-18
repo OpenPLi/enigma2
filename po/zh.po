@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-13 16:06+0330\n"
+"POT-Creation-Date: 2018-02-18 12:01+0330\n"
 "PO-Revision-Date: 2016-06-17 12:13+0800\n"
 "Last-Translator: nx111 <gdzdz@163.com>\n"
 "Language-Team: NEWBOLT\n"
@@ -632,8 +632,9 @@ msgstr ""
 "录制已经开始:\n"
 "%s"
 
-msgid "A recording is currently running on the selected tuner. Please select a different tuner or consider to stop the recording to try again."
-msgstr ""
+#, fuzzy
+msgid "A recording is currently running on the selected tuner. Please select a different tuner or stop the recording and try again."
+msgstr "录制正在进行中. 扫描前请停止录制."
 
 msgid ""
 "A recording is currently running.\n"
@@ -811,7 +812,8 @@ msgstr ""
 msgid "Adjust 3D settings"
 msgstr "调整3D设置"
 
-msgid "Adjust the color settings so that all the color shades are distinguishable, but appear as saturated as possible. If you are happy with the result, press OK to close the video fine-tuning, or use the number keys to select other test screens."
+#, fuzzy
+msgid "Adjust the color settings so that all the color shades are distinguishable but appear as saturated as possible. If you are happy with the result press OK to close the video fine-tuning or use the number keys to select other test screens."
 msgstr "调整颜色设置以使所有的颜色深浅可以辨识出来，使之看起来尽可能饱和。如果您对结果感到满意，按OK关闭视频微调，或者用数字键选择画面上的其它测试。 "
 
 msgid "Advanced"
@@ -935,6 +937,9 @@ msgid "An empty filename is illegal."
 msgstr "一个空的文件名是非法的."
 
 msgid "An error occurred while downloading the packetlist. Please try again."
+msgstr ""
+
+msgid "An error occurred, Please try again later"
 msgstr ""
 
 msgid "An unknown error occurred!"
@@ -1447,10 +1452,10 @@ msgstr ""
 msgid "Cannot determine"
 msgstr ""
 
-msgid "Cannot find any signal ..., aborting !"
+msgid "Cannot find any images, Please try again later"
 msgstr ""
 
-msgid "Cannot find images - please try later"
+msgid "Cannot find any signal ..., aborting !"
 msgstr ""
 
 msgid "Cannot move files on a different disk or system to the trash can"
@@ -1519,6 +1524,10 @@ msgstr "频道"
 
 msgid "Channel Info"
 msgstr ""
+
+#, fuzzy
+msgid "Channel context menu"
+msgstr "频道列表菜单"
 
 msgid "Channel list type"
 msgstr "频道列表类型"
@@ -2027,7 +2036,8 @@ msgstr "配置本地网络"
 msgid "Configure your network again"
 msgstr "重新配置网络"
 
-msgid "Configure your network settings, and press OK to start the scan"
+#, fuzzy
+msgid "Configure your network settings and press OK to scan"
 msgstr "配置你的网络，然后按OK开始扫描"
 
 msgid "Configure your wireless LAN again"
@@ -2100,20 +2110,14 @@ msgstr "继续播放(重复)"
 msgid "Contrast"
 msgstr "对比度"
 
-msgid "Convert ext3 filesystem to ext4"
-msgstr ""
-
-msgid "Convert ext3 to ext4"
-msgstr ""
-
-msgid "Converting ext3 to ext4..."
-msgstr ""
-
 msgid "Cook Islands"
 msgstr ""
 
 msgid "Copy"
 msgstr "拷贝"
+
+msgid "Copy to..."
+msgstr ""
 
 msgid "Costa Rica"
 msgstr ""
@@ -2121,10 +2125,10 @@ msgstr ""
 msgid "Cote d'Ivoire"
 msgstr ""
 
-msgid "Could not find installed channel list."
+msgid "Could not find any suitable media, Please insert a media (e.g. USB stick) and try again later"
 msgstr ""
 
-msgid "Could not find suitable media - Please insert a media (e.g. USB stick) and try again!"
+msgid "Could not find installed channel list."
 msgstr ""
 
 msgid "Could not load medium! No disc inserted?"
@@ -2209,7 +2213,7 @@ msgstr "当前转发器"
 msgid "Current value: "
 msgstr "当前值:"
 
-msgid "Currently the commit log cannot be retrieved - please try later again"
+msgid "Currently the commit log cannot be retrieved, Please try again later"
 msgstr ""
 
 msgid "Custom skip time for '1'/'3' buttons"
@@ -2508,10 +2512,6 @@ msgstr ""
 msgid "DiSEqC-tester settings"
 msgstr ""
 
-#, fuzzy
-msgid "Diasbled"
-msgstr "禁用"
-
 msgid "Did you see all eight arrow heads?"
 msgstr ""
 
@@ -2615,13 +2615,6 @@ msgid ""
 msgstr ""
 " 是否检查文件系统?\n"
 "这将需要很长时间!"
-
-msgid ""
-"Do you really want to convert the filesystem?\n"
-"You cannot go back!"
-msgstr ""
-" 是否确认要转换文件系统?\n"
-"你将不能恢复!"
 
 #, python-format
 msgid "Do you really want to delete %s?"
@@ -2740,11 +2733,11 @@ msgstr ""
 msgid "Don't zap and remove timer"
 msgstr ""
 
-#, python-format
-msgid "Done - Installed, upgraded or removed %d package (%s)"
-msgid_plural "Done - Installed, upgraded or removed %d packages (%s)"
-msgstr[0] ""
-msgstr[1] ""
+#, fuzzy, python-format
+msgid "Done! Installed, upgraded or removed %d package (%s)"
+msgid_plural "Done! Installed, upgraded or removed %d packages (%s)"
+msgstr[0] "完成 - 安装, 升级或移除 %d 软件包出现 %d 错误"
+msgstr[1] "完成 - 安装, 升级或移除 %d 软件包出现 %d 错误"
 
 msgid "Download plugins"
 msgstr ""
@@ -3258,6 +3251,12 @@ msgstr ""
 msgid "Factory reset"
 msgstr "出厂设置"
 
+msgid ""
+"Factory reset will restore your receiver to its default configuration. All user data including system settings, tuner configuration, bouquets, services and plugins will be DELETED. Recordings and other files stored on HDD and USB media will remain intact. After completion, the system will restart automatically!\n"
+"\n"
+"Do you really want to proceed?"
+msgstr ""
+
 msgid "Failed"
 msgstr "失败"
 
@@ -3317,6 +3316,10 @@ msgstr ""
 
 msgid "File appears to be busy.\n"
 msgstr ""
+
+#, fuzzy
+msgid "File manager"
+msgstr "文件管理器"
 
 msgid "Filename"
 msgstr "文件名"
@@ -3908,6 +3911,10 @@ msgstr ""
 msgid "Indonesia"
 msgstr "完成!"
 
+#, fuzzy
+msgid "Indonesian"
+msgstr "完成!"
+
 msgid "Info"
 msgstr "信息"
 
@@ -4300,6 +4307,10 @@ msgstr "列出可用网络"
 msgid "List mode"
 msgstr ""
 
+#, fuzzy
+msgid "List of files"
+msgstr "切换到文件列表"
+
 msgid "List of storage devices"
 msgstr ""
 
@@ -4611,6 +4622,10 @@ msgstr "东移"
 
 msgid "Move to position X"
 msgstr ""
+
+#, fuzzy
+msgid "Move to..."
+msgstr "东移"
 
 msgid "Move west"
 msgstr "西移"
@@ -5044,6 +5059,12 @@ msgstr ""
 msgid ""
 "Nothing to scan!\n"
 "Please setup your tuner settings before you start a service scan."
+msgstr ""
+"没有扫描!\n"
+"请设置您的调谐器，然后再启动频道扫描。."
+
+#, fuzzy
+msgid "Nothing to scan! Setup your tuner and try again."
 msgstr ""
 "没有扫描!\n"
 "请设置您的调谐器，然后再启动频道扫描。."
@@ -5742,9 +5763,6 @@ msgstr ""
 msgid "Press OK to select/deselect a CAId."
 msgstr "按OK键 选择/取消 CAID"
 
-msgid "Press OK to start the scan"
-msgstr "按OK键开始扫描."
-
 msgid "Press OK to toggle the selection"
 msgstr ""
 
@@ -6003,7 +6021,7 @@ msgid "Refresh rate selection."
 msgstr "选择刷新率."
 
 #, fuzzy
-msgid "Refreshing image list - Please wait..."
+msgid "Refreshing image list, Please wait..."
 msgstr "正在搜索可用升级. 请稍候..."
 
 #, fuzzy
@@ -6222,11 +6240,11 @@ msgid "Resuming playback"
 msgstr "恢复播放"
 
 #, fuzzy
-msgid "Retreiving image list - Please wait..."
+msgid "Retreiving image list, Please wait..."
 msgstr "正在下载插件信息, 请稍候..."
 
 #, fuzzy
-msgid "Retreiving image slots - Please wait..."
+msgid "Retreiving image slots, Please wait..."
 msgstr "正在安装... 请稍候..."
 
 msgid "Return to movie list"
@@ -6382,9 +6400,6 @@ msgstr ""
 msgid "Satellites"
 msgstr "卫星"
 
-msgid "Satfinder"
-msgstr "寻星"
-
 msgid "Sats"
 msgstr "卫星"
 
@@ -6461,11 +6476,25 @@ msgstr ""
 msgid "Scan additional SR"
 msgstr "扫描更多 SR"
 
+#, fuzzy, python-format
+msgid "Scan completed, %d channel found."
+msgid_plural "Scan completed, %d channels found."
+msgstr[0] "扫描完成，找到%d个频道"
+msgstr[1] "扫描完成，找到%d个频道"
+
+#, fuzzy
+msgid "Scan failed!"
+msgstr "扫描失败!"
+
 msgid "Scan files..."
 msgstr ""
 
 msgid "Scan options"
 msgstr ""
+
+#, fuzzy
+msgid "Scan state"
+msgstr "扫描状态"
 
 msgid "Scan wireless networks"
 msgstr ""
@@ -6665,6 +6694,14 @@ msgstr "选择要录制的频道"
 msgid "Select copy destination for:"
 msgstr "选择目标位置:"
 
+#, fuzzy
+msgid "Select destination for copy selected files..."
+msgstr "目标目录:"
+
+#, fuzzy
+msgid "Select destination for move selected files..."
+msgstr "目标目录:"
+
 msgid "Select destination for:"
 msgstr "目标目录:"
 
@@ -6675,12 +6712,19 @@ msgstr "创建目录%s 失败."
 msgid "Select files for backup."
 msgstr "选择 文件/目录 备份..."
 
+msgid "Select files with 'OK' and then use 'Menu' for select operation"
+msgstr ""
+
 msgid "Select files/folders to backup"
 msgstr "选择 文件/目录 备份..."
 
 #, fuzzy
 msgid "Select function"
 msgstr "选择位置"
+
+#, fuzzy
+msgid "Select hard disk"
+msgstr "选择一部电影"
 
 msgid "Select horizontal resolution:"
 msgstr ""
@@ -6705,6 +6749,10 @@ msgstr ""
 
 msgid "Select movie"
 msgstr ""
+
+#, fuzzy
+msgid "Select operation:"
+msgstr "选择目标位置:"
 
 #, fuzzy
 msgid "Select path for logfile"
@@ -6746,16 +6794,16 @@ msgstr ""
 msgid "Select the movie path"
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
 msgid "Select the satellite you want to configure. Once that satellite is configured you can select and configure other satellites that will be accessed using this same tuner."
@@ -6990,6 +7038,10 @@ msgstr "设置"
 
 msgid "Setup"
 msgstr "设置"
+
+#, fuzzy
+msgid "Setup hard disk"
+msgstr "硬盘"
 
 msgid "Setup menu"
 msgstr ""
@@ -7401,9 +7453,6 @@ msgid "Solomon Islands"
 msgstr ""
 
 msgid "Somalia"
-msgstr ""
-
-msgid "Some error occured - Please try later"
 msgstr ""
 
 msgid "Some plugins are not available:\n"
@@ -8114,7 +8163,8 @@ msgstr ""
 "所选的分区上可能没有足够的空间.\n"
 "是否继续？"
 
-msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
+#, fuzzy
+msgid "This DVD RW medium is already formatted, Reformatting will erase all content on the disc."
 msgstr "这张DVD RW已经格式化过，再次格式化将删除所有文件"
 
 #, python-format
@@ -8199,7 +8249,7 @@ msgstr ""
 msgid "This option configures you can set auto volume level."
 msgstr ""
 
-msgid "This option set the level of surpression of musquito noise (Musquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
+msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr ""
 
 msgid "This option sets  the picture contrast."
@@ -8567,6 +8617,10 @@ msgstr "2"
 
 msgid "Type"
 msgstr "类型"
+
+#, fuzzy
+msgid "Type of LNB/device"
+msgstr "扫描类型"
 
 msgid "Type of scan"
 msgstr "扫描类型"
@@ -9317,19 +9371,6 @@ msgstr ""
 msgid "When the content has an aspect ratio of 4:3, choose whether to scale/stretch the picture."
 msgstr ""
 
-msgid ""
-"When you do a factory reset, you will lose ALL your configuration data\n"
-"(including bouquets, services, satellite data ...)\n"
-"After completion of factory reset, your receiver will restart automatically!\n"
-"\n"
-"Really do a factory reset?"
-msgstr ""
-"如果恢复出厂设置，全部个人设置将丢失\n"
-"(包括卫星, 频道, 自定义组等 ...)\n"
-"完成出厂设置复位后, 接收机将自动重启!\n"
-"\n"
-"确定要恢复出厂设置吗?"
-
 msgid "Where do you want to backup your settings?"
 msgstr "在哪里备份您的设置?"
 
@@ -9539,9 +9580,6 @@ msgid ""
 msgstr ""
 "您需要一台PC连接到您的dreambox.通过电脑更新dreambox的固件.\n"
 "如果您需要进一步的说明请访问网站http://www.dm7025.de."
-
-msgid "You system does not support ext4"
-msgstr ""
 
 msgid "Your backup succeeded. We will now continue to explain the further upgrade process."
 msgstr "备份成功.现在将继续说明下一步的升级过程."
@@ -11842,6 +11880,10 @@ msgstr ""
 #~ msgid "DiSEqC-Tester settings"
 #~ msgstr "测试DiSEqC设置"
 
+#, fuzzy
+#~ msgid "Diasbled"
+#~ msgstr "禁用"
+
 #~ msgid "Directory %s nonexistent."
 #~ msgstr "目录 %s 不存在."
 
@@ -11881,6 +11923,13 @@ msgstr ""
 #~ "Do you really want to REMOVE\n"
 #~ "the plugin \"%s\"?"
 #~ msgstr " 是否移除插件\"%s\"?"
+
+#~ msgid ""
+#~ "Do you really want to convert the filesystem?\n"
+#~ "You cannot go back!"
+#~ msgstr ""
+#~ " 是否确认要转换文件系统?\n"
+#~ "你将不能恢复!"
 
 #~ msgid ""
 #~ "Do you really want to initialize the harddisk?\n"
@@ -11929,9 +11978,6 @@ msgstr ""
 
 #~ msgid "Done - Installed or upgraded %d packages with %d errors"
 #~ msgstr "完成 - 安装或升级 %d 软件包出现 %d 错误"
-
-#~ msgid "Done - Installed, upgraded or removed %d packages with %d errors"
-#~ msgstr "完成 - 安装, 升级或移除 %d 软件包出现 %d 错误"
 
 #~ msgid "Doubled size of the RAM"
 #~ msgstr "双倍内存大小"
@@ -12163,9 +12209,6 @@ msgstr ""
 
 #~ msgid "File"
 #~ msgstr "文件"
-
-#~ msgid "File Manager"
-#~ msgstr "文件管理器"
 
 #~ msgid "File(s)"
 #~ msgstr "文件(S)"
@@ -13280,6 +13323,9 @@ msgstr ""
 #~ msgid "Press OK to select a Provider."
 #~ msgstr "按OK键选择提供商."
 
+#~ msgid "Press OK to start the scan"
+#~ msgstr "按OK键开始扫描."
+
 #~ msgid "Press number field to edit"
 #~ msgstr "按数字区编辑"
 
@@ -13499,6 +13545,9 @@ msgstr ""
 #~ msgid "Satellites view"
 #~ msgstr "卫星"
 
+#~ msgid "Satfinder"
+#~ msgstr "寻星"
+
 #~ msgid "Save Playlist"
 #~ msgstr "保存播放列表"
 
@@ -13567,9 +13616,6 @@ msgstr ""
 
 #~ msgid "Scan band US SUPER"
 #~ msgstr "扫描 US SUPER"
-
-#~ msgid "Scanning completed, %d channels found"
-#~ msgstr "扫描完成，找到%d个频道"
 
 #~ msgid "Scattered Showers"
 #~ msgstr "零散小雨"
@@ -14617,6 +14663,19 @@ msgstr ""
 
 #~ msgid "What do you want to scan?"
 #~ msgstr "是否开始扫描?"
+
+#~ msgid ""
+#~ "When you do a factory reset, you will lose ALL your configuration data\n"
+#~ "(including bouquets, services, satellite data ...)\n"
+#~ "After completion of factory reset, your receiver will restart automatically!\n"
+#~ "\n"
+#~ "Really do a factory reset?"
+#~ msgstr ""
+#~ "如果恢复出厂设置，全部个人设置将丢失\n"
+#~ "(包括卫星, 频道, 自定义组等 ...)\n"
+#~ "完成出厂设置复位后, 接收机将自动重启!\n"
+#~ "\n"
+#~ "确定要恢复出厂设置吗?"
 
 #~ msgid "Window"
 #~ msgstr "窗口"

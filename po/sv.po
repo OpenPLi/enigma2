@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-13 16:06+0330\n"
+"POT-Creation-Date: 2018-02-18 12:01+0330\n"
 "PO-Revision-Date: 2017-03-05 13:24+0100\n"
 "Last-Translator: Magnus Nilsson <mag_nilsson@hotmail.com>\n"
 "Language-Team: \n"
@@ -706,7 +706,8 @@ msgstr ""
 "En inspelning har påbörjats :\n"
 "%s"
 
-msgid "A recording is currently running on the selected tuner. Please select a different tuner or consider to stop the recording to try again."
+#, fuzzy
+msgid "A recording is currently running on the selected tuner. Please select a different tuner or stop the recording and try again."
 msgstr "En inspelning pågår för närvarande på den valda tunern. Var god välj en annan tuner eller överväg att stoppa inspelningen för att prova igen."
 
 #
@@ -923,7 +924,8 @@ msgid "Adjust 3D settings"
 msgstr "Justera 3D-inställningar"
 
 #
-msgid "Adjust the color settings so that all the color shades are distinguishable, but appear as saturated as possible. If you are happy with the result, press OK to close the video fine-tuning, or use the number keys to select other test screens."
+#, fuzzy
+msgid "Adjust the color settings so that all the color shades are distinguishable but appear as saturated as possible. If you are happy with the result press OK to close the video fine-tuning or use the number keys to select other test screens."
 msgstr "Justera färginställningarna så att alla färgnivåer är urskiljningsbara, men de ska vara så färgfulla som möjligt. När du är nöjd med resultatet, tryck OK för att stänga videoinställningarna eller tryck på nummerknapp för att välja annan testbild."
 
 msgid "Advanced"
@@ -1062,6 +1064,10 @@ msgstr "Ett tomt filnamn är inte tillåtet."
 #
 msgid "An error occurred while downloading the packetlist. Please try again."
 msgstr "Ett fel uppstod vid nedladdning av paketlistan. Vänligen prova igen."
+
+#, fuzzy
+msgid "An error occurred, Please try again later"
+msgstr "Något fel inträffade - Var snäll och försök senare"
 
 #
 msgid "An unknown error occurred!"
@@ -1645,11 +1651,12 @@ msgstr ""
 msgid "Cannot determine"
 msgstr "Kan inte avgöra"
 
+#, fuzzy
+msgid "Cannot find any images, Please try again later"
+msgstr "Inga uppdateringar tillgängliga. Försök igen senare."
+
 msgid "Cannot find any signal ..., aborting !"
 msgstr "Hittar ingen signal ..., avbryter !"
-
-msgid "Cannot find images - please try later"
-msgstr ""
 
 msgid "Cannot move files on a different disk or system to the trash can"
 msgstr "Kan inte flytta filer på en annan disk eller system till papperskorgen"
@@ -1725,6 +1732,11 @@ msgstr "Kanal"
 
 msgid "Channel Info"
 msgstr "Kanal info"
+
+#
+#, fuzzy
+msgid "Channel context menu"
+msgstr "Meny för kanallista"
 
 #
 msgid "Channel list type"
@@ -2283,7 +2295,8 @@ msgstr "Konfigurera ditt interna LAN"
 msgid "Configure your network again"
 msgstr "Konfigurera ditt nätverk igen"
 
-msgid "Configure your network settings, and press OK to start the scan"
+#, fuzzy
+msgid "Configure your network settings and press OK to scan"
 msgstr "Konfigurera dina nätverksinställningar, och tryck OK för att starta skanningen"
 
 #
@@ -2367,20 +2380,14 @@ msgstr "Kontinuerlig uppspelning (loop)"
 msgid "Contrast"
 msgstr "Kontrast"
 
-msgid "Convert ext3 filesystem to ext4"
-msgstr "Konvertera filsystemet ext3 till ext4"
-
-msgid "Convert ext3 to ext4"
-msgstr "Konvertera ext3 till ext4"
-
-msgid "Converting ext3 to ext4..."
-msgstr "Konverterar ext3 till ext4..."
-
 msgid "Cook Islands"
 msgstr ""
 
 msgid "Copy"
 msgstr "Kopiera"
+
+msgid "Copy to..."
+msgstr ""
 
 msgid "Costa Rica"
 msgstr ""
@@ -2388,11 +2395,11 @@ msgstr ""
 msgid "Cote d'Ivoire"
 msgstr ""
 
+msgid "Could not find any suitable media, Please insert a media (e.g. USB stick) and try again later"
+msgstr ""
+
 msgid "Could not find installed channel list."
 msgstr "Det gick inte att hitta den installerade kanallistan."
-
-msgid "Could not find suitable media - Please insert a media (e.g. USB stick) and try again!"
-msgstr ""
 
 #
 msgid "Could not load medium! No disc inserted?"
@@ -2489,7 +2496,8 @@ msgstr "Nuvarande transponder"
 msgid "Current value: "
 msgstr "Nuvarande värde : "
 
-msgid "Currently the commit log cannot be retrieved - please try later again"
+#, fuzzy
+msgid "Currently the commit log cannot be retrieved, Please try again later"
 msgstr "För tillfället kan inte commit loggen tas emot - var vänlig försök igen senare"
 
 #
@@ -2828,11 +2836,6 @@ msgstr "DiSEqC port %s: %s"
 msgid "DiSEqC-tester settings"
 msgstr "DiSEqC-tester inställningar"
 
-#
-#, fuzzy
-msgid "Diasbled"
-msgstr "Avaktivera"
-
 msgid "Did you see all eight arrow heads?"
 msgstr "Såg du alla åtta pilhuvudena?"
 
@@ -2956,13 +2959,6 @@ msgid ""
 msgstr ""
 "Vill du verkligen kontrollera filsystemet?\n"
 "Detta kan ta lång tid!"
-
-msgid ""
-"Do you really want to convert the filesystem?\n"
-"You cannot go back!"
-msgstr ""
-"Vill du verkligen konvertera filsystemet?\n"
-"Du kan inte gå tillbaka!"
 
 #
 #, python-format
@@ -3103,9 +3099,9 @@ msgid "Don't zap and remove timer"
 msgstr "Zappa inte och ta bort timer"
 
 #
-#, python-format
-msgid "Done - Installed, upgraded or removed %d package (%s)"
-msgid_plural "Done - Installed, upgraded or removed %d packages (%s)"
+#, fuzzy, python-format
+msgid "Done! Installed, upgraded or removed %d package (%s)"
+msgid_plural "Done! Installed, upgraded or removed %d packages (%s)"
 msgstr[0] "Klar - installerat, uppgraderat eller avinstallerat %d paket (%s)"
 msgstr[1] "Klar - installerat, uppgraderat eller avinstallerat %d paket (%s)"
 
@@ -3684,6 +3680,12 @@ msgstr "FTA"
 msgid "Factory reset"
 msgstr "Fabriksåterställning"
 
+msgid ""
+"Factory reset will restore your receiver to its default configuration. All user data including system settings, tuner configuration, bouquets, services and plugins will be DELETED. Recordings and other files stored on HDD and USB media will remain intact. After completion, the system will restart automatically!\n"
+"\n"
+"Do you really want to proceed?"
+msgstr ""
+
 #
 msgid "Failed"
 msgstr "Misslyckades"
@@ -3752,6 +3754,10 @@ msgstr ""
 
 msgid "File appears to be busy.\n"
 msgstr "Filen verkar vara upptagen.\n"
+
+#, fuzzy
+msgid "File manager"
+msgstr "Filnamn"
 
 msgid "Filename"
 msgstr "Filnamn"
@@ -4403,6 +4409,9 @@ msgstr ""
 msgid "Indonesia"
 msgstr ""
 
+msgid "Indonesian"
+msgstr ""
+
 #
 msgid "Info"
 msgstr "Info"
@@ -4859,6 +4868,11 @@ msgid "List mode"
 msgstr "Listläge"
 
 #
+#, fuzzy
+msgid "List of files"
+msgstr "Byt till fillista"
+
+#
 msgid "List of storage devices"
 msgstr "Lista på lagringsenheter"
 
@@ -5218,6 +5232,11 @@ msgstr "Flytta mot öst"
 
 msgid "Move to position X"
 msgstr "Flytta till position X"
+
+#
+#, fuzzy
+msgid "Move to..."
+msgstr "Flytta mot öst"
 
 #
 msgid "Move west"
@@ -5711,6 +5730,13 @@ msgstr "Obs : Vid aktiverad, om du vill ha viloläge efter uppstart, ställ in a
 msgid ""
 "Nothing to scan!\n"
 "Please setup your tuner settings before you start a service scan."
+msgstr ""
+"Inget att söka efter!\n"
+"Vänligen konfigurera tuner före sökning efter kanaler."
+
+#
+#, fuzzy
+msgid "Nothing to scan! Setup your tuner and try again."
 msgstr ""
 "Inget att söka efter!\n"
 "Vänligen konfigurera tuner före sökning efter kanaler."
@@ -6516,10 +6542,6 @@ msgstr "Tryck OK för att välja satelliter"
 msgid "Press OK to select/deselect a CAId."
 msgstr "Tryck OK för att aktivera / avaktivera en CAId."
 
-#
-msgid "Press OK to start the scan"
-msgstr "Tryck OK för att starta sökning"
-
 msgid "Press OK to toggle the selection"
 msgstr "Tryck OK för att växla val."
 
@@ -6815,7 +6837,7 @@ msgstr "Val av uppdateringsfrekvens."
 
 #
 #, fuzzy
-msgid "Refreshing image list - Please wait..."
+msgid "Refreshing image list, Please wait..."
 msgstr "Söker efter tillgängliga uppdateringar. Vänligen vänta..."
 
 #
@@ -7075,12 +7097,12 @@ msgstr "Återupptar uppspelning"
 
 #
 #, fuzzy
-msgid "Retreiving image list - Please wait..."
+msgid "Retreiving image list, Please wait..."
 msgstr "Hämtar plugin information. Var vänlig vänta..."
 
 #
 #, fuzzy
-msgid "Retreiving image slots - Please wait..."
+msgid "Retreiving image slots, Please wait..."
 msgstr "Söker efter tillgängliga uppdateringar. Vänligen vänta..."
 
 #
@@ -7256,10 +7278,6 @@ msgid "Satellites"
 msgstr "Satelliter"
 
 #
-msgid "Satfinder"
-msgstr "Satfinder"
-
-#
 msgid "Sats"
 msgstr "Sats"
 
@@ -7346,12 +7364,27 @@ msgstr "Sök %s band"
 msgid "Scan additional SR"
 msgstr "Sök ytterligare SR"
 
+#, fuzzy, python-format
+msgid "Scan completed, %d channel found."
+msgid_plural "Scan completed, %d channels found."
+msgstr[0] "Sökning klar, %d kanal hittad"
+msgstr[1] "Sökning klar, %d kanaler hittade"
+
+#, fuzzy
+msgid "Scan failed!"
+msgstr "Sökning misslyckades!"
+
 #
 msgid "Scan files..."
 msgstr "Sök filer..."
 
 msgid "Scan options"
 msgstr "Sök val"
+
+#
+#, fuzzy
+msgid "Scan state"
+msgstr "sökningsstatus"
 
 #
 msgid "Scan wireless networks"
@@ -7577,6 +7610,14 @@ msgstr "Välj kanal att spela in från"
 msgid "Select copy destination for:"
 msgstr "Välj destination för kopia :"
 
+#, fuzzy
+msgid "Select destination for copy selected files..."
+msgstr "Välj destination för :"
+
+#, fuzzy
+msgid "Select destination for move selected files..."
+msgstr "Välj destination för :"
+
 msgid "Select destination for:"
 msgstr "Välj destination för :"
 
@@ -7588,6 +7629,9 @@ msgstr "Skapande av katalog %s misslyckades."
 msgid "Select files for backup."
 msgstr "Väl filer för säkerhetskopia."
 
+msgid "Select files with 'OK' and then use 'Menu' for select operation"
+msgstr ""
+
 #
 msgid "Select files/folders to backup"
 msgstr "Ange filer / bibliotek att ta säkerhetskopia på"
@@ -7595,6 +7639,11 @@ msgstr "Ange filer / bibliotek att ta säkerhetskopia på"
 #, fuzzy
 msgid "Select function"
 msgstr "Välj åtgärd"
+
+#
+#, fuzzy
+msgid "Select hard disk"
+msgstr "Välj ett utseende"
 
 #, fuzzy
 msgid "Select horizontal resolution:"
@@ -7622,6 +7671,10 @@ msgstr "Välj sökväg"
 #
 msgid "Select movie"
 msgstr "Välj en film"
+
+#, fuzzy
+msgid "Select operation:"
+msgstr "Välj sökväg"
 
 #
 #, fuzzy
@@ -7669,16 +7722,16 @@ msgstr ""
 msgid "Select the movie path"
 msgstr "Välj film sökväg"
 
-msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
 msgid "Select the satellite you want to configure. Once that satellite is configured you can select and configure other satellites that will be accessed using this same tuner."
@@ -7941,6 +7994,11 @@ msgstr "Inställningar"
 #
 msgid "Setup"
 msgstr "Inställningar"
+
+#
+#, fuzzy
+msgid "Setup hard disk"
+msgstr "Hårddisk"
 
 msgid "Setup menu"
 msgstr "Installationsmeny"
@@ -8407,9 +8465,6 @@ msgstr ""
 
 msgid "Somalia"
 msgstr ""
-
-msgid "Some error occured - Please try later"
-msgstr "Något fel inträffade - Var snäll och försök senare"
 
 #
 msgid "Some plugins are not available:\n"
@@ -9239,7 +9294,8 @@ msgstr ""
 "Vill du verkligen fortsätta?"
 
 #
-msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
+#, fuzzy
+msgid "This DVD RW medium is already formatted, Reformatting will erase all content on the disc."
 msgstr "Detta DVD RW media är redan formaterat - om formatering kommer ta bort all data på skivan."
 
 #, python-format
@@ -9339,7 +9395,7 @@ msgstr ""
 msgid "This option configures you can set auto volume level."
 msgstr ""
 
-msgid "This option set the level of surpression of musquito noise (Musquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
+msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr ""
 
 msgid "This option sets  the picture contrast."
@@ -9786,6 +9842,11 @@ msgstr "Två"
 #
 msgid "Type"
 msgstr "Typ"
+
+#
+#, fuzzy
+msgid "Type of LNB/device"
+msgstr "Typ av sökning"
 
 #
 msgid "Type of scan"
@@ -10630,20 +10691,6 @@ msgid "When the content has an aspect ratio of 4:3, choose whether to scale/stre
 msgstr "När innehållet har ett bildförhållande på 4:3, välj om man ska skala / sträcka bilden."
 
 #
-msgid ""
-"When you do a factory reset, you will lose ALL your configuration data\n"
-"(including bouquets, services, satellite data ...)\n"
-"After completion of factory reset, your receiver will restart automatically!\n"
-"\n"
-"Really do a factory reset?"
-msgstr ""
-"När du utför en fabriksreset, kommer du att förlora ALL konfigurationsdata\n"
-"(inkl favoritlistor, kanaler, satellit data ...)\n"
-"När fabriksreset är klar kommer din mottagare automatiskt starta om!\n"
-"\n"
-"Vill du utföra en fabriksreset?"
-
-#
 msgid "Where do you want to backup your settings?"
 msgstr "Var vill du spara din säkerhetskopia på dina inställningar?"
 
@@ -10896,9 +10943,6 @@ msgid ""
 msgstr ""
 "Du behöver ha en PC kopplad till din mottagare. Behöver du ytterligare instruktioner vänligen gå till websidan http://www.dm7025.de.\n"
 "Din mottagare kommer nu att stoppas. När du har genomfört uppdateringen enligt instruktionerna från websidan, kommer din nya mjukvara att fråga dig om du vill återställa dina inställningar."
-
-msgid "You system does not support ext4"
-msgstr "Ditt system stödjer inte ext4"
 
 #
 msgid "Your backup succeeded. We will now continue to explain the further upgrade process."
@@ -12471,6 +12515,15 @@ msgstr ""
 #~ msgid "Constellation"
 #~ msgstr "Konstellation"
 
+#~ msgid "Convert ext3 filesystem to ext4"
+#~ msgstr "Konvertera filsystemet ext3 till ext4"
+
+#~ msgid "Convert ext3 to ext4"
+#~ msgstr "Konvertera ext3 till ext4"
+
+#~ msgid "Converting ext3 to ext4..."
+#~ msgstr "Konverterar ext3 till ext4..."
+
 #~ msgid "Could not connect to receiver .NFI image feed server:"
 #~ msgstr "Kunde inte ansluta till mottagare .NFI image feed Server:"
 
@@ -12483,6 +12536,18 @@ msgstr ""
 
 #~ msgid "Descramble http streams"
 #~ msgstr "Avkoda http-strömmar"
+
+#
+#, fuzzy
+#~ msgid "Diasbled"
+#~ msgstr "Avaktivera"
+
+#~ msgid ""
+#~ "Do you really want to convert the filesystem?\n"
+#~ "You cannot go back!"
+#~ msgstr ""
+#~ "Vill du verkligen konvertera filsystemet?\n"
+#~ "Du kan inte gå tillbaka!"
 
 #
 #~ msgid "Do you want to do another manual service scan?"
@@ -12619,6 +12684,10 @@ msgstr ""
 #~ msgstr "Förbered ytterligare en USB-sticka för image flashning"
 
 #
+#~ msgid "Press OK to start the scan"
+#~ msgstr "Tryck OK för att starta sökning"
+
+#
 #~ msgid "Provider to scan"
 #~ msgstr "Operatör att skanna"
 
@@ -12631,6 +12700,10 @@ msgstr ""
 
 #~ msgid "SID"
 #~ msgstr "SID"
+
+#
+#~ msgid "Satfinder"
+#~ msgstr "Satfinder"
 
 #~ msgid "Select an image to be downloaded"
 #~ msgstr "Välj image för nedladdning"
@@ -12784,6 +12857,20 @@ msgstr ""
 #~ msgid "When enabled, http streams are descrambled on the server side. The (remote) client receiver does not have to do descrambling."
 #~ msgstr "Vid aktiverad kommer http-strömmar avkodas på serversidan. (Fjärr) Klientmottagaren behöver inte göra avkodningen."
 
+#
+#~ msgid ""
+#~ "When you do a factory reset, you will lose ALL your configuration data\n"
+#~ "(including bouquets, services, satellite data ...)\n"
+#~ "After completion of factory reset, your receiver will restart automatically!\n"
+#~ "\n"
+#~ "Really do a factory reset?"
+#~ msgstr ""
+#~ "När du utför en fabriksreset, kommer du att förlora ALL konfigurationsdata\n"
+#~ "(inkl favoritlistor, kanaler, satellit data ...)\n"
+#~ "När fabriksreset är klar kommer din mottagare automatiskt starta om!\n"
+#~ "\n"
+#~ "Vill du utföra en fabriksreset?"
+
 #~ msgid "Would you like to install a softcam?"
 #~ msgstr "Vill du installera en softcam?"
 
@@ -12794,6 +12881,9 @@ msgstr ""
 #
 #~ msgid "You have chosen to create a new .NFI flasher bootable USB stick. This will repartition the USB stick and therefore all data on it will be erased."
 #~ msgstr "Du har valt att skapa en ny .NFI flash startbar USB-sticka. Detta kommer att repartitionera USB-stickan och efter det kommer all data på den vara borta."
+
+#~ msgid "You system does not support ext4"
+#~ msgstr "Ditt system stödjer inte ext4"
 
 #
 #~ msgid ""

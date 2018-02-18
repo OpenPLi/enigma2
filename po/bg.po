@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-13 16:06+0330\n"
+"POT-Creation-Date: 2018-02-18 12:01+0330\n"
 "PO-Revision-Date: 2017-12-01 19:24+0200\n"
 "Last-Translator: Martin Petkov <marto74bg@yahoo.co.uk>\n"
 "Language-Team: Bulgarian\n"
@@ -644,8 +644,9 @@ msgstr ""
 "Започна запис:\n"
 "%s"
 
-msgid "A recording is currently running on the selected tuner. Please select a different tuner or consider to stop the recording to try again."
-msgstr ""
+#, fuzzy
+msgid "A recording is currently running on the selected tuner. Please select a different tuner or stop the recording and try again."
+msgstr "В момента тече запис. Моля спрете записа преди сканиране."
 
 msgid ""
 "A recording is currently running.\n"
@@ -826,7 +827,8 @@ msgstr ""
 msgid "Adjust 3D settings"
 msgstr "3D настройки"
 
-msgid "Adjust the color settings so that all the color shades are distinguishable, but appear as saturated as possible. If you are happy with the result, press OK to close the video fine-tuning, or use the number keys to select other test screens."
+#, fuzzy
+msgid "Adjust the color settings so that all the color shades are distinguishable but appear as saturated as possible. If you are happy with the result press OK to close the video fine-tuning or use the number keys to select other test screens."
 msgstr "Настройте цветовете така, че всички цветови нюанса да са различимии и максимално наситени. Ако сте доволни от резултата, натиснете OK за да затворите фината настройка на картината, или използвайте цифровите бутони за да изберете друг тест екран."
 
 msgid "Advanced"
@@ -950,6 +952,10 @@ msgid "An empty filename is illegal."
 msgstr "Файл без име не се приема."
 
 msgid "An error occurred while downloading the packetlist. Please try again."
+msgstr "Настъпи грешка при изтегляне на списъка с пакети. Моля опитайте отново."
+
+#, fuzzy
+msgid "An error occurred, Please try again later"
 msgstr "Настъпи грешка при изтегляне на списъка с пакети. Моля опитайте отново."
 
 msgid "An unknown error occurred!"
@@ -1465,11 +1471,11 @@ msgstr ""
 msgid "Cannot determine"
 msgstr "Не може да се определи"
 
+msgid "Cannot find any images, Please try again later"
+msgstr ""
+
 msgid "Cannot find any signal ..., aborting !"
 msgstr "Не може да се открие сигнал ..., изход !"
-
-msgid "Cannot find images - please try later"
-msgstr ""
 
 msgid "Cannot move files on a different disk or system to the trash can"
 msgstr "Не може да се преместват файлове от различни дискове или системи в кошчето"
@@ -1536,6 +1542,10 @@ msgstr "Канал"
 
 msgid "Channel Info"
 msgstr ""
+
+#, fuzzy
+msgid "Channel context menu"
+msgstr "Меню списък с канали"
 
 msgid "Channel list type"
 msgstr "Списък с канали тип"
@@ -2042,7 +2052,8 @@ msgstr "Конфигуриране на вашата вътрешна LAN."
 msgid "Configure your network again"
 msgstr "Повторно конфигуриране на вашата мрежа."
 
-msgid "Configure your network settings, and press OK to start the scan"
+#, fuzzy
+msgid "Configure your network settings and press OK to scan"
 msgstr "Настройте вашата мрежа и натиснете OK за старт на сканирането"
 
 msgid "Configure your wireless LAN again"
@@ -2115,20 +2126,14 @@ msgstr "Непрекъснато възпроизвеждане (loop)"
 msgid "Contrast"
 msgstr "Контраст"
 
-msgid "Convert ext3 filesystem to ext4"
-msgstr "Конвертиране ext3 към ext4 файлова система"
-
-msgid "Convert ext3 to ext4"
-msgstr "Конвертиране ext3 към ext4"
-
-msgid "Converting ext3 to ext4..."
-msgstr "Конвертиране ext3 към ext4..."
-
 msgid "Cook Islands"
 msgstr ""
 
 msgid "Copy"
 msgstr "Копие"
+
+msgid "Copy to..."
+msgstr ""
 
 msgid "Costa Rica"
 msgstr ""
@@ -2136,11 +2141,11 @@ msgstr ""
 msgid "Cote d'Ivoire"
 msgstr ""
 
+msgid "Could not find any suitable media, Please insert a media (e.g. USB stick) and try again later"
+msgstr ""
+
 msgid "Could not find installed channel list."
 msgstr "Не може да се открие инсталиран списък с канали."
-
-msgid "Could not find suitable media - Please insert a media (e.g. USB stick) and try again!"
-msgstr ""
 
 msgid "Could not load medium! No disc inserted?"
 msgstr "Не може да се зареди съдържанието! Не е вкаран диск?"
@@ -2223,7 +2228,7 @@ msgstr "Текущ транспондер"
 msgid "Current value: "
 msgstr "Моментна стойност: "
 
-msgid "Currently the commit log cannot be retrieved - please try later again"
+msgid "Currently the commit log cannot be retrieved, Please try again later"
 msgstr ""
 
 msgid "Custom skip time for '1'/'3' buttons"
@@ -2518,10 +2523,6 @@ msgstr "DiSEqC порт %s: %s"
 msgid "DiSEqC-tester settings"
 msgstr "DiSEqC-тестер настройки"
 
-#, fuzzy
-msgid "Diasbled"
-msgstr "Спрян"
-
 msgid "Did you see all eight arrow heads?"
 msgstr ""
 
@@ -2620,13 +2621,6 @@ msgid ""
 msgstr ""
 "Искате ли да проверите файловата система?\n"
 "Това може да отнеме доста време!"
-
-msgid ""
-"Do you really want to convert the filesystem?\n"
-"You cannot go back!"
-msgstr ""
-"Наистина ли искате да конвертирате файловата система?\n"
-"Не можете да спрете процеса!"
 
 #, python-format
 msgid "Do you really want to delete %s?"
@@ -2749,8 +2743,8 @@ msgid "Don't zap and remove timer"
 msgstr ""
 
 #, python-format
-msgid "Done - Installed, upgraded or removed %d package (%s)"
-msgid_plural "Done - Installed, upgraded or removed %d packages (%s)"
+msgid "Done! Installed, upgraded or removed %d package (%s)"
+msgid_plural "Done! Installed, upgraded or removed %d packages (%s)"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -3260,6 +3254,12 @@ msgstr "FTA"
 msgid "Factory reset"
 msgstr "Фабрични настройки"
 
+msgid ""
+"Factory reset will restore your receiver to its default configuration. All user data including system settings, tuner configuration, bouquets, services and plugins will be DELETED. Recordings and other files stored on HDD and USB media will remain intact. After completion, the system will restart automatically!\n"
+"\n"
+"Do you really want to proceed?"
+msgstr ""
+
 msgid "Failed"
 msgstr "Грешка"
 
@@ -3319,6 +3319,10 @@ msgstr ""
 
 msgid "File appears to be busy.\n"
 msgstr "Изглежда файлът се използва в момента.\n"
+
+#, fuzzy
+msgid "File manager"
+msgstr "Управление на пакети"
 
 msgid "Filename"
 msgstr ""
@@ -3905,6 +3909,9 @@ msgstr ""
 msgid "Indonesia"
 msgstr ""
 
+msgid "Indonesian"
+msgstr ""
+
 msgid "Info"
 msgstr "Инфо"
 
@@ -4290,6 +4297,10 @@ msgstr ""
 msgid "List mode"
 msgstr ""
 
+#, fuzzy
+msgid "List of files"
+msgstr "превкл. на файллист"
+
 msgid "List of storage devices"
 msgstr ""
 
@@ -4596,6 +4607,10 @@ msgstr "Завърти на изток"
 
 msgid "Move to position X"
 msgstr ""
+
+#, fuzzy
+msgid "Move to..."
+msgstr "Завърти на изток"
 
 msgid "Move west"
 msgstr "Завърти на запад"
@@ -5022,6 +5037,12 @@ msgstr ""
 msgid ""
 "Nothing to scan!\n"
 "Please setup your tuner settings before you start a service scan."
+msgstr ""
+"Нищо за сканиране!\n"
+"Моля настройте вашия тунер преди търсене на канали."
+
+#, fuzzy
+msgid "Nothing to scan! Setup your tuner and try again."
 msgstr ""
 "Нищо за сканиране!\n"
 "Моля настройте вашия тунер преди търсене на канали."
@@ -5716,9 +5737,6 @@ msgstr ""
 msgid "Press OK to select/deselect a CAId."
 msgstr ""
 
-msgid "Press OK to start the scan"
-msgstr "Натиснете ОК за да започне търсенето"
-
 msgid "Press OK to toggle the selection"
 msgstr ""
 
@@ -5976,8 +5994,9 @@ msgstr ""
 msgid "Refresh rate selection."
 msgstr "Избор честота на обновяване."
 
-msgid "Refreshing image list - Please wait..."
-msgstr ""
+#, fuzzy
+msgid "Refreshing image list, Please wait..."
+msgstr "Приемам инфо за плъгина. Моля изчакайте..."
 
 msgid "Refusing to move to the same directory"
 msgstr ""
@@ -6188,11 +6207,13 @@ msgstr ""
 msgid "Resuming playback"
 msgstr "Възобновяване на възпроизвеждането"
 
-msgid "Retreiving image list - Please wait..."
-msgstr ""
+#, fuzzy
+msgid "Retreiving image list, Please wait..."
+msgstr "Приемам инфо за плъгина. Моля изчакайте..."
 
-msgid "Retreiving image slots - Please wait..."
-msgstr ""
+#, fuzzy
+msgid "Retreiving image slots, Please wait..."
+msgstr "Приемам инфо за плъгина. Моля изчакайте..."
 
 msgid "Return to movie list"
 msgstr "Връщане към списъка с филми"
@@ -6347,9 +6368,6 @@ msgstr ""
 msgid "Satellites"
 msgstr "Сателити"
 
-msgid "Satfinder"
-msgstr "Търсене на Сателити"
-
 msgid "Sats"
 msgstr "Сателити"
 
@@ -6426,11 +6444,25 @@ msgstr ""
 msgid "Scan additional SR"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "Scan completed, %d channel found."
+msgid_plural "Scan completed, %d channels found."
+msgstr[0] "Актуализацията завърши, %d пакет беше инсталиран."
+msgstr[1] "Актуализацията завърши, %d пакета бяха инсталирани."
+
+#, fuzzy
+msgid "Scan failed!"
+msgstr "Грешка при запис!"
+
 msgid "Scan files..."
 msgstr ""
 
 msgid "Scan options"
 msgstr ""
+
+#, fuzzy
+msgid "Scan state"
+msgstr "състояние сканиране"
 
 msgid "Scan wireless networks"
 msgstr ""
@@ -6627,6 +6659,12 @@ msgstr "Изберете канал за запис"
 msgid "Select copy destination for:"
 msgstr ""
 
+msgid "Select destination for copy selected files..."
+msgstr ""
+
+msgid "Select destination for move selected files..."
+msgstr ""
+
 msgid "Select destination for:"
 msgstr ""
 
@@ -6636,11 +6674,18 @@ msgstr ""
 msgid "Select files for backup."
 msgstr ""
 
+msgid "Select files with 'OK' and then use 'Menu' for select operation"
+msgstr ""
+
 msgid "Select files/folders to backup"
 msgstr ""
 
 msgid "Select function"
 msgstr ""
+
+#, fuzzy
+msgid "Select hard disk"
+msgstr "Изберете филм"
 
 msgid "Select horizontal resolution:"
 msgstr ""
@@ -6665,6 +6710,10 @@ msgstr ""
 
 msgid "Select movie"
 msgstr ""
+
+#, fuzzy
+msgid "Select operation:"
+msgstr "Режим Картина"
 
 msgid "Select path for logfile"
 msgstr ""
@@ -6705,16 +6754,16 @@ msgstr ""
 msgid "Select the movie path"
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
 msgid "Select the satellite you want to configure. Once that satellite is configured you can select and configure other satellites that will be accessed using this same tuner."
@@ -6948,6 +6997,10 @@ msgstr "Настройки"
 
 msgid "Setup"
 msgstr "Настройки"
+
+#, fuzzy
+msgid "Setup hard disk"
+msgstr "Твърд Диск"
 
 msgid "Setup menu"
 msgstr ""
@@ -7356,9 +7409,6 @@ msgid "Solomon Islands"
 msgstr ""
 
 msgid "Somalia"
-msgstr ""
-
-msgid "Some error occured - Please try later"
 msgstr ""
 
 msgid "Some plugins are not available:\n"
@@ -8063,7 +8113,7 @@ msgstr ""
 "Може да няма достатъчно място на избрания дял.\n"
 "Искате ли да продължите?"
 
-msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
+msgid "This DVD RW medium is already formatted, Reformatting will erase all content on the disc."
 msgstr ""
 
 #, python-format
@@ -8148,7 +8198,7 @@ msgstr ""
 msgid "This option configures you can set auto volume level."
 msgstr ""
 
-msgid "This option set the level of surpression of musquito noise (Musquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
+msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr ""
 
 msgid "This option sets  the picture contrast."
@@ -8510,6 +8560,10 @@ msgstr "Две"
 
 msgid "Type"
 msgstr "Тип"
+
+#, fuzzy
+msgid "Type of LNB/device"
+msgstr "Тип търсене"
 
 msgid "Type of scan"
 msgstr "Тип търсене"
@@ -9263,19 +9317,6 @@ msgstr ""
 msgid "When the content has an aspect ratio of 4:3, choose whether to scale/stretch the picture."
 msgstr ""
 
-msgid ""
-"When you do a factory reset, you will lose ALL your configuration data\n"
-"(including bouquets, services, satellite data ...)\n"
-"After completion of factory reset, your receiver will restart automatically!\n"
-"\n"
-"Really do a factory reset?"
-msgstr ""
-"Ако възстановите фабричните настройки, се губят всички данни\n"
-"(включително букети, канали, данни за сателити ...)\n"
-"След възстановяването на фабричните настройки, вашия приемник ще се рестартира автоматично!\n"
-"\n"
-"Да възстановя ли фабричните настройки?"
-
 msgid "Where do you want to backup your settings?"
 msgstr "Къде искате да backup вашите настройки?"
 
@@ -9478,9 +9519,6 @@ msgstr ""
 msgid ""
 "You need a PC connected to your receiver. If you need further instructions, please visit the website https://openpli.org\n"
 "Your receiver will now be halted. After you have performed the update instructions from the website, your new firmware will ask you to restore your settings."
-msgstr ""
-
-msgid "You system does not support ext4"
 msgstr ""
 
 msgid "Your backup succeeded. We will now continue to explain the further upgrade process."
@@ -10802,8 +10840,28 @@ msgstr ""
 #~ msgid "Bluetooth Setup"
 #~ msgstr "Bluetooth Настройки"
 
+#~ msgid "Convert ext3 filesystem to ext4"
+#~ msgstr "Конвертиране ext3 към ext4 файлова система"
+
+#~ msgid "Convert ext3 to ext4"
+#~ msgstr "Конвертиране ext3 към ext4"
+
+#~ msgid "Converting ext3 to ext4..."
+#~ msgstr "Конвертиране ext3 към ext4..."
+
+#, fuzzy
+#~ msgid "Diasbled"
+#~ msgstr "Спрян"
+
 #~ msgid "Do not flash image"
 #~ msgstr "Не флашвай имидж"
+
+#~ msgid ""
+#~ "Do you really want to convert the filesystem?\n"
+#~ "You cannot go back!"
+#~ msgstr ""
+#~ "Наистина ли искате да конвертирате файловата система?\n"
+#~ "Не можете да спрете процеса!"
 
 #~ msgid "Do you want to do a service scan?"
 #~ msgstr "Искате ли да сканирам за канали?"
@@ -10842,8 +10900,14 @@ msgstr ""
 #~ msgid "Intermediate"
 #~ msgstr "Междинен"
 
+#~ msgid "Press OK to start the scan"
+#~ msgstr "Натиснете ОК за да започне търсенето"
+
 #~ msgid "Provider to scan"
 #~ msgstr "Сканиране на Провайдър"
+
+#~ msgid "Satfinder"
+#~ msgstr "Търсене на Сателити"
 
 #~ msgid "Softcam type"
 #~ msgstr "Тип на емулатора"
@@ -10853,6 +10917,19 @@ msgstr ""
 
 #~ msgid "What do you want to scan?"
 #~ msgstr "Какво искате да търся?"
+
+#~ msgid ""
+#~ "When you do a factory reset, you will lose ALL your configuration data\n"
+#~ "(including bouquets, services, satellite data ...)\n"
+#~ "After completion of factory reset, your receiver will restart automatically!\n"
+#~ "\n"
+#~ "Really do a factory reset?"
+#~ msgstr ""
+#~ "Ако възстановите фабричните настройки, се губят всички данни\n"
+#~ "(включително букети, канали, данни за сателити ...)\n"
+#~ "След възстановяването на фабричните настройки, вашия приемник ще се рестартира автоматично!\n"
+#~ "\n"
+#~ "Да възстановя ли фабричните настройки?"
 
 #~ msgid "Yes, do a manual scan now"
 #~ msgstr "Да, започни ръчно търсене"
