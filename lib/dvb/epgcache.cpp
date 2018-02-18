@@ -3284,6 +3284,7 @@ void eEPGCache::importEvents(ePyObject serviceReferences, ePyObject list)
 //     1 = search events with exactly title name (EXACT_TITLE_SEARCH)
 //     2 = search events with text in title name (PARTIAL_TITLE_SEARCH)
 //     3 = search events starting with title name (START_TITLE_SEARCH)
+//     4 = search events ending with title name (END_TITLE_SEARCH)
 //  when type is 0 (SIMILAR_BROADCASTINGS_SEARCH)
 //   the fourth is the servicereference string
 //   the fifth is the eventid
@@ -3432,6 +3433,9 @@ PyObject *eEPGCache::search(ePyObject arg)
 						case 3:
 							eDebug("[eEPGCache] lookup events, title starting with '%s' (%s)", str, casetype?"ignore case":"case sensitive");
 							break;
+						case 4:
+							eDebug("[eEPGCache] lookup events, title ending with '%s' (%s)", str, casetype?"ignore case":"case sensitive");
+							break;
 					}
 					Py_BEGIN_ALLOW_THREADS; /* No Python code in this section, so other threads can run */
 					singleLock s(cache_lock);
@@ -3463,6 +3467,12 @@ PyObject *eEPGCache::search(ePyObject arg)
 							else if (querytype == 3)
 							{
 								/* Do a "startswith" match by pretending the text isn't that long */
+								title_len = textlen;
+							}
+							else if (querytype == 4)
+							{
+								/* Offset to adjust the pointer based on the text length difference */
+								titleptr = titleptr + title_len - textlen;
 								title_len = textlen;
 							}
 							if (casetype)
