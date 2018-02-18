@@ -33,7 +33,7 @@ class SelectImage(Screen):
 		self["key_green"] = StaticText()
 		self["key_yellow"] = StaticText()
 		self["key_blue"] = StaticText()
-		self["list"] = ChoiceList(list=[ChoiceEntryComponent('',((_("Retreiving image list - Please wait...")), "Waiter"))])
+		self["list"] = ChoiceList(list=[ChoiceEntryComponent('',((_("Retreiving image list, Please wait...")), "Waiter"))])
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "KeyboardInputActions", "MenuActions"],
 		{
@@ -111,7 +111,7 @@ class SelectImage(Screen):
 				self.setIndex = 0
 			self.selectionChanged()
 		else:
-			self.session.openWithCallback(self.close, MessageBox, _("Cannot find images - please try later"), type=MessageBox.TYPE_ERROR, timeout=3)
+			self.session.openWithCallback(self.close, MessageBox, _("Cannot find any images, Please try again later"), type=MessageBox.TYPE_ERROR, timeout=3)
 
 	def keyOk(self):
 		currentSelected = self["list"].l.getCurrentSelection()
@@ -134,7 +134,7 @@ class SelectImage(Screen):
 				shutil.rmtree(currentSelected)
 			self.setIndex = self["list"].getSelectedIndex()
 			self.imagesList = []
-			self["list"].setList([ChoiceEntryComponent('',((_("Refreshing image list - Please wait...")), "Waiter"))])
+			self["list"].setList([ChoiceEntryComponent('',((_("Refreshing image list, Please wait...")), "Waiter"))])
 			self.delay.start(0, True)
 
 	def selectionChanged(self):
@@ -278,7 +278,7 @@ class FlashImage(Screen):
 				else:
 					self.startDownload()
 			else:
-				self.session.openWithCallback(self.abort, MessageBox, _("Could not find suitable media - Please insert a media (e.g. USB stick) and try again!"), type=MessageBox.TYPE_ERROR, simple=True)
+				self.session.openWithCallback(self.abort, MessageBox, _("Could not find any suitable media, Please insert a media (e.g. USB stick) and try again later"), type=MessageBox.TYPE_ERROR, simple=True)
 		else:
 			self.abort()
 
@@ -368,7 +368,7 @@ class MultibootSelection(SelectImage):
 		self.setTitle(_("Select Multiboot"))
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Reboot"))
-		self["list"] = ChoiceList(list=[ChoiceEntryComponent('',((_("Retreiving image slots - Please wait...")), "Waiter"))])
+		self["list"] = ChoiceList(list=[ChoiceEntryComponent('',((_("Retreiving image slots, Please wait...")), "Waiter"))])
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "KeyboardInputActions", "MenuActions"],
 		{
