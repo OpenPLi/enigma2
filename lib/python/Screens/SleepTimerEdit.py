@@ -46,7 +46,7 @@ class SleepTimerEdit(ConfigListScreen, Screen):
 		if int(config.usage.inactivity_timer.value):
 			self.list.append(getConfigListEntry(_("Specify timeframe to ignore inactivity sleeptimer"),
 				config.usage.inactivity_timer_blocktime,
-				_("When enabled you can specify a timeframe were the inactivity sleeptimer is ignored. Not the detection is disabled during this timeframe but the inactivity timeout is disabled")))
+				_("When enabled you can specify a timeframe when the inactivity sleeptimer is ignored. Not the detection is disabled during this timeframe but the inactivity timeout is disabled")))
 			if config.usage.inactivity_timer_blocktime.value:
 				self.list.append(getConfigListEntry(_("Set blocktimes by weekday"),
 					config.usage.inactivity_timer_blocktime_by_weekdays,
