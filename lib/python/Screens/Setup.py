@@ -64,20 +64,13 @@ class Setup(ConfigListScreen, Screen):
 
 	ALLOW_SUSPEND = True
 
-	def removeNotifier(self):
-		config.usage.setup_level.notifiers.remove(self.levelChanged)
-
-	def levelChanged(self, configElement):
-		list = []
-		self.refill(list)
-		self["config"].setList(list)
-
-	def refill(self, list):
+	def refill(self):
+		self.list = []
 		xmldata = setupdom.getroot()
 		for x in xmldata.findall("setup"):
 			if x.get("key") != self.setup:
 				continue
-			self.addItems(list, x)
+			self.addItems(x)
 			self.setup_title = x.get("title", "").encode("UTF-8")
 			self.seperation = int(x.get('separation', '0'))
 
@@ -85,10 +78,8 @@ class Setup(ConfigListScreen, Screen):
 		Screen.__init__(self, session)
 		# for the skin: first try a setup_<setupID>, then Setup
 		self.skinName = ["setup_" + setup, "Setup" ]
-
+		self.list = []
 		self.setup = setup
-		list = []
-		self.refill(list)
 
 		#check for list.entries > 0 else self.close
 		self["key_red"] = StaticText(_("Cancel"))
@@ -102,27 +93,29 @@ class Setup(ConfigListScreen, Screen):
 				"menu": self.closeRecursive,
 			}, -2)
 
-		ConfigListScreen.__init__(self, list, session = session, on_change = self.changedEntry)
-
-		self.changedEntry()
+		self.refill()
+		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changedEntry)
 		self.setTitle(_(self.setup_title))
 
-	def addItems(self, list, parentNode):
+	def addItems(self, parentNode):
 		for x in parentNode:
 			if not x.tag:
 				continue
 			if x.tag == 'item':
 				item_level = int(x.get("level", 0))
 
-				if not self.levelChanged in config.usage.setup_level.notifiers:
-					config.usage.setup_level.notifiers.append(self.levelChanged)
-					self.onClose.append(self.removeNotifier)
-
 				if item_level > config.usage.setup_level.index:
 					continue
 
 				requires = x.get("requires")
-				if requires and not SystemInfo.get(requires, False):
+				if requires:
+					if requires[0] == '!':
+						if SystemInfo.get(requires[1:], False):
+							continue
+					elif not SystemInfo.get(requires, False):
+						continue
+				configCondition = x.get("configcondition")
+				if configCondition and not eval(configCondition + ".value"):
 					continue
 
 				item_text = _(x.get("text", "??").encode("UTF-8"))
@@ -135,7 +128,11 @@ class Setup(ConfigListScreen, Screen):
 				# the first b is the item itself, ignored by the configList.
 				# the second one is converted to string.
 				if not isinstance(item, ConfigNothing):
-					list.append((item_text, item, item_description))
+					self.list.append((item_text, item, item_description))
+
+	def changedEntry(self):
+		self.refill()
+		self["config"].setList(self.list)
 
 def getSetupTitle(id):
 	xmldata = setupdom.getroot()
