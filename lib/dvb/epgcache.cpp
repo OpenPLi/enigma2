@@ -1653,7 +1653,7 @@ void eEPGCache::channel_data::startEPG()
 		mask.pid = it->second;
 		eDebug("[eEPGCache] Using non-standard pid %#x", mask.pid);
 	}
-	
+
 	if (eEPGCache::getInstance()->getEpgSources() & eEPGCache::NOWNEXT)
 	{
 		mask.data[0] = 0x4E;
@@ -3285,6 +3285,7 @@ void eEPGCache::importEvents(ePyObject serviceReferences, ePyObject list)
 //     2 = search events with text in title name (PARTIAL_TITLE_SEARCH)
 //     3 = search events starting with title name (START_TITLE_SEARCH)
 //     4 = search events ending with title name (END_TITLE_SEARCH)
+//     5 = search events with text in description (PARTIAL_DESCRIPTION_SEARCH)
 //  when type is 0 (SIMILAR_BROADCASTINGS_SEARCH)
 //   the fourth is the servicereference string
 //   the fifth is the eventid
@@ -3418,9 +3419,9 @@ PyObject *eEPGCache::search(ePyObject arg)
 					int casetype = PyLong_AsLong(PyTuple_GET_ITEM(arg, 4));
 					const char *str = PyString_AS_STRING(obj);
 #if PY_VERSION_HEX < 0x02060000
-					int textlen = PyString_GET_SIZE(obj);
+					int strlen = PyString_GET_SIZE(obj);
 #else
-					int textlen = PyString_Size(obj);
+					int strlen = PyString_Size(obj);
 #endif
 					switch (querytype)
 					{
@@ -3436,69 +3437,86 @@ PyObject *eEPGCache::search(ePyObject arg)
 						case 4:
 							eDebug("[eEPGCache] lookup events, title ending with '%s' (%s)", str, casetype?"ignore case":"case sensitive");
 							break;
+						case 5:
+							eDebug("[eEPGCache] lookup events with '%s' in the description (%s)", str, casetype?"ignore case":"case sensitive");
+							break;
 					}
 					Py_BEGIN_ALLOW_THREADS; /* No Python code in this section, so other threads can run */
 					singleLock s(cache_lock);
-					std::string title;
+					std::string text;
 					for (DescriptorMap::iterator it(eventData::descriptors.begin());
 						it != eventData::descriptors.end(); ++it)
 					{
 						uint8_t *data = it->second.data;
-						if ( data[0] == 0x4D ) // short event descriptor
+						int textlen = 0;
+						if ( data[0] == 0x4D && querytype > 0 && querytype < 5 ) // short event descriptor
 						{
-							const char *titleptr = (const char*)&data[6];
-							int title_len = data[5];
+							const char *textptr = (const char*)&data[6];
+							textlen = data[5];
 							if (data[6] < 0x20)
 							{
 								/* custom encoding */
-								title = convertDVBUTF8((unsigned char*)titleptr, title_len, 0x40, 0);
-								titleptr = title.data();
-								title_len = title.length();
+								text = convertDVBUTF8((unsigned char*)textptr, textlen, 0x40, 0);
+								textptr = text.data();
+								textlen = text.length();
 							}
-							if (title_len < textlen)
-								/*Doesn't fit, so cannot match anything */
-								continue;
+						}
+						else if ( data[0] == 0x4E 0 && querytype == 5 ) // extended event descriptor
+						{
+							const char *textptr = (const char*)&data[8];
+							textlen = data[7];
+							if (data[8] < 0x20)
+							{
+								/* custom encoding */
+								text = convertDVBUTF8((unsigned char*)textptr, textlen, 0x40, 0);
+								textptr = text.data();
+								textlen = text.length();
+							}
+						}
+						/* if we have a descriptor, the argument may not be bigger */
+						if (textlen > 0 && strlen <= textlen )
+						{
 							if (querytype == 1)
 							{
-								/* require exact title match */
-								if (title_len != textlen)
+								/* require exact text match */
+								if (textlen != strlen)
 									continue;
 							}
 							else if (querytype == 3)
 							{
 								/* Do a "startswith" match by pretending the text isn't that long */
-								title_len = textlen;
+								textlen = strlen;
 							}
 							else if (querytype == 4)
 							{
 								/* Offset to adjust the pointer based on the text length difference */
-								titleptr = titleptr + title_len - textlen;
-								title_len = textlen;
+								textptr = textptr + textlen - strlen;
+								textlen = strlen;
 							}
 							if (casetype)
 							{
-								while (title_len >= textlen)
+								while (textlen >= strlen)
 								{
-									if (!strncasecmp(titleptr, str, textlen))
+									if (!strncasecmp(titleptr, str, strlen))
 									{
 										descr.push_back(it->first);
 										break;
 									}
-									title_len--;
-									titleptr++;
+									textlen--;
+									textptr++;
 								}
 							}
 							else
 							{
-								while (title_len >= textlen)
+								while (textlen >= strlen)
 								{
-									if (!memcmp(titleptr, str, textlen))
+									if (!memcmp(textptr, str, strlen))
 									{
 										descr.push_back(it->first);
 										break;
 									}
-									title_len--;
-									titleptr++;
+									textlen--;
+									textptr++;
 								}
 							}
 						}
