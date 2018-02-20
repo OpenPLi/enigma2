@@ -2174,12 +2174,12 @@ class MovieSelectionFileManagerList(Screen):
 			})
 
 		self["key_red"] = Button(_("Cancel"))
-		self["key_green"] = Button(_("Finish"))
+		self["key_green"] = Button(_("Action"))
 		self["key_yellow"] = Button(_("Sort"))
 		self["key_blue"] = Button(_("Inversion"))
 
 		self.sort = 0
-		self["description"].setText(_("Select files with 'OK' and then use 'Menu' or 'Finish' for select operation"))
+		self["description"].setText(_("Select files with 'OK' and then use 'Menu' or 'Action' for select operation"))
 
 	def changePng(self):
 		from Tools.Directories import SCOPE_CURRENT_SKIN
