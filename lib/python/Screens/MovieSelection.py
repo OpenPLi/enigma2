@@ -2172,6 +2172,14 @@ class MovieSelectionFileManagerList(Screen):
 		self.sort = 0
 		self["description"].setText(_("Select files with 'OK' and then use 'Menu' or 'Action' for select operation"))
 
+		self["Service"] = ServiceEvent()
+		self["config"].onSelectionChanged.append(self.setService)
+		self.onShown.append(self.setService)
+
+	def setService(self):
+		item = self["config"].getCurrent()[0]
+		self["Service"].newService(item[1])
+
 	def changePng(self):
 		from Tools.Directories import SCOPE_CURRENT_SKIN
 		from Tools.LoadPixmap import LoadPixmap
