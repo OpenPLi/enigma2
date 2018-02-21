@@ -645,7 +645,10 @@ class NimManager:
 			if feid is None or self.nim_slots[feid].isMultistream():
 				return self.transponders[pos]
 			else: # remove multistream transponders
-				return [tp for tp in self.transponders[pos] if not (tp[5] == eDVBFrontendParametersSatellite.System_DVB_S2 and (tp[10] > -1 or tp[11] > 0 or tp[12] > 1))]
+				def isMultistreamTP(tp):
+					# since we are using Gold sequences there is no need to check the PLS Mode
+					return tp[5] == eDVBFrontendParametersSatellite.System_DVB_S2 and (tp[10] > -1 or tp[12] > 0)
+				return [tp for tp in self.transponders[pos] if not isMultistreamTP(tp)]
 		else:
 			return []
 
