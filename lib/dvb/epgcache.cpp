@@ -3461,7 +3461,7 @@ PyObject *eEPGCache::search(ePyObject arg)
 								textlen = text.length();
 							}
 						}
-						else if ( data[0] == 0x4E 0 && querytype == 5 ) // extended event descriptor
+						else if ( data[0] == 0x4E && querytype == 5 ) // extended event descriptor
 						{
 							const char *textptr = (const char*)&data[8];
 							textlen = data[7];
