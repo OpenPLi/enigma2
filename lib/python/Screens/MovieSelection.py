@@ -2148,15 +2148,10 @@ class MovieSelectionFileManagerList(Screen):
 			if record:
 				item = record[0]
 				info = record[1]
-				path = item.getPath()
 				name = info and info.getName(item)
 				if not item.flags & eServiceReference.mustDescent:
-					ext = os.path.splitext(path)[1].lower()
-					if ext in IMAGE_EXTENSIONS:
-						continue
-					else:
-						data.addSelection(name, item, index, False)
-						index += 1
+					data.addSelection(name, item, index, False)
+					index += 1
 		self.list = data
 
 		self["config"] = self.list
