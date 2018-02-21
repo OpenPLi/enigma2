@@ -36,7 +36,7 @@ class AutoDiseqc(Screen, ConfigListScreen):
 			eDVBFrontendParametersSatellite.Modulation_Auto,
 			eDVBFrontendParametersSatellite.RollOff_auto,
 			eDVBFrontendParametersSatellite.Pilot_Unknown,
-			-1, # NO_STREAM_ID_FILTER
+			eDVBFrontendParametersSatellite.No_Stream_Id_Filter,
 			eDVBFrontendParametersSatellite.PLS_Gold,
 			0,  # default gold PLS code
 			1079,
@@ -55,7 +55,7 @@ class AutoDiseqc(Screen, ConfigListScreen):
 			eDVBFrontendParametersSatellite.Modulation_Auto,
 			eDVBFrontendParametersSatellite.RollOff_auto,
 			eDVBFrontendParametersSatellite.Pilot_Unknown,
-			-1, # NO_STREAM_ID_FILTER
+			eDVBFrontendParametersSatellite.No_Stream_Id_Filter,
 			eDVBFrontendParametersSatellite.PLS_Gold,
 			0,  # default gold PLS code
 			3224,
@@ -74,7 +74,7 @@ class AutoDiseqc(Screen, ConfigListScreen):
 			eDVBFrontendParametersSatellite.Modulation_Auto,
 			eDVBFrontendParametersSatellite.RollOff_auto,
 			eDVBFrontendParametersSatellite.Pilot_Unknown,
-			-1, # NO_STREAM_ID_FILTER
+			eDVBFrontendParametersSatellite.No_Stream_Id_Filter,
 			eDVBFrontendParametersSatellite.PLS_Gold,
 			0,  # default gold PLS code
 			2004,
@@ -93,7 +93,7 @@ class AutoDiseqc(Screen, ConfigListScreen):
 			eDVBFrontendParametersSatellite.Modulation_Auto,
 			eDVBFrontendParametersSatellite.RollOff_auto,
 			eDVBFrontendParametersSatellite.Pilot_Unknown,
-			-1, # NO_STREAM_ID_FILTER
+			eDVBFrontendParametersSatellite.No_Stream_Id_Filter,
 			eDVBFrontendParametersSatellite.PLS_Gold,
 			0,  # default gold PLS code
 			12400,
@@ -112,7 +112,7 @@ class AutoDiseqc(Screen, ConfigListScreen):
  			eDVBFrontendParametersSatellite.Modulation_Auto,
  			eDVBFrontendParametersSatellite.RollOff_auto,
 			eDVBFrontendParametersSatellite.Pilot_Unknown,
-			-1, # NO_STREAM_ID_FILTER
+			eDVBFrontendParametersSatellite.No_Stream_Id_Filter,
 			eDVBFrontendParametersSatellite.PLS_Gold,
 			0,  # default gold PLS code
  			20100,
@@ -131,7 +131,7 @@ class AutoDiseqc(Screen, ConfigListScreen):
 			eDVBFrontendParametersSatellite.Modulation_Auto,
 			eDVBFrontendParametersSatellite.RollOff_auto,
 			eDVBFrontendParametersSatellite.Pilot_Unknown,
-			-1, # NO_STREAM_ID_FILTER
+			eDVBFrontendParametersSatellite.No_Stream_Id_Filter,
 			eDVBFrontendParametersSatellite.PLS_Gold,
 			0, # default gold PLS code
 			706,
@@ -150,9 +150,9 @@ class AutoDiseqc(Screen, ConfigListScreen):
 			eDVBFrontendParametersSatellite.Modulation_Auto,
 			eDVBFrontendParametersSatellite.RollOff_auto,
 			eDVBFrontendParametersSatellite.Pilot_Unknown,
-			-1,
-			0,
-			0,
+			eDVBFrontendParametersSatellite.No_Stream_Id_Filter,
+			eDVBFrontendParametersSatellite.PLS_Gold,
+			0, # default gold PLS code
 			1388,
 			1388,
 			"Hispasat 30.0w"),
