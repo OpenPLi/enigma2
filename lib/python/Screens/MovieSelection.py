@@ -2181,12 +2181,20 @@ class MovieSelectionFileManagerList(Screen):
 		self.sort = 0
 		self["description"].setText(_("Select files with 'OK' and then use 'Menu' or 'Action' for select operation"))
 
+		self["Service"] = ServiceEvent()
+		self["config"].onSelectionChanged.append(self.setService)
+		self.onShown.append(self.setService)
+
 	def changePng(self):
 		from Tools.Directories import SCOPE_CURRENT_SKIN
 		from Tools.LoadPixmap import LoadPixmap
 		if os.path.exists(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/mark_select.png")):
 			self.original_selectionpng = Components.SelectionList.selectionpng
 			Components.SelectionList.selectionpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/mark_select.png"))
+
+	def setService(self):
+		item = self["config"].getCurrent()[0]
+		self["Service"].newService(item[1])
 
 	def sortList(self):
 		if self.sort == 0:	# reversed
