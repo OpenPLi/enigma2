@@ -3498,7 +3498,7 @@ PyObject *eEPGCache::search(ePyObject arg)
 							{
 								while (textlen >= strlen)
 								{
-									if (!strncasecmp(titleptr, str, strlen))
+									if (!strncasecmp(textptr, str, strlen))
 									{
 										descr.push_back(it->first);
 										break;
