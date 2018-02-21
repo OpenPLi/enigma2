@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-13 16:06+0330\n"
+"POT-Creation-Date: 2018-02-21 17:39+0330\n"
 "PO-Revision-Date: 2016-06-17 12:13+0800\n"
 "Last-Translator: nx111 <gdzdz@163.com>\n"
 "Language-Team: NEWBOLT\n"
@@ -621,7 +621,8 @@ msgid ""
 "your receiver. Shutdown now?"
 msgstr ""
 
-msgid "A graphical EPG for all services of an specific bouquet"
+#, fuzzy
+msgid "A graphical EPG for all services of a specific bouquet"
 msgstr "图形EPG包含自定义组所有频道"
 
 #, python-format
@@ -632,8 +633,9 @@ msgstr ""
 "录制已经开始:\n"
 "%s"
 
-msgid "A recording is currently running on the selected tuner. Please select a different tuner or consider to stop the recording to try again."
-msgstr ""
+#, fuzzy
+msgid "A recording is currently running on the selected tuner. Please select a different tuner or stop the recording and try again."
+msgstr "录制正在进行中. 扫描前请停止录制."
 
 msgid ""
 "A recording is currently running.\n"
@@ -720,6 +722,10 @@ msgstr "关于..."
 
 msgid "Accesspoint:"
 msgstr "存取点:"
+
+#, fuzzy
+msgid "Action"
+msgstr "功能:"
 
 msgid "Activate HbbTV (Redbutton)"
 msgstr ""
@@ -895,6 +901,9 @@ msgstr ""
 msgid "Allow quit movieplayer with exit"
 msgstr ""
 
+msgid "Allow quitting movieplayer with exit"
+msgstr ""
+
 msgid "Allow subtitle language to equal audio language"
 msgstr ""
 
@@ -933,6 +942,10 @@ msgstr ""
 
 msgid "An empty filename is illegal."
 msgstr "一个空的文件名是非法的."
+
+#, fuzzy
+msgid "An error occurred - Please try again later"
+msgstr "更新密码文件发生错误."
 
 msgid "An error occurred while downloading the packetlist. Please try again."
 msgstr ""
@@ -1520,6 +1533,10 @@ msgstr "频道"
 msgid "Channel Info"
 msgstr ""
 
+#, fuzzy
+msgid "Channel context menu"
+msgstr "频道列表菜单"
+
 msgid "Channel list type"
 msgstr "频道列表类型"
 
@@ -2000,10 +2017,10 @@ msgstr ""
 msgid "Configure whether multi channel sound tracks should be downmixed to stereo."
 msgstr ""
 
-msgid "Configure whether or not an icon should be shown when your motorized dish is moving."
+msgid "Configure whether or not a rotor position will be displayed on the infobar"
 msgstr ""
 
-msgid "Configure whether or not an rotor position will be displayed on infobar"
+msgid "Configure whether or not an icon should be shown when your motorized dish is moving."
 msgstr ""
 
 msgid "Configure which access level to use for the configuration menu. Expert level gives access to all items."
@@ -2015,7 +2032,7 @@ msgstr ""
 msgid "Configure which tuner for recordings will be preferred, when more than one tuner is available."
 msgstr ""
 
-msgid "Configure which tuner type will be preferred, when the same service is available on different types of tuners. Choose 'no priority' to try each alternative one by one independent from tuner type."
+msgid "Configure which tuner type will be preferred when the same service is available on different types of tuners. Choose 'no priority' to try each alternative one by one regardless of the tuner type."
 msgstr ""
 
 msgid "Configure which tuner will be preferred, when more than one tuner is available. If set to 'auto' the system will give priority to the tuner having the lowest number of channels/satellites."
@@ -2027,7 +2044,8 @@ msgstr "配置本地网络"
 msgid "Configure your network again"
 msgstr "重新配置网络"
 
-msgid "Configure your network settings, and press OK to start the scan"
+#, fuzzy
+msgid "Configure your network settings and press OK to scan"
 msgstr "配置你的网络，然后按OK开始扫描"
 
 msgid "Configure your wireless LAN again"
@@ -2100,20 +2118,14 @@ msgstr "继续播放(重复)"
 msgid "Contrast"
 msgstr "对比度"
 
-msgid "Convert ext3 filesystem to ext4"
-msgstr ""
-
-msgid "Convert ext3 to ext4"
-msgstr ""
-
-msgid "Converting ext3 to ext4..."
-msgstr ""
-
 msgid "Cook Islands"
 msgstr ""
 
 msgid "Copy"
 msgstr "拷贝"
+
+msgid "Copy to..."
+msgstr ""
 
 msgid "Costa Rica"
 msgstr ""
@@ -2508,10 +2520,6 @@ msgstr ""
 msgid "DiSEqC-tester settings"
 msgstr ""
 
-#, fuzzy
-msgid "Diasbled"
-msgstr "禁用"
-
 msgid "Did you see all eight arrow heads?"
 msgstr ""
 
@@ -2615,13 +2623,6 @@ msgid ""
 msgstr ""
 " 是否检查文件系统?\n"
 "这将需要很长时间!"
-
-msgid ""
-"Do you really want to convert the filesystem?\n"
-"You cannot go back!"
-msgstr ""
-" 是否确认要转换文件系统?\n"
-"你将不能恢复!"
 
 #, python-format
 msgid "Do you really want to delete %s?"
@@ -3258,6 +3259,12 @@ msgstr ""
 msgid "Factory reset"
 msgstr "出厂设置"
 
+msgid ""
+"Factory reset will restore your receiver to its default configuration. All user data including system settings, tuner configuration, bouquets, services and plugins will be DELETED. Recordings and other files stored on HDD and USB media will remain intact. After completion, the system will restart automatically!\n"
+"\n"
+"Do you really want to proceed?"
+msgstr ""
+
 msgid "Failed"
 msgstr "失败"
 
@@ -3317,6 +3324,10 @@ msgstr ""
 
 msgid "File appears to be busy.\n"
 msgstr ""
+
+#, fuzzy
+msgid "File manager"
+msgstr "文件管理器"
 
 msgid "Filename"
 msgstr "文件名"
@@ -3776,8 +3787,9 @@ msgstr ""
 msgid "Hotkey zap"
 msgstr ""
 
-msgid "How many minutes do you want add to record?"
-msgstr ""
+#, fuzzy
+msgid "How many minutes do you want add to the recording?"
+msgstr "您想录制多少分钟?"
 
 msgid "How many minutes do you want to record?"
 msgstr "您想录制多少分钟?"
@@ -3906,6 +3918,10 @@ msgstr ""
 
 #, fuzzy
 msgid "Indonesia"
+msgstr "完成!"
+
+#, fuzzy
+msgid "Indonesian"
 msgstr "完成!"
 
 msgid "Info"
@@ -4081,9 +4097,9 @@ msgid "Israel"
 msgstr ""
 
 msgid ""
-"It seems you did not see all the eight arrow heads. This means your TV is has overscan enabled, and is not configured properly.\n"
+"It seems you did not see all the eight arrow heads. This means your TV has overscan enabled, and is not configured properly.\n"
 "\n"
-"Please refer to your TVs manual to find how you can disable overscan on your TV. Look for terms like 'Just fit', 'Full width', etc. If you can't find it, ask other users at http://forums.openpli.org.\n"
+"Please refer to your TV's manual to find how you can disable overscan on your TV. Look for terms like 'Just fit', 'Full width', etc. If you can't find it, ask other users at http://forums.openpli.org.\n"
 "\n"
 msgstr ""
 
@@ -4299,6 +4315,10 @@ msgstr "列出可用网络"
 
 msgid "List mode"
 msgstr ""
+
+#, fuzzy
+msgid "List of files"
+msgstr "切换到文件列表"
 
 msgid "List of storage devices"
 msgstr ""
@@ -4611,6 +4631,10 @@ msgstr "东移"
 
 msgid "Move to position X"
 msgstr ""
+
+#, fuzzy
+msgid "Move to..."
+msgstr "东移"
 
 msgid "Move west"
 msgstr "西移"
@@ -5048,6 +5072,12 @@ msgstr ""
 "没有扫描!\n"
 "请设置您的调谐器，然后再启动频道扫描。."
 
+#, fuzzy
+msgid "Nothing to scan! Setup your tuner and try again."
+msgstr ""
+"没有扫描!\n"
+"请设置您的调谐器，然后再启动频道扫描。."
+
 msgid "Now"
 msgstr ""
 
@@ -5270,8 +5300,9 @@ msgstr "电影结束时暂停"
 msgid "Pause playback"
 msgstr ""
 
-msgid "Pauze/Continue playback"
-msgstr ""
+#, fuzzy
+msgid "Pause/Continue playback"
+msgstr "继续播放"
 
 msgid "Percentage left"
 msgstr ""
@@ -5741,9 +5772,6 @@ msgstr ""
 
 msgid "Press OK to select/deselect a CAId."
 msgstr "按OK键 选择/取消 CAID"
-
-msgid "Press OK to start the scan"
-msgstr "按OK键开始扫描."
 
 msgid "Press OK to toggle the selection"
 msgstr ""
@@ -6382,9 +6410,6 @@ msgstr ""
 msgid "Satellites"
 msgstr "卫星"
 
-msgid "Satfinder"
-msgstr "寻星"
-
 msgid "Sats"
 msgstr "卫星"
 
@@ -6461,11 +6486,25 @@ msgstr ""
 msgid "Scan additional SR"
 msgstr "扫描更多 SR"
 
+#, fuzzy, python-format
+msgid "Scan completed, %d channel found."
+msgid_plural "Scan completed, %d channels found."
+msgstr[0] "扫描完成，找到%d个频道"
+msgstr[1] "扫描完成，找到%d个频道"
+
+#, fuzzy
+msgid "Scan failed!"
+msgstr "扫描失败!"
+
 msgid "Scan files..."
 msgstr ""
 
 msgid "Scan options"
 msgstr ""
+
+#, fuzzy
+msgid "Scan state"
+msgstr "扫描状态"
 
 msgid "Scan wireless networks"
 msgstr ""
@@ -6665,6 +6704,14 @@ msgstr "选择要录制的频道"
 msgid "Select copy destination for:"
 msgstr "选择目标位置:"
 
+#, fuzzy
+msgid "Select destination for copy selected files..."
+msgstr "目标目录:"
+
+#, fuzzy
+msgid "Select destination for move selected files..."
+msgstr "目标目录:"
+
 msgid "Select destination for:"
 msgstr "目标目录:"
 
@@ -6675,12 +6722,19 @@ msgstr "创建目录%s 失败."
 msgid "Select files for backup."
 msgstr "选择 文件/目录 备份..."
 
+msgid "Select files with 'OK' and then use 'Menu' or 'Action' for select operation"
+msgstr ""
+
 msgid "Select files/folders to backup"
 msgstr "选择 文件/目录 备份..."
 
 #, fuzzy
 msgid "Select function"
 msgstr "选择位置"
+
+#, fuzzy
+msgid "Select hard disk"
+msgstr "选择一部电影"
 
 msgid "Select horizontal resolution:"
 msgstr ""
@@ -6705,6 +6759,10 @@ msgstr ""
 
 msgid "Select movie"
 msgstr ""
+
+#, fuzzy
+msgid "Select operation:"
+msgstr "选择目标位置:"
 
 #, fuzzy
 msgid "Select path for logfile"
@@ -6746,16 +6804,16 @@ msgstr ""
 msgid "Select the movie path"
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
 msgid "Select the satellite you want to configure. Once that satellite is configured you can select and configure other satellites that will be accessed using this same tuner."
@@ -6990,6 +7048,10 @@ msgstr "设置"
 
 msgid "Setup"
 msgstr "设置"
+
+#, fuzzy
+msgid "Setup hard disk"
+msgstr "硬盘"
 
 msgid "Setup menu"
 msgstr ""
@@ -7401,9 +7463,6 @@ msgid "Solomon Islands"
 msgstr ""
 
 msgid "Somalia"
-msgstr ""
-
-msgid "Some error occured - Please try later"
 msgstr ""
 
 msgid "Some plugins are not available:\n"
@@ -8021,7 +8080,7 @@ msgid ""
 "The yellow area means a 5% border area of a full HD picture will be invisible.\n"
 "The green area means a 10% border area of a full HD picture will be invisible.\n"
 "\n"
-"In other words, if the yellow box meets all for sides of your screen, then you have at least 5% overscan on all sides.\n"
+"In other words, if the yellow box touches all four sides of your screen, you have at least 5% overscan on all sides.\n"
 "\n"
 "If you see the tips of all eight arrowheads, then your TV has overscan disabled.\n"
 "\n"
@@ -8139,22 +8198,13 @@ msgstr ""
 msgid "This option allows to set the level of dynamic contrast of the picture."
 msgstr ""
 
-msgid "This option allows you can config the Colordepth for UHD"
-msgstr ""
-
-msgid "This option allows you can config the Colorimetry for HDR."
-msgstr ""
-
-msgid "This option allows you can config the Colorspace from Auto to RGB"
+msgid "This option allows you can to set the auto volume level."
 msgstr ""
 
 msgid "This option allows you enable smoothing filter to control the dithering process."
 msgstr ""
 
 msgid "This option allows you enable the vertical scaler dejagging."
-msgstr ""
-
-msgid "This option allows you show all symbols on display."
 msgstr ""
 
 msgid "This option allows you to add the softcam setup in the extensions menu."
@@ -8167,6 +8217,15 @@ msgid "This option allows you to boost the green tones in the picture."
 msgstr ""
 
 msgid "This option allows you to change the virtuell loadspeaker position."
+msgstr ""
+
+msgid "This option allows you to configure the Colordepth for UHD"
+msgstr ""
+
+msgid "This option allows you to configure the Colorimetry for HDR."
+msgstr ""
+
+msgid "This option allows you to configure the Colorspace from Auto to RGB"
 msgstr ""
 
 msgid "This option allows you to disable or change the virtuell loadspeaker position."
@@ -8184,6 +8243,9 @@ msgstr ""
 msgid "This option allows you to power off the display."
 msgstr ""
 
+msgid "This option allows you to show all symbols on the display."
+msgstr ""
+
 msgid "This option allows you to show menu number quick links."
 msgstr ""
 
@@ -8196,10 +8258,7 @@ msgstr ""
 msgid "This option can be useful for long HDMI cables."
 msgstr ""
 
-msgid "This option configures you can set auto volume level."
-msgstr ""
-
-msgid "This option set the level of surpression of musquito noise (Musquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
+msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr ""
 
 msgid "This option sets  the picture contrast."
@@ -8272,14 +8331,21 @@ msgid ""
 "- please check your DHCP, cabling and adapter setup"
 msgstr ""
 
+#, fuzzy
 msgid ""
 "This test checks whether your LAN adapter is set up for automatic IP address configuration with DHCP.\n"
 "If you get a \"disabled\" message:\n"
 " - then your LAN adapter is configured for manual IP setup\n"
-"- verify thay you have entered correct IP informations in the adapter setup dialog.\n"
+"- verify thay you have entered the correct IP information in the adapter setup dialog.\n"
 "If you get an \"enabeld\" message:\n"
 "-verify that you have a configured and working DHCP server in your network."
 msgstr ""
+"该测试检查您的网卡能否从DHCP服务器上自动获取IP地址.\n"
+"如果显示 \"不可用\" 信息:\n"
+" - 那么证明您的网卡配置为手动的IP设置\n"
+"- 请证实网卡正确配置并能通过网络会话.\n"
+"如果显示 \"不可用\" 信息:\n"
+" - 证明您的DHCP服务器配置正确,并能连接到网络."
 
 msgid "This test detects your configured LAN adapter."
 msgstr ""
@@ -8567,6 +8633,10 @@ msgstr "2"
 
 msgid "Type"
 msgstr "类型"
+
+#, fuzzy
+msgid "Type of LNB/device"
+msgstr "扫描类型"
 
 msgid "Type of scan"
 msgstr "扫描类型"
@@ -9146,10 +9216,10 @@ msgstr ""
 msgid "When enabled you can specify a timeframe to ignore the shutdown timer when the receiver is in standby mode"
 msgstr ""
 
-msgid "When enabled you can specify a timeframe were the inactivity sleeptimer is ignored. Not the detection is disabled during this timeframe but the inactivity timeout is disabled"
+msgid "When enabled you can specify a timeframe when the inactivity sleeptimer is ignored. Not the detection is disabled during this timeframe but the inactivity timeout is disabled"
 msgstr ""
 
-msgid "When enabled you can specify an extra timeframe were the inactivity sleeptimer is ignored. Not the detection is disabled during this timeframe but the inactivity timeout is disabled"
+msgid "When enabled you can specify an extra timeframe when the inactivity sleeptimer is ignored. Not the detection is disabled during this timeframe but the inactivity timeout is disabled"
 msgstr ""
 
 msgid "When enabled you can zap channels with the  CH+/-, B+/-, P+/- buttons instead of opening the channel selection list."
@@ -9233,7 +9303,7 @@ msgstr ""
 msgid "When enabled, measure power consumption to detect when the rotor stops turning (when supported by the tuner)."
 msgstr ""
 
-msgid "When enabled, number markers will be hiden."
+msgid "When enabled, number markers will be hidden."
 msgstr ""
 
 msgid "When enabled, reformat subtitles to match the width of the screen."
@@ -9316,19 +9386,6 @@ msgstr ""
 
 msgid "When the content has an aspect ratio of 4:3, choose whether to scale/stretch the picture."
 msgstr ""
-
-msgid ""
-"When you do a factory reset, you will lose ALL your configuration data\n"
-"(including bouquets, services, satellite data ...)\n"
-"After completion of factory reset, your receiver will restart automatically!\n"
-"\n"
-"Really do a factory reset?"
-msgstr ""
-"如果恢复出厂设置，全部个人设置将丢失\n"
-"(包括卫星, 频道, 自定义组等 ...)\n"
-"完成出厂设置复位后, 接收机将自动重启!\n"
-"\n"
-"确定要恢复出厂设置吗?"
 
 msgid "Where do you want to backup your settings?"
 msgstr "在哪里备份您的设置?"
@@ -9463,7 +9520,7 @@ msgstr "恢复备份"
 msgid "Yesterday"
 msgstr "昨天"
 
-msgid "You PIN code is 0000. This is the default PIN code and it disable parental control!\n"
+msgid "You PIN code is 0000. This is the default PIN code and it disables parental control!\n"
 msgstr ""
 
 #, python-format
@@ -9507,7 +9564,7 @@ msgid ""
 msgstr ""
 
 msgid ""
-"You did not see all eight arrow heads. This means your TV has overscan enabled and presents you with a zoomed-in picture, causing you to loose part of a full HD screen. In addition this you may also miss parts of the user interface, for example volume bars and more.\n"
+"You did not see all eight arrow heads. This means your TV has overscan enabled and presents you with a zoomed-in picture, causing you to loose part of a full HD screen. In addition to this you may also miss parts of the user interface, for example volume bars and more.\n"
 "\n"
 "You can now try to resize and change the position of the user interface until you see the eight arrow heads.\n"
 "\n"
@@ -9539,9 +9596,6 @@ msgid ""
 msgstr ""
 "您需要一台PC连接到您的dreambox.通过电脑更新dreambox的固件.\n"
 "如果您需要进一步的说明请访问网站http://www.dm7025.de."
-
-msgid "You system does not support ext4"
-msgstr ""
 
 msgid "Your backup succeeded. We will now continue to explain the further upgrade process."
 msgstr "备份成功.现在将继续说明下一步的升级过程."
@@ -9783,7 +9837,7 @@ msgstr ""
 msgid "always"
 msgstr ""
 
-msgid "and never ask again this session again"
+msgid "and never ask in this session again"
 msgstr ""
 
 msgid "and never ask this again"
@@ -11164,9 +11218,6 @@ msgstr ""
 #~ msgid "Action on short powerbutton press"
 #~ msgstr "短按电源按钮"
 
-#~ msgid "Action:"
-#~ msgstr "功能:"
-
 #~ msgid "Activate please Torrent-List"
 #~ msgstr "启用种子列表"
 
@@ -11265,9 +11316,6 @@ msgstr ""
 
 #~ msgid "Always start with the same folder"
 #~ msgstr "总是从同一目录启动"
-
-#~ msgid "An error occurred updating the password file !!!"
-#~ msgstr "更新密码文件发生错误."
 
 #~ msgid "An unknown error occured!"
 #~ msgstr "发生未知错误!"
@@ -11842,6 +11890,10 @@ msgstr ""
 #~ msgid "DiSEqC-Tester settings"
 #~ msgstr "测试DiSEqC设置"
 
+#, fuzzy
+#~ msgid "Diasbled"
+#~ msgstr "禁用"
+
 #~ msgid "Directory %s nonexistent."
 #~ msgstr "目录 %s 不存在."
 
@@ -11881,6 +11933,13 @@ msgstr ""
 #~ "Do you really want to REMOVE\n"
 #~ "the plugin \"%s\"?"
 #~ msgstr " 是否移除插件\"%s\"?"
+
+#~ msgid ""
+#~ "Do you really want to convert the filesystem?\n"
+#~ "You cannot go back!"
+#~ msgstr ""
+#~ " 是否确认要转换文件系统?\n"
+#~ "你将不能恢复!"
 
 #~ msgid ""
 #~ "Do you really want to initialize the harddisk?\n"
@@ -12163,9 +12222,6 @@ msgstr ""
 
 #~ msgid "File"
 #~ msgstr "文件"
-
-#~ msgid "File Manager"
-#~ msgstr "文件管理器"
 
 #~ msgid "File(s)"
 #~ msgstr "文件(S)"
@@ -13280,6 +13336,9 @@ msgstr ""
 #~ msgid "Press OK to select a Provider."
 #~ msgstr "按OK键选择提供商."
 
+#~ msgid "Press OK to start the scan"
+#~ msgstr "按OK键开始扫描."
+
 #~ msgid "Press number field to edit"
 #~ msgstr "按数字区编辑"
 
@@ -13499,6 +13558,9 @@ msgstr ""
 #~ msgid "Satellites view"
 #~ msgstr "卫星"
 
+#~ msgid "Satfinder"
+#~ msgstr "寻星"
+
 #~ msgid "Save Playlist"
 #~ msgstr "保存播放列表"
 
@@ -13567,9 +13629,6 @@ msgstr ""
 
 #~ msgid "Scan band US SUPER"
 #~ msgstr "扫描 US SUPER"
-
-#~ msgid "Scanning completed, %d channels found"
-#~ msgstr "扫描完成，找到%d个频道"
 
 #~ msgid "Scattered Showers"
 #~ msgstr "零散小雨"
@@ -14261,21 +14320,6 @@ msgstr ""
 #~ "- 没有配置有效的IP地址\n"
 #~ "- 请检查DHCP服务器, 线缆和网卡配置"
 
-#~ msgid ""
-#~ "This test checks whether your LAN Adapter is set up for automatic IP Address configuration with DHCP.\n"
-#~ "If you get a \"disabled\" message:\n"
-#~ " - then your LAN Adapter is configured for manual IP Setup\n"
-#~ "- verify thay you have entered correct IP informations in the AdapterSetup dialog.\n"
-#~ "If you get an \"enabeld\" message:\n"
-#~ "-verify that you have a configured and working DHCP Server in your network."
-#~ msgstr ""
-#~ "该测试检查您的网卡能否从DHCP服务器上自动获取IP地址.\n"
-#~ "如果显示 \"不可用\" 信息:\n"
-#~ " - 那么证明您的网卡配置为手动的IP设置\n"
-#~ "- 请证实网卡正确配置并能通过网络会话.\n"
-#~ "如果显示 \"不可用\" 信息:\n"
-#~ " - 证明您的DHCP服务器配置正确,并能连接到网络."
-
 #~ msgid "This test detects your configured LAN-Adapter."
 #~ msgstr "该测试会侦测您的网络配置。."
 
@@ -14617,6 +14661,19 @@ msgstr ""
 
 #~ msgid "What do you want to scan?"
 #~ msgstr "是否开始扫描?"
+
+#~ msgid ""
+#~ "When you do a factory reset, you will lose ALL your configuration data\n"
+#~ "(including bouquets, services, satellite data ...)\n"
+#~ "After completion of factory reset, your receiver will restart automatically!\n"
+#~ "\n"
+#~ "Really do a factory reset?"
+#~ msgstr ""
+#~ "如果恢复出厂设置，全部个人设置将丢失\n"
+#~ "(包括卫星, 频道, 自定义组等 ...)\n"
+#~ "完成出厂设置复位后, 接收机将自动重启!\n"
+#~ "\n"
+#~ "确定要恢复出厂设置吗?"
 
 #~ msgid "Window"
 #~ msgstr "窗口"

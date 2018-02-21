@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-13 16:06+0330\n"
+"POT-Creation-Date: 2018-02-21 17:39+0330\n"
 "PO-Revision-Date: 2017-03-05 13:24+0100\n"
 "Last-Translator: Magnus Nilsson <mag_nilsson@hotmail.com>\n"
 "Language-Team: \n"
@@ -694,7 +694,8 @@ msgstr ""
 "din mottagare. Stänga av nu?"
 
 #
-msgid "A graphical EPG for all services of an specific bouquet"
+#, fuzzy
+msgid "A graphical EPG for all services of a specific bouquet"
 msgstr "En grafisk EPG för alla kanaler i en specifik favoritlista."
 
 #
@@ -706,7 +707,8 @@ msgstr ""
 "En inspelning har påbörjats :\n"
 "%s"
 
-msgid "A recording is currently running on the selected tuner. Please select a different tuner or consider to stop the recording to try again."
+#, fuzzy
+msgid "A recording is currently running on the selected tuner. Please select a different tuner or stop the recording and try again."
 msgstr "En inspelning pågår för närvarande på den valda tunern. Var god välj en annan tuner eller överväg att stoppa inspelningen för att prova igen."
 
 #
@@ -808,6 +810,11 @@ msgstr "Om..."
 #
 msgid "Accesspoint:"
 msgstr "Accesspunkt :"
+
+#
+#, fuzzy
+msgid "Action"
+msgstr "Sökväg"
 
 msgid "Activate HbbTV (Redbutton)"
 msgstr "Aktivera HbbTV (Röd Knapp)"
@@ -1015,6 +1022,10 @@ msgstr "Allokera oanvänt minne"
 msgid "Allow quit movieplayer with exit"
 msgstr "Avsluta movieplayer med exitknappen"
 
+#, fuzzy
+msgid "Allow quitting movieplayer with exit"
+msgstr "Avsluta movieplayer med exitknappen"
+
 msgid "Allow subtitle language to equal audio language"
 msgstr "Tillåt att undertextspråk är detsamma som ljudspråk"
 
@@ -1058,6 +1069,10 @@ msgstr ""
 #
 msgid "An empty filename is illegal."
 msgstr "Ett tomt filnamn är inte tillåtet."
+
+#, fuzzy
+msgid "An error occurred - Please try again later"
+msgstr "Något fel inträffade - Var snäll och försök senare"
 
 #
 msgid "An error occurred while downloading the packetlist. Please try again."
@@ -1727,6 +1742,11 @@ msgid "Channel Info"
 msgstr "Kanal info"
 
 #
+#, fuzzy
+msgid "Channel context menu"
+msgstr "Meny för kanallista"
+
+#
 msgid "Channel list type"
 msgstr "Typ av kanallista"
 
@@ -2254,11 +2274,12 @@ msgstr "Konfigurera om flerkanals PCM ljud skall aktiveras."
 msgid "Configure whether multi channel sound tracks should be downmixed to stereo."
 msgstr "Konfigurera om flerkanals ljudspår ska mixas ned till stereo."
 
+#, fuzzy
+msgid "Configure whether or not a rotor position will be displayed on the infobar"
+msgstr "Konfigurera om rotorpositionen skall visas i infobalken."
+
 msgid "Configure whether or not an icon should be shown when your motorized dish is moving."
 msgstr "Vid aktiverad kommer en ikon att visas när motoriserad parabol är i rörelse."
-
-msgid "Configure whether or not an rotor position will be displayed on infobar"
-msgstr "Konfigurera om rotorpositionen skall visas i infobalken."
 
 msgid "Configure which access level to use for the configuration menu. Expert level gives access to all items."
 msgstr "Konfigurera vilken behörighetsnivå som ska användas för konfigurationsmenyn. Expertnivå ger tillgång till alla objekt."
@@ -2269,7 +2290,8 @@ msgstr "Konfigurera vilket färgformat som ska användas på SCART utgången."
 msgid "Configure which tuner for recordings will be preferred, when more than one tuner is available."
 msgstr "Konfigurera vilken tuner som skall föredras för inspelningar, när mer än en tuner är tillgänglig."
 
-msgid "Configure which tuner type will be preferred, when the same service is available on different types of tuners. Choose 'no priority' to try each alternative one by one independent from tuner type."
+#, fuzzy
+msgid "Configure which tuner type will be preferred when the same service is available on different types of tuners. Choose 'no priority' to try each alternative one by one regardless of the tuner type."
 msgstr "Konfigurera vilken tuner som skall föredras, när samma kanal är tillgänglig på olika typer av tuners. Välj 'ingen prioritet' för att prova varje alternativ en och en oberoende av tunertyp."
 
 msgid "Configure which tuner will be preferred, when more than one tuner is available. If set to 'auto' the system will give priority to the tuner having the lowest number of channels/satellites."
@@ -2283,7 +2305,8 @@ msgstr "Konfigurera ditt interna LAN"
 msgid "Configure your network again"
 msgstr "Konfigurera ditt nätverk igen"
 
-msgid "Configure your network settings, and press OK to start the scan"
+#, fuzzy
+msgid "Configure your network settings and press OK to scan"
 msgstr "Konfigurera dina nätverksinställningar, och tryck OK för att starta skanningen"
 
 #
@@ -2367,20 +2390,14 @@ msgstr "Kontinuerlig uppspelning (loop)"
 msgid "Contrast"
 msgstr "Kontrast"
 
-msgid "Convert ext3 filesystem to ext4"
-msgstr "Konvertera filsystemet ext3 till ext4"
-
-msgid "Convert ext3 to ext4"
-msgstr "Konvertera ext3 till ext4"
-
-msgid "Converting ext3 to ext4..."
-msgstr "Konverterar ext3 till ext4..."
-
 msgid "Cook Islands"
 msgstr ""
 
 msgid "Copy"
 msgstr "Kopiera"
+
+msgid "Copy to..."
+msgstr ""
 
 msgid "Costa Rica"
 msgstr ""
@@ -2828,11 +2845,6 @@ msgstr "DiSEqC port %s: %s"
 msgid "DiSEqC-tester settings"
 msgstr "DiSEqC-tester inställningar"
 
-#
-#, fuzzy
-msgid "Diasbled"
-msgstr "Avaktivera"
-
 msgid "Did you see all eight arrow heads?"
 msgstr "Såg du alla åtta pilhuvudena?"
 
@@ -2956,13 +2968,6 @@ msgid ""
 msgstr ""
 "Vill du verkligen kontrollera filsystemet?\n"
 "Detta kan ta lång tid!"
-
-msgid ""
-"Do you really want to convert the filesystem?\n"
-"You cannot go back!"
-msgstr ""
-"Vill du verkligen konvertera filsystemet?\n"
-"Du kan inte gå tillbaka!"
 
 #
 #, python-format
@@ -3684,6 +3689,12 @@ msgstr "FTA"
 msgid "Factory reset"
 msgstr "Fabriksåterställning"
 
+msgid ""
+"Factory reset will restore your receiver to its default configuration. All user data including system settings, tuner configuration, bouquets, services and plugins will be DELETED. Recordings and other files stored on HDD and USB media will remain intact. After completion, the system will restart automatically!\n"
+"\n"
+"Do you really want to proceed?"
+msgstr ""
+
 #
 msgid "Failed"
 msgstr "Misslyckades"
@@ -3752,6 +3763,10 @@ msgstr ""
 
 msgid "File appears to be busy.\n"
 msgstr "Filen verkar vara upptagen.\n"
+
+#, fuzzy
+msgid "File manager"
+msgstr "Filnamn"
 
 msgid "Filename"
 msgstr "Filnamn"
@@ -4256,7 +4271,8 @@ msgstr "Hotkey inställning"
 msgid "Hotkey zap"
 msgstr "Hotkey zapp"
 
-msgid "How many minutes do you want add to record?"
+#, fuzzy
+msgid "How many minutes do you want add to the recording?"
 msgstr "Hur många minuter vill du lägga till inspelning?"
 
 #
@@ -4401,6 +4417,9 @@ msgid "India"
 msgstr ""
 
 msgid "Indonesia"
+msgstr ""
+
+msgid "Indonesian"
 msgstr ""
 
 #
@@ -4603,10 +4622,11 @@ msgstr "Typ av sökning"
 msgid "Israel"
 msgstr ""
 
+#, fuzzy
 msgid ""
-"It seems you did not see all the eight arrow heads. This means your TV is has overscan enabled, and is not configured properly.\n"
+"It seems you did not see all the eight arrow heads. This means your TV has overscan enabled, and is not configured properly.\n"
 "\n"
-"Please refer to your TVs manual to find how you can disable overscan on your TV. Look for terms like 'Just fit', 'Full width', etc. If you can't find it, ask other users at http://forums.openpli.org.\n"
+"Please refer to your TV's manual to find how you can disable overscan on your TV. Look for terms like 'Just fit', 'Full width', etc. If you can't find it, ask other users at http://forums.openpli.org.\n"
 "\n"
 msgstr ""
 "Det verkar som att du inte såg alla åtta pilhuvudena. Detta tyder på att du har överskanning aktiverad, och att denna inte är konfigurerad ordentligt.\n"
@@ -4857,6 +4877,11 @@ msgstr "Lista med tillgängliga nätverk"
 
 msgid "List mode"
 msgstr "Listläge"
+
+#
+#, fuzzy
+msgid "List of files"
+msgstr "Byt till fillista"
 
 #
 msgid "List of storage devices"
@@ -5218,6 +5243,11 @@ msgstr "Flytta mot öst"
 
 msgid "Move to position X"
 msgstr "Flytta till position X"
+
+#
+#, fuzzy
+msgid "Move to..."
+msgstr "Flytta mot öst"
 
 #
 msgid "Move west"
@@ -5715,6 +5745,13 @@ msgstr ""
 "Inget att söka efter!\n"
 "Vänligen konfigurera tuner före sökning efter kanaler."
 
+#
+#, fuzzy
+msgid "Nothing to scan! Setup your tuner and try again."
+msgstr ""
+"Inget att söka efter!\n"
+"Vänligen konfigurera tuner före sökning efter kanaler."
+
 msgid "Now"
 msgstr "Nu"
 
@@ -5961,7 +5998,8 @@ msgstr "Pausa filmen vid slutet"
 msgid "Pause playback"
 msgstr "Pausa uppspelning"
 
-msgid "Pauze/Continue playback"
+#, fuzzy
+msgid "Pause/Continue playback"
 msgstr "Pausa / Fortsätt uppspelning"
 
 msgid "Percentage left"
@@ -6515,10 +6553,6 @@ msgstr "Tryck OK för att välja satelliter"
 #
 msgid "Press OK to select/deselect a CAId."
 msgstr "Tryck OK för att aktivera / avaktivera en CAId."
-
-#
-msgid "Press OK to start the scan"
-msgstr "Tryck OK för att starta sökning"
 
 msgid "Press OK to toggle the selection"
 msgstr "Tryck OK för att växla val."
@@ -7256,10 +7290,6 @@ msgid "Satellites"
 msgstr "Satelliter"
 
 #
-msgid "Satfinder"
-msgstr "Satfinder"
-
-#
 msgid "Sats"
 msgstr "Sats"
 
@@ -7346,12 +7376,27 @@ msgstr "Sök %s band"
 msgid "Scan additional SR"
 msgstr "Sök ytterligare SR"
 
+#, fuzzy, python-format
+msgid "Scan completed, %d channel found."
+msgid_plural "Scan completed, %d channels found."
+msgstr[0] "Sökning klar, %d kanal hittad"
+msgstr[1] "Sökning klar, %d kanaler hittade"
+
+#, fuzzy
+msgid "Scan failed!"
+msgstr "Sökning misslyckades!"
+
 #
 msgid "Scan files..."
 msgstr "Sök filer..."
 
 msgid "Scan options"
 msgstr "Sök val"
+
+#
+#, fuzzy
+msgid "Scan state"
+msgstr "sökningsstatus"
 
 #
 msgid "Scan wireless networks"
@@ -7577,6 +7622,14 @@ msgstr "Välj kanal att spela in från"
 msgid "Select copy destination for:"
 msgstr "Välj destination för kopia :"
 
+#, fuzzy
+msgid "Select destination for copy selected files..."
+msgstr "Välj destination för :"
+
+#, fuzzy
+msgid "Select destination for move selected files..."
+msgstr "Välj destination för :"
+
 msgid "Select destination for:"
 msgstr "Välj destination för :"
 
@@ -7588,6 +7641,9 @@ msgstr "Skapande av katalog %s misslyckades."
 msgid "Select files for backup."
 msgstr "Väl filer för säkerhetskopia."
 
+msgid "Select files with 'OK' and then use 'Menu' or 'Action' for select operation"
+msgstr ""
+
 #
 msgid "Select files/folders to backup"
 msgstr "Ange filer / bibliotek att ta säkerhetskopia på"
@@ -7595,6 +7651,11 @@ msgstr "Ange filer / bibliotek att ta säkerhetskopia på"
 #, fuzzy
 msgid "Select function"
 msgstr "Välj åtgärd"
+
+#
+#, fuzzy
+msgid "Select hard disk"
+msgstr "Välj ett utseende"
 
 #, fuzzy
 msgid "Select horizontal resolution:"
@@ -7622,6 +7683,10 @@ msgstr "Välj sökväg"
 #
 msgid "Select movie"
 msgstr "Välj en film"
+
+#, fuzzy
+msgid "Select operation:"
+msgstr "Välj sökväg"
 
 #
 #, fuzzy
@@ -7669,16 +7734,16 @@ msgstr ""
 msgid "Select the movie path"
 msgstr "Välj film sökväg"
 
-msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
 msgid "Select the satellite you want to configure. Once that satellite is configured you can select and configure other satellites that will be accessed using this same tuner."
@@ -7941,6 +8006,11 @@ msgstr "Inställningar"
 #
 msgid "Setup"
 msgstr "Inställningar"
+
+#
+#, fuzzy
+msgid "Setup hard disk"
+msgstr "Hårddisk"
 
 msgid "Setup menu"
 msgstr "Installationsmeny"
@@ -8407,9 +8477,6 @@ msgstr ""
 
 msgid "Somalia"
 msgstr ""
-
-msgid "Some error occured - Please try later"
-msgstr "Något fel inträffade - Var snäll och försök senare"
 
 #
 msgid "Some plugins are not available:\n"
@@ -9107,6 +9174,7 @@ msgstr ""
 "\n"
 "meny->installation->system->överskanningsguide"
 
+#, fuzzy
 msgid ""
 "The overscan wizard helps you to setup your TV in the correct way.\n"
 "\n"
@@ -9115,7 +9183,7 @@ msgid ""
 "The yellow area means a 5% border area of a full HD picture will be invisible.\n"
 "The green area means a 10% border area of a full HD picture will be invisible.\n"
 "\n"
-"In other words, if the yellow box meets all for sides of your screen, then you have at least 5% overscan on all sides.\n"
+"In other words, if the yellow box touches all four sides of your screen, you have at least 5% overscan on all sides.\n"
 "\n"
 "If you see the tips of all eight arrowheads, then your TV has overscan disabled.\n"
 "\n"
@@ -9268,25 +9336,15 @@ msgstr ""
 msgid "This option allows to set the level of dynamic contrast of the picture."
 msgstr "Detta val tillåter dig att stänga av displayen."
 
-msgid "This option allows you can config the Colordepth for UHD"
-msgstr "Detta val tillåter dig att konfigurera färgdjupet för UHD"
-
 #, fuzzy
-msgid "This option allows you can config the Colorimetry for HDR."
-msgstr "Detta val tillåter dig att konfigurera färgdjupet för UHD"
-
-msgid "This option allows you can config the Colorspace from Auto to RGB"
-msgstr "Detta val tillåter dig att konfigurera färgrymden från Auto till RGB."
+msgid "This option allows you can to set the auto volume level."
+msgstr "Detta val tillåter dig att visa menyvägar."
 
 msgid "This option allows you enable smoothing filter to control the dithering process."
 msgstr ""
 
 #, fuzzy
 msgid "This option allows you enable the vertical scaler dejagging."
-msgstr "Detta val tillåter dig att stänga av displayen."
-
-#, fuzzy
-msgid "This option allows you show all symbols on display."
 msgstr "Detta val tillåter dig att stänga av displayen."
 
 #, fuzzy
@@ -9303,6 +9361,18 @@ msgstr "Detta val tillåter dig att stänga av displayen."
 
 #, fuzzy
 msgid "This option allows you to change the virtuell loadspeaker position."
+msgstr "Detta val tillåter dig att konfigurera färgrymden från Auto till RGB."
+
+#, fuzzy
+msgid "This option allows you to configure the Colordepth for UHD"
+msgstr "Detta val tillåter dig att konfigurera färgdjupet för UHD"
+
+#, fuzzy
+msgid "This option allows you to configure the Colorimetry for HDR."
+msgstr "Detta val tillåter dig att konfigurera färgdjupet för UHD"
+
+#, fuzzy
+msgid "This option allows you to configure the Colorspace from Auto to RGB"
 msgstr "Detta val tillåter dig att konfigurera färgrymden från Auto till RGB."
 
 #, fuzzy
@@ -9323,6 +9393,10 @@ msgstr "Detta val tillåter dig att dölja och sortera menyalternativ, vid val a
 msgid "This option allows you to power off the display."
 msgstr "Detta val tillåter dig att stänga av displayen."
 
+#, fuzzy
+msgid "This option allows you to show all symbols on the display."
+msgstr "Detta val tillåter dig att stänga av displayen."
+
 msgid "This option allows you to show menu number quick links."
 msgstr "Detta val tillåter dig att visa snabblänksnummer för menyer."
 
@@ -9336,10 +9410,7 @@ msgstr "Detta val tillåter dig att stänga av displayen."
 msgid "This option can be useful for long HDMI cables."
 msgstr ""
 
-msgid "This option configures you can set auto volume level."
-msgstr ""
-
-msgid "This option set the level of surpression of musquito noise (Musquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
+msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr ""
 
 msgid "This option sets  the picture contrast."
@@ -9431,11 +9502,12 @@ msgstr ""
 "- ingen giltig IP hittades.\n"
 "- vänlig kontrollera din DHCP, kablar och nätverkskortets installation."
 
+#, fuzzy
 msgid ""
 "This test checks whether your LAN adapter is set up for automatic IP address configuration with DHCP.\n"
 "If you get a \"disabled\" message:\n"
 " - then your LAN adapter is configured for manual IP setup\n"
-"- verify thay you have entered correct IP informations in the adapter setup dialog.\n"
+"- verify thay you have entered the correct IP information in the adapter setup dialog.\n"
 "If you get an \"enabeld\" message:\n"
 "-verify that you have a configured and working DHCP server in your network."
 msgstr ""
@@ -9786,6 +9858,11 @@ msgstr "Två"
 #
 msgid "Type"
 msgstr "Typ"
+
+#
+#, fuzzy
+msgid "Type of LNB/device"
+msgstr "Typ av sökning"
 
 #
 msgid "Type of scan"
@@ -10457,10 +10534,12 @@ msgstr "Vid aktiverad kan du kontrollera volymen med pilknapparna istället för
 msgid "When enabled you can specify a timeframe to ignore the shutdown timer when the receiver is in standby mode"
 msgstr "Vid aktiverad kan du specificera en tidsperiod för att ignorera avstängningstimer när mottagaren är i viloläge."
 
-msgid "When enabled you can specify a timeframe were the inactivity sleeptimer is ignored. Not the detection is disabled during this timeframe but the inactivity timeout is disabled"
+#, fuzzy
+msgid "When enabled you can specify a timeframe when the inactivity sleeptimer is ignored. Not the detection is disabled during this timeframe but the inactivity timeout is disabled"
 msgstr "Vid aktiverad kan du ange en tidsperiod när inaktiv insomningstimer är ignorerad. Detektering är inte avstängd under denna tidsperiod, men den inaktiva timeouten är avstängd."
 
-msgid "When enabled you can specify an extra timeframe were the inactivity sleeptimer is ignored. Not the detection is disabled during this timeframe but the inactivity timeout is disabled"
+#, fuzzy
+msgid "When enabled you can specify an extra timeframe when the inactivity sleeptimer is ignored. Not the detection is disabled during this timeframe but the inactivity timeout is disabled"
 msgstr "Vid aktiverad kan du ange en tidsperiod när inaktiv insomningstimer är ignorerad. Detektering är inte avstängd under denna tidsperiod men den inaktiva timeouten är avstängd."
 
 msgid "When enabled you can zap channels with the  CH+/-, B+/-, P+/- buttons instead of opening the channel selection list."
@@ -10544,7 +10623,8 @@ msgstr "Vid aktiverad kan man avsluta movieplayer med exitknappen."
 msgid "When enabled, measure power consumption to detect when the rotor stops turning (when supported by the tuner)."
 msgstr "Vid aktiverad kommer energiförbrukningen mätas för att upptäcka när rotorn slutar vrida (när det stöds av tunern)."
 
-msgid "When enabled, number markers will be hiden."
+#, fuzzy
+msgid "When enabled, number markers will be hidden."
 msgstr "Vid aktiverad kommer nummermarkörer att döljas."
 
 msgid "When enabled, reformat subtitles to match the width of the screen."
@@ -10628,20 +10708,6 @@ msgstr "När innehållet har ett bildförhållande på 16:9, välj om man ska sk
 
 msgid "When the content has an aspect ratio of 4:3, choose whether to scale/stretch the picture."
 msgstr "När innehållet har ett bildförhållande på 4:3, välj om man ska skala / sträcka bilden."
-
-#
-msgid ""
-"When you do a factory reset, you will lose ALL your configuration data\n"
-"(including bouquets, services, satellite data ...)\n"
-"After completion of factory reset, your receiver will restart automatically!\n"
-"\n"
-"Really do a factory reset?"
-msgstr ""
-"När du utför en fabriksreset, kommer du att förlora ALL konfigurationsdata\n"
-"(inkl favoritlistor, kanaler, satellit data ...)\n"
-"När fabriksreset är klar kommer din mottagare automatiskt starta om!\n"
-"\n"
-"Vill du utföra en fabriksreset?"
 
 #
 msgid "Where do you want to backup your settings?"
@@ -10794,7 +10860,8 @@ msgstr "Återställ säkerhetskopia"
 msgid "Yesterday"
 msgstr "Igår"
 
-msgid "You PIN code is 0000. This is the default PIN code and it disable parental control!\n"
+#, fuzzy
+msgid "You PIN code is 0000. This is the default PIN code and it disables parental control!\n"
 msgstr "Din PIN-kod är 0000. Detta är standard PIN-koden och den stänger av föräldrakontrollen!\n"
 
 #, python-format
@@ -10854,8 +10921,9 @@ msgstr ""
 "\n"
 "meny->installation->system->överskanningsguide"
 
+#, fuzzy
 msgid ""
-"You did not see all eight arrow heads. This means your TV has overscan enabled and presents you with a zoomed-in picture, causing you to loose part of a full HD screen. In addition this you may also miss parts of the user interface, for example volume bars and more.\n"
+"You did not see all eight arrow heads. This means your TV has overscan enabled and presents you with a zoomed-in picture, causing you to loose part of a full HD screen. In addition to this you may also miss parts of the user interface, for example volume bars and more.\n"
 "\n"
 "You can now try to resize and change the position of the user interface until you see the eight arrow heads.\n"
 "\n"
@@ -10896,9 +10964,6 @@ msgid ""
 msgstr ""
 "Du behöver ha en PC kopplad till din mottagare. Behöver du ytterligare instruktioner vänligen gå till websidan http://www.dm7025.de.\n"
 "Din mottagare kommer nu att stoppas. När du har genomfört uppdateringen enligt instruktionerna från websidan, kommer din nya mjukvara att fråga dig om du vill återställa dina inställningar."
-
-msgid "You system does not support ext4"
-msgstr "Ditt system stödjer inte ext4"
 
 #
 msgid "Your backup succeeded. We will now continue to explain the further upgrade process."
@@ -11180,7 +11245,8 @@ msgstr "alternativ"
 msgid "always"
 msgstr "alltid"
 
-msgid "and never ask again this session again"
+#, fuzzy
+msgid "and never ask in this session again"
 msgstr "och fråga aldrig om denna sessionen igen"
 
 msgid "and never ask this again"
@@ -12471,6 +12537,15 @@ msgstr ""
 #~ msgid "Constellation"
 #~ msgstr "Konstellation"
 
+#~ msgid "Convert ext3 filesystem to ext4"
+#~ msgstr "Konvertera filsystemet ext3 till ext4"
+
+#~ msgid "Convert ext3 to ext4"
+#~ msgstr "Konvertera ext3 till ext4"
+
+#~ msgid "Converting ext3 to ext4..."
+#~ msgstr "Konverterar ext3 till ext4..."
+
 #~ msgid "Could not connect to receiver .NFI image feed server:"
 #~ msgstr "Kunde inte ansluta till mottagare .NFI image feed Server:"
 
@@ -12483,6 +12558,18 @@ msgstr ""
 
 #~ msgid "Descramble http streams"
 #~ msgstr "Avkoda http-strömmar"
+
+#
+#, fuzzy
+#~ msgid "Diasbled"
+#~ msgstr "Avaktivera"
+
+#~ msgid ""
+#~ "Do you really want to convert the filesystem?\n"
+#~ "You cannot go back!"
+#~ msgstr ""
+#~ "Vill du verkligen konvertera filsystemet?\n"
+#~ "Du kan inte gå tillbaka!"
 
 #
 #~ msgid "Do you want to do another manual service scan?"
@@ -12619,6 +12706,10 @@ msgstr ""
 #~ msgstr "Förbered ytterligare en USB-sticka för image flashning"
 
 #
+#~ msgid "Press OK to start the scan"
+#~ msgstr "Tryck OK för att starta sökning"
+
+#
 #~ msgid "Provider to scan"
 #~ msgstr "Operatör att skanna"
 
@@ -12631,6 +12722,10 @@ msgstr ""
 
 #~ msgid "SID"
 #~ msgstr "SID"
+
+#
+#~ msgid "Satfinder"
+#~ msgstr "Satfinder"
 
 #~ msgid "Select an image to be downloaded"
 #~ msgstr "Välj image för nedladdning"
@@ -12784,6 +12879,20 @@ msgstr ""
 #~ msgid "When enabled, http streams are descrambled on the server side. The (remote) client receiver does not have to do descrambling."
 #~ msgstr "Vid aktiverad kommer http-strömmar avkodas på serversidan. (Fjärr) Klientmottagaren behöver inte göra avkodningen."
 
+#
+#~ msgid ""
+#~ "When you do a factory reset, you will lose ALL your configuration data\n"
+#~ "(including bouquets, services, satellite data ...)\n"
+#~ "After completion of factory reset, your receiver will restart automatically!\n"
+#~ "\n"
+#~ "Really do a factory reset?"
+#~ msgstr ""
+#~ "När du utför en fabriksreset, kommer du att förlora ALL konfigurationsdata\n"
+#~ "(inkl favoritlistor, kanaler, satellit data ...)\n"
+#~ "När fabriksreset är klar kommer din mottagare automatiskt starta om!\n"
+#~ "\n"
+#~ "Vill du utföra en fabriksreset?"
+
 #~ msgid "Would you like to install a softcam?"
 #~ msgstr "Vill du installera en softcam?"
 
@@ -12794,6 +12903,9 @@ msgstr ""
 #
 #~ msgid "You have chosen to create a new .NFI flasher bootable USB stick. This will repartition the USB stick and therefore all data on it will be erased."
 #~ msgstr "Du har valt att skapa en ny .NFI flash startbar USB-sticka. Detta kommer att repartitionera USB-stickan och efter det kommer all data på den vara borta."
+
+#~ msgid "You system does not support ext4"
+#~ msgstr "Ditt system stödjer inte ext4"
 
 #
 #~ msgid ""
