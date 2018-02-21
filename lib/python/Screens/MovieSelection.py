@@ -2121,12 +2121,9 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		for index, item in enumerate(self["list"]):
 			if item:
 				item = item[0]
-				path = item.getPath()
 				if not item.flags & eServiceReference.mustDescent:
-					ext = os.path.splitext(path)[1].lower()
-					if ext in IMAGE_EXTENSIONS:
-						continue
-					else:
+					ext = os.path.splitext(item.getPath())[1].lower()
+					if ext not in IMAGE_EXTENSIONS:
 						items.append(item)
 
 playlist = []
@@ -2142,22 +2139,18 @@ class MovieSelectionFileManagerList(Screen):
 		self.original_selectionpng = None
 		self.changePng()
 
-		data = SelectionList([])
+		self.list = SelectionList([])
 		index = 0
 		for i, record in enumerate(list):
 			if record:
 				item = record[0]
-				info = record[1]
-				path = item.getPath()
-				name = info and info.getName(item)
 				if not item.flags & eServiceReference.mustDescent:
-					ext = os.path.splitext(path)[1].lower()
-					if ext in IMAGE_EXTENSIONS:
-						continue
-					else:
-						data.addSelection(name, item, index, False)
+					ext = os.path.splitext(item.getPath())[1].lower()
+					if ext not in IMAGE_EXTENSIONS:
+						info = record[1]
+						name = info and info.getName(item)
+						self.list.addSelection(name, item, index, False)
 						index += 1
-		self.list = data
 
 		self["config"] = self.list
 		self["description"] = Label()
@@ -2184,9 +2177,10 @@ class MovieSelectionFileManagerList(Screen):
 	def changePng(self):
 		from Tools.Directories import SCOPE_CURRENT_SKIN
 		from Tools.LoadPixmap import LoadPixmap
-		if os.path.exists(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/mark_select.png")):
+		path = resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/mark_select.png")
+		if os.path.exists(path):
 			self.original_selectionpng = Components.SelectionList.selectionpng
-			Components.SelectionList.selectionpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/mark_select.png"))
+			Components.SelectionList.selectionpng = LoadPixmap(cached=True, path=path)
 
 	def sortList(self):
 		if self.sort == 0:	# reversed
@@ -2203,13 +2197,10 @@ class MovieSelectionFileManagerList(Screen):
 			self.sort = 0
 
 	def selectAction(self):
-		menu = []
-		buttons = []
-		menu.append((_("Copy to..."),5))
-		menu.append((_("Move to..."),6))
-		buttons += ["5","6"]
+		menu = [(_("Copy to..."),5), (_("Move to..."),6)]
+		keys = ["5","6"]
 		text = _("Select operation:")
-		self.session.openWithCallback(self.menuCallback, ChoiceBox, title=text, list=menu, keys=buttons)
+		self.session.openWithCallback(self.menuCallback, ChoiceBox, title=text, list=menu, keys=keys)
 
 	def menuCallback(self, choice):
 		if choice is None:
@@ -2218,10 +2209,6 @@ class MovieSelectionFileManagerList(Screen):
 			self.copySelected()
 		elif choice[1] == 6:
 			self.moveSelected()
-		elif choice[1] == 8:
-			return
-		else:
-			return
 
 	def copySelected(self):
 		self.selectMovieLocation(title=_("Select destination for copy selected files..."), callback=self.gotCopyMovieDest)
@@ -2254,23 +2241,16 @@ class MovieSelectionFileManagerList(Screen):
 			return
 		dest = os.path.normpath(choice)
 		data = self.list.getSelectionsList()
-		if len(data):
-			try:
-				for item in data:
-					# item ... (name, service, index, False)
-					moveServiceFiles(item[1], dest, item[0])
-					self.list.removeSelection(item)
-					self.mainList.removeService(item[1])
-			except Exception, e:
-				self.session.open(MessageBox, str(e), MessageBox.TYPE_ERROR)
-		else:
-			item = self["config"].getCurrent()[0]
-			try:
+		if len(data) == 0:
+			data = [self["config"].getCurrent()[0]]
+		try:
+			for item in data:
+				# item ... (name, service, index, False)
 				moveServiceFiles(item[1], dest, item[0])
 				self.list.removeSelection(item)
 				self.mainList.removeService(item[1])
-			except Exception, e:
-				self.session.open(MessageBox, str(e), MessageBox.TYPE_ERROR)
+		except Exception, e:
+			self.session.open(MessageBox, str(e), MessageBox.TYPE_ERROR)
 
 	def exit(self):
 		if self.original_selectionpng:
@@ -2282,7 +2262,7 @@ class MovieSelectionFileManagerList(Screen):
 		buildMovieLocationList(bookmarks)
 		self.onMovieSelected = callback
 		self.movieSelectTitle = title
-		self.session.openWithCallback(self.gotMovieLocation, ChoiceBox, title=title, list = bookmarks)
+		self.session.openWithCallback(self.gotMovieLocation, ChoiceBox, title=title, list=bookmarks)
 
 	def gotMovieLocation(self, choice):
 		if not choice:
