@@ -2145,12 +2145,10 @@ class MovieSelectionFileManagerList(Screen):
 			if record:
 				item = record[0]
 				if not item.flags & eServiceReference.mustDescent:
-					ext = os.path.splitext(item.getPath())[1].lower()
-					if ext not in IMAGE_EXTENSIONS:
-						info = record[1]
-						name = info and info.getName(item)
-						self.list.addSelection(name, item, index, False)
-						index += 1
+					info = record[1]
+					name = info and info.getName(item)
+					self.list.addSelection(name, item, index, False)
+					index += 1
 
 		self["config"] = self.list
 		self["description"] = Label()
@@ -2173,6 +2171,14 @@ class MovieSelectionFileManagerList(Screen):
 
 		self.sort = 0
 		self["description"].setText(_("Select files with 'OK' and then use 'Menu' or 'Action' for select operation"))
+
+		self["Service"] = ServiceEvent()
+		self["config"].onSelectionChanged.append(self.setService)
+		self.onShown.append(self.setService)
+
+	def setService(self):
+		item = self["config"].getCurrent()[0]
+		self["Service"].newService(item[1])
 
 	def changePng(self):
 		from Tools.Directories import SCOPE_CURRENT_SKIN
