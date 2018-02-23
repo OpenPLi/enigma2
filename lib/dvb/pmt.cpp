@@ -247,6 +247,7 @@ void eDVBServicePMTHandler::AITready(int error)
 	if (!m_AIT.getCurrent(ptr))
 	{
 		m_HBBTVUrl = "";
+		std::string tmp_url = "", tmp_path = "";
 		for (std::vector<ApplicationInformationSection*>::const_iterator it = ptr->getSections().begin(); it != ptr->getSections().end(); ++it)
 		{
 			for (std::list<ApplicationInformation *>::const_iterator i = (*it)->getApplicationInformation()->begin(); i != (*it)->getApplicationInformation()->end(); ++i)
@@ -287,7 +288,7 @@ void eDVBServicePMTHandler::AITready(int error)
 							{
 								if ((*i)->getApplicationControlCode() == 0x01) /* AUTOSTART */
 								{
-									m_HBBTVUrl.insert(0, (*interactionit)->getUrlBase()->getUrl());
+									tmp_url = (*interactionit)->getUrlBase()->getUrl();
 								}
 								aitinfo.url.insert(0, (*interactionit)->getUrlBase()->getUrl());
 								break;
@@ -303,7 +304,7 @@ void eDVBServicePMTHandler::AITready(int error)
 						SimpleApplicationLocationDescriptor *applicationlocation = (SimpleApplicationLocationDescriptor*)(*desc);
 						if ((*i)->getApplicationControlCode() == 0x01) /* AUTOSTART */
 						{
-							m_HBBTVUrl += applicationlocation->getInitialPath();
+							tmp_path = applicationlocation->getInitialPath();
 						}
 						aitinfo.url += applicationlocation->getInitialPath();
 						break;
@@ -314,6 +315,7 @@ void eDVBServicePMTHandler::AITready(int error)
 						break;
 					}
 				}
+				m_HBBTVUrl = tmp_url + tmp_path;
 				m_aitInfoList.push_back(aitinfo);
 			}
 		}
