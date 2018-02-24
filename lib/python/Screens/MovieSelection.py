@@ -655,6 +655,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		self["SeekActions"] = HelpableActionMap(self, "InfobarSeekActions",
 			{
 				"playpauseService": (self.preview, _("Preview")),
+				"unPauseService": (self.preview, _("Preview")),
 				"seekFwd": (sfwd, tFwd),
 				"seekFwdManual": (ssfwd, tFwd),
 				"seekBack": (sback, tBack),
