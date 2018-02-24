@@ -2147,20 +2147,28 @@ class MovieSelectionFileManagerList(Screen):
 				if not item.flags & eServiceReference.mustDescent:
 					info = record[1]
 					name = info and info.getName(item)
-					self.list.addSelection(name, item, index, False)
+					size = 0
+					if info:
+						if isinstance(info, Components.MovieList.StubInfo): # picture
+							size = info.getInfo(item, iServiceInformation.sFileSize)
+						else:
+							size = info.getInfoObject(item, iServiceInformation.sFileSize)
+					self.list.addSelection(name, (item, size), index, False) # movie
 					index += 1
 
 		self["config"] = self.list
 		self["description"] = Label()
+		self.size = 0
+		self["size"] = Label()
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "MovieSelectionActions"],
 			{
 				"cancel": self.exit,
-				"ok": self.list.toggleSelection,
+				"ok": self.toggleSelection,
 				"red": self.exit,
 				"green": self.selectAction,
 				"yellow": self.sortList,
-				"blue": self.list.toggleAllSelection,
+				"blue": self.toggleAllSelection,
 				"contextMenu": self.selectAction,
 			})
 
@@ -2176,10 +2184,27 @@ class MovieSelectionFileManagerList(Screen):
 		self["config"].onSelectionChanged.append(self.setService)
 		self.onShown.append(self.setService)
 
+	def toggleAllSelection(self):
+		self.list.toggleAllSelection()
+		self["size"].setText(self.countSize())
+
+	def toggleSelection(self):
+		self.list.toggleSelection()
+		self["size"].setText(self.countSize())
+
+	def countSize(self):
+		data = self.list.getSelectionsList()
+		if len(data):
+			self.size = 0
+			for item in data:
+				self.size += item[1][1]
+			return "%s" % self.convertSize(self.size)
+		return ""
+
 	def setService(self):
 		item = self["config"].getCurrent()
 		if item:
-			self["Service"].newService(item[0][1])
+			self["Service"].newService(item[0][1][0])
 
 	def changePng(self):
 		from Tools.Directories import SCOPE_CURRENT_SKIN
@@ -2226,20 +2251,24 @@ class MovieSelectionFileManagerList(Screen):
 			return
 		dest = os.path.normpath(choice)
 		data = self.list.getSelectionsList()
+		toggle = True
+		if len(data) == 0:
+			data = [self["config"].getCurrent()[0]]
+			self.size = data[0][1][1]
+			toggle = False
+		if not self.isFreeSpace(dest):
+			return
 		if len(data):
 			try:
 				for item in data:
-					# item ... (name, item, index, False)
-					copyServiceFiles(item[1], dest, item[0])
-					self.list.toggleItemSelection(item)
+					# item ... (name, (service, size), index, False)
+					copyServiceFiles(item[1][0], dest, item[0])
+					if toggle:
+						self.list.toggleItemSelection(item)
 			except Exception, e:
 				self.session.open(MessageBox, str(e), MessageBox.TYPE_ERROR)
-		else:
-			item = self["config"].getCurrent()[0]
-			try:
-				copyServiceFiles(item[1], dest, item[0])
-			except Exception, e:
-				self.session.open(MessageBox, str(e), MessageBox.TYPE_ERROR)
+			else:
+				self["size"].setText("")
 
 	def moveSelected(self):
 		if self["config"].getCurrent():
@@ -2249,17 +2278,42 @@ class MovieSelectionFileManagerList(Screen):
 		if not choice:
 			return
 		dest = os.path.normpath(choice)
+		src = config.movielist.last_videodir.value
+
 		data = self.list.getSelectionsList()
 		if len(data) == 0:
 			data = [self["config"].getCurrent()[0]]
-		try:
-			for item in data:
-				# item ... (name, service, index, False)
-				moveServiceFiles(item[1], dest, item[0])
-				self.list.removeSelection(item)
-				self.mainList.removeService(item[1])
-		except Exception, e:
-			self.session.open(MessageBox, str(e), MessageBox.TYPE_ERROR)
+			self.size = data[0][1][1]
+		if not self.isSameDevice(src, dest):
+			if not self.isFreeSpace(dest):
+				return
+		if len(data):
+			try:
+				for item in data:
+					# item ... (name, (service, size), index, False)
+					moveServiceFiles(item[1][0], dest, item[0])
+					self.list.removeSelection(item)
+					self.mainList.removeService(item[1][0])
+			except Exception, e:
+				self.session.open(MessageBox, str(e), MessageBox.TYPE_ERROR)
+			else:
+				self["size"].setText("")
+
+	def isSameDevice(self, src, dest):
+		if os.stat(src).st_dev != os.stat(dest).st_dev:
+			return False
+		return True
+
+	def freeSpace(self, path):
+		dev = os.statvfs(path)
+		return dev.f_bfree * dev.f_bsize
+
+	def isFreeSpace(self, dest):
+		free_space = self.freeSpace(dest)
+		if free_space <= self.size:
+			self.session.open(MessageBox, "On destination '%s' is %s free space only!" % (dest, self.convertSize(free_space)), MessageBox.TYPE_ERROR)
+			return False
+		return True
 
 	def exit(self):
 		if self.original_selectionpng:
@@ -2301,3 +2355,16 @@ class MovieSelectionFileManagerList(Screen):
 		last_selected_dest.insert(0, where)
 		if len(last_selected_dest) > 5:
 			del last_selected_dest[-1]
+
+	def convertSize(self, filesize):
+		if filesize:
+			if filesize >= 104857600000:
+				return _("%.0f GB") % (filesize / 1073741824.0)
+			elif filesize >= 1073741824:
+				return _("%.2f GB") % (filesize / 1073741824.0)
+			elif filesize >= 1048576:
+				return _("%.0f MB") % (filesize / 1048576.0)
+			elif filesize >= 1024:
+				return _("%.0f kB") % (filesize / 1024.0)
+			return _("%d B") % filesize
+		return ""
