@@ -2135,7 +2135,7 @@ class MovieSelectionFileManagerList(Screen):
 		Screen.__init__(self, session)
 		self.session = session
 		self.mainList = list
-		self.setTitle(_("List of files"))
+		self.setTitle(_("List of files") + ":  %s" % config.movielist.last_videodir.value)
 
 		self.original_selectionpng = None
 		self.changePng()
@@ -2187,13 +2187,19 @@ class MovieSelectionFileManagerList(Screen):
 
 	def toggleAllSelection(self):
 		self.list.toggleAllSelection()
-		self["size"].setText(self.countSize())
+		self["size"].setText(self.countSizeAllSelected())
 
 	def toggleSelection(self):
 		self.list.toggleSelection()
-		self["size"].setText(self.countSize())
+		item = self["config"].getCurrent()
+		if item:
+			if item[0][3]:
+				self.size += item[0][1][1]
+			else:
+				self.size -= item[0][1][1]
+		self["size"].setText("%s" % self.convertSize(self.size))
 
-	def countSize(self):
+	def countSizeAllSelected(self):
 		data = self.list.getSelectionsList()
 		if len(data):
 			self.size = 0
