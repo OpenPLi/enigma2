@@ -2162,7 +2162,11 @@ class MovieSelectionFileManagerList(Screen):
 		self.size = 0
 		self["size"] = Label()
 
-		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "MovieSelectionActions"],
+		sfwd = lambda: self.seekRelative(1, config.seek.selfdefined_46.value * 90000)
+		ssfwd = lambda: self.seekRelative(1, config.seek.selfdefined_79.value * 90000)
+		sback = lambda: self.seekRelative(-1, config.seek.selfdefined_46.value * 90000)
+		ssback = lambda: self.seekRelative(-1, config.seek.selfdefined_79.value * 90000)
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "InfobarSeekActions", "MediaPlayerActions"],
 			{
 				"cancel": self.exit,
 				"ok": self.toggleSelection,
@@ -2170,7 +2174,14 @@ class MovieSelectionFileManagerList(Screen):
 				"green": self.selectAction,
 				"yellow": self.sortList,
 				"blue": self.toggleAllSelection,
-				"contextMenu": self.selectAction,
+				"menu": self.selectAction,
+				"playpauseService": self.preview,
+				"unPauseService": self.preview,
+				"stop": self.stop,
+				"seekFwd": sfwd,
+				"seekFwdManual": ssfwd,
+				"seekBack": sback,
+				"seekBackManual": ssback,
 			})
 
 		self["key_red"] = Button(_("Cancel"))
@@ -2178,12 +2189,36 @@ class MovieSelectionFileManagerList(Screen):
 		self["key_yellow"] = Button(_("Sort"))
 		self["key_blue"] = Button(_("Inversion"))
 
+		self.playingRef = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 		self.sort = 0
 		self["description"].setText(_("Select files with 'OK' and then use 'Menu' or 'Action' for select operation"))
 
 		self["Service"] = ServiceEvent()
 		self["config"].onSelectionChanged.append(self.setService)
 		self.onShown.append(self.setService)
+
+	def seekRelative(self, direction, amount):
+		seekable = self.getSeek()
+		if seekable is None:
+			return
+		seekable.seekRelative(direction, amount)
+
+	def getSeek(self):
+		service = self.session.nav.getCurrentService()
+		if service is None:
+			return None
+		seek = service.seek()
+		if seek is None or not seek.isCurrentlySeekable():
+			return None
+		return seek
+
+	def preview(self):
+		item = self["config"].getCurrent()
+		if item:
+			self.session.nav.playService(item[0][1][0])
+
+	def stop(self):
+		self.session.nav.playService(self.playingRef)
 
 	def toggleAllSelection(self):
 		self.list.toggleAllSelection()
@@ -2268,7 +2303,7 @@ class MovieSelectionFileManagerList(Screen):
 		if len(data):
 			try:
 				for item in data:
-					# item ... (name, (service, size), index, False)
+					# item ... (name, (service, size), index, status)
 					copyServiceFiles(item[1][0], dest, item[0])
 					if toggle:
 						self.list.toggleItemSelection(item)
@@ -2297,7 +2332,7 @@ class MovieSelectionFileManagerList(Screen):
 		if len(data):
 			try:
 				for item in data:
-					# item ... (name, (service, size), index, False)
+					# item ... (name, (service, size), index, status)
 					moveServiceFiles(item[1][0], dest, item[0])
 					self.list.removeSelection(item)
 					self.mainList.removeService(item[1][0])
@@ -2325,6 +2360,7 @@ class MovieSelectionFileManagerList(Screen):
 	def exit(self):
 		if self.original_selectionpng:
 			Components.SelectionList.selectionpng = self.original_selectionpng
+		self.session.nav.playService(self.playingRef)
 		self.close()
 
 	def selectMovieLocation(self, title, callback):
