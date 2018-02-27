@@ -2181,6 +2181,8 @@ class MovieSelectionFileManagerList(Screen):
 				"seekFwdManual": ssfwd,
 				"seekBack": sback,
 				"seekBackManual": ssback,
+				"nextBouquet": self.getSelectString,
+				"prevBouquet": self.getUnselectString,
 			})
 
 		self["key_red"] = Button(_("Cancel"))
@@ -2219,9 +2221,31 @@ class MovieSelectionFileManagerList(Screen):
 	def stop(self):
 		self.session.nav.playService(self.playingRef)
 
+	def getSelectString(self):
+		self.session.openWithCallback(self.selectItems, VirtualKeyBoard, title = _("Add to selection (starts with...)"))
+
+	def selectItems(self, searchString = None):
+		if searchString:
+			for item in self.list.list:
+				if item[0][0].lower().startswith(searchString.lower()):
+					if not item[0][3]:
+						self.list.toggleItemSelection(item[0])
+		self["size"].setText(self.countSizeSelectedItems())
+
+	def getUnselectString(self):
+		self.session.openWithCallback(self.unselectItems, VirtualKeyBoard, title = _("Remove from selection (starts with...)"))
+
+	def unselectItems(self, searchString = None):
+		if searchString:
+			for item in self.list.list:
+				if item[0][0].lower().startswith(searchString.lower()):
+					if item[0][3]:
+						self.list.toggleItemSelection(item[0])
+		self["size"].setText(self.countSizeSelectedItems())
+
 	def toggleAllSelection(self):
 		self.list.toggleAllSelection()
-		self["size"].setText(self.countSizeAllSelected())
+		self["size"].setText(self.countSizeSelectedItems())
 
 	def toggleSelection(self):
 		self.list.toggleSelection()
@@ -2233,10 +2257,10 @@ class MovieSelectionFileManagerList(Screen):
 				self.size -= item[0][1][1]
 		self["size"].setText("%s" % self.convertSize(self.size))
 
-	def countSizeAllSelected(self):
+	def countSizeSelectedItems(self):
+		self.size = 0
 		data = self.list.getSelectionsList()
 		if len(data):
-			self.size = 0
 			for item in data:
 				self.size += item[1][1]
 			return "%s" % self.convertSize(self.size)
