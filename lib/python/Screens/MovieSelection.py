@@ -2226,8 +2226,9 @@ class MovieSelectionFileManagerList(Screen):
 
 	def selectItems(self, searchString = None):
 		if searchString:
+			search = searchString.lower()
 			for item in self.list.list:
-				if item[0][0].lower().startswith(searchString.lower()):
+				if item[0][0].lower().startswith(search):
 					if not item[0][3]:
 						self.list.toggleItemSelection(item[0])
 		self["size"].setText(self.countSizeSelectedItems())
@@ -2237,8 +2238,9 @@ class MovieSelectionFileManagerList(Screen):
 
 	def unselectItems(self, searchString = None):
 		if searchString:
+			search = searchString.lower()
 			for item in self.list.list:
-				if item[0][0].lower().startswith(searchString.lower()):
+				if item[0][0].lower().startswith(search):
 					if item[0][3]:
 						self.list.toggleItemSelection(item[0])
 		self["size"].setText(self.countSizeSelectedItems())
