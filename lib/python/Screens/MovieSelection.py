@@ -14,6 +14,7 @@ from Components.Sources.ServiceEvent import ServiceEvent
 from Components.Sources.StaticText import StaticText
 import Components.Harddisk
 from Components.UsageConfig import preferredTimerPath
+from Screens.VirtualKeyBoard import VirtualKeyBoard
 
 from Plugins.Plugin import PluginDescriptor
 
@@ -1598,7 +1599,6 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		return True
 
 	def do_createdir(self):
-		from Screens.VirtualKeyBoard import VirtualKeyBoard
 		self.session.openWithCallback(self.createDirCallback, VirtualKeyBoard,
 			title = _("Please enter name of the new directory"),
 			text = "")
@@ -1646,7 +1646,6 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			if full_name == name: # split extensions for files without metafile
 				name, self.extension = os.path.splitext(name)
 
-		from Screens.VirtualKeyBoard import VirtualKeyBoard
 		self.session.openWithCallback(self.renameCallback, VirtualKeyBoard,
 			title = _("Rename"),
 			text = name)
@@ -2182,6 +2181,8 @@ class MovieSelectionFileManagerList(Screen):
 				"seekFwdManual": ssfwd,
 				"seekBack": sback,
 				"seekBackManual": ssback,
+				"nextBouquet": self.getSelectString,
+				"prevBouquet": self.getUnselectString,
 			})
 
 		self["key_red"] = Button(_("Cancel"))
@@ -2220,9 +2221,33 @@ class MovieSelectionFileManagerList(Screen):
 	def stop(self):
 		self.session.nav.playService(self.playingRef)
 
+	def getSelectString(self):
+		self.session.openWithCallback(self.selectItems, VirtualKeyBoard, title = _("Add to selection (starts with...)"))
+
+	def selectItems(self, searchString = None):
+		if searchString:
+			search = searchString.lower()
+			for item in self.list.list:
+				if item[0][0].lower().startswith(search):
+					if not item[0][3]:
+						self.list.toggleItemSelection(item[0])
+		self["size"].setText(self.countSizeSelectedItems())
+
+	def getUnselectString(self):
+		self.session.openWithCallback(self.unselectItems, VirtualKeyBoard, title = _("Remove from selection (starts with...)"))
+
+	def unselectItems(self, searchString = None):
+		if searchString:
+			search = searchString.lower()
+			for item in self.list.list:
+				if item[0][0].lower().startswith(search):
+					if item[0][3]:
+						self.list.toggleItemSelection(item[0])
+		self["size"].setText(self.countSizeSelectedItems())
+
 	def toggleAllSelection(self):
 		self.list.toggleAllSelection()
-		self["size"].setText(self.countSizeAllSelected())
+		self["size"].setText(self.countSizeSelectedItems())
 
 	def toggleSelection(self):
 		self.list.toggleSelection()
@@ -2234,10 +2259,10 @@ class MovieSelectionFileManagerList(Screen):
 				self.size -= item[0][1][1]
 		self["size"].setText("%s" % self.convertSize(self.size))
 
-	def countSizeAllSelected(self):
+	def countSizeSelectedItems(self):
+		self.size = 0
 		data = self.list.getSelectionsList()
 		if len(data):
-			self.size = 0
 			for item in data:
 				self.size += item[1][1]
 			return "%s" % self.convertSize(self.size)
