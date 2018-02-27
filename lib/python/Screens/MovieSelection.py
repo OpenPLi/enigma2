@@ -2269,8 +2269,8 @@ class MovieSelectionFileManagerList(Screen):
 				size = self.convertSize(self.size)
 			else:
 				size = self.countSizeSelectedItems()
-			size = _("Size: %s" % size)
-			number = _("Selected: %s" % nr)
+			size = _("Size: %s") % size
+			number = _("Selected: %s") % nr
 		self["number"].setText(number)
 		self["size"].setText(size)
 
@@ -2393,7 +2393,7 @@ class MovieSelectionFileManagerList(Screen):
 	def isFreeSpace(self, dest):
 		free_space = self.freeSpace(dest)
 		if free_space <= self.size:
-			self.session.open(MessageBox, "On destination '%s' is %s free space only!" % (dest, self.convertSize(free_space)), MessageBox.TYPE_ERROR)
+			self.session.open(MessageBox, _("On destination '%s' is %s free space only!") % (dest, self.convertSize(free_space)), MessageBox.TYPE_ERROR)
 			return False
 		return True
 
