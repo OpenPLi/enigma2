@@ -714,8 +714,9 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y() + (or
 			<convert type="ClockToText">Format:%a %d.%m.%Y, %H:%M</convert>
 		</widget>
 		<ePixmap pixmap="skin_default/div-h.png" position="5,363" zPosition="2" size="590,2"/>
-		<widget name="size" position="5,380" size="100,25" zPosition="1" foregroundColor="green" font="Regular;20"/>
-		<widget name="description" position="105,368" zPosition="2" size="490,46" valign="center" halign="left" font="Regular;20" foregroundColor="white"/>
+		<widget name="number" position="5,372" size="120,20" zPosition="1" foregroundColor="green" font="Regular;16"/>
+		<widget name="size" position="5,392" size="120,20" zPosition="1" foregroundColor="green" font="Regular;16"/>
+		<widget name="description" position="125,368" zPosition="2" size="470,46" valign="center" halign="left" font="Regular;20" foregroundColor="white"/>
 	</screen>
 	<!-- Mute -->
 	<screen name="Mute" position="50,50" zPosition="10" size="34,45" backgroundColor="transparent" title="Mute" flags="wfNoBorder">
