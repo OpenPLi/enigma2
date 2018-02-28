@@ -74,7 +74,8 @@ class VirtualKeyBoard(Screen):
 
 		self["key_red"] = StaticText(_("Exit"))
 		self["key_green"] = StaticText(_("OK"))
-		self["key_yellow"] = self["country"] = StaticText("")
+		self["key_yellow"] = StaticText("")
+		self["country"] = StaticText("")
 		self["header"] = Label(title)
 		self["text"] = Input(currPos=len(kwargs.get("text", "").decode("utf-8",'ignore')), allMarked=False, **kwargs)
 		self["list"] = VirtualKeyBoardList([])
@@ -334,7 +335,7 @@ class VirtualKeyBoard(Screen):
 			self.lang = 'en_EN'
 			self.nextLang = 'ar_AE'
 		self["country"].setText(self.lang)
-		self["key_yellow"].setText(self.lang)
+		self["key_yellow"].setText(language.lang[self.lang][0])
 
 	def virtualKeyBoardEntryComponent(self, keys):
 		w, h = skin.parameters.get("VirtualKeyboard",(45, 45))
