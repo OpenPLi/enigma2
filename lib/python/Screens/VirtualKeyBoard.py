@@ -73,7 +73,7 @@ class VirtualKeyBoard(Screen):
 			}
 
 		self["key_red"] = StaticText(_("Exit"))
-		self["key_green"] = StaticText(_("Save"))
+		self["key_green"] = StaticText(_("OK"))
 		self["key_yellow"] = self["country"] = StaticText("")
 		self["header"] = Label(title)
 		self["text"] = Input(currPos=len(kwargs.get("text", "").decode("utf-8",'ignore')), allMarked=False, **kwargs)
