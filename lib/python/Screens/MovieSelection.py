@@ -2227,9 +2227,9 @@ class MovieSelectionFileManagerList(Screen):
 
 	def selectItems(self, searchString = None):
 		if searchString:
-			search = searchString.lower()
+			search = searchString.decode('UTF-8', 'replace').lower()
 			for item in self.list.list:
-				if item[0][0].lower().startswith(search):
+				if item[0][0].decode('UTF-8', 'replace').lower().startswith(search):
 					if not item[0][3]:
 						self.list.toggleItemSelection(item[0])
 		self.displaySelectionPars()
@@ -2239,9 +2239,9 @@ class MovieSelectionFileManagerList(Screen):
 
 	def unselectItems(self, searchString = None):
 		if searchString:
-			search = searchString.lower()
+			search = searchString.decode('UTF-8', 'replace').lower()
 			for item in self.list.list:
-				if item[0][0].lower().startswith(search):
+				if item[0][0].decode('UTF-8', 'replace').lower().startswith(search):
 					if item[0][3]:
 						self.list.toggleItemSelection(item[0])
 		self.displaySelectionPars()
