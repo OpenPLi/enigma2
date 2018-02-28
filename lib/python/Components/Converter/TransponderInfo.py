@@ -32,10 +32,6 @@ class TransponderInfo(Converter, object):
 		else:
 			transponderraw = info.getInfoObject(iServiceInformation.sTransponderData)
 			ref = info.getInfoString(iServiceInformation.sServiceref)
-		if "InRootOnly" in self.type and not self.rootBouquet():
-			return ""
-		if "NoRoot" in self.type and self.rootBouquet():
-			return ""
 		if transponderraw:
 			transponderdata = ConvertToHumanReadable(transponderraw)
 			# retreive onid and tsid from service reference
