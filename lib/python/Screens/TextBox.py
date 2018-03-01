@@ -12,17 +12,11 @@ class TextBox(Screen):
 
 		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions"],
 				{
-					"cancel": self.cancel,
-					"ok": self.ok,
+					"cancel": self.close,
+					"ok": self.close,
 					"up": self["text"].pageUp,
 					"down": self["text"].pageDown,
 				}, -1)
 
 		if title:
 			self.setTitle(title)
-
-	def ok(self):
-		self.close()
-
-	def cancel(self):
-		self.close()
