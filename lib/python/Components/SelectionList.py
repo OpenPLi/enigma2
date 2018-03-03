@@ -46,15 +46,18 @@ class SelectionList(MenuList):
 
 	def removeSelection(self, item):
 		for it in self.list:
-			if it[0][2] == item[2]:
+			if it[0][0:3] == item[0:3]:
 				self.list.pop(self.list.index(it))
-		self.setList(self.list)
+				self.setList(self.list)
+				return
 
 	def toggleItemSelection(self, item):
-		idx = item[2]
-		item = self.list[idx][0]
-		self.list[idx] = SelectionEntryComponent(item[0], item[1], item[2], not item[3])
-		self.setList(self.list)
+		for idx, i in enumerate(self.list):
+			if i[0][0:3] == item[0:3]:
+				item = self.list[idx][0]
+				self.list[idx] = SelectionEntryComponent(item[0], item[1], item[2], not item[3])
+				self.setList(self.list)
+				return
 
 	def sort(self, sortType=False, flag=False):
 		# sorting by sortType:
