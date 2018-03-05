@@ -24,13 +24,18 @@ class ImportChannels():
 				self.thread.start()
 
 	def threaded_function(self):
+		def testConfigStringFor(string):
+			if string in config.usage.remote_fallback_import.value or string in config.usage.remote_fallback_import_restart.value or string in config.usage.remote_fallback_import_standby.value:
+				return True
+			return False
+
 		try:
 			os.mkdir("/tmp/tmp")
 		except:
 			pass
 		self.setProgress(5)
 		print "Writing epg.dat file on sever box"
-		if config.usage.remote_fallback_epg.value:
+		if testConfigStringFor("epg"):
 			try:
 				urllib2.urlopen("%s/web/saveepg" % self.url, timeout=5).read()
 			except:
@@ -58,39 +63,41 @@ class ImportChannels():
 				print "[Import Channels] Loading EPG cache..."
 				eEPGCache.getInstance().load()
 			else:
-				self.ImportChannelsCallback(False, "No epg.dat fie found server")
-				return
-		self.setProgress(20)
-		print "[Import Channels] reading dir"
-		try:
-			files = [file for file in loads(urllib2.urlopen("%s/file?dir=/etc/enigma2" % self.url).read())["files"] if os.path.basename(file).startswith(settingfiles)]
-			count = 0
-			for file in files:
-				count += 1
-				file = file.encode("UTF-8")
-				print "[Import Channels] Downloading %s" % file, 
-				destination = "/tmp/tmp"
-				try:
-					open("%s/%s" % (destination, os.path.basename(file)), "wb").write(urllib2.urlopen("%s/file?file=%s" % (self.url, file), timeout=5).read())
-				except:
-					self.ImportChannelsCallback(False, "ERROR downloading file %s" % file)
+				self.ImportChannelsCallback(False, "No epg.dat file found server")
+				if not testConfigStringFor("channels"):
 					return
-				self.setProgress(count * 70 / len(files) + 20)
-		except:
-			self.ImportChannelsCallback(False, "Error %s" % self.url)
-			return
+		if testConfigStringFor("channels"):
+			self.setProgress(20)
+			print "[Import Channels] reading dir"
+			try:
+				files = [file for file in loads(urllib2.urlopen("%s/file?dir=/etc/enigma2" % self.url).read())["files"] if os.path.basename(file).startswith(settingfiles)]
+				count = 0
+				for file in files:
+					count += 1
+					file = file.encode("UTF-8")
+					print "[Import Channels] Downloading %s" % file
+					destination = "/tmp/tmp"
+					try:
+						open("%s/%s" % (destination, os.path.basename(file)), "wb").write(urllib2.urlopen("%s/file?file=%s" % (self.url, file), timeout=5).read())
+					except:
+						self.ImportChannelsCallback(False, "ERROR downloading file %s" % file)
+						return
+					self.setProgress(count * 70 / len(files) + 20)
+			except:
+				self.ImportChannelsCallback(False, "Error %s" % self.url)
+				return
 
-		print "[Import Channels] Removing files..."
-		files = [file for file in os.listdir("/etc/enigma2") if file.startswith(settingfiles)]
-		for file in files:
-			os.remove("/etc/enigma2/%s" % file)
-		print "[Import Channels] copying files..."
-		self.setProgress(95)
-		files = [x for x in os.listdir("/tmp/tmp") if x.startswith(settingfiles)]
-		for file in files:
-			shutil.move("/tmp/tmp/%s" % file, "/etc/enigma2/%s" % file)
-		os.rmdir("/tmp/tmp")
-		self.ImportChannelsCallback(True, "OK")
+			print "[Import Channels] Removing files..."
+			files = [file for file in os.listdir("/etc/enigma2") if file.startswith(settingfiles)]
+			for file in files:
+				os.remove("/etc/enigma2/%s" % file)
+			print "[Import Channels] copying files..."
+			self.setProgress(95)
+			files = [x for x in os.listdir("/tmp/tmp") if x.startswith(settingfiles)]
+			for file in files:
+				shutil.move("/tmp/tmp/%s" % file, "/etc/enigma2/%s" % file)
+			os.rmdir("/tmp/tmp")
+			self.ImportChannelsCallback(True, "OK")
 
 	def ImportChannelsCallback(self, flag, errorstring):
 		if flag:
