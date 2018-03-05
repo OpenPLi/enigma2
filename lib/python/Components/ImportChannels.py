@@ -24,18 +24,13 @@ class ImportChannels():
 				self.thread.start()
 
 	def threaded_function(self):
-		def testConfigStringFor(string):
-			if string in config.usage.remote_fallback_import.value or string in config.usage.remote_fallback_import_restart.value or string in config.usage.remote_fallback_import_standby.value:
-				return True
-			return False
-
 		try:
 			os.mkdir("/tmp/tmp")
 		except:
 			pass
 		self.setProgress(5)
 		print "Writing epg.dat file on sever box"
-		if testConfigStringFor("epg"):
+		if "epg" in  config.usage.remote_fallback_import.value:
 			try:
 				urllib2.urlopen("%s/web/saveepg" % self.url, timeout=5).read()
 			except:
@@ -64,9 +59,7 @@ class ImportChannels():
 				eEPGCache.getInstance().load()
 			else:
 				self.ImportChannelsCallback(False, "No epg.dat file found server")
-				if not testConfigStringFor("channels"):
-					return
-		if testConfigStringFor("channels"):
+		if "channels" in  config.usage.remote_fallback_import.value:
 			self.setProgress(20)
 			print "[Import Channels] reading dir"
 			try:
@@ -97,7 +90,7 @@ class ImportChannels():
 			for file in files:
 				shutil.move("/tmp/tmp/%s" % file, "/etc/enigma2/%s" % file)
 			os.rmdir("/tmp/tmp")
-			self.ImportChannelsCallback(True, "OK")
+		self.ImportChannelsCallback(True, "OK")
 
 	def ImportChannelsCallback(self, flag, errorstring):
 		if flag:
