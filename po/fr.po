@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-19 21:31+0100\n"
-"PO-Revision-Date: 2018-02-19 22:02+0100\n"
+"POT-Creation-Date: 2018-03-05 15:37+0100\n"
+"PO-Revision-Date: 2018-03-05 15:56+0100\n"
 "Last-Translator: Pr2\n"
 "Language-Team: french\n"
 "Language: fr\n"
@@ -930,6 +930,12 @@ msgstr "Autoriser les sous-titres pour malentendants"
 msgid "Alpha"
 msgstr "Transparence"
 
+msgid "Also import at reboot/restart enigma2"
+msgstr "Importer aussi au redémarrage d’Enigma2"
+
+msgid "Also import when box is leaving standby"
+msgstr "Importer aussi lorsque le récepteur est laissé en veille"
+
 msgid "Also on standby"
 msgstr "Aussi en veille"
 
@@ -1579,6 +1585,19 @@ msgstr "Numéro de la chaîne et nom du service"
 msgid "Channelnumber, picon and servicename"
 msgstr "Numéro de la chaîne, picon et nom du service"
 
+msgid "Channels and EPG"
+msgstr "Chaînes et EPG"
+
+#, python-format
+msgid "Channels from fallback tuner failed %s"
+msgstr "Les chaînes du tuner de repli ont échoué %s"
+
+msgid "Channels from fallback tuner imported"
+msgstr "Les chaînes du récepteur de repli ont été importées"
+
+msgid "Channels only"
+msgstr "Uniquement les chaînes"
+
 msgid "Chap."
 msgstr "Chap."
 
@@ -2139,9 +2158,6 @@ msgstr "Îles Cook"
 
 msgid "Copy"
 msgstr "Copier"
-
-msgid "Copy to..."
-msgstr "Copier vers..."
 
 msgid "Costa Rica"
 msgstr "Costa Rica"
@@ -2799,6 +2815,9 @@ msgstr "Sélection de la langue EPG 1"
 msgid "EPG language selection 2"
 msgstr "Sélection de la langue EPG 2"
 
+msgid "EPG only"
+msgstr "Seulement l’EPG"
+
 msgid "EPG selection"
 msgstr "Sélection EPG"
 
@@ -2808,6 +2827,10 @@ msgstr "Paramètres EPG"
 #, python-format
 msgid "ERROR - failed to scan (%s)!"
 msgstr "ERREUR - échec lors de l'analyse (%s)!"
+
+#, python-format
+msgid "ERROR downloading file %s"
+msgstr "ERREUR téléchargement du fichier %s"
 
 msgid "East"
 msgstr "Est"
@@ -3033,6 +3056,10 @@ msgstr "Eritrée"
 msgid "Error"
 msgstr "Erreur"
 
+#, python-format
+msgid "Error %s"
+msgstr "Erreur %s"
+
 msgid "Error code"
 msgstr "Code d'erreur"
 
@@ -3067,6 +3094,15 @@ msgstr "Erreur d'exécution de l'extension"
 
 msgid "Error stop stream!"
 msgstr "Erreur arrêt du stream (diffusion)!"
+
+msgid "Error when writing epg.dat on server"
+msgstr "Erreur lors de l’écriture du epg.dat sur le serveur"
+
+msgid "Error while retreiving epg.dat from server"
+msgstr "Erreur lors de la réception du fichier epg.dat du serveur"
+
+msgid "Error while retreiving location of epg.dat on server"
+msgstr "Erreur pour trouver la localisation du fichier epg.dat sur le serveur"
 
 #, python-format
 msgid ""
@@ -3303,6 +3339,9 @@ msgstr "Îles des Falkland (Malouines)"
 msgid "Fallback remote receiver URL"
 msgstr "URL du récepteur distant de repli"
 
+msgid "Fallback remote receiver setup"
+msgstr "Configuration du récepteur distant de repli"
+
 #, python-format
 msgid "Fan %d"
 msgstr "%d ventilateur"
@@ -3347,9 +3386,6 @@ msgstr "Fidji"
 
 msgid "File appears to be busy.\n"
 msgstr "Le fichier semble être occupé.\n"
-
-msgid "File manager"
-msgstr "Nom de fichier"
 
 msgid "Filename"
 msgstr "Nom de fichier"
@@ -3902,6 +3938,18 @@ msgstr ""
 msgid "Image: "
 msgstr "Image: "
 
+msgid "Import channels and/or EPG from remote receiver URL also when the receiver is getting out of standby"
+msgstr "Importer les chaînes et/ou EPG de l’URL du récepteur distant également lorsque le récepteur sort de veille"
+
+msgid "Import channels and/or EPG from remote receiver URL when receiver is booted"
+msgstr "Importer les chaînes et/ou EPG de l’URL du récepteur distant lorsque le récepteur est démarré"
+
+msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
+msgstr "Importer les chaînes et/ou EPG de l’URL du récepteur distant lorsque le récepteur ou Enigma2 est redémarré"
+
+msgid "Import from remote receiver URL"
+msgstr "Importer depuis l’URL du récepteur distant"
+
 msgid "In order to record a timer, the TV was switched to the recording service!\n"
 msgstr "Afin d'enregistrer une émission programmée, la TV zappera sur la chaîne enregistrée!\n"
 
@@ -4330,9 +4378,6 @@ msgstr "Liste des réseaux disponibles"
 msgid "List mode"
 msgstr "Mode liste"
 
-msgid "List of files"
-msgstr "Liste des fichiers"
-
 msgid "List of storage devices"
 msgstr "Liste des périphériques de stockage"
 
@@ -4640,9 +4685,6 @@ msgstr "Déplacer vers l'est"
 msgid "Move to position X"
 msgstr "Déplacer vers position X"
 
-msgid "Move to..."
-msgstr "Déplacer vers…"
-
 msgid "Move west"
 msgstr "Déplacer vers l'ouest"
 
@@ -4660,6 +4702,9 @@ msgstr "Configuration de la liste de films"
 
 msgid "Movie location"
 msgstr "Emplacement des films"
+
+msgid "Movie manager"
+msgstr "Gestionnaire de films"
 
 msgid "Movie selection"
 msgstr "Sélection des films"
@@ -4896,6 +4941,9 @@ msgstr "Description non disponible."
 
 msgid "No displayable files on this medium found!"
 msgstr "Aucun fichiers affichables trouvés sur ce support!"
+
+msgid "No epg.dat file found server"
+msgstr "Pas de fichier epg.dat trouvé sur le serveur"
 
 msgid "No event info found, recording indefinitely."
 msgstr "Aucune information trouvée sur l'émission, enregistrement indéfini."
@@ -6687,12 +6735,6 @@ msgstr "Choisir la chaîne à enregistrer"
 msgid "Select copy destination for:"
 msgstr "Sélectionnez la destination de copie pour:"
 
-msgid "Select destination for copy selected files..."
-msgstr "Sélectionnez une destination pour copier les fichiers choisis…"
-
-msgid "Select destination for move selected files..."
-msgstr "Sélectionnez une destination pour déplacer les fichiers choisis…"
-
 msgid "Select destination for:"
 msgstr "Sélectionnez une destination pour:"
 
@@ -6701,9 +6743,6 @@ msgstr "Définir le répertoire pour le fichier log"
 
 msgid "Select files for backup."
 msgstr "Choisir fichiers pour la sauvegarde."
-
-msgid "Select files with 'OK' and then use 'Menu' or 'Green' for select operation"
-msgstr "Sélectionnez les fichiers avec ‘OK’ et utilisez ‘Menu’ ou ‘Vert’ pour l’opération de sélection"
 
 msgid "Select files/folders to backup"
 msgstr "Choisir fichiers/dossiers pour sauvegarde"
@@ -6737,9 +6776,6 @@ msgstr "Choisir la localisation"
 
 msgid "Select movie"
 msgstr "Choisir un film"
-
-msgid "Select operation:"
-msgstr "Sélectionnez l'opération:"
 
 msgid "Select path for logfile"
 msgstr "Choisir le répertoire pour le fichier log"
@@ -7181,6 +7217,18 @@ msgstr "Afficher les films"
 
 msgid "Show multi channel EPG"
 msgstr "Afficher l'EPG multi chaîne"
+
+msgid "Show notification when import channels and/or EPG from remote receiver URL did not complete"
+msgstr "Afficher une notification lorsque l’import des chaînes et/ou EPG du récepteur distant n’a pas réussi"
+
+msgid "Show notification when import channels and/or EPG from remote receiver URL is completed"
+msgstr "Afficher une notification lorsque l’import des chaînes et/ou EPG du récepteur distant est réussi"
+
+msgid "Show notification when import channels was not successful"
+msgstr "Afficher une notification lorsque l’import des chaînes n’a pas réussi"
+
+msgid "Show notification when import channels was successful"
+msgstr "Afficher une notification lorsque l’import des chaînes a réussi"
 
 msgid "Show packages to be upgraded"
 msgstr "Afficher les paquets à mettre à jour"
@@ -9245,8 +9293,8 @@ msgstr "Lorsqu'elle est activée, vous pouvez contrôler le volume avec les flè
 msgid "When enabled you can specify a timeframe to ignore the shutdown timer when the receiver is in standby mode"
 msgstr "Lorsqu'elle est activée, vous pouvez spécifier une plage horaire pendant laquelle le timer d'arrêt complet est ignoré lorsque le récepteur est en mode veille"
 
-msgid "When enabled you can specify a timeframe were the inactivity sleeptimer is ignored. Not the detection is disabled during this timeframe but the inactivity timeout is disabled"
-msgstr "Lorsqu'elle est activée, vous pouvez spécifier une plage horaire pendant laquelle l'arrêt automatique pour inactivité est ignoré. La détection n'est pas désactivée pendant cette période, juste le timer d'inactivité est désactivé."
+msgid "When enabled you can specify a timeframe when the inactivity sleeptimer is ignored. Not the detection is disabled during this timeframe but the inactivity timeout is disabled"
+msgstr "Lorsqu'elle est activée, vous pouvez spécifier une plage horaire pendant laquelle l'arrêt automatique pour inactivité est ignoré. La détection n’est pas désactivée pendant cette période, juste le timer d'inactivité est désactivé."
 
 msgid "When enabled you can specify an extra timeframe when the inactivity sleeptimer is ignored. Not the detection is disabled during this timeframe but the inactivity timeout is disabled"
 msgstr "Lorsqu'elle est activée, vous pouvez spécifier une plage horaire pendant laquelle l'arrêt automatique est ignoré. La détection n'est pas désactivée pendant cette période, juste le timer d'inactivité est désactivé."
