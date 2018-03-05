@@ -11,7 +11,7 @@ settingfiles = ('lamedb', 'bouquets.', 'userbouquet.', 'blacklist', 'whitelist',
 class ImportChannels():
 	
 	def __init__(self, callback=None, progress=None):
-		if config.usage.remote_fallback_enabled.value and config.usage.remote_fallback.value:
+		if config.usage.remote_fallback_import.value and config.usage.remote_fallback.value:
 			self.callback = callback
 			if "ChannelsImport" in [x.name for x in threading.enumerate()]:
 				self.ImportChannelsCallback(False, "ChannelsImport already running")
@@ -24,13 +24,9 @@ class ImportChannels():
 				self.thread.start()
 
 	def threaded_function(self):
-		try:
-			os.mkdir("/tmp/tmp")
-		except:
-			pass
-		self.setProgress(5)
-		print "Writing epg.dat file on sever box"
-		if "epg" in  config.usage.remote_fallback_import.value:
+		self.setProgress(0)
+		if "epg" in config.usage.remote_fallback_import.value:
+			print "Writing epg.dat file on sever box"
 			try:
 				urllib2.urlopen("%s/web/saveepg" % self.url, timeout=5).read()
 			except:
@@ -59,7 +55,11 @@ class ImportChannels():
 				eEPGCache.getInstance().load()
 			else:
 				self.ImportChannelsCallback(False, "No epg.dat file found server")
-		if "channels" in  config.usage.remote_fallback_import.value:
+		if "channels" in config.usage.remote_fallback_import.value:
+			try:
+				os.mkdir("/tmp/tmp")
+			except:
+				pass
 			self.setProgress(20)
 			print "[Import Channels] reading dir"
 			try:
