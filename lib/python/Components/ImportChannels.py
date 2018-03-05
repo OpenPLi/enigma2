@@ -30,7 +30,7 @@ class ImportChannels():
 			try:
 				urllib2.urlopen("%s/web/saveepg" % self.url, timeout=5).read()
 			except:
-				self.ImportChannelsCallback(False, "Error when writing epg.dat on server")
+				self.ImportChannelsCallback(False, _("Error when writing epg.dat on server"))
 				return
 			self.setProgress(10)
 			print "[Import Channels] Get EPG Location"
@@ -41,7 +41,7 @@ class ImportChannels():
 					files = [file for file in loads(urllib2.urlopen("%s/file?dir=/" % self.url).read())["files"] if os.path.basename(file).startswith("epg.dat")] 
 				epg_location = files[0] if files else None
 			except:
-				self.ImportChannelsCallback(False, "Error while retreiving location of epg.dat on server")
+				self.ImportChannelsCallback(False, _("Error while retreiving location of epg.dat on server"))
 				return
 			self.setProgress(12)
 			if epg_location:
@@ -49,12 +49,12 @@ class ImportChannels():
 				try:
 					open("/hdd/epg.dat" if os.path.isdir("/hdd") else "/epg.dat", "wb").write(urllib2.urlopen("%s/file?file=%s" % (self.url, epg_location), timeout=5).read())
 				except:
-					self.ImportChannelsCallback(False, "Error while retreiving epg.dat from server")
+					self.ImportChannelsCallback(False, _("Error while retreiving epg.dat from server"))
 				self.setProgress(17)
 				print "[Import Channels] Loading EPG cache..."
 				eEPGCache.getInstance().load()
 			else:
-				self.ImportChannelsCallback(False, "No epg.dat file found server")
+				self.ImportChannelsCallback(False, _("No epg.dat file found server"))
 		if "channels" in config.usage.remote_fallback_import.value:
 			try:
 				os.mkdir("/tmp/tmp")
@@ -73,11 +73,11 @@ class ImportChannels():
 					try:
 						open("%s/%s" % (destination, os.path.basename(file)), "wb").write(urllib2.urlopen("%s/file?file=%s" % (self.url, file), timeout=5).read())
 					except:
-						self.ImportChannelsCallback(False, "ERROR downloading file %s" % file)
+						self.ImportChannelsCallback(False, _("ERROR downloading file %s") % file)
 						return
 					self.setProgress(count * 70 / len(files) + 20)
 			except:
-				self.ImportChannelsCallback(False, "Error %s" % self.url)
+				self.ImportChannelsCallback(False, _("Error %s") % self.url)
 				return
 
 			print "[Import Channels] Removing files..."
@@ -90,7 +90,7 @@ class ImportChannels():
 			for file in files:
 				shutil.move("/tmp/tmp/%s" % file, "/etc/enigma2/%s" % file)
 			os.rmdir("/tmp/tmp")
-		self.ImportChannelsCallback(True, "OK")
+		self.ImportChannelsCallback(True, _("OK"))
 
 	def ImportChannelsCallback(self, flag, errorstring):
 		if flag:
@@ -99,7 +99,7 @@ class ImportChannels():
 			eDVBDB.getInstance().reloadBouquets()
 			eDVBDB.getInstance().reloadServicelist()
 		elif config.usage.remote_fallback_nok.value:
-			Notifications.AddNotification(MessageBox, _("Channels from fallback tuner failed %s" % errorstring), type=MessageBox.TYPE_ERROR, timeout=5)
+			Notifications.AddNotification(MessageBox, _("Channels from fallback tuner failed %s") % errorstring, type=MessageBox.TYPE_ERROR, timeout=5)
 		if self.callback:
 			self.callback(flag, errorstring)
 
