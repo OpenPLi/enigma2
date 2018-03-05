@@ -132,7 +132,7 @@ class Standby(Screen):
 		self.leaveMute()
 		if os.path.exists("/usr/script/standby_leave.sh"):
 			Console().ePopen("/usr/script/standby_leave.sh")
-		if config.usage.remote_fallback_channelsimport_standby.value:
+		if config.usage.remote_fallback_import_standby.value:
 			ImportChannels()
 
 	def __onFirstExecBegin(self):
