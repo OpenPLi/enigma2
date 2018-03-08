@@ -1518,8 +1518,8 @@ def InitNimManager(nimmgr, update_slots = []):
 					nimmgr.sec.update()
 			else:
 				print "[InitNimManager] tuner type is already already %d" %cur_type
-		except:
-			pass
+		except Exception as e:
+			print "[InitNimManager] tunerTypeChanged error: ", e
 
 	empty_slots = 0
 	for slot in nimmgr.nim_slots:
