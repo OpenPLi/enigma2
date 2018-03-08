@@ -553,7 +553,7 @@ static void gif_load(Cfilepara* filepara, bool forceRGB = false)
 							filepara->bits = 24;
 							filepara->pic_buffer = pic_buffer2;
 							delete [] pic_buffer;
-							delete filepara->palette;
+							delete [] filepara->palette;
 							filepara->palette = NULL;
 						}
 					}
