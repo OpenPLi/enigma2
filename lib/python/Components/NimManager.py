@@ -1502,7 +1502,7 @@ def InitNimManager(nimmgr, update_slots = []):
 			if not is_changed_mode and frontend.setDeliverySystem(nimmgr.nim_slots[fe_id].getType()):
 				print "[InitNimManager] tunerTypeChanged feid %d to mode %d" % (fe_id, int(configElement.value))
 				InitNimManager(nimmgr)
-				if not config.misc.firstrun.value:
+				if not hasattr(config.misc, 'firstrun') or not config.misc.firstrun.value:
 					configElement.save()
 			elif is_changed_mode:
 				cur_type = int(open("/proc/stb/frontend/%d/mode" % (fe_id), "r").read())
@@ -1531,7 +1531,7 @@ def InitNimManager(nimmgr, update_slots = []):
 					if initial:
 						print "[InitNimManager] tunerTypeChanged force update setting"
 						nimmgr.sec.update()
-					if not config.misc.firstrun.value:
+					if not hasattr(config.misc, 'firstrun') or not config.misc.firstrun.value:
 						configElement.save()
 				else:
 					print "[InitNimManager] tunerTypeChanged tuner type is already %d" % cur_type
