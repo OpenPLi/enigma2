@@ -51,8 +51,6 @@ class ImportChannels():
 				except:
 					self.ImportChannelsCallback(False, _("Error while retreiving epg.dat from server"))
 				self.setProgress(17)
-				print "[Import Channels] Loading EPG cache..."
-				eEPGCache.getInstance().load()
 			else:
 				self.ImportChannelsCallback(False, _("No epg.dat file found server"))
 		if "channels" in config.usage.remote_fallback_import.value:
@@ -94,12 +92,9 @@ class ImportChannels():
 
 	def ImportChannelsCallback(self, flag, errorstring):
 		if flag:
-			if config.usage.remote_fallback_ok.value:
-				Notifications.AddNotification(MessageBox, _("Channels from fallback tuner imported"), type=MessageBox.TYPE_INFO, timeout=5)
-			eDVBDB.getInstance().reloadBouquets()
-			eDVBDB.getInstance().reloadServicelist()
-		elif config.usage.remote_fallback_nok.value:
-			Notifications.AddNotification(MessageBox, _("Channels from fallback tuner failed %s") % errorstring, type=MessageBox.TYPE_ERROR, timeout=5)
+			Notifications.AddNotificationWithID("ChannelsImportOK", MessageBox, _("Channels from fallback tuner imported"), type=MessageBox.TYPE_INFO, timeout=5)
+		else:
+			Notifications.AddNotificationWithID("ChannelsImportNOK", MessageBox, _("Channels from fallback tuner failed %s") % errorstring, type=MessageBox.TYPE_ERROR, timeout=5)
 		if self.callback:
 			self.callback(flag, errorstring)
 
