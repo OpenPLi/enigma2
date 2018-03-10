@@ -1538,6 +1538,8 @@ def InitNimManager(nimmgr, update_slots = []):
 		except Exception as e:
 			print "[InitNimManager] tunerTypeChanged error: ", e
 
+	tunersRequireTypeChange = []
+
 	empty_slots = 0
 	for slot in nimmgr.nim_slots:
 		x = slot.slot
@@ -1560,7 +1562,7 @@ def InitNimManager(nimmgr, update_slots = []):
 
 			nim.multiType.fe_id = x - empty_slots
 			nim.multiType.addNotifier(boundFunction(tunerTypeChanged, nimmgr), initial_call=False)
-			tunerTypeChanged(nimmgr, nim.multiType, initial=True)
+			tunersRequireTypeChange.append(x)
 
 	empty_slots = 0
 	for slot in nimmgr.nim_slots:
@@ -1642,5 +1644,9 @@ def InitNimManager(nimmgr, update_slots = []):
 			empty = False
 		if empty:
 			empty_slots += 1
+
+	for x in tunersRequireTypeChange:
+		nim = config.Nims[x]
+		tunerTypeChanged(nimmgr, nim.multiType, initial=True)
 
 nimmanager = NimManager()
