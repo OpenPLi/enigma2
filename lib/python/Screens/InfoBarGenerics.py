@@ -2949,6 +2949,14 @@ class InfoBarNotifications:
 				n[3]["onSessionOpenCallback"]()
 				del n[3]["onSessionOpenCallback"]
 
+			if n[4].startswith("ChannelsImport"):
+				if "channels" in config.usage.remote_fallback_import.value:
+					eDVBDB.getInstance().reloadBouquets()
+					eDVBDB.getInstance().reloadServicelist()
+				if "epg" in config.usage.remote_fallback_import.value:
+					eEPGCache.getInstance().load()
+				if not(n[4].endswith("NOK") and config.usage.remote_fallback_nok.value or config.usage.remote_fallback_ok.value):
+					return
 			if cb:
 				dlg = self.session.openWithCallback(cb, n[1], *n[2], **n[3])
 			elif not Notifications.current_notifications and n[4] == "ZapError":
@@ -2962,14 +2970,6 @@ class InfoBarNotifications:
 				eActionMap.getInstance().bindAction('', -maxint - 1, self.keypressNotification)
 			else:
 				dlg = self.session.open(n[1], *n[2], **n[3])
-			if n[4].startswith("ChannelsImport"):
-				if "channels" in config.usage.remote_fallback_import.value:
-					eDVBDB.getInstance().reloadBouquets()
-					eDVBDB.getInstance().reloadServicelist()
-				if "epg" in config.usage.remote_fallback_import.value:
-					eEPGCache.getInstance().load()
-				if not(n[4].endswith("NOK") and config.usage.remote_fallback_nok.value or config.usage.remote_fallback_ok.value):
-					return
 
 			# remember that this notification is currently active
 			d = (n[4], dlg)
