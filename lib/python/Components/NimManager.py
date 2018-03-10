@@ -1538,32 +1538,6 @@ def InitNimManager(nimmgr, update_slots = []):
 		except Exception as e:
 			print "[InitNimManager] tunerTypeChanged error: ", e
 
-	tunersRequireTypeChange = []
-
-	empty_slots = 0
-	for slot in nimmgr.nim_slots:
-		x = slot.slot
-
-		if update_slots and (x not in update_slots):
-			continue
-
-		nim = config.Nims[x]
-		addMultiType = False
-		try:
-			nim.multiType
-		except:
-			addMultiType = True
-		if slot.isMultiType() and addMultiType:
-			typeList = []
-			for id in slot.getMultiTypeList().keys():
-				type = slot.getMultiTypeList()[id]
-				typeList.append((id, type))
-			nim.multiType = ConfigSelection(typeList, "0")
-
-			nim.multiType.fe_id = x - empty_slots
-			nim.multiType.addNotifier(boundFunction(tunerTypeChanged, nimmgr), initial_call=False)
-			tunersRequireTypeChange.append(x)
-
 	empty_slots = 0
 	for slot in nimmgr.nim_slots:
 		x = slot.slot
@@ -1645,8 +1619,20 @@ def InitNimManager(nimmgr, update_slots = []):
 		if empty:
 			empty_slots += 1
 
-	for x in tunersRequireTypeChange:
-		nim = config.Nims[x]
-		tunerTypeChanged(nimmgr, nim.multiType, initial=True)
+		# check for multitype tuners
+		addMultiType = False
+		try:
+			nim.multiType
+		except:
+			addMultiType = True
+
+		if slot.isMultiType() and addMultiType:
+			typeList = []
+			for id in slot.getMultiTypeList().keys():
+				type = slot.getMultiTypeList()[id]
+				typeList.append((id, type))
+			nim.multiType = ConfigSelection(typeList, "0")
+			nim.multiType.fe_id = x - empty_slots
+			nim.multiType.addNotifier(boundFunction(tunerTypeChanged, nimmgr), initial_call=True)
 
 nimmanager = NimManager()
