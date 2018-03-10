@@ -2950,7 +2950,7 @@ class InfoBarNotifications:
 				n[3]["onSessionOpenCallback"]()
 				del n[3]["onSessionOpenCallback"]
 
-			if n[4].startswith("ChannelsImport"):
+			if n[4] and n[4].startswith("ChannelsImport"):
 				if "channels" in config.usage.remote_fallback_import.value:
 					eDVBDB.getInstance().reloadBouquets()
 					eDVBDB.getInstance().reloadServicelist()
