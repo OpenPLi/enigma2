@@ -22,7 +22,7 @@ class ImportChannels():
 		if "epg" in config.usage.remote_fallback_import.value:
 			print "Writing epg.dat file on sever box"
 			try:
-				urllib2.urlopen("%s/web/saveepg" % self.urlconfig.usage.remote_fallback, timeout=5).read()
+				urllib2.urlopen("%s/web/saveepg" % self.url, timeout=5).read()
 			except:
 				self.ImportChannelsDone(False, _("Error when writing epg.dat on server"))
 				return
