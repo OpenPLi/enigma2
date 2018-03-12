@@ -151,6 +151,7 @@ def getSetupTitle(id):
 		if x.get("key") == id:
 			title = x.get("title", "").encode("UTF-8")
 			if title == "":
+				print "[Setup] Error: Setup ID '%s' title is missing or blank!" % id
 				title = "** Setup error: '%s' title is missing or blank!" % id
 	if title == "":
 		print "[Setup] Error: Setup ID '%s' not found in setup file!" % id
