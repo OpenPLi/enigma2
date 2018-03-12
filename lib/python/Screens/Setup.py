@@ -150,6 +150,8 @@ def getSetupTitle(id):
 	for x in xmldata.findall("setup"):
 		if x.get("key") == id:
 			title = x.get("title", "").encode("UTF-8")
+			if title == "":
+				title = "** Setup warning: '%s' title is missing or blank!" % id
 	if title == "":
 		print "[Setup] Error: Setup ID '%s' not found in setup file!" % id
 		title = "** Setup error: '%s' section not found! **" % id
