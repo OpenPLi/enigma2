@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-27 14:41+0100\n"
-"PO-Revision-Date: 2018-02-25 13:42+0200\n"
-"Last-Translator: Audronis Grincevicius <adga45@gmail.com>\n"
+"POT-Creation-Date: 2018-03-06 11:14+0100\n"
+"PO-Revision-Date: 2018-03-14 06:37+0200\n"
+"Last-Translator: Audronis Grincevičius <adga45@gmail.com>\n"
 "Language-Team: Adga (C) <adga45@gmail.com>\n"
 "Language: lt_LT\n"
 "MIME-Version: 1.0\n"
@@ -135,11 +135,11 @@ msgstr " (0 - visi tinklai)"
 
 #, python-format
 msgid " (Channel %s)"
-msgstr " (%s kanalas)"
+msgstr " (Kanalas %s)"
 
 #, python-format
 msgid " (Partition %d)"
-msgstr " (%d skaidinys)"
+msgstr " (Skaidinys %d)"
 
 msgid " (PiP)"
 msgstr " (Paveikslėlis paveikslėlyje)"
@@ -621,8 +621,8 @@ msgstr ""
 "Baigęs įrašymą, laikmatis nori išjungti\n"
 "Jūsų imtuvą. Išjungti dabar?"
 
-msgid "A graphical EPG for all services of an specific bouquet"
-msgstr "Grafinis EPG visiems kanalams iš konkretaus paketo"
+msgid "A graphical EPG for all services of a specific bouquet"
+msgstr "Konkretaus paketo visų kanalų grafinis EPG"
 
 #, python-format
 msgid ""
@@ -634,10 +634,10 @@ msgstr ""
 
 msgid ""
 "A recording is currently running on the selected tuner. Please select a "
-"different tuner or consider to stop the recording to try again."
+"different tuner or stop the recording and try again."
 msgstr ""
-"Įrašymas šiuo metu vyksta pasirinktame imtuve. Prašome pasirinkti kitą "
-"imtuvą arba apsvarstyti galimybę sustabdyti įrašymą, bandykite dar kartą."
+"Pasirinktas imtuvas šiuo metu naudojamas įrašymui. Pasirinkite kitą imtuvą, "
+"arba nutraukite įrašymą ir bandykite dar kartą."
 
 msgid ""
 "A recording is currently running.\n"
@@ -924,8 +924,8 @@ msgstr ""
 msgid "Allocate unused memory index"
 msgstr "Paskirti nenaudojamos atminties indeksą"
 
-msgid "Allow quit movieplayer with exit"
-msgstr "Leisti išjungti filmų grotuvą uždarant"
+msgid "Allow quitting movieplayer with exit"
+msgstr "Leisti užverti filmų grotuvą su exit"
 
 msgid "Also on standby"
 msgstr "Ir budėjimo būsenoje"
@@ -944,6 +944,9 @@ msgstr "Amerikos Samoa"
 
 msgid "An empty filename is illegal."
 msgstr "Tuščias failo pavadinimas negalimas."
+
+msgid "An error occurred - Please try again later"
+msgstr "Įvyko klaida – bandykite dar kartą vėliau"
 
 msgid "An error occurred while downloading the packetlist. Please try again."
 msgstr "Parsisiunčiant paketų sąrašą įvyko klaida. Pabandykite dar kartą."
@@ -1147,9 +1150,6 @@ msgid "Automatic"
 msgstr "Automatinis"
 
 msgid "Automatic Scan"
-msgstr "Automatinė paieška"
-
-msgid "Automatic scan"
 msgstr "Automatinė paieška"
 
 msgid "Available format variables"
@@ -1474,6 +1474,9 @@ msgstr "Kanalas"
 msgid "Channel Info"
 msgstr "Kanalo informacija"
 
+msgid "Channel context menu"
+msgstr "Kanalo kontekstinis meniu"
+
 msgid "Channel list type"
 msgstr "Kanalų sąrašo tipas"
 
@@ -1494,6 +1497,19 @@ msgstr "Kanalo numeris ir pavadinimas"
 
 msgid "Channelnumber, picon and servicename"
 msgstr "Kanalo numeris, piktograma ir pavadinimas"
+
+msgid "Channels and EPG"
+msgstr "Kanalai ir EPG"
+
+#, python-format
+msgid "Channels from fallback tuner failed %s"
+msgstr "Iš nuotolinio imtuvo nepavykę parsisiųsti kanalai %s"
+
+msgid "Channels from fallback tuner imported"
+msgstr "Kanalai, importuoti iš nuotolinio imtuvo"
+
+msgid "Channels only"
+msgstr "Tik kanalai"
 
 msgid "Chap."
 msgstr "Skyr."
@@ -1727,8 +1743,9 @@ msgstr ""
 msgid "Configure your internal LAN"
 msgstr "Konfigūruokite savo vidinį tinklą"
 
-msgid "Configure your network settings, and press OK to start the scan"
-msgstr "Konfigūruokite tinklo nustatymus ir spauskite OK paieškai pradėti"
+msgid "Configure your network settings and press OK to scan"
+msgstr ""
+"Konfigūruokite savo tinklo nustatymus ir ieškokite, paspaudę OK mygtuką"
 
 msgid "Configure your wireless LAN again"
 msgstr "Konfigūruokite belaidį tinklą (LAN) dar kartą"
@@ -1820,7 +1837,7 @@ msgid ""
 "Could not find suitable media - Please insert a media (e.g. USB stick) and "
 "try again!"
 msgstr ""
-"Negalima rasti tinkamos medijos - įdėkite laikmeną (pvz., USB atmintinę) ir "
+"Nerasta tinkama media - prijunkite laikmeną (pvz., USB atmintinę) ir "
 "bandykite dar kartą!"
 
 msgid "Could not load medium! No disc inserted?"
@@ -1895,7 +1912,7 @@ msgid "Current mode: %s \n"
 msgstr "Dabartinis režimas: %s \n"
 
 msgid "Current rotor position: "
-msgstr "Dabartinė padėties nustatymo įrenginio padėtis: "
+msgstr "Dabartinė rotoriaus pozicija: "
 
 msgid "Current settings:"
 msgstr "Dabartinės nuostatos:"
@@ -1988,7 +2005,7 @@ msgid "DVD file browser"
 msgstr "DVD failų naršyklė"
 
 msgid "DVD media toolbox"
-msgstr "DVD priemonių rinkinys"
+msgstr "DVD media rinkinys"
 
 msgid "DVD player"
 msgstr "DVD grotuvas"
@@ -2399,9 +2416,16 @@ msgstr "ECM informacija"
 msgid "EPG"
 msgstr "Elektroninis programų vadovas"
 
+msgid "EPG only"
+msgstr "Tik EPG"
+
 #, python-format
 msgid "ERROR - failed to scan (%s)!"
 msgstr "KLAIDA - paieška nepavyko (%s)!"
+
+#, python-format
+msgid "ERROR downloading file %s"
+msgstr "KLAIDA, parsiunčiant failą %s"
 
 msgid "East"
 msgstr "Rytai"
@@ -2559,8 +2583,7 @@ msgstr ""
 msgid ""
 "Enter the number stored in the positioner that corresponds to this satellite."
 msgstr ""
-"Įrašykite numerį, išsaugotą padėties nustatymo įrenginyje, kuris atitinka šį "
-"palydovą."
+"Įrašykite numerį, išsaugotą pozicionieriuje, kuris atitinka šį palydovą."
 
 msgid "Enter the service pin"
 msgstr "Įrašykite kanalo PIN"
@@ -2605,6 +2628,10 @@ msgstr "Eritrėja"
 msgid "Error"
 msgstr "Klaida"
 
+#, python-format
+msgid "Error %s"
+msgstr "Klaida %s"
+
 msgid "Error code"
 msgstr "Klaidos kodas"
 
@@ -2639,6 +2666,15 @@ msgstr "Priedo paleisti nepavyko"
 
 msgid "Error stop stream!"
 msgstr "Srauto stabdymo klaida!"
+
+msgid "Error when writing epg.dat on server"
+msgstr "Klaida, įrašant epg.dat serveryje"
+
+msgid "Error while retreiving epg.dat from server"
+msgstr "Klaida, ieškant epg.data iš serverio"
+
+msgid "Error while retreiving location of epg.dat on server"
+msgstr "Klaida atkūrus epg.dat vietą serveryje"
 
 #, python-format
 msgid ""
@@ -2703,10 +2739,10 @@ msgid "Exit input device selection."
 msgstr "Užverti įvesties įrenginio pasirinkimą."
 
 msgid "Exit media player?"
-msgstr "Užverti medijos grotuvą?"
+msgstr "Užverti media grotuvą?"
 
 msgid "Exit mediaplayer"
-msgstr "Užverti medijos grotuvą"
+msgstr "Užverti media grotuvą"
 
 msgid "Exit movie list"
 msgstr "Užverti filmų sąrašą"
@@ -2715,7 +2751,7 @@ msgid "Exit movie player?"
 msgstr "Užverti filmų grotuvą?"
 
 msgid "Exit nameserver configuration"
-msgstr "Užverti serverio pavadinimo konfigūravimą"
+msgstr "Užverti DNS konfigūravimą"
 
 msgid "Exit network interface list"
 msgstr "Užverti tinklo sąsajos sąrašą"
@@ -2817,6 +2853,23 @@ msgstr "FEC:"
 
 msgid "FTA"
 msgstr "FTA"
+
+msgid ""
+"Factory reset will restore your receiver to its default configuration. All "
+"user data including system settings, tuner configuration, bouquets, services "
+"and plugins will be DELETED. Recordings and other files stored on HDD and "
+"USB media will remain intact. After completion, the system will restart "
+"automatically!\n"
+"\n"
+"Do you really want to proceed?"
+msgstr ""
+"Gamyklinių nuostatų atkūrimas atkurs imtuvą į numatytąją konfigūraciją. Visi "
+"naudotojo duomenys, įskaitant sistemos nustatymus, imtuvo konfigūraciją, "
+"paketus, kanalus ir priedus, bus ištrinti. Įrašai ir kiti failai, saugomi "
+"HDD ir USB laikmenose, išliks nepakitę. Pabaigus, sistema automatiškai "
+"pasileis iš naujo!\n"
+"\n"
+"Ar tikrai norite tęsti?"
 
 msgid "Failed"
 msgstr "Nepavyko"
@@ -3289,8 +3342,8 @@ msgstr "Sparčiųjų klavišų valdymas"
 msgid "Hotkey zap"
 msgstr "Spartusis perjungimas"
 
-msgid "How many minutes do you want add to record?"
-msgstr "Kelių minučių trukmės norite skirti šiam įrašui?"
+msgid "How many minutes do you want add to the recording?"
+msgstr "Kiek minučių norite pridėti prie įrašo?"
 
 msgid "How many minutes do you want to record?"
 msgstr "Kiek minučių norite daryti įrašą?"
@@ -3571,22 +3624,21 @@ msgid "Israel"
 msgstr "Izraelis"
 
 msgid ""
-"It seems you did not see all the eight arrow heads. This means your TV is "
-"has overscan enabled, and is not configured properly.\n"
+"It seems you did not see all the eight arrow heads. This means your TV has "
+"overscan enabled, and is not configured properly.\n"
 "\n"
-"Please refer to your TVs manual to find how you can disable overscan on your "
-"TV. Look for terms like 'Just fit', 'Full width', etc. If you can't find it, "
-"ask other users at http://forums.openpli.org.\n"
+"Please refer to your TV's manual to find how you can disable overscan on "
+"your TV. Look for terms like 'Just fit', 'Full width', etc. If you can't "
+"find it, ask other users at http://forums.openpli.org.\n"
 "\n"
 msgstr ""
 "Atrodo, kad nematote visų aštuonių rodyklių galų. Tai reiškia, kad TV "
 "įjungtas ekrano kraštinių nustatymas, bet jis netinkamai sukonfigūruotas.\n"
 "\n"
 "Susiraskite savo televizoriaus aprašyme, kaip išjungti ekrano kraštinių "
-"nustatymą Jūsų televizoriuje. Ieškokite terminų 'Įtalpinti', 'Viso pločio' "
-"ir pan. Jei nerasite, klauskite kitų vartotojų forume http://forums.openpli."
-"org.\n"
-"\n"
+"nustatymą Jūsų televizoriuje. Ieškokite terminų, pvz., \"Tiesiog tinkamas\", "
+"\"Visiškas plotis\" ir t.t. Jei negalite jo rasti, paprašykite kitų "
+"naudotojų adresu http://forums.openpli.org..\n"
 
 msgid "Italian"
 msgstr "Italų"
@@ -3935,16 +3987,16 @@ msgid ""
 "recording before trying to configure the positioner."
 msgstr ""
 "Galima priežastis - šiuo metu vykstantis įrašymas. Prieš konfigūruodami "
-"padėties nustatymo įrenginį, nutraukite įrašymą."
+"pozicionierių, nutraukite įrašymą."
 
 msgid "Mayotte"
 msgstr "Majotas"
 
 msgid "Media player"
-msgstr "Medija grotuvas"
+msgstr "Media grotuvas"
 
 msgid "Media scanner"
-msgstr "Medija failų paieška"
+msgstr "Media failų paieška"
 
 msgid "Medium is not a writeable DVD!"
 msgstr "Tai neįrašomas DVD!"
@@ -4081,6 +4133,9 @@ msgstr "Filmų sąrašo konfigūracija"
 
 msgid "Movie location"
 msgstr "Filmo vieta"
+
+msgid "Movie manager"
+msgstr "Filmų tvarkyklė"
 
 msgid "Movie selection"
 msgstr "Filmo pasirinkimas"
@@ -4234,7 +4289,7 @@ msgstr "Kitas"
 
 msgctxt "now/next: 'next' event label"
 msgid "Next"
-msgstr "Vėliau"
+msgstr "Kitas"
 
 msgid "Nicaragua"
 msgstr "Nikaragva"
@@ -4282,6 +4337,9 @@ msgstr "Joks aprašymas nepasiekiamas."
 msgid "No displayable files on this medium found!"
 msgstr "Jokių failų čia nerasta!"
 
+msgid "No epg.dat file found server"
+msgstr "Failo epg.dat serveryje nerasta"
+
 msgid "No event info found, recording indefinitely."
 msgstr "Informacija apie įvykius nerasta, tęsiamas įrašymas."
 
@@ -4308,7 +4366,7 @@ msgid "No new plugins found"
 msgstr "Naujų priedų nerasta"
 
 msgid "No positioner capable frontend found."
-msgstr "Su padėties nustatymo įrenginiu suderinamos sąsajos nėra."
+msgstr "Su pozicionierimi suderinamos sąsajos nerasta."
 
 msgid "No priority"
 msgstr "Be prioritetų"
@@ -4351,8 +4409,7 @@ msgid "No transparency"
 msgstr "Nenaudoti skaidrumo"
 
 msgid "No tuner is configured for use with a diseqc positioner!"
-msgstr ""
-"Nėra imtuvo, suderinto naudotis su diseqc padėties nustatymo įrenginiu!"
+msgstr "Nėra imtuvo, suderinto naudotis su diseqc pozicionieriumi!"
 
 msgid ""
 "No tuner is enabled!\n"
@@ -4474,6 +4531,9 @@ msgid ""
 msgstr ""
 "Nėra ko ieškoti!\n"
 "Prašome, suderinkite savo imtuvą prieš paleidžiant kanalų paiešką."
+
+msgid "Nothing to scan! Setup your tuner and try again."
+msgstr "Nėra ko ieškoti! Suderinkite savo imtuvą ir bandykite dar kartą."
 
 msgid "Now"
 msgstr "Dabar"
@@ -4686,7 +4746,7 @@ msgstr "Sustabdyti filmą pabaigoje"
 msgid "Pause playback"
 msgstr "Pristabdyti peržiūrą"
 
-msgid "Pauze/Continue playback"
+msgid "Pause/Continue playback"
 msgstr "Pristabdyti/Tęsti atkūrimą"
 
 msgid "Percentage left"
@@ -4742,7 +4802,7 @@ msgid "Play audio-CD..."
 msgstr "Groti garso CD..."
 
 msgid "Play back media files"
-msgstr "Groti medijos failus"
+msgstr "Groti media failus"
 
 msgid "Play entry"
 msgstr "Paleisti įrašą"
@@ -4961,16 +5021,16 @@ msgid "Position stored at index"
 msgstr "Padėtis išsaugota ties žyme"
 
 msgid "Positioner"
-msgstr "Padėties nustatymo įrenginys"
+msgstr "Pozicionierius"
 
 msgid "Positioner (selecting satellites)"
-msgstr "Padėties nustatymo įrenginys (pasirinkus palydovus)"
+msgstr "Pozicionierius (pasirenkami palydovai)"
 
 msgid "Positioner setup"
-msgstr "Padėties nustatymo įrenginio sąranka"
+msgstr "Pozicionieriaus sąranka"
 
 msgid "Positioner setup log"
-msgstr "Padėties nustatymo įrenginio sąrankos žurnalas"
+msgstr "Pozicionieriaus sąrankos žurnalas"
 
 msgid "Power management. Consult your receiver's manual for more information."
 msgstr ""
@@ -5037,9 +5097,6 @@ msgstr "Paspauskite OK norėdami pasirinkti palydovus"
 
 msgid "Press OK to select/deselect a CAId."
 msgstr "Spauskite OK, kad pasirinkti/nepasirinkti CAId."
-
-msgid "Press OK to start the scan"
-msgstr "Kad pradėti paiešką, spauskite 'OK'"
 
 msgid "Press OK to toggle the selection"
 msgstr "Kad sukeisti pasirinkimus, spauskite OK"
@@ -5524,10 +5581,10 @@ msgid "Root directory"
 msgstr "Pagrindinis katalogas"
 
 msgid "Rotor step position:"
-msgstr "Padėties nustatymo įrenginio žingsnio pozicija:"
+msgstr "Rotoriaus žingsnio pozicija:"
 
 msgid "Rotor turning speed"
-msgstr "Padėties nustatymo įrenginio sukimosi greitis"
+msgstr "Rotoriaus sukimosi greitis"
 
 msgid "Rotor: "
 msgstr "Rotorius: "
@@ -5704,11 +5761,24 @@ msgstr "Ieškoti %s diapazone"
 msgid "Scan additional SR"
 msgstr "Papildomų SR paieška"
 
+#, python-format
+msgid "Scan completed, %d channel found."
+msgid_plural "Scan completed, %d channels found."
+msgstr[0] "Paieška baigta, rastas %d kanalas"
+msgstr[1] "Paieška baigta, rasti %d kanalai"
+msgstr[2] "Paieška baigta, rasta %d kanalų"
+
+msgid "Scan failed!"
+msgstr "Paieška nepavyko!"
+
 msgid "Scan files..."
 msgstr "Failų paieška..."
 
 msgid "Scan options"
 msgstr "Paieškos parinktys"
+
+msgid "Scan state"
+msgstr "Paieškos eiga"
 
 msgid "Scan wireless networks"
 msgstr "Ieškoti belaidžių tinklų"
@@ -5748,8 +5818,8 @@ msgstr "Vyksta paieška..."
 msgid ""
 "Scans default lamedbs sorted by satellite with a connected dish positioner"
 msgstr ""
-"Skenuokite numatytą lamedbs, surūšiuotą pagal palydovą su prijungta, prie "
-"padėties nustatymo įrenginio, antena"
+"Skenuokite numatytą lamedbs, surūšiuotą pagal palydovą su prijungta prie "
+"pozicionieriaus antena"
 
 msgid "Search east"
 msgstr "Rytų paieška"
@@ -5801,8 +5871,8 @@ msgid ""
 "switches, and '1.2' for systems using a positioner."
 msgstr ""
 "Pasirinkite '1.0' standartiniams įvykdytiems jungikliams, '1.1' "
-"neprijungtiems jungikliams ir '1.2' sistemoms, kuriose naudojamas padėties "
-"nustatymo įrenginys"
+"neprijungtiems jungikliams ir '1.2' sistemoms, kuriose naudojamas "
+"pozicionierius."
 
 msgid ""
 "Select 'A' or 'B' if your aerial system requires this, otherwise select "
@@ -5956,6 +6026,9 @@ msgstr "Pasirinkite failus ir katalogus atsarginei kopijai"
 msgid "Select function"
 msgstr "Pasirinkite funkciją"
 
+msgid "Select hard disk"
+msgstr "Pasirinkite kietąjį diską"
+
 msgid "Select horizontal resolution:"
 msgstr "Pasirinkite horizontalią rezoliuciją:"
 
@@ -5967,7 +6040,7 @@ msgid ""
 "switch, positioner, etc."
 msgstr ""
 "Pasirinkite, kaip nustatyti palydovinę anteną. t.y. fiksuota antena, viena "
-"LNB, DiSEqC jungiklis, padėties nustatymo įrenginys ir t.t."
+"LNB, DiSEqC jungiklis, pozicionierius ir t.t."
 
 msgid "Select input device"
 msgstr "Pasirinkite įvesties įrenginį"
@@ -6321,11 +6394,14 @@ msgstr "Nustatymai"
 msgid "Setup"
 msgstr "Valdymas"
 
+msgid "Setup hard disk"
+msgstr "Kietojo disko valdymas"
+
 msgid "Setup menu"
 msgstr "Valdymo meniu"
 
 msgid "Setup your positioner"
-msgstr "Padėties nustatymo įrenginio valdymas"
+msgstr "Sukonfigūruokite pozicionierių"
 
 msgid "Setup your satellite equipment"
 msgstr "Palydovinės įrangos sąranka"
@@ -6615,9 +6691,6 @@ msgstr "Saliamono Salos"
 
 msgid "Somalia"
 msgstr "Somalis"
-
-msgid "Some error occured - Please try later"
-msgstr "Įvyko klaida, bandykite pakartoti vėliau"
 
 msgid "Some plugins are not available:\n"
 msgstr "Kai kurių priedų nėra:\n"
@@ -7196,8 +7269,8 @@ msgid ""
 "The green area means a 10% border area of a full HD picture will be "
 "invisible.\n"
 "\n"
-"In other words, if the yellow box meets all for sides of your screen, then "
-"you have at least 5% overscan on all sides.\n"
+"In other words, if the yellow box touches all four sides of your screen, you "
+"have at least 5% overscan on all sides.\n"
 "\n"
 "If you see the tips of all eight arrowheads, then your TV has overscan "
 "disabled.\n"
@@ -7359,15 +7432,8 @@ msgstr ""
 msgid "This option allows to set the level of dynamic contrast of the picture."
 msgstr "Ši parinktis leidžia nustatyti paveikslėlio dinaminio kontrasto lygį."
 
-msgid "This option allows you can config the Colordepth for UHD"
-msgstr "Ši parinktis leidžia nustatyti UHD spalvų gylį."
-
-msgid "This option allows you can config the Colorimetry for HDR."
-msgstr "Ši parinktis leidžia konfigūruoti HDR kolorimetriją."
-
-msgid "This option allows you can config the Colorspace from Auto to RGB"
-msgstr ""
-"Ši parinktis leidžia pasirinkti spalvų atvaizdavimo erdvę iš 'Auto' į RGB"
+msgid "This option allows you can to set the auto volume level."
+msgstr "Ši parinktis leidžia jums nustatyti automatinį garsumo lygį."
 
 msgid ""
 "This option allows you enable smoothing filter to control the dithering "
@@ -7388,6 +7454,15 @@ msgstr "Ši parinktis leidžia padidinti žalią toną paveikslėlyje."
 msgid "This option allows you to change the virtuell loadspeaker position."
 msgstr "Ši parinktis leidžia pakeisti virtualių garsiakalbių padėtį."
 
+msgid "This option allows you to configure the Colordepth for UHD"
+msgstr "Ši parinktis leidžia jums konfigūruoti UHD spalvų erdvę"
+
+msgid "This option allows you to configure the Colorimetry for HDR."
+msgstr "Ši parinktis leidžia jums konfigūruoti HDR kolorimetriją."
+
+msgid "This option allows you to configure the Colorspace from Auto to RGB"
+msgstr "Ši parinktis leidžia jums konfigūruoti spalvų erdvę iš Auto į RGB"
+
 msgid ""
 "This option allows you to disable or change the virtuell loadspeaker "
 "position."
@@ -7407,11 +7482,8 @@ msgstr ""
 msgid "This option can be useful for long HDMI cables."
 msgstr "Ši parinktis gali būti naudinga ilgiems HDMI laidams."
 
-msgid "This option configures you can set auto volume level."
-msgstr "Ši parinktis leidžia įjungti automatinį garsumo lygio reguliavimą."
-
 msgid ""
-"This option set the level of surpression of musquito noise (Musquito Noise "
+"This option set the level of surpression of mosquito noise (Mosquito Noise "
 "is random aliasing as a result of strong compression). Obviously this goes "
 "at the cost of picture details."
 msgstr ""
@@ -7539,16 +7611,16 @@ msgid ""
 "configuration with DHCP.\n"
 "If you get a \"disabled\" message:\n"
 " - then your LAN adapter is configured for manual IP setup\n"
-"- verify thay you have entered correct IP informations in the adapter setup "
-"dialog.\n"
+"- verify thay you have entered the correct IP information in the adapter "
+"setup dialog.\n"
 "If you get an \"enabeld\" message:\n"
 "-verify that you have a configured and working DHCP server in your network."
 msgstr ""
-"Čia patikrinsite, ar jūsų vietinio tinklo adapteris yra nustatytas DHCP "
+"Šis testas tikrina, ar jūsų vietinio tinklo adapteris yra nustatytas DHCP "
 "automatinei IP adreso konfigūracijai.\n"
 "Jei gaunate pranešimą 'išjungta':\n"
 "- jūsų tinklo adapteris yra sukonfigūruotas rankiniam IP nustatymui\n"
-"- įsitikinkite, kad įrašėte teisingą IP informaciją tinklo adapterio "
+"- įsitikinkite, kad įvedėte teisingą IP informaciją tinklo adapterio "
 "nustatymų dialoge.\n"
 "Jei gaunate pranešimą 'įjungta':\n"
 "- patikrinkite, ar turite savo tinkle sukonfigūruotą ir veikiantį DHCP "
@@ -7562,9 +7634,8 @@ msgid ""
 "previously memorised positions and fine-tuning!\n"
 "Are you sure?"
 msgstr ""
-"Bus perskaičiuotos visos padėties nustatymo įrenginio padėtys ir gali būti "
-"pašalintos anksčiau įsimintos padėtys, įskaitant tikslaus derinimo "
-"reikšmes!\n"
+"Bus perskaičiuotos visos rotoriaus pozicijos ir gali būti pašalintos "
+"anksčiau įsimintos padėtys, įskaitant tikslaus derinimo reikšmes!\n"
 "Ar jūs įsitikinę?"
 
 msgid "Three"
@@ -7819,6 +7890,9 @@ msgstr "Du"
 
 msgid "Type"
 msgstr "Tipas"
+
+msgid "Type of LNB/device"
+msgstr "LNB/įrenginio tipas"
 
 msgid "Type of scan"
 msgstr "Paieškos būdas"
@@ -8093,7 +8167,7 @@ msgid "Video enhancement settings"
 msgstr "Vaizdo gerinimo nuostatos"
 
 msgid "Video enhancement setup"
-msgstr "Vaizdo gerinimo nustatymai"
+msgstr "Vaizdo gerinimo sąranka"
 
 msgid "Video output"
 msgstr "Vaizdo išvestis"
@@ -8306,16 +8380,16 @@ msgstr ""
 "ignoruojamas išsijungimo laikmatis, kai imtuvas randasi budėjimo būsenoje"
 
 msgid ""
-"When enabled you can specify a timeframe were the inactivity sleeptimer is "
+"When enabled you can specify a timeframe when the inactivity sleeptimer is "
 "ignored. Not the detection is disabled during this timeframe but the "
 "inactivity timeout is disabled"
 msgstr ""
 "Kai čia įjungta, galite nurodyti laiko intervalą, kurio metu, nesant jokio "
 "aktyvumo, bus ignoruojamas miego laikmatis. Šiuo laikotarpiu uždraustas ne "
-"aptikimas, bet neveiklumo laikotarpis"
+"aptikimas, bet neveiklumo laikotarpis."
 
 msgid ""
-"When enabled you can specify an extra timeframe were the inactivity "
+"When enabled you can specify an extra timeframe when the inactivity "
 "sleeptimer is ignored. Not the detection is disabled during this timeframe "
 "but the inactivity timeout is disabled"
 msgstr ""
@@ -8345,22 +8419,6 @@ msgid ""
 msgstr ""
 "Kai turinys yra kraštinių santykis 4:3, pasirinkti, ar didinti mastelį/"
 "ištempti vaizdą."
-
-msgid ""
-"When you do a factory reset, you will lose ALL your configuration data\n"
-"(including bouquets, services, satellite data ...)\n"
-"After completion of factory reset, your receiver will restart "
-"automatically!\n"
-"\n"
-"Really do a factory reset?"
-msgstr ""
-"Jeigu jūs atkursite gamyklinius nustatymus, jūs prarasite VISUS savo "
-"konfigūracijos duomenis\n"
-"(įskaitant paketus, kanalus, palydovinius duomenis...)\n"
-"Po to, kai bus atkurti gamykliniai nustatymai imtuvas pasileis iš naujo "
-"automatiškai!\n"
-"\n"
-"Tikrai norite atkurti?"
 
 msgid "Where to save temporary timeshift recordings?"
 msgstr "Kur saugoti laikinus laiko poslinkio įrašus?"
@@ -8472,7 +8530,7 @@ msgid "Yesterday"
 msgstr "Vakar"
 
 msgid ""
-"You PIN code is 0000. This is the default PIN code and it disable parental "
+"You PIN code is 0000. This is the default PIN code and it disables parental "
 "control!\n"
 msgstr ""
 "Jūsų PIN kodas yra 0000. Tai yra numatytasis PIN kodas ir jis išjungia tėvų "
@@ -8547,7 +8605,7 @@ msgstr ""
 msgid ""
 "You did not see all eight arrow heads. This means your TV has overscan "
 "enabled and presents you with a zoomed-in picture, causing you to loose part "
-"of a full HD screen. In addition this you may also miss parts of the user "
+"of a full HD screen. In addition to this you may also miss parts of the user "
 "interface, for example volume bars and more.\n"
 "\n"
 "You can now try to resize and change the position of the user interface "
@@ -8558,7 +8616,7 @@ msgid ""
 msgstr ""
 "Jei Jūs nematote aštuonių rodyklių. Tai reiškia, kad jūsų TV rodomos vaizdo "
 "kraštinės įjungtos su padidintu-paveikslėliu, ko pasekoje prarasite dalį "
-"Pilnai HD ekrano. Be to, taip pat galite praleisti dalį vartotojo sąsajos, "
+"pilnai HD ekrano. Be to, taip pat galite praleisti dalį vartotojo sąsajos, "
 "pavyzdžiui garso barų ir daugiau.\n"
 "\n"
 "Dabar galite pakeisti dydį ir keisti vartotojo sąsajos vietą tol, kol "
@@ -8663,7 +8721,7 @@ msgid "Zap back to previously tuned service?"
 msgstr "Perjungti į ankstesnį suderintą kanalą?"
 
 msgid "Zap back to service before positioner setup?"
-msgstr "Perjungti atgal į kanalą po padėties nustatymo įrenginio nustatymo?"
+msgstr "Įjungti prieš pozicionieriaus konfigūravimą naudotą kanalą?"
 
 msgid "Zap bouquets blindly on zap buttons"
 msgstr "Perjunginėti paketus aklai, perjungimo mygtukais"
@@ -8806,7 +8864,7 @@ msgstr "alternatyva"
 msgid "always"
 msgstr "visada"
 
-msgid "and never ask again this session again"
+msgid "and never ask in this session again"
 msgstr "ir daugiau šioje sesijoje neklausti"
 
 msgid "and never ask this again"
@@ -9057,13 +9115,13 @@ msgid "execute cuts (requires MovieCut plugin)"
 msgstr "vykdyti iškirpimus (reikia MovieCut priedo)"
 
 msgid "exit DVD player or return to file browser"
-msgstr "išjungti DVD grotuvą arba grįžti į failų naršyklę"
+msgstr "užverti DVD grotuvą arba grįžti į failų naršyklę"
 
 msgid "exit network adapter configuration"
 msgstr "užverti tinklo adapterio konfigūravimą"
 
 msgid "exit networkadapter setup menu"
-msgstr "užverti tinklo adapterio nuostatų meniu"
+msgstr "užverti tinklo adapterio sąrankos meniu"
 
 msgid "experimental film/video"
 msgstr "eksperimentinis filmas/video"
@@ -9297,7 +9355,7 @@ msgid "never"
 msgstr "niekada"
 
 msgid "new media"
-msgstr "nauja medijos laikmena"
+msgstr "nauja media laikmena"
 
 msgid "news magazine"
 msgstr "naujienų žurnalas"
@@ -9582,7 +9640,7 @@ msgid "show event details"
 msgstr "rodyti įvykio detales"
 
 msgid "show mediaplayer on mainmenu"
-msgstr "mediagrotuvą rodyti pagrindiniame meniu"
+msgstr "media grotuvą rodyti pagrindiniame meniu"
 
 msgid "show softwaremanager in setup menu"
 msgstr "programinės įrangos tvarkyklę rodyti tarp nustatymų meniu"
@@ -9871,296 +9929,11 @@ msgstr "jungti ir įrašyti"
 msgid "zapped"
 msgstr "perjungta"
 
-msgid "[REC]"
-msgstr "[REC]"
-
-msgid "Audio"
-msgstr "Garsas"
-
-msgid "BER"
-msgstr "BER"
-
-msgid "C"
-msgstr "C"
-
-msgid "D"
-msgstr "D"
-
-msgid "Extensions"
-msgstr "Išplėtimai"
-
-msgid "Info bar"
-msgstr "Infojuosta"
-
-msgid "SNR"
-msgstr "SNR"
-
-msgid "Timeshift"
-msgstr "Laiko poslinkis"
-
-msgid "0"
-msgstr "0"
-
-msgid "1"
-msgstr "1"
-
-msgid "2"
-msgstr "2"
-
-msgid "3"
-msgstr "3"
-
-msgid "4"
-msgstr "4"
-
-msgid "5"
-msgstr "5"
-
-msgid "6"
-msgstr "6"
-
-msgid "7"
-msgstr "7"
-
-msgid "8"
-msgstr "8"
-
-msgid "9"
-msgstr "9"
-
-msgid "Channellist menu"
-msgstr "Kanalų sąrašo meniu"
-
-msgid "Command execution..."
-msgstr "Vykdoma komanda..."
-
-msgid "Commit info"
-msgstr "Vykdymo info"
-
-msgid "Continue in background"
-msgstr "Tęsti fone"
-
-msgid "Downloadable plugins"
-msgstr "Galimi parsisiųsti priedai"
-
-msgid "EPG selection"
-msgstr "EPG pasirinkimas"
-
-msgid "Event view"
-msgstr "Įvykių peržiūra"
-
-msgid "Event view menu"
-msgstr "Įvykių peržiūros meniu"
-
-msgid "Harddisk"
-msgstr "Kietas diskas"
-
-msgid "Index"
-msgstr "Indeksas"
-
-msgid "Installing software..."
-msgstr "Įdiegiama programinė įranga..."
-
-msgid "MORE"
-msgstr "DAUGIAU"
-
-msgid "Manual scan"
-msgstr "Rankinė paieška"
-
-msgid "Message..."
-msgstr "Pranešimas..."
-
-msgid "Movielist menu"
-msgstr "Filmų sąrašo meniu"
-
-msgid "Mute"
-msgstr "Be garso"
-
-msgid "NEXT"
-msgstr "KITAS"
-
-msgid "NOW"
-msgstr "DABAR"
-
-msgid "Nameserver setup"
-msgstr "Serverio pavadinimo valdymas"
-
-msgid "Network configuration..."
-msgstr "Tinklo konfigūracija..."
-
-msgid "Network test..."
-msgstr "Tinklo tikrinimas..."
-
-msgid "Now playing"
-msgstr "Dabar rodoma"
-
-msgid "OSD settings"
-msgstr "OSD nustatymai"
-
-msgid "PIN code needed"
-msgstr "Reikalingas PIN kodas"
-
-msgid "Parental control services editor"
-msgstr "Tėvų kontrolės kanalų redaktorius"
-
-msgid "PiP setup"
-msgstr "PiP nuostatos"
-
-msgid "Radio"
-msgstr "Radijas"
-
-msgid "Reception settings"
-msgstr "Priėmimo nustatymai"
-
-msgid "Satfinder"
-msgstr "Palydovų ieškiklis"
-
-msgid "Select HDD"
-msgstr "Pasirinkite HDD"
-
-msgid "Select a bouquet"
-msgstr "Pasirinkite paketą"
-
-msgid "Select a movie"
-msgstr "Pasirinkite filmą"
-
-msgid "Select a skin"
-msgstr "Pasirinkite temą"
-
-msgid "Select a tuner"
-msgstr "Pasirinkite imtuvą"
-
-msgid "Timer edit"
-msgstr "Redaguoti laikmatį"
-
-msgid "Timeshift Live"
-msgstr "Laiko poslinkis gyvai"
-
-msgid "Translation:"
-msgstr "Vertimas:"
-
-msgid "UnhandledKey"
-msgstr "Nepalaikomas mygtukas"
-
-msgid "VideoMode"
-msgstr "Vaizdo režimas"
-
-msgid "Volume"
-msgstr "Garsumas"
-
-msgid "Welcome..."
-msgstr "Sveiki atvykę..."
-
-msgid "config menu"
-msgstr "konfigūracijos meniu"
-
-msgid "REC"
-msgstr "REC"
-
-msgid "Check the internet connection"
-msgstr "Patikrinkite interneto ryšį"
-
-msgid "Check the internet connection again"
-msgstr "Patikrinkite interneto ryšį dar kartą"
-
-msgid "Checking the internet connection"
-msgstr "Tikrinamas interneto ryšis"
-
-msgid "Do you want to install Plugins?"
-msgstr "Ar norite įdiegti priedus?"
-
-msgid "Do you want to install a channel list?"
-msgstr "Ar norite įdiegti kanalų sąrašą?"
-
-msgid "Exit the wizard"
-msgstr "Užverti nustatymų vedlį"
-
-msgid "Please connect your receiver to the internet"
-msgstr "Prašome prisijungti savo imtuvą prie interneto"
-
-msgid "Please set up tuner A"
-msgstr "Sukonfigūruokite A imtuvą"
-
-msgid "Please set up tuner B"
-msgstr "Sukonfigūruokite B imtuvą"
-
-msgid "Please set up tuner C"
-msgstr "Sukonfigūruokite C imtuvą"
-
-msgid "Please set up tuner D"
-msgstr "Sukonfigūruokite D imtuvą"
-
-msgid "Please set up tuner E"
-msgstr "Sukonfigūruokite E imtuvą"
-
-msgid "Please set up tuner F"
-msgstr "Sukonfigūruokite F imtuvą"
-
-msgid "Please set up tuner G"
-msgstr "Sukonfigūruokite G imtuvą"
-
-msgid "Please set up tuner H"
-msgstr "Sukonfigūruokite H imtuvą"
-
-msgid "Please set up tuner I"
-msgstr "Sukonfigūruokite I imtuvą"
-
-msgid "Please set up tuner J"
-msgstr "Sukonfigūruokite J imtuvą"
-
-msgid "Please set up tuner Q"
-msgstr "Sukonfigūruokite Q imtuvą"
-
-msgid "Please set up tuner R"
-msgstr "Prašome nustatyti imtuvą R"
-
-msgid ""
-"Skip internet connection check (disables automatic package installation)"
-msgstr "Netikrinti interneto ryšio (išjungs automatinį paketų diegimą)"
-
-msgid ""
-"Thank you for using the wizard. Your receiver is now ready for use.\n"
-"Press OK to start using your receiver."
-msgstr ""
-"Ačiū, kad naudojatės nustatymų vedliu. Jūsų imtuvas yra paruoštas "
-"naudojimui.\n"
-"Prašome nuspauskite OK, kad pradėti naudotis imtuvu."
-
-msgid ""
-"Use the up/down keys on your remote control to select an option. After that, "
-"press OK."
-msgstr ""
-"Naudokitės mygtukais aukštyn/žemyn valdymo pulte, nustatymų pasirinkimui. Po "
-"to spauskite OK."
-
-msgid "Use the wizard to set up basic features"
-msgstr "Naudoti vedlį pagrindiniams nustatymams"
-
-msgid ""
-"Welcome.\n"
-"\n"
-"This start wizard will guide you through the basic setup of your receiver.\n"
-"Press the OK button on your remote control to move to the next step."
-msgstr ""
-"Sveiki,\n"
-"\n"
-"Šis pradinis vedlys padės nustatyti pagrindinius jūsų imtuvo parametrus.\n"
-"Kad pereiti į sekantį žingsnį, spauskite 'OK'."
-
-msgid "What type of service scan do you want?"
-msgstr "Kokio tipo kanalų nuskaitymo norite?"
-
-msgid "®"
-msgstr "®"
-
-msgid "TUNER:"
-msgstr "IMTUVAS:"
-
-msgid "Rec"
-msgstr "REC"
-
 msgid "Audio / Video"
 msgstr "Garsas / Vaizdas"
+
+msgid "Automatic scan"
+msgstr "Automatinė paieška"
 
 msgid "Expert settings"
 msgstr "Ekspertiniai nustatymai"
@@ -10174,6 +9947,9 @@ msgstr "Failų sistemos tikrinimas"
 msgid "Flash image"
 msgstr "Įdiegtas atvaizdas"
 
+msgid "Harddisk"
+msgstr "Kietas diskas"
+
 msgid "Initialization"
 msgstr "Inicializavimas"
 
@@ -10182,6 +9958,9 @@ msgstr "Įvesties įrenginiai"
 
 msgid "Keyboard"
 msgstr "Klaviatūra"
+
+msgid "Manual scan"
+msgstr "Rankinė paieška"
 
 msgid "Multiboot"
 msgstr "Daugiafunkcinė įkrova"
@@ -10211,22 +9990,7 @@ msgid "Tuner configuration"
 msgstr "Imtuvo konfigūravimas"
 
 msgid "VCR scart"
-msgstr "Vaizdo grotuvas"
-
-msgid "F"
-msgstr "F"
-
-msgid "G"
-msgstr "G"
-
-msgid "H"
-msgstr "H"
-
-msgid "I"
-msgstr "I"
-
-msgid "J"
-msgstr "J"
+msgstr "VCR skartas"
 
 msgid "12V output"
 msgstr "12V išvestis"
@@ -10237,6 +10001,9 @@ msgstr "Aktyvuoti tinklo nustatymus"
 msgid "Activate the configured network settings."
 msgstr "Aktyvuoti sukonfigūruotus tinklo nustatymus."
 
+msgid "Allow quit movieplayer with exit"
+msgstr "Leisti užverti filmų grotuvą su exit"
+
 msgid "Allow subtitle language to equal audio language"
 msgstr "Leisti subtitrų kalbai atitikti garso takelio kalbą"
 
@@ -10245,6 +10012,13 @@ msgstr "Leisti subtitrus turintiems klausos sutrukimų"
 
 msgid "Alpha"
 msgstr "Alfa"
+
+msgid "Also import at reboot/restart enigma2"
+msgstr ""
+"Importuoti kanalus perkraunant arba paleidžiant grafinę aplinką iš naujo"
+
+msgid "Also import when box is leaving standby"
+msgstr "Importuoti kanalus, kai imtuvas išeina iš budėjimo režimo"
 
 msgid "Alternative numbering mode"
 msgstr "Alternatyvus numeravimo būdas"
@@ -10666,14 +10440,15 @@ msgstr ""
 "informaciją apie rodomą kanalą."
 
 msgid ""
+"Configure whether or not a rotor position will be displayed on the infobar"
+msgstr "Nustatykite ar info juostoje rodyti rotoriaus poziciją"
+
+msgid ""
 "Configure whether or not an icon should be shown when your motorized dish is "
 "moving."
 msgstr ""
 "Nustatykite ar sukant motorizuotą anteną, info juostoje turi būti rodoma "
 "piktograma."
-
-msgid "Configure whether or not an rotor position will be displayed on infobar"
-msgstr "Nustatykite, ar info juostoje rodyti rotoriaus padėtį"
 
 msgid ""
 "Configure which access level to use for the configuration menu. Expert level "
@@ -10690,9 +10465,9 @@ msgstr ""
 "vienas imtuvas."
 
 msgid ""
-"Configure which tuner type will be preferred, when the same service is "
+"Configure which tuner type will be preferred when the same service is "
 "available on different types of tuners. Choose 'no priority' to try each "
-"alternative one by one independent from tuner type."
+"alternative one by one regardless of the tuner type."
 msgstr ""
 "Nustatykite, kuris imtuvo tipas bus pasirinktas, kai tas pats kanalas "
 "prieinamas keliais imtuvų tipais. Pasirinkus 'Be prioritetų', bus bandomos "
@@ -10839,6 +10614,9 @@ msgstr "Išorinių subtitrų perjungiami šriftai"
 msgid "Fallback remote receiver URL"
 msgstr "Atsarginio nuotolinio imtuvo internetinis adresas"
 
+msgid "Fallback remote receiver setup"
+msgstr "Nuotolinio imtuvo nustatymas"
+
 msgid "Fan operation"
 msgstr "Ventiliatoriaus veikimas"
 
@@ -10882,6 +10660,29 @@ msgstr "Ignoruoti DVB-S pavadinimų srities potinklį"
 
 msgid "Ignore DVB-T namespace sub network"
 msgstr "Ignoruoti DVB-T pavadinimų srities potinklį"
+
+msgid ""
+"Import channels and/or EPG from remote receiver URL also when the receiver "
+"is getting out of standby"
+msgstr ""
+"Importuoti kanalus ir/arba EPG iš nuotolinio imtuvo URL taip pat, kai "
+"imtuvas išeina iš budėjimo režimo"
+
+msgid ""
+"Import channels and/or EPG from remote receiver URL when receiver is booted"
+msgstr ""
+"Importuoti kanalus ir/arba EPG iš nuotolinio imtuvo URL, kai imtuvas yra "
+"paleistas"
+
+msgid ""
+"Import channels and/or EPG from remote receiver URL when receiver or enigma2 "
+"is restarted"
+msgstr ""
+"Importuoti kanalus ir/arba EPG iš nuotolinio imtuvo URL, kai imtuvas arba "
+"enigma2 yra paleidžiami iš naujo"
+
+msgid "Import from remote receiver URL"
+msgstr "Importuoti epg iš nuotolinio imtuvo URL"
 
 msgid "Include AIT in http streams"
 msgstr "Įtraukti AIT į http srautus"
@@ -10961,6 +10762,9 @@ msgstr "Kanalų skaičius kanalų pasirinkimo sąraše"
 
 msgid "Number of repeating text on display."
 msgstr "Teksto pasikartojimų ekrane skaičius."
+
+msgid "OSD settings"
+msgstr "OSD nustatymai"
 
 msgid "Offline decode delay (ms)"
 msgstr "Dekodavimo delsa neprisijungus (ms)"
@@ -11132,6 +10936,26 @@ msgstr "Prasidedant įrašymui, pranešti žinute"
 msgid "Show movie lengths in movielist"
 msgstr "Filmų sąraše rodyti filmo trukmę"
 
+msgid ""
+"Show notification when import channels and/or EPG from remote receiver URL "
+"did not complete"
+msgstr ""
+"Rodyti pranešimą, kai kanalų ir/arba EPG importas iš nuotolinio imtuvo yra "
+"nebaigtas"
+
+msgid ""
+"Show notification when import channels and/or EPG from remote receiver URL "
+"is completed"
+msgstr ""
+"Rodyti pranešimą, kai kanalų ir/arba EPG importas iš nuotolinio imtuvo yra "
+"baigtas"
+
+msgid "Show notification when import channels was not successful"
+msgstr "Rodyti pranešimą, kai kanalų importas nepavyko"
+
+msgid "Show notification when import channels was successful"
+msgstr "Rodyti pranešimą, kai kanalų importas pavyko"
+
 msgid "Show picons in channel selection list"
 msgstr "Kanalų sąrašo lange rodyti piktogramas"
 
@@ -11139,10 +10963,10 @@ msgid "Show picons in display"
 msgstr "Ekrane rodyti piktogramas"
 
 msgid "Show positioner movement"
-msgstr "Rodyti padėties nustatymo įrenginio judėjimą"
+msgstr "Rodyti pozicionieriaus judėjimą"
 
 msgid "Show positioner position"
-msgstr "Rodyti padėties nustatymo įrenginio padėtį"
+msgstr "Rodyti pozicionieriaus poziciją"
 
 msgid "Show record indicator"
 msgstr "Rodyti įrašymo indikatorių"
@@ -11231,9 +11055,6 @@ msgstr "Teleteksto subtitrų spalva"
 msgid "Test mode"
 msgstr "Bandymo būdas"
 
-msgid "This option allows you show all symbols on display."
-msgstr "Ši pasirinktis leidžia jums rodyti visus simbolius ekrane."
-
 msgid "This option allows you to add the softcam setup in the extensions menu."
 msgstr "Ši parinktis leidžia pridėti emuliatorių sąranką į išplėstinį meniu."
 
@@ -11246,6 +11067,9 @@ msgstr ""
 
 msgid "This option allows you to power off the display."
 msgstr "Ši parinktis leidžia jums išsijungti ekraną."
+
+msgid "This option allows you to show all symbols on the display."
+msgstr "Ši parinktis leidžia jums rodyti visus simbolius ekrane."
 
 msgid "This option allows you to show menu number quick links."
 msgstr "Ši parinktis leidžia jums parodyti greitų nuorodų meniu numerį."
@@ -11318,7 +11142,7 @@ msgstr ""
 "saugoti savo vartotojo paketus, o įdiegti nustatymai bus atnaujinti"
 
 msgid "When enabled the PiP can be closed by the exit button."
-msgstr "Kai čia įjungta, PiP gali būti išjungtas su exit mygtuku."
+msgstr "Kai įjungta, PiP gali būti užvertas su exit mygtuku."
 
 msgid ""
 "When enabled the arrow buttons around the OK button will follow the "
@@ -11509,17 +11333,17 @@ msgstr ""
 "nereikės to daryti. Numatytasis: 'Taip'."
 
 msgid "When enabled, it is possible to leave the movieplayer with exit."
-msgstr "Kai čia įjungta, iš filmų grotuvo galima išeiti mygtuku 'EXIT'."
+msgstr "Kai čia įjungta, iš filmų grotuvo galima išeiti mygtuku exit."
 
 msgid ""
 "When enabled, measure power consumption to detect when the rotor stops "
 "turning (when supported by the tuner)."
 msgstr ""
 "Kai čia įjungta, bus matuojama variklio suvartojama galia, kad nustatyti, "
-"kada padėties nustatymo įrenginys nustojo suktis (jei imtuvas tai palaiko)."
+"kada rotorius nustojo suktis (jei imtuvas tai palaiko)."
 
-msgid "When enabled, number markers will be hiden."
-msgstr "Kai čia įjungta, bus paslėpti numerių žymekliai."
+msgid "When enabled, number markers will be hidden."
+msgstr "Kai įjungta, numerių žymekliai bus paslėpti."
 
 msgid "When enabled, reformat subtitles to match the width of the screen."
 msgstr "Kai čia įjungta, subtitrai bus performuoti, kad atitiktų ekrano plotį."
@@ -11656,38 +11480,299 @@ msgstr ""
 "konfigūruokite, kokia rezoliucija rodomos nuotraukos nuotraukų naršyklėje ir "
 "grotuve"
 
+msgid "0"
+msgstr "0"
+
+msgid "1"
+msgstr "1"
+
+msgid "2"
+msgstr "2"
+
+msgid "3"
+msgstr "3"
+
+msgid "4"
+msgstr "4"
+
+msgid "5"
+msgstr "5"
+
+msgid "6"
+msgstr "6"
+
+msgid "7"
+msgstr "7"
+
+msgid "8"
+msgstr "8"
+
+msgid "9"
+msgstr "9"
+
+msgid "Audio"
+msgstr "Garsas"
+
+msgid "Channellist menu"
+msgstr "Kanalų sąrašo meniu"
+
+msgid "Command execution..."
+msgstr "Vykdoma komanda..."
+
+msgid "Commit info"
+msgstr "Vykdymo info"
+
+msgid "Continue in background"
+msgstr "Tęsti fone"
+
+msgid "Downloadable plugins"
+msgstr "Galimi parsisiųsti priedai"
+
+msgid "EPG selection"
+msgstr "EPG pasirinkimas"
+
+msgid "Event view"
+msgstr "Įvykių peržiūra"
+
+msgid "Event view menu"
+msgstr "Įvykių peržiūros meniu"
+
+msgid "Index"
+msgstr "Indeksas"
+
+msgid "Installing software..."
+msgstr "Įdiegiama programinė įranga..."
+
+msgid "MORE"
+msgstr "DAUGIAU"
+
+msgid "Message..."
+msgstr "Pranešimas..."
+
+msgid "Movielist menu"
+msgstr "Filmų sąrašo meniu"
+
+msgid "Mute"
+msgstr "Be garso"
+
+msgid "NEXT"
+msgstr "KITAS"
+
+msgid "NOW"
+msgstr "DABAR"
+
+msgid "Nameserver setup"
+msgstr "Serverio pavadinimo valdymas"
+
+msgid "Network configuration..."
+msgstr "Tinklo konfigūracija..."
+
+msgid "Network test..."
+msgstr "Tinklo tikrinimas..."
+
+msgid "Now playing"
+msgstr "Dabar rodoma"
+
+msgid "PIN code needed"
+msgstr "Reikalingas PIN kodas"
+
+msgid "Parental control services editor"
+msgstr "Tėvų kontrolės kanalų redaktorius"
+
+msgid "PiP setup"
+msgstr "PiP nuostatos"
+
+msgid "Radio"
+msgstr "Radijas"
+
+msgid "Reception settings"
+msgstr "Priėmimo nustatymai"
+
+msgid "Select HDD"
+msgstr "Pasirinkite HDD"
+
+msgid "Select a bouquet"
+msgstr "Pasirinkite paketą"
+
+msgid "Select a movie"
+msgstr "Pasirinkite filmą"
+
+msgid "Select a skin"
+msgstr "Pasirinkite temą"
+
+msgid "Select a tuner"
+msgstr "Pasirinkite imtuvą"
+
+msgid "Timer edit"
+msgstr "Redaguoti laikmatį"
+
+msgid "Timeshift Live"
+msgstr "Laiko poslinkis gyvai"
+
+msgid "Translation:"
+msgstr "Vertimas:"
+
+msgid "UnhandledKey"
+msgstr "Nepalaikomas mygtukas"
+
+msgid "VideoMode"
+msgstr "Vaizdo režimas"
+
+msgid "Volume"
+msgstr "Garsumas"
+
+msgid "Welcome..."
+msgstr "Sveiki atvykę..."
+
+msgid "config menu"
+msgstr "konfigūracijos meniu"
+
+msgid "Rec"
+msgstr "REC"
+
+msgid "[REC]"
+msgstr "[REC]"
+
 msgid "EtPortal"
 msgstr "EtPortalas"
 
-msgid "Refresh rate selection."
-msgstr "Atnaujinimo normos pasirinkimas."
+msgid "®"
+msgstr "®"
 
-msgid "Select refresh rate"
-msgstr "Pasirinkite atnaujinimo dažnį"
+msgid "C"
+msgstr "C"
 
-msgid "Select video input with up/down buttons"
-msgstr "Mygtukais aukštyn/žemyn pasirinkite vaizdo įvestį"
+msgid "D"
+msgstr "D"
 
-msgid "Select video mode"
-msgstr "Pasirinkite vaizdo režimą"
+msgid "TUNER:"
+msgstr "IMTUVAS:"
+
+msgid "F"
+msgstr "F"
+
+msgid "G"
+msgstr "G"
+
+msgid "H"
+msgstr "H"
+
+msgid "I"
+msgstr "I"
+
+msgid "J"
+msgstr "J"
+
+msgid "REC"
+msgstr "REC"
+
+msgid "BER"
+msgstr "BER"
+
+msgid "Extensions"
+msgstr "Išplėtimai"
+
+msgid "Info bar"
+msgstr "Infojuosta"
+
+msgid "SNR"
+msgstr "SNR"
+
+msgid "Timeshift"
+msgstr "Laiko poslinkis"
+
+msgid "Check the internet connection"
+msgstr "Patikrinkite interneto ryšį"
+
+msgid "Check the internet connection again"
+msgstr "Patikrinkite interneto ryšį dar kartą"
+
+msgid "Checking the internet connection"
+msgstr "Tikrinamas interneto ryšis"
+
+msgid "Do you want to install Plugins?"
+msgstr "Ar norite įdiegti priedus?"
+
+msgid "Do you want to install a channel list?"
+msgstr "Ar norite įdiegti kanalų sąrašą?"
+
+msgid "Exit the wizard"
+msgstr "Užverti nustatymų vedlį"
+
+msgid "Please connect your receiver to the internet"
+msgstr "Prašome prisijungti savo imtuvą prie interneto"
+
+msgid "Please set up tuner A"
+msgstr "Sukonfigūruokite A imtuvą"
+
+msgid "Please set up tuner B"
+msgstr "Sukonfigūruokite B imtuvą"
+
+msgid "Please set up tuner C"
+msgstr "Sukonfigūruokite C imtuvą"
+
+msgid "Please set up tuner D"
+msgstr "Sukonfigūruokite D imtuvą"
+
+msgid "Please set up tuner E"
+msgstr "Sukonfigūruokite E imtuvą"
+
+msgid "Please set up tuner F"
+msgstr "Sukonfigūruokite F imtuvą"
+
+msgid "Please set up tuner G"
+msgstr "Sukonfigūruokite G imtuvą"
+
+msgid "Please set up tuner H"
+msgstr "Sukonfigūruokite H imtuvą"
+
+msgid "Please set up tuner I"
+msgstr "Sukonfigūruokite I imtuvą"
+
+msgid "Please set up tuner J"
+msgstr "Sukonfigūruokite J imtuvą"
+
+msgid "Please set up tuner Q"
+msgstr "Sukonfigūruokite Q imtuvą"
+
+msgid "Please set up tuner R"
+msgstr "Prašome nustatyti imtuvą R"
 
 msgid ""
-"Video input selection\n"
-"\n"
-"Please press OK if you can see this page on your TV (or select a different "
-"input port).\n"
-"\n"
-"The next input port will be automatically probed in 20 seconds."
-msgstr ""
-"Vaizdo įvesties pasirinkimas\n"
-"\n"
-"Jei matote šį puslapį TV ekrane, spauskite 'OK', arba išrinkite kitą "
-"įvesties prievadą.\n"
-"\n"
-"Po 20 sek. bus automatiškai perjungta į kitą prievadą."
+"Skip internet connection check (disables automatic package installation)"
+msgstr "Netikrinti interneto ryšio (išjungs automatinį paketų diegimą)"
 
-msgid "Video mode selection."
-msgstr "Vaizdo režimo pasirinkimas."
+msgid ""
+"Thank you for using the wizard. Your receiver is now ready for use.\n"
+"Press OK to start using your receiver."
+msgstr ""
+"Ačiū, kad naudojatės nustatymų vedliu. Jūsų imtuvas yra paruoštas "
+"naudojimui.\n"
+"Prašome nuspauskite OK, kad pradėti naudotis imtuvu."
+
+msgid ""
+"Use the up/down keys on your remote control to select an option. After that, "
+"press OK."
+msgstr ""
+"Naudokitės mygtukais aukštyn/žemyn valdymo pulte, nustatymų pasirinkimui. Po "
+"to spauskite OK."
+
+msgid "Use the wizard to set up basic features"
+msgstr "Naudoti vedlį pagrindiniams nustatymams"
+
+msgid ""
+"Welcome.\n"
+"\n"
+"This start wizard will guide you through the basic setup of your receiver.\n"
+"Press the OK button on your remote control to move to the next step."
+msgstr ""
+"Sveiki,\n"
+"\n"
+"Šis pradinis vedlys padės nustatyti pagrindinius jūsų imtuvo parametrus.\n"
+"Kad pereiti į sekantį žingsnį, spauskite 'OK'."
+
+msgid "What type of service scan do you want?"
+msgstr "Kokio tipo kanalų nuskaitymo norite?"
 
 msgid "Configure interface"
 msgstr "Konfigūruokite sąsają"
@@ -11897,11 +11982,49 @@ msgstr "Atsarginė kopija sukurta. Dabar toliau tęsime atnaujinimo procesą."
 msgid "Your receiver is shutting down. Please stand by..."
 msgstr "Imtuvas išjungiamas. Prašome laukti..."
 
+msgid "Refresh rate selection."
+msgstr "Atnaujinimo normos pasirinkimas."
+
+msgid "Select refresh rate"
+msgstr "Pasirinkite atnaujinimo dažnį"
+
+msgid "Select video input with up/down buttons"
+msgstr "Mygtukais aukštyn/žemyn pasirinkite vaizdo įvestį"
+
+msgid "Select video mode"
+msgstr "Pasirinkite vaizdo režimą"
+
+msgid ""
+"Video input selection\n"
+"\n"
+"Please press OK if you can see this page on your TV (or select a different "
+"input port).\n"
+"\n"
+"The next input port will be automatically probed in 20 seconds."
+msgstr ""
+"Vaizdo įvesties pasirinkimas\n"
+"\n"
+"Jei matote šį puslapį TV ekrane, spauskite 'OK', arba išrinkite kitą "
+"įvesties prievadą.\n"
+"\n"
+"Po 20 sek. bus automatiškai perjungta į kitą prievadą."
+
+msgid "Video mode selection."
+msgstr "Vaizdo režimo pasirinkimas."
+
+#~ msgid "Import channels from remote receiver URL"
+#~ msgstr "Importuoti kanalus iš nuotolinio imtuvo URL"
+
+#~ msgid "Import epg from remote receiver URL"
+#~ msgstr "Importuoti epg iš nuotolinio imtuvo URL"
+
 #~ msgid "%d-%b-%Y %-H:%M"
 #~ msgstr "%Y-%b-%d %-H:%M"
 
+#, fuzzy
+#~| msgid "Size: %s"
 #~ msgid ": %s"
-#~ msgstr ": %s"
+#~ msgstr "Dydis : %s"
 
 #~ msgid ""
 #~ "A recording is currently running. Please stop the recording before trying "
@@ -11978,9 +12101,9 @@ msgstr "Imtuvas išjungiamas. Prašome laukti..."
 #~ msgstr "Išjungtas"
 
 #, fuzzy
-#~| msgid "Description"
+#~| msgid "Action"
 #~ msgid "Diction"
-#~ msgstr "Aprašymas"
+#~ msgstr "Veiksmo"
 
 #~ msgid "Disclaimer"
 #~ msgstr "Atsakomybės apribojimas"
@@ -12126,6 +12249,9 @@ msgstr "Imtuvas išjungiamas. Prašome laukti..."
 #~ msgid "Prepare another USB stick for image flashing"
 #~ msgstr "Paruoškite kitą USB laikmeną atvaizdo užkrovimui"
 
+#~ msgid "Press OK to start the scan"
+#~ msgstr "Kad pradėti paiešką, spauskite 'OK'"
+
 #~ msgid "Provider to scan"
 #~ msgstr "Tiekėjas, kurio ieškosite"
 
@@ -12152,6 +12278,9 @@ msgstr "Imtuvas išjungiamas. Prašome laukti..."
 
 #~ msgid "SID"
 #~ msgstr "SID"
+
+#~ msgid "Satfinder"
+#~ msgstr "Palydovų ieškiklis"
 
 #~ msgid "Select an image to be downloaded"
 #~ msgstr "Pasirinkite atvaizdą, kurį norite atsisiųsti"
@@ -12344,6 +12473,22 @@ msgstr "Imtuvas išjungiamas. Prašome laukti..."
 #~ "Kai čia įjungta, http srautai bus dekoduojami serveryje. Kliento imtuvui "
 #~ "nereikės to daryti."
 
+#~ msgid ""
+#~ "When you do a factory reset, you will lose ALL your configuration data\n"
+#~ "(including bouquets, services, satellite data ...)\n"
+#~ "After completion of factory reset, your receiver will restart "
+#~ "automatically!\n"
+#~ "\n"
+#~ "Really do a factory reset?"
+#~ msgstr ""
+#~ "Jeigu jūs atkursite gamyklinius nustatymus, jūs prarasite VISUS savo "
+#~ "konfigūracijos duomenis\n"
+#~ "(įskaitant paketus, kanalus, palydovinius duomenis...)\n"
+#~ "Po to, kai bus atkurti gamykliniai nustatymai imtuvas pasileis iš naujo "
+#~ "automatiškai!\n"
+#~ "\n"
+#~ "Tikrai norite atkurti?"
+
 #~ msgid "Would you like to install a softcam?"
 #~ msgstr "Ar norite įdiegti emuliatorių?"
 
@@ -12388,58 +12533,21 @@ msgstr "Imtuvas išjungiamas. Prašome laukti..."
 #~ msgid "slot%s - %s"
 #~ msgstr "lizdas%s -%s režimas 1"
 
-#~ msgid "Allow quitting movieplayer with exit"
-#~ msgstr "Leisti išjungti filmų grotuvą su 'EXIT'"
-
-#~ msgid "Channel context menu"
-#~ msgstr "Kanalo kontekstinis meniu"
-
-#~ msgid "Copy to..."
-#~ msgstr "Kopijuoti į..."
-
-#~ msgid ""
-#~ "Factory reset will restore your receiver to its default configuration. "
-#~ "All user data including system settings, tuner configuration, bouquets, "
-#~ "services and plugins will be DELETED. Recordings and other files stored "
-#~ "on HDD and USB media will remain intact. After completion, the system "
-#~ "will restart automatically!\n"
-#~ "\n"
-#~ "Do you really want to proceed?"
-#~ msgstr ""
-#~ "Gamyklinių nuostatų atkūrimas atkurs imtuvą į numatytąją konfigūraciją. "
-#~ "Visi naudotojo duomenys, įskaitant sistemos nustatymus, imtuvo "
-#~ "konfigūraciją, paketus, kanalus ir priedus, bus ištrinti. Įrašai ir kiti "
-#~ "failai, saugomi HDD ir USB laikmenose, išliks nepakitę. Pabaigus, sistema "
-#~ "automatiškai pasileis iš naujo!\n"
-#~ "\n"
-#~ "Ar tikrai norite tęsti?"
-
-#~ msgid "File manager"
-#~ msgstr "Failų tvarkytuvas"
-
-#~ msgid "How many minutes do you want add to the recording?"
-#~ msgstr "Kiek minučių norite pridėti prie įrašo?"
-
 #~ msgid "List of files"
 #~ msgstr "Failų sąrašas"
 
-#~ msgid "Move to..."
-#~ msgstr "Perkelti į..."
+#~ msgid "On destination '%s' is %s free space only!"
+#~ msgstr "Paskirties vietoje '%s' yra tik %s laisvos vietos!"
 
-#~ msgid "Nothing to scan! Setup your tuner and try again."
-#~ msgstr "Nėra ko ieškoti! Suderinkite savo imtuvą ir bandykite dar kartą."
+#~ msgid "Select operation:"
+#~ msgstr "Pasirinkite operaciją:"
 
-#~ msgid "Scan completed, %d channel found."
-#~ msgid_plural "Scan completed, %d channels found."
-#~ msgstr[0] "Paieška baigta, rastas %d kanalas"
-#~ msgstr[1] "Paieška baigta, surasti %d kanalai"
-#~ msgstr[2] "Paieška baigta, surasta %d kanalų"
-
-#~ msgid "Scan failed!"
-#~ msgstr "Paieška nepavyko!"
-
-#~ msgid "Scan state"
-#~ msgstr "Paieškos eiga"
+#~ msgid ""
+#~ "Select files with 'OK' and then use 'Menu' or 'Action' for select "
+#~ "operation"
+#~ msgstr ""
+#~ "Pasirinkite failus su 'OK' ir tada operacijos pasirinkimui naudokite "
+#~ "'Meniu' arba 'Veiksmas'"
 
 #~ msgid "Select destination for copy selected files..."
 #~ msgstr "Pasirinkite vietą į kur kopijuoti pasirinktus failus..."
@@ -12447,23 +12555,123 @@ msgstr "Imtuvas išjungiamas. Prašome laukti..."
 #~ msgid "Select destination for move selected files..."
 #~ msgstr "Pasirinkite vietą į kur perkelti pasirinktus failus..."
 
+#~ msgid "Selected: %s"
+#~ msgstr "Pasirinkta: %s"
+
+#~ msgid "Some error occured - Please try later"
+#~ msgstr "Įvyko klaida, bandykite pakartoti vėliau"
+
 #~ msgid ""
-#~ "Select files with 'OK' and then use 'Menu' or 'Green' for select operation"
+#~ "You did not see all eight arrow heads. This means your TV has overscan "
+#~ "enabled and presents you with a zoomed-in picture, causing you to loose "
+#~ "part of a full HD screen. In addition to this you may also miss parts of "
+#~ "the user interface, for example volume bars and more.\n"
+#~ "\n"
+#~ "Unfortunately, your model of receiver is not capable to adjust the "
+#~ "dimensions of the user interface. If not everything is visible, you "
+#~ "should change the installed skin to one that supports the overscan area "
+#~ "of your TV.\n"
+#~ "\n"
+#~ "When you select a different skin, the user interface of your receiver "
+#~ "will restart.\n"
+#~ "\n"
+#~ "Note: you can always start the Overscan wizard later,  via\n"
+#~ "\n"
+#~ "menu->installation->system->Overscan wizard"
 #~ msgstr ""
-#~ "Pasirinkite failus su 'OK' ir tada naudokite 'Menu' arba 'Žalią', kad "
-#~ "pasirinktumėte operaciją"
+#~ "Jei Jūs nematote visų aštuonių rodyklių. Tai reiškia, kad jūsų TV rodomos "
+#~ "vaizdo kraštinės įjungtos su padidintu-paveikslėliu, ir jūs prarasite "
+#~ "dalį Visiško HD ekrano. Be to, taip pat galite netekti dalies vartotojo "
+#~ "sąsajų, pavyzdžiui, apimties barų ir daugiau.\n"
+#~ "\n"
+#~ "Deja, Jūsų imtuvo modelis negali reguliuoti naudotojo sąsajos matmenų. "
+#~ "Jei ne viskas yra matoma, turėtumėte pakeisti įdiegtą temą, kuri palaiko "
+#~ "rodomos vaizdo kraštinės plotą jūsų TV.\n"
+#~ "\n"
+#~ "Kai pasirenkate kitą temą, vartotojo sąsaja ir imtuvas bus paleisti iš "
+#~ "naujo.\n"
+#~ "\n"
+#~ "Pastaba: jūs visada galite paleisti vaizdo kraštinių rodymo vedlį vėliau "
+#~ "per\n"
+#~ "\n"
+#~ "meniu> įdiegimas-> sistema> Vaizdo kraštinių rodymo vedlys"
 
-#~ msgid "Select hard disk"
-#~ msgstr "Pasirinkite kietąjį diską"
+#~ msgid "Add to selection (starts with...)"
+#~ msgstr "Pridėti prie pasirinkimo (prasideda su...)"
 
-#~ msgid "Select operation:"
-#~ msgstr "Pasirinkite operaciją:"
+#~ msgid "Copy to..."
+#~ msgstr "Kopijuoti į..."
 
-#~ msgid "Setup hard disk"
-#~ msgstr "Kietojo disko valdymas"
+#~ msgid "Move to..."
+#~ msgstr "Perkelti į..."
 
-#~ msgid "Type of LNB/device"
-#~ msgstr "LNB/įrenginio tipas"
+#~ msgid "Remove from selection (starts with...)"
+#~ msgstr "Pašalinti iš pasirinkimo (prasideda su...)"
+
+#~ msgid "Tuners in Use:"
+#~ msgstr "Naudojami imtuvai:"
+
+#~ msgid "Current Time:"
+#~ msgstr "Dabartinis laikas:"
+
+#~ msgid "Streaming Info:"
+#~ msgstr "Srauto informacija:"
+
+#~ msgid "DVB drivers: "
+#~ msgstr "DVB tvarkyklės: "
+
+#~ msgid "Please wait (downloading softcam)"
+#~ msgstr "Prašome palaukti (atsisiunčiamas emuliatorius)"
+
+#~ msgid "Softcam type"
+#~ msgstr "Emuliatoriaus tipas"
+
+#, fuzzy
+#~| msgid "slot%s - %s mode 1 (current image)"
+#~ msgid "slot%s - %s (current image)"
+#~ msgstr "lizdas%s -%s režimas 1 (dabartinis atvaizdas)"
+
+#, fuzzy
+#~| msgid "slot%s - %s mode 1"
+#~ msgid "slot%s - empty"
+#~ msgstr "lizdas%s -%s režimas 1"
+
+#~ msgid "Compare case sensitive"
+#~ msgstr "Palyginti didžiąsias ir mažąsias raides"
+
+#~ msgid "Options..."
+#~ msgstr "Parinktys..."
+
+#~ msgid "Use first 'x' filename's chars for virtual keyboard"
+#~ msgstr ""
+#~ "Naudokite pirmąsias 'x' failo pavadinimo simbolius virtualioms "
+#~ "klaviatūroms"
+
+#~ msgid "Enable fallback remote receiver for recordings"
+#~ msgstr "Įjungti atsarginį nuotolinį imtuvą įrašams"
+
+#~ msgid ""
+#~ "Enable remote enigma2 receiver to be tried to tune into services that "
+#~ "cannot be tuned into locally for recordings (e.g. tuner is occupied or "
+#~ "service type is unavailable on the local tuner. Specify complete URL "
+#~ "including http:// and port number (normally ...:8001), e.g. http://"
+#~ "second_box:8001."
+#~ msgstr ""
+#~ "Įjungti nuotolinį enigma2 imtuvą, kad būtų galima įrašyti kanalus, kurie "
+#~ "negali būti priimti lokaliai (pvz., imtuvas užimtas, arba kanalas "
+#~ "nepasiekiamas vietiniam imtuvui. Nurodykite pilną internetinį adresą, "
+#~ "įskaitant http://ir jungties numerį (paprastai ...:8001), pvz., http://"
+#~ "antrasis_aparatas:8001."
+
+#~ msgid ""
+#~ "Select 'Unicable' if this tuner will use a Unicable device. Для остальных "
+#~ "настроек выберите 'FBC - автоматически'."
+#~ msgstr ""
+#~ "Pasirinkite 'Unicable', jei šis imtuvas naudos Unicable įrenginį. Visiems "
+#~ "kitiems nustatymams pasirinkite 'FBC automatinis'."
+
+#~ msgid "How many minutes do you want add to record?"
+#~ msgstr "Kelių minučių trukmės norite skirti šiam įrašui?"
 
 #~ msgid "Ignore DVB namespace sub network"
 #~ msgstr "Ignoruoti DVB pavadinimų potinklį"
@@ -12580,9 +12788,6 @@ msgstr "Imtuvas išjungiamas. Prašome laukti..."
 #  add by Eragon
 #~ msgid "Cutting was aborted for movie \"%s\""
 #~ msgstr "Filmo \"%s\" karpymas buvo nutrauktas"
-
-#~ msgid "DVB drivers: "
-#~ msgstr "DVB tvarkyklės: "
 
 #  add by Eragon
 #~ msgid "Daily automatic backup"
@@ -12746,9 +12951,6 @@ msgstr "Imtuvas išjungiamas. Prašome laukti..."
 #~ msgid "Place the cut movie in a new file ending with \" cut\""
 #~ msgstr "Išsaugoti iškirptą filmą naujame faile, su galūne \"cut\""
 
-#~ msgid "Please wait (downloading softcam)"
-#~ msgstr "Prašome palaukti (atsisiunčiamas emuliatorius)"
-
 #~ msgid "Press OK"
 #~ msgstr "Spauskite 'OK'"
 
@@ -12791,9 +12993,6 @@ msgstr "Imtuvas išjungiamas. Prašome laukti..."
 
 #~ msgid "Softcam setup..."
 #~ msgstr "Emuliatorių sąranka..."
-
-#~ msgid "Softcam type"
-#~ msgstr "Emuliatoriaus tipas"
 
 #~ msgid "Sources"
 #~ msgstr "Šaltiniai"
@@ -12852,41 +13051,6 @@ msgstr "Imtuvas išjungiamas. Prašome laukti..."
 
 #~ msgid "Yes, do an automatic scan now"
 #~ msgstr "Taip, atlikti automatinę paiešką"
-
-#~ msgid ""
-#~ "You did not see all eight arrow heads. This means your TV has overscan "
-#~ "enabled and presents you with a zoomed-in picture, causing you to loose "
-#~ "part of a full HD screen. In addition this you may also miss parts of the "
-#~ "user interface, for example volume bars and more.\n"
-#~ "\n"
-#~ "Unfortunately, your model of receiver is not capable to adjust the "
-#~ "dimensions of the user interface. If not everything is visible, you "
-#~ "should change the installed skin to one that supports the overscan area "
-#~ "of your TV.\n"
-#~ "\n"
-#~ "When you select a different skin, the user interface of your receiver "
-#~ "will restart.\n"
-#~ "\n"
-#~ "Note: you can always start the Overscan wizard later, via\n"
-#~ "\n"
-#~ "menu->installation->system->Overscan wizard"
-#~ msgstr ""
-#~ "Jei Jūs nematote visų aštuonių rodyklių. Tai reiškia, kad jūsų TV rodomos "
-#~ "vaizdo kraštinės įjungtos su padidintu-paveikslėliu, ir jūs prarasite "
-#~ "dalį Visiško HD ekrano. Be to, taip pat galite netekti dalies vartotojo "
-#~ "sąsajų, pavyzdžiui, apimties barų ir daugiau.\n"
-#~ "\n"
-#~ "Deja, Jūsų imtuvo modelis negali reguliuoti naudotojo sąsajos matmenų. "
-#~ "Jei ne viskas yra matoma, turėtumėte pakeisti įdiegtą temą, kuri palaiko "
-#~ "rodomos vaizdo kraštinės plotą jūsų TV.\n"
-#~ "\n"
-#~ "Kai pasirenkate kitą temą, vartotojo sąsaja ir imtuvas bus paleisti iš "
-#~ "naujo.\n"
-#~ "\n"
-#~ "Pastaba: jūs visada galite paleisti vaizdo kraštinių rodymo vedlį vėliau "
-#~ "per\n"
-#~ "\n"
-#~ "meniu> įdiegimas-> sistema> Vaizdo kraštinių rodymo vedlys"
 
 #~ msgid ""
 #~ "You may not use this settings!\n"
@@ -13578,22 +13742,6 @@ msgstr "Imtuvas išjungiamas. Prašome laukti..."
 #~ msgid "EPG Selection"
 #~ msgstr "EPG pasirinkimas"
 
-#~ msgid "Enable fallback remote receiver for recordings"
-#~ msgstr "Įjungti atsarginį nuotolinį imtuvą įrašams"
-
-#~ msgid ""
-#~ "Enable remote enigma2 receiver to be tried to tune into services that "
-#~ "cannot be tuned into locally for recordings (e.g. tuner is occupied or "
-#~ "service type is unavailable on the local tuner. Specify complete URL "
-#~ "including http:// and port number (normally ...:8001), e.g. http://"
-#~ "second_box:8001."
-#~ msgstr ""
-#~ "Įjungti nuotolinį enigma2 imtuvą, kad būtų galima įrašyti kanalus, kurie "
-#~ "negali būti priimti lokaliai (pvz., imtuvas užimtas, arba kanalas "
-#~ "nepasiekiamas vietiniam imtuvui. Nurodykite pilną internetinį adresą, "
-#~ "įskaitant http://ir jungties numerį (paprastai ...:8001), pvz., http://"
-#~ "antrasis_aparatas:8001."
-
 #~ msgid "FP Upgrade"
 #~ msgstr "Priekinio procesoriaus atnaujinimas"
 
@@ -13745,8 +13893,3 @@ msgstr "Imtuvas išjungiamas. Prašome laukti..."
 
 #~ msgid "bouquets"
 #~ msgstr "paketai"
-
-#, fuzzy
-#~| msgid "slot%s - %s mode 1"
-#~ msgid "slot%s - empty"
-#~ msgstr "lizdas%s -%s režimas 1"
