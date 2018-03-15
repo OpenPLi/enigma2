@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-02 00:14+0200\n"
+"POT-Creation-Date: 2018-03-15 21:19+0200\n"
 "PO-Revision-Date: 2014-11-12 00:49+0200\n"
 "Last-Translator: Tapat <taapat@gmail.com>\n"
 "Language-Team: Taapat <taapat@gmail.com>\n"
@@ -604,10 +604,10 @@ msgid ": 0000 - default (disabled)"
 msgstr ": 0000 - pēc noklusējuma (nedarbosies)"
 
 msgid "<Current movielist location>"
-msgstr "<Tekošā filmu saraksta atrašanās vieta>"
+msgstr "<Tekošā media saraksta atrašanās vieta>"
 
 msgid "<Default movie location>"
-msgstr "<Filmu atrašanās vieta pēc noklusējuma>"
+msgstr "<Media atrašanās vieta pēc noklusējuma>"
 
 msgid "<Last timer location>"
 msgstr "<Pēdējā taimera atrašanās vieta>"
@@ -757,9 +757,6 @@ msgstr "Par..."
 msgid "Accesspoint:"
 msgstr "Piekļuves punkts:"
 
-msgid "Action"
-msgstr "Darbība"
-
 msgid "Activate HbbTV (Redbutton)"
 msgstr "Aktivizēt HbbTV"
 
@@ -837,9 +834,6 @@ msgstr "Pievienot buķetei"
 
 msgid "Add to favourites"
 msgstr "Pievienot favorītiem"
-
-msgid "Add to selection (starts with...)"
-msgstr "Pievienot izvēlētajiem (sākas ar...)"
 
 msgid "Add/remove change timer for current event"
 msgstr "Pievienot/noņemt mainīt taimeri tekošajai pārraidei"
@@ -935,10 +929,10 @@ msgid "Allocate unused memory index"
 msgstr "Piešķirt neizmantoto atmiņas indeksu"
 
 msgid "Allow quit movieplayer with exit"
-msgstr "Iziet no filmu atskaņotāja ar exit taustiņu"
+msgstr "Iziet no media atskaņotāja ar exit taustiņu"
 
 msgid "Allow quitting movieplayer with exit"
-msgstr "Iziet no filmu atskaņotāja ar exit taustiņu"
+msgstr "Iziet no media atskaņotāja ar exit taustiņu"
 
 msgid "Allow subtitle language to equal audio language"
 msgstr "Atļaut subtitru valodu vienādu ar audio valodu"
@@ -948,6 +942,15 @@ msgstr "Atļaut subtitrus dzirdes traucējumiem"
 
 msgid "Alpha"
 msgstr "Alfa"
+
+msgid "Also import at reboot/restart enigma2"
+msgstr "Arī importēt pārstartējot enigmu"
+
+msgid "Also import from the extension menu"
+msgstr "Rādīt importēšanu paplašinājumu izvēlnē"
+
+msgid "Also import when box is leaving standby"
+msgstr "Arī importēt pēc gaidstāves"
 
 msgid "Also on standby"
 msgstr "Arī pēc gaidstāves"
@@ -1244,7 +1247,7 @@ msgid "Back"
 msgstr "Atpakaļ"
 
 msgid "Background"
-msgstr "Fons"
+msgstr "Fonā"
 
 msgid "Background color"
 msgstr "Fona krāsa"
@@ -1598,6 +1601,19 @@ msgstr "Kanāla numurs un nosaukums"
 msgid "Channelnumber, picon and servicename"
 msgstr "Kanāla numurs, pikona un kanāla nosaukums"
 
+msgid "Channels and EPG"
+msgstr "Kanālus un EPG"
+
+#, python-format
+msgid "Channels from fallback tuner failed %s"
+msgstr "Kanālu importēšana no attālinātā uztvērēja neizdevās %s"
+
+msgid "Channels from fallback tuner imported"
+msgstr "Kanāli no attālinātā uztvērēja importēti!"
+
+msgid "Channels only"
+msgstr "Tikai kanālus"
+
 msgid "Chap."
 msgstr "Nod."
 
@@ -1749,9 +1765,6 @@ msgstr "Komoru salas"
 
 msgid "Compact flash"
 msgstr "Zibatmiņa"
-
-msgid "Compare case sensitive"
-msgstr "Salīdzināt reģistrjutīgi"
 
 msgid "Complete"
 msgstr "Gatavs"
@@ -2031,7 +2044,7 @@ msgid "Configure the tuner mode."
 msgstr "Uzstāda uztvērēja režīmu."
 
 msgid "Configure the type of status indication icons shown in the movielist."
-msgstr "Uzstāda statusa indikatora ikonas veidu filmu sarakstā."
+msgstr "Uzstāda statusa indikatora ikonas veidu media sarakstā."
 
 msgid "Configure the vertical position of the subtitles, measured from the bottom of the screen."
 msgstr "Uzstāda subtitru vertikālo pozīciju no ekrāna apakšas."
@@ -2161,9 +2174,6 @@ msgstr "Kuka salas"
 
 msgid "Copy"
 msgstr "Kopēt"
-
-msgid "Copy to..."
-msgstr "Kopēt uz..."
 
 msgid "Costa Rica"
 msgstr "Kostarika"
@@ -2393,7 +2403,7 @@ msgid "Default Services Scanner"
 msgstr "Kanālu meklētājs pēc noklusējuma"
 
 msgid "Default movie location"
-msgstr "Filmu atrašanās vieta pēc noklusējuma"
+msgstr "Media failu atrašanās vieta pēc noklusējuma"
 
 msgid "Default settings"
 msgstr "Noklusējuma iestatījumi"
@@ -2822,6 +2832,9 @@ msgstr "EPG valodas izvēle 1"
 msgid "EPG language selection 2"
 msgstr "EPG valodas izvēle 2"
 
+msgid "EPG only"
+msgstr "Tikai EPG"
+
 msgid "EPG selection"
 msgstr "EPG izvēle"
 
@@ -2831,6 +2844,10 @@ msgstr "EPG iestatījumi"
 #, python-format
 msgid "ERROR - failed to scan (%s)!"
 msgstr "KĻŪDA - meklēšana neizdevās (%s)!"
+
+#, python-format
+msgid "ERROR downloading file %s"
+msgstr "Kļūda lejupielādējot failu %s"
 
 msgid "East"
 msgstr "Austrumi"
@@ -3056,6 +3073,10 @@ msgstr "Eritreja"
 msgid "Error"
 msgstr "Kļūda"
 
+#, python-format
+msgid "Error %s"
+msgstr "Kļūda %s"
+
 msgid "Error code"
 msgstr "Kļūdas kods"
 
@@ -3090,6 +3111,15 @@ msgstr "Kļūda, palaižot spraudni"
 
 msgid "Error stop stream!"
 msgstr "Kļūda apturot straumēšanu!"
+
+msgid "Error when writing epg.dat on server"
+msgstr "Kļūda rakstot epg.dat failu uz servera"
+
+msgid "Error while retreiving epg.dat from server"
+msgstr "Kļūda iegūstot epg.dat failu no servera"
+
+msgid "Error while retreiving location of epg.dat on server"
+msgstr "Kļūda iegūstot epg.dat faila atrašanās vietu no servera"
 
 #, python-format
 msgid ""
@@ -3169,10 +3199,10 @@ msgid "Exit mediaplayer"
 msgstr "Iziet no mediju atskaņotāja"
 
 msgid "Exit movie list"
-msgstr "Iziet no filmu saraksta"
+msgstr "Iziet no media saraksta"
 
 msgid "Exit movie player?"
-msgstr "Iziet no filmu atskaņotāja?"
+msgstr "Iziet no media atskaņotāja?"
 
 msgid "Exit nameserver configuration"
 msgstr "Iziet no DNS konfigurācijas"
@@ -3326,6 +3356,9 @@ msgstr "Folklenda (Malvinu) salas"
 msgid "Fallback remote receiver URL"
 msgstr "Rezerves uztvērēja adrese"
 
+msgid "Fallback remote receiver setup"
+msgstr "Attālinātais uztvērējs"
+
 #, python-format
 msgid "Fan %d"
 msgstr "Ventilators %d"
@@ -3370,9 +3403,6 @@ msgstr "Fidži"
 
 msgid "File appears to be busy.\n"
 msgstr "Fails šķiet aizņemts.\n"
-
-msgid "File manager"
-msgstr "Failu pārvaldnieks"
 
 msgid "Filename"
 msgstr "Fails"
@@ -3644,7 +3674,7 @@ msgid "GotoX calibration"
 msgstr "Iet uz X kalibrēšanu"
 
 msgid "GraphMultiEpg Settings"
-msgstr "GraphMultiEpg iestatījumi"
+msgstr "Grafiskā daudzkanālu EPG iestatījumi"
 
 msgid "Graphical Multi EPG"
 msgstr "Grafiskais daudzkanālu EPG"
@@ -3914,7 +3944,7 @@ msgid "Ignore DVB-T namespace sub network"
 msgstr "Ignorēt DVB-T apakštīklu"
 
 msgid "Ignore conflict"
-msgstr "Ignorēt konfliktus"
+msgstr "Ignorēt"
 
 #, python-format
 msgid ""
@@ -3926,6 +3956,21 @@ msgstr ""
 
 msgid "Image: "
 msgstr "Imidžs: "
+
+msgid "Import channels and/or EPG from remote receiver URL also when the receiver is getting out of standby"
+msgstr "Importēt kanālus un/vai EPG no attālinātā uztvērēja arī eslēdzoties no gaidstāves"
+
+msgid "Import channels and/or EPG from remote receiver URL when receiver is booted"
+msgstr "Importēt kanālus un/vai EPG no attālinātā uztvērēja kad uztvērējs tiek islēgts"
+
+msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
+msgstr "Importēt kanālus un/vai EPG no attālinātā uztvērēja kad enigma tiek restartēta"
+
+msgid "Import channels from fallback tuner"
+msgstr "Importēt kanālus no attālinātā uztvērēja"
+
+msgid "Import from remote receiver URL"
+msgstr "Importēt attālinātā uztvērēja"
 
 msgid "In order to record a timer, the TV was switched to the recording service!\n"
 msgstr "Lai uzsāktu ierakstu pēc taimera, TV tika pārslēgts uz ierakstāmo kanālu!\n"
@@ -4353,9 +4398,6 @@ msgstr "Skatīt pieejamos tīklus"
 msgid "List mode"
 msgstr "Saraksta režīms"
 
-msgid "List of files"
-msgstr "Failu saraksts"
-
 msgid "List of storage devices"
 msgstr "Atmiņas ierīču saraksts"
 
@@ -4452,6 +4494,9 @@ msgstr "Galvenā izvēlne"
 
 msgid "Maintain old EPG data for"
 msgstr "Saglabāt vecos EPG datus"
+
+msgid "Make it possible to manually initiate the channels import and/or EPG via the extension menu"
+msgstr "Atļaut kanālu un/vai EPG importu izmatojot paplašinājumu izvēlni"
 
 msgid "Make this mark an 'in' point"
 msgstr "Padarīt šo zīmi par 'ieejas' punktu"
@@ -4664,9 +4709,6 @@ msgstr "Griezt uz austrumiem"
 msgid "Move to position X"
 msgstr "Griezt uz pozīciju X"
 
-msgid "Move to..."
-msgstr "Pārvietot uz..."
-
 msgid "Move west"
 msgstr "Griezt uz rietumiem"
 
@@ -4680,19 +4722,22 @@ msgid "Movement"
 msgstr "Kustība"
 
 msgid "Movie list configuration"
-msgstr "Filmu saraksta konfigurācija"
+msgstr "Media iestatījumi"
 
 msgid "Movie location"
-msgstr "Filmu atrašanās vieta"
+msgstr "Media atrašanās vieta"
+
+msgid "Movie manager"
+msgstr "Media pārlūks"
 
 msgid "Movie selection"
-msgstr "Filmu izvēle"
+msgstr "Media faili"
 
 msgid "Movie/Drama"
 msgstr "Filma/Drāma"
 
 msgid "Movielist menu"
-msgstr "Filmu saraksta izvēlne"
+msgstr "Media saraksta izvēlne"
 
 msgid "Moving"
 msgstr "Griezt"
@@ -4920,6 +4965,9 @@ msgstr "Apraksts nav pieejams."
 
 msgid "No displayable files on this medium found!"
 msgstr "Šinī datu nesējā nav atrasti attēlojami faili!"
+
+msgid "No epg.dat file found server"
+msgstr "Serverī nav atrasts epg.dat fails"
 
 msgid "No event info found, recording indefinitely."
 msgstr "Nav atrasta informācija par pārraidi, ierakstīs nepārtrukti."
@@ -5154,10 +5202,6 @@ msgstr "Omāna"
 msgid "On"
 msgstr "Ieslēgts"
 
-#, python-format
-msgid "On destination '%s' is %s free space only!"
-msgstr "Mērķa direktorijā '%s' ir tikai %s brīvas vietas!"
-
 msgid "On end of movie"
 msgstr "Uz filmas beigām"
 
@@ -5204,13 +5248,10 @@ msgid "Open setup tuner "
 msgstr "Atvērt iestatījumus uztvērējam "
 
 msgid "Open the movie list"
-msgstr "Atvērt filmu sarakstu"
+msgstr "Atvērt media sarakstu"
 
 msgid "Options disable timer"
 msgstr "Iespēja izslēgt taimeri"
-
-msgid "Options..."
-msgstr "Iestatījumi..."
 
 msgid "Orbital position"
 msgstr "Orbitālajā pozīcija"
@@ -5404,7 +5445,7 @@ msgid "Play next"
 msgstr "Atskaņot nākošo"
 
 msgid "Play next (return to movie list)"
-msgstr "Atskaņot nākošo (atgriesties filmu sarakstā)"
+msgstr "Atskaņot nākošo (atgriesties media sarakstā)"
 
 msgid "Play next (return to previous service)"
 msgstr "Atskaņot nākošo (atgriezties iepriekšējā kanālā)"
@@ -5511,7 +5552,7 @@ msgid "Please select tag to filter..."
 msgstr "Lūdzu izvēlieties etiķeti filtrēšanai..."
 
 msgid "Please select the movie path..."
-msgstr "Lūdzu izvēlieties ceļu filmām..."
+msgstr "Lūdzu izvēlieties ceļu uz media..."
 
 msgid ""
 "Please select the network interface that you want to use for your internet connection.\n"
@@ -5870,7 +5911,7 @@ msgid "Protect menu sort"
 msgstr "Aizsargāt izvēlnes kārtošanu"
 
 msgid "Protect movie list"
-msgstr "Aizsargāt filmu sarakstu"
+msgstr "Aizsargāt media sarakstu"
 
 msgid "Protect on epg age"
 msgstr "Aizsargāt pēc epg norādītā vecuma"
@@ -6119,9 +6160,6 @@ msgstr "Dzēst pabeigtos taimerus pēc (dienām)"
 msgid "Remove currently selected title"
 msgstr "Dzēst pašreiz izvēlēto virsrakstu"
 
-msgid "Remove from selection (starts with...)"
-msgstr "Noņemt no iezīmētajiem (sākas ar...)"
-
 msgid "Remove items from trash can after (days)"
 msgstr "Dzēst no miskastes pēc (dienām)"
 
@@ -6280,7 +6318,7 @@ msgid "Retreiving image slots - Please wait..."
 msgstr "Iegūst pieejamos slotus - Lūdzu uzgaidiet..."
 
 msgid "Return to movie list"
-msgstr "Atgriezties uz filmu sarakstu"
+msgstr "Atgriezties uz media sarakstu"
 
 msgid "Return to previous service"
 msgstr "Atgriezties uz iepriekšējo kanālu"
@@ -6724,12 +6762,6 @@ msgstr "Izvēlieties ierakstāmo kanālu"
 msgid "Select copy destination for:"
 msgstr "Izvēlieties kopijas mērķi no:"
 
-msgid "Select destination for copy selected files..."
-msgstr "Izvēlieties mērķi kur kopēt failus..."
-
-msgid "Select destination for move selected files..."
-msgstr "Izvēlieties mērķi kur pārvietot failus..."
-
 msgid "Select destination for:"
 msgstr "Izvēlieties mērķi no:"
 
@@ -6738,9 +6770,6 @@ msgstr "Izvēlieties mapi žurnāla failam"
 
 msgid "Select files for backup."
 msgstr "Izvēlieties failus dublējumkopijai"
-
-msgid "Select files with 'OK' and then use 'Menu' or 'Action' for select operation"
-msgstr "Izvēlieties failus ar 'OK' an tad lietojiet 'Izvēlne' vai Zaļo taustiņu lai izvēlētos darbību."
 
 msgid "Select files/folders to backup"
 msgstr "Izvēlieties failus/mapes dublējumkopijai"
@@ -6774,9 +6803,6 @@ msgstr "Izvēlieties atrašanās vietu"
 
 msgid "Select movie"
 msgstr "Izvēlieties filmu"
-
-msgid "Select operation:"
-msgstr "Izvēlieties darbību:"
 
 msgid "Select path for logfile"
 msgstr "Izvēlieties ceļu žurnāla failam"
@@ -6815,7 +6841,7 @@ msgid "Select the model number of your Unicable device. If the model number is n
 msgstr "Izvēlieties savas Unicable ierīces modeļa numuru. Ja modeļa numurs nav norādīts, iestatiet 'SCR' uz 'lietotāja definēts' un ievadiet ierīces parametrus manuāli, atbilstoši tā specifikācijai."
 
 msgid "Select the movie path"
-msgstr "Izvēlieties ceļu filmām"
+msgstr "Izvēlieties ceļu ierakstiem"
 
 msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr "Izvēlieties satelītu, kas ir pievienots slēdža ieejai A. Ja neesat pārliecināts, izvēlieties 'automātiski', un uztvērējs mēģinās to noteikt pats. Ja nekas nav pievienots šai ieejai, izvēlieties 'nekas nav pievienots'"
@@ -6882,10 +6908,6 @@ msgstr "Izvēlieties jūsu operatoru un nospiediet OK lai sāktu meklēt"
 
 msgid "Select your region. If not available change 'Country' to 'all' and select one of the default alternatives."
 msgstr "Izvēlieties jūsu reģionu. Ja tas nav pieejams, izmainiet valsti uz 'visam', un izvēlieties citu kanālu meklēšanas veidu."
-
-#, python-format
-msgid "Selected: %s"
-msgstr "Izvēlēti: %s"
 
 msgid "Selecting satellites 1 (USALS)"
 msgstr "Izvēlieties pavadoni 1 (USALS)"
@@ -7223,6 +7245,18 @@ msgstr "Rādīt ierakstus"
 msgid "Show multi channel EPG"
 msgstr "Rādīt daudzkanālu EPG"
 
+msgid "Show notification when import channels and/or EPG from remote receiver URL did not complete"
+msgstr "Parādīt brīdinājumu kad kanālu un/vai EPG imports no attālinātā uztvērēja nav izdevies"
+
+msgid "Show notification when import channels and/or EPG from remote receiver URL is completed"
+msgstr "Parādīt brīdinājumu kad kanālu un/vai EPG imports no attālinātā uztvērēja ir izdevies"
+
+msgid "Show notification when import channels was not successful"
+msgstr "Parādīt brīdinājumu kad imports nav izdevies"
+
+msgid "Show notification when import channels was successful"
+msgstr "Parādīt brīdinājumu kad imports ir izdevies"
+
 msgid "Show packages to be upgraded"
 msgstr "Parādīt paketes kuras tiks atjaunotas"
 
@@ -7375,10 +7409,6 @@ msgstr "Vietas platums"
 
 msgid "Site longitude"
 msgstr "Vietas garums"
-
-#, python-format
-msgid "Size: %s"
-msgstr "Izmērs: %s"
 
 msgid "Skin"
 msgstr "Noformējums"
@@ -8643,7 +8673,7 @@ msgid "Tuner not available."
 msgstr "Uztvērējs nav pieejams."
 
 msgid "Tuner setting values"
-msgstr "Iestatītās vērtības"
+msgstr "Iestatītās"
 
 msgid "Tuner slot"
 msgstr "Uztvērēja slots"
@@ -8880,9 +8910,6 @@ msgstr "Lietot ātrās meklēšanas kanālu nosaukumus"
 msgid "Use fastscan channel numbering"
 msgstr "Lietot ātrās meklēšanas kanālu numurus"
 
-msgid "Use first 'x' filename's chars for virtual keyboard"
-msgstr "Lietot pirmos 'x' faila burtus virtuālajā tastatūrā"
-
 msgid "Use frequency or channel"
 msgstr "Lietot frekvenci vai kanālu"
 
@@ -8926,7 +8953,7 @@ msgid "Use this video enhancement settings?"
 msgstr "Lietot šos video uzlabošanas iestatījumus?"
 
 msgid "Use trash can in movielist"
-msgstr "Lietot miskasti filmu sarakstā"
+msgstr "Lietot miskasti media sarakstā"
 
 msgid "Used service scan type"
 msgstr "Lietotais kanālu meklēšanas veids"
@@ -9366,7 +9393,7 @@ msgid "When enabled, http streams are descrambled on the server side. The (remot
 msgstr "Ja ieslēgts, http straumes tiks dekodētas serverī. Klientiem nebūs jādekodē. Pēc noklusējuma ieslēgts."
 
 msgid "When enabled, it is possible to leave the movieplayer with exit."
-msgstr "Ja ieslēgts, ir iespējams iziet no filmu atskaņotāja ar exit taustiņu."
+msgstr "Ja ieslēgts, ir iespējams iziet no media atskaņotāja ar exit taustiņu."
 
 msgid "When enabled, measure power consumption to detect when the rotor stops turning (when supported by the tuner)."
 msgstr "Ja ieslēgts, tiks mērīta patērētā jauda lai noskaidrotu kad pozicionieris apstājies (ja to uztur uztvērējs)."
@@ -9411,7 +9438,7 @@ msgid "When enabled, the infobar will be displayed when skipping forwards/backwa
 msgstr "Ja ieslēgts, pārtinot uz priekšu vai atpakaļ mediju failus tiks parādīta infojosla."
 
 msgid "When enabled, the lenght of each recording will be shown in the movielist (this might cause some additional loading time)."
-msgstr "Ja ieslēgts, filmu sarakstā tiks parādīts katra ieraksta garums (tas prasa zināmu ielādes laiku)."
+msgstr "Ja ieslēgts, media sarakstā tiks parādīts katra ieraksta garums (tas prasa zināmu ielādes laiku)."
 
 msgid "When enabled, the receiver will automatically use the audio track which you selected before."
 msgstr "Ja ieslēgts, uztvērējs automātiski lietos audio celiņu, kuru iepriekš norādījāt."
@@ -9559,7 +9586,7 @@ msgid "Yes, backup my settings!"
 msgstr "Jā, veidot iestatījumu dublējumkopiju!"
 
 msgid "Yes, delete this movie and return to movie list"
-msgstr "Jā, dzēst šo filmu un atgriesties filmu sarakstā"
+msgstr "Jā, dzēst šo filmu un atgriesties media sarakstā"
 
 msgid "Yes, only from deep standby"
 msgstr "Jā, tikai no dziļās gaidstāves"
@@ -9574,7 +9601,7 @@ msgid "Yes, restore the settings now"
 msgstr "Jā, atjaunot iestatījumus tagad"
 
 msgid "Yes, returning to movie list"
-msgstr "Jā, atgriezties uz filmu sarakstu"
+msgstr "Jā, atgriezties uz media sarakstu"
 
 msgid "Yes, with backup"
 msgstr "Jā, ar dublējumkopiju"
@@ -9878,7 +9905,7 @@ msgid "add alternatives"
 msgstr "pievienot alternatīvas"
 
 msgid "add bookmark"
-msgstr "pievienot grāmatzīmi"
+msgstr "grāmatzīme"
 
 msgid "add bouquet"
 msgstr "pievienot buķeti"
@@ -10035,7 +10062,7 @@ msgid "config menu"
 msgstr "konfigurācijas izvēlne"
 
 msgid "configure in which resolution pictures are displayed with the picture viewer and movieplayer"
-msgstr "konfigurē kādā izšķirtspējā attēli tiks attēloti attēlu un filmu atskaņotājos"
+msgstr "konfigurē kādā izšķirtspējā attēli tiks attēloti attēlu un media atskaņotājos"
 
 msgid "confirmed"
 msgstr "apstiprināts"
@@ -10320,7 +10347,7 @@ msgid "languages"
 msgstr "valodas"
 
 msgid "leave movie player..."
-msgstr "iziet no filmu atskaņotāja..."
+msgstr "iziet no media atskaņotāja..."
 
 msgid "left"
 msgstr "kreisā"
@@ -10587,7 +10614,7 @@ msgid "remove before this position"
 msgstr "dzēst pirms šīs pozīcijas"
 
 msgid "remove bookmark"
-msgstr "dzēst grāmatzīmi"
+msgstr "noņemt"
 
 msgid "remove bouquet from parental protection"
 msgstr "dzēst buķeti no vecāku kontroles"
