@@ -297,6 +297,7 @@ bool Cexif::DecodeExifPNG(const char * filename)
 		}
 	}
 	png_destroy_read_struct(&png_ptr, &info_ptr, (png_infopp)NULL);
+	free(row);
 
 	return true;
 }
