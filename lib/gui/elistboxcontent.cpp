@@ -437,7 +437,7 @@ void eListboxPythonConfigContent::paint(gPainter &painter, eWindowStyle &style, 
 						ePyObject pvalue = PyTuple_GET_ITEM(value, 1);
 						const char *value = (pvalue && PyString_Check(pvalue)) ? PyString_AsString(pvalue) : "<not-a-string>";
 						eRect tmp = eRect(textoffset, itemsize);
-						eTextPara *para = new eTextPara(tmp);
+						ePtr<eTextPara> para = new eTextPara(tmp);
 						para->setFont(fnt2);
 						para->renderString(value);
 						valueWidth = para->getBoundBox().width();
