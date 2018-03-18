@@ -14,7 +14,10 @@ class ImportChannels():
 			if "ChannelsImport" in [x.name for x in threading.enumerate()]:
 				self.ImportChannelsDone(False, "ChannelsImport already running")
 			else:
-				self.url = config.usage.remote_fallback.value.rsplit(":", 1)[0]
+				if config.usage.remote_fallback_enabled.value and config.usage.remote_fallback_import.value and config.usage.remote_fallback.value:
+					self.url = config.usage.remote_fallback_import_url.value(":", 1)[0]
+				else:
+					self.url = config.usage.remote_fallback.value.rsplit(":", 1)[0]
 				self.thread = threading.Thread(target=self.threaded_function, name="ChannelsImport")
 				self.thread.start()
 
