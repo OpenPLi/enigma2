@@ -9,6 +9,7 @@ from Components.Label import Label
 from Components.SelectionList import SelectionList, SelectionEntryComponent
 from Components.config import getConfigListEntry, config, ConfigNothing, ConfigYesNo, configfile, NoSave, ConfigSelection
 from Components.Sources.List import List
+from Components.Sources.StaticText import StaticText
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
 from Screens.ServiceStopScreen import ServiceStopScreen
@@ -581,11 +582,11 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 		ServiceStopScreen.__init__(self)
 		ConfigListScreen.__init__(self, self.list)
 
-		self["key_red"] = Label(_("Cancel"))
-		self["key_green"] = Label(_("Save"))
-		self["key_yellow"] = Label()
-		self["key_blue"] = Label()
-		self["description"] = Label("")
+		self["key_red"] = StaticText(_("Cancel"))
+		self["key_green"] = StaticText(_("Save"))
+		self["key_yellow"] = StaticText("")
+		self["key_blue"] = StaticText("")
+		self["description"] = StaticText("")
 		self["actions"] = ActionMap(["SetupActions", "SatlistShortcutAction"],
 		{
 			"ok": self.keyOk,
