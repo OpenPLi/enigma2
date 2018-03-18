@@ -586,7 +586,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 		self["key_green"] = StaticText(_("Save"))
 		self["key_yellow"] = StaticText("")
 		self["key_blue"] = StaticText("")
-		self["description"] = StaticText("")
+		self["description"] = Label("")
 		self["actions"] = ActionMap(["SetupActions", "SatlistShortcutAction"],
 		{
 			"ok": self.keyOk,
