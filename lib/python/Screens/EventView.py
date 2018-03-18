@@ -2,13 +2,13 @@ from Screen import Screen
 from Screens.TimerEdit import TimerSanityConflict
 from Screens.ChoiceBox import ChoiceBox
 from Components.ActionMap import ActionMap
-from Components.Button import Button
 from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
 from Components.PluginComponent import plugins
 from Components.TimerList import TimerList
 from Components.UsageConfig import preferredTimerPath
 from Components.Sources.ServiceEvent import ServiceEvent
+from Components.Sources.StaticText import StaticText
 from Components.Sources.Event import Event
 from enigma import eEPGCache, eTimer, eServiceReference
 from RecordTimer import RecordTimerEntry, parseEvent, AFTEREVENT
@@ -35,7 +35,7 @@ class EventViewBase:
 		self["datetime"] = Label()
 		self["channel"] = Label()
 		self["duration"] = Label()
-		self["key_red"] = Button("")
+		self["key_red"] = StaticText("")
 		if similarEPGCB is not None:
 			self.SimilarBroadcastTimer = eTimer()
 			self.SimilarBroadcastTimer.callback.append(self.getSimilarEvents)
@@ -43,11 +43,11 @@ class EventViewBase:
 			self.SimilarBroadcastTimer = None
 		self.key_green_choice = self.ADD_TIMER
 		if self.isRecording:
-			self["key_green"] = Button("")
+			self["key_green"] = StaticText("")
 		else:
-			self["key_green"] = Button(_("Add timer"))
-		self["key_yellow"] = Button("")
-		self["key_blue"] = Button("")
+			self["key_green"] = StaticText(_("Add timer"))
+		self["key_yellow"] = StaticText("")
+		self["key_blue"] = StaticText("")
 		self["actions"] = ActionMap(["OkCancelActions", "EventViewActions"],
 			{
 				"cancel": self.close,
