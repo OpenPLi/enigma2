@@ -202,6 +202,30 @@ if test x"$with_amlogic" = xyes ; then
 	PKG_CHECK_MODULES(DVBCSA, libdvbcsa)
 fi
 
+AC_ARG_WITH(accelerationthreshold,
+	AC_HELP_STRING([--with-accelerationthreshold=n], [use acceleration threshold of n bytes]),
+	[[with_accelerationthreshold=$withval]],
+	[[with_accelerationthreshold=48000]]
+)
+
+AC_DEFINE_UNQUOTED(GFX_SURFACE_ACCELERATION_THRESHOLD, $with_accelerationthreshold,[Configure threshold for accelerated surfaces (in bytes)])
+
+AC_ARG_WITH(fillaccelerationthreshold,
+	AC_HELP_STRING([--with-fillaccelerationthreshold=n], [use fill acceleration threshold of n bytes]),
+	[[with_fillaccelerationthreshold=$withval]],
+	[[with_fillaccelerationthreshold=80000]]
+)
+
+AC_DEFINE_UNQUOTED(GFX_SURFACE_FILL_ACCELERATION_THRESHOLD, $with_fillaccelerationthreshold,[Configure threshold for accelerated fill operations (in bytes)])
+
+AC_ARG_WITH(blitaccelerationthreshold,
+	AC_HELP_STRING([--with-blitaccelerationthreshold=n], [use blit acceleration threshold of n bytes]),
+	[[with_blitaccelerationthreshold=$withval]],
+	[[with_blitaccelerationthreshold=0]]
+)
+
+AC_DEFINE_UNQUOTED(GFX_SURFACE_BLIT_ACCELERATION_THRESHOLD, $with_blitaccelerationthreshold,[Configure threshold for accelerated blit operations (in bytes)])
+
 AC_CHECK_HEADERS([sys/klog.h])
 AC_CHECK_FUNCS([klogctl])
 
