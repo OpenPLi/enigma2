@@ -318,6 +318,20 @@ class VirtualKeyBoard(Screen):
 				["\xe0\xb8\xa4", "\xe0\xb8\x86", "\xe0\xb8\x8f", "\xe0\xb9\x82", "\xe0\xb8\x8c", "\xe0\xb9\x87", "\xe0\xb9\x8b", "\xe0\xb8\xa9", "\xe0\xb8\xa8", "\xe0\xb8\x8b", "", "\xe0\xb8\xbf"],
 				["", "", "\xe0\xb8\x89", "\xe0\xb8\xae", "\xe0\xb8\xba", "\xe0\xb9\x8c", "", "\xe0\xb8\x92", "\xe0\xb8\xac", "\xe0\xb8\xa6", "", u"CLEAR"],
 				[u"SHIFT", u"SPACE", u"OK", u"LEFT", u"RIGHT"]]
+			self.nextLang = 'uk_UA'
+		elif self.lang == 'uk_UA':
+			self.keys_list = [
+				[u"EXIT", u"1", u"2", u"3", u"4", u"5", u"6", u"7", u"8", u"9", u"0", u"BACKSPACE"],
+				[u"а", u"б", u"в", u"г", u"ґ", u"д", u"е", u"є", u"ж", u"з", u"и", u"+"],
+				[u"і", u"ї", u"й", u"к", u"л", u"м", u"н", u"о", u"п", u"р", u"с", u"#"],
+				[u"<", u"т", u"у", u"ф", u"х", u"ц", u"ч", u"ш", u",", u".", u"-", u"ALL"],
+				[u"SHIFT", u"SPACE", u"@", u"щ", u"ь", u"ю", u"я", u"OK", u"LEFT", u"RIGHT"]]
+			self.shiftkeys_list = [
+				[u"EXIT", u"!", u'"', u"§", u"$", u"%", u"&", u"/", u"(", u")", u"=", u"BACKSPACE"],
+				[u"А", u"Б", u"В", u"Г", u"Ґ", u"Д", u"Е", u"Є", u"Ж", u"З", u"И", u"*"],
+				[u"І", u"Ї", u"Й", u"К", u"Л", u"М", u"Н", u"О", u"П", u"Р", u"С", u"'"],
+				[u">", u"Т", u"У", u"Ф", u"Х", u"Ц", u"Ч", u"Ш", u";", u":", u"_", u"CLEAR"],
+				[u"SHIFT", u"SPACE", u"?", u"\\", u"Щ", u"Ь", u"Ю", u"Я", u"OK", u"LEFT", u"RIGHT"]]
 			self.nextLang = 'en_EN'
 		else:
 			self.keys_list = [
