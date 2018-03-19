@@ -1,11 +1,10 @@
 from Screen import Screen
 from Components.ActionMap import NumberActionMap
-from Components.config import config, ConfigNothing
+from Components.config import config, ConfigNothing, ConfigText, ConfigPassword
 from Components.Label import Label
 from Components.SystemInfo import SystemInfo
 from Components.ConfigList import ConfigListScreen
 from Components.Sources.StaticText import StaticText
-from Components.config import ConfigText, ConfigPassword
 from enigma import eEnv
 
 import xml.etree.cElementTree
