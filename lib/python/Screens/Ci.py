@@ -1,7 +1,6 @@
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Tools.BoundFunction import boundFunction
-from Tools.Directories import fileExists
 from Components.Sources.StaticText import StaticText
 from Components.ActionMap import ActionMap
 from Components.ActionMap import NumberActionMap
@@ -28,8 +27,10 @@ def setdvbCiDelay(configElement):
 
 def setRelevantPidsRouting(configElement):
 	ci_entry = "/proc/stb/tsmux/ci%d_relevant_pids_routing" % configElement.slotid
-	if fileExists(ci_entry):
+	try:
 		open(ci_entry, "w").write(configElement.value)
+	except:
+		pass 
 
 def InitCiConfig():
 	config.ci = ConfigSubList()
