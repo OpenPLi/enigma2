@@ -147,6 +147,18 @@ MAP_SK = (
 	u"tuv8ťúůüTUVŤÚŮÜ",
 	u"wxyz9ýžWXYZÝŽ",
 	)
+MAP_UA = (
+	u"0,?'+\"()@$!=&*%",
+	u" 1.:;/-_#",
+	u"abcабвгґ2ABCАБВГҐ",
+	u"defдеєжз3DEFДЕЄЖЗ",
+	u"ghiиіїй4GHIИІЇЙ",
+	u"jklклмн5JKLКЛМН",
+	u"mnoопрс6MNOОПРС",
+	u"pqrsтуфх7PQRSТУФХ",
+	u"tuvцчшщ8TUVЦЧШЩ",
+	u"wxyzьюя9WXYZЬЮЯ",
+	)
 MAPPINGS = {
 	'cs_CZ': MAP_CZ,
 	'de_DE': MAP_DE,
@@ -158,6 +170,7 @@ MAPPINGS = {
 	'sv_SE': MAP_SE,
 	'fi_FI': MAP_SE,
 	'sk_SK': MAP_SK,
+	'uk_UA': MAP_UA,
 	}
 
 class NumericalTextInput:
