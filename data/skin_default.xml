@@ -1109,6 +1109,9 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y() + (or
 		<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1"/>
 		<widget name="config" position="5,50" size="550,325" scrollbarMode="showOnDemand"/>
 		<widget name="description" position="5,380" size="550,55" font="Regular;18" valign="top"/>
+		<widget source="VKeyIcon" render="Pixmap" pixmap="skin_default/buttons/key_text.png" position="520,10" zPosition="10" size="35,25" transparent="1" alphatest="on">
+			<convert type="ConditionalShowHide"/>
+		</widget>
 	</screen>
 	<screen name="SelectImage" position="center,center" size="550,400">
 		<widget name="list" position="fill" scrollbarMode="showOnDemand"/>
