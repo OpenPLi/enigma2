@@ -20,6 +20,12 @@ def hassoftcaminstalled():
 	from Tools.camcontrol import CamControl
 	return len(CamControl('softcam').getList()) > 1
 
+def has2160pMode():
+	try:
+		return "2160" in open("/proc/stb/video/videomode_50hz").read()
+	except:
+		return False
+
 SystemInfo["HasSoftcamInstalled"] = hassoftcaminstalled()
 SystemInfo["NumVideoDecoders"] = getNumVideoDecoders()
 SystemInfo["PIPAvailable"] = SystemInfo["NumVideoDecoders"] > 1
@@ -81,3 +87,4 @@ SystemInfo["HasOfflineDecoding"] = HardwareInfo().get_device_model() not in ('os
 SystemInfo["canFlashWithOfgwrite"] = not HardwareInfo().get_device_model().startswith("dm")
 SystemInfo["canMultiBoot"] = HardwareInfo().get_device_model() in ('hd51', 'h7', 'vs1500', 'e4hd')
 SystemInfo["canMode12"] = SystemInfo["canMultiBoot"] and '200M' if HardwareInfo().get_device_model() == "h7" else '192M'
+SystemInfo["2160pPIPmodeSize"] = HardwareInfo().get_device_model() in "vusolo4k" and has2160pMode()
