@@ -25,22 +25,34 @@ def setdvbCiDelay(configElement):
 	open(SystemInfo["CommonInterfaceCIDelay"], "w").write(configElement.value)
 	configElement.save()
 
+def setRelevantPidsRouting(configElement):
+	ci_entry = "/proc/stb/tsmux/ci%d_relevant_pids_routing" % configElement.slotid
+	try:
+		open(ci_entry, "w").write(configElement.value)
+	except:
+		pass 
+
 def InitCiConfig():
 	config.ci = ConfigSubList()
 	config.cimisc = ConfigSubsection()
 	for slot in range(MAX_NUM_CI):
 		config.ci.append(ConfigSubsection())
-		config.ci[slot].canDescrambleMultipleServices = ConfigSelection(choices = [("auto", _("Auto")), ("no", _("No")), ("yes", _("Yes"))], default = "auto")
+		config.ci[slot].canDescrambleMultipleServices = ConfigSelection(choices = [("auto", _("auto")), ("no", _("no")), ("yes", _("yes"))], default = "auto")
 		config.ci[slot].use_static_pin = ConfigYesNo(default = True)
 		config.ci[slot].static_pin = ConfigPIN(default = 0)
 		config.ci[slot].show_ci_messages = ConfigYesNo(default = True)
 		if SystemInfo["CommonInterfaceSupportsHighBitrates"]:
-			config.ci[slot].canHandleHighBitrates = ConfigSelection(choices = [("no", _("No")), ("yes", _("Yes"))], default = "yes")
+			config.ci[slot].canHandleHighBitrates = ConfigSelection(choices = [("no", _("no")), ("yes", _("yes"))], default = "yes")
 			config.ci[slot].canHandleHighBitrates.slotid = slot
 			config.ci[slot].canHandleHighBitrates.addNotifier(setCIBitrate)
+		if SystemInfo["CiRelevantPidsRoutingSupport"]:
+			config.ci[slot].relevantPidsRouting = ConfigSelection(choices = [("no", _("no")), ("yes", _("yes"))], default = "no")
+			config.ci[slot].relevantPidsRouting.slotid = slot
+			config.ci[slot].relevantPidsRouting.addNotifier(setRelevantPidsRouting)
 		if SystemInfo["CommonInterfaceCIDelay"]:
-			config.cimisc.dvbCiDelay = ConfigSelection(default = "256", choices = [("16"), ("32"), ("64"), ("128"), ("256")] )
-			config.cimisc.dvbCiDelay.addNotifier(setdvbCiDelay)
+			if not hasattr(config.cimisc, "dvbCiDelay"):
+				config.cimisc.dvbCiDelay = ConfigSelection(default = "256", choices = [("16"), ("32"), ("64"), ("128"), ("256")])
+				config.cimisc.dvbCiDelay.addNotifier(setdvbCiDelay)
 
 class MMIDialog(Screen):
 	def __init__(self, session, slotid, action, handler=eDVBCI_UI.getInstance(), wait_text="", screen_data=None):
@@ -309,6 +321,12 @@ class CiMessageHandler:
 			SystemInfo["CommonInterfaceSupportsHighBitrates"] = True
 		except:
 			SystemInfo["CommonInterfaceSupportsHighBitrates"] = False
+		try:
+			file = open("/proc/stb/tsmux/ci0_relevant_pids_routing", "r")
+			file.close()
+			SystemInfo["CiRelevantPidsRoutingSupport"] = True
+		except:
+			SystemInfo["CiRelevantPidsRoutingSupport"] = False
 
 	def setSession(self, session):
 		self.session = session
@@ -431,6 +449,8 @@ class CiSelection(Screen):
 		self.list.append(getConfigListEntry(_("Multiple service support"), config.ci[slot].canDescrambleMultipleServices))
 		if SystemInfo["CommonInterfaceSupportsHighBitrates"]:
 			self.list.append(getConfigListEntry(_("High bitrate support"), config.ci[slot].canHandleHighBitrates))
+		if SystemInfo["CiRelevantPidsRoutingSupport"]:
+			self.list.append(getConfigListEntry(_("Relevant PIDs routing"), config.ci[slot].relevantPidsRouting))
 		if SystemInfo["CommonInterfaceCIDelay"]:
 			self.list.append(getConfigListEntry(_("DVB CI Delay"), config.cimisc.dvbCiDelay))
 
