@@ -527,7 +527,7 @@ def loadSingleSkinData(desktop, skin, path_prefix):
 			filename = get_attr('filename')
 			if not filename:
 				raise SkinError('[Skin] pixmap needs filename attribute')
-			resolved_png = resolveFilename(SCOPE_ACTIVE_SKIN, filename, path_prefix=path_prefix)
+			resolved_png = resolveFilename(SCOPE_CURRENT_SKIN, filename, path_prefix=path_prefix)
 			if fileExists(resolved_png):
 				switchPixmap[name] = resolved_png
 			else:
