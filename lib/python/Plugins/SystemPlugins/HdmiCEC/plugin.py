@@ -56,26 +56,29 @@ class HdmiCECSetupScreen(Screen, ConfigListScreen):
 	def createSetup(self):
 		self.list = []
 		self.list.append(getConfigListEntry(_("Enabled"), config.hdmicec.enabled))
+		level = config.usage.setup_level.index
 		if config.hdmicec.enabled.value:
-			self.list.append(getConfigListEntry(_("Put TV in standby"), config.hdmicec.control_tv_standby))
-			self.list.append(getConfigListEntry(_("Wakeup TV from standby"), config.hdmicec.control_tv_wakeup))
-			self.list.append(getConfigListEntry(_("Regard deep standby as standby"), config.hdmicec.handle_deepstandby_events))
-			self.list.append(getConfigListEntry(_("Switch TV to correct input"), config.hdmicec.report_active_source))
-			self.list.append(getConfigListEntry(_("Use TV remote control"), config.hdmicec.report_active_menu))
-			self.list.append(getConfigListEntry(_("Handle standby from TV"), config.hdmicec.handle_tv_standby))
-			self.list.append(getConfigListEntry(_("Handle wakeup from TV"), config.hdmicec.handle_tv_wakeup))
-			self.list.append(getConfigListEntry(_("Wakeup signal from TV"), config.hdmicec.tv_wakeup_detection))
-			self.list.append(getConfigListEntry(_("Forward volume keys"), config.hdmicec.volume_forwarding))
-			self.list.append(getConfigListEntry(_("Put receiver in standby"), config.hdmicec.control_receiver_standby))
-			self.list.append(getConfigListEntry(_("Wakeup receiver from standby"), config.hdmicec.control_receiver_wakeup))
-			self.list.append(getConfigListEntry(_("Minimum send interval"), config.hdmicec.minimum_send_interval))
-			self.list.append(getConfigListEntry(_("Repeat leave standby messages"), config.hdmicec.repeat_wakeup_timer))
-			self.list.append(getConfigListEntry(_("Send 'sourceactive' before zap timers"), config.hdmicec.sourceactive_zaptimers))
-			self.list.append(getConfigListEntry(_("Detect next boxes before standby"), config.hdmicec.next_boxes_detect))
-			self.list.append(getConfigListEntry(_("Debug to file"), config.hdmicec.debug))
-			self.logpath_entry = getConfigListEntry(_("Select path for logfile"), config.hdmicec.log_path)
-			if config.hdmicec.debug.value != "0":
-				self.list.append(self.logpath_entry)
+			if level >= 1:
+				self.list.append(getConfigListEntry(_("Put TV in standby"), config.hdmicec.control_tv_standby))
+				self.list.append(getConfigListEntry(_("Wakeup TV from standby"), config.hdmicec.control_tv_wakeup))
+				self.list.append(getConfigListEntry(_("Regard deep standby as standby"), config.hdmicec.handle_deepstandby_events))
+				self.list.append(getConfigListEntry(_("Switch TV to correct input"), config.hdmicec.report_active_source))
+				self.list.append(getConfigListEntry(_("Use TV remote control"), config.hdmicec.report_active_menu))
+				self.list.append(getConfigListEntry(_("Handle standby from TV"), config.hdmicec.handle_tv_standby))
+				self.list.append(getConfigListEntry(_("Handle wakeup from TV"), config.hdmicec.handle_tv_wakeup))
+				self.list.append(getConfigListEntry(_("Wakeup signal from TV"), config.hdmicec.tv_wakeup_detection))
+				self.list.append(getConfigListEntry(_("Forward volume keys"), config.hdmicec.volume_forwarding))
+				self.list.append(getConfigListEntry(_("Put receiver in standby"), config.hdmicec.control_receiver_standby))
+				self.list.append(getConfigListEntry(_("Wakeup receiver from standby"), config.hdmicec.control_receiver_wakeup))
+				self.list.append(getConfigListEntry(_("Minimum send interval"), config.hdmicec.minimum_send_interval))
+				self.list.append(getConfigListEntry(_("Repeat leave standby messages"), config.hdmicec.repeat_wakeup_timer))
+				self.list.append(getConfigListEntry(_("Send 'sourceactive' before zap timers"), config.hdmicec.sourceactive_zaptimers))
+				self.list.append(getConfigListEntry(_("Detect next boxes before standby"), config.hdmicec.next_boxes_detect))
+				self.list.append(getConfigListEntry(_("Debug to file"), config.hdmicec.debug))
+				self.logpath_entry = getConfigListEntry(_("Select path for logfile"), config.hdmicec.log_path)
+			if level >= 2:
+				if config.hdmicec.debug.value != "0":
+					self.list.append(self.logpath_entry)
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
@@ -141,7 +144,7 @@ def main(session, **kwargs):
 
 def startSetup(menuid):
 	# only show in the menu when set to intermediate or higher
-	if menuid == "video" and config.usage.setup_level.index >= 1:
+	if menuid == "video":
 		return [(_("HDMI-CEC setup"), main, "hdmi_cec_setup", 0)]
 	return []
 
