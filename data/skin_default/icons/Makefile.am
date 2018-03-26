@@ -54,6 +54,8 @@ dist_install_DATA = \
 	lock.png \
 	lockBouquet.png \
 	loop.png \
+	menu_off.png \
+	menu_on.png \
 	marker.png \
 	mp_buttons.png \
 	movie_play.png \
