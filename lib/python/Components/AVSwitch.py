@@ -96,6 +96,12 @@ def InitAVSwitch():
 	# TRANSLATORS: (aspect ratio policy: scale as close to fullscreen as possible)
 	"scale": _("Just scale")}
 	try:
+		if "full" in open("/proc/stb/video/policy2_choices").read():
+			# TRANSLATORS: (aspect ratio policy: display as fullscreen, even if the content aspect ratio does not match the screen ratio)
+			policy2_choices.update({"full": _("Full screen")})
+	except:
+		pass
+	try:
 		if "auto" in open("/proc/stb/video/policy2_choices").read():
 			# TRANSLATORS: (aspect ratio policy: automatically select the best aspect ratio mode)
 			policy2_choices.update({"auto": _("Auto")})
@@ -111,6 +117,12 @@ def InitAVSwitch():
 	"nonlinear": _("Nonlinear"),
 	# TRANSLATORS: (aspect ratio policy: scale as close to fullscreen as possible)
 	"scale": _("Just scale")}
+	try:
+		if "full" in open("/proc/stb/video/policy_choices").read():
+			# TRANSLATORS: (aspect ratio policy: display as fullscreen, even if the content aspect ratio does not match the screen ratio)
+			policy_choices.update({"full": _("Full screen")})
+	except:
+		pass
 	try:
 		if "auto" in open("/proc/stb/video/policy_choices").read():
 			# TRANSLATORS: (aspect ratio policy: automatically select the best aspect ratio mode)
