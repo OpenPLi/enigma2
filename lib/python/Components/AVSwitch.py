@@ -97,7 +97,7 @@ def InitAVSwitch():
 	"scale": _("Just scale")}
 	try:
 		if "auto" in open("/proc/stb/video/policy2_choices").read():
-			# TRANSLATORS: (aspect ratio policy: always try to display as fullscreen, when there is no content (black bars) on left/right, even if this breaks the aspect.
+			# TRANSLATORS: (aspect ratio policy: automatically select the best aspect ratio mode)
 			policy2_choices.update({"auto": _("Auto")})
 	except:
 		pass
@@ -113,7 +113,7 @@ def InitAVSwitch():
 	"scale": _("Just scale")}
 	try:
 		if "auto" in open("/proc/stb/video/policy_choices").read():
-			# TRANSLATORS: (aspect ratio policy: always try to display as fullscreen, when there is no content (black bars) on left/right, even if this breaks the aspect.
+			# TRANSLATORS: (aspect ratio policy: automatically select the best aspect ratio mode)
 			policy_choices.update({"auto": _("Auto")})
 	except:
 		pass
