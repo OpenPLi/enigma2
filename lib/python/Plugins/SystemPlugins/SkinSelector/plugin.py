@@ -130,7 +130,7 @@ def SkinSelMain(session, **kwargs):
 
 def SkinSelSetup(menuid, **kwargs):
 	# only show in the menu when set to intermediate or higher
-	if menuid == "video" and config.usage.setup_level.index >= 1:
+	if menuid == "gui" and config.usage.setup_level.index >= 1:
 		return [(_("Skin"), SkinSelMain, "skin_selector", None)]
 	return []
 
