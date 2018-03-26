@@ -1,5 +1,5 @@
 from Components.config import config, ConfigSelection, ConfigSubDict, ConfigYesNo
-
+from Components.SystemInfo import SystemInfo
 from Tools.CList import CList
 from Tools.HardwareInfo import HardwareInfo
 import os
@@ -71,7 +71,8 @@ class VideoHardware:
 	}
 
 	modes["Scart"] = ["PAL", "NTSC", "Multi"]
-	modes["YPbPr"] = ["720p", "1080i", "576p", "480p", "576i", "480i"]
+	if SystemInfo["HasYPbPr"]:
+		modes["YPbPr"] = ["720p", "1080i", "576p", "480p", "576i", "480i"]
 	modes["DVI"] = ["720p", "1080p", "2160p", "2160p30", "1080i", "576p", "480p", "576i", "480i"]
 	modes["DVI-PC"] = ["PC"]
 
