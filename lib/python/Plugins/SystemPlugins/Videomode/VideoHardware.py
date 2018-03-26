@@ -70,7 +70,10 @@ class VideoHardware:
 		"640x480" : { 60: "640x480" }
 	}
 
-	modes["Scart"] = ["PAL", "NTSC", "Multi"]
+	if SystemInfo["HasScart"]:
+		modes["Scart"] = ["PAL", "NTSC", "Multi"]
+	elif SystemInfo["HasVideoComposite"]:
+		modes["Video Composite"] = ["576i", "PAL", "NTSC", "Multi"]
 	if SystemInfo["HasYPbPr"]:
 		modes["YPbPr"] = ["720p", "1080i", "576p", "480p", "576i", "480i"]
 	modes["DVI"] = ["720p", "1080p", "2160p", "2160p30", "1080i", "576p", "480p", "576i", "480i"]
