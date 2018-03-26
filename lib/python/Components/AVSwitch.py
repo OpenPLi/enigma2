@@ -93,7 +93,7 @@ def InitAVSwitch():
 	"letterbox": _("Letterbox"),
 	# TRANSLATORS: (aspect ratio policy: cropped content on left/right) in doubt, keep english term
 	"panscan": _("Pan&scan"),
-	# TRANSLATORS: (aspect ratio policy: display as fullscreen, even if this breaks the aspect)
+	# TRANSLATORS: (aspect ratio policy: scale as close to fullscreen as possible)
 	"scale": _("Just scale")}
 	try:
 		if "auto" in open("/proc/stb/video/policy2_choices").read():
@@ -109,7 +109,7 @@ def InitAVSwitch():
 	"panscan": _("Pan&scan"),
 	# TRANSLATORS: (aspect ratio policy: display as fullscreen, with stretching the left/right)
 	"nonlinear": _("Nonlinear"),
-	# TRANSLATORS: (aspect ratio policy: display as fullscreen, even if this breaks the aspect)
+	# TRANSLATORS: (aspect ratio policy: scale as close to fullscreen as possible)
 	"scale": _("Just scale")}
 	try:
 		if "auto" in open("/proc/stb/video/policy_choices").read():
