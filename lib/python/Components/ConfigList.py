@@ -193,10 +193,11 @@ class ConfigListScreen:
 					self["VirtualKB"].setEnabled(True)
 					self["VKeyIcon"].boolean = True
 				if "HelpWindow" in self:
-					if self["config"].getCurrent()[1].help_window.instance is not None:
+					helpwindow = self["config"].getCurrent()[1].help_window
+					if helpwindow and helpwindow.instance is not None:
 						helpwindowpos = self["HelpWindow"].getPosition()
 						from enigma import ePoint
-						self["config"].getCurrent()[1].help_window.instance.move(ePoint(helpwindowpos[0],helpwindowpos[1]))
+						helpwindow.instance.move(ePoint(helpwindowpos[0],helpwindowpos[1]))
 			else:
 				if "VKeyIcon" in self:
 					self["VirtualKB"].setEnabled(False)
