@@ -6,7 +6,6 @@
 		<!-- this is just a placeholder, the Videomode plugin implements this submenu -->
 	</setup>
 	<setup key="usage" title="Customize">
-		<item level="0" text="Setup mode" description="Configure which access level to use for the configuration menu. Expert level gives access to all items.">config.usage.setup_level</item>
 		<item level="1" text="Sort order for menu entries" description="This option allows you to hide and sort menu entries. When selecting user you can change order and hide menu items via the blue button">config.usage.menu_sort_mode</item>
 		<item level="1" text="Show menu paths" description="This option allows you to show menu paths.">config.usage.menu_path</item>
 		<item level="0" text="Show menu numbers" description="This option allows you to show menu number quick links.">config.usage.menu_show_numbers</item>
@@ -172,6 +171,9 @@
 		<item level="2" text="Always include ECM in recordings" description="Always include ECM messages in recordings. This overrides the individual timer settings globally. It allows recordings to be always decrypted afterwards (sometimes called offline decoding), if supported by your receiver. Default: off.">config.recording.always_ecm</item>
 		<item level="2" text="Never decrypt while recording" description="Never decrypt the content while recording. This overrides the individual timer settings globally. If enabled, recordings are stored in crypted presentation and must be decrypted afterwards (sometimes called offline decoding). Default: off.">config.recording.never_decrypt</item>
 		<item level="2" text="Offline decode delay (ms)" requires="HasOfflineDecoding" description="Configure the offline decoding delay in milliseconds. The configured delay is observed at each control word parity change.">config.recording.offline_decode_delay</item>
+	</setup>
+	<setup key="accesslevel" title="User Mode">
+		<item level="0" text="Setup mode" description="Configure which access level to use for the configuration menu. Expert level gives access to all items.">config.usage.setup_level</item>
 	</setup>
 	<setup key="harddisk" title="Hard disk setup" >
 		<item level="0" text="Hard disk standby after" description="Configure the hard disk drive to go to standby after the specified idle time.">config.usage.hdd_standby</item>
