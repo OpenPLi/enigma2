@@ -1,6 +1,6 @@
 from Screen import Screen
 from Components.ActionMap import NumberActionMap
-from Components.config import config, ConfigNothing, ConfigText, ConfigPassword
+from Components.config import config, ConfigNothing, ConfigBoolean, ConfigSelection
 from Components.Label import Label
 from Components.SystemInfo import SystemInfo
 from Components.ConfigList import ConfigListScreen
@@ -139,7 +139,7 @@ class Setup(ConfigListScreen, Screen):
 					self.list.append((item_text, item, item_description))
 
 	def changedEntry(self):
-		if not(isinstance(self["config"].getCurrent()[1], ConfigText) or isinstance(self["config"].getCurrent()[1], ConfigPassword)):
+		if isinstance(self["config"].getCurrent()[1], ConfigBoolean) or isinstance(self["config"].getCurrent()[1], ConfigSelection):
 			self.refill()
 			self["config"].setList(self.list)
 
@@ -150,7 +150,7 @@ class Setup(ConfigListScreen, Screen):
 			self["config"].setList(self.list)
 			self["config"].onSelectionChanged.append(self.__onSelectionChanged)
 			self.force_update_list = False
-		if isinstance(self["config"].getCurrent()[1], ConfigText) or isinstance(self["config"].getCurrent()[1], ConfigPassword):
+		if not (isinstance(self["config"].getCurrent()[1], ConfigBoolean) or isinstance(self["config"].getCurrent()[1], ConfigSelection)):
 			self.force_update_list = True
 
 def getSetupTitle(id):
