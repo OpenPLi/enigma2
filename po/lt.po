@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-06 11:14+0100\n"
-"PO-Revision-Date: 2018-03-14 06:37+0200\n"
+"POT-Creation-Date: 2018-03-30 11:26+0200\n"
+"PO-Revision-Date: 2018-03-30 22:52+0300\n"
 "Last-Translator: Audronis Grincevičius <adga45@gmail.com>\n"
 "Language-Team: Adga (C) <adga45@gmail.com>\n"
 "Language: lt_LT\n"
@@ -1118,7 +1118,7 @@ msgstr "Autorius: "
 msgid "Authoring mode"
 msgstr "Kūrimas"
 
-#. TRANSLATORS: (aspect ratio policy: always try to display as fullscreen, when there is no content (black bars) on left/right, even if this breaks the aspect.
+#. TRANSLATORS: (aspect ratio policy: automatically select the best aspect ratio mode)
 msgid "Auto"
 msgstr "Automatinis"
 
@@ -2358,6 +2358,9 @@ msgstr "Ar norite atnaujinti imtuvo įrangą?"
 msgid "Do you want to upgrade the package:\n"
 msgstr "Ar norite atnaujinti paketą:\n"
 
+msgid "Dolby"
+msgstr "Dolby"
+
 msgid "Dominica"
 msgstr "Dominika"
 
@@ -3033,6 +3036,10 @@ msgstr "Nuo:"
 msgid "Frontprocessor version: %s"
 msgstr "Priekinio procesoriaus versija: %s"
 
+#. TRANSLATORS: (aspect ratio policy: display as fullscreen, even if the content aspect ratio does not match the screen ratio)
+msgid "Full screen"
+msgstr "Visas ekranas"
+
 msgid "Full transparency"
 msgstr "Visiškai permatomas"
 
@@ -3243,6 +3250,9 @@ msgstr "HDMI Kolorimetrija"
 msgid "HDMI Colorspace"
 msgstr "HDMI spalvų erdvė"
 
+msgid "HDMI HDR Type"
+msgstr "HDMI HDR tipas"
+
 msgid "HDMI-CEC Source Active"
 msgstr "HDMI-CEC šaltinis aktyvus"
 
@@ -3251,6 +3261,12 @@ msgstr "HDMI-CEC šaltinis neaktyvus"
 
 msgid "HDMI-CEC setup"
 msgstr "HDMI-CEC nustatymai"
+
+msgid "HDR10"
+msgstr "HDR10"
+
+msgid "HLG"
+msgstr "HLG"
 
 msgid "Haiti"
 msgstr "Haitis"
@@ -3456,6 +3472,9 @@ msgstr ""
 
 msgid "Image: "
 msgstr "Atvaizdas: "
+
+msgid "Import channels from fallback tuner"
+msgstr "Importuoti kanalus iš atsarginio imtuvo"
 
 msgid ""
 "In order to record a timer, the TV was switched to the recording service!\n"
@@ -3679,7 +3698,7 @@ msgstr "Peršokti į sekančią pažymėtą poziciją"
 msgid "Jump to previous marked position"
 msgstr "Peršokti į ankstesnę pažymėtą poziciją"
 
-#. TRANSLATORS: (aspect ratio policy: display as fullscreen, even if this breaks the aspect)
+#. TRANSLATORS: (aspect ratio policy: scale as close to fullscreen as possible)
 msgid "Just scale"
 msgstr "Tik pakeisti dydį"
 
@@ -4307,7 +4326,7 @@ msgid "No"
 msgstr "Ne"
 
 msgid "No (supported) DVDROM found!"
-msgstr "Palaikomo DVDROM nerasta!"
+msgstr "Palaikomo DVD ROM nerasta!"
 
 msgid "No Connection"
 msgstr "Nėra prisijungimo"
@@ -4729,7 +4748,7 @@ msgid "Paraguay"
 msgstr "Paragvajus"
 
 msgid "Parent directory"
-msgstr "Pagrindinis katalogas"
+msgstr "Tėvų katalogas"
 
 msgid "Parental control"
 msgstr "Tėvų kontrolė"
@@ -5353,6 +5372,9 @@ msgstr "Regionas"
 msgid "Relative"
 msgstr "Santykinis"
 
+msgid "Relevant PIDs routing"
+msgstr "Aktualus PIDs maršrutizavimas"
+
 msgid "Reload"
 msgstr "Užkrauti iš naujo"
 
@@ -5578,7 +5600,7 @@ msgid "Root"
 msgstr "Šakninis"
 
 msgid "Root directory"
-msgstr "Pagrindinis katalogas"
+msgstr "Šakninis katalogas"
 
 msgid "Rotor step position:"
 msgstr "Rotoriaus žingsnio pozicija:"
@@ -5615,6 +5637,10 @@ msgstr "SCR JESS"
 
 msgid "SCR Unicable"
 msgstr "Kelių kabelių SCR"
+
+#| msgid "SNR"
+msgid "SDR"
+msgstr "SDR"
 
 msgid "SINGLE LAYER DVD"
 msgstr "VIENO SLUOKSNIO DVD"
@@ -5764,9 +5790,9 @@ msgstr "Papildomų SR paieška"
 #, python-format
 msgid "Scan completed, %d channel found."
 msgid_plural "Scan completed, %d channels found."
-msgstr[0] "Paieška baigta, rastas %d kanalas"
-msgstr[1] "Paieška baigta, rasti %d kanalai"
-msgstr[2] "Paieška baigta, rasta %d kanalų"
+msgstr[0] "Paieška baigta, rastas %d kanalas."
+msgstr[1] "Paieška baigta, rasti %d kanalai."
+msgstr[2] "Paieška baigta, rasta %d kanalų."
 
 msgid "Scan failed!"
 msgstr "Paieška nepavyko!"
@@ -5778,7 +5804,7 @@ msgid "Scan options"
 msgstr "Paieškos parinktys"
 
 msgid "Scan state"
-msgstr "Paieškos eiga"
+msgstr "Paieškos būklė"
 
 msgid "Scan wireless networks"
 msgstr "Ieškoti belaidžių tinklų"
@@ -7462,6 +7488,9 @@ msgstr "Ši parinktis leidžia jums konfigūruoti HDR kolorimetriją."
 
 msgid "This option allows you to configure the Colorspace from Auto to RGB"
 msgstr "Ši parinktis leidžia jums konfigūruoti spalvų erdvę iš Auto į RGB"
+
+msgid "This option allows you to configure the HDR type."
+msgstr "Ši parinktis leidžia konfigūruoti HDR tipą."
 
 msgid ""
 "This option allows you to disable or change the virtuell loadspeaker "
@@ -9947,6 +9976,9 @@ msgstr "Failų sistemos tikrinimas"
 msgid "Flash image"
 msgstr "Įdiegtas atvaizdas"
 
+msgid "GUI Settings"
+msgstr "Grafinės aplinkos nustatymai"
+
 msgid "Harddisk"
 msgstr "Kietas diskas"
 
@@ -10001,6 +10033,9 @@ msgstr "Aktyvuoti tinklo nustatymus"
 msgid "Activate the configured network settings."
 msgstr "Aktyvuoti sukonfigūruotus tinklo nustatymus."
 
+msgid "Add seperate receiver URL for import"
+msgstr "Importui pridėkite atskirą imtuvo URL adresą"
+
 msgid "Allow quit movieplayer with exit"
 msgstr "Leisti užverti filmų grotuvą su exit"
 
@@ -10016,6 +10051,9 @@ msgstr "Alfa"
 msgid "Also import at reboot/restart enigma2"
 msgstr ""
 "Importuoti kanalus perkraunant arba paleidžiant grafinę aplinką iš naujo"
+
+msgid "Also import from the extension menu"
+msgstr "Taip pat importuokite iš išplėstinio meniu"
 
 msgid "Also import when box is leaving standby"
 msgstr "Importuoti kanalus, kai imtuvas išeina iš budėjimo režimo"
@@ -10596,6 +10634,13 @@ msgstr ""
 msgid "Enable teletext caching"
 msgstr "Įjungti teleteksto kaupimą talpykloje"
 
+msgid ""
+"Enable to display all true/false, yes/no, on/off and enable/disable set up "
+"options as a graphical switch."
+msgstr ""
+"Įgalinti rodyti visas teisinga/klaidinga, taip/ne, įjungti/išjungti "
+"nustatymo parinktis kaip grafinį jungiklį."
+
 msgid "Enable volume control with arrow buttons"
 msgstr "Įjungti garso reguliavimą rodyklių mygtukais"
 
@@ -10684,6 +10729,9 @@ msgstr ""
 msgid "Import from remote receiver URL"
 msgstr "Importuoti epg iš nuotolinio imtuvo URL"
 
+msgid "Import remote receiver URL"
+msgstr "Importuokite nuotolinio imtuvo URL"
+
 msgid "Include AIT in http streams"
 msgstr "Įtraukti AIT į http srautus"
 
@@ -10731,6 +10779,13 @@ msgstr "Įjungti daugiau vartotojo paketų"
 
 msgid "Maintain old EPG data for"
 msgstr "Išlaikyti senus EPG duomenis"
+
+msgid ""
+"Make it possible to manually initiate the channels import and/or EPG via the "
+"extension menu"
+msgstr ""
+"Padarykite galimybę rankiniu būdu inicijuoti kanalų importavimą ir/arba EPG "
+"per išplėstinį meniu"
 
 msgid "Margin after recording (minutes)"
 msgstr "Intarpas po įrašymo (minutėmis)"
@@ -10866,6 +10921,11 @@ msgstr "Slinkties delsa"
 msgid "Scroll repeats"
 msgstr "Slinkties kartojimai"
 
+msgid ""
+"Select yes when you want to import channels and/or EPG from a different URL"
+msgstr ""
+"Pasirinkite 'Taip', jei norite importuoti kanalus ir (arba) EPG iš kito URL"
+
 msgid "Selects the mode how live tv should be shown on the LCD."
 msgstr "Parenka režimą, kaip 'Live TV' turėtų būti rodomas LCD ekrane."
 
@@ -10884,6 +10944,9 @@ msgstr "Info juostoje rodyti EIT dabar/sekantis"
 
 msgid "Show SNR percentage instead of dB value"
 msgstr "Rodyti SNR procentus vietoj dB reikšmės"
+
+msgid "Show True/False as graphical switch"
+msgstr "Rodyti teisinga/klaidinga kaip grafinį jungiklį"
 
 msgid "Show VCR scart on main menu"
 msgstr "Rodyti VCR SCART pagrindiniame meniu"
@@ -11118,6 +11181,9 @@ msgstr "Naudokite originalią teleteksto poziciją"
 
 msgid "Use trash can in movielist"
 msgstr "Naudoti šiukšlinę filmų sąraše"
+
+msgid "User Mode"
+msgstr "Vartotojo režimas"
 
 msgid ""
 "Usually when the subtitle language is the same as the audio language, the "
@@ -11480,6 +11546,30 @@ msgstr ""
 "konfigūruokite, kokia rezoliucija rodomos nuotraukos nuotraukų naršyklėje ir "
 "grotuve"
 
+msgid "Audio"
+msgstr "Garsas"
+
+msgid "BER"
+msgstr "BER"
+
+msgid "C"
+msgstr "C"
+
+msgid "D"
+msgstr "D"
+
+msgid "Extensions"
+msgstr "Išplėtimai"
+
+msgid "Info bar"
+msgstr "Infojuosta"
+
+msgid "SNR"
+msgstr "SNR"
+
+msgid "Timeshift"
+msgstr "Laiko poslinkis"
+
 msgid "0"
 msgstr "0"
 
@@ -11509,9 +11599,6 @@ msgstr "8"
 
 msgid "9"
 msgstr "9"
-
-msgid "Audio"
-msgstr "Garsas"
 
 msgid "Channellist menu"
 msgstr "Kanalų sąrašo meniu"
@@ -11639,12 +11726,6 @@ msgstr "EtPortalas"
 msgid "®"
 msgstr "®"
 
-msgid "C"
-msgstr "C"
-
-msgid "D"
-msgstr "D"
-
 msgid "TUNER:"
 msgstr "IMTUVAS:"
 
@@ -11665,21 +11746,6 @@ msgstr "J"
 
 msgid "REC"
 msgstr "REC"
-
-msgid "BER"
-msgstr "BER"
-
-msgid "Extensions"
-msgstr "Išplėtimai"
-
-msgid "Info bar"
-msgstr "Infojuosta"
-
-msgid "SNR"
-msgstr "SNR"
-
-msgid "Timeshift"
-msgstr "Laiko poslinkis"
 
 msgid "Check the internet connection"
 msgstr "Patikrinkite interneto ryšį"
@@ -12012,6 +12078,259 @@ msgstr ""
 msgid "Video mode selection."
 msgstr "Vaizdo režimo pasirinkimas."
 
+#~ msgid "Convert ext3 filesystem to ext4"
+#~ msgstr "Konvertuoti ext3 failų sistemą į ext4"
+
+#~ msgid "Convert ext3 to ext4"
+#~ msgstr "Konvertuoti ext3 į ext4"
+
+#~ msgid "Converting ext3 to ext4..."
+#~ msgstr "Konvertuojama ext3 į ext4..."
+
+#~ msgid "Diasbled"
+#~ msgstr "Išjungtas"
+
+#~ msgid ""
+#~ "Do you really want to convert the filesystem?\n"
+#~ "You cannot go back!"
+#~ msgstr ""
+#~ "Ar tikrai norite konvertuoti failų sistemą?\n"
+#~ "Šio veiksmo atstatyti atgal negalėsite!"
+
+#~ msgid "Enable fallback remote receiver for recordings"
+#~ msgstr "Įjungti atsarginį nuotolinį imtuvą įrašams"
+
+#~ msgid ""
+#~ "Enable remote enigma2 receiver to be tried to tune into services that "
+#~ "cannot be tuned into locally for recordings (e.g. tuner is occupied or "
+#~ "service type is unavailable on the local tuner. Specify complete URL "
+#~ "including http:// and port number (normally ...:8001), e.g. http://"
+#~ "second_box:8001."
+#~ msgstr ""
+#~ "Įjungti nuotolinį enigma2 imtuvą, kad būtų galima įrašyti kanalus, kurie "
+#~ "negali būti priimti lokaliai (pvz., imtuvas užimtas, arba kanalas "
+#~ "nepasiekiamas vietiniam imtuvui. Nurodykite pilną internetinį adresą, "
+#~ "įskaitant http://ir jungties numerį (paprastai ...:8001), pvz., http://"
+#~ "antrasis_aparatas:8001."
+
+#~ msgid "Press OK to start the scan"
+#~ msgstr "Kad pradėti paiešką, spauskite 'OK'"
+
+#~ msgid "Satfinder"
+#~ msgstr "Palydovų ieškiklis"
+
+#~ msgid ""
+#~ "Select 'Unicable' if this tuner will use a Unicable device. Для остальных "
+#~ "настроек выберите 'FBC - автоматически'."
+#~ msgstr ""
+#~ "Pasirinkite 'Unicable', jei šis imtuvas naudos Unicable įrenginį. Visiems "
+#~ "kitiems nustatymams pasirinkite 'FBC automatinis'."
+
+#~ msgid "Some error occurred - Please try later"
+#~ msgstr "Įvyko klaida, bandykite pakartoti vėliau"
+
+#~ msgid "You system does not support ext4"
+#~ msgstr "Jūsų sistema nepalaiko ext4"
+
+#~ msgid "List of files"
+#~ msgstr "Failų sąrašas"
+
+#~ msgid "Select files with 'OK' and then use 'Action' for select operation"
+#~ msgstr ""
+#~ "Pasirinkite failus su 'OK' ir tada operacijos pasirinkimui naudokite "
+#~ "'Veiksmas'"
+
+#~ msgid "Copy to..."
+#~ msgstr "Kopijuoti į..."
+
+#~ msgid "Move to..."
+#~ msgstr "Perkelti į..."
+
+#~ msgid "Select operation:"
+#~ msgstr "Pasirinkite operaciją:"
+
+#~ msgid "Select destination for move selected files..."
+#~ msgstr "Pasirinkite vietą į kur perkelti pasirinktus failus..."
+
+#~ msgid "Action"
+#~ msgstr "Veiksmo"
+
+#~ msgid "On destination '%s' is %s free space only!"
+#~ msgstr "Paskirties vietoje '%s' yra tik %s laisvos vietos!"
+
+#~ msgid "Select destination for copy selected files..."
+#~ msgstr "Pasirinkite vietą į kur kopijuoti pasirinktus failus..."
+
+#~ msgid "Selected: %s"
+#~ msgstr "Pasirinkta: %s"
+
+#~ msgid "Size: %s"
+#~ msgstr "Dydis : %s"
+
+#~ msgid ""
+#~ "You did not see all eight arrow heads. This means your TV has overscan "
+#~ "enabled and presents you with a zoomed-in picture, causing you to loose "
+#~ "part of a full HD screen. In addition to this you may also miss parts of "
+#~ "the user interface, for example volume bars and more.\n"
+#~ "\n"
+#~ "Unfortunately, your model of receiver is not capable to adjust the "
+#~ "dimensions of the user interface. If not everything is visible, you "
+#~ "should change the installed skin to one that supports the overscan area "
+#~ "of your TV.\n"
+#~ "\n"
+#~ "When you select a different skin, the user interface of your receiver "
+#~ "will restart.\n"
+#~ "\n"
+#~ "Note: you can always start the Overscan wizard later,  via\n"
+#~ "\n"
+#~ "menu->installation->system->Overscan wizard"
+#~ msgstr ""
+#~ "Jei Jūs nematote visų aštuonių rodyklių. Tai reiškia, kad jūsų TV rodomos "
+#~ "vaizdo kraštinės įjungtos su padidintu-paveikslėliu, ir jūs prarasite "
+#~ "dalį Visiško HD ekrano. Be to, taip pat galite netekti dalies vartotojo "
+#~ "sąsajų, pavyzdžiui, apimties barų ir daugiau.\n"
+#~ "\n"
+#~ "Deja, Jūsų imtuvo modelis negali reguliuoti naudotojo sąsajos matmenų. "
+#~ "Jei ne viskas yra matoma, turėtumėte pakeisti įdiegtą temą, kuri palaiko "
+#~ "rodomos vaizdo kraštinės plotą jūsų TV.\n"
+#~ "\n"
+#~ "Kai pasirenkate kitą temą, vartotojo sąsaja ir imtuvas bus paleisti iš "
+#~ "naujo.\n"
+#~ "\n"
+#~ "Pastaba: jūs visada galite paleisti vaizdo kraštinių rodymo vedlį vėliau "
+#~ "per\n"
+#~ "\n"
+#~ "meniu> įdiegimas-> sistema> Vaizdo kraštinių rodymo vedlys"
+
+#~ msgid "Add to selection (starts with...)"
+#~ msgstr "Pridėti prie pasirinkimo (prasideda su...)"
+
+#~ msgid "Remove from selection (starts with...)"
+#~ msgstr "Pašalinti iš pasirinkimo (prasideda su...)"
+
+#~ msgid "Tuners in Use:"
+#~ msgstr "Naudojami imtuvai:"
+
+#~ msgid "Current Time:"
+#~ msgstr "Dabartinis laikas:"
+
+#~ msgid "Streaming Info:"
+#~ msgstr "Srauto informacija:"
+
+#~ msgid "Blue boost"
+#~ msgstr "Daugiau mėlynos"
+
+#~ msgid "Cannot create image list - please try later"
+#~ msgstr "Negalima sukurti atvaizdo sąrašo - bandykite vėliau"
+
+#~ msgid "DVB drivers: "
+#~ msgstr "DVB tvarkyklės: "
+
+#~ msgid "Disclaimer"
+#~ msgstr "Atsakomybės apribojimas"
+
+#~ msgid "Do you want to do another manual service scan?"
+#~ msgstr "Jūs norite atlikti kitą rankinę kanalų paiešką?"
+
+#~ msgid "Green boost"
+#~ msgstr "Daugiau žalios"
+
+#~ msgid "Install softcam"
+#~ msgstr "Įdiegti emuliatorių"
+
+#~ msgid "Installed: "
+#~ msgstr "Atvaizdo data: "
+
+#~ msgid "Intermediate"
+#~ msgstr "Vidutinis"
+
+#~ msgid "No cable tuner found!"
+#~ msgstr "Kabelinio imtuvo nerasta!"
+
+#~ msgid "Not configured"
+#~ msgstr "Nesukonfigūruotas"
+
+#~ msgid "Nothing connected"
+#~ msgstr "Nieko neprijungta"
+
+#~ msgid "Please set up tuner K"
+#~ msgstr "Sukonfigūruokite K imtuvą"
+
+#~ msgid "Please wait (downloading softcam)"
+#~ msgstr "Prašome palaukti (atsisiunčiamas emuliatorius)"
+
+#~ msgid "Provider to scan"
+#~ msgstr "Tiekėjas, kurio ieškosite"
+
+#~ msgid "Show disclaimer"
+#~ msgstr "Rodyti atsakomybės atsiribojimą"
+
+#~ msgid "Simplified Chinese"
+#~ msgstr "Supaprastinta kinų"
+
+#~ msgid "Skin setup"
+#~ msgstr "Temos sąranka"
+
+#~ msgid "Softcam type"
+#~ msgstr "Emuliatoriaus tipas"
+
+#~ msgid "Terrestrial provider"
+#~ msgstr "Antžeminės TV tiekėjas"
+
+#~ msgid ""
+#~ "The OpenPLi team would like to point out that upgrading to the latest "
+#~ "nightly build comes not only with the latest features, but also with some "
+#~ "risks. After the update, it is possible that your device no longer works "
+#~ "as expected. We recommend you create backups with Autobackup or "
+#~ "Backupsuite. This allows you to quickly and easily restore your device to "
+#~ "its previous state, should you experience any problems. If you encounter "
+#~ "a 'bug', please report the issue on www.openpli.org.\n"
+#~ "\n"
+#~ "Do you understand this?"
+#~ msgstr ""
+#~ "OpenPli komanda pažymi, kad atnaujinimas į paskutinę nakties darbo "
+#~ "versiją gali įnešti ne tik naujas galimybes, bet ir kažkiek rizikos. "
+#~ "Visai gali būti, kad po atnaujinimo jūsų imtuvas ims veikti ne taip, kaip "
+#~ "tikėjotės. Todėl rekomenduojame daryti atsargines kopijas, naudojant "
+#~ "Autobackup, arba Backupsuite priedus. Tas leis, atsiradus bet kokiai "
+#~ "problemai, greitai ir lengvai atkurti ankstesnį Jūsų imtuvo stovį. Jei "
+#~ "radote klaidą, prašome apie tai pranešti www.openpli.org.\n"
+#~ "\n"
+#~ "Jūs tai supratote?"
+
+#~ msgid "Toggle Extra Keys"
+#~ msgstr "Perjungti papildomus klavišus"
+
+#~ msgid "Traditional Chinese"
+#~ msgstr "Tradicinė kinų"
+
+#~ msgid "What do you want to scan?"
+#~ msgstr "Ko Jūs norite ieškoti?"
+
+#~ msgid "Would you like to install a softcam?"
+#~ msgstr "Ar norite įdiegti emuliatorių?"
+
+#~ msgid "Yes, do another manual scan now"
+#~ msgstr "Taip, atlikti dar vieną rankinę paiešką"
+
+#~ msgid "and never show this message again"
+#~ msgstr "ir daugiau nerodyti šio pranešimo"
+
+#, fuzzy
+#~| msgid "slot%s - %s mode 1"
+#~ msgid "slot%s - %s"
+#~ msgstr "lizdas%s -%s režimas 1"
+
+#, fuzzy
+#~| msgid "slot%s - %s mode 1 (current image)"
+#~ msgid "slot%s - %s (current image)"
+#~ msgstr "lizdas%s -%s režimas 1 (dabartinis atvaizdas)"
+
+#, fuzzy
+#~| msgid "slot%s - %s mode 1"
+#~ msgid "slot%s - empty"
+#~ msgstr "lizdas%s -%s režimas 1"
+
 #~ msgid "Import channels from remote receiver URL"
 #~ msgstr "Importuoti kanalus iš nuotolinio imtuvo URL"
 
@@ -12020,11 +12339,6 @@ msgstr "Vaizdo režimo pasirinkimas."
 
 #~ msgid "%d-%b-%Y %-H:%M"
 #~ msgstr "%Y-%b-%d %-H:%M"
-
-#, fuzzy
-#~| msgid "Size: %s"
-#~ msgid ": %s"
-#~ msgstr "Dydis : %s"
 
 #~ msgid ""
 #~ "A recording is currently running. Please stop the recording before trying "
@@ -12038,12 +12352,6 @@ msgstr "Vaizdo režimo pasirinkimas."
 
 #~ msgid "Action on short powerbutton press"
 #~ msgstr "Veiksmas, trumpai spaudžiant įtampos mygtuką"
-
-#~ msgid "Blue boost"
-#~ msgstr "Daugiau mėlynos"
-
-#~ msgid "Cannot create image list - please try later"
-#~ msgstr "Negalima sukurti atvaizdo sąrašo - bandykite vėliau"
 
 #~ msgid "Changelog"
 #~ msgstr "Pakeitimų sąrašas"
@@ -12076,15 +12384,6 @@ msgstr "Vaizdo režimo pasirinkimas."
 #~ msgid "Constellation"
 #~ msgstr "Konsteliacija"
 
-#~ msgid "Convert ext3 filesystem to ext4"
-#~ msgstr "Konvertuoti ext3 failų sistemą į ext4"
-
-#~ msgid "Convert ext3 to ext4"
-#~ msgstr "Konvertuoti ext3 į ext4"
-
-#~ msgid "Converting ext3 to ext4..."
-#~ msgstr "Konvertuojama ext3 į ext4..."
-
 #~ msgid "Could not connect to receiver .NFI image feed server:"
 #~ msgstr "Negalima prisijungti prie imtuvo .NFI atvaizdo šaltinių serverio:"
 
@@ -12096,27 +12395,6 @@ msgstr "Vaizdo režimo pasirinkimas."
 
 #~ msgid "Descramble http streams"
 #~ msgstr "Dekoduoti http srautus"
-
-#~ msgid "Diasbled"
-#~ msgstr "Išjungtas"
-
-#, fuzzy
-#~| msgid "Action"
-#~ msgid "Diction"
-#~ msgstr "Veiksmo"
-
-#~ msgid "Disclaimer"
-#~ msgstr "Atsakomybės apribojimas"
-
-#~ msgid ""
-#~ "Do you really want to convert the filesystem?\n"
-#~ "You cannot go back!"
-#~ msgstr ""
-#~ "Ar tikrai norite konvertuoti failų sistemą?\n"
-#~ "Šio veiksmo atstatyti atgal negalėsite!"
-
-#~ msgid "Do you want to do another manual service scan?"
-#~ msgstr "Jūs norite atlikti kitą rankinę kanalų paiešką?"
 
 #, fuzzy
 #~| msgid ""
@@ -12154,9 +12432,6 @@ msgstr "Vaizdo režimo pasirinkimas."
 #~ msgid "Get latest release image"
 #~ msgstr "Gaukite paskutinį atvaizdą"
 
-#~ msgid "Green boost"
-#~ msgstr "Daugiau žalios"
-
 #~ msgid "HD1100/et7x00/et8500"
 #~ msgstr "HD1100/ET7x00/ET8500"
 
@@ -12168,15 +12443,6 @@ msgstr "Vaizdo režimo pasirinkimas."
 
 #~ msgid "Immediate shutdown"
 #~ msgstr "Išjungimas nedelsiant"
-
-#~ msgid "Install softcam"
-#~ msgstr "Įdiegti emuliatorių"
-
-#~ msgid "Installed: "
-#~ msgstr "Atvaizdo data: "
-
-#~ msgid "Intermediate"
-#~ msgstr "Vidutinis"
 
 #~ msgid "Log results to harddisk"
 #~ msgstr "Log rezultatus į kietą diską"
@@ -12205,17 +12471,8 @@ msgstr "Vaizdo režimo pasirinkimas."
 #~ msgid "New version:"
 #~ msgstr "Nauja versija:"
 
-#~ msgid "No cable tuner found!"
-#~ msgstr "Kabelinio imtuvo nerasta!"
-
 #~ msgid "No details for this image file"
 #~ msgstr "Nėra informacijos apie šį atvaizdą"
-
-#~ msgid "Not configured"
-#~ msgstr "Nesukonfigūruotas"
-
-#~ msgid "Nothing connected"
-#~ msgstr "Nieko neprijungta"
 
 #~ msgid "OSD position setup"
 #~ msgstr "OSD pozicijos nustatymas"
@@ -12234,9 +12491,6 @@ msgstr "Vaizdo režimo pasirinkimas."
 #~ "Prašome išsirinkti NFI failą ir spauskite žalią mygtuką atvaizdo "
 #~ "užkrovumui!"
 
-#~ msgid "Please set up tuner K"
-#~ msgstr "Sukonfigūruokite K imtuvą"
-
 #~ msgid "Plugin install"
 #~ msgstr "Priedo įdiegimas"
 
@@ -12248,12 +12502,6 @@ msgstr "Vaizdo režimo pasirinkimas."
 
 #~ msgid "Prepare another USB stick for image flashing"
 #~ msgstr "Paruoškite kitą USB laikmeną atvaizdo užkrovimui"
-
-#~ msgid "Press OK to start the scan"
-#~ msgstr "Kad pradėti paiešką, spauskite 'OK'"
-
-#~ msgid "Provider to scan"
-#~ msgstr "Tiekėjas, kurio ieškosite"
 
 #~ msgid "Reception Settings"
 #~ msgstr "Priėmimo nustatymai"
@@ -12279,9 +12527,6 @@ msgstr "Vaizdo režimo pasirinkimas."
 #~ msgid "SID"
 #~ msgstr "SID"
 
-#~ msgid "Satfinder"
-#~ msgstr "Palydovų ieškiklis"
-
 #~ msgid "Select an image to be downloaded"
 #~ msgstr "Pasirinkite atvaizdą, kurį norite atsisiųsti"
 
@@ -12295,44 +12540,11 @@ msgstr "Vaizdo režimo pasirinkimas."
 #~ "Ar USB atmintinės vedliui vykdyti programos atvaizdo failą %s į \"vidinę"
 #~ "\" atmintį?"
 
-#~ msgid "Show disclaimer"
-#~ msgstr "Rodyti atsakomybės atsiribojimą"
-
 #~ msgid "Show shutdown menu"
 #~ msgstr "Rodyti išjungimo meniu"
 
 #~ msgid "Silently zap between bouquets"
 #~ msgstr "Tyliai perjungti iš paketo į paketą"
-
-#~ msgid "Simplified Chinese"
-#~ msgstr "Supaprastinta kinų"
-
-#~ msgid "Skin setup"
-#~ msgstr "Temos sąranka"
-
-#~ msgid "Terrestrial provider"
-#~ msgstr "Antžeminės TV tiekėjas"
-
-#~ msgid ""
-#~ "The OpenPLi team would like to point out that upgrading to the latest "
-#~ "nightly build comes not only with the latest features, but also with some "
-#~ "risks. After the update, it is possible that your device no longer works "
-#~ "as expected. We recommend you create backups with Autobackup or "
-#~ "Backupsuite. This allows you to quickly and easily restore your device to "
-#~ "its previous state, should you experience any problems. If you encounter "
-#~ "a 'bug', please report the issue on www.openpli.org.\n"
-#~ "\n"
-#~ "Do you understand this?"
-#~ msgstr ""
-#~ "OpenPli komanda pažymi, kad atnaujinimas į paskutinę nakties darbo "
-#~ "versiją gali įnešti ne tik naujas galimybes, bet ir kažkiek rizikos. "
-#~ "Visai gali būti, kad po atnaujinimo jūsų imtuvas ims veikti ne taip, kaip "
-#~ "tikėjotės. Todėl rekomenduojame daryti atsargines kopijas, naudojant "
-#~ "Autobackup, arba Backupsuite priedus. Tas leis, atsiradus bet kokiai "
-#~ "problemai, greitai ir lengvai atkurti ankstesnį Jūsų imtuvo stovį. Jei "
-#~ "radote klaidą, prašome apie tai pranešti www.openpli.org.\n"
-#~ "\n"
-#~ "Jūs tai supratote?"
 
 #~ msgid ""
 #~ "The USB stick was prepared to be bootable.\n"
@@ -12417,12 +12629,6 @@ msgstr "Vaizdo režimo pasirinkimas."
 #~ "skydelio 10 sekundžių.\n"
 #~ "3) Laukite įkrovos ir veikite pagal vedlio instrukcijas."
 
-#~ msgid "Toggle Extra Keys"
-#~ msgstr "Perjungti papildomus klavišus"
-
-#~ msgid "Traditional Chinese"
-#~ msgstr "Tradicinė kinų"
-
 #~ msgid "Tuner status %s"
 #~ msgstr "Imtuvo būsena  %s"
 
@@ -12449,9 +12655,6 @@ msgstr "Vaizdo režimo pasirinkimas."
 
 #~ msgid "Videosize"
 #~ msgstr "Vaizdo dydis"
-
-#~ msgid "What do you want to scan?"
-#~ msgstr "Ko Jūs norite ieškoti?"
 
 #~ msgid "When enabled the LNB power will not be switched off in standby"
 #~ msgstr "Kai čia įjungta, LNB maitinimas liks įjungtas ir budėjimo režime."
@@ -12489,12 +12692,6 @@ msgstr "Vaizdo režimo pasirinkimas."
 #~ "\n"
 #~ "Tikrai norite atkurti?"
 
-#~ msgid "Would you like to install a softcam?"
-#~ msgstr "Ar norite įdiegti emuliatorių?"
-
-#~ msgid "Yes, do another manual scan now"
-#~ msgstr "Taip, atlikti dar vieną rankinę paiešką"
-
 #~ msgid ""
 #~ "You have chosen to create a new .NFI flasher bootable USB stick. This "
 #~ "will repartition the USB stick and therefore all data on it will be "
@@ -12502,9 +12699,6 @@ msgstr "Vaizdo režimo pasirinkimas."
 #~ msgstr ""
 #~ "Jūs nusprendėte sukurti naują .NFI diegėją USB rakte. Tada bus "
 #~ "perdalintas USB raktas ir visi duomenys jame bus ištrinti."
-
-#~ msgid "You system does not support ext4"
-#~ msgstr "Jūsų sistema nepalaiko ext4"
 
 #~ msgid ""
 #~ "Your frontprocessor firmware must be upgraded.\n"
@@ -12516,9 +12710,6 @@ msgstr "Vaizdo režimo pasirinkimas."
 #~ msgid "Zap back to service before tuner setup?"
 #~ msgstr "Perjungti atgal į kanalą prieš imtuvo nustatymą?"
 
-#~ msgid "and never show this message again"
-#~ msgstr "ir daugiau nerodyti šio pranešimo"
-
 #~ msgid "continue"
 #~ msgstr "tęsti"
 
@@ -12527,114 +12718,6 @@ msgstr "Vaizdo režimo pasirinkimas."
 
 #~ msgid "not used"
 #~ msgstr "nenaudojamas"
-
-#, fuzzy
-#~| msgid "slot%s - %s mode 1"
-#~ msgid "slot%s - %s"
-#~ msgstr "lizdas%s -%s režimas 1"
-
-#~ msgid "List of files"
-#~ msgstr "Failų sąrašas"
-
-#~ msgid "On destination '%s' is %s free space only!"
-#~ msgstr "Paskirties vietoje '%s' yra tik %s laisvos vietos!"
-
-#~ msgid "Select operation:"
-#~ msgstr "Pasirinkite operaciją:"
-
-#~ msgid ""
-#~ "Select files with 'OK' and then use 'Menu' or 'Action' for select "
-#~ "operation"
-#~ msgstr ""
-#~ "Pasirinkite failus su 'OK' ir tada operacijos pasirinkimui naudokite "
-#~ "'Meniu' arba 'Veiksmas'"
-
-#~ msgid "Select destination for copy selected files..."
-#~ msgstr "Pasirinkite vietą į kur kopijuoti pasirinktus failus..."
-
-#~ msgid "Select destination for move selected files..."
-#~ msgstr "Pasirinkite vietą į kur perkelti pasirinktus failus..."
-
-#~ msgid "Selected: %s"
-#~ msgstr "Pasirinkta: %s"
-
-#~ msgid "Some error occured - Please try later"
-#~ msgstr "Įvyko klaida, bandykite pakartoti vėliau"
-
-#~ msgid ""
-#~ "You did not see all eight arrow heads. This means your TV has overscan "
-#~ "enabled and presents you with a zoomed-in picture, causing you to loose "
-#~ "part of a full HD screen. In addition to this you may also miss parts of "
-#~ "the user interface, for example volume bars and more.\n"
-#~ "\n"
-#~ "Unfortunately, your model of receiver is not capable to adjust the "
-#~ "dimensions of the user interface. If not everything is visible, you "
-#~ "should change the installed skin to one that supports the overscan area "
-#~ "of your TV.\n"
-#~ "\n"
-#~ "When you select a different skin, the user interface of your receiver "
-#~ "will restart.\n"
-#~ "\n"
-#~ "Note: you can always start the Overscan wizard later,  via\n"
-#~ "\n"
-#~ "menu->installation->system->Overscan wizard"
-#~ msgstr ""
-#~ "Jei Jūs nematote visų aštuonių rodyklių. Tai reiškia, kad jūsų TV rodomos "
-#~ "vaizdo kraštinės įjungtos su padidintu-paveikslėliu, ir jūs prarasite "
-#~ "dalį Visiško HD ekrano. Be to, taip pat galite netekti dalies vartotojo "
-#~ "sąsajų, pavyzdžiui, apimties barų ir daugiau.\n"
-#~ "\n"
-#~ "Deja, Jūsų imtuvo modelis negali reguliuoti naudotojo sąsajos matmenų. "
-#~ "Jei ne viskas yra matoma, turėtumėte pakeisti įdiegtą temą, kuri palaiko "
-#~ "rodomos vaizdo kraštinės plotą jūsų TV.\n"
-#~ "\n"
-#~ "Kai pasirenkate kitą temą, vartotojo sąsaja ir imtuvas bus paleisti iš "
-#~ "naujo.\n"
-#~ "\n"
-#~ "Pastaba: jūs visada galite paleisti vaizdo kraštinių rodymo vedlį vėliau "
-#~ "per\n"
-#~ "\n"
-#~ "meniu> įdiegimas-> sistema> Vaizdo kraštinių rodymo vedlys"
-
-#~ msgid "Add to selection (starts with...)"
-#~ msgstr "Pridėti prie pasirinkimo (prasideda su...)"
-
-#~ msgid "Copy to..."
-#~ msgstr "Kopijuoti į..."
-
-#~ msgid "Move to..."
-#~ msgstr "Perkelti į..."
-
-#~ msgid "Remove from selection (starts with...)"
-#~ msgstr "Pašalinti iš pasirinkimo (prasideda su...)"
-
-#~ msgid "Tuners in Use:"
-#~ msgstr "Naudojami imtuvai:"
-
-#~ msgid "Current Time:"
-#~ msgstr "Dabartinis laikas:"
-
-#~ msgid "Streaming Info:"
-#~ msgstr "Srauto informacija:"
-
-#~ msgid "DVB drivers: "
-#~ msgstr "DVB tvarkyklės: "
-
-#~ msgid "Please wait (downloading softcam)"
-#~ msgstr "Prašome palaukti (atsisiunčiamas emuliatorius)"
-
-#~ msgid "Softcam type"
-#~ msgstr "Emuliatoriaus tipas"
-
-#, fuzzy
-#~| msgid "slot%s - %s mode 1 (current image)"
-#~ msgid "slot%s - %s (current image)"
-#~ msgstr "lizdas%s -%s režimas 1 (dabartinis atvaizdas)"
-
-#, fuzzy
-#~| msgid "slot%s - %s mode 1"
-#~ msgid "slot%s - empty"
-#~ msgstr "lizdas%s -%s režimas 1"
 
 #~ msgid "Compare case sensitive"
 #~ msgstr "Palyginti didžiąsias ir mažąsias raides"
@@ -12646,29 +12729,6 @@ msgstr "Vaizdo režimo pasirinkimas."
 #~ msgstr ""
 #~ "Naudokite pirmąsias 'x' failo pavadinimo simbolius virtualioms "
 #~ "klaviatūroms"
-
-#~ msgid "Enable fallback remote receiver for recordings"
-#~ msgstr "Įjungti atsarginį nuotolinį imtuvą įrašams"
-
-#~ msgid ""
-#~ "Enable remote enigma2 receiver to be tried to tune into services that "
-#~ "cannot be tuned into locally for recordings (e.g. tuner is occupied or "
-#~ "service type is unavailable on the local tuner. Specify complete URL "
-#~ "including http:// and port number (normally ...:8001), e.g. http://"
-#~ "second_box:8001."
-#~ msgstr ""
-#~ "Įjungti nuotolinį enigma2 imtuvą, kad būtų galima įrašyti kanalus, kurie "
-#~ "negali būti priimti lokaliai (pvz., imtuvas užimtas, arba kanalas "
-#~ "nepasiekiamas vietiniam imtuvui. Nurodykite pilną internetinį adresą, "
-#~ "įskaitant http://ir jungties numerį (paprastai ...:8001), pvz., http://"
-#~ "antrasis_aparatas:8001."
-
-#~ msgid ""
-#~ "Select 'Unicable' if this tuner will use a Unicable device. Для остальных "
-#~ "настроек выберите 'FBC - автоматически'."
-#~ msgstr ""
-#~ "Pasirinkite 'Unicable', jei šis imtuvas naudos Unicable įrenginį. Visiems "
-#~ "kitiems nustatymams pasirinkite 'FBC automatinis'."
 
 #~ msgid "How many minutes do you want add to record?"
 #~ msgstr "Kelių minučių trukmės norite skirti šiam įrašui?"
