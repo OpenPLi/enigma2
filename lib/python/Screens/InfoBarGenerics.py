@@ -469,9 +469,9 @@ class BufferIndicator(Screen):
 
 	def	mayShowEndTimer(self):
 		self.mayShow = True
-		if not self.getBufferValue():
+		if self.getBufferValue() == 0:
 			self["status"].setText(_("No data received yet"))
-		self.show()
+			self.show()
 
 	def getBufferValue(self):
 		service = self.session.nav.getCurrentService()
