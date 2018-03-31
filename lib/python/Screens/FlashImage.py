@@ -93,13 +93,11 @@ class SelectImage(Screen):
 			if catagorie in self.expanded:
 				list.append(ChoiceEntryComponent('expanded',((str(catagorie)), "Expander")))
 				for image in reversed(sorted(self.imagesList[catagorie].keys())):
-					if not SystemInfo["canMultiBoot"] or image.endswith('_multiboot.zip'):
-						list.append(ChoiceEntryComponent('verticalline',((str(self.imagesList[catagorie][image]['name'])), str(self.imagesList[catagorie][image]['link']))))
+					list.append(ChoiceEntryComponent('verticalline',((str(self.imagesList[catagorie][image]['name'])), str(self.imagesList[catagorie][image]['link']))))
 			else:
 				for image in self.imagesList[catagorie].keys():
-					if not SystemInfo["canMultiBoot"] or image.endswith('_multiboot.zip'):
-						list.append(ChoiceEntryComponent('expandable',((str(catagorie)), "Expander")))
-						break
+					list.append(ChoiceEntryComponent('expandable',((str(catagorie)), "Expander")))
+					break
 		if list:
 			self["list"].setList(list)
 			if self.setIndex:
