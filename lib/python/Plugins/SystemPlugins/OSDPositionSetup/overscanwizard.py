@@ -80,7 +80,7 @@ class OverscanWizard(Screen, ConfigListScreen):
 				"In other words, if the yellow box touches all four sides of your screen, you have at least 5% overscan on all sides.\n\n"
 				"If you see the tips of all eight arrowheads, then your TV has overscan disabled.\n\n"
 				"Test Pattern by TigerDave - www.tigerdave.com/ht_menu.htm"))
-			self.yes_no = ConfigYesNo(default = True)
+			self.yes_no = ConfigYesNo(default = True, graphic = False)
 			self.list.append(getConfigListEntry(_("Did you see all eight arrow heads?"), self.yes_no))
 			self.save_new_position = False
 			setPosition(0, 720, 0, 576)
