@@ -452,16 +452,16 @@ class ConfigBoolean(ConfigElement):
 			self.last_value = self.value
 
 class ConfigYesNo(ConfigBoolean):
-	def __init__(self, default = False):
-		ConfigBoolean.__init__(self, default = default, descriptions = {False: _("no"), True: _("yes")})
+	def __init__(self, default = False, graphic = True):
+		ConfigBoolean.__init__(self, default = default, descriptions = {False: _("no"), True: _("yes")}, graphic = graphic)
 
 class ConfigOnOff(ConfigBoolean):
-	def __init__(self, default = False):
-		ConfigBoolean.__init__(self, default = default, descriptions = {False: _("off"), True: _("on")})
+	def __init__(self, default = False, graphic = True):
+		ConfigBoolean.__init__(self, default = default, descriptions = {False: _("off"), True: _("on")}, graphic = graphic)
 
 class ConfigEnableDisable(ConfigBoolean):
-	def __init__(self, default = False):
-		ConfigBoolean.__init__(self, default = default, descriptions = {False: _("disable"), True: _("enable")})
+	def __init__(self, default = False, graphic = True):
+		ConfigBoolean.__init__(self, default = default, descriptions = {False: _("disable"), True: _("enable")}, graphic = graphic)
 
 class ConfigDateTime(ConfigElement):
 	def __init__(self, default, formatstring, increment = 86400):
