@@ -1008,6 +1008,14 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y() + (or
 		<widget name="config" position="10,50" size="400,300" scrollbarMode="showOnDemand"/>
 		<widget name="footer" position="0,0" size="0,0"/>
 	</screen>
+	<!-- OSD 3D setup -->
+	<screen name="OSD3DSetupScreen" position="center,center" size="400,200" title="OSD 3D setup">
+		<widget name="config" position="c-175,c-75" size="350,150"/>
+		<ePixmap pixmap="skin_default/buttons/green.png" position="c-145,e-45" size="140,40" alphatest="on"/>
+		<ePixmap pixmap="skin_default/buttons/red.png" position="c+5,e-45" size="140,40" alphatest="on"/>
+		<widget name="key_green" position="c-145,e-45" size="140,40" valign="center" halign="center" zPosition="1" font="Regular;20" transparent="1"/>
+		<widget name="key_red" position="c+5,e-45" size="140,40" valign="center" halign="center" zPosition="1" font="Regular;20" transparent="1"/>
+	</screen>
 	<!-- Positioner setup -->
 	<screen name="PositionerSetup" position="center,center" size="660,485" title="Positioner setup">
 		<widget name="list" position="120,10" size="420,180" transparent="1" font="Regular;20"/>
