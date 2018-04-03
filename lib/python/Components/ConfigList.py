@@ -1,5 +1,5 @@
 from GUIComponent import GUIComponent
-from config import KEY_LEFT, KEY_RIGHT, KEY_HOME, KEY_END, KEY_0, KEY_DELETE, KEY_BACKSPACE, KEY_OK, KEY_TOGGLEOW, KEY_ASCII, KEY_TIMEOUT, KEY_NUMBERS, ConfigElement, ConfigText, ConfigPassword
+from config import KEY_LEFT, KEY_RIGHT, KEY_HOME, KEY_END, KEY_0, KEY_DELETE, KEY_BACKSPACE, KEY_OK, KEY_TOGGLEOW, KEY_ASCII, KEY_TIMEOUT, KEY_NUMBERS, ConfigElement
 from Components.ActionMap import NumberActionMap, ActionMap
 from enigma import eListbox, eListboxPythonConfigContent, eRCInput, eTimer
 from Screens.MessageBox import MessageBox
@@ -190,7 +190,7 @@ class ConfigListScreen:
 
 	def handleInputHelpers(self):
 		if self["config"].getCurrent() is not None:
-			if isinstance(self["config"].getCurrent()[1], ConfigText) or isinstance(self["config"].getCurrent()[1], ConfigPassword):
+			if self["config"].getCurrent()[1].__class__.__name__ == 'ConfigText' or self["config"].getCurrent()[1].__class__.__name__ == 'ConfigPassword':
 				if "VKeyIcon" in self:
 					self["VirtualKB"].setEnabled(True)
 					self["VKeyIcon"].boolean = True
@@ -214,20 +214,12 @@ class ConfigListScreen:
 		self.session.openWithCallback(self.VirtualKeyBoardCallback, VirtualKeyBoard, title = self["config"].getCurrent()[0], text = self["config"].getCurrent()[1].getValue())
 
 	def HideHelp(self):
-		try:
-			if isinstance(self["config"].getCurrent()[1], ConfigText) or isinstance(self["config"].getCurrent()[1], ConfigPassword):
-				if self["config"].getCurrent()[1].help_window.instance is not None:
-					self["config"].getCurrent()[1].help_window.hide()
-		except:
-			pass
+		if "config" in self and (self["config"].getCurrent()[1].__class__.__name__ == 'ConfigText' or self["config"].getCurrent()[1].__class__.__name__ == 'ConfigPassword') and self["config"].getCurrent()[1].help_window and self["config"].getCurrent()[1].help_window.instance is not None:
+			self["config"].getCurrent()[1].help_window.hide()
 
 	def ShowHelp(self):
-		try:
-			if isinstance(self["config"].getCurrent()[1], ConfigText) or isinstance(self["config"].getCurrent()[1], ConfigPassword):
-				if self["config"].getCurrent()[1].help_window.instance is not None:
-					self["config"].getCurrent()[1].help_window.show()
-		except:
-			pass
+		if "config" in self and (self["config"].getCurrent()[1].__class__.__name__ == 'ConfigText' or self["config"].getCurrent()[1].__class__.__name__ == 'ConfigPassword') and self["config"].getCurrent()[1].help_window and self["config"].getCurrent()[1].help_window.instance is not None:
+			self["config"].getCurrent()[1].help_window.show()
 
 	def VirtualKeyBoardCallback(self, callback = None):
 		if callback is not None and len(callback):
