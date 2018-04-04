@@ -2020,8 +2020,9 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 	def can_moviemanager(self, item):
 		return True
 	def do_moviemanager(self):
+		item = self.getCurrentSelection()[0]
 		from Plugins.Extensions.MovieManager.ui import MovieManager
-		self.session.open(MovieManager, self["list"])
+		self.session.open(MovieManager, self["list"], item)
 	def installedMovieManagerPlugin(self):
 		try:
 			from Plugins.Extensions.MovieManager.ui import MovieManager
