@@ -7,23 +7,69 @@ from Components.ConfigList import ConfigListScreen
 from Components.Pixmap import Pixmap
 from Components.Sources.StaticText import StaticText
 from Components.Sources.Boolean import Boolean
-from enigma import eEnv
+from Tools.Directories import resolveFilename, SCOPE_CURRENT_PLUGIN, SCOPE_SKIN
 
+import os
 import xml.etree.cElementTree
 
-# FIXME: use resolveFile!
-# read the setupmenu
-try:
-	# first we search in the current path
-	setupfile = file('data/setup.xml', 'r')
-except:
-	# if not found in the current path, we use the global datadir-path
-	setupfile = file(eEnv.resolve('${datadir}/enigma2/setup.xml'), 'r')
-setupdom = xml.etree.cElementTree.parse(setupfile)
-setupfile.close()
+__setupdoms = {}
+__setupdates = {}
+__setuptitles = {}
+
+# Read the setupmenu
+def setupdom(setup=None, plugin=None):
+	if plugin:
+		setupfile = resolveFilename(SCOPE_CURRENT_PLUGIN, plugin + "/setup.xml")
+		msg = " from plugin '%s'" % plugin
+	else:
+		setupfile = resolveFilename(SCOPE_SKIN, "setup.xml")
+		msg = ""
+	try:
+		mtime = os.path.getmtime(setupfile)
+	except OSError as err:
+		print "[Setup] ERROR: Unable to get '%s' modified time - Error (%d): %s!" % (setupfile, err.errno, err.strerror)
+		return xml.etree.cElementTree.fromstring("<setupxml></setupxml>")
+	cached = setupfile in __setupdoms and setupfile in __setupdates and __setupdates[setupfile] == mtime
+	print "[Setup] XML%s source file: '%s'" % (" cached" if cached else "", setupfile)
+	if setup is not None:
+		print "[Setup] XML Setup menu '%s'%s" % (setup, msg)
+	if cached:
+		return __setupdoms[setupfile]
+	try:
+		fail = False
+		setupfiledom = xml.etree.cElementTree.parse(setupfile)
+	except (IOError, OSError) as err:
+		fail = True
+		print "[Setup] ERROR: Unable to open/read '%s' - Error (%d): %s!" % (setupfile, err.errno, err.strerror)
+	except xml.etree.cElementTree.ParseError as err:
+		fail = True
+		print "[Setup] ERROR: Unable to load XML data from '%s' - %s!" % (setupfile, str(err))
+	except Exception:
+		fail = True
+		print "[Setup] ERROR: Unable to process XML data from '%s'!" % setupfile
+	if fail:
+		setupfiledom = xml.etree.cElementTree.fromstring("<setupxml></setupxml>")
+	else:
+		__setupdoms[setupfile] = setupfiledom
+		__setupdates[setupfile] = mtime
+		if plugin is None:		# Don't allow plugin IDs to clobber setup.xml IDs
+			xmldata = setupfiledom.getroot()
+			for x in xmldata.findall("setup"):
+				id = x.get("key", "")
+				title = x.get("menuTitle", "").encode("UTF-8")
+				if title == "":
+					title = x.get("title", "").encode("UTF-8")
+					if title == "":
+						print "[Setup] Error: Setup ID '%s' title is missing or blank!" % id
+						title = "** Setup error: '%s' title is missing or blank!" % id
+				# print "[Setup] DEBUG XML Setup menu load: id='%s', title='%s', menuTitle='%s'" % (id, x.get("title", "").encode("UTF-8"), x.get("menuTitle", "").encode("UTF-8"))
+				if title != "":
+					title = _(title)
+				__setuptitles[id] = title
+	return setupfiledom
 
 def getConfigMenuItem(configElement):
-	for item in setupdom.getroot().findall('./setup/item/.'):
+	for item in setupdom().getroot().findall("./setup/item/."):
 		if item.text == configElement:
 			return _(item.attrib["text"]), eval(configElement)
 	return "", None
@@ -68,7 +114,7 @@ class Setup(ConfigListScreen, Screen):
 
 	def refill(self):
 		self.list = []
-		xmldata = setupdom.getroot()
+		xmldata = setupdom(self.setup, self.plugin).getroot()
 		for x in xmldata.findall("setup"):
 			if x.get("key") != self.setup:
 				continue
@@ -76,12 +122,14 @@ class Setup(ConfigListScreen, Screen):
 			self.setup_title = x.get("title", "").encode("UTF-8")
 			self.seperation = int(x.get('separation', '0'))
 
-	def __init__(self, session, setup):
+	def __init__(self, session, setup, plugin=None, menu_path=None, PluginLanguageDomain=None):
 		Screen.__init__(self, session)
 		# for the skin: first try a setup_<setupID>, then Setup
 		self.skinName = ["setup_" + setup, "Setup" ]
-		self.list = []
 		self.setup = setup
+		self.plugin = plugin
+		self.menu_path = menu_path
+		self.PluginLanguageDomain = PluginLanguageDomain
 		self.force_update_list = False
 
 		#check for list.entries > 0 else self.close
@@ -99,6 +147,7 @@ class Setup(ConfigListScreen, Screen):
 				"menu": self.closeRecursive,
 			}, -2)
 
+		self.list = []
 		self.refill()
 		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changedEntry)
 		self["config"].onSelectionChanged.append(self.__onSelectionChanged)
@@ -154,8 +203,15 @@ class Setup(ConfigListScreen, Screen):
 			self.force_update_list = True
 
 def getSetupTitle(id):
-	xmldata = setupdom.getroot()
-	for x in xmldata.findall("setup"):
-		if x.get("key") == id:
-			return x.get("title", "").encode("UTF-8")
-	raise SetupError("unknown setup id '%s'!" % repr(id))
+	setupdom()		# Load (or check for an updated) setup.xml file
+	id = str(id)
+	title = __setuptitles.get(id, "")
+	if title == "":
+		print "[Setup] Error: Setup ID '%s' not found in setup file!" % id
+		title = "** Setup error: '%s' section not found! **" % id
+		#
+		# Forcing a UI crash is VERY bad and, in this case, unnecessary but
+		# I have been told that this must happen!  :(
+		#
+		raise SetupError("[Setup] Error: Unknown setup id '%s'!" % id)
+	return title
