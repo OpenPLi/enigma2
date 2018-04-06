@@ -7,7 +7,8 @@ from Components.ConfigList import ConfigListScreen
 from Components.Pixmap import Pixmap
 from Components.Sources.StaticText import StaticText
 from Components.Sources.Boolean import Boolean
-from Tools.Directories import resolveFilename, SCOPE_CURRENT_PLUGIN, SCOPE_SKIN
+from Tools.Directories import resolveFilename, SCOPE_CURRENT_PLUGIN, SCOPE_SKIN, SCOPE_CURRENT_SKIN
+from Tools.LoadPixmap import LoadPixmap
 
 try:
 	from boxbranding import getMachineBrand, getMachineName
@@ -16,6 +17,10 @@ except ImportError:
 	# from models.owibranding import getBoxType, getMachineName
 	branding_available = False
 from gettext import dgettext
+try:
+	from skin import setups
+except ImportError:
+	setups = {}
 
 import os
 import xml.etree.cElementTree
@@ -170,6 +175,23 @@ class Setup(ConfigListScreen, Screen):
 				"menu": self.closeRecursive,
 			}, -2)
 
+		defaultmenuimage = setups.get("default", "")
+		menuimage = setups.get(self.setup, defaultmenuimage)
+		if menuimage:
+			if menuimage == defaultmenuimage:
+				msg = "Default"
+			else:
+				msg = "Menu"
+			menuimage = resolveFilename(SCOPE_CURRENT_SKIN, menuimage)
+			print "[Setup] %s image: '%s'" % (msg, menuimage)
+			self.menuimage = LoadPixmap(menuimage)
+			if self.menuimage:
+				self["menuimage"] = Pixmap()
+			else:
+				print "[Setup] ERROR: Unable to load menu image '%s'!" % menuimage
+		else:
+			self.menuimage = None
+
 		self.list = []
 		self.refill()
 		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changedEntry)
@@ -258,6 +280,8 @@ class Setup(ConfigListScreen, Screen):
 		else:
 			title = _(self.setup_title)
 		self.setTitle(title)
+		if self.menuimage:
+			self["menuimage"].instance.setPixmap(self.menuimage)
 		if len(self["config"].getList()) == 0:
 			print "[Setup] No menu items available!"
 
