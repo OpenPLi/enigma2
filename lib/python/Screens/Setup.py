@@ -96,9 +96,8 @@ class SetupError(Exception):
 		return self.msg
 
 class SetupSummary(Screen):
-
 	def __init__(self, session, parent):
-		Screen.__init__(self, session, parent = parent)
+		Screen.__init__(self, session, parent=parent)
 		self["SetupTitle"] = StaticText(_(parent.setup_title))
 		self["SetupEntry"] = StaticText("")
 		self["SetupValue"] = StaticText("")
@@ -106,19 +105,20 @@ class SetupSummary(Screen):
 		self.onHide.append(self.removeWatcher)
 
 	def addWatcher(self):
-		if hasattr(self.parent,"onChangedEntry"):
+		if hasattr(self.parent, "onChangedEntry"):
 			self.parent.onChangedEntry.append(self.selectionChanged)
 			self.parent["config"].onSelectionChanged.append(self.selectionChanged)
 			self.selectionChanged()
 
 	def removeWatcher(self):
-		if hasattr(self.parent,"onChangedEntry"):
+		if hasattr(self.parent, "onChangedEntry"):
 			self.parent.onChangedEntry.remove(self.selectionChanged)
 			self.parent["config"].onSelectionChanged.remove(self.selectionChanged)
 
 	def selectionChanged(self):
 		self["SetupEntry"].text = self.parent.getCurrentEntry()
 		self["SetupValue"].text = self.parent.getCurrentValue()
+
 
 class Setup(ConfigListScreen, Screen, HelpableScreen):
 
@@ -141,7 +141,7 @@ class Setup(ConfigListScreen, Screen, HelpableScreen):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 		# for the skin: first try a setup_<setupID>, then Setup
-		self.skinName = ["setup_" + setup, "Setup" ]
+		self.skinName = ["setup_" + setup, "Setup"]
 		self.setup = setup
 		self.plugin = plugin
 		self.menu_path = menu_path
@@ -196,7 +196,7 @@ class Setup(ConfigListScreen, Screen, HelpableScreen):
 
 		self.list = []
 		self.refill()
-		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
 		if config.usage.sort_settings.value:
 			self["config"].list.sort()
 		if self.levelChanged not in config.usage.setup_level.notifiers:
