@@ -1,5 +1,5 @@
 from Screen import Screen
-from Components.ActionMap import NumberActionMap
+from Components.ActionMap import HelpableActionMap
 from Components.config import config, ConfigNothing, ConfigBoolean, ConfigSelection, ConfigYesNo
 from Components.Label import Label
 from Components.SystemInfo import SystemInfo
@@ -7,6 +7,7 @@ from Components.ConfigList import ConfigListScreen
 from Components.Pixmap import Pixmap
 from Components.Sources.StaticText import StaticText
 from Components.Sources.Boolean import Boolean
+from Screens.HelpMenu import HelpableScreen
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_PLUGIN, SCOPE_SKIN, SCOPE_CURRENT_SKIN
 from Tools.LoadPixmap import LoadPixmap
 
@@ -119,7 +120,7 @@ class SetupSummary(Screen):
 		self["SetupEntry"].text = self.parent.getCurrentEntry()
 		self["SetupValue"].text = self.parent.getCurrentValue()
 
-class Setup(ConfigListScreen, Screen):
+class Setup(ConfigListScreen, Screen, HelpableScreen):
 
 	ALLOW_SUSPEND = True
 
@@ -138,6 +139,7 @@ class Setup(ConfigListScreen, Screen):
 
 	def __init__(self, session, setup, plugin=None, menu_path=None, PluginLanguageDomain=None):
 		Screen.__init__(self, session)
+		HelpableScreen.__init__(self)
 		# for the skin: first try a setup_<setupID>, then Setup
 		self.skinName = ["setup_" + setup, "Setup" ]
 		self.setup = setup
@@ -162,18 +164,18 @@ class Setup(ConfigListScreen, Screen):
 		#check for list.entries > 0 else self.close
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
+		self["key_help"] = StaticText(_("HELP"))
 		self["description"] = Label("")
 		self["footnote"] = Label("")
 		self["HelpWindow"] = Pixmap()
 		self["HelpWindow"].hide()
 		self["VKeyIcon"] = Boolean(False)
 
-		self["actions"] = NumberActionMap(["SetupActions", "MenuActions"],
-			{
-				"cancel": self.keyCancel,
-				"save": self.keySave,
-				"menu": self.closeRecursive,
-			}, -2)
+		self["actions"] = HelpableActionMap(self, "SetupActions", {
+			"cancel": (self.keyCancel, _("Cancel any changed settings and exit")),
+			"save": (self.keySave, _("Save all changed settings and exit")),
+			"menu": (self.closeRecursive, _("Cancel any changed settings and exit all menus"))
+		}, prio=-2, description=_("Common Setup Functions"))
 
 		defaultmenuimage = setups.get("default", "")
 		menuimage = setups.get(self.setup, defaultmenuimage)
