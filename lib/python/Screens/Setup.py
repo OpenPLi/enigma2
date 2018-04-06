@@ -1,13 +1,13 @@
-from Screen import Screen
 from Components.ActionMap import HelpableActionMap
 from Components.config import config, ConfigNothing, ConfigBoolean, ConfigSelection, ConfigYesNo
-from Components.Label import Label
-from Components.SystemInfo import SystemInfo
 from Components.ConfigList import ConfigListScreen
+from Components.Label import Label
 from Components.Pixmap import Pixmap
-from Components.Sources.StaticText import StaticText
 from Components.Sources.Boolean import Boolean
+from Components.Sources.StaticText import StaticText
+from Components.SystemInfo import SystemInfo
 from Screens.HelpMenu import HelpableScreen
+from Screens.Screen import Screen
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_PLUGIN, SCOPE_SKIN, SCOPE_CURRENT_SKIN
 from Tools.LoadPixmap import LoadPixmap
 
@@ -82,18 +82,6 @@ def setupdom(setup=None, plugin=None):
 				__setuptitles[id] = title
 	return setupfiledom
 
-def getConfigMenuItem(configElement):
-	for item in setupdom().getroot().findall("./setup/item/."):
-		if item.text == configElement:
-			return _(item.attrib["text"]), eval(configElement)
-	return "", None
-
-class SetupError(Exception):
-	def __init__(self, message):
-		self.msg = message
-
-	def __str__(self):
-		return self.msg
 
 class SetupSummary(Screen):
 	def __init__(self, session, parent):
@@ -101,8 +89,10 @@ class SetupSummary(Screen):
 		self["SetupTitle"] = StaticText(_(parent.setup_title))
 		self["SetupEntry"] = StaticText("")
 		self["SetupValue"] = StaticText("")
-		self.onShow.append(self.addWatcher)
-		self.onHide.append(self.removeWatcher)
+		if self.addWatcher not in self.onShow:
+			self.onShow.append(self.addWatcher)
+		if self.removeWatcher not in self.onHide:
+			self.onHide.append(self.removeWatcher)
 
 	def addWatcher(self):
 		if hasattr(self.parent, "onChangedEntry"):
@@ -124,24 +114,11 @@ class Setup(ConfigListScreen, Screen, HelpableScreen):
 
 	ALLOW_SUSPEND = True
 
-	def refill(self):
-		xmldata = setupdom(self.setup, self.plugin).getroot()
-		for x in xmldata.findall("setup"):
-			if x.get("key") == self.setup:
-				self.addItems(x)
-				skin = x.get("skin", "")
-				if skin != "":
-					self.skinName = [skin] + self.skinName
-				if self.show_menupath in ("large", "small") and x.get("menuTitle", "").encode("UTF-8") != "":
-					self.setup_title = x.get("menuTitle", "").encode("UTF-8")
-				else:
-					self.setup_title = x.get("title", "").encode("UTF-8")
-
 	def __init__(self, session, setup, plugin=None, menu_path=None, PluginLanguageDomain=None):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
-		# for the skin: first try a setup_<setupID>, then Setup
-		self.skinName = ["setup_" + setup, "Setup"]
+		# For the skin: First try a Setup_<setupID>, then Setup
+		self.skinName = ["Setup_" + setup, "Setup"]
 		self.setup = setup
 		self.plugin = plugin
 		self.menu_path = menu_path
@@ -161,9 +138,8 @@ class Setup(ConfigListScreen, Screen, HelpableScreen):
 			if getattr(config.usage, "show_menupath", None) is not None:
 				self.show_menupath = config.usage.show_menupath.value
 				self["menu_path_compressed"] = StaticText()
-		#check for list.entries > 0 else self.close
 		self["key_red"] = StaticText(_("Cancel"))
-		self["key_green"] = StaticText(_("OK"))
+		self["key_green"] = StaticText(_("Save"))
 		self["key_help"] = StaticText(_("HELP"))
 		self["description"] = Label("")
 		self["footnote"] = Label("")
@@ -207,6 +183,19 @@ class Setup(ConfigListScreen, Screen, HelpableScreen):
 			self["config"].onSelectionChanged.append(self.selectionChanged)
 		if self.layoutFinished not in self.onLayoutFinish:
 			self.onLayoutFinish.append(self.layoutFinished)
+
+	def refill(self):
+		xmldata = setupdom(self.setup, self.plugin).getroot()
+		for x in xmldata.findall("setup"):
+			if x.get("key") == self.setup:
+				self.addItems(x)
+				skin = x.get("skin", "")
+				if skin != "":
+					self.skinName = [skin] + self.skinName
+				if self.show_menupath in ("large", "small") and x.get("menuTitle", "").encode("UTF-8") != "":
+					self.setup_title = x.get("menuTitle", "").encode("UTF-8")
+				else:
+					self.setup_title = x.get("title", "").encode("UTF-8")
 
 	def addItems(self, parentNode):
 		for x in parentNode:
@@ -319,6 +308,22 @@ class Setup(ConfigListScreen, Screen, HelpableScreen):
 	def cleanUp(self):
 		config.usage.setup_level.notifiers.remove(self.levelChanged)
 
+# Only used in AudioSelection screen...
+def getConfigMenuItem(configElement):
+	for item in setupdom().getroot().findall("./setup/item/."):
+		if item.text == configElement:
+			return _(item.attrib["text"]), eval(configElement)
+	return "", None
+
+
+class SetupError(Exception):
+	def __init__(self, message):
+		self.msg = message
+
+	def __str__(self):
+		return self.msg
+
+# Only used in Menu screen...
 def getSetupTitle(id):
 	setupdom()		# Load (or check for an updated) setup.xml file
 	id = str(id)
