@@ -1,6 +1,6 @@
 from Screen import Screen
 from Components.ActionMap import NumberActionMap
-from Components.config import config, ConfigNothing, ConfigBoolean, ConfigSelection
+from Components.config import config, ConfigNothing, ConfigBoolean, ConfigSelection, ConfigYesNo
 from Components.Label import Label
 from Components.SystemInfo import SystemInfo
 from Components.ConfigList import ConfigListScreen
@@ -8,6 +8,14 @@ from Components.Pixmap import Pixmap
 from Components.Sources.StaticText import StaticText
 from Components.Sources.Boolean import Boolean
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_PLUGIN, SCOPE_SKIN
+
+try:
+	from boxbranding import getMachineBrand, getMachineName
+	branding_available = True
+except ImportError:
+	# from models.owibranding import getBoxType, getMachineName
+	branding_available = False
+from gettext import dgettext
 
 import os
 import xml.etree.cElementTree
@@ -113,14 +121,17 @@ class Setup(ConfigListScreen, Screen):
 	ALLOW_SUSPEND = True
 
 	def refill(self):
-		self.list = []
 		xmldata = setupdom(self.setup, self.plugin).getroot()
 		for x in xmldata.findall("setup"):
-			if x.get("key") != self.setup:
-				continue
-			self.addItems(x)
-			self.setup_title = x.get("title", "").encode("UTF-8")
-			self.seperation = int(x.get('separation', '0'))
+			if x.get("key") == self.setup:
+				self.addItems(x)
+				skin = x.get("skin", "")
+				if skin != "":
+					self.skinName = [skin] + self.skinName
+				if self.show_menupath in ("large", "small") and x.get("menuTitle", "").encode("UTF-8") != "":
+					self.setup_title = x.get("menuTitle", "").encode("UTF-8")
+				else:
+					self.setup_title = x.get("title", "").encode("UTF-8")
 
 	def __init__(self, session, setup, plugin=None, menu_path=None, PluginLanguageDomain=None):
 		Screen.__init__(self, session)
@@ -130,8 +141,20 @@ class Setup(ConfigListScreen, Screen):
 		self.plugin = plugin
 		self.menu_path = menu_path
 		self.PluginLanguageDomain = PluginLanguageDomain
-		self.force_update_list = False
+		self.setup_title = "Setup"
+		self.item = None
 
+		# If config.usage.sort_settings doesn't exist create it here to supress
+		# errors later.
+		if getattr(config.usage, "sort_settings", None) is None:
+			config.usage.sort_settings = ConfigYesNo(default=False)
+		# In OpenPLi the menu path code is handled globally in GUISkin.py. In
+		# OpenViX and Beyonwiz the menu path code is handled here.
+		self.show_menupath = ""
+		if getattr(config.usage, "menu_path", None) is None:
+			if getattr(config.usage, "show_menupath", None) is not None:
+				self.show_menupath = config.usage.show_menupath.value
+				self["menu_path_compressed"] = StaticText()
 		#check for list.entries > 0 else self.close
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
@@ -150,57 +173,101 @@ class Setup(ConfigListScreen, Screen):
 		self.list = []
 		self.refill()
 		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changedEntry)
+		if config.usage.sort_settings.value:
+			self["config"].list.sort()
+		if self.levelChanged not in config.usage.setup_level.notifiers:
+			config.usage.setup_level.notifiers.append(self.levelChanged)
+		if self.cleanUp not in self.onClose:
+			self.onClose.append(self.cleanUp)
 		self["config"].onSelectionChanged.append(self.__onSelectionChanged)
 
 		self.setTitle(_(self.setup_title))
+		if self.layoutFinished not in self.onLayoutFinish:
+			self.onLayoutFinish.append(self.layoutFinished)
 
 	def addItems(self, parentNode):
 		for x in parentNode:
-			if not x.tag:
-				continue
-			if x.tag == 'item':
+			if x.tag and x.tag == "item":
 				item_level = int(x.get("level", 0))
-
 				if item_level > config.usage.setup_level.index:
 					continue
 
 				requires = x.get("requires")
 				if requires:
-					if requires[0] == '!':
-						if SystemInfo.get(requires[1:], False):
-							continue
-					elif not SystemInfo.get(requires, False):
+					negate = requires.startswith("!")
+					if negate:
+						requires = requires[1:]
+					if requires.startswith("config."):
+						item = eval(requires)
+						SystemInfo[requires] = item.value and item.value != "0"
+						clean = True
+					else:
+						clean = False
+					result = bool(SystemInfo.get(requires, False))
+					if clean:
+						SystemInfo.pop(requires, None)
+					if requires and negate == result:
 						continue
+
 				conditional = x.get("conditional")
 				if conditional and not eval(conditional):
 					continue
 
-				item_text = _(x.get("text", "??").encode("UTF-8"))
-				item_description = _(x.get("description", " ").encode("UTF-8"))
-				b = eval(x.text or "");
-				if b == "":
-					continue
-				#add to configlist
-				item = b
-				# the first b is the item itself, ignored by the configList.
-				# the second one is converted to string.
-				if not isinstance(item, ConfigNothing):
+				if self.PluginLanguageDomain:
+					item_text = dgettext(self.PluginLanguageDomain, x.get("text", "??").encode("UTF-8"))
+					item_description = dgettext(self.PluginLanguageDomain, x.get("description", " ").encode("UTF-8"))
+				else:
+					item_text = _(x.get("text", "??").encode("UTF-8"))
+					item_description = _(x.get("description", " ").encode("UTF-8"))
+				if branding_available:
+					item_text = item_text.replace("%s %s", "%s %s" % (getMachineBrand(), getMachineName()))
+					item_description = item_description.replace("%s %s", "%s %s" % (getMachineBrand(), getMachineName()))
+				else:
+					msg = _("Enigma2 receiver")
+					item_text = item_text.replace("%s %s", msg)
+					item_description = item_description.replace("%s %s", msg)
+				item = eval(x.text or "")
+				if item != "" and not isinstance(item, ConfigNothing):
+					# Add item to configlist.
+					# The first item is the item itself, ignored by the configList.
+					# The second one is converted to string.
 					self.list.append((item_text, item, item_description))
 
-	def changedEntry(self):
-		if isinstance(self["config"].getCurrent()[1], ConfigBoolean) or isinstance(self["config"].getCurrent()[1], ConfigSelection):
-			self.refill()
-			self["config"].setList(self.list)
+	def layoutFinished(self):
+		if len(self["config"].getList()) == 0:
+			print "[Setup] No menu items available!"
 
-	def __onSelectionChanged(self):
-		if self.force_update_list:
-			self["config"].onSelectionChanged.remove(self.__onSelectionChanged)
-			self.refill()
-			self["config"].setList(self.list)
-			self["config"].onSelectionChanged.append(self.__onSelectionChanged)
-			self.force_update_list = False
-		if not (isinstance(self["config"].getCurrent()[1], ConfigBoolean) or isinstance(self["config"].getCurrent()[1], ConfigSelection)):
-			self.force_update_list = True
+	def changedEntry(self):
+		self.item = self["config"].getCurrent()
+		if isinstance(self.item[1], (ConfigBoolean, ConfigSelection)):
+			self.createSetup()
+
+	def levelChanged(self, configElement):
+		self.createSetup()
+
+	def createSetup(self):
+		self.list = []
+		self.refill()
+		self["config"].setList(self.list)
+		if config.usage.sort_settings.value:
+			self["config"].list.sort()
+		self.moveToItem(self.item)
+
+	def moveToItem(self, item):
+		newIdx = self.getIndexFromItem(item)
+		if newIdx is None:
+			newIdx = 0
+		self["config"].setCurrentIndex(newIdx)
+
+	def getIndexFromItem(self, item):
+		if item is not None:
+			for x in range(len(self["config"].list)):
+				if self["config"].list[x][0] == item[0]:
+					return x
+		return None
+
+	def cleanUp(self):
+		config.usage.setup_level.notifiers.remove(self.levelChanged)
 
 def getSetupTitle(id):
 	setupdom()		# Load (or check for an updated) setup.xml file
