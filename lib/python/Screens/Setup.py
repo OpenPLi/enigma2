@@ -113,8 +113,6 @@ class SetupSummary(Screen):
 	def selectionChanged(self):
 		self["SetupEntry"].text = self.parent.getCurrentEntry()
 		self["SetupValue"].text = self.parent.getCurrentValue()
-		if hasattr(self.parent,"getCurrentDescription") and "description" in self.parent:
-			self.parent["description"].text = self.parent.getCurrentDescription()
 
 class Setup(ConfigListScreen, Screen):
 
@@ -143,6 +141,7 @@ class Setup(ConfigListScreen, Screen):
 		self.PluginLanguageDomain = PluginLanguageDomain
 		self.setup_title = "Setup"
 		self.item = None
+		self.footnote = ""
 
 		# If config.usage.sort_settings doesn't exist create it here to supress
 		# errors later.
@@ -159,6 +158,7 @@ class Setup(ConfigListScreen, Screen):
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
 		self["description"] = Label("")
+		self["footnote"] = Label("")
 		self["HelpWindow"] = Pixmap()
 		self["HelpWindow"].hide()
 		self["VKeyIcon"] = Boolean(False)
@@ -179,9 +179,8 @@ class Setup(ConfigListScreen, Screen):
 			config.usage.setup_level.notifiers.append(self.levelChanged)
 		if self.cleanUp not in self.onClose:
 			self.onClose.append(self.cleanUp)
-		self["config"].onSelectionChanged.append(self.__onSelectionChanged)
-
-		self.setTitle(_(self.setup_title))
+		if self.selectionChanged not in self["config"].onSelectionChanged:
+			self["config"].onSelectionChanged.append(self.selectionChanged)
 		if self.layoutFinished not in self.onLayoutFinish:
 			self.onLayoutFinish.append(self.layoutFinished)
 
@@ -233,7 +232,32 @@ class Setup(ConfigListScreen, Screen):
 					# The second one is converted to string.
 					self.list.append((item_text, item, item_description))
 
+	def selectionChanged(self):
+		if len(self["config"].getList()):
+			if self.footnote:
+				self["footnote"].text = _(self.footnote)
+			else:
+				if self.getCurrentEntry().endswith("*"):
+					self["footnote"].text = _("* = Restart Required")
+				else:
+					self["footnote"].text = ""
+			self["description"].text = self.getCurrentDescription()
+		else:
+			self["description"].text = _("There are no items currently available for this menu.")
+
 	def layoutFinished(self):
+		if self.show_menupath == "large" and self.menu_path:
+			title = self.menu_path + _(self.setup_title)
+			self["menu_path_compressed"].setText("")
+		elif self.show_menupath == "small" and self.menu_path:
+			title = _(self.setup_title)
+			self["menu_path_compressed"].setText(self.menu_path + " >" if not self.menu_path.endswith(" / ") else self.menu_path[:-3] + " >" or "")
+		elif self.show_menupath == "off" and self.menu_path:
+			title = _(self.setup_title)
+			self["menu_path_compressed"].setText("")
+		else:
+			title = _(self.setup_title)
+		self.setTitle(title)
 		if len(self["config"].getList()) == 0:
 			print "[Setup] No menu items available!"
 
