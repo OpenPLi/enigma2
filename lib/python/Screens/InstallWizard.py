@@ -2,7 +2,7 @@ from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen, ConfigList
 from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
-from Components.config import config, ConfigSubsection, ConfigBoolean, getConfigListEntry, ConfigSelection, ConfigYesNo, ConfigIP, ConfigNothing
+from Components.config import config, ConfigSubsection, ConfigBoolean, getConfigListEntry, ConfigSelection, ConfigIP, ConfigNothing
 from Components.Network import iNetwork
 from Components.Ipkg import IpkgComponent
 from enigma import eDVBDB
@@ -46,7 +46,7 @@ class InstallWizard(Screen, ConfigListScreen):
 			if is_found is False:
 				self.createMenu()
 		elif self.index == self.STATE_CHOISE_CHANNELLIST:
-			self.enabled = ConfigYesNo(default = True)
+			self.enabled = ConfigSelection(choices = [("True", _("Yes")), ("False", _("No"))], default = "True")
 			modes = {"19e-23e-basis": "Astra1 Astra3 basis", "19e-23e": "Astra 1 Astra 3", "19e-23e-28e": "Astra 1 Astra 2 Astra 3", "13e-19e-23e-28e": "Astra 1 Astra 2 Astra 3 Hotbird", "kabelnl": "Kabel-NL"}
 			self.channellist_type = ConfigSelection(choices = modes, default = "19e-23e-basis")
 			self.createMenu()
@@ -86,7 +86,7 @@ class InstallWizard(Screen, ConfigListScreen):
 				self.list.append(getConfigListEntry(_("Your receiver does not have an internet connection"), self.enabled))
 		elif self.index == self.STATE_CHOISE_CHANNELLIST:
 			self.list.append(getConfigListEntry(_("Install channel list"), self.enabled))
-			if self.enabled.value:
+			if self.enabled.value == "True":
 				self.list.append(getConfigListEntry(_("Channel list type"), self.channellist_type))
 		elif self.index == self.INSTALL_PLUGINS:
 			self.list.append(getConfigListEntry(_("No, I do not want to install plugins"), self.noplugins))
@@ -117,7 +117,7 @@ class InstallWizard(Screen, ConfigListScreen):
 			self.session.open(InstallWizardIpkgUpdater, self.index, _('Please wait (updating packages)'), IpkgComponent.CMD_UPDATE)
 			self.doNextStep = True
 		elif self.index == self.STATE_CHOISE_CHANNELLIST:
-			if self.enabled.value:
+			if self.enabled.value == "True":
 				self.session.open(InstallWizardIpkgUpdater, self.index, _('Please wait (downloading channel list)'), IpkgComponent.CMD_REMOVE, {'package': 'enigma2-plugin-settings-hans-' + self.channellist_type.value})
 			self.doNextStep = True
 		elif self.index == self.INSTALL_PLUGINS:
