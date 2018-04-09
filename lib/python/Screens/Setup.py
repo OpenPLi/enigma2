@@ -66,23 +66,21 @@ class Setup(ConfigListScreen, Screen):
 
 	ALLOW_SUSPEND = True
 
-	def refill(self):
-		self.list = []
-		xmldata = setupdom.getroot()
-		for x in xmldata.findall("setup"):
-			if x.get("key") != self.setup:
-				continue
-			self.addItems(x)
-			self.setup_title = x.get("title", "").encode("UTF-8")
-			self.seperation = int(x.get('separation', '0'))
-
 	def __init__(self, session, setup):
 		Screen.__init__(self, session)
 		# for the skin: first try a setup_<setupID>, then Setup
 		self.skinName = ["setup_" + setup, "Setup" ]
 		self.list = []
-		self.setup = setup
 		self.force_update_list = False
+
+		xmldata = setupdom.getroot()
+		for x in xmldata.findall("setup"):
+			if x.get("key") == setup:
+				self.setup = x
+				break
+
+		self.setup_title = self.setup.get("title", "").encode("UTF-8")
+		self.seperation = int(self.setup.get('separation', '0'))
 
 		#check for list.entries > 0 else self.close
 		self["key_red"] = StaticText(_("Cancel"))
@@ -99,14 +97,15 @@ class Setup(ConfigListScreen, Screen):
 				"menu": self.closeRecursive,
 			}, -2)
 
-		self.refill()
 		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changedEntry)
+		self.createSetupList()
 		self["config"].onSelectionChanged.append(self.__onSelectionChanged)
 
 		self.setTitle(_(self.setup_title))
 
-	def addItems(self, parentNode):
-		for x in parentNode:
+	def createSetupList(self):
+		self.list = []
+		for x in self.setup:
 			if not x.tag:
 				continue
 			if x.tag == 'item':
@@ -117,7 +116,7 @@ class Setup(ConfigListScreen, Screen):
 
 				requires = x.get("requires")
 				if requires:
-					if requires[0] == '!':
+					if requires.startswith('!'):
 						if SystemInfo.get(requires[1:], False):
 							continue
 					elif not SystemInfo.get(requires, False):
@@ -137,17 +136,16 @@ class Setup(ConfigListScreen, Screen):
 				# the second one is converted to string.
 				if not isinstance(item, ConfigNothing):
 					self.list.append((item_text, item, item_description))
+		self["config"].setList(self.list)
 
 	def changedEntry(self):
 		if isinstance(self["config"].getCurrent()[1], ConfigBoolean) or isinstance(self["config"].getCurrent()[1], ConfigSelection):
-			self.refill()
-			self["config"].setList(self.list)
+			self.createSetupList()
 
 	def __onSelectionChanged(self):
 		if self.force_update_list:
 			self["config"].onSelectionChanged.remove(self.__onSelectionChanged)
-			self.refill()
-			self["config"].setList(self.list)
+			self.createSetupList()
 			self["config"].onSelectionChanged.append(self.__onSelectionChanged)
 			self.force_update_list = False
 		if not (isinstance(self["config"].getCurrent()[1], ConfigBoolean) or isinstance(self["config"].getCurrent()[1], ConfigSelection)):
