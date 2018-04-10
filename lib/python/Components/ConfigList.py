@@ -12,6 +12,8 @@ class ConfigList(GUIComponent, object):
 		self.l = eListboxPythonConfigContent()
 		seperation = skin.parameters.get("ConfigListSeperator", 200)
 		self.l.setSeperation(seperation)
+		height, space = skin.parameters.get("ConfigListSlider",(17, 0))
+		self.l.setSlider(height, space)
 		self.timer = eTimer()
 		self.list = list
 		self.onSelectionChanged = [ ]
