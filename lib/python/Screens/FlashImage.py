@@ -392,9 +392,9 @@ class MultibootSelection(SelectImage):
 		currentimageslot = GetCurrentImage()
 		mode = SystemInfo["canMode12"] and GetCurrentImageMode() or 0
 		for x in sorted(imagesdict.keys()):
-			list.append(ChoiceEntryComponent('',((_("slot%s - %s mode 1 (current image)") if x == currentimageslot and mode == 1 else _("slot%s - %s mode 1")) % (x, imagesdict[x]['imagename']), x)))
+			list.append(ChoiceEntryComponent('',((_("slot%s - %s current mode 1 (current image)") if x == currentimageslot and mode != 12 else _("slot%s - %s  restart mode 1 ")) % (x, imagesdict[x]['imagename']), x)))
 			if SystemInfo["canMode12"]:
-				list.append(ChoiceEntryComponent('',((_("slot%s - %s mode 12 (current image)") if x == currentimageslot and mode == 12 else _("slot%s - %s mode 12")) % (x, imagesdict[x]['imagename']), x + 12)))
+				list.append(ChoiceEntryComponent('',((_("slot%s - %s current mode 12 (current image)") if x == currentimageslot and mode == 12 else _("slot%s - %s  restart mode 12 ")) % (x, imagesdict[x]['imagename']), x + 12)))
 		self["list"].setList(list)
 
 	def keyOk(self):
@@ -402,7 +402,7 @@ class MultibootSelection(SelectImage):
 		slot = currentSelected[0][1]
 		if currentSelected[0][1] != "Waiter":
 			model = HardwareInfo().get_device_model()
-			if SystemInfo["canMultiBootGB"]:
+			if SystemInfo["canMultiBoot"] and 'rootflags=data=journal' in open('/dev/mmcblk0p1').read():
 				startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rootwait rw rootflags=data=journal libata.force=1:3.0G,2:3.0G,3:3.0G coherent_poll=2M brcm_cma=764M@0x10000000 brcm_cma=1024M@0x80000000'\n" % (slot, slot * 2 + 3)
 			elif slot < 12:
 				startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=1'\n" % (slot, slot * 2 + 1, model)
