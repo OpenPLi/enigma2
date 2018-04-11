@@ -35,7 +35,10 @@ eBackgroundFileEraser::~eBackgroundFileEraser()
 	messages.send(Message());
 	if (instance==this)
 		instance=0;
-	kill();  // i dont understand why this is needed .. in ~eThread::eThread is a kill() to..
+	// Wait for the thread to complete. Must do that here,
+	// because in C++ the object will be demoted after this
+	// returns.
+	kill();
 }
 
 void eBackgroundFileEraser::thread()

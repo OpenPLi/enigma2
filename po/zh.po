@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-08 23:20+0100\n"
+"POT-Creation-Date: 2018-01-13 16:06+0330\n"
 "PO-Revision-Date: 2016-06-17 12:13+0800\n"
 "Last-Translator: nx111 <gdzdz@163.com>\n"
 "Language-Team: NEWBOLT\n"
@@ -159,7 +159,31 @@ msgid " updates available."
 msgstr "升级可用."
 
 #, python-format
+msgid "%.0f GB"
+msgstr ""
+
+#, python-format
+msgid "%.0f MB"
+msgstr ""
+
+#, python-format
+msgid "%.0f kB"
+msgstr ""
+
+#, python-format
+msgid "%.2f GB"
+msgstr ""
+
+#, python-format
 msgid "%02d:%02d"
+msgstr ""
+
+#, python-format
+msgid "%03d MB"
+msgstr ""
+
+#, python-format
+msgid "%2.1f sec"
 msgstr ""
 
 #. TRANSLATORS: short time representation hour:minute
@@ -170,6 +194,10 @@ msgstr ""
 #. TRANSLATORS: full time representation hour:minute:seconds
 #, python-format
 msgid "%2d:%02d:%02d"
+msgstr ""
+
+#, python-format
+msgid "%3.01f dB"
 msgstr ""
 
 msgid "%A %d %B"
@@ -189,12 +217,29 @@ msgstr ""
 msgid "%Y-%m-%d %H:%M"
 msgstr ""
 
+#. TRANSLATORS: full date representations short dayname daynum monthname long year in strftime() format! See 'man strftime'
+#, fuzzy
+msgid "%a %e %B %Y"
+msgstr "%d.%B %Y"
+
 #. TRANSLATORS: short date representation short dayname daynum short monthname in strftime() format! See 'man strftime'
 msgid "%a %e/%m"
 msgstr ""
 
 #. TRANSLATORS: long date representation short dayname daynum short monthname hour:minute in strftime() format! See 'man strftime'
 msgid "%a %e/%m  %-H:%M"
+msgstr ""
+
+#, python-format
+msgid "%d B"
+msgstr ""
+
+#, python-format
+msgid "%d GB"
+msgstr ""
+
+#, python-format
+msgid "%d MB"
 msgstr ""
 
 #. TRANSLATORS: Intermediate scanning result, '%d' channel(s) have been found so far
@@ -216,6 +261,10 @@ msgid_plural "%d files"
 msgstr[0] "%d file"
 msgstr[1] "%d files"
 
+#, fuzzy, python-format
+msgid "%d fps"
+msgstr "%d file"
+
 #, python-format
 msgid "%d hour"
 msgid_plural "%d hours"
@@ -227,6 +276,14 @@ msgid "%d job is running in the background!"
 msgid_plural "%d jobs are running in the background!"
 msgstr[0] ""
 msgstr[1] ""
+
+#, python-format
+msgid "%d kB"
+msgstr ""
+
+#, python-format
+msgid "%d kB/s"
+msgstr ""
 
 #, python-format
 msgid "%d min"
@@ -281,11 +338,37 @@ msgstr ""
 msgid "%d.%02d. %02d:%02d"
 msgstr ""
 
+#, python-format
+msgid "%d.%03d GB"
+msgstr ""
+
 msgid "%d.%B %Y"
 msgstr "%d.%B %Y"
 
+#, fuzzy, python-format
+msgid "%d.%d"
+msgstr "%d.%B %Y"
+
+#, fuzzy, python-format
+msgid "%d.%d.%d"
+msgstr "%d.%B %Y"
+
+#, python-format
+msgid "%d:%02d"
+msgstr ""
+
 #. TRANSLATORS: VFD hour:minute daynum short monthname in strftime() format! See 'man strftime'
 msgid "%k:%M %e/%m"
+msgstr ""
+
+#, python-format
+msgid ""
+"%s\n"
+"Press exit to close"
+msgstr ""
+
+#, python-format
+msgid "%s %d.%d"
 msgstr ""
 
 #, python-format
@@ -319,6 +402,12 @@ msgstr ""
 msgid "%s:%s"
 msgstr ""
 
+msgid "(VU+ type)"
+msgstr ""
+
+msgid "(ZAP as PiP)"
+msgstr ""
+
 msgid "(ZAP)"
 msgstr "(调谐)"
 
@@ -335,8 +424,19 @@ msgstr ""
 msgid "(show optional DVD audio menu)"
 msgstr "（显示可选的DVD音频菜单）"
 
+#, fuzzy
+msgid "(unknown)"
+msgstr "未知"
+
 msgid "* Only available if more than one interface is active."
 msgstr "* 仅在一个或多个网卡激活才有效."
+
+msgid "-NO SERVICE\n"
+msgstr ""
+
+#, python-format
+msgid "-SERVICE ERROR:%d\n"
+msgstr ""
 
 msgid "/s"
 msgstr ""
@@ -355,6 +455,12 @@ msgstr "1.1"
 
 msgid "1.2"
 msgstr "1.2"
+
+msgid "10 MB/s"
+msgstr ""
+
+msgid "100 MB/s"
+msgstr ""
 
 msgid "10bit"
 msgstr ""
@@ -392,6 +498,9 @@ msgstr "18 V"
 msgid "2"
 msgstr ""
 
+msgid "20 MB/s"
+msgstr ""
+
 msgid "23.976"
 msgstr ""
 
@@ -408,6 +517,15 @@ msgid "3"
 msgstr ""
 
 msgid "30"
+msgstr ""
+
+msgid "3D surround"
+msgstr ""
+
+msgid "3D surround softlimiter"
+msgstr ""
+
+msgid "3D surround speaker position"
 msgstr ""
 
 msgid "3d mode"
@@ -435,6 +553,9 @@ msgid "4:3 PanScan"
 msgstr "4:3 伸缩"
 
 msgid "5"
+msgstr ""
+
+msgid "50 MB/s"
 msgstr ""
 
 msgid "6"
@@ -466,6 +587,9 @@ msgstr "<最后一个计时器位置>"
 
 msgid "<unknown>"
 msgstr "<未知>"
+
+msgid "=NO STREAM\n"
+msgstr ""
 
 msgid "??"
 msgstr "??"
@@ -569,6 +693,9 @@ msgstr ""
 
 msgid "AC3 downmix"
 msgstr "AC3 缩减混音"
+
+msgid "ACQUIRING TSID/ONID"
+msgstr ""
 
 msgid "AGC:"
 msgstr ""
@@ -675,6 +802,12 @@ msgstr "添加到喜欢频道"
 msgid "Add/remove change timer for current event"
 msgstr ""
 
+msgid "Additional motor options allow you to enter details from your motor's spec sheet so enigma can work out how long it will take to move the dish from one satellite to another satellite."
+msgstr ""
+
+msgid "Additional motor options allow you to enter details from your motor's spec sheet so enigma can work out how long it will take to move to another satellite."
+msgstr ""
+
 msgid "Adjust 3D settings"
 msgstr "调整3D设置"
 
@@ -702,11 +835,23 @@ msgstr "高级视频增强设置"
 msgid "Advanced video setup"
 msgstr "高级视频设置"
 
+msgid "Afghanistan"
+msgstr ""
+
 msgid "After event"
 msgstr "事件之后"
 
+msgid "Aland Islands"
+msgstr ""
+
+msgid "Albania"
+msgstr ""
+
 msgid "Album"
 msgstr "专辑"
+
+msgid "Algeria"
+msgstr ""
 
 msgid "Alignment of events"
 msgstr ""
@@ -739,6 +884,9 @@ msgid "All services provider"
 msgstr ""
 
 msgid "Allocate"
+msgstr ""
+
+msgid "Allocate a number to the physical LNB you are configuring. You will be able to select this LNB again for other satellites (e.g. motorised dishes) to save setting up the same LNB multiple times."
 msgstr ""
 
 msgid "Allocate unused memory index"
@@ -780,6 +928,9 @@ msgstr ""
 msgid "Always include ECM messages in recordings. This overrides the individual timer settings globally. It allows recordings to be always decrypted afterwards (sometimes called offline decoding), if supported by your receiver. Default: off."
 msgstr ""
 
+msgid "American Samoa"
+msgstr ""
+
 msgid "An empty filename is illegal."
 msgstr "一个空的文件名是非法的."
 
@@ -790,6 +941,21 @@ msgid "An unknown error occurred!"
 msgstr ""
 
 msgid "And will put your receiver in standby over "
+msgstr ""
+
+msgid "Andorra"
+msgstr ""
+
+msgid "Angola"
+msgstr ""
+
+msgid "Anguilla"
+msgstr ""
+
+msgid "Antarctica"
+msgstr ""
+
+msgid "Antigua and Barbuda"
 msgstr ""
 
 msgid "Any activity"
@@ -849,10 +1015,19 @@ msgid ""
 "Your receiver will restart after the backup has been restored!"
 msgstr ""
 
+msgid "Argentina"
+msgstr ""
+
+msgid "Armenia"
+msgstr ""
+
 msgid "Artist"
 msgstr "艺术家"
 
 msgid "Arts/Culture"
+msgstr ""
+
+msgid "Aruba"
 msgstr ""
 
 msgid "As defined by the skin"
@@ -887,8 +1062,14 @@ msgstr ""
 msgid "Audio"
 msgstr "音频"
 
+msgid "Audio / Video"
+msgstr ""
+
 msgid "Audio PID"
 msgstr "音频PID"
+
+msgid "Audio auto volume level"
+msgstr ""
 
 msgid "Audio language selection 1"
 msgstr "自动语言1"
@@ -914,6 +1095,16 @@ msgstr ""
 
 #, python-format
 msgid "Audio track (%s) language"
+msgstr ""
+
+msgid "Audio volume step size"
+msgstr ""
+
+#, fuzzy
+msgid "Australia"
+msgstr "意大利语"
+
+msgid "Austria"
 msgstr ""
 
 msgid "Author: "
@@ -971,6 +1162,9 @@ msgstr "自动打开外部字幕"
 msgid "Available format variables"
 msgstr "可用的格式变量"
 
+msgid "Azerbaijan"
+msgstr ""
+
 msgid "B"
 msgstr "B"
 
@@ -979,6 +1173,15 @@ msgstr "误码"
 
 msgid "BER:"
 msgstr "误码:"
+
+msgid "BT 2020 CL"
+msgstr ""
+
+msgid "BT 2020 NCL"
+msgstr ""
+
+msgid "BT 709"
+msgstr ""
 
 msgid "Back"
 msgstr "返回"
@@ -995,6 +1198,10 @@ msgstr "后台删除选项"
 msgid "Background delete speed"
 msgstr "后台删除速度"
 
+#, python-format
+msgid "Backing up to: %s"
+msgstr ""
+
 msgid "Backup completed."
 msgstr ""
 
@@ -1004,14 +1211,31 @@ msgstr "备份失败!!"
 msgid "Backup is running..."
 msgstr "正在备份..."
 
+#, fuzzy
+msgid "Backup settings"
+msgstr "备份系统设置"
+
 msgid "Backup system settings"
 msgstr "备份系统设置"
+
+msgid "Bahamas"
+msgstr ""
+
+#, fuzzy
+msgid "Bahrain"
+msgstr "雨"
 
 msgid "Band"
 msgstr "波段"
 
 msgid "Bandwidth"
 msgstr "带宽"
+
+msgid "Bangladesh"
+msgstr ""
+
+msgid "Barbados"
+msgstr ""
 
 msgid "Basque"
 msgstr ""
@@ -1034,6 +1258,24 @@ msgstr "当电影结束时"
 msgid "Behavior when a movie reaches the end"
 msgstr "当电影快要结束时"
 
+msgid "Belarus"
+msgstr ""
+
+msgid "Belgium"
+msgstr ""
+
+msgid "Belize"
+msgstr ""
+
+msgid "Benin"
+msgstr ""
+
+msgid "Bermuda"
+msgstr ""
+
+msgid "Bhutan"
+msgstr ""
+
 msgid "Big PiP"
 msgstr ""
 
@@ -1052,20 +1294,59 @@ msgstr "块降噪"
 msgid "Blue"
 msgstr ""
 
-msgid "Blue boost"
+msgid "Bolivia (Plurinational State of)"
+msgstr ""
+
+msgid "Bonaire, Sint Eustatius and Saba"
 msgstr ""
 
 msgid "Bookmarks"
 msgstr "书签"
 
+msgid "Boost blue"
+msgstr ""
+
+#, fuzzy
+msgid "Boost green"
+msgstr "绿色"
+
+msgid "Bosnia and Herzegovina"
+msgstr ""
+
+msgid "Botswana"
+msgstr ""
+
+msgid "Bouvet Island"
+msgstr ""
+
+msgid "Brazil"
+msgstr ""
+
 msgid "Brightness"
 msgstr "亮度"
+
+msgid "British Indian Ocean Territory"
+msgstr ""
+
+msgid "Brunei Darussalam"
+msgstr ""
 
 #, python-format
 msgid "Buffering %d%%"
 msgstr ""
 
+#, fuzzy
+msgid "Build date: "
+msgstr "比特率:"
+
+#, fuzzy
+msgid "Bulgaria"
+msgstr "匈牙利语"
+
 msgid "Bulgarian"
+msgstr ""
+
+msgid "Burkina Faso"
 msgstr ""
 
 msgid "Burn DVD"
@@ -1080,6 +1361,9 @@ msgstr "烧录已有的镜像到DVD"
 
 msgid "Burn to DVD"
 msgstr "DVD烧录"
+
+msgid "Burundi"
+msgstr ""
 
 msgid "Bus: "
 msgstr "Bus:"
@@ -1124,6 +1408,9 @@ msgstr "有线"
 msgid "Cable Scan"
 msgstr "有线电视扫描"
 
+msgid "Cabo Verde"
+msgstr ""
+
 msgid "Cache thumbnails"
 msgstr ""
 
@@ -1139,16 +1426,31 @@ msgstr "计算结束"
 msgid "Calibrate"
 msgstr ""
 
+msgid "Cambodia"
+msgstr ""
+
+msgid "Cameroon"
+msgstr ""
+
 msgid "Can be used for different fps between external subtitles and video."
+msgstr ""
+
+msgid "Canada"
 msgstr ""
 
 msgid "Cancel"
 msgstr "取消"
 
+msgid "Cancelled upon user request"
+msgstr ""
+
 msgid "Cannot determine"
 msgstr ""
 
 msgid "Cannot find any signal ..., aborting !"
+msgstr ""
+
+msgid "Cannot find images - please try later"
 msgstr ""
 
 msgid "Cannot move files on a different disk or system to the trash can"
@@ -1169,11 +1471,24 @@ msgstr "卡片"
 msgid "Cascade PiP"
 msgstr ""
 
+msgid "Cayman Islands"
+msgstr ""
+
 msgid "Center DVB subtitles"
 msgstr ""
 
 msgid "Center time-labels and remove date"
 msgstr ""
+
+msgid "Central African Republic"
+msgstr ""
+
+msgid "Chad"
+msgstr ""
+
+#, fuzzy
+msgid "Change Language"
+msgstr "语言"
 
 msgid "Change PIN"
 msgstr ""
@@ -1262,6 +1577,18 @@ msgstr ""
 msgid "Children/Youth"
 msgstr ""
 
+msgid "Chile"
+msgstr ""
+
+msgid "China"
+msgstr ""
+
+msgid "Chinese - Simplified"
+msgstr ""
+
+msgid "Chinese - Traditional"
+msgstr ""
+
 msgid "Choose Tuner"
 msgstr "选择调谐器"
 
@@ -1269,6 +1596,9 @@ msgid "Choose bouquet"
 msgstr "选择自定义组"
 
 msgid "Choose which tuner to configure."
+msgstr ""
+
+msgid "Christmas Island"
 msgstr ""
 
 msgid "Circular LNB"
@@ -1301,6 +1631,9 @@ msgstr "清除播放列表"
 msgid "Clone TV screen to LCD"
 msgstr ""
 
+msgid "Clone TV screen to LCD mode"
+msgstr ""
+
 msgid "Close"
 msgstr "关闭"
 
@@ -1309,6 +1642,9 @@ msgstr "结束时关闭画中画"
 
 msgid "Close title selection"
 msgstr "关闭标题选择"
+
+msgid "Cocos (Keeling) Islands"
+msgstr ""
 
 msgid "Code R. LP-HP & Guard Int."
 msgstr ""
@@ -1325,8 +1661,15 @@ msgstr "收藏名称"
 msgid "Collection settings"
 msgstr "收藏设置"
 
+#, fuzzy
+msgid "Colombia"
+msgstr "色彩"
+
 msgid "Color format"
 msgstr "色彩格式"
+
+msgid "Combo"
+msgstr ""
 
 msgid "Command execution..."
 msgstr "执行命令..."
@@ -1346,6 +1689,9 @@ msgstr "通用接口选择"
 msgid "Communication"
 msgstr "通信"
 
+msgid "Comoros"
+msgstr ""
+
 msgid "Compact flash"
 msgstr ""
 
@@ -1357,6 +1703,10 @@ msgstr "复合 (允许混合音轨和宽高比)"
 
 msgid "Composition of the recording filenames"
 msgstr "录像的文件名构成"
+
+#, fuzzy
+msgid "Compress"
+msgstr "按 OK"
 
 msgid "Config Scan Details"
 msgstr ""
@@ -1518,6 +1868,9 @@ msgstr ""
 msgid "Configure the general audio delay of stereo sound tracks."
 msgstr ""
 
+msgid "Configure the general audio volume step size (limit 1-10)."
+msgstr ""
+
 msgid "Configure the hard disk drive to go to standby after the specified idle time."
 msgstr ""
 
@@ -1632,6 +1985,9 @@ msgstr ""
 msgid "Configure the way in which the receiver changes channels."
 msgstr ""
 
+msgid "Configure this tuner using simple or advanced options, or loop it through to another tuner, or copy a configuration from another tuner, or disable it."
+msgstr ""
+
 msgid "Configure where completed timers show up in the timer list."
 msgstr ""
 
@@ -1686,11 +2042,21 @@ msgstr "配置"
 msgid "Conflict not resolved!"
 msgstr ""
 
+msgid "Congo"
+msgstr ""
+
+msgid "Congo (Democratic Republic of the)"
+msgstr ""
+
 msgid "Connect"
 msgstr "连接"
 
 msgid "Connect to a wireless network"
 msgstr "连接无线网络"
+
+#, fuzzy
+msgid "Connected"
+msgstr "已连接"
 
 msgid "Connected satellites"
 msgstr ""
@@ -1705,6 +2071,12 @@ msgid "Console"
 msgstr ""
 
 msgid "Constellation & FFT mode"
+msgstr ""
+
+msgid "Consult your Unicable device spec sheet for this information."
+msgstr ""
+
+msgid "Consult your motor's spec sheet for this information, or leave the default setting."
 msgstr ""
 
 msgid "Content does not fit on DVD!"
@@ -1737,10 +2109,22 @@ msgstr ""
 msgid "Converting ext3 to ext4..."
 msgstr ""
 
+msgid "Cook Islands"
+msgstr ""
+
 msgid "Copy"
 msgstr "拷贝"
 
+msgid "Costa Rica"
+msgstr ""
+
+msgid "Cote d'Ivoire"
+msgstr ""
+
 msgid "Could not find installed channel list."
+msgstr ""
+
+msgid "Could not find suitable media - Please insert a media (e.g. USB stick) and try again!"
 msgstr ""
 
 msgid "Could not load medium! No disc inserted?"
@@ -1756,6 +2140,9 @@ msgstr ""
 #, python-format
 msgid "Could not record due to invalid service %s"
 msgstr ""
+
+msgid "Country"
+msgstr "国家列表"
 
 msgid "Cover dashed flickering line for this service"
 msgstr ""
@@ -1779,8 +2166,18 @@ msgstr ""
 msgid "Creating partition"
 msgstr ""
 
+#, fuzzy
+msgid "Croatia"
+msgstr "克罗地亚"
+
 msgid "Croatian"
 msgstr "克罗地亚"
+
+msgid "Cuba"
+msgstr ""
+
+msgid "Curacao"
+msgstr ""
 
 msgid "Current CEC address"
 msgstr "当前CEC地址"
@@ -1839,10 +2236,20 @@ msgstr ""
 msgid "Cutlist editor..."
 msgstr "列表编辑器..."
 
+msgid "Cyprus"
+msgstr ""
+
 msgid "Czech"
 msgstr "捷克"
 
+#, fuzzy
+msgid "Czechia"
+msgstr "捷克"
+
 msgid "D"
+msgstr ""
+
+msgid "DAC"
 msgstr ""
 
 msgid "DHCP"
@@ -1863,8 +2270,9 @@ msgstr "双层DVD"
 msgid "DVB CI Delay"
 msgstr ""
 
-msgid "DVB drivers: "
-msgstr ""
+#, fuzzy
+msgid "DVB driver version: "
+msgstr "新版本:"
 
 msgid "DVB subtitle black transparency"
 msgstr "DVB字幕黑色透明"
@@ -1922,6 +2330,9 @@ msgstr "日期"
 
 msgid "Date/time input"
 msgstr "日期/时间输入"
+
+msgid "Debug to file"
+msgstr ""
 
 msgid "Deep standby"
 msgstr "深度休眠"
@@ -2013,6 +2424,10 @@ msgstr "删除失败."
 msgid "Delete file"
 msgstr ""
 
+#, fuzzy
+msgid "Delete image"
+msgstr "已删除项目"
+
 msgid "Delete playlist entry"
 msgstr ""
 
@@ -2027,6 +2442,10 @@ msgstr "删除"
 
 msgid "Deleted items"
 msgstr "已删除项目"
+
+#, fuzzy
+msgid "Denmark"
+msgstr "周末标记:"
 
 msgid "Depth"
 msgstr "深度"
@@ -2045,6 +2464,9 @@ msgstr "取消"
 
 msgid "Details for plugin: "
 msgstr "插件信息:"
+
+msgid "Detect next boxes before standby"
+msgstr ""
 
 msgid "Detected HDD:"
 msgstr "检测到的硬盘:"
@@ -2085,6 +2507,10 @@ msgstr ""
 
 msgid "DiSEqC-tester settings"
 msgstr ""
+
+#, fuzzy
+msgid "Diasbled"
+msgstr "禁用"
 
 msgid "Did you see all eight arrow heads?"
 msgstr ""
@@ -2127,9 +2553,6 @@ msgstr "禁用定时器"
 msgid "Disabled"
 msgstr "禁用"
 
-msgid "Disclaimer"
-msgstr ""
-
 msgid "Disk space to reserve for recordings (in GB)"
 msgstr "为录像保留磁盘空间(GB)"
 
@@ -2150,6 +2573,32 @@ msgstr ""
 
 msgid "Display setup"
 msgstr "显示设置"
+
+#, fuzzy
+msgid "Djibouti"
+msgstr "关于"
+
+#, fuzzy
+msgid "Do a cable service scan now"
+msgstr " 是否开始频道扫描?"
+
+#, fuzzy
+msgid "Do a fast service scan now"
+msgstr " 是否开始频道扫描?"
+
+#, fuzzy
+msgid "Do a manual service scan now"
+msgstr "是，开始手动扫描"
+
+#, fuzzy
+msgid "Do an automatic service scan now"
+msgstr "是，开始自动扫描"
+
+msgid "Do center DVB subs on this service"
+msgstr ""
+
+msgid "Do not center DVB subs on this service"
+msgstr ""
 
 msgid "Do not change"
 msgstr ""
@@ -2217,11 +2666,15 @@ msgstr ""
 msgid "Do you want to burn this collection to DVD medium?"
 msgstr " 是否烧录这个收藏到DVD光盘?"
 
-msgid "Do you want to do a service scan?"
-msgstr " 是否开始频道扫描?"
+#, fuzzy, python-format
+msgid ""
+"Do you want to flash image\n"
+"%s"
+msgstr " 是否下载映像到 \"%s\"?"
 
-msgid "Do you want to do another manual service scan?"
-msgstr " 是否手动扫描其他频道?"
+#, fuzzy
+msgid "Do you want to install Plugins?"
+msgstr " 是否安装默认的卫星列表？"
 
 msgid "Do you want to install a channel list?"
 msgstr ""
@@ -2266,6 +2719,12 @@ msgstr ""
 msgid "Do you want to upgrade the package:\n"
 msgstr " 是否升级软件包:\n"
 
+msgid "Dominica"
+msgstr ""
+
+msgid "Dominican Republic"
+msgstr ""
+
 msgid "Don't save and stop timeshift"
 msgstr ""
 
@@ -2299,6 +2758,10 @@ msgstr "可下载的插件"
 msgid "Downloading"
 msgstr "下载"
 
+#, fuzzy
+msgid "Downloading Image"
+msgstr "下载"
+
 msgid "Downloading plugin information. Please wait..."
 msgstr "正在下载插件列表,请稍候..."
 
@@ -2310,6 +2773,10 @@ msgstr ""
 
 msgid "E"
 msgstr "E"
+
+#, fuzzy
+msgid "ECM Info"
+msgstr "ECM信息"
 
 msgid "EPG"
 msgstr ""
@@ -2336,6 +2803,9 @@ msgstr "东"
 msgid "East limit set"
 msgstr ""
 
+msgid "Ecuador"
+msgstr ""
+
 msgid "Edit"
 msgstr "修改"
 
@@ -2344,6 +2814,10 @@ msgstr "编辑 DNS"
 
 msgid "Edit chapters of current title"
 msgstr "编辑章节当前标题"
+
+#, fuzzy
+msgid "Edit selection"
+msgstr "定时器选择"
 
 msgid "Edit settings"
 msgstr "编辑设置"
@@ -2364,6 +2838,12 @@ msgid "Edit upgrade source url."
 msgstr "修改升级源地址."
 
 msgid "Education/Science/..."
+msgstr ""
+
+msgid "Egypt"
+msgstr ""
+
+msgid "El Salvador"
 msgstr ""
 
 msgid "Electronic Program Guide"
@@ -2433,6 +2913,9 @@ msgstr ""
 msgid "Enable teletext caching"
 msgstr "启用图文电视缓冲"
 
+msgid "Enable this setting if your aerial system needs power"
+msgstr ""
+
 msgid "Enable timer conflict detection"
 msgstr ""
 
@@ -2479,10 +2962,20 @@ msgstr "英语"
 msgid "Enigma (re)starts: %d\n"
 msgstr ""
 
+#, fuzzy
+msgid "Enigma version: "
+msgstr "反向:"
+
 msgid "Enigma2 skin selector"
 msgstr ""
 
 msgid "Enter PIN"
+msgstr ""
+
+msgid "Enter if you are in the east or west hemisphere."
+msgstr ""
+
+msgid "Enter if you are north or south of the equator."
 msgstr ""
 
 msgid "Enter main menu..."
@@ -2494,10 +2987,37 @@ msgstr ""
 msgid "Enter pin code"
 msgstr "输入密码"
 
+msgid "Enter the frequency at which you LNB switches between low band and high band. For more information consult the spec sheet of your LNB."
+msgstr ""
+
+msgid "Enter the frequency step size for the tuner to use when searching for cable multiplexes. For more information consult your cable provider's documentation."
+msgstr ""
+
+msgid "Enter the number stored in the positioner that corresponds to this satellite."
+msgstr ""
+
 msgid "Enter the service pin"
 msgstr "输入服务密码"
 
+msgid "Enter your current latitude. This is the number of degrees you are from the equator as a decimal."
+msgstr ""
+
+msgid "Enter your current longitude. This is the number of degrees you are from zero meridian as a decimal."
+msgstr ""
+
+msgid "Enter your high band local oscillator frequency. For more information consult the spec sheet of your LNB."
+msgstr ""
+
+msgid "Enter your low band local oscillator frequency. For more information consult the spec sheet of your LNB."
+msgstr ""
+
 msgid "Equal to"
+msgstr ""
+
+msgid "Equatorial Guinea"
+msgstr ""
+
+msgid "Eritrea"
 msgstr ""
 
 msgid "Error"
@@ -2506,8 +3026,31 @@ msgstr "错误"
 msgid "Error code"
 msgstr "错误码"
 
+#, python-format
+msgid ""
+"Error during backup settings\n"
+"%s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Error during downloading image\n"
+"%s\n"
+"%s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Error during unzipping image\n"
+"%s"
+msgstr ""
+
 msgid "Error executing plugin"
 msgstr "执行插件发生错误"
+
+#, fuzzy
+msgid "Error stop stream!"
+msgstr "固定流"
 
 #, python-format
 msgid ""
@@ -2516,6 +3059,9 @@ msgid ""
 msgstr ""
 "错误: %s\n"
 "重试?"
+
+msgid "Estonia"
+msgstr ""
 
 msgid "Estonian"
 msgstr ""
@@ -2526,7 +3072,13 @@ msgstr ""
 msgid "Ethernet network interface"
 msgstr "网卡接口"
 
+msgid "Ethiopia"
+msgstr ""
+
 msgid "Event font size (relative to skin size)"
+msgstr ""
+
+msgid "Event name first"
 msgstr ""
 
 msgid "Event view"
@@ -2598,8 +3150,15 @@ msgstr "退出向导"
 msgid "Exit/OK"
 msgstr ""
 
+msgid "Expand"
+msgstr ""
+
 msgid "Expert"
 msgstr "高级"
+
+#, fuzzy
+msgid "Expert settings"
+msgstr "编辑设置"
 
 msgid "Extend sleeptimer 15 minutes"
 msgstr ""
@@ -2659,7 +3218,10 @@ msgstr ""
 msgid "F"
 msgstr ""
 
-msgid "F1/F3/F4"
+msgid "F1/F3/F4/F4-TURBO"
+msgstr ""
+
+msgid "FAILED"
 msgstr ""
 
 msgid "FBC SCR (Unicable/JESS)"
@@ -2705,6 +3267,9 @@ msgstr ""
 msgid "Failed:"
 msgstr ""
 
+msgid "Falkland Islands (Malvinas)"
+msgstr ""
+
 msgid "Fallback remote receiver URL"
 msgstr ""
 
@@ -2726,6 +3291,9 @@ msgstr ""
 msgid "Fan speed"
 msgstr ""
 
+msgid "Faroe Islands"
+msgstr ""
+
 msgid "Fast"
 msgstr "快速"
 
@@ -2743,6 +3311,9 @@ msgstr ""
 
 msgid "Favourites"
 msgstr "喜爱频道"
+
+msgid "Fiji"
+msgstr ""
 
 msgid "File appears to be busy.\n"
 msgstr ""
@@ -2777,11 +3348,32 @@ msgstr "网络设置完成"
 msgid "Finished restarting your network"
 msgstr "重启网络完成"
 
+msgid "Finland"
+msgstr ""
+
 msgid "Finnish"
 msgstr "芬兰"
 
 msgid "Fixed"
 msgstr ""
+
+#, fuzzy
+msgid "Flash Image"
+msgstr "安装失败"
+
+#, fuzzy
+msgid "Flash image"
+msgstr "安装失败"
+
+#, fuzzy
+msgid "Flashing image succesfull"
+msgstr "成功删除"
+
+#, fuzzy, python-format
+msgid ""
+"Flashing image was not succesfull\n"
+"%s"
+msgstr "安装不成功!\n"
 
 msgid "Following tasks will be done after you press OK!"
 msgstr ""
@@ -2790,6 +3382,9 @@ msgid "Force LNB Power"
 msgstr ""
 
 msgid "Force ToneBurst"
+msgstr ""
+
+msgid "Force legacy signal stats"
 msgstr ""
 
 msgid "Format"
@@ -2801,8 +3396,22 @@ msgstr "前向音量键"
 msgid "Frame size in full view"
 msgstr "全屏显示时的帧大小"
 
+#, fuzzy
+msgid "France"
+msgstr "取消"
+
 msgid "French"
 msgstr "法国"
+
+#, fuzzy
+msgid "French Guiana"
+msgstr "法国"
+
+msgid "French Polynesia"
+msgstr ""
+
+msgid "French Southern Territories"
+msgstr ""
 
 msgid "Frequency"
 msgstr "频率"
@@ -2856,6 +3465,10 @@ msgstr ""
 msgid "G"
 msgstr ""
 
+#, fuzzy
+msgid "GStreamer version: "
+msgstr "新版本:"
+
 msgid ""
 "GUI needs a restart to apply a new language\n"
 "Do you want to restart the GUI now?"
@@ -2864,6 +3477,12 @@ msgstr ""
 msgid ""
 "GUI needs a restart to apply a new skin\n"
 "Do you want to restart the GUI now?"
+msgstr ""
+
+msgid "Gabon"
+msgstr ""
+
+msgid "Gambia"
 msgstr ""
 
 msgid "Gateway"
@@ -2878,11 +3497,24 @@ msgstr ""
 msgid "Genre"
 msgstr "类型"
 
+msgid "Georgia"
+msgstr ""
+
 msgid "German"
+msgstr "德语"
+
+#, fuzzy
+msgid "Germany"
 msgstr "德语"
 
 msgid "Getting plugin information. Please wait..."
 msgstr "正在下载插件信息, 请稍候..."
+
+msgid "Ghana"
+msgstr ""
+
+msgid "Gibraltar"
+msgstr ""
 
 msgid "Go down the list"
 msgstr ""
@@ -2912,6 +3544,9 @@ msgid "Go to previous page of service"
 msgstr ""
 
 msgid "Go up the list"
+msgstr ""
+
+msgid "Gold"
 msgstr ""
 
 msgid "Goto"
@@ -2959,17 +3594,45 @@ msgstr ""
 msgid "Graphical Multi EPG"
 msgstr "图形 Multi-EPG"
 
+#, fuzzy
+msgid "Greece"
+msgstr "希腊语"
+
 msgid "Greek"
 msgstr "希腊语"
 
 msgid "Green"
 msgstr ""
 
-msgid "Green boost"
+msgid "Greenland"
+msgstr ""
+
+msgid "Grenada"
+msgstr ""
+
+msgid "Guadeloupe"
+msgstr ""
+
+msgid "Guam"
 msgstr ""
 
 msgid "Guard interval"
 msgstr "保护间隔模式"
+
+msgid "Guatemala"
+msgstr ""
+
+msgid "Guernsey"
+msgstr ""
+
+msgid "Guinea"
+msgstr ""
+
+msgid "Guinea-Bissau"
+msgstr ""
+
+msgid "Guyana"
+msgstr ""
 
 msgid "H"
 msgstr ""
@@ -2977,20 +3640,36 @@ msgstr ""
 msgid "HD list"
 msgstr "高清列表"
 
-msgid "HD1100/HD1200/HD1265/et7x00/et8500/et7000mini"
+msgid "HD11/HD51/HD1100/HD1200/HD1265/HD1500/HD500C/HD530C/VS1000/VS1500/et7x00/et8500/et7000mini"
 msgstr ""
 
 msgid "HD2400"
 msgstr ""
 
+msgid "HDMI"
+msgstr ""
+
 msgid "HDMI Colordepth"
+msgstr ""
+
+msgid "HDMI Colorimetry"
 msgstr ""
 
 msgid "HDMI Colorspace"
 msgstr ""
 
+msgid "HDMI-CEC Source Active"
+msgstr ""
+
+msgid "HDMI-CEC Source Inactive"
+msgstr ""
+
 msgid "HDMI-CEC setup"
 msgstr ""
+
+#, fuzzy
+msgid "Haiti"
+msgstr "等待"
 
 msgid "Handle standby from TV"
 msgstr "管理待机"
@@ -3015,6 +3694,9 @@ msgstr ""
 
 msgid "Hardware: "
 msgstr "硬件:"
+
+msgid "Heard Island and McDonald Islands"
+msgstr ""
 
 msgid "Hebrew"
 msgstr ""
@@ -3061,7 +3743,16 @@ msgstr ""
 msgid "Hold till locked"
 msgstr "保持到锁定"
 
+msgid "Holy See"
+msgstr ""
+
 msgid "Home"
+msgstr ""
+
+msgid "Honduras"
+msgstr ""
+
+msgid "Hong Kong"
 msgstr ""
 
 msgid "Horizontal"
@@ -3097,7 +3788,18 @@ msgstr "色相"
 msgid "Hungarian"
 msgstr "匈牙利语"
 
+#, fuzzy
+msgid "Hungary"
+msgstr "匈牙利语"
+
 msgid "I"
+msgstr ""
+
+#, fuzzy
+msgid "I do not want to perform any service scans"
+msgstr " 是否开始频道扫描?"
+
+msgid "IDLE"
 msgstr ""
 
 msgid "IP address"
@@ -3109,8 +3811,30 @@ msgstr "这个ISO文件过大!"
 msgid "ISO path"
 msgstr "ISO路径"
 
+#, fuzzy
+msgid "Iceland"
+msgstr "冰岛"
+
 msgid "Icons"
 msgstr "图标"
+
+msgid "If enabled, display shows 12 chars instead 8, but in latin-1/translit only."
+msgstr ""
+
+msgid "If set to 'yes' signal values (SNR, etc) will be calculated from API V3. This is an old API version that has now been superseded."
+msgstr ""
+
+msgid "If using multiple uncommitted switches the DiSEqC commands must be sent multiple times. Set to the number of uncommitted switches in the chain minus one."
+msgstr ""
+
+msgid "If you are using a Circular polarised LNB select 'yes', otherwise select 'no'."
+msgstr ""
+
+msgid "If you are using a DiSEqC committed switch enter the port letter required to access the LNB used for this satellite."
+msgstr ""
+
+msgid "If you are using a DiSEqC uncommitted switch enter the port number required to access the LNB used for this satellite."
+msgstr ""
 
 msgid ""
 "If you see this, something is wrong with\n"
@@ -3126,7 +3850,22 @@ msgid ""
 "If you are happy with the result, press OK."
 msgstr "如果您的电视机有亮度或对比度增强项，请关闭它。如果里面有标为“动态”的项目，将其设置为标准。调整背光等级的值以符合您的口味。将电视机的对比度尽可能地降低。然后尽可能将亮度设置调低，但请确保最下面的两个灰色能够分辨出来。现在，不必关心亮度的色调，它们将在接下来的步骤中设置。如果您对结果感到满意，按OK 。"
 
+msgid "Ignore DVB-C namespace sub network"
+msgstr ""
+
+msgid "Ignore DVB-S namespace sub network"
+msgstr ""
+
+msgid "Ignore DVB-T namespace sub network"
+msgstr ""
+
 msgid "Ignore conflict"
+msgstr ""
+
+#, python-format
+msgid ""
+"Image to install is invalid\n"
+"%s"
 msgstr ""
 
 msgid "Image: "
@@ -3161,6 +3900,13 @@ msgstr "索引"
 
 msgid "Index allocated:"
 msgstr ""
+
+msgid "India"
+msgstr ""
+
+#, fuzzy
+msgid "Indonesia"
+msgstr "完成!"
 
 msgid "Info"
 msgstr "信息"
@@ -3213,6 +3959,13 @@ msgstr "正在初始化硬盘..."
 msgid "Input"
 msgstr "输入"
 
+#, fuzzy
+msgid "Input "
+msgstr "输入 1"
+
+msgid "Input Stream ID"
+msgstr ""
+
 msgid "Input device setup"
 msgstr "输入设备"
 
@@ -3243,16 +3996,10 @@ msgstr "安装本地扩展"
 msgid "Install picons on"
 msgstr "安装picon"
 
-msgid "Install softcam"
-msgstr ""
-
 msgid "Installation has completed."
 msgstr ""
 
 msgid "Installation or removal has completed."
-msgstr ""
-
-msgid "Installed: "
 msgstr ""
 
 msgid "Installing"
@@ -3272,9 +4019,6 @@ msgstr ""
 
 msgid "Interface: "
 msgstr "网卡:"
-
-msgid "Intermediate"
-msgstr "中级"
 
 msgid "Internal"
 msgstr ""
@@ -3313,10 +4057,27 @@ msgstr "反向"
 msgid "Ipkg"
 msgstr ""
 
+msgid "Iran (Islamic Republic of)"
+msgstr ""
+
+msgid "Iraq"
+msgstr ""
+
+#, fuzzy
+msgid "Ireland"
+msgstr "冰岛"
+
 msgid "Is this setting ok?"
 msgstr ""
 
 msgid "Is this video mode ok?"
+msgstr ""
+
+#, fuzzy
+msgid "Isle of Man"
+msgstr "扫描类型"
+
+msgid "Israel"
 msgstr ""
 
 msgid ""
@@ -3329,6 +4090,10 @@ msgstr ""
 msgid "Italian"
 msgstr "意大利语"
 
+#, fuzzy
+msgid "Italy"
+msgstr "意大利语"
+
 msgid "Items per page "
 msgstr ""
 
@@ -3338,7 +4103,19 @@ msgstr ""
 msgid "J"
 msgstr ""
 
+msgid "Jamaica"
+msgstr ""
+
+msgid "Japan"
+msgstr ""
+
+msgid "Jersey"
+msgstr ""
+
 msgid "Job overview"
+msgstr ""
+
+msgid "Jordan"
 msgstr ""
 
 msgid "Jump to beginning of list"
@@ -3357,11 +4134,24 @@ msgstr ""
 msgid "Just scale"
 msgstr ""
 
+msgid "KA-SAT"
+msgstr ""
+
+msgid "Kazakhstan"
+msgstr ""
+
 msgid "Keep service"
+msgstr ""
+
+msgid "Kenya"
 msgstr ""
 
 msgid "Kernel version: "
 msgstr ""
+
+#, fuzzy
+msgid "Key Events"
+msgstr "事件"
 
 msgid "Keyboard"
 msgstr "键盘布局"
@@ -3370,6 +4160,22 @@ msgid "Keyboard map"
 msgstr ""
 
 msgid "Keyboard setup"
+msgstr ""
+
+msgid "Kiribati"
+msgstr ""
+
+msgid "Korea (Democratic People's Republic of)"
+msgstr ""
+
+msgid "Korea (Republic of)"
+msgstr ""
+
+#, fuzzy
+msgid "Kuwait"
+msgstr "等待"
+
+msgid "Kyrgyzstan"
 msgstr ""
 
 msgid "LAN adapter"
@@ -3387,6 +4193,9 @@ msgstr "语言"
 msgid "Language selection"
 msgstr "语言选择"
 
+msgid "Lao People's Democratic Republic"
+msgstr ""
+
 msgid "Large"
 msgstr ""
 
@@ -3402,13 +4211,26 @@ msgstr ""
 msgid "Latest Commits"
 msgstr ""
 
+#, fuzzy
+msgid "Latest upgrade log"
+msgstr "上次升级:"
+
 msgid "Latitude"
 msgstr "纬度"
+
+msgid "Latvia"
+msgstr ""
 
 msgid "Latvian"
 msgstr ""
 
 msgid "Leave DVD player?"
+msgstr ""
+
+msgid "Leave this set to 'yes' unless you fully understand why you are adjusting it."
+msgstr ""
+
+msgid "Lebanon"
 msgstr ""
 
 msgid "Left"
@@ -3420,11 +4242,23 @@ msgstr ""
 msgid "Leisure hobbies"
 msgstr ""
 
+msgid "Lesotho"
+msgstr ""
+
 #. TRANSLATORS: (aspect ratio policy: black bars on top/bottom) in doubt, keep english term.
 msgid "Letterbox"
 msgstr "信箱模式"
 
 msgid "Letterbox zoom"
+msgstr ""
+
+msgid "Liberia"
+msgstr ""
+
+msgid "Libya"
+msgstr ""
+
+msgid "Liechtenstein"
 msgstr ""
 
 msgid "Limit character set for recording filenames"
@@ -3484,6 +4318,10 @@ msgstr ""
 msgid "Lists reloaded!"
 msgstr ""
 
+#, fuzzy
+msgid "Lithuania"
+msgstr "立陶宛语"
+
 msgid "Lithuanian"
 msgstr "立陶宛语"
 
@@ -3532,6 +4370,9 @@ msgstr "经度"
 msgid "Loop through from"
 msgstr ""
 
+msgid "Luxembourg"
+msgstr ""
+
 msgid "Luxembourgish"
 msgstr ""
 
@@ -3540,6 +4381,15 @@ msgstr ""
 
 msgid "MORE"
 msgstr "更多"
+
+msgid "Macao"
+msgstr ""
+
+msgid "Macedonia (the former Yugoslav Republic of)"
+msgstr ""
+
+msgid "Madagascar"
+msgstr ""
 
 msgid "Main menu"
 msgstr "主菜单"
@@ -3555,6 +4405,21 @@ msgstr "这个标记作为'out'节点"
 
 msgid "Make this mark just a mark"
 msgstr "这仅仅只是一标记"
+
+msgid "Malawi"
+msgstr ""
+
+msgid "Malaysia"
+msgstr ""
+
+msgid "Maldives"
+msgstr ""
+
+msgid "Mali"
+msgstr ""
+
+msgid "Malta"
+msgstr ""
 
 msgid "Manage extensions"
 msgstr "管理扩展"
@@ -3589,6 +4454,20 @@ msgstr ""
 msgid "Mark service as dedicated 3D service"
 msgstr ""
 
+msgid "Marshall Islands"
+msgstr ""
+
+msgid "Martinique"
+msgstr ""
+
+#, fuzzy
+msgid "Mauritania"
+msgstr "立陶宛语"
+
+#, fuzzy
+msgid "Mauritius"
+msgstr "喜爱频道"
+
 msgid "Max memory positions"
 msgstr ""
 
@@ -3596,6 +4475,9 @@ msgid "Max. bitrate: "
 msgstr ""
 
 msgid "Maybe the reason that recording is currently running. Please stop the recording before trying to configure the positioner."
+msgstr ""
+
+msgid "Mayotte"
 msgstr ""
 
 msgid "Media player"
@@ -3632,6 +4514,16 @@ msgstr "消息"
 msgid "Message..."
 msgstr "消息..."
 
+#, fuzzy
+msgid "Messages"
+msgstr "消息"
+
+msgid "Mexico"
+msgstr ""
+
+msgid "Micronesia (Federated States of)"
+msgstr ""
+
 #, python-format
 msgid "Minimum age %d years"
 msgstr ""
@@ -3650,6 +4542,10 @@ msgctxt "Video output mode"
 msgid "Mode"
 msgstr "输出模式"
 
+#, fuzzy
+msgid "Model"
+msgstr "模式"
+
 msgid "Model: "
 msgstr "型号:"
 
@@ -3659,14 +4555,32 @@ msgstr "调制"
 msgid "Modulator"
 msgstr "调制器"
 
+msgid "Moldova (Republic of)"
+msgstr ""
+
 msgid "Mon"
 msgstr "周一"
 
 msgid "Mon-Fri"
 msgstr "星期一至星期五"
 
+msgid "Monaco"
+msgstr ""
+
 msgid "Monday"
 msgstr "星期一"
+
+msgid "Mongolia"
+msgstr ""
+
+msgid "Montenegro"
+msgstr ""
+
+msgid "Montserrat"
+msgstr ""
+
+msgid "Morocco"
+msgstr ""
 
 msgid "Mosquito noise reduction"
 msgstr "蚊状噪声抑制"
@@ -3737,6 +4651,9 @@ msgstr ""
 msgid "Moving west ..."
 msgstr ""
 
+msgid "Mozambique"
+msgstr ""
+
 msgid "Multi EPG"
 msgstr "Multi-EPG"
 
@@ -3745,6 +4662,10 @@ msgstr ""
 
 msgid "Multi-EPG bouquet selection"
 msgstr "Multi-EPG组 选择"
+
+#, fuzzy
+msgid "Multiboot"
+msgstr "多星"
 
 msgid "Multichannel PCM"
 msgstr ""
@@ -3761,11 +4682,18 @@ msgstr "多星"
 msgid "Multisat all select"
 msgstr ""
 
+#, fuzzy
+msgid "Multistream"
+msgstr "多星"
+
 msgid "Music/Ballet/Dance"
 msgstr ""
 
 msgid "Mute"
 msgstr "静音"
+
+msgid "Myanmar"
+msgstr ""
 
 msgid "N/A"
 msgstr "空"
@@ -3803,6 +4731,18 @@ msgstr ""
 
 msgid "Namespace"
 msgstr "名字空间"
+
+msgid "Namibia"
+msgstr ""
+
+msgid "Nauru"
+msgstr ""
+
+msgid "Nepal"
+msgstr ""
+
+msgid "Netherlands"
+msgstr ""
 
 msgid "Netmask"
 msgstr "子网掩码"
@@ -3862,6 +4802,12 @@ msgstr ""
 msgid "New"
 msgstr "新建"
 
+msgid "New Caledonia"
+msgstr ""
+
+msgid "New Zealand"
+msgstr ""
+
 msgid "News Current Affairs"
 msgstr ""
 
@@ -3873,6 +4819,18 @@ msgctxt "now/next: 'next' event label"
 msgid "Next"
 msgstr ""
 
+msgid "Nicaragua"
+msgstr ""
+
+msgid "Niger"
+msgstr ""
+
+msgid "Nigeria"
+msgstr ""
+
+msgid "Niue"
+msgstr ""
+
 msgid "No"
 msgstr "不"
 
@@ -3882,6 +4840,9 @@ msgstr "未找到(支持的)DVDROM!"
 msgid "No Connection"
 msgstr "没有连接"
 
+msgid "No ECMPids available (FTA Service)"
+msgstr ""
+
 msgid "No HDD found or HDD not initialized!"
 msgstr "未找到硬盘或硬盘未初始化！"
 
@@ -3890,9 +4851,6 @@ msgstr ""
 
 msgid "No backup needed"
 msgstr "不需要备份"
-
-msgid "No cable tuner found!"
-msgstr "没有发现卫星前端"
 
 msgid ""
 "No data on transponder!\n"
@@ -4010,8 +4968,16 @@ msgstr ""
 "未找到可用的无线网络连接.\n"
 "请检查无线网络设备并检查无线网卡配置是否正确."
 
+#, fuzzy
+msgid "No, I do not want to install plugins"
+msgstr " 是否安装软件包:\n"
+
 msgid "No, but restart from begin"
 msgstr "不，重新开始播放这个视频"
+
+#, fuzzy
+msgid "No, do not flash image"
+msgstr "不，什么也不做."
 
 msgid "No, do nothing."
 msgstr "不，什么也不做."
@@ -4032,11 +4998,25 @@ msgstr "无"
 msgid "Nonlinear"
 msgstr "非线性"
 
+msgid "Norfolk Island"
+msgstr ""
+
+#, fuzzy
+msgid "Normal"
+msgstr "格式化"
+
 msgid "Normal mode"
 msgstr ""
 
 msgid "North"
 msgstr "北"
+
+msgid "Northern Mariana Islands"
+msgstr ""
+
+#, fuzzy
+msgid "Norway"
+msgstr "挪威语"
 
 msgid "Norwegian"
 msgstr "挪威语"
@@ -4047,9 +5027,6 @@ msgstr ""
 msgid "Not associated"
 msgstr ""
 
-msgid "Not configured"
-msgstr ""
-
 #, python-format
 msgid "Not enough disk space. Please free up some disk space and try again. (%d MB required, %d MB available)"
 msgstr ""
@@ -4057,10 +5034,11 @@ msgstr ""
 msgid "Not tested:"
 msgstr ""
 
-msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'."
-msgstr ""
+#, fuzzy
+msgid "Not yet implemented!"
+msgstr "功能不可用"
 
-msgid "Nothing connected"
+msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'."
 msgstr ""
 
 msgid ""
@@ -4119,6 +5097,9 @@ msgstr ""
 msgid "Ok"
 msgstr "确定"
 
+msgid "Oman"
+msgstr ""
+
 msgid "On"
 msgstr "打开"
 
@@ -4128,8 +5109,14 @@ msgstr ""
 msgid "On end of movie (as menu)"
 msgstr ""
 
+msgid "On valid ONIDs, ignore frequency sub network part"
+msgstr ""
+
 msgid "One"
 msgstr "1"
+
+msgid "Only change this setting if you are using a Unicable device that has been reprogrammed with a custom programmer. For further information check with the person that reprogrammed the device."
+msgstr ""
 
 msgid "Only extensions."
 msgstr "只有扩展."
@@ -4137,7 +5124,16 @@ msgstr "只有扩展."
 msgid "Only free scan"
 msgstr ""
 
+msgid "Only move the dish quickly after this hour."
+msgstr ""
+
+msgid "Only move the dish quickly before this hour."
+msgstr ""
+
 msgid "Only on startup"
+msgstr ""
+
+msgid "Only select 'yes' if you are using a multiswich that requires a DiSEqC Port-A command signal. For all other setups select 'no'."
 msgstr ""
 
 msgid "Open select location"
@@ -4160,6 +5156,9 @@ msgstr ""
 
 msgid "Orbital position"
 msgstr "轨道位置"
+
+msgid "Ordinary"
+msgstr ""
 
 msgid "Original"
 msgstr ""
@@ -4200,6 +5199,13 @@ msgstr ""
 msgid "PLP ID"
 msgstr ""
 
+msgid "PLS Code"
+msgstr ""
+
+#, fuzzy
+msgid "PLS Mode"
+msgstr "设置模式"
+
 msgid "PMT PID"
 msgstr ""
 
@@ -4218,11 +5224,29 @@ msgstr "软件包管理"
 msgid "Packet manager"
 msgstr "软件管理器"
 
+msgid "Pakistan"
+msgstr ""
+
+msgid "Palau"
+msgstr ""
+
+msgid "Palestine, State of"
+msgstr ""
+
 #. TRANSLATORS: (aspect ratio policy: cropped content on left/right) in doubt, keep english term
 msgid "Pan&scan"
 msgstr ""
 
+msgid "Panama"
+msgstr ""
+
 msgid "Panic to"
+msgstr ""
+
+msgid "Papua New Guinea"
+msgstr ""
+
+msgid "Paraguay"
 msgstr ""
 
 msgid "Parent directory"
@@ -4264,6 +5288,12 @@ msgstr ""
 msgid "Persian"
 msgstr ""
 
+msgid "Peru"
+msgstr ""
+
+msgid "Philippines"
+msgstr ""
+
 msgid "PiP setup"
 msgstr ""
 
@@ -4282,6 +5312,9 @@ msgstr "原始大小"
 
 msgid "Pilot"
 msgstr "Pilot"
+
+msgid "Pitcairn"
+msgstr ""
 
 msgid "Play"
 msgstr "播放"
@@ -4471,8 +5504,13 @@ msgstr ""
 msgid "Please set up tuner J"
 msgstr ""
 
-msgid "Please set up tuner K"
-msgstr ""
+#, fuzzy
+msgid "Please set up tuner Q"
+msgstr "请选择调谐器 B."
+
+#, fuzzy
+msgid "Please set up tuner R"
+msgstr "请选择调谐器 B."
 
 msgid ""
 "Please use direction keys to move the PiP window.\n"
@@ -4490,9 +5528,6 @@ msgid "Please wait"
 msgstr ""
 
 msgid "Please wait (downloading channel list)"
-msgstr ""
-
-msgid "Please wait (downloading softcam)"
 msgstr ""
 
 msgid "Please wait (updating packages)"
@@ -4516,6 +5551,15 @@ msgstr "正在测试网络...请稍候..."
 msgid "Please wait while your network is restarting..."
 msgstr "正在重启网络...请稍候..."
 
+msgid "Please wait, restarting cardserver."
+msgstr "请等待，正在重启卡片服务."
+
+msgid "Please wait, restarting softcam and cardserver."
+msgstr "请等待，正在重启softcam和卡片服务."
+
+msgid "Please wait, restarting softcam."
+msgstr "请等待，正在重启softcam."
+
 msgid "Please wait..."
 msgstr "请稍候..."
 
@@ -4537,6 +5581,9 @@ msgstr ""
 msgid "Plugins"
 msgstr "插件"
 
+msgid "Poland"
+msgstr ""
+
 msgid "Polarisation"
 msgstr ""
 
@@ -4557,6 +5604,10 @@ msgstr "端口 C"
 
 msgid "Port D"
 msgstr "端口 D"
+
+#, fuzzy
+msgid "Portugal"
+msgstr "葡萄牙语"
 
 msgid "Portuguese"
 msgstr "葡萄牙语"
@@ -4582,11 +5633,17 @@ msgstr "位置设置(DiSEqC 1.2)"
 msgid "Positioner setup log"
 msgstr ""
 
+msgid "Power management. Consult your receiver's manual for more information."
+msgstr ""
+
 msgid "Power on display"
 msgstr ""
 
 msgid "Power threshold in mA"
 msgstr "功率阈值(mA)"
+
+msgid "Power threshold. Consult your receiver's manual for more information."
+msgstr ""
 
 msgid "PowerMenu"
 msgstr ""
@@ -4672,6 +5729,9 @@ msgstr "按OK键获取 %s 详细说明"
 
 msgid "Press OK to scan"
 msgstr "按OK键开始扫描."
+
+msgid "Press OK to select a group of satellites to configure in one block."
+msgstr ""
 
 msgid "Press OK to select a provider."
 msgstr ""
@@ -4782,11 +5842,11 @@ msgstr ""
 msgid "Provider"
 msgstr "供应商"
 
-msgid "Provider to scan"
-msgstr "扫描供应商"
-
 msgid "Providers"
 msgstr "供应商"
+
+msgid "Puerto Rico"
+msgstr ""
 
 msgid "Put TV in standby"
 msgstr "待机"
@@ -4798,6 +5858,9 @@ msgid "Python frontend for /tmp/mmi.socket"
 msgstr ""
 
 msgid "Python version: "
+msgstr ""
+
+msgid "Qatar"
 msgstr ""
 
 msgid "Question"
@@ -4862,6 +5925,9 @@ msgstr ""
 msgid "Really upgrade your settop box and reboot now?"
 msgstr ""
 
+msgid "Reboot"
+msgstr "重新启动"
+
 msgid "Rec"
 msgstr "录制"
 
@@ -4899,6 +5965,13 @@ msgstr ""
 msgid "Recording(s) are in progress or coming up in few seconds!"
 msgstr "录制正在进行中或刚开始录制不久!"
 
+#, fuzzy, python-format
+msgid ""
+"Recording(s) are in progress or coming up in few seconds!\n"
+"Do you still want to flash image\n"
+"%s?"
+msgstr "录制正在进行中或刚开始录制不久!"
+
 msgid "Recordings"
 msgstr "正在录制"
 
@@ -4929,6 +6002,14 @@ msgstr ""
 msgid "Refresh rate selection."
 msgstr "选择刷新率."
 
+#, fuzzy
+msgid "Refreshing image list - Please wait..."
+msgstr "正在搜索可用升级. 请稍候..."
+
+#, fuzzy
+msgid "Refusing to move to the same directory"
+msgstr "为新的目录重命名"
+
 msgid "Regard deep standby as standby"
 msgstr ""
 
@@ -4958,6 +6039,10 @@ msgstr ""
 
 msgid "Remote control type"
 msgstr ""
+
+#, fuzzy
+msgid "Remote control type setup"
+msgstr "家长控制设置"
 
 msgid "Removal has completed."
 msgstr ""
@@ -5036,6 +6121,12 @@ msgstr "重复"
 msgid "Replace `- ` in dialogs with colored text per speaker (like teletext subtitles for the hearing impaired)"
 msgstr ""
 
+msgid "Request for physical address report"
+msgstr ""
+
+msgid "Request for vendor report"
+msgstr ""
+
 msgid "Require authentication for http streams"
 msgstr ""
 
@@ -5078,11 +6169,22 @@ msgstr "重新启动"
 msgid "Restart GUI now?"
 msgstr "立即重启Enigma2?"
 
+#, fuzzy
+msgid "Restart both"
+msgstr "重新测试"
+
+#, fuzzy
+msgid "Restart cardserver"
+msgstr "请等待，正在重启卡片服务."
+
 msgid "Restart enigma"
 msgstr "重启Enigma2"
 
 msgid "Restart network"
 msgstr "重启网络"
+
+msgid "Restart softcam"
+msgstr "重启softcam"
 
 msgid "Restart test"
 msgstr "重新测试"
@@ -5119,11 +6221,22 @@ msgstr "恢复到%s"
 msgid "Resuming playback"
 msgstr "恢复播放"
 
+#, fuzzy
+msgid "Retreiving image list - Please wait..."
+msgstr "正在下载插件信息, 请稍候..."
+
+#, fuzzy
+msgid "Retreiving image slots - Please wait..."
+msgstr "正在安装... 请稍候..."
+
 msgid "Return to movie list"
 msgstr "返回电影列表"
 
 msgid "Return to previous service"
 msgstr "返回之前的频道"
+
+msgid "Reunion"
+msgstr ""
 
 msgid "Reverse bouquet buttons"
 msgstr ""
@@ -5146,7 +6259,13 @@ msgstr ""
 msgid "Roll-off"
 msgstr "信号衰减"
 
+msgid "Romania"
+msgstr ""
+
 msgid "Romanian"
+msgstr ""
+
+msgid "Root"
 msgstr ""
 
 msgid "Root directory"
@@ -5166,6 +6285,12 @@ msgstr ""
 
 msgid "Russian"
 msgstr "俄语"
+
+msgid "Russian Federation"
+msgstr ""
+
+msgid "Rwanda"
+msgstr ""
 
 msgid "S-Video"
 msgstr "S-Video"
@@ -5191,6 +6316,9 @@ msgstr "信噪比"
 msgid "SNR:"
 msgstr "信噪:"
 
+msgid "SPDIF"
+msgstr ""
+
 msgid "SRT file"
 msgstr ""
 
@@ -5200,7 +6328,37 @@ msgstr ""
 msgid "SSID:"
 msgstr ""
 
+msgid "Saint Barthelemy"
+msgstr ""
+
+msgid "Saint Helena, Ascension and Tristan da Cunha"
+msgstr ""
+
+msgid "Saint Kitts and Nevis"
+msgstr ""
+
+msgid "Saint Lucia"
+msgstr ""
+
+msgid "Saint Martin (French part)"
+msgstr ""
+
+msgid "Saint Pierre and Miquelon"
+msgstr ""
+
+msgid "Saint Vincent and the Grenadines"
+msgstr ""
+
 msgid "Same resolution as skin"
+msgstr ""
+
+msgid "Samoa"
+msgstr ""
+
+msgid "San Marino"
+msgstr ""
+
+msgid "Sao Tome and Principe"
 msgstr ""
 
 msgid "Sat"
@@ -5236,6 +6394,9 @@ msgstr "饱和度"
 msgid "Saturday"
 msgstr "星期六"
 
+msgid "Saudi Arabia"
+msgstr ""
+
 msgid "Save"
 msgstr "保存"
 
@@ -5252,6 +6413,9 @@ msgid "Save changes"
 msgstr ""
 
 msgid "Save playlist"
+msgstr ""
+
+msgid "Save settings and EPG data"
 msgstr ""
 
 msgid "Save timeshift and zap"
@@ -5271,6 +6435,9 @@ msgstr ""
 
 msgid "Scaler sharpness"
 msgstr "定标锐度"
+
+msgid "Scaler vertical dejagging"
+msgstr ""
 
 msgid "Scaling mode"
 msgstr ""
@@ -5383,14 +6550,74 @@ msgstr ""
 msgid "Select"
 msgstr "选择"
 
+msgid "Select '1.0' for standard committed switches, '1.1' for uncommitted switches, and '1.2' for systems using a positioner."
+msgstr ""
+
+msgid "Select 'A' or 'B' if your aerial system requires this, otherwise select 'none'. If you are unsure select 'none'."
+msgstr ""
+
+msgid "Select 'Unicable' if this tuner will use a Unicable device. For all other setups select 'FBC automatic'."
+msgstr ""
+
+msgid "Select 'band' if using a 'universal' LNB, otherwise consult your LNB spec sheet."
+msgstr ""
+
+msgid "Select 'enabled' if this tuner has a signal cable connected, otherwise select 'nothing connected'."
+msgstr ""
+
+msgid "Select 'polarisation' if using a 'universal' LNB, otherwise consult your LNB spec sheet."
+msgstr ""
+
+msgid "Select 'provider' to scan from the predefined list of cable multiplexes. Select 'bands' to only scan certain parts of the spectrum. Select 'steps' to scan in steps of a particular frequency bandwidth."
+msgstr ""
+
+msgid "Select 'yes' if this tuner is connected to the Unicable device through another tuner, otherwise select 'no'."
+msgstr ""
+
+msgid "Select 'yes' to choose what bands or step sizes will be scanned."
+msgstr ""
+
+#, python-format
+msgid "Select 'yes' to include %s multiplexes in your search."
+msgstr ""
+
+#, python-format
+msgid "Select 'yes' to include symbol rate %s in your search."
+msgstr ""
+
+#, python-format
+msgid "Select 'yes' to include the %s band in your search."
+msgstr ""
+
+msgid "Select 'yes' to only send the DiSEqC command when changing from one satellite to another, or select 'no' for the DiSEqC command to be resent on every zap."
+msgstr ""
+
 msgid "Select CAId"
 msgstr ""
+
+#, fuzzy
+msgid "Select Card Server"
+msgstr "选择一部电影"
 
 msgid "Select Channel"
 msgstr ""
 
+msgid "Select Fast DiSEqC if your aerial system supports this. If you are unsure select 'no'."
+msgstr ""
+
 msgid "Select HDD"
 msgstr "选择硬盘"
+
+#, fuzzy
+msgid "Select Image"
+msgstr "选择包"
+
+#, fuzzy
+msgid "Select Multiboot"
+msgstr "选择音频模式"
+
+msgid "Select Softcam"
+msgstr "选择Softcam"
 
 msgid "Select a bouquet"
 msgstr ""
@@ -5441,11 +6668,28 @@ msgstr "选择目标位置:"
 msgid "Select destination for:"
 msgstr "目标目录:"
 
+#, fuzzy
+msgid "Select directory for logfile"
+msgstr "创建目录%s 失败."
+
 msgid "Select files for backup."
 msgstr "选择 文件/目录 备份..."
 
 msgid "Select files/folders to backup"
 msgstr "选择 文件/目录 备份..."
+
+#, fuzzy
+msgid "Select function"
+msgstr "选择位置"
+
+msgid "Select horizontal resolution:"
+msgstr ""
+
+msgid "Select how quickly the dish should move between satellites."
+msgstr ""
+
+msgid "Select how the satellite dish is set up. i.e. fixed dish, single LNB, DiSEqC switch, positioner, etc."
+msgstr ""
 
 msgid "Select input device"
 msgstr "输入设备"
@@ -5461,6 +6705,10 @@ msgstr ""
 
 msgid "Select movie"
 msgstr ""
+
+#, fuzzy
+msgid "Select path for logfile"
+msgstr "选择一部电影"
 
 msgid "Select provider to add..."
 msgstr "选择要添加的提供商..."
@@ -5483,7 +6731,52 @@ msgstr ""
 msgid "Select target folder"
 msgstr ""
 
+msgid "Select the Unicable channel to be assigned to this tuner. This is a unique value. Be certain that no other device connected to this same Unicable system is allocated to the same Unicable channel."
+msgstr ""
+
+msgid "Select the format of your Unicable device. Choices are 'SCR Unicable' (Unicable I format), or 'SCR JESS' (Unicable II format)."
+msgstr ""
+
+msgid "Select the manufacturer of your Unicable device. If the manufacturer is not listed, set 'SCR' to 'user defined' and enter the device parameters manually according to its spec sheet."
+msgstr ""
+
+msgid "Select the model number of your Unicable device. If the model number is not listed, set 'SCR' to 'user defined' and enter the device parameters manually according to its spec sheet."
+msgstr ""
+
 msgid "Select the movie path"
+msgstr ""
+
+msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgstr ""
+
+msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgstr ""
+
+msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgstr ""
+
+msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgstr ""
+
+msgid "Select the satellite you want to configure. Once that satellite is configured you can select and configure other satellites that will be accessed using this same tuner."
+msgstr ""
+
+msgid "Select the satellite your dish receives from. If you are unsure select 'automatic' and the receiver will attempt to determine this for you."
+msgstr ""
+
+msgid "Select the tuner that controls the motorised dish."
+msgstr ""
+
+msgid "Select the tuner that this loopthrough depends on."
+msgstr ""
+
+msgid "Select the tuner to which the signal cable of the Unicable device is connected."
+msgstr ""
+
+msgid "Select the type of LNB/device being used (normally 'Universal'). If your LNB type is not available select 'user defined'."
+msgstr ""
+
+msgid "Select the type of Unicable device you are using."
 msgstr ""
 
 msgid "Select upgrade source"
@@ -5501,16 +6794,38 @@ msgstr "设置视频模式"
 msgid "Select wireless network"
 msgstr "选择无线网络"
 
+#, fuzzy
+msgid "Select your ATSC provider."
+msgstr "选择要添加的提供商..."
+
 msgid "Select your Skin"
+msgstr ""
+
+msgid "Select your country. If not available select 'all'."
+msgstr ""
+
+msgid "Select your provider and region. If not present in this list you will need to select one of the other 'service scan types'."
 msgstr ""
 
 msgid "Select your provider, and press OK to start the scan"
 msgstr "选择供应商，按OK开始扫描"
 
+msgid "Select your region. If not available change 'Country' to 'all' and select one of the default alternatives."
+msgstr ""
+
 msgid "Selecting satellites 1 (USALS)"
 msgstr ""
 
 msgid "Selecting satellites 2 (USALS)"
+msgstr ""
+
+msgid "Selecting this option allows you to configure a group of satellites in one block."
+msgstr ""
+
+msgid "Selects the mode how live tv should be shown on the LCD."
+msgstr ""
+
+msgid "Send 'sourceactive' before zap timers"
 msgstr ""
 
 msgid "Send DiSEqC"
@@ -5519,11 +6834,17 @@ msgstr "发送DiSEqC命令"
 msgid "Send DiSEqC only on satellite change"
 msgstr "当改变卫星时发送DiSEqC命令"
 
+msgid "Senegal"
+msgstr ""
+
 msgid "Separate titles with a main menu"
 msgstr ""
 
 msgid "Sequence repeat"
 msgstr "重复序列"
+
+msgid "Serbia"
+msgstr ""
 
 msgid "Serbian"
 msgstr ""
@@ -5545,6 +6866,10 @@ msgstr "频道已添加到选定的自定义组."
 
 msgid "Service info"
 msgstr ""
+
+#, fuzzy
+msgid "Service info - ECM Info"
+msgstr "频道信息"
 
 msgid "Service info - service & PIDs"
 msgstr ""
@@ -5630,6 +6955,9 @@ msgstr "设置极限"
 msgid "Set pin code persistent"
 msgstr ""
 
+msgid "Set sequence repeats if your aerial system requires this. Normally if the aerial system has been configured correctly sequence repeats will not be necessary. If yours does, recheck you have command order set correctly."
+msgstr ""
+
 msgid "Set startup service"
 msgstr ""
 
@@ -5673,6 +7001,9 @@ msgid "Setup your positioner"
 msgstr ""
 
 msgid "Setup your satellite equipment"
+msgstr ""
+
+msgid "Seychelles"
 msgstr ""
 
 msgid "Sharpness"
@@ -5745,9 +7076,6 @@ msgid "Show crypto info in infobar"
 msgstr "在信息条显示加密信息"
 
 msgid "Show detailed event info"
-msgstr ""
-
-msgid "Show disclaimer"
 msgstr ""
 
 msgid "Show event details"
@@ -5861,6 +7189,9 @@ msgstr ""
 msgid "Show single service EPG"
 msgstr ""
 
+msgid "Show softcam setup in extensions menu"
+msgstr ""
+
 msgid "Show status icons in movie list"
 msgstr ""
 
@@ -5871,6 +7202,9 @@ msgid "Show subservice selection"
 msgstr ""
 
 msgid "Show subtitle selection"
+msgstr ""
+
+msgid "Show symbols on display"
 msgstr ""
 
 msgid "Show the radio player..."
@@ -5909,8 +7243,15 @@ msgstr ""
 msgid "Side by side"
 msgstr ""
 
+msgid "Sierra Leone"
+msgstr ""
+
 msgid "Signal OK, proceeding"
 msgstr ""
+
+#, fuzzy
+msgid "Signal finder"
+msgstr "寻星"
 
 msgid "Signal quality"
 msgstr ""
@@ -5936,8 +7277,9 @@ msgstr "简易"
 msgid "Simple titleset (compatibility for legacy players)"
 msgstr "简易的标题 (更好的兼容性)"
 
-msgid "Simplified Chinese"
-msgstr "简体中文"
+#, fuzzy
+msgid "Singapore"
+msgstr "单个"
 
 msgid "Single"
 msgstr "单个"
@@ -5951,6 +7293,9 @@ msgstr "单个卫星"
 msgid "Single step (GOP)"
 msgstr ""
 
+msgid "Sint Maarten (Dutch part)"
+msgstr ""
+
 msgid "Site latitude"
 msgstr ""
 
@@ -5959,9 +7304,6 @@ msgstr ""
 
 msgid "Skin"
 msgstr "皮肤"
-
-msgid "Skin setup"
-msgstr ""
 
 msgid "Skins"
 msgstr "皮肤"
@@ -5997,6 +7339,12 @@ msgstr "插槽 %d"
 msgid "Slovak"
 msgstr ""
 
+msgid "Slovakia"
+msgstr ""
+
+msgid "Slovenia"
+msgstr ""
+
 msgid "Slovenian"
 msgstr ""
 
@@ -6015,14 +7363,21 @@ msgstr ""
 msgid "Smartcard PIN"
 msgstr ""
 
+msgid "Smooth"
+msgstr ""
+
 msgid "Social/Political/Economics"
 msgstr ""
 
 msgid "SoftCam / CI"
 msgstr ""
 
-msgid "Softcam type"
-msgstr ""
+#, fuzzy
+msgid "Softcam Setup"
+msgstr "Softcam 设置"
+
+msgid "Softcam setup"
+msgstr "Softcam 设置"
 
 msgid "Software"
 msgstr "软件"
@@ -6041,6 +7396,12 @@ msgstr "软件升级"
 
 msgid "Softwaremanager information"
 msgstr "软件管理"
+
+msgid "Solomon Islands"
+msgstr ""
+
+msgid "Somalia"
+msgstr ""
 
 msgid "Some error occured - Please try later"
 msgstr ""
@@ -6107,6 +7468,19 @@ msgstr "源目录"
 msgid "South"
 msgstr "南"
 
+msgid "South Africa"
+msgstr ""
+
+msgid "South Georgia and the South Sandwich Islands"
+msgstr ""
+
+#, fuzzy
+msgid "South Sudan"
+msgstr "南"
+
+msgid "Spain"
+msgstr ""
+
 msgid "Spanish"
 msgstr "西班牙语"
 
@@ -6147,6 +7521,9 @@ msgid "Splitscreen"
 msgstr ""
 
 msgid "Sports"
+msgstr ""
+
+msgid "Sri Lanka"
 msgstr ""
 
 msgid "Standard"
@@ -6241,6 +7618,10 @@ msgstr ""
 msgid "Stop all current recordings"
 msgstr ""
 
+#, fuzzy
+msgid "Stop all streams"
+msgstr "停止测试"
+
 msgid "Stop and delete all current recordings"
 msgstr ""
 
@@ -6259,8 +7640,16 @@ msgstr "停止当前事件并禁用下一个事件"
 msgid "Stop current event but not coming events"
 msgstr "停止当前事件但不禁用下一个事件"
 
+#, fuzzy
+msgid "Stop current stream"
+msgstr "当天"
+
 msgid "Stop entry"
 msgstr ""
+
+#, fuzzy
+msgid "Stop play TV"
+msgstr "停止 Camd: "
 
 msgid "Stop playing this movie?"
 msgstr "停止播放这部电影？"
@@ -6379,11 +7768,21 @@ msgstr ""
 msgid "Succeeded:"
 msgstr ""
 
+msgid "Sudan"
+msgstr ""
+
 msgid "Sun"
 msgstr "周日"
 
 msgid "Sunday"
 msgstr "星期日"
+
+#, fuzzy
+msgid "Suriname"
+msgstr "文件名"
+
+msgid "Svalbard and Jan Mayen"
+msgstr ""
 
 msgid "Swap PIP"
 msgstr ""
@@ -6393,6 +7792,13 @@ msgstr ""
 
 msgid "Swap services"
 msgstr ""
+
+msgid "Swaziland"
+msgstr ""
+
+#, fuzzy
+msgid "Sweden"
+msgstr "瑞典语"
 
 msgid "Swedish"
 msgstr "瑞典语"
@@ -6454,6 +7860,9 @@ msgstr ""
 msgid "Switchable tuner types:"
 msgstr "可换调谐器类型"
 
+msgid "Switzerland"
+msgstr ""
+
 msgid "Symbol rate"
 msgstr "符号率"
 
@@ -6464,6 +7873,9 @@ msgid "Symbol rate:"
 msgstr ""
 
 msgid "Sync failure moving back to origin !"
+msgstr ""
+
+msgid "Syrian Arab Republic"
 msgstr ""
 
 msgid "System"
@@ -6485,6 +7897,9 @@ msgstr ""
 msgid "TUNER:"
 msgstr ""
 
+msgid "TUNING"
+msgstr ""
+
 msgid "TV physical address report"
 msgstr ""
 
@@ -6497,6 +7912,12 @@ msgstr ""
 msgid "Tags"
 msgstr "标签"
 
+msgid "Tajikistan"
+msgstr ""
+
+msgid "Tanzania, United Republic of"
+msgstr ""
+
 msgid "Teletext subtitle color"
 msgstr "图文字幕颜色"
 
@@ -6505,9 +7926,6 @@ msgstr ""
 
 msgid "Terrestrial"
 msgstr "地面波"
-
-msgid "Terrestrial provider"
-msgstr "地面波提供商"
 
 msgid "Test DiSEqC settings"
 msgstr "测试DiSEqC设置"
@@ -6533,6 +7951,9 @@ msgstr ""
 msgid "Thai"
 msgstr ""
 
+msgid "Thailand"
+msgstr ""
+
 msgid ""
 "Thank you for using the wizard.\n"
 "Please press OK to continue."
@@ -6552,12 +7973,6 @@ msgstr ""
 msgid "The DVD standard doesn't support H.264 (HDTV) video streams. Do you want to create a special format data DVD (which will not play in stand-alone DVD players) instead?"
 msgstr ""
 
-msgid ""
-"The OpenPLi team would like to point out that upgrading to the latest nightly build comes not only with the latest features, but also with some risks. After the update, it is possible that your device no longer works as expected. We recommend you create backups with Autobackup or Backupsuite. This allows you to quickly and easily restore your device to its previous state, should you experience any problems. If you encounter a 'bug', please report the issue on www.openpli.org.\n"
-"\n"
-"Do you understand this?"
-msgstr ""
-
 msgid "The PIN code has been changed successfully."
 msgstr "服务密码 已被成功修改."
 
@@ -6572,7 +7987,7 @@ msgstr "备份操作失败！请选择不同的备份位置。"
 
 #, python-format
 msgid ""
-"The current beta image might not be stable.\n"
+"The current image might not be stable.\n"
 "For more information see %s."
 msgstr ""
 
@@ -6595,7 +8010,7 @@ msgid ""
 "\n"
 "Note: you can always start the Overscan wizard later,  via\n"
 "\n"
-"menu->installation->system->Overscan wizard"
+"Menu->Installation->System->Audio/Video->Overscan wizard"
 msgstr ""
 
 msgid ""
@@ -6639,7 +8054,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid "The status of the current beta image could not be checked because %s can not be reached."
+msgid "The status of the current image could not be checked because %s can not be reached."
 msgstr ""
 
 msgid "The timer file (timers.xml) is corrupt and could not be loaded."
@@ -6702,16 +8117,65 @@ msgstr ""
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "这张DVD RW已经格式化过，再次格式化将删除所有文件"
 
+#, python-format
+msgid "This field allows you to search an additional symbol rate up to %s."
+msgstr ""
+
 msgid ""
 "This info is for developers only.\n"
 "For a normal users it is not relevant.\n"
 "Don't panic please when you see values being displayed that you think look suspicious!"
 msgstr ""
 
+msgid "This is a multitype tuner. Available options depend on the hardware. Cable and terrestrial cannot be configured at the same time. If you want to use as cable + satellite or terrestrial + satellite, configure cable/terrestrial first and then save. Re-open and configure again as satellite."
+msgstr ""
+
+msgid "This is the order in which DiSEqC commands are sent to the aerial system. The order must correspond exactly with the order the physical devices are arranged along the signal cable (starting from the receiver end)."
+msgstr ""
+
+msgid "This option allows to reduce the block-noise in the picture. Obviously this is at the cost of the picture's sharpness."
+msgstr ""
+
+msgid "This option allows to set the level of dynamic contrast of the picture."
+msgstr ""
+
 msgid "This option allows you can config the Colordepth for UHD"
 msgstr ""
 
+msgid "This option allows you can config the Colorimetry for HDR."
+msgstr ""
+
 msgid "This option allows you can config the Colorspace from Auto to RGB"
+msgstr ""
+
+msgid "This option allows you enable smoothing filter to control the dithering process."
+msgstr ""
+
+msgid "This option allows you enable the vertical scaler dejagging."
+msgstr ""
+
+msgid "This option allows you show all symbols on display."
+msgstr ""
+
+msgid "This option allows you to add the softcam setup in the extensions menu."
+msgstr ""
+
+msgid "This option allows you to boost the blue tones in the picture."
+msgstr ""
+
+msgid "This option allows you to boost the green tones in the picture."
+msgstr ""
+
+msgid "This option allows you to change the virtuell loadspeaker position."
+msgstr ""
+
+msgid "This option allows you to disable or change the virtuell loadspeaker position."
+msgstr ""
+
+msgid "This option allows you to enable 3D surround softlimiter."
+msgstr ""
+
+msgid "This option allows you to enable 3D surround sound."
 msgstr ""
 
 msgid "This option allows you to hide and sort menu entries. When selecting user you can change order and hide menu items via the blue button"
@@ -6724,6 +8188,42 @@ msgid "This option allows you to show menu number quick links."
 msgstr ""
 
 msgid "This option allows you to show menu paths."
+msgstr ""
+
+msgid "This option allows you to view the old and new settings side by side."
+msgstr ""
+
+msgid "This option can be useful for long HDMI cables."
+msgstr ""
+
+msgid "This option configures you can set auto volume level."
+msgstr ""
+
+msgid "This option set the level of surpression of musquito noise (Musquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
+msgstr ""
+
+msgid "This option sets  the picture contrast."
+msgstr ""
+
+msgid "This option sets the picture brightness."
+msgstr ""
+
+msgid "This option sets the picture flesh tones."
+msgstr ""
+
+msgid "This option sets the picture hue."
+msgstr ""
+
+msgid "This option sets the picture saturation."
+msgstr ""
+
+msgid "This option sets the scaler sharpness, used when stretching picture from 4:3 to 16:9."
+msgstr ""
+
+msgid "This option sets the surpression of false digital contours, that are the result of a limited number of discrete values."
+msgstr ""
+
+msgid "This option sets up the picture sharpness, used when the picture is being upscaled."
 msgstr ""
 
 msgid "This plugin is installed."
@@ -6740,6 +8240,15 @@ msgstr "插件被移除"
 
 #, python-format
 msgid "This receiver cannot decode %s streams!"
+msgstr ""
+
+msgid "This setting allows the tuner configuration to be a duplication of how another tuner is already configured."
+msgstr ""
+
+msgid "This setting depends on your cable provider and location. If you don't know the correct setting refer to the menu in the official cable receiver, or get it from your cable provider, or seek help via internet forum."
+msgstr ""
+
+msgid "This setting is for special setups only. It gives this LNB higher priority over other LNBs with lower values. The free LNB with the highest priority will be the first LNB selected for tuning services."
 msgstr ""
 
 msgid ""
@@ -6859,6 +8368,9 @@ msgstr "不能时光平移!"
 msgid "Timezone"
 msgstr "时区"
 
+msgid "Timor-Leste"
+msgstr ""
+
 msgid "Title"
 msgstr "标题"
 
@@ -6876,9 +8388,6 @@ msgstr "字幕选择"
 
 msgid "Today"
 msgstr "今天"
-
-msgid "Toggle Extra Keys"
-msgstr ""
 
 msgid "Toggle HDMI In"
 msgstr ""
@@ -6907,6 +8416,12 @@ msgstr ""
 msgid "Toggle the tv and the radio player..."
 msgstr ""
 
+msgid "Togo"
+msgstr ""
+
+msgid "Tokelau"
+msgstr ""
+
 msgid "Tone amplitude"
 msgstr ""
 
@@ -6919,6 +8434,9 @@ msgstr "Toneburst"
 msgid "Toneburst A/B"
 msgstr "Toneburst A/B"
 
+msgid "Tonga"
+msgstr ""
+
 msgid "Top and bottom"
 msgstr ""
 
@@ -6928,9 +8446,6 @@ msgstr ""
 
 msgid "Track"
 msgstr "轨道"
-
-msgid "Traditional Chinese"
-msgstr "繁体中文"
 
 msgid "Transcoding: "
 msgstr ""
@@ -6950,11 +8465,18 @@ msgstr "传输模式"
 msgid "Transponder"
 msgstr "转发器"
 
+#, fuzzy
+msgid "Transport Stream Type"
+msgstr "转发器类型"
+
 msgid "Trash can"
 msgstr ""
 
 msgid "Tries left:"
 msgstr "尝试:"
+
+msgid "Trinidad and Tobago"
+msgstr ""
 
 msgid "Troubleshoot"
 msgstr ""
@@ -7007,20 +8529,37 @@ msgstr ""
 msgid "Tuner slot"
 msgstr ""
 
-#, python-format
-msgid "Tuner status %s"
-msgstr ""
+#, fuzzy
+msgid "Tuner status:"
+msgstr "调谐器状态"
 
 msgid "Tuner type"
 msgstr "调谐器类型"
 
+msgid "Tunisia"
+msgstr ""
+
+#, fuzzy
+msgid "Turkey"
+msgstr "土耳其语"
+
 msgid "Turkish"
 msgstr "土耳其语"
+
+#, fuzzy
+msgid "Turkmenistan"
+msgstr "土耳其语"
+
+msgid "Turks and Caicos Islands"
+msgstr ""
 
 msgid "Turn on the power LED during standby."
 msgstr ""
 
 msgid "Turning step size"
+msgstr ""
+
+msgid "Tuvalu"
 msgstr ""
 
 msgid "Two"
@@ -7032,6 +8571,9 @@ msgstr "类型"
 msgid "Type of scan"
 msgstr "扫描类型"
 
+msgid "UNKNOWN"
+msgstr ""
+
 msgid "URL"
 msgstr ""
 
@@ -7041,13 +8583,26 @@ msgstr ""
 msgid "USALS"
 msgstr "USALS"
 
+msgid "USALS automatically moves a motorised dish to the correct satellite based on the coordinates entered by the user. Without USALS each satellite will need to be setup and saved individually."
+msgstr ""
+
 msgid "USALS calibration"
 msgstr ""
 
 msgid "USB stick"
 msgstr ""
 
+msgid "Uganda"
+msgstr ""
+
+#, fuzzy
+msgid "Ukraine"
+msgstr "雨"
+
 msgid "Ukrainian"
+msgstr ""
+
+msgid "Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"
 msgstr ""
 
 msgid ""
@@ -7058,6 +8613,10 @@ msgstr ""
 
 msgid "Uncover dashed flickering line for this service"
 msgstr ""
+
+#, fuzzy
+msgid "Undefined"
+msgstr "用户定义"
 
 msgid "Undo install"
 msgstr " 放弃安装"
@@ -7076,6 +8635,18 @@ msgstr ""
 
 msgid "Uninstall"
 msgstr "卸载"
+
+msgid "United Arab Emirates"
+msgstr ""
+
+msgid "United Kingdom"
+msgstr ""
+
+msgid "United States Minor Outlying Islands"
+msgstr ""
+
+msgid "United States of America"
+msgstr ""
 
 msgid "Universal LNB"
 msgstr "通用LNB"
@@ -7097,6 +8668,10 @@ msgstr "更新"
 
 msgid "Update and ask to reboot"
 msgstr ""
+
+#, fuzzy
+msgid "Update and reboot"
+msgstr "升级并请求重启"
 
 msgid "Update and reboot (recommended)"
 msgstr ""
@@ -7128,11 +8703,17 @@ msgstr ""
 msgid "Upgrading"
 msgstr "升级"
 
+msgid "Uruguay"
+msgstr ""
+
 msgid "Usage Setup"
 msgstr ""
 
 msgid "Use"
 msgstr "使用"
+
+msgid "Use 12 characters display mode"
+msgstr ""
 
 msgid "Use DHCP"
 msgstr "自动分配地址(DHCP)"
@@ -7141,6 +8722,9 @@ msgid "Use EIT EPG information when it is available."
 msgstr ""
 
 msgid "Use FreeSat EPG information when it is available."
+msgstr ""
+
+msgid "Use HDMI pre-emphasis"
 msgstr ""
 
 msgid "Use MHW EPG information when it is available."
@@ -7163,6 +8747,9 @@ msgstr ""
 
 msgid "Use a gateway"
 msgstr "使用网关"
+
+msgid "Use as PiP if possible"
+msgstr ""
 
 msgid "Use circular LNB"
 msgstr ""
@@ -7247,8 +8834,15 @@ msgstr "使用调谐器 %s"
 msgid "Usually when the subtitle language is the same as the audio language, the subtitles will not be used. Enable this option to allow these subtitles to be used."
 msgstr ""
 
+msgid "Uzbekistan"
+msgstr ""
+
 msgid "VCR scart"
 msgstr "录像机"
+
+#, fuzzy
+msgid "VLAN connection"
+msgstr "局域网连接"
 
 msgid "VMGM (intro trailer)"
 msgstr ""
@@ -7257,6 +8851,13 @@ msgid "VOB file"
 msgstr ""
 
 msgid "VU+"
+msgstr ""
+
+#, fuzzy
+msgid "Vanuatu"
+msgstr "手动"
+
+msgid "Venezuela (Bolivarian Republic of)"
 msgstr ""
 
 msgid "Vertical"
@@ -7315,6 +8916,9 @@ msgstr ""
 msgid "Videocodec, size & format"
 msgstr ""
 
+msgid "Viet Nam"
+msgstr ""
+
 msgid "View Rass interactive..."
 msgstr "View Rass interactive..."
 
@@ -7367,6 +8971,12 @@ msgid "View teletext..."
 msgstr "查看图文电视..."
 
 msgid "View video CD..."
+msgstr ""
+
+msgid "Virgin Islands (British)"
+msgstr ""
+
+msgid "Virgin Islands (U.S.)"
 msgstr ""
 
 msgid "Virtual keyboard"
@@ -7438,6 +9048,9 @@ msgstr ""
 msgid "Wakeup type"
 msgstr ""
 
+msgid "Wallis and Futuna"
+msgstr ""
+
 msgid "Warning"
 msgstr ""
 
@@ -7503,8 +9116,11 @@ msgstr "西"
 msgid "West limit set"
 msgstr ""
 
-msgid "What do you want to scan?"
-msgstr "是否开始扫描?"
+msgid "Western Sahara"
+msgstr ""
+
+msgid "What type of service scan do you want?"
+msgstr ""
 
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are upgraded"
 msgstr ""
@@ -7750,9 +9366,6 @@ msgstr ""
 msgid "Wizard to arrange the overscan"
 msgstr ""
 
-msgid "Would you like to install a softcam?"
-msgstr ""
-
 #, python-format
 msgid "Would you save the entered PIN %s persistent?"
 msgstr ""
@@ -7790,6 +9403,9 @@ msgstr ""
 msgid "Yellow DVB subtitles"
 msgstr "黄色DVB字幕"
 
+msgid "Yemen"
+msgstr ""
+
 msgid "Yes"
 msgstr "是"
 
@@ -7805,6 +9421,10 @@ msgstr ""
 msgid "Yes to all"
 msgstr "所有"
 
+#, fuzzy
+msgid "Yes, I do want to install plugins"
+msgstr " 是否安装软件包:\n"
+
 msgid "Yes, always"
 msgstr "总是"
 
@@ -7816,15 +9436,6 @@ msgstr "是，备份我的设置！"
 
 msgid "Yes, delete this movie and return to movie list"
 msgstr ""
-
-msgid "Yes, do a manual scan now"
-msgstr "是，开始手动扫描"
-
-msgid "Yes, do an automatic scan now"
-msgstr "是，开始自动扫描"
-
-msgid "Yes, do another manual scan now"
-msgstr "是，手动扫描另一个参数"
 
 msgid "Yes, only from deep standby"
 msgstr ""
@@ -7840,6 +9451,14 @@ msgstr "是，立即还原设置"
 
 msgid "Yes, returning to movie list"
 msgstr "是，返回电影列表"
+
+#, fuzzy
+msgid "Yes, with backup"
+msgstr "恢复备份"
+
+#, fuzzy
+msgid "Yes, without backup"
+msgstr "恢复备份"
 
 msgid "Yesterday"
 msgstr "昨天"
@@ -7913,10 +9532,13 @@ msgstr "您必须等待 %s !"
 msgid "You must switch to the service %s (%s - '%s')!\n"
 msgstr ""
 
+#, fuzzy
 msgid ""
-"You need a PC connected to your receiver. If you need further instructions, please visit the website http://www.dm7025.de.\n"
+"You need a PC connected to your receiver. If you need further instructions, please visit the website https://openpli.org\n"
 "Your receiver will now be halted. After you have performed the update instructions from the website, your new firmware will ask you to restore your settings."
 msgstr ""
+"您需要一台PC连接到您的dreambox.通过电脑更新dreambox的固件.\n"
+"如果您需要进一步的说明请访问网站http://www.dm7025.de."
 
 msgid "You system does not support ext4"
 msgstr ""
@@ -7949,6 +9571,12 @@ msgstr ""
 
 msgid "Your network configuration has been activated."
 msgstr "您的网络配置已被激活."
+
+msgid "Your receiver can use SCPC optimized search range. Consult your receiver's manual for more information."
+msgstr ""
+
+msgid "Your receiver can use tone amplitude. Consult your receiver's manual for more information."
+msgstr ""
 
 msgid "Your receiver does not have an internet connection"
 msgstr ""
@@ -8000,6 +9628,9 @@ msgstr ""
 "\n"
 "请选择下一步做什么."
 
+msgid "Zambia"
+msgstr ""
+
 msgid "Zap"
 msgstr ""
 
@@ -8036,13 +9667,27 @@ msgstr ""
 msgid "Zap up"
 msgstr ""
 
-msgid "Zgemma H.S/H.2S/H.2H/H5"
+#, python-format
+msgid "Zapped to timer service %s as PiP!"
+msgstr ""
+
+#, python-format
+msgid "Zapped to timer service %s!"
+msgstr ""
+
+msgid "Zgemma H.S/H.2S/H.2H/H5/H7"
 msgstr ""
 
 msgid "Zgemma Star S/2S/H1/H2"
 msgstr ""
 
+msgid "Zimbabwe"
+msgstr ""
+
 msgid "[REC]"
+msgstr ""
+
+msgid "[a]"
 msgstr ""
 
 msgid "[alternative edit]"
@@ -8142,9 +9787,6 @@ msgid "and never ask again this session again"
 msgstr ""
 
 msgid "and never ask this again"
-msgstr ""
-
-msgid "and never show this message again"
 msgstr ""
 
 msgid "and select next channel"
@@ -8408,6 +10050,10 @@ msgstr "退出网卡设置菜单"
 
 msgid "experimental film/video"
 msgstr ""
+
+#, fuzzy
+msgid "extra wide"
+msgstr "附加字段"
 
 msgid "failed"
 msgstr "失败"
@@ -8679,6 +10325,10 @@ msgstr "未设置"
 msgid "not locked"
 msgstr "无信号"
 
+#, fuzzy
+msgid "not running"
+msgstr "正在恢复"
+
 msgid "not supported"
 msgstr "不支持"
 
@@ -8732,6 +10382,10 @@ msgstr ""
 
 msgid "pass"
 msgstr "通过"
+
+#, fuzzy
+msgid "pausing"
+msgstr "暂停"
 
 msgid "performing arts"
 msgstr ""
@@ -8826,6 +10480,9 @@ msgstr "重复播放列表"
 msgid "repeated"
 msgstr "重复"
 
+msgid "reserved for future use"
+msgstr ""
+
 msgid "restore deleted userbouquets"
 msgstr ""
 
@@ -8849,6 +10506,10 @@ msgstr ""
 
 msgid "romance"
 msgstr ""
+
+#, fuzzy
+msgid "running"
+msgstr "正在运行"
 
 msgid "save last directory on exit"
 msgstr "退出时保存目录"
@@ -8885,6 +10546,10 @@ msgstr ""
 
 msgid "service is in bouquet parental protection"
 msgstr ""
+
+#, fuzzy
+msgid "service off-air"
+msgstr "频道密码"
 
 msgid "set as startup service"
 msgstr "设为启动频道"
@@ -8934,6 +10599,46 @@ msgstr "快倒"
 msgid "skip forward"
 msgstr "快进"
 
+#, python-format
+msgid "slot%s - %s (current image) with, backup"
+msgstr ""
+
+#, python-format
+msgid "slot%s - %s (current image), without backup"
+msgstr ""
+
+#, python-format
+msgid "slot%s - %s mode 1"
+msgstr ""
+
+#, python-format
+msgid "slot%s - %s mode 1 (current image)"
+msgstr ""
+
+#, python-format
+msgid "slot%s - %s mode 12"
+msgstr ""
+
+#, python-format
+msgid "slot%s - %s mode 12 (current image)"
+msgstr ""
+
+#, python-format
+msgid "slot%s - %s, with backup"
+msgstr ""
+
+#, python-format
+msgid "slot%s - %s, without backup"
+msgstr ""
+
+#, python-format
+msgid "slot%s - empty, with backup"
+msgstr ""
+
+#, python-format
+msgid "slot%s - empty, without backup"
+msgstr ""
+
 msgid "soap/melodram/folkloric"
 msgstr ""
 
@@ -8966,6 +10671,10 @@ msgstr "从这里开始剪接"
 
 msgid "start directory"
 msgstr "开始目录"
+
+#, fuzzy
+msgid "starts in a few seconds"
+msgstr "超时(秒)"
 
 msgid "stepsize"
 msgstr "步长"
@@ -9030,6 +10739,9 @@ msgstr ""
 msgid "true"
 msgstr ""
 
+msgid "type"
+msgstr ""
+
 msgid "unavailable"
 msgstr ""
 
@@ -9092,6 +10804,9 @@ msgstr ""
 
 msgid "white"
 msgstr "白"
+
+msgid "wide"
+msgstr ""
 
 msgid "width"
 msgstr "宽"
@@ -9888,9 +11603,6 @@ msgstr ""
 #~ msgid "Coderate LP"
 #~ msgstr "LP编码率"
 
-#~ msgid "Color"
-#~ msgstr "色彩"
-
 #~ msgid "Color Format"
 #~ msgstr "色彩模式"
 
@@ -9926,9 +11638,6 @@ msgstr ""
 
 #~ msgid "Connected to Fritz!Box!"
 #~ msgstr "连接到Fretz!Box"
-
-#~ msgid "Connected!"
-#~ msgstr "已连接"
 
 #~ msgid "Connecting to Fritz!Box..."
 #~ msgstr "连接到Fritz!Box..."
@@ -9971,9 +11680,6 @@ msgstr ""
 
 #~ msgid "Count user"
 #~ msgstr "用户计数"
-
-#~ msgid "Country"
-#~ msgstr "国家列表"
 
 #~ msgid "Country List"
 #~ msgstr "国家列表"
@@ -10190,14 +11896,11 @@ msgstr ""
 #~ " 是否现在备份?\n"
 #~ "按下 OK键后请等待!"
 
-#~ msgid "Do you want to download the image to %s ?"
-#~ msgstr " 是否下载映像到 \"%s\"?"
+#~ msgid "Do you want to do another manual service scan?"
+#~ msgstr " 是否手动扫描其他频道?"
 
 #~ msgid "Do you want to enable the parental control feature on your dreambox?"
 #~ msgstr " 是否启用家长控制?"
-
-#~ msgid "Do you want to install default sat lists?"
-#~ msgstr " 是否安装默认的卫星列表？"
 
 #~ msgid "Do you want to reboot your Dreambox?"
 #~ msgstr " 是否重启您的Dreambox?"
@@ -10295,9 +11998,6 @@ msgstr ""
 
 #~ msgid "EXIT key in movie mode"
 #~ msgstr "退出短片模式"
-
-#~ msgid "Ecm Info"
-#~ msgstr "ECM信息"
 
 #~ msgid "Edit Entry"
 #~ msgstr "编辑项目"
@@ -10410,9 +12110,6 @@ msgstr ""
 #~ msgid "Event Fontsize"
 #~ msgstr "文本字体大小"
 
-#~ msgid "Events"
-#~ msgstr "事件"
-
 #~ msgid "Eventview"
 #~ msgstr "事件查看"
 
@@ -10494,9 +12191,6 @@ msgstr ""
 #~ msgid "First we need to download the latest boot environment for the USB flasher."
 #~ msgstr "首先我们需要为USB安装下载最新的启动环境."
 
-#~ msgid "Flashing failed"
-#~ msgstr "安装失败"
-
 #~ msgid "Fog Late"
 #~ msgstr "晚上 雾"
 
@@ -10535,9 +12229,6 @@ msgstr ""
 
 #~ msgid "Fsck failed"
 #~ msgstr "Fsck检查失败"
-
-#~ msgid "Function not yet implemented"
-#~ msgstr "功能不可用"
 
 #~ msgid "Functions at a certain time would drive out automatically"
 #~ msgstr "特定时间自动运行的功能"
@@ -10677,9 +12368,6 @@ msgstr ""
 #~ msgid "IP Address"
 #~ msgstr "IP地址"
 
-#~ msgid "Icelandic"
-#~ msgstr "冰岛"
-
 #~ msgid "If you can see this page, please press OK."
 #~ msgstr "如果您能看以这个页面，请按 OK."
 
@@ -10718,9 +12406,6 @@ msgstr ""
 
 #~ msgid "Initialization..."
 #~ msgstr "初始化..."
-
-#~ msgid "Input 1"
-#~ msgstr "输入 1"
 
 #~ msgid "Input 10"
 #~ msgstr "输入 10"
@@ -10797,9 +12482,6 @@ msgstr ""
 #~ msgid "Installing default sat lists... Please wait..."
 #~ msgstr "正在安装默认卫星列表... 请稍候..."
 
-#~ msgid "Installing defaults... Please wait..."
-#~ msgstr "正在安装... 请稍候..."
-
 #~ msgid "Installing package content... Please wait..."
 #~ msgstr "正在安装软件包... 请稍候..."
 
@@ -10815,6 +12497,9 @@ msgstr ""
 #~ msgid "Integrated Wireless"
 #~ msgstr "集成WLAN"
 
+#~ msgid "Intermediate"
+#~ msgstr "中级"
+
 #~ msgid "Internal Flash"
 #~ msgstr "内置Flash"
 
@@ -10829,9 +12514,6 @@ msgstr ""
 
 #~ msgid "Invalid directory"
 #~ msgstr "目录无效"
-
-#~ msgid "Inversion:"
-#~ msgstr "反向:"
 
 #~ msgid "Invert display"
 #~ msgstr "反向显示"
@@ -10917,9 +12599,6 @@ msgstr ""
 
 #~ msgid "Language..."
 #~ msgstr "语言选择..."
-
-#~ msgid "Last Upgrade: "
-#~ msgstr "上次升级:"
 
 #~ msgid "Last playlists automatically loading"
 #~ msgstr "自动载入上次的播放列表"
@@ -11059,9 +12738,6 @@ msgstr ""
 #~ msgid "Mkfs failed"
 #~ msgstr "Mkfs 失败"
 
-#~ msgid "Mode"
-#~ msgstr "模式"
-
 #~ msgid "Mostly Clear"
 #~ msgstr "晴"
 
@@ -11184,9 +12860,6 @@ msgstr ""
 #~ msgid "New position"
 #~ msgstr "新位置"
 
-#~ msgid "New version:"
-#~ msgstr "新版本:"
-
 #~ msgid "Next"
 #~ msgstr "下一个"
 
@@ -11198,6 +12871,9 @@ msgstr ""
 
 #~ msgid "No 50 Hz, sorry. :("
 #~ msgstr "50Hz不工作,抱歉. :("
+
+#~ msgid "No cable tuner found!"
+#~ msgstr "没有发现卫星前端"
 
 #~ msgid "No details for this image file"
 #~ msgstr "这个Image文件没有详细说明"
@@ -11547,15 +13223,6 @@ msgstr ""
 #~ msgid "Please wait while searching for removable packages..."
 #~ msgstr "正在搜索可删除软件包，请稍候..."
 
-#~ msgid "Please wait, restarting cardserver."
-#~ msgstr "请等待，正在重启卡片服务."
-
-#~ msgid "Please wait, restarting softcam and cardserver."
-#~ msgstr "请等待，正在重启softcam和卡片服务."
-
-#~ msgid "Please wait, restarting softcam."
-#~ msgstr "请等待，正在重启softcam."
-
 #~ msgid "Polarity"
 #~ msgstr "极化"
 
@@ -11631,6 +13298,9 @@ msgstr ""
 #~ msgid "Protect setup"
 #~ msgstr "保护设置"
 
+#~ msgid "Provider to scan"
+#~ msgstr "扫描供应商"
+
 #~ msgid "Quality"
 #~ msgstr "质量"
 
@@ -11693,9 +13363,6 @@ msgstr ""
 
 #~ msgid "Read-Buffer:"
 #~ msgstr "读缓冲区:"
-
-#~ msgid "Reboot"
-#~ msgstr "重新启动"
 
 #~ msgid "Receives printing jobs of yours network"
 #~ msgstr "接收网络打印任务"
@@ -11796,14 +13463,8 @@ msgstr ""
 #~ msgid "Restart GUI"
 #~ msgstr "重启Enigma2"
 
-#~ msgid "Restart softcam"
-#~ msgstr "重启softcam"
-
 #~ msgid "Restore is running..."
 #~ msgstr "正在恢复..."
-
-#~ msgid "Restore running"
-#~ msgstr "正在恢复"
 
 #~ msgid "Restoring the settings is done. Please press OK to activate the restored settings now."
 #~ msgstr "恢复设置完成。请按OK重新启动。"
@@ -11816,9 +13477,6 @@ msgstr ""
 
 #~ msgid "Rolloff"
 #~ msgstr "信号衰减"
-
-#~ msgid "Running"
-#~ msgstr "正在运行"
 
 #~ msgid "Running Time"
 #~ msgstr "运行时间"
@@ -11952,29 +13610,17 @@ msgstr ""
 #~ msgid "Select Cam (left/right)"
 #~ msgstr "选择Camd (左, 右)"
 
-#~ msgid "Select Location"
-#~ msgstr "选择位置"
-
 #~ msgid "Select Network Adapter"
 #~ msgstr "选择网卡"
 
-#~ msgid "Select Softcam"
-#~ msgstr "选择Softcam"
-
 #~ msgid "Select Your Skin"
 #~ msgstr "选择皮肤"
-
-#~ msgid "Select audio mode"
-#~ msgstr "选择音频模式"
 
 #~ msgid "Select desired image from feed list"
 #~ msgstr "从服务器选择Image"
 
 #~ msgid "Select files for backup. Currently selected:\n"
 #~ msgstr "选择要备份的文件.当前已选的:\n"
-
-#~ msgid "Select package"
-#~ msgstr "选择包"
 
 #~ msgid "Selected Cam:"
 #~ msgstr "已选Cam:"
@@ -12000,9 +13646,6 @@ msgstr ""
 #~ msgid "Service Searching"
 #~ msgstr "频道搜索"
 
-#~ msgid "Serviceinfo"
-#~ msgstr "频道信息"
-
 #~ msgid "Services / Daemons"
 #~ msgstr "服务 / 守护进程"
 
@@ -12023,9 +13666,6 @@ msgstr ""
 
 #~ msgid "Set new Label"
 #~ msgstr "设置新标签"
-
-#~ msgid "Setup Mode"
-#~ msgstr "设置模式"
 
 #~ msgid "Share"
 #~ msgstr "共享"
@@ -12132,6 +13772,9 @@ msgstr ""
 #~ msgid "Signal Strength:"
 #~ msgstr "信号强度"
 
+#~ msgid "Simplified Chinese"
+#~ msgstr "简体中文"
+
 #~ msgid "Single transponder"
 #~ msgstr "单个转发器"
 
@@ -12182,9 +13825,6 @@ msgstr ""
 
 #~ msgid "Snow Showers Late"
 #~ msgstr "晚上 阵雪"
-
-#~ msgid "Softcam setup"
-#~ msgstr "Softcam 设置"
 
 #~ msgid "Softcam setup..."
 #~ msgstr "Softcam 设置..."
@@ -12346,9 +13986,6 @@ msgstr ""
 #~ msgid "Stop Timeshift?"
 #~ msgstr "停止时光平移?"
 
-#~ msgid "Stop camd: "
-#~ msgstr "停止 Camd: "
-
 #~ msgid "Stoptime"
 #~ msgstr "停止时间"
 
@@ -12468,6 +14105,9 @@ msgstr ""
 
 #~ msgid "Terminate"
 #~ msgstr "终止"
+
+#~ msgid "Terrestrial provider"
+#~ msgstr "地面波提供商"
 
 #~ msgid "Test Type"
 #~ msgstr "测试类型"
@@ -12689,11 +14329,11 @@ msgstr ""
 #~ msgid "Top and Bottom"
 #~ msgstr "顶端和底部"
 
+#~ msgid "Traditional Chinese"
+#~ msgstr "繁体中文"
+
 #~ msgid "Transmission Mode"
 #~ msgstr "传输模式"
-
-#~ msgid "Transponder Type"
-#~ msgstr "转发器类型"
 
 #~ msgid "Trashcan"
 #~ msgstr "垃圾桶"
@@ -12706,9 +14346,6 @@ msgstr ""
 
 #~ msgid "Tuner Slot"
 #~ msgstr "调谐器插槽"
-
-#~ msgid "Tuner status"
-#~ msgstr "调谐器状态"
 
 #~ msgid "Type:"
 #~ msgstr "类型:"
@@ -12777,9 +14414,6 @@ msgstr ""
 
 #~ msgid "Updating... Please wait... This can take some minutes..."
 #~ msgstr "正在更新... 请稍候... 这需要一些时间..."
-
-#~ msgid "Upgrade and ask to reboot"
-#~ msgstr "升级并请求重启"
 
 #~ msgid "Upgrade finished."
 #~ msgstr "升级完成."
@@ -12981,6 +14615,9 @@ msgstr ""
 #~ "启动向导将引导您完成Dreambox的基本设置.\n"
 #~ "按OK键进入下一步设置."
 
+#~ msgid "What do you want to scan?"
+#~ msgstr "是否开始扫描?"
+
 #~ msgid "Window"
 #~ msgstr "窗口"
 
@@ -13001,6 +14638,9 @@ msgstr ""
 
 #~ msgid "Yes, and don't ask again"
 #~ msgstr "是的，不再询问"
+
+#~ msgid "Yes, do another manual scan now"
+#~ msgstr "是，手动扫描另一个参数"
 
 #~ msgid "Yes, view the tutorial"
 #~ msgstr "是，查看教程"
@@ -13049,13 +14689,6 @@ msgstr ""
 #~ "您必须重启Enigma,以应用新的皮肤.\n"
 #~ "\n"
 #~ "立即重启?"
-
-#~ msgid ""
-#~ "You need a PC connected to your dreambox. If you need further instructions, please visit the website http://www.dm7025.de.\n"
-#~ "Your dreambox will now be halted. After you have performed the update instructions from the website, your new firmware will ask you to restore your settings."
-#~ msgstr ""
-#~ "您需要一台PC连接到您的dreambox.通过电脑更新dreambox的固件.\n"
-#~ "如果您需要进一步的说明请访问网站http://www.dm7025.de."
 
 #~ msgid ""
 #~ "You need to set a PIN code and hide it from your children.\n"
@@ -13330,9 +14963,6 @@ msgstr ""
 #~ msgid "connections"
 #~ msgstr "连接"
 
-#~ msgid "constant stream"
-#~ msgstr "固定流"
-
 #~ msgid "continue"
 #~ msgstr "继续"
 
@@ -13369,9 +14999,6 @@ msgstr ""
 
 #~ msgid "current Camd-List:"
 #~ msgstr "当前Camd列表"
-
-#~ msgid "current Day"
-#~ msgstr "当天"
 
 #~ msgid "current Directory is:\n"
 #~ msgstr "当前目录:\n"
@@ -13423,9 +15050,6 @@ msgstr ""
 
 #~ msgid "don't record"
 #~ msgstr "什么也不做"
-
-#~ msgid "done"
-#~ msgstr "完成!"
 
 #~ msgid "download"
 #~ msgstr "下载"
@@ -13493,9 +15117,6 @@ msgstr ""
 
 #~ msgid "exit network interface list"
 #~ msgstr "退出网卡列表"
-
-#~ msgid "extra field"
-#~ msgstr "附加字段"
 
 #~ msgid "file"
 #~ msgstr "文件"
@@ -13584,9 +15205,6 @@ msgstr ""
 #~ msgstr ""
 #~ "传入呼叫!\n"
 #~ "%s 呼叫在 %s!"
-
-#~ msgid "install not successful!\n"
-#~ msgstr "安装不成功!\n"
 
 #~ msgid "install successful!\n"
 #~ msgstr "安装成功!\n"
@@ -13782,9 +15400,6 @@ msgstr ""
 #~ msgid "open virtual keyboard input help"
 #~ msgstr "打开虚拟键盘输入帮助"
 
-#~ msgid "pause"
-#~ msgstr "暂停"
-
 #~ msgid "play entry"
 #~ msgstr "播放项目"
 
@@ -13809,9 +15424,6 @@ msgstr ""
 #~ msgid "press left or right to change"
 #~ msgstr "按左右键更改"
 
-#~ msgid "press ok"
-#~ msgstr "按 OK"
-
 #~ msgid "press ok to change"
 #~ msgstr "按OK更改"
 
@@ -13823,9 +15435,6 @@ msgstr ""
 
 #~ msgid "public"
 #~ msgstr "公开"
-
-#~ msgid "rain"
-#~ msgstr "雨"
 
 #~ msgid "record Location:"
 #~ msgstr "录制位置"
@@ -13898,9 +15507,6 @@ msgstr ""
 
 #~ msgid "service PIN"
 #~ msgstr "服务密码"
-
-#~ msgid "service pin"
-#~ msgstr "频道密码"
 
 #~ msgid "set AutoUpdate"
 #~ msgstr "自动更新设置"
@@ -14076,9 +15682,6 @@ msgstr ""
 #~ msgid "time up to show"
 #~ msgstr "显示时间"
 
-#~ msgid "timeout in seconds"
-#~ msgstr "超时(秒)"
-
 #~ msgid "to"
 #~ msgstr "到"
 
@@ -14115,14 +15718,8 @@ msgstr ""
 #~ msgid "view/choose"
 #~ msgstr "查看/选择"
 
-#~ msgid "was removed successfully"
-#~ msgstr "成功删除"
-
 #~ msgid "week started:"
 #~ msgstr "每周星期一开始:"
-
-#~ msgid "weekend mark:"
-#~ msgstr "周末标记:"
 
 #~ msgid "whitelist"
 #~ msgstr "白名单"

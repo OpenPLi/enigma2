@@ -1,18 +1,19 @@
-from HTMLComponent import HTMLComponent
 from GUIComponent import GUIComponent
-from config import KEY_LEFT, KEY_RIGHT, KEY_HOME, KEY_END, KEY_0, KEY_DELETE, KEY_BACKSPACE, KEY_OK, KEY_TOGGLEOW, KEY_ASCII, KEY_TIMEOUT, KEY_NUMBERS, ConfigElement, ConfigText, ConfigPassword
+from config import KEY_LEFT, KEY_RIGHT, KEY_HOME, KEY_END, KEY_0, KEY_DELETE, KEY_BACKSPACE, KEY_OK, KEY_TOGGLEOW, KEY_ASCII, KEY_TIMEOUT, KEY_NUMBERS, ConfigElement
 from Components.ActionMap import NumberActionMap, ActionMap
 from enigma import eListbox, eListboxPythonConfigContent, eRCInput, eTimer
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
 import skin
 
-class ConfigList(HTMLComponent, GUIComponent, object):
+class ConfigList(GUIComponent, object):
 	def __init__(self, list, session = None):
 		GUIComponent.__init__(self)
 		self.l = eListboxPythonConfigContent()
 		seperation = skin.parameters.get("ConfigListSeperator", 200)
 		self.l.setSeperation(seperation)
+		height, space = skin.parameters.get("ConfigListSlider",(17, 0))
+		self.l.setSlider(height, space)
 		self.timer = eTimer()
 		self.list = list
 		self.onSelectionChanged = [ ]
@@ -64,8 +65,7 @@ class ConfigList(HTMLComponent, GUIComponent, object):
 	GUI_WIDGET = eListbox
 
 	def selectionChanged(self):
-		if isinstance(self.current,tuple) and len(self.current) >= 2:
-			self.current[1].onDeselect(self.session)
+		self.onDeselect()
 		self.current = self.getCurrent()
 		if isinstance(self.current,tuple) and len(self.current) >= 2:
 			self.current[1].onSelect(self.session)
@@ -74,14 +74,21 @@ class ConfigList(HTMLComponent, GUIComponent, object):
 		for x in self.onSelectionChanged:
 			x()
 
+	def onDeselect(self):
+		if isinstance(self.current, tuple) and len(self.current) >= 2:
+			self.current[1].onDeselect(self.session)
+
+	def onSelect(self):
+		if isinstance(self.current, tuple) and len(self.current) >= 2:
+			self.current[1].onSelect(self.session)
+
 	def postWidgetCreate(self, instance):
 		instance.selectionChanged.get().append(self.selectionChanged)
 		instance.setContent(self.l)
 		self.instance.setWrapAround(True)
 
 	def preWidgetRemove(self, instance):
-		if isinstance(self.current,tuple) and len(self.current) >= 2:
-			self.current[1].onDeselect(self.session)
+		self.onDeselect()
 		instance.selectionChanged.get().remove(self.selectionChanged)
 		instance.setContent(None)
 
@@ -187,12 +194,12 @@ class ConfigListScreen:
 
 	def handleInputHelpers(self):
 		if self["config"].getCurrent() is not None:
-			if isinstance(self["config"].getCurrent()[1], ConfigText) or isinstance(self["config"].getCurrent()[1], ConfigPassword):
+			if self["config"].getCurrent()[1].__class__.__name__ == 'ConfigText' or self["config"].getCurrent()[1].__class__.__name__ == 'ConfigPassword':
 				if "VKeyIcon" in self:
 					self["VirtualKB"].setEnabled(True)
 					self["VKeyIcon"].boolean = True
 				if "HelpWindow" in self:
-					if self["config"].getCurrent()[1].help_window.instance is not None:
+					if self["config"].getCurrent()[1].help_window and self["config"].getCurrent()[1].help_window.instance is not None:
 						helpwindowpos = self["HelpWindow"].getPosition()
 						from enigma import ePoint
 						self["config"].getCurrent()[1].help_window.instance.move(ePoint(helpwindowpos[0],helpwindowpos[1]))
@@ -206,6 +213,7 @@ class ConfigListScreen:
 				self["VKeyIcon"].boolean = False
 
 	def KeyText(self):
+		self["config"].onDeselect()
 		from Screens.VirtualKeyBoard import VirtualKeyBoard
 		self.session.openWithCallback(self.VirtualKeyBoardCallback, VirtualKeyBoard, title = self["config"].getCurrent()[0], text = self["config"].getCurrent()[1].getValue())
 
@@ -213,6 +221,7 @@ class ConfigListScreen:
 		if callback is not None and len(callback):
 			self["config"].getCurrent()[1].setValue(callback)
 			self["config"].invalidate(self["config"].getCurrent())
+		self["config"].onSelect()
 
 	def keyOK(self):
 		self["config"].handleKey(KEY_OK)
@@ -285,6 +294,7 @@ class ConfigListScreen:
 
 	def cancelConfirm(self, result):
 		if not result:
+			self["config"].onSelect()
 			return
 
 		for x in self["config"].list:
@@ -293,6 +303,7 @@ class ConfigListScreen:
 
 	def closeMenuList(self, recursive = False):
 		if self["config"].isChanged():
+			self["config"].onDeselect()
 			self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Really close without saving settings?"))
 		else:
 			self.close(recursive)

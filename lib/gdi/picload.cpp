@@ -478,7 +478,11 @@ static void gif_load(Cfilepara* filepara, bool forceRGB = false)
 	int cmaps;
 	int extcode;
 
+#if GIFLIB_MAJOR > 5 || GIFLIB_MAJOR == 5 && GIFLIB_MINOR >= 1
 	gft = DGifOpenFileName(filepara->file, &extcode);
+#else
+	gft = DGifOpenFileName(filepara->file);
+#endif
 	if (gft == NULL)
 		return;
 	do
@@ -549,7 +553,7 @@ static void gif_load(Cfilepara* filepara, bool forceRGB = false)
 							filepara->bits = 24;
 							filepara->pic_buffer = pic_buffer2;
 							delete [] pic_buffer;
-							delete filepara->palette;
+							delete [] filepara->palette;
 							filepara->palette = NULL;
 						}
 					}
@@ -568,11 +572,19 @@ static void gif_load(Cfilepara* filepara, bool forceRGB = false)
 	}
 	while (rt != TERMINATE_RECORD_TYPE);
 
+#if GIFLIB_MAJOR > 5 || GIFLIB_MAJOR == 5 && GIFLIB_MINOR >= 1
 	DGifCloseFile(gft, &extcode);
+#else
+	DGifCloseFile(gft);
+#endif
 	return;
 ERROR_R:
 	eDebug("[ePicLoad] <Error gif>");
+#if GIFLIB_MAJOR > 5 || GIFLIB_MAJOR == 5 && GIFLIB_MINOR >= 1
 	DGifCloseFile(gft, &extcode);
+#else
+	DGifCloseFile(gft);
+#endif
 }
 
 //---------------------------------------------------------------------------------------------
@@ -700,7 +712,7 @@ void ePicLoad::decodeThumb()
 			sprintf(crcstr, "%08lX", crc32);
 
 			cachedir = m_filepara->file;
-			unsigned int pos = cachedir.find_last_of("/");
+			size_t pos = cachedir.find_last_of("/");
 			if (pos != std::string::npos)
 				cachedir = cachedir.substr(0, pos) + "/.Thumbnails";
 
@@ -1015,9 +1027,20 @@ int ePicLoad::getData(ePtr<gPixmap> &result)
 		}
 		unsigned int* row_buffer;
 		if (yoff != 0) {
-			row_buffer = (unsigned int *) tmp_buffer;
-			for (int x = 0; x < m_filepara->max_x; ++x) // fill first line
-				*row_buffer++ = background;
+			if (m_filepara->bits == 8)
+			{
+				unsigned char* row_buffer;
+				row_buffer = (unsigned char *) tmp_buffer;
+				for (int x = 0; x < m_filepara->max_x; ++x) // fill first line
+					*row_buffer++ = background;
+			}
+			else
+			{
+				unsigned int* row_buffer;
+				row_buffer = (unsigned int *) tmp_buffer;
+				for (int x = 0; x < m_filepara->max_x; ++x) // fill first line
+					*row_buffer++ = background;
+			}
 			int y;
 			#pragma omp parallel for
 			for (y = 1; y < yoff; ++y) // copy from first line
@@ -1029,13 +1052,25 @@ int ePicLoad::getData(ePtr<gPixmap> &result)
 					m_filepara->max_x * surface->bypp);
 		}
 		if (xoff != 0) {
-			row_buffer = (unsigned int *) (tmp_buffer + yoff * surface->stride);
-			int x;
-			for (x = 0; x < xoff; ++x) // fill left side of first line
-				*row_buffer++ = background;
-			row_buffer += scrx;
-			for (x = xoff + scrx; x < m_filepara->max_x; ++x) // fill right side of first line
-				*row_buffer++ = background;
+			if (m_filepara->bits == 8)
+			{
+				unsigned char* row_buffer = (unsigned char *) (tmp_buffer + yoff * surface->stride);
+				int x;
+				for (x = 0; x < xoff; ++x) // fill left side of first line
+					*row_buffer++ = background;
+				row_buffer += scrx;
+				for (x = xoff + scrx; x < m_filepara->max_x; ++x) // fill right side of first line
+					*row_buffer++ = background;
+			}
+			else {
+				unsigned int* row_buffer = (unsigned int *) (tmp_buffer + yoff * surface->stride);
+				int x;
+				for (x = 0; x < xoff; ++x) // fill left side of first line
+					*row_buffer++ = background;
+				row_buffer += scrx;
+				for (x = xoff + scrx; x < m_filepara->max_x; ++x) // fill right side of first line
+					*row_buffer++ = background;
+			}
 			#pragma omp parallel for
 			for (int y = yoff + 1; y < scry; ++y) { // copy from first line
 				memcpy(tmp_buffer + y*surface->stride,

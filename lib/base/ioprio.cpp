@@ -31,16 +31,16 @@ void setIoPrio(int prio_class, int prio)
 {
 	if (prio_class < 0 || prio_class > 3)
 	{
-		eDebug("[setIoPrio] class(%d) out of valid range (0..3)", prio_class);
+		eWarning("[setIoPrio] class(%d) out of valid range (0..3)", prio_class);
 		return;
 	}
 	if (prio < 0 || prio > 7)
 	{
-		eDebug("[setIoPrio] level(%d) out of range (0..7)", prio);
+		eWarning("[setIoPrio] level(%d) out of range (0..7)", prio);
 		return;
 	}
 	if (ioprio_set(IOPRIO_WHO_PROCESS, 0 /*pid 0 .. current process*/, prio | prio_class << IOPRIO_CLASS_SHIFT) == -1)
-		eDebug("[setIoPrio] failed: %m");
+		eWarning("[setIoPrio] %s:%d failed: %m", to_prio[prio_class], prio);
 	else
 		eDebug("[setIoPrio] %s level %d ok", to_prio[prio_class], prio);
 }

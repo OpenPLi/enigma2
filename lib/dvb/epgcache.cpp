@@ -704,7 +704,8 @@ bool eEPGCache::FixOverlapping(EventCacheItem &servicemap, time_t TM, int durati
 {
 	bool ret = false;
 	timeMap::iterator tmp = tm_it;
-	while ((tmp->first + tmp->second->getDuration() - 300) > TM)
+
+	while ((tmp->first + tmp->second->getDuration() - 60) > TM)
 	{
 		if(tmp->first != TM
 #ifdef ENABLE_PRIVATE_EPG
@@ -746,7 +747,7 @@ bool eEPGCache::FixOverlapping(EventCacheItem &servicemap, time_t TM, int durati
 	}
 
 	tmp = tm_it;
-	while(tmp->first < (TM+duration-300))
+	while(tmp->first < (TM + duration - 60))
 	{
 		if (tmp->first != TM && tmp->second->type != PRIVATE)
 		{
@@ -1014,7 +1015,7 @@ next:
 						i++, (int)it->first, (int)it->second->getStartTime(), (int)it->second->getEventID(), it->second );
 				}
 			}
-			eFatal("[eEPGCache] (1)map sizes not equal :( sid %04x tsid %04x onid %04x size %d size2 %d",
+			eFatal("[eEPGCache] (1)map sizes not equal :( sid %04x tsid %04x onid %04x size %zu size2 %zu",
 				service.sid, service.tsid, service.onid,
 				servicemap.first.size(), servicemap.second.size() );
 		}
@@ -1453,17 +1454,18 @@ void eEPGCache::save()
 		return;
 	}
 
-	free(buf);
-
 	// check for enough free space on storage
 	tmp=s.f_bfree;
 	tmp*=s.f_bsize;
 	if ( tmp < (eventData::CacheSize*12)/10 ) // 20% overhead
 	{
-		eDebug("[eEPGCache] not enough free space at '%s' %lld bytes available but %u needed", buf, tmp, (eventData::CacheSize*12)/10);
+		eDebug("[eEPGCache] not enough free space at '%s' %zu bytes available but %u needed", buf, tmp, (eventData::CacheSize*12)/10);
+		free(buf);
 		fclose(f);
 		return;
 	}
+
+	free(buf);
 
 	int cnt=0;
 	unsigned int magic = 0x98765432;
@@ -1652,7 +1654,7 @@ void eEPGCache::channel_data::startEPG()
 		mask.pid = it->second;
 		eDebug("[eEPGCache] Using non-standard pid %#x", mask.pid);
 	}
-	
+
 	if (eEPGCache::getInstance()->getEpgSources() & eEPGCache::NOWNEXT)
 	{
 		mask.data[0] = 0x4E;
@@ -3283,6 +3285,8 @@ void eEPGCache::importEvents(ePyObject serviceReferences, ePyObject list)
 //     1 = search events with exactly title name (EXACT_TITLE_SEARCH)
 //     2 = search events with text in title name (PARTIAL_TITLE_SEARCH)
 //     3 = search events starting with title name (START_TITLE_SEARCH)
+//     4 = search events ending with title name (END_TITLE_SEARCH)
+//     5 = search events with text in description (PARTIAL_DESCRIPTION_SEARCH)
 //  when type is 0 (SIMILAR_BROADCASTINGS_SEARCH)
 //   the fourth is the servicereference string
 //   the fifth is the eventid
@@ -3416,9 +3420,9 @@ PyObject *eEPGCache::search(ePyObject arg)
 					int casetype = PyLong_AsLong(PyTuple_GET_ITEM(arg, 4));
 					const char *str = PyString_AS_STRING(obj);
 #if PY_VERSION_HEX < 0x02060000
-					int textlen = PyString_GET_SIZE(obj);
+					int strlen = PyString_GET_SIZE(obj);
 #else
-					int textlen = PyString_Size(obj);
+					int strlen = PyString_Size(obj);
 #endif
 					switch (querytype)
 					{
@@ -3431,63 +3435,90 @@ PyObject *eEPGCache::search(ePyObject arg)
 						case 3:
 							eDebug("[eEPGCache] lookup events, title starting with '%s' (%s)", str, casetype?"ignore case":"case sensitive");
 							break;
+						case 4:
+							eDebug("[eEPGCache] lookup events, title ending with '%s' (%s)", str, casetype?"ignore case":"case sensitive");
+							break;
+						case 5:
+							eDebug("[eEPGCache] lookup events with '%s' in the description (%s)", str, casetype?"ignore case":"case sensitive");
+							break;
 					}
 					Py_BEGIN_ALLOW_THREADS; /* No Python code in this section, so other threads can run */
 					singleLock s(cache_lock);
-					std::string title;
+					std::string text;
 					for (DescriptorMap::iterator it(eventData::descriptors.begin());
 						it != eventData::descriptors.end(); ++it)
 					{
 						uint8_t *data = it->second.data;
-						if ( data[0] == 0x4D ) // short event descriptor
+						int textlen = 0;
+						const char *textptr = NULL;
+						if ( data[0] == 0x4D && querytype > 0 && querytype < 5 ) // short event descriptor
 						{
-							const char *titleptr = (const char*)&data[6];
-							int title_len = data[5];
+							textptr = (const char*)&data[6];
+							textlen = data[5];
 							if (data[6] < 0x20)
 							{
 								/* custom encoding */
-								title = convertDVBUTF8((unsigned char*)titleptr, title_len, 0x40, 0);
-								titleptr = title.data();
-								title_len = title.length();
+								text = convertDVBUTF8((unsigned char*)textptr, textlen, 0x40, 0);
+								textptr = text.data();
+								textlen = text.length();
 							}
-							if (title_len < textlen)
-								/*Doesn't fit, so cannot match anything */
-								continue;
+						}
+						else if ( data[0] == 0x4E && querytype == 5 ) // extended event descriptor
+						{
+							textptr = (const char*)&data[8];
+							textlen = data[7];
+							if (data[8] < 0x20)
+							{
+								/* custom encoding */
+								text = convertDVBUTF8((unsigned char*)textptr, textlen, 0x40, 0);
+								textptr = text.data();
+								textlen = text.length();
+							}
+						}
+						/* if we have a descriptor, the argument may not be bigger */
+						if (textlen > 0 && strlen <= textlen )
+						{
 							if (querytype == 1)
 							{
-								/* require exact title match */
-								if (title_len != textlen)
+								/* require exact text match */
+								if (textlen != strlen)
 									continue;
 							}
 							else if (querytype == 3)
 							{
 								/* Do a "startswith" match by pretending the text isn't that long */
-								title_len = textlen;
+								textlen = strlen;
+							}
+							else if (querytype == 4)
+							{
+								/* Offset to adjust the pointer based on the text length difference */
+								textptr = textptr + textlen - strlen;
+								textlen = strlen;
 							}
 							if (casetype)
 							{
-								while (title_len >= textlen)
+								while (textlen >= strlen)
 								{
-									if (!strncasecmp(titleptr, str, textlen))
+									if (!strncasecmp(textptr, str, strlen))
 									{
 										descr.push_back(it->first);
 										break;
 									}
-									title_len--;
-									titleptr++;
+									textlen--;
+									textptr++;
 								}
 							}
 							else
 							{
-								while (title_len >= textlen)
+								while (textlen >= strlen)
 								{
-									if (!memcmp(titleptr, str, textlen))
+									if (!memcmp(textptr, str, strlen))
 									{
 										descr.push_back(it->first);
 										break;
 									}
-									title_len--;
-									titleptr++;
+									textlen--;
+									textptr++;
 								}
 							}
 						}
@@ -4323,7 +4354,7 @@ void eEPGCache::channel_data::readMHWData(const uint8_t *data)
 		}
 		haveData |= MHW;
 
-		eDebug("[eEPGCache] mhw %d channels found", m_channels.size());
+		eDebug("[eEPGCache] mhw %zu channels found", m_channels.size());
 
 		// Channels table has been read, start reading the themes table.
 		startMHWReader(0xD3, 0x92);
@@ -4354,7 +4385,7 @@ void eEPGCache::channel_data::readMHWData(const uint8_t *data)
 
 			m_themes[idx+sub_idx] = *theme;
 		}
-		eDebug("[eEPGCache] mhw %d themes found", m_themes.size());
+		eDebug("[eEPGCache] mhw %zu themes found", m_themes.size());
 		// Themes table has been read, start reading the titles table.
 		startMHWReader(0xD2, 0x90);
 		startMHWTimeout(4000);
@@ -4398,7 +4429,7 @@ void eEPGCache::channel_data::readMHWData(const uint8_t *data)
 			// Titles table has been read, there are summaries to read.
 			// Start reading summaries, store corresponding titles on the fly.
 			startMHWReader(0xD3, 0x90);
-			eDebug("[eEPGCache] mhw %d titles(%d with summary) found",
+			eDebug("[eEPGCache] mhw %zu titles(%zu with summary) found",
 				m_titles.size(),
 				m_program_ids.size());
 			startMHWTimeout(4000);
@@ -4431,7 +4462,7 @@ void eEPGCache::channel_data::readMHWData(const uint8_t *data)
 		{
 			std::string the_text = (char *) (data + 11 + summary->nb_replays * 7);
 
-			unsigned int pos=0;
+			size_t pos = 0;
 			while((pos = the_text.find("\r\n")) != std::string::npos)
 				the_text.replace(pos, 2, " ");
 
@@ -4448,7 +4479,7 @@ void eEPGCache::channel_data::readMHWData(const uint8_t *data)
 				return;	// Continue reading of the current table.
 		}
 	}
-	eDebug("[eEPGCache] mhw finished(%ld) %d summaries not found",
+	eDebug("[eEPGCache] mhw finished(%ld) %zu summaries not found",
 		::time(0),
 		m_program_ids.size());
 	// Summaries have been read, titles that have summaries have been stored.
@@ -4524,7 +4555,7 @@ void eEPGCache::channel_data::readMHWData2(const uint8_t *data)
 //			eDebug("[eEPGCache] %d(%02x) %s", i, i, channel.name);
 		}
 		haveData |= MHW;
-		eDebug("[eEPGCache] mhw2 %d channels found", m_channels.size());
+		eDebug("[eEPGCache] mhw2 %zu channels found", m_channels.size());
 	}
 	else if (m_MHWFilterMask2.pid == m_mhw2_channel_pid && m_MHWFilterMask2.data[0] == 0xC8 && m_MHWFilterMask2.data[1] == 1)
 	{
@@ -4633,7 +4664,7 @@ void eEPGCache::channel_data::readMHWData2(const uint8_t *data)
 		}
 		if (finish)
 		{
-			eDebug("[eEPGCache] mhw2 %d titles(%d with summary) found", m_titles.size(), m_program_ids.size());
+			eDebug("[eEPGCache] mhw2 %zu titles(%zu with summary) found", m_titles.size(), m_program_ids.size());
 			if (!m_program_ids.empty())
 			{
 				// Titles table has been read, there are summaries to read.
@@ -4762,7 +4793,7 @@ void eEPGCache::channel_data::readMHWData2(const uint8_t *data)
 			// Now store titles that do not have summaries.
 			for (std::map<uint32_t, mhw_title_t>::iterator itTitle(m_titles.begin()); itTitle != m_titles.end(); itTitle++)
 				storeMHWTitle( itTitle, "", data );
-			eDebug("[eEPGCache] mhw2 finished(%ld) %d summaries not found",
+			eDebug("[eEPGCache] mhw2 finished(%ld) %zu summaries not found",
 				::time(0),
 				m_program_ids.size());
 		}

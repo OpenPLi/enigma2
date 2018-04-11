@@ -475,7 +475,7 @@ class SecConfigure:
 		self.update()
 
 class NIM(object):
-	def __init__(self, slot, type, description, has_outputs = True, internally_connectable = None, multi_type = {}, frontend_id = None, i2c = None, is_empty = False):
+	def __init__(self, slot, type, description, has_outputs = True, internally_connectable = None, multi_type = {}, frontend_id = None, i2c = None, is_empty = False, supports_blind_scan = False):
 		nim_types = ["DVB-S", "DVB-S2", "DVB-C", "DVB-T", "DVB-T2", "ATSC"]
 
 		if type and type not in nim_types:
@@ -488,6 +488,7 @@ class NIM(object):
 		self.has_outputs = has_outputs
 		self.internally_connectable = internally_connectable
 		self.multi_type = multi_type
+		self.supports_blind_scan = supports_blind_scan
 		self.i2c = i2c
 		self.frontend_id = frontend_id
 		self.__is_empty = is_empty
@@ -590,6 +591,9 @@ class NIM(object):
 			multistream = True
 		return multistream
 
+	def supportsBlindScan(self):
+		return self.supports_blind_scan
+
 	# returns dict {<slotid>: <type>}
 	def getMultiTypeList(self):
 		return self.multi_type
@@ -641,7 +645,10 @@ class NimManager:
 			if feid is None or self.nim_slots[feid].isMultistream():
 				return self.transponders[pos]
 			else: # remove multistream transponders
-				return [tp for tp in self.transponders[pos] if not (tp[5] == eDVBFrontendParametersSatellite.System_DVB_S2 and (tp[10] > -1 or tp[11] > 0 or tp[12] > 1))]
+				def isMultistreamTP(tp):
+					# since we are using Gold sequences there is no need to check the PLS Mode
+					return tp[5] == eDVBFrontendParametersSatellite.System_DVB_S2 and (tp[10] > -1 or tp[12] > 0)
+				return [tp for tp in self.transponders[pos] if not isMultistreamTP(tp)]
 		else:
 			return []
 
@@ -783,7 +790,7 @@ class NimManager:
 			elif line.startswith("Type:"):
 				entries[current_slot]["type"] = str(line[6:])
 				if entries[current_slot]["type"] == "DVB-S2X":
-				    entries[current_slot]["type"] = "DVB-S2"
+					entries[current_slot]["type"] = "DVB-S2"
 				entries[current_slot]["isempty"] = False
 			elif line.startswith("Name:"):
 				entries[current_slot]["name"] = str(line[6:])
@@ -794,6 +801,9 @@ class NimManager:
 			elif line.startswith("Internally_Connectable:"):
 				input = int(line[len("Internally_Connectable:") + 1:])
 				entries[current_slot]["internally_connectable"] = input
+			elif line.startswith("Supports_Blind_Scan:"):
+				input = str(line[len("Supports_Blind_Scan:") + 1:])
+				entries[current_slot]["supports_blind_scan"] = (input == "yes")
 			elif line.startswith("Frontend_Device:"):
 				input = int(line[len("Frontend_Device:") + 1:])
 				entries[current_slot]["frontend_device"] = input
@@ -824,7 +834,7 @@ class NimManager:
 			if "has_outputs" not in entry:
 				entry["has_outputs"] = True
 			if "frontend_device" in entry: # check if internally connectable
-				if os.path.exists("/proc/stb/frontend/%d/rf_switch" % entry["frontend_device"]):
+				if os.path.exists("/proc/stb/frontend/%d/rf_switch" % entry["frontend_device"]) and (not id or entries[id]["name"] == entries[id - 1]["name"]):
 					entry["internally_connectable"] = entry["frontend_device"] - 1
 				else:
 					entry["internally_connectable"] = None
@@ -832,7 +842,9 @@ class NimManager:
 				entry["frontend_device"] = entry["internally_connectable"] = None
 			if "multi_type" not in entry:
 				entry["multi_type"] = {}
-			self.nim_slots.append(NIM(slot = id, description = entry["name"], type = entry["type"], has_outputs = entry["has_outputs"], internally_connectable = entry["internally_connectable"], multi_type = entry["multi_type"], frontend_id = entry["frontend_device"], i2c = entry["i2c"], is_empty = entry["isempty"]))
+			if "supports_blind_scan" not in entry:
+				entry["supports_blind_scan"] = False
+			self.nim_slots.append(NIM(slot = id, description = entry["name"], type = entry["type"], has_outputs = entry["has_outputs"], internally_connectable = entry["internally_connectable"], multi_type = entry["multi_type"], frontend_id = entry["frontend_device"], i2c = entry["i2c"], is_empty = entry["isempty"], supports_blind_scan = entry["supports_blind_scan"]))
 
 	def hasNimType(self, chktype):
 		return any(slot.canBeCompatible(chktype) for slot in self.nim_slots)
@@ -1229,10 +1241,10 @@ def InitNimManager(nimmgr, update_slots = []):
 					section.unicableProduct.save_forced = True
 					section.unicableProduct.addNotifier(boundFunction(unicableProductChanged, configEntry.value, lnb_or_matrix))
 				def userScrListChanged(srcfrequencyList, configEntry):
-					section.scrfrequency = ConfigInteger(default=int(srcfrequencyList[configEntry.index]), limits=(950, 2150))
-					section.lofl = ConfigInteger(default=9750, limits=(950, 2150))
-					section.lofh = ConfigInteger(default=10600, limits=(950, 2150))
-					section.threshold = ConfigInteger(default=11700, limits=(950, 2150))
+					section.scrfrequency = ConfigInteger(default=int(srcfrequencyList[configEntry.index]), limits = (0, 99999))
+					section.lofl = ConfigInteger(default=9750, limits = (0, 99999))
+					section.lofh = ConfigInteger(default=10600, limits = (0, 99999))
+					section.threshold = ConfigInteger(default=11700, limits = (0, 99999))
 				def formatChanged(configEntry):
 					section.positions = ConfigInteger(default=configEntry.value == "jess" and 64 or 2)
 					section.positions.addNotifier(positionsChanged)
@@ -1478,8 +1490,10 @@ def InitNimManager(nimmgr, update_slots = []):
 		try:
 			raw_channel = eDVBResourceManager.getInstance().allocateRawChannel(fe_id)
 			if raw_channel is None:
-				self.session.nav.stopService()
-				raw_channel = eDVBResourceManager.getInstance().allocateRawChannel(fe_id)
+				import NavigationInstance
+				if NavigationInstance.instance:
+					NavigationInstance.instance.stopService()
+					raw_channel = eDVBResourceManager.getInstance().allocateRawChannel(fe_id)
 				if raw_channel is None:
 					print "[InitNimManager] %d: tunerTypeChanged to '%s' failed (BUSY)" %(fe_id, configElement.getText())
 					return
@@ -1487,8 +1501,9 @@ def InitNimManager(nimmgr, update_slots = []):
 			is_changed_mode = os.path.exists("/proc/stb/frontend/%d/mode" % fe_id)
 			if not is_changed_mode and frontend.setDeliverySystem(nimmgr.nim_slots[fe_id].getType()):
 				print "[InitNimManager] tunerTypeChanged feid %d to mode %d" % (fe_id, int(configElement.value))
-				InitNimManager(nimmgr)
-				configElement.save()
+				InitNimManager(nimmgr, [fe_id])
+				if not hasattr(config.misc, 'firstrun') or not config.misc.firstrun.value:
+					configElement.save()
 			elif is_changed_mode:
 				cur_type = int(open("/proc/stb/frontend/%d/mode" % (fe_id), "r").read())
 				if cur_type != int(configElement.value):
@@ -1516,7 +1531,8 @@ def InitNimManager(nimmgr, update_slots = []):
 					if initial:
 						print "[InitNimManager] tunerTypeChanged force update setting"
 						nimmgr.sec.update()
-					configElement.save()
+					if not hasattr(config.misc, 'firstrun') or not config.misc.firstrun.value:
+						configElement.save()
 				else:
 					print "[InitNimManager] tunerTypeChanged tuner type is already %d" % cur_type
 		except Exception as e:
@@ -1525,31 +1541,16 @@ def InitNimManager(nimmgr, update_slots = []):
 	empty_slots = 0
 	for slot in nimmgr.nim_slots:
 		x = slot.slot
-		nim = config.Nims[x]
-		addMultiType = False
-		try:
-			nim.multiType
-		except:
-			addMultiType = True
-		if slot.isMultiType() and addMultiType:
-			typeList = []
-			for id in slot.getMultiTypeList().keys():
-				type = slot.getMultiTypeList()[id]
-				typeList.append((id, type))
-			nim.multiType = ConfigSelection(typeList, "0")
 
-			nim.multiType.fe_id = x - empty_slots
-			nim.multiType.addNotifier(boundFunction(tunerTypeChanged, nimmgr), initial_call=False)
-			tunerTypeChanged(nimmgr, nim.multiType, initial=True)
+		if update_slots and (x not in update_slots):
+			continue
 
-	empty_slots = 0
-	for slot in nimmgr.nim_slots:
-		x = slot.slot
 		nim = config.Nims[x]
+		nim.force_legacy_signal_stats = ConfigYesNo(default = False)
 
 		if slot.isCompatible("DVB-S"):
 			createSatConfig(nim, x, empty_slots)
-			config_mode_choices = [("nothing", _("nothing connected")),
+			config_mode_choices = [("nothing", _("disabled")),
 				("simple", _("simple")), ("advanced", _("advanced"))]
 			if len(nimmgr.getNimListOfType(slot.type, exception = x)) > 0:
 				config_mode_choices.append(("equal", _("equal to")))
@@ -1565,7 +1566,7 @@ def InitNimManager(nimmgr, update_slots = []):
 			nim.configMode = ConfigSelection(
 				choices = {
 					"enabled": _("enabled"),
-					"nothing": _("nothing connected"),
+					"nothing": _("disabled"),
 					},
 				default = "enabled")
 			createCableConfig(nim, x)
@@ -1573,7 +1574,7 @@ def InitNimManager(nimmgr, update_slots = []):
 			nim.configMode = ConfigSelection(
 				choices = {
 					"enabled": _("enabled"),
-					"nothing": _("nothing connected"),
+					"nothing": _("disabled"),
 					},
 				default = "enabled")
 			createTerrestrialConfig(nim, x)
@@ -1581,7 +1582,7 @@ def InitNimManager(nimmgr, update_slots = []):
 			nim.configMode = ConfigSelection(
 				choices = {
 					"enabled": _("enabled"),
-					"nothing": _("nothing connected"),
+					"nothing": _("disabled"),
 					},
 				default = "enabled")
 			createATSCConfig(nim, x)
@@ -1596,11 +1597,12 @@ def InitNimManager(nimmgr, update_slots = []):
 	empty_slots = 0
 	for slot in nimmgr.nim_slots:
 		x = slot.slot
-		nim = config.Nims[x]
-		empty = True
 
 		if update_slots and (x not in update_slots):
 			continue
+
+		nim = config.Nims[x]
+		empty = True
 
 		if slot.canBeCompatible("DVB-S"):
 			createSatConfig(nim, x, empty_slots)
@@ -1616,5 +1618,21 @@ def InitNimManager(nimmgr, update_slots = []):
 			empty = False
 		if empty:
 			empty_slots += 1
+
+		# check for multitype tuners
+		addMultiType = False
+		try:
+			nim.multiType
+		except:
+			addMultiType = True
+
+		if slot.isMultiType() and addMultiType:
+			typeList = []
+			for id in slot.getMultiTypeList().keys():
+				type = slot.getMultiTypeList()[id]
+				typeList.append((id, type))
+			nim.multiType = ConfigSelection(typeList, "0")
+			nim.multiType.fe_id = x - empty_slots
+			nim.multiType.addNotifier(boundFunction(tunerTypeChanged, nimmgr), initial_call=True)
 
 nimmanager = NimManager()

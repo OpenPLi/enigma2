@@ -15,7 +15,6 @@ from Components.ProgressBar import ProgressBar
 from Tools.StbHardware import getFPVersion
 from enigma import eTimer, eLabel, eConsoleAppContainer
 
-from Components.HTMLComponent import HTMLComponent
 from Components.GUIComponent import GUIComponent
 import skin, os
 
@@ -39,7 +38,8 @@ class About(Screen):
 		self["ImageVersion"] = StaticText(ImageVersion)
 		# AboutText += ImageVersion + "\n"
 
-		EnigmaVersion = about.getEnigmaVersionString().rsplit("-", 2)
+		EnigmaVersion = about.getEnigmaVersionString()
+		EnigmaVersion = EnigmaVersion.rsplit("-", EnigmaVersion.count("-") - 2)
 		if len(EnigmaVersion) == 3:
 			EnigmaVersion = EnigmaVersion[0] + " " + EnigmaVersion[2] + "-" + EnigmaVersion[1]
 		else:
@@ -327,7 +327,7 @@ class MemoryInfo(Screen):
 		open("/proc/sys/vm/drop_caches", "w").write("3")
 		self.getMemoryInfo()
 
-class MemoryInfoSkinParams(HTMLComponent, GUIComponent):
+class MemoryInfoSkinParams(GUIComponent):
 	def __init__(self):
 		GUIComponent.__init__(self)
 		self.rows_in_column = 25
@@ -406,7 +406,7 @@ class Troubleshoot(Screen):
 
 	def appClosed(self, retval):
 		if retval:
-			self["AboutScrollLabel"].setText(_("Some error occured - Please try later"))
+			self["AboutScrollLabel"].setText(_("An error occurred - Please try again later"))
 
 	def dataAvail(self, data):
 		self["AboutScrollLabel"].appendText(data)
@@ -425,7 +425,7 @@ class Troubleshoot(Screen):
 				if self.container.execute(command):
 					raise Exception, "failed to execute: ", command
 			except Exception, e:
-				self["AboutScrollLabel"].setText("%s\n%s" % (_("Some error occured - Please try later"), e))
+				self["AboutScrollLabel"].setText("%s\n%s" % (_("An error occurred - Please try again later"), e))
 
 	def cancel(self):
 		self.container.appClosed.remove(self.appClosed)

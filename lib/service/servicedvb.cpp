@@ -2920,16 +2920,16 @@ void eDVBServicePlay::updateDecoder(bool sendSeekableStateChanged)
 		if (!m_noaudio)
 		{
 			selectAudioStream();
+		}
 
 #if HAVE_AMLOGIC
-			m_decoder->setSyncPCR(pcrpid);
+		m_decoder->setSyncPCR(pcrpid);
 #else
-			if (!(m_is_pvr || m_is_stream || m_timeshift_active))
-				m_decoder->setSyncPCR(pcrpid);
-			else
-				m_decoder->setSyncPCR(-1);
+		if (!(m_is_pvr || m_is_stream || m_timeshift_active))
+			m_decoder->setSyncPCR(pcrpid);
+		else
+			m_decoder->setSyncPCR(-1);
 #endif
-		}
 
 		if (m_decoder_index == 0)
 		{
@@ -3230,8 +3230,8 @@ RESULT eDVBServicePlay::getCachedSubtitle(struct SubtitleTrack &track)
 		if (!h.getProgramInfo(program))
 		{
 			bool usecache = eConfigManager::getConfigBoolValue("config.autolanguage.subtitle_usecache");
-			int stream=program.defaultSubtitleStream;
-			int tmp = m_dvb_service->getCacheEntry(eDVBService::cSUBTITLE);
+			int stream = program.defaultSubtitleStream;
+			int tmp = usecache ? m_dvb_service->getCacheEntry(eDVBService::cSUBTITLE) : -1; 
 
 			if (usecache || stream == -1)
 			{

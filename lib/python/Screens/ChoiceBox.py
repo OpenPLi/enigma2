@@ -90,8 +90,8 @@ class ChoiceBox(Screen):
 		self.setTitle(windowTitle or _("Select"))
 
 	def autoResize(self):
-		orgwidth = self.instance.size().width()
 		orgpos = self.instance.position()
+		orgheight = self.instance.size().height()
 		textsize = self["text"].getSize()
 		count = len(self.list)
 		if count > 10:
@@ -99,20 +99,13 @@ class ChoiceBox(Screen):
 		offset = 25 * count
 		wsizex = textsize[0] + 60
 		wsizey = textsize[1] + offset
-		if (520 > wsizex):
-			wsizex = 520
-		wsize = (wsizex, wsizey)
-		# resize
-		self.instance.resize(enigma.eSize(*wsize))
-		# resize label
-		self["text"].instance.resize(enigma.eSize(*textsize))
-		# move list
-		listsize = (wsizex, 25 * count)
+		# move and resize screen
 		self["list"].instance.move(enigma.ePoint(0, textsize[1]))
-		self["list"].instance.resize(enigma.eSize(*listsize))
+		self.instance.resize(enigma.eSize(*(wsizex, wsizey)))
+		# resize list
+		self["list"].instance.resize(enigma.eSize(*(wsizex, offset)))
 		# center window
-		newwidth = wsize[0]
-		self.instance.move(enigma.ePoint((720-wsizex)/2, (576-wsizey)/(count > 7 and 2 or 3)))
+		self.instance.move(enigma.ePoint(orgpos.x(), orgpos.y()+(orgheight-wsizey)/2))
 
 	def keyLeft(self):
 		pass

@@ -15,6 +15,7 @@ from Components.RcModel import rc_model
 from Components.SystemInfo import SystemInfo
 
 colorNames = {}
+switchPixmap = {}
 # Predefined fonts, typically used in built-in screens and for components like
 # the movie list and so.
 fonts = {
@@ -286,6 +287,8 @@ class AttributeParser:
 			self.applyOne(attrib, value)
 	def conditional(self, value):
 		pass
+	def objectTypes(self, value):
+		pass
 	def position(self, value):
 		if isinstance(value, tuple):
 			self.guiObject.move(ePoint(*value))
@@ -512,10 +515,25 @@ def loadSingleSkinData(desktop, skin, path_prefix):
 			if not fileExists(skinfile):
 				skinfile = resolveFilename(SCOPE_SKIN_IMAGE, filename, path_prefix=path_prefix)
 			if fileExists(skinfile):
-				print "[SKIN] loading include:", skinfile
+				print "[Skin] Loading include:", skinfile
 				loadSkin(skinfile)
 
-	for c in skin.findall("colors"):
+	for c in skin.findall('switchpixmap'):
+		for pixmap in c.findall('pixmap'):
+			get_attr = pixmap.attrib.get
+			name = get_attr('name')
+			if not name:
+				raise SkinError('[Skin] pixmap needs name attribute')
+			filename = get_attr('filename')
+			if not filename:
+				raise SkinError('[Skin] pixmap needs filename attribute')
+			resolved_png = resolveFilename(SCOPE_CURRENT_SKIN, filename, path_prefix=path_prefix)
+			if fileExists(resolved_png):
+				switchPixmap[name] = resolved_png
+			else:
+				raise SkinError('[Skin] switchpixmap pixmap filename="%s" (%s) not found' % (filename, resolved_png))
+
+ 	for c in skin.findall("colors"):
 		for color in c.findall("color"):
 			get_attr = color.attrib.get
 			name = get_attr("name")
@@ -560,7 +578,7 @@ def loadSingleSkinData(desktop, skin, path_prefix):
 				global fonts
 				fonts[name] = (font, size, height, width)
 			except Exception, ex:
-				print "[SKIN] bad font alias", ex
+				print "[Skin] Bad font alias", ex
 
 	for c in skin.findall("parameters"):
 		for parameter in c.findall("parameter"):
@@ -570,7 +588,7 @@ def loadSingleSkinData(desktop, skin, path_prefix):
 				value = get("value")
 				parameters[name] = "," in value and map(int, value.split(",")) or int(value)
 			except Exception, ex:
-				print "[SKIN] bad parameter", ex
+				print "[Skin] Bad parameter", ex
 
 	for c in skin.findall("subtitles"):
 		from enigma import eSubtitleWidget
@@ -837,15 +855,15 @@ def readSkin(screen, skin, names, desktop):
 					sid = candidate.attrib.get('id', None)
 					if (not sid) or (int(sid) == display_skin_id):
 						myscreen = candidate
-						break;
+						break
 			else:
-				print "[SKIN] Hey, no suitable screen!"
+				print "[Skin] No suitable screen!"
 		else:
 			myscreen = xml.etree.cElementTree.fromstring(skin)
 		if myscreen:
 			screen.parsedSkin = myscreen
 	if myscreen is None:
-		print "[SKIN] No skin to read..."
+		print "[Skin] No skin to read..."
 		myscreen = screen.parsedSkin = xml.etree.cElementTree.fromstring("<screen></screen>")
 
 	screen.skinAttributes = [ ]
@@ -980,11 +998,14 @@ def readSkin(screen, skin, names, desktop):
 			conditional = w.attrib.get('conditional')
 			if conditional and not [i for i in conditional.split(",") if i in screen.keys()]:
 				continue
+			objecttypes = w.attrib.get('objectTypes', '').split(",")
+			if len(objecttypes) > 1 and (objecttypes[0] not in screen.keys() or not [i for i in objecttypes[1:] if i == screen[objecttypes[0]].__class__.__name__]):
+					continue
 			p = processors.get(w.tag, process_none)
 			try:
 				p(w, context)
 			except SkinError, e:
-				print "[Skin] SKIN ERROR in screen '%s' widget '%s':" % (name, w.tag), e
+				print "[Skin] Error in screen '%s' widget '%s':" % (name, w.tag), e
 
 	def process_panel(widget, context):
 		n = widget.attrib.get('name')
@@ -992,7 +1013,7 @@ def readSkin(screen, skin, names, desktop):
 			try:
 				s = dom_screens[n]
 			except KeyError:
-				print "[SKIN] Unable to find screen '%s' referred in screen '%s'" % (n, name)
+				print "[Skin] Unable to find screen '%s' referred in screen '%s'" % (n, name)
 			else:
 				process_screen(s[0], context)
 		layout = widget.attrib.get('layout')
@@ -1016,11 +1037,12 @@ def readSkin(screen, skin, names, desktop):
 	}
 
 	try:
+		print "[Skin] Processing screen: %s" % name
 		context.x = 0 # reset offsets, all components are relative to screen
 		context.y = 0 # coordinates.
 		process_screen(myscreen, context)
 	except Exception, e:
-		print "[Skin] SKIN ERROR in %s:" % name, e
+		print "[Skin] Error in %s:" % name, e
 
 	from Components.GUIComponent import GUIComponent
 	nonvisited_components = [x for x in set(screen.keys()) - visited_components if isinstance(x, GUIComponent)]

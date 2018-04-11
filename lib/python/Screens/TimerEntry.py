@@ -5,9 +5,8 @@ from Components.config import config, ConfigSelection, ConfigText, ConfigSubList
 from Components.ActionMap import NumberActionMap
 from Components.ConfigList import ConfigListScreen
 from Components.MenuList import MenuList
-from Components.Button import Button
+from Components.Sources.StaticText import StaticText
 from Components.Label import Label
-from Components.Pixmap import Pixmap
 from Components.SystemInfo import SystemInfo
 from Components.UsageConfig import defaultMoviePath
 from Screens.MovieSelection import getPreferredTagEditor
@@ -28,12 +27,10 @@ class TimerEntry(Screen, ConfigListScreen):
 		self.entryDate = None
 		self.entryService = None
 
-		self["oktext"] = Label(_("OK"))
-		self["canceltext"] = Label(_("Cancel"))
-		self["ok"] = Pixmap()
-		self["cancel"] = Pixmap()
-		self["key_yellow"] = Label(_("Timer type"))
-		self["key_blue"] = Label()
+		self["key_red"] = StaticText(_("Cancel"))
+		self["key_green"] = StaticText(_("Save"))
+		self["key_yellow"] = StaticText(_("Timer type"))
+		self["key_blue"] = StaticText("")
 
 		self.createConfig()
 
@@ -46,6 +43,8 @@ class TimerEntry(Screen, ConfigListScreen):
 			"volumeDown": self.decrementStart,
 			"size+": self.incrementEnd,
 			"size-": self.decrementEnd,
+			"red": self.keyCancel,
+			"green": self.keyGo,
 			"yellow": self.changeTimerType,
 			"blue": self.changeZapWakeupType
 		}, -2)
@@ -522,10 +521,10 @@ class TimerLog(Screen):
 		self["loglist"] = MenuList(self.list)
 		self["logentry"] = Label()
 
-		self["key_red"] = Button(_("Delete entry"))
-		self["key_green"] = Button()
-		self["key_yellow"] = Button("")
-		self["key_blue"] = Button(_("Clear log"))
+		self["key_red"] = StaticText(_("Delete entry"))
+		self["key_green"] = StaticText("")
+		self["key_yellow"] = StaticText("")
+		self["key_blue"] = StaticText(_("Clear log"))
 
 		self.onShown.append(self.updateText)
 

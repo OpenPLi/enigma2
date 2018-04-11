@@ -516,7 +516,7 @@ public:
 class iDVBFrontend: public iDVBFrontend_ENUMS, public iObject
 {
 public:
-	virtual RESULT tune(const iDVBFrontendParameters &where)=0;
+	virtual RESULT tune(const iDVBFrontendParameters &where, bool blindscan = false)=0;
 	virtual int closeFrontend(bool force = false, bool no_delayed = false)=0;
 	virtual void reopenFrontend()=0;
 #ifndef SWIG

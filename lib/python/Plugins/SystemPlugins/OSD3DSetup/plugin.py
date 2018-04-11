@@ -1,5 +1,6 @@
 from Screens.Screen import Screen
 from Screens.ChannelSelection import FLAG_IS_DEDICATED_3D
+from Components.Label import Label
 from Components.ConfigList import ConfigListScreen
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.SystemInfo import SystemInfo
@@ -13,17 +14,7 @@ config.plugins.OSD3DSetup.mode = ConfigSelection(choices = modelist, default = "
 config.plugins.OSD3DSetup.znorm = ConfigInteger(default = 0)
 
 class OSD3DSetupScreen(Screen, ConfigListScreen):
-	skin = """
-	<screen position="c-200,c-100" size="400,200" title="OSD 3D setup">
-		<widget name="config" position="c-175,c-75" size="350,150" />
-		<ePixmap pixmap="skin_default/buttons/green.png" position="c-145,e-45" zPosition="0" size="140,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/red.png" position="c+5,e-45" zPosition="0" size="140,40" alphatest="on" />
-		<widget name="ok" position="c-145,e-45" size="140,40" valign="center" halign="center" zPosition="1" font="Regular;20" transparent="1" backgroundColor="green" />
-		<widget name="cancel" position="c+5,e-45" size="140,40" valign="center" halign="center" zPosition="1" font="Regular;20" transparent="1" backgroundColor="red" />
-	</screen>"""
-
 	def __init__(self, session):
-		self.skin = OSD3DSetupScreen.skin
 		Screen.__init__(self, session)
 
 		self.setTitle(_("OSD 3D setup"))
@@ -31,8 +22,8 @@ class OSD3DSetupScreen(Screen, ConfigListScreen):
 		from Components.ActionMap import ActionMap
 		from Components.Button import Button
 
-		self["ok"] = Button(_("OK"))
-		self["cancel"] = Button(_("Cancel"))
+		self["key_red"] = Label(_("Cancel"))
+		self["key_green"] = Label(_("Save"))
 
 		self["actions"] = ActionMap(["SetupActions", "ColorActions", "MenuActions"],
 		{

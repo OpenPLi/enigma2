@@ -1,5 +1,5 @@
 from Components.ActionMap import ActionMap, HelpableActionMap, NumberActionMap
-from Components.Button import Button
+from Components.Sources.StaticText import StaticText
 from Components.ChoiceList import ChoiceList, ChoiceEntryComponent
 from Components.SystemInfo import SystemInfo
 from Components.config import config, ConfigSubsection, ConfigText, ConfigYesNo
@@ -96,7 +96,9 @@ def getHotkeys():
 		("Media", "media", ""),
 		("Media" + " " + _("long"), "media_long", ""),
 		("Favorites", "favorites", "Infobar/openFavouritesList"),
-		("Favorites" + " " + _("long"), "favorites_long", "")]
+		("Favorites" + " " + _("long"), "favorites_long", ""),
+		("WWW Portal", "www", ""),
+		("WWW Portal" + " " + _("long"), "www_long", "")]
 
 config.misc.hotkey = ConfigSubsection()
 config.misc.hotkey.additional_keys = ConfigYesNo(default=False)
@@ -225,7 +227,7 @@ class HotkeySetup(Screen):
 		Screen.__init__(self, session)
 		self.session = session
 		self.setTitle(_("Hotkey Setup"))
-		self["key_red"] = Button(_("Exit"))
+		self["key_red"] = StaticText(_("Exit"))
 		self.list = []
 		self.hotkeys = getHotkeys()
 		self.hotkeyFunctions = getHotkeyFunctions()
@@ -319,13 +321,9 @@ class HotkeySetupSelect(Screen):
 		self.session = session
 		self.key = key
 		self.setTitle(_("Hotkey Setup") + " " + key[0][0])
-		self["key_red"] = Button(_("Cancel"))
-		self["key_green"] = Button(_("Save"))
-		self["key_yellow"] = Button()
-		self["h_red"] = Pixmap()
-		self["h_green"] = Pixmap()
-		self["h_yellow"] = Pixmap()
-		self["h_yellow"].hide()
+		self["key_red"] = StaticText(_("Cancel"))
+		self["key_green"] = StaticText(_("Save"))
+		self["key_yellow"] = StaticText("")
 		self["h_prev"] = Pixmap()
 		self["h_next"] = Pixmap()
 
@@ -345,7 +343,7 @@ class HotkeySetupSelect(Screen):
 					self.selected.append(ChoiceEntryComponent('',((function[0][0]), function[0][1])))
 		self.prevselected = self.selected[:]
 		if self.prevselected:
-			self.yellowButton(_("Edit selection"))
+			self["key_yellow"].setText(_("Edit selection"))
 		self["choosen"] = ChoiceList(list=self.selected, selection=0)
 		self["list"] = ChoiceList(list=self.getFunctionList(), selection=0)
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "KeyboardInputActions", "MenuActions"],
@@ -396,19 +394,12 @@ class HotkeySetupSelect(Screen):
 				functionslist.append(ChoiceEntryComponent('expandable',((catagorie), "Expander")))
 		return functionslist
 
-	def yellowButton(self, text=""):
-		self["key_yellow"].setText(text)
-		if text:
-			self["h_yellow"].show()
-		else:
-			self["h_yellow"].hide()
-
 	def toggleMode(self):
 		if self.mode == "list" and self.selected:
 			self.mode = "choosen"
 			self["choosen"].selectionEnabled(1)
 			self["list"].selectionEnabled(0)
-			self.yellowButton(_("Select function"))
+			self["key_yellow"].setText(_("Select function"))
 			if len(self.selected) > 1:
 				self.showPrevNext(True)
 		elif self.mode == "choosen":
@@ -419,9 +410,9 @@ class HotkeySetupSelect(Screen):
 
 	def toggleText(self):
 		if self.selected:
-			self.yellowButton(_("Edit selection"))
+			self["key_yellow"].setText(_("Edit selection"))
 		else:
-			self.yellowButton("")
+			self["key_yellow"].setText("")
 		self.showPrevNext()
 
 	def showPrevNext(self, show=False):
@@ -650,8 +641,12 @@ class InfoBarHotkey():
 			elif selected[0] == "Shellscript":
 				command = '/usr/script/' + selected[1] + ".sh"
 				if os.path.isfile(command):
-					from Screens.Console import Console
-					self.session.open(Console, selected[1] + " shellscript", command, closeOnSuccess=selected[1].startswith('!'), showStartStopText=False)
+					if ".hidden." in command:
+						from enigma import eConsoleAppContainer
+						eConsoleAppContainer().execute(command)
+					else:
+						from Screens.Console import Console
+						self.session.open(Console, selected[1] + " shellscript", command, closeOnSuccess=selected[1].startswith('!'), showStartStopText=False)
 			elif selected[0] == "Menu":
 				from Screens.Menu import MainMenu, mdom
 				root = mdom.getroot()

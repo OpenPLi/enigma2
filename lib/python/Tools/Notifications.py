@@ -1,6 +1,7 @@
+import threading
+lock = threading.Lock()
 
 notifications = [ ]
-
 notificationAdded = [ ]
 
 # notifications which are currently on screen (and might be closed by similiar notifications)
@@ -11,7 +12,9 @@ def __AddNotification(fnc, screen, id, *args, **kwargs):
 		kwargs["simple"] = True
 	if ".Standby'>" in `screen`:
 		removeCIdialog()
+	lock.acquire(True)
 	notifications.append((fnc, screen, args, kwargs, id))
+	lock.release()
 	for x in notificationAdded:
 		x()
 
@@ -37,7 +40,9 @@ def RemovePopup(id):
 	for x in notifications:
 		if x[4] and x[4] == id:
 			print "(found in notifications)"
+			lock.acquire(True)
 			notifications.remove(x)
+			lock.release()
 
 	for x in current_notifications:
 		if x[0] == id:

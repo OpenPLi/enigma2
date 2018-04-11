@@ -1,4 +1,3 @@
-from HTMLComponent import HTMLComponent
 from GUIComponent import GUIComponent
 
 from enigma import eEPGCache, eListbox, eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, RT_VALIGN_CENTER
@@ -36,7 +35,7 @@ class Rect:
 	def width(self):
 		return self.w
 
-class EPGList(HTMLComponent, GUIComponent):
+class EPGList(GUIComponent):
 	def __init__(self, type=EPG_TYPE_SINGLE, selChangedCB=None, timer = None):
 		self.days = (_("Mon"), _("Tue"), _("Wed"), _("Thu"), _("Fri"), _("Sat"), _("Sun"))
 		self.timer = timer

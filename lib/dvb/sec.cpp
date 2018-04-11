@@ -34,7 +34,7 @@ void eDVBSatelliteEquipmentControl::setParam(int param, int value)
 }
 
 eDVBSatelliteEquipmentControl::eDVBSatelliteEquipmentControl(eSmartPtrList<eDVBRegisteredFrontend> &avail_frontends, eSmartPtrList<eDVBRegisteredFrontend> &avail_simulate_frontends)
-	:m_lnbidx((sizeof(m_lnbs) / sizeof(eDVBSatelliteLNBParameters))-1), m_curSat(m_lnbs[0].m_satellites.end()), m_avail_frontends(avail_frontends), m_avail_simulate_frontends(avail_simulate_frontends), m_rotorMoving(0)
+	:m_lnbidx(-1), m_curSat(eDVBSatelliteLNBParameters().m_satellites.end()), m_avail_frontends(avail_frontends), m_avail_simulate_frontends(avail_simulate_frontends), m_rotorMoving(0)
 {
 	if (!instance)
 		instance = this;
@@ -1001,17 +1001,18 @@ RESULT eDVBSatelliteEquipmentControl::prepare(iDVBFrontend &frontend, const eDVB
 					sec_sequence.push_back( eSecCommand(eSecCommand::IF_TONE_GOTO, compare) );
 					sec_sequence.push_back( eSecCommand(eSecCommand::SET_TONE, tone) );
 					sec_sequence.push_back( eSecCommand(eSecCommand::SLEEP, m_params[DELAY_AFTER_FINAL_CONT_TONE_CHANGE]) );
-					sec_sequence.push_back( eSecCommand(eSecCommand::SET_FRONTEND, 0) );
 
 					cmd.direction=1;  // check for running rotor
 					cmd.deltaA=0;
-					cmd.steps = +3;
+					cmd.steps = +4;
 					cmd.okcount=0;
 					sec_sequence.push_back( eSecCommand(eSecCommand::SET_TIMEOUT, mrt*4) );  // mrt is in seconds... our SLEEP time is 250ms.. so * 4
+					sec_sequence.push_back( eSecCommand(eSecCommand::SET_FRONTEND, 0) );
 					sec_sequence.push_back( eSecCommand(eSecCommand::SLEEP, 250) );  // 250msec delay
 					sec_sequence.push_back( eSecCommand(eSecCommand::IF_TUNER_LOCKED_GOTO, cmd ) );
 					sec_sequence.push_back( eSecCommand(eSecCommand::IF_TIMEOUT_GOTO, +5 ) );
-					sec_sequence.push_back( eSecCommand(eSecCommand::GOTO, -3) );  // goto loop start
+					sec_sequence.push_back( eSecCommand(eSecCommand::IF_LOCK_TIMEOUT_GOTO, -4) ); /* retune when lock timeout occurred */
+					sec_sequence.push_back( eSecCommand(eSecCommand::GOTO, -4) );  // goto loop start
 					sec_sequence.push_back( eSecCommand(eSecCommand::UPDATE_CURRENT_ROTORPARAMS) );
 					sec_sequence.push_back( eSecCommand(eSecCommand::SET_ROTOR_STOPPED) );
 					sec_sequence.push_back( eSecCommand(eSecCommand::GOTO, +4) );
@@ -1059,13 +1060,13 @@ RESULT eDVBSatelliteEquipmentControl::prepare(iDVBFrontend &frontend, const eDVB
 		sat.system ? "DVB-S2" : "DVB-S",
 		sat.frequency,
 		sat.polarisation == eDVBFrontendParametersSatellite::Polarisation_Horizontal ? "H" :
-			eDVBFrontendParametersSatellite::Polarisation_Vertical ? "V" :
-			eDVBFrontendParametersSatellite::Polarisation_CircularLeft ? "CL" : "CR",
+		sat.polarisation == eDVBFrontendParametersSatellite::Polarisation_Vertical ? "V" :
+		sat.polarisation == eDVBFrontendParametersSatellite::Polarisation_CircularLeft ? "CL" : "CR",
 		sat.modulation == eDVBFrontendParametersSatellite::Modulation_Auto ? "AUTO" :
-			eDVBFrontendParametersSatellite::Modulation_QPSK ? "QPSK" :
-			eDVBFrontendParametersSatellite::Modulation_8PSK ? "8PSK" :
-			eDVBFrontendParametersSatellite::Modulation_QAM16 ? "QAM16" :
-			eDVBFrontendParametersSatellite::Modulation_16APSK ? "16APSK" : "32APSK",
+		sat.modulation == eDVBFrontendParametersSatellite::Modulation_QPSK ? "QPSK" :
+		sat.modulation == eDVBFrontendParametersSatellite::Modulation_8PSK ? "8PSK" :
+		sat.modulation == eDVBFrontendParametersSatellite::Modulation_QAM16 ? "QAM16" :
+		sat.modulation == eDVBFrontendParametersSatellite::Modulation_16APSK ? "16APSK" : "32APSK",
 		sat.orbital_position );
 	return -1;
 }
@@ -1176,11 +1177,8 @@ RESULT eDVBSatelliteEquipmentControl::clear()
 	eSecDebug("eDVBSatelliteEquipmentControl::clear()");
 
 	for (int i=0; i <= m_lnbidx; ++i)
-	{
 		m_lnbs[i].m_satellites.clear();
-		m_lnbs[i].m_slot_mask = 0;
-		m_lnbs[i].m_prio = -1; // auto
-	}
+	m_lnbs.clear();
 	m_lnbidx=-1;
 
 	m_not_linked_slot_mask=0;
@@ -1215,13 +1213,12 @@ RESULT eDVBSatelliteEquipmentControl::clear()
 /* LNB Specific Parameters */
 RESULT eDVBSatelliteEquipmentControl::addLNB()
 {
-	if ( (m_lnbidx+1) < (int)(sizeof(m_lnbs) / sizeof(eDVBSatelliteLNBParameters)))
-		m_curSat=m_lnbs[++m_lnbidx].m_satellites.end();
-	else
-	{
-		eDebug("[eDVBSatelliteEquipmentControl] no more LNB free... cnt is %d", m_lnbidx);
-		return -ENOSPC;
-	}
+	eDVBSatelliteLNBParameters lnb;
+	lnb.m_slot_mask = 0;
+	lnb.m_prio = -1; // auto
+	m_lnbidx++;
+	m_lnbs.push_back(lnb);
+	m_curSat = lnb.m_satellites.end();
 	eSecDebug("[eDVBSatelliteEquipmentControl::addLNB] lnb=%d)", m_lnbidx);
 	return 0;
 }

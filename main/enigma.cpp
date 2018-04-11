@@ -35,8 +35,6 @@
 #include "bsod.h"
 #include "version_info.h"
 
-#include <gst/gst.h>
-
 #ifdef OBJECT_DEBUG
 int object_total_remaining;
 
@@ -187,8 +185,6 @@ int main(int argc, char **argv)
 	atexit(object_dump);
 #endif
 
-	gst_init(&argc, &argv);
-
 	// set pythonpath if unset
 	setenv("PYTHONPATH", eEnv::resolve("${libdir}/enigma2/python").c_str(), 0);
 	printf("PYTHONPATH: %s\n", getenv("PYTHONPATH"));
@@ -259,17 +255,18 @@ int main(int argc, char **argv)
 			std::string rfilename;
 			snprintf(filename, sizeof(filename), "${datadir}/enigma2/skin_default/spinner/wait%d.png", i + 1);
 			rfilename = eEnv::resolve(filename);
-			loadPNG(wait[i], rfilename.c_str());
 
+			if (::access(rfilename.c_str(), R_OK) < 0)
+				break;
+
+			loadPNG(wait[i], rfilename.c_str());
 			if (!wait[i])
 			{
-				if (!i)
-					eDebug("[MAIN] failed to load %s: %m", rfilename.c_str());
-				else
-					eDebug("[MAIN] found %d spinner!\n", i);
+				eDebug("[MAIN] failed to load %s: %m", rfilename.c_str());
 				break;
 			}
 		}
+		eDebug("[MAIN] found %d spinner!", i);
 		if (i)
 			my_dc->setSpinner(eRect(ePoint(100, 100), wait[0]->size()), wait, i);
 		else
@@ -339,11 +336,6 @@ const char *getEnigmaVersionString()
 const char *getBoxType()
 {
 	return BOXTYPE;
-}
-
-const char *getGStreamerVersionString()
-{
-	return gst_version_string();
 }
 
 #include <malloc.h>

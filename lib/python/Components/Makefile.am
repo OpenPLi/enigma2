@@ -3,9 +3,9 @@ installdir = $(pkglibdir)/python/Components
 SUBDIRS = Sources Converter Renderer
 
 install_PYTHON = \
-	ActionMap.py GUISkin.py PerServiceDisplay.py components.py              \
+	ActionMap.py GUISkin.py PerServiceDisplay.py                            \
 	Button.py HTMLComponent.py ProgressBar.py TimerList.py config.py        \
-	HTMLSkin.py ServiceList.py VariableText.py                              \
+	ServiceList.py VariableText.py                                          \
 	ConfigList.py VariableValue.py                                          \
 	Label.py ServiceScan.py VolumeBar.py VolumeControl.py                   \
 	GUIComponent.py MenuList.py __init__.py MovieList.py                    \
@@ -21,4 +21,4 @@ install_PYTHON = \
 	Task.py Console.py ResourceManager.py TuneTest.py \
 	Keyboard.py Sensors.py FanControl.py HdmiCec.py RcModel.py \
 	Netlink.py InputHotplug.py \
-	opkg.py
+	opkg.py ImportChannels.py
