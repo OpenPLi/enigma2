@@ -9,7 +9,7 @@ import os
 # available and preferred modes, as well as handling the currently
 # selected mode. No other strict checking is done.
 
-config.av.edid_override = ConfigYesNo(default = False)
+config.av.edid_override = ConfigYesNo(default = True)
 
 class VideoHardware:
 	rates = { } # high-level, use selectable modes.
