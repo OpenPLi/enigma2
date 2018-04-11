@@ -8,6 +8,9 @@ import os
 # It generates hotplug events, and gives you the list of
 # available and preferred modes, as well as handling the currently
 # selected mode. No other strict checking is done.
+
+config.av.edid_override = ConfigYesNo(default = False)
+
 class VideoHardware:
 	rates = { } # high-level, use selectable modes.
 
@@ -151,17 +154,20 @@ class VideoHardware:
 		self.modes_available = modes.split(' ')
 
 	def readPreferredModes(self):
-		try:
-			modes = open("/proc/stb/video/videomode_preferred").read()[:-1]
-			self.modes_preferred = modes.split(' ')
-		except IOError:
-			print "[VideoHardware] reading preferred modes failed, using all modes"
-			self.modes_preferred = self.modes_available
+		if config.av.edid_override.value == False:
+			try:
+				modes = open("/proc/stb/video/videomode_preferred").read()[:-1]
+				self.modes_preferred = modes.split(' ')
+			except IOError:
+				print "[VideoHardware] reading preferred modes failed, using all modes"
+				self.modes_preferred = self.modes_available
 
-		if self.modes_preferred != self.last_modes_preferred:
-			self.last_modes_preferred = self.modes_preferred
-			print "[VideoHardware] hotplug on dvi"
-			self.on_hotplug("DVI") # must be DVI
+			if self.modes_preferred != self.last_modes_preferred:
+				self.last_modes_preferred = self.modes_preferred
+				print "[VideoHardware] hotplug on dvi"
+				self.on_hotplug("DVI") # must be DVI
+		else:
+			self.modes_preferred = self.modes_available
 
 	# check if a high-level mode with a given rate is available.
 	def isModeAvailable(self, port, mode, rate):
@@ -371,6 +377,5 @@ class VideoHardware:
 		except IOError:
 			pass
 
-config.av.edid_override = ConfigYesNo(default = False)
 video_hw = VideoHardware()
 video_hw.setConfiguredMode()
