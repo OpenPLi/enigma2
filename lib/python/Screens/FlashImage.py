@@ -213,12 +213,17 @@ class FlashImage(Screen):
 		self.getImageList = None
 		choices = []
 		currentimageslot = GetCurrentImage()
-		HIslot = len(imagedict) + 1
-		for x in range(1,HIslot):
-			choices.append(((_("slot%s - %s (current image) with, backup") if x == currentimageslot else _("slot%s - %s, with backup")) % (x, imagedict[x]['imagename']), (x, "with backup")))
+		for x in range(1,5):
+			if x in imagedict:
+				choices.append(((_("slot%s - %s (current image) with, backup") if x == currentimageslot else _("slot%s - %s, with backup")) % (x, imagedict[x]['imagename']), (x, "with backup")))
+			else:
+				choices.append((_("slot%s - empty, with backup") % x, (x, "with backup")))
 		choices.append((_("No, do not flash image"), False))
-		for x in range(1,HIslot):
-			choices.append(((_("slot%s - %s (current image), without backup") if x == currentimageslot else _("slot%s - %s, without backup")) % (x, imagedict[x]['imagename']), (x, "without backup")))
+		for x in range(1,5):
+			if x in imagedict:
+				choices.append(((_("slot%s - %s (current image), without backup") if x == currentimageslot else _("slot%s - %s, without backup")) % (x, imagedict[x]['imagename']), (x, "without backup")))
+			else:
+				choices.append((_("slot%s - empty, without backup") % x, (x, "without backup")))
 		self.session.openWithCallback(self.backupsettings, MessageBox, self.message, list=choices, default=currentimageslot, simple=True)
 
 	def backupsettings(self, retval):
@@ -402,9 +407,7 @@ class MultibootSelection(SelectImage):
 		slot = currentSelected[0][1]
 		if currentSelected[0][1] != "Waiter":
 			model = HardwareInfo().get_device_model()
-			if SystemInfo["canMultiBootGB"]:
-				startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rootwait rw rootflags=data=journal libata.force=1:3.0G,2:3.0G,3:3.0G coherent_poll=2M brcm_cma=764M@0x10000000 brcm_cma=1024M@0x80000000'\n" % (slot, slot * 2 + 3)
-			elif slot < 12:
+			if slot < 12:
 				startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=1'\n" % (slot, slot * 2 + 1, model)
 			else:
 				slot -= 12
