@@ -22,7 +22,7 @@ self["portpic"].hide()
 	</step>
 	<step id="rateselection" timeout="20" timeoutaction="selectnext">
 		<condition>
-self.condition = (self.port != "DVI" or self.mode == "PC")
+self.condition = (self.port != "DVI" and not self.port == "RCA" or self.mode == "PC")
 		</condition>
 		<text value="Refresh rate selection." />
 		<displaytext value="Select refresh rate" />
