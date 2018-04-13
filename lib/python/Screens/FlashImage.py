@@ -402,17 +402,17 @@ class MultibootSelection(SelectImage):
 		slot = currentSelected[0][1]
 		if currentSelected[0][1] != "Waiter":
 			model = HardwareInfo().get_device_model()
-			if SystemInfo["canMultiBoot"] and 'rootflags=data=journal' in open('/dev/mmcblk0p1').read():
-				startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rootwait rw rootflags=data=journal libata.force=1:3.0G,2:3.0G,3:3.0G coherent_poll=2M brcm_cma=764M@0x10000000 brcm_cma=1024M@0x80000000'\n" % (slot, slot * 2 + 3)
+			for media in ['/media/%s' % x for x in os.listdir('/media') if x.startswith('mmc')]:
+				if 'STARTUP' in os.listdir(media):
+					break
+			if not SystemInfo["canMode12"]:
+					startupFileContents = open('%s/%s_%s' % (media, 'STARTUP', slot)).read() 
 			elif slot < 12:
 				startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=1'\n" % (slot, slot * 2 + 1, model)
 			else:
 				slot -= 12
 				startupFileContents = "boot emmcflash0.kernel%s 'brcm_cma=520M@248M brcm_cma=%s@768M root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=12'\n" % (slot, SystemInfo["canMode12"], slot * 2 + 1, model)
-			for media in ['/media/%s' % x for x in os.listdir('/media') if x.startswith('mmc')]:
-				if 'STARTUP' in os.listdir(media):
-					open('%s/%s' % (media, 'STARTUP'), 'w').write(startupFileContents)
-					break
+			open('%s/%s' % (media, 'STARTUP'), 'w').write(startupFileContents)
 			from Screens.Standby import TryQuitMainloop
 			self.session.open(TryQuitMainloop, 2)
 
