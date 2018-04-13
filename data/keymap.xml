@@ -66,6 +66,7 @@
 		<key id="KEY_0" mapto="0" flags="m"/>
 		<key id="KEY_FILE" mapto="file" flags="m"/>
 		<key id="KEY_VIDEO" mapto="file" flags="m"/>
+		<key id="KEY_PVR" mapto="file" flags="m"/>
 	</map>
 
 	<map context="InputActions">
@@ -205,6 +206,7 @@
 		<key id="KEY_FILE" mapto="showMovies" flags="m"/>
 		<key id="KEY_TEXT" mapto="showText" flags="m"/>
 		<key id="KEY_MEDIA" mapto="showMovies" flags="b" />
+		<key id="KEY_PVR" mapto="showMovies" flags="b"/>
 	</map>
 
 	<map context="InfobarAudioSelectionActions">
@@ -405,6 +407,7 @@
 		<key id="KEY_UP" mapto="up" flags="m"/>
 		<key id="KEY_DOWN" mapto="down" flags="m"/>
 		<key id="KEY_VIDEO" mapto="movieList" flags="b"/>
+		<key id="KEY_PVR" mapto="movieList" flags="b"/>
 		<key id="KEY_FILE" mapto="movieList" flags="m"/>
 	</map>
 
@@ -804,15 +807,15 @@
 		<key id="KEY_TEXT" mapto="text" flags="m"/>
 		<key id="KEY_HELP" mapto="displayHelp" flags="b"/>
 		<key id="KEY_HELP" mapto="displayHelp_long" flags="l"/>
-        <key id="KEY_SUBTITLE" mapto="subtitle" flags="m"/>
-        <key id="KEY_MENU" mapto="mainMenu" flags="m"/>
-        <key id="KEY_INFO" mapto="info" flags="b"/>
+		<key id="KEY_SUBTITLE" mapto="subtitle" flags="m"/>
+		<key id="KEY_MENU" mapto="mainMenu" flags="m"/>
+		<key id="KEY_INFO" mapto="info" flags="b"/>
 		<key id="KEY_INFO" mapto="info_long" flags="l"/>
 		<key id="KEY_VIDEO" mapto="list" flags="b"/>
 		<key id="KEY_VIDEO" mapto="list_long" flags="r"/>
-        <key id="KEY_BACK" mapto="back" flags="b"/>
+		<key id="KEY_BACK" mapto="back" flags="b"/>
 		<key id="KEY_BACK" mapto="back_long" flags="l"/>
-        <key id="KEY_END" mapto="end" flags="m"/>
+		<key id="KEY_END" mapto="end" flags="m"/>
 		<key id="KEY_EPG" mapto="epg" flags="b"/>
 		<key id="KEY_EPG" mapto="epg_long" flags="l"/>
 		<key id="KEY_LEFT" mapto="cross_left" flags="m"/>
@@ -836,12 +839,12 @@
 		<key id="KEY_PROGRAM" mapto="timer" flags="b"/>
 		<key id="KEY_PROGRAM" mapto="timer_long" flags="l"/>
 		<key id="KEY_PLAYPAUSE" mapto="playpause" flags="m"/>
-        <key id="KEY_LIST" mapto="playlist" flags="m"/>
-        <key id="KEY_TIME" mapto="timeshift" flags="m"/>
+		<key id="KEY_LIST" mapto="playlist" flags="m"/>
+		<key id="KEY_TIME" mapto="timeshift" flags="m"/>
 		<key id="KEY_SEARCH" mapto="search" flags="b"/>
 		<key id="KEY_SEARCH" mapto="search_long" flags="l"/>
-        <key id="KEY_RESTART" mapto="slow" flags="m"/>
-        <key id="KEY_BOOKMARKS" mapto="mark" flags="b"/>
+		<key id="KEY_RESTART" mapto="slow" flags="m"/>
+		<key id="KEY_BOOKMARKS" mapto="mark" flags="b"/>
 		<key id="KEY_BOOKMARKS" mapto="mark_long" flags="l"/>
 		<key id="KEY_SLEEP" mapto="sleep" flags="b"/>
 		<key id="KEY_SLEEP" mapto="sleep_long" flags="l"/>
@@ -870,5 +873,7 @@
 		<key id="KEY_FAVORITES" mapto="favorites_long" flags="l"/>
 		<key id="KEY_WWW" mapto="www" flags="b"/>
 		<key id="KEY_WWW" mapto="www_long" flags="l"/>
+		<key id="KEY_PVR" mapto="list" flags="b"/>
+		<key id="KEY_PVR" mapto="list_long" flags="l"/>
 	</map>
 </keymap>
