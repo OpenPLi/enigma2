@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-13 16:06+0330\n"
+"POT-Creation-Date: 2018-04-13 09:42+0200\n"
 "PO-Revision-Date: 2013-10-15 19:32+0200\n"
 "Last-Translator: BoxFreak\n"
 "Language-Team: none\n"
@@ -679,7 +679,8 @@ msgstr ""
 "vastaanottimesi. Sammutetaanko nyt?"
 
 #
-msgid "A graphical EPG for all services of an specific bouquet"
+#, fuzzy
+msgid "A graphical EPG for all services of a specific bouquet"
 msgstr "Graafinen ohjelmaopas kaikille suosikkilistan kanaville"
 
 #
@@ -691,8 +692,9 @@ msgstr ""
 "Tallennus on alkanut:\n"
 "%s"
 
-msgid "A recording is currently running on the selected tuner. Please select a different tuner or consider to stop the recording to try again."
-msgstr ""
+#, fuzzy
+msgid "A recording is currently running on the selected tuner. Please select a different tuner or stop the recording and try again."
+msgstr "Tallennus on käynnissä. Lopeta tallennus ennen kuin käytät hakua."
 
 #
 msgid ""
@@ -875,6 +877,9 @@ msgstr "Tallenna (jatkuva tallennus)"
 msgid "Add recording (stop after current event)"
 msgstr "Tallenna (lopeta nykyisen ohjelman jälkeen)"
 
+msgid "Add seperate receiver URL for import"
+msgstr ""
+
 #
 msgid "Add service"
 msgstr "Lisää kanava"
@@ -1002,6 +1007,10 @@ msgstr "Varaa vapaa muisti-indeksi"
 msgid "Allow quit movieplayer with exit"
 msgstr "Salli tallenteista poistuminen exit-napilla"
 
+#, fuzzy
+msgid "Allow quitting movieplayer with exit"
+msgstr "Salli tallenteista poistuminen exit-napilla"
+
 msgid "Allow subtitle language to equal audio language"
 msgstr "Salli tekstityskielen vastata äänivalintaa"
 
@@ -1011,6 +1020,17 @@ msgstr "Salli kuulovammaisten tekstitys"
 #
 msgid "Alpha"
 msgstr "Alpha"
+
+msgid "Also import at reboot/restart enigma2"
+msgstr ""
+
+#
+#, fuzzy
+msgid "Also import from the extension menu"
+msgstr "Näytä laajennusvalikossa"
+
+msgid "Also import when box is leaving standby"
+msgstr ""
 
 msgid "Also on standby"
 msgstr ""
@@ -1045,6 +1065,10 @@ msgstr ""
 #
 msgid "An empty filename is illegal."
 msgstr "Tyhjä nimi ei ole sallittu"
+
+#, fuzzy
+msgid "An error occurred - Please try again later"
+msgstr "Päivityksiä ei ole nyt saatavilla. Yritä myöhemmin uudestaan."
 
 #
 msgid "An error occurred while downloading the packetlist. Please try again."
@@ -1254,7 +1278,7 @@ msgid "Authoring mode"
 msgstr "Toimintatapa"
 
 #
-#. TRANSLATORS: (aspect ratio policy: always try to display as fullscreen, when there is no content (black bars) on left/right, even if this breaks the aspect.
+#. TRANSLATORS: (aspect ratio policy: automatically select the best aspect ratio mode)
 msgid "Auto"
 msgstr "Automaattinen"
 
@@ -1707,6 +1731,11 @@ msgid "Channel Info"
 msgstr ""
 
 #
+#, fuzzy
+msgid "Channel context menu"
+msgstr "Kanavalistan muokkaus"
+
+#
 msgid "Channel list type"
 msgstr "Kanavalistan muokkaus"
 
@@ -1734,6 +1763,23 @@ msgstr ""
 
 msgid "Channelnumber, picon and servicename"
 msgstr ""
+
+#
+#, fuzzy
+msgid "Channels and EPG"
+msgstr "Kanavalistan muokkaus"
+
+#, python-format
+msgid "Channels from fallback tuner failed %s"
+msgstr ""
+
+msgid "Channels from fallback tuner imported"
+msgstr ""
+
+#
+#, fuzzy
+msgid "Channels only"
+msgstr "Kanava"
 
 #
 msgid "Chap."
@@ -2235,11 +2281,11 @@ msgstr ""
 msgid "Configure whether multi channel sound tracks should be downmixed to stereo."
 msgstr "Määrittää jos haluat että monikanavaääni miksataan stereoääneksi."
 
+msgid "Configure whether or not a rotor position will be displayed on the infobar"
+msgstr ""
+
 msgid "Configure whether or not an icon should be shown when your motorized dish is moving."
 msgstr "Määrittelee haluatko kuvakkeen näytettäväksi kun kääntömoottoria käännetään. "
-
-msgid "Configure whether or not an rotor position will be displayed on infobar"
-msgstr ""
 
 msgid "Configure which access level to use for the configuration menu. Expert level gives access to all items."
 msgstr "Määrittelee millaisilla käyttäjäoikeuksilla pääsee asetusvalikkoon. Expert tason oikeudet sallii pääsyn kaikkiin asetuksiin."
@@ -2250,8 +2296,9 @@ msgstr "Määrittää mitä värimallia tulisi käyttää SCART lähdössä."
 msgid "Configure which tuner for recordings will be preferred, when more than one tuner is available."
 msgstr ""
 
-msgid "Configure which tuner type will be preferred, when the same service is available on different types of tuners. Choose 'no priority' to try each alternative one by one independent from tuner type."
-msgstr ""
+#, fuzzy
+msgid "Configure which tuner type will be preferred when the same service is available on different types of tuners. Choose 'no priority' to try each alternative one by one regardless of the tuner type."
+msgstr "Määrittää mitä viritintä suositaan, kun enemmän kuin yksi viritin on vapaana. Jos asetettu 'auto'-tilaan järjestelmä antaa prioriteetin virittimelle jolla on vähiten kanavia/satelliittejä."
 
 msgid "Configure which tuner will be preferred, when more than one tuner is available. If set to 'auto' the system will give priority to the tuner having the lowest number of channels/satellites."
 msgstr "Määrittää mitä viritintä suositaan, kun enemmän kuin yksi viritin on vapaana. Jos asetettu 'auto'-tilaan järjestelmä antaa prioriteetin virittimelle jolla on vähiten kanavia/satelliittejä."
@@ -2264,7 +2311,8 @@ msgstr "Määritä LAN-asetukset"
 msgid "Configure your network again"
 msgstr "Määrittele verkko uudelleen"
 
-msgid "Configure your network settings, and press OK to start the scan"
+#, fuzzy
+msgid "Configure your network settings and press OK to scan"
 msgstr "Määritä verkkoasetukset ja aloita haku painamalla OK"
 
 #
@@ -2347,15 +2395,6 @@ msgstr "Jatkuva toisto (loop)"
 #
 msgid "Contrast"
 msgstr "Kontrasti"
-
-msgid "Convert ext3 filesystem to ext4"
-msgstr "Muunna ext3 tiedostojärjestelmästä ext4:ään"
-
-msgid "Convert ext3 to ext4"
-msgstr "Muunna ext3:sta ext4:ään"
-
-msgid "Converting ext3 to ext4..."
-msgstr "Muunnetaan ext3:sta ext4:ään..."
 
 msgid "Cook Islands"
 msgstr ""
@@ -2806,11 +2845,6 @@ msgstr "DiSEqC portti %s: %s"
 msgid "DiSEqC-tester settings"
 msgstr "DiSEqC-testin asetukset"
 
-#
-#, fuzzy
-msgid "Diasbled"
-msgstr "Ei käytössä"
-
 msgid "Did you see all eight arrow heads?"
 msgstr ""
 
@@ -2936,13 +2970,6 @@ msgstr ""
 "Haluatko tarkistaa tiedostojärjetelmän?\n"
 "Tarkistus saattaa kestää kauan!"
 
-msgid ""
-"Do you really want to convert the filesystem?\n"
-"You cannot go back!"
-msgstr ""
-"Haluatko varmasti muuntaa tämän tiedostojärjestelmän?\n"
-"Et voi palata takaisin entiseen!"
-
 #
 #, python-format
 msgid "Do you really want to delete %s?"
@@ -3060,6 +3087,9 @@ msgstr "Haluatko päivittää vastaanottimesi?"
 msgid "Do you want to upgrade the package:\n"
 msgstr "Haluatko päivittää ohjelmapaketin:\n"
 
+msgid "Dolby"
+msgstr ""
+
 msgid "Dominica"
 msgstr ""
 
@@ -3139,6 +3169,9 @@ msgstr "Ohjelmaoppaan kielen valinta 1"
 msgid "EPG language selection 2"
 msgstr "Ohjelmaoppaan kielen valinta 2"
 
+msgid "EPG only"
+msgstr ""
+
 #
 msgid "EPG selection"
 msgstr "Ohjelmaoppaan valinta"
@@ -3150,6 +3183,10 @@ msgstr "Ohjelmaoppaan asetukset"
 #, python-format
 msgid "ERROR - failed to scan (%s)!"
 msgstr "VIRHE - haku epäonnistui (%s)!"
+
+#, python-format
+msgid "ERROR downloading file %s"
+msgstr ""
 
 #
 msgid "East"
@@ -3285,6 +3322,9 @@ msgstr ""
 msgid "Enable timer conflict detection"
 msgstr ""
 
+msgid "Enable to display all true/false, yes/no, on/off and enable/disable set up options as a graphical switch."
+msgstr ""
+
 msgid "Enable volume control with arrow buttons"
 msgstr ""
 
@@ -3401,6 +3441,11 @@ msgstr "Streamin pyyntö"
 msgid "Error"
 msgstr "Virhe"
 
+#
+#, fuzzy, python-format
+msgid "Error %s"
+msgstr "Virhe"
+
 msgid "Error code"
 msgstr "Virhekoodi"
 
@@ -3428,6 +3473,15 @@ msgid "Error executing plugin"
 msgstr "Virhe plugin-lisäosan suorittamisessa"
 
 msgid "Error stop stream!"
+msgstr ""
+
+msgid "Error when writing epg.dat on server"
+msgstr ""
+
+msgid "Error while retreiving epg.dat from server"
+msgstr ""
+
+msgid "Error while retreiving location of epg.dat on server"
 msgstr ""
 
 #
@@ -3658,6 +3712,12 @@ msgstr "FTA"
 msgid "Factory reset"
 msgstr "Palauta tehdasasetukset"
 
+msgid ""
+"Factory reset will restore your receiver to its default configuration. All user data including system settings, tuner configuration, bouquets, services and plugins will be DELETED. Recordings and other files stored on HDD and USB media will remain intact. After completion, the system will restart automatically!\n"
+"\n"
+"Do you really want to proceed?"
+msgstr ""
+
 #
 msgid "Failed"
 msgstr "Epäonnistui"
@@ -3672,6 +3732,9 @@ msgid "Falkland Islands (Malvinas)"
 msgstr ""
 
 msgid "Fallback remote receiver URL"
+msgstr ""
+
+msgid "Fallback remote receiver setup"
 msgstr ""
 
 #, python-format
@@ -3868,6 +3931,11 @@ msgstr "Mistä:"
 msgid "Frontprocessor version: %s"
 msgstr ""
 
+#. TRANSLATORS: (aspect ratio policy: display as fullscreen, even if the content aspect ratio does not match the screen ratio)
+#, fuzzy
+msgid "Full screen"
+msgstr "Pidä näyttö"
+
 msgid "Full transparency"
 msgstr "Täysi läpinäkyvyys"
 
@@ -3889,6 +3957,11 @@ msgstr ""
 #, fuzzy
 msgid "GStreamer version: "
 msgstr "Kernelin versio:"
+
+#
+#, fuzzy
+msgid "GUI Settings"
+msgstr "Asetukset"
 
 msgid ""
 "GUI needs a restart to apply a new language\n"
@@ -4096,6 +4169,9 @@ msgstr ""
 msgid "HDMI Colorspace"
 msgstr ""
 
+msgid "HDMI HDR Type"
+msgstr ""
+
 msgid "HDMI-CEC Source Active"
 msgstr ""
 
@@ -4103,6 +4179,12 @@ msgid "HDMI-CEC Source Inactive"
 msgstr ""
 
 msgid "HDMI-CEC setup"
+msgstr ""
+
+msgid "HDR10"
+msgstr ""
+
+msgid "HLG"
 msgstr ""
 
 #
@@ -4221,8 +4303,10 @@ msgstr ""
 msgid "Hotkey zap"
 msgstr ""
 
-msgid "How many minutes do you want add to record?"
-msgstr ""
+#
+#, fuzzy
+msgid "How many minutes do you want add to the recording?"
+msgstr "Kuinka monta minuuttia haluat tallentaa?"
 
 #
 msgid "How many minutes do you want to record?"
@@ -4332,6 +4416,24 @@ msgstr ""
 msgid "Image: "
 msgstr "Ohjelmisto: "
 
+msgid "Import channels and/or EPG from remote receiver URL also when the receiver is getting out of standby"
+msgstr ""
+
+msgid "Import channels and/or EPG from remote receiver URL when receiver is booted"
+msgstr ""
+
+msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
+msgstr ""
+
+msgid "Import channels from fallback tuner"
+msgstr ""
+
+msgid "Import from remote receiver URL"
+msgstr ""
+
+msgid "Import remote receiver URL"
+msgstr ""
+
 #
 msgid "In order to record a timer, the TV was switched to the recording service!\n"
 msgstr ""
@@ -4373,6 +4475,9 @@ msgid "India"
 msgstr ""
 
 msgid "Indonesia"
+msgstr ""
+
+msgid "Indonesian"
 msgstr ""
 
 msgid "Info"
@@ -4570,9 +4675,9 @@ msgid "Israel"
 msgstr ""
 
 msgid ""
-"It seems you did not see all the eight arrow heads. This means your TV is has overscan enabled, and is not configured properly.\n"
+"It seems you did not see all the eight arrow heads. This means your TV has overscan enabled, and is not configured properly.\n"
 "\n"
-"Please refer to your TVs manual to find how you can disable overscan on your TV. Look for terms like 'Just fit', 'Full width', etc. If you can't find it, ask other users at http://forums.openpli.org.\n"
+"Please refer to your TV's manual to find how you can disable overscan on your TV. Look for terms like 'Just fit', 'Full width', etc. If you can't find it, ask other users at http://forums.openpli.org.\n"
 "\n"
 msgstr ""
 
@@ -4626,7 +4731,7 @@ msgid "Jump to previous marked position"
 msgstr "Mene edelliseen merkkiin"
 
 #
-#. TRANSLATORS: (aspect ratio policy: display as fullscreen, even if this breaks the aspect)
+#. TRANSLATORS: (aspect ratio policy: scale as close to fullscreen as possible)
 msgid "Just scale"
 msgstr "Aina kokoruutu"
 
@@ -4931,6 +5036,9 @@ msgstr "Päävalikko"
 msgid "Maintain old EPG data for"
 msgstr "Säilytä vanhaa EPG-tietoa"
 
+msgid "Make it possible to manually initiate the channels import and/or EPG via the extension menu"
+msgstr ""
+
 #
 msgid "Make this mark an 'in' point"
 msgstr "Tee tästä merkistä aloituspiste"
@@ -5196,6 +5304,11 @@ msgstr "Tallenneluettelon asetukset"
 msgid "Movie location"
 msgstr "Tallennushakemisto"
 
+#
+#, fuzzy
+msgid "Movie manager"
+msgstr "Ohjelmapakettien hallinta"
+
 msgid "Movie selection"
 msgstr "Tallenteen valinta"
 
@@ -5460,6 +5573,9 @@ msgstr ""
 "Lähettimessä ei dataa!\n"
 "(Aikaraja ylittyi luettaessa PAT)"
 
+msgid "No data received yet"
+msgstr ""
+
 msgid "No delay"
 msgstr "Ei viivettä"
 
@@ -5470,6 +5586,9 @@ msgstr "Kuvausta ei ole saatavilla."
 #
 msgid "No displayable files on this medium found!"
 msgstr "Tiedostoja ei löytynyt!"
+
+msgid "No epg.dat file found server"
+msgstr ""
 
 #
 msgid "No event info found, recording indefinitely."
@@ -5678,6 +5797,13 @@ msgstr ""
 msgid ""
 "Nothing to scan!\n"
 "Please setup your tuner settings before you start a service scan."
+msgstr ""
+"Ei ole mitään haettavaa!\n"
+"Määritä virittimen asetukset ennen kanavahakua."
+
+#
+#, fuzzy
+msgid "Nothing to scan! Setup your tuner and try again."
 msgstr ""
 "Ei ole mitään haettavaa!\n"
 "Määritä virittimen asetukset ennen kanavahakua."
@@ -5933,8 +6059,10 @@ msgstr "Pysähdy tallenteen loppuun"
 msgid "Pause playback"
 msgstr "Keskeytä toisto"
 
-msgid "Pauze/Continue playback"
-msgstr ""
+#
+#, fuzzy
+msgid "Pause/Continue playback"
+msgstr "Jatka toistoa"
 
 msgid "Percentage left"
 msgstr "Prosentti vasemmalle"
@@ -6493,10 +6621,6 @@ msgstr ""
 msgid "Press OK to select/deselect a CAId."
 msgstr "Valitse/poista CAId:t OK-näppäimellä"
 
-#
-msgid "Press OK to start the scan"
-msgstr "Aloita haku painamalla OK"
-
 msgid "Press OK to toggle the selection"
 msgstr ""
 
@@ -6806,6 +6930,9 @@ msgstr ""
 
 msgid "Relative"
 msgstr "Suhteellinen"
+
+msgid "Relevant PIDs routing"
+msgstr ""
 
 #
 msgid "Reload"
@@ -7142,6 +7269,11 @@ msgstr ""
 msgid "SCR Unicable"
 msgstr ""
 
+#
+#, fuzzy
+msgid "SDR"
+msgstr "SNR"
+
 msgid "SINGLE LAYER DVD"
 msgstr "SINGLE LAYER DVD"
 
@@ -7224,10 +7356,6 @@ msgstr "Satelliitin pituusaste:"
 #
 msgid "Satellites"
 msgstr "Satelliitit"
-
-#
-msgid "Satfinder"
-msgstr "Satelliittietsin"
 
 msgid "Sats"
 msgstr "Sat."
@@ -7316,12 +7444,27 @@ msgstr "Hae alue %s"
 msgid "Scan additional SR"
 msgstr "Hae muita SR:iä"
 
+#, fuzzy, python-format
+msgid "Scan completed, %d channel found."
+msgid_plural "Scan completed, %d channels found."
+msgstr[0] "Haku valmis, %d kanava löytyi"
+msgstr[1] "Haku valmis, %d kanavaa löytyi"
+
+#, fuzzy
+msgid "Scan failed!"
+msgstr "Haku epäonnistui"
+
 #
 msgid "Scan files..."
 msgstr "Hae tiedostoja..."
 
 msgid "Scan options"
 msgstr ""
+
+#
+#, fuzzy
+msgid "Scan state"
+msgstr "haun tila"
 
 #
 msgid "Scan wireless networks"
@@ -7571,6 +7714,11 @@ msgstr "Valitse varmistettavat tiedostot/kansiot"
 msgid "Select function"
 msgstr "Valitse varmuuskopion sijainti"
 
+#
+#, fuzzy
+msgid "Select hard disk"
+msgstr "Valitse teema"
+
 msgid "Select horizontal resolution:"
 msgstr ""
 
@@ -7643,16 +7791,16 @@ msgstr ""
 msgid "Select the movie path"
 msgstr "Valitse tallennehakemisto"
 
-msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
 msgid "Select the satellite you want to configure. Once that satellite is configured you can select and configure other satellites that will be accessed using this same tuner."
@@ -7695,6 +7843,9 @@ msgstr "Valitse video-tila"
 #
 msgid "Select wireless network"
 msgstr "Valitse WLAN-verkko"
+
+msgid "Select yes when you want to import channels and/or EPG from a different URL"
+msgstr ""
 
 #
 #, fuzzy
@@ -7919,6 +8070,10 @@ msgstr "Asetukset"
 msgid "Setup"
 msgstr "Asetukset"
 
+#, fuzzy
+msgid "Setup hard disk"
+msgstr "Kiintolevy"
+
 msgid "Setup menu"
 msgstr "Asetusvalikko"
 
@@ -7973,6 +8128,9 @@ msgstr ""
 
 msgid "Show SNR percentage instead of dB value"
 msgstr "Näytä SNR prosentteina dB arvon sijaan"
+
+msgid "Show True/False as graphical switch"
+msgstr ""
 
 #
 msgid "Show VCR scart on main menu"
@@ -8089,6 +8247,18 @@ msgstr ""
 
 msgid "Show multi channel EPG"
 msgstr "Näytä useamman kanavan ohjelmaopas"
+
+msgid "Show notification when import channels and/or EPG from remote receiver URL did not complete"
+msgstr ""
+
+msgid "Show notification when import channels and/or EPG from remote receiver URL is completed"
+msgstr ""
+
+msgid "Show notification when import channels was not successful"
+msgstr ""
+
+msgid "Show notification when import channels was successful"
+msgstr ""
 
 msgid "Show packages to be upgraded"
 msgstr ""
@@ -8386,9 +8556,6 @@ msgid "Solomon Islands"
 msgstr ""
 
 msgid "Somalia"
-msgstr ""
-
-msgid "Some error occured - Please try later"
 msgstr ""
 
 #
@@ -9088,7 +9255,7 @@ msgid ""
 "The yellow area means a 5% border area of a full HD picture will be invisible.\n"
 "The green area means a 10% border area of a full HD picture will be invisible.\n"
 "\n"
-"In other words, if the yellow box meets all for sides of your screen, then you have at least 5% overscan on all sides.\n"
+"In other words, if the yellow box touches all four sides of your screen, you have at least 5% overscan on all sides.\n"
 "\n"
 "If you see the tips of all eight arrowheads, then your TV has overscan disabled.\n"
 "\n"
@@ -9221,22 +9388,13 @@ msgstr ""
 msgid "This option allows to set the level of dynamic contrast of the picture."
 msgstr ""
 
-msgid "This option allows you can config the Colordepth for UHD"
-msgstr ""
-
-msgid "This option allows you can config the Colorimetry for HDR."
-msgstr ""
-
-msgid "This option allows you can config the Colorspace from Auto to RGB"
+msgid "This option allows you can to set the auto volume level."
 msgstr ""
 
 msgid "This option allows you enable smoothing filter to control the dithering process."
 msgstr ""
 
 msgid "This option allows you enable the vertical scaler dejagging."
-msgstr ""
-
-msgid "This option allows you show all symbols on display."
 msgstr ""
 
 msgid "This option allows you to add the softcam setup in the extensions menu."
@@ -9249,6 +9407,18 @@ msgid "This option allows you to boost the green tones in the picture."
 msgstr ""
 
 msgid "This option allows you to change the virtuell loadspeaker position."
+msgstr ""
+
+msgid "This option allows you to configure the Colordepth for UHD"
+msgstr ""
+
+msgid "This option allows you to configure the Colorimetry for HDR."
+msgstr ""
+
+msgid "This option allows you to configure the Colorspace from Auto to RGB"
+msgstr ""
+
+msgid "This option allows you to configure the HDR type."
 msgstr ""
 
 msgid "This option allows you to disable or change the virtuell loadspeaker position."
@@ -9266,6 +9436,9 @@ msgstr ""
 msgid "This option allows you to power off the display."
 msgstr ""
 
+msgid "This option allows you to show all symbols on the display."
+msgstr ""
+
 msgid "This option allows you to show menu number quick links."
 msgstr ""
 
@@ -9278,10 +9451,7 @@ msgstr ""
 msgid "This option can be useful for long HDMI cables."
 msgstr ""
 
-msgid "This option configures you can set auto volume level."
-msgstr ""
-
-msgid "This option set the level of surpression of musquito noise (Musquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
+msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr ""
 
 msgid "This option sets  the picture contrast."
@@ -9374,11 +9544,12 @@ msgstr ""
 "- tarkista DHCP, kaapeli ja verkkosovittimen asetukset"
 
 #
+#, fuzzy
 msgid ""
 "This test checks whether your LAN adapter is set up for automatic IP address configuration with DHCP.\n"
 "If you get a \"disabled\" message:\n"
 " - then your LAN adapter is configured for manual IP setup\n"
-"- verify thay you have entered correct IP informations in the adapter setup dialog.\n"
+"- verify thay you have entered the correct IP information in the adapter setup dialog.\n"
 "If you get an \"enabeld\" message:\n"
 "-verify that you have a configured and working DHCP server in your network."
 msgstr ""
@@ -9732,6 +9903,11 @@ msgid "Type"
 msgstr "Tyyppi"
 
 #
+#, fuzzy
+msgid "Type of LNB/device"
+msgstr "Hakutapa"
+
+#
 msgid "Type of scan"
 msgstr "Hakutapa"
 
@@ -10009,6 +10185,11 @@ msgstr "Käytetty kanavahakutyyppi"
 
 msgid "User - bouquets"
 msgstr "Käyttäjä - suosikit"
+
+#
+#, fuzzy
+msgid "User Mode"
+msgstr "Käyttäjän määrittelemä"
 
 #
 msgid "User defined"
@@ -10404,11 +10585,13 @@ msgstr ""
 msgid "When enabled you can specify a timeframe to ignore the shutdown timer when the receiver is in standby mode"
 msgstr ""
 
-msgid "When enabled you can specify a timeframe were the inactivity sleeptimer is ignored. Not the detection is disabled during this timeframe but the inactivity timeout is disabled"
+#, fuzzy
+msgid "When enabled you can specify a timeframe when the inactivity sleeptimer is ignored. Not the detection is disabled during this timeframe but the inactivity timeout is disabled"
 msgstr "Kun päällä, voit määritellä aikaikkunan milloin käyttämättömyysajastin on pois päältä. Käytön tunnistaminen on kuitenkin päällä, vain aikakatkaisua ei tehdä."
 
-msgid "When enabled you can specify an extra timeframe were the inactivity sleeptimer is ignored. Not the detection is disabled during this timeframe but the inactivity timeout is disabled"
-msgstr ""
+#, fuzzy
+msgid "When enabled you can specify an extra timeframe when the inactivity sleeptimer is ignored. Not the detection is disabled during this timeframe but the inactivity timeout is disabled"
+msgstr "Kun päällä, voit määritellä aikaikkunan milloin käyttämättömyysajastin on pois päältä. Käytön tunnistaminen on kuitenkin päällä, vain aikakatkaisua ei tehdä."
 
 msgid "When enabled you can zap channels with the  CH+/-, B+/-, P+/- buttons instead of opening the channel selection list."
 msgstr ""
@@ -10491,7 +10674,8 @@ msgstr "Kun päällä, on mahdollista poistua tallenteista exit-napilla."
 msgid "When enabled, measure power consumption to detect when the rotor stops turning (when supported by the tuner)."
 msgstr "Kun päällä, mitataan virrankulutusta että voidaan havaita kun kääntömoottori pysähtyy (jos viritin tukee tätä)."
 
-msgid "When enabled, number markers will be hiden."
+#, fuzzy
+msgid "When enabled, number markers will be hidden."
 msgstr "Kun päällä, suosikkilistan väliotsikot joilla on kanavanumero piilotetaan."
 
 msgid "When enabled, reformat subtitles to match the width of the screen."
@@ -10575,19 +10759,6 @@ msgstr "Kun lähteen kuvasuhde on 16:9, valitse skaalataanko vai venytetäänkö
 
 msgid "When the content has an aspect ratio of 4:3, choose whether to scale/stretch the picture."
 msgstr "Kun lähteen kuvasuhde on 4:3, valitse skaalataanko vai venytetäänkö kuvaa näytölle. "
-
-msgid ""
-"When you do a factory reset, you will lose ALL your configuration data\n"
-"(including bouquets, services, satellite data ...)\n"
-"After completion of factory reset, your receiver will restart automatically!\n"
-"\n"
-"Really do a factory reset?"
-msgstr ""
-"Jos palautat tehdasasetukset, häviää kaikki tekemäsi omat asetukset\n"
-"(sisältäen suosikkilistat, kanavat, satelliitit ...)\n"
-"Tehdasasetusten palautuksen jälkeen vastaanotin käynnistyy automaattisesti uudelleen!\n"
-"\n"
-"Haluatko palauttaa tehdasasetukset?"
 
 #
 msgid "Where do you want to backup your settings?"
@@ -10742,7 +10913,7 @@ msgstr "Palauta varmistus"
 msgid "Yesterday"
 msgstr "Eilen"
 
-msgid "You PIN code is 0000. This is the default PIN code and it disable parental control!\n"
+msgid "You PIN code is 0000. This is the default PIN code and it disables parental control!\n"
 msgstr ""
 
 #, python-format
@@ -10794,7 +10965,7 @@ msgid ""
 msgstr ""
 
 msgid ""
-"You did not see all eight arrow heads. This means your TV has overscan enabled and presents you with a zoomed-in picture, causing you to loose part of a full HD screen. In addition this you may also miss parts of the user interface, for example volume bars and more.\n"
+"You did not see all eight arrow heads. This means your TV has overscan enabled and presents you with a zoomed-in picture, causing you to loose part of a full HD screen. In addition to this you may also miss parts of the user interface, for example volume bars and more.\n"
 "\n"
 "You can now try to resize and change the position of the user interface until you see the eight arrow heads.\n"
 "\n"
@@ -10829,9 +11000,6 @@ msgid ""
 msgstr ""
 "Tarvitset PC:ltä yhteyden vastaanottimeesi. Jos tarvitset lisäohjeita, vieraile verkkosivulla http://www.dm7025.de.\n"
 "Vastaanottimesi pysäytetään nyt. Kun olet suorittanut päivityksen verkkosivun päivitysohjeen mukaan, vastaanottimesi uusi ohjelmisto kysyy sinulta asetusten palauttamista."
-
-msgid "You system does not support ext4"
-msgstr "Järjetelmä ei tue ext4-tiedostojärjestelmää"
 
 #
 msgid "Your backup succeeded. We will now continue to explain the further upgrade process."
@@ -11109,7 +11277,7 @@ msgstr "Vaihtoehtoinen"
 msgid "always"
 msgstr ""
 
-msgid "and never ask again this session again"
+msgid "and never ask in this session again"
 msgstr ""
 
 msgid "and never ask this again"
@@ -12352,328 +12520,3 @@ msgstr "Vaihdettu"
 
 msgid "®"
 msgstr ""
-
-#~ msgid "%d-%b-%Y %-H:%M"
-#~ msgstr "%d-%b-%Y %-H:%M"
-
-#
-#~ msgid "A recording is currently running. Please stop the recording before trying to configure the positioner."
-#~ msgstr ""
-#~ "Tallennus on parhaillaan käynnissä. Pysäytä tallennus\n"
-#~ "ennen kuin yrität muokata kääntömoottorin asetuksia."
-
-#
-#~ msgid "Action on long powerbutton press"
-#~ msgstr "Sammutusnapin pitkä painallus"
-
-#~ msgid "Action on short powerbutton press"
-#~ msgstr "Sammutusnapin lyhyt painallus"
-
-#
-#~ msgid "Blue boost"
-#~ msgstr "Sinisen korostus"
-
-#~ msgid "Changelog"
-#~ msgstr "Muutosloki"
-
-#~ msgid ""
-#~ "Checking tuner %d\n"
-#~ "DiSEqC port %s for %s"
-#~ msgstr ""
-#~ "Tarkistetaan viritin %d\n"
-#~ "DiSEqC portti %s / %s"
-
-#
-#~ msgid "Coderate HP"
-#~ msgstr "Koodinopeus (HP)"
-
-#
-#~ msgid "Coderate LP"
-#~ msgstr "Koodinopeus (LP)"
-
-#~ msgid "Configure the function of a long press on the power button."
-#~ msgstr "Määrittää toiminnan, kun virtanäppäintä painetaan pitkään."
-
-#~ msgid "Configure the function of a short press on the power button."
-#~ msgstr "Määrittää toiminnan, kun virtanäppäintä painetaan lyhyesti."
-
-#
-#~ msgid "Conflicting timer"
-#~ msgstr "Ristiriita ajastusten välillä"
-
-#
-#~ msgid "Constellation"
-#~ msgstr "Modulaatio"
-
-#~ msgid "Could not connect to receiver .NFI image feed server:"
-#~ msgstr "Ei yhteyttä .NFI ohjelmistoa tarjoavaan palvelimeen:"
-
-#
-#~ msgid "Current version:"
-#~ msgstr "Nykyinen versio:"
-
-#~ msgid "Currently installed image"
-#~ msgstr "Nykyinen ohjelmisto"
-
-#~ msgid "Descramble http streams"
-#~ msgstr "Pura http-streameja"
-
-#
-#~ msgid "Do you want to do another manual service scan?"
-#~ msgstr "Haluatko tehdä uuden manuaalihaun?"
-
-#
-#~ msgid "Download"
-#~ msgstr "Lataa"
-
-#~ msgid "Download %s from server"
-#~ msgstr "Lataa %s palvelimelta"
-
-#
-#~ msgid "Download .NFI-files for USB-flasher"
-#~ msgstr "Lataa .NFI-tiedostoja USB-päivitysohjelmaa varten"
-
-#
-#~ msgid "Flashing failed"
-#~ msgstr "Päivitys epäonnistui"
-
-#~ msgid "Frontprocessor version: %d"
-#~ msgstr "Etuprosessorin versio: %d"
-
-#~ msgid "Get latest experimental image"
-#~ msgstr "Hae viimeisin testiversion ohjelmistopäivitys"
-
-#~ msgid "Get latest release image"
-#~ msgstr "Hae viimeisin virallinen ohjelmistopäivitys"
-
-#
-#~ msgid "Green boost"
-#~ msgstr "Vihreän korostus"
-
-#~ msgid "Hide CI messages"
-#~ msgstr "Piilota CI-viestit"
-
-#
-#~ msgid "Hierarchy information"
-#~ msgstr "Hierarkia-tietoja"
-
-#
-#~ msgid "Immediate shutdown"
-#~ msgstr "Sammuta heti"
-
-#
-#~ msgid "Install softcam"
-#~ msgstr "Asenna softcam..."
-
-#
-#~ msgid "Intermediate"
-#~ msgstr "Keskitaso"
-
-#
-#~ msgid "Log results to harddisk"
-#~ msgstr "Luo lokitiedosto kiintolevylle"
-
-#~ msgid "Multiplex"
-#~ msgstr "Multipleksi"
-
-#~ msgid "NFI image flashing"
-#~ msgstr "NFI-tiedoston asennus"
-
-#
-#~ msgid "NFI image flashing completed. Press Yellow to Reboot!"
-#~ msgstr "NFI-päivityksen asennus on suoritettu. Käynnistä uudelleen keltaisella näppäimellä!"
-
-#~ msgid "NIM"
-#~ msgstr "NIM"
-
-#
-#~ msgid "New version:"
-#~ msgstr "Uusi versio:"
-
-#~ msgid "No cable tuner found!"
-#~ msgstr "Kaapeliviritintä ei löytynyt!"
-
-#
-#~ msgid "No details for this image file"
-#~ msgstr "Ei tietoja tästä päivityksestä"
-
-#
-#~ msgid "PIDs"
-#~ msgstr "PIDit"
-
-#~ msgid "Picon and service name"
-#~ msgstr "Kanavalogo ja kanavan nimi"
-
-#
-#~ msgid "Please check your network settings!"
-#~ msgstr "Tarkista verkkoasetukset!"
-
-#~ msgid "Please select an NFI file and press green key to flash!"
-#~ msgstr "Valitse NFI-tiedosto ja aloita päivitys vihreällä näppäimellä."
-
-#~ msgid "Polarisation:"
-#~ msgstr "Polarisaatio:"
-
-#
-#~ msgid "Positioner Setup"
-#~ msgstr "Kääntömoottorin asetukset"
-
-#~ msgid "Prepare another USB stick for image flashing"
-#~ msgstr "Alusta toinen USB-muistitikku päivitystä varten"
-
-#
-#~ msgid "Provider to scan"
-#~ msgstr "Hae palveluntarjoajalta"
-
-#
-#~ msgid "Restore is running..."
-#~ msgstr "Palautus käynnissä..."
-
-#~ msgid "SID"
-#~ msgstr "SID"
-
-#~ msgid "Select an image to be downloaded"
-#~ msgstr "Valitse ladattava ohjelmistopäivitys"
-
-#~ msgid "Select desired image from feed list"
-#~ msgstr "Valitse haluamasi ohjelmistopäivitys feed-luettelosta"
-
-#~ msgid "Shall the USB stick wizard proceed and program the image file %s into flash memory?"
-#~ msgstr "Saako USB-muistiavustaja jatkaa ja kirjoittaa päivityksen %s flash-muistiin?"
-
-#
-#~ msgid "Show shutdown menu"
-#~ msgstr "Näytä sammutusvalikko"
-
-#
-#~ msgid "Terrestrial provider"
-#~ msgstr "Antenniverkon palveluntarjoaja"
-
-#~ msgid ""
-#~ "The USB stick was prepared to be bootable.\n"
-#~ "Now you can download an NFI image file!"
-#~ msgstr ""
-#~ "USB-tikusta tehtiin automaattisesti käynnistyvä.\n"
-#~ "Voit nyt ladata NFI-tiedoston."
-
-#
-#~ msgid ""
-#~ "The following device was found:\n"
-#~ "\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Do you want to write the USB flasher to this stick?"
-#~ msgstr ""
-#~ "Seuraava laite löytyi:\n"
-#~ "\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Haluatko tallentaa ohjelmistopäivitysohjelman tälle USB-muistille?"
-
-#~ msgid "The md5sum validation failed, the file may be corrupted!"
-#~ msgstr "MD5-tarkistus epäonnistui, tiedosto voi olla vioittunut!"
-
-#
-#~ msgid "The results have been written to %s."
-#~ msgstr "Tulokset kirjoitettiin %s."
-
-#~ msgid "The wizard found a configuration backup. Do you want to restore your old settings from %s?"
-#~ msgstr "Avustaja löysi asetusten varmuuskopion. Haluatko, että vanhat asetukset palautetaan tiedostosta %s?"
-
-#~ msgid ""
-#~ "This plugin creates a USB stick which can be used to update the firmware of your receiver without the need for a network or WLAN connection.\n"
-#~ "First, a USB stick needs to be prepared so that it becomes bootable.\n"
-#~ "In the next step, an NFI image file can be downloaded from the update server and saved on the USB stick.\n"
-#~ "If you already have a prepared bootable USB stick, please insert it now. Otherwise plug in a USB stick with a minimum size of 64 MB!"
-#~ msgstr ""
-#~ "Tämä plugin luo USB tikun jota voidaan käyttää vastaanottimesi ohjemiston päivittämiseen ilman verkko- tai WLAN-yhteyttä.\n"
-#~ "Ensiksi, USB tikku tulee alustaa niin että siitä tulee boottaava.\n"
-#~ "Seuraavaksi, NFI ohjelmatiedosto voidaan ladata päivityspalvelimelta ja tallentaa USB tikulle.\n"
-#~ "Jos olet jo valmistellut boottaavan USB tikun, liitä se vastaanottimeesi nyt. Muussa tapauksessa liitä USB tikku jonka koko on vähintään 64 MB!"
-
-#
-#~ msgid "Timer editor"
-#~ msgstr "Ajastusten muokkaus"
-
-#~ msgid ""
-#~ "To update your receiver firmware, please follow these steps:\n"
-#~ "1) Turn off your box with the rear power switch and make sure the bootable USB stick is plugged in.\n"
-#~ "2) Turn mains back on and hold the DOWN button on the front panel pressed for 10 seconds.\n"
-#~ "3) Wait for bootup and follow instructions of the wizard."
-#~ msgstr ""
-#~ "Päivittääksesi vastaanottimesi, toimi seuraavasti:\n"
-#~ "1) Katkaise virta vastaanottimesi takana olevasta katkaisijasta ja laita boottaava USB tikku paikoilleen.\n"
-#~ "2) Laita virta takaisin päälle ja paina ALAS näppäintä vastaanottimesi etupaneelissa 10 sekunnin ajan.\n"
-#~ "3) Odota käynnistymistä ja seuraa avustajan ohjeita."
-
-#
-#~ msgid "Tuner status %s"
-#~ msgstr "Virittimen tila %s"
-
-#
-#~ msgid "USB stick wizard"
-#~ msgstr "USB-muistiavustaja"
-
-#~ msgid "Unicable"
-#~ msgstr "Unicable"
-
-#~ msgid "Unicable LNB"
-#~ msgstr "Unicable LNB"
-
-#~ msgid "Unicable Martix"
-#~ msgstr "Unicable Matrix"
-
-#~ msgid "Videocodec"
-#~ msgstr "Videokoodekki"
-
-#~ msgid "Videoformat"
-#~ msgstr "Videoformaatti"
-
-#~ msgid "Videosize"
-#~ msgstr "Videon koko"
-
-#
-#  Ohjatun asennuksen (Start Wizard) kutosruudun ohjeteksti
-#  Alkukielinen teksti on tilanteeseen nähden aika pösilö.
-#~ msgid "What do you want to scan?"
-#~ msgstr "Kanavahaun lisäasetukset:"
-
-#~ msgid "When enabled, error messages related to the Common Interface module will not be shown."
-#~ msgstr "Kun päällä, CI-moduuliin liittyviä virheilmoituksia ei näytetä."
-
-#~ msgid "When enabled, http streams are descrambled on the server side. The (remote) client receiver does not have to do descrambling."
-#~ msgstr "Kun päällä, http striimien salaus puretaan palvelimen päässä. Vastaanottajan ei tarvitse tehdä salauksenpurkua."
-
-#~ msgid "Would you like to install a softcam?"
-#~ msgstr "Haluatko asentaa softcam:in?"
-
-#
-#~ msgid "Yes, do another manual scan now"
-#~ msgstr "Kyllä, tee toinen manuaalihaku nyt"
-
-#
-#~ msgid "You have chosen to create a new .NFI flasher bootable USB stick. This will repartition the USB stick and therefore all data on it will be erased."
-#~ msgstr "Olet valinnut .NFI-päivitysohjelman asennuksen USB-muistille. Tämä toiminto osioi USB-muistin ja tuhoaa siltä kaikki tiedostot."
-
-#~ msgid ""
-#~ "Your frontprocessor firmware must be upgraded.\n"
-#~ "Press OK to start upgrade."
-#~ msgstr ""
-#~ "Etuprosessorin ohjelmisto on päivitettävä.\n"
-#~ "Paina OK aloittaaksesi päivityksen."
-
-#~ msgid "Zap back to service before tuner setup?"
-#~ msgstr ""
-#~ "Vaihdetaanko takaisin kanavalle, jota katsottiin\n"
-#~ "ennen viritinasetuksien muutosta?"
-
-#
-#~ msgid "continue"
-#~ msgstr "jatka"
-
-#~ msgid "currently installed image: %s"
-#~ msgstr "nykyinen ohjelmisto: %s"
-
-#
-#~ msgid "not used"
-#~ msgstr "ei käyt."

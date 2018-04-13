@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-21 17:27+0100\n"
+"POT-Creation-Date: 2018-04-13 09:42+0200\n"
 "PO-Revision-Date: 2018-02-27 19:37+0100\n"
 "Last-Translator: blzr <blzr@o2.pl>\n"
 "Language-Team: \n"
@@ -755,9 +755,6 @@ msgstr "Odbiornik / System"
 msgid "Accesspoint:"
 msgstr "Punkt dostępowy:"
 
-msgid "Action"
-msgstr "Działanie"
-
 msgid "Activate HbbTV (Redbutton)"
 msgstr "Włącz HbbTV (Czerwony klawisz)"
 
@@ -820,6 +817,9 @@ msgstr "Nagrywaj (czas nieokreślony)"
 
 msgid "Add recording (stop after current event)"
 msgstr "Nagrywaj (zatrzymaj po aktualnym wydarzeniu)"
+
+msgid "Add seperate receiver URL for import"
+msgstr ""
 
 msgid "Add service"
 msgstr "Dodaj kanał"
@@ -943,6 +943,16 @@ msgstr "Zezwalaj na napisy dla niesłyszących"
 
 msgid "Alpha"
 msgstr "Przezroczystość"
+
+msgid "Also import at reboot/restart enigma2"
+msgstr ""
+
+#, fuzzy
+msgid "Also import from the extension menu"
+msgstr "Wyświetl w menu rozszerzeń"
+
+msgid "Also import when box is leaving standby"
+msgstr ""
 
 msgid "Also on standby"
 msgstr "Także przy wyjściu ze standby"
@@ -1165,7 +1175,7 @@ msgstr "Autor: "
 msgid "Authoring mode"
 msgstr "Tryb tworzenia"
 
-#. TRANSLATORS: (aspect ratio policy: always try to display as fullscreen, when there is no content (black bars) on left/right, even if this breaks the aspect.
+#. TRANSLATORS: (aspect ratio policy: automatically select the best aspect ratio mode)
 msgid "Auto"
 msgstr "Auto"
 
@@ -1592,6 +1602,21 @@ msgstr "Numer kanału i nazwa"
 
 msgid "Channelnumber, picon and servicename"
 msgstr "Numer kanału, pikona i nazwa"
+
+#, fuzzy
+msgid "Channels and EPG"
+msgstr "Informacje o kanale"
+
+#, python-format
+msgid "Channels from fallback tuner failed %s"
+msgstr ""
+
+msgid "Channels from fallback tuner imported"
+msgstr ""
+
+#, fuzzy
+msgid "Channels only"
+msgstr "Informacje o kanale"
 
 msgid "Chap."
 msgstr "Rozdz."
@@ -2153,9 +2178,6 @@ msgstr "Wyspy Cooka"
 
 msgid "Copy"
 msgstr "Kopiuj"
-
-msgid "Copy to..."
-msgstr "Skopiuj do..."
 
 msgid "Costa Rica"
 msgstr "Kostaryka"
@@ -2747,6 +2769,9 @@ msgstr "Chcesz zaktualizować oprogramowanie odbiornika?"
 msgid "Do you want to upgrade the package:\n"
 msgstr "Chcesz zaktualizować pakiet:\n"
 
+msgid "Dolby"
+msgstr ""
+
 msgid "Dominica"
 msgstr "Dominika"
 
@@ -2814,6 +2839,9 @@ msgstr "Preferowany język EPG 1"
 msgid "EPG language selection 2"
 msgstr "Preferowany język EPG 2"
 
+msgid "EPG only"
+msgstr ""
+
 msgid "EPG selection"
 msgstr "Wybór EPG"
 
@@ -2823,6 +2851,10 @@ msgstr "EPG"
 #, python-format
 msgid "ERROR - failed to scan (%s)!"
 msgstr "BŁĄD - skanowanie (%s) nie powiodło się!"
+
+#, python-format
+msgid "ERROR downloading file %s"
+msgstr ""
 
 msgid "East"
 msgstr "Wschód"
@@ -2945,6 +2977,9 @@ msgstr "Włącz tą opcję, jeśli twoja instalacja potrzebuje zasilania."
 msgid "Enable timer conflict detection"
 msgstr "Włącz wykrywanie konfliktów timera"
 
+msgid "Enable to display all true/false, yes/no, on/off and enable/disable set up options as a graphical switch."
+msgstr ""
+
 msgid "Enable volume control with arrow buttons"
 msgstr "Regulacja głośności strzałkami L/P"
 
@@ -3048,6 +3083,10 @@ msgstr "Erytrea"
 msgid "Error"
 msgstr "Błąd"
 
+#, fuzzy, python-format
+msgid "Error %s"
+msgstr "Błąd"
+
 msgid "Error code"
 msgstr "Kod błędu"
 
@@ -3082,6 +3121,15 @@ msgstr "Błąd podczas uruchamiania wtyczki"
 
 msgid "Error stop stream!"
 msgstr "Błąd zatrzymania streamu!"
+
+msgid "Error when writing epg.dat on server"
+msgstr ""
+
+msgid "Error while retreiving epg.dat from server"
+msgstr ""
+
+msgid "Error while retreiving location of epg.dat on server"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -3318,6 +3366,10 @@ msgstr "Falklandy"
 msgid "Fallback remote receiver URL"
 msgstr "Adres zdalnego odbiornika rezerwowego"
 
+#, fuzzy
+msgid "Fallback remote receiver setup"
+msgstr "Adres zdalnego odbiornika rezerwowego"
+
 #, python-format
 msgid "Fan %d"
 msgstr ""
@@ -3362,9 +3414,6 @@ msgstr "Fidżi"
 
 msgid "File appears to be busy.\n"
 msgstr "Plik wydaje się zajęty.\n"
-
-msgid "File manager"
-msgstr "Menadżer plików"
 
 msgid "Filename"
 msgstr "Nazwa pliku"
@@ -3492,6 +3541,11 @@ msgstr "Z:"
 msgid "Frontprocessor version: %s"
 msgstr "Wersja front procesora: %s"
 
+#. TRANSLATORS: (aspect ratio policy: display as fullscreen, even if the content aspect ratio does not match the screen ratio)
+#, fuzzy
+msgid "Full screen"
+msgstr "Pełna przezroczystość"
+
 msgid "Full transparency"
 msgstr "Pełna przezroczystość"
 
@@ -3512,6 +3566,10 @@ msgstr ""
 
 msgid "GStreamer version: "
 msgstr "Wersja gstreamera:"
+
+#, fuzzy
+msgid "GUI Settings"
+msgstr "Ustawienia"
 
 msgid ""
 "GUI needs a restart to apply a new language\n"
@@ -3704,6 +3762,10 @@ msgstr "Kolorymetria HDMI"
 msgid "HDMI Colorspace"
 msgstr "Przestrzeń kolorów HDMI"
 
+#, fuzzy
+msgid "HDMI HDR Type"
+msgstr "Głowica i typ"
+
 msgid "HDMI-CEC Source Active"
 msgstr "Źródło HDMI-CEC aktywne"
 
@@ -3712,6 +3774,12 @@ msgstr "Źródło HDMI-CEC nieaktywne"
 
 msgid "HDMI-CEC setup"
 msgstr "Ustawienia HDMI-CEC"
+
+msgid "HDR10"
+msgstr ""
+
+msgid "HLG"
+msgstr ""
 
 msgid "Haiti"
 msgstr ""
@@ -3918,6 +3986,26 @@ msgstr ""
 
 msgid "Image: "
 msgstr "Soft:"
+
+msgid "Import channels and/or EPG from remote receiver URL also when the receiver is getting out of standby"
+msgstr ""
+
+msgid "Import channels and/or EPG from remote receiver URL when receiver is booted"
+msgstr ""
+
+msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
+msgstr ""
+
+msgid "Import channels from fallback tuner"
+msgstr ""
+
+#, fuzzy
+msgid "Import from remote receiver URL"
+msgstr "Adres zdalnego odbiornika rezerwowego"
+
+#, fuzzy
+msgid "Import remote receiver URL"
+msgstr "Adres zdalnego odbiornika rezerwowego"
 
 msgid "In order to record a timer, the TV was switched to the recording service!\n"
 msgstr "Aby nagrywać z timera, TV został przełączony na nagrywany kanał!\n"
@@ -4180,7 +4268,7 @@ msgstr "Skocz do następnej zaznaczonej pozycji"
 msgid "Jump to previous marked position"
 msgstr "Skocz do poprzedniej zaznaczonej pozycji"
 
-#. TRANSLATORS: (aspect ratio policy: display as fullscreen, even if this breaks the aspect)
+#. TRANSLATORS: (aspect ratio policy: scale as close to fullscreen as possible)
 msgid "Just scale"
 msgstr "Po prostu skaluj"
 
@@ -4347,9 +4435,6 @@ msgstr "Pokaż listę dostępnych sieci"
 msgid "List mode"
 msgstr "Tryb listy"
 
-msgid "List of files"
-msgstr "Lista plików"
-
 msgid "List of storage devices"
 msgstr "Lista urządzeń przechowywania danych"
 
@@ -4446,6 +4531,9 @@ msgstr "Menu główne"
 
 msgid "Maintain old EPG data for"
 msgstr "Trzymaj stare dane EPG przez (w min.)"
+
+msgid "Make it possible to manually initiate the channels import and/or EPG via the extension menu"
+msgstr ""
 
 msgid "Make this mark an 'in' point"
 msgstr "Traktuj znacznik jako punkt 'wejścia'"
@@ -4658,9 +4746,6 @@ msgstr "Przesuń na wschód"
 msgid "Move to position X"
 msgstr "Idź do pozycji X"
 
-msgid "Move to..."
-msgstr "Przenieś do..."
-
 msgid "Move west"
 msgstr "Przesuń na zachód"
 
@@ -4678,6 +4763,10 @@ msgstr "Konfiguracja listy kanałów"
 
 msgid "Movie location"
 msgstr "Lokalizacja nagrań"
+
+#, fuzzy
+msgid "Movie manager"
+msgstr "Menadżer plików"
 
 msgid "Movie selection"
 msgstr "Filmy / Multimedia"
@@ -4906,6 +4995,9 @@ msgstr ""
 "Brak danych na transponderze!\n"
 "(Koniec czasu czytania PAT)"
 
+msgid "No data received yet"
+msgstr ""
+
 msgid "No delay"
 msgstr "Brak"
 
@@ -4914,6 +5006,9 @@ msgstr "Brak dostępnego opisu."
 
 msgid "No displayable files on this medium found!"
 msgstr "Brak plików do wyświetlenia na tym nośniku!"
+
+msgid "No epg.dat file found server"
+msgstr ""
 
 msgid "No event info found, recording indefinitely."
 msgstr "Nie znaleziono informacji o wydarzeniu, nagrywanie na czas nieokreślony."
@@ -6058,6 +6153,9 @@ msgstr "Region"
 msgid "Relative"
 msgstr "Względna"
 
+msgid "Relevant PIDs routing"
+msgstr ""
+
 msgid "Reload"
 msgstr "Przeładuj"
 
@@ -6339,6 +6437,9 @@ msgid "SCR JESS"
 msgstr ""
 
 msgid "SCR Unicable"
+msgstr ""
+
+msgid "SDR"
 msgstr ""
 
 msgid "SINGLE LAYER DVD"
@@ -6708,12 +6809,6 @@ msgstr "Wybierz kanał z którego nagrywać"
 msgid "Select copy destination for:"
 msgstr "Wybierz miejsce docelowe kopii dla:"
 
-msgid "Select destination for copy selected files..."
-msgstr "Wybierz miejsce dla kopiowanych plików..."
-
-msgid "Select destination for move selected files..."
-msgstr "Wybierz miejsce dla przenoszonych plików..."
-
 msgid "Select destination for:"
 msgstr "Wybierz miejsce dla:"
 
@@ -6722,9 +6817,6 @@ msgstr "Wybierz katalog dla logów."
 
 msgid "Select files for backup."
 msgstr "Wybierz pliki do backupu"
-
-msgid "Select files with 'OK' and then use 'Menu' or 'Action' for select operation"
-msgstr "Wybierz pliki za pomocą 'OK', następnie użyj 'Menu' lub 'Działanie' aby wybrać co zrobić z plikami."
 
 msgid "Select files/folders to backup"
 msgstr "Wybierz pliki/foldery do backupu"
@@ -6758,9 +6850,6 @@ msgstr "Wybierz lokalizację"
 
 msgid "Select movie"
 msgstr "Wybierz film"
-
-msgid "Select operation:"
-msgstr "Wybierz działanie:"
 
 msgid "Select path for logfile"
 msgstr "Wybierz ścieżkę do loga"
@@ -6848,6 +6937,9 @@ msgstr "Wybierz tryb video"
 
 msgid "Select wireless network"
 msgstr "Wybierz sieć bezprzewodową"
+
+msgid "Select yes when you want to import channels and/or EPG from a different URL"
+msgstr ""
 
 msgid "Select your ATSC provider."
 msgstr "Wybierz nadawcę ATSC."
@@ -7098,6 +7190,9 @@ msgstr "Pokaż PiP"
 msgid "Show SNR percentage instead of dB value"
 msgstr "SNR w procentach zamiast dB"
 
+msgid "Show True/False as graphical switch"
+msgstr ""
+
 msgid "Show VCR scart on main menu"
 msgstr "VCR scart w głównym menu"
 
@@ -7202,6 +7297,18 @@ msgstr "Wyświetl listę nagrań"
 
 msgid "Show multi channel EPG"
 msgstr "Wyświetl EPG dla wielu kanałów"
+
+msgid "Show notification when import channels and/or EPG from remote receiver URL did not complete"
+msgstr ""
+
+msgid "Show notification when import channels and/or EPG from remote receiver URL is completed"
+msgstr ""
+
+msgid "Show notification when import channels was not successful"
+msgstr ""
+
+msgid "Show notification when import channels was successful"
+msgstr ""
 
 msgid "Show packages to be upgraded"
 msgstr "Pakiety do zaktualizowania"
@@ -8250,6 +8357,10 @@ msgstr "Ta opcja pozwala skonfigurować kolorymetrię dla HDR."
 msgid "This option allows you to configure the Colorspace from Auto to RGB"
 msgstr "Ta opcja pozwala zmienić ustawienie przestrzeni kolorów od 'Auto'do 'RGB'."
 
+#, fuzzy
+msgid "This option allows you to configure the HDR type."
+msgstr "Ta opcja pozwala skonfigurować kolorymetrię dla HDR."
+
 msgid "This option allows you to disable or change the virtuell loadspeaker position."
 msgstr "Ta opcja pozwala wyłączyć lub zmienić pozycję głośników wirtualnych."
 
@@ -8913,6 +9024,10 @@ msgstr "Używany typ skanowania kanałów"
 
 msgid "User - bouquets"
 msgstr "Bukiety"
+
+#, fuzzy
+msgid "User Mode"
+msgstr "Zdefiniowany przez użytkownika"
 
 msgid "User defined"
 msgstr "Zdefiniowany przez użytkownika"
