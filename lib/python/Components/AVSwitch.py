@@ -117,10 +117,14 @@ def InitAVSwitch():
 	"pillarbox": _("Pillarbox"),
 	# TRANSLATORS: (aspect ratio policy: cropped content on left/right) in doubt, keep english term
 	"panscan": _("Pan&scan"),
-	# TRANSLATORS: (aspect ratio policy: display as fullscreen, with stretching the left/right)
-	"nonlinear": _("Nonlinear"),
 	# TRANSLATORS: (aspect ratio policy: scale as close to fullscreen as possible)
 	"scale": _("Just scale")}
+	try:
+		if "nonlinear" in open("/proc/stb/video/policy_choices").read():
+			# TRANSLATORS: (aspect ratio policy: display as fullscreen, with stretching the left/right)
+			policy_choices.update({"nonlinear": _("Nonlinear")})
+	except:
+		pass
 	try:
 		if "full" in open("/proc/stb/video/policy_choices").read():
 			# TRANSLATORS: (aspect ratio policy: display as fullscreen, even if the content aspect ratio does not match the screen ratio)
