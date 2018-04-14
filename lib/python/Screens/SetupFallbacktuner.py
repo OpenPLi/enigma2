@@ -42,6 +42,22 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 		self.selectionChanged()
 
 	def createConfig(self):
+
+		def set_avahselect_seperate(configElement):
+			if config.usage.remote_fallback_import_url.value and config.usage.remote_fallback_import_url.value != config.usage.remote_fallback.value:
+				peerDefault_sepearate = config.usage.remote_fallback_import_url.value
+			else:
+				peerDefault_sepearate = "same"
+				config.usage.remote_fallback_import_url.value = config.usage.remote_fallback.value
+			self.seperateBoxes = [("same", _("Same as stream"))] + self.peerStreamingBoxes
+			if configElement.value in self.seperateBoxes:
+				self.seperateBoxes.remove(configElement.value)
+			if configElement.value == "url" and config.usage.remote_fallback.value in self.seperateBoxes:
+				self.seperateBoxes.remove(config.usage.remote_fallback.value)
+			if configElement.value == "ip" and "http://%d.%d.%d.%d:%d" % (tuple(self.ip.value) + (self.port.value,)) in self.seperateBoxes:
+				self.seperateBoxes.remove("http://%d.%d.%d.%d:%d" % (tuple(self.ip.value) + (self.port.value,)))
+			self.avahiselect_seperate = ConfigSelection(default=peerDefault_sepearate, choices=self.seperateBoxes)
+
 		self.peerStreamingBoxes = getPeerStreamingBoxes() + [("ip", _("Enter IP address")), ("url", _("Enter URL"))]
 		peerDefault = peerDefault_sepearate = None
 		if config.usage.remote_fallback.value:
@@ -50,13 +66,8 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 				self.peerStreamingBoxes = [config.usage.remote_fallback.value] + self.peerStreamingBoxes
 			if config.usage.remote_fallback_import_url.value and config.usage.remote_fallback_import_url.value not in self.peerStreamingBoxes:
 				self.peerStreamingBoxes = [config.usage.remote_fallback_import_url.value] + self.peerStreamingBoxes
-		if config.usage.remote_fallback_import_url.value and config.usage.remote_fallback_import_url.value != config.usage.remote_fallback.value:
-			peerDefault_sepearate = config.usage.remote_fallback_import_url.value
-		else:
-			peerDefault_sepearate = "same"
-			config.usage.remote_fallback_import_url.value = config.usage.remote_fallback.value
 		self.avahiselect = ConfigSelection(default=peerDefault, choices=self.peerStreamingBoxes)
-		self.avahiselect_seperate = ConfigSelection(default=peerDefault_sepearate, choices=[("same", _("Same as stream"))] + self.peerStreamingBoxes)
+		self.avahiselect.addNotifier(set_avahselect_seperate)
 		try:
 			ipDefault = [int(x) for x in config.usage.remote_fallback.value.split(":")[1][2:].split(".")]
 			portDefault = int( config.usage.remote_fallback.value.split(":")[2])
@@ -134,7 +145,7 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 
 	def keyGo(self):
 		if self.avahiselect.value == "ip":
-			config.usage.remote_fallback.value = "http://%d.%d.%d.%d:%d" % (tuple(self.ip.value) + (self.port,))
+			config.usage.remote_fallback.value = "http://%d.%d.%d.%d:%d" % (tuple(self.ip.value) + (self.port.value,))
 		elif self.avahiselect.value != "url":
 			config.usage.remote_fallback.value = self.avahiselect.value
 		if self.avahiselect_seperate.value == "ip":
