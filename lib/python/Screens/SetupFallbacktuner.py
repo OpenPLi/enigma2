@@ -43,7 +43,7 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 
 	def createConfig(self):
 
-		def set_avahselect_seperate(configElement):
+		def set_avahiselect_seperate(configElement):
 			if config.usage.remote_fallback_import_url.value and config.usage.remote_fallback_import_url.value != config.usage.remote_fallback.value:
 				peerDefault_sepearate = config.usage.remote_fallback_import_url.value
 			else:
@@ -67,7 +67,7 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 			if config.usage.remote_fallback_import_url.value and config.usage.remote_fallback_import_url.value not in self.peerStreamingBoxes:
 				self.peerStreamingBoxes = [config.usage.remote_fallback_import_url.value] + self.peerStreamingBoxes
 		self.avahiselect = ConfigSelection(default=peerDefault, choices=self.peerStreamingBoxes)
-		self.avahiselect.addNotifier(set_avahselect_seperate)
+		self.avahiselect.addNotifier(set_avahiselect_seperate)
 		try:
 			ipDefault = [int(x) for x in config.usage.remote_fallback.value.split(":")[1][2:].split(".")]
 			portDefault = int( config.usage.remote_fallback.value.split(":")[2])
