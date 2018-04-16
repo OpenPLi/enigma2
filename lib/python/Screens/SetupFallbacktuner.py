@@ -50,12 +50,8 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 				peerDefault_sepearate = "same"
 				config.usage.remote_fallback_import_url.value = config.usage.remote_fallback.value
 			self.seperateBoxes = [("same", _("Same as stream"))] + self.peerStreamingBoxes
-			if configElement.value in self.seperateBoxes:
+			if configElement.value not in ("url", "ip") and configElement.value in self.seperateBoxes:
 				self.seperateBoxes.remove(configElement.value)
-			if configElement.value == "url" and config.usage.remote_fallback.value in self.seperateBoxes:
-				self.seperateBoxes.remove(config.usage.remote_fallback.value)
-			if configElement.value == "ip" and "http://%d.%d.%d.%d:%d" % (tuple(self.ip.value) + (self.port.value,)) in self.seperateBoxes:
-				self.seperateBoxes.remove("http://%d.%d.%d.%d:%d" % (tuple(self.ip.value) + (self.port.value,)))
 			self.avahiselect_seperate = ConfigSelection(default=peerDefault_sepearate, choices=self.seperateBoxes)
 
 		self.peerStreamingBoxes = getPeerStreamingBoxes() + [("ip", _("Enter IP address")), ("url", _("Enter URL"))]
