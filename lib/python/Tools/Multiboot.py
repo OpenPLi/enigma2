@@ -38,7 +38,7 @@ class GetImagelist():
 	def appClosed(self, data, retval, extra_args):
 		if retval == 0 and self.phase == self.MOUNT:
 			if os.path.isfile("/tmp/testmount/usr/bin/enigma2"):
-				self.imagelist[self.slot] =  { 'imagename': open("/tmp/testmount/etc/issue").readlines()[-2].capitalize().strip()[:-6]}
+				self.imagelist[self.slot] =  { 'imagename': open("/tmp/testmount/etc/issue").readlines()[-2].capitalize().strip()[:-6] + BuildVersion}
 			else:
 				self.imagelist[self.slot] = { 'imagename': _("Empty slot")}
 			self.phase = self.UNMOUNT
@@ -53,40 +53,3 @@ class GetImagelist():
 			if not os.path.ismount('/tmp/testmount'):
 				os.rmdir('/tmp/testmount')
 			self.callback(self.imagelist)
-
-class WriteStartup():
-	MOUNT = 0
-	UNMOUNT = 1
-
-	def __init__(self, Contents, callback):
-		if SystemInfo["canMultiBoot"]:
-			if not os.path.isdir('/tmp/testmount'):
-				os.mkdir('/tmp/testmount')
-			self.callback = callback
-			self.container = Console()
-			self.phase = self.MOUNT
-			if not SystemInfo["canMode12"]:
-				self.slot = Contents
-			else:
-				self.contents = Contents			
-			self.run()
-		else:	
-			callback({})
-	
-	def run(self):
-		volume = SystemInfo["canMultiBoot"][2]
-		self.container.ePopen('mount /dev/%s /tmp/testmount' %volume if self.phase == self.MOUNT else 'umount /tmp/testmount', self.appClosed)
-			
-	def appClosed(self, data, retval, extra_args):
-		if retval == 0 and self.phase == self.MOUNT:
-			if os.path.isfile("/tmp/testmount/STARTUP"):
-				if not SystemInfo["canMode12"]:
-					self.contents = open('/tmp/testmount/STARTUP_%s'% self.slot).read()
-				open('/tmp/testmount/STARTUP', 'w').write(self.contents)
-			self.phase = self.UNMOUNT
-			self.run()
-		else:
-			self.container.killAll()
-			if not os.path.ismount('/tmp/testmount'):
-				os.rmdir('/tmp/testmount')
-			self.callback()
