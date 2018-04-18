@@ -4,13 +4,13 @@ import os
 
 def GetCurrentImage():
 	if SystemInfo["canMultiBoot"]:
-		if not SystemInfo["canMode12"]:
+		if 'rootflags=data=journal' in open('/dev/mmcblk0p1').read():
 			return (int(open('/sys/firmware/devicetree/base/chosen/bootargs', 'r').read().replace('\0', '').split('=')[1].split('p')[1].split(' ')[0])-3)/2
 		else:
 			return	int(open('/sys/firmware/devicetree/base/chosen/kerneldev', 'r').read().replace('\0', '')[-1])
 
 def GetCurrentImageMode():
-	if SystemInfo["canMultiBoot"] and SystemInfo["canMode12"]: 
+	if SystemInfo["canMultiBoot"] and 'rootflags=data=journal' not in open('/dev/mmcblk0p1').read(): 
 		return	int(open('/sys/firmware/devicetree/base/chosen/bootargs', 'r').read().replace('\0', '').split('=')[-1])
 
 class GetImagelist():
