@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-13 16:06+0330\n"
+"POT-Creation-Date: 2018-04-13 09:42+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Budiarno\n"
 "Language-Team: \n"
@@ -640,7 +640,8 @@ msgstr ""
 "Pewaktu rekam yang telah selesai ingin mematikan\n"
 "Rx anda. Matikan sekarang?"
 
-msgid "A graphical EPG for all services of an specific bouquet"
+#, fuzzy
+msgid "A graphical EPG for all services of a specific bouquet"
 msgstr "EPG grafis untuk seluruh layanan pada buket tertentu"
 
 #, python-format
@@ -651,7 +652,8 @@ msgstr ""
 "Rekaman telah dimulai:\n"
 "%s"
 
-msgid "A recording is currently running on the selected tuner. Please select a different tuner or consider to stop the recording to try again."
+#, fuzzy
+msgid "A recording is currently running on the selected tuner. Please select a different tuner or stop the recording and try again."
 msgstr "Perekaman sedang berjalan pada penala yg dipilih saat ini. Mohon pilih penala lainnya atau hentikan rekaman untuk mencoba kembali."
 
 msgid ""
@@ -806,6 +808,9 @@ msgstr "Tambah rekaman (tidak terbatas waktu)"
 msgid "Add recording (stop after current event)"
 msgstr "Tambah rekaman (berhenti setelah acara saat ini)"
 
+msgid "Add seperate receiver URL for import"
+msgstr ""
+
 msgid "Add service"
 msgstr "Tambah layanan"
 
@@ -917,6 +922,10 @@ msgstr "Alokasikan indeks memori tak terpakai"
 msgid "Allow quit movieplayer with exit"
 msgstr "Izinkan keluar pemutar film dgn tombol exit"
 
+#, fuzzy
+msgid "Allow quitting movieplayer with exit"
+msgstr "Izinkan keluar pemutar film dgn tombol exit"
+
 msgid "Allow subtitle language to equal audio language"
 msgstr "Izinkan bahasa teks film sama dengan bahasa audio"
 
@@ -925,6 +934,16 @@ msgstr "Izinkan teks film untuk tuna rungu"
 
 msgid "Alpha"
 msgstr "Alfa"
+
+msgid "Also import at reboot/restart enigma2"
+msgstr ""
+
+#, fuzzy
+msgid "Also import from the extension menu"
+msgstr "Tampilkan menu pilihan buket"
+
+msgid "Also import when box is leaving standby"
+msgstr ""
 
 msgid "Also on standby"
 msgstr "Juga pada standby"
@@ -955,6 +974,10 @@ msgstr ""
 
 msgid "An empty filename is illegal."
 msgstr "Nama berkas kosong tidak diperbolehkan."
+
+#, fuzzy
+msgid "An error occurred - Please try again later"
+msgstr "Pembaruan tidak tersedia. Silakan coba lain waktu."
 
 msgid "An error occurred while downloading the packetlist. Please try again."
 msgstr "Kesalahan terjadi saat unduh daftar paket. Silakan coba lagi"
@@ -1146,7 +1169,7 @@ msgstr "Penulis: "
 msgid "Authoring mode"
 msgstr "Mode penulisan"
 
-#. TRANSLATORS: (aspect ratio policy: always try to display as fullscreen, when there is no content (black bars) on left/right, even if this breaks the aspect.
+#. TRANSLATORS: (aspect ratio policy: automatically select the best aspect ratio mode)
 msgid "Auto"
 msgstr "Auto"
 
@@ -1552,6 +1575,10 @@ msgstr "Kanal"
 msgid "Channel Info"
 msgstr "Info Kanal"
 
+#, fuzzy
+msgid "Channel context menu"
+msgstr "Menu daftar kanal"
+
 msgid "Channel list type"
 msgstr "Tipe daftar kanal"
 
@@ -1575,6 +1602,21 @@ msgstr "Nomor kanal dan nama layanan"
 
 msgid "Channelnumber, picon and servicename"
 msgstr "Nomor kanal, pikon dan nama layanan"
+
+#, fuzzy
+msgid "Channels and EPG"
+msgstr "Info Kanal"
+
+#, python-format
+msgid "Channels from fallback tuner failed %s"
+msgstr ""
+
+msgid "Channels from fallback tuner imported"
+msgstr ""
+
+#, fuzzy
+msgid "Channels only"
+msgstr "Info Kanal"
 
 msgid "Chap."
 msgstr "Bab"
@@ -2037,11 +2079,12 @@ msgstr "Atur apakah suara PCM multi kanal seharusnya dihidupkan"
 msgid "Configure whether multi channel sound tracks should be downmixed to stereo."
 msgstr "Atur apakah jalur suara kanal banyak ingin diturunkan ke stereo."
 
+#, fuzzy
+msgid "Configure whether or not a rotor position will be displayed on the infobar"
+msgstr "Atur apakah posisi rotor akan ditampilkan atau tidak pada infobar"
+
 msgid "Configure whether or not an icon should be shown when your motorized dish is moving."
 msgstr "Atur apakah ikon sebaiknya ditampilkan atau tidak ketika parabola anda yg berpenggerak sedang bergerak."
-
-msgid "Configure whether or not an rotor position will be displayed on infobar"
-msgstr "Atur apakah posisi rotor akan ditampilkan atau tidak pada infobar"
 
 msgid "Configure which access level to use for the configuration menu. Expert level gives access to all items."
 msgstr "Atur level akses mana yang digunakan untuk mengatur menu. Level ahli memberikan akses ke semua item."
@@ -2052,7 +2095,8 @@ msgstr "Atur format warna mana seharusnya digunakan pada keluaran SCART."
 msgid "Configure which tuner for recordings will be preferred, when more than one tuner is available."
 msgstr "Atur penala yg mana untuk merekam yg dipilih, jika lebih dari satu penala tersedia"
 
-msgid "Configure which tuner type will be preferred, when the same service is available on different types of tuners. Choose 'no priority' to try each alternative one by one independent from tuner type."
+#, fuzzy
+msgid "Configure which tuner type will be preferred when the same service is available on different types of tuners. Choose 'no priority' to try each alternative one by one regardless of the tuner type."
 msgstr "Atur tipe penala mana ingin diutamakan,  ketika layanan yang sama tersedia pada tipe penala yang berbeda. Pilih 'tidak diprioritaskan' untuk mencoba setiap alternatif satu per satu terlepas dari tipe penala."
 
 msgid "Configure which tuner will be preferred, when more than one tuner is available. If set to 'auto' the system will give priority to the tuner having the lowest number of channels/satellites."
@@ -2064,7 +2108,8 @@ msgstr "Atur LAN internal anda"
 msgid "Configure your network again"
 msgstr "Atur kembali jaringan anda"
 
-msgid "Configure your network settings, and press OK to start the scan"
+#, fuzzy
+msgid "Configure your network settings and press OK to scan"
 msgstr "Atur penyetelan jaringan anda, dan tekan OK untuk mulai memindai"
 
 msgid "Configure your wireless LAN again"
@@ -2136,15 +2181,6 @@ msgstr "Putar terus (loop)"
 
 msgid "Contrast"
 msgstr "Kontras"
-
-msgid "Convert ext3 filesystem to ext4"
-msgstr "Rubah sistem berkas ext3 ke ext4"
-
-msgid "Convert ext3 to ext4"
-msgstr "Rubah ext3 ke ext4"
-
-msgid "Converting ext3 to ext4..."
-msgstr "Merubah ext3 ke ext4..."
 
 msgid "Cook Islands"
 msgstr ""
@@ -2548,10 +2584,6 @@ msgstr "Port DiSEqC %s: %s"
 msgid "DiSEqC-tester settings"
 msgstr "Pengaturan Pengecek-DiSEqC"
 
-#, fuzzy
-msgid "Diasbled"
-msgstr "Dimatikan"
-
 msgid "Did you see all eight arrow heads?"
 msgstr "Apakah anda melihat semua kedelapan anak panah?"
 
@@ -2656,13 +2688,6 @@ msgstr ""
 "Anda yakin ingin memeriksa sistem berkas?\n"
 "Ini memerlukan waktu yang cukup lama!"
 
-msgid ""
-"Do you really want to convert the filesystem?\n"
-"You cannot go back!"
-msgstr ""
-"Anda yakin ingin merubah sistem berkas?\n"
-"Anda tak bisa kembali!"
-
 #, python-format
 msgid "Do you really want to delete %s?"
 msgstr "Anda yakin ingin menghapus %s?"
@@ -2763,6 +2788,9 @@ msgstr "Anda ingin memperbarui rx anda?"
 msgid "Do you want to upgrade the package:\n"
 msgstr "Anda ingin menaiktingkatkan paket:\n"
 
+msgid "Dolby"
+msgstr ""
+
 msgid "Dominica"
 msgstr ""
 
@@ -2831,6 +2859,9 @@ msgstr "Pemilihan bahasa EPG 1"
 msgid "EPG language selection 2"
 msgstr "Pemilihan bahasa EPG 2"
 
+msgid "EPG only"
+msgstr ""
+
 msgid "EPG selection"
 msgstr "Pemilihan EPG"
 
@@ -2840,6 +2871,10 @@ msgstr "Pengaturan EPG"
 #, python-format
 msgid "ERROR - failed to scan (%s)!"
 msgstr "Kesalahan - gagal melacak (%s)!"
+
+#, python-format
+msgid "ERROR downloading file %s"
+msgstr ""
 
 msgid "East"
 msgstr "Timur"
@@ -2963,6 +2998,9 @@ msgstr ""
 msgid "Enable timer conflict detection"
 msgstr "Aktifkan deteksi konflik pewaktu"
 
+msgid "Enable to display all true/false, yes/no, on/off and enable/disable set up options as a graphical switch."
+msgstr ""
+
 msgid "Enable volume control with arrow buttons"
 msgstr "Aktifkan kontrol suara dengan tombol panah"
 
@@ -3068,6 +3106,10 @@ msgstr "Stream"
 msgid "Error"
 msgstr "Kesalahan"
 
+#, fuzzy, python-format
+msgid "Error %s"
+msgstr "Kesalahan"
+
 msgid "Error code"
 msgstr "Kode kesalahan"
 
@@ -3094,6 +3136,15 @@ msgid "Error executing plugin"
 msgstr "Kesalahan eksekusi plugin"
 
 msgid "Error stop stream!"
+msgstr ""
+
+msgid "Error when writing epg.dat on server"
+msgstr ""
+
+msgid "Error while retreiving epg.dat from server"
+msgstr ""
+
+msgid "Error while retreiving location of epg.dat on server"
 msgstr ""
 
 #, python-format
@@ -3303,6 +3354,12 @@ msgstr "FTA"
 msgid "Factory reset"
 msgstr "Parameter Pabrik"
 
+msgid ""
+"Factory reset will restore your receiver to its default configuration. All user data including system settings, tuner configuration, bouquets, services and plugins will be DELETED. Recordings and other files stored on HDD and USB media will remain intact. After completion, the system will restart automatically!\n"
+"\n"
+"Do you really want to proceed?"
+msgstr ""
+
 msgid "Failed"
 msgstr "Gagal"
 
@@ -3316,6 +3373,10 @@ msgid "Falkland Islands (Malvinas)"
 msgstr ""
 
 msgid "Fallback remote receiver URL"
+msgstr "URL penggunaan rx dari jauh"
+
+#, fuzzy
+msgid "Fallback remote receiver setup"
 msgstr "URL penggunaan rx dari jauh"
 
 #, python-format
@@ -3491,6 +3552,11 @@ msgstr "From :"
 msgid "Frontprocessor version: %s"
 msgstr ""
 
+#. TRANSLATORS: (aspect ratio policy: display as fullscreen, even if the content aspect ratio does not match the screen ratio)
+#, fuzzy
+msgid "Full screen"
+msgstr "Hold screen"
+
 msgid "Full transparency"
 msgstr "Transparan sepenuhnya"
 
@@ -3512,6 +3578,10 @@ msgstr ""
 #, fuzzy
 msgid "GStreamer version: "
 msgstr "Kernel version: "
+
+#, fuzzy
+msgid "GUI Settings"
+msgstr "Penyetelan"
 
 msgid ""
 "GUI needs a restart to apply a new language\n"
@@ -3704,6 +3774,9 @@ msgstr ""
 msgid "HDMI Colorspace"
 msgstr ""
 
+msgid "HDMI HDR Type"
+msgstr ""
+
 #, fuzzy
 msgid "HDMI-CEC Source Active"
 msgstr "Pengaturan HDMI-CEC"
@@ -3713,6 +3786,12 @@ msgstr ""
 
 msgid "HDMI-CEC setup"
 msgstr "Pengaturan HDMI-CEC"
+
+msgid "HDR10"
+msgstr ""
+
+msgid "HLG"
+msgstr ""
 
 #, fuzzy
 msgid "Haiti"
@@ -3823,8 +3902,9 @@ msgstr ""
 msgid "Hotkey zap"
 msgstr ""
 
-msgid "How many minutes do you want add to record?"
-msgstr ""
+#, fuzzy
+msgid "How many minutes do you want add to the recording?"
+msgstr "How many minutes do you want to record?"
 
 msgid "How many minutes do you want to record?"
 msgstr "How many minutes do you want to record?"
@@ -3921,6 +4001,26 @@ msgstr ""
 msgid "Image: "
 msgstr "Image: "
 
+msgid "Import channels and/or EPG from remote receiver URL also when the receiver is getting out of standby"
+msgstr ""
+
+msgid "Import channels and/or EPG from remote receiver URL when receiver is booted"
+msgstr ""
+
+msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
+msgstr ""
+
+msgid "Import channels from fallback tuner"
+msgstr ""
+
+#, fuzzy
+msgid "Import from remote receiver URL"
+msgstr "URL penggunaan rx dari jauh"
+
+#, fuzzy
+msgid "Import remote receiver URL"
+msgstr "URL penggunaan rx dari jauh"
+
 msgid "In order to record a timer, the TV was switched to the recording service!\n"
 msgstr "In order to record a timer, the TV was switched to the recording service!\n"
 
@@ -3955,6 +4055,9 @@ msgid "India"
 msgstr ""
 
 msgid "Indonesia"
+msgstr ""
+
+msgid "Indonesian"
 msgstr ""
 
 msgid "Info"
@@ -4129,9 +4232,9 @@ msgid "Israel"
 msgstr ""
 
 msgid ""
-"It seems you did not see all the eight arrow heads. This means your TV is has overscan enabled, and is not configured properly.\n"
+"It seems you did not see all the eight arrow heads. This means your TV has overscan enabled, and is not configured properly.\n"
 "\n"
-"Please refer to your TVs manual to find how you can disable overscan on your TV. Look for terms like 'Just fit', 'Full width', etc. If you can't find it, ask other users at http://forums.openpli.org.\n"
+"Please refer to your TV's manual to find how you can disable overscan on your TV. Look for terms like 'Just fit', 'Full width', etc. If you can't find it, ask other users at http://forums.openpli.org.\n"
 "\n"
 msgstr ""
 
@@ -4178,7 +4281,7 @@ msgstr "Jump to next marked position"
 msgid "Jump to previous marked position"
 msgstr "Jump to previous marked position"
 
-#. TRANSLATORS: (aspect ratio policy: display as fullscreen, even if this breaks the aspect)
+#. TRANSLATORS: (aspect ratio policy: scale as close to fullscreen as possible)
 msgid "Just scale"
 msgstr "Just scale"
 
@@ -4446,6 +4549,9 @@ msgstr "Menu Utama"
 msgid "Maintain old EPG data for"
 msgstr "Biarkan data EPG lama hingga"
 
+msgid "Make it possible to manually initiate the channels import and/or EPG via the extension menu"
+msgstr ""
+
 msgid "Make this mark an 'in' point"
 msgstr "Make this mark an 'in' point"
 
@@ -4681,6 +4787,10 @@ msgstr "Movie list configuration"
 msgid "Movie location"
 msgstr "Movie location"
 
+#, fuzzy
+msgid "Movie manager"
+msgstr "Pengelola Paket"
+
 msgid "Movie selection"
 msgstr "Movie selection"
 
@@ -4910,6 +5020,9 @@ msgstr ""
 "Tidak ada data pada transponder!\n"
 "(Waktu habis membaca PAT)"
 
+msgid "No data received yet"
+msgstr ""
+
 msgid "No delay"
 msgstr "Jangan tunda"
 
@@ -4918,6 +5031,9 @@ msgstr "Deskripsi tidak tersedia."
 
 msgid "No displayable files on this medium found!"
 msgstr "Tidak ditemukan file yang bisa dilihat pada medium ini!"
+
+msgid "No epg.dat file found server"
+msgstr ""
 
 msgid "No event info found, recording indefinitely."
 msgstr "Info acara tidak ditemukan, merekam tanpa batas waktu."
@@ -5094,6 +5210,12 @@ msgstr ""
 msgid ""
 "Nothing to scan!\n"
 "Please setup your tuner settings before you start a service scan."
+msgstr ""
+"Tidak ada yg bisa dilacak!\n"
+"Atur pengaturan penala sebelum memulai lacak layanan."
+
+#, fuzzy
+msgid "Nothing to scan! Setup your tuner and try again."
 msgstr ""
 "Tidak ada yg bisa dilacak!\n"
 "Atur pengaturan penala sebelum memulai lacak layanan."
@@ -5320,8 +5442,9 @@ msgstr "Pause movie at end"
 msgid "Pause playback"
 msgstr "Pause playback"
 
-msgid "Pauze/Continue playback"
-msgstr ""
+#, fuzzy
+msgid "Pause/Continue playback"
+msgstr "Lanjut mainkan"
 
 msgid "Percentage left"
 msgstr "Persentase di kiri"
@@ -5795,9 +5918,6 @@ msgstr ""
 msgid "Press OK to select/deselect a CAId."
 msgstr "Press OK to select/deselect a CAId."
 
-msgid "Press OK to start the scan"
-msgstr "Tekan OK untuk memulai pelacakan"
-
 msgid "Press OK to toggle the selection"
 msgstr ""
 
@@ -6071,6 +6191,9 @@ msgstr ""
 
 msgid "Relative"
 msgstr "Relatif"
+
+msgid "Relevant PIDs routing"
+msgstr ""
 
 msgid "Reload"
 msgstr "Reload"
@@ -6361,6 +6484,10 @@ msgstr ""
 msgid "SCR Unicable"
 msgstr ""
 
+#, fuzzy
+msgid "SDR"
+msgstr "SNR"
+
 msgid "SINGLE LAYER DVD"
 msgstr "SINGLE LAYER DVD"
 
@@ -6435,9 +6562,6 @@ msgstr "Satellite longitude:"
 
 msgid "Satellites"
 msgstr "Satelit"
-
-msgid "Satfinder"
-msgstr "Pelacak Satelit"
 
 msgid "Sats"
 msgstr "Sat"
@@ -6515,11 +6639,25 @@ msgstr "Scan %s band"
 msgid "Scan additional SR"
 msgstr "Scan additional SR"
 
+#, fuzzy, python-format
+msgid "Scan completed, %d channel found."
+msgid_plural "Scan completed, %d channels found."
+msgstr[0] "%d kanal ditemukan"
+msgstr[1] "%d kanal ditemukan"
+
+#, fuzzy
+msgid "Scan failed!"
+msgstr "Scanning failed!"
+
 msgid "Scan files..."
 msgstr "Pindai file..."
 
 msgid "Scan options"
 msgstr ""
+
+#, fuzzy
+msgid "Scan state"
+msgstr "scan state"
 
 msgid "Scan wireless networks"
 msgstr "Pindai jaringan nirkabel"
@@ -6737,6 +6875,10 @@ msgstr "Select files/folders to backup"
 msgid "Select function"
 msgstr "Pilih lokasi backup"
 
+#, fuzzy
+msgid "Select hard disk"
+msgstr "Pilih satu tampilan"
+
 msgid "Select horizontal resolution:"
 msgstr ""
 
@@ -6801,16 +6943,16 @@ msgstr ""
 msgid "Select the movie path"
 msgstr "Select the movie path"
 
-msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
 msgid "Select the satellite you want to configure. Once that satellite is configured you can select and configure other satellites that will be accessed using this same tuner."
@@ -6848,6 +6990,9 @@ msgstr "Pilih mode video"
 
 msgid "Select wireless network"
 msgstr "Select wireless network"
+
+msgid "Select yes when you want to import channels and/or EPG from a different URL"
+msgstr ""
 
 #, fuzzy
 msgid "Select your ATSC provider."
@@ -7047,6 +7192,10 @@ msgstr "Penyetelan"
 msgid "Setup"
 msgstr "Pengaturan"
 
+#, fuzzy
+msgid "Setup hard disk"
+msgstr "Hard disk"
+
 msgid "Setup menu"
 msgstr "Menu pengaturan"
 
@@ -7097,6 +7246,9 @@ msgstr ""
 
 msgid "Show SNR percentage instead of dB value"
 msgstr "Tampilkan persentase SNR daripada nilai dB"
+
+msgid "Show True/False as graphical switch"
+msgstr ""
 
 msgid "Show VCR scart on main menu"
 msgstr "Tampilkan scart VCR pada menu utama"
@@ -7201,6 +7353,18 @@ msgid "Show movies"
 msgstr ""
 
 msgid "Show multi channel EPG"
+msgstr ""
+
+msgid "Show notification when import channels and/or EPG from remote receiver URL did not complete"
+msgstr ""
+
+msgid "Show notification when import channels and/or EPG from remote receiver URL is completed"
+msgstr ""
+
+msgid "Show notification when import channels was not successful"
+msgstr ""
+
+msgid "Show notification when import channels was successful"
 msgstr ""
 
 msgid "Show packages to be upgraded"
@@ -7461,9 +7625,6 @@ msgid "Solomon Islands"
 msgstr ""
 
 msgid "Somalia"
-msgstr ""
-
-msgid "Some error occured - Please try later"
 msgstr ""
 
 msgid "Some plugins are not available:\n"
@@ -8091,7 +8252,7 @@ msgid ""
 "The yellow area means a 5% border area of a full HD picture will be invisible.\n"
 "The green area means a 10% border area of a full HD picture will be invisible.\n"
 "\n"
-"In other words, if the yellow box meets all for sides of your screen, then you have at least 5% overscan on all sides.\n"
+"In other words, if the yellow box touches all four sides of your screen, you have at least 5% overscan on all sides.\n"
 "\n"
 "If you see the tips of all eight arrowheads, then your TV has overscan disabled.\n"
 "\n"
@@ -8213,22 +8374,13 @@ msgstr ""
 msgid "This option allows to set the level of dynamic contrast of the picture."
 msgstr ""
 
-msgid "This option allows you can config the Colordepth for UHD"
-msgstr ""
-
-msgid "This option allows you can config the Colorimetry for HDR."
-msgstr ""
-
-msgid "This option allows you can config the Colorspace from Auto to RGB"
+msgid "This option allows you can to set the auto volume level."
 msgstr ""
 
 msgid "This option allows you enable smoothing filter to control the dithering process."
 msgstr ""
 
 msgid "This option allows you enable the vertical scaler dejagging."
-msgstr ""
-
-msgid "This option allows you show all symbols on display."
 msgstr ""
 
 msgid "This option allows you to add the softcam setup in the extensions menu."
@@ -8241,6 +8393,18 @@ msgid "This option allows you to boost the green tones in the picture."
 msgstr ""
 
 msgid "This option allows you to change the virtuell loadspeaker position."
+msgstr ""
+
+msgid "This option allows you to configure the Colordepth for UHD"
+msgstr ""
+
+msgid "This option allows you to configure the Colorimetry for HDR."
+msgstr ""
+
+msgid "This option allows you to configure the Colorspace from Auto to RGB"
+msgstr ""
+
+msgid "This option allows you to configure the HDR type."
 msgstr ""
 
 msgid "This option allows you to disable or change the virtuell loadspeaker position."
@@ -8258,6 +8422,9 @@ msgstr ""
 msgid "This option allows you to power off the display."
 msgstr ""
 
+msgid "This option allows you to show all symbols on the display."
+msgstr ""
+
 msgid "This option allows you to show menu number quick links."
 msgstr ""
 
@@ -8270,10 +8437,7 @@ msgstr ""
 msgid "This option can be useful for long HDMI cables."
 msgstr ""
 
-msgid "This option configures you can set auto volume level."
-msgstr ""
-
-msgid "This option set the level of surpression of musquito noise (Musquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
+msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr ""
 
 msgid "This option sets  the picture contrast."
@@ -8358,11 +8522,12 @@ msgstr ""
 "- no valid IP address was found\n"
 "- please check your DHCP, cabling and adapter setup"
 
+#, fuzzy
 msgid ""
 "This test checks whether your LAN adapter is set up for automatic IP address configuration with DHCP.\n"
 "If you get a \"disabled\" message:\n"
 " - then your LAN adapter is configured for manual IP setup\n"
-"- verify thay you have entered correct IP informations in the adapter setup dialog.\n"
+"- verify thay you have entered the correct IP information in the adapter setup dialog.\n"
 "If you get an \"enabeld\" message:\n"
 "-verify that you have a configured and working DHCP server in your network."
 msgstr ""
@@ -8662,6 +8827,10 @@ msgstr "Two"
 msgid "Type"
 msgstr "Type"
 
+#, fuzzy
+msgid "Type of LNB/device"
+msgstr "Tipe Pelacakan"
+
 msgid "Type of scan"
 msgstr "Tipe Pelacakan"
 
@@ -8907,6 +9076,10 @@ msgstr "Used service scan type"
 
 msgid "User - bouquets"
 msgstr "User - bouquets"
+
+#, fuzzy
+msgid "User Mode"
+msgstr "Ditentukan pengguna"
 
 msgid "User defined"
 msgstr "Ditentukan pengguna"
@@ -9257,10 +9430,10 @@ msgstr "Ketika diaktifkan, anda bisa mengatur volume suara dengan tombol panah d
 msgid "When enabled you can specify a timeframe to ignore the shutdown timer when the receiver is in standby mode"
 msgstr ""
 
-msgid "When enabled you can specify a timeframe were the inactivity sleeptimer is ignored. Not the detection is disabled during this timeframe but the inactivity timeout is disabled"
+msgid "When enabled you can specify a timeframe when the inactivity sleeptimer is ignored. Not the detection is disabled during this timeframe but the inactivity timeout is disabled"
 msgstr ""
 
-msgid "When enabled you can specify an extra timeframe were the inactivity sleeptimer is ignored. Not the detection is disabled during this timeframe but the inactivity timeout is disabled"
+msgid "When enabled you can specify an extra timeframe when the inactivity sleeptimer is ignored. Not the detection is disabled during this timeframe but the inactivity timeout is disabled"
 msgstr ""
 
 msgid "When enabled you can zap channels with the  CH+/-, B+/-, P+/- buttons instead of opening the channel selection list."
@@ -9344,7 +9517,8 @@ msgstr "Ketika diaktifkan, memungkinkan untuk keluar dari pemutar film dengan to
 msgid "When enabled, measure power consumption to detect when the rotor stops turning (when supported by the tuner)."
 msgstr "When enabled, measure power consumption to detect when the rotor stops turning (when supported by the tuner)."
 
-msgid "When enabled, number markers will be hiden."
+#, fuzzy
+msgid "When enabled, number markers will be hidden."
 msgstr "Ketika diaktifkan, penanda nomor akan disembunyikan."
 
 msgid "When enabled, reformat subtitles to match the width of the screen."
@@ -9427,19 +9601,6 @@ msgstr "When the content has an aspect ratio of 16:9, choose whether to scale/st
 
 msgid "When the content has an aspect ratio of 4:3, choose whether to scale/stretch the picture."
 msgstr "When the content has an aspect ratio of 4:3, choose whether to scale/stretch the picture."
-
-msgid ""
-"When you do a factory reset, you will lose ALL your configuration data\n"
-"(including bouquets, services, satellite data ...)\n"
-"After completion of factory reset, your receiver will restart automatically!\n"
-"\n"
-"Really do a factory reset?"
-msgstr ""
-"Ketika anda melakukan parameter pabrik, anda akan kehilangan SEMUA data konfigurasi anda\n"
-"(termasuk data buket, layanan, satelit ...)\n"
-"Setelah parameter pabrik selesai, rx anda akan restart secara otomatis!\n"
-"\n"
-"Yakin ingin melakukan parameter pabrik?"
 
 msgid "Where do you want to backup your settings?"
 msgstr "Where do you want to backup your settings?"
@@ -9575,7 +9736,8 @@ msgstr "Restore backups"
 msgid "Yesterday"
 msgstr "Kemarin"
 
-msgid "You PIN code is 0000. This is the default PIN code and it disable parental control!\n"
+#, fuzzy
+msgid "You PIN code is 0000. This is the default PIN code and it disables parental control!\n"
 msgstr "Kode PIN anda adalah 0000. Ini adalah kode PIN bawaan pabrik dan ia mematikan kontrol orang tua!\n"
 
 #, python-format
@@ -9630,8 +9792,9 @@ msgstr ""
 "\n"
 "menu->pemasangan->sistem->wizard Overscan"
 
+#, fuzzy
 msgid ""
-"You did not see all eight arrow heads. This means your TV has overscan enabled and presents you with a zoomed-in picture, causing you to loose part of a full HD screen. In addition this you may also miss parts of the user interface, for example volume bars and more.\n"
+"You did not see all eight arrow heads. This means your TV has overscan enabled and presents you with a zoomed-in picture, causing you to loose part of a full HD screen. In addition to this you may also miss parts of the user interface, for example volume bars and more.\n"
 "\n"
 "You can now try to resize and change the position of the user interface until you see the eight arrow heads.\n"
 "\n"
@@ -9669,9 +9832,6 @@ msgid ""
 msgstr ""
 "Anda perlu sebuah PC untuk terhubung ke Rx. Jika anda memerlukan instruksi lanjutan, silakan kunjungi website http://www.dm7025.de.\n"
 "Rx anda dihentikan sekarang. Setelah anda melakukan langkah-langkah pembaruan dari website, firmware baru anda akan meminta anda memulihkan pengaturan anda."
-
-msgid "You system does not support ext4"
-msgstr "Sistem anda tidak mendukung ext4"
 
 msgid "Your backup succeeded. We will now continue to explain the further upgrade process."
 msgstr "Backup anda sukses. Kami akan lanjut menjelaskan proses upgrade selanjutnya."
@@ -9925,8 +10085,9 @@ msgstr "alternatif"
 msgid "always"
 msgstr ""
 
-msgid "and never ask again this session again"
-msgstr ""
+#, fuzzy
+msgid "and never ask in this session again"
+msgstr "dan jangan tampilkan pesan ini lagi"
 
 msgid "and never ask this again"
 msgstr ""
@@ -11002,494 +11163,3 @@ msgstr "zapped"
 
 msgid "®"
 msgstr ""
-
-#~ msgid "%d-%b-%Y %-H:%M"
-#~ msgstr "%d-%b-%Y %-H:%M"
-
-#~ msgid "0 pixels wide"
-#~ msgstr "lebar pixels 0"
-
-#~ msgid "100 pixels wide"
-#~ msgstr "lebar pixels 100"
-
-#~ msgid "1000 pixels wide"
-#~ msgstr "lebar pixels 1000"
-
-#~ msgid "1100 pixels wide"
-#~ msgstr "lebar pixels 1100"
-
-#~ msgid "1200 pixels wide"
-#~ msgstr "lebar pixels 1200"
-
-#~ msgid "200 pixels wide"
-#~ msgstr "lebar pixels 200"
-
-#~ msgid "300 pixels wide"
-#~ msgstr "lebar pixels 300"
-
-#~ msgid "400 pixels wide"
-#~ msgstr "lebar pixels 400"
-
-#~ msgid "500 pixels wide"
-#~ msgstr "lebar pixels 500"
-
-#~ msgid "600 pixels wide"
-#~ msgstr "lebar pixels 600"
-
-#~ msgid "700 pixels wide"
-#~ msgstr "lebar pixels 700"
-
-#~ msgid "800 pixels wide"
-#~ msgstr "lebar pixels 800"
-
-#~ msgid "900 pixels wide"
-#~ msgstr "lebar pixels 900"
-
-#~ msgid "A recording is currently running. Please stop the recording before trying to configure the positioner."
-#~ msgstr "A recording is currently running. Please stop the recording before trying to configure the positioner."
-
-#~ msgid "Action on long powerbutton press"
-#~ msgstr "Tindakan pada tekan lama tombol power"
-
-#~ msgid "Action on short powerbutton press"
-#~ msgstr "Tindakan pada tekan singkat tombol power"
-
-#~ msgid "Audio source"
-#~ msgstr "Sumber audio"
-
-#~ msgid "Audio/Subtitles"
-#~ msgstr "Audio/Teks Film"
-
-#~ msgid "Blue boost"
-#~ msgstr "Dorongan biru"
-
-#~ msgid "Bouquets/Last Scanned"
-#~ msgstr "Hasil Pelacakan Terakhir"
-
-#~ msgid "Burmese"
-#~ msgstr "Burma/Myanmar"
-
-#~ msgid "CANCEL"
-#~ msgstr "BATAL"
-
-#~ msgid "CAS"
-#~ msgstr "Kripto"
-
-#~ msgid "Changelog"
-#~ msgstr "Changelog"
-
-#~ msgid ""
-#~ "Checking tuner %d\n"
-#~ "DiSEqC port %s for %s"
-#~ msgstr ""
-#~ "Checking tuner %d\n"
-#~ "DiSEqC port %s for %s"
-
-#~ msgid "Coderate HP"
-#~ msgstr "Coderate HP"
-
-#~ msgid "Coderate LP"
-#~ msgstr "Coderate LP"
-
-#~ msgid "Configure the function of a long press on the power button."
-#~ msgstr "Atur fungsi tekan lama pada tombol power."
-
-#~ msgid "Configure the function of a short press on the power button."
-#~ msgstr "Atur fungsi tekan sebentar pada tombol power."
-
-#~ msgid "Configure what to do after activated PiP."
-#~ msgstr "Atur apa yg akan dilakukan setelah mengaktifkan PiP."
-
-#~ msgid "Conflicting timer"
-#~ msgstr "Conflicting timer"
-
-#~ msgid "Constellation"
-#~ msgstr "Constellation"
-
-#~ msgid "Could not connect to receiver .NFI image feed server:"
-#~ msgstr "Could not connect to receiver .NFI image feed server:"
-
-#~ msgid "Crypto"
-#~ msgstr "Kripto"
-
-#~ msgid "Current"
-#~ msgstr "Sekarang"
-
-#~ msgctxt "Current"
-#~ msgid "Current"
-#~ msgstr "Sekarang"
-
-#~ msgid "Current version:"
-#~ msgstr "Versi saat ini:"
-
-#~ msgid "Currently installed image"
-#~ msgstr "Image terpasang saat ini"
-
-#~ msgid "Default Skin"
-#~ msgstr "Tampilan bawaan"
-
-#~ msgid "Descramble http streams"
-#~ msgstr "Descramble http streams"
-
-#~ msgid "Devicelist"
-#~ msgstr "Daftar Perangkat"
-
-#~ msgid "Disclaimer"
-#~ msgstr "Ketentuan"
-
-#~ msgid "Do you understand this?"
-#~ msgstr "Anda mengerti hal ini?"
-
-#~ msgid "Do you want to do another manual service scan?"
-#~ msgstr "Anda ingin melacak layanan secara manual lainnya?"
-
-#~ msgid "Download"
-#~ msgstr "Download"
-
-#~ msgid "Download %s from server"
-#~ msgstr "Download %s from server"
-
-#~ msgid "Download .NFI-files for USB-flasher"
-#~ msgstr "Download .NFI-files for USB-flasher"
-
-#~ msgid "Emu manager"
-#~ msgstr "Kelola Emu"
-
-#~ msgctxt "Event description unavailable"
-#~ msgid "Event description unavailable"
-#~ msgstr "Penjabaran acara tidak tersedia"
-
-#~ msgid "Flashing failed"
-#~ msgstr "Flashing failed"
-
-#~ msgid "Frontprocessor version: %d"
-#~ msgstr "Frontprocessor version: %d"
-
-#~ msgid "Get latest experimental image"
-#~ msgstr "Dapatkan image percobaan terbaru"
-
-#~ msgid "Get latest release image"
-#~ msgstr "Dapatkan image keluaran terbaru"
-
-#~ msgid "Green boost"
-#~ msgstr "Green boost"
-
-#~ msgid "Hide CI messages"
-#~ msgstr "Sembunyikan pesan CI"
-
-#~ msgid "Hierarchy information"
-#~ msgstr "Info hirarki"
-
-#~ msgid "Immediate shutdown"
-#~ msgstr "Langsung shutdown"
-
-#~ msgid "Install softcam"
-#~ msgstr "Pasang softcam"
-
-#~ msgid "Intermediate"
-#~ msgstr "Sedang"
-
-#~ msgid "Internet info"
-#~ msgstr "Info Internet"
-
-#~ msgid "Keep service + Reverse bouquet buttons"
-#~ msgstr "Tetap pada layanan + Putarbalik tombol buket"
-
-#~ msgid "Korean"
-#~ msgstr "Korea"
-
-#~ msgid "LNB Freq"
-#~ msgstr "Frek LNB"
-
-#~ msgid "Last Scanned"
-#~ msgstr "Hasil Pelacakan Terakhir"
-
-#~ msgid "Log results to harddisk"
-#~ msgstr "Log results to harddisk"
-
-#~ msgid "Move main picture to PiP"
-#~ msgstr "Pindahkan gambar utama ke PiP"
-
-#~ msgid "Multiple languages"
-#~ msgstr "Multi Bahasa"
-
-#~ msgid "Multiplex"
-#~ msgstr "Multiplex"
-
-#~ msgid "NFI image flashing"
-#~ msgstr "NFI image flashing"
-
-#~ msgid "NFI image flashing completed. Press Yellow to Reboot!"
-#~ msgstr "NFI image flashing completed. Press Yellow to Reboot!"
-
-#~ msgid "NIM"
-#~ msgstr "NIM"
-
-#~ msgid "New version:"
-#~ msgstr "Versi baru:"
-
-#~ msgid "Next"
-#~ msgstr "Berikutnya"
-
-#~ msgctxt "Next"
-#~ msgid "Next"
-#~ msgstr "Berikutnya"
-
-#~ msgctxt "No Event Found"
-#~ msgid "No Event Found"
-#~ msgstr "Acara Tidak Ditemukan"
-
-#~ msgctxt "No Schedule"
-#~ msgid "No Schedule"
-#~ msgstr "Tidak ada jadwal"
-
-#~ msgid "No cable tuner found!"
-#~ msgstr "Kabel penala tidak ditemukan!"
-
-#~ msgid "No details for this image file"
-#~ msgstr "Tidak ada rincian pada image ini"
-
-#~ msgctxt "Not Applicable"
-#~ msgid "Not Applicable"
-#~ msgstr "Tidak bisa diterapkan"
-
-#~ msgid "Open channel list"
-#~ msgstr "Buka daftar kanal"
-
-#~ msgid "Open current transponder"
-#~ msgstr "Buka transponder saat ini"
-
-#~ msgid "PIDs"
-#~ msgstr "PIDs"
-
-#~ msgid "Picon and service name"
-#~ msgstr "Nama picon dan layanan"
-
-#~ msgid "Please check your network settings!"
-#~ msgstr "Mohon periksa pengaturan jaringan anda!"
-
-#~ msgid "Please select an NFI file and press green key to flash!"
-#~ msgstr "Please select an NFI file and press green key to flash!"
-
-#~ msgid "Please select your preferred configuration."
-#~ msgstr "Silakan pilih konfigurasi yang anda suka."
-
-#~ msgid "Polarity"
-#~ msgstr "Polarisasi"
-
-#~ msgid "Prepare another USB stick for image flashing"
-#~ msgstr "Prepare another USB stick for image flashing"
-
-#~ msgid "Provider to scan"
-#~ msgstr "Penyedia untuk dipindai"
-
-#~ msgid "Quality"
-#~ msgstr "Kualitas"
-
-#~ msgid "Restore is running..."
-#~ msgstr "Restore is running..."
-
-#~ msgid "SID"
-#~ msgstr "SID"
-
-#~ msgid "Search"
-#~ msgstr "Cari"
-
-#~ msgid "Select an image to be downloaded"
-#~ msgstr "Select an image to be downloaded"
-
-#~ msgid "Select desired image from feed list"
-#~ msgstr "Select desired image from feed list"
-
-#~ msgid "Shall the USB stick wizard proceed and program the image file %s into flash memory?"
-#~ msgstr "Shall the USB stick wizard proceed and program the image file %s into flash memory?"
-
-#~ msgid "Show Weather Forecast"
-#~ msgstr "Tampilkan Prakiraan Cuaca"
-
-#~ msgid "Show picons in channel list"
-#~ msgstr "Tampilkan pikon di daftar kanal"
-
-#~ msgid "Show shutdown menu"
-#~ msgstr "Tampilkan menu shutdown"
-
-#~ msgid "Signal"
-#~ msgstr "Sinyal"
-
-#~ msgid "Signal Quality"
-#~ msgstr "Kualitas Sinyal"
-
-#~ msgid "Signal Status"
-#~ msgstr "Status Sinyal"
-
-#~ msgid "Signal Strength"
-#~ msgstr "Kekuatan Sinyal"
-
-#~ msgid "Signal strength"
-#~ msgstr "Kekuatan sinyal"
-
-#~ msgid "Start, stop, restart SoftCams, change settings."
-#~ msgstr "Start, stop, restart SoftCam, ubah pengaturan."
-
-#~ msgid "Symbol Rate"
-#~ msgstr "Simbol Rate"
-
-#~ msgid "Terrestrial provider"
-#~ msgstr "Terrestrial provider"
-
-#~ msgid "Text PID"
-#~ msgstr "PID Text"
-
-#~ msgid ""
-#~ "The OpenPLi team would like to point out that upgrading to the latest nightly build comes not only with the latest features, but also with some risks. After the update, it is possible that your device no longer works as expected. We recommend you create backups with Autobackup or Backupsuite. This allows you to quickly and easily restore your device to its previous state, should you experience any problems. If you encounter a 'bug', please report the issue on www.openpli.org.\n"
-#~ "\n"
-#~ "Do you understand this?"
-#~ msgstr ""
-#~ "Tim OpenPLi ingin menegaskan bahwa pembaruan ke versi belum stabil tidak hanya mendapatkan fitur mutakhir, tapi juga ada resikonya. Setelah diupdate, kemungkinan perangkat anda tidak lagi berfungsi seperti yang diharapkan. Kami sarankan anda membuat file backup menggunakan Autobackup atau Backupsuite. Ini memungkinkan anda dengan mudah dan cepat mengembalikan perangkat anda pada posisi semula, jika anda mengalami masalah. Jika anda menemukan 'bug', mohon laporkan hal tersebut kepada www.openpli.org.\n"
-#~ "\n"
-#~ "Apakah anda mengerti hal ini?"
-
-#~ msgid ""
-#~ "The USB stick was prepared to be bootable.\n"
-#~ "Now you can download an NFI image file!"
-#~ msgstr ""
-#~ "The USB stick was prepared to be bootable.\n"
-#~ "Now you can download an NFI image file!"
-
-#~ msgid ""
-#~ "The following device was found:\n"
-#~ "\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Do you want to write the USB flasher to this stick?"
-#~ msgstr ""
-#~ "The following device was found:\n"
-#~ "\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Do you want to write the USB flasher to this stick?"
-
-#~ msgid "The md5sum validation failed, the file may be corrupted!"
-#~ msgstr "The md5sum validation failed, the file may be corrupted!"
-
-#~ msgid "The results have been written to %s."
-#~ msgstr "The results have been written to %s."
-
-#~ msgid "The wizard found a configuration backup. Do you want to restore your old settings from %s?"
-#~ msgstr "The wizard found a configuration backup. Do you want to restore your old settings from %s?"
-
-#~ msgid ""
-#~ "This plugin creates a USB stick which can be used to update the firmware of your receiver without the need for a network or WLAN connection.\n"
-#~ "First, a USB stick needs to be prepared so that it becomes bootable.\n"
-#~ "In the next step, an NFI image file can be downloaded from the update server and saved on the USB stick.\n"
-#~ "If you already have a prepared bootable USB stick, please insert it now. Otherwise plug in a USB stick with a minimum size of 64 MB!"
-#~ msgstr ""
-#~ "This plugin creates a USB stick which can be used to update the firmware of your receiver without the need for a network or WLAN connection.\n"
-#~ "First, a USB stick needs to be prepared so that it becomes bootable.\n"
-#~ "In the next step, an NFI image file can be downloaded from the update server and saved on the USB stick.\n"
-#~ "If you already have a prepared bootable USB stick, please insert it now. Otherwise plug in a USB stick with a minimum size of 64 MB!"
-
-#~ msgid "Timer editor"
-#~ msgstr "Pengubah pewaktu"
-
-#~ msgid ""
-#~ "To update your receiver firmware, please follow these steps:\n"
-#~ "1) Turn off your box with the rear power switch and make sure the bootable USB stick is plugged in.\n"
-#~ "2) Turn mains back on and hold the DOWN button on the front panel pressed for 10 seconds.\n"
-#~ "3) Wait for bootup and follow instructions of the wizard."
-#~ msgstr ""
-#~ "To update your receiver firmware, please follow these steps:\n"
-#~ "1) Turn off your box with the rear power switch and make sure the bootable USB stick is plugged in.\n"
-#~ "2) Turn mains back on and hold the DOWN button on the front panel pressed for 10 seconds.\n"
-#~ "3) Wait for bootup and follow instructions of the wizard."
-
-#~ msgid "Trans Freq"
-#~ msgstr "Frek Trans"
-
-#~ msgid "Tuner status %s"
-#~ msgstr "Tuner status %s"
-
-#~ msgid "USB stick wizard"
-#~ msgstr "USB stick wizard"
-
-#~ msgid "Unicable"
-#~ msgstr "Unicable"
-
-#~ msgid "Unicable LNB"
-#~ msgstr "Unicable LNB"
-
-#~ msgid "Unicable Martix"
-#~ msgstr "Unicable Martix"
-
-#~ msgctxt "Vertical"
-#~ msgid "Vertical"
-#~ msgstr "Vertikal"
-
-#~ msgid "Videocodec"
-#~ msgstr "Videocodec"
-
-#~ msgid "Videoformat"
-#~ msgstr "Videoformat"
-
-#~ msgid "Videosize"
-#~ msgstr "Videosize"
-
-#~ msgid "Weather Plugin"
-#~ msgstr "Plugin Cuaca"
-
-#~ msgid "What do you want to scan?"
-#~ msgstr "Apa yang ingin anda pindai?"
-
-#~ msgid "When activate PiP"
-#~ msgstr "Kapan mengaktifkan PiP"
-
-#~ msgid "When enabled, error messages related to the Common Interface module will not be shown."
-#~ msgstr "Ketika diaktifkan, pesan kesalahan terkait modul CI tidak akan ditampilkan."
-
-#~ msgid "Would you like to install a softcam?"
-#~ msgstr "Would you like to install a softcam?"
-
-#~ msgid "Yes, do another manual scan now"
-#~ msgstr "Ya, lakukan pelacakan manual lainnya sekarang"
-
-#~ msgid "You have chosen to create a new .NFI flasher bootable USB stick. This will repartition the USB stick and therefore all data on it will be erased."
-#~ msgstr "You have chosen to create a new .NFI flasher bootable USB stick. This will repartition the USB stick and therefore all data on it will be erased."
-
-#~ msgid ""
-#~ "Your frontprocessor firmware must be upgraded.\n"
-#~ "Press OK to start upgrade."
-#~ msgstr ""
-#~ "Your frontprocessor firmware must be upgraded.\n"
-#~ "Press OK to start upgrade."
-
-#~ msgid "Zap back to service before tuner setup?"
-#~ msgstr "Kembali ke layanan sebelum atur penala?"
-
-#~ msgid "and never show this message again"
-#~ msgstr "dan jangan tampilkan pesan ini lagi"
-
-#~ msgid "continue"
-#~ msgstr "berlanjut"
-
-#~ msgid "currently installed image: %s"
-#~ msgstr "image yang terinstall saat ini: %s"
-
-#~ msgctxt "dummyEventDescription"
-#~ msgid "dummyEventDescription"
-#~ msgstr "Penjabaran acara kosong"
-
-#~ msgctxt "dummyEventName"
-#~ msgid "dummyEventName"
-#~ msgstr "Nama Acara Kosong"
-
-#~ msgid "min"
-#~ msgstr "mnt"
-
-#~ msgid "not used"
-#~ msgstr "tidak digunakan"
-
-#~ msgid "sec"
-#~ msgstr "dtk"
-
-#~ msgid "set of utilities for enigma2"
-#~ msgstr "kumpulan alat untuk kegunaan enigma2"

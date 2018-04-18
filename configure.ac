@@ -131,8 +131,9 @@ if test "$with_po" = "yes"; then
 	AC_PATH_PROG(MSGINIT, msginit)
 	AC_PATH_PROG(MSGMERGE, msgmerge)
 	AC_PATH_PROG(MSGUNIQ, msguniq)
+	AC_PATH_PROG(MSGATTRIB, msgattrib)
 	AC_PATH_PROG(XGETTEXT, xgettext)
-	if test -z "$MSGINIT" -o -z "$MSGMERGE" -o -z "$MSGUNIQ" -o -z "$XGETTEXT"; then
+	if test -z "$MSGINIT" -o -z "$MSGMERGE" -o -z "$MSGUNIQ" -o -z "$MSGATTRIB" -o -z "$XGETTEXT"; then
 		AC_MSG_ERROR([Could not find required gettext tools])
 	fi
 fi
@@ -254,7 +255,7 @@ ENIGMA2_CFLAGS="-fno-rtti -fno-exceptions -rdynamic -funwind-tables"
 AC_SUBST(ENIGMA2_CFLAGS)
 
 CPPFLAGS="$CPPFLAGS $PYTHON_CPPFLAGS -std=c++11"
-CFLAGS="$CFLAGS -Wall -std=c++11"
+CFLAGS="$CFLAGS -Wall"
 CXXFLAGS="$CXXFLAGS -Wall -std=c++11 $BASE_CFLAGS $ENIGMA2_CFLAGS $PTHREAD_CFLAGS $OPENMP_CFLAGS $ALSA_CFLAGS $AMCODEC_CFLAGS $AMADEC_CFLAGS $DVBCSA_CFLAGS"
 
 AC_CONFIG_FILES([

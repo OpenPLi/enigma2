@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-13 16:06+0330\n"
+"POT-Creation-Date: 2018-04-13 09:42+0200\n"
 "PO-Revision-Date: 2018-03-20 18:54+0200\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: openPLi Dimitrij\n"
@@ -255,6 +255,8 @@ msgstr "%d GB"
 msgid "%d MB"
 msgstr "%d MB"
 
+#. TRANSLATORS: Intermediate scanning result, '%d' channel(s) have been found so far
+#, python-format
 msgid "%d channel found"
 msgid_plural "%d channels found"
 msgstr[0] "%d канал найден"
@@ -275,6 +277,7 @@ msgstr[0] "%d файл"
 msgstr[1] "%d файла"
 msgstr[2] "%d файлов"
 
+#, python-format
 msgid "%d fps"
 msgstr "%d fps"
 
@@ -365,12 +368,15 @@ msgstr "%d.%03d GB"
 msgid "%d.%B %Y"
 msgstr "%d.%B %Y"
 
+#, python-format
 msgid "%d.%d"
 msgstr "%d.%d"
 
+#, python-format
 msgid "%d.%d.%d"
 msgstr "%d.%d.%d"
 
+#, python-format
 msgid "%d:%02d"
 msgstr "%d:%02d"
 
@@ -812,6 +818,9 @@ msgstr "Добавить запись (окончание неопределен
 msgid "Add recording (stop after current event)"
 msgstr "Добавить запись (стоп после текущего события)"
 
+msgid "Add seperate receiver URL for import"
+msgstr "Добавить другой ресивер URL для импорта"
+
 msgid "Add service"
 msgstr "Добавить сервис"
 
@@ -920,6 +929,12 @@ msgstr "Выделите номер для физического LNB, кото�
 msgid "Allocate unused memory index"
 msgstr "Выделить неиспользуемый номер памяти"
 
+msgid "Allow quit movieplayer with exit"
+msgstr "Разрешить выходить из видеоплеера кнопкой выход"
+
+msgid "Allow quitting movieplayer with exit"
+msgstr "Разрешить выходить из видеоплеера кнопкой выход"
+
 msgid "Allow subtitle language to equal audio language"
 msgstr "Показывать субтитры при совпадении с языком аудио"
 
@@ -928,6 +943,15 @@ msgstr "Разрешить субтитры для людей с ослабле�
 
 msgid "Alpha"
 msgstr "Прозрачность"
+
+msgid "Also import at reboot/restart enigma2"
+msgstr "Импорт при перезагрузке ресивера/рестарт enigma2"
+
+msgid "Also import from the extension menu"
+msgstr "Добавить импорт в меню дополнений"
+
+msgid "Also import when box is leaving standby"
+msgstr "Импорт при выходе из режима ожидания"
 
 msgid "Also on standby"
 msgstr "Также из режима ожидания"
@@ -958,6 +982,9 @@ msgstr "American Samoa"
 
 msgid "An empty filename is illegal."
 msgstr "Пустое имя недопустимо."
+
+msgid "An error occurred - Please try again later"
+msgstr "Произошла ошибка. Пожалуйста, повторите попытку позже."
 
 msgid "An error occurred while downloading the packetlist. Please try again."
 msgstr "Произошла ошибка при загрузке списка пакетов. Пожалуйста, попробуйте еще раз."
@@ -1146,7 +1173,7 @@ msgstr "Автор: "
 msgid "Authoring mode"
 msgstr "Режим авторизации"
 
-#. TRANSLATORS: (aspect ratio policy: always try to display as fullscreen, when there is no content (black bars) on left/right, even if this breaks the aspect.
+#. TRANSLATORS: (aspect ratio policy: automatically select the best aspect ratio mode)
 msgid "Auto"
 msgstr "Авто"
 
@@ -1547,6 +1574,9 @@ msgstr "Канал"
 msgid "Channel Info"
 msgstr "Информация канала"
 
+msgid "Channel context menu"
+msgstr "Контекстное меню селектора каналов"
+
 msgid "Channel list type"
 msgstr "Тип списка каналов"
 
@@ -1570,6 +1600,19 @@ msgstr "Номер канала и название сервиса"
 
 msgid "Channelnumber, picon and servicename"
 msgstr "Номер канала, пикон и название сервиса"
+
+msgid "Channels and EPG"
+msgstr "каналы и EPG"
+
+#, python-format
+msgid "Channels from fallback tuner failed %s"
+msgstr "Невозможно импортировать каналы с удаленного ресивера %s"
+
+msgid "Channels from fallback tuner imported"
+msgstr "Каналы удаленного ресивера импортированы!"
+
+msgid "Channels only"
+msgstr "только каналы"
 
 msgid "Chap."
 msgstr "Глава."
@@ -2027,11 +2070,11 @@ msgstr "Настройка, нужно ли включать мультикан�
 msgid "Configure whether multi channel sound tracks should be downmixed to stereo."
 msgstr "Настройка - следует ли многоканальную звуковую дорожку декодировать в стереозвук."
 
-msgid "Configure whether or not an icon should be shown when your motorized dish is moving."
-msgstr "Настройка - нужно ли показывать иконку при движении антенны с мотоподвесом."
-
 msgid "Configure whether or not a rotor position will be displayed on the infobar"
 msgstr "Настройка для показа позиции ротора в инфобаре."
+
+msgid "Configure whether or not an icon should be shown when your motorized dish is moving."
+msgstr "Настройка - нужно ли показывать иконку при движении антенны с мотоподвесом."
 
 msgid "Configure which access level to use for the configuration menu. Expert level gives access to all items."
 msgstr "Настройка уровня доступа для использования в меню конфигурации. Экспертный уровень дает доступ к другим элементам."
@@ -2125,15 +2168,6 @@ msgstr "Продолжает воспроизведение(петля)"
 
 msgid "Contrast"
 msgstr "Контрастность"
-
-msgid "Convert ext3 filesystem to ext4"
-msgstr "Конвертация файловой системы ext3 в ext4"
-
-msgid "Convert ext3 to ext4"
-msgstr "Конвертация ext3 в ext4"
-
-msgid "Converting ext3 to ext4..."
-msgstr "Конвертация ext3 в ext4..."
 
 msgid "Cook Islands"
 msgstr "Cook Islands"
@@ -2531,9 +2565,6 @@ msgstr "DiSEqC порт %s: %s"
 msgid "DiSEqC-tester settings"
 msgstr "Настройки DiSEqC-тестер"
 
-msgid "Diasbled"
-msgstr "Отключен"
-
 msgid "Did you see all eight arrow heads?"
 msgstr "Вы видели все восемь наконечников стрелок?"
 
@@ -2632,13 +2663,6 @@ msgid ""
 msgstr ""
 "Вы действительно хотите проверить файловую систему на ошибки?\n"
 "Это займет некоторое время!"
-
-msgid ""
-"Do you really want to convert the filesystem?\n"
-"You cannot go back!"
-msgstr ""
-"Вы действительно хотите преобразовать файловую систему?\n"
-"Вы не сможете вернуться назад!"
 
 #, python-format
 msgid "Do you really want to delete %s?"
@@ -2741,6 +2765,9 @@ msgstr "Вы хотите обновить ваш ресивер?"
 msgid "Do you want to upgrade the package:\n"
 msgstr "Вы хотите обновить пакеты:\n"
 
+msgid "Dolby"
+msgstr ""
+
 msgid "Dominica"
 msgstr "Dominica"
 
@@ -2808,6 +2835,9 @@ msgstr "Выбор языка EPG 1"
 msgid "EPG language selection 2"
 msgstr "Выбор языка EPG 2"
 
+msgid "EPG only"
+msgstr "только EPG"
+
 msgid "EPG selection"
 msgstr "Выбор EPG"
 
@@ -2817,6 +2847,10 @@ msgstr "Настройки EPG"
 #, python-format
 msgid "ERROR - failed to scan (%s)!"
 msgstr "ОШИБКА - сканирование не удалось (%s)!"
+
+#, python-format
+msgid "ERROR downloading file %s"
+msgstr "Ошибка загрузки файла %s"
 
 msgid "East"
 msgstr "Восток"
@@ -2918,9 +2952,6 @@ msgstr "Включить выбор букетов при запуске мул�
 msgid "Enable fallback remote receiver"
 msgstr "Включить запасной удаленный ресивер"
 
-msgid "Enable fallback remote receiver for recordings"
-msgstr "Включить запасной удаленный ресивер для записей"
-
 msgid "Enable freesat EPG"
 msgstr "Включить freesat EPG"
 
@@ -2933,9 +2964,6 @@ msgstr "Включить родительский контроль"
 msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
 msgstr "Разрешить удаленный ресивер на enigma2, который попытается запустить стрим этого сервиса, если локальный тюнер занят.Укажите полный URL, включая http:// и номер порта (обычно ...:8001), пример: http://айпи_удаленного_ресивера:8001."
 
-msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally for recordings (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
-msgstr "Разрешить удаленный ресивер на enigma2, который попытается запустить стрим этого сервиса, если локальный тюнер для записи занят.Укажите полный URL, включая http:// и номер порта (обычно ...:8001), пример: http://айпи_удаленного_ресивера:8001."
-
 msgid "Enable teletext caching"
 msgstr "Включить кэширование телетекста"
 
@@ -2944,6 +2972,9 @@ msgstr "Включите эту настройку, если Вашей сист
 
 msgid "Enable timer conflict detection"
 msgstr "Включить обнаружение конфликтов таймера"
+
+msgid "Enable to display all true/false, yes/no, on/off and enable/disable set up options as a graphical switch."
+msgstr "Значение для таких параметров, как 'да/нет', 'включить/выключить' и 'вкл/выкл', будет заменено графическим переключателем."
 
 msgid "Enable volume control with arrow buttons"
 msgstr "Включить управление громкостью на кнопках со стрелками"
@@ -3048,6 +3079,10 @@ msgstr "Eritrea"
 msgid "Error"
 msgstr "Ошибка"
 
+#, python-format
+msgid "Error %s"
+msgstr "Ошибка %s"
+
 msgid "Error code"
 msgstr "Код ошибки"
 
@@ -3082,6 +3117,15 @@ msgstr "Ошибка запуска плагина"
 
 msgid "Error stop stream!"
 msgstr "Ошибка при остановке стрима!"
+
+msgid "Error when writing epg.dat on server"
+msgstr "Ошибка при записи epg.dat на сервере"
+
+msgid "Error while retreiving epg.dat from server"
+msgstr "Ошибка при получении epg.dat с сервера"
+
+msgid "Error while retreiving location of epg.dat on server"
+msgstr "Ошибка получения расположения файла epg.dat с сервера"
 
 #, python-format
 msgid ""
@@ -3294,6 +3338,15 @@ msgstr "FTA"
 msgid "Factory reset"
 msgstr "Сброс к дефолтным установкам"
 
+msgid ""
+"Factory reset will restore your receiver to its default configuration. All user data including system settings, tuner configuration, bouquets, services and plugins will be DELETED. Recordings and other files stored on HDD and USB media will remain intact. After completion, the system will restart automatically!\n"
+"\n"
+"Do you really want to proceed?"
+msgstr ""
+"При сбросе на заводские установки будут удалены все конфигурационные данные,включая букеты,сервисы, данные спутников. После завершения сброса, Ваш ресивер будет автоматически перезагружен!\n"
+"\n"
+"Действительно выполнить сброс на заводские установки?"
+
 msgid "Failed"
 msgstr "Неудачный"
 
@@ -3308,6 +3361,9 @@ msgstr "Falkland Islands (Malvinas)"
 
 msgid "Fallback remote receiver URL"
 msgstr "URL запасного удаленного ресивера"
+
+msgid "Fallback remote receiver setup"
+msgstr "Настройки удаленного резервного ресивера"
 
 #, python-format
 msgid "Fan %d"
@@ -3480,6 +3536,11 @@ msgstr "От :"
 msgid "Frontprocessor version: %s"
 msgstr "Версия фронтпроцессора: %s"
 
+#. TRANSLATORS: (aspect ratio policy: display as fullscreen, even if the content aspect ratio does not match the screen ratio)
+#, fuzzy
+msgid "Full screen"
+msgstr "Держать экран"
+
 msgid "Full transparency"
 msgstr "Полная прозрачность"
 
@@ -3500,6 +3561,9 @@ msgstr "G"
 
 msgid "GStreamer version: "
 msgstr "Версия GStreamer: "
+
+msgid "GUI Settings"
+msgstr "Настройки GUI"
 
 msgid ""
 "GUI needs a restart to apply a new language\n"
@@ -3692,6 +3756,10 @@ msgstr "HDMI колориметрия"
 msgid "HDMI Colorspace"
 msgstr "Цветовая модель HDMI"
 
+#, fuzzy
+msgid "HDMI HDR Type"
+msgstr "NIM & Тип тюнера"
+
 msgid "HDMI-CEC Source Active"
 msgstr "HDMI-CEC источник активный"
 
@@ -3700,6 +3768,12 @@ msgstr "HDMI-CEC источник неактивный"
 
 msgid "HDMI-CEC setup"
 msgstr "Настройки HDMI-CEC"
+
+msgid "HDR10"
+msgstr ""
+
+msgid "HLG"
+msgstr ""
 
 msgid "Haiti"
 msgstr "Haiti"
@@ -3907,6 +3981,24 @@ msgstr ""
 msgid "Image: "
 msgstr "Имидж: "
 
+msgid "Import channels and/or EPG from remote receiver URL also when the receiver is getting out of standby"
+msgstr "Импортировать каналы/EPG при выходе из режима ожидания"
+
+msgid "Import channels and/or EPG from remote receiver URL when receiver is booted"
+msgstr "Импортировать каналы /EPG при загрузке ресивера"
+
+msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
+msgstr "Импортировать каналы/EPG после рестарта enigma2"
+
+msgid "Import channels from fallback tuner"
+msgstr "Импорт каналов из резервного тюнера"
+
+msgid "Import from remote receiver URL"
+msgstr "Импорт из URL удаленного ресивера"
+
+msgid "Import remote receiver URL"
+msgstr "Импорт с удаленного ресивера URL"
+
 msgid "In order to record a timer, the TV was switched to the recording service!\n"
 msgstr ""
 "Для старта записи по таймеру,\n"
@@ -3943,6 +4035,10 @@ msgid "India"
 msgstr "India"
 
 msgid "Indonesia"
+msgstr "Indonesia"
+
+#, fuzzy
+msgid "Indonesian"
 msgstr "Indonesia"
 
 msgid "Info"
@@ -4165,7 +4261,7 @@ msgstr "Перейти к следующей метке"
 msgid "Jump to previous marked position"
 msgstr "Перейти к предыдущей метке"
 
-#. TRANSLATORS: (aspect ratio policy: display as fullscreen, even if this breaks the aspect)
+#. TRANSLATORS: (aspect ratio policy: scale as close to fullscreen as possible)
 msgid "Just scale"
 msgstr "Только масштаб"
 
@@ -4277,6 +4373,7 @@ msgstr "Хобби на отдыхе"
 msgid "Lesotho"
 msgstr "Lesotho"
 
+#. TRANSLATORS: (aspect ratio policy: black bars on top/bottom) in doubt, keep english term.
 msgid "Letterbox"
 msgstr "Letterbox"
 
@@ -4427,6 +4524,9 @@ msgstr "Главное меню"
 
 msgid "Maintain old EPG data for"
 msgstr "Сохранять прошедшие данные EPG для (мин)"
+
+msgid "Make it possible to manually initiate the channels import and/or EPG via the extension menu"
+msgstr "Добавить импорт в меню дополнений"
 
 msgid "Make this mark an 'in' point"
 msgstr "Сделать эту метку как точку 'в'"
@@ -4657,6 +4757,10 @@ msgstr "Конфигурация списка видео"
 msgid "Movie location"
 msgstr "Расположение видео"
 
+#, fuzzy
+msgid "Movie manager"
+msgstr "Файловый менеджер"
+
 msgid "Movie selection"
 msgstr "Выбор видео"
 
@@ -4884,6 +4988,9 @@ msgstr ""
 "Нет данных на транспондер!\n"
 "(Таймаут чтения PAT)"
 
+msgid "No data received yet"
+msgstr ""
+
 msgid "No delay"
 msgstr "Без задержки"
 
@@ -4892,6 +4999,9 @@ msgstr "Нет доступного описания."
 
 msgid "No displayable files on this medium found!"
 msgstr "Нет отображаемых файлов на этом носителе!"
+
+msgid "No epg.dat file found server"
+msgstr "Не найден сервер с epg.dat"
 
 msgid "No event info found, recording indefinitely."
 msgstr "Информация о событии не найдена, запись на неопределенное время."
@@ -5017,6 +5127,7 @@ msgstr "Нет, никогда"
 msgid "None"
 msgstr "Ничего"
 
+#. TRANSLATORS: (aspect ratio policy: display as fullscreen, with stretching the left/right)
 msgid "Nonlinear"
 msgstr "Nonlinear"
 
@@ -5063,6 +5174,12 @@ msgstr "Заметка: если активировано и вы хотите �
 msgid ""
 "Nothing to scan!\n"
 "Please setup your tuner settings before you start a service scan."
+msgstr ""
+"Нечего сканировать!\n"
+"Пожалуйста, настройте ваш тюнер перед началом сканирования сервисов."
+
+#, fuzzy
+msgid "Nothing to scan! Setup your tuner and try again."
 msgstr ""
 "Нечего сканировать!\n"
 "Пожалуйста, настройте ваш тюнер перед началом сканирования сервисов."
@@ -5757,9 +5874,6 @@ msgstr "Нажмите OK для выбора спутников"
 msgid "Press OK to select/deselect a CAId."
 msgstr "Нажмите OK, чтобы выбрать/отменить CAId."
 
-msgid "Press OK to start the scan"
-msgstr "Нажмите OK для начала сканирования"
-
 msgid "Press OK to toggle the selection"
 msgstr "Нажмите ОК для подтверждения или отмены"
 
@@ -6034,6 +6148,9 @@ msgstr "Регион"
 msgid "Relative"
 msgstr "относительная"
 
+msgid "Relevant PIDs routing"
+msgstr ""
+
 msgid "Reload"
 msgstr "Обновить"
 
@@ -6225,6 +6342,13 @@ msgstr "Возобновить с последней позиции"
 msgid "Resume position at %s"
 msgstr "Текущая позиция %s"
 
+#. TRANSLATORS: The string "Resuming playback" flashes for a moment
+#. TRANSLATORS: at the start of a movie, when the user has selected
+#. TRANSLATORS: "Resume from last position" as start behavior.
+#. TRANSLATORS: The purpose is to notify the user that the movie starts
+#. TRANSLATORS: in the middle somewhere and not from the beginning.
+#. TRANSLATORS: (Some translators seem to have interpreted it as a
+#. TRANSLATORS: question or a choice, but it is a statement.)
 msgid "Resuming playback"
 msgstr "Возобновление воспроизведения"
 
@@ -6312,6 +6436,10 @@ msgstr "SCR JESS"
 msgid "SCR Unicable"
 msgstr "SCR Unicable"
 
+#, fuzzy
+msgid "SDR"
+msgstr "SNR"
+
 msgid "SINGLE LAYER DVD"
 msgstr "SINGLE LAYER (один слой) DVD"
 
@@ -6386,9 +6514,6 @@ msgstr "Долгота спутника:"
 
 msgid "Satellites"
 msgstr "Спутники"
-
-msgid "Satfinder"
-msgstr "Сатфайндер"
 
 msgid "Sats"
 msgstr "Спутники"
@@ -6466,11 +6591,24 @@ msgstr "Сканирование %s диапазона"
 msgid "Scan additional SR"
 msgstr "Сканировать дополнительные SR"
 
+#, fuzzy, python-format
+msgid "Scan completed, %d channel found."
+msgid_plural "Scan completed, %d channels found."
+msgstr[0] "Сканирование завершено, %d канал найден"
+msgstr[1] "Сканирование завершено, %d канала найдено"
+msgstr[2] "Сканирование завершено, %d каналов найдено"
+
+msgid "Scan failed!"
+msgstr "Ошибка сканирования!"
+
 msgid "Scan files..."
 msgstr "Сканировать файлы..."
 
 msgid "Scan options"
 msgstr "Параметры сканирования"
+
+msgid "Scan state"
+msgstr "состояние поиска"
 
 msgid "Scan wireless networks"
 msgstr "Сканирование беспроводных сетей"
@@ -6482,19 +6620,23 @@ msgstr "Сканирование Вашей сети для поиска бес�
 msgid "Scanning %s..."
 msgstr "Сканирование %s..."
 
+#. TRANSLATORS: The stb is performing a channel scan, progress percentage is printed in '%d' (and '%%' will show a single '%' symbol)
+#, python-format
 msgid "Scanning - %d%% completed"
 msgid_plural "Scanning - %d%% completed"
 msgstr[0] "Сканирование - %d%% завершено"
 msgstr[1] "Сканирование - %d%% завершено"
 msgstr[2] "Сканирование - %d%% завершено"
 
+#, python-format
 msgid "Scanning completed, %d channel found"
 msgid_plural "Scanning completed, %d channels found"
 msgstr[0] "Сканирование завершено, %d канал найден"
 msgstr[1] "Сканирование завершено, %d канала найдено"
 msgstr[2] "Сканирование завершено, %d каналов найдено"
 
-msgid "Scan failed!"
+#, fuzzy
+msgid "Scanning failed!"
 msgstr "Ошибка сканирования!"
 
 msgid "Scanning..."
@@ -6560,8 +6702,9 @@ msgstr "Выберите '1.0' для стандартных committed пере�
 msgid "Select 'A' or 'B' if your aerial system requires this, otherwise select 'none'. If you are unsure select 'none'."
 msgstr "Выберите 'A' или 'B', если Ваша система требует этого, в остальных случаях выберите 'ничего'."
 
-msgid "Select 'Unicable' if this tuner will use a Unicable device. Для остальных настроек выберите 'FBC - автоматически'."
-msgstr "Выберите 'Unicable' ,если этот тюнер использует устройство Unicable. For all other setups select 'FBC automatic'."
+#, fuzzy
+msgid "Select 'Unicable' if this tuner will use a Unicable device. For all other setups select 'FBC automatic'."
+msgstr "Выберите 'да' ,что бы"
 
 msgid "Select 'band' if using a 'universal' LNB, otherwise consult your LNB spec sheet."
 msgstr "Выберите 'диапазон' при использовании универсального LNB, иначе обратитесь к спецификации LNB."
@@ -6681,6 +6824,9 @@ msgstr "Выбор файлов/папок для бэкапа"
 msgid "Select function"
 msgstr "Выбор функции"
 
+msgid "Select hard disk"
+msgstr "Выбор жесткого диска"
+
 msgid "Select horizontal resolution:"
 msgstr "Выбор горизонтального разрешения:"
 
@@ -6744,16 +6890,20 @@ msgstr "Выберите номер модели Вашего Unicable устр�
 msgid "Select the movie path"
 msgstr "выбрать путь к видео"
 
-msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+#, fuzzy
+msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr "Выберите спутник, который подключен к порту A вашего коммутатора."
 
-msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+#, fuzzy
+msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr "Выберите спутник, который подключен к порту B вашего коммутатора."
 
-msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+#, fuzzy
+msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr "Выберите спутник, который подключен к порту C вашего коммутатора."
 
-msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+#, fuzzy
+msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr "Выберите спутник, который подключен к порту D вашего коммутатора."
 
 msgid "Select the satellite you want to configure. Once that satellite is configured you can select and configure other satellites that will be accessed using this same tuner."
@@ -6791,6 +6941,9 @@ msgstr "Выберите видеорежим"
 
 msgid "Select wireless network"
 msgstr "Выберите беспроводную сеть"
+
+msgid "Select yes when you want to import channels and/or EPG from a different URL"
+msgstr "Выберите Да, когда Вы хотите импортировать каналы/EPG с другого URL-адреса"
 
 msgid "Select your ATSC provider."
 msgstr "Выбор Вашего ATSC провайдера."
@@ -6987,6 +7140,9 @@ msgstr "Установки"
 msgid "Setup"
 msgstr "Настройки"
 
+msgid "Setup hard disk"
+msgstr "Настройки жесткого диска"
+
 msgid "Setup menu"
 msgstr "Меню настроек"
 
@@ -7037,6 +7193,9 @@ msgstr "Показать PiP"
 
 msgid "Show SNR percentage instead of dB value"
 msgstr "Показать SNR проценты  вместо dB значения"
+
+msgid "Show True/False as graphical switch"
+msgstr "Использовать графический переключатель"
 
 msgid "Show VCR scart on main menu"
 msgstr "Показать 'Видеомагнитофон' в главном меню"
@@ -7142,6 +7301,18 @@ msgstr "Показать видео"
 
 msgid "Show multi channel EPG"
 msgstr "Показать мульти EPG каналов"
+
+msgid "Show notification when import channels and/or EPG from remote receiver URL did not complete"
+msgstr "Показывать уведомление, когда импорт каналов/EPG из удаленного ресивера URL не завершен"
+
+msgid "Show notification when import channels and/or EPG from remote receiver URL is completed"
+msgstr "Показывать уведомление, когда импорт каналов/EPG из удаленного ресивера URL завершен"
+
+msgid "Show notification when import channels was not successful"
+msgstr "Показывать уведомление, когда импорт каналов не удался"
+
+msgid "Show notification when import channels was successful"
+msgstr "Показывать уведомление, когда импорт каналов удался"
 
 msgid "Show packages to be upgraded"
 msgstr "Показать пакеты, которые будут обновлены"
@@ -7395,9 +7566,6 @@ msgstr "Solomon Islands"
 
 msgid "Somalia"
 msgstr "Somalia"
-
-msgid "Some error occurred - Please try later"
-msgstr "Произошла ошибка - пожалуйста, попробуйте позже"
 
 msgid "Some plugins are not available:\n"
 msgstr "Некоторые плагины недоступны:\n"
@@ -8067,6 +8235,7 @@ msgstr ""
 "Плагин менеджера дополнений ПО не установлен!\n"
 "Пожалуйста, установите его."
 
+#, python-format
 msgid "The status of the current image could not be checked because %s can not be reached."
 msgstr "Статус текущей бета версии не может быть проверен,одна из причин, %s не отвечает."
 
@@ -8157,23 +8326,14 @@ msgstr "Эта опция позволяет уменьшить блок-шум 
 msgid "This option allows to set the level of dynamic contrast of the picture."
 msgstr "Эта опция позволяет установить уровень динамической контрастности изображения."
 
-msgid "This option allows you to configure the Colordepth for UHD"
-msgstr "Этот параметр позволяет установить глубину цвета HDMI для UHD"
-
-msgid "This option allows you to configure the Colorimetry for HDR."
-msgstr "Эта опция позволяет вам настроить колориметрию для HDR."
-
-msgid "This option allows you to configure the Colorspace from Auto to RGB"
-msgstr "Этот параметр позволяет установить режим цветовой модели HDMI - от авто до RGB"
+msgid "This option allows you can to set the auto volume level."
+msgstr "Эта опция настраивает уровень автоматической громкости звука."
 
 msgid "This option allows you enable smoothing filter to control the dithering process."
 msgstr "Эта опция позволяет включить фильтр плавности для управления процессом сглаживания."
 
 msgid "This option allows you enable the vertical scaler dejagging."
 msgstr "Эта опция позволяет Вам включить вертикальное деформирование."
-
-msgid "This option allows you to show all symbols on the display."
-msgstr "Эта опция позволяет Вам показывать все символы на дисплее."
 
 msgid "This option allows you to add the softcam setup in the extensions menu."
 msgstr "Эта опция позволяет добавить 'Настройки эмулятора' в меню дополнений."
@@ -8186,6 +8346,19 @@ msgstr "Эта опция позволяет вам увеличивать зе�
 
 msgid "This option allows you to change the virtuell loadspeaker position."
 msgstr "Эта опция позволяет Вам изменить позицию виртуального динамика."
+
+msgid "This option allows you to configure the Colordepth for UHD"
+msgstr "Этот параметр позволяет установить глубину цвета HDMI для UHD"
+
+msgid "This option allows you to configure the Colorimetry for HDR."
+msgstr "Эта опция позволяет вам настроить колориметрию для HDR."
+
+msgid "This option allows you to configure the Colorspace from Auto to RGB"
+msgstr "Этот параметр позволяет установить режим цветовой модели HDMI - от авто до RGB"
+
+#, fuzzy
+msgid "This option allows you to configure the HDR type."
+msgstr "Эта опция позволяет вам настроить колориметрию для HDR."
 
 msgid "This option allows you to disable or change the virtuell loadspeaker position."
 msgstr "Эта опция позволяет Вам отключить или изменить позицию виртуального динамика."
@@ -8202,6 +8375,9 @@ msgstr "Эта настройка позволяет скрывать и сор�
 msgid "This option allows you to power off the display."
 msgstr "Эта опция позволяет отключить дисплей."
 
+msgid "This option allows you to show all symbols on the display."
+msgstr "Эта опция позволяет Вам показывать все символы на дисплее."
+
 msgid "This option allows you to show menu number quick links."
 msgstr "Эта опция позволяет показать номер меню, для быстрого перехода на него, через цифровые кнопки."
 
@@ -8213,9 +8389,6 @@ msgstr "Эта опция позволяет вам просматривать �
 
 msgid "This option can be useful for long HDMI cables."
 msgstr "Эта опция может быть полезна для длинных кабелей HDMI (более 5 метров)."
-
-msgid "This option allows you can to set the auto volume level."
-msgstr "Эта опция настраивает уровень автоматической громкости звука."
 
 msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr "Эта опция устанавливает уровень подавления шума от mosquito noise (Mosquito Noise - случайное алиасирование в результате сильного сжатия). Очевидно, это происходит за счет деталей изображения."
@@ -8602,6 +8775,9 @@ msgstr "Два"
 msgid "Type"
 msgstr "Тип"
 
+msgid "Type of LNB/device"
+msgstr "Тип LNB/устройства"
+
 msgid "Type of scan"
 msgstr "Тип сканирования"
 
@@ -8845,6 +9021,9 @@ msgstr "Использовать тип сканирования сервиса"
 
 msgid "User - bouquets"
 msgstr "Пользователь - букеты"
+
+msgid "User Mode"
+msgstr "Пользовательский режим"
 
 msgid "User defined"
 msgstr "Пользовательский вариант"
@@ -9367,15 +9546,6 @@ msgstr "Когда изображение на канале имеет соот�
 msgid "When the content has an aspect ratio of 4:3, choose whether to scale/stretch the picture."
 msgstr "Когда изображение на канале имеет соотношение сторон 4:3, выберите, следует ли масштабировать/растянуть картинку."
 
-msgid ""
-"Factory reset will restore your receiver to its default configuration. All user data including system settings, tuner configuration, bouquets, services and plugins will be DELETED. Recordings and other files stored on HDD and USB media will remain intact. After completion, the system will restart automatically!\n"
-"\n"
-"Do you really want to proceed?"
-msgstr ""
-"При сбросе на заводские установки будут удалены все конфигурационные данные,включая букеты,сервисы, данные спутников. После завершения сброса, Ваш ресивер будет автоматически перезагружен!\n"
-"\n"
-"Действительно выполнить сброс на заводские установки?"
-
 msgid "Where do you want to backup your settings?"
 msgstr "Где Вы хотите сохранить бэкап Ваших настроек?"
 
@@ -9599,9 +9769,6 @@ msgid ""
 msgstr ""
 "Вам потребуется компьютер подсоединенный к вашему ресиверу. Если вам необходимы дополнительные инструкции, пожалуйста, посетите сайт https://openpli.org\n"
 "Ваш ресивер должен быть остановлен. После выполнения Вами инструкций по обновлению с сайта, новое ПО запросит восстановление Ваших установок. "
-
-msgid "You system does not support ext4"
-msgstr "Ваша система не поддерживает ext4"
 
 msgid "Your backup succeeded. We will now continue to explain the further upgrade process."
 msgstr "Ваш бэкап создан. Теперь мы продолжим процесс обновления. "
@@ -10584,7 +10751,8 @@ msgstr "сохранить последний каталог при выходе
 msgid "save playlist on exit"
 msgstr "сохранить плейлист при выходе"
 
-msgid "Scan state"
+#, fuzzy
+msgid "scan state"
 msgstr "состояние поиска"
 
 msgid "science fiction/fantasy/horror"
@@ -10665,12 +10833,15 @@ msgstr "перемотка назад"
 msgid "skip forward"
 msgstr "перемотка вперед"
 
+#, python-format
 msgid "slot%s - %s (current image) with, backup"
 msgstr "слот%s - %s (текущий имидж), с бекапом"
 
+#, python-format
 msgid "slot%s - %s (current image), without backup"
 msgstr "слот%s - %s (текущий имидж), без бекапа"
 
+#, python-format
 msgid "slot%s - %s mode 1"
 msgstr "слот%s - %s режим 1"
 
@@ -10678,6 +10849,7 @@ msgstr "слот%s - %s режим 1"
 msgid "slot%s - %s mode 1 (current image)"
 msgstr "слот%s - %s режим 1 (текущий имидж)"
 
+#, python-format
 msgid "slot%s - %s mode 12"
 msgstr "слот%s - %s режим 12"
 
@@ -10685,9 +10857,11 @@ msgstr "слот%s - %s режим 12"
 msgid "slot%s - %s mode 12 (current image)"
 msgstr "слот%s - %s режим 12 (текущий имидж)"
 
+#, python-format
 msgid "slot%s - %s, with backup"
 msgstr "слот%s - %s, с бекапом"
 
+#, python-format
 msgid "slot%s - %s, without backup"
 msgstr "слот%s - %s, без бекапа"
 
@@ -10921,138 +11095,3 @@ msgstr "переключено"
 
 msgid "®"
 msgstr "®"
-
-msgid "Channel context menu"
-msgstr "Контекстное меню селектора каналов"
-
-msgid "Setup hard disk"
-msgstr "Настройки жесткого диска"
-
-msgid "Select hard disk"
-msgstr "Выбор жесткого диска"
-
-msgid "File manager"
-msgstr "Файловый менеджер"
-
-msgid "List of files"
-msgstr "Список файлов"
-
-msgid "Select files with 'OK' and then use 'Action' for select operation"
-msgstr "Выберите файлы с помощью 'OK', затем используйте 'Действие' для выбора операции"
-
-msgid "Copy to..."
-msgstr "Копировать в..."
-
-msgid "Move to..."
-msgstr "Переместить в..."
-
-msgid "Select operation:"
-msgstr "Выбор операции:"
-
-msgid "Select destination for move selected files..."
-msgstr "Выберите место назначения для перемещения выбранных файлов..."
-
-msgid "Action"
-msgstr "Действие"
-
-msgid "Allow quitting movieplayer with exit"
-msgstr "Разрешить выходить из видеоплеера кнопкой выход"
-
-msgid "Allow quit movieplayer with exit"
-msgstr "Разрешить выходить из видеоплеера кнопкой выход"
-
-msgid "An error occurred - Please try again later"
-msgstr "Произошла ошибка. Пожалуйста, повторите попытку позже."
-
-msgid "Also import at reboot/restart enigma2"
-msgstr "Импорт при перезагрузке ресивера/рестарт enigma2"
-
-msgid "Also import from the extension menu"
-msgstr "Добавить импорт в меню дополнений"
-
-msgid "Also import when box is leaving standby"
-msgstr "Импорт при выходе из режима ожидания"
-
-msgid "Channels and EPG"
-msgstr "каналы и EPG"
-
-msgid "Channels from fallback tuner failed %s"
-msgstr "Невозможно импортировать каналы с удаленного ресивера %s"
-
-msgid "Channels from fallback tuner imported"
-msgstr "Каналы удаленного ресивера импортированы!"
-
-msgid "Channels only"
-msgstr "только каналы"
-
-msgid "EPG only"
-msgstr "только EPG"
-
-msgid "ERROR downloading file %s"
-msgstr "Ошибка загрузки файла %s"
-
-msgid "Error %s"
-msgstr "Ошибка %s"
-
-msgid "Error when writing epg.dat on server"
-msgstr "Ошибка при записи epg.dat на сервере"
-
-msgid "Error while retreiving epg.dat from server"
-msgstr "Ошибка при получении epg.dat с сервера"
-
-msgid "Error while retreiving location of epg.dat on server"
-msgstr "Ошибка получения расположения файла epg.dat с сервера"
-
-msgid "Fallback remote receiver setup"
-msgstr "Настройки удаленного резервного ресивера"
-
-msgid "Import channels and/or EPG from remote receiver URL also when the receiver is getting out of standby"
-msgstr "Импортировать каналы/EPG при выходе из режима ожидания"
-
-msgid "Import channels and/or EPG from remote receiver URL when receiver is booted"
-msgstr "Импортировать каналы /EPG при загрузке ресивера"
-
-msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
-msgstr "Импортировать каналы/EPG после рестарта enigma2"
-
-msgid "Import channels from fallback tuner"
-msgstr "Импорт каналов из резервного тюнера"
-
-msgid "Import from remote receiver URL"
-msgstr "Импорт из URL удаленного ресивера"
-
-msgid "Make it possible to manually initiate the channels import and/or EPG via the extension menu"
-msgstr "Добавить импорт в меню дополнений"
-
-msgid "No epg.dat file found server"
-msgstr "Не найден сервер с epg.dat"
-
-msgid "Show notification when import channels and/or EPG from remote receiver URL did not complete"
-msgstr "Показывать уведомление, когда импорт каналов/EPG из удаленного ресивера URL не завершен"
-
-msgid "Show notification when import channels and/or EPG from remote receiver URL is completed"
-msgstr "Показывать уведомление, когда импорт каналов/EPG из удаленного ресивера URL завершен"
-
-msgid "Show notification when import channels was not successful"
-msgstr "Показывать уведомление, когда импорт каналов не удался"
-
-msgid "Show notification when import channels was successful"
-msgstr "Показывать уведомление, когда импорт каналов удался"
-
-msgid "Add seperate receiver URL for import"
-msgstr "Добавить другой ресивер URL для импорта"
-
-msgid "Import remote receiver URL"
-msgstr "Импорт с удаленного ресивера URL"
-
-msgid "Select yes when you want to import channels and/or EPG from a different URL"
-msgstr "Выберите Да, когда Вы хотите импортировать каналы/EPG с другого URL-адреса"
-
-msgid "Type of LNB/device"
-msgstr "Тип LNB/устройства"
-
-msgid "Show True/False as graphical switch"
-msgstr "Использовать графический переключатель"
-
-msgid "Enable to display all true/false, yes/no, on/off and enable/disable set up options as a graphical switch."
-msgstr "Значение для таких параметров, как 'да/нет', 'включить/выключить' и 'вкл/выкл', будет заменено графическим переключателем."

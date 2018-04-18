@@ -8,6 +8,9 @@ import os
 # It generates hotplug events, and gives you the list of
 # available and preferred modes, as well as handling the currently
 # selected mode. No other strict checking is done.
+
+config.av.edid_override = ConfigYesNo(default = True)
+
 class VideoHardware:
 	rates = { } # high-level, use selectable modes.
 
@@ -117,6 +120,7 @@ class VideoHardware:
 		self.current_port = None
 
 		self.readAvailableModes()
+		self.readPreferredModes()
 		self.widescreen_modes = set(["720p", "1080i", "1080p", "2160p", "2160p30"]).intersection(*[self.modes_available])
 
 		if "DVI-PC" in self.modes and not self.getModeList("DVI-PC"):
@@ -127,7 +131,6 @@ class VideoHardware:
 			del self.modes["Scart"]
 
 		self.createConfig()
-		self.readPreferredModes()
 
 		# take over old AVSwitch component :)
 		from Components.AVSwitch import AVSwitch
@@ -151,24 +154,33 @@ class VideoHardware:
 		self.modes_available = modes.split(' ')
 
 	def readPreferredModes(self):
-		try:
-			modes = open("/proc/stb/video/videomode_preferred").read()[:-1]
-			self.modes_preferred = modes.split(' ')
-		except IOError:
-			print "[VideoHardware] reading preferred modes failed, using all modes"
-			self.modes_preferred = self.modes_available
+		if config.av.edid_override.value == False:
+			try:
+				modes = open("/proc/stb/video/videomode_preferred").read()[:-1]
+				self.modes_preferred = modes.split(' ')
+			except IOError:
+				print "[VideoHardware] reading preferred modes failed, using all video modes"
+				self.modes_preferred = self.modes_available
 
-		if self.modes_preferred != self.last_modes_preferred:
-			self.last_modes_preferred = self.modes_preferred
-			print "[VideoHardware] hotplug on dvi"
-			self.on_hotplug("DVI") # must be DVI
+			if len(self.modes_preferred) <= 1:
+				self.modes_preferred = self.modes_available
+				print "[VideoHardware] reading preferred modes is empty, using all video modes"
+		else:
+			self.modes_preferred = self.modes_available
+			print "[VideoHardware] reading preferred modes override, using all video modes"
+
+		self.last_modes_preferred = self.modes_preferred
 
 	# check if a high-level mode with a given rate is available.
 	def isModeAvailable(self, port, mode, rate):
 		rate = self.rates[mode][rate]
 		for mode in rate.values():
-			if mode not in self.modes_available:
-				return False
+			if port == "DVI":
+				if mode not in self.modes_preferred:
+					return False
+			else:
+				if mode not in self.modes_available:
+					return False
 		return True
 
 	def isWidescreenMode(self, port, mode):
@@ -371,6 +383,5 @@ class VideoHardware:
 		except IOError:
 			pass
 
-config.av.edid_override = ConfigYesNo(default = False)
 video_hw = VideoHardware()
 video_hw.setConfiguredMode()
