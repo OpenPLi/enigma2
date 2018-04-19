@@ -51,6 +51,16 @@ class HardwareInfo:
 
 		self.device_model = self.device_model or self.device_name
 
+		# unify Xtrend device models
+		if self.device_model in ("et9000", "et9100", "et9200", "et9500"):
+			self.device_model = "et9x00"
+		elif self.device_model in ("et6000", "et6x00"):
+			self.device_model = "et6x00"
+		elif self.device_model in ("et5000", "et5x00"):
+			self.device_model = "et5x00"
+		elif self.device_model in ("et4000", "et4x00"):
+			self.device_model = "et4x00"
+
 		# only some early DMM boxes do not have HDMI hardware
 		self.device_hdmi =  self.device_model not in ("dm7025", "dm800", "dm8000")
 
