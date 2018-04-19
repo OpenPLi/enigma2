@@ -193,7 +193,7 @@ class ConfigListScreen:
 			x()
 
 	def handleInputHelpers(self):
-		if self["config"].getCurrent() is not None and (self["config"].getCurrent()[1].__class__.__name__ == 'ConfigText' or self["config"].getCurrent()[1].__class__.__name__ == 'ConfigPassword'):
+		if self["config"].getCurrent() is not None and self["config"].getCurrent()[1].__class__.__name__ in ('ConfigText', 'ConfigPassword'):
 				if "VKeyIcon" in self:
 					self["VirtualKB"].setEnabled(True)
 					self["VKeyIcon"].boolean = True
