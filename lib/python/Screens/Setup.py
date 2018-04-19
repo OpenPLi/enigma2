@@ -143,7 +143,8 @@ class Setup(ConfigListScreen, Screen):
 		self.moveToItem(currentItem)
 
 	def moveToItem(self, item):
-		self["config"].setCurrentIndex(self.getIndexFromItem(item))
+		if item != self["config"].getCurrent():
+			self["config"].setCurrentIndex(self.getIndexFromItem(item))
 
 	def getIndexFromItem(self, item):
 		return self["config"].list.index(item) if item in self["config"].list else 0
