@@ -21,7 +21,7 @@ def setdvbCiDelay(configElement):
 	configElement.save()
 
 def setRelevantPidsRouting(configElement):
-	open(SystemInfo["CI%dRelevantPidsRoutingSupport" % configElement.slotid], "w").write(configElement.value)
+	open(SystemInfo["CI%dRelevantPidsRoutingSupport" % configElement.slotid], "w").write("yes" if configElement.value else "no")
 
 def InitCiConfig():
 	config.ci = ConfigSubList()
@@ -34,11 +34,11 @@ def InitCiConfig():
 			config.ci[slot].static_pin = ConfigPIN(default = 0)
 			config.ci[slot].show_ci_messages = ConfigYesNo(default = True)
 			if SystemInfo["CI%dSupportsHighBitrates" % slot]:
-				config.ci[slot].canHandleHighBitrates = ConfigSelection(choices = [("no", _("no")), ("yes", _("yes"))], default = "yes")
+				config.ci[slot].canHandleHighBitrates = ConfigYesNo(default = True)
 				config.ci[slot].canHandleHighBitrates.slotid = slot
 				config.ci[slot].canHandleHighBitrates.addNotifier(setCIBitrate)
 			if SystemInfo["CI%dRelevantPidsRoutingSupport" % slot]:
-				config.ci[slot].relevantPidsRouting = ConfigSelection(choices = [("no", _("no")), ("yes", _("yes"))], default = "no")
+				config.ci[slot].relevantPidsRouting = ConfigYesNo(default = False)
 				config.ci[slot].relevantPidsRouting.slotid = slot
 				config.ci[slot].relevantPidsRouting.addNotifier(setRelevantPidsRouting)
 		if SystemInfo["CommonInterfaceCIDelay"]:

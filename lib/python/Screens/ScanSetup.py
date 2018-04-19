@@ -1296,7 +1296,7 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 		if not answer or self.scan_nims.value == "":
 			return
 		tlist = []
-		flags = None
+		flags = 0
 		removeAll = True
 		action = START_SCAN
 		index_to_scan = int(self.scan_nims.value)
@@ -1377,6 +1377,14 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 			elif self.scan_typecable.value == "complete":
 				if config.Nims[index_to_scan].cable.scan_type.value == "provider":
 					getInitialCableTransponderList(tlist, index_to_scan)
+				elif nimmanager.nim_slots[index_to_scan].supportsBlindScan():
+					flags |= eComponentScan.scanBlindSearch
+					self.addCabTransponder(tlist, 73000,
+												  (866000 - 73000) / 1000,
+												  eDVBFrontendParametersCable.Modulation_Auto,
+												  eDVBFrontendParametersCable.FEC_Auto,
+												  eDVBFrontendParametersCable.Inversion_Unknown)
+					removeAll = False
 				else:
 					action = SEARCH_CABLE_TRANSPONDERS
 
@@ -1437,7 +1445,7 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 			elif self.scan_type_atsc.value == "complete":
 				getInitialATSCTransponderList(tlist, index_to_scan)
 
-		flags = self.scan_networkScan.value and eComponentScan.scanNetworkSearch or 0
+		flags |= self.scan_networkScan.value and eComponentScan.scanNetworkSearch or 0
 
 		tmp = self.scan_clearallservices.value
 		if tmp == "yes":

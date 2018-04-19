@@ -230,7 +230,6 @@ def InitUsageConfig():
 	config.usage.remote_fallback_enabled = ConfigYesNo(default = False)
 	config.usage.remote_fallback = ConfigText(default = "", fixed_size = False)
 	config.usage.remote_fallback.addNotifier(remote_fallback_changed, immediate_feedback=False)
-	config.usage.remote_fallback_import_seperate = ConfigYesNo(default = False)
 	config.usage.remote_fallback_import_url = ConfigText(default = "", fixed_size = False)
 	config.usage.remote_fallback_import_url.addNotifier(remote_fallback_changed, immediate_feedback=False)
 	config.usage.remote_fallback_import = ConfigSelection(default = "", choices = [("", _("No")), ("channels", _("Channels only")), ("channels_epg", _("Channels and EPG")), ("epg", _("EPG only"))])
@@ -687,7 +686,7 @@ def InitUsageConfig():
 	config.autolanguage.audio_autoselect2 = ConfigSelection(choices=audio_language_choices, default="---")
 	config.autolanguage.audio_autoselect3 = ConfigSelection(choices=audio_language_choices, default="---")
 	config.autolanguage.audio_autoselect4 = ConfigSelection(choices=audio_language_choices, default="---")
-	config.autolanguage.audio_defaultac3 = ConfigYesNo(default = False)
+	config.autolanguage.audio_defaultac3 = ConfigYesNo(default = True)
 	config.autolanguage.audio_defaultddp = ConfigYesNo(default = False)
 	config.autolanguage.audio_usecache = ConfigYesNo(default = True)
 

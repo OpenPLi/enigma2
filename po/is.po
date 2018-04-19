@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-13 16:06+0330\n"
+"POT-Creation-Date: 2018-04-13 09:42+0200\n"
 "PO-Revision-Date: 2011-05-07 12:23+0200\n"
 "Last-Translator: Baldur <bsveinsson@gmail.com>\n"
 "Language-Team: Polar Team/LT Team <baddi@oreind.is>\n"
@@ -678,7 +678,8 @@ msgid ""
 msgstr ""
 
 #
-msgid "A graphical EPG for all services of an specific bouquet"
+#, fuzzy
+msgid "A graphical EPG for all services of a specific bouquet"
 msgstr "Myndrænt EPG fyrir allar rásir á ákveðnum rásavendi"
 
 #
@@ -690,8 +691,10 @@ msgstr ""
 "Upptaka hefur hafist:\n"
 "%s"
 
-msgid "A recording is currently running on the selected tuner. Please select a different tuner or consider to stop the recording to try again."
-msgstr ""
+#
+#, fuzzy
+msgid "A recording is currently running on the selected tuner. Please select a different tuner or stop the recording and try again."
+msgstr "Upptaka er nú í gangi. Stoppið vinsamlega upptökuna áður en að þú reynir að stilla staðsetjara."
 
 #
 msgid ""
@@ -878,6 +881,9 @@ msgstr "bæta við upptöku (endalaus)"
 msgid "Add recording (stop after current event)"
 msgstr "bæta við upptöku (stoppa eftir núverandi atriði)"
 
+msgid "Add seperate receiver URL for import"
+msgstr ""
+
 #
 #, fuzzy
 msgid "Add service"
@@ -996,6 +1002,9 @@ msgstr ""
 msgid "Allow quit movieplayer with exit"
 msgstr ""
 
+msgid "Allow quitting movieplayer with exit"
+msgstr ""
+
 msgid "Allow subtitle language to equal audio language"
 msgstr ""
 
@@ -1004,6 +1013,15 @@ msgstr ""
 
 msgid "Alpha"
 msgstr "Gegnsæi"
+
+msgid "Also import at reboot/restart enigma2"
+msgstr ""
+
+msgid "Also import from the extension menu"
+msgstr ""
+
+msgid "Also import when box is leaving standby"
+msgstr ""
 
 msgid "Also on standby"
 msgstr ""
@@ -1037,6 +1055,11 @@ msgstr ""
 
 msgid "An empty filename is illegal."
 msgstr "Það þarf að vera skráarnafn."
+
+#
+#, fuzzy
+msgid "An error occurred - Please try again later"
+msgstr "Það varð villa við niðurhal pakka listans. Vinsamlega prófaðu aftur."
 
 #
 #, fuzzy
@@ -1238,7 +1261,7 @@ msgstr "Höfundur:"
 msgid "Authoring mode"
 msgstr "Höfunda hamur"
 
-#. TRANSLATORS: (aspect ratio policy: always try to display as fullscreen, when there is no content (black bars) on left/right, even if this breaks the aspect.
+#. TRANSLATORS: (aspect ratio policy: automatically select the best aspect ratio mode)
 msgid "Auto"
 msgstr "Sjálfvirkt"
 
@@ -1658,6 +1681,10 @@ msgid "Channel Info"
 msgstr ""
 
 #, fuzzy
+msgid "Channel context menu"
+msgstr "Valmynd rásalista"
+
+#, fuzzy
 msgid "Channel list type"
 msgstr "Valmynd rásalista"
 
@@ -1682,6 +1709,21 @@ msgstr ""
 
 msgid "Channelnumber, picon and servicename"
 msgstr ""
+
+#, fuzzy
+msgid "Channels and EPG"
+msgstr "Valmynd rásalista"
+
+#, python-format
+msgid "Channels from fallback tuner failed %s"
+msgstr ""
+
+msgid "Channels from fallback tuner imported"
+msgstr ""
+
+#, fuzzy
+msgid "Channels only"
+msgstr "Rás"
 
 msgid "Chap."
 msgstr "Kafli."
@@ -2166,10 +2208,10 @@ msgstr ""
 msgid "Configure whether multi channel sound tracks should be downmixed to stereo."
 msgstr ""
 
-msgid "Configure whether or not an icon should be shown when your motorized dish is moving."
+msgid "Configure whether or not a rotor position will be displayed on the infobar"
 msgstr ""
 
-msgid "Configure whether or not an rotor position will be displayed on infobar"
+msgid "Configure whether or not an icon should be shown when your motorized dish is moving."
 msgstr ""
 
 msgid "Configure which access level to use for the configuration menu. Expert level gives access to all items."
@@ -2181,7 +2223,7 @@ msgstr ""
 msgid "Configure which tuner for recordings will be preferred, when more than one tuner is available."
 msgstr ""
 
-msgid "Configure which tuner type will be preferred, when the same service is available on different types of tuners. Choose 'no priority' to try each alternative one by one independent from tuner type."
+msgid "Configure which tuner type will be preferred when the same service is available on different types of tuners. Choose 'no priority' to try each alternative one by one regardless of the tuner type."
 msgstr ""
 
 msgid "Configure which tuner will be preferred, when more than one tuner is available. If set to 'auto' the system will give priority to the tuner having the lowest number of channels/satellites."
@@ -2193,8 +2235,9 @@ msgstr "Stilla innbyggt netkort"
 msgid "Configure your network again"
 msgstr "Stilla netkortið þitt aftur"
 
-msgid "Configure your network settings, and press OK to start the scan"
-msgstr ""
+#, fuzzy
+msgid "Configure your network settings and press OK to scan"
+msgstr "Stilla netkortið þitt aftur"
 
 msgid "Configure your wireless LAN again"
 msgstr "Stilla þráðlausa netkortið þitt aftur"
@@ -2269,15 +2312,6 @@ msgstr ""
 
 msgid "Contrast"
 msgstr "Skerpa"
-
-msgid "Convert ext3 filesystem to ext4"
-msgstr ""
-
-msgid "Convert ext3 to ext4"
-msgstr ""
-
-msgid "Converting ext3 to ext4..."
-msgstr ""
 
 msgid "Cook Islands"
 msgstr ""
@@ -2725,11 +2759,6 @@ msgstr "DiSEqC endurtekning"
 msgid "DiSEqC-tester settings"
 msgstr "DiSEqC prufu stillingar"
 
-#
-#, fuzzy
-msgid "Diasbled"
-msgstr "Óvirkt"
-
 msgid "Did you see all eight arrow heads?"
 msgstr ""
 
@@ -2860,11 +2889,6 @@ msgstr ""
 "Viltu örugglega athuga skráarkerfi?\n"
 "Það tekur langan tíma!"
 
-msgid ""
-"Do you really want to convert the filesystem?\n"
-"You cannot go back!"
-msgstr ""
-
 #
 #, python-format
 msgid "Do you really want to delete %s?"
@@ -2978,6 +3002,9 @@ msgstr ""
 msgid "Do you want to upgrade the package:\n"
 msgstr "Viltu uppfæra pakkann:\n"
 
+msgid "Dolby"
+msgstr ""
+
 msgid "Dominica"
 msgstr ""
 
@@ -3052,6 +3079,9 @@ msgstr ""
 msgid "EPG language selection 2"
 msgstr ""
 
+msgid "EPG only"
+msgstr ""
+
 #
 #, fuzzy
 msgid "EPG selection"
@@ -3063,6 +3093,10 @@ msgstr ""
 #, python-format
 msgid "ERROR - failed to scan (%s)!"
 msgstr "VILLA - gat ekki leitað (%s)!"
+
+#, python-format
+msgid "ERROR downloading file %s"
+msgstr ""
 
 #
 msgid "East"
@@ -3200,6 +3234,9 @@ msgstr ""
 msgid "Enable timer conflict detection"
 msgstr ""
 
+msgid "Enable to display all true/false, yes/no, on/off and enable/disable set up options as a graphical switch."
+msgstr ""
+
 msgid "Enable volume control with arrow buttons"
 msgstr ""
 
@@ -3317,6 +3354,11 @@ msgstr ""
 msgid "Error"
 msgstr "Villa"
 
+#
+#, fuzzy, python-format
+msgid "Error %s"
+msgstr "Villa"
+
 msgid "Error code"
 msgstr ""
 
@@ -3343,6 +3385,15 @@ msgid "Error executing plugin"
 msgstr "Villa við keyrslu íforrits"
 
 msgid "Error stop stream!"
+msgstr ""
+
+msgid "Error when writing epg.dat on server"
+msgstr ""
+
+msgid "Error while retreiving epg.dat from server"
+msgstr ""
+
+msgid "Error while retreiving location of epg.dat on server"
 msgstr ""
 
 #
@@ -3581,6 +3632,12 @@ msgstr ""
 msgid "Factory reset"
 msgstr "Verksmiðju stilling"
 
+msgid ""
+"Factory reset will restore your receiver to its default configuration. All user data including system settings, tuner configuration, bouquets, services and plugins will be DELETED. Recordings and other files stored on HDD and USB media will remain intact. After completion, the system will restart automatically!\n"
+"\n"
+"Do you really want to proceed?"
+msgstr ""
+
 #
 msgid "Failed"
 msgstr "Tókst ekki"
@@ -3595,6 +3652,9 @@ msgid "Falkland Islands (Malvinas)"
 msgstr ""
 
 msgid "Fallback remote receiver URL"
+msgstr ""
+
+msgid "Fallback remote receiver setup"
 msgstr ""
 
 #, python-format
@@ -3793,6 +3853,10 @@ msgstr ""
 msgid "Frontprocessor version: %s"
 msgstr ""
 
+#. TRANSLATORS: (aspect ratio policy: display as fullscreen, even if the content aspect ratio does not match the screen ratio)
+msgid "Full screen"
+msgstr ""
+
 msgid "Full transparency"
 msgstr ""
 
@@ -3815,6 +3879,11 @@ msgstr ""
 #, fuzzy
 msgid "GStreamer version: "
 msgstr "Ný útgáfa:"
+
+#
+#, fuzzy
+msgid "GUI Settings"
+msgstr "Stillingar"
 
 msgid ""
 "GUI needs a restart to apply a new language\n"
@@ -4032,6 +4101,9 @@ msgstr ""
 msgid "HDMI Colorspace"
 msgstr ""
 
+msgid "HDMI HDR Type"
+msgstr ""
+
 msgid "HDMI-CEC Source Active"
 msgstr ""
 
@@ -4039,6 +4111,12 @@ msgid "HDMI-CEC Source Inactive"
 msgstr ""
 
 msgid "HDMI-CEC setup"
+msgstr ""
+
+msgid "HDR10"
+msgstr ""
+
+msgid "HLG"
 msgstr ""
 
 #
@@ -4162,8 +4240,10 @@ msgstr ""
 msgid "Hotkey zap"
 msgstr ""
 
-msgid "How many minutes do you want add to record?"
-msgstr ""
+#
+#, fuzzy
+msgid "How many minutes do you want add to the recording?"
+msgstr "Í hvað margar mínútur viltu taka upp?"
 
 #
 msgid "How many minutes do you want to record?"
@@ -4270,6 +4350,24 @@ msgstr ""
 msgid "Image: "
 msgstr ""
 
+msgid "Import channels and/or EPG from remote receiver URL also when the receiver is getting out of standby"
+msgstr ""
+
+msgid "Import channels and/or EPG from remote receiver URL when receiver is booted"
+msgstr ""
+
+msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
+msgstr ""
+
+msgid "Import channels from fallback tuner"
+msgstr ""
+
+msgid "Import from remote receiver URL"
+msgstr ""
+
+msgid "Import remote receiver URL"
+msgstr ""
+
 #
 msgid "In order to record a timer, the TV was switched to the recording service!\n"
 msgstr "Til að taka upp á tíma stillingu þá var sjónvarpið stillt á upptökurás!\n"
@@ -4309,6 +4407,9 @@ msgid "India"
 msgstr ""
 
 msgid "Indonesia"
+msgstr ""
+
+msgid "Indonesian"
 msgstr ""
 
 #
@@ -4521,9 +4622,9 @@ msgid "Israel"
 msgstr ""
 
 msgid ""
-"It seems you did not see all the eight arrow heads. This means your TV is has overscan enabled, and is not configured properly.\n"
+"It seems you did not see all the eight arrow heads. This means your TV has overscan enabled, and is not configured properly.\n"
 "\n"
-"Please refer to your TVs manual to find how you can disable overscan on your TV. Look for terms like 'Just fit', 'Full width', etc. If you can't find it, ask other users at http://forums.openpli.org.\n"
+"Please refer to your TV's manual to find how you can disable overscan on your TV. Look for terms like 'Just fit', 'Full width', etc. If you can't find it, ask other users at http://forums.openpli.org.\n"
 "\n"
 msgstr ""
 
@@ -4581,7 +4682,7 @@ msgid "Jump to previous marked position"
 msgstr "fara til fyrri merkingar"
 
 #
-#. TRANSLATORS: (aspect ratio policy: display as fullscreen, even if this breaks the aspect)
+#. TRANSLATORS: (aspect ratio policy: scale as close to fullscreen as possible)
 #, fuzzy
 msgid "Just scale"
 msgstr "Bara full mynd"
@@ -4901,6 +5002,9 @@ msgstr "Aðalvalmynd"
 msgid "Maintain old EPG data for"
 msgstr ""
 
+msgid "Make it possible to manually initiate the channels import and/or EPG via the extension menu"
+msgstr ""
+
 #
 msgid "Make this mark an 'in' point"
 msgstr "Gera þetta merki að 'inn' merki"
@@ -5177,6 +5281,11 @@ msgstr "Handvirk stilling"
 msgid "Movie location"
 msgstr "Staðsetning bíómynda"
 
+#
+#, fuzzy
+msgid "Movie manager"
+msgstr "Hugbúnaðarpakka stjóri"
+
 #, fuzzy
 msgid "Movie selection"
 msgstr "Staðsetning bíómynda"
@@ -5446,6 +5555,9 @@ msgstr ""
 "Engin gögn á sendi!\n"
 "(Rann út á tíma við lestur PAT)"
 
+msgid "No data received yet"
+msgstr ""
+
 msgid "No delay"
 msgstr ""
 
@@ -5456,6 +5568,9 @@ msgstr "Engin lýsing tiltæk."
 #
 msgid "No displayable files on this medium found!"
 msgstr "Engar skrár fundust á þessu tæki!"
+
+msgid "No epg.dat file found server"
+msgstr ""
 
 #
 msgid "No event info found, recording indefinitely."
@@ -5663,6 +5778,13 @@ msgstr ""
 msgid ""
 "Nothing to scan!\n"
 "Please setup your tuner settings before you start a service scan."
+msgstr ""
+"Ekkert til að leita!\n"
+"Stilltu inn móttakarann áður en að þú byrjar rása leit."
+
+#
+#, fuzzy
+msgid "Nothing to scan! Setup your tuner and try again."
 msgstr ""
 "Ekkert til að leita!\n"
 "Stilltu inn móttakarann áður en að þú byrjar rása leit."
@@ -5925,8 +6047,9 @@ msgstr "Setja á pásu við enda myndar"
 msgid "Pause playback"
 msgstr "Held áfram spilun"
 
-msgid "Pauze/Continue playback"
-msgstr ""
+#, fuzzy
+msgid "Pause/Continue playback"
+msgstr "Halda áfram að spila"
 
 msgid "Percentage left"
 msgstr ""
@@ -6485,10 +6608,6 @@ msgstr ""
 msgid "Press OK to select/deselect a CAId."
 msgstr "Ýttu á OK til að velja eða ekki velja CAId."
 
-#
-msgid "Press OK to start the scan"
-msgstr "Ýtið á OK til að byrja að leita"
-
 msgid "Press OK to toggle the selection"
 msgstr ""
 
@@ -6802,6 +6921,9 @@ msgid "Region"
 msgstr ""
 
 msgid "Relative"
+msgstr ""
+
+msgid "Relevant PIDs routing"
 msgstr ""
 
 #
@@ -7140,6 +7262,11 @@ msgstr ""
 msgid "SCR Unicable"
 msgstr ""
 
+#
+#, fuzzy
+msgid "SDR"
+msgstr "SNR"
+
 msgid "SINGLE LAYER DVD"
 msgstr "SINGLE LAYER DVD"
 
@@ -7224,10 +7351,6 @@ msgstr ""
 #
 msgid "Satellites"
 msgstr "Gervihnettir"
-
-#
-msgid "Satfinder"
-msgstr "Gervihnattaleit"
 
 msgid "Sats"
 msgstr "Gervihn."
@@ -7318,12 +7441,29 @@ msgid "Scan additional SR"
 msgstr "Leita á fleiri SR"
 
 #
+#, fuzzy, python-format
+msgid "Scan completed, %d channel found."
+msgid_plural "Scan completed, %d channels found."
+msgstr[0] "%d rásir fundnar!"
+msgstr[1] "%d rásir fundnar!"
+
+#
+#, fuzzy
+msgid "Scan failed!"
+msgstr "Tókst ekki að stilla inn!"
+
+#
 #, fuzzy
 msgid "Scan files..."
 msgstr "Leita að skrám..."
 
 msgid "Scan options"
 msgstr ""
+
+#
+#, fuzzy
+msgid "Scan state"
+msgstr "leitar staða"
 
 #
 #, fuzzy
@@ -7580,6 +7720,11 @@ msgstr "Veldu skrár/möppur til afritunar"
 msgid "Select function"
 msgstr "Veldu stað fyrir afrit"
 
+#
+#, fuzzy
+msgid "Select hard disk"
+msgstr "Veldu mynd"
+
 msgid "Select horizontal resolution:"
 msgstr ""
 
@@ -7652,16 +7797,16 @@ msgstr ""
 msgid "Select the movie path"
 msgstr "velja slóð að mynd"
 
-msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
-msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attepmt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
+msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr ""
 
 msgid "Select the satellite you want to configure. Once that satellite is configured you can select and configure other satellites that will be accessed using this same tuner."
@@ -7705,6 +7850,9 @@ msgstr "Veldu mynd stillingu"
 #
 msgid "Select wireless network"
 msgstr "Veldu þráðlaust net"
+
+msgid "Select yes when you want to import channels and/or EPG from a different URL"
+msgstr ""
 
 #
 #, fuzzy
@@ -7934,6 +8082,11 @@ msgstr "Stillingar"
 msgid "Setup"
 msgstr "Uppsetning"
 
+#
+#, fuzzy
+msgid "Setup hard disk"
+msgstr "Harður diskur"
+
 msgid "Setup menu"
 msgstr ""
 
@@ -7991,6 +8144,9 @@ msgid "Show PIP"
 msgstr ""
 
 msgid "Show SNR percentage instead of dB value"
+msgstr ""
+
+msgid "Show True/False as graphical switch"
 msgstr ""
 
 msgid "Show VCR scart on main menu"
@@ -8115,6 +8271,18 @@ msgid "Show movies"
 msgstr ""
 
 msgid "Show multi channel EPG"
+msgstr ""
+
+msgid "Show notification when import channels and/or EPG from remote receiver URL did not complete"
+msgstr ""
+
+msgid "Show notification when import channels and/or EPG from remote receiver URL is completed"
+msgstr ""
+
+msgid "Show notification when import channels was not successful"
+msgstr ""
+
+msgid "Show notification when import channels was successful"
 msgstr ""
 
 msgid "Show packages to be upgraded"
@@ -8417,9 +8585,6 @@ msgid "Solomon Islands"
 msgstr ""
 
 msgid "Somalia"
-msgstr ""
-
-msgid "Some error occured - Please try later"
 msgstr ""
 
 msgid "Some plugins are not available:\n"
@@ -9154,7 +9319,7 @@ msgid ""
 "The yellow area means a 5% border area of a full HD picture will be invisible.\n"
 "The green area means a 10% border area of a full HD picture will be invisible.\n"
 "\n"
-"In other words, if the yellow box meets all for sides of your screen, then you have at least 5% overscan on all sides.\n"
+"In other words, if the yellow box touches all four sides of your screen, you have at least 5% overscan on all sides.\n"
 "\n"
 "If you see the tips of all eight arrowheads, then your TV has overscan disabled.\n"
 "\n"
@@ -9287,22 +9452,13 @@ msgstr ""
 msgid "This option allows to set the level of dynamic contrast of the picture."
 msgstr ""
 
-msgid "This option allows you can config the Colordepth for UHD"
-msgstr ""
-
-msgid "This option allows you can config the Colorimetry for HDR."
-msgstr ""
-
-msgid "This option allows you can config the Colorspace from Auto to RGB"
+msgid "This option allows you can to set the auto volume level."
 msgstr ""
 
 msgid "This option allows you enable smoothing filter to control the dithering process."
 msgstr ""
 
 msgid "This option allows you enable the vertical scaler dejagging."
-msgstr ""
-
-msgid "This option allows you show all symbols on display."
 msgstr ""
 
 msgid "This option allows you to add the softcam setup in the extensions menu."
@@ -9315,6 +9471,18 @@ msgid "This option allows you to boost the green tones in the picture."
 msgstr ""
 
 msgid "This option allows you to change the virtuell loadspeaker position."
+msgstr ""
+
+msgid "This option allows you to configure the Colordepth for UHD"
+msgstr ""
+
+msgid "This option allows you to configure the Colorimetry for HDR."
+msgstr ""
+
+msgid "This option allows you to configure the Colorspace from Auto to RGB"
+msgstr ""
+
+msgid "This option allows you to configure the HDR type."
 msgstr ""
 
 msgid "This option allows you to disable or change the virtuell loadspeaker position."
@@ -9332,6 +9500,9 @@ msgstr ""
 msgid "This option allows you to power off the display."
 msgstr ""
 
+msgid "This option allows you to show all symbols on the display."
+msgstr ""
+
 msgid "This option allows you to show menu number quick links."
 msgstr ""
 
@@ -9344,10 +9515,7 @@ msgstr ""
 msgid "This option can be useful for long HDMI cables."
 msgstr ""
 
-msgid "This option configures you can set auto volume level."
-msgstr ""
-
-msgid "This option set the level of surpression of musquito noise (Musquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
+msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr ""
 
 msgid "This option sets  the picture contrast."
@@ -9444,7 +9612,7 @@ msgid ""
 "This test checks whether your LAN adapter is set up for automatic IP address configuration with DHCP.\n"
 "If you get a \"disabled\" message:\n"
 " - then your LAN adapter is configured for manual IP setup\n"
-"- verify thay you have entered correct IP informations in the adapter setup dialog.\n"
+"- verify thay you have entered the correct IP information in the adapter setup dialog.\n"
 "If you get an \"enabeld\" message:\n"
 "-verify that you have a configured and working DHCP server in your network."
 msgstr ""
@@ -9804,6 +9972,11 @@ msgid "Type"
 msgstr "Gerð"
 
 #
+#, fuzzy
+msgid "Type of LNB/device"
+msgstr "Gerð leitunar"
+
+#
 msgid "Type of scan"
 msgstr "Gerð leitunar"
 
@@ -10074,6 +10247,11 @@ msgstr "Notuð leitunaraðferð"
 
 msgid "User - bouquets"
 msgstr ""
+
+#
+#, fuzzy
+msgid "User Mode"
+msgstr "Stillt af notanda"
 
 #
 msgid "User defined"
@@ -10474,10 +10652,10 @@ msgstr ""
 msgid "When enabled you can specify a timeframe to ignore the shutdown timer when the receiver is in standby mode"
 msgstr ""
 
-msgid "When enabled you can specify a timeframe were the inactivity sleeptimer is ignored. Not the detection is disabled during this timeframe but the inactivity timeout is disabled"
+msgid "When enabled you can specify a timeframe when the inactivity sleeptimer is ignored. Not the detection is disabled during this timeframe but the inactivity timeout is disabled"
 msgstr ""
 
-msgid "When enabled you can specify an extra timeframe were the inactivity sleeptimer is ignored. Not the detection is disabled during this timeframe but the inactivity timeout is disabled"
+msgid "When enabled you can specify an extra timeframe when the inactivity sleeptimer is ignored. Not the detection is disabled during this timeframe but the inactivity timeout is disabled"
 msgstr ""
 
 msgid "When enabled you can zap channels with the  CH+/-, B+/-, P+/- buttons instead of opening the channel selection list."
@@ -10561,7 +10739,7 @@ msgstr ""
 msgid "When enabled, measure power consumption to detect when the rotor stops turning (when supported by the tuner)."
 msgstr ""
 
-msgid "When enabled, number markers will be hiden."
+msgid "When enabled, number markers will be hidden."
 msgstr ""
 
 msgid "When enabled, reformat subtitles to match the width of the screen."
@@ -10646,19 +10824,6 @@ msgstr ""
 
 msgid "When the content has an aspect ratio of 4:3, choose whether to scale/stretch the picture."
 msgstr ""
-
-#
-msgid ""
-"When you do a factory reset, you will lose ALL your configuration data\n"
-"(including bouquets, services, satellite data ...)\n"
-"After completion of factory reset, your receiver will restart automatically!\n"
-"\n"
-"Really do a factory reset?"
-msgstr ""
-"Þegar þú velur verksmiðju stillingu þá missir þú út ALLAR stillingar\n"
-"(þar með talið rásavendi, rásir, gervihnattaupplýsingar...)\n"
-"Eftir að búið er að setja inn verksmiðju stillingar þá mun móttakarinn endurræsa sig.\n"
-"Ertu viss um að þú viljir setja inn verksmiðju stillingar?"
 
 #
 msgid "Where do you want to backup your settings?"
@@ -10811,7 +10976,7 @@ msgstr "Setja inn afrit"
 msgid "Yesterday"
 msgstr ""
 
-msgid "You PIN code is 0000. This is the default PIN code and it disable parental control!\n"
+msgid "You PIN code is 0000. This is the default PIN code and it disables parental control!\n"
 msgstr ""
 
 #, python-format
@@ -10858,7 +11023,7 @@ msgid ""
 msgstr ""
 
 msgid ""
-"You did not see all eight arrow heads. This means your TV has overscan enabled and presents you with a zoomed-in picture, causing you to loose part of a full HD screen. In addition this you may also miss parts of the user interface, for example volume bars and more.\n"
+"You did not see all eight arrow heads. This means your TV has overscan enabled and presents you with a zoomed-in picture, causing you to loose part of a full HD screen. In addition to this you may also miss parts of the user interface, for example volume bars and more.\n"
 "\n"
 "You can now try to resize and change the position of the user interface until you see the eight arrow heads.\n"
 "\n"
@@ -10889,9 +11054,6 @@ msgstr ""
 msgid ""
 "You need a PC connected to your receiver. If you need further instructions, please visit the website https://openpli.org\n"
 "Your receiver will now be halted. After you have performed the update instructions from the website, your new firmware will ask you to restore your settings."
-msgstr ""
-
-msgid "You system does not support ext4"
 msgstr ""
 
 #
@@ -11163,7 +11325,7 @@ msgstr ""
 msgid "always"
 msgstr ""
 
-msgid "and never ask again this session again"
+msgid "and never ask in this session again"
 msgstr ""
 
 msgid "and never ask this again"
@@ -12399,250 +12561,3 @@ msgstr "stokkið"
 
 msgid "®"
 msgstr ""
-
-#
-#~ msgid "A recording is currently running. Please stop the recording before trying to configure the positioner."
-#~ msgstr "Upptaka er nú í gangi. Stoppið vinsamlega upptökuna áður en að þú reynir að stilla staðsetjara."
-
-#
-#~ msgid "Action on long powerbutton press"
-#~ msgstr "Hvað skal gera ef ýtt er lengi á power takka"
-
-#~ msgid "Action on short powerbutton press"
-#~ msgstr "Hvað skal gera ef ýtt er stutt á straumrofa"
-
-#~ msgid "Blue boost"
-#~ msgstr "Auka bláan"
-
-#~ msgid "Changelog"
-#~ msgstr "Breytingaskrá"
-
-#~ msgid "Coderate HP"
-#~ msgstr "Gagnahraði HP"
-
-#~ msgid "Coderate LP"
-#~ msgstr "Gagnahraði LP"
-
-#~ msgid "Conflicting timer"
-#~ msgstr "Tímastilling skarast"
-
-#~ msgid "Constellation"
-#~ msgstr "Constellation"
-
-#~ msgid "Current version:"
-#~ msgstr "Núverandi útgáfa:"
-
-#~ msgid "Currently installed image"
-#~ msgstr "Núverandi stýrikerfi"
-
-#
-#~ msgid "Do you want to do another manual service scan?"
-#~ msgstr "Viltu leita aftur handvirkt?"
-
-#
-#~ msgid "Download"
-#~ msgstr "Hlaða niður"
-
-#, fuzzy
-#~ msgid "Download %s from server"
-#~ msgstr "Hleð niður %s frá vefþjón"
-
-#~ msgid "Download .NFI-files for USB-flasher"
-#~ msgstr "Hlaða niður .NFI skrár fyrir keyranlegt USB"
-
-#
-#~ msgid "Flashing failed"
-#~ msgstr "Forritun tókt ekki"
-
-#
-#~ msgid "Frontprocessor version: %d"
-#~ msgstr "Útgáfa framheila: %d"
-
-#~ msgid "Get latest experimental image"
-#~ msgstr "Ná í nýjustu prufuútgáfu stýrikerfis"
-
-#~ msgid "Get latest release image"
-#~ msgstr "Ná í nýjasta útgefið stýrikerfi"
-
-#
-#~ msgid "Green boost"
-#~ msgstr "Auka grænan"
-
-#
-#, fuzzy
-#~ msgid "Hierarchy information"
-#~ msgstr "Stigskipta upplýsingar"
-
-#
-#, fuzzy
-#~ msgid "Immediate shutdown"
-#~ msgstr "slökkva strax"
-
-#, fuzzy
-#~ msgid "Install softcam"
-#~ msgstr "Set inn hugbúnað..."
-
-#
-#~ msgid "Intermediate"
-#~ msgstr "millistig"
-
-#
-#~ msgid "Log results to harddisk"
-#~ msgstr "Skýrslur á harðadisk"
-
-#~ msgid "Multiplex"
-#~ msgstr "Margar rásir"
-
-#, fuzzy
-#~ msgid "NFI image flashing"
-#~ msgstr "NFI stýrikerfis forritun"
-
-#
-#~ msgid "NFI image flashing completed. Press Yellow to Reboot!"
-#~ msgstr "NFI forritun er lokið. Ýttu á gulan til að endurræsa!"
-
-#~ msgid "NIM"
-#~ msgstr "NIM"
-
-#
-#~ msgid "New version:"
-#~ msgstr "Ný útgáfa:"
-
-#
-#~ msgid "No details for this image file"
-#~ msgstr "Engar upplýsingar um þetta stýrikerfi"
-
-#
-#~ msgid "PIDs"
-#~ msgstr "PIDs"
-
-#
-#~ msgid "Please check your network settings!"
-#~ msgstr "Vinsamlega athugaðu stillingar netkerfis!"
-
-#~ msgid "Please select an NFI file and press green key to flash!"
-#~ msgstr "Vinsamlega veldu NFI stýrikerfi og ýttu á græna takkann til að setja inn!"
-
-#~ msgid "Prepare another USB stick for image flashing"
-#~ msgstr "Undirbúa annan USB staut fyrir stýrikerfis forritun"
-
-#
-#~ msgid "Provider to scan"
-#~ msgstr "Sendandi sem leita á"
-
-#
-#~ msgid "Restore is running..."
-#~ msgstr "Set inn afrit..."
-
-#~ msgid "SID"
-#~ msgstr "SID"
-
-#, fuzzy
-#~ msgid "Select an image to be downloaded"
-#~ msgstr "Veldu stýrikerfi til að hlaða niður"
-
-#~ msgid "Select desired image from feed list"
-#~ msgstr "Veldu stýrikerfi af listanum"
-
-#~ msgid "Shall the USB stick wizard proceed and program the image file %s into flash memory?"
-#~ msgstr "Á USB stauts ráðgjafi  að halda áfram og setja stýrikerfi %s inn í minni móttakarans?"
-
-#
-#, fuzzy
-#~ msgid "Show shutdown menu"
-#~ msgstr "sýna slökkva valmynd"
-
-#
-#~ msgid "Terrestrial provider"
-#~ msgstr "Sendandi á landi"
-
-#~ msgid ""
-#~ "The USB stick was prepared to be bootable.\n"
-#~ "Now you can download an NFI image file!"
-#~ msgstr ""
-#~ "USB stauturinn var gerður ræsanlegur.\n"
-#~ "Núna getur þú hlaðið niður NFI  stýrikerfis skrá!"
-
-#
-#~ msgid ""
-#~ "The following device was found:\n"
-#~ "\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Do you want to write the USB flasher to this stick?"
-#~ msgstr ""
-#~ "Eftirfarandi tæki fannst:\n"
-#~ "\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Viltu skrifa USB keyrslu skrá á þennan staut?"
-
-#~ msgid "The md5sum validation failed, the file may be corrupted!"
-#~ msgstr "Md5sum prufun tókst ekki, skráin er sennilega skemmd!"
-
-#
-#~ msgid "The results have been written to %s."
-#~ msgstr "Útkoman hefur verið skrifuð á %s."
-
-#~ msgid "The wizard found a configuration backup. Do you want to restore your old settings from %s?"
-#~ msgstr "Ráðgjafinn fann afrit af stillingum. Viltu setja inn stillingar síðan %s?"
-
-#
-#, fuzzy
-#~ msgid "Timer editor"
-#~ msgstr "Breyta Tímastillingum"
-
-#
-#, fuzzy
-#~ msgid "Tuner status %s"
-#~ msgstr "Móttakari"
-
-#
-#~ msgid "USB stick wizard"
-#~ msgstr "USB stauta stjóri"
-
-#
-#~ msgid "Unicable"
-#~ msgstr "Unicable"
-
-#
-#~ msgid "Unicable LNB"
-#~ msgstr "Unicable LNB"
-
-#
-#~ msgid "Unicable Martix"
-#~ msgstr "Unicable Martix"
-
-#
-#~ msgid "What do you want to scan?"
-#~ msgstr "Að hverju viltu leita?"
-
-#
-#~ msgid "Yes, do another manual scan now"
-#~ msgstr "Já, leitaðu aftur handvirkt núna"
-
-#
-#~ msgid "You have chosen to create a new .NFI flasher bootable USB stick. This will repartition the USB stick and therefore all data on it will be erased."
-#~ msgstr "Þú hefur valið að búa til nýjan keyranlegan .NFI USB staut. Þetta veldur því að öllum gögnum af USB stautum verður eytt."
-
-#
-#~ msgid ""
-#~ "Your frontprocessor firmware must be upgraded.\n"
-#~ "Press OK to start upgrade."
-#~ msgstr ""
-#~ "Það þarf að uppfæra heila í framtölvu.\n"
-#~ "Ýtið á OK til að byrja uppfærslu."
-
-#~ msgid "Zap back to service before tuner setup?"
-#~ msgstr "Fara aftur á rás fyrir stillingu móttakara?"
-
-#
-#~ msgid "continue"
-#~ msgstr "halda áfram"
-
-#~ msgid "currently installed image: %s"
-#~ msgstr "núverandi stýrikerfi: %s"
-
-#
-#~ msgid "not used"
-#~ msgstr "ekki notað"

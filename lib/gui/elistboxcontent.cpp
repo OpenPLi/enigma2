@@ -454,22 +454,33 @@ void eListboxPythonConfigContent::paint(gPainter &painter, eWindowStyle &style, 
 						int size = (pvalue && PyInt_Check(psize)) ? PyInt_AsLong(psize) : 100;
 
 							/* calc. slider length */
-						int width = (m_itemsize.width() - m_seperation - 7) * value / size;
+						int width = (m_itemsize.width() - m_seperation - 15) * value / size;
 						int height = m_itemsize.height();
 
 
 							/* draw slider */
 						//painter.fill(eRect(offset.x() + m_seperation, offset.y(), width, height));
-						//hack - make it customizable
-						ePoint tl(offset.x() + m_seperation, offset.y() + 1);
-						ePoint tr(offset.x() + m_itemsize.width() - 1, tl.y());
-						ePoint bl(tl.x(), offset.y() + m_itemsize.height() - 2);
-						ePoint br(tr.x(), bl.y());
-						painter.line(tl, tr);
-						painter.line(tr, br);
-						painter.line(br, bl);
-						painter.line(bl, tl);
-						painter.fill(eRect(offset.x() + m_seperation + 3, offset.y() + 5, width, height - 10));
+						if (m_slider_height % 2 != height % 2)
+							m_slider_height -= 1;
+						if(m_slider_height + 2*m_slider_space >= height) // frame out of selector = without frame
+							m_slider_space = 0;
+						int slider_y_offset = (height - m_slider_height) / 2;
+						if (m_slider_space)
+						{
+							ePoint tl(offset.x() + m_seperation, offset.y() + slider_y_offset - m_slider_space - 1);
+							ePoint tr(offset.x() + m_itemsize.width() - 15 - 1, tl.y());
+							ePoint bl(tl.x(), offset.y() + slider_y_offset + m_slider_height + m_slider_space);
+							ePoint br(tr.x(), bl.y());
+							painter.line(tl, tr);
+							painter.line(tr, br);
+							painter.line(br, bl);
+							painter.line(bl, tl);
+							painter.fill(eRect(offset.x() + m_seperation + m_slider_space + 1, offset.y() + slider_y_offset, width - 2*(m_slider_space + 1), m_slider_height));
+						}
+						else
+						{
+							painter.fill(eRect(offset.x() + m_seperation, offset.y() + slider_y_offset, width, m_slider_height));
+						}
 
 							/* pvalue is borrowed */
 					} else if (!strcmp(atype, "mtext"))

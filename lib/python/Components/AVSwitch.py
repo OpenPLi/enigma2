@@ -66,13 +66,17 @@ class AVSwitch:
 def InitAVSwitch():
 	config.av = ConfigSubsection()
 	config.av.yuvenabled = ConfigBoolean(default=True)
-	colorformat_choices = {"cvbs": _("CVBS"), "rgb": _("RGB"), "svideo": _("S-Video")}
+	colorformat_choices = {"cvbs": _("CVBS")}
 
-	# when YUV is not enabled, don't let the user select it
-	if config.av.yuvenabled.value:
+	# when YUV, Scart or S-Video is not support by HW, don't let the user select it
+	if SystemInfo["HasYPbPr"]:
 		colorformat_choices["yuv"] = _("YPbPr")
+	if SystemInfo["HasScart"]:
+		colorformat_choices["rgb"] = _("RGB")
+	if SystemInfo["HasSVideo"]:
+		colorformat_choices["svideo"] = _("S-Video")
 
-	config.av.colorformat = ConfigSelection(choices=colorformat_choices, default="rgb")
+	config.av.colorformat = ConfigSelection(choices=colorformat_choices, default="cvbs")
 	config.av.aspectratio = ConfigSelection(choices={
 			"4_3_letterbox": _("4:3 Letterbox"),
 			"4_3_panscan": _("4:3 PanScan"),
@@ -113,10 +117,14 @@ def InitAVSwitch():
 	"pillarbox": _("Pillarbox"),
 	# TRANSLATORS: (aspect ratio policy: cropped content on left/right) in doubt, keep english term
 	"panscan": _("Pan&scan"),
-	# TRANSLATORS: (aspect ratio policy: display as fullscreen, with stretching the left/right)
-	"nonlinear": _("Nonlinear"),
 	# TRANSLATORS: (aspect ratio policy: scale as close to fullscreen as possible)
 	"scale": _("Just scale")}
+	try:
+		if "nonlinear" in open("/proc/stb/video/policy_choices").read():
+			# TRANSLATORS: (aspect ratio policy: display as fullscreen, with stretching the left/right)
+			policy_choices.update({"nonlinear": _("Nonlinear")})
+	except:
+		pass
 	try:
 		if "full" in open("/proc/stb/video/policy_choices").read():
 			# TRANSLATORS: (aspect ratio policy: display as fullscreen, even if the content aspect ratio does not match the screen ratio)

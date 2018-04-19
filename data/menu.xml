@@ -31,7 +31,7 @@
 				<item text="Tuner configuration" entryID="tuner_setup"><screen module="Satconfig" screen="NimSelection"/></item>
 				<item text="Automatic scan" entryID="auto_scan"><screen module="ScanSetup" screen="ScanSimple"/></item>
 				<item text="Manual scan" entryID="manual_scan"><screen module="ScanSetup"/></item>
-				<item level="0" entryID="fallbacktuner_settings"><setup id="fallbacktuner"/></item>
+				<item text="Fallback remote receiver setup" entryID="fallbacktuner_settings"><screen module="SetupFallbacktuner"/></item>
 			</menu>
 			<menu weight="5" level="0" text="System" entryID="system_selection">
 				<id val="system"/>
@@ -44,14 +44,19 @@
 				</menu>
 
 				<item level="0" entryID="usage_setup"><setup id="usage"/></item>
-				<item level="0" entryID="user_interface"><setup id="userinterface"/></item>
-				<item level="1" entryID="rfmod_setup" requires="RfModulator"><setup id="RFmod"/></item>
 
+				<menu level="0" text="GUI Settings" entryID="gui_settings">
+				<id val="gui"/>
+				<item level="0" text="Language" entryID="language_setup"><screen module="LanguageSelection"/></item>
+				<item level="0" entryID="timezone_setup"><setup id="timezone"/></item>
+				<item level="2" entryID="epg_settings"><setup id="epgsettings"/></item>
+				<item level="0" entryID="user_interface"><setup id="userinterface"/></item>
+				</menu>
+				<item level="1" entryID="rfmod_setup" requires="RfModulator"><setup id="RFmod"/></item>
 				<menu level="0" text="Expert settings" entryID="expert_selection">
 				<id val="expert"/>
-				<item level="2" entryID="epg_settings"><setup id="epgsettings"/></item>
+				<item level="0" entryID="accesslevel_setup"><setup id="accesslevel"/></item>
 				<item level="0" entryID="recording_setup"><setup id="recording"/></item>
-
 
 					<menu level="0" text="Harddisk" entryID="hardisk_selection" requires="Harddisk">
 					<id val="harddisk"/>
@@ -64,8 +69,6 @@
 				<item entryID="lcd_setup" requires="Display"><setup level="1" id="lcd"/></item>
 				<item entryID="keyboard_setup" text="Keyboard"><setup id="keyboard"/></item>
 				<item level="2" text="Recording paths" entryID="RecordPaths"><screen module="RecordPaths" screen="RecordPathsSettings"/></item>
-				<item level="0" text="Language" entryID="language_setup"><screen module="LanguageSelection"/></item>
-				<item level="0" entryID="timezone_setup"><setup id="timezone"/></item>
 				<item level="1" text="Hotkey" entryID="hotkey_setup"><screen module="Hotkey" screen="HotkeySetup"/></item>
 				</menu>
 			</menu>

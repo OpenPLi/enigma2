@@ -440,6 +440,8 @@ class BufferIndicator(Screen):
 		Screen.__init__(self, session)
 		self["status"] = Label()
 		self.mayShow = False
+		self.mayShowTimer = eTimer()
+		self.mayShowTimer.callback.append(self.mayShowEndTimer)
 		self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
 			{
 				iPlayableService.evBuffering: self.bufferChanged,
@@ -449,22 +451,32 @@ class BufferIndicator(Screen):
 
 	def bufferChanged(self):
 		if self.mayShow:
-			service = self.session.nav.getCurrentService()
-			info = service and service.info()
-			if info:
-				value = info.getInfo(iServiceInformation.sBuffer)
-				if value and value != 100:
-					self["status"].setText(_("Buffering %d%%") % value)
-					if not self.shown:
-						self.show()
+			value = self.getBufferValue()
+			if value and value != 100:
+				self["status"].setText(_("Buffering %d%%") % value)
+				if not self.shown:
+					self.show()
 
 	def __evStart(self):
-		self.mayShow = True
 		self.hide()
+		self.mayShow = False
+		self.mayShowTimer.start(1000, True)
 
 	def __evGstreamerPlayStarted(self):
 		self.mayShow = False
+		self.mayShowTimer.stop()
 		self.hide()
+
+	def	mayShowEndTimer(self):
+		self.mayShow = True
+		if self.getBufferValue() == 0:
+			self["status"].setText(_("No data received yet"))
+			self.show()
+
+	def getBufferValue(self):
+		service = self.session.nav.getCurrentService()
+		info = service and service.info()
+		return info and info.getInfo(iServiceInformation.sBuffer)
 
 class InfoBarBuffer():
 	def __init__(self):

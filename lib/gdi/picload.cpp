@@ -1027,9 +1027,20 @@ int ePicLoad::getData(ePtr<gPixmap> &result)
 		}
 		unsigned int* row_buffer;
 		if (yoff != 0) {
-			row_buffer = (unsigned int *) tmp_buffer;
-			for (int x = 0; x < m_filepara->max_x; ++x) // fill first line
-				*row_buffer++ = background;
+			if (m_filepara->bits == 8)
+			{
+				unsigned char* row_buffer;
+				row_buffer = (unsigned char *) tmp_buffer;
+				for (int x = 0; x < m_filepara->max_x; ++x) // fill first line
+					*row_buffer++ = background;
+			}
+			else
+			{
+				unsigned int* row_buffer;
+				row_buffer = (unsigned int *) tmp_buffer;
+				for (int x = 0; x < m_filepara->max_x; ++x) // fill first line
+					*row_buffer++ = background;
+			}
 			int y;
 			#pragma omp parallel for
 			for (y = 1; y < yoff; ++y) // copy from first line
@@ -1041,13 +1052,25 @@ int ePicLoad::getData(ePtr<gPixmap> &result)
 					m_filepara->max_x * surface->bypp);
 		}
 		if (xoff != 0) {
-			row_buffer = (unsigned int *) (tmp_buffer + yoff * surface->stride);
-			int x;
-			for (x = 0; x < xoff; ++x) // fill left side of first line
-				*row_buffer++ = background;
-			row_buffer += scrx;
-			for (x = xoff + scrx; x < m_filepara->max_x; ++x) // fill right side of first line
-				*row_buffer++ = background;
+			if (m_filepara->bits == 8)
+			{
+				unsigned char* row_buffer = (unsigned char *) (tmp_buffer + yoff * surface->stride);
+				int x;
+				for (x = 0; x < xoff; ++x) // fill left side of first line
+					*row_buffer++ = background;
+				row_buffer += scrx;
+				for (x = xoff + scrx; x < m_filepara->max_x; ++x) // fill right side of first line
+					*row_buffer++ = background;
+			}
+			else {
+				unsigned int* row_buffer = (unsigned int *) (tmp_buffer + yoff * surface->stride);
+				int x;
+				for (x = 0; x < xoff; ++x) // fill left side of first line
+					*row_buffer++ = background;
+				row_buffer += scrx;
+				for (x = xoff + scrx; x < m_filepara->max_x; ++x) // fill right side of first line
+					*row_buffer++ = background;
+			}
 			#pragma omp parallel for
 			for (int y = yoff + 1; y < scry; ++y) { // copy from first line
 				memcpy(tmp_buffer + y*surface->stride,

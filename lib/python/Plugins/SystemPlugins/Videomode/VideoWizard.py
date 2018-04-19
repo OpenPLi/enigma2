@@ -5,6 +5,7 @@ from VideoHardware import video_hw
 
 from Components.Pixmap import Pixmap
 from Components.config import config, ConfigBoolean, configfile
+from Components.SystemInfo import SystemInfo
 
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from Tools.HardwareInfo import HardwareInfo
@@ -133,9 +134,13 @@ class VideoWizard(WizardLanguage, Rc):
 	def modeSelect(self, mode):
 		ratesList = self.listRates(mode)
 		print "[VideoWizard] ratesList:", ratesList
-		if self.port == "DVI" and mode in ("720p", "1080i", "1080p", "2160p"):
-			self.rate = "multi"
-			self.hw.setMode(port = self.port, mode = mode, rate = "multi")
+		if self.port == "DVI" and mode in ("720p", "1080i", "1080p", "2160p", "2160p30"):
+			if SystemInfo["Has24hz"]:
+				self.rate = "auto"
+				self.hw.setMode(port = self.port, mode = mode, rate = "auto")
+			else:
+				self.rate = "multi"
+				self.hw.setMode(port = self.port, mode = mode, rate = "multi")
 		else:
 			self.hw.setMode(port = self.port, mode = mode, rate = ratesList[0][0])
 
