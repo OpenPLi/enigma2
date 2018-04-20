@@ -4,7 +4,7 @@ import os
 
 def GetCurrentImage():
 	if SystemInfo["canMultiBoot"]:
-		if not SystemInfo["canMode12"]:
+		if 'coherent_poll=2M' in open("/proc/cmdline", "r").read():
 			return (int(open('/sys/firmware/devicetree/base/chosen/bootargs', 'r').read().replace('\0', '').split('=')[1].split('p')[1].split(' ')[0])-3)/2
 		else:
 			return	int(open('/sys/firmware/devicetree/base/chosen/kerneldev', 'r').read().replace('\0', '')[-1])
