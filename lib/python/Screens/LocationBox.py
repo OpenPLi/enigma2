@@ -536,7 +536,7 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 
 def MovieLocationBox(session, text, dir, filename = "", minFree = None):
 	config.movielist.videodirs.load()
-	return LocationBox(session, text = text,  filename = filename, currDir = dir, bookmarks = config.movielist.videodirs, autoAdd = True, editDir = True, inhibitDirs = defaultInhibitDirs, minFree = minFree)
+	return LocationBox(session, text = text,  filename = filename, currDir = dir, bookmarks = config.movielist.videodirs, autoAdd = config.movielist.add_bookmark.value , editDir = True, inhibitDirs = defaultInhibitDirs, minFree = minFree)
 
 class TimeshiftLocationBox(LocationBox):
 	def __init__(self, session):
