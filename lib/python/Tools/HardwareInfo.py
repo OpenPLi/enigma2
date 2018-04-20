@@ -75,5 +75,20 @@ class HardwareInfo:
 			return "%s (%s)" % (hw_info.device_model, hw_info.device_version)
 		return hw_info.device_model
 
+	def get_machine_name(self)
+		# get the reported device model
+		machine = get_device_model()
+		# map Xtrend device models to machine names
+		if machine in ("et9000", "et9100", "et9200", "et9500"):
+			machine = "et9x00"
+		elif machine == "et6000":
+			machine = "et6x00"
+		elif machine == "et5000":
+			machine = "et5x00"
+		elif machine == "et4000":
+			machine = "et4x00"
+		return machine
+
+
 	def has_hdmi(self):
 		return hw_info.device_hdmi
