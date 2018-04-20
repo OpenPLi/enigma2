@@ -104,6 +104,7 @@ class Setup(ConfigListScreen, Screen):
 		self.setTitle(_(self.setup_title))
 
 	def createSetupList(self):
+		currentItem = self["config"].getCurrent()
 		self.list = []
 		for x in self.setup:
 			if not x.tag:
@@ -137,6 +138,16 @@ class Setup(ConfigListScreen, Screen):
 				if not isinstance(item, ConfigNothing):
 					self.list.append((item_text, item, item_description))
 		self["config"].setList(self.list)
+		if config.usage.sort_settings.value:
+			self["config"].list.sort()
+		self.moveToItem(currentItem)
+
+	def moveToItem(self, item):
+		if item != self["config"].getCurrent():
+			self["config"].setCurrentIndex(self.getIndexFromItem(item))
+
+	def getIndexFromItem(self, item):
+		return self["config"].list.index(item) if item in self["config"].list else 0
 
 	def changedEntry(self):
 		if isinstance(self["config"].getCurrent()[1], ConfigBoolean) or isinstance(self["config"].getCurrent()[1], ConfigSelection):
