@@ -2,7 +2,7 @@ from Components.Converter.Converter import Converter
 from Components.Element import cached
 from time import localtime, strftime
 
-class BhAnalogic(Converter, object):
+class AnalogClock(Converter, object):
 
 	def __init__(self, type):
 		Converter.__init__(self, type)

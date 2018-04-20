@@ -3,7 +3,7 @@ from Renderer import Renderer
 
 from enigma import eGauge
 
-class Bhclock(VariableValue, Renderer):
+class GaugeRender(VariableValue, Renderer):
 	def __init__(self):
 		Renderer.__init__(self)
 		VariableValue.__init__(self)
