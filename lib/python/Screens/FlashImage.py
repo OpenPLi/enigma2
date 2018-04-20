@@ -13,7 +13,7 @@ from Components.SystemInfo import SystemInfo
 from Tools.BoundFunction import boundFunction
 from Tools.Downloader import downloadWithProgress
 from Tools.HardwareInfo import HardwareInfo
-from Tools.Multiboot import GetImagelist, GetCurrentImage, GetCurrentImageMode
+from Tools.Multiboot import GetImagelist, GetCurrentImage, GetCurrentImageMode, WriteStartup
 import os, urllib2, json, time, zipfile
 from enigma import eTimer, eEPGCache
 
@@ -213,17 +213,12 @@ class FlashImage(Screen):
 		self.getImageList = None
 		choices = []
 		currentimageslot = GetCurrentImage()
-		for x in range(1,5):
-			if x in imagedict:
-				choices.append(((_("slot%s - %s (current image) with, backup") if x == currentimageslot else _("slot%s - %s, with backup")) % (x, imagedict[x]['imagename']), (x, "with backup")))
-			else:
-				choices.append((_("slot%s - empty, with backup") % x, (x, "with backup")))
+		HIslot = len(imagedict) + 1
+		for x in range(1,HIslot):
+			choices.append(((_("slot%s - %s (current image) with, backup") if x == currentimageslot else _("slot%s - %s, with backup")) % (x, imagedict[x]['imagename']), (x, "with backup")))
 		choices.append((_("No, do not flash image"), False))
-		for x in range(1,5):
-			if x in imagedict:
-				choices.append(((_("slot%s - %s (current image), without backup") if x == currentimageslot else _("slot%s - %s, without backup")) % (x, imagedict[x]['imagename']), (x, "without backup")))
-			else:
-				choices.append((_("slot%s - empty, without backup") % x, (x, "without backup")))
+		for x in range(1,HIslot):
+			choices.append(((_("slot%s - %s (current image), without backup") if x == currentimageslot else _("slot%s - %s, without backup")) % (x, imagedict[x]['imagename']), (x, "without backup")))
 		self.session.openWithCallback(self.backupsettings, MessageBox, self.message, list=choices, default=currentimageslot, simple=True)
 
 	def backupsettings(self, retval):
@@ -341,11 +336,11 @@ class FlashImage(Screen):
 	def FlashimageDone(self, data, retval, extra_args):
 		self.containerofgwrite = None
 		if retval == 0:
-			self["header"].setText(_("Flashing image succesfull"))
+			self["header"].setText(_("Flashing image successfull"))
 			self["info"].setText(_("%s\nPress exit to close") % self.imagename)
 			self["progress"].hide()
 		else:
-			self.session.openWithCallback(self.abort, MessageBox, _("Flashing image was not succesfull\n%s") % self.imagename, type=MessageBox.TYPE_ERROR, simple=True)
+			self.session.openWithCallback(self.abort, MessageBox, _("Flashing image was not successfull\n%s") % self.imagename, type=MessageBox.TYPE_ERROR, simple=True)
 
 	def abort(self, reply=None):
 		if self.getImageList or self.containerofgwrite:
@@ -363,10 +358,11 @@ class MultibootSelection(SelectImage):
 		self.session = session
 		self.imagesList = None
 		self.expanded = []
+		self.addin = SystemInfo["canMultiBoot"][0]
 		self.setTitle(_("Select Multiboot"))
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Reboot"))
-		self["list"] = ChoiceList(list=[ChoiceEntryComponent('',((_("Retreiving image slots - Please wait...")), "Waiter"))])
+		self["list"] = ChoiceList(list=[ChoiceEntryComponent('',((_("Retrieving image slots - Please wait...")), "Waiter"))])
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "KeyboardInputActions", "MenuActions"],
 		{
@@ -397,9 +393,9 @@ class MultibootSelection(SelectImage):
 		currentimageslot = GetCurrentImage()
 		mode = SystemInfo["canMode12"] and GetCurrentImageMode() or 0
 		for x in sorted(imagesdict.keys()):
-			list.append(ChoiceEntryComponent('',((_("slot%s - %s mode 1 (current image)") if x == currentimageslot and mode == 1 else _("slot%s - %s mode 1")) % (x, imagesdict[x]['imagename']), x)))
+			list.append(ChoiceEntryComponent('',((_("slot%s - %s current mode 1 (current image)") if x == currentimageslot and mode != 12 else _("slot%s - %s  restart mode 1 ")) % (x, imagesdict[x]['imagename']), x)))
 			if SystemInfo["canMode12"]:
-				list.append(ChoiceEntryComponent('',((_("slot%s - %s mode 12 (current image)") if x == currentimageslot and mode == 12 else _("slot%s - %s mode 12")) % (x, imagesdict[x]['imagename']), x + 12)))
+				list.append(ChoiceEntryComponent('',((_("slot%s - %s current mode 12 (current image)") if x == currentimageslot and mode == 12 else _("slot%s - %s  restart mode 12 ")) % (x, imagesdict[x]['imagename']), x + 12)))
 		self["list"].setList(list)
 
 	def keyOk(self):
@@ -407,15 +403,19 @@ class MultibootSelection(SelectImage):
 		slot = currentSelected[0][1]
 		if currentSelected[0][1] != "Waiter":
 			model = HardwareInfo().get_device_model()
-			if slot < 12:
-				startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=1'\n" % (slot, slot * 2 + 1, model)
+#	If Gigablue then pass slot to write routine, to read STARTUP_slot and write to STARTUP
+#	If multimode and mode 1 then build bootmode 1 STARTUP and pass to write routine
+#	If multimode and mode 12 then build bootmode 12 STARTUP and pass to write routine
+			if SystemInfo["canMultiBoot"] and 'coherent_poll=2M' in open("/proc/cmdline", "r").read():
+				WriteStartup(slot, self.ReExit)
+			elif slot < 12:
+				startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=1'\n" % (slot, slot * 2 + self.addin, model)
+				WriteStartup(startupFileContents, self.ReExit)
 			else:
 				slot -= 12
-				startupFileContents = "boot emmcflash0.kernel%s 'brcm_cma=520M@248M brcm_cma=%s@768M root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=12'\n" % (slot, SystemInfo["canMode12"], slot * 2 + 1, model)
-			for media in ['/media/%s' % x for x in os.listdir('/media') if x.startswith('mmc')]:
-				if 'STARTUP' in os.listdir(media):
-					open('%s/%s' % (media, 'STARTUP'), 'w').write(startupFileContents)
-					break
+				startupFileContents = "boot emmcflash0.kernel%s 'brcm_cma=520M@248M brcm_cma=%s@768M root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=12'\n" % (slot, SystemInfo["canMode12"], slot * 2 + self.addin, model)
+				WriteStartup(startupFileContents, self.ReExit)
+	def ReExit(self):
 			from Screens.Standby import TryQuitMainloop
 			self.session.open(TryQuitMainloop, 2)
 
