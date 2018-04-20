@@ -20,6 +20,20 @@ from enigma import eTimer, eEPGCache
 def checkimagefiles(files):
 	return len([x for x in files if 'kernel' in x and '.bin' in x or x in ('uImage', 'rootfs.bin', 'root_cfe_auto.bin', 'root_cfe_auto.jffs2', 'oe_rootfs.bin', 'e2jffs2.img', 'rootfs.tar.bz2', 'rootfs.ubi')]) == 2
 
+def getMachineName()
+		# get the reported device model
+		machine = HardwareInfo().get_device_model()
+		# map Xtrend device models to machine names
+		if machine in ("et9000", "et9100", "et9200", "et9500"):
+			machine = "et9x00"
+		elif machine == "et6000":
+			machine = "et6x00"
+		elif machine == "et5000":
+			machine = "et5x00"
+		elif machine == "et4000":
+			machine = "et4x00"
+		return machine
+
 class SelectImage(Screen):
 	def __init__(self, session, *args):
 		Screen.__init__(self, session)
@@ -70,7 +84,7 @@ class SelectImage(Screen):
 				except:
 					pass
 
-		model = HardwareInfo().get_device_model()
+		model = getMachineName()
 
 		if not self.imagesList:
 			if not self.jsonlist:
@@ -406,7 +420,7 @@ class MultibootSelection(SelectImage):
 		currentSelected = self["list"].l.getCurrentSelection()
 		slot = currentSelected[0][1]
 		if currentSelected[0][1] != "Waiter":
-			model = HardwareInfo().get_device_model()
+			model = getMachineName()
 			if slot < 12:
 				startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=1'\n" % (slot, slot * 2 + 1, model)
 			else:
