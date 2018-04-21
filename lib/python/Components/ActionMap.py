@@ -95,3 +95,26 @@ class HelpableActionMap(ActionMap):
 		ActionMap.__init__(self, [context], adict, prio)
 
 		parent.helpList.append((self, context, alist))
+
+
+class HelpableNumberActionMap(NumberActionMap, HelpableActionMap):
+	"""An Actionmap which automatically puts the actions into the helpList.
+
+	Note that you can only use ONE context here!"""
+
+	# sorry for this complicated code.
+	# it's not more than converting a "documented" actionmap
+	# (where the values are possibly (function, help)-tuples)
+	# into a "classic" actionmap, where values are just functions.
+	# the classic actionmap is then passed to the ActionMap constructor,
+	# the collected helpstrings (with correct context, action) is
+	# added to the screen's "helpList", which will be picked up by
+	# the "HelpableScreen".
+	#
+	def __init__(self, parent, context, actions=None, prio=0, description=None):
+		# Initialise NumberActionMap with empty context and actions
+		# so that the underlying ActionMap is only initialised with
+		# these once, via the HelpableActionMap.
+		#
+		NumberActionMap.__init__(self, [], {})
+		HelpableActionMap.__init__(self, parent, context, actions, prio, description)
