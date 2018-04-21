@@ -84,6 +84,7 @@ class HelpableActionMap(ActionMap):
 	# the collected helpstrings (with correct context, action) is
 	# added to the screen's "helpList", which will be picked up by
 	# the "HelpableScreen".
+	#
 	def __init__(self, parent, context, actions=None, prio=0, description=None):
 		if actions is None:
 			actions = {}
@@ -114,7 +115,7 @@ class HelpableNumberActionMap(NumberActionMap, HelpableActionMap):
 	# the collected helpstrings (with correct context, action) is
 	# added to the screen's "helpList", which will be picked up by
 	# the "HelpableScreen".
-
+	#
 	def __init__(self, parent, context, actions=None, prio=0, description=None):
 		# Initialise NumberActionMap with empty context and actions
 		# so that the underlying ActionMap is only initialised with
