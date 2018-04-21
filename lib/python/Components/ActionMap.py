@@ -1,9 +1,13 @@
 from enigma import eActionMap
 
 class ActionMap:
-	def __init__(self, contexts = [ ], actions = { }, prio=0):
-		self.actions = actions
+	def __init__(self, contexts=None, actions=None, prio=0):
+		if contexts is None:
+			contexts = []
+		if actions is None:
+			actions = {}
 		self.contexts = contexts
+		self.actions = actions
 		self.prio = prio
 		self.p = eActionMap.getInstance()
 		self.bound = False
