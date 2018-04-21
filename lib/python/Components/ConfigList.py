@@ -196,17 +196,16 @@ class ConfigListScreen:
 
 	def handleInputHelpers(self):
 		if self["config"].getCurrent() is not None and self["config"].getCurrent()[1].__class__.__name__ in ('ConfigText', 'ConfigPassword'):
-				if "VKeyIcon" in self:
-					self["VirtualKB"].setEnabled(True)
-					self["VKeyIcon"].boolean = True
-				if "HelpWindow" in self:
-					if self["config"].getCurrent()[1].help_window and self["config"].getCurrent()[1].help_window.instance is not None:
-						helpwindowpos = self["HelpWindow"].getPosition()
-						from enigma import ePoint
-						self["config"].getCurrent()[1].help_window.instance.move(ePoint(helpwindowpos[0],helpwindowpos[1]))
+			if "VKeyIcon" in self:
+				self["VirtualKB"].setEnabled(True)
+				self["VKeyIcon"].boolean = True
+			if "HelpWindow" in self and self["config"].getCurrent()[1].help_window and self["config"].getCurrent()[1].help_window.instance is not None:
+				helpwindowpos = self["HelpWindow"].getPosition()
+				from enigma import ePoint
+				self["config"].getCurrent()[1].help_window.instance.move(ePoint(helpwindowpos[0],helpwindowpos[1]))
 		elif "VKeyIcon" in self:
-				self["VirtualKB"].setEnabled(False)
-				self["VKeyIcon"].boolean = False
+			self["VirtualKB"].setEnabled(False)
+			self["VKeyIcon"].boolean = False
 
 	def KeyText(self):
 		self["config"].hideHelp()
