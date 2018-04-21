@@ -75,7 +75,7 @@ class HardwareInfo:
 			return "%s (%s)" % (hw_info.device_model, hw_info.device_version)
 		return hw_info.device_model
 
-	def get_machine_name(self)
+	def get_machine_name(self):
 		# get the reported device model
 		machine = get_device_model()
 		# map Xtrend device models to machine names
