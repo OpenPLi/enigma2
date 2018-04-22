@@ -14,7 +14,8 @@ from Tools.BoundFunction import boundFunction
 from Tools.Downloader import downloadWithProgress
 from Tools.HardwareInfo import HardwareInfo
 from Tools.Multiboot import GetImagelist, GetCurrentImage, GetCurrentImageMode
-import os, urllib2, json, time, zipfile
+import os, urllib2, json, time, zipfile, shutil
+
 from enigma import eTimer, eEPGCache
 
 def checkimagefiles(files):
@@ -128,7 +129,6 @@ class SelectImage(Screen):
 			os.remove(currentSelected)
 			currentSelected = ".".join([currentSelected[:-4], "unzipped"])
 			if os.path.isdir(currentSelected):
-				import shutil
 				shutil.rmtree(currentSelected)
 			self.setIndex = self["list"].getSelectedIndex()
 			self.imagesList = []
@@ -412,10 +412,8 @@ class MultibootSelection(SelectImage):
 		slot = self.currentSelected[0][1]
 		model = HardwareInfo().get_machine_name()
 		if 'coherent_poll=2M' in open("/proc/cmdline", "r").read():
-			#when Gigablue do something else... this needs to be improved later!!!
-			#### TO DO - ARANGE THAT THE CORRECT FILE IS COPIED TO /tmp/startupmount/STARTUP ####
-			#### MAYBY WHEN HD51/HD7 ETC. DO THE SAME WE CAN ALSO DO THE SAME HERE ###
-			pass
+			#when Gigablue do something else... this needs to be improved later!!! It even looks that the GB method is better :)
+			shutil.copyfile("/tmp/startupmount/STARTUP_%s" % self.slot, "/tmp/startupmount/STARTUP")
 		else:
 			if slot < 12:
 				startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=1'\n" % (slot, slot * 2 + 1, model)
