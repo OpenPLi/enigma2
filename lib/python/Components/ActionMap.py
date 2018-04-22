@@ -81,7 +81,10 @@ class HelpableActionMap(ActionMap):
 	# the collected helpstrings (with correct context, action) is
 	# added to the screen's "helpList", which will be picked up by
 	# the "HelpableScreen".
-	def __init__(self, parent, context, actions = { }, prio=0):
+	def __init__(self, parent, context, actions=None, prio=0, description=None):
+		if actions is None:
+			actions = {}
+		self.description = description
 		alist = [ ]
 		adict = { }
 		for (action, funchelp) in actions.iteritems():
