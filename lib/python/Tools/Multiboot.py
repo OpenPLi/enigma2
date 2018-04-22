@@ -3,7 +3,7 @@ from Components.Console import Console
 import os
 
 def GetCurrentImage():
-	return SystemInfo["canMultiBoot"] and (int(open('/sys/firmware/devicetree/base/chosen/bootargs', 'r').read().replace('\0', '').split('=')[1].split('p')[1].split(' ')[0])-SystemInfo["canMultiBoot"][0])/2
+	return SystemInfo["canMultiBoot"] and (int(open('/sys/firmware/devicetree/base/chosen/bootargs', 'r').read().replace('\0', '').split('mmcblk0p')[1].split(' ')[0])-SystemInfo["canMultiBoot"][0])/2
 
 def GetCurrentImageMode():
 	return SystemInfo["canMultiBoot"] and SystemInfo["canMode12"] and int(open('/sys/firmware/devicetree/base/chosen/bootargs', 'r').read().replace('\0', '').split('=')[-1])
@@ -32,14 +32,14 @@ class GetImagelist():
 	def appClosed(self, data, retval, extra_args):
 		if retval == 0 and self.phase == self.MOUNT:
 			if os.path.isfile("/tmp/testmount/usr/bin/enigma2"):
-				self.imagelist[self.slot] =  { 'imagename': open("/tmp/testmount/etc/issue").readlines()[-2].capitalize().strip()[:-6] }
+				self.imagelist[self.slot] =  { 'imagename': open("/tmp/testmount/etc/issue").readlines()[-2].capitalize().strip()[:-6]}
 			else:
-				self.imagelist[self.slot] = { 'imagename': _("Empty slot") }
+				self.imagelist[self.slot] = { 'imagename': _("Empty slot")}
 			self.phase = self.UNMOUNT
 			self.run()
 		elif self.slot < self.numberofslots:
 			self.slot += 1
-			self.imagelist[self.slot] = { 'imagename': _("Empty slot") }
+			self.imagelist[self.slot] = { 'imagename': _("Empty slot")}
 			self.phase = self.MOUNT
 			self.run()
 		else:
