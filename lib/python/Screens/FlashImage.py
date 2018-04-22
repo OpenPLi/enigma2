@@ -70,7 +70,7 @@ class SelectImage(Screen):
 				except:
 					pass
 
-		model = HardwareInfo.get_machine_name()
+		model = HardwareInfo().get_machine_name()
 
 		if not self.imagesList:
 			if not self.jsonlist:
@@ -400,7 +400,7 @@ class MultibootSelection(SelectImage):
 		currentSelected = self["list"].l.getCurrentSelection()
 		slot = currentSelected[0][1]
 		if currentSelected[0][1] != "Waiter":
-			model = HardwareInfo.get_machine_name()
+			model = HardwareInfo().get_machine_name()
 			if 'coherent_poll=2M' in open("/proc/cmdline", "r").read():
 				#when Gigablue do something else... this needs to be improved later!!!
 				startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rootwait rw rootflags=data=journal libata.force=1:3.0G,2:3.0G,3:3.0G coherent_poll=2M brcm_cma=764M@0x10000000 brcm_cma=1024M@0x80000000'\n" % (slot, slot * 2 + 3)
