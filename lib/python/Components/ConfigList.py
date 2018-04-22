@@ -7,16 +7,16 @@ from Screens.ChoiceBox import ChoiceBox
 import skin
 
 class ConfigList(GUIComponent, object):
-	def __init__(self, list, session = None):
+	def __init__(self, list, session=None):
 		GUIComponent.__init__(self)
 		self.l = eListboxPythonConfigContent()
 		seperation = skin.parameters.get("ConfigListSeperator", 200)
 		self.l.setSeperation(seperation)
-		height, space = skin.parameters.get("ConfigListSlider",(17, 0))
+		height, space = skin.parameters.get("ConfigListSlider", (17, 0))
 		self.l.setSlider(height, space)
 		self.timer = eTimer()
 		self.list = list
-		self.onSelectionChanged = [ ]
+		self.onSelectionChanged = []
 		self.current = None
 		self.session = session
 
@@ -131,9 +131,8 @@ class ConfigList(GUIComponent, object):
 			self.instance.setSelectionEnable(enabled)
 
 class ConfigListScreen:
-	def __init__(self, list, session = None, on_change = None):
-		self["config_actions"] = NumberActionMap(["SetupActions", "InputAsciiActions", "KeyboardInputActions"],
-		{
+	def __init__(self, list, session=None, on_change=None):
+		self["config_actions"] = NumberActionMap(["SetupActions", "InputAsciiActions", "KeyboardInputActions"], {
 			"gotAsciiCode": self.keyGotAscii,
 			"ok": self.keyOK,
 			"left": self.keyLeft,
@@ -155,25 +154,24 @@ class ConfigListScreen:
 			"8": self.keyNumberGlobal,
 			"9": self.keyNumberGlobal,
 			"0": self.keyNumberGlobal,
-			"file" : self.keyFile
-		}, -1) # to prevent left/right overriding the listbox
+			"file": self.keyFile
+		}, -1)  # to prevent left/right overriding the listbox
 
 		self.onChangedEntry = []
 
-		self["VirtualKB"] = ActionMap(["VirtualKeyboardActions"],
-		{
+		self["VirtualKB"] = ActionMap(["VirtualKeyboardActions"], {
 			"showVirtualKeyboard": self.KeyText,
 		}, -2)
 		self["VirtualKB"].setEnabled(False)
 
-		self["config"] = ConfigList(list, session = session)
+		self["config"] = ConfigList(list, session=session)
 
 		if on_change is not None:
 			self.__changed = on_change
 		else:
 			self.__changed = lambda: None
 
-		if not self.handleInputHelpers in self["config"].onSelectionChanged:
+		if self.handleInputHelpers not in self["config"].onSelectionChanged:
 			self["config"].onSelectionChanged.append(self.handleInputHelpers)
 
 	def createSummary(self):
@@ -202,7 +200,7 @@ class ConfigListScreen:
 			if "HelpWindow" in self and self["config"].getCurrent()[1].help_window and self["config"].getCurrent()[1].help_window.instance is not None:
 				helpwindowpos = self["HelpWindow"].getPosition()
 				from enigma import ePoint
-				self["config"].getCurrent()[1].help_window.instance.move(ePoint(helpwindowpos[0],helpwindowpos[1]))
+				self["config"].getCurrent()[1].help_window.instance.move(ePoint(helpwindowpos[0], helpwindowpos[1]))
 		elif "VKeyIcon" in self:
 			self["VirtualKB"].setEnabled(False)
 			self["VKeyIcon"].boolean = False
@@ -210,9 +208,9 @@ class ConfigListScreen:
 	def KeyText(self):
 		self["config"].hideHelp()
 		from Screens.VirtualKeyBoard import VirtualKeyBoard
-		self.session.openWithCallback(self.VirtualKeyBoardCallback, VirtualKeyBoard, title = self["config"].getCurrent()[0], text = self["config"].getCurrent()[1].getValue())
+		self.session.openWithCallback(self.VirtualKeyBoardCallback, VirtualKeyBoard, title=self["config"].getCurrent()[0], text=self["config"].getCurrent()[1].getValue())
 
-	def VirtualKeyBoardCallback(self, callback = None):
+	def VirtualKeyBoardCallback(self, callback=None):
 		if callback is not None and len(callback):
 			self["config"].getCurrent()[1].setValue(callback)
 			self["config"].invalidate(self["config"].getCurrent())
@@ -266,10 +264,12 @@ class ConfigListScreen:
 	def keyFile(self):
 		selection = self["config"].getCurrent()
 		if selection and selection[1].enabled and hasattr(selection[1], "description"):
-			self.session.openWithCallback(self.handleKeyFileCallback, ChoiceBox, selection[0],
+			self.session.openWithCallback(
+				self.handleKeyFileCallback, ChoiceBox, selection[0],
 				list=zip(selection[1].description, selection[1].choices),
 				selection=selection[1].choices.index(selection[1].value),
-				keys=[])
+				keys=[]
+			)
 
 	def handleKeyFileCallback(self, answer):
 		if answer:
@@ -296,7 +296,7 @@ class ConfigListScreen:
 			x[1].cancel()
 		self.close()
 
-	def closeMenuList(self, recursive = False):
+	def closeMenuList(self, recursive=False):
 		if self["config"].isChanged():
 			self["config"].hideHelp()
 			self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Really close without saving settings?"))
