@@ -1,5 +1,6 @@
 from enigma import eActionMap
 
+
 class ActionMap:
 	def __init__(self, contexts=None, actions=None, prio=0):
 		if contexts is None:
@@ -58,6 +59,7 @@ class ActionMap:
 	def destroy(self):
 		pass
 
+
 class NumberActionMap(ActionMap):
 	def action(self, contexts, action):
 		if action in ("0", "1", "2", "3", "4", "5", "6", "7", "8", "9") and action in self.actions:
@@ -67,6 +69,7 @@ class NumberActionMap(ActionMap):
 			return 1
 		else:
 			return ActionMap.action(self, contexts, action)
+
 
 class HelpableActionMap(ActionMap):
 	"""An Actionmap which automatically puts the actions into the helpList.
@@ -81,22 +84,21 @@ class HelpableActionMap(ActionMap):
 	# the collected helpstrings (with correct context, action) is
 	# added to the screen's "helpList", which will be picked up by
 	# the "HelpableScreen".
+	#
 	def __init__(self, parent, context, actions=None, prio=0, description=None):
 		if actions is None:
 			actions = {}
 		self.description = description
-		alist = [ ]
-		adict = { }
+		alist = []
+		adict = {}
 		for (action, funchelp) in actions.iteritems():
-			# check if this is a tuple
+			# Check if this is a tuple.
 			if isinstance(funchelp, tuple):
 				alist.append((action, funchelp[1]))
 				adict[action] = funchelp[0]
 			else:
 				adict[action] = funchelp
-
 		ActionMap.__init__(self, [context], adict, prio)
-
 		parent.helpList.append((self, context, alist))
 
 
