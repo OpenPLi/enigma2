@@ -397,21 +397,33 @@ class MultibootSelection(SelectImage):
 		self["list"].setList(list)
 
 	def keyOk(self):
-		currentSelected = self["list"].l.getCurrentSelection()
-		slot = currentSelected[0][1]
-		if currentSelected[0][1] != "Waiter":
-			model = HardwareInfo().get_machine_name()
-			if 'coherent_poll=2M' in open("/proc/cmdline", "r").read():
-				#when Gigablue do something else... this needs to be improved later!!!
-				startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rootwait rw rootflags=data=journal libata.force=1:3.0G,2:3.0G,3:3.0G coherent_poll=2M brcm_cma=764M@0x10000000 brcm_cma=1024M@0x80000000'\n" % (slot, slot * 2 + 3)
-			elif slot < 12:
+		self.currentSelected = self["list"].l.getCurrentSelection()
+		if self.currentSelected[0][1] != "Waiter":
+			self.container = Console()
+			if os.path.isdir('/tmp/startupmount'):
+				self.ContainterFallback()
+			else:
+				os.mkdir('/tmp/startupmount')
+				self.container.ePopen('mount /dev/mmcblk0p1 /tmp/startupmount', self.ContainterFallback)
+
+	def ContainterFallback(self, data=None, retval=None, extra_args=None):
+		self.container.killAll()
+		slot = self.currentSelected[0][1]
+		model = HardwareInfo().get_machine_name()
+		if 'coherent_poll=2M' in open("/proc/cmdline", "r").read():
+			#when Gigablue do something else... this needs to be improved later!!!
+			#### TO DO - ARANGE THAT THE CORRECT FILE IS COPIED TO /tmp/startupmount/STARTUP ####
+			#### MAYBY WHEN HD51/HD7 ETC. DO THE SAME WE CAN ALSO DO THE SAME HERE ###
+			pass
+		else:
+			if slot < 12:
 				startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=1'\n" % (slot, slot * 2 + 1, model)
 			else:
 				slot -= 12
 				startupFileContents = "boot emmcflash0.kernel%s 'brcm_cma=520M@248M brcm_cma=%s@768M root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=12'\n" % (slot, SystemInfo["canMode12"], slot * 2 + 1, model)
-			open('/media/mmcblk0p1/STARTUP', 'w').write(startupFileContents)
-			from Screens.Standby import TryQuitMainloop
-			self.session.open(TryQuitMainloop, 2)
+			open('/tmp/startupmount/STARTUP', 'w').write(startupFileContents)
+		from Screens.Standby import TryQuitMainloop
+		self.session.open(TryQuitMainloop, 2)
 
 	def selectionChanged(self):
 		pass
