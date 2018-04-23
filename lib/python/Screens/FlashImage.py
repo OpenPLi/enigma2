@@ -14,7 +14,8 @@ from Tools.BoundFunction import boundFunction
 from Tools.Downloader import downloadWithProgress
 from Tools.HardwareInfo import HardwareInfo
 from Tools.Multiboot import GetImagelist, GetCurrentImage, GetCurrentImageMode
-import os, urllib2, json, time, zipfile
+import os, urllib2, json, time, zipfile, shutil
+
 from enigma import eTimer, eEPGCache
 
 def checkimagefiles(files):
@@ -128,7 +129,6 @@ class SelectImage(Screen):
 			os.remove(currentSelected)
 			currentSelected = ".".join([currentSelected[:-4], "unzipped"])
 			if os.path.isdir(currentSelected):
-				import shutil
 				shutil.rmtree(currentSelected)
 			self.setIndex = self["list"].getSelectedIndex()
 			self.imagesList = []
@@ -391,27 +391,38 @@ class MultibootSelection(SelectImage):
 		currentimageslot = GetCurrentImage()
 		mode = GetCurrentImageMode() or 0
 		for x in sorted(imagesdict.keys()):
-			list.append(ChoiceEntryComponent('',((_("slot%s - %s current mode 1 (current image)") if x == currentimageslot and mode != 12 else _("slot%s - %s  restart mode 1 ")) % (x, imagesdict[x]['imagename']), x)))
-			if SystemInfo["canMode12"]:
-				list.append(ChoiceEntryComponent('',((_("slot%s - %s current mode 12 (current image)") if x == currentimageslot and mode == 12 else _("slot%s - %s  restart mode 12 ")) % (x, imagesdict[x]['imagename']), x + 12)))
+			if imagesdict[x]["imagename"] != _("Empty slot"):
+				list.append(ChoiceEntryComponent('',((_("slot%s - %s mode 1 (current image)") if x == currentimageslot and mode != 12 else _("slot%s - %s mode 1 ")) % (x, imagesdict[x]['imagename']), x)))
+				if SystemInfo["canMode12"]:
+					list.append(ChoiceEntryComponent('',((_("slot%s - %s mode 12 (current image)") if x == currentimageslot and mode == 12 else _("slot%s - %s mode 12 ")) % (x, imagesdict[x]['imagename']), x + 12)))
 		self["list"].setList(list)
 
 	def keyOk(self):
-		currentSelected = self["list"].l.getCurrentSelection()
-		slot = currentSelected[0][1]
-		if currentSelected[0][1] != "Waiter":
-			model = HardwareInfo().get_machine_name()
-			if 'coherent_poll=2M' in open("/proc/cmdline", "r").read():
-				#when Gigablue do something else... this needs to be improved later!!!
-				startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rootwait rw rootflags=data=journal libata.force=1:3.0G,2:3.0G,3:3.0G coherent_poll=2M brcm_cma=764M@0x10000000 brcm_cma=1024M@0x80000000'\n" % (slot, slot * 2 + 3)
-			elif slot < 12:
+		self.currentSelected = self["list"].l.getCurrentSelection()
+		if self.currentSelected[0][1] != "Waiter":
+			self.container = Console()
+			if os.path.isdir('/tmp/startupmount'):
+				self.ContainterFallback()
+			else:
+				os.mkdir('/tmp/startupmount')
+				self.container.ePopen('mount /dev/mmcblk0p1 /tmp/startupmount', self.ContainterFallback)
+
+	def ContainterFallback(self, data=None, retval=None, extra_args=None):
+		self.container.killAll()
+		slot = self.currentSelected[0][1]
+		model = HardwareInfo().get_machine_name()
+		if 'coherent_poll=2M' in open("/proc/cmdline", "r").read():
+			#when Gigablue do something else... this needs to be improved later!!! It even looks that the GB method is better :)
+			shutil.copyfile("/tmp/startupmount/STARTUP_%s" % self.slot, "/tmp/startupmount/STARTUP")
+		else:
+			if slot < 12:
 				startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=1'\n" % (slot, slot * 2 + 1, model)
 			else:
 				slot -= 12
 				startupFileContents = "boot emmcflash0.kernel%s 'brcm_cma=520M@248M brcm_cma=%s@768M root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=12'\n" % (slot, SystemInfo["canMode12"], slot * 2 + 1, model)
-			open('/media/mmcblk0p1/STARTUP', 'w').write(startupFileContents)
-			from Screens.Standby import TryQuitMainloop
-			self.session.open(TryQuitMainloop, 2)
+			open('/tmp/startupmount/STARTUP', 'w').write(startupFileContents)
+		from Screens.Standby import TryQuitMainloop
+		self.session.open(TryQuitMainloop, 2)
 
 	def selectionChanged(self):
 		pass

@@ -51,6 +51,9 @@ class HardwareInfo:
 
 		self.device_model = self.device_model or self.device_name
 
+		# map for Xtrend device models to machine names
+		self.machine_name = "%s%s%s" % (self.device_model[:3], "x", self.device_model[-2:]) if self.device_model.startswith(("et9", "et4", "et5", "et6")) else self.device_model
+
 		# only some early DMM boxes do not have HDMI hardware
 		self.device_hdmi =  self.device_model not in ("dm7025", "dm800", "dm8000")
 
@@ -76,19 +79,7 @@ class HardwareInfo:
 		return hw_info.device_model
 
 	def get_machine_name(self):
-		# get the reported device model
-		machine = get_device_model()
-		# map Xtrend device models to machine names
-		if machine in ("et9000", "et9100", "et9200", "et9500"):
-			machine = "et9x00"
-		elif machine == "et6000":
-			machine = "et6x00"
-		elif machine == "et5000":
-			machine = "et5x00"
-		elif machine == "et4000":
-			machine = "et4x00"
-		return machine
-
+		return hw_info.machine_name
 
 	def has_hdmi(self):
 		return hw_info.device_hdmi
