@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-13 09:42+0200\n"
+"POT-Creation-Date: 2018-04-24 20:00+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Frenske <voorzitter@openpli.org>\n"
 "Language-Team: PLiteam <translators@openpli.org>\n"
@@ -808,9 +808,6 @@ msgstr "Voeg een opname toe (doorlopend)"
 msgid "Add recording (stop after current event)"
 msgstr "Voeg een opname toe (stop na huidige uitzending)"
 
-msgid "Add seperate receiver URL for import"
-msgstr "Voeg een aparte URL van een receiver toe t.b.v. import"
-
 msgid "Add service"
 msgstr "Voeg een zender toe"
 
@@ -1198,6 +1195,10 @@ msgid "Automatic"
 msgstr "Automatisch"
 
 msgid "Automatic Scan"
+msgstr "Automatische scan"
+
+#, fuzzy
+msgid "Automatic bookmarks"
 msgstr "Automatische scan"
 
 msgid "Automatic scan"
@@ -2669,6 +2670,13 @@ msgstr "Beschrijving"
 msgid "Deselect"
 msgstr "Deselecteer"
 
+#, fuzzy
+msgid "Destination of fallback remote receiver"
+msgstr ""
+"Voer de complete URL in zoals het voorbeeld hieronder.\n"
+"Alleen het ipadres volstaat, het poortnummer wordt vanzelf toegevoegd\n"
+"http://192.168.100.202:8001"
+
 msgid "Details for plugin: "
 msgstr "Plugin details:"
 
@@ -2774,6 +2782,9 @@ msgstr "Display en gebruikersinterface"
 msgid "Display message before playing next movie"
 msgstr "Een bericht weergeven voordat de volgende film start?"
 
+msgid "Display movie length in movielist (except single line style)."
+msgstr ""
+
 msgid "Display setup"
 msgstr "Instellingen voor het display"
 
@@ -2803,6 +2814,9 @@ msgstr "Niet wijzigen"
 
 msgid "Do not record"
 msgstr "Niet opnemen"
+
+msgid "Do not show file extensions for registered multimedia files."
+msgstr ""
 
 msgid "Do nothing"
 msgstr "Geen actie"
@@ -3056,6 +3070,9 @@ msgstr "El Salvador"
 msgid "Electronic Program Guide"
 msgstr "Elektronische Programma Gids"
 
+msgid "Empty slot"
+msgstr ""
+
 msgid "Enable"
 msgstr "Aan"
 
@@ -3180,7 +3197,15 @@ msgstr "Enigma versie: "
 msgid "Enigma2 skin selector"
 msgstr "Enigma2 skinkeuze"
 
+#, fuzzy
+msgid "Enter IP address"
+msgstr "IP-adres"
+
 msgid "Enter PIN"
+msgstr "Voer PIN in"
+
+#, fuzzy
+msgid "Enter URL"
 msgstr "Voer PIN in"
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -3515,10 +3540,26 @@ msgstr "Mislukt:"
 msgid "Falkland Islands (Malvinas)"
 msgstr "Falkland eilanden (Malnivas)"
 
+#, fuzzy
+msgid "Fallback remote receiver"
+msgstr "URL (http) van de Fallback ontvanger"
+
+#, fuzzy
+msgid "Fallback remote receiver IP"
+msgstr "URL (http) van de Fallback ontvanger"
+
+#, fuzzy
+msgid "Fallback remote receiver Port"
+msgstr "Instellen van de Fallback ontvanger"
+
 msgid "Fallback remote receiver URL"
 msgstr "URL (http) van de Fallback ontvanger"
 
 msgid "Fallback remote receiver setup"
+msgstr "Instellen van de Fallback ontvanger"
+
+#, fuzzy
+msgid "Fallback tuner setup"
 msgstr "Instellen van de Fallback ontvanger"
 
 #, python-format
@@ -4064,6 +4105,13 @@ msgstr "INACTIEF"
 msgid "IP address"
 msgstr "IP-adres"
 
+#, fuzzy
+msgid "IP of fallback remote receiver"
+msgstr ""
+"Voer de complete URL in zoals het voorbeeld hieronder.\n"
+"Alleen het ipadres volstaat, het poortnummer wordt vanzelf toegevoegd\n"
+"http://192.168.100.202:8001"
+
 msgid "ISO file is too large for this filesystem!"
 msgstr "ISO bestand is te groot voor dit bestandsysteem!"
 
@@ -4078,6 +4126,19 @@ msgstr "Iconen"
 
 msgid "If enabled, display shows 12 chars instead 8, but in latin-1/translit only."
 msgstr "Indien geactiveerd toont het display 12 i.p.v. 8 karakters, maar alleen in latin-1/translit."
+
+#, fuzzy
+msgid "If enabled, then there will be displayed icons for new/unseen items too."
+msgstr "Indien geactiveerd, dan wordt de informatiebalk weergegeven indien een nieuw programma start."
+
+msgid "If is disabled, then after Copy/Move will not be target directory stored into bookmarks."
+msgstr ""
+
+msgid "If is enabled and movie playback is finished, then after return to movielist will not be automaticaly start service playback."
+msgstr ""
+
+msgid "If set as 'Yes', then audiofiles are played in 'list mode' only, instead in full screen player."
+msgstr ""
 
 msgid "If set to 'yes' signal values (SNR, etc) will be calculated from API V3. This is an old API version that has now been superseded."
 msgstr "Indien geactiveerd zullen de waardes (SNR, etc) worden berekend vanaf de API V3. Dit is de oude API versie die nu is vervangen."
@@ -5618,11 +5679,12 @@ msgstr "Afspelen"
 msgid "Play DVD"
 msgstr "DVD afspelen"
 
-msgid "Play audio in background"
-msgstr "Audio op de achtergrond afspelen"
-
 msgid "Play audio-CD..."
 msgstr "Muziek CD afspelen..."
+
+#, fuzzy
+msgid "Play audiofiles in list mode"
+msgstr "Audio op de achtergrond afspelen"
 
 msgid "Play back media files"
 msgstr "Speel mediabestanden af"
@@ -5898,6 +5960,13 @@ msgstr "Poort C"
 
 msgid "Port D"
 msgstr "Poort D"
+
+#, fuzzy
+msgid "Port of fallback remote receiver"
+msgstr ""
+"Voer de complete URL in zoals het voorbeeld hieronder.\n"
+"Alleen het ipadres volstaat, het poortnummer wordt vanzelf toegevoegd\n"
+"http://192.168.100.202:8001"
 
 msgid "Portugal"
 msgstr "Portugal"
@@ -6646,6 +6715,10 @@ msgstr "Saint Pierre en Miquelon"
 msgid "Saint Vincent and the Grenadines"
 msgstr "Saint Vincent en de Grenadines"
 
+#, fuzzy
+msgid "Same as stream"
+msgstr "Stop alle streams"
+
 msgid "Same resolution as skin"
 msgstr "Identieke resolutie als de skin"
 
@@ -7097,9 +7170,6 @@ msgstr "Selecteer videomodus"
 msgid "Select wireless network"
 msgstr "Selecteer draadloos netwerk"
 
-msgid "Select yes when you want to import channels and/or EPG from a different URL"
-msgstr "Kies ja indien de import van zenders en EPG vanaf een alternatief IPadres plaatsvindt."
-
 msgid "Select your ATSC provider."
 msgstr "Kies uw ATSC aanbieder."
 
@@ -7229,6 +7299,13 @@ msgstr "Zenders"
 msgid "Set PIN"
 msgstr "PIN instellen"
 
+#, fuzzy
+msgid "Set action when movie playback is finished."
+msgstr ""
+"Met deze optie stelt u in wat er gebeurt indien een film gestart wordt.\n"
+"\n"
+"U kunt kiezen uit de volgende opties. Ga door op laatste positie, start vanaf het begin of vraag het de gebruiker."
+
 msgid "Set all hotkey to default?"
 msgstr "Zet alle Hotkey instellingen terug?"
 
@@ -7250,11 +7327,18 @@ msgstr "Zet vast"
 msgid "Set fps for external subtitles"
 msgstr "Stel de fps in voor de externe ondertitels."
 
+msgid "Set if You want see status icons, progress bars or nothing."
+msgstr ""
+
 msgid "Set interface as default Interface"
 msgstr "Stel deze interface in als standaard"
 
 msgid "Set limits"
 msgstr "Zet de limieten"
+
+#, fuzzy
+msgid "Set movielist type."
+msgstr "Beveilig film lijst"
 
 msgid "Set pin code persistent"
 msgstr "Pincode instellen"
@@ -7294,6 +7378,9 @@ msgstr "Stel de spanning en 22kHz optie in"
 
 msgid "Settings"
 msgstr "Settings"
+
+msgid "Settings can be different for each directory separately (for non removeable devices only)."
+msgstr ""
 
 msgid "Setup"
 msgstr "Instellingen"
@@ -7768,6 +7855,10 @@ msgid "Sort list:"
 msgstr "Sorteren op:"
 
 msgid "Sort order for menu entries"
+msgstr "Sorteer menu-items volgorde."
+
+#, fuzzy
+msgid "Sort order for setup entries"
 msgstr "Sorteer menu-items volgorde."
 
 msgid "Sort plugins list to default?"
@@ -8505,6 +8596,13 @@ msgstr "Met deze optie activeert u de verticale scaler dejagging."
 
 msgid "This option allows you to add the softcam setup in the extensions menu."
 msgstr "Met deze optie is het mogelijk om de softcam instelling in het extensions menu toe te voegen."
+
+#, fuzzy
+msgid "This option allows you to alphabetically sort setup menu entries."
+msgstr ""
+"Deze optie maakt de menu-paden zichtbaar.\n"
+"\n"
+"U kunt kiezen uit klein, groot of gedéactiveerd."
 
 msgid "This option allows you to boost the blue tones in the picture."
 msgstr "Met deze optie pept u de blauwe kleur in het beeld op."
@@ -9908,6 +10006,9 @@ msgstr "Verwijderen kan worden geannuleerd."
 msgid "You can continue watching TV etc. while this is running."
 msgstr "U kunt TV etc. blijven kijken terwijl deze actie loopt."
 
+msgid "You can enable if will be displayed extended EPG description for item."
+msgstr ""
+
 msgid "You can install this plugin."
 msgstr "U kunt deze applicatie installeren."
 
@@ -9916,6 +10017,16 @@ msgstr "U kunt enkel opnames branden die door uw ontvanger gemaakt zijn!"
 
 msgid "You can remove this plugin."
 msgstr "U kunt deze applicatie verwijderen."
+
+msgid "You can set how will be finished movieplayer with 'Exit' button."
+msgstr ""
+
+msgid "You can set selected directory as 'root' directory for movie player."
+msgstr ""
+
+#, fuzzy
+msgid "You can set sorting type for items in movielist."
+msgstr "Toon lengte van opnames in opnamemenu"
 
 msgid "You cannot delete this!"
 msgstr "U kunt dit niet wissen!"
@@ -11080,14 +11191,6 @@ msgstr "slot%s - %s, met backup"
 #, python-format
 msgid "slot%s - %s, without backup"
 msgstr "slot%s - %s, zonder backup"
-
-#, python-format
-msgid "slot%s - empty, with backup"
-msgstr "slot%s - leeg, met een backup"
-
-#, python-format
-msgid "slot%s - empty, without backup"
-msgstr "slot%s - leeg, zonder backup"
 
 msgid "soap/melodram/folkloric"
 msgstr "Soap/Melodrama/Folklore"
