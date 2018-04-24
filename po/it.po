@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPLi-enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-13 09:42+0200\n"
+"POT-Creation-Date: 2018-04-24 20:23+0200\n"
 "PO-Revision-Date: 2018-04-17 19:15+0200\n"
 "Last-Translator: Gringo <openpli@tiscali.it>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -814,9 +814,6 @@ msgstr "Aggiungere una registrazione (durata illimitata)"
 msgid "Add recording (stop after current event)"
 msgstr "Aggiungere una registrazione (evento attuale)"
 
-msgid "Add seperate receiver URL for import"
-msgstr "Aggiungere l'URL del ricevitore separato per l'importazione"
-
 msgid "Add service"
 msgstr "Aggiungere un canale"
 
@@ -936,6 +933,10 @@ msgstr "Associare la lingua dei sottotitoli alla lingua audio"
 
 msgid "Allow subtitles for hearing impaired"
 msgstr "Abilitare i sottotitoli per non udenti"
+
+#, fuzzy
+msgid "Allow unsupported modes"
+msgstr "Non supportato"
 
 msgid "Alpha"
 msgstr "Trasparenza"
@@ -1205,6 +1206,10 @@ msgid "Automatic"
 msgstr "Automatico"
 
 msgid "Automatic Scan"
+msgstr "Ricerca automatica"
+
+#, fuzzy
+msgid "Automatic bookmarks"
 msgstr "Ricerca automatica"
 
 msgid "Automatic scan"
@@ -2516,6 +2521,10 @@ msgstr "Descrizione"
 msgid "Deselect"
 msgstr "Deselezionare"
 
+#, fuzzy
+msgid "Destination of fallback remote receiver"
+msgstr "Specificare l'indirizzo (URL) del ricevitore remoto di fallback."
+
 msgid "Details for plugin: "
 msgstr "Dettagli del plugin: "
 
@@ -2621,6 +2630,9 @@ msgstr "Schermo ed interfaccia utente"
 msgid "Display message before playing next movie"
 msgstr "Visualizzare un messaggio prima di riprodurre il video successivo"
 
+msgid "Display movie length in movielist (except single line style)."
+msgstr ""
+
 msgid "Display setup"
 msgstr "Display"
 
@@ -2650,6 +2662,9 @@ msgstr "Non cambiare"
 
 msgid "Do not record"
 msgstr "Non registrare"
+
+msgid "Do not show file extensions for registered multimedia files."
+msgstr ""
 
 msgid "Do nothing"
 msgstr "Nessuna"
@@ -2897,6 +2912,9 @@ msgstr "El Salvador"
 msgid "Electronic Program Guide"
 msgstr "Guida Programmi Elettronica"
 
+msgid "Empty slot"
+msgstr ""
+
 msgid "Enable"
 msgstr "Abilitare"
 
@@ -3019,7 +3037,15 @@ msgstr "Versione Enigma: "
 msgid "Enigma2 skin selector"
 msgstr "Selezione della skin Enigma2"
 
+#, fuzzy
+msgid "Enter IP address"
+msgstr "Indirizzo IP"
+
 msgid "Enter PIN"
+msgstr "Inserire il PIN"
+
+#, fuzzy
+msgid "Enter URL"
 msgstr "Inserire il PIN"
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -3352,10 +3378,26 @@ msgstr "Non riuscito:"
 msgid "Falkland Islands (Malvinas)"
 msgstr "Isole Falkland (Malvinas)"
 
+#, fuzzy
+msgid "Fallback remote receiver"
+msgstr "Specificare l'URL del ricevitore remoto di fallback"
+
+#, fuzzy
+msgid "Fallback remote receiver IP"
+msgstr "Specificare l'URL del ricevitore remoto di fallback"
+
+#, fuzzy
+msgid "Fallback remote receiver Port"
+msgstr "Impostazioni del ricevitore remoto di fallback"
+
 msgid "Fallback remote receiver URL"
 msgstr "Specificare l'URL del ricevitore remoto di fallback"
 
 msgid "Fallback remote receiver setup"
+msgstr "Impostazioni del ricevitore remoto di fallback"
+
+#, fuzzy
+msgid "Fallback tuner setup"
 msgstr "Impostazioni del ricevitore remoto di fallback"
 
 #, python-format
@@ -3901,6 +3943,10 @@ msgstr "INATTIVO"
 msgid "IP address"
 msgstr "Indirizzo IP"
 
+#, fuzzy
+msgid "IP of fallback remote receiver"
+msgstr "Specificare l'indirizzo (URL) del ricevitore remoto di fallback."
+
 msgid "ISO file is too large for this filesystem!"
 msgstr "File ISO troppo grande per questo filesystem!"
 
@@ -3915,6 +3961,19 @@ msgstr "Icone"
 
 msgid "If enabled, display shows 12 chars instead 8, but in latin-1/translit only."
 msgstr "Se abilitata, questa opzione mostra 12 caratteri invece di 8, ma solo in traslitterazione latin-1."
+
+#, fuzzy
+msgid "If enabled, then there will be displayed icons for new/unseen items too."
+msgstr "Se questa impostazione è attivata, l'infobar sarà visualizzata all'inizio di un nuovo evento."
+
+msgid "If is disabled, then after Copy/Move will not be target directory stored into bookmarks."
+msgstr ""
+
+msgid "If is enabled and movie playback is finished, then after return to movielist will not be automaticaly start service playback."
+msgstr ""
+
+msgid "If set as 'Yes', then audiofiles are played in 'list mode' only, instead in full screen player."
+msgstr ""
 
 msgid "If set to 'yes' signal values (SNR, etc) will be calculated from API V3. This is an old API version that has now been superseded."
 msgstr "Se si sceglie \"Sì\" i parametri del segnale (SNR, ecc.) verranno calcolati dalla API V3. Questa è una versione obsoleta della API che ormai è superata."
@@ -5442,11 +5501,12 @@ msgstr "Riprodurre"
 msgid "Play DVD"
 msgstr "Riprodurre DVD"
 
-msgid "Play audio in background"
-msgstr "Riprodurre l'audio in sottofondo"
-
 msgid "Play audio-CD..."
 msgstr "Riprodurre CD audio..."
+
+#, fuzzy
+msgid "Play audiofiles in list mode"
+msgstr "Riprodurre l'audio in sottofondo"
 
 msgid "Play back media files"
 msgstr "Riprodurre file multimediali"
@@ -5722,6 +5782,10 @@ msgstr "Porta C"
 
 msgid "Port D"
 msgstr "Porta D"
+
+#, fuzzy
+msgid "Port of fallback remote receiver"
+msgstr "Specificare l'indirizzo (URL) del ricevitore remoto di fallback."
 
 msgid "Portugal"
 msgstr "Portogallo"
@@ -6465,6 +6529,10 @@ msgstr "Saint Pierre e Miquelon"
 msgid "Saint Vincent and the Grenadines"
 msgstr "Saint Vincent e Grenadine"
 
+#, fuzzy
+msgid "Same as stream"
+msgstr "Interrompere tutti i flussi"
+
 msgid "Same resolution as skin"
 msgstr "Stessa risoluzione della skin"
 
@@ -6916,9 +6984,6 @@ msgstr "Selezionare la modalità video"
 msgid "Select wireless network"
 msgstr "Selezionare una rete wireless"
 
-msgid "Select yes when you want to import channels and/or EPG from a different URL"
-msgstr "Selezionare Sì quando si desidera importare i canali e/o l'EPG da un URL diverso"
-
 msgid "Select your ATSC provider."
 msgstr "Selezionare il provider ATSC."
 
@@ -7048,6 +7113,10 @@ msgstr "Canali"
 msgid "Set PIN"
 msgstr "Impostare il PIN"
 
+#, fuzzy
+msgid "Set action when movie playback is finished."
+msgstr "Impostare cosa fare quando la riproduzione di un video viene avviata."
+
 msgid "Set all hotkey to default?"
 msgstr "Reimpostare tutti i tasti al funzionamento predefinito?"
 
@@ -7069,11 +7138,18 @@ msgstr "Impostare indirizzo"
 msgid "Set fps for external subtitles"
 msgstr "Impostare la cadenza dei fotogrammi (fps) per i sottotitoli esterni"
 
+msgid "Set if You want see status icons, progress bars or nothing."
+msgstr ""
+
 msgid "Set interface as default Interface"
 msgstr "Impostare l'interfaccia come predefinita"
 
 msgid "Set limits"
 msgstr "Impostare i limiti"
+
+#, fuzzy
+msgid "Set movielist type."
+msgstr "Proteggere la lista delle registrazioni"
 
 msgid "Set pin code persistent"
 msgstr "Impostare il codice PIN permanente"
@@ -7110,6 +7186,9 @@ msgstr "Impostare la tensione e il tono a 22KHz"
 
 msgid "Settings"
 msgstr "Impostazioni"
+
+msgid "Settings can be different for each directory separately (for non removeable devices only)."
+msgstr ""
 
 msgid "Setup"
 msgstr "Impostazioni"
@@ -7584,6 +7663,10 @@ msgid "Sort list:"
 msgstr "Ordinamento della lista delle registrazioni:"
 
 msgid "Sort order for menu entries"
+msgstr "Modalità di ordinamento delle voci dei menu"
+
+#, fuzzy
+msgid "Sort order for setup entries"
 msgstr "Modalità di ordinamento delle voci dei menu"
 
 msgid "Sort plugins list to default?"
@@ -8327,6 +8410,10 @@ msgstr "Questa opzione consente di abilitare l'anti-aliasing dello scaler vertic
 
 msgid "This option allows you to add the softcam setup in the extensions menu."
 msgstr "Questa opzione consente di aggiungere le impostazioni della SoftCam nel menu delle estensioni."
+
+#, fuzzy
+msgid "This option allows you to alphabetically sort setup menu entries."
+msgstr "Questa opzione consente di impostare se e con quale dimensione del carattere visualizzare la gerarchia dei menu nella parte alta dello schermo (es.: Menu  > Impostazioni > Impostazioni sistema > Personalizzazioni)."
 
 msgid "This option allows you to boost the blue tones in the picture."
 msgstr "Questa opzione consente di intensificare il colore blu nell'immagine."
@@ -9532,6 +9619,9 @@ msgstr "Un valore diverso da zero (in minuti) farà avviare una registrazione an
 msgid "When nonzero, a recording will stop later than the ending time indicated by the EPG."
 msgstr "Un valore diverso da zero (in minuti) farà concludere una registrazione posticipandola rispetto all'orario di fine previsto dall'EPG."
 
+msgid "When selected this allows video modes to be selected even if they are not reported as supported."
+msgstr ""
+
 msgid "When the content has an aspect ratio of 16:9, choose whether to scale/stretch the picture."
 msgstr "Quando il video ha un formato 16:9 selezionare se scalare o allargare l'immagine."
 
@@ -9690,6 +9780,9 @@ msgstr "E' possibile annullare l'eliminazione."
 msgid "You can continue watching TV etc. while this is running."
 msgstr "Durante questa operazione sarà possibile continuare la visione."
 
+msgid "You can enable if will be displayed extended EPG description for item."
+msgstr ""
+
 msgid "You can install this plugin."
 msgstr "E' possibile installare questo plugin."
 
@@ -9698,6 +9791,16 @@ msgstr "E' possibile masterizzare solo le registrazioni del ricevitore!"
 
 msgid "You can remove this plugin."
 msgstr "E' possibile eliminare questo plugin."
+
+msgid "You can set how will be finished movieplayer with 'Exit' button."
+msgstr ""
+
+msgid "You can set selected directory as 'root' directory for movie player."
+msgstr ""
+
+#, fuzzy
+msgid "You can set sorting type for items in movielist."
+msgstr "Caricare nell'elenco la durata dei video"
 
 msgid "You cannot delete this!"
 msgstr "Non è possibile effettuare questa eliminazione!"
@@ -10856,14 +10959,6 @@ msgstr "slot%s - %s, con backup"
 #, python-format
 msgid "slot%s - %s, without backup"
 msgstr "slot%s - %s, senza backup"
-
-#, python-format
-msgid "slot%s - empty, with backup"
-msgstr "slot%s - vuoto, con backup"
-
-#, python-format
-msgid "slot%s - empty, without backup"
-msgstr "slot%s - vuoto, senza backup"
 
 msgid "soap/melodram/folkloric"
 msgstr "Soap/Melodrammi/Folklore"
