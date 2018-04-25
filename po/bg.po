@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-13 09:42+0200\n"
+"POT-Creation-Date: 2018-04-24 20:23+0200\n"
 "PO-Revision-Date: 2018-04-03 22:15+0300\n"
 "Last-Translator: Мартин Петков <marto74bg@yahoo.co.uk>\n"
 "Language-Team: Bulgarian\n"
@@ -807,9 +807,6 @@ msgstr "Добави запис (без ограничение)"
 msgid "Add recording (stop after current event)"
 msgstr "Добави запис (спри след текущото предаване)"
 
-msgid "Add seperate receiver URL for import"
-msgstr "Добави URL на друг приемник за импорт"
-
 msgid "Add service"
 msgstr "Добавяне на услуга"
 
@@ -930,6 +927,10 @@ msgstr "Позволи езика на субтитрите да съответ�
 
 msgid "Allow subtitles for hearing impaired"
 msgstr "Позволи субтитри за хора с увреден слух"
+
+#, fuzzy
+msgid "Allow unsupported modes"
+msgstr "не се поддържа"
 
 msgid "Alpha"
 msgstr "Алфа"
@@ -1199,6 +1200,10 @@ msgid "Automatic"
 msgstr "Автоматично"
 
 msgid "Automatic Scan"
+msgstr "Автоматично Търсене"
+
+#, fuzzy
+msgid "Automatic bookmarks"
 msgstr "Автоматично Търсене"
 
 msgid "Automatic scan"
@@ -2512,6 +2517,10 @@ msgstr "Описание"
 msgid "Deselect"
 msgstr "Отмяна Избор"
 
+#, fuzzy
+msgid "Destination of fallback remote receiver"
+msgstr "Въведете URL на резервния приемник"
+
 msgid "Details for plugin: "
 msgstr "Подробно за плъгина: "
 
@@ -2617,6 +2626,9 @@ msgstr "Дисплей и потребителски интерфейс"
 msgid "Display message before playing next movie"
 msgstr "Показване на съобщение преди изпълнението на следващия филм"
 
+msgid "Display movie length in movielist (except single line style)."
+msgstr ""
+
 msgid "Display setup"
 msgstr "Настройки Дисплей"
 
@@ -2646,6 +2658,9 @@ msgstr "Не променяй"
 
 msgid "Do not record"
 msgstr "Не записвай"
+
+msgid "Do not show file extensions for registered multimedia files."
+msgstr ""
 
 msgid "Do nothing"
 msgstr "Не прави нищо"
@@ -2895,6 +2910,9 @@ msgstr "Ел Салвадор"
 msgid "Electronic Program Guide"
 msgstr "Електронен Програмен Гайд"
 
+msgid "Empty slot"
+msgstr ""
+
 msgid "Enable"
 msgstr "Активиране"
 
@@ -3017,7 +3035,15 @@ msgstr "Енигма версия: "
 msgid "Enigma2 skin selector"
 msgstr "Енигма2 избор на скин"
 
+#, fuzzy
+msgid "Enter IP address"
+msgstr "IP адрес"
+
 msgid "Enter PIN"
+msgstr "Въведете PIN-кода"
+
+#, fuzzy
+msgid "Enter URL"
 msgstr "Въведете PIN-кода"
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -3351,10 +3377,26 @@ msgstr "Неуспешно:"
 msgid "Falkland Islands (Malvinas)"
 msgstr "Фолкландски Острови"
 
+#, fuzzy
+msgid "Fallback remote receiver"
+msgstr "URL на резервния приемник"
+
+#, fuzzy
+msgid "Fallback remote receiver IP"
+msgstr "URL на резервния приемник"
+
+#, fuzzy
+msgid "Fallback remote receiver Port"
+msgstr "Настройки на резервен приемник"
+
 msgid "Fallback remote receiver URL"
 msgstr "URL на резервния приемник"
 
 msgid "Fallback remote receiver setup"
+msgstr "Настройки на резервен приемник"
+
+#, fuzzy
+msgid "Fallback tuner setup"
 msgstr "Настройки на резервен приемник"
 
 #, python-format
@@ -3906,6 +3948,10 @@ msgstr "СВОБОДЕН"
 msgid "IP address"
 msgstr "IP адрес"
 
+#, fuzzy
+msgid "IP of fallback remote receiver"
+msgstr "Въведете URL на резервния приемник"
+
 msgid "ISO file is too large for this filesystem!"
 msgstr "ISO файла е много голям за тази файлова система!"
 
@@ -3920,6 +3966,19 @@ msgstr "Икони"
 
 msgid "If enabled, display shows 12 chars instead 8, but in latin-1/translit only."
 msgstr "Ако се активира, на дисплея ще се показват 12 символа вместо 8, но само за кодировка latin-1 или транслит."
+
+#, fuzzy
+msgid "If enabled, then there will be displayed icons for new/unseen items too."
+msgstr "Ако е включено, инфо-лентата ще се показва при начало на ново предаване."
+
+msgid "If is disabled, then after Copy/Move will not be target directory stored into bookmarks."
+msgstr ""
+
+msgid "If is enabled and movie playback is finished, then after return to movielist will not be automaticaly start service playback."
+msgstr ""
+
+msgid "If set as 'Yes', then audiofiles are played in 'list mode' only, instead in full screen player."
+msgstr ""
 
 msgid "If set to 'yes' signal values (SNR, etc) will be calculated from API V3. This is an old API version that has now been superseded."
 msgstr "При ‘Да’, данните за сигнала (SNR,и т.н.) ще се изчисляват от API V3. Това е стара API версия, която е вече заменена."
@@ -5448,11 +5507,12 @@ msgstr "Възпроизвеждане"
 msgid "Play DVD"
 msgstr "Възпроизвеждане на DVD"
 
-msgid "Play audio in background"
-msgstr "Възпроизвеждане на аудио във фонов режим"
-
 msgid "Play audio-CD..."
 msgstr "Възпроизвеждане на аудио-CD..."
+
+#, fuzzy
+msgid "Play audiofiles in list mode"
+msgstr "Възпроизвеждане на аудио във фонов режим"
 
 msgid "Play back media files"
 msgstr "Възпроизвеждане на медия файлове"
@@ -5728,6 +5788,10 @@ msgstr "Порт C"
 
 msgid "Port D"
 msgstr "Порт D"
+
+#, fuzzy
+msgid "Port of fallback remote receiver"
+msgstr "Въведете URL на резервния приемник"
 
 msgid "Portugal"
 msgstr "Португалия"
@@ -6471,6 +6535,10 @@ msgstr "Св. Пиер и Микелон"
 msgid "Saint Vincent and the Grenadines"
 msgstr "Св.Винсент и Гренадини"
 
+#, fuzzy
+msgid "Same as stream"
+msgstr "Спри всички стриймове"
+
 msgid "Same resolution as skin"
 msgstr "Резолюция както тази на скина"
 
@@ -6924,9 +6992,6 @@ msgstr "Изберете видео режим"
 msgid "Select wireless network"
 msgstr "Изберете безжична мрежа"
 
-msgid "Select yes when you want to import channels and/or EPG from a different URL"
-msgstr "Изберете Да, когато искате да импортирате канали/EPG от друг URL-адрес"
-
 msgid "Select your ATSC provider."
 msgstr "Изберете Вашия ATSC провайдър."
 
@@ -7056,6 +7121,10 @@ msgstr "Канали"
 msgid "Set PIN"
 msgstr "Задайте PIN-код"
 
+#, fuzzy
+msgid "Set action when movie playback is finished."
+msgstr "Настройка какво да се случи когато бъде стартирано възпроизвеждането на филм."
+
 msgid "Set all hotkey to default?"
 msgstr "Задаване на всички бързи бутони по подразбиране?"
 
@@ -7077,11 +7146,18 @@ msgstr "Фиксирай"
 msgid "Set fps for external subtitles"
 msgstr "Задайте fps (кадри в секунда) за външни субтитри"
 
+msgid "Set if You want see status icons, progress bars or nothing."
+msgstr ""
+
 msgid "Set interface as default Interface"
 msgstr "Направи интерфейса като основен Интерфейс"
 
 msgid "Set limits"
 msgstr "Поставяне лимити"
+
+#, fuzzy
+msgid "Set movielist type."
+msgstr "Защита на списъка с филми"
 
 msgid "Set pin code persistent"
 msgstr "Задайте постоянен PIN-код"
@@ -7118,6 +7194,9 @@ msgstr "Задаване на напрежение и 22KHz"
 
 msgid "Settings"
 msgstr "Настройки"
+
+msgid "Settings can be different for each directory separately (for non removeable devices only)."
+msgstr ""
 
 msgid "Setup"
 msgstr "Настройки"
@@ -7592,6 +7671,10 @@ msgid "Sort list:"
 msgstr "Подреждане на списъка:"
 
 msgid "Sort order for menu entries"
+msgstr "Начин на подреждане за редовете в меню"
+
+#, fuzzy
+msgid "Sort order for setup entries"
 msgstr "Начин на подреждане за редовете в меню"
 
 msgid "Sort plugins list to default?"
@@ -8320,6 +8403,10 @@ msgstr "Тази опция позволява да активирате заг�
 
 msgid "This option allows you to add the softcam setup in the extensions menu."
 msgstr "Тази опция позволява да се добави 'Настройка на емулатора' в менюто с разширения."
+
+#, fuzzy
+msgid "This option allows you to alphabetically sort setup menu entries."
+msgstr "Тази опция позволява да се показва пътя към менюто."
 
 msgid "This option allows you to boost the blue tones in the picture."
 msgstr "Тази опция позволява да подсилите сините тонове в картината."
@@ -9524,6 +9611,9 @@ msgstr "Укажете колко минути по-рано да започне
 msgid "When nonzero, a recording will stop later than the ending time indicated by the EPG."
 msgstr "Укажете колко минути по-късно да започне записа от времето за начало според EPG."
 
+msgid "When selected this allows video modes to be selected even if they are not reported as supported."
+msgstr ""
+
 msgid "When the content has an aspect ratio of 16:9, choose whether to scale/stretch the picture."
 msgstr "Когато изображението на канала има съотношение на страните 16:9, изберете дали да се мащабира/разтегне картината."
 
@@ -9682,6 +9772,9 @@ msgstr "Можете да отмените премахването."
 msgid "You can continue watching TV etc. while this is running."
 msgstr "Можете да продължите да гледате ТВ и т.н., докато тече процеса."
 
+msgid "You can enable if will be displayed extended EPG description for item."
+msgstr ""
+
 msgid "You can install this plugin."
 msgstr "Можете да инсталирате този плъгин."
 
@@ -9690,6 +9783,16 @@ msgstr "Можете да записвате(на диск) само запис�
 
 msgid "You can remove this plugin."
 msgstr "Можете да премахнете този плъгин."
+
+msgid "You can set how will be finished movieplayer with 'Exit' button."
+msgstr ""
+
+msgid "You can set selected directory as 'root' directory for movie player."
+msgstr ""
+
+#, fuzzy
+msgid "You can set sorting type for items in movielist."
+msgstr "Зареждане продължителността на филмите във видео списъка"
 
 msgid "You cannot delete this!"
 msgstr "Не може да го изтриете!"
@@ -10850,14 +10953,6 @@ msgstr "slot%s - %s, с бакъп"
 #, python-format
 msgid "slot%s - %s, without backup"
 msgstr "slot%s - %s, без бакъп"
-
-#, python-format
-msgid "slot%s - empty, with backup"
-msgstr "slot%s - празен, с бакъп"
-
-#, python-format
-msgid "slot%s - empty, without backup"
-msgstr "slot%s - празен, без бакъп"
 
 msgid "soap/melodram/folkloric"
 msgstr "сапунен сериал/мелодрама/фолклор"

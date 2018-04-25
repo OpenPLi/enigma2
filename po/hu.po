@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-13 09:42+0200\n"
+"POT-Creation-Date: 2018-04-24 20:23+0200\n"
 "PO-Revision-Date: 2018-04-04 22:58+0200\n"
 "Last-Translator: mcfly82\n"
 "Language-Team: \n"
@@ -807,9 +807,6 @@ msgstr "Felvétel hozzáadása (korlátlan)"
 msgid "Add recording (stop after current event)"
 msgstr "Felvétel hozzáadása (esemény után leáll)"
 
-msgid "Add seperate receiver URL for import"
-msgstr ""
-
 msgid "Add service"
 msgstr "Csatorna hozzáadása"
 
@@ -929,6 +926,10 @@ msgstr "Azonos nyelvű hangsáv és felirat összerendelése"
 
 msgid "Allow subtitles for hearing impaired"
 msgstr "Hallássérülteknek szánt feliratok engedélyezése"
+
+#, fuzzy
+msgid "Allow unsupported modes"
+msgstr "nem támogatott"
 
 msgid "Alpha"
 msgstr "Alfa"
@@ -1199,6 +1200,10 @@ msgid "Automatic"
 msgstr "Automatikus"
 
 msgid "Automatic Scan"
+msgstr "Automatikus keresés"
+
+#, fuzzy
+msgid "Automatic bookmarks"
 msgstr "Automatikus keresés"
 
 msgid "Automatic scan"
@@ -2522,6 +2527,9 @@ msgstr "Leírás"
 msgid "Deselect"
 msgstr "Kijelölés törlése"
 
+msgid "Destination of fallback remote receiver"
+msgstr ""
+
 msgid "Details for plugin: "
 msgstr "Bővítmény részletei: "
 
@@ -2627,6 +2635,9 @@ msgstr "Képernyő és felhasználói felület"
 msgid "Display message before playing next movie"
 msgstr "A következő fájl lejátszása előtt üzenet megjelenítése"
 
+msgid "Display movie length in movielist (except single line style)."
+msgstr ""
+
 msgid "Display setup"
 msgstr "Előlapi kijelző"
 
@@ -2656,6 +2667,9 @@ msgstr "Ne változtassa meg"
 
 msgid "Do not record"
 msgstr "Ne vegye fel"
+
+msgid "Do not show file extensions for registered multimedia files."
+msgstr ""
 
 msgid "Do nothing"
 msgstr "Ne csináljon semmit"
@@ -2903,6 +2917,9 @@ msgstr "Salvador"
 msgid "Electronic Program Guide"
 msgstr "Elektronikus Műsorújság"
 
+msgid "Empty slot"
+msgstr ""
+
 msgid "Enable"
 msgstr "Engedélyezve"
 
@@ -3025,7 +3042,15 @@ msgstr "Kezelőfelület verzió: "
 msgid "Enigma2 skin selector"
 msgstr "Kinézet választó"
 
+#, fuzzy
+msgid "Enter IP address"
+msgstr "IP cím"
+
 msgid "Enter PIN"
+msgstr "Adja meg a PIN kódot"
+
+#, fuzzy
+msgid "Enter URL"
 msgstr "Adja meg a PIN kódot"
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -3360,10 +3385,22 @@ msgstr "Sikertelen:"
 msgid "Falkland Islands (Malvinas)"
 msgstr "Falkland-szigetek"
 
+msgid "Fallback remote receiver"
+msgstr ""
+
+msgid "Fallback remote receiver IP"
+msgstr ""
+
+msgid "Fallback remote receiver Port"
+msgstr ""
+
 msgid "Fallback remote receiver URL"
 msgstr ""
 
 msgid "Fallback remote receiver setup"
+msgstr ""
+
+msgid "Fallback tuner setup"
 msgstr ""
 
 #, python-format
@@ -3913,6 +3950,9 @@ msgstr "TÉTLEN"
 msgid "IP address"
 msgstr "IP cím"
 
+msgid "IP of fallback remote receiver"
+msgstr ""
+
 msgid "ISO file is too large for this filesystem!"
 msgstr "Az ISO fájl túl nagy ehhez a fájlrendszerhez!"
 
@@ -3926,6 +3966,19 @@ msgid "Icons"
 msgstr "Ikonok"
 
 msgid "If enabled, display shows 12 chars instead 8, but in latin-1/translit only."
+msgstr ""
+
+#, fuzzy
+msgid "If enabled, then there will be displayed icons for new/unseen items too."
+msgstr "Az információs sáv automatikus felbukkanása egy új műsor EPG szerinti kezdetekor."
+
+msgid "If is disabled, then after Copy/Move will not be target directory stored into bookmarks."
+msgstr ""
+
+msgid "If is enabled and movie playback is finished, then after return to movielist will not be automaticaly start service playback."
+msgstr ""
+
+msgid "If set as 'Yes', then audiofiles are played in 'list mode' only, instead in full screen player."
 msgstr ""
 
 msgid "If set to 'yes' signal values (SNR, etc) will be calculated from API V3. This is an old API version that has now been superseded."
@@ -5466,11 +5519,12 @@ msgstr "Lejátszás"
 msgid "Play DVD"
 msgstr "DVD lejátszás"
 
-msgid "Play audio in background"
-msgstr "Hanglejátszás a háttérben"
-
 msgid "Play audio-CD..."
 msgstr "Audio-CD lejátszás..."
+
+#, fuzzy
+msgid "Play audiofiles in list mode"
+msgstr "Hanglejátszás a háttérben"
 
 msgid "Play back media files"
 msgstr "Médiafájlok lejátszása"
@@ -5746,6 +5800,9 @@ msgstr "C Port"
 
 msgid "Port D"
 msgstr "D Port"
+
+msgid "Port of fallback remote receiver"
+msgstr ""
 
 msgid "Portugal"
 msgstr "Portugália"
@@ -6494,6 +6551,10 @@ msgstr "Saint-Pierre és Miquelon"
 msgid "Saint Vincent and the Grenadines"
 msgstr "Saint Vincent és a Grenadine-szigetek"
 
+#, fuzzy
+msgid "Same as stream"
+msgstr "Minden adatfolyam legállítása"
+
 msgid "Same resolution as skin"
 msgstr "Ugyanaz a felbontás, mint az kinézet"
 
@@ -6950,9 +7011,6 @@ msgstr "Válassza ki a video módot"
 msgid "Select wireless network"
 msgstr "Válasszon vezeték nélküli hálózatot"
 
-msgid "Select yes when you want to import channels and/or EPG from a different URL"
-msgstr ""
-
 msgid "Select your ATSC provider."
 msgstr "Válassza ki az ATSC szolgáltatóját."
 
@@ -7082,6 +7140,10 @@ msgstr "Csatornák"
 msgid "Set PIN"
 msgstr "PIN beállítás"
 
+#, fuzzy
+msgid "Set action when movie playback is finished."
+msgstr "Mi történjen, amikor egy fájl lejátszása elindul."
+
 msgid "Set all hotkey to default?"
 msgstr "Minden hotkey-t visszaállít alapértelmezett állapotba?"
 
@@ -7103,11 +7165,18 @@ msgstr "Beállítás fixre"
 msgid "Set fps for external subtitles"
 msgstr "Külső feliratokhoz FPS"
 
+msgid "Set if You want see status icons, progress bars or nothing."
+msgstr ""
+
 msgid "Set interface as default Interface"
 msgstr "Jelölje meg mint alapértelmezett interfészt"
 
 msgid "Set limits"
 msgstr "Limitek beállítása"
+
+#, fuzzy
+msgid "Set movielist type."
+msgstr "Filmlista védelme"
 
 msgid "Set pin code persistent"
 msgstr ""
@@ -7144,6 +7213,9 @@ msgstr "Feszültség és 22KHz beállítása"
 
 msgid "Settings"
 msgstr "Beállítások"
+
+msgid "Settings can be different for each directory separately (for non removeable devices only)."
+msgstr ""
 
 msgid "Setup"
 msgstr "Beállítások"
@@ -7627,6 +7699,10 @@ msgid "Sort list:"
 msgstr "Lista rendezése:"
 
 msgid "Sort order for menu entries"
+msgstr "Menü bejegyzések rendezése"
+
+#, fuzzy
+msgid "Sort order for setup entries"
 msgstr "Menü bejegyzések rendezése"
 
 msgid "Sort plugins list to default?"
@@ -8364,6 +8440,10 @@ msgstr "Ez a beállítás engedélyezi a skálázó függőleges élsimítást."
 
 msgid "This option allows you to add the softcam setup in the extensions menu."
 msgstr "Beállíthatja, hogy a softcam beállításai megjelenjenek a bővítmények menüben."
+
+#, fuzzy
+msgid "This option allows you to alphabetically sort setup menu entries."
+msgstr "Megjeleníti a menü útvonalakat."
 
 msgid "This option allows you to boost the blue tones in the picture."
 msgstr "A képernyőn lévő kék színek kiemelése."
@@ -9569,6 +9649,9 @@ msgstr "Ennyivel korábban kezdje a felvételt, mint amennyi időt mond az EPG."
 msgid "When nonzero, a recording will stop later than the ending time indicated by the EPG."
 msgstr "Ennyivel később fejezze be a felvételt, mint amennyi időt mond az EPG."
 
+msgid "When selected this allows video modes to be selected even if they are not reported as supported."
+msgstr ""
+
 msgid "When the content has an aspect ratio of 16:9, choose whether to scale/stretch the picture."
 msgstr "Egy 16:9-es kép méretarányú tartalom nagyítva vagy széthúzva legyen."
 
@@ -9727,6 +9810,9 @@ msgstr "Az eltávolítás folyamata leállítható."
 msgid "You can continue watching TV etc. while this is running."
 msgstr "A készülék használatát folytathatja a megszokott módon."
 
+msgid "You can enable if will be displayed extended EPG description for item."
+msgstr ""
+
 msgid "You can install this plugin."
 msgstr "A bővítmény telepíthető."
 
@@ -9735,6 +9821,16 @@ msgstr "Csak ezzel a készüléktípussal felvett anyagokat lehet kiírni!"
 
 msgid "You can remove this plugin."
 msgstr "A bővítmény eltávolítható."
+
+msgid "You can set how will be finished movieplayer with 'Exit' button."
+msgstr ""
+
+msgid "You can set selected directory as 'root' directory for movie player."
+msgstr ""
+
+#, fuzzy
+msgid "You can set sorting type for items in movielist."
+msgstr "Filmek hosszának betöltése a filmlistában"
 
 msgid "You cannot delete this!"
 msgstr "Ez nem törölheti le!"
@@ -10893,14 +10989,6 @@ msgstr "partíció%s - %s, biztonsági mentéssel"
 #, python-format
 msgid "slot%s - %s, without backup"
 msgstr "partíció%s - %s, biztonsági mentés nélkül"
-
-#, python-format
-msgid "slot%s - empty, with backup"
-msgstr "partíció%s üres, biztonsági mentéssel"
-
-#, python-format
-msgid "slot%s - empty, without backup"
-msgstr "partíció%s üres, biztonsági mentés nélkül"
 
 msgid "soap/melodram/folkloric"
 msgstr "szappanopera/melodráma"
