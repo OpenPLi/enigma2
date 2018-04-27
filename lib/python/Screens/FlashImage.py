@@ -413,7 +413,7 @@ class MultibootSelection(SelectImage):
 		model = HardwareInfo().get_machine_name()
 		if 'coherent_poll=2M' in open("/proc/cmdline", "r").read():
 			#when Gigablue do something else... this needs to be improved later!!! It even looks that the GB method is better :)
-			shutil.copyfile("/tmp/startupmount/STARTUP_%s" % self.slot, "/tmp/startupmount/STARTUP")
+			shutil.copyfile("/tmp/startupmount/STARTUP_%s" % slot, "/tmp/startupmount/STARTUP")
 		else:
 			if slot < 12:
 				startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=1'\n" % (slot, slot * 2 + 1, model)
