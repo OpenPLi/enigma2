@@ -92,4 +92,4 @@ SystemInfo["hasXcoreVFD"] = HardwareInfo().get_device_model() in ('osmega','spyc
 SystemInfo["HasOfflineDecoding"] = HardwareInfo().get_device_model() not in ('osmini', 'osminiplus', 'et7000mini', 'et11000', 'mbmicro', 'mbtwinplus', 'mbmicrov2', 'et7000', 'et8500')
 SystemInfo["canFlashWithOfgwrite"] = not HardwareInfo().get_device_model().startswith("dm")
 SystemInfo["canMultiBoot"] = HardwareInfo().get_device_model() in ('hd51', 'h7', 'vs1500') and (1, 4) or HardwareInfo().get_device_model() in ('gbue4k', 'gbquad4k') and (3, 3)
-SystemInfo["canMode12"] = SystemInfo["canMultiBoot"] and '200M' if HardwareInfo().get_device_model() == "h7" else '192M'
+SystemInfo["canMode12"] = HardwareInfo().get_device_model() in ("hd51", "vs1500") and '192M' or HardwareInfo().get_device_model() in ("h7") and '200M'
