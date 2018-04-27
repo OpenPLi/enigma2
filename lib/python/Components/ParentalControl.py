@@ -18,6 +18,7 @@ LIST_BLACKLIST = "blacklist"
 FLAG_IS_PARENTAL_PROTECTED_HIDDEN = 256
 
 def InitParentalControl():
+	# Note: This ConfigYesNo items must be duplicated in UsageConfig.py for graphics switches due early initialization
 	config.ParentalControl = ConfigSubsection()
 	config.ParentalControl.storeservicepin = ConfigSelection(default = "never", choices = [("never", _("never")), ("5", _("%d minutes") % 5), ("15", _("%d minutes") % 15), ("30", _("%d minutes") % 30), ("60", _("%d minutes") % 60), ("120", _("%d minutes") % 120), ("standby", _("until standby/restart"))])
 	config.ParentalControl.configured = ConfigYesNo(default = False)
@@ -43,7 +44,7 @@ def InitParentalControl():
 	config.ParentalControl.config_sections.menu_sort = ConfigYesNo(default = False)
 
 	#Added for backwards compatibility with some 3rd party plugins that depend on this config
-	config.ParentalControl.servicepinactive = config.ParentalControl.configured
+	config.ParentalControl.servicepinactive = config.ParentalControl.configured # this one line is duplicated in UsageConfig.py too
 	config.ParentalControl.setuppin = config.ParentalControl.servicepin[0]
 	config.ParentalControl.retries.setuppin = config.ParentalControl.retries.servicepin
 	config.ParentalControl.type = ConfigSelection(default = "blacklist", choices = [(LIST_BLACKLIST, _("blacklist"))])

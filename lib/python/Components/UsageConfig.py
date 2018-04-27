@@ -721,6 +721,32 @@ def InitUsageConfig():
 	config.misc.softcam_setup = ConfigSubsection()
 	config.misc.softcam_setup.extension_menu = ConfigYesNo(default = True)
 
+	# ConfigYesNo items duplicity for graphics yes/no due early initialisation:
+		# MovieSelection.py:
+	config.movielist.play_audio_internal = ConfigYesNo(default=True)
+	config.movielist.settings_per_directory = ConfigYesNo(default=True)
+	config.movielist.hide_extensions = ConfigYesNo(default=False)
+	config.movielist.stop_service = ConfigYesNo(default=True)
+	config.movielist.add_bookmark = ConfigYesNo(default=True)
+		# MyTest.py:
+	config.misc.load_unlinked_userbouquets = ConfigYesNo(default=True)
+		# ParentalControl.py:
+	config.ParentalControl.configured = ConfigYesNo(default = False)
+	config.ParentalControl.setuppinactive = ConfigYesNo(default = False)
+	config.ParentalControl.hideBlacklist = ConfigYesNo(default = False)
+	config.ParentalControl.config_sections.main_menu = ConfigYesNo(default = False)
+	config.ParentalControl.config_sections.configuration = ConfigYesNo(default = False)
+	config.ParentalControl.config_sections.timer_menu = ConfigYesNo(default = False)
+	config.ParentalControl.config_sections.plugin_browser = ConfigYesNo(default = False)
+	config.ParentalControl.config_sections.standby_menu = ConfigYesNo(default = False)
+	config.ParentalControl.config_sections.software_update = ConfigYesNo(default = False)
+	config.ParentalControl.config_sections.manufacturer_reset = ConfigYesNo(default = True)
+	config.ParentalControl.config_sections.movie_list = ConfigYesNo(default = False)
+	config.ParentalControl.config_sections.context_menus = ConfigYesNo(default = False)
+	config.ParentalControl.config_sections.menu_sort = ConfigYesNo(default = False)
+	config.ParentalControl.servicepinactive = config.ParentalControl.configured
+	# end of duplicates
+
 def updateChoices(sel, choices):
 	if choices:
 		defval = None
