@@ -30,6 +30,7 @@ from sys import stdout
 
 profile("Bouquets")
 from Components.config import config, configfile, ConfigText, ConfigYesNo, ConfigInteger, NoSave
+# Note: This ConfigYesNo item must be duplicated in UsageConfig.py for graphics switches due early initialization
 config.misc.load_unlinked_userbouquets = ConfigYesNo(default=True)
 def setLoadUnlinkedUserbouquets(configElement):
 	enigma.eDVBDB.getInstance().setLoadUnlinkedUserbouquets(configElement.value)

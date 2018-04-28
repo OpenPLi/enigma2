@@ -37,6 +37,7 @@ import os
 import time
 import cPickle as pickle
 
+# Note: This ConfigYesNo items must be duplicated in UsageConfig.py for graphics switches due early initialization
 config.movielist = ConfigSubsection()
 config.movielist.moviesort = ConfigInteger(default=MovieList.SORT_GROUPWISE)
 config.movielist.listtype = ConfigInteger(default=MovieList.LISTTYPE_MINIMAL)
