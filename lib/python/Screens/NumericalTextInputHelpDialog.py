@@ -35,24 +35,13 @@ class NumericalTextInputHelpDialog(Screen):
 					key_with_max = x
 			return key_with_max, text_width
 
-		def testFilling(key, label_width):
-			item = self["key%d" % key]
-			nowrap = item.instance.getNoWrap()
-			item.instance.setNoWrap(1)
-			res = label_width >= item.instance.calculateSize().width()
-			item.instance.setNoWrap(nowrap)
-			return res
-
 		key, text_width = findLongerText()
 		fnt = self["key%d" % key].instance.getFont()
 		label_width = self["key%d" % key].instance.size().width()
 		if label_width < text_width:
-			for i in range(int(fnt.pointSize)-1, 10, -1): # minimum 11 px
-				fnt = enigma.gFont(fnt.family, i)
-				self["key%d" % key].instance.setFont(fnt)
-				if testFilling(key, label_width):
-					for x in (1, 2, 3, 4, 5, 6, 7, 8, 9, 0):
-						self["key%d" % x].instance.setFont(fnt)
-					self["help1"].instance.setFont(fnt)
-					self["help2"].instance.setFont(fnt)
-					break
+			newSize = fnt.pointSize * label_width / text_width
+			fnt = enigma.gFont(fnt.family, newSize)
+			for x in (1, 2, 3, 4, 5, 6, 7, 8, 9, 0):
+				self["key%d" % x].instance.setFont(fnt)
+			self["help1"].instance.setFont(fnt)
+			self["help2"].instance.setFont(fnt)
