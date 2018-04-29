@@ -43,10 +43,9 @@ class NumericalTextInputHelpDialog(Screen):
 			item.instance.setNoWrap(nowrap)
 			return res
 
-		item = "key0"
-		fnt = self[item].instance.getFont()
-		label_width = self[item].instance.size().width()
 		key, text_width = findLongerText()
+		fnt = self["key%d" % key].instance.getFont()
+		label_width = self["key%d" % key].instance.size().width()
 		if label_width < text_width:
 			for i in range(int(fnt.pointSize)-1, 10, -1): # minimum 11 px
 				fnt = enigma.gFont(fnt.family, i)
