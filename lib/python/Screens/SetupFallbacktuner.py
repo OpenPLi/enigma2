@@ -4,7 +4,7 @@ from Components.ActionMap import ActionMap
 from Components.Pixmap import Pixmap
 from Components.Sources.Boolean import Boolean
 from Components.Sources.StaticText import StaticText
-from Components.config import config, configfile, ConfigSelection, ConfigIP, ConfigInteger, getConfigListEntry
+from Components.config import config, configfile, ConfigSelection, ConfigIP, ConfigInteger, getConfigListEntry, ConfigBoolean
 from Components.ConfigList import ConfigListScreen
 
 from enigma import getPeerStreamingBoxes
@@ -34,11 +34,11 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 		self["HelpWindow"] = Pixmap()
 		self["HelpWindow"].hide()
 
+		self.force_update_list = False
 		self.createConfig()
 		self.createSetup()
 
-		if not self.selectionChanged in self["config"].onSelectionChanged:
-			self["config"].onSelectionChanged.append(self.selectionChanged)
+		self["config"].onSelectionChanged.append(self.selectionChanged)
 		self.selectionChanged()
 
 	def createConfig(self):
@@ -134,10 +134,18 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 		self["config"].l.setList(self.list)
 
 	def selectionChanged(self):
+		if self.force_update_list:
+			self["config"].onSelectionChanged.remove(self.selectionChanged)
+			self.createSetup()
+			self["config"].onSelectionChanged.append(self.selectionChanged)
+			self.force_update_list = False
+		if not (isinstance(self["config"].getCurrent()[1], ConfigBoolean) or isinstance(self["config"].getCurrent()[1], ConfigSelection)):
+			self.force_update_list = True
 		self["description"].setText(self.getCurrentDescription())
 
 	def changedEntry(self):
-		self.createSetup()
+		if isinstance(self["config"].getCurrent()[1], ConfigBoolean) or isinstance(self["config"].getCurrent()[1], ConfigSelection):
+			self.createSetup()
 
 	def keyGo(self):
 		if self.avahiselect.value == "ip":
