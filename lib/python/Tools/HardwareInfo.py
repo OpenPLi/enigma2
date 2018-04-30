@@ -52,7 +52,10 @@ class HardwareInfo:
 		self.device_model = self.device_model or self.device_name
 
 		# map for Xtrend device models to machine names
-		self.machine_name = "%s%s%s" % (self.device_model[:3], "x", self.device_model[-2:]) if self.device_model.startswith(("et9", "et4", "et5", "et6")) else self.device_model
+		if self.device_model.startswith(("et9", "et4", "et5", "et6")):
+			self.machine_name = "%sx00" % self.device_model[:3]
+		else:
+			self.machine_name = self.device_model
 
 		# only some early DMM boxes do not have HDMI hardware
 		self.device_hdmi =  self.device_model not in ("dm7025", "dm800", "dm8000")
