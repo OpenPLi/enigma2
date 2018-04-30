@@ -24,10 +24,8 @@ class NumericalTextInputHelpDialog(Screen):
 		text_width=0
 		for x in (1, 2, 3, 4, 5, 6, 7, 8, 9, 0):
 			item = self["key%d" % x]
-			nowrap = item.instance.getNoWrap()
 			item.instance.setNoWrap(1)
 			width = item.instance.calculateSize().width()
-			item.instance.setNoWrap(nowrap)
 			if width > text_width:
 				text_width = width
 				key = x
