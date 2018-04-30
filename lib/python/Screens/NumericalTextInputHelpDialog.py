@@ -7,7 +7,7 @@ class NumericalTextInputHelpDialog(Screen):
 		Screen.__init__(self, session)
 		self["help1"] = Label(text="<")
 		self["help2"] = Label(text=">")
-		for x in (1, 2, 3, 4, 5, 6, 7, 8, 9, 0):
+		for x in range(0, 10):
 			self["key%d" % x] = Label(text=textinput.mapping[x].encode("utf-8"))
 		self.last_marked = 0
 		self.onLayoutFinish.append(self.resizeFont)
@@ -22,19 +22,19 @@ class NumericalTextInputHelpDialog(Screen):
 	def resizeFont(self):
 		key=0
 		text_width=0
-		for x in (1, 2, 3, 4, 5, 6, 7, 8, 9, 0):
+		for x in range(0, 10):
 			item = self["key%d" % x]
 			item.instance.setNoWrap(1)
 			width = item.instance.calculateSize().width()
 			if width > text_width:
 				text_width = width
 				key = x
-		fnt = self["key%d" % key].instance.getFont()
 		label_width = self["key%d" % key].instance.size().width()
 		if label_width < text_width:
+			fnt = self["key%d" % key].instance.getFont()
 			newSize = fnt.pointSize * label_width / text_width
 			fnt = enigma.gFont(fnt.family, newSize)
-			for x in (1, 2, 3, 4, 5, 6, 7, 8, 9, 0):
+			for x in range(0, 10):
 				self["key%d" % x].instance.setFont(fnt)
 			self["help1"].instance.setFont(fnt)
 			self["help2"].instance.setFont(fnt)
