@@ -22,14 +22,17 @@ class NumericalTextInputHelpDialog(Screen):
 	def resizeFont(self):
 		def getsize(x):
 			item = self["key%d" % x]
+			nowrap = item.instance.getNoWrap()
 			item.instance.setNoWrap(1)
-			return item.instance.calculateSize().width()
+			width = item.instance.calculateSize().width()
+			item.instance.setNoWrap(nowrap)
+			return width
 
 		text_width = max([getsize(x) for x in range (0, 10)])
 		label_width = self["key0"].instance.size().width()
 		if label_width < text_width:
 			fnt = self["key0"].instance.getFont()
-			newSize = fnt.pointSize * label_width / text_width
+			newSize = max(fnt.pointSize * label_width / text_width, int(0.6 * fnt.pointSize))
 			fnt = enigma.gFont(fnt.family, newSize)
 			for x in range(0, 10):
 				self["key%d" % x].instance.setFont(fnt)
