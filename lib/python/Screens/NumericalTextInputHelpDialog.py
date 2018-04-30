@@ -20,18 +20,15 @@ class NumericalTextInputHelpDialog(Screen):
 			self.last_marked = textinput.lastKey
 
 	def resizeFont(self):
-		key=0
-		text_width=0
-		for x in range(0, 10):
+		def getsize(x):
 			item = self["key%d" % x]
 			item.instance.setNoWrap(1)
-			width = item.instance.calculateSize().width()
-			if width > text_width:
-				text_width = width
-				key = x
-		label_width = self["key%d" % key].instance.size().width()
+			return item.instance.calculateSize().width()
+
+		text_width = max([getsize(x) for x in range (0, 10)])
+		label_width = self["key0"].instance.size().width()
 		if label_width < text_width:
-			fnt = self["key%d" % key].instance.getFont()
+			fnt = self["key0"].instance.getFont()
 			newSize = fnt.pointSize * label_width / text_width
 			fnt = enigma.gFont(fnt.family, newSize)
 			for x in range(0, 10):
