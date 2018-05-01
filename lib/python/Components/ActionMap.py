@@ -1,9 +1,14 @@
 from enigma import eActionMap
 
+
 class ActionMap:
-	def __init__(self, contexts = [ ], actions = { }, prio=0):
-		self.actions = actions
+	def __init__(self, contexts=None, actions=None, prio=0):
+		if contexts is None:
+			contexts = []
+		if actions is None:
+			actions = {}
 		self.contexts = contexts
+		self.actions = actions
 		self.prio = prio
 		self.p = eActionMap.getInstance()
 		self.bound = False
@@ -41,18 +46,19 @@ class ActionMap:
 		self.checkBind()
 
 	def action(self, context, action):
-		print " ".join(("action -> ", context, action))
 		if action in self.actions:
+			print "[ActionMap] Keymap '%s' -> Action = '%s'" % (context, action)
 			res = self.actions[action]()
 			if res is not None:
 				return res
 			return 1
 		else:
-			print "unknown action %s/%s! typo in keymap?" % (context, action)
+			print "[ActionMap] Keymap '%s' -> Unknown action '%s'! (Typo in keymap?)" % (context, action)
 			return 0
 
 	def destroy(self):
 		pass
+
 
 class NumberActionMap(ActionMap):
 	def action(self, contexts, action):
@@ -63,6 +69,7 @@ class NumberActionMap(ActionMap):
 			return 1
 		else:
 			return ActionMap.action(self, contexts, action)
+
 
 class HelpableActionMap(ActionMap):
 	"""An Actionmap which automatically puts the actions into the helpList.
@@ -77,17 +84,42 @@ class HelpableActionMap(ActionMap):
 	# the collected helpstrings (with correct context, action) is
 	# added to the screen's "helpList", which will be picked up by
 	# the "HelpableScreen".
-	def __init__(self, parent, context, actions = { }, prio=0):
-		alist = [ ]
-		adict = { }
+	#
+	def __init__(self, parent, context, actions=None, prio=0, description=None):
+		if actions is None:
+			actions = {}
+		self.description = description
+		alist = []
+		adict = {}
 		for (action, funchelp) in actions.iteritems():
-			# check if this is a tuple
+			# Check if this is a tuple.
 			if isinstance(funchelp, tuple):
 				alist.append((action, funchelp[1]))
 				adict[action] = funchelp[0]
 			else:
 				adict[action] = funchelp
-
 		ActionMap.__init__(self, [context], adict, prio)
-
 		parent.helpList.append((self, context, alist))
+
+
+class HelpableNumberActionMap(NumberActionMap, HelpableActionMap):
+	"""An Actionmap which automatically puts the actions into the helpList.
+
+	Note that you can only use ONE context here!"""
+
+	# sorry for this complicated code.
+	# it's not more than converting a "documented" actionmap
+	# (where the values are possibly (function, help)-tuples)
+	# into a "classic" actionmap, where values are just functions.
+	# the classic actionmap is then passed to the ActionMap constructor,
+	# the collected helpstrings (with correct context, action) is
+	# added to the screen's "helpList", which will be picked up by
+	# the "HelpableScreen".
+	#
+	def __init__(self, parent, context, actions=None, prio=0, description=None):
+		# Initialise NumberActionMap with empty context and actions
+		# so that the underlying ActionMap is only initialised with
+		# these once, via the HelpableActionMap.
+		#
+		NumberActionMap.__init__(self, [], {})
+		HelpableActionMap.__init__(self, parent, context, actions, prio, description)
