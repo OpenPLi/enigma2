@@ -18,13 +18,20 @@ def getImageVersionString():
 		pass
 	return _("unavailable")
 
+# WW -placeholder for BC purposes, commented out for the moment in the Screen
 def getFlashDateString():
-	try:
-		return time.strftime(_("%Y-%m-%d %H:%M"), time.localtime(os.path.getatime("/bin")))
-	except:
 		return _("unknown")
 
 def getBuildDateString():
+	try:
+		if os.path.isfile('/etc/version'):
+			version = open("/etc/version","r").read()
+			return "%s-%s-%s" % (version[:4], version[4:6], version[6:8])
+	except:
+		pass
+	return _("unknown")
+
+def getUpdateDateString():
 	try:
 		from glob import glob
 		build = [x.split("-")[-2:-1][0][-8:] for x in open(glob("/var/lib/opkg/info/openpli-bootlogo.control")[0], "r") if x.startswith("Version:")][0]
