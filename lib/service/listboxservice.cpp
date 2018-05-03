@@ -157,7 +157,10 @@ int eListboxServiceContent::getNextBeginningWithChar(char c)
 	{
 		std::string text;
 		ePtr<iStaticServiceInformation> service_info;
-		m_service_center->info(*i, service_info);
+		if (m_service_center->info(*i, service_info))
+		{
+			continue; // failed to find service handler
+		}
 		service_info->getName(*i, text);
 //		printf("%c\n", text.c_str()[0]);
 		int idx=0;
