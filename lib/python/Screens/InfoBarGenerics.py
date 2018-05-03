@@ -3064,9 +3064,10 @@ class InfoBarCueSheetSupport:
 			seekable = self.__getSeekable()
 			if seekable is None:
 				return # Should not happen?
-			length = seekable.getLength() or (None,0)
+			length = seekable.getLength()
+			if length[0]:
+				length = (-1, 0) #  Set length 0 if error in getLength()
 			print "seekable.getLength() returns:", length
-			# Hmm, this implies we don't resume if the length is unknown...
 			if (last > 900000) and (not length[1]  or (last < length[1] - 900000)):
 				self.resume_point = last
 				l = last / 90000
