@@ -135,7 +135,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 			RecordTimerEntry.staticGotRecordEvent(None, iRecordableService.evEnd)
 #################################################################
 
-	def __init__(self, serviceref, begin, end, name, description, eit, disabled = False, justplay = False, afterEvent = AFTEREVENT.AUTO, checkOldTimers = False, dirname = None, tags = None, descramble = True, record_ecm = False, always_zap = False, zap_wakeup = "always", rename_repeat = True, conflict_detection = True, pipzap = False):
+	def __init__(self, serviceref, begin, end, name, description, eit, disabled = False, justplay = False, afterEvent = AFTEREVENT.AUTO, checkOldTimers = False, dirname = None, tags = None, descramble = True, record_ecm = False, always_zap = False, zap_wakeup = "always", rename_repeat = True, conflict_detection = True, pipzap = False, external = False):
 		timer.TimerEntry.__init__(self, int(begin), int(end))
 
 		if checkOldTimers:
@@ -173,6 +173,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 		self.record_ecm = record_ecm
 		self.rename_repeat = rename_repeat
 		self.conflict_detection = conflict_detection
+		self.external = external
 		self.setAdvancedPriorityFrontend = None
 		if SystemInfo["DVB-T_priority_tuner_available"] or SystemInfo["DVB-C_priority_tuner_available"] or SystemInfo["DVB-S_priority_tuner_available"] or SystemInfo["ATSC_priority_tuner_available"]:
 			rec_ref = self.service_ref and self.service_ref.ref
@@ -682,7 +683,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 
 	record_service = property(lambda self: self.__record_service, setRecordService)
 
-def createTimer(xml):
+def createTimer(xml, external=False):
 	begin = int(xml.get("begin"))
 	end = int(xml.get("end"))
 	serviceref = ServiceReference(xml.get("serviceref").encode("utf-8"))
@@ -722,7 +723,7 @@ def createTimer(xml):
 
 	name = xml.get("name").encode("utf-8")
 	#filename = xml.get("filename").encode("utf-8")
-	entry = RecordTimerEntry(serviceref, begin, end, name, description, eit, disabled, justplay, afterevent, dirname = location, tags = tags, descramble = descramble, record_ecm = record_ecm, always_zap = always_zap, zap_wakeup = zap_wakeup, rename_repeat = rename_repeat, conflict_detection = conflict_detection, pipzap = pipzap)
+	entry = RecordTimerEntry(serviceref, begin, end, name, description, eit, disabled, justplay, afterevent, dirname = location, tags = tags, descramble = descramble, record_ecm = record_ecm, always_zap = always_zap, zap_wakeup = zap_wakeup, rename_repeat = rename_repeat, conflict_detection = conflict_detection, pipzap = pipzap, external = external)
 	entry.repeated = int(repeated)
 	flags = xml.get("flags")
 	if flags:

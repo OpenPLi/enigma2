@@ -7,6 +7,7 @@ from Components.ConfigList import ConfigListScreen
 from Components.MenuList import MenuList
 from Components.Sources.StaticText import StaticText
 from Components.Label import Label
+from Components.NimManager import nimmanager
 from Components.SystemInfo import SystemInfo
 from Components.UsageConfig import defaultMoviePath
 from Screens.MovieSelection import getPreferredTagEditor
@@ -14,10 +15,12 @@ from Screens.LocationBox import MovieLocationBox
 from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
 from Screens.VirtualKeyBoard import VirtualKeyBoard
+from Tools.Alternatives import GetWithAlternative
 from RecordTimer import AFTEREVENT
 from enigma import eEPGCache
 from time import localtime, mktime, time, strftime
 from datetime import datetime
+import urllib
 
 class TimerEntry(Screen, ConfigListScreen):
 	def __init__(self, session, timer):
@@ -97,7 +100,7 @@ class TimerEntry(Screen, ConfigListScreen):
 			repeated = None
 			weekday = int(strftime("%u", localtime(self.timer.begin))) - 1
 			day[weekday] = 1
-
+		self.timerentry_remote = ConfigYesNo(default=config.usage.remote_fallback_external_timer.value and config.usage.remote_fallback.value and not nimmanager.somethingConnected())
 		self.timerentry_justplay = ConfigSelection(choices = [
 			("zap", _("zap")), ("record", _("record")), ("zap+record", _("zap and record"))],
 			default = {0: "record", 1: "zap", 2: "zap+record"}[justplay + 2*always_zap])
@@ -151,6 +154,9 @@ class TimerEntry(Screen, ConfigListScreen):
 
 	def createSetup(self, widget):
 		self.list = []
+		self.entryRemoteTimer = getConfigListEntry(_("Remote Timer"), self.timerentry_remote)
+		if config.usage.remote_fallback_external_timer.value and config.usage.remote_fallback.value:
+			self.list.append(self.entryRemoteTimer)
 		self.entryName = getConfigListEntry(_("Name"), self.timerentry_name)
 		self.list.append(self.entryName)
 		self.entryDescription = getConfigListEntry(_("Description"), self.timerentry_description)
@@ -207,7 +213,8 @@ class TimerEntry(Screen, ConfigListScreen):
 			self.list.append(self.entryEndTime)
 
 		self.conflictDetectionEntry = getConfigListEntry(_("Enable timer conflict detection"), self.timerentry_conflictdetection)
-		self.list.append(self.conflictDetectionEntry)
+		if not self.timerentry_remote.value:
+			self.list.append(self.conflictDetectionEntry)
 
 		self.channelEntry = getConfigListEntry(_("Channel"), self.timerentry_service)
 		self.list.append(self.channelEntry)
@@ -226,8 +233,8 @@ class TimerEntry(Screen, ConfigListScreen):
 		self[widget].l.setList(self.list)
 
 	def newConfig(self):
-		print "newConfig", self["config"].getCurrent()
-		if self["config"].getCurrent() in (self.timerTypeEntry, self.timerJustplayEntry, self.frequencyEntry, self.entryShowEndTime):
+		print "[TimerEdit] newConfig", self["config"].getCurrent()
+		if self["config"].getCurrent() in (self.timerTypeEntry, self.timerJustplayEntry, self.frequencyEntry, self.entryShowEndTime, self.entryRemoteTimer):
 			self.createSetup("config")
 
 	def keyLeft(self):
@@ -357,99 +364,189 @@ class TimerEntry(Screen, ConfigListScreen):
 			self.finishedChannelSelection(*args)
 			self.keyGo()
 
+	def RemoteSubserviceSelected(self, service):
+		if service:
+			# ouch, this hurts a little
+			service_ref = timerentry_service_ref
+			self.timerentry_service_ref = ServiceReference(service[1])
+			eit = self.timer.eit
+			self.timer.eit = None
+			self.keyGo()
+			self.timerentry_service_ref = service_ref
+			self.timer.eit = eit
+
 	def keyGo(self, result = None):
 		if not self.timerentry_service_ref.isRecordable():
 			self.session.openWithCallback(self.selectChannelSelector, MessageBox, _("You didn't select a channel to record from."), MessageBox.TYPE_ERROR)
-			return
-		self.timer.name = self.timerentry_name.value
-		self.timer.description = self.timerentry_description.value
-		self.timer.justplay = self.timerentry_justplay.value == "zap"
-		self.timer.always_zap = self.timerentry_justplay.value == "zap+record"
-		self.timer.zap_wakeup = self.timerentry_zapwakeup.value
-		self.timer.pipzap = self.timerentry_pipzap.value
-		self.timer.rename_repeat = self.timerentry_renamerepeat.value
-		self.timer.conflict_detection = self.timerentry_conflictdetection.value
-		if self.timerentry_justplay.value == "zap":
-			if not self.timerentry_showendtime.value:
-				self.timerentry_endtime.value = self.timerentry_starttime.value
-				self.timerentry_afterevent.value = "nothing"
-		self.timer.resetRepeated()
-		self.timer.afterEvent = {
-			"nothing": AFTEREVENT.NONE,
-			"deepstandby": AFTEREVENT.DEEPSTANDBY,
-			"standby": AFTEREVENT.STANDBY,
-			"auto": AFTEREVENT.AUTO
-			}[self.timerentry_afterevent.value]
-		self.timer.descramble = {
-			"normal": True,
-			"descrambled+ecm": True,
-			"scrambled+ecm": False,
-			}[self.timerentry_recordingtype.value]
-		self.timer.record_ecm = {
-			"normal": False,
-			"descrambled+ecm": True,
-			"scrambled+ecm": True,
-			}[self.timerentry_recordingtype.value]
-		self.timer.service_ref = self.timerentry_service_ref
-		self.timer.tags = self.timerentry_tags
+		elif self.timerentry_remote.value:
+			service_ref = self.timerentry_service_ref
+			if self.timer.eit is not None:
+				event = eEPGCache.getInstance().lookupEventId(service_ref.ref, self.timer.eit)
+				if event:
+					n = event.getNumOfLinkageServices()
+					if n > 1:
+						tlist = []
+						ref = self.session.nav.getCurrentlyPlayingServiceReference()
+						parent = service_ref.ref
+						selection = 0
+						for x in range(n):
+							i = event.getLinkageService(parent, x)
+							if i.toString() == ref.toString():
+								selection = x
+							tlist.append((i.getName(), i))
+						self.session.openWithCallback(self.RemoteSubserviceSelected, ChoiceBox, title=_("Please select a subservice to record..."), list = tlist, selection = selection)
+						return
+					elif n > 0:
+						parent = service_ref.ref
+						service_ref = ServiceReference(event.getLinkageService(parent, 0))
+			#resolve alternative
+			alternative_ref = GetWithAlternative(str(service_ref))
+			service_ref = ':'.join(alternative_ref.split(':')[:11])
 
-		if self.timer.dirname or self.timerentry_dirname.value != defaultMoviePath():
-			self.timer.dirname = self.timerentry_dirname.value
-			config.movielist.last_timer_videodir.value = self.timer.dirname
-			config.movielist.last_timer_videodir.save()
-
-		if self.timerentry_type.value == "once":
-			self.timer.begin, self.timer.end = self.getBeginEnd()
-		if self.timerentry_type.value == "repeated":
-			if self.timerentry_repeated.value == "daily":
-				for x in (0, 1, 2, 3, 4, 5, 6):
-					self.timer.setRepeated(x)
-
-			if self.timerentry_repeated.value == "weekly":
-				self.timer.setRepeated(self.timerentry_weekday.index)
-
-			if self.timerentry_repeated.value == "weekdays":
-				for x in (0, 1, 2, 3, 4):
-					self.timer.setRepeated(x)
-
-			if self.timerentry_repeated.value == "user":
-				for x in (0, 1, 2, 3, 4, 5, 6):
-					if self.timerentry_day[x].value:
-						self.timer.setRepeated(x)
-
-			self.timer.repeatedbegindate = self.getTimestamp(self.timerentry_repeatedbegindate.value, self.timerentry_starttime.value)
-			if self.timer.repeated:
-				self.timer.begin = self.getTimestamp(self.timerentry_repeatedbegindate.value, self.timerentry_starttime.value)
-				self.timer.end = self.getTimestamp(self.timerentry_repeatedbegindate.value, self.timerentry_endtime.value)
-			else:
-				self.timer.begin = self.getTimestamp(time(), self.timerentry_starttime.value)
-				self.timer.end = self.getTimestamp(time(), self.timerentry_endtime.value)
+			# XXX: this will - without any hassle - ignore the value of repeated
+			begin, end = self.getBeginEnd()
 
 			# when a timer end is set before the start, add 1 day
-			if self.timer.end < self.timer.begin:
-				self.timer.end += 86400
+			if end < begin:
+				end += 86400
 
-		if self.timer.eit is not None:
-			event = eEPGCache.getInstance().lookupEventId(self.timer.service_ref.ref, self.timer.eit)
-			if event:
-				n = event.getNumOfLinkageServices()
-				if n > 1:
-					tlist = []
-					ref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
-					parent = self.timer.service_ref.ref
-					selection = 0
-					for x in range(n):
-						i = event.getLinkageService(parent, x)
-						if i.toString() == ref.toString():
-							selection = x
-						tlist.append((i.getName(), i))
-					self.session.openWithCallback(self.subserviceSelected, ChoiceBox, title=_("Please select a subservice to record..."), list = tlist, selection = selection)
-					return
-				elif n > 0:
-					parent = self.timer.service_ref.ref
-					self.timer.service_ref = ServiceReference(event.getLinkageService(parent, 0))
-		self.saveTimer()
-		self.close((True, self.timer))
+			rt_name = urllib.quote(self.timerentry_name.value.decode('utf8').encode('utf8','ignore'))
+			rt_description = urllib.quote(self.timerentry_description.value.decode('utf8').encode('utf8','ignore'))
+			rt_disabled = 0 # XXX: do we really want to hardcode this? why do we offer this option then?
+			rt_repeated = 0 # XXX: same here
+			rt_dirname = "/hdd/movie"
+
+			if self.timerentry_justplay.value == "zap":
+				rt_justplay = 1
+			else:
+				rt_justplay = 0
+
+			rt_eit = 0
+			if self.timer.eit is not None:
+				rt_eit = self.timer.eit
+
+			rt_afterEvent = {
+				"deepstandby": AFTEREVENT.DEEPSTANDBY,
+				"standby": AFTEREVENT.STANDBY,
+				"nothing": AFTEREVENT.NONE,
+				"auto": AFTEREVENT.AUTO
+				}.get(self.timerentry_afterevent.value, AFTEREVENT.AUTO)
+
+			url = "%s/web/timeradd?sRef=%s&begin=%s&end=%s&name=%s&description=%s&disabled=%s&justplay=%s&afterevent=%s&repeated=%s&dirname=%s&eit=%s" % (
+				config.usage.remote_fallback.value.rsplit(":", 1)[0],
+				service_ref,
+				begin,
+				end,
+				rt_name,
+				rt_description,
+				rt_disabled,
+				rt_justplay,
+				rt_afterEvent,
+				rt_repeated,
+				rt_dirname,
+				rt_eit
+			)
+			print "[RemoteTimer] debug remote", url
+			from Screens.TimerEdit import getUrl
+			getUrl(url).addCallback(self.remoteTimerOK).addErrback(self.remoteTimerNOK)
+
+		else:
+
+			self.timer.name = self.timerentry_name.value
+			self.timer.description = self.timerentry_description.value
+			self.timer.justplay = self.timerentry_justplay.value == "zap"
+			self.timer.always_zap = self.timerentry_justplay.value == "zap+record"
+			self.timer.zap_wakeup = self.timerentry_zapwakeup.value
+			self.timer.pipzap = self.timerentry_pipzap.value
+			self.timer.rename_repeat = self.timerentry_renamerepeat.value
+			self.timer.conflict_detection = self.timerentry_conflictdetection.value
+			if self.timerentry_justplay.value == "zap":
+				if not self.timerentry_showendtime.value:
+					self.timerentry_endtime.value = self.timerentry_starttime.value
+					self.timerentry_afterevent.value = "nothing"
+			self.timer.resetRepeated()
+			self.timer.afterEvent = {
+				"nothing": AFTEREVENT.NONE,
+				"deepstandby": AFTEREVENT.DEEPSTANDBY,
+				"standby": AFTEREVENT.STANDBY,
+				"auto": AFTEREVENT.AUTO
+				}[self.timerentry_afterevent.value]
+			self.timer.descramble = {
+				"normal": True,
+				"descrambled+ecm": True,
+				"scrambled+ecm": False,
+				}[self.timerentry_recordingtype.value]
+			self.timer.record_ecm = {
+				"normal": False,
+				"descrambled+ecm": True,
+				"scrambled+ecm": True,
+				}[self.timerentry_recordingtype.value]
+			self.timer.service_ref = self.timerentry_service_ref
+			self.timer.tags = self.timerentry_tags
+
+			if self.timer.dirname or self.timerentry_dirname.value != defaultMoviePath():
+				self.timer.dirname = self.timerentry_dirname.value
+				config.movielist.last_timer_videodir.value = self.timer.dirname
+				config.movielist.last_timer_videodir.save()
+
+			if self.timerentry_type.value == "once":
+				self.timer.begin, self.timer.end = self.getBeginEnd()
+			if self.timerentry_type.value == "repeated":
+				if self.timerentry_repeated.value == "daily":
+					for x in (0, 1, 2, 3, 4, 5, 6):
+						self.timer.setRepeated(x)
+
+				if self.timerentry_repeated.value == "weekly":
+					self.timer.setRepeated(self.timerentry_weekday.index)
+
+				if self.timerentry_repeated.value == "weekdays":
+					for x in (0, 1, 2, 3, 4):
+						self.timer.setRepeated(x)
+
+				if self.timerentry_repeated.value == "user":
+					for x in (0, 1, 2, 3, 4, 5, 6):
+						if self.timerentry_day[x].value:
+							self.timer.setRepeated(x)
+
+				self.timer.repeatedbegindate = self.getTimestamp(self.timerentry_repeatedbegindate.value, self.timerentry_starttime.value)
+				if self.timer.repeated:
+					self.timer.begin = self.getTimestamp(self.timerentry_repeatedbegindate.value, self.timerentry_starttime.value)
+					self.timer.end = self.getTimestamp(self.timerentry_repeatedbegindate.value, self.timerentry_endtime.value)
+				else:
+					self.timer.begin = self.getTimestamp(time(), self.timerentry_starttime.value)
+					self.timer.end = self.getTimestamp(time(), self.timerentry_endtime.value)
+
+				# when a timer end is set before the start, add 1 day
+				if self.timer.end < self.timer.begin:
+					self.timer.end += 86400
+
+			if self.timer.eit is not None:
+				event = eEPGCache.getInstance().lookupEventId(self.timer.service_ref.ref, self.timer.eit)
+				if event:
+					n = event.getNumOfLinkageServices()
+					if n > 1:
+						tlist = []
+						ref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
+						parent = self.timer.service_ref.ref
+						selection = 0
+						for x in range(n):
+							i = event.getLinkageService(parent, x)
+							if i.toString() == ref.toString():
+								selection = x
+							tlist.append((i.getName(), i))
+						self.session.openWithCallback(self.subserviceSelected, ChoiceBox, title=_("Please select a subservice to record..."), list = tlist, selection = selection)
+						return
+					elif n > 0:
+						parent = self.timer.service_ref.ref
+						self.timer.service_ref = ServiceReference(event.getLinkageService(parent, 0))
+			self.saveTimer()
+			self.close((True, self.timer))
+
+	def remoteTimerOK(self, *args):
+		self.close((False, True))
+
+	def remoteTimerNOK(self, *args):
+		print "[TimerEntry] Something when wrong with uploading timer"
 
 	def changeTimerType(self):
 		self.timerentry_justplay.selectNext()
