@@ -20,7 +20,7 @@ def getImageVersionString():
 
 # WW -placeholder for BC purposes, commented out for the moment in the Screen
 def getFlashDateString():
-		return _("unknown")
+	return _("unknown")
 
 def getBuildDateString():
 	try:
