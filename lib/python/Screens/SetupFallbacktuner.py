@@ -84,9 +84,6 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 			config.usage.remote_fallback_import,
 			_("Import channels and/or EPG from remote receiver URL when receiver is booted")))
 		if config.usage.remote_fallback_enabled.value or config.usage.remote_fallback_import.value:
-			self.list.append(getConfigListEntry(_("Enable import timer from fallback tuner"),
-				config.usage.remote_fallback_external_timer,
-				_("When enabled the timer from the fallback tuner is imported")))
 			self.list.append(getConfigListEntry(_("Fallback remote receiver"),
 				self.avahiselect,
 				_("Destination of fallback remote receiver")))
@@ -172,6 +169,5 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 		config.usage.remote_fallback_ok.save()
 		config.usage.remote_fallback_nok.save()
 		config.usage.remote_fallback.save()
-		config.usage.remote_fallback_external_timer.save()
 		configfile.save()
 		self.close(False)
