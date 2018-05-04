@@ -211,7 +211,7 @@ class TimerEditList(Screen):
 			self["key_blue"].setText("")
 			self.key_blue_choice = self.EMPTY
 
-	def fillTimerList(self):
+	def fillTimerList(self, dummy=False):
 
 		def eol_compare(x, y):
 			if x[0].state != y[0].state and x[0].state == RealTimerEntry.StateEnded or y[0].state == RealTimerEntry.StateEnded:
@@ -234,7 +234,8 @@ class TimerEditList(Screen):
 			self.list.sort(cmp = eol_compare)
 		else:
 			self.list.sort(key = lambda x: x[0].begin)
-		self["timerlist"].l.setList(self.list)
+		if not dummy:
+			self["timerlist"].l.setList(self.list)
 
 	def showLog(self):
 		cur=self["timerlist"].getCurrent()
@@ -344,7 +345,13 @@ class TimerEditList(Screen):
 				self.fillTimerList()
 				self.updateState()
 		elif len(answer) == 2 and answer[1]:
-				self.removeTimer(True)
+				prevlen = len(self.list)
+				self.fillTimerList(dummy=True)
+				if len(self.list) > prevlen:
+					self.removeTimer(True)
+				else:	
+					self["timerlist"].l.setList(self.list)
+					self.updateState()
 		else:
 				print "[TimerEditList] timer edit aborted"
 
