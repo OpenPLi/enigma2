@@ -403,48 +403,52 @@ class TimerEntry(Screen, ConfigListScreen):
 			alternative_ref = GetWithAlternative(str(service_ref))
 			service_ref = ':'.join(alternative_ref.split(':')[:11])
 
-			# XXX: this will - without any hassle - ignore the value of repeated
-			begin, end = self.getBeginEnd()
+			repeated = 0
+			if self.timerentry_type.value == "once":
+				begin, end = self.getBeginEnd()
+			if self.timerentry_type.value == "repeated":
+				if self.timerentry_repeated.value == "daily":
+					for x in (0, 1, 2, 3, 4, 5, 6):
+						repeated |= (2 ** x)
+				if self.timerentry_repeated.value == "weekly":
+					repeated = (2 ** self.timerentry_weekday.index)
+				if self.timerentry_repeated.value == "weekdays":
+					for x in (0, 1, 2, 3, 4):
+						repeated |= (2 ** x)
+				if self.timerentry_repeated.value == "user":
+					for x in (0, 1, 2, 3, 4, 5, 6):
+						if self.timerentry_day[x].value:
+							repeated |= (2 ** x)
+				repeatedbegindate = self.getTimestamp(self.timerentry_repeatedbegindate.value, self.timerentry_starttime.value)
+				if self.timer.repeated:
+					begin = self.getTimestamp(repeatedbegindate, self.timerentry_starttime.value)
+					end = self.getTimestamp(repeatedbegindate, self.timerentry_endtime.value)
+				else:
+					begin = self.getTimestamp(time(), self.timerentry_starttime.value)
+					end = self.getTimestamp(time(), self.timerentry_endtime.value)
 
 			# when a timer end is set before the start, add 1 day
 			if end < begin:
 				end += 86400
-
-			rt_name = urllib.quote(self.timerentry_name.value.decode('utf8').encode('utf8','ignore'))
-			rt_description = urllib.quote(self.timerentry_description.value.decode('utf8').encode('utf8','ignore'))
-			rt_disabled = 0 # XXX: do we really want to hardcode this? why do we offer this option then?
-			rt_repeated = 0 # XXX: same here
-			rt_dirname = "/hdd/movie"
-
-			if self.timerentry_justplay.value == "zap":
-				rt_justplay = 1
-			else:
-				rt_justplay = 0
-
-			rt_eit = 0
-			if self.timer.eit is not None:
-				rt_eit = self.timer.eit
-
-			rt_afterEvent = {
-				"deepstandby": AFTEREVENT.DEEPSTANDBY,
-				"standby": AFTEREVENT.STANDBY,
-				"nothing": AFTEREVENT.NONE,
-				"auto": AFTEREVENT.AUTO
-				}.get(self.timerentry_afterevent.value, AFTEREVENT.AUTO)
 
 			url = "%s/web/timeradd?sRef=%s&begin=%s&end=%s&name=%s&description=%s&disabled=%s&justplay=%s&afterevent=%s&repeated=%s&dirname=%s&eit=%s" % (
 				config.usage.remote_fallback.value.rsplit(":", 1)[0],
 				service_ref,
 				begin,
 				end,
-				rt_name,
-				rt_description,
-				rt_disabled,
-				rt_justplay,
-				rt_afterEvent,
-				rt_repeated,
-				rt_dirname,
-				rt_eit
+				urllib.quote(self.timerentry_name.value.decode('utf8').encode('utf8','ignore')),
+				urllib.quote(self.timerentry_description.value.decode('utf8').encode('utf8','ignore')),
+				0,
+				1 if self.timerentry_justplay.value == "zap" else 0,
+				{
+				"deepstandby": AFTEREVENT.DEEPSTANDBY,
+				"standby": AFTEREVENT.STANDBY,
+				"nothing": AFTEREVENT.NONE,
+				"auto": AFTEREVENT.AUTO
+				}.get(self.timerentry_afterevent.value, AFTEREVENT.AUTO),
+				repeated,
+				"None",
+				self.timer.eit or 0
 			)
 			print "[RemoteTimer] debug remote", url
 			from Screens.TimerEdit import getUrl
