@@ -277,7 +277,7 @@ sync:
 		if (tmp[4] != 0x47)
 		{
 			if (rd > 0) {
-				eDebug("[eM2TSFile] short read at pos %lld async!!", m_current_offset);
+				eDebug("[eM2TSFile] short read at pos %jd async!!", (intmax_t)m_current_offset);
 				return rd;
 			}
 			else {
@@ -296,7 +296,7 @@ sync:
 				eDebugNoNewLine("\n");
 				x=0;
 #else
-				eDebug("[eM2TSFile] m2ts out of sync at pos %lld, real %lld", offset + m_sync_offset, m_current_offset);
+				eDebug("[eM2TSFile] m2ts out of sync at pos %jd, real %jd", (intmax_t)(offset + m_sync_offset), (intmax_t)m_current_offset);
 #endif
 				for (; x < 192; ++x)
 				{
