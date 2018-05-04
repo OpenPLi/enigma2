@@ -2368,7 +2368,7 @@ bool eDVBServiceBase::tryFallbackTuner(eServiceReferenceDVB &service, bool &is_s
 		// hack for broken enigma implementation, uses ? instead & separators
 		while((index = remote_service_args.find('&')) != std::string::npos)
 		{
-			 remote_service_args.replace(index, 1, '?');
+			 remote_service_args.replace(index, 1, "?");
 		}
 	}
 	else
