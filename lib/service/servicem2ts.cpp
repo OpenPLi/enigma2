@@ -385,7 +385,7 @@ RESULT eServiceFactoryM2TS::info(const eServiceReference &ref, ePtr<iStaticServi
 
 RESULT eServiceFactoryM2TS::offlineOperations(const eServiceReference &ref, ePtr<iServiceOfflineOperations> &ptr)
 {
-	ptr = 0;
+	ptr = nullptr;
 	return -1;
 }
 
