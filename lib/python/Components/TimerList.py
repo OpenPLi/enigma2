@@ -24,10 +24,7 @@ class TimerList(GUIComponent, object):
 		if 200 > width - serviceNameWidth - self.iconWidth - self.iconMargin:
 			serviceNameWidth = width - 200 - self.iconWidth - self.iconMargin
 
-		if timer.external:
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, width - serviceNameWidth, 0, serviceNameWidth, self.rowSplit, 0, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, serviceName, self.backupColor, self.backupColorSel, None, None, None, None))
-		else:
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, width - serviceNameWidth, 0, serviceNameWidth, self.rowSplit, 0, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, serviceName))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, width - serviceNameWidth, 0, serviceNameWidth, self.rowSplit, 0, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, serviceName))
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, self.iconWidth + self.iconMargin, 0, width - serviceNameWidth - self.iconWidth - self.iconMargin, self.rowSplit, 2, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, timer.name))
 
 		begin = FuzzyTime(timer.begin)
@@ -102,7 +99,6 @@ class TimerList(GUIComponent, object):
 		self.rowSplit = 25
 		self.iconMargin = 4
 		self.satPosLeft = 160
-		self.backupColor = self.backupColorSel = 0x00CCAC68
 		self.iconWait = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/timer_wait.png"))
 		#currently intended that all icons have the same size
 		self.iconWidth = self.iconWait.size().width()
@@ -130,10 +126,6 @@ class TimerList(GUIComponent, object):
 			self.iconMargin = int(value)
 		def satPosLeft(value):
 			self.satPosLeft = int(value)
-		def backupColor(value):
-			self.backupColor = int(value)
-		def backupColorSel(value):
-			self.backupColorSel = int(value)
 		for (attrib, value) in list(self.skinAttributes):
 			try:
 				locals().get(attrib)(value)

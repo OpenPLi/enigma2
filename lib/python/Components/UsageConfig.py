@@ -239,7 +239,6 @@ def InitUsageConfig():
 	config.usage.remote_fallback_ok = ConfigYesNo(default = False)
 	config.usage.remote_fallback_nok = ConfigYesNo(default = False)
 	config.usage.remote_fallback_extension_menu = ConfigYesNo(default = False)
-	config.usage.remote_fallback_external_timer = ConfigYesNo(default = False)
 
 	config.usage.show_timer_conflict_warning = ConfigYesNo(default = True)
 
