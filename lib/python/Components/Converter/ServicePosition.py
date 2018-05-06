@@ -22,6 +22,7 @@ class ServicePosition(Poll, Converter, object):
 		self.detailed = 'Detailed' in args
 		self.showHours = 'ShowHours' in args
 		self.showNoSeconds = 'ShowNoSeconds' in args
+		self.vfd = '7segment' in args
 
 		if type == "Length":
 			self.type = self.TYPE_LENGTH
@@ -34,7 +35,7 @@ class ServicePosition(Poll, Converter, object):
 		elif type == "Summary":
 			self.type = self.TYPE_SUMMARY
 		else:
-			raise ElementError("type must be {Length|Position|Remaining|Gauge} with optional arguments {Negate|Detailed|ShowHours|ShowNoSeconds} for ServicePosition converter")
+			raise ElementError("type must be {Length|Position|Remaining|Gauge|Summary} with optional arguments {Negate|Plus|Detailed|ShowHours|ShowNoSeconds|7segment} for ServicePosition converter")
 
 		if self.detailed:
 			self.poll_interval = 100
@@ -95,10 +96,8 @@ class ServicePosition(Poll, Converter, object):
 			if l < 0:
 				return ""
 
-			if not self.detailed:
-				l /= 90000
-
-			if self.negate: l = -l
+			if self.negate:
+				l = -l
 
 			sign = ""
 			if l >= 0:
@@ -109,16 +108,26 @@ class ServicePosition(Poll, Converter, object):
 				sign = "-"
 
 			if not self.detailed:
-				if self.showHours:
-					if self.showNoSeconds:
-						return sign + "%d:%02d" % (l/3600, l%3600/60)
+				l /= 90000
+				if not self.vfd:
+					if self.showHours:
+						if self.showNoSeconds:
+							return sign + "%d:%02d" % (l/3600, l%3600/60)
+						else:
+							return sign + "%d:%02d:%02d" % (l/3600, l%3600/60, l%60)
 					else:
-						return sign + "%d:%02d:%02d" % (l/3600, l%3600/60, l%60)
+						if self.showNoSeconds:
+							return sign + "%d" % (l/60)
+						else:
+							return sign + "%d:%02d" % (l/60, l%60)
 				else:
-					if self.showNoSeconds:
-						return sign + "%d" % (l/60)
+					f = l/60
+					if f < 100:
+						s = l%60
 					else:
-						return sign + "%d:%02d" % (l/60, l%60)
+						f /= 60
+						s = l%3600/60
+					return "%2d:%02d" % (f, s)
 			else:
 				if self.showHours:
 					return sign + "%d:%02d:%02d:%03d" % ((l/3600/90000), (l/90000)%3600/60, (l/90000)%60, (l%90000)/90)
