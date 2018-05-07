@@ -70,20 +70,19 @@ class NumberActionMap(ActionMap):
 
 
 class HelpableActionMap(ActionMap):
-	"""An Actionmap which automatically puts the actions into the helpList.
-
-	A context list is allowed, and for backward compatibility,
-	a single string context name also is allowed"""
-
-	# sorry for this complicated code.
-	# it's not more than converting a "documented" actionmap
-	# (where the values are possibly (function, help)-tuples)
-	# into a "classic" actionmap, where values are just functions.
-	# the classic actionmap is then passed to the ActionMap constructor,
-	# the collected helpstrings (with correct context, action) is
-	# added to the screen's "helpList", which will be picked up by
-	# the "HelpableScreen".
-
+	# An Actionmap which automatically puts the actions into the helpList.
+	#
+	# A context list is allowed, and for backward compatibility, a single
+	# string context name also is allowed.
+	#
+	# Sorry for this complicated code.  It's not more than converting a
+	# "documented" actionmap (where the values are possibly (function,
+	# help)-tuples) into a "classic" actionmap, where values are just
+	# functions.  The classic actionmap is then passed to the
+	# ActionMapconstructor,	the collected helpstrings (with correct
+	# context, action) is added to the screen's "helpList", which will
+	# be picked up by the "HelpableScreen".
+	#
 	def __init__(self, parent, contexts, actions={}, prio=0, description=None):
 		if not hasattr(contexts, '__iter__'):
 			contexts = [contexts]
@@ -106,20 +105,6 @@ class HelpableActionMap(ActionMap):
 
 
 class HelpableNumberActionMap(NumberActionMap, HelpableActionMap):
-	"""An Actionmap which automatically puts the actions into the helpList.
-
-	A context list is allowed, and for backward compatibility,
-	a single string context name also is allowed"""
-
-	# sorry for this complicated code.
-	# it's not more than converting a "documented" actionmap
-	# (where the values are possibly (function, help)-tuples)
-	# into a "classic" actionmap, where values are just functions.
-	# the classic actionmap is then passed to the ActionMap constructor,
-	# the collected helpstrings (with correct context, action) is
-	# added to the screen's "helpList", which will be picked up by
-	# the "HelpableScreen".
-	#
 	def __init__(self, parent, contexts, actions=None, prio=0, description=None):
 		# Initialise NumberActionMap with empty context and actions
 		# so that the underlying ActionMap is only initialised with
