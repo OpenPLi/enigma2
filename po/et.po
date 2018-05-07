@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Openpli\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-13 09:42+0200\n"
+"POT-Creation-Date: 2018-05-07 21:56+0200\n"
 "PO-Revision-Date: 2018-03-31 22:06+0300\n"
 "Last-Translator: \n"
 "Language-Team: Raivo, Henkka, eesatfan, rimas, zeros\\n faas, sateks, valgekotkas, tigekala, rootsikunn\\n kain, i70, mustkass, pelmeen, Scott\\n <digi-tv.ee>\n"
@@ -810,9 +810,6 @@ msgstr "Salvesta (pidev salvestus)"
 msgid "Add recording (stop after current event)"
 msgstr "Salvesta (lõpeta pärast praegust saadet)"
 
-msgid "Add seperate receiver URL for import"
-msgstr ""
-
 msgid "Add service"
 msgstr "Lisa kanal"
 
@@ -933,6 +930,10 @@ msgstr "Luba subtiitrid heli keele valiku järgi"
 
 msgid "Allow subtitles for hearing impaired"
 msgstr "Luba vaegkuuljate subtiitrid"
+
+#, fuzzy
+msgid "Allow unsupported modes"
+msgstr "pole toetatud"
 
 msgid "Alpha"
 msgstr "Alfa"
@@ -1204,6 +1205,10 @@ msgid "Automatic"
 msgstr "Automaatne"
 
 msgid "Automatic Scan"
+msgstr "Automaatotsing"
+
+#, fuzzy
+msgid "Automatic bookmarks"
 msgstr "Automaatotsing"
 
 msgid "Automatic scan"
@@ -2524,6 +2529,10 @@ msgstr "Kirjeldus"
 msgid "Deselect"
 msgstr "Tühista valik"
 
+#, fuzzy
+msgid "Destination of fallback remote receiver"
+msgstr "Kaugvastuvõtja URL"
+
 msgid "Details for plugin: "
 msgstr "Laienduse üksikasjad: "
 
@@ -2629,6 +2638,9 @@ msgstr "Esipaneel ja kasutajaliides"
 msgid "Display message before playing next movie"
 msgstr "Teavita enne järgmise filmi alustamist"
 
+msgid "Display movie length in movielist (except single line style)."
+msgstr ""
+
 msgid "Display setup"
 msgstr "Esipaneeli seaded"
 
@@ -2658,6 +2670,9 @@ msgstr "Ära muuda"
 
 msgid "Do not record"
 msgstr "Ära salvesta"
+
+msgid "Do not show file extensions for registered multimedia files."
+msgstr ""
 
 msgid "Do nothing"
 msgstr "Ära tee midagi"
@@ -2907,6 +2922,9 @@ msgstr "El Salvador"
 msgid "Electronic Program Guide"
 msgstr "EPG"
 
+msgid "Empty slot"
+msgstr ""
+
 msgid "Enable"
 msgstr "Luba"
 
@@ -3029,7 +3047,15 @@ msgstr "Enigma versioon: "
 msgid "Enigma2 skin selector"
 msgstr "Enigma2 kujunduse valik"
 
+#, fuzzy
+msgid "Enter IP address"
+msgstr "IP aadress"
+
 msgid "Enter PIN"
+msgstr "Sisesta PIN"
+
+#, fuzzy
+msgid "Enter URL"
 msgstr "Sisesta PIN"
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -3360,11 +3386,27 @@ msgstr "Nurjus:"
 msgid "Falkland Islands (Malvinas)"
 msgstr "Falklandi saared"
 
+#, fuzzy
+msgid "Fallback remote receiver"
+msgstr "Kaugvastuvõtja URL"
+
+#, fuzzy
+msgid "Fallback remote receiver IP"
+msgstr "Kaugvastuvõtja URL"
+
+#, fuzzy
+msgid "Fallback remote receiver Port"
+msgstr "Kaugvastuvõtja URL"
+
 msgid "Fallback remote receiver URL"
 msgstr "Kaugvastuvõtja URL"
 
 #, fuzzy
 msgid "Fallback remote receiver setup"
+msgstr "Kaugvastuvõtja URL"
+
+#, fuzzy
+msgid "Fallback tuner setup"
 msgstr "Kaugvastuvõtja URL"
 
 #, python-format
@@ -3914,6 +3956,10 @@ msgstr "JÕUDEOLEKUS"
 msgid "IP address"
 msgstr "IP aadress"
 
+#, fuzzy
+msgid "IP of fallback remote receiver"
+msgstr "Kaugvastuvõtja URL"
+
 msgid "ISO file is too large for this filesystem!"
 msgstr "ISO fail on liiga suur failisüsteemile!"
 
@@ -3928,6 +3974,19 @@ msgstr "Ikoonid"
 
 msgid "If enabled, display shows 12 chars instead 8, but in latin-1/translit only."
 msgstr "Kui on lubatud, näitab näidik 12 sümbolit 8 asemel, aga ainult latin-1/translit."
+
+#, fuzzy
+msgid "If enabled, then there will be displayed icons for new/unseen items too."
+msgstr "Määrates 'jah', kuvatakse uue saate algamisel inforiba."
+
+msgid "If is disabled, then after Copy/Move will not be target directory stored into bookmarks."
+msgstr ""
+
+msgid "If is enabled and movie playback is finished, then after return to movielist will not be automaticaly start service playback."
+msgstr ""
+
+msgid "If set as 'Yes', then audiofiles are played in 'list mode' only, instead in full screen player."
+msgstr ""
 
 msgid "If set to 'yes' signal values (SNR, etc) will be calculated from API V3. This is an old API version that has now been superseded."
 msgstr "Määrates 'jah', arvutatakse signaali väärused (SNR, jms.) API V3 põhjal. See on vana API versioon, mis on nüüd asendatud uuega."
@@ -5465,11 +5524,12 @@ msgstr "Taasesita"
 msgid "Play DVD"
 msgstr "Taasesita"
 
-msgid "Play audio in background"
-msgstr "Mängi taustal heli"
-
 msgid "Play audio-CD..."
 msgstr "Mängi heliplaat..."
+
+#, fuzzy
+msgid "Play audiofiles in list mode"
+msgstr "Mängi taustal heli"
 
 msgid "Play back media files"
 msgstr "Esita meediafaile"
@@ -5745,6 +5805,10 @@ msgstr "Port C"
 
 msgid "Port D"
 msgstr "Port D"
+
+#, fuzzy
+msgid "Port of fallback remote receiver"
+msgstr "Kaugvastuvõtja URL"
 
 msgid "Portugal"
 msgstr "Portugal"
@@ -6490,6 +6554,10 @@ msgstr "Saint-Pierre ja Miquelon"
 msgid "Saint Vincent and the Grenadines"
 msgstr "Saint Vincent ja Grenadiinid"
 
+#, fuzzy
+msgid "Same as stream"
+msgstr "Peata kõik vood"
+
 msgid "Same resolution as skin"
 msgstr "Sama eraldus nagu välimusel"
 
@@ -6944,9 +7012,6 @@ msgstr "Vali video töörežiim"
 msgid "Select wireless network"
 msgstr "Vali WiFi võrk"
 
-msgid "Select yes when you want to import channels and/or EPG from a different URL"
-msgstr ""
-
 #, fuzzy
 msgid "Select your ATSC provider."
 msgstr "ATSC levitaja"
@@ -7077,6 +7142,10 @@ msgstr "Kanalid"
 msgid "Set PIN"
 msgstr "Määra PIN"
 
+#, fuzzy
+msgid "Set action when movie playback is finished."
+msgstr "Määra käitumine filmi algamisel."
+
 msgid "Set all hotkey to default?"
 msgstr "Kas seada kõik kiirnupud vaikeseadesse?"
 
@@ -7098,11 +7167,18 @@ msgstr "Määra püsiaadress"
 msgid "Set fps for external subtitles"
 msgstr "Määra väliste subtiitrite kaadrisagedus"
 
+msgid "Set if You want see status icons, progress bars or nothing."
+msgstr ""
+
 msgid "Set interface as default Interface"
 msgstr "Määra vaikimisi võrguliideseks"
 
 msgid "Set limits"
 msgstr "Määra piirid"
+
+#, fuzzy
+msgid "Set movielist type."
+msgstr "Kaitse filmide nimekirja"
 
 msgid "Set pin code persistent"
 msgstr "Sea PIN kood püsivaks"
@@ -7139,6 +7215,9 @@ msgstr "Määra pinge ja 22 KHz"
 
 msgid "Settings"
 msgstr "Seaded"
+
+msgid "Settings can be different for each directory separately (for non removeable devices only)."
+msgstr ""
 
 msgid "Setup"
 msgstr "Seadistamine"
@@ -7614,6 +7693,10 @@ msgid "Sort list:"
 msgstr "Järjesta nimekiri:"
 
 msgid "Sort order for menu entries"
+msgstr "Sea menüü sisestuste järjekord"
+
+#, fuzzy
+msgid "Sort order for setup entries"
 msgstr "Sea menüü sisestuste järjekord"
 
 msgid "Sort plugins list to default?"
@@ -8350,6 +8433,10 @@ msgstr "See valikuvõimalus aitab seadistada kujutletava valjuhääldi asukohta.
 
 msgid "This option allows you to add the softcam setup in the extensions menu."
 msgstr "See valik lubab lisada softcam seadmise laienduste menüüsse."
+
+#, fuzzy
+msgid "This option allows you to alphabetically sort setup menu entries."
+msgstr "Saad kuvada menüüde täieliku asukoha."
 
 #, fuzzy
 msgid "This option allows you to boost the blue tones in the picture."
@@ -9568,6 +9655,9 @@ msgstr "Salvestamist alustatakse enne saatekavas näidatud aega."
 msgid "When nonzero, a recording will stop later than the ending time indicated by the EPG."
 msgstr "Salvestamine lõpetatakse pärast saatekavas näidatud aega."
 
+msgid "When selected this allows video modes to be selected even if they are not reported as supported."
+msgstr ""
+
 msgid "When the content has an aspect ratio of 16:9, choose whether to scale/stretch the picture."
 msgstr "Määra, kas 16:9 pildisuhtega sisu tuleb skaleerida/venitada."
 
@@ -9727,6 +9817,9 @@ msgstr "Eemaldamise saab tühistada."
 msgid "You can continue watching TV etc. while this is running."
 msgstr "Samal ajal võib vaadata TV-d jne."
 
+msgid "You can enable if will be displayed extended EPG description for item."
+msgstr ""
+
 msgid "You can install this plugin."
 msgstr "Selle laienduse saab paigaldada."
 
@@ -9735,6 +9828,16 @@ msgstr "Plaadile saab kirjutada ainult vastuvõtja salvestusi!"
 
 msgid "You can remove this plugin."
 msgstr "Selle laienduse saab eemaldada."
+
+msgid "You can set how will be finished movieplayer with 'Exit' button."
+msgstr ""
+
+msgid "You can set selected directory as 'root' directory for movie player."
+msgstr ""
+
+#, fuzzy
+msgid "You can set sorting type for items in movielist."
+msgstr "Näita filmi pikkust "
 
 msgid "You cannot delete this!"
 msgstr "Seda ei saa kustutada!"
@@ -10895,14 +10998,6 @@ msgstr "slot%s - %s, koos varukoopiaga"
 #, python-format
 msgid "slot%s - %s, without backup"
 msgstr "slot%s - %s, ilma varukoopiata"
-
-#, python-format
-msgid "slot%s - empty, with backup"
-msgstr "slot%s - tühi, varukoopiaga"
-
-#, python-format
-msgid "slot%s - empty, without backup"
-msgstr "slot%s - tühi, ilma varukoopiata"
 
 msgid "soap/melodram/folkloric"
 msgstr "seep/melodraama/folkloor"
