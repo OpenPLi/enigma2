@@ -94,7 +94,10 @@ static void fetch_pallete(int fd, struct color pallete[], int count)
 	lseek(fd, BMP_COLOR_OFFSET, SEEK_SET);
 	for (int i = 0; i < count; i++)
 	{
-		read(fd, buff, 4);
+		if (read(fd, buff, 4) != 4) // failed to read rgb
+		{
+			break;
+		}
 		pallete[i].red = buff[2];
 		pallete[i].green = buff[1];
 		pallete[i].blue = buff[0];
@@ -109,15 +112,39 @@ static unsigned char *bmp_load(const char *file,  int *x, int *y)
 	int fd = open(file, O_RDONLY);
 	if (fd == -1) return NULL;
 	if (lseek(fd, BMP_SIZE_OFFSET, SEEK_SET) == -1) return NULL;
-	read(fd, buff, 4);
+	if (read(fd, buff, 4) != 4) // failed to read x
+	{
+		close(fd);
+		return NULL;
+	}
 	*x = buff[0] + (buff[1] << 8) + (buff[2] << 16) + (buff[3] << 24);
-	read(fd, buff, 4);
+	if (read(fd, buff, 4) != 4) // failed to read y
+	{
+		close(fd);
+		return NULL;
+	}
 	*y = buff[0] + (buff[1] << 8) + (buff[2] << 16) + (buff[3] << 24);
-	if (lseek(fd, BMP_TORASTER_OFFSET, SEEK_SET) == -1) return NULL;
-	read(fd, buff, 4);
+	if (lseek(fd, BMP_TORASTER_OFFSET, SEEK_SET) == -1)
+	{
+		close(fd);
+		return NULL;
+	}
+	if (read(fd, buff, 4) != 4) // failed to read raster
+	{
+		close(fd);
+		return NULL;
+	}
 	int raster = buff[0] + (buff[1] << 8) + (buff[2] << 16) + (buff[3] << 24);
-	if (lseek(fd, BMP_BPP_OFFSET, SEEK_SET) == -1) return NULL;
-	read(fd, buff, 2);
+	if (lseek(fd, BMP_BPP_OFFSET, SEEK_SET) == -1)
+	{
+		close(fd);
+		return NULL;
+	}
+	if (read(fd, buff, 2) != 2) // failed to read bpp
+	{
+		close(fd);
+		return NULL;
+	}
 	int bpp = buff[0] + (buff[1] << 8);
 
 	unsigned char *pic_buffer = new unsigned char[(*x) * (*y) * 3];
@@ -135,7 +162,10 @@ static unsigned char *bmp_load(const char *file,  int *x, int *y)
 				return NULL;
 			for (int i = 0; i < *y; i++)
 			{
-				read(fd, tbuffer, (*x) / 2 + *x % 2);
+				if (read(fd, tbuffer, (*x) / 2 + *x % 2) != ((*x) / 2 + *x % 2))
+				{
+					eDebug("[ePicLoad] failed to read %d bytes...", ((*x) / 2 + *x % 2));
+				}
 				int j;
 				for (j = 0; j < (*x) / 2; j++)
 				{
@@ -156,7 +186,12 @@ static unsigned char *bmp_load(const char *file,  int *x, int *y)
 					*wr_buffer++ = pallete[c1].blue;
 				}
 				if (skip)
-					read(fd, buff, skip);
+				{
+					if (read(fd, buff, skip) != skip)
+					{
+						eDebug("[ePicLoad] failed to read %d bytes...", skip);
+					}
+				}
 				wr_buffer -= (*x) * 6;
 			}
 			delete [] tbuffer;
@@ -172,7 +207,10 @@ static unsigned char *bmp_load(const char *file,  int *x, int *y)
 				return NULL;
 			for (int i = 0; i < *y; i++)
 			{
-				read(fd, tbuffer, *x);
+				if (read(fd, tbuffer, *x) != *x)
+				{
+					eDebug("[ePicLoad] failed to read %d bytes...", *x);
+				}
 				for (int j = 0; j < *x; j++)
 				{
 					wr_buffer[j * 3] = pallete[tbuffer[j]].red;
@@ -180,7 +218,12 @@ static unsigned char *bmp_load(const char *file,  int *x, int *y)
 					wr_buffer[j * 3 + 2] = pallete[tbuffer[j]].blue;
 				}
 				if (skip)
-					read(fd, buff, skip);
+				{
+					if (read(fd, buff, skip) != skip)
+					{
+						eDebug("[ePicLoad] failed to skip %d bytes...", skip);
+					}
+				}
 				wr_buffer -= (*x) * 3;
 			}
 			delete [] tbuffer;
@@ -192,7 +235,10 @@ static unsigned char *bmp_load(const char *file,  int *x, int *y)
 			lseek(fd, raster, SEEK_SET);
 			for (int i = 0; i < (*y); i++)
 			{
-				read(fd, wr_buffer, (*x) * 3);
+				if (read(fd, wr_buffer, (*x) * 3) != ((*x) * 3))
+				{
+					eDebug("[picload] failed to read %d bytes...", ((*x) * 3));
+				}
 				for (int j = 0; j < (*x) * 3 ; j = j + 3)
 				{
 					unsigned char c = wr_buffer[j];
@@ -200,7 +246,12 @@ static unsigned char *bmp_load(const char *file,  int *x, int *y)
 					wr_buffer[j + 2] = c;
 				}
 				if (skip)
-					read(fd, buff, skip);
+				{
+					if (read(fd, buff, skip) != skip)
+					{
+						eDebug("[ePicLoad] failed to skip %d bytes...", skip);
+					}
+				}
 				wr_buffer -= (*x) * 3;
 			}
 			break;
@@ -640,7 +691,10 @@ void ePicLoad::thread()
 {
 	threadrunning = true;
 	hasStarted();
-	nice(4);
+	if (nice(4))
+	{
+		eDebug("[ePicLoad] thread failed to modify scheduling priority (%m)");
+	}
 	runLoop();
 }
 
@@ -1283,7 +1337,12 @@ int ePicLoad::getFileType(const char * file)
 	int fd = ::open(file, O_RDONLY);
 	if (fd == -1)
 		return -1;
-	::read(fd, id, 10);
+	if (::read(fd, id, 10) != 10)
+	{
+		eDebug("[ePicLoad] getFileType failed to read magic num");
+		close(fd);
+		return -1;
+	}
 	::close(fd);
 
 	if      (id[1] == 'P'  && id[2] == 'N'  && id[3] == 'G')			return F_PNG;
