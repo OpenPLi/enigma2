@@ -69,16 +69,16 @@
 
 <!-- movieplayer-->
 	<screen name="InfoBarMoviePlayerSummary" position="0,0" size="220,176" >
-		<widget source="session.CurrentService" render="Label" position="0,10" size="220,107" font="FdLcD;29" halign="center" valign="center" transparent="1" >
+		<widget source="session.CurrentService" render="Label" position="0,4" size="220,106" font="FdLcD;28" halign="center" valign="center" transparent="1" >
 			<convert type="ServiceName">Name</convert>
 		</widget>
-		<widget source="session.CurrentService" render="Progress" position="0,112" size="220,22" zPosition="2" borderWidth="1"  transparent="1" >
+		<widget source="session.CurrentService" render="Progress" position="0,116" size="220,15" zPosition="2" borderWidth="1"  transparent="1" >
 			<convert type="ServicePosition">Position</convert>
 		</widget>
-		<widget source="session.CurrentService" render="Label" position="0,142" size="220,34" font="FdLcD;34" halign="right" transparent="1">
+		<widget source="session.CurrentService" render="Label" position="0,142" size="220,34" font="FdLcD;32" halign="right" transparent="1">
 			<convert type="ServicePosition">Remaining,Negate</convert>
 		</widget>
-		<widget source="global.CurrentTime" render="Label" position="0,142" size="220,34" font="FdLcD;34" halign="left" transparent="1">
+		<widget source="global.CurrentTime" render="Label" position="0,142" size="220,34" font="FdLcD;32" halign="left" transparent="1">
 			<convert type="ClockToText">Format:%H:%M</convert>
 		</widget>
 	</screen>
