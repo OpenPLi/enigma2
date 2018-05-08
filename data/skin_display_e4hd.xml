@@ -142,15 +142,15 @@
 
 <!-- setup-->
 	<screen name="SetupSummary" position="fill">
-		<widget source="SetupTitle" render="Label" position="top" size="*,41" font="FdLcD;36" halign="left" />
-		<widget source="SetupEntry" render="Label" position="top" size="*,42" font="FdLcD;18" halign="left" />
-		<widget source="SetupValue" render="Label" position="top" size="*,42" font="FdLcD;18" halign="left" />
+		<widget source="SetupTitle" render="Label" position="0,4" size="220,40" font="FdLcD;32" halign="center" valign="top" />
+		<widget source="SetupEntry" render="Label" position="0,50" size="220,42" font="FdLcD;18" halign="left" />
+		<widget source="SetupValue" render="Label" position="0,100" size="220,42" font="FdLcD;18" halign="left" />
 	</screen>
 
 <!-- misc-->
 	<screen name="SimpleSummary" position="fill">
-		<widget source="parent.Title" render="Label" position="top" size="*,73" font="FdLcD;29" halign="center" valign="center" />
-		<panel position="bottom" size="*,18" name="SummaryClockPanel" />
+		<widget source="parent.Title" render="Label" position="0,4" size="220,40" font="FdLcD;32" halign="center" valign="top" />
+		<panel name="SummaryClockPanel" />
 	</screen>
 	<screen name="WizardSummary" position="fill">
 		<widget source="text" render="Label" position="top" size="*,52" font="FdLcD;26" halign="center" />
