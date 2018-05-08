@@ -9,6 +9,9 @@ MAX_X = 720
 MAX_Y = 576
 MAX_W = MAX_X * 3 / 4
 MAX_H = MAX_Y * 3 / 4
+if SystemInfo["Has360PiP"]:
+	MAX_W = MAX_X / 2
+	MAX_H = MAX_Y / 2
 MIN_W = MAX_X / 8
 MIN_H = MAX_Y / 8
 
