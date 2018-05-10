@@ -10,21 +10,21 @@
 <!-- movieplayer-->
 	<screen name="InfoBarMoviePlayerSummary" position="0,0" size="1,1">
 		<widget source="session.CurrentService" render="Label" position="0,0" size="1,1">
-			<convert type="ServicePosition">Remaining</convert>
+			<convert type="ServicePosition">Remaining,7segment</convert>
 		</widget>
 	</screen>
 
 <!-- DVD -->
 	<screen name="DVDSummary" position="0,0" size="1,1">
 		<widget source="session.CurrentService" render="Label" position="0,0" size="1,1">
-			<convert type="ServicePosition">Remaining</convert>
+			<convert type="ServicePosition">Remaining,7segment</convert>
 		</widget>
 	</screen>
 
 <!-- MediaPlayer -->
 	<screen name="MediaPlayerLCDScreen" position="0,0" size="1,1">
 		<widget source="session.CurrentService" render="Label" position="0,0" size="1,1">
-			<convert type="ServicePosition">Remaining</convert>
+			<convert type="ServicePosition">Remaining,7segment</convert>
 		</widget>
 	</screen>
 
