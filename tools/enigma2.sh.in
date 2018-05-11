@@ -63,7 +63,7 @@ case $ret in
 	42)
 		# bind the console (when available)
 		[ -f /sys/class/vtconsole/vtcon1/bind ] && echo 1 > /sys/class/vtconsole/vtcon1/bind
-		( opkg upgrade sysvinit && opkg upgrade sysvinit-pidof && opkg upgrade initscripts-functions && opkg upgrade busybox && opkg list-upgradable | cut -f 1 -d ' ' | xargs opkg upgrade ) 2>&1 | tee /home/root/ipkgupgrade.log
+		( opkg upgrade sysvinit && opkg upgrade sysvinit-pidof && opkg upgrade initscripts-functions && opkg upgrade busybox && opkg upgrade kmod && opkg list-upgradable | cut -f 1 -d ' ' | xargs opkg upgrade ) 2>&1 | tee /home/root/ipkgupgrade.log
 		/sbin/reboot
 		;;
 	43)
