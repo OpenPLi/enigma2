@@ -17,6 +17,7 @@
 	<fonts>
 		<!-- pick a funky name for the font, so we don't conflict  -->
 		<font filename="nmsbd.ttf" name="FdLcD" scale="100"/>
+		<font filename="LiberationSans-Regular.ttf" name="CondFdLcD" scale="100"/>
 	</fonts>
 
 <!-- template -->
@@ -31,7 +32,7 @@
 		</widget>
 	</screen>
 	<screen name="LcdOrbitalPositionPanel">
-		<widget source="session.CurrentService" render="Label" position="18,151" size="102,24" text="DVB-S" halign="center" font="Regular;24">
+		<widget source="session.CurrentService" render="Label" position="18,151" size="102,24" halign="center" font="CondFdLcD;24">
 			<convert type="ServiceOrbitalPosition"/>
 		</widget>
 	</screen>
@@ -53,7 +54,7 @@
 		</widget>
 	</screen>
 	<screen name="LcdChannelOrbitalPositionPanel">
-		<widget source="parent.ServiceEvent" render="Label" position="18,151" size="102,24" halign="center" font="Regular;24">
+		<widget source="parent.ServiceEvent" render="Label" position="18,151" size="102,24" halign="center" font="CondFdLcD;24">
 			<convert type="ServiceOrbitalPosition"/>
 		</widget>
 	</screen>
@@ -214,22 +215,68 @@
 		</widget>
 	</screen>
 
-	<screen name="EventView_summary" position="0,0" size="220,176">
-		<widget source="parent.Title" render="Label" position="0,0" size="160,22" font="FdLcD;15" halign="left" noWrap="1"/>
-		<widget source="parent.summary_description" render="Label" position="0,22" size="220,102" font="FdLcD;18"/>
-	</screen>
-
 	<screen name="EventViewSimple_summary" position="0,0" size="220,176">
 		<widget source="parent.Title" render="Label" position="0,0" size="160,16" font="FdLcD;15" halign="left" noWrap="1"/>
 		<widget source="parent.summary_description" render="Label" position="0,16" size="220,102" font="FdLcD;18"/>
 	</screen>
 
-<!-- EPG Screens -->
+<!-- EPG service-->
 	<screen name="EPGSelection_summary" position="0,0" size="220,176">
-		<panel name="SummaryEpgPanel"/>
-		<panel name="SummaryIconsPanel"/>
-		<panel name="SummaryTunerStatusPanel"/>
+		<widget source="parent.Event" render="Label" position="0,4" size="220,37" font="FdLcD;32" foregroundColor="#DDDD00">
+			<convert type="EventName">Name</convert>
+		</widget>
+		<widget source="parent.Event" render="Label" position="0,44" size="220,72" font="CondFdLcD;16" halign="left">
+			<convert type="EventName">FullDescription</convert>
+		</widget>
+		<widget source="parent.Event" render="Label" position="0,122" size="70,16" font="FdLcD;16" foregroundColor="#dddd00">
+			<convert type="EventTime">StartTime</convert>
+			<convert type="ClockToText">ShortDate</convert>
+		</widget>
+		<widget source="parent.Event" render="Label" position="80,122" size="42,16" font="FdLcD;16" halign="left" foregroundColor="#dddd00">
+			<convert type="EventTime">StartTime</convert>
+			<convert type="ClockToText">Format:%H:%M</convert>
+		</widget>
+		<widget source="parent.Event" render="Label" position="122,122" size="52,16" font="FdLcD;16" halign="right" foregroundColor="#dddd00">
+			<convert type="EventTime">EndTime</convert>
+			<convert type="ClockToText">Format:- %H:%M</convert>
+		</widget>
+		<widget source="parent.Event" render="Label" position="174,122" size="46,16" font="FdLcD;16" halign="right" foregroundColor="#dddd00">
+			<convert type="EventTime">Duration</convert>
+			<convert type="ClockToText">AsLengthHours</convert>
+		</widget>
+		<widget source="session.CurrentService" render="Label" position="18,151" size="102,24" halign="center" font="CondFdLcD;24" noWrap="1">
+			<convert type="ServiceOrbitalPosition"/>
+		</widget>
+		<panel name="LcdTunerPanel"/>
+		<panel name="LcdRecordPanel"/>
+		<panel name="LcdClockPanel"/>
 	</screen>
+<!-- EPG EventView -->
+	<screen name="EventView_summary" position="0,0" size="220,176">
+		<widget source="parent.Title" render="Label" position="0,4" size="220,37" font="FdLcD;32"/>
+		<widget source="parent.Event" render="Label" position="0,44" size="220,72" font="CondFdLcD;16" halign="left">
+			<convert type="EventName">Description</convert>
+		</widget>
+		<widget source="parent.Event" render="Label" position="0,122" size="80,16" font="FdLcD;16" foregroundColor="#dddd00">
+			<convert type="EventTime">StartTime</convert>
+			<convert type="ClockToText">ShortDate</convert>
+		</widget>
+		<widget source="parent.Event" render="Label" position="80,122" size="70,16" font="FdLcD;16" halign="left" foregroundColor="#dddd00">
+			<convert type="EventTime">StartTime</convert>
+			<convert type="ClockToText">Format:%H:%M</convert>
+		</widget>
+		<widget source="parent.Event" render="Label" position="150,122" size="70,16" font="FdLcD;16" halign="right" foregroundColor="#dddd00">
+			<convert type="EventTime">Duration</convert>
+			<convert type="ClockToText">InMinutes</convert>
+		</widget>
+		<widget source="session.CurrentService" render="Label" position="18,151" size="102,24" halign="center" font="CondFdLcD;24" noWrap="1">
+			<convert type="ServiceOrbitalPosition"/>
+		</widget>
+		<panel name="LcdTunerPanel"/>
+		<panel name="LcdRecordPanel"/>
+		<panel name="LcdClockPanel"/>
+	</screen>
+<!-- EPG Screens -->
 	<screen name="QuickEPG_summary" position="0,0" size="220,176">
 		<panel name="SummaryEpgPanel"/>
 		<panel name="SummaryIconsPanel"/>
