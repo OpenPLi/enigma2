@@ -1,5 +1,4 @@
 #include <lib/gdi/lcd.h>
-//#include <lib/gdi/epng.h>
 
 #include <unistd.h>
 #include <fcntl.h>
