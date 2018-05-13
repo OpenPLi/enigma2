@@ -21,7 +21,6 @@ class eFbLCD: public eLCD
 	uint16_t m_red[256], m_green[256], m_blue[256], m_trans[256];
 	int m_phys_mem;
 	int m_manual_blit;
-	bool m_dump;
 
 	void calcRamp();
 	int setMode(int xRes, int yRes, int bpp);
@@ -30,7 +29,8 @@ class eFbLCD: public eLCD
 	void disableManualBlit();
 			// low level gfx stuff
 	int putCMAP();
-	void dumpLCD2PNG();
+	void save2png(unsigned char* output, int xRes, int yRes);
+	void save2bmp(unsigned char* output, int xRes, int yRes);
 public:
 	eFbLCD(const char *fb=LCD_DEV);
 	~eFbLCD();
@@ -47,7 +47,7 @@ public:
 	int lock();
 	void unlock();
 	int islocked() { return locked; }
-	void setDump(bool);
+	void dumpLCD(bool);
 };
 
 #endif
