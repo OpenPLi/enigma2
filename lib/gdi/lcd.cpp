@@ -297,7 +297,7 @@ void eDBoxLCD::update()
 #endif
 }
 
-void eDBoxLCD::setDump(bool onoff)
+void eDBoxLCD::dumpLCD(bool png)
 {
 	return;
 }

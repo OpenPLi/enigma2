@@ -31,7 +31,6 @@ eFbLCD::eFbLCD(const char *fb)
 	m_alpha = 255;
 	m_gamma = 128;
 	m_brightness = 128;
-	m_dump=false;
 
 	lcdfd = open(fb, O_RDWR);
 	if (lcdfd < 0)
@@ -285,65 +284,95 @@ int eFbLCD::setLCDBrightness(int brightness)
 	return 0;
 }
 
-void eFbLCD::setDump(bool onoff)
+void eFbLCD::dumpLCD(bool png=true)
 {
-	m_dump = onoff;
-	if (m_dump)
-		dumpLCD2PNG();
+	unsigned char *buffer, *output;
+	int mallocsize = m_xRes * m_yRes;
+	output = (unsigned char *)malloc(mallocsize*4);
+
+	buffer=(unsigned char*)mmap(0, m_available, PROT_WRITE|PROT_READ, MAP_SHARED, lcdfd, 0);
+	if (!buffer)
+	{
+		eDebug("[eFbLCD] mmap: %m");
+		return;
+	}
+	memcpy(output, buffer, _stride * m_yRes);
+	if (png)
+		save2png(output, m_xRes, m_yRes);
+	else
+		save2bmp(output, m_xRes, m_yRes);
+
+	munmap(buffer, m_available);
+	buffer = 0;
 }
 
-void eFbLCD::dumpLCD2PNG()
+void eFbLCD::save2png(unsigned char* output, int xRes, int yRes)
 {
-	if (m_dump)
+	int output_bytes=4; //osd only
+	const char* filename = "/tmp/lcdshot.png";
+
+	FILE *fd2;
+	fd2 = fopen(filename, "wr");
+	if (!fd2)
 	{
-		unsigned char *buffer, *output;
-		int mallocsize = m_xRes * m_yRes;
-		output = (unsigned char *)malloc(mallocsize*4);
-
-		buffer=(unsigned char*)mmap(0, m_available, PROT_WRITE|PROT_READ, MAP_SHARED, lcdfd, 0);
-		if (!buffer)
-		{
-			eDebug("[eFbLCD] mmap: %m");
-			return;
-		}
-		memcpy(output, buffer, _stride * m_yRes);
-		int output_bytes=4;
-
-		const char* filename = "/tmp/lcdshot.png";
-
-		FILE *fd2;
-		fd2 = fopen(filename, "wr");
-		if (!fd2)
-		{
-			fprintf(stderr, "Failed to open '%s' for output\n", filename);
-			return;
-		}
-
-		png_bytep *row_pointers;
-		png_structp png_ptr;
-		png_infop info_ptr;
-
-		png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, (png_voidp)NULL, (png_error_ptr)NULL, (png_error_ptr)NULL);
-		info_ptr = png_create_info_struct(png_ptr);
-		png_init_io(png_ptr, fd2);
-
-		row_pointers=(png_bytep*)malloc(sizeof(png_bytep)*m_yRes);
-
-		int y;
-		for (y=0; y<m_yRes; y++)
-			row_pointers[y]=output+(y*m_xRes*output_bytes);
-		png_set_bgr(png_ptr);
-		png_set_IHDR(png_ptr, info_ptr, m_xRes, m_yRes, 8, PNG_COLOR_TYPE_RGBA, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_BASE, PNG_FILTER_TYPE_BASE);
-		png_write_info(png_ptr, info_ptr);
-		png_write_image(png_ptr, row_pointers);
-		png_write_end(png_ptr, info_ptr);
-		png_destroy_write_struct(&png_ptr, &info_ptr);
-
-		free(row_pointers);
-
-		fclose(fd2);
-
-		munmap(buffer, m_available);
-		buffer = 0;
+		fprintf(stderr, "Failed to open '%s' for output\n", filename);
+		return;
 	}
+
+	png_bytep *row_pointers;
+	png_structp png_ptr;
+	png_infop info_ptr;
+
+	png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, (png_voidp)NULL, (png_error_ptr)NULL, (png_error_ptr)NULL);
+	info_ptr = png_create_info_struct(png_ptr);
+	png_init_io(png_ptr, fd2);
+
+	row_pointers=(png_bytep*)malloc(sizeof(png_bytep)*yRes);
+
+	int y;
+	for (y=0; y < yRes; y++)
+		row_pointers[y]=output+(y*xRes*output_bytes);
+	png_set_bgr(png_ptr);
+	png_set_IHDR(png_ptr, info_ptr, xRes, yRes, 8, PNG_COLOR_TYPE_RGBA, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_BASE, PNG_FILTER_TYPE_BASE);
+	png_write_info(png_ptr, info_ptr);
+	png_write_image(png_ptr, row_pointers);
+	png_write_end(png_ptr, info_ptr);
+	png_destroy_write_struct(&png_ptr, &info_ptr);
+
+	free(row_pointers);
+	fclose(fd2);
+}
+
+void eFbLCD::save2bmp(unsigned char* output, int xRes, int yRes)
+{
+	int output_bytes=4;  //osd only
+	const char* filename = "/tmp/lcdshot.bmp";
+
+	FILE *fd2;
+	fd2 = fopen(filename, "wr");
+	if (!fd2)
+	{
+		fprintf(stderr, "Failed to open '%s' for output\n", filename);
+		return;
+	}
+	unsigned char hdr[14 + 40];
+	int i = 0;
+#define PUT32(x) hdr[i++] = ((x)&0xFF); hdr[i++] = (((x)>>8)&0xFF); hdr[i++] = (((x)>>16)&0xFF); hdr[i++] = (((x)>>24)&0xFF);
+#define PUT16(x) hdr[i++] = ((x)&0xFF); hdr[i++] = (((x)>>8)&0xFF);
+#define PUT8(x) hdr[i++] = ((x)&0xFF);
+	PUT8('B'); PUT8('M');
+	PUT32((((xRes * yRes) * 3 + 3) &~ 3) + 14 + 40);
+	PUT16(0); PUT16(0); PUT32(14 + 40);
+	PUT32(40); PUT32(xRes); PUT32(yRes);
+	PUT16(1);
+	PUT16(output_bytes*8); // bits
+	PUT32(0); PUT32(0); PUT32(0); PUT32(0); PUT32(0); PUT32(0);
+#undef PUT32
+#undef PUT16
+#undef PUT8
+	fwrite(hdr, 1, i, fd2);
+	int y;
+	for (y=yRes-1; y>=0 ; y-=1)
+		fwrite(output+(y*xRes*output_bytes),xRes*output_bytes,1,fd2);
+	fclose(fd2);
 }
