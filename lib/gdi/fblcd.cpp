@@ -8,6 +8,7 @@
 #include <linux/kd.h>
 
 #include <lib/gdi/fblcd.h>
+#include "png.h"
 
 #ifndef FBIO_BLIT
 #define FBIO_SET_MANUAL_BLIT _IOW('F', 0x21, __u8)
@@ -30,6 +31,7 @@ eFbLCD::eFbLCD(const char *fb)
 	m_alpha = 255;
 	m_gamma = 128;
 	m_brightness = 128;
+	m_dump=false;
 
 	lcdfd = open(fb, O_RDWR);
 	if (lcdfd < 0)
@@ -281,4 +283,67 @@ int eFbLCD::setLCDBrightness(int brightness)
 		fclose(f);
 	}
 	return 0;
+}
+
+void eFbLCD::setDump(bool onoff)
+{
+	m_dump = onoff;
+	if (m_dump)
+		dumpLCD2PNG();
+}
+
+void eFbLCD::dumpLCD2PNG()
+{
+	if (m_dump)
+	{
+		unsigned char *buffer, *output;
+		int mallocsize = m_xRes * m_yRes;
+		output = (unsigned char *)malloc(mallocsize*4);
+
+		buffer=(unsigned char*)mmap(0, m_available, PROT_WRITE|PROT_READ, MAP_SHARED, lcdfd, 0);
+		if (!buffer)
+		{
+			eDebug("[eFbLCD] mmap: %m");
+			return;
+		}
+		memcpy(output, buffer, _stride * m_yRes);
+		int output_bytes=4;
+
+		const char* filename = "/tmp/lcdshot.png";
+
+		FILE *fd2;
+		fd2 = fopen(filename, "wr");
+		if (!fd2)
+		{
+			fprintf(stderr, "Failed to open '%s' for output\n", filename);
+			return;
+		}
+
+		png_bytep *row_pointers;
+		png_structp png_ptr;
+		png_infop info_ptr;
+
+		png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, (png_voidp)NULL, (png_error_ptr)NULL, (png_error_ptr)NULL);
+		info_ptr = png_create_info_struct(png_ptr);
+		png_init_io(png_ptr, fd2);
+
+		row_pointers=(png_bytep*)malloc(sizeof(png_bytep)*m_yRes);
+
+		int y;
+		for (y=0; y<m_yRes; y++)
+			row_pointers[y]=output+(y*m_xRes*output_bytes);
+		png_set_bgr(png_ptr);
+		png_set_IHDR(png_ptr, info_ptr, m_xRes, m_yRes, 8, PNG_COLOR_TYPE_RGBA, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_BASE, PNG_FILTER_TYPE_BASE);
+		png_write_info(png_ptr, info_ptr);
+		png_write_image(png_ptr, row_pointers);
+		png_write_end(png_ptr, info_ptr);
+		png_destroy_write_struct(&png_ptr, &info_ptr);
+
+		free(row_pointers);
+
+		fclose(fd2);
+
+		munmap(buffer, m_available);
+		buffer = 0;
+	}
 }
