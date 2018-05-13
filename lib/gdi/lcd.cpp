@@ -1,4 +1,5 @@
 #include <lib/gdi/lcd.h>
+//#include <lib/gdi/epng.h>
 
 #include <unistd.h>
 #include <fcntl.h>
@@ -295,4 +296,9 @@ void eDBoxLCD::update()
 		write(lcdfd, raw, 64 * 64);
 	}
 #endif
+}
+
+void eDBoxLCD::setDump(bool onoff)
+{
+	return;
 }
