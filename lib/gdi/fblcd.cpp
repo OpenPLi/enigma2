@@ -31,7 +31,7 @@ eFbLCD::eFbLCD(const char *fb)
 	m_alpha = 255;
 	m_gamma = 128;
 	m_brightness = 128;
-	dump=false;
+	m_dump=false;
 
 	lcdfd = open(fb, O_RDWR);
 	if (lcdfd < 0)
@@ -287,14 +287,14 @@ int eFbLCD::setLCDBrightness(int brightness)
 
 void eFbLCD::setDump(bool onoff)
 {
-	dump = onoff;
-	if (dump)
+	m_dump = onoff;
+	if (m_dump)
 		dumpLCD2PNG();
 }
 
 void eFbLCD::dumpLCD2PNG()
 {
-	if (dump)
+	if (m_dump)
 	{
 		unsigned char *buffer, *output;
 		int mallocsize = m_xRes * m_yRes;

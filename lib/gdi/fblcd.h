@@ -21,7 +21,7 @@ class eFbLCD: public eLCD
 	uint16_t m_red[256], m_green[256], m_blue[256], m_trans[256];
 	int m_phys_mem;
 	int m_manual_blit;
-	bool dump;
+	bool m_dump;
 
 	void calcRamp();
 	int setMode(int xRes, int yRes, int bpp);
