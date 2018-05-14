@@ -8,7 +8,7 @@
 #include <linux/kd.h>
 
 #include <lib/gdi/fblcd.h>
-#include "png.h"
+#include <png.h>
 
 #ifndef FBIO_BLIT
 #define FBIO_SET_MANUAL_BLIT _IOW('F', 0x21, __u8)
@@ -315,7 +315,7 @@ void eFbLCD::save2png(unsigned char* output, int xRes, int yRes)
 	fd2 = fopen(filename, "wr");
 	if (!fd2)
 	{
-		fprintf(stderr, "Failed to open '%s' for output\n", filename);
+		eDebug("[eFbLCD] Failed to open '%s' for output", filename);
 		return;
 	}
 
@@ -341,6 +341,7 @@ void eFbLCD::save2png(unsigned char* output, int xRes, int yRes)
 
 	free(row_pointers);
 	fclose(fd2);
+	eDebug("[eFbLCD] lcdshot in '%s'", filename);
 }
 
 void eFbLCD::save2bmp(unsigned char* output, int xRes, int yRes)
@@ -352,7 +353,7 @@ void eFbLCD::save2bmp(unsigned char* output, int xRes, int yRes)
 	fd2 = fopen(filename, "wr");
 	if (!fd2)
 	{
-		fprintf(stderr, "Failed to open '%s' for output\n", filename);
+		eDebug("[eFbLCD] Failed to open '%s' for output", filename);
 		return;
 	}
 	unsigned char hdr[14 + 40];
@@ -375,4 +376,5 @@ void eFbLCD::save2bmp(unsigned char* output, int xRes, int yRes)
 	for (y=yRes-1; y>=0 ; y-=1)
 		fwrite(output+(y*xRes*output_bytes),xRes*output_bytes,1,fd2);
 	fclose(fd2);
+	eDebug("[eFbLCD] lcdshot in '%s'", filename);
 }
