@@ -99,8 +99,8 @@ class inputDevices:
 	def setDefaults(self, device):
 		print "[iInputDevices] setDefaults for device %s" % device
 		self.setDeviceAttribute(device, 'configuredName', None)
-		event_repeat = struct.pack('iihhi', 0, 0, 0x14, 0x01, 100)
-		event_delay = struct.pack('iihhi', 0, 0, 0x14, 0x00, 700)
+		event_repeat = struct.pack('LLHHi', 0, 0, 0x14, 0x01, 100)
+		event_delay = struct.pack('LLHHi', 0, 0, 0x14, 0x00, 700)
 		fd = os.open("/dev/input/" + device, os.O_RDWR)
 		os.write(fd, event_repeat)
 		os.write(fd, event_delay)
@@ -109,7 +109,7 @@ class inputDevices:
 	def setRepeat(self, device, value): #REP_PERIOD
 		if self.getDeviceAttribute(device, 'enabled'):
 			print "[iInputDevices] setRepeat for device %s to %d ms" % (device,value)
-			event = struct.pack('iihhi', 0, 0, 0x14, 0x01, int(value))
+			event = struct.pack('LLHHi', 0, 0, 0x14, 0x01, int(value))
 			fd = os.open("/dev/input/" + device, os.O_RDWR)
 			os.write(fd, event)
 			os.close(fd)
@@ -117,7 +117,7 @@ class inputDevices:
 	def setDelay(self, device, value): #REP_DELAY
 		if self.getDeviceAttribute(device, 'enabled'):
 			print "[iInputDevices] setDelay for device %s to %d ms" % (device,value)
-			event = struct.pack('iihhi', 0, 0, 0x14, 0x00, int(value))
+			event = struct.pack('LLHHi', 0, 0, 0x14, 0x00, int(value))
 			fd = os.open("/dev/input/" + device, os.O_RDWR)
 			os.write(fd, event)
 			os.close(fd)
