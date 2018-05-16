@@ -306,7 +306,7 @@ void print_backtrace()
 {
 	void *array[15];
 	size_t size;
-	int cnt;
+	size_t cnt;
 
 	size = backtrace(array, 15);
 	eLog(lvlFatal, "Backtrace:");
