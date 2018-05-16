@@ -8,6 +8,7 @@
 #include <linux/kd.h>
 
 #include <lib/gdi/fblcd.h>
+#define PNG_SKIP_SETJMP_CHECK
 #include <png.h>
 
 #ifndef FBIO_BLIT
