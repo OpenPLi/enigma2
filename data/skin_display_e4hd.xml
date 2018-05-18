@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<skin>
+	<windowstyle id="1" type="skinned">
+		<color color="#000000" name="Background"/>
+		<color color="#ffffff" name="LabelForeground"/>
+		<color color="#000000" name="ListboxBackground"/>
+		<color color="#ffffff" name="ListboxForeground"/>
+		<color color="#000000" name="ListboxSelectedBackground"/>
+		<color color="#ffffff" name="ListboxSelectedForeground"/>
+		<color color="#000000" name="ListboxMarkedBackground"/>
+		<color color="#ffffff" name="ListboxMarkedForeground"/>
+		<color color="#000000" name="ListboxMarkedAndSelectedBackground"/>
+		<color color="#ffffff" name="ListboxMarkedAndSelectedForeground"/>
+		<color color="#ffffff" name="WindowTitleForeground"/>
+		<color color="#000000" name="WindowTitleBackground"/>
+	</windowstyle>
+	<fonts>
+		<!-- pick a funky name for the font, so we don't conflict  -->
+		<font filename="nmsbd.ttf" name="FdLcD" scale="100"/>
+		<font filename="LiberationSans-Regular.ttf" name="CondFdLcD" scale="100"/>
+	</fonts>
+
+<!-- template -->
+	<screen name="LcdClockPanel">
+		<widget source="global.CurrentTime" render="Label" position="120,137" size="100,40" font="FdLcD;40" halign="right" noWrap="1">
+			<convert type="ClockToText"></convert>
+		</widget>
+	</screen>
+	<screen name="LcdRecordPanel">
+		<widget source="session.RecordState" render="FixedLabel" text=" " position="1,153" size="19,20" halign="left" backgroundColor="#cc0000" font="FdLcD;20" zPosition="1" noWrap="1">
+			<convert type="ConditionalShowHide">Blink,2000</convert>
+		</widget>
+	</screen>
+	<screen name="LcdOrbitalPositionPanel">
+		<widget source="session.CurrentService" render="Label" position="18,151" size="102,24" halign="center" font="CondFdLcD;24">
+			<convert type="ServiceOrbitalPosition"/>
+		</widget>
+	</screen>
+	<screen name="LcdTunerPanel">
+		<widget source="session.FrontendInfo" render="FixedLabel" position="0,151" size="18,24" text="A" foregroundColor="#04B404" font="FdLcD;24">
+			<convert type="FrontendInfo">NUMBER</convert>
+			<convert type="ValueRange">0,0</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget source="session.FrontendInfo" render="FixedLabel" position="0,151" size="18,24" text="B" foregroundColor="#04B404" font="FdLcD;24">
+			<convert type="FrontendInfo">NUMBER</convert>
+			<convert type="ValueRange">1,1</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget source="session.FrontendInfo" render="FixedLabel" position="0,151" size="18,24" text="C" foregroundColor="#04B404" font="FdLcD;24">
+			<convert type="FrontendInfo">NUMBER</convert>
+			<convert type="ValueRange">2,2</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+	</screen>
+	<screen name="LcdChannelOrbitalPositionPanel">
+		<widget source="parent.ServiceEvent" render="Label" position="18,151" size="102,24" halign="center" font="CondFdLcD;24">
+			<convert type="ServiceOrbitalPosition"/>
+		</widget>
+	</screen>
+	<screen name="LcdBottomPanel">
+		<panel name="LcdTunerPanel"/>
+		<panel name="LcdOrbitalPositionPanel"/>
+		<panel name="LcdRecordPanel"/>
+		<panel name="LcdClockPanel"/>
+	</screen>
+<!-- main-->
+	<screen name="InfoBarSummary" position="0,0" size="220,176">
+		<widget source="session.CurrentService" render="Label" position="0,4" size="220,37" font="FdLcD;32" halign="center" foregroundColor="#FFFF00">
+			<convert type="ServiceName">Name</convert>
+		</widget>
+		<widget source="session.Event_Now" render="Label" position="0,50" size="220,42" font="FdLcD;18" halign="center">
+			<convert type="EventName">Name</convert>
+		</widget>
+		<widget source="session.Event_Now" render="Progress" position="0,110" size="140,15" borderWidth="1">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+		<widget source="session.Event_Now" render="Label" position="141,109" size="79,16" font="Regular;16" foregroundColor="#F78181" halign="right">
+			<convert type="EventTime">Remaining</convert>
+			<convert type="RemainingToText">FOLLOW</convert>
+		</widget>
+		<panel name="LcdBottomPanel"/>
+	</screen>
+
+<!-- movieplayer-->
+	<screen name="InfoBarMoviePlayerSummary" position="0,0" size="220,176">
+		<widget source="session.CurrentService" render="Label" position="0,4" size="220,106" font="FdLcD;28" halign="center" transparent="1">
+			<convert type="ServiceName">Name</convert>
+		</widget>
+		<widget source="session.CurrentService" render="Progress" position="1,110" size="218,15" borderWidth="1">
+			<convert type="ServicePosition">Position</convert>
+		</widget>
+		<widget source="session.CurrentService" render="Label" position="0,142" size="220,34" font="FdLcD;32" halign="right" transparent="1">
+			<convert type="ServicePosition">Remaining,Negate</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="0,142" size="220,34" font="FdLcD;32" halign="left" transparent="1">
+			<convert type="ClockToText">Format:%H:%M</convert>
+		</widget>
+	</screen>
+	<screen name="MovieContextMenuSummary" position="0,0" size="220,176">
+		<widget source="parent.Title" render="Label" position="0,4" size="220,37" font="FdLcD;32" halign="center" noWrap="1"/>
+		<widget source="selected" render="Label" position="0,50" size="220,42" font="FdLcD;18"/>
+		<panel name="LcdRecordPanel"/>
+		<panel name="LcdClockPanel"/>
+	</screen>
+	<screen name="MovieSelectionSummary" position="fill">
+		<widget source="parent.Title" render="Label" position="0,4" size="220,37" font="FdLcD;32" halign="center" noWrap="1"/>
+		<widget source="name" render="Label" position="0,50" size="220,42" font="FdLcD;18" halign="left"/>
+		<widget source="parent.Service" render="Label" position="2,110" size="218,24" font="FdLcD;24" halign="left" noWrap="1">
+			<convert type="MovieInfo">RecordServiceName</convert>
+		</widget>
+		<widget source="parent.Service" render="Label" position="20,151" size="90,24" font="FdLcD;24" halign="right" noWrap="1">
+			<convert type="MovieInfo">FileSize</convert>
+		</widget>
+		<panel name="LcdRecordPanel"/>
+		<panel name="LcdClockPanel"/>
+	</screen>
+<!-- Mediaplayer -->
+	<screen name="MediaPlayerLCDScreen" position="0,0" size="220,176">
+		<widget name="text1" position="0,0" size="220,24" font="FdLcD;21" noWrap="1" halign="center" valign="center" transparent="1" zPosition="2"/>
+		<widget name="text3" position="0,26" size="220,24" font="FdLcD;21" noWrap="1" halign="center" valign="center" transparent="1" zPosition="2"/>
+		<widget name="text4" position="0,52" size="220,24" font="FdLcD;21" noWrap="1" halign="center" valign="center" transparent="1" zPosition="2"/>
+		<widget source="session.CurrentService" render="Progress" position="1,110" size="218,15" borderWidth="1">
+			<convert type="ServicePosition">Position</convert>
+		</widget>
+		<widget source="session.CurrentService" render="Label" position="0,142" size="220,34" font="FdLcD;34" halign="right" transparent="1">
+			<convert type="ServicePosition">Remaining,Negate</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="0,142" size="220,34" font="FdLcD;34" halign="left" transparent="1">
+			<convert type="ClockToText">Format:%H:%M</convert>
+		</widget>
+	</screen>	
+<!-- channelselection-->
+	<screen name="ChannelSelection_summary" position="0,0" size="220,176">
+		<widget source="parent.ServiceEvent" render="Label" position="0,4" size="220,37" font="FdLcD;32" halign="center" foregroundColor="#FFFF00">
+			<convert type="ServiceName">Name</convert>
+		</widget>
+		<widget source="parent.ServiceEvent" render="Label" position="0,50" size="220,42" font="FdLcD;18" halign="center">
+			<convert type="EventName">Name</convert>
+		</widget>
+		<widget source="parent.ServiceEvent" render="Progress" position="1,110" size="218,15" borderWidth="1">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+		<panel name="LcdTunerPanel"/>
+		<panel name="LcdChannelOrbitalPositionPanel"/>
+		<panel name="LcdRecordPanel"/>
+		<panel name="LcdClockPanel"/>
+	</screen>
+
+<!-- menus-->
+	<screen name="MenuSummary" position="fill">
+		<widget source="parent.title" render="Label" position="0,4" size="220,37" font="FdLcD;32" halign="center"/>
+		<widget source="parent.menu" render="Label" position="0,50" size="220,46" font="FdLcD;20" halign="left">
+			<convert type="StringListSelection"/>
+		</widget>
+		<panel name="LcdRecordPanel"/>
+		<panel name="LcdClockPanel"/>
+	</screen>
+
+<!-- setup-->
+	<screen name="SetupSummary" position="fill">
+		<widget source="SetupTitle" render="Label" position="0,4" size="220,37" font="FdLcD;32" halign="center"/>
+		<widget source="SetupEntry" render="Label" position="0,50" size="220,42" font="FdLcD;18" halign="left"/>
+		<widget source="SetupValue" render="Label" position="0,100" size="220,42" font="FdLcD;18" halign="left"/>
+		<panel name="LcdRecordPanel"/>
+		<panel name="LcdClockPanel"/>
+	</screen>
+
+<!-- misc-->
+	<screen name="SimpleSummary" position="fill">
+		<widget source="parent.Title" render="Label" position="0,4" size="220,37" font="FdLcD;32" halign="center"/>
+		<panel name="LcdRecordPanel"/>
+		<panel name="LcdClockPanel"/>
+	</screen>
+	<screen name="WizardSummary" position="fill">
+		<widget source="text" render="Label" position="top" size="*,52" font="FdLcD;26" halign="center"/>
+		<widget source="parent.list" render="Label" position="fill" font="FdLcD;18" halign="center">
+			<convert type="StringListSelection"/>
+		</widget>
+	</screen>
+	<screen name="VideoWizardSummary" position="fill">
+		<widget name="text" position="top" size="*,29" font="FdLcD;9" transparent="1"/>
+		<widget source="parent.list" render="Label" position="fill" font="FdLcD;33" halign="center">
+			<convert type="StringListSelection"/>
+		</widget>
+	</screen>
+
+<!-- standby -->
+	<screen name="StandbySummary" position="0,0" size="220,176">
+		<widget source="global.CurrentTime" render="Label" position="0,2" size="220,22" font="FdLcD;22" halign="left"  noWrap="1">
+			<convert type="ClockToText">Format:%d.%m.%Y</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="center,center" size="220,62" font="FdLcD;62" halign="center" noWrap="1">
+			<convert type="ClockToText">Format:%H:%M</convert>
+		</widget>
+		<panel name="LcdRecordPanel"/>
+	</screen>
+
+<!-- Plugin browser -->
+	<screen name="PluginBrowserSummary" position="fill">
+		<widget source="parent.Title" render="Label" position="0,4" size="220,37" font="FdLcD;32" halign="center" noWrap="1"/>
+		<widget source="entry" render="Label" position="0,50" size="220,32" font="FdLcD;28" halign="left" noWrap="1"/>
+		<widget source="desc" render="Label" position="0,92" size="220,42" font="FdLcD;18"/>
+		<panel name="LcdRecordPanel"/>
+		<panel name="LcdClockPanel"/>
+	</screen>
+
+<!-- JobView Summary -->
+	<screen name="JobView_summary" position="0,0" size="220,176">
+		<widget source="parent.summary_job_name" render="Label" position="0,28" size="220,42" font="FdLcD;18" halign="left"/>
+		<widget source="parent.summary_job_task" render="Label" position="0,74" size="220,18" font="FdLcD;14" halign="left"/>
+		<widget source="parent.summary_job_progress" render="Progress" position="0,0" size="285,22" borderWidth="1" zPosition="1"/>
+		<widget source="parent.summary_job_progress" render="Label" position="160,0" size="100,22" font="FdLcD;18" zposition="1" halign="center" valign="center" transparent="1">
+			<convert type="ProgressToText"/>
+		</widget>
+	</screen>
+
+	<screen name="EventViewSimple_summary" position="0,0" size="220,176">
+		<widget source="parent.Title" render="Label" position="0,0" size="160,16" font="FdLcD;15" halign="left" noWrap="1"/>
+		<widget source="parent.summary_description" render="Label" position="0,16" size="220,102" font="FdLcD;18"/>
+	</screen>
+
+<!-- EPG service-->
+	<screen name="EPGSelection_summary" position="0,0" size="220,176">
+		<widget source="parent.Event" render="Label" position="0,4" size="220,37" font="FdLcD;32" foregroundColor="#DDDD00">
+			<convert type="EventName">Name</convert>
+		</widget>
+		<widget source="parent.Event" render="Label" position="0,44" size="220,72" font="CondFdLcD;16" halign="left">
+			<convert type="EventName">FullDescription</convert>
+		</widget>
+		<widget source="parent.Event" render="Label" position="0,122" size="70,16" font="FdLcD;16" foregroundColor="#dddd00">
+			<convert type="EventTime">StartTime</convert>
+			<convert type="ClockToText">ShortDate</convert>
+		</widget>
+		<widget source="parent.Event" render="Label" position="80,122" size="42,16" font="FdLcD;16" halign="left" foregroundColor="#dddd00">
+			<convert type="EventTime">StartTime</convert>
+			<convert type="ClockToText">Format:%H:%M</convert>
+		</widget>
+		<widget source="parent.Event" render="Label" position="122,122" size="52,16" font="FdLcD;16" halign="right" foregroundColor="#dddd00">
+			<convert type="EventTime">EndTime</convert>
+			<convert type="ClockToText">Format:- %H:%M</convert>
+		</widget>
+		<widget source="parent.Event" render="Label" position="174,122" size="46,16" font="FdLcD;16" halign="right" foregroundColor="#dddd00">
+			<convert type="EventTime">Duration</convert>
+			<convert type="ClockToText">AsLengthHours</convert>
+		</widget>
+		<widget source="session.CurrentService" render="Label" position="18,151" size="102,24" halign="center" font="CondFdLcD;24" noWrap="1">
+			<convert type="ServiceOrbitalPosition"/>
+		</widget>
+		<panel name="LcdTunerPanel"/>
+		<panel name="LcdRecordPanel"/>
+		<panel name="LcdClockPanel"/>
+	</screen>
+<!-- EPG EventView -->
+	<screen name="EventView_summary" position="0,0" size="220,176">
+		<widget source="parent.Title" render="Label" position="0,4" size="220,37" font="FdLcD;32"/>
+		<widget source="parent.Event" render="Label" position="0,44" size="220,72" font="CondFdLcD;16" halign="left">
+			<convert type="EventName">Description</convert>
+		</widget>
+		<widget source="parent.Event" render="Label" position="0,122" size="80,16" font="FdLcD;16" foregroundColor="#dddd00">
+			<convert type="EventTime">StartTime</convert>
+			<convert type="ClockToText">ShortDate</convert>
+		</widget>
+		<widget source="parent.Event" render="Label" position="80,122" size="70,16" font="FdLcD;16" halign="left" foregroundColor="#dddd00">
+			<convert type="EventTime">StartTime</convert>
+			<convert type="ClockToText">Format:%H:%M</convert>
+		</widget>
+		<widget source="parent.Event" render="Label" position="150,122" size="70,16" font="FdLcD;16" halign="right" foregroundColor="#dddd00">
+			<convert type="EventTime">Duration</convert>
+			<convert type="ClockToText">InMinutes</convert>
+		</widget>
+		<widget source="session.CurrentService" render="Label" position="18,151" size="102,24" halign="center" font="CondFdLcD;24" noWrap="1">
+			<convert type="ServiceOrbitalPosition"/>
+		</widget>
+		<panel name="LcdTunerPanel"/>
+		<panel name="LcdRecordPanel"/>
+		<panel name="LcdClockPanel"/>
+	</screen>
+<!-- EPG Screens -->
+	<screen name="QuickEPG_summary" position="0,0" size="220,176">
+		<panel name="SummaryEpgPanel"/>
+		<panel name="SummaryIconsPanel"/>
+		<panel name="SummaryTunerStatusPanel"/>
+	</screen>
+	<screen name="GraphicalEPG_summary" position="0,0" size="220,176">
+		<panel name="SummaryEpgPanel"/>
+		<panel name="SummaryIconsPanel"/>
+		<panel name="SummaryTunerStatusPanel"/>
+	</screen>
+	<screen name="GraphicalEPGPIG_summary" position="0,0" size="220,176">
+		<panel name="SummaryEpgPanel"/>
+		<panel name="SummaryIconsPanel"/>
+		<panel name="SummaryTunerStatusPanel"/>
+	</screen>
+
+	<screen name="ChoiceBox_summary" position="0,0" size="220,176">
+		<widget source="parent.summary_list" render="Label" position="0,4" size="220,135" font="FdLcD;13" noWrap="1"/>
+		<panel name="LcdRecordPanel"/>
+		<panel name="LcdClockPanel"/>
+	</screen>
+
+	<screen name="MessageBox_summary" position="0,0" size="220,176">
+		<widget source="parent.Text" render="Label" position="0,0" size="220,176" font="FdLcD;18" halign="center"/>
+		<widget source="parent.selectedChoice" render="Label" position="0,100" size="220,24" font="FdLcD;21" halign="center" noWrap="1"/>
+		<panel name="LcdRecordPanel"/>
+		<panel name="LcdClockPanel"/>
+	</screen>
+	<screen name="MessageBoxSimple_summary" position="0,0" size="220,176">
+		<widget source="parent.Text" render="Label" position="0,0" size="220,176" font="FdLcD;18" halign="center"/>
+		<widget source="parent.selectedChoice" render="Label" position="0,100" size="220,24" font="FdLcD;21" halign="center" noWrap="1"/>
+		<panel name="LcdRecordPanel"/>
+		<panel name="LcdClockPanel"/>
+	</screen>
+
+	<screen name="AboutSummary" position="0,0" size="220,176">
+		<widget source="AboutText" render="Label" position="0,0" size="220,176" font="FdLcD;11"/>
+		<panel name="LcdRecordPanel"/>
+		<panel name="LcdClockPanel"/>
+	</screen>
+
+	<screen name="TimerEditListSummary" position="0,0" size="220,176">
+		<widget source="parent.Title" render="Label" position="0,0" size="220,21" font="FdLcD;18" halign="center" noWrap="1"/>
+		<widget source="service" render="Label" position="0,30" size="220,24" font="FdLcD;21" halign="center" noWrap="1"/>
+		<widget source="name" render="Label" position="0,60" size="220,72" font="FdLcD;21" halign="center" valign="center"/>
+		<widget source="time" render="Label" position="0,134" size="220,21" font="FdLcD;18" halign="left" transparent="1"/>
+		<widget source="duration" render="Label" position="0,155" size="220,21" font="FdLcD;18" halign="left" transparent="1"/>
+		<widget source="state" render="Label" position="0,155" size="220,21" font="FdLcD;18" halign="right" transparent="1"/>
+	</screen>
+
+	<screen name="AutoTimerOverviewSummary" position="0,0" size="220,176">
+		<widget source="parent.Title" render="Label" position="0,0" size="220,21" font="FdLcD;18" halign="center" noWrap="1"/>
+		<widget source="entry" render="Label" position="0,30" size="220,92" font="FdLcD;21" halign="center" valign="center"/>
+		<panel name="LcdClockPanel"/>
+	</screen>
+
+	<screen name="WizardSummary" position="0,0" size="220,176">
+		<widget source="text" render="Label" position="0,0" size="220,42" font="FdLcD;18" halign="center"/>
+		<widget source="parent.list" render="Label" position="0,62" size="220,90" font="FdLcD;18" halign="center">
+			<convert type="StringListSelection"/>
+		</widget>
+	</screen>
+	<screen name="LanguageWizardSummary" position="0,0" size="220,176">
+		<widget source="parent.summarytext" render="Label" position="0,0" size="220,42" font="FdLcD;18" halign="center"/>
+		<widget source="parent.summarylangname" render="Label" position="0,62" size="220,90" font="FdLcD;18" halign="center"/>
+<!-- 		<widget source="parent.flag" render="Pixmap" position="0,0" size="60,30" backgroundColor="#ff000000"/> -->
+	</screen>
+	<screen name="VideoWizardSummary" position="fill">
+		<widget source="text" render="Label" position="0,0" size="220,42" font="FdLcD;18" halign="center"/>
+		<widget source="parent.list" render="Label" position="0,62" size="220,90" font="FdLcD;18" halign="center">
+			<convert type="StringListSelection"/>
+		</widget>
+	</screen>
+
+<!-- DVD -->
+	<screen name="DVDSummary" position="fill">
+		<widget source="session.CurrentService" render="Label" position="top" size="*,20" font="FdLcD;9"  >
+			<convert type="ServiceName">Name</convert>
+		</widget>
+		<widget source="session.CurrentService" render="Progress" position="top" size="*,3" borderWidth="1">
+			<convert type="ServicePosition">Position</convert>
+		</widget>
+		<panel position="fill">
+			<widget source="session.CurrentService" render="Label" position="left" size="33,*" font="FdLcD;9" halign="left">
+				<convert type="ServicePosition">Position</convert>
+			</widget>
+			<widget name="Chapter" position="fill" font="FdLcD;12" halign="left"/>
+		</panel>
+	</screen>
+</skin>

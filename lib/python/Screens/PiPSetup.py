@@ -7,8 +7,7 @@ from Components.config import config
 # this is not so great.
 MAX_X = 720
 MAX_Y = 576
-MAX_W = MAX_X * 3 / 4
-MAX_H = MAX_Y * 3 / 4
+MAX_W, MAX_H = SystemInfo["MaxPIPSize"]
 MIN_W = MAX_X / 8
 MIN_H = MAX_Y / 8
 

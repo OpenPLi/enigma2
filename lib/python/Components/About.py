@@ -20,7 +20,7 @@ def getImageVersionString():
 
 # WW -placeholder for BC purposes, commented out for the moment in the Screen
 def getFlashDateString():
-		return _("unknown")
+	return _("unknown")
 
 def getBuildDateString():
 	try:
@@ -49,8 +49,12 @@ def getEnigmaVersionString():
 	return enigma_version
 
 def getGStreamerVersionString():
-	import enigma
-	return enigma.getGStreamerVersionString()
+	try:
+		from glob import glob
+		gst = [x.split("Version: ") for x in open(glob("/var/lib/opkg/info/gstreamer[0-9].[0-9].control")[0], "r") if x.startswith("Version:")][0]
+		return "%s" % gst[1].split("+")[0].replace("\n","")
+	except:
+		return _("unknown")
 
 def getKernelVersionString():
 	try:

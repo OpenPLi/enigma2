@@ -31,9 +31,10 @@ class VirtualKeyBoard(Screen):
 		self.setTitle(_("Virtual keyboard"))
 		self.keys_list = []
 		self.shiftkeys_list = []
+		self.thirdkeys_list = []
 		self.lang = language.getLanguage()
 		self.nextLang = None
-		self.shiftMode = False
+		self.shiftMode = 0
 		self.selectedKey = 0
 		self.smsChar = None
 		self.sms = NumericalTextInput(self.smsOK)
@@ -63,6 +64,17 @@ class VirtualKeyBoard(Screen):
 			}
 		self.keyImagesShift = {
 				"BACKSPACE": self.key_backspace,
+				"CLEAR": self.key_clr,
+				"EXIT": self.key_esc,
+				"OK": self.key_ok,
+				"SHIFT": self.key_shift_sel,
+				"SPACE": self.key_space,
+				"LEFT": self.key_left,
+				"RIGHT": self.key_right
+			}
+		self.keyImagesThird = {
+				"BACKSPACE": self.key_backspace,
+				"ALL": self.key_all,
 				"CLEAR": self.key_clr,
 				"EXIT": self.key_esc,
 				"OK": self.key_ok,
@@ -123,6 +135,7 @@ class VirtualKeyBoard(Screen):
 		self.buildVirtualKeyBoard()
 
 	def setLang(self):
+		self.thirdkeys_list = []
 		if self.lang == 'ar_AE':
 			self.keys_list = [
 				[u"EXIT", u"1", u"2", u"3", u"4", u"5", u"6", u"7", u"8", u"9", u"0", u"BACKSPACE"],
@@ -141,15 +154,21 @@ class VirtualKeyBoard(Screen):
 			self.keys_list = [
 				[u"EXIT", u"1", u"2", u"3", u"4", u"5", u"6", u"7", u"8", u"9", u"0", u"BACKSPACE"],
 				[u"q", u"w", u"e", u"r", u"t", u"z", u"u", u"i", u"o", u"p", u"ú", u"+"],
-				[u"a", u"s", u"d", u"f", u"g", u"h", u"j", u"k", u"l", u"ů", u"@", u"#"],
+				[u"a", u"s", u"d", u"f", u"g", u"h", u"j", u"k", u"l", u"ů", u"§", u"/"],
 				[u"<", u"y", u"x", u"c", u"v", u"b", u"n", u"m", u",", ".", u"-", u"ALL"],
 				[u"SHIFT", u"SPACE", u"ě", u"š", u"č", u"ř", u"ž", u"ý", u"á", u"í", u"é", u"OK"]]
 			self.shiftkeys_list = [
-				[u"EXIT", u"!", u'"', u"§", u"$", u"%", u"&", u"/", u"(", u")", u"=", u"BACKSPACE"],
-				[u"Q", u"W", u"E", u"R", u"T", u"Z", u"U", u"I", u"O", u"P", u"ť", u"*"],
-				[u"A", u"S", u"D", u"F", u"G", u"H", u"J", u"K", u"L", u"ň", u"ď", u"'"],
+				[u"EXIT", u"!", u"@", u"#", u"$", u"%", u"^", u"&", u"(", u")", u"=", u"BACKSPACE"],
+				[u"Q", u"W", u"E", u"R", u"T", u"Z", u"U", u"I", u"O", u"P", u"Ú", u"*"],
+				[u"A", u"S", u"D", u"F", u"G", u"H", u"J", u"K", u"L", u"Ů", u"\\", u"'"],
 				[u">", u"Y", u"X", u"C", u"V", u"B", u"N", u"M", u";", u":", u"_", u"CLEAR"],
-				[u"SHIFT", u"SPACE", u"?", u"\\", u"Č", u"Ř", u"Š", u"Ž", u"Ú", u"Á", u"É", u"OK"]]
+				[u"SHIFT", u"SPACE", u"Ě", u"Š", u"Č", u"Ř", u"Ž", u"Ý", u"Á", u"Í", u"É", u"OK"]]
+			self.thirdkeys_list = [
+				[u"EXIT", u"SPACE", u"SPACE", u"SPACE", u"Ť", u"SPACE", u"SPACE", u"SPACE", u"Ó", u"SPACE", u"SPACE", u"BACKSPACE"],
+				[u"\\", u"|", u"Ď", u"SPACE", u"ť", u"SPACE", u"Ň", u"SPACE", u"ó", u"SPACE", u"/", u"ALL"],
+				[u"SPACE", u"SPACE", u"ď", u"[", u"]", u"SPACE", u"ň", u"SPACE", u"SPACE", u"SPACE", u'"', u"CLEAR"],
+				[u"SPACE", u"SPACE", u"SPACE", u"SPACE", u"SPACE", u"{", u"}", u"SPACE", u"SPACE", u"?", u"SPACE", u"BACKSPACE"],
+				[u"SHIFT", u"SPACE", u"SPACE", u"SPACE", u"SPACE", u"SPACE", u"SPACE",u"SPACE", u"<", u">", u"SPACE", u"OK"]]
 			self.nextLang = 'de_DE'
 		elif self.lang == 'de_DE':
 			self.keys_list = [
@@ -354,7 +373,7 @@ class VirtualKeyBoard(Screen):
 	def virtualKeyBoardEntryComponent(self, keys):
 		w, h = skin.parameters.get("VirtualKeyboard",(45, 45))
 		key_bg_width = self.key_bg and self.key_bg.size().width() or w
-		key_images = self.shiftMode and self.keyImagesShift or self.keyImages
+		key_images = self.shiftMode & 2 and self.keyImagesThird or self.shiftMode & 1 and self.keyImagesShift or self.keyImages
 		res = [keys]
 		text = []
 		x = 0
@@ -374,7 +393,9 @@ class VirtualKeyBoard(Screen):
 		self.previousSelectedKey = None
 		self.list = []
 		self.max_key = 0
-		for keys in self.shiftMode and self.shiftkeys_list or self.keys_list:
+		if self.shiftMode == 2 and not len(self.thirdkeys_list):
+			self.shiftMode -=1
+		for keys in self.shiftMode & 2 and self.thirdkeys_list or self.shiftMode & 1 and self.shiftkeys_list or self.keys_list:
 			self.list.append(self.virtualKeyBoardEntryComponent(keys))
 			self.max_key += len(keys)
 		self.max_key -= 1
@@ -402,12 +423,16 @@ class VirtualKeyBoard(Screen):
 
 	def shiftClicked(self):
 		self.smsChar = None
-		self.shiftMode = not self.shiftMode
+		if len(self.thirdkeys_list):
+			self.shiftMode +=1
+			self.shiftMode %= 3
+		else:
+			self.shiftMode = not self.shiftMode
 		self.buildVirtualKeyBoard()
 
 	def okClicked(self):
 		self.smsChar = None
-		text = (self.shiftMode and self.shiftkeys_list or self.keys_list)[self.selectedKey / 12][self.selectedKey % 12].encode("UTF-8")
+		text = (self.shiftMode & 1 and self.shiftkeys_list or self.shiftMode & 2 and self.thirdkeys_list or self.keys_list)[self.selectedKey / 12][self.selectedKey % 12].encode("UTF-8")
 
 		if text == "EXIT":
 			self.close(None)
@@ -499,17 +524,30 @@ class VirtualKeyBoard(Screen):
 	def selectAsciiKey(self, char):
 		if char == " ":
 			char = "SPACE"
-		for keyslist in (self.shiftkeys_list, self.keys_list):
+		for keyslist in (self.shiftkeys_list, self.keys_list, self.thirdkeys_list):
 			selkey = 0
 			for keys in keyslist:
 				for key in keys:
 					if key == char:
 						self.selectedKey = selkey
-						if self.shiftMode != (keyslist is self.shiftkeys_list):
-							self.shiftMode = not self.shiftMode
-							self.buildVirtualKeyBoard()
-						else:
-							self.markSelectedKey()
+						if keyslist is self.keys_list:
+							if self.shiftMode != 0:
+								self.shiftMode = 0
+								self.buildVirtualKeyBoard()
+							else:
+								self.markSelectedKey()
+						elif keyslist is self.shiftkeys_list:
+							if self.shiftMode != 1:
+								self.shiftMode = 1
+								self.buildVirtualKeyBoard()
+							else:
+								self.markSelectedKey()
+						elif keyslist is self.thirdkeys_list:
+							if self.shiftMode != 2:
+								self.shiftMode = 2
+								self.buildVirtualKeyBoard()
+							else:
+								self.markSelectedKey()
 						return True
 					selkey += 1
 		return False

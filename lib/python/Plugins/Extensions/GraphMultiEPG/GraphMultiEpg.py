@@ -57,7 +57,7 @@ config.misc.graph_mepg.servicetitle_mode = ConfigSelection(default = "picon+serv
 	("number+picon", _("Channelnumber and picon")),
 	("number+picon+servicename", _("Channelnumber, picon and servicename")) ])
 config.misc.graph_mepg.roundTo = ConfigSelection(default = "900", choices = [("900", _("%d minutes") % 15), ("1800", _("%d minutes") % 30), ("3600", _("%d minutes") % 60)])
-config.misc.graph_mepg.OKButton = ConfigSelection(default = "info", choices = [("info", _("Show detailed event info")), ("zap", _("Zap to selected channel"))])
+config.misc.graph_mepg.OKButton = ConfigSelection(default = "info", choices = [("info", _("Show detailed event info")), ("zap", _("Zap to selected channel")), ("zap+exit", _("Zap to selected channel and exit GMEPG"))])
 possibleAlignmentChoices = [
 	( str(RT_HALIGN_LEFT   | RT_VALIGN_CENTER          ) , _("left")),
 	( str(RT_HALIGN_CENTER | RT_VALIGN_CENTER          ) , _("centered")),
@@ -1177,7 +1177,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 		self["timeline_text"].setDateFormat(config.misc.graph_mepg.servicetitle_mode.value)
 		l.fillMultiEPG(self.services, self.ask_time)
 		l.moveToService(self.serviceref)
-		l.setCurrentlyPlaying(self.serviceref)
+		l.setCurrentlyPlaying(self.previousref)
 		self.moveTimeLines()
 
 	def eventViewCallback(self, setEvent, setService, val):
@@ -1207,7 +1207,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 				from Components.ServiceEventTracker import InfoBarCount
 				preview = InfoBarCount > 1
 				self.zapFunc(ref.ref, preview)
-				if self.previousref and self.previousref == ref.ref and not preview:
+				if config.misc.graph_mepg.OKButton.value == "zap+exit" or self.previousref and self.previousref == ref.ref and not preview:
 					config.misc.graph_mepg.save()
 					self.close(True)
 				self.previousref = ref.ref
