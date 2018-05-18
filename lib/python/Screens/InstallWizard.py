@@ -32,19 +32,8 @@ class InstallWizard(Screen, ConfigListScreen):
 			config.misc.installwizard.ipkgloaded.value = False
 			modes = {0: " "}
 			self.enabled = ConfigSelection(choices = modes, default = 0)
-			self.adapters = [(iNetwork.getFriendlyAdapterName(x),x) for x in iNetwork.getAdapterList()]
-			is_found = False
-			for x in self.adapters:
-				if x[1] == 'eth0' or x[1] == 'eth1':
-					if iNetwork.getAdapterAttribute(x[1], 'up'):
-						self.ipConfigEntry = ConfigIP(default = iNetwork.getAdapterAttribute(x[1], "ip"))
-						iNetwork.checkNetworkState(self.checkNetworkCB)
-						if_found = True
-					else:
-						iNetwork.restartNetwork(self.checkNetworkLinkCB)
-					break
-			if is_found is False:
-				self.createMenu()
+			self.adapters = [adapter for adapter in iNetwork.getAdapterList() if adapter in ('eth0', 'eth1')]
+			self.checkNetwork()
 		elif self.index == self.STATE_CHOISE_CHANNELLIST:
 			self.enabled = ConfigYesNo(default = True, graphic = False)
 			modes = {"19e-23e-basis": "Astra1 Astra3 basis", "19e-23e": "Astra 1 Astra 3", "19e-23e-28e": "Astra 1 Astra 2 Astra 3", "13e-19e-23e-28e": "Astra 1 Astra 2 Astra 3 Hotbird", "kabelnl": "Kabel-NL"}
@@ -62,16 +51,28 @@ class InstallWizard(Screen, ConfigListScreen):
 			self.cablescan = ConfigNothing()
 			self.createMenu()
 
-	def checkNetworkCB(self, data):
-		if data < 3:
-			config.misc.installwizard.hasnetwork.value = True
-		self.createMenu()
-
-	def checkNetworkLinkCB(self, retval):
-		if retval:
-			iNetwork.checkNetworkState(self.checkNetworkCB)
+	def checkNetwork(self):
+		if self.adapters:
+			self.adapter = self.adapters.pop(0)
+			if iNetwork.getAdapterAttribute(self.adapter, 'up'):
+				iNetwork.checkNetworkState(self.checkNetworkStateCallback)
+			else:
+				iNetwork.restartNetwork(self.restartNetworkCallback)
 		else:
 			self.createMenu()
+
+	def checkNetworkStateCallback(self, data):
+		if data < 3:
+			config.misc.installwizard.hasnetwork.value = True
+			self.createMenu()
+		else:
+			self.checkNetwork()
+
+	def restartNetworkCallback(self, retval):
+		if retval:
+			iNetwork.checkNetworkState(self.checkNetworkStateCallback)
+		else:
+			self.checkNetwork()
 
 	def createMenu(self):
 		try:
@@ -81,7 +82,8 @@ class InstallWizard(Screen, ConfigListScreen):
 		self.list = []
 		if self.index == self.STATE_UPDATE:
 			if config.misc.installwizard.hasnetwork.value:
-				self.list.append(getConfigListEntry(_("Your internet connection is working (ip: %s)") % (self.ipConfigEntry.getText()), self.enabled))
+				ip = ".".join([str(x) for x in iNetwork.getAdapterAttribute(self.adapter, "ip")])
+				self.list.append(getConfigListEntry(_("Your internet connection is working (ip: %s)") % ip, self.enabled))
 			else:
 				self.list.append(getConfigListEntry(_("Your receiver does not have an internet connection"), self.enabled))
 		elif self.index == self.STATE_CHOISE_CHANNELLIST:
