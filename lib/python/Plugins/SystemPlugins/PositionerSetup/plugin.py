@@ -1573,7 +1573,7 @@ def PositionerMain(session, **kwargs):
 			session.open(MessageBox, _("No tuner is configured for use with a diseqc positioner!"), MessageBox.TYPE_ERROR)
 
 def PositionerSetupStart(menuid, **kwargs):
-	if menuid == "scan":
+	if menuid == "scan" and nimmanager.somethingConnected():
 		return [(_("Positioner setup"), PositionerMain, "positioner_setup", None)]
 	else:
 		return []

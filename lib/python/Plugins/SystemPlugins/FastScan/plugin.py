@@ -378,7 +378,7 @@ def autostart(reason, **kwargs):
 		config.misc.standbyCounter.removeNotifier(standbyCountChanged)
 
 def FastScanStart(menuid, **kwargs):
-	if menuid == "scan":
+	if menuid == "scan" and nimmanager.somethingConnected():
 		return [(_("Fast Scan"), FastScanMain, "fastscan", None)]
 	else:
 		return []
