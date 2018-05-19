@@ -20,6 +20,7 @@ config.misc.fastscan = ConfigSubsection()
 config.misc.fastscan.last_configuration = ConfigText(default="()")
 config.misc.fastscan.auto = ConfigSelection(default="true", choices=[("true", _("yes")), ("false", _("no")), ("multi", _("multi"))])
 config.misc.fastscan.autoproviders = ConfigText(default="()")
+config.misc.fastscan.drop = ConfigYesNo(default = True)
 
 class FastScanStatus(Screen):
 	skin = """
@@ -192,6 +193,7 @@ class FastScanScreen(ConfigListScreen, Screen):
 		self.list.append(getConfigListEntry(_("Use fastscan channel numbering"), self.scan_keepnumbering))
 		self.list.append(getConfigListEntry(_("Use fastscan channel names"), self.scan_keepsettings))
 		self.list.append(getConfigListEntry(_("Create seperate radio userbouquet"), self.scan_create_radio_bouquet))
+		self.list.append(getConfigListEntry(_("Drop unconfigured sattelites"), config.misc.fastscan.drop))
 		self.list.append(getConfigListEntry(_("Enable auto fast scan"), config.misc.fastscan.auto))
 		if config.misc.fastscan.auto.value == "multi":
 			for provider in self.providers:
