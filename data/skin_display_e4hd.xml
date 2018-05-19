@@ -69,19 +69,42 @@
 		<widget source="session.CurrentService" render="Label" position="0,4" size="220,37" font="FdLcD;32" halign="center" foregroundColor="#FFFF00">
 			<convert type="ServiceName">Name</convert>
 		</widget>
-		<widget source="session.Event_Now" render="Label" position="0,50" size="220,42" font="FdLcD;18" halign="center">
+		<widget source="session.Event_Now" render="Label" position="0,50" size="220,42" font="FdLcD;18" halign="center" valign="center">
 			<convert type="EventName">Name</convert>
 		</widget>
 		<widget source="session.Event_Now" render="Progress" position="0,110" size="140,15" borderWidth="1">
 			<convert type="EventTime">Progress</convert>
 		</widget>
-		<widget source="session.Event_Now" render="Label" position="141,109" size="79,16" font="Regular;16" foregroundColor="#F78181" halign="right">
+		<widget source="session.Event_Now" render="Label" position="141,109" size="79,16" font="FdLcD;16" foregroundColor="#8080F0" halign="right">
 			<convert type="EventTime">Remaining</convert>
 			<convert type="RemainingToText">FOLLOW</convert>
 		</widget>
 		<panel name="LcdBottomPanel"/>
 	</screen>
-
+<!-- channelselection-->
+	<screen name="ChannelSelection_summary" position="0,0" size="220,176">
+		<widget source="parent.ServiceEvent" render="Label" position="0,4" size="220,37" font="FdLcD;32" halign="center" foregroundColor="#FFFF00">
+			<convert type="ServiceName">Name</convert>
+		</widget>
+		<widget source="parent.ServiceEvent" render="Label" position="0,50" size="220,42" font="FdLcD;18" halign="center" valign="center">
+			<convert type="EventName">Name</convert>
+		</widget>
+		<widget source="parent.ServiceEvent" render="Progress" position="1,110" size="218,15" borderWidth="1">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+		<widget source="parent.Event" render="Label" position="2,130" size="42,16" font="FdLcD;16" halign="left" foregroundColor="#8080ff">
+			<convert type="EventTime">StartTime</convert>
+			<convert type="ClockToText">Format:%H:%M</convert>
+		</widget>
+		<widget source="parent.Event" render="Label" position="42,130" size="52,16" font="FdLcD;16" halign="right" foregroundColor="#8080ff">
+			<convert type="EventTime">EndTime</convert>
+			<convert type="ClockToText">Format:- %H:%M</convert>
+		</widget>
+		<panel name="LcdTunerPanel"/>
+		<panel name="LcdChannelOrbitalPositionPanel"/>
+		<panel name="LcdRecordPanel"/>
+		<panel name="LcdClockPanel"/>
+	</screen>
 <!-- movieplayer-->
 	<screen name="InfoBarMoviePlayerSummary" position="0,0" size="220,176">
 		<widget source="session.CurrentService" render="Label" position="0,4" size="220,106" font="FdLcD;28" halign="center" transparent="1">
@@ -130,23 +153,6 @@
 			<convert type="ClockToText">Format:%H:%M</convert>
 		</widget>
 	</screen>	
-<!-- channelselection-->
-	<screen name="ChannelSelection_summary" position="0,0" size="220,176">
-		<widget source="parent.ServiceEvent" render="Label" position="0,4" size="220,37" font="FdLcD;32" halign="center" foregroundColor="#FFFF00">
-			<convert type="ServiceName">Name</convert>
-		</widget>
-		<widget source="parent.ServiceEvent" render="Label" position="0,50" size="220,42" font="FdLcD;18" halign="center">
-			<convert type="EventName">Name</convert>
-		</widget>
-		<widget source="parent.ServiceEvent" render="Progress" position="1,110" size="218,15" borderWidth="1">
-			<convert type="EventTime">Progress</convert>
-		</widget>
-		<panel name="LcdTunerPanel"/>
-		<panel name="LcdChannelOrbitalPositionPanel"/>
-		<panel name="LcdRecordPanel"/>
-		<panel name="LcdClockPanel"/>
-	</screen>
-
 <!-- menus-->
 	<screen name="MenuSummary" position="fill">
 		<widget source="parent.title" render="Label" position="0,4" size="220,37" font="FdLcD;32" halign="center"/>
@@ -187,10 +193,10 @@
 
 <!-- standby -->
 	<screen name="StandbySummary" position="0,0" size="220,176">
-		<widget source="global.CurrentTime" render="Label" position="0,2" size="220,22" font="FdLcD;22" halign="left"  noWrap="1">
+		<widget source="global.CurrentTime" render="Label" position="0,2" size="220,22" font="FdLcD;22" halign="left" noWrap="1" foregroundColor="#a0a0a0">
 			<convert type="ClockToText">Format:%d.%m.%Y</convert>
 		</widget>
-		<widget source="global.CurrentTime" render="Label" position="center,center" size="220,62" font="FdLcD;62" halign="center" noWrap="1">
+		<widget source="global.CurrentTime" render="Label" position="center,center" size="220,62" font="FdLcD;62" halign="center" noWrap="1" foregroundColor="#a0a0a0">
 			<convert type="ClockToText">Format:%H:%M</convert>
 		</widget>
 		<panel name="LcdRecordPanel"/>
