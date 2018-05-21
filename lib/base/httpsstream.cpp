@@ -19,6 +19,10 @@ eHttpsStream::eHttpsStream()
 	partialPktSz = 0;
 	tmpBufSize = 32;
 	tmpBuf = (char*)malloc(tmpBufSize);
+	if (eConfigManager::getConfigBoolValue("config.usage.remote_fallback_enabled", false))
+		startDelay = 500000;
+	else
+		startDelay = 0;
 
 	ctx = NULL;
 	ssl = NULL;
@@ -311,8 +315,7 @@ int eHttpsStream::open(const char *url)
 void eHttpsStream::thread()
 {
 	hasStarted();
-	if (eConfigManager::getConfigBoolValue("config.usage.remote_fallback_enabled", false))
-		usleep(500000); // wait half a second
+	usleep(startDelay); // wait up to half a second
 	std::string currenturl, newurl;
 	currenturl = streamUrl;
 	for (unsigned int i = 0; i < 5; i++)
