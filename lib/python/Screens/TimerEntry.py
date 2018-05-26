@@ -162,9 +162,9 @@ class TimerEntry(Screen, ConfigListScreen):
 
 	def createSetup(self, widget):
 		self.list = []
-		self.entryRemoteTimer = getConfigListEntry(_("Remote Timer"), self.timerentry_fallback)
+		self.entryFallbackTimer = getConfigListEntry(_("Fallback Timer"), self.timerentry_fallback)
 		if config.usage.remote_fallback_external_timer.value and config.usage.remote_fallback.value and not hasattr(self, "timerentry_remote"):
-			self.list.append(self.entryRemoteTimer)
+			self.list.append(self.entryFallbackTimer)
 		self.entryName = getConfigListEntry(_("Name"), self.timerentry_name)
 		self.list.append(self.entryName)
 		self.entryDescription = getConfigListEntry(_("Description"), self.timerentry_description)
@@ -242,7 +242,7 @@ class TimerEntry(Screen, ConfigListScreen):
 
 	def newConfig(self):
 		print "[TimerEdit] newConfig", self["config"].getCurrent()
-		if self["config"].getCurrent() in (self.timerTypeEntry, self.timerJustplayEntry, self.frequencyEntry, self.entryShowEndTime, self.entryRemoteTimer):
+		if self["config"].getCurrent() in (self.timerTypeEntry, self.timerJustplayEntry, self.frequencyEntry, self.entryShowEndTime, self.entryFallbackTimer):
 			self.createSetup("config")
 
 	def keyLeft(self):
