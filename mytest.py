@@ -351,13 +351,20 @@ class PowerKey:
 		print "PowerOff - Now!"
 		if not Screens.Standby.inTryQuitMainloop and self.session.current_dialog and self.session.current_dialog.ALLOW_SUSPEND:
 			self.session.open(Screens.Standby.TryQuitMainloop, 1)
+		else:
+			return 0
 
 	def powerup(self):
-		self.doAction(config.misc.hotkey.power.value)
+		if not Screens.Standby.inStandby and self.session.current_dialog and self.session.current_dialog.ALLOW_SUSPEND and self.session.in_exec:
+			self.doAction(config.misc.hotkey.power.value)
+		else:
+			return 0
 
 	def powerlong(self):
-		if not(Screens.Standby.inTryQuitMainloop or (self.session.current_dialog and not self.session.current_dialog.ALLOW_SUSPEND)):
+		if not Screens.Standby.inStandby and self.session.current_dialog and self.session.current_dialog.ALLOW_SUSPEND and self.session.in_exec:
 			self.doAction(config.misc.hotkey.power_long.value)
+		else:
+			return 0
 
 	def doAction(self, selected):
 		if selected:
@@ -381,6 +388,8 @@ class PowerKey:
 	def standby(self):
 		if not Screens.Standby.inStandby and self.session.current_dialog and self.session.current_dialog.ALLOW_SUSPEND and self.session.in_exec:
 			self.session.open(Screens.Standby.Standby)
+		else:
+			return 0
 
 profile("Scart")
 from Screens.Scart import Scart
