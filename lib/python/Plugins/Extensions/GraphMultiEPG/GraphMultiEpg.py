@@ -1161,7 +1161,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 	def setServices(self, services):
 		self.services = services
 		self["list"].resetOffset()
-		self.createGMEPG()
+		self.onCreate()
 
 	def setService(self, service):
 		self.serviceref = service
