@@ -18,7 +18,6 @@ gSDLDC::gSDLDC() : m_pump(eApp, 1)
 
 	CONNECT(m_pump.recv_msg, gSDLDC::pumpEvent);
 
-	m_surface.type = 0;
 	m_surface.clut.colors = 256;
 	m_surface.clut.data = new gRGB[m_surface.clut.colors];
 
@@ -86,7 +85,7 @@ void gSDLDC::exec(const gOpcode *o)
 	}
 }
 
-void gSDLDC::setResolution(int xres, int yres)
+void gSDLDC::setResolution(int xres, int yres, int bpp)
 {
 	pushEvent(EV_SET_VIDEO_MODE, (void *)xres, (void *)yres);
 }
