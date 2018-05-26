@@ -15,6 +15,7 @@ class FallbackTimerList():
 			self.url = config.usage.remote_fallback.value.rsplit(":", 1)[0]
 			self.getFallbackTimerList()
 		else:
+			self.list = []
 			parent.onLayoutFinish.append(self.fallbackFunction)
 
 	def getUrl(self, url):
@@ -128,7 +129,7 @@ class FallbackTimerList():
 	
 	def fallback(self, message=None):
 		if message:
-			self.parent.session.openWithCallback(self.fallbackNOK, MessageBox, _("Error while retreiving fallback timer information %s") % message, MessageBox.TYPE_ERROR)
+			self.parent.session.openWithCallback(self.fallbackNOK, MessageBox, _("Error while retreiving fallback timer information\n%s") % message, MessageBox.TYPE_ERROR)
 		else:
 			self.fallbackFunction()
 
