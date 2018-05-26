@@ -1179,7 +1179,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 		self["timeline_text"].setDateFormat(config.misc.graph_mepg.servicetitle_mode.value)
 		l.fillMultiEPG(self.services, self.ask_time)
 		l.moveToService(self.serviceref)
-		l.setCurrentlyPlaying(self.serviceref)
+		l.setCurrentlyPlaying(self.previousref)
 		self.moveTimeLines()
 
 	def eventViewCallback(self, setEvent, setService, val):
