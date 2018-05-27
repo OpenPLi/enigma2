@@ -15,6 +15,7 @@ class FallbackTimerList():
 			self.url = config.usage.remote_fallback.value.rsplit(":", 1)[0]
 			self.getFallbackTimerList()
 		else:
+			self.url = None
 			self.list = []
 			parent.onLayoutFinish.append(self.fallbackFunction)
 
