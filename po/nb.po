@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-25 16:26+0200\n"
-"PO-Revision-Date: 2018-04-28 14:50+0200\n"
+"POT-Creation-Date: 2018-05-27 10:16+0200\n"
+"PO-Revision-Date: 2018-05-27 10:28+0200\n"
 "Last-Translator: GeirJ <dummy@dummy.com>\n"
 "Language-Team: GeirJ\n"
 "Language: nb\n"
@@ -37,7 +37,7 @@ msgid ""
 "Backup your receiver settings."
 msgstr ""
 "\n"
-"Sikkerhetskopier dine innstillinger."
+"Sikkerhetskopier dine mottaker innstillinger."
 
 msgid ""
 "\n"
@@ -51,7 +51,7 @@ msgid ""
 "Edit the upgrade source address."
 msgstr ""
 "\n"
-"Rediger kildeadressen til oppdatering."
+"Endre oppdateringsadressen."
 
 msgid ""
 "\n"
@@ -126,14 +126,14 @@ msgid ""
 "Timer '%s' disabled!"
 msgstr ""
 "\n"
-"Tidsur '%s' frakoblet!"
+"Timer '%s' av!"
 
 msgid ""
 "\n"
 "View, install and remove available or installed packages."
 msgstr ""
 "\n"
-"Se gjennom, installer/avinstaller programpakker."
+"Se, installer og avinstaller tilgjengelige programvare pakker."
 
 #
 msgid " (0 - all networks)"
@@ -597,7 +597,7 @@ msgid "<Default movie location>"
 msgstr "<Standard opptaksmappe>"
 
 msgid "<Last timer location>"
-msgstr "<Siste tidsur mappe>"
+msgstr "<Siste timer mappe>"
 
 #
 msgid "<unknown>"
@@ -636,15 +636,15 @@ msgid ""
 "A finished record timer wants to set your\n"
 "receiver to standby. Do that now?"
 msgstr ""
-"Et tidsopptak er fullført og vil å slå av din\n"
-"mottaker. Slå av nå?"
+"Et timer opptak er ferdig og vil slå av din\n"
+"mottaker til standby. Slå av nå?"
 
 msgid ""
 "A finished record timer wants to shut down\n"
 "your receiver. Shutdown now?"
 msgstr ""
-"Et tidsopptak er fullført og din mottaker vil bli slått av\n"
-"Slå av nå?"
+"Et timer opptak er ferdig og vil slå av din\n"
+"mottaker. Slå av nå?"
 
 #
 msgid "A graphical EPG for all services of a specific bouquet"
@@ -704,14 +704,14 @@ msgid ""
 "A sleep timer wants to set your\n"
 "receiver to standby. Do that now?"
 msgstr ""
-"Et tidsur ønsker å slå av din\n"
-"mottaker. Slå av nå?"
+"Dvale timer vil slå av din\n"
+"mottaker til standby. Slå av nå?"
 
 msgid ""
 "A sleep timer wants to shut down\n"
 "your receiver. Shutdown now?"
 msgstr ""
-"Et tidsur ønsker å slå av\n"
+"Dvale timer vil å slå av\n"
 "din mottaker. Slå av nå?"
 
 msgid "A small overview of the available icon states and actions."
@@ -721,8 +721,8 @@ msgid ""
 "A timer failed to record!\n"
 "Disable TV and try again?\n"
 msgstr ""
-"Et tidsopptak mislyktes!\n"
-"Koble fra TV og prøv igjen?\n"
+"Et timer opptak mislyktes!\n"
+"Slå av TV og prøv igjen?\n"
 
 msgid "A/V settings"
 msgstr "Lyd og bilde innstilling"
@@ -842,7 +842,7 @@ msgstr "Legg til kanal"
 
 #
 msgid "Add timer"
-msgstr "Legg til opptak"
+msgstr "Legg til timer"
 
 #
 msgid "Add title"
@@ -857,7 +857,7 @@ msgid "Add to favourites"
 msgstr "Legg til i favorittliste"
 
 msgid "Add/remove change timer for current event"
-msgstr "Legg til/slett tidsur i nåværende program"
+msgstr "Legg til/slett timer i dette program"
 
 msgid ""
 "Additional motor options allow you to enter details from your motor's spec "
@@ -1153,13 +1153,13 @@ msgid "At end"
 msgstr "Ved slutten"
 
 msgid "Attention, this is repeated timer!\n"
-msgstr "Advarsel, dette er et gjentatt tidsur!\n"
+msgstr "Obs, dette er repetert timer!\n"
 
 msgid ""
 "Attention, this is repeated timer!\n"
 "What do you want to do?"
 msgstr ""
-"Advarsel, dette er et gjentatt tidsur!\n"
+"Obs, dette er repetert timer!\n"
 "Hva vil du gjøre?"
 
 msgid "Audio PID"
@@ -1601,7 +1601,7 @@ msgstr "Endre trinn lengde"
 
 #
 msgid "Change timer"
-msgstr "Endre tidsur"
+msgstr "Endre timer"
 
 #
 msgid "Channel"
@@ -1847,15 +1847,15 @@ msgid ""
 "Configure the duration in hours the receiver should go to standby when the "
 "receiver is not controlled."
 msgstr ""
-"Still inn tid i antall timer fra mottakeren er urørt til den automatisk skal "
-"gå i ."
+"Still inn varighet i antall timer mottaker skal gå til standby når mottaker "
+"ikke brukes."
 
 msgid ""
 "Configure the duration in minutes for the sleeptimer. Select this entry and "
 "click OK or green to start/stop the sleeptimer"
 msgstr ""
-"Still inn tid i minutter for sovetidsur. Velg denne og trykk OK eller grønn "
-"tast for start/stopp av sovetidsur"
+"Still inn varighet i minutter for dvale timer. Velg denne og trykk OK eller "
+"grønn tast for start/stopp av dvale timer"
 
 msgid ""
 "Configure the duration when the receiver should go to shut down in case the "
@@ -2025,7 +2025,7 @@ msgstr "Kunne ikke åpne bilde i bilde"
 
 #, python-format
 msgid "Could not record due to conflicting timer %s"
-msgstr "Kunne ikke starte opptak på grunn av et motstridende tidsur %s"
+msgstr "Kunne ikke starte opptak pga. motstridende timer %s"
 
 #, python-format
 msgid "Could not record due to invalid service %s"
@@ -2035,7 +2035,7 @@ msgid "Country"
 msgstr "Land"
 
 msgid "Cover dashed flickering line for this service"
-msgstr "skjul stiplede flimmer linjer på denne kanalen"
+msgstr "skjul stiplede flimmer linjer for denne kanalen"
 
 #
 msgid "Create DVD-ISO"
@@ -2044,8 +2044,8 @@ msgstr "Lag en DVD-ISO"
 msgid "Create new folder and exit"
 msgstr "Lag ny mappe og avslutt"
 
-msgid "Create seperate radio userbouquet"
-msgstr "Lage separate radio favorittkanaler"
+msgid "Create separate radio userbouquet"
+msgstr "Opprett egen radio favorittliste"
 
 #, python-format
 msgid "Creating directory %s failed."
@@ -2433,7 +2433,7 @@ msgstr "Fjern nåværende program men ikke kommende program"
 
 #
 msgid "Disable timer"
-msgstr "Deaktiver tidsur"
+msgstr "Deaktiver timer"
 
 #
 msgid "Disabled"
@@ -2506,7 +2506,7 @@ msgstr ""
 #
 #, python-format
 msgid "Do you really want to delete %s?"
-msgstr "Vil du virkelig slette %s?"
+msgstr "Er du sikker på at du vil slette %s?"
 
 #
 #, python-format
@@ -2534,7 +2534,7 @@ msgid ""
 "Do you really want to remove\n"
 "the plugin \"%s\"?"
 msgstr ""
-"Vil du virkelig fjerne\n"
+"Er du sikker på å fjerne\n"
 "tillegget \"%s\"?"
 
 #, python-format
@@ -2634,14 +2634,14 @@ msgid "Don't stop current event but disable coming events"
 msgstr "Ikke stopp dette program men slå av neste program"
 
 msgid "Don't zap"
-msgstr "Ikke skift"
+msgstr "Ikke gå til"
 
 #
 msgid "Don't zap and disable timer"
-msgstr "Ikke skift og deaktiver tidsur"
+msgstr "Ikke gå til og deaktiver timer"
 
 msgid "Don't zap and remove timer"
-msgstr "Ikke skift og slett tidsur"
+msgstr "Ikke skift og slett timer"
 
 #
 #, python-format
@@ -2669,6 +2669,9 @@ msgstr "Laster ned Image"
 #
 msgid "Downloading plugin information. Please wait..."
 msgstr "Laster ned informasjon om tillegg. Vennligst vent litt..."
+
+msgid "Drop unconfigured satellites"
+msgstr "Fjern satellitter som ikke brukes"
 
 msgid "Dutch"
 msgstr "Nederlandsk"
@@ -2733,7 +2736,7 @@ msgid "Edit the network configuration of your receiver.\n"
 msgstr "Rediger mottakerens nettverksinnstilling.\n"
 
 msgid "Edit timer"
-msgstr "Tidsur innstilling"
+msgstr "Rediger timer"
 
 msgid "Edit title"
 msgstr "Rediger overskrift"
@@ -2778,6 +2781,9 @@ msgstr "Aktiver auto hurtig søk for %s"
 msgid "Enable fallback remote receiver"
 msgstr "Bruk ekstern reservemottaker"
 
+msgid "Enable import timer from fallback tuner"
+msgstr "Aktiver import timer fra reserve tuner"
+
 #
 msgid "Enable parental protection"
 msgstr "Aktiver foreldrekontroll"
@@ -2798,10 +2804,10 @@ msgid "Enable this setting if your aerial system needs power"
 msgstr "Aktiver denne innstillingen hvis din antenne trenger strøm"
 
 msgid "Enable timer conflict detection"
-msgstr "Aktiver oppdagelse av tidsur konflikt"
+msgstr "Aktiver timer konflikt kontroll"
 
 msgid "Enable wakeup timer"
-msgstr "Bruk vekkerklokke"
+msgstr "Bruk våkne timer"
 
 #
 msgid "Enabled"
@@ -2832,10 +2838,10 @@ msgid "End time"
 msgstr "Slutt tid"
 
 msgid "End time to ignore inactivity sleeptimer"
-msgstr "Slutt tid for overstyring av sovetidsur"
+msgstr "Slutt tid for overstyring av dvale timer"
 
 msgid "End time to ignore shutdown in standby"
-msgstr "Slutt tid for overstyre slå av i standby"
+msgstr "Slutt tid for overstyring av slå av i standby"
 
 #
 msgid "English"
@@ -2996,6 +3002,14 @@ msgstr "Feil ved skriving av EPG på server"
 msgid "Error while retreiving epg.dat from server"
 msgstr "Feil ved henting av EPG fra server"
 
+#, python-format
+msgid ""
+"Error while retreiving fallback timer information\n"
+"%s"
+msgstr ""
+"Feil ved henting av reserve timer informasjon\n"
+"%s"
+
 msgid "Error while retreiving location of epg.dat on server"
 msgstr "Feil ved henting av EPG lokasjon på server"
 
@@ -3110,7 +3124,7 @@ msgid "Expert"
 msgstr "Ekspert"
 
 msgid "Extend sleeptimer 15 minutes"
-msgstr "Utvid sovetidsur 15 minutter"
+msgstr "Utvid dvale timer med 15 minutter"
 
 #
 msgid "Extended"
@@ -3151,13 +3165,13 @@ msgid "External Storage %s"
 msgstr "Ekstern lagring %s"
 
 msgid "Extra end time to ignore inactivity sleeptimer"
-msgstr "Ekstra slutt tid for overstyring av sovetidsur"
+msgstr "Ekstra slutt tid til overstyring av inaktiv dvale timer"
 
 msgid "Extra motor options"
 msgstr "Ekstra motorinnstillinger"
 
 msgid "Extra start time to ignore inactivity sleeptimer"
-msgstr "Ekstra start tid til overstyring av sovetidsur"
+msgstr "Ekstra start tid til overstyring av inaktiv dvale timer"
 
 msgid "F1/F3/F4/F4-TURBO"
 msgstr "F1/F3/F4/F4-TURBO"
@@ -3236,6 +3250,9 @@ msgstr "Feilet:"
 
 msgid "Falkland Islands (Malvinas)"
 msgstr "Falklandsøyene"
+
+msgid "Fallback Timer"
+msgstr "Reserve timer"
 
 msgid "Fallback remote receiver"
 msgstr "Ekstern reserve mottaker"
@@ -3827,7 +3844,7 @@ msgid ""
 "If is disabled, then after Copy/Move will not be target directory stored "
 "into bookmarks."
 msgstr ""
-"Ved frakoblet, og etter kopi/flytt vil ikke målmappen bli lagret i bokmerker"
+"Ved avslått, og etter kopi/flytt blir ikke målmappen lagret i bokmerker."
 
 msgid ""
 "If is enabled and movie playback is finished, then after return to movielist "
@@ -3856,8 +3873,7 @@ msgid ""
 "one."
 msgstr ""
 "Hvis du bruker flere uforpliktede vekslere, må DiSEqC-kommandoene sendes "
-"flere ganger. Angi antall uforpliktede (uncommitted) vekslere i kjeden minus "
-"en."
+"flere ganger. Angi antall uforpliktede vekslere i kjeden minus en."
 
 msgid ""
 "If you are using a Circular polarised LNB select 'yes', otherwise select "
@@ -3884,7 +3900,7 @@ msgid ""
 "your scart connection. Press OK to return."
 msgstr ""
 "Hvis dette vises, er det noe galt med\n"
-"scart forbindelsen. Trykk OK for å fortsette."
+"scart tilkoblingen. Trykk OK for å fortsette."
 
 msgid ""
 "If your TV has a brightness or contrast enhancement, disable it. If there is "
@@ -3952,14 +3968,14 @@ msgstr "Importer eksternmottakers URL"
 #
 msgid ""
 "In order to record a timer, the TV was switched to the recording service!\n"
-msgstr "Et tidsopptak startet og mottakeren skiftet over til opptaket!\n"
+msgstr "Et timer opptak startet og mottakeren skiftet over til opptaket!\n"
 
 #
 msgid "In progress"
 msgstr "Pågår"
 
 msgid "Inactivity Sleeptimer"
-msgstr "Sovetidsur"
+msgstr "Inaktiv dvale timer"
 
 msgid "Incorrect type service for PiP!"
 msgstr "Feil bruk av bilde i bilde!"
@@ -3994,7 +4010,7 @@ msgstr "Igangsett"
 
 #
 msgid "Initial location in new timers"
-msgstr "Første plassering i nye tidsurvalg"
+msgstr "Førstegangs plassering av nye timere"
 
 msgid "Initial lock ratio"
 msgstr "Låse forhold"
@@ -4475,7 +4491,7 @@ msgstr "Madagaskar"
 
 #
 msgid "Main menu"
-msgstr "Hovedmeny"
+msgstr "Hoved meny"
 
 msgid ""
 "Make it possible to manually initiate the channels import and/or EPG via the "
@@ -4735,6 +4751,9 @@ msgstr "Opptaksvalg"
 
 msgid "Movie/Drama"
 msgstr "Film/Drama"
+
+msgid "Movielist menu"
+msgstr "Opptaksliste meny"
 
 msgid "Moving"
 msgstr "Kjører"
@@ -5103,7 +5122,7 @@ msgid "No, do not flash image"
 msgstr "Nei, ikke installer systemet"
 
 msgid "No, except Wakeup timer"
-msgstr "Nei, unntatt vekkerklokke"
+msgstr "Nei, unntatt vekke timer"
 
 msgid "No, never"
 msgstr "Nei, aldri"
@@ -5165,8 +5184,8 @@ msgid ""
 "Note: when enabled, and you do want standby mode after wake up, set option "
 "'Startup to Standby' as 'No, except Wakeup timer'."
 msgstr ""
-"NB: Når dette er på og du ønsker standby etter vekking, brukes valget 'Slå "
-"på til Standby' som 'Nei, unntatt tidsur tid'."
+"NB: Når dette er på og du ønsker standby modus etter vekking, brukes valget "
+"'Oppstart til Standby' som 'Nei, unntatt vekke timer'."
 
 msgid ""
 "Nothing to scan!\n"
@@ -5271,7 +5290,7 @@ msgid "Open select location"
 msgstr "Åpne valg mappe"
 
 msgid "Open select location as timer name"
-msgstr "Åpne sted som tidsur navn"
+msgstr "Åpne velgested som timer navn"
 
 #
 msgid "Open service list"
@@ -5286,7 +5305,7 @@ msgstr "Åpne opptaksliste"
 
 #
 msgid "Options disable timer"
-msgstr "Deaktiver tidsur"
+msgstr "Innstilling for av timer"
 
 msgid "Orbital position"
 msgstr "Satellittposisjon"
@@ -5915,7 +5934,7 @@ msgstr "Beskytt meny i avslått"
 
 #
 msgid "Protect timer menu"
-msgstr "Beskytt tidsur meny"
+msgstr "Lås timer meny"
 
 #
 msgid "Provider"
@@ -5981,7 +6000,7 @@ msgstr "Lukke uten å lagre innstillinger?"
 
 #
 msgid "Really delete done timers?"
-msgstr "Vil du virkelig slette fullførte tidsur?"
+msgstr "Er du sikker på å slette ferdige timere?"
 
 #
 msgid "Really exit the subservices quickzap?"
@@ -6003,7 +6022,8 @@ msgid "Really store at index %2d for current position?"
 msgstr "Lagre ved index %2d for denne posisjon?"
 
 msgid "Really upgrade the frontprocessor and reboot now?"
-msgstr "Vil du virkelig oppdatere frontprosessoren og starte på nytt?"
+msgstr ""
+"Er du sikker på at du vil oppdatere frontprosessoren og starte på nytt?"
 
 msgid "Really upgrade your settop box and reboot now?"
 msgstr "Skal mottakeren oppdateres og starte på nytt nå?"
@@ -6019,7 +6039,7 @@ msgstr "Opptaks innstilling"
 
 #, python-format
 msgid "Record time limited due to conflicting timer %s"
-msgstr "Opptakstid begrenset på grunn av motstridende tidsur %s"
+msgstr "Opptakstid begrenset på grunn av motstridende timer %s"
 
 msgid "Recorded files..."
 msgstr "Opptaks mapper..."
@@ -6811,7 +6831,7 @@ msgstr "Velg handling"
 
 #, python-format
 msgid "Select action for timer '%s'."
-msgstr "Velg handling for tidsur '%s'."
+msgstr "Velg handling for timer'%s'."
 
 #
 msgid "Select all"
@@ -7539,13 +7559,13 @@ msgid "Skip empty services"
 msgstr "Hopp over ubrukte kanaler"
 
 msgid "SleepTimer Configuration"
-msgstr "Sovetidsur innstilling"
+msgstr "Dvale timer innstilling"
 
 msgid "Sleeptimer"
-msgstr "Sovetidsur"
+msgstr "Dvale timer"
 
 msgid "Sleeptimer edit"
-msgstr "Rediger sovetidsur"
+msgstr "Dvale timer redigering"
 
 msgid "Slide picture in loop"
 msgstr "Vis repeterende bildevisning"
@@ -7707,7 +7727,7 @@ msgid "Spanish"
 msgstr "Spansk"
 
 msgid "Specify extra timeframe to ignore inactivity sleeptimer"
-msgstr "Angi ekstra tidsrom når sovetidsur skal overstyres"
+msgstr "Angi ekstra tidsrom for overstyring av inaktiv dvale timer"
 
 msgid "Specify if you want to set the blocktimes separately by weekday"
 msgstr ""
@@ -7717,34 +7737,35 @@ msgid ""
 "Specify the end time to ignore the shutdown timer when the receiver is in "
 "standby mode"
 msgstr ""
-"Still inn stopp tid for overstyring av tidsur når mottaker er i avslått modus"
+"Still inn slutt tid for å overstyre slå av timer når mottaker er i standby "
+"modus"
 
 msgid "Specify the end time until the inactivity sleeptimer should be ignored"
-msgstr "Still inn slutt tid når sovetidsur skal overstyres"
+msgstr "Still inn slutt tid når inaktiv dvale timer skal overstyres"
 
 msgid ""
 "Specify the extra end time until the inactivity sleeptimer should be ignored"
-msgstr "Angi ekstra slutt tid når sovetidsur skal overstyres"
+msgstr "Angi ekstra slutt tid for overstyring av inaktiv dvale timer"
 
 msgid ""
 "Specify the extra start time when the inactivity sleeptimer should be ignored"
-msgstr "Angi ekstra start tid når sovetidsur skal overstyres"
+msgstr "Angi ekstra start tid for overstyring av inaktiv dvale timer"
 
 msgid ""
 "Specify the start time to ignore the shutdown timer when the receiver is in "
 "standby mode"
 msgstr ""
-"Still inn start tid for overstyring av tidsur når mottakeren er i avslått "
+"Still inn start tid for å overstyre slå av timer når mottaker er i standby "
 "modus"
 
 msgid "Specify the start time when the inactivity sleeptimer should be ignored"
-msgstr "Still inn start tid når sovetidsur skal overstyres"
+msgstr "Still inn start tid når inaktiv dvale timer skal overstyres"
 
 msgid "Specify timeframe to ignore inactivity sleeptimer"
-msgstr "Angi tidsrommet når sovetidsur skal overstyres"
+msgstr "Angi tidsrom når inaktiv dvale timer skal overstyres"
 
 msgid "Specify timeframe to ignore the shutdown in standby"
-msgstr "Angi tidsrommet når slå av skal overstyres i standby"
+msgstr "Angi tidsrom når slå av skal overstyres i standby"
 
 #
 msgid "Split preview mode"
@@ -7811,7 +7832,7 @@ msgid "Start time"
 msgstr "Start tid"
 
 msgid "Start time to ignore inactivity sleeptimer"
-msgstr "Start tid for overstyring av sovetidsur"
+msgstr "Start tid for overstyring av inaktiv dvale timer"
 
 msgid "Start time to ignore shutdown in standby"
 msgstr "Start tid for overstyring av slå av i standby"
@@ -7915,7 +7936,7 @@ msgid "Stop testing plane after # successful transponders"
 msgstr "Stopp testing etter # vellykkede transpondere"
 
 msgid "Stop timer recording"
-msgstr "Stopp tidsopptak"
+msgstr "Stopp timer opptak"
 
 #
 msgid "Stop timeshift"
@@ -8119,7 +8140,7 @@ msgstr "System - Modulasjon"
 
 #. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
 msgid "TRANSLATOR_INFO"
-msgstr "Siste oppdatering utført: 28.04.2018"
+msgstr "Siste oppdatering utført: 27.05.2018"
 
 #
 msgid "TS file is too large for ISO9660 level 1!"
@@ -8303,11 +8324,11 @@ msgstr "Den lagrede PIN koden ble godkjent."
 
 #
 msgid "The sleep timer has been activated."
-msgstr "Tidsur har blitt aktivert."
+msgstr "Dvale timer har blitt aktivert."
 
 #
 msgid "The sleep timer has been disabled."
-msgstr "Tidsur har blitt deaktivert."
+msgstr "Dvale timer har blitt deaktivert."
 
 msgid ""
 "The software management extension is not installed!\n"
@@ -8324,7 +8345,7 @@ msgstr "Kan ikke kontrollere status for gjeldende programvare oppdatering %s."
 
 #
 msgid "The timer file (timers.xml) is corrupt and could not be loaded."
-msgstr "Tidsurfilen (timers.xml) feilet og kunne ikke lastes."
+msgstr "Timer filen (timers.xml) feilet og kunne ikke lastes."
 
 msgid ""
 "The user interface of the receiver will now restart to select the selected "
@@ -8671,53 +8692,53 @@ msgstr "Tids måler"
 
 #
 msgid "Timer"
-msgstr "Tidsur"
+msgstr "Timer"
 
 #
 msgid "Timer Overview"
-msgstr "Opptaksoversikt"
+msgstr "Timer oversikt"
 
 #
 msgid "Timer entry"
-msgstr "Tidsur oppføring"
+msgstr "Timer oppføring"
 
 #
 msgid "Timer log"
-msgstr "Tidsur logg"
+msgstr "Timer logg"
 
 #
 msgid ""
 "Timer overlap in timers.xml detected!\n"
 "Please recheck it!"
 msgstr ""
-"Tidsur overlapping i timers.xml oppdaget!\n"
-"Vennligst kontroller det!"
+"Timer overlapp i timers.xml oppdaget!\n"
+"Vennligst kontroller det på nytt!"
 
 #
 msgid "Timer overview"
-msgstr "Opptaks oversikt"
+msgstr "Timer oversikt"
 
 msgid "Timer recording location"
-msgstr "Tidsur opptakssted"
+msgstr "Timer opptakssted"
 
 #
 msgid "Timer sanity error"
-msgstr "Tidsur feil"
+msgstr "Timer feil"
 
 #
 msgid "Timer selection"
-msgstr "Tidsur valg"
+msgstr "Timer valg"
 
 #
 msgid "Timer selection..."
-msgstr "Tidsur valg..."
+msgstr "Timer valg..."
 
 #
 msgid "Timer type"
-msgstr "Tidsur type"
+msgstr "Timer type"
 
 msgid "Timeshift is running. Select an action.\n"
-msgstr "Tidsskift pågår. Velg en handling.\n"
+msgstr "Timeskift pågår. Velg en handling.\n"
 
 #
 msgid "Timeshift location"
@@ -8725,7 +8746,7 @@ msgstr "Mappe for tidsskift"
 
 #
 msgid "Timeshift not possible!"
-msgstr "Tidsskift ikke mulig!"
+msgstr "Timeskift ikke mulig!"
 
 msgid "Timor-Leste"
 msgstr "Timor-Leste"
@@ -9022,6 +9043,9 @@ msgstr "Angre avinstallering"
 
 msgid "Unencrypted"
 msgstr "Ukryptert"
+
+msgid "Unexpected error while retreiving fallback tuner's timer information"
+msgstr "Uventet feil ved henting av reserve tuners timer informasjon"
 
 #
 msgid "Unhide parental control services"
@@ -9403,7 +9427,7 @@ msgid "Wakeup TV from standby"
 msgstr "Slå på TV fra standby"
 
 msgid "Wakeup receiver for start timer"
-msgstr "Slå på mottaker med hjelp av tidsur"
+msgstr "Vekke opp mottaker for start timer"
 
 msgid "Wakeup receiver from standby"
 msgstr "Slå på mottaker fra standby"
@@ -9429,8 +9453,8 @@ msgid ""
 "Really disable timer conflict detection?"
 msgstr ""
 "Advarsel!\n"
-"Dette er en funksjon for viderekommende brukere.\n"
-"Vil du virkelig frakoble oppdagelse av tidsur konflikt?"
+"Dette er en funksjon for ekspert brukere.\n"
+"Er du sikker på at du vil fjerne timerens konflikt kontroll?"
 
 msgid "Warning: no LNB; using factory defaults."
 msgstr "Advarsel: ingen LNB; bruker standardinnstillinger."
@@ -9454,7 +9478,7 @@ msgid "Weekday"
 msgstr "Ukedag"
 
 msgid "Weighted position"
-msgstr "Hovedposisjon"
+msgstr "Hoved posisjon"
 
 msgid ""
 "Welcome to the cutlist editor.\n"
@@ -9480,30 +9504,33 @@ msgstr "Sett vest grense"
 msgid "Western Sahara"
 msgstr "Vest Sahara"
 
+msgid "When enabled the timer from the fallback tuner is imported"
+msgstr "Når dette på vil timer fra reserve tuner bli importert"
+
 msgid ""
 "When enabled you can specify a timeframe to ignore the shutdown timer when "
 "the receiver is in standby mode"
 msgstr ""
-"Når dette er på, kan du velge et tidsrom som overstyrer tidsur når "
-"mottakeren er i avslått modus"
+"Når dette er på, kan du velge et tidsrom som overstyrer slå av timer når "
+"mottakeren er i standby modus"
 
 msgid ""
 "When enabled you can specify a timeframe when the inactivity sleeptimer is "
 "ignored. Not the detection is disabled during this timeframe but the "
 "inactivity timeout is disabled"
 msgstr ""
-"Når aktivert, kan du velge et ekstra tidsrom slik at tidsur overstyres. Det "
-"er ikke deteksjonen som frakobles i tidsrommet, men den ubrukte sluttid som "
-"frakobles"
+"Når aktivert, kan du velge et ekstra tidsrom slik at inaktiv dvale timer "
+"overstyres. Deteksjonen slår seg ikke av i tidsrommet, men ubrukt sluttid "
+"fjernes"
 
 msgid ""
 "When enabled you can specify an extra timeframe when the inactivity "
 "sleeptimer is ignored. Not the detection is disabled during this timeframe "
 "but the inactivity timeout is disabled"
 msgstr ""
-"Når aktivert, kan du velge et ekstra tidsrom slik at tidsur overstyres. Det "
-"er ikke deteksjonen som frakobles i tidsrommet, men den ubrukte sluttid som "
-"frakobles"
+"Når aktivert, kan du velge et ekstra tidsrom slik at inaktiv timer "
+"overstyres. Deteksjonen slår seg ikke av i tidsrommet, men ubrukt timeout "
+"fjernes"
 
 msgid ""
 "When enabled, content with an aspect ratio of 4:3 will be stretched to fit "
@@ -9848,7 +9875,7 @@ msgstr ""
 "startes på nytt."
 
 msgid "Your receiver will got to stand by due to the sleeptimer."
-msgstr "Din mottaker vil gå i hvilemodus etter tidsurvalget."
+msgstr "Din mottaker vil gå i standby pga. dvale timer."
 
 msgid "Your receiver will got to standby due to inactivity."
 msgstr "Mottakeren slår seg av fordi den har stått ubrukt."
@@ -9888,6 +9915,9 @@ msgstr "Gå til"
 msgid "Zap to selected channel"
 msgstr "Gå til valgt kanal"
 
+msgid "Zap to selected channel and exit GMEPG"
+msgstr "Gå til valgt kanal og avslutt GMEPG"
+
 msgid ""
 "Zap to selected channel, or show detailed event info (depends on "
 "configuration)"
@@ -9900,12 +9930,12 @@ msgstr "Gå opp"
 
 #, python-format
 msgid "Zapped to timer service %s as PiP!"
-msgstr "Tidsuret skiftet til valgt kanal %s som bilde i bilde!"
+msgstr "Timer skiftet til valgt kanal %s som bilde i bilde!"
 
 #
 #, python-format
 msgid "Zapped to timer service %s!"
-msgstr "Tidsuret skiftet til valgt kanal %s!"
+msgstr "Timer skiftet til valgt kanal %s!"
 
 msgid "Zgemma H.S/H.2S/H.2H/H5/H7"
 msgstr "Zgemma H.S/H.2S/H.2H/H5/H7"
@@ -10194,7 +10224,7 @@ msgid "disable"
 msgstr "deaktiver"
 
 msgid "disable intro screen"
-msgstr "deaktiver introduksjons skjerm"
+msgstr "deaktiver intro skjerm"
 
 msgid "disable move mode"
 msgstr "slå av flytte modus"
@@ -11233,7 +11263,7 @@ msgid "zapped"
 msgstr "gått til"
 
 msgid "Audio / Video"
-msgstr "Hovedinnstilling"
+msgstr "Hoved innstilling"
 
 msgid "Automatic scan"
 msgstr "Automatisk søk"
@@ -11254,7 +11284,7 @@ msgid "Flash image"
 msgstr "Installer operativsystem"
 
 msgid "GUI Settings"
-msgstr "Innstilling for utseende"
+msgstr "GUI innstilling"
 
 msgid "Harddisk"
 msgstr "Lagrings innstilling"
@@ -11292,7 +11322,7 @@ msgid "Shutdown"
 msgstr "Slå av"
 
 msgid "Sleep timer"
-msgstr "Hvilemodus"
+msgstr "Dvale timer"
 
 msgid "SoftCam / CI"
 msgstr "SoftCam / CI"
@@ -11347,8 +11377,8 @@ msgid ""
 "afterwards (sometimes called offline decoding), if supported by your "
 "receiver. Default: off."
 msgstr ""
-"Alltid ta med ECM data i opptakene. Dette overstyrer individuelle globale "
-"tidsur innstillinger. Dette tillater alltid opptak å bli avkodet i ettertid "
+"Alltid inkluder ECM data i opptakene. Dette overstyrer egne globale timer "
+"innstillinger. Dette tillater alltid opptak å bli avkodet i ettertid "
 "(offline dekoding), hvis støttet av din mottaker. Standardinnstilling: av."
 
 msgid "Audio language selection 1"
@@ -11650,8 +11680,8 @@ msgid ""
 "Configure the number of days old timers are kept before they are "
 "automatically removed from the timer list."
 msgstr ""
-"Still inn antall dager gamle tidsur lagres før de automatisk fjernes fra "
-"tidsur listen."
+"Still inn antall dager gamle timere lagres før de automatisk fjernes fra "
+"timer listen."
 
 msgid ""
 "Configure the offline decoding delay in milliseconds. The configured delay "
@@ -11738,7 +11768,7 @@ msgid "Configure the way in which the receiver changes channels."
 msgstr "Still inn alternativer for hvordan mottakeren bytter kanaler."
 
 msgid "Configure where completed timers show up in the timer list."
-msgstr "Still inn hvor fullførte tidsur skal vises i tidsur listen."
+msgstr "Still inn hvor fullførte timere skal vises i timer listen."
 
 msgid ""
 "Configure whether (and for how long) a second infobar will be shown when OK "
@@ -12011,6 +12041,9 @@ msgstr ""
 "sikrer kompatibilitet med operativsystem eller filsystemer med begrenset "
 "antall tegnsett."
 
+msgid "Live decoder"
+msgstr "Dekoder ibruk"
+
 #
 msgid "Load unlinked userbouquets"
 msgstr "Last kanallister som ikke er tilknyttet"
@@ -12039,9 +12072,9 @@ msgid ""
 "presentation and must be decrypted afterwards (sometimes called offline "
 "decoding). Default: off."
 msgstr ""
-"Aldri dekode innholdet under opptak. Dette overstyrer individuelle globale "
-"tidsur innstillinger. Når dette er på, vil opptak lagres kryptert og må "
-"dekodes i ettertid (offline dekoding). Standardinnstilling: av."
+"Aldri dekode innholdet under opptak. Dette overstyrer egne globale timer "
+"innstillinger. Når dette er på, vil opptak lagres kryptert og må dekodes i "
+"ettertid (offline dekoding). Standardinnstilling: av."
 
 msgid "Never decrypt while recording"
 msgstr "Aldri dekryptere under opptak"
@@ -12063,7 +12096,7 @@ msgid "On valid ONIDs, ignore frequency sub network part"
 msgstr "Ved gyldige ONIDs, ignorer frequency sub network part"
 
 msgid "Position of completed timers in timerlist"
-msgstr "Posisjon for fullførte tidsur i tidsurliste"
+msgstr "Posisjon for fullførte timere i timer liste"
 
 msgid "Power on display"
 msgstr "Slå på display"
@@ -12127,7 +12160,7 @@ msgid "Remember last service in PiP"
 msgstr "Husk siste kanal i PiP"
 
 msgid "Remove completed timers after (days)"
-msgstr "Slett fullførte tidsur etter (dager)"
+msgstr "Slett ferdige timere etter (dager)"
 
 msgid "Remove items from trash can after (days)"
 msgstr "Tøm papirkurven etter (dager)"
@@ -12160,6 +12193,9 @@ msgstr "Skroll gjentakelser"
 
 msgid "Selects the mode how live tv should be shown on the LCD."
 msgstr "Med dette valget vises TV innstillingens utseende på LCD."
+
+msgid "Selects video source displayed on the LCD."
+msgstr "Velger videokilde vist på LCDen."
 
 msgid "Set fps for external subtitles"
 msgstr "Ekstern undertekst fps nivå"
@@ -12868,9 +12904,6 @@ msgstr "MORE"
 msgid "Message..."
 msgstr "Beskjed..."
 
-msgid "Movielist menu"
-msgstr "Opptaksliste meny"
-
 #
 msgid "Mute"
 msgstr "Demp"
@@ -12939,7 +12972,7 @@ msgstr "Velg tuner"
 
 #
 msgid "Timer edit"
-msgstr "Tidsur innstilling"
+msgstr "Timer redigering"
 
 #
 msgid "Timeshift Live"
@@ -12970,6 +13003,9 @@ msgstr "innstillingsmeny"
 msgid "Rec"
 msgstr "Opptak"
 
+msgid "C"
+msgstr "C"
+
 msgid "[REC]"
 msgstr "[REC]"
 
@@ -12978,9 +13014,6 @@ msgstr "EtPortal"
 
 msgid "®"
 msgstr "®"
-
-msgid "C"
-msgstr "C"
 
 msgid "D"
 msgstr "D"
@@ -13025,7 +13058,7 @@ msgstr "SNR"
 
 #
 msgid "Timeshift"
-msgstr "Tidsskift"
+msgstr "Timeskift"
 
 msgid "Check the internet connection"
 msgstr "Undersøker internett forbindelsen"
@@ -13134,7 +13167,7 @@ msgstr ""
 "Trykk OK for å fortsette."
 
 msgid "What type of service scan do you want?"
-msgstr "Hvilken type kanalsøk ønsker du?"
+msgstr "Hvilken type kanalsøk vil du bruke?"
 
 #
 msgid "Configure interface"
@@ -13671,9 +13704,6 @@ msgstr "Innstilling for bilde."
 
 #~ msgid "SID"
 #~ msgstr "SID"
-
-#~ msgid "Videocodec"
-#~ msgstr "Videokodeks"
 
 #~ msgid "Videosize"
 #~ msgstr "Videostørrelse"
