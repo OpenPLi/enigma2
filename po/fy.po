@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-13 09:42+0200\n"
+"POT-Creation-Date: 2018-05-28 11:34+0430\n"
 "PO-Revision-Date: 2008-12-29 16:22+0100\n"
 "Last-Translator: gerrit <gerrit@nedlinux.nl>\n"
 "Language-Team: gerrit <fy@li.org>\n"
@@ -878,9 +878,6 @@ msgstr "opnimmen tafoegje (foar altiid trochgean)"
 msgid "Add recording (stop after current event)"
 msgstr "opnimmen tafoegje (stopje nei dit barren)"
 
-msgid "Add seperate receiver URL for import"
-msgstr ""
-
 #
 #, fuzzy
 msgid "Add service"
@@ -1016,6 +1013,9 @@ msgid "Allow subtitle language to equal audio language"
 msgstr ""
 
 msgid "Allow subtitles for hearing impaired"
+msgstr ""
+
+msgid "Allow unsupported modes"
 msgstr ""
 
 #
@@ -1313,6 +1313,11 @@ msgstr "Automatysk"
 
 msgid "Automatic Scan"
 msgstr ""
+
+#
+#, fuzzy
+msgid "Automatic bookmarks"
+msgstr "Automatysk sykjen"
 
 #
 #, fuzzy
@@ -2461,7 +2466,7 @@ msgstr "Meitsje DVD-ISO"
 msgid "Create new folder and exit"
 msgstr ""
 
-msgid "Create seperate radio userbouquet"
+msgid "Create separate radio userbouquet"
 msgstr ""
 
 #
@@ -2828,6 +2833,9 @@ msgstr "Beskriuwing"
 msgid "Deselect"
 msgstr ""
 
+msgid "Destination of fallback remote receiver"
+msgstr ""
+
 msgid "Details for plugin: "
 msgstr ""
 
@@ -2953,6 +2961,9 @@ msgstr ""
 msgid "Display message before playing next movie"
 msgstr ""
 
+msgid "Display movie length in movielist (except single line style)."
+msgstr ""
+
 #
 #, fuzzy
 msgid "Display setup"
@@ -2998,6 +3009,9 @@ msgstr "net feroarje"
 #, fuzzy
 msgid "Do not record"
 msgstr "net opnimme"
+
+msgid "Do not show file extensions for registered multimedia files."
+msgstr ""
 
 #
 #, fuzzy
@@ -3182,6 +3196,11 @@ msgid "Downloading plugin information. Please wait..."
 msgstr "Binnenheljen fan ynstekker ynformaasje..."
 
 #
+#, fuzzy
+msgid "Drop unconfigured satellites"
+msgstr "selektearre sat ferwiderje"
+
+#
 msgid "Dutch"
 msgstr "Nederlansk"
 
@@ -3288,6 +3307,9 @@ msgstr ""
 msgid "Electronic Program Guide"
 msgstr "Elektroniske Programma Gids"
 
+msgid "Empty slot"
+msgstr ""
+
 #
 msgid "Enable"
 msgstr "Ynskeakelje"
@@ -3342,6 +3364,9 @@ msgid "Enable fallback remote receiver"
 msgstr ""
 
 msgid "Enable freesat EPG"
+msgstr ""
+
+msgid "Enable import timer from fallback tuner"
 msgstr ""
 
 #
@@ -3429,7 +3454,15 @@ msgstr "Nije ferzje:"
 msgid "Enigma2 skin selector"
 msgstr "enigma2 en netwurk"
 
+#
+#, fuzzy
+msgid "Enter IP address"
+msgstr "IP Adres"
+
 msgid "Enter PIN"
+msgstr ""
+
+msgid "Enter URL"
 msgstr ""
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -3525,6 +3558,12 @@ msgid "Error when writing epg.dat on server"
 msgstr ""
 
 msgid "Error while retreiving epg.dat from server"
+msgstr ""
+
+#, python-format
+msgid ""
+"Error while retreiving fallback timer information\n"
+"%s"
 msgstr ""
 
 msgid "Error while retreiving location of epg.dat on server"
@@ -3793,10 +3832,25 @@ msgstr ""
 msgid "Falkland Islands (Malvinas)"
 msgstr ""
 
+msgid "Fallback Timer"
+msgstr ""
+
+msgid "Fallback remote receiver"
+msgstr ""
+
+msgid "Fallback remote receiver IP"
+msgstr ""
+
+msgid "Fallback remote receiver Port"
+msgstr ""
+
 msgid "Fallback remote receiver URL"
 msgstr ""
 
 msgid "Fallback remote receiver setup"
+msgstr ""
+
+msgid "Fallback tuner setup"
 msgstr ""
 
 #
@@ -4423,6 +4477,9 @@ msgstr ""
 msgid "IP address"
 msgstr "IP Adres"
 
+msgid "IP of fallback remote receiver"
+msgstr ""
+
 #
 msgid "ISO file is too large for this filesystem!"
 msgstr "ISO triem is te grut foar dit bestânsysteem!"
@@ -4438,6 +4495,18 @@ msgid "Icons"
 msgstr ""
 
 msgid "If enabled, display shows 12 chars instead 8, but in latin-1/translit only."
+msgstr ""
+
+msgid "If enabled, then there will be displayed icons for new/unseen items too."
+msgstr ""
+
+msgid "If is disabled, then after Copy/Move will not be target directory stored into bookmarks."
+msgstr ""
+
+msgid "If is enabled and movie playback is finished, then after return to movielist will not be automaticaly start service playback."
+msgstr ""
+
+msgid "If set as 'Yes', then audiofiles are played in 'list mode' only, instead in full screen player."
 msgstr ""
 
 msgid "If set to 'yes' signal values (SNR, etc) will be calculated from API V3. This is an old API version that has now been superseded."
@@ -5059,6 +5128,9 @@ msgstr "Lithuaniansk"
 #
 msgid "Lithuanian"
 msgstr "Lithuaniansk"
+
+msgid "Live decoder"
+msgstr ""
 
 #
 msgid "Load"
@@ -6260,13 +6332,13 @@ msgstr "Ofspylje"
 msgid "Play DVD"
 msgstr ""
 
-msgid "Play audio in background"
-msgstr ""
-
 #
 #, fuzzy
 msgid "Play audio-CD..."
 msgstr "Ofspylje fan Audio-CD..."
+
+msgid "Play audiofiles in list mode"
+msgstr ""
 
 msgid "Play back media files"
 msgstr ""
@@ -6607,6 +6679,9 @@ msgstr "Poort C"
 #
 msgid "Port D"
 msgstr "Poort D"
+
+msgid "Port of fallback remote receiver"
+msgstr ""
 
 #
 #, fuzzy
@@ -7473,6 +7548,11 @@ msgstr ""
 msgid "Saint Vincent and the Grenadines"
 msgstr ""
 
+#
+#, fuzzy
+msgid "Same as stream"
+msgstr "Stop test"
+
 msgid "Same resolution as skin"
 msgstr ""
 
@@ -8023,9 +8103,6 @@ msgstr "Kies fideo moadus"
 msgid "Select wireless network"
 msgstr ""
 
-msgid "Select yes when you want to import channels and/or EPG from a different URL"
-msgstr ""
-
 #
 #, fuzzy
 msgid "Select your ATSC provider."
@@ -8056,6 +8133,9 @@ msgid "Selecting this option allows you to configure a group of satellites in on
 msgstr ""
 
 msgid "Selects the mode how live tv should be shown on the LCD."
+msgstr ""
+
+msgid "Selects video source displayed on the LCD."
 msgstr ""
 
 msgid "Send 'sourceactive' before zap timers"
@@ -8178,6 +8258,11 @@ msgstr "Kanalen"
 msgid "Set PIN"
 msgstr ""
 
+#
+#, fuzzy
+msgid "Set action when movie playback is finished."
+msgstr "Gedrach wannear in film start is"
+
 msgid "Set all hotkey to default?"
 msgstr ""
 
@@ -8201,12 +8286,20 @@ msgstr ""
 msgid "Set fps for external subtitles"
 msgstr ""
 
+msgid "Set if You want see status icons, progress bars or nothing."
+msgstr ""
+
 #
 msgid "Set interface as default Interface"
 msgstr "Set ynterface as standerd ynterface"
 
 msgid "Set limits"
 msgstr ""
+
+#
+#, fuzzy
+msgid "Set movielist type."
+msgstr "filmlyst ferlitte"
 
 msgid "Set pin code persistent"
 msgstr ""
@@ -8246,6 +8339,9 @@ msgstr "Set spanning en 22 kHz"
 #
 msgid "Settings"
 msgstr "Ynstellingen"
+
+msgid "Settings can be different for each directory separately (for non removeable devices only)."
+msgstr ""
 
 #
 msgid "Setup"
@@ -8799,6 +8895,9 @@ msgid "Sort list:"
 msgstr ""
 
 msgid "Sort order for menu entries"
+msgstr ""
+
+msgid "Sort order for setup entries"
 msgstr ""
 
 msgid "Sort plugins list to default?"
@@ -9618,6 +9717,9 @@ msgstr ""
 msgid "This option allows you to add the softcam setup in the extensions menu."
 msgstr ""
 
+msgid "This option allows you to alphabetically sort setup menu entries."
+msgstr ""
+
 msgid "This option allows you to boost the blue tones in the picture."
 msgstr ""
 
@@ -10201,6 +10303,9 @@ msgid "Undo uninstall"
 msgstr ""
 
 msgid "Unencrypted"
+msgstr ""
+
+msgid "Unexpected error while retreiving fallback tuner's timer information"
 msgstr ""
 
 #
@@ -10814,6 +10919,9 @@ msgstr ""
 msgid "When enabled the set top box is able to wakeup on LAN"
 msgstr ""
 
+msgid "When enabled the timer from the fallback tuner is imported"
+msgstr ""
+
 msgid "When enabled then when you select a new channel in the channel selection the channel selection will not close. It will only close when you select the current playing service. This is a kind of preview mode"
 msgstr ""
 
@@ -10988,6 +11096,9 @@ msgid "When nonzero, a recording will start earlier than the starting time indic
 msgstr ""
 
 msgid "When nonzero, a recording will stop later than the ending time indicated by the EPG."
+msgstr ""
+
+msgid "When selected this allows video modes to be selected even if they are not reported as supported."
 msgstr ""
 
 msgid "When the content has an aspect ratio of 16:9, choose whether to scale/stretch the picture."
@@ -11167,6 +11278,9 @@ msgstr ""
 msgid "You can continue watching TV etc. while this is running."
 msgstr ""
 
+msgid "You can enable if will be displayed extended EPG description for item."
+msgstr ""
+
 #
 msgid "You can install this plugin."
 msgstr ""
@@ -11177,6 +11291,17 @@ msgstr ""
 #
 msgid "You can remove this plugin."
 msgstr ""
+
+msgid "You can set how will be finished movieplayer with 'Exit' button."
+msgstr ""
+
+msgid "You can set selected directory as 'root' directory for movie player."
+msgstr ""
+
+#
+#, fuzzy
+msgid "You can set sorting type for items in movielist."
+msgstr "Laad lengte fan films yn filmlyst"
 
 #
 msgid "You cannot delete this!"
@@ -11346,6 +11471,9 @@ msgid "Zap to"
 msgstr ""
 
 msgid "Zap to selected channel"
+msgstr ""
+
+msgid "Zap to selected channel and exit GMEPG"
 msgstr ""
 
 msgid "Zap to selected channel, or show detailed event info (depends on configuration)"
@@ -12472,14 +12600,6 @@ msgstr ""
 
 #, python-format
 msgid "slot%s - %s, without backup"
-msgstr ""
-
-#, python-format
-msgid "slot%s - empty, with backup"
-msgstr ""
-
-#, python-format
-msgid "slot%s - empty, without backup"
 msgstr ""
 
 msgid "soap/melodram/folkloric"

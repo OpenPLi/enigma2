@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-13 09:42+0200\n"
+"POT-Creation-Date: 2018-05-28 11:34+0430\n"
 "PO-Revision-Date: 2016-06-17 12:13+0800\n"
 "Last-Translator: nx111 <gdzdz@163.com>\n"
 "Language-Team: NEWBOLT\n"
@@ -786,9 +786,6 @@ msgstr ""
 msgid "Add recording (stop after current event)"
 msgstr ""
 
-msgid "Add seperate receiver URL for import"
-msgstr ""
-
 msgid "Add service"
 msgstr "添加频道"
 
@@ -908,6 +905,10 @@ msgstr ""
 
 msgid "Allow subtitles for hearing impaired"
 msgstr ""
+
+#, fuzzy
+msgid "Allow unsupported modes"
+msgstr "不支持"
 
 msgid "Alpha"
 msgstr "透明度"
@@ -1169,6 +1170,10 @@ msgid "Automatic"
 msgstr "自动"
 
 msgid "Automatic Scan"
+msgstr "自动扫描"
+
+#, fuzzy
+msgid "Automatic bookmarks"
 msgstr "自动扫描"
 
 msgid "Automatic scan"
@@ -2185,7 +2190,7 @@ msgstr "创建DVD-ISO"
 msgid "Create new folder and exit"
 msgstr ""
 
-msgid "Create seperate radio userbouquet"
+msgid "Create separate radio userbouquet"
 msgstr ""
 
 #, python-format
@@ -2494,6 +2499,9 @@ msgstr "描述"
 msgid "Deselect"
 msgstr "取消"
 
+msgid "Destination of fallback remote receiver"
+msgstr ""
+
 msgid "Details for plugin: "
 msgstr "插件信息:"
 
@@ -2599,6 +2607,9 @@ msgstr ""
 msgid "Display message before playing next movie"
 msgstr ""
 
+msgid "Display movie length in movielist (except single line style)."
+msgstr ""
+
 msgid "Display setup"
 msgstr "显示设置"
 
@@ -2632,6 +2643,9 @@ msgid "Do not change"
 msgstr ""
 
 msgid "Do not record"
+msgstr ""
+
+msgid "Do not show file extensions for registered multimedia files."
 msgstr ""
 
 msgid "Do nothing"
@@ -2789,6 +2803,10 @@ msgstr "下载"
 msgid "Downloading plugin information. Please wait..."
 msgstr "正在下载插件列表,请稍候..."
 
+#, fuzzy
+msgid "Drop unconfigured satellites"
+msgstr "移除选定的卫星"
+
 msgid "Dutch"
 msgstr "荷兰语"
 
@@ -2881,6 +2899,9 @@ msgstr ""
 msgid "Electronic Program Guide"
 msgstr "电子节目指南"
 
+msgid "Empty slot"
+msgstr ""
+
 msgid "Enable"
 msgstr "启用"
 
@@ -2932,6 +2953,9 @@ msgstr ""
 
 msgid "Enable freesat EPG"
 msgstr "启用freesat EPG"
+
+msgid "Enable import timer from fallback tuner"
+msgstr ""
 
 msgid "Enable multiple bouquets"
 msgstr "启用多自定义组"
@@ -3004,7 +3028,14 @@ msgstr "反向:"
 msgid "Enigma2 skin selector"
 msgstr ""
 
+#, fuzzy
+msgid "Enter IP address"
+msgstr "当前CEC地址"
+
 msgid "Enter PIN"
+msgstr ""
+
+msgid "Enter URL"
 msgstr ""
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -3095,6 +3126,12 @@ msgid "Error when writing epg.dat on server"
 msgstr ""
 
 msgid "Error while retreiving epg.dat from server"
+msgstr ""
+
+#, python-format
+msgid ""
+"Error while retreiving fallback timer information\n"
+"%s"
 msgstr ""
 
 msgid "Error while retreiving location of epg.dat on server"
@@ -3324,10 +3361,25 @@ msgstr ""
 msgid "Falkland Islands (Malvinas)"
 msgstr ""
 
+msgid "Fallback Timer"
+msgstr ""
+
+msgid "Fallback remote receiver"
+msgstr ""
+
+msgid "Fallback remote receiver IP"
+msgstr ""
+
+msgid "Fallback remote receiver Port"
+msgstr ""
+
 msgid "Fallback remote receiver URL"
 msgstr ""
 
 msgid "Fallback remote receiver setup"
+msgstr ""
+
+msgid "Fallback tuner setup"
 msgstr ""
 
 #, python-format
@@ -3881,6 +3933,9 @@ msgstr ""
 msgid "IP address"
 msgstr ""
 
+msgid "IP of fallback remote receiver"
+msgstr ""
+
 msgid "ISO file is too large for this filesystem!"
 msgstr "这个ISO文件过大!"
 
@@ -3895,6 +3950,18 @@ msgid "Icons"
 msgstr "图标"
 
 msgid "If enabled, display shows 12 chars instead 8, but in latin-1/translit only."
+msgstr ""
+
+msgid "If enabled, then there will be displayed icons for new/unseen items too."
+msgstr ""
+
+msgid "If is disabled, then after Copy/Move will not be target directory stored into bookmarks."
+msgstr ""
+
+msgid "If is enabled and movie playback is finished, then after return to movielist will not be automaticaly start service playback."
+msgstr ""
+
+msgid "If set as 'Yes', then audiofiles are played in 'list mode' only, instead in full screen player."
 msgstr ""
 
 msgid "If set to 'yes' signal values (SNR, etc) will be calculated from API V3. This is an old API version that has now been superseded."
@@ -4422,6 +4489,9 @@ msgstr "立陶宛语"
 
 msgid "Lithuanian"
 msgstr "立陶宛语"
+
+msgid "Live decoder"
+msgstr ""
 
 msgid "Load"
 msgstr "加载"
@@ -5440,11 +5510,12 @@ msgstr "播放"
 msgid "Play DVD"
 msgstr "播放DVD"
 
-msgid "Play audio in background"
-msgstr "后台播放音频"
-
 msgid "Play audio-CD..."
 msgstr ""
+
+#, fuzzy
+msgid "Play audiofiles in list mode"
+msgstr "后台播放音频"
 
 msgid "Play back media files"
 msgstr ""
@@ -5722,6 +5793,9 @@ msgstr "端口 C"
 
 msgid "Port D"
 msgstr "端口 D"
+
+msgid "Port of fallback remote receiver"
+msgstr ""
 
 #, fuzzy
 msgid "Portugal"
@@ -6471,6 +6545,10 @@ msgstr ""
 msgid "Saint Vincent and the Grenadines"
 msgstr ""
 
+#, fuzzy
+msgid "Same as stream"
+msgstr "停止测试"
+
 msgid "Same resolution as skin"
 msgstr ""
 
@@ -6931,9 +7009,6 @@ msgstr "设置视频模式"
 msgid "Select wireless network"
 msgstr "选择无线网络"
 
-msgid "Select yes when you want to import channels and/or EPG from a different URL"
-msgstr ""
-
 #, fuzzy
 msgid "Select your ATSC provider."
 msgstr "选择要添加的提供商..."
@@ -6963,6 +7038,9 @@ msgid "Selecting this option allows you to configure a group of satellites in on
 msgstr ""
 
 msgid "Selects the mode how live tv should be shown on the LCD."
+msgstr ""
+
+msgid "Selects video source displayed on the LCD."
 msgstr ""
 
 msgid "Send 'sourceactive' before zap timers"
@@ -7065,6 +7143,9 @@ msgstr "频道"
 msgid "Set PIN"
 msgstr ""
 
+msgid "Set action when movie playback is finished."
+msgstr ""
+
 msgid "Set all hotkey to default?"
 msgstr ""
 
@@ -7086,11 +7167,18 @@ msgstr "设为已修复"
 msgid "Set fps for external subtitles"
 msgstr ""
 
+msgid "Set if You want see status icons, progress bars or nothing."
+msgstr ""
+
 msgid "Set interface as default Interface"
 msgstr "将网卡设为默认"
 
 msgid "Set limits"
 msgstr "设置极限"
+
+#, fuzzy
+msgid "Set movielist type."
+msgstr "返回电影列表"
 
 msgid "Set pin code persistent"
 msgstr ""
@@ -7127,6 +7215,9 @@ msgstr ""
 
 msgid "Settings"
 msgstr "设置"
+
+msgid "Settings can be different for each directory separately (for non removeable devices only)."
+msgstr ""
 
 msgid "Setup"
 msgstr "设置"
@@ -7603,6 +7694,9 @@ msgid "Sort list:"
 msgstr ""
 
 msgid "Sort order for menu entries"
+msgstr ""
+
+msgid "Sort order for setup entries"
 msgstr ""
 
 msgid "Sort plugins list to default?"
@@ -8307,6 +8401,9 @@ msgstr ""
 msgid "This option allows you to add the softcam setup in the extensions menu."
 msgstr ""
 
+msgid "This option allows you to alphabetically sort setup menu entries."
+msgstr ""
+
 msgid "This option allows you to boost the blue tones in the picture."
 msgstr ""
 
@@ -8796,6 +8893,9 @@ msgstr "放弃卸载"
 
 msgid "Unencrypted"
 msgstr "未加密"
+
+msgid "Unexpected error while retreiving fallback tuner's timer information"
+msgstr ""
 
 msgid "UnhandledKey"
 msgstr ""
@@ -9311,6 +9411,9 @@ msgstr ""
 msgid "When enabled the set top box is able to wakeup on LAN"
 msgstr ""
 
+msgid "When enabled the timer from the fallback tuner is imported"
+msgstr ""
+
 msgid "When enabled then when you select a new channel in the channel selection the channel selection will not close. It will only close when you select the current playing service. This is a kind of preview mode"
 msgstr ""
 
@@ -9485,6 +9588,9 @@ msgstr ""
 msgid "When nonzero, a recording will stop later than the ending time indicated by the EPG."
 msgstr ""
 
+msgid "When selected this allows video modes to be selected even if they are not reported as supported."
+msgstr ""
+
 msgid "When the content has an aspect ratio of 16:9, choose whether to scale/stretch the picture."
 msgstr ""
 
@@ -9643,6 +9749,9 @@ msgstr ""
 msgid "You can continue watching TV etc. while this is running."
 msgstr ""
 
+msgid "You can enable if will be displayed extended EPG description for item."
+msgstr ""
+
 msgid "You can install this plugin."
 msgstr ""
 
@@ -9651,6 +9760,15 @@ msgstr ""
 
 msgid "You can remove this plugin."
 msgstr "你可以删除这个插件."
+
+msgid "You can set how will be finished movieplayer with 'Exit' button."
+msgstr ""
+
+msgid "You can set selected directory as 'root' directory for movie player."
+msgstr ""
+
+msgid "You can set sorting type for items in movielist."
+msgstr ""
 
 msgid "You cannot delete this!"
 msgstr "这个文件不能删除!"
@@ -9817,6 +9935,9 @@ msgid "Zap to"
 msgstr ""
 
 msgid "Zap to selected channel"
+msgstr ""
+
+msgid "Zap to selected channel and exit GMEPG"
 msgstr ""
 
 msgid "Zap to selected channel, or show detailed event info (depends on configuration)"
@@ -10787,14 +10908,6 @@ msgstr ""
 
 #, python-format
 msgid "slot%s - %s, without backup"
-msgstr ""
-
-#, python-format
-msgid "slot%s - empty, with backup"
-msgstr ""
-
-#, python-format
-msgid "slot%s - empty, without backup"
 msgstr ""
 
 msgid "soap/melodram/folkloric"

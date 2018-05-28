@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-13 09:42+0200\n"
+"POT-Creation-Date: 2018-05-28 11:34+0430\n"
 "PO-Revision-Date: 2016-11-17 12:51+0200\n"
 "Last-Translator: vovan43<vovan43@ex.ua>, sety <tim1065@mail.ru>, Irkoff <irkoff@gmail.com>\n"
 "Language-Team: gisclub.tv <http://gisclub.tv/>\n"
@@ -821,9 +821,6 @@ msgstr "Почати запис (закінчення не визначено)"
 msgid "Add recording (stop after current event)"
 msgstr "Почати запис (стоп після поточного події)"
 
-msgid "Add seperate receiver URL for import"
-msgstr ""
-
 msgid "Add service"
 msgstr "Додати сервіс"
 
@@ -944,6 +941,10 @@ msgstr "Показувати субтитри при збігу з мовою А
 
 msgid "Allow subtitles for hearing impaired"
 msgstr "Субтитри для людей з ослабленим слухом"
+
+#, fuzzy
+msgid "Allow unsupported modes"
+msgstr "невідома"
 
 msgid "Alpha"
 msgstr "Прозорість"
@@ -1217,6 +1218,10 @@ msgid "Automatic"
 msgstr "Автоматично"
 
 msgid "Automatic Scan"
+msgstr "Автоматичне Сканування"
+
+#, fuzzy
+msgid "Automatic bookmarks"
 msgstr "Автоматичне Сканування"
 
 msgid "Automatic scan"
@@ -2242,8 +2247,9 @@ msgstr "Створити DVD-ISO"
 msgid "Create new folder and exit"
 msgstr "Створити нову папку і вийти"
 
-msgid "Create seperate radio userbouquet"
-msgstr ""
+#, fuzzy
+msgid "Create separate radio userbouquet"
+msgstr "відновити видалені  букети  користувача"
 
 #, python-format
 msgid "Creating directory %s failed."
@@ -2554,6 +2560,10 @@ msgstr "Опис"
 msgid "Deselect"
 msgstr "Скасувати"
 
+#, fuzzy
+msgid "Destination of fallback remote receiver"
+msgstr "Адреса запасного варіанту віддаленого приймача"
+
 msgid "Details for plugin: "
 msgstr "Детальніше про плагін: "
 
@@ -2659,6 +2669,9 @@ msgstr "Екран і інтерфейс"
 msgid "Display message before playing next movie"
 msgstr "Повідомлення перед відтв. наступного запису"
 
+msgid "Display movie length in movielist (except single line style)."
+msgstr ""
+
 msgid "Display setup"
 msgstr "Налаштування дисплея"
 
@@ -2693,6 +2706,9 @@ msgstr "Не змінювати"
 
 msgid "Do not record"
 msgstr "Не записувати"
+
+msgid "Do not show file extensions for registered multimedia files."
+msgstr ""
 
 msgid "Do nothing"
 msgstr "Нічого не робити"
@@ -2854,6 +2870,10 @@ msgstr "Завантаження"
 msgid "Downloading plugin information. Please wait..."
 msgstr "Завантаження інформації про плагіни. чекайте..."
 
+#, fuzzy
+msgid "Drop unconfigured satellites"
+msgstr "Підключені супутники"
+
 msgid "Dutch"
 msgstr "Нідерландський"
 
@@ -2945,6 +2965,9 @@ msgstr ""
 msgid "Electronic Program Guide"
 msgstr "Електронний Програмний Гід(ЕПГ)"
 
+msgid "Empty slot"
+msgstr ""
+
 msgid "Enable"
 msgstr "Увімкнути"
 
@@ -2996,6 +3019,9 @@ msgstr "Включити резервний віддалений приймач"
 
 msgid "Enable freesat EPG"
 msgstr "Увімкнути freesat EPG"
+
+msgid "Enable import timer from fallback tuner"
+msgstr ""
 
 msgid "Enable multiple bouquets"
 msgstr "Дозволити мульти-букети"
@@ -3068,7 +3094,15 @@ msgstr "Версія ядра: "
 msgid "Enigma2 skin selector"
 msgstr "Вибір скіна Enigma2"
 
+#, fuzzy
+msgid "Enter IP address"
+msgstr "IP адреса"
+
 msgid "Enter PIN"
+msgstr "Введіть PIN-код"
+
+#, fuzzy
+msgid "Enter URL"
 msgstr "Введіть PIN-код"
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -3159,6 +3193,12 @@ msgid "Error when writing epg.dat on server"
 msgstr ""
 
 msgid "Error while retreiving epg.dat from server"
+msgstr ""
+
+#, python-format
+msgid ""
+"Error while retreiving fallback timer information\n"
+"%s"
 msgstr ""
 
 msgid "Error while retreiving location of epg.dat on server"
@@ -3390,11 +3430,30 @@ msgstr "Помилка:"
 msgid "Falkland Islands (Malvinas)"
 msgstr ""
 
+msgid "Fallback Timer"
+msgstr ""
+
+#, fuzzy
+msgid "Fallback remote receiver"
+msgstr "Запасний URL віддаленого приймача"
+
+#, fuzzy
+msgid "Fallback remote receiver IP"
+msgstr "Запасний URL віддаленого приймача"
+
+#, fuzzy
+msgid "Fallback remote receiver Port"
+msgstr "Запасний URL віддаленого приймача"
+
 msgid "Fallback remote receiver URL"
 msgstr "Запасний URL віддаленого приймача"
 
 #, fuzzy
 msgid "Fallback remote receiver setup"
+msgstr "Запасний URL віддаленого приймача"
+
+#, fuzzy
+msgid "Fallback tuner setup"
 msgstr "Запасний URL віддаленого приймача"
 
 #, python-format
@@ -3953,6 +4012,10 @@ msgstr ""
 msgid "IP address"
 msgstr "IP адреса"
 
+#, fuzzy
+msgid "IP of fallback remote receiver"
+msgstr "Адреса запасного варіанту віддаленого приймача"
+
 msgid "ISO file is too large for this filesystem!"
 msgstr "ISO файл занадто великий для цієї файлової системи!"
 
@@ -3966,6 +4029,19 @@ msgid "Icons"
 msgstr "Іконки"
 
 msgid "If enabled, display shows 12 chars instead 8, but in latin-1/translit only."
+msgstr ""
+
+#, fuzzy
+msgid "If enabled, then there will be displayed icons for new/unseen items too."
+msgstr "Якщо увімкнено, при початку нової події EPG на поточному каналі, з'явиться інфобар."
+
+msgid "If is disabled, then after Copy/Move will not be target directory stored into bookmarks."
+msgstr ""
+
+msgid "If is enabled and movie playback is finished, then after return to movielist will not be automaticaly start service playback."
+msgstr ""
+
+msgid "If set as 'Yes', then audiofiles are played in 'list mode' only, instead in full screen player."
 msgstr ""
 
 msgid "If set to 'yes' signal values (SNR, etc) will be calculated from API V3. This is an old API version that has now been superseded."
@@ -4508,6 +4584,9 @@ msgstr "Литовський"
 
 msgid "Lithuanian"
 msgstr "Литовський"
+
+msgid "Live decoder"
+msgstr ""
 
 msgid "Load"
 msgstr "Завантажити"
@@ -5526,11 +5605,12 @@ msgstr "Відтворити"
 msgid "Play DVD"
 msgstr "Відтворити DVD"
 
-msgid "Play audio in background"
-msgstr "Відтворити аудіо у фоновому режимі"
-
 msgid "Play audio-CD..."
 msgstr "Відтворити аудіо-CD"
+
+#, fuzzy
+msgid "Play audiofiles in list mode"
+msgstr "Відтворити аудіо у фоновому режимі"
 
 msgid "Play back media files"
 msgstr "Програвач медіа файлів"
@@ -5811,6 +5891,10 @@ msgstr "Порт C"
 
 msgid "Port D"
 msgstr "Порт D"
+
+#, fuzzy
+msgid "Port of fallback remote receiver"
+msgstr "Адреса запасного варіанту віддаленого приймача"
 
 #, fuzzy
 msgid "Portugal"
@@ -6565,6 +6649,10 @@ msgstr ""
 msgid "Saint Vincent and the Grenadines"
 msgstr ""
 
+#, fuzzy
+msgid "Same as stream"
+msgstr "Зупинити тест"
+
 msgid "Same resolution as skin"
 msgstr "Роздільна здатність як в скіну"
 
@@ -7030,9 +7118,6 @@ msgstr "Виберіть відеорежим"
 msgid "Select wireless network"
 msgstr "Виберіть бездротову мережу"
 
-msgid "Select yes when you want to import channels and/or EPG from a different URL"
-msgstr ""
-
 #, fuzzy
 msgid "Select your ATSC provider."
 msgstr "ATSC провайдер"
@@ -7062,6 +7147,9 @@ msgid "Selecting this option allows you to configure a group of satellites in on
 msgstr ""
 
 msgid "Selects the mode how live tv should be shown on the LCD."
+msgstr ""
+
+msgid "Selects video source displayed on the LCD."
 msgstr ""
 
 msgid "Send 'sourceactive' before zap timers"
@@ -7165,6 +7253,10 @@ msgstr "Сервіси"
 msgid "Set PIN"
 msgstr "Встановити PIN"
 
+#, fuzzy
+msgid "Set action when movie playback is finished."
+msgstr "Вкажіть, що робити при початку відтворення."
+
 msgid "Set all hotkey to default?"
 msgstr "Встановіть всі гарячі клавіші за замовчуванням?"
 
@@ -7186,11 +7278,18 @@ msgstr "Фіксувати"
 msgid "Set fps for external subtitles"
 msgstr "Набір кадрів в секунду для зовнішніх субтитрів"
 
+msgid "Set if You want see status icons, progress bars or nothing."
+msgstr ""
+
 msgid "Set interface as default Interface"
 msgstr "Встановити інтерфейс як дефолтний"
 
 msgid "Set limits"
 msgstr "Набір обмежень"
+
+#, fuzzy
+msgid "Set movielist type."
+msgstr "Захистити список фільмів"
 
 msgid "Set pin code persistent"
 msgstr "Встановити пін-код наполегливо"
@@ -7227,6 +7326,9 @@ msgstr "Встановити напругу и 22КГц"
 
 msgid "Settings"
 msgstr "Налаштування"
+
+msgid "Settings can be different for each directory separately (for non removeable devices only)."
+msgstr ""
 
 msgid "Setup"
 msgstr "Налаштування"
@@ -7709,6 +7811,10 @@ msgid "Sort list:"
 msgstr "Сортування списку:"
 
 msgid "Sort order for menu entries"
+msgstr "Порядок сортування для елементів меню"
+
+#, fuzzy
+msgid "Sort order for setup entries"
 msgstr "Порядок сортування для елементів меню"
 
 msgid "Sort plugins list to default?"
@@ -8447,6 +8553,10 @@ msgid "This option allows you to add the softcam setup in the extensions menu."
 msgstr "Ця опція дозволяє показати шляхи меню."
 
 #, fuzzy
+msgid "This option allows you to alphabetically sort setup menu entries."
+msgstr "Ця опція дозволяє показати шляхи меню."
+
+#, fuzzy
 msgid "This option allows you to boost the blue tones in the picture."
 msgstr "Ця опція дозволяє показати шляхи меню."
 
@@ -8965,6 +9075,9 @@ msgstr "Скасування видалення"
 
 msgid "Unencrypted"
 msgstr "Декодований"
+
+msgid "Unexpected error while retreiving fallback tuner's timer information"
+msgstr ""
 
 msgid "UnhandledKey"
 msgstr "Не оброблений ключ"
@@ -9501,6 +9614,9 @@ msgstr ""
 "Якщо включено і якщо специфікація ресивера дозволяє, то можна розбудити \n"
 "Ресивер з глибокого очікування по LAN підключенню віддалено."
 
+msgid "When enabled the timer from the fallback tuner is imported"
+msgstr ""
+
 msgid "When enabled then when you select a new channel in the channel selection the channel selection will not close. It will only close when you select the current playing service. This is a kind of preview mode"
 msgstr "Якщо ця функція включена, то при виборі нового каналу у виборі каналу вибір каналу не буде закрита. Це буде тільки близько, коли Ви вибираєте поточний відтворений канал.Це є свого роду режим перегляду"
 
@@ -9688,6 +9804,9 @@ msgstr "Вкажіть на скільки хвилин раніше почин�
 msgid "When nonzero, a recording will stop later than the ending time indicated by the EPG."
 msgstr "Вкажіть на скільки хвилин пізніше закінчити запис, ніж час закінчення запису по EPG."
 
+msgid "When selected this allows video modes to be selected even if they are not reported as supported."
+msgstr ""
+
 msgid "When the content has an aspect ratio of 16:9, choose whether to scale/stretch the picture."
 msgstr "Коли зображення на каналі має співвідношення сторін 16:9, виберіть, чи слід масштабувати / розтягнути картинку."
 
@@ -9851,6 +9970,9 @@ msgstr "Ви можете скасувати видалення."
 msgid "You can continue watching TV etc. while this is running."
 msgstr "Ви можете продовжити перегляд ТБ і т.д., поки процес виконується."
 
+msgid "You can enable if will be displayed extended EPG description for item."
+msgstr ""
+
 msgid "You can install this plugin."
 msgstr "Ви можете встановити цей плагін."
 
@@ -9859,6 +9981,16 @@ msgstr "Ви можете пропалити тільки записи реси�
 
 msgid "You can remove this plugin."
 msgstr "Ви можете видалити цей плагін."
+
+msgid "You can set how will be finished movieplayer with 'Exit' button."
+msgstr ""
+
+msgid "You can set selected directory as 'root' directory for movie player."
+msgstr ""
+
+#, fuzzy
+msgid "You can set sorting type for items in movielist."
+msgstr "Тривалість завантаження фільмів в списку фільмів"
 
 msgid "You cannot delete this!"
 msgstr "Ви не можете видалити це!"
@@ -10051,6 +10183,10 @@ msgid "Zap to"
 msgstr "Переключити на"
 
 msgid "Zap to selected channel"
+msgstr "Переключитись на вибраний канал"
+
+#, fuzzy
+msgid "Zap to selected channel and exit GMEPG"
 msgstr "Переключитись на вибраний канал"
 
 msgid "Zap to selected channel, or show detailed event info (depends on configuration)"
@@ -11021,14 +11157,6 @@ msgstr ""
 
 #, python-format
 msgid "slot%s - %s, without backup"
-msgstr ""
-
-#, python-format
-msgid "slot%s - empty, with backup"
-msgstr ""
-
-#, python-format
-msgid "slot%s - empty, without backup"
 msgstr ""
 
 msgid "soap/melodram/folkloric"

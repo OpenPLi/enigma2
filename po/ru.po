@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-13 09:42+0200\n"
+"POT-Creation-Date: 2018-05-28 11:34+0430\n"
 "PO-Revision-Date: 2018-05-02 18:32+0300\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: openPLi Dimitrij\n"
@@ -818,9 +818,6 @@ msgstr "Добавить запись (окончание неопределен
 msgid "Add recording (stop after current event)"
 msgstr "Добавить запись (стоп после текущего события)"
 
-msgid "Add seperate receiver URL for import"
-msgstr "Добавить другой ресивер URL для импорта"
-
 msgid "Add service"
 msgstr "Добавить сервис"
 
@@ -940,6 +937,9 @@ msgstr "Показывать субтитры при совпадении с я�
 
 msgid "Allow subtitles for hearing impaired"
 msgstr "Разрешить субтитры для людей с ослабленным слухом"
+
+msgid "Allow unsupported modes"
+msgstr "Разрешить неподдерживаемые видео режимы"
 
 msgid "Alpha"
 msgstr "Прозрачность"
@@ -1209,6 +1209,9 @@ msgstr "Автоматически"
 
 msgid "Automatic Scan"
 msgstr "Автоматическое сканирование"
+
+msgid "Automatic bookmarks"
+msgstr "Автоматически создавать закладки"
 
 msgid "Automatic scan"
 msgstr "Автоматическое сканирование"
@@ -2213,7 +2216,8 @@ msgstr "Создать DVD-ISO"
 msgid "Create new folder and exit"
 msgstr "Создать новую папку и выйти"
 
-msgid "Create seperate radio userbouquet"
+#, fuzzy
+msgid "Create separate radio userbouquet"
 msgstr "Создавать отдельный пользовательский букет для радио"
 
 #, python-format
@@ -2519,6 +2523,10 @@ msgstr "Описание"
 msgid "Deselect"
 msgstr "Не выбирать"
 
+#, fuzzy
+msgid "Destination of fallback remote receiver"
+msgstr "Впишите URL запасного удаленного ресивера"
+
 msgid "Details for plugin: "
 msgstr "Подробнее о плагине: "
 
@@ -2624,6 +2632,9 @@ msgstr "Экран и пользовательский интерфейс"
 msgid "Display message before playing next movie"
 msgstr "Сообщение перед воспроизведением следующего видео"
 
+msgid "Display movie length in movielist (except single line style)."
+msgstr "Показывать длину фильма в списке видео (кроме однострочного стиля)."
+
 msgid "Display setup"
 msgstr "Настройка дисплея"
 
@@ -2653,6 +2664,9 @@ msgstr "Не изменять"
 
 msgid "Do not record"
 msgstr "Не записывать"
+
+msgid "Do not show file extensions for registered multimedia files."
+msgstr "Не показывать расширения файлов для зарегистрированных мультимедийных файлов."
 
 msgid "Do nothing"
 msgstr "Ничего не делать"
@@ -2814,6 +2828,10 @@ msgstr "Загрузка имиджа"
 msgid "Downloading plugin information. Please wait..."
 msgstr "Загрузка информации о плагинах. Пожалуйста, подождите..."
 
+#, fuzzy
+msgid "Drop unconfigured satellites"
+msgstr "Подключенные спутники"
+
 msgid "Dutch"
 msgstr "Нидерландский"
 
@@ -2903,6 +2921,9 @@ msgstr "El Salvador"
 msgid "Electronic Program Guide"
 msgstr "Электронный Программный Гид"
 
+msgid "Empty slot"
+msgstr "Пустой слот"
+
 msgid "Enable"
 msgstr "Включить"
 
@@ -2954,6 +2975,10 @@ msgstr "Включить запасной удаленный ресивер"
 
 msgid "Enable freesat EPG"
 msgstr "Включить freesat EPG"
+
+#, fuzzy
+msgid "Enable import timer from fallback tuner"
+msgstr "Импорт каналов из резервного тюнера"
 
 msgid "Enable multiple bouquets"
 msgstr "Включить мульти-букеты"
@@ -3025,7 +3050,15 @@ msgstr "Версия энигмы: "
 msgid "Enigma2 skin selector"
 msgstr "Выбор скинов Enigma2"
 
+#, fuzzy
+msgid "Enter IP address"
+msgstr "IP-адрес"
+
 msgid "Enter PIN"
+msgstr "Ввод PIN-кода"
+
+#, fuzzy
+msgid "Enter URL"
 msgstr "Ввод PIN-кода"
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -3123,6 +3156,12 @@ msgstr "Ошибка при записи epg.dat на сервере"
 
 msgid "Error while retreiving epg.dat from server"
 msgstr "Ошибка при получении epg.dat с сервера"
+
+#, fuzzy, python-format
+msgid ""
+"Error while retreiving fallback timer information\n"
+"%s"
+msgstr "Ошибка получения расположения файла epg.dat с сервера"
 
 msgid "Error while retreiving location of epg.dat on server"
 msgstr "Ошибка получения расположения файла epg.dat с сервера"
@@ -3359,10 +3398,29 @@ msgstr "Неудачно:"
 msgid "Falkland Islands (Malvinas)"
 msgstr "Falkland Islands (Malvinas)"
 
+msgid "Fallback Timer"
+msgstr ""
+
+#, fuzzy
+msgid "Fallback remote receiver"
+msgstr "URL запасного удаленного ресивера"
+
+#, fuzzy
+msgid "Fallback remote receiver IP"
+msgstr "URL запасного удаленного ресивера"
+
+#, fuzzy
+msgid "Fallback remote receiver Port"
+msgstr "Настройки удаленного резервного ресивера"
+
 msgid "Fallback remote receiver URL"
 msgstr "URL запасного удаленного ресивера"
 
 msgid "Fallback remote receiver setup"
+msgstr "Настройки удаленного резервного ресивера"
+
+#, fuzzy
+msgid "Fallback tuner setup"
 msgstr "Настройки удаленного резервного ресивера"
 
 #, python-format
@@ -3908,6 +3966,10 @@ msgstr "БЕЗДЕЙСТВИЕ"
 msgid "IP address"
 msgstr "IP-адрес"
 
+#, fuzzy
+msgid "IP of fallback remote receiver"
+msgstr "Впишите URL запасного удаленного ресивера"
+
 msgid "ISO file is too large for this filesystem!"
 msgstr "Объем ISO файл слишком большой для этой файловой системы!"
 
@@ -3922,6 +3984,18 @@ msgstr "Иконка"
 
 msgid "If enabled, display shows 12 chars instead 8, but in latin-1/translit only."
 msgstr "Если включено, на дисплее отображается 12 символов вместо 8, но только для кодировки latin-1 или транслита."
+
+msgid "If enabled, then there will be displayed icons for new/unseen items too."
+msgstr "Если включено, тогда будут отображаться значки для новых / невидимых элементов."
+
+msgid "If is disabled, then after Copy/Move will not be target directory stored into bookmarks."
+msgstr "Если это отключено, то после копирования/перемещения не будет целевого каталога, хранящегося в закладках."
+
+msgid "If is enabled and movie playback is finished, then after return to movielist will not be automaticaly start service playback."
+msgstr "Если включено и воспроизведение фильма закончено, то после возврата в список видео, воспроизведение не будет автоматически переключатся на предыдущий канал."
+
+msgid "If set as 'Yes', then audiofiles are played in 'list mode' only, instead in full screen player."
+msgstr "Если выбрано 'Да', то аудио файлы воспроизводятся тольео в 'режиме списка', а не как полноэкранный плеер."
 
 msgid "If set to 'yes' signal values (SNR, etc) will be calculated from API V3. This is an old API version that has now been superseded."
 msgstr "Если установлено значение 'да', значения сигнала (SNR, др.) будут вычисляться из API V3. Это старая API версия,которая заменена некоторыми производителями драйверов на новую."
@@ -4449,6 +4523,9 @@ msgstr "Lithuania"
 
 msgid "Lithuanian"
 msgstr "Литовский"
+
+msgid "Live decoder"
+msgstr ""
 
 msgid "Load"
 msgstr "Загрузить"
@@ -5452,11 +5529,11 @@ msgstr "Воспроизвести"
 msgid "Play DVD"
 msgstr "Воспроизвести DVD"
 
-msgid "Play audio in background"
-msgstr "Воспроизведение аудио в фоновом режиме"
-
 msgid "Play audio-CD..."
 msgstr "Воспроизвести аудио-CD..."
+
+msgid "Play audiofiles in list mode"
+msgstr "Воспроизведение аудиофайлов в режиме списка"
 
 msgid "Play back media files"
 msgstr "Воспроизведение медиа файлов"
@@ -5732,6 +5809,10 @@ msgstr "Порт C"
 
 msgid "Port D"
 msgstr "Порт D"
+
+#, fuzzy
+msgid "Port of fallback remote receiver"
+msgstr "Впишите URL запасного удаленного ресивера"
 
 msgid "Portugal"
 msgstr "Portugal"
@@ -6476,6 +6557,10 @@ msgstr "Saint Pierre and Miquelon"
 msgid "Saint Vincent and the Grenadines"
 msgstr "Saint Vincent and the Grenadines"
 
+#, fuzzy
+msgid "Same as stream"
+msgstr "Остановка всех стримов"
+
 msgid "Same resolution as skin"
 msgstr "Разрешение как в скине"
 
@@ -6930,9 +7015,6 @@ msgstr "Выберите видеорежим"
 msgid "Select wireless network"
 msgstr "Выберите беспроводную сеть"
 
-msgid "Select yes when you want to import channels and/or EPG from a different URL"
-msgstr "Выберите Да, когда Вы хотите импортировать каналы/EPG с другого URL-адреса"
-
 msgid "Select your ATSC provider."
 msgstr "Выбор Вашего ATSC провайдера."
 
@@ -6961,6 +7043,10 @@ msgid "Selecting this option allows you to configure a group of satellites in on
 msgstr "Выбор этого параметра позволяет вам настроить группу спутников в одном блоке."
 
 msgid "Selects the mode how live tv should be shown on the LCD."
+msgstr "Выбор режима показа live ТВ на LCD дисплее."
+
+#, fuzzy
+msgid "Selects video source displayed on the LCD."
 msgstr "Выбор режима показа live ТВ на LCD дисплее."
 
 msgid "Send 'sourceactive' before zap timers"
@@ -7062,6 +7148,9 @@ msgstr "Сервисы"
 msgid "Set PIN"
 msgstr "Установить PIN-код"
 
+msgid "Set action when movie playback is finished."
+msgstr "Установите действие, когда воспроизведение фильма закончено."
+
 msgid "Set all hotkey to default?"
 msgstr "Установить все горячие кнопки по умолчанию?"
 
@@ -7083,11 +7172,17 @@ msgstr "Зафиксировать"
 msgid "Set fps for external subtitles"
 msgstr "Установить fps (набор кадров в секунду) для внешних субтитров"
 
+msgid "Set if You want see status icons, progress bars or nothing."
+msgstr "Установка, что Вы хотите видеть - иконка состояния/прогресс бар/ничего."
+
 msgid "Set interface as default Interface"
 msgstr "Установить интерфейс как интерфейс по дефолту"
 
 msgid "Set limits"
 msgstr "Установить лимиты"
+
+msgid "Set movielist type."
+msgstr "Установите тип списка видео."
 
 msgid "Set pin code persistent"
 msgstr "Установить постоянный PIN-код"
@@ -7124,6 +7219,9 @@ msgstr "Установить напряжение и 22KHz"
 
 msgid "Settings"
 msgstr "Установки"
+
+msgid "Settings can be different for each directory separately (for non removeable devices only)."
+msgstr ""
 
 msgid "Setup"
 msgstr "Настройки"
@@ -7599,6 +7697,9 @@ msgstr "Сортировка списка:"
 
 msgid "Sort order for menu entries"
 msgstr "Порядок сортировки пунктов меню"
+
+msgid "Sort order for setup entries"
+msgstr "Сортировка пунктов настроек"
 
 msgid "Sort plugins list to default?"
 msgstr "Сортировать список плагинов по умолчанию?"
@@ -8326,6 +8427,9 @@ msgstr "Эта опция позволяет Вам включить верти�
 msgid "This option allows you to add the softcam setup in the extensions menu."
 msgstr "Эта опция позволяет добавить 'Настройки эмулятора' в меню дополнений."
 
+msgid "This option allows you to alphabetically sort setup menu entries."
+msgstr "Сортировать пункты меню по алфавиту."
+
 msgid "This option allows you to boost the blue tones in the picture."
 msgstr "Эта опция позволяет увеличить синие тона изображения."
 
@@ -8824,6 +8928,9 @@ msgstr "Отмена удаления"
 
 msgid "Unencrypted"
 msgstr "Незашифрованная (открытая)"
+
+msgid "Unexpected error while retreiving fallback tuner's timer information"
+msgstr ""
 
 msgid "UnhandledKey"
 msgstr "Не обработанный ключ"
@@ -9353,6 +9460,10 @@ msgstr "Если включено, то кнопки лево/право, CH+/-,
 msgid "When enabled the set top box is able to wakeup on LAN"
 msgstr "Если включено и если спецификация ресивера позволяет, то можно разбудить ресивер из глубокого ожидания по LAN подключению удаленно."
 
+#, fuzzy
+msgid "When enabled the timer from the fallback tuner is imported"
+msgstr "Каналы удаленного ресивера импортированы!"
+
 msgid "When enabled then when you select a new channel in the channel selection the channel selection will not close. It will only close when you select the current playing service. This is a kind of preview mode"
 msgstr "Если включено, то при выборе нового канала, список выбора каналов не закроется. Он закроется кнопкой ОК только при выборе текущего игрового сервиса. Это является своего рода режимом предварительного просмотра."
 
@@ -9527,6 +9638,9 @@ msgstr "Укажите на сколько минут раньше начина�
 msgid "When nonzero, a recording will stop later than the ending time indicated by the EPG."
 msgstr "Укажите на сколько минут позже закончить запись, чем время окончания записи по EPG."
 
+msgid "When selected this allows video modes to be selected even if they are not reported as supported."
+msgstr "Если включено, то это позволяет выбирать режим видео, даже если он является  неподдерживаемым."
+
 msgid "When the content has an aspect ratio of 16:9, choose whether to scale/stretch the picture."
 msgstr "Когда изображение на канале имеет соотношение сторон 16:9, выберите, следует ли масштабировать/растянуть картинку."
 
@@ -9685,6 +9799,9 @@ msgstr "Вы можете отменить удаление."
 msgid "You can continue watching TV etc. while this is running."
 msgstr "Вы можете продолжить просмотр ТВ и т.д., пока процесс выполняется."
 
+msgid "You can enable if will be displayed extended EPG description for item."
+msgstr "Вы можете включить, будет ли отображаться расширенное описание EPG для выбранного элемента."
+
 msgid "You can install this plugin."
 msgstr "Вы можете установить этот плагин."
 
@@ -9693,6 +9810,15 @@ msgstr "Вы можете прожечь(технология burn) только
 
 msgid "You can remove this plugin."
 msgstr "Вы можете удалить это плагин."
+
+msgid "You can set how will be finished movieplayer with 'Exit' button."
+msgstr "Вы можете установить, как будет настроен выход из видеоплеера по кнопке 'Exit'."
+
+msgid "You can set selected directory as 'root' directory for movie player."
+msgstr "Вы можете установить выбранный каталог как 'корневой' каталог для видеоплеера."
+
+msgid "You can set sorting type for items in movielist."
+msgstr "Вы можете установить тип сортировки для элементов в списке видео."
 
 msgid "You cannot delete this!"
 msgstr "Вы не можете удалить это!"
@@ -9884,6 +10010,10 @@ msgid "Zap to"
 msgstr "Переключить на"
 
 msgid "Zap to selected channel"
+msgstr "Переключение на выбраный канал"
+
+#, fuzzy
+msgid "Zap to selected channel and exit GMEPG"
 msgstr "Переключение на выбраный канал"
 
 msgid "Zap to selected channel, or show detailed event info (depends on configuration)"
@@ -10851,14 +10981,6 @@ msgstr "слот%s - %s, с бекапом"
 msgid "slot%s - %s, without backup"
 msgstr "слот%s - %s, без бекапа"
 
-#, python-format
-msgid "slot%s - empty, with backup"
-msgstr "слот%s - пустой, с бекапом"
-
-#, python-format
-msgid "slot%s - empty, without backup"
-msgstr "слот%s - пустой, без бекапа"
-
 msgid "soap/melodram/folkloric"
 msgstr "мыльная опера/мелодрама/фольклор"
 
@@ -11081,63 +11203,3 @@ msgstr "переключено"
 
 msgid "®"
 msgstr "®"
-
-msgid "Automatic bookmarks"
-msgstr "Автоматически создавать закладки"
-
-msgid "Display movie length in movielist (except single line style)."
-msgstr "Показывать длину фильма в списке видео (кроме однострочного стиля)."
-
-msgid "Do not show file extensions for registered multimedia files."
-msgstr "Не показывать расширения файлов для зарегистрированных мультимедийных файлов."
-
-msgid "Empty slot"
-msgstr "Пустой слот"
-
-msgid "If enabled, then there will be displayed icons for new/unseen items too."
-msgstr "Если включено, тогда будут отображаться значки для новых / невидимых элементов."
-
-msgid "If is disabled, then after Copy/Move will not be target directory stored into bookmarks."
-msgstr "Если это отключено, то после копирования/перемещения не будет целевого каталога, хранящегося в закладках."
-
-msgid "If is enabled and movie playback is finished, then after return to movielist will not be automaticaly start service playback."
-msgstr "Если включено и воспроизведение фильма закончено, то после возврата в список видео, воспроизведение не будет автоматически переключатся на предыдущий канал."
-
-msgid "If set as 'Yes', then audiofiles are played in 'list mode' only, instead in full screen player."
-msgstr "Если выбрано 'Да', то аудио файлы воспроизводятся тольео в 'режиме списка', а не как полноэкранный плеер."
-
-msgid "Play audiofiles in list mode"
-msgstr "Воспроизведение аудиофайлов в режиме списка"
-
-msgid "Set action when movie playback is finished."
-msgstr "Установите действие, когда воспроизведение фильма закончено."
-
-msgid "Set if You want see status icons, progress bars or nothing."
-msgstr "Установка, что Вы хотите видеть - иконка состояния/прогресс бар/ничего."
-
-msgid "Set movielist type."
-msgstr "Установите тип списка видео."
-
-msgid "This option allows you to alphabetically sort setup menu entries."
-msgstr "Сортировать пункты меню по алфавиту."
-
-msgid "You can enable if will be displayed extended EPG description for item."
-msgstr "Вы можете включить, будет ли отображаться расширенное описание EPG для выбранного элемента."
-
-msgid "You can set how will be finished movieplayer with 'Exit' button."
-msgstr "Вы можете установить, как будет настроен выход из видеоплеера по кнопке 'Exit'."
-
-msgid "You can set selected directory as 'root' directory for movie player."
-msgstr "Вы можете установить выбранный каталог как 'корневой' каталог для видеоплеера."
-
-msgid "You can set sorting type for items in movielist."
-msgstr "Вы можете установить тип сортировки для элементов в списке видео."
-
-msgid "Allow unsupported modes"
-msgstr "Разрешить неподдерживаемые видео режимы"
-
-msgid "When selected this allows video modes to be selected even if they are not reported as supported."
-msgstr "Если включено, то это позволяет выбирать режим видео, даже если он является  неподдерживаемым."
-
-msgid "Sort order for setup entries"
-msgstr "Сортировка пунктов настроек"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Project Slovenia\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-13 09:42+0200\n"
+"POT-Creation-Date: 2018-05-28 11:34+0430\n"
 "PO-Revision-Date: 2015-08-30 09:00+0200\n"
 "Last-Translator: Taykun345 <support@satnigmo.com>\n"
 "Language-Team: Satnigmo <support@satnigmo.com>\n"
@@ -923,9 +923,6 @@ msgstr "Novo snemanje (čas je nedoločen)"
 msgid "Add recording (stop after current event)"
 msgstr "Novo snemanje (snemanje se zaključi po koncu trenutnega dogodka)"
 
-msgid "Add seperate receiver URL for import"
-msgstr ""
-
 #
 msgid "Add service"
 msgstr "Nov kanal"
@@ -1067,6 +1064,10 @@ msgstr "Podnapisi naj se ujemajo z zvočno sledjo"
 #
 msgid "Allow subtitles for hearing impaired"
 msgstr "Dovoli podnapise za gluhe osebe"
+
+#, fuzzy
+msgid "Allow unsupported modes"
+msgstr "ni podprto"
 
 #
 msgid "Alpha"
@@ -1378,6 +1379,10 @@ msgid "Automatic"
 msgstr "Samodejno"
 
 msgid "Automatic Scan"
+msgstr "Samodejno iskanje "
+
+#, fuzzy
+msgid "Automatic bookmarks"
 msgstr "Samodejno iskanje "
 
 #
@@ -2518,8 +2523,9 @@ msgstr "Kreiraj DVD-ISO"
 msgid "Create new folder and exit"
 msgstr "Ustvari novo mapo in zapusti"
 
-msgid "Create seperate radio userbouquet"
-msgstr ""
+#, fuzzy
+msgid "Create separate radio userbouquet"
+msgstr "obnova že izbrisanih seznamov kanalov"
 
 #
 #, python-format
@@ -2871,6 +2877,10 @@ msgstr "Opis"
 msgid "Deselect"
 msgstr "Preklic"
 
+#, fuzzy
+msgid "Destination of fallback remote receiver"
+msgstr "Naslov rezervnega oddaljenega sprejemnika"
+
 msgid "Details for plugin: "
 msgstr "Dodatne informacije:"
 
@@ -3000,6 +3010,9 @@ msgstr "Zaslon in uporabniški vmesnik"
 msgid "Display message before playing next movie"
 msgstr "Prikaz obvestila pred začetkom predvajanja posnetka."
 
+msgid "Display movie length in movielist (except single line style)."
+msgstr ""
+
 #
 msgid "Display setup"
 msgstr "Zaslon sprejemnika"
@@ -3041,6 +3054,9 @@ msgstr "Ne spreminjaj"
 #
 msgid "Do not record"
 msgstr "Ne snemaj"
+
+msgid "Do not show file extensions for registered multimedia files."
+msgstr ""
 
 #
 msgid "Do nothing"
@@ -3232,6 +3248,11 @@ msgid "Downloading plugin information. Please wait..."
 msgstr "Poteka pridobivanje seznama vtičnikov... Prosim počakajte!"
 
 #
+#, fuzzy
+msgid "Drop unconfigured satellites"
+msgstr "Priključeni sateliti"
+
+#
 msgid "Dutch"
 msgstr "Nizozemsko"
 
@@ -3341,6 +3362,9 @@ msgstr ""
 msgid "Electronic Program Guide"
 msgstr "Elektronski spored programov (EPG)"
 
+msgid "Empty slot"
+msgstr ""
+
 #
 msgid "Enable"
 msgstr "omogoči"
@@ -3403,6 +3427,9 @@ msgstr "Vklopi rezervni oddaljeni sprejemnik"
 #
 msgid "Enable freesat EPG"
 msgstr "Freesat EPG sistem"
+
+msgid "Enable import timer from fallback tuner"
+msgstr ""
 
 #
 msgid "Enable multiple bouquets"
@@ -3485,7 +3512,14 @@ msgstr "Verzija jedra: "
 msgid "Enigma2 skin selector"
 msgstr "Izbirnik Enigma2 preoblek"
 
+#, fuzzy
+msgid "Enter IP address"
+msgstr "IP naslov"
+
 msgid "Enter PIN"
+msgstr ""
+
+msgid "Enter URL"
 msgstr ""
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -3583,6 +3617,12 @@ msgid "Error when writing epg.dat on server"
 msgstr ""
 
 msgid "Error while retreiving epg.dat from server"
+msgstr ""
+
+#, python-format
+msgid ""
+"Error while retreiving fallback timer information\n"
+"%s"
 msgstr ""
 
 msgid "Error while retreiving location of epg.dat on server"
@@ -3844,11 +3884,30 @@ msgstr ""
 msgid "Falkland Islands (Malvinas)"
 msgstr ""
 
+msgid "Fallback Timer"
+msgstr ""
+
+#, fuzzy
+msgid "Fallback remote receiver"
+msgstr "Naslov rezervnega oddaljenega sprejemnika"
+
+#, fuzzy
+msgid "Fallback remote receiver IP"
+msgstr "Naslov rezervnega oddaljenega sprejemnika"
+
+#, fuzzy
+msgid "Fallback remote receiver Port"
+msgstr "Naslov rezervnega oddaljenega sprejemnika"
+
 msgid "Fallback remote receiver URL"
 msgstr "Naslov rezervnega oddaljenega sprejemnika"
 
 #, fuzzy
 msgid "Fallback remote receiver setup"
+msgstr "Naslov rezervnega oddaljenega sprejemnika"
+
+#, fuzzy
+msgid "Fallback tuner setup"
 msgstr "Naslov rezervnega oddaljenega sprejemnika"
 
 #
@@ -4473,6 +4532,10 @@ msgstr ""
 msgid "IP address"
 msgstr "IP naslov"
 
+#, fuzzy
+msgid "IP of fallback remote receiver"
+msgstr "Naslov rezervnega oddaljenega sprejemnika"
+
 #
 msgid "ISO file is too large for this filesystem!"
 msgstr "ISO datoteka je prevelika za ta datotečni sistem!"
@@ -4489,6 +4552,19 @@ msgid "Icons"
 msgstr "Ikone"
 
 msgid "If enabled, display shows 12 chars instead 8, but in latin-1/translit only."
+msgstr ""
+
+#, fuzzy
+msgid "If enabled, then there will be displayed icons for new/unseen items too."
+msgstr "Če je nastavitev vključena, potem se informacijska vrstica prikaže vedno, ko pride do spremembe dogodka."
+
+msgid "If is disabled, then after Copy/Move will not be target directory stored into bookmarks."
+msgstr ""
+
+msgid "If is enabled and movie playback is finished, then after return to movielist will not be automaticaly start service playback."
+msgstr ""
+
+msgid "If set as 'Yes', then audiofiles are played in 'list mode' only, instead in full screen player."
 msgstr ""
 
 msgid "If set to 'yes' signal values (SNR, etc) will be calculated from API V3. This is an old API version that has now been superseded."
@@ -5101,6 +5177,9 @@ msgstr "Litvansko"
 #
 msgid "Lithuanian"
 msgstr "Litvansko"
+
+msgid "Live decoder"
+msgstr ""
 
 #
 msgid "Load"
@@ -6277,12 +6356,13 @@ msgstr "Predvajaj"
 msgid "Play DVD"
 msgstr "Predvajajte DVD"
 
-msgid "Play audio in background"
-msgstr "Predvajanje zvoka v ozadju"
-
 #
 msgid "Play audio-CD..."
 msgstr "Predvajajte zvočni CD"
+
+#, fuzzy
+msgid "Play audiofiles in list mode"
+msgstr "Predvajanje zvoka v ozadju"
 
 msgid "Play back media files"
 msgstr "Predvajanje multimedijskih datotek"
@@ -6625,6 +6705,10 @@ msgstr "Vrata C"
 #
 msgid "Port D"
 msgstr "Vrata D"
+
+#, fuzzy
+msgid "Port of fallback remote receiver"
+msgstr "Naslov rezervnega oddaljenega sprejemnika"
 
 #, fuzzy
 msgid "Portugal"
@@ -7506,6 +7590,11 @@ msgid "Saint Vincent and the Grenadines"
 msgstr ""
 
 #
+#, fuzzy
+msgid "Same as stream"
+msgstr "Ustavite preizkus"
+
+#
 msgid "Same resolution as skin"
 msgstr "Ista ločljivost kot ločljivost preobleke"
 
@@ -8051,9 +8140,6 @@ msgstr "Izberite video način"
 msgid "Select wireless network"
 msgstr "Izberite brezžično omrežje"
 
-msgid "Select yes when you want to import channels and/or EPG from a different URL"
-msgstr ""
-
 #
 #, fuzzy
 msgid "Select your ATSC provider."
@@ -8086,6 +8172,9 @@ msgid "Selecting this option allows you to configure a group of satellites in on
 msgstr ""
 
 msgid "Selects the mode how live tv should be shown on the LCD."
+msgstr ""
+
+msgid "Selects video source displayed on the LCD."
 msgstr ""
 
 msgid "Send 'sourceactive' before zap timers"
@@ -8206,6 +8295,11 @@ msgstr "Kanali"
 msgid "Set PIN"
 msgstr ""
 
+#
+#, fuzzy
+msgid "Set action when movie playback is finished."
+msgstr "Nastavitev obnašanja, ko se prične predvajanje posnetka."
+
 msgid "Set all hotkey to default?"
 msgstr ""
 
@@ -8230,12 +8324,20 @@ msgstr "Določi fiksno"
 msgid "Set fps for external subtitles"
 msgstr "Št. slik na sekundo (fps) pri zunanjih podnapisih"
 
+msgid "Set if You want see status icons, progress bars or nothing."
+msgstr ""
+
 #
 msgid "Set interface as default Interface"
 msgstr "Nastavite kot privzet vmesnik"
 
 msgid "Set limits"
 msgstr "Določitev meja"
+
+#
+#, fuzzy
+msgid "Set movielist type."
+msgstr "Izhod iz seznama datotek"
 
 msgid "Set pin code persistent"
 msgstr ""
@@ -8275,6 +8377,9 @@ msgstr "Nastavi napetost in 22KHz "
 #
 msgid "Settings"
 msgstr "Nastavitve"
+
+msgid "Settings can be different for each directory separately (for non removeable devices only)."
+msgstr ""
 
 #
 msgid "Setup"
@@ -8836,6 +8941,9 @@ msgid "Sort list:"
 msgstr "Seznam razvrščanja:"
 
 msgid "Sort order for menu entries"
+msgstr ""
+
+msgid "Sort order for setup entries"
 msgstr ""
 
 msgid "Sort plugins list to default?"
@@ -9657,6 +9765,9 @@ msgstr ""
 msgid "This option allows you to add the softcam setup in the extensions menu."
 msgstr ""
 
+msgid "This option allows you to alphabetically sort setup menu entries."
+msgstr ""
+
 msgid "This option allows you to boost the blue tones in the picture."
 msgstr ""
 
@@ -10234,6 +10345,9 @@ msgstr "Preklic izbrisa"
 
 msgid "Unencrypted"
 msgstr "Nekodirano"
+
+msgid "Unexpected error while retreiving fallback tuner's timer information"
+msgstr ""
 
 #
 msgid "UnhandledKey"
@@ -10844,6 +10958,9 @@ msgstr "Če je nastavitev vključena, tipke CH+/-, B+/-, P+/- pričnejo delovati
 msgid "When enabled the set top box is able to wakeup on LAN"
 msgstr "Če ne nastavitev vključena, potem se lahko sprejemnik zbudi s pomočjo mrežne naprave (WOL)."
 
+msgid "When enabled the timer from the fallback tuner is imported"
+msgstr ""
+
 msgid "When enabled then when you select a new channel in the channel selection the channel selection will not close. It will only close when you select the current playing service. This is a kind of preview mode"
 msgstr "Če je nastavitev vključena, potem se ob izbiri novega kanala, seznam kanalov ne zapre. Zapre se le, če izberete kanal, ki se že predvaja."
 
@@ -11022,6 +11139,9 @@ msgstr "Če je nastavitev vključena, potem se snemanje začne prej, kot je to d
 
 msgid "When nonzero, a recording will stop later than the ending time indicated by the EPG."
 msgstr "Če je nastavitev vključena, potem se snemanje konča kasneje, kot je to določeno s sporedom. Če se po sporedu oddaja konča ob 10:00, lahko sprejemnik (odvisno od nastavitve) konča s snemanjem ob 10:10."
+
+msgid "When selected this allows video modes to be selected even if they are not reported as supported."
+msgstr ""
 
 msgid "When the content has an aspect ratio of 16:9, choose whether to scale/stretch the picture."
 msgstr "Če ima vsebina razmerje slike 16:9, potem lahko določite, kako naj se slika prilagaja zaslonu. Priporočena nastavitev je \"Samodejno\"."
@@ -11208,6 +11328,9 @@ msgstr "Lahko prekličete izbris."
 msgid "You can continue watching TV etc. while this is running."
 msgstr "Med izvajanjem trenutne naloge, lahko nadaljujete z gledanjem trenutnega dogodka."
 
+msgid "You can enable if will be displayed extended EPG description for item."
+msgstr ""
+
 #
 msgid "You can install this plugin."
 msgstr "Izbrani vtičnik lahko namestite."
@@ -11218,6 +11341,17 @@ msgstr ""
 #
 msgid "You can remove this plugin."
 msgstr "Izbrani vtičnik lahko izbrišete."
+
+msgid "You can set how will be finished movieplayer with 'Exit' button."
+msgstr ""
+
+msgid "You can set selected directory as 'root' directory for movie player."
+msgstr ""
+
+#
+#, fuzzy
+msgid "You can set sorting type for items in movielist."
+msgstr "Prikaz trajanja posnetkov v seznamu datotek"
 
 #
 msgid "You cannot delete this!"
@@ -11405,6 +11539,10 @@ msgid "Zap to"
 msgstr "Preklop na"
 
 msgid "Zap to selected channel"
+msgstr "Preklop na izbrani kanal"
+
+#, fuzzy
+msgid "Zap to selected channel and exit GMEPG"
 msgstr "Preklop na izbrani kanal"
 
 msgid "Zap to selected channel, or show detailed event info (depends on configuration)"
@@ -12536,14 +12674,6 @@ msgstr ""
 
 #, python-format
 msgid "slot%s - %s, without backup"
-msgstr ""
-
-#, python-format
-msgid "slot%s - empty, with backup"
-msgstr ""
-
-#, python-format
-msgid "slot%s - empty, without backup"
 msgstr ""
 
 msgid "soap/melodram/folkloric"

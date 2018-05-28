@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-13 09:42+0200\n"
+"POT-Creation-Date: 2018-05-28 11:34+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Budiarno\n"
 "Language-Team: \n"
@@ -808,9 +808,6 @@ msgstr "Tambah rekaman (tidak terbatas waktu)"
 msgid "Add recording (stop after current event)"
 msgstr "Tambah rekaman (berhenti setelah acara saat ini)"
 
-msgid "Add seperate receiver URL for import"
-msgstr ""
-
 msgid "Add service"
 msgstr "Tambah layanan"
 
@@ -931,6 +928,10 @@ msgstr "Izinkan bahasa teks film sama dengan bahasa audio"
 
 msgid "Allow subtitles for hearing impaired"
 msgstr "Izinkan teks film untuk tuna rungu"
+
+#, fuzzy
+msgid "Allow unsupported modes"
+msgstr "tidak didukung"
 
 msgid "Alpha"
 msgstr "Alfa"
@@ -1204,6 +1205,10 @@ msgid "Automatic"
 msgstr "Otomatis"
 
 msgid "Automatic Scan"
+msgstr "Pelacakan Otomatis"
+
+#, fuzzy
+msgid "Automatic bookmarks"
 msgstr "Pelacakan Otomatis"
 
 msgid "Automatic scan"
@@ -2227,7 +2232,8 @@ msgstr "Membuat DVD-ISO"
 msgid "Create new folder and exit"
 msgstr "Buat folder baru lalu keluar"
 
-msgid "Create seperate radio userbouquet"
+#, fuzzy
+msgid "Create separate radio userbouquet"
 msgstr "Buat buket pengguna radio secara terpisah"
 
 #, python-format
@@ -2538,6 +2544,10 @@ msgstr "Deskripsi"
 msgid "Deselect"
 msgstr "Tidak dipilih"
 
+#, fuzzy
+msgid "Destination of fallback remote receiver"
+msgstr "Alamat URL penggunaan rx dari jauh"
+
 msgid "Details for plugin: "
 msgstr "Rincian plugin: "
 
@@ -2643,6 +2653,9 @@ msgstr "Display dan antarmuka pengguna"
 msgid "Display message before playing next movie"
 msgstr "Tampilkan pesan sebelum memutar film berikutnya"
 
+msgid "Display movie length in movielist (except single line style)."
+msgstr ""
+
 msgid "Display setup"
 msgstr "Atur display"
 
@@ -2677,6 +2690,9 @@ msgstr "Jangan ubah"
 
 msgid "Do not record"
 msgstr "Jangan rekam"
+
+msgid "Do not show file extensions for registered multimedia files."
+msgstr ""
 
 msgid "Do nothing"
 msgstr "Jangan lakukan"
@@ -2837,6 +2853,10 @@ msgstr "Mengunduh"
 msgid "Downloading plugin information. Please wait..."
 msgstr "Mengunduh informasi plugin. Mohon menunggu..."
 
+#, fuzzy
+msgid "Drop unconfigured satellites"
+msgstr "Satelit terhubung"
+
 msgid "Dutch"
 msgstr "Belanda"
 
@@ -2928,6 +2948,9 @@ msgstr ""
 msgid "Electronic Program Guide"
 msgstr "Electronic Program Guide"
 
+msgid "Empty slot"
+msgstr ""
+
 msgid "Enable"
 msgstr "Aktifkan"
 
@@ -2979,6 +3002,9 @@ msgstr "Aktifkan penggunaan rx dari jauh"
 
 msgid "Enable freesat EPG"
 msgstr "Aktifkan EPG freesat"
+
+msgid "Enable import timer from fallback tuner"
+msgstr ""
 
 msgid "Enable multiple bouquets"
 msgstr "Aktifkan buket multi"
@@ -3051,7 +3077,15 @@ msgstr "Kernel version: "
 msgid "Enigma2 skin selector"
 msgstr "Pilih tampilan Enigma2"
 
+#, fuzzy
+msgid "Enter IP address"
+msgstr "IP address"
+
 msgid "Enter PIN"
+msgstr "Masukkan PIN"
+
+#, fuzzy
+msgid "Enter URL"
 msgstr "Masukkan PIN"
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -3142,6 +3176,12 @@ msgid "Error when writing epg.dat on server"
 msgstr ""
 
 msgid "Error while retreiving epg.dat from server"
+msgstr ""
+
+#, python-format
+msgid ""
+"Error while retreiving fallback timer information\n"
+"%s"
 msgstr ""
 
 msgid "Error while retreiving location of epg.dat on server"
@@ -3372,11 +3412,30 @@ msgstr ""
 msgid "Falkland Islands (Malvinas)"
 msgstr ""
 
+msgid "Fallback Timer"
+msgstr ""
+
+#, fuzzy
+msgid "Fallback remote receiver"
+msgstr "URL penggunaan rx dari jauh"
+
+#, fuzzy
+msgid "Fallback remote receiver IP"
+msgstr "URL penggunaan rx dari jauh"
+
+#, fuzzy
+msgid "Fallback remote receiver Port"
+msgstr "URL penggunaan rx dari jauh"
+
 msgid "Fallback remote receiver URL"
 msgstr "URL penggunaan rx dari jauh"
 
 #, fuzzy
 msgid "Fallback remote receiver setup"
+msgstr "URL penggunaan rx dari jauh"
+
+#, fuzzy
+msgid "Fallback tuner setup"
 msgstr "URL penggunaan rx dari jauh"
 
 #, python-format
@@ -3932,6 +3991,10 @@ msgstr ""
 msgid "IP address"
 msgstr "IP address"
 
+#, fuzzy
+msgid "IP of fallback remote receiver"
+msgstr "Alamat URL penggunaan rx dari jauh"
+
 msgid "ISO file is too large for this filesystem!"
 msgstr "ISO file is too large for this filesystem!"
 
@@ -3945,6 +4008,19 @@ msgid "Icons"
 msgstr "Ikon"
 
 msgid "If enabled, display shows 12 chars instead 8, but in latin-1/translit only."
+msgstr ""
+
+#, fuzzy
+msgid "If enabled, then there will be displayed icons for new/unseen items too."
+msgstr "Ketika diaktifkan, infobar akan ditampilkan ketika memulai acara baru."
+
+msgid "If is disabled, then after Copy/Move will not be target directory stored into bookmarks."
+msgstr ""
+
+msgid "If is enabled and movie playback is finished, then after return to movielist will not be automaticaly start service playback."
+msgstr ""
+
+msgid "If set as 'Yes', then audiofiles are played in 'list mode' only, instead in full screen player."
 msgstr ""
 
 msgid "If set to 'yes' signal values (SNR, etc) will be calculated from API V3. This is an old API version that has now been superseded."
@@ -4475,6 +4551,9 @@ msgstr "Lituania"
 
 msgid "Lithuanian"
 msgstr "Lituania"
+
+msgid "Live decoder"
+msgstr ""
 
 msgid "Load"
 msgstr "Load"
@@ -5495,11 +5574,12 @@ msgstr "Mainkan"
 msgid "Play DVD"
 msgstr "Play DVD"
 
-msgid "Play audio in background"
-msgstr "Play audio in background"
-
 msgid "Play audio-CD..."
 msgstr "Play audio-CD..."
+
+#, fuzzy
+msgid "Play audiofiles in list mode"
+msgstr "Play audio in background"
 
 msgid "Play back media files"
 msgstr "Mainkan file-file media"
@@ -5780,6 +5860,10 @@ msgstr "Port C"
 
 msgid "Port D"
 msgstr "Port D"
+
+#, fuzzy
+msgid "Port of fallback remote receiver"
+msgstr "Alamat URL penggunaan rx dari jauh"
 
 #, fuzzy
 msgid "Portugal"
@@ -6530,6 +6614,10 @@ msgstr ""
 msgid "Saint Vincent and the Grenadines"
 msgstr ""
 
+#, fuzzy
+msgid "Same as stream"
+msgstr "Hentikan pengecekan"
+
 msgid "Same resolution as skin"
 msgstr "Sama dgn resolusi tampilan"
 
@@ -6991,9 +7079,6 @@ msgstr "Pilih mode video"
 msgid "Select wireless network"
 msgstr "Select wireless network"
 
-msgid "Select yes when you want to import channels and/or EPG from a different URL"
-msgstr ""
-
 #, fuzzy
 msgid "Select your ATSC provider."
 msgstr "Penyedia ATSC"
@@ -7023,6 +7108,9 @@ msgid "Selecting this option allows you to configure a group of satellites in on
 msgstr ""
 
 msgid "Selects the mode how live tv should be shown on the LCD."
+msgstr ""
+
+msgid "Selects video source displayed on the LCD."
 msgstr ""
 
 msgid "Send 'sourceactive' before zap timers"
@@ -7126,6 +7214,10 @@ msgstr "Layanan"
 msgid "Set PIN"
 msgstr ""
 
+#, fuzzy
+msgid "Set action when movie playback is finished."
+msgstr "Atur apa yang akan dilakukan ketika pemutar film dimulai."
+
 msgid "Set all hotkey to default?"
 msgstr ""
 
@@ -7147,11 +7239,18 @@ msgstr "Set fixed"
 msgid "Set fps for external subtitles"
 msgstr "Tentukan fps untuk teks film dari luar"
 
+msgid "Set if You want see status icons, progress bars or nothing."
+msgstr ""
+
 msgid "Set interface as default Interface"
 msgstr "Set interface as default Interface"
 
 msgid "Set limits"
 msgstr "Set limits"
+
+#, fuzzy
+msgid "Set movielist type."
+msgstr "Keluar dari daftar film"
 
 msgid "Set pin code persistent"
 msgstr ""
@@ -7188,6 +7287,9 @@ msgstr "Set voltage and 22KHz"
 
 msgid "Settings"
 msgstr "Penyetelan"
+
+msgid "Settings can be different for each directory separately (for non removeable devices only)."
+msgstr ""
 
 msgid "Setup"
 msgstr "Pengaturan"
@@ -7670,6 +7772,9 @@ msgid "Sort list:"
 msgstr ""
 
 msgid "Sort order for menu entries"
+msgstr ""
+
+msgid "Sort order for setup entries"
 msgstr ""
 
 msgid "Sort plugins list to default?"
@@ -8386,6 +8491,9 @@ msgstr ""
 msgid "This option allows you to add the softcam setup in the extensions menu."
 msgstr ""
 
+msgid "This option allows you to alphabetically sort setup menu entries."
+msgstr ""
+
 msgid "This option allows you to boost the blue tones in the picture."
 msgstr ""
 
@@ -8892,6 +9000,9 @@ msgstr "Undo uninstall"
 
 msgid "Unencrypted"
 msgstr "Unencrypted"
+
+msgid "Unexpected error while retreiving fallback tuner's timer information"
+msgstr ""
 
 msgid "UnhandledKey"
 msgstr "UnhandledKey"
@@ -9421,6 +9532,9 @@ msgstr "Ketika diaktifkan; tombol kiri, kanan, CH+/-, B+/-, P+/- akan mengikuti 
 msgid "When enabled the set top box is able to wakeup on LAN"
 msgstr ""
 
+msgid "When enabled the timer from the fallback tuner is imported"
+msgstr ""
+
 msgid "When enabled then when you select a new channel in the channel selection the channel selection will not close. It will only close when you select the current playing service. This is a kind of preview mode"
 msgstr "Ketika diaktifkan, jadinya saat anda memilih suatu kanal pada pemilihan kanal, maka pemilihan kanal tidak akan menutup. Ia hanya akan menutup ketika anda memilih layanan yang sedang diputar saat itu. Ini mirip-mirip mode pratinjau gitu."
 
@@ -9596,6 +9710,9 @@ msgstr "Ketika bukan nol, rekaman akan dimulai lebih awal daripada waktu mulai y
 msgid "When nonzero, a recording will stop later than the ending time indicated by the EPG."
 msgstr "Ketika bukan nol, rekaman akan dihentikan lebih lambat daripada waktu berhenti yang ditunjukkan oleh EPG."
 
+msgid "When selected this allows video modes to be selected even if they are not reported as supported."
+msgstr ""
+
 msgid "When the content has an aspect ratio of 16:9, choose whether to scale/stretch the picture."
 msgstr "When the content has an aspect ratio of 16:9, choose whether to scale/stretch the picture."
 
@@ -9759,6 +9876,9 @@ msgstr "Anda bisa membatalkan penghapusan."
 msgid "You can continue watching TV etc. while this is running."
 msgstr "Anda bisa terus menonton TV dlsb sementara ini berjalan."
 
+msgid "You can enable if will be displayed extended EPG description for item."
+msgstr ""
+
 msgid "You can install this plugin."
 msgstr "Anda bisa memasang plugin ini."
 
@@ -9767,6 +9887,16 @@ msgstr "You can only burn receiver recordings!"
 
 msgid "You can remove this plugin."
 msgstr "Anda bisa menghapus plugin ini."
+
+msgid "You can set how will be finished movieplayer with 'Exit' button."
+msgstr ""
+
+msgid "You can set selected directory as 'root' directory for movie player."
+msgstr ""
+
+#, fuzzy
+msgid "You can set sorting type for items in movielist."
+msgstr "Load length of movies in movie list"
 
 msgid "You cannot delete this!"
 msgstr "Anda tidak bisa menghapus ini!"
@@ -9961,6 +10091,10 @@ msgid "Zap to"
 msgstr ""
 
 msgid "Zap to selected channel"
+msgstr "Zap to selected channel"
+
+#, fuzzy
+msgid "Zap to selected channel and exit GMEPG"
 msgstr "Zap to selected channel"
 
 msgid "Zap to selected channel, or show detailed event info (depends on configuration)"
@@ -10930,14 +11064,6 @@ msgstr ""
 
 #, python-format
 msgid "slot%s - %s, without backup"
-msgstr ""
-
-#, python-format
-msgid "slot%s - empty, with backup"
-msgstr ""
-
-#, python-format
-msgid "slot%s - empty, without backup"
 msgstr ""
 
 msgid "soap/melodram/folkloric"
