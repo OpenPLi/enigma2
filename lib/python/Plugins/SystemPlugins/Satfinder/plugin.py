@@ -84,17 +84,17 @@ class Satfinder(ScanSetup, ServiceScan):
 	def newConfig(self):
 		cur = self["config"].getCurrent()
 		if cur in (
-					self.typeOfTuningEntry, 
-					self.systemEntry, 
-					self.typeOfInputEntry, 
-					self.systemEntryATSC, 
-					self.DVB_TypeEntry, 
-					self.systemEntryTerr, 
+					self.typeOfTuningEntry,
+					self.systemEntry,
+					self.typeOfInputEntry,
+					self.systemEntryATSC,
+					self.DVB_TypeEntry,
+					self.systemEntryTerr,
 					self.satEntry
 					):  # update screen and retune
 			self.createSetup()
 			self.retune()
-		
+
 		elif cur == self.satfinderTunerEntry: # switching tuners, update screen, get frontend, and retune (in prepareFrontend())
 			self.feid = int(self.satfinder_scan_nims.value)
 			self.createSetup()
@@ -104,7 +104,7 @@ class Satfinder(ScanSetup, ServiceScan):
 				if self.session.nav.RecordTimer.isRecording():
 					msg += _("\nRecording in progress.")
 				self.session.open(MessageBox, msg, MessageBox.TYPE_ERROR)
-		
+
 		elif cur in (self.preDefTransponderEntry, self.preDefTransponderCableEntry, self.preDefTransponderTerrEntry, self.preDefTransponderAtscEntry): # retune only
 			self.retune()
 		elif cur == self.is_id_boolEntry:
@@ -265,13 +265,13 @@ class Satfinder(ScanSetup, ServiceScan):
 			self.orbital_position = self.frontendData['orbital_position']
 		ScanSetup.createConfig(self, self.frontendData)
 
-		# The following are updated in self.newConfig(). Do not add here. 
+		# The following are updated in self.newConfig(). Do not add here.
 		# self.scan_sat.system, self.tuning_type, self.scan_input_as, self.scan_ats.system, self.DVB_type, self.scan_ter.system, self.satfinder_scan_nims, self.tuning_sat
 		for x in (self.scan_sat.frequency,
 			self.scan_sat.inversion, self.scan_sat.symbolrate,
 			self.scan_sat.polarization, self.scan_sat.fec, self.scan_sat.pilot,
 			self.scan_sat.fec_s2, self.scan_sat.fec, self.scan_sat.modulation,
-			self.scan_sat.rolloff, 
+			self.scan_sat.rolloff,
 			self.scan_sat.is_id, self.scan_sat.pls_mode, self.scan_sat.pls_code,
 			self.scan_ter.channel, self.scan_ter.frequency, self.scan_ter.inversion,
 			self.scan_ter.bandwidth, self.scan_ter.fechigh, self.scan_ter.feclow,
