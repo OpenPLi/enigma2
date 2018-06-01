@@ -249,6 +249,10 @@ RESULT eAMLTSMPEGDecoder::setAudioPID(int apid, int type)
 				m_codec.audio_type = AFORMAT_AC3;
 				t = "AC3";
 				break;
+			case aDDP:
+				m_codec.audio_type = AFORMAT_EAC3;
+				t = "AC3";
+				break;
 			case aAAC:
 				m_codec.audio_type = AFORMAT_AAC;
 				t = "AAC";
