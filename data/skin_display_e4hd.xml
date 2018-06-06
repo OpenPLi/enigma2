@@ -72,10 +72,10 @@
 		<widget source="session.Event_Now" render="Label" position="0,50" size="220,42" font="FdLcD;18" halign="center" valign="center">
 			<convert type="EventName">Name</convert>
 		</widget>
-		<widget source="session.Event_Now" render="Progress" position="0,110" size="140,15" borderWidth="1">
+		<widget source="session.Event_Now" render="Progress" position="1,110" size="141,15" borderWidth="1">
 			<convert type="EventTime">Progress</convert>
 		</widget>
-		<widget source="session.Event_Now" render="Label" position="141,109" size="79,16" font="FdLcD;16" foregroundColor="#8080F0" halign="right">
+		<widget source="session.Event_Now" render="Label" position="142,109" size="77,16" font="FdLcD;16" foregroundColor="#8080F0" halign="right">
 			<convert type="EventTime">Remaining</convert>
 			<convert type="RemainingToText">FOLLOW</convert>
 		</widget>
@@ -89,8 +89,12 @@
 		<widget source="parent.ServiceEvent" render="Label" position="0,50" size="220,42" font="FdLcD;18" halign="center" valign="center">
 			<convert type="EventName">Name</convert>
 		</widget>
-		<widget source="parent.ServiceEvent" render="Progress" position="1,110" size="218,15" borderWidth="1">
+		<widget source="parent.ServiceEvent" render="Progress" position="1,110" size="140,15" borderWidth="1">
 			<convert type="EventTime">Progress</convert>
+		</widget>
+		<widget source="parent.ServiceEvent" render="Label" position="142,109" size="77,16" font="FdLcD;16" foregroundColor="#8080F0" halign="right">
+			<convert type="EventTime">Remaining</convert>
+			<convert type="RemainingToText">InMinutes</convert>
 		</widget>
 		<widget source="parent.Event" render="Label" position="2,130" size="42,16" font="FdLcD;16" halign="left" foregroundColor="#8080ff">
 			<convert type="EventTime">StartTime</convert>
@@ -215,8 +219,8 @@
 	<screen name="JobView_summary" position="0,0" size="220,176">
 		<widget source="parent.summary_job_name" render="Label" position="0,28" size="220,42" font="FdLcD;18" halign="left"/>
 		<widget source="parent.summary_job_task" render="Label" position="0,74" size="220,18" font="FdLcD;14" halign="left"/>
-		<widget source="parent.summary_job_progress" render="Progress" position="0,0" size="285,22" borderWidth="1" zPosition="1"/>
-		<widget source="parent.summary_job_progress" render="Label" position="160,0" size="100,22" font="FdLcD;18" zposition="1" halign="center" valign="center" transparent="1">
+		<widget source="parent.summary_job_progress" render="Progress" position="0,110" size="140,15" borderWidth="1" zPosition="1"/>
+		<widget source="parent.summary_job_progress" render="Label" position="0,130" size="220,21" font="FdLcD;18" zposition="1" halign="center" valign="center" transparent="1">
 			<convert type="ProgressToText"/>
 		</widget>
 	</screen>
@@ -234,19 +238,19 @@
 		<widget source="parent.Event" render="Label" position="0,44" size="220,72" font="CondFdLcD;16" halign="left">
 			<convert type="EventName">FullDescription</convert>
 		</widget>
-		<widget source="parent.Event" render="Label" position="0,122" size="70,16" font="FdLcD;16" foregroundColor="#dddd00">
+		<widget source="parent.Event" render="Label" position="0,122" size="70,16" font="FdLcD;16" foregroundColor="#8080F0">
 			<convert type="EventTime">StartTime</convert>
 			<convert type="ClockToText">ShortDate</convert>
 		</widget>
-		<widget source="parent.Event" render="Label" position="80,122" size="42,16" font="FdLcD;16" halign="left" foregroundColor="#dddd00">
+		<widget source="parent.Event" render="Label" position="80,122" size="42,16" font="FdLcD;16" halign="left" foregroundColor="#8080F0">
 			<convert type="EventTime">StartTime</convert>
 			<convert type="ClockToText">Format:%H:%M</convert>
 		</widget>
-		<widget source="parent.Event" render="Label" position="122,122" size="52,16" font="FdLcD;16" halign="right" foregroundColor="#dddd00">
+		<widget source="parent.Event" render="Label" position="122,122" size="52,16" font="FdLcD;16" halign="right" foregroundColor="#8080F0">
 			<convert type="EventTime">EndTime</convert>
 			<convert type="ClockToText">Format:- %H:%M</convert>
 		</widget>
-		<widget source="parent.Event" render="Label" position="174,122" size="46,16" font="FdLcD;16" halign="right" foregroundColor="#dddd00">
+		<widget source="parent.Event" render="Label" position="174,122" size="46,16" font="FdLcD;16" halign="right" foregroundColor="#8080F0">
 			<convert type="EventTime">Duration</convert>
 			<convert type="ClockToText">AsLengthHours</convert>
 		</widget>
@@ -259,19 +263,22 @@
 	</screen>
 <!-- EPG EventView -->
 	<screen name="EventView_summary" position="0,0" size="220,176">
-		<widget source="parent.Title" render="Label" position="0,4" size="220,37" font="FdLcD;32"/>
+		<widget source="parent.Title" render="Label" position="0,4" size="220,37" font="FdLcD;32" foregroundColor="#DDDD00"/>
 		<widget source="parent.Event" render="Label" position="0,44" size="220,72" font="CondFdLcD;16" halign="left">
 			<convert type="EventName">Description</convert>
 		</widget>
-		<widget source="parent.Event" render="Label" position="0,122" size="80,16" font="FdLcD;16" foregroundColor="#dddd00">
+		<widget source="parent.Event" render="Label" position="0,44" size="220,72" font="CondFdLcD;16" halign="left">
+			<convert type="EventName">FullDescription</convert>
+		</widget>
+		<widget source="parent.Event" render="Label" position="0,122" size="80,16" font="FdLcD;16" foregroundColor="#8080F0">
 			<convert type="EventTime">StartTime</convert>
 			<convert type="ClockToText">ShortDate</convert>
 		</widget>
-		<widget source="parent.Event" render="Label" position="80,122" size="70,16" font="FdLcD;16" halign="left" foregroundColor="#dddd00">
+		<widget source="parent.Event" render="Label" position="80,122" size="70,16" font="FdLcD;16" halign="left" foregroundColor="#8080F0">
 			<convert type="EventTime">StartTime</convert>
 			<convert type="ClockToText">Format:%H:%M</convert>
 		</widget>
-		<widget source="parent.Event" render="Label" position="150,122" size="70,16" font="FdLcD;16" halign="right" foregroundColor="#dddd00">
+		<widget source="parent.Event" render="Label" position="150,122" size="70,16" font="FdLcD;16" halign="right" foregroundColor="#8080F0">
 			<convert type="EventTime">Duration</convert>
 			<convert type="ClockToText">InMinutes</convert>
 		</widget>
