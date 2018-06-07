@@ -476,7 +476,7 @@ class SecConfigure:
 
 class NIM(object):
 	def __init__(self, slot, type, description, has_outputs = True, internally_connectable = None, multi_type = {}, frontend_id = None, i2c = None, is_empty = False, supports_blind_scan = False):
-		nim_types = ["DVB-S", "DVB-S2", "DVB-C", "DVB-T", "DVB-T2", "ATSC"]
+		nim_types = ["DVB-S", "DVB-S2", "DVB-S2X", "DVB-C", "DVB-T", "DVB-T2", "ATSC"]
 
 		if type and type not in nim_types:
 			print "[NIM] warning: unknown NIM type %s, not using." % type
@@ -499,6 +499,7 @@ class NIM(object):
 				"DVB-C": ("DVB-C", None),
 				"DVB-T": ("DVB-T", None),
 				"DVB-S2": ("DVB-S", "DVB-S2", None),
+				"DVB-S2X": ("DVB-S", "DVB-S2", "DVB-S2X", None),
 				"DVB-C2": ("DVB-C", "DVB-C2", None),
 				"DVB-T2": ("DVB-T", "DVB-T2", None),
 				"ATSC": ("ATSC", None),
@@ -534,10 +535,11 @@ class NIM(object):
 
 	def connectableTo(self):
 		connectable = {
-				"DVB-S": ("DVB-S", "DVB-S2"),
+				"DVB-S": ("DVB-S", "DVB-S2", "DVB-S2X"),
 				"DVB-C": ("DVB-C", "DVB-C2"),
 				"DVB-T": ("DVB-T","DVB-T2"),
-				"DVB-S2": ("DVB-S", "DVB-S2"),
+				"DVB-S2": ("DVB-S", "DVB-S2", "DVB-S2X"),
+				"DVB-S2X": ("DVB-S", "DVB-S2", "DVB-S2X"),
 				"DVB-C2": ("DVB-C", "DVB-C2"),
 				"DVB-T2": ("DVB-T", "DVB-T2"),
 				"ATSC": ("ATSC"),
@@ -789,8 +791,6 @@ class NimManager:
 				entries[current_slot] = {}
 			elif line.startswith("Type:"):
 				entries[current_slot]["type"] = str(line[6:])
-				if entries[current_slot]["type"] == "DVB-S2X":
-					entries[current_slot]["type"] = "DVB-S2"
 				entries[current_slot]["isempty"] = False
 			elif line.startswith("Name:"):
 				entries[current_slot]["name"] = str(line[6:])
@@ -917,7 +917,7 @@ class NimManager:
 
 	def canEqualTo(self, slotid):
 		type = self.getNimType(slotid)
-		type = type[:5] # DVB-S2 --> DVB-S, DVB-T2 --> DVB-T, DVB-C2 --> DVB-C
+		type = type[:5] # DVB-S2X --> DVB-S, DVB-S2 --> DVB-S, DVB-T2 --> DVB-T, DVB-C2 --> DVB-C
 		nimList = self.getNimListOfType(type, slotid)
 		for nim in nimList[:]:
 			mode = self.getNimConfig(nim)
@@ -927,7 +927,7 @@ class NimManager:
 
 	def canDependOn(self, slotid):
 		type = self.getNimType(slotid)
-		type = type[:5] # DVB-S2 --> DVB-S, DVB-T2 --> DVB-T, DVB-C2 --> DVB-C
+		type = type[:5] # DVB-S2X --> DVB-S, DVB-S2 --> DVB-S, DVB-T2 --> DVB-T, DVB-C2 --> DVB-C
 		nimList = self.getNimListOfType(type, slotid)
 		positionerList = []
 		for nim in nimList[:]:
