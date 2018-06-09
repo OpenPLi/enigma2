@@ -368,7 +368,8 @@ class VirtualKeyBoard(Screen):
 			self.lang = 'en_EN'
 			self.nextLang = 'ar_AE'
 		self["country"].setText(self.lang)
-		self["key_yellow"].setText(language.lang[self.lang][0])
+		self["key_yellow"].setText(self.lang)
+		self.max_key=47+len(self.keys_list[4])
 
 	def virtualKeyBoardEntryComponent(self, keys):
 		w, h = skin.parameters.get("VirtualKeyboard",(45, 45))
