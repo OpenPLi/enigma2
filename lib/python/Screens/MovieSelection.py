@@ -422,8 +422,6 @@ class MovieContextMenu(Screen, ProtectedScreen):
 		append_to_menu(menu, (_("create directory"), csel.do_createdir), key="7")
 		append_to_menu(menu, (_("Sort by") + "...", csel.selectSortby))
 		append_to_menu(menu, (_("Network") + "...", csel.showNetworkSetup), key="yellow")
-		if csel.installedMovieManagerPlugin():
-			append_to_menu(menu, (_("Movie manager") + "...", csel.do_moviemanager))
 		append_to_menu(menu, (_("Settings") + "...", csel.configure), key="menu")
 
 		self["menu"] = ChoiceList(menu)
@@ -732,8 +730,6 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				'movieoff': _("On end of movie"),
 				'movieoff_menu': _("On end of movie (as menu)")
 			}
-			if self.installedMovieManagerPlugin():
-				userDefinedActions['moviemanager'] = _("Movie manager")
 			for p in plugins.getPlugins(PluginDescriptor.WHERE_MOVIELIST):
 				userDefinedActions['@' + p.name] = p.description
 			locations = []
@@ -2018,19 +2014,6 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 	def showNetworkSetup(self):
 		import NetworkSetup
 		self.session.open(NetworkSetup.NetworkAdapterSelection)
-
-	def can_moviemanager(self, item):
-		return True
-	def do_moviemanager(self):
-		item = self.getCurrentSelection()
-		from Plugins.Extensions.MovieManager.ui import MovieManager
-		self.session.open(MovieManager, self["list"], item)
-	def installedMovieManagerPlugin(self):
-		try:
-			from Plugins.Extensions.MovieManager.ui import MovieManager
-			return True
-		except Exception as e:
-			return False
 
 	def showActionFeedback(self, text):
 		if self.feedbackTimer is None:
