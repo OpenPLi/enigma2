@@ -2128,6 +2128,15 @@ RESULT eDVBDB::removeFlag(const eServiceReference &ref, unsigned int flagmask)
 	return -1;
 }
 
+void eDVBDB::removeServicesFlag(unsigned int flagmask)
+{
+	for (std::map<eServiceReferenceDVB, ePtr<eDVBService> >::iterator i(m_services.begin());
+		i != m_services.end(); ++i)
+	{
+		i->second->m_flags &= ~flagmask;
+	}
+}
+
 RESULT eDVBDB::removeFlags(unsigned int flagmask, int dvb_namespace, int tsid, int onid, unsigned int orb_pos)
 {
 	return removeFlags(flagmask, eDVBChannelID(eDVBNamespace(dvb_namespace), eTransportStreamID(tsid), eOriginalNetworkID(onid)), orb_pos);
