@@ -22,7 +22,7 @@
 
 <!-- template -->
 	<screen name="LcdClockPanel">
-		<widget source="global.CurrentTime" render="Label" position="120,137" size="100,40" font="FdLcD;40" halign="right" noWrap="1">
+		<widget source="global.CurrentTime" render="Label" position="120,137" size="100,40" font="FdLcD;40" halign="right" noWrap="1" transparent="1">
 			<convert type="ClockToText"></convert>
 		</widget>
 	</screen>
@@ -89,7 +89,7 @@
 		<widget source="parent.ServiceEvent" render="Label" position="0,50" size="220,42" font="FdLcD;18" halign="center" valign="center">
 			<convert type="EventName">Name</convert>
 		</widget>
-		<widget source="parent.ServiceEvent" render="Progress" position="1,110" size="140,15" borderWidth="1">
+		<widget source="parent.ServiceEvent" render="Progress" position="1,110" size="141,15" borderWidth="1">
 			<convert type="EventTime">Progress</convert>
 		</widget>
 		<widget source="parent.ServiceEvent" render="Label" position="142,109" size="77,16" font="FdLcD;16" foregroundColor="#8080F0" halign="right">
@@ -221,10 +221,10 @@
 
 <!-- JobView Summary -->
 	<screen name="JobView_summary" position="0,0" size="220,176">
-		<widget source="parent.summary_job_name" render="Label" position="0,28" size="220,42" font="FdLcD;18" halign="left"/>
+		<widget source="parent.summary_job_name" render="Label" position="0,4" size="220,42" font="FdLcD;18" halign="left"/>
 		<widget source="parent.summary_job_task" render="Label" position="0,74" size="220,18" font="FdLcD;14" halign="left"/>
-		<widget source="parent.summary_job_progress" render="Progress" position="0,110" size="140,15" borderWidth="1" zPosition="1"/>
-		<widget source="parent.summary_job_progress" render="Label" position="0,130" size="220,21" font="FdLcD;18" zposition="1" halign="center" valign="center" transparent="1">
+		<widget source="parent.summary_job_progress" render="Progress" position="1,110" size="141,15" borderWidth="1"/>
+		<widget source="parent.summary_job_progress" render="Label" position="0,130" size="141,28" font="FdLcD;24" halign="right">
 			<convert type="ProgressToText"/>
 		</widget>
 	</screen>
