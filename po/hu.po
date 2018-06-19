@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-01 14:02+0200\n"
-"PO-Revision-Date: 2018-06-07 10:43+0200\n"
+"POT-Creation-Date: 2018-06-17 12:04+0200\n"
+"PO-Revision-Date: 2018-06-19 14:11+0200\n"
 "Last-Translator: mcfly82\n"
 "Language-Team: mcfly82 & wysless\n"
 "Language: hu_HU\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.7\n"
+"X-Generator: Poedit 2.0.8\n"
 
 msgid ""
 "\n"
@@ -1868,7 +1868,7 @@ msgstr "DVD képfájl készítés"
 msgid "Create new folder and exit"
 msgstr "Új mappa létrehozása majd kilépés"
 
-msgid "Create seperate radio userbouquet"
+msgid "Create separate radio userbouquet"
 msgstr "Különálló rádió lista létrehozása"
 
 #, python-format
@@ -2417,6 +2417,9 @@ msgstr "Image letöltése"
 msgid "Downloading plugin information. Please wait..."
 msgstr "Bővítmények betöltése folyamatban. Kérem, várjon..."
 
+msgid "Drop unconfigured satellites"
+msgstr "Nem konfigurált műholdak elvetése"
+
 msgid "Dutch"
 msgstr "Holland"
 
@@ -2515,6 +2518,9 @@ msgstr "Automatikus gyorskeresés engedélyezése ehhez: %s"
 
 msgid "Enable fallback remote receiver"
 msgstr "Tartalék távoli vevő engedélyezése"
+
+msgid "Enable import timer from fallback tuner"
+msgstr "Időzítők importálása a tartalék tunerből"
 
 msgid "Enable parental protection"
 msgstr "Gyermekzár védelem engedélyezése"
@@ -2708,6 +2714,14 @@ msgstr "Hiba az epg.dat szerverre írásakor"
 msgid "Error while retreiving epg.dat from server"
 msgstr "Hiba az epg.dat szerverről történő beolvasásakor"
 
+#, python-format
+msgid ""
+"Error while retreiving fallback timer information\n"
+"%s"
+msgstr ""
+"Hiba történt a tartalék tuner időzítők letöltésekor\n"
+"%s"
+
 msgid "Error while retreiving location of epg.dat on server"
 msgstr "Hiba az epg.dat helyének meghatározásakor a szerveren"
 
@@ -2801,7 +2815,7 @@ msgid "Expand"
 msgstr "Kibővít"
 
 msgid "Expert"
-msgstr "Haladó"
+msgstr "Szakértő"
 
 msgid "Extend sleeptimer 15 minutes"
 msgstr "Elalvás időzítése 15 perccel későbbre"
@@ -2917,6 +2931,9 @@ msgstr "Sikertelen:"
 
 msgid "Falkland Islands (Malvinas)"
 msgstr "Falkland-szigetek"
+
+msgid "Fallback Timer"
+msgstr "Tartalék távoli vevő időzítő"
 
 msgid "Fallback remote receiver"
 msgstr "Tartalék távoli vevő"
@@ -4264,9 +4281,6 @@ msgstr "Filmlista beállítása"
 
 msgid "Movie location"
 msgstr "Fájlok tárhelye"
-
-msgid "Movie manager"
-msgstr "Film-kezelő"
 
 msgid "Movie selection"
 msgstr "Filmválasztás"
@@ -7323,7 +7337,7 @@ msgid "TRANSLATOR_INFO"
 msgstr ""
 "A fordítást készítette:\n"
 "mcfly82 & wysless\n"
-"Utolsó fordítás időpontja: 2018.06.07.\n"
+"Utolsó fordítás időpontja: 2018.06.19.\n"
 "Eredeti fordítás: MediaVox-Team, Robertut\n"
 "A magyar fordítás az OpenPLi projekthez készült.\n"
 "További információ: http://openpli.org"
@@ -8141,6 +8155,9 @@ msgstr "Eltávolítás visszavonása"
 msgid "Unencrypted"
 msgstr "Kódolatlan"
 
+msgid "Unexpected error while retreiving fallback tuner's timer information"
+msgstr "Váratlan hiba történt a tartalék tuner időzítők letöltésekor"
+
 msgid "Unhide parental control services"
 msgstr "Gyermekzárral védett csatornák mutatása"
 
@@ -8552,6 +8569,9 @@ msgstr "Nyugati limit beállítás"
 
 msgid "Western Sahara"
 msgstr "Nyugat-Szahara"
+
+msgid "When enabled the timer from the fallback tuner is imported"
+msgstr "Ezzel engedélyezheti az időzítők importálását a tartalék tunerből"
 
 msgid ""
 "When enabled you can specify a timeframe to ignore the shutdown timer when "
@@ -10134,7 +10154,7 @@ msgid "Automatic scan"
 msgstr "Automatikus keresés"
 
 msgid "Expert settings"
-msgstr "Haladó beállítások"
+msgstr "Szakértő beállítások"
 
 msgid "Factory reset"
 msgstr "Gyári alapbeállítások"
@@ -10653,8 +10673,8 @@ msgid ""
 "Configure which access level to use for the configuration menu. Expert level "
 "gives access to all items."
 msgstr ""
-"Milyen szintű hozzáférése legyen a menürendszernek. A 'Haladó' szint minden "
-"menü elemet hozzáférhetővé tesz."
+"Milyen szintű hozzáférése legyen a menürendszerhez. A 'Szakértő' szint "
+"minden menü elemet hozzáférhetővé tesz."
 
 msgid ""
 "Configure which tuner for recordings will be preferred, when more than one "
@@ -10889,6 +10909,9 @@ msgstr ""
 "Ezáltal a kompatibilitás garantált olyan operációs rendszerekkel is, "
 "melyekben limitált a karakterkészlet."
 
+msgid "Live decoder"
+msgstr "Valós idejű dekóder"
+
 msgid "Load unlinked userbouquets"
 msgstr "Leválasztott listák betöltése"
 
@@ -11033,6 +11056,9 @@ msgstr "Görgetés ismétlése"
 
 msgid "Selects the mode how live tv should be shown on the LCD."
 msgstr "Az élő TV-műsor hogyan jelenjen meg az LCD-n."
+
+msgid "Selects video source displayed on the LCD."
+msgstr "A forrás videó hogyan jelenjen meg az LCD-n."
 
 msgid "Set fps for external subtitles"
 msgstr "Külső feliratokhoz FPS"
@@ -12161,3 +12187,6 @@ msgstr ""
 
 msgid "Video mode selection."
 msgstr "Video mód kiválasztás."
+
+#~ msgid "Movie manager"
+#~ msgstr "Film-kezelő"
