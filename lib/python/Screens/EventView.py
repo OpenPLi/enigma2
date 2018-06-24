@@ -329,7 +329,7 @@ class EventViewSimple(Screen, EventViewBase):
 	def __init__(self, session, Event, Ref, callback=None, similarEPGCB=None, parent=None):
 		Screen.__init__(self, session)
 		self.skinName = "EventView"
-		EventViewBase.__init__(self, Event, Ref, callback, similarEPGCB, parent)
+		EventViewBase.__init__(self, Event, Ref, callback, similarEPGCB)
 
 class EventViewEPGSelect(Screen, EventViewBase):
 	def __init__(self, session, Event, Ref, callback=None, singleEPGCB=None, multiEPGCB=None, similarEPGCB=None, parent=None):
@@ -337,7 +337,7 @@ class EventViewEPGSelect(Screen, EventViewBase):
 		self.skinName = "EventView"
 		self.singleEPGCB = singleEPGCB
 		self.multiEPGCB = multiEPGCB
-		EventViewBase.__init__(self, Event, Ref, callback, similarEPGCB, parent)
+		EventViewBase.__init__(self, Event, Ref, callback, similarEPGCB)
 		self["key_yellow"].setText(_("Single EPG"))
 		self["key_blue"].setText(_("Multi EPG"))
 		self["epgactions"] = ActionMap(["EventViewEPGActions"],
