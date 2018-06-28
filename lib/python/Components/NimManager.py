@@ -974,7 +974,7 @@ class NimManager:
 	def somethingConnected(self, slotid = -1):
 		if slotid == -1:
 			for id in range(self.getSlotCount()):
-				if self.somethingConnected(id) and not self.nim_slots[id].isFBCLink():
+				if self.somethingConnected(id) and not (self.nim_slots[id].isFBCLink() or self.getNimConfig(id).configMode.value == "loopthrough"):
 					return True
 			return False
 		else:
