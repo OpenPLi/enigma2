@@ -974,7 +974,7 @@ class NimManager:
 	def somethingConnected(self, slotid = -1):
 		if slotid == -1:
 			for id in range(self.getSlotCount()):
-				if self.somethingConnected(id) and not self.nim_slots[id].isFBCLink() and self.nim_slots[id].internally_connectable != id - 1:
+				if self.somethingConnected(id) and not self.nim_slots[id].isFBCLink():
 					return True
 			return False
 		else:
