@@ -294,6 +294,9 @@ class CableTransponderSearchSupport:
 		if tunername == "CXD1981":
 			bin_name = "CXD1981"
 			cmd = "cxd1978 --init --scan --verbose --wakeup --inv 2 --bus %d" % bus
+		elif tunername == "ATBM781x":
+			bin_name = "ATBM781x"
+			cmd = "atbm781x --init --scan --verbose --wakeup --inv 2 --bus %d" % bus
 		elif tunername.startswith("Sundtek"):
 			bin_name = "mediaclient"
 			cmd = "/opt/bin/mediaclient --blindscan %d" % nim_idx
