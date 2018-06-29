@@ -237,11 +237,12 @@ int eDVBService::isPlayable(const eServiceReference &ref, const eServiceReferenc
 		if (res_mgr->canAllocateChannel(chid, chid_ignore, system, simulate))
 		{
 			std::string python_config_str;
-			if (ePythonConfigQuery::getConfigValue("config.misc.use_ci_assignment", python_config_str) > 0 || python_config_str == "True")
+			bool use_ci_assignment = eConfigManager::getConfigBoolValue("config.misc.use_ci_assignment", false);
+			if (use_ci_assignment)
 			{
 				int is_ci_playable = 1;
-				PyObject pName, pModule, *pFunc;
-				PyObject pArgs, pArg, *pResult;
+				PyObject *pName, *pModule, *pFunc;
+				PyObject *pArgs, *pArg, *pResult;
 				Py_Initialize();
 				pName = PyString_FromString("Tools.CIHelper");
 				pModule = PyImport_Import(pName);
@@ -264,11 +265,11 @@ int eDVBService::isPlayable(const eServiceReference &ref, const eServiceReferenc
 						}
 					}
 				}
-				eDebug("isPlayble... error in python code");
+				eDebug("[eDVBService] isPlayble... error in python code");
 				PyErr_Print();
 			}
 			return 1;
-
+		}
 		if (remote_fallback_enabled)
 			return 2;
 	}
