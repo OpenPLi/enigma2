@@ -182,7 +182,7 @@ class TimerSanityCheck:
 		is_ci_timer_conflict = 0
 
 		ci_timer = False
-		if config.misc.use_ci_assignment.value and cihelper.ServiceIsAssigned(self.newtimer.service_ref.ref):
+		if config.misc.use_ci_assignment.value and cihelper.ServiceIsAssigned(self.newtimer.service_ref.ref) and not self.newtimer.recordingtype == "scrambled+ecm":
 			ci_timer = self.newtimer
 			ci_timer_begin = ci_timer.begin
 			ci_timer_end = ci_timer.end
