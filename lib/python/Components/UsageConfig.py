@@ -282,6 +282,7 @@ def InitUsageConfig():
 	SystemInfo["ATSC_priority_tuner_available"] = len(atsc_nims) > 3 and any(len(i) > 2 for i in (dvbs_nims, dvbc_nims, dvbt_nims))
 
 	config.misc.disable_background_scan = ConfigYesNo(default = False)
+	config.misc.use_ci_assignment = ConfigYesNo(default = False)
 	config.usage.show_event_progress_in_servicelist = ConfigSelection(default = 'barright', choices = [
 		('barleft', _("Progress bar left")),
 		('barright', _("Progress bar right")),
