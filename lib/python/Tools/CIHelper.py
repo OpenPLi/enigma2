@@ -141,7 +141,7 @@ class CIHelper:
 		if NavigationInstance.instance.getRecordings():
 			if self.ServiceIsAssigned(service):
 				for timer in NavigationInstance.instance.RecordTimer.timer_list:
-					if not timer.justplay and timer.state == TimerEntry.StateRunning and timer.record_ecm and not timer.descramble:
+					if not timer.justplay and timer.state == TimerEntry.StateRunning and not (timer.record_ecm and not timer.descramble):
 						timerservice = timer.service_ref.ref
 						if timerservice != service:
 							if self.ServiceIsAssigned(timerservice):
