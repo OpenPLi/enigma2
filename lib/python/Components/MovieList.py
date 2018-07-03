@@ -56,50 +56,47 @@ def moviePlayState(cutsFileName, ref, length):
 	try:
 		# read the cuts file first
 		f = open(cutsFileName, 'rb')
-		lastCut = None
-		cutPTS = None
+		lastPosition = None
 		while 1:
 			data = f.read(cutsParser.size)
 			if len(data) < cutsParser.size:
 				break
 			cut, cutType = cutsParser.unpack(data)
 			if cutType == 3: # undocumented, but 3 appears to be the stop
-				cutPTS = cut
-			else:
-				lastCut = cut
+				lastPosition = cut
 		f.close()
 		# See what we have in RAM (it might help)
 		last = lastPlayPosFromCache(ref)
 		if last:
-			# Get the length from the cache
-			if not lastCut:
-				lastCut = last[2]
 			# Get the cut point from the cache if not in the file
-			if not cutPTS:
-				cutPTS = last[1]
-		if cutPTS is None:
+			lastPosition = last[1]
+			# Get the length from the cache
+			length = last[2]
+		else:
+			if length and (length > 0):
+				length = length * 90000
+			else:
+				if lastPosition:
+					return 50
+		if lastPosition is None:
 			# Unseen movie
 			return None
-		if not lastCut:
-			if length and (length > 0):
-				lastCut = length * 90000
-			else:
-				# Seen, but unknown how far
-				return 50
-		if cutPTS >= lastCut:
+		if lastPosition >= length:
 			return 100
-		return (100 * cutPTS) // lastCut
+		return (100 * lastPosition) // length
 	except:
-		cutPTS = lastPlayPosFromCache(ref)
-		if cutPTS:
-			if not length or (length<0):
-				length = cutPTS[2]
+		last = lastPlayPosFromCache(ref)
+		if last:
+			lastPosition = last[1]
+			if not length or (length < 0):
+				length = last[2]
 			if length:
-				if cutPTS[1] >= length:
+				if lastPosition >= length:
 					return 100
-				return (100 * cutPTS[1]) // length
+				return (100 * lastPosition) // length
 			else:
-				return 50
+				if lastPosition:
+					return 50
 		return None
 
 def resetMoviePlayState(cutsFileName, ref=None):
