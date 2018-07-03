@@ -17,7 +17,6 @@ class CIHelper:
 		if NUM_CI and NUM_CI > 0:
 			self.CI_ASSIGNMENT_LIST = []
 			def getValue(definitions, default):
-				ret = ""
 				Len = len(definitions)
 				return Len > 0 and definitions[Len-1].text or default
 
@@ -142,19 +141,16 @@ class CIHelper:
 		if NavigationInstance.instance.getRecordings():
 			if self.ServiceIsAssigned(service):
 				for timer in NavigationInstance.instance.RecordTimer.timer_list:
-					if timer.state == TimerEntry.StateRunning:
-						if timer.justplay:
-							pass
-						else:
-							timerservice = timer.service_ref.ref
-							if timerservice != service:
-								if self.ServiceIsAssigned(timerservice):
-									if self.canMultiDescramble(service):
-										for x in (4, 2, 3):
-											if  timerservice.getUnsignedData(x) != service.getUnsignedData(x):
-												return 0
-									else:
-										return 0
+					if not timer.justplay and timer.state == TimerEntry.StateRunning and not (timer.record_ecm and not timer.descramble):
+						timerservice = timer.service_ref.ref
+						if timerservice != service:
+							if self.ServiceIsAssigned(timerservice):
+								if self.canMultiDescramble(service):
+									for x in (4, 2, 3):
+										if timerservice.getUnsignedData(x) != service.getUnsignedData(x):
+											return 0
+								else:
+									return 0
 		return 1
 
 cihelper = CIHelper()
