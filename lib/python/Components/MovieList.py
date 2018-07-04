@@ -500,7 +500,7 @@ class MovieList(GUIComponent):
 			if (self.descr_state == MovieList.SHOW_DESCRIPTION) or not len:
 				dateSize = ih * 145 / 25   # 25 -> 145
 				res.append(MultiContentEntryText(pos=(iconSize+space, 0), size=(width-iconSize-space-dateSize-r, ih), font = 0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = data.txt))
-				res.append(MultiContentEntryText(pos=(width-dateSize-r, 4), size=(dateSize, ih), font=1, flags=RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text=begin_string))
+				res.append(MultiContentEntryText(pos=(width-dateSize-r, 2), size=(dateSize, ih), font=1, flags=RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text=begin_string))
 			else:
 				lenSize = ih * 3 # 25 -> 75
 				res.append(MultiContentEntryText(pos=(iconSize+space, 0), size=(width-lenSize-iconSize-space-r, ih), font = 0, flags = RT_HALIGN_LEFT, text = data.txt))
