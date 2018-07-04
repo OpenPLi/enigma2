@@ -264,6 +264,18 @@ class AudioSelection(Screen, ConfigListScreen):
 		if SystemInfo["CanDownmixAAC"]:
 			config.av.downmix_aac.value = config.av.downmix_ac3.value
 			config.av.downmix_aac.save()
+		if SystemInfo["CanDownmixDTSHD"]:
+			config.av.downmix_dtshd.value = config.av.downmix_dtshd.value
+			config.av.downmix_dtshd.save()
+		if SystemInfo["CanDownmixWMApro"]:
+			config.av.downmix_wmapro.value = config.av.downmix_wmapro.value
+			config.av.downmix_wmapro.save()
+		if SystemInfo["CanAC3plusTranscode"]:
+			config.av.transcode_ac3plus.value = config.av.transcode_ac3plus.value
+			config.av.transcode_ac3plus.save()
+		if SystemInfo["CanAACTranscode"]:
+			config.av.transcode_aac.value = config.av.transcode_aac.value
+			config.av.transcode_aac.save()
 
 	def changeMode(self, mode):
 		if mode is not None and self.audioChannel:
