@@ -95,3 +95,7 @@ SystemInfo["HasOfflineDecoding"] = HardwareInfo().get_device_model() not in ('os
 SystemInfo["canFlashWithOfgwrite"] = not HardwareInfo().get_device_model().startswith("dm")
 SystemInfo["canMultiBoot"] = HardwareInfo().get_device_model() in ('hd51', 'h7', 'vs1500', 'e4hd') and (1, 4) or HardwareInfo().get_device_model() in ('gbue4k', 'gbquad4k') and (3, 3)
 SystemInfo["canMode12"] = HardwareInfo().get_device_model() in ("hd51", "vs1500") and '192M' or HardwareInfo().get_device_model() in ("h7") and '200M'
+SystemInfo["CanDownmixDTSHD"] = fileExists("/proc/stb/audio/dtshd_choices") or fileExists("/proc/stb/audio/dtshd")
+SystemInfo["CanDownmixWMApro"] = fileExists("/proc/stb/audio/wmapro_choices") or fileExists("/proc/stb/audio/wmapro")
+SystemInfo["CanAC3plusTranscode"] = fileExists("/proc/stb/audio/ac3plus_choices") or fileExists("/proc/stb/audio/ac3plus")
+SystemInfo["CanAACTranscode"] = fileExists("/proc/stb/audio/aac_transcode_choices") or fileExists("/proc/stb/audio/aac_transcode")
