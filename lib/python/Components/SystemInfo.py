@@ -99,3 +99,4 @@ SystemInfo["CanDownmixDTSHD"] = fileExists("/proc/stb/audio/dtshd_choices") or f
 SystemInfo["CanDownmixWMApro"] = fileExists("/proc/stb/audio/wmapro_choices") or fileExists("/proc/stb/audio/wmapro")
 SystemInfo["CanAC3plusTranscode"] = fileExists("/proc/stb/audio/ac3plus_choices") or fileExists("/proc/stb/audio/ac3plus")
 SystemInfo["CanAACTranscode"] = fileExists("/proc/stb/audio/aac_transcode_choices") or fileExists("/proc/stb/audio/aac_transcode")
+SystemInfo["HDRSupport"] = fileExists("/proc/stb/hdmi/hlg_support_choices") or fileExists("/proc/stb/hdmi/hlg_support")
