@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-28 11:34+0430\n"
+"POT-Creation-Date: 2018-07-08 11:27+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Frenske <voorzitter@openpli.org>\n"
 "Language-Team: PLiteam <translators@openpli.org>\n"
@@ -714,8 +714,20 @@ msgstr "A/V instellingen"
 msgid "AAC downmix"
 msgstr "AAC downmix"
 
+#, fuzzy
+msgid "AAC transcoding"
+msgstr "Transcoderen:"
+
+#, fuzzy
+msgid "AC3"
+msgstr "DAC"
+
 msgid "AC3 downmix"
 msgstr "AC3 downmix"
+
+#, fuzzy
+msgid "AC3 plus transcoding"
+msgstr "Transcoderen:"
 
 msgid "ACQUIRING TSID/ONID"
 msgstr "VERKRIJG TSID/ONID"
@@ -915,6 +927,14 @@ msgstr "Wijs een nummer toe aan de fysieke LNB die u aan het configureren bent. 
 
 msgid "Allocate unused memory index"
 msgstr "Wijs de ongebruikte memory index toe"
+
+#, fuzzy
+msgid "Allow 10bit"
+msgstr "10 bit"
+
+#, fuzzy
+msgid "Allow 12bit"
+msgstr "12 bit"
 
 msgid "Allow quit movieplayer with exit"
 msgstr "Verlaat de movieplayer d.m.v. de 'exit' toets"
@@ -1666,6 +1686,10 @@ msgstr "Kies de tuner"
 msgid "Choose bouquet"
 msgstr "Kies bouquet"
 
+#, fuzzy
+msgid "Choose whether multi channel sound tracks should be convert to PCM or SPDIF."
+msgstr "Indien geactiveerd stelt u in of zenders met meerdere geluidskanalen, of deze kanalen omgezet moeten worden naar stereo."
+
 msgid "Choose which tuner to configure."
 msgstr "Kies de in te stellen tuner."
 
@@ -2214,6 +2238,22 @@ msgstr ""
 "\n"
 "U kunt kiezen uit, geen weergave, geen timeout, 1-11 sec of bij een EPG update."
 
+#, fuzzy
+msgid "Configure whether AAC sound tracks should be transcoded."
+msgstr "Indien geactiveerd stelt u in of zenders met meerdere geluidskanalen, of deze kanalen omgezet moeten worden naar stereo."
+
+#, fuzzy
+msgid "Configure whether AC3 plus sound tracks should be transcoded to AC3."
+msgstr "Indien geactiveerd stelt u in of zenders met meerdere geluidskanalen, of deze kanalen omgezet moeten worden naar stereo."
+
+#, fuzzy
+msgid "Configure whether DTS-HD channel sound tracks should be downmixed or transcoded."
+msgstr "Indien geactiveerd stelt u in of zenders met meerdere geluidskanalen, of deze kanalen omgezet moeten worden naar stereo."
+
+#, fuzzy
+msgid "Configure whether WMA pro channel sound tracks should be downmixed or transcoded."
+msgstr "Indien geactiveerd stelt u in of zenders met meerdere geluidskanalen, of deze kanalen omgezet moeten worden naar stereo."
+
 # # Rick: Of.. Moet de meervoudige PCM geluid ingeschakeld worden?
 msgid "Configure whether multi channel PCM sound should be enabled."
 msgstr "Met deze optie kunt u meervoudig PCM geluid in of uitschakelen."
@@ -2482,7 +2522,14 @@ msgstr "DMM geavanceerd"
 msgid "DMM normal"
 msgstr "DMM normaal"
 
+msgid "DTS"
+msgstr ""
+
 msgid "DTS downmix"
+msgstr "DTS downmix"
+
+#, fuzzy
+msgid "DTS-HD downmix"
 msgstr "DTS downmix"
 
 msgid "DUAL LAYER DVD"
@@ -2982,6 +3029,10 @@ msgstr "De image wordt gedownload"
 
 msgid "Downloading plugin information. Please wait..."
 msgstr "Applicatie informatie ophalen. Een ogenblik aub..."
+
+#, fuzzy
+msgid "Downmix"
+msgstr "DTS downmix"
 
 #, fuzzy
 msgid "Drop unconfigured satellites"
@@ -3974,6 +4025,10 @@ msgstr "HDMI kleurruimte"
 msgid "HDMI HDR Type"
 msgstr "HDMI HDR Type"
 
+#, fuzzy
+msgid "HDMI audio source"
+msgstr "HDMI kleurruimte"
+
 msgid "HDMI-CEC Source Active"
 msgstr "HDMI-CEC actieve bron"
 
@@ -3986,8 +4041,16 @@ msgstr "HDMI-CEC instellingen"
 msgid "HDR10"
 msgstr "HDR10"
 
+#, fuzzy
+msgid "HDR10 support"
+msgstr "niet ondersteund"
+
 msgid "HLG"
 msgstr "HLG"
+
+#, fuzzy
+msgid "HLG support"
+msgstr "niet ondersteund"
 
 msgid "Haiti"
 msgstr "Haiti"
@@ -4246,6 +4309,10 @@ msgstr "Inactiviteit Sleeptimer"
 
 msgid "Include AIT in http streams"
 msgstr "Neem AIT op in http streams"
+
+#, fuzzy
+msgid "Include CI assignment"
+msgstr "CI toewijzing"
 
 msgid "Include ECM in http streams"
 msgstr "Neem ECM op in http streams"
@@ -4994,9 +5061,6 @@ msgstr "Configuratie van de opnamelijst"
 msgid "Movie location"
 msgstr "Opnamelocatie"
 
-msgid "Movie manager"
-msgstr "Opnamebestand beheer"
-
 msgid "Movie selection"
 msgstr "Filmselectie"
 
@@ -5560,6 +5624,10 @@ msgstr "Configuratie bestanden overschrijven?"
 msgid "PAL"
 msgstr "PAL"
 
+#, fuzzy
+msgid "PCM"
+msgstr "PDC"
+
 msgid "PCR PID"
 msgstr "PCR PID"
 
@@ -5635,6 +5703,9 @@ msgstr "Kinderslot zendereditor"
 
 msgid "Parental control setup"
 msgstr "Kinderslotinstellingen"
+
+msgid "Passthrough"
+msgstr ""
 
 msgid "Pause"
 msgstr "Pauze"
@@ -6109,6 +6180,10 @@ msgid "Press OK to select a group of satellites to configure in one block."
 msgstr "Druk Ok om een aantal satellieten in één blok te kunnen configureren."
 
 msgid "Press OK to select a provider."
+msgstr "Druk op Ok om een provider te kiezen."
+
+#, fuzzy
+msgid "Press OK to select a service."
 msgstr "Druk op Ok om een provider te kiezen."
 
 msgid "Press OK to select satellites"
@@ -7310,6 +7385,9 @@ msgstr "Zendernaam"
 
 msgid "Services"
 msgstr "Zenders"
+
+msgid "Set CI assignment for detection of available services."
+msgstr ""
 
 msgid "Set PIN"
 msgstr "PIN instellen"
@@ -8651,6 +8729,34 @@ msgstr "Met deze optie kunt u de 3D surround begrenzer activeren."
 msgid "This option allows you to enable 3D surround sound."
 msgstr "Met deze optie kunt u het 3D geluid in of uitschakelen."
 
+#, fuzzy
+msgid "This option allows you to enable or disable the 10 bit color mode"
+msgstr ""
+"Met deze optie kunt u de virtuele luidsprekerpositie wijzigen of uitschakelen.\n"
+"\n"
+"Default is 'uit'. Verder kunt u kiezen uit 'centreer', 'breed' of 'extra breed'."
+
+#, fuzzy
+msgid "This option allows you to enable or disable the 12 bit color mode"
+msgstr ""
+"Met deze optie kunt u de virtuele luidsprekerpositie wijzigen of uitschakelen.\n"
+"\n"
+"Default is 'uit'. Verder kunt u kiezen uit 'centreer', 'breed' of 'extra breed'."
+
+#, fuzzy
+msgid "This option allows you to force the HDR10 modes for UHD"
+msgstr ""
+"Deze optie maakt het mogelijk om de kleurdiepte voor UHD in te stellen.\n"
+"\n"
+"U kunt kiezen uit 'auto', 8 - 10 of 12 bit. De default is 'auto'."
+
+#, fuzzy
+msgid "This option allows you to force the HLG modes for UHD"
+msgstr ""
+"Deze optie maakt het mogelijk om de kleurdiepte voor UHD in te stellen.\n"
+"\n"
+"U kunt kiezen uit 'auto', 8 - 10 of 12 bit. De default is 'auto'."
+
 msgid "This option allows you to hide and sort menu entries. When selecting user you can change order and hide menu items via the blue button"
 msgstr ""
 "Deze optie maakt het mogelijk om menu items te verbergen. Tijdens het instellen kan de volgorde en menu-verberg opties via de blauwe knop worden ingesteld.\n"
@@ -9506,6 +9612,10 @@ msgstr "WEP"
 
 msgid "WLAN connection"
 msgstr "WLAN connectie"
+
+#, fuzzy
+msgid "WMA pro downmix"
+msgstr "AAC downmix"
 
 msgid "WPA"
 msgstr "WPA"
@@ -10481,6 +10591,23 @@ msgstr "bevestigd"
 msgid "connected"
 msgstr "verbonden"
 
+msgid "controlled by HDMI"
+msgstr ""
+
+msgid "convert to AC3"
+msgstr ""
+
+msgid "convert to DTS"
+msgstr ""
+
+#, fuzzy
+msgid "convert to multi channel PCM"
+msgstr "Multichannel PCM"
+
+#, fuzzy
+msgid "convert to multi-channel PCM"
+msgstr "Multichannel PCM"
+
 msgid "cooking"
 msgstr "Kookprogramma"
 
@@ -10678,6 +10805,17 @@ msgstr "Folk/Traditionele muziek"
 
 msgid "football/soccer"
 msgstr "Voetbal"
+
+msgid "force AC3 plus"
+msgstr ""
+
+#, fuzzy
+msgid "force disabled"
+msgstr "Uitgeschakeld"
+
+#, fuzzy
+msgid "force enabled"
+msgstr "Ingeschakeld"
 
 msgid "foreign countries/expeditions"
 msgstr "Onbekende landen/Expedities"
@@ -11341,6 +11479,9 @@ msgstr "niet te testen"
 
 msgid "until standby/restart"
 msgstr "tot standby/herstart"
+
+msgid "use best, controlled by HDMI"
+msgstr ""
 
 msgid "user defined"
 msgstr "Zelf gedefinieerd"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-28 11:34+0430\n"
+"POT-Creation-Date: 2018-07-08 11:27+0430\n"
 "PO-Revision-Date: 2016-06-17 12:13+0800\n"
 "Last-Translator: nx111 <gdzdz@163.com>\n"
 "Language-Team: NEWBOLT\n"
@@ -693,8 +693,17 @@ msgstr "A/V设置"
 msgid "AAC downmix"
 msgstr ""
 
+msgid "AAC transcoding"
+msgstr ""
+
+msgid "AC3"
+msgstr ""
+
 msgid "AC3 downmix"
 msgstr "AC3 缩减混音"
+
+msgid "AC3 plus transcoding"
+msgstr ""
 
 msgid "ACQUIRING TSID/ONID"
 msgstr ""
@@ -892,6 +901,12 @@ msgid "Allocate a number to the physical LNB you are configuring. You will be ab
 msgstr ""
 
 msgid "Allocate unused memory index"
+msgstr ""
+
+msgid "Allow 10bit"
+msgstr ""
+
+msgid "Allow 12bit"
 msgstr ""
 
 msgid "Allow quit movieplayer with exit"
@@ -1640,6 +1655,9 @@ msgstr "选择调谐器"
 msgid "Choose bouquet"
 msgstr "选择自定义组"
 
+msgid "Choose whether multi channel sound tracks should be convert to PCM or SPDIF."
+msgstr ""
+
 msgid "Choose which tuner to configure."
 msgstr ""
 
@@ -2039,6 +2057,18 @@ msgstr ""
 msgid "Configure whether (and for how long) a second infobar will be shown when OK is pressed twice. The second infobar contains additional information about the current channel."
 msgstr ""
 
+msgid "Configure whether AAC sound tracks should be transcoded."
+msgstr ""
+
+msgid "Configure whether AC3 plus sound tracks should be transcoded to AC3."
+msgstr ""
+
+msgid "Configure whether DTS-HD channel sound tracks should be downmixed or transcoded."
+msgstr ""
+
+msgid "Configure whether WMA pro channel sound tracks should be downmixed or transcoded."
+msgstr ""
+
 msgid "Configure whether multi channel PCM sound should be enabled."
 msgstr ""
 
@@ -2298,7 +2328,14 @@ msgstr ""
 msgid "DMM normal"
 msgstr ""
 
+msgid "DTS"
+msgstr ""
+
 msgid "DTS downmix"
+msgstr "AC3 缩减混音"
+
+#, fuzzy
+msgid "DTS-HD downmix"
 msgstr "AC3 缩减混音"
 
 msgid "DUAL LAYER DVD"
@@ -2802,6 +2839,10 @@ msgstr "下载"
 
 msgid "Downloading plugin information. Please wait..."
 msgstr "正在下载插件列表,请稍候..."
+
+#, fuzzy
+msgid "Downmix"
+msgstr "AC3 缩减混音"
 
 #, fuzzy
 msgid "Drop unconfigured satellites"
@@ -3779,6 +3820,9 @@ msgstr ""
 msgid "HDMI HDR Type"
 msgstr ""
 
+msgid "HDMI audio source"
+msgstr ""
+
 msgid "HDMI-CEC Source Active"
 msgstr ""
 
@@ -3791,8 +3835,16 @@ msgstr ""
 msgid "HDR10"
 msgstr ""
 
+#, fuzzy
+msgid "HDR10 support"
+msgstr "不支持"
+
 msgid "HLG"
 msgstr ""
+
+#, fuzzy
+msgid "HLG support"
+msgstr "不支持"
 
 #, fuzzy
 msgid "Haiti"
@@ -4043,6 +4095,10 @@ msgstr ""
 
 msgid "Include AIT in http streams"
 msgstr ""
+
+#, fuzzy
+msgid "Include CI assignment"
+msgstr "CI选择"
 
 msgid "Include ECM in http streams"
 msgstr ""
@@ -4801,10 +4857,6 @@ msgstr ""
 msgid "Movie location"
 msgstr "影片位置"
 
-#, fuzzy
-msgid "Movie manager"
-msgstr "文件管理器"
-
 msgid "Movie selection"
 msgstr ""
 
@@ -5371,6 +5423,9 @@ msgstr ""
 msgid "PAL"
 msgstr "PAL"
 
+msgid "PCM"
+msgstr ""
+
 msgid "PCR PID"
 msgstr ""
 
@@ -5447,6 +5502,9 @@ msgstr ""
 
 msgid "Parental control setup"
 msgstr "家长控制设置"
+
+msgid "Passthrough"
+msgstr ""
 
 msgid "Pause"
 msgstr ""
@@ -5927,6 +5985,10 @@ msgstr ""
 
 msgid "Press OK to select a provider."
 msgstr ""
+
+#, fuzzy
+msgid "Press OK to select a service."
+msgstr "请选择一个子频道..."
 
 msgid "Press OK to select satellites"
 msgstr ""
@@ -7139,6 +7201,9 @@ msgstr ""
 
 msgid "Services"
 msgstr "频道"
+
+msgid "Set CI assignment for detection of available services."
+msgstr ""
 
 msgid "Set PIN"
 msgstr ""
@@ -8434,6 +8499,18 @@ msgstr ""
 msgid "This option allows you to enable 3D surround sound."
 msgstr ""
 
+msgid "This option allows you to enable or disable the 10 bit color mode"
+msgstr ""
+
+msgid "This option allows you to enable or disable the 12 bit color mode"
+msgstr ""
+
+msgid "This option allows you to force the HDR10 modes for UHD"
+msgstr ""
+
+msgid "This option allows you to force the HLG modes for UHD"
+msgstr ""
+
 msgid "This option allows you to hide and sort menu entries. When selecting user you can change order and hide menu items via the blue button"
 msgstr ""
 
@@ -9276,6 +9353,10 @@ msgstr "WEP"
 
 msgid "WLAN connection"
 msgstr "WLAN连接"
+
+#, fuzzy
+msgid "WMA pro downmix"
+msgstr "AC3 缩减混音"
 
 msgid "WPA"
 msgstr "WPA"
@@ -10174,6 +10255,21 @@ msgstr "检测通过"
 msgid "connected"
 msgstr "已连接"
 
+msgid "controlled by HDMI"
+msgstr ""
+
+msgid "convert to AC3"
+msgstr ""
+
+msgid "convert to DTS"
+msgstr ""
+
+msgid "convert to multi channel PCM"
+msgstr ""
+
+msgid "convert to multi-channel PCM"
+msgstr ""
+
 msgid "cooking"
 msgstr ""
 
@@ -10372,6 +10468,17 @@ msgstr ""
 
 msgid "football/soccer"
 msgstr ""
+
+msgid "force AC3 plus"
+msgstr ""
+
+#, fuzzy
+msgid "force disabled"
+msgstr "不可用"
+
+#, fuzzy
+msgid "force enabled"
+msgstr "启用"
 
 msgid "foreign countries/expeditions"
 msgstr ""
@@ -11039,6 +11146,9 @@ msgstr ""
 
 msgid "until standby/restart"
 msgstr "直到待机/重启"
+
+msgid "use best, controlled by HDMI"
+msgstr ""
 
 msgid "user defined"
 msgstr "用户定义"

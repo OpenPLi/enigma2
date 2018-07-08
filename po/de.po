@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-28 11:34+0430\n"
+"POT-Creation-Date: 2018-07-08 11:27+0430\n"
 "PO-Revision-Date: 2018-05-16 21:34+0200\n"
 "Last-Translator: daddelfalk <OpenPLi>\n"
 "Language-Team: Sfteam  angelo2807@hotmail.com\n"
@@ -715,8 +715,20 @@ msgstr "A/V-Einstellungen"
 msgid "AAC downmix"
 msgstr "AAC downmix"
 
+#, fuzzy
+msgid "AAC transcoding"
+msgstr "Transkodierung: "
+
+#, fuzzy
+msgid "AC3"
+msgstr "DAC"
+
 msgid "AC3 downmix"
 msgstr "AC3 downmix"
+
+#, fuzzy
+msgid "AC3 plus transcoding"
+msgstr "Transkodierung: "
 
 msgid "ACQUIRING TSID/ONID"
 msgstr "ACQUIRING TSID/ONID"
@@ -915,6 +927,14 @@ msgstr "Weisen Sie dem physischen LNB, den Sie konfigurieren, eine Nummer zu. Si
 
 msgid "Allocate unused memory index"
 msgstr "Zuordnen ungenutzer Rotor Index-Positionen"
+
+#, fuzzy
+msgid "Allow 10bit"
+msgstr "10bit"
+
+#, fuzzy
+msgid "Allow 12bit"
+msgstr "12bit"
 
 msgid "Allow quit movieplayer with exit"
 msgstr "Schließe Movieplayer mit Exit"
@@ -1662,6 +1682,10 @@ msgstr "Wähle Tuner"
 msgid "Choose bouquet"
 msgstr "Favoritenliste auswählen"
 
+#, fuzzy
+msgid "Choose whether multi channel sound tracks should be convert to PCM or SPDIF."
+msgstr "Heruntermischen von Multi-Kanal-Sound in Stereo."
+
 msgid "Choose which tuner to configure."
 msgstr "Wählen Sie den Tuner aus."
 
@@ -2059,6 +2083,22 @@ msgstr "Position beendeter Timer in der Timerliste."
 msgid "Configure whether (and for how long) a second infobar will be shown when OK is pressed twice. The second infobar contains additional information about the current channel."
 msgstr "Anpassung ob (und wie lange) eine zweite Infoleiste bei erneuter Betätigung der OK Taste angezeigt werden soll. Diese zeigt zusätzliche Informationen über den Kanal an."
 
+#, fuzzy
+msgid "Configure whether AAC sound tracks should be transcoded."
+msgstr "Heruntermischen von Multi-Kanal-Sound in Stereo."
+
+#, fuzzy
+msgid "Configure whether AC3 plus sound tracks should be transcoded to AC3."
+msgstr "Heruntermischen von Multi-Kanal-Sound in Stereo."
+
+#, fuzzy
+msgid "Configure whether DTS-HD channel sound tracks should be downmixed or transcoded."
+msgstr "Heruntermischen von Multi-Kanal-Sound in Stereo."
+
+#, fuzzy
+msgid "Configure whether WMA pro channel sound tracks should be downmixed or transcoded."
+msgstr "Heruntermischen von Multi-Kanal-Sound in Stereo."
+
 msgid "Configure whether multi channel PCM sound should be enabled."
 msgstr "Konfigurieren Sie, ob Mehrkanal-PCM-Sound aktiviert werden soll."
 
@@ -2317,7 +2357,14 @@ msgstr "Erweitertes DMM"
 msgid "DMM normal"
 msgstr "DMM normal"
 
+msgid "DTS"
+msgstr ""
+
 msgid "DTS downmix"
+msgstr "DTS downmix"
+
+#, fuzzy
+msgid "DTS-HD downmix"
 msgstr "DTS downmix"
 
 msgid "DUAL LAYER DVD"
@@ -2814,6 +2861,10 @@ msgstr "Bild herunterladen"
 
 msgid "Downloading plugin information. Please wait..."
 msgstr "Lade Plugin-Informationen herunter. Bitte warten..."
+
+#, fuzzy
+msgid "Downmix"
+msgstr "DTS downmix"
 
 #, fuzzy
 msgid "Drop unconfigured satellites"
@@ -3804,6 +3855,10 @@ msgstr "HDMI Farbraum"
 msgid "HDMI HDR Type"
 msgstr "HDMI HDR Typ"
 
+#, fuzzy
+msgid "HDMI audio source"
+msgstr "HDMI Farbraum"
+
 msgid "HDMI-CEC Source Active"
 msgstr "HDMI-CEC-Quelle aktiv"
 
@@ -3816,8 +3871,16 @@ msgstr "HDMI-CEC Konfiguration"
 msgid "HDR10"
 msgstr "HDR10"
 
+#, fuzzy
+msgid "HDR10 support"
+msgstr "Nicht unterstützt"
+
 msgid "HLG"
 msgstr "HLG"
+
+#, fuzzy
+msgid "HLG support"
+msgstr "Nicht unterstützt"
 
 msgid "Haiti"
 msgstr "Haiti"
@@ -4071,6 +4134,10 @@ msgstr "Inaktivitäts-Sleeptimer"
 
 msgid "Include AIT in http streams"
 msgstr "Integriere AIT in HTTP-Streams"
+
+#, fuzzy
+msgid "Include CI assignment"
+msgstr "CI-Zuweisung"
 
 msgid "Include ECM in http streams"
 msgstr "Integriere ECM in HTTP-Streams"
@@ -4819,9 +4886,6 @@ msgstr "Filmlisten Einstellungen"
 msgid "Movie location"
 msgstr "Filmverzeichnis"
 
-msgid "Movie manager"
-msgstr "Filmmanager"
-
 msgid "Movie selection"
 msgstr "Filmauswahl"
 
@@ -5380,6 +5444,10 @@ msgstr "Konfigurationsdateien überschreiben?"
 msgid "PAL"
 msgstr "PAL"
 
+#, fuzzy
+msgid "PCM"
+msgstr "PDC "
+
 msgid "PCR PID"
 msgstr "PCR PID"
 
@@ -5455,6 +5523,9 @@ msgstr "Jugendschutz-Kanaleditor"
 
 msgid "Parental control setup"
 msgstr "Jugendschutz-Einstellungen"
+
+msgid "Passthrough"
+msgstr ""
 
 msgid "Pause"
 msgstr "Pause"
@@ -5932,6 +6003,10 @@ msgid "Press OK to select a group of satellites to configure in one block."
 msgstr "Drücken Sie OK, um eine Gruppe von Satelliten auszuwählen, die in einem Block konfiguriert werden sollen."
 
 msgid "Press OK to select a provider."
+msgstr "Drücken Sie OK um einen Anbieter auszuwählen."
+
+#, fuzzy
+msgid "Press OK to select a service."
 msgstr "Drücken Sie OK um einen Anbieter auszuwählen."
 
 msgid "Press OK to select satellites"
@@ -7133,6 +7208,9 @@ msgstr "Sendername"
 
 msgid "Services"
 msgstr "Kanäle"
+
+msgid "Set CI assignment for detection of available services."
+msgstr ""
 
 msgid "Set PIN"
 msgstr "PIN speichern"
@@ -8457,6 +8535,22 @@ msgstr "Mit dieser Option können Sie den 3D-Surround-Softlimiter aktivieren."
 msgid "This option allows you to enable 3D surround sound."
 msgstr "Mit dieser Option können Sie 3D-Surround-Sound aktivieren."
 
+#, fuzzy
+msgid "This option allows you to enable or disable the 10 bit color mode"
+msgstr "Mit dieser Option können Sie die virtuelle Lautsprecherposition deaktivieren oder ändern."
+
+#, fuzzy
+msgid "This option allows you to enable or disable the 12 bit color mode"
+msgstr "Mit dieser Option können Sie die virtuelle Lautsprecherposition deaktivieren oder ändern."
+
+#, fuzzy
+msgid "This option allows you to force the HDR10 modes for UHD"
+msgstr "Mit dieser Option können Sie die Farbtiefe für UHD konfigurieren"
+
+#, fuzzy
+msgid "This option allows you to force the HLG modes for UHD"
+msgstr "Mit dieser Option können Sie die Farbtiefe für UHD konfigurieren"
+
 msgid "This option allows you to hide and sort menu entries. When selecting user you can change order and hide menu items via the blue button"
 msgstr "Diese Option erlaubt Ihnen Menü-Einträge zu verstecken und zu sortieren. Bei Auswahl 'Benutzerdefiniert' kann das Verändern der Reihenfolge und das Verstecken von Menü-Einträgen über die blaue Taste realisiert werden."
 
@@ -9304,6 +9398,10 @@ msgstr "WEP"
 
 msgid "WLAN connection"
 msgstr "WLAN Verbindung"
+
+#, fuzzy
+msgid "WMA pro downmix"
+msgstr "AAC downmix"
 
 msgid "WPA"
 msgstr "WPA"
@@ -10248,6 +10346,23 @@ msgstr "Bestätigt"
 msgid "connected"
 msgstr "Verbunden"
 
+msgid "controlled by HDMI"
+msgstr ""
+
+msgid "convert to AC3"
+msgstr ""
+
+msgid "convert to DTS"
+msgstr ""
+
+#, fuzzy
+msgid "convert to multi channel PCM"
+msgstr "Multichannel PCM"
+
+#, fuzzy
+msgid "convert to multi-channel PCM"
+msgstr "Multichannel PCM"
+
 msgid "cooking"
 msgstr "Kochen"
 
@@ -10445,6 +10560,17 @@ msgstr "Volks/Traditionelle Musik"
 
 msgid "football/soccer"
 msgstr "Fußball"
+
+msgid "force AC3 plus"
+msgstr ""
+
+#, fuzzy
+msgid "force disabled"
+msgstr "Deaktiviert"
+
+#, fuzzy
+msgid "force enabled"
+msgstr "Aktiviert"
 
 msgid "foreign countries/expeditions"
 msgstr "Ausland/Expeditionen"
@@ -11107,6 +11233,9 @@ msgstr "untestbar"
 
 msgid "until standby/restart"
 msgstr "Bis zum Standby/Neustart"
+
+msgid "use best, controlled by HDMI"
+msgstr ""
 
 msgid "user defined"
 msgstr "Benutzerdefiniert"

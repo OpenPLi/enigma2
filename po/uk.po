@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-28 11:34+0430\n"
+"POT-Creation-Date: 2018-07-08 11:27+0430\n"
 "PO-Revision-Date: 2016-11-17 12:51+0200\n"
 "Last-Translator: vovan43<vovan43@ex.ua>, sety <tim1065@mail.ru>, Irkoff <irkoff@gmail.com>\n"
 "Language-Team: gisclub.tv <http://gisclub.tv/>\n"
@@ -728,8 +728,20 @@ msgstr "Аудіо/Відео налаштування"
 msgid "AAC downmix"
 msgstr "AAC мікшування"
 
+#, fuzzy
+msgid "AAC transcoding"
+msgstr "Транскодування:"
+
+#, fuzzy
+msgid "AC3"
+msgstr "PDC"
+
 msgid "AC3 downmix"
 msgstr "AC3 мікшування"
+
+#, fuzzy
+msgid "AC3 plus transcoding"
+msgstr "Транскодування:"
 
 msgid "ACQUIRING TSID/ONID"
 msgstr ""
@@ -928,6 +940,12 @@ msgstr ""
 
 msgid "Allocate unused memory index"
 msgstr "Виділити невикористовуваний номер пам'яті"
+
+msgid "Allow 10bit"
+msgstr ""
+
+msgid "Allow 12bit"
+msgstr ""
 
 msgid "Allow quit movieplayer with exit"
 msgstr "Дозволити вийти з відеоплеєра кнопкою вихід"
@@ -1690,6 +1708,10 @@ msgstr "Виберіть тюнер"
 msgid "Choose bouquet"
 msgstr "Виберіть букет"
 
+#, fuzzy
+msgid "Choose whether multi channel sound tracks should be convert to PCM or SPDIF."
+msgstr "Виберіть, чи слід багатоканальну звукову доріжку декодувати в стереозвук."
+
 msgid "Choose which tuner to configure."
 msgstr "Виберіть тюнер для налаштування."
 
@@ -2093,6 +2115,22 @@ msgstr "Вкажіть, в якому місці списку таймерів �
 msgid "Configure whether (and for how long) a second infobar will be shown when OK is pressed twice. The second infobar contains additional information about the current channel."
 msgstr "Чи потрібно показати (і як довго) другий інфобар при натисканні кнопки OK двічі.Другий інфобар містить додаткову інформацію про поточний канал."
 
+#, fuzzy
+msgid "Configure whether AAC sound tracks should be transcoded."
+msgstr "Виберіть, чи слід багатоканальну звукову доріжку декодувати в стереозвук."
+
+#, fuzzy
+msgid "Configure whether AC3 plus sound tracks should be transcoded to AC3."
+msgstr "Виберіть, чи слід багатоканальну звукову доріжку декодувати в стереозвук."
+
+#, fuzzy
+msgid "Configure whether DTS-HD channel sound tracks should be downmixed or transcoded."
+msgstr "Виберіть, чи слід багатоканальну звукову доріжку декодувати в стереозвук."
+
+#, fuzzy
+msgid "Configure whether WMA pro channel sound tracks should be downmixed or transcoded."
+msgstr "Виберіть, чи слід багатоканальну звукову доріжку декодувати в стереозвук."
+
 msgid "Configure whether multi channel PCM sound should be enabled."
 msgstr "Налаштування: чи повинен бути включений багатоканальний PCM звук."
 
@@ -2359,7 +2397,14 @@ msgstr "DMM розширений"
 msgid "DMM normal"
 msgstr "DMM нормальний"
 
+msgid "DTS"
+msgstr ""
+
 msgid "DTS downmix"
+msgstr "DTS downmix"
+
+#, fuzzy
+msgid "DTS-HD downmix"
 msgstr "DTS downmix"
 
 msgid "DUAL LAYER DVD"
@@ -2869,6 +2914,10 @@ msgstr "Завантаження"
 
 msgid "Downloading plugin information. Please wait..."
 msgstr "Завантаження інформації про плагіни. чекайте..."
+
+#, fuzzy
+msgid "Downmix"
+msgstr "DTS downmix"
 
 #, fuzzy
 msgid "Drop unconfigured satellites"
@@ -3857,6 +3906,10 @@ msgid "HDMI HDR Type"
 msgstr "NIM і Тип тюнера"
 
 #, fuzzy
+msgid "HDMI audio source"
+msgstr "Колірна насиченість"
+
+#, fuzzy
 msgid "HDMI-CEC Source Active"
 msgstr "Все одним пультом(HDMI-CEC)"
 
@@ -3869,8 +3922,16 @@ msgstr "Все одним пультом(HDMI-CEC)"
 msgid "HDR10"
 msgstr ""
 
+#, fuzzy
+msgid "HDR10 support"
+msgstr "невідома"
+
 msgid "HLG"
 msgstr ""
+
+#, fuzzy
+msgid "HLG support"
+msgstr "невідома"
 
 #, fuzzy
 msgid "Haiti"
@@ -4131,6 +4192,10 @@ msgstr "Таймер неактивності"
 
 msgid "Include AIT in http streams"
 msgstr "Вмикати AIT в http стрім"
+
+#, fuzzy
+msgid "Include CI assignment"
+msgstr "Призначення CI"
 
 msgid "Include ECM in http streams"
 msgstr "Вмикати ECM в http стрім"
@@ -4897,10 +4962,6 @@ msgstr "Конфігурація списку відео"
 msgid "Movie location"
 msgstr "Розташування відео"
 
-#, fuzzy
-msgid "Movie manager"
-msgstr "Менеджер пакетів"
-
 msgid "Movie selection"
 msgstr "Вибір відео"
 
@@ -5466,6 +5527,10 @@ msgstr "Переписати файли конфігурації"
 msgid "PAL"
 msgstr "PAL"
 
+#, fuzzy
+msgid "PCM"
+msgstr "PDC"
+
 msgid "PCR PID"
 msgstr "PCR PID"
 
@@ -5542,6 +5607,9 @@ msgstr "Редактор сервісів батьківського контр�
 
 msgid "Parental control setup"
 msgstr "Налаштування батьківського контролю"
+
+msgid "Passthrough"
+msgstr ""
 
 msgid "Pause"
 msgstr "Пауза"
@@ -6026,6 +6094,10 @@ msgid "Press OK to select a group of satellites to configure in one block."
 msgstr "Натисніть OK для вибору супутника"
 
 msgid "Press OK to select a provider."
+msgstr "Натисніть ОК для вибору провайдера."
+
+#, fuzzy
+msgid "Press OK to select a service."
 msgstr "Натисніть ОК для вибору провайдера."
 
 msgid "Press OK to select satellites"
@@ -7249,6 +7321,9 @@ msgstr "Назва сервісу"
 
 msgid "Services"
 msgstr "Сервіси"
+
+msgid "Set CI assignment for detection of available services."
+msgstr ""
 
 msgid "Set PIN"
 msgstr "Встановити PIN"
@@ -8596,6 +8671,22 @@ msgstr "Ця опція дозволяє показати шляхи меню."
 msgid "This option allows you to enable 3D surround sound."
 msgstr "Ця опція дозволяє показати шляхи меню."
 
+#, fuzzy
+msgid "This option allows you to enable or disable the 10 bit color mode"
+msgstr "Цей параметр дозволяє налаштувати  в колірному просторі від Auto до RGB"
+
+#, fuzzy
+msgid "This option allows you to enable or disable the 12 bit color mode"
+msgstr "Цей параметр дозволяє налаштувати  в колірному просторі від Auto до RGB"
+
+#, fuzzy
+msgid "This option allows you to force the HDR10 modes for UHD"
+msgstr "Цей параметр дозволяє налаштувати  в колірному просторі від Auto до RGB"
+
+#, fuzzy
+msgid "This option allows you to force the HLG modes for UHD"
+msgstr "Цей параметр дозволяє налаштувати  в колірному просторі від Auto до RGB"
+
 msgid "This option allows you to hide and sort menu entries. When selecting user you can change order and hide menu items via the blue button"
 msgstr "Ця опція дозволяє приховувати і сортувати пункти меню. При виборі користувача, ви можете змінити порядок і приховати пункти меню за допомогою синьої кнопки"
 
@@ -9459,6 +9550,10 @@ msgstr "WEP"
 
 msgid "WLAN connection"
 msgstr "WLAN з'єднання"
+
+#, fuzzy
+msgid "WMA pro downmix"
+msgstr "AAC мікшування"
 
 msgid "WPA"
 msgstr "WPA"
@@ -10425,6 +10520,23 @@ msgstr "присвоєно"
 msgid "connected"
 msgstr "підключено"
 
+msgid "controlled by HDMI"
+msgstr ""
+
+msgid "convert to AC3"
+msgstr ""
+
+msgid "convert to DTS"
+msgstr ""
+
+#, fuzzy
+msgid "convert to multi channel PCM"
+msgstr "Багатоканальне PCM"
+
+#, fuzzy
+msgid "convert to multi-channel PCM"
+msgstr "Багатоканальне PCM"
+
 msgid "cooking"
 msgstr "приготування"
 
@@ -10622,6 +10734,17 @@ msgstr "народна/традиційна музика"
 
 msgid "football/soccer"
 msgstr "футбол"
+
+msgid "force AC3 plus"
+msgstr ""
+
+#, fuzzy
+msgid "force disabled"
+msgstr "вимкнено"
+
+#, fuzzy
+msgid "force enabled"
+msgstr "увімкнено"
 
 msgid "foreign countries/expeditions"
 msgstr "зарубіжні країни/експедиції"
@@ -11289,6 +11412,9 @@ msgstr "неперевірено"
 
 msgid "until standby/restart"
 msgstr "до режиму очікування/перезавантаження"
+
+msgid "use best, controlled by HDMI"
+msgstr ""
 
 msgid "user defined"
 msgstr "визначений користувачем"

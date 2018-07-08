@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-28 11:34+0430\n"
+"POT-Creation-Date: 2018-07-08 11:27+0430\n"
 "PO-Revision-Date: 2018-05-16 09:05+0200\n"
 "Last-Translator: mcfly82\n"
 "Language-Team: mcfly82 & wysless\n"
@@ -714,8 +714,20 @@ msgstr "A/V beállítások"
 msgid "AAC downmix"
 msgstr "AAC lekeverése"
 
+#, fuzzy
+msgid "AAC transcoding"
+msgstr "Átkódolás: "
+
+#, fuzzy
+msgid "AC3"
+msgstr "DAC"
+
 msgid "AC3 downmix"
 msgstr "AC3 lekeverése"
+
+#, fuzzy
+msgid "AC3 plus transcoding"
+msgstr "Átkódolás: "
 
 msgid "ACQUIRING TSID/ONID"
 msgstr "TSID/ONID BESZERZÉSE"
@@ -914,6 +926,14 @@ msgstr "Rendeljen hozzá egy számot a konfigurálandó fejhez. Ezt a fejet kés
 
 msgid "Allocate unused memory index"
 msgstr "Használatlan memóriaindex hozzárendelés"
+
+#, fuzzy
+msgid "Allow 10bit"
+msgstr "10bit"
+
+#, fuzzy
+msgid "Allow 12bit"
+msgstr "12bit"
 
 msgid "Allow quit movieplayer with exit"
 msgstr "Médialejátszó bezárása kilépés gombbal"
@@ -1660,6 +1680,10 @@ msgstr "Tuner kiválasztása"
 msgid "Choose bouquet"
 msgstr "Lista kiválasztása"
 
+#, fuzzy
+msgid "Choose whether multi channel sound tracks should be convert to PCM or SPDIF."
+msgstr "A többcsatornás hangsávok (pl. 5.1-es) lekeverése sztereóra."
+
 msgid "Choose which tuner to configure."
 msgstr "Válassza ki a beállítandó tunert."
 
@@ -2057,6 +2081,22 @@ msgstr "A lejárt időzítések megjelenítésének módja a listában."
 msgid "Configure whether (and for how long) a second infobar will be shown when OK is pressed twice. The second infobar contains additional information about the current channel."
 msgstr "Egy második, bővebb információs ablak megjelenítése az aktuális csatornáról és mennyi ideig, ha az 'OK' gombot másodjára nyomjuk meg."
 
+#, fuzzy
+msgid "Configure whether AAC sound tracks should be transcoded."
+msgstr "A többcsatornás hangsávok (pl. 5.1-es) lekeverése sztereóra."
+
+#, fuzzy
+msgid "Configure whether AC3 plus sound tracks should be transcoded to AC3."
+msgstr "A többcsatornás hangsávok (pl. 5.1-es) lekeverése sztereóra."
+
+#, fuzzy
+msgid "Configure whether DTS-HD channel sound tracks should be downmixed or transcoded."
+msgstr "A többcsatornás hangsávok (pl. 5.1-es) lekeverése sztereóra."
+
+#, fuzzy
+msgid "Configure whether WMA pro channel sound tracks should be downmixed or transcoded."
+msgstr "A többcsatornás hangsávok (pl. 5.1-es) lekeverése sztereóra."
+
 msgid "Configure whether multi channel PCM sound should be enabled."
 msgstr "Megadható, hogy a többcsatornás PCM hang be legyen-e kapcsolva."
 
@@ -2313,7 +2353,14 @@ msgstr "DMM haladó"
 msgid "DMM normal"
 msgstr "DMM hagyományos"
 
+msgid "DTS"
+msgstr ""
+
 msgid "DTS downmix"
+msgstr "DTS lekeverése"
+
+#, fuzzy
+msgid "DTS-HD downmix"
 msgstr "DTS lekeverése"
 
 msgid "DUAL LAYER DVD"
@@ -2813,6 +2860,10 @@ msgstr "Image letöltése"
 
 msgid "Downloading plugin information. Please wait..."
 msgstr "Bővítmények betöltése folyamatban. Kérem, várjon..."
+
+#, fuzzy
+msgid "Downmix"
+msgstr "DTS lekeverése"
 
 #, fuzzy
 msgid "Drop unconfigured satellites"
@@ -3793,6 +3844,10 @@ msgstr "HDMI színtér"
 msgid "HDMI HDR Type"
 msgstr "HDMI HDR típusa"
 
+#, fuzzy
+msgid "HDMI audio source"
+msgstr "HDMI színtér"
+
 msgid "HDMI-CEC Source Active"
 msgstr "HDMI-CEC forrás aktív"
 
@@ -3805,8 +3860,16 @@ msgstr "HDMI-CEC beállítások"
 msgid "HDR10"
 msgstr "HDR10"
 
+#, fuzzy
+msgid "HDR10 support"
+msgstr "nem támogatott"
+
 msgid "HLG"
 msgstr "HLG"
+
+#, fuzzy
+msgid "HLG support"
+msgstr "nem támogatott"
 
 msgid "Haiti"
 msgstr "Haiti"
@@ -4061,6 +4124,10 @@ msgstr "Elalvás inaktivitás miatt"
 
 msgid "Include AIT in http streams"
 msgstr "Legyen AIT a HTTP jelfolyamban"
+
+#, fuzzy
+msgid "Include CI assignment"
+msgstr "CI hozzárendelés"
 
 msgid "Include ECM in http streams"
 msgstr "Legyen ECM a HTTP jelfolyamban"
@@ -4809,9 +4876,6 @@ msgstr "Filmlista beállítása"
 msgid "Movie location"
 msgstr "Fájlok tárhelye"
 
-msgid "Movie manager"
-msgstr "Film-kezelő"
-
 msgid "Movie selection"
 msgstr "Filmválasztás"
 
@@ -5370,6 +5434,10 @@ msgstr "Konfigurációs fájlok felülírása?"
 msgid "PAL"
 msgstr "PAL"
 
+#, fuzzy
+msgid "PCM"
+msgstr "PDC"
+
 msgid "PCR PID"
 msgstr "PCR PID"
 
@@ -5445,6 +5513,9 @@ msgstr "Gyermekzárral védett csatornák szerkesztése"
 
 msgid "Parental control setup"
 msgstr "Gyermekzár beállítások"
+
+msgid "Passthrough"
+msgstr ""
 
 msgid "Pause"
 msgstr "Szünet"
@@ -5919,6 +5990,10 @@ msgid "Press OK to select a group of satellites to configure in one block."
 msgstr "Nyomja le az OK gombot több műhold egyidejű konfigurálásához."
 
 msgid "Press OK to select a provider."
+msgstr "Nyomja le az OK gombot egy szolgáltató kiválasztásához."
+
+#, fuzzy
+msgid "Press OK to select a service."
 msgstr "Nyomja le az OK gombot egy szolgáltató kiválasztásához."
 
 msgid "Press OK to select satellites"
@@ -7113,6 +7188,9 @@ msgstr "Csatornanév"
 
 msgid "Services"
 msgstr "Csatornák"
+
+msgid "Set CI assignment for detection of available services."
+msgstr ""
 
 msgid "Set PIN"
 msgstr "PIN beállítás"
@@ -8439,6 +8517,22 @@ msgstr "Ez engedélyezi a 3D Surround softlimiter-t."
 msgid "This option allows you to enable 3D surround sound."
 msgstr "Ez engedélyezi a 3D Surround hangot."
 
+#, fuzzy
+msgid "This option allows you to enable or disable the 10 bit color mode"
+msgstr "Letilthatja vagy megváltoztathatja a virtuális hangszórók pozícióját."
+
+#, fuzzy
+msgid "This option allows you to enable or disable the 12 bit color mode"
+msgstr "Letilthatja vagy megváltoztathatja a virtuális hangszórók pozícióját."
+
+#, fuzzy
+msgid "This option allows you to force the HDR10 modes for UHD"
+msgstr "Beállíthatja az UHD színmélységet"
+
+#, fuzzy
+msgid "This option allows you to force the HLG modes for UHD"
+msgstr "Beállíthatja az UHD színmélységet"
+
 msgid "This option allows you to hide and sort menu entries. When selecting user you can change order and hide menu items via the blue button"
 msgstr "A menü bejegyzések elrejtése és rendezése. Ha engedélyezi, a kék gombbal meg tudja változtatni a menü egyes elemeinek elrejtését és sorrendjét."
 
@@ -9285,6 +9379,10 @@ msgstr "WEP"
 
 msgid "WLAN connection"
 msgstr "Vezeték nélküli kapcsolat"
+
+#, fuzzy
+msgid "WMA pro downmix"
+msgstr "AAC lekeverése"
 
 msgid "WPA"
 msgstr "WPA"
@@ -10227,6 +10325,23 @@ msgstr "visszaigazolt"
 msgid "connected"
 msgstr "csatlakoztatva"
 
+msgid "controlled by HDMI"
+msgstr ""
+
+msgid "convert to AC3"
+msgstr ""
+
+msgid "convert to DTS"
+msgstr ""
+
+#, fuzzy
+msgid "convert to multi channel PCM"
+msgstr "Többcsatornás PCM"
+
+#, fuzzy
+msgid "convert to multi-channel PCM"
+msgstr "Többcsatornás PCM"
+
 msgid "cooking"
 msgstr "főzés"
 
@@ -10424,6 +10539,17 @@ msgstr "folklór/népzene"
 
 msgid "football/soccer"
 msgstr "futball/foci"
+
+msgid "force AC3 plus"
+msgstr ""
+
+#, fuzzy
+msgid "force disabled"
+msgstr "kikapcsolva"
+
+#, fuzzy
+msgid "force enabled"
+msgstr "engedélyezve"
 
 msgid "foreign countries/expeditions"
 msgstr "külföldi országok/kirándulás"
@@ -11086,6 +11212,9 @@ msgstr "nem tesztelhető"
 
 msgid "until standby/restart"
 msgstr "kikapcsolásig/újraindításig"
+
+msgid "use best, controlled by HDMI"
+msgstr ""
 
 msgid "user defined"
 msgstr "felhasználó által megadva"

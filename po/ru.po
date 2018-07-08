@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-28 11:34+0430\n"
+"POT-Creation-Date: 2018-07-08 11:27+0430\n"
 "PO-Revision-Date: 2018-05-02 18:32+0300\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: openPLi Dimitrij\n"
@@ -725,8 +725,20 @@ msgstr "Аудио/видео настройки"
 msgid "AAC downmix"
 msgstr "AAC микширование"
 
+#, fuzzy
+msgid "AAC transcoding"
+msgstr "Транскодирование: "
+
+#, fuzzy
+msgid "AC3"
+msgstr "DAC"
+
 msgid "AC3 downmix"
 msgstr "AC3 микширование"
+
+#, fuzzy
+msgid "AC3 plus transcoding"
+msgstr "Транскодирование: "
 
 msgid "ACQUIRING TSID/ONID"
 msgstr "ПОЛУЧЕНИЕ TSID/ONID"
@@ -925,6 +937,14 @@ msgstr "Выделите номер для физического LNB, кото�
 
 msgid "Allocate unused memory index"
 msgstr "Выделить неиспользуемый номер памяти"
+
+#, fuzzy
+msgid "Allow 10bit"
+msgstr "10bit"
+
+#, fuzzy
+msgid "Allow 12bit"
+msgstr "12bit"
 
 msgid "Allow quit movieplayer with exit"
 msgstr "Разрешить выходить из видеоплеера кнопкой выход"
@@ -1670,6 +1690,10 @@ msgstr "Выбор тюнера"
 msgid "Choose bouquet"
 msgstr "Выбор букета"
 
+#, fuzzy
+msgid "Choose whether multi channel sound tracks should be convert to PCM or SPDIF."
+msgstr "Настройка - следует ли многоканальную звуковую дорожку декодировать в стереозвук."
+
 msgid "Choose which tuner to configure."
 msgstr "Выберите тюнер для настройки."
 
@@ -2067,6 +2091,22 @@ msgstr "Настройка - в каком месте списка таймер�
 msgid "Configure whether (and for how long) a second infobar will be shown when OK is pressed twice. The second infobar contains additional information about the current channel."
 msgstr "Настройка для показа (и как долго) второго инфобара, при нажатии кнопки OK дважды. Второй инфобар содержит дополнительную информацию о текущем канале."
 
+#, fuzzy
+msgid "Configure whether AAC sound tracks should be transcoded."
+msgstr "Настройка - следует ли многоканальную звуковую дорожку декодировать в стереозвук."
+
+#, fuzzy
+msgid "Configure whether AC3 plus sound tracks should be transcoded to AC3."
+msgstr "Настройка - следует ли многоканальную звуковую дорожку декодировать в стереозвук."
+
+#, fuzzy
+msgid "Configure whether DTS-HD channel sound tracks should be downmixed or transcoded."
+msgstr "Настройка - следует ли многоканальную звуковую дорожку декодировать в стереозвук."
+
+#, fuzzy
+msgid "Configure whether WMA pro channel sound tracks should be downmixed or transcoded."
+msgstr "Настройка - следует ли многоканальную звуковую дорожку декодировать в стереозвук."
+
 msgid "Configure whether multi channel PCM sound should be enabled."
 msgstr "Настройка, нужно ли включать мультиканальный звук PCM."
 
@@ -2324,7 +2364,14 @@ msgstr "DMM расширенный"
 msgid "DMM normal"
 msgstr "DMM нормальный"
 
+msgid "DTS"
+msgstr ""
+
 msgid "DTS downmix"
+msgstr "DTS микширование"
+
+#, fuzzy
+msgid "DTS-HD downmix"
 msgstr "DTS микширование"
 
 msgid "DUAL LAYER DVD"
@@ -2826,6 +2873,10 @@ msgstr "Загрузка имиджа"
 msgid "Downloading plugin information. Please wait..."
 msgstr "Загрузка информации о плагинах. Пожалуйста, подождите..."
 
+#, fuzzy
+msgid "Downmix"
+msgstr "DTS микширование"
+
 msgid "Drop unconfigured satellites"
 msgstr "Отбросить ненастроенные спутники"
 
@@ -3151,12 +3202,14 @@ msgstr "Ошибка при записи epg.dat на сервере"
 msgid "Error while retreiving epg.dat from server"
 msgstr "Ошибка при получении epg.dat с сервера"
 
+#, python-format
 msgid ""
 "Error while retreiving fallback timer information\n"
 "%s"
 msgstr ""
 "Ошибка получения информации о резервных таймерах\n"
 "%s"
+
 msgid "Error while retreiving location of epg.dat on server"
 msgstr "Ошибка получения расположения файла epg.dat с сервера"
 
@@ -3806,6 +3859,10 @@ msgstr "Цветовая модель HDMI"
 msgid "HDMI HDR Type"
 msgstr "HDMI HDR тип"
 
+#, fuzzy
+msgid "HDMI audio source"
+msgstr "Цветовая модель HDMI"
+
 msgid "HDMI-CEC Source Active"
 msgstr "HDMI-CEC источник активный"
 
@@ -3818,8 +3875,16 @@ msgstr "Настройки HDMI-CEC"
 msgid "HDR10"
 msgstr "HDR10"
 
+#, fuzzy
+msgid "HDR10 support"
+msgstr "не поддерживается"
+
 msgid "HLG"
 msgstr "HLG"
+
+#, fuzzy
+msgid "HLG support"
+msgstr "не поддерживается"
 
 msgid "Haiti"
 msgstr "Haiti"
@@ -4073,6 +4138,10 @@ msgstr "Таймер неактивности"
 
 msgid "Include AIT in http streams"
 msgstr "Включать AIT в http стрим потоки"
+
+#, fuzzy
+msgid "Include CI assignment"
+msgstr "Присвоение CI"
 
 msgid "Include ECM in http streams"
 msgstr "Включать ECM в http стрим потоки"
@@ -4820,9 +4889,6 @@ msgstr "Конфигурация списка видео"
 msgid "Movie location"
 msgstr "Расположение видео"
 
-msgid "Movie manager"
-msgstr "Файловый менеджер"
-
 msgid "Movie selection"
 msgstr "Выбор видео"
 
@@ -5381,6 +5447,10 @@ msgstr "Переписать файлы конфигурации?"
 msgid "PAL"
 msgstr "PAL"
 
+#, fuzzy
+msgid "PCM"
+msgstr "PDC"
+
 msgid "PCR PID"
 msgstr "PCR PID"
 
@@ -5456,6 +5526,9 @@ msgstr "Редактор сервисов родительского контр�
 
 msgid "Parental control setup"
 msgstr "Установки родительского контроля"
+
+msgid "Passthrough"
+msgstr ""
 
 msgid "Pause"
 msgstr "Пауза"
@@ -5931,6 +6004,10 @@ msgid "Press OK to select a group of satellites to configure in one block."
 msgstr "Нажмите OK, чтобы выбрать группу спутников для настройки в одном блоке."
 
 msgid "Press OK to select a provider."
+msgstr "Нажмите ОК для выбора провайдера."
+
+#, fuzzy
+msgid "Press OK to select a service."
 msgstr "Нажмите ОК для выбора провайдера."
 
 msgid "Press OK to select satellites"
@@ -7131,6 +7208,9 @@ msgstr "Название сервиса"
 
 msgid "Services"
 msgstr "Сервисы"
+
+msgid "Set CI assignment for detection of available services."
+msgstr ""
 
 msgid "Set PIN"
 msgstr "Установить PIN-код"
@@ -8447,6 +8527,22 @@ msgstr "Эта опция позволяет Вам включить 3D софт
 msgid "This option allows you to enable 3D surround sound."
 msgstr "Эта опция позволяет Вам включить 3D объемный звук."
 
+#, fuzzy
+msgid "This option allows you to enable or disable the 10 bit color mode"
+msgstr "Эта опция позволяет Вам отключить или изменить позицию виртуального динамика."
+
+#, fuzzy
+msgid "This option allows you to enable or disable the 12 bit color mode"
+msgstr "Эта опция позволяет Вам отключить или изменить позицию виртуального динамика."
+
+#, fuzzy
+msgid "This option allows you to force the HDR10 modes for UHD"
+msgstr "Этот параметр позволяет установить глубину цвета HDMI для UHD"
+
+#, fuzzy
+msgid "This option allows you to force the HLG modes for UHD"
+msgstr "Этот параметр позволяет установить глубину цвета HDMI для UHD"
+
 msgid "This option allows you to hide and sort menu entries. When selecting user you can change order and hide menu items via the blue button"
 msgstr "Эта настройка позволяет скрывать и сортировать порядок пунктов меню. При выборе пользовательского варианта, Вы можете изменить порядок и скрыть пункты меню с помощью синей кнопки."
 
@@ -9296,6 +9392,10 @@ msgstr "WEP"
 msgid "WLAN connection"
 msgstr "WLAN соединение"
 
+#, fuzzy
+msgid "WMA pro downmix"
+msgstr "AAC микширование"
+
 msgid "WPA"
 msgstr "WPA"
 
@@ -9998,7 +10098,6 @@ msgstr "Переключить на"
 msgid "Zap to selected channel"
 msgstr "Переключение на выбраный канал"
 
-
 msgid "Zap to selected channel and exit GMEPG"
 msgstr "Переключить на выбраный канал и закрыть GMEPG"
 
@@ -10236,6 +10335,23 @@ msgstr "подтверждено"
 msgid "connected"
 msgstr "подключено"
 
+msgid "controlled by HDMI"
+msgstr ""
+
+msgid "convert to AC3"
+msgstr ""
+
+msgid "convert to DTS"
+msgstr ""
+
+#, fuzzy
+msgid "convert to multi channel PCM"
+msgstr "Мультиканал PCM"
+
+#, fuzzy
+msgid "convert to multi-channel PCM"
+msgstr "Мультиканал PCM"
+
 msgid "cooking"
 msgstr "приготовление"
 
@@ -10433,6 +10549,17 @@ msgstr "народная/традиционная музыка"
 
 msgid "football/soccer"
 msgstr "футбол"
+
+msgid "force AC3 plus"
+msgstr ""
+
+#, fuzzy
+msgid "force disabled"
+msgstr "отключено"
+
+#, fuzzy
+msgid "force enabled"
+msgstr "включено"
 
 msgid "foreign countries/expeditions"
 msgstr "зарубежные страны/экспедиции"
@@ -11095,6 +11222,9 @@ msgstr "непроверяема"
 
 msgid "until standby/restart"
 msgstr "до режима ожидания/перезагрузки"
+
+msgid "use best, controlled by HDMI"
+msgstr ""
 
 msgid "user defined"
 msgstr "пользовательский вариант"

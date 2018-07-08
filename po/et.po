@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Openpli\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-28 11:34+0430\n"
+"POT-Creation-Date: 2018-07-08 11:27+0430\n"
 "PO-Revision-Date: 2018-03-31 22:06+0300\n"
 "Last-Translator: \n"
 "Language-Team: Raivo, Henkka, eesatfan, rimas, zeros\\n faas, sateks, valgekotkas, tigekala, rootsikunn\\n kain, i70, mustkass, pelmeen, Scott\\n <digi-tv.ee>\n"
@@ -717,8 +717,20 @@ msgstr "Heli ja pildi seaded"
 msgid "AAC downmix"
 msgstr "AAC > stereo"
 
+#, fuzzy
+msgid "AAC transcoding"
+msgstr "Transkodeerimine: "
+
+#, fuzzy
+msgid "AC3"
+msgstr "DAC"
+
 msgid "AC3 downmix"
 msgstr "AC3 > stereo"
+
+#, fuzzy
+msgid "AC3 plus transcoding"
+msgstr "Transkodeerimine: "
 
 msgid "ACQUIRING TSID/ONID"
 msgstr "TSID/ONID OTSING"
@@ -917,6 +929,14 @@ msgstr "Määra seadistatava reaalse LNB number. Sama LNB saab määrata uuesti 
 
 msgid "Allocate unused memory index"
 msgstr "Eralda kasutamata mälu märgis"
+
+#, fuzzy
+msgid "Allow 10bit"
+msgstr "10bit"
+
+#, fuzzy
+msgid "Allow 12bit"
+msgstr "12bit"
 
 msgid "Allow quit movieplayer with exit"
 msgstr "Taasesituse lõpetamine EXIT nupuga"
@@ -1671,6 +1691,10 @@ msgstr "Vali tuuner"
 msgid "Choose bouquet"
 msgstr "Vali lemmiknimekiri"
 
+#, fuzzy
+msgid "Choose whether multi channel sound tracks should be convert to PCM or SPDIF."
+msgstr "Määra, kas mitmekanaline heli tuleks taandada stereoks."
+
 msgid "Choose which tuner to configure."
 msgstr "Vali seadistamiseks tuuner."
 
@@ -2070,6 +2094,22 @@ msgstr "Määra, kus teostatud taimereid  taimerite nimekirjas näidatakse."
 msgid "Configure whether (and for how long) a second infobar will be shown when OK is pressed twice. The second infobar contains additional information about the current channel."
 msgstr "Määra, kas ja kui kaua teist inforiba näidatakse, kui vajutada kaks korda OK. Teine inforiba sisaldab käesoleva kanali kohta lisateavet."
 
+#, fuzzy
+msgid "Configure whether AAC sound tracks should be transcoded."
+msgstr "Määra, kas mitmekanaline heli tuleks taandada stereoks."
+
+#, fuzzy
+msgid "Configure whether AC3 plus sound tracks should be transcoded to AC3."
+msgstr "Määra, kas mitmekanaline heli tuleks taandada stereoks."
+
+#, fuzzy
+msgid "Configure whether DTS-HD channel sound tracks should be downmixed or transcoded."
+msgstr "Määra, kas mitmekanaline heli tuleks taandada stereoks."
+
+#, fuzzy
+msgid "Configure whether WMA pro channel sound tracks should be downmixed or transcoded."
+msgstr "Määra, kas mitmekanaline heli tuleks taandada stereoks."
+
 msgid "Configure whether multi channel PCM sound should be enabled."
 msgstr "Säti, kas mitme kanali PCM heli peaks olema lubatud."
 
@@ -2332,7 +2372,14 @@ msgstr "DMM edasijõudnutele"
 msgid "DMM normal"
 msgstr "DMM tavaline"
 
+msgid "DTS"
+msgstr ""
+
 msgid "DTS downmix"
+msgstr "DTS > stereo"
+
+#, fuzzy
+msgid "DTS-HD downmix"
 msgstr "DTS > stereo"
 
 msgid "DUAL LAYER DVD"
@@ -2833,6 +2880,10 @@ msgstr "Tarkvara alla laadimas"
 
 msgid "Downloading plugin information. Please wait..."
 msgstr "Laeme alla laienduste infot. Palun oota."
+
+#, fuzzy
+msgid "Downmix"
+msgstr "DTS > stereo"
 
 #, fuzzy
 msgid "Drop unconfigured satellites"
@@ -3822,6 +3873,10 @@ msgstr "HDMI värviruum"
 msgid "HDMI HDR Type"
 msgstr "NIM ja tüüp"
 
+#, fuzzy
+msgid "HDMI audio source"
+msgstr "HDMI värviruum"
+
 msgid "HDMI-CEC Source Active"
 msgstr "HDMI-CEC allikas aktiivne"
 
@@ -3834,8 +3889,16 @@ msgstr "HDMI-CEC seaded"
 msgid "HDR10"
 msgstr "HDR10"
 
+#, fuzzy
+msgid "HDR10 support"
+msgstr "pole toetatud"
+
 msgid "HLG"
 msgstr "HLG"
+
+#, fuzzy
+msgid "HLG support"
+msgstr "pole toetatud"
 
 msgid "Haiti"
 msgstr "Haiiti"
@@ -4095,6 +4158,10 @@ msgstr "Jõudeoleku taimer"
 
 msgid "Include AIT in http streams"
 msgstr "Kaasa AIT http voogudesse"
+
+#, fuzzy
+msgid "Include CI assignment"
+msgstr "CI määrangud"
 
 msgid "Include ECM in http streams"
 msgstr "Kaasa ECM http voogudesse"
@@ -4843,10 +4910,6 @@ msgstr "Filmilisti seaded"
 msgid "Movie location"
 msgstr "Salvestiste asukoht"
 
-#, fuzzy
-msgid "Movie manager"
-msgstr "Paketi haldur"
-
 msgid "Movie selection"
 msgstr "Filmi valik"
 
@@ -5406,6 +5469,10 @@ msgstr "Seadistusfailid kirjutatakse üle?"
 msgid "PAL"
 msgstr "PAL"
 
+#, fuzzy
+msgid "PCM"
+msgstr "PDC"
+
 msgid "PCR PID"
 msgstr "PCR PID"
 
@@ -5481,6 +5548,9 @@ msgstr "Lapseluku kanali muutmine"
 
 msgid "Parental control setup"
 msgstr "Lapseluku seaded"
+
+msgid "Passthrough"
+msgstr ""
 
 msgid "Pause"
 msgstr "Paus"
@@ -5959,6 +6029,10 @@ msgid "Press OK to select a group of satellites to configure in one block."
 msgstr "Vajuta OK satelliitide valikuks"
 
 msgid "Press OK to select a provider."
+msgstr "Levitaja valimiseks vajuta OK."
+
+#, fuzzy
+msgid "Press OK to select a service."
 msgstr "Levitaja valimiseks vajuta OK."
 
 msgid "Press OK to select satellites"
@@ -7162,6 +7236,9 @@ msgstr "Teenuse nimi"
 
 msgid "Services"
 msgstr "Kanalid"
+
+msgid "Set CI assignment for detection of available services."
+msgstr ""
 
 msgid "Set PIN"
 msgstr "Määra PIN"
@@ -8498,6 +8575,22 @@ msgstr "See valikuvõimalus lubab rakendada 3D surround pehmet piirajat."
 msgid "This option allows you to enable 3D surround sound."
 msgstr "Selle valikuvõimaluse abli saad lubada 3D surround heli."
 
+#, fuzzy
+msgid "This option allows you to enable or disable the 10 bit color mode"
+msgstr "See valikuvõimalus lubab kustutada või muuta kujutletava valjuhääldi asukohta."
+
+#, fuzzy
+msgid "This option allows you to enable or disable the 12 bit color mode"
+msgstr "See valikuvõimalus lubab kustutada või muuta kujutletava valjuhääldi asukohta."
+
+#, fuzzy
+msgid "This option allows you to force the HDR10 modes for UHD"
+msgstr "See valikuvõimalus aitab seadistada UHD värvisügavust"
+
+#, fuzzy
+msgid "This option allows you to force the HLG modes for UHD"
+msgstr "See valikuvõimalus aitab seadistada UHD värvisügavust"
+
 msgid "This option allows you to hide and sort menu entries. When selecting user you can change order and hide menu items via the blue button"
 msgstr "See valik lubab peita ja järjestada menüü sisestusi. Valides kasutaja saad muuta järjekorda ja peita menüü sisestusi sinise nupu abil."
 
@@ -9350,6 +9443,10 @@ msgstr "WEP"
 
 msgid "WLAN connection"
 msgstr "WiFi ühendus"
+
+#, fuzzy
+msgid "WMA pro downmix"
+msgstr "AAC > stereo"
 
 msgid "WPA"
 msgstr "WPA"
@@ -10302,6 +10399,23 @@ msgstr "kinnitatud"
 msgid "connected"
 msgstr "ühendatud"
 
+msgid "controlled by HDMI"
+msgstr ""
+
+msgid "convert to AC3"
+msgstr ""
+
+msgid "convert to DTS"
+msgstr ""
+
+#, fuzzy
+msgid "convert to multi channel PCM"
+msgstr "Mitme kanali PCM"
+
+#, fuzzy
+msgid "convert to multi-channel PCM"
+msgstr "Mitme kanali PCM"
+
 msgid "cooking"
 msgstr "kokasaade"
 
@@ -10499,6 +10613,17 @@ msgstr "folk/rahvamuusika"
 
 msgid "football/soccer"
 msgstr "jalgpall"
+
+msgid "force AC3 plus"
+msgstr ""
+
+#, fuzzy
+msgid "force disabled"
+msgstr "keelatud"
+
+#, fuzzy
+msgid "force enabled"
+msgstr "lubatud"
 
 msgid "foreign countries/expeditions"
 msgstr "välisriigid/reisid"
@@ -11161,6 +11286,9 @@ msgstr "ebastabiilne"
 
 msgid "until standby/restart"
 msgstr "kuni ooterežiimini/taaskäivitamiseni"
+
+msgid "use best, controlled by HDMI"
+msgstr ""
 
 msgid "user defined"
 msgstr "kasutaja määratud"

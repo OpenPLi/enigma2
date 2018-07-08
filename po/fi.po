@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-28 11:34+0430\n"
+"POT-Creation-Date: 2018-07-08 11:27+0430\n"
 "PO-Revision-Date: 2013-10-15 19:32+0200\n"
 "Last-Translator: BoxFreak\n"
 "Language-Team: none\n"
@@ -761,9 +761,18 @@ msgstr "Ääni- ja kuvalähtöjen asetukset"
 msgid "AAC downmix"
 msgstr ""
 
+msgid "AAC transcoding"
+msgstr ""
+
+msgid "AC3"
+msgstr ""
+
 #
 msgid "AC3 downmix"
 msgstr "AC3 muunnos stereoksi"
+
+msgid "AC3 plus transcoding"
+msgstr ""
 
 msgid "ACQUIRING TSID/ONID"
 msgstr ""
@@ -1000,6 +1009,12 @@ msgstr ""
 
 msgid "Allocate unused memory index"
 msgstr "Varaa vapaa muisti-indeksi"
+
+msgid "Allow 10bit"
+msgstr ""
+
+msgid "Allow 12bit"
+msgstr ""
 
 msgid "Allow quit movieplayer with exit"
 msgstr "Salli tallenteista poistuminen exit-napilla"
@@ -1844,6 +1859,10 @@ msgstr "Valitse viritin"
 msgid "Choose bouquet"
 msgstr ""
 
+#, fuzzy
+msgid "Choose whether multi channel sound tracks should be convert to PCM or SPDIF."
+msgstr "Määrittää jos haluat että monikanavaääni miksataan stereoääneksi."
+
 msgid "Choose which tuner to configure."
 msgstr "Valitse minkä virittimen tahdot määrittää."
 
@@ -2281,6 +2300,22 @@ msgstr "Määrittää missä jo päättyneet ajastukset näytetään ajastuslist
 msgid "Configure whether (and for how long) a second infobar will be shown when OK is pressed twice. The second infobar contains additional information about the current channel."
 msgstr "Määrittää josko (ja kuinka kauan) toinen tietopalkki näytetään kun OK-näppäintä painetaan kahdesti. Toinen tietopalkki sisältää lisätietoja valitusta kanavasta."
 
+#, fuzzy
+msgid "Configure whether AAC sound tracks should be transcoded."
+msgstr "Määrittää jos haluat että monikanavaääni miksataan stereoääneksi."
+
+#, fuzzy
+msgid "Configure whether AC3 plus sound tracks should be transcoded to AC3."
+msgstr "Määrittää jos haluat että monikanavaääni miksataan stereoääneksi."
+
+#, fuzzy
+msgid "Configure whether DTS-HD channel sound tracks should be downmixed or transcoded."
+msgstr "Määrittää jos haluat että monikanavaääni miksataan stereoääneksi."
+
+#, fuzzy
+msgid "Configure whether WMA pro channel sound tracks should be downmixed or transcoded."
+msgstr "Määrittää jos haluat että monikanavaääni miksataan stereoääneksi."
+
 msgid "Configure whether multi channel PCM sound should be enabled."
 msgstr ""
 
@@ -2574,7 +2609,14 @@ msgstr "Laaja"
 msgid "DMM normal"
 msgstr "Normaali"
 
+msgid "DTS"
+msgstr ""
+
 msgid "DTS downmix"
+msgstr "DTS muunnos stereoksi"
+
+#, fuzzy
+msgid "DTS-HD downmix"
 msgstr "DTS muunnos stereoksi"
 
 msgid "DUAL LAYER DVD"
@@ -3158,6 +3200,10 @@ msgstr "Ladataan"
 #
 msgid "Downloading plugin information. Please wait..."
 msgstr "Ladataan tietoja lisäosista. Odota..."
+
+#, fuzzy
+msgid "Downmix"
+msgstr "DTS muunnos stereoksi"
 
 #
 #, fuzzy
@@ -4227,6 +4273,9 @@ msgstr ""
 msgid "HDMI HDR Type"
 msgstr ""
 
+msgid "HDMI audio source"
+msgstr ""
+
 msgid "HDMI-CEC Source Active"
 msgstr ""
 
@@ -4239,8 +4288,16 @@ msgstr ""
 msgid "HDR10"
 msgstr ""
 
+#, fuzzy
+msgid "HDR10 support"
+msgstr "ei tuettu"
+
 msgid "HLG"
 msgstr ""
+
+#, fuzzy
+msgid "HLG support"
+msgstr "ei tuettu"
 
 #
 #, fuzzy
@@ -4521,6 +4578,11 @@ msgstr "Käyttämättömyysajastin"
 
 msgid "Include AIT in http streams"
 msgstr "Sisällytä AIT http-streameihin"
+
+#
+#, fuzzy
+msgid "Include CI assignment"
+msgstr "CI-määritys"
 
 msgid "Include ECM in http streams"
 msgstr "Sisällytä ECM http-streameihin"
@@ -5378,11 +5440,6 @@ msgstr "Tallenneluettelon asetukset"
 msgid "Movie location"
 msgstr "Tallennushakemisto"
 
-#
-#, fuzzy
-msgid "Movie manager"
-msgstr "Ohjelmapakettien hallinta"
-
 msgid "Movie selection"
 msgstr "Tallenteen valinta"
 
@@ -6035,6 +6092,9 @@ msgstr "Korvaa asetustiedostot?"
 msgid "PAL"
 msgstr "PAL"
 
+msgid "PCM"
+msgstr ""
+
 msgid "PCR PID"
 msgstr "PCR PID"
 
@@ -6120,6 +6180,9 @@ msgstr "Lapsilukon kanavaeditori"
 #
 msgid "Parental control setup"
 msgstr "Lapsilukon asetukset"
+
+msgid "Passthrough"
+msgstr ""
 
 #
 msgid "Pause"
@@ -6690,6 +6753,11 @@ msgstr ""
 
 #
 msgid "Press OK to select a provider."
+msgstr "Valitse palveluntarjoaja painamalla OK."
+
+#
+#, fuzzy
+msgid "Press OK to select a service."
 msgstr "Valitse palveluntarjoaja painamalla OK."
 
 msgid "Press OK to select satellites"
@@ -8078,6 +8146,9 @@ msgstr ""
 #
 msgid "Services"
 msgstr "Kanavat"
+
+msgid "Set CI assignment for detection of available services."
+msgstr ""
 
 msgid "Set PIN"
 msgstr ""
@@ -9535,6 +9606,18 @@ msgstr ""
 msgid "This option allows you to enable 3D surround sound."
 msgstr ""
 
+msgid "This option allows you to enable or disable the 10 bit color mode"
+msgstr ""
+
+msgid "This option allows you to enable or disable the 12 bit color mode"
+msgstr ""
+
+msgid "This option allows you to force the HDR10 modes for UHD"
+msgstr ""
+
+msgid "This option allows you to force the HLG modes for UHD"
+msgstr ""
+
 msgid "This option allows you to hide and sort menu entries. When selecting user you can change order and hide menu items via the blue button"
 msgstr ""
 
@@ -10522,6 +10605,11 @@ msgstr "WEP"
 
 msgid "WLAN connection"
 msgstr "WLAN-yhteys"
+
+#
+#, fuzzy
+msgid "WMA pro downmix"
+msgstr "AC3 muunnos stereoksi"
 
 #
 msgid "WPA"
@@ -11539,6 +11627,23 @@ msgstr "Vahvistettu"
 msgid "connected"
 msgstr "Kytketty"
 
+msgid "controlled by HDMI"
+msgstr ""
+
+msgid "convert to AC3"
+msgstr ""
+
+msgid "convert to DTS"
+msgstr ""
+
+#, fuzzy
+msgid "convert to multi channel PCM"
+msgstr "Näytä useamman kanavan ohjelmaopas"
+
+#, fuzzy
+msgid "convert to multi-channel PCM"
+msgstr "Näytä useamman kanavan ohjelmaopas"
+
 msgid "cooking"
 msgstr "ruuanlaitto"
 
@@ -11766,6 +11871,19 @@ msgstr "kansan/perinteinen musiikki"
 
 msgid "football/soccer"
 msgstr "jalkapallo"
+
+msgid "force AC3 plus"
+msgstr ""
+
+#
+#, fuzzy
+msgid "force disabled"
+msgstr "Pois päältä"
+
+#
+#, fuzzy
+msgid "force enabled"
+msgstr "Päällä"
 
 msgid "foreign countries/expeditions"
 msgstr "ulkomaat/tutkimusmatkat"
@@ -12538,6 +12656,9 @@ msgstr ""
 #
 msgid "until standby/restart"
 msgstr "valmiustilaan/uudelleenkäynnistykseen asti"
+
+msgid "use best, controlled by HDMI"
+msgstr ""
 
 #
 msgid "user defined"
