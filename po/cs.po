@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-28 11:34+0430\n"
+"POT-Creation-Date: 2018-07-08 11:27+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi <ims21@users.sourceforge.net>\n"
@@ -800,8 +800,21 @@ msgstr "Nastavení A/V"
 msgid "AAC downmix"
 msgstr ""
 
+#
+#, fuzzy
+msgid "AAC transcoding"
+msgstr "Transkódování: "
+
+msgid "AC3"
+msgstr ""
+
 msgid "AC3 downmix"
 msgstr ""
+
+#
+#, fuzzy
+msgid "AC3 plus transcoding"
+msgstr "Transkódování: "
 
 msgid "ACQUIRING TSID/ONID"
 msgstr ""
@@ -1044,6 +1057,12 @@ msgstr "Přiřaďte číslo fyzickému LNB, který konfigurujete. Tento LNB mů�
 
 msgid "Allocate unused memory index"
 msgstr "Přidělit nepoužitou paměť"
+
+msgid "Allow 10bit"
+msgstr ""
+
+msgid "Allow 12bit"
+msgstr ""
 
 msgid "Allow quit movieplayer with exit"
 msgstr "Umožnit zavírat movieplayer pomocí Exit"
@@ -1894,6 +1913,10 @@ msgstr "Zvolte tuner"
 msgid "Choose bouquet"
 msgstr "Zvolte přehled"
 
+#, fuzzy
+msgid "Choose whether multi channel sound tracks should be convert to PCM or SPDIF."
+msgstr "Nastavuje, zda bude vícekanálový zvuk přepočítáván na stereo."
+
 msgid "Choose which tuner to configure."
 msgstr "Vyberte si, který tuner chcete nastavovat."
 
@@ -2335,6 +2358,22 @@ msgstr "Nastavuje, kde se budou v seznamu časovačů zobrazovat dokončené ča
 msgid "Configure whether (and for how long) a second infobar will be shown when OK is pressed twice. The second infobar contains additional information about the current channel."
 msgstr "Nastavuje, zda (a jak dlouho) bude zobrazován druhý infobar, jestliže je dvakrát stisknuto tlačítko OK. Druhý infobar obsahuje další informace o aktuálním kanálu."
 
+#, fuzzy
+msgid "Configure whether AAC sound tracks should be transcoded."
+msgstr "Nastavuje, zda bude vícekanálový zvuk přepočítáván na stereo."
+
+#, fuzzy
+msgid "Configure whether AC3 plus sound tracks should be transcoded to AC3."
+msgstr "Nastavuje, zda bude vícekanálový zvuk přepočítáván na stereo."
+
+#, fuzzy
+msgid "Configure whether DTS-HD channel sound tracks should be downmixed or transcoded."
+msgstr "Nastavuje, zda bude vícekanálový zvuk přepočítáván na stereo."
+
+#, fuzzy
+msgid "Configure whether WMA pro channel sound tracks should be downmixed or transcoded."
+msgstr "Nastavuje, zda bude vícekanálový zvuk přepočítáván na stereo."
+
 msgid "Configure whether multi channel PCM sound should be enabled."
 msgstr "Nastavuje, zda by měl být povolen vícekanálový PCM zvuk."
 
@@ -2633,7 +2672,13 @@ msgstr "rozšířené"
 msgid "DMM normal"
 msgstr "normální"
 
+msgid "DTS"
+msgstr ""
+
 msgid "DTS downmix"
+msgstr ""
+
+msgid "DTS-HD downmix"
 msgstr ""
 
 #
@@ -3231,6 +3276,9 @@ msgstr "Stahuje se image"
 #
 msgid "Downloading plugin information. Please wait..."
 msgstr "Stahuji informace o pluginech. Prosím, čekejte..."
+
+msgid "Downmix"
+msgstr ""
 
 #
 msgid "Drop unconfigured satellites"
@@ -4338,6 +4386,10 @@ msgstr "Barevný prostor HDMI"
 msgid "HDMI HDR Type"
 msgstr "HDMI HDR typ"
 
+#, fuzzy
+msgid "HDMI audio source"
+msgstr "Barevný prostor HDMI"
+
 #
 msgid "HDMI-CEC Source Active"
 msgstr ""
@@ -4352,8 +4404,16 @@ msgstr "Nastavení HDMI-CEC"
 msgid "HDR10"
 msgstr ""
 
+#, fuzzy
+msgid "HDR10 support"
+msgstr "nepodporováno"
+
 msgid "HLG"
 msgstr ""
+
+#, fuzzy
+msgid "HLG support"
+msgstr "nepodporováno"
 
 #
 msgid "Haiti"
@@ -4633,6 +4693,11 @@ msgstr "Časovač neaktivity"
 #
 msgid "Include AIT in http streams"
 msgstr "Včetně AIT v http streamech"
+
+#
+#, fuzzy
+msgid "Include CI assignment"
+msgstr "CI přiřazení"
 
 #
 msgid "Include ECM in http streams"
@@ -5515,9 +5580,6 @@ msgstr "Nastavení seznamu filmů"
 msgid "Movie location"
 msgstr "Umístění souboru"
 
-msgid "Movie manager"
-msgstr "Správce souborů"
-
 msgid "Movie selection"
 msgstr "Výběr filmů"
 
@@ -6170,6 +6232,9 @@ msgstr "Přepsat konfigurační soubory?"
 msgid "PAL"
 msgstr "PAL"
 
+msgid "PCM"
+msgstr ""
+
 msgid "PCR PID"
 msgstr ""
 
@@ -6255,6 +6320,9 @@ msgstr "Nastavení rodičovského zámku"
 #
 msgid "Parental control setup"
 msgstr "Nastavení rodičovského zámku"
+
+msgid "Passthrough"
+msgstr ""
 
 #
 msgid "Pause"
@@ -6834,6 +6902,11 @@ msgstr "Stiskněte OK k vybrání skupiny satelitů pro konfiguraci v jednom blo
 
 #
 msgid "Press OK to select a provider."
+msgstr "Stiskněte OK k vybrání poskytovatele."
+
+#
+#, fuzzy
+msgid "Press OK to select a service."
 msgstr "Stiskněte OK k vybrání poskytovatele."
 
 #
@@ -8229,6 +8302,9 @@ msgstr "Název programu"
 #
 msgid "Services"
 msgstr "Programy"
+
+msgid "Set CI assignment for detection of available services."
+msgstr ""
 
 msgid "Set PIN"
 msgstr "Zadat PIN"
@@ -9727,6 +9803,22 @@ msgstr "Povoluje 3D surround softlimiter."
 msgid "This option allows you to enable 3D surround sound."
 msgstr "Povoluje 3D surround zvuk."
 
+#, fuzzy
+msgid "This option allows you to enable or disable the 10 bit color mode"
+msgstr "Umožňuje zakázat nebo změnit polohu virtuálního reproduktoru."
+
+#, fuzzy
+msgid "This option allows you to enable or disable the 12 bit color mode"
+msgstr "Umožňuje zakázat nebo změnit polohu virtuálního reproduktoru."
+
+#, fuzzy
+msgid "This option allows you to force the HDR10 modes for UHD"
+msgstr "Toto nastavení umožňuje konfigurovat barevnou hloubku pro UHD"
+
+#, fuzzy
+msgid "This option allows you to force the HLG modes for UHD"
+msgstr "Toto nastavení umožňuje konfigurovat barevnou hloubku pro UHD"
+
 msgid "This option allows you to hide and sort menu entries. When selecting user you can change order and hide menu items via the blue button"
 msgstr "Umožňuje skrýt a třídit položky menu. Při zvolení může uživatel měnit pořadí a skrýt položky menu pomocí modrého tlačítka a následně pomocí < >"
 
@@ -10715,6 +10807,9 @@ msgstr "WEP"
 
 msgid "WLAN connection"
 msgstr "WLAN připojení"
+
+msgid "WMA pro downmix"
+msgstr ""
 
 #
 msgid "WPA"
@@ -11755,6 +11850,23 @@ msgstr "potvrzeno"
 msgid "connected"
 msgstr "připojeno"
 
+msgid "controlled by HDMI"
+msgstr ""
+
+msgid "convert to AC3"
+msgstr ""
+
+msgid "convert to DTS"
+msgstr ""
+
+#, fuzzy
+msgid "convert to multi channel PCM"
+msgstr "Zobrazovat vícekanálovou EPG"
+
+#, fuzzy
+msgid "convert to multi-channel PCM"
+msgstr "Zobrazovat vícekanálovou EPG"
+
 msgid "cooking"
 msgstr "vaření"
 
@@ -11987,6 +12099,19 @@ msgstr "folk/tradiční hudba"
 
 msgid "football/soccer"
 msgstr "fotbal"
+
+msgid "force AC3 plus"
+msgstr ""
+
+#
+#, fuzzy
+msgid "force disabled"
+msgstr "Zakázáno"
+
+#
+#, fuzzy
+msgid "force enabled"
+msgstr "Povoleno"
 
 msgid "foreign countries/expeditions"
 msgstr "cizí země/expedice"
@@ -12770,6 +12895,9 @@ msgstr "netestovatelné"
 #
 msgid "until standby/restart"
 msgstr "do standby/restartu"
+
+msgid "use best, controlled by HDMI"
+msgstr ""
 
 #
 msgid "user defined"

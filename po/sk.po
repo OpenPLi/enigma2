@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-28 11:34+0430\n"
+"POT-Creation-Date: 2018-07-08 11:27+0430\n"
 "PO-Revision-Date: 2018-06-01 09:50+0200\n"
 "Last-Translator: Andrej Tobola <andrej.tobola@gmail.com>\n"
 "Language-Team: \n"
@@ -725,8 +725,20 @@ msgstr "Nastavenie A/V"
 msgid "AAC downmix"
 msgstr "AAC downmix"
 
+#, fuzzy
+msgid "AAC transcoding"
+msgstr "Transkódovanie: "
+
+#, fuzzy
+msgid "AC3"
+msgstr "DAC"
+
 msgid "AC3 downmix"
 msgstr "AC3 downmix"
+
+#, fuzzy
+msgid "AC3 plus transcoding"
+msgstr "Transkódovanie: "
 
 msgid "ACQUIRING TSID/ONID"
 msgstr "ZÍSKANIE TSID / ONID"
@@ -925,6 +937,14 @@ msgstr "Pridelte číslo k fyzickému LNB ktorý konfigurujete. Budete tak môc�
 
 msgid "Allocate unused memory index"
 msgstr "Prideliť nepoužívanú pamät"
+
+#, fuzzy
+msgid "Allow 10bit"
+msgstr "10bit"
+
+#, fuzzy
+msgid "Allow 12bit"
+msgstr "12bit"
 
 msgid "Allow quit movieplayer with exit"
 msgstr "Povoliť ukončenie prehrávača filmov stlačením tlačidla Exit"
@@ -1671,6 +1691,10 @@ msgstr "Zvoľte tuner"
 msgid "Choose bouquet"
 msgstr "Zvoľte prehľad"
 
+#, fuzzy
+msgid "Choose whether multi channel sound tracks should be convert to PCM or SPDIF."
+msgstr "Vyberte, či sa má multi kanálový zvuk zmiešavať do sterea (downmix)."
+
 msgid "Choose which tuner to configure."
 msgstr "Zvoľte, ktorý tuner chcete konfigurovať."
 
@@ -2068,6 +2092,22 @@ msgstr "Nastaviť, kde v zozname časovačov sa majú zobraziť ukončené časo
 msgid "Configure whether (and for how long) a second infobar will be shown when OK is pressed twice. The second infobar contains additional information about the current channel."
 msgstr "Konfigurovať, či (a ako dlho) sa zobrazí druhý informačný panel, keď stlačíte OK dvakrát. Druhý informačný panel obsahuje ďalšie informácie o aktuálnom kanáli."
 
+#, fuzzy
+msgid "Configure whether AAC sound tracks should be transcoded."
+msgstr "Vyberte, či sa má multi kanálový zvuk zmiešavať do sterea (downmix)."
+
+#, fuzzy
+msgid "Configure whether AC3 plus sound tracks should be transcoded to AC3."
+msgstr "Vyberte, či sa má multi kanálový zvuk zmiešavať do sterea (downmix)."
+
+#, fuzzy
+msgid "Configure whether DTS-HD channel sound tracks should be downmixed or transcoded."
+msgstr "Vyberte, či sa má multi kanálový zvuk zmiešavať do sterea (downmix)."
+
+#, fuzzy
+msgid "Configure whether WMA pro channel sound tracks should be downmixed or transcoded."
+msgstr "Vyberte, či sa má multi kanálový zvuk zmiešavať do sterea (downmix)."
+
 msgid "Configure whether multi channel PCM sound should be enabled."
 msgstr "Nastavenie povolenia viac kanálového PCM zvuku."
 
@@ -2325,7 +2365,14 @@ msgstr "Rozšírené DMM"
 msgid "DMM normal"
 msgstr "Normálne DMM"
 
+msgid "DTS"
+msgstr ""
+
 msgid "DTS downmix"
+msgstr "DTS downmix"
+
+#, fuzzy
+msgid "DTS-HD downmix"
 msgstr "DTS downmix"
 
 msgid "DUAL LAYER DVD"
@@ -2826,6 +2873,10 @@ msgstr "Sťahuje sa image"
 
 msgid "Downloading plugin information. Please wait..."
 msgstr "Sťahujem informácie o doplnkoch. Prosím čakajte..."
+
+#, fuzzy
+msgid "Downmix"
+msgstr "DTS downmix"
 
 msgid "Drop unconfigured satellites"
 msgstr "Zrusiť nenakonfigurované satelity"
@@ -3809,6 +3860,10 @@ msgstr "Farebný výstup HDMI"
 msgid "HDMI HDR Type"
 msgstr "Typ HDMI HDR"
 
+#, fuzzy
+msgid "HDMI audio source"
+msgstr "Farebný výstup HDMI"
+
 msgid "HDMI-CEC Source Active"
 msgstr "Zdroj HDMI-CEC aktívny"
 
@@ -3821,8 +3876,16 @@ msgstr "Nastavenie HDMI-CEC"
 msgid "HDR10"
 msgstr "HDR10"
 
+#, fuzzy
+msgid "HDR10 support"
+msgstr "nepodporované"
+
 msgid "HLG"
 msgstr "HLG (Hybrid Log-Gamma)"
+
+#, fuzzy
+msgid "HLG support"
+msgstr "nepodporované"
 
 msgid "Haiti"
 msgstr "Haiti"
@@ -4074,6 +4137,10 @@ msgstr "Časovač nekativity"
 
 msgid "Include AIT in http streams"
 msgstr "Zahrnúť AIT (HbbTV) do http streamov"
+
+#, fuzzy
+msgid "Include CI assignment"
+msgstr "Priradenie CI"
 
 msgid "Include ECM in http streams"
 msgstr "Zahrnúť ECM do http streamov"
@@ -4823,9 +4890,6 @@ msgstr "Konfigurácia zoznamu filmov"
 msgid "Movie location"
 msgstr "Umiestenie filmu"
 
-msgid "Movie manager"
-msgstr "Manažér filmov"
-
 msgid "Movie selection"
 msgstr "Výber filmu"
 
@@ -5382,6 +5446,10 @@ msgstr "Prepísať konfiguračné súbory?"
 msgid "PAL"
 msgstr "PAL"
 
+#, fuzzy
+msgid "PCM"
+msgstr "PDC"
+
 msgid "PCR PID"
 msgstr "PCR PID"
 
@@ -5457,6 +5525,9 @@ msgstr "Editor staníc rodičovskej zámky"
 
 msgid "Parental control setup"
 msgstr "Nastavenie rodičovskej kontroly"
+
+msgid "Passthrough"
+msgstr ""
 
 msgid "Pause"
 msgstr "Pauza"
@@ -5931,6 +6002,10 @@ msgid "Press OK to select a group of satellites to configure in one block."
 msgstr "Stlačením OK vyberiete skupinu satelitov, ktoré chcete konfigurovať v jednom bloku."
 
 msgid "Press OK to select a provider."
+msgstr "Stlačením OK zvolíte poskytovateľa."
+
+#, fuzzy
+msgid "Press OK to select a service."
 msgstr "Stlačením OK zvolíte poskytovateľa."
 
 msgid "Press OK to select satellites"
@@ -7128,6 +7203,9 @@ msgstr "Názov služby"
 
 msgid "Services"
 msgstr "Stanice"
+
+msgid "Set CI assignment for detection of available services."
+msgstr ""
 
 msgid "Set PIN"
 msgstr "Nastaviť PIN"
@@ -8449,6 +8527,22 @@ msgstr "Táto voľba umožňuje zapnúť softvérový obmedzovač 3D priestorov�
 msgid "This option allows you to enable 3D surround sound."
 msgstr "Táto voľba umožňuje zapnúť 3D priestorový zvuk."
 
+#, fuzzy
+msgid "This option allows you to enable or disable the 10 bit color mode"
+msgstr "Táto voľba umožňuje vypnúť alebo zmeniť pozíciu virtuálneho reproduktora."
+
+#, fuzzy
+msgid "This option allows you to enable or disable the 12 bit color mode"
+msgstr "Táto voľba umožňuje vypnúť alebo zmeniť pozíciu virtuálneho reproduktora."
+
+#, fuzzy
+msgid "This option allows you to force the HDR10 modes for UHD"
+msgstr "Táto voľba umožňuje konfiguráciu farebnej hĺbky pre UltraHD"
+
+#, fuzzy
+msgid "This option allows you to force the HLG modes for UHD"
+msgstr "Táto voľba umožňuje konfiguráciu farebnej hĺbky pre UltraHD"
+
 msgid "This option allows you to hide and sort menu entries. When selecting user you can change order and hide menu items via the blue button"
 msgstr "Táto voľba umožnuje skryť a zoradiť položky menu. Ked zvolíte Užívateľsky definované, cez modré tlačidlo môžete zmeniť poradie a skryť položky menu"
 
@@ -9295,6 +9389,10 @@ msgstr "WEP"
 
 msgid "WLAN connection"
 msgstr "Pripojenie WLAN"
+
+#, fuzzy
+msgid "WMA pro downmix"
+msgstr "AAC downmix"
 
 msgid "WPA"
 msgstr "WPA"
@@ -10236,6 +10334,23 @@ msgstr "potvrdené"
 msgid "connected"
 msgstr "pripojené"
 
+msgid "controlled by HDMI"
+msgstr ""
+
+msgid "convert to AC3"
+msgstr ""
+
+msgid "convert to DTS"
+msgstr ""
+
+#, fuzzy
+msgid "convert to multi channel PCM"
+msgstr "Multikanál PCM"
+
+#, fuzzy
+msgid "convert to multi-channel PCM"
+msgstr "Multikanál PCM"
+
 msgid "cooking"
 msgstr "varenie"
 
@@ -10433,6 +10548,17 @@ msgstr "folk/tradičná hudba"
 
 msgid "football/soccer"
 msgstr "futbal"
+
+msgid "force AC3 plus"
+msgstr ""
+
+#, fuzzy
+msgid "force disabled"
+msgstr "zakázané"
+
+#, fuzzy
+msgid "force enabled"
+msgstr "zapnuté"
 
 msgid "foreign countries/expeditions"
 msgstr "zahraničné krajiny/expedície"
@@ -11095,6 +11221,9 @@ msgstr "neskúšateľné"
 
 msgid "until standby/restart"
 msgstr "do vypnutia alebo reštartu"
+
+msgid "use best, controlled by HDMI"
+msgstr ""
 
 msgid "user defined"
 msgstr "užívateľsky definované"

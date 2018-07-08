@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-28 11:34+0430\n"
+"POT-Creation-Date: 2018-07-08 11:27+0430\n"
 "PO-Revision-Date: 2018-05-27 10:28+0200\n"
 "Last-Translator: GeirJ <dummy@dummy.com>\n"
 "Language-Team: GeirJ\n"
@@ -765,8 +765,22 @@ msgstr "Lyd og bilde innstilling"
 msgid "AAC downmix"
 msgstr "AAC nedskalering"
 
+#
+#, fuzzy
+msgid "AAC transcoding"
+msgstr "Transkoding: "
+
+#, fuzzy
+msgid "AC3"
+msgstr "DAC"
+
 msgid "AC3 downmix"
 msgstr "AC3 nedskalering"
+
+#
+#, fuzzy
+msgid "AC3 plus transcoding"
+msgstr "Transkoding: "
 
 msgid "ACQUIRING TSID/ONID"
 msgstr "ANSKAFFER TSID/ONID"
@@ -995,6 +1009,14 @@ msgstr "Tildel et nummer til den fysiske LNB du stiller inn. Du vil kunne velge 
 
 msgid "Allocate unused memory index"
 msgstr "Tildel ubrukt minneregister"
+
+#, fuzzy
+msgid "Allow 10bit"
+msgstr "10bit"
+
+#, fuzzy
+msgid "Allow 12bit"
+msgstr "12bit"
 
 msgid "Allow quit movieplayer with exit"
 msgstr "Tillat stopp avspiller med exit tast"
@@ -1828,6 +1850,10 @@ msgstr "Velg tuner"
 msgid "Choose bouquet"
 msgstr "Velg kanalliste"
 
+#, fuzzy
+msgid "Choose whether multi channel sound tracks should be convert to PCM or SPDIF."
+msgstr "Velg dersom digital flerkanals lyd skal nedskaleres til stereolyd."
+
 msgid "Choose which tuner to configure."
 msgstr "Velg tuner som skal stilles inn."
 
@@ -2251,6 +2277,22 @@ msgstr "Still inn hvor fullførte timere skal vises i timer listen."
 msgid "Configure whether (and for how long) a second infobar will be shown when OK is pressed twice. The second infobar contains additional information about the current channel."
 msgstr "Still inn (hvor lenge) ekstra informasjonstekst skal vises når OK trykkes to ganger. Ekstra informasjonstekst inneholder tilleggsinformasjon for den aktuelle kanalen."
 
+#, fuzzy
+msgid "Configure whether AAC sound tracks should be transcoded."
+msgstr "Velg dersom digital flerkanals lyd skal nedskaleres til stereolyd."
+
+#, fuzzy
+msgid "Configure whether AC3 plus sound tracks should be transcoded to AC3."
+msgstr "Velg dersom digital flerkanals lyd skal nedskaleres til stereolyd."
+
+#, fuzzy
+msgid "Configure whether DTS-HD channel sound tracks should be downmixed or transcoded."
+msgstr "Velg dersom digital flerkanals lyd skal nedskaleres til stereolyd."
+
+#, fuzzy
+msgid "Configure whether WMA pro channel sound tracks should be downmixed or transcoded."
+msgstr "Velg dersom digital flerkanals lyd skal nedskaleres til stereolyd."
+
 msgid "Configure whether multi channel PCM sound should be enabled."
 msgstr "Velg dersom PCM flerkanals lyd skal brukes."
 
@@ -2537,7 +2579,14 @@ msgstr "DMM avansert"
 msgid "DMM normal"
 msgstr "DMM normal"
 
+msgid "DTS"
+msgstr ""
+
 msgid "DTS downmix"
+msgstr "DTS nedskalering"
+
+#, fuzzy
+msgid "DTS-HD downmix"
 msgstr "DTS nedskalering"
 
 #
@@ -3106,6 +3155,10 @@ msgstr "Laster ned Image"
 #
 msgid "Downloading plugin information. Please wait..."
 msgstr "Laster ned informasjon om tillegg. Vennligst vent litt..."
+
+#, fuzzy
+msgid "Downmix"
+msgstr "DTS nedskalering"
 
 msgid "Drop unconfigured satellites"
 msgstr "Fjern satellitter som ikke brukes"
@@ -4200,6 +4253,10 @@ msgstr "HDMI fargerom"
 msgid "HDMI HDR Type"
 msgstr "HDMI HDR Type"
 
+#, fuzzy
+msgid "HDMI audio source"
+msgstr "HDMI fargerom"
+
 msgid "HDMI-CEC Source Active"
 msgstr "HDMI-CEC Kilde Aktiv"
 
@@ -4212,8 +4269,16 @@ msgstr "HDMI-CEC innstilling"
 msgid "HDR10"
 msgstr "HDR10"
 
+#, fuzzy
+msgid "HDR10 support"
+msgstr "ikke støttet"
+
 msgid "HLG"
 msgstr "HLG"
+
+#, fuzzy
+msgid "HLG support"
+msgstr "ikke støttet"
 
 #
 msgid "Haiti"
@@ -4484,6 +4549,11 @@ msgstr "Inaktiv dvale timer"
 
 msgid "Include AIT in http streams"
 msgstr "Inkluder AIT i http strøm"
+
+#
+#, fuzzy
+msgid "Include CI assignment"
+msgstr "CI tildeling"
 
 msgid "Include ECM in http streams"
 msgstr "Inkluder ECM i http strøm"
@@ -5342,10 +5412,6 @@ msgstr "Opptakslistevalg"
 msgid "Movie location"
 msgstr "Opptaksmappe"
 
-#
-msgid "Movie manager"
-msgstr "Filmbehandling"
-
 msgid "Movie selection"
 msgstr "Opptaksvalg"
 
@@ -5974,6 +6040,10 @@ msgstr "Overskrive innstilte filer?"
 msgid "PAL"
 msgstr "PAL"
 
+#, fuzzy
+msgid "PCM"
+msgstr "PDC"
+
 msgid "PCR PID"
 msgstr "PCR PID"
 
@@ -6057,6 +6127,9 @@ msgstr "Foreldrekontroll og kanalinnstillinger"
 #
 msgid "Parental control setup"
 msgstr "Foreldrekontroll oppsett"
+
+msgid "Passthrough"
+msgstr ""
 
 #
 msgid "Pause"
@@ -6600,6 +6673,10 @@ msgid "Press OK to select a group of satellites to configure in one block."
 msgstr "Trykk OK for å velge en gruppe av satellitter som skal konfigureres i ett."
 
 msgid "Press OK to select a provider."
+msgstr "Trykk OK for valg av distributør ."
+
+#, fuzzy
+msgid "Press OK to select a service."
 msgstr "Trykk OK for valg av distributør ."
 
 msgid "Press OK to select satellites"
@@ -7945,6 +8022,9 @@ msgstr "Kanalnavn"
 #
 msgid "Services"
 msgstr "Kanaler"
+
+msgid "Set CI assignment for detection of available services."
+msgstr ""
 
 msgid "Set PIN"
 msgstr "Velg PIN"
@@ -9411,6 +9491,22 @@ msgstr "Med dette valget kan du velge 3D surround softlimiter."
 msgid "This option allows you to enable 3D surround sound."
 msgstr "Med dette valget kan du velge 3D surround lyd."
 
+#, fuzzy
+msgid "This option allows you to enable or disable the 10 bit color mode"
+msgstr "Med dette valget kan du slå av eller endre kunstig høyttaler ballanse."
+
+#, fuzzy
+msgid "This option allows you to enable or disable the 12 bit color mode"
+msgstr "Med dette valget kan du slå av eller endre kunstig høyttaler ballanse."
+
+#, fuzzy
+msgid "This option allows you to force the HDR10 modes for UHD"
+msgstr "Dette alternativet lar deg konfigurere fargedybde for UHD"
+
+#, fuzzy
+msgid "This option allows you to force the HLG modes for UHD"
+msgstr "Dette alternativet lar deg konfigurere fargedybde for UHD"
+
 msgid "This option allows you to hide and sort menu entries. When selecting user you can change order and hide menu items via the blue button"
 msgstr "Med dette valget kan du skjule og sortere meny linjene. Du kan skifte rekkefølge og skjule menyer med blå tasten"
 
@@ -10370,6 +10466,10 @@ msgstr "WEP"
 
 msgid "WLAN connection"
 msgstr "WLAN tilkoblet"
+
+#, fuzzy
+msgid "WMA pro downmix"
+msgstr "AAC nedskalering"
 
 #
 msgid "WPA"
@@ -11382,6 +11482,23 @@ msgstr "bekreftet"
 msgid "connected"
 msgstr "tilkoblet"
 
+msgid "controlled by HDMI"
+msgstr ""
+
+msgid "convert to AC3"
+msgstr ""
+
+msgid "convert to DTS"
+msgstr ""
+
+#, fuzzy
+msgid "convert to multi channel PCM"
+msgstr "Multikanal PCM lyd"
+
+#, fuzzy
+msgid "convert to multi-channel PCM"
+msgstr "Multikanal PCM lyd"
+
 msgid "cooking"
 msgstr "matlaging"
 
@@ -11608,6 +11725,19 @@ msgstr "folk/tradisjonell musikk"
 
 msgid "football/soccer"
 msgstr "fotball"
+
+msgid "force AC3 plus"
+msgstr ""
+
+#
+#, fuzzy
+msgid "force disabled"
+msgstr "deaktivert"
+
+#
+#, fuzzy
+msgid "force enabled"
+msgstr "aktivert"
 
 msgid "foreign countries/expeditions"
 msgstr "utland/ekspedisjoner"
@@ -12352,6 +12482,9 @@ msgstr "lar seg ikke teste"
 
 msgid "until standby/restart"
 msgstr "til slår av/starter på nytt"
+
+msgid "use best, controlled by HDMI"
+msgstr ""
 
 #
 msgid "user defined"

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-28 11:34+0430\n"
+"POT-Creation-Date: 2018-07-08 11:27+0430\n"
 "PO-Revision-Date: 2014-12-15 19:38-0000\n"
 "Last-Translator: Phenom <phenomxy@gmail.com>\n"
 "Language-Team: Muaitai <muaitai@gmail.com>\n"
@@ -763,7 +763,16 @@ msgstr "Definições A/V"
 msgid "AAC downmix"
 msgstr ""
 
+msgid "AAC transcoding"
+msgstr ""
+
+msgid "AC3"
+msgstr ""
+
 msgid "AC3 downmix"
+msgstr ""
+
+msgid "AC3 plus transcoding"
 msgstr ""
 
 msgid "ACQUIRING TSID/ONID"
@@ -1018,6 +1027,12 @@ msgstr ""
 
 msgid "Allocate unused memory index"
 msgstr "Alocar memória de índices inutilizados"
+
+msgid "Allow 10bit"
+msgstr ""
+
+msgid "Allow 12bit"
+msgstr ""
 
 msgid "Allow quit movieplayer with exit"
 msgstr "Permitir que o movieplayer desligue ao sair"
@@ -1883,6 +1898,10 @@ msgstr ""
 msgid "Choose bouquet"
 msgstr ""
 
+#, fuzzy
+msgid "Choose whether multi channel sound tracks should be convert to PCM or SPDIF."
+msgstr "Configurar se faixas som multi-canal devem ser downmixed para estéreo."
+
 msgid "Choose which tuner to configure."
 msgstr "Seleccione qual o sintonizador a configurar."
 
@@ -2339,6 +2358,22 @@ msgstr "Configurar onde agendamentos concluídos aparecem na lista."
 msgid "Configure whether (and for how long) a second infobar will be shown when OK is pressed twice. The second infobar contains additional information about the current channel."
 msgstr "Configurar se (e por quanto tempo) uma segunda barra informativa será mostrada quando OK for pressionado duas vezes. A segunda barra informativa contém informações adicionais sobre o canal actual."
 
+#, fuzzy
+msgid "Configure whether AAC sound tracks should be transcoded."
+msgstr "Configurar se faixas som multi-canal devem ser downmixed para estéreo."
+
+#, fuzzy
+msgid "Configure whether AC3 plus sound tracks should be transcoded to AC3."
+msgstr "Configurar se faixas som multi-canal devem ser downmixed para estéreo."
+
+#, fuzzy
+msgid "Configure whether DTS-HD channel sound tracks should be downmixed or transcoded."
+msgstr "Configurar se faixas som multi-canal devem ser downmixed para estéreo."
+
+#, fuzzy
+msgid "Configure whether WMA pro channel sound tracks should be downmixed or transcoded."
+msgstr "Configurar se faixas som multi-canal devem ser downmixed para estéreo."
+
 msgid "Configure whether multi channel PCM sound should be enabled."
 msgstr ""
 
@@ -2643,7 +2678,13 @@ msgstr "DMM avançado"
 msgid "DMM normal"
 msgstr "DMM normal"
 
+msgid "DTS"
+msgstr ""
+
 msgid "DTS downmix"
+msgstr ""
+
+msgid "DTS-HD downmix"
 msgstr ""
 
 #
@@ -3238,6 +3279,9 @@ msgstr "Descarregando"
 #
 msgid "Downloading plugin information. Please wait..."
 msgstr "A descarregar informações de Plugins. Por favor aguarde..."
+
+msgid "Downmix"
+msgstr ""
 
 #, fuzzy
 msgid "Drop unconfigured satellites"
@@ -4340,6 +4384,9 @@ msgstr ""
 msgid "HDMI HDR Type"
 msgstr ""
 
+msgid "HDMI audio source"
+msgstr ""
+
 #, fuzzy
 msgid "HDMI-CEC Source Active"
 msgstr "Configurações HDMI-CEC"
@@ -4353,8 +4400,16 @@ msgstr "Configurações HDMI-CEC"
 msgid "HDR10"
 msgstr ""
 
+#, fuzzy
+msgid "HDR10 support"
+msgstr "não suportado"
+
 msgid "HLG"
 msgstr ""
+
+#, fuzzy
+msgid "HLG support"
+msgstr "não suportado"
 
 #
 #, fuzzy
@@ -4636,6 +4691,11 @@ msgstr "Inactividade do temporizador"
 
 msgid "Include AIT in http streams"
 msgstr "Incluir AIT nos Streams HTTP"
+
+#
+#, fuzzy
+msgid "Include CI assignment"
+msgstr "Escolha de CI"
 
 msgid "Include ECM in http streams"
 msgstr "Incluir ECM nos Streams HTTP"
@@ -5548,11 +5608,6 @@ msgstr "Configuração da Lista de Vídeos"
 msgid "Movie location"
 msgstr "Localização das gravações"
 
-#
-#, fuzzy
-msgid "Movie manager"
-msgstr "Gestor de Pacotes"
-
 #, fuzzy
 msgid "Movie selection"
 msgstr "Selecção de gravação"
@@ -6213,6 +6268,9 @@ msgstr "Substituir os ficheiros de configuração?"
 msgid "PAL"
 msgstr "PAL"
 
+msgid "PCM"
+msgstr ""
+
 msgid "PCR PID"
 msgstr "PCR PID"
 
@@ -6303,6 +6361,9 @@ msgstr "Editor de canais de controlo parental"
 #
 msgid "Parental control setup"
 msgstr "Definições de controle parental"
+
+msgid "Passthrough"
+msgstr ""
 
 #
 #, fuzzy
@@ -6895,6 +6956,11 @@ msgstr "Prima OK para seleccionar satélites."
 #
 #, fuzzy
 msgid "Press OK to select a provider."
+msgstr "Prima OK para selecionar um operador."
+
+#
+#, fuzzy
+msgid "Press OK to select a service."
 msgstr "Prima OK para selecionar um operador."
 
 msgid "Press OK to select satellites"
@@ -8331,6 +8397,9 @@ msgstr ""
 #
 msgid "Services"
 msgstr "Canais"
+
+msgid "Set CI assignment for detection of available services."
+msgstr ""
 
 msgid "Set PIN"
 msgstr ""
@@ -9860,6 +9929,18 @@ msgstr ""
 msgid "This option allows you to enable 3D surround sound."
 msgstr ""
 
+msgid "This option allows you to enable or disable the 10 bit color mode"
+msgstr ""
+
+msgid "This option allows you to enable or disable the 12 bit color mode"
+msgstr ""
+
+msgid "This option allows you to force the HDR10 modes for UHD"
+msgstr ""
+
+msgid "This option allows you to force the HLG modes for UHD"
+msgstr ""
+
 msgid "This option allows you to hide and sort menu entries. When selecting user you can change order and hide menu items via the blue button"
 msgstr ""
 
@@ -10881,6 +10962,9 @@ msgstr "WEP"
 
 msgid "WLAN connection"
 msgstr "Ligação de rede sem fios"
+
+msgid "WMA pro downmix"
+msgstr ""
 
 #
 msgid "WPA"
@@ -11913,6 +11997,23 @@ msgstr "confimado"
 msgid "connected"
 msgstr "conectado"
 
+msgid "controlled by HDMI"
+msgstr ""
+
+msgid "convert to AC3"
+msgstr ""
+
+msgid "convert to DTS"
+msgstr ""
+
+#, fuzzy
+msgid "convert to multi channel PCM"
+msgstr "Mostrar Guia de Programação Múltiplo canal"
+
+#, fuzzy
+msgid "convert to multi-channel PCM"
+msgstr "Mostrar Guia de Programação Múltiplo canal"
+
 msgid "cooking"
 msgstr "cozinhar"
 
@@ -12143,6 +12244,19 @@ msgstr "música folclórica/tradicional"
 
 msgid "football/soccer"
 msgstr "futebol"
+
+msgid "force AC3 plus"
+msgstr ""
+
+#
+#, fuzzy
+msgid "force disabled"
+msgstr "desactivar"
+
+#
+#, fuzzy
+msgid "force enabled"
+msgstr "activo"
 
 msgid "foreign countries/expeditions"
 msgstr "países estrangeiros/expedições"
@@ -12914,6 +13028,9 @@ msgstr ""
 #
 msgid "until standby/restart"
 msgstr "até Standby/reiniciar"
+
+msgid "use best, controlled by HDMI"
+msgstr ""
 
 #
 msgid "user defined"

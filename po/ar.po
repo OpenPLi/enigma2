@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-28 11:34+0430\n"
+"POT-Creation-Date: 2018-07-08 11:27+0430\n"
 "PO-Revision-Date: 2010-08-20 00:08+0200\n"
 "Last-Translator: Hazem <moustafagamal@hotmail.com>\n"
 "Language-Team: Arabic <moustafagamal@hotmail.com>\n"
@@ -769,7 +769,16 @@ msgstr "إعدادات الصوت والصوره"
 msgid "AAC downmix"
 msgstr ""
 
+msgid "AAC transcoding"
+msgstr ""
+
+msgid "AC3"
+msgstr ""
+
 msgid "AC3 downmix"
+msgstr ""
+
+msgid "AC3 plus transcoding"
 msgstr ""
 
 msgid "ACQUIRING TSID/ONID"
@@ -1009,6 +1018,12 @@ msgid "Allocate a number to the physical LNB you are configuring. You will be ab
 msgstr ""
 
 msgid "Allocate unused memory index"
+msgstr ""
+
+msgid "Allow 10bit"
+msgstr ""
+
+msgid "Allow 12bit"
 msgstr ""
 
 msgid "Allow quit movieplayer with exit"
@@ -1818,6 +1833,9 @@ msgstr ""
 msgid "Choose bouquet"
 msgstr ""
 
+msgid "Choose whether multi channel sound tracks should be convert to PCM or SPDIF."
+msgstr ""
+
 msgid "Choose which tuner to configure."
 msgstr ""
 
@@ -2240,6 +2258,18 @@ msgstr ""
 msgid "Configure whether (and for how long) a second infobar will be shown when OK is pressed twice. The second infobar contains additional information about the current channel."
 msgstr ""
 
+msgid "Configure whether AAC sound tracks should be transcoded."
+msgstr ""
+
+msgid "Configure whether AC3 plus sound tracks should be transcoded to AC3."
+msgstr ""
+
+msgid "Configure whether DTS-HD channel sound tracks should be downmixed or transcoded."
+msgstr ""
+
+msgid "Configure whether WMA pro channel sound tracks should be downmixed or transcoded."
+msgstr ""
+
 msgid "Configure whether multi channel PCM sound should be enabled."
 msgstr ""
 
@@ -2511,7 +2541,13 @@ msgstr "متقدم"
 msgid "DMM normal"
 msgstr ""
 
+msgid "DTS"
+msgstr ""
+
 msgid "DTS downmix"
+msgstr ""
+
+msgid "DTS-HD downmix"
 msgstr ""
 
 msgid "DUAL LAYER DVD"
@@ -3058,6 +3094,9 @@ msgstr "جارى التحميل"
 
 msgid "Downloading plugin information. Please wait..."
 msgstr "جارى تحميل معلومات عن البلج إن. رجاء الانتظار.."
+
+msgid "Downmix"
+msgstr ""
 
 #, fuzzy
 msgid "Drop unconfigured satellites"
@@ -4106,6 +4145,9 @@ msgstr ""
 msgid "HDMI HDR Type"
 msgstr ""
 
+msgid "HDMI audio source"
+msgstr ""
+
 msgid "HDMI-CEC Source Active"
 msgstr ""
 
@@ -4118,8 +4160,15 @@ msgstr ""
 msgid "HDR10"
 msgstr ""
 
+msgid "HDR10 support"
+msgstr ""
+
 msgid "HLG"
 msgstr ""
+
+#, fuzzy
+msgid "HLG support"
+msgstr "غير مدعم"
 
 #
 #, fuzzy
@@ -4388,6 +4437,10 @@ msgstr ""
 
 msgid "Include AIT in http streams"
 msgstr ""
+
+#, fuzzy
+msgid "Include CI assignment"
+msgstr "تحديد وحدة النفاذ المشروط"
 
 msgid "Include ECM in http streams"
 msgstr ""
@@ -5256,10 +5309,6 @@ msgid "Movie location"
 msgstr "مكان الفيلم"
 
 #, fuzzy
-msgid "Movie manager"
-msgstr "المتحكم فى الحزم"
-
-#, fuzzy
 msgid "Movie selection"
 msgstr "مكان الفيلم"
 
@@ -5878,6 +5927,9 @@ msgstr "تهيئة الموالف"
 msgid "PAL"
 msgstr "بال"
 
+msgid "PCM"
+msgstr ""
+
 msgid "PCR PID"
 msgstr ""
 
@@ -5962,6 +6014,9 @@ msgstr "محرر خدمات التحكم الأبوى"
 #
 msgid "Parental control setup"
 msgstr "اعداد التحكم الابوى"
+
+msgid "Passthrough"
+msgstr ""
 
 #, fuzzy
 msgid "Pause"
@@ -6489,6 +6544,10 @@ msgstr ""
 
 #, fuzzy
 msgid "Press OK to select a provider."
+msgstr "أضغط موافق لتختار مزود"
+
+#, fuzzy
+msgid "Press OK to select a service."
 msgstr "أضغط موافق لتختار مزود"
 
 msgid "Press OK to select satellites"
@@ -7815,6 +7874,9 @@ msgstr ""
 #
 msgid "Services"
 msgstr "القنوات/الخدمات"
+
+msgid "Set CI assignment for detection of available services."
+msgstr ""
 
 msgid "Set PIN"
 msgstr ""
@@ -9268,6 +9330,18 @@ msgstr ""
 msgid "This option allows you to enable 3D surround sound."
 msgstr ""
 
+msgid "This option allows you to enable or disable the 10 bit color mode"
+msgstr ""
+
+msgid "This option allows you to enable or disable the 12 bit color mode"
+msgstr ""
+
+msgid "This option allows you to force the HDR10 modes for UHD"
+msgstr ""
+
+msgid "This option allows you to force the HLG modes for UHD"
+msgstr ""
+
 msgid "This option allows you to hide and sort menu entries. When selecting user you can change order and hide menu items via the blue button"
 msgstr ""
 
@@ -10217,6 +10291,9 @@ msgstr ""
 msgid "WLAN connection"
 msgstr "إتصال شبكه واسعه"
 
+msgid "WMA pro downmix"
+msgstr ""
+
 #
 msgid "WPA"
 msgstr "WPA"
@@ -11153,6 +11230,21 @@ msgstr "تم التأكيد"
 msgid "connected"
 msgstr "تم الاتصال"
 
+msgid "controlled by HDMI"
+msgstr ""
+
+msgid "convert to AC3"
+msgstr ""
+
+msgid "convert to DTS"
+msgstr ""
+
+msgid "convert to multi channel PCM"
+msgstr ""
+
+msgid "convert to multi-channel PCM"
+msgstr ""
+
 msgid "cooking"
 msgstr ""
 
@@ -11361,6 +11453,17 @@ msgstr ""
 
 msgid "football/soccer"
 msgstr ""
+
+msgid "force AC3 plus"
+msgstr ""
+
+#, fuzzy
+msgid "force disabled"
+msgstr "تم التعطيل"
+
+#, fuzzy
+msgid "force enabled"
+msgstr "تم النفعيل"
 
 msgid "foreign countries/expeditions"
 msgstr ""
@@ -12063,6 +12166,9 @@ msgstr ""
 #
 msgid "until standby/restart"
 msgstr "حتى وضع الانتظار/إعادة التشغيل"
+
+msgid "use best, controlled by HDMI"
+msgstr ""
 
 #
 msgid "user defined"

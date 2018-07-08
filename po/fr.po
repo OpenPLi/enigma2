@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-21 19:36+0200\n"
+"POT-Creation-Date: 2018-07-08 11:27+0430\n"
 "PO-Revision-Date: 2018-06-21 19:38+0200\n"
 "Last-Translator: Pr2\n"
 "Language-Team: french\n"
@@ -714,8 +714,20 @@ msgstr "Paramètres A/V"
 msgid "AAC downmix"
 msgstr "Downmix AAC"
 
+#, fuzzy
+msgid "AAC transcoding"
+msgstr "Transcodage: "
+
+#, fuzzy
+msgid "AC3"
+msgstr "DAC"
+
 msgid "AC3 downmix"
 msgstr "Downmix AC3"
+
+#, fuzzy
+msgid "AC3 plus transcoding"
+msgstr "Transcodage: "
 
 msgid "ACQUIRING TSID/ONID"
 msgstr "ACQUISITION DE TSID/ONID"
@@ -914,6 +926,14 @@ msgstr "Alloue un numéro au LNB physique que vous configurez. Vous serez capabl
 
 msgid "Allocate unused memory index"
 msgstr "Allouer indice de la mémoire inutilisée"
+
+#, fuzzy
+msgid "Allow 10bit"
+msgstr "10bit"
+
+#, fuzzy
+msgid "Allow 12bit"
+msgstr "12bit"
 
 msgid "Allow quit movieplayer with exit"
 msgstr "Autoriser de quitter Movieplayer avec la touche EXIT"
@@ -1660,6 +1680,10 @@ msgstr "Choisir tuner"
 msgid "Choose bouquet"
 msgstr "Choisir le bouquet"
 
+#, fuzzy
+msgid "Choose whether multi channel sound tracks should be convert to PCM or SPDIF."
+msgstr "Configure si plusieurs pistes sonores doivent être remixées en stéréo."
+
 msgid "Choose which tuner to configure."
 msgstr "Choisissez le tuner à configurer."
 
@@ -2057,6 +2081,22 @@ msgstr "Configure comment les programmations terminées apparaissent dans la lis
 msgid "Configure whether (and for how long) a second infobar will be shown when OK is pressed twice. The second infobar contains additional information about the current channel."
 msgstr "Configure si (et pour combien de temps) une deuxième barre d'informations s'affiche lorsque vous appuyez sur OK à deux reprises. La seconde barre contient des informations supplémentaires sur la chaîne actuelle."
 
+#, fuzzy
+msgid "Configure whether AAC sound tracks should be transcoded."
+msgstr "Configure si plusieurs pistes sonores doivent être remixées en stéréo."
+
+#, fuzzy
+msgid "Configure whether AC3 plus sound tracks should be transcoded to AC3."
+msgstr "Configure si plusieurs pistes sonores doivent être remixées en stéréo."
+
+#, fuzzy
+msgid "Configure whether DTS-HD channel sound tracks should be downmixed or transcoded."
+msgstr "Configure si plusieurs pistes sonores doivent être remixées en stéréo."
+
+#, fuzzy
+msgid "Configure whether WMA pro channel sound tracks should be downmixed or transcoded."
+msgstr "Configure si plusieurs pistes sonores doivent être remixées en stéréo."
+
 msgid "Configure whether multi channel PCM sound should be enabled."
 msgstr "Configure si la piste PCM multi canaux doit être activée."
 
@@ -2314,7 +2354,14 @@ msgstr "DMM avancée"
 msgid "DMM normal"
 msgstr "DMM normal"
 
+msgid "DTS"
+msgstr ""
+
 msgid "DTS downmix"
+msgstr "Downmix DTS"
+
+#, fuzzy
+msgid "DTS-HD downmix"
 msgstr "Downmix DTS"
 
 msgid "DUAL LAYER DVD"
@@ -2814,6 +2861,10 @@ msgstr "Téléchargement de l'image"
 
 msgid "Downloading plugin information. Please wait..."
 msgstr "Téléchargement des informations sur les extensions. Patientez SVP..."
+
+#, fuzzy
+msgid "Downmix"
+msgstr "Downmix DTS"
 
 msgid "Drop unconfigured satellites"
 msgstr "Oublier les satellites non configurés"
@@ -3798,6 +3849,10 @@ msgstr "Espace colorimétrique HDMI"
 msgid "HDMI HDR Type"
 msgstr "Type HDMI HDR"
 
+#, fuzzy
+msgid "HDMI audio source"
+msgstr "Espace colorimétrique HDMI"
+
 msgid "HDMI-CEC Source Active"
 msgstr "HDMI-CEC source active"
 
@@ -3810,8 +3865,16 @@ msgstr "Configurer HDMI-CEC"
 msgid "HDR10"
 msgstr "HDR10"
 
+#, fuzzy
+msgid "HDR10 support"
+msgstr "Pas supporté"
+
 msgid "HLG"
 msgstr "HLG"
+
+#, fuzzy
+msgid "HLG support"
+msgstr "Pas supporté"
 
 msgid "Haiti"
 msgstr "Haïti"
@@ -4060,6 +4123,10 @@ msgstr "Arrêt automatique en cas d'inactivité"
 
 msgid "Include AIT in http streams"
 msgstr "Inclure AIT dans les flux HTTP"
+
+#, fuzzy
+msgid "Include CI assignment"
+msgstr "Assignation CI"
 
 msgid "Include ECM in http streams"
 msgstr "Inclure ECM dans les flux HTTP"
@@ -5364,6 +5431,10 @@ msgstr "Ecraser les fichiers de configuration?"
 msgid "PAL"
 msgstr "PAL"
 
+#, fuzzy
+msgid "PCM"
+msgstr "PDC"
+
 msgid "PCR PID"
 msgstr "PID PCR"
 
@@ -5439,6 +5510,9 @@ msgstr "Éditeur des services avec contrôle parental"
 
 msgid "Parental control setup"
 msgstr "Paramètres du contrôle parental"
+
+msgid "Passthrough"
+msgstr ""
 
 msgid "Pause"
 msgstr "Pause"
@@ -5913,6 +5987,10 @@ msgid "Press OK to select a group of satellites to configure in one block."
 msgstr "Appuyez sur OK pour sélectionner un groupe de satellites à configurer en un bloc."
 
 msgid "Press OK to select a provider."
+msgstr "Appuyez sur OK pour sélectionner un opérateur."
+
+#, fuzzy
+msgid "Press OK to select a service."
 msgstr "Appuyez sur OK pour sélectionner un opérateur."
 
 msgid "Press OK to select satellites"
@@ -7109,6 +7187,9 @@ msgstr "Nom du service"
 
 msgid "Services"
 msgstr "Services"
+
+msgid "Set CI assignment for detection of available services."
+msgstr ""
 
 msgid "Set PIN"
 msgstr "Définir le PIN"
@@ -8431,6 +8512,22 @@ msgstr "Cette option vous permet d’activer le limiteur doux du 3D surround."
 msgid "This option allows you to enable 3D surround sound."
 msgstr "Cette option vous permet d’activer le son 3D surround."
 
+#, fuzzy
+msgid "This option allows you to enable or disable the 10 bit color mode"
+msgstr "Cette option vous permet de désactiver ou modifier la position des haut-parleurs virtuels."
+
+#, fuzzy
+msgid "This option allows you to enable or disable the 12 bit color mode"
+msgstr "Cette option vous permet de désactiver ou modifier la position des haut-parleurs virtuels."
+
+#, fuzzy
+msgid "This option allows you to force the HDR10 modes for UHD"
+msgstr "Cette option vous permet de configurer la profondeur des couleurs pour UHD"
+
+#, fuzzy
+msgid "This option allows you to force the HLG modes for UHD"
+msgstr "Cette option vous permet de configurer la profondeur des couleurs pour UHD"
+
 msgid "This option allows you to hide and sort menu entries. When selecting user you can change order and hide menu items via the blue button"
 msgstr "Cette option vous permet de masquer et trier les entrées des menus. Lorsqu’il est activé vous pouvez changer l’ordre et masquer les entrées des menus via le bouton bleu."
 
@@ -9282,6 +9379,10 @@ msgstr "WEP"
 
 msgid "WLAN connection"
 msgstr "Connexion WLAN"
+
+#, fuzzy
+msgid "WMA pro downmix"
+msgstr "Downmix AAC"
 
 msgid "WPA"
 msgstr "WPA"
@@ -10223,6 +10324,23 @@ msgstr "Confirmé"
 msgid "connected"
 msgstr "Connecté"
 
+msgid "controlled by HDMI"
+msgstr ""
+
+msgid "convert to AC3"
+msgstr ""
+
+msgid "convert to DTS"
+msgstr ""
+
+#, fuzzy
+msgid "convert to multi channel PCM"
+msgstr "PCM multi-canaux"
+
+#, fuzzy
+msgid "convert to multi-channel PCM"
+msgstr "PCM multi-canaux"
+
 msgid "cooking"
 msgstr "Cuisine"
 
@@ -10420,6 +10538,17 @@ msgstr "Folk/Musique traditionnelle"
 
 msgid "football/soccer"
 msgstr "Football/Foot"
+
+msgid "force AC3 plus"
+msgstr ""
+
+#, fuzzy
+msgid "force disabled"
+msgstr "Désactivé"
+
+#, fuzzy
+msgid "force enabled"
+msgstr "Activé"
 
 msgid "foreign countries/expeditions"
 msgstr "Pays étrangers/Expéditions"
@@ -11082,6 +11211,9 @@ msgstr "non testable"
 
 msgid "until standby/restart"
 msgstr "Jusqu'à veille/redémarrage"
+
+msgid "use best, controlled by HDMI"
+msgstr ""
 
 msgid "user defined"
 msgstr "Défini par l'utilisateur"
