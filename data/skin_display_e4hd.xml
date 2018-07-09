@@ -111,7 +111,7 @@
 	</screen>
 <!-- movieplayer-->
 	<screen name="InfoBarMoviePlayerSummary" position="0,0" size="220,176">
-		<widget source="session.CurrentService" render="Label" position="0,4" size="220,96" font="FdLcD;28" halign="center" transparent="1">
+		<widget source="session.CurrentService" render="Label" position="0,4" size="220,96" font="FdLcD;28" halign="center" transparent="1" foregroundColor="#FFFF00">
 			<convert type="ServiceName">Name</convert>
 		</widget>
 		<widget source="session.CurrentService" render="Progress" position="1,110" size="218,15" borderWidth="1">
@@ -140,6 +140,24 @@
 		</widget>
 		<widget source="parent.Service" render="Label" position="20,151" size="90,24" font="FdLcD;24" halign="right" noWrap="1">
 			<convert type="MovieInfo">FileSize</convert>
+		</widget>
+		<panel name="LcdRecordPanel"/>
+		<panel name="LcdClockPanel"/>
+	</screen>
+<!-- DVD -->
+	<screen name="DVDSummary" position="fill">
+		<widget source="session.CurrentService" render="Label" position="0,4" size="220,87" font="FdLcD;25" halign="center" transparent="1" foregroundColor="#ffff00">
+			<convert type="ServiceName">Name</convert>
+		</widget>
+		<widget name="FullChapters" render="Label" position="1,91" size="218,18" font="FdLcD;16" halign="left" transparent="1" foregroundColor="#00c0ff"/>
+		<widget source="session.CurrentService" render="Progress" position="1,110" size="218,15" borderWidth="1">
+			<convert type="ServicePosition">Position</convert>
+		</widget>
+		<widget source="session.CurrentService" render="Label" position="7,128" size="113,26" font="FdLcD;23" halign="left" transparent="1" foregroundColor="#8080F0">
+			<convert type="ServicePosition">Remaining,Plus,ShowHours</convert>
+		</widget>
+		<widget source="session.CurrentService" render="Label" position="20,152" size="100,26" font="FdLcD;23" halign="left" transparent="1">
+			<convert type="ServicePosition">Position,ShowHours</convert>
 		</widget>
 		<panel name="LcdRecordPanel"/>
 		<panel name="LcdClockPanel"/>
@@ -368,19 +386,5 @@
 		</widget>
 	</screen>
 
-<!-- DVD -->
-	<screen name="DVDSummary" position="fill">
-		<widget source="session.CurrentService" render="Label" position="top" size="*,20" font="FdLcD;9"  >
-			<convert type="ServiceName">Name</convert>
-		</widget>
-		<widget source="session.CurrentService" render="Progress" position="top" size="*,3" borderWidth="1">
-			<convert type="ServicePosition">Position</convert>
-		</widget>
-		<panel position="fill">
-			<widget source="session.CurrentService" render="Label" position="left" size="33,*" font="FdLcD;9" halign="left">
-				<convert type="ServicePosition">Position</convert>
-			</widget>
-			<widget name="Chapter" position="fill" font="FdLcD;12" halign="left"/>
-		</panel>
-	</screen>
+
 </skin>
