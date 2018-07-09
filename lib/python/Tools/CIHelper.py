@@ -1,8 +1,8 @@
 from xml.etree.cElementTree import parse
-from enigma import eDVBCIInterfaces, eDVBCI_UI, eEnv, eServiceCenter, eServiceReference
-from timer import TimerEntry
+from enigma import eDVBCIInterfaces, eDVBCI_UI, eEnv, eServiceCenter, eServiceReference, getBestPlayableServiceReference
 import NavigationInstance 
 from Components.SystemInfo import SystemInfo
+from Tools.Alternatives import GetWithAlternative
 import os
 
 class CIHelper:
@@ -96,16 +96,24 @@ class CIHelper:
 						provider_services_refs.append(service)
 		return provider_services_refs
 
-	def ServiceIsAssigned(self, ref):
+	def ServiceIsAssigned(self, ref, timer_state=None):
 		self.load_ci_assignment()
-
-		if self.CI_ASSIGNMENT_SERVICES_LIST:
+		ref = self.resolveAlternate(ref, timer_state)
+		if ref and self.CI_ASSIGNMENT_SERVICES_LIST:
 			for x in self.CI_ASSIGNMENT_SERVICES_LIST:
 				if len(x) and ref in x:
 					return True
 		return False
 
-	def canMultiDescramble(self, ref):
+	def resolveAlternate(self, ref, timer_state=None):
+		if ref and timer_state is not None and ref.flags & eServiceReference.isGroup:
+			if timer_state == 2:
+				ref = getBestPlayableServiceReference(ref, eServiceReference())
+			else:
+				ref = eServiceReference(GetWithAlternative(ref.toString()))
+		return ref
+
+	def canMultiDescramble(self, ref, timer_state=None):
 		if self.CI_MULTIDESCRAMBLE is None:
 			no_ci = SystemInfo["CommonInterface"]
 			if no_ci > 0:
@@ -116,8 +124,8 @@ class CIHelper:
 						self.CI_MULTIDESCRAMBLE = True
 		elif self.CI_MULTIDESCRAMBLE == False:
 			return False
-			
-		if self.CI_ASSIGNMENT_LIST is not None and len(self.CI_ASSIGNMENT_LIST):
+		ref = self.resolveAlternate(ref, timer_state)
+		if ref and self.CI_ASSIGNMENT_LIST is not None and len(self.CI_ASSIGNMENT_LIST):
 			for x in self.CI_ASSIGNMENT_LIST:
 				if ref.toString() in x[1][0]:
 					appname = eDVBCI_UI.getInstance().getAppName(x[0])
@@ -141,9 +149,9 @@ class CIHelper:
 		if NavigationInstance.instance.getRecordings():
 			if self.ServiceIsAssigned(service):
 				for timer in NavigationInstance.instance.RecordTimer.timer_list:
-					if not timer.justplay and timer.state == TimerEntry.StateRunning and not (timer.record_ecm and not timer.descramble):
-						timerservice = timer.service_ref.ref
-						if timerservice != service:
+					if not timer.justplay and timer.isRunning() and not (timer.record_ecm and not timer.descramble):
+						timerservice = self.resolveAlternate(timer.service_ref.ref, timer.isRunning())
+						if timerservice and timerservice != service:
 							if self.ServiceIsAssigned(timerservice):
 								if self.canMultiDescramble(service):
 									for x in (4, 2, 3):
