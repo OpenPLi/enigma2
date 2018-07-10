@@ -1,6 +1,8 @@
 from Screens.Screen import Screen
 from Screens.ChannelSelection import *
 from Screens.ChoiceBox import ChoiceBox
+from Screens.Standby import TryQuitMainloop
+from Screens.MessageBox import MessageBox
 from Components.ActionMap import ActionMap
 from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText
@@ -94,10 +96,10 @@ class CIconfigMenu(Screen):
 			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
-			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
-			<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
-			<widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
-			<widget source="key_blue" render="Label" position="420,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" transparent="1" />
+			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;18" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
+			<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;18" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+			<widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" font="Regular;18" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
+			<widget source="key_blue" render="Label" position="420,0" zPosition="1" size="140,40" font="Regular;18" halign="center" valign="center" backgroundColor="#18188b" transparent="1" />
 			<widget source="CAidList_desc" render="Label" position="5,50" size="550,22" font="Regular;20"  backgroundColor="#25062748" transparent="1" />
 			<widget source="CAidList" render="Label" position="5,80" size="550,45" font="Regular;20"  backgroundColor="#25062748" transparent="1" />
 			<ePixmap pixmap="skin_default/div-h.png" position="0,125" zPosition="1" size="560,2" />
@@ -121,12 +123,13 @@ class CIconfigMenu(Screen):
 		self["ServiceList_desc"] = StaticText(_("Assigned services/provider:"))
 		self["ServiceList_info"] = StaticText()
 
-		self["actions"] = ActionMap(["ColorActions","SetupActions"],
+		self["actions"] = ActionMap(["ColorActions","SetupActions", "MenuActions"],
 			{
 				"green": self.greenPressed,
 				"red": self.redPressed,
 				"yellow": self.yellowPressed,
 				"blue": self.bluePressed,
+				"menu": self.menuPressed,
 				"cancel": self.cancel
 			}, -1)
 
@@ -171,6 +174,23 @@ class CIconfigMenu(Screen):
 	def bluePressed(self):
 		self.session.openWithCallback(self.finishedCAidSelection, CAidSelect, self.caidlist, self.selectedcaid)
 
+	def menuPressed(self):
+		if os.path.exists(self.filename):
+			self.session.openWithCallback(self.deleteXMLfile, MessageBox, _("Delete file") + " " + self.filename + "?", MessageBox.TYPE_YESNO)
+
+	def deleteXMLfile(self, answer):
+		if answer:
+			try:
+				os.remove(self.filename)
+			except:
+				print "[CI_Config_CI%d] error remove xml..." % self.ci_slot
+			else:
+				self.session.openWithCallback(self.restartGui, MessageBox, _("Restart GUI now?"), MessageBox.TYPE_YESNO)
+
+	def restartGui(self, answer):
+		if answer:
+			self.session.open(TryQuitMainloop, 3)
+
 	def cancel(self):
 		self.saveXML()
 		cihelper.load_ci_assignment(force=True)
@@ -195,15 +215,16 @@ class CIconfigMenu(Screen):
 			service_ref = ServiceReference(ref)
 			service_name = service_ref.getServiceName()
 			if find_in_list(self.servicelist, service_name, 0) == False:
-				split_ref = service_ref.ref.toString().split(":")
-				if split_ref[0] == "1":#== dvb service und nicht muell von None
-					self.servicelist.append((service_name, ConfigNothing(), 0, service_ref.ref.toString()))
+				str_service = service_ref.ref.toString()
+				split_ref = str_service.split(":")
+				if split_ref[0] == "1" and not str_service.startswith("1:134:") and "%3a//" not in str_service:
+					self.servicelist.append((service_name, ConfigNothing(), 0, str_service))
 					self["ServiceList"].l.setList(self.servicelist)
 					self.setServiceListInfo()
 
 	def finishedProviderSelection(self, *args):
 		item = len(args)
-		if item > 1: # bei nix selected kommt nur 1 arg zurueck (==None)
+		if item > 1:
 			if item > 2 and args[2] is True:
 				for ref in args[0]:
 					service_ref = ServiceReference(ref)
@@ -274,7 +295,6 @@ class CIconfigMenu(Screen):
 			return
 
 		def getValue(definitions, default):
-			ret = ""
 			Len = len(definitions)
 			return Len > 0 and definitions[Len-1].text or default
 		self.read_services = []
@@ -328,26 +348,24 @@ class easyCIconfigMenu(CIconfigMenu):
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
-			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
-			<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
-			<widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
+			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;19" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
+			<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;19" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+			<widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" font="Regular;19" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
 			<widget source="ServiceList_desc" render="Label" position="5,50" size="550,22" font="Regular;20" backgroundColor="#25062748" transparent="1"  />
 			<widget name="ServiceList" position="5,80" size="550,300" zPosition="1" scrollbarMode="showOnDemand" />
 			<widget source="ServiceList_info" render="Label" position="5,80" size="550,300" zPosition="2" font="Regular;20" backgroundColor="#25062748" transparent="1"  />
 		</screen>"""
 
 	def __init__(self, session, ci_slot="9"):
-		Screen.setTitle(self, _("CI assignment"))
-		ci = ci_slot
 		CIconfigMenu.__init__(self, session, ci_slot)
-
-		self["actions"] = ActionMap(["ColorActions","SetupActions"],
-		{
-			"green": self.greenPressed,
-			"red": self.redPressed,
-			"yellow": self.yellowPressed,
-			"cancel": self.cancel
-		})
+		self["actions"] = ActionMap(["ColorActions","SetupActions", "MenuActions"],
+			{
+				"green": self.greenPressed,
+				"red": self.redPressed,
+				"yellow": self.yellowPressed,
+				"menu": self.menuPressed,
+				"cancel": self.cancel
+			}, -1)
 
 class CAidSelect(Screen):
 	skin = """
