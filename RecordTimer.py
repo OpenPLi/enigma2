@@ -641,8 +641,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 	def log_tuner(self, level, state):
 		feinfo = self.record_service and hasattr(self.record_service, "frontendInfo") and self.record_service.frontendInfo()
 		fedata = feinfo and hasattr(feinfo, "getFrontendData") and feinfo.getFrontendData()
-		tn = fedata and fedata.get("tuner_number")
-		tuner_info = tn is not None and chr(ord('A') + tn) or "?"
+		tuner_info = fedata and "tuner_number" in fedata and chr(ord('A') + fedata.get("tuner_number")) or "(fallback) stream"
 		self.log(level, "%s recording on tuner: %s" % (state, tuner_info))
 
 	def timeChanged(self):
