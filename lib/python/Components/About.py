@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import sys, os, time
 from Tools.HardwareInfo import HardwareInfo
+from Tools.Directories import fileCheck
 
 def getVersionString():
 	return getImageVersionString()
@@ -76,6 +77,10 @@ def getCPUInfoString():
 	try:
 		cpu_count = 0
 		cpu_speed = 0
+		if HardwareInfo().get_device_model() in ("h9") and fileCheck("/proc/stb/info/chipset"):
+			f = open("/proc/stb/info/chipset", 'r')
+			processor = f.readline().strip()
+			f.close()
 		for line in open("/proc/cpuinfo").readlines():
 			line = [x.strip() for x in line.strip().split(":")]
 			if line[0] in ("system type", "model name"):
