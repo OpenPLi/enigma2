@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import sys, os, time
 from Tools.HardwareInfo import HardwareInfo
+from SystemInfo import SystemInfo
 
 def getVersionString():
 	return getImageVersionString()
@@ -76,6 +77,8 @@ def getCPUInfoString():
 	try:
 		cpu_count = 0
 		cpu_speed = 0
+		if SystemInfo["IsHiSilicon"]:
+			processor = open("/proc/stb/info/chipset").readline().strip()
 		for line in open("/proc/cpuinfo").readlines():
 			line = [x.strip() for x in line.strip().split(":")]
 			if line[0] in ("system type", "model name"):
