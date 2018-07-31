@@ -335,7 +335,7 @@ class MemoryInfoSkinParams(GUIComponent):
 					self.rows_in_column = int(value)
 			self.skinAttributes = attribs
 		return GUIComponent.applySkin(self, desktop, screen)
-
+	
 	GUI_WIDGET = eLabel
 
 class Troubleshoot(Screen):
