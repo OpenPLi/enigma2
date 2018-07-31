@@ -104,3 +104,4 @@ SystemInfo["CanDownmixAC3"] = fileExists("/proc/stb/audio/ac3_choices") and "dow
 SystemInfo["CanDownmixDTS"] = fileExists("/proc/stb/audio/dts_choices") and "downmix" in open("/proc/stb/audio/dts_choices", "r").read()
 SystemInfo["CanDownmixAAC"] = fileExists("/proc/stb/audio/aac_choices") and "downmix" in open("/proc/stb/audio/aac_choices", "r").read()
 SystemInfo["HDMIAudioSource"] = fileExists("/proc/stb/hdmi/audio_source")
+SystemInfo["IsHiSilicon"] = fileExists("/proc/stb/info/chipset") and "hi" in open("/proc/stb/info/chipset", "r").read()
