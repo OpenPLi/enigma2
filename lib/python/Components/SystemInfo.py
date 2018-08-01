@@ -1,5 +1,5 @@
 from enigma import eDVBResourceManager, Misc_Options, eDVBCIInterfaces
-from Tools.Directories import fileExists, fileCheck, pathExists
+from Tools.Directories import fileExists, fileCheck, pathExists, fileHas
 from Tools.HardwareInfo import HardwareInfo
 
 SystemInfo = {}
