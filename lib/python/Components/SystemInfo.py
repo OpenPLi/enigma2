@@ -103,4 +103,4 @@ SystemInfo["HDRSupport"] = fileExists("/proc/stb/hdmi/hlg_support_choices") and 
 SystemInfo["CanDownmixAC3"] = fileHas("/proc/stb/audio/ac3_choices", "downmix")
 SystemInfo["CanDownmixDTS"] = fileHas("/proc/stb/audio/dts_choices", "downmix")
 SystemInfo["CanDownmixAAC"] = fileHas("/proc/stb/audio/aac_choices", "downmix")
-SystemInfo["HDMIAudioSource"] = fileCheck("/proc/stb/hdmi/audio_source")
+SystemInfo["HDMIAudioSource"] = fileExists("/proc/stb/hdmi/audio_source") and fileCheck("/proc/stb/hdmi/audio_source")
