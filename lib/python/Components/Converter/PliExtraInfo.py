@@ -180,7 +180,7 @@ class PliExtraInfo(Poll, Converter, object):
 		else:
 			tmp = addspace(self.createFrequency(feraw)) + addspace(self.createPolarization(fedata))
 		return addspace(self.createTunerSystem(fedata)) + tmp + addspace(self.createSymbolRate(fedata, feraw)) + addspace(self.createFEC(fedata, feraw)) \
-			+ addspace(self.createModulation(fedata)) + addspace(self.createOrbPos(feraw))
+			+ addspace(self.createModulation(fedata)) + addspace(self.createOrbPos(feraw)) + addspace(self.createMisPls(fedata))
 
 	def createFrequency(self, feraw):
 		frequency = feraw.get("frequency")
@@ -253,6 +253,14 @@ class PliExtraInfo(Poll, Converter, object):
 
 	def createProviderName(self, info):
 		return info.getInfoString(iServiceInformation.sProvider)
+
+	def createMisPls(self, fedata):
+		tmp = ""
+		if fedata.get("is_id") > -1:
+			tmp = "MIS %d" % fedata("is_id")
+		if fedata.get("pls_code") > 0:
+			tmp = addspace(tmp) + "%s %d" % (fedata("pls_mode"), fedata("pls_code"))
+		return tmp
 
 	@cached
 	def getText(self):
