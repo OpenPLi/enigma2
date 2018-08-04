@@ -78,7 +78,7 @@ def getCPUInfoString():
 		cpu_speed = 0
 		for line in open("/proc/cpuinfo").readlines():
 			line = [x.strip() for x in line.strip().split(":")]
-			if line[0] in ("system type", "model name"):
+			if line[0] in ("system type", "model name", "Processor"):
 				processor = line[1].split()[0]
 			elif line[0] == "cpu MHz":
 				cpu_speed = "%1.0f" % float(line[1])
@@ -99,13 +99,15 @@ def getCPUInfoString():
 			temperature = open("/proc/stb/fp/temp_sensor_avs").readline().replace('\n','')
 		elif os.path.isfile('/proc/stb/power/avs'):
 			temperature = open("/proc/stb/power/avs").readline().replace('\n','')
+		elif os.path.isfile('/proc/stb/fp/temp_sensor'):
+			temperature = open("/proc/stb/fp/temp_sensor").readline().replace('\n','')
 		elif os.path.isfile("/sys/devices/virtual/thermal/thermal_zone0/temp"):
 			try:
 				temperature = int(open("/sys/devices/virtual/thermal/thermal_zone0/temp").read().strip())/1000
 			except:
 				pass
 		if temperature:
-			return "%s %s MHz (%s) %s°C" % (processor, cpu_speed, ngettext("%d core", "%d cores", cpu_count) % cpu_count, temperature)
+			return "%s %s MHz (%s) %sÂ°C" % (processor, cpu_speed, ngettext("%d core", "%d cores", cpu_count) % cpu_count, temperature)
 		return "%s %s MHz (%s)" % (processor, cpu_speed, ngettext("%d core", "%d cores", cpu_count) % cpu_count)
 	except:
 		return _("undefined")
