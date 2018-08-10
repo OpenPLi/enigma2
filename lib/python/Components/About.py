@@ -76,14 +76,16 @@ def getCPUInfoString():
 	try:
 		cpu_count = 0
 		cpu_speed = 0
+		processor = ""
 		for line in open("/proc/cpuinfo").readlines():
 			line = [x.strip() for x in line.strip().split(":")]
-			if line[0] in ("system type", "model name"):
+			if not processor and line[0] in ("system type", "model name"):
 				processor = line[1].split()[0]
-			elif line[0] == "cpu MHz":
+			elif not cpu_speed and line[0] == "cpu MHz":
 				cpu_speed = "%1.0f" % float(line[1])
 			elif line[0] == "processor":
 				cpu_count += 1
+
 		if not cpu_speed:
 			try:
 				cpu_speed = int(open("/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq").read()) / 1000
