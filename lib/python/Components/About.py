@@ -86,6 +86,9 @@ def getCPUInfoString():
 			elif line[0] == "processor":
 				cpu_count += 1
 
+		if processor.startswith("ARM") and os.path.isfile("/proc/stb/info/chipset"):
+			processor = "%s (%s)" % (open("/proc/stb/info/chipset").readline().strip().upper(), processor)
+
 		if not cpu_speed:
 			try:
 				cpu_speed = int(open("/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq").read()) / 1000
