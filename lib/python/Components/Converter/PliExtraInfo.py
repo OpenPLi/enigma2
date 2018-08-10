@@ -255,12 +255,11 @@ class PliExtraInfo(Poll, Converter, object):
 		return info.getInfoString(iServiceInformation.sProvider)
 
 	def createMisPls(self, fedata):
-		tmp = ""
 		if fedata.get("is_id") > -1:
-			tmp = "MIS %d" % fedata.get("is_id")
-		if fedata.get("pls_code") > 0:
-			tmp = addspace(tmp) + "%s %d" % (fedata.get("pls_mode"), fedata.get("pls_code"))
-		return tmp
+			return "MIS %d" % fedata.get("is_id")
+		elif fedata.get("pls_code") > 0:
+			return addspace(tmp) + "%s %d" % (fedata.get("pls_mode"), fedata.get("pls_code"))
+		return ""
 
 	@cached
 	def getText(self):
