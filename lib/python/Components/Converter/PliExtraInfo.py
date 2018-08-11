@@ -175,8 +175,8 @@ class PliExtraInfo(Poll, Converter, object):
 	def createTransponderInfo(self, fedata, feraw, info):
 		if not feraw:
 			refstr = info.getInfoString(iServiceInformation.sServiceref)
-			if "%3a//" in refstr:
-				return refstr.split(":")[-1].replace("%3a", ":")
+			if "%3a//" in refstr.lower():
+				return refstr.split(":")[-1].replace("%3a", ":").replace("%3A", ":")
 			return ""
 		elif "DVB-T" in feraw.get("tuner_type"):
 			tmp = addspace(self.createChannelNumber(fedata, feraw)) + addspace(self.createFrequency(feraw)) + addspace(self.createPolarization(fedata))
