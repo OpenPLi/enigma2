@@ -641,10 +641,11 @@ class ChannelContextMenu(Screen):
 		sel = self.csel.getCurrentSelection()
 		if sel and sel.valid() and not self.csel.entry_marked:
 			currentPlayingService = (hasattr(self.csel, "dopipzap") and self.csel.dopipzap) and self.session.pip.getCurrentService() or self.session.nav.getCurrentlyPlayingServiceOrGroup()
-			self.csel.servicelist.setCurrent(currentPlayingService, adjust=False)
-			if self.csel.getCurrentSelection() != currentPlayingService:
-				self.csel.setCurrentSelection(sel)
-			self.close()
+			if currentPlayingService:
+				self.csel.servicelist.setCurrent(currentPlayingService, adjust=False)
+				if self.csel.getCurrentSelection() != currentPlayingService:
+					self.csel.setCurrentSelection(sel)
+				self.close()
 		else:
 			return 0
 
