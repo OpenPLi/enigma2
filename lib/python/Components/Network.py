@@ -315,7 +315,7 @@ class Network:
 				name = 'Atmel'
 			elif name.startswith('iwm'):
 				name = 'Intel'
-			elif name.startswith('brcm'):
+			elif name.startswith('brcm') or name.startswith('bcm'):
 				name = 'Broadcom'
 		else:
 			name = _('Unknown')
