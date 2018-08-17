@@ -1,7 +1,7 @@
 A Guide to the VirtualKeyBoard Screen
 -------------------------------------
 
-Written by IanSav - 15-Aug-2018
+Written by IanSav - 18-Aug-2018
 
 This document explains the changes and updates to the VirtualKeyBoard of 
 Enigma2.  The code is located in:
@@ -98,6 +98,10 @@ For example in a 1280 x 720 skin:
 		<widget name="language" position="0,0" size="0,0" font="Regular;20" transparent="1" />
 	</screen>
 
+	IMPORTANT: Make sure that all the 720 "vkey_*" images are copied to 
+	the "/usr/share/enigma2/<skin>/buttons/" directory where "<skin>" is 
+	the name of the skin that you are updating.
+
 For example in a 1920 x 1080 skin:
 	<fonts>
 		<font name="DejaVuSans" filename="DejaVuSans.ttf" scale="100" />
@@ -118,6 +122,10 @@ For example in a 1920 x 1080 skin:
 		<widget name="mode" position="892,460" size="60,25" font="Regular;20" halign="right" transparent="1" valign="center" />
 		<widget name="language" position="0,0" size="0,0" font="Regular;20" transparent="1" />
 	</screen>
+
+	IMPORTANT: Make sure that all the 1080 "vkey_*" images are copied to 
+	the "/usr/share/enigma2/<skin>/buttons/" directory where "<skin>" is 
+	the name of the skin that you are updating.
 
 NOTE:
 	The most important changes for a skin is to ensure that the width of 
