@@ -30,7 +30,7 @@ class VirtualKeyBoardEntryComponent:
 	def __init__(self):
 		pass
 
-# For more information read the documentation here https://github.com/OpenPLi/enigma2/blob/develop/doc/VIRTUALKEYBOARD
+# For more information see /doc/VIRTUALKEYBOARD
 
 class VirtualKeyBoard(Screen, HelpableScreen):
 	def __init__(self, session, title=_("Virtual KeyBoard Text:"), **kwargs):
