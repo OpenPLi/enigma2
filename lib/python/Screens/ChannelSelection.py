@@ -669,8 +669,11 @@ class SelectionEventInfo:
 	def updateEventInfo(self):
 		cur = self.getCurrentSelection()
 		service = self["Service"]
-		service.newService(cur)
-		self["Event"].newEvent(service.event)
+		try:
+			service.newService(cur)
+			self["Event"].newEvent(service.event)
+		except:
+			pass
 
 class ChannelSelectionEPG(InfoBarHotkey):
 	def __init__(self):
