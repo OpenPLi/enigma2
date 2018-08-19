@@ -17,6 +17,7 @@ from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
 from Tools.LoadPixmap import LoadPixmap
 from Tools.NumericalTextInput import NumericalTextInput
 
+
 class VirtualKeyBoardList(MenuList):
 	def __init__(self, list, enableWrapAround=False):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
@@ -30,10 +31,11 @@ class VirtualKeyBoardEntryComponent:
 	def __init__(self):
 		pass
 
-# For more information see /doc/VIRTUALKEYBOARD
 
+# For more information about using VirtualKeyBoard see /doc/VIRTUALKEYBOARD
+#
 class VirtualKeyBoard(Screen, HelpableScreen):
-	def __init__(self, session, title=_("Virtual KeyBoard Text:"), **kwargs):
+	def __init__(self, session, title=_("Virtual KeyBoard Text:"), text="", maxSize=False, visible_width=False, type=Input.TEXT, currPos=0, allMarked=False):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 		prompt = title  # Title should only be used for screen titles!
@@ -349,7 +351,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 
 		self.lang = language.getLanguage()
 		self["prompt"] = Label(prompt)
-		self["text"] = Input(maxSize=False, visible_width=False, type=0, currPos=len(kwargs.get("text", "").decode("utf-8", "ignore")), allMarked=False, **kwargs)  # type=TEXT(0)
+		self["text"] = Input(text=text, maxSize=maxSize, visible_width=visible_width, type=type, currPos=len(text), allMarked=allMarked)
 		self["list"] = VirtualKeyBoardList([])
 		self["mode"] = Label(_("INS"))
 		self["locale"] = Label(_("Locale") + ": " + self.lang)
