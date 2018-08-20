@@ -235,10 +235,10 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 					[u"SHIFT", u"Y", u"X", u"C", u"V", u"B", u"N", u"M", u"?", u":", u"_", u"\u0147", u"", u"SHIFT"],
 					[u"EXIT", u"LOC", u"LEFT", u"RIGHT", u"ALL", u"CLR", u"SPACE"]
 				], [
-					[u"", u"~", u"", u"", u"", u"", u"", u"`", u"", u"", u"", u"", u"", u"BACKSPACE"],
-					[u"FIRST", u"\\", u"|", u"\u20AC", u"\u0165", u"\u0164", u"", u"", u"", u"\u00F3", u"\u00D3", u"\u00F7", u"\u00D7", u""],
-					[u"LAST", u"", u"\u0111", u"\u00D0", u"[", u"]", u"\u010F", u"\u010E", u"\u0142", u"\u0141", u"$", u"\u00DF", u"\u00A4", u"ENTER"],
-					[u"SHIFT", u"", u"#", u"&", u"@", u"{", u"}", u"", u"<", u">", u"*", u"", u"", u"SHIFT"],
+					[u"", u"~", u"\u011A", u"\u0160", u"\u010C", u"\u0158", u"\u017D", u"\u00DD", u"\u00C1", u"\u00CD", u"\u00C9", u"`", u"", u"BACKSPACE"],
+					[u"FIRST", u"\\", u"|", u"\u20AC", u"\u0165", u"\u0164", u"", u"", u"", u"\u00F3", u"\u00D3", u"\u00DA", u"\u00F7", u"\u00D7"],
+					[u"LAST", u"", u"\u0111", u"\u00D0", u"[", u"]", u"\u010F", u"\u010E", u"\u0142", u"\u0141", u"\u016E", u"$", u"\u00DF", u"ENTER"],
+					[u"SHIFT", u"", u"#", u"&", u"@", u"{", u"}", u"", u"<", u">", u"*", u"", u"\u00A4", u"SHIFT"],
 					[u"EXIT", u"LOC", u"LEFT", u"RIGHT", u"ALL", u"CLR", u"SPACE"]
 				]
 			]],
