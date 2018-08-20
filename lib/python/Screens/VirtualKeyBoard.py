@@ -375,7 +375,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		self.keyboardHeight = 0
 		self.maxKey = 0
 		self.overwrite = False
-		self.selectedKey = 0
+		self.selectedKey = None
 		self.sms = NumericalTextInput(self.smsGotChar)
 		self.smsChar = None
 		self.setLocale()
@@ -580,6 +580,8 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		for keys in self.keyList[self.shiftLevel]:
 			self.list.append(self.virtualKeyBoardEntryComponent(keys))
 		self.previousSelectedKey = None
+		if self.selectedKey is None:
+			self.selectedKey = self.keyboardWidth
 		self.markSelectedKey()
 
 	def virtualKeyBoardEntryComponent(self, keys):
