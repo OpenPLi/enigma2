@@ -776,6 +776,11 @@ class ConfigClock(ConfigSequence):
 		# Trigger change
 		self.changed()
 
+date_limits = [(1, 31), (1, 12), (1970, 2050)]
+class ConfigDate(ConfigSequence):
+	def __init__(self, default):
+		d = localtime(default)
+		ConfigSequence.__init__(self, seperator=".", limits=date_limits, default=[d.tm_mday, d.tm_mon, d.tm_year])
 
 integer_limits = (0, 9999999999)
 class ConfigInteger(ConfigSequence):
