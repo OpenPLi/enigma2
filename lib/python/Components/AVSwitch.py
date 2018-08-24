@@ -188,30 +188,6 @@ def InitAVSwitch():
 		config.av.downmix_aac = ConfigYesNo(default = True)
 		config.av.downmix_aac.addNotifier(setAACDownmix)
 
-	if SystemInfo["CanDownmixDTSHD"]:
-		def setDTSHDDownmix(configElement):
-			open("/proc/stb/audio/dtshd", "w").write(configElement.value)
-		config.av.downmix_dtshd = ConfigSelection(default = "downmix", choices = [("downmix",  _("Downmix")), ("force_dts", _("convert to DTS")), ("use_hdmi_caps",  _("controlled by HDMI")), ("multichannel",  _("convert to multi channel PCM")), ("hdmi_best",  _("use best, controlled by HDMI"))])
-		config.av.downmix_dtshd.addNotifier(setDTSHDDownmix)
-
-	if SystemInfo["CanDownmixWMApro"]:
-		def setWMAproDownmix(configElement):
-			open("/proc/stb/audio/wmapro", "w").write(configElement.value)
-		config.av.downmix_wmapro = ConfigSelection(default = "downmix", choices = [("downmix",  _("Downmix")), ("passthrough", _("Passthrough")), ("multichannel",  _("convert to multi channel PCM")), ("hdmi_best",  _("use best, controlled by HDMI"))])
-		config.av.downmix_wmapro.addNotifier(setWMAproDownmix)
-
-	if SystemInfo["CanAC3plusTranscode"]:
-		def setAC3plusTranscode(configElement):
-			open("/proc/stb/audio/ac3plus", "w").write(configElement.value)
-		config.av.transcode_ac3plus = ConfigSelection(default = "force_ac3", choices = [("use_hdmi_caps", _("controlled by HDMI")), ("force_ac3", _("convert to AC3")), ("multichannel",  _("convert to multi channel PCM")), ("hdmi_best",  _("use best, controlled by HDMI")), ("force_ddp",  _("force AC3 plus"))])
-		config.av.transcode_ac3plus.addNotifier(setAC3plusTranscode)
-
-	if SystemInfo["CanAACTranscode"]:
-		def setAACTranscode(configElement):
-			open("/proc/stb/audio/aac_transcode", "w").write(configElement.value)
-		config.av.transcode_aac = ConfigSelection(default = "off", choices = [("off", _("off")), ("ac3", _("AC3")), ("dts", _("DTS"))])
-		config.av.transcode_aac.addNotifier(setAACTranscode)
-
 	try:
 		SystemInfo["CanChangeOsdAlpha"] = open("/proc/stb/video/alpha", "r") and True or False
 	except:
