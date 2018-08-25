@@ -528,11 +528,11 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		keyList = copy.deepcopy(base)
 		keyList[0][3][11] = u"\u0105"
 		keyList[0][3][12] = u"\u0107"
-		keyList[0][-1].extend([u"\u0119", u"\u0141", u"\u0144", u"\u00F3", u"\u015B", u"\u017A", u"\u017C"])
+		keyList[0][-1].extend([u"\u0119", u"\u0142", u"\u0144", u"\u00F3", u"\u015B", u"\u017A", u"\u017C"])
 		keyList[1][2][12] = u"\u20AC"
 		keyList[1][3][11] = u"\u0104"
 		keyList[1][3][12] = u"\u0106"
-		keyList[1][-1].extend([u"\u0118", u"\u0142", u"\u0143", u"\u00D3", u"\u015A", u"\u0179", u"\u017B"])
+		keyList[1][-1].extend([u"\u0118", u"\u0141", u"\u0143", u"\u00D3", u"\u015A", u"\u0179", u"\u017B"])
 		return keyList
 
 	def swedish(self, base):
