@@ -631,7 +631,11 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		if self.selectedKey > self.maxKey:
 			self.selectedKey = self.maxKey
 		x = self.list[self.selectedKey / self.keyboardWidth][self.selectedKey % self.keyboardWidth + 1][1]
-		self.list[self.selectedKey / self.keyboardWidth].append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(self.key_sel.size().width(), self.height), png=self.key_sel))
+		if self.key_sel is None:
+			width = self.width
+		else:
+			width = self.key_sel.size().width()
+		self.list[self.selectedKey / self.keyboardWidth].append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(width, self.height), png=self.key_sel))
 		self.previousSelectedKey = self.selectedKey
 		self["list"].setList(self.list)
 
