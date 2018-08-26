@@ -454,14 +454,15 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		keyList = copy.deepcopy(base)
 		keyList[0][1][11] = u"\u00FC"
 		keyList[0][1][12] = u"\u00F5"
-		keyList[0][1][13] = u"\\"
+		keyList[0][1][13] = u"\u0161"
 		keyList[0][3][12] = u"\u017E"
-		keyList[0][4].extend([u"[", u"]"])
+		keyList[0][4].extend([u"[", u"]", u"\\"])
 		keyList[1][1][11] = u"\u00DC"
 		keyList[1][1][12] = u"\u00D5"
-		keyList[1][1][13] = u""
+		keyList[1][1][13] = u"\u0160"
 		keyList[1][3][12] = u"\u017D"
 		keyList[1][4].extend([u"{", u"}", u"\u00A3", u"$", u"\u20AC"])
+		del keyList[2]
 		return keyList
 
 	def finnish(self, base):
