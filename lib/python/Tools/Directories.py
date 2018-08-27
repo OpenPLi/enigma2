@@ -68,9 +68,17 @@ def resolveFilename(scope, base = "", path_prefix = None):
 				if pathExists(tmpfile):
 					path = tmp+config.skin.primary_skin.value[:pos+1]
 				else:
-					path = tmp
+					if 'skin_default' not in tmp:
+						path = tmp + 'skin_default/'
+					else:
+						path = tmp
 			else:
-				path = tmp
+				if pathExists(tmp + base):
+					path = tmp
+				elif 'skin_default' not in tmp:
+					path = tmp + 'skin_default/'
+				else:
+					path = tmp
 
 	elif scope == SCOPE_CURRENT_PLUGIN:
 		tmp = defaultPaths[SCOPE_PLUGINS]
