@@ -300,9 +300,13 @@ class AttributeParser:
 		else:
 			self.guiObject.resize(parseSize(value, self.scaleTuple, self.guiObject, self.desktop))
 	def title(self, value):
-		self.guiObject.setTitle(_(value))
+		if value and value != "":
+			value = _(value)
+		self.guiObject.setTitle(value)
 	def text(self, value):
-		self.guiObject.setText(_(value))
+		if value and value != "":
+			value = _(value)
+		self.guiObject.setText(value)
 	def font(self, value):
 		self.guiObject.setFont(parseFont(value, self.scaleTuple))
 	def zPosition(self, value):
