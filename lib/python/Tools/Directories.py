@@ -127,7 +127,7 @@ def defaultRecordingLocation(candidate=None):
 		return candidate
 	# First, try whatever /hdd points to, or /media/hdd
 	try:
-		path = os.readlink('/hdd')
+		path = os.path.realpath("/hdd")
 	except:
 		path = '/media/hdd'
 	if not os.path.exists(path):
