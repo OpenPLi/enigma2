@@ -571,7 +571,7 @@ static void svg_load(Cfilepara* filepara, bool forceRGB = false)
 	nsvgDeleteRasterizer(rast);
 	nsvgDelete(image);
 
-	if(forceRGB) // convert 32bit RGBA to 32bit RGB
+	if(forceRGB) // convert 32bit RGBA to 24bit RGB
 	{
 		unsigned char *pic_buffer2 = (unsigned char*)malloc(w*h*3); // 24bit RGB
 		if (pic_buffer2 == nullptr)
