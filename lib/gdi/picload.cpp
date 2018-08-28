@@ -522,37 +522,72 @@ inline void m_rend_gif_decodecolormap(unsigned char *cmb, unsigned char *rgbb, C
 	}
 }
 
-static void svg_load(Cfilepara* filepara)
+static void svg_load(Cfilepara* filepara, bool forceRGB = false)
 {
 	NSVGimage *image = nullptr;
 	NSVGrasterizer *rast = nullptr;
 	unsigned char *pic_buffer = nullptr;
 	int w = 0;
 	int h = 0;
-	double scale = 1.0;
+	double xscale, yscale, scale;
 
 	image = nsvgParseFromFile(filepara->file, "px", 96.0f);
 	if (image == nullptr)
 	{
-		goto error;
+		return;
 	}
-	w = (int)image->width;
-	h = (int)image->height;
+
 	rast = nsvgCreateRasterizer();
 	if (rast == nullptr)
 	{
-		goto error;
+		nsvgDelete(image);
+		return;
 	}
+
+	xscale = ((double) filepara->max_x) / image->width;
+	yscale = ((double) filepara->max_y) / image->height;
+	scale =  xscale > yscale ? yscale : xscale;
+
+	w = image->width*scale;
+	h = image->height*scale;
+
 	pic_buffer = (unsigned char*)malloc(w*h*4);
+	if (pic_buffer == nullptr)
+	{
+		nsvgDeleteRasterizer(rast);
+		nsvgDelete(image);
+		return;
+	}
+
+	eDebug("[ePicLoad] svg_load max %dx%d from %dx%d scale %f new %dx%d", filepara->max_x, filepara->max_y, (int)image->width, (int)image->height, scale, w, h);
 	// Rasterizes SVG image, returns RGBA image (non-premultiplied alpha)
-	nsvgRasterize(rast, image, 0, 0, scale, pic_buffer, w, h, w*scale*4);
+	nsvgRasterize(rast, image, 0, 0, scale, pic_buffer, w, h, w*4);
+
 	filepara->pic_buffer = pic_buffer;
 	filepara->bits = 32;
 	filepara->ox = w;
 	filepara->oy = h;
-error:
+
 	nsvgDeleteRasterizer(rast);
 	nsvgDelete(image);
+
+	if(forceRGB) // convert 32bit RGBA to 32bit RGB
+	{
+		unsigned char *pic_buffer2 = (unsigned char*)malloc(w*h*3); // 24bit RGB
+		if (pic_buffer2 == nullptr)
+		{
+			return;
+		}
+		for (size_t i=0; i<w*h; i++)
+		{
+			pic_buffer2[3*i]   = pic_buffer[4*i];
+			pic_buffer2[3*i+1] = pic_buffer[4*i+1];
+			pic_buffer2[3*i+2] = pic_buffer[4*i+2];
+		}
+		filepara->bits = 24;
+		filepara->pic_buffer = pic_buffer2;
+		free(pic_buffer);
+	}
 }
 
 static void gif_load(Cfilepara* filepara, bool forceRGB = false)
@@ -832,7 +867,7 @@ void ePicLoad::decodeThumb()
 				break;
 		case F_GIF:	gif_load(m_filepara, true);
 				break;
-		case F_SVG:	svg_load(m_filepara);
+		case F_SVG:	svg_load(m_filepara, true);
 				break;
 	}
 	//eDebug("[ePicLoad] getThumb picture loaded %s", m_filepara->file);
