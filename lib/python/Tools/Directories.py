@@ -57,18 +57,16 @@ def resolveFilename(scope, base = "", path_prefix = None):
 		from Components.config import config
 		# allow files in the config directory to replace skin files
 		tmp = defaultPaths[SCOPE_CONFIG][0]
-		if base and pathExists(tmp + base):
+		if base and pathExists("%s%s" % (tmp, base)):
 			path = tmp
 		else:
-			tmp = defaultPaths[SCOPE_SKIN][0]
+			path = defaultPaths[SCOPE_SKIN][0]
 			pos = config.skin.primary_skin.value.rfind('/')
 			if pos != -1:
-				#if basefile is not available use default skin path as fallback
-				tmpfile = tmp+config.skin.primary_skin.value[:pos+1] + base
-				if pathExists(tmpfile):
-					path = tmp+config.skin.primary_skin.value[:pos+1]
-				else:
-					path = tmp
+				for dir in ("%s%s" % (path, config.skin.primary_skin.value[:pos+1]), "%s%s" % (path, "skin_default/")):
+					for file in (base, os.path.basename(base)):
+						if pathExists("%s%s"% (dir, file)):
+							return "%s%s" % (dir, file)
 			else:
 				path = tmp
 
