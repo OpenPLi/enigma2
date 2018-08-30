@@ -38,6 +38,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 	def __init__(self, session, title=_("Virtual KeyBoard Text:"), text="", maxSize=False, visible_width=False, type=Input.TEXT, currPos=0, allMarked=False):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
+		self.setTitle(_("Virtual keyboard"))
 		prompt = title  # Title should only be used for screen titles!
 		self.key_bg = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_bg.png"))
 		self.key_red_bg = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_red.png"))
