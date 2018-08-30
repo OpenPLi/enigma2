@@ -11,6 +11,9 @@ extern "C" {
 #include <jpeglib.h>
 }
 
+#include <nanosvg.h>
+#include <nanosvgrast.h>
+
 /* TODO: I wonder why this function ALWAYS returns 0 */
 int loadPNG(ePtr<gPixmap> &result, const char *filename, int accel, int cached)
 {
@@ -356,6 +359,56 @@ static int savePNGto(FILE *fp, gPixmap *pixmap)
 
 	png_write_end(png_ptr, info_ptr);
 	png_destroy_write_struct(&png_ptr, &info_ptr);
+	return 0;
+}
+
+int loadSVG(ePtr<gPixmap> &result, const char *filename, int accel)
+{
+	result = nullptr;
+
+        if (pixmapFromTable(result, filename) == 0)
+                return 0;
+
+	// load svg
+	NSVGimage *image = nullptr;
+	NSVGrasterizer *rast = nullptr;
+	int w = 0;
+	int h = 0;
+	double scale = 1.0;
+
+	image = nsvgParseFromFile(filename, "px", 96.0f);
+	if (image == nullptr)
+	{
+		return 0;
+	}
+
+	rast = nsvgCreateRasterizer();
+	if (rast == nullptr)
+	{
+		nsvgDelete(image);
+		return 0;
+	}
+
+	w = image->width*scale;
+	h = image->height*scale;
+
+	result = new gPixmap(w, h, 32, pixmapDisposed, accel);
+	if (result == nullptr)
+	{
+		nsvgDeleteRasterizer(rast);
+		nsvgDelete(image);
+		return 0;
+	}
+
+	eDebug("[ePNG] loadSVG %s=%dx%d", filename, w, h);
+	// Rasterizes SVG image, returns RGBA image (non-premultiplied alpha)
+	nsvgRasterize(rast, image, 0, 0, scale, (unsigned char*)result->surface->data, w, h, w*4);
+
+	pixmapToTable(result, filename);
+
+	nsvgDeleteRasterizer(rast);
+	nsvgDelete(image);
+
 	return 0;
 }
 
