@@ -65,10 +65,22 @@ dist_install_DATA = \
 	verticalline-plugins.png \
 	vkey_backspace.png \
 	vkey_bg.png \
+	vkey_blue.png \
+	vkey_enter.png \
+	vkey_first.png \
+	vkey_green.png \
 	vkey_icon.png \
+	vkey_yellow.png \
+	vkey_last.png \
 	vkey_left.png \
+	vkey_red.png \
 	vkey_right.png \
 	vkey_sel.png \
+	vkey_shift0.png \
+	vkey_shift1.png \
+	vkey_shift2.png \
+	vkey_shift3.png \
+	vkey_space_alt.png \
 	vkey_space.png \
 	vkey_text.png \
 	volume.png \
