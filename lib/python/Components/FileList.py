@@ -33,6 +33,7 @@ EXTENSIONS = {
 		"gif": "picture",
 		"bmp": "picture",
 		"jpeg": "picture",
+		"jpe": "picture",
 		"mpg": "movie",
 		"vob": "movie",
 		"m4v": "movie",
