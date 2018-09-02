@@ -382,6 +382,8 @@ eEPGCache::eEPGCache()
 {
 	eDebug("[eEPGCache] Initialized EPGCache (wait for setCacheFile call now)");
 
+	load_epg = eConfigManager::getConfigValue("config.usage.remote_fallback_import").find("epg") == std::string::npos;
+
 	enabledSources = 0;
 	historySeconds = 0;
 
@@ -1282,7 +1284,7 @@ void eEPGCache::thread()
 {
 	hasStarted();
 	nice(4);
-	load();
+	if (load_epg) { load(); }
 	cleanLoop();
 	runLoop();
 	save();
