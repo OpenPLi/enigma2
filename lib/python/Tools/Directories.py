@@ -61,11 +61,13 @@ def resolveFilename(scope, base = "", path_prefix = None):
 			path = tmp
 		else:
 			path = defaultPaths[SCOPE_SKIN][0]
-			if pathExists("%s%s" % (path, base)):
-				return "%s%s" % (path, base)
 			pos = config.skin.primary_skin.value.rfind('/')
 			if pos != -1:
-				for dir in ("%s%s" % (path, config.skin.primary_skin.value[:pos+1]), "%s%s" % (path, "skin_default/")):
+				skinname = config.skin.primary_skin.value[:pos+1]
+				#  remove skin name from base if exist
+				if base.startswith(skinname):
+					base = base[pos+1:]
+				for dir in ("%s%s" % (path, skinname), "%s%s" % (path, "skin_default/")):
 					for file in (base, os.path.basename(base)):
 						if pathExists("%s%s"% (dir, file)):
 							return "%s%s" % (dir, file)
