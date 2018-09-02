@@ -3,6 +3,7 @@
 #include <fcntl.h>
 
 #include <lib/base/cfile.h>
+#include <lib/base/wrappers.h>
 #include <lib/gdi/picload.h>
 
 extern "C" {
@@ -1428,7 +1429,7 @@ int ePicLoad::getFileType(const char * file)
 	else if (id[0] == 'B'  && id[1] == 'M' )					return F_BMP;
 	else if (id[0] == 'G'  && id[1] == 'I'  && id[2] == 'F')			return F_GIF;
 	else if (id[0] == '<'  && id[1] == 's'  && id[2] == 'v' && id[3] == 'g')	return F_SVG;
-	else if (strstr(file, ".svg"))							return F_SVG;
+	else if (endsWith(file, ".svg"))						return F_SVG;
 	return -1;
 }
 
