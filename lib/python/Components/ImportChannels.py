@@ -28,8 +28,10 @@ class ImportChannels():
 				return
 			print "[Import Channels] Get EPG Location"
 			try:
+				epgdatfile = [x for x in urllib2.urlopen("%s/file?file=/etc/enigma2/settings" % self.url, timeout=5).readlines() if x.startswith('config.misc.epgcache_filename=')]
+				epgdatfile = epgdatfile and epgdatfile[0].split('=')[1].strip() or "/hdd/epg.dat"
 				try:
-					files = [file for file in loads(urllib2.urlopen("%s/file?dir=/hdd" % self.url, timeout=5).read())["files"] if os.path.basename(file).startswith("epg.dat")]
+					files = [file for file in loads(urllib2.urlopen("%s/file?dir=%s" % (self.url, os.path.dirname(epgdatfile)), timeout=5).read())["files"] if os.path.basename(file).startswith(os.path.basename(epgdatfile))]
 				except:
 					files = [file for file in loads(urllib2.urlopen("%s/file?dir=/" % self.url, timeout=5).read())["files"] if os.path.basename(file).startswith("epg.dat")]
 				epg_location = files[0] if files else None
