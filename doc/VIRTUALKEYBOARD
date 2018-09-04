@@ -2,7 +2,7 @@ A Guide to the VirtualKeyBoard Screen
 -------------------------------------
 
 Written by IanSav - 18-Aug-2018
-Updated by IanSav - 31-Aug-2018
+Updated by IanSav -  4-Sep-2018
 
 This document explains the changes and updates to the VirtualKeyBoard of 
 Enigma2.  The code is located in:
@@ -99,8 +99,17 @@ For example in a 1280 x 720 skin:
 		<widget name="language" position="0,0" size="0,0" font="Regular;20" transparent="1" />
 	</screen>
 
-	WARNING: Due to limitations in the current parameter parsing the 
-	shift colours MUST be specified as decimal numbers.
+	WARNING: Due to limitations in the parameter parsing the shift 
+	colours MUST be specified as decimal numbers for all firmware 
+	versions earlier than 4-Sep-2018.  For firmware builds later than 
+	4-Sep-2018 the colours can be specified as decimal numbers, hex 
+	numbers, Enigma2 "#" colour codes or colour names.  For example, 
+	the following parameters are equaly valid and effectively the same:
+		<parameter name="VirtualKeyBoardShiftColors" value="16777215,16777215,65535,16711935" />
+		<parameter name="VirtualKeyBoardShiftColors" value="0x00ffffff,0x00ffffff,0x0000ffff,0x00ff00ff" />
+		<parameter name="VirtualKeyBoardShiftColors" value="#00ffffff,#00ffffff,#0000ffff,#00ff00ff" />
+		<parameter name="VirtualKeyBoardShiftColors" value="White,White,Cyan,Magenta" />
+		(Assuming the colours "White", "Cyan" and "Magenta" are defined!)
 
 	IMPORTANT: Make sure that all the 720 "vkey_*" images are copied to 
 	the "/usr/share/enigma2/<skin>/buttons/" directory where "<skin>" is 
@@ -127,8 +136,17 @@ For example in a 1920 x 1080 skin:
 		<widget name="language" position="0,0" size="0,0" font="Regular;20" transparent="1" />
 	</screen>
 
-	WARNING: Due to limitations in the current parameter parsing the 
-	shift colours MUST be specified as decimal numbers.
+	WARNING: Due to limitations in the parameter parsing the shift 
+	colours MUST be specified as decimal numbers for all firmware 
+	versions earlier than 4-Sep-2018.  For firmware builds later than 
+	4-Sep-2018 the colours can be specified as decimal numbers, hex 
+	numbers, Enigma2 "#" colour codes or colour names.  For example, 
+	the following parameters are equaly valid and effectively the same:
+		<parameter name="VirtualKeyBoardShiftColors" value="16777215,16777215,65535,16711935" />
+		<parameter name="VirtualKeyBoardShiftColors" value="0x00ffffff,0x00ffffff,0x0000ffff,0x00ff00ff" />
+		<parameter name="VirtualKeyBoardShiftColors" value="#00ffffff,#00ffffff,#0000ffff,#00ff00ff" />
+		<parameter name="VirtualKeyBoardShiftColors" value="White,White,Cyan,Magenta" />
+		(Assuming the colours "White", "Cyan" and "Magenta" are defined!)
 
 	IMPORTANT: Make sure that all the 1080 "vkey_*" images are copied to 
 	the "/usr/share/enigma2/<skin>/buttons/" directory where "<skin>" is 
