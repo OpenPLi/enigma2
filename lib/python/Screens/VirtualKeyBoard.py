@@ -326,7 +326,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 			"save": (self.save, _("Save any text changes and exit")),
 			"locale": (self.localeMenu, _("Select the virtual keyboard locale from a menu")),
 			"shift": (self.shiftClicked, _("Select the virtual keyboard shifted character set")),
-			"ok": (self.okClicked, _("Select the character or action under the virtual keyboard cursor")),
+			"select": (self.processSelect, _("Select the character or action under the virtual keyboard cursor")),
 			"up": (self.up, _("Move the virtual keyboard cursor up")),
 			"left": (self.left, _("Move the virtual keyboard cursor left")),
 			"right": (self.right, _("Move the virtual keyboard cursor right")),
@@ -575,7 +575,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 
 	def smsGotChar(self):
 		if self.smsChar and self.selectAsciiKey(self.smsChar):
-			self.okClicked()
+			self.processSelect()
 
 	def setLocale(self):
 		self.language, self.location, self.keyList = self.locales.get(self.lang, [None, None, None])
@@ -640,7 +640,10 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		self.previousSelectedKey = self.selectedKey
 		self["list"].setList(self.list)
 
-	def okClicked(self):
+	def okClicked(self):  # Deprecated legacy interface to new processSelect used by YouTubeVirtualKeyBoard
+		self.processSelect()
+
+	def processSelect(self):
 		self.smsChar = None
 		text = self.keyList[self.shiftLevel][self.selectedKey / self.keyboardWidth][self.selectedKey % self.keyboardWidth].encode("UTF-8")
 		if text == u"":
@@ -781,7 +784,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 	def keyGotAscii(self):
 		self.smsChar = None
 		if self.selectAsciiKey(str(unichr(getPrevAsciiCode()).encode("utf-8"))):
-			self.okClicked()
+			self.processSelect()
 
 	def selectAsciiKey(self, char):
 		if char == u" ":
