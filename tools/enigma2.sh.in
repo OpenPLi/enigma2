@@ -61,9 +61,15 @@ case $ret in
 		fi
 		;;
 	42)
+		df -P | grep -v "tmpfs " | awk '{print $6}' | tail -n +3 > /tmp/upgrade_mountpoints.txt
+		while read line; do
+			if [  -f $line/var/lib/opkg/status ]; then
+			DESTS=$DESTS" --add-dest "$line":"$line
+		fi
+		done < /tmp/upgrade_mountpoints.txt
 		# bind the console (when available)
 		[ -f /sys/class/vtconsole/vtcon1/bind ] && echo 1 > /sys/class/vtconsole/vtcon1/bind
-		( opkg upgrade sysvinit && opkg upgrade sysvinit-pidof && opkg upgrade initscripts-functions && opkg upgrade busybox && opkg upgrade kmod && opkg list-upgradable | cut -f 1 -d ' ' | xargs opkg upgrade ) 2>&1 | tee /home/root/ipkgupgrade.log
+		( opkg upgrade sysvinit && opkg upgrade sysvinit-pidof && opkg upgrade initscripts-functions && opkg upgrade busybox && opkg upgrade kmod && opkg list-upgradable $DESTS | cut -f 1 -d ' ' | xargs opkg upgrade $DESTS ) 2>&1 | tee /home/root/ipkgupgrade.log
 		/sbin/reboot
 		;;
 	43)
