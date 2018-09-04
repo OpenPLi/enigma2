@@ -434,6 +434,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		keyList[0][2][11] = u"\u00B4"
 		keyList[0][2][12] = u"\\"
 		keyList[0][3] = [u"SHIFT", u"]", u"z", u"x", u"c", u"v", u"b", u"n", u"m", u",", u".", u"-", u"{", u"SHIFT"]
+		keyList[0][-1].extend([u"www.", u".com", u".net", u".org", u".edu", u".nl", u".tv"])
 		keyList[1][0] = [u"\u00A7", u"!", u"\"", u"#", u"$", u"%", u"&", u"_", u"(", u")", u"'", u"?", u"~", u"BACKSPACE"]
 		keyList[1][1][11] = u"^"
 		keyList[1][1][12] = u"|"
@@ -442,10 +443,11 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		keyList[1][2][11] = u"`"
 		keyList[1][2][12] = u"\u00A6"
 		keyList[1][3] = [u"SHIFT", u"[", u"Z", u"X", u"C", u"V", u"B", u"N", u"M", u";", u":", u"=", u"}", u"SHIFT"]
+		keyList[1][-1].extend([u"www.", u".com", u".net", u".org", u".edu", u".nl", u".tv"])
 		keyList.append([
 			[u"\u00AC", u"\u00B9", u"\u00B2", u"\u00B3", u"\u00BC", u"\u00BD", u"\u00BE", u"\u00A3", u"{", u"}", u"$", u"\\", u"", u"BACKSPACE"],
 			[u"FIRST", u"", u"", u"\u20AC", u"\u00B6", u"", u"", u"", u"", u"", u"", u"", u"", u""],
-			[u"LAST", u"", u"", u"", u"", u"", u"", u"", u"", u"", u"", u"", u"", u"ENTER"],
+			[u"LAST", u"", u"\u00E1", u"\u00E9", u"\u00ED", u"\u00F3", u"\u00FA", u"\u00C1", u"\u00C9", u"\u00CD", u"\u00D3", u"\u00DA", u"", u"ENTER"],
 			[u"SHIFT", u"\u00A6", u"\u00AB", u"\u00BB", u"\u00A2", u"", u"", u"", u"\u00B5", u"", u"\u00B7", u"", u"", u"SHIFT"],
 			[u"EXIT", u"LOC", u"LEFT", u"RIGHT", u"ALL", u"CLR", u"SPACE"]
 		])
