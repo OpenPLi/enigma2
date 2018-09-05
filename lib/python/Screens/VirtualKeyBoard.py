@@ -564,7 +564,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		keyList[0][1][13] = u"\u00A6"
 		keyList[0][2][12] = u"#"
 		keyList[0][3] = [u"SHIFT", u"\\", u"z", u"x", u"c", u"v", u"b", u"n", u"m", u",", u".", u"/", u"", u"SHIFT"]
-		keyList[0][-1].extend([u"\u00E1", u"\u00E9", u"\u00ED", u"\u00F3", u"\u00FA"])
+		# keyList[0][-1].extend([u"\u00E1", u"\u00E9", u"\u00ED", u"\u00F3", u"\u00FA"])  # English users don't use the accented characters.
 		keyList[1][0][0] = u"\u00AC"
 		keyList[1][0][2] = u"\""
 		keyList[1][0][3] = u"\u00A3"
@@ -572,7 +572,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		keyList[1][2][11] = u"@"
 		keyList[1][2][12] = u"~"
 		keyList[1][3] = [u"SHIFT", u"|", u"Z", u"X", u"C", u"V", u"B", u"N", u"M", u"<", u">", u"?", u"", u"SHIFT"]
-		keyList[1][-1].extend([u"\u00C1", u"\u00C9", u"\u00CD", u"\u00D3", u"\u00DA"])
+		# keyList[1][-1].extend([u"\u00C1", u"\u00C9", u"\u00CD", u"\u00D3", u"\u00DA"])  # English users don't use the accented characters.
 		return keyList
 
 	def smsGotChar(self):
