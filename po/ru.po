@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-03 21:04+0200\n"
+"POT-Creation-Date: 2018-08-21 18:40+0200\n"
 "PO-Revision-Date: 2018-05-02 18:32+0300\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: openPLi Dimitrij\n"
@@ -725,8 +725,17 @@ msgstr "Аудио/видео настройки"
 msgid "AAC downmix"
 msgstr "AAC микширование"
 
+msgid "AAC transcoding"
+msgstr "AAC транскодирование"
+
+msgid "AC3"
+msgstr "AC3"
+
 msgid "AC3 downmix"
 msgstr "AC3 микширование"
+
+msgid "AC3 plus transcoding"
+msgstr "AC3 Plus транскодирование"
 
 msgid "ACQUIRING TSID/ONID"
 msgstr "ПОЛУЧЕНИЕ TSID/ONID"
@@ -1170,9 +1179,8 @@ msgstr "Размер шага громкости звука"
 msgid "Australia"
 msgstr "Australia"
 
-#, fuzzy
 msgid "Australian"
-msgstr "Australia"
+msgstr "Australian"
 
 msgid "Austria"
 msgstr "Austria"
@@ -1235,9 +1243,8 @@ msgstr "Автоматическое включение внешних субт�
 msgid "Available format variables"
 msgstr "Доступные форматы переменных"
 
-#, fuzzy
 msgid "Available locales are:"
-msgstr "Доступные форматы переменных"
+msgstr "Доступными локалями являются:"
 
 msgid "Azerbaijan"
 msgstr "Azerbaijan"
@@ -1336,9 +1343,8 @@ msgstr "Поведение при окончании видео"
 msgid "Belarus"
 msgstr "Belarus"
 
-#, fuzzy
 msgid "Belgian"
-msgstr "Belgium"
+msgstr "Belgian"
 
 msgid "Belgium"
 msgstr "Belgium"
@@ -1690,6 +1696,9 @@ msgstr "Выбор тюнера"
 
 msgid "Choose bouquet"
 msgstr "Выбор букета"
+
+msgid "Choose whether multi channel sound tracks should be convert to PCM or SPDIF."
+msgstr "Настройка - следует ли многоканальную звуковую дорожку конвертировать в PCM или SPDIF."
 
 msgid "Choose which tuner to configure."
 msgstr "Выберите тюнер для настройки."
@@ -2088,6 +2097,18 @@ msgstr "Настройка - в каком месте списка таймер�
 msgid "Configure whether (and for how long) a second infobar will be shown when OK is pressed twice. The second infobar contains additional information about the current channel."
 msgstr "Настройка для показа (и как долго) второго инфобара, при нажатии кнопки OK дважды. Второй инфобар содержит дополнительную информацию о текущем канале."
 
+msgid "Configure whether AAC sound tracks should be transcoded."
+msgstr "Настройка - следует ли AAC звуковую дорожку транскодировать."
+
+msgid "Configure whether AC3 plus sound tracks should be transcoded to AC3."
+msgstr "Настройка - следует ли AC3 Plus звуковую дорожку транскодировать в AC3."
+
+msgid "Configure whether DTS-HD channel sound tracks should be downmixed or transcoded."
+msgstr "Настройка - DTS-HD звуковые дорожки транскодировать или микшировать."
+
+msgid "Configure whether WMA pro channel sound tracks should be downmixed or transcoded."
+msgstr "Настройка - WMA pro звуковые дорожки транскодировать или микшировать."
+
 msgid "Configure whether multi channel PCM sound should be enabled."
 msgstr "Настройка, нужно ли включать мультиканальный звук PCM."
 
@@ -2208,9 +2229,8 @@ msgstr "Cote d'Ivoire"
 msgid "Could not find installed channel list."
 msgstr "Нет найден инсталлированный список каналов."
 
-#, fuzzy
 msgid "Could not find suitable media - Please remove some downloaded images or insert a media (e.g. USB stick) with sufficiant free space and try again!"
-msgstr "Не удалось найти подходящий накопитель. Пожалуйста, вставьте, например, флешку USB и повторите попытку!"
+msgstr "Не удалось найти подходящие носители. Удалите загруженные изображения или вставьте носитель (например, USB-накопитель) с достаточным свободным пространством и повторите попытку!"
 
 msgid "Could not load medium! No disc inserted?"
 msgstr "Не удалось загрузить носитель! Проверьте, вставлен ли диск?"
@@ -2346,8 +2366,14 @@ msgstr "DMM расширенный"
 msgid "DMM normal"
 msgstr "DMM нормальный"
 
+msgid "DTS"
+msgstr "DTS"
+
 msgid "DTS downmix"
 msgstr "DTS микширование"
+
+msgid "DTS-HD downmix"
+msgstr "DTS-HD микширование"
 
 msgid "DUAL LAYER DVD"
 msgstr "DUAL LAYER (двойной слой) DVD"
@@ -2432,10 +2458,6 @@ msgstr "Дефолтное место записей"
 
 msgid "Default settings"
 msgstr "Дефолтные настройки"
-
-#, fuzzy
-msgid "Define the location of the EPG Cache file."
-msgstr "Настройка соотношения сторон экрана."
 
 msgid "Delay after change voltage before switch command"
 msgstr "Задержка после изменения напряжения команд перекл."
@@ -2522,10 +2544,10 @@ msgid "Delete saved playlist"
 msgstr "удалить сохраненный плейлист"
 
 msgid "Delete the character to the left of text buffer cursor"
-msgstr ""
+msgstr "Удалить символ слева от курсора текстового буфера"
 
 msgid "Delete the character under the text buffer cursor"
-msgstr ""
+msgstr "Удалить символ под курсором текстового буфера"
 
 msgid "Delete timer"
 msgstr "Удалить таймер"
@@ -2857,6 +2879,9 @@ msgstr "Загрузка имиджа"
 
 msgid "Downloading plugin information. Please wait..."
 msgstr "Загрузка информации о плагинах. Пожалуйста, подождите..."
+
+msgid "Downmix"
+msgstr "Микширование"
 
 msgid "Drop unconfigured satellites"
 msgstr "Отбросить ненастроенные спутники"
@@ -3781,7 +3806,7 @@ msgid "Greek"
 msgstr "Греческий"
 
 msgid "Greek (Modern)"
-msgstr ""
+msgstr "Greek (Modern)"
 
 msgid "Green"
 msgstr "Зеленая"
@@ -3843,6 +3868,9 @@ msgstr "Цветовая модель HDMI"
 msgid "HDMI HDR Type"
 msgstr "HDMI HDR тип"
 
+msgid "HDMI audio source"
+msgstr "HDMI аудио источник"
+
 msgid "HDMI-CEC Source Active"
 msgstr "HDMI-CEC источник активный"
 
@@ -3859,7 +3887,7 @@ msgid "HDR10 support"
 msgstr "HDR10 поддержка"
 
 msgid "HELP"
-msgstr ""
+msgstr "HELP"
 
 msgid "HLG"
 msgstr "HLG"
@@ -4000,10 +4028,10 @@ msgid "IDLE"
 msgstr "БЕЗДЕЙСТВИЕ"
 
 msgid "INFO"
-msgstr ""
+msgstr "INFO"
 
 msgid "INS"
-msgstr ""
+msgstr "INS"
 
 msgid "IP address"
 msgstr "IP-адрес"
@@ -4307,9 +4335,8 @@ msgstr "Ipkg"
 msgid "Iran (Islamic Republic of)"
 msgstr "Iran (Islamic Republic of)"
 
-#, fuzzy
 msgid "Iran, Islamic Republic"
-msgstr "Iran (Islamic Republic of)"
+msgstr "Iran, Islamic Republic"
 
 msgid "Iraq"
 msgstr "Iraq"
@@ -4405,9 +4432,8 @@ msgstr "Ключ событий"
 msgid "Keyboard"
 msgstr "Клавиатура"
 
-#, fuzzy
 msgid "Keyboard data entry"
-msgstr "Настройки клавиатуры"
+msgstr "Ввод данных клавиатуры"
 
 msgid "Keyboard map"
 msgstr "Раскладка клавиатуры"
@@ -4594,15 +4620,11 @@ msgstr "Загрузка отделенных пользовательских �
 msgid "Local network"
 msgstr "Локальная сеть"
 
-#, fuzzy
 msgid "Locale"
-msgstr "Локальная сеть"
+msgstr "Локаль"
 
 msgid "Location"
 msgstr "Расположение"
-
-msgid "Location EPG Cache file"
-msgstr ""
 
 msgid "Location for instant recordings"
 msgstr "Расположение немедленные записей"
@@ -4632,7 +4654,7 @@ msgid "Loop through from"
 msgstr "Петлевой вход от"
 
 msgid "Lower case"
-msgstr ""
+msgstr "Нижний регистр"
 
 msgid "Luxembourg"
 msgstr "Luxembourg"
@@ -4873,28 +4895,28 @@ msgid "Move east"
 msgstr "Перемещение на восток"
 
 msgid "Move the text buffer cursor left"
-msgstr ""
+msgstr "Переместить курсор текстового буфера влево"
 
 msgid "Move the text buffer cursor right"
-msgstr ""
+msgstr "Переместить курсор текстового буфера вправо"
 
 msgid "Move the text buffer cursor to the first character"
-msgstr ""
+msgstr "Переместите курсор текстового буфера на первый символ"
 
 msgid "Move the text buffer cursor to the last character"
-msgstr ""
+msgstr "Переместите курсор текстового буфера на последний символ"
 
 msgid "Move the virtual keyboard cursor down"
-msgstr ""
+msgstr "Перемещение курсора виртуальной клавиатуры вниз"
 
 msgid "Move the virtual keyboard cursor left"
-msgstr ""
+msgstr "Перемещение курсора виртуальной клавиатуры влево"
 
 msgid "Move the virtual keyboard cursor right"
-msgstr ""
+msgstr "Перемещение курсора виртуальной клавиатуры вправо"
 
 msgid "Move the virtual keyboard cursor up"
-msgstr ""
+msgstr "Перемещение курсора виртуальной клавиатуры вверх"
 
 msgid "Move to position X"
 msgstr "Перемещение к позиции Х"
@@ -5359,7 +5381,7 @@ msgid "Number of repeating text on display."
 msgstr "Количество повторов текста на дисплее."
 
 msgid "Number or SMS style data entry"
-msgstr ""
+msgstr "Запись данных в виде номера или SMS стиля"
 
 msgid "OK"
 msgstr "OK"
@@ -5383,7 +5405,7 @@ msgid "OSD transparency"
 msgstr "Прозрачность экранного меню (OSD)"
 
 msgid "OVR"
-msgstr ""
+msgstr "OVR"
 
 msgid "Off"
 msgstr "Выкл."
@@ -5559,6 +5581,9 @@ msgstr "Редактор сервисов родительского контр�
 
 msgid "Parental control setup"
 msgstr "Установки родительского контроля"
+
+msgid "Passthrough"
+msgstr "Passthrough"
 
 msgid "Pause"
 msgstr "Пауза"
@@ -6711,9 +6736,8 @@ msgstr "Сохранить и рестарт таймшифта"
 msgid "Save and stop timeshift"
 msgstr "Сохранить и остановить таймшифт"
 
-#, fuzzy
 msgid "Save any text changes and exit"
-msgstr "Сохранить и выйти"
+msgstr "Сохранить изменения текста и выйти"
 
 msgid "Save changes"
 msgstr "Сохранить изменения"
@@ -7019,9 +7043,8 @@ msgstr "Выбор устройства ввода"
 msgid "Select interface"
 msgstr "Выбор интерфейса"
 
-#, fuzzy
 msgid "Select locale"
-msgstr "Выбор расположения"
+msgstr "Выбор локали"
 
 msgid "Select location"
 msgstr "Выбор расположения"
@@ -7057,7 +7080,7 @@ msgid "Select the Unicable channel to be assigned to this tuner. This is a uniqu
 msgstr "Выберите канал Unicable, который будет назначен этому тюнеру. Это уникальное значение."
 
 msgid "Select the character or action under the virtual keyboard cursor"
-msgstr ""
+msgstr "Выберите символ или действие под курсором виртуальной клавиатуры"
 
 msgid "Select the format of your Unicable device. Choices are 'SCR Unicable' (Unicable I format), or 'SCR JESS' (Unicable II format)."
 msgstr "Выберите формат Вашего Unicable устройства . Возможные варианты - 'SCR Unicable' (Unicable I) или 'SCR JESS' (Unicable II)."
@@ -7105,10 +7128,10 @@ msgid "Select the type of Unicable device you are using."
 msgstr "Выберите тип используемого устройства Unicable."
 
 msgid "Select the virtual keyboard locale from a menu"
-msgstr ""
+msgstr "Выберите язык виртуальной клавиатуры из меню"
 
 msgid "Select the virtual keyboard shifted character set"
-msgstr ""
+msgstr "Выберите набор символов с виртуальной клавиатурой"
 
 msgid "Select upgrade source"
 msgstr "Выбор источника обновления"
@@ -7847,13 +7870,11 @@ msgstr "Spain"
 msgid "Spanish"
 msgstr "Испанский"
 
-#, fuzzy
 msgid "Special 1"
-msgstr "специальное событие"
+msgstr "Специальное 1"
 
-#, fuzzy
 msgid "Special 2"
-msgstr "специальное событие"
+msgstr "Специальное 2"
 
 msgid "Specify extra timeframe to ignore inactivity sleeptimer"
 msgstr "Экстра период времени игнорирования таймера неактивности"
@@ -8252,7 +8273,7 @@ msgstr "Система & Модуляция"
 
 #. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
 msgid "TRANSLATOR_INFO"
-msgstr "Dmitrij - 10.07.2018"
+msgstr "Дмитрий - 05.09.2018"
 
 msgid "TS file is too large for ISO9660 level 1!"
 msgstr "TS файл слишком большой для ISO9660 level 1!"
@@ -8845,7 +8866,7 @@ msgid "Toggle infoBar"
 msgstr "Смена инфобаров"
 
 msgid "Toggle new text inserts before or overwrites existing text"
-msgstr ""
+msgstr "Переключить новые текстовые вставки до или перезаписать существующий текст"
 
 msgid "Toggle show/hide"
 msgstr "Переключатель показать/скрыть"
@@ -9082,9 +9103,8 @@ msgstr "United Arab Emirates"
 msgid "United Kingdom"
 msgstr "United Kingdom"
 
-#, fuzzy
 msgid "United States"
-msgstr "United States of America"
+msgstr "United States"
 
 msgid "United States Minor Outlying Islands"
 msgstr "United States Minor Outlying Islands"
@@ -9148,7 +9168,7 @@ msgid "Upgrading"
 msgstr "Обновление"
 
 msgid "Upper case"
-msgstr ""
+msgstr "Верхний регистр"
 
 msgid "Uruguay"
 msgstr "Uruguay"
@@ -9305,9 +9325,8 @@ msgstr "VU+"
 msgid "Vanuatu"
 msgstr "Vanuatu"
 
-#, fuzzy
 msgid "Various"
-msgstr "Играть предыдущее"
+msgstr "Различный"
 
 msgid "Venezuela (Bolivarian Republic of)"
 msgstr "Venezuela (Bolivarian Republic of)"
@@ -9431,13 +9450,11 @@ msgstr "Virgin Islands (British)"
 msgid "Virgin Islands (U.S.)"
 msgstr "Virgin Islands (U.S.)"
 
-#, fuzzy
 msgid "Virtual KeyBoard Functions"
-msgstr "Виртуальная клавиатура"
+msgstr "Функции виртуальной клавиатуры"
 
-#, fuzzy
 msgid "Virtual KeyBoard Text:"
-msgstr "Виртуальная клавиатура"
+msgstr "Текст виртуальной клавиатуры:"
 
 msgid "Virtual keyboard"
 msgstr "Виртуальная клавиатура"
@@ -9462,6 +9479,9 @@ msgstr "WEP"
 
 msgid "WLAN connection"
 msgstr "WLAN соединение"
+
+msgid "WMA pro downmix"
+msgstr "WMA pro микширование"
 
 msgid "WPA"
 msgstr "WPA"
@@ -10405,6 +10425,18 @@ msgstr "подключено"
 msgid "controlled by HDMI"
 msgstr "управляемый по HDMI"
 
+msgid "convert to AC3"
+msgstr "конвертировать в AC3"
+
+msgid "convert to DTS"
+msgstr "конвертировать в DTS"
+
+msgid "convert to multi channel PCM"
+msgstr "конвертировать в мультиканал PCM"
+
+msgid "convert to multi-channel PCM"
+msgstr "конвертировать в мультиканал PCM"
+
 msgid "cooking"
 msgstr "приготовление"
 
@@ -10602,6 +10634,9 @@ msgstr "народная/традиционная музыка"
 
 msgid "football/soccer"
 msgstr "футбол"
+
+msgid "force AC3 plus"
+msgstr "принудительно AC3 Plus"
 
 msgid "force disabled"
 msgstr "принудительно отключено"
@@ -11271,6 +11306,9 @@ msgstr "непроверяема"
 msgid "until standby/restart"
 msgstr "до режима ожидания/перезагрузки"
 
+msgid "use best, controlled by HDMI"
+msgstr "лучше всего использовать управление по HDMI"
+
 msgid "user defined"
 msgstr "пользовательский вариант"
 
@@ -11364,3 +11402,9 @@ msgstr "переключено"
 
 msgid "®"
 msgstr "®"
+
+msgid "Define the location of the EPG Cache file."
+msgstr "Выбор расположения кеша EPG файла."
+
+msgid "Location EPG Cache file"
+msgstr "Расположение кеша EPG файла"
