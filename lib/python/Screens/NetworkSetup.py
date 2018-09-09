@@ -1320,7 +1320,7 @@ class NetworkAdapterTest(Screen):
 	def LinkStatedataAvail(self,data):
 		for item in data.splitlines():
 			if "Link detected:" in item:
-			        if "yes" in item:
+				if "yes" in item:
 					self["Network"].setForegroundColorNum(2)
 					self["Network"].setText(_("connected"))
 					self["NetworkInfo_Check"].setPixmapNum(0)
@@ -1329,7 +1329,7 @@ class NetworkAdapterTest(Screen):
 					self["Network"].setText(_("disconnected"))
 					self["NetworkInfo_Check"].setPixmapNum(1)
 				break
-		else:
+			else:
 			self["Network"].setText(_("unknown"))
 		self["NetworkInfo_Check"].show()
 
