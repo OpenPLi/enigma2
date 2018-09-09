@@ -140,13 +140,13 @@ LOCALES = {
 	"pl_PL": (
 		(None, None, None),
 		(None, None, None),
-		(u"abc\u0105\u0107\u00E32ABC\u0104\u0106\u00C3", u"ABC\u0104\u0106\u00C32", u"abc\u0105\u0107\u00E32"),
-		(u"def\u0119\u00E9\u00EB3DEF\u0118\u00C9\u00CB", u"DEF\u0118\u00C9\u00CB3", u"def\u0119\u00E9\u00EB3"),
+		(u"abc\u0105\u01072ABC\u0104\u0106", u"ABC\u0104\u01062", u"abc\u0105\u01072"),
+		(u"def\u01193DEF\u0118", u"DEF\u01183", u"def\u01193"),
 		(None, None, None),
 		(u"jkl\u01425JKL\u0141", u"JKL\u01415", u"jkl\u01425"),
-		(u"mno\u0144\u00F3\u00F2\u00F46MNO\u0143\u00D3\u00D2\u00D4", u"MNO\u0143\u00D3\u00D2\u00D46", u"mno\u0144\u00F3\u00F2\u00F46"),
+		(u"mno\u0144\u00F36MNO\u0143\u00D3", u"MNO\u0143\u00D36", u"mno\u0144\u00F36"),
 		(u"pqrs\u015B7PQRS\u015A", u"PQRS\u015A7", u"pqrs\u015B7"),
-		(u"tuv\u00F98TUV\u00D9", u"TUV\u00D98", u"tuv\u00F98"),
+		(None, None, None),
 		(u"wxyz\u017A\u017C9WXYZ\u0179\u017B", u"WXYZ\u0179\u017B9", u"wxyz\u017A\u017C9")
 	),
 	"ru_RU": (
