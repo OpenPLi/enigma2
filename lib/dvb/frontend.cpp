@@ -1420,6 +1420,7 @@ void eDVBFrontend::getTransponderData(ePtr<iDVBTransponderData> &dest, bool orig
 		p[cmdseq.num++].cmd = DTV_FREQUENCY;
 		p[cmdseq.num++].cmd = DTV_INVERSION;
 		p[cmdseq.num++].cmd = DTV_MODULATION;
+		p[cmdseq.num++].cmd = DTV_API_VERSION;
 		if (type == feSatellite)
 		{
 			p[cmdseq.num++].cmd = DTV_SYMBOL_RATE;
@@ -1427,6 +1428,10 @@ void eDVBFrontend::getTransponderData(ePtr<iDVBTransponderData> &dest, bool orig
 			p[cmdseq.num++].cmd = DTV_ROLLOFF;
 			p[cmdseq.num++].cmd = DTV_PILOT;
 			p[cmdseq.num++].cmd = DTV_STREAM_ID;
+			if (m_dvbversion >= DVB_VERSION(5, 11))
+			{
+				p[cmdseq.num++].cmd = DTV_SCRAMBLING_SEQUENCE_INDEX;
+			}
 		}
 		else if (type == feCable)
 		{
@@ -2051,7 +2056,15 @@ void eDVBFrontend::setFrontend(bool recvEvents)
 			{
 				p[cmdseq.num].cmd = DTV_ROLLOFF, p[cmdseq.num].u.data = rolloff, cmdseq.num++;
 				p[cmdseq.num].cmd = DTV_PILOT, p[cmdseq.num].u.data = pilot, cmdseq.num++;
-				p[cmdseq.num].cmd = DTV_STREAM_ID, p[cmdseq.num].u.data = parm.is_id | (parm.pls_code << 8) | (parm.pls_mode << 26), cmdseq.num++;
+				if (m_dvbversion >= DVB_VERSION(5, 11))
+				{
+					p[cmdseq.num].cmd = DTV_STREAM_ID, p[cmdseq.num].u.data = parm.is_id, cmdseq.num++;
+					p[cmdseq.num].cmd = DTV_SCRAMBLING_SEQUENCE_INDEX, p[cmdseq.num].u.data = parm.pls_code, cmdseq.num++;
+				}
+				else
+				{
+					p[cmdseq.num].cmd = DTV_STREAM_ID, p[cmdseq.num].u.data = parm.is_id | (parm.pls_code << 8) | (parm.pls_mode << 26), cmdseq.num++;
+				}
 			}
 		}
 		else if (type == iDVBFrontend::feCable)

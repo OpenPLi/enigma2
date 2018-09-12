@@ -350,6 +350,9 @@ int eDVBSatelliteTransponderData::getPLSMode() const
 {
 	if (originalValues) return transponderParameters.pls_mode;
 
+	if (getProperty(DTV_API_VERSION) >= DVB_VERSION(5, 11))
+		return eDVBFrontendParametersSatellite::PLS_Gold;
+
 	unsigned int stream_id = getProperty(DTV_STREAM_ID);
 	if (stream_id == NO_STREAM_ID_FILTER) return transponderParameters.pls_mode;
 	return (stream_id >> 26) & 0x3;
@@ -358,6 +361,9 @@ int eDVBSatelliteTransponderData::getPLSMode() const
 int eDVBSatelliteTransponderData::getPLSCode() const
 {
 	if (originalValues) return transponderParameters.pls_code;
+
+	if (getProperty(DTV_API_VERSION) >= DVB_VERSION(5, 11))
+		return getProperty(DTV_SCRAMBLING_SEQUENCE_INDEX);
 
 	unsigned int stream_id = getProperty(DTV_STREAM_ID);
 	if (stream_id == NO_STREAM_ID_FILTER) return transponderParameters.pls_code;
