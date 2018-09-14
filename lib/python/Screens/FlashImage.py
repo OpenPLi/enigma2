@@ -88,6 +88,8 @@ class SelectImage(Screen):
 						media = "%s/downloaded_images" % media
 						if os.path.isdir(media) and not os.path.islink(media) and not os.path.ismount(media):
 							getImages(media, ["%s/%s" % (media, x) for x in os.listdir(media) if x.endswith('.zip') and model in x])
+							for dir in [dir for dir in [os.path.join(media, dir) for dir in os.listdir(media)] if os.path.isdir(dir) and dir.endswith(".unzipped")]:
+								shutil.rmtree(dir)
 
 		list = []
 		for catagorie in reversed(sorted(self.imagesList.keys())):
