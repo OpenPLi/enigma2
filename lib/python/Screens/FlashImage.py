@@ -61,7 +61,7 @@ class SelectImage(Screen):
 	def getImagesList(self):
 
 		def getImages(path, files):
-			for file in [x for x in files if x.endswith('.zip') and model in x]:
+			for file in [x for x in files if os.path.splitext(x)[1] == ".zip" and model in x]:
 				try:
 					if checkimagefiles([x.split(os.sep)[-1] for x in zipfile.ZipFile(file).namelist()]):
 						medium = path.split(os.sep)[-1]
@@ -83,12 +83,12 @@ class SelectImage(Screen):
 
 			for media in getNonNetworkMediaMounts():
 				if not(SystemInfo['HasMMC'] and "/mmc" in media):
-					getImages(media, [os.path.join(media, x) for x in os.listdir(media) if x.endswith('.zip') and model in x])
+					getImages(media, [os.path.join(media, x) for x in os.listdir(media) if os.path.splitext(x)[1] == ".zip" and model in x])
 					if "downloaded_images" in os.listdir(media):
 						media = os.path.join(media, "downloaded_images")
 						if os.path.isdir(media) and not os.path.islink(media) and not os.path.ismount(media):
-							getImages(media, [os.path.join(media, x) for x in os.listdir(media) if x.endswith('.zip') and model in x])
-							for dir in [dir for dir in [os.path.join(media, dir) for dir in os.listdir(media)] if os.path.isdir(dir) and dir.endswith(".unzipped")]:
+							getImages(media, [os.path.join(media, x) for x in os.listdir(media) if os.path.splitext(x)[1] == ".zip" and model in x])
+							for dir in [dir for dir in [os.path.join(media, dir) for dir in os.listdir(media)] if os.path.isdir(dir) and os.path.splitext(dir)[1] == ".unzipped"]:
 								shutil.rmtree(dir)
 
 		list = []
