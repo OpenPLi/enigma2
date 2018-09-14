@@ -83,11 +83,11 @@ class SelectImage(Screen):
 
 			for media in getNonNetworkMediaMounts():
 				if not(SystemInfo['HasMMC'] and "/mmc" in media):
-					getImages(media, ["%s/%s" % (media, x) for x in os.listdir(media) if x.endswith('.zip') and model in x])
+					getImages(media, [os.path.join(media, x) for x in os.listdir(media) if x.endswith('.zip') and model in x])
 					if "downloaded_images" in os.listdir(media):
-						media = "%s/downloaded_images" % media
+						media = os.path.join(media, "downloaded_images")
 						if os.path.isdir(media) and not os.path.islink(media) and not os.path.ismount(media):
-							getImages(media, ["%s/%s" % (media, x) for x in os.listdir(media) if x.endswith('.zip') and model in x])
+							getImages(media, [os.path.join(media, x) for x in os.listdir(media) if x.endswith('.zip') and model in x])
 							for dir in [dir for dir in [os.path.join(media, dir) for dir in os.listdir(media)] if os.path.isdir(dir) and dir.endswith(".unzipped")]:
 								shutil.rmtree(dir)
 
@@ -250,9 +250,9 @@ class FlashImage(Screen):
 
 			if self.destination:
 
-				destination = "/".join([self.destination, 'downloaded_images'])
-				self.zippedimage = "://" in self.source and "/".join([destination, self.imagename]) or self.source
-				self.unzippedimage = "/".join([destination, '%s.unzipped' % self.imagename[:-4]])
+				destination = os.path.join(self.destination, 'downloaded_images')
+				self.zippedimage = "://" in self.source and os.path.join(destination, self.imagename) or self.source
+				self.unzippedimage = os.path.join(destination, '%s.unzipped' % self.imagename[:-4])
 
 				if os.path.isfile(destination):
 					os.remove(destination)
