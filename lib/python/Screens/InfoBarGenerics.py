@@ -407,13 +407,16 @@ class InfoBarShowHide(InfoBarScreenSaver):
 	def checkHideVBI(self):
 		service = self.session.nav.getCurrentlyPlayingServiceReference()
 		servicepath = service and service.getPath()
-		if servicepath and servicepath.startswith("/"):
-			if service.toString().startswith("1:"):
-				info = eServiceCenter.getInstance().info(service)
-				service = info and info.getInfoString(service, iServiceInformation.sServiceref)
-				return service and eDVBDB.getInstance().getFlag(eServiceReference(service)) & self.FLAG_HIDE_VBI and True
-			else:
-				return ".hidvbi." in servicepath.lower()
+		if servicepath:
+			if servicepath.startswith("/"):
+				if service.toString().startswith("1:"):
+					info = eServiceCenter.getInstance().info(service)
+					service = info and info.getInfoString(service, iServiceInformation.sServiceref)
+					return service and eDVBDB.getInstance().getFlag(eServiceReference(service)) & self.FLAG_HIDE_VBI and True
+				else:
+					return ".hidvbi." in servicepath.lower()
+			elif "://" in servicepath:
+				return False
 		service = self.session.nav.getCurrentService()
 		info = service and service.info()
 		return info and info.getInfo(iServiceInformation.sHideVBI)
