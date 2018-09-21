@@ -352,10 +352,15 @@ class PluginDownloadBrowser(Screen):
 				self.doRemove(self.installFinished, self["list"].l.getCurrentSelection()[0].name)
 
 	def doRemove(self, callback, pkgname):
-		self.session.openWithCallback(callback, Console, cmdlist = [self.ipkg_remove + Ipkg.opkgExtraDestinations() + " " + self.PLUGIN_PREFIX + pkgname, "sync"], closeOnSuccess = True)
+		pkgname = self.PLUGIN_PREFIX + pkgname
+		self.session.openWithCallback(callback, Console, cmdlist = [self.ipkg_remove + Ipkg.opkgExtraDestinations() + " " + pkgname, "sync"], closeOnSuccess = True)
 
 	def doInstall(self, callback, pkgname):
-		self.session.openWithCallback(callback, Console, cmdlist = [self.ipkg_install + " " + self.PLUGIN_PREFIX + pkgname, "sync"], closeOnSuccess = True)
+		if pkgname.startswith('modules-'):
+			pkgname = 'kernel-module-' + pkgname[8:]
+		else:
+			pkgname = self.PLUGIN_PREFIX + pkgname
+		self.session.openWithCallback(callback, Console, cmdlist = [self.ipkg_install + " " + pkgname, "sync"], closeOnSuccess = True)
 
 	def runSettingsRemove(self, val):
 		if val:
@@ -429,6 +434,10 @@ class PluginDownloadBrowser(Screen):
 			for plugin in opkg.enumPlugins(self.PLUGIN_PREFIX):
 				if plugin[0] not in self.installedplugins:
 					pluginlist.append(plugin + (plugin[0][15:],))
+			for plugin in opkg.enumPlugins('kernel-module'):
+				if plugin[0] not in self.installedplugins:
+					pkg = 'modules-'+'-'.join(plugin[0].split('-')[2:])
+					pluginlist.append(plugin + (pkg,))
 			if pluginlist:
 				pluginlist.sort()
 				self.updateList()
