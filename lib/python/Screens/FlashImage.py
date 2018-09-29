@@ -190,6 +190,8 @@ class FlashImage(Screen):
 		{
 			"cancel": self.abort,
 			"red": self.abort,
+			"ok": self.ok,
+			"green": self.ok,
 		}, -1)
 
 		self.delay = eTimer()
@@ -338,7 +340,7 @@ class FlashImage(Screen):
 		self.containerofgwrite = None
 		if retval == 0:
 			self["header"].setText(_("Flashing image succesfull"))
-			self["info"].setText(_("%s\nPress exit to close") % self.imagename)
+			self["info"].setText(_("%s\nPress ok for multiboot selection\nPress exit to close") % self.imagename)
 			self["progress"].hide()
 		else:
 			self.session.openWithCallback(self.abort, MessageBox, _("Flashing image was not succesfull\n%s") % self.imagename, type=MessageBox.TYPE_ERROR, simple=True)
@@ -351,6 +353,12 @@ class FlashImage(Screen):
 		if self.containerbackup:
 			self.containerbackup.killAll()
 		self.close()
+
+	def ok(self):
+		if self["header"].text == _("Flashing image succesfull"):
+			self.session.openWithCallback(self.abort, MultibootSelection)
+		else:
+			return 0
 
 class MultibootSelection(SelectImage):
 	def __init__(self, session, *args):
