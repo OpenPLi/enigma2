@@ -2,10 +2,10 @@ from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import ActionMap
-from Components.Label import Label
 from Components.config import ConfigSelection, getConfigListEntry, ConfigAction
 from Components.ScrollLabel import ScrollLabel
 from Tools.GetEcmInfo import GetEcmInfo
+from Components.Sources.StaticText import StaticText
 
 import os
 from Tools.camcontrol import CamControl
@@ -18,10 +18,12 @@ class SoftcamSetup(Screen, ConfigListScreen):
 		<widget name="info" position="5,100" size="550,300" font="Fixed;18" />
 		<ePixmap name="red" position="0,410" zPosition="1" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 		<ePixmap name="green" position="140,410" zPosition="1" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-		<ePixmap name="blue" position="420,410" zPosition="1" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-		<widget name="key_red" position="0,410" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_green" position="140,410" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_blue" position="420,410" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
+		<widget objectTypes="key_red,StaticText" source="key_red" render="Label" position="0,410" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
+		<widget objectTypes="key_green,StaticText" source="key_green" render="Label" position="140,410" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
+		<widget objectTypes="key_blue,StaticText" source="key_blue" render="Label"  position="420,410" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1"/>
+		<widget objectTypes="key_blue,StaticText" source="key_blue" render="Pixmap" pixmap="skin_default/buttons/blue.png"  position="420,410" zPosition="1" size="140,40" transparent="1" alphatest="on">
+			<convert type="ConditionalShowHide"/>
+		</widget>
 	</screen>"""
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -38,7 +40,7 @@ class SoftcamSetup(Screen, ConfigListScreen):
 			},-1)
 
 		self.list = [ ]
-		ConfigListScreen.__init__(self, self.list, session = session)
+		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changedEntry)
 
 		self.softcam = CamControl('softcam')
 		self.cardserver = CamControl('cardserver')
@@ -56,7 +58,8 @@ class SoftcamSetup(Screen, ConfigListScreen):
 		self.softcams = ConfigSelection(choices = softcams)
 		self.softcams.value = self.softcam.current()
 
-		self.list.append(getConfigListEntry(_("Select Softcam"), self.softcams))
+		self.softcams_text = _("Select Softcam")
+		self.list.append(getConfigListEntry(self.softcams_text, self.softcams))
 		if cardservers:
 			self.cardservers = ConfigSelection(choices = cardservers)
 			self.cardservers.value = self.cardserver.current()
@@ -67,9 +70,20 @@ class SoftcamSetup(Screen, ConfigListScreen):
 			self.list.append(getConfigListEntry(_("Restart cardserver"), ConfigAction(self.restart, "c")))
 			self.list.append(getConfigListEntry(_("Restart both"), ConfigAction(self.restart, "sc")))
 
-		self["key_red"] = Label(_("Cancel"))
-		self["key_green"] = Label(_("OK"))
-		self["key_blue"] = Label(_("Info"))
+		self["key_red"] = StaticText(_("Cancel"))
+		self["key_green"] = StaticText(_("OK"))
+		self["key_blue"] = StaticText()
+		self.onShown.append(self.blueButton)
+
+	def changedEntry(self):
+		if self["config"].getCurrent()[0] == self.softcams_text:
+			self.blueButton()
+
+	def blueButton(self):
+		if self.softcams.value.lower() == "none":
+			self["key_blue"].setText("")
+		else:
+			self["key_blue"].setText(_("Info"))
 
 	def setEcmInfo(self):
 		(newEcmFound, ecmInfo) = self.ecminfo.getEcm()
