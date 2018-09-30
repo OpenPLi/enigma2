@@ -112,6 +112,7 @@ class AudioSelection(Screen, ConfigListScreen):
 					number = str(x + 1)
 					i = audio.getTrackInfo(x)
 					languages = i.getLanguage().split('/')
+					print "[AudioSelection] audio track:", number, languages
 					description = i.getDescription() or ""
 					selected = ""
 					language = ""
@@ -236,6 +237,8 @@ class AudioSelection(Screen, ConfigListScreen):
 		service = self.session.nav.getCurrentService()
 		subtitle = service and service.subtitle()
 		subtitlelist = subtitle and subtitle.getSubtitleList()
+		for s in subtitlelist:
+			print "[AudioSelection] subtitle track:", s
 		self.selectedSubtitle = None
 		if self.subtitlesEnabled():
 			self.selectedSubtitle = self.infobar.selected_subtitle
