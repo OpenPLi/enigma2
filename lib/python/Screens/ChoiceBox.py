@@ -20,7 +20,7 @@ class ChoiceBox(Screen):
 		self.skinName = skin_name + ["ChoiceBox"]
 
 		self.reorderConfig = reorderConfig
-		self.title = title
+		self.text = title
 		self["text"] = Label(title)
 		self.list = []
 		self.summarylist = []
@@ -94,12 +94,12 @@ class ChoiceBox(Screen):
 		def getTextSize():
 			def getTextPars(text):
 				return len(text), text
-			l, text = getTextPars(self.title)
+			l, text = getTextPars(self.text)
 			( max_l, max_text ) = max([getTextPars(line[0][0]) for line in self["list"].list])
 			text, l = (max_text, max_l) if max_l > l else (text, l)
 			self["text"].setText(text)
 			size = self["text"].getSize()
-			self["text"].setText(self.title)
+			self["text"].setText(self.text)
 			return size
 
 		orgpos = self.instance.position()
