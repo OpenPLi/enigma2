@@ -102,15 +102,11 @@ class ChoiceBox(Screen):
 			self["text"].setText(self.text)
 			return size
 
-		def getScreenSize():
-			desktop = enigma.getDesktop(0)
-			return desktop.size().width(), desktop.size().height()
-
 		textsize = getTextSize()
 		count = len(self.list)
 		if count > 10:
 			count = 10
-		offset = 25 * count
+		offset = self["list"].l.getItemSize().height() * count
 		wsizex = textsize[0] + 60
 		wsizey = textsize[1] + offset
 		# move and resize screen
@@ -119,7 +115,7 @@ class ChoiceBox(Screen):
 		# resize list
 		self["list"].instance.resize(enigma.eSize(*(wsizex, offset)))
 		# center window
-		width,height = getScreenSize()
+		width,height = enigma.getDesktop(0).size().width(), enigma.getDesktop(0).size().height()
 		self.instance.move(enigma.ePoint((width - wsizex)/2,(height - wsizey)/2))
 
 	def keyLeft(self):
