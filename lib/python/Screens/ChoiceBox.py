@@ -20,7 +20,7 @@ class ChoiceBox(Screen):
 		self.skinName = skin_name + ["ChoiceBox"]
 
 		self.reorderConfig = reorderConfig
-		self.text = title
+		self["autoresize"] = Label("") # do not remove, used for autoResize()
 		self["text"] = Label(title)
 		self.list = []
 		self.summarylist = []
@@ -91,23 +91,19 @@ class ChoiceBox(Screen):
 		self.setTitle(windowTitle or _("Select"))
 
 	def autoResize(self):
-		def getTextSize():
-			def getTextPars(text):
-				return len(text), text
-			l, text = getTextPars(self.text)
-			( max_l, max_text ) = max([getTextPars(line[0][0]) for line in self["list"].list])
-			text, l = (max_text, max_l) if max_l > l else (text, l)
-			self["text"].setText(text)
-			size = self["text"].getSize()
-			self["text"].setText(self.text)
-			return size
+		def x_offset():
+			return max([line[1][1] for line in self["list"].list])
+		def x_width(textsize):
+			def getListLineTextWidth(text):
+				self["autoresize"].setText(text)
+				return self["autoresize"].getSize()[0]
+			return max(max([getListLineTextWidth(line[0][0]) for line in self["list"].list]), textsize)
 
-		textsize = getTextSize()
+		textsize = self["text"].getSize()
 		count = len(self.list)
-		if count > 10:
-			count = 10
+		count, scrollbar = (10, 20 + 5) if count > 10 else (count, 0)
 		offset = self["list"].l.getItemSize().height() * count
-		wsizex = textsize[0] + 60
+		wsizex = x_width(textsize[0]) + x_offset() + 10 + scrollbar
 		wsizey = textsize[1] + offset
 		# move and resize screen
 		self["list"].instance.move(enigma.ePoint(0, textsize[1]))
