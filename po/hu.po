@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-29 17:41+0200\n"
-"PO-Revision-Date: 2018-08-28 12:27+0200\n"
+"PO-Revision-Date: 2018-10-08 13:00+0200\n"
 "Last-Translator: mcfly82\n"
 "Language-Team: mcfly82 & wysless\n"
 "Language: hu_HU\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.1.1\n"
+"X-Generator: Poedit 2.2\n"
 
 msgid ""
 "\n"
@@ -380,6 +380,9 @@ msgid ""
 "Press ok for multiboot selection\n"
 "Press exit to close"
 msgstr ""
+"%s\n"
+"Nyomja meg az 'OK'-t a multiboot kiválasztásához\n"
+"Nyomja meg az 'Exit'-et a kilépéshez"
 
 #, python-format
 msgid "%s %d.%d"
@@ -1419,7 +1422,7 @@ msgid "Burn audio track (%s)"
 msgstr "Hangsáv írása (%s)"
 
 msgid "Burn existing image to DVD"
-msgstr "A meglévő képfájl DVD-re írása"
+msgstr "A meglévő image DVD-re írása"
 
 msgid "Burn to DVD"
 msgstr "DVD-re kiírás"
@@ -2194,9 +2197,8 @@ msgstr "Elefántcsontpart"
 msgid "Could not find installed channel list."
 msgstr "Nem található telepített csatornalista."
 
-#, fuzzy
 msgid "Could not find suitable media - Please remove some downloaded images or insert a media (e.g. USB stick) with sufficiant free space and try again!"
-msgstr "Nem található megfelelő adathordozó. Kérem, helyezzen be egy adathordozót, és próbálja újra!"
+msgstr "Nem található megfelelő adathordozó. Kérem, töröljön néhány letöltött image-t, vagy helyezzen be egy adathordozót (pl. pendrive) elegendő szabad hellyel, és próbálja újra!"
 
 msgid "Could not load medium! No disc inserted?"
 msgstr "Nem lehet betölteni a hordozót! Van bennt lemez?"
@@ -2417,9 +2419,8 @@ msgstr "Felvételek tárhelye"
 msgid "Default settings"
 msgstr "Alapértelmezett beállítások"
 
-#, fuzzy
 msgid "Define the location of the EPG Cache file."
-msgstr "A kép méret-arányának beállítása."
+msgstr "Az EPG cache fájl helyének megadása."
 
 msgid "Delay after change voltage before switch command"
 msgstr "Késleltetés a feszültség változás után a kapcsoló parancs előtt"
@@ -4580,7 +4581,7 @@ msgid "Location"
 msgstr "Tárhely"
 
 msgid "Location EPG Cache file"
-msgstr ""
+msgstr "EPG cache fájl helye"
 
 msgid "Location for instant recordings"
 msgstr "Azonnali felvételek helye"
@@ -6186,9 +6187,8 @@ msgstr "Biztos ki szeretne lépni az alcsatorna gyorsUGRÁS módból?"
 msgid "Really reboot now?"
 msgstr "Biztos újraindítsam most?"
 
-#, fuzzy
 msgid "Really restart in debug mode now?"
-msgstr "Biztos újraindítsam most?"
+msgstr "Biztos újraindítsam most hibakeresési módban?"
 
 msgid "Really restart now?"
 msgstr "Biztos újraindítsam most?"
@@ -6459,9 +6459,8 @@ msgstr "Kártyaszerver újraindítása"
 msgid "Restart enigma"
 msgstr "Kezelőfelület újraindítása"
 
-#, fuzzy
 msgid "Restart enigma in debug mode"
-msgstr "Kezelőfelület újraindítása"
+msgstr "Kezelőfelület újraindítása hibakeresési módban"
 
 msgid "Restart network"
 msgstr "Hálózat újraindítása"
@@ -8232,7 +8231,7 @@ msgid "TRANSLATOR_INFO"
 msgstr ""
 "A fordítást készítette:\n"
 "mcfly82 & wysless\n"
-"Utolsó fordítás időpontja: 2018.08.28.\n"
+"Utolsó fordítás időpontja: 2018.10.08.\n"
 "Eredeti fordítás: MediaVox-Team, Robertut\n"
 "A magyar fordítás az OpenPLi projekthez készült.\n"
 "További információ: http://openpli.org"
@@ -8449,9 +8448,8 @@ msgstr ""
 "A kezelőfelület újraindítása folyamatban van\n"
 "a mytest.py fájlban lévő hiba miatt"
 
-#, fuzzy
 msgid "The user interface of your receiver is restarting in debug mode"
-msgstr "A kezelőfelület újraindítása folyamatban van"
+msgstr "A kezelőfelület hibakeresési módban indul újra"
 
 msgid ""
 "The wireless LAN plugin is not installed!\n"
@@ -9113,8 +9111,8 @@ msgstr "Köv. csatorna az előzményekben"
 #, python-format
 msgid "Update completed, %d package was installed."
 msgid_plural "Update completed, %d packages were installed."
-msgstr[0] "A frissítés elkészült, %d csomag került telepítésre."
-msgstr[1] "A frissítés elkészült, %d csaomag lett feltelepítve."
+msgstr[0] "A frissítés elkészült, %d csomag lett feltelepítve."
+msgstr[1] "A frissítés elkészült, %d csomag lett feltelepítve."
 
 msgid "Update completed. Do you want to reboot your receiver?"
 msgstr "Frissítés sikeres. Újraindítja most a készüléket?"
