@@ -28,11 +28,21 @@ class JobView(InfoBarNotifications, Screen, ConfigListScreen):
 		self["summary_job_progress"] = Progress()
 		self["summary_job_task"] = StaticText()
 		self["job_status"] = StaticText()
-		self["finished"] = Boolean()
-		self["cancelable"] = Boolean(cancelable)
-		self["backgroundable"] = Boolean(backgroundable)
 
-		self["key_blue"] = StaticText(_("Background"))
+		self.cancelable = Boolean(cancelable)
+		self.backgroundable = Boolean(backgroundable)
+
+		self["key_green"] = StaticText("")
+
+		if self.cancelable.getBoolean:
+			self["key_red"] = StaticText(_("Cancel"))
+		else:
+			self["key_red"] = StaticText("")
+
+		if self.backgroundable.getBoolean:
+			self["key_blue"] = StaticText(_("Hide"))
+		else:
+			self["key_blue"] = StaticText("")
 
 		self.onShow.append(self.windowShow)
 		self.onHide.append(self.windowHide)
@@ -97,15 +107,18 @@ class JobView(InfoBarNotifications, Screen, ConfigListScreen):
 			self["summary_job_task"].text = j.getStatustext()
 		if j.status in (j.FINISHED, j.FAILED):
 			self.performAfterEvent()
-			self["backgroundable"].boolean = False
+			self.backgroundable.setBoolean(False)
+			self["key_blue"].setText("")
 			if j.status == j.FINISHED:
-				self["finished"].boolean = True
-				self["cancelable"].boolean = False
+				self["key_green"].setText(_("OK"))
+				self.cancelable.setBoolean(False)
+				self["key_red"].setText("")
 			elif j.status == j.FAILED:
-				self["cancelable"].boolean = True
+				self.cancelable.setBoolean(True)
+				self["key_red"].setText(_("Cancel"))
 
 	def background(self):
-		if self["backgroundable"].boolean:
+		if self.backgroundable.getBoolean():
 			self.close(True)
 
 	def ok(self):
@@ -118,7 +131,7 @@ class JobView(InfoBarNotifications, Screen, ConfigListScreen):
 		if self.job.status == self.job.NOT_STARTED:
 			job_manager.active_jobs.remove(self.job)
 			self.close(False)
-		elif self.job.status == self.job.IN_PROGRESS and self["cancelable"].boolean == True:
+		elif self.job.status == self.job.IN_PROGRESS and self.cancelable.getBoolean():
 			self.job.cancel()
 		else:
 			self.close(False)
