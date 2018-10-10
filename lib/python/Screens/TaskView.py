@@ -39,7 +39,7 @@ class JobView(InfoBarNotifications, Screen, ConfigListScreen):
 			self["key_red"] = StaticText("")
 
 		if self.backgroundable:
-			self["key_blue"] = StaticText(_("Hide"))
+			self["key_blue"] = StaticText(_("Background"))
 		else:
 			self["key_blue"] = StaticText("")
 
