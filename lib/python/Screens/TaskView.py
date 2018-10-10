@@ -1,7 +1,6 @@
 from Components.ActionMap import ActionMap
 from Components.config import config, ConfigSubsection, ConfigSelection, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
-from Components.Sources.Boolean import Boolean
 from Components.Sources.Progress import Progress
 from Components.Sources.StaticText import StaticText
 from Components.SystemInfo import SystemInfo
@@ -29,17 +28,17 @@ class JobView(InfoBarNotifications, Screen, ConfigListScreen):
 		self["summary_job_task"] = StaticText()
 		self["job_status"] = StaticText()
 
-		self.cancelable = Boolean(cancelable)
-		self.backgroundable = Boolean(backgroundable)
+		self.cancelable = cancelable
+		self.backgroundable = backgroundable
 
 		self["key_green"] = StaticText("")
 
-		if self.cancelable.getBoolean:
+		if self.cancelable:
 			self["key_red"] = StaticText(_("Cancel"))
 		else:
 			self["key_red"] = StaticText("")
 
-		if self.backgroundable.getBoolean:
+		if self.backgroundable:
 			self["key_blue"] = StaticText(_("Hide"))
 		else:
 			self["key_blue"] = StaticText("")
@@ -107,18 +106,18 @@ class JobView(InfoBarNotifications, Screen, ConfigListScreen):
 			self["summary_job_task"].text = j.getStatustext()
 		if j.status in (j.FINISHED, j.FAILED):
 			self.performAfterEvent()
-			self.backgroundable.setBoolean(False)
+			self.backgroundable = False
 			self["key_blue"].setText("")
 			if j.status == j.FINISHED:
 				self["key_green"].setText(_("OK"))
-				self.cancelable.setBoolean(False)
+				self.cancelable = False
 				self["key_red"].setText("")
 			elif j.status == j.FAILED:
-				self.cancelable.setBoolean(True)
+				self.cancelable = True
 				self["key_red"].setText(_("Cancel"))
 
 	def background(self):
-		if self.backgroundable.getBoolean():
+		if self.backgroundable:
 			self.close(True)
 
 	def ok(self):
@@ -131,7 +130,7 @@ class JobView(InfoBarNotifications, Screen, ConfigListScreen):
 		if self.job.status == self.job.NOT_STARTED:
 			job_manager.active_jobs.remove(self.job)
 			self.close(False)
-		elif self.job.status == self.job.IN_PROGRESS and self.cancelable.getBoolean():
+		elif self.job.status == self.job.IN_PROGRESS and self.cancelable:
 			self.job.cancel()
 		else:
 			self.close(False)
