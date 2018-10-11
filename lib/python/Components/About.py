@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import sys, os, time
+import re
 from Tools.HardwareInfo import HardwareInfo
 
 def getVersionString():
@@ -109,6 +110,11 @@ def getCPUInfoString():
 		elif os.path.isfile("/sys/devices/virtual/thermal/thermal_zone0/temp"):
 			try:
 				temperature = int(open("/sys/devices/virtual/thermal/thermal_zone0/temp").read().strip())/1000
+			except:
+				pass
+		elif os.path.isfile("/proc/hisi/msp/pm_cpu"):
+			try:
+				temperature = re.search('temperature = (\d+) degree', open("/proc/hisi/msp/pm_cpu").read()).group(1)
 			except:
 				pass
 		if temperature:
