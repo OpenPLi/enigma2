@@ -311,7 +311,8 @@ class RemoteControlType(Screen, ConfigListScreen):
 			("18", _("F1/F3/F4/F4-TURBO")),
 			("19", _("HD2400")),
 			("20", _("Zgemma Star S/2S/H1/H2")),
-			("21", _("Zgemma H.S/H.2S/H.2H/H5/H7"))
+			("21", _("Zgemma H.S/H.2S/H.2H/H5/H7")),
+			("25", _("Zgemma H9"))
 		]
 
 	defaultRcList = [
@@ -347,6 +348,7 @@ class RemoteControlType(Screen, ConfigListScreen):
 			("h3", 21),
 			("h5", 21),
 			("h7", 21),
+			("h9", 25),
 			("et7000mini", 16)
 		]
 
