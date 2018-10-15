@@ -97,6 +97,8 @@ def getHotkeys():
 		("Media" + " " + _("long"), "media_long", ""),
 		("Favorites", "favorites", "Infobar/openFavouritesList"),
 		("Favorites" + " " + _("long"), "favorites_long", ""),
+		("Mouse", "mouse", ""),
+		("Mouse" + " " + _("long"), "mouse_long", ""),
 		("WWW Portal", "www", ""),
 		("WWW Portal" + " " + _("long"), "www_long", "")]
 
