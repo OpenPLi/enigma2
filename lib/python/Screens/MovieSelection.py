@@ -1018,6 +1018,14 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		except Exception, e:
 			print "[ML] DVD Player not installed:", e
 
+	def playSuburi(self, path):
+		suburi = os.path.splitext(path)[0][:-7]
+		for ext in AUDIO_EXTENSIONS:
+			if os.path.exists("%s%s" % (suburi, ext)):
+				current = eServiceReference(4097, 0, "file://%s&suburi=file://%s%s" % (path, suburi, ext))
+				self.close(current)
+				return True
+
 	def __serviceStarted(self):
 		if not self.list.playInBackground:
 			return
@@ -1184,6 +1192,9 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 					return
 			elif ext in DVD_EXTENSIONS:
 				if self.playAsDVD(path):
+					return
+			elif "_suburi." in path:
+				if self.playSuburi(path):
 					return
 			self.movieSelected()
 
