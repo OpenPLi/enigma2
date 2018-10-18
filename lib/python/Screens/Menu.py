@@ -381,9 +381,9 @@ class MenuSort(Menu):
 	def selectionChanged(self):
 		selection = self["menu"].getCurrent()[2]
 		if self.sub_menu_sort.getConfigValue(selection, "hidden"):
-			self["key_yellow"].setText(_("show"))
+			self["key_yellow"].setText(_("Show"))
 		else:
-			self["key_yellow"].setText(_("hide"))
+			self["key_yellow"].setText(_("Hide"))
 
 	def keySave(self):
 		if self.somethingChanged:
@@ -428,10 +428,10 @@ class MenuSort(Menu):
 		selection = self["menu"].getCurrent()[2]
 		if self.sub_menu_sort.getConfigValue(selection, "hidden"):
 			self.sub_menu_sort.removeConfigValue(selection, "hidden")
-			self["key_yellow"].setText(_("hide"))
+			self["key_yellow"].setText(_("Hide"))
 		else:
 			self.sub_menu_sort.changeConfigValue(selection, "hidden", 1)
-			self["key_yellow"].setText(_("show"))
+			self["key_yellow"].setText(_("Show"))
 
 	def moveChoosen(self, direction):
 		self.somethingChanged = True
