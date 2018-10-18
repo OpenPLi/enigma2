@@ -315,7 +315,7 @@ class FlashImage(Screen):
 
 	def unzip(self):
 		self["header"].setText(_("Unzipping Image"))
-		self["info"].setText(self.imagename)
+		self["info"].setText("%s\n%s"% (self.imagename, _("Please wait")))
 		self["progress"].hide()
 		self.delay.callback.remove(self.confirmation)
 		self.delay.callback.append(self.doUnzip)
