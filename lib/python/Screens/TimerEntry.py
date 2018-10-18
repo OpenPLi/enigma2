@@ -108,7 +108,7 @@ class TimerEntry(Screen, ConfigListScreen):
 			repeated = None
 			weekday = int(strftime("%u", localtime(self.timer.begin))) - 1
 			day[weekday] = 1
-		self.timerentry_fallback = ConfigYesNo(default=config.usage.remote_fallback_external_timer.value and config.usage.remote_fallback.value and not nimmanager.somethingConnected())
+		self.timerentry_fallback = ConfigYesNo(default=self.timer.external_prev or config.usage.remote_fallback_external_timer.value and config.usage.remote_fallback.value and not nimmanager.somethingConnected())
 		self.timerentry_justplay = ConfigSelection(choices = [
 			("zap", _("zap")), ("record", _("record")), ("zap+record", _("zap and record"))],
 			default = {0: "record", 1: "zap", 2: "zap+record"}[justplay + 2*always_zap])
