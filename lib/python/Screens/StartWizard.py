@@ -48,7 +48,7 @@ def checkForAvailableAutoBackup():
 
 class AutoRestoreWizard(MessageBox):
 	def __init__(self, session):
-		MessageBox.__init__(self, session, _("Do you want to autorestore settings?"), type=MessageBox.TYPE_YESNO, timeout=10, default=True, simple=True)
+		MessageBox.__init__(self, session, _("Do you want to autorestore settings?"), type=MessageBox.TYPE_YESNO, timeout=20, default=True, simple=True)
 
 	def close(self, value):
 		if value:
