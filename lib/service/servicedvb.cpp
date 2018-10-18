@@ -1925,9 +1925,6 @@ int eDVBServicePlay::getInfo(int w)
 	case sIsDedicated3D:
 		if (m_dvb_service) return m_dvb_service->isDedicated3D();
 		return false;
-	case sHideVBI:
-		if (m_dvb_service) return m_dvb_service->doHideVBI();
-		return false;
 	case sCenterDVBSubs:
 		if (m_dvb_service) return m_dvb_service->doCenterDVBSubs();
 		return false;
