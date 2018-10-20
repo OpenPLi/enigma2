@@ -21,10 +21,10 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 
 		self["actions2"] = ActionMap(["SetupActions"],
 		{
-			"ok": self.keyGo,
+			"ok": self.run,
 			"menu": self.keyCancel,
 			"cancel": self.keyCancel,
-			"save": self.keyGo,
+			"save": self.run,
 		}, -2)
 
 		self["key_red"] = StaticText(_("Exit"))
@@ -151,7 +151,7 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 		if isinstance(self["config"].getCurrent()[1], ConfigBoolean) or isinstance(self["config"].getCurrent()[1], ConfigSelection):
 			self.createSetup()
 
-	def keyGo(self):
+	def run(self):
 		if self.avahiselect.value == "ip":
 			config.usage.remote_fallback.value = "http://%d.%d.%d.%d:%d" % (tuple(self.ip.value) + (self.port.value,))
 		elif self.avahiselect.value != "url":
