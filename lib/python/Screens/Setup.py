@@ -162,6 +162,9 @@ class Setup(ConfigListScreen, Screen):
 		if not (isinstance(self["config"].getCurrent()[1], ConfigBoolean) or isinstance(self["config"].getCurrent()[1], ConfigSelection)):
 			self.force_update_list = True
 
+	def run(self):
+		self.keySave()
+
 def getSetupTitle(id):
 	xmldata = setupdom.getroot()
 	for x in xmldata.findall("setup"):
