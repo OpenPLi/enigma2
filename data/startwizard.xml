@@ -258,6 +258,14 @@ self.clearSelectedKeys()
 self.selectKey("OK")
 			</code>
 		</step>
+		<step id="setup">
+			<text value="Please setup the following basic configs!" />
+			<config screen="Setup" module="Setup" args="wizardsetup" type="ConfigList" />
+			<code>
+self.clearSelectedKeys()
+self.selectKey("OK")
+			</code>
+		</step>
 		<step id="end" laststep="true">
 			<text value="Thank you for using the wizard. Your receiver is now ready for use.\nPress OK to start using your receiver." />
 			<code>
