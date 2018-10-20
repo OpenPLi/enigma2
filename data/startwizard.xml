@@ -222,6 +222,19 @@ self.selectKey("LEFT")
 self.selectKey("RIGHT")
 			</code>
 		</step>
+		<step id="fallbacktuner">
+			<condition>
+from Components.NimManager import nimmanager
+self.condition = not nimmanager.somethingConnected() and config.misc.installwizard.hasnetwork.value and config.misc.installwizard.ipkgloaded.value
+			</condition>
+			<text value="Do you want to install a channel list?" />
+			<config screen="SetupFallbacktuner" module="SetupFallbacktuner" type="ConfigList" />
+			<code>
+self.clearSelectedKeys()
+self.selectKey("LEFT")
+self.selectKey("RIGHT")
+			</code>
+		</step>
 		<step id="doscan">
 			<text value="What type of service scan do you want?" />
 			<condition>
