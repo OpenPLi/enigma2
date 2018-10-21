@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-29 17:41+0200\n"
+"POT-Creation-Date: 2018-10-21 11:16+0200\n"
 "PO-Revision-Date: 2018-05-27 10:28+0200\n"
 "Last-Translator: GeirJ <dummy@dummy.com>\n"
 "Language-Team: GeirJ\n"
@@ -95,13 +95,6 @@ msgid ""
 msgstr ""
 "\n"
 "Tilbakestill din mottakers innstillinger."
-
-msgid ""
-"\n"
-"Restore your receiver with a new firmware."
-msgstr ""
-"\n"
-"Tilbakestill mottakeren med en ny programvare."
 
 msgid ""
 "\n"
@@ -2375,10 +2368,6 @@ msgid "Continue"
 msgstr "Fortsett"
 
 #
-msgid "Continue in background"
-msgstr "Fortsett i bakgrunnen"
-
-#
 msgid "Continue playback"
 msgstr "Fortsett avspillingen"
 
@@ -3901,6 +3890,10 @@ msgstr "Installer operativsystem"
 msgid "Flash image"
 msgstr "Installer operativsystem"
 
+#, fuzzy
+msgid "Flashing Image"
+msgstr "Installer operativsystem"
+
 msgid "Flashing image succesfull"
 msgstr "Installering av operativsystem gikk fint"
 
@@ -4304,6 +4297,9 @@ msgstr "Hjelp for antenne oppsett"
 msgid "Hidden network"
 msgstr "Skjult nettverk"
 
+msgid "Hide"
+msgstr ""
+
 msgid "Hide channel list in radio mode"
 msgstr "Skjul kanallisten i radiomodus"
 
@@ -4652,12 +4648,6 @@ msgstr "Enhets innstilling"
 #
 msgid "Install"
 msgstr "Installer"
-
-msgid "Install a new image with a USB stick"
-msgstr "Installer nytt operativsystem med en USB pinne"
-
-msgid "Install a new image with your web browser"
-msgstr "Installer et nytt operativsystem med nettleseren"
 
 #
 msgid "Install channel list"
@@ -5695,10 +5685,6 @@ msgid "No age block"
 msgstr "Ingen aldersgrense"
 
 #
-msgid "No backup needed"
-msgstr "Backup er ikke nødvendig"
-
-#
 msgid ""
 "No data on transponder!\n"
 "(Timeout reading PAT)"
@@ -5848,15 +5834,8 @@ msgstr "Nei, men start på nytt"
 msgid "No, do not flash image"
 msgstr "Nei, ikke installer systemet"
 
-#
-msgid "No, do nothing."
-msgstr "Nei, ikke gjør noe."
-
 msgid "No, except Wakeup timer"
 msgstr "Nei, unntatt vekke timer"
-
-msgid "No, just start my receiver"
-msgstr "Nei, bare start opp mottakeren"
 
 msgid "No, never"
 msgstr "Nei, aldri"
@@ -5949,9 +5928,6 @@ msgstr ""
 #
 msgid "OK"
 msgstr "OK"
-
-msgid "OK, guide me through the upgrade process"
-msgstr "OK, start oppgraderings prosessen"
 
 msgid "ONID"
 msgstr "ONID"
@@ -6296,6 +6272,10 @@ msgstr ""
 "Konfigurer eller verifiser navneserver og tast inn alle nødvendige verdier.\n"
 "Trykk OK for å fortsette."
 
+#, fuzzy
+msgid "Please configure the fallback tuner setup?"
+msgstr "Ekstern tuner innstilling"
+
 msgid ""
 "Please configure your internet connection by filling out the required values.\n"
 "When you are ready press OK to continue."
@@ -6457,6 +6437,9 @@ msgstr "Still inn tuner Q"
 #
 msgid "Please set up tuner R"
 msgstr "Vennligst still inn tuner R"
+
+msgid "Please setup the following basic configs!"
+msgstr ""
 
 msgid ""
 "Please use direction keys to move the PiP window.\n"
@@ -8204,6 +8187,11 @@ msgstr "Shellskript"
 msgid "Short filenames"
 msgstr "Korte filnavn"
 
+#
+#, fuzzy
+msgid "Show"
+msgstr "Vis bilde i bilde"
+
 msgid "Show Audioselection"
 msgstr "Vis lydvalg"
 
@@ -8645,10 +8633,6 @@ msgstr "Programvareadministrasjon"
 
 msgid "Software manager setup"
 msgstr "Programvare oppsett"
-
-#
-msgid "Software restore"
-msgstr "Gjenopprett programvare"
 
 msgid "Software update"
 msgstr "Programvareoppdatering"
@@ -9316,9 +9300,6 @@ msgstr "PIN koden har blitt lagret."
 msgid "The PIN codes you entered are different."
 msgstr "Feil PIN kode er tastet."
 
-msgid "The backup failed. Please choose a different backup location."
-msgstr "Sikkerhetskopien mislyktes. Vennligst velg en annen reserveplassering."
-
 #, python-format
 msgid ""
 "The current image might not be stable.\n"
@@ -9458,13 +9439,6 @@ msgid ""
 msgstr ""
 "Det trådløse LAN tillegg er ikke installert!\n"
 "Vennligst installer det."
-
-#
-msgid "The wizard can backup your current settings. Do you want to do a backup now?"
-msgstr "Veiviseren kan ta sikkerhetskopi av dine nåværende innstillinger. Vil du sikkerhetskopiere nå?"
-
-msgid "The wizard is finished now."
-msgstr "Veiviseren er ferdig."
 
 #
 msgid "There are at least "
@@ -10172,6 +10146,11 @@ msgstr "Demonter"
 msgid "Unsupported"
 msgstr "Ikke støttet"
 
+#
+#, fuzzy
+msgid "Unzipping Image"
+msgstr "Laster ned Image"
+
 msgid "Update"
 msgstr "Oppdater"
 
@@ -10666,9 +10645,6 @@ msgstr ""
 "\n"
 "Deretter gå til slutten, trykk OK, velg 'klipp slutt'. Det var det hele."
 
-msgid "Welcome to the image upgrade wizard. The wizard will assist you in upgrading the firmware of your receiver by providing a backup facility for your current settings and a short explanation of how to upgrade your firmware."
-msgstr "Velkommen til oppdatering av operativsystemet. Veiviseren vil forklare hvordan programvare oppdateres på mottakeren ved å tilby en sikkerhetskopi av gjeldende innstillinger."
-
 msgid ""
 "Welcome.\n"
 "\n"
@@ -10910,10 +10886,6 @@ msgstr "Når bildet har et sideforhold på 16:9. Velg om det skal skaleres/strek
 msgid "When the content has an aspect ratio of 4:3, choose whether to scale/stretch the picture."
 msgstr "Når bildet har et sideforhold på 4:3. Velg om det skal skaleres/strekkes ut."
 
-#
-msgid "Where do you want to backup your settings?"
-msgstr "Hvor skal sikkerhetskopien av innstillingene lagres?"
-
 msgid "Where to save temporary timeshift recordings?"
 msgstr "Hvor skal midlertidige tidsskift opptak lagres?"
 
@@ -10948,6 +10920,11 @@ msgstr "Med varsel"
 
 msgid "Without popup"
 msgstr "Uten varsel"
+
+#
+#, fuzzy
+msgid "Wizard setup"
+msgstr "Videooppsett"
 
 msgid "Wizard to arrange the overscan"
 msgstr "Veiviser for ekte bildestørrelse"
@@ -11023,10 +11000,6 @@ msgstr "Ja, alltid"
 msgid "Yes, and delete this movie"
 msgstr "Ja, slett denne filmen"
 
-#
-msgid "Yes, backup my settings!"
-msgstr "Ja, sikkerhetskopier innstillingene!"
-
 msgid "Yes, delete this movie and return to movie list"
 msgstr "Ja, slett dette opptaket og gå til opptakslisten"
 
@@ -11036,13 +11009,6 @@ msgstr "Ja, bare fra dvalemodus"
 
 msgid "Yes, only from standby"
 msgstr "Ja, bare fra avslått modus"
-
-msgid "Yes, perform a shutdown now."
-msgstr "Ja, slå av nå."
-
-#
-msgid "Yes, restore the settings now"
-msgstr "Ja, gjenopprett innstillingene nå"
 
 msgid "Yes, returning to movie list"
 msgstr "Ja, returnerer til opptaksliste"
@@ -11146,12 +11112,6 @@ msgstr ""
 msgid "You didn't select a channel to record from."
 msgstr "Du valgte ingen kanal til opptak."
 
-msgid "You have chosen to backup your settings. Please press OK to start the backup now."
-msgstr "Du har valgt å sikkerhetskopiere innstillingene dine. Vennligst trykk OK for å starte sikkerhetskopien nå."
-
-msgid "You have chosen to restore your settings. Enigma2 will restart after restore. Please press OK to start the restore now."
-msgstr "Tilbakestilling av innstillinger er valgt. Enigma2 starter på nytt etter tilbakestillingen. Trykk OK for å fortsette."
-
 #
 #, python-format
 msgid "You have to wait %s!"
@@ -11160,16 +11120,6 @@ msgstr "Vent litt %s!"
 #, python-format
 msgid "You must switch to the service %s (%s - '%s')!\n"
 msgstr "Gå til kanalen %s (%s - '%s')!\n"
-
-msgid ""
-"You need a PC connected to your receiver. If you need further instructions, please visit the website https://openpli.org\n"
-"Your receiver will now be halted. After you have performed the update instructions from the website, your new firmware will ask you to restore your settings."
-msgstr ""
-"Du trenger en PC tilkoblet din mottaker. Trenger du flere opplysninger, vær vennlig og besøk websiden https://openpli.org\n"
-"Mottakeren vil nå bli stoppet. Etter å ha fulgt oppdaterings instruksene fra websiden, vil den nye programvaren gjenopprette dine innstillinger."
-
-msgid "Your backup succeeded. We will now continue to explain the further upgrade process."
-msgstr "Sikkerhetskopien din lyktes. Vi vil nå fortsette å forklare den videre oppdateringen."
 
 msgid "Your collection exceeds the size of a single layer medium, you will need a blank dual layer DVD!"
 msgstr "Samlingen overstiger ledig plass på enkeltlagsplaten, en tolags DVD må brukes!"
@@ -11240,9 +11190,6 @@ msgstr "Mottakeren starter på nytt"
 
 msgid "Your receiver is shutting down"
 msgstr "Mottakeren slås av"
-
-msgid "Your receiver is shutting down. Please stand by..."
-msgstr "Mottakeren slår seg av. Vennligst vent litt..."
 
 msgid "Your receiver might be unusable now. Please consult the manual for further assistance before rebooting your receiver."
 msgstr "Mottakeren kan være ubrukelig nå. Slå opp i bruksanvisningen før mottakeren startes på nytt."
@@ -11321,6 +11268,9 @@ msgstr "Timer skiftet til valgt kanal %s!"
 
 msgid "Zgemma H.S/H.2S/H.2H/H5/H7"
 msgstr "Zgemma H.S/H.2S/H.2H/H5/H7"
+
+msgid "Zgemma H9"
+msgstr ""
 
 msgid "Zgemma Star S/2S/H1/H2"
 msgstr "Zgemma Star S/2S/H1/H2"
@@ -11863,9 +11813,6 @@ msgstr "høyde"
 msgid "help..."
 msgstr "hjelp..."
 
-msgid "hide"
-msgstr "skjul"
-
 #
 msgid "horizontal"
 msgstr "horisontal"
@@ -12334,9 +12281,6 @@ msgstr "kanalen sender ikke"
 
 msgid "set as startup service"
 msgstr "bruk denne som oppstartskanal"
-
-msgid "show"
-msgstr "vis"
 
 #
 msgid "show DVD main menu"
