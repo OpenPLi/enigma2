@@ -21,6 +21,7 @@ class ChoiceBox(Screen):
 
 		self.reorderConfig = reorderConfig
 		self["autoresize"] = Label("") # do not remove, used for autoResize()
+		self["description"] = Label()
 		self["text"] = Label(title)
 		self.list = []
 		self.summarylist = []
@@ -59,6 +60,7 @@ class ChoiceBox(Screen):
 				self.keymap[self.__keys[pos]] = list[pos]
 			self.summarylist.append((self.__keys[pos],x[0]))
 			pos += 1
+
 		self["list"] = ChoiceList(list = self.list, selection = selection)
 		self["summary_list"] = StaticText()
 		self["summary_selection"] = StaticText()
@@ -99,15 +101,31 @@ class ChoiceBox(Screen):
 				return self["autoresize"].getSize()[0]
 			return max(max([getListLineTextWidth(line[0][0]) for line in self["list"].list]), textsize)
 
+		def getMaxDescriptionHeight():
+			def getDescrLineHeight(text):
+				if len(text)==3:
+					self["description"].setText(text[2])
+					return self["description"].instance.calculateSize().height()
+				return 0
+			return max([getDescrLineHeight(line[0]) for line in self["list"].list ])
+
 		textsize = self["text"].getSize()
 		count = len(self.list)
 		count, scrollbar = (10, 20 + 5) if count > 10 else (count, 0)
 		offset = self["list"].l.getItemSize().height() * count
 		wsizex = x_width(textsize[0]) + x_offset() + 10 + scrollbar
-		wsizey = textsize[1] + offset
+		#precount description size
+		descrsize = self["description"].getSize()
+		self["description"].instance.resize(enigma.eSize(*(wsizex - 20, descrsize[1] if descrsize[1] > 0 else 0)))
+		# then get true description height
+		descriptionHeight = getMaxDescriptionHeight()
+		wsizey = textsize[1] + offset + descriptionHeight
 		# move and resize screen
 		self["list"].instance.move(enigma.ePoint(0, textsize[1]))
 		self.instance.resize(enigma.eSize(*(wsizex, wsizey)))
+		# move and resize description
+		self["description"].instance.move(enigma.ePoint(10, textsize[1] + offset))
+		self["description"].instance.resize(enigma.eSize(*(wsizex - 20, descriptionHeight)))
 		# resize list
 		self["list"].instance.resize(enigma.eSize(*(wsizex, offset)))
 		# center window
@@ -177,6 +195,7 @@ class ChoiceBox(Screen):
 		self.goKey("blue")
 
 	def updateSummary(self, curpos=0):
+		self.displayDescription()
 		pos = 0
 		summarytext = ""
 		for entry in self.summarylist:
@@ -189,6 +208,13 @@ class ChoiceBox(Screen):
 				summarytext += ' ' + entry[1] + '\n'
 			pos += 1
 		self["summary_list"].setText(summarytext)
+
+	def displayDescription(self):
+		cursel = self["list"].l.getCurrentSelection()
+		if cursel and len(cursel[0]) == 3:
+			self["description"].setText(cursel[0][2])
+		else:
+			self["description"].setText("")
 
 	def cancel(self):
 		self.close(None)
