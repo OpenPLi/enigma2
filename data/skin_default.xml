@@ -26,6 +26,7 @@
 		<alias name="Body" font="Regular" size="20" height="25"/>
 		<alias name="ChoiceList" font="Regular" size="20" height="25"/>
 		<alias name="TextNormal" font="Regular" size="20" height="24"/>
+		<alias name="ChoiceBoxDescription" font="Regular" size="18" height="18"/>
 	</fonts>
 	<colors>
 		<color name="white" value="#ffffff"/>
@@ -253,6 +254,7 @@
 		<widget name="autoresize" position="0,0" size="0,0" font="ChoiceList" noWrap="1"/>
 		<widget name="text" position="top" size="*,2h" font="TextNormal"/>
 		<widget name="list" position="fill" scrollbarMode="showOnDemand"/>
+		<widget name="description" position="0,0" size="0,0" font="ChoiceBoxDescription" valign="center"/>
 		<applet type="onLayoutFinish">
 self.autoResize()
 		</applet>
