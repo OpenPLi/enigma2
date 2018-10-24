@@ -84,10 +84,11 @@ class AutoInstallWizard(Screen):
 		autoinstallfiles = [x for x in os.path.join(os.sep, backupdir, '%s%s' % ('autoinstall', macaddr)), os.path.join(os.sep, backupdir, 'autoinstall') if os.path.isfile(x)]
 		if autoinstallfiles:
 			self.packages = [x.strip() for x in open(autoinstallfiles[0]).readlines()]
-			self.totalpackages = len(self.packages)
-			self.onLayoutFinish.append(self.run_console)
-		else:
-			self.close()
+			if self.packages:
+				self.totalpackages = len(self.packages)
+				self.onLayoutFinish.append(self.run_console)
+				return
+		self.close()
 
 	def run_console(self):
 		if not self.counter:
