@@ -211,7 +211,7 @@ class ChoiceBox(Screen):
 
 	def displayDescription(self):
 		cursel = self["list"].l.getCurrentSelection()
-		if cursel and len(cursel[0]) == 3:
+		if cursel and len(cursel[0]) == 3 and isinstance(cursel[0][2], str):
 			self["description"].setText(cursel[0][2])
 		else:
 			self["description"].setText("")
