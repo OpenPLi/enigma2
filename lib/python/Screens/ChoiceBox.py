@@ -195,7 +195,7 @@ class ChoiceBox(Screen):
 		self.goKey("blue")
 
 	def updateSummary(self, curpos=0):
-		self.displayDescription()
+		self.displayDescription(curpos)
 		pos = 0
 		summarytext = ""
 		for entry in self.summarylist:
@@ -209,10 +209,9 @@ class ChoiceBox(Screen):
 			pos += 1
 		self["summary_list"].setText(summarytext)
 
-	def displayDescription(self):
-		cursel = self["list"].l.getCurrentSelection()
-		if cursel and len(cursel[0]) == 3 and isinstance(cursel[0][2], str):
-			self["description"].setText(cursel[0][2])
+	def displayDescription(self, curpos=0):
+		if len(self.list[curpos][0]) > 2 and isinstance(self.list[curpos][0][2], str):
+			self["description"].setText(self.list[curpos][0][2])
 		else:
 			self["description"].setText("")
 
