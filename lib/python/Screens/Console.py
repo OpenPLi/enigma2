@@ -66,6 +66,8 @@ class Console(Screen):
 				self.finishedCallback()
 			if not self.errorOcurred and self.closeOnSuccess:
 				self.cancel()
+			else:
+				self["text"].appendText(_("\nPress OK or Exit to abort!"))
 
 	def cancel(self):
 		if self.run == len(self.cmdlist):
