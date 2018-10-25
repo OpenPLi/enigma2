@@ -74,7 +74,7 @@ class AutoInstallWizard(Screen):
 		self["progress"].setRange((0, 100))
 		self["progress"].setValue(0)
 		self["AboutScrollLabel"] = ScrollLabel("", showscrollbar=False)
-		self["header"] = Label(_("Autoinstall..."))
+		self["header"] = Label()
 
 		self.logfile = open('/home/root/autoinstall.log', 'w')
 		self.container = eConsoleAppContainer()
