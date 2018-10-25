@@ -97,9 +97,12 @@ class AutoInstallWizard(Screen):
 		self.counter += 1
 		self["progress"].setValue(100 * self.counter/self.totalpackages)
 		self.package = self.packages.pop()
+		if self.package in [line.strip().split(":", 1)[1].strip() for line in open('/var/lib/opkg/status').readlines() if line.startswith('Package:')]:
+			self.dataAvail("Skip already installed package %s" % self.package)
+			self.appClosed()
 		self["header"].setText(_("Autoinstall... %s") % self.package)
 		try:
-			if self.container.execute("/etc/init.d/autoinstall.sh %s" % self.package):
+			if self.container.execute("opkg install %s" % self.package):
 				raise Exception, "failed to execute autoinstall.sh script"
 				self.appClosed(True)
 		except Exception, e:
@@ -109,9 +112,9 @@ class AutoInstallWizard(Screen):
 		self["AboutScrollLabel"].appendText(data)
 		self.logfile.write(data)
 
-	def appClosed(self, retval):
+	def appClosed(self, retval=False):
 		if retval:
-			self.dataAvail(_("An error occurred during installing %s - Please try again later") % self.package)
+			self.dataAvail("An error occurred during installing %s - Please try again later" % self.package)
 		if self.packages:
 			self.run_console()
 		else:
