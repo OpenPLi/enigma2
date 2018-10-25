@@ -111,7 +111,7 @@ class AutoInstallWizard(Screen):
 
 	def appClosed(self, retval):
 		if retval:
-			self["AboutScrollLabel"].setText(_("An error occurred - Please try again later"))
+			self.dataAvail(_("An error occurred - Please try again later"))
 		if self.packages:
 			self.run_console()
 		else:
