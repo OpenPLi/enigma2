@@ -11,6 +11,7 @@ except:
 
 from Components.Pixmap import Pixmap
 from Components.ProgressBar import ProgressBar
+from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
 from Components.config import config, ConfigBoolean, configfile
 from LanguageSelection import LanguageWizard
@@ -63,6 +64,7 @@ class AutoInstallWizard(Screen):
 		<panel position="right" size="5%,*"/>
 		<panel position="top" size="*,5%"/>
 		<panel position="bottom" size="*,5%"/>
+		<widget name="header" position="top" size="*,50" font="Regular;40"/>
 		<widget name="progress" position="top" size="*,24" backgroundColor="#00242424"/>
 		<widget name="AboutScrollLabel" font="Fixed;20" position="fill"/>
 	</screen>"""
@@ -71,7 +73,8 @@ class AutoInstallWizard(Screen):
 		self["progress"] = ProgressBar()
 		self["progress"].setRange((0, 100))
 		self["progress"].setValue(0)
-		self["AboutScrollLabel"] = ScrollLabel(_("Please wait"), showscrollbar=False)
+		self["AboutScrollLabel"] = ScrollLabel("", showscrollbar=False)
+		self["header"] = Label(_("Autoinstall..."))
 
 		self.logfile = open('/home/root/autoinstall.log', 'w')
 		self.container = eConsoleAppContainer()
@@ -91,12 +94,12 @@ class AutoInstallWizard(Screen):
 		self.close()
 
 	def run_console(self):
-		if not self.counter:
-			self["AboutScrollLabel"].setText("")
 		self.counter += 1
 		self["progress"].setValue(100 * self.counter/self.totalpackages)
 		try:
-			if self.container.execute("/etc/init.d/autoinstall.sh %s" % self.packages.pop()):
+			package = self.packages.pop()
+			self["header"].setText(_("Autoinstall... %s") % package)
+			if self.container.execute("/etc/init.d/autoinstall.sh %s" % package):
 				raise Exception, "failed to execute autoinstall.sh script"
 				self.appClosed(True)
 		except Exception, e:
