@@ -80,10 +80,8 @@ class AutoInstallWizard(Screen):
 		self.counter = 0
 
 		macaddr = open('/sys/class/net/eth0/address', 'r').readline().strip().replace(":", "")
-		backupdir = os.path.join(os.sep, config.plugins.autobackup.where.value or '/media/hdd', 'backup')
-		autoinstallfiles = [x for x in os.path.join(os.sep, backupdir, '%s%s' % ('autoinstall', macaddr)), os.path.join(os.sep, backupdir, 'autoinstall') if os.path.isfile(x)]
-		if autoinstallfiles:
-			self.packages = [x.strip() for x in open(autoinstallfiles[0]).readlines()]
+		for autoinstallfile in [os.path.join(os.sep, 'media', path, 'backup', '%s%s' % ('autoinstall', macaddr)) for path in os.listdir('/media') if os.path.isfile(os.path.join(os.sep, 'media', path, 'backup', '%s%s' % ('autoinstall', macaddr)))]:
+			self.packages = [x.strip() for x in open(autoinstallfile).readlines()]
 			if self.packages:
 				self.totalpackages = len(self.packages)
 				self.onLayoutFinish.append(self.run_console)
