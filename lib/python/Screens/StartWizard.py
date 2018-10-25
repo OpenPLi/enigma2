@@ -100,15 +100,15 @@ class AutoInstallWizard(Screen):
 		self.package = self.packages.pop(0)
 		self["header"].setText(_("Autoinstalling %s") % self.package)
 		if self.package in [line.strip().split(":", 1)[1].strip() for line in open('/var/lib/opkg/status').readlines() if line.startswith('Package:')]:
-			command = 'echo skip already installed package %s' % self.package
+			self.dataAvail('skip already installed package %s\n' % self.package)
+			self.appClosed()
 		else:
-			command = 'opkg install %s' % self.package
-		try:
-			if self.container.execute(command):
-				raise Exception, "failed to execute command!"
+			try:
+				if self.container.execute('opkg install %s' % self.package):
+					raise Exception, "failed to execute command!"
+					self.appClosed(True)
+			except Exception, e:
 				self.appClosed(True)
-		except Exception, e:
-			self.appClosed(True)
 
 	def dataAvail(self, data):
 		self["AboutScrollLabel"].appendText(data)
