@@ -15,7 +15,7 @@ from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
 from Components.config import config, ConfigBoolean, configfile
 from LanguageSelection import LanguageWizard
-from enigma import eConsoleAppContainer
+from enigma import eConsoleAppContainer, eTimer
 
 import os
 
@@ -74,16 +74,13 @@ class AutoInstallWizard(Screen):
 		self["progress"].setRange((0, 100))
 		self["progress"].setValue(0)
 		self["AboutScrollLabel"] = ScrollLabel("", showscrollbar=False)
-		self["header"] = Label()
+		self["header"] = Label(_("Autoinstalling please wait for packages being updated"))
 
 		self.logfile = open('/home/root/autoinstall.log', 'w')
 		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.appClosed)
 		self.container.dataAvail.append(self.dataAvail)
 		self.counter = 0
-
-		# make sure we have a valid package list before attempting to restore packages
-		self.container.execute("opkg update")
 
 		import glob
 		autoinstallfiles = glob.glob('/media/*/backup/autoinstall%s' % open('/sys/class/net/eth0/address', 'r').readline().strip().replace(":", ""))
@@ -92,21 +89,23 @@ class AutoInstallWizard(Screen):
 			self.packages = [x.strip() for x in open(autoinstallfile).readlines()]
 			if self.packages:
 				self.totalpackages = len(self.packages)
-				self.onLayoutFinish.append(self.run_console)
+				# make sure we have a valid package list before attempting to restore packages
+				self.container.execute("opkg update")
 				return
 		self.close()
 
 	def run_console(self):
 		self.counter += 1
 		self["progress"].setValue(100 * self.counter/self.totalpackages)
-		self.package = self.packages.pop()
+		self.package = self.packages.pop(0)
+		self["header"].setText(_("Autoinstalling %s") % self.package)
 		if self.package in [line.strip().split(":", 1)[1].strip() for line in open('/var/lib/opkg/status').readlines() if line.startswith('Package:')]:
-			self.dataAvail("Skip already installed package %s\n" % self.package)
-			self.appClosed()
-		self["header"].setText(_("Autoinstall... %s") % self.package)
+			command = 'echo skip already installed package %s' % self.package
+		else:
+			command = 'opkg install %s' % self.package
 		try:
-			if self.container.execute("opkg install %s" % self.package):
-				raise Exception, "failed to execute opkg install !"
+			if self.container.execute(command):
+				raise Exception, "failed to execute command!"
 				self.appClosed(True)
 		except Exception, e:
 			self.appClosed(True)
@@ -121,12 +120,18 @@ class AutoInstallWizard(Screen):
 		if self.packages:
 			self.run_console()
 		else:
-			self.container.appClosed.remove(self.appClosed)
-			self.container.dataAvail.remove(self.dataAvail)
-			self.container = None
-			self.logfile.close()
-			os.remove("/etc/.doAutoinstall")
-			self.close(3)
+			self["header"].setText(_("Autoinstalling Completed"))
+			self.delay = eTimer()
+			self.delay.callback.append(self.abort)
+			self.delay.startLongTimer(5)
+
+	def abort(self):
+		self.container.appClosed.remove(self.appClosed)
+		self.container.dataAvail.remove(self.dataAvail)
+		self.container = None
+		self.logfile.close()
+		os.remove("/etc/.doAutoinstall")
+		self.close(3)
 
 if not os.path.isfile("/etc/installed"):
 	from Components.Console import Console
