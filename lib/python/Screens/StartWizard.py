@@ -82,6 +82,9 @@ class AutoInstallWizard(Screen):
 		self.container.dataAvail.append(self.dataAvail)
 		self.counter = 0
 
+		# make sure we have a valid package list before attempting to restore packages
+		self.container.execute("opkg update")
+
 		import glob
 		autoinstallfiles = glob.glob('/media/*/backup/autoinstall%s' % open('/sys/class/net/eth0/address', 'r').readline().strip().replace(":", ""))
 		autoinstallfiles.sort(key=os.path.getmtime, reverse=True)
@@ -103,7 +106,7 @@ class AutoInstallWizard(Screen):
 		self["header"].setText(_("Autoinstall... %s") % self.package)
 		try:
 			if self.container.execute("opkg install %s" % self.package):
-				raise Exception, "failed to execute autoinstall.sh script"
+				raise Exception, "failed to execute opkg install !"
 				self.appClosed(True)
 		except Exception, e:
 			self.appClosed(True)
