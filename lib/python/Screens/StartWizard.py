@@ -96,10 +96,10 @@ class AutoInstallWizard(Screen):
 	def run_console(self):
 		self.counter += 1
 		self["progress"].setValue(100 * self.counter/self.totalpackages)
-		package = self.packages.pop()
-		self["header"].setText(_("Autoinstall... %s") % package)
+		self.package = self.packages.pop()
+		self["header"].setText(_("Autoinstall... %s") % self.package)
 		try:
-			if self.container.execute("/etc/init.d/autoinstall.sh %s" % package):
+			if self.container.execute("/etc/init.d/autoinstall.sh %s" % self.package):
 				raise Exception, "failed to execute autoinstall.sh script"
 				self.appClosed(True)
 		except Exception, e:
@@ -111,7 +111,7 @@ class AutoInstallWizard(Screen):
 
 	def appClosed(self, retval):
 		if retval:
-			self.dataAvail(_("An error occurred - Please try again later"))
+			self.dataAvail(_("An error occurred during installing %s - Please try again later") % self.package)
 		if self.packages:
 			self.run_console()
 		else:
