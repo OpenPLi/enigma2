@@ -92,7 +92,7 @@ class AutoInstallWizard(Screen):
 				# make sure we have a valid package list before attempting to restore packages
 				self.container.execute("opkg update")
 				return
-		self.close()
+		self.abort()
 
 	def run_console(self):
 		self.counter += 1
