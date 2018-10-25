@@ -79,8 +79,10 @@ class AutoInstallWizard(Screen):
 		self.container.dataAvail.append(self.dataAvail)
 		self.counter = 0
 
-		macaddr = open('/sys/class/net/eth0/address', 'r').readline().strip().replace(":", "")
-		for autoinstallfile in [os.path.join(os.sep, 'media', path, 'backup', '%s%s' % ('autoinstall', macaddr)) for path in os.listdir('/media') if os.path.isfile(os.path.join(os.sep, 'media', path, 'backup', '%s%s' % ('autoinstall', macaddr)))]:
+		import glob
+		autoinstallfiles = glob.glob('/media/*/backup/autoinstall%s' % open('/sys/class/net/eth0/address', 'r').readline().strip().replace(":", ""))
+		autoinstallfiles.sort(key=os.path.getmtime, reverse=True)
+		for autoinstallfile in autoinstallfiles:
 			self.packages = [x.strip() for x in open(autoinstallfile).readlines()]
 			if self.packages:
 				self.totalpackages = len(self.packages)
