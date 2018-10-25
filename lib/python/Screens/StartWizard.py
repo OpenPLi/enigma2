@@ -101,7 +101,7 @@ class AutoInstallWizard(Screen):
 		self["progress"].setValue(100 * self.counter/self.totalpackages)
 		self.package = self.packages.pop()
 		if self.package in [line.strip().split(":", 1)[1].strip() for line in open('/var/lib/opkg/status').readlines() if line.startswith('Package:')]:
-			self.dataAvail("Skip already installed package %s" % self.package)
+			self.dataAvail("Skip already installed package %s\n" % self.package)
 			self.appClosed()
 		self["header"].setText(_("Autoinstall... %s") % self.package)
 		try:
@@ -117,7 +117,7 @@ class AutoInstallWizard(Screen):
 
 	def appClosed(self, retval=False):
 		if retval:
-			self.dataAvail("An error occurred during installing %s - Please try again later" % self.package)
+			self.dataAvail("An error occurred during installing %s - Please try again later\n" % self.package)
 		if self.packages:
 			self.run_console()
 		else:
