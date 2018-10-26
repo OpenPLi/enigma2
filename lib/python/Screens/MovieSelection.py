@@ -588,6 +588,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				"showMovies": (self.doPathSelect, _("Select the movie path")),
 				"showRadio": (self.btn_radio, boundFunction(self.getinitUserDefinedActionsDescription, "btn_radio")),
 				"showTv": (self.btn_tv, boundFunction(self.getinitUserDefinedActionsDescription, "btn_tv")),
+				"toggleTvRadio": (self.btn_tv, boundFunction(self.getinitUserDefinedActionsDescription, "btn_tv")),
 				"showText": (self.btn_text, boundFunction(self.getinitUserDefinedActionsDescription, "btn_text")),
 			})
 
@@ -755,6 +756,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				'blue': config.movielist.btn_blue,
 				'Radio': config.movielist.btn_radio,
 				'TV': config.movielist.btn_tv,
+				'TV2': config.movielist.btn_tv,
 				'Text': config.movielist.btn_text,
 				'F1': config.movielist.btn_F1,
 				'F2': config.movielist.btn_F2,
