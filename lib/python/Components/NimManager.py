@@ -1216,7 +1216,7 @@ def InitNimManager(nimmgr, update_slots = []):
 			section = lnbs[lnb]
 			if isinstance(section.unicable, ConfigNothing):
 				def getformat(value, index):
-					return index >= 4 and "jess" or "unicable" if value == "dSRC" else value
+					return ("jess" if index >= int(value.split(",")[1] if "," in value else 4) else "unicable") if value.startswith("dSCR") else value
 				def positionsChanged(configEntry):
 					section.positionNumber = ConfigSelection(["%d" % (x+1) for x in range(configEntry.value)], default="%d" % min(lnb, configEntry.value))
 				def scrListChanged(productparameters, srcfrequencylist, configEntry):
