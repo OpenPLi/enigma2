@@ -121,6 +121,7 @@ class AutoInstallWizard(Screen):
 				self.dataAvail("An error occurred during installing %s - Please try again later\n" % self.package)
 			else:
 				self.dataAvail("An error occurred during opkg update - Please try again later\n")
+				self.packages = None
 		if self.packages:
 			self.run_console()
 		else:
