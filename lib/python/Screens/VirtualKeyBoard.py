@@ -61,7 +61,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		self.keyBackgrounds = {
 			"EXIT": self.key_red_bg,
 			"OK": self.key_green_bg,
-			"SAVE": self.key_green_bg,
+			"ENTER": self.key_green_bg,
 			"LOC": self.key_yellow_bg,
 			"SHFT": self.key_blue_bg
 		}
@@ -323,7 +323,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 
 		self["actions"] = HelpableNumberActionMap(self, "VirtualKeyBoardActions", {
 			"cancel": (self.cancel, _("Cancel any text changes and exit")),
-			"save": (self.save, _("Save any text changes and exit")),
+			"save": (self.enter, _("Enter text and exit")),
 			"locale": (self.localeMenu, _("Select the virtual keyboard locale from a menu")),
 			"shift": (self.shiftClicked, _("Select the virtual keyboard shifted character set")),
 			"select": (self.processSelect, _("Select the character or action under the virtual keyboard cursor")),
@@ -360,7 +360,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		self["language"] = Label(_("Language") + ": " + self.lang)
 		self["key_info"] = StaticText(_("INFO"))
 		self["key_red"] = StaticText(_("Exit"))
-		self["key_green"] = StaticText(_("Save"))
+		self["key_green"] = StaticText(_("Enter"))
 		self["key_yellow"] = StaticText(_("Select locale"))
 		self["key_blue"] = StaticText(self.shiftMsgs[1])
 		self["key_help"] = StaticText(_("HELP"))
@@ -662,7 +662,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 			self["text"].deleteAllChars()
 			self["text"].update()
 		elif text == u"ENTER":
-			self.save()
+			self.enter()
 		elif text == u"ESC":
 			self.cancel()
 		elif text == u"EXIT":
@@ -676,11 +676,11 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		elif text == u"LEFT":
 			self["text"].left()
 		elif text == u"OK":
-			self.save()
+			self.enter()
 		elif text == u"RIGHT":
 			self["text"].right()
-		elif text == u"SAVE":
-			self.save()
+		elif text == u"ENTER":
+			self.enter()
 		elif text == u"SHIFT":
 			self.shiftClicked()
 		elif text == u"Shift":
@@ -693,7 +693,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 	def cancel(self):
 		self.close(None)
 
-	def save(self):
+	def enter(self):
 		self.close(self["text"].getText())
 
 	def localeMenu(self):
