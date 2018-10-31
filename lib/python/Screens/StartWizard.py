@@ -80,6 +80,7 @@ class AutoInstallWizard(Screen):
 		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.appClosed)
 		self.container.dataAvail.append(self.dataAvail)
+		self.package = None
 		self.counter = 0
 
 		import glob
@@ -116,7 +117,10 @@ class AutoInstallWizard(Screen):
 
 	def appClosed(self, retval=False):
 		if retval:
-			self.dataAvail("An error occurred during installing %s - Please try again later\n" % self.package)
+			if self.package:
+				self.dataAvail("An error occurred during installing %s - Please try again later\n" % self.package)
+			else:
+				self.dataAvail("An error occurred during opkg update - Please try again later\n")
 		if self.packages:
 			self.run_console()
 		else:
