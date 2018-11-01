@@ -693,6 +693,9 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 	def cancel(self):
 		self.close(None)
 
+	def save(self):  # Deprecated legacy interface to new enter
+		self.enter()
+
 	def enter(self):
 		self.close(self["text"].getText())
 
