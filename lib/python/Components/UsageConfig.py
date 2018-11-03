@@ -674,7 +674,6 @@ def InitUsageConfig():
 		("chn sgp", _("Chinese - Simplified")),
 		("twn hkn",_("Chinese - Traditional")),
 		("ces cze", _("Czech")),
-		("cze/slo", _("Czech") + " / " + _("Slovak")),
 		("dan", _("Danish")),
 		("dut ndl nld", _("Dutch")),
 		("eng qaa", _("English")),
