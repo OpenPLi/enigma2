@@ -413,16 +413,16 @@ int eDVBServicePMTHandler::getProgramInfo(program &program)
 		std::string configvalue;
 		std::vector<std::string> autoaudio_languages;
 		configvalue = eConfigManager::getConfigValue("config.autolanguage.audio_autoselect1");
-		if (configvalue != "" && configvalue != "None")
+		if (configvalue != "")
 			autoaudio_languages.push_back(configvalue);
 		configvalue = eConfigManager::getConfigValue("config.autolanguage.audio_autoselect2");
-		if (configvalue != "" && configvalue != "None")
+		if (configvalue != "")
 			autoaudio_languages.push_back(configvalue);
 		configvalue = eConfigManager::getConfigValue("config.autolanguage.audio_autoselect3");
-		if (configvalue != "" && configvalue != "None")
+		if (configvalue != "")
 			autoaudio_languages.push_back(configvalue);
 		configvalue = eConfigManager::getConfigValue("config.autolanguage.audio_autoselect4");
-		if (configvalue != "" && configvalue != "None")
+		if (configvalue != "")
 			autoaudio_languages.push_back(configvalue);
 
 		int autosub_txt_normal = -1;
@@ -433,16 +433,16 @@ int eDVBServicePMTHandler::getProgramInfo(program &program)
 
 		std::vector<std::string> autosub_languages;
 		configvalue = eConfigManager::getConfigValue("config.autolanguage.subtitle_autoselect1");
-		if (configvalue != "" && configvalue != "None")
+		if (configvalue != "")
 			autosub_languages.push_back(configvalue);
 		configvalue = eConfigManager::getConfigValue("config.autolanguage.subtitle_autoselect2");
-		if (configvalue != "" && configvalue != "None")
+		if (configvalue != "")
 			autosub_languages.push_back(configvalue);
 		configvalue = eConfigManager::getConfigValue("config.autolanguage.subtitle_autoselect3");
-		if (configvalue != "" && configvalue != "None")
+		if (configvalue != "")
 			autosub_languages.push_back(configvalue);
 		configvalue = eConfigManager::getConfigValue("config.autolanguage.subtitle_autoselect4");
-		if (configvalue != "" && configvalue != "None")
+		if (configvalue != "")
 			autosub_languages.push_back(configvalue);
 
 		m_dsmcc_pid = program.dsmccPid;
