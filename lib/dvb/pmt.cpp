@@ -492,7 +492,7 @@ int eDVBServicePMTHandler::getProgramInfo(program &program)
 				{
 					bool languageFound = false;
 					size_t pos = 0;
-					std::string delimiter = "/";
+					char delimiter = '/';
 					std::string audioStreamLanguages = program.audioStreams[i].language_code;
 					audioStreamLanguages += delimiter;
 					while ((pos = audioStreamLanguages.find(delimiter)) != std::string::npos)
