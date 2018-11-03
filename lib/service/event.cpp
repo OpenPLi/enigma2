@@ -17,8 +17,8 @@
 #include <fcntl.h>
 
 // static members / methods
-std::string eServiceEvent::m_language = "---";
-std::string eServiceEvent::m_language_alternative = "---";
+std::string eServiceEvent::m_language = "";
+std::string eServiceEvent::m_language_alternative = "";
 
 ///////////////////////////
 
@@ -45,7 +45,7 @@ bool eServiceEvent::loadLanguage(Event *evt, const std::string &lang, int tsidon
 				std::string cc = sed->getIso639LanguageCode();
 				std::transform(cc.begin(), cc.end(), cc.begin(), tolower);
 				int table=encodingHandler.getCountryCodeDefaultMapping(cc);
-				if (language == "---" || language.find(cc) != std::string::npos)
+				if (language == "" || language.find(cc) != std::string::npos)
 				{
 					/* stick to this language, avoid merging or mixing descriptors of different languages */
 					language = cc;
@@ -61,7 +61,7 @@ bool eServiceEvent::loadLanguage(Event *evt, const std::string &lang, int tsidon
 				std::string cc = eed->getIso639LanguageCode();
 				std::transform(cc.begin(), cc.end(), cc.begin(), tolower);
 				int table=encodingHandler.getCountryCodeDefaultMapping(cc);
-				if (language == "---" || language.find(cc) != std::string::npos)
+				if (language == "" || language.find(cc) != std::string::npos)
 				{
 					/* stick to this language, avoid merging or mixing descriptors of different languages */
 					language = cc;
@@ -195,11 +195,11 @@ RESULT eServiceEvent::parseFrom(Event *evt, int tsidonid)
 	m_duration = fromBCD(duration>>16)*3600+fromBCD(duration>>8)*60+fromBCD(duration);
 	uint8_t running_status = evt->getRunningStatus();
 	m_running_status = running_status;
-	if (m_language != "---" && loadLanguage(evt, m_language, tsidonid))
+	if (m_language != "" && loadLanguage(evt, m_language, tsidonid))
 		return 0;
-	if (m_language_alternative != "---" && loadLanguage(evt, m_language_alternative, tsidonid))
+	if (m_language_alternative != "" && loadLanguage(evt, m_language_alternative, tsidonid))
 		return 0;
-	if (loadLanguage(evt, "---", tsidonid))
+	if (loadLanguage(evt, "", tsidonid))
 		return 0;
 	return 0;
 }
