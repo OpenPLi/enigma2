@@ -110,6 +110,7 @@ class NetworkAdapterSelection(Screen,HelpableScreen):
 	def updateList(self):
 		self.list = []
 		default_gw = None
+		iNetwork.getInterfaces()
 		num_configured_if = len(iNetwork.getConfiguredAdapters())
 		if num_configured_if >= 2:
 			self["key_yellow"].setText(_("Default"))
