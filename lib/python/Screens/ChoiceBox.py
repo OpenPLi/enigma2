@@ -103,7 +103,7 @@ class ChoiceBox(Screen):
 
 		def getMaxDescriptionHeight():
 			def getDescrLineHeight(text):
-				if len(text)==3:
+				if len(text) > 2 and isinstance(text[2], str):
 					self["description"].setText(text[2])
 					return self["description"].instance.calculateSize().height()
 				return 0
