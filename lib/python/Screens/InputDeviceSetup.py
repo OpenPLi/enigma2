@@ -312,7 +312,7 @@ class RemoteControlType(Screen, ConfigListScreen):
 			("19", _("HD2400")),
 			("20", _("Zgemma Star S/2S/H1/H2")),
 			("21", _("Zgemma H.S/H.2S/H.2H/H5/H7")),
-			("25", _("Zgemma H9"))
+			("25", _("Zgemma H9/i55 Plus"))
 		]
 
 	defaultRcList = [
