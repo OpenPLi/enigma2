@@ -216,8 +216,9 @@ class PliExtraInfo(Poll, Converter, object):
 		if "DVB-T" in feraw.get("tuner_type"):
 			code_rate_lp = fedata.get("code_rate_lp")
 			code_rate_hp = fedata.get("code_rate_hp")
-			if code_rate_lp and code_rate_hp:
-				return code_rate_lp + "-" + code_rate_hp
+			guard_interval = fedata.get('guard_interval')
+			if code_rate_lp and code_rate_hp and guard_interval:
+				return code_rate_lp + "-" + code_rate_hp + "-" + guard_interval
 		else:
 			fec = fedata.get("fec_inner")
 			if fec:
