@@ -307,12 +307,12 @@ class RemoteControlType(Screen, ConfigListScreen):
 			("11", _("et9200/9500/6500")),
 			("13", _("et4000")),
 			("14", _("xp1000")),
-			("16", _("HD11/HD51/HD1100/HD1200/HD1265/HD1500/HD500C/HD530C/VS1000/VS1500/et7x00/et8500/et7000mini")),
+			("16", _("HDx1/HD1xxx/HD5x0C/VS1x00/et7x00/et8500/et7000mini")),
 			("18", _("F1/F3/F4/F4-TURBO")),
 			("19", _("HD2400")),
 			("20", _("Zgemma Star S/2S/H1/H2")),
 			("21", _("Zgemma H.S/H.2S/H.2H/H5/H7")),
-			("25", _("Zgemma H9"))
+			("25", _("Zgemma H9/i55 Plus"))
 		]
 
 	defaultRcList = [

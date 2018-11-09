@@ -413,16 +413,16 @@ int eDVBServicePMTHandler::getProgramInfo(program &program)
 		std::string configvalue;
 		std::vector<std::string> autoaudio_languages;
 		configvalue = eConfigManager::getConfigValue("config.autolanguage.audio_autoselect1");
-		if (configvalue != "" && configvalue != "None")
+		if (configvalue != "")
 			autoaudio_languages.push_back(configvalue);
 		configvalue = eConfigManager::getConfigValue("config.autolanguage.audio_autoselect2");
-		if (configvalue != "" && configvalue != "None")
+		if (configvalue != "")
 			autoaudio_languages.push_back(configvalue);
 		configvalue = eConfigManager::getConfigValue("config.autolanguage.audio_autoselect3");
-		if (configvalue != "" && configvalue != "None")
+		if (configvalue != "")
 			autoaudio_languages.push_back(configvalue);
 		configvalue = eConfigManager::getConfigValue("config.autolanguage.audio_autoselect4");
-		if (configvalue != "" && configvalue != "None")
+		if (configvalue != "")
 			autoaudio_languages.push_back(configvalue);
 
 		int autosub_txt_normal = -1;
@@ -433,16 +433,16 @@ int eDVBServicePMTHandler::getProgramInfo(program &program)
 
 		std::vector<std::string> autosub_languages;
 		configvalue = eConfigManager::getConfigValue("config.autolanguage.subtitle_autoselect1");
-		if (configvalue != "" && configvalue != "None")
+		if (configvalue != "")
 			autosub_languages.push_back(configvalue);
 		configvalue = eConfigManager::getConfigValue("config.autolanguage.subtitle_autoselect2");
-		if (configvalue != "" && configvalue != "None")
+		if (configvalue != "")
 			autosub_languages.push_back(configvalue);
 		configvalue = eConfigManager::getConfigValue("config.autolanguage.subtitle_autoselect3");
-		if (configvalue != "" && configvalue != "None")
+		if (configvalue != "")
 			autosub_languages.push_back(configvalue);
 		configvalue = eConfigManager::getConfigValue("config.autolanguage.subtitle_autoselect4");
-		if (configvalue != "" && configvalue != "None")
+		if (configvalue != "")
 			autosub_languages.push_back(configvalue);
 
 		m_dsmcc_pid = program.dsmccPid;
@@ -490,21 +490,33 @@ int eDVBServicePMTHandler::getProgramInfo(program &program)
 				int x = 1;
 				for (std::vector<std::string>::iterator it = autoaudio_languages.begin();x <= autoaudio_level && it != autoaudio_languages.end();x++,it++)
 				{
-					if ((*it).find(program.audioStreams[i].language_code) != std::string::npos)
+					bool languageFound = false;
+					size_t pos = 0;
+					char delimiter = '/';
+					std::string audioStreamLanguages = program.audioStreams[i].language_code;
+					audioStreamLanguages += delimiter;
+					while ((pos = audioStreamLanguages.find(delimiter)) != std::string::npos)
 					{
-						if (program.audioStreams[i].type == audioStream::atMPEG && (autoaudio_level > x || autoaudio_mpeg == -1))
-							autoaudio_mpeg = i;
-						else if (program.audioStreams[i].type == audioStream::atAC3 && (autoaudio_level > x || autoaudio_ac3 == -1))
-							autoaudio_ac3 = i;
-						else if (program.audioStreams[i].type == audioStream::atDDP && (autoaudio_level > x || autoaudio_ddp == -1))
-							autoaudio_ddp = i;
-						else if (program.audioStreams[i].type == audioStream::atAACHE && (autoaudio_level > x || autoaudio_aache == -1))
-							autoaudio_aache = i;
-						else if (program.audioStreams[i].type == audioStream::atAAC && (autoaudio_level > x || autoaudio_aac == -1))
-							autoaudio_aac = i;
-						autoaudio_level = x;
-						break;
+						if ((*it).find(audioStreamLanguages.substr(0, pos)) != std::string::npos)
+						{
+							if (program.audioStreams[i].type == audioStream::atMPEG && (autoaudio_level > x || autoaudio_mpeg == -1))
+								autoaudio_mpeg = i;
+							else if (program.audioStreams[i].type == audioStream::atAC3 && (autoaudio_level > x || autoaudio_ac3 == -1))
+								autoaudio_ac3 = i;
+							else if (program.audioStreams[i].type == audioStream::atDDP && (autoaudio_level > x || autoaudio_ddp == -1))
+								autoaudio_ddp = i;
+							else if (program.audioStreams[i].type == audioStream::atAACHE && (autoaudio_level > x || autoaudio_aache == -1))
+								autoaudio_aache = i;
+							else if (program.audioStreams[i].type == audioStream::atAAC && (autoaudio_level > x || autoaudio_aac == -1))
+								autoaudio_aac = i;
+							autoaudio_level = x;
+							languageFound = true;
+							break;
+						}
+						audioStreamLanguages.erase(0, pos + 1);
 					}
+					if (languageFound)
+						break;
 				}
 			}
 		}
