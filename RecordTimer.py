@@ -21,9 +21,7 @@ from ServiceReference import ServiceReference
 
 from time import localtime, strftime, ctime, time
 from bisect import insort
-
-# sys.maxint on 64bit (2**63-1) fails with OverflowError on eActionMap.bindAction use 32bit value (2**31-1)
-maxint = 2147483647
+from sys import maxint
 
 # ok, for descriptions etc we have:
 # service reference  (to get the service name)
