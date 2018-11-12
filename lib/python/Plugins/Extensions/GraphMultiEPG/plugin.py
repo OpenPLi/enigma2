@@ -25,6 +25,8 @@ def zapToService(service, preview = False, zapback = False):
 					Servicelist.enterPath(Servicelist.bouquet_root)
 				Servicelist.enterPath(epg_bouquet)
 			Servicelist.setCurrentSelection(service)
+			global ref
+			ref = service
 		if not zapback or preview:
 			Servicelist.zap(not preview, preview, ref=preview and service or None)
 	if (Servicelist.dopipzap or zapback) and not preview:

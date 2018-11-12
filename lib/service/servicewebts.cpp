@@ -77,7 +77,7 @@ RESULT eServiceFactoryWebTS::info(const eServiceReference &ref, ePtr<iStaticServ
 
 RESULT eServiceFactoryWebTS::offlineOperations(const eServiceReference &, ePtr<iServiceOfflineOperations> &ptr)
 {
-	ptr = 0;
+	ptr = nullptr;
 	return -1;
 }
 

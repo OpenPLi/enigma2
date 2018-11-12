@@ -15,18 +15,31 @@ Don't forget that a new language file must be considered in "po/Makefile.am"
 as a "po" file is just the source file of a language and it has to be compiled
 into a ".mo" file and then you can define it in enigma2 python files as a new language.
 
+You will need a "linux" based system in order to properly update the files.
+You don't need to setup a full OpenPLi build environment but there are some pre-requisites,
+the following commands must be installed and available in path on your system:
+- git-core
+- gawk (GNU awk)
+- find
+- gsed (GNU sed)
+- python
+- gettext (for the tools: xgettext, msguniq, msgmerge, msgattrib, msgfmt, msginit)
+
 How to create updated "po" files including latest strings?
 
 Follow these steps:
 
 1- git clone https://github.com/OpenPLi/enigma2.git
-2- Find "configure.ac" file and comment first 4 "PKG_CHECK_MODULES" and "AC_CHECK_LIB" lines using "#".
-3- cd enigma2
-4- ./autogen.sh
-5- ./configure --with-po
-6- cd po
-7- make *.po
+2- cd enigma2
+3- cd po
+4- ./updateallpo.sh
 
-Now in "po" folder you'll find updated ".pot" and all ".po" files.
+You'll have the latest "enigma2.pot" and all updated ".po" files.
 
-Hint: A ".pot" file is the template that you can use to create new ".po" files.
+You can start updating your language file and you can post them in this forum thread:
+https://forums.openpli.org/topic/21479-translations-for-enigma-2-please-post-them-here/
+
+Hint: The "enigma2.pot" file is the template that you can use to create new ".po" files.
+
+Remark: by installing "brew" on OSX and then the pre-requisite packages with "brew install",
+you can also generate the .po and .pot files.

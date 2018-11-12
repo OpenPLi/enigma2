@@ -8,10 +8,10 @@ from Tools import Notifications
 settingfiles = ('lamedb', 'bouquets.', 'userbouquet.', 'blacklist', 'whitelist', 'alternatives.')
 
 class ImportChannels():
-	
+
 	def __init__(self):
-		if config.usage.remote_fallback_import.value and config.usage.remote_fallback.value and not "ChannelsImport" in [x.name for x in threading.enumerate()]:
-				if config.usage.remote_fallback_enabled.value and config.usage.remote_fallback_import.value and config.usage.remote_fallback_import_seperate.value and config.usage.remote_fallback_import_url.value:
+		if config.usage.remote_fallback_enabled.value and config.usage.remote_fallback_import.value and config.usage.remote_fallback.value and not "ChannelsImport" in [x.name for x in threading.enumerate()]:
+				if config.usage.remote_fallback_enabled.value and config.usage.remote_fallback_import.value and config.usage.remote_fallback_import_url.value != "same" and config.usage.remote_fallback_import_url.value:
 					self.url = config.usage.remote_fallback_import_url.value.rsplit(":", 1)[0]
 				else:
 					self.url = config.usage.remote_fallback.value.rsplit(":", 1)[0]
@@ -28,8 +28,10 @@ class ImportChannels():
 				return
 			print "[Import Channels] Get EPG Location"
 			try:
+				epgdatfile = [x for x in urllib2.urlopen("%s/file?file=/etc/enigma2/settings" % self.url, timeout=5).readlines() if x.startswith('config.misc.epgcache_filename=')]
+				epgdatfile = epgdatfile and epgdatfile[0].split('=')[1].strip() or "/hdd/epg.dat"
 				try:
-					files = [file for file in loads(urllib2.urlopen("%s/file?dir=/hdd" % self.url, timeout=5).read())["files"] if os.path.basename(file).startswith("epg.dat")]
+					files = [file for file in loads(urllib2.urlopen("%s/file?dir=%s" % (self.url, os.path.dirname(epgdatfile)), timeout=5).read())["files"] if os.path.basename(file).startswith(os.path.basename(epgdatfile))]
 				except:
 					files = [file for file in loads(urllib2.urlopen("%s/file?dir=/" % self.url, timeout=5).read())["files"] if os.path.basename(file).startswith("epg.dat")]
 				epg_location = files[0] if files else None

@@ -42,7 +42,10 @@ class SecParameterSetup(Screen, ConfigListScreen):
 			(_("Delay after voltage change before motor command"), config.sec.delay_after_voltage_change_before_motor_command),
 			(_("Delay before sequence repeat"), config.sec.delay_before_sequence_repeat),
 			(_("Motor running timeout"), config.sec.motor_running_timeout),
-			(_("Motor command retries"), config.sec.motor_command_retries) ]
+			(_("Motor command retries"), config.sec.motor_command_retries),
+			(_("Unicable delay after enable voltage before switch command"), config.sec.unicable_delay_after_enable_voltage_before_switch_command),
+			(_("Unicable delay after change voltage before switch command"), config.sec.unicable_delay_after_change_voltage_before_switch_command),
+			(_("Unicable delay after last diseqc command"), config.sec.unicable_delay_after_last_diseqc_command) ]
 		ConfigListScreen.__init__(self, list)
 
 	def setDefault(self):

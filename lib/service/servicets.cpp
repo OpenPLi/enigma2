@@ -63,13 +63,13 @@ RESULT eServiceFactoryTS::list(const eServiceReference &, ePtr<iListableService>
 
 RESULT eServiceFactoryTS::info(const eServiceReference &ref, ePtr<iStaticServiceInformation> &ptr)
 {
-	ptr = 0;
+	ptr = nullptr;
 	return -1;
 }
 
 RESULT eServiceFactoryTS::offlineOperations(const eServiceReference &, ePtr<iServiceOfflineOperations> &ptr)
 {
-	ptr = 0;
+	ptr = nullptr;
 	return -1;
 }
 

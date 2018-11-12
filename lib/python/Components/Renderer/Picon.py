@@ -72,11 +72,11 @@ def getPiconName(serviceName):
 		fields[6] = fields[6][:-4] + "0000"
 		pngname = findPicon('_'.join(fields))
 	if not pngname and fields[0] != '1':
-		#fallback to 1 for other reftypes
+		#fallback to 1 for IPTV streams
 		fields[0] = '1'
 		pngname = findPicon('_'.join(fields))
-	if not pngname and fields[2] != '1':
-		#fallback to 1 for services with different service types
+	if not pngname and fields[2] != '2':
+		#fallback to 1 for TV services with non-standard service types
 		fields[2] = '1'
 		pngname = findPicon('_'.join(fields))
 	if not pngname: # picon by channel name
@@ -87,6 +87,9 @@ def getPiconName(serviceName):
 			pngname = findPicon(name)
 			if not pngname and len(name) > 2 and name.endswith('hd'):
 				pngname = findPicon(name[:-2])
+			if not pngname and len(name) > 6:
+				series = re.sub(r's[0-9]*e[0-9]*$', '', name)
+				pngname = findPicon(series)
 	return pngname
 
 class Picon(Renderer):

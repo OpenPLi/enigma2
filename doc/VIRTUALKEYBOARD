@@ -1,0 +1,168 @@
+A Guide to the VirtualKeyBoard Screen
+-------------------------------------
+
+Written by IanSav - 18-Aug-2018
+Updated by IanSav -  4-Sep-2018
+
+This document explains the changes and updates to the VirtualKeyBoard of 
+Enigma2.  The code is located in:
+	/usr/lib/enigma2/python/Screens/VirtualKeyBoard.py
+
+The revised virtual keyboard is dynamically created based on the data 
+defined in the "self.locales" data in the "__init__" method of the 
+"VirtualKeyBoard" class.  To make creating new locales based on common 
+languages easier a number of base language definitions are provided. 
+(Currently English, French, German, Russian, Scandinavian and Spanish.) 
+The locales are based on the list at https://lh.2xlibre.net/locales/.
+
+The maximum width of the keyboard has been set at 14 buttons.  This 
+limitation is set by the skin allocation of space for the keyboard and then 
+confirmed in this code in the "virtualKeyBoardEntryComponent" method.  If 
+the "keyList" data describes a keyboard less than 14 characters then that 
+keyboard will be centred in the 14 wide keyboard space.
+
+Each element of the "keyList" data is a button displayed on the virtual 
+keyboard.  Certain button names are mapped to images that will be used 
+for that button.  The current image button definitions are listed in 
+the "self.keyImages" dictionary in the "__init__" method of the 
+"VirtualKeyBoard" class. To make future updates easier all non English 
+characters are represented by their unicode numeric code 
+(https://en.wikipedia.org/wiki/List_of_Unicode_characters).
+
+This revision also allows the four colour buttons to be assigned to any 
+keyboard key by nominating the key text in the "self.keyBackgrounds" 
+dictionary in the "__init__" method of the "VirtualKeyBoard" class. 
+This change will allow for colour button text to be localised rather than 
+depending on a graphical button to achieve the coloured border.  Note that 
+the ENTER and SHIFT button graphics include the default GREEN and BLUE 
+borders, respectively, as a default.
+
+This revision also adds the ability to define the foreground colours of the 
+characters on the virtual keyboard.  The colour selections for the unshifted 
+and three predefined shift levels are defined as white, white, cyan and 
+magenta respectively.  These colours match the default SHIFT button 
+images.  These colours can be overridden by a skin author via the 
+"VirtualKeyBoardShiftColors" skin parameter.  (The number of shift levels 
+can be increased if required.)
+
+This revision also improves font size options.  The previous 
+"VirtualKeyBoard" skin font parameter is retained but a new scaling option 
+has been added to the code such that short text messages can be now assigned 
+to keyboard buttons.  For example, for the en_AU implementation spare keys 
+have been assigned to text like ".com", ".org" etc to make Internet address 
+entry easier.  To ensure that longer key text can fit in the screen space 
+available any text longer than one character will be drawn at 56% of the 
+"VirtualKeyBoard" skin font parameter assigned font size.
+
+This revision also adds HELP button text to assist users with using the 
+updated Virtual KeyBoard interface.
+
+If the VirtualKeyBoard interface is to be re-skinned then the following
+"name=" screen widgets should be defined:
+	prompt   - This widget displays the prompt text for the entry.
+	text     - This widget displays the current text buffer.
+	list     - This widget displays the keyboard grid.
+	locale   - This widget displays the currently selected keyboard
+		   language.
+	language - This widget displays the current language.
+
+The standard colour and action buttons "source=" screen widgets can also 
+be defined:
+	key_red    - This widget displays the RED button exit text prompt.
+	key_green  - This widget displays the GREEN button save text prompt.
+	key_yellow - This widget displays the YELLOW button locale menu
+		     prompt.
+	key_blue   - This widget displays the BLUE button shift text prompt.
+	key_info   - This widget triggers the INFO button.
+	key_help   - This widget triggers the HELP button.
+
+	(See /doc/BUTTONGUIDE in the repository for more information.)
+
+For example in a 1280 x 720 skin:
+	<fonts>
+		<font name="DejaVuSans" filename="DejaVuSans.ttf" scale="100" />
+		<alias name="VirtualKeyBoard" font="DejaVuSans" size="28" height="45" />
+	</fonts>
+
+	<parameters>
+		<parameter name="VirtualKeyBoard" value="45,45" />
+		<parameter name="VirtualKeyBoardShiftColors" value="16777215,16777215,65535,16711935" />
+	</parameters>
+
+	<screen name="VirtualKeyBoard" title="Virtual Keyboard" position="center,center" size="660,375" zPosition="99">
+		<widget name="prompt" position="15,10" size="630,25" font="Regular;20" noWrap="1" transparent="1" />
+		<ePixmap pixmap="buttons/vkey_text.png" position="10,35" size="640,50" alphatest="blend" zPosition="-4" />
+		<widget name="text" position="15,35" size="630,46" font="Regular;40" halign="right" noWrap="1" transparent="1" />
+		<widget name="list" position="15,100" size="630,225" backgroundColor="#001c2c5c" foregroundColor="window-fg" selectionDisabled="1" transparent="1" />
+		<widget name="locale" position="15,340" size="570,25" font="Regular;20" transparent="1" />
+		<widget name="mode" position="585,340" size="60,25" font="Regular;20" halign="right" transparent="1" valign="center" />
+		<widget name="language" position="0,0" size="0,0" font="Regular;20" transparent="1" />
+	</screen>
+
+	WARNING: Due to limitations in the parameter parsing the shift 
+	colours MUST be specified as decimal numbers for all firmware 
+	versions earlier than 4-Sep-2018.  For firmware builds later than 
+	4-Sep-2018 the colours can be specified as decimal numbers, hex 
+	numbers, Enigma2 "#" colour codes or colour names.  For example, 
+	the following parameters are equaly valid and effectively the same:
+		<parameter name="VirtualKeyBoardShiftColors" value="16777215,16777215,65535,16711935" />
+		<parameter name="VirtualKeyBoardShiftColors" value="0x00ffffff,0x00ffffff,0x0000ffff,0x00ff00ff" />
+		<parameter name="VirtualKeyBoardShiftColors" value="#00ffffff,#00ffffff,#0000ffff,#00ff00ff" />
+		<parameter name="VirtualKeyBoardShiftColors" value="White,White,Cyan,Magenta" />
+		(Assuming the colours "White", "Cyan" and "Magenta" are defined!)
+
+	IMPORTANT: Make sure that all the 720 "vkey_*" images are copied to 
+	the "/usr/share/enigma2/<skin>/buttons/" directory where "<skin>" is 
+	the name of the skin that you are updating.
+
+For example in a 1920 x 1080 skin:
+	<fonts>
+		<font name="DejaVuSans" filename="DejaVuSans.ttf" scale="100" />
+		<alias name="VirtualKeyBoard" font="DejaVuSans" size="42" height="68" />
+	</fonts>
+
+	<parameters>
+		<parameter name="VirtualKeyBoard" value="68,68" />
+		<parameter name="VirtualKeyBoardShiftColors" value="16777215,16777215,65535,16711935" />
+	</parameters>
+
+	<screen name="VirtualKeyBoard" title="Virtual Keyboard" position="center,center" size="980,495" zPosition="99">
+		<widget name="prompt" position="14,10" size="952,25" font="Regular;20" noWrap="1" transparent="1" />
+		<ePixmap pixmap="buttons/vkey_text.png" position="10,45" size="960,50" alphatest="blend" zPosition="-4" />
+		<widget name="text" position="14,48" size="952,46" font="Regular;40" halign="right" noWrap="1" transparent="1" />
+		<widget name="list" position="14,105" size="952,340" backgroundColor="#001c2c5c" foregroundColor="window-fg" selectionDisabled="1" transparent="1" />
+		<widget name="locale" position="14,460" size="800,25" font="Regular;20" transparent="1" />
+		<widget name="mode" position="892,460" size="60,25" font="Regular;20" halign="right" transparent="1" valign="center" />
+		<widget name="language" position="0,0" size="0,0" font="Regular;20" transparent="1" />
+	</screen>
+
+	WARNING: Due to limitations in the parameter parsing the shift 
+	colours MUST be specified as decimal numbers for all firmware 
+	versions earlier than 4-Sep-2018.  For firmware builds later than 
+	4-Sep-2018 the colours can be specified as decimal numbers, hex 
+	numbers, Enigma2 "#" colour codes or colour names.  For example, 
+	the following parameters are equaly valid and effectively the same:
+		<parameter name="VirtualKeyBoardShiftColors" value="16777215,16777215,65535,16711935" />
+		<parameter name="VirtualKeyBoardShiftColors" value="0x00ffffff,0x00ffffff,0x0000ffff,0x00ff00ff" />
+		<parameter name="VirtualKeyBoardShiftColors" value="#00ffffff,#00ffffff,#0000ffff,#00ff00ff" />
+		<parameter name="VirtualKeyBoardShiftColors" value="White,White,Cyan,Magenta" />
+		(Assuming the colours "White", "Cyan" and "Magenta" are defined!)
+
+	IMPORTANT: Make sure that all the 1080 "vkey_*" images are copied to 
+	the "/usr/share/enigma2/<skin>/buttons/" directory where "<skin>" is 
+	the name of the skin that you are updating.
+
+NOTE:
+	The most important changes for a skin is to ensure that the width of 
+	the "list" object is wide enough to display the larger keyboard.  The 
+	width is calculated by multiplying number of buttons (14) by the 
+	width of each button (in parameter "VirtualKeyBoard" and the actual 
+	width of the button background or image. (720 skins 14 x 45 = 630, 
+	1080 skins 14 x 68 = 952) 
+
+	Also, the enhanced VirtualKeyBoard adds some new button images and 
+	abandons others.  Graphic buttons for plain text are deprecated as 
+	the new code creates these on the fly while allowing for language 
+	localisation.
+
+---END---

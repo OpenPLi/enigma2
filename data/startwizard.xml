@@ -222,6 +222,19 @@ self.selectKey("LEFT")
 self.selectKey("RIGHT")
 			</code>
 		</step>
+		<step id="fallbacktuner">
+			<condition>
+from Components.NimManager import nimmanager
+self.condition = not nimmanager.somethingConnected() and config.misc.installwizard.hasnetwork.value and config.misc.installwizard.ipkgloaded.value
+			</condition>
+			<text value="Please configure the fallback tuner setup?" />
+			<config screen="SetupFallbacktuner" module="SetupFallbacktuner" type="ConfigList" />
+			<code>
+self.clearSelectedKeys()
+self.selectKey("LEFT")
+self.selectKey("RIGHT")
+			</code>
+		</step>
 		<step id="doscan">
 			<text value="What type of service scan do you want?" />
 			<condition>
@@ -240,6 +253,14 @@ self.condition = config.misc.installwizard.hasnetwork.value and config.misc.inst
 			</condition>
 			<text value="Do you want to install Plugins?" />
 			<config screen="InstallWizard" module="InstallWizard" args="2" type="ConfigList" />
+			<code>
+self.clearSelectedKeys()
+self.selectKey("OK")
+			</code>
+		</step>
+		<step id="setup">
+			<text value="Please setup the following basic configs!" />
+			<config screen="Setup" module="Setup" args="wizardsetup" type="ConfigList" />
 			<code>
 self.clearSelectedKeys()
 self.selectKey("OK")

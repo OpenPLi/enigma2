@@ -7,6 +7,7 @@
 	</setup>
 	<setup key="usage" title="Customize">
 		<item level="1" text="Sort order for menu entries" description="This option allows you to hide and sort menu entries. When selecting user you can change order and hide menu items via the blue button">config.usage.menu_sort_mode</item>
+		<item level="1" text="Sort order for setup entries" description="This option allows you to alphabetically sort setup menu entries.">config.usage.sort_settings</item>
 		<item level="1" text="Show menu paths" description="This option allows you to show menu paths.">config.usage.menu_path</item>
 		<item level="0" text="Show menu numbers" description="This option allows you to show menu number quick links.">config.usage.menu_show_numbers</item>
 		<item level="2" text="Show softcam setup in extensions menu" description="This option allows you to add the softcam setup in the extensions menu." requires="HasSoftcamInstalled">config.misc.softcam_setup.extension_menu</item>
@@ -45,6 +46,7 @@
 		<item level="1" text="Show animation while busy" description="Show busy indicator when the system is busy.">config.usage.show_spinner</item>
 		<item level="1" text="Show positioner movement" description="Configure whether or not an icon should be shown when your motorized dish is moving.">config.usage.showdish</item>
 		<item level="1" text="Show positioner position" description="Configure whether or not a rotor position will be displayed on the infobar">config.misc.showrotorposition</item>
+		<item level="0" text="Include CI assignment" description="Set CI assignment for detection of available services." >config.misc.use_ci_assignment</item>
 		<item level="1" text="Enable multiple bouquets" description="When enabled, services may be grouped in multiple bouquets.">config.usage.multibouquet</item>
 		<item level="1" text="Multi-EPG bouquet selection" description="Enable bouquet selection in multi-EPG">config.usage.multiepg_ask_bouquet</item>
 		<item level="0" text="Alternative numbering mode" description="When enabled, channel numbering will start at '1' for each bouquet.">config.usage.alternative_number_mode</item>
@@ -81,7 +83,6 @@
 		<item level="2" text="Show picons in display" description="Configure if service picons will be shown in display (when supported by the skin)." requires="HasFrontDisplayPicon">config.usage.show_picon_in_display</item>
 		<item level="2" text="Infobar frontend data source" description="Configure the source of the frontend data as shown on the infobars. 'Settings' is as stored on the settings. 'Tuner' is as reported by the tuner.">config.usage.infobar_frontend_source</item>
 		<item level="2" text="Show SNR percentage instead of dB value" description="By default, SNR will be shown in dB (when supported by the tuner). This setting forces SNR to be shown as a percentage instead.">config.usage.swap_snr_on_osd</item>
-		<item level="2" text="Show EIT now/next in infobar" description="When enabled, display the EIT now/next eventdata in infobar. When disabled, display now/next eventdata from the EPG cache instead.">config.usage.show_eit_nownext</item>
 		<item level="2" text="Behavior of 0 key in PiP-mode" description="Configure the function of the '0' button do when PIP is active." requires="PIPAvailable">config.usage.pip_zero_button</item>
 		<item level="2" text="Close PiP on exit" description="When enabled the PiP can be closed by the exit button." requires="PIPAvailable">config.usage.pip_hideOnExit</item>
 		<item level="2" text="Remember last service in PiP" description="Configure if and how long the latest service in the PiP will be remembered." requires="PIPAvailable">config.usage.pip_last_service_timeout</item>
@@ -89,6 +90,7 @@
 		<item level="2" text="Show True/False as graphical switch" description="Enable to display all true/false, yes/no, on/off and enable/disable set up options as a graphical switch.">config.usage.boolean_graphic</item>
 	</setup>
 	<setup key="epgsettings" title="EPG settings">
+		<item level="2" text="Show EIT now/next in infobar" description="When enabled, display the EIT now/next eventdata in infobar. When disabled, display now/next eventdata from the EPG cache instead.">config.usage.show_eit_nownext</item>
 		<item level="0" text="Enable EIT EPG" description="Use EIT EPG information when it is available.">config.epg.eit</item>
 		<item level="2" text="Enable MHW EPG" description="Use MHW EPG information when it is available.">config.epg.mhw</item>
 		<item level="1" text="Enable freesat EPG" description="Use FreeSat EPG information when it is available.">config.epg.freesat</item>
@@ -96,6 +98,7 @@
 		<item level="1" text="Enable Netmed EPG" description="Use Netmed EPG information when it is available.">config.epg.netmed</item>
 		<item level="1" text="Enable Virgin EPG" description="Use Virgin EPG information when it is available.">config.epg.virgin</item>
 		<item level="2" text="Maintain old EPG data for" description="Configure for how many minutes finished events should remain visible in the EPG. Useful when you need information about an event which has just finished, or has been delayed.">config.epg.histminutes</item>
+		<item level="2" text="Location EPG Cache file" description="Define the location of the EPG Cache file.">config.misc.epgcache_filename</item>
 	</setup>
 	<setup key="subtitlesetup" title="Subtitle settings">
 		<item level="0" text="Teletext subtitle color" description="Configure the color of the teletext subtitles.">config.subtitles.ttx_subtitle_colors</item>
@@ -205,6 +208,7 @@
 	<setup key="lcd" title="Display setup" requires="FrontpanelDisplay">
 		<item level="0" text="Clone TV screen to LCD" description="Shows live tv or informations on LCD." requires="LcdLiveTV">config.lcd.showTv</item>
 		<item level="0" text="Clone TV screen to LCD mode" description="Selects the mode how live tv should be shown on the LCD." requires="LcdLiveTVMode">config.usage.LcdLiveTVMode</item>
+		<item level="2" text="Live decoder" description="Selects video source displayed on the LCD." requires="LcdLiveDecoder">config.usage.LcdLiveDecoder</item>
 		<item level="0" text="Brightness" description="Configure the brightness level of the front panel display.">config.lcd.bright</item>
 		<item level="0" text="Contrast" description="Configure the contrast level of the front panel display.">config.lcd.contrast</item>
 		<item level="0" text="Standby" description="Configure the brightness level of the front panel display during standby.">config.lcd.standby</item>
@@ -225,16 +229,8 @@
 		<item text="Latitude" description="Configure the latitude of your location.">config.sat.diseqcb</item>
 		<item text="Use power measurement" description="When enabled, measure power consumption to detect when the rotor stops turning (when supported by the tuner)." >config.sat.diseqcc</item>
 	</setup>
-	<setup key="fallbacktuner" title="Fallback remote receiver setup">
-		<item level="0" text="Enable fallback remote receiver" description="Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001.">config.usage.remote_fallback_enabled</item>
-		<item level="0" text="Import from remote receiver URL" description="Import channels and/or EPG from remote receiver URL when receiver is booted">config.usage.remote_fallback_import</item>
-		<item level="0" text="Fallback remote receiver URL" conditional="config.usage.remote_fallback_enabled.value or config.usage.remote_fallback_import.value" description="URL of fallback remote receiver">config.usage.remote_fallback</item>
-		<item level="1" text="Add seperate receiver URL for import" conditional="config.usage.remote_fallback_enabled.value and config.usage.remote_fallback_import.value and config.usage.remote_fallback.value" description="Select yes when you want to import channels and/or EPG from a different URL">config.usage.remote_fallback_import_seperate</item>
-		<item level="1" text="Import remote receiver URL" conditional="config.usage.remote_fallback_enabled.value and config.usage.remote_fallback_import.value and config.usage.remote_fallback_import_seperate.value" description="URL of fallback remote receiver">config.usage.remote_fallback_import_url</item>
-		<item level="1" text="Also import at reboot/restart enigma2" conditional="config.usage.remote_fallback.value and config.usage.remote_fallback_import.value" description="Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted">config.usage.remote_fallback_import_restart</item>
-		<item level="1" text="Also import when box is leaving standby" conditional="config.usage.remote_fallback.value and config.usage.remote_fallback_import.value" description="Import channels and/or EPG from remote receiver URL also when the receiver is getting out of standby">config.usage.remote_fallback_import_standby</item>
-		<item level="0" text="Also import from the extension menu" conditional="config.usage.remote_fallback.value and config.usage.remote_fallback_import.value" description="Make it possible to manually initiate the channels import and/or EPG via the extension menu">config.usage.remote_fallback_extension_menu</item>
-		<item level="0" text="Show notification when import channels was successful" conditional="config.usage.remote_fallback.value and config.usage.remote_fallback_import.value" description="Show notification when import channels and/or EPG from remote receiver URL is completed">config.usage.remote_fallback_ok</item>
-		<item level="0" text="Show notification when import channels was not successful" conditional="config.usage.remote_fallback.value and config.usage.remote_fallback_import.value" description="Show notification when import channels and/or EPG from remote receiver URL did not complete">config.usage.remote_fallback_nok</item>
+	<setup key="wizardsetup" title="Wizard setup">
+		<item level="0" text="Setup mode" description="Configure which access level to use for the configuration menu. Expert level gives access to all items.">config.usage.setup_level</item>
+		<item level="0" text="Alternative numbering mode" description="When enabled, channel numbering will start at '1' for each bouquet.">config.usage.alternative_number_mode</item>
 	</setup>
 </setupxml>

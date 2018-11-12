@@ -57,18 +57,20 @@ def resolveFilename(scope, base = "", path_prefix = None):
 		from Components.config import config
 		# allow files in the config directory to replace skin files
 		tmp = defaultPaths[SCOPE_CONFIG][0]
-		if base and pathExists(tmp + base):
+		if base and pathExists("%s%s" % (tmp, base)):
 			path = tmp
 		else:
-			tmp = defaultPaths[SCOPE_SKIN][0]
+			path = defaultPaths[SCOPE_SKIN][0]
 			pos = config.skin.primary_skin.value.rfind('/')
 			if pos != -1:
-				#if basefile is not available use default skin path as fallback
-				tmpfile = tmp+config.skin.primary_skin.value[:pos+1] + base
-				if pathExists(tmpfile):
-					path = tmp+config.skin.primary_skin.value[:pos+1]
-				else:
-					path = tmp
+				skinname = config.skin.primary_skin.value[:pos+1]
+				#  remove skin name from base if exist
+				if base.startswith(skinname):
+					skinname = ""
+				for dir in ("%s%s" % (path, skinname), path, "%s%s" % (path, "skin_default/")):
+					for file in (base, os.path.basename(base)):
+						if pathExists("%s%s"% (dir, file)):
+							return "%s%s" % (dir, file)
 			else:
 				path = tmp
 
@@ -127,7 +129,7 @@ def defaultRecordingLocation(candidate=None):
 		return candidate
 	# First, try whatever /hdd points to, or /media/hdd
 	try:
-		path = os.readlink('/hdd')
+		path = os.path.realpath("/hdd")
 	except:
 		path = '/media/hdd'
 	if not os.path.exists(path):
@@ -180,6 +182,9 @@ def fileExists(f, mode='r'):
 
 def fileCheck(f, mode='r'):
 	return fileExists(f, mode) and f
+
+def fileHas(f, content, mode='r'):
+        return fileExists(f, mode) and content in open(f, mode).read()
 
 def getRecordingFilename(basename, dirname = None):
 	# filter out non-allowed characters

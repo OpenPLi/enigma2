@@ -46,7 +46,7 @@ public:
 		 * "all sections of the SDT for the actual multiplex shall be transmitted at least every 2 s"
 		 * "all sections of the SDT for other TSs shall be transmitted at least every 10 s if present"
 		 */
-		m_spec.timeout = 2000; // ServiceDescriptionSection::TIMEOUT;
+		m_spec.timeout = 2500; // ServiceDescriptionSection::TIMEOUT;
 		m_spec.flags   = eDVBTableSpec::tfAnyVersion |
 			eDVBTableSpec::tfHaveTID | eDVBTableSpec::tfCheckCRC |
 			eDVBTableSpec::tfHaveTimeout;
@@ -63,7 +63,7 @@ public:
 		 * "all sections of the SDT for the actual multiplex shall be transmitted at least every 2 s"
 		 * "all sections of the SDT for other TSs shall be transmitted at least every 10 s if present"
 		 */
-		m_spec.timeout = other ? 10000 : 2000; // ServiceDescriptionSection::TIMEOUT;
+		m_spec.timeout = other ? 10500 : 2500; // ServiceDescriptionSection::TIMEOUT;
 		m_spec.flags   = eDVBTableSpec::tfAnyVersion |
 			eDVBTableSpec::tfHaveTID | eDVBTableSpec::tfCheckCRC |
 			eDVBTableSpec::tfHaveTIDExt | eDVBTableSpec::tfHaveTimeout;

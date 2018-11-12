@@ -124,7 +124,8 @@ terrestrial_autoscan_nimtype = {
 'SSH108' : 'ssh108_t2_scan',
 'TT3L10' : 'tt3l10_t2_scan',
 'TURBO' : 'vuplus_turbo_t',
-'TT2L08' : 'tt2l08_t2_scan'
+'TT2L08' : 'tt2l08_t2_scan',
+'BCM3466' : 'bcm3466'
 }
 
 def GetDeviceId(filter, nim_idx):
@@ -216,11 +217,12 @@ class CableTransponderSearchSupport:
 						"FEC_1_2" : parm.FEC_1_2,
 						"FEC_2_3" : parm.FEC_2_3,
 						"FEC_3_4" : parm.FEC_3_4,
+						"FEC_3_5" : parm.FEC_3_5,
+						"FEC_4_5" : parm.FEC_4_5,						
 						"FEC_5_6" : parm.FEC_5_6,
+						"FEC_6_7" : parm.FEC_6_7,						
 						"FEC_7_8" : parm.FEC_7_8,
 						"FEC_8_9" : parm.FEC_8_9,
-						"FEC_3_5" : parm.FEC_3_5,
-						"FEC_4_5" : parm.FEC_4_5,
 						"FEC_9_10" : parm.FEC_9_10,
 						"FEC_NONE" : parm.FEC_None }
 					parm.frequency = int(data[1])
@@ -243,9 +245,9 @@ class CableTransponderSearchSupport:
 				if nim_name is not None and nim_name != "":
 					device_id = ""
 					nim_name = nim_name.split(' ')[-1][4:-1]
-					if nim_name == 'TT3L10':
+					if nim_name in ("TT3L10", "BCM3466"):
 						try:
-							device_id = GetDeviceId('TT3L10', nim_idx)
+							device_id = GetDeviceId(nim_name, nim_idx)
 							device_id = "--device=%s" % (device_id)
 						except Exception, err:
 							print "GetCommand ->", err
@@ -293,6 +295,9 @@ class CableTransponderSearchSupport:
 		if tunername == "CXD1981":
 			bin_name = "CXD1981"
 			cmd = "cxd1978 --init --scan --verbose --wakeup --inv 2 --bus %d" % bus
+		elif tunername == "ATBM781x":
+			bin_name = "ATBM781x"
+			cmd = "atbm781x --init --scan --verbose --wakeup --inv 2 --bus %d" % bus
 		elif tunername.startswith("Sundtek"):
 			bin_name = "mediaclient"
 			cmd = "/opt/bin/mediaclient --blindscan %d" % nim_idx
@@ -1034,6 +1039,7 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 			(eDVBFrontendParametersSatellite.FEC_3_5, "3/5"),
 			(eDVBFrontendParametersSatellite.FEC_4_5, "4/5"),
 			(eDVBFrontendParametersSatellite.FEC_5_6, "5/6"),
+			(eDVBFrontendParametersSatellite.FEC_6_7, "6/7"),
 			(eDVBFrontendParametersSatellite.FEC_7_8, "7/8"),
 			(eDVBFrontendParametersSatellite.FEC_8_9, "8/9"),
 			(eDVBFrontendParametersSatellite.FEC_9_10, "9/10")])
@@ -1080,11 +1086,12 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 			(eDVBFrontendParametersCable.FEC_1_2, "1/2"),
 			(eDVBFrontendParametersCable.FEC_2_3, "2/3"),
 			(eDVBFrontendParametersCable.FEC_3_4, "3/4"),
-			(eDVBFrontendParametersCable.FEC_5_6, "5/6"),
-			(eDVBFrontendParametersCable.FEC_7_8, "7/8"),
-			(eDVBFrontendParametersCable.FEC_8_9, "8/9"),
 			(eDVBFrontendParametersCable.FEC_3_5, "3/5"),
 			(eDVBFrontendParametersCable.FEC_4_5, "4/5"),
+			(eDVBFrontendParametersCable.FEC_5_6, "5/6"),
+			(eDVBFrontendParametersCable.FEC_6_7, "6/7"),
+			(eDVBFrontendParametersCable.FEC_7_8, "7/8"),
+			(eDVBFrontendParametersCable.FEC_8_9, "8/9"),
 			(eDVBFrontendParametersCable.FEC_9_10, "9/10"),
 			(eDVBFrontendParametersCable.FEC_None, _("None"))])
 		self.scan_cab.symbolrate = ConfigInteger(default = defaultCab["symbolrate"], limits = (1, 99999))
@@ -1113,6 +1120,8 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 			(eDVBFrontendParametersTerrestrial.FEC_1_2, "1/2"),
 			(eDVBFrontendParametersTerrestrial.FEC_2_3, "2/3"),
 			(eDVBFrontendParametersTerrestrial.FEC_3_4, "3/4"),
+			(eDVBFrontendParametersTerrestrial.FEC_3_5, "3/5"),
+			(eDVBFrontendParametersTerrestrial.FEC_4_5, "4/5"),
 			(eDVBFrontendParametersTerrestrial.FEC_5_6, "5/6"),
 			(eDVBFrontendParametersTerrestrial.FEC_6_7, "6/7"),
 			(eDVBFrontendParametersTerrestrial.FEC_7_8, "7/8"),
@@ -1122,6 +1131,8 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 			(eDVBFrontendParametersTerrestrial.FEC_1_2, "1/2"),
 			(eDVBFrontendParametersTerrestrial.FEC_2_3, "2/3"),
 			(eDVBFrontendParametersTerrestrial.FEC_3_4, "3/4"),
+			(eDVBFrontendParametersTerrestrial.FEC_3_5, "3/5"),
+			(eDVBFrontendParametersTerrestrial.FEC_4_5, "4/5"),
 			(eDVBFrontendParametersTerrestrial.FEC_5_6, "5/6"),
 			(eDVBFrontendParametersTerrestrial.FEC_6_7, "6/7"),
 			(eDVBFrontendParametersTerrestrial.FEC_7_8, "7/8"),
@@ -1535,8 +1546,11 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 			pol_list = ['H','V','L','R']
 			fec_list = ['Auto','1/2','2/3','3/4','5/6','7/8','8/9','3/5','4/5','9/10','None']
 			tp_text = str(tp[1] / 1000) + " " + pol_list[tp[3]] + " " + str(tp[2] / 1000) + " " + fec_list[tp[4]]
-			if tp[10] > -1 and tp[5] == eDVBFrontendParametersSatellite.System_DVB_S2:
-				tp_text = ("%s IS %d") % (tp_text, tp[10])
+			if tp[5] == eDVBFrontendParametersSatellite.System_DVB_S2:
+				if tp[10] > eDVBFrontendParametersSatellite.No_Stream_Id_Filter:
+					tp_text = ("%s MIS %d") % (tp_text, tp[10])
+				if tp[12] > 0:
+					tp_text = ("%s Gold %d") % (tp_text, tp[12])
 			return tp_text
 		return _("Invalid transponder data")
 

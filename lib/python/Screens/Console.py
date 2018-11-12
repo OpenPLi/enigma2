@@ -2,6 +2,7 @@ from enigma import eConsoleAppContainer
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.ScrollLabel import ScrollLabel
+from Components.Sources.StaticText import StaticText
 
 class Console(Screen):
 	#TODO move this to skin.xml
@@ -10,15 +11,19 @@ class Console(Screen):
 			<widget name="text" position="0,0" size="550,400" font="Console;14" />
 		</screen>"""
 
-	def __init__(self, session, title = "Console", cmdlist = None, finishedCallback = None, closeOnSuccess = False, showStartStopText=True):
+	def __init__(self, session, title = "Console", cmdlist = None, finishedCallback = None, closeOnSuccess = False, showStartStopText=True, skin=None):
 		Screen.__init__(self, session)
 
 		self.finishedCallback = finishedCallback
 		self.closeOnSuccess = closeOnSuccess
 		self.showStartStopText = showStartStopText
+		if skin:
+			self.skinName = [skin, "Console"]
+
 		self.errorOcurred = False
 
 		self["text"] = ScrollLabel("")
+		self["key_red"] = StaticText(_("Cancel"))
 		self["actions"] = ActionMap(["WizardActions", "DirectionActions"],
 		{
 			"ok": self.cancel,
@@ -63,6 +68,8 @@ class Console(Screen):
 				self.finishedCallback()
 			if not self.errorOcurred and self.closeOnSuccess:
 				self.cancel()
+			else:
+				self["text"].appendText(_("\nPress OK or Exit to abort!"))
 
 	def cancel(self):
 		if self.run == len(self.cmdlist):

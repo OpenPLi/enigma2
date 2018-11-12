@@ -28,22 +28,17 @@ class About(Screen):
 		AboutText += _("CPU: ") + about.getCPUInfoString() + "\n"
 		AboutText += _("Image: ") + about.getImageTypeString() + "\n"
 		AboutText += _("Build date: ") + about.getBuildDateString() + "\n"
+		AboutText += _("Last upgrade: ") + about.getUpdateDateString() + "\n"
 
 		# [WanWizard] Removed until we find a reliable way to determine the installation date
 		# AboutText += _("Installed: ") + about.getFlashDateString() + "\n"
 
-		# [WanWizard] No longer that relevant as we now have an accurate build date
-		# as I'm not sure this variable isn't used elsewhere, I haven't removed it
-		ImageVersion = _("Last upgrade: ") + about.getImageVersionString()
-		self["ImageVersion"] = StaticText(ImageVersion)
-		# AboutText += ImageVersion + "\n"
-
 		EnigmaVersion = about.getEnigmaVersionString()
 		EnigmaVersion = EnigmaVersion.rsplit("-", EnigmaVersion.count("-") - 2)
 		if len(EnigmaVersion) == 3:
-			EnigmaVersion = EnigmaVersion[0] + " " + EnigmaVersion[2] + "-" + EnigmaVersion[1]
+			EnigmaVersion = EnigmaVersion[0] + " (" + EnigmaVersion[2] + "-" + EnigmaVersion[1] + ")"
 		else:
-			EnigmaVersion = " ".join(EnigmaVersion)
+			EnigmaVersion = EnigmaVersion[0] + " (" + EnigmaVersion[1] + ")"
 		EnigmaVersion = _("Enigma version: ") + EnigmaVersion
 		self["EnigmaVersion"] = StaticText(EnigmaVersion)
 		AboutText += "\n" + EnigmaVersion + "\n"
@@ -340,7 +335,7 @@ class MemoryInfoSkinParams(GUIComponent):
 					self.rows_in_column = int(value)
 			self.skinAttributes = attribs
 		return GUIComponent.applySkin(self, desktop, screen)
-
+	
 	GUI_WIDGET = eLabel
 
 class Troubleshoot(Screen):
@@ -440,8 +435,8 @@ class Troubleshoot(Screen):
 		return [x for x in sorted(glob.glob("/mnt/hdd/*.log"), key=lambda x: os.path.isfile(x) and os.path.getmtime(x))] + (os.path.isfile(home_root) and [home_root] or []) + (os.path.isfile(tmp) and [tmp] or [])
 
 	def updateOptions(self):
-		self.titles = ["dmesg", "ifconfig", "df", "top", "ps"]
-		self.commands = ["dmesg", "ifconfig", "df -h", "top -n 1", "ps"]
+		self.titles = ["dmesg", "ifconfig", "df", "top", "ps", "messages"]
+		self.commands = ["dmesg", "ifconfig", "df -h", "top -n 1", "ps", "cat /var/volatile/log/messages"]
 		install_log = "/home/root/autoinstall.log"
 		if os.path.isfile(install_log):
 				self.titles.append("%s" % install_log)

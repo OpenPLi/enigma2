@@ -390,8 +390,9 @@ public:
 		sLiveStreamDemuxId,
 		sBuffer,
 		sIsDedicated3D,
-		sHideVBI,
 		sCenterDVBSubs,
+
+		sGamma,
 
 		sUser = 0x100
 	};
@@ -930,6 +931,8 @@ public:
 		evStopped,
 
 		evHBBTVInfo,
+
+		evVideoGammaChanged,
 
 		evUser = 0x100
 	};

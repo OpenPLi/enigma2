@@ -86,6 +86,7 @@ def InitUsageConfig():
 		("small", _("Small")),
 		("large", _("Large")),])
 	config.usage.enable_tt_caching = ConfigYesNo(default = True)
+	config.usage.sort_settings = ConfigYesNo(default=False)
 	choicelist = []
 	for i in (10, 30):
 		choicelist.append((str(i), ngettext("%d second", "%d seconds", i) % i))
@@ -230,7 +231,6 @@ def InitUsageConfig():
 	config.usage.remote_fallback_enabled = ConfigYesNo(default = False)
 	config.usage.remote_fallback = ConfigText(default = "", fixed_size = False)
 	config.usage.remote_fallback.addNotifier(remote_fallback_changed, immediate_feedback=False)
-	config.usage.remote_fallback_import_seperate = ConfigYesNo(default = False)
 	config.usage.remote_fallback_import_url = ConfigText(default = "", fixed_size = False)
 	config.usage.remote_fallback_import_url.addNotifier(remote_fallback_changed, immediate_feedback=False)
 	config.usage.remote_fallback_import = ConfigSelection(default = "", choices = [("", _("No")), ("channels", _("Channels only")), ("channels_epg", _("Channels and EPG")), ("epg", _("EPG only"))])
@@ -239,6 +239,7 @@ def InitUsageConfig():
 	config.usage.remote_fallback_ok = ConfigYesNo(default = False)
 	config.usage.remote_fallback_nok = ConfigYesNo(default = False)
 	config.usage.remote_fallback_extension_menu = ConfigYesNo(default = False)
+	config.usage.remote_fallback_external_timer = ConfigYesNo(default = False)
 
 	config.usage.show_timer_conflict_warning = ConfigYesNo(default = True)
 
@@ -281,6 +282,7 @@ def InitUsageConfig():
 	SystemInfo["ATSC_priority_tuner_available"] = len(atsc_nims) > 3 and any(len(i) > 2 for i in (dvbs_nims, dvbc_nims, dvbt_nims))
 
 	config.misc.disable_background_scan = ConfigYesNo(default = False)
+	config.misc.use_ci_assignment = ConfigYesNo(default = False)
 	config.usage.show_event_progress_in_servicelist = ConfigSelection(default = 'barright', choices = [
 		('barleft', _("Progress bar left")),
 		('barright', _("Progress bar right")),
@@ -383,6 +385,12 @@ def InitUsageConfig():
 			open(SystemInfo["LcdLiveTVMode"], "w").write(configElement.value)
 		config.usage.LcdLiveTVMode = ConfigSelection(default = "0", choices=[str(x) for x in range(0,9)])
 		config.usage.LcdLiveTVMode.addNotifier(setLcdLiveTVMode)
+
+	if SystemInfo["LcdLiveDecoder"]:
+		def setLcdLiveDecoder(configElement):
+			open(SystemInfo["LcdLiveDecoder"], "w").write(configElement.value)
+		config.usage.LcdLiveDecoder = ConfigSelection(default = "0", choices=[str(x) for x in range(0,4)])
+		config.usage.LcdLiveDecoder.addNotifier(setLcdLiveDecoder)
 
 	config.usage.boolean_graphic = ConfigYesNo(default=True)
 
@@ -578,6 +586,29 @@ def InitUsageConfig():
 			open(SystemInfo["HasHdrType"], "w").write(configElement.value)
 		config.av.hdmihdrtype = ConfigSelection(default = "auto", choices={"auto": _("Auto"), "none": _("SDR"), "hdr10": _("HDR10"), "hlg": _("HLG"), "dolby": _("Dolby")})
 		config.av.hdmihdrtype.addNotifier(setHdmiHdrType)
+		
+	if SystemInfo["HDRSupport"]:
+		def setHlgSupport(configElement):
+			open("/proc/stb/hdmi/hlg_support", "w").write(configElement.value)
+		config.av.hlg_support = ConfigSelection(default = "auto(EDID)", 
+			choices = [ ("auto(EDID)", _("controlled by HDMI")), ("yes", _("force enabled")), ("no", _("force disabled")) ])
+		config.av.hlg_support.addNotifier(setHlgSupport)
+
+		def setHdr10Support(configElement):
+			open("/proc/stb/hdmi/hdr10_support", "w").write(configElement.value)
+		config.av.hdr10_support = ConfigSelection(default = "auto(EDID)", 
+			choices = [ ("auto(EDID)", _("controlled by HDMI")), ("yes", _("force enabled")), ("no", _("force disabled")) ])
+		config.av.hdr10_support.addNotifier(setHdr10Support)
+
+		def setDisable12Bit(configElement):
+			open("/proc/stb/video/disable_12bit", "w").write(configElement.value)
+		config.av.allow_12bit = ConfigSelection(default = "0", choices = [ ("0", _("yes")), ("1", _("no")) ]);
+		config.av.allow_12bit.addNotifier(setDisable12Bit)
+
+		def setDisable10Bit(configElement):
+			open("/proc/stb/video/disable_10bit", "w").write(configElement.value)
+		config.av.allow_10bit = ConfigSelection(default = "0", choices = [ ("0", _("yes")), ("1", _("no")) ]);
+		config.av.allow_10bit.addNotifier(setDisable10Bit)
 
 	config.subtitles = ConfigSubsection()
 	config.subtitles.ttx_subtitle_colors = ConfigSelection(default = "1", choices = [
@@ -634,7 +665,7 @@ def InitUsageConfig():
 
 	config.autolanguage = ConfigSubsection()
 	audio_language_choices=[
-		("---", _("None")),
+		("", _("None")),
 		("orj dos ory org esl qaa und mis mul ORY ORJ Audio_ORJ", _("Original")),
 		("ara", _("Arabic")),
 		("eus baq", _("Basque")),
@@ -675,27 +706,27 @@ def InitUsageConfig():
 
 	def setEpgLanguage(configElement):
 		eServiceEvent.setEPGLanguage(configElement.value)
-	config.autolanguage.audio_epglanguage = ConfigSelection(audio_language_choices[:1] + audio_language_choices [2:], default="---")
+	config.autolanguage.audio_epglanguage = ConfigSelection(audio_language_choices[:1] + audio_language_choices [2:], default="")
 	config.autolanguage.audio_epglanguage.addNotifier(setEpgLanguage)
 
 	def setEpgLanguageAlternative(configElement):
 		eServiceEvent.setEPGLanguageAlternative(configElement.value)
-	config.autolanguage.audio_epglanguage_alternative = ConfigSelection(audio_language_choices[:1] + audio_language_choices [2:], default="---")
+	config.autolanguage.audio_epglanguage_alternative = ConfigSelection(audio_language_choices[:1] + audio_language_choices [2:], default="")
 	config.autolanguage.audio_epglanguage_alternative.addNotifier(setEpgLanguageAlternative)
 
-	config.autolanguage.audio_autoselect1 = ConfigSelection(choices=audio_language_choices, default="---")
-	config.autolanguage.audio_autoselect2 = ConfigSelection(choices=audio_language_choices, default="---")
-	config.autolanguage.audio_autoselect3 = ConfigSelection(choices=audio_language_choices, default="---")
-	config.autolanguage.audio_autoselect4 = ConfigSelection(choices=audio_language_choices, default="---")
+	config.autolanguage.audio_autoselect1 = ConfigSelection(choices=audio_language_choices, default="")
+	config.autolanguage.audio_autoselect2 = ConfigSelection(choices=audio_language_choices, default="")
+	config.autolanguage.audio_autoselect3 = ConfigSelection(choices=audio_language_choices, default="")
+	config.autolanguage.audio_autoselect4 = ConfigSelection(choices=audio_language_choices, default="")
 	config.autolanguage.audio_defaultac3 = ConfigYesNo(default = True)
 	config.autolanguage.audio_defaultddp = ConfigYesNo(default = False)
 	config.autolanguage.audio_usecache = ConfigYesNo(default = True)
 
 	subtitle_language_choices = audio_language_choices[:1] + audio_language_choices [2:]
-	config.autolanguage.subtitle_autoselect1 = ConfigSelection(choices=subtitle_language_choices, default="---")
-	config.autolanguage.subtitle_autoselect2 = ConfigSelection(choices=subtitle_language_choices, default="---")
-	config.autolanguage.subtitle_autoselect3 = ConfigSelection(choices=subtitle_language_choices, default="---")
-	config.autolanguage.subtitle_autoselect4 = ConfigSelection(choices=subtitle_language_choices, default="---")
+	config.autolanguage.subtitle_autoselect1 = ConfigSelection(choices=subtitle_language_choices, default="")
+	config.autolanguage.subtitle_autoselect2 = ConfigSelection(choices=subtitle_language_choices, default="")
+	config.autolanguage.subtitle_autoselect3 = ConfigSelection(choices=subtitle_language_choices, default="")
+	config.autolanguage.subtitle_autoselect4 = ConfigSelection(choices=subtitle_language_choices, default="")
 	config.autolanguage.subtitle_hearingimpaired = ConfigYesNo(default = False)
 	config.autolanguage.subtitle_defaultimpaired = ConfigYesNo(default = False)
 	config.autolanguage.subtitle_defaultdvb = ConfigYesNo(default = False)

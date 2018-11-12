@@ -22,10 +22,11 @@ from Screens.TimerEdit import TimerSanityConflict, TimerEditList
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
-from RecordTimer import RecordTimerEntry, parseEvent, AFTEREVENT
+from RecordTimer import RecordTimerEntry, parseEvent, AFTEREVENT, createRecordTimerEntry
 from ServiceReference import ServiceReference, isPlayableForCur
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Alternatives import CompareWithAlternatives
+from Tools.FallbackTimer import FallbackTimerList
 from Tools.TextBoundary import getTextBoundarySize
 from enigma import eEPGCache, eListbox, gFont, eListboxPythonMultiContent, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, RT_VALIGN_CENTER, RT_WRAP, BT_SCALE, BT_KEEP_ASPECT_RATIO, eSize, eRect, eTimer, loadPNG, eServiceReference
 from GraphMultiEpgSetup import GraphMultiEpgSetup
@@ -57,7 +58,7 @@ config.misc.graph_mepg.servicetitle_mode = ConfigSelection(default = "picon+serv
 	("number+picon", _("Channelnumber and picon")),
 	("number+picon+servicename", _("Channelnumber, picon and servicename")) ])
 config.misc.graph_mepg.roundTo = ConfigSelection(default = "900", choices = [("900", _("%d minutes") % 15), ("1800", _("%d minutes") % 30), ("3600", _("%d minutes") % 60)])
-config.misc.graph_mepg.OKButton = ConfigSelection(default = "info", choices = [("info", _("Show detailed event info")), ("zap", _("Zap to selected channel"))])
+config.misc.graph_mepg.OKButton = ConfigSelection(default = "info", choices = [("info", _("Show detailed event info")), ("zap", _("Zap to selected channel")), ("zap+exit", _("Zap to selected channel and exit GMEPG"))])
 possibleAlignmentChoices = [
 	( str(RT_HALIGN_LEFT   | RT_VALIGN_CENTER          ) , _("left")),
 	( str(RT_HALIGN_CENTER | RT_VALIGN_CENTER          ) , _("centered")),
@@ -927,6 +928,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 		self.updateTimelineTimer.start(60 * 1000)
 		self.onLayoutFinish.append(self.onCreate)
 		self.previousref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
+		self.fallbackTimer = FallbackTimerList(self, self.onCreate)
 
 	def prevPage(self):
 		self.showhideWindow(True)
@@ -1177,7 +1179,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 		self["timeline_text"].setDateFormat(config.misc.graph_mepg.servicetitle_mode.value)
 		l.fillMultiEPG(self.services, self.ask_time)
 		l.moveToService(self.serviceref)
-		l.setCurrentlyPlaying(self.serviceref)
+		l.setCurrentlyPlaying(self.previousref)
 		self.moveTimeLines()
 
 	def eventViewCallback(self, setEvent, setService, val):
@@ -1207,7 +1209,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 				from Components.ServiceEventTracker import InfoBarCount
 				preview = InfoBarCount > 1
 				self.zapFunc(ref.ref, preview)
-				if self.previousref and self.previousref == ref.ref and not preview:
+				if config.misc.graph_mepg.OKButton.value == "zap+exit" or self.previousref and self.previousref == ref.ref and not preview:
 					config.misc.graph_mepg.save()
 					self.close(True)
 				self.previousref = ref.ref
@@ -1226,10 +1228,13 @@ class GraphMultiEPG(Screen, HelpableScreen):
 			self.zapTo()
 
 	def removeTimer(self, timer):
-		timer.afterEvent = AFTEREVENT.NONE
-		self.session.nav.RecordTimer.removeEntry(timer)
-		self["key_green"].setText(_("Add timer"))
-		self.key_green_choice = self.ADD_TIMER
+		if timer.external:
+			self.fallbackTimer.removeTimer(timer, self.onSelectionChanged)
+		else:
+			timer.afterEvent = AFTEREVENT.NONE
+			self.session.nav.RecordTimer.removeEntry(timer)
+			self["key_green"].setText(_("Add timer"))
+			self.key_green_choice = self.ADD_TIMER
 
 	def disableTimer(self, timer, state, repeat=False, record=False):
 		if repeat:
@@ -1243,10 +1248,13 @@ class GraphMultiEPG(Screen, HelpableScreen):
 				menu = [(_("Disable current event but not coming events"), "nextonlystop"),(_("Disable timer"), "simplestop")]
 			self.session.openWithCallback(boundFunction(self.runningEventCallback, timer, state), ChoiceBox, title=title_text, list=menu)
 		elif timer.state == state:
-			timer.disable()
-			self.session.nav.RecordTimer.timeChanged(timer)
-			self["key_green"].setText(_("Add timer"))
-			self.key_green_choice = self.ADD_TIMER
+			if timer.external:
+				self.fallbackTimer.toggleTimer(timer, self.onSelectionChanged)
+			else:
+				timer.disable()
+				self.session.nav.RecordTimer.timeChanged(timer)
+				self["key_green"].setText(_("Add timer"))
+				self.key_green_choice = self.ADD_TIMER
 
 	def runningEventCallback(self, t, state, result):
 		if result is not None and t.state == state:
@@ -1285,7 +1293,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 		begin = event.getBeginTime()
 		end = begin + event.getDuration()
 		refstr = ':'.join(serviceref.ref.toString().split(':')[:11])
-		for timer in self.session.nav.RecordTimer.timer_list:
+		for timer in self.session.nav.RecordTimer.getAllTimersList():
 			needed_ref = ':'.join(timer.service_ref.ref.toString().split(':')[:11]) == refstr
 			if needed_ref and timer.eit == eventid and (begin < timer.begin <= end or timer.begin <= begin <= timer.end):
 				isRecordEvent = True
@@ -1333,60 +1341,79 @@ class GraphMultiEPG(Screen, HelpableScreen):
 	def finishedEdit(self, answer=None):
 		if answer[0]:
 			entry = answer[1]
-			simulTimerList = self.session.nav.RecordTimer.record(entry)
-			if simulTimerList is not None:
-				for x in simulTimerList:
-					if x.setAutoincreaseEnd(entry):
-						self.session.nav.RecordTimer.timeChanged(x)
+			if entry.external_prev != entry.external:
+				def removeEditTimer():
+					entry.service_ref, entry.begin, entry.end, entry.external = entry.service_ref_prev, entry.begin_prev, entry.end_prev, entry.external_prev
+					self.removeTimer(entry)
+				def moveEditTimerError():
+					entry.external = entry.external_prev
+					self.onSelectionChanged()
+				if entry.external:
+					self.fallbackTimer.addTimer(entry, removeEditTimer, moveEditTimerError)
+				else:
+					newentry = createRecordTimerEntry(entry)
+					entry.service_ref, entry.begin, entry.end = entry.service_ref_prev, entry.begin_prev, entry.end_prev
+					self.fallbackTimer.removeTimer(entry, boundFunction(self.finishedTimerAdd, (True, newentry)), moveEditTimerError)
+			elif entry.external:
+				self.fallbackTimer.editTimer(entry, self.onSelectionChanged)
+			else:
 				simulTimerList = self.session.nav.RecordTimer.record(entry)
 				if simulTimerList is not None:
-					self.session.openWithCallback(self.finishedEdit, TimerSanityConflict, simulTimerList)
-					return
-				else:
-					self.session.nav.RecordTimer.timeChanged(entry)
-		self.onSelectionChanged()
+					for x in simulTimerList:
+						if x.setAutoincreaseEnd(entry):
+							self.session.nav.RecordTimer.timeChanged(x)
+					simulTimerList = self.session.nav.RecordTimer.record(entry)
+					if simulTimerList is not None:
+						self.session.openWithCallback(boundFunction(self.finishedEdit, service_ref, begin, end), TimerSanityConflict, simulTimerList)
+						return
+					else:
+						self.session.nav.RecordTimer.timeChanged(entry)
+				self.onSelectionChanged()
 
 	def finishedTimerAdd(self, answer):
 		print "finished add"
 		if answer[0]:
 			entry = answer[1]
-			simulTimerList = self.session.nav.RecordTimer.record(entry)
-			if simulTimerList is not None:
-				for x in simulTimerList:
-					if x.setAutoincreaseEnd(entry):
-						self.session.nav.RecordTimer.timeChanged(x)
+			if entry.external:
+				self.fallbackTimer.addTimer(entry, self.onSelectionChanged)
+			else:
 				simulTimerList = self.session.nav.RecordTimer.record(entry)
 				if simulTimerList is not None:
-					if not entry.repeated and not config.recording.margin_before.value and not config.recording.margin_after.value and len(simulTimerList) > 1:
-						change_time = False
-						conflict_begin = simulTimerList[1].begin
-						conflict_end = simulTimerList[1].end
-						if conflict_begin == entry.end:
-							entry.end -= 30
-							change_time = True
-						elif entry.begin == conflict_end:
-							entry.begin += 30
-							change_time = True
-						elif entry.begin == conflict_begin and (entry.service_ref and entry.service_ref.ref and entry.service_ref.ref.flags & eServiceReference.isGroup):
-							entry.begin += 30
-							change_time = True
-						if change_time:
-							simulTimerList = self.session.nav.RecordTimer.record(entry)
+					for x in simulTimerList:
+						if x.setAutoincreaseEnd(entry):
+							self.session.nav.RecordTimer.timeChanged(x)
+					simulTimerList = self.session.nav.RecordTimer.record(entry)
 					if simulTimerList is not None:
-						self.session.openWithCallback(self.finishSanityCorrection, TimerSanityConflict, simulTimerList)
-						return
-			cur = self["list"].getCurrent()
-			event = cur and cur[0]
-			if event:
-				begin = event.getBeginTime()
-				end = begin + event.getDuration()
-				if begin < entry.begin <= end or entry.begin <= begin <= entry.end:
-					self["key_green"].setText(_("Change timer"))
-					self.key_green_choice = self.REMOVE_TIMER
-		else:
-			self["key_green"].setText(_("Add timer"))
-			self.key_green_choice = self.ADD_TIMER
-			print "Timeredit aborted"
+						if not entry.repeated and not config.recording.margin_before.value and not config.recording.margin_after.value and len(simulTimerList) > 1:
+							change_time = False
+							conflict_begin = simulTimerList[1].begin
+							conflict_end = simulTimerList[1].end
+							if conflict_begin == entry.end:
+								entry.end -= 30
+								change_time = True
+							elif entry.begin == conflict_end:
+								entry.begin += 30
+								change_time = True
+							elif entry.begin == conflict_begin and (entry.service_ref and entry.service_ref.ref and entry.service_ref.ref.flags & eServiceReference.isGroup):
+								entry.begin += 30
+								change_time = True
+							if change_time:
+								simulTimerList = self.session.nav.RecordTimer.record(entry)
+						if simulTimerList is not None:
+							self.session.openWithCallback(self.finishSanityCorrection, TimerSanityConflict, simulTimerList)
+							return
+				cur = self["list"].getCurrent()
+				event = cur and cur[0]
+				if event:
+					begin = event.getBeginTime()
+					end = begin + event.getDuration()
+					if begin < entry.begin <= end or entry.begin <= begin <= entry.end:
+						self["key_green"].setText(_("Change timer"))
+						self.key_green_choice = self.REMOVE_TIMER
+				else:
+					self["key_green"].setText(_("Add timer"))
+					self.key_green_choice = self.ADD_TIMER
+					print "Timeredit aborted"
 
 	def finishSanityCorrection(self, answer):
 		self.finishedTimerAdd(answer)
@@ -1423,7 +1450,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 		end = begin + event.getDuration()
 		refstr = ':'.join(servicerefref.toString().split(':')[:11])
 		isRecordEvent = False
-		for timer in self.session.nav.RecordTimer.timer_list:
+		for timer in self.session.nav.RecordTimer.getAllTimersList():
 			needed_ref = ':'.join(timer.service_ref.ref.toString().split(':')[:11]) == refstr
 			if needed_ref and (timer.eit == eventid and (begin < timer.begin <= end or timer.begin <= begin <= timer.end) or timer.repeated and self.session.nav.RecordTimer.isInRepeatTimer(timer, event)):
 				isRecordEvent = True
@@ -1434,6 +1461,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 		elif not isRecordEvent and self.key_green_choice != self.ADD_TIMER:
 			self["key_green"].setText(_("Add timer"))
 			self.key_green_choice = self.ADD_TIMER
+		self["list"].l.invalidate()
 
 	def moveTimeLines(self, force=False):
 		self.updateTimelineTimer.start((60 - (int(time()) % 60)) * 1000)	#keep syncronised

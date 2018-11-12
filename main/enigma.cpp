@@ -35,8 +35,6 @@
 #include "bsod.h"
 #include "version_info.h"
 
-#include <gst/gst.h>
-
 #ifdef OBJECT_DEBUG
 int object_total_remaining;
 
@@ -159,6 +157,16 @@ void quitMainloop(int exitCode)
 	eApp->quit(0);
 }
 
+void pauseInit()
+{
+	eInit::pauseInit();
+}
+
+void resumeInit()
+{
+	eInit::resumeInit();
+}
+
 static void sigterm_handler(int num)
 {
 	quitMainloop(128 + num);
@@ -186,8 +194,6 @@ int main(int argc, char **argv)
 #ifdef OBJECT_DEBUG
 	atexit(object_dump);
 #endif
-
-	gst_init(&argc, &argv);
 
 	// set pythonpath if unset
 	setenv("PYTHONPATH", eEnv::resolve("${libdir}/enigma2/python").c_str(), 0);
@@ -340,11 +346,6 @@ const char *getEnigmaVersionString()
 const char *getBoxType()
 {
 	return BOXTYPE;
-}
-
-const char *getGStreamerVersionString()
-{
-	return gst_version_string();
 }
 
 #include <malloc.h>

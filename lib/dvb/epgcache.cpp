@@ -382,6 +382,8 @@ eEPGCache::eEPGCache()
 {
 	eDebug("[eEPGCache] Initialized EPGCache (wait for setCacheFile call now)");
 
+	load_epg = eConfigManager::getConfigValue("config.usage.remote_fallback_import").find("epg") == std::string::npos;
+
 	enabledSources = 0;
 	historySeconds = 0;
 
@@ -1282,7 +1284,7 @@ void eEPGCache::thread()
 {
 	hasStarted();
 	nice(4);
-	load();
+	if (load_epg) { load(); }
 	cleanLoop();
 	runLoop();
 	save();
@@ -3008,6 +3010,13 @@ void eEPGCache::submitEventData(const std::vector<eServiceReferenceDVB>& service
 		serviceRef->getChannelID(chid);
 		chids.push_back(chid);
 		sids.push_back(serviceRef->getServiceID().get());
+
+		// disable EIT event parsing when using EPG_IMPORT
+		ePtr<eDVBService> service;
+		if (!eDVBDB::getInstance()->getService(*serviceRef, service) && service->useEIT())
+		{
+			service->m_flags |= eDVBService::dxNoEIT;
+		}
 	}
 	submitEventData(sids, chids, start, duration, title, short_summary, long_description, event_type, EPG_IMPORT);
 }

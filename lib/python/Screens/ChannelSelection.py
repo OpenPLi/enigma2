@@ -47,7 +47,6 @@ profile("ChannelSelection.py after imports")
 
 FLAG_SERVICE_NEW_FOUND = 64
 FLAG_IS_DEDICATED_3D = 128
-FLAG_HIDE_VBI = 512
 FLAG_CENTER_DVB_SUBS = 2048 #define in lib/dvb/idvb.h as dxNewFound = 64 and dxIsDedicated3D = 128
 
 class BouquetSelector(Screen):
@@ -176,16 +175,16 @@ class ChannelContextMenu(Screen):
 								append_when_current_valid(current, menu, (_("remove from parental protection"), boundFunction(self.removeParentalProtection, current)), level=0)
 						if self.parentalControl.blacklist and config.ParentalControl.hideBlacklist.value and not self.parentalControl.sessionPinCached and config.ParentalControl.storeservicepin.value != "never":
 							append_when_current_valid(current, menu, (_("Unhide parental control services"), self.unhideParentalServices), level=0, key="1")
-					if SystemInfo["3DMode"] and  fileExists("/usr/lib/enigma2/python/Plugins/SystemPlugins/OSD3DSetup/plugin.py"):
+					if SystemInfo["3DMode"] and fileExists("/usr/lib/enigma2/python/Plugins/SystemPlugins/OSD3DSetup/plugin.pyo"):
 						if eDVBDB.getInstance().getFlag(eServiceReference(current.toString())) & FLAG_IS_DEDICATED_3D:
 							append_when_current_valid(current, menu, (_("Unmark service as dedicated 3D service"), self.removeDedicated3DFlag), level=2)
 						else:
 							append_when_current_valid(current, menu, (_("Mark service as dedicated 3D service"), self.addDedicated3DFlag), level=2)
 					if not (current_sel_path):
-						if eDVBDB.getInstance().getFlag(eServiceReference(current.toString())) & FLAG_HIDE_VBI:
-							append_when_current_valid(current, menu, (_("Uncover dashed flickering line for this service"), self.removeHideVBIFlag), level=1)
+						if Screens.InfoBar.InfoBar.instance.checkHideVBI(current):
+							append_when_current_valid(current, menu, (_("Uncover dashed flickering line for this service"), self.toggleVBI), level=1)
 						else:
-							append_when_current_valid(current, menu, (_("Cover dashed flickering line for this service"), self.addHideVBIFlag), level=1)
+							append_when_current_valid(current, menu, (_("Cover dashed flickering line for this service"), self.toggleVBI), level=1)
 						if eDVBDB.getInstance().getCachedPid(eServiceReference(current.toString()), 9) >> 16 not in (-1, eDVBDB.getInstance().getCachedPid(eServiceReference(current.toString()), 2)):
 							#Only show when a DVB subtitle is cached on this service
 							if eDVBDB.getInstance().getFlag(eServiceReference(current.toString())) & FLAG_CENTER_DVB_SUBS:
@@ -307,15 +306,8 @@ class ChannelContextMenu(Screen):
 		self.set3DMode(False)
 		self.close()
 
-	def addHideVBIFlag(self):
-		eDVBDB.getInstance().addFlag(eServiceReference(self.csel.getCurrentSelection().toString()), FLAG_HIDE_VBI)
-		eDVBDB.getInstance().reloadBouquets()
-		Screens.InfoBar.InfoBar.instance.showHideVBI()
-		self.close()
-
-	def removeHideVBIFlag(self):
-		eDVBDB.getInstance().removeFlag(eServiceReference(self.csel.getCurrentSelection().toString()), FLAG_HIDE_VBI)
-		eDVBDB.getInstance().reloadBouquets()
+	def toggleVBI(self):
+		Screens.InfoBar.InfoBar.instance.ToggleHideVBI(self.csel.getCurrentSelection())
 		Screens.InfoBar.InfoBar.instance.showHideVBI()
 		self.close()
 
@@ -641,10 +633,11 @@ class ChannelContextMenu(Screen):
 		sel = self.csel.getCurrentSelection()
 		if sel and sel.valid() and not self.csel.entry_marked:
 			currentPlayingService = (hasattr(self.csel, "dopipzap") and self.csel.dopipzap) and self.session.pip.getCurrentService() or self.session.nav.getCurrentlyPlayingServiceOrGroup()
-			self.csel.servicelist.setCurrent(currentPlayingService, adjust=False)
-			if self.csel.getCurrentSelection() != currentPlayingService:
-				self.csel.setCurrentSelection(sel)
-			self.close()
+			if currentPlayingService:
+				self.csel.servicelist.setCurrent(currentPlayingService, adjust=False)
+				if self.csel.getCurrentSelection() != currentPlayingService:
+					self.csel.setCurrentSelection(sel)
+				self.close()
 		else:
 			return 0
 
@@ -668,8 +661,11 @@ class SelectionEventInfo:
 	def updateEventInfo(self):
 		cur = self.getCurrentSelection()
 		service = self["Service"]
-		service.newService(cur)
-		self["Event"].newEvent(service.event)
+		try:
+			service.newService(cur)
+			self["Event"].newEvent(service.event)
+		except:
+			pass
 
 class ChannelSelectionEPG(InfoBarHotkey):
 	def __init__(self):

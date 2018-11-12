@@ -140,7 +140,8 @@ class ServiceInfo(Screen):
 			videocodec = "-"
 			resolution = "-"
 			if self.info:
-				videocodec =  ("MPEG2", "AVC", "MPEG1", "MPEG4-VC", "VC1", "VC1-SM", "HEVC", "N/A")[self.info.getInfo(iServiceInformation.sVideoType)]
+				from Components.Converter.PliExtraInfo import codec_data
+				videocodec = codec_data.get(self.info.getInfo(iServiceInformation.sVideoType), "N/A")
 				width = self.info.getInfo(iServiceInformation.sVideoWidth)
 				height = self.info.getInfo(iServiceInformation.sVideoHeight)
 				if width > 0 and height > 0:
@@ -151,6 +152,9 @@ class ServiceInfo(Screen):
 					aspect = self.getServiceInfoValue(iServiceInformation.sAspect)
 					aspect = aspect in ( 1, 2, 5, 6, 9, 0xA, 0xD, 0xE ) and "4:3" or "16:9"
 					resolution += " - ["+aspect+"]"
+				gamma = ("SDR", "HDR", "HDR10", "HLG", "")[self.info.getInfo(iServiceInformation.sGamma)]
+				if gamma:
+					resolution += " - " + gamma
 			if "%3a//" in refstr and reftype not in (1,257,4098,4114):
 				fillList = [(_("Service name"), name, TYPE_TEXT),
 					(_("Videocodec, size & format"), resolution, TYPE_TEXT),
@@ -209,13 +213,14 @@ class ServiceInfo(Screen):
 			else:
 				tuner = (_("NIM & Type"), chr(ord('A') + frontendData["tuner_number"]) + " - " + frontendData["tuner_type"], TYPE_TEXT)
 			if frontendDataOrg["tuner_type"] == "DVB-S":
+				issy = lambda x: 0 if x == -1 else x
 				return (tuner,
 					(_("System & Modulation"), frontendData["system"] + " " + frontendData["modulation"], TYPE_TEXT),
 					(_("Orbital position"), frontendData["orbital_position"], TYPE_VALUE_DEC),
 					(_("Frequency & Polarization"), "%s MHz" % (frontendData.get("frequency", 0) / 1000) + " - " + frontendData["polarization"], TYPE_TEXT),
 					(_("Symbol rate & FEC"), "%s KSymb/s" % (frontendData.get("symbol_rate", 0) / 1000) + " - " + frontendData["fec_inner"], TYPE_TEXT),
 					(_("Inversion, Pilot & Roll-off"), frontendData["inversion"] + " - " + str(frontendData.get("pilot", None)) + " - " + str(frontendData.get("rolloff", None)), TYPE_TEXT),
-					(_("Input Stream ID"), frontendData.get("is_id", 0), TYPE_VALUE_DEC),
+					(_("Input Stream ID"), issy(frontendData.get("is_id", 0)), TYPE_VALUE_DEC),
 					(_("PLS Mode"), frontendData.get("pls_mode", None), TYPE_TEXT),
 					(_("PLS Code"), frontendData.get("pls_code", 0), TYPE_VALUE_DEC))
 			elif frontendDataOrg["tuner_type"] == "DVB-C":

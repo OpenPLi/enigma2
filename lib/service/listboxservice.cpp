@@ -157,7 +157,10 @@ int eListboxServiceContent::getNextBeginningWithChar(char c)
 	{
 		std::string text;
 		ePtr<iStaticServiceInformation> service_info;
-		m_service_center->info(*i, service_info);
+		if (m_service_center->info(*i, service_info))
+		{
+			continue; // failed to find service handler
+		}
 		service_info->getName(*i, text);
 //		printf("%c\n", text.c_str()[0]);
 		int idx=0;
@@ -849,7 +852,7 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 					tmp.setWidth(((!isPlayable || m_column_width == -1 || (!piconPixmap && !m_column_width)) ? tmp.width() : m_column_width) - xoffs);
 				}
 
-				eTextPara *para = new eTextPara(tmp);
+				ePtr<eTextPara> para = new eTextPara(tmp);
 				para->setFont(m_element_font[e]);
 				para->renderString(text.c_str());
 

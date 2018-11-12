@@ -97,6 +97,8 @@ def getHotkeys():
 		("Media" + " " + _("long"), "media_long", ""),
 		("Favorites", "favorites", "Infobar/openFavouritesList"),
 		("Favorites" + " " + _("long"), "favorites_long", ""),
+		("Mouse", "mouse", ""),
+		("Mouse" + " " + _("long"), "mouse_long", ""),
 		("WWW Portal", "www", ""),
 		("WWW Portal" + " " + _("long"), "www_long", "")]
 
@@ -200,6 +202,9 @@ def getHotkeyFunctions():
 	for plugin in plugins.getPluginsForMenu("video"):
 		if plugin[2]:
 			hotkeyFunctions.append((plugin[0], "MenuPlugin/video/" + plugin[2], "Setup"))
+	for plugin in plugins.getPluginsForMenu("gui"):
+		if plugin[2]:
+			hotkeyFunctions.append((plugin[0], "MenuPlugin/gui/" + plugin[2], "Setup"))
 	hotkeyFunctions.append((_("PowerMenu"), "Menu/shutdown", "Power"))
 	hotkeyFunctions.append((_("Standby"), "Module/Screens.Standby/Standby", "Power"))
 	hotkeyFunctions.append((_("Restart"), "Module/Screens.Standby/TryQuitMainloop/2", "Power"))
@@ -223,6 +228,7 @@ def getHotkeyFunctions():
 	return hotkeyFunctions
 
 class HotkeySetup(Screen):
+	ALLOW_SUSPEND = False
 	def __init__(self, session, args=None):
 		Screen.__init__(self, session)
 		self.session = session

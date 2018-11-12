@@ -10,6 +10,7 @@ from Components.PluginComponent import plugins
 from Components.config import config, ConfigSubsection, ConfigText, ConfigInteger, ConfigLocations, ConfigSet, ConfigYesNo, ConfigSelection, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
 from Components.ServiceEventTracker import ServiceEventTracker, InfoBarBase
+from Components.Sources.Boolean import Boolean
 from Components.Sources.ServiceEvent import ServiceEvent
 from Components.Sources.StaticText import StaticText
 import Components.Harddisk
@@ -50,6 +51,7 @@ config.movielist.settings_per_directory = ConfigYesNo(default=True)
 config.movielist.root = ConfigSelection(default="/media", choices=["/","/media","/media/hdd","/media/hdd/movie","/media/usb","/media/usb/movie"])
 config.movielist.hide_extensions = ConfigYesNo(default=False)
 config.movielist.stop_service = ConfigYesNo(default=True)
+config.movielist.add_bookmark = ConfigYesNo(default=True)
 
 userDefinedButtons = None
 last_selected_dest = []
@@ -243,44 +245,31 @@ def buildMovieLocationList(bookmarks):
 		inlist.append(d)
 
 class MovieBrowserConfiguration(ConfigListScreen,Screen):
-	skin = """
-<screen position="center,center" size="560,400" title="Movie Browser Configuration" >
-	<ePixmap name="red"    position="0,0"   zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-	<ePixmap name="green"  position="140,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-
-	<widget name="key_red" position="0,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
-	<widget name="key_green" position="140,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
-	<widget name="config" position="10,40" size="540,340" scrollbarMode="showOnDemand" />
-
-	<ePixmap alphatest="on" pixmap="skin_default/icons/clock.png" position="480,383" size="14,14" zPosition="3"/>
-	<widget font="Regular;18" halign="left" position="505,380" render="Label" size="55,20" source="global.CurrentTime" transparent="1" valign="center" zPosition="3">
-		<convert type="ClockToText">Default</convert>
-	</widget>
-</screen>"""
-
 	def __init__(self, session, args = 0):
 		self.session = session
 		self.setup_title = _("Movie list configuration")
 		Screen.__init__(self, session)
+		self.skinName = ['MovieBrowserConfiguration', 'Setup']
 		cfg = ConfigSubsection()
 		self.cfg = cfg
 		cfg.moviesort = ConfigSelection(default=str(config.movielist.moviesort.value), choices = l_moviesort)
 		cfg.listtype = ConfigSelection(default=str(config.movielist.listtype.value), choices = l_listtype)
 		cfg.description = ConfigYesNo(default=(config.movielist.description.value != MovieList.HIDE_DESCRIPTION))
 		configList = [
-			getConfigListEntry(_("Sort"), cfg.moviesort),
-			getConfigListEntry(_("Show extended description"), cfg.description),
-			getConfigListEntry(_("Type"), cfg.listtype),
-			getConfigListEntry(_("Use individual settings for each directory"), config.movielist.settings_per_directory),
-			getConfigListEntry(_("Allow quitting movieplayer with exit"), config.usage.leave_movieplayer_onExit),
-			getConfigListEntry(_("Behavior when a movie reaches the end"), config.usage.on_movie_eof),
-			getConfigListEntry(_("Stop service on return to movie list"), config.movielist.stop_service),
-			getConfigListEntry(_("Load length of movies in movie list"), config.usage.load_length_of_movies_in_moviellist),
-			getConfigListEntry(_("Show status icons in movie list"), config.usage.show_icons_in_movielist),
-			getConfigListEntry(_("Show icon for new/unseen items"), config.usage.movielist_unseen),
-			getConfigListEntry(_("Play audio in background"), config.movielist.play_audio_internal),
-			getConfigListEntry(_("Root directory"), config.movielist.root),
-			getConfigListEntry(_("Hide known extensions"), config.movielist.hide_extensions),
+			getConfigListEntry(_("Sort"), cfg.moviesort, _("You can set sorting type for items in movielist.")),
+			getConfigListEntry(_("Show extended description"), cfg.description, _("You can enable if will be displayed extended EPG description for item.")),
+			getConfigListEntry(_("Type"), cfg.listtype, _("Set movielist type.")),
+			getConfigListEntry(_("Use individual settings for each directory"), config.movielist.settings_per_directory, _("Settings can be different for each directory separately (for non removeable devices only).")),
+			getConfigListEntry(_("Allow quitting movieplayer with exit"), config.usage.leave_movieplayer_onExit, _("You can set how will be finished movieplayer with 'Exit' button.")),
+			getConfigListEntry(_("Behavior when a movie reaches the end"), config.usage.on_movie_eof, _("Set action when movie playback is finished.")),
+			getConfigListEntry(_("Stop service on return to movie list"), config.movielist.stop_service, _("If is enabled and movie playback is finished, then after return to movielist will not be automaticaly start service playback.")),
+			getConfigListEntry(_("Load length of movies in movie list"), config.usage.load_length_of_movies_in_moviellist, _("Display movie length in movielist (except single line style).")),
+			getConfigListEntry(_("Show status icons in movie list"), config.usage.show_icons_in_movielist, _("Set if You want see status icons, progress bars or nothing.")),
+			getConfigListEntry(_("Show icon for new/unseen items"), config.usage.movielist_unseen, _("If enabled, then there will be displayed icons for new/unseen items too.")),
+			getConfigListEntry(_("Play audiofiles in list mode"), config.movielist.play_audio_internal, _("If set as 'Yes', then audiofiles are played in 'list mode' only, instead in full screen player.")),
+			getConfigListEntry(_("Root directory"), config.movielist.root, _("You can set selected directory as 'root' directory for movie player.")),
+			getConfigListEntry(_("Hide known extensions"), config.movielist.hide_extensions, _("Do not show file extensions for registered multimedia files.")),
+			getConfigListEntry(_("Automatic bookmarks"), config.movielist.add_bookmark, _("If is disabled, then after Copy/Move will not be target directory stored into bookmarks.")),
 			]
 		for btn in ('red', 'green', 'yellow', 'blue', 'TV', 'Radio', 'Text', 'F1', 'F2', 'F3'):
 			configList.append(getConfigListEntry(_(btn), userDefinedButtons[btn]))
@@ -296,8 +285,20 @@ class MovieBrowserConfiguration(ConfigListScreen,Screen):
 			"ok": self.save,
 			"menu": self.cancel,
 		}, -2)
+
+		self["description"] = Label()
+
+		# For compatibility with the Setup screen
+		self["HelpWindow"] = Pixmap()
+		self["HelpWindow"].hide()
+		self["VKeyIcon"] = Boolean(False)
+
 		self.onChangedEntry = []
 		self.onLayoutFinish.append(self.layoutFinished)
+		self["config"].onSelectionChanged.append(self.descriptions)
+
+	def descriptions(self):
+		self["description"].setText(self["config"].getCurrent() and len(self["config"].getCurrent()) > 2 and self["config"].getCurrent()[2] or "")
 
 	def layoutFinished(self):
 		self.setTitle(self.setup_title)
@@ -371,6 +372,7 @@ class MovieContextMenu(Screen, ProtectedScreen):
 		Screen.__init__(self, session)
 		self.csel = csel
 		ProtectedScreen.__init__(self)
+		self.title = _("Movielist menu")
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "NumberActions", "MenuActions"],
 			{
@@ -420,8 +422,6 @@ class MovieContextMenu(Screen, ProtectedScreen):
 		append_to_menu(menu, (_("create directory"), csel.do_createdir), key="7")
 		append_to_menu(menu, (_("Sort by") + "...", csel.selectSortby))
 		append_to_menu(menu, (_("Network") + "...", csel.showNetworkSetup), key="yellow")
-		if csel.installedMovieManagerPlugin():
-			append_to_menu(menu, (_("Movie manager") + "...", csel.do_moviemanager))
 		append_to_menu(menu, (_("Settings") + "...", csel.configure), key="menu")
 
 		self["menu"] = ChoiceList(menu)
@@ -588,6 +588,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				"showMovies": (self.doPathSelect, _("Select the movie path")),
 				"showRadio": (self.btn_radio, boundFunction(self.getinitUserDefinedActionsDescription, "btn_radio")),
 				"showTv": (self.btn_tv, boundFunction(self.getinitUserDefinedActionsDescription, "btn_tv")),
+				"toggleTvRadio": (self.btn_tv, boundFunction(self.getinitUserDefinedActionsDescription, "btn_tv")),
 				"showText": (self.btn_text, boundFunction(self.getinitUserDefinedActionsDescription, "btn_text")),
 			})
 
@@ -730,8 +731,6 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				'movieoff': _("On end of movie"),
 				'movieoff_menu': _("On end of movie (as menu)")
 			}
-			if self.installedMovieManagerPlugin():
-				userDefinedActions['moviemanager'] = _("Movie manager")
 			for p in plugins.getPlugins(PluginDescriptor.WHERE_MOVIELIST):
 				userDefinedActions['@' + p.name] = p.description
 			locations = []
@@ -757,6 +756,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				'blue': config.movielist.btn_blue,
 				'Radio': config.movielist.btn_radio,
 				'TV': config.movielist.btn_tv,
+				'TV2': config.movielist.btn_tv,
 				'Text': config.movielist.btn_text,
 				'F1': config.movielist.btn_F1,
 				'F2': config.movielist.btn_F2,
@@ -1020,6 +1020,14 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		except Exception, e:
 			print "[ML] DVD Player not installed:", e
 
+	def playSuburi(self, path):
+		suburi = os.path.splitext(path)[0][:-7]
+		for ext in AUDIO_EXTENSIONS:
+			if os.path.exists("%s%s" % (suburi, ext)):
+				current = eServiceReference(4097, 0, "file://%s&suburi=file://%s%s" % (path, suburi, ext))
+				self.close(current)
+				return True
+
 	def __serviceStarted(self):
 		if not self.list.playInBackground:
 			return
@@ -1187,6 +1195,9 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			elif ext in DVD_EXTENSIONS:
 				if self.playAsDVD(path):
 					return
+			elif "_suburi." in path:
+				if self.playSuburi(path):
+					return
 			self.movieSelected()
 
 	# Note: DVDBurn overrides this method, hence the itemSelected indirection.
@@ -1328,7 +1339,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		for x in l_moviesort:
 			if int(x[0]) == int(config.movielist.moviesort.value):
 				used = index
-			menu.append((_(x[1]), x[0], "%d" % index))
+			menu.append((x[1], x[0]))
 			index += 1
 		self.session.openWithCallback(self.sortbyMenuCallback, ChoiceBox, title=_("Sort list:"), list=menu, selection = used, skin_name="SortbyChoiceBox")
 
@@ -2016,18 +2027,6 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 	def showNetworkSetup(self):
 		import NetworkSetup
 		self.session.open(NetworkSetup.NetworkAdapterSelection)
-
-	def can_moviemanager(self, item):
-		return True
-	def do_moviemanager(self):
-		from Plugins.Extensions.MovieManager.ui import MovieManager
-		self.session.open(MovieManager, self["list"])
-	def installedMovieManagerPlugin(self):
-		try:
-			from Plugins.Extensions.MovieManager.ui import MovieManager
-			return True
-		except Exception as e:
-			return False
 
 	def showActionFeedback(self, text):
 		if self.feedbackTimer is None:

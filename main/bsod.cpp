@@ -306,7 +306,7 @@ void print_backtrace()
 {
 	void *array[15];
 	size_t size;
-	int cnt;
+	size_t cnt;
 
 	size = backtrace(array, 15);
 	eLog(lvlFatal, "Backtrace:");
@@ -317,7 +317,7 @@ void print_backtrace()
 		if (dladdr(array[cnt], &info)
 			&& info.dli_fname != NULL && info.dli_fname[0] != '\0')
 		{
-			eLog(lvlFatal, "%s(%s) [0x%X]", info.dli_fname, info.dli_sname != NULL ? info.dli_sname : "n/a", (unsigned long int) array[cnt]);
+			eLog(lvlFatal, "%s(%s) [0x%lX]", info.dli_fname, info.dli_sname != NULL ? info.dli_sname : "n/a", (unsigned long int) array[cnt]);
 		}
 	}
 }

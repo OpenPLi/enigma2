@@ -43,10 +43,11 @@ void eDVBPMTParser::processCaDescriptor(program &program, CaDescriptor *descr)
 	pair.caid = descr->getCaSystemId();
 	pair.capid = descr->getCaPid();
 	pair.databytes.clear();
-	for(std::vector<unsigned char>::const_iterator it = descr->getCaDataBytes()->begin(); it != descr->getCaDataBytes()->end(); ++it)
+
+	for(const auto it : *descr->getCaDataBytes())
 	{
-		char t[2];
-		sprintf(t, "%02X", *it);
+		char t[3];
+		sprintf(t, "%02X", it);
 		pair.databytes += t;
 	}
 	program.caids.push_back(pair);
@@ -65,35 +66,33 @@ int eDVBPMTParser::getProgramInfo(program &program)
 		eDVBTableSpec table_spec;
 		ptr->getSpec(table_spec);
 		program.pmtPid = table_spec.pid < 0x1fff ? table_spec.pid : -1;
-		std::vector<ProgramMapSection*>::const_iterator i;
-		for (i = ptr->getSections().begin(); i != ptr->getSections().end(); ++i)
+
+		for (const auto i : ptr->getSections())
 		{
-			const ProgramMapSection &pmt = **i;
+			const ProgramMapSection &pmt = *i;
 			int is_hdmv = 0;
 
 			program.serviceId = pmt.getProgramNumber();
 			program.pcrPid = pmt.getPcrPid();
 
-			for (DescriptorConstIterator desc = pmt.getDescriptors()->begin();
-				desc != pmt.getDescriptors()->end(); ++desc)
+			for (const auto desc : *pmt.getDescriptors())
 			{
-				if ((*desc)->getTag() == CA_DESCRIPTOR)
+				if (desc->getTag() == CA_DESCRIPTOR)
 				{
-					processCaDescriptor(program, (CaDescriptor*)(*desc));
+					processCaDescriptor(program, (CaDescriptor*)(desc));
 				}
-				else if ((*desc)->getTag() == REGISTRATION_DESCRIPTOR)
+				else if (desc->getTag() == REGISTRATION_DESCRIPTOR)
 				{
-					RegistrationDescriptor *d = (RegistrationDescriptor*)(*desc);
+					RegistrationDescriptor *d = (RegistrationDescriptor*)(desc);
 					if (d->getFormatIdentifier() == 0x48444d56) // HDMV
 						is_hdmv = 1;
 				}
 			}
 
-			ElementaryStreamInfoConstIterator es;
-			for (es = pmt.getEsInfo()->begin(); es != pmt.getEsInfo()->end(); ++es)
+			for (const auto es : *pmt.getEsInfo())
 			{
 				int isaudio = 0, isvideo = 0, issubtitle = 0, forced_video = 0, forced_audio = 0, isteletext = 0;
-				int streamtype = (*es)->getType();
+				int streamtype = es->getType();
 				videoStream video;
 				audioStream audio;
 				audio.component_tag=video.component_tag=-1;
@@ -197,11 +196,10 @@ int eDVBPMTParser::getProgramInfo(program &program)
 				case 0xEA: // TS_PSI_ST_SMPTE_VC1
 				{
 					int num_descriptors = 0;
-					for (DescriptorConstIterator desc = (*es)->getDescriptors()->begin();
-						desc != (*es)->getDescriptors()->end(); ++desc)
+					for (const auto desc : *es->getDescriptors())
 					{
-						uint8_t tag = (*desc)->getTag();
-						/* check descriptors to get the exakt stream type. */
+						uint8_t tag = desc->getTag();
+						/* check descriptors to get the exact stream type. */
 						++num_descriptors;
 						if (!forced_video && !forced_audio)
 						{
@@ -213,20 +211,20 @@ int eDVBPMTParser::getProgramInfo(program &program)
 							case VIDEO_STREAM_DESCRIPTOR:
 							{
 								isvideo = 1;
-								VideoStreamDescriptor *d = (VideoStreamDescriptor*)(*desc);
+								VideoStreamDescriptor *d = (VideoStreamDescriptor*)(desc);
 								if (d->getMpeg1OnlyFlag())
 									video.type = videoStream::vtMPEG1;
 								break;
 							}
 							case SUBTITLING_DESCRIPTOR:
 							{
-								SubtitlingDescriptor *d = (SubtitlingDescriptor*)(*desc);
+								SubtitlingDescriptor *d = (SubtitlingDescriptor*)(desc);
 								const SubtitlingList *list = d->getSubtitlings();
 								subtitleStream s;
-								s.pid = (*es)->getPid();
-								for (SubtitlingConstIterator it(list->begin()); it != list->end(); ++it)
+								s.pid = es->getPid();
+								for (const auto it : *list)
 								{
-									s.subtitling_type = (*it)->getSubtitlingType();
+									s.subtitling_type = it->getSubtitlingType();
 									switch(s.subtitling_type)
 									{
 									case 0x10 ... 0x15: // dvb subtitles normal
@@ -238,9 +236,9 @@ int eDVBPMTParser::getProgramInfo(program &program)
 										s.subtitling_type = 0x10;
 										break;
 									}
-									s.composition_page_id = (*it)->getCompositionPageId();
-									s.ancillary_page_id = (*it)->getAncillaryPageId();
-									std::string language = (*it)->getIso639LanguageCode();
+									s.composition_page_id = it->getCompositionPageId();
+									s.ancillary_page_id = it->getAncillaryPageId();
+									std::string language = it->getIso639LanguageCode();
 									s.language_code = language;
 //								eDebug("[eDVBPMTParser] add dvb subtitle %s PID %04x, type %d, composition page %d, ancillary_page %d", s.language_code.c_str(), s.pid, s.subtitling_type, s.composition_page_id, s.ancillary_page_id);
 									issubtitle = 1;
@@ -253,24 +251,24 @@ int eDVBPMTParser::getProgramInfo(program &program)
 								{
 									subtitleStream s;
 									s.subtitling_type = 0x01; // EBU TELETEXT SUBTITLES
-									s.pid = program.textPid = (*es)->getPid();
-									TeletextDescriptor *d = (TeletextDescriptor*)(*desc);
+									s.pid = program.textPid = es->getPid();
+									TeletextDescriptor *d = (TeletextDescriptor*)(desc);
 									isteletext = 1;
 									const VbiTeletextList *list = d->getVbiTeletexts();
 									std::string language;
-									for (VbiTeletextConstIterator it(list->begin()); it != list->end(); ++it)
+									for (const auto it : *list)
 									{
-										switch((*it)->getTeletextType())
+										switch(it->getTeletextType())
 										{
 										case 0x02: // Teletext subtitle page
 										case 0x05: // Teletext subtitle page for hearing impaired pepople
-											language = (*it)->getIso639LanguageCode();
+											language = it->getIso639LanguageCode();
 											s.language_code = language;
-											s.teletext_page_number = (*it)->getTeletextPageNumber();
-											s.teletext_magazine_number = (*it)->getTeletextMagazineNumber();
+											s.teletext_page_number = it->getTeletextPageNumber();
+											s.teletext_magazine_number = it->getTeletextMagazineNumber();
 //										eDebug("[eDVBPMTParser] add teletext subtitle %s PID %04x, page number %d, magazine number %d", s.language_code.c_str(), s.pid, s.teletext_page_number, s.teletext_magazine_number);
 											program.subtitleStreams.push_back(s);
-											issubtitle=1;
+											issubtitle = 1;
 										default:
 											break;
 										}
@@ -300,7 +298,7 @@ int eDVBPMTParser::getProgramInfo(program &program)
 								break;
 							case REGISTRATION_DESCRIPTOR: /* some services don't have a separate AC3 descriptor */
 							{
-								RegistrationDescriptor *d = (RegistrationDescriptor*)(*desc);
+								RegistrationDescriptor *d = (RegistrationDescriptor*)(desc);
 								switch (d->getFormatIdentifier())
 								{
 								case 0x44545331 ... 0x44545333: // DTS1/DTS2/DTS3
@@ -354,13 +352,13 @@ int eDVBPMTParser::getProgramInfo(program &program)
 						case ISO_639_LANGUAGE_DESCRIPTOR:
 							if (!isvideo)
 							{
-								const Iso639LanguageList *languages = ((Iso639LanguageDescriptor*)*desc)->getIso639Languages();
+								const Iso639LanguageList *languages = ((Iso639LanguageDescriptor*)desc)->getIso639Languages();
 								/* use last language code */
 								int cnt=0;
-								for (Iso639LanguageConstIterator i=languages->begin(); i != languages->end(); ++i)
+								for (const auto i : *languages)
 								{
-									std::string language=(*i)->getIso639LanguageCode();
-									if ( cnt==0 )
+									std::string language = i->getIso639LanguageCode();
+									if (cnt == 0)
 										audio.language_code = language;
 									else
 										audio.language_code += "/" + language;
@@ -371,11 +369,11 @@ int eDVBPMTParser::getProgramInfo(program &program)
 						case STREAM_IDENTIFIER_DESCRIPTOR:
 							audio.component_tag =
 								video.component_tag =
-									((StreamIdentifierDescriptor*)*desc)->getComponentTag();
+									((StreamIdentifierDescriptor*)desc)->getComponentTag();
 							break;
 						case CA_DESCRIPTOR:
 						{
-							processCaDescriptor(program, (CaDescriptor*)(*desc));
+							processCaDescriptor(program, (CaDescriptor*)(desc));
 							break;
 						}
 						default:
@@ -384,7 +382,7 @@ int eDVBPMTParser::getProgramInfo(program &program)
 					}
 					if (!num_descriptors && streamtype == 0x06 && prev_audio)
 					{
-						prev_audio->rdsPid = (*es)->getPid();
+						prev_audio->rdsPid = es->getPid();
 						eDebug("[eDVBPMTParser] Rds PID %04x detected ? ! ?", prev_audio->rdsPid);
 					}
 					prev_audio = 0;
@@ -392,13 +390,12 @@ int eDVBPMTParser::getProgramInfo(program &program)
 				}
 				case 0x05: /* ITU-T Rec. H.222.0 | ISO/IEC 13818-1 private sections */
 				{
-					for (DescriptorConstIterator desc = (*es)->getDescriptors()->begin();
-						desc != (*es)->getDescriptors()->end(); ++desc)
+					for (const auto desc : *es->getDescriptors())
 					{
-						switch ((*desc)->getTag())
+						switch (desc->getTag())
 						{
 						case APPLICATION_SIGNALLING_DESCRIPTOR:
-							program.aitPid = (*es)->getPid();
+							program.aitPid = es->getPid();
 							break;
 						}
 					}
@@ -406,13 +403,12 @@ int eDVBPMTParser::getProgramInfo(program &program)
 				}
 				case 0x0b: /* ISO/IEC 13818-6 DSM-CC U-N Messages */
 				{
-					for (DescriptorConstIterator desc = (*es)->getDescriptors()->begin();
-						desc != (*es)->getDescriptors()->end(); ++desc)
+					for (const auto desc : *es->getDescriptors())
 					{
-						switch ((*desc)->getTag())
+						switch (desc->getTag())
 						{
 						case CAROUSEL_IDENTIFIER_DESCRIPTOR:
-							program.dsmccPid = (*es)->getPid();
+							program.dsmccPid = es->getPid();
 							break;
 						case STREAM_IDENTIFIER_DESCRIPTOR:
 							break;
@@ -425,28 +421,37 @@ int eDVBPMTParser::getProgramInfo(program &program)
 				}
 				if (isteletext && (isaudio || isvideo))
 				{
-					eDebug("[eDVBPMTParser] ambiguous streamtype for PID %04x detected.. forced as teletext!", (*es)->getPid());
+					eDebug("[eDVBPMTParser] ambiguous streamtype for PID %04x detected.. forced as teletext!", es->getPid());
 					continue; // continue with next PID
 				}
 				else if (issubtitle && (isaudio || isvideo))
-					eDebug("[eDVBPMTParser] ambiguous streamtype for PID %04x detected.. forced as subtitle!", (*es)->getPid());
+				{
+					eDebug("[eDVBPMTParser] ambiguous streamtype for PID %04x detected.. forced as subtitle!", es->getPid());
+				}
 				else if (isaudio && isvideo)
-					eDebug("[eDVBPMTParser] ambiguous streamtype for PID %04x detected.. forced as video!", (*es)->getPid());
+				{
+					eDebug("[eDVBPMTParser] ambiguous streamtype for PID %04x detected.. forced as video!", es->getPid());
+				}
+
 				if (issubtitle) // continue with next PID
+				{
 					continue;
+				}
 				else if (isvideo)
 				{
-					video.pid = (*es)->getPid();
+					video.pid = es->getPid();
 					program.videoStreams.push_back(video);
 				}
 				else if (isaudio)
 				{
-					audio.pid = (*es)->getPid();
+					audio.pid = es->getPid();
 					program.audioStreams.push_back(audio);
 					prev_audio = &program.audioStreams.back();
 				}
 				else
+				{
 					continue;
+				}
 			}
 		}
 		ret = 0;
@@ -458,12 +463,12 @@ DEFINE_REF(eDVBPMTParser::eStreamData);
 
 eDVBPMTParser::eStreamData::eStreamData(eDVBPMTParser::program &program)
 {
-	for (std::vector<eDVBPMTParser::videoStream>::const_iterator i(program.videoStreams.begin()); i != program.videoStreams.end(); ++i)
-		videoStreams.push_back(i->pid);
-	for (std::vector<eDVBPMTParser::audioStream>::const_iterator i(program.audioStreams.begin()); i != program.audioStreams.end(); ++i)
-		audioStreams.push_back(i->pid);
-	for (std::vector<eDVBPMTParser::subtitleStream>::const_iterator i(program.subtitleStreams.begin()); i != program.subtitleStreams.end(); ++i)
-		subtitleStreams.push_back(i->pid);
+	for (const auto i : program.videoStreams)
+		videoStreams.push_back(i.pid);
+	for (const auto i : program.audioStreams)
+		audioStreams.push_back(i.pid);
+	for (const auto i : program.subtitleStreams)
+		subtitleStreams.push_back(i.pid);
 	pcrPid = program.pcrPid;
 	pmtPid = program.pmtPid;
 	textPid = program.textPid;
@@ -471,11 +476,11 @@ eDVBPMTParser::eStreamData::eStreamData(eDVBPMTParser::program &program)
 	adapterId = program.adapterId;
 	demuxId = program.demuxId;
 	serviceId = program.serviceId;
-	for (std::list<eDVBPMTParser::program::capid_pair>::const_iterator it(program.caids.begin()); it != program.caids.end(); ++it)
+	for (const auto it : program.caids)
 	{
-		caIds.push_back(it->caid);
-		ecmPids.push_back(it->capid);
-		ecmDataBytes.push_back(it->databytes);
+		caIds.push_back(it.caid);
+		ecmPids.push_back(it.capid);
+		ecmDataBytes.push_back(it.databytes);
 	}
 }
 

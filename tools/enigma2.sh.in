@@ -24,16 +24,22 @@ if [ -d /home/root ]; then
 	cd
 fi
 
+DEBUG_LVL=3
 LIBS=@libdir@/libopen.so.0.0.0
 
 sync
-LD_PRELOAD=$LIBS @bindir@/enigma2
+LD_PRELOAD=$LIBS ENIGMA_DEBUG_LVL=$DEBUG_LVL @bindir@/enigma2
 
 # enigma2 exit codes:
 #
-# 1 - halt
-# 2 - reboot
-# 3 - restart enigma
+#  1 - halt
+#  2 - reboot
+#  3 - restart enigma
+#  4 - front processor upgrade
+#  5 - install new settings
+#  6 - restart enigma in debug mode
+# 42 - offline update
+# 43 - restart for autoinstall
 #
 # >128 signal
 
@@ -46,6 +52,7 @@ case $ret in
 		/sbin/reboot
 		;;
 	3)
+        DEBUG_LVL=3
 		;;
 	4)
 		/sbin/rmmod lcd
@@ -60,10 +67,19 @@ case $ret in
 			echo "config.misc.RestartUI=true" >>/etc/enigma2/settings
 		fi
 		;;
+    6)
+        DEBUG_LVL=4
+        ;;
 	42)
+		df -P | grep -v "tmpfs " | awk '{print $6}' | tail -n +3 > /tmp/upgrade_mountpoints.txt
+		while read line; do
+			if [  -f $line/var/lib/opkg/status ]; then
+			DESTS=$DESTS" --add-dest "$line":"$line
+		fi
+		done < /tmp/upgrade_mountpoints.txt
 		# bind the console (when available)
 		[ -f /sys/class/vtconsole/vtcon1/bind ] && echo 1 > /sys/class/vtconsole/vtcon1/bind
-		( opkg upgrade sysvinit && opkg upgrade sysvinit-pidof && opkg upgrade initscripts-functions && opkg upgrade busybox && opkg list-upgradable | cut -f 1 -d ' ' | xargs opkg upgrade ) 2>&1 | tee /home/root/ipkgupgrade.log
+		( opkg upgrade sysvinit && opkg upgrade sysvinit-pidof && opkg upgrade initscripts-functions && opkg upgrade busybox && opkg upgrade kmod && opkg list-upgradable $DESTS | cut -f 1 -d ' ' | xargs opkg upgrade $DESTS ) 2>&1 | tee /home/root/ipkgupgrade.log
 		/sbin/reboot
 		;;
 	43)
@@ -84,5 +100,6 @@ case $ret in
 		touch /etc/.doAutoinstall
 		;;
 	*)
+        DEBUG_LVL=4
 		;;
 esac
