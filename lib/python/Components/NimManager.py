@@ -1225,9 +1225,9 @@ def InitNimManager(nimmgr, update_slots = []):
 					section.positions = ConfigInteger(default=int(productparameters.get("positions", 1)))
 					section.positions.addNotifier(positionsChanged)
 					section.positionsOffset = ConfigInteger(default=int(productparameters.get("positionsoffset", 0)))
-					section.lofl = ConfigInteger(default=int(productparameters.get("lofl", 9750)))
-					section.lofh = ConfigInteger(default=int(productparameters.get("lofh", 10600)))
-					section.threshold = ConfigInteger(default=int(productparameters.get("threshold", 11700)))
+					section.lofl = ConfigInteger(default=int(productparameters.get("lofl", 9750)), limits = (0, 99999))
+					section.lofh = ConfigInteger(default=int(productparameters.get("lofh", 10600)), limits = (0, 99999))
+					section.threshold = ConfigInteger(default=int(productparameters.get("threshold", 11700)), limits = (0, 99999))
 				def unicableProductChanged(manufacturer, lnb_or_matrix, configEntry):
 					config.unicable.unicableProduct.value = configEntry.value
 					config.unicable.unicableProduct.save()
