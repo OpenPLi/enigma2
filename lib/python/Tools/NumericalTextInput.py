@@ -230,7 +230,11 @@ class NumericalTextInput:
 					if locale[num][index] is not None:
 						self.mapping[num] = locale[num][index]
 			self.mapping = tuple(self.mapping)
-		self.useableChars = None
+		# The key mapping lists naturally restricts character input to
+		# the listed characters, this restriction is not enforced for
+		# external keyboard input!
+		self.useableChars = "".join(self.mapping)  # This limits data entry to only characters in the mapping lists.
+		# print "[NumericalTextInput] DEBUG: Mode='%s', Index=%d, Character set: '%s'" % (mode, index, "".join(sorted(self.useableChars)))
 		self.lastKey = -1
 		self.pos = -1
 
