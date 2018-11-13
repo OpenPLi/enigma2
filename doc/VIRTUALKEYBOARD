@@ -3,6 +3,7 @@ A Guide to the VirtualKeyBoard Screen
 
 Written by IanSav - 18-Aug-2018
 Updated by IanSav -  4-Sep-2018
+Updated by IanSav - 12-Nov-2018
 
 This document explains the changes and updates to the VirtualKeyBoard of 
 Enigma2.  The code is located in:
@@ -164,5 +165,30 @@ NOTE:
 	abandons others.  Graphic buttons for plain text are deprecated as 
 	the new code creates these on the fly while allowing for language 
 	localisation.
+
+Removing legacy VirtualKeyBoard support:
+	If support for the old VirtualKeyBoard code is not required for a 
+	skin then the following items may be removed / deleted from the 
+	skin:
+
+	From the <fonts> block in the skin remove:
+		<alias name="VirtualKeyboard" ... />
+	
+	From the <parameters> block in the skin remove:
+		<parameter name="VirtualKeyboard" ... />
+
+	IMPORTANT: The lower case "b" in "board" is significant!  The 
+	"VirtualKeyboard" entries are used by the old code while 
+	"VirtualKeyBoard" entries are used by the new code.
+
+	From the buttons directory in the skin delete:
+		vkey_all.png
+		vkey_clr.png
+		vkey_esc.png
+		vkey_ok.png
+		vkey_shift.png
+		vkey_shift_sel.png
+	Please do not delete any of these images if they are shared by other 
+	skins that continue to support the older VirtualKeyBoard code.
 
 ---END---
