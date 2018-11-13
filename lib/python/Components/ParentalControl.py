@@ -153,6 +153,7 @@ class ParentalControl:
 	def resetSessionPin(self):
 		self.sessionPinCached = False
 		self.hideBlacklist()
+		refreshServiceList()
 
 	def getCurrentTimeStamp(self):
 		return time.time()
@@ -242,7 +243,6 @@ class ParentalControl:
 			flag = config.ParentalControl.servicepinactive.value and config.ParentalControl.storeservicepin.value != "never" and config.ParentalControl.hideBlacklist.value and not self.sessionPinCached
 			for ref in self.blacklist:
 				self.setHideFlag(ref, flag)
-		refreshServiceList()
 
 	def setHideFlag(self, ref, flag):
 		if TYPE_BOUQUET in ref:
