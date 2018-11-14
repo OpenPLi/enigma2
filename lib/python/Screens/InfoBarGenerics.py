@@ -2930,6 +2930,8 @@ class InfoBarNotifications:
 				if "channels" in config.usage.remote_fallback_import.value:
 					eDVBDB.getInstance().reloadBouquets()
 					eDVBDB.getInstance().reloadServicelist()
+					from Components.ParentalControl import parentalControl
+					parentalControl.open()
 					refreshServiceList()
 					reload_whitelist_vbi()
 				if "epg" in config.usage.remote_fallback_import.value:
