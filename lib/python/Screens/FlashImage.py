@@ -5,7 +5,7 @@ from Components.ChoiceList import ChoiceList, ChoiceEntryComponent
 from Components.config import config, configfile
 from Components.ActionMap import ActionMap
 from Components.Console import Console
-from Components.Harddisk import getNonNetworkMediaMounts
+from Components.Harddisk import getNetworkMediaMounts, getNonNetworkMediaMounts
 from Components.Label import Label
 from Components.Pixmap import Pixmap
 from Components.ProgressBar import ProgressBar
@@ -81,7 +81,7 @@ class SelectImage(Screen):
 					pass
 			self.imagesList = dict(self.jsonlist) if self.jsonlist else {}
 
-			for media in getNonNetworkMediaMounts():
+			for media in getNonNetworkMediaMounts() + getNetworkMediaMounts():
 				if not(SystemInfo['HasMMC'] and "/mmc" in media):
 					getImages(media, [os.path.join(media, x) for x in os.listdir(media) if os.path.splitext(x)[1] == ".zip" and model in x])
 					if "downloaded_images" in os.listdir(media):
@@ -171,6 +171,8 @@ class FlashImage(Screen):
 		<widget name="progress" position="5,e-39" size="e-10,24" backgroundColor="#54242424"/>
 	</screen>"""
 
+	BACKUP_SCRIPT = "/usr/lib/enigma2/python/Plugins/Extensions/AutoBackup/settings-backup.sh"
+
 	def __init__(self, session,  imagename, source):
 		Screen.__init__(self, session)
 		self.containerbackup = None
@@ -211,7 +213,7 @@ class FlashImage(Screen):
 			self.getImageList = GetImagelist(self.getImagelistCallback)
 		else:
 			choices = [(_("Yes, with backup"), "with backup"), (_("No, do not flash image"), False), (_("Yes, without backup"), "without backup")]
-			self.session.openWithCallback(self.backupsettings, MessageBox, self.message , list=choices, default=False, simple=True)
+			self.session.openWithCallback(self.checkMedia, MessageBox, self.message , list=choices, default=False, simple=True)
 
 	def getImagelistCallback(self, imagedict):
 		self.getImageList = None
@@ -222,19 +224,15 @@ class FlashImage(Screen):
 		choices.append((_("No, do not flash image"), False))
 		for x in range(1, SystemInfo["canMultiBoot"][1] + 1):
 			choices.append(((_("slot%s - %s (current image), without backup") if x == currentimageslot else _("slot%s - %s, without backup")) % (x, imagedict[x]['imagename']), (x, "without backup")))
-		self.session.openWithCallback(self.backupsettings, MessageBox, self.message, list=choices, default=currentimageslot, simple=True)
+		self.session.openWithCallback(self.checkMedia, MessageBox, self.message, list=choices, default=currentimageslot, simple=True)
 
-	def backupsettings(self, retval):
-
+	def checkMedia(self, retval):
 		if retval:
-
 			if SystemInfo["canMultiBoot"]:
 				self.multibootslot = retval[0]
 				doBackup = retval[1] == "with backup"
 			else:
 				doBackup = retval == "with backup"
-
-			BACKUP_SCRIPT = "/usr/lib/enigma2/python/Plugins/Extensions/AutoBackup/settings-backup.sh"
 
 			def findmedia(destination):
 				def avail(path):
@@ -247,8 +245,12 @@ class FlashImage(Screen):
 				for path in [destination] + getNonNetworkMediaMounts():
 					if avail(path):
 						return path
+				print getNetworkMediaMounts()
+				for path in getNetworkMediaMounts():
+					if avail(path):
+						return path
 
-			self.destination = findmedia(os.path.isfile(BACKUP_SCRIPT) and config.plugins.autobackup.where.value or "/media/hdd")
+			self.destination = findmedia(os.path.isfile(self.BACKUP_SCRIPT) and config.plugins.autobackup.where.value or "/media/hdd")
 
 			if self.destination:
 
@@ -262,19 +264,28 @@ class FlashImage(Screen):
 					os.mkdir(destination)
 
 				if doBackup:
-					if os.path.isfile(BACKUP_SCRIPT):
-						self["info"].setText(_("Backing up to: %s") % self.destination)
-						configfile.save()
-						if config.plugins.autobackup.epgcache.value:
-							eEPGCache.getInstance().save()
-						self.containerbackup = Console()
-						self.containerbackup.ePopen("%s%s'%s' %s" % (BACKUP_SCRIPT, config.plugins.autobackup.autoinstall.value and " -a " or " ", self.destination, int(config.plugins.autobackup.prevbackup.value)), self.backupsettingsDone)
+					if self.destination in getNetworkMediaMounts():
+						self.session.openWithCallback(self.startBackupsettings, MessageBox, _("Can only find a network drive to store the backup this means after the flash the autorestore will not work. Alternativaly you can mount the network drive after the flash and perform a manufacurer reset to autorestore"), simple=True)
 					else:
-						self.session.openWithCallback(self.startDownload, MessageBox, _("Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"), default=False, simple=True)
+						self.startBackupsettings(True)
 				else:
 					self.startDownload()
 			else:
 				self.session.openWithCallback(self.abort, MessageBox, _("Could not find suitable media - Please remove some downloaded images or insert a media (e.g. USB stick) with sufficiant free space and try again!"), type=MessageBox.TYPE_ERROR, simple=True)
+		else:
+			self.abort()
+
+	def startBackupsettings(self, retval):
+		if retval:
+			if os.path.isfile(self.BACKUP_SCRIPT):
+				self["info"].setText(_("Backing up to: %s") % self.destination)
+				configfile.save()
+				if config.plugins.autobackup.epgcache.value:
+					eEPGCache.getInstance().save()
+				self.containerbackup = Console()
+				self.containerbackup.ePopen("%s%s'%s' %s" % (self.BACKUP_SCRIPT, config.plugins.autobackup.autoinstall.value and " -a " or " ", self.destination, int(config.plugins.autobackup.prevbackup.value)), self.backupsettingsDone)
+			else:
+				self.session.openWithCallback(self.startDownload, MessageBox, _("Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"), default=False, simple=True)
 		else:
 			self.abort()
 
