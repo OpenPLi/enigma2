@@ -2,6 +2,7 @@ from Tools.Profile import profile
 
 from Screen import Screen
 import Screens.InfoBar
+from Screens.ScreenSaver import InfoBarScreenSaver
 import Components.ParentalControl
 from Components.Button import Button
 from Components.ServiceList import ServiceList, refreshServiceList
@@ -238,6 +239,8 @@ class ChannelContextMenu(Screen):
 					append_when_current_valid(current, menu, (_("remove new found flag"), self.removeNewFoundFlag), level=0)
 			else:
 					if self.parentalControlEnabled:
+						if self.parentalControl.blacklist and config.ParentalControl.hideBlacklist.value and not self.parentalControl.sessionPinCached and config.ParentalControl.storeservicepin.value != "never":
+							append_when_current_valid(current, menu, (_("Unhide parental control services"), self.unhideParentalServices), level=0, key="1")
 						if self.parentalControl.getProtectionLevel(current.toCompareString()) == -1:
 							append_when_current_valid(current, menu, (_("add bouquet to parental protection"), boundFunction(self.addParentalProtection, current)), level=0)
 						else:
@@ -2365,7 +2368,7 @@ class RadioInfoBar(Screen):
 		Screen.__init__(self, session)
 		self["RdsDecoder"] = RdsDecoder(self.session.nav)
 
-class ChannelSelectionRadio(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelectionEPG, InfoBarBase, SelectionEventInfo):
+class ChannelSelectionRadio(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelectionEPG, InfoBarBase, SelectionEventInfo, InfoBarScreenSaver):
 	ALLOW_SUSPEND = True
 
 	def __init__(self, session, infobar):
@@ -2374,6 +2377,7 @@ class ChannelSelectionRadio(ChannelSelectionBase, ChannelSelectionEdit, ChannelS
 		ChannelSelectionEPG.__init__(self)
 		InfoBarBase.__init__(self)
 		SelectionEventInfo.__init__(self)
+		InfoBarScreenSaver.__init__(self)
 		self.infobar = infobar
 		self.startServiceRef = None
 		self.onLayoutFinish.append(self.onCreate)

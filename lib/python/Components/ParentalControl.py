@@ -116,7 +116,7 @@ class ParentalControl:
 		if service not in self.blacklist:
 			self.serviceMethodWrapper(service, self.addServiceToList, self.blacklist)
 			if config.ParentalControl.hideBlacklist.value and not self.sessionPinCached and config.ParentalControl.storeservicepin.value != "never":
-				eDVBDB.getInstance().addFlag(eServiceReference(service), FLAG_IS_PARENTAL_PROTECTED_HIDDEN)
+				self.setHideFlag(service, True)
 
 	def unProtectService(self, service):
 		if service in self.blacklist:
@@ -153,6 +153,7 @@ class ParentalControl:
 	def resetSessionPin(self):
 		self.sessionPinCached = False
 		self.hideBlacklist()
+		refreshServiceList()
 
 	def getCurrentTimeStamp(self):
 		return time.time()
@@ -239,12 +240,26 @@ class ParentalControl:
 
 	def hideBlacklist(self):
 		if self.blacklist:
-			if config.ParentalControl.servicepinactive.value and config.ParentalControl.storeservicepin.value != "never" and config.ParentalControl.hideBlacklist.value and not self.sessionPinCached:
-				for ref in self.blacklist:
-					if TYPE_BOUQUET not in ref:
-						eDVBDB.getInstance().addFlag(eServiceReference(ref), FLAG_IS_PARENTAL_PROTECTED_HIDDEN)
+			flag = config.ParentalControl.servicepinactive.value and config.ParentalControl.storeservicepin.value != "never" and config.ParentalControl.hideBlacklist.value and not self.sessionPinCached
+			for ref in self.blacklist:
+				self.setHideFlag(ref, flag)
+
+	def setHideFlag(self, ref, flag):
+		if TYPE_BOUQUET in ref:
+			ref = ref.split(":")
+			ref[1], ref[9] = '519', '1'
+			ref_remove = eServiceReference(":".join(ref))
+			ref[1], ref[9] = '7', '0'
+			ref_add = eServiceReference(":".join(ref))
+			if flag:
+				ref_remove, ref_add = ref_add, ref_remove
+			list = eServiceCenter.getInstance().list(eServiceReference('1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "bouquets.%s" ORDER BY bouquet' % ('tv' if ref[2] == '1' else 'radio')))
+			if list:
+				mutableList = list.startEdit()
+				if not mutableList.addService(ref_add, ref_remove):
+					mutableList.removeService(ref_remove, False)
+		else:
+			if flag:
+				eDVBDB.getInstance().addFlag(eServiceReference(ref), FLAG_IS_PARENTAL_PROTECTED_HIDDEN)
 			else:
-				for ref in self.blacklist:
-					if TYPE_BOUQUET not in ref:
-						eDVBDB.getInstance().removeFlag(eServiceReference(ref), FLAG_IS_PARENTAL_PROTECTED_HIDDEN)
-			refreshServiceList()
+				eDVBDB.getInstance().removeFlag(eServiceReference(ref), FLAG_IS_PARENTAL_PROTECTED_HIDDEN)

@@ -19,7 +19,7 @@ from EpgSelection import EPGSelection
 from Plugins.Plugin import PluginDescriptor
 
 from Screen import Screen
-from Screens import ScreenSaver
+from Screens.ScreenSaver import InfoBarScreenSaver
 from Screens import Standby
 from Screens.ChoiceBox import ChoiceBox
 from Screens.Dish import Dish
@@ -165,55 +165,6 @@ class InfoBarUnhandledKey:
 		if self.flags == self.uflags:
 			self.unhandledKeyDialog.show()
 			self.hideUnhandledKeySymbolTimer.start(2000, True)
-
-class InfoBarScreenSaver:
-	def __init__(self):
-		self.onExecBegin.append(self.__onExecBegin)
-		self.onExecEnd.append(self.__onExecEnd)
-		self.screenSaverTimer = eTimer()
-		self.screenSaverTimer.callback.append(self.screensaverTimeout)
-		self.screensaver = self.session.instantiateDialog(ScreenSaver.Screensaver)
-		self.onLayoutFinish.append(self.__layoutFinished)
-
-	def __layoutFinished(self):
-		self.screensaver.hide()
-
-	def __onExecBegin(self):
-		self.ScreenSaverTimerStart()
-
-	def __onExecEnd(self):
-		if self.screensaver.shown:
-			self.screensaver.hide()
-			eActionMap.getInstance().unbindAction('', self.keypressScreenSaver)
-		self.screenSaverTimer.stop()
-
-	def ScreenSaverTimerStart(self):
-		time = int(config.usage.screen_saver.value)
-		flag = self.seekstate[0]
-		if not flag:
-			ref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
-			if ref and not (hasattr(self.session, "pipshown") and self.session.pipshown):
-				ref = ref.toString().split(":")
-				flag = ref[2] == "2" or os.path.splitext(ref[10])[1].lower() in AUDIO_EXTENSIONS
-		if time and flag:
-			self.screenSaverTimer.startLongTimer(time)
-		else:
-			self.screenSaverTimer.stop()
-
-	def screensaverTimeout(self):
-		if self.execing and not Standby.inStandby and not Standby.inTryQuitMainloop:
-			self.hide()
-			if hasattr(self, "pvrStateDialog"):
-				self.pvrStateDialog.hide()
-			self.screensaver.show()
-			eActionMap.getInstance().bindAction('', -maxint - 1, self.keypressScreenSaver)
-
-	def keypressScreenSaver(self, key, flag):
-		if flag:
-			self.screensaver.hide()
-			self.show()
-			self.ScreenSaverTimerStart()
-			eActionMap.getInstance().unbindAction('', self.keypressScreenSaver)
 
 class HideVBILine(Screen):
 	def __init__(self, session):
@@ -2979,6 +2930,8 @@ class InfoBarNotifications:
 				if "channels" in config.usage.remote_fallback_import.value:
 					eDVBDB.getInstance().reloadBouquets()
 					eDVBDB.getInstance().reloadServicelist()
+					from Components.ParentalControl import parentalControl
+					parentalControl.open()
 					refreshServiceList()
 					reload_whitelist_vbi()
 				if "epg" in config.usage.remote_fallback_import.value:
