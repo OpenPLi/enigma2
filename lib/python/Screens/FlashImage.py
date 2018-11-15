@@ -242,11 +242,7 @@ class FlashImage(Screen):
 							return (statvfs.f_bavail * statvfs.f_frsize) / (1 << 20) >= 500 and path
 						except:
 							pass
-				for path in [destination] + getNonNetworkMediaMounts():
-					if avail(path):
-						return path
-				print getNetworkMediaMounts()
-				for path in getNetworkMediaMounts():
+				for path in [destination] + getNonNetworkMediaMounts() + getNetworkMediaMounts():
 					if avail(path):
 						return path
 
