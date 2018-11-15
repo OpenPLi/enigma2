@@ -1,9 +1,7 @@
 #include <lib/gui/eslider.h>
 
 eSlider::eSlider(eWidget *parent)
-	:eWidget(parent), m_have_border_color(false), m_have_foreground_color(false), m_have_sliderborder_color(false), m_have_sliderborder_width(false), m_have_sliderforeground_color(false),
-	m_min(0), m_max(0), m_value(0), m_start(0), m_orientation(orHorizontal), m_orientation_swapped(0),
-	m_border_width(0), m_sliderborder_width(0)
+	:eWidget(parent), m_have_border_color(false), m_have_foreground_color(false), m_start(0), m_orientation(orHorizontal), m_orientation_swapped(0), m_border_width(0)
 {
 }
 
@@ -49,49 +47,6 @@ void eSlider::setForegroundColor(const gRGB &color)
 	invalidate();
 }
 
-void eSlider::setSliderBorderWidth(int pixel)
-{
-	m_sliderborder_width=pixel;
-	m_have_sliderborder_width = true;
-	invalidate();
-}
-
-void eSlider::setScrollbarSliderPicture(ePtr<gPixmap> &pixmap)
-{
-	setScrollbarSliderPicture(pixmap.operator->());
-}
-
-void eSlider::setScrollbarSliderPicture(gPixmap *pixmap)
-{
-	m_pixmap = pixmap;
-	event(evtChangedSlider);
-}
-
-void eSlider::setScrollbarBackgroundPicture(ePtr<gPixmap> &pixmap)
-{
-	setScrollbarBackgroundPicture(pixmap.operator->());
-}
-
-void eSlider::setScrollbarBackgroundPicture(gPixmap *pixmap)
-{
-	m_backgroundpixmap = pixmap;
-	invalidate();
-}
-
-void eSlider::setSliderBorderColor(const gRGB &color)
-{
-	m_sliderborder_color=color;
-	m_have_sliderborder_color=true;
-	invalidate();
-}
-
-void eSlider::setSliderForegroundColor(const gRGB &color)
-{
-	m_sliderforeground_color = color;
-	m_have_sliderforeground_color = true;
-	invalidate();
-}
-
 int eSlider::event(int event, void *data, void *data2)
 {
 	switch (event)
@@ -116,9 +71,7 @@ int eSlider::event(int event, void *data, void *data2)
 
 		if (!m_pixmap)
 		{
-			if (m_have_sliderforeground_color)
-				painter.setForegroundColor(m_sliderforeground_color);
-			else if (m_have_foreground_color)
+			if (m_have_foreground_color)
 				painter.setForegroundColor(m_foreground_color);
 			painter.fill(m_currently_filled);
 		}
@@ -126,21 +79,12 @@ int eSlider::event(int event, void *data, void *data2)
 			painter.blit(m_pixmap, ePoint(0, 0), m_currently_filled.extends, isTransparent() ? gPainter::BT_ALPHATEST : 0);
 
 // border
-
-		if (m_have_sliderborder_color)
-			painter.setForegroundColor(m_sliderborder_color);
-		else if (m_have_border_color)
+		if (m_have_border_color)
 			painter.setForegroundColor(m_border_color);
-
-		int bw;
-		if(m_have_sliderborder_width)
-			bw = m_sliderborder_width;
-		else
-			bw = m_border_width;
-		painter.fill(eRect(0, 0, s.width(), bw));
-		painter.fill(eRect(0, bw, bw, s.height() - bw));
-		painter.fill(eRect(bw, s.height() - bw, s.width() - bw, bw));
-		painter.fill(eRect(s.width() - bw, bw, bw, s.height() - bw));
+		painter.fill(eRect(0, 0, s.width(), m_border_width));
+		painter.fill(eRect(0, m_border_width, m_border_width, s.height()-m_border_width));
+		painter.fill(eRect(m_border_width, s.height()-m_border_width, s.width()-m_border_width, m_border_width));
+		painter.fill(eRect(s.width()-m_border_width, m_border_width, m_border_width, s.height()-m_border_width));
 
 		return 0;
 	}
