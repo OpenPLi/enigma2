@@ -252,6 +252,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 			"fi_FI": [_("Finnish"), _("Finland"), self.finnish(self.scandinavian)],
 			"fr_BE": [_("French"), _("Belgian"), self.belgian(self.french)],
 			"fr_FR": [_("French"), _("France"), self.french],
+			"de_CH": [_("German"), _("Switzerland"), self.swiss(self.german)],
 			"de_DE": [_("German"), _("Germany"), self.german],
 			"el_GR": [_("Greek (Modern)"), _("Greece"), [
 				[
@@ -543,6 +544,32 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		keyList = copy.deepcopy(base)
 		keyList[0][4].extend([u"\\", u"\u00B5"])
 		keyList[1][4].extend([u"\u00A3", u"$", u"\u20AC"])
+		return keyList
+
+	def swiss(self, base):
+		keyList = copy.deepcopy(base)
+		keyList[0][0][0] = u"\u00A7"
+		keyList[0][0][11] = u"'"
+		keyList[0][0][12] = u"^"
+		keyList[0][2][12] = u"$"
+		keyList[0][3][12] = u"\u20AC"
+		keyList[0][4][7] = u"\u00E0"
+		keyList[0][4][8] = u"\u00E8"
+		keyList[0][4][9] = u"\u00E9"
+		keyList[0][4].extend([u"@", u"!", u"\u00AC", u"\\"])
+		keyList[1][0][1] = u"+"
+		keyList[1][0][3] = u"*"
+		keyList[1][0][4] = u"\u00E7"
+		keyList[1][0][11] = u"?"
+		keyList[1][0][12] = u"`"
+		keyList[1][2][12] = u"\u00A3"
+		keyList[1][3][12] = u"\u00A2"
+		keyList[1][4][9] = u"\u00AC"
+		keyList[1][4][9] = u"\u00A6"
+		keyList[1][4][7] = u"\u00C0"
+		keyList[1][4][8] = u"\u00C8"
+		keyList[1][4][9] = u"\u00C9"
+		keyList[1][4].extend([u"#", u"|", u"\u00A6"])
 		return keyList
 
 	def ukranian(self, base):
