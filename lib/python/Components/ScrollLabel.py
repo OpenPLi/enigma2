@@ -19,6 +19,8 @@ class ScrollLabel(GUIComponent):
 		self.splitchar = "|"
 
 	def applySkin(self, desktop, parent):
+		scrollbarWidth = 20
+		scrollbarBorderWidth = 1
 		ret = False
 		if self.skinAttributes:
 			widget_attribs = []
@@ -28,6 +30,24 @@ class ScrollLabel(GUIComponent):
 					scrollbar_attribs.append((attrib,value))
 				if "transparent" in attrib or "backgroundColor" in attrib:
 					widget_attribs.append((attrib,value))
+				if "scrollbarSliderForegroundColor" in attrib:
+					scrollbar_attribs.append((attrib,value))
+					self.skinAttributes.remove((attrib, value))
+				if "scrollbarSliderBorderColor" in attrib:
+					scrollbar_attribs.append((attrib,value))
+					self.skinAttributes.remove((attrib, value))
+				if "scrollbarSliderPicture" in attrib:
+					scrollbar_attribs.append((attrib,value))
+					self.skinAttributes.remove((attrib, value))
+				if "scrollbarBackgroundPicture" in attrib:
+					scrollbar_attribs.append((attrib,value))
+					self.skinAttributes.remove((attrib, value))
+				if "scrollbarWidth" in attrib:
+					scrollbarWidth = int(value)
+					self.skinAttributes.remove((attrib, value))
+				if "scrollbarSliderBorderWidth" in attrib:
+					scrollbarBorderWidth = int(value)
+					self.skinAttributes.remove((attrib, value))
 				if "split" in attrib:
 					self.split = int(value)
 					if self.split:
@@ -51,11 +71,11 @@ class ScrollLabel(GUIComponent):
 		self.pageHeight = int(lines * lineheight)
 		self.instance.move(self.long_text.position())
 		self.instance.resize(eSize(self.pageWidth, self.pageHeight + int(lineheight/6)))
-		self.scrollbar.move(ePoint(self.pageWidth - 20, 0))
-		self.scrollbar.resize(eSize(20, self.pageHeight + int(lineheight / 6)))
+		self.scrollbar.move(ePoint(self.pageWidth - scrollbarWidth, 0))
+		self.scrollbar.resize(eSize(scrollbarWidth, self.pageHeight + int(lineheight / 6)))
 		self.scrollbar.setOrientation(eSlider.orVertical)
 		self.scrollbar.setRange(0, 100)
-		self.scrollbar.setBorderWidth(1)
+		self.scrollbar.setBorderWidth(scrollbarBorderWidth)
 		self.setText(self.message)
 		return ret
 
