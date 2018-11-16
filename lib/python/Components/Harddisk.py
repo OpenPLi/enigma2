@@ -24,7 +24,7 @@ def getProcMounts():
 	return result
 
 def getNetworkMediaMounts():
-	return [x[1] for x in getProcMounts() if x[1].startswith("/media/") and x[0].startswith("//")]
+	return [x[1] for x in getProcMounts() if x[0].startswith("//")]
 
 def getNonNetworkMediaMounts():
 	return [x[1] for x in getProcMounts() if x[1].startswith("/media/") and not x[0].startswith("//")]
