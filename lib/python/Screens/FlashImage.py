@@ -5,7 +5,6 @@ from Components.ChoiceList import ChoiceList, ChoiceEntryComponent
 from Components.config import config, configfile
 from Components.ActionMap import ActionMap
 from Components.Console import Console
-from Components.Harddisk import getNetworkMediaMounts, getNonNetworkMediaMounts
 from Components.Label import Label
 from Components.Pixmap import Pixmap
 from Components.ProgressBar import ProgressBar
@@ -81,7 +80,7 @@ class SelectImage(Screen):
 					pass
 			self.imagesList = dict(self.jsonlist) if self.jsonlist else {}
 
-			for media in getNonNetworkMediaMounts() + getNetworkMediaMounts():
+			for media in ['/media/%s' % x for x in os.listdir('/media')] + ['/media/net/%s' % x for x in os.listdir('/media/net')]:
 				if not(SystemInfo['HasMMC'] and "/mmc" in media):
 					getImages(media, [os.path.join(media, x) for x in os.listdir(media) if os.path.splitext(x)[1] == ".zip" and model in x])
 					if "downloaded_images" in os.listdir(media):
@@ -234,19 +233,33 @@ class FlashImage(Screen):
 			else:
 				doBackup = retval == "with backup"
 
-			def findmedia(destination):
+			def findmedia(path):
 				def avail(path):
-					if not(SystemInfo["HasMMC"] and '/mmc' in path) and not os.path.islink(path):
+					if not '/mmc' in path and os.access(path, os.W_OK):
 						try:
 							statvfs = os.statvfs(path)
-							return (statvfs.f_bavail * statvfs.f_frsize) / (1 << 20) >= 500 and path
+							return (statvfs.f_bavail * statvfs.f_frsize) / (1 << 20)
 						except:
 							pass
-				for path in [destination] + getNonNetworkMediaMounts() + getNetworkMediaMounts():
-					if avail(path):
-						return path
+				def checkIfDevice(path, diskstats):
+					st_dev = os.stat(path).st_dev
+					return [str(os.major(st_dev)), str(os.minor(st_dev))] in diskstats
 
-			self.destination = findmedia(os.path.isfile(self.BACKUP_SCRIPT) and config.plugins.autobackup.where.value or "/media/hdd")
+				diskstats = [x.split()[0:2] for x in open('/proc/diskstats').readlines()]
+				if os.path.isdir(path) and avail(path) > 500:
+					return (path, checkIfDevice(path, diskstats))
+				mounts = []
+				devices = []
+				for path in ['/media/%s' % x for x in os.listdir('/media')] + ['/media/net/%s' % x for x in os.listdir('/media/net')]:
+					if checkIfDevice(path, diskstats):
+						devices.append((path, avail(path)))
+					else:
+						mounts.append((path, avail(path)))
+				devices.sort(key=lambda x: x[1], reverse=True)
+				mounts.sort(key=lambda x: x[1], reverse=True)
+				return devices and devices[0][1] > 500 and (devices[0][0], True) or mounts and mounts[0][1] > 500 and (mounts[0][0], False)
+
+			self.destination, isDevice = findmedia(os.path.isfile(self.BACKUP_SCRIPT) and config.plugins.autobackup.where.value or "/media/hdd")
 
 			if self.destination:
 
@@ -260,10 +273,10 @@ class FlashImage(Screen):
 					os.mkdir(destination)
 
 				if doBackup:
-					if self.destination in getNetworkMediaMounts():
-						self.session.openWithCallback(self.startBackupsettings, MessageBox, _("Can only find a network drive to store the backup this means after the flash the autorestore will not work. Alternativaly you can mount the network drive after the flash and perform a manufacurer reset to autorestore"), simple=True)
-					else:
+					if isDevice:
 						self.startBackupsettings(True)
+					else:
+						self.session.openWithCallback(self.startBackupsettings, MessageBox, _("Can only find a network drive to store the backup this means after the flash the autorestore will not work. Alternativaly you can mount the network drive after the flash and perform a manufacurer reset to autorestore"), simple=True)
 				else:
 					self.startDownload()
 			else:
