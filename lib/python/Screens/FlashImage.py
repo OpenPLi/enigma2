@@ -241,13 +241,14 @@ class FlashImage(Screen):
 							return (statvfs.f_bavail * statvfs.f_frsize) / (1 << 20)
 						except:
 							pass
+
 				def checkIfDevice(path, diskstats):
 					st_dev = os.stat(path).st_dev
 					return [str(os.major(st_dev)), str(os.minor(st_dev))] in diskstats
 
 				diskstats = [x.split()[0:2] for x in open('/proc/diskstats').readlines()]
-				if os.path.isdir(path) and avail(path) > 500:
-					return (path, checkIfDevice(path, diskstats))
+				if os.path.isdir(path) and checkIfDevice(path, diskstats) and avail(path) > 500:
+					return (path, True)
 				mounts = []
 				devices = []
 				for path in ['/media/%s' % x for x in os.listdir('/media')] + ['/media/net/%s' % x for x in os.listdir('/media/net')]:
@@ -257,7 +258,7 @@ class FlashImage(Screen):
 						mounts.append((path, avail(path)))
 				devices.sort(key=lambda x: x[1], reverse=True)
 				mounts.sort(key=lambda x: x[1], reverse=True)
-				return devices and devices[0][1] > 500 and (devices[0][0], True) or mounts and mounts[0][1] > 500 and (mounts[0][0], False)
+				return devices and devices[0][1] > 500 and (devices[0][0], True) or mounts and mounts[0][1] > 500 and (mounts[0][0], False) or (None, None)
 
 			self.destination, isDevice = findmedia(os.path.isfile(self.BACKUP_SCRIPT) and config.plugins.autobackup.where.value or "/media/hdd")
 
