@@ -258,7 +258,7 @@ class FlashImage(Screen):
 						mounts.append((path, avail(path)))
 				devices.sort(key=lambda x: x[1], reverse=True)
 				mounts.sort(key=lambda x: x[1], reverse=True)
-				return devices and devices[0][1] > 500 and (devices[0][0], True) or mounts and mounts[0][1] > 500 and (mounts[0][0], False) or (None, None)
+				return ((devices[0][1] > 500 and (devices[0][0], True)) if devices else mounts and mounts[0][1] > 500 and (mounts[0][0], False)) or (None, None)
 
 			self.destination, isDevice = findmedia(os.path.isfile(self.BACKUP_SCRIPT) and config.plugins.autobackup.where.value or "/media/hdd")
 
