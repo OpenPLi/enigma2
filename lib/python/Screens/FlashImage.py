@@ -244,9 +244,9 @@ class FlashImage(Screen):
 
 				def checkIfDevice(path, diskstats):
 					st_dev = os.stat(path).st_dev
-					return [str(os.major(st_dev)), str(os.minor(st_dev))] in diskstats
+					return (os.major(st_dev), os.minor(st_dev)) in diskstats
 
-				diskstats = [x.split()[0:2] for x in open('/proc/diskstats').readlines()]
+				diskstats = [(int(x[0]), int(x[1])) for x in [x.split()[0:3] for x in open('/proc/diskstats').readlines()] if x[2].startswith("sd")]
 				if os.path.isdir(path) and checkIfDevice(path, diskstats) and avail(path) > 500:
 					return (path, True)
 				mounts = []
