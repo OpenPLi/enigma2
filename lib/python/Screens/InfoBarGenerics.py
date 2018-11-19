@@ -2726,7 +2726,7 @@ class InfoBarSubserviceSelection:
 			{
 				"nextSubservice": (self.nextSubservice, _("Switch to next sub service")),
 				"prevSubservice": (self.prevSubservice, _("Switch to previous sub service"))
-			}, -1)
+			}, -10)
 		self["SubserviceQuickzapAction"].setEnabled(False)
 
 		self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
