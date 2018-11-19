@@ -1,19 +1,16 @@
 from Screens.Screen import Screen
 from Components.ActionMap import NumberActionMap
 from Components.Label import Label
-
 from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
 from InfoBarGenerics import InfoBarShowHide, InfoBarMenu, InfoBarInstantRecord, InfoBarTimeshift, InfoBarSeek, InfoBarTimeshiftState, InfoBarExtensions, InfoBarSubtitleSupport, InfoBarAudioSelection
+from enigma import eServiceReference
 from Components.ServiceEventTracker import InfoBarBase
-
-from enigma import eTimer
 
 class SubservicesQuickzap(InfoBarBase, InfoBarShowHide, InfoBarMenu, \
 		InfoBarInstantRecord, InfoBarSeek, InfoBarTimeshift, \
 		InfoBarTimeshiftState, InfoBarExtensions, InfoBarSubtitleSupport, \
 		InfoBarAudioSelection, Screen):
-
 	def __init__(self, session, subservices):
 		Screen.__init__(self, session)
 		self.setTitle(_("Subservices"))
@@ -22,19 +19,14 @@ class SubservicesQuickzap(InfoBarBase, InfoBarShowHide, InfoBarMenu, \
 				InfoBarTimeshiftState, InfoBarSubtitleSupport, \
 				InfoBarExtensions, InfoBarAudioSelection:
 			x.__init__(self)
-
 		self.restoreService = self.session.nav.getCurrentlyPlayingServiceOrGroup()
-
+		self.subservices = subservices
+		self.n = None
+		if self.subservices:
+			self.n = len(self.subservices)
+		self.__lastservice = self.currentlyPlayingSubservice = self.getSubserviceIndex(self.session.nav.getCurrentlyPlayingServiceReference())
 		self["CurrentSubserviceNumber"] = Label("")
 		self.currentSubserviceNumberLabel = self["CurrentSubserviceNumber"]
-
-		self.updateSubservices()
-		self.currentlyPlayingSubservice = 0
-
-		self.timer = eTimer()
-		self.timer.callback.append(self.playSubservice)
-		self.onLayoutFinish.append(self.onLayoutFinished)
-
 		self["actions"] = NumberActionMap( [ "InfobarSubserviceQuickzapActions", "NumberActions", "DirectionActions", "ColorActions" ],
 			{
 				"up": self.showSelection,
@@ -54,7 +46,7 @@ class SubservicesQuickzap(InfoBarBase, InfoBarShowHide, InfoBarMenu, \
 				"9": self.keyNumberGlobal,
 				"0": self.keyNumberGlobal
 			}, 0)
-
+		self.onLayoutFinish.append(self.onLayoutFinished)
 		self.onClose.append(self.__onClose)
 
 	def __onClose(self):
@@ -62,15 +54,11 @@ class SubservicesQuickzap(InfoBarBase, InfoBarShowHide, InfoBarMenu, \
 		self.session.nav.playService(self.restoreService, checkParentalControl=False, adjust=False)
 
 	def onLayoutFinished(self):
-		self.timer.start(0, True)
-
-	def updateSubservices(self):
-		self.service = self.session.nav.getCurrentService()
-		self.subservices = self.service and self.service.subServices()
-		self.n = self.subservices and self.subservices.getNumberOfSubservices()
+		cur_num = self.currentlyPlayingSubservice
+		if cur_num is not None or cur_num != -1:
+			self.currentSubserviceNumberLabel.setText(str(cur_num + 1))
 
 	def nextSubservice(self):
-		self.updateSubservices()
 		if self.n:
 			if self.currentlyPlayingSubservice >= self.n - 1:
 				self.playSubservice(0)
@@ -78,7 +66,6 @@ class SubservicesQuickzap(InfoBarBase, InfoBarShowHide, InfoBarMenu, \
 				self.playSubservice(self.currentlyPlayingSubservice + 1)
 
 	def previousSubservice(self):
-		self.updateSubservices()
 		if self.n:
 			if self.currentlyPlayingSubservice > self.n:
 				self.currentlyPlayingSubservice = self.n
@@ -88,42 +75,40 @@ class SubservicesQuickzap(InfoBarBase, InfoBarShowHide, InfoBarMenu, \
 				self.playSubservice(self.currentlyPlayingSubservice - 1)
 
 	def getSubserviceIndex(self, service):
-		self.updateSubservices()
-		if self.n is None:
+		if self.n is None or service is None:
 			return -1
 		for x in range(self.n):
-			if service == self.subservices.getSubservice(x):
-				return x
+			try:
+				if service == eServiceReference(self.subservices[x][0]):
+					return x
+			except:
+				pass
+		return -1
 
 	def keyNumberGlobal(self, number):
-		print number, "pressed"
-		self.updateSubservices()
 		if number == 0:
 			self.playSubservice(self.__lastservice)
 		elif self.n is not None and number <= self.n:
-			self.playSubservice(number -1)
+			self.playSubservice(number - 1)
 
 	def showSelection(self):
-		self.updateSubservices()
 		tlist = []
 		n = self.n or 0
 		if n:
 			idx = 0
 			while idx < n:
-				i = self.subservices.getSubservice(idx)
-				tlist.append((i.getName(), idx))
+				i = self.subservices[idx]
+				tlist.append((i[1], idx))
 				idx += 1
-
-		keys = [ "1", "2", "3", "4", "5", "6", "7", "8", "9" ] + [""] * n
-		self.session.openWithCallback(self.subserviceSelected, ChoiceBox, title=_("Please select a subservice..."), list = tlist, selection = self.currentlyPlayingSubservice, keys = keys, windowTitle=_("Subservices"))
+			keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "green", "yellow"] + [""] * n
+			self.session.openWithCallback(self.subserviceSelected, ChoiceBox, title=_("Please select a subservice..."), list=tlist, selection=self.currentlyPlayingSubservice, keys=keys, windowTitle=_("Subservices"))
 
 	def subserviceSelected(self, service):
-		print "playing subservice number", service
-		if service is not None:
+		if service:
 			self.playSubservice(service[1])
 
 	def keyOK(self):
-		pass
+		self.doShow()
 
 	def quitQuestion(self):
 		self.session.openWithCallback(self.quit, MessageBox, _("Really exit the subservices quickzap?"))
@@ -132,14 +117,15 @@ class SubservicesQuickzap(InfoBarBase, InfoBarShowHide, InfoBarMenu, \
 		if answer:
 			self.close()
 
-	def playSubservice(self, number = 0):
-		newservice = self.subservices.getSubservice(number)
-		if newservice.valid():
-			del self.subservices
-			del self.service
+	def playSubservice(self, number=0):
+		try:
+			newservice = eServiceReference(self.subservices[number][0])
+		except:
+			newservice = None
+		if newservice and newservice.valid():
 			self.__lastservice = self.currentlyPlayingSubservice
 			self.session.nav.stopService()
 			self.session.nav.playService(newservice, checkParentalControl=False, adjust=False)
 			self.currentlyPlayingSubservice = number
-			self.currentSubserviceNumberLabel.setText(str(number+1))
+			self.currentSubserviceNumberLabel.setText(str(number + 1))
 			self.doShow()

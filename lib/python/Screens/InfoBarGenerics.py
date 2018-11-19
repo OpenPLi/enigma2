@@ -45,6 +45,7 @@ from time import time, localtime, strftime
 import os
 from bisect import insort
 from sys import maxint
+import itertools, datetime
 
 from RecordTimer import RecordTimerEntry, RecordTimer, findSafeRecordPath
 
@@ -127,6 +128,44 @@ def reload_whitelist_vbi():
 	global whitelist_vbi
 	whitelist_vbi = [line.strip() for line in open('/etc/enigma2/whitelist_vbi', 'r').readlines()] if os.path.isfile('/etc/enigma2/whitelist_vbi') else []
 reload_whitelist_vbi()
+
+subservice_groupslist = None
+def reload_subservice_groupslist(force=False):
+	global subservice_groupslist
+	if subservice_groupslist is None or force:
+		try:
+			subservice_groupslist = [list(g) for k,g in itertools.groupby([line.split('#')[0].strip() for line in open('/etc/enigma2/groupedservices').readlines()], lambda x:not x) if not k]
+		except:
+			subservice_groupslist = []
+reload_subservice_groupslist()
+
+def getPossibleSubservicesForCurrentChannel(current_service):
+	if current_service and subservice_groupslist:
+		ref_in_subservices_group = [x for x in subservice_groupslist if current_service in x]
+		if ref_in_subservices_group:
+			return ref_in_subservices_group[0]
+	return None
+
+def getActiveSubservicesForCurrentChannel(possibleSubservices, only_current=False):
+	activeSubservices = []
+	epgCache = eEPGCache.getInstance()
+	idx = 0
+	for subservice in possibleSubservices:
+		events = epgCache.lookupEvent(['BDTS', (subservice, 0, -1)])
+		if events is not None and len(events) == 1:
+			event = events[0]
+			title = event[2]
+			starttime = datetime.datetime.fromtimestamp(event[0]).strftime('%H:%M')
+			endtime = datetime.datetime.fromtimestamp(event[0] + event[1]).strftime('%H:%M')
+			if title and "Sendepause" not in title:
+				current_show_name = title + " " + str(starttime) + "-" + str(endtime)
+				activeSubservices.append((subservice, current_show_name))
+				if only_current:
+					if only_current != subservice:
+						idx += 1
+					elif idx:
+						return activeSubservices
+	return activeSubservices
 
 class InfoBarDish:
 	def __init__(self):
@@ -2696,16 +2735,29 @@ class InfoBarSubserviceSelection:
 			})
 		self.onClose.append(self.__removeNotifications)
 
-		self.bsel = None
+		self.bouquets = self.bsel = self.selectedSubservice = None
 
 	def __removeNotifications(self):
 		self.session.nav.event.remove(self.checkSubservicesAvail)
 
 	def checkSubservicesAvail(self):
-		service = self.session.nav.getCurrentService()
-		subservices = service and service.subServices()
-		if not subservices or subservices.getNumberOfSubservices() == 0:
+		serviceRef = self.session.nav.getCurrentlyPlayingServiceReference()
+		activeSubservice = False
+		if serviceRef:
+			refstr = serviceRef.toString()
+			possibleSubservices = getPossibleSubservicesForCurrentChannel(refstr)
+			if possibleSubservices:
+				activeSubservice = getActiveSubservicesForCurrentChannel(possibleSubservices, refstr)
+		if not activeSubservice:
 			self["SubserviceQuickzapAction"].setEnabled(False)
+			self.bouquets = self.bsel = self.selectedSubservice = None
+
+	def getAvailableSubservices(self, currentRef):
+		activeSubservices = None
+		possibleSubservices = getPossibleSubservicesForCurrentChannel(currentRef)
+		if possibleSubservices:
+			activeSubservices = getActiveSubservicesForCurrentChannel(possibleSubservices)
+		return activeSubservices
 
 	def nextSubservice(self):
 		self.changeSubservice(+1)
@@ -2719,15 +2771,14 @@ class InfoBarSubserviceSelection:
 		self.session.nav.playService(ref, checkParentalControl=False, adjust=False)
 
 	def changeSubservice(self, direction):
-		service = self.session.nav.getCurrentService()
-		subservices = service and service.subServices()
-		n = subservices and subservices.getNumberOfSubservices()
-		if n and n > 0:
+		serviceRef = self.session.nav.getCurrentlyPlayingServiceReference()
+		subservices = serviceRef and self.getAvailableSubservices(serviceRef.toString()) or None
+		if subservices and len(subservices) > 1:
+			n = len(subservices)
 			selection = -1
-			ref = self.session.nav.getCurrentlyPlayingServiceReference()
 			idx = 0
 			while idx < n:
-				if subservices.getSubservice(idx).toString() == ref.toString():
+				if subservices[idx][0] == serviceRef.toString():
 					selection = idx
 					break
 				idx += 1
@@ -2737,82 +2788,82 @@ class InfoBarSubserviceSelection:
 					selection = 0
 				elif selection < 0:
 					selection = n - 1
-				newservice = subservices.getSubservice(selection)
-				if newservice.valid():
-					del subservices
-					del service
+				try:
+					newservice = eServiceReference(subservices[selection][0])
+				except:
+					newservice = None
+				if newservice and newservice.valid():
 					self.playSubservice(newservice)
 
 	def subserviceSelection(self):
-		service = self.session.nav.getCurrentService()
-		subservices = service and service.subServices()
-		self.bouquets = self.servicelist.getBouquetList()
-		n = subservices and subservices.getNumberOfSubservices()
-		selection = 0
-		if n and n > 0:
-			ref = self.session.nav.getCurrentlyPlayingServiceReference()
-			tlist = []
-			idx = 0
-			cnt_parent = 0
-			while idx < n:
-				i = subservices.getSubservice(idx)
-				if i.toString() == ref.toString():
-					selection = idx
-				tlist.append((i.getName(), i))
-				if i.getUnsignedData(6):
-					cnt_parent += 1
-				idx += 1
-
-			if cnt_parent and self.bouquets and len(self.bouquets):
-				keys = ["red", "blue", "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" ] + [""] * n
-				if config.usage.multibouquet.value:
-					tlist = [(_("Quick zap"), "quickzap", service.subServices()), (_("Add to bouquet"), "CALLFUNC", self.addSubserviceToBouquetCallback), ("--", "")] + tlist
+		serviceRef = self.session.nav.getCurrentlyPlayingServiceReference()
+		subservices = serviceRef and self.getAvailableSubservices(serviceRef.toString()) or None
+		if subservices and len(subservices) > 1:
+			self.bouquets = self.servicelist and self.servicelist.getBouquetList()
+			n = len(subservices)
+			selection = 0
+			if n and n > 0:
+				tlist = []
+				idx = 0
+				while idx < n:
+					i = subservices[idx][0]
+					if i == serviceRef.toString():
+						selection = idx
+					tlist.append((subservices[idx][1], i))
+					idx += 1
+				if self.bouquets and len(self.bouquets):
+					keys = ["red", "blue", "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" ] + [""] * n
+					call_func_title = _("Add to favourites")
+					if config.usage.multibouquet.value:
+						call_func_title = _("Add to bouquet")
+						tlist = [(_("Quick zap"), "quickzap", subservices), (call_func_title, "CALLFUNC", self.addSubserviceToBouquetCallback), ("--", "")] + tlist
+					selection += 3
 				else:
-					tlist = [(_("Quick zap"), "quickzap", service.subServices()), (_("Add to favourites"), "CALLFUNC", self.addSubserviceToBouquetCallback), ("--", "")] + tlist
-				selection += 3
-			else:
-				tlist = [(_("Quick zap"), "quickzap", service.subServices()), ("--", "")] + tlist
-				keys = ["red", "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" ] + [""] * n
-				selection += 2
-
-			self.session.openWithCallback(self.subserviceSelected, ChoiceBox, title=_("Please select a sub service..."), list = tlist, selection = selection, keys = keys, skin_name = "SubserviceSelection")
+					tlist = [(_("Quick zap"), "quickzap", subservices), ("--", "")] + tlist
+					keys = ["red", "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" ] + [""] * n
+					selection += 2
+				self.session.openWithCallback(self.subserviceSelected, ChoiceBox, title=_("Please select a sub service..."), list=tlist, selection=selection, keys=keys, skin_name ="SubserviceSelection")
 
 	def subserviceSelected(self, service):
-		del self.bouquets
-		if not service is None:
-			if isinstance(service[1], str):
-				if service[1] == "quickzap":
-					from Screens.SubservicesQuickzap import SubservicesQuickzap
-					self.session.open(SubservicesQuickzap, service[2])
+		if service and len(service) > 1:
+			if service[1] == "quickzap":
+				from Screens.SubservicesQuickzap import SubservicesQuickzap
+				self.session.open(SubservicesQuickzap, service[2])
 			else:
-				self["SubserviceQuickzapAction"].setEnabled(True)
-				self.playSubservice(service[1])
+				try:
+					ref = eServiceReference(service[1])
+				except:
+					ref = None
+				if ref and ref.valid():
+					self["SubserviceQuickzapAction"].setEnabled(True)
+					self.playSubservice(ref)
 
 	def addSubserviceToBouquetCallback(self, service):
-		if service and len(service) > 1 and isinstance(service[1], eServiceReference):
-			self.selectedSubservice = service
-			if self.bouquets is None:
-				cnt = 0
-			else:
-				cnt = len(self.bouquets)
-			if cnt > 1: # show bouquet list
+		if service and len(service) > 1:
+			try:
+				self.selectedSubservice = eServiceReference(service[1])
+			except:
+				self.selectedSubservice = None
+			if self.selectedSubservice is None or not self.selectedSubservice.valid() or self.bouquets is None:
+				self.bouquets = self.bsel = self.selectedSubservice = None
+				return
+			cnt = len(self.bouquets)
+			if cnt > 1:
 				self.bsel = self.session.openWithCallback(self.bouquetSelClosed, BouquetSelector, self.bouquets, self.addSubserviceToBouquet)
-			elif cnt == 1: # add to only one existing bouquet
+			elif cnt == 1:
 				self.addSubserviceToBouquet(self.bouquets[0][1])
 				self.session.open(MessageBox, _("Service has been added to the favourites."), MessageBox.TYPE_INFO, timeout=5)
 
 	def bouquetSelClosed(self, confirmed):
-		self.bsel = None
-		del self.selectedSubservice
+		self.bouquets = self.bsel = self.selectedSubservice = None
 		if confirmed:
 			self.session.open(MessageBox, _("Service has been added to the selected bouquet."), MessageBox.TYPE_INFO, timeout=5)
 
 	def addSubserviceToBouquet(self, dest):
-		self.servicelist.addServiceToBouquet(dest, self.selectedSubservice[1])
+		self.servicelist.addServiceToBouquet(dest, self.selectedSubservice)
 		if self.bsel:
 			self.bsel.close(True)
-		else:
-			del self.selectedSubservice
+			self.bouquets = self.bsel = self.selectedSubservice = None
 
 class InfoBarRedButton:
 	def __init__(self):
