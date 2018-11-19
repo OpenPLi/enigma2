@@ -25,21 +25,22 @@
 		<alias name="Small" font="FdLcD" size="48" height="48" />
 	</fonts>
 	<colors>
-		<color name="fullred" value="#ff0000" />
-		<color name="yellow" value="#ffff00" />
-		<color name="greenish" value="#04b404" />
-		<color name="lightcyan" value="#7fffff" />
-		<color name="darkgrey" value="#404040" />
-		<color name="lightgrey" value="#c0c0c0" />
+		<!-- use color names with lcd_ prefix -->
+		<color name="lcd_fullred" value="#ff0000" />
+		<color name="lcd_yellow" value="#ffff00" />
+		<color name="lcd_greenish" value="#04b404" />
+		<color name="lcd_lightcyan" value="#7fffff" />
+		<color name="lcd_darkgrey" value="#404040" />
+		<color name="lcd_lightgrey" value="#c0c0c0" />
 	</colors>
 	<!-- template -->
 	<screen name="SummaryClockPanel">
-		<widget source="global.CurrentTime" render="Label" position="510,5" size="270,100" halign="right" font="FdLcD;100" foregroundColor="lightcyan" >
+		<widget source="global.CurrentTime" render="Label" position="510,5" size="270,100" halign="right" font="FdLcD;100" foregroundColor="lcd_lightcyan" >
 			<convert type="ClockToText">Default</convert>
 		</widget>
 	</screen>
 	<screen name="SummaryClockRecPanel">
-		<widget source="global.CurrentTime" render="Label" position="right" size="240,*" font="Big" halign="right" valign="center" noWrap="1" foregroundColor="lightcyan">
+		<widget source="global.CurrentTime" render="Label" position="right" size="240,*" font="Big" halign="right" valign="center" noWrap="1" foregroundColor="lcd_lightcyan">
 			<convert type="ClockToText"></convert>
 		</widget>
 		<widget source="session.RecordState" render="Pixmap" pixmap="skin_default/icons/record.png" position="right" size="30,30">
@@ -48,14 +49,14 @@
 	</screen>
 	<!-- menus-->
 	<screen name="MenuSummary" position="fill">
-		<widget source="parent.title" render="Label" position="10,10" size="770,110" font="Big" halign="center" valign="center" foregroundColor="yellow" />
+		<widget source="parent.title" render="Label" position="10,10" size="770,110" font="Big" halign="center" valign="center" foregroundColor="lcd_yellow" />
 		<widget source="parent.menu" render="Label" position="10,140" size="770,140" font="Medium" halign="center" valign="center">
 			<convert type="StringListSelection" />
 		</widget>
 	</screen>
 	<!-- setup-->
 	<screen name="SetupSummary" position="fill">
-		<widget source="SetupTitle" render="Label" position="10,10" size="770,110" font="Big" halign="center" valign="center" foregroundColor="yellow" />
+		<widget source="SetupTitle" render="Label" position="10,10" size="770,110" font="Big" halign="center" valign="center" foregroundColor="lcd_yellow" />
 		<widget source="SetupEntry" render="Label" position="10,140" size="770,140" font="Medium" halign="center" valign="center" />
 		<widget source="SetupValue" render="Label" position="10,300" size="770,110" font="Medium" halign="center" valign="center" />
 	</screen>
@@ -77,24 +78,24 @@
 		<widget source="session.FrontendInfo" render="Label" position="240,102" size="540,50" halign="right" valign="bottom" font="FdLcD;42">
 			<convert type="FrontendInfo">STRING,24,0</convert>
 		</widget>
-		<widget source="session.CurrentService" render="Label" position="10,150" size="780,70" font="Medium" halign="center" valign="top" foregroundColor="yellow" >
+		<widget source="session.CurrentService" render="Label" position="10,150" size="780,70" font="Medium" halign="center" valign="top" foregroundColor="lcd_yellow" >
 			<convert type="ServiceName">Name</convert>
 		</widget>
-		<widget source="session.Event_Now" render="Progress" position="10,220" size="780,15" borderWidth="0" foregroundColor="lightcyan" backgroundColor="darkgrey" >
+		<widget source="session.Event_Now" render="Progress" position="10,220" size="780,15" borderWidth="0" foregroundColor="lcd_lightcyan" backgroundColor="lcd_darkgrey" >
 			<convert type="EventTime">Progress</convert>
 		</widget>
 		<widget source="session.Event_Now" render="Label" position="10,240" size="780,140" font="Medium" halign="center" valign="top" >
 			<convert type="EventName">Name</convert>
 		</widget>
-		<widget source="session.Event_Now" render="Label" position="10,405" size="150,55" font="Small" valign="bottom" foregroundColor="lightgrey">
+		<widget source="session.Event_Now" render="Label" position="10,405" size="150,55" font="Small" valign="bottom" foregroundColor="lcd_lightgrey">
 			<convert type="EventTime">StartTime</convert>
 			<convert type="ClockToText">Format:%H:%M</convert>
 		</widget>
-		<widget source="session.Event_Now" render="Label" position="155,405" size="170,55" font="Small" valign="bottom" foregroundColor="lightgrey">
+		<widget source="session.Event_Now" render="Label" position="155,405" size="170,55" font="Small" valign="bottom" foregroundColor="lcd_lightgrey">
 			<convert type="EventTime">EndTime</convert>
 			<convert type="ClockToText">Format:- %H:%M</convert>
 		</widget>
-		<widget source="session.Event_Now" render="Label" position="580,405" size="200,55" font="Small" halign="right" valign="bottom" foregroundColor="lightgrey">
+		<widget source="session.Event_Now" render="Label" position="580,405" size="200,55" font="Small" halign="right" valign="bottom" foregroundColor="lcd_lightgrey">
 			<convert type="EventTime">Remaining</convert>
 			<convert type="RemainingToText">FOLLOW</convert>
 		</widget>
@@ -118,24 +119,24 @@
 		<widget source="session.FrontendInfo" render="Label" position="240,102" size="540,50" halign="right" valign="bottom" font="FdLcD;42">
 			<convert type="FrontendInfo">STRING,24,0</convert>
 		</widget>
-		<widget source="parent.ServiceEvent" render="Label" position="10,150" size="780,70" font="Medium" halign="center" valign="top" foregroundColor="yellow" >
+		<widget source="parent.ServiceEvent" render="Label" position="10,150" size="780,70" font="Medium" halign="center" valign="top" foregroundColor="lcd_yellow" >
 			<convert type="ServiceName">Name</convert>
 		</widget>
-		<widget source="parent.ServiceEvent" render="Progress" position="10,220" size="780,15" borderWidth="0" foregroundColor="lightcyan" backgroundColor="darkgrey" >
+		<widget source="parent.ServiceEvent" render="Progress" position="10,220" size="780,15" borderWidth="0" foregroundColor="lcd_lightcyan" backgroundColor="lcd_darkgrey" >
 			<convert type="EventTime">Progress</convert>
 		</widget>
 		<widget source="parent.ServiceEvent" render="Label" position="10,240" size="780,140" font="Medium" halign="center" valign="top" >
 			<convert type="EventName">Name</convert>
 		</widget>
-		<widget source="parent.ServiceEvent" render="Label" position="10,405" size="150,55" font="Small" valign="bottom" foregroundColor="lightgrey">
+		<widget source="parent.ServiceEvent" render="Label" position="10,405" size="150,55" font="Small" valign="bottom" foregroundColor="lcd_lightgrey">
 			<convert type="EventTime">StartTime</convert>
 			<convert type="ClockToText">Format:%H:%M</convert>
 		</widget>
-		<widget source="parent.ServiceEvent" render="Label" position="155,405" size="170,55" font="Small" valign="bottom" foregroundColor="lightgrey">
+		<widget source="parent.ServiceEvent" render="Label" position="155,405" size="170,55" font="Small" valign="bottom" foregroundColor="lcd_lightgrey">
 			<convert type="EventTime">EndTime</convert>
 			<convert type="ClockToText">Format:- %H:%M</convert>
 		</widget>
-		<widget source="parent.ServiceEvent" render="Label" position="580,405" size="200,55" font="Small" halign="right" valign="bottom" foregroundColor="lightgrey">
+		<widget source="parent.ServiceEvent" render="Label" position="580,405" size="200,55" font="Small" halign="right" valign="bottom" foregroundColor="lcd_lightgrey">
 			<convert type="EventTime">Remaining</convert>
 			<convert type="RemainingToText">FOLLOW</convert>
 		</widget>
@@ -165,24 +166,24 @@
 		<widget source="session.FrontendInfo" render="Label" position="240,102" size="540,50" halign="right" valign="bottom" font="FdLcD;42">
 			<convert type="FrontendInfo">STRING,24,0</convert>
 		</widget>
-		<widget source="parent.Service" render="Label" position="10,150" size="780,70" font="Medium" halign="center" valign="top" foregroundColor="yellow">
+		<widget source="parent.Service" render="Label" position="10,150" size="780,70" font="Medium" halign="center" valign="top" foregroundColor="lcd_yellow">
 			<convert type="ServiceName">Name</convert>
 		</widget>
-		<widget source="parent.Event" render="Progress" position="10,220" size="780,15" borderWidth="0" foregroundColor="lightcyan" backgroundColor="darkgrey">
+		<widget source="parent.Event" render="Progress" position="10,220" size="780,15" borderWidth="0" foregroundColor="lcd_lightcyan" backgroundColor="lcd_darkgrey">
 			<convert type="EventTime">Progress</convert>
 		</widget>
 		<widget source="parent.Event" render="Label" position="10,240" size="780,140" font="Medium" halign="center" valign="top" >
 			<convert type="EventName">Name</convert>
 		</widget>
-		<widget source="parent.Event" render="Label" position="10,405" size="150,55" font="Small" valign="bottom" foregroundColor="lightgrey">
+		<widget source="parent.Event" render="Label" position="10,405" size="150,55" font="Small" valign="bottom" foregroundColor="lcd_lightgrey">
 			<convert type="EventTime">StartTime</convert>
 			<convert type="ClockToText">Format:%H:%M</convert>
 		</widget>
-		<widget source="parent.Event" render="Label" position="155,405" size="170,55" font="Small" valign="bottom" foregroundColor="lightgrey">
+		<widget source="parent.Event" render="Label" position="155,405" size="170,55" font="Small" valign="bottom" foregroundColor="lcd_lightgrey">
 			<convert type="EventTime">EndTime</convert>
 			<convert type="ClockToText">Format:- %H:%M</convert>
 		</widget>
-		<widget source="parent.Event" render="Label" position="580,405" size="200,55" font="Small" halign="right" valign="bottom" foregroundColor="lightgrey">
+		<widget source="parent.Event" render="Label" position="580,405" size="200,55" font="Small" halign="right" valign="bottom" foregroundColor="lcd_lightgrey">
 			<convert type="EventTime">Remaining</convert>
 			<convert type="RemainingToText">FOLLOW</convert>
 		</widget>
@@ -199,17 +200,17 @@
 	<!-- messagebox-->
 	<screen name="MessageBox_summary" position="fill">
 		<widget source="parent.Text" render="Label" position="10,10" size="770,380" font="Medium" halign="center" valign="center"/>
-		<widget source="parent.selectedChoice" render="Label" position="10,390" size="770,70" font="Medium" halign="center" valign="center" noWrap="1" foregroundColor="lightcyan"/>
+		<widget source="parent.selectedChoice" render="Label" position="10,390" size="770,70" font="Medium" halign="center" valign="center" noWrap="1" foregroundColor="lcd_lightcyan"/>
 	</screen>
 	<screen name="MessageBoxSimple_summary" position="fill">
 		<panel name="MessageBox_summary" />
 	</screen>
 	<!-- standby -->
 	<screen name="StandbySummary" position="fill">
-		<widget source="global.CurrentTime" render="Label" position="10,70" size="770,240" font="FdLcD;160" noWrap="1" foregroundColor="lightcyan" halign="center">
+		<widget source="global.CurrentTime" render="Label" position="10,70" size="770,240" font="FdLcD;160" noWrap="1" foregroundColor="lcd_lightcyan" halign="center">
 			<convert type="ClockToText">Default</convert>
 		</widget>
-		<widget source="global.CurrentTime" render="Label" position="10,10" size="770,60" font="FdLcD;50" noWrap="1" foregroundColor="yellow" halign="center">
+		<widget source="global.CurrentTime" render="Label" position="10,10" size="770,60" font="FdLcD;50" noWrap="1" foregroundColor="lcd_yellow" halign="center">
 			<convert type="ClockToText">Date</convert>
 		</widget>
 		<widget source="session.FrontendInfo" render="Label" position="10,410" size="770,50" borderWidth="1" borderColor="black" zPosition="1" halign="center" valign="bottom" backgroundColor="transpBlack" transparent="1" font="FdLcD;42">
@@ -229,8 +230,8 @@
 	<!-- numberzap -->
 	<screen name="NumberZap_summary" position="fill">
 		<widget source="parent.channel_summary" render="Label" position="10,10" size="770,60" font="FdLcD;60" halign="center"/>
-		<widget source="parent.number_summary" render="Label" position="10,70" size="770,120" font="FdLcD;120" halign="center" foregroundColor="lightcyan"/>
-		<widget source="parent.servicename_summary" render="Label" position="10,190" size="770,60" font="FdLcD;60" halign="center" foregroundColor="yellow"/>
+		<widget source="parent.number_summary" render="Label" position="10,70" size="770,120" font="FdLcD;120" halign="center" foregroundColor="lcd_lightcyan"/>
+		<widget source="parent.servicename_summary" render="Label" position="10,190" size="770,60" font="FdLcD;60" halign="center" foregroundColor="lcd_yellow"/>
 	</screen>
 	<!-- movieplayer-->
 	<screen name="InfoBarMoviePlayerSummary" position="fill">
@@ -241,7 +242,7 @@
 		<widget source="session.CurrentService" render="Label" position="10,170" size="770,182" font="Smaller" halign="center" valign="center" >
 			<convert type="ServiceName">Name</convert>
 		</widget>
-		<widget source="session.CurrentService" render="Progress" position="10,370" size="770,15" borderWidth="0" foregroundColor="lightcyan" backgroundColor="darkgrey">
+		<widget source="session.CurrentService" render="Progress" position="10,370" size="770,15" borderWidth="0" foregroundColor="lcd_lightcyan" backgroundColor="lcd_darkgrey">
 			<convert type="ServicePosition">Position</convert>
 		</widget>
 		<widget source="session.CurrentService" render="Label" position="15,390" size="400,70" font="Medium" halign="left" valign="bottom" >
@@ -262,10 +263,10 @@
 		<panel position="left" size="5%,*" />
 		<panel position="right" size="5%,*" />
 		<panel position="fill">
-			<widget source="parent.Title" render="Label" position="top" size="*,90" font="Small" halign="left" valign="center" noWrap="1"  foregroundColor="yellow" />
+			<widget source="parent.Title" render="Label" position="top" size="*,90" font="Small" halign="left" valign="center" noWrap="1"  foregroundColor="lcd_yellow" />
 			<widget source="name" render="Label" position="top" size="*,150" font="Medium" halign="left" valign="top" />
 			<panel position="top" size="*,60">
-				<widget source="parent.Service" render="Label" position="fill" font="Medium" halign="right" noWrap="1" foregroundColor="yellow">
+				<widget source="parent.Service" render="Label" position="fill" font="Medium" halign="right" noWrap="1" foregroundColor="lcd_yellow">
 					<convert type="MovieInfo">RecordServiceName</convert>
 				</widget>
 			</panel>
@@ -310,7 +311,7 @@
 		</widget>
 	</screen>
 	<screen name="ChoiceBox_summary" position="fill">
-		<widget source="parent.summary_list" render="Label" position="10,10" size="770,440" font="FdLcD;32" halign="center" valign="center" noWrap="1" foregroundColor="lightcyan" />
+		<widget source="parent.summary_list" render="Label" position="10,10" size="770,440" font="FdLcD;32" halign="center" valign="center" noWrap="1" foregroundColor="lcd_lightcyan" />
 	</screen>
 	<screen name="AboutSummary" position="fill">
 		<widget source="AboutText" render="Label" position="fill" font="FdLcD;20" />
