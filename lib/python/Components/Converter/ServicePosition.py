@@ -122,7 +122,7 @@ class ServicePosition(Poll, Converter, object):
 							return sign + "%d:%02d" % (l/60, l%60)
 				else:
 					f = l/60
-					if f < 100:
+					if f < 60:
 						s = l%60
 					else:
 						f /= 60
