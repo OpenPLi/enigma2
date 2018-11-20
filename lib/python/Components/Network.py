@@ -317,6 +317,8 @@ class Network:
 				name = 'Intel'
 			elif name.startswith('brcm') or name.startswith('bcm'):
 				name = 'Broadcom'
+		elif os.path.isdir('/tmp/bcm/' + iface):
+			name = 'Broadcom'
 		else:
 			name = _('Unknown')
 
