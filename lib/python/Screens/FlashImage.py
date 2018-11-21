@@ -81,7 +81,7 @@ class SelectImage(Screen):
 			self.imagesList = dict(self.jsonlist) if self.jsonlist else {}
 
 			for media in ['/media/%s' % x for x in os.listdir('/media')] + ['/media/net/%s' % x for x in os.listdir('/media/net')]:
-				if not(SystemInfo['HasMMC'] and "/mmc" in media):
+				if not(SystemInfo['HasMMC'] and "/mmc" in media) and os.path.isdir(media):
 					getImages(media, [os.path.join(media, x) for x in os.listdir(media) if os.path.splitext(x)[1] == ".zip" and model in x])
 					if "downloaded_images" in os.listdir(media):
 						media = os.path.join(media, "downloaded_images")
@@ -235,7 +235,7 @@ class FlashImage(Screen):
 
 			def findmedia(path):
 				def avail(path):
-					if not '/mmc' in path and os.access(path, os.W_OK):
+					if not '/mmc' in path and os.path.isdir(path) and os.access(path, os.W_OK):
 						try:
 							statvfs = os.statvfs(path)
 							return (statvfs.f_bavail * statvfs.f_frsize) / (1 << 20)
