@@ -13,7 +13,7 @@ from Components.Label import Label
 from Components.ProgressBar import ProgressBar
 
 from Tools.StbHardware import getFPVersion
-from enigma import eTimer, eLabel, eConsoleAppContainer
+from enigma import eTimer, eLabel, eConsoleAppContainer, getDesktop
 
 from Components.GUIComponent import GUIComponent
 import skin, os
@@ -63,6 +63,8 @@ class About(Screen):
 			AboutText += fp_version + "\n"
 
 		self["FPVersion"] = StaticText(fp_version)
+
+		AboutText += _('Skin & Resolution: %s (%sx%s)\n') % (config.skin.primary_skin.value[0:-9], getDesktop(0).size().width(), getDesktop(0).size().height())
 
 		self["TunerHeader"] = StaticText(_("Detected NIMs:"))
 		AboutText += "\n" + _("Detected NIMs:") + "\n"
