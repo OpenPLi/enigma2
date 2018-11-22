@@ -16,41 +16,27 @@ inline char tolower(char c)
 int mapEncoding(char *s_table)
 {
 	int encoding = 0;
-	int ex_table_flag = 0;
-
-	//if encoding string has a option 'N' or 'NOID' first split by ':' , it indicates that the string has no
-	//encoding id char in the first byte, and the bit 0x0800 of encoding id will be set. if encoding string 
-        //has a option 'E' or 'ENFORCE' first split by ':' , it indicates that the string encode by provide value,
-        //and skip the first encode byte, and the bit 0x0100 of encoding id will be set.
-
-	char *colon=strrchr(s_table, ':');
-	if(colon != NULL){
-		if(strncmp(s_table,"n:",2) == 0 || strncmp(s_table,"noid:",5) == 0 )
-			ex_table_flag |= NO_TABLEID;
-		s_table = colon + 1;
-	}
 
 	// table name will be in lowercase!
 	if (sscanf(s_table, "iso8859-%d", &encoding) == 1)
-		return ex_table_flag | encoding;
+		return encoding;
 	if (sscanf(s_table, "iso%d", &encoding) == 1 and encoding == 6937)
-		return ex_table_flag;
+		return 0;
 	if (strcmp(s_table, "gb2312") == 0 || strcmp(s_table, "gbk") == 0
 		|| strcmp(s_table, "gb18030") == 0 || strcmp(s_table, "cp936") == 0)
-		return ex_table_flag | GB18030_ENCODING;
+		return GB18030_ENCODING;
 	if (strcmp(s_table, "big5") == 0 || strcmp(s_table, "cp950") == 0)
-		return ex_table_flag | BIG5_ENCODING;
+		return BIG5_ENCODING;
 	if (strcmp(s_table, "utf8") == 0 || strcmp(s_table, "utf-8") == 0)
-		return ex_table_flag | UTF8_ENCODING;
+		return UTF8_ENCODING;
 	if (strcmp(s_table, "unicode") == 0)
-		return ex_table_flag | UNICODE_ENCODING;
+		return UNICODE_ENCODING;
 	if (strcmp(s_table, "utf16be") == 0)
-		return ex_table_flag | UTF16BE_ENCODING;
+		return UTF16BE_ENCODING;
 	if (strcmp(s_table, "utf16le") == 0)
-		return ex_table_flag | UTF16LE_ENCODING;
+		return UTF16LE_ENCODING;
 	else
 		eDebug("[eDVBTextEncodingHandler] unsupported table in encoding.conf: %s. ", s_table);
-
 	return -1;
 }
 

@@ -439,12 +439,11 @@ std::string convertDVBUTF8(const unsigned char *data, int len, int table, int ts
 	//	data[8], data[9], data[10], data[11], data[12], data[13], data[14],
 	//	std::string((char*)data, len).c_str());
 
-
 	if (tsidonid)
 		encodingHandler.getTransponderDefaultMapping(tsidonid, table);
 
 	// first byte in strings may override general encoding table.
-	switch(data[0] | (table & NO_TABLEID))
+	switch(data[0])
 	{
 		case ISO8859_5 ... ISO8859_15:
 			// For Thai providers, encoding char is present but faulty.
@@ -499,15 +498,12 @@ std::string convertDVBUTF8(const unsigned char *data, int len, int table, int ts
 			++i;
 			table = UTF16LE_ENCODING;
 			break;
-		case HUFFMAN_ENCODING:
+		case 0x1F:
 			{
 				// Attempt to decode Freesat Huffman encoded string
 				std::string decoded_string = huffmanDecoder.decode(data, len);
-				if (!decoded_string.empty()){
-					table = HUFFMAN_ENCODING;
-					output = decoded_string;
-					break;
-				}
+				if (!decoded_string.empty())
+					return decoded_string;
 			}
 			++i;
 			eDebug("[convertDVBUTF8] failed to decode bbc freesat huffman");
@@ -531,18 +527,6 @@ std::string convertDVBUTF8(const unsigned char *data, int len, int table, int ts
 
 	switch(table)
 	{
-		case HUFFMAN_ENCODING:
-		{
-			if(output.empty()){
-				// Attempt to decode Freesat Huffman encoded string
-				std::string decoded_string = huffmanDecoder.decode(data, len);
-				if (!decoded_string.empty())
-					output = decoded_string;
-			}
-			if (!output.empty() && pconvertedLen)
-					*pconvertedLen += len;
-			break;
-		}
 		case UTF8_ENCODING:
 			output = std::string((char*)data + i, len - i);
 			if (pconvertedLen)
