@@ -140,14 +140,17 @@ class SelectImage(Screen):
 		currentSelected = self["list"].l.getCurrentSelection()
 		if "://" in currentSelected[0][1] or currentSelected[0][1] in ["Expander", "Waiter"]:
 			self["key_yellow"].setText("")
-			self["description"].setText("")
 		else:
 			self["key_yellow"].setText(_("Delete image"))
-			self["description"].setText(currentSelected[0][1])
 		if currentSelected[0][1] == "Waiter":
 			self["key_green"].setText("")
 		else:
-			self["key_green"].setText((_("Compress") if currentSelected[0][0] in self.expanded else _("Expand")) if currentSelected[0][1] == "Expander" else _("Flash Image"))
+			if currentSelected[0][1] == "Expander"
+				self["key_green"].setText(_("Compress") if currentSelected[0][0] in self.expanded else _("Expand"))
+				self["description"].setText("")
+			else
+				self["key_green"].setText(_("Flash Image"))
+				self["description"].setText(currentSelected[0][1])
 
 	def keyLeft(self):
 		self["list"].instance.moveSelection(self["list"].instance.pageUp)
