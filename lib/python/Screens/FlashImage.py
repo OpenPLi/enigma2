@@ -64,10 +64,9 @@ class SelectImage(Screen):
 			for file in [x for x in files if os.path.splitext(x)[1] == ".zip" and model in x]:
 				try:
 					if checkimagefiles([x.split(os.sep)[-1] for x in zipfile.ZipFile(file).namelist()]):
-						medium = path.split(os.sep)[-1]
-						if medium not in self.imagesList:
-							self.imagesList[medium] = {}
-						self.imagesList[medium][file] = { 'link': file, 'name': file.split(os.sep)[-1]}
+						if "Downloaded Images" not in self.imagesList:
+							self.imagesList["Downloaded Images"] = {}
+						self.imagesList["Downloaded Images"][file] = { 'link': file, 'name': file.split(os.sep)[-1]}
 				except:
 					pass
 
