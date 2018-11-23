@@ -33,6 +33,7 @@ class SelectImage(Screen):
 		self["key_green"] = StaticText()
 		self["key_yellow"] = StaticText()
 		self["key_blue"] = StaticText()
+		self["description"] = StaticText()
 		self["list"] = ChoiceList(list=[ChoiceEntryComponent('',((_("Retrieving image list - Please wait...")), "Waiter"))])
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "KeyboardInputActions", "MenuActions"],
@@ -140,8 +141,10 @@ class SelectImage(Screen):
 		currentSelected = self["list"].l.getCurrentSelection()
 		if "://" in currentSelected[0][1] or currentSelected[0][1] in ["Expander", "Waiter"]:
 			self["key_yellow"].setText("")
+			self["description"].setText("")
 		else:
 			self["key_yellow"].setText(_("Delete image"))
+			self["description"].setText(currentSelected[0][1])
 		if currentSelected[0][1] == "Waiter":
 			self["key_green"].setText("")
 		else:
