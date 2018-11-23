@@ -145,10 +145,10 @@ class SelectImage(Screen):
 		if currentSelected[0][1] == "Waiter":
 			self["key_green"].setText("")
 		else:
-			if currentSelected[0][1] == "Expander"
+			if currentSelected[0][1] == "Expander":
 				self["key_green"].setText(_("Compress") if currentSelected[0][0] in self.expanded else _("Expand"))
 				self["description"].setText("")
-			else
+			else:
 				self["key_green"].setText(_("Flash Image"))
 				self["description"].setText(currentSelected[0][1])
 
