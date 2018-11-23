@@ -436,11 +436,6 @@ std::string convertDVBUTF8(const unsigned char *data, int len, int table, int ts
 	bool ignore_tableid = false;
 	int convertedLen = 0;
 
-	//eDebug("[convertDVBUTF8] table=0x%02X tsidonid=0x%08X len=%d data[0..14]]=%02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X data=%s",
-	//	table, tsidonid, len,
-	//	data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7],
-	//	data[8], data[9], data[10], data[11], data[12], data[13], data[14],
-	//	std::string((char*)data, len).c_str());
 
 	if (tsidonid)
 		encodingHandler.getTransponderDefaultMapping(tsidonid, table);
@@ -638,6 +633,12 @@ std::string convertDVBUTF8(const unsigned char *data, int len, int table, int ts
 	if (convertedLen < len)
 		eDebug("[convertDVBUTF8] %d chars converted, and %d chars left..", convertedLen, len-convertedLen);
 	//eDebug("[convertDVBUTF8] table=0x%02X twochar=%d output:%s\n", table, useTwoCharMapping, output.c_str());
+
+	eDebug("[convertDVBUTF8] table=0x%02X tsid:onid=0x%X:0x%X data[0..14]=%s   output:%s\n",
+		table, (unsigned int)tsidonid >> 16, tsidonid & 0xFFFFU,
+		string_to_hex(std::string((char*)data, len < 15 ? len : 15)).c_str(),
+		output.c_str());
+
 	return output;
 }
 
@@ -901,4 +902,22 @@ std::string urlDecode(const std::string &s)
 		}
 	}
 	return res;
+}
+
+std::string string_to_hex(const std::string& input)
+{
+    static const char* const lut = "0123456789ABCDEF";
+    size_t len = input.length();
+
+    std::string output;
+    output.reserve(3 * len);
+    for (size_t i = 0; i < len; ++i)
+    {
+        const unsigned char c = input[i];
+        if (i)
+		output.push_back(' ');
+        output.push_back(lut[c >> 4]);
+        output.push_back(lut[c & 15]);
+    }
+    return output;
 }
