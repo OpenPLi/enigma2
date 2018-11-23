@@ -433,6 +433,7 @@ std::string convertDVBUTF8(const unsigned char *data, int len, int table, int ts
 	int i = 0;
 	int mask_no_tableid = 0;
 	std::string output = "";
+	bool ignore_tableid = false;
 
 	//eDebug("[convertDVBUTF8] table=0x%02X tsidonid=0x%08X len=%d data[0..14]]=%02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X data=%s",
 	//	table, tsidonid, len,
@@ -447,6 +448,13 @@ std::string convertDVBUTF8(const unsigned char *data, int len, int table, int ts
 		mask_no_tableid = MASK_NO_TABLEID;
 		table &= ~MASK_NO_TABLEID;
 	}
+
+	if (table >= 0 && (table & MASK_IGNORE_TABLEID)){
+		ignore_tableid = true;
+		table &= ~MASK_IGNORE_TABLEID;
+	}
+
+        int table_preset = table;
 
 	// first byte in strings may override general encoding table.
 	switch(data[0] | mask_no_tableid)
@@ -523,6 +531,10 @@ std::string convertDVBUTF8(const unsigned char *data, int len, int table, int ts
 			eDebug("[convertDVBUTF8] reserved %d", data[0]);
 			++i;
 			break;
+	}
+
+	if (ignore_tableid && table != UTF8_ENCODING) {
+		table = table_preset;
 	}
 
 	bool useTwoCharMapping = !table || (tsidonid && encodingHandler.getTransponderUseTwoCharMapping(tsidonid));

@@ -27,6 +27,7 @@
 #define HUFFMAN_ENCODING		0x1F
 
 #define MASK_NO_TABLEID			0x0800
+#define MASK_IGNORE_TABLEID		0x0100
 
 class eDVBTextEncodingHandler
 {
