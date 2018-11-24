@@ -149,7 +149,7 @@ def getPossibleSubservicesForCurrentChannel(current_service):
 			return ref_in_subservices_group[0]
 	return []
 
-def getActiveSubservicesForCurrentChannel(current_service, only_current=True):
+def getActiveSubservicesForCurrentChannel(current_service):
 	if current_service:
 		possibleSubservices = getPossibleSubservicesForCurrentChannel(current_service)
 		activeSubservices = []
@@ -157,20 +157,19 @@ def getActiveSubservicesForCurrentChannel(current_service, only_current=True):
 		idx = 0
 		for subservice in possibleSubservices:
 			events = epgCache.lookupEvent(['BDTS', (subservice, 0, -1)])
-			if events is not None and len(events) == 1:
+			if events and len(events) == 1:
 				event = events[0]
 				title = event[2]
-				starttime = datetime.datetime.fromtimestamp(event[0]).strftime('%H:%M')
-				endtime = datetime.datetime.fromtimestamp(event[0] + event[1]).strftime('%H:%M')
 				if title and "Sendepause" not in title:
+					starttime = datetime.datetime.fromtimestamp(event[0]).strftime('%H:%M')
+					endtime = datetime.datetime.fromtimestamp(event[0] + event[1]).strftime('%H:%M')
 					current_show_name = title + " " + str(starttime) + "-" + str(endtime)
 					activeSubservices.append((subservice, current_show_name))
-					if only_current:
-						if only_current != subservice:
-							idx += 1
-						elif idx:
-							return activeSubservices
 		return activeSubservices
+
+def hasActiveSubservicesForCurrentChannel(current_service):
+	activeSubservices = getActiveSubservicesForCurrentChannel(current_service)
+	return bool(activeSubservices and len(activeSubservices) > 1)
 
 class InfoBarDish:
 	def __init__(self):
@@ -2747,7 +2746,7 @@ class InfoBarSubserviceSelection:
 
 	def checkSubservicesAvail(self):
 		serviceRef = self.session.nav.getCurrentlyPlayingServiceReference()
-		if not serviceRef or not getActiveSubservicesForCurrentChannel(serviceRef.toString()):
+		if not serviceRef or not hasActiveSubservicesForCurrentChannel(serviceRef.toString()):
 			self["SubserviceQuickzapAction"].setEnabled(False)
 			self.bouquets = self.bsel = self.selectedSubservice = None
 
@@ -2764,7 +2763,7 @@ class InfoBarSubserviceSelection:
 
 	def changeSubservice(self, direction):
 		serviceRef = self.session.nav.getCurrentlyPlayingServiceReference()
-		subservices = serviceRef and getActiveSubservicesForCurrentChannel(serviceRef.toString(), False)
+		subservices = serviceRef and getActiveSubservicesForCurrentChannel(serviceRef.toString())
 		if subservices and len(subservices) > 1:
 			n = len(subservices)
 			selection = -1
@@ -2789,7 +2788,7 @@ class InfoBarSubserviceSelection:
 
 	def subserviceSelection(self):
 		serviceRef = self.session.nav.getCurrentlyPlayingServiceReference()
-		subservices = serviceRef and getActiveSubservicesForCurrentChannel(serviceRef.toString(), False)
+		subservices = serviceRef and getActiveSubservicesForCurrentChannel(serviceRef.toString())
 		if subservices and len(subservices) > 1:
 			self.bouquets = self.servicelist and self.servicelist.getBouquetList()
 			n = len(subservices)
