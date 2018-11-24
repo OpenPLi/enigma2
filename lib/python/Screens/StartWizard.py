@@ -85,6 +85,8 @@ class AutoInstallWizard(Screen):
 
 		import glob
 		autoinstallfiles = glob.glob('/media/*/backup/autoinstall%s' % open('/sys/class/net/eth0/address', 'r').readline().strip().replace(":", ""))
+		if not autoinstallfiles:
+			autoinstallfiles = glob.glob('/media/*/backup/autoinstall')
 		autoinstallfiles.sort(key=os.path.getmtime, reverse=True)
 		for autoinstallfile in autoinstallfiles:
 			self.packages = [x.strip() for x in open(autoinstallfile).readlines()]
