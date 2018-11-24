@@ -21,9 +21,6 @@ class SubservicesQuickzap(InfoBarBase, InfoBarShowHide, InfoBarMenu, \
 			x.__init__(self)
 		self.restoreService = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 		self.subservices = subservices
-		self.n = None
-		if self.subservices:
-			self.n = len(self.subservices)
 		self.__lastservice = self.currentlyPlayingSubservice = self.getSubserviceIndex(self.session.nav.getCurrentlyPlayingServiceReference())
 		self["CurrentSubserviceNumber"] = Label("")
 		self.currentSubserviceNumberLabel = self["CurrentSubserviceNumber"]
@@ -55,53 +52,31 @@ class SubservicesQuickzap(InfoBarBase, InfoBarShowHide, InfoBarMenu, \
 
 	def onLayoutFinished(self):
 		cur_num = self.currentlyPlayingSubservice
-		if cur_num is not None or cur_num != -1:
+		if cur_num:
 			self.currentSubserviceNumberLabel.setText(str(cur_num + 1))
 
 	def nextSubservice(self):
-		if self.n:
-			if self.currentlyPlayingSubservice >= self.n - 1:
-				self.playSubservice(0)
-			else:
-				self.playSubservice(self.currentlyPlayingSubservice + 1)
+		if self.subservices:
+			self.playSubservice((self.currentlyPlayingSubservice + 1) % len(self.subservices))
 
 	def previousSubservice(self):
-		if self.n:
-			if self.currentlyPlayingSubservice > self.n:
-				self.currentlyPlayingSubservice = self.n
-			if self.currentlyPlayingSubservice == 0:
-				self.playSubservice(self.n - 1)
-			else:
-				self.playSubservice(self.currentlyPlayingSubservice - 1)
+		if self.subservices:
+			self.playSubservice((self.currentlyPlayingSubservice - 1) % len(self.subservices))
 
 	def getSubserviceIndex(self, service):
-		if self.n is None or service is None:
-			return -1
-		for x in range(self.n):
-			try:
-				if service == eServiceReference(self.subservices[x][0]):
-					return x
-			except:
-				pass
-		return -1
+		if self.subservices and service and service.toString() in [x[1] for x in self.subservices]:
+			return [x[1] for x in self.subservices].index(service.toString())
 
 	def keyNumberGlobal(self, number):
 		if number == 0:
 			self.playSubservice(self.__lastservice)
-		elif self.n is not None and number <= self.n:
+		elif self.subservices and number <= len(self.subservices):
 			self.playSubservice(number - 1)
 
 	def showSelection(self):
-		tlist = []
-		n = self.n or 0
-		if n:
-			idx = 0
-			while idx < n:
-				i = self.subservices[idx]
-				tlist.append((i[1], idx))
-				idx += 1
-			keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "green", "yellow"] + [""] * n
-			self.session.openWithCallback(self.subserviceSelected, ChoiceBox, title=_("Please select a subservice..."), list=tlist, selection=self.currentlyPlayingSubservice, keys=keys, windowTitle=_("Subservices"))
+		if self.subservices:
+			keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "green", "yellow"] + [""] * (len(self.subservices) - 10)
+			self.session.openWithCallback(self.subserviceSelected, ChoiceBox, title=_("Please select a subservice..."), list=self.subservices, selection=self.currentlyPlayingSubservice, keys=keys, windowTitle=_("Subservices"))
 
 	def subserviceSelected(self, service):
 		if service:
@@ -119,7 +94,7 @@ class SubservicesQuickzap(InfoBarBase, InfoBarShowHide, InfoBarMenu, \
 
 	def playSubservice(self, number=0):
 		try:
-			newservice = eServiceReference(self.subservices[number][0])
+			newservice = eServiceReference(self.subservices[number][1])
 		except:
 			newservice = None
 		if newservice and newservice.valid():

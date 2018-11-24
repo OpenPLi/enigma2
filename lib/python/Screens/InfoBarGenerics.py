@@ -164,7 +164,7 @@ def getActiveSubservicesForCurrentChannel(current_service):
 					starttime = datetime.datetime.fromtimestamp(event[0]).strftime('%H:%M')
 					endtime = datetime.datetime.fromtimestamp(event[0] + event[1]).strftime('%H:%M')
 					current_show_name = title + " " + str(starttime) + "-" + str(endtime)
-					activeSubservices.append((subservice, current_show_name))
+					activeSubservices.append((current_show_name, subservice))
 		return activeSubservices
 
 def hasActiveSubservicesForCurrentChannel(current_service):
@@ -2763,22 +2763,11 @@ class InfoBarSubserviceSelection:
 
 	def changeSubservice(self, direction):
 		serviceRef = self.session.nav.getCurrentlyPlayingServiceReference()
-		subservices = serviceRef and getActiveSubservicesForCurrentChannel(serviceRef.toString())
-		if subservices and len(subservices) > 1:
-			n = len(subservices)
-			selection = -1
-			idx = 0
-			while idx < n:
-				if subservices[idx][0] == serviceRef.toString():
-					selection = idx
-					break
-				idx += 1
-			if selection != -1:
-				selection += direction
-				if selection >= n:
-					selection = 0
-				elif selection < 0:
-					selection = n - 1
+		if serviceRef:
+			subservices = getActiveSubservicesForCurrentChannel(serviceRef.toString())
+			if subservices and len(subservices) > 1 and serviceRef.toString() in [x[1] for x in subservices]:
+				selection = [x[1] for x in subservices].index(serviceRef.toString())
+				selection += direction % len(subservices)
 				try:
 					newservice = eServiceReference(subservices[selection][0])
 				except:
@@ -2788,30 +2777,21 @@ class InfoBarSubserviceSelection:
 
 	def subserviceSelection(self):
 		serviceRef = self.session.nav.getCurrentlyPlayingServiceReference()
-		subservices = serviceRef and getActiveSubservicesForCurrentChannel(serviceRef.toString())
-		if subservices and len(subservices) > 1:
-			self.bouquets = self.servicelist and self.servicelist.getBouquetList()
-			n = len(subservices)
-			selection = 0
-			if n and n > 0:
-				tlist = []
-				idx = 0
-				while idx < n:
-					i = subservices[idx][0]
-					if i == serviceRef.toString():
-						selection = idx
-					tlist.append((subservices[idx][1], i))
-					idx += 1
+		if serviceRef:
+			subservices = getActiveSubservicesForCurrentChannel(serviceRef.toString())
+			if subservices and len(subservices) > 1 and serviceRef.toString() in [x[1] for x in subservices]:
+				selection = [x[1] for x in subservices].index(serviceRef.toString())
+				self.bouquets = self.servicelist and self.servicelist.getBouquetList()
 				if self.bouquets and len(self.bouquets):
-					keys = ["red", "blue", "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" ] + [""] * n
+					keys = ["red", "blue", "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" ] + [""] * (len(subservices) - 10)
 					call_func_title = _("Add to favourites")
 					if config.usage.multibouquet.value:
 						call_func_title = _("Add to bouquet")
-						tlist = [(_("Quick zap"), "quickzap", subservices), (call_func_title, "CALLFUNC", self.addSubserviceToBouquetCallback), ("--", "")] + tlist
+						tlist = [(_("Quick zap"), "quickzap", subservices), (call_func_title, "CALLFUNC", self.addSubserviceToBouquetCallback), ("--", "")] + subservices
 					selection += 3
 				else:
-					tlist = [(_("Quick zap"), "quickzap", subservices), ("--", "")] + tlist
-					keys = ["red", "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" ] + [""] * n
+					tlist = [(_("Quick zap"), "quickzap", subservices), ("--", "")] + subservices
+					keys = ["red", "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" ] + [""] * (len(subservices) - 10)
 					selection += 2
 				self.session.openWithCallback(self.subserviceSelected, ChoiceBox, title=_("Please select a sub service..."), list=tlist, selection=selection, keys=keys, skin_name ="SubserviceSelection")
 
