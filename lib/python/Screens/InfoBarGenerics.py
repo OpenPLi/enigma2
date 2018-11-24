@@ -147,28 +147,30 @@ def getPossibleSubservicesForCurrentChannel(current_service):
 		ref_in_subservices_group = [x for x in subservice_groupslist if current_service in x]
 		if ref_in_subservices_group:
 			return ref_in_subservices_group[0]
-	return None
+	return []
 
-def getActiveSubservicesForCurrentChannel(possibleSubservices, only_current=False):
-	activeSubservices = []
-	epgCache = eEPGCache.getInstance()
-	idx = 0
-	for subservice in possibleSubservices:
-		events = epgCache.lookupEvent(['BDTS', (subservice, 0, -1)])
-		if events is not None and len(events) == 1:
-			event = events[0]
-			title = event[2]
-			starttime = datetime.datetime.fromtimestamp(event[0]).strftime('%H:%M')
-			endtime = datetime.datetime.fromtimestamp(event[0] + event[1]).strftime('%H:%M')
-			if title and "Sendepause" not in title:
-				current_show_name = title + " " + str(starttime) + "-" + str(endtime)
-				activeSubservices.append((subservice, current_show_name))
-				if only_current:
-					if only_current != subservice:
-						idx += 1
-					elif idx:
-						return activeSubservices
-	return activeSubservices
+def getActiveSubservicesForCurrentChannel(current_service, only_current=True):
+	if current_service:
+		possibleSubservices = getPossibleSubservicesForCurrentChannel(current_service)
+		activeSubservices = []
+		epgCache = eEPGCache.getInstance()
+		idx = 0
+		for subservice in possibleSubservices:
+			events = epgCache.lookupEvent(['BDTS', (subservice, 0, -1)])
+			if events is not None and len(events) == 1:
+				event = events[0]
+				title = event[2]
+				starttime = datetime.datetime.fromtimestamp(event[0]).strftime('%H:%M')
+				endtime = datetime.datetime.fromtimestamp(event[0] + event[1]).strftime('%H:%M')
+				if title and "Sendepause" not in title:
+					current_show_name = title + " " + str(starttime) + "-" + str(endtime)
+					activeSubservices.append((subservice, current_show_name))
+					if only_current:
+						if only_current != subservice:
+							idx += 1
+						elif idx:
+							return activeSubservices
+		return activeSubservices
 
 class InfoBarDish:
 	def __init__(self):
@@ -2745,22 +2747,9 @@ class InfoBarSubserviceSelection:
 
 	def checkSubservicesAvail(self):
 		serviceRef = self.session.nav.getCurrentlyPlayingServiceReference()
-		activeSubservice = False
-		if serviceRef:
-			refstr = serviceRef.toString()
-			possibleSubservices = getPossibleSubservicesForCurrentChannel(refstr)
-			if possibleSubservices:
-				activeSubservice = getActiveSubservicesForCurrentChannel(possibleSubservices, refstr)
-		if not activeSubservice:
+		if not serviceRef or not getActiveSubservicesForCurrentChannel(serviceRef.toString()):
 			self["SubserviceQuickzapAction"].setEnabled(False)
 			self.bouquets = self.bsel = self.selectedSubservice = None
-
-	def getAvailableSubservices(self, currentRef):
-		activeSubservices = None
-		possibleSubservices = getPossibleSubservicesForCurrentChannel(currentRef)
-		if possibleSubservices:
-			activeSubservices = getActiveSubservicesForCurrentChannel(possibleSubservices)
-		return activeSubservices
 
 	def nextSubservice(self):
 		self.changeSubservice(+1)
@@ -2775,7 +2764,7 @@ class InfoBarSubserviceSelection:
 
 	def changeSubservice(self, direction):
 		serviceRef = self.session.nav.getCurrentlyPlayingServiceReference()
-		subservices = serviceRef and self.getAvailableSubservices(serviceRef.toString()) or None
+		subservices = serviceRef and getActiveSubservicesForCurrentChannel(serviceRef.toString(), False)
 		if subservices and len(subservices) > 1:
 			n = len(subservices)
 			selection = -1
@@ -2800,7 +2789,7 @@ class InfoBarSubserviceSelection:
 
 	def subserviceSelection(self):
 		serviceRef = self.session.nav.getCurrentlyPlayingServiceReference()
-		subservices = serviceRef and self.getAvailableSubservices(serviceRef.toString()) or None
+		subservices = serviceRef and getActiveSubservicesForCurrentChannel(serviceRef.toString(), False)
 		if subservices and len(subservices) > 1:
 			self.bouquets = self.servicelist and self.servicelist.getBouquetList()
 			n = len(subservices)

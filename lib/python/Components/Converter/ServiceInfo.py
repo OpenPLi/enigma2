@@ -119,13 +119,8 @@ class ServiceInfo(Converter, object):
 		elif self.type == self.IS_NOT_WIDESCREEN:
 			return info.getInfo(iServiceInformation.sAspect) not in WIDESCREEN
 		elif self.type == self.SUBSERVICES_AVAILABLE:
-			refstr = ':'.join(info.getInfoString(iServiceInformation.sServiceref).split(':')[:11])
-			possibleSubservices = getPossibleSubservicesForCurrentChannel(refstr)
-			if possibleSubservices:
-				activeSubservice = getActiveSubservicesForCurrentChannel(possibleSubservices, refstr)
-				if activeSubservice and len(activeSubservice) > 1:
-					return True
-			return False
+			activeSubservice = getActiveSubservicesForCurrentChannel(':'.join(info.getInfoString(iServiceInformation.sServiceref).split(':')[:11]))
+			return bool(activeSubservice and len(activeSubservice) > 1)
 		elif self.type == self.HAS_HBBTV:
 			return info.getInfoString(iServiceInformation.sHBBTVUrl) != ""
 		elif self.type == self.AUDIOTRACKS_AVAILABLE:
