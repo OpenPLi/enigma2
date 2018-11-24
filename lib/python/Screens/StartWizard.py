@@ -84,9 +84,10 @@ class AutoInstallWizard(Screen):
 		self.counter = 0
 
 		import glob
-		autoinstallfiles = glob.glob('/media/*/backup/autoinstall%s' % open('/sys/class/net/eth0/address', 'r').readline().strip().replace(":", ""))
+		mac_address = open('/sys/class/net/eth0/address', 'r').readline().strip().replace(":", "")
+		autoinstallfiles = glob.glob('/media/*/backup/autoinstall%s' % mac_address) + glob.glob('/media/net/*/backup/autoinstall%s' % mac_address)
 		if not autoinstallfiles:
-			autoinstallfiles = glob.glob('/media/*/backup/autoinstall')
+			autoinstallfiles = glob.glob('/media/*/backup/autoinstall') + glob.glob('/media/net/*/backup/autoinstall')
 		autoinstallfiles.sort(key=os.path.getmtime, reverse=True)
 		for autoinstallfile in autoinstallfiles:
 			self.packages = [x.strip() for x in open(autoinstallfile).readlines()]
