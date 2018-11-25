@@ -25,37 +25,27 @@ class ScrollLabel(GUIComponent):
 		if self.skinAttributes:
 			widget_attribs = []
 			scrollbar_attribs = []
+			scrollbarAttrib = ["borderColor", "borderWidth", "scrollbarSliderForegroundColor", "scrollbarSliderBorderColor", "scrollbarSliderPicture", "scrollbarBackgroundPicture"]
 			for (attrib, value) in self.skinAttributes:
-				if "borderColor" in attrib or "borderWidth" in attrib:
-					scrollbar_attribs.append((attrib,value))
-				if "transparent" in attrib or "backgroundColor" in attrib:
-					widget_attribs.append((attrib,value))
-				if "scrollbarSliderForegroundColor" in attrib:
-					scrollbar_attribs.append((attrib,value))
+				if attrib in scrollbarAttrib:
+					scrollbar_attribs.append((attrib, value))
 					self.skinAttributes.remove((attrib, value))
-				if "scrollbarSliderBorderColor" in attrib:
-					scrollbar_attribs.append((attrib,value))
-					self.skinAttributes.remove((attrib, value))
-				if "scrollbarSliderPicture" in attrib:
-					scrollbar_attribs.append((attrib,value))
-					self.skinAttributes.remove((attrib, value))
-				if "scrollbarBackgroundPicture" in attrib:
-					scrollbar_attribs.append((attrib,value))
-					self.skinAttributes.remove((attrib, value))
-				if "scrollbarWidth" in attrib:
-					scrollbarWidth = int(value)
-					self.skinAttributes.remove((attrib, value))
-				if "scrollbarSliderBorderWidth" in attrib:
-					scrollbarBorderWidth = int(value)
-					self.skinAttributes.remove((attrib, value))
-				if "split" in attrib:
+				elif "transparent" in attrib or "backgroundColor" in attrib:
+					widget_attribs.append((attrib, value))
+				elif "scrollbarWidth" in attrib:
+ 					scrollbarWidth = int(value)
+ 					self.skinAttributes.remove((attrib, value))
+ 				elif "scrollbarSliderBorderWidth" in attrib:
+ 					scrollbarBorderWidth = int(value)
+ 					self.skinAttributes.remove((attrib, value))
+ 				elif "split" in attrib:
 					self.split = int(value)
 					if self.split:
 						self.right_text = eLabel(self.instance)
 					self.skinAttributes.remove((attrib, value))	
-				if "colposition" in attrib:
+				elif "colposition" in attrib:
 					self.column = int(value)
-				if "dividechar" in attrib:
+				elif "dividechar" in attrib:
 					self.splitchar = value
 			if self.split:
 				skin.applyAllAttributes(self.long_text, desktop, self.skinAttributes + [("halign", "left")], parent.scale)
