@@ -2189,7 +2189,6 @@ class InfoBarExtensions:
 				else:
 					extensionsList.remove(extension)
 		list.extend([(x[0](), x) for x in extensionsList])
-		keys += [""] * len(extensionsList)
 		self.session.openWithCallback(self.extensionCallback, ChoiceBox, title=_("Please choose an extension..."), list=list, keys=keys, skin_name="ExtensionsList", reorderConfig="extension_order", windowTitle=_("Extensions menu"))
 
 	def extensionCallback(self, answer):
@@ -2783,7 +2782,7 @@ class InfoBarSubserviceSelection:
 				selection = [x[1] for x in subservices].index(serviceRef.toString())
 				self.bouquets = self.servicelist and self.servicelist.getBouquetList()
 				if self.bouquets and len(self.bouquets):
-					keys = ["red", "blue", "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" ] + [""] * (len(subservices) - 10)
+					keys = ["red", "blue", "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 					call_func_title = _("Add to favourites")
 					if config.usage.multibouquet.value:
 						call_func_title = _("Add to bouquet")
@@ -2791,7 +2790,7 @@ class InfoBarSubserviceSelection:
 					selection += 3
 				else:
 					tlist = [(_("Quick zap"), "quickzap", subservices), ("--", "")] + subservices
-					keys = ["red", "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" ] + [""] * (len(subservices) - 10)
+					keys = ["red", "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 					selection += 2
 				self.session.openWithCallback(self.subserviceSelected, ChoiceBox, title=_("Please select a sub service..."), list=tlist, selection=selection, keys=keys, skin_name ="SubserviceSelection")
 

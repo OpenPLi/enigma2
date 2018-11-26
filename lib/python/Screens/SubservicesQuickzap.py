@@ -75,7 +75,7 @@ class SubservicesQuickzap(InfoBarBase, InfoBarShowHide, InfoBarMenu, \
 
 	def showSelection(self):
 		if self.subservices:
-			keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "green", "yellow"] + [""] * (len(self.subservices) - 10)
+			keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "green", "yellow"]
 			self.session.openWithCallback(self.subserviceSelected, ChoiceBox, title=_("Please select a subservice..."), list=self.subservices, selection=self.currentlyPlayingSubservice, keys=keys, windowTitle=_("Subservices"))
 
 	def subserviceSelected(self, service):
