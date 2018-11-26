@@ -449,14 +449,13 @@ class MultibootSelection(SelectImage):
 				self.ContainterFallback()
 			else:
 				os.mkdir('/tmp/startupmount')
-				self.container.ePopen('mount /dev/mmcblk0p1 /tmp/startupmount', self.ContainterFallback)
+				self.container.ePopen('mount /dev/%sp1 /tmp/startupmount' % SystemInfo["canMultiBoot"][2], self.ContainterFallback)
 
 	def ContainterFallback(self, data=None, retval=None, extra_args=None):
 		self.container.killAll()
 		slot = self.currentSelected[0][1]
 		model = HardwareInfo().get_machine_name()
-		if 'coherent_poll=2M' in open("/proc/cmdline", "r").read():
-			#when Gigablue do something else... this needs to be improved later!!! It even looks that the GB method is better :)
+		if SystemInfo["canMultiBoot"][3]:
 			shutil.copyfile("/tmp/startupmount/STARTUP_%s" % slot, "/tmp/startupmount/STARTUP")
 		else:
 			if slot < 12:
