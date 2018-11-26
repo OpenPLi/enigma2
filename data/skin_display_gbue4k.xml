@@ -161,16 +161,16 @@
 	</screen>
 
 	<screen name="StandbySummary" position="0,0" size="220,176" backgroundColor="GBLcdBlack">
-		<widget source="global.CurrentTime" render="Label" position="0,45" size="170,61" font="GBLcd;60" halign="right" foregroundColor="GBLcdGrey" backgroundColor="GBLcdBlack">
+		<widget source="global.CurrentTime" render="Label" position="0,25" size="165,61" font="GBLcd;60" halign="right" foregroundColor="GBLcdGrey" backgroundColor="GBLcdBlack">
 			<convert type="ClockToText"/>
 		</widget>
-		<widget source="session.RecordState" render="FixedLabel" text="REC" position="171,49" size="44,27" font="GBLcd;25" foregroundColor="GBLcdRed" backgroundColor="GBLcdBlack" halign="right">
+		<widget source="session.RecordState" render="FixedLabel" text="REC" position="166,29" size="44,27" font="GBLcd;25" foregroundColor="GBLcdRed" backgroundColor="GBLcdBlack" halign="right">
 				<convert type="ConditionalShowHide"/>
 		</widget>
-		<widget source="global.CurrentTime" render="Label" position="171,74" size="49,32" font="GBLcd;30" foregroundColor="GBLcdGrey" backgroundColor="GBLcdBlack">
+		<widget source="global.CurrentTime" render="Label" position="166,54" size="49,32" font="GBLcd;30" foregroundColor="GBLcdGrey" backgroundColor="GBLcdBlack">
 			<convert type="ClockToText">Format::%S</convert>
 		</widget>
-		<widget source="global.CurrentTime" render="Label" position="0,108" size="220,25" font="GBLcd;20" halign="center" foregroundColor="GBLcdGrey" backgroundColor="GBLcdBlack">
+		<widget source="global.CurrentTime" render="Label" position="0,88" size="220,60" font="GBLcd;25" halign="center" foregroundColor="GBLcdGrey" backgroundColor="GBLcdBlack">
 			<convert type="ClockToText">LongDate</convert>
 		</widget>
 	</screen>
