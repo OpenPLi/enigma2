@@ -31,7 +31,6 @@ class Language:
 		self.addLanguage("Français",	"fr", "FR", "ISO-8859-15")
 		self.addLanguage("Frysk",	"fy", "NL", "ISO-8859-15")
 		self.addLanguage("Hebrew",	"he", "IL", "ISO-8859-15")
-		self.addLanguage("TChinese",	"hk", "HK", "UTF-8")
 		self.addLanguage("Hrvatski",	"hr", "HR", "ISO-8859-15")
 		self.addLanguage("Magyar",	"hu", "HU", "ISO-8859-15")
 		self.addLanguage("Indonesian",	"id", "ID", "ISO-8859-15")
@@ -56,6 +55,7 @@ class Language:
 		self.addLanguage("Türkçe",	"tr", "TR", "ISO-8859-15")
 		self.addLanguage("Українська",	"uk", "UA", "ISO-8859-15")
 		self.addLanguage("SChinese",	"zh", "CN", "UTF-8")
+		self.addLanguage("TChinese",	"zh", "HK", "UTF-8")
 
 		self.callbacks = []
 
