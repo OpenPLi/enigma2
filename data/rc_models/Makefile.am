@@ -11,4 +11,4 @@ dist_install_DATA = \
 	amiko1.xml et6x00.xml et9500.xml et7x00.xml vuduo2.xml vu.xml vu2.xml formuler1.xml hd2400.xml hd-gen.xml \
 	vs1x00.xml xsarius.xml xsarius.png wetekplay.xml osmini.xml zgemma.xml miraclebox.xml miraclebox2.xml \
 	spycat.xml xpeedlx.xml et7000mini.png et7000mini.xml revo4k.xml sab.xml sh1.xml i55.xml qviart.xml \
-	h9.xml gb7252.xml e4hd.xml edision2.xml edision3.xml edision4.xml hd60.xml
+	gb7252.xml e4hd.xml edision2.xml edision3.xml edision4.xml hd60.xml
