@@ -59,6 +59,10 @@ public:
 		No_Stream_Id_Filter = NO_STREAM_ID_FILTER
 	};
 
+	enum {
+		PLS_Default_Gold_Code, PLS_Default_Root_Code
+	};
+
 	bool no_rotor_command_on_tune;
 	unsigned int frequency, symbol_rate;
 	int polarisation, fec, inversion, orbital_position, system, modulation, rolloff, pilot, is_id, pls_mode, pls_code;

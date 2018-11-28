@@ -27,7 +27,7 @@ class Tuner:
 			else:
 				parm.is_id = eDVBFrontendParametersSatellite.No_Stream_Id_Filter
 				parm.pls_mode = eDVBFrontendParametersSatellite.PLS_Gold
-				parm.pls_code = 0 # default gold PLS code
+				parm.pls_code = eDVBFrontendParametersSatellite.PLS_Default_Gold_Code
 			self.tuneSatObj(parm)
 
 	def tuneSatObj(self, transponderObj):
