@@ -95,7 +95,7 @@ void eDVBFrontendParametersSatellite::set(const S2SatelliteDeliverySystemDescrip
 	}
 	else // default DVB-S2 physical layer scrambling sequence of index n = 0 is used
 	{
-		is_id = NO_STREAM_ID_FILTER;
+		is_id = eDVBFrontendParametersSatellite::No_Stream_Id_Filter;
 		pls_mode = eDVBFrontendParametersSatellite::PLS_Gold;
 		pls_code = eDVBFrontendParametersSatellite::PLS_Default_Gold_Code;
 	}
@@ -125,7 +125,7 @@ void eDVBFrontendParametersSatellite::set(const SatelliteDeliverySystemDescripto
 		modulation = Modulation_QPSK;
 	}
 	rolloff = descriptor.getRollOff();
-	is_id = NO_STREAM_ID_FILTER;
+	is_id = eDVBFrontendParametersSatellite::No_Stream_Id_Filter;
 	pls_mode = eDVBFrontendParametersSatellite::PLS_Gold;
 	pls_code = eDVBFrontendParametersSatellite::PLS_Default_Gold_Code;
 	if (system == System_DVB_S2)

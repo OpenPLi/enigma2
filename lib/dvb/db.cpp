@@ -465,7 +465,7 @@ static ePtr<eDVBFrontendParameters> parseFrontendData(char* line, int version)
 				modulation=eDVBFrontendParametersSatellite::Modulation_QPSK,
 				rolloff=eDVBFrontendParametersSatellite::RollOff_alpha_0_35,
 				pilot=eDVBFrontendParametersSatellite::Pilot_Unknown,
-				is_id = NO_STREAM_ID_FILTER,
+				is_id = eDVBFrontendParametersSatellite::No_Stream_Id_Filter,
 				pls_code = eDVBFrontendParametersSatellite::PLS_Default_Gold_Code,
 				pls_mode = eDVBFrontendParametersSatellite::PLS_Gold;
 			sscanf(line+2, "%d:%d:%d:%d:%d:%d:%d:%d:%d:%d:%d:%d:%d:%d",
@@ -1379,7 +1379,7 @@ PyObject *eDVBDB::readSatellites(ePyObject sat_list, ePyObject sat_dict, ePyObje
 				inv = eDVBFrontendParametersSatellite::Inversion_Unknown;
 				pilot = eDVBFrontendParametersSatellite::Pilot_Unknown;
 				rolloff = eDVBFrontendParametersSatellite::RollOff_alpha_0_35;
-				is_id = NO_STREAM_ID_FILTER;
+				is_id = eDVBFrontendParametersSatellite::No_Stream_Id_Filter;
 				pls_code = eDVBFrontendParametersSatellite::PLS_Default_Gold_Code;
 				pls_mode = eDVBFrontendParametersSatellite::PLS_Gold;
 				tsid = -1;
