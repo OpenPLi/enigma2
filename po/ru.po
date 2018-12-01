@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-27 22:08+0200\n"
+"POT-Creation-Date: 2018-12-01 11:52+0330\n"
 "PO-Revision-Date: 2018-05-02 18:32+0300\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: openPLi Dimitrij\n"
@@ -1215,6 +1215,7 @@ msgstr "Авто проигрывание blu-ray файла"
 msgid "Auto scart switching"
 msgstr "Автоматическое переключение SCART"
 
+#, python-format
 msgid "Autoinstalling %s"
 msgstr "Авто инсталляция %s"
 
@@ -1518,6 +1519,9 @@ msgstr "Cameroon"
 
 msgid "Can be used for different fps between external subtitles and video."
 msgstr "Может быть использован для различных fps (набора кадров в секунду) между внешними субтитрами и видео."
+
+msgid "Can only find a network drive to store the backup this means after the flash the autorestore will not work. Alternativaly you can mount the network drive after the flash and perform a manufacurer reset to autorestore"
+msgstr ""
 
 msgid "Canada"
 msgstr "Canada"
@@ -2174,7 +2178,8 @@ msgstr "Консоль"
 msgid "Constellation & FFT mode"
 msgstr "Модуляция & FFT режим"
 
-msgid "Consult your Unicable device spec sheet for this information."
+#, fuzzy
+msgid "Consult your SCR device spec sheet for this information."
 msgstr "Для получения этой информации обратитесь к спецификаци этого Unicable устройства."
 
 msgid "Consult your motor's spec sheet for this information, or leave the default setting."
@@ -3081,6 +3086,10 @@ msgstr "Версия энигмы: "
 msgid "Enigma2 skin selector"
 msgstr "Выбор скинов Enigma2"
 
+#, fuzzy
+msgid "Enter"
+msgstr "центр"
+
 msgid "Enter IP address"
 msgstr "Ввод IP-адреса"
 
@@ -3104,6 +3113,10 @@ msgstr "Ввод постоянного PIN-кода"
 
 msgid "Enter pin code"
 msgstr "Ввод PIN-кода"
+
+#, fuzzy
+msgid "Enter text and exit"
+msgstr "Сохранить и выйти"
 
 msgid "Enter the frequency at which you LNB switches between low band and high band. For more information consult the spec sheet of your LNB."
 msgstr "Введите частоту, с которой LNB переключается между низкими и высокими частотами диапазона. Для получения дополнительной информации смотрите спецификацию вашего LNB."
@@ -3631,8 +3644,8 @@ msgstr "Полный экран"
 msgid "Full transparency"
 msgstr "Полная прозрачность"
 
-msgid "Fulview resulution"
-msgstr "Полное разрешение просмотра"
+msgid "Full view resolution"
+msgstr "Полноэкранный режим"
 
 msgid "Function of OK button"
 msgstr "Функция кнопки OK"
@@ -3828,9 +3841,6 @@ msgstr "H"
 msgid "HD list"
 msgstr "HD лист"
 
-msgid "HD11/HD51/HD1100/HD1200/HD1265/HD1500/HD500C/HD530C/VS1000/VS1500/et7x00/et8500/et7000mini"
-msgstr "HD11/HD51/HD1100/HD1200/HD1265/HD1500/HD500C/HD530C/VS1000/VS1500/et7x00/et8500/et7000mini"
-
 msgid "HD2400"
 msgstr "HD2400"
 
@@ -3863,6 +3873,10 @@ msgstr "HDR10"
 
 msgid "HDR10 support"
 msgstr "HDR10 поддержка"
+
+#, fuzzy
+msgid "HDx1/HD1xxx/HD5x0C/VS1x00/et7x00/et8500/et7000mini"
+msgstr "HD11/HD51/HD1100/HD1200/HD1265/HD1500/HD500C/HD530C/VS1000/VS1500/et7x00/et8500/et7000mini"
 
 msgid "HELP"
 msgstr "HELP"
@@ -5400,7 +5414,8 @@ msgstr "При валидных ONID, игнорировать частотну�
 msgid "One"
 msgstr "Один"
 
-msgid "Only change this setting if you are using a Unicable device that has been reprogrammed with a custom programmer. For further information check with the person that reprogrammed the device."
+#, fuzzy
+msgid "Only change this setting if you are using a SCR device that has been reprogrammed with a custom programmer. For further information check with the person that reprogrammed the device."
 msgstr "Измените этот параметр только в том случае, если Dы используете устройство Unicable, которое было перепрограммировано с помощью специального программиста. Для получения дополнительной информации обратитесь к человеку, который перепрограммировал устройство."
 
 msgid "Only extensions."
@@ -6711,9 +6726,6 @@ msgstr "Сохранить и рестарт таймшифта"
 msgid "Save and stop timeshift"
 msgstr "Сохранить и остановить таймшифт"
 
-msgid "Save any text changes and exit"
-msgstr "Сохранить изменения текста и выйти"
-
 msgid "Save changes"
 msgstr "Сохранить изменения"
 
@@ -6876,7 +6888,8 @@ msgstr "Выберите '1.0' для стандартных committed пере�
 msgid "Select 'A' or 'B' if your aerial system requires this, otherwise select 'none'. If you are unsure select 'none'."
 msgstr "Выберите 'A' или 'B', если Ваша система требует этого, в остальных случаях выберите 'ничего'."
 
-msgid "Select 'Unicable' if this tuner will use a Unicable device. For all other setups select 'FBC automatic'."
+#, fuzzy
+msgid "Select 'FBC SCR' if this tuner will connect to a SCR (Unicable/JESS) device. For all other setups select 'FBC automatic'."
 msgstr "Выберите 'Unicable' ,если Ваш тюнер испрользует устройство Unicable. В остальных случаях используйте 'FBC автоматически'."
 
 msgid "Select 'band' if using a 'universal' LNB, otherwise consult your LNB spec sheet."
@@ -6891,7 +6904,8 @@ msgstr "Выберите 'поляризация' при использован�
 msgid "Select 'provider' to scan from the predefined list of cable multiplexes. Select 'bands' to only scan certain parts of the spectrum. Select 'steps' to scan in steps of a particular frequency bandwidth."
 msgstr "Выберите 'ппровайдер' для сканирования из предопределенного списка кабельных мультиплексов. Выберите 'диапазоны' для сканирования только определенных частей спектра. Выберите 'шаги' для сканирования с шагом определенной полосы частот."
 
-msgid "Select 'yes' if this tuner is connected to the Unicable device through another tuner, otherwise select 'no'."
+#, fuzzy
+msgid "Select 'yes' if this tuner is connected to the SCR device through another tuner, otherwise select 'no'."
 msgstr "Выберите 'да' ,что бы"
 
 msgid "Select 'yes' to choose what bands or step sizes will be scanned."
@@ -7051,23 +7065,32 @@ msgstr "Выбор способа сортировки:"
 msgid "Select target folder"
 msgstr "Выбрать целевую папку"
 
-msgid "Select the Unicable channel to be assigned to this tuner. This is a unique value. Be certain that no other device connected to this same Unicable system is allocated to the same Unicable channel."
-msgstr "Выберите канал Unicable, который будет назначен этому тюнеру. Это уникальное значение."
+msgid "Select the User Band channel to be assigned to this tuner. This is an index into the table of frequencies the SCR switch or SCR LNB uses to pass the requested transponder to the tuner."
+msgstr ""
+
+msgid "Select the User Band frequency to be assigned to this tuner. This is the frequency the SCR switch or SCR LNB uses to pass the requested transponder to the tuner."
+msgstr ""
+
+msgid "Select the User Band to be assigned to this tuner. This is an index into the table of frequencies the SCR switch or SCR LNB uses to pass the requested tranponder to the tuner."
+msgstr ""
 
 msgid "Select the character or action under the virtual keyboard cursor"
 msgstr "Выберите символ или действие под курсором виртуальной клавиатуры"
 
-msgid "Select the format of your Unicable device. Choices are 'SCR Unicable' (Unicable I format), or 'SCR JESS' (Unicable II format)."
-msgstr "Выберите формат Вашего Unicable устройства . Возможные варианты - 'SCR Unicable' (Unicable I) или 'SCR JESS' (Unicable II)."
-
-msgid "Select the manufacturer of your Unicable device. If the manufacturer is not listed, set 'SCR' to 'user defined' and enter the device parameters manually according to its spec sheet."
+#, fuzzy
+msgid "Select the manufacturer of your SCR device. If the manufacturer is not listed, set 'SCR' to 'user defined' and enter the device parameters manually according to its spec sheet."
 msgstr "Выберите производителя Вашего Unicable устройства."
 
-msgid "Select the model number of your Unicable device. If the model number is not listed, set 'SCR' to 'user defined' and enter the device parameters manually according to its spec sheet."
+#, fuzzy
+msgid "Select the model number of your SCR device. If the model number is not listed, set 'SCR' to 'user defined' and enter the device parameters manually according to its spec sheet."
 msgstr "Выберите номер модели Вашего Unicable устройства."
 
 msgid "Select the movie path"
 msgstr "выбрать путь к видео"
+
+#, fuzzy
+msgid "Select the protocol used by your SCR device. Choices are 'SCR Unicable' (Unicable), or 'SCR JESS' (JESS, also known as Unicable II)."
+msgstr "Выберите формат Вашего Unicable устройства . Возможные варианты - 'SCR Unicable' (Unicable I) или 'SCR JESS' (Unicable II)."
 
 msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr "Выберите спутник, который подключен к порту A вашего коммутатора."
@@ -7093,13 +7116,15 @@ msgstr "Выберите тюнер для контроля над мотопо�
 msgid "Select the tuner that this loopthrough depends on."
 msgstr "Выберите тюнер для петлевого входа."
 
-msgid "Select the tuner to which the signal cable of the Unicable device is connected."
+#, fuzzy
+msgid "Select the tuner to which the signal cable of the SCR device is connected."
 msgstr "Выберите тюнер, к которому подключен кабель Unicable устройства."
 
 msgid "Select the type of LNB/device being used (normally 'Universal'). If your LNB type is not available select 'user defined'."
 msgstr "Выберите тип используемого LNB/устройства (обычно 'Универсальный'). Если ваш тип LNB недоступен, выберите 'Пользовательский вариант'."
 
-msgid "Select the type of Unicable device you are using."
+#, fuzzy
+msgid "Select the type of Single Cable Reception device you are using."
 msgstr "Выберите тип используемого устройства Unicable."
 
 msgid "Select the virtual keyboard locale from a menu"
@@ -7668,6 +7693,10 @@ msgstr "Долгота по сайту"
 
 msgid "Skin"
 msgstr "Выбор скина"
+
+#, python-format
+msgid "Skin & Resolution: %s (%sx%s)\n"
+msgstr ""
 
 msgid "Skins"
 msgstr "Скины"
@@ -8483,6 +8512,14 @@ msgstr "%s доступных обновлений для вашего реси�
 
 msgid "There are currently no outstanding actions."
 msgstr "В текущий момент нет выдающихся действий."
+
+#, fuzzy
+msgid "There are no saved playlists to delete!"
+msgstr "Пожалуйста, выберите плейлист для удаления..."
+
+#, fuzzy
+msgid "There are no saved playlists to load!"
+msgstr "удалить сохраненный плейлист"
 
 msgid "There are no updates available."
 msgstr "Нет доступных обновлений."
@@ -10152,7 +10189,7 @@ msgstr "Таймер - переключено на сервис %s!"
 msgid "Zgemma H.S/H.2S/H.2H/H5/H7"
 msgstr "Zgemma H.S/H.2S/H.2H/H5/H7"
 
-msgid "Zgemma H9"
+msgid "Zgemma H9/i55 Plus"
 msgstr ""
 
 msgid "Zgemma Star S/2S/H1/H2"
@@ -11328,6 +11365,3 @@ msgstr "переключено"
 
 msgid "®"
 msgstr "®"
-
-msgid "Full view resolution"
-msgstr "Полноэкранный режим"
