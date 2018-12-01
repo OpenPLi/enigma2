@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-27 22:08+0200\n"
+"POT-Creation-Date: 2018-12-01 11:52+0330\n"
 "PO-Revision-Date: 2018-11-13 08:52+0100\n"
 "Last-Translator: mcfly82\n"
 "Language-Team: mcfly82 & wysless\n"
@@ -1510,6 +1510,9 @@ msgstr "Kamerun"
 msgid "Can be used for different fps between external subtitles and video."
 msgstr "Ha a film és a felirat eltérő FPS-el rendelkeznek, akkor itt adható ez meg a felirat számára."
 
+msgid "Can only find a network drive to store the backup this means after the flash the autorestore will not work. Alternativaly you can mount the network drive after the flash and perform a manufacurer reset to autorestore"
+msgstr ""
+
 msgid "Canada"
 msgstr "Kanada"
 
@@ -2165,7 +2168,8 @@ msgstr "Konzol"
 msgid "Constellation & FFT mode"
 msgstr "Konstelláció és FFT mód"
 
-msgid "Consult your Unicable device spec sheet for this information."
+#, fuzzy
+msgid "Consult your SCR device spec sheet for this information."
 msgstr "Ezen információhoz nézze meg az Unicable eszköz technikai adatlapját."
 
 msgid "Consult your motor's spec sheet for this information, or leave the default setting."
@@ -3069,6 +3073,10 @@ msgstr "Kezelőfelület verzió: "
 msgid "Enigma2 skin selector"
 msgstr "Kinézet választó"
 
+#, fuzzy
+msgid "Enter"
+msgstr "középre"
+
 msgid "Enter IP address"
 msgstr "Adja meg az IP címet"
 
@@ -3092,6 +3100,10 @@ msgstr "Adja meg a tartós PIN-kódot"
 
 msgid "Enter pin code"
 msgstr "Adja meg a PIN-kódot"
+
+#, fuzzy
+msgid "Enter text and exit"
+msgstr "Szöveg változások elvetése és kilépés"
 
 msgid "Enter the frequency at which you LNB switches between low band and high band. For more information consult the spec sheet of your LNB."
 msgstr "Adja meg a frekvenciát, ahol a fej vált az alsó és a felső sáv között. További információért nézze meg a fej technikai adatlapját."
@@ -3812,9 +3824,6 @@ msgstr "H"
 msgid "HD list"
 msgstr "HD csatornák"
 
-msgid "HD11/HD51/HD1100/HD1200/HD1265/HD1500/HD500C/HD530C/VS1000/VS1500/et7x00/et8500/et7000mini"
-msgstr "HD11/HD51/HD1100/HD1200/HD1265/HD1500/HD500C/HD530C/VS1000/VS1500/et7x00/et8500/et7000mini"
-
 msgid "HD2400"
 msgstr "HD2400"
 
@@ -3847,6 +3856,10 @@ msgstr "HDR10"
 
 msgid "HDR10 support"
 msgstr "HDR10 támogatás"
+
+#, fuzzy
+msgid "HDx1/HD1xxx/HD5x0C/VS1x00/et7x00/et8500/et7000mini"
+msgstr "HD11/HD51/HD1100/HD1200/HD1265/HD1500/HD500C/HD530C/VS1000/VS1500/et7x00/et8500/et7000mini"
 
 msgid "HELP"
 msgstr "SEGÍTSÉG"
@@ -5386,7 +5399,8 @@ msgstr "Érvényes ONID-k esetén a frekvencia alhálózat-rész figyelmen kív�
 msgid "One"
 msgstr "Egy"
 
-msgid "Only change this setting if you are using a Unicable device that has been reprogrammed with a custom programmer. For further information check with the person that reprogrammed the device."
+#, fuzzy
+msgid "Only change this setting if you are using a SCR device that has been reprogrammed with a custom programmer. For further information check with the person that reprogrammed the device."
 msgstr "Csak akkor változtassa meg ez a beállítást, ha olyan Unicable eszközt használ, amely egy egyedi programozóval újra lett programozva. További információkért keresse fel az újraprogramozást végző személyt."
 
 msgid "Only extensions."
@@ -6693,9 +6707,6 @@ msgstr "Mentés és időcsúsztatás újraindítása"
 msgid "Save and stop timeshift"
 msgstr "Mentés és időcsúsztatás leállítása"
 
-msgid "Save any text changes and exit"
-msgstr "Szöveg változásainak mentése és kilépés"
-
 msgid "Save changes"
 msgstr "Változások mentése"
 
@@ -6855,7 +6866,8 @@ msgstr "Válassza az '1.0'-t a hagyományos elkötelezett kapcsolókhoz, '1.1'-e
 msgid "Select 'A' or 'B' if your aerial system requires this, otherwise select 'none'. If you are unsure select 'none'."
 msgstr "Válassza az 'A'-t vagy 'B'-t, amennyiben a földfelszíni rendszere megköveteli, egyéb esetben pedig a 'nincs'-et. Ha bizonytalan, akkor is válassza a 'nincs'-et."
 
-msgid "Select 'Unicable' if this tuner will use a Unicable device. For all other setups select 'FBC automatic'."
+#, fuzzy
+msgid "Select 'FBC SCR' if this tuner will connect to a SCR (Unicable/JESS) device. For all other setups select 'FBC automatic'."
 msgstr "Válassza az 'Unicable'-t, ha az ön tunere Unicable eszközhöz csatlakozik. Minden egyéb összeállítás esetén válassza az 'FCB automata'-t."
 
 msgid "Select 'band' if using a 'universal' LNB, otherwise consult your LNB spec sheet."
@@ -6870,7 +6882,8 @@ msgstr "Válassza a 'polarizáció'-t ha 'univerzális' fejet használ, egyéb e
 msgid "Select 'provider' to scan from the predefined list of cable multiplexes. Select 'bands' to only scan certain parts of the spectrum. Select 'steps' to scan in steps of a particular frequency bandwidth."
 msgstr "Válassza a 'szolgáltató'-t, ha egy előre beállított kábel multiplex lista alapján, a 'sávok'-at, ha a tartomány egy részében, és a 'lépések'-et, ha az adott frekvencia-tartományban lépésenként szeretne keresését végezni."
 
-msgid "Select 'yes' if this tuner is connected to the Unicable device through another tuner, otherwise select 'no'."
+#, fuzzy
+msgid "Select 'yes' if this tuner is connected to the SCR device through another tuner, otherwise select 'no'."
 msgstr "Válassza az 'igen'-t, ha ez a tuner egy Unicable eszközhöz csatlakozik, egyéb esetekben a 'nem'-et."
 
 msgid "Select 'yes' to choose what bands or step sizes will be scanned."
@@ -7030,23 +7043,32 @@ msgstr "Rendezési módszer választása:"
 msgid "Select target folder"
 msgstr "Válassza ki a célmappát"
 
-msgid "Select the Unicable channel to be assigned to this tuner. This is a unique value. Be certain that no other device connected to this same Unicable system is allocated to the same Unicable channel."
-msgstr "Válassza ki, mely Unicable csatornát rendelje ehhez a tunerhez. Ez egy egyedi érték. Győződjön meg róla, hogy az ön Unicable rendszerében más eszköz nem csatlakozik ehhez az Unicable csatornához."
+msgid "Select the User Band channel to be assigned to this tuner. This is an index into the table of frequencies the SCR switch or SCR LNB uses to pass the requested transponder to the tuner."
+msgstr ""
+
+msgid "Select the User Band frequency to be assigned to this tuner. This is the frequency the SCR switch or SCR LNB uses to pass the requested transponder to the tuner."
+msgstr ""
+
+msgid "Select the User Band to be assigned to this tuner. This is an index into the table of frequencies the SCR switch or SCR LNB uses to pass the requested tranponder to the tuner."
+msgstr ""
 
 msgid "Select the character or action under the virtual keyboard cursor"
 msgstr "Váltás karakter vagy művelet mód között a virtuális billentyűzeten"
 
-msgid "Select the format of your Unicable device. Choices are 'SCR Unicable' (Unicable I format), or 'SCR JESS' (Unicable II format)."
-msgstr "Válassza ki az Unicable eszközének formátumát. A lehetőségek: 'SCR Unicable' (Unicable I formátum), vagy 'SCR JESS' (Unicable II formátum)."
-
-msgid "Select the manufacturer of your Unicable device. If the manufacturer is not listed, set 'SCR' to 'user defined' and enter the device parameters manually according to its spec sheet."
+#, fuzzy
+msgid "Select the manufacturer of your SCR device. If the manufacturer is not listed, set 'SCR' to 'user defined' and enter the device parameters manually according to its spec sheet."
 msgstr "Válassza ki az Unicable eszközének gyártóját. Ha nincs a listában, állítsa az 'SCR'-t erre: 'felhasználó által megadva', majd adja meg a készülék paramétereit a technikai adatlapja alapján."
 
-msgid "Select the model number of your Unicable device. If the model number is not listed, set 'SCR' to 'user defined' and enter the device parameters manually according to its spec sheet."
+#, fuzzy
+msgid "Select the model number of your SCR device. If the model number is not listed, set 'SCR' to 'user defined' and enter the device parameters manually according to its spec sheet."
 msgstr "Válassza ki az Unicable eszközének típusszámát. Ha nincs a listában, állítsa az 'SCR'-t erre: 'felhasználó által megadva', majd adja meg a készülék paramétereit a technikai adatlapja alapján."
 
 msgid "Select the movie path"
 msgstr "Válassza ki a felvételek útvonalát"
+
+#, fuzzy
+msgid "Select the protocol used by your SCR device. Choices are 'SCR Unicable' (Unicable), or 'SCR JESS' (JESS, also known as Unicable II)."
+msgstr "Válassza ki az Unicable eszközének formátumát. A lehetőségek: 'SCR Unicable' (Unicable I formátum), vagy 'SCR JESS' (Unicable II formátum)."
 
 msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr "Válassza ki a műholdat, amely a kapcsoló 'A' bemenetére csatlakozik. Ha bizonytalan, válassza az 'automatikus' módot, ekkor a vevőkészülék megkísérli megtalálni. Ha semmi nincs csatlakoztatva ehhez a bemenethez, akkor válassza a 'semmi sincs csatlakoztatva' lehetőséget."
@@ -7072,13 +7094,15 @@ msgstr "Válassza ki azt a tunert, amely vezérli a forgatómotort."
 msgid "Select the tuner that this loopthrough depends on."
 msgstr "Válassza ki a tunert, amely fel van fűzve."
 
-msgid "Select the tuner to which the signal cable of the Unicable device is connected."
+#, fuzzy
+msgid "Select the tuner to which the signal cable of the SCR device is connected."
 msgstr "Válassza ki a tunert, amelyhez az Unicable eszköz jelkábele csatlakozik."
 
 msgid "Select the type of LNB/device being used (normally 'Universal'). If your LNB type is not available select 'user defined'."
 msgstr "Válassza ki a használt fej/készülék típusát (alapesetben 'Univerzális'). Ha az ön fej típusa nem található, válassza a 'felhasználó által megadva' opciót."
 
-msgid "Select the type of Unicable device you are using."
+#, fuzzy
+msgid "Select the type of Single Cable Reception device you are using."
 msgstr "Válassza ki a használt Unicable eszköz típusát."
 
 msgid "Select the virtual keyboard locale from a menu"
@@ -7649,6 +7673,10 @@ msgstr "Földrajzi hosszúsági fok"
 
 msgid "Skin"
 msgstr "Kinézet"
+
+#, python-format
+msgid "Skin & Resolution: %s (%sx%s)\n"
+msgstr ""
 
 msgid "Skins"
 msgstr "Kinézetek"
@@ -8472,6 +8500,14 @@ msgstr "Legalább %s frissítés elérhető."
 
 msgid "There are currently no outstanding actions."
 msgstr "Semmilyen kiemelkedő esemény nem következik."
+
+#, fuzzy
+msgid "There are no saved playlists to delete!"
+msgstr "Válasszon egy lejátszási listát amit törölni szeretne..."
+
+#, fuzzy
+msgid "There are no saved playlists to load!"
+msgstr "Mentett lejátszási lista törlése"
 
 msgid "There are no updates available."
 msgstr "Nincs elérhető frissítés."
@@ -10140,7 +10176,8 @@ msgstr "Csatorna váltva az időzítésre %s!"
 msgid "Zgemma H.S/H.2S/H.2H/H5/H7"
 msgstr "Zgemma H.S/H.2S/H.2H/H5/H7"
 
-msgid "Zgemma H9"
+#, fuzzy
+msgid "Zgemma H9/i55 Plus"
 msgstr "Zgemma H9"
 
 msgid "Zgemma Star S/2S/H1/H2"
