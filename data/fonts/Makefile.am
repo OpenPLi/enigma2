@@ -17,6 +17,6 @@ dist_install_DATA = \
 	LiberationSans-Regular.ttf \
 	wqy-microhei.ttc
 
-install-exec-hook:
+install-data-hook:
 	cd $(DESTDIR)$(datadir)/fonts && \
 	$(LN_S) wqy-microhei.ttc fallback.font
