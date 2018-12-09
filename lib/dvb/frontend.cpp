@@ -1200,6 +1200,11 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 				break;
 		}
 	}
+	else if (!strncmp(m_description, "Si2166D", 7))
+	{
+		ret = snr;
+		sat_max = 1620;
+	}
 	else if (!strncmp(m_description, "Si216", 5)) // New models with SI tuners
 	{
 		ret = snr;
