@@ -360,10 +360,7 @@ class PluginDownloadBrowser(Screen):
 		self.session.openWithCallback(callback, Console, cmdlist = [self.ipkg_remove + Ipkg.opkgExtraDestinations() + " " + pkgname, "sync"], skin="Console_Pig")
 
 	def doInstall(self, callback, pkgname):
-		if pkgname.startswith('modules-'):
-			pkgname = 'kernel-module-' + pkgname[8:]
-		else:
-			pkgname = self.PLUGIN_PREFIX + pkgname
+		pkgname = self.PLUGIN_PREFIX + pkgname
 		self.session.openWithCallback(callback, Console, cmdlist = [self.ipkg_install + " " + pkgname, "sync"], skin="Console_Pig")
 
 	def runSettingsRemove(self, val):
@@ -438,10 +435,6 @@ class PluginDownloadBrowser(Screen):
 			for plugin in opkg.enumPlugins(self.PLUGIN_PREFIX):
 				if plugin[0] not in self.installedplugins:
 					pluginlist.append(plugin + (plugin[0][15:],))
-			for plugin in opkg.enumPlugins('kernel-module'):
-				if plugin[0] not in self.installedplugins:
-					pkg = 'modules-'+'-'.join(plugin[0].split('-')[2:])
-					pluginlist.append(plugin + (pkg,))
 			if pluginlist:
 				pluginlist.sort()
 				self.updateList()
