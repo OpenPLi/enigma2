@@ -157,6 +157,7 @@ class ServiceInfo(Screen):
 				if gamma:
 					resolution += " - " + gamma
 			if "%3a//" in refstr and reftype not in (1,257,4098,4114):
+			#IPTV 4097 5001, no PIDs shown
 				fillList = [(_("Service name"), name, TYPE_TEXT),
 					(_("Videocodec, size & format"), resolution, TYPE_TEXT),
 					(_("Service reference"), ":".join(refstr.split(":")[:9]), TYPE_TEXT),
@@ -164,18 +165,22 @@ class ServiceInfo(Screen):
 				subList = self.getSubtitleList()
 			else:
 				if ":/" in refstr:
+				# mp4 videos, dvb-s-t recording
 					fillList = [(_("Service name"), name, TYPE_TEXT),
 						(_("Videocodec, size & format"), resolution, TYPE_TEXT),
 						(_("Service reference"), ":".join(refstr.split(":")[:9]), TYPE_TEXT),
 						(_("Filename"), refstr.split(":")[10], TYPE_TEXT)]
 				else:
+				# fallback, movistartv, live dvb-s-t
 					fillList = [(_("Service name"), name, TYPE_TEXT),
 						(_("Provider"), self.getServiceInfoValue(iServiceInformation.sProvider), TYPE_TEXT),
 						(_("Videocodec, size & format"), resolution, TYPE_TEXT)]
 					if "%3a//" in refstr:
+					#fallback, movistartv
 						fillList = fillList + [(_("Service reference"), ":".join(refstr.split(":")[:9]), TYPE_TEXT),
 							(_("URL"), refstr.split(":")[10].replace("%3a", ":"), TYPE_TEXT)]
 					else:
+					#live dvb-s-t
 						fillList = fillList + [(_("Service reference"), refstr, TYPE_TEXT)]
 				self.subList = self.getSubtitleList()
 				trackList = self.getTrackList()
