@@ -1,5 +1,6 @@
 from Components.GUIComponent import GUIComponent
 from Screen import Screen
+from Screens.AudioSelection import AudioSelection
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from ServiceReference import ServiceReference
@@ -115,8 +116,8 @@ class ServiceInfo(Screen):
 					self.feinfo = None
 					serviceref = play_service
 					self.transponder_info = serviceref and eServiceCenter.getInstance().info(serviceref).getInfoObject(serviceref, iServiceInformation.sTransponderData)
+			self["key_yellow"] = self["yellow"] = Label(_("Service & PIDs"))
 			if self.feinfo or self.transponder_info:
-				self["key_yellow"] = self["yellow"] = Label(_("Service & PIDs"))
 				self["key_blue"] = self["blue"] = Label(_("Tuner setting values"))
 			else:
 				self.skinName="ServiceInfoSimple"
@@ -160,6 +161,7 @@ class ServiceInfo(Screen):
 					(_("Videocodec, size & format"), resolution, TYPE_TEXT),
 					(_("Service reference"), ":".join(refstr.split(":")[:9]), TYPE_TEXT),
 					(_("URL"), refstr.split(":")[10].replace("%3a", ":"), TYPE_TEXT)]
+				subList = self.getSubtitleList()
 			else:
 				if ":/" in refstr:
 					fillList = [(_("Service name"), name, TYPE_TEXT),
@@ -175,20 +177,87 @@ class ServiceInfo(Screen):
 							(_("URL"), refstr.split(":")[10].replace("%3a", ":"), TYPE_TEXT)]
 					else:
 						fillList = fillList + [(_("Service reference"), refstr, TYPE_TEXT)]
-				fillList = fillList + [(_("Namespace"), self.getServiceInfoValue(iServiceInformation.sNamespace), TYPE_VALUE_HEX, 8),
-					(_("Service ID"), self.getServiceInfoValue(iServiceInformation.sSID), TYPE_VALUE_HEX_DEC, 4),
-					(_("Video PID"), self.getServiceInfoValue(iServiceInformation.sVideoPID), TYPE_VALUE_HEX_DEC, 4),
-					(_("Audio PID"), self.getServiceInfoValue(iServiceInformation.sAudioPID), TYPE_VALUE_HEX_DEC, 4),
-					(_("PCR PID"), self.getServiceInfoValue(iServiceInformation.sPCRPID), TYPE_VALUE_HEX_DEC, 4),
-					(_("PMT PID"), self.getServiceInfoValue(iServiceInformation.sPMTPID), TYPE_VALUE_HEX_DEC, 4),
-					(_("TXT PID"), self.getServiceInfoValue(iServiceInformation.sTXTPID), TYPE_VALUE_HEX_DEC, 4),
+				self.subList = self.getSubtitleList()
+				trackList = self.getTrackList()
+				fillList = fillList + ([(_("Namespace"), self.getServiceInfoValue(iServiceInformation.sNamespace), TYPE_VALUE_HEX, 8),
 					(_("TSID"), self.getServiceInfoValue(iServiceInformation.sTSID), TYPE_VALUE_HEX_DEC, 4),
-					(_("ONID"), self.getServiceInfoValue(iServiceInformation.sONID), TYPE_VALUE_HEX_DEC, 4)]
+					(_("ONID"), self.getServiceInfoValue(iServiceInformation.sONID), TYPE_VALUE_HEX_DEC, 4),
+					(_("Service ID"), self.getServiceInfoValue(iServiceInformation.sSID), TYPE_VALUE_HEX_DEC, 4),
+					(_("Video PID"), self.getServiceInfoValue(iServiceInformation.sVideoPID), TYPE_VALUE_HEX_DEC, 4)]
+					+ trackList + [(_("PCR PID"), self.getServiceInfoValue(iServiceInformation.sPCRPID), TYPE_VALUE_HEX_DEC, 4),
+					(_("PMT PID"), self.getServiceInfoValue(iServiceInformation.sPMTPID), TYPE_VALUE_HEX_DEC, 4),
+					(_("TXT PID"), self.getServiceInfoValue(iServiceInformation.sTXTPID), TYPE_VALUE_HEX_DEC, 4)])
+				if self.showAll == True:
+					fillList = fillList + self.subList
+
 			self.fillList(fillList)
 		elif self.transponder_info:
 			self.fillList(self.getFEData(self.transponder_info))
 
+	def getTrackList(self):
+		service = self.session.nav.getCurrentService()
+		audio = service and service.audioTracks()
+		trackList = []
+		self.currentTrack = audio.getCurrentTrack()
+		self.numberofTracks = audio.getNumberOfTracks()
+		if (self["key_yellow"].text == _("Service & PIDs") or self["key_yellow"].text == _("Basic PID info")) and (self.numberofTracks > 1 or self.subList):
+			self.showAll = False
+			self["key_yellow"].text = self["yellow"].text = _("Extended PID info")
+			self["Title"].text = _("Service info - service & Basic PID Info")
+		elif (self.numberofTracks < 2) and not self.subList:
+			self.showAll = False
+		else:
+			self.showAll = True
+			self["key_yellow"].text = self["yellow"].text = _("Basic PID info")
+			self["Title"].text = _("Service info - service & Extended PID Info")
+		if self.numberofTracks:
+			for i in range(0, self.numberofTracks):
+				audioDesc = audio.getTrackInfo(i).getDescription()
+				audioPID = audio.getTrackInfo(i).getPID()
+				audioLang = audio.getTrackInfo(i).getLanguage().upper()
+				if audioLang == "":
+					audioLang = "Not Defined"
+				if self.showAll or self.currentTrack == i:
+					trackList += [(_("Audio%s PID, codec & lang") % (" %s" % (i + 1) if self.numberofTracks > 1 and self.showAll == True else ""), "%04X (%d) - %s - %s" % (to_unsigned(audioPID), audioPID, audioDesc, audioLang), TYPE_TEXT)]
+				if self.getServiceInfoValue(iServiceInformation.sAudioPID) == "N/A":
+					trackList = [(_("Audio PID, codec & lang"), "N/A - %s - %s" % (audioDesc, audioLang), TYPE_TEXT)] 
+		else:
+			trackList = [(_("Audio PID"), "N/A", TYPE_TEXT)]
+		return trackList
+
+	def getSubtitleList(self):
+		service = self.session.nav.getCurrentService()
+		subtitle = service and service.subtitle()
+		subtitlelist = subtitle and subtitle.getSubtitleList()
+		subList = []
+		for x in subtitlelist:
+			subNumber = str(x[1])
+			subPID = x[1]
+			subLang = ""
+			subLang = x[4].upper()
+
+			if x[0] == 0:  # DVB PID
+				subNumber = "%04X" % (x[1])
+				subList += [(_("DVB Subtitles PID & lang"), "%04X (%d) - %s" % (to_unsigned(subPID), subPID, subLang), TYPE_TEXT)]
+
+			elif x[0] == 1: # Teletext
+				subNumber = "%x%02x" %(x[3] and x[3] or 8, x[2])
+				subList += [(_("TXT Subtitles page & lang"), "%s - %s" % (subNumber, subLang), TYPE_TEXT)]
+
+			elif x[0] == 2: # File
+				types = (_("unknown"), _("Embedded"), _("SSA File"), _("ASS File"),
+						_("SRT File"), _("VOB File"), _("PGS File"))
+				try:
+					description = types[x[2]]
+				except:
+					description = _("unknown") + ": %s" % x[2]
+				subNumber = str(int(subNumber) + 1)
+				subList += [(_("Other Subtitles & lang"), "%s - %s - %s" % (subNumber, description, subLang), TYPE_TEXT)]
+
+		return subList
+
 	def ShowTransponderInformation(self):
+		self["key_yellow"].text = self["yellow"].text = _("Service & PIDs")
 		if self.type == TYPE_SERVICE_INFO:
 			frontendData = self.feinfo and self.feinfo.getAll(True)
 			if frontendData:
@@ -265,6 +334,7 @@ class ServiceInfo(Screen):
 		return ""
 
 	def ShowECMInformation(self):
+		self["key_yellow"].text = self["yellow"].text = _("Service & PIDs")
 		if self.info:
 			from Components.Converter.PliExtraInfo import caid_data
 			self["Title"].text = _("Service info - ECM Info")
