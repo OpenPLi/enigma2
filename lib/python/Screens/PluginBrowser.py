@@ -146,7 +146,6 @@ class PluginBrowser(Screen, ProtectedScreen):
 	def run(self):
 		plugin = self["list"].l.getCurrentSelection()[0]
 		plugin(session=self.session)
-		self.help=False
 
 	def setDefaultList(self, answer):
 		if answer:
@@ -218,6 +217,7 @@ class PluginBrowser(Screen, ProtectedScreen):
 				tmp = list(x[1][1])
 				tmp[7] = "%s %s" % (x[0]+1, tmp[7])
 				x[1][1]=tuple(tmp)
+			self.help=False
 		self["list"].l.setList(self.list)
 
 	def showHelp(self):
