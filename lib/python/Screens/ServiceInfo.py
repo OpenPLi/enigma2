@@ -156,6 +156,7 @@ class ServiceInfo(Screen):
 				gamma = ("SDR", "HDR", "HDR10", "HLG", "")[self.info.getInfo(iServiceInformation.sGamma)]
 				if gamma:
 					resolution += " - " + gamma
+			self.service = self.session.nav.getCurrentService()
 			if "%3a//" in refstr and reftype not in (1,257,4098,4114):
 			#IPTV 4097 5001, no PIDs shown
 				fillList = [(_("Service name"), name, TYPE_TEXT),
@@ -182,7 +183,10 @@ class ServiceInfo(Screen):
 					else:
 					#live dvb-s-t
 						fillList = fillList + [(_("Service reference"), refstr, TYPE_TEXT)]
+				self.audio = self.service and self.service.audioTracks()
+				self.numberofTracks = self.audio.getNumberOfTracks()
 				self.subList = self.getSubtitleList()
+				self.togglePIDButton()
 				trackList = self.getTrackList()
 				fillList = fillList + ([(_("Namespace"), self.getServiceInfoValue(iServiceInformation.sNamespace), TYPE_VALUE_HEX, 8),
 					(_("TSID"), self.getServiceInfoValue(iServiceInformation.sTSID), TYPE_VALUE_HEX_DEC, 4),
@@ -200,11 +204,24 @@ class ServiceInfo(Screen):
 			self.fillList(self.getFEData(self.transponder_info))
 
 	def getTrackList(self):
-		service = self.session.nav.getCurrentService()
-		audio = service and service.audioTracks()
 		trackList = []
-		self.currentTrack = audio.getCurrentTrack()
-		self.numberofTracks = audio.getNumberOfTracks()
+		currentTrack = self.audio.getCurrentTrack()
+		if self.numberofTracks:
+			for i in range(0, self.numberofTracks):
+				audioDesc = self.audio.getTrackInfo(i).getDescription()
+				audioPID = self.audio.getTrackInfo(i).getPID()
+				audioLang = self.audio.getTrackInfo(i).getLanguage().upper()
+				if audioLang == "":
+					audioLang = "Not Defined"
+				if self.showAll or currentTrack == i:
+					trackList += [(_("Audio PID%s, codec & lang" % ((" %s") % (i + 1) if self.numberofTracks > 1 and self.showAll else "")), "%04X (%d) - %s - %s" % (to_unsigned(audioPID), audioPID, audioDesc, audioLang), TYPE_TEXT)]
+				if self.getServiceInfoValue(iServiceInformation.sAudioPID) == "N/A":
+					trackList = [(_("Audio PID, codec & lang"), "N/A - %s - %s" % (audioDesc, audioLang), TYPE_TEXT)] 
+		else:
+			trackList = [(_("Audio PID"), "N/A", TYPE_TEXT)]
+		return trackList
+
+	def togglePIDButton(self):
 		if (self["key_yellow"].text == _("Service & PIDs") or self["key_yellow"].text == _("Basic PID info")) and (self.numberofTracks > 1 or self.subList):
 			self.showAll = False
 			self["key_yellow"].text = self["yellow"].text = _("Extended PID info")
@@ -215,24 +232,9 @@ class ServiceInfo(Screen):
 			self.showAll = True
 			self["key_yellow"].text = self["yellow"].text = _("Basic PID info")
 			self["Title"].text = _("Service info - service & Extended PID Info")
-		if self.numberofTracks:
-			for i in range(0, self.numberofTracks):
-				audioDesc = audio.getTrackInfo(i).getDescription()
-				audioPID = audio.getTrackInfo(i).getPID()
-				audioLang = audio.getTrackInfo(i).getLanguage().upper()
-				if audioLang == "":
-					audioLang = "Not Defined"
-				if self.showAll or self.currentTrack == i:
-					trackList += [(_("Audio%s PID, codec & lang") % (" %s" % (i + 1) if self.numberofTracks > 1 and self.showAll == True else ""), "%04X (%d) - %s - %s" % (to_unsigned(audioPID), audioPID, audioDesc, audioLang), TYPE_TEXT)]
-				if self.getServiceInfoValue(iServiceInformation.sAudioPID) == "N/A":
-					trackList = [(_("Audio PID, codec & lang"), "N/A - %s - %s" % (audioDesc, audioLang), TYPE_TEXT)] 
-		else:
-			trackList = [(_("Audio PID"), "N/A", TYPE_TEXT)]
-		return trackList
 
 	def getSubtitleList(self):
-		service = self.session.nav.getCurrentService()
-		subtitle = service and service.subtitle()
+		subtitle = self.service and self.service.subtitle()
 		subtitlelist = subtitle and subtitle.getSubtitleList()
 		subList = []
 		for x in subtitlelist:
@@ -258,7 +260,6 @@ class ServiceInfo(Screen):
 					description = _("unknown") + ": %s" % x[2]
 				subNumber = str(int(subNumber) + 1)
 				subList += [(_("Other Subtitles & lang"), "%s - %s - %s" % (subNumber, description, subLang), TYPE_TEXT)]
-
 		return subList
 
 	def ShowTransponderInformation(self):
