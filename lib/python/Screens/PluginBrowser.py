@@ -216,7 +216,7 @@ class PluginBrowser(Screen, ProtectedScreen):
 		if config.usage.menu_show_numbers.value or showHelp:
 			for x in enumerate(self.list):
 				tmp = list(x[1][1])
-				tmp[7] = "%s%s%s" % (x[0]+1, "   " if x[0] < 9 else " ", tmp[7])
+				tmp[7] = "%s %s" % (x[0]+1, tmp[7])
 				x[1][1]=tuple(tmp)
 		self["list"].l.setList(self.list)
 
