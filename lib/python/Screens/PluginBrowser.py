@@ -221,8 +221,9 @@ class PluginBrowser(Screen, ProtectedScreen):
 		self["list"].l.setList(self.list)
 
 	def showHelp(self):
-		self.help = not self.help
-		self.updateList(self.help)
+		if not config.usage.menu_show_numbers.value:
+			self.help = not self.help
+			self.updateList(self.help)
 
 	def delete(self):
 		self.session.openWithCallback(self.PluginDownloadBrowserClosed, PluginDownloadBrowser, PluginDownloadBrowser.REMOVE)
