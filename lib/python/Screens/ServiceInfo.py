@@ -188,7 +188,7 @@ class ServiceInfo(Screen):
 				self.subList = self.getSubtitleList()
 				self.togglePIDButton()
 				trackList = self.getTrackList()
-				fillList = fillList + ([(_("Namespace"), self.getServiceInfoValue(iServiceInformation.sNamespace), TYPE_VALUE_HEX, 8),
+				fillList = fillList + ([(_("Namespace & Orbital pos."), self.namespace(self.getServiceInfoValue(iServiceInformation.sNamespace)), TYPE_TEXT),
 					(_("TSID"), self.getServiceInfoValue(iServiceInformation.sTSID), TYPE_VALUE_HEX_DEC, 4),
 					(_("ONID"), self.getServiceInfoValue(iServiceInformation.sONID), TYPE_VALUE_HEX_DEC, 4),
 					(_("Service ID"), self.getServiceInfoValue(iServiceInformation.sSID), TYPE_VALUE_HEX_DEC, 4),
@@ -202,6 +202,20 @@ class ServiceInfo(Screen):
 			self.fillList(fillList)
 		elif self.transponder_info:
 			self.fillList(self.getFEData(self.transponder_info))
+
+	def namespace(self, nmspc):
+		namespace = "%08X" % (to_unsigned(nmspc))
+		if namespace[:4] == "EEEE":
+			return "%s - DVB-T" % (namespace)
+		elif namespace[:4] == "FFFF":
+			return "%s - DVB-C" % (namespace)
+		else:
+			EW = "E"
+			posi = int(namespace[:4], 16)
+			if posi > 1800:
+				posi = 3600 - posi
+				EW = "W"
+		return "%s - %s\xc2\xb0 %s" % (namespace, (float(posi) / 10.0), EW) 
 
 	def getTrackList(self):
 		trackList = []
