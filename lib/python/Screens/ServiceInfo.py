@@ -224,11 +224,11 @@ class ServiceInfo(Screen):
 			for i in range(0, self.numberofTracks):
 				audioDesc = self.audio.getTrackInfo(i).getDescription()
 				audioPID = self.audio.getTrackInfo(i).getPID()
-				audioLang = self.audio.getTrackInfo(i).getLanguage().upper()
+				audioLang = self.audio.getTrackInfo(i).getLanguage()
 				if audioLang == "":
 					audioLang = "Not Defined"
 				if self.showAll or currentTrack == i:
-					trackList += [(_("Audio PID%s, codec & lang" % ((" %s") % (i + 1) if self.numberofTracks > 1 and self.showAll else "")), "%04X (%d) - %s - %s" % (to_unsigned(audioPID), audioPID, audioDesc, audioLang), TYPE_TEXT)]
+					trackList += [(_("Audio PID%s, codec & lang") % ((" %s") % (i + 1) if self.numberofTracks > 1 and self.showAll else ""), "%04X (%d) - %s - %s" % (to_unsigned(audioPID), audioPID, audioDesc, audioLang), TYPE_TEXT)]
 				if self.getServiceInfoValue(iServiceInformation.sAudioPID) == "N/A":
 					trackList = [(_("Audio PID, codec & lang"), "N/A - %s - %s" % (audioDesc, audioLang), TYPE_TEXT)] 
 		else:
@@ -255,7 +255,7 @@ class ServiceInfo(Screen):
 			subNumber = str(x[1])
 			subPID = x[1]
 			subLang = ""
-			subLang = x[4].upper()
+			subLang = x[4]
 
 			if x[0] == 0:  # DVB PID
 				subNumber = "%04X" % (x[1])
