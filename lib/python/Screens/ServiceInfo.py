@@ -228,7 +228,7 @@ class ServiceInfo(Screen):
 				if audioLang == "":
 					audioLang = "Not Defined"
 				if self.showAll or currentTrack == i:
-					trackList += [(_("Audio PID%s, codec & lang" % ((" %s") % (i + 1) if self.numberofTracks > 1 and self.showAll else "")), "%04X (%d) - %s - %s" % (to_unsigned(audioPID), audioPID, audioDesc, audioLang), TYPE_TEXT)]
+					trackList += [(_("Audio PID%s, codec & lang") % ((" %s") % (i + 1) if self.numberofTracks > 1 and self.showAll else ""), "%04X (%d) - %s - %s" % (to_unsigned(audioPID), audioPID, audioDesc, audioLang), TYPE_TEXT)]
 				if self.getServiceInfoValue(iServiceInformation.sAudioPID) == "N/A":
 					trackList = [(_("Audio PID, codec & lang"), "N/A - %s - %s" % (audioDesc, audioLang), TYPE_TEXT)] 
 		else:
