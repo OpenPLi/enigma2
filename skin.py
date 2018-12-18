@@ -42,7 +42,7 @@ class SkinError(Exception):
 
 dom_skins = [ ]
 
-def addSkin(name, scope = SCOPE_CURRENT_SKIN):
+def addSkin(name, scope = SCOPE_SKIN):
 	# read the skin
 	filename = resolveFilename(scope, name)
 	if fileExists(filename):
@@ -99,8 +99,12 @@ addSkin('skin_box.xml')
 addSkin('skin_second_infobar.xml')
 
 display_skin_id = 1
-
-addSkin(displaySkinXml)
+displaySkinXml = 'skin_display.xml';
+displaySkinFilename = resolveFilename(SCOPE_CURRENT_SKIN, displaySkinXml)
+if fileExists(displaySkinFilename):
+  addSkin(displaySkinXml, SCOPE_CURRENT_SKIN)
+else:
+  addSkin(displaySkinXml)
 
 addSkin('skin_text.xml')
 
