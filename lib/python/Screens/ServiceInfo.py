@@ -204,6 +204,8 @@ class ServiceInfo(Screen):
 			self.fillList(self.getFEData(self.transponder_info))
 
 	def namespace(self, nmspc):
+		if isinstance(nmspc, str):
+			return "N/A - N/A"
 		namespace = "%08X" % (to_unsigned(nmspc))
 		if namespace[:4] == "EEEE":
 			return "%s - DVB-T" % (namespace)
@@ -277,8 +279,8 @@ class ServiceInfo(Screen):
 		return subList
 
 	def ShowTransponderInformation(self):
-		self["key_yellow"].text = self["yellow"].text = _("Service & PIDs")
 		if self.type == TYPE_SERVICE_INFO:
+			self["key_yellow"].text = self["yellow"].text = _("Service & PIDs")
 			frontendData = self.feinfo and self.feinfo.getAll(True)
 			if frontendData:
 				if self["key_blue"].text == _("Tuner setting values"):
@@ -354,10 +356,10 @@ class ServiceInfo(Screen):
 		return ""
 
 	def ShowECMInformation(self):
-		self["key_yellow"].text = self["yellow"].text = _("Service & PIDs")
 		if self.info:
 			from Components.Converter.PliExtraInfo import caid_data
 			self["Title"].text = _("Service info - ECM Info")
+			self["key_yellow"].text = self["yellow"].text = _("Service & PIDs")
 			tlist = []
 			for caid in sorted(set(self.info.getInfoObject(iServiceInformation.sCAIDPIDs)), key=lambda x: (x[0], x[1])):
 				CaIdDescription = _("Undefined")
