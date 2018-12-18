@@ -99,15 +99,11 @@ addSkin('skin_box.xml')
 addSkin('skin_second_infobar.xml')
 
 display_skin_id = 1
-displaySkinXml = 'skin_display.xml';
-displaySkinFilename = resolveFilename(SCOPE_CURRENT_SKIN, displaySkinXml)
-if fileExists(displaySkinFilename):
-  addSkin(displaySkinXml, SCOPE_CURRENT_SKIN)
+if fileExists(resolveFilename(SCOPE_CURRENT_SKIN, 'skin_display.xml')):
+  addSkin('skin_display.xml', SCOPE_CURRENT_SKIN)
 else:
-  addSkin(displaySkinXml)
-
+  addSkin('skin_display.xml')
 addSkin('skin_text.xml')
-
 addSkin('skin_subtitles.xml')
 
 try:
