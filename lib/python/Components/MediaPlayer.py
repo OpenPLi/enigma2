@@ -43,7 +43,7 @@ class PlayList(MenuList):
 		try:
 			png = self.icons[state]
 			x, y, w, h = skin.parameters.get("PlayListIcon",(5, 3, 16, 16))
-			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, x, y, w, h, png))
+			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, x, y, w, h, png))
 		except:
 		        pass
 		return res
