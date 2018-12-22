@@ -253,29 +253,30 @@ class ServiceInfo(Screen):
 		subtitle = self.service and self.service.subtitle()
 		subtitlelist = subtitle and subtitle.getSubtitleList()
 		subList = []
-		for x in subtitlelist:
-			subNumber = str(x[1])
-			subPID = x[1]
-			subLang = ""
-			subLang = x[4]
+		if subtitlelist:
+			for x in subtitlelist:
+				subNumber = str(x[1])
+				subPID = x[1]
+				subLang = ""
+				subLang = x[4]
 
-			if x[0] == 0:  # DVB PID
-				subNumber = "%04X" % (x[1])
-				subList += [(_("DVB Subtitles PID & lang"), "%04X (%d) - %s" % (to_unsigned(subPID), subPID, subLang), TYPE_TEXT)]
+				if x[0] == 0:  # DVB PID
+					subNumber = "%04X" % (x[1])
+					subList += [(_("DVB Subtitles PID & lang"), "%04X (%d) - %s" % (to_unsigned(subPID), subPID, subLang), TYPE_TEXT)]
 
-			elif x[0] == 1: # Teletext
-				subNumber = "%x%02x" %(x[3] and x[3] or 8, x[2])
-				subList += [(_("TXT Subtitles page & lang"), "%s - %s" % (subNumber, subLang), TYPE_TEXT)]
+				elif x[0] == 1: # Teletext
+					subNumber = "%x%02x" %(x[3] and x[3] or 8, x[2])
+					subList += [(_("TXT Subtitles page & lang"), "%s - %s" % (subNumber, subLang), TYPE_TEXT)]
 
-			elif x[0] == 2: # File
-				types = (_("unknown"), _("Embedded"), _("SSA File"), _("ASS File"),
-						_("SRT File"), _("VOB File"), _("PGS File"))
-				try:
-					description = types[x[2]]
-				except:
-					description = _("unknown") + ": %s" % x[2]
-				subNumber = str(int(subNumber) + 1)
-				subList += [(_("Other Subtitles & lang"), "%s - %s - %s" % (subNumber, description, subLang), TYPE_TEXT)]
+				elif x[0] == 2: # File
+					types = (_("unknown"), _("Embedded"), _("SSA File"), _("ASS File"),
+							_("SRT File"), _("VOB File"), _("PGS File"))
+					try:
+						description = types[x[2]]
+					except:
+						description = _("unknown") + ": %s" % x[2]
+					subNumber = str(int(subNumber) + 1)
+					subList += [(_("Other Subtitles & lang"), "%s - %s - %s" % (subNumber, description, subLang), TYPE_TEXT)]
 		return subList
 
 	def ShowTransponderInformation(self):
