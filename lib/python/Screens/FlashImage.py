@@ -80,7 +80,7 @@ class SelectImage(Screen):
 					pass
 			self.imagesList = dict(self.jsonlist) if self.jsonlist else {}
 
-			for media in ['/media/%s' % x for x in os.listdir('/media')] + ['/media/net/%s' % x for x in os.listdir('/media/net')] if os.path.isdir('/media/net') else []:
+			for media in ['/media/%s' % x for x in os.listdir('/media')] + (['/media/net/%s' % x for x in os.listdir('/media/net')] if os.path.isdir('/media/net') else []):
 				if not(SystemInfo['HasMMC'] and "/mmc" in media) and os.path.isdir(media):
 					getImages(media, [os.path.join(media, x) for x in os.listdir(media) if os.path.splitext(x)[1] == ".zip" and model in x])
 					if "downloaded_images" in os.listdir(media):
@@ -256,7 +256,7 @@ class FlashImage(Screen):
 					return (path, True)
 				mounts = []
 				devices = []
-				for path in ['/media/%s' % x for x in os.listdir('/media')] + ['/media/net/%s' % x for x in os.listdir('/media/net')] if os.path.isdir('/media/net') else []:
+				for path in ['/media/%s' % x for x in os.listdir('/media')] + (['/media/net/%s' % x for x in os.listdir('/media/net')] if os.path.isdir('/media/net') else []):
 					if checkIfDevice(path, diskstats):
 						devices.append((path, avail(path)))
 					else:
