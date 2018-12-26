@@ -170,7 +170,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 			elif self.nimConfig.configMode.value == "loopthrough":
 				choices = []
 				print "connectable to:", nimmanager.canConnectTo(self.slotid)
-				connectable = nimmanager.canConnectTo(self.slotid)
+				connectable = set(nimmanager.canConnectTo(self.slotid))
 				for id in connectable:
 					choices.append((str(id), nimmanager.getNimDescription(id)))
 				self.nimConfig.connectedTo.setChoices(choices)
