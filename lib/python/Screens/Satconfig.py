@@ -417,7 +417,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 						self.list.append(self.advancedPosition)
 					self.list.append(self.advancedSCR)
 				choices = []
-				connectable = nimmanager.canConnectTo(self.slotid)
+				connectable = set(nimmanager.canConnectTo(self.slotid))
 				for id in connectable:
 					choices.append((str(id), nimmanager.getNimDescription(id)))
 				if len(choices):
