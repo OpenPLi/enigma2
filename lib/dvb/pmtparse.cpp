@@ -313,6 +313,10 @@ int eDVBPMTParser::getProgramInfo(program &program)
 									isaudio = 1;
 									audio.type = audioStream::atLPCM;
 									break;
+								case 0x44524131: /* DRA is "DRA1" */
+									isaudio = 1;
+									audio.type = audioStream::atDRA;
+									break;
 								case 0x56432d31: // == 'VC-1'
 								{
 									const AdditionalIdentificationInfoVector *vec = d->getAdditionalIdentificationInfo();
