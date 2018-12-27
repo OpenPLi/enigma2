@@ -1015,7 +1015,7 @@ int eMPEGStreamParserTS::processPacket(const unsigned char *pkt, off_t offset)
 					break;
 				}
 
-				case(6): // h.265
+				case(7): // h.265
 				{
 					int nal_unit_type = (sc >> 1);
 					if (nal_unit_type == 35) /* H265 NAL unit access delimiter */
@@ -1200,12 +1200,12 @@ void eMPEGStreamParserTS::setPid(int _pid, iDVBTSRecorder::timing_pid_type pidty
 {
 	m_pktptr = 0;
 	/*
-	 * Currently, eMPEGStreamParserTS can only parse video, mpeg2 (streamtype 0), h264 (streamtype 1) and h265 (streamtype 6).
+	 * Currently, eMPEGStreamParserTS can only parse video, mpeg2 (streamtype 0), h264 (streamtype 1) and h265 (streamtype 7).
 	 * Also, streamtype -1 should be accepted, which will cause the streamtype to be autodetected.
 	 * Do not try to parse audio pids, which might lead to false hits,
 	 * and waste cpu time.
 	 */
-	if (pidtype == iDVBTSRecorder::video_pid && (streamtype < 2 || streamtype == 6))
+	if (pidtype == iDVBTSRecorder::video_pid && (streamtype < 2 || streamtype == 7))
 	{
 		m_pid = _pid;
 		m_streamtype = streamtype;
