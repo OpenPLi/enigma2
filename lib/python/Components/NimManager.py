@@ -912,8 +912,7 @@ class NimManager:
 				if "configMode" in nimConfig.content.items and nimConfig.configMode.value == "loopthrough" and int(nimConfig.connectedTo.value) == testnim:
 					slots.remove(testnim)
 					break
-		slots.sort()
-		return slots
+		return list(set(slots))
 
 	def canEqualTo(self, slotid):
 		type = self.getNimType(slotid)
