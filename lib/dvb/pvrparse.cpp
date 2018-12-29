@@ -944,7 +944,7 @@ int eMPEGStreamParserTS::processPacket(const unsigned char *pkt, off_t offset)
 //			eDebug("[eMPEGStreamParserTS] SC %02x %02x %02x %02x, %02x", pkt[0], pkt[1], pkt[2], pkt[3], pkt[4]);
 			unsigned int sc = pkt[3];
 
-			if (m_streamtype < eDVBVideo::MPEG2) /* unknown */
+			if (m_streamtype == eDVBVideo::UNKNOWN)
 			{
 				if ((sc == 0x00) || (sc == 0xb3) || (sc == 0xb8))
 				{
@@ -962,7 +962,7 @@ int eMPEGStreamParserTS::processPacket(const unsigned char *pkt, off_t offset)
 
 			switch(m_streamtype)
 			{
-				case(eDVBVideo::MPEG2): // mpeg2
+				case eDVBVideo::MPEG2:
 				{
 					if ((sc == 0x00) || (sc == 0xb3) || (sc == 0xb8)) /* picture, sequence, group start code */
 					{
@@ -993,7 +993,7 @@ int eMPEGStreamParserTS::processPacket(const unsigned char *pkt, off_t offset)
 					break;
 				}
 
-				case(eDVBVideo::MPEG4_H264): // h.264 */
+				case eDVBVideo::MPEG4_H264:
 				{
 					if (sc == 0x09)
 					{
@@ -1016,7 +1016,7 @@ int eMPEGStreamParserTS::processPacket(const unsigned char *pkt, off_t offset)
 					break;
 				}
 
-				case(eDVBVideo::H265_HEVC): // h.265
+				case eDVBVideo::H265_HEVC:
 				{
 					int nal_unit_type = (sc >> 1);
 					if (nal_unit_type == 35) /* H265 NAL unit access delimiter */
@@ -1036,11 +1036,14 @@ int eMPEGStreamParserTS::processPacket(const unsigned char *pkt, off_t offset)
 					break;
 				}
 
-				default:
+				case eDVBVideo::UNKNOWN:
+				case eDVBVideo::VC1:
+				case eDVBVideo::MPEG4_Part2:
+				case eDVBVideo::VC1_SM:
+				case eDVBVideo::MPEG1
+				case eDVBVideo::AVS:
 				{
-					eDebug("[eMPEGStreamParserTS]: unknown streamtype: %d ", m_streamtype);
-
-					break;
+					break; /* TODO: add parser for above codecs */
 				}
 			}
 		}
