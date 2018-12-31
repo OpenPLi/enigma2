@@ -79,6 +79,13 @@
 			<convert type="EventTime">Remaining</convert>
 			<convert type="RemainingToText">FOLLOW</convert>
 		</widget>
+		<widget source="session.CurrentService" render="Pixmap" pixmap="skin_default/icons/stream24.png" size="24,24" position="1,128" zPosition="1" alphatest="blend" >
+			<convert type="ClientsStreaming"/>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget source="session.HddSleepingState" render="Pixmap" pixmap="skin_default/icons/hdd24.png" size="24,24" position="28,128" zPosition="1" alphatest="blend" >
+			<convert type="ConditionalShowHide"/>
+		</widget>
 		<panel name="LcdBottomPanel"/>
 	</screen>
 <!-- channelselection-->
