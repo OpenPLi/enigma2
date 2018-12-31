@@ -301,6 +301,3 @@ class Timer:
 				self.doActivate(timer_list[0])
 			else:
 				break
-
-	def saveTimer(self):
-		pass
