@@ -28,7 +28,7 @@
 	</screen>
 	<screen name="LcdRecordPanel">
 		<widget source="session.RecordState" render="FixedLabel" text=" " position="1,153" size="19,20" halign="left" backgroundColor="#cc0000" font="FdLcD;20" zPosition="1" noWrap="1">
-			<convert type="ConditionalShowHide">Blink,2000</convert>
+			<convert type="ConditionalShowHide">Blink,1500</convert>
 		</widget>
 	</screen>
 	<screen name="LcdOrbitalPositionPanel">
@@ -79,11 +79,11 @@
 			<convert type="EventTime">Remaining</convert>
 			<convert type="RemainingToText">FOLLOW</convert>
 		</widget>
-		<widget source="session.CurrentService" render="Pixmap" pixmap="skin_default/icons/stream24.png" size="24,24" position="1,128" zPosition="1" alphatest="blend" >
+		<widget source="session.CurrentService" render="Pixmap" pixmap="skin_default/icons/stream24.png" position="1,128" size="24,24" zPosition="1" alphatest="blend" >
 			<convert type="ClientsStreaming"/>
 			<convert type="ConditionalShowHide"/>
 		</widget>
-		<widget source="session.HddSleepingState" render="Pixmap" pixmap="skin_default/icons/hdd24.png" size="24,24" position="28,128" zPosition="1" alphatest="blend" >
+		<widget source="session.HddSleepingState" render="Pixmap" pixmap="skin_default/icons/hdd24.png" position="28,128" size="24,24" zPosition="1" alphatest="blend" >
 			<convert type="ConditionalShowHide"/>
 		</widget>
 		<panel name="LcdBottomPanel"/>
@@ -224,6 +224,13 @@
 		</widget>
 		<widget source="global.CurrentTime" render="Label" position="center,center" size="220,62" font="FdLcD;62" halign="center" noWrap="1" foregroundColor="#a0a0a0">
 			<convert type="ClockToText">Format:%H:%M</convert>
+		</widget>
+		<widget source="session.CurrentService" render="Pixmap" pixmap="skin_default/icons/stream24.png" position="26,152" size="24,24" zPosition="1" alphatest="blend" >
+			<convert type="ClientsStreaming"/>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget source="session.HddSleepingState" render="Pixmap" pixmap="skin_default/icons/hdd24.png" position="54,152" size="24,24" zPosition="1" alphatest="blend" >
+			<convert type="ConditionalShowHide"/>
 		</widget>
 		<panel name="LcdRecordPanel"/>
 	</screen>
