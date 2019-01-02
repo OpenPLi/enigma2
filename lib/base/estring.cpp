@@ -920,4 +920,11 @@ std::string string_to_hex(const std::string& input)
         output.push_back(lut[c & 15]);
     }
     return output;
+
+std::string strip_non_graph(std::string s)
+{
+	s = std::regex_replace(s, std::regex("[[^:graph:]]"), " ");
+	s = std::regex_replace(s, std::regex("\\s{2,}"), " ");
+	s = std::regex_replace(s, std::regex("^\\s+|\\s+$"), "");
+	return s;
 }
