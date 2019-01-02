@@ -871,7 +871,7 @@ std::string urlDecode(const std::string &s)
 	return res;
 }
 
-std::string strip_non_graph(std::string &s)
+std::string strip_non_graph(std::string s)
 {
 	s = std::regex_replace(s, std::regex("[[^:graph:]]"), " ");
 	s = std::regex_replace(s, std::regex("\\s{2,}"), " ");
