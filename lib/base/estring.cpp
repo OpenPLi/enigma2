@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <regex>
 #include <cctype>
 #include <climits>
 #include <string>
@@ -868,4 +869,12 @@ std::string urlDecode(const std::string &s)
 		}
 	}
 	return res;
+}
+
+std::string strip_non_graph(std::string &s)
+{
+	s = std::regex_replace(s, std::regex("[[^:graph:]]"), " ");
+	s = std::regex_replace(s, std::regex("\\s{2,}"), " ");
+	s = std::regex_replace(s, std::regex("^\\s+|\\s+$"), "");
+	return s;
 }
