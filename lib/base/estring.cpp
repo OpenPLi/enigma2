@@ -920,6 +920,7 @@ std::string string_to_hex(const std::string& input)
         output.push_back(lut[c & 15]);
     }
     return output;
+}
 
 std::string strip_non_graph(std::string s)
 {
