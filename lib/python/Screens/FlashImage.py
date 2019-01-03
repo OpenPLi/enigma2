@@ -127,14 +127,17 @@ class SelectImage(Screen):
 	def keyDelete(self):
 		currentSelected= self["list"].l.getCurrentSelection()[0][1]
 		if not("://" in currentSelected or currentSelected in ["Expander", "Waiter"]):
-			os.remove(currentSelected)
-			currentSelected = ".".join([currentSelected[:-4], "unzipped"])
-			if os.path.isdir(currentSelected):
-				shutil.rmtree(currentSelected)
-			self.setIndex = self["list"].getSelectedIndex()
-			self.imagesList = []
-			self["list"].setList([ChoiceEntryComponent('',((_("Refreshing image list - Please wait...")), "Waiter"))])
-			self.delay.start(0, True)
+			try:
+				os.remove(currentSelected)
+				currentSelected = ".".join([currentSelected[:-4], "unzipped"])
+				if os.path.isdir(currentSelected):
+					shutil.rmtree(currentSelected)
+				self.setIndex = self["list"].getSelectedIndex()
+				self.imagesList = []
+				self["list"].setList([ChoiceEntryComponent('',((_("Refreshing image list - Please wait...")), "Waiter"))])
+				self.delay.start(0, True)
+			except:
+				self.session.open(MessageBox, _("Cannot delete downloaded image"), MessageBox.TYPE_ERROR, timeout=3)
 
 	def selectionChanged(self):
 		currentSelected = self["list"].l.getCurrentSelection()
@@ -273,18 +276,20 @@ class FlashImage(Screen):
 				self.zippedimage = "://" in self.source and os.path.join(destination, self.imagename) or self.source
 				self.unzippedimage = os.path.join(destination, '%s.unzipped' % self.imagename[:-4])
 
-				if os.path.isfile(destination):
-					os.remove(destination)
-				if not os.path.isdir(destination):
-					os.mkdir(destination)
-
-				if doBackup:
-					if isDevice:
-						self.startBackupsettings(True)
+				try:
+					if os.path.isfile(destination):
+						os.remove(destination)
+					if not os.path.isdir(destination):
+						os.mkdir(destination)
+					if doBackup:
+						if isDevice:
+							self.startBackupsettings(True)
+						else:
+							self.session.openWithCallback(self.startBackupsettings, MessageBox, _("Can only find a network drive to store the backup this means after the flash the autorestore will not work. Alternativaly you can mount the network drive after the flash and perform a manufacurer reset to autorestore"), simple=True)
 					else:
-						self.session.openWithCallback(self.startBackupsettings, MessageBox, _("Can only find a network drive to store the backup this means after the flash the autorestore will not work. Alternativaly you can mount the network drive after the flash and perform a manufacurer reset to autorestore"), simple=True)
-				else:
-					self.startDownload()
+						self.startDownload()
+				except:
+					self.session.openWithCallback(self.abort, MessageBox, _("Could not some setup the required directories on the media (e.g. USB stick) - Please verify media and check try again!"), type=MessageBox.TYPE_ERROR, simple=True)
 			else:
 				self.session.openWithCallback(self.abort, MessageBox, _("Could not find suitable media - Please remove some downloaded images or insert a media (e.g. USB stick) with sufficiant free space and try again!"), type=MessageBox.TYPE_ERROR, simple=True)
 		else:
