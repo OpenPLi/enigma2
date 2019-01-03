@@ -99,14 +99,14 @@ class AutoInstallWizard(Screen):
 		self.abort()
 
 	def run_console(self):
-		self.counter += 1
 		self["progress"].setValue(100 * self.counter/self.totalpackages)
 		try:
 			open("/proc/progress", "w").write(str(self["progress"].value))
 		except IOError:
 			pass
+		self.counter += 1
 		self.package = self.packages.pop(0)
-		self["header"].setText(_("Autoinstalling %s") % self.package)
+		self["header"].setText(_("%s%% Autoinstalling %s") % (self["progress"].value, self.package))
 		if self.package in [line.strip().split(":", 1)[1].strip() for line in open('/var/lib/opkg/status').readlines() if line.startswith('Package:')]:
 			self.dataAvail('skip already installed package %s\n' % self.package)
 			self.appClosed()
@@ -131,6 +131,7 @@ class AutoInstallWizard(Screen):
 		if self.packages:
 			self.run_console()
 		else:
+			self["progress"].setValue(100)
 			self["header"].setText(_("Autoinstalling Completed"))
 			self.delay = eTimer()
 			self.delay.callback.append(self.abort)
