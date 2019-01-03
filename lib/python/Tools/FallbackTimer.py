@@ -12,10 +12,13 @@ class FallbackTimerList():
 		self.fallbackFunction = fallbackFunction
 		self.fallbackFunctionNOK = fallbackFunctionNOK or fallbackFunction
 		self.parent = parent
+		self.headers = {}
 		if config.usage.remote_fallback_enabled.value and config.usage.remote_fallback_external_timer.value and config.usage.remote_fallback.value:
 			self.url = config.usage.remote_fallback.value.rsplit(":", 1)[0]
 			if config.usage.remote_fallback_openwebif_customize.value:
 				self.url = "%s:%s" % (self.url, config.usage.remote_fallback_openwebif_port.value)
+				if config.usage.remote_fallback_openwebif_userid.value and config.usage.remote_fallback_openwebif_password.value:
+					self.headers = {"Authorization": "Basic %s" % encodestring("%s:%s" % (config.usage.remote_fallback_openwebif_userid.value, config.usage.remote_fallback_openwebif_password.value)).strip()}
 			self.getFallbackTimerList()
 		else:
 			self.url = None
@@ -24,12 +27,8 @@ class FallbackTimerList():
 
 	def getUrl(self, url):
 		print "[FallbackTimer] getURL", url
-		if config.usage.remote_fallback_openwebif_customize.value and config.usage.remote_fallback_openwebif_userid.value and config.usage.remote_fallback_openwebif_password.value:
-			headers = {"Authorization": "Basic %s" % encodestring("%s:%s" % (config.usage.remote_fallback_openwebif_userid.value, config.usage.remote_fallback_openwebif_password.value)).strip()}
-		else:
-			headers = {}
 		from twisted.web.client import getPage
-		return getPage("%s/%s" % (self.url, url), headers=headers)
+		return getPage("%s/%s" % (self.url, url), headers=self.headers)
 
 	def getFallbackTimerList(self):
 		self.list = []

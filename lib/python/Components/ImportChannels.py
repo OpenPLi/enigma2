@@ -12,19 +12,22 @@ class ImportChannels():
 
 	def __init__(self):
 		if config.usage.remote_fallback_enabled.value and config.usage.remote_fallback_import.value and config.usage.remote_fallback.value and not "ChannelsImport" in [x.name for x in threading.enumerate()]:
-				if config.usage.remote_fallback_enabled.value and config.usage.remote_fallback_import.value and config.usage.remote_fallback_import_url.value != "same" and config.usage.remote_fallback_import_url.value:
-					self.url = config.usage.remote_fallback_import_url.value.rsplit(":", 1)[0]
-				else:
-					self.url = config.usage.remote_fallback.value.rsplit(":", 1)[0]
-				if config.usage.remote_fallback_openwebif_customize.value:
-					self.url = "%s:%s" % (self.url, config.usage.remote_fallback_openwebif_port.value)
-				self.thread = threading.Thread(target=self.threaded_function, name="ChannelsImport")
-				self.thread.start()
+			self.header = None
+			if config.usage.remote_fallback_enabled.value and config.usage.remote_fallback_import.value and config.usage.remote_fallback_import_url.value != "same" and config.usage.remote_fallback_import_url.value:
+				self.url = config.usage.remote_fallback_import_url.value.rsplit(":", 1)[0]
+			else:
+				self.url = config.usage.remote_fallback.value.rsplit(":", 1)[0]
+			if config.usage.remote_fallback_openwebif_customize.value:
+				self.url = "%s:%s" % (self.url, config.usage.remote_fallback_openwebif_port.value)
+				if config.usage.remote_fallback_openwebif_userid.value and config.usage.remote_fallback_openwebif_password.value:
+					self.header = "Basic %s" % encodestring("%s:%s" % (config.usage.remote_fallback_openwebif_userid.value, config.usage.remote_fallback_openwebif_password.value)).strip()
+			self.thread = threading.Thread(target=self.threaded_function, name="ChannelsImport")
+			self.thread.start()
 
 	def getUrl(self, url):
 		request = urllib2.Request(url)
-		if config.usage.remote_fallback_openwebif_customize.value and config.usage.remote_fallback_openwebif_userid.value and config.usage.remote_fallback_openwebif_password.value:
-			request.add_header("Authorization", "Basic %s" % encodestring("%s:%s" % (config.usage.remote_fallback_openwebif_userid.value, config.usage.remote_fallback_openwebif_password.value)).strip())
+		if self.header:
+			request.add_header("Authorization", self.header)
 		return urllib2.urlopen(request, timeout=5)
 
 	def threaded_function(self):
