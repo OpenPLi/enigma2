@@ -133,9 +133,9 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 			self.list.append(getConfigListEntry(_("Show notification when import channels was not successful"),
 				config.usage.remote_fallback_nok,
 				_("Show notification when import channels and/or EPG from remote receiver URL did not complete")))
-			self.list.append(getConfigListEntry(_("Custumize OpenWebIF settings for fallback tuner"),
+			self.list.append(getConfigListEntry(_("Customize OpenWebIF settings for fallback tuner"),
 				config.usage.remote_fallback_openwebif_customize,
-				_("When enabled you can custimize the OpenWebIf settings for the fallback tuner")))
+				_("When enabled you can customize the OpenWebIf settings for the fallback tuner")))
 			if config.usage.remote_fallback_openwebif_customize.value:
 				self.list.append(getConfigListEntry(_("User ID"),
 					config.usage.remote_fallback_openwebif_userid,
