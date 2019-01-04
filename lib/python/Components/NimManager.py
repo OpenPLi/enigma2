@@ -1396,6 +1396,11 @@ def InitNimManager(nimmgr, update_slots = []):
 		if os.path.exists("/proc/stb/frontend/%d/tone_amplitude" % fe_id):
 			open("/proc/stb/frontend/%d/tone_amplitude" %(fe_id), "w").write(configElement.value)
 
+	def t2miRawModeChanged(configElement):
+		slot = configElement.slot
+		if os.path.exists("/proc/stb/frontend/%d/t2mirawmode" % slot):
+			open("/proc/stb/frontend/%d/t2mirawmode" % slot, "w").write(configElement.value)
+
 	def createSatConfig(nim, x, empty_slots):
 		try:
 			nim.toneAmplitude
@@ -1408,6 +1413,9 @@ def InitNimManager(nimmgr, update_slots = []):
 			nim.scpcSearchRange.fe_id = x - empty_slots
 			nim.scpcSearchRange.slot_id = x
 			nim.scpcSearchRange.addNotifier(scpcSearchRangeChanged)
+			nim.t2miRawMode = ConfigSelection([("disable", _("disabled")), ("enable", _("enabled"))], "disable")
+			nim.t2miRawMode.slot = x
+			nim.t2miRawMode.addNotifier(t2miRawModeChanged)
 			nim.diseqc13V = ConfigYesNo(False)
 			nim.diseqcMode = ConfigSelection(diseqc_mode_choices, "diseqc_a_b")
 			nim.connectedTo = ConfigSelection([(str(id), nimmgr.getNimDescription(id)) for id in nimmgr.getNimListOfType("DVB-S") if id != x])
