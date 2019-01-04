@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-27 17:56+0100\n"
-"PO-Revision-Date: 2018-12-27 17:58+0100\n"
+"POT-Creation-Date: 2019-01-04 23:29+0100\n"
+"PO-Revision-Date: 2019-01-04 23:38+0100\n"
 "Last-Translator: Pr2\n"
 "Language-Team: french\n"
 "Language: fr\n"
@@ -406,6 +406,10 @@ msgid "%s updated package available"
 msgid_plural "%s updated packages available"
 msgstr[0] "%s mise à jour disponible"
 msgstr[1] "%s mises à jour disponibles"
+
+#, python-format
+msgid "%s%% Autoinstalling %s"
+msgstr "%s%% Autoinstallation %s"
 
 #, python-format
 msgid "%s%d min"
@@ -1219,10 +1223,6 @@ msgstr "Lecture auto fichier Blu-ray"
 msgid "Auto scart switching"
 msgstr "Commutation auto péritel"
 
-#, python-format
-msgid "Autoinstalling %s"
-msgstr "Autoinstallation %s"
-
 msgid "Autoinstalling Completed"
 msgstr "Autoinstallation terminée"
 
@@ -1541,6 +1541,9 @@ msgstr "Annuler les modifications de texte et quitter"
 
 msgid "Cancelled upon user request"
 msgstr "Annulé à la demande de l’utilisateur"
+
+msgid "Cannot delete downloaded image"
+msgstr "Impossible de supprimer l'image téléchargée"
 
 msgid "Cannot determine"
 msgstr "Impossible à déterminer"
@@ -2241,6 +2244,9 @@ msgstr "Impossible d'enregistrer en raison d'un conflit de programmation %s"
 msgid "Could not record due to invalid service %s"
 msgstr "Impossible d'enregistrer en raison d'un service non valide %s"
 
+msgid "Could not some setup the required directories on the media (e.g. USB stick) - Please verify media and check try again!"
+msgstr "Impossible de configurer les répertoires requis sur les médias (par exemple, clé USB) - S’il vous plaît vérifier les médias puis réessayer!"
+
 msgid "Country"
 msgstr "Pays"
 
@@ -2324,6 +2330,9 @@ msgstr "Personnaliser délai saut pour touches '7'/'9'"
 
 msgid "Customize"
 msgstr "Personnaliser"
+
+msgid "Customize OpenWebIF settings for fallback tuner"
+msgstr "Personnaliser les paramètres OpenWebIF pour le tuner de secours"
 
 msgid "Customize channel list cursor behavior"
 msgstr "Comportement du curseur dans la liste des chaînes"
@@ -5581,6 +5590,9 @@ msgstr "Éditeur des services avec contrôle parental"
 msgid "Parental control setup"
 msgstr "Paramètres du contrôle parental"
 
+msgid "Password"
+msgstr "Mot de passe"
+
 msgid "Pause"
 msgstr "Pause"
 
@@ -5916,6 +5928,9 @@ msgstr "Polarisation"
 
 msgid "Polish"
 msgstr "Polonais"
+
+msgid "Port"
+msgstr "Port"
 
 msgid "Port A"
 msgstr "Port A"
@@ -7347,6 +7362,15 @@ msgstr "Définir la séquence de répétition si votre installation aérienne en
 msgid "Set startup service"
 msgstr "Choisir comme service de démarrage"
 
+msgid "Set the User ID of the OpenWeb interface from your fallback tuner"
+msgstr "Définir l'ID utilisateur de l'interface OpenWebif à partir de votre tuner de secours"
+
+msgid "Set the password of the OpenWeb interface from your fallback tuner"
+msgstr "Définir le mot de passe de l'interface OpenWebif à partir de votre tuner de secours"
+
+msgid "Set the port of the OpenWeb interace from your fallback tuner"
+msgstr "Définir le port de l'interace OpenWeb à partir de votre tuner de secours"
+
 msgid "Set the type of the progress indication in the channel selection screen."
 msgstr "Défini le type et la localisation de l'indicateur de progression des événements dans la sélection des chaînes. Soit barre graphe, soit en pourcentage à gauche ou à droite du nom du service."
 
@@ -8294,13 +8318,16 @@ msgstr "Système"
 msgid "System & Modulation"
 msgstr "Système & modulation"
 
+msgid "T2MI RAW Mode"
+msgstr "T2MI mode RAW"
+
 #. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
 msgid "TRANSLATOR_INFO"
 msgstr ""
 "Traduction Française\n"
 "Enigma2 - OpenPLi\n"
 "Support: www.openpli.org\n"
-"Dernière MAJ: 27-12-2018"
+"Dernière MAJ: 04-01-2019"
 
 msgid "TS file is too large for ISO9660 level 1!"
 msgstr "Fichier TS trop grand pour le niveau 1 ISO9660!"
@@ -9325,6 +9352,9 @@ msgstr "Type de recherche de service utilisé"
 msgid "User - bouquets"
 msgstr "Perso - bouquets"
 
+msgid "User ID"
+msgstr "ID de l’utilisateur"
+
 msgid "User Mode"
 msgstr "Mode utilisateur"
 
@@ -9687,6 +9717,9 @@ msgstr "Lorsqu'elle est activée, quand vous sélectionnez une chaîne dans la l
 msgid "When enabled you can control the volume with the arrow buttons instead of getting the channel selection list"
 msgstr "Lorsqu'elle est activée, vous pouvez contrôler le volume avec les flèches à la place d'avoir la liste des chaînes"
 
+msgid "When enabled you can customize the OpenWebIf settings for the fallback tuner"
+msgstr "Lorsque cette option est activée, vous pouvez personnaliser les paramètres OpenWebIf pour le tuner de secours"
+
 msgid "When enabled you can specify a timeframe to ignore the shutdown timer when the receiver is in standby mode"
 msgstr "Lorsqu'elle est activée, vous pouvez spécifier une plage horaire pendant laquelle le timer d'arrêt complet est ignoré lorsque le récepteur est en mode veille"
 
@@ -9887,6 +9920,9 @@ msgstr "Configuration connexion réseau sans fil."
 
 msgid "Wireless network state"
 msgstr "État du réseau sans fil"
+
+msgid "With T2MI RAW mode disabled (default) we can use single T2MI PLP de-encapsulation. With T2MI RAW mode enabled we can use astra-sm to analyze T2MI"
+msgstr "Avec T2MI mode RAW désactivé (par défaut), nous pouvons utiliser Single T2MI PLP de-encapsulation. Avec T2MI mode RAW activé, nous pouvons utiliser Astra-SM pour analyser T2MI"
 
 msgid "With errors:"
 msgstr "Avec erreurs:"
