@@ -205,12 +205,6 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 				if fileExists("/proc/stb/frontend/%d/t2mirawmode" % self.nim.slot):
 					self.t2mirawmode = getConfigListEntry(_("T2MI RAW Mode"), self.nimConfig.t2miRawMode, _("With T2MI RAW mode disabled (default) we can use single T2MI PLP de-encapsulation. With T2MI RAW mode enabled we can use astra-sm to analyze T2MI"))
 					self.list.append(self.t2mirawmode)
-				if SystemInfo["HasForceLNBOn"] and self.nim.isFBCRoot():
-					self.forcelnbpower = getConfigListEntry(_("Force LNB Power"), config.misc.forceLnbPower)
-					self.list.append(self.forcelnbpower)
-				if SystemInfo["HasForceToneburst"] and self.nim.isFBCRoot():
-					self.forcetoneburst = getConfigListEntry(_("Force ToneBurst"), config.misc.forceToneBurst)
-					self.list.append(self.forcetoneburst)
 		elif self.nim.isCompatible("DVB-C"):
 			self.configMode = getConfigListEntry(_("Configuration mode"), self.nimConfig.configMode, _("Select 'enabled' if this tuner has a signal cable connected, otherwise select 'nothing connected'."))
 			self.list.append(self.configMode)
