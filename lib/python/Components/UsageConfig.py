@@ -540,18 +540,6 @@ def InitUsageConfig():
 		config.usage.vfd_final_scroll_delay = ConfigSelection(default = "1000", choices = choicelist)
 		config.usage.vfd_final_scroll_delay.addNotifier(final_scroll_delay, immediate_feedback = False)
 
-	if SystemInfo["HasForceLNBOn"]:
-		def forceLNBPowerChanged(configElement):
-			open(SystemInfo["HasForceLNBOn"], "w").write(configElement.value)
-		config.misc.forceLnbPower = ConfigSelection(default = "on", choices = [ ("on", _("yes")), ("off", _("no"))] )
-		config.misc.forceLnbPower.addNotifier(forceLNBPowerChanged)
-
-	if SystemInfo["HasForceToneburst"]:
-		def forceToneBurstChanged(configElement):
-			open(SystemInfo["HasForceToneburst"], "w").write(configElement.value)
-		config.misc.forceToneBurst = ConfigSelection(default = "enable", choices = [ ("enable", _("yes")), ("disable", _("no"))] )
-		config.misc.forceToneBurst.addNotifier(forceToneBurstChanged)
-
 	if SystemInfo["HasBypassEdidChecking"]:
 		def setHasBypassEdidChecking(configElement):
 			open(SystemInfo["HasBypassEdidChecking"], "w").write(configElement.value)
