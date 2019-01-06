@@ -36,7 +36,7 @@
 			<convert type="ServiceOrbitalPosition"/>
 		</widget>
 	</screen>
-	<screen name="LcdTunerPanel">
+	<screen name="LcdActiveTunerPanel">
 		<widget source="session.FrontendInfo" render="FixedLabel" position="0,151" size="18,24" text="A" foregroundColor="#04B404" font="FdLcD;24">
 			<convert type="FrontendInfo">NUMBER</convert>
 			<convert type="ValueRange">0,0</convert>
@@ -58,8 +58,23 @@
 			<convert type="ServiceOrbitalPosition"/>
 		</widget>
 	</screen>
+	<screen name="LcdTuners">
+		<widget source="session.FrontendInfo" render="Label" position="1,126" size="58,26" halign="left" font="FdLcD;26">
+			<convert type="FrontendInfo">STRING,3,2</convert>
+		</widget>
+	</screen>
+	<screen name="LcdStream">
+			<widget source="session.CurrentService" render="Pixmap" pixmap="skin_default/icons/stream24.png" position="64,129" size="24,24" zPosition="1" alphatest="blend" >
+			<convert type="ClientsStreaming"/>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+	</screen>
+	<screen name="LcdHdd">
+		<widget source="session.HddSleepingState" render="Pixmap" pixmap="skin_default/icons/hdd24.png" position="92,129" size="24,24" zPosition="1" alphatest="blend" >
+			<convert type="ConditionalShowHide"/>
+		</widget>
+	</screen>
 	<screen name="LcdBottomPanel">
-		<panel name="LcdTunerPanel"/>
 		<panel name="LcdOrbitalPositionPanel"/>
 		<panel name="LcdRecordPanel"/>
 		<panel name="LcdClockPanel"/>
@@ -79,13 +94,9 @@
 			<convert type="EventTime">Remaining</convert>
 			<convert type="RemainingToText">FOLLOW</convert>
 		</widget>
-		<widget source="session.CurrentService" render="Pixmap" pixmap="skin_default/icons/stream24.png" position="1,129" size="24,24" zPosition="1" alphatest="blend" >
-			<convert type="ClientsStreaming"/>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget source="session.HddSleepingState" render="Pixmap" pixmap="skin_default/icons/hdd24.png" position="28,129" size="24,24" zPosition="1" alphatest="blend" >
-			<convert type="ConditionalShowHide"/>
-		</widget>
+		<panel name="LcdStream"/>
+		<panel name="LcdHdd"/>
+		<panel name="LcdTuners"/>
 		<panel name="LcdBottomPanel"/>
 	</screen>
 <!-- channelselection-->
@@ -111,7 +122,7 @@
 			<convert type="EventTime">EndTime</convert>
 			<convert type="ClockToText">Format:- %H:%M</convert>
 		</widget>
-		<panel name="LcdTunerPanel"/>
+		<panel name="LcdActiveTunerPanel"/>
 		<panel name="LcdChannelOrbitalPositionPanel"/>
 		<panel name="LcdRecordPanel"/>
 		<panel name="LcdClockPanel"/>
@@ -286,7 +297,7 @@
 		<widget source="session.CurrentService" render="Label" position="18,151" size="102,24" halign="center" font="CondFdLcD;24" noWrap="1">
 			<convert type="ServiceOrbitalPosition"/>
 		</widget>
-		<panel name="LcdTunerPanel"/>
+		<panel name="LcdActiveTunerPanel"/>
 		<panel name="LcdRecordPanel"/>
 		<panel name="LcdClockPanel"/>
 	</screen>
@@ -314,7 +325,7 @@
 		<widget source="session.CurrentService" render="Label" position="18,151" size="102,24" halign="center" font="CondFdLcD;24" noWrap="1">
 			<convert type="ServiceOrbitalPosition"/>
 		</widget>
-		<panel name="LcdTunerPanel"/>
+		<panel name="LcdActiveTunerPanel"/>
 		<panel name="LcdRecordPanel"/>
 		<panel name="LcdClockPanel"/>
 	</screen>
