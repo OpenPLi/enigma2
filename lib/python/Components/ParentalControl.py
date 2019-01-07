@@ -230,7 +230,7 @@ class ParentalControl:
 		if not self.filesOpened:
 			config.misc.standbyCounter.addNotifier(self.standbyCounterCallback, initial_call=False)
 			self.filesOpened = True
-			refreshServiceList()
+		refreshServiceList()
 
 	def __getattr__(self, name):
 		if name in ('blacklist', 'whitelist'):
