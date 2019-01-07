@@ -32,7 +32,8 @@ class GetImagelist():
 	def appClosed(self, data, retval, extra_args):
 		if retval == 0 and self.phase == self.MOUNT:
 			if os.path.isfile("/tmp/testmount/usr/bin/enigma2"):
-				self.imagelist[self.slot] =  { 'imagename': open("/tmp/testmount/etc/issue").readlines()[-2].capitalize().strip()[:-6]}
+				import datetime
+				self.imagelist[self.slot] =  { 'imagename': "%s (%s)" % (open("/tmp/testmount/etc/issue").readlines()[-2].capitalize().strip()[:-6], datetime.datetime.fromtimestamp(os.stat("/tmp/testmount/usr/share/bootlogo.mvi").st_mtime).strftime('%Y-%m-%d'))}
 			else:
 				self.imagelist[self.slot] = { 'imagename': _("Empty slot")}
 			self.phase = self.UNMOUNT
