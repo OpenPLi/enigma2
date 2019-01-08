@@ -664,11 +664,6 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 			# sanity check for empty sat list
 			if self.nimConfig.configMode.value != "satposdepends" and len(nimmanager.getSatListForNim(self.slotid)) < 1:
 				self.nimConfig.configMode.value = "nothing"
-			if self.nim.isFBCRoot():
-				if SystemInfo["HasForceLNBOn"]:
-					config.misc.forceLnbPower.save()
-				if SystemInfo["HasForceToneburst"]:
-					config.misc.forceToneBurst.save()
 		if self.isChanged():
 			for x in self["config"].list:
 				x[1].save()
