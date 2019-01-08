@@ -99,6 +99,12 @@ def getHotkeys():
 		("Favorites" + " " + _("long"), "favorites_long", ""),
 		("Mouse", "mouse", ""),
 		("Mouse" + " " + _("long"), "mouse_long", ""),
+		("Sat", "sat", ""),
+		("Sat" + " " + _("long"), "sat_long", ""),
+		("Homepage", "homepage", ""),
+		("Homepage" + " " + _("long"), "homepage_long", ""),
+		("EjectCD", "ejectcd", ""),
+		("EjectCD" + " " + _("long"), "ejectcd_long", ""),
 		("WWW Portal", "www", ""),
 		("WWW Portal" + " " + _("long"), "www_long", "")]
 
