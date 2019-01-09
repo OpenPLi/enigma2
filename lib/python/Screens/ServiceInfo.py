@@ -184,7 +184,7 @@ class ServiceInfo(Screen):
 					#live dvb-s-t
 						fillList = fillList + [(_("Service reference"), refstr, TYPE_TEXT)]
 				self.audio = self.service and self.service.audioTracks()
-				self.numberofTracks = self.audio.getNumberOfTracks()
+				self.numberofTracks = self.audio and self.audio.getNumberOfTracks()
 				self.subList = self.getSubtitleList()
 				self.togglePIDButton()
 				trackList = self.getTrackList()
