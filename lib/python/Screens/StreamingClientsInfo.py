@@ -81,21 +81,11 @@ class StreamingClientsInfo(Screen):
 	def stopCurrentStreamCallback(self, answer):
 		if answer:
 			client = self["menu"].l.getCurrentSelection()
-			if client:
-				if client[1][0] != -1:
-					if self.streamServer:
-						for x in self.streamServer.getConnectedClients():
-							if client[1][0] == x[0] and client[1][1] == x[1]:
-								if not self.streamServer.stopStreamClient(client[1][0], client[1][1]):
-									self.session.open(MessageBox,  client[0] +" \n\n" + _("Error stop stream!"), MessageBox.TYPE_WARNING)
-				elif StreamServiceList and streamList:
-					self.session.open(MessageBox,  client[0] +" \n\n" + _("Not yet implemented!"), MessageBox.TYPE_WARNING)
-					# TODO
-					#for x in streamList[:]:
-					#	if hasattr(x, 'getService') and x.getService() and x.getService().__deref__() == client[1][1]:
-					#		x.execEnd()
-					#		if x in streamList:
-					#			streamList.remove(x)
+			if client and client[1][0] != -1 and self.streamServer:
+				for x in self.streamServer.getConnectedClients():
+					if client[1][0] == x[0] and client[1][1] == x[1]:
+						if not self.streamServer.stopStreamClient(client[1][0], client[1][1]):
+							self.session.open(MessageBox,  client[0] +" \n\n" + _("Error stop stream!"), MessageBox.TYPE_WARNING)
 				self.updateClients()
 
 	def stopAllStreams(self):
@@ -108,13 +98,6 @@ class StreamingClientsInfo(Screen):
 			if self.streamServer:
 				for x in self.streamServer.getConnectedClients():
 					self.streamServer.stopStream()
-			# TODO
-			#if StreamServiceList and streamList:
-			#	for x in streamList[:]:
-			#		if hasattr(x, 'execEnd'):
-			#			x.execEnd()
-			#			if x in streamList:
-			#				streamList.remove(x)
 			self.updateClients()
 			if not self.clients:
 				self.close()
