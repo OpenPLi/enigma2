@@ -220,7 +220,7 @@ class FlashImage(Screen):
 			self.getImageList = GetImagelist(self.getImagelistCallback)
 		else:
 			choices = [(_("Yes, with backup"), "with backup"), (_("Yes, without backup"), "without backup"), (_("No, do not flash image"), False)]
-			self.session.openWithCallback(self.checkMedia, MessageBox, self.message , list=choices, default=False)
+			self.session.openWithCallback(self.checkMedia, MessageBox, self.message , list=choices, default=False, simple=True)
 
 	def getImagelistCallback(self, imagedict):
 		self.getImageList = None
@@ -231,7 +231,7 @@ class FlashImage(Screen):
 		for x in range(1, SystemInfo["canMultiBoot"][1] + 1):
 			choices.append(((_("slot%s - %s (current image), without backup") if x == currentimageslot else _("slot%s - %s, without backup")) % (x, imagedict[x]['imagename']), (x, "without backup")))
 		choices.append((_("No, do not flash image"), False))
-		self.session.openWithCallback(self.checkMedia, MessageBox, self.message, list=choices, default=currentimageslot)
+		self.session.openWithCallback(self.checkMedia, MessageBox, self.message, list=choices, default=currentimageslot, simple=True)
 
 	def checkMedia(self, retval):
 		if retval:
