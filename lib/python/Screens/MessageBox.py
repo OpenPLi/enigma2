@@ -167,4 +167,4 @@ class MessageBox(Screen):
 		def getListLineTextWidth(text):
 			self["autoresize"].setText(text)
 			return self["autoresize"].getSize()[0]
-		return max([getListLineTextWidth(line[0]) for line in self.list])
+		return max([getListLineTextWidth(line[0]) for line in self.list]) if self.list else 0
