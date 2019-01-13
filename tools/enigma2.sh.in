@@ -26,7 +26,7 @@ fi
 
 # any debuglevel passed?
 if [ -z $ENIGMA_DEBUG_LVL ]; then
-	DEBUG_LVL=2
+	DEBUG_LVL=3
 else
 	DEBUG_LVL=$ENIGMA_DEBUG_LVL
 fi
@@ -38,7 +38,12 @@ while : ; do
 
 	# start enigma
 	sync
-	LD_PRELOAD=$LIBS ENIGMA_DEBUG_LVL=$DEBUG_LVL @bindir@/enigma2 2>&1 | tee /home/root/enigma.log
+	if [ $ENIGMA_DEBUG_LVL -lt 4 ]; then
+		LD_PRELOAD=$LIBS ENIGMA_DEBUG_LVL=$DEBUG_LVL @bindir@/enigma2
+	else
+		LD_PRELOAD=$LIBS ENIGMA_DEBUG_LVL=$DEBUG_LVL @bindir@/enigma2 > /home/root/enigma.log 2&>1
+	fi
+
 
 	# enigma2 exit codes:
 	#
@@ -62,7 +67,7 @@ while : ; do
 			/sbin/reboot
 			;;
 		3)
-			DEBUG_LVL=2
+			DEBUG_LVL=3
 			;;
 		4)
 			/sbin/rmmod lcd
@@ -108,9 +113,10 @@ while : ; do
 			/etc/init.d/networking start
 			/etc/init.d/avahi-daemon start
 			touch /etc/.doAutoinstall
+			break
 			;;
 		*)
-			DEBUG_LVL=4
+			break
 			;;
 	esac
 
