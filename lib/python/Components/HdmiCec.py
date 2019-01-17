@@ -285,7 +285,7 @@ class HdmiCec:
 		self.standbyMessages()
 
 	def onEnterDeepStandby(self, configElement):
-		if config.hdmicec.handle_deepstandby_events.value:
+		if config.hdmicec.enabled.value and config.hdmicec.handle_deepstandby_events.value:
 			if config.hdmicec.next_boxes_detect.value:
 				self.delay.start(750, True)
 			else:
