@@ -357,6 +357,12 @@ def InitUsageConfig():
 		config.usage.standbyLED = ConfigYesNo(default = True)
 		config.usage.standbyLED.addNotifier(standbyLEDChanged)
 
+	if SystemInfo["SuspendLED"]:
+		def suspendLEDChanged(configElement):
+			open(SystemInfo["SuspendLED"], "w").write(configElement.value and "on" or "off")
+		config.usage.suspendLED = ConfigYesNo(default = True)
+		config.usage.suspendLED.addNotifier(suspendLEDChanged)
+
 	if SystemInfo["PowerOffDisplay"]:
 		def powerOffDisplayChanged(configElement):
 			open(SystemInfo["PowerOffDisplay"], "w").write(configElement.value and "1" or "0")
