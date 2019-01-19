@@ -42,6 +42,12 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		prompt = title  # Title should only be used for screen titles!
 		self.key_bg = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_bg.png"))
 		self.key_sel = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_sel.png"))
+		self.key_longl_sel = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_longl_sel.png"))
+		self.key_longm_sel = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_longm_sel.png"))
+		self.key_longr_sel = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_longr_sel.png"))
+		key_longl_bg = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_longl_bg.png"))
+		key_longm_bg = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_longm_bg.png"))
+		key_longr_bg = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_longr_bg.png"))
 		key_red_bg = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_red.png"))
 		key_green_bg = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_green.png"))
 		key_yellow_bg = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_yellow.png"))
@@ -64,7 +70,10 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 			"OK": key_green_bg,
 			"ENTER": key_green_bg,
 			"LOC": key_yellow_bg,
-			"SHFT": key_blue_bg
+			"SHFT": key_blue_bg,
+			"LongL": key_longl_bg,
+			"LongM": key_longm_bg,
+			"LongR": key_longr_bg
 		}
 		self.keyImages = [{
 			"BACKSPACE": key_backspace,
@@ -373,6 +382,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		self.language = None
 		self.location = None
 		self.keyList = []
+		self.previousSelectedKey = []
 		self.shiftLevels = 0
 		self.shiftLevel = 0
 		self.keyboardWidth = 0
@@ -628,7 +638,6 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		self.list = []
 		for keys in self.keyList[self.shiftLevel]:
 			self.list.append(self.virtualKeyBoardEntryComponent(keys))
-		self.previousSelectedKey = None
 		if self.selectedKey is None:
 			self.selectedKey = self.keyboardWidth
 		self.markSelectedKey()
@@ -647,7 +656,9 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 				res.append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(width, self.height), png=image))
 			else:
 				width = self.width
-				res.append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(width, self.height), png=self.keyBackgrounds.get(key, self.key_bg)))
+				res.append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(width, self.height), png=self.keyBackgrounds.get(key.split("__")[0], self.key_bg)))
+				if "__" in key:
+					key = key.split("__")[1] if not "__HIDE" in key else u""
 				if len(key) > 1:  # NOTE: UTF8 / Unicode glyphs only count as one character here.
 					text.append(MultiContentEntryText(pos=(x, 0), size=(width, self.height), font=1, flags=RT_HALIGN_CENTER | RT_VALIGN_CENTER, text=_(key.encode("utf-8")), color=self.shiftColors[self.shiftLevel]))
 				else:
@@ -657,60 +668,90 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		return res + text
 
 	def markSelectedKey(self):
-		if self.previousSelectedKey is not None:
-			self.list[self.previousSelectedKey / self.keyboardWidth] = self.list[self.previousSelectedKey / self.keyboardWidth][:-1]
+		for key in self.previousSelectedKey:
+			self.list[key / self.keyboardWidth] = self.list[key / self.keyboardWidth][:-1]
+		self.previousSelectedKey = []
 		if self.selectedKey > self.maxKey:
 			self.selectedKey = self.maxKey
-		x = self.list[self.selectedKey / self.keyboardWidth][self.selectedKey % self.keyboardWidth + 1][1]
-		if self.key_sel is None:
-			width = self.width
+		if "__" not in self.keyList[self.shiftLevel][self.selectedKey / self.keyboardWidth][self.selectedKey % self.keyboardWidth]:
+			x = self.list[self.selectedKey / self.keyboardWidth][self.selectedKey % self.keyboardWidth + 1][1]
+			self.list[self.selectedKey / self.keyboardWidth].append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(self.key_sel_width, self.height), png=self.key_sel))
+			self.previousSelectedKey.append(self.selectedKey)
 		else:
-			width = self.key_sel.size().width()
-		self.list[self.selectedKey / self.keyboardWidth].append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(width, self.height), png=self.key_sel))
-		self.previousSelectedKey = self.selectedKey
+			selectedKeyShift = self.selectedKey
+			while True:
+				selectedBg = self.keyList[self.shiftLevel][selectedKeyShift / self.keyboardWidth][selectedKeyShift % self.keyboardWidth].split("__")[0]
+				x = self.list[selectedKeyShift / self.keyboardWidth][selectedKeyShift % self.keyboardWidth + 1][1]
+				if selectedBg == "LongL":
+					self.list[selectedKeyShift / self.keyboardWidth].append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(self.key_sel_width, self.height), png=self.key_longl_sel))
+					self.previousSelectedKey.append(selectedKeyShift)
+					break
+				elif selectedBg == "LongM":
+					self.list[selectedKeyShift / self.keyboardWidth].append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(self.key_sel_width, self.height), png=self.key_longm_sel))
+					self.previousSelectedKey.append(selectedKeyShift)
+				selectedKeyShift -= 1
+				if selectedKeyShift < 0:
+					break
+			selectedKeyShift = self.selectedKey
+			while True:
+				selectedBg = self.keyList[self.shiftLevel][selectedKeyShift / self.keyboardWidth][selectedKeyShift % self.keyboardWidth].split("__")[0]
+				x = self.list[selectedKeyShift / self.keyboardWidth][selectedKeyShift % self.keyboardWidth + 1][1]
+				if selectedBg == "LongR":
+					self.list[selectedKeyShift / self.keyboardWidth].append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(self.key_sel_width, self.height), png=self.key_longr_sel))
+					self.previousSelectedKey.append(selectedKeyShift)
+					break
+				elif selectedBg == "LongM":
+					self.list[selectedKeyShift / self.keyboardWidth].append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(self.key_sel_width, self.height), png=self.key_longm_sel))
+					self.previousSelectedKey.append(selectedKeyShift)
+				selectedKeyShift += 1
+				if selectedKeyShift > self.maxKey:
+					break
 		self["list"].setList(self.list)
 
 	def processSelect(self):
 		self.smsChar = None
 		text = self.keyList[self.shiftLevel][self.selectedKey / self.keyboardWidth][self.selectedKey % self.keyboardWidth].encode("UTF-8")
+		upperText = text.upper()
+		if "__" in upperText:
+			upperText = upperText.split("__")[1]
 		if text == u"":
 			pass
-		elif text == u"ALL":
+		elif upperText == u"ALL":
 			self["text"].markAll()
-		elif text == u"BACK":
+		elif upperText == u"BACK":
 			self["text"].deleteBackward()
-		elif text == u"BACKSPACE":
+		elif upperText == u"BACKSPACE":
 			self["text"].deleteBackward()
-		elif text == u"BLANK":
+		elif upperText == u"BLANK":
 			pass
-		elif text == u"CLR":
+		elif upperText == u"CLR":
 			self["text"].deleteAllChars()
 			self["text"].update()
-		elif text == u"ENTER":
+		elif upperText == u"ENTER":
 			self.enter()
-		elif text == u"ESC":
+		elif upperText == u"ESC":
 			self.cancel()
-		elif text == u"EXIT":
+		elif upperText == u"EXIT":
 			self.cancel()
-		elif text == u"FIRST":
+		elif upperText == u"FIRST":
 			self["text"].home()
-		elif text == u"LOC":
+		elif upperText == u"LOC":
 			self.localeMenu()
-		elif text == u"LAST":
+		elif upperText == u"LAST":
 			self["text"].end()
-		elif text == u"LEFT":
+		elif upperText == u"LEFT":
 			self["text"].left()
-		elif text == u"OK":
+		elif upperText == u"OK":
 			self.enter()
-		elif text == u"RIGHT":
+		elif upperText == u"RIGHT":
 			self["text"].right()
-		elif text == u"ENTER":
+		elif upperText == u"ENTER":
 			self.enter()
-		elif text == u"SHIFT":
+		elif upperText == u"SHIFT":
 			self.shiftClicked()
-		elif text == u"Shift":
+		elif upperText == u"Shift":
 			self.shiftClicked()
-		elif text == u"SPACE":
+		elif upperText == u"SPACE":
 			self["text"].char(" ".encode("UTF-8"))
 		else:
 			self["text"].char(text.encode("UTF-8"))
@@ -791,14 +832,22 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		self.selectedKey = self.selectedKey / self.keyboardWidth * self.keyboardWidth + (self.selectedKey + self.keyboardWidth - 1) % self.keyboardWidth
 		if self.selectedKey > self.maxKey:
 			self.selectedKey = self.maxKey
-		self.markSelectedKey()
+		selectedBg = self.keyList[self.shiftLevel][self.selectedKey / self.keyboardWidth][self.selectedKey % self.keyboardWidth].split("__")[0]
+		if self.selectedKey < self.maxKey and selectedBg == "LongM" or selectedBg == "LongL":
+			self.left()
+		else:
+			self.markSelectedKey()
 
 	def right(self):
 		self.smsChar = None
 		self.selectedKey = self.selectedKey / self.keyboardWidth * self.keyboardWidth + (self.selectedKey + 1) % self.keyboardWidth
 		if self.selectedKey > self.maxKey:
 			self.selectedKey = self.selectedKey / self.keyboardWidth * self.keyboardWidth
-		self.markSelectedKey()
+		selectedBg = self.keyList[self.shiftLevel][self.selectedKey / self.keyboardWidth][self.selectedKey % self.keyboardWidth].split("__")[0]
+		if self.selectedKey > 0 and selectedBg == "LongM" or selectedBg == "LongR":
+			self.right()
+		else:
+			self.markSelectedKey()
 
 	def down(self):
 		self.smsChar = None
