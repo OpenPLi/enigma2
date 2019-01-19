@@ -70,6 +70,12 @@ dist_install_DATA = \
 	vkey_first.png \
 	vkey_green.png \
 	vkey_icon.png \
+	vkey_longl_bg.png \
+	vkey_longl_sel.png \
+	vkey_longm_bg.png \
+	vkey_longm_sel.png \
+	vkey_longr_bg.png \
+	vkey_longr_sel.png \
 	vkey_yellow.png \
 	vkey_last.png \
 	vkey_left.png \
