@@ -670,9 +670,6 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		self.previousSelectedKey = self.selectedKey
 		self["list"].setList(self.list)
 
-	def okClicked(self):  # Deprecated legacy interface to new processSelect used by YouTubeVirtualKeyBoard
-		self.processSelect()
-
 	def processSelect(self):
 		self.smsChar = None
 		text = self.keyList[self.shiftLevel][self.selectedKey / self.keyboardWidth][self.selectedKey % self.keyboardWidth].encode("UTF-8")
