@@ -41,66 +41,67 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		self.setTitle(_("Virtual keyboard"))
 		prompt = title  # Title should only be used for screen titles!
 		self.key_bg = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_bg.png"))
-		self.key_red_bg = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_red.png"))
-		self.key_green_bg = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_green.png"))
-		self.key_yellow_bg = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_yellow.png"))
-		self.key_blue_bg = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_blue.png"))
 		self.key_sel = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_sel.png"))
-		self.key_backspace = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_backspace.png"))
-		self.key_enter = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_enter.png"))
-		self.key_first = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_first.png"))
-		self.key_last = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_last.png"))
-		self.key_left = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_left.png"))
-		self.key_right = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_right.png"))
-		self.key_shift0 = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_shift0.png"))
-		self.key_shift1 = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_shift1.png"))
-		self.key_shift2 = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_shift2.png"))
-		self.key_shift3 = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_shift3.png"))
-		self.key_space = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_space.png"))
-		self.key_space_alt = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_space_alt.png"))
+		key_red_bg = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_red.png"))
+		key_green_bg = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_green.png"))
+		key_yellow_bg = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_yellow.png"))
+		key_blue_bg = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_blue.png"))
+		key_backspace = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_backspace.png"))
+		key_enter = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_enter.png"))
+		key_first = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_first.png"))
+		key_last = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_last.png"))
+		key_left = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_left.png"))
+		key_right = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_right.png"))
+		key_shift0 = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_shift0.png"))
+		key_shift1 = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_shift1.png"))
+		key_shift2 = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_shift2.png"))
+		key_shift3 = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_shift3.png"))
+		# self.key_space = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_space.png"))
+		key_space_alt = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_space_alt.png"))
+		self.key_sel_width = self.key_sel.size().width()
 		self.keyBackgrounds = {
-			"EXIT": self.key_red_bg,
-			"OK": self.key_green_bg,
-			"ENTER": self.key_green_bg,
-			"LOC": self.key_yellow_bg,
-			"SHFT": self.key_blue_bg
+			"EXIT": key_red_bg,
+			"OK": key_green_bg,
+			"ENTER": key_green_bg,
+			"LOC": key_yellow_bg,
+			"SHFT": key_blue_bg
 		}
 		self.keyImages = [{
-			"BACKSPACE": self.key_backspace,
-			"ENTER": self.key_enter,
-			"FIRST": self.key_first,
-			"LAST": self.key_last,
-			"LEFT": self.key_left,
-			"RIGHT": self.key_right,
-			"SHIFT": self.key_shift0,
-			"SPACE": self.key_space_alt
+			"BACKSPACE": key_backspace,
+			"ENTER": key_enter,
+			"FIRST": key_first,
+			"LAST": key_last,
+			"LEFT": key_left,
+			"RIGHT": key_right,
+			"SHIFT": key_shift0,
+			"SPACE": key_space_alt
 		}, {
-			"BACKSPACE": self.key_backspace,
-			"ENTER": self.key_enter,
-			"FIRST": self.key_first,
-			"LAST": self.key_last,
-			"LEFT": self.key_left,
-			"RIGHT": self.key_right,
-			"SHIFT": self.key_shift1,
-			"SPACE": self.key_space_alt
+			"BACKSPACE": key_backspace,
+			"ENTER": key_enter,
+			"FIRST": key_first,
+			"LAST": key_last,
+			"LEFT": key_left,
+			"RIGHT": key_right,
+			"SHIFT": key_shift1,
+			"SPACE": key_space_alt
 		}, {
-			"BACKSPACE": self.key_backspace,
-			"ENTER": self.key_enter,
-			"FIRST": self.key_first,
-			"LAST": self.key_last,
-			"LEFT": self.key_left,
-			"RIGHT": self.key_right,
-			"SHIFT": self.key_shift2,
-			"SPACE": self.key_space_alt
+			"BACKSPACE": key_backspace,
+			"ENTER": key_enter,
+			"FIRST": key_first,
+			"LAST": key_last,
+			"LEFT": key_left,
+			"RIGHT": key_right,
+			"SHIFT": key_shift2,
+			"SPACE": key_space_alt
 		}, {
-			"BACKSPACE": self.key_backspace,
-			"ENTER": self.key_enter,
-			"FIRST": self.key_first,
-			"LAST": self.key_last,
-			"LEFT": self.key_left,
-			"RIGHT": self.key_right,
-			"SHIFT": self.key_shift3,
-			"SPACE": self.key_space_alt
+			"BACKSPACE": key_backspace,
+			"ENTER": key_enter,
+			"FIRST": key_first,
+			"LAST": key_last,
+			"LEFT": key_left,
+			"RIGHT": key_right,
+			"SHIFT": key_shift3,
+			"SPACE": key_space_alt
 		}]
 		self.shiftMsgs = [
 			_("Lower case"),
