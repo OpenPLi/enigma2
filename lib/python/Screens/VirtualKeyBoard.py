@@ -173,21 +173,21 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 			[
 				[u"`", u"1", u"2", u"3", u"4", u"5", u"6", u"7", u"8", u"9", u"0", u"-", u"=", u"BACKSPACE"],
 				[u"FIRST", u"q", u"w", u"e", u"r", u"t", u"y", u"u", u"i", u"o", u"p", u"[", u"]", u"\\"],
-				[u"LAST", u"a", u"s", u"d", u"f", u"g", u"h", u"j", u"k", u"l", u";", u"'", u"LongL__Enter", u"LongR__ENTER__HIDE"],
-				[u"LongL__Shift", u"LongR__SHIFT__HIDE", u"z", u"x", u"c", u"v", u"b", u"n", u"m", u",", u".", u"/", u"LongL__Shift", u"LongR__SHIFT__HIDE"],
-				[u"LongL__Esc", u"LongR__ESC__HIDE", u"Loc", u"All", u"LongL__SPACE__HIDE", u"LongM__SPACE__HIDE", u"LongM__SPACE__HIDE", u"LongM__SPACE__HIDE", u"LongM__SPACE__HIDE", u"LongR__SPACE__HIDE", u"LEFT", u"RIGHT", u"LongL__Clr", u"LongR__CLR__HIDE"]
+				[u"LAST", u"a", u"s", u"d", u"f", u"g", u"h", u"j", u"k", u"l", u";", u"'", u"LongL__ENTER__HIDE", u"LongR__Enter"],
+				[u"LongL__Shift", u"LongR__SHIFT__HIDE", u"z", u"x", u"c", u"v", u"b", u"n", u"m", u",", u".", u"/", u"LongL__SHIFT__HIDE", u"LongR__Shift"],
+				[u"LongL__Esc", u"LongR__ESC__HIDE", u"Loc", u"All", u"LongL__SPACE__HIDE", u"LongM__SPACE__HIDE", u"LongM__SPACE__HIDE", u"LongM__SPACE__HIDE", u"LongM__SPACE__HIDE", u"LongR__SPACE__HIDE", u"LEFT", u"RIGHT", u"LongL__CLR__HIDE", u"LongR__Clr"]
 			], [
 				[u"~", u"!", u"@", u"#", u"$", u"%", u"^", u"&", u"*", u"(", u")", u"_", u"+", u"BACKSPACE"],
 				[u"FIRST", u"Q", u"W", u"E", u"R", u"T", u"Y", u"U", u"I", u"O", u"P", u"{", u"}", u"|"],
-				[u"LAST", u"A", u"S", u"D", u"F", u"G", u"H", u"J", u"K", u"L", u":", u"\"", u"LongL__Enter", u"LongR__ENTER__HIDE"],
-				[u"LongL__Shift", u"LongR__SHIFT__HIDE", u"Z", u"X", u"C", u"V", u"B", u"N", u"M", u"<", u">", u"?", u"LongL__Shift", u"LongR__SHIFT__HIDE"],
-				[u"LongL__Esc", u"LongR__ESC__HIDE", u"Loc", u"All", u"LongL__SPACE__HIDE", u"LongM__SPACE__HIDE", u"LongM__SPACE__HIDE", u"LongM__SPACE__HIDE", u"LongM__SPACE__HIDE", u"LongR__SPACE__HIDE", u"LEFT", u"RIGHT", u"LongL__Clr", u"LongR__CLR__HIDE"]
+				[u"LAST", u"A", u"S", u"D", u"F", u"G", u"H", u"J", u"K", u"L", u":", u"\"", u"LongL__ENTER__HIDE", u"LongR__Enter"],
+				[u"LongL__Shift", u"LongR__SHIFT__HIDE", u"Z", u"X", u"C", u"V", u"B", u"N", u"M", u"<", u">", u"?", u"LongL__SHIFT__HIDE", u"LongR__Shift"],
+				[u"LongL__Esc", u"LongR__ESC__HIDE", u"Loc", u"All", u"LongL__SPACE__HIDE", u"LongM__SPACE__HIDE", u"LongM__SPACE__HIDE", u"LongM__SPACE__HIDE", u"LongM__SPACE__HIDE", u"LongR__SPACE__HIDE", u"LEFT", u"RIGHT", u"LongL__CLR__HIDE", u"LongR__Clr"]
 			], [
 				[u"\u00b4", u"\u00b9", u"\u00b2", u"\u00b3", u"\u20ac", u"\u00bd", u"\u00be", u"\u007b", u"\u005b", u"\u005d", u"\u007d ", u"\u005c", u"\u2013", u"BACKSPACE"],
 				[u"FIRST", u"q", u"\u0113", u"\u0112", u"\u0157", u"\u0156", u"\u016B", u"\u016A", u"\u012B", u"\u012A", u"\u014D", u"\u014C", u"\u00ab", u"\u00bb"],
-				[u"LAST", u"\u0101", u"\u0100", u"\u0161", u"\u0160", u"\u0123", u"\u0122", u"\u0137", u"\u0136", u"\u013C", u"\u013B", u"\u003b", u"LongL__Enter", u"LongR__ENTER__HIDE"],
-				[u"LongL__Shift", u"LongR__SHIFT__HIDE", u"\u017E", u"\u017D", u"\u010D", u"\u010C", u"b", u"\u0146", u"\u0145", u"\u0060", u"\u00b7", u"\u002f", u"LongL__Shift", u"LongR__SHIFT__HIDE"],
-				[u"LongL__Esc", u"LongR__ESC__HIDE", u"Loc", u"All", u"LongL__SPACE__HIDE", u"LongM__SPACE__HIDE", u"LongM__SPACE__HIDE", u"LongM__SPACE__HIDE", u"LongM__SPACE__HIDE", u"LongR__SPACE__HIDE", u"LEFT", u"RIGHT", u"LongL__Clr", u"LongR__CLR__HIDE"]
+				[u"LAST", u"\u0101", u"\u0100", u"\u0161", u"\u0160", u"\u0123", u"\u0122", u"\u0137", u"\u0136", u"\u013C", u"\u013B", u"\u003b", u"LongL__ENTER__HIDE", u"LongR__Enter"],
+				[u"LongL__Shift", u"LongR__SHIFT__HIDE", u"\u017E", u"\u017D", u"\u010D", u"\u010C", u"b", u"\u0146", u"\u0145", u"\u0060", u"\u00b7", u"\u002f", u"LongL__SHIFT__HIDE", u"LongR__Shift"],
+				[u"LongL__Esc", u"LongR__ESC__HIDE", u"Loc", u"All", u"LongL__SPACE__HIDE", u"LongM__SPACE__HIDE", u"LongM__SPACE__HIDE", u"LongM__SPACE__HIDE", u"LongM__SPACE__HIDE", u"LongR__SPACE__HIDE", u"LEFT", u"RIGHT", u"LongL__CLR__HIDE", u"LongR__Clr"]
 			]
 		]
 		self.russian = [
