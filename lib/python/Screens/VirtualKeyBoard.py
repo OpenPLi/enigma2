@@ -648,6 +648,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		self.list = []
 		for keys in self.keyList[self.shiftLevel]:
 			self.list.append(self.virtualKeyBoardEntryComponent(keys))
+		self.previousSelectedKey = []
 		if self.selectedKey is None:
 			self.selectedKey = self.keyboardWidth
 		self.markSelectedKey()
