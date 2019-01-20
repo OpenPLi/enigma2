@@ -710,7 +710,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 					self.list[selectedKeyShift / self.keyboardWidth].append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(self.key_sel_width, self.height), png=self.key_longr_sel))
 					self.previousSelectedKey.append(selectedKeyShift)
 					break
-				elif selectedBg == "LongM":
+				elif selectedBg == "LongM" and selectedKeyShift > self.selectedKey:
 					self.list[selectedKeyShift / self.keyboardWidth].append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(self.key_sel_width, self.height), png=self.key_longm_sel))
 					self.previousSelectedKey.append(selectedKeyShift)
 				selectedKeyShift += 1
