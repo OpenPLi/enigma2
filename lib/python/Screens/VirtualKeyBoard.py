@@ -133,6 +133,21 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 				[u"EXIT", u"LOC", u"LEFT", u"RIGHT", u"ALL", u"CLR", u"SPACE"]
 			]
 		]
+		self.english_EN_US = [
+			[
+				[u"`", u"1", u"2", u"3", u"4", u"5", u"6", u"7", u"8", u"9", u"0", u"-", u"=", u"BACKSPACE"],
+				[u"FIRST", u"q", u"w", u"e", u"r", u"t", u"y", u"u", u"i", u"o", u"p", u"[", u"]", u"\\"],
+				[u"LAST", u"a", u"s", u"d", u"f", u"g", u"h", u"j", u"k", u"l", u";", u"'", u"LongL__ENTER__HIDE", u"LongR__Enter"],
+				[u"LongL__Shift", u"LongR__SHIFT__HIDE", u"z", u"x", u"c", u"v", u"b", u"n", u"m", u",", u".", u"/", u"LongL__SHIFT__HIDE", u"LongR__Shift"],
+				[u"LongL__Esc", u"LongR__ESC__HIDE", u"Loc", u"All", u"LongL__SPACE__HIDE", u"LongM__SPACE__HIDE", u"LongM__SPACE__HIDE", u"LongM__SPACE__HIDE", u"LongM__SPACE__HIDE", u"LongR__SPACE__HIDE", u"LEFT", u"RIGHT", u"LongL__CLR__HIDE", u"LongR__Clr"]
+			], [
+				[u"~", u"!", u"@", u"#", u"$", u"%", u"^", u"&", u"*", u"(", u")", u"_", u"+", u"BACKSPACE"],
+				[u"FIRST", u"Q", u"W", u"E", u"R", u"T", u"Y", u"U", u"I", u"O", u"P", u"{", u"}", u"|"],
+				[u"LAST", u"A", u"S", u"D", u"F", u"G", u"H", u"J", u"K", u"L", u":", u"\"", u"LongL__ENTER__HIDE", u"LongR__Enter"],
+				[u"LongL__Shift", u"LongR__SHIFT__HIDE", u"Z", u"X", u"C", u"V", u"B", u"N", u"M", u"<", u">", u"?", u"LongL__SHIFT__HIDE", u"LongR__Shift"],
+				[u"LongL__Esc", u"LongR__ESC__HIDE", u"Loc", u"All", u"LongL__SPACE__HIDE", u"LongM__SPACE__HIDE", u"LongM__SPACE__HIDE", u"LongM__SPACE__HIDE", u"LongM__SPACE__HIDE", u"LongR__SPACE__HIDE", u"LEFT", u"RIGHT", u"LongL__CLR__HIDE", u"LongR__Clr"]
+			]
+		]
 		self.french = [
 			[
 				[u"\u00B2", u"&", u"\u00E9", u"\"", u"'", u"(", u"-", u"\u00E8", u"_", u"\u00E7", u"\u00E0", u")", u"=", u"BACKSPACE"],
@@ -277,8 +292,8 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 			"nl_NL": [_("Dutch"), _("Netherlands"), self.dutch(self.english)],
 			"en_AU": [_("English"), _("Australian"), self.australian(self.english)],
 			"en_GB": [_("English"), _("United Kingdom"), self.unitedKingdom(self.english)],
-			"en_US": [_("English"), _("United States"), self.english],
-			"en_EN": [_("English"), _("Various"), self.english],
+			"en_US": [_("English"), _("United States"), self.english_EN_US],
+			"en_EN": [_("English"), _("Various"), self.english_EN_US],
 			"et_EE": [_("Estonian"), _("Estonia"), self.estonian(self.scandinavian)],
 			"fi_FI": [_("Finnish"), _("Finland"), self.finnish(self.scandinavian)],
 			"fr_BE": [_("French"), _("Belgian"), self.belgian(self.french)],
@@ -633,7 +648,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 			self.lang = "en_EN"
 			self.language = _("English")
 			self.location = _("Various")
-			self.keyList = self.english
+			self.keyList = self.english_EN_US
 		self.shiftLevel = 0
 		self["locale"].setText(_("Locale") + ": " + self.lang + "  (" + self.language + " - " + self.location + ")")
 
