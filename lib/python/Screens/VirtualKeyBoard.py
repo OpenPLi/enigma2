@@ -695,40 +695,46 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 
 	def markSelectedKey(self):
 		for key in self.previousSelectedKey:
-			self.list[key / self.keyboardWidth] = self.list[key / self.keyboardWidth][:-1]
+			self.list[key] = self.list[key][:-1]
 		self.previousSelectedKey = []
 		if self.selectedKey > self.maxKey:
 			self.selectedKey = self.maxKey
-		if "__" not in self.keyList[self.shiftLevel][self.selectedKey / self.keyboardWidth][self.selectedKey % self.keyboardWidth]:
-			x = self.list[self.selectedKey / self.keyboardWidth][self.selectedKey % self.keyboardWidth + 1][1]
-			self.list[self.selectedKey / self.keyboardWidth].append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(self.key_sel_width, self.height), png=self.key_sel))
-			self.previousSelectedKey.append(self.selectedKey)
+		selectedKeyboardKey = self.selectedKey / self.keyboardWidth
+		selectedKeyModulus = self.selectedKey % self.keyboardWidth
+		if "__" not in self.keyList[self.shiftLevel][selectedKeyboardKey][selectedKeyModulus]:
+			x = self.list[selectedKeyboardKey][selectedKeyModulus + 1][1]
+			self.list[selectedKeyboardKey].append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(self.key_sel_width, self.height), png=self.key_sel))
+			self.previousSelectedKey.append(selectedKeyboardKey)
 		else:
 			selectedKeyShift = self.selectedKey
 			while True:
-				selectedBg = self.keyList[self.shiftLevel][selectedKeyShift / self.keyboardWidth][selectedKeyShift % self.keyboardWidth].split("__")[0]
-				x = self.list[selectedKeyShift / self.keyboardWidth][selectedKeyShift % self.keyboardWidth + 1][1]
+				selectedKeyboardKey = selectedKeyShift / self.keyboardWidth
+				selectedKeyModulus = selectedKeyShift % self.keyboardWidth
+				selectedBg = self.keyList[self.shiftLevel][selectedKeyboardKey][selectedKeyModulus].split("__")[0]
+				x = self.list[selectedKeyboardKey][selectedKeyModulus + 1][1]
 				if selectedBg == "LongL":
-					self.list[selectedKeyShift / self.keyboardWidth].append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(self.key_sel_width, self.height), png=self.key_longl_sel))
-					self.previousSelectedKey.append(selectedKeyShift)
+					self.list[selectedKeyboardKey].append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(self.key_sel_width, self.height), png=self.key_longl_sel))
+					self.previousSelectedKey.append(selectedKeyboardKey)
 					break
 				elif selectedBg == "LongM":
-					self.list[selectedKeyShift / self.keyboardWidth].append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(self.key_sel_width, self.height), png=self.key_longm_sel))
-					self.previousSelectedKey.append(selectedKeyShift)
+					self.list[selectedKeyboardKey].append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(self.key_sel_width, self.height), png=self.key_longm_sel))
+					self.previousSelectedKey.append(selectedKeyboardKey)
 				selectedKeyShift -= 1
 				if selectedKeyShift < 0:
 					break
 			selectedKeyShift = self.selectedKey
 			while True:
-				selectedBg = self.keyList[self.shiftLevel][selectedKeyShift / self.keyboardWidth][selectedKeyShift % self.keyboardWidth].split("__")[0]
-				x = self.list[selectedKeyShift / self.keyboardWidth][selectedKeyShift % self.keyboardWidth + 1][1]
+				selectedKeyboardKey = selectedKeyShift / self.keyboardWidth
+				selectedKeyModulus = selectedKeyShift % self.keyboardWidth
+				selectedBg = self.keyList[self.shiftLevel][selectedKeyboardKey][selectedKeyModulus].split("__")[0]
+				x = self.list[selectedKeyboardKey][selectedKeyModulus + 1][1]
 				if selectedBg == "LongR":
-					self.list[selectedKeyShift / self.keyboardWidth].append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(self.key_sel_width, self.height), png=self.key_longr_sel))
-					self.previousSelectedKey.append(selectedKeyShift)
+					self.list[selectedKeyboardKey].append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(self.key_sel_width, self.height), png=self.key_longr_sel))
+					self.previousSelectedKey.append(selectedKeyboardKey)
 					break
 				elif selectedBg == "LongM" and selectedKeyShift > self.selectedKey:
-					self.list[selectedKeyShift / self.keyboardWidth].append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(self.key_sel_width, self.height), png=self.key_longm_sel))
-					self.previousSelectedKey.append(selectedKeyShift)
+					self.list[selectedKeyboardKey].append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(self.key_sel_width, self.height), png=self.key_longm_sel))
+					self.previousSelectedKey.append(selectedKeyboardKey)
 				selectedKeyShift += 1
 				if selectedKeyShift > self.maxKey:
 					break
@@ -857,10 +863,11 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 
 	def left(self):
 		self.smsChar = None
-		self.selectedKey = self.selectedKey / self.keyboardWidth * self.keyboardWidth + (self.selectedKey + self.keyboardWidth - 1) % self.keyboardWidth
+		selectedKeyboardKey = self.selectedKey / self.keyboardWidth
+		self.selectedKey = selectedKeyboardKey * self.keyboardWidth + (self.selectedKey + self.keyboardWidth - 1) % self.keyboardWidth
 		if self.selectedKey > self.maxKey:
 			self.selectedKey = self.maxKey
-		selectedBg = self.keyList[self.shiftLevel][self.selectedKey / self.keyboardWidth][self.selectedKey % self.keyboardWidth].split("__")[0]
+		selectedBg = self.keyList[self.shiftLevel][selectedKeyboardKey][self.selectedKey % self.keyboardWidth].split("__")[0]
 		if self.selectedKey < self.maxKey and selectedBg == "LongM" or selectedBg == "LongL":
 			self.left()
 		else:
@@ -868,10 +875,11 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 
 	def right(self):
 		self.smsChar = None
-		self.selectedKey = self.selectedKey / self.keyboardWidth * self.keyboardWidth + (self.selectedKey + 1) % self.keyboardWidth
+		selectedKeyboardKey = self.selectedKey / self.keyboardWidth
+		self.selectedKey = selectedKeyboardKey * self.keyboardWidth + (self.selectedKey + 1) % self.keyboardWidth
 		if self.selectedKey > self.maxKey:
-			self.selectedKey = self.selectedKey / self.keyboardWidth * self.keyboardWidth
-		selectedBg = self.keyList[self.shiftLevel][self.selectedKey / self.keyboardWidth][self.selectedKey % self.keyboardWidth].split("__")[0]
+			self.selectedKey = selectedKeyboardKey * self.keyboardWidth
+		selectedBg = self.keyList[self.shiftLevel][selectedKeyboardKey][self.selectedKey % self.keyboardWidth].split("__")[0]
 		if self.selectedKey > 0 and selectedBg == "LongM" or selectedBg == "LongR":
 			self.right()
 		else:
