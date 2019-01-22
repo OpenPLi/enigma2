@@ -6,7 +6,6 @@ from time import time, localtime, mktime
 from enigma import eTimer
 
 from Components.config import config
-from ServiceReference import ServiceReference
 from Tools import Directories
 from Tools.XMLTools import stringToXML
 
@@ -20,25 +19,9 @@ class TimerEntry:
 	StateEnded    = 3
 
 	def __init__(self, begin, end):
-		self.dontSave = False
 		self.begin = begin
 		self.prepare_time = 20
 		self.end = end
-		self.service_ref = ServiceReference(None)
-		self.name = ""
-		self.description = ""
-		self.eit = None
-		self.dirname = None
-		self.tags = None
-		self.justplay = False
-		self.always_zap = False
-		self.pipzap = False
-		self.zap_wakeup = "always"
-		self.rename_repeat = True
-		self.conflict_detection = True
-		self.descramble = True
-		self.record_ecm = False
-		self.log_entries = []
 		self.state = 0
 		self.findRunningEvent = True
 		self.findNextEvent = False
@@ -47,9 +30,8 @@ class TimerEntry:
 		#newdate = datetime.datetime(begindate.tm_year, begindate.tm_mon, begindate.tm_mday 0, 0, 0);
 		self.repeatedbegindate = begin
 		self.backoff = 0
+
 		self.disabled = False
-		self.afterEvent = RecordTimer.AFTEREVENT.AUTO
-		self.flags = set()
 
 	def resetState(self):
 		self.state = self.StateWaiting
