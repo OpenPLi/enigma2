@@ -12,6 +12,7 @@ import Screens.Standby
 import Screens.InfoBar
 import Components.ParentalControl
 from Tools import Directories, Notifications, ASCIItranslit, Trashcan
+from Tools.XMLTools import stringToXML
 
 import timer
 import xml.etree.cElementTree
@@ -752,6 +753,7 @@ class RecordTimer(timer.Timer):
 	def __init__(self):
 		timer.Timer.__init__(self)
 
+		self.Filename = Directories.resolveFilename(Directories.SCOPE_CONFIG, "timers.xml")
 		self.fallback_timer_list = []
 
 		try:
@@ -846,6 +848,112 @@ class RecordTimer(timer.Timer):
 			from Tools.Notifications import AddPopup
 			from Screens.MessageBox import MessageBox
 			AddPopup(_("Timer overlap in timers.xml detected!\nPlease recheck it!") + timer_text, type = MessageBox.TYPE_ERROR, timeout = 0, id = "TimerLoadFailed")
+
+
+	def saveTimer(self):
+		#root_element = xml.etree.cElementTree.Element('timers')
+		#root_element.text = "\n"
+
+		#for timer in self.timer_list + self.processed_timers:
+			# some timers (instant records) don't want to be saved.
+			# skip them
+			#if timer.dontSave:
+				#continue
+			#t = xml.etree.cElementTree.SubElement(root_element, 'timers')
+			#t.set("begin", str(int(timer.begin)))
+			#t.set("end", str(int(timer.end)))
+			#t.set("serviceref", str(timer.service_ref))
+			#t.set("repeated", str(timer.repeated))
+			#t.set("name", timer.name)
+			#t.set("description", timer.description)
+			#t.set("afterevent", str({
+			#	AFTEREVENT.NONE: "nothing",
+			#	AFTEREVENT.STANDBY: "standby",
+			#	AFTEREVENT.DEEPSTANDBY: "deepstandby",
+			#	AFTEREVENT.AUTO: "auto"}))
+			#if timer.eit is not None:
+			#	t.set("eit", str(timer.eit))
+			#if timer.dirname is not None:
+			#	t.set("location", str(timer.dirname))
+			#t.set("disabled", str(int(timer.disabled)))
+			#t.set("justplay", str(int(timer.justplay)))
+			#t.text = "\n"
+			#t.tail = "\n"
+
+			#for time, code, msg in timer.log_entries:
+				#l = xml.etree.cElementTree.SubElement(t, 'log')
+				#l.set("time", str(time))
+				#l.set("code", str(code))
+				#l.text = str(msg)
+				#l.tail = "\n"
+
+		#doc = xml.etree.cElementTree.ElementTree(root_element)
+		#doc.write(self.Filename)
+
+		list = []
+
+		list.append('<?xml version="1.0" ?>\n')
+		list.append('<timers>\n')
+
+		for timer in self.timer_list + self.processed_timers:
+			if timer.dontSave:
+				continue
+
+			list.append('<timer')
+			list.append(' begin="' + str(int(timer.begin)) + '"')
+			list.append(' end="' + str(int(timer.end)) + '"')
+			list.append(' serviceref="' + stringToXML(str(timer.service_ref)) + '"')
+			list.append(' repeated="' + str(int(timer.repeated)) + '"')
+			list.append(' name="' + str(stringToXML(timer.name)) + '"')
+			list.append(' description="' + str(stringToXML(timer.description)) + '"')
+			list.append(' afterevent="' + str(stringToXML({
+				AFTEREVENT.NONE: "nothing",
+				AFTEREVENT.STANDBY: "standby",
+				AFTEREVENT.DEEPSTANDBY: "deepstandby",
+				AFTEREVENT.AUTO: "auto"
+				}[timer.afterEvent])) + '"')
+			if timer.eit is not None:
+				list.append(' eit="' + str(timer.eit) + '"')
+			if timer.dirname:
+				list.append(' location="' + str(stringToXML(timer.dirname)) + '"')
+			if timer.tags:
+				list.append(' tags="' + str(stringToXML(' '.join(timer.tags))) + '"')
+			if timer.disabled:
+				list.append(' disabled="' + str(int(timer.disabled)) + '"')
+			list.append(' justplay="' + str(int(timer.justplay)) + '"')
+			list.append(' always_zap="' + str(int(timer.always_zap)) + '"')
+			list.append(' pipzap="' + str(int(timer.pipzap)) + '"')
+			list.append(' zap_wakeup="' + str(timer.zap_wakeup) + '"')
+			list.append(' rename_repeat="' + str(int(timer.rename_repeat)) + '"')
+			list.append(' conflict_detection="' + str(int(timer.conflict_detection)) + '"')
+			list.append(' descramble="' + str(int(timer.descramble)) + '"')
+			list.append(' record_ecm="' + str(int(timer.record_ecm)) + '"')
+			if timer.flags:
+				list.append(' flags="' + ' '.join([stringToXML(x) for x in timer.flags]) + '"')
+			list.append('>\n')
+
+			if config.recording.debug.value:
+				for time, code, msg in timer.log_entries:
+					list.append('<log')
+					list.append(' code="' + str(code) + '"')
+					list.append(' time="' + str(time) + '"')
+					list.append('>')
+					list.append(str(stringToXML(msg)))
+					list.append('</log>\n')
+
+			list.append('</timer>\n')
+
+		list.append('</timers>\n')
+
+		file = open(self.Filename + ".writing", "w")
+		for x in list:
+			file.write(x)
+		file.flush()
+
+		import os
+		os.fsync(file.fileno())
+		file.close()
+		os.rename(self.Filename + ".writing", self.Filename)
 
 	def getNextZapTime(self, isWakeup=False):
 		now = time()
