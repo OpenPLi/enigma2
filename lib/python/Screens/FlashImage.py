@@ -25,8 +25,8 @@ class SelectImage(Screen):
 	def __init__(self, session, *args):
 		Screen.__init__(self, session)
 		self.session = session
-		self.jsonlist = None
-		self.imagesList = None
+		self.jsonlist = {}
+		self.imagesList = {}
 		self.setIndex = 0
 		self.expanded = []
 		self.setTitle(_("Select Image"))
@@ -76,10 +76,12 @@ class SelectImage(Screen):
 		if not self.imagesList:
 			if not self.jsonlist:
 				try:
-					self.jsonlist = json.load(urllib2.urlopen('http://downloads.openpli.org/json/%s' % model))
+					self.jsonlist = dict(json.load(urllib2.urlopen('http://downloads.openpli.org/json/%s' % model)))
+					if config.usage.alternative_imagefeed.value:
+						self.jsonlist.update(dict(json.load(urllib2.urlopen('%s%s' % (config.usage.alternative_imagefeed.value, model)))))
 				except:
 					pass
-			self.imagesList = dict(self.jsonlist) if self.jsonlist else {}
+			self.imagesList = self.jsonlist
 
 			for media in ['/media/%s' % x for x in os.listdir('/media')] + (['/media/net/%s' % x for x in os.listdir('/media/net')] if os.path.isdir('/media/net') else []):
 				if not(SystemInfo['HasMMC'] and "/mmc" in media) and os.path.isdir(media):
