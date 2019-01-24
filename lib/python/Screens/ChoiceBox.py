@@ -112,7 +112,7 @@ class ChoiceBox(Screen):
 
 		textsize = self["text"].getSize()
 		count = len(self.list)
-		count, scrollbar = (10, 20 + 5) if count > 10 else (count, 0)
+		count, scrollbar = (10, self["list"].instance.getScrollbarWidth() + 5) if count > 10 else (count, 0)
 		offset = self["list"].l.getItemSize().height() * count
 		wsizex = x_width(textsize[0]) + x_offset() + 10 + scrollbar
 		#precount description size
