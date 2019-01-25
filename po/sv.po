@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-05 18:53+0100\n"
+"POT-Creation-Date: 2019-01-25 20:37+0100\n"
 "PO-Revision-Date: 2017-03-05 13:24+0100\n"
 "Last-Translator: Magnus Nilsson <mag_nilsson@hotmail.com>\n"
 "Language-Team: \n"
@@ -389,6 +389,13 @@ msgstr "%2d:%02d"
 #. TRANSLATORS: VFD hour:minute daynum short monthname in strftime() format! See 'man strftime'
 msgid "%k:%M %e/%m"
 msgstr "%k:%M %e/%m"
+
+#, fuzzy, python-format
+msgid ""
+"%s\n"
+"Do you still want to flash image\n"
+"%s?"
+msgstr "Vill du ladda ner image till %s ?"
 
 #, python-format
 msgid ""
@@ -1071,6 +1078,9 @@ msgstr "Också vid viloläge"
 #
 msgid "Alternative"
 msgstr "Lägg till alternativ"
+
+msgid "Alternative URL for images listed on FlashImage"
+msgstr ""
 
 #
 msgid "Alternative numbering mode"
@@ -1963,6 +1973,9 @@ msgstr "Rensa logg"
 msgid "Clear playlist"
 msgstr "Rensa spellista"
 
+msgid "Client is streaming from this box!"
+msgstr ""
+
 msgid "Clone TV screen to LCD"
 msgstr "Klona TV skärm till LCD"
 
@@ -2748,6 +2761,11 @@ msgid "Debug to file"
 msgstr "Ta bort fil"
 
 #
+#, fuzzy
+msgid "Deep Standby LED"
+msgstr "Stäng av"
+
+#
 msgid "Deep standby"
 msgstr "Stäng av"
 
@@ -3015,6 +3033,18 @@ msgstr "Visa 4:3 sändning som"
 #
 msgid "Display >16:9 content as"
 msgstr "Visa 16:9 sändning som"
+
+msgid "Display EPG as MultiEPG"
+msgstr ""
+
+#, fuzzy
+msgid "Display EPG info for current event"
+msgstr "Spara endast timeshift för aktuellt program"
+
+#
+#, fuzzy
+msgid "Display EPG list for current channel"
+msgstr "Visa EPG för aktuell kanal ..."
 
 #
 msgid "Display and userinterface"
@@ -3533,6 +3563,9 @@ msgstr "Ange PIN"
 msgid "Enter URL"
 msgstr "Ange PIN"
 
+msgid "Enter an URL where alternative images could be listed for FlashImage"
+msgstr ""
+
 msgid "Enter if you are in the east or west hemisphere."
 msgstr ""
 
@@ -4050,12 +4083,6 @@ msgstr ""
 msgid "Following tasks will be done after you press OK!"
 msgstr "Följande saker kommer utföras efter du tryckt på OK!"
 
-msgid "Force LNB Power"
-msgstr "Tvinga LNB power"
-
-msgid "Force ToneBurst"
-msgstr "Tvinga Toneburst"
-
 msgid "Force legacy signal stats"
 msgstr ""
 
@@ -4432,6 +4459,9 @@ msgstr "Hårddisk"
 
 msgid "Harddisk Setup"
 msgstr "Hårddiskinställningar"
+
+msgid "Harddisk is not in sleepmode it could be in use!"
+msgstr ""
 
 msgid "Hardware: "
 msgstr "Hårdvara :"
@@ -6057,9 +6087,6 @@ msgstr "Inte tillräckligt med diskutrymme. Vänligen frigör diskutrymme och f�
 msgid "Not tested:"
 msgstr "Inte testad :"
 
-msgid "Not yet implemented!"
-msgstr ""
-
 msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'."
 msgstr "Obs : Vid aktiverad, om du vill ha viloläge efter uppstart, ställ in alternativet 'Uppstart till viloläge' som 'Nej, förutom uppstartstimer'."
 
@@ -7173,13 +7200,6 @@ msgid "Recording type"
 msgstr "Inpelningstyp"
 
 msgid "Recording(s) are in progress or coming up in few seconds!"
-msgstr "Inspelning(ar) pågår eller ska påbörjas inom några sekunder!"
-
-#, fuzzy, python-format
-msgid ""
-"Recording(s) are in progress or coming up in few seconds!\n"
-"Do you still want to flash image\n"
-"%s?"
 msgstr "Inspelning(ar) pågår eller ska påbörjas inom några sekunder!"
 
 #
@@ -9096,6 +9116,10 @@ msgstr "Viloläge"
 msgid "Standby / restart"
 msgstr "Viloläge / Omstart"
 
+#, fuzzy
+msgid "Standby LED"
+msgstr "Viloläges LED"
+
 msgid "Standby after current event"
 msgstr "Viloläge efter aktuellt program"
 
@@ -9111,9 +9135,6 @@ msgstr "Standby fläkt %d Volt"
 
 msgid "Standby in "
 msgstr "Viloläge om"
-
-msgid "StandbyLED"
-msgstr "Viloläges LED"
 
 #
 msgid "Start from the beginning"
@@ -10347,6 +10368,10 @@ msgstr "Turkiska"
 
 msgid "Turks and Caicos Islands"
 msgstr ""
+
+#, fuzzy
+msgid "Turn on the power LED during deep standby."
+msgstr "Slå på powerlampan i viloläge."
 
 msgid "Turn on the power LED during standby."
 msgstr "Slå på powerlampan i viloläge."

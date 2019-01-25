@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-05 18:53+0100\n"
+"POT-Creation-Date: 2019-01-25 20:37+0100\n"
 "PO-Revision-Date: 2018-12-31 15:13+0100\n"
 "Last-Translator: GeirJ <dummy@dummy.com>\n"
 "Language-Team: GeirJ\n"
@@ -388,6 +388,16 @@ msgstr "%d:%02d"
 #. TRANSLATORS: VFD hour:minute daynum short monthname in strftime() format! See 'man strftime'
 msgid "%k:%M %e/%m"
 msgstr "%k:%M %e/%m"
+
+#
+#, fuzzy, python-format
+msgid ""
+"%s\n"
+"Do you still want to flash image\n"
+"%s?"
+msgstr ""
+"Vil du å installere systemet\n"
+"%s"
 
 #, python-format
 msgid ""
@@ -1051,6 +1061,9 @@ msgstr "Også i av/på"
 #
 msgid "Alternative"
 msgstr "Alternativ"
+
+msgid "Alternative URL for images listed on FlashImage"
+msgstr ""
 
 #
 msgid "Alternative numbering mode"
@@ -1925,6 +1938,9 @@ msgstr "Slett logg"
 msgid "Clear playlist"
 msgstr "Slett opptaksliste"
 
+msgid "Client is streaming from this box!"
+msgstr ""
+
 msgid "Clone TV screen to LCD"
 msgstr "Klone TV skjerm til LCD"
 
@@ -2683,6 +2699,10 @@ msgstr "Still inn dato/tid"
 msgid "Debug to file"
 msgstr "Feilsøk til fil"
 
+#, fuzzy
+msgid "Deep Standby LED"
+msgstr "Slå helt av"
+
 msgid "Deep standby"
 msgstr "Slå helt av"
 
@@ -2942,6 +2962,19 @@ msgstr "Vis 4:3 innhold som"
 #
 msgid "Display >16:9 content as"
 msgstr "Vis 16:9 innhold som"
+
+msgid "Display EPG as MultiEPG"
+msgstr ""
+
+#
+#, fuzzy
+msgid "Display EPG info for current event"
+msgstr "Lagre tidsskift bare for denne handlingen"
+
+#
+#, fuzzy
+msgid "Display EPG list for current channel"
+msgstr "Vis EPG for gjeldende kanal..."
 
 msgid "Display and userinterface"
 msgstr "Skjerm og oppsett"
@@ -3447,6 +3480,9 @@ msgstr "Tast inn PIN"
 
 msgid "Enter URL"
 msgstr "Tast URL"
+
+msgid "Enter an URL where alternative images could be listed for FlashImage"
+msgstr ""
 
 msgid "Enter if you are in the east or west hemisphere."
 msgstr "Skriv inn hvis du er i østlig eller vestlig halvkule."
@@ -3977,12 +4013,6 @@ msgstr ""
 msgid "Following tasks will be done after you press OK!"
 msgstr "Følgende oppgaver blir utført etter at OK tastes!"
 
-msgid "Force LNB Power"
-msgstr "Slå på LNB strøm"
-
-msgid "Force ToneBurst"
-msgstr "Bruk ToneBurst"
-
 msgid "Force legacy signal stats"
 msgstr "Tvinge eldre signal statistikk"
 
@@ -4348,6 +4378,9 @@ msgstr "Lagrings innstilling"
 
 msgid "Harddisk Setup"
 msgstr "Lagrings oppsett"
+
+msgid "Harddisk is not in sleepmode it could be in use!"
+msgstr ""
 
 msgid "Hardware: "
 msgstr "Maskinvare: "
@@ -5949,9 +5982,6 @@ msgstr "Ikke nok diskplass. Frigjør litt diskplass og prøv på nytt. (%d MB n�
 msgid "Not tested:"
 msgstr "Ikke testet:"
 
-msgid "Not yet implemented!"
-msgstr "Enda ikke tatt i bruk!"
-
 msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'."
 msgstr "NB: Når dette er på og du ønsker standby modus etter vekking, brukes valget 'Oppstart til Standby' som 'Nei, unntatt vekke timer'."
 
@@ -7036,16 +7066,6 @@ msgstr "Opptakstype"
 
 msgid "Recording(s) are in progress or coming up in few seconds!"
 msgstr "Opptak starter opp om få sekunder!"
-
-#, python-format
-msgid ""
-"Recording(s) are in progress or coming up in few seconds!\n"
-"Do you still want to flash image\n"
-"%s?"
-msgstr ""
-"Opptak pågår eller starter om få sekunder!\n"
-"Ønsker du fortsatt å installere et nytt system\n"
-"%s?"
 
 msgid "Recordings"
 msgstr "Opptak innstilling"
@@ -8901,6 +8921,10 @@ msgstr "Slå av"
 msgid "Standby / restart"
 msgstr "Av/på strømvalg"
 
+#, fuzzy
+msgid "Standby LED"
+msgstr "Av/på LED"
+
 #
 msgid "Standby after current event"
 msgstr "Slå av etter nåværende program"
@@ -8915,9 +8939,6 @@ msgstr "Standby kjølevifte %d voltstyrke"
 
 msgid "Standby in "
 msgstr "Slå av om "
-
-msgid "StandbyLED"
-msgstr "Av/på LED"
 
 #
 msgid "Start from the beginning"
@@ -10120,6 +10141,10 @@ msgstr "Turkmenistan"
 
 msgid "Turks and Caicos Islands"
 msgstr "Turks and Caicos Islands"
+
+#, fuzzy
+msgid "Turn on the power LED during deep standby."
+msgstr "Slå på LED lys under avslått."
 
 msgid "Turn on the power LED during standby."
 msgstr "Slå på LED lys under avslått."

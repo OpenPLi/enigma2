@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-05 18:53+0100\n"
+"POT-Creation-Date: 2019-01-25 20:37+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi <ims@openpli.org>\n"
@@ -406,6 +406,15 @@ msgstr ""
 #. TRANSLATORS: VFD hour:minute daynum short monthname in strftime() format! See 'man strftime'
 msgid "%k:%M %e/%m"
 msgstr ""
+
+#, fuzzy, python-format
+msgid ""
+"%s\n"
+"Do you still want to flash image\n"
+"%s?"
+msgstr ""
+"Chcete nahrát image\n"
+"%s"
 
 #, python-format
 msgid ""
@@ -1100,6 +1109,9 @@ msgstr "Také při standby"
 #
 msgid "Alternative"
 msgstr "alternativní"
+
+msgid "Alternative URL for images listed on FlashImage"
+msgstr ""
 
 #
 msgid "Alternative numbering mode"
@@ -1991,6 +2003,9 @@ msgstr "Smazat log"
 msgid "Clear playlist"
 msgstr "Vymazat playlist"
 
+msgid "Client is streaming from this box!"
+msgstr ""
+
 msgid "Clone TV screen to LCD"
 msgstr "Klonovat TV obrazovku na LCD"
 
@@ -2781,6 +2796,11 @@ msgid "Debug to file"
 msgstr "Debug do souboru"
 
 #
+#, fuzzy
+msgid "Deep Standby LED"
+msgstr "Hluboký spánek"
+
+#
 msgid "Deep standby"
 msgstr "Hluboký spánek"
 
@@ -3062,6 +3082,18 @@ msgstr "Zobrazovat obraz 4:3 jako"
 #
 msgid "Display >16:9 content as"
 msgstr "Zobrazovat >16:9 obsah jako"
+
+msgid "Display EPG as MultiEPG"
+msgstr ""
+
+#, fuzzy
+msgid "Display EPG info for current event"
+msgstr "Uložit timeshift pouze pro aktuální událost"
+
+#
+#, fuzzy
+msgid "Display EPG list for current channel"
+msgstr "Zobrazovat EPG pro aktuální kanál..."
 
 #
 msgid "Display and userinterface"
@@ -3583,6 +3615,9 @@ msgstr "Zadejte PIN"
 
 msgid "Enter URL"
 msgstr "Zadejte URL"
+
+msgid "Enter an URL where alternative images could be listed for FlashImage"
+msgstr ""
 
 msgid "Enter if you are in the east or west hemisphere."
 msgstr "Zadejte, zda jste na východní nebo západní polokouli."
@@ -4114,13 +4149,6 @@ msgstr ""
 msgid "Following tasks will be done after you press OK!"
 msgstr "Následující úlohy budou provedeny po stisknutí OK!"
 
-msgid "Force LNB Power"
-msgstr "Vynutit napájení LNB"
-
-#
-msgid "Force ToneBurst"
-msgstr "Vynutit Toneburst"
-
 msgid "Force legacy signal stats"
 msgstr "Vynutit starší signálové statistiky"
 
@@ -4492,6 +4520,9 @@ msgstr "Pevný disk"
 
 msgid "Harddisk Setup"
 msgstr "Nastavení pevného disku"
+
+msgid "Harddisk is not in sleepmode it could be in use!"
+msgstr ""
 
 msgid "Hardware: "
 msgstr "Hardware: "
@@ -6135,9 +6166,6 @@ msgstr "Nedostatek místa na disku. Uvolněte prostor na disku a zkuste znovu. (
 msgid "Not tested:"
 msgstr "Netestováno:"
 
-msgid "Not yet implemented!"
-msgstr "Zatím neimplementováno!"
-
 msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'."
 msgstr "Poznámka: jestliže je povoleno a chcete přejít do Standby po probuzení přijímače, nastavte 'Po startu přepnout do Standby' na 'Ne, kromě časovače probuzení'."
 
@@ -7276,16 +7304,6 @@ msgstr "Typ nahrávání"
 #
 msgid "Recording(s) are in progress or coming up in few seconds!"
 msgstr "Probíhá nahrávání nebo začne za několik sekund!"
-
-#, python-format
-msgid ""
-"Recording(s) are in progress or coming up in few seconds!\n"
-"Do you still want to flash image\n"
-"%s?"
-msgstr ""
-"Probíhá nahrávání nebo během několika vteřin začne nahrávání!\n"
-"Chcete stále nahrát image do přijímače\n"
-"%s?"
 
 #
 msgid "Recordings"
@@ -9198,6 +9216,11 @@ msgstr "Pohotovostní režim"
 msgid "Standby / restart"
 msgstr "Standby / restart"
 
+#
+#, fuzzy
+msgid "Standby LED"
+msgstr "Pohotovostní režim"
+
 msgid "Standby after current event"
 msgstr "Standby po této události"
 
@@ -9213,9 +9236,6 @@ msgstr "Napětí ventilátoru %d ve standby"
 
 msgid "Standby in "
 msgstr "Standby za "
-
-msgid "StandbyLED"
-msgstr ""
 
 #
 msgid "Start from the beginning"
@@ -10430,6 +10450,10 @@ msgstr "Turkmenistán"
 
 msgid "Turks and Caicos Islands"
 msgstr "Turks a Caicos"
+
+#, fuzzy
+msgid "Turn on the power LED during deep standby."
+msgstr "Zapne LED napájení při standby."
 
 msgid "Turn on the power LED during standby."
 msgstr "Zapne LED napájení při standby."

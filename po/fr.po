@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-05 18:53+0100\n"
-"PO-Revision-Date: 2019-01-05 19:00+0100\n"
+"POT-Creation-Date: 2019-01-25 20:37+0100\n"
+"PO-Revision-Date: 2019-01-25 20:38+0100\n"
 "Last-Translator: Pr2\n"
 "Language-Team: french\n"
 "Language: fr\n"
@@ -373,6 +373,16 @@ msgstr "%d:%02d"
 #. TRANSLATORS: VFD hour:minute daynum short monthname in strftime() format! See 'man strftime'
 msgid "%k:%M %e/%m"
 msgstr "%k:%M %e/%m"
+
+#, python-format
+msgid ""
+"%s\n"
+"Do you still want to flash image\n"
+"%s?"
+msgstr ""
+"%s\n"
+"Voulez-vous toujours flasher l'image\n"
+"%s?"
 
 #, python-format
 msgid ""
@@ -966,6 +976,9 @@ msgstr "Aussi en veille"
 
 msgid "Alternative"
 msgstr "Ajouter les alternatifs"
+
+msgid "Alternative URL for images listed on FlashImage"
+msgstr "URL alternative pour les images listées sur FlashImage"
 
 msgid "Alternative numbering mode"
 msgstr "Mode de numérotation alternatif"
@@ -1746,6 +1759,9 @@ msgstr "Effacer le log"
 msgid "Clear playlist"
 msgstr "Effacer liste de lecture"
 
+msgid "Client is streaming from this box!"
+msgstr "Un client regarde en streaming depuis ce récepteur!"
+
 msgid "Clone TV screen to LCD"
 msgstr "Dupliquer l'écran TV sur le LCD"
 
@@ -2445,6 +2461,9 @@ msgstr "Saisie Date/Heure"
 msgid "Debug to file"
 msgstr "Débogguer vers un fichier"
 
+msgid "Deep Standby LED"
+msgstr "LED en veille profonde"
+
 msgid "Deep standby"
 msgstr "Veille profonde"
 
@@ -2681,6 +2700,15 @@ msgstr "Afficher contenu 4:3 comme"
 
 msgid "Display >16:9 content as"
 msgstr "Afficher contenu >16:9 comme"
+
+msgid "Display EPG as MultiEPG"
+msgstr "Afficher l’EPG en tant que MultiEPG"
+
+msgid "Display EPG info for current event"
+msgstr "Afficher les info EPG du service courant"
+
+msgid "Display EPG list for current channel"
+msgstr "Afficher la liste EPG de la chaîne actuelle"
 
 msgid "Display and userinterface"
 msgstr "Affichage et interface utilisateur"
@@ -3124,6 +3152,9 @@ msgstr "Saisir le code PIN"
 
 msgid "Enter URL"
 msgstr "Entrer l’URL"
+
+msgid "Enter an URL where alternative images could be listed for FlashImage"
+msgstr "Entrez une URL où des images alternatives peuvent être répertoriées pour FlashImage"
 
 msgid "Enter if you are in the east or west hemisphere."
 msgstr "Saisissez si vous êtes dans l’hémisphère est ou ouest."
@@ -3599,12 +3630,6 @@ msgstr ""
 msgid "Following tasks will be done after you press OK!"
 msgstr "Les tâches suivantes seront réalisées après avoir appuyé sur OK!"
 
-msgid "Force LNB Power"
-msgstr "Forcer l’alimentation des LNBs"
-
-msgid "Force ToneBurst"
-msgstr "Forcer Toneburst"
-
 msgid "Force legacy signal stats"
 msgstr "Forcer les statistiques de signal hérité"
 
@@ -3938,6 +3963,9 @@ msgstr "Disque dur"
 
 msgid "Harddisk Setup"
 msgstr "Paramètres du disque dur"
+
+msgid "Harddisk is not in sleepmode it could be in use!"
+msgstr "Le disque dur n’est pas au repos il pourrait être utilisé!"
 
 msgid "Hardware: "
 msgstr "Matériel: "
@@ -5350,9 +5378,6 @@ msgstr "Espace disque insuffisant. Veuillez libérer de l'espace disque et rées
 msgid "Not tested:"
 msgstr "Pas testé:"
 
-msgid "Not yet implemented!"
-msgstr "Pas encore implémenté!"
-
 msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'."
 msgstr "Note: lorsqu’activé, et que vous voulez mettre votre récepteur en veille après un réveil, mettre l’option ‘Démarrer en mode veille ‘ sur ‘Non, excepté la minuterie de réveil’."
 
@@ -6308,16 +6333,6 @@ msgstr "Type d'enregistrement"
 
 msgid "Recording(s) are in progress or coming up in few seconds!"
 msgstr "Des enregistrement(s) sont en cours ou se terminent dans quelques secondes!"
-
-#, python-format
-msgid ""
-"Recording(s) are in progress or coming up in few seconds!\n"
-"Do you still want to flash image\n"
-"%s?"
-msgstr ""
-"Des enregistrement(s) sont en cours ou se terminent dans quelques secondes!\n"
-"Voulez-vous vraiment flasher l'image\n"
-"%s?"
 
 msgid "Recordings"
 msgstr "Enregistrements"
@@ -7977,6 +7992,9 @@ msgstr "Veille"
 msgid "Standby / restart"
 msgstr "Veille / Redémarrage"
 
+msgid "Standby LED"
+msgstr "LED en veille"
+
 msgid "Standby after current event"
 msgstr "Mise en veille après l'évènement actuel"
 
@@ -7990,9 +8008,6 @@ msgstr "Tension ventilateur en veille %d"
 
 msgid "Standby in "
 msgstr "Mise en veille dans "
-
-msgid "StandbyLED"
-msgstr "LED de veille"
 
 msgid "Start from the beginning"
 msgstr "Démarrer depuis le début"
@@ -8332,7 +8347,7 @@ msgstr ""
 "\n"
 "Traducteur: Pr2\n"
 "Support: www.openpli.org\n"
-"Dernière MAJ: 05-01-2019"
+"Dernière MAJ: 25-01-2019"
 
 msgid "TS file is too large for ISO9660 level 1!"
 msgstr "Fichier TS trop grand pour le niveau 1 ISO9660!"
@@ -9070,6 +9085,9 @@ msgstr "Turkmenistan"
 
 msgid "Turks and Caicos Islands"
 msgstr "Îles Turques et Caïques"
+
+msgid "Turn on the power LED during deep standby."
+msgstr "Allumez la LED « power » pendant la veille profonde."
 
 msgid "Turn on the power LED during standby."
 msgstr "Allumer la LED power pendant le standby."

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-05 18:53+0100\n"
+"POT-Creation-Date: 2019-01-25 20:37+0100\n"
 "PO-Revision-Date: 2018-11-12 20:51+0200\n"
 "Last-Translator: Мартин Петков <marto74bg@yahoo.co.uk>\n"
 "Language-Team: Bulgarian\n"
@@ -371,6 +371,13 @@ msgstr "%2d:%02d"
 #. TRANSLATORS: VFD hour:minute daynum short monthname in strftime() format! See 'man strftime'
 msgid "%k:%M %e/%m"
 msgstr "%k:%M %e/%m"
+
+#, fuzzy, python-format
+msgid ""
+"%s\n"
+"Do you still want to flash image\n"
+"%s?"
+msgstr "Не, не флашвай имидж"
 
 #, python-format
 msgid ""
@@ -965,6 +972,9 @@ msgstr "В режим готовност също"
 
 msgid "Alternative"
 msgstr "Алтернатива"
+
+msgid "Alternative URL for images listed on FlashImage"
+msgstr ""
 
 msgid "Alternative numbering mode"
 msgstr "Алтернативен номериран режим"
@@ -1752,6 +1762,9 @@ msgstr "Изтрий лога"
 msgid "Clear playlist"
 msgstr "Изчистване на плейлиста"
 
+msgid "Client is streaming from this box!"
+msgstr ""
+
 msgid "Clone TV screen to LCD"
 msgstr "Клониране ТВ екрана на LCD"
 
@@ -2454,6 +2467,10 @@ msgstr "Дата/час въвеждане"
 msgid "Debug to file"
 msgstr "Отстраняване на грешки във файл"
 
+#, fuzzy
+msgid "Deep Standby LED"
+msgstr "Изключване"
+
 msgid "Deep standby"
 msgstr "Изключване"
 
@@ -2691,6 +2708,17 @@ msgstr "Покажи 4:3 като"
 
 msgid "Display >16:9 content as"
 msgstr "Покажи >16:9 като"
+
+msgid "Display EPG as MultiEPG"
+msgstr ""
+
+#, fuzzy
+msgid "Display EPG info for current event"
+msgstr "Запази таймшифт само за текущото събитие"
+
+#, fuzzy
+msgid "Display EPG list for current channel"
+msgstr "Покажи EPG за текущия канал..."
 
 msgid "Display and userinterface"
 msgstr "Дисплей и потребителски интерфейс"
@@ -3139,6 +3167,9 @@ msgstr "Въведете PIN-кода"
 #, fuzzy
 msgid "Enter URL"
 msgstr "Въведете PIN-кода"
+
+msgid "Enter an URL where alternative images could be listed for FlashImage"
+msgstr ""
 
 msgid "Enter if you are in the east or west hemisphere."
 msgstr "Въведете ако се намирате в източното или западното полукълбо."
@@ -3620,12 +3651,6 @@ msgstr ""
 msgid "Following tasks will be done after you press OK!"
 msgstr "Следните задачи ще бъдат изпълнени, след като натиснете OK!"
 
-msgid "Force LNB Power"
-msgstr "Принудително LNB захранване"
-
-msgid "Force ToneBurst"
-msgstr "Принудителен тонов импулс (Tone Burst)"
-
 msgid "Force legacy signal stats"
 msgstr "Избиране на старите стат.данни за сигнала"
 
@@ -3964,6 +3989,9 @@ msgstr "Твърд диск"
 
 msgid "Harddisk Setup"
 msgstr "Настройки на твърдия диск"
+
+msgid "Harddisk is not in sleepmode it could be in use!"
+msgstr ""
 
 msgid "Hardware: "
 msgstr "Хардуер: "
@@ -5385,9 +5413,6 @@ msgstr "Няма достатъчно място на диска. Моля ос�
 msgid "Not tested:"
 msgstr "Не е тестван:"
 
-msgid "Not yet implemented!"
-msgstr "Все още не е въведен!"
-
 msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'."
 msgstr "Отбележете: ако е активирано и Вие искате да преминете в режим готовност след включване, изберете опция 'Режим готовност при старт' като 'Не, с изключение на таймера за включване'."
 
@@ -6351,15 +6376,6 @@ msgstr "Тип записи"
 
 msgid "Recording(s) are in progress or coming up in few seconds!"
 msgstr "Запис(и) се извършват или ще започнат до няколко секунди!"
-
-#, python-format
-msgid ""
-"Recording(s) are in progress or coming up in few seconds!\n"
-"Do you still want to flash image\n"
-"%s?"
-msgstr ""
-"Запис(и) се извършват или ще започнат до няколко секунди! Все още ли искате да флашнете имидж\n"
-"%s?"
 
 msgid "Recordings"
 msgstr "Записи"
@@ -8044,6 +8060,10 @@ msgstr "Готовност"
 msgid "Standby / restart"
 msgstr "Готовност / Рестарт"
 
+#, fuzzy
+msgid "Standby LED"
+msgstr "LED в режим готовност"
+
 msgid "Standby after current event"
 msgstr "Режим готовност след текущото предаване"
 
@@ -8057,9 +8077,6 @@ msgstr "Вентилатор в режим готовност %d напреже�
 
 msgid "Standby in "
 msgstr "Режим готовност след "
-
-msgid "StandbyLED"
-msgstr "LED в режим готовност"
 
 msgid "Start from the beginning"
 msgstr "Започни от началото"
@@ -9131,6 +9148,10 @@ msgstr "Туркменистан"
 
 msgid "Turks and Caicos Islands"
 msgstr "Островите Туркс и Кайкос"
+
+#, fuzzy
+msgid "Turn on the power LED during deep standby."
+msgstr "Включи LED на бутона на захранването на предния панел в режим готовност."
 
 msgid "Turn on the power LED during standby."
 msgstr "Включи LED на бутона на захранването на предния панел в режим готовност."

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-04 23:29+0100\n"
+"POT-Creation-Date: 2019-01-25 20:37+0100\n"
 "PO-Revision-Date: 2019-01-05 21:03+0100\n"
 "Last-Translator: Andrej Tobola <andrej.tobola@gmail.com>\n"
 "Language-Team: \n"
@@ -384,6 +384,15 @@ msgstr "%d:%02d"
 #. TRANSLATORS: VFD hour:minute daynum short monthname in strftime() format! See 'man strftime'
 msgid "%k:%M %e/%m"
 msgstr "%k:%M %e/%m"
+
+#, fuzzy, python-format
+msgid ""
+"%s\n"
+"Do you still want to flash image\n"
+"%s?"
+msgstr ""
+"Chcete nahrať image\n"
+"%s ?"
 
 #, python-format
 msgid ""
@@ -977,6 +986,9 @@ msgstr "Tiež v pohotovostnom režime"
 
 msgid "Alternative"
 msgstr "Alternatívne"
+
+msgid "Alternative URL for images listed on FlashImage"
+msgstr ""
 
 msgid "Alternative numbering mode"
 msgstr "Režim alternatívneho číslovania"
@@ -1757,6 +1769,9 @@ msgstr "Vymazať log"
 msgid "Clear playlist"
 msgstr "Vymazať zoznam prehrávania"
 
+msgid "Client is streaming from this box!"
+msgstr ""
+
 msgid "Clone TV screen to LCD"
 msgstr "Duplikovať obrazovku TV na LCD"
 
@@ -2255,7 +2270,8 @@ msgstr "Nedalo sa nahrávať - prekrýva sa časovanie %s"
 msgid "Could not record due to invalid service %s"
 msgstr "Nedalo sa nahrať pre neplatnú stanicu %s"
 
-msgid "Could not some setup the required directories on the media (e.g. USB stick) - Please verify media and check try again!"
+#, fuzzy
+msgid "Could not some setup the required directories on the media (e.g. USB stick) - Please verify media and try again!"
 msgstr "Nebolo možné vytvoriť požadované zložky na disku (napr. USB kľúč) - skontrolujte prosím disk a skúste to znovu!"
 
 msgid "Country"
@@ -2455,6 +2471,10 @@ msgstr "Nastavenie dátumu/času"
 
 msgid "Debug to file"
 msgstr "Ladiť do súboru"
+
+#, fuzzy
+msgid "Deep Standby LED"
+msgstr "Vypnúť prijímač (hlboký spánok)"
 
 msgid "Deep standby"
 msgstr "Vypnúť prijímač (hlboký spánok)"
@@ -2692,6 +2712,17 @@ msgstr "Obraz 4:3 zobraziť ako"
 
 msgid "Display >16:9 content as"
 msgstr "Obraz >16:9 zobraziť ako"
+
+msgid "Display EPG as MultiEPG"
+msgstr ""
+
+#, fuzzy
+msgid "Display EPG info for current event"
+msgstr "Uložiť súbor časového posunu iba pre aktuálnu reláciu"
+
+#, fuzzy
+msgid "Display EPG list for current channel"
+msgstr "Zobrazovať EPG pre aktuálnú stanicu..."
 
 msgid "Display and userinterface"
 msgstr "Displej a užívateľské rozhranie"
@@ -3136,6 +3167,9 @@ msgstr "Vložte PIN"
 
 msgid "Enter URL"
 msgstr "Vložte URL"
+
+msgid "Enter an URL where alternative images could be listed for FlashImage"
+msgstr ""
 
 msgid "Enter if you are in the east or west hemisphere."
 msgstr "Vojdite, ak sa nachádzate vo východnej alebo západnej hemisfére."
@@ -3610,12 +3644,6 @@ msgstr ""
 msgid "Following tasks will be done after you press OK!"
 msgstr "Po stlačení OK sa vykonajú nasledujúce úlohy!"
 
-msgid "Force LNB Power"
-msgstr "Vynútiť napájanie LNB"
-
-msgid "Force ToneBurst"
-msgstr "Vynútiť ToneBurst"
-
 msgid "Force legacy signal stats"
 msgstr "Vynútiť zastaralú štatistiku signálu"
 
@@ -3949,6 +3977,9 @@ msgstr "Pevný disk"
 
 msgid "Harddisk Setup"
 msgstr "Nastavenie pevného disku"
+
+msgid "Harddisk is not in sleepmode it could be in use!"
+msgstr ""
 
 msgid "Hardware: "
 msgstr "Hardvér: "
@@ -5365,9 +5396,6 @@ msgstr "Nie je dostatok miesta na disku. Uvoľnite miesto na disku a a skúste t
 msgid "Not tested:"
 msgstr "Netestované:"
 
-msgid "Not yet implemented!"
-msgstr "Ešte nie je implementované!"
-
 msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'."
 msgstr "Poznámka: Ak je povolené, a chcete prejsť do pohotovostného režimu po prebudení prijímača, nastavte voľbu \"Prebudenie do pohotovostného režimu\" na \"Nie, s výnimkou časovača prebudenia\"."
 
@@ -6323,16 +6351,6 @@ msgstr "Typ nahrávky"
 
 msgid "Recording(s) are in progress or coming up in few seconds!"
 msgstr "Nahrávanie prebieha alebo o pár sekúnd začne!"
-
-#, python-format
-msgid ""
-"Recording(s) are in progress or coming up in few seconds!\n"
-"Do you still want to flash image\n"
-"%s?"
-msgstr ""
-"Práve prebieha nahrávanie, alebo začne o niekoľko sekúnd!\n"
-"Chcete do prijímača stále nahrať image\n"
-"%s?"
 
 msgid "Recordings"
 msgstr "Nahrávky"
@@ -7378,13 +7396,16 @@ msgstr "Nastavte opakovanie sekvencie pokiaľ to vyžaduje anténny systém. Pok
 msgid "Set startup service"
 msgstr "Nastaviť stanicu po spustení"
 
-msgid "Set the User ID of the OpenWeb interface from your fallback tuner"
+#, fuzzy
+msgid "Set the User ID of the OpenWebif from your fallback tuner"
 msgstr "Nastaviť User ID rozhrania OpenWeb záložného tuneru."
 
-msgid "Set the password of the OpenWeb interface from your fallback tuner"
+#, fuzzy
+msgid "Set the password of the OpenWebif from your fallback tuner"
 msgstr "Nastaviť heslo rozhrania OpenWeb záložného tuneru."
 
-msgid "Set the port of the OpenWeb interace from your fallback tuner"
+#, fuzzy
+msgid "Set the port of the OpenWebif from your fallback tuner"
 msgstr "Nastaviť port rozhrania OpenWeb záložného tuneru."
 
 msgid "Set the type of the progress indication in the channel selection screen."
@@ -7993,6 +8014,10 @@ msgstr "Pohotovostný režim"
 msgid "Standby / restart"
 msgstr "Pohotovostný režim / Reštart"
 
+#, fuzzy
+msgid "Standby LED"
+msgstr "LED v pohotovostnom režime"
+
 msgid "Standby after current event"
 msgstr "Pohotovostný režim po aktuálnej udalosti"
 
@@ -8006,9 +8031,6 @@ msgstr "Pohotovosť, napätie ventilátora %d"
 
 msgid "Standby in "
 msgstr "Pohotovostný režim za "
-
-msgid "StandbyLED"
-msgstr "LED v pohotovostnom režime"
 
 msgid "Start from the beginning"
 msgstr "Spustiť od začiatku"
@@ -9080,6 +9102,10 @@ msgstr "Turkenistan"
 
 msgid "Turks and Caicos Islands"
 msgstr "Turecké a Caicos ostrovy"
+
+#, fuzzy
+msgid "Turn on the power LED during deep standby."
+msgstr "Zapnúť LED napájania počas pohotovostného režimu."
 
 msgid "Turn on the power LED during standby."
 msgstr "Zapnúť LED napájania počas pohotovostného režimu."

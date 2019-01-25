@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-05 18:53+0100\n"
+"POT-Creation-Date: 2019-01-25 20:37+0100\n"
 "PO-Revision-Date: 2018-10-22T21:44:30+02:00\n"
 "Last-Translator: daddelfalk <OpenPLi>\n"
 "Language-Team: Sfteam  angelo2807@hotmail.com\n"
@@ -374,6 +374,15 @@ msgstr "%d:%02d"
 #. TRANSLATORS: VFD hour:minute daynum short monthname in strftime() format! See 'man strftime'
 msgid "%k:%M %e/%m"
 msgstr "%k:%M %e/%m"
+
+#, fuzzy, python-format
+msgid ""
+"%s\n"
+"Do you still want to flash image\n"
+"%s?"
+msgstr ""
+"Wollen Sie das Image flashen?\n"
+"% s"
 
 #, python-format
 msgid ""
@@ -967,6 +976,9 @@ msgstr "Auch in Standby"
 
 msgid "Alternative"
 msgstr "Alternativen hinzufügen"
+
+msgid "Alternative URL for images listed on FlashImage"
+msgstr ""
 
 msgid "Alternative numbering mode"
 msgstr "Alternativer Nummerierungs-Modus"
@@ -1746,6 +1758,9 @@ msgstr "Log löschen"
 msgid "Clear playlist"
 msgstr "Wiedergabeliste leeren"
 
+msgid "Client is streaming from this box!"
+msgstr ""
+
 msgid "Clone TV screen to LCD"
 msgstr "Klone TV Bild zum LCD"
 
@@ -2445,6 +2460,10 @@ msgstr "Zeit/Datum-Eingabe"
 msgid "Debug to file"
 msgstr "Debuggen zur Datei"
 
+#, fuzzy
+msgid "Deep Standby LED"
+msgstr "Tiefschlaf / Ausschalten"
+
 msgid "Deep standby"
 msgstr "Tiefschlaf / Ausschalten"
 
@@ -2681,6 +2700,17 @@ msgstr "4:3-Inhalt anzeigen als"
 
 msgid "Display >16:9 content as"
 msgstr "Inhalt mit einem Bildformate grösser als 16:9 anzeigen als"
+
+msgid "Display EPG as MultiEPG"
+msgstr ""
+
+#, fuzzy
+msgid "Display EPG info for current event"
+msgstr "Timeshift nur für aktuelle Sendung speichern"
+
+#, fuzzy
+msgid "Display EPG list for current channel"
+msgstr "EPG für aktuellen Kanal anzeigen…"
 
 msgid "Display and userinterface"
 msgstr "Display und Benutzeroberfläche"
@@ -3120,6 +3150,9 @@ msgstr "PIN eingeben"
 
 msgid "Enter URL"
 msgstr "URL eingeben"
+
+msgid "Enter an URL where alternative images could be listed for FlashImage"
+msgstr ""
 
 msgid "Enter if you are in the east or west hemisphere."
 msgstr "Geben Sie ein, wenn Sie sich in der östlichen oder westlichen Hemisphäre befinden."
@@ -3594,12 +3627,6 @@ msgstr ""
 msgid "Following tasks will be done after you press OK!"
 msgstr "Folgendes wird ausgeführt, nachdem Sie OK gedrückt haben!"
 
-msgid "Force LNB Power"
-msgstr "Force LNB Power"
-
-msgid "Force ToneBurst"
-msgstr "Force ToneBurst"
-
 msgid "Force legacy signal stats"
 msgstr "Erzwinge Legacy-Signal-Statistiken"
 
@@ -3933,6 +3960,9 @@ msgstr "Festplatte"
 
 msgid "Harddisk Setup"
 msgstr "Festplatten Einstellungen"
+
+msgid "Harddisk is not in sleepmode it could be in use!"
+msgstr ""
 
 msgid "Hardware: "
 msgstr "Hardware: "
@@ -5350,9 +5380,6 @@ msgstr "Nicht genügend freier Speicherplatz. Bitte löschen Sie nicht mehr ben�
 msgid "Not tested:"
 msgstr "Nicht getestet:"
 
-msgid "Not yet implemented!"
-msgstr "Noch nicht implementiert!"
-
 msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'."
 msgstr "Hinweis: Wenn diese Option aktiviert ist und Sie nach dem Aufwachen in den Standby-Modus wechseln wollen, setzen Sie die Option “Startup to Standby” auf “No, außer Wakeup Timer”."
 
@@ -6309,16 +6336,6 @@ msgstr "Aufnahmetyp"
 
 msgid "Recording(s) are in progress or coming up in few seconds!"
 msgstr "Zurzeit sind Aufnahmen aktiv oder starten gleich!"
-
-#, python-format
-msgid ""
-"Recording(s) are in progress or coming up in few seconds!\n"
-"Do you still want to flash image\n"
-"%s?"
-msgstr ""
-"Die Aufnahme läuft oder läuft in wenigen Sekunden!\n"
-"Wollen Sie das Image immer noch flashen?\n"
-"% s?"
 
 msgid "Recordings"
 msgstr "Aufnahmen"
@@ -7981,6 +7998,10 @@ msgstr "Standby"
 msgid "Standby / restart"
 msgstr "Standby / Neustart"
 
+#, fuzzy
+msgid "Standby LED"
+msgstr "LED im Standby-Modus"
+
 msgid "Standby after current event"
 msgstr "Standby nach aktueller Sendung"
 
@@ -7994,9 +8015,6 @@ msgstr "Standby Lüfter %d Spannung"
 
 msgid "Standby in "
 msgstr "Standby in"
-
-msgid "StandbyLED"
-msgstr "LED im Standby-Modus"
 
 msgid "Start from the beginning"
 msgstr "Am Anfang starten"
@@ -9067,6 +9085,10 @@ msgstr "Turkmenistan"
 
 msgid "Turks and Caicos Islands"
 msgstr "Turks- und Caicosinseln"
+
+#, fuzzy
+msgid "Turn on the power LED during deep standby."
+msgstr "Die LED im Standy-Modus ausschalten."
 
 msgid "Turn on the power LED during standby."
 msgstr "Die LED im Standy-Modus ausschalten."

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-05 18:53+0100\n"
+"POT-Creation-Date: 2019-01-25 20:37+0100\n"
 "PO-Revision-Date: 2019-01-11 19:33+0200\n"
 "Last-Translator: Audronis Grincevicius <adga45@gmail.com>\n"
 "Language-Team: Adga (C) <adga45@gmail.com>\n"
@@ -384,6 +384,15 @@ msgstr "%d:%02d"
 #. TRANSLATORS: VFD hour:minute daynum short monthname in strftime() format! See 'man strftime'
 msgid "%k:%M %e/%m"
 msgstr "%m/%e %k:%M"
+
+#, fuzzy, python-format
+msgid ""
+"%s\n"
+"Do you still want to flash image\n"
+"%s?"
+msgstr ""
+"Ar norite įdiegti šį atvaizdą\n"
+"%s"
 
 #, python-format
 msgid ""
@@ -978,6 +987,9 @@ msgstr "Ir budėjimo būsenoje"
 
 msgid "Alternative"
 msgstr "Alternatyva"
+
+msgid "Alternative URL for images listed on FlashImage"
+msgstr ""
 
 msgid "Alternative numbering mode"
 msgstr "Alternatyvus numeravimo būdas"
@@ -1758,6 +1770,9 @@ msgstr "Išvalyti žurnalą"
 msgid "Clear playlist"
 msgstr "Išvalyti grojaraštį"
 
+msgid "Client is streaming from this box!"
+msgstr ""
+
 msgid "Clone TV screen to LCD"
 msgstr "Klonuoti TV vaizdą į LCD"
 
@@ -2457,6 +2472,10 @@ msgstr "Datos / laiko įvestis"
 msgid "Debug to file"
 msgstr "Sukurti klaidų žurnalo failą"
 
+#, fuzzy
+msgid "Deep Standby LED"
+msgstr "Visiškai išjungti"
+
 msgid "Deep standby"
 msgstr "Visiškai išjungti"
 
@@ -2693,6 +2712,17 @@ msgstr "4:3 santykio turinį rodyti, kaip"
 
 msgid "Display >16:9 content as"
 msgstr ">16:9 santykio turinį rodyti, kaip"
+
+msgid "Display EPG as MultiEPG"
+msgstr ""
+
+#, fuzzy
+msgid "Display EPG info for current event"
+msgstr "Išsaugoti laiko poslinkį tik šiam įvykiui"
+
+#, fuzzy
+msgid "Display EPG list for current channel"
+msgstr "Rodyti šio kanalo EPG..."
 
 msgid "Display and userinterface"
 msgstr "Ekranas ir vartotojo sąsaja"
@@ -3139,6 +3169,9 @@ msgstr "Įrašykite PIN"
 
 msgid "Enter URL"
 msgstr "Įrašykite internetinį adresą"
+
+msgid "Enter an URL where alternative images could be listed for FlashImage"
+msgstr ""
 
 msgid "Enter if you are in the east or west hemisphere."
 msgstr "Įveskite, jei esate rytų ar vakarų pusrutulyje."
@@ -3609,12 +3642,6 @@ msgstr ""
 msgid "Following tasks will be done after you press OK!"
 msgstr "Šios užduotys bus atliktos, kai paspausite 'OK'!"
 
-msgid "Force LNB Power"
-msgstr "Priverstinė LNB įtampa"
-
-msgid "Force ToneBurst"
-msgstr "Priverstinis tono impulsas"
-
 msgid "Force legacy signal stats"
 msgstr "Priverstinė pasenusių signalų statistika"
 
@@ -3948,6 +3975,9 @@ msgstr "Kietas diskas"
 
 msgid "Harddisk Setup"
 msgstr "HDD valdymas"
+
+msgid "Harddisk is not in sleepmode it could be in use!"
+msgstr ""
 
 msgid "Hardware: "
 msgstr "Techninė įranga: "
@@ -5366,9 +5396,6 @@ msgstr "Diske nepakanka vietos. Atlaisvinkite vietos diske ir bandykite dar kart
 msgid "Not tested:"
 msgstr "Netikrinta:"
 
-msgid "Not yet implemented!"
-msgstr "Dar neįgyvendinta!"
-
 msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'."
 msgstr "Pastaba: kai čia įjungta ir po imtuvo pažadinimo, norite pervesti į  budėjimo būseną, pasirinkite 'Startuoti imtuvą į budėjimo būseną', kaip 'Ne, išskyrus pažadinimo laikmatį'."
 
@@ -6324,16 +6351,6 @@ msgstr "Įrašymo tipas"
 
 msgid "Recording(s) are in progress or coming up in few seconds!"
 msgstr "Įrašas (ai) yra vykdymas arba bus prieinamas po kelių sekundžių!"
-
-#, python-format
-msgid ""
-"Recording(s) are in progress or coming up in few seconds!\n"
-"Do you still want to flash image\n"
-"%s?"
-msgstr ""
-"Įrašymas(-ai) vyksta arba prasidės netrukus!\n"
-"Ar vis dar norite įdiegti atvaizdą\n"
-"%s?"
 
 msgid "Recordings"
 msgstr "Įrašai"
@@ -7998,6 +8015,10 @@ msgstr "Budėjimo režimas"
 msgid "Standby / restart"
 msgstr "Išjungimo meniu"
 
+#, fuzzy
+msgid "Standby LED"
+msgstr "LED budėjime"
+
 msgid "Standby after current event"
 msgstr "Po šio įvykio pereiti į budėjimo režimą"
 
@@ -8011,9 +8032,6 @@ msgstr "Ventiliatoriaus įtampa %d budėjimo režime"
 
 msgid "Standby in "
 msgstr "Į budėjimo režimą po "
-
-msgid "StandbyLED"
-msgstr "LED budėjime"
 
 msgid "Start from the beginning"
 msgstr "Pradėti nuo pradžių"
@@ -9084,6 +9102,10 @@ msgstr "Turkmenistanas"
 
 msgid "Turks and Caicos Islands"
 msgstr "Terkso ir Kaikoso salos"
+
+#, fuzzy
+msgid "Turn on the power LED during deep standby."
+msgstr "Įjunkite maitinimo LED indikatorių budėjimo režimu metu."
 
 msgid "Turn on the power LED during standby."
 msgstr "Įjunkite maitinimo LED indikatorių budėjimo režimu metu."

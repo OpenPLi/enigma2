@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Openpli\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-05 18:53+0100\n"
+"POT-Creation-Date: 2019-01-25 20:37+0100\n"
 "PO-Revision-Date: 2018-09-05 01:25+0300\n"
 "Last-Translator: \n"
 "Language-Team: Raivo, Henkka, eesatfan, rimas, zeros\\n faas, sateks, valgekotkas, tigekala, rootsikunn\\n kain, i70, mustkass, pelmeen, Scott\\n <digi-tv.ee>\n"
@@ -373,6 +373,15 @@ msgstr "%d:%02d"
 #. TRANSLATORS: VFD hour:minute daynum short monthname in strftime() format! See 'man strftime'
 msgid "%k:%M %e/%m"
 msgstr "%k:%M %e/%m"
+
+#, fuzzy, python-format
+msgid ""
+"%s\n"
+"Do you still want to flash image\n"
+"%s?"
+msgstr ""
+"Kas soovid paigaldada image\n"
+"%s"
 
 #, python-format
 msgid ""
@@ -965,6 +974,9 @@ msgstr "Ka ooteseisundis"
 
 msgid "Alternative"
 msgstr "Alternatiivne"
+
+msgid "Alternative URL for images listed on FlashImage"
+msgstr ""
 
 msgid "Alternative numbering mode"
 msgstr "Alternatiivne numeratsioon"
@@ -1748,6 +1760,9 @@ msgstr "Kustuta logi"
 msgid "Clear playlist"
 msgstr "Tühjenda esitusloend"
 
+msgid "Client is streaming from this box!"
+msgstr ""
+
 msgid "Clone TV screen to LCD"
 msgstr "Kopeeri TV ekraan LCD-le"
 
@@ -2451,6 +2466,10 @@ msgstr "Aeg/kuupäev"
 msgid "Debug to file"
 msgstr "Silu faili"
 
+#, fuzzy
+msgid "Deep Standby LED"
+msgstr "Sügav ooterežiim"
+
 msgid "Deep standby"
 msgstr "Sügav ooterežiim"
 
@@ -2687,6 +2706,17 @@ msgstr "Näita 4:3 materjal"
 
 msgid "Display >16:9 content as"
 msgstr "Näita 16:9 materjal"
+
+msgid "Display EPG as MultiEPG"
+msgstr ""
+
+#, fuzzy
+msgid "Display EPG info for current event"
+msgstr "Salvesta ajanihe ainult käimasoleva sündmuse jaoks"
+
+#, fuzzy
+msgid "Display EPG list for current channel"
+msgstr "Kanali saatekava"
 
 msgid "Display and userinterface"
 msgstr "Esipaneel ja kasutajaliides"
@@ -3133,6 +3163,9 @@ msgstr "Sisesta PIN"
 
 msgid "Enter URL"
 msgstr "Sisesta URL"
+
+msgid "Enter an URL where alternative images could be listed for FlashImage"
+msgstr ""
 
 msgid "Enter if you are in the east or west hemisphere."
 msgstr "Sisesta, kas asud ida- või läänepoolkeral."
@@ -3605,12 +3638,6 @@ msgstr ""
 msgid "Following tasks will be done after you press OK!"
 msgstr "Järgmised toimingud tehakse pärast OK vajutamist!"
 
-msgid "Force LNB Power"
-msgstr "Sunni LNB toide"
-
-msgid "Force ToneBurst"
-msgstr "Sunni toonipurse"
-
 msgid "Force legacy signal stats"
 msgstr "Kasuta aegunud signaalistatistikat"
 
@@ -3945,6 +3972,9 @@ msgstr "Kõvaketas"
 
 msgid "Harddisk Setup"
 msgstr "Kõvaketta seadistamine"
+
+msgid "Harddisk is not in sleepmode it could be in use!"
+msgstr ""
 
 msgid "Hardware: "
 msgstr "Riistvara: "
@@ -5359,9 +5389,6 @@ msgstr "Kõvakettal pole piisavalt ruumi. Kustuta ebavajalik ja proovi uuesti. (
 msgid "Not tested:"
 msgstr "Pole testitud:"
 
-msgid "Not yet implemented!"
-msgstr "Pole veel rakendatud!"
-
 msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'."
 msgstr "Märkus: kui lubatud, ja sa tahad ooterežiimi pärast äratust, sea valik 'Ooterežiimis alustamine' kui 'Ei, välja arvatud äratustaimer'."
 
@@ -6324,16 +6351,6 @@ msgstr "Salvestuse liik"
 
 msgid "Recording(s) are in progress or coming up in few seconds!"
 msgstr "Salvestus(ed) on käimas või käivituvad peatselt!"
-
-#, python-format
-msgid ""
-"Recording(s) are in progress or coming up in few seconds!\n"
-"Do you still want to flash image\n"
-"%s?"
-msgstr ""
-"Salvestus(ed) on käimas või algavad mõne sekundi jooksul.\n"
-"Kas soovid siiski paigaldada tarkvara\n"
-"%s?"
 
 msgid "Recordings"
 msgstr "Salvestised"
@@ -8009,6 +8026,10 @@ msgstr "Ooterežiim"
 msgid "Standby / restart"
 msgstr "Seiskamine"
 
+#, fuzzy
+msgid "Standby LED"
+msgstr "Ooterežiimi LED"
+
 msgid "Standby after current event"
 msgstr "Ooterežiimis pärast praegust sündmust"
 
@@ -8022,9 +8043,6 @@ msgstr "Vent. %d pinge ooterežiimil"
 
 msgid "Standby in "
 msgstr "Ooterežiimis "
-
-msgid "StandbyLED"
-msgstr "Ooterežiimi LED"
 
 msgid "Start from the beginning"
 msgstr "Alusta algusest"
@@ -9113,6 +9131,10 @@ msgstr "Türkmenistan"
 
 msgid "Turks and Caicos Islands"
 msgstr "Turks ja Caicos"
+
+#, fuzzy
+msgid "Turn on the power LED during deep standby."
+msgstr "Lülita ooteseisundi ajal sisse toite LED."
 
 msgid "Turn on the power LED during standby."
 msgstr "Lülita ooteseisundi ajal sisse toite LED."
