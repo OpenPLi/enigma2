@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-05 18:53+0100\n"
+"POT-Creation-Date: 2019-01-25 20:37+0100\n"
 "PO-Revision-Date: 2014-12-15 19:38-0000\n"
 "Last-Translator: Phenom <phenomxy@gmail.com>\n"
 "Language-Team: Muaitai <muaitai@gmail.com>\n"
@@ -389,6 +389,13 @@ msgstr "%2d:%02d"
 #. TRANSLATORS: VFD hour:minute daynum short monthname in strftime() format! See 'man strftime'
 msgid "%k:%M %e/%m"
 msgstr "%k:%M %e/%m"
+
+#, fuzzy, python-format
+msgid ""
+"%s\n"
+"Do you still want to flash image\n"
+"%s?"
+msgstr "Deseja fazer o Download da imagem para %s ?"
 
 #, python-format
 msgid ""
@@ -1078,6 +1085,9 @@ msgstr ""
 #, fuzzy
 msgid "Alternative"
 msgstr "Alternativa"
+
+msgid "Alternative URL for images listed on FlashImage"
+msgstr ""
 
 #
 #, fuzzy
@@ -1985,6 +1995,9 @@ msgstr "Limpar LOG"
 msgid "Clear playlist"
 msgstr "Limpar Lista de Reprodução"
 
+msgid "Client is streaming from this box!"
+msgstr ""
+
 msgid "Clone TV screen to LCD"
 msgstr ""
 
@@ -2800,6 +2813,11 @@ msgstr "Eliminar ficheiro"
 
 #
 #, fuzzy
+msgid "Deep Standby LED"
+msgstr "Desligar"
+
+#
+#, fuzzy
 msgid "Deep standby"
 msgstr "Desligar"
 
@@ -3069,6 +3087,18 @@ msgstr "Mostrar conteúdo 4:3 como"
 #
 msgid "Display >16:9 content as"
 msgstr "Mostrar conteúdo maior que 16:9 como"
+
+msgid "Display EPG as MultiEPG"
+msgstr ""
+
+#, fuzzy
+msgid "Display EPG info for current event"
+msgstr "Colocar em Standby após o programa actual"
+
+#
+#, fuzzy
+msgid "Display EPG list for current channel"
+msgstr "Mostrar Guia de Programação para o canal corrente..."
 
 #
 #, fuzzy
@@ -3598,6 +3628,9 @@ msgstr ""
 msgid "Enter URL"
 msgstr ""
 
+msgid "Enter an URL where alternative images could be listed for FlashImage"
+msgstr ""
+
 msgid "Enter if you are in the east or west hemisphere."
 msgstr ""
 
@@ -4117,12 +4150,6 @@ msgstr ""
 msgid "Following tasks will be done after you press OK!"
 msgstr "As tarefas seguintes vão terminar depois de pressionar OK!"
 
-msgid "Force LNB Power"
-msgstr ""
-
-msgid "Force ToneBurst"
-msgstr ""
-
 msgid "Force legacy signal stats"
 msgstr ""
 
@@ -4504,6 +4531,9 @@ msgid "Harddisk"
 msgstr "Disco rígido"
 
 msgid "Harddisk Setup"
+msgstr ""
+
+msgid "Harddisk is not in sleepmode it could be in use!"
 msgstr ""
 
 msgid "Hardware: "
@@ -6188,9 +6218,6 @@ msgstr "Não existe espaço suficiente no disco. Por favor liberte algum espaço
 msgid "Not tested:"
 msgstr ""
 
-msgid "Not yet implemented!"
-msgstr ""
-
 msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'."
 msgstr ""
 
@@ -7345,14 +7372,6 @@ msgstr "Tipo de gravação"
 
 #
 msgid "Recording(s) are in progress or coming up in few seconds!"
-msgstr "Gravações em progresso ou a iniciarem brevemente!"
-
-#
-#, fuzzy, python-format
-msgid ""
-"Recording(s) are in progress or coming up in few seconds!\n"
-"Do you still want to flash image\n"
-"%s?"
 msgstr "Gravações em progresso ou a iniciarem brevemente!"
 
 #
@@ -9345,6 +9364,10 @@ msgstr "Standby"
 msgid "Standby / restart"
 msgstr "Standby / Reiniciar"
 
+#, fuzzy
+msgid "Standby LED"
+msgstr "Standby LED"
+
 msgid "Standby after current event"
 msgstr "Colocar em Standby após o programa actual"
 
@@ -9360,9 +9383,6 @@ msgstr "Tensão do ventilador em Standby %d"
 
 msgid "Standby in "
 msgstr "Standby em "
-
-msgid "StandbyLED"
-msgstr "Standby LED"
 
 #
 msgid "Start from the beginning"
@@ -10601,6 +10621,10 @@ msgstr "Turco"
 
 msgid "Turks and Caicos Islands"
 msgstr ""
+
+#, fuzzy
+msgid "Turn on the power LED during deep standby."
+msgstr "Ligar o LED de Power durante o Standby."
 
 msgid "Turn on the power LED during standby."
 msgstr "Ligar o LED de Power durante o Standby."

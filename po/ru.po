@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-05 18:53+0100\n"
+"POT-Creation-Date: 2019-01-25 20:37+0100\n"
 "PO-Revision-Date: 2018-05-02 18:32+0300\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: openPLi Dimitrij\n"
@@ -383,6 +383,15 @@ msgstr "%d:%02d"
 #. TRANSLATORS: VFD hour:minute daynum short monthname in strftime() format! See 'man strftime'
 msgid "%k:%M %e/%m"
 msgstr "%k:%M %e/%m"
+
+#, fuzzy, python-format
+msgid ""
+"%s\n"
+"Do you still want to flash image\n"
+"%s?"
+msgstr ""
+"Вы хотите прошить имидж\n"
+"%s"
 
 #, python-format
 msgid ""
@@ -977,6 +986,9 @@ msgstr "Также из режима ожидания"
 
 msgid "Alternative"
 msgstr "Альтернатива"
+
+msgid "Alternative URL for images listed on FlashImage"
+msgstr ""
 
 msgid "Alternative numbering mode"
 msgstr "Альтернативный режим нумерации каналов"
@@ -1757,6 +1769,9 @@ msgstr "Очистить лог"
 msgid "Clear playlist"
 msgstr "Очистить список воспроизведения"
 
+msgid "Client is streaming from this box!"
+msgstr ""
+
 msgid "Clone TV screen to LCD"
 msgstr "Клон ТВ экрана на LCD"
 
@@ -2456,6 +2471,10 @@ msgstr "Ввод времени/даты"
 msgid "Debug to file"
 msgstr "Отладка в файл"
 
+#, fuzzy
+msgid "Deep Standby LED"
+msgstr "Глубокий режим ожидания"
+
 msgid "Deep standby"
 msgstr "Глубокий режим ожидания"
 
@@ -2692,6 +2711,17 @@ msgstr "Показывать 4:3 контент как"
 
 msgid "Display >16:9 content as"
 msgstr "Показывать >16:9 контент как"
+
+msgid "Display EPG as MultiEPG"
+msgstr ""
+
+#, fuzzy
+msgid "Display EPG info for current event"
+msgstr "Сохранить таймшифт только для текущего события"
+
+#, fuzzy
+msgid "Display EPG list for current channel"
+msgstr "Показать EPG текущего канала..."
 
 msgid "Display and userinterface"
 msgstr "Экран и пользовательский интерфейс"
@@ -3136,6 +3166,9 @@ msgstr "Ввод PIN-кода"
 
 msgid "Enter URL"
 msgstr "Ввод URL"
+
+msgid "Enter an URL where alternative images could be listed for FlashImage"
+msgstr ""
 
 msgid "Enter if you are in the east or west hemisphere."
 msgstr "Ввод, где Вы находитесь, в восточном или западном полушарии."
@@ -3610,12 +3643,6 @@ msgstr ""
 msgid "Following tasks will be done after you press OK!"
 msgstr "Выполнение процесса начнется после того, как вы нажмете ОК!"
 
-msgid "Force LNB Power"
-msgstr "Принудительное питание LNB"
-
-msgid "Force ToneBurst"
-msgstr "Принудительный тоновый импульс (Tone Burst)"
-
 msgid "Force legacy signal stats"
 msgstr "Применять устаревшую статистику вывода сигналов"
 
@@ -3949,6 +3976,9 @@ msgstr "Жесткий диск"
 
 msgid "Harddisk Setup"
 msgstr "Настройки жестокого диска"
+
+msgid "Harddisk is not in sleepmode it could be in use!"
+msgstr ""
 
 msgid "Hardware: "
 msgstr "Аппаратные средства: "
@@ -5365,9 +5395,6 @@ msgstr "Нет места на диске. Пожалуйста, освобод�
 msgid "Not tested:"
 msgstr "Без теста:"
 
-msgid "Not yet implemented!"
-msgstr "Еще не реалезовано!"
-
 msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'."
 msgstr "Заметка: если активировано и вы хотите перейти в режим ожидания после включения, установите опцию 'Режим ожидания при старте' как 'Нет, исключение таймер включения'."
 
@@ -6326,15 +6353,6 @@ msgstr "Тип записи"
 
 msgid "Recording(s) are in progress or coming up in few seconds!"
 msgstr "Запись(и) в процессе или начнется в ближайшие несколько минут/секунд!"
-
-#, python-format
-msgid ""
-"Recording(s) are in progress or coming up in few seconds!\n"
-"Do you still want to flash image\n"
-"%s?"
-msgstr ""
-"Запись(и) в процессе или начнется в ближайшие несколько минут/секунд! Вы все еще хотите прошить имидж\n"
-"%s?"
 
 msgid "Recordings"
 msgstr "Записи"
@@ -8003,6 +8021,10 @@ msgstr "Режим ожидания"
 msgid "Standby / restart"
 msgstr "Меню выключения"
 
+#, fuzzy
+msgid "Standby LED"
+msgstr "LED в режиме ожидания/выключения"
+
 msgid "Standby after current event"
 msgstr "Режим ожидания после текущего события"
 
@@ -8016,9 +8038,6 @@ msgstr "Режим ожидания - напряжение вентилятор�
 
 msgid "Standby in "
 msgstr "Режим ожидания через "
-
-msgid "StandbyLED"
-msgstr "LED в режиме ожидания/выключения"
 
 msgid "Start from the beginning"
 msgstr "Начать с самого начала"
@@ -9085,6 +9104,10 @@ msgstr "Turkmenistan"
 
 msgid "Turks and Caicos Islands"
 msgstr "Turks and Caicos Islands"
+
+#, fuzzy
+msgid "Turn on the power LED during deep standby."
+msgstr "Включить питание на кнопке LED, на передней панели в режиме ожидания / режиме глубокого ожидания."
 
 msgid "Turn on the power LED during standby."
 msgstr "Включить питание на кнопке LED, на передней панели в режиме ожидания / режиме глубокого ожидания."

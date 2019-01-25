@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPLi-enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-05 18:53+0100\n"
+"POT-Creation-Date: 2019-01-25 20:37+0100\n"
 "PO-Revision-Date: 2018-05-22 13:54+0200\n"
 "Last-Translator: Gringo <openpli@tiscali.it>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -379,6 +379,13 @@ msgstr "%d:%02d"
 #. TRANSLATORS: VFD hour:minute daynum short monthname in strftime() format! See 'man strftime'
 msgid "%k:%M %e/%m"
 msgstr "%k:%M %e/%m"
+
+#, fuzzy, python-format
+msgid ""
+"%s\n"
+"Do you still want to flash image\n"
+"%s?"
+msgstr "Installare l'immagine in %s?"
 
 #, python-format
 msgid ""
@@ -972,6 +979,9 @@ msgstr "Anche in stato di sospensione"
 
 msgid "Alternative"
 msgstr "Alternativa"
+
+msgid "Alternative URL for images listed on FlashImage"
+msgstr ""
 
 msgid "Alternative numbering mode"
 msgstr "Utilizzare la numerazione alternativa dei canali"
@@ -1757,6 +1767,9 @@ msgstr "Eliminare il registro"
 msgid "Clear playlist"
 msgstr "Eliminare la playlist"
 
+msgid "Client is streaming from this box!"
+msgstr ""
+
 msgid "Clone TV screen to LCD"
 msgstr "Clonare lo schermo TV sul display LCD"
 
@@ -2459,6 +2472,10 @@ msgstr "Inserimento data/ora"
 msgid "Debug to file"
 msgstr "Debug su file"
 
+#, fuzzy
+msgid "Deep Standby LED"
+msgstr "Spegnimento"
+
 msgid "Deep standby"
 msgstr "Spegnimento"
 
@@ -2696,6 +2713,17 @@ msgstr "Visualizzare i contenuti in 4:3 come"
 
 msgid "Display >16:9 content as"
 msgstr "Visualizzare i contenuti > di 16:9 come"
+
+msgid "Display EPG as MultiEPG"
+msgstr ""
+
+#, fuzzy
+msgid "Display EPG info for current event"
+msgstr "Salvare il file di timeshift solo per l'evento attuale"
+
+#, fuzzy
+msgid "Display EPG list for current channel"
+msgstr "Mostrare l'EPG per il canale attuale..."
 
 msgid "Display and userinterface"
 msgstr "Schermo ed interfaccia utente"
@@ -3141,6 +3169,9 @@ msgstr "Inserire il PIN"
 
 msgid "Enter URL"
 msgstr "Inserire URL"
+
+msgid "Enter an URL where alternative images could be listed for FlashImage"
+msgstr ""
 
 msgid "Enter if you are in the east or west hemisphere."
 msgstr "Specificare se ci si trova nell'emisfero orientale oppure occidentale."
@@ -3616,12 +3647,6 @@ msgstr ""
 msgid "Following tasks will be done after you press OK!"
 msgstr "Le seguenti operazioni saranno eseguite dopo aver premuto il tasto OK!"
 
-msgid "Force LNB Power"
-msgstr "Mantenere l'alimentazione dell'LNB"
-
-msgid "Force ToneBurst"
-msgstr "Forzare il segnale a 22 kHz (Toneburst)"
-
 msgid "Force legacy signal stats"
 msgstr "Forzare le statistiche del segnale legacy"
 
@@ -3958,6 +3983,9 @@ msgstr "Disco rigido"
 
 msgid "Harddisk Setup"
 msgstr "Configurazione Disco rigido"
+
+msgid "Harddisk is not in sleepmode it could be in use!"
+msgstr ""
 
 msgid "Hardware: "
 msgstr "Hardware: "
@@ -5377,9 +5405,6 @@ msgstr "Spazio su disco insufficiente. Liberare spazio sul disco e riprovare. (%
 msgid "Not tested:"
 msgstr "Non verificato:"
 
-msgid "Not yet implemented!"
-msgstr "Non ancora previsto!"
-
 msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'."
 msgstr "Se questa impostazione è attivata e si desidera mettere il ricevitore in sospensione all'accensione, impostare l'opzione 'Accensione in stato di sospensione' a 'No, eccetto per il timer di riattivazione' (questa opzione si trova nel menu Impostazioni > Impostazioni sistema > Personalizzazioni)."
 
@@ -6343,16 +6368,6 @@ msgstr "Tipo di registrazione"
 
 msgid "Recording(s) are in progress or coming up in few seconds!"
 msgstr "Registrazione/i in corso o in procinto di iniziare!"
-
-#, python-format
-msgid ""
-"Recording(s) are in progress or coming up in few seconds!\n"
-"Do you still want to flash image\n"
-"%s?"
-msgstr ""
-"Una o più registrazioni sono attualmente in corso o stanno per iniziare entro alcuni secondi!\n"
-"Si desidera ancora installare l'immagine\n"
-"%s?"
 
 msgid "Recordings"
 msgstr "Registrazioni"
@@ -8032,6 +8047,10 @@ msgstr "Sospensione"
 msgid "Standby / restart"
 msgstr "Gestione stato"
 
+#, fuzzy
+msgid "Standby LED"
+msgstr "LED in stato di sospensione"
+
 msgid "Standby after current event"
 msgstr "In sospensione alla fine dell'evento attuale"
 
@@ -8045,9 +8064,6 @@ msgstr "Tensione ventola in sospensione %d"
 
 msgid "Standby in "
 msgstr "In sospensione tra "
-
-msgid "StandbyLED"
-msgstr "LED in stato di sospensione"
 
 msgid "Start from the beginning"
 msgstr "Partire dall'inizio"
@@ -9143,6 +9159,10 @@ msgstr "Turkmenistan"
 
 msgid "Turks and Caicos Islands"
 msgstr "Isole Turks e Caicos"
+
+#, fuzzy
+msgid "Turn on the power LED during deep standby."
+msgstr "Attivare il LED di accensione durante la sospensione."
 
 msgid "Turn on the power LED during standby."
 msgstr "Attivare il LED di accensione durante la sospensione."

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPLI Enigma2 Official Greek Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-05 18:53+0100\n"
+"POT-Creation-Date: 2019-01-25 20:37+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: MCelliotG <mcelliotg@gmail.com>\n"
 "Language-Team: MCelliotG <mcelliotg@gmail.com>\n"
@@ -374,6 +374,15 @@ msgstr "%d:%02d"
 #. TRANSLATORS: VFD hour:minute daynum short monthname in strftime() format! See 'man strftime'
 msgid "%k:%M %e/%m"
 msgstr "%k:%M %e/%m"
+
+#, fuzzy, python-format
+msgid ""
+"%s\n"
+"Do you still want to flash image\n"
+"%s?"
+msgstr ""
+"Θέλετε να γίνει φλασάρισμα του image\n"
+"%s"
 
 #, python-format
 msgid ""
@@ -967,6 +976,9 @@ msgstr "Επίσης στην αναμονή"
 
 msgid "Alternative"
 msgstr "Προσθήκη εναλλακτικών"
+
+msgid "Alternative URL for images listed on FlashImage"
+msgstr ""
 
 msgid "Alternative numbering mode"
 msgstr "Εναλλακτική λειτουργία αρίθμησης"
@@ -1742,6 +1754,9 @@ msgstr "Εκκαθάριση καταγραφολογίου"
 msgid "Clear playlist"
 msgstr "Εκκαθάριση λίστας αναπαραγωγής"
 
+msgid "Client is streaming from this box!"
+msgstr ""
+
 msgid "Clone TV screen to LCD"
 msgstr "Κλωνοποίηση TV στο LCD"
 
@@ -2441,6 +2456,10 @@ msgstr "Εισαγωγή ημερομηνίας/ώρας"
 msgid "Debug to file"
 msgstr "Εκσφαλμάτωση σε αρχείο"
 
+#, fuzzy
+msgid "Deep Standby LED"
+msgstr "Βαθιά αναμονή"
+
 msgid "Deep standby"
 msgstr "Βαθιά αναμονή"
 
@@ -2677,6 +2696,17 @@ msgstr "Εμφάνιση περιεχομένου 4:3 ως"
 
 msgid "Display >16:9 content as"
 msgstr "Εμφάνιση περιεχομένου >16:9 ως"
+
+msgid "Display EPG as MultiEPG"
+msgstr ""
+
+#, fuzzy
+msgid "Display EPG info for current event"
+msgstr "Αποθήκευση χρονομετατόπισης μόνο για το τρέχον πρόγραμμα"
+
+#, fuzzy
+msgid "Display EPG list for current channel"
+msgstr "Εμφάνιση EPG για το τρέχον κανάλι..."
 
 msgid "Display and userinterface"
 msgstr "Οθόνη και επιφάνεια χρήστη"
@@ -3120,6 +3150,9 @@ msgstr "Εισαγωγή PIN"
 
 msgid "Enter URL"
 msgstr "Εισαγωγή URL"
+
+msgid "Enter an URL where alternative images could be listed for FlashImage"
+msgstr ""
 
 msgid "Enter if you are in the east or west hemisphere."
 msgstr "Εισάγετε εάν βρίσκεστε στο ανατολικό ή στο δυτικό ημισφαίριο."
@@ -3594,12 +3627,6 @@ msgstr ""
 msgid "Following tasks will be done after you press OK!"
 msgstr "Οι ακόλουθες ενέργειες θα εκτελεστούν αφού πιέσετε ΟΚ!"
 
-msgid "Force LNB Power"
-msgstr "Εξαναγκασμένη ισχύς LNB"
-
-msgid "Force ToneBurst"
-msgstr "Εξαναγκασμένη Ριπή Τόνου"
-
 msgid "Force legacy signal stats"
 msgstr "Εξαναγκασμός στατιστικών σήματος παλαιού τύπου"
 
@@ -3826,9 +3853,6 @@ msgstr "Ελληνικά"
 msgid "Greek (Modern)"
 msgstr "Ελληνικά (Νέα)"
 
-msgid "Greek, Modern (1453-)"
-msgstr "Ελληνικά, Νέα (1453-)"
-
 msgid "Green"
 msgstr "Πράσινο"
 
@@ -3936,6 +3960,9 @@ msgstr "Σκληρός δίσκος"
 
 msgid "Harddisk Setup"
 msgstr "Ρύθμιση Σκληρού Δίσκου"
+
+msgid "Harddisk is not in sleepmode it could be in use!"
+msgstr ""
 
 msgid "Hardware: "
 msgstr "Υλικό: "
@@ -5351,9 +5378,6 @@ msgstr "Μη επαρκής χώρος δίσκου. Παρακαλώ ελευθ
 msgid "Not tested:"
 msgstr "Μη δοκιμασμένο:"
 
-msgid "Not yet implemented!"
-msgstr "Δεν έχει ακόμη υλοποιηθεί!"
-
 msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'."
 msgstr "Σημείωση: όταν είναι ενεργό, και θέλετε λειτουργία αναμονής μετά την αφύπνιση, θέστε την επιλογή στο \"Εκκίνηση από Αναμονή\" στο \"Όχι, εκτός του χρονοδιακόπτη αφύπνισης\"."
 
@@ -6309,16 +6333,6 @@ msgstr "Τύπος εγγραφής"
 
 msgid "Recording(s) are in progress or coming up in few seconds!"
 msgstr "Εκτελούνται εγγραφές ή θα ξεκινήσουν σε λίγο!"
-
-#, python-format
-msgid ""
-"Recording(s) are in progress or coming up in few seconds!\n"
-"Do you still want to flash image\n"
-"%s?"
-msgstr ""
-"Υπάρχει(ουν) εγγραφή(ές) σε εξέλιξη ή αναμένονται σε λίγα δευτερόλεπτα!\n"
-"Θέλετε σίγουρα να γίνει φλασάρισμα του image\n"
-"%s?"
 
 msgid "Recordings"
 msgstr "Εγγραφές"
@@ -7978,6 +7992,10 @@ msgstr "Αναμονή"
 msgid "Standby / restart"
 msgstr "Αναμονή / επανεκκίνηση"
 
+#, fuzzy
+msgid "Standby LED"
+msgstr "LED Αναμονής"
+
 msgid "Standby after current event"
 msgstr "Αναμονή μετά το τρέχον πρόγραμμα"
 
@@ -7991,9 +8009,6 @@ msgstr "Τάση αναμονής ανεμιστήρα %d"
 
 msgid "Standby in "
 msgstr "Αναμονή σε "
-
-msgid "StandbyLED"
-msgstr "LED Αναμονής"
 
 msgid "Start from the beginning"
 msgstr "Έναρξη  από την αρχή"
@@ -9064,6 +9079,10 @@ msgstr "Τουρκμενιστάν"
 
 msgid "Turks and Caicos Islands"
 msgstr "Νήσοι Τερκς και Κέικος"
+
+#, fuzzy
+msgid "Turn on the power LED during deep standby."
+msgstr "Ενεργοποίηση LED κατά την αναμονή."
 
 msgid "Turn on the power LED during standby."
 msgstr "Ενεργοποίηση LED κατά την αναμονή."
@@ -11438,6 +11457,3 @@ msgstr "έγινε μετάβαση"
 
 msgid "®"
 msgstr "®"
-
-msgid "Add Biss Caid to service"
-msgstr "Προσθήκη Biss Caid στην υπηρεσία"

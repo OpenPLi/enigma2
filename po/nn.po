@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-05 18:53+0100\n"
+"POT-Creation-Date: 2019-01-25 20:37+0100\n"
 "PO-Revision-Date: 2013-10-23 19:15+0100\n"
 "Last-Translator: andy1 <dmmm8000pvr@gmail.com>\n"
 "Language-Team: none\n"
@@ -377,6 +377,13 @@ msgstr ""
 #. TRANSLATORS: VFD hour:minute daynum short monthname in strftime() format! See 'man strftime'
 msgid "%k:%M %e/%m"
 msgstr ""
+
+#, fuzzy, python-format
+msgid ""
+"%s\n"
+"Do you still want to flash image\n"
+"%s?"
+msgstr "Vil du laste ned bildet til %s ?"
 
 #, python-format
 msgid ""
@@ -1038,6 +1045,9 @@ msgstr ""
 #
 msgid "Alternative"
 msgstr "Alternativ"
+
+msgid "Alternative URL for images listed on FlashImage"
+msgstr ""
 
 #
 msgid "Alternative numbering mode"
@@ -1910,6 +1920,9 @@ msgstr "Tøm logg"
 msgid "Clear playlist"
 msgstr "Tøm spilliste"
 
+msgid "Client is streaming from this box!"
+msgstr ""
+
 msgid "Clone TV screen to LCD"
 msgstr ""
 
@@ -2675,6 +2688,10 @@ msgstr "Still inn tid/dato"
 msgid "Debug to file"
 msgstr "Slette fil"
 
+#, fuzzy
+msgid "Deep Standby LED"
+msgstr "Slå helt av"
+
 msgid "Deep standby"
 msgstr "Slå helt av"
 
@@ -2933,6 +2950,19 @@ msgstr "Vis 4:3 innhold som"
 #
 msgid "Display >16:9 content as"
 msgstr "Vis 16:9 innhold som"
+
+msgid "Display EPG as MultiEPG"
+msgstr ""
+
+#
+#, fuzzy
+msgid "Display EPG info for current event"
+msgstr "Slå av etter nåværende program"
+
+#
+#, fuzzy
+msgid "Display EPG list for current channel"
+msgstr "Vis EPG for nåværende kanal..."
 
 msgid "Display and userinterface"
 msgstr "Skjerm og oppsett"
@@ -3441,6 +3471,9 @@ msgstr ""
 msgid "Enter URL"
 msgstr ""
 
+msgid "Enter an URL where alternative images could be listed for FlashImage"
+msgstr ""
+
 msgid "Enter if you are in the east or west hemisphere."
 msgstr ""
 
@@ -3940,12 +3973,6 @@ msgstr ""
 msgid "Following tasks will be done after you press OK!"
 msgstr "Følgende oppgaver vil bli utført etter at du trykker OK!"
 
-msgid "Force LNB Power"
-msgstr ""
-
-msgid "Force ToneBurst"
-msgstr ""
-
 msgid "Force legacy signal stats"
 msgstr ""
 
@@ -4313,6 +4340,9 @@ msgid "Harddisk"
 msgstr "Disk"
 
 msgid "Harddisk Setup"
+msgstr ""
+
+msgid "Harddisk is not in sleepmode it could be in use!"
 msgstr ""
 
 msgid "Hardware: "
@@ -5917,9 +5947,6 @@ msgstr "Ikke nok diskplass. Vennligst frigjør litt diskplass og prøv på nytt.
 msgid "Not tested:"
 msgstr ""
 
-msgid "Not yet implemented!"
-msgstr ""
-
 msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'."
 msgstr ""
 
@@ -6981,13 +7008,6 @@ msgid "Recording type"
 msgstr "Opptakstype"
 
 msgid "Recording(s) are in progress or coming up in few seconds!"
-msgstr "Opptak starter opp om få sekunder!"
-
-#, fuzzy, python-format
-msgid ""
-"Recording(s) are in progress or coming up in few seconds!\n"
-"Do you still want to flash image\n"
-"%s?"
 msgstr "Opptak starter opp om få sekunder!"
 
 msgid "Recordings"
@@ -8827,6 +8847,10 @@ msgstr "Slå av"
 msgid "Standby / restart"
 msgstr "Av/på strømvalg"
 
+#, fuzzy
+msgid "Standby LED"
+msgstr "Slå av"
+
 #
 msgid "Standby after current event"
 msgstr "Slå av etter nåværende program"
@@ -8841,9 +8865,6 @@ msgstr "Standby vifte %d spenning"
 
 msgid "Standby in "
 msgstr "Slå av om"
-
-msgid "StandbyLED"
-msgstr ""
 
 #
 msgid "Start from the beginning"
@@ -10019,6 +10040,9 @@ msgid "Turkmenistan"
 msgstr "Tyrkisk"
 
 msgid "Turks and Caicos Islands"
+msgstr ""
+
+msgid "Turn on the power LED during deep standby."
 msgstr ""
 
 msgid "Turn on the power LED during standby."

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-05 18:53+0100\n"
+"POT-Creation-Date: 2019-01-25 20:37+0100\n"
 "PO-Revision-Date: 2018-12-29 02:52+0100\n"
 "Last-Translator: Jose Juan <jzapater@gmail.com>\n"
 "Language-Team: SFTEAM  angelo2807@hotmail.com\n"
@@ -395,6 +395,15 @@ msgstr "%d:%02d"
 #. TRANSLATORS: VFD hour:minute daynum short monthname in strftime() format! See 'man strftime'
 msgid "%k:%M %e/%m"
 msgstr "%k:%M %e/%m"
+
+#, fuzzy, python-format
+msgid ""
+"%s\n"
+"Do you still want to flash image\n"
+"%s?"
+msgstr ""
+"¿Quieres flashear la imagen?\n"
+"% s"
 
 #, python-format
 msgid ""
@@ -1079,6 +1088,9 @@ msgstr "También en modo de espera"
 msgid "Alternative"
 msgstr "añadir alternativas"
 
+msgid "Alternative URL for images listed on FlashImage"
+msgstr ""
+
 #
 msgid "Alternative numbering mode"
 msgstr "Modo de numeración alternativo"
@@ -1360,10 +1372,6 @@ msgstr "Reproducir automaticamente archivo blu-ray"
 #
 msgid "Auto scart switching"
 msgstr "Intercambio a euroconector auto"
-
-#, python-format
-msgid "Autoinstalling %s"
-msgstr "Instalación automática %s"
 
 #
 msgid "Autoinstalling Completed"
@@ -1951,6 +1959,9 @@ msgstr "Borrar log"
 #
 msgid "Clear playlist"
 msgstr "limpiar lista"
+
+msgid "Client is streaming from this box!"
+msgstr ""
 
 msgid "Clone TV screen to LCD"
 msgstr "Clonar pantalla de TV a LCD"
@@ -2725,6 +2736,11 @@ msgid "Debug to file"
 msgstr "fichero de plantilla"
 
 #
+#, fuzzy
+msgid "Deep Standby LED"
+msgstr "Modo de espera  profundo"
+
+#
 msgid "Deep standby"
 msgstr "Modo de espera  profundo"
 
@@ -2991,6 +3007,18 @@ msgstr "Visualice los contenidos 4:3 como"
 #
 msgid "Display >16:9 content as"
 msgstr "Visualizar contenido >16:9"
+
+msgid "Display EPG as MultiEPG"
+msgstr ""
+
+#, fuzzy
+msgid "Display EPG info for current event"
+msgstr "Ahorro de tiempo sólo para el evento actual"
+
+#
+#, fuzzy
+msgid "Display EPG list for current channel"
+msgstr "Mostrar EPG para el canal actual …"
 
 #
 msgid "Display and userinterface"
@@ -3493,6 +3521,9 @@ msgstr "Introduzca código pin"
 
 msgid "Enter URL"
 msgstr "Introduzca URL"
+
+msgid "Enter an URL where alternative images could be listed for FlashImage"
+msgstr ""
 
 msgid "Enter if you are in the east or west hemisphere."
 msgstr "Ingrese si se encuentra en el hemisferio este u oeste."
@@ -4013,12 +4044,6 @@ msgstr ""
 msgid "Following tasks will be done after you press OK!"
 msgstr "¡Las siguientes tareas serán hechas después de pulsar OK!"
 
-msgid "Force LNB Power"
-msgstr "Force LNB Power"
-
-msgid "Force ToneBurst"
-msgstr "Force ToneBurst"
-
 msgid "Force legacy signal stats"
 msgstr "Forzar estadísticas de señales heredadas"
 
@@ -4383,6 +4408,9 @@ msgstr "Disco duro"
 
 msgid "Harddisk Setup"
 msgstr "Configuración del disco duro"
+
+msgid "Harddisk is not in sleepmode it could be in use!"
+msgstr ""
 
 msgid "Hardware: "
 msgstr "Hardware: "
@@ -5977,9 +6005,6 @@ msgstr "No hay suficiente espacio en el disco. Libere espacio en disco e intént
 msgid "Not tested:"
 msgstr "No probado:"
 
-msgid "Not yet implemented!"
-msgstr "¡Aun no implementado!"
-
 msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'."
 msgstr "Nota: cuando está activado, y desea que el modo de espera después de despertar, establezca la opción ‘Inicio en espera’ como ‘No, excepto Wakeup timer’."
 
@@ -7078,16 +7103,6 @@ msgstr "Tipo de grabación"
 msgid "Recording(s) are in progress or coming up in few seconds!"
 msgstr "¡Grabación(es) está(n) en proceso o va(n) a comenzar en pocos segundos!"
 
-#, python-format
-msgid ""
-"Recording(s) are in progress or coming up in few seconds!\n"
-"Do you still want to flash image\n"
-"%s?"
-msgstr ""
-"La (s) grabación (es) están en progreso o aparecen en pocos segundos.\n"
-"¿Aún quieres flashear la imagen?\n"
-"% s?"
-
 #
 msgid "Recordings"
 msgstr "Grabaciones"
@@ -7974,7 +7989,8 @@ msgstr "Seleccione el canal de la banda de usuario que se asignará a este sinto
 msgid "Select the User Band frequency to be assigned to this tuner. This is the frequency the SCR switch or SCR LNB uses to pass the requested transponder to the tuner."
 msgstr "Seleccione el canal de la banda de usuario que se asignará a este sintonizador. Este es un índice en la tabla de frecuencias que utiliza el interruptor SCR o SCR LNB para pasar el transpondedor solicitado al sintonizador."
 
-msgid "Select the User Band to be assigned to this tuner. This is an index into the table of frequencies the SCR switch or SCR LNB uses to pass the requested tranponder to the tuner."
+#, fuzzy
+msgid "Select the User Band to be assigned to this tuner. This is an index into the table of frequencies the SCR switch or SCR LNB uses to pass the requested transponder to the tuner."
 msgstr "Seleccione la banda de usuario que se asignará a este sintonizador. Este es un índice en la tabla de frecuencias que utiliza el interruptor SCR o SCR LNB para pasar el transmisor solicitado al sintonizador."
 
 msgid "Select the character or action under the virtual keyboard cursor"
@@ -8943,6 +8959,10 @@ msgstr "Reposo"
 msgid "Standby / restart"
 msgstr "En espera / reinicio"
 
+#, fuzzy
+msgid "Standby LED"
+msgstr "StandbyLED"
+
 msgid "Standby after current event"
 msgstr "Espera después del evento actual"
 
@@ -8956,9 +8976,6 @@ msgstr "Voltaje del ventilador% d voltaje"
 
 msgid "Standby in "
 msgstr "En espera"
-
-msgid "StandbyLED"
-msgstr "StandbyLED"
 
 #
 msgid "Start from the beginning"
@@ -10166,6 +10183,10 @@ msgstr "Turkmenistan"
 
 msgid "Turks and Caicos Islands"
 msgstr "Islas Turcas y Caicos"
+
+#, fuzzy
+msgid "Turn on the power LED during deep standby."
+msgstr "Encienda el LED de alimentación durante el modo de espera"
 
 msgid "Turn on the power LED during standby."
 msgstr "Encienda el LED de alimentación durante el modo de espera"

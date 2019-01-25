@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-05 18:53+0100\n"
+"POT-Creation-Date: 2019-01-25 20:37+0100\n"
 "PO-Revision-Date: 2016-11-17 12:51+0200\n"
 "Last-Translator: vovan43<vovan43@ex.ua>, sety <tim1065@mail.ru>, Irkoff <irkoff@gmail.com>\n"
 "Language-Team: gisclub.tv <http://gisclub.tv/>\n"
@@ -383,6 +383,13 @@ msgstr "%2d:%02d"
 #. TRANSLATORS: VFD hour:minute daynum short monthname in strftime() format! See 'man strftime'
 msgid "%k:%M %e/%m"
 msgstr "%k:%M %e/%m"
+
+#, fuzzy, python-format
+msgid ""
+"%s\n"
+"Do you still want to flash image\n"
+"%s?"
+msgstr "Ви хочете це зробити?"
 
 #, python-format
 msgid ""
@@ -982,6 +989,9 @@ msgstr "Також в режимі очікування"
 
 msgid "Alternative"
 msgstr "Альтернативний DNS"
+
+msgid "Alternative URL for images listed on FlashImage"
+msgstr ""
 
 msgid "Alternative numbering mode"
 msgstr "Альтернативний режим нумерації каналів"
@@ -1780,6 +1790,9 @@ msgstr "Очистити лог"
 msgid "Clear playlist"
 msgstr "Очистити список відтворення"
 
+msgid "Client is streaming from this box!"
+msgstr ""
+
 msgid "Clone TV screen to LCD"
 msgstr "Клон телевізор з плоским екраном на LCD"
 
@@ -2496,6 +2509,10 @@ msgstr "Введення Час/Дата "
 msgid "Debug to file"
 msgstr "Видалити файл"
 
+#, fuzzy
+msgid "Deep Standby LED"
+msgstr "Глубокий Режим очікування"
+
 msgid "Deep standby"
 msgstr "Глубокий Режим очікування"
 
@@ -2735,6 +2752,17 @@ msgstr "Показувати 4:3 контент як"
 
 msgid "Display >16:9 content as"
 msgstr "Показувати >16:9 контент як"
+
+msgid "Display EPG as MultiEPG"
+msgstr ""
+
+#, fuzzy
+msgid "Display EPG info for current event"
+msgstr "Зберегти таймшифт тільки для поточної події"
+
+#, fuzzy
+msgid "Display EPG list for current channel"
+msgstr "Показати EPG поточного каналу..."
 
 msgid "Display and userinterface"
 msgstr "Екран і інтерфейс"
@@ -3193,6 +3221,9 @@ msgstr "Введіть PIN-код"
 #, fuzzy
 msgid "Enter URL"
 msgstr "Введіть PIN-код"
+
+msgid "Enter an URL where alternative images could be listed for FlashImage"
+msgstr ""
 
 msgid "Enter if you are in the east or west hemisphere."
 msgstr ""
@@ -3659,12 +3690,6 @@ msgstr ""
 msgid "Following tasks will be done after you press OK!"
 msgstr "Виконання почнеться після того, як ви натиснете ОК!"
 
-msgid "Force LNB Power"
-msgstr "Потужність силового LNB "
-
-msgid "Force ToneBurst"
-msgstr "Потужність тонового сигналу"
-
 msgid "Force legacy signal stats"
 msgstr ""
 
@@ -4011,6 +4036,9 @@ msgstr "Жорсткий диск"
 
 msgid "Harddisk Setup"
 msgstr "Налаштування жорсткого диска"
+
+msgid "Harddisk is not in sleepmode it could be in use!"
+msgstr ""
 
 msgid "Hardware: "
 msgstr "Апаратура: "
@@ -5461,9 +5489,6 @@ msgstr "Немає місця на диску. Будь ласка звільн�
 msgid "Not tested:"
 msgstr "Не випробувано:"
 
-msgid "Not yet implemented!"
-msgstr ""
-
 msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'."
 msgstr "Примітка : якщо включений , і ви хочете в режим очікування після того , як прокинетеся , встановіть параметр 'Запуск в режимі очікування', якщо 'Ні,за винятком таймера пробудження' ."
 
@@ -6439,13 +6464,6 @@ msgid "Recording type"
 msgstr "Тип запису"
 
 msgid "Recording(s) are in progress or coming up in few seconds!"
-msgstr "Запис (іи) йде або розпочнеться в найближчі кілька секунд!"
-
-#, fuzzy, python-format
-msgid ""
-"Recording(s) are in progress or coming up in few seconds!\n"
-"Do you still want to flash image\n"
-"%s?"
 msgstr "Запис (іи) йде або розпочнеться в найближчі кілька секунд!"
 
 msgid "Recordings"
@@ -8158,6 +8176,10 @@ msgstr "Режим очікування"
 msgid "Standby / restart"
 msgstr "Меню вимкнення"
 
+#, fuzzy
+msgid "Standby LED"
+msgstr "Режим очікування LED"
+
 msgid "Standby after current event"
 msgstr "Режим очікування після поточного події"
 
@@ -8171,9 +8193,6 @@ msgstr "Режим Standby вентилятора %d PWM"
 
 msgid "Standby in "
 msgstr "Режим очікування через "
-
-msgid "StandbyLED"
-msgstr "Режим очікування LED"
 
 msgid "Start from the beginning"
 msgstr "Почати з самого початку"
@@ -9276,6 +9295,10 @@ msgstr "Турецький"
 
 msgid "Turks and Caicos Islands"
 msgstr ""
+
+#, fuzzy
+msgid "Turn on the power LED during deep standby."
+msgstr "Увімкніть LED індикатор в режимі очікування."
 
 msgid "Turn on the power LED during standby."
 msgstr "Увімкніть LED індикатор в режимі очікування."

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-05 18:53+0100\n"
+"POT-Creation-Date: 2019-01-25 20:37+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Frenske <voorzitter@openpli.org>\n"
 "Language-Team: PLiteam <translators@openpli.org>\n"
@@ -373,6 +373,15 @@ msgstr "%d:%02d"
 #. TRANSLATORS: VFD hour:minute daynum short monthname in strftime() format! See 'man strftime'
 msgid "%k:%M %e/%m"
 msgstr "%k:%M %e/%m"
+
+#, fuzzy, python-format
+msgid ""
+"%s\n"
+"Do you still want to flash image\n"
+"%s?"
+msgstr ""
+"Wilt u een image flashen?\n"
+"%s"
 
 #, python-format
 msgid ""
@@ -966,6 +975,9 @@ msgstr "Tevens bij standby"
 
 msgid "Alternative"
 msgstr "Alternatieven"
+
+msgid "Alternative URL for images listed on FlashImage"
+msgstr ""
 
 msgid "Alternative numbering mode"
 msgstr "Alternatieve telmodus"
@@ -1751,6 +1763,9 @@ msgstr "Log wissen"
 
 msgid "Clear playlist"
 msgstr "Afspeellijst leeg maken"
+
+msgid "Client is streaming from this box!"
+msgstr ""
 
 msgid "Clone TV screen to LCD"
 msgstr "TV beeld op het LCD display weergeven."
@@ -2612,6 +2627,10 @@ msgstr "Tijd/Datum invoer"
 msgid "Debug to file"
 msgstr "Debug naar bestand"
 
+#, fuzzy
+msgid "Deep Standby LED"
+msgstr "Volledig uitschakelen"
+
 msgid "Deep standby"
 msgstr "Volledig uitschakelen"
 
@@ -2848,6 +2867,17 @@ msgstr "Toon 4:3 materiaal als"
 
 msgid "Display >16:9 content as"
 msgstr "Toon >16:9 materiaal als"
+
+msgid "Display EPG as MultiEPG"
+msgstr ""
+
+#, fuzzy
+msgid "Display EPG info for current event"
+msgstr "Sla de timeshift enkel op voor het lopende programma"
+
+#, fuzzy
+msgid "Display EPG list for current channel"
+msgstr "Toon de EPG van de huidige zender"
 
 msgid "Display and userinterface"
 msgstr "Display en gebruikersinterface"
@@ -3298,6 +3328,9 @@ msgstr "Voer PIN in"
 
 msgid "Enter URL"
 msgstr "Voer een URL in"
+
+msgid "Enter an URL where alternative images could be listed for FlashImage"
+msgstr ""
 
 msgid "Enter if you are in the east or west hemisphere."
 msgstr "Geef aan of je je in het oostelijk of westelijk halfrond bevindt."
@@ -3773,12 +3806,6 @@ msgstr ""
 msgid "Following tasks will be done after you press OK!"
 msgstr "Nadat u op Ok drukt worden de volgende taken uitgevoerd!"
 
-msgid "Force LNB Power"
-msgstr "Forceer de LNB spanning"
-
-msgid "Force ToneBurst"
-msgstr "Forceer ToneBurst"
-
 msgid "Force legacy signal stats"
 msgstr "Force Legacy Signal Stats"
 
@@ -4112,6 +4139,9 @@ msgstr "Harde schijf"
 
 msgid "Harddisk Setup"
 msgstr "Instellen harde schijf"
+
+msgid "Harddisk is not in sleepmode it could be in use!"
+msgstr ""
 
 msgid "Hardware: "
 msgstr "Hardware: "
@@ -5535,9 +5565,6 @@ msgstr "Onvoldoende schijfruimte. Maak ruimte vrij en probeer het opnieuw (%d MB
 msgid "Not tested:"
 msgstr "Niet getest:"
 
-msgid "Not yet implemented!"
-msgstr "Nog niet geimplementeerd"
-
 msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'."
 msgstr "Nota: indien ingeschakeld en u wilt vanuit 'wake up'naar standby, stelt u dan de optie 'opstarten naar standby' in op 'nee, uitgezonderd wakeup timer'."
 
@@ -6499,16 +6526,6 @@ msgstr "Opnamesoort"
 
 msgid "Recording(s) are in progress or coming up in few seconds!"
 msgstr "Een opname is bezig of kan elk moment aanvangen!"
-
-#, python-format
-msgid ""
-"Recording(s) are in progress or coming up in few seconds!\n"
-"Do you still want to flash image\n"
-"%s?"
-msgstr ""
-"Een opname is bezig of kan elk moment aanvangen!\n"
-"Wilt u toch beginnen met het flashen van een image\n"
-"%s?"
 
 msgid "Recordings"
 msgstr "Opnames"
@@ -8181,6 +8198,10 @@ msgstr "Standby"
 msgid "Standby / restart"
 msgstr "Standby / herstart"
 
+#, fuzzy
+msgid "Standby LED"
+msgstr "Standby-led"
+
 msgid "Standby after current event"
 msgstr "Standby na de huidige actie"
 
@@ -8194,9 +8215,6 @@ msgstr "Standby ventilator %d spanning"
 
 msgid "Standby in "
 msgstr "Standby na "
-
-msgid "StandbyLED"
-msgstr "Standby-led"
 
 msgid "Start from the beginning"
 msgstr "Start vanaf het begin"
@@ -9291,6 +9309,10 @@ msgstr "Turksmenistan"
 
 msgid "Turks and Caicos Islands"
 msgstr "Turks- en Caicoseilanden"
+
+#, fuzzy
+msgid "Turn on the power LED during deep standby."
+msgstr "Met deze optie bepaalt u of de power led brandt als de ontvanger standby staat."
 
 msgid "Turn on the power LED during standby."
 msgstr "Met deze optie bepaalt u of de power led brandt als de ontvanger standby staat."

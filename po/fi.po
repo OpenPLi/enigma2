@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-05 18:53+0100\n"
+"POT-Creation-Date: 2019-01-25 20:37+0100\n"
 "PO-Revision-Date: 2013-10-15 19:32+0200\n"
 "Last-Translator: BoxFreak\n"
 "Language-Team: none\n"
@@ -386,6 +386,13 @@ msgstr "%2d:%02d"
 #. TRANSLATORS: VFD hour:minute daynum short monthname in strftime() format! See 'man strftime'
 msgid "%k:%M %e/%m"
 msgstr "%k:%M %e.%-m"
+
+#, fuzzy, python-format
+msgid ""
+"%s\n"
+"Do you still want to flash image\n"
+"%s?"
+msgstr "Haluatko ladata ohjelmistopäivityksen %s :lle ?"
 
 #, python-format
 msgid ""
@@ -1058,6 +1065,9 @@ msgstr ""
 #
 msgid "Alternative"
 msgstr "Vaihtoehtoisten kanavien lisäys ja poisto"
+
+msgid "Alternative URL for images listed on FlashImage"
+msgstr ""
 
 #
 msgid "Alternative numbering mode"
@@ -1949,6 +1959,9 @@ msgstr "Tyhjennä loki"
 msgid "Clear playlist"
 msgstr "Tyhjennä soittolista"
 
+msgid "Client is streaming from this box!"
+msgstr ""
+
 msgid "Clone TV screen to LCD"
 msgstr ""
 
@@ -2726,6 +2739,11 @@ msgid "Debug to file"
 msgstr "Poista tiedosto"
 
 #
+#, fuzzy
+msgid "Deep Standby LED"
+msgstr "Virransäästötila"
+
+#
 msgid "Deep standby"
 msgstr "Virransäästötila"
 
@@ -2994,6 +3012,19 @@ msgstr "Näytä 4:3 sisältö"
 #
 msgid "Display >16:9 content as"
 msgstr "Näytä >16:9 sisältö"
+
+msgid "Display EPG as MultiEPG"
+msgstr ""
+
+#
+#, fuzzy
+msgid "Display EPG info for current event"
+msgstr "Aseta valmiustilaan menossa olevan ohjelman jälkeen"
+
+#
+#, fuzzy
+msgid "Display EPG list for current channel"
+msgstr "Näytä tietopalkki ohjelman vaihtuessa"
 
 #
 msgid "Display and userinterface"
@@ -3515,6 +3546,9 @@ msgstr ""
 msgid "Enter URL"
 msgstr ""
 
+msgid "Enter an URL where alternative images could be listed for FlashImage"
+msgstr ""
+
 msgid "Enter if you are in the east or west hemisphere."
 msgstr ""
 
@@ -4011,12 +4045,6 @@ msgstr ""
 msgid "Following tasks will be done after you press OK!"
 msgstr "Seuraavat tehtävät suoritetaan kun painat OK!"
 
-msgid "Force LNB Power"
-msgstr ""
-
-msgid "Force ToneBurst"
-msgstr ""
-
 msgid "Force legacy signal stats"
 msgstr ""
 
@@ -4387,6 +4415,9 @@ msgid "Harddisk"
 msgstr "Kiintolevy"
 
 msgid "Harddisk Setup"
+msgstr ""
+
+msgid "Harddisk is not in sleepmode it could be in use!"
 msgstr ""
 
 msgid "Hardware: "
@@ -6013,9 +6044,6 @@ msgstr "Ei riittävästi levytilaa. Vapauta levytilaa ja yritä uudelleen. (%d M
 msgid "Not tested:"
 msgstr ""
 
-msgid "Not yet implemented!"
-msgstr ""
-
 msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'."
 msgstr ""
 
@@ -7133,14 +7161,6 @@ msgstr "Tallennuksen tyyppi"
 
 #
 msgid "Recording(s) are in progress or coming up in few seconds!"
-msgstr "Tallennuksia on käynnissä tai käynnistymässä!"
-
-#
-#, fuzzy, python-format
-msgid ""
-"Recording(s) are in progress or coming up in few seconds!\n"
-"Do you still want to flash image\n"
-"%s?"
 msgstr "Tallennuksia on käynnissä tai käynnistymässä!"
 
 #
@@ -9063,6 +9083,11 @@ msgid "Standby / restart"
 msgstr "Sammutusvalikko"
 
 #
+#, fuzzy
+msgid "Standby LED"
+msgstr "Valmiustila"
+
+#
 msgid "Standby after current event"
 msgstr "Aseta valmiustilaan menossa olevan ohjelman jälkeen"
 
@@ -9077,9 +9102,6 @@ msgstr "Valmiustilan tuuletin %d jännite"
 #
 msgid "Standby in "
 msgstr "Valmiustilaan kun kulunut "
-
-msgid "StandbyLED"
-msgstr ""
 
 #
 msgid "Start from the beginning"
@@ -10264,6 +10286,9 @@ msgid "Turkmenistan"
 msgstr "Turkki"
 
 msgid "Turks and Caicos Islands"
+msgstr ""
+
+msgid "Turn on the power LED during deep standby."
 msgstr ""
 
 msgid "Turn on the power LED during standby."
