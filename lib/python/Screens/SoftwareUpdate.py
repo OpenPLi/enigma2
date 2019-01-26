@@ -112,22 +112,19 @@ class UpdatePlugin(Screen, ProtectedScreen):
 	def getLatestImageTimestamp(self):
 		currentTimeoutDefault = socket.getdefaulttimeout()
 		socket.setdefaulttimeout(3)
-		try:
+		if 1:#try:
 			# TODO: Use Twisted's URL fetcher, urlopen is evil. And it can
 			# run in parallel to the package update.
 			from time import strftime
 			from datetime import datetime
-			imageVersion = about.getImageTypeString().split(" ")[1]
-			imageVersion = (int(imageVersion) < 5 and "%.1f" or "%s") % int(imageVersion)
-			url = "https://openpli.org/download/timestamp/%s~%s" % (HardwareInfo().get_device_model(), imageVersion)
-			try:
-				latestImageTimestamp = datetime.fromtimestamp(int(urlopen(url, timeout=5).read())).strftime(_("%Y-%m-%d %H:%M"))
-			except:
-				# OpenPli 5.0 uses python 2.7.11 and here we need to bypass the certificate check
-				from ssl import _create_unverified_context
-				latestImageTimestamp = datetime.fromtimestamp(int(urlopen(url, timeout=5, context=_create_unverified_context()).read())).strftime(_("%Y-%m-%d %H:%M"))
-		except:
+			import json
+			jsonlist = json.loads(urlopen('http://downloads.openpli.org/json/%s' % HardwareInfo().get_device_model(), timeout=5).read())
+			release = about.getImageTypeString().split()[1].lower()
+			date = sorted([jsonlist[release][x]['date'] for x in jsonlist[release]], reverse=True)[0]
+			latestImageTimestamp = datetime.fromtimestamp(date).strftime('%Y-%m-%d %H:%M:%S')
+		else:#except:
 			latestImageTimestamp = ""
+
 		socket.setdefaulttimeout(currentTimeoutDefault)
 		return latestImageTimestamp
 
@@ -193,7 +190,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 				if self.total_packages:
 					latestImageTimestamp = self.getLatestImageTimestamp()
 					if latestImageTimestamp:
-						message = _("Do you want to update your receiver to %s?") % self.getLatestImageTimestamp() + "\n"
+						message = _("Do you want to update your receiver to %s?") % latestImageTimestamp + "\n"
 					else:
 						message = _("Do you want to update your receiver?") + "\n"
 					message += "(" + (ngettext("%s updated package available", "%s updated packages available", self.total_packages) % self.total_packages) + ")"
