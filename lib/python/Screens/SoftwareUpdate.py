@@ -105,7 +105,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 			self.startActualUpdate(True)
 
 	def getLatestImageTimestamp(self):
-		if 1:#try:
+		try:
 			# TODO: Use Twisted's URL fetcher, urlopen is evil. And it can
 			# run in parallel to the package update.
 			from time import strftime
@@ -114,10 +114,9 @@ class UpdatePlugin(Screen, ProtectedScreen):
 			jsonlist = json.loads(urlopen('http://downloads.openpli.org/json/%s' % HardwareInfo().get_device_model(), timeout=5).read())
 			release = about.getImageTypeString().split()[1].lower()
 			date = sorted([jsonlist[release][x]['date'] for x in jsonlist[release]], reverse=True)[0]
-			latestImageTimestamp = datetime.fromtimestamp(date).strftime('%Y-%m-%d %H:%M:%S')
-		else:#except:
-			latestImageTimestamp = ""
-		return latestImageTimestamp
+			return datetime.fromtimestamp(date).strftime('%Y-%m-%d %H:%M:%S')
+		except:
+			pass
 
 	def startActualUpdate(self,answer):
 		if answer:
