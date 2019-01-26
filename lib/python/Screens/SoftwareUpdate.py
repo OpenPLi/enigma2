@@ -16,7 +16,6 @@ from Tools.Directories import fileExists
 from Tools.HardwareInfo import HardwareInfo
 from enigma import eTimer, getBoxType, eDVBDB
 from urllib2 import urlopen
-import socket
 
 class UpdatePlugin(Screen, ProtectedScreen):
 	skin = """
@@ -76,9 +75,6 @@ class UpdatePlugin(Screen, ProtectedScreen):
 	def checkTraficLight(self):
 		self.activityTimer.callback.remove(self.checkTraficLight)
 		self.activityTimer.start(100, False)
-
-		currentTimeoutDefault = socket.getdefaulttimeout()
-		socket.setdefaulttimeout(3)
 		message = ""
 		picon = None
 		try:
@@ -102,7 +98,6 @@ class UpdatePlugin(Screen, ProtectedScreen):
 		except:
 			message = _("The status of the current image could not be checked because %s can not be reached.") % ("www.openpli.org")
 			picon = MessageBox.TYPE_ERROR
-		socket.setdefaulttimeout(currentTimeoutDefault)
 		if message != "":
 			message += "\n" + _("Do you want to update your receiver?")
 			self.session.openWithCallback(self.startActualUpdate, MessageBox, message, picon = picon)
@@ -110,8 +105,6 @@ class UpdatePlugin(Screen, ProtectedScreen):
 			self.startActualUpdate(True)
 
 	def getLatestImageTimestamp(self):
-		currentTimeoutDefault = socket.getdefaulttimeout()
-		socket.setdefaulttimeout(3)
 		if 1:#try:
 			# TODO: Use Twisted's URL fetcher, urlopen is evil. And it can
 			# run in parallel to the package update.
@@ -124,8 +117,6 @@ class UpdatePlugin(Screen, ProtectedScreen):
 			latestImageTimestamp = datetime.fromtimestamp(date).strftime('%Y-%m-%d %H:%M:%S')
 		else:#except:
 			latestImageTimestamp = ""
-
-		socket.setdefaulttimeout(currentTimeoutDefault)
 		return latestImageTimestamp
 
 	def startActualUpdate(self,answer):
