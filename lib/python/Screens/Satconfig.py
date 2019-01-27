@@ -140,8 +140,9 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 
 		if self.nim.isMultiType():
 			multiType = self.nimConfig.multiType
-			self.multiType = getConfigListEntry(_("Tuner type"), multiType, _("This is a multitype tuner. Available options depend on the hardware. Cable and terrestrial cannot be configured at the same time. If you want to use as cable + satellite or terrestrial + satellite, configure cable/terrestrial first and then save. Re-open and configure again as satellite."))
+			self.multiType = getConfigListEntry(_("Tuner type"), multiType, _("This is a multitype tuner. Available options depend on the hardware."))
 			self.list.append(self.multiType)
+			secondary_multitype = self.nim.multi_type.get(self.nimConfig.multiType.value[-1], None)
 
 		if self.nim.isCompatible("DVB-S"):
 			self.configMode = getConfigListEntry(_("Configuration mode"), self.nimConfig.configMode, _("Select 'FBC SCR' if this tuner will connect to a SCR (Unicable/JESS) device. For all other setups select 'FBC automatic'.") if self.nim.isFBCLink() else _("Configure this tuner using simple or advanced options, or loop it through to another tuner, or copy a configuration from another tuner, or disable it."))
@@ -205,10 +206,11 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 				if fileExists("/proc/stb/frontend/%d/t2mirawmode" % self.nim.slot):
 					self.t2mirawmode = getConfigListEntry(_("T2MI RAW Mode"), self.nimConfig.t2miRawMode, _("With T2MI RAW mode disabled (default) we can use single T2MI PLP de-encapsulation. With T2MI RAW mode enabled we can use astra-sm to analyze T2MI"))
 					self.list.append(self.t2mirawmode)
-		elif self.nim.isCompatible("DVB-C"):
-			self.configMode = getConfigListEntry(_("Configuration mode"), self.nimConfig.configMode, _("Select 'enabled' if this tuner has a signal cable connected, otherwise select 'nothing connected'."))
-			self.list.append(self.configMode)
-			if self.nimConfig.configMode.value == "enabled":
+		elif self.nim.isCompatible("DVB-C") or (self.nim.isMultiType() and secondary_multitype == "DVB-C"):
+			if not self.nim.isMultiType():
+				self.configMode = getConfigListEntry(_("Configuration mode"), self.nimConfig.configMode, _("Select 'enabled' if this tuner has a signal cable connected, otherwise select 'nothing connected'."))
+				self.list.append(self.configMode)
+			if self.nimConfig.configMode.value != "nothing":
 				self.list.append(getConfigListEntry(_("Network ID"), self.nimConfig.cable.scan_networkid, _("This setting depends on your cable provider and location. If you don't know the correct setting refer to the menu in the official cable receiver, or get it from your cable provider, or seek help via internet forum.")))
 				self.cableScanType=getConfigListEntry(_("Used service scan type"), self.nimConfig.cable.scan_type, _("Select 'provider' to scan from the predefined list of cable multiplexes. Select 'bands' to only scan certain parts of the spectrum. Select 'steps' to scan in steps of a particular frequency bandwidth."))
 				self.list.append(self.cableScanType)
@@ -266,12 +268,11 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 						self.list.append(getConfigListEntry(_("Scan %s") % ("SR6875"), self.nimConfig.cable.scan_sr_6875, _("Select 'yes' to include symbol rate %s in your search.") % ("6875")))
 						self.list.append(getConfigListEntry(_("Scan additional SR"), self.nimConfig.cable.scan_sr_ext1, _("This field allows you to search an additional symbol rate up to %s.") % ("7320")))
 						self.list.append(getConfigListEntry(_("Scan additional SR"), self.nimConfig.cable.scan_sr_ext2, _("This field allows you to search an additional symbol rate up to %s.") % ("7320")))
-			self.have_advanced = False
-		elif self.nim.isCompatible("DVB-T"):
-			self.configMode = getConfigListEntry(_("Configuration mode"), self.nimConfig.configMode, _("Select 'enabled' if this tuner has a signal cable connected, otherwise select 'nothing connected'."))
-			self.list.append(self.configMode)
-			self.have_advanced = False
-			if self.nimConfig.configMode.value == "enabled":
+		elif self.nim.isCompatible("DVB-T") or (self.nim.isMultiType() and secondary_multitype == "DVB-T"):
+			if not self.nim.isMultiType():
+				self.configMode = getConfigListEntry(_("Configuration mode"), self.nimConfig.configMode, _("Select 'enabled' if this tuner has a signal cable connected, otherwise select 'nothing connected'."))
+				self.list.append(self.configMode)
+			if self.nimConfig.configMode.value != "nothing":
 				# country/region tier one
 				if self.terrestrialCountriesEntry is None:
 					terrestrialcountrycodelist = nimmanager.getTerrestrialsCountrycodeList()
@@ -296,14 +297,12 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 				self.list.append(self.terrestrialCountriesEntry)
 				self.list.append(self.terrestrialRegionsEntry)
 				self.list.append(getConfigListEntry(_("Enable 5V for active antenna"), self.nimConfig.terrestrial_5V, _("Enable this setting if your aerial system needs power")))
-		elif self.nim.isCompatible("ATSC"):
-			self.configMode = getConfigListEntry(_("Configuration mode"), self.nimConfig.configMode, _("Select 'enabled' if this tuner has a signal cable connected, otherwise select 'nothing connected'."))
-			self.list.append(self.configMode)
-			if self.nimConfig.configMode.value == "enabled":
+		elif self.nim.isCompatible("ATSC") or (self.nim.isMultiType() and secondary_multitype == "ATSC"):
+			if not self.nim.isMultiType():
+				self.configMode = getConfigListEntry(_("Configuration mode"), self.nimConfig.configMode, _("Select 'enabled' if this tuner has a signal cable connected, otherwise select 'nothing connected'."))
+				self.list.append(self.configMode)
+			if self.nimConfig.configMode.value != "nothing":
 				self.list.append(getConfigListEntry(_("ATSC provider"), self.nimConfig.atsc, _("Select your ATSC provider.")))
-			self.have_advanced = False
-		else:
-			self.have_advanced = False
 
 		if self.nimConfig.configMode.value != "nothing" and config.usage.setup_level.index > 1:
 			self.list.append(getConfigListEntry(_("Force legacy signal stats"), self.nimConfig.force_legacy_signal_stats, _("If set to 'yes' signal values (SNR, etc) will be calculated from API V3. This is an old API version that has now been superseded.")))
@@ -758,12 +757,10 @@ class NimSelection(Screen):
 		else:
 			nim = self["nimlist"].getCurrent()
 			nim = nim and nim[3]
-
 			nimConfig = nimmanager.getNimConfig(nim.slot)
 			if nim.isFBCLink() and nimConfig.configMode.value == "nothing" and not getLinkedSlotID(nim.slot) == -1:
 				return
-
-			if nim is not None and not nim.empty and nim.isSupported():
+			if nim is not None and (not nim.empty or nim.isMultiType()) and nim.isSupported():
 				self.session.openWithCallback(boundFunction(self.NimSetupCB, self["nimlist"].getIndex()), self.resultclass, nim.slot)
 
 	def NimSetupCB(self, index=None):
