@@ -380,10 +380,10 @@ class FlashImage(Screen):
 	def FlashimageDone(self, data, retval, extra_args):
 		self.containerofgwrite = None
 		if retval == 0:
-			self["header"].setText(_("Flashing image succesfull"))
+			self["header"].setText(_("Flashing image successful"))
 			self["info"].setText(_("%s\nPress ok for multiboot selection\nPress exit to close") % self.imagename)
 		else:
-			self.session.openWithCallback(self.abort, MessageBox, _("Flashing image was not succesfull\n%s") % self.imagename, type=MessageBox.TYPE_ERROR, simple=True)
+			self.session.openWithCallback(self.abort, MessageBox, _("Flashing image was not successful\n%s") % self.imagename, type=MessageBox.TYPE_ERROR, simple=True)
 
 	def abort(self, reply=None):
 		if self.getImageList or self.containerofgwrite:
@@ -395,7 +395,7 @@ class FlashImage(Screen):
 		self.close()
 
 	def ok(self):
-		if self["header"].text == _("Flashing image succesfull"):
+		if self["header"].text == _("Flashing image successful"):
 			self.session.openWithCallback(self.abort, MultibootSelection)
 		else:
 			return 0
