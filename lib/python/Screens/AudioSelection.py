@@ -424,8 +424,10 @@ class QuickSubtitlesConfigMenu(ConfigListScreen, Screen):
 		if servicepath and servicepath.startswith("/") and self.service.toString().startswith("1:"):
 			info = eServiceCenter.getInstance().info(self.service)
 			self.service_string = info and info.getInfoString(self.service, iServiceInformation.sServiceref)
+			recording = True
 		else:
 			self.service_string = self.service.toString()
+			recording = False
 		self.center_dvb_subs = ConfigYesNo(default = (eDVBDB.getInstance().getFlag(eServiceReference(self.service_string)) & self.FLAG_CENTER_DVB_SUBS) and True)
 		self.center_dvb_subs.addNotifier(self.setCenterDvbSubs)
 		self["videofps"] = Label("")
@@ -438,9 +440,9 @@ class QuickSubtitlesConfigMenu(ConfigListScreen, Screen):
 				getConfigMenuItem("config.subtitles.dvb_subtitles_original_position"),
 				(_("Center DVB subtitles"), self.center_dvb_subs),
 				getConfigMenuItem("config.subtitles.subtitle_position"),
-				getConfigMenuItem("config.subtitles.subtitle_bad_timing_delay"),
-				getConfigMenuItem("config.subtitles.subtitle_noPTSrecordingdelay"),
-			]
+				getConfigMenuItem("config.subtitles.subtitle_bad_timing_delay")]
+			if recording:
+				menu += [getConfigMenuItem("config.subtitles.subtitle_noPTSrecordingdelay")]
 		elif sub[0] == 1: # teletext
 			menu = [
 				getConfigMenuItem("config.subtitles.ttx_subtitle_colors"),
@@ -451,9 +453,9 @@ class QuickSubtitlesConfigMenu(ConfigListScreen, Screen):
 				getConfigMenuItem("config.subtitles.subtitle_borderwidth"),
 				getConfigMenuItem("config.subtitles.showbackground"),
 				getConfigMenuItem("config.subtitles.subtitle_alignment"),
-				getConfigMenuItem("config.subtitles.subtitle_bad_timing_delay"),
-				getConfigMenuItem("config.subtitles.subtitle_noPTSrecordingdelay"),
-			]
+				getConfigMenuItem("config.subtitles.subtitle_bad_timing_delay")]
+			if recording:
+				menu += [getConfigMenuItem("config.subtitles.subtitle_noPTSrecordingdelay")]
 		else: 		# pango
 			menu = [
 				getConfigMenuItem("config.subtitles.pango_subtitles_delay"),
@@ -466,8 +468,7 @@ class QuickSubtitlesConfigMenu(ConfigListScreen, Screen):
 				getConfigMenuItem("config.subtitles.subtitle_rewrap"),
 				getConfigMenuItem("config.subtitles.subtitle_borderwidth"),
 				getConfigMenuItem("config.subtitles.showbackground"),
-				getConfigMenuItem("config.subtitles.pango_subtitles_fps"),
-			]
+				getConfigMenuItem("config.subtitles.pango_subtitles_fps")]
 			self["videofps"].setText(_("Video: %s fps") % (self.getFps().rstrip(".000")))
 
 		ConfigListScreen.__init__(self, menu, self.session, on_change = self.changedEntry)
@@ -493,7 +494,7 @@ class QuickSubtitlesConfigMenu(ConfigListScreen, Screen):
 			self.instance.resize(eSize(self.instance.size().width(), self["config"].l.getItemSize().height()*len(self["config"].getList()) + 10))
 
 	def changedEntry(self):
-		if self["config"].getCurrent() in [getConfigMenuItem("config.subtitles.pango_subtitles_delay"),getConfigMenuItem("config.subtitles.pango_subtitles_fps")]:
+		if self["config"].getCurrent() in [getConfigMenuItem("config.subtitles.pango_subtitles_delay"), getConfigMenuItem("config.subtitles.pango_subtitles_fps")]:
 			self.wait.start(500, True)
 
 	def resyncSubtitles(self):
