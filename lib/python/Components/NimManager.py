@@ -1633,7 +1633,7 @@ def InitNimManager(nimmgr, update_slots = []):
 				typeList.append((id, slot.getMultiTypeList()[id]))
 			if slot.canBeCompatible("DVB-S"):
 				dvb_s_id = [key  for (key, value) in slot.getMultiTypeList().items() if value in slot.compatible["DVB-S2X"]][0]
-				for id in sorted([keys for keys in mode.keys() if slot.getMultiTypeList()[keys] not in slot.compatible["DVB-S2X"]]):
+				for id in sorted([key for key in slot.getMultiTypeList().keys() if slot.getMultiTypeList()[key] not in slot.compatible["DVB-S2X"]]):
 					typeList.append(("%s%s" % (dvb_s_id, id), "%s + %s" % (slot.getMultiTypeList()[dvb_s_id], slot.getMultiTypeList()[id])))
 			typeList.append(("nothing", "disabled"))
 			nim.multiType = ConfigSelection(typeList, "0")
