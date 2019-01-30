@@ -89,13 +89,9 @@ def changeBouquetCB(direction, epgcall):
 	if config.misc.graph_mepg.zap_blind_bouquets.value:
 		global bouquets
 		global epg_bouquet
-		try:
-			onSelectBouquetClose(None, bouquets[ ([x[1] for x in bouquets].index(epg_bouquet) + (direction > 0 and 1 or -1)) ][1])
-		except:
-			pass
+		onSelectBouquetClose(None, bouquets[([x[1] for x in bouquets].index(epg_bouquet) + (direction > 0 and 1 or -1)) % len(bouquets)][1])
 	else:
-		if epg["list"].getCurrent() and epg["list"].getCurrent()[1]:
-			Session.openWithCallback(onSelectBouquetClose, SimpleChannelSelection, _("Select channel"), True, True, epg["list"].getCurrent()[1].ref )
+		Session.openWithCallback(onSelectBouquetClose, SimpleChannelSelection, _("Select channel"), True, True, epg["list"].getCurrent()[1].ref)
 
 def main(session, servicelist = None, **kwargs):
 	global ref

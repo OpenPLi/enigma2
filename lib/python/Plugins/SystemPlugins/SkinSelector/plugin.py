@@ -16,7 +16,7 @@ from enigma import eEnv
 import os
 
 SKINXML = "skin.xml"
-DEFAULTSKIN = _("<Default Skin>")
+DEFAULTSKIN = "<Default Skin>"
 
 class SkinSelector(Screen):
 
