@@ -28,7 +28,7 @@ class Streaming2(Converter):
 
                 retval = "+%d:%s" % (s["demux"], ','.join(["%x:%s" % (x[0], x[1]) for x in s["pids"]]))
 
-                if "default_audio_pid" in s:
+                if "default_audio_pid" in s and s["default_audio_pid"] >= 0:
                         retval += ",%x:%s" % (s["default_audio_pid"], "default_audio_pid")
 
                 retval += "\n"
