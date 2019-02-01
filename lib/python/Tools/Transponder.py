@@ -121,7 +121,6 @@ def ConvertToHumanReadable(tp, tunertype = None):
 			ret["pls_mode"] = None
 			ret["is_id"] = None
 			ret["pls_code"] = None
-			ret["t2mi_plp_id"] = None
 	elif tunertype == "DVB-C":
 		ret["tuner_type"] = _("Cable")
 		ret["modulation"] = {

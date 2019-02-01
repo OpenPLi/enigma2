@@ -173,11 +173,6 @@ int eDVBTransponderData::getPLSCode() const
 	return -1;
 }
 
-int eDVBTransponderData::getT2MIPlpId() const
-{
-	return -1;
-}
-
 int eDVBTransponderData::getBandwidth() const
 {
 	return -1;
@@ -373,16 +368,6 @@ int eDVBSatelliteTransponderData::getPLSCode() const
 	unsigned int stream_id = getProperty(DTV_STREAM_ID);
 	if (stream_id == NO_STREAM_ID_FILTER) return transponderParameters.pls_code;
 	return (stream_id >> 8) & 0x3FFFF;
-}
-
-int eDVBSatelliteTransponderData::getT2MIPlpId() const
-{
-	if (originalValues) return transponderParameters.t2mi_plp_id;
-
-	/* FIXME HACK ALERT use unused by enigma2 ISDBT SEGMENT IDX to pass T2MI PLP ID */
-	unsigned int t2mi_plp_id = getProperty(DTV_ISDBT_SB_SEGMENT_IDX);
-	if (t2mi_plp_id == eDVBFrontendParametersSatellite::No_T2MI_PLP_Id) return transponderParameters.t2mi_plp_id;
-	return t2mi_plp_id;
 }
 
 DEFINE_REF(eDVBCableTransponderData);
