@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-25 20:37+0100\n"
+"POT-Creation-Date: 2019-02-02 13:11+0200\n"
 "PO-Revision-Date: 2014-11-12 00:49+0200\n"
 "Last-Translator: Taapat <taapat@gmail.com>\n"
 "Language-Team: Taapat <taapat@gmail.com>\n"
@@ -229,9 +229,6 @@ msgstr "%A %e.%B %Y"
 
 msgid "%H:%M"
 msgstr "%H:%M"
-
-msgid "%Y-%m-%d %H:%M"
-msgstr "%Y-%m-%d %H:%M"
 
 #. TRANSLATORS: full date representations short dayname daynum monthname long year in strftime() format! See 'man strftime'
 msgid "%a %e %B %Y"
@@ -626,6 +623,9 @@ msgstr ": 0000 - pēc noklusējuma (nedarbosies)"
 msgid "<Current movielist location>"
 msgstr "<Tekošā media saraksta atrašanās vieta>"
 
+msgid "<Default Skin>"
+msgstr "Pēc noklusējuma"
+
 msgid "<Default movie location>"
 msgstr "<Media atrašanās vieta pēc noklusējuma>"
 
@@ -991,7 +991,7 @@ msgid "Alternative"
 msgstr "Alternatīvas"
 
 msgid "Alternative URL for images listed on FlashImage"
-msgstr ""
+msgstr "Adrese papildus imidžu uzstādīšanai"
 
 msgid "Alternative numbering mode"
 msgstr "Alternatīvais numuru režīms"
@@ -2474,9 +2474,8 @@ msgstr "Datuma/laika ievade"
 msgid "Debug to file"
 msgstr "Rakstīt drabību failā"
 
-#, fuzzy
 msgid "Deep Standby LED"
-msgstr "Izslēgt"
+msgstr "LED izslēdzot"
 
 msgid "Deep standby"
 msgstr "Izslēgt"
@@ -2716,15 +2715,13 @@ msgid "Display >16:9 content as"
 msgstr "Attēlot >16:9 saturu"
 
 msgid "Display EPG as MultiEPG"
-msgstr ""
+msgstr "Rādīt daudzkanālu EPG"
 
-#, fuzzy
 msgid "Display EPG info for current event"
-msgstr "Saglabāt laika aizturi tikai pašreizējai pārraidei"
+msgstr "Rādīt EPG informāciju pašreizējai pārraidei."
 
-#, fuzzy
 msgid "Display EPG list for current channel"
-msgstr "Rādīt EPG pašreizējam kanālam..."
+msgstr "Rādīt EPG sarakstu pašreizējai pārraidei."
 
 msgid "Display and userinterface"
 msgstr "Attēla un lietotāja interfeiss"
@@ -3171,7 +3168,7 @@ msgid "Enter URL"
 msgstr "Adrese (URL)"
 
 msgid "Enter an URL where alternative images could be listed for FlashImage"
-msgstr ""
+msgstr "Ievadiet adresi (URL), kur atrodas altrenatīvie imidži kurus izmantot uzstādīšanai."
 
 msgid "Enter if you are in the east or west hemisphere."
 msgstr "Ievadiet, ja esat austrumu vai rietumu puslodē."
@@ -6017,6 +6014,9 @@ msgstr "Pozicioniera iestatījumi"
 msgid "Positioner setup log"
 msgstr "Pozicioniera iestatījumu logs"
 
+msgid "Power LED"
+msgstr "Ieslēgt LED"
+
 msgid "Power management. Consult your receiver's manual for more information."
 msgstr "Barošanas pārvaldīšana. Lai iegūtu papildinformāciju, skatiet uztvērēja rokasgrāmatu."
 
@@ -6636,7 +6636,7 @@ msgid "Right from servicename"
 msgstr "Pa labi no kanāla nosaukuma"
 
 msgid "Roll-off"
-msgstr "Skrullēt-uz"
+msgstr "Roll-off faktors"
 
 msgid "Romania"
 msgstr "Rumānija"
@@ -8013,9 +8013,8 @@ msgstr "Gaidstāve"
 msgid "Standby / restart"
 msgstr "Izslēgšana"
 
-#, fuzzy
 msgid "Standby LED"
-msgstr "GaidstāvesLED"
+msgstr "LED gaidstāvē"
 
 msgid "Standby after current event"
 msgstr "Gaidstāve pēc pašreizējās pārraides"
@@ -9097,12 +9096,14 @@ msgstr "Turkmenistāna"
 msgid "Turks and Caicos Islands"
 msgstr "Turks un Kaikosas salas"
 
-#, fuzzy
 msgid "Turn on the power LED during deep standby."
-msgstr "Ieslēgt LED gaidstāvē"
+msgstr "Ieslēgt LED dziļās gaidstāves režīmā."
 
 msgid "Turn on the power LED during standby."
-msgstr "Ieslēgt LED gaidstāvē"
+msgstr "Ieslēgt LED gaidstāvē."
+
+msgid "Turn on the power LED."
+msgstr "Ieslēgt LED darbības laikā."
 
 msgid "Turning step size"
 msgstr "Noskaņošanas soļa lielums"
