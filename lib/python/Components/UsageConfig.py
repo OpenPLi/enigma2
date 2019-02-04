@@ -459,7 +459,7 @@ def InitUsageConfig():
 
 	config.usage.keymap = ConfigText(default = eEnv.resolve("${datadir}/enigma2/keymap.xml"))
 	config.usage.keytrans = ConfigText(default = eEnv.resolve("${datadir}/enigma2/keytranslation.xml"))
-	config.usage.alternative_imagefeed = ConfigText(default = "", fixed_size = False)
+	config.usage.alternative_imagefeed = ConfigText(default="", fixed_size=False)
 
 	config.seek = ConfigSubsection()
 	config.seek.selfdefined_13 = ConfigNumber(default=15)
