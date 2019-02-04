@@ -16,6 +16,7 @@ from Tools.Directories import fileExists
 from Tools.HardwareInfo import HardwareInfo
 from enigma import eTimer, getBoxType, eDVBDB
 from urllib2 import urlopen
+import datetime, os
 
 class UpdatePlugin(Screen, ProtectedScreen):
 	skin = """
@@ -105,18 +106,12 @@ class UpdatePlugin(Screen, ProtectedScreen):
 			self.startActualUpdate(True)
 
 	def getLatestImageTimestamp(self):
-		try:
-			# TODO: Use Twisted's URL fetcher, urlopen is evil. And it can
-			# run in parallel to the package update.
-			from time import strftime
-			from datetime import datetime
-			import json
-			jsonlist = json.loads(urlopen('http://downloads.openpli.org/json/%s' % HardwareInfo().get_device_model(), timeout=5).read())
-			release = about.getImageTypeString().split()[1].lower()
-			date = sorted([jsonlist[release][x]['date'] for x in jsonlist[release]], reverse=True)[0]
-			return datetime.fromtimestamp(date).strftime('%Y-%m-%d %H:%M:%S')
-		except:
-			pass
+		def gettime(url):
+			try:
+				return str(datetime.datetime.strptime(urlopen("%s/Packages.gz" % url).info()["Last-Modified"], '%a, %d %b %Y %H:%M:%S %Z'))
+			except:
+				return ""
+		return sorted([gettime(open("/etc/opkg/%s" % file, "r").readlines()[0].split()[2]) for file in os.listdir("/etc/opkg") if not file.startswith("3rd-party") and file not in ("arch.conf", "opkg.conf")], reverse=True)[0]
 
 	def startActualUpdate(self,answer):
 		if answer:
