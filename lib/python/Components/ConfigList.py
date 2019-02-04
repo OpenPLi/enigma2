@@ -211,7 +211,7 @@ class ConfigListScreen:
 		self.session.openWithCallback(self.VirtualKeyBoardCallback, VirtualKeyBoard, title=self["config"].getCurrent()[0], text=self["config"].getCurrent()[1].getValue())
 
 	def VirtualKeyBoardCallback(self, callback=None):
-		if callback is not None and len(callback):
+		if callback is not None:
 			self["config"].getCurrent()[1].setValue(callback)
 			self["config"].invalidate(self["config"].getCurrent())
 		self["config"].showHelp()
