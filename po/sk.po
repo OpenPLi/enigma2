@@ -4,14 +4,14 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-05 11:25+0330\n"
-"PO-Revision-Date: 2019-01-05 21:03+0100\n"
+"PO-Revision-Date: 2019-02-06 13:41+0100\n"
 "Last-Translator: Andrej Tobola <andrej.tobola@gmail.com>\n"
 "Language-Team: \n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 2.2.1\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 msgid ""
@@ -382,13 +382,14 @@ msgstr "%d:%02d"
 msgid "%k:%M %e/%m"
 msgstr "%k:%M %e/%m"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "%s\n"
 "Do you still want to flash image\n"
 "%s?"
 msgstr ""
-"Chcete nahrať image\n"
+"%s\n"
+"Chcete skutočne aktualizovať softvér\n"
 "%s ?"
 
 #, python-format
@@ -621,9 +622,8 @@ msgstr ": 0000 - predvolené (vypnuté)"
 msgid "<Current movielist location>"
 msgstr "<Aktuálne umiestnenie zoznamu filmov>"
 
-#, fuzzy
 msgid "<Default Skin>"
-msgstr "Predvolené nastavenia"
+msgstr "<Predvolený vzhľad>"
 
 msgid "<Default movie location>"
 msgstr "<Predvolené umiestnenie filmov>"
@@ -989,7 +989,7 @@ msgid "Alternative"
 msgstr "Alternatívne"
 
 msgid "Alternative URL for images listed on FlashImage"
-msgstr ""
+msgstr "Alternatívna adresa URL pre image uvedené vo FlashImage"
 
 msgid "Alternative numbering mode"
 msgstr "Režim alternatívneho číslovania"
@@ -1771,7 +1771,7 @@ msgid "Clear playlist"
 msgstr "Vymazať zoznam prehrávania"
 
 msgid "Client is streaming from this box!"
-msgstr ""
+msgstr "Z tohoto prijímača streamuje klient!"
 
 msgid "Clone TV screen to LCD"
 msgstr "Duplikovať obrazovku TV na LCD"
@@ -2271,7 +2271,6 @@ msgstr "Nedalo sa nahrávať - prekrýva sa časovanie %s"
 msgid "Could not record due to invalid service %s"
 msgstr "Nedalo sa nahrať pre neplatnú stanicu %s"
 
-#, fuzzy
 msgid "Could not some setup the required directories on the media (e.g. USB stick) - Please verify media and try again!"
 msgstr "Nebolo možné vytvoriť požadované zložky na disku (napr. USB kľúč) - skontrolujte prosím disk a skúste to znovu!"
 
@@ -2473,9 +2472,8 @@ msgstr "Nastavenie dátumu/času"
 msgid "Debug to file"
 msgstr "Ladiť do súboru"
 
-#, fuzzy
 msgid "Deep Standby LED"
-msgstr "Vypnúť prijímač (hlboký spánok)"
+msgstr "LED pri vypnutom prijímači"
 
 msgid "Deep standby"
 msgstr "Vypnúť prijímač (hlboký spánok)"
@@ -2715,15 +2713,13 @@ msgid "Display >16:9 content as"
 msgstr "Obraz >16:9 zobraziť ako"
 
 msgid "Display EPG as MultiEPG"
-msgstr ""
+msgstr "Zobraziť EPG ako MultiEPG"
 
-#, fuzzy
 msgid "Display EPG info for current event"
-msgstr "Uložiť súbor časového posunu iba pre aktuálnu reláciu"
+msgstr "Zobraziť EPG informáciu pre aktuálny program"
 
-#, fuzzy
 msgid "Display EPG list for current channel"
-msgstr "Zobrazovať EPG pre aktuálnú stanicu..."
+msgstr "Zobraziť EPG zoznam pre aktuálnú stanicu"
 
 msgid "Display and userinterface"
 msgstr "Displej a užívateľské rozhranie"
@@ -2833,7 +2829,7 @@ msgid ""
 "Do you want to flash image\n"
 "%s"
 msgstr ""
-"Chcete nahrať image\n"
+"Chcete aktualizovať softvér\n"
 "%s ?"
 
 msgid "Do you want to install Plugins?"
@@ -3170,7 +3166,7 @@ msgid "Enter URL"
 msgstr "Vložte URL"
 
 msgid "Enter an URL where alternative images could be listed for FlashImage"
-msgstr ""
+msgstr "Vložte adresu URL, kde sú zobrazené alternatívne image pre FlashImage"
 
 msgid "Enter if you are in the east or west hemisphere."
 msgstr "Vojdite, ak sa nachádzate vo východnej alebo západnej hemisfére."
@@ -3980,7 +3976,7 @@ msgid "Harddisk Setup"
 msgstr "Nastavenie pevného disku"
 
 msgid "Harddisk is not in sleepmode it could be in use!"
-msgstr ""
+msgstr "Pevný disk nie je v režime spánku, môže sa používať!"
 
 msgid "Hardware: "
 msgstr "Hardvér: "
@@ -6019,7 +6015,7 @@ msgid "Positioner setup log"
 msgstr "Záznam nastavení pozicionéra"
 
 msgid "Power LED"
-msgstr ""
+msgstr "LED napájania"
 
 msgid "Power management. Consult your receiver's manual for more information."
 msgstr "Správa napájania. Pre viac informácií si preštudujte návod k prijímaču."
@@ -7400,20 +7396,14 @@ msgstr "Nastavte opakovanie sekvencie pokiaľ to vyžaduje anténny systém. Pok
 msgid "Set startup service"
 msgstr "Nastaviť stanicu po spustení"
 
-#, fuzzy
 msgid "Set the User ID of the OpenWebif from your fallback tuner"
-msgstr "Nastaviť User ID rozhrania OpenWeb záložného tuneru."
+msgstr "Nastaviť User ID rozhrania OpenWeb záložného tuneru"
 
-#, fuzzy
-msgid "Set the password of the OpenWebif from your fallback tuner"
-msgstr "Nastaviť heslo rozhrania OpenWeb záložného tuneru."
-
-#, fuzzy
 msgid "Set the port of the OpenWebif from your fallback tuner"
-msgstr "Nastaviť port rozhrania OpenWeb záložného tuneru."
+msgstr "Nastaviť port rozhrania OpenWeb záložného tuneru"
 
 msgid "Set the type of the progress indication in the channel selection screen."
-msgstr "Zvoliť typ zobrazenia priebehu programu v zozname staníc."
+msgstr "Zvoliť typ zobrazenia priebehu programu v zozname staníc"
 
 msgid "Set time window to 1 hour"
 msgstr "Nastaviť časové okno na 1 hodinu"
@@ -8018,7 +8008,6 @@ msgstr "Pohotovostný režim"
 msgid "Standby / restart"
 msgstr "Pohotovostný režim / Reštart"
 
-#, fuzzy
 msgid "Standby LED"
 msgstr "LED v pohotovostnom režime"
 
@@ -9107,16 +9096,14 @@ msgstr "Turkenistan"
 msgid "Turks and Caicos Islands"
 msgstr "Turecké a Caicos ostrovy"
 
-#, fuzzy
 msgid "Turn on the power LED during deep standby."
-msgstr "Zapnúť LED napájania počas pohotovostného režimu."
+msgstr "Zapnúť LED napájania pri vypnutom prijímači."
 
 msgid "Turn on the power LED during standby."
-msgstr "Zapnúť LED napájania počas pohotovostného režimu."
+msgstr "Zapnúť LED napájania pohotovostnom režime."
 
-#, fuzzy
 msgid "Turn on the power LED."
-msgstr "Zapnúť LED napájania počas pohotovostného režimu."
+msgstr "Zapnúť LED napájania."
 
 msgid "Turning step size"
 msgstr "Zmeniť veľkosť kroku pri ladení"
