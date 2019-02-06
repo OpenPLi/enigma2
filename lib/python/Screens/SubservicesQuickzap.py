@@ -52,7 +52,7 @@ class SubservicesQuickzap(InfoBarBase, InfoBarShowHide, InfoBarMenu, \
 
 	def onLayoutFinished(self):
 		cur_num = self.currentlyPlayingSubservice
-		if cur_num:
+		if cur_num is not None:
 			self.currentSubserviceNumberLabel.setText(str(cur_num + 1))
 
 	def nextSubservice(self):
@@ -80,7 +80,7 @@ class SubservicesQuickzap(InfoBarBase, InfoBarShowHide, InfoBarMenu, \
 
 	def subserviceSelected(self, service):
 		if service:
-			self.playSubservice(service[1])
+			self.playSubservice([x[1] for x in self.subservices].index(service[1]))
 
 	def keyOK(self):
 		self.doShow()
