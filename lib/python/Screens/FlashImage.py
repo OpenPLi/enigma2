@@ -81,7 +81,7 @@ class SelectImage(Screen):
 						self.jsonlist.update(dict(json.load(urllib2.urlopen('%s%s' % (config.usage.alternative_imagefeed.value, model)))))
 				except:
 					pass
-			self.imagesList = self.jsonlist
+			self.imagesList = dict(self.jsonlist)
 
 			for media in ['/media/%s' % x for x in os.listdir('/media')] + (['/media/net/%s' % x for x in os.listdir('/media/net')] if os.path.isdir('/media/net') else []):
 				if not(SystemInfo['HasMMC'] and "/mmc" in media) and os.path.isdir(media):
@@ -137,8 +137,7 @@ class SelectImage(Screen):
 					shutil.rmtree(currentSelected)
 				self.setIndex = self["list"].getSelectedIndex()
 				self.imagesList = []
-				self["list"].setList([ChoiceEntryComponent('',((_("Refreshing image list - Please wait...")), "Waiter"))])
-				self.delay.start(0, True)
+				self.getImagesList()
 			except:
 				self.session.open(MessageBox, _("Cannot delete downloaded image"), MessageBox.TYPE_ERROR, timeout=3)
 
