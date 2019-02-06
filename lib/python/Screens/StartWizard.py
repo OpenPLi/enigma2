@@ -90,16 +90,15 @@ class AutoInstallWizard(Screen):
 			autoinstallfiles = glob.glob('/media/*/backup/autoinstall') + glob.glob('/media/net/*/backup/autoinstall')
 		autoinstallfiles.sort(key=os.path.getmtime, reverse=True)
 		for autoinstallfile in autoinstallfiles:
-			self.packages = [x.strip() for x in open(autoinstallfile).readlines()]
+			self.packages = [package.strip() for package in open(autoinstallfile).readlines()]
 			if self.packages:
-				self.totalpackages = len(self.packages)
 				# make sure we have a valid package list before attempting to restore packages
 				self.container.execute("opkg update")
 				return
 		self.abort()
 
 	def run_console(self):
-		self["progress"].setValue(100 * self.counter/self.totalpackages)
+		self["progress"].setValue(100 * self.counter/len(self.packages))
 		try:
 			open("/proc/progress", "w").write(str(self["progress"].value))
 		except IOError:
@@ -107,16 +106,12 @@ class AutoInstallWizard(Screen):
 		self.counter += 1
 		self.package = self.packages.pop(0)
 		self["header"].setText(_("%s%% Autoinstalling %s") % (self["progress"].value, self.package))
-		if self.package in [line.strip().split(":", 1)[1].strip() for line in open('/var/lib/opkg/status').readlines() if line.startswith('Package:')]:
-			self.dataAvail('skip already installed package %s\n' % self.package)
-			self.appClosed()
-		else:
-			try:
-				if self.container.execute('opkg install %s' % self.package):
-					raise Exception, "failed to execute command!"
-					self.appClosed(True)
-			except Exception, e:
+		try:
+			if self.container.execute('opkg install %s' % self.package):
+				raise Exception, "failed to execute command!"
 				self.appClosed(True)
+		except Exception, e:
+			self.appClosed(True)
 
 	def dataAvail(self, data):
 		self["AboutScrollLabel"].appendText(data)
@@ -128,6 +123,8 @@ class AutoInstallWizard(Screen):
 				self.dataAvail("An error occurred during installing %s - Please try again later\n" % self.package)
 			else:
 				self.dataAvail("An error occurred during opkg update - Please try again later\n")
+		installed = [line.strip().split(":", 1)[1].strip() for line in open('/var/lib/opkg/status').readlines() if line.startswith('Package:')]
+		self.packages = [package for package in self.packages if package not in installed]
 		if self.packages:
 			self.run_console()
 		else:
