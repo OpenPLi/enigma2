@@ -5,7 +5,7 @@ class Tuner:
 		self.frontend = frontend
 		self.ignore_rotor = ignore_rotor
 
-	# transponder = (0:frequency 1:symbolrate 2:polarisation 3:fec 4:inversion 5:orbpos 6:system 7:modulation 8:rolloff 9:pilot 10:is_id 11:pls_mode 12:pls_code 13:t2mi_plp_id 14:tsid 15:onid)
+	# transponder = (0:frequency 1:symbolrate 2:polarisation 3:fec 4:inversion 5:orbpos 6:system 7:modulation 8:rolloff 9:pilot 10:is_id 11:pls_mode 12:pls_code 13:t2mi_plp_id 14:t2mi_pid 15:tsid 16:onid)
 	def tune(self, transponder):
 		if self.frontend:
 			print "[TuneTest] tuning to transponder with data", transponder
@@ -24,6 +24,7 @@ class Tuner:
 			parm.pls_mode = transponder[11]
 			parm.pls_code = transponder[12]
 			parm.t2mi_plp_id = transponder[13]
+			parm.t2mi_pid = transponder[14]
 			self.tuneSatObj(parm)
 
 	def tuneSatObj(self, transponderObj):
@@ -178,8 +179,8 @@ class TuneTest:
 				pidsFailed = False
 				if self.checkPIDs:
 					if self.currTuned is not None:
-						if self.tsid != self.currTuned[14] or self.onid != self.currTuned[15]:
-							self.failedTune.append([self.currTuned, self.oldTuned, "pids_failed", {"real": (self.tsid, self.onid), "expected": (self.currTuned[14], self.currTuned[15])}, dict])  # last parameter is the frontend status
+						if self.tsid != self.currTuned[15] or self.onid != self.currTuned[16]:
+							self.failedTune.append([self.currTuned, self.oldTuned, "pids_failed", {"real": (self.tsid, self.onid), "expected": (self.currTuned[15], self.currTuned[16])}, dict])  # last parameter is the frontend status
 							pidsFailed = True
 						else:
 							self.successfullyTune.append([self.currTuned, self.oldTuned, dict])  # 3rd parameter is the frontend status
@@ -216,7 +217,7 @@ class TuneTest:
 			# check for tsid != -1 and onid != -1
 			print "index:", index
 			print "len(self.transponderlist):", len(self.transponderlist)
-			while (index < len(self.transponderlist) and (self.transponderlist[index][14] == -1 or self.transponderlist[index][15] == -1)):
+			while (index < len(self.transponderlist) and (self.transponderlist[index][15] == -1 or self.transponderlist[index][16] == -1)):
 			 	index += 1
 		print "FirstTransponder final index:", index
 		return index
@@ -229,7 +230,7 @@ class TuneTest:
 			# check for tsid != -1 and onid != -1
 			print "index:", index
 			print "len(self.transponderlist):", len(self.transponderlist)
-			while (index < len(self.transponderlist) and (self.transponderlist[index][14] == -1 or self.transponderlist[index][15] == -1)):
+			while (index < len(self.transponderlist) and (self.transponderlist[index][15] == -1 or self.transponderlist[index][16] == -1)):
 			 	index += 1
 
 		print "next transponder index:", index
@@ -279,7 +280,7 @@ class TuneTest:
 		self.progressCallback((self.getProgressLength(), self.tuningtransponder, self.STATUS_START, self.currTuned))
 		self.timer.start(100, True)
 
-	# transponder = (0:frequency 1:symbolrate 2:polarisation 3:fec 4:inversion 5:orbpos 6:system 7:modulation 8:rolloff 9:pilot 10:is_id 11:pls_mode 12:pls_code 13:t2mi_plp_id 14:tsid 15:onid)
+	# transponder = (0:frequency 1:symbolrate 2:polarisation 3:fec 4:inversion 5:orbpos 6:system 7:modulation 8:rolloff 9:pilot 10:is_id 11:pls_mode 12:pls_code 13:t2mi_plp_id 14:t2mi_pid 15:tsid 16:onid)
 	def addTransponder(self, transponder):
 		self.transponderlist.append(transponder)
 

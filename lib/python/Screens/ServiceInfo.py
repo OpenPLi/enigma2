@@ -316,7 +316,8 @@ class ServiceInfo(Screen):
 					(_("Input Stream ID"), issy(frontendData.get("is_id", 0)), TYPE_VALUE_DEC),
 					(_("PLS Mode"), frontendData.get("pls_mode", None), TYPE_TEXT),
 					(_("PLS Code"), frontendData.get("pls_code", 0), TYPE_VALUE_DEC),
-					(_("T2MI PLP ID"), t2mi(frontendData.get("t2mi_plp_id", -1)), TYPE_TEXT))
+					(_("T2MI PLP ID"), t2mi(frontendData.get("t2mi_plp_id", -1)), TYPE_TEXT),
+					(_("T2MI PID"), None if frontendData.get("t2mi_plp_id", -1) == -1 else frontendData.get("t2mi_pid", 4096), TYPE_TEXT))
 			elif frontendDataOrg["tuner_type"] == "DVB-C":
 				return (tuner,
 					(_("Modulation"), frontendData["modulation"], TYPE_TEXT),
