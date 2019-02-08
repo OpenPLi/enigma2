@@ -1079,7 +1079,6 @@ int ePicLoad::getData(ePtr<gPixmap> &result)
 		else {
 			background = m_conf.background;
 		}
-		unsigned int* row_buffer;
 		if (yoff != 0) {
 			if (m_filepara->bits == 8)
 			{
