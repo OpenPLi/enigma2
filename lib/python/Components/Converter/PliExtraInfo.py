@@ -266,7 +266,7 @@ class PliExtraInfo(Poll, Converter, object):
 		if fedata.get("pls_code") > 0:
 			tmp = addspace(tmp) + "%s %d" % (fedata.get("pls_mode"), fedata.get("pls_code"))
 		if fedata.get("t2mi_plp_id") > -1:
-			tmp = addspace(tmp) + "T2MI %d" % fedata.get("t2mi_plp_id")
+			tmp = addspace(tmp) + "T2MI %d PID %d" % (fedata.get("t2mi_plp_id"), fedata.get("t2mi_pid"))
 		return tmp
 
 	@cached
