@@ -776,7 +776,7 @@ int eDVBServicePMTHandler::getProgramInfo(program &program)
 int eDVBServicePMTHandler::compareAudioSubtitleCode(const std::string &subtitleTrack, const std::string &audioTrack)
 {
         std::size_t pos = audioTrack.find("/");
-        if ( pos != -1 )
+        if ( pos != std::string::npos)
 	{
                 std::string firstAudio = audioTrack.substr(0, pos);
                 std::string secondAudio = audioTrack.substr(pos + 1);
