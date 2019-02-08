@@ -85,7 +85,7 @@ class ServiceScan:
 							if tp.pls_code > 0:
 								tp_text = ("%s Gold %d") % (tp_text, tp.pls_code)
 							if tp.t2mi_plp_id > tp.No_T2MI_PLP_Id:
-								tp_text = ("%s T2MI %d") % (tp_text, tp.t2mi_plp_id)
+								tp_text = ("%s T2MI %d PID %d") % (tp_text, tp.t2mi_plp_id, tp.t2mi_pid)
 					elif tp_type == iDVBFrontend.feCable:
 						network = _("Cable")
 						tp = transponder.getDVBC()

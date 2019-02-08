@@ -51,6 +51,7 @@ def getInitialTransponderList(tlist, pos, feid = None):
 			parm.pls_mode = x[11]
 			parm.pls_code = x[12]
 			parm.t2mi_plp_id = x[13]
+			parm.t2mi_id = x[14]
 			tlist.append(parm)
 
 def getInitialCableTransponderList(tlist, nim):
@@ -735,6 +736,7 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 					self.list.append(self.t2mi_plp_id_boolEntry)
 					if self.scan_sat.t2mi_plp_id_bool.value:
 						self.list.append(getConfigListEntry(_('T2MI PLP ID'), self.scan_sat.t2mi_plp_id))
+						self.list.append(getConfigListEntry(_('T2MI PID'), self.scan_sat.t2mi_pid))
 			elif self.scan_type.value == "predefined_transponder" and self.satList[index_to_scan]:
 				self.updateSatList()
 				self.preDefSatList = getConfigListEntry(_('Satellite'), self.scan_satselection[index_to_scan])
@@ -877,9 +879,11 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 		elif cur == self.t2mi_plp_id_boolEntry:
 			if self.t2mi_plp_id_boolEntry[1].value:
 				self.scan_sat.t2mi_plp_id.value = 0 if self.t2mi_plp_id_memory < 0 else self.t2mi_plp_id_memory
+				self.scan_sat.t2mi_pid.value = eDVBFrontendParametersSatellite.T2MI_Default_Pid if self.t2mi_plp_id_memory < 0 else self.scan_sat.t2mi_pid.value
 			else:
 				self.t2mi_plp_id_memory = self.scan_sat.t2mi_plp_id.value
 				self.scan_sat.t2mi_plp_id.value = eDVBFrontendParametersSatellite.No_T2MI_PLP_Id
+				self.scan_sat_t2mi_pid.value = eDVBFrontendParametersSatellite.T2MI_Default_Pid
 			self.createSetup()
 
 	def createConfig(self, frontendData):
@@ -896,7 +900,8 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 			"is_id": eDVBFrontendParametersSatellite.No_Stream_Id_Filter,
 			"pls_mode": eDVBFrontendParametersSatellite.PLS_Gold,
 			"pls_code": eDVBFrontendParametersSatellite.PLS_Default_Gold_Code,
-			"t2mi_plp_id": eDVBFrontendParametersSatellite.No_T2MI_PLP_Id }
+			"t2mi_plp_id": eDVBFrontendParametersSatellite.No_T2MI_PLP_Id,
+			"t2mi_pid": eDVBFrontendParametersSatellite.T2MI_Default_Pid }
 		defaultCab = {
 			"frequency": 466000,
 			"inversion": eDVBFrontendParametersCable.Inversion_Unknown,
@@ -939,6 +944,7 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 					defaultSat["pls_mode"] = frontendData.get("pls_mode", defaultSat["pls_mode"])
 					defaultSat["pls_code"] = frontendData.get("pls_code", defaultSat["pls_code"])
 					defaultSat["t2mi_plp_id"] = frontendData.get("t2mi_plp_id", defaultSat["t2mi_plp_id"])
+					defaultSat["t2mi_pid"] = frontendData.get("t2mi_pid", defaultSat["t2mi_pid"])
 				else:
 					defaultSat["fec"] = frontendData.get("fec_inner", eDVBFrontendParametersSatellite.FEC_Auto)
 				defaultSat["modulation"] = frontendData.get("modulation", eDVBFrontendParametersSatellite.Modulation_QPSK)
@@ -1080,6 +1086,7 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 			(eDVBFrontendParametersSatellite.PLS_Combo, _("Combo"))])
 		self.scan_sat.pls_code = ConfigInteger(default = defaultSat["pls_code"], limits = (0, 262142))
 		self.scan_sat.t2mi_plp_id = ConfigInteger(default = defaultSat["t2mi_plp_id"], limits = (eDVBFrontendParametersSatellite.No_T2MI_PLP_Id, 255))
+		self.scan_sat.t2mi_pid = ConfigInteger(default = defaultSat["t2mi_pid"], limits = (0, 8191))
 		self.scan_sat.t2mi_plp_id_bool  = ConfigSelection(default = defaultSat["t2mi_plp_id"] != eDVBFrontendParametersSatellite.No_T2MI_PLP_Id, choices = [(True, _("Enabled")),(False, _("Disabled"))])
 		
 		self.is_id_memory = self.scan_sat.is_id.value # used to prevent is_id value being lost when self.scan_sat.is_id_bool state changes
@@ -1270,8 +1277,8 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 	def updateStatus(self):
 		print "updatestatus"
 
-	def addSatTransponder(self, tlist, frequency, symbol_rate, polarisation, fec, inversion, orbital_position, system, modulation, rolloff, pilot, is_id, pls_mode, pls_code, t2mi_plp_id):
-		print "Add Sat: frequ: " + str(frequency) + " symbol: " + str(symbol_rate) + " pol: " + str(polarisation) + " fec: " + str(fec) + " inversion: " + str(inversion) + " modulation: " + str(modulation) + " system: " + str(system) + " rolloff" + str(rolloff) + " pilot" + str(pilot) + " is_id" + str(is_id) + " pls_mode" + str(pls_mode) + " pls_code" + str(pls_code) + " t2mi_plp_id" + str(t2mi_plp_id)
+	def addSatTransponder(self, tlist, frequency, symbol_rate, polarisation, fec, inversion, orbital_position, system, modulation, rolloff, pilot, is_id, pls_mode, pls_code, t2mi_plp_id, t2mi_pid):
+		print "Add Sat: frequ: " + str(frequency) + " symbol: " + str(symbol_rate) + " pol: " + str(polarisation) + " fec: " + str(fec) + " inversion: " + str(inversion) + " modulation: " + str(modulation) + " system: " + str(system) + " rolloff" + str(rolloff) + " pilot" + str(pilot) + " is_id" + str(is_id) + " pls_mode" + str(pls_mode) + " pls_code" + str(pls_code) + " t2mi_plp_id" + str(t2mi_plp_id + " t2mi_pid " + str(t2mi_pid))
 		print "orbpos: " + str(orbital_position)
 		parm = eDVBFrontendParametersSatellite()
 		parm.modulation = modulation
@@ -1288,6 +1295,7 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 		parm.pls_mode = pls_mode
 		parm.pls_code = pls_code
 		parm.t2mi_plp_id = t2mi_plp_id
+		parm.t2mi_pid = t2mi_pid
 		tlist.append(parm)
 
 	def addCabTransponder(self, tlist, frequency, symbol_rate, modulation, fec, inversion):
@@ -1368,7 +1376,8 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 								self.scan_sat.is_id.value,
 								self.scan_sat.pls_mode.value,
 								self.scan_sat.pls_code.value,
-								self.scan_sat.t2mi_plp_id.value)
+								self.scan_sat.t2mi_plp_id.value,
+								self.scan_sat.t2mi_pid.value)
 				removeAll = False
 			elif self.scan_type.value == "predefined_transponder":
 				nimsats = self.satList[index_to_scan]
@@ -1547,7 +1556,8 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 				self.scan_sat.is_id.value,           # 10
 				self.scan_sat.pls_mode.value,        # 11
 				self.scan_sat.pls_code.value,        # 12
-				self.scan_sat.t2mi_plp_id.value      # 13
+				self.scan_sat.t2mi_plp_id.value,     # 13
+				self.scan_sat.t2mi_pid.value         # 14
 				# tsid
 				# onid
 			]
@@ -1573,7 +1583,7 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 				if tp[12] > 0:
 					tp_text = ("%s Gold %d") % (tp_text, tp[12])
 				if tp[13] > eDVBFrontendParametersSatellite.No_T2MI_PLP_Id:
-					tp_text = ("%s T2MI %d") % (tp_text, tp[13])
+					tp_text = ("%s T2MI %d PID %d") % (tp_text, tp[13], tp[14])
 			return tp_text
 		return _("Invalid transponder data")
 
