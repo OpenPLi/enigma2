@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Components.ActionMap import ActionMap, HelpableActionMap, NumberActionMap
 from Components.Sources.StaticText import StaticText
 from Components.ChoiceList import ChoiceList, ChoiceEntryComponent
@@ -111,7 +112,7 @@ def getHotkeys():
 config.misc.hotkey = ConfigSubsection()
 config.misc.hotkey.additional_keys = ConfigYesNo(default=False)
 for x in getHotkeys():
-	exec "config.misc.hotkey." + x[1] + " = ConfigText(default='" + x[2] + "')"
+	exec("config.misc.hotkey." + x[1] + " = ConfigText(default='" + x[2] + "')")
 
 def getHotkeyFunctions():
 	hotkeyFunctions = []
@@ -120,7 +121,7 @@ def getHotkeyFunctions():
 	pluginlist = plugins.getPlugins(PluginDescriptor.WHERE_EVENTINFO)
 	pluginlist.sort(key=lambda p: p.name)
 	for plugin in pluginlist:
-		if plugin.name not in twinPlugins and plugin.path and 'selectedevent' not in plugin.__call__.func_code.co_varnames:
+		if plugin.name not in twinPlugins and plugin.path and 'selectedevent' not in plugin.__call__.__code__.co_varnames:
 			if plugin.path[24:] in twinPaths:
 				twinPaths[plugin.path[24:]] += 1
 			else:
@@ -587,7 +588,7 @@ class InfoBarHotkey():
 				pluginlist = plugins.getPlugins(PluginDescriptor.WHERE_EVENTINFO)
 				pluginlist.sort(key=lambda p: p.name)
 				for plugin in pluginlist:
-					if plugin.name not in twinPlugins and plugin.path and 'selectedevent' not in plugin.__call__.func_code.co_varnames:
+					if plugin.name not in twinPlugins and plugin.path and 'selectedevent' not in plugin.__call__.__code__.co_varnames:
 						if plugin.path[24:] in twinPaths:
 							twinPaths[plugin.path[24:]] += 1
 						else:
@@ -615,21 +616,21 @@ class InfoBarHotkey():
 						return
 			elif selected[0] == "Infobar":
 				if hasattr(self, selected[1]):
-					exec "self." + ".".join(selected[1:]) + "()"
+					exec("self." + ".".join(selected[1:]) + "()")
 				else:
 					return 0
 			elif selected[0] == "Module":
 				try:
-					exec "from " + selected[1] + " import *"
-					exec "self.session.open(" + ",".join(selected[2:]) + ")"
+					exec("from " + selected[1] + " import *")
+					exec("self.session.open(" + ",".join(selected[2:]) + ")")
 				except:
-					print "[Hotkey] error during executing module %s, screen %s" % (selected[1], selected[2])
+					print("[Hotkey] error during executing module %s, screen %s" % (selected[1], selected[2]))
 			elif selected[0] == "SoftcamSetup" and SystemInfo["HasSoftcamInstalled"]:
 				from Screens.SoftcamSetup import SoftcamSetup
 				self.session.open(SoftcamSetup)
 			elif selected[0] == "Setup":
 				from Screens.Setup import *
-				exec "self.session.open(Setup, \"" + selected[1] + "\")"
+				exec("self.session.open(Setup, \"" + selected[1] + "\")")
 			elif selected[0].startswith("Zap"):
 				if selected[0] == "ZapPanic":
 					self.servicelist.history = []

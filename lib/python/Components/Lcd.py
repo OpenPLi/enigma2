@@ -1,4 +1,5 @@
-from config import config, ConfigSubsection, ConfigSlider, ConfigYesNo, ConfigNothing
+from __future__ import absolute_import
+from .config import config, ConfigSubsection, ConfigSlider, ConfigYesNo, ConfigNothing
 from enigma import eDBoxLCD
 from Components.SystemInfo import SystemInfo
 from Screens.InfoBar import InfoBar

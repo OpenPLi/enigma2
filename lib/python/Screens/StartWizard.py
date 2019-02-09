@@ -1,5 +1,6 @@
-from Wizard import wizardManager
-from Screen import Screen
+from __future__ import absolute_import
+from .Wizard import wizardManager
+from .Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.WizardLanguage import WizardLanguage
 from Screens.Rc import Rc
@@ -14,7 +15,7 @@ from Components.ProgressBar import ProgressBar
 from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
 from Components.config import config, ConfigBoolean, configfile
-from LanguageSelection import LanguageWizard
+from .LanguageSelection import LanguageWizard
 from enigma import eConsoleAppContainer, eTimer
 
 import os
@@ -108,9 +109,9 @@ class AutoInstallWizard(Screen):
 		self["header"].setText(_("%s%% Autoinstalling %s") % (self["progress"].value, self.package))
 		try:
 			if self.container.execute('opkg install %s' % self.package):
-				raise Exception, "failed to execute command!"
+				raise Exception("failed to execute command!")
 				self.appClosed(True)
-		except Exception, e:
+		except Exception as e:
 			self.appClosed(True)
 
 	def dataAvail(self, data):

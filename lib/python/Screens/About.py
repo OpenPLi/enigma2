@@ -1,4 +1,6 @@
-from Screen import Screen
+from __future__ import print_function
+from __future__ import absolute_import
+from .Screen import Screen
 from Screens.MessageBox import MessageBox
 from Components.config import config
 from Components.ActionMap import ActionMap
@@ -149,7 +151,7 @@ class TranslationInfo(Screen):
 				continue
 			(type, value) = l
 			infomap[type] = value
-		print infomap
+		print(infomap)
 
 		self["key_red"] = Button(_("Cancel"))
 		self["TranslationInfo"] = StaticText(info)
@@ -316,8 +318,8 @@ class MemoryInfo(Screen):
 			self["slide"].setValue(int(100.0*(mem-free)/mem+0.25))
 			self['pfree'].setText("%.1f %s" % (100.*free/mem,'%'))
 			self['pused'].setText("%.1f %s" % (100.*(mem-free)/mem,'%'))
-		except Exception, e:
-			print "[About] getMemoryInfo FAIL:", e
+		except Exception as e:
+			print("[About] getMemoryInfo FAIL:", e)
 
 	def clearMemory(self):
 		eConsoleAppContainer().execute("sync")
@@ -421,7 +423,7 @@ class Troubleshoot(Screen):
 			try:
 				if self.container.execute(command):
 					raise Exception, "failed to execute: ", command
-			except Exception, e:
+			except Exception as e:
 				self["AboutScrollLabel"].setText("%s\n%s" % (_("An error occurred - Please try again later"), e))
 
 	def cancel(self):

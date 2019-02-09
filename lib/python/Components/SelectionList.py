@@ -1,4 +1,5 @@
-from MenuList import MenuList
+from __future__ import absolute_import
+from .MenuList import MenuList
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
 from enigma import eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT
 from Tools.LoadPixmap import LoadPixmap

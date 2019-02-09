@@ -1,10 +1,12 @@
+from __future__ import print_function
+from __future__ import absolute_import
 from Tools.Profile import profile
 from enigma import eServiceReference
 
 # workaround for required config entry dependencies.
 import Screens.MovieSelection
 
-from Screen import Screen
+from .Screen import Screen
 from Screens.MessageBox import MessageBox
 
 profile("LOAD:enigma")
@@ -293,8 +295,8 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 						else:
 							self.movielistAgain()
 						return
-					except Exception, e:
-						print "[InfoBar] Failed to move to .Trash folder:", e
+					except Exception as e:
+						print("[InfoBar] Failed to move to .Trash folder:", e)
 						msg = _("Cannot move to trash can") + "\n" + str(e) + "\n"
 				info = serviceHandler.info(ref)
 				name = info and info.getName(ref) or _("this recording")
@@ -524,7 +526,7 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 				self.session.nav.playService(ref)
 
 	def getPlaylistServiceInfo(self, service):
-		from MovieSelection import playlist
+		from .MovieSelection import playlist
 		for i, item in enumerate(playlist):
 			if item == service:
 				if config.usage.on_movie_eof.value == "repeatcurrent":

@@ -1,3 +1,5 @@
+from __future__ import print_function
+from __future__ import absolute_import
 from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
 from Components.Label import Label
@@ -6,12 +8,12 @@ from Components.TimerList import TimerList
 from Components.TimerSanityCheck import TimerSanityCheck
 from Components.UsageConfig import preferredTimerPath
 from RecordTimer import RecordTimerEntry, parseEvent, AFTEREVENT, createRecordTimerEntry
-from Screen import Screen
+from .Screen import Screen
 from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
 from Screens.InputBox import PinInput
 from ServiceReference import ServiceReference
-from TimerEntry import TimerEntry, TimerLog
+from .TimerEntry import TimerEntry, TimerLog
 from Tools.BoundFunction import boundFunction
 from Tools.FallbackTimer import FallbackTimerList
 from time import time
@@ -106,18 +108,18 @@ class TimerEditList(Screen):
 				if t.disabled and t.repeated and stateRunning and not t.justplay:
 					return
 				if t.disabled:
-					print "[TimerEditList] try to ENABLE timer"
+					print("[TimerEditList] try to ENABLE timer")
 					t.enable()
 					timersanitycheck = TimerSanityCheck(self.session.nav.RecordTimer.timer_list, cur)
 					if not timersanitycheck.check():
 						t.disable()
-						print "[TimerEditList] sanity check failed"
+						print("[TimerEditList] sanity check failed")
 						simulTimerList = timersanitycheck.getSimulTimerList()
 						if simulTimerList is not None:
 							self.session.openWithCallback(self.finishedEdit, TimerSanityConflict, simulTimerList)
 							timer_changed = False
 					else:
-						print "[TimerEditList] sanity check passed"
+						print("[TimerEditList] sanity check passed")
 						if timersanitycheck.doubleCheck():
 							t.disable()
 				else:
@@ -317,7 +319,7 @@ class TimerEditList(Screen):
 		self.session.openWithCallback(self.finishedAdd, TimerEntry, timer)
 
 	def finishedEdit(self, answer):
-		print "[TimerEditList] finished edit"
+		print("[TimerEditList] finished edit")
 		if answer[0]:
 			entry = answer[1]
 			if entry.external_prev != entry.external:
@@ -353,12 +355,12 @@ class TimerEditList(Screen):
 				else:
 					success = True
 				if success:
-					print "[TimerEditList] sanity check passed"
+					print("[TimerEditList] sanity check passed")
 					self.session.nav.RecordTimer.timeChanged(entry)
 				self.fillTimerList()
 
 	def finishedAdd(self, answer):
-		print "[TimerEditList] finished add"
+		print("[TimerEditList] finished add")
 		if answer[0]:
 			entry = answer[1]
 			if entry.external:

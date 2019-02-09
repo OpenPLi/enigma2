@@ -1,4 +1,5 @@
-from config import ConfigNumber, ConfigYesNo, ConfigSubsection, ConfigSelection, config
+from __future__ import absolute_import
+from .config import ConfigNumber, ConfigYesNo, ConfigSubsection, ConfigSelection, config
 
 def InitRecordingConfig():
 	config.recording = ConfigSubsection()

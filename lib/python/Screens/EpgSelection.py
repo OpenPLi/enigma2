@@ -1,4 +1,5 @@
-from Screen import Screen
+from __future__ import print_function
+from .Screen import Screen
 import ChannelSelection
 import Screens.InfoBar
 from Components.config import config, ConfigClock
@@ -13,10 +14,10 @@ from Components.Sources.Event import Event
 from Screens.ChoiceBox import ChoiceBox
 from Screens.TimerEdit import TimerSanityConflict, TimerEditList
 from Screens.EventView import EventViewSimple
-from TimeDateInput import TimeDateInput
+from .TimeDateInput import TimeDateInput
 from enigma import eServiceReference
 from RecordTimer import RecordTimerEntry, parseEvent, AFTEREVENT, createRecordTimerEntry
-from TimerEntry import TimerEntry
+from .TimerEntry import TimerEntry
 from ServiceReference import ServiceReference
 from time import localtime, time
 from Components.PluginComponent import plugins
@@ -143,7 +144,7 @@ class EPGSelection(Screen):
 		event = self["list"].getCurrent()[0]
 		if event:
 			menu = [(p.name, boundFunction(self.runPlugin, p)) for p in plugins.getPlugins(where = PluginDescriptor.WHERE_EVENTINFO) \
-				if 'selectedevent' in p.__call__.func_code.co_varnames]
+				if 'selectedevent' in p.__call__.__code__.co_varnames]
 			if menu:
 				text += ": %s" % event.getEventName()
 		if self.type == EPG_TYPE_MULTI:
@@ -436,7 +437,7 @@ class EPGSelection(Screen):
 				self.onSelectionChanged()
 
 	def finishedAdd(self, answer):
-		print "finished add"
+		print("finished add")
 		if answer[0]:
 			entry = answer[1]
 			if entry.external:
@@ -478,7 +479,7 @@ class EPGSelection(Screen):
 				else:
 					self["key_green"].setText(_("Add timer"))
 					self.key_green_choice = self.ADD_TIMER
-					print "Timeredit aborted"
+					print("Timeredit aborted")
 
 	def finishSanityCorrection(self, answer):
 		self.finishedAdd(answer)

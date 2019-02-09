@@ -1,3 +1,5 @@
+from __future__ import print_function
+from __future__ import absolute_import
 from skin import parseColor, parseFont
 from Components.config import config, ConfigClock, ConfigInteger, ConfigSubsection, ConfigYesNo, ConfigSelection, ConfigSelectionNumber
 from Components.Pixmap import Pixmap
@@ -29,7 +31,7 @@ from Tools.Alternatives import CompareWithAlternatives
 from Tools.FallbackTimer import FallbackTimerList
 from Tools.TextBoundary import getTextBoundarySize
 from enigma import eEPGCache, eListbox, gFont, eListboxPythonMultiContent, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, RT_VALIGN_CENTER, RT_WRAP, BT_SCALE, BT_KEEP_ASPECT_RATIO, eSize, eRect, eTimer, loadPNG, eServiceReference
-from GraphMultiEpgSetup import GraphMultiEpgSetup
+from .GraphMultiEpgSetup import GraphMultiEpgSetup
 from time import localtime, time, strftime, mktime
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
@@ -1120,7 +1122,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 		event = self["list"].getCurrent()[0]
 		if event:
 			menu = [(p.name, boundFunction(self.runPlugin, p)) for p in plugins.getPlugins(where = PluginDescriptor.WHERE_EVENTINFO) \
-				if 'selectedevent' in p.__call__.func_code.co_varnames]
+				if 'selectedevent' in p.__call__.__code__.co_varnames]
 			if menu:
 				text += ": %s" % event.getEventName()
 			keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "red", "green", "yellow"][:len(menu)] + (len(menu) - 13) * [""] + keys
@@ -1371,7 +1373,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 				self.onSelectionChanged()
 
 	def finishedTimerAdd(self, answer):
-		print "finished add"
+		print("finished add")
 		if answer[0]:
 			entry = answer[1]
 			if entry.external:
@@ -1413,7 +1415,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 				else:
 					self["key_green"].setText(_("Add timer"))
 					self.key_green_choice = self.ADD_TIMER
-					print "Timeredit aborted"
+					print("Timeredit aborted")
 
 	def finishSanityCorrection(self, answer):
 		self.finishedTimerAdd(answer)

@@ -1,3 +1,5 @@
+from __future__ import print_function
+from __future__ import absolute_import
 import os
 import time
 import cPickle
@@ -33,8 +35,8 @@ from Tools.LoadPixmap import LoadPixmap
 from Tools.NumericalTextInput import NumericalTextInput
 from enigma import RT_HALIGN_LEFT, RT_VALIGN_CENTER, eListbox, gFont, getDesktop, ePicLoad, eRCInput, getPrevAsciiCode, eEnv
 from twisted.web import client
-from BackupRestore import BackupSelection, RestoreMenu, BackupScreen, RestoreScreen, getBackupPath, getBackupFilename
-from SoftwareTools import iSoftwareTools
+from .BackupRestore import BackupSelection, RestoreMenu, BackupScreen, RestoreScreen, getBackupPath, getBackupFilename
+from .SoftwareTools import iSoftwareTools
 
 config.plugins.configurationbackup = ConfigSubsection()
 config.plugins.configurationbackup.backuplocation = ConfigText(default = '/media/hdd/', visible_width = 50, fixed_size = False)
@@ -57,8 +59,8 @@ def write_cache(cache_file, cache_data):
 		if not os.path.isdir(path):
 			os.mkdir(path)
 		cPickle.dump(cache_data, open(cache_file, 'w'), -1)
-	except Exception, ex:
-		print "Failed to write cache data to %s:" % cache_file, ex
+	except Exception as ex:
+		print("Failed to write cache data to %s:" % cache_file, ex)
 
 def valid_cache(cache_file, cache_ttl):
 	#See if the cache file exists and is still living
@@ -116,7 +118,7 @@ class UpdatePluginMenu(Screen):
 		self.text = ""
 		self.backupdirs = ' '.join( config.plugins.configurationbackup.backupdirs.value )
 		if self.menu == 0:
-			print "building menu entries"
+			print("building menu entries")
 			self.list.append(("install-extensions", _("Manage extensions"), _("\nManage extensions or plugins for your receiver" ) + self.oktext, None))
 			self.list.append(("software-update", _("Software update"), _("\nOnline update of your receiver software." ) + self.oktext, None))
 			self.list.append(("system-backup", _("Backup system settings"), _("\nBackup your receiver settings." ) + self.oktext + "\n\n" + self.infotext, None))
@@ -304,7 +306,7 @@ class UpdatePluginMenu(Screen):
 			self.createBackupfolders()
 
 	def createBackupfolders(self):
-		print "Creating backup folder if not already there..."
+		print("Creating backup folder if not already there...")
 		self.backuppath = getBackupPath()
 		try:
 			if (os.path.exists(self.backuppath) == False):
@@ -405,7 +407,7 @@ class SoftwareManagerSetup(Screen, ConfigListScreen):
 
 	def confirm(self, confirmed):
 		if not confirmed:
-			print "not confirmed"
+			print("not confirmed")
 			return
 		else:
 			self.keySave()
@@ -1255,7 +1257,7 @@ class PluginDetails(Screen, PackageInfoHandler):
 
 		if thumbnailUrl is not None:
 			self.thumbnail = "/tmp/" + thumbnailUrl.split('/')[-1]
-			print "[PluginDetails] downloading screenshot " + thumbnailUrl + " to " + self.thumbnail
+			print("[PluginDetails] downloading screenshot " + thumbnailUrl + " to " + self.thumbnail)
 			if iSoftwareTools.NetworkConnectionAvailable:
 				client.downloadPage(thumbnailUrl,self.thumbnail).addCallback(self.setThumbnail).addErrback(self.fetchFailed)
 			else:
@@ -1335,7 +1337,7 @@ class PluginDetails(Screen, PackageInfoHandler):
 
 	def fetchFailed(self,string):
 		self.setThumbnail(noScreenshot = True)
-		print "[PluginDetails] fetch failed " + string.getErrorMessage()
+		print("[PluginDetails] fetch failed " + string.getErrorMessage())
 
 class IPKGMenu(Screen):
 	skin = """
@@ -1801,7 +1803,7 @@ class PacketManager(Screen, NumericalTextInput):
 		self.list = []
 		self.cachelist = []
 		if self.cache_ttl > 0 and self.vc != 0:
-			print 'Loading packagelist cache from ',self.cache_file
+			print('Loading packagelist cache from ',self.cache_file)
 			try:
 				self.cachelist = load_cache(self.cache_file)
 				if len(self.cachelist) > 0:
@@ -1812,7 +1814,7 @@ class PacketManager(Screen, NumericalTextInput):
 				self.inv_cache = 1
 
 		if self.cache_ttl == 0 or self.inv_cache == 1 or self.vc == 0:
-			print 'rebuilding fresh package list'
+			print('rebuilding fresh package list')
 			for x in self.packetlist:
 				status = ""
 				if x[0] in self.installed_packetlist:

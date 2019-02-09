@@ -1,8 +1,10 @@
-from GUIComponent import GUIComponent
-from config import config
+from __future__ import print_function
+from __future__ import absolute_import
+from .GUIComponent import GUIComponent
+from .config import config
 from skin import applyAllAttributes
 from Tools.CList import CList
-from Sources.StaticText import StaticText
+from .Sources.StaticText import StaticText
 
 class screenPath():
 	def __init__(self):
@@ -29,7 +31,7 @@ class GUISkin:
 				if not updateonly:
 					val.GUIcreate(parent)
 				if not val.applySkin(desktop, self):
-					print "warning, skin is missing renderer", val, "in", self
+					print("warning, skin is missing renderer", val, "in", self)
 
 		for key in self:
 			val = self[key]
@@ -39,10 +41,10 @@ class GUISkin:
 				depr = val.deprecationInfo
 				if val.applySkin(desktop, self):
 					if depr:
-						print "WARNING: OBSOLETE COMPONENT '%s' USED IN SKIN. USE '%s' INSTEAD!" % (key, depr[0])
-						print "OBSOLETE COMPONENT WILL BE REMOVED %s, PLEASE UPDATE!" % (depr[1])
+						print("WARNING: OBSOLETE COMPONENT '%s' USED IN SKIN. USE '%s' INSTEAD!" % (key, depr[0]))
+						print("OBSOLETE COMPONENT WILL BE REMOVED %s, PLEASE UPDATE!" % (depr[1]))
 				elif not depr:
-					print "warning, skin is missing element", key, "in", self
+					print("warning, skin is missing element", key, "in", self)
 
 		for w in self.additionalWidgets:
 			if not updateonly:
@@ -52,7 +54,7 @@ class GUISkin:
 
 		for f in self.onLayoutFinish:
 			if type(f) is not type(self.close): # is this the best way to do this?
-				exec f in globals(), locals()
+				exec(f, globals(), locals())
 			else:
 				f()
 

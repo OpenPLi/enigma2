@@ -1,6 +1,8 @@
+from __future__ import print_function
+from __future__ import absolute_import
 # the implementation here is a bit crappy.
 import time
-from Directories import resolveFilename, SCOPE_CONFIG
+from .Directories import resolveFilename, SCOPE_CONFIG
 
 PERCENTAGE_START = 0
 PERCENTAGE_END = 100
@@ -21,12 +23,12 @@ try:
 		total_time = t
 		profile_data[id] = t
 except:
-	print "no profile data available"
+	print("no profile data available")
 
 try:
 	profile_file = open(resolveFilename(SCOPE_CONFIG, "profile"), "w")
 except IOError:
-	print "WARNING: couldn't open profile file!"
+	print("WARNING: couldn't open profile file!")
 
 def profile(id):
 	now = time.time() - profile_start

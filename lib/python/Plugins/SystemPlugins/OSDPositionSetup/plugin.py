@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 from Screens.Screen import Screen
 from Components.config import config, ConfigSubsection, ConfigInteger
 
@@ -24,7 +25,7 @@ def setConfiguredPosition():
 	setPosition(int(config.plugins.OSDPositionSetup.dst_left.value), int(config.plugins.OSDPositionSetup.dst_width.value), int(config.plugins.OSDPositionSetup.dst_top.value), int(config.plugins.OSDPositionSetup.dst_height.value))
 
 def main(session, **kwargs):
-	from overscanwizard import OverscanWizard
+	from .overscanwizard import OverscanWizard
 	session.open(OverscanWizard, timeOut=False)
 
 def startSetup(menuid):

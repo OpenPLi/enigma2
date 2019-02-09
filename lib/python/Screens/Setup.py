@@ -1,4 +1,5 @@
-from Screen import Screen
+from __future__ import absolute_import
+from .Screen import Screen
 from Components.ActionMap import NumberActionMap
 from Components.config import config, ConfigNothing, ConfigBoolean, ConfigSelection
 from Components.Label import Label

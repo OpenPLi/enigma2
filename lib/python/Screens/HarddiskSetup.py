@@ -1,4 +1,5 @@
-from Screen import Screen
+from __future__ import absolute_import
+from .Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.Harddisk import harddiskmanager
 from Components.MenuList import MenuList
@@ -39,9 +40,9 @@ class HarddiskSetup(Screen):
 		try:
 			job = self.action()
 			job_manager.AddJob(job, onSuccess=job_manager.popupTaskView)
-			from TaskView import JobView
+			from .TaskView import JobView
 			self.session.open(JobView, job, afterEventChangeable=False)
-		except Exception, ex:
+		except Exception as ex:
 			self.session.open(MessageBox, str(ex), type=MessageBox.TYPE_ERROR, timeout=10)
 		self.close()
 

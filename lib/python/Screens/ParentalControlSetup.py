@@ -1,4 +1,5 @@
-from Screen import Screen
+from __future__ import absolute_import
+from .Screen import Screen
 from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import NumberActionMap
 from Components.config import config, getConfigListEntry, ConfigNothing, NoSave, configfile

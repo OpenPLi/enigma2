@@ -1,3 +1,4 @@
+from __future__ import print_function
 import sys
 import os
 if os.path.isfile("/usr/lib/enigma2/python/enigma.zip"):
@@ -97,7 +98,7 @@ try:
 	def runReactor():
 		reactor.run(installSignalHandlers=False)
 except ImportError:
-	print "twisted not available"
+	print("twisted not available")
 	def runReactor():
 		enigma.runMainloop()
 
@@ -126,9 +127,9 @@ def dump(dir, p = ""):
 				had[str(value)] = 1
 				dump(value, p + "/" + str(name))
 			else:
-				print p + "/" + str(name) + ":" + str(dir.__class__) + "(cycle)"
+				print(p + "/" + str(name) + ":" + str(dir.__class__) + "(cycle)")
 	else:
-		print p + ":" + str(dir)
+		print(p + ":" + str(dir))
 
 # + ":" + str(dir.__class__)
 
@@ -189,7 +190,7 @@ class Session:
 			try:
 				p(reason=0, session=self)
 			except:
-				print "Plugin raised exception at WHERE_SESSIONSTART"
+				print("Plugin raised exception at WHERE_SESSIONSTART")
 				import traceback
 				traceback.print_exc()
 
@@ -304,7 +305,7 @@ class Session:
 
 	def close(self, screen, *retval):
 		if not self.in_exec:
-			print "close after exec!"
+			print("close after exec!")
 			return
 
 		# be sure that the close is for the right dialog!
@@ -350,7 +351,7 @@ class PowerKey:
 		globalActionMap.actions["discrete_off"] = self.standby
 
 	def shutdown(self):
-		print "PowerOff - Now!"
+		print("PowerOff - Now!")
 		if not Screens.Standby.inTryQuitMainloop and self.session.current_dialog and self.session.current_dialog.ALLOW_SUSPEND:
 			self.session.open(Screens.Standby.TryQuitMainloop, 1)
 		else:
@@ -373,10 +374,10 @@ class PowerKey:
 			selected = selected.split("/")
 			if selected[0] == "Module":
 				try:
-					exec "from " + selected[1] + " import *"
-					exec "self.session.open(" + ",".join(selected[2:]) + ")"
+					exec("from " + selected[1] + " import *")
+					exec("self.session.open(" + ",".join(selected[2:]) + ")")
 				except:
-					print "[mytest] error during executing module %s, screen %s" % (selected[1], selected[2])
+					print("[mytest] error during executing module %s, screen %s" % (selected[1], selected[2]))
 			elif selected[0] == "Menu":
 				from Screens.Menu import MainMenu, mdom
 				root = mdom.getroot()
@@ -506,9 +507,9 @@ def runScreenTest():
 		else:
 			wptime = startTime[0] - 240
 		if not config.misc.useTransponderTime.value:
-			print "dvb time sync disabled... so set RTC now to current linux time!", strftime("%Y/%m/%d %H:%M", localtime(nowTime))
+			print("dvb time sync disabled... so set RTC now to current linux time!", strftime("%Y/%m/%d %H:%M", localtime(nowTime)))
 			setRTCtime(nowTime)
-		print "set wakeup time to", strftime("%Y/%m/%d %H:%M", localtime(wptime))
+		print("set wakeup time to", strftime("%Y/%m/%d %H:%M", localtime(wptime)))
 		setFPWakeuptime(wptime)
 		config.misc.prev_wakeup_time.value = int(startTime[0])
 		config.misc.prev_wakeup_time_type.value = startTime[1]
@@ -587,8 +588,8 @@ try:
 
 	Components.ParentalControl.parentalControl.save()
 except:
-	print 'EXCEPTION IN PYTHON STARTUP CODE:'
-	print '-'*60
+	print('EXCEPTION IN PYTHON STARTUP CODE:')
+	print('-'*60)
 	print_exc(file=stdout)
 	enigma.quitMainloop(5)
-	print '-'*60
+	print('-'*60)

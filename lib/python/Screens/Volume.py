@@ -1,4 +1,6 @@
-from Screen import Screen
+from __future__ import print_function
+from __future__ import absolute_import
+from .Screen import Screen
 from Components.VolumeBar import VolumeBar
 from Components.Label import Label
 
@@ -10,6 +12,6 @@ class Volume(Screen):
 		self["VolumeText"] = Label("")
 
 	def setValue(self, vol):
-		print "setValue", vol
+		print("setValue", vol)
 		self.volumeBar.setValue(vol)
 		self["VolumeText"].setText(str(vol))

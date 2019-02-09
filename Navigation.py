@@ -1,3 +1,4 @@
+from __future__ import print_function
 from enigma import eServiceCenter, eServiceReference, pNavigation, getBestPlayableServiceReference, iPlayableService, setPreferredTuner, eStreamServer
 from Components.ImportChannels import ImportChannels
 from Components.ParentalControl import parentalControl
@@ -80,9 +81,9 @@ class Navigation:
 	def playService(self, ref, checkParentalControl=True, forceRestart=False, adjust=True):
 		oldref = self.currentlyPlayingServiceOrGroup
 		if ref and oldref and ref == oldref and not forceRestart:
-			print "ignore request to play already running service(1)"
+			print("ignore request to play already running service(1)")
 			return 1
-		print "playing", ref and ref.toString()
+		print("playing", ref and ref.toString())
 		if ref is None:
 			self.stopService()
 			return 0
@@ -92,9 +93,9 @@ class Navigation:
 			if ref.flags & eServiceReference.isGroup:
 				oldref = self.currentlyPlayingServiceReference or eServiceReference()
 				playref = getBestPlayableServiceReference(ref, oldref)
-				print "playref", playref
+				print("playref", playref)
 				if playref and oldref and playref == oldref and not forceRestart:
-					print "ignore request to play already running service(2)"
+					print("ignore request to play already running service(2)")
 					return 1
 				if not playref:
 					alternativeref = getBestPlayableServiceReference(ref, eServiceReference(), True)
@@ -103,7 +104,7 @@ class Navigation:
 						self.currentlyPlayingServiceReference = alternativeref
 						self.currentlyPlayingServiceOrGroup = ref
 						if self.pnav.playService(alternativeref):
-							print "Failed to start", alternativeref
+							print("Failed to start", alternativeref)
 							self.currentlyPlayingServiceReference = None
 							self.currentlyPlayingServiceOrGroup = None
 					return 0
@@ -148,7 +149,7 @@ class Navigation:
 									setPreferredTuner(int(config.usage.frontend_priority_dvbs.value))
 									setPriorityFrontend = True
 				if self.pnav.playService(playref):
-					print "Failed to start", playref
+					print("Failed to start", playref)
 					self.currentlyPlayingServiceReference = None
 					self.currentlyPlayingServiceOrGroup = None
 				if setPriorityFrontend:
@@ -166,7 +167,7 @@ class Navigation:
 
 	def recordService(self, ref, simulate=False):
 		service = None
-		if not simulate: print "recording service: %s" % (str(ref))
+		if not simulate: print("recording service: %s" % (str(ref)))
 		if isinstance(ref, ServiceReference.ServiceReference):
 			ref = ref.ref
 		if ref:
@@ -174,7 +175,7 @@ class Navigation:
 				ref = getBestPlayableServiceReference(ref, eServiceReference(), simulate)
 			service = ref and self.pnav and self.pnav.recordService(ref, simulate)
 			if service is None:
-				print "record returned non-zero"
+				print("record returned non-zero")
 		return service
 
 	def stopRecordService(self, service):

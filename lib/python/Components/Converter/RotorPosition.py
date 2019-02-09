@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from Converter import Converter
+from __future__ import absolute_import
+from .Converter import Converter
 from Components.Element import cached
 from Components.config import config
 from Tools.Transponder import orbpos

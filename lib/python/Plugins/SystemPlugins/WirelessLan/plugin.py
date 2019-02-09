@@ -1,3 +1,5 @@
+from __future__ import print_function
+from __future__ import absolute_import
 from enigma import eTimer, eEnv
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap, NumberActionMap
@@ -11,7 +13,7 @@ from Components.Console import Console
 from Plugins.Plugin import PluginDescriptor
 from Tools.Directories import resolveFilename, SCOPE_SKIN_IMAGE
 from Tools.LoadPixmap import LoadPixmap
-from Wlan import iWlan, iStatus, getWlanConfigName, existBcmWifi
+from .Wlan import iWlan, iStatus, getWlanConfigName, existBcmWifi
 from time import time
 import re
 
@@ -316,7 +318,7 @@ class WlanScan(Screen):
 		self.cleanList = []
 		aps = iWlan.getNetworkList()
 		if aps is not None:
-			print "[WirelessLan.py] got Accespoints!"
+			print("[WirelessLan.py] got Accespoints!")
 			tmpList = []
 			compList = []
 			for ap in aps:

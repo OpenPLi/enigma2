@@ -1,4 +1,6 @@
-from Renderer import Renderer
+from __future__ import print_function
+from __future__ import absolute_import
+from .Renderer import Renderer
 
 from enigma import eCanvas, eRect, gRGB
 
@@ -38,7 +40,7 @@ class Canvas(Renderer):
 			elif l[0] == 4:
 				self.instance.drawRotatedLine(l[1], l[2], l[3], l[4], l[5], l[6], l[7], l[8], gRGB(l[9]))
 			else:
-				print "drawlist entry:", l
+				print("drawlist entry:", l)
 				raise RuntimeError("invalid drawlist entry")
 
 	def changed(self, what):

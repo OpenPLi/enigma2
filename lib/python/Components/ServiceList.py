@@ -1,4 +1,6 @@
-from GUIComponent import GUIComponent
+from __future__ import print_function
+from __future__ import absolute_import
+from .GUIComponent import GUIComponent
 from skin import parseColor, parseFont
 
 from enigma import eListboxServiceContent, eListbox, eServiceCenter, eServiceReference, gFont, eRect
@@ -149,7 +151,7 @@ class ServiceList(GUIComponent):
 			return None
 		from Components.ServiceEventTracker import InfoBarCount
 		if adjust and config.usage.multibouquet.value and InfoBarCount == 1 and ref and ref.type != 8192:
-			print "[servicelist] search for service in userbouquets"
+			print("[servicelist] search for service in userbouquets")
 			if self.serviceList:
 				revert_mode = config.servicelist.lastmode.value
 				revert_root = self.getRoot()
@@ -173,7 +175,7 @@ class ServiceList(GUIComponent):
 						self.serviceList.saveChannel(ref)
 						return True
 				self.serviceList.enterUserbouquet(revert_radio_root)
-				print "[servicelist] service not found in any userbouquets"
+				print("[servicelist] service not found in any userbouquets")
 				if revert_mode == "tv":
 					self.serviceList.setModeTv()
 				elif revert_mode == "radio":
@@ -210,7 +212,7 @@ class ServiceList(GUIComponent):
 
 	def moveToChar(self, char):
 		# TODO fill with life
-		print "Next char: "
+		print("Next char: ")
 		index = self.l.getNextBeginningWithChar(char)
 		indexup = self.l.getNextBeginningWithChar(char.upper())
 		if indexup != 0:
@@ -218,7 +220,7 @@ class ServiceList(GUIComponent):
 				index = indexup
 
 		self.instance.moveSelectionTo(index)
-		print "Moving to character " + str(char)
+		print("Moving to character " + str(char))
 
 	def moveToNextMarker(self):
 		idx = self.l.getNextMarkerPos()

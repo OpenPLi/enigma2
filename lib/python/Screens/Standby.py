@@ -1,9 +1,11 @@
+from __future__ import print_function
+from __future__ import absolute_import
 import os
 from time import time, localtime
 
 import RecordTimer
 import Components.ParentalControl
-from Screen import Screen
+from .Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.config import config
 from Components.AVSwitch import AVSwitch
@@ -20,7 +22,7 @@ inStandby = None
 
 class Standby(Screen):
 	def Power(self):
-		print "[Standby] leave standby"
+		print("[Standby] leave standby")
 		self.close(True)
 
 	def setMute(self):
@@ -36,7 +38,7 @@ class Standby(Screen):
 		Screen.__init__(self, session)
 		self.avswitch = AVSwitch()
 
-		print "[Standby] enter standby"
+		print("[Standby] enter standby")
 
 		if os.path.exists("/usr/script/standby_enter.sh"):
 			Console().ePopen("/usr/script/standby_enter.sh")

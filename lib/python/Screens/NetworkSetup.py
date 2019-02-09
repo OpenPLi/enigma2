@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -214,7 +215,7 @@ class NameserverSetup(Screen, ConfigListScreen, HelpableScreen):
 		HelpableScreen.__init__(self)
 		self.setTitle(_("Configure nameservers"))
 		self.backupNameserverList = iNetwork.getNameserverList()[:]
-		print "backup-list:", self.backupNameserverList
+		print("backup-list:", self.backupNameserverList)
 
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Add"))
@@ -272,7 +273,7 @@ class NameserverSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def cancel(self):
 		iNetwork.clearNameservers()
-		print "backup-list:", self.backupNameserverList
+		print("backup-list:", self.backupNameserverList)
 		for nameserver in self.backupNameserverList:
 			iNetwork.addNameserver(nameserver)
 		self.close()
@@ -283,7 +284,7 @@ class NameserverSetup(Screen, ConfigListScreen, HelpableScreen):
 		self.createSetup()
 
 	def remove(self):
-		print "currentIndex:", self["config"].getCurrentIndex()
+		print("currentIndex:", self["config"].getCurrentIndex())
 		index = self["config"].getCurrentIndex()
 		if index < len(self.nameservers):
 			iNetwork.removeNameserver(self.nameservers[index])
@@ -717,11 +718,12 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 			try:
 				ifobj = Wireless(iface) # a Wireless NIC Object
 				wlanresponse = ifobj.getAPaddr()
-			except IOError, (error_no, error_str):
+			except IOError as xxx_todo_changeme:
+				(error_no, error_str) = xxx_todo_changeme.args
 				if error_no in (errno.EOPNOTSUPP, errno.ENODEV, errno.EPERM):
 					return False
 				else:
-					print "error: ",error_no,error_str
+					print("error: ",error_no,error_str)
 					return True
 			else:
 				return True
