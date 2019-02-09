@@ -399,7 +399,7 @@ int eDVBSatelliteTransponderData::getT2MIPid() const
 	unsigned int t2mi_pid = getProperty(DTV_ISDBT_SB_SEGMENT_IDX);
 	if (t2mi_pid == eDVBFrontendParametersSatellite::No_T2MI_PLP_Id) return transponderParameters.t2mi_pid;
 	if (!(t2mi_pid & 0x80000000)) return transponderParameters.t2mi_pid;
-	return (t2mi_pid >> 8) & 0x1FFF;
+	return (t2mi_pid >> 16) & 0x1FFF;
 }
 
 DEFINE_REF(eDVBCableTransponderData);
