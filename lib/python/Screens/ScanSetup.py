@@ -51,7 +51,7 @@ def getInitialTransponderList(tlist, pos, feid = None):
 			parm.pls_mode = x[11]
 			parm.pls_code = x[12]
 			parm.t2mi_plp_id = x[13]
-			parm.t2mi_id = x[14]
+			parm.t2mi_pid = x[14]
 			tlist.append(parm)
 
 def getInitialCableTransponderList(tlist, nim):
