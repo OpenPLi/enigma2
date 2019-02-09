@@ -110,7 +110,10 @@ void eBackgroundFileEraser::gotMessage(const Message &msg )
 						if (::unlink(c_filename) == 0)
 							unlinked = true;
 						st.st_size -= st.st_size % erase_speed; // align on erase_speed
-						::ftruncate(fd, st.st_size);
+						if (::ftruncate(fd, st.st_size) != 0)
+						{
+							eDebug("[eBackgroundFileEraser] Failed to truncate %s: %m", c_filename);
+						}
 						usleep(500000); // even if truncate fails, wait a moment
 						while ((st.st_size > erase_speed) && (erase_flags != 0))
 						{
