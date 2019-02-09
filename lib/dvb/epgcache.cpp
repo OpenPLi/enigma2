@@ -322,21 +322,23 @@ void eventData::load(FILE *f)
 	int id=0;
 	DescriptorPair p;
 	uint8_t header[2];
-	fread(&size, sizeof(int), 1, f);
+	size_t ret; /* dummy value to store fread return values */
+	ret = fread(&size, sizeof(int), 1, f);
 	descriptors.rehash(size);
 	while(size)
 	{
-		fread(&id, sizeof(uint32_t), 1, f);
-		fread(&p.reference_count, sizeof(int), 1, f);
-		fread(header, 2, 1, f);
+		ret = fread(&id, sizeof(uint32_t), 1, f);
+		ret = fread(&p.reference_count, sizeof(int), 1, f);
+		ret = fread(header, 2, 1, f);
 		int bytes = header[1]+2;
 		p.data = new uint8_t[bytes];
 		p.data[0] = header[0];
 		p.data[1] = header[1];
-		fread(p.data+2, bytes-2, 1, f);
+		ret = fread(p.data+2, bytes-2, 1, f);
 		descriptors[id] = p;
 		--size;
 	}
+	(void)ret;
 }
 
 void eventData::save(FILE *f)
@@ -1301,6 +1303,7 @@ void eEPGCache::load()
 	const char* EPGDATX = filenamex.c_str();
 	FILE *f = fopen(EPGDAT, "rb");
 	int renameResult;
+	size_t ret; /* dummy value to store fread return values */
 	if (f == NULL)
 	{
 		/* No EPG on harddisk, so try internal flash */
@@ -1322,7 +1325,7 @@ void eEPGCache::load()
 		int cnt=0;
 		unsigned int magic=0;
 		unlink(EPGDAT_IN_FLASH);/* Don't keep it around when in flash */
-		fread( &magic, sizeof(int), 1, f);
+		ret = fread( &magic, sizeof(int), 1, f);
 		if (magic != 0x98765432)
 		{
 			eDebug("[eEPGCache] epg file has incorrect byte order.. dont read it");
@@ -1330,33 +1333,33 @@ void eEPGCache::load()
 			return;
 		}
 		char text1[13];
-		fread( text1, 13, 1, f);
+		ret = fread( text1, 13, 1, f);
 		if ( !memcmp( text1, "ENIGMA_EPG_V7", 13) )
 		{
 			singleLock s(cache_lock);
-			fread( &size, sizeof(int), 1, f);
+			ret = fread( &size, sizeof(int), 1, f);
 			eventDB.rehash(size); /* Reserve buckets in advance */
 			while(size--)
 			{
 				uniqueEPGKey key;
 				int size=0;
-				fread( &key, sizeof(uniqueEPGKey), 1, f);
-				fread( &size, sizeof(int), 1, f);
+				ret = fread( &key, sizeof(uniqueEPGKey), 1, f);
+				ret = fread( &size, sizeof(int), 1, f);
 				EventCacheItem& item = eventDB[key]; /* Constructs new entry */
 				while(size--)
 				{
 					uint8_t len=0;
 					uint8_t type=0;
 					eventData *event=0;
-					fread( &type, sizeof(uint8_t), 1, f);
-					fread( &len, sizeof(uint8_t), 1, f);
+					ret = fread( &type, sizeof(uint8_t), 1, f);
+					ret = fread( &len, sizeof(uint8_t), 1, f);
 					event = new eventData(0, len, type);
 					event->n_crc = (len-10) / sizeof(uint32_t);
-					fread( event->rawEITdata, 10, 1, f);
+					ret = fread( event->rawEITdata, 10, 1, f);
 					if (event->n_crc)
 					{
 						event->crc_list = new uint32_t[event->n_crc];
-						fread( event->crc_list, sizeof(uint32_t), event->n_crc, f);
+						ret = fread( event->crc_list, sizeof(uint32_t), event->n_crc, f);
 					}
 					eventData::CacheSize += sizeof(eventData) + event->n_crc * sizeof(uint32_t);
 					item.byEvent[event->getEventID()] = event;
@@ -1368,31 +1371,31 @@ void eEPGCache::load()
 			eDebug("[eEPGCache] %d events read from %s", cnt, EPGDAT);
 #ifdef ENABLE_PRIVATE_EPG
 			char text2[11];
-			fread( text2, 11, 1, f);
+			ret = fread( text2, 11, 1, f);
 			if ( !memcmp( text2, "PRIVATE_EPG", 11) )
 			{
 				size=0;
-				fread( &size, sizeof(int), 1, f);
+				ret = fread( &size, sizeof(int), 1, f);
 				while(size--)
 				{
 					int size=0;
 					uniqueEPGKey key;
-					fread( &key, sizeof(uniqueEPGKey), 1, f);
+					ret = fread( &key, sizeof(uniqueEPGKey), 1, f);
 					eventMap &evMap = eventDB[key].byEvent;
-					fread( &size, sizeof(int), 1, f);
+					ret = fread( &size, sizeof(int), 1, f);
 					while(size--)
 					{
 						int size;
 						int content_id;
-						fread( &content_id, sizeof(int), 1, f);
-						fread( &size, sizeof(int), 1, f);
+						ret = fread( &content_id, sizeof(int), 1, f);
+						ret = fread( &size, sizeof(int), 1, f);
 						while(size--)
 						{
 							time_t time1, time2;
 							uint16_t event_id;
-							fread( &time1, sizeof(time_t), 1, f);
-							fread( &time2, sizeof(time_t), 1, f);
-							fread( &event_id, sizeof(uint16_t), 1, f);
+							ret = fread( &time1, sizeof(time_t), 1, f);
+							ret = fread( &time2, sizeof(time_t), 1, f);
+							ret = fread( &event_id, sizeof(uint16_t), 1, f);
 							content_time_tables[key][content_id][time1]=std::pair<time_t, uint16_t>(time2, event_id);
 							eventMap::iterator it =
 								evMap.find(event_id);
@@ -1415,6 +1418,7 @@ void eEPGCache::load()
 			if (renameResult) eDebug("[eEPGCache] failed to rename epg.dat back");
 		}
 	}
+	(void)ret;
 }
 
 void eEPGCache::save()
