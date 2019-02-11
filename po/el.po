@@ -372,14 +372,15 @@ msgstr "%d:%02d"
 msgid "%k:%M %e/%m"
 msgstr "%k:%M %e/%m"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "%s\n"
 "Do you still want to flash image\n"
 "%s?"
 msgstr ""
+"%s\n"
 "Θέλετε να γίνει φλασάρισμα του image\n"
-"%s"
+"%s;"
 
 #, python-format
 msgid ""
@@ -610,9 +611,8 @@ msgstr ": 0000 - προεπιλογή (ανενεργό)"
 msgid "<Current movielist location>"
 msgstr "<Τρέχουσα τοποθεσία καταλόγου ταινιών>"
 
-#, fuzzy
 msgid "<Default Skin>"
-msgstr "Προεπιλεγμένες ρυθμίσεις"
+msgstr "<Προεπιλεγμένο θέμα>"
 
 msgid "<Default movie location>"
 msgstr "<Προεπιλεγμένη τοποθεσία ταινιών>"
@@ -979,7 +979,7 @@ msgid "Alternative"
 msgstr "Προσθήκη εναλλακτικών"
 
 msgid "Alternative URL for images listed on FlashImage"
-msgstr ""
+msgstr "Εναλλακτική URL για images προς φλασάρισμα"
 
 msgid "Alternative numbering mode"
 msgstr "Εναλλακτική λειτουργία αρίθμησης"
@@ -1537,7 +1537,7 @@ msgid "Can be used for different fps between external subtitles and video."
 msgstr "Μπορεί να χρησιμοποιηθεί όταν οι υπότιτλοι έχουν διαφορετικό fps από το βίντεο."
 
 msgid "Can only find a network drive to store the backup this means after the flash the autorestore will not work. Alternativaly you can mount the network drive after the flash and perform a manufacurer reset to autorestore"
-msgstr "Η εφεδρεία δεν θα λειτουργήσει μετά το φλασάρισμα αν υπάρχει μόνο δίσκος δικτύου για την αποθήκευση του αντιγράφου ασφαλείας. Εναλλακτικά μπορείτε να μοντάρετε το δίσκο δικτύου μετά το φλασάρισμα και να κάνετε εργοστασιακή αναφορά για να γίνει η αυτόματη εφεδρεία"
+msgstr "Η εφεδρεία δεν θα λειτουργήσει μετά το φλασάρισμα αν υπάρχει μόνο δίσκος δικτύου για την αποθήκευση του αντιγράφου ασφαλείας. Εναλλακτικά μπορείτε να μοντάρετε το δίσκο δικτύου μετά το φλασάρισμα και να κάνετε εργοστασιακή επαναφορά για να γίνει η αυτόματη εφεδρεία"
 
 msgid "Canada"
 msgstr "Καναδάς"
@@ -1756,7 +1756,7 @@ msgid "Clear playlist"
 msgstr "Εκκαθάριση λίστας αναπαραγωγής"
 
 msgid "Client is streaming from this box!"
-msgstr ""
+msgstr "Υπάρχει πελάτης ροής από αυτό το δέκτη!"
 
 msgid "Clone TV screen to LCD"
 msgstr "Κλωνοποίηση TV στο LCD"
@@ -2457,9 +2457,8 @@ msgstr "Εισαγωγή ημερομηνίας/ώρας"
 msgid "Debug to file"
 msgstr "Εκσφαλμάτωση σε αρχείο"
 
-#, fuzzy
 msgid "Deep Standby LED"
-msgstr "Βαθιά αναμονή"
+msgstr "LED Βαθιάς Αναμονής"
 
 msgid "Deep standby"
 msgstr "Βαθιά αναμονή"
@@ -2699,15 +2698,13 @@ msgid "Display >16:9 content as"
 msgstr "Εμφάνιση περιεχομένου >16:9 ως"
 
 msgid "Display EPG as MultiEPG"
-msgstr ""
+msgstr "Εμφάνιση EPG ως Πολλαπλός EPG"
 
-#, fuzzy
 msgid "Display EPG info for current event"
-msgstr "Αποθήκευση χρονομετατόπισης μόνο για το τρέχον πρόγραμμα"
+msgstr "Εμφάνιση πληροφοριών EPG για το τρέχον πρόγραμμα"
 
-#, fuzzy
 msgid "Display EPG list for current channel"
-msgstr "Εμφάνιση EPG για το τρέχον κανάλι..."
+msgstr "Εμφάνιση λίστας EPG για το τρέχον κανάλι"
 
 msgid "Display and userinterface"
 msgstr "Οθόνη και επιφάνεια χρήστη"
@@ -3153,7 +3150,7 @@ msgid "Enter URL"
 msgstr "Εισαγωγή URL"
 
 msgid "Enter an URL where alternative images could be listed for FlashImage"
-msgstr ""
+msgstr "Εισάγετε μία URL στην οποία βρίσκονται τα εναλλακτικά images για φλασάρισμα"
 
 msgid "Enter if you are in the east or west hemisphere."
 msgstr "Εισάγετε εάν βρίσκεστε στο ανατολικό ή στο δυτικό ημισφαίριο."
@@ -3963,7 +3960,7 @@ msgid "Harddisk Setup"
 msgstr "Ρύθμιση Σκληρού Δίσκου"
 
 msgid "Harddisk is not in sleepmode it could be in use!"
-msgstr ""
+msgstr "Ο σκληρός δίσκος δεν βρίσκεται σε αναμονή μπορεί να χρησιμοποιείται!"
 
 msgid "Hardware: "
 msgstr "Υλικό: "
@@ -4878,6 +4875,9 @@ msgstr "Μοντέλο"
 
 msgid "Model: "
 msgstr "Μοντέλο: "
+
+msgid "Modern Greek (1453-)"
+msgstr "Νέα Ελληνικά (1453-)"
 
 msgid "Modulation"
 msgstr "Διαμόρφωση"
@@ -6001,7 +6001,7 @@ msgid "Positioner setup log"
 msgstr "Καταγραφή ρυθμίσεων tuner"
 
 msgid "Power LED"
-msgstr ""
+msgstr "LED Ισχύος"
 
 msgid "Power management. Consult your receiver's manual for more information."
 msgstr "Διαχείριση ισχύος. Συμβουλευτείτε το εγχειρίδιο χρήσης του δέκτη σας για περισσότερες πληροφορίες."
@@ -7996,7 +7996,6 @@ msgstr "Αναμονή"
 msgid "Standby / restart"
 msgstr "Αναμονή / επανεκκίνηση"
 
-#, fuzzy
 msgid "Standby LED"
 msgstr "LED Αναμονής"
 
@@ -9084,16 +9083,14 @@ msgstr "Τουρκμενιστάν"
 msgid "Turks and Caicos Islands"
 msgstr "Νήσοι Τερκς και Κέικος"
 
-#, fuzzy
 msgid "Turn on the power LED during deep standby."
-msgstr "Ενεργοποίηση LED κατά την αναμονή."
+msgstr "Ενεργοποίηση LED κατά τη βαθιά αναμονή."
 
 msgid "Turn on the power LED during standby."
 msgstr "Ενεργοποίηση LED κατά την αναμονή."
 
-#, fuzzy
 msgid "Turn on the power LED."
-msgstr "Ενεργοποίηση LED κατά την αναμονή."
+msgstr "Ενεργοποίηση LED κατά την εκκίνηση."
 
 msgid "Turning step size"
 msgstr "Μέγεθος βήματος περιστροφής"
@@ -11465,3 +11462,6 @@ msgstr "έγινε μετάβαση"
 
 msgid "®"
 msgstr "®"
+
+msgid "Add Biss Caid to service"
+msgstr "Προσθήκη Biss Caid στην υπηρεσία"
