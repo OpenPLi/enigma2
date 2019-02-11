@@ -612,6 +612,11 @@ class NIM(object):
 			multistream = True
 		return multistream
 
+	def isT2MI(self):
+		# Check if t2mi feature exists using procfs due to missing FE_CAN_T2MI in DVB API
+		# TODO: Ask manufactures to add /proc/stb/frontend/%d/t2mi entry on supported frontends
+		return os.path.exists("/tmp/stb/frontend/%d/t2mi" % self.frontend_id)
+
 	def supportsBlindScan(self):
 		return self.supports_blind_scan
 
