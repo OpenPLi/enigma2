@@ -9,7 +9,7 @@ eListbox::eListbox(eWidget *parent) :
 	m_top(0), m_selected(0), m_itemheight(25),
 	m_items_per_page(0), m_selection_enabled(1), m_scrollbar(nullptr)
 {
-	memset(&m_style, 0, sizeof(m_style));
+	memset(static_cast<void*>(&m_style), 0, sizeof(m_style));
 	m_style.m_text_offset = ePoint(1,1);
 //	setContent(new eListboxStringContent());
 
