@@ -320,7 +320,7 @@ class TimerEditList(Screen):
 		print "[TimerEditList] finished edit"
 		if answer[0]:
 			entry = answer[1]
-			if entry.external_prev != entry.external:
+			if hasattr(entry, "external_prev") and entry.external_prev != entry.external:
 				def removeEditTimer():
 					entry.service_ref, entry.begin, entry.end, entry.external = entry.service_ref_prev, entry.begin_prev, entry.end_prev, entry.external_prev
 					self.removeTimer()
