@@ -180,7 +180,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 		self.record_ecm = record_ecm
 		self.rename_repeat = rename_repeat
 		self.conflict_detection = conflict_detection
-		self.external = False
+		self.external = self.external_prev = False
 		self.setAdvancedPriorityFrontend = None
 		if SystemInfo["DVB-T_priority_tuner_available"] or SystemInfo["DVB-C_priority_tuner_available"] or SystemInfo["DVB-S_priority_tuner_available"] or SystemInfo["ATSC_priority_tuner_available"]:
 			rec_ref = self.service_ref and self.service_ref.ref
