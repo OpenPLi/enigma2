@@ -131,7 +131,7 @@ class Satfinder(ScanSetup, ServiceScan):
 				self.t2mi_plp_id_memory = self.scan_sat.t2mi_plp_id.value
 				self.t2mi_pid_memory = self.scan_sat.t2mi_pid.value
 				self.scan_sat.t2mi_plp_id.value = eDVBFrontendParametersSatellite.No_T2MI_PLP_Id
-				self.scan_sat_t2mi_pid.value = eDVBFrontendParametersSatellite.T2MI_Default_Pid
+				self.scan_sat.t2mi_pid.value = eDVBFrontendParametersSatellite.T2MI_Default_Pid
 			self.createSetup()
 			self.retune()
 
