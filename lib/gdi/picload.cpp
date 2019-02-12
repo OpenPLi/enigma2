@@ -754,7 +754,7 @@ void ePicLoad::decodeThumb()
 		{
 			int c;
 			int count = 1024*100; // get checksum data out of max 100kB
-			unsigned long crc32 = 0;
+			uint32_t crc32 = 0;
 			char crcstr[9];
 			*crcstr = 0;
 
@@ -763,7 +763,7 @@ void ePicLoad::decodeThumb()
 
 			fclose(f);
 			crc32 = ~crc32;
-			sprintf(crcstr, "%08lX", crc32);
+			sprintf(crcstr, "%08X", crc32);
 
 			cachedir = m_filepara->file;
 			size_t pos = cachedir.find_last_of("/");
