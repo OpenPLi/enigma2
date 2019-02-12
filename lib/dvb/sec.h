@@ -247,6 +247,12 @@ class eDVBSatelliteLNBParameters
 		eDVBSatelliteLNBParameters()
 		{
 			SatCR_format = SatCR_format_none;
+#ifndef SWIG
+			m_12V_relais_state = OFF;
+			m_lof_hi = m_lof_lo = m_lof_threshold = 0;
+			m_increased_voltage = false;
+			m_prio = -1;
+#endif
 		}
 #ifdef SWIG
 		~eDVBSatelliteLNBParameters();
