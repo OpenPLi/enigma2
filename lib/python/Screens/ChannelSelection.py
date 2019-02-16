@@ -377,6 +377,8 @@ class ChannelContextMenu(Screen):
 
 	def removeBouquet(self, answer):
 		if answer:
+			if answer == "never":
+				self.csel.confirmRemove = False
 			self.csel.removeBouquet()
 			eDVBDB.getInstance().reloadBouquets()
 			self.close()
