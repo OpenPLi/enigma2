@@ -112,7 +112,7 @@ while : ; do
 			/etc/init.d/dbus-1 reload
 			/etc/init.d/networking start
 			/etc/init.d/avahi-daemon start
-			touch /etc/.doAutoinstall
+			[ ! -f /home/root/autoinstall.log ] && touch /etc/.doAutoinstall
 			break
 			;;
 		*)
