@@ -212,10 +212,11 @@ class QuitMainloopScreen(Screen):
 
 inTryQuitMainloop = False
 
-def getReasons(session):
+def getReasons(session, retvalue=1):
 	recordings = session.nav.getRecordings()
 	jobs = len(job_manager.getPendingJobs())
 	reasons = []
+	dont_sleep = False
 	next_rec_time = -1
 	if not recordings:
 		next_rec_time = session.nav.RecordTimer.getNextRecordingTime()
@@ -229,15 +230,16 @@ def getReasons(session):
 			reasons.append((ngettext("%d job is running in the background!", "%d jobs are running in the background!", jobs) % jobs))
 	if eStreamServer.getInstance().getConnectedClients() or StreamServiceList:
 			reasons.append(_("Client is streaming from this box!"))
-	if not reasons and internalHDDNotSleeping():
+	if not reasons and internalHDDNotSleeping() and retvalue not in (3, 6, 42):
 			reasons.append(_("Harddisk is not in sleepmode it could be in use!"))
-	return "\n".join(reasons)
+			dont_sleep = True
+	return "\n".join(reasons), dont_sleep
 
 class TryQuitMainloop(MessageBox):
 	def __init__(self, session, retvalue=1, timeout=-1, default_yes = False):
 		self.retval = retvalue
 		self.connected = False
-		reason = getReasons(session)
+		reason, dont_sleep = getReasons(session, retvalue)
 		if reason:
 			text = { 1: _("Really shutdown now?"),
 				2: _("Really reboot now?"),
@@ -246,7 +248,7 @@ class TryQuitMainloop(MessageBox):
 				6: _("Really restart in debug mode now?"),
 				42: _("Really upgrade your settop box and reboot now?") }.get(retvalue)
 			if text:
-				MessageBox.__init__(self, session, "%s\n%s" % (reason, text), type = MessageBox.TYPE_YESNO, timeout = timeout, default = default_yes)
+				MessageBox.__init__(self, session, "%s\n%s" % (reason, text), type = MessageBox.TYPE_YESNO, timeout = dont_sleep and 30 or timeout, default = dont_sleep and True or default_yes)
 				self.skinName = "MessageBoxSimple"
 				session.nav.record_event.append(self.getRecordEvent)
 				self.connected = True
