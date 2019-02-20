@@ -1547,9 +1547,10 @@ def InitNimManager(nimmgr, update_slots = []):
 	def tunerConfigChanged(nim, configElement=None):
 		if slot.isHotSwitchable():
 			if nim.configModeDVBS.value or nim.configModeDVBC.value or nim.configModeDVBT.value or nim.configModeDVBATSC.value:
-				nim.configMode.cancel()
 				if nim.configMode.value == "nothing":
-					nim.configMode.value = "simple"
+					nim.configMode.cancel()
+					if nim.configMode.value == "nothing":
+						nim.configMode.value = "simple"
 			else:
 				nim.configMode.value = nim.configMode.default = "nothing"
 
