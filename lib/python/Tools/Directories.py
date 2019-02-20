@@ -208,16 +208,16 @@ def getRecordingFilename(basename, dirname = None):
 		dirname = defaultRecordingLocation()
 	filename = os.path.join(dirname, filename)
 
-	i = 0
-	while True:
-		path = filename
-		if i > 0:
-			path += "_%03d" % i
-		try:
-			open(path + ".ts")
-			i += 1
-		except IOError:
-			return path
+	if not os.path.isfile("%s.ts" % filename):
+		return filename
+	for i in range(0,1000):
+		newfilename = "%s_%03d" % (filename, i)
+		if os.path.isfile("%s.ts" % newfilename):
+			if not os.path.islink("%s.eit" % newfilename):
+				os.symlink("%s.eit" % filename, "%s.eit" % newfilename)
+		else:
+			break
+	return newfilename
 
 # this is clearly a hack:
 def InitFallbackFiles():
