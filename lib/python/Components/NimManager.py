@@ -1557,15 +1557,12 @@ def InitNimManager(nimmgr, update_slots = []):
 	empty_slots = 0
 	for slot in nimmgr.nim_slots:
 		x = slot.slot
-
 		if update_slots and (x not in update_slots):
 			continue
-
 		nim = config.Nims[x]
 		nim.force_legacy_signal_stats = ConfigYesNo(default = False)
 
 		if slot.isCompatible("DVB-S"):
-			createSatConfig(nim, x, empty_slots)
 			config_mode_choices = {"nothing": _("disabled"), "simple": _("simple"), "advanced": _("advanced")}
 			if len(nimmgr.getNimListOfType(slot.type, exception = x)) > 0:
 				config_mode_choices["equal"] = _("equal to")
@@ -1577,20 +1574,14 @@ def InitNimManager(nimmgr, update_slots = []):
 			tmp.slot_id = x
 			tmp.addNotifier(configModeChanged, initial_call = False)
 			nim.configMode = tmp
-		elif slot.isCompatible("DVB-C"):
+		elif slot.canBeCompatible("DVB-C") or slot.canBeCompatible("DVB-T") or slot.canBeCompatible("ATSC"):
 			nim.configMode = ConfigSelection(choices = {"enabled": _("enabled"), "nothing": _("disabled")}, default = "enabled")
-			createCableConfig(nim, x)
-		elif slot.isCompatible("DVB-T"):
-			nim.configMode = ConfigSelection(choices = {"enabled": _("enabled"), "nothing": _("disabled")}, default = "enabled")
-			createTerrestrialConfig(nim, x)
-		elif slot.isCompatible("ATSC"):
-			nim.configMode = ConfigSelection(choices = {"enabled": _("enabled"), "nothing": _("disabled")}, default = "enabled")
-			createATSCConfig(nim, x)
 		else:
-			empty_slots += 1
 			nim.configMode = ConfigSelection(choices = { "nothing": _("disabled") }, default="nothing")
-			if slot.type is not None:
-				print "[InitNimManager] pls add support for this frontend type!", slot.type
+			if not slot.canBeCompatible("DVB-S"):
+				empty_slots += 1
+				if slot.type is not None:
+					print "[InitNimManager] pls add support for this frontend type!", slot.type
 
 		nim.configModeDVBS = ConfigYesNo(default=True)
 		nim.configModeDVBC = ConfigYesNo()
@@ -1602,32 +1593,14 @@ def InitNimManager(nimmgr, update_slots = []):
 		nim.configModeDVBATSC.addNotifier(boundFunction(tunerConfigChanged, nim), initial_call=False)
 		tunerConfigChanged(nim)
 
-	nimmgr.sec = SecConfigure(nimmgr)
-
-	empty_slots = 0
-	for slot in nimmgr.nim_slots:
-		x = slot.slot
-
-		if update_slots and (x not in update_slots):
-			continue
-
-		nim = config.Nims[x]
-		empty = True
-
 		if slot.canBeCompatible("DVB-S"):
 			createSatConfig(nim, x, empty_slots)
-			empty = False
 		if slot.canBeCompatible("DVB-C"):
 			createCableConfig(nim, x)
-			empty = False
 		if slot.canBeCompatible("DVB-T"):
 			createTerrestrialConfig(nim, x)
-			empty = False
 		if slot.canBeCompatible("ATSC"):
 			createATSCConfig(nim, x)
-			empty = False
-		if empty:
-			empty_slots += 1
 
 		if slot.isMultiType() and not hasattr(nim, "multiType"):
 			nim.multiType = ConfigSelection([(id, slot.getMultiTypeList()[id]) for id in slot.getMultiTypeList().keys()] + [("nothing", _("disabled"))], "0")
@@ -1636,5 +1609,7 @@ def InitNimManager(nimmgr, update_slots = []):
 		if slot.isHotSwitchable():
 			#for hotswitchable multitype we need to set the frontend type to DVB-S
 			eDVBResourceManager.getInstance().setFrontendType(nimmgr.nim_slots[x - empty_slots].frontend_id, slot.getType())
+
+	nimmgr.sec = SecConfigure(nimmgr)
 
 nimmanager = NimManager()
