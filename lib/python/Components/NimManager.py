@@ -1591,7 +1591,7 @@ def InitNimManager(nimmgr, update_slots = []):
 			if slot.type is not None:
 				print "[InitNimManager] pls add support for this frontend type!", slot.type
 
-		nim.configModeDVBS = ConfigYesNo()
+		nim.configModeDVBS = ConfigYesNo(default=True)
 		nim.configModeDVBC = ConfigYesNo()
 		nim.configModeDVBT = ConfigYesNo()
 		nim.configModeDVBATSC = ConfigYesNo()
