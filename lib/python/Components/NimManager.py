@@ -1403,92 +1403,88 @@ def InitNimManager(nimmgr, update_slots = []):
 			open("/proc/stb/frontend/%d/t2mirawmode" % slot, "w").write(configElement.value)
 
 	def createSatConfig(nim, x, empty_slots):
-		if not hasattr(nim, "toneAmplitude"):
-			nim.toneAmplitude = ConfigSelection([("11", "340mV"), ("10", "360mV"), ("9", "600mV"), ("8", "700mV"), ("7", "800mV"), ("6", "900mV"), ("5", "1100mV")], "7")
-			nim.toneAmplitude.fe_id = x - empty_slots
-			nim.toneAmplitude.slot_id = x
-			nim.toneAmplitude.addNotifier(toneAmplitudeChanged)
-			nim.scpcSearchRange = ConfigSelection([("0", _("no")), ("1", _("yes"))], "0")
-			nim.scpcSearchRange.fe_id = x - empty_slots
-			nim.scpcSearchRange.slot_id = x
-			nim.scpcSearchRange.addNotifier(scpcSearchRangeChanged)
-			nim.t2miRawMode = ConfigSelection([("disable", _("disabled")), ("enable", _("enabled"))], "disable")
-			nim.t2miRawMode.slot = x
-			nim.t2miRawMode.addNotifier(t2miRawModeChanged)
-			nim.diseqc13V = ConfigYesNo(False)
-			nim.diseqcMode = ConfigSelection(diseqc_mode_choices, "diseqc_a_b")
-			nim.connectedTo = ConfigSelection([(str(id), nimmgr.getNimDescription(id)) for id in nimmgr.getNimListOfType("DVB-S") if id != x])
-			nim.simpleSingleSendDiSEqC = ConfigYesNo(False)
-			nim.simpleDiSEqCSetVoltageTone = ConfigYesNo(True)
-			nim.simpleDiSEqCOnlyOnSatChange = ConfigYesNo(False)
-			nim.simpleDiSEqCSetCircularLNB = ConfigYesNo(True)
-			nim.diseqcA = ConfigSatlist(list = diseqc_satlist_choices)
-			nim.diseqcB = ConfigSatlist(list = diseqc_satlist_choices)
-			nim.diseqcC = ConfigSatlist(list = diseqc_satlist_choices)
-			nim.diseqcD = ConfigSatlist(list = diseqc_satlist_choices)
-			nim.positionerMode = ConfigSelection(positioner_mode_choices, "usals")
-			nim.userSatellitesList = ConfigText('[]')
-			nim.pressOKtoList = ConfigNothing()
-			nim.longitude = ConfigFloat(default=[5,100], limits=[(0,359),(0,999)])
-			nim.longitudeOrientation = ConfigSelection(longitude_orientation_choices, "east")
-			nim.latitude = ConfigFloat(default=[50,767], limits=[(0,359),(0,999)])
-			nim.latitudeOrientation = ConfigSelection(latitude_orientation_choices, "north")
-			nim.tuningstepsize = ConfigFloat(default = [0,360], limits = [(0,9),(0,999)])
-			nim.rotorPositions = ConfigInteger(default = 99, limits = [1,999])
-			nim.turningspeedH = ConfigFloat(default = [2,3], limits = [(0,9),(0,9)])
-			nim.turningspeedV = ConfigFloat(default = [1,7], limits = [(0,9),(0,9)])
-			nim.powerMeasurement = ConfigYesNo(True)
-			nim.powerThreshold = ConfigInteger(default=hw.get_device_name() == "dm8000" and 15 or 50, limits=(0, 100))
-			nim.turningSpeed = ConfigSelection(turning_speed_choices, "fast")
-			btime = datetime(1970, 1, 1, 7, 0)
-			nim.fastTurningBegin = ConfigDateTime(default = mktime(btime.timetuple()), formatstring = _("%H:%M"), increment = 900)
-			etime = datetime(1970, 1, 1, 19, 0)
-			nim.fastTurningEnd = ConfigDateTime(default = mktime(etime.timetuple()), formatstring = _("%H:%M"), increment = 900)
+		nim.toneAmplitude = ConfigSelection([("11", "340mV"), ("10", "360mV"), ("9", "600mV"), ("8", "700mV"), ("7", "800mV"), ("6", "900mV"), ("5", "1100mV")], "7")
+		nim.toneAmplitude.fe_id = x - empty_slots
+		nim.toneAmplitude.slot_id = x
+		nim.toneAmplitude.addNotifier(toneAmplitudeChanged)
+		nim.scpcSearchRange = ConfigSelection([("0", _("no")), ("1", _("yes"))], "0")
+		nim.scpcSearchRange.fe_id = x - empty_slots
+		nim.scpcSearchRange.slot_id = x
+		nim.scpcSearchRange.addNotifier(scpcSearchRangeChanged)
+		nim.t2miRawMode = ConfigSelection([("disable", _("disabled")), ("enable", _("enabled"))], "disable")
+		nim.t2miRawMode.slot = x
+		nim.t2miRawMode.addNotifier(t2miRawModeChanged)
+		nim.diseqc13V = ConfigYesNo(False)
+		nim.diseqcMode = ConfigSelection(diseqc_mode_choices, "diseqc_a_b")
+		nim.connectedTo = ConfigSelection([(str(id), nimmgr.getNimDescription(id)) for id in nimmgr.getNimListOfType("DVB-S") if id != x])
+		nim.simpleSingleSendDiSEqC = ConfigYesNo(False)
+		nim.simpleDiSEqCSetVoltageTone = ConfigYesNo(True)
+		nim.simpleDiSEqCOnlyOnSatChange = ConfigYesNo(False)
+		nim.simpleDiSEqCSetCircularLNB = ConfigYesNo(True)
+		nim.diseqcA = ConfigSatlist(list = diseqc_satlist_choices)
+		nim.diseqcB = ConfigSatlist(list = diseqc_satlist_choices)
+		nim.diseqcC = ConfigSatlist(list = diseqc_satlist_choices)
+		nim.diseqcD = ConfigSatlist(list = diseqc_satlist_choices)
+		nim.positionerMode = ConfigSelection(positioner_mode_choices, "usals")
+		nim.userSatellitesList = ConfigText('[]')
+		nim.pressOKtoList = ConfigNothing()
+		nim.longitude = ConfigFloat(default=[5,100], limits=[(0,359),(0,999)])
+		nim.longitudeOrientation = ConfigSelection(longitude_orientation_choices, "east")
+		nim.latitude = ConfigFloat(default=[50,767], limits=[(0,359),(0,999)])
+		nim.latitudeOrientation = ConfigSelection(latitude_orientation_choices, "north")
+		nim.tuningstepsize = ConfigFloat(default = [0,360], limits = [(0,9),(0,999)])
+		nim.rotorPositions = ConfigInteger(default = 99, limits = [1,999])
+		nim.turningspeedH = ConfigFloat(default = [2,3], limits = [(0,9),(0,9)])
+		nim.turningspeedV = ConfigFloat(default = [1,7], limits = [(0,9),(0,9)])
+		nim.powerMeasurement = ConfigYesNo(True)
+		nim.powerThreshold = ConfigInteger(default=hw.get_device_name() == "dm8000" and 15 or 50, limits=(0, 100))
+		nim.turningSpeed = ConfigSelection(turning_speed_choices, "fast")
+		btime = datetime(1970, 1, 1, 7, 0)
+		nim.fastTurningBegin = ConfigDateTime(default = mktime(btime.timetuple()), formatstring = _("%H:%M"), increment = 900)
+		etime = datetime(1970, 1, 1, 19, 0)
+		nim.fastTurningEnd = ConfigDateTime(default = mktime(etime.timetuple()), formatstring = _("%H:%M"), increment = 900)
 
 	def createCableConfig(nim, x):
-		if not hasattr(nim, "cable"):
-			list = [(x[0], x[0]) for x in nimmgr.cablesList]
-			nim.cable = ConfigSubsection()
-			nim.cable.scan_networkid = ConfigInteger(default = 0, limits = (0, 99999))
-			possible_scan_types = [("bands", _("Frequency bands")), ("steps", _("Frequency steps"))]
-			if list:
-				possible_scan_types.append(("provider", _("Provider")))
-				nim.cable.scan_provider = ConfigSelection(default = "0", choices = list)
-			nim.cable.config_scan_details = ConfigYesNo(default = False)
-			nim.cable.scan_type = ConfigSelection(default = "bands", choices = possible_scan_types)
-			nim.cable.scan_band_EU_VHF_I = ConfigYesNo(default = True)
-			nim.cable.scan_band_EU_MID = ConfigYesNo(default = True)
-			nim.cable.scan_band_EU_VHF_III = ConfigYesNo(default = True)
-			nim.cable.scan_band_EU_UHF_IV = ConfigYesNo(default = True)
-			nim.cable.scan_band_EU_UHF_V = ConfigYesNo(default = True)
-			nim.cable.scan_band_EU_SUPER = ConfigYesNo(default = True)
-			nim.cable.scan_band_EU_HYPER = ConfigYesNo(default = True)
-			nim.cable.scan_band_US_LOW = ConfigYesNo(default = False)
-			nim.cable.scan_band_US_MID = ConfigYesNo(default = False)
-			nim.cable.scan_band_US_HIGH = ConfigYesNo(default = False)
-			nim.cable.scan_band_US_SUPER = ConfigYesNo(default = False)
-			nim.cable.scan_band_US_HYPER = ConfigYesNo(default = False)
-			nim.cable.scan_frequency_steps = ConfigInteger(default = 1000, limits = (1000, 10000))
-			nim.cable.scan_mod_qam16 = ConfigYesNo(default = False)
-			nim.cable.scan_mod_qam32 = ConfigYesNo(default = False)
-			nim.cable.scan_mod_qam64 = ConfigYesNo(default = True)
-			nim.cable.scan_mod_qam128 = ConfigYesNo(default = False)
-			nim.cable.scan_mod_qam256 = ConfigYesNo(default = True)
-			nim.cable.scan_sr_6900 = ConfigYesNo(default = True)
-			nim.cable.scan_sr_6875 = ConfigYesNo(default = True)
-			nim.cable.scan_sr_ext1 = ConfigInteger(default = 0, limits = (0, 7230))
-			nim.cable.scan_sr_ext2 = ConfigInteger(default = 0, limits = (0, 7230))
+		list = [(x[0], x[0]) for x in nimmgr.cablesList]
+		nim.cable = ConfigSubsection()
+		nim.cable.scan_networkid = ConfigInteger(default = 0, limits = (0, 99999))
+		possible_scan_types = [("bands", _("Frequency bands")), ("steps", _("Frequency steps"))]
+		if list:
+			possible_scan_types.append(("provider", _("Provider")))
+			nim.cable.scan_provider = ConfigSelection(default = "0", choices = list)
+		nim.cable.config_scan_details = ConfigYesNo(default = False)
+		nim.cable.scan_type = ConfigSelection(default = "bands", choices = possible_scan_types)
+		nim.cable.scan_band_EU_VHF_I = ConfigYesNo(default = True)
+		nim.cable.scan_band_EU_MID = ConfigYesNo(default = True)
+		nim.cable.scan_band_EU_VHF_III = ConfigYesNo(default = True)
+		nim.cable.scan_band_EU_UHF_IV = ConfigYesNo(default = True)
+		nim.cable.scan_band_EU_UHF_V = ConfigYesNo(default = True)
+		nim.cable.scan_band_EU_SUPER = ConfigYesNo(default = True)
+		nim.cable.scan_band_EU_HYPER = ConfigYesNo(default = True)
+		nim.cable.scan_band_US_LOW = ConfigYesNo(default = False)
+		nim.cable.scan_band_US_MID = ConfigYesNo(default = False)
+		nim.cable.scan_band_US_HIGH = ConfigYesNo(default = False)
+		nim.cable.scan_band_US_SUPER = ConfigYesNo(default = False)
+		nim.cable.scan_band_US_HYPER = ConfigYesNo(default = False)
+		nim.cable.scan_frequency_steps = ConfigInteger(default = 1000, limits = (1000, 10000))
+		nim.cable.scan_mod_qam16 = ConfigYesNo(default = False)
+		nim.cable.scan_mod_qam32 = ConfigYesNo(default = False)
+		nim.cable.scan_mod_qam64 = ConfigYesNo(default = True)
+		nim.cable.scan_mod_qam128 = ConfigYesNo(default = False)
+		nim.cable.scan_mod_qam256 = ConfigYesNo(default = True)
+		nim.cable.scan_sr_6900 = ConfigYesNo(default = True)
+		nim.cable.scan_sr_6875 = ConfigYesNo(default = True)
+		nim.cable.scan_sr_ext1 = ConfigInteger(default = 0, limits = (0, 7230))
+		nim.cable.scan_sr_ext2 = ConfigInteger(default = 0, limits = (0, 7230))
 
 	def createTerrestrialConfig(nim, x):
-		if not hasattr(nim, "terrestrial"):
-			list = [(x[0], x[0]) for x in nimmgr.terrestrialsList]
-			nim.terrestrial = ConfigSelection(choices = list)
-			nim.terrestrial_5V = ConfigOnOff()
+		list = [(x[0], x[0]) for x in nimmgr.terrestrialsList]
+		nim.terrestrial = ConfigSelection(choices = list)
+		nim.terrestrial_5V = ConfigOnOff()
 
 	def createATSCConfig(nim, x):
-		if not hasattr(nim, "atsc"):
-			list = [(x[0], x[0]) for x in nimmgr.atscList]
-			nim.atsc = ConfigSelection(choices = list)
+		list = [(x[0], x[0]) for x in nimmgr.atscList]
+		nim.atsc = ConfigSelection(choices = list)
 
 	def tunerTypeChanged(nimmgr, configElement, initial=False):
 		fe_id = configElement.fe_id
