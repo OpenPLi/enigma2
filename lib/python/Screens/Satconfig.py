@@ -217,7 +217,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 					self.t2mirawmode = getConfigListEntry(self.indent % _("T2MI RAW Mode"), self.nimConfig.t2miRawMode, _("With T2MI RAW mode disabled (default) we can use single T2MI PLP de-encapsulation. With T2MI RAW mode enabled we can use astra-sm to analyze T2MI"))
 					self.list.append(self.t2mirawmode)
 		if self.nim.isCompatible("DVB-C") or (self.nim.isHotSwitchable() and self.nim.canBeCompatible("DVB-C")):
-			self.configMode = getConfigListEntry(self.indent % _("Configuration mode"), self.nimConfig.configMode, _("Select 'enabled' if this tuner has a signal cable connected, otherwise select 'nothing connected'."))
+			self.configMode = self.configMode or getConfigListEntry(self.indent % _("Configuration mode"), self.nimConfig.configMode, _("Select 'enabled' if this tuner has a signal cable connected, otherwise select 'nothing connected'."))
 			if self.nim.isHotSwitchable():
 				self.list.append(self.configModeDVBC)
 			elif not self.nim.isMultiType():
@@ -281,7 +281,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 						self.list.append(getConfigListEntry(self.indent % (_("Scan additional SR")), self.nimConfig.cable.scan_sr_ext1, _("This field allows you to search an additional symbol rate up to %s.") % ("7320")))
 						self.list.append(getConfigListEntry(self.indent % (_("Scan additional SR")), self.nimConfig.cable.scan_sr_ext2, _("This field allows you to search an additional symbol rate up to %s.") % ("7320")))
 		if self.nim.isCompatible("DVB-T") or (self.nim.isHotSwitchable() and self.nim.canBeCompatible("DVB-T")):
-			self.configMode = getConfigListEntry(self.indent % _("Configuration mode"), self.nimConfig.configMode, _("Select 'enabled' if this tuner has a signal cable connected, otherwise select 'nothing connected'."))
+			self.configMode = self.configMode or getConfigListEntry(self.indent % _("Configuration mode"), self.nimConfig.configMode, _("Select 'enabled' if this tuner has a signal cable connected, otherwise select 'nothing connected'."))
 			if self.nim.isHotSwitchable():
 				self.list.append(self.configModeDVBT)
 			elif not self.nim.isMultiType():
@@ -312,7 +312,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 				self.list.append(self.terrestrialRegionsEntry)
 				self.list.append(getConfigListEntry(self.indent % _("Enable 5V for active antenna"), self.nimConfig.terrestrial_5V, _("Enable this setting if your aerial system needs power")))
 		if self.nim.isCompatible("ATSC") or (self.nim.isHotSwitchable() and self.nim.canBeCompatible("ATSC")):
-			self.configMode = getConfigListEntry(self.indent % _("Configuration mode"), self.nimConfig.configMode, _("Select 'enabled' if this tuner has a signal cable connected, otherwise select 'nothing connected'."))
+			self.configMode = self.configMode or getConfigListEntry(self.indent % _("Configuration mode"), self.nimConfig.configMode, _("Select 'enabled' if this tuner has a signal cable connected, otherwise select 'nothing connected'."))
 			if self.nim.isHotSwitchable():
 				self.list.append(self.configModeDVBATSC)
 			elif not self.nim.isMultiType():
