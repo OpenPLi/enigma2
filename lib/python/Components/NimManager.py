@@ -528,7 +528,7 @@ class NIM(object):
 	def getType(self):
 		try:
 			if self.isHotSwitchable():
-				return "DVB-S2"
+				return [x for x in self.multi_type.values() if x.startswith("DVB-S")][0]
 			if self.isMultiType():
 				return self.multi_type[self.config.multiType.value]
 		except:
@@ -1633,6 +1633,6 @@ def InitNimManager(nimmgr, update_slots = []):
 			nim.multiType.addNotifier(boundFunction(tunerTypeChanged, nimmgr), initial_call=True)
 		if slot.isHotSwitchable():
 			#for hotswitchable multitype we need to set the frontend type to DVB-S
-			eDVBResourceManager.getInstance().setFrontendType(nimmgr.nim_slots[x - empty_slots].frontend_id, "DVB-S")
+			eDVBResourceManager.getInstance().setFrontendType(nimmgr.nim_slots[x - empty_slots].frontend_id, slot.getType())
 
 nimmanager = NimManager()
