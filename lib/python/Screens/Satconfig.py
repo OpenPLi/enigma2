@@ -141,7 +141,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 		if self.nim.isMultiType():
 			self.multiType = getConfigListEntry(_("Tuner type"), self.nimConfig.multiType, _("This is a multitype tuner. Available options depend on the hardware."))
 			self.list.append(self.multiType)
-			self.nimConfig.configMode.value = "nothing" if self.nimConfig.multiType.value == "nothing" else "enabled"
+			self.nimConfig.configMode.value = "nothing" if self.nimConfig.multiType.value == "nothing" else ("simple" if "DVB-S" in self.nimConfig.multiType.value else "enable")
 
 		self.configModeDVBS = getConfigListEntry(_("Configure DVB-S"), self.nimConfig.configModeDVBS, _("Select 'Yes' when you want to configure this tuner for DVB-S"))
 		self.configModeDVBC = getConfigListEntry(_("Configure DVB-C"), self.nimConfig.configModeDVBC, _("Select 'Yes' when you want to configure this tuner for DVB-C"))
