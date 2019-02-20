@@ -828,7 +828,7 @@ class NimSelection(Screen):
 								text += ", ".join(satnames)
 							elif len(satnames) > 2:
 								# we need a newline here, since multi content lists don't support automtic line wrapping
-								text += "%s,\n         %s" % (".join(satnames[:2]) + ", ", ".join(satnames[2:]))
+								text += "%s,\n         %s" % (", ".join(satnames[:2]), ",".join(satnames[2:]))
 						elif nimConfig.diseqcMode.value in ("positioner", "positioner_select"):
 							text = "%s: " % {"positioner": _("Positioner"), "positioner_select": _("Positioner (selecting satellites)")}[nimConfig.diseqcMode.value]
 							if nimConfig.positionerMode.value == "usals":
