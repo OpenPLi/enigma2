@@ -1559,12 +1559,12 @@ def InitNimManager(nimmgr, update_slots = []):
 		nim.force_legacy_signal_stats = ConfigYesNo(default = False)
 
 		if slot.isCompatible("DVB-S"):
-			config_mode_choices = {"nothing": _("disabled"), "simple": _("simple"), "advanced": _("advanced")}
+			config_mode_choices = {"nothing": _("Disabled"), "simple": _("Simple"), "advanced": _("Advanced")}
 			if len(nimmgr.getNimListOfType(slot.type, exception = x)) > 0:
-				config_mode_choices["equal"] = _("equal to")
-				config_mode_choices["satposdepends"] = _("second cable of motorized LNB")
+				config_mode_choices["equal"] = _("Equal to")
+				config_mode_choices["satposdepends"] = _("Second cable of motorized LNB")
 			if len(nimmgr.canConnectTo(x)) > 0:
-				config_mode_choices["loopthrough"] = _("loopthrough to")
+				config_mode_choices["loopthrough"] = _("Loop through from")
 			#nim.advanced = ConfigNothing()
 			nim.configMode = ConfigSelection(config_mode_choices, slot.isFBCLink() and "nothing" or "simple")
 			nim.configMode.slot_id = x
