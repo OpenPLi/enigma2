@@ -1353,7 +1353,7 @@ def InitNimManager(nimmgr, update_slots = []):
 	def configModeChanged(configMode):
 		slot_id = configMode.slot_id
 		nim = config.Nims[slot_id]
-		if configMode.value == "advanced" and isinstance(nim.advanced, ConfigNothing):
+		if configMode.value == "advanced" and not hasattr(nim, "advanced"):
 			# advanced config:
 			nim.advanced = ConfigSubsection()
 			nim.advanced.sat = ConfigSubDict()
@@ -1565,11 +1565,10 @@ def InitNimManager(nimmgr, update_slots = []):
 				config_mode_choices["satposdepends"] = _("second cable of motorized LNB")
 			if len(nimmgr.canConnectTo(x)) > 0:
 				config_mode_choices["loopthrough"] = _("loopthrough to")
-			nim.advanced = ConfigNothing()
-			tmp = ConfigSelection(config_mode_choices, slot.isFBCLink() and "nothing" or "simple")
-			tmp.slot_id = x
-			tmp.addNotifier(configModeChanged, initial_call = False)
-			nim.configMode = tmp
+			#nim.advanced = ConfigNothing()
+			nim.configMode = ConfigSelection(config_mode_choices, slot.isFBCLink() and "nothing" or "simple")
+			nim.configMode.slot_id = x
+			nim.configMode.addNotifier(configModeChanged, initial_call = False)
 		elif slot.canBeCompatible("DVB-C") or slot.canBeCompatible("DVB-T") or slot.canBeCompatible("ATSC"):
 			nim.configMode = ConfigSelection(choices = {"enabled": _("enabled"), "nothing": _("disabled")}, default = "enabled")
 		else:
