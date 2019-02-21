@@ -141,7 +141,13 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 		if self.nim.isMultiType():
 			self.multiType = getConfigListEntry(_("Tuner type"), self.nimConfig.multiType, _("This is a multitype tuner. Available options depend on the hardware."))
 			self.list.append(self.multiType)
-			self.nimConfig.configMode.value = "nothing" if self.nimConfig.multiType.value == "nothing" else ("simple" if "DVB-S" in self.nimConfig.multiType.value else "enable")
+			if self.nimConfig.multiType.value == "nothing":
+				self.nimConfig.configMode.value = "nothing"
+			elif self.nim.isCompatible("DVB-S"):
+				if self.nimConfig.configMode.value in ("nothing", "enable"):
+					self.nimConfig.configMode.value = "advanced"
+			else:
+				self.nimConfig.configMode.value = "enable"
 
 		self.configModeDVBS = getConfigListEntry(_("Configure DVB-S"), self.nimConfig.configModeDVBS, _("Select 'Yes' when you want to configure this tuner for DVB-S"))
 		self.configModeDVBC = getConfigListEntry(_("Configure DVB-C"), self.nimConfig.configModeDVBC, _("Select 'Yes' when you want to configure this tuner for DVB-C"))
@@ -154,7 +160,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 				self.list.append(self.configModeDVBS)
 			if self.nim.isMultiType() or self.nim.isHotSwitchable():
 				self.nimConfig.configMode.choices.choices.pop("nothing", None)
-			if not self.nim.isMultiType() and (not self.nim.isHotSwitchable() or self.nimConfig.configModeDVBS.value):
+			if (not self.nim.isMultiType() or self.nimConfig.configMode.value != "nothing") and (not self.nim.isHotSwitchable() or self.nimConfig.configModeDVBS.value):
 				self.list.append(self.configMode)
 			else:
 				self.nimConfig.configMode.default = self.nimConfig.configMode.value = "nothing"
