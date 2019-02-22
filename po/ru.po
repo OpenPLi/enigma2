@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-15 19:45+0100\n"
+"POT-Creation-Date: 2019-02-22 14:27+0330\n"
 "PO-Revision-Date: 2019-02-05 10:33+0200\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: openPLi Dimitrij\n"
@@ -1865,6 +1865,21 @@ msgstr "Режим конфигурации: %s"
 
 msgid "Configuration..."
 msgstr "Конфигурация..."
+
+msgid "Configure DVB-ATSC"
+msgstr ""
+
+#, fuzzy
+msgid "Configure DVB-C"
+msgstr "Настройки"
+
+#, fuzzy
+msgid "Configure DVB-S"
+msgstr "Настройки"
+
+#, fuzzy
+msgid "Configure DVB-T"
+msgstr "Настройки"
 
 msgid "Configure an additional delay to improve external subtitle synchronisation."
 msgstr "Настройка дополнительной задержки для улучшения синхронизации внешних субтитров."
@@ -4064,6 +4079,14 @@ msgstr "Настройки горячих кнопок"
 msgid "Hotkey zap"
 msgstr "Переключение горячих кнопок"
 
+#, fuzzy
+msgid "Hotswitchable"
+msgstr "непроверяема"
+
+#, fuzzy
+msgid "Hotswitchable tuner"
+msgstr "Переключаемые типы тюнеров:"
+
 msgid "How many minutes do you want add to the recording?"
 msgstr "Сколько минут Вы хотите добавить к записи?"
 
@@ -4367,6 +4390,10 @@ msgid "Invalid directory selected: %s"
 msgstr "Выбран неправильный каталог: %s"
 
 msgid "Invalid location"
+msgstr "Неправильное расположение"
+
+#, fuzzy
+msgid "Invalid reason"
 msgstr "Неправильное расположение"
 
 msgid "Invalid transponder data"
@@ -6962,6 +6989,18 @@ msgstr "Выберите 'A' или 'B', если Ваша система тре
 msgid "Select 'FBC SCR' if this tuner will connect to a SCR (Unicable/JESS) device. For all other setups select 'FBC automatic'."
 msgstr "Выберите 'FBC SCR' ,если Ваш тюнер испрользует устройство SCR (Unicable/JESS). В остальных случаях используйте 'FBC автоматически'."
 
+msgid "Select 'Yes' when you want to configure this tuner for DVB-ATSC"
+msgstr ""
+
+msgid "Select 'Yes' when you want to configure this tuner for DVB-C"
+msgstr ""
+
+msgid "Select 'Yes' when you want to configure this tuner for DVB-S"
+msgstr ""
+
+msgid "Select 'Yes' when you want to configure this tuner for DVB-T"
+msgstr ""
+
 msgid "Select 'band' if using a 'universal' LNB, otherwise consult your LNB spec sheet."
 msgstr "Выберите 'диапазон' при использовании универсального LNB, иначе обратитесь к спецификации LNB."
 
@@ -8327,7 +8366,8 @@ msgstr "Перейти на предыдущий суб сервис"
 msgid "Switch to radio mode"
 msgstr "Перейти к режиму радио"
 
-msgid "Switchable tuner types:"
+#, fuzzy
+msgid "Switchable tuner types"
 msgstr "Переключаемые типы тюнеров:"
 
 msgid "Switzerland"
@@ -8633,8 +8673,8 @@ msgstr ""
 "Для простых пользователей это не важно.\n"
 "Без паники, если здесь будет отображаться любая подозрительная информация!"
 
-msgid "This is a multitype tuner. Available options depend on the hardware. Cable and terrestrial cannot be configured at the same time. If you want to use as cable + satellite or terrestrial + satellite, configure cable/terrestrial first and then save. Re-open and configure again as satellite."
-msgstr "Это мульти тюнер. Доступные опции зависят от аппаратного обеспечения. Одновременно невозможно настроить кабельное и наземное соединение. Если вы хотите использовать кабельное + спутниковое или наземное + спутник, сначала сконфигурируйте кабельную / наземную сеть, а затем сохраните. Повторно откройте и настройте снова как спутник."
+msgid "This is a multitype tuner. Available options depend on the hardware."
+msgstr ""
 
 msgid "This is the order in which DiSEqC commands are sent to the aerial system. The order must correspond exactly with the order the physical devices are arranged along the signal cable (starting from the receiver end)."
 msgstr "Это порядок, в котором команды DiSEqC отправляются системе. Порядок должен точно соответствовать порядку расположения физических устройств по кабелю (начиная от ресивера)."
@@ -10630,9 +10670,6 @@ msgstr "развлечения (6-14 лет)"
 msgid "epg cache backup"
 msgstr "бэкап кеша EPG"
 
-msgid "equal to"
-msgstr "так же как"
-
 msgid "equestrian"
 msgstr "конный спорт"
 
@@ -10845,9 +10882,6 @@ msgstr "захвачено"
 
 msgid "long"
 msgstr "длинная"
-
-msgid "loopthrough to"
-msgstr "петлевой вход к"
 
 msgid "magazines/reports/documentary"
 msgstr "журналы/репортажы/документальный"
@@ -11151,9 +11185,6 @@ msgstr "состояние поиска"
 
 msgid "science fiction/fantasy/horror"
 msgstr "научная фантастика/фэнтези/ужасы"
-
-msgid "second cable of motorized LNB"
-msgstr "второй кабель от LNB на моторе"
 
 msgid "seconds"
 msgstr "секунд"

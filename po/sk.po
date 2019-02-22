@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-15 19:45+0100\n"
+"POT-Creation-Date: 2019-02-22 14:27+0330\n"
 "PO-Revision-Date: 2019-02-06 13:41+0100\n"
 "Last-Translator: Andrej Tobola <andrej.tobola@gmail.com>\n"
 "Language-Team: \n"
@@ -1866,6 +1866,21 @@ msgstr "Možnosti nastavenia: %s"
 
 msgid "Configuration..."
 msgstr "Konfigurácia..."
+
+msgid "Configure DVB-ATSC"
+msgstr ""
+
+#, fuzzy
+msgid "Configure DVB-C"
+msgstr "Konfigurujem"
+
+#, fuzzy
+msgid "Configure DVB-S"
+msgstr "Konfigurujem"
+
+#, fuzzy
+msgid "Configure DVB-T"
+msgstr "Konfigurujem"
 
 msgid "Configure an additional delay to improve external subtitle synchronisation."
 msgstr "Nakonfigurovať ďalšie oneskorenie na zlepšenie synchronizácie externých titulkov."
@@ -4065,6 +4080,14 @@ msgstr "Nastavenie klávesových skratiek"
 msgid "Hotkey zap"
 msgstr "Prepnutie klávesovou skratkou"
 
+#, fuzzy
+msgid "Hotswitchable"
+msgstr "neskúšateľné"
+
+#, fuzzy
+msgid "Hotswitchable tuner"
+msgstr "Prepínateľné typy tunerov:"
+
 msgid "How many minutes do you want add to the recording?"
 msgstr "Koľko minút chcete pridať k nahrávke?"
 
@@ -4366,6 +4389,10 @@ msgid "Invalid directory selected: %s"
 msgstr "Zvolený neplatný adresár: %s"
 
 msgid "Invalid location"
+msgstr "Neplatné umiestnenie"
+
+#, fuzzy
+msgid "Invalid reason"
 msgstr "Neplatné umiestnenie"
 
 msgid "Invalid transponder data"
@@ -6957,6 +6984,18 @@ msgstr "Vyberte 'A' alebo 'B' ak to váš anténny systém vyžaduje, inak zvolt
 msgid "Select 'FBC SCR' if this tuner will connect to a SCR (Unicable/JESS) device. For all other setups select 'FBC automatic'."
 msgstr "Vyberte 'FBC SCR' ak sa tento tuner pripojí na SCR (Unicable/JESS) zariadenie. Pre všetky ostatné nastavenia vyberte 'Automatický FBC'."
 
+msgid "Select 'Yes' when you want to configure this tuner for DVB-ATSC"
+msgstr ""
+
+msgid "Select 'Yes' when you want to configure this tuner for DVB-C"
+msgstr ""
+
+msgid "Select 'Yes' when you want to configure this tuner for DVB-S"
+msgstr ""
+
+msgid "Select 'Yes' when you want to configure this tuner for DVB-T"
+msgstr ""
+
 msgid "Select 'band' if using a 'universal' LNB, otherwise consult your LNB spec sheet."
 msgstr "Vyberte 'Pásmo' ak sa používa 'Univerzálne LNB', v opačnom prípade si preštudujte špecifikáciu LNB."
 
@@ -8323,7 +8362,8 @@ msgstr "Prepnúť na predchádzajúci podkanál"
 msgid "Switch to radio mode"
 msgstr "Prepnúť na mód rádia"
 
-msgid "Switchable tuner types:"
+#, fuzzy
+msgid "Switchable tuner types"
 msgstr "Prepínateľné typy tunerov:"
 
 msgid "Switzerland"
@@ -8634,8 +8674,8 @@ msgstr ""
 "Pre bežných užívateľov nie je dôležitá.\n"
 "Neprepadajte panike prosím ak sa Vám zdá, že zobrazované hodnoty vyzerajú podozrivo!"
 
-msgid "This is a multitype tuner. Available options depend on the hardware. Cable and terrestrial cannot be configured at the same time. If you want to use as cable + satellite or terrestrial + satellite, configure cable/terrestrial first and then save. Re-open and configure again as satellite."
-msgstr "Toto je viactypový tuner. Dostupné možnosti závisia na hardvéri. Káblový a terestriálny nemôžu byť konfigurované v rovnakom čase. Ak ho chcete použiť ako káblový + satelitný, alebo terestriálny + satelitný, najprv nakonfigurujte káblový/terestriálny a uložte. Znovuotvorte a nakonfigurujte opäť ako satelitný."
+msgid "This is a multitype tuner. Available options depend on the hardware."
+msgstr ""
 
 msgid "This is the order in which DiSEqC commands are sent to the aerial system. The order must correspond exactly with the order the physical devices are arranged along the signal cable (starting from the receiver end)."
 msgstr "Toto je poradie, v ktorom sú DiSEqC príkazy posielané do anténneho systému. Poradie musí presne korešpondovať s poradím, v akom sú fyzické zariadenia zoskupené so signálnym káblom (začínajúcim od koncu prijímača)."
@@ -10630,9 +10670,6 @@ msgstr "zábavný (6 až 14 rokov)"
 msgid "epg cache backup"
 msgstr "záloha pamäte epg"
 
-msgid "equal to"
-msgstr "rovná sa"
-
 msgid "equestrian"
 msgstr "jazdectvo"
 
@@ -10845,9 +10882,6 @@ msgstr "zachytený"
 
 msgid "long"
 msgstr "dlhý"
-
-msgid "loopthrough to"
-msgstr "prepojiť s"
 
 msgid "magazines/reports/documentary"
 msgstr "časopisy/správy/dokumentárne"
@@ -11151,9 +11185,6 @@ msgstr "stav vyhľadávania"
 
 msgid "science fiction/fantasy/horror"
 msgstr "sci-fi/fantasy/horor"
-
-msgid "second cable of motorized LNB"
-msgstr "druhý kábel motorizovaného LNB"
 
 msgid "seconds"
 msgstr "sekúnd"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Openpli\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-15 19:45+0100\n"
+"POT-Creation-Date: 2019-02-22 14:27+0330\n"
 "PO-Revision-Date: 2018-09-05 01:25+0300\n"
 "Last-Translator: \n"
 "Language-Team: Raivo, Henkka, eesatfan, rimas, zeros\\n faas, sateks, valgekotkas, tigekala, rootsikunn\\n kain, i70, mustkass, pelmeen, Scott\\n <digi-tv.ee>\n"
@@ -1857,6 +1857,21 @@ msgstr "Häälestamine: %s"
 
 msgid "Configuration..."
 msgstr "Seadistamine..."
+
+msgid "Configure DVB-ATSC"
+msgstr ""
+
+#, fuzzy
+msgid "Configure DVB-C"
+msgstr "Seadistatakse"
+
+#, fuzzy
+msgid "Configure DVB-S"
+msgstr "Seadistatakse"
+
+#, fuzzy
+msgid "Configure DVB-T"
+msgstr "Seadistatakse"
 
 msgid "Configure an additional delay to improve external subtitle synchronisation."
 msgstr "Määra lisaviide väliste subtiitrite ajastamise parendamiseks. "
@@ -4064,6 +4079,14 @@ msgstr "Puldi nuppude seadistus"
 msgid "Hotkey zap"
 msgstr "Kiirnupu vahetus"
 
+#, fuzzy
+msgid "Hotswitchable"
+msgstr "ebastabiilne"
+
+#, fuzzy
+msgid "Hotswitchable tuner"
+msgstr "Vahetatavate tuunerite tüübid:"
+
 msgid "How many minutes do you want add to the recording?"
 msgstr "Mitu minutit soovid salvestusele lisada?"
 
@@ -4365,6 +4388,10 @@ msgid "Invalid directory selected: %s"
 msgstr "Valisid mittetöötava kausta: %s"
 
 msgid "Invalid location"
+msgstr "Kehtetu asukoht"
+
+#, fuzzy
+msgid "Invalid reason"
 msgstr "Kehtetu asukoht"
 
 msgid "Invalid transponder data"
@@ -6964,6 +6991,18 @@ msgstr "Vali 'A' või 'B', kui antennisüsteem seda nõuab, muudel juhtudel vali
 msgid "Select 'FBC SCR' if this tuner will connect to a SCR (Unicable/JESS) device. For all other setups select 'FBC automatic'."
 msgstr "Vali 'Unicable', kui see tuuner kasutab unicable seadet. Kõigil ülejäänud juhtudel vali 'FBC automaatne'."
 
+msgid "Select 'Yes' when you want to configure this tuner for DVB-ATSC"
+msgstr ""
+
+msgid "Select 'Yes' when you want to configure this tuner for DVB-C"
+msgstr ""
+
+msgid "Select 'Yes' when you want to configure this tuner for DVB-S"
+msgstr ""
+
+msgid "Select 'Yes' when you want to configure this tuner for DVB-T"
+msgstr ""
+
 msgid "Select 'band' if using a 'universal' LNB, otherwise consult your LNB spec sheet."
 msgstr "Universaalse LNB puhul vali 'sagedusala', muudel juhtudel vaata LNB käsiraamatust."
 
@@ -8342,7 +8381,8 @@ msgstr "Eelmine alamkanal"
 msgid "Switch to radio mode"
 msgstr "Lülita raadio peale"
 
-msgid "Switchable tuner types:"
+#, fuzzy
+msgid "Switchable tuner types"
 msgstr "Vahetatavate tuunerite tüübid:"
 
 msgid "Switzerland"
@@ -8658,8 +8698,8 @@ msgstr ""
 "Tavakasutajatele pole see oluline.\n"
 "Ära muretse kui näed väärtusi, mis tunduvad imelikena!"
 
-msgid "This is a multitype tuner. Available options depend on the hardware. Cable and terrestrial cannot be configured at the same time. If you want to use as cable + satellite or terrestrial + satellite, configure cable/terrestrial first and then save. Re-open and configure again as satellite."
-msgstr "See on mitmetüübiline tuuner. Võimalikud valikud sõltuvad vastuvõtjast. Kaabel ja maapealne ei saa olla kasutuses korraga. Kui tahad vastuvõtjat kasutada 'kaabel + satelliit' või 'maapealne + satelliit', seadista esmalt kaabel/maapealne ja salvesta. Ava uuesti ja seadista satelliit."
+msgid "This is a multitype tuner. Available options depend on the hardware."
+msgstr ""
 
 msgid "This is the order in which DiSEqC commands are sent to the aerial system. The order must correspond exactly with the order the physical devices are arranged along the signal cable (starting from the receiver end)."
 msgstr "Selles järjekorras saadetakse DiSEqC käsud antennisüsteemile. See järjekord peab vastama täpselt järjekorrale, millega füüsilised seadmed on antennikaabli abil ühendatud (alates vastuvõtjast)."
@@ -10682,9 +10722,6 @@ msgstr "meelelahutus (6-14 aastastele)"
 msgid "epg cache backup"
 msgstr "epg vahemälu varukoopia"
 
-msgid "equal to"
-msgstr "on võrdne"
-
 msgid "equestrian"
 msgstr "ratsutamine"
 
@@ -10900,9 +10937,6 @@ msgstr "lukustatud"
 
 msgid "long"
 msgstr "pikalt"
-
-msgid "loopthrough to"
-msgstr "läbiviik kuni"
 
 msgid "magazines/reports/documentary"
 msgstr "ajakirjad/raportid/dokumentaalid"
@@ -11206,9 +11240,6 @@ msgstr "otsingu seis"
 
 msgid "science fiction/fantasy/horror"
 msgstr "ulme/fantaasia/õudus"
-
-msgid "second cable of motorized LNB"
-msgstr "Mootoriga antenni LNB teine kaabel"
 
 msgid "seconds"
 msgstr "sekundit"

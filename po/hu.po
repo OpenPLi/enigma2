@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-15 19:45+0100\n"
+"POT-Creation-Date: 2019-02-22 14:27+0330\n"
 "PO-Revision-Date: 2019-02-19 12:41+0100\n"
 "Last-Translator: mcfly82\n"
 "Language-Team: mcfly82 & wysless\n"
@@ -1854,6 +1854,21 @@ msgstr "Konfigurációs mód: %s"
 
 msgid "Configuration..."
 msgstr "Beállítások..."
+
+msgid "Configure DVB-ATSC"
+msgstr ""
+
+#, fuzzy
+msgid "Configure DVB-C"
+msgstr "Konfigurálás"
+
+#, fuzzy
+msgid "Configure DVB-S"
+msgstr "Konfigurálás"
+
+#, fuzzy
+msgid "Configure DVB-T"
+msgstr "Konfigurálás"
 
 msgid "Configure an additional delay to improve external subtitle synchronisation."
 msgstr "Extra késleltetés beállítása külső feliratfájl esetén, szinkronizáció hibák korrigálásához."
@@ -4046,6 +4061,14 @@ msgstr "Hotkey beállítás"
 msgid "Hotkey zap"
 msgstr "Hotkey csatornaváltás"
 
+#, fuzzy
+msgid "Hotswitchable"
+msgstr "nem tesztelhető"
+
+#, fuzzy
+msgid "Hotswitchable tuner"
+msgstr "Cserélhető tuner típusok:"
+
 msgid "How many minutes do you want add to the recording?"
 msgstr "Hány percet szeretne felvenni?"
 
@@ -4350,6 +4373,10 @@ msgid "Invalid directory selected: %s"
 msgstr "A kiválasztott mappa érvénytelen: %s"
 
 msgid "Invalid location"
+msgstr "Érvénytelen hely"
+
+#, fuzzy
+msgid "Invalid reason"
 msgstr "Érvénytelen hely"
 
 msgid "Invalid transponder data"
@@ -6939,6 +6966,18 @@ msgstr "Válassza az 'A'-t vagy 'B'-t, amennyiben a földfelszíni rendszere meg
 msgid "Select 'FBC SCR' if this tuner will connect to a SCR (Unicable/JESS) device. For all other setups select 'FBC automatic'."
 msgstr "Válassza az 'Unicable'-t, ha az ön tunere Unicable eszközhöz csatlakozik. Minden egyéb összeállítás esetén válassza az 'FCB automata'-t."
 
+msgid "Select 'Yes' when you want to configure this tuner for DVB-ATSC"
+msgstr ""
+
+msgid "Select 'Yes' when you want to configure this tuner for DVB-C"
+msgstr ""
+
+msgid "Select 'Yes' when you want to configure this tuner for DVB-S"
+msgstr ""
+
+msgid "Select 'Yes' when you want to configure this tuner for DVB-T"
+msgstr ""
+
 msgid "Select 'band' if using a 'universal' LNB, otherwise consult your LNB spec sheet."
 msgstr "Válassza a 'sáv'-ot, amennyiben univerzális fejet használ, egyéb esetekben nézze meg a fej technikai adatlapját."
 
@@ -8306,7 +8345,8 @@ msgstr "Ugrás az előző alcsatornára"
 msgid "Switch to radio mode"
 msgstr "Váltás rádió módba"
 
-msgid "Switchable tuner types:"
+#, fuzzy
+msgid "Switchable tuner types"
 msgstr "Cserélhető tuner típusok:"
 
 msgid "Switzerland"
@@ -8620,8 +8660,8 @@ msgstr ""
 "Átlagos felhasználóknak ez nem lényeges.\n"
 "Ne aggódjon, ha valamilyen érték ön szerint nem megfelelő!"
 
-msgid "This is a multitype tuner. Available options depend on the hardware. Cable and terrestrial cannot be configured at the same time. If you want to use as cable + satellite or terrestrial + satellite, configure cable/terrestrial first and then save. Re-open and configure again as satellite."
-msgstr "Ez egy vegyes (kombinált) tuner. A beállítási lehetőségek hardverfüggőek. A kábeles és a földfelszíni vétel nem lehetséges egyszerre. Amennyiben kábeles + műholdasként, vagy földfelszíni + műholdasként szeretné használni, előbb állítsa be a kábel/földfelszíni vételt, és mentse, majd újra belépve állítsa be a műholdas vételt."
+msgid "This is a multitype tuner. Available options depend on the hardware."
+msgstr ""
 
 msgid "This is the order in which DiSEqC commands are sent to the aerial system. The order must correspond exactly with the order the physical devices are arranged along the signal cable (starting from the receiver end)."
 msgstr "Ez a földfelszíni rendszerre küldött DiSEqC parancsok sorrendje. A sorrendnek teljesen meg kell egyeznie a jelkábelen található fizikai eszközök sorrendjével (a vevőkészüléktől indulva)."
@@ -10616,9 +10656,6 @@ msgstr "szórakoztató (6-14 éves korosztály"
 msgid "epg cache backup"
 msgstr "EPG cache biztonsági mentése"
 
-msgid "equal to"
-msgstr "egyenlő"
-
 msgid "equestrian"
 msgstr "lovaglás"
 
@@ -10831,9 +10868,6 @@ msgstr "hangolva"
 
 msgid "long"
 msgstr "hosszú"
-
-msgid "loopthrough to"
-msgstr "átfűzés ide"
 
 msgid "magazines/reports/documentary"
 msgstr "magazin/riport/dokumentum"
@@ -11137,9 +11171,6 @@ msgstr "keresési állapot"
 
 msgid "science fiction/fantasy/horror"
 msgstr "sci-fi/fantasy/horror"
-
-msgid "second cable of motorized LNB"
-msgstr "forgatómotoros fej második kábele"
 
 msgid "seconds"
 msgstr "másodperc"
