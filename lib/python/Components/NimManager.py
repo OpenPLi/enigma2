@@ -1347,7 +1347,7 @@ def InitNimManager(nimmgr, update_slots = []):
 			tmp = ConfigSelection(lnb_choices, lnb_choices_default)
 			tmp.slot_id = x
 			tmp.lnb_id = lnb
-			tmp.addNotifier(configLOFChanged, initial_call = False)
+			tmp.addNotifier(configLOFChanged, initial_call=False)
 			section.lof = tmp
 
 	def scpcSearchRangeChanged(configElement):
@@ -1422,7 +1422,7 @@ def InitNimManager(nimmgr, update_slots = []):
 			tmp.rotorposition = ConfigInteger(default=1, limits=(1, 255))
 			lnb = ConfigSelection(advanced_lnb_choices, "0")
 			lnb.slot_id = slot_id
-			lnb.addNotifier(configLNBChanged, initial_call = False)
+			lnb.addNotifier(configLNBChanged, initial_call=False)
 			tmp.lnb = lnb
 			nim.advanced.sat[x[0]] = tmp
 		for x in range(3601, 3607):
@@ -1432,10 +1432,10 @@ def InitNimManager(nimmgr, update_slots = []):
 			tmp.usals = ConfigYesNo(default=True)
 			tmp.userSatellitesList = ConfigText('[]')
 			tmp.rotorposition = ConfigInteger(default=1, limits=(1, 255))
-			lnbnum = 65+x-3601
+			lnbnum = 65 + x - 3601
 			lnb = ConfigSelection([("0", _("not configured")), (str(lnbnum), "LNB %d"%(lnbnum))], "0")
 			lnb.slot_id = slot_id
-			lnb.addNotifier(configLNBChanged, initial_call = False)
+			lnb.addNotifier(configLNBChanged, initial_call=False)
 			tmp.lnb = lnb
 			nim.advanced.sat[x] = tmp
 
