@@ -4,6 +4,7 @@ import os
 from xml.etree.ElementTree import ElementTree, Element
 
 root = Element("index")
+encoding = ("unicode" if sys.version_info[0] >= 3 else "utf-8")
 
 for file in sys.argv[1:]:
 	p = ElementTree()
@@ -50,4 +51,4 @@ def indent(elem, level=0):
 
 indent(root)
 
-ElementTree(root).write(sys.stdout)
+ElementTree(root).write(sys.stdout, encoding=encoding)
