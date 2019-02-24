@@ -4,21 +4,6 @@ prefix=@prefix@
 exec_prefix=@exec_prefix@
 datarootdir=@datarootdir@
 
-if [ -x @bindir@/showiframe ]; then
-	if [ -f @sysconfdir@/enigma2/backdrop.mvi ]; then
-		@bindir@/showiframe @sysconfdir@/enigma2/backdrop.mvi
-	elif [ -f @sysconfdir@/enigma2/bootlogo.mvi ]; then
-		@bindir@/showiframe @sysconfdir@/enigma2/bootlogo.mvi
-	elif [ -f @datadir@/bootlogo.mvi ]; then
-		@bindir@/showiframe @datadir@/bootlogo.mvi
-	fi
-fi
-
-# hook to execute scripts always before enigma2 start
-if [ -x @bindir@/enigma2_pre_start.sh ]; then
-	@bindir@/enigma2_pre_start.sh
-fi
-
 if [ -d /home/root ]; then
 	export HOME=/home/root
 	cd
@@ -35,6 +20,21 @@ LIBS=@libdir@/libopen.so.0.0.0
 
 # enigma main loop
 while : ; do
+	# show bootlogo on enigma2 start
+	if [ -x @bindir@/showiframe ]; then
+		if [ -f @sysconfdir@/enigma2/backdrop.mvi ]; then
+			@bindir@/showiframe @sysconfdir@/enigma2/backdrop.mvi
+		elif [ -f @sysconfdir@/enigma2/bootlogo.mvi ]; then
+			@bindir@/showiframe @sysconfdir@/enigma2/bootlogo.mvi
+		elif [ -f @datadir@/bootlogo.mvi ]; then
+			@bindir@/showiframe @datadir@/bootlogo.mvi
+		fi
+	fi
+
+	# hook to execute scripts always before enigma2 start
+	if [ -x @bindir@/enigma2_pre_start.sh ]; then
+		@bindir@/enigma2_pre_start.sh
+	fi
 
 	# start enigma
 	sync
