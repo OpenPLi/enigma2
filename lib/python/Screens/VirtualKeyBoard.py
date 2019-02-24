@@ -35,7 +35,7 @@ class VirtualKeyBoardEntryComponent:
 # For more information about using VirtualKeyBoard see /doc/VIRTUALKEYBOARD
 #
 class VirtualKeyBoard(Screen, HelpableScreen):
-	def __init__(self, session, title=_("Virtual KeyBoard Text:"), text="", maxSize=False, visible_width=False, type=Input.TEXT, currPos=0, allMarked=False):
+	def __init__(self, session, title=_("Virtual KeyBoard Text:"), text="", maxSize=False, visible_width=False, type=Input.TEXT, currPos=0, allMarked=False, keyGreen=_("Enter")):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 		self.setTitle(_("Virtual keyboard"))
@@ -407,7 +407,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		self["language"] = Label(_("Language") + ": " + self.lang)
 		self["key_info"] = StaticText(_("INFO"))
 		self["key_red"] = StaticText(_("Exit"))
-		self["key_green"] = StaticText(_("Enter"))
+		self["key_green"] = StaticText(keyGreen)
 		self["key_yellow"] = StaticText(_("Select locale"))
 		self["key_blue"] = StaticText(self.shiftMsgs[1])
 		self["key_help"] = StaticText(_("HELP"))
