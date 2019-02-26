@@ -152,7 +152,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 		self.configModeDVBS = getConfigListEntry(_("Configure DVB-S"), self.nimConfig.configModeDVBS, _("Select 'Yes' when you want to configure this tuner for DVB-S"))
 		self.configModeDVBC = getConfigListEntry(_("Configure DVB-C"), self.nimConfig.configModeDVBC, _("Select 'Yes' when you want to configure this tuner for DVB-C"))
 		self.configModeDVBT = getConfigListEntry(_("Configure DVB-T"), self.nimConfig.configModeDVBT, _("Select 'Yes' when you want to configure this tuner for DVB-T"))
-		self.configModeDVBATSC = getConfigListEntry(_("Configure DVB-ATSC"), self.nimConfig.configModeDVBATSC, _("Select 'Yes' when you want to configure this tuner for DVB-ATSC"))
+		self.configModeATSC = getConfigListEntry(_("Configure ATSC"), self.nimConfig.configModeATSC, _("Select 'Yes' when you want to configure this tuner for ATSC"))
 
 		if self.nim.isCompatible("DVB-S"):
 			self.configMode = getConfigListEntry(self.indent % _("Configuration mode"), self.nimConfig.configMode, _("Select 'FBC SCR' if this tuner will connect to a SCR (Unicable/JESS) device. For all other setups select 'FBC automatic'.") if self.nim.isFBCLink() else _("Configure this tuner using simple or advanced options, or loop it through to another tuner, or copy a configuration from another tuner, or disable it."))
@@ -320,10 +320,10 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 		if self.nim.isCompatible("ATSC") or (self.nim.isHotSwitchable() and self.nim.canBeCompatible("ATSC")):
 			self.configMode = self.configMode or getConfigListEntry(self.indent % _("Configuration mode"), self.nimConfig.configMode, _("Select 'enabled' if this tuner has a signal cable connected, otherwise select 'nothing connected'."))
 			if self.nim.isHotSwitchable():
-				self.list.append(self.configModeDVBATSC)
+				self.list.append(self.configModeATSC)
 			elif not self.nim.isMultiType():
 				self.list.append(self.configMode)
-			if self.nimConfig.configModeDVBATSC.value if self.nim.isHotSwitchable() else self.nimConfig.configMode.value != "nothing":
+			if self.nimConfig.configModeATSC.value if self.nim.isHotSwitchable() else self.nimConfig.configMode.value != "nothing":
 				self.list.append(getConfigListEntry(self.indent % _("ATSC provider"), self.nimConfig.atsc, _("Select your ATSC provider.")))
 
 		if self.nimConfig.configMode.value != "nothing" and config.usage.setup_level.index > 1:
@@ -341,7 +341,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 			InitNimManager(nimmanager, update_slots)
 			self.nim = nimmanager.nim_slots[self.slotid]
 			self.nimConfig = self.nim.config
-		if self["config"].getCurrent() in (self.configMode, self.configModeDVBS, self.configModeDVBC, self.configModeDVBT, self.configModeDVBATSC, self.diseqcModeEntry, self.advancedSatsEntry, self.advancedLnbsEntry, self.advancedDiseqcMode, self.advancedUsalsEntry,\
+		if self["config"].getCurrent() in (self.configMode, self.configModeDVBS, self.configModeDVBC, self.configModeDVBT, self.configModeATSC, self.diseqcModeEntry, self.advancedSatsEntry, self.advancedLnbsEntry, self.advancedDiseqcMode, self.advancedUsalsEntry,\
 			self.advancedLof, self.advancedPowerMeasurement, self.turningSpeed, self.advancedType, self.advancedSCR, self.advancedPosition, self.advancedFormat, self.advancedManufacturer,\
 			self.advancedUnicable, self.advancedConnected, self.toneburst, self.committedDiseqcCommand, self.uncommittedDiseqcCommand, self.singleSatEntry,	self.commandOrder,\
 			self.showAdditionalMotorOptions, self.cableScanType, self.multiType, self.cableConfigScanDetails, self.terrestrialCountriesEntry, self.cableCountriesEntry, \

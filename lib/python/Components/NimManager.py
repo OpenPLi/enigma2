@@ -1537,7 +1537,7 @@ def InitNimManager(nimmgr, update_slots = []):
 
 	def tunerConfigChanged(nim, configElement=None):
 		if slot.isHotSwitchable():
-			if nim.configModeDVBS.value or nim.configModeDVBC.value or nim.configModeDVBT.value or nim.configModeDVBATSC.value:
+			if nim.configModeDVBS.value or nim.configModeDVBC.value or nim.configModeDVBT.value or nim.configModeATSC.value:
 				if nim.configMode.value == "nothing":
 					nim.configMode.cancel()
 					if nim.configMode.value == "nothing":
@@ -1575,11 +1575,11 @@ def InitNimManager(nimmgr, update_slots = []):
 		nim.configModeDVBS = ConfigYesNo(default=True)
 		nim.configModeDVBC = ConfigYesNo()
 		nim.configModeDVBT = ConfigYesNo()
-		nim.configModeDVBATSC = ConfigYesNo()
+		nim.configModeATSC = ConfigYesNo()
 		nim.configModeDVBT.addNotifier(boundFunction(tunerConfigChanged, nim), initial_call=False)
 		nim.configModeDVBC.addNotifier(boundFunction(tunerConfigChanged, nim), initial_call=False)
 		nim.configModeDVBS.addNotifier(boundFunction(tunerConfigChanged, nim), initial_call=False)
-		nim.configModeDVBATSC.addNotifier(boundFunction(tunerConfigChanged, nim), initial_call=False)
+		nim.configModeATSC.addNotifier(boundFunction(tunerConfigChanged, nim), initial_call=False)
 		tunerConfigChanged(nim)
 
 		if slot.canBeCompatible("DVB-S"):
