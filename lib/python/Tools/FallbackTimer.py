@@ -148,7 +148,7 @@ class FallbackTimerDirs(FallbackTimerList):
 	def getFallbackTimerList(self):
 		if self.url:
 			try:
-				self.getUrl("web/getlocations").addCallback(self.getlocations).addErrback(self.fallback)
+				self.getUrl("web/getlocations").addCallback(self.getlocations).addErrback(self.fallbackFunction)
 			except:
 				self.fallbackFunction()
 		else:
@@ -157,7 +157,7 @@ class FallbackTimerDirs(FallbackTimerList):
 	def getlocations(self, data):
 		self.locations = [c.text for c in xml.etree.ElementTree.fromstring(data)]
 		try:
-			self.getUrl("web/getcurrlocation").addCallback(self.getcurrlocation).addErrback(self.fallback)
+			self.getUrl("web/getcurrlocation").addCallback(self.getcurrlocation).addErrback(self.fallbackFunction)
 		except:
 			self.fallbackFunction()
 
