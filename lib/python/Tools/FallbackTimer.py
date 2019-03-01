@@ -98,7 +98,7 @@ class FallbackTimerList():
 			timer.justplay,
 			timer.afterEvent,
 			timer.repeated,
-			None,
+			timer.dirname,
 			timer.eit or 0,
 		)
 		self.getUrl(url).addCallback(self.getUrlFallback).addErrback(self.fallback)	
@@ -119,7 +119,7 @@ class FallbackTimerList():
 			timer.service_ref_prev,
 			timer.begin_prev,
 			timer.end_prev,
-			None,
+			timer.dirname,
 			timer.eit or 0,
 		)
 		self.getUrl(url).addCallback(self.getUrlFallback).addErrback(self.fallback)
