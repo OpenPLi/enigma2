@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import division
 #
 # create links for picon
 #   usage: create_picon_providers lamedb
@@ -30,7 +31,7 @@ while len(f) > 2:
 	else:
 		servicetype = 'unknown'
 
-	sat = str(ref[1]/16/16/16/16)
+	sat = str(ref[1]//16//16//16//16)
 
 #	SID:NS:TSID:ONID:STYPE:UNUSED(channelnumber in enigma1)
 #	X   X  X    X    D     D
