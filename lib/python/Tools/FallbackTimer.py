@@ -143,6 +143,32 @@ class FallbackTimerList():
 	def fallbackNOK(self, answer=None):
 		self.fallbackFunctionNOK()
 
+class FallbackTimerDirs(FallbackTimerList):
+
+	def getFallbackTimerList(self):
+		if self.url:
+			try:
+				self.getUrl("web/getlocations").addCallback(self.getlocations).addErrback(self.fallback)
+			except:
+				self.fallbackFunction()
+		else:
+			self.fallbackFunction()
+
+	def getlocations(self, data):
+		self.locations = [c.text for c in xml.etree.ElementTree.fromstring(data)]
+		try:
+			self.getUrl("web/getcurrlocation").addCallback(self.getcurrlocation).addErrback(self.fallback)
+		except:
+			self.fallbackFunction()
+
+	def getcurrlocation(self, data):
+		self.currlocation = [c.text for c in xml.etree.ElementTree.fromstring(data)]
+		if self.currlocation:
+			self.currlocation = self.currlocation[0]
+			self.fallbackFunction(self.currlocation, self.locations)
+		else:
+			self.fallbackFunction()
+
 class FallbackTimerClass(TimerObject):
 	def __init__(self, service_ref = "", name = "", disabled = 0, \
 			timebegin = 0, timeend = 0, duration = 0, startprepare = 0, \
