@@ -142,7 +142,7 @@ ePython::ePython()
 	init_enigma();
 	eBaseInit();
 	eConsoleInit();
-#endif*/
+#endif
 }
 
 ePython::~ePython()
