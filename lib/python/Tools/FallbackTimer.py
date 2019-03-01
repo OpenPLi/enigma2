@@ -162,10 +162,9 @@ class FallbackTimerDirs(FallbackTimerList):
 			self.fallbackFunction()
 
 	def getcurrlocation(self, data):
-		self.currlocation = [c.text for c in xml.etree.ElementTree.fromstring(data)]
-		if self.currlocation:
-			self.currlocation = self.currlocation[0]
-			self.fallbackFunction(self.currlocation, self.locations)
+		currlocation = [c.text for c in xml.etree.ElementTree.fromstring(data)]
+		if currlocation:
+			self.fallbackFunction(currlocation[0], self.locations)
 		else:
 			self.fallbackFunction()
 
