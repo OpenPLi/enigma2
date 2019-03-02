@@ -1600,8 +1600,7 @@ def InitNimManager(nimmgr, update_slots = []):
 		nim.configModeDVBT.addNotifier(boundFunction(hotswitchableConfigChanged, nim, slot, fe_id), initial_call=False)
 		nim.configModeDVBC.addNotifier(boundFunction(hotswitchableConfigChanged, nim, slot, fe_id), initial_call=False)
 		nim.configModeDVBS.addNotifier(boundFunction(hotswitchableConfigChanged, nim, slot, fe_id), initial_call=False)
-		nim.configModeATSC.addNotifier(boundFunction(hotswitchableConfigChanged, nim, slot, fe_id), initial_call=False)
-		hotswitchableConfigChanged(nim, slot, fe_id)
+		nim.configModeATSC.addNotifier(boundFunction(hotswitchableConfigChanged, nim, slot, fe_id))
 
 	nimmgr.sec = SecConfigure(nimmgr)
 
