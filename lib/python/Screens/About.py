@@ -337,7 +337,7 @@ class MemoryInfoSkinParams(GUIComponent):
 					self.rows_in_column = int(value)
 			self.skinAttributes = attribs
 		return GUIComponent.applySkin(self, desktop, screen)
-	
+
 	GUI_WIDGET = eLabel
 
 class Troubleshoot(Screen):
@@ -430,6 +430,10 @@ class Troubleshoot(Screen):
 		self.container = None
 		self.close()
 
+	def getDebugFilesList(self):
+		import glob
+		return [x for x in sorted(glob.glob("/home/root/enigma.*.debuglog"), key=lambda x: os.path.isfile(x) and os.path.getmtime(x))]
+
 	def getLogFilesList(self):
 		import glob
 		home_root = "/home/root/enigma2_crash.log"
@@ -444,7 +448,7 @@ class Troubleshoot(Screen):
 				self.titles.append("%s" % install_log)
 				self.commands.append("cat %s" % install_log)
 		self.numberOfCommands = len(self.commands)
-		fileNames = self.getLogFilesList()
+		fileNames = self.getLogFilesList() + self.getDebugFilesList()
 		if fileNames:
 			totalNumberOfLogfiles = len(fileNames)
 			logfileCounter = 1
