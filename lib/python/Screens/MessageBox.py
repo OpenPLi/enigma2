@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.Label import Label
@@ -122,7 +123,7 @@ class MessageBox(Screen):
 				self.timeoutCallback()
 
 	def timeoutCallback(self):
-		print "Timeout!"
+		print("Timeout!")
 		if self.timeout_default is not None:
 			self.close(self.timeout_default)
 		else:

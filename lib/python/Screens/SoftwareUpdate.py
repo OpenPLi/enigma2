@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
 from Screens.ParentalControlSetup import ProtectedScreen
@@ -88,7 +89,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 				# OpenPli 5.0 uses python 2.7.11 and here we need to bypass the certificate check
 				from ssl import _create_unverified_context
 				status = urlopen(url, timeout=5, context=_create_unverified_context()).read().split('!', 1)
-				print status
+				print(status)
 			if getBoxType() in status[0].split(','):
 				message = len(status) > 1 and status[1] or _("The current image might not be stable.\nFor more information see %s.") % ("www.openpli.org")
 				# strip any HTML that may be in the message, but retain line breaks

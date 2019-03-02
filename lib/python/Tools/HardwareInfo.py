@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Tools.Directories import SCOPE_SKIN, resolveFilename
 
 hw_info = None
@@ -15,7 +16,7 @@ class HardwareInfo:
 			return
 		hw_info = self
 
-		print "[HardwareInfo] Scanning hardware info"
+		print("[HardwareInfo] Scanning hardware info")
 		# Version
 		try:
 			self.device_version = open("/proc/stb/info/version").read().strip()
@@ -67,7 +68,7 @@ class HardwareInfo:
 		# only some early DMM boxes do not have HDMI hardware
 		self.device_hdmi =  self.device_model not in ("dm7025", "dm800", "dm8000")
 
-		print "Detected: " + self.get_device_string()
+		print("Detected: " + self.get_device_string())
 
 	def get_device_name(self):
 		return hw_info.device_name

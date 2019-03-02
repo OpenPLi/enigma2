@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os
 
 def enumFeeds():
@@ -53,9 +54,9 @@ def listsDirPath():
 				if len(line) > 2 and line[1] == ('lists_dir'):
 					return line[2].strip()
 	except Exception, ex:
-		print "[opkg]", ex
+		print("[opkg]", ex)
 	return '/var/lib/opkg/lists'
 
 if __name__ == '__main__':
 	for p in enumPlugins('enigma'):
-		print p
+		print(p)

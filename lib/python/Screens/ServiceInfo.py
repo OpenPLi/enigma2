@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Components.GUIComponent import GUIComponent
 from Screen import Screen
 from Screens.AudioSelection import AudioSelection
@@ -24,7 +25,7 @@ def to_unsigned(x):
 	return x & 0xFFFFFFFF
 
 def ServiceInfoListEntry(a, b="", valueType=TYPE_TEXT, param=4):
-	print "b:", b
+	print("b:", b)
 	if not isinstance(b, str):
 		if valueType == TYPE_VALUE_HEX:
 			b = ("%0" + str(param) + "X") % to_unsigned(b)

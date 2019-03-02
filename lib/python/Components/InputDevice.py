@@ -1,3 +1,4 @@
+from __future__ import print_function
 from config import config, ConfigSlider, ConfigSubsection, ConfigYesNo, ConfigText, ConfigInteger
 from SystemInfo import SystemInfo
 from fcntl import ioctl
@@ -40,7 +41,7 @@ class inputDevices:
 				self.name = self.name[:self.name.find("\0")]
 				os.close(self.fd)
 			except (IOError,OSError), err:
-				print '[iInputDevices] getInputDevices ' + evdev + ' <ERROR: ioctl(EVIOCGNAME): ' + str(err) + ' >'
+				print('[iInputDevices] getInputDevices ' + evdev + ' <ERROR: ioctl(EVIOCGNAME): ' + str(err) + ' >')
 				self.name = None
 
 			if self.name:
@@ -55,7 +56,7 @@ class inputDevices:
 		elif "mouse" in name:
 			return "mouse"
 		else:
-			print "Unknown device type:",name
+			print("Unknown device type:",name)
 			return None
 
 	def getDeviceName(self, x):
@@ -97,7 +98,7 @@ class inputDevices:
 	#}; -> size = 16
 
 	def setDefaults(self, device):
-		print "[iInputDevices] setDefaults for device %s" % device
+		print("[iInputDevices] setDefaults for device %s" % device)
 		self.setDeviceAttribute(device, 'configuredName', None)
 		event_repeat = struct.pack('LLHHi', 0, 0, 0x14, 0x01, 100)
 		event_delay = struct.pack('LLHHi', 0, 0, 0x14, 0x00, 700)
@@ -108,7 +109,7 @@ class inputDevices:
 
 	def setRepeat(self, device, value): #REP_PERIOD
 		if self.getDeviceAttribute(device, 'enabled'):
-			print "[iInputDevices] setRepeat for device %s to %d ms" % (device,value)
+			print("[iInputDevices] setRepeat for device %s to %d ms" % (device,value))
 			event = struct.pack('LLHHi', 0, 0, 0x14, 0x01, int(value))
 			fd = os.open("/dev/input/" + device, os.O_RDWR)
 			os.write(fd, event)
@@ -116,7 +117,7 @@ class inputDevices:
 
 	def setDelay(self, device, value): #REP_DELAY
 		if self.getDeviceAttribute(device, 'enabled'):
-			print "[iInputDevices] setDelay for device %s to %d ms" % (device,value)
+			print("[iInputDevices] setDelay for device %s to %d ms" % (device,value))
 			event = struct.pack('LLHHi', 0, 0, 0x14, 0x00, int(value))
 			fd = os.open("/dev/input/" + device, os.O_RDWR)
 			os.write(fd, event)

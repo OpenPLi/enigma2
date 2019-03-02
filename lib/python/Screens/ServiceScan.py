@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Screen import Screen
 import Screens.InfoBar
 from Components.ServiceScan import ServiceScan as CScan
@@ -33,7 +34,7 @@ class ServiceScanSummary(Screen):
 class ServiceScan(Screen):
 
 	def ok(self):
-		print "ok"
+		print("ok")
 		if self["scan"].isDone():
 			if self.currentInfobar.__class__.__name__ == "InfoBar":
 				selectedService = self["servicelist"].getCurrentSelection()
@@ -109,5 +110,5 @@ class ServiceScan(Screen):
 		self["scan"] = CScan(self["scan_progress"], self["scan_state"], self["servicelist"], self["pass"], self.scanList, self["network"], self["transponder"], self["FrontendInfo"], self.session.summary)
 
 	def createSummary(self):
-		print "ServiceScanCreateSummary"
+		print("ServiceScanCreateSummary")
 		return ServiceScanSummary

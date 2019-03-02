@@ -1,3 +1,4 @@
+from __future__ import print_function
 import struct, os, time
 from config import config, ConfigSelection, ConfigYesNo, ConfigSubsection, ConfigText, ConfigCECAddress, ConfigLocations, ConfigDirectory
 from enigma import eHdmiCEC, eActionMap
@@ -314,11 +315,11 @@ class HdmiCec:
 				self.debugRx(length, cmd, data)
 			if cmd == 0x00:
 				if length == 0: # only polling message ( it's some as ping )
-					print "eHdmiCec: received polling message"
+					print("eHdmiCec: received polling message")
 				else:
 					# feature abort
 					if data[0] == '\x44':
-						print 'eHdmiCec: volume forwarding not supported by device %02x'%(message.getAddress())
+						print('eHdmiCec: volume forwarding not supported by device %02x'%(message.getAddress()))
 						self.volumeForwardingEnabled = False
 			elif cmd == 0x46: # request name
 				self.sendMessage(message.getAddress(), 'osdname')
@@ -328,7 +329,7 @@ class HdmiCec:
 				else:
 					self.volumeForwardingDestination = 0 # off: send volume keys to tv
 				if config.hdmicec.volume_forwarding.value:
-					print 'eHdmiCec: volume forwarding to device %02x enabled'%(self.volumeForwardingDestination)
+					print('eHdmiCec: volume forwarding to device %02x enabled'%(self.volumeForwardingDestination))
 					self.volumeForwardingEnabled = True
 			elif cmd == 0x8f: # request power status
 				if inStandby:
@@ -360,7 +361,7 @@ class HdmiCec:
 			elif cmd == 0x90: # receive powerstatus report
 				if ord(data[0]) == 0: # some box is powered
 					self.useStandby = False
-					print "[HDMI-CEC] powered box found"
+					print("[HDMI-CEC] powered box found")
 			elif cmd == 0x9F: # request get CEC version
 				self.sendMessage(message.getAddress(), 'sendcecversion')
 

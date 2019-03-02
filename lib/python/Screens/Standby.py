@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os
 from time import time, localtime
 
@@ -20,7 +21,7 @@ inStandby = None
 
 class Standby(Screen):
 	def Power(self):
-		print "[Standby] leave standby"
+		print("[Standby] leave standby")
 		self.close(True)
 
 	def setMute(self):
@@ -36,7 +37,7 @@ class Standby(Screen):
 		Screen.__init__(self, session)
 		self.avswitch = AVSwitch()
 
-		print "[Standby] enter standby"
+		print("[Standby] enter standby")
 
 		if os.path.exists("/usr/script/standby_enter.sh"):
 			Console().ePopen("/usr/script/standby_enter.sh")

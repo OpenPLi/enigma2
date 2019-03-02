@@ -1,6 +1,7 @@
 # -*- coding: iso-8859-1 -*-
 # (c) 2006 Stephan Reichholf
 # This Software is Free, use it where you want, when you want for whatever you want and modify it if you want but don't remove my copyright!
+from __future__ import print_function
 from Screens.Screen import Screen
 from Screens.Standby import TryQuitMainloop
 from Screens.MessageBox import MessageBox
@@ -100,7 +101,7 @@ class SkinSelector(Screen):
 			self.skinfile = self["SkinList"].getCurrent()
 		self.skinfile = os.path.join(self.skinfile, SKINXML)
 
-		print "Skinselector: Selected Skin: "+self.root+self.skinfile
+		print("Skinselector: Selected Skin: "+self.root+self.skinfile)
 		restartbox = self.session.openWithCallback(self.restartGUI,MessageBox,_("GUI needs a restart to apply a new skin\nDo you want to restart the GUI now?"), MessageBox.TYPE_YESNO)
 		restartbox.setTitle(_("Restart GUI now?"))
 

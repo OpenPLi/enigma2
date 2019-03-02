@@ -1,3 +1,4 @@
+from __future__ import print_function
 from enigma import eDVBDB, getLinkedSlotID, eDVBResourceManager
 from Screen import Screen
 from Components.SystemInfo import SystemInfo
@@ -187,7 +188,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 				self.list.append(getConfigListEntry(self.indent % _("Tuner"), self.nimConfig.connectedTo, _("Select the tuner that controls the motorised dish.")))
 			elif self.nimConfig.configMode.value == "loopthrough":
 				choices = []
-				print "connectable to:", nimmanager.canConnectTo(self.slotid)
+				print("connectable to:", nimmanager.canConnectTo(self.slotid))
 				connectable = nimmanager.canConnectTo(self.slotid)
 				for id in connectable:
 					choices.append((str(id), nimmanager.getNimDescription(id)))

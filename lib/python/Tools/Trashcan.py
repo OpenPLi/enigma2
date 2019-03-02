@@ -1,3 +1,4 @@
+from __future__ import print_function
 import time
 import os
 import enigma
@@ -17,7 +18,7 @@ def createTrashFolder(path):
 	# Create and return trash folder for given file or dir
 	trash = getTrashFolder(path)
 	if not os.path.isdir(trash):
-		print "[Trashcan] create:", trash
+		print("[Trashcan] create:", trash)
 		os.mkdir(trash)
 	return trash
 
@@ -72,7 +73,7 @@ class Trashcan:
 		if not self.dirty:
 			return
 		if self.isCleaning:
-			print "[Trashcan] Cleanup already running"
+			print("[Trashcan] Cleanup already running")
 			return
 		if (self.session is not None) and self.session.nav.getRecordings():
 			return
@@ -89,7 +90,7 @@ class Trashcan:
 		self.cleanIfIdle()
 
 	def cleanFail(self, failure):
-		print "[Trashcan] ERROR in clean:", failure
+		print("[Trashcan] ERROR in clean:", failure)
 		self.isCleaning = False
 
 def purge(cleanset, ctimeLimit, reserveBytes):
@@ -97,13 +98,13 @@ def purge(cleanset, ctimeLimit, reserveBytes):
 	# reserveBytes of free disk space.
 	for trash in cleanset:
 		if not os.path.isdir(trash):
-			print "[Trashcan] No trash.", trash
+			print("[Trashcan] No trash.", trash)
 			return 0
 		diskstat = os.statvfs(trash)
 		free = diskstat.f_bfree * diskstat.f_bsize
 		bytesToRemove = reserveBytes - free
 		candidates = []
-		print "[Trashcan] bytesToRemove", bytesToRemove, trash
+		print("[Trashcan] bytesToRemove", bytesToRemove, trash)
 		size = 0
 		for root, dirs, files in os.walk(trash, topdown=False):
 			for name in files:
@@ -111,14 +112,14 @@ def purge(cleanset, ctimeLimit, reserveBytes):
 					fn = os.path.join(root, name)
 					st = os.stat(fn)
 					if st.st_ctime < ctimeLimit:
-						print "[Trashcan] Too old:", name, st.st_ctime
+						print("[Trashcan] Too old:", name, st.st_ctime)
 						enigma.eBackgroundFileEraser.getInstance().erase(fn)
 						bytesToRemove -= st.st_size
 					else:
 						candidates.append((st.st_ctime, fn, st.st_size))
 						size += st.st_size
 				except Exception, e:
-					print "[Trashcan] Failed to stat %s:"% name, e
+					print("[Trashcan] Failed to stat %s:"% name, e)
 			# Remove empty directories if possible
 			for name in dirs:
 				try:
@@ -127,18 +128,18 @@ def purge(cleanset, ctimeLimit, reserveBytes):
 					pass
 		candidates.sort()
 		# Now we have a list of ctime, candidates, size. Sorted by ctime (=deletion time)
-		print "[Trashcan] Bytes to remove remaining:", bytesToRemove, trash
+		print("[Trashcan] Bytes to remove remaining:", bytesToRemove, trash)
 		for st_ctime, fn, st_size in candidates:
 			if bytesToRemove < 0:
 				break
 			enigma.eBackgroundFileEraser.getInstance().erase(fn)
 			bytesToRemove -= st_size
 			size -= st_size
-		print "[Trashcan] Size after purging:", size, trash
+		print("[Trashcan] Size after purging:", size, trash)
 
 def cleanAll(trash):
 	if not os.path.isdir(trash):
-		print "[Trashcan] No trash.", trash
+		print("[Trashcan] No trash.", trash)
 		return 0
 	for root, dirs, files in os.walk(trash, topdown=False):
 		for name in files:
@@ -146,7 +147,7 @@ def cleanAll(trash):
 			try:
 				enigma.eBackgroundFileEraser.getInstance().erase(fn)
 			except Exception, e:
-				print "[Trashcan] Failed to erase %s:"% name, e
+				print("[Trashcan] Failed to erase %s:"% name, e)
 		# Remove empty directories if possible
 		for name in dirs:
 			try:

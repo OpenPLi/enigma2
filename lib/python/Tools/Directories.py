@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 import os
 import re
 from stat import S_IMODE
@@ -99,7 +100,7 @@ def resolveFilename(scope, base = "", path_prefix = None):
 			try:
 				os.mkdir(path)
 			except OSError:
-				print "resolveFilename: Couldn't create %s" % path
+				print("resolveFilename: Couldn't create %s" % path)
 				return None
 
 	return path + base
@@ -121,7 +122,7 @@ def bestRecordingLocation(candidates):
 					path = candidate[1]
 					biggest = size
 		except Exception, e:
-			print "[DRL]", e
+			print("[DRL]", e)
 	return path
 
 def defaultRecordingLocation(candidate=None):
@@ -254,7 +255,7 @@ def copyfile(src, dst):
 		os.chmod(dst, mode)
 		os.utime(dst, (st.st_atime, st.st_mtime))
 	except:
-		print "copy", src, "to", dst, "failed!"
+		print("copy", src, "to", dst, "failed!")
 		return -1
 	return 0
 
@@ -278,14 +279,14 @@ def copytree(src, dst, symlinks=False):
 			else:
 				copyfile(srcname, dstname)
 		except:
-			print "dont copy srcname (no file or link or folder)"
+			print("dont copy srcname (no file or link or folder)")
 	try:
 		st = os.stat(src)
 		mode = S_IMODE(st.st_mode)
 		os.chmod(dst, mode)
 		os.utime(dst, (st.st_atime, st.st_mtime))
 	except:
-		print "copy stats for", src, "failed!"
+		print("copy stats for", src, "failed!")
 
 # Renames files or if source and destination are on different devices moves them in background
 # input list of (source, destination)
@@ -298,19 +299,19 @@ def moveFiles(fileList):
 				movedList.append(item)
 		except OSError, e:
 			if e.errno == 18:
-				print "[Directories] cannot rename across devices, trying slow move"
+				print("[Directories] cannot rename across devices, trying slow move")
 				import Screens.CopyFiles
 				Screens.CopyFiles.moveFiles(fileList, item[0])
-				print "[Directories] Moving in background..."
+				print("[Directories] Moving in background...")
 			else:
 				raise
 	except Exception, e:
-		print "[Directories] Failed move:", e
+		print("[Directories] Failed move:", e)
 		for item in movedList:
 			try:
 				os.rename(item[1], item[0])
 			except:
-				print "[Directories] Failed to undo move:", item
+				print("[Directories] Failed to undo move:", item)
 				raise
 
 def getSize(path, pattern=".*"):
