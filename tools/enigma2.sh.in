@@ -38,10 +38,15 @@ while : ; do
 
 	# start enigma
 	sync
-	if [ $ENIGMA_DEBUG_LVL -lt 4 ]; then
+	if [ $DEBUG_LVL -lt 4 ]; then
 		LD_PRELOAD=$LIBS ENIGMA_DEBUG_LVL=$DEBUG_LVL @bindir@/enigma2
 	else
-		LD_PRELOAD=$LIBS ENIGMA_DEBUG_LVL=$DEBUG_LVL @bindir@/enigma2 > /home/root/enigma.log 2&>1
+		# remove old logfiles
+		keep=5;
+		for file in `ls -t /home/root/enigma.*.debuglog`; do let "keep--"; if [ "$keep" -lt "0" ]; then rm $file; fi; done
+		# todays log file
+		file="/home/root/enigma.$(date +%Y%m%d).debuglog"
+		LD_PRELOAD=$LIBS ENIGMA_DEBUG_LVL=$DEBUG_LVL @bindir@/enigma2 >> $file 2>&1
 	fi
 
 
