@@ -121,7 +121,7 @@ def bestRecordingLocation(candidates):
 				if size > biggest:
 					path = candidate[1]
 					biggest = size
-		except Exception, e:
+		except Exception as e:
 			print("[DRL]", e)
 	return path
 
@@ -297,7 +297,7 @@ def moveFiles(fileList):
 			for item in fileList:
 				os.rename(item[0], item[1])
 				movedList.append(item)
-		except OSError, e:
+		except OSError as e:
 			if e.errno == 18:
 				print("[Directories] cannot rename across devices, trying slow move")
 				import Screens.CopyFiles
@@ -305,7 +305,7 @@ def moveFiles(fileList):
 				print("[Directories] Moving in background...")
 			else:
 				raise
-	except Exception, e:
+	except Exception as e:
 		print("[Directories] Failed move:", e)
 		for item in movedList:
 			try:

@@ -294,7 +294,7 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 						else:
 							self.movielistAgain()
 						return
-					except Exception, e:
+					except Exception as e:
 						print("[InfoBar] Failed to move to .Trash folder:", e)
 						msg = _("Cannot move to trash can") + "\n" + str(e) + "\n"
 				info = serviceHandler.info(ref)

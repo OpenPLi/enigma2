@@ -155,7 +155,7 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 		try:
 			from Plugins.SystemPlugins.Hotplug.plugin import hotplugNotifier
 			hotplugNotifier.append(self.hotplugCB)
-		except Exception, ex:
+		except Exception as ex:
 			print("[MediaPlayer] No hotplug support", ex)
 
 		class MoviePlayerActionMap(NumberActionMap):
@@ -712,7 +712,7 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 		try:
 			for i in os.listdir(playlistdir):
 				listpath.append((i,playlistdir + i))
-		except IOError,e:
+		except IOError as e:
 			print("Error while scanning subdirs ",e)
 		if config.mediaplayer.sortPlaylists.value:
 			listpath.sort()
@@ -753,7 +753,7 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 		if confirmed:
 			try:
 				os.remove(self.delname)
-			except OSError,e:
+			except OSError as e:
 				print("delete failed:", e)
 				self.session.open(MessageBox, _("Delete failed!"), MessageBox.TYPE_ERROR)
 
@@ -1243,7 +1243,7 @@ def movielist_open(list, session, **kwargs):
 def audiocdscan(menuid, **kwargs):
 	try:
 		from Plugins.SystemPlugins.Hotplug.plugin import AudiocdAdded
-	except Exception, e:
+	except Exception as e:
 		print("[Mediaplayer.plugin] no hotplug support",e)
 		return []
 	if menuid == "mainmenu" and AudiocdAdded() and os.path.isfile('/media/audiocd/cdplaylist.cdpls'):

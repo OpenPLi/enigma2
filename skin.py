@@ -107,7 +107,7 @@ addSkin('skin_subtitles.xml')
 try:
 	if not addSkin(config.skin.primary_skin.value):
 		raise SkinError, "primary skin not found"
-except Exception, err:
+except Exception as err:
 	print("SKIN ERROR:", err)
 	skin = DEFAULT_SKIN
 	if config.skin.primary_skin.value == skin:
@@ -297,7 +297,7 @@ class AttributeParser:
 			getattr(self, attrib)(value)
 		except AttributeError:
 			print("[Skin] Attribute not implemented:", attrib, "value:", value)
-		except SkinError, ex:
+		except SkinError as ex:
 			print("[Skin] Error:", ex)
 	def applyAll(self, attrs):
 		for attrib, value in attrs:
@@ -615,7 +615,7 @@ def loadSingleSkinData(desktop, skin, path_prefix):
 				width = int(get("width", size))
 				global fonts
 				fonts[name] = (font, size, height, width)
-			except Exception, ex:
+			except Exception as ex:
 				print("[Skin] Bad font alias", ex)
 
 	for c in skin.findall("parameters"):
@@ -625,7 +625,7 @@ def loadSingleSkinData(desktop, skin, path_prefix):
 				name = get("name")
 				value = get("value")
 				parameters[name] = "," in value and map(parseParameter, value.split(",")) or parseParameter(value)
-			except Exception, ex:
+			except Exception as ex:
 				print("[Skin] Bad parameter", ex)
 
 	for c in skin.findall("subtitles"):
@@ -1010,7 +1010,7 @@ def readSkin(screen, skin, names, desktop):
 			codeText = widget.text.strip()
 			widgetType = widget.attrib.get('type')
 			code = compile(codeText, "skin applet", "exec")
-		except Exception, ex:
+		except Exception as ex:
 			raise SkinError("applet failed to compile: " + str(ex))
 		if widgetType == "onLayoutFinish":
 			screen.onLayoutFinish.append(code)
@@ -1042,7 +1042,7 @@ def readSkin(screen, skin, names, desktop):
 			p = processors.get(w.tag, process_none)
 			try:
 				p(w, context)
-			except SkinError, e:
+			except SkinError as e:
 				print("[Skin] Error in screen '%s' widget '%s':" % (name, w.tag), e)
 
 	def process_panel(widget, context):
@@ -1061,7 +1061,7 @@ def readSkin(screen, skin, names, desktop):
 			cc = SkinContext
 		try:
 			c = cc(context, widget.attrib.get('position'), widget.attrib.get('size'), widget.attrib.get('font'))
-		except Exception, ex:
+		except Exception as ex:
 			raise SkinError("Failed to create skincontext (%s,%s,%s) in %s: %s" % (widget.attrib.get('position'), widget.attrib.get('size'), widget.attrib.get('font'), context, ex) )
 		process_screen(widget, c)
 
@@ -1079,7 +1079,7 @@ def readSkin(screen, skin, names, desktop):
 		context.x = 0 # reset offsets, all components are relative to screen
 		context.y = 0 # coordinates.
 		process_screen(myscreen, context)
-	except Exception, e:
+	except Exception as e:
 		print("[Skin] Error in %s:" % name, e)
 
 	from Components.GUIComponent import GUIComponent

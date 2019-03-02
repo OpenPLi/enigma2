@@ -40,7 +40,7 @@ class inputDevices:
 				self.name = ioctl(self.fd, EVIOCGNAME(256), buffer)
 				self.name = self.name[:self.name.find("\0")]
 				os.close(self.fd)
-			except (IOError,OSError), err:
+			except (IOError,OSError) as err:
 				print('[iInputDevices] getInputDevices ' + evdev + ' <ERROR: ioctl(EVIOCGNAME): ' + str(err) + ' >')
 				self.name = None
 

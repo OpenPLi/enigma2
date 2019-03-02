@@ -53,7 +53,7 @@ def listsDirPath():
 				line = line.split(' ', 2)
 				if len(line) > 2 and line[1] == ('lists_dir'):
 					return line[2].strip()
-	except Exception, ex:
+	except Exception as ex:
 		print("[opkg]", ex)
 	return '/var/lib/opkg/lists'
 
