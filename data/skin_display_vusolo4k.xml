@@ -305,6 +305,12 @@
 			</panel>
 		</panel>
 	</screen>
+	<!-- servicescan -->
+	<screen name="ServiceScanSummary" position="fill">
+		<widget source="Title" render="Label" position="5,5" size="470,70" font="Big" halign="center"/>
+		<widget name="Service" position="5,100" size="470,40" font="Medium" transparent="1" halign="center"/>
+		<widget name="scan_progress" position="20,200" size="440,20" zPosition="1" borderWidth="1" foregroundColor="#00ff00" borderColor="white" backgroundColor="dark"/>
+	</screen>
 	<!-- misc-->
 	<screen name="SimpleSummary" position="fill">
 		<widget source="parent.Title" render="Label" position="top" size="*,100" font="Medium" halign="center" valign="center" />
