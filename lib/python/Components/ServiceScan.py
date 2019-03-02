@@ -235,7 +235,7 @@ class ServiceScan:
 		self.lcd_summary and self.lcd_summary.updateService(newServiceName)
 
 	def destroy(self):
- 		self.state = self.Idle
+		self.state = self.Idle
 		if self.scan is not None:
 			self.scan.statusChanged.get().remove(self.scanStatusChanged)
 			self.scan.newService.get().remove(self.newService)

@@ -33,12 +33,12 @@ class ScrollLabel(GUIComponent):
 				elif "transparent" in attrib or "backgroundColor" in attrib:
 					widget_attribs.append((attrib, value))
 				elif "scrollbarWidth" in attrib:
- 					scrollbarWidth = int(value)
- 					self.skinAttributes.remove((attrib, value))
- 				elif "scrollbarSliderBorderWidth" in attrib:
- 					scrollbarBorderWidth = int(value)
- 					self.skinAttributes.remove((attrib, value))
- 				elif "split" in attrib:
+					scrollbarWidth = int(value)
+					self.skinAttributes.remove((attrib, value))
+				elif "scrollbarSliderBorderWidth" in attrib:
+					scrollbarBorderWidth = int(value)
+					self.skinAttributes.remove((attrib, value))
+				elif "split" in attrib:
 					self.split = int(value)
 					if self.split:
 						self.right_text = eLabel(self.instance)
