@@ -954,3 +954,8 @@ std::vector<std::string> split(std::string s, const std::string& separator)
 
 	return tokens;
 }
+
+int strcasecmp(const std::string& s1, const std::string& s2)
+{
+	return ::strcasecmp(s1.c_str(), s2.c_str());
+}
