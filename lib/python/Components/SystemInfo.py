@@ -2,6 +2,8 @@ from enigma import eDVBResourceManager, Misc_Options, eDVBCIInterfaces
 from Tools.Directories import fileExists, fileCheck, pathExists, fileHas
 from Tools.HardwareInfo import HardwareInfo
 
+import os
+
 SystemInfo = {}
 
 def getNumVideoDecoders():
@@ -19,6 +21,8 @@ def countFrontpanelLEDs():
 def hassoftcaminstalled():
 	from Tools.camcontrol import CamControl
 	return len(CamControl('softcam').getList()) > 1
+
+SystemInfo["InDebugMode"] = (os.environ.get('ENIGMA_DEBUG_LVL') >= 4)
 
 SystemInfo["CommonInterface"] = eDVBCIInterfaces.getInstance().getNumOfSlots()
 SystemInfo["CommonInterfaceCIDelay"] = fileCheck("/proc/stb/tsmux/rmx_delay")
