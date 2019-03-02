@@ -65,7 +65,7 @@ class PluginComponent:
 								try:
 									os.rmdir(path)
 								except:
-								        pass
+									pass
 							continue
 
 						# allow single entry not to be a list

@@ -58,7 +58,7 @@ def parseTrans(filename, actionmap, device, keys):
 		get_attr = x.attrib.get
 		toggle_key = get_attr("from")
 		toggle_key = getKeyId(toggle_key)
-                actionmap.bindToggle(filename, device, toggle_key)
+		actionmap.bindToggle(filename, device, toggle_key)
 
 	for x in keys.findall("key"):
 		get_attr = x.attrib.get
@@ -71,7 +71,7 @@ def parseTrans(filename, actionmap, device, keys):
 		keyin  = getKeyId(keyin)
 		keyout = getKeyId(keyout)
 		toggle = int(toggle)
-                actionmap.bindTranslation(filename, device, keyin, keyout, toggle)
+		actionmap.bindTranslation(filename, device, keyin, keyout, toggle)
 
 
 def readKeymap(filename):

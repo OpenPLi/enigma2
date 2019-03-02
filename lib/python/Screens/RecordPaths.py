@@ -30,11 +30,11 @@ class RecordPathsSettings(Screen,ConfigListScreen):
 
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions", "MenuActions"],
 		{
-		    "green": self.save,
-		    "red": self.keyCancel,
-		    "cancel": self.keyCancel,
-		    "ok": self.ok,
-		    "menu": self.closeRecursive,
+			"green": self.save,
+			"red": self.keyCancel,
+			"cancel": self.keyCancel,
+			"ok": self.ok,
+			"menu": self.closeRecursive,
 		}, -2)
 
 	def checkReadWriteDir(self, configele):
