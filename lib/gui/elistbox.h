@@ -27,6 +27,7 @@ protected:
 	iListboxContent();
 	friend class eListbox;
 	virtual void updateClip(gRegion &){ };
+	virtual void resetClip(){ };
 	virtual void cursorHome()=0;
 	virtual void cursorEnd()=0;
 	virtual int cursorMove(int count=1)=0;

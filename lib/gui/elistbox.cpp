@@ -252,6 +252,10 @@ void eListbox::moveSelection(long dir)
 	m_selected = m_content->cursorGet();
 	m_top = m_selected - (m_selected % m_items_per_page);
 
+	// if it is, then the old selection clip is irrelevant, clear it or we'll get artifacts
+	if (m_top != oldtop && m_content)
+		m_content->resetClip();
+
 	if (oldsel != m_selected)
 		/* emit */ selectionChanged();
 

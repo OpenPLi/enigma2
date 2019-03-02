@@ -1252,6 +1252,11 @@ void eListboxPythonMultiContent::setList(ePyObject list)
 	eListboxPythonStringContent::setList(list);
 }
 
+void eListboxPythonMultiContent::resetClip()
+{
+	m_old_clip = m_clip = gRegion::invalidRegion();
+}
+
 void eListboxPythonMultiContent::updateClip(gRegion &clip)
 {
 	if (m_clip.valid())

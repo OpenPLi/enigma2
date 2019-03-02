@@ -81,6 +81,7 @@ public:
 	void setItemHeight(int height);
 	void setSelectionClip(eRect &rect, bool update=false);
 	void updateClip(gRegion &);
+	void resetClip();
 	void entryRemoved(int idx);
 	void setTemplate(SWIG_PYOBJECT(ePyObject) tmplate);
 private:
