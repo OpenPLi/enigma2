@@ -2170,16 +2170,16 @@ msgid "Configure the cursor behaviour in the channel selection list. When openin
 msgstr "Määrittele osoittimen toiminta kanavalistalla. Listaa avattaessa voidaan nykyinen kanavanvalinta säilyttää, tai valinta voi vaihtua jo valmiiksi ylös tai alas (vakio). B+/B- näppäinten toiminta voidaan myös kääntää."
 
 msgid "Configure the duration in hours the receiver should go to standby when the receiver is not controlled."
-msgstr ""
+msgstr "Määritä aika (tunneissa) jonka jälkeen vastaanotin asetetaan valmiustilaan mikäli sitä ei ole käytetty."
 
 msgid "Configure the duration in minutes for the screensaver."
 msgstr "Määrittele näytönsäästäjän aika minuuteissa."
 
 msgid "Configure the duration in minutes for the sleeptimer. Select this entry and click OK or green to start/stop the sleeptimer"
-msgstr ""
+msgstr "Määritä uniajastimen pituus (minuuteissa). Paina OK tai vihreää näppäintä aloittaaksesi tai lopettaaksesi ajastimen"
 
 msgid "Configure the duration when the receiver should go to shut down in case the receiver is in standby mode."
-msgstr "Määrittele kesto milloin vastaanottimen pitäisi sammua, jos vastaanotin on valmiustilassa."
+msgstr "Määrittele siirtyykö (ja kuinka pian) vastaanotin automaattisesti valmiustilasta virransäästötilaan."
 
 msgid "Configure the first audio language (highest priority)."
 msgstr "Määrittää ensisijaisen äänen kielen (korkein prioriteetti)."
@@ -3435,7 +3435,7 @@ msgid "Enable volume control with arrow buttons"
 msgstr "Säädä äänenvoimakkuutta nuolinäppäimillä"
 
 msgid "Enable wakeup timer"
-msgstr ""
+msgstr "Herätysajastin"
 
 msgid "Enable zapping with CH+/-, B+/-, P+/-"
 msgstr "Laita päälle kanavanvaihto CH+/-, B+/- ja P+/- näppäimillä"
@@ -3468,10 +3468,10 @@ msgid "End time"
 msgstr "Lopetusaika"
 
 msgid "End time to ignore inactivity sleeptimer"
-msgstr "Pois päältä olon päättymisaika"
+msgstr "Aikavälin lopetusaika"
 
 msgid "End time to ignore shutdown in standby"
-msgstr ""
+msgstr "Aikavälin lopetusaika"
 
 #
 msgid "English"
@@ -3786,13 +3786,13 @@ msgid "External subtitle switch fonts"
 msgstr "Ulkoisen tekstityksen fontin vaihtelu"
 
 msgid "Extra end time to ignore inactivity sleeptimer"
-msgstr ""
+msgstr "Lisäaikavälin lopetusaika"
 
 msgid "Extra motor options"
 msgstr "Moottorin lisäasetukset"
 
 msgid "Extra start time to ignore inactivity sleeptimer"
-msgstr ""
+msgstr "Lisäaikavälin aloitusaika"
 
 msgid "F"
 msgstr ""
@@ -4634,7 +4634,7 @@ msgstr "Käynnissä"
 
 #
 msgid "Inactivity Sleeptimer"
-msgstr "Käyttämättömyysajastin"
+msgstr "Siirry valmiustilaan"
 
 msgid "Include AIT in http streams"
 msgstr "Sisällytä AIT http-striimeihin"
@@ -6015,7 +6015,7 @@ msgid "Not tested:"
 msgstr ""
 
 msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'."
-msgstr ""
+msgstr "Määritä herätetäänkö vastaanotin automaattisesti määriteltynä aikana. Jos lisäksi haluat että vastaanotin siirtyy valmiustilaan herätyksen jälkeen, aseta 'Käynnisty valmiustilaan' arvoksi järjestelmän yleisasetuksissa 'Ei, paitsi ajastetusta herätyksestä'." 
 
 #
 msgid ""
@@ -8282,7 +8282,7 @@ msgid "Set all hotkey to default?"
 msgstr ""
 
 msgid "Set blocktimes by weekday"
-msgstr ""
+msgstr "Aseta aikaväli päiväkohtaisesti"
 
 msgid "Set default"
 msgstr "Oletus"
@@ -8663,7 +8663,7 @@ msgid "Shutdown"
 msgstr "Sammuta"
 
 msgid "Shutdown when in Standby"
-msgstr "Sammuta valmiustilasta"
+msgstr "Siirry virransäästötilaan"
 
 msgid "Side by side"
 msgstr "Rinnakkain"
@@ -8955,34 +8955,34 @@ msgid "Special 2"
 msgstr ""
 
 msgid "Specify extra timeframe to ignore inactivity sleeptimer"
-msgstr ""
+msgstr "Lisäaikaväli valmiustilaan siirtymisen poiskytkennälle"
 
 msgid "Specify if you want to set the blocktimes separately by weekday"
-msgstr ""
+msgstr "Valitse haluatko määritellä valmiustilaan siirtymisen poiskytkennän aikavälit päiväkohtaisesti"
 
 msgid "Specify the end time to ignore the shutdown timer when the receiver is in standby mode"
-msgstr ""
+msgstr "Aseta lopetusaika mihin saakka virransäästötilaan siirtymisen ajastin on pois käytöstä"
 
 msgid "Specify the end time until the inactivity sleeptimer should be ignored"
-msgstr "Määrittele lopetusaika mihin saakka käyttämättömyysajastinta ei huomioida"
+msgstr "Aseta lopetusaika mihin saakka valmiustilaan siirtyminen on pois käytöstä"
 
 msgid "Specify the extra end time until the inactivity sleeptimer should be ignored"
-msgstr ""
+msgstr "Aseta lopetusaika lisäaikavälille jolloin valmiustilaan siirtyminen on myös pois käytöstä"
 
 msgid "Specify the extra start time when the inactivity sleeptimer should be ignored"
-msgstr ""
+msgstr "Aseta aloitusaika lisäaikavälille jolloin valmiustilaan siirtyminen on myös pois käytöstä"
 
 msgid "Specify the start time to ignore the shutdown timer when the receiver is in standby mode"
-msgstr ""
+msgstr "Aseta aloitusaika mistä lähtien virransäästötilaan siirtymisen ajastin on pois käytöstä"
 
 msgid "Specify the start time when the inactivity sleeptimer should be ignored"
-msgstr "Määrittele aloitusaika mistä lähtien käyttämättömyysajastinta ei huomioida."
+msgstr "Aseta aloitusaika mistä lähtien valmiustilaan siirtyminen on pois käytöstä"
 
 msgid "Specify timeframe to ignore inactivity sleeptimer"
-msgstr "Käyttämättömyysajastin pois päältä aikavälillä"
+msgstr "Valmiustilaan siirtyminen pois päältä aikavälillä"
 
 msgid "Specify timeframe to ignore the shutdown in standby"
-msgstr ""
+msgstr "Virransäästötilaan siirtyminen pois päältä aikavälillä"
 
 #
 msgid "Split preview mode"
@@ -9059,10 +9059,10 @@ msgid "Start time"
 msgstr "Aloitusaika"
 
 msgid "Start time to ignore inactivity sleeptimer"
-msgstr "Pois päältä olon aloitusaika"
+msgstr "Aikavälin aloitusaika"
 
 msgid "Start time to ignore shutdown in standby"
-msgstr ""
+msgstr "Aikavälin aloitusaika"
 
 msgid "Start timeshift"
 msgstr "Aloita ajansiirto"
@@ -10964,13 +10964,13 @@ msgid "When enabled you can customize the OpenWebIf settings for the fallback tu
 msgstr "Käy käytössä, voit määritellä etävastaanottimen OpenWebIf asetuksia"
 
 msgid "When enabled you can specify a timeframe to ignore the shutdown timer when the receiver is in standby mode"
-msgstr ""
+msgstr "Kun päällä, voit määritellä aikaikkunan jonka aikana virransäästötilaan siirtymisen ajastin on pois päältä"
 
 msgid "When enabled you can specify a timeframe when the inactivity sleeptimer is ignored. Not the detection is disabled during this timeframe but the inactivity timeout is disabled"
-msgstr "Kun päällä, voit määritellä aikaikkunan milloin käyttämättömyysajastin on pois päältä. Käytön tunnistaminen on kuitenkin päällä, vain aikakatkaisua ei tehdä."
+msgstr "Kun päällä, voit määritellä aikaikkunan jonka aikana valmiustilaan siirtyminen on pois päältä"
 
 msgid "When enabled you can specify an extra timeframe when the inactivity sleeptimer is ignored. Not the detection is disabled during this timeframe but the inactivity timeout is disabled"
-msgstr "Kun päällä, voit määritellä lisäaikaikkunan milloin käyttämättömyysajastin on pois päältä. Käytön tunnistaminen on kuitenkin päällä, vain aikakatkaisua ei tehdä."
+msgstr "Kun päällä, voit määritellä lisäaikavälin jonka aikana valmiustilaan siirtyminen on pois päältä"
 
 msgid "When enabled you can zap channels with the  CH+/-, B+/-, P+/- buttons instead of opening the channel selection list."
 msgstr "Kun päällä, voit vaihtaa kanavaa CH+/-, B+/- ja P+/- näppäimillä kanavalistan avaamisen sijasta."
@@ -11450,10 +11450,10 @@ msgid "Your receiver might be unusable now. Please consult the manual for furthe
 msgstr "Vastaanottimesi saattaa olla nyt poissa käytöstä. Lue käsikirjasta lisäohjeita ennenkuin uudelleenkäynnistät vastaanottimesi."
 
 msgid "Your receiver will got to stand by due to the sleeptimer."
-msgstr "Uniajastin laittaa vastaanottimesi valmiustilaan."
+msgstr "Vastaanottimesi siirtyy valmiustilaan uniajastimen vuoksi."
 
 msgid "Your receiver will got to standby due to inactivity."
-msgstr "Käyttämättömyysajastin laittaa vastaanottimesi valmiustilaan."
+msgstr "Vastaanottimesi siirtyy valmiustilaan aktiivisuuden puutteen vuoksi."
 
 msgid "Your receiver will restart after pressing OK on your remote control."
 msgstr "Vastaanottimesi uudelleenkäynnistyy kun painat OK näppäintä kaukosäätimessäsi."
