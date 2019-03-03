@@ -235,7 +235,7 @@ class TryQuitMainloop(MessageBox):
 				reasons += (ngettext("%d job is running in the background!", "%d jobs are running in the background!", jobs) % jobs) + "\n"
 		if not next_record and eStreamServer.getInstance().getConnectedClients() or StreamServiceList:
 			reasons += _("Client is streaming from this box!")+ "\n"
-		if not next_record and not reasons and internalHDDNotSleeping()and retvalue not in (3, 6, 42):
+		if not next_record and not reasons and internalHDDNotSleeping() and retvalue not in (3, 6, 42):
 			reasons += _("Harddisk is not in sleepmode it could be in use!")+ "\n"
 		if reasons:
 			self.skinName = ""
