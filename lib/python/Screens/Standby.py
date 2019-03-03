@@ -212,49 +212,51 @@ class QuitMainloopScreen(Screen):
 
 inTryQuitMainloop = False
 
-def getReasons(session):
-	recordings = session.nav.getRecordings()
-	jobs = len(job_manager.getPendingJobs())
-	reasons = []
-	next_rec_time = -1
-	if not recordings:
-		next_rec_time = session.nav.RecordTimer.getNextRecordingTime()
-	if recordings or (next_rec_time > 0 and (next_rec_time - time()) < 360):
-		reasons.append(_("Recording(s) are in progress or coming up in few seconds!"))
-	if jobs:
-		if jobs == 1:
-			job = job_manager.getPendingJobs()[0]
-			reasons.append("%s: %s (%d%%)" % (job.getStatustext(), job.name, int(100*job.progress/float(job.end))))
-		else:
-			reasons.append((ngettext("%d job is running in the background!", "%d jobs are running in the background!", jobs) % jobs))
-	if eStreamServer.getInstance().getConnectedClients() or StreamServiceList:
-			reasons.append(_("Client is streaming from this box!"))
-	if not reasons and internalHDDNotSleeping():
-			reasons.append(_("Harddisk is not in sleepmode it could be in use!"))
-	return "\n".join(reasons)
-
 class TryQuitMainloop(MessageBox):
-	def __init__(self, session, retvalue=1, timeout=-1, default_yes = False):
+	def __init__(self, session, retvalue=1, timeout=-1, default_yes=True):
 		self.retval = retvalue
 		self.connected = False
-		reason = getReasons(session)
-		if reason and not(reason == _("Harddisk is not in sleepmode it could be in use!") and retvalue in (3, 6, 42)):
-			text = { 1: _("Really shutdown now?"),
-				2: _("Really reboot now?"),
-				3: _("Really restart now?"),
-				4: _("Really upgrade the frontprocessor and reboot now?"),
-				6: _("Really restart in debug mode now?"),
-				42: _("Really upgrade your settop box and reboot now?") }.get(retvalue, _("Invalid reason"))
-			MessageBox.__init__(self, session, "%s\n%s" % (reason, text), type = MessageBox.TYPE_YESNO, timeout = timeout, default = default_yes)
-			self.skinName = "MessageBoxSimple"
+		recordings = session.nav.getRecordings()
+		jobs = len(job_manager.getPendingJobs())
+		reasons = ""
+		next_rec_time = -1
+		next_record = False
+		if not recordings:
+			next_rec_time = session.nav.RecordTimer.getNextRecordingTime()
+		if recordings or (next_rec_time > 0 and (next_rec_time - time()) < 360):
+			reasons = _("Recording(s) are in progress or coming up in few seconds!")
+			next_record = True
+			default_yes = False
+		if not next_record and jobs:
+			if jobs == 1:
+				job = job_manager.getPendingJobs()[0]
+				reasons += "%s: %s (%d%%)\n" % (job.getStatustext(), job.name, int(100*job.progress/float(job.end)))
+			else:
+				reasons += (ngettext("%d job is running in the background!", "%d jobs are running in the background!", jobs) % jobs) + "\n"
+		if not next_record and eStreamServer.getInstance().getConnectedClients() or StreamServiceList:
+			reasons += _("Client is streaming from this box!")+ "\n"
+		if not next_record and not reasons and internalHDDNotSleeping()and retvalue not in (3, 6, 42):
+			reasons += _("Harddisk is not in sleepmode it could be in use!")+ "\n"
+		if reasons:
+			self.skinName = ""
 			session.nav.record_event.append(self.getRecordEvent)
-			self.connected = True
-			self.onShow.append(self.__onShow)
-			self.onHide.append(self.__onHide)
-		else:
-			self.skin = """<screen position="0,0" size="0,0"/>"""
-			Screen.__init__(self, session)
-			self.close(True)
+			if not inStandby:
+				timeout = 30
+				text = { 1: _("Really shutdown now?"),
+					2: _("Really reboot now?"),
+					3: _("Really restart now?"),
+					4: _("Really upgrade the frontprocessor and reboot now?"),
+					6: _("Really restart in debug mode now?"),
+					42: _("Really upgrade your settop box and reboot now?") }.get(retvalue, _("Invalid reason"))
+				MessageBox.__init__(self, session, "%s\n%s" % (reasons, text), type=MessageBox.TYPE_YESNO, timeout=timeout, default=default_yes)
+				self.skinName = "MessageBoxSimple"
+				self.connected = True
+				self.onShow.append(self.__onShow)
+				self.onHide.append(self.__onHide)
+				return
+		self.skin = """<screen position="1310,0" size="0,0"/>"""
+		Screen.__init__(self, session)
+		self.close(True)
 
 	def getRecordEvent(self, recservice, event):
 		if event == iRecordableService.evEnd:
@@ -271,7 +273,7 @@ class TryQuitMainloop(MessageBox):
 
 	def close(self, value):
 		if self.connected:
-			self.connected=False
+			self.connected = False
 			self.session.nav.record_event.remove(self.getRecordEvent)
 		if value:
 			self.hide()
