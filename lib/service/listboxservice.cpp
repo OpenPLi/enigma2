@@ -888,7 +888,7 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 								painter.blitScale(piconPixmap,
 									eRect(area.left(), area.top(), iconWidth, area.height()),
 									area,
-									gPainter::BT_ALPHABLEND | gPainter::BT_KEEP_ASPECT_RATIO);
+									gPainter::BT_ALPHABLEND | gPainter::BT_KEEP_ASPECT_RATIO | gPainter::BT_HALIGN_CENTER | gPainter::BT_VALIGN_CENTER);
 								painter.clippop();
 							}
 						}
