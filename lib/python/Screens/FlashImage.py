@@ -1,6 +1,5 @@
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
-from Screens.Standby import getReasons
 from Components.Sources.StaticText import StaticText
 from Components.ChoiceList import ChoiceList, ChoiceEntryComponent
 from Components.config import config, configfile
@@ -190,7 +189,6 @@ class FlashImage(Screen):
 		self.downloader = None
 		self.source = source
 		self.imagename = imagename
-		self.reasons = getReasons(session)
 
 		self["header"] = Label(_("Backup settings"))
 		self["info"] = Label(_("Save settings and EPG data"))
@@ -212,8 +210,8 @@ class FlashImage(Screen):
 		self.hide()
 
 	def confirmation(self):
-		if self.reasons:
-			self.message = _("%s\nDo you still want to flash image\n%s?") % (self.reasons, self.imagename)
+		if self.session.nav.getRecordings():
+			self.message = _("Recording in progress!\nDo you still want to flash image\n%s?") % self.imagename
 		else:
 			self.message = _("Do you want to flash image\n%s") % self.imagename
 		if SystemInfo["canMultiBoot"]:
