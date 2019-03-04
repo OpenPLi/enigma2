@@ -154,5 +154,6 @@ enum { lvlDebug=4, lvlInfo=3, lvlWarning=2, lvlError=1, lvlFatal=0 };
 #endif // SWIG
 
 void ePythonOutput(const char *, int lvl = lvlDebug);
+int eGetEnigmaDebugLvl();
 
 #endif // __E_ERROR__

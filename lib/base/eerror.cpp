@@ -195,6 +195,11 @@ void ePythonOutput(const char *string, int lvl)
 #endif
 }
 
+int eGetEnigmaDebugLvl()
+{
+	return debugLvl;
+}
+
 void setDebugTime(bool enable)
 {
 	debugTime = enable;
