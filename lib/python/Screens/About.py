@@ -13,7 +13,7 @@ from Components.Label import Label
 from Components.ProgressBar import ProgressBar
 
 from Tools.StbHardware import getFPVersion
-from enigma import eTimer, eLabel, eConsoleAppContainer, getDesktop
+from enigma import eTimer, eLabel, eConsoleAppContainer, getDesktop, eGetEnigmaDebugLvl
 
 from Components.GUIComponent import GUIComponent
 import skin, os
@@ -54,6 +54,7 @@ class About(Screen):
 		AboutText += _("Python version: ") + about.getPythonVersionString() + "\n"
 
 		AboutText += _("Enigma (re)starts: %d\n") % config.misc.startCounter.value
+		AboutText += _("Enigma debug level: %d\n") % eGetEnigmaDebugLvl()
 
 		fp_version = getFPVersion()
 		if fp_version is None:
