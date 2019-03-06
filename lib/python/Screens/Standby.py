@@ -14,7 +14,6 @@ from Components.SystemInfo import SystemInfo
 from GlobalActions import globalActionMap
 from enigma import eDVBVolumecontrol, eTimer, eDVBLocalTimeHandler, eServiceReference, eStreamServer
 from Components.Sources.StreamService import StreamServiceList
-from Tools.HardwareInfo import HardwareInfo
 
 inStandby = None
 
