@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-22 14:27+0330\n"
-"PO-Revision-Date: 2019-02-15 19:50+0100\n"
+"POT-Creation-Date: 2019-03-06 19:22+0100\n"
+"PO-Revision-Date: 2019-03-06 19:25+0100\n"
 "Last-Translator: Pr2\n"
 "Language-Team: french\n"
 "Language: fr\n"
@@ -1856,20 +1856,17 @@ msgstr "Mode de configuration: %s"
 msgid "Configuration..."
 msgstr "Configuration..."
 
-msgid "Configure DVB-ATSC"
-msgstr ""
+msgid "Configure ATSC"
+msgstr "Configurer ATSC"
 
-#, fuzzy
 msgid "Configure DVB-C"
-msgstr "Configuration"
+msgstr "Configurer DVB-C"
 
-#, fuzzy
 msgid "Configure DVB-S"
-msgstr "Configuration"
+msgstr "Configurer DVB-S"
 
-#, fuzzy
 msgid "Configure DVB-T"
-msgstr "Configuration"
+msgstr "Configurer DVB-T"
 
 msgid "Configure an additional delay to improve external subtitle synchronisation."
 msgstr "Configure un retard supplémentaire pour améliorer la synchronisation des sous-titres externes."
@@ -3150,6 +3147,10 @@ msgstr "Anglais"
 msgid "Enigma (re)starts: %d\n"
 msgstr "Redémarrage(s) Enigma: %d\n"
 
+#, python-format
+msgid "Enigma debug level: %d\n"
+msgstr "Niveau de déboggage Enigma: %d\n"
+
 msgid "Enigma version: "
 msgstr "Version Enigma: "
 
@@ -4069,13 +4070,11 @@ msgstr "Configurer Hotkey"
 msgid "Hotkey zap"
 msgstr "Hotkey zap"
 
-#, fuzzy
 msgid "Hotswitchable"
-msgstr "non testable"
+msgstr "Permutable à chaud"
 
-#, fuzzy
 msgid "Hotswitchable tuner"
-msgstr "Types de tuner permutables:"
+msgstr "Types de tuner permutable à chaud"
 
 msgid "How many minutes do you want add to the recording?"
 msgstr "Combien de minutes voulez-vous ajouter à l'enregistrement?"
@@ -4375,10 +4374,6 @@ msgid "Invalid directory selected: %s"
 msgstr "Répertoire sélectionné non valide: %s"
 
 msgid "Invalid location"
-msgstr "Emplacement non valide"
-
-#, fuzzy
-msgid "Invalid reason"
 msgstr "Emplacement non valide"
 
 msgid "Invalid transponder data"
@@ -6570,6 +6565,9 @@ msgstr "Redémarrer OpenPLi"
 msgid "Restart enigma in debug mode"
 msgstr "Redémarrer OpenPLi en mode déboggage"
 
+msgid "Restart enigma in standard mode"
+msgstr "Redémarrer OpenPLi en mode standard"
+
 msgid "Restart network"
 msgstr "Relancer le réseau"
 
@@ -6968,17 +6966,17 @@ msgstr "Sélectionnez ‘A’ ou ‘B’ si votre système aérien nécessite ce
 msgid "Select 'FBC SCR' if this tuner will connect to a SCR (Unicable/JESS) device. For all other setups select 'FBC automatic'."
 msgstr "Sélectionnez ‘FBC SCR’ si le tuner va être connecté à un périphérique SCR (Unicable/JESS). Pour toutes les autres configurations choisir ‘FBC automatique’."
 
-msgid "Select 'Yes' when you want to configure this tuner for DVB-ATSC"
-msgstr ""
+msgid "Select 'Yes' when you want to configure this tuner for ATSC"
+msgstr "Sélectionnez «Oui» lorsque vous souhaitez configurer ce tuner pour ATSC"
 
 msgid "Select 'Yes' when you want to configure this tuner for DVB-C"
-msgstr ""
+msgstr "Sélectionnez «Oui» lorsque vous souhaitez configurer ce tuner pour DVB-C"
 
 msgid "Select 'Yes' when you want to configure this tuner for DVB-S"
-msgstr ""
+msgstr "Sélectionnez «Oui» lorsque vous souhaitez configurer ce tuner pour DVB-S"
 
 msgid "Select 'Yes' when you want to configure this tuner for DVB-T"
-msgstr ""
+msgstr "Sélectionnez «Oui» lorsque vous souhaitez configurer ce tuner pour DVB-T"
 
 msgid "Select 'band' if using a 'universal' LNB, otherwise consult your LNB spec sheet."
 msgstr "Sélectionnez ‘bande’ si vous utilisez un LNB ‘universel’, sinon consultez la fiche technique de votre LNB."
@@ -8345,9 +8343,8 @@ msgstr "Basculer vers sous-service précédent"
 msgid "Switch to radio mode"
 msgstr "Basculer en mode radio"
 
-#, fuzzy
 msgid "Switchable tuner types"
-msgstr "Types de tuner permutables:"
+msgstr "Types de tuner permutables"
 
 msgid "Switzerland"
 msgstr "Suisse"
@@ -8387,7 +8384,7 @@ msgstr ""
 "\n"
 "Traducteur: Pr2\n"
 "Support: www.openpli.org\n"
-"Dernière MAJ: 15-02-2019"
+"Dernière MAJ: 06-03-2019"
 
 msgid "TS file is too large for ISO9660 level 1!"
 msgstr "Fichier TS trop grand pour le niveau 1 ISO9660!"
@@ -8664,7 +8661,7 @@ msgstr ""
 "SVP, ne paniquez pas si vous voyez des valeurs que vous pensez étranges!"
 
 msgid "This is a multitype tuner. Available options depend on the hardware."
-msgstr ""
+msgstr "Ceci est un tuner multi type. Les options disponibles diffèrent en fonction du matériel."
 
 msgid "This is the order in which DiSEqC commands are sent to the aerial system. The order must correspond exactly with the order the physical devices are arranged along the signal cable (starting from the receiver end)."
 msgstr "Ceci est l’ordre dans laquelle les commandes DiSEqC sont envoyées vers un système aérien. L’ordre doit correspondre exactement avec l’ordre des périphériques physiques le long du câble (en démarrant du récepteur vers la fin)."
