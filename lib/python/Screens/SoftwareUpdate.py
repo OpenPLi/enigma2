@@ -13,7 +13,6 @@ from Components.Sources.StaticText import StaticText
 from Components.Slider import Slider
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import fileExists
-from Tools.HardwareInfo import HardwareInfo
 from enigma import eTimer, getBoxType, eDVBDB
 from urllib2 import urlopen
 import datetime, os
