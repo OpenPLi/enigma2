@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-22 14:27+0330\n"
+"POT-Creation-Date: 2019-03-06 19:22+0100\n"
 "PO-Revision-Date: 2019-02-13 20:52+0200\n"
 "Last-Translator: jamu\n"
 "Language-Team: BoxFreak/jamu\n"
@@ -2050,7 +2050,8 @@ msgstr "Toimintatila: %s"
 msgid "Configuration..."
 msgstr "Asetukset..."
 
-msgid "Configure DVB-ATSC"
+#, fuzzy
+msgid "Configure ATSC"
 msgstr "Määritä DBV-ATSC"
 
 msgid "Configure DVB-C"
@@ -3481,6 +3482,10 @@ msgstr "Englanti"
 msgid "Enigma (re)starts: %d\n"
 msgstr "Enigman käynnistykset %d\n"
 
+#, python-format
+msgid "Enigma debug level: %d\n"
+msgstr ""
+
 msgid "Enigma version: "
 msgstr "Enigman versio: "
 
@@ -4818,11 +4823,6 @@ msgid "Invalid location"
 msgstr "Virheellinen sijainti"
 
 #
-#, fuzzy
-msgid "Invalid reason"
-msgstr "Virheellinen sijainti"
-
-#
 msgid "Invalid transponder data"
 msgstr "Epäkelpo transponderin tieto"
 
@@ -6015,7 +6015,7 @@ msgid "Not tested:"
 msgstr ""
 
 msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'."
-msgstr "Määritä herätetäänkö vastaanotin automaattisesti määriteltynä aikana. Jos lisäksi haluat että vastaanotin siirtyy valmiustilaan herätyksen jälkeen, aseta 'Käynnisty valmiustilaan' arvoksi järjestelmän yleisasetuksissa 'Ei, paitsi ajastetusta herätyksestä'." 
+msgstr "Määritä herätetäänkö vastaanotin automaattisesti määriteltynä aikana. Jos lisäksi haluat että vastaanotin siirtyy valmiustilaan herätyksen jälkeen, aseta 'Käynnisty valmiustilaan' arvoksi järjestelmän yleisasetuksissa 'Ei, paitsi ajastetusta herätyksestä'."
 
 #
 msgid ""
@@ -7360,6 +7360,10 @@ msgstr "Käynnistä enigma uudelleen"
 msgid "Restart enigma in debug mode"
 msgstr "Käynnistä enigma uudelleen debug tilassa"
 
+#, fuzzy
+msgid "Restart enigma in standard mode"
+msgstr "Käynnistä enigma uudelleen debug tilassa"
+
 #
 msgid "Restart network"
 msgstr "Käynnistä verkko uudelleen"
@@ -7810,7 +7814,8 @@ msgstr ""
 msgid "Select 'FBC SCR' if this tuner will connect to a SCR (Unicable/JESS) device. For all other setups select 'FBC automatic'."
 msgstr ""
 
-msgid "Select 'Yes' when you want to configure this tuner for DVB-ATSC"
+#, fuzzy
+msgid "Select 'Yes' when you want to configure this tuner for ATSC"
 msgstr "Valitse käytetäänkö tätä viritintä DVB-ATSC viritykseen"
 
 msgid "Select 'Yes' when you want to configure this tuner for DVB-C"
