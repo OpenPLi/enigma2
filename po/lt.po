@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-06 19:22+0100\n"
-"PO-Revision-Date: 2019-01-11 19:33+0200\n"
+"POT-Creation-Date: 2019-03-07 21:51+0330\n"
+"PO-Revision-Date: 2019-03-05 15:26+0200\n"
 "Last-Translator: Audronis Grincevicius <adga45@gmail.com>\n"
 "Language-Team: Adga (C) <adga45@gmail.com>\n"
 "Language: lt_LT\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 2.2.1\n"
 
 msgid ""
 "\n"
@@ -165,7 +165,7 @@ msgid " extensions."
 msgstr " plėtiniai."
 
 msgid " ms"
-msgstr " msek."
+msgstr " msek"
 
 msgid " packages selected."
 msgstr " išsirinkti paketai."
@@ -199,7 +199,7 @@ msgstr "%03d MB"
 
 #, python-format
 msgid "%2.1f sec"
-msgstr "%2.1f sek."
+msgstr "%2.1f sek"
 
 #. TRANSLATORS: short time representation hour:minute
 #, python-format
@@ -303,7 +303,7 @@ msgstr "%d kB/s"
 
 #, python-format
 msgid "%d min"
-msgstr "%d min."
+msgstr "%d min"
 
 #, python-format
 msgid "%d minute"
@@ -318,7 +318,7 @@ msgstr "%d minutės"
 
 #, python-format
 msgid "%d ms"
-msgstr "%d msek."
+msgstr "%d msek"
 
 #, python-format
 msgid "%d pixel wide"
@@ -329,7 +329,7 @@ msgstr[2] "%d pikselių pločio"
 
 #, python-format
 msgid "%d sec"
-msgstr "%d sek."
+msgstr "%d sek"
 
 #, python-format
 msgid "%d second"
@@ -382,14 +382,15 @@ msgstr "%d:%02d"
 msgid "%k:%M %e/%m"
 msgstr "%m/%e %k:%M"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "%s\n"
 "Do you still want to flash image\n"
 "%s?"
 msgstr ""
-"Ar norite įdiegti šį atvaizdą\n"
-"%s"
+"%s\n"
+"Ar vis tiek norite įdiegti atvaizdą\n"
+"%s?"
 
 #, python-format
 msgid ""
@@ -431,7 +432,7 @@ msgstr "%s%% Automatinis diegimas %s"
 
 #, python-format
 msgid "%s%d min"
-msgstr "%s%d min."
+msgstr "%s%d min"
 
 #, python-format
 msgid "%s%d%s"
@@ -621,9 +622,8 @@ msgstr ": 0000 - numatytasis (išjungta)"
 msgid "<Current movielist location>"
 msgstr "<Dabartinė filmų sąrašo vieta>"
 
-#, fuzzy
 msgid "<Default Skin>"
-msgstr "Numatytosios nuostatos"
+msgstr "<Numatytoji tema>"
 
 msgid "<Default movie location>"
 msgstr "<Numatytoji filmų vieta>"
@@ -756,7 +756,7 @@ msgid "AGC:"
 msgstr "AGC:"
 
 msgid "ASS File"
-msgstr "ASS failas"
+msgstr "ASS Failas"
 
 msgid "ASS file"
 msgstr "ASS failas"
@@ -990,7 +990,7 @@ msgid "Alternative"
 msgstr "Alternatyva"
 
 msgid "Alternative URL for images listed on FlashImage"
-msgstr ""
+msgstr "Alternatyvus atvaizdų URL, rodomas vidiniame atvaizde"
 
 msgid "Alternative numbering mode"
 msgstr "Alternatyvus numeravimo būdas"
@@ -1772,7 +1772,7 @@ msgid "Clear playlist"
 msgstr "Išvalyti grojaraštį"
 
 msgid "Client is streaming from this box!"
-msgstr ""
+msgstr "Klientas transliuoja iš šio imtuvo!"
 
 msgid "Clone TV screen to LCD"
 msgstr "Klonuoti TV vaizdą į LCD"
@@ -1868,21 +1868,17 @@ msgstr "Konfigūravimo būdas: %s"
 msgid "Configuration..."
 msgstr "Konfigūracija..."
 
-#, fuzzy
 msgid "Configure ATSC"
-msgstr "Konfigūruojama"
+msgstr "ATSC konfigūravimas"
 
-#, fuzzy
 msgid "Configure DVB-C"
-msgstr "Konfigūruojama"
+msgstr "DVB-C konfigūravimas"
 
-#, fuzzy
 msgid "Configure DVB-S"
-msgstr "Konfigūruojama"
+msgstr "DVB-S konfigūravimas"
 
-#, fuzzy
 msgid "Configure DVB-T"
-msgstr "Konfigūruojama"
+msgstr "DVB-T konfigūravimas"
 
 msgid "Configure an additional delay to improve external subtitle synchronisation."
 msgstr "Nustatykite papildomą delsą, kad pagerinti išorinį subtitrų sinchronizavimą."
@@ -2489,9 +2485,8 @@ msgstr "Datos / laiko įvestis"
 msgid "Debug to file"
 msgstr "Sukurti klaidų žurnalo failą"
 
-#, fuzzy
 msgid "Deep Standby LED"
-msgstr "Visiškai išjungti"
+msgstr "Gilaus budėjimo LED"
 
 msgid "Deep standby"
 msgstr "Visiškai išjungti"
@@ -2731,15 +2726,13 @@ msgid "Display >16:9 content as"
 msgstr ">16:9 santykio turinį rodyti, kaip"
 
 msgid "Display EPG as MultiEPG"
-msgstr ""
+msgstr "Rodyti EPG kaip MultiEPG"
 
-#, fuzzy
 msgid "Display EPG info for current event"
-msgstr "Išsaugoti laiko poslinkį tik šiam įvykiui"
+msgstr "Rodyti EPG informaciją apie dabartinį įvykį"
 
-#, fuzzy
 msgid "Display EPG list for current channel"
-msgstr "Rodyti šio kanalo EPG..."
+msgstr "Rodyti dabartinio kanalo EPG sąrašą"
 
 msgid "Display and userinterface"
 msgstr "Ekranas ir vartotojo sąsaja"
@@ -3171,7 +3164,7 @@ msgstr "Paleidimų skaičius: %d\n"
 
 #, python-format
 msgid "Enigma debug level: %d\n"
-msgstr ""
+msgstr "Enigma derinimo lygis: %d\n"
 
 msgid "Enigma version: "
 msgstr "Enigmos versija: "
@@ -3192,7 +3185,7 @@ msgid "Enter URL"
 msgstr "Įrašykite internetinį adresą"
 
 msgid "Enter an URL where alternative images could be listed for FlashImage"
-msgstr ""
+msgstr "Įveskite URL, kuriame vidiniame atvaizde gali būti įrašyti alternatyvūs atvaizdai"
 
 msgid "Enter if you are in the east or west hemisphere."
 msgstr "Įveskite, jei esate rytų ar vakarų pusrutulyje."
@@ -3998,7 +3991,7 @@ msgid "Harddisk Setup"
 msgstr "HDD valdymas"
 
 msgid "Harddisk is not in sleepmode it could be in use!"
-msgstr ""
+msgstr "Kietasis diskas yra ne miego režime, jis gali būti naudojamas!"
 
 msgid "Hardware: "
 msgstr "Techninė įranga: "
@@ -4087,13 +4080,11 @@ msgstr "Sparčiųjų klavišų valdymas"
 msgid "Hotkey zap"
 msgstr "Spartusis perjungimas"
 
-#, fuzzy
 msgid "Hotswitchable"
-msgstr "netikrintinas"
+msgstr "Greitai perjungiamas"
 
-#, fuzzy
 msgid "Hotswitchable tuner"
-msgstr "Perjungiami imtuvų tipai:"
+msgstr "Greitai perjungiamas imtuvas"
 
 msgid "How many minutes do you want add to the recording?"
 msgstr "Kiek minučių norite pridėti prie įrašo?"
@@ -4443,15 +4434,17 @@ msgstr "Meno sala"
 msgid "Israel"
 msgstr "Izraelis"
 
+#, fuzzy
 msgid ""
 "It seems you did not see all the eight arrow heads. This means your TV has overscan enabled, and is not configured properly.\n"
 "\n"
 "Please refer to your TV's manual to find how you can disable overscan on your TV. Look for terms like 'Just fit', 'Full width', etc. If you can't find it, ask other users at http://forums.openpli.org.\n"
 "\n"
 msgstr ""
-"Atrodo, kad nematote visų aštuonių rodyklių galų. Tai reiškia, kad TV įjungtas ekrano kraštinių nustatymas, bet jis netinkamai sukonfigūruotas.\n"
+"Atrodo negalima pamatyti visų aštuonių rodyklių galvučių. Tai reiškia, kad jūsų televizoriuje vaizdo kraštinių rodymas jau įjungtas, ir jis nėra tinkamai sukonfigūruotas.\n"
 "\n"
-"Susiraskite savo televizoriaus aprašyme, kaip išjungti ekrano kraštinių nustatymą Jūsų televizoriuje. Ieškokite terminų, pvz., \"Tiesiog tinkamas\", \"Visiškas plotis\" ir t.t. Jei negalite jo rasti, paprašykite kitų naudotojų adresu http://forums.openpli.org..\n"
+"Prašome žiūrėti į savo televizoriaus vadovą ir rasti, kaip galite išjungti vaizdo kraštinių rodymą savo televizoriuje. Ieškokite sąvokų kaip \"Tiesiog tinka\", \"Visas plotis\" ir t.t Jei negalite jų rasti, paprašykite kitų vartotojų https://openvision.tech\n"
+"\n"
 
 msgid "Italian"
 msgstr "Italų"
@@ -4913,11 +4906,11 @@ msgstr "Trūkstamas "
 
 msgctxt "Satellite configuration mode"
 msgid "Mode"
-msgstr "Palydovo konfigūracija"
+msgstr "Režimas"
 
 msgctxt "Video output mode"
 msgid "Mode"
-msgstr "Vaizdo išvestis"
+msgstr "Režimas"
 
 msgid "Model"
 msgstr "Modelis"
@@ -5057,8 +5050,9 @@ msgstr "Mozambikas"
 msgid "Multi EPG"
 msgstr "Daugiakanalis EPG"
 
+#, fuzzy
 msgid "Multi channel downmix"
-msgstr "Daugiakanalio garso suliejimas"
+msgstr "Daugiakanalis PCM"
 
 msgid "Multi-EPG bouquet selection"
 msgstr "Daugiakanalio EPG paketo pasirinkimas"
@@ -5211,11 +5205,11 @@ msgstr "Naujienos, aktualijos"
 
 msgctxt "button label, 'next screen'"
 msgid "Next"
-msgstr "Kitas"
+msgstr "Sekantis"
 
 msgctxt "now/next: 'next' event label"
 msgid "Next"
-msgstr "Kitas"
+msgstr "Toliau programoje"
 
 msgid "Nicaragua"
 msgstr "Nikaragva"
@@ -5443,7 +5437,7 @@ msgstr "Dabar"
 
 msgctxt "now/next: 'now' event label"
 msgid "Now"
-msgstr "Dabar"
+msgstr "Dabar rodoma"
 
 msgid "Now playing"
 msgstr "Dabar rodoma"
@@ -6590,9 +6584,8 @@ msgstr "Paleisti grafinę aplinką iš naujo"
 msgid "Restart enigma in debug mode"
 msgstr "Iš naujo paleisti enigma derinimo režimu"
 
-#, fuzzy
 msgid "Restart enigma in standard mode"
-msgstr "Iš naujo paleisti enigma derinimo režimu"
+msgstr "Paleisti grafinę aplinką iš naujo įprastu režimu"
 
 msgid "Restart network"
 msgstr "Paleisti tinklą iš naujo"
@@ -6996,16 +6989,16 @@ msgid "Select 'FBC SCR' if this tuner will connect to a SCR (Unicable/JESS) devi
 msgstr "Pasirinkite 'FBC SCR' jei šis imtuvas prisijungtas prie SCR (Unicable/JESS) įrenginio. Visiems kitiems nustatymams pasirinkite 'FBC automatinis'."
 
 msgid "Select 'Yes' when you want to configure this tuner for ATSC"
-msgstr ""
+msgstr "Pasirinkite 'Taip', jei norite konfigūruoti šį imtuvą ATSC"
 
 msgid "Select 'Yes' when you want to configure this tuner for DVB-C"
-msgstr ""
+msgstr "Pasirinkite 'Taip', kai norite konfigūruoti šį imtuvą DVB-C"
 
 msgid "Select 'Yes' when you want to configure this tuner for DVB-S"
-msgstr ""
+msgstr "Pasirinkite 'Taip', kai norite konfigūruoti šį imtuvą DVB-S"
 
 msgid "Select 'Yes' when you want to configure this tuner for DVB-T"
-msgstr ""
+msgstr "Pasirinkite 'Taip', kai norite konfigūruoti šį imtuvą DVB-T"
 
 msgid "Select 'band' if using a 'universal' LNB, otherwise consult your LNB spec sheet."
 msgstr "Jei naudojate 'universalią' LNB, pasirinkite 'juosta', kitaip kreipkitės į savo LNB specifikacijų lapą."
@@ -8060,9 +8053,8 @@ msgstr "Budėjimo režimas"
 msgid "Standby / restart"
 msgstr "Išjungimo meniu"
 
-#, fuzzy
 msgid "Standby LED"
-msgstr "LED budėjime"
+msgstr "Budėjimo LED"
 
 msgid "Standby after current event"
 msgstr "Po šio įvykio pereiti į budėjimo režimą"
@@ -8375,9 +8367,8 @@ msgstr "Perjungti į ankstesnį subkanalą"
 msgid "Switch to radio mode"
 msgstr "Perjungti į radiją"
 
-#, fuzzy
 msgid "Switchable tuner types"
-msgstr "Perjungiami imtuvų tipai:"
+msgstr "Perjungiamų imtuvų tipai"
 
 msgid "Switzerland"
 msgstr "Šveicarų"
@@ -8410,7 +8401,7 @@ msgstr "T2MI RAW režimas"
 msgid "TRANSLATOR_INFO"
 msgstr ""
 "P&C Adga, adga45@gmail.com\n"
-"Pasvalys, 2019-01-05"
+"Pasvalys, 2019-03-05 versija"
 
 msgid "TS file is too large for ISO9660 level 1!"
 msgstr "TS failas per didelis 1 lygio ISO9660!"
@@ -8455,22 +8446,22 @@ msgid "Terrestrial"
 msgstr "Antžeminė TV"
 
 msgid "Test DiSEqC settings"
-msgstr "Testuoti DiSEqC nustatymus"
+msgstr "Tikrinkite DiSEqC nustatymus"
 
 msgid "Test mode"
-msgstr "Testo režimas"
+msgstr "Tikrinimo režimas"
 
 msgid "Test the network configuration of your receiver.\n"
-msgstr "Patikrinkite savo imtuvo tinklo konfigūraciją.\n"
+msgstr "Tikrinkite savo imtuvo tinklo konfigūraciją.\n"
 
 msgid "Test type"
-msgstr "Testo tipas"
+msgstr "Tikrinimo tipas"
 
 msgid "Testscreens"
-msgstr "Ekrano testiniai vaizdai"
+msgstr "Ekrano tikrinimo vaizdai"
 
 msgid "Testscreens that are helpfull to fine-tune your display"
-msgstr "Testiniai ekranai, padedantys tiksliai suderinti ekrano šviesumą ir kontrastą"
+msgstr "Ekrano tikrinimo vaizdai, padedantys tiksliau suderinti šviesumą ir kontrastą"
 
 msgid "Text color"
 msgstr "Teksto spalva"
@@ -8509,7 +8500,7 @@ msgid "The PIN code has been saved successfully."
 msgstr "PIN kodas sėkmingai išsaugotas."
 
 msgid "The PIN codes you entered are different."
-msgstr "Jūsų įvesti PIN kodai yra skirtingi."
+msgstr "Jūsų įrašyti PIN kodai yra skirtingi."
 
 #, python-format
 msgid ""
@@ -8579,10 +8570,10 @@ msgstr ""
 
 #, python-format
 msgid "The path %s already exists."
-msgstr "Kelias %s jau egzistuoja."
+msgstr "Kelias %s jau yra."
 
 msgid "The pin code you entered is wrong."
-msgstr "Įvedėte neteisingą PIN kodą."
+msgstr "Įrašėte neteisingą PIN kodą."
 
 #, python-format
 msgid "The results have been written to %s"
@@ -8592,10 +8583,10 @@ msgid "The saved PIN was cleared."
 msgstr "Išsaugotas PIN išvalytas."
 
 msgid "The sleep timer has been activated."
-msgstr "Miego laikmatis įjungtas."
+msgstr "Budėjimo laikmatis jau aktyvuotas."
 
 msgid "The sleep timer has been disabled."
-msgstr "Miego laikmatis išjungtas."
+msgstr "Budėjimo laikmatis jau išjungtas."
 
 msgid ""
 "The software management extension is not installed!\n"
@@ -8687,7 +8678,7 @@ msgstr ""
 "Nepulkit į paniką, perskaitę čia kokią nors jums nesuprantamą, ar įtartiną informaciją!"
 
 msgid "This is a multitype tuner. Available options depend on the hardware."
-msgstr ""
+msgstr "Tai kelių tipų imtuvas. Galimos parinktys priklauso nuo aparatūros."
 
 msgid "This is the order in which DiSEqC commands are sent to the aerial system. The order must correspond exactly with the order the physical devices are arranged along the signal cable (starting from the receiver end)."
 msgstr "Tai yra tvarka, kuria DiSEqC komandos siunčiamos į antenos sistemą. Užsakymas turi tiksliai atitikti tvarką, pagal kurią fiziniai įrenginiai išdėstomi palei signalo kabelį (pradedant imtuvo pabaigos)."
@@ -8872,7 +8863,7 @@ msgstr ""
 "Šis testas tikrina, ar jūsų vietinio tinklo adapteris yra nustatytas DHCP automatinei IP adreso konfigūracijai.\n"
 "Jei gaunate pranešimą 'išjungta':\n"
 "- jūsų tinklo adapteris yra sukonfigūruotas rankiniam IP nustatymui\n"
-"- įsitikinkite, kad įvedėte teisingą IP informaciją tinklo adapterio nustatymų dialoge.\n"
+"- įsitikinkite, kad įrašėte teisingą IP informaciją tinklo adapterio nustatymų dialoge.\n"
 "Jei gaunate pranešimą 'įjungta':\n"
 "- patikrinkite, ar turite savo tinkle sukonfigūruotą ir veikiantį DHCP serverį."
 
@@ -9149,16 +9140,14 @@ msgstr "Turkmenistanas"
 msgid "Turks and Caicos Islands"
 msgstr "Terkso ir Kaikoso salos"
 
-#, fuzzy
 msgid "Turn on the power LED during deep standby."
-msgstr "Įjunkite maitinimo LED indikatorių budėjimo režimu metu."
+msgstr "Įjunkite įtampos LED gilaus budėjimo režime."
 
 msgid "Turn on the power LED during standby."
 msgstr "Įjunkite maitinimo LED indikatorių budėjimo režimu metu."
 
-#, fuzzy
 msgid "Turn on the power LED."
-msgstr "Įjunkite maitinimo LED indikatorių budėjimo režimu metu."
+msgstr "Įjunkite maitinimo LED indikatorių."
 
 msgid "Turning step size"
 msgstr "Sukimosi žingsnio dydis"
@@ -9191,7 +9180,7 @@ msgid "USALS"
 msgstr "USALS"
 
 msgid "USALS automatically moves a motorised dish to the correct satellite based on the coordinates entered by the user. Without USALS each satellite will need to be setup and saved individually."
-msgstr "USALS automatiškai perkelia motorizuotą anteną į tinkamą palydovą, remiantis vartotojo įvestomis koordinatėmis. Be USALS kiekvienas palydovas turės būti nustatytas ir išsaugotas atskirai."
+msgstr "USALS automatiškai perkelia motorizuotą anteną į tinkamą palydovą, remiantis vartotojo įrašytomis koordinatėmis. Be USALS kiekvienas palydovas turės būti nustatytas ir išsaugotas atskirai."
 
 msgid "USALS calibration"
 msgstr "USALS kalibravimas"
@@ -9233,7 +9222,7 @@ msgid "Undo uninstall"
 msgstr "Anuliuoti išdiegimą"
 
 msgid "Unencrypted"
-msgstr "Nekoduota"
+msgstr "Nekoduotas"
 
 msgid "Unexpected error while retreiving fallback tuner's timer information"
 msgstr "Netikėta klaida, nuskaitant atsarginio imtuvo laikmačio informaciją"
@@ -9272,7 +9261,7 @@ msgid "United States of America"
 msgstr "Jungtinės Amerikos Valstijos"
 
 msgid "Universal LNB"
-msgstr "Universali LNB"
+msgstr "Universalus LNB"
 
 msgid "Unknown"
 msgstr "Nežinoma"
@@ -9290,7 +9279,7 @@ msgid "Unzipping Image"
 msgstr "Išarchyvuojamas atvaizdas"
 
 msgid "Update"
-msgstr "Atnaujinimas"
+msgstr "Atnaujinti"
 
 msgid "Update and ask to reboot"
 msgstr "Atnaujinti ir klausti, ar paleisti iš naujo"
@@ -9307,12 +9296,12 @@ msgstr "Atnaujinti tik kanalų sąrašą"
 #, python-format
 msgid "Update completed, %d package was installed."
 msgid_plural "Update completed, %d packages were installed."
-msgstr[0] "Atnaujinimas baigtas, įdiegtas %d paketas."
-msgstr[1] "Atnaujinimas baigtas, įdiegti %d paketai."
-msgstr[2] "Atnaujinimas baigtas, įdiegta %d paketų."
+msgstr[0] "Atnaujinta, įdiegtas %d paketas."
+msgstr[1] "Atnaujinta, įdiegti %d paketai."
+msgstr[2] "Atnaujinta, įdiegta %d paketų."
 
 msgid "Update completed. Do you want to reboot your receiver?"
-msgstr "Atnaujinimas baigtas. Ar norite paleisti imtuvą iš naujo?"
+msgstr "Atnaujinta. Ar norite paleisti imtuvą iš naujo?"
 
 msgid "Update failed. Your receiver does not have a working internet connection."
 msgstr "Atnaujinimo klaida. Jūsų imtuvas neturi interneto ryšio."
@@ -9384,10 +9373,10 @@ msgid "Use circular LNB"
 msgstr "Naudoti apskritiminę LNB"
 
 msgid "Use fastscan channel names"
-msgstr "Naudokite greito skenavimo kanalų pavadinimus"
+msgstr "Naudokite greitos paieškos kanalo pavadinimus"
 
 msgid "Use fastscan channel numbering"
-msgstr "Naudokite greito skenavimo kanalų numeravimą"
+msgstr "Naudokite greitos paieškos kanalų numeravimą"
 
 msgid "Use frequency or channel"
 msgstr "Naudokite dažnį arba kanalą"
@@ -9438,7 +9427,7 @@ msgid "Used service scan type"
 msgstr "Naudojamas kanalų paieškos būdas"
 
 msgid "User - bouquets"
-msgstr "Mano paketai"
+msgstr "Vartotojas - paketai"
 
 msgid "User ID"
 msgstr "Vartotojo ID"
@@ -9447,13 +9436,13 @@ msgid "User Mode"
 msgstr "Vartotojo režimas"
 
 msgid "User defined"
-msgstr "Naudotojo nustatytas"
+msgstr "Vartotojo nustatytas"
 
 msgid "User defined transponder"
-msgstr "Naudotojo nustatytas transponderis"
+msgstr "Vartotojo pasirinktas transponderis"
 
 msgid "User interface"
-msgstr "Vartotojo aplinka"
+msgstr "Vartotojo sąsaja"
 
 #, python-format
 msgid "Using LNB %d"
@@ -10029,7 +10018,7 @@ msgstr "Rodomos vaizdo kraštinės organizavimo vedlys"
 
 #, python-format
 msgid "Would you save the entered PIN %s persistent?"
-msgstr "Išsaugoti įvestą PIN %s pastoviai?"
+msgstr "Išsaugoti įrašytą PIN %s pastoviai?"
 
 msgid "Write error while recording. Disk full?\n"
 msgstr "Rašant įrašą įvyko klaida. Diskas pilnas?\n"
@@ -10270,10 +10259,10 @@ msgstr ""
 "Spauskite 'OK', kad tęsti."
 
 msgid "Your receiver is rebooting"
-msgstr "Imtuvas paleidžiamas iš naujo"
+msgstr "Jūsų imtuvas paleidžiamas iš naujo"
 
 msgid "Your receiver is shutting down"
-msgstr "Imtuvas išjungiamas"
+msgstr "Jūsų Imtuvas išjungiamas"
 
 msgid "Your receiver might be unusable now. Please consult the manual for further assistance before rebooting your receiver."
 msgstr "Jūsų imtuvas gali tapti netinkamu naudoti. Vadovaukitės vartotojo vadovu, prieš paleisdami imtuvą iš naujo."
@@ -10282,10 +10271,10 @@ msgid "Your receiver will got to stand by due to the sleeptimer."
 msgstr "Pagal miego laikmatį, imtuvas dabar persijungs į budėjimo režimą."
 
 msgid "Your receiver will got to standby due to inactivity."
-msgstr "Įmtuvas persijungs į budėjimo režimą, nes yra nenaudojamas."
+msgstr "Jūsų imtuvas persijungs į budėjimo režimą, nes yra nenaudojamas."
 
 msgid "Your receiver will restart after pressing OK on your remote control."
-msgstr "Paspaudus 'OK', imtuvas bus paleistas iš naujo."
+msgstr "Paspaudus OK, Jūsų imtuvas bus paleistas iš naujo."
 
 msgid ""
 "Your wireless LAN internet connection could not be started!\n"
@@ -10308,7 +10297,7 @@ msgid "Zap back to previously tuned service?"
 msgstr "Perjungti į ankstesnį suderintą kanalą?"
 
 msgid "Zap back to service before positioner setup?"
-msgstr "Įjungti, prieš pozicionieriaus konfigūraciją, naudotą kanalą?"
+msgstr "Perjungti į, prieš pozicionieriaus konfigūraciją, naudotą kanalą?"
 
 msgid "Zap bouquets blindly on zap buttons"
 msgstr "Perjungti paketus aklai, perjungimo mygtukais"
@@ -10342,11 +10331,11 @@ msgstr "Perjungti aukštyn"
 
 #, python-format
 msgid "Zapped to timer service %s as PiP!"
-msgstr "Įjungta į laikmačio kanalą %s kaip PiP!"
+msgstr "Perjungta į laikmačio kanalą %s kaip PiP!"
 
 #, python-format
 msgid "Zapped to timer service %s!"
-msgstr "Įjungta į laikmačio kanalą %s!"
+msgstr "Perjungta į laikmačio kanalą %s!"
 
 msgid "Zgemma H.S/H.2S/H.2H/H5/H7"
 msgstr "Zgemma H.S/H.2S/H.2H/H5/H7"
@@ -10361,7 +10350,7 @@ msgid "Zimbabwe"
 msgstr "Zimbabvė"
 
 msgid "[REC]"
-msgstr "[REC]"
+msgstr ""
 
 msgid "[a]"
 msgstr "[a]"
@@ -10572,7 +10561,7 @@ msgid "connected"
 msgstr "prijungtas"
 
 msgid "controlled by HDMI"
-msgstr "valdoma HDMI"
+msgstr "kontroliuojama HDMI"
 
 msgid "cooking"
 msgstr "valgio gaminimas"
