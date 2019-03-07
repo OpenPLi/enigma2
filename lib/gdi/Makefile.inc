@@ -20,6 +20,7 @@ gdi_libenigma_gdi_a_SOURCES = \
 	gdi/lcd.cpp \
 	gdi/picexif.cpp \
 	gdi/picload.cpp \
+	gdi/pixmapcache.cpp \
 	gdi/region.cpp
 
 gdiincludedir = $(pkgincludedir)/lib/gdi
@@ -40,6 +41,7 @@ gdiinclude_HEADERS = \
 	gdi/lcd.h \
 	gdi/picexif.h \
 	gdi/picload.h \
+	gdi/pixmapcache.h \
 	gdi/region.h
 
 if HAVE_LIBSDL
