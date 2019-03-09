@@ -315,7 +315,6 @@ class HotkeySetup(Screen):
 		self.session.openWithCallback(self.setDefaultHotkey, MessageBox, _("Set all hotkey to default?"), MessageBox.TYPE_YESNO)
 
 	def getFunctions(self):
-		attached = False
 		key = self["list"].l.getCurrentSelection()[0][1]
 		if key:
 			selected = []
@@ -328,9 +327,8 @@ class HotkeySetup(Screen):
 					function = list(function for function in self.hotkeyFunctions if function[1] == x )
 					if function:
 						selected.append(ChoiceEntryComponent('',((function[0][0]), function[0][1])))
-						attached = True
 			self["choosen"].setList(selected)
-		self["description"].setText(_("Press or select button and then press 'OK' for attach next function or edit attached.") if attached else _("Press or select button and then press 'OK' for attach function."))
+		self["description"].setText(_("Press or select button and then press 'OK' for attach next function or edit attached.") if len(selected) else _("Press or select button and then press 'OK' for attach function."))
 
 class HotkeySetupSelect(Screen):
 	def __init__(self, session, key, args=None):
@@ -350,7 +348,6 @@ class HotkeySetupSelect(Screen):
 		self.config = eval("config.misc.hotkey." + key[0][1])
 		self.expanded = []
 		self.selected = []
-		attached = False
 		for x in self.config.value.split(','):
 			if x.startswith("ZapPanic"):
 				self.selected.append(ChoiceEntryComponent('',((_("Panic to") + " " + ServiceReference(eServiceReference(x.split("/", 1)[1]).toString()).getServiceName()), x)))
@@ -360,8 +357,7 @@ class HotkeySetupSelect(Screen):
 				function = list(function for function in self.hotkeyFunctions if function[1] == x )
 				if function:
 					self.selected.append(ChoiceEntryComponent('',((function[0][0]), function[0][1])))
-					attached = True
-		text = _("Press 'OK' for attach next function or 'CH+/-' for edit attached.") if attached else _("Press 'OK' for attach function.")
+		text = _("Press 'OK' for attach next function or 'CH+/-' for edit attached.") if len(self.selected) else _("Press 'OK' for attach function.")
 		self.prevselected = self.selected[:]
 		if self.prevselected:
 			self["key_yellow"].setText(_("Edit selection"))
