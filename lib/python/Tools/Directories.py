@@ -210,7 +210,7 @@ def getRecordingFilename(basename, dirname = None):
 
 	if not os.path.isfile("%s.ts" % filename):
 		return filename
-	for i in range(0,1000):
+	for i in range(1,1000):
 		newfilename = "%s_%03d" % (filename, i)
 		if os.path.isfile("%s.ts" % newfilename):
 			if not os.path.islink("%s.eit" % newfilename):
