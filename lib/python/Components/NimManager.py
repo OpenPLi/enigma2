@@ -517,7 +517,7 @@ class NIM(object):
 				types.remove("DVB-S")
 			if len(types) > 1:
 				self.multi_type = {}
-				self.hotswitchable = self.description.upper().startswith("AVL")
+				self.hotswitchable = not os.path.exists("/proc/stb/frontend/%d/mode" % self.frontend_id)
 				for type in types:
 					self.multi_type[str(types.index(type))] = type
 
