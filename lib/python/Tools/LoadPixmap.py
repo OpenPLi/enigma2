@@ -1,13 +1,18 @@
 from enigma import loadPNG, loadJPG
 
-# if cached is not supplied, defaults to caching PNGs and not caching JPGs
+# If cached is not supplied, LoadPixmap defaults to caching PNGs and not caching JPGs
+# Split alpha channel JPGs are never cached as the C++ layer's caching is based on
+# a single file per image in the cache
 def LoadPixmap(path, desktop=None, cached=None):
 	if path[-4:] == ".png":
-		ptr = loadPNG(path, 0, 0 if cached == 0 else 1)
+		# cache unless caller explicity requests to not cache
+		ptr = loadPNG(path, 0, 0 if cached == False else 1)
 	elif path[-4:] == ".jpg":
-		ptr = loadJPG(path, 0, 1 if cached == 1 else 0)
+		# don't cache unless caller explicity requests caching
+		ptr = loadJPG(path, 1 if cached == True else 0)
 	elif path[-1:] == ".":
-		alpha = loadPNG(path + "a.png", 0)
+		# caching mechanism isn't suitable for multi file images, so it's explicitly disabled
+		alpha = loadPNG(path + "a.png", 0, 0)
 		ptr = loadJPG(path + "rgb.jpg", alpha, 0)
 	else:
 		raise Exception("neither .png nor .jpg, please fix file extension")
