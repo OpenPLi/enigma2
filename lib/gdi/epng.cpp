@@ -185,6 +185,11 @@ my_error_exit (j_common_ptr cinfo)
 	longjmp(myerr->setjmp_buffer, 1);
 }
 
+int loadJPG(ePtr<gPixmap> &result, const char *filename, int cached)
+{
+	return loadJPG(result, filename, ePtr<gPixmap>(), cached);
+}
+
 int loadJPG(ePtr<gPixmap> &result, const char *filename, ePtr<gPixmap> alpha, int cached)
 {
 	if (cached && (result = PixmapCache::Get(filename)))
