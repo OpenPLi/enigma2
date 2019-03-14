@@ -144,10 +144,10 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 			if self.nimConfig.multiType.value == "nothing":
 				self.nimConfig.configMode.value = "nothing"
 			elif self.nim.isCompatible("DVB-S"):
-				if self.nimConfig.configMode.value in ("nothing", "enable"):
+				if self.nimConfig.configMode.value in ("nothing", "enabled"):
 					self.nimConfig.configMode.value = "advanced"
 			else:
-				self.nimConfig.configMode.value = "enable"
+				self.nimConfig.configMode.value = "enabled"
 
 		self.configModeDVBS = getConfigListEntry(_("Configure DVB-S"), self.nimConfig.configModeDVBS, _("Select 'Yes' when you want to configure this tuner for DVB-S"))
 		self.configModeDVBC = getConfigListEntry(_("Configure DVB-C"), self.nimConfig.configModeDVBC, _("Select 'Yes' when you want to configure this tuner for DVB-C"))
