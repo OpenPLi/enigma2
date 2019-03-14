@@ -1484,6 +1484,7 @@ def InitNimManager(nimmgr, update_slots = []):
 
 	def tunerTypeChanged(nimmgr, configElement, initial=False):
 		fe_id = configElement.fe_id
+		print "[InitNimManager] tunerTypeChanged: setFrontendType %s" % nimmgr.nim_slots[fe_id].getType()
 		eDVBResourceManager.getInstance().setFrontendType(nimmgr.nim_slots[fe_id].frontend_id, nimmgr.nim_slots[fe_id].getType())
 		try:
 			raw_channel = eDVBResourceManager.getInstance().allocateRawChannel(fe_id)
@@ -1545,21 +1546,13 @@ def InitNimManager(nimmgr, update_slots = []):
 			if tunerTypesEnabled:
 				print "[InitNimManager] enable hotswitchable tuner type(s) %s" %  ",".join(tunerTypesEnabled)
 				eDVBResourceManager.getInstance().setFrontendType(nimmgr.nim_slots[fe_id].frontend_id, ",".join(tunerTypesEnabled))
-				if nim.configMode.value == "nothing":
-					nim.configMode.cancel()
-					if nim.configMode.value == "nothing":
-						nim.configMode.value = "simple"
+				createConfig(nim, slot)
 			else:
 				print "[InitNimManager] disable hotswitchable tuner"
 				nim.configMode.value = nim.configMode.default = "nothing"
 
-	for slot in nimmgr.nim_slots:
+	def createConfig(nim, slot):
 		slot_id = slot.slot
-		if update_slots and (slot_id not in update_slots):
-			continue
-		nim = config.Nims[slot_id]
-		nim.force_legacy_signal_stats = ConfigYesNo(default = False)
-
 		if slot.isCompatible("DVB-S"):
 			config_mode_choices = {"nothing": _("Disabled"), "simple": _("Simple"), "advanced": _("Advanced")}
 			if len(nimmgr.getNimListOfType(slot.type, exception=slot_id)) > 0:
@@ -1576,6 +1569,16 @@ def InitNimManager(nimmgr, update_slots = []):
 			if not slot.canBeCompatible("DVB-S"):
 				if slot.type is not None:
 					print "[InitNimManager] pls add support for this frontend type!", slot.type
+
+	for slot in nimmgr.nim_slots:
+		slot_id = slot.slot
+		if update_slots and (slot_id not in update_slots):
+			continue
+		nim = config.Nims[slot_id]
+		nim.force_legacy_signal_stats = ConfigYesNo(default = False)
+
+		createConfig(nim, slot)
+
 		fe_id = slot_id
 
 		if slot.canBeCompatible("DVB-S"):
