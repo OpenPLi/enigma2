@@ -1368,13 +1368,13 @@ def InitNimManager(nimmgr, update_slots = []):
 		if os.path.exists("/proc/stb/frontend/%d/t2mirawmode" % slot):
 			open("/proc/stb/frontend/%d/t2mirawmode" % slot, "w").write(configElement.value)
 
-	def createSatConfig(nim, slot_id, empty_slots):
+	def createSatConfig(nim, slot_id):
 		nim.toneAmplitude = ConfigSelection([("11", "340mV"), ("10", "360mV"), ("9", "600mV"), ("8", "700mV"), ("7", "800mV"), ("6", "900mV"), ("5", "1100mV")], "7")
-		nim.toneAmplitude.fe_id = slot_id - empty_slots
+		nim.toneAmplitude.fe_id = slot_id
 		nim.toneAmplitude.slot_id = slot_id
 		nim.toneAmplitude.addNotifier(toneAmplitudeChanged)
 		nim.scpcSearchRange = ConfigSelection([("0", _("no")), ("1", _("yes"))], "0")
-		nim.scpcSearchRange.fe_id = slot_id - empty_slots
+		nim.scpcSearchRange.fe_id = slot_id
 		nim.scpcSearchRange.slot_id = slot_id
 		nim.scpcSearchRange.addNotifier(scpcSearchRangeChanged)
 		nim.t2miRawMode = ConfigSelection([("disable", _("disabled")), ("enable", _("enabled"))], "disable")
@@ -1553,7 +1553,6 @@ def InitNimManager(nimmgr, update_slots = []):
 				print "[InitNimManager] disable hotswitchable tuner"
 				nim.configMode.value = nim.configMode.default = "nothing"
 
-	empty_slots = 0
 	for slot in nimmgr.nim_slots:
 		slot_id = slot.slot
 		if update_slots and (slot_id not in update_slots):
@@ -1575,13 +1574,12 @@ def InitNimManager(nimmgr, update_slots = []):
 		else:
 			nim.configMode = ConfigSelection(choices = { "nothing": _("disabled") }, default="nothing")
 			if not slot.canBeCompatible("DVB-S"):
-				empty_slots += 1
 				if slot.type is not None:
 					print "[InitNimManager] pls add support for this frontend type!", slot.type
-		fe_id = slot_id - empty_slots
+		fe_id = slot_id
 
 		if slot.canBeCompatible("DVB-S"):
-			createSatConfig(nim, slot_id, empty_slots)
+			createSatConfig(nim, slot_id)
 		if slot.canBeCompatible("DVB-C"):
 			createCableConfig(nim, slot_id)
 		if slot.canBeCompatible("DVB-T"):
