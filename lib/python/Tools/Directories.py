@@ -343,7 +343,7 @@ def getExtension(file):
 
 def mediafilesInUse(session):
 	from Components.MovieList import KNOWN_EXTENSIONS
-	files = [x[2] for x in lsof() if x[2].startswith('/media') and getExtension(x[2]) in KNOWN_EXTENSIONS]
+	files = [x[2] for x in lsof() if getExtension(x[2]) in KNOWN_EXTENSIONS]
 	service = session.nav.getCurrentlyPlayingServiceOrGroup()
 	filename = service and service.getPath()
 	if filename and "://" in filename: #when path is a stream ignore it
