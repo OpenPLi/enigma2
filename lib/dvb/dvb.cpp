@@ -1065,6 +1065,12 @@ RESULT eDVBResourceManager::allocateChannel(const eDVBChannelID &channelid, eUse
 	if (!simulate && m_cached_channel)
 	{
 		eDVBChannel *cache_chan = (eDVBChannel*)&(*m_cached_channel);
+		if(channelid==cache_chan->getChannelID())
+		{
+			eDebug("[eDVBResourceManager] use cached_channel");
+			channel = m_cached_channel;
+			return 0;
+		}
 		m_cached_channel_state_changed_conn.disconnect();
 		m_cached_channel=0;
 		m_releaseCachedChannelTimer->stop();
