@@ -826,6 +826,10 @@ void eDVBResourceManager::setFrontendType(int index, const char *types)
 				whitelist.push_back(SYS_ATSC);
 				whitelist.push_back(SYS_DVBC_ANNEX_B);
 			}
+			else if (type == "UNDEFINED")
+			{
+				whitelist.push_back(SYS_UNDEFINED);
+			}
 		}
 		i->m_frontend->setDeliverySystemWhitelist(whitelist);
 		break;

@@ -1549,7 +1549,7 @@ def InitNimManager(nimmgr, update_slots = []):
 				createConfig(nim, slot)
 			else:
 				print "[InitNimManager] disable hotswitchable tuner"
-				eDVBResourceManager.getInstance().setFrontendType(nimmgr.nim_slots[fe_id].frontend_id, "")
+				eDVBResourceManager.getInstance().setFrontendType(nimmgr.nim_slots[fe_id].frontend_id, "UNDEFINED")
 				nim.configMode.value = nim.configMode.default = "nothing"
 
 	def createConfig(nim, slot):
