@@ -337,15 +337,15 @@ def lsof():
 				pass
 	return lsof
 
+def getExtension(file):
+	filename, file_extension = os.path.splitext(file)
+	return file_extension
+
 def mediafilesInUse(session):
-	files = [x[2] for x in lsof() if x[2].startswith('/media')]
-	timeshift = None
+	from Components.MovieList import KNOWN_EXTENSIONS
+	files = [x[2] for x in lsof() if x[2].startswith('/media') and getExtension(x[2]) in KNOWN_EXTENSIONS]
 	service = session.nav.getCurrentlyPlayingServiceOrGroup()
 	filename = service and service.getPath()
 	if filename and "://" in filename: #when path is a stream ignore it
 		filename = None
-	if not filename:
-		service = session.nav.getCurrentService()
-		timeshift = service and service.timeshift()
-		filename = timeshift and timeshift.getTimeshiftFilename()
-	return set([file for file in files if not(filename and file.startswith(filename) and files.count(filename) < 3 if timeshift else 2)])
+	return set([file for file in files if not(filename and file.startswith(filename) and files.count(filename) < 2)])
