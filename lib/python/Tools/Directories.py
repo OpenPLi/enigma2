@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 import re
+from shutil import copyfile
 from stat import S_IMODE
 from enigma import eEnv
 
@@ -212,10 +213,9 @@ def getRecordingFilename(basename, dirname = None):
 		return filename
 	for i in range(1,1000):
 		newfilename = "%s_%03d" % (filename, i)
-		if os.path.isfile("%s.ts" % newfilename):
-			if not os.path.islink("%s.eit" % newfilename):
-				os.symlink("%s.eit" % filename, "%s.eit" % newfilename)
-		else:
+		if not os.path.isfile("%s.eit" % newfilename):
+			copyfile("%s.eit" % filename, "%s.eit" % newfilename)
+		if not os.path.isfile("%s.ts" % newfilename):
 			break
 	return newfilename
 
