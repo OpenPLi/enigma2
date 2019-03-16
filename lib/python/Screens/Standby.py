@@ -9,7 +9,7 @@ from Components.config import config
 from Components.AVSwitch import AVSwitch
 from Components.Console import Console
 from Components.ImportChannels import ImportChannels
-from Components.Harddisk import internalHDDNotSleeping
+from Tools.Directories import mediafilesInUse
 from Components.SystemInfo import SystemInfo
 from GlobalActions import globalActionMap
 from enigma import eDVBVolumecontrol, eTimer, eDVBLocalTimeHandler, eServiceReference, eStreamServer
@@ -165,7 +165,7 @@ class Standby(Screen):
 							duration += 24*3600
 						self.standbyTimeoutTimer.startLongTimer(duration)
 						return
-		if self.session.screen["TunerInfo"].tuner_use_mask or internalHDDNotSleeping():
+		if self.session.screen["TunerInfo"].tuner_use_mask or mediafilesInUse(self.session):
 			self.standbyTimeoutTimer.startLongTimer(600)
 		else:
 			from RecordTimer import RecordTimerEntry
@@ -228,8 +228,8 @@ def getReasons(session, retvalue=1):
 			reasons.append((ngettext("%d job is running in the background!", "%d jobs are running in the background!", jobs) % jobs))
 	if eStreamServer.getInstance().getConnectedClients() or StreamServiceList:
 			reasons.append(_("Client is streaming from this box!"))
-	if not reasons and internalHDDNotSleeping() and retvalue in (1, 2, 4, 42):
-			reasons.append(_("Harddisk is not in sleepmode it could be in use!"))
+	if not reasons and mediafilesInUse(session) and retvalue in (1, 2, 4, 42):
+			reasons.append(_("A file from media is in use!"))
 	return "\n".join(reasons)
 
 class TryQuitMainloop(MessageBox):
