@@ -60,8 +60,8 @@ class RemainingToText(Converter, object):
 					if remaining <= duration:
 						prefix = "+"
 					if self.type == self.DEFAULT:
-						suffix = " min"
-					return _("%s%d%s") % (prefix, tsecs / 60, suffix)
+						suffix = _(" min")
+					return "%s%d%s" % (prefix, tsecs / 60, suffix)
 				else:
 					return "???"
 		return ""
