@@ -1547,6 +1547,8 @@ def InitNimManager(nimmgr, update_slots = []):
 				print "[InitNimManager] enable hotswitchable tuner type(s) %s" %  ",".join(tunerTypesEnabled)
 				eDVBResourceManager.getInstance().setFrontendType(nimmgr.nim_slots[fe_id].frontend_id, ",".join(tunerTypesEnabled))
 				createConfig(nim, slot)
+				if "DVB-S" not in tunerTypesEnabled:
+					nim.configMode.value = nim.configMode.default = "enabled"
 			else:
 				print "[InitNimManager] disable hotswitchable tuner"
 				eDVBResourceManager.getInstance().setFrontendType(nimmgr.nim_slots[fe_id].frontend_id, "UNDEFINED")
