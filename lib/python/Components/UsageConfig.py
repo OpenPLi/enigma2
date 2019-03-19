@@ -81,6 +81,11 @@ def InitUsageConfig():
 		("default", _("Default")),
 		("user", _("user defined")),])
 	config.usage.menu_show_numbers = ConfigSelection(default = "no", choices = [("no", _("no")), ("menu&plugins", _("in menu and plugins")), ("menu", _("in menu only")), ("plugins", _("in plugins only"))])
+	config.usage.show_numbers_format = ConfigSelection(default = "default", choices = [
+		("default", _("Default")),
+		("singledot", _("1. ")),
+		("singlebracket", _("1 ) ")),
+		("doublebracket", _("( 1 )")),])
 	config.usage.menu_path = ConfigSelection(default = "off", choices = [
 		("off", _("Disabled")),
 		("small", _("Small")),
