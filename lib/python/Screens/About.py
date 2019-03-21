@@ -65,7 +65,7 @@ class About(Screen):
 
 		self["FPVersion"] = StaticText(fp_version)
 
-		AboutText += _('Skin & Resolution: %s (%sx%s)\n') % (config.skin.primary_skin.value[0:-9], getDesktop(0).size().width(), getDesktop(0).size().height())
+		AboutText += _('Skin & Resolution: %s (%sx%s)\n') % (config.skin.primary_skin.value.split('/')[0], getDesktop(0).size().width(), getDesktop(0).size().height())
 
 		self["TunerHeader"] = StaticText(_("Detected NIMs:"))
 		AboutText += "\n" + _("Detected NIMs:") + "\n"
