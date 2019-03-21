@@ -57,9 +57,9 @@ def resolveFilename(scope, base = "", path_prefix = None):
 	if scope == SCOPE_CURRENT_SKIN:
 		from Components.config import config
 		# allow files in the config directory to replace skin files
-		tmp = defaultPaths[SCOPE_CONFIG][0]
+		path = tmp = defaultPaths[SCOPE_CONFIG][0]
 		if base and pathExists("%s%s" % (tmp, base)):
-			path = tmp
+			return "%s%s" % (tmp, base)
 		else:
 			path = defaultPaths[SCOPE_SKIN][0]
 			pos = config.skin.primary_skin.value.rfind('/')
