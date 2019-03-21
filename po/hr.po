@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-16 11:34+0330\n"
-"PO-Revision-Date: 2019-03-08 18:22+0100\n"
+"POT-Creation-Date: 2019-03-21 18:59+0100\n"
+"PO-Revision-Date: 2019-03-18 21:20+0100\n"
 "Last-Translator: Željko <zeljko2@hi.ht.hr>\n"
 "Language-Team: Željko\n"
 "Language: hr_HR\n"
@@ -162,6 +162,10 @@ msgstr " (niži od bilo kojeg automatskog)"
 
 msgid " extensions."
 msgstr " proširenja."
+
+#, fuzzy
+msgid " min"
+msgstr "%d min"
 
 msgid " ms"
 msgstr " ms"
@@ -434,10 +438,6 @@ msgid "%s%d min"
 msgstr "%s%d min"
 
 #, python-format
-msgid "%s%d%s"
-msgstr "%s%d%s"
-
-#, python-format
 msgid "%s/%s: %s"
 msgstr "%s/%s: %s"
 
@@ -657,6 +657,9 @@ msgid ""
 msgstr ""
 "Konfiguracijski fajl (%s) je promjenjen poslije instalacije.\n"
 "Želite li zadržati svoju verziju?"
+
+msgid "A file from media is in use!"
+msgstr ""
 
 msgid ""
 "A finished record timer wants to set your\n"
@@ -2314,7 +2317,7 @@ msgid "Croatia"
 msgstr "Hrvatska"
 
 msgid "Croatian"
-msgstr "hrvatski"
+msgstr "Hrvatski"
 
 msgid "Cuba"
 msgstr "Kuba"
@@ -3991,9 +3994,6 @@ msgstr "Hard disk"
 
 msgid "Harddisk Setup"
 msgstr "Hard disk postavke"
-
-msgid "Harddisk is not in sleepmode it could be in use!"
-msgstr "Tvrdi disk nije u stanju mirovanja jer bi mogao biti u uporabi!"
 
 msgid "Hardware: "
 msgstr "Hardver: "
@@ -6112,18 +6112,17 @@ msgstr "Priprema... molim pričekajte"
 msgid "Press '0' to toggle PiP mode"
 msgstr "Pritisnite '0', za uključivanje načina rada PiP"
 
-#, fuzzy
 msgid "Press 'OK' for attach function."
-msgstr "Pritisnite OK za promjenu odabira."
+msgstr "Pritisnite 'OK' za pridodavanje funkcije."
 
 msgid "Press 'OK' for attach next function or 'CH+/-' for edit attached."
-msgstr ""
+msgstr "Pritisnite 'OK' za pridodavanje sljedeće funkcije ili 'CH+/-' za uređivanje privitka."
 
 msgid "Press 'OK' for remove item or 'CH+/-' for toggle to list of features."
-msgstr ""
+msgstr "Pritisnite 'OK' za uklanjanje stavke ili 'CH+/-' za prebacivanje na popis značajki."
 
 msgid "Press 'OK' for remove item or < > for change order or 'CH+/-' for toggle to list of features."
-msgstr ""
+msgstr "Pritisnite 'OK' za uklanjanje stavke ili < > za redoslijed promjena ili 'CH+/-' za prebacivanje na popis značajki."
 
 msgid "Press INFO on your remote control for additional information."
 msgstr "Pritisnite INFO na daljinskom upravljaču za dodatne informacije."
@@ -6175,10 +6174,10 @@ msgid "Press OK, save and exit..."
 msgstr "Pritisnite OK, spremite i izađite..."
 
 msgid "Press or select button and then press 'OK' for attach function."
-msgstr ""
+msgstr "Pritisnite ili odaberite gumb i zatim pritisnite 'OK' za pridodavanje funkcije."
 
 msgid "Press or select button and then press 'OK' for attach next function or edit attached."
-msgstr ""
+msgstr "Pritisnite ili odaberite gumb, a zatim pritisnite 'OK' za pridodavanje sljedeće funkcije ili uređivanje privitka."
 
 msgid "Press yellow to set this interface as default interface."
 msgstr "Kliknite žuti gumb da biste postavili ovo sučelje kao zadano."
@@ -6978,19 +6977,19 @@ msgid "Secondary DNS"
 msgstr "Sporedan DNS"
 
 msgid "Seek"
-msgstr "Premotati"
+msgstr "Pomicanje"
 
 msgid "Seek backward"
-msgstr "Premotati nazad"
+msgstr "Pomicanje unatrag"
 
 msgid "Seek backward (enter time)"
-msgstr "Premotati nazad (unesite vrijeme)"
+msgstr "Pomicanje unatrag (unesite vrijeme)"
 
 msgid "Seek forward"
-msgstr "Premotati naprijed"
+msgstr "Pomicanje naprijed"
 
 msgid "Seek forward (enter time)"
-msgstr "Premotati naprijed (unesite vrijeme)"
+msgstr "Pomicanje naprijed (unesite vrijeme)"
 
 msgid "Select"
 msgstr "Odaberite"
@@ -7207,7 +7206,7 @@ msgid "Select the model number of your SCR device. If the model number is not li
 msgstr "Odaberite broj modela vašeg SCR uređaja. Ako broj modela nije naveden, postavite 'SCR' na 'korisnički definirano' i ručno unesite parametre uređaja prema specifikacijama."
 
 msgid "Select the movie path"
-msgstr "odaberite putanju do videozapisa"
+msgstr "Odaberite putanju do videozapisa"
 
 msgid "Select the protocol used by your SCR device. Choices are 'SCR Unicable' (Unicable), or 'SCR JESS' (JESS, also known as Unicable II)."
 msgstr "Odaberite protokol koji koristi vaš SCR uređaj. Izbor je 'SCR Unicable' (Unicable) ili 'SCR JESS' (JESS, također poznat kao Unicable II)."
@@ -11266,10 +11265,10 @@ msgid "simple"
 msgstr "jednostavan"
 
 msgid "skip backward"
-msgstr "premotati unatrag"
+msgstr "Preskočiti unatrag"
 
 msgid "skip forward"
-msgstr "premotati naprijed"
+msgstr "Preskočiti naprijed"
 
 #, python-format
 msgid "slot%s - %s (current image) with, backup"
