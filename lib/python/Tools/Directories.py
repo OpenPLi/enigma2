@@ -68,12 +68,12 @@ def resolveFilename(scope, base = "", path_prefix = None):
 				#  remove skin name from base if exist
 				if base.startswith(skinname):
 					skinname = ""
-				for dir in ("%s%s" % (path, skinname), path, "%s%s" % (path, "skin_default/")):
-					for file in (base, os.path.basename(base)):
-						if pathExists("%s%s"% (dir, file)):
-							return "%s%s" % (dir, file)
 			else:
-				path = tmp
+				skinname = ""
+			for dir in ("%s%s" % (path, skinname), path, "%s%s" % (path, "skin_default/")):
+				for file in (base, os.path.basename(base)):
+					if pathExists("%s%s"% (dir, file)):
+						return "%s%s" % (dir, file)
 
 	elif scope == SCOPE_CURRENT_PLUGIN:
 		tmp = defaultPaths[SCOPE_PLUGINS]
