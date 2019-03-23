@@ -77,21 +77,6 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 			self.list.append(getConfigListEntry(self.indent % ("   %s [%s]" % (_("Turning step size"), chr(176))), nim.tuningstepsize, _("Consult your motor's spec sheet for this information, or leave the default setting.")))
 			self.list.append(getConfigListEntry(self.indent % ("   %s" % _("Max memory positions")), nim.rotorPositions, _("Consult your motor's spec sheet for this information, or leave the default setting.")))
 
-	def createConfigMode(self):
-		if self.nim.isCompatible("DVB-S"):
-			choices = {"nothing": _("Disabled"),
-						"simple": _("Simple"),
-						"advanced": _("Advanced")}
-			if len(nimmanager.canEqualTo(self.slotid)) > 0:
-				choices["equal"] = _("Equal to")
-			if len(nimmanager.canDependOn(self.slotid)) > 0:
-				choices["satposdepends"] = _("Second cable of motorized LNB")
-			if len(nimmanager.canConnectTo(self.slotid)) > 0:
-				choices["loopthrough"] = _("Loop through from")
-			if self.nim.isFBCLink():
-				choices = { "nothing": _("FBC automatic"), "advanced": _("FBC SCR (Unicable/JESS)")}
-			self.nimConfig.configMode.setChoices(choices, self.nim.isFBCLink() and "nothing" or "simple")
-
 	def createSetup(self):
 		self.list = [ ]
 
@@ -154,7 +139,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 		self.configModeDVBT = getConfigListEntry(_("Configure DVB-T"), self.nimConfig.configModeDVBT, _("Select 'Yes' when you want to configure this tuner for DVB-T"))
 		self.configModeATSC = getConfigListEntry(_("Configure ATSC"), self.nimConfig.configModeATSC, _("Select 'Yes' when you want to configure this tuner for ATSC"))
 
-		if self.nim.isCompatible("DVB-S"):
+		if self.nim.isCompatible("DVB-S") or (self.nim.isHotSwitchable() and self.nim.canBeCompatible("DVB-S")):
 			self.configMode = getConfigListEntry(self.indent % _("Configuration mode"), self.nimConfig.configMode, _("Select 'FBC SCR' if this tuner will connect to a SCR (Unicable/JESS) device. For all other setups select 'FBC automatic'.") if self.nim.isFBCLink() else _("Configure this tuner using simple or advanced options, or loop it through to another tuner, or copy a configuration from another tuner, or disable it."))
 			if self.nim.isHotSwitchable():
 				self.list.append(self.configModeDVBS)
@@ -619,7 +604,6 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 		self.slotid = slotid
 		self.nim = nimmanager.nim_slots[slotid]
 		self.nimConfig = self.nim.config
-		self.createConfigMode()
 		self.createSetup()
 		self.setTitle(_("Setup") + " " + self.nim.friendly_full_description)
 		
@@ -794,7 +778,7 @@ class NimSelection(Screen):
 		for x in nimmanager.nim_slots:
 			slotid = x.slot
 			nimConfig = nimmanager.getNimConfig(x.slot)
-			text = nimConfig.configMode.value
+			text = ""
 			if self.showNim(x):
 				if x.isCompatible("DVB-S"):
 					if nimConfig.configMode.value in ("loopthrough", "equal", "satposdepends"):
@@ -850,16 +834,14 @@ class NimSelection(Screen):
 				elif x.isCompatible("DVB-T") or x.isCompatible("DVB-C") or x.isCompatible("ATSC"):
 					if nimConfig.configMode.value == "nothing":
 						text = _("Disabled")
-					elif nimConfig.configMode.value == "enabled":
+					elif nimConfig.configMode.value == "enabled" and not x.isHotSwitchable():
 						text = _("Enabled")
-				if x.isMultiType():
-					text = "%s: (%s)\n%s" % (_("Switchable tuner types"), ','.join(x.getMultiTypeList().values()), text)
-				elif  x.isHotSwitchable():
-					text = "%s: (%s)\n%s" % (_("Hotswitchable tuner"), ','.join(x.getMultiTypeList().values()), text)
+				if x.multi_type:
+					enabledTuners = "/".join([y[1].replace("DVB-", "") for y in sorted([({ "DVB-S" :1, "DVB-C": 2, "DVB-T": 3, "ATSC": 4}[y[:5]], y) for y in x.getTunerTypesEnabled()])] if nimConfig.configMode.value != "nothing" else [])
+					text = ("%s (%s)\n%s" % (_("Activated modes") if "/" in enabledTuners else _("Activated mode"), enabledTuners if enabledTuners == 'ATSC' else "DVB-%s" % enabledTuners, text)) if enabledTuners else _("Disabled")
 				if not x.isSupported():
 					text = _("Tuner is not supported")
-
-				self.list.append((slotid, x.friendly_full_description, text, x))
+				self.list.append((slotid, x.friendly_full_description, text or nimConfig.configMode.value, x))
 		self["nimlist"].setList(self.list)
 		self["nimlist"].updateList(self.list)
 		if index is not None:
