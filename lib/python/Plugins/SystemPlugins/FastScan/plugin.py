@@ -314,26 +314,26 @@ class FastScanAutoScreen(FastScanScreen):
 		from Screens.Standby import StandbySummary
 		return StandbySummary
 
+def getNimList():
+	nimList = []
+	# collect all nims which are *not* set to "nothing"
+	for n in nimmanager.nim_slots:
+		if not n.isCompatible("DVB-S"):
+			continue
+		if n.config_mode == "nothing":
+			continue
+		if n.config_mode in ("loopthrough", "satposdepends"):
+			root_id = nimmanager.sec.getRoot(n.slot_id, int(n.config.connectedTo.value))
+			if n.type == nimmanager.nim_slots[root_id].type: # check if connected from a DVB-S to DVB-S2 Nim or vice versa
+				continue
+		nimList.append((str(n.slot), n.friendly_full_description))
+	return nimList
+
 def FastScanMain(session, **kwargs):
 	if session.nav.RecordTimer.isRecording():
 		session.open(MessageBox, _("A recording is currently running. Please stop the recording before trying to scan."), MessageBox.TYPE_ERROR)
 	else:
-		nimList = []
-		# collect all nims which are *not* set to "nothing"
-		for n in nimmanager.nim_slots:
-			if not n.isCompatible("DVB-S"):
-				continue
-			if n.config_mode == "nothing":
-				continue
-			if n.config_mode in ("loopthrough", "satposdepends"):
-				root_id = nimmanager.sec.getRoot(n.slot_id, int(n.config.connectedTo.value))
-				if n.type == nimmanager.nim_slots[root_id].type: # check if connected from a DVB-S to DVB-S2 Nim or vice versa
-					continue
-			nimList.append((str(n.slot), n.friendly_full_description))
-		if nimList:
-			session.open(FastScanScreen, nimList)
-		else:
-			session.open(MessageBox, _("No suitable sat tuner found!"), MessageBox.TYPE_ERROR)
+		session.open(FastScanScreen, getNimList())
 
 Session = None
 FastScanAutoStartTimer = eTimer()
@@ -389,7 +389,7 @@ def autostart(reason, **kwargs):
 		config.misc.standbyCounter.removeNotifier(standbyCountChanged)
 
 def FastScanStart(menuid, **kwargs):
-	if menuid == "scan" and nimmanager.somethingConnected():
+	if menuid == "scan" and nimmanager.somethingConnected() and getNimList():
 		return [(_("Fast Scan"), FastScanMain, "fastscan", None)]
 	else:
 		return []
