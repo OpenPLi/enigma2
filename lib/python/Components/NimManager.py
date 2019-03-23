@@ -1623,16 +1623,6 @@ def InitNimManager(nimmgr, update_slots = []):
 				nim.configMode.value = "nothing"
 
 		if slot.isHotSwitchable():
-			if not hasattr(nim, "multiType"):
-				nim.multiType = ConfigText(default = "")
-			if nim.multiType.value:
-				#To arrange that after an upgrade the tuner is currectly re-configured
-				nim.configModeDVBS.value = nim.multiType.value.startswith("DVB-S")
-				nim.configModeDVBC.value = nim.multiType.value.startswith("DVB-C")
-				nim.configModeDVBT.value = nim.multiType.value.startswith("DVB-T")
-				nim.configModeATSC.value = nim.multiType.value.startswith("ATSC")
-				nim.multiType.value = ""
-
 			nim.configModeDVBS.addNotifier(boundFunction(hotswitchableConfigChanged, nim, slot, slot_id), initial_call=False)
 			nim.configModeDVBC.addNotifier(boundFunction(hotswitchableConfigChanged, nim, slot, slot_id), initial_call=False)
 			nim.configModeDVBT.addNotifier(boundFunction(hotswitchableConfigChanged, nim, slot, slot_id), initial_call=False)
