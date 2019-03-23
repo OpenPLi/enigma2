@@ -796,7 +796,7 @@ class NimSelection(Screen):
 								link = nimmanager.getNim(link).slot_name
 								text = _("FBC automatic\nconnected to %s") % link
 						else:
-							text = _("not configured")
+							text = _("Disabled")
 					elif nimConfig.configMode.value == "simple":
 						if nimConfig.diseqcMode.value in ("single", "toneburst_a_b", "diseqc_a_b", "diseqc_a_b_c_d"):
 							text = "%s\n%s: " % ({"single": _("Single"), "toneburst_a_b": _("Toneburst A/B"), "diseqc_a_b": _("DiSEqC A/B"), "diseqc_a_b_c_d": _("DiSEqC A/B/C/D")}[nimConfig.diseqcMode.value],
