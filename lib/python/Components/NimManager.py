@@ -1628,11 +1628,11 @@ def InitNimManager(nimmgr, update_slots = []):
 			if nim.configMode.value and not slot.getTunerTypesEnabled():
 				nim.multiType = ConfigText(default = "")
 				if nim.multiType.value:
-					type = slot.multi_type[nim.multiType.value]
-					nim.configModeDVBS.value = type.startswith("DVB-S")
-					nim.configModeDVBC.value = type.startswith("DVB-C")
-					nim.configModeDVBT.value = type.startswith("DVB-T")
-					nim.configModeATSC.value = type.startswith("ATSC")
+					type = slot.multi_type[nim.multiType.value][:5]
+					nim.configModeDVBS.value = type == "DVB-S"
+					nim.configModeDVBC.value = type == "DVB-C"
+					nim.configModeDVBT.value = type == "DVB-T"
+					nim.configModeATSC.value = type == "ATSC"
 					nim.multiType.value = ""
 					nim.save()
 
