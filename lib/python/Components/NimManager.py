@@ -1623,15 +1623,16 @@ def InitNimManager(nimmgr, update_slots = []):
 				nim.configMode.value = "nothing"
 
 		if slot.isCombined():
-			if not hasattr(nim, "multiType"):
+			if nim.configMode.value and not slot.getTunerTypesEnabled():
 				nim.multiType = ConfigText(default = "")
-			if nim.multiType.value:
-				#To arrange that after an upgrade the tuner is currectly re-configured
-				nim.configModeDVBS.value = nim.multiType.value.startswith("DVB-S")
-				nim.configModeDVBC.value = nim.multiType.value.startswith("DVB-C")
-				nim.configModeDVBT.value = nim.multiType.value.startswith("DVB-T")
-				nim.configModeATSC.value = nim.multiType.value.startswith("ATSC")
-				nim.multiType.value = ""
+				if nim.multiType.value:
+					type = slot.multi_type[nim.multiType.value]
+					nim.configModeDVBS.value = type.startswith("DVB-S")
+					nim.configModeDVBC.value = type.startswith("DVB-C")
+					nim.configModeDVBT.value = type.startswith("DVB-T")
+					nim.configModeATSC.value = type.startswith("ATSC")
+					nim.multiType.value = ""
+					nim.save()
 
 			nim.configModeDVBS.addNotifier(boundFunction(combinedConfigChanged, nim, slot, slot_id), initial_call=False)
 			nim.configModeDVBC.addNotifier(boundFunction(combinedConfigChanged, nim, slot, slot_id), initial_call=False)
