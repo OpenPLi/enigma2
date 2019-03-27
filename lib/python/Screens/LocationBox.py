@@ -241,6 +241,11 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 				self.realBookmarks.save()
 			self["booklist"].setList(self.bookmarks)
 
+	def updateBookmarks(self):
+		config.movielist.videodirs.load()
+		self.bookmarks = config.movielist.videodirs and config.movielist.videodirs.value[:] or []
+		self["booklist"].setList(self.bookmarks)
+
 	def createDir(self):
 		if self["filelist"].current_directory is not None:
 			self.session.openWithCallback(
@@ -432,7 +437,8 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 			if self.currList == "filelist":
 				menu = [
 					(_("switch to bookmarks"), self.switchToBookList),
-					(_("add bookmark"), self.addRemoveBookmark)
+					(_("add bookmark"), self.addRemoveBookmark),
+					(_("update bookmarks"), self.updateBookmarks)
 				]
 				if self.editDir:
 					menu.extend((
@@ -442,7 +448,8 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 			else:
 				menu = (
 					(_("switch to filelist"), self.switchToFileList),
-					(_("remove bookmark"), self.addRemoveBookmark)
+					(_("remove bookmark"), self.addRemoveBookmark),
+					(_("update bookmarks"), self.updateBookmarks)
 				)
 
 			self.session.openWithCallback(
