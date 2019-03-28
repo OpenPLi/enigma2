@@ -783,8 +783,10 @@ class NimSelection(Screen):
 							if len(satnames) <= 2:
 								text += ", ".join(satnames)
 							elif len(satnames) > 2:
-								# we need a newline here, since multi content lists don't support automtic line wrapping
-								text += "%s,\n         %s" % (", ".join(satnames[:2]), ",".join(satnames[2:]))
+								# basic info - orbital positions only
+								for sat in satnames:
+									text += sat.split(' ')[0] + ', '
+							text = text.rstrip(', ')
 						elif nimConfig.diseqcMode.value in ("positioner", "positioner_select"):
 							text = "%s: " % {"positioner": _("Positioner"), "positioner_select": _("Positioner (selecting satellites)")}[nimConfig.diseqcMode.value]
 							if nimConfig.positionerMode.value == "usals":
