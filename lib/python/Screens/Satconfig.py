@@ -806,7 +806,7 @@ class NimSelection(Screen):
 						text = _("Enabled")
 				if x.multi_type:
 					enabledTuners = "/".join([y[1].replace("DVB-", "") for y in sorted([({ "DVB-S" :1, "DVB-C": 2, "DVB-T": 3, "ATSC": 4}[y[:5]], y) for y in x.getTunerTypesEnabled()])] if nimConfig.configMode.value != "nothing" else [])
-					text = ("%s (%s)\n%s" % (_("Activated modes") if "/" in enabledTuners else _("Activated mode"), enabledTuners if enabledTuners == 'ATSC' else "DVB-%s" % enabledTuners, text)) if enabledTuners else _("Disabled")
+					text = ("%s: %s\n%s" % (_("Modes") if "/" in enabledTuners else _("Mode"), enabledTuners if enabledTuners == 'ATSC' else "DVB-%s" % enabledTuners, text)) if enabledTuners else _("Disabled")
 				if not x.isSupported():
 					text = _("Tuner is not supported")
 				self.list.append((slotid, x.friendly_full_description, text or nimConfig.configMode.value, x))
