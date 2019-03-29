@@ -28,7 +28,7 @@
 			<id val="setup"/>
 			<menu weight="7" level="0" text="Service searching" entryID="service_searching_selection">
 				<id val="scan"/>
-				<item text="Tuner configuration" entryID="tuner_setup"><screen module="Satconfig" screen="NimSelection"/></item>
+				<item text="Tuner configuration" entryID="tuner_setup" conditional="nimmanager.nim_slots"><screen module="Satconfig" screen="NimSelection"/></item>
 				<item text="Automatic scan" entryID="auto_scan" conditional="nimmanager.somethingConnected()"><screen module="ScanSetup" screen="ScanSimple"/></item>
 				<item text="Manual scan" entryID="manual_scan" conditional="nimmanager.somethingConnected()"><screen module="ScanSetup"/></item>
 				<item text="Fallback remote receiver setup" entryID="fallbacktuner_settings"><screen module="SetupFallbacktuner"/></item>
