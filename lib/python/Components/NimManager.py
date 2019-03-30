@@ -1579,11 +1579,10 @@ def InitNimManager(nimmgr, update_slots = []):
 				config_mode_choices = {"simple": _("Simple"), "advanced": _("Advanced")}
 				if not slot.multi_type:
 					config_mode_choices["nothing"] = _("Disabled")
-				if nimmgr.canEqualTo(slot_id):
+				if len(nimmgr.getNimListOfType(slot.type, exception=slot_id)) > 0:
 					config_mode_choices["equal"] = _("Equal to")
-				if nimmgr.canDependOn(slot_id):
 					config_mode_choices["satposdepends"] = _("Second cable of motorized LNB")
-				if nimmgr.canConnectTo(slot_id):
+				if len(nimmgr.canConnectTo(slot_id)) > 0:
 					config_mode_choices["loopthrough"] = _("Loop through from")
 			nim.configMode = ConfigSelection(config_mode_choices, "nothing" if slot.isFBCLink() else "simple")
 			nim.configMode.slot_id = slot_id
