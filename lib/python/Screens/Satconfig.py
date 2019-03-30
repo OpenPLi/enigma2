@@ -77,6 +77,17 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 			self.list.append(getConfigListEntry(self.indent % ("   %s [%s]" % (_("Turning step size"), chr(176))), nim.tuningstepsize, _("Consult your motor's spec sheet for this information, or leave the default setting.")))
 			self.list.append(getConfigListEntry(self.indent % ("   %s" % _("Max memory positions")), nim.rotorPositions, _("Consult your motor's spec sheet for this information, or leave the default setting.")))
 
+	def adaptConfigModeChoices(self):
+		if self.nim.isCompatible("DVB-S") and not self.nim.isFBCLink():
+			#remove configMode choices that are not possible but we had to pre-define them
+			#in nimmanager as there not al configModes for all Nims were defined to perform the required checks
+			if not nimmanager.canEqualTo(self.slotid):
+				self.nimConfig.configMode.choices.choices.pop("equal", None)
+			if not nimmanager.canDependOn(self.slotid):
+				self.nimConfig.configMode.choices.choices.pop("satposdepends", None)
+			if not nimmanager.canConnectTo(self.slotid):
+				self.nimConfig.configMode.choices.choices.pop("loopthrough", None)
+
 	def createSetup(self):
 		self.list = [ ]
 
@@ -572,6 +583,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 		self.slotid = slotid
 		self.nim = nimmanager.nim_slots[slotid]
 		self.nimConfig = self.nim.config
+		self.adaptConfigModeChoices()
 		self.createSetup()
 		self.setTitle(_("Setup") + " " + self.nim.friendly_full_description)
 		
