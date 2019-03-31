@@ -90,7 +90,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 				config_mode_choices["satposdepends"] = _("Second cable of motorized LNB")
 			if nimmanager.canConnectTo(self.slotid):
 				config_mode_choices["loopthrough"] = _("Loop through from")
-			self.nimConfig.configMode.setChoices(config_mode_choices, self.nim.isFBCLink() and "nothing" or "simple")
+			self.nimConfig.configMode.setChoices(config_mode_choices, "simple")
 
 	def createSetup(self):
 		self.list = [ ]
