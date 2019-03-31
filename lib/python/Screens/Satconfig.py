@@ -79,14 +79,18 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 
 	def adaptConfigModeChoices(self):
 		if self.nim.isCompatible("DVB-S") and not self.nim.isFBCLink():
-			#remove configMode choices that are not possible but we had to pre-define them
-			#in nimmanager as there not al configModes for all Nims were defined to perform the required checks
-			if not nimmanager.canEqualTo(self.slotid):
-				self.nimConfig.configMode.choices.choices.pop("equal", None)
-			if not nimmanager.canDependOn(self.slotid):
-				self.nimConfig.configMode.choices.choices.pop("satposdepends", None)
-			if not nimmanager.canConnectTo(self.slotid):
-				self.nimConfig.configMode.choices.choices.pop("loopthrough", None)
+			#redefine configMode choices with only the possible/required options.
+			#We have to pre-define them here as here all tuner configs are known
+			config_mode_choices = {"simple": _("Simple"), "advanced": _("Advanced")}
+			if not self.nim.multi_type:
+				config_mode_choices["nothing"] = _("Disabled")
+			if nimmanager.canEqualTo(self.slotid):
+				config_mode_choices["equal"] = _("Equal to")
+			if nimmanager.canDependOn(self.slotid):
+				config_mode_choices["satposdepends"] = _("Second cable of motorized LNB")
+			if nimmanager.canConnectTo(self.slotid):
+				config_mode_choices["loopthrough"] = _("Loop through from")
+			self.nimConfig.configMode.setChoices(config_mode_choices, self.nim.isFBCLink() and "nothing" or "simple")
 
 	def createSetup(self):
 		self.list = [ ]
