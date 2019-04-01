@@ -289,7 +289,7 @@ class FlashImage(Screen):
 					else:
 						self.startDownload()
 				except:
-					self.session.openWithCallback(self.abort, MessageBox, _("Could not some setup the required directories on the media (e.g. USB stick) - Please verify media and try again!"), type=MessageBox.TYPE_ERROR, simple=True)
+					self.session.openWithCallback(self.abort, MessageBox, _("Unable to create the required directories on the media (e.g. USB stick or Harddisk) - Please verify media and try again!"), type=MessageBox.TYPE_ERROR, simple=True)
 			else:
 				self.session.openWithCallback(self.abort, MessageBox, _("Could not find suitable media - Please remove some downloaded images or insert a media (e.g. USB stick) with sufficiant free space and try again!"), type=MessageBox.TYPE_ERROR, simple=True)
 		else:
