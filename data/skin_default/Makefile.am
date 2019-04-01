@@ -65,29 +65,32 @@ dist_install_DATA = \
 	verticalline-plugins.png \
 	vkey_backspace.png \
 	vkey_bg.png \
-	vkey_blue.png \
+	vkey_bg_l.png \
+	vkey_bg_m.png \
+	vkey_bg_r.png \
+	vkey_blue_l.png \
+	vkey_blue_m.png \
+	vkey_blue_r.png \
 	vkey_enter.png \
 	vkey_first.png \
-	vkey_green.png \
+	vkey_green_l.png \
+	vkey_green_m.png \
+	vkey_green_r.png \
 	vkey_icon.png \
-	vkey_longl_bg.png \
-	vkey_longl_sel.png \
-	vkey_longm_bg.png \
-	vkey_longm_sel.png \
-	vkey_longr_bg.png \
-	vkey_longr_sel.png \
-	vkey_yellow.png \
 	vkey_last.png \
 	vkey_left.png \
-	vkey_red.png \
+	vkey_red_l.png \
+	vkey_red_m.png \
+	vkey_red_r.png \
 	vkey_right.png \
-	vkey_sel.png \
-	vkey_shift0.png \
-	vkey_shift1.png \
-	vkey_shift2.png \
-	vkey_shift3.png \
+	vkey_sel_l.png \
+	vkey_sel_m.png \
+	vkey_sel_r.png \
 	vkey_space_alt.png \
 	vkey_space.png \
 	vkey_text.png \
+	vkey_yellow_l.png \
+	vkey_yellow_m.png \
+	vkey_yellow_r.png \
 	volume.png \
 	wizard.png
