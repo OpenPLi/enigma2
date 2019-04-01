@@ -4,6 +4,7 @@ A Guide to the VirtualKeyBoard Screen
 Written by IanSav - 18-Aug-2018
 Updated by IanSav -  4-Sep-2018
 Updated by IanSav - 12-Nov-2018
+Updated by IanSav - 25-Mar-2019 *
 
 This document explains the changes and updates to the VirtualKeyBoard of 
 Enigma2.  The code is located in:
@@ -16,11 +17,12 @@ languages easier a number of base language definitions are provided.
 (Currently English, French, German, Russian, Scandinavian and Spanish.) 
 The locales are based on the list at https://lh.2xlibre.net/locales/.
 
-The maximum width of the keyboard has been set at 14 buttons.  This 
+* The maximum width of the keyboard has been set at 14 buttons.  This 
 limitation is set by the skin allocation of space for the keyboard and then 
 confirmed in this code in the "virtualKeyBoardEntryComponent" method.  If 
 the "keyList" data describes a keyboard less than 14 characters then that 
-keyboard will be centred in the 14 wide keyboard space.
+keyboard will be centred in the 14 wide keyboard space.  The button layouts 
+for each of the keyboards is based on the layouts at http://kbdlayout.info/.
 
 Each element of the "keyList" data is a button displayed on the virtual 
 keyboard.  Certain button names are mapped to images that will be used 
@@ -30,13 +32,17 @@ the "self.keyImages" dictionary in the "__init__" method of the
 characters are represented by their unicode numeric code 
 (https://en.wikipedia.org/wiki/List_of_Unicode_characters).
 
-This revision also allows the four colour buttons to be assigned to any 
-keyboard key by nominating the key text in the "self.keyBackgrounds" 
+* Any sequence of identical button definitions on any single row of a 
+"keyList" entry will be used to generate a single wide button on the 
+screen occupying all the defined positions.
+
+* This revision also allows the four colour buttons to be assigned to any 
+keyboard key by nominating the key text in the "self.keyHiglights" 
 dictionary in the "__init__" method of the "VirtualKeyBoard" class. 
 This change will allow for colour button text to be localised rather than 
 depending on a graphical button to achieve the coloured border.  Note that 
-the ENTER and SHIFT button graphics include the default GREEN and BLUE 
-borders, respectively, as a default.
+the ENTER and SHIFT button graphics should default to the GREEN and BLUE 
+borders, respectively, but can now be changed.
 
 This revision also adds the ability to define the foreground colours of the 
 characters on the virtual keyboard.  The colour selections for the unshifted 
@@ -46,14 +52,72 @@ images.  These colours can be overridden by a skin author via the
 "VirtualKeyBoardShiftColors" skin parameter.  (The number of shift levels 
 can be increased if required.)
 
+* The updated virtual keyboard has a new and optional calling parameter 
+"style=".  This calling parameter can be used to adjust the text of the 
+GREEN button and the optional text on the keypad button for the "Enter" 
+key.  The values that can be used are:
+	VKB_DONE_GRAPHIC
+	VKB_ENTER_GRAPHIC
+	VKB_OK_GRAPHIC
+	VKB_SAVE_GRAPHIC
+	VKB_DONE_TEXT
+	VKB_ENTER_TEXT
+	VKB_OK_TEXT
+	VKB_SAVE_TEXT
+The first four options change the GREEN button text to "Done", "Enter", 
+"OK" and "Save" respectively but keep the keypad grid image of the 
+"ENTER" button.  The next four options change both the GREEN button and 
+the text used on the keypad grid.
+
+* This revision includes two optional new parameters to give skin designers 
+more control of the VirtualKeyBoard display:
+
+* The "VirtualKeyBoardAlignment" parameter takes two comma separated 
+decimal values.  The first value specifies the horizontal alignment of the 
+data in each of the keyboard keymap cells.  The second value specifies the 
+vertical alignment of the data in each of the keyboard keymap cells.
+
+* The horizontal "VirtualKeyBoardAlignment" values are:
+	0 - Auto - Default  (Auto=Left on left button, Centre on middle 
+				buttons, Right on right button).
+	1 - Left
+	2 - Centre
+	3 - Right
+
+* The vertical "VirtualKeyBoardAlignment" values are:
+	0 - Auto - Default  (Auto=Centre)
+	1 - Top
+	2 - Centre
+	3 - Bottom
+
+* The "VirtualKeyBoardPadding" parameter takes two comma separated 
+decimal values.  The first value specifies the horizontal (left and right) 
+padding of the data in each of the keyboard keymap cells.  The second 
+value specifies the vertical (top and bottom) padding of the data in each 
+of the keyboard keymap cells.  This parameter controls how close the content 
+of a cell can come to the edges of that cell.  The default is 4 pixels for 
+720 skins and 7 pixels for 1080 skins.  These values allows the content of 
+the cell to stay clear of the default highlighting and current cell overlay 
+indicators.
+
+* To further assist with changing the skin of the Virtual KeyBoard the 
+various colour highlights and button images no longer contain any part of 
+the virtual keyboard background image.  They are now standalone images on 
+a transparent background.  These images are now placed on top of the 
+background cell image rather than replacing it.  These images now blend 
+in with *any* selected image chosen for the cell background.  For most 
+skinning changes to the cell background the skin designer now only needs 
+to replace the three component images that constitute the cell background. 
+(NOTE: If a light background is desired then many of the images will need 
+to be changed to a contrasting colour so as to be seen.)
+
 This revision also improves font size options.  The previous 
 "VirtualKeyBoard" skin font parameter is retained but a new scaling option 
 has been added to the code such that short text messages can be now assigned 
-to keyboard buttons.  For example, for the en_AU implementation spare keys 
-have been assigned to text like ".com", ".org" etc to make Internet address 
-entry easier.  To ensure that longer key text can fit in the screen space 
-available any text longer than one character will be drawn at 56% of the 
-"VirtualKeyBoard" skin font parameter assigned font size.
+to keyboard buttons.  For example, text like ".com", ".org" etc to make 
+Internet address entry easier.  To ensure that longer key text can fit in 
+the screen space available any text longer than one character will be drawn 
+at 56% of the "VirtualKeyBoard" skin font parameter assigned font size.
 
 This revision also adds HELP button text to assist users with using the 
 updated Virtual KeyBoard interface.
@@ -86,7 +150,9 @@ For example in a 1280 x 720 skin:
 	</fonts>
 
 	<parameters>
+		<parameter name="VirtualKeyBoardAlignment" value="0,0" />
 		<parameter name="VirtualKeyBoard" value="45,45" />
+		<parameter name="VirtualKeyBoardPadding" value="4,4" />
 		<parameter name="VirtualKeyBoardShiftColors" value="16777215,16777215,65535,16711935" />
 	</parameters>
 
@@ -123,7 +189,9 @@ For example in a 1920 x 1080 skin:
 	</fonts>
 
 	<parameters>
+		<parameter name="VirtualKeyBoardAlignment" value="0,0" />
 		<parameter name="VirtualKeyBoard" value="68,68" />
+		<parameter name="VirtualKeyBoardPadding" value="7,7" />
 		<parameter name="VirtualKeyBoardShiftColors" value="16777215,16777215,65535,16711935" />
 	</parameters>
 
@@ -181,14 +249,24 @@ Removing legacy VirtualKeyBoard support:
 	"VirtualKeyboard" entries are used by the old code while 
 	"VirtualKeyBoard" entries are used by the new code.
 
-	From the buttons directory in the skin delete:
+	* From the buttons directory in the skin delete:
 		vkey_all.png
+		vkey_blue.png
 		vkey_clr.png
 		vkey_esc.png
+		vkey_green.png
 		vkey_ok.png
+		vkey_red.png
+		vkey_sel.png
 		vkey_shift.png
 		vkey_shift_sel.png
+		vkey_yellow.png
 	Please do not delete any of these images if they are shared by other 
 	skins that continue to support the older VirtualKeyBoard code.
+	
+	* NOTE: The image "vkey_bg.png" is no longer used by the new 
+	VirtualKeyBoard but must not be removed as it is used by 
+	"NTIVirtualKeyBoard.pyo"!  When this tool is removed from the 
+	base build the old image can be removed.
 
 ---END---
