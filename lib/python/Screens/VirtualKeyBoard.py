@@ -176,7 +176,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 			u"SHIFT": "self.shiftClicked()",
 			u"SPACE": "self['text'].char(" ".encode('UTF-8'))",
 		}
-		self.footer = [u"Exit", u"Loc", u"LEFT", u"RIGHT", u"SPACE", u"SPACE", u"SPACE", u"SPACE", u"SPACE", u"SPACE", u"", u"Del", u"Clear", u"Exit"]
+		self.footer = [u"Exit", u"LEFT", u"RIGHT", u"SPACE", u"SPACE", u"SPACE", u"SPACE", u"SPACE", u"SPACE", u"SPACE", u"SPACE", u"Loc", u"Clear", u"Del"]
 		self.czech = [
 			[
 				[u";", u"+", u"\u011B", u"\u0161", u"\u010D", u"\u0159", u"\u017E", u"\u00FD", u"\u00E1", u"\u00ED", u"\u00E9", u"=", u"\u00B4", u"BACKSPACE"],
@@ -655,6 +655,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 			[u"FIRST", u"", u"", u"\u0112", u"\u0156", u"", u"", u"\u016A", u"\u012A", u"\u014C", u"", u"", u"", u""],
 			[u"LAST", u"\u0100", u"\u0160", u"", u"", u"\u0122", u"", u"", u"\u0136", u"\u013B", u"", u"", self.green, self.green],
 			[u"SHIFT", u"", u"\u017D", u"", u"\u010C", u"", u"", u"\u0145", u"", u"", u"", u"", u"SHIFT", u"SHIFT"],
+			self.footer
 		])
 		return keyList
 
