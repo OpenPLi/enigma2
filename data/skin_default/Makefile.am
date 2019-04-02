@@ -71,7 +71,10 @@ dist_install_DATA = \
 	vkey_blue_l.png \
 	vkey_blue_m.png \
 	vkey_blue_r.png \
+	vkey_clear.png \
+	vkey_delete.png \
 	vkey_enter.png \
+	vkey_exit.png \
 	vkey_first.png \
 	vkey_green_l.png \
 	vkey_green_m.png \
@@ -79,6 +82,7 @@ dist_install_DATA = \
 	vkey_icon.png \
 	vkey_last.png \
 	vkey_left.png \
+	vkey_locale.png \
 	vkey_red_l.png \
 	vkey_red_m.png \
 	vkey_red_r.png \
