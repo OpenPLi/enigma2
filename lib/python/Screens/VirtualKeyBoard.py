@@ -36,10 +36,12 @@ VKB_DONE_GRAPHIC = 0
 VKB_ENTER_GRAPHIC = 1
 VKB_OK_GRAPHIC = 2
 VKB_SAVE_GRAPHIC = 3
-VKB_DONE_TEXT = 4
-VKB_ENTER_TEXT = 5
-VKB_OK_TEXT = 6
-VKB_SAVE_TEXT = 7
+VKB_SEARCH_GRAPHIC = 4
+VKB_DONE_TEXT = 5
+VKB_ENTER_TEXT = 6
+VKB_OK_TEXT = 7
+VKB_SAVE_TEXT = 8
+VKB_SEARCH_TEXT = 9
 
 # For more information about using VirtualKeyBoard see /doc/VIRTUALKEYBOARD
 #
@@ -54,10 +56,12 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 			VKB_ENTER_GRAPHIC: ("Enter", u"ENTER"),
 			VKB_OK_GRAPHIC: ("OK", u"ENTER"),
 			VKB_SAVE_GRAPHIC: ("Save", u"ENTER"),
+			VKB_SEARCH_GRAPHIC: ("Search", u"ENTER"),
 			VKB_DONE_TEXT: ("Done", u"Done"),
 			VKB_ENTER_TEXT: ("Done", u"Enter"),
 			VKB_OK_TEXT: ("OK", u"OK"),
-			VKB_SAVE_TEXT: ("Save", u"Save")
+			VKB_SAVE_TEXT: ("Save", u"Save"),
+			VKB_SEARCH_TEXT: ("Search", u"Search")
 		}.get(style, ("Enter", u"ENTER"))
 		self.bg = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_bg.png"))  # Legacy support only!
 		self.bg_l = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_bg_l.png"))
