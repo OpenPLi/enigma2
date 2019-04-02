@@ -1563,7 +1563,7 @@ def InitNimManager(nimmgr, update_slots = []):
 			print "[InitNimManager] enable combined tuner type(s) %s" % tunersEnabled
 			eDVBResourceManager.getInstance().setFrontendType(nimmgr.nim_slots[slot_id].frontend_id, tunersEnabled)
 			if nim.configMode.value == 'nothing':
-				nim.configMode.value = nim.configMode.default = "simple" if "DVB-S" in tunersEnabled else "enabled"
+				nim.configMode.value = nim.configMode.default = "simple" if slot.canBeCompatible("DVB-S") else "enabled"
 		else:
 			print "[InitNimManager] disable combined tuner"
 			eDVBResourceManager.getInstance().setFrontendType(nimmgr.nim_slots[slot_id].frontend_id, "UNDEFINED")
