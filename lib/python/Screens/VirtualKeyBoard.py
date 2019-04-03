@@ -151,7 +151,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 			u"CLEARICON": key_clear,
 			u"DELETEICON": key_delete,
 			u"ENTERICON": key_enter,
-			u"EXITALTICON": key_exit,
+			u"EXITICON": key_exit,
 			u"FIRSTICON": key_first,
 			u"LASTICON": key_last,
 			u"LEFTICON": key_left,
