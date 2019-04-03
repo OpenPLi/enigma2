@@ -211,7 +211,7 @@ class InfoBarUnhandledKey:
 
 class HideVBILine(Screen):
 	def __init__(self, session):
-		self.skin = """<screen position="0,0" size="%s,%s" flags="wfNoBorder" zPosition="1"/>""" % (getDesktop(0).size().width(), getDesktop(0).size().height() / 360 + 1)
+		self.skin = """<screen position="0,0" size="%s,%s" flags="wfNoBorder" zPosition="1"/>""" % (getDesktop(0).size().width(), getDesktop(0).size().height() / 180 + 1)
 		Screen.__init__(self, session)
 
 class SecondInfoBar(Screen):
