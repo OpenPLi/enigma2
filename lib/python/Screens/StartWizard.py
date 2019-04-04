@@ -81,7 +81,6 @@ class AutoInstallWizard(Screen):
 		self.container.appClosed.append(self.appClosed)
 		self.container.dataAvail.append(self.dataAvail)
 		self.package = None
-		self.counter = 0
 
 		import glob
 		mac_address = open('/sys/class/net/eth0/address', 'r').readline().strip().replace(":", "")
