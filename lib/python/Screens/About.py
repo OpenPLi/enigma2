@@ -13,7 +13,7 @@ from Components.Label import Label
 from Components.ProgressBar import ProgressBar
 
 from Tools.StbHardware import getFPVersion
-from enigma import eTimer, eLabel, eConsoleAppContainer
+from enigma import eTimer, eLabel, eConsoleAppContainer, getDesktop, eGetEnigmaDebugLvl
 
 from Components.GUIComponent import GUIComponent
 import skin, os
@@ -54,6 +54,7 @@ class About(Screen):
 		AboutText += _("Python version: ") + about.getPythonVersionString() + "\n"
 
 		AboutText += _("Enigma (re)starts: %d\n") % config.misc.startCounter.value
+		AboutText += _("Enigma debug level: %d\n") % eGetEnigmaDebugLvl()
 
 		fp_version = getFPVersion()
 		if fp_version is None:
@@ -63,6 +64,8 @@ class About(Screen):
 			AboutText += fp_version + "\n"
 
 		self["FPVersion"] = StaticText(fp_version)
+
+		AboutText += _('Skin & Resolution: %s (%sx%s)\n') % (config.skin.primary_skin.value.split('/')[0], getDesktop(0).size().width(), getDesktop(0).size().height())
 
 		self["TunerHeader"] = StaticText(_("Detected NIMs:"))
 		AboutText += "\n" + _("Detected NIMs:") + "\n"
@@ -428,6 +431,10 @@ class Troubleshoot(Screen):
 		self.container = None
 		self.close()
 
+	def getDebugFilesList(self):
+		import glob
+		return [x for x in sorted(glob.glob("/home/root/enigma.*.debuglog"), key=lambda x: os.path.isfile(x) and os.path.getmtime(x))]
+
 	def getLogFilesList(self):
 		import glob
 		home_root = "/home/root/enigma2_crash.log"
@@ -435,14 +442,14 @@ class Troubleshoot(Screen):
 		return [x for x in sorted(glob.glob("/mnt/hdd/*.log"), key=lambda x: os.path.isfile(x) and os.path.getmtime(x))] + (os.path.isfile(home_root) and [home_root] or []) + (os.path.isfile(tmp) and [tmp] or [])
 
 	def updateOptions(self):
-		self.titles = ["dmesg", "ifconfig", "df", "top", "ps"]
-		self.commands = ["dmesg", "ifconfig", "df -h", "top -n 1", "ps"]
+		self.titles = ["dmesg", "ifconfig", "df", "top", "ps", "messages"]
+		self.commands = ["dmesg", "ifconfig", "df -h", "top -n 1", "ps", "cat /var/volatile/log/messages"]
 		install_log = "/home/root/autoinstall.log"
 		if os.path.isfile(install_log):
 				self.titles.append("%s" % install_log)
 				self.commands.append("cat %s" % install_log)
 		self.numberOfCommands = len(self.commands)
-		fileNames = self.getLogFilesList()
+		fileNames = self.getLogFilesList() + self.getDebugFilesList()
 		if fileNames:
 			totalNumberOfLogfiles = len(fileNames)
 			logfileCounter = 1

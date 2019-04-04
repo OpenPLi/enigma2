@@ -178,7 +178,7 @@ class Pic_Setup(Screen, ConfigListScreen):
 			getConfigListEntry(_("Slide picture in loop"), config.pic.loop),
 			getConfigListEntry(_("Background color"), config.pic.bgcolor),
 			getConfigListEntry(_("Text color"), config.pic.textcolor),
-			getConfigListEntry(_("Fulview resulution"), config.usage.pic_resolution),
+			getConfigListEntry(_("Full view resolution"), config.usage.pic_resolution),
 			getConfigListEntry(_("Auto EXIF Orientation rotation/flipping"), config.pic.autoOrientation),
 			getConfigListEntry(_("Stop play TV"), config.pic.stopPlayTv),
 		]

@@ -21,9 +21,13 @@ class DVDSummary(Screen):
 		self["Title"] = Label("")
 		self["Time"] = Label("")
 		self["Chapter"] = Label("")
+		self["FullChapters"] = Label("")
 
 	def updateChapter(self, chapter):
 		self["Chapter"].setText(chapter)
+
+	def updateFullChapters(self, chapters):
+		self["FullChapters"].setText(chapters)
 
 	def setTitle(self, title):
 		self["Title"].setText(title)
@@ -334,14 +338,17 @@ class DVDPlayer(Screen, InfoBarBase, InfoBarNotifications, InfoBarSeek, InfoBarP
 
 	def setChapterLabel(self):
 		chapterLCD = _("Menu")
+		chaptersLCD = _("DVD Menu")
 		chapterOSD = _("DVD Menu")
 		if self.currentTitle > 0:
 			chapterLCD = "%s %d" % (_("Chap."), self.currentChapter)
+			chaptersLCD = "%s %d/%d" % (_("Chapter"), self.currentChapter, self.totalChapters)
 			chapterOSD = "DVD %s %d/%d" % (_("Chapter"), self.currentChapter, self.totalChapters)
 			chapterOSD += " (%s %d/%d)" % (_("Title"), self.currentTitle, self.totalTitles)
 		self["chapterLabel"].setText(chapterOSD)
 		try:
 			self.session.summary and self.session.summary.updateChapter(chapterLCD)
+			self.session.summary and self.session.summary.updateFullChapters(chaptersLCD)
 		except:
 			pass
 

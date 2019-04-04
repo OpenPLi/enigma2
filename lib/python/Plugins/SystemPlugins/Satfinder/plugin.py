@@ -118,7 +118,7 @@ class Satfinder(ScanSetup, ServiceScan):
 				self.pls_code_memory = self.scan_sat.pls_code.value
 				self.scan_sat.is_id.value = eDVBFrontendParametersSatellite.No_Stream_Id_Filter
 				self.scan_sat.pls_mode.value = eDVBFrontendParametersSatellite.PLS_Gold
-				self.scan_sat.pls_code.value = 0
+				self.scan_sat.pls_code.value = eDVBFrontendParametersSatellite.PLS_Default_Gold_Code
 			self.createSetup()
 			self.retune()
 
@@ -165,13 +165,13 @@ class Satfinder(ScanSetup, ServiceScan):
 						self.is_id_boolEntry = getConfigListEntry(_('Transport Stream Type'), self.scan_sat.is_id_bool)
 						self.list.append(self.is_id_boolEntry)
 						if self.scan_sat.is_id_bool.value:
-							self.list.append(getConfigListEntry(_('Input Stream ID'), self.scan_sat.is_id))
-							self.list.append(getConfigListEntry(_('PLS Mode'), self.scan_sat.pls_mode))
-							self.list.append(getConfigListEntry(_('PLS Code'), self.scan_sat.pls_code))
+							self.list.append(getConfigListEntry("   " + _('Input Stream ID'), self.scan_sat.is_id))
+							self.list.append(getConfigListEntry("   " + _('PLS Mode'), self.scan_sat.pls_mode))
+							self.list.append(getConfigListEntry("   " + _('PLS Code'), self.scan_sat.pls_code))
 					else:
 						self.scan_sat.is_id.value = eDVBFrontendParametersSatellite.No_Stream_Id_Filter
 						self.scan_sat.pls_mode.value = eDVBFrontendParametersSatellite.PLS_Gold
-						self.scan_sat.pls_code.value = 0
+						self.scan_sat.pls_code.value = eDVBFrontendParametersSatellite.PLS_Default_Gold_Code
 			elif self.tuning_type.value == "predefined_transponder":
 				self.updatePreDefTransponders()
 				self.preDefTransponderEntry = getConfigListEntry(_("Transponder"), self.preDefTransponders)
@@ -537,9 +537,7 @@ def SatfinderMain(session, close=None, **kwargs):
 			continue
 		if n.config_mode in ("loopthrough", "satposdepends", "nothing"):
 			continue
-		if n.isCompatible("DVB-S") and n.config_mode in ("advanced", "simple") and len(nimmanager.getSatListForNim(n.slot)) < 1:
-			config.Nims[n.slot].configMode.value = "nothing"
-			config.Nims[n.slot].configMode.save()
+		if n.isCompatible("DVB-S") and n.config_mode in ("advanced", "simple") and len(nimmanager.getSatListForNim(n.slot)) < 1 and len(n.getTunerTypesEnabled()) < 2:
 			continue
 		nimList.append(n)
 

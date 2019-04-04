@@ -144,7 +144,7 @@ enum { lvlDebug=4, lvlInfo=3, lvlWarning=2, lvlError=1, lvlFatal=0 };
 #define eFatal(...)			eDebugLow(lvlFatal, _DBGFLG_FATAL, __VA_ARGS__)
 #define eLog(lvl, ...)			eDebugLow(lvl,        0,                 ##__VA_ARGS__)
 #define eLogNoNewLineStart(lvl, ...)	eDebugLow(lvl,        _DBGFLG_NONEWLINE, ##__VA_ARGS__)
-#define eLogNoNewLine(lvl, ...)	eDebugLow(lvl,        _DBGFLG_NOTIME | _DBGFLG_NONEWLINE, ##__VA_ARGS__)
+#define eLogNoNewLine(lvl, ...)		eDebugLow(lvl,        _DBGFLG_NOTIME | _DBGFLG_NONEWLINE, ##__VA_ARGS__)
 #define eWarning(...)			eDebugLow(lvlWarning, 0,                   __VA_ARGS__)
 #define eDebug(...)			eDebugLow(lvlDebug,   0,                   __VA_ARGS__)
 #define eDebugNoNewLineStart(...)	eDebugLow(lvlDebug,   _DBGFLG_NONEWLINE,   __VA_ARGS__)
@@ -154,5 +154,6 @@ enum { lvlDebug=4, lvlInfo=3, lvlWarning=2, lvlError=1, lvlFatal=0 };
 #endif // SWIG
 
 void ePythonOutput(const char *, int lvl = lvlDebug);
+int eGetEnigmaDebugLvl();
 
 #endif // __E_ERROR__

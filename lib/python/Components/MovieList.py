@@ -14,10 +14,10 @@ import skin
 
 from enigma import eListboxPythonMultiContent, eListbox, gFont, iServiceInformation, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, eServiceReference, eServiceCenter, eTimer, RT_VALIGN_CENTER
 
-AUDIO_EXTENSIONS = frozenset((".dts", ".mp3", ".wav", ".wave", ".oga", ".ogg", ".flac", ".m4a", ".mp2", ".m2a", ".wma", ".ac3", ".mka", ".aac", ".ape", ".alac"))
+AUDIO_EXTENSIONS = frozenset((".dts", ".mp3", ".wav", ".wave", ".wv", ".oga", ".ogg", ".flac", ".m4a", ".mp2", ".m2a", ".wma", ".ac3", ".mka", ".aac", ".ape", ".alac", ".amr", ".au", ".mid"))
 DVD_EXTENSIONS = frozenset((".iso", ".img", ".nrg"))
-IMAGE_EXTENSIONS = frozenset((".jpg", ".png", ".gif", ".bmp", ".jpeg"))
-MOVIE_EXTENSIONS = frozenset((".mpg", ".vob", ".m4v", ".mkv", ".avi", ".divx", ".dat", ".flv", ".mp4", ".mov", ".wmv", ".asf", ".3gp", ".3g2", ".mpeg", ".mpe", ".rm", ".rmvb", ".ogm", ".ogv", ".m2ts", ".mts", ".webm"))
+IMAGE_EXTENSIONS = frozenset((".jpg", ".png", ".gif", ".bmp", ".jpeg", ".jpe"))
+MOVIE_EXTENSIONS = frozenset((".mpg", ".vob", ".m4v", ".mkv", ".avi", ".divx", ".dat", ".flv", ".mp4", ".mov", ".wmv", ".asf", ".3gp", ".3g2", ".mpeg", ".mpe", ".rm", ".rmvb", ".ogm", ".ogv", ".m2ts", ".mts", ".webm", ".pva", ".wtv", ".ts"))
 KNOWN_EXTENSIONS = MOVIE_EXTENSIONS.union(IMAGE_EXTENSIONS, DVD_EXTENSIONS, AUDIO_EXTENSIONS)
 
 cutsParser = struct.Struct('>QI') # big-endian, 64-bit PTS and 32-bit type
@@ -56,50 +56,47 @@ def moviePlayState(cutsFileName, ref, length):
 	try:
 		# read the cuts file first
 		f = open(cutsFileName, 'rb')
-		lastCut = None
-		cutPTS = None
+		lastPosition = None
 		while 1:
 			data = f.read(cutsParser.size)
 			if len(data) < cutsParser.size:
 				break
 			cut, cutType = cutsParser.unpack(data)
 			if cutType == 3: # undocumented, but 3 appears to be the stop
-				cutPTS = cut
-			else:
-				lastCut = cut
+				lastPosition = cut
 		f.close()
 		# See what we have in RAM (it might help)
 		last = lastPlayPosFromCache(ref)
 		if last:
-			# Get the length from the cache
-			if not lastCut:
-				lastCut = last[2]
 			# Get the cut point from the cache if not in the file
-			if not cutPTS:
-				cutPTS = last[1]
-		if cutPTS is None:
+			lastPosition = last[1]
+			# Get the length from the cache
+			length = last[2]
+		else:
+			if length and (length > 0):
+				length = length * 90000
+			else:
+				if lastPosition:
+					return 50
+		if lastPosition is None:
 			# Unseen movie
 			return None
-		if not lastCut:
-			if length and (length > 0):
-				lastCut = length * 90000
-			else:
-				# Seen, but unknown how far
-				return 50
-		if cutPTS >= lastCut:
+		if lastPosition >= length:
 			return 100
-		return (100 * cutPTS) // lastCut
+		return (100 * lastPosition) // length
 	except:
-		cutPTS = lastPlayPosFromCache(ref)
-		if cutPTS:
-			if not length or (length<0):
-				length = cutPTS[2]
+		last = lastPlayPosFromCache(ref)
+		if last:
+			lastPosition = last[1]
+			if not length or (length < 0):
+				length = last[2]
 			if length:
-				if cutPTS[1] >= length:
+				if lastPosition >= length:
 					return 100
-				return (100 * cutPTS[1]) // length
+				return (100 * lastPosition) // length
 			else:
-				return 50
+				if lastPosition:
+					return 50
 		return None
 
 def resetMoviePlayState(cutsFileName, ref=None):
@@ -466,13 +463,13 @@ class MovieList(GUIComponent):
 			res.append(MultiContentEntryText(pos=(0, ih1), size=(width-r, ih2-ih1), font=1, flags=RT_HALIGN_LEFT, text=data.description))
 			res.append(MultiContentEntryText(pos=(0, ih2), size=(sc-r, ih-ih2), font=1, flags=RT_HALIGN_LEFT, text=begin_string))
 			if len:
-			     res.append(MultiContentEntryText(pos=(width-sc-r, ih2), size=(sc, ih-ih2), font=1, flags=RT_HALIGN_RIGHT, text=len))
+				res.append(MultiContentEntryText(pos=(width-sc-r, ih2), size=(sc, ih-ih2), font=1, flags=RT_HALIGN_RIGHT, text=len))
 		elif self.list_type == MovieList.LISTTYPE_COMPACT_DESCRIPTION:
 			ih1 = ((ih * 8) + 14) / 15 # 37 -> 20, round up
 			if len:
-			     lenSize = 58 * ih / 37
+				lenSize = 58 * ih / 37
 			else:
-			     lenSize = 0
+				lenSize = 0
 			fc, sc, tc = self.columnsCompactDescription[0], self.columnsCompactDescription[1], self.columnsCompactDescription[2]
 			res.append(MultiContentEntryText(pos=(iconSize+space, 0), size=(width-sc-r, ih1), font = 0, flags = RT_HALIGN_LEFT, text = data.txt))
 			res.append(MultiContentEntryText(pos=(0, ih1), size=(width-tc-lenSize-r, ih-ih1), font=1, flags=RT_HALIGN_LEFT, text=data.description))
@@ -480,14 +477,14 @@ class MovieList(GUIComponent):
 			if data.serviceName:
 				res.append(MultiContentEntryText(pos=(width-tc-lenSize-r, ih1), size=(tc, ih-ih1), font = 1, flags = RT_HALIGN_RIGHT, text = data.serviceName))
 			if lenSize:
-			     res.append(MultiContentEntryText(pos=(width-lenSize-r, ih1), size=(lenSize, ih-ih1), font=1, flags=RT_HALIGN_RIGHT, text=len))
+				res.append(MultiContentEntryText(pos=(width-lenSize-r, ih1), size=(lenSize, ih-ih1), font=1, flags=RT_HALIGN_RIGHT, text=len))
 		elif self.list_type == MovieList.LISTTYPE_COMPACT:
 			col = self.compactColumn
 			ih1 = ((ih * 8) + 14) / 15 # 37 -> 20, round up
 			if len:
-			     lenSize = 2 * ih
+				lenSize = 2 * ih
 			else:
-			     lenSize = 0
+				lenSize = 0
 			res.append(MultiContentEntryText(pos=(iconSize+space, 0), size=(width-lenSize-iconSize-space-r, ih1), font = 0, flags = RT_HALIGN_LEFT, text = data.txt))
 			if self.tags:
 				res.append(MultiContentEntryText(pos=(width-col-r, ih1), size=(col, ih-ih1), font = 1, flags = RT_HALIGN_RIGHT, text = info.getInfoString(serviceref, iServiceInformation.sTags)))
@@ -498,12 +495,12 @@ class MovieList(GUIComponent):
 					res.append(MultiContentEntryText(pos=(width-col-r, ih1), size=(col, ih-ih1), font = 1, flags = RT_HALIGN_RIGHT, text = data.serviceName))
 			res.append(MultiContentEntryText(pos=(0, ih1), size=(col, ih-ih1), font=1, flags=RT_HALIGN_LEFT, text=begin_string))
 			if lenSize:
-			     res.append(MultiContentEntryText(pos=(width-lenSize-r, 0), size=(lenSize, ih1), font=0, flags=RT_HALIGN_RIGHT, text=len))
+				res.append(MultiContentEntryText(pos=(width-lenSize-r, 0), size=(lenSize, ih1), font=0, flags=RT_HALIGN_RIGHT, text=len))
 		else:
 			if (self.descr_state == MovieList.SHOW_DESCRIPTION) or not len:
 				dateSize = ih * 145 / 25   # 25 -> 145
 				res.append(MultiContentEntryText(pos=(iconSize+space, 0), size=(width-iconSize-space-dateSize-r, ih), font = 0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = data.txt))
-				res.append(MultiContentEntryText(pos=(width-dateSize-r, 4), size=(dateSize, ih), font=1, flags=RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text=begin_string))
+				res.append(MultiContentEntryText(pos=(width-dateSize-r, 2), size=(dateSize, ih), font=1, flags=RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text=begin_string))
 			else:
 				lenSize = ih * 3 # 25 -> 75
 				res.append(MultiContentEntryText(pos=(iconSize+space, 0), size=(width-lenSize-iconSize-space-r, ih), font = 0, flags = RT_HALIGN_LEFT, text = data.txt))

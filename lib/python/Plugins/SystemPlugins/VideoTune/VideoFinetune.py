@@ -1,6 +1,8 @@
 from Screens.Screen import Screen
+from Components.config import config
 from Components.Sources.CanvasSource import CanvasSource
 from Components.ActionMap import ActionMap, NumberActionMap
+from Components.Console import Console
 from Components.SystemInfo import SystemInfo
 from Tools.Directories import fileExists
 from enigma import gFont, getDesktop, gMainDC, eSize, RT_HALIGN_RIGHT, RT_WRAP
@@ -24,6 +26,7 @@ class OverscanTestScreen(Screen):
 			"4": self.keyNumber,
 			"5": self.keyNumber,
 			"7": self.keyNumber,
+			"8": self.keyNumber,
 			"ok": self.ok,
 			"cancel": self.cancel
 		})
@@ -61,6 +64,7 @@ class FullHDTestScreen(OverscanTestScreen):
 			"4": self.keyNumber,
 			"5": self.keyNumber,
 			"6": self.keyNumber,
+			"8": self.keyNumber,
 			"ok": self.ok,
 			"cancel": self.cancel
 		})
@@ -68,6 +72,33 @@ class FullHDTestScreen(OverscanTestScreen):
 	def __close(self):
 		gMainDC.getInstance().setResolution(self.xres, self.yres)
 		getDesktop(0).resize(eSize(self.xres, self.yres))
+
+class FullUHDTestScreen(OverscanTestScreen):
+	skin = """<screen position="0,0" size="0,0"/>"""
+
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		self.oldref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
+		self.session.nav.stopService()
+		Console().ePopen("/usr/bin/showiframe /usr/lib/enigma2/python/Plugins/SystemPlugins/VideoTune/testbeeld-4k.mvi")
+		self.hide()
+		self.onClose.append(self.__close)
+
+		self["actions"] = NumberActionMap(["InputActions", "OkCancelActions"],
+		{
+			"1": self.keyNumber,
+			"2": self.keyNumber,
+			"3": self.keyNumber,
+			"4": self.keyNumber,
+			"5": self.keyNumber,
+			"6": self.keyNumber,
+			"7": self.keyNumber,
+			"ok": self.ok,
+			"cancel": self.cancel
+		})
+
+	def __close(self):
+		self.session.nav.playService(self.oldref)
 
 class VideoFinetune(Screen):
 	skin = """
@@ -77,6 +108,10 @@ class VideoFinetune(Screen):
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
+
+		port = config.av.videoport.value
+		self.hasUHD = port and config.av.videomode[port].value.startswith("2160")
+
 		self["Canvas"] = CanvasSource()
 
 		self.basic_colors = [RGB(255, 255, 255), RGB(255, 255, 0), RGB(0, 255, 255), RGB(0, 255, 0), RGB(255, 0, 255), RGB(255, 0, 0), RGB(0, 0, 255), RGB(0, 0, 0)]
@@ -103,6 +138,7 @@ class VideoFinetune(Screen):
 			"5": self.keyNumber,
 			"6": self.keyNumber,
 			"7": self.keyNumber,
+			"8": self.keyNumber,
 			"ok": self.callNext,
 			"cancel": self.close,
 		})
@@ -115,7 +151,7 @@ class VideoFinetune(Screen):
 		open("/proc/stb/fb/dst_height", "w").write(self.height)
 
 	def keyNumber(self, key):
-		(self.testpic_brightness, self.testpic_contrast, self.testpic_colors, self.testpic_filter, self.testpic_gamma, self.testpic_overscan, self.testpic_fullhd)[key-1]()
+		(self.testpic_brightness, self.testpic_contrast, self.testpic_colors, self.testpic_filter, self.testpic_gamma, self.testpic_overscan, self.testpic_fullhd, self.testpic_uhd)[key-1]()
 
 	def callNext(self):
 		if self.next:
@@ -337,9 +373,17 @@ class VideoFinetune(Screen):
 
 	def testpic_fullhd(self):
 		if SystemInfo["HasFullHDSkinSupport"]:
-			self.next = self.testpic_brightness
+			self.next = self.hasUHD and self.testpic_uhd or self.testpic_brightness
 			self.hide()
 			self.session.openWithCallback(self.testpicCallback, FullHDTestScreen)
+		else:
+			return 0
+
+	def testpic_uhd(self):
+		if self.hasUHD:
+			self.next = self.testpic_brightness
+			self.hide()
+			self.session.openWithCallback(self.testpicCallback, FullUHDTestScreen)
 		else:
 			return 0
 

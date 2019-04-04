@@ -20,8 +20,11 @@ class ServiceStopScreen:
 
 	def stopService(self):
 		if not self.oldref:
-			self.oldref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
-			self.session.nav.stopService()
+			ref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
+			path = ref and ref.getPath()
+			if not path:
+				self.oldref = ref
+				self.session.nav.stopService()
 			if self.pipAvailable():
 				if self.session.pipshown: # try to disable pip
 					if hasattr(self.session, 'infobar'):

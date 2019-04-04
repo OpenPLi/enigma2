@@ -313,6 +313,10 @@ int eDVBPMTParser::getProgramInfo(program &program)
 									isaudio = 1;
 									audio.type = audioStream::atLPCM;
 									break;
+								case 0x44524131: /* DRA is "DRA1" */
+									isaudio = 1;
+									audio.type = audioStream::atDRA;
+									break;
 								case 0x56432d31: // == 'VC-1'
 								{
 									const AdditionalIdentificationInfoVector *vec = d->getAdditionalIdentificationInfo();
@@ -343,6 +347,24 @@ int eDVBPMTParser::getProgramInfo(program &program)
 								isvideo = 1;
 								video.type = videoStream::vtMPEG4_Part2;
 								break;
+							case EXTENSION_DESCRIPTOR:
+							{
+								ExtensionDescriptor &d = (ExtensionDescriptor&)*desc;
+								switch (d.getExtensionTag())
+								{
+								case 0x15: /* AC-4 descriptor */
+									if (!isvideo && !isaudio)
+									{
+										isaudio = 1;
+										audio.type = audioStream::atAC4;
+									}
+									break;
+								default:
+									eDebug("[eDVBPMTParser] TODO: Fix parsing for Extension descriptor with tag: %d", d.getExtensionTag());
+									break;
+								}
+								break;
+							}
 							default:
 								break;
 							}
@@ -473,6 +495,7 @@ eDVBPMTParser::eStreamData::eStreamData(eDVBPMTParser::program &program)
 	pmtPid = program.pmtPid;
 	textPid = program.textPid;
 	aitPid = program.aitPid;
+	defaultAudioPid = program.defaultAudioStream;
 	adapterId = program.adapterId;
 	demuxId = program.demuxId;
 	serviceId = program.serviceId;
@@ -580,6 +603,19 @@ RESULT eDVBPMTParser::eStreamData::getCaIds(std::vector<int> &caids, std::vector
 		caids.push_back(caIds[i]);
 		ecmpids.push_back(ecmPids[i]);
 		ecmdatabytes.push_back(ecmDataBytes[i]);
+	}
+	return 0;
+}
+
+RESULT eDVBPMTParser::eStreamData::getDefaultAudioPid(int &result) const
+{
+	if (audioStreams.size() > static_cast<size_t>(defaultAudioPid))
+	{
+		result = audioStreams[defaultAudioPid];
+	}
+	else
+	{
+		result = -1;
 	}
 	return 0;
 }

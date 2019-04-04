@@ -247,6 +247,12 @@ class eDVBSatelliteLNBParameters
 		eDVBSatelliteLNBParameters()
 		{
 			SatCR_format = SatCR_format_none;
+#ifndef SWIG
+			m_12V_relais_state = OFF;
+			m_lof_hi = m_lof_lo = m_lof_threshold = 0;
+			m_increased_voltage = false;
+			m_prio = -1;
+#endif
 		}
 #ifdef SWIG
 		~eDVBSatelliteLNBParameters();
@@ -316,6 +322,9 @@ public:
 		DELAY_AFTER_VOLTAGE_CHANGE_BEFORE_SWITCH_CMDS, // delay after change voltage before transmit toneburst/diseqc
 		DELAY_AFTER_DISEQC_RESET_CMD,
 		DELAY_AFTER_DISEQC_PERIPHERIAL_POWERON_CMD,
+		UNICABLE_DELAY_AFTER_ENABLE_VOLTAGE_BEFORE_SWITCH_CMDS,
+		UNICABLE_DELAY_AFTER_VOLTAGE_CHANGE_BEFORE_SWITCH_CMDS,
+		UNICABLE_DELAY_AFTER_LAST_DISEQC_CMD,
 		MAX_PARAMS
 	};
 private:

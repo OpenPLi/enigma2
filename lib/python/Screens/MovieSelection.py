@@ -269,7 +269,7 @@ class MovieBrowserConfiguration(ConfigListScreen,Screen):
 			getConfigListEntry(_("Play audiofiles in list mode"), config.movielist.play_audio_internal, _("If set as 'Yes', then audiofiles are played in 'list mode' only, instead in full screen player.")),
 			getConfigListEntry(_("Root directory"), config.movielist.root, _("You can set selected directory as 'root' directory for movie player.")),
 			getConfigListEntry(_("Hide known extensions"), config.movielist.hide_extensions, _("Do not show file extensions for registered multimedia files.")),
-			getConfigListEntry(_("Automatic bookmarks"), config.movielist.add_bookmark, _("If is disabled, then after Copy/Move will not be target directory stored into bookmarks.")),
+			getConfigListEntry(_("Automatic bookmarks"), config.movielist.add_bookmark, _("If enabled, bookmarks will be updated with the new location when you move or copy a recording.")),
 			]
 		for btn in ('red', 'green', 'yellow', 'blue', 'TV', 'Radio', 'Text', 'F1', 'F2', 'F3'):
 			configList.append(getConfigListEntry(_(btn), userDefinedButtons[btn]))
@@ -422,8 +422,6 @@ class MovieContextMenu(Screen, ProtectedScreen):
 		append_to_menu(menu, (_("create directory"), csel.do_createdir), key="7")
 		append_to_menu(menu, (_("Sort by") + "...", csel.selectSortby))
 		append_to_menu(menu, (_("Network") + "...", csel.showNetworkSetup), key="yellow")
-		if csel.installedMovieManagerPlugin():
-			append_to_menu(menu, (_("Movie manager") + "...", csel.do_moviemanager))
 		append_to_menu(menu, (_("Settings") + "...", csel.configure), key="menu")
 
 		self["menu"] = ChoiceList(menu)
@@ -590,6 +588,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				"showMovies": (self.doPathSelect, _("Select the movie path")),
 				"showRadio": (self.btn_radio, boundFunction(self.getinitUserDefinedActionsDescription, "btn_radio")),
 				"showTv": (self.btn_tv, boundFunction(self.getinitUserDefinedActionsDescription, "btn_tv")),
+				"toggleTvRadio": (self.btn_tv, boundFunction(self.getinitUserDefinedActionsDescription, "btn_tv")),
 				"showText": (self.btn_text, boundFunction(self.getinitUserDefinedActionsDescription, "btn_text")),
 			})
 
@@ -732,8 +731,6 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				'movieoff': _("On end of movie"),
 				'movieoff_menu': _("On end of movie (as menu)")
 			}
-			if self.installedMovieManagerPlugin():
-				userDefinedActions['moviemanager'] = _("Movie manager")
 			for p in plugins.getPlugins(PluginDescriptor.WHERE_MOVIELIST):
 				userDefinedActions['@' + p.name] = p.description
 			locations = []
@@ -759,6 +756,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				'blue': config.movielist.btn_blue,
 				'Radio': config.movielist.btn_radio,
 				'TV': config.movielist.btn_tv,
+				'TV2': config.movielist.btn_tv,
 				'Text': config.movielist.btn_text,
 				'F1': config.movielist.btn_F1,
 				'F2': config.movielist.btn_F2,
@@ -1022,6 +1020,14 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		except Exception, e:
 			print "[ML] DVD Player not installed:", e
 
+	def playSuburi(self, path):
+		suburi = os.path.splitext(path)[0][:-7]
+		for ext in AUDIO_EXTENSIONS:
+			if os.path.exists("%s%s" % (suburi, ext)):
+				current = eServiceReference(4097, 0, "file://%s&suburi=file://%s%s" % (path, suburi, ext))
+				self.close(current)
+				return True
+
 	def __serviceStarted(self):
 		if not self.list.playInBackground:
 			return
@@ -1189,6 +1195,9 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			elif ext in DVD_EXTENSIONS:
 				if self.playAsDVD(path):
 					return
+			elif "_suburi." in path:
+				if self.playSuburi(path):
+					return
 			self.movieSelected()
 
 	# Note: DVDBurn overrides this method, hence the itemSelected indirection.
@@ -1330,7 +1339,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		for x in l_moviesort:
 			if int(x[0]) == int(config.movielist.moviesort.value):
 				used = index
-			menu.append((_(x[1]), x[0], "%d" % index))
+			menu.append((x[1], x[0]))
 			index += 1
 		self.session.openWithCallback(self.sortbyMenuCallback, ChoiceBox, title=_("Sort list:"), list=menu, selection = used, skin_name="SortbyChoiceBox")
 
@@ -1985,8 +1994,8 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		offline = serviceHandler.offlineOperations(current)
 		try:
 			if offline is None:
-			        from enigma import eBackgroundFileEraser
-			        eBackgroundFileEraser.getInstance().erase(os.path.realpath(current.getPath()))
+				from enigma import eBackgroundFileEraser
+				eBackgroundFileEraser.getInstance().erase(os.path.realpath(current.getPath()))
 			else:
 				if offline.deleteFromDisk(0):
 					raise Exception, "Offline delete failed"
@@ -2018,19 +2027,6 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 	def showNetworkSetup(self):
 		import NetworkSetup
 		self.session.open(NetworkSetup.NetworkAdapterSelection)
-
-	def can_moviemanager(self, item):
-		return True
-	def do_moviemanager(self):
-		item = self.getCurrentSelection()
-		from Plugins.Extensions.MovieManager.ui import MovieManager
-		self.session.open(MovieManager, self["list"], item)
-	def installedMovieManagerPlugin(self):
-		try:
-			from Plugins.Extensions.MovieManager.ui import MovieManager
-			return True
-		except Exception as e:
-			return False
 
 	def showActionFeedback(self, text):
 		if self.feedbackTimer is None:

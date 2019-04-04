@@ -65,6 +65,8 @@ config.misc.prev_wakeup_time_type = ConfigInteger(default=0)
 config.misc.epgcache_filename = ConfigText(default = "/hdd/epg.dat")
 
 def setEPGCachePath(configElement):
+	if os.path.isdir(configElement.value) or os.path.islink(configElement.value):
+		configElement.value = os.path.join(configElement.value, "epg.dat")
 	enigma.eEPGCache.getInstance().setCacheFile(configElement.value)
 
 #demo code for use of standby enter leave callbacks

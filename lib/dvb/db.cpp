@@ -235,8 +235,40 @@ int eDVBService::isPlayable(const eServiceReference &ref, const eServiceReferenc
 		((const eServiceReferenceDVB&)ignore).getChannelID(chid_ignore);
 
 		if (res_mgr->canAllocateChannel(chid, chid_ignore, system, simulate))
+		{
+			bool use_ci_assignment = eConfigManager::getConfigBoolValue("config.misc.use_ci_assignment", false);
+			if (use_ci_assignment)
+			{
+				int is_ci_playable = 1;
+				PyObject *pName, *pModule, *pFunc;
+				PyObject *pArgs, *pArg, *pResult;
+				Py_Initialize();
+				pName = PyString_FromString("Tools.CIHelper");
+				pModule = PyImport_Import(pName);
+				Py_DECREF(pName);
+				if (pModule != NULL)
+				{
+					pFunc = PyObject_GetAttrString(pModule, "isPlayable");
+					if (pFunc) 
+					{
+						pArgs = PyTuple_New(1);
+						pArg = PyString_FromString(ref.toString().c_str());
+						PyTuple_SetItem(pArgs, 0, pArg);
+						pResult = PyObject_CallObject(pFunc, pArgs);
+						Py_DECREF(pArgs);
+						if (pResult != NULL)
+						{
+							is_ci_playable = PyInt_AsLong(pResult);
+							Py_DECREF(pResult);
+							return is_ci_playable;
+						}
+					}
+				}
+				eDebug("[eDVBService] isPlayble... error in python code");
+				PyErr_Print();
+			}
 			return 1;
-
+		}
 		if (remote_fallback_enabled)
 			return 2;
 	}
@@ -433,8 +465,8 @@ static ePtr<eDVBFrontendParameters> parseFrontendData(char* line, int version)
 				modulation=eDVBFrontendParametersSatellite::Modulation_QPSK,
 				rolloff=eDVBFrontendParametersSatellite::RollOff_alpha_0_35,
 				pilot=eDVBFrontendParametersSatellite::Pilot_Unknown,
-				is_id = NO_STREAM_ID_FILTER,
-				pls_code = 0,
+				is_id = eDVBFrontendParametersSatellite::No_Stream_Id_Filter,
+				pls_code = eDVBFrontendParametersSatellite::PLS_Default_Gold_Code,
 				pls_mode = eDVBFrontendParametersSatellite::PLS_Gold;
 			sscanf(line+2, "%d:%d:%d:%d:%d:%d:%d:%d:%d:%d:%d:%d:%d:%d",
 				&frequency, &symbol_rate, &polarisation, &fec, &orbital_position,
@@ -1153,7 +1185,7 @@ void eDVBDB::reloadBouquets()
 	loadBouquet("bouquets.tv");
 	loadBouquet("bouquets.radio");
 	// create default bouquets when missing
-	if ( m_bouquets.find("userbouquet.favourites.tv") == m_bouquets.end() )
+	if ( m_bouquets["bouquets.tv"].m_services.empty() )
 	{
 		eBouquet &b = m_bouquets["userbouquet.favourites.tv"];
 		b.m_filename = "userbouquet.favourites.tv";
@@ -1168,7 +1200,7 @@ void eDVBDB::reloadBouquets()
 		parent.m_services.push_back(ref);
 		parent.flushChanges();
 	}
-	if ( m_bouquets.find("userbouquet.favourites.radio") == m_bouquets.end() )
+	if ( m_bouquets["bouquets.radio"].m_services.empty() )
 	{
 		eBouquet &b = m_bouquets["userbouquet.favourites.radio"];
 		b.m_filename = "userbouquet.favourites.radio";
@@ -1347,8 +1379,8 @@ PyObject *eDVBDB::readSatellites(ePyObject sat_list, ePyObject sat_dict, ePyObje
 				inv = eDVBFrontendParametersSatellite::Inversion_Unknown;
 				pilot = eDVBFrontendParametersSatellite::Pilot_Unknown;
 				rolloff = eDVBFrontendParametersSatellite::RollOff_alpha_0_35;
-				is_id = NO_STREAM_ID_FILTER;
-				pls_code = 0;
+				is_id = eDVBFrontendParametersSatellite::No_Stream_Id_Filter;
+				pls_code = eDVBFrontendParametersSatellite::PLS_Default_Gold_Code;
 				pls_mode = eDVBFrontendParametersSatellite::PLS_Gold;
 				tsid = -1;
 				onid = -1;
@@ -2126,6 +2158,15 @@ RESULT eDVBDB::removeFlag(const eServiceReference &ref, unsigned int flagmask)
 		return 0;
 	}
 	return -1;
+}
+
+void eDVBDB::removeServicesFlag(unsigned int flagmask)
+{
+	for (std::map<eServiceReferenceDVB, ePtr<eDVBService> >::iterator i(m_services.begin());
+		i != m_services.end(); ++i)
+	{
+		i->second->m_flags &= ~flagmask;
+	}
 }
 
 RESULT eDVBDB::removeFlags(unsigned int flagmask, int dvb_namespace, int tsid, int onid, unsigned int orb_pos)

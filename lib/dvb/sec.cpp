@@ -714,11 +714,11 @@ RESULT eDVBSatelliteEquipmentControl::prepare(iDVBFrontend &frontend, const eDVB
 				compare.voltage = iDVBFrontend::voltageOff;
 				sec_sequence.push_back( eSecCommand(eSecCommand::IF_NOT_VOLTAGE_GOTO, compare) );
 				sec_sequence.push_back( eSecCommand(eSecCommand::SET_VOLTAGE, VOLTAGE(13)) );
-				sec_sequence.push_back( eSecCommand(eSecCommand::SLEEP, m_params[DELAY_AFTER_ENABLE_VOLTAGE_BEFORE_SWITCH_CMDS] ) );
+				sec_sequence.push_back( eSecCommand(eSecCommand::SLEEP, m_params[UNICABLE_DELAY_AFTER_ENABLE_VOLTAGE_BEFORE_SWITCH_CMDS] ) );
 
 				sec_sequence.push_back( eSecCommand(eSecCommand::SET_VOLTAGE, VOLTAGE(18)) );
 				sec_sequence.push_back( eSecCommand(eSecCommand::SET_TONE, iDVBFrontend::toneOff) );
-				sec_sequence.push_back( eSecCommand(eSecCommand::SLEEP, m_params[DELAY_AFTER_VOLTAGE_CHANGE_BEFORE_SWITCH_CMDS]) );  // wait 20 ms after voltage change
+				sec_sequence.push_back( eSecCommand(eSecCommand::SLEEP, m_params[UNICABLE_DELAY_AFTER_VOLTAGE_CHANGE_BEFORE_SWITCH_CMDS]) );  // wait 20 ms after voltage change
 
 				eDVBDiseqcCommand diseqc;
 				memset(diseqc.data, 0, MAX_DISEQC_LENGTH);
@@ -767,19 +767,19 @@ RESULT eDVBSatelliteEquipmentControl::prepare(iDVBFrontend &frontend, const eDVB
 						frontend.setData(eDVBFrontend::SATCR, lnb_param.SatCR_idx);
 						frontend.setData(eDVBFrontend::DICTION, SatCR_format_unicable);
 
-						eDebug("**** Tuning Unicable");
-						eDebug("**** frequency_mhz: %u", frequency_mhz);
-						eDebug("**** lo_mhz: %u", lof_mhz);
-						eDebug("**** ub_mhz: %u", ub_mhz);
-						eDebug("**** T: %u", encoded_frequency_T);
-						eDebug("**** ub: %u", ub);
-						eDebug("**** position: %u", position);
-						eDebug("**** mode: %u", mode);
-						eDebug("**** bank: %u", bank);
-						eDebug("**** Unicable: %02x %02x %02x %02x %02x", diseqc.data[0], diseqc.data[1],
+						eDebugNoSimulate("**** Tuning Unicable");
+						eDebugNoSimulate("**** frequency_mhz: %u", frequency_mhz);
+						eDebugNoSimulate("**** lo_mhz: %u", lof_mhz);
+						eDebugNoSimulate("**** ub_mhz: %u", ub_mhz);
+						eDebugNoSimulate("**** T: %u", encoded_frequency_T);
+						eDebugNoSimulate("**** ub: %u", ub);
+						eDebugNoSimulate("**** position: %u", position);
+						eDebugNoSimulate("**** mode: %u", mode);
+						eDebugNoSimulate("**** bank: %u", bank);
+						eDebugNoSimulate("**** Unicable: %02x %02x %02x %02x %02x", diseqc.data[0], diseqc.data[1],
 								diseqc.data[2], diseqc.data[3], diseqc.data[4]);
-						eDebug("**** Calculated tuningword: %04x", (diseqc.data[3] << 8) | (diseqc.data[4] << 0));
-						eDebug("**** Stored     tuningword: %04x", lnb_param.UnicableTuningWord);
+						eDebugNoSimulate("**** Calculated tuningword: %04x", (diseqc.data[3] << 8) | (diseqc.data[4] << 0));
+						eDebugNoSimulate("**** Stored     tuningword: %04x", lnb_param.UnicableTuningWord);
 
 						break;
 					}
@@ -809,14 +809,14 @@ RESULT eDVBSatelliteEquipmentControl::prepare(iDVBFrontend &frontend, const eDVB
 						frontend.setData(eDVBFrontend::SATCR, lnb_param.SatCR_idx);
 						frontend.setData(eDVBFrontend::DICTION, SatCR_format_jess);
 
-						eDebug("**** Tuning JESS");
-						eDebug("**** frequency_mhz: %u", frequency_mhz);
-						eDebug("**** lo_mhz: %u", lof_mhz);
-						eDebug("**** T: %u", encoded_frequency_T);
-						eDebug("**** position: %u", position);
-						eDebug("**** ub: %u", ub);
-						eDebug("**** mode: %u", mode);
-						eDebug("**** JESS: %02x %02x %02x %02x", diseqc.data[0], diseqc.data[1], diseqc.data[2], diseqc.data[3]);
+						eDebugNoSimulate("**** Tuning JESS");
+						eDebugNoSimulate("**** frequency_mhz: %u", frequency_mhz);
+						eDebugNoSimulate("**** lo_mhz: %u", lof_mhz);
+						eDebugNoSimulate("**** T: %u", encoded_frequency_T);
+						eDebugNoSimulate("**** position: %u", position);
+						eDebugNoSimulate("**** ub: %u", ub);
+						eDebugNoSimulate("**** mode: %u", mode);
+						eDebugNoSimulate("**** JESS: %02x %02x %02x %02x", diseqc.data[0], diseqc.data[1], diseqc.data[2], diseqc.data[3]);
 
 						break;
 					}
@@ -826,12 +826,12 @@ RESULT eDVBSatelliteEquipmentControl::prepare(iDVBFrontend &frontend, const eDVB
 						frontend.setData(eDVBFrontend::SATCR, -1);
 						frontend.setData(eDVBFrontend::DICTION, SatCR_format_none);
 
-						eDebug("**** SatCR_format neither Unicable nor JESS!");
+						eDebugNoSimulate("**** SatCR_format neither Unicable nor JESS!");
 					}
 				}
 
 				sec_sequence.push_back( eSecCommand(eSecCommand::SEND_DISEQC, diseqc) );
-				sec_sequence.push_back( eSecCommand(eSecCommand::SLEEP, m_params[DELAY_AFTER_LAST_DISEQC_CMD]) );
+				sec_sequence.push_back( eSecCommand(eSecCommand::SLEEP, m_params[UNICABLE_DELAY_AFTER_LAST_DISEQC_CMD]) );
 				sec_sequence.push_back( eSecCommand(eSecCommand::SET_VOLTAGE, VOLTAGE(13)) );
 				if ( RotorCmd != -1 && RotorCmd != lastRotorCmd && !rotor_param.m_inputpower_parameters.m_use)
 					sec_sequence.push_back( eSecCommand(eSecCommand::SLEEP, m_params[DELAY_AFTER_VOLTAGE_CHANGE_BEFORE_MOTOR_CMD]) );  // wait 150msec after voltage change

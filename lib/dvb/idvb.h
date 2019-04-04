@@ -280,7 +280,7 @@ public:
 		cVPID, cMPEGAPID, cTPID, cPCRPID, cAC3PID,
 		cVTYPE, cACHANNEL, cAC3DELAY, cPCMDELAY,
 		cSUBTITLE, cAACHEAPID=12, cDDPPID, cAACAPID,
-		cDATAPID, cPMTPID, cacheMax
+		cDATAPID, cPMTPID, cDRAAPID, cAC4PID, cacheMax
 	};
 
 	int getCacheEntry(cacheID);
@@ -305,16 +305,16 @@ public:
 		dxNewFound=64,
 		dxIsDedicated3D=128,
 		dxIsParentalProtected=256,
-		dxHideVBI=512,
 		dxIsScrambledPMT=1024,
 		dxCenterDVBSubs=2048,
+		dxNoEIT=4096,
 	};
 
 	bool usePMT() const { return !(m_flags & dxNoDVB); }
 	bool isHidden() const { return (m_flags & dxDontshow || m_flags & dxIsParentalProtected); }
 	bool isDedicated3D() const { return m_flags & dxIsDedicated3D; }
-	bool doHideVBI() const { return m_flags & dxHideVBI; }
 	bool doCenterDVBSubs() const { return m_flags & dxCenterDVBSubs; }
+	bool useEIT() const { return !(m_flags & dxNoEIT); }
 
 	CAID_LIST m_ca;
 
@@ -753,13 +753,15 @@ public:
 		enum { eventUnknown = 0,
 			eventSizeChanged = VIDEO_EVENT_SIZE_CHANGED,
 			eventFrameRateChanged = VIDEO_EVENT_FRAME_RATE_CHANGED,
-			eventProgressiveChanged = 16
+			eventProgressiveChanged = 16,
+			eventGammaChanged = 17
 		} type;
 		unsigned char aspect;
 		unsigned short height;
 		unsigned short width;
 		bool progressive;
 		unsigned short framerate;
+		unsigned short gamma;
 	};
 
 	virtual RESULT connectVideoEvent(const sigc::slot1<void, struct videoEvent> &event, ePtr<eConnection> &connection) = 0;
@@ -769,6 +771,7 @@ public:
 	virtual int getVideoProgressive() = 0;
 	virtual int getVideoFrameRate() = 0;
 	virtual int getVideoAspect() = 0;
+	virtual int getVideoGamma() = 0;
 };
 
 #endif //SWIG

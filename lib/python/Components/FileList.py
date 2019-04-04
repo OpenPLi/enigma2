@@ -12,6 +12,7 @@ EXTENSIONS = {
 		"mp3": "music",
 		"wav": "music",
 		"wave": "music",
+		"wv": "music",
 		"oga": "music",
 		"ogg": "music",
 		"flac": "music",
@@ -24,11 +25,15 @@ EXTENSIONS = {
 		"aac": "music",
 		"ape": "music",
 		"alac": "music",
+		"amr": "music",
+		"au": "music",
+		"mid": "music",
 		"jpg": "picture",
 		"png": "picture",
 		"gif": "picture",
 		"bmp": "picture",
 		"jpeg": "picture",
+		"jpe": "picture",
 		"mpg": "movie",
 		"vob": "movie",
 		"m4v": "movie",
@@ -53,6 +58,8 @@ EXTENSIONS = {
 		"mts": "movie",
 		"ts": "movie",
 		"webm": "movie",
+		"pva": "movie",
+		"wtv": "movie",
 	}
 
 def FileEntryComponent(name, absolute = None, isDir = False):
@@ -70,7 +77,7 @@ def FileEntryComponent(name, absolute = None, isDir = False):
 			png = None
 	if png is not None:
 		x, y, w, h = skin.parameters.get("FileListIcon",(10, 2, 20, 20))
-		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, x, y, w, h, png))
+		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, x, y, w, h, png))
 
 	return res
 
@@ -306,14 +313,14 @@ def MultiFileSelectEntryComponent(name, absolute = None, isDir = False, selected
 			png = None
 	if png is not None:
 		x, y, w, h = skin.parameters.get("FileListMultiIcon",(30, 2, 20, 20))
-		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, x, y, w, h, png))
+		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, x, y, w, h, png))
 	if not name.startswith('<'):
 		if selected:
 			icon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/lock_on.png"))
 		else:
 			icon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/lock_off.png"))
 		x, y, w, h = skin.parameters.get("FileListMultiLock",(2, 0, 25, 25))
-		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, x, y, w, h, icon))
+		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, x, y, w, h, icon))
 	return res
 
 

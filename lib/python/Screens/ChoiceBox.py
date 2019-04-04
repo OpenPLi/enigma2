@@ -20,6 +20,8 @@ class ChoiceBox(Screen):
 		self.skinName = skin_name + ["ChoiceBox"]
 
 		self.reorderConfig = reorderConfig
+		self["autoresize"] = Label("") # do not remove, used for autoResize()
+		self["description"] = Label()
 		self["text"] = Label(title)
 		self.list = []
 		self.summarylist = []
@@ -52,12 +54,14 @@ class ChoiceBox(Screen):
 						new_keys.append(not x.isdigit() and x or "")
 				self.__keys = new_keys
 		for x in list:
-			strpos = str(self.__keys[pos])
-			self.list.append(ChoiceEntryComponent(key = strpos, text = x))
-			if self.__keys[pos] != "":
-				self.keymap[self.__keys[pos]] = list[pos]
-			self.summarylist.append((self.__keys[pos],x[0]))
-			pos += 1
+			if x:
+				strpos = str(self.__keys[pos])
+				self.list.append(ChoiceEntryComponent(key = strpos, text = x))
+				if self.__keys[pos] != "":
+					self.keymap[self.__keys[pos]] = list[pos]
+				self.summarylist.append((self.__keys[pos],x[0]))
+				pos += 1
+
 		self["list"] = ChoiceList(list = self.list, selection = selection)
 		self["summary_list"] = StaticText()
 		self["summary_selection"] = StaticText()
@@ -90,22 +94,44 @@ class ChoiceBox(Screen):
 		self.setTitle(windowTitle or _("Select"))
 
 	def autoResize(self):
-		orgpos = self.instance.position()
-		orgheight = self.instance.size().height()
+		def x_offset():
+			return max([line[1][1] for line in self["list"].list])
+		def x_width(textsize):
+			def getListLineTextWidth(text):
+				self["autoresize"].setText(text)
+				return self["autoresize"].getSize()[0]
+			return max(max([getListLineTextWidth(line[0][0]) for line in self["list"].list]), textsize)
+
+		def getMaxDescriptionHeight():
+			def getDescrLineHeight(text):
+				if len(text) > 2 and isinstance(text[2], str):
+					self["description"].setText(text[2])
+					return self["description"].instance.calculateSize().height()
+				return 0
+			return max([getDescrLineHeight(line[0]) for line in self["list"].list ])
+
 		textsize = self["text"].getSize()
 		count = len(self.list)
-		if count > 10:
-			count = 10
-		offset = 25 * count
-		wsizex = textsize[0] + 60
-		wsizey = textsize[1] + offset
+		count, scrollbar = (10, self["list"].instance.getScrollbarWidth() + 5) if count > 10 else (count, 0)
+		offset = self["list"].l.getItemSize().height() * count
+		wsizex = x_width(textsize[0]) + x_offset() + 10 + scrollbar
+		#precount description size
+		descrsize = self["description"].getSize()
+		self["description"].instance.resize(enigma.eSize(*(wsizex - 20, descrsize[1] if descrsize[1] > 0 else 0)))
+		# then get true description height
+		descriptionHeight = getMaxDescriptionHeight()
+		wsizey = textsize[1] + offset + descriptionHeight
 		# move and resize screen
 		self["list"].instance.move(enigma.ePoint(0, textsize[1]))
 		self.instance.resize(enigma.eSize(*(wsizex, wsizey)))
+		# move and resize description
+		self["description"].instance.move(enigma.ePoint(10, textsize[1] + offset))
+		self["description"].instance.resize(enigma.eSize(*(wsizex - 20, descriptionHeight)))
 		# resize list
 		self["list"].instance.resize(enigma.eSize(*(wsizex, offset)))
 		# center window
-		self.instance.move(enigma.ePoint(orgpos.x(), orgpos.y()+(orgheight-wsizey)/2))
+		width,height = enigma.getDesktop(0).size().width(), enigma.getDesktop(0).size().height()
+		self.instance.move(enigma.ePoint((width - wsizex)/2,(height - wsizey)/2))
 
 	def keyLeft(self):
 		pass
@@ -170,6 +196,7 @@ class ChoiceBox(Screen):
 		self.goKey("blue")
 
 	def updateSummary(self, curpos=0):
+		self.displayDescription(curpos)
 		pos = 0
 		summarytext = ""
 		for entry in self.summarylist:
@@ -182,6 +209,12 @@ class ChoiceBox(Screen):
 				summarytext += ' ' + entry[1] + '\n'
 			pos += 1
 		self["summary_list"].setText(summarytext)
+
+	def displayDescription(self, curpos=0):
+		if self.list and len(self.list[curpos][0]) > 2 and isinstance(self.list[curpos][0][2], str):
+			self["description"].setText(self.list[curpos][0][2])
+		else:
+			self["description"].setText("")
 
 	def cancel(self):
 		self.close(None)

@@ -19,23 +19,33 @@ class ScrollLabel(GUIComponent):
 		self.splitchar = "|"
 
 	def applySkin(self, desktop, parent):
+		scrollbarWidth = 20
+		scrollbarBorderWidth = 1
 		ret = False
 		if self.skinAttributes:
 			widget_attribs = []
 			scrollbar_attribs = []
+			scrollbarAttrib = ["borderColor", "borderWidth", "scrollbarSliderForegroundColor", "scrollbarSliderBorderColor", "scrollbarSliderPicture", "scrollbarBackgroundPicture"]
 			for (attrib, value) in self.skinAttributes:
-				if "borderColor" in attrib or "borderWidth" in attrib:
-					scrollbar_attribs.append((attrib,value))
-				if "transparent" in attrib or "backgroundColor" in attrib:
-					widget_attribs.append((attrib,value))
-				if "split" in attrib:
+				if attrib in scrollbarAttrib:
+					scrollbar_attribs.append((attrib, value))
+					self.skinAttributes.remove((attrib, value))
+				elif "transparent" in attrib or "backgroundColor" in attrib:
+					widget_attribs.append((attrib, value))
+				elif "scrollbarWidth" in attrib:
+					scrollbarWidth = int(value)
+					self.skinAttributes.remove((attrib, value))
+				elif "scrollbarSliderBorderWidth" in attrib:
+					scrollbarBorderWidth = int(value)
+					self.skinAttributes.remove((attrib, value))
+				elif "split" in attrib:
 					self.split = int(value)
 					if self.split:
 						self.right_text = eLabel(self.instance)
 					self.skinAttributes.remove((attrib, value))	
-				if "colposition" in attrib:
+				elif "colposition" in attrib:
 					self.column = int(value)
-				if "dividechar" in attrib:
+				elif "dividechar" in attrib:
 					self.splitchar = value
 			if self.split:
 				skin.applyAllAttributes(self.long_text, desktop, self.skinAttributes + [("halign", "left")], parent.scale)
@@ -51,11 +61,11 @@ class ScrollLabel(GUIComponent):
 		self.pageHeight = int(lines * lineheight)
 		self.instance.move(self.long_text.position())
 		self.instance.resize(eSize(self.pageWidth, self.pageHeight + int(lineheight/6)))
-		self.scrollbar.move(ePoint(self.pageWidth - 20, 0))
-		self.scrollbar.resize(eSize(20, self.pageHeight + int(lineheight / 6)))
+		self.scrollbar.move(ePoint(self.pageWidth - scrollbarWidth, 0))
+		self.scrollbar.resize(eSize(scrollbarWidth, self.pageHeight + int(lineheight / 6)))
 		self.scrollbar.setOrientation(eSlider.orVertical)
 		self.scrollbar.setRange(0, 100)
-		self.scrollbar.setBorderWidth(1)
+		self.scrollbar.setBorderWidth(scrollbarBorderWidth)
 		self.setText(self.message)
 		return ret
 

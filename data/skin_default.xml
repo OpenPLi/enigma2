@@ -18,12 +18,15 @@
 		<font filename="nmsbd.ttf" name="Regular" scale="90"/>
 		<font filename="andale.ttf" name="Fixed" scale="100"/>
 		<font filename="tuxtxt.ttf" name="Console" scale="100"/>
+		<font name="DejaVuSans" filename="DejaVuSans.ttf" scale="100" />
+		<alias name="VirtualKeyBoard" font="DejaVuSans" size="28" height="45" />
 		<!-- Arabic and Thai char set replacement -->
 		<font filename="ae_AlMateen.ttf" name="Replacement" scale="100" replacement="1"/>
 		<!-- Aliases that should be present -->
 		<alias name="Body" font="Regular" size="20" height="25"/>
 		<alias name="ChoiceList" font="Regular" size="20" height="25"/>
 		<alias name="TextNormal" font="Regular" size="20" height="24"/>
+		<alias name="ChoiceBoxDescription" font="Regular" size="18" height="18"/>
 	</fonts>
 	<colors>
 		<color name="white" value="#ffffff"/>
@@ -247,20 +250,24 @@
 	</screen>
 	<!-- Choice box -->
 	<screen name="ChoiceBox" position="center,center" size="550,400" title="Input">
+		 <!-- "autoresize" is used for autoResize only. If you using self.autoResize() applet, do not remove or change this line! -->
+		<widget name="autoresize" position="0,0" size="0,0" font="ChoiceList" noWrap="1"/>
 		<widget name="text" position="top" size="*,2h" font="TextNormal"/>
 		<widget name="list" position="fill" scrollbarMode="showOnDemand"/>
+		<widget name="description" position="0,0" size="0,0" font="ChoiceBoxDescription" valign="center"/>
 		<applet type="onLayoutFinish">
 self.autoResize()
 		</applet>
 	</screen>
 	<!-- Hotkey -->
-	<screen name="HotkeySetup" position="center,center" size="560,400" title="Input">
+	<screen name="HotkeySetup" position="center,center" size="560,437" title="Input">
 		<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on"/>
 		<widget name="key_red" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1"/>
 		<widget name="list" position="0,45" size="280,350" scrollbarMode="showOnDemand"/>
 		<widget name="choosen" position="280,45" size="280,350" scrollbarMode="showOnDemand"/>
+		<widget name="description" position="5,405" size="550,32" zPosition="1" font="Regular;16" valign="bottom"/>
 	</screen>
-	<screen name="HotkeySetupSelect" position="center,center" size="560,400" title="Input">
+	<screen name="HotkeySetupSelect" position="center,center" size="560,437" title="Input">
 		<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on"/>
 		<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on"/>
 		<widget name="h_yellow" pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on"/>
@@ -271,6 +278,7 @@ self.autoResize()
 		<widget name="h_next" pixmap="skin_default/buttons/key_next.png" zPosition="1" alphatest="blend" position="460,8" size="35,25"/>
 		<widget name="list" position="0,45" size="280,350" scrollbarMode="showOnDemand"/>
 		<widget name="choosen" position="280,45" size="280,350" scrollbarMode="showOnDemand"/>
+		<widget name="description" position="5,405" size="550,32" zPosition="1" font="Regular;16" valign="bottom"/>
 	</screen>
 	<!-- Common interface -->
 	<screen name="MMIDialog" position="center,center" size="450,270">
@@ -1284,47 +1292,35 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y() + (or
 		<widget name="Volume" pixmap="skin_default/progress_small.png" position="31,7" zPosition="1" size="168,7" transparent="1"/>
 	</screen>
 	<!-- JobView -->
-	<screen name="JobView" position="center,center" size="520,350" title="Job overview">
-		<widget source="job_name" render="Label" position="20,12" size="480,60" font="Regular;28"/>
-		<widget source="job_task" render="Label" position="20,90" size="480,50" font="Regular;23"/>
-		<widget source="job_progress" render="Progress" position="20,162" size="480,36" borderWidth="2" backgroundColor="#254f7497"/>
-		<widget source="job_progress" render="Label" position="120,166" size="280,32" font="Regular;28" foregroundColor="#000000" zPosition="2" halign="center" transparent="1"  >
+	<screen name="JobView" position="center,center" size="560,350" title="Job overview">
+		<ePixmap pixmap="skin_default/buttons/red.png" position="0,300" size="140,40" alphatest="on"/>
+		<ePixmap pixmap="skin_default/buttons/green.png" position="140,300" size="140,40" alphatest="on"/>
+		<ePixmap pixmap="skin_default/buttons/blue.png" position="420,300" size="140,40" alphatest="on"/>
+		<widget source="key_red" render="Label" position="0,300" size="140,40" zPosition="1" halign="center" valign="center" font="Regular;20" foregroundColor="white" transparent="1"/>
+		<widget source="key_green" render="Label" position="140,300" size="140,40" zPosition="1" halign="center" valign="center" font="Regular;20" foregroundColor="white" transparent="1"/>
+		<widget source="key_blue" render="Label" position="420,300" size="140,40" zPosition="1" halign="center" valign="center" font="Regular;20" foregroundColor="white" transparent="1"/>
+		<widget source="job_name" render="Label" position="20,12" size="520,60" font="Regular;28"/>
+		<widget source="job_task" render="Label" position="20,90" size="520,50" font="Regular;23"/>
+		<widget source="job_progress" render="Progress" position="20,162" size="520,36" borderWidth="2" backgroundColor="#254f7497"/>
+		<widget source="job_progress" render="Label" position="140,166" size="280,32" font="Regular;28" foregroundColor="#000000" zPosition="2" halign="center" transparent="1"  >
 			<convert type="ProgressToText"/>
 		</widget>
-		<widget source="job_status" render="Label" position="20,212" size="480,26" font="Regular;23"/>
-		<widget name="config" position="20,254" size="480,20"/>
-		<widget source="cancelable" render="Pixmap" pixmap="skin_default/buttons/red.png" position="20,300" size="140,40" alphatest="on">
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget source="cancelable" render="FixedLabel" text="Cancel" position="20,300" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1">
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget source="finished" render="Pixmap" pixmap="skin_default/buttons/green.png" position="190,300" size="140,40" alphatest="on">
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget source="finished" render="FixedLabel" text="OK" font="Regular;20" halign="center" valign="center" position="190,300" size="140,40" transparent="1" backgroundColor="#1f771f">
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget source="backgroundable" render="Pixmap" pixmap="skin_default/buttons/blue.png" position="360,300" size="140,40" alphatest="on">
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget source="backgroundable" render="FixedLabel" text="Continue in background" font="Regular;20" halign="center" valign="center" position="360,300" size="140,40" transparent="1" backgroundColor="#18188b">
-			<convert type="ConditionalShowHide"/>
-		</widget>
+		<widget source="job_status" render="Label" position="20,212" size="520,26" font="Regular;23"/>
+		<widget name="config" position="20,254" size="520,20"/>
 	</screen>
 	<!-- VideoMode -->
 	<screen name="VideoMode" position="center,center" size="250,60" title="VideoMode">
 		<widget name="videomode" position="10,10" size="230,40" font="Regular;23" halign="left"/>
 	</screen>
 	<!-- VirtualKeyBoard -->
-	<screen name="VirtualKeyBoard" position="center,center" size="560,350" zPosition="99" title="Virtual keyboard">
-		<ePixmap pixmap="skin_default/vkey_text.png" position="9,45" zPosition="-4" size="542,52" alphatest="on"/>
-		<widget source="country" render="Pixmap" position="490,0" size="60,40" alphatest="on" borderWidth="2" borderColor="yellow">
-			<convert type="ValueToPixmap">LanguageCode</convert>
-		</widget>
-		<widget name="header" position="10,20" size="500,20" font="Regular;20" transparent="1" noWrap="1"/>
-		<widget name="text" position="12,45" size="536,46" font="Regular;46" transparent="1" noWrap="1" halign="right"/>
-		<widget name="list" position="10,110" size="540,225" selectionDisabled="1" transparent="1"/>
+	<screen name="VirtualKeyBoard" title="Virtual keyboard" position="center,center" size="660,365" zPosition="99">
+		<widget name="prompt" position="15,10" size="630,25" font="Regular;20" noWrap="1" transparent="1" />
+		<ePixmap pixmap="skin_default/vkey_text.png" position="10,40" size="640,50" alphatest="blend" zPosition="-4" />
+		<widget name="text" position="15,52" size="630,33" font="Regular;28" halign="right" noWrap="1" transparent="1" />
+		<widget name="list" position="15,95" size="630,225" backgroundColor="#001c2c5c" foregroundColor="window-fg" selectionDisabled="1" transparent="1" />
+		<widget name="locale" position="15,335" size="570,25" font="Regular;20" transparent="1" />
+		<widget name="mode" position="585,335" size="60,25" font="Regular;20" halign="right" transparent="1" valign="center" />
+		<widget name="language" position="0,0" size="0,0" font="Regular;20" transparent="1" />
 	</screen>
 	<!-- FileBrowser -->
 	<screen name="FileBrowser" position="center,center" size="520,430" title="DVD file browser">

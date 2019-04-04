@@ -25,6 +25,7 @@ class TimerEditList(Screen):
 	DISABLE = 2
 	CLEANUP = 3
 	DELETE = 4
+	STOP = 5
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -42,6 +43,7 @@ class TimerEditList(Screen):
 		self["key_green"] = StaticText(_("Add"))
 		self["key_yellow"] = StaticText("")
 		self["key_blue"] = StaticText("")
+		self["key_info"] = StaticText("")
 
 		self["description"] = Label("")
 
@@ -93,7 +95,7 @@ class TimerEditList(Screen):
 		self.updateState()
 
 	def toggleDisabledState(self):
-		cur=self["timerlist"].getCurrent()
+		cur = self["timerlist"].getCurrent()
 		timer_changed = True
 		if cur:
 			t = cur
@@ -157,12 +159,20 @@ class TimerEditList(Screen):
 	def updateState(self):
 		cur = self["timerlist"].getCurrent()
 		if cur:
+			if cur.external:
+				self["key_info"].setText("")
+			else:
+				self["key_info"].setText(_("Info"))
 			text = cur.description
 			if not cur.conflict_detection:
 				text += _("\nConflict detection disabled!")
 			self["description"].setText(text)
 			stateRunning = cur.state in (1, 2)
-			if self.key_red_choice != self.DELETE:
+			if cur.state == 2 and self.key_red_choice != self.STOP:
+				self["actions"].actions.update({"red":self.stopTimerQuestion})
+				self["key_red"].setText(_("Stop"))
+				self.key_red_choice = self.STOP
+			elif cur.state != 2 and self.key_red_choice != self.DELETE:
 				self["actions"].actions.update({"red":self.removeTimerQuestion})
 				self["key_red"].setText(_("Delete"))
 				self.key_red_choice = self.DELETE
@@ -233,12 +243,14 @@ class TimerEditList(Screen):
 		self.updateState()
 
 	def showLog(self):
-		cur=self["timerlist"].getCurrent()
-		if cur:
+		cur = self["timerlist"].getCurrent()
+		if cur and not cur.external:
 			self.session.openWithCallback(self.finishedEdit, TimerLog, cur)
+		else:
+			return 0
 
 	def openEdit(self):
-		cur=self["timerlist"].getCurrent()
+		cur = self["timerlist"].getCurrent()
 		if cur:
 			self.session.openWithCallback(self.finishedEdit, TimerEntry, cur)
 
@@ -249,6 +261,11 @@ class TimerEditList(Screen):
 		if delete:
 			self.session.nav.RecordTimer.cleanup()
 			self.fallbackTimer.cleanupTimers(self.refill)
+
+	def stopTimerQuestion(self):
+		cur = self["timerlist"].getCurrent()
+		if cur:
+			self.session.openWithCallback(self.removeTimer, MessageBox, _("Do you really want to stop current event and delete timer %s?") % (cur.name))
 
 	def removeTimerQuestion(self):
 		cur = self["timerlist"].getCurrent()
@@ -413,8 +430,10 @@ class TimerSanityConflict(Screen):
 
 	def showLog(self):
 		selected_timer = self["timerlist"].getCurrent()
-		if selected_timer:
+		if selected_timer and not selected_timer.external:
 			self.session.openWithCallback(self.editTimerCallBack, TimerLog, selected_timer)
+		else:
+			return 0
 
 	def editTimerCallBack(self, answer=None):
 		if answer and len(answer) > 1 and answer[0] is True:

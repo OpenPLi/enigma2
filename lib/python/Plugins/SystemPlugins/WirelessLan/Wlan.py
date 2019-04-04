@@ -389,6 +389,8 @@ class Status:
 			if "Bit Rate" in line:
 				if "kb" in line:
 					br = line[line.index('Bit Rate')+9 :line.index(' kb/s')]
+				elif "Gb" in line:
+					br = line[line.index('Bit Rate')+9 :line.index(' Gb/s')]
 				else:
 					br = line[line.index('Bit Rate')+9 :line.index(' Mb/s')]
 				if br is not None:

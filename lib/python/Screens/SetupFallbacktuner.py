@@ -6,6 +6,7 @@ from Components.Sources.Boolean import Boolean
 from Components.Sources.StaticText import StaticText
 from Components.config import config, configfile, ConfigSelection, ConfigIP, ConfigInteger, getConfigListEntry, ConfigBoolean
 from Components.ConfigList import ConfigListScreen
+from Components.ImportChannels import ImportChannels
 
 from enigma import getPeerStreamingBoxes
 
@@ -20,10 +21,10 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 
 		self["actions2"] = ActionMap(["SetupActions"],
 		{
-			"ok": self.keyGo,
+			"ok": self.run,
 			"menu": self.keyCancel,
 			"cancel": self.keyCancel,
-			"save": self.keyGo,
+			"save": self.run,
 		}, -2)
 
 		self["key_red"] = StaticText(_("Exit"))
@@ -37,7 +38,7 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 		self.force_update_list = False
 		self.createConfig()
 		self.createSetup()
-
+		self.remote_fallback_prev = config.usage.remote_fallback_import.value
 		self["config"].onSelectionChanged.append(self.selectionChanged)
 		self.selectionChanged()
 
@@ -116,7 +117,7 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 				self.list.append(getConfigListEntry(_("Fallback remote receiver URL"),
 					config.usage.remote_fallback_import_url,
 					_("URL of fallback remote receiver")))
-		if config.usage.remote_fallback.value and config.usage.remote_fallback_import.value:
+		if config.usage.remote_fallback_enabled.value and config.usage.remote_fallback_import.value:
 			self.list.append(getConfigListEntry(_("Also import at reboot/restart enigma2"),
 				config.usage.remote_fallback_import_restart,
 				_("Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted")))
@@ -132,7 +133,19 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 			self.list.append(getConfigListEntry(_("Show notification when import channels was not successful"),
 				config.usage.remote_fallback_nok,
 				_("Show notification when import channels and/or EPG from remote receiver URL did not complete")))
-
+			self.list.append(getConfigListEntry(_("Customize OpenWebIF settings for fallback tuner"),
+				config.usage.remote_fallback_openwebif_customize,
+				_("When enabled you can customize the OpenWebIf settings for the fallback tuner")))
+			if config.usage.remote_fallback_openwebif_customize.value:
+				self.list.append(getConfigListEntry(_("User ID"),
+					config.usage.remote_fallback_openwebif_userid,
+					_("Set the User ID of the OpenWebif from your fallback tuner")))
+				self.list.append(getConfigListEntry(_("Password"),
+					config.usage.remote_fallback_openwebif_password,
+					_("Set the password of the OpenWebif from your fallback tuner")))
+				self.list.append(getConfigListEntry(_("Port"),
+					config.usage.remote_fallback_openwebif_port,
+					_("Set the port of the OpenWebif from your fallback tuner")))
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
@@ -150,7 +163,7 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 		if isinstance(self["config"].getCurrent()[1], ConfigBoolean) or isinstance(self["config"].getCurrent()[1], ConfigSelection):
 			self.createSetup()
 
-	def keyGo(self):
+	def run(self):
 		if self.avahiselect.value == "ip":
 			config.usage.remote_fallback.value = "http://%d.%d.%d.%d:%d" % (tuple(self.ip.value) + (self.port.value,))
 		elif self.avahiselect.value != "url":
@@ -173,5 +186,11 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 		config.usage.remote_fallback_nok.save()
 		config.usage.remote_fallback.save()
 		config.usage.remote_fallback_external_timer.save()
+		config.usage.remote_fallback_openwebif_customize.save()
+		config.usage.remote_fallback_openwebif_userid.save()
+		config.usage.remote_fallback_openwebif_password.save()
+		config.usage.remote_fallback_openwebif_port.save()
 		configfile.save()
+		if not self.remote_fallback_prev and config.usage.remote_fallback_import.value:
+			ImportChannels()
 		self.close(False)

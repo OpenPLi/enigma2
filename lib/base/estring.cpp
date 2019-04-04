@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <regex>
 #include <cctype>
 #include <climits>
 #include <string>
@@ -431,32 +432,42 @@ std::string convertDVBUTF8(const unsigned char *data, int len, int table, int ts
 	}
 
 	int i = 0;
+	int mask_no_tableid = 0;
 	std::string output = "";
+	bool ignore_tableid = false;
+	int convertedLen = 0;
 
-	//eDebug("[convertDVBUTF8] table=0x%02X tsidonid=0x%08X len=%d data[0..14]]=%02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X data=%s",
-	//	table, tsidonid, len,
-	//	data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7],
-	//	data[8], data[9], data[10], data[11], data[12], data[13], data[14],
-	//	std::string((char*)data, len).c_str());
 
 	if (tsidonid)
 		encodingHandler.getTransponderDefaultMapping(tsidonid, table);
 
+	if (table >= 0 && (table & MASK_NO_TABLEID)){
+		mask_no_tableid = MASK_NO_TABLEID;
+		table &= ~MASK_NO_TABLEID;
+	}
+
+	if (table >= 0 && (table & MASK_IGNORE_TABLEID)){
+		ignore_tableid = true;
+		table &= ~MASK_IGNORE_TABLEID;
+	}
+
+        int table_preset = table;
+
 	// first byte in strings may override general encoding table.
-	switch(data[0])
+	switch(data[0] | mask_no_tableid)
 	{
 		case ISO8859_5 ... ISO8859_15:
 			// For Thai providers, encoding char is present but faulty.
 			if (table != 11)
 				table = data[i] + 4;
 			++i;
-			// eDebug("[convertDVBUTF8] (1..11)text encoded in ISO-8859-%d", table);
+			eLog(6, "[convertDVBUTF8] (1..11)text encoded in ISO-8859-%d", table);
 			break;
 		case ISO8859_xx:
 		{
 			int n = data[++i] << 8;
 			n |= (data[++i]);
-			// eDebug("[convertDVBUTF8] (0x10)text encoded in ISO-8859-%d", n);
+			eLog(6, "[convertDVBUTF8] (0x10)text encoded in ISO-8859-%d", n);
 			++i;
 			switch(n)
 			{
@@ -498,12 +509,15 @@ std::string convertDVBUTF8(const unsigned char *data, int len, int table, int ts
 			++i;
 			table = UTF16LE_ENCODING;
 			break;
-		case 0x1F:
+		case HUFFMAN_ENCODING:
 			{
 				// Attempt to decode Freesat Huffman encoded string
 				std::string decoded_string = huffmanDecoder.decode(data, len);
-				if (!decoded_string.empty())
-					return decoded_string;
+				if (!decoded_string.empty()){
+					table = HUFFMAN_ENCODING;
+					output = decoded_string;
+					break;
+				}
 			}
 			++i;
 			eDebug("[convertDVBUTF8] failed to decode bbc freesat huffman");
@@ -516,10 +530,14 @@ std::string convertDVBUTF8(const unsigned char *data, int len, int table, int ts
 			break;
 	}
 
+	if (ignore_tableid && table != UTF8_ENCODING) {
+		table = table_preset;
+	}
+
 	bool useTwoCharMapping = !table || (tsidonid && encodingHandler.getTransponderUseTwoCharMapping(tsidonid));
 
 	if (useTwoCharMapping && table == 5) { // i hope this dont break other transponders which realy use ISO8859-5 and two char byte mapping...
-//		eDebug("[convertDVBUTF8] Cyfra / Cyfrowy Polsat HACK... override given ISO8859-5 with ISO6937");
+		eLog(6, "[convertDVBUTF8] Cyfra / Cyfrowy Polsat HACK... override given ISO8859-5 with ISO6937");
 		table = 0;
 	}
 	else if ( table == -1 )
@@ -527,20 +545,29 @@ std::string convertDVBUTF8(const unsigned char *data, int len, int table, int ts
 
 	switch(table)
 	{
+		case HUFFMAN_ENCODING:
+		{
+			if(output.empty()){
+				// Attempt to decode Freesat Huffman encoded string
+				std::string decoded_string = huffmanDecoder.decode(data, len);
+				if (!decoded_string.empty())
+					output = decoded_string;
+			}
+			if (!output.empty())
+					convertedLen += len;
+			break;
+		}
 		case UTF8_ENCODING:
 			output = std::string((char*)data + i, len - i);
-			if (pconvertedLen)
-				*pconvertedLen += len;
+			convertedLen += i;
 			break;
 		case GB18030_ENCODING:
-			output = GB18030ToUTF8((const char *)(data + i), len - i, pconvertedLen);
-			if (pconvertedLen)
-				*pconvertedLen += len;
+			output = GB18030ToUTF8((const char *)(data + i), len - i, &convertedLen);
+			convertedLen += i;
 			break;
 		case BIG5_ENCODING:
-			output = Big5ToUTF8((const char *)(data + i), len - i, pconvertedLen);
-			if (pconvertedLen)
-				*pconvertedLen += len;
+			output = Big5ToUTF8((const char *)(data + i), len - i, &convertedLen);
+			convertedLen += i;
 			break;
 		default:
 			std::string res = "";
@@ -596,15 +623,23 @@ std::string convertDVBUTF8(const unsigned char *data, int len, int table, int ts
 					continue;
 				res += UnicodeToUTF8(code);
 			}
-			if (pconvertedLen)
-				*pconvertedLen = i;
+			convertedLen = i;
 			output = res;
 			break;
 	}
 
-	if (pconvertedLen && *pconvertedLen < len)
-		eDebug("[convertDVBUTF8] %d chars converted, and %d chars left..", *pconvertedLen, len-*pconvertedLen);
-	//eDebug("[convertDVBUTF8] table=0x%02X twochar=%d output:%s\n", table, useTwoCharMapping, output.c_str());
+	if (pconvertedLen)
+		*pconvertedLen = convertedLen;
+
+	if (convertedLen < len)
+		eLog(6, "[convertDVBUTF8] %d chars converted, and %d chars left..", convertedLen, len-convertedLen);
+	eLog(6, "[convertDVBUTF8] table=0x%02X twochar=%d output:%s\n", table, useTwoCharMapping, output.c_str());
+
+	eLog(6, "[convertDVBUTF8] table=0x%02X tsid:onid=0x%X:0x%X data[0..14]=%s   output:%s\n",
+		table, (unsigned int)tsidonid >> 16, tsidonid & 0xFFFFU,
+		string_to_hex(std::string((char*)data, len < 15 ? len : 15)).c_str(),
+		output.c_str());
+
 	return output;
 }
 
@@ -868,4 +903,59 @@ std::string urlDecode(const std::string &s)
 		}
 	}
 	return res;
+}
+
+std::string string_to_hex(const std::string& input)
+{
+    static const char* const lut = "0123456789ABCDEF";
+    size_t len = input.length();
+
+    std::string output;
+    output.reserve(3 * len);
+    for (size_t i = 0; i < len; ++i)
+    {
+        const unsigned char c = input[i];
+        if (i)
+		output.push_back(' ');
+        output.push_back(lut[c >> 4]);
+        output.push_back(lut[c & 15]);
+    }
+    return output;
+}
+
+std::string strip_non_graph(std::string s)
+{
+	s = std::regex_replace(s, std::regex("[[^:graph:]]"), " ");
+	s = std::regex_replace(s, std::regex("\\s{2,}"), " ");
+	s = std::regex_replace(s, std::regex("^\\s+|\\s+$"), "");
+	return s;
+}
+
+std::vector<std::string> split(std::string s, const std::string& separator)
+{
+	std::vector<std::string> tokens;
+	std::string token;
+	size_t pos, sep_len = separator.length();
+
+	while ((pos = s.find(separator)) != std::string::npos)
+	{
+		token = s.substr(0, pos);
+		if (!token.empty())
+		{
+			tokens.push_back(token);
+		}
+		s.erase(0, pos + sep_len);
+	}
+
+	if (!s.empty())
+	{
+		tokens.push_back(s);
+	}
+
+	return tokens;
+}
+
+int strcasecmp(const std::string& s1, const std::string& s2)
+{
+	return ::strcasecmp(s1.c_str(), s2.c_str());
 }

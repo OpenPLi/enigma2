@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 import re
+from shutil import copyfile
 from stat import S_IMODE
 from enigma import eEnv
 
@@ -56,21 +57,23 @@ def resolveFilename(scope, base = "", path_prefix = None):
 	if scope == SCOPE_CURRENT_SKIN:
 		from Components.config import config
 		# allow files in the config directory to replace skin files
-		tmp = defaultPaths[SCOPE_CONFIG][0]
-		if base and pathExists(tmp + base):
-			path = tmp
+		path = tmp = defaultPaths[SCOPE_CONFIG][0]
+		if base and pathExists("%s%s" % (tmp, base)):
+			return "%s%s" % (tmp, base)
 		else:
-			tmp = defaultPaths[SCOPE_SKIN][0]
+			path = defaultPaths[SCOPE_SKIN][0]
 			pos = config.skin.primary_skin.value.rfind('/')
 			if pos != -1:
-				#if basefile is not available use default skin path as fallback
-				tmpfile = tmp+config.skin.primary_skin.value[:pos+1] + base
-				if pathExists(tmpfile):
-					path = tmp+config.skin.primary_skin.value[:pos+1]
-				else:
-					path = tmp
+				skinname = config.skin.primary_skin.value[:pos+1]
+				#  remove skin name from base if exist
+				if base.startswith(skinname):
+					skinname = ""
 			else:
-				path = tmp
+				skinname = ""
+			for dir in ("%s%s" % (path, skinname), path, "%s%s" % (path, "skin_default/")):
+				for file in (base, os.path.basename(base)):
+					if pathExists("%s%s"% (dir, file)):
+						return "%s%s" % (dir, file)
 
 	elif scope == SCOPE_CURRENT_PLUGIN:
 		tmp = defaultPaths[SCOPE_PLUGINS]
@@ -127,7 +130,7 @@ def defaultRecordingLocation(candidate=None):
 		return candidate
 	# First, try whatever /hdd points to, or /media/hdd
 	try:
-		path = os.readlink('/hdd')
+		path = os.path.realpath("/hdd")
 	except:
 		path = '/media/hdd'
 	if not os.path.exists(path):
@@ -181,6 +184,9 @@ def fileExists(f, mode='r'):
 def fileCheck(f, mode='r'):
 	return fileExists(f, mode) and f
 
+def fileHas(f, content, mode='r'):
+	return fileExists(f, mode) and content in open(f, mode).read()
+
 def getRecordingFilename(basename, dirname = None):
 	# filter out non-allowed characters
 	non_allowed_characters = "/.\\:*?<>|\""
@@ -203,16 +209,15 @@ def getRecordingFilename(basename, dirname = None):
 		dirname = defaultRecordingLocation()
 	filename = os.path.join(dirname, filename)
 
-	i = 0
-	while True:
-		path = filename
-		if i > 0:
-			path += "_%03d" % i
-		try:
-			open(path + ".ts")
-			i += 1
-		except IOError:
-			return path
+	if not os.path.isfile("%s.ts" % filename):
+		return filename
+	for i in range(1,1000):
+		newfilename = "%s_%03d" % (filename, i)
+		if not os.path.isfile("%s.eit" % newfilename):
+			copyfile("%s.eit" % filename, "%s.eit" % newfilename)
+		if not os.path.isfile("%s.ts" % newfilename):
+			break
+	return newfilename
 
 # this is clearly a hack:
 def InitFallbackFiles():
@@ -318,3 +323,29 @@ def getSize(path, pattern=".*"):
 	elif os.path.isfile(path):
 		path_size = os.path.getsize(path)
 	return path_size
+
+def lsof():
+	lsof = []
+	for pid in os.listdir('/proc'):
+		if pid.isdigit():
+			try:
+				prog = os.readlink(os.path.join('/proc', pid, 'exe'))
+				dir = os.path.join('/proc', pid, 'fd')
+				for file in [os.path.join(dir, file) for file in os.listdir(dir)]:
+					lsof.append((pid, prog, os.readlink(file)))
+			except:
+				pass
+	return lsof
+
+def getExtension(file):
+	filename, file_extension = os.path.splitext(file)
+	return file_extension
+
+def mediafilesInUse(session):
+	from Components.MovieList import KNOWN_EXTENSIONS
+	files = [x[2] for x in lsof() if getExtension(x[2]) in KNOWN_EXTENSIONS]
+	service = session.nav.getCurrentlyPlayingServiceOrGroup()
+	filename = service and service.getPath()
+	if filename and "://" in filename: #when path is a stream ignore it
+		filename = None
+	return set([file for file in files if not(filename and file.startswith(filename) and files.count(filename) < 2)])

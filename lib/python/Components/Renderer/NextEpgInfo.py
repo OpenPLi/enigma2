@@ -1,7 +1,7 @@
 from Components.VariableText import VariableText
 from Renderer import Renderer
 from enigma import eLabel, eEPGCache, eServiceReference
-from time import localtime, strftime
+from time import time, localtime, strftime
 from skin import parseColor
 
 class NextEpgInfo(Renderer, VariableText):
@@ -24,23 +24,22 @@ class NextEpgInfo(Renderer, VariableText):
 		info = reference and self.source.info
 		if info:
 			currentEvent = self.source.getCurrentEvent()
-			if currentEvent:
-				if not self.epgcache.startTimeQuery(eServiceReference(reference.toString()), currentEvent.getBeginTime() + currentEvent.getDuration()):
-					spaces = " "*self.numOfSpaces
-					if self.numberOfItems == 1:
+			if not self.epgcache.startTimeQuery(eServiceReference(reference.toString()), currentEvent.getBeginTime() + currentEvent.getDuration() if currentEvent else int(time())):
+				spaces = " " * self.numOfSpaces
+				if self.numberOfItems == 1:
+					event = self.epgcache.getNextTimeEntry()
+					if event:
+						if self.hideLabel:
+							self.text = "%s%s%s%s%s" % (self.timecolor, strftime("%H:%M", localtime(event.getBeginTime())), spaces, self.foregroundColor, event.getEventName())
+						else:
+							self.text = "%s%s:%s%s%s" % (self.labelcolor, pgettext("now/next: 'next' event label", "Next"), spaces, self.foregroundColor, event.getEventName())
+				else:
+					for x in range(self.numberOfItems):
 						event = self.epgcache.getNextTimeEntry()
 						if event:
-							if self.hideLabel:
-								self.text = "%s%s%s%s%s" % (self.timecolor, strftime("%H:%M", localtime(event.getBeginTime())), spaces, self.foregroundColor, event.getEventName())
-							else:
-								self.text = "%s%s:%s%s%s" % (self.labelcolor, pgettext("now/next: 'next' event label", "Next"), spaces, self.foregroundColor, event.getEventName())
-					else:
-						for x in range(self.numberOfItems):
-							event = self.epgcache.getNextTimeEntry()
-							if event:
-								self.text += "%s%s%s%s%s\n" % (self.timecolor, strftime("%H:%M", localtime(event.getBeginTime())), spaces, self.foregroundColor, event.getEventName())
-						if not self.hideLabel:
-							self.text = self.text and "%s%s\n%s" % (self.labelcolor, pgettext("now/next: 'next' event label", "Next"), self.text) or ""
+							self.text += "%s%s%s%s%s\n" % (self.timecolor, strftime("%H:%M", localtime(event.getBeginTime())), spaces, self.foregroundColor, event.getEventName())
+					if not self.hideLabel:
+						self.text = self.text and "%s%s\n%s" % (self.labelcolor, pgettext("now/next: 'next' event label", "Next"), self.text) or ""
 
 	def applySkin(self, desktop, parent):
 		attribs = []

@@ -54,7 +54,7 @@ class PluginComponent:
 						except Exception, exc:
 							print "Plugin ", c + "/" + pluginname, "failed to load:", exc
 							# supress errors due to missing plugin.py* files (badly removed plugin)
-							for fn in ('plugin.py', 'plugin.pyc', 'plugin.pyo'):
+							for fn in ('plugin.py', 'plugin.pyo'):
 								if os.path.exists(os.path.join(path, fn)):
 									self.warnings.append( (c + "/" + pluginname, str(exc)) )
 									from traceback import print_exc
@@ -65,7 +65,7 @@ class PluginComponent:
 								try:
 									os.rmdir(path)
 								except:
-								        pass
+									pass
 							continue
 
 						# allow single entry not to be a list

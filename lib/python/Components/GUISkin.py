@@ -128,13 +128,13 @@ class GUISkin:
 			if key == "zPosition":
 				z = int(value)
 			elif key == "title":
-				self.skin_title = value
+				self.skin_title = _(value)
 				skin_title_idx = idx
 				if title:
 					self.skinAttributes[skin_title_idx] = ("title", title)
 				else:
-					self["Title"].text = value
-					self.summaries.setTitle(value)
+					self["Title"].text = self.skin_title
+					self.summaries.setTitle(self.skin_title)
 			elif key == "baseResolution":
 				baseres = tuple([int(x) for x in value.split(',')])
 			idx += 1

@@ -390,8 +390,9 @@ public:
 		sLiveStreamDemuxId,
 		sBuffer,
 		sIsDedicated3D,
-		sHideVBI,
 		sCenterDVBSubs,
+
+		sGamma,
 
 		sUser = 0x100
 	};
@@ -818,6 +819,7 @@ public:
 	virtual SWIG_VOID(RESULT) getAdapterId(int &result) const = 0;
 	virtual SWIG_VOID(RESULT) getDemuxId(int &result) const = 0;
 	virtual SWIG_VOID(RESULT) getCaIds(std::vector<int> &caids, std::vector<int> &ecmpids, std::vector<std::string> &ecmdatabytes) const = 0;
+	virtual SWIG_VOID(RESULT) getDefaultAudioPid(int &result) const = 0;
 };
 
 class iStreamableService: public iObject
@@ -930,6 +932,8 @@ public:
 		evStopped,
 
 		evHBBTVInfo,
+
+		evVideoGammaChanged,
 
 		evUser = 0x100
 	};

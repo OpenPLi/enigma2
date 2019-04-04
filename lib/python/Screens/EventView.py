@@ -31,6 +31,7 @@ class EventViewBase:
 		self.event = event
 		self["Service"] = ServiceEvent()
 		self["Event"] = Event()
+		self["epg_eventname"] = ScrollLabel()
 		self["epg_description"] = ScrollLabel()
 		self["FullDescription"] = ScrollLabel()
 		self["datetime"] = Label()
@@ -243,6 +244,7 @@ class EventViewBase:
 		text += ext
 
 		self.setTitle(event.getEventName())
+		self["epg_eventname"].setText(event.getEventName())
 		self["epg_description"].setText(text)
 		self["FullDescription"].setText(ext)
 		self["datetime"].setText(event.getBeginTimeString())
@@ -272,10 +274,12 @@ class EventViewBase:
 			self.key_green_choice = self.ADD_TIMER
 
 	def pageUp(self):
+		self["epg_eventname"].pageUp()
 		self["epg_description"].pageUp()
 		self["FullDescription"].pageUp()
 
 	def pageDown(self):
+		self["epg_eventname"].pageDown()
 		self["epg_description"].pageDown()
 		self["FullDescription"].pageDown()
 

@@ -1,6 +1,6 @@
-from Tools.KeyBindings import queryKeyBinding
-
 from enigma import eActionMap
+
+from Tools.KeyBindings import queryKeyBinding
 
 
 class ActionMap:

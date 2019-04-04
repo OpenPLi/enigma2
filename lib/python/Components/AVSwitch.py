@@ -170,32 +170,17 @@ def InitAVSwitch():
 	iAVSwitch.setInput("ENCODER") # init on startup
 	SystemInfo["ScartSwitch"] = eAVSwitch.getInstance().haveScartSwitch()
 
-	try:
-		SystemInfo["CanDownmixAC3"] = "downmix" in open("/proc/stb/audio/ac3_choices", "r").read()
-	except:
-		SystemInfo["CanDownmixAC3"] = False
-
 	if SystemInfo["CanDownmixAC3"]:
 		def setAC3Downmix(configElement):
 			open("/proc/stb/audio/ac3", "w").write(configElement.value and "downmix" or "passthrough")
 		config.av.downmix_ac3 = ConfigYesNo(default = True)
 		config.av.downmix_ac3.addNotifier(setAC3Downmix)
 
-	try:
-		SystemInfo["CanDownmixDTS"] = "downmix" in open("/proc/stb/audio/dts_choices", "r").read()
-	except:
-		SystemInfo["CanDownmixDTS"] = False
-
 	if SystemInfo["CanDownmixDTS"]:
 		def setDTSDownmix(configElement):
 			open("/proc/stb/audio/dts", "w").write(configElement.value and "downmix" or "passthrough")
 		config.av.downmix_dts = ConfigYesNo(default = True)
 		config.av.downmix_dts.addNotifier(setDTSDownmix)
-
-	try:
-		SystemInfo["CanDownmixAAC"] = "downmix" in open("/proc/stb/audio/aac_choices", "r").read()
-	except:
-		SystemInfo["CanDownmixAAC"] = False
 
 	if SystemInfo["CanDownmixAAC"]:
 		def setAACDownmix(configElement):
@@ -270,6 +255,12 @@ def InitAVSwitch():
 			open(SystemInfo["Has3DSurroundSoftLimiter"], "w").write(configElement.value and "enabled" or "disabled")
 		config.av.surround_softlimiter_3d = ConfigYesNo(default = False)
 		config.av.surround_softlimiter_3d.addNotifier(set3DSurroundSoftLimiter)
+		
+	if SystemInfo["HDMIAudioSource"]:
+		def setHDMIAudioSource(configElement):
+			open(SystemInfo["HDMIAudioSource"], "w").write(configElement.value)
+		config.av.hdmi_audio_source = ConfigSelection(default = "pcm", choices = [("pcm", _("PCM")), ("spdif", _("SPDIF"))])
+		config.av.hdmi_audio_source.addNotifier(setHDMIAudioSource)
 
 	def setVolumeStepsize(configElement):
 		eDVBVolumecontrol.getInstance().setVolumeSteps(int(configElement.value))

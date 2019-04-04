@@ -852,7 +852,7 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 					tmp.setWidth(((!isPlayable || m_column_width == -1 || (!piconPixmap && !m_column_width)) ? tmp.width() : m_column_width) - xoffs);
 				}
 
-				eTextPara *para = new eTextPara(tmp);
+				ePtr<eTextPara> para = new eTextPara(tmp);
 				para->setFont(m_element_font[e]);
 				para->renderString(text.c_str());
 
@@ -888,7 +888,7 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 								painter.blitScale(piconPixmap,
 									eRect(area.left(), area.top(), iconWidth, area.height()),
 									area,
-									gPainter::BT_ALPHABLEND | gPainter::BT_KEEP_ASPECT_RATIO);
+									gPainter::BT_ALPHABLEND | gPainter::BT_KEEP_ASPECT_RATIO | gPainter::BT_HALIGN_CENTER | gPainter::BT_VALIGN_CENTER);
 								painter.clippop();
 							}
 						}

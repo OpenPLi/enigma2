@@ -123,7 +123,7 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 
 		# 'None' is magic to start at the list of mountpoints
 		defaultDir = config.mediaplayer.defaultDir.getValue()
-		self.filelist = FileList(defaultDir, matchingPattern = "(?i)^.*\.(dts|mp3|wav|wave|oga|ogg|flac|m4a|mp2|m2a|wma|ac3|mka|aac|ape|alac|mpg|vob|m4v|mkv|avi|divx|dat|flv|mp4|mov|wmv|asf|3gp|3g2|mpeg|mpe|rm|rmvb|ogm|ogv|m2ts|mts|ts|m3u|e2pls|pls)", useServiceRef = True, additionalExtensions = "4098:m3u 4098:e2pls 4098:pls")
+		self.filelist = FileList(defaultDir, matchingPattern = "(?i)^.*\.(dts|mp3|wav|wave|wv|oga|ogg|flac|m4a|mp2|m2a|wma|ac3|mka|aac|ape|alac|mpg|vob|m4v|mkv|avi|divx|dat|flv|mp4|mov|wmv|asf|3gp|3g2|mpeg|mpe|rm|rmvb|ogm|ogv|m2ts|mts|ts|m3u|e2pls|pls|amr|au|mid|pva|wtv)", useServiceRef = True, additionalExtensions = "4098:m3u 4098:e2pls 4098:pls")
 		self["filelist"] = self.filelist
 
 		self.playlist = MyPlayList()
@@ -705,7 +705,7 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 				self.playlistIOInternal.addService(ServiceReference(x[0]))
 			self.playlistIOInternal.save(resolveFilename(SCOPE_PLAYLIST) + name)
 
-	def load_playlist(self):
+	def get_playlists(self):
 		listpath = []
 		playlistdir = resolveFilename(SCOPE_PLAYLIST)
 		try:
@@ -715,7 +715,14 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 			print "Error while scanning subdirs ",e
 		if config.mediaplayer.sortPlaylists.value:
 			listpath.sort()
-		self.session.openWithCallback(self.PlaylistSelected, ChoiceBox, title=_("Please select a playlist..."), list = listpath)
+		return listpath
+
+	def load_playlist(self):
+		listpath = self.get_playlists()
+		if listpath:
+			self.session.openWithCallback(self.PlaylistSelected, ChoiceBox, title=_("Please select a playlist..."), list = listpath)
+		else:
+			self.session.open(MessageBox, _("There are no saved playlists to load!"), MessageBox.TYPE_ERROR)
 
 	def PlaylistSelected(self,path):
 		if path is not None:
@@ -730,16 +737,11 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 			self.playlist.updateList()
 
 	def delete_saved_playlist(self):
-		listpath = []
-		playlistdir = resolveFilename(SCOPE_PLAYLIST)
-		try:
-			for i in os.listdir(playlistdir):
-				listpath.append((i,playlistdir + i))
-		except IOError,e:
-			print "Error while scanning subdirs ",e
-		if config.mediaplayer.sortPlaylists.value:
-			listpath.sort()
-		self.session.openWithCallback(self.DeletePlaylistSelected, ChoiceBox, title=_("Please select a playlist to delete..."), list = listpath)
+		listpath = self.get_playlists()
+		if listpath:
+			self.session.openWithCallback(self.DeletePlaylistSelected, ChoiceBox, title=_("Please select a playlist to delete..."), list = listpath)
+		else:
+			self.session.open(MessageBox, _("There are no saved playlists to delete!"), MessageBox.TYPE_ERROR)
 
 	def DeletePlaylistSelected(self,path):
 		if path is not None:

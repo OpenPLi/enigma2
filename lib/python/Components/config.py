@@ -593,7 +593,7 @@ class ConfigSequence(ConfigElement):
 			# position in the block
 			posinblock = self.marked_pos - block_len_total[blocknumber]
 
-			oldvalue = self._value[blocknumber]
+			oldvalue = abs(self._value[blocknumber]) # we are using abs in order to allow change negative values like default -1 on mis
 			olddec = oldvalue % 10 ** (number_len - posinblock) - (oldvalue % 10 ** (number_len - posinblock - 1))
 			newvalue = oldvalue - olddec + (10 ** (number_len - posinblock - 1) * number)
 
@@ -776,6 +776,11 @@ class ConfigClock(ConfigSequence):
 		# Trigger change
 		self.changed()
 
+date_limits = [(1, 31), (1, 12), (1970, 2050)]
+class ConfigDate(ConfigSequence):
+	def __init__(self, default):
+		d = localtime(default)
+		ConfigSequence.__init__(self, seperator=".", limits=date_limits, default=[d.tm_mday, d.tm_mon, d.tm_year])
 
 integer_limits = (0, 9999999999)
 class ConfigInteger(ConfigSequence):
@@ -1809,7 +1814,7 @@ class ConfigFile:
 		if len(names) > 1:
 			if names[0] == "config":
 				ret = self.__resolveValue(names[1:], config.content.items)
-				if ret and len(ret):
+				if ret and len(ret) or ret == "":
 					return ret
 		print "getResolvedKey", key, "failed !! (Typo??)"
 		return ""

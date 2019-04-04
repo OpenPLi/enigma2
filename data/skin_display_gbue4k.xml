@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<skin>
+	<windowstyle id="1" type="skinned">
+		<color name="Background" color="#0060eb"/>
+		<color name="LabelForeground" color="#ffffff"/>
+	</windowstyle>
+
+	<colors>
+		<color name="GBLcdBlack" value="#00000000"/>
+		<color name="GBLcdGrey" value="#00e2e2e2"/>
+		<color name="GBLcdRed" value="#00ff2525"/>
+		<color name="GBLcdWhite" value="#00ffffff"/>
+	</colors>
+
+	<fonts>
+		<font filename="nmsbd.ttf" name="GBLcd" scale="100"/>
+	</fonts>
+
+	<screen name="GBLcdClockTemplate">
+		<widget source="global.CurrentTime" render="Label" position="0,115" size="170,61" font="GBLcd;60" halign="right">
+			<convert type="ClockToText"/>
+		</widget>
+		<widget source="session.RecordState" render="FixedLabel" text="REC" position="171,119" size="44,27" font="GBLcd;25" foregroundColor="GBLcdRed" halign="right">
+				<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="171,144" size="49,32" font="GBLcd;30">
+			<convert type="ClockToText">Format::%S</convert>
+		</widget>
+	</screen>
+
+	<screen name="ChannelSelection_summary" position="0,0" size="220,176">
+		<widget source="parent.ServiceEvent" render="Label" position="5,0" size="210,60" font="GBLcd;26" valign="center">
+			<convert type="ServiceName">Name</convert>
+		</widget>
+		<widget source="parent.ServiceEvent" render="Label" position="5,60" size="215,49" font="GBLcd;20" valign="bottom" foregroundColor="GBLcdGrey">
+			<convert type="EventName">Name</convert>
+		</widget>
+		<widget source="parent.ServiceEvent" render="Progress" position="5,109" size="210,6" borderWidth="1">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+		<panel name="GBLcdClockTemplate"/>
+	</screen>
+
+	<screen name="ChoiceBox_summary" position="0,0" size="220,176">
+		<widget source="parent.summary_list" render="Label" position="0,0" size="220,176" font="GBLcd;20"/>
+	</screen>
+
+	<screen name="DVDSummary" position="0,0" size="220,176">
+		<widget source="session.CurrentService" render="Label" position="5,0" size="210,60" font="GBLcd;26" valign="center">
+			<convert type="ServiceName">Name</convert>
+		</widget>
+		<widget name="Chapter" position="5,79" size="105,30" font="GBLcd;26" foregroundColor="GBLcdGrey"/>
+		<widget source="session.CurrentService" render="Label" position="110,79" size="105,30" font="GBLcd;26" foregroundColor="GBLcdGrey" halign="right">
+			<convert type="ServicePosition">Remaining</convert>
+		</widget>
+		<widget source="session.CurrentService" render="Progress" position="5,109" size="210,6" borderWidth="1">
+			<convert type="ServicePosition">Position</convert>
+		</widget>
+		<panel name="GBLcdClockTemplate"/>
+	</screen>
+
+	<screen name="InfoBarSummary" position="0,0" size="220,176">
+		<widget source="session.CurrentService" render="Label" position="5,0" size="210,60" font="GBLcd;26" valign="center">
+			<convert type="ServiceName">Name</convert>
+		</widget>
+		<widget source="session.Event_Now" render="Label" position="5,60" size="215,49" font="GBLcd;20" valign="bottom" foregroundColor="GBLcdGrey">
+			<convert type="EventName">Name</convert>
+		</widget>
+		<widget source="session.Event_Now" render="Progress" position="5,109" size="210,6" borderWidth="1">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+		<panel name="GBLcdClockTemplate"/>
+	</screen>
+
+	<screen name="InfoBarMoviePlayerSummary" position="0,0" size="220,176">
+		<widget source="session.CurrentService" render="Label" position="5,0" size="210,60" font="GBLcd;26" valign="center">
+			<convert type="ServiceName">Name</convert>
+		</widget>
+		<widget source="session.CurrentService" render="Label" position="5,79" size="105,30" font="GBLcd;26" foregroundColor="GBLcdGrey">
+			<convert type="ServicePosition">Position</convert>
+		</widget>
+		<widget source="session.CurrentService" render="Label" position="110,79" size="105,30" font="GBLcd;26" foregroundColor="GBLcdGrey" halign="right">
+			<convert type="ServicePosition">Remaining</convert>
+		</widget>
+		<widget source="session.CurrentService" render="Progress" position="5,109" size="210,6" borderWidth="1">
+			<convert type="ServicePosition">Position</convert>
+		</widget>
+		<panel name="GBLcdClockTemplate"/>
+	</screen>
+
+	<screen name="JobView_summary" position="0,0" size="220,176">
+		<widget source="parent.summary_job_name" render="Label" position="5,0" size="210,84" font="GBLcd;26" valign="center"/>
+		<widget source="parent.summary_job_task" render="Label" position="5,84" size="105,25" font="GBLcd;20" foregroundColor="GBLcdGrey"/>
+		<widget source="parent.summary_job_progress" render="Label" position="110,84" size="105,25" font="GBLcd;20" foregroundColor="GBLcdGrey" halign="right">
+			<convert type="ProgressToText"/>
+		</widget>
+		<widget source="parent.summary_job_progress" render="Progress" position="5,109" size="210,6" borderWidth="1"/>
+		<panel name="GBLcdClockTemplate"/>
+	</screen>
+
+	<screen name="MenuSummary" position="0,0" size="220,176">
+		<widget source="parent.title" render="Label" position="5,0" size="210,60" font="GBLcd;26" valign="center"/>
+		<widget source="parent.menu" render="Label" position="5,60" size="215,49" font="GBLcd;20" valign="bottom" foregroundColor="GBLcdGrey">
+			<convert type="StringListSelection"/>
+		</widget>
+		<eLabel position="5,109" size="210,6" backgroundColor="GBLcdWhite"/>
+		<panel name="GBLcdClockTemplate"/>
+	</screen>
+
+	<screen name="MessageBox_summary" position="0,0" size="220,176">
+		<widget source="parent.Text" render="Label" position="5,0" size="210,146" font="GBLcd;21" valign="center" foregroundColor="GBLcdGrey"/>
+		<widget source="parent.selectedChoice" render="Label" position="5,146" size="210,30" font="GBLcd;26"/>
+	</screen>
+
+	<screen name="MessageBoxSimple_summary" position="0,0" size="220,176">
+		<widget source="parent.Text" render="Label" position="5,0" size="210,146" font="GBLcd;21" valign="center" foregroundColor="GBLcdGrey"/>
+		<widget source="parent.selectedChoice" render="Label" position="5,146" size="210,30" font="GBLcd;26"/>
+	</screen>
+
+	<screen name="MovieContextMenuSummary" position="0,0" size="220,176">
+		<widget source="parent.Title" render="Label" position="5,0" size="210,60" font="GBLcd;26" valign="center"/>
+		<widget source="selected" render="Label" position="5,60" size="215,49" font="GBLcd;20" valign="bottom" foregroundColor="GBLcdGrey"/>
+		<eLabel position="5,109" size="210,6" backgroundColor="GBLcdWhite"/>
+		<panel name="GBLcdClockTemplate"/>
+	</screen>
+
+	<screen name="MovieSelectionSummary" position="0,0" size="220,176">
+		<widget source="parent.Title" render="Label" position="5,0" size="210,60" font="GBLcd;26" valign="center"/>
+		<widget source="name" render="Label" position="5,60" size="215,49" font="GBLcd;20" valign="bottom" foregroundColor="GBLcdGrey"/>
+		<eLabel position="5,109" size="210,6" backgroundColor="GBLcdWhite"/>
+		<panel name="GBLcdClockTemplate"/>
+	</screen>
+
+	<screen name="PluginBrowserSummary" position="0,0" size="220,176">
+		<widget source="parent.Title" render="Label" position="5,0" size="210,60" font="GBLcd;26" valign="center"/>
+		<widget source="entry" render="Label" position="5,60" size="215,49" font="GBLcd;20" foregroundColor="GBLcdGrey" valign="center"/>
+		<widget source="desc" render="Label" position="5,109" size="215,67" font="GBLcd;20"/>
+	</screen>
+
+	<screen name="RdsInfoDisplaySummary" position="0,0" size="220,176">
+		<widget source="message" render="Label" position="5,0" size="215,176" font="GBLcd;26" valign="center"/>
+	</screen>
+
+	<screen name="ServiceScanSummary" position="0,0" size="220,176">
+		<widget name="Title" position="5,0" size="210,60" font="GBLcd;26" valign="center"/>
+		<widget name="Service" position="5,60" size="215,49" font="GBLcd;20" valign="bottom" foregroundColor="GBLcdGrey"/>
+		<widget name="scan_progress" position="5,109" size="210,6" borderWidth="1"/>
+		<panel name="GBLcdClockTemplate"/>
+	</screen>
+
+	<screen name="SetupSummary" position="0,0" size="220,176">
+		<widget source="SetupTitle" render="Label" position="5,0" size="210,60" font="GBLcd;26" valign="center"/>
+		<widget source="SetupEntry" render="Label" position="5,70" size="215,80" font="GBLcd;20" foregroundColor="GBLcdGrey"/>
+		<widget source="SetupValue" render="Label" position="5,150" size="215,26" font="GBLcd;20"/>
+	</screen>
+
+	<screen name="SimpleSummary" position="0,0" size="220,176">
+		<widget source="parent.Title" render="Label" position="5,0" size="210,109" font="GBLcd;26"/>
+		<eLabel position="5,109" size="210,6" backgroundColor="GBLcdWhite"/>
+		<panel name="GBLcdClockTemplate"/>
+	</screen>
+
+	<screen name="StandbySummary" position="0,0" size="220,176" backgroundColor="GBLcdBlack">
+		<widget source="global.CurrentTime" render="Label" position="0,25" size="165,61" font="GBLcd;60" halign="right" foregroundColor="GBLcdGrey" backgroundColor="GBLcdBlack">
+			<convert type="ClockToText"/>
+		</widget>
+		<widget source="session.RecordState" render="FixedLabel" text="REC" position="166,29" size="44,27" font="GBLcd;25" foregroundColor="GBLcdRed" backgroundColor="GBLcdBlack" halign="right">
+				<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="166,54" size="49,32" font="GBLcd;30" foregroundColor="GBLcdGrey" backgroundColor="GBLcdBlack">
+			<convert type="ClockToText">Format::%S</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="0,88" size="220,60" font="GBLcd;25" halign="center" foregroundColor="GBLcdGrey" backgroundColor="GBLcdBlack">
+			<convert type="ClockToText">LongDate</convert>
+		</widget>
+	</screen>
+
+	<screen name="VideoWizardSummary" position="0,0" size="220,176">
+		<widget name="text" position="5,0" size="210,60" font="GBLcd;26" valign="center"/>
+		<widget source="parent.list" render="Label" position="5,60" size="210,116" font="GBLcd;20">
+			<convert type="StringListSelection"/>
+		</widget>
+	</screen>
+
+	<screen name="WizardSummary" position="0,0" size="220,176">
+		<widget source="text" render="Label" position="5,0" size="210,60" font="GBLcd;26" valign="center"/>
+		<widget source="parent.list" render="Label" position="5,60" size="210,116" font="GBLcd;20">
+			<convert type="StringListSelection"/>
+		</widget>
+	</screen>
+</skin>

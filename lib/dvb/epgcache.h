@@ -285,6 +285,7 @@ private:
 	updateMap channelLastUpdated;
 	std::string m_filename;
 	bool m_running;
+	bool load_epg;
 
 #ifdef ENABLE_PRIVATE_EPG
 	contentMaps content_time_tables;

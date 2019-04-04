@@ -2,8 +2,60 @@ from Screens.Screen import Screen
 from Components.MovieList import AUDIO_EXTENSIONS
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.Pixmap import Pixmap
-from enigma import ePoint, eTimer, iPlayableService
+from Components.config import config
+import Screens.Standby
+from enigma import ePoint, eTimer, iPlayableService, eActionMap
 import os, random
+from sys import maxint
+
+class InfoBarScreenSaver:
+	def __init__(self):
+		self.onExecBegin.append(self.__onExecBegin)
+		self.onExecEnd.append(self.__onExecEnd)
+		self.screenSaverTimer = eTimer()
+		self.screenSaverTimer.callback.append(self.screensaverTimeout)
+		self.screensaver = self.session.instantiateDialog(Screensaver)
+		self.onLayoutFinish.append(self.__layoutFinished)
+
+	def __layoutFinished(self):
+		self.screensaver.hide()
+
+	def __onExecBegin(self):
+		self.ScreenSaverTimerStart()
+
+	def __onExecEnd(self):
+		if self.screensaver.shown:
+			self.screensaver.hide()
+			eActionMap.getInstance().unbindAction('', self.keypressScreenSaver)
+		self.screenSaverTimer.stop()
+
+	def ScreenSaverTimerStart(self):
+		time = int(config.usage.screen_saver.value)
+		flag = hasattr(self, "seekstate") and self.seekstate[0]
+		if not flag:
+			ref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
+			if ref and not (hasattr(self.session, "pipshown") and self.session.pipshown):
+				ref = ref.toString().split(":")
+				flag = ref[2] == "2" or os.path.splitext(ref[10])[1].lower() in AUDIO_EXTENSIONS
+		if time and flag:
+			self.screenSaverTimer.startLongTimer(time)
+		else:
+			self.screenSaverTimer.stop()
+
+	def screensaverTimeout(self):
+		if self.execing and not Screens.Standby.inStandby and not Screens.Standby.inTryQuitMainloop:
+			self.hide()
+			if hasattr(self, "pvrStateDialog"):
+				self.pvrStateDialog.hide()
+			self.screensaver.show()
+			eActionMap.getInstance().bindAction('', -maxint - 1, self.keypressScreenSaver)
+
+	def keypressScreenSaver(self, key, flag):
+		if flag:
+			self.screensaver.hide()
+			self.show()
+			self.ScreenSaverTimerStart()
+			eActionMap.getInstance().unbindAction('', self.keypressScreenSaver)
 
 class Screensaver(Screen):
 	def __init__(self, session):

@@ -1,4 +1,5 @@
 #include <lib/dvb/pvrparse.h>
+#include <lib/dvb/decoder.h>
 #include <lib/base/cfile.h>
 #include <lib/base/eerror.h>
 #include <sys/types.h>
@@ -943,25 +944,25 @@ int eMPEGStreamParserTS::processPacket(const unsigned char *pkt, off_t offset)
 //			eDebug("[eMPEGStreamParserTS] SC %02x %02x %02x %02x, %02x", pkt[0], pkt[1], pkt[2], pkt[3], pkt[4]);
 			unsigned int sc = pkt[3];
 
-			if (m_streamtype < 0) /* unknown */
+			if (m_streamtype == eDVBVideo::UNKNOWN)
 			{
 				if ((sc == 0x00) || (sc == 0xb3) || (sc == 0xb8))
 				{
 					eDebug("[eMPEGStreamParserTS] - detected MPEG2 stream");
-					m_streamtype = 0;
+					m_streamtype = eDVBVideo::MPEG2;
 				}
 				else if (sc == 0x09)
 				{
 					eDebug("[eMPEGStreamParserTS] - detected H264 stream");
-					m_streamtype =  1;
+					m_streamtype =  eDVBVideo::MPEG4_H264;
 				}
-				else
+				else /* TODO: detect H265 */
 					continue;
 			}
 
 			switch(m_streamtype)
 			{
-				case(0): // mpeg2
+				case eDVBVideo::MPEG2:
 				{
 					if ((sc == 0x00) || (sc == 0xb3) || (sc == 0xb8)) /* picture, sequence, group start code */
 					{
@@ -992,7 +993,7 @@ int eMPEGStreamParserTS::processPacket(const unsigned char *pkt, off_t offset)
 					break;
 				}
 
-				case(1): // h.264 */
+				case eDVBVideo::MPEG4_H264:
 				{
 					if (sc == 0x09)
 					{
@@ -1015,7 +1016,7 @@ int eMPEGStreamParserTS::processPacket(const unsigned char *pkt, off_t offset)
 					break;
 				}
 
-				case(6): // h.265
+				case eDVBVideo::H265_HEVC:
 				{
 					int nal_unit_type = (sc >> 1);
 					if (nal_unit_type == 35) /* H265 NAL unit access delimiter */
@@ -1035,11 +1036,14 @@ int eMPEGStreamParserTS::processPacket(const unsigned char *pkt, off_t offset)
 					break;
 				}
 
-				default:
+				case eDVBVideo::UNKNOWN:
+				case eDVBVideo::VC1:
+				case eDVBVideo::MPEG4_Part2:
+				case eDVBVideo::VC1_SM:
+				case eDVBVideo::MPEG1:
+				case eDVBVideo::AVS:
 				{
-					eDebug("[eMPEGStreamParserTS]: unknown streamtype: %d ", m_streamtype);
-
-					break;
+					break; /* TODO: add parser for above codecs */
 				}
 			}
 		}
@@ -1066,7 +1070,7 @@ inline int eMPEGStreamParserTS::wantPacket(const unsigned char *pkt) const
 	if (hdr[1] & 0x40)	 /* pusi set: yes. */
 		return 1;
 
-	return m_streamtype == 0; /* we need all packets for MPEG2, but only PUSI packets for H.264 */
+	return m_streamtype == eDVBVideo::MPEG2; /* we need all packets for MPEG2, but only PUSI packets for H.264 */
 }
 
 void eMPEGStreamParserTS::parseData(off_t offset, const void *data, unsigned int len)
@@ -1200,12 +1204,14 @@ void eMPEGStreamParserTS::setPid(int _pid, iDVBTSRecorder::timing_pid_type pidty
 {
 	m_pktptr = 0;
 	/*
-	 * Currently, eMPEGStreamParserTS can only parse video, mpeg2 (streamtype 0), h264 (streamtype 1) and h265 (streamtype 6).
-	 * Also, streamtype -1 should be accepted, which will cause the streamtype to be autodetected.
+	 * Currently, eMPEGStreamParserTS can only parse video, mpeg2, h264 and h265.
+	 * Also, streamtype UNKNOWN should be accepted, which will cause the streamtype to be autodetected.
 	 * Do not try to parse audio pids, which might lead to false hits,
 	 * and waste cpu time.
 	 */
-	if (pidtype == iDVBTSRecorder::video_pid && (streamtype < 2 || streamtype == 6))
+	if (pidtype == iDVBTSRecorder::video_pid && (streamtype == eDVBVideo::UNKNOWN ||
+		streamtype == eDVBVideo::MPEG2 || streamtype == eDVBVideo::MPEG4_H264 ||
+		streamtype == eDVBVideo::H265_HEVC))
 	{
 		m_pid = _pid;
 		m_streamtype = streamtype;
@@ -1214,7 +1220,7 @@ void eMPEGStreamParserTS::setPid(int _pid, iDVBTSRecorder::timing_pid_type pidty
 	{
 		/* invalidate pid */
 		m_pid = -1;
-		m_streamtype = -1;
+		m_streamtype = eDVBVideo::UNKNOWN;
 	}
 }
 
