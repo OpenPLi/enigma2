@@ -97,6 +97,7 @@ SystemInfo["Has3DSurroundSoftLimiter"] = fileExists("/proc/stb/audio/3dsurround_
 SystemInfo["hasXcoreVFD"] = HardwareInfo().get_device_model() in ('osmega','spycat4k','spycat4kmini','spycat4kcombo') and fileCheck("/sys/module/brcmstb_%s/parameters/pt6302_cgram" % HardwareInfo().get_device_model())
 SystemInfo["HasOfflineDecoding"] = HardwareInfo().get_device_model() not in ('osmini', 'osminiplus', 'et7000mini', 'et11000', 'mbmicro', 'mbtwinplus', 'mbmicrov2', 'et7000', 'et8500')
 SystemInfo["canFlashWithOfgwrite"] = not(HardwareInfo().get_device_model().startswith("dm") or HardwareInfo().get_device_model() in ("hd60", "hd61"))
+SystemInfo["HasRootSubdir"] = fileHas("/proc/cmdline", "rootsubdir=")
 SystemInfo["canMultiBoot"] = HardwareInfo().get_device_model() in ('hd51', 'h7', 'vs1500', 'e4hd') and (1, 4, "mmcblk0", False) or HardwareInfo().get_device_model() in ('gbue4k', 'gbquad4k') and (3, 3, "mmcblk0", True) or HardwareInfo().get_device_model() in ('osmio4k') and (1, 4, "mmcblk1", True)
 SystemInfo["canMode12"] = HardwareInfo().get_device_model() in ("hd51", "vs1500") and '192M' or HardwareInfo().get_device_model() in ("h7") and '200M'
 SystemInfo["HDRSupport"] = fileExists("/proc/stb/hdmi/hlg_support_choices") and fileCheck("/proc/stb/hdmi/hlg_support")
