@@ -57,12 +57,12 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 			VKB_OK_ICON: ("OK", u"ENTERICON"),
 			VKB_SAVE_ICON: ("Save", u"ENTERICON"),
 			VKB_SEARCH_ICON: ("Search", u"ENTERICON"),
-			VKB_DONE_TEXT: ("Done", u"Done"),
-			VKB_ENTER_TEXT: ("Done", u"Enter"),
-			VKB_OK_TEXT: ("OK", u"OK"),
-			VKB_SAVE_TEXT: ("Save", u"Save"),
-			VKB_SEARCH_TEXT: ("Search", u"Search")
-		}.get(style, ("Enter", u"ENTER"))
+			VKB_DONE_TEXT: (_("Done"), u"Done"),
+			VKB_ENTER_TEXT: (_("Done"), u"Enter"),
+			VKB_OK_TEXT: (_("OK"), u"OK"),
+			VKB_SAVE_TEXT: (_("Save"), u"Save"),
+			VKB_SEARCH_TEXT: (_("Search"), u"Search")
+		}.get(style, (_("Enter"), u"ENTER"))
 		self.bg = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_bg.png"))  # Legacy support only!
 		self.bg_l = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_bg_l.png"))
 		self.bg_m = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_bg_m.png"))
@@ -924,7 +924,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 					# print "[VirtualKeyBoard] DEBUG: Left=%d, Top=%d, Width=%d, Height=%d, Image Width=%d, Image Height=%d" % (left, top, w, h, wImage, hImage)
 				else:  # Display the cell text.
 					if len(key) > 1:  # NOTE: UTF8 / Unicode glyphs only count as one character here.
-						text.append(MultiContentEntryText(pos=(xData, self.padding[1]), size=(w, h), font=1, flags=alignH | alignV, text=_(key.encode("utf-8")), color=self.shiftColors[self.shiftLevel]))
+						text.append(MultiContentEntryText(pos=(xData, self.padding[1]), size=(w, h), font=1, flags=alignH | alignV, text=key.encode("utf-8"), color=self.shiftColors[self.shiftLevel]))
 					else:
 						text.append(MultiContentEntryText(pos=(xData, self.padding[1]), size=(w, h), font=0, flags=alignH | alignV, text=key.encode("utf-8"), color=self.shiftColors[self.shiftLevel]))
 				highlight = self.keyHighlights.get(key.upper(), (None, None, None))  # Check if the cell needs to be highlighted.
