@@ -210,8 +210,9 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 			u"SAVE": "self.save()",
 			u"SHIFT": "self.shiftClicked()",
 			u"SHIFTICON": "self.shiftClicked()",
-			u"SPACEICON": "self['text'].char(" ".encode('UTF-8'))",
-			u"SPACEICONALT": "self['text'].char(" ".encode('UTF-8'))"
+			u"SPACE": "self['text'].char(' '.encode('UTF-8'))",
+			u"SPACEICON": "self['text'].char(' '.encode('UTF-8'))",
+			u"SPACEICONALT": "self['text'].char(' '.encode('UTF-8'))"
 		}
 		self.footer = [u"EXITICON", u"LEFTICON", u"RIGHTICON", u"SPACEICON", u"SPACEICON", u"SPACEICON", u"SPACEICON", u"SPACEICON", u"SPACEICON", u"SPACEICON", u"SPACEICON", u"LOCALEICON", u"CLEARICON", u"DELETEICON"]
 		self.czech = [
