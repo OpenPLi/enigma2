@@ -57,12 +57,12 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 			VKB_OK_ICON: ("OK", u"ENTERICON"),
 			VKB_SAVE_ICON: ("Save", u"ENTERICON"),
 			VKB_SEARCH_ICON: ("Search", u"ENTERICON"),
-			VKB_DONE_TEXT: ("Done", u"Done"),
-			VKB_ENTER_TEXT: ("Done", u"Enter"),
-			VKB_OK_TEXT: ("OK", u"OK"),
-			VKB_SAVE_TEXT: ("Save", u"Save"),
-			VKB_SEARCH_TEXT: ("Search", u"Search")
-		}.get(style, ("Enter", u"ENTER"))
+			VKB_DONE_TEXT: ("Done", _("Done")),
+			VKB_ENTER_TEXT: ("Done", _("Enter")),
+			VKB_OK_TEXT: ("OK", _("OK")),
+			VKB_SAVE_TEXT: ("Save", _("Save")),
+			VKB_SEARCH_TEXT: ("Search", _("Search"))
+		}.get(style, ("Enter", u"ENTERICON"))
 		self.bg = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_bg.png"))  # Legacy support only!
 		self.bg_l = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_bg_l.png"))
 		self.bg_m = LoadPixmap(path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/vkey_bg_m.png"))
@@ -457,8 +457,10 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 			"de_DE": [_("German"), _("Germany"), self.german],
 			"de_CH": [_("German"), _("Switzerland"), self.germanSwiss(self.german)],
 			"el_GR": [_("Greek (Modern)"), _("Greece"), self.greek],
-			"lv_LV": [_("Latvian"), _("Latvia"), self.latvian],
-			"lv_EN": [_("Latvian"), _("Standard"), self.latvianStandard(self.english)],
+			"hu_HU": [_("Hungarian"), _("Hungary"), self.hungarian(self.german)],
+			"lv_LL": [_("Latvian"), _("Latvia"), self.latvian],
+			"lv_LV": [_("Latvian"), _("QWERTY"), self.latvianQWERTY(self.english)],
+			"lv_ST": [_("Latvian"), _("Standard"), self.latvianStandard(self.english)],
 			"lt_LT": [_("Lithuanian"), _("Lithuania"), self.lithuanian(self.english)],
 			"nb_NO": [_("Norwegian"), _("Norway"), self.norwegian(self.scandinavian)],
 			"fa_IR": [_("Persian"), _("Iran, Islamic Republic"), self.persian(self.english)],
@@ -677,6 +679,43 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		keyList[2][3][8] = u""
 		return keyList
 
+	def hungarian(self, base):
+		keyList = copy.deepcopy(base)
+		keyList[0][0][0] = u"0"
+		keyList[0][0][10] = u"\u00F6"
+		keyList[0][0][11] = u"\u00FC"
+		keyList[0][0][12] = u"\u00F3"
+		keyList[0][1][11] = u"\u0151"
+		keyList[0][1][12] = u"\u00FA"
+		keyList[0][1][13] = u"\u0171"
+		keyList[0][2][10] = u"\u00E9"
+		keyList[0][2][11] = u"\u00E1"
+		keyList[0][3][1] = u"\u00ED"
+		keyList[1][0] = [u"\u00A7", u"'", u"\"", u"+", u"!", u"%", u"/", u"=", u"(", u")", u"\u00D6", u"\u00DC", u"\u00D3", u"BACSPACEICON"]
+		keyList[1][1][11] = u"\u0150"
+		keyList[1][1][12] = u"\u00DA"
+		keyList[1][1][13] = u"\u0170"
+		keyList[1][2][10] = u"\u00C9"
+		keyList[1][2][11] = u"\u00C1"
+		keyList[1][3][1] = u"\u00CD"
+		keyList[1][3][9] = u"?"
+		del keyList[2]
+		keyList.append([
+			[u"", u"~", u"\u02C7", u"^", u"\u02D8", u"\u00B0", u"\u02DB", u"`", u"\u02D9", u"\u00B4", u"\u02DD", u"\u00A8", u"\u00B8", u"BACKSPACEICON"],
+			[u"FIRSTICON", u"\\", u"|", u"\u00C4", u"", u"", u"", u"\u20AC", u"\u00CD", u"", u"", u"\u00F7", u"\u00D7", u"\u00A4"],
+			[u"LASTICON", u"\u00E4", u"\u0111", u"\u0110", u"[", u"]", u"", u"\u00ED", u"\u0142", u"\u0141", u"$", u"\u00DF", self.green, self.green],
+			[u"SHIFTICON", u"<", u">", u"#", u"&", u"@", u"{", u"}", u"<", u";", u">", u"*", u"SHIFTICON", u"SHIFTICON"],
+			self.footer
+		])
+		return keyList
+
+	def latvianQWERTY(self, base):
+		keyList = self.latvianStandard(base)
+		keyList[0][1][13] = u"\u00B0"
+		keyList[2][1][9] = u"\u00F5"
+		keyList[3][1][9] = u"\u00D5"
+		return keyList
+
 	def latvianStandard(self, base):
 		keyList = copy.deepcopy(base)
 		keyList[0][3][1] = u"\\"
@@ -691,7 +730,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		keyList.append([
 			[u"", u"", u"", u"", u"\u00A7", u"\u00B0", u"", u"\u00B1", u"\u00D7", u"", u"", u"\u2014", u"", u"BACKSPACEICON"],
 			[u"FIRSTICON", u"", u"", u"\u0112", u"\u0156", u"", u"", u"\u016A", u"\u012A", u"\u014C", u"", u"", u"", u""],
-			[u"LASTICON", u"\u0100", u"\u0160", u"", u"", u"\u0122", u"", u"", u"\u0136", u"\u013B", u"", u"", self.green, self.green],
+			[u"LASTICON", u"\u0100", u"\u0160", u"", u"", u"\u0122", u"", u"", u"\u0136", u"\u013B", u"", u"\u00A8", self.green, self.green],
 			[u"SHIFTICON", u"", u"\u017D", u"", u"\u010C", u"", u"", u"\u0145", u"", u"", u"", u"", u"SHIFTICON", u"SHIFTICON"],
 			self.footer
 		])
@@ -924,7 +963,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 					# print "[VirtualKeyBoard] DEBUG: Left=%d, Top=%d, Width=%d, Height=%d, Image Width=%d, Image Height=%d" % (left, top, w, h, wImage, hImage)
 				else:  # Display the cell text.
 					if len(key) > 1:  # NOTE: UTF8 / Unicode glyphs only count as one character here.
-						text.append(MultiContentEntryText(pos=(xData, self.padding[1]), size=(w, h), font=1, flags=alignH | alignV, text=_(key.encode("utf-8")), color=self.shiftColors[self.shiftLevel]))
+						text.append(MultiContentEntryText(pos=(xData, self.padding[1]), size=(w, h), font=1, flags=alignH | alignV, text=key.encode("utf-8"), color=self.shiftColors[self.shiftLevel]))
 					else:
 						text.append(MultiContentEntryText(pos=(xData, self.padding[1]), size=(w, h), font=0, flags=alignH | alignV, text=key.encode("utf-8"), color=self.shiftColors[self.shiftLevel]))
 				highlight = self.keyHighlights.get(key.upper(), (None, None, None))  # Check if the cell needs to be highlighted.
