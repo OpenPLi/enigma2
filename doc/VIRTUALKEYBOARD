@@ -37,6 +37,19 @@ Any sequence of identical button definitions on any single row of a
 "keyList" entry will be used to generate a single wide button on the 
 screen occupying all the defined positions.
 
+* New languages and locales can be added by adding an appropriate entry 
+into the "self.locales" dictionary.  The primary or default keyboard 
+for the language should use the locale key as provided by Enigma2.  
+Alternates can be provided with other keys to allow selection of the 
+alternate by users.
+
+* If a keyboard is fundamentally similar to an existing keyboard then the 
+existing keyboard can be used as a template for the new keyboard.  The 
+method specified in the dictionary should duplicate the existing definition 
+and then proceed to change the keyboard cells as required.  If the new 
+keyboard is substantially different then a new keyboard keymap should be 
+defined.
+
 This revision also allows the four colour buttons to be assigned to any 
 keyboard key by nominating the key text in the "self.keyHiglights" 
 dictionary in the "__init__" method of the "VirtualKeyBoard" class. 
