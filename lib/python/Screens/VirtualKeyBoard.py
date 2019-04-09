@@ -458,13 +458,14 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 			"de_CH": [_("German"), _("Switzerland"), self.germanSwiss(self.german)],
 			"el_GR": [_("Greek (Modern)"), _("Greece"), self.greek],
 			"hu_HU": [_("Hungarian"), _("Hungary"), self.hungarian(self.german)],
-			"lv_LL": [_("Latvian"), _("Latvia"), self.latvian],
-			"lv_LV": [_("Latvian"), _("QWERTY"), self.latvianQWERTY(self.english)],
-			"lv_ST": [_("Latvian"), _("Standard"), self.latvianStandard(self.english)],
+			"lv_01": [_("Latvian"), _("Alternative 1"), self.latvianStandard(self.english)],
+			"lv_02": [_("Latvian"), _("Alternative 2"), self.latvian],
+			"lv_LV": [_("Latvian"), _("Latvia"), self.latvianDefault(self.english)],
 			"lt_LT": [_("Lithuanian"), _("Lithuania"), self.lithuanian(self.english)],
 			"nb_NO": [_("Norwegian"), _("Norway"), self.norwegian(self.scandinavian)],
 			"fa_IR": [_("Persian"), _("Iran, Islamic Republic"), self.persian(self.english)],
-			"pl_PL": [_("Polish"), _("Poland"), self.polish(self.german)],
+			"pl_01": [_("Polish"), _("Alternative"), self.polishAlternative(self.german)],
+			"pl_PL": [_("Polish"), _("Poland"), self.polish(self.english)],
 			"ru_RU": [_("Russian"), _("Russian Federation"), self.russian],
 			"sk_SK": [_("Slovak"), _("Slovakia"), self.slovak(self.german)],
 			"es_ES": [_("Spanish"), _("Spain"), self.spanish],
@@ -709,7 +710,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		])
 		return keyList
 
-	def latvianQWERTY(self, base):
+	def latvianDefault(self, base):
 		keyList = self.latvianStandard(base)
 		keyList[0][1][13] = u"\u00B0"
 		keyList[2][1][9] = u"\u00F5"
@@ -784,6 +785,19 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		return keyList
 
 	def polish(self, base):
+		keyList = copy.deepcopy(base)
+		keyList[0][3][1] = u"\\"
+		keyList[1][3][1] = u"|"
+		keyList.append([
+			[u"", u"", u"", u"", u"", u"", u"", u"", u"", u"", u"", u"", u"", u"BACKSPACEICON"],
+			[u"FIRSTICON", u"", u"", u"\u0119", u"\u0118", u"", u"", u"\u20AC", u"", u"\u00F3", u"\u00D3", u"", u"", u""],
+			[u"LASTICON", u"\u0105", u"\u0104", u"\u015B", u"\u015A", u"", u"", u"", u"", u"\u0142", u"\u0141", u"", self.green, self.green],
+			[u"SHIFTICON", u"\u017C", u"\u017B", u"\u017A", u"\u0179", u"\u0107", u"\u0106", u"\u0144", u"\u0143", u"", u"", u"", u"SHIFTICON", u"SHIFTICON"],
+			self.footer
+		])
+		return keyList
+
+	def polishAlternative(self, base):
 		keyList = copy.deepcopy(base)
 		keyList[0][0][0] = u"\u02DB"
 		keyList[0][0][11] = u"+"
