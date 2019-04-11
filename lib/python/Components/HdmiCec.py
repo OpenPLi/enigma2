@@ -359,7 +359,8 @@ class HdmiCec:
 						self.sendMessage(message.getAddress(), 'menuactive')
 			elif cmd == 0x90: # receive powerstatus report
 				if ord(data[0]) == 0: # some box is powered
-					self.useStandby = False
+					if config.hdmicec.next_boxes_detect.value:
+						self.useStandby = False
 					print "[HDMI-CEC] powered box found"
 			elif cmd == 0x9F: # request get CEC version
 				self.sendMessage(message.getAddress(), 'sendcecversion')
