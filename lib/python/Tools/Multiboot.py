@@ -25,17 +25,33 @@ class GetImagelist():
 			self.run()
 		else:	
 			callback({})
-	
+
 	def run(self):
-		self.container.ePopen('mount /dev/%sp%s /tmp/testmount' % (SystemInfo["canMultiBoot"][2], str(self.slot * 2 + self.firstslot)) if self.phase == self.MOUNT else 'umount /tmp/testmount', self.appClosed)
+		if SystemInfo["HasRootSubdir"]:
+			if self.slot == 1:
+				self.container.ePopen('mount /dev/block/by-name/linuxrootfs /tmp/testmount' if self.phase == self.MOUNT else 'umount /tmp/testmount', self.appClosed)
+			else:
+				self.container.ePopen('mount /dev/block/by-name/userdata /tmp/testmount' if self.phase == self.MOUNT else 'umount /tmp/testmount', self.appClosed)
+		else:
+			self.container.ePopen('mount /dev/%sp%s /tmp/testmount' % (SystemInfo["canMultiBoot"][2], str(self.slot * 2 + self.firstslot)) if self.phase == self.MOUNT else 'umount /tmp/testmount', self.appClosed)
 
 	def appClosed(self, data, retval, extra_args):
 		if retval == 0 and self.phase == self.MOUNT:
-			if os.path.isfile("/tmp/testmount/usr/bin/enigma2"):
-				import datetime
-				self.imagelist[self.slot] =  { 'imagename': "%s (%s)" % (open("/tmp/testmount/etc/issue").readlines()[-2].capitalize().strip()[:-6], datetime.datetime.fromtimestamp(os.stat("/tmp/testmount/usr/share/bootlogo.mvi").st_mtime).strftime('%Y-%m-%d'))}
+			if SystemInfo["HasRootSubdir"]:
+				if os.path.isfile("/tmp/testmount/linuxrootfs1/usr/bin/enigma2"):
+					import datetime
+					self.imagelist[self.slot] =  { 'imagename': "%s (%s)" % (open("/tmp/testmount/linuxrootfs1/etc/issue").readlines()[-2].capitalize().strip()[:-6], datetime.datetime.fromtimestamp(os.stat("/tmp/testmount/linuxrootfs1/usr/share/bootlogo.mvi").st_mtime).strftime('%Y-%m-%d'))}
+				elif os.path.isfile("/tmp/testmount/linuxrootfs%s/usr/bin/enigma2" % self.slot):
+					import datetime
+					self.imagelist[self.slot] =  { 'imagename': "%s (%s)" % (open("/tmp/testmount/linuxrootfs%s/etc/issue" % self.slot).readlines()[-2].capitalize().strip()[:-6], datetime.datetime.fromtimestamp(os.stat("/tmp/testmount/linuxrootfs%s/usr/share/bootlogo.mvi" % self.slot).st_mtime).strftime('%Y-%m-%d'))}
+				else:
+					self.imagelist[self.slot] = { 'imagename': _("Empty slot")}
 			else:
-				self.imagelist[self.slot] = { 'imagename': _("Empty slot")}
+				if os.path.isfile("/tmp/testmount/usr/bin/enigma2"):
+					import datetime
+					self.imagelist[self.slot] =  { 'imagename': "%s (%s)" % (open("/tmp/testmount/etc/issue").readlines()[-2].capitalize().strip()[:-6], datetime.datetime.fromtimestamp(os.stat("/tmp/testmount/usr/share/bootlogo.mvi").st_mtime).strftime('%Y-%m-%d'))}
+				else:
+					self.imagelist[self.slot] = { 'imagename': _("Empty slot")}
 			self.phase = self.UNMOUNT
 			self.run()
 		elif self.slot < self.numberofslots:
