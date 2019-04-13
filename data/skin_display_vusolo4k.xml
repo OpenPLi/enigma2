@@ -330,9 +330,9 @@
 	</screen>
 	<!-- Plugin browser -->
 	<screen name="PluginBrowserSummary" position="fill">
-		<widget source="parent.Title" render="Label" position="top" size="*,26" font="FdLcD;25" noWrap="1" />
-		<widget source="entry" render="Label" position="top" size="*,61" font="FdLcD;50" halign="left" />
-		<widget source="desc" render="Label" position="fill" font="FdLcD;22" valign="top" />
+		<widget source="parent.Title" render="Label" position="5,5" size="475,28" font="FdLcD;25" noWrap="1" />
+		<widget source="entry" render="Label" position="5,40" size="475,58" font="FdLcD;50" halign="left" />
+		<widget source="desc" render="Label" position="5,106" size="475,50" font="FdLcD;22" valign="top" />
 	</screen>
 	<!-- JobView Summary -->
 	<screen name="JobView_summary" position="fill">
@@ -457,5 +457,24 @@
 		<widget source="global.CurrentTime" render="Label" position="310,250" size="130,52" halign="right" font="FdLcD;50" transparent="1" zPosition="1" foregroundColor="lcd_lightcyan" >
 			<convert type="ClockToText">Default</convert>
 		</widget>
+	</screen>
+	<!-- Hdmi Test-->
+	<screen name="HdmiTestSummary" position="0,0" size="480,320">
+		<widget source="parent.Title" render="Label" position="0,5" size="480,58" font="FdLcD;50" halign="center" noWrap="1" foregroundColor="#ffff00"/>
+		<widget source="entry" render="Label" position="5,70" size="475,28" font="FdLcD;24" halign="left" foregroundColor="#c0c0ff"/>
+		<widget source="value" render="Label" position="5,98" size="475,56" font="FdLcD;24" halign="center"/>
+		<widget source="address" render="Label" position="5,154" size="475,28" font="FdLcD;24" halign="left" foregroundColor="#b0b000"/>
+		<ePixmap pixmap="skin_default/div-h.png" position="0,190" size="480,2" zPosition="2"/>
+		<widget source="txtext" render="Label" position="5,200" size="235,112" zPosition="1" font="FdLcD;24" halign="left" noWrap="1" foregroundColor="#c0ffc0"/>
+		<widget source="rxtext" render="Label" position="240,200" size="235,112" zPosition="1" font="FdLcD;24" halign="left" noWrap="1" foregroundColor="#ffc0c0"/>
+	</screen>
+	<screen name="HdmiTestInfoSummary" position="0,0" size="480,320">
+		<widget source="parent.Title" render="Label" position="0,5" size="480,58" font="FdLcD;50" halign="center" noWrap="1" foregroundColor="#ffff00"/>
+		<widget source="rxtext" render="Label" position="5,65" size="475,250" zPosition="1" font="FdLcD;22" halign="left"/>
+	</screen>
+	<screen name="HdmiTestOptionsSummary" position="0,0" size="480,320">
+		<widget source="parent.Title" render="Label" position="0,5" size="480,58" font="FdLcD;50" halign="center" noWrap="1" foregroundColor="#ffff00"/>
+		<widget source="entry" render="Label" position="5,70" size="475,28" font="FdLcD;24" halign="left" foregroundColor="#c0c0ff"/>
+		<widget source="value" render="Label" position="5,98" size="475,56" font="FdLcD;24" halign="center"/>
 	</screen>
 </skin>
