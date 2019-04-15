@@ -453,8 +453,15 @@ class MultibootSelection(SelectImage):
 			if os.path.isdir('/tmp/startupmount'):
 				self.ContainterFallback()
 			else:
-				os.mkdir('/tmp/startupmount')
-				self.container.ePopen('mount /dev/%sp1 /tmp/startupmount' % SystemInfo["canMultiBoot"][2], self.ContainterFallback)
+				if os.path.isfile("/dev/block/by-name/bootoptions"):
+					os.mkdir('/tmp/startupmount')
+					self.container.ePopen('mount /dev/block/by-name/bootoptions /tmp/startupmount', self.ContainterFallback)
+				elif os.path.isfile("/dev/block/by-name/boot"):
+					os.mkdir('/tmp/startupmount')
+					self.container.ePopen('mount /dev/block/by-name/boot /tmp/startupmount', self.ContainterFallback)
+				else:
+					os.mkdir('/tmp/startupmount')
+					self.container.ePopen('mount /dev/%sp1 /tmp/startupmount' % SystemInfo["canMultiBoot"][2], self.ContainterFallback)
 
 	def ContainterFallback(self, data=None, retval=None, extra_args=None):
 		self.container.killAll()
@@ -462,6 +469,14 @@ class MultibootSelection(SelectImage):
 		model = HardwareInfo().get_machine_name()
 		if SystemInfo["canMultiBoot"][3]:
 			shutil.copyfile("/tmp/startupmount/STARTUP_%s" % slot, "/tmp/startupmount/STARTUP")
+		elif os.path.isfile("/tmp/startupmount/STARTUP_LINUX_4_BOXMODE_12"):
+			if slot < 12:
+				shutil.copyfile("/tmp/startupmount/STARTUP_LINUX_%s_BOXMODE_1" % slot, "/tmp/startupmount/STARTUP")
+			else:
+				slot -= 12
+				shutil.copyfile("/tmp/startupmount/STARTUP_LINUX_%s_BOXMODE_12" % slot, "/tmp/startupmount/STARTUP")
+		elif os.path.isfile("/tmp/startupmount/STARTUP_LINUX_4"):
+			shutil.copyfile("/tmp/startupmount/STARTUP_LINUX_%s" % slot, "/tmp/startupmount/STARTUP")
 		else:
 			if slot < 12:
 				startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=1'\n" % (slot, slot * 2 + 1, model)
