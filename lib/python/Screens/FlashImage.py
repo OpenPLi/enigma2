@@ -448,7 +448,7 @@ class MultibootSelection(SelectImage):
 
 	def keyOk(self):
 		self.currentSelected = self["list"].l.getCurrentSelection()
-		if self.currentSelected[0][1] != "Waiter":
+		if self.currentSelected and self.currentSelected[0][1] != "Waiter":
 			self.container = Console()
 			if os.path.isdir('/tmp/startupmount'):
 				self.ContainterFallback()
