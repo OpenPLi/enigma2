@@ -4,102 +4,125 @@ prefix=@prefix@
 exec_prefix=@exec_prefix@
 datarootdir=@datarootdir@
 
-if [ -x @bindir@/showiframe ]; then
-	if [ -f @sysconfdir@/enigma2/backdrop.mvi ]; then
-		@bindir@/showiframe @sysconfdir@/enigma2/backdrop.mvi
-	elif [ -f @sysconfdir@/enigma2/bootlogo.mvi ]; then
-		@bindir@/showiframe @sysconfdir@/enigma2/bootlogo.mvi
-	elif [ -f @datadir@/bootlogo.mvi ]; then
-		@bindir@/showiframe @datadir@/bootlogo.mvi
-	fi
-fi
-
-# hook to execute scripts always before enigma2 start
-if [ -x @bindir@/enigma2_pre_start.sh ]; then
-	@bindir@/enigma2_pre_start.sh
-fi
-
 if [ -d /home/root ]; then
 	export HOME=/home/root
 	cd
 fi
 
-DEBUG_LVL=3
+# any debuglevel passed?
+if [ -z $ENIGMA_DEBUG_LVL ]; then
+	DEBUG_LVL=3
+else
+	DEBUG_LVL=$ENIGMA_DEBUG_LVL
+fi
+
 LIBS=@libdir@/libopen.so.0.0.0
 
-sync
-LD_PRELOAD=$LIBS ENIGMA_DEBUG_LVL=$DEBUG_LVL @bindir@/enigma2
-
-# enigma2 exit codes:
-#
-#  1 - halt
-#  2 - reboot
-#  3 - restart enigma
-#  4 - front processor upgrade
-#  5 - install new settings
-#  6 - restart enigma in debug mode
-# 42 - offline update
-# 43 - restart for autoinstall
-#
-# >128 signal
-
-ret=$?
-case $ret in
-	1)
-		/sbin/halt
-		;;
-	2)
-		/sbin/reboot
-		;;
-	3)
-        DEBUG_LVL=3
-		;;
-	4)
-		/sbin/rmmod lcd
-		/usr/sbin/fpupgrade --upgrade 2>&1 | tee /home/root/fpupgrade.log
-		sleep 1;
-		/sbin/rmmod fp
-		/sbin/modprobe fp
-		/sbin/reboot
-		;;
-	5)
-		if ! grep -q config.misc.RestartUI /etc/enigma2/settings; then
-			echo "config.misc.RestartUI=true" >>/etc/enigma2/settings
+# enigma main loop
+while : ; do
+	# show bootlogo on enigma2 start
+	if [ -x @bindir@/showiframe ]; then
+		if [ -f @sysconfdir@/enigma2/backdrop.mvi ]; then
+			@bindir@/showiframe @sysconfdir@/enigma2/backdrop.mvi
+		elif [ -f @sysconfdir@/enigma2/bootlogo.mvi ]; then
+			@bindir@/showiframe @sysconfdir@/enigma2/bootlogo.mvi
+		elif [ -f @datadir@/bootlogo.mvi ]; then
+			@bindir@/showiframe @datadir@/bootlogo.mvi
 		fi
-		;;
-    6)
-        DEBUG_LVL=4
-        ;;
-	42)
-		df -P | grep -v "tmpfs " | awk '{print $6}' | tail -n +3 > /tmp/upgrade_mountpoints.txt
-		while read line; do
-			if [  -f $line/var/lib/opkg/status ]; then
-			DESTS=$DESTS" --add-dest "$line":"$line
-		fi
-		done < /tmp/upgrade_mountpoints.txt
-		# bind the console (when available)
-		[ -f /sys/class/vtconsole/vtcon1/bind ] && echo 1 > /sys/class/vtconsole/vtcon1/bind
-		( opkg upgrade sysvinit && opkg upgrade sysvinit-pidof && opkg upgrade initscripts-functions && opkg upgrade busybox && opkg upgrade kmod && opkg list-upgradable $DESTS | cut -f 1 -d ' ' | xargs opkg upgrade $DESTS ) 2>&1 | tee /home/root/ipkgupgrade.log
-		/sbin/reboot
-		;;
-	43)
-		#auto install and autobackup
-		[ -f /sys/class/vtconsole/vtcon1/bind ] && echo 1 > /sys/class/vtconsole/vtcon1/bind
-		/etc/init.d/settings-restore.sh
-		/etc/init.d/avahi-daemon stop
-		ifdown eth1
-		ip addr flush dev eth1 scope global
-		ifdown eth0
-		ip addr flush dev eth0 scope global
-		/etc/init.d/networking stop
-		killall -9 udhcpc
-		rm /var/run/udhcpc*
-		/etc/init.d/dbus-1 reload
-		/etc/init.d/networking start
-		/etc/init.d/avahi-daemon start
-		touch /etc/.doAutoinstall
-		;;
-	*)
-        DEBUG_LVL=4
-		;;
-esac
+	fi
+
+	# hook to execute scripts always before enigma2 start
+	if [ -x @bindir@/enigma2_pre_start.sh ]; then
+		@bindir@/enigma2_pre_start.sh
+	fi
+
+	# start enigma
+	sync
+	if [ $DEBUG_LVL -lt 4 ]; then
+		LD_PRELOAD=$LIBS ENIGMA_DEBUG_LVL=$DEBUG_LVL @bindir@/enigma2
+	else
+		# remove old logfiles
+		keep=5;
+		for file in `ls -t /home/root/enigma.*.debuglog`; do let "keep--"; if [ "$keep" -lt "0" ]; then rm $file; fi; done
+		# todays log file
+		file="/home/root/enigma.$(date +%Y%m%d).debuglog"
+		LD_PRELOAD=$LIBS ENIGMA_DEBUG_LVL=$DEBUG_LVL @bindir@/enigma2 >> $file 2>&1
+	fi
+
+
+	# enigma2 exit codes:
+	#
+	#  1 - halt
+	#  2 - reboot
+	#  3 - restart enigma in normal mode
+	#  4 - front processor upgrade
+	#  5 - install new settings
+	#  6 - restart enigma in debug mode
+	# 42 - offline update
+	# 43 - restart for autoinstall
+	#
+	# >128 signal
+
+	ret=$?
+	case $ret in
+		1)
+			/sbin/halt
+			;;
+		2)
+			/sbin/reboot
+			;;
+		3)
+			DEBUG_LVL=3
+			;;
+		4)
+			/sbin/rmmod lcd
+			/usr/sbin/fpupgrade --upgrade 2>&1 | tee /home/root/fpupgrade.log
+			sleep 1;
+			/sbin/rmmod fp
+			/sbin/modprobe fp
+			/sbin/reboot
+			;;
+		5)
+			if ! grep -q config.misc.RestartUI /etc/enigma2/settings; then
+				echo "config.misc.RestartUI=true" >>/etc/enigma2/settings
+			fi
+			;;
+		6)
+			DEBUG_LVL=4
+			;;
+		42)
+			df -P | grep -v "tmpfs " | awk '{print $6}' | tail -n +3 > /tmp/upgrade_mountpoints.txt
+			while read line; do
+				if [  -f $line/var/lib/opkg/status ]; then
+				DESTS=$DESTS" --add-dest "$line":"$line
+			fi
+			done < /tmp/upgrade_mountpoints.txt
+			# bind the console (when available)
+			[ -f /sys/class/vtconsole/vtcon1/bind ] && echo 1 > /sys/class/vtconsole/vtcon1/bind
+			( opkg upgrade sysvinit && opkg upgrade sysvinit-pidof && opkg upgrade initscripts-functions && opkg upgrade busybox && opkg upgrade kmod && opkg list-upgradable $DESTS | cut -f 1 -d ' ' | xargs opkg upgrade $DESTS ) 2>&1 | tee /home/root/ipkgupgrade.log
+			/sbin/reboot
+			;;
+		43)
+			#auto install and autobackup
+			[ -f /sys/class/vtconsole/vtcon1/bind ] && echo 1 > /sys/class/vtconsole/vtcon1/bind
+			/etc/init.d/settings-restore.sh
+			/etc/init.d/avahi-daemon stop
+			ifdown eth1
+			ip addr flush dev eth1 scope global
+			ifdown eth0
+			ip addr flush dev eth0 scope global
+			/etc/init.d/networking stop
+			killall -9 udhcpc
+			rm /var/run/udhcpc*
+			/etc/init.d/dbus-1 reload
+			/etc/init.d/networking start
+			/etc/init.d/avahi-daemon start
+			[ ! -f /home/root/autoinstall.log ] && touch /etc/.doAutoinstall
+			break
+			;;
+		*)
+			break
+			;;
+	esac
+
+done

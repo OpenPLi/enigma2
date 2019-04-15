@@ -705,7 +705,7 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 				self.playlistIOInternal.addService(ServiceReference(x[0]))
 			self.playlistIOInternal.save(resolveFilename(SCOPE_PLAYLIST) + name)
 
-	def load_playlist(self):
+	def get_playlists(self):
 		listpath = []
 		playlistdir = resolveFilename(SCOPE_PLAYLIST)
 		try:
@@ -715,7 +715,14 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 			print "Error while scanning subdirs ",e
 		if config.mediaplayer.sortPlaylists.value:
 			listpath.sort()
-		self.session.openWithCallback(self.PlaylistSelected, ChoiceBox, title=_("Please select a playlist..."), list = listpath)
+		return listpath
+
+	def load_playlist(self):
+		listpath = self.get_playlists()
+		if listpath:
+			self.session.openWithCallback(self.PlaylistSelected, ChoiceBox, title=_("Please select a playlist..."), list = listpath)
+		else:
+			self.session.open(MessageBox, _("There are no saved playlists to load!"), MessageBox.TYPE_ERROR)
 
 	def PlaylistSelected(self,path):
 		if path is not None:
@@ -730,16 +737,11 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 			self.playlist.updateList()
 
 	def delete_saved_playlist(self):
-		listpath = []
-		playlistdir = resolveFilename(SCOPE_PLAYLIST)
-		try:
-			for i in os.listdir(playlistdir):
-				listpath.append((i,playlistdir + i))
-		except IOError,e:
-			print "Error while scanning subdirs ",e
-		if config.mediaplayer.sortPlaylists.value:
-			listpath.sort()
-		self.session.openWithCallback(self.DeletePlaylistSelected, ChoiceBox, title=_("Please select a playlist to delete..."), list = listpath)
+		listpath = self.get_playlists()
+		if listpath:
+			self.session.openWithCallback(self.DeletePlaylistSelected, ChoiceBox, title=_("Please select a playlist to delete..."), list = listpath)
+		else:
+			self.session.open(MessageBox, _("There are no saved playlists to delete!"), MessageBox.TYPE_ERROR)
 
 	def DeletePlaylistSelected(self,path):
 		if path is not None:

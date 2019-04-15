@@ -180,7 +180,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 		self.record_ecm = record_ecm
 		self.rename_repeat = rename_repeat
 		self.conflict_detection = conflict_detection
-		self.external = False
+		self.external = self.external_prev = False
 		self.setAdvancedPriorityFrontend = None
 		if SystemInfo["DVB-T_priority_tuner_available"] or SystemInfo["DVB-C_priority_tuner_available"] or SystemInfo["DVB-S_priority_tuner_available"] or SystemInfo["ATSC_priority_tuner_available"]:
 			rec_ref = self.service_ref and self.service_ref.ref
@@ -1141,33 +1141,6 @@ class RecordTimer(timer.Timer):
 		refstr = ':'.join(service.split(':')[:11])
 		for x in self.getAllTimersList():
 			check = ':'.join(x.service_ref.ref.toString().split(':')[:11]) == refstr
-			if not check:
-				sref = x.service_ref.ref
-				parent_sid = sref.getUnsignedData(5)
-				parent_tsid = sref.getUnsignedData(6)
-				if parent_sid and parent_tsid:
-					# check for subservice
-					sid = sref.getUnsignedData(1)
-					tsid = sref.getUnsignedData(2)
-					sref.setUnsignedData(1, parent_sid)
-					sref.setUnsignedData(2, parent_tsid)
-					sref.setUnsignedData(5, 0)
-					sref.setUnsignedData(6, 0)
-					check = sref.toCompareString() == refstr
-					num = 0
-					if check:
-						check = False
-						event = eEPGCache.getInstance().lookupEventId(sref, eventid)
-						num = event and event.getNumOfLinkageServices() or 0
-					sref.setUnsignedData(1, sid)
-					sref.setUnsignedData(2, tsid)
-					sref.setUnsignedData(5, parent_sid)
-					sref.setUnsignedData(6, parent_tsid)
-					for cnt in range(num):
-						subservice = event.getLinkageService(sref, cnt)
-						if sref.toCompareString() == subservice.toCompareString():
-							check = True
-							break
 			if check:
 				timer_end = x.end
 				timer_begin = x.begin
@@ -1333,4 +1306,12 @@ class RecordTimer(timer.Timer):
 		self.saveTimer()
 
 	def shutdown(self):
+		self.saveTimer()
+
+	def cleanup(self):
+		timer.Timer.cleanup(self)
+		self.saveTimer()
+
+	def cleanupDaily(self, days):
+		timer.Timer.cleanupDaily(self, days)
 		self.saveTimer()

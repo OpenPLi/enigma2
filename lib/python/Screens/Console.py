@@ -70,6 +70,7 @@ class Console(Screen):
 				self.cancel()
 			else:
 				self["text"].appendText(_("\nPress OK or Exit to abort!"))
+				self["key_red"].setText(_("Exit"))
 
 	def cancel(self):
 		if self.run == len(self.cmdlist):

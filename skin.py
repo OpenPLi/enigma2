@@ -42,7 +42,7 @@ class SkinError(Exception):
 
 dom_skins = [ ]
 
-def addSkin(name, scope = SCOPE_SKIN):
+def addSkin(name, scope = SCOPE_CURRENT_SKIN):
 	# read the skin
 	filename = resolveFilename(scope, name)
 	if fileExists(filename):
@@ -97,10 +97,10 @@ if not name or not res:
 addSkin('skin_box.xml')
 # add optional discrete second infobar
 addSkin('skin_second_infobar.xml')
+
 display_skin_id = 1
 addSkin('skin_display.xml')
 addSkin('skin_text.xml')
-
 addSkin('skin_subtitles.xml')
 
 try:
@@ -238,7 +238,7 @@ def parseParameter(s):
 	else:
 		return int(s)
 
-def collectAttributes(skinAttributes, node, context, skin_path_prefix=None, ignore=(), filenames=frozenset(("pixmap", "pointer", "seek_pointer", "backgroundPixmap", "selectionPixmap", "sliderPixmap", "scrollbarbackgroundPixmap"))):
+def collectAttributes(skinAttributes, node, context, skin_path_prefix=None, ignore=(), filenames=frozenset(("pixmap", "pointer", "seek_pointer", "backgroundPixmap", "selectionPixmap", "sliderPixmap", "scrollbarSliderPicture", "scrollbarbackgroundPixmap", "scrollbarBackgroundPicture"))):
 	# walk all attributes
 	size = None
 	pos = None
@@ -257,12 +257,12 @@ def collectAttributes(skinAttributes, node, context, skin_path_prefix=None, igno
 			# Similar situation for a scrollbar in a listbox; when the scrollbar setting is applied after
 			# the size, a scrollbar will not be shown until the selection moves for the first time
 			if attrib == 'size':
-			        size = value.encode("utf-8")
+				size = value.encode("utf-8")
 			elif attrib == 'position':
-			        pos = value.encode("utf-8")
+				pos = value.encode("utf-8")
 			elif attrib == 'font':
-			        font = value.encode("utf-8")
-			        skinAttributes.append((attrib, font))
+				font = value.encode("utf-8")
+				skinAttributes.append((attrib, font))
 			else:
 				skinAttributes.append((attrib, value.encode("utf-8")))
 	if pos is not None:
@@ -321,6 +321,8 @@ class AttributeParser:
 		self.guiObject.setText(_(value))
 	def font(self, value):
 		self.guiObject.setFont(parseFont(value, self.scaleTuple))
+	def secondfont(self, value):
+		self.guiObject.setSecondFont(parseFont(value, self.scaleTuple))
 	def zPosition(self, value):
 		self.guiObject.setZPosition(int(value))
 	def itemHeight(self, value):
@@ -338,6 +340,12 @@ class AttributeParser:
 		ptr = loadPixmap(value, self.desktop)
 		self.guiObject.setSliderPicture(ptr)
 	def scrollbarbackgroundPixmap(self, value):
+		ptr = loadPixmap(value, self.desktop)
+		self.guiObject.setScrollbarBackgroundPicture(ptr)
+	def scrollbarSliderPicture(self, value):	# for compability same as sliderPixmap
+		ptr = loadPixmap(value, self.desktop)
+		self.guiObject.setSliderPicture(ptr)
+	def scrollbarBackgroundPicture(self, value):	# for compability same as scrollbarbackgroundPixmap
 		ptr = loadPixmap(value, self.desktop)
 		self.guiObject.setScrollbarBackgroundPicture(ptr)
 	def alphatest(self, value):
@@ -408,6 +416,14 @@ class AttributeParser:
 		self.guiObject.setBorderColor(parseColor(value))
 	def borderWidth(self, value):
 		self.guiObject.setBorderWidth(int(value))
+	def scrollbarSliderBorderWidth(self, value):
+		self.guiObject.setScrollbarSliderBorderWidth(int(value))
+	def scrollbarWidth(self, value):
+		self.guiObject.setScrollbarWidth(int(value))
+	def scrollbarSliderBorderColor(self, value):
+		self.guiObject.setSliderBorderColor(parseColor(value))
+	def scrollbarSliderForegroundColor(self, value):
+		self.guiObject.setSliderForegroundColor(parseColor(value))
 	def scrollbarMode(self, value):
 		self.guiObject.setScrollbarMode(getattr(self.guiObject, value))
 		#	{ "showOnDemand": self.guiObject.showOnDemand,
@@ -583,6 +599,11 @@ def loadSingleSkinData(desktop, skin, path_prefix):
 					resolved_font = skin_path
 			addFont(resolved_font, name, scale, is_replacement, render)
 			#print "Font: ", resolved_font, name, scale, is_replacement
+
+		fallbackFont = resolveFilename(SCOPE_FONTS, "fallback.font", path_prefix=path_prefix)
+		if fileExists(fallbackFont):
+			addFont(fallbackFont, "Fallback", 100, -1, 0)
+
 		for alias in c.findall("alias"):
 			get = alias.attrib.get
 			try:
@@ -767,7 +788,7 @@ class SizeTuple(tuple):
 
 class SkinContext:
 	def __init__(self, parent=None, pos=None, size=None, font=None):
-	        if parent is not None:
+		if parent is not None:
 			if pos is not None:
 				pos, size = parent.parse(pos, size, font)
 				self.x, self.y = pos
@@ -778,26 +799,26 @@ class SkinContext:
 				self.w = None
 				self.h = None
 	def __str__(self):
-	        return "Context (%s,%s)+(%s,%s) " % (self.x, self.y, self.w, self.h)
+		return "Context (%s,%s)+(%s,%s) " % (self.x, self.y, self.w, self.h)
 	def parse(self, pos, size, font):
-	        if pos == "fill":
-	                pos = (self.x, self.y)
-	                size = (self.w, self.h)
-	                self.w = 0
-	                self.h = 0
+		if pos == "fill":
+			pos = (self.x, self.y)
+			size = (self.w, self.h)
+			self.w = 0
+			self.h = 0
 		else:
 			w,h = size.split(',')
 			w = parseCoordinate(w, self.w, 0, font)
 			h = parseCoordinate(h, self.h, 0, font)
 			if pos == "bottom":
-			        pos = (self.x, self.y + self.h - h)
-			        size = (self.w, h)
-			        self.h -= h
+				pos = (self.x, self.y + self.h - h)
+				size = (self.w, h)
+				self.h -= h
 			elif pos == "top":
-			        pos = (self.x, self.y)
-			        size = (self.w, h)
-			        self.h -= h
-			        self.y += h
+				pos = (self.x, self.y)
+				size = (self.w, h)
+				self.h -= h
+				self.y += h
 			elif pos == "left":
 				pos = (self.x, self.y)
 				size = (w, self.h)
@@ -816,19 +837,19 @@ class SkinContext:
 class SkinContextStack(SkinContext):
 	# A context that stacks things instead of aligning them
 	def parse(self, pos, size, font):
-	        if pos == "fill":
-	                pos = (self.x, self.y)
-	                size = (self.w, self.h)
+		if pos == "fill":
+			pos = (self.x, self.y)
+			size = (self.w, self.h)
 		else:
 			w,h = size.split(',')
 			w = parseCoordinate(w, self.w, 0, font)
 			h = parseCoordinate(h, self.h, 0, font)
 			if pos == "bottom":
-			        pos = (self.x, self.y + self.h - h)
-			        size = (self.w, h)
+				pos = (self.x, self.y + self.h - h)
+				size = (self.w, h)
 			elif pos == "top":
-			        pos = (self.x, self.y)
-			        size = (self.w, h)
+				pos = (self.x, self.y)
+				size = (self.w, h)
 			elif pos == "left":
 				pos = (self.x, self.y)
 				size = (w, self.h)
@@ -901,7 +922,7 @@ def readSkin(screen, skin, names, desktop):
 
 	# now walk all widgets and stuff
 	def process_none(widget, context):
-	        pass
+		pass
 
 	def process_widget(widget, context):
 		get_attr = widget.attrib.get
@@ -1036,20 +1057,20 @@ def readSkin(screen, skin, names, desktop):
 		if layout == 'stack':
 			cc = SkinContextStack
 		else:
-		        cc = SkinContext
+			cc = SkinContext
 		try:
 			c = cc(context, widget.attrib.get('position'), widget.attrib.get('size'), widget.attrib.get('font'))
 		except Exception, ex:
-		        raise SkinError("Failed to create skincontext (%s,%s,%s) in %s: %s" % (widget.attrib.get('position'), widget.attrib.get('size'), widget.attrib.get('font'), context, ex) )
+			raise SkinError("Failed to create skincontext (%s,%s,%s) in %s: %s" % (widget.attrib.get('position'), widget.attrib.get('size'), widget.attrib.get('font'), context, ex) )
 		process_screen(widget, c)
 
 	processors = {
-	        None: process_none,
-	        "widget": process_widget,
-	        "applet": process_applet,
-	        "eLabel": process_elabel,
-	        "ePixmap": process_epixmap,
-	        "panel": process_panel
+		None: process_none,
+		"widget": process_widget,
+		"applet": process_applet,
+		"eLabel": process_elabel,
+		"ePixmap": process_epixmap,
+		"panel": process_panel
 	}
 
 	try:

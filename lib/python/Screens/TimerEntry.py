@@ -17,7 +17,7 @@ from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Tools.Alternatives import GetWithAlternative
-from Tools.FallbackTimer import FallbackTimerList
+from Tools.FallbackTimer import FallbackTimerDirs
 from RecordTimer import AFTEREVENT
 from enigma import eEPGCache
 from time import localtime, mktime, time, strftime
@@ -33,6 +33,7 @@ class TimerEntry(Screen, ConfigListScreen):
 		self.timer.begin_prev = self.timer.begin
 		self.timer.end_prev = self.timer.end
 		self.timer.external_prev = self.timer.external
+		self.timer.dirname_prev = self.timer.dirname
 
 		self.entryDate = None
 		self.entryService = None
@@ -41,8 +42,6 @@ class TimerEntry(Screen, ConfigListScreen):
 		self["key_green"] = StaticText(_("Save"))
 		self["key_yellow"] = StaticText(_("Timer type"))
 		self["key_blue"] = StaticText("")
-
-		self.createConfig()
 
 		self["actions"] = NumberActionMap(["SetupActions", "GlobalActions", "PiPSetupActions", "ColorActions"],
 		{
@@ -63,16 +62,15 @@ class TimerEntry(Screen, ConfigListScreen):
 
 		ConfigListScreen.__init__(self, self.list, session = session)
 		self.setTitle(_("Timer entry"))
-		self.createSetup("config")
+		FallbackTimerDirs(self, self.createConfig)
 
-	def createConfig(self):
+	def createConfig(self, currlocation=None, locations=[]):
 		justplay = self.timer.justplay
 		always_zap = self.timer.always_zap
 		zap_wakeup = self.timer.zap_wakeup
 		pipzap = self.timer.pipzap
 		rename_repeat = self.timer.rename_repeat
 		conflict_detection = self.timer.conflict_detection
-		config.movielist.videodirs.load()
 
 		afterevent = {
 			AFTEREVENT.NONE: "nothing",
@@ -137,11 +135,16 @@ class TimerEntry(Screen, ConfigListScreen):
 		self.timerentry_endtime = ConfigClock(default = self.timer.end)
 		self.timerentry_showendtime = ConfigSelection(default = ((self.timer.end - self.timer.begin) > 4), choices = [(True, _("yes")), (False, _("no"))])
 
-		default = self.timer.dirname or defaultMoviePath()
+		default = not self.timer.external_prev and self.timer.dirname or defaultMoviePath()
 		tmp = config.movielist.videodirs.value
 		if default not in tmp:
 			tmp.append(default)
 		self.timerentry_dirname = ConfigSelection(default = default, choices = tmp)
+
+		default = self.timer.external_prev and self.timer.dirname or currlocation
+		if default not in locations:
+			locations.append(default)
+		self.timerentry_fallbackdirname = ConfigSelection(default=default, choices=locations)
 
 		self.timerentry_repeatedbegindate = ConfigDateTime(default = self.timer.repeatedbegindate, formatstring = _("%d.%B %Y"), increment = 86400)
 
@@ -159,6 +162,7 @@ class TimerEntry(Screen, ConfigListScreen):
 			pass
 		self.timerentry_service_ref = self.timer.service_ref
 		self.timerentry_service = ConfigSelection([servicename])
+		self.createSetup("config")
 
 	def createSetup(self, widget):
 		self.list = []
@@ -223,15 +227,16 @@ class TimerEntry(Screen, ConfigListScreen):
 		self.channelEntry = getConfigListEntry(_("Channel"), self.timerentry_service)
 		self.list.append(self.channelEntry)
 
+		self.dirname = getConfigListEntry(_("Location"), self.timerentry_fallbackdirname) if self.timerentry_fallback.value and self.timerentry_fallbackdirname.value else getConfigListEntry(_("Location"), self.timerentry_dirname)
+		if config.usage.setup_level.index >= 2 and (self.timerentry_fallback.value and self.timerentry_fallbackdirname.value or self.timerentry_dirname.value): # expert+
+			self.list.append(self.dirname)
+
 		self.conflictDetectionEntry = getConfigListEntry(_("Enable timer conflict detection"), self.timerentry_conflictdetection)
 		if not self.timerentry_fallback.value:
 			self.list.append(self.conflictDetectionEntry)
 
-		self.dirname = getConfigListEntry(_("Location"), self.timerentry_dirname)
 		self.tagsSet = getConfigListEntry(_("Tags"), self.timerentry_tagsset)
 		if self.timerentry_justplay.value != "zap" and not self.timerentry_fallback.value:
-			if config.usage.setup_level.index >= 2: # expert+
-				self.list.append(self.dirname)
 			if getPreferredTagEditor():
 				self.list.append(self.tagsSet)
 			self.list.append(getConfigListEntry(_("After event"), self.timerentry_afterevent))
@@ -420,10 +425,14 @@ class TimerEntry(Screen, ConfigListScreen):
 			self.timer.service_ref = self.timerentry_service_ref
 			self.timer.tags = self.timerentry_tags
 
-			if self.timer.dirname or self.timerentry_dirname.value != defaultMoviePath():
-				self.timer.dirname = self.timerentry_dirname.value
-				config.movielist.last_timer_videodir.value = self.timer.dirname
-				config.movielist.last_timer_videodir.save()
+
+			if self.timerentry_fallback.value:
+				self.timer.dirname = self.timerentry_fallbackdirname.value
+			else:
+				if self.timer.dirname or self.timerentry_dirname.value != defaultMoviePath():
+					self.timer.dirname = self.timerentry_dirname.value
+					config.movielist.last_timer_videodir.value = self.timer.dirname
+					config.movielist.last_timer_videodir.save()
 
 			if self.timerentry_type.value == "once":
 				self.timer.begin, self.timer.end = self.getBeginEnd()

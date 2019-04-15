@@ -151,9 +151,14 @@ class PliExtraInfo(Poll, Converter, object):
 			return ""
 		yres = info.getInfo(iServiceInformation.sVideoHeight)
 		mode = ("i", "p", " ")[info.getInfo(iServiceInformation.sProgressive)]
-		fps  = str((info.getInfo(iServiceInformation.sFrameRate) + 500) / 1000)
+		fps = (info.getInfo(iServiceInformation.sFrameRate) + 500) / 1000
+		if not fps:
+			try:
+				fps = (int(open("/proc/stb/vmpeg/0/framerate", "r").read()) + 500) / 1000
+			except:
+				pass
 		gamma = ("SDR", "HDR", "HDR10", "HLG", "")[info.getInfo(iServiceInformation.sGamma)]
-		return str(xres) + "x" + str(yres) + mode + fps + addspace(gamma)
+		return "%sx%s%s%s %s" % (xres, yres, mode, fps, gamma)
 
 	def createVideoCodec(self, info):
 		return codec_data.get(info.getInfo(iServiceInformation.sVideoType), "N/A")
@@ -265,6 +270,8 @@ class PliExtraInfo(Poll, Converter, object):
 			tmp = "MIS %d" % fedata.get("is_id")
 		if fedata.get("pls_code") > 0:
 			tmp = addspace(tmp) + "%s %d" % (fedata.get("pls_mode"), fedata.get("pls_code"))
+		if fedata.get("t2mi_plp_id") > -1:
+			tmp = addspace(tmp) + "T2MI %d PID %d" % (fedata.get("t2mi_plp_id"), fedata.get("t2mi_pid"))
 		return tmp
 
 	@cached

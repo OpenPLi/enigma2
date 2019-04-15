@@ -12,12 +12,13 @@ from Tools.BoundFunction import boundFunction
 from ServiceReference import ServiceReference
 from enigma import eServiceReference
 from Components.Pixmap import Pixmap
+from Components.Label import Label
 import os
 
 def getHotkeys():
 	return [(_("Red") + " " + _("long"), "red_long", ""),
 		(_("Green") + " " + _("long"), "green_long", ""),
-		(_("Yellow") + " " + _("long"), "yellow_long", ""),
+		(_("Yellow") + " " + _("long"), "yellow_long", "Plugins/Extensions/GraphMultiEPG/1"),
 		(_("Blue") + " " + _("long"), "blue_long", "SoftcamSetup"),
 		("F1/LAN", "f1", ""),
 		("F1" + " " + _("long"), "f1_long", ""),
@@ -99,6 +100,12 @@ def getHotkeys():
 		("Favorites" + " " + _("long"), "favorites_long", ""),
 		("Mouse", "mouse", ""),
 		("Mouse" + " " + _("long"), "mouse_long", ""),
+		("Sat", "sat", ""),
+		("Sat" + " " + _("long"), "sat_long", ""),
+		("Homepage", "homepage", ""),
+		("Homepage" + " " + _("long"), "homepage_long", ""),
+		("EjectCD", "ejectcd", ""),
+		("EjectCD" + " " + _("long"), "ejectcd_long", ""),
 		("WWW Portal", "www", ""),
 		("WWW Portal" + " " + _("long"), "www_long", "")]
 
@@ -234,6 +241,7 @@ class HotkeySetup(Screen):
 		self.session = session
 		self.setTitle(_("Hotkey Setup"))
 		self["key_red"] = StaticText(_("Exit"))
+		self["description"] = Label()
 		self.list = []
 		self.hotkeys = getHotkeys()
 		self.hotkeyFunctions = getHotkeyFunctions()
@@ -320,6 +328,7 @@ class HotkeySetup(Screen):
 					if function:
 						selected.append(ChoiceEntryComponent('',((function[0][0]), function[0][1])))
 			self["choosen"].setList(selected)
+		self["description"].setText(_("Press or select button and then press 'OK' for attach next function or edit attached.") if len(selected) else _("Press or select button and then press 'OK' for attach function."))
 
 class HotkeySetupSelect(Screen):
 	def __init__(self, session, key, args=None):
@@ -332,6 +341,7 @@ class HotkeySetupSelect(Screen):
 		self["key_yellow"] = StaticText("")
 		self["h_prev"] = Pixmap()
 		self["h_next"] = Pixmap()
+		self["description"] = Label()
 
 		self.mode = "list"
 		self.hotkeyFunctions = getHotkeyFunctions()
@@ -347,6 +357,7 @@ class HotkeySetupSelect(Screen):
 				function = list(function for function in self.hotkeyFunctions if function[1] == x )
 				if function:
 					self.selected.append(ChoiceEntryComponent('',((function[0][0]), function[0][1])))
+		text = _("Press 'OK' for attach next function or 'CH+/-' for edit attached.") if len(self.selected) else _("Press 'OK' for attach function.")
 		self.prevselected = self.selected[:]
 		if self.prevselected:
 			self["key_yellow"].setText(_("Edit selection"))
@@ -373,9 +384,8 @@ class HotkeySetupSelect(Screen):
 			"moveDown": self.moveDown,
 			"menu": boundFunction(self.close, True),
 		}, -1)
-
+		self.description(text)
 		self.showPrevNext()
-
 		self.onLayoutFinish.append(self.__layoutFinished)
 
 	def __layoutFinished(self):
@@ -400,6 +410,9 @@ class HotkeySetupSelect(Screen):
 				functionslist.append(ChoiceEntryComponent('expandable',((catagorie), "Expander")))
 		return functionslist
 
+	def description(self, msg=""):
+		self["description"].setText(msg)
+
 	def toggleMode(self):
 		if self.mode == "list" and self.selected:
 			self.mode = "choosen"
@@ -408,6 +421,7 @@ class HotkeySetupSelect(Screen):
 			self["key_yellow"].setText(_("Select function"))
 			if len(self.selected) > 1:
 				self.showPrevNext(True)
+			self.description(_("Press 'OK' for remove item or < > for change order or 'CH+/-' for toggle to list of features.") if len(self.selected) > 1 else _("Press 'OK' for remove item or 'CH+/-' for toggle to list of features."))
 		elif self.mode == "choosen":
 			self.mode = "list"
 			self["choosen"].selectionEnabled(0)
@@ -417,6 +431,8 @@ class HotkeySetupSelect(Screen):
 	def toggleText(self):
 		if self.selected:
 			self["key_yellow"].setText(_("Edit selection"))
+			if self.mode == "list":
+				self.description(_("Press 'OK' for attach next function or 'CH+/-' for edit attached."))
 		else:
 			self["key_yellow"].setText("")
 		self.showPrevNext()
@@ -456,7 +472,11 @@ class HotkeySetupSelect(Screen):
 			if not self.selected:
 				self.toggleMode()
 				self.toggleText()
-		if len(self.selected) < 2:
+		if not len(self.selected):
+			self.description(_("Press 'OK' for attach function."))
+			self.showPrevNext()
+		elif len(self.selected) < 2:
+			self.description(_("Press 'OK' for attach next function or 'CH+/-' for edit attached.") if self.mode == "list" else _("Press 'OK' for remove item or 'CH+/-' for toggle to list of features."))
 			self.showPrevNext()
 		self["choosen"].setList(self.selected)
 

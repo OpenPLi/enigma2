@@ -34,10 +34,6 @@ dvb_libenigma_dvb_a_SOURCES = \
 	dvb/fbc.cpp \
 	dvb/atsc.cpp
 
-if HAVE_AMLOGIC
-dvb_libenigma_dvb_a_SOURCES += dvb/amldecoder.cpp
-endif
-
 dvbincludedir = $(pkgincludedir)/lib/dvb
 dvbinclude_HEADERS = \
 	dvb/absdiff.h \
@@ -78,6 +74,3 @@ dvbinclude_HEADERS = \
 	dvb/encoder.h \
 	dvb/fbc.h \
 	dvb/atsc.h
-if HAVE_AMLOGIC
-dvbinclude_HEADERS += dvb/amldecoder.h
-endif

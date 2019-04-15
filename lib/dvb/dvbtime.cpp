@@ -253,7 +253,6 @@ void eDVBLocalTimeHandler::readTimeOffsetData( const char* filename )
 	if (!f)
 		return;
 	char line[256];
-	fgets(line, 256, f);
 	while (true)
 	{
 		if (!fgets( line, 256, f ))

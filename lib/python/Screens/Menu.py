@@ -166,6 +166,7 @@ class Menu(Screen, ProtectedScreen):
 
 		self["menu"] = List([])
 		self["menu"].enableWrapAround = True
+		self.showNumericHelp = False
 		self.createMenuList()
 
 		# for the skin: first try a menu_<menuID>, then Menu
@@ -176,7 +177,7 @@ class Menu(Screen, ProtectedScreen):
 
 		ProtectedScreen.__init__(self)
 
-		self["actions"] = NumberActionMap(["OkCancelActions", "MenuActions", "NumberActions"],
+		self["actions"] = NumberActionMap(["OkCancelActions", "MenuActions", "NumberActions", "HelpActions"],
 			{
 				"ok": self.okbuttonClick,
 				"cancel": self.closeNonRecursive,
@@ -190,7 +191,8 @@ class Menu(Screen, ProtectedScreen):
 				"6": self.keyNumberGlobal,
 				"7": self.keyNumberGlobal,
 				"8": self.keyNumberGlobal,
-				"9": self.keyNumberGlobal
+				"9": self.keyNumberGlobal,
+				"displayHelp": self.showHelp,
 			})
 		if config.usage.menu_sort_mode.value == "user":
 			self["EditActions"] = ActionMap(["ColorActions"],
@@ -209,7 +211,12 @@ class Menu(Screen, ProtectedScreen):
 		self.nextNumberTimer = eTimer()
 		self.nextNumberTimer.callback.append(self.okbuttonClick)
 
-	def createMenuList(self):
+	def showHelp(self):
+		if config.usage.menu_show_numbers.value not in ("menu&plugins", "menu"):
+			self.showNumericHelp = not self.showNumericHelp
+			self.createMenuList(self.showNumericHelp)
+
+	def createMenuList(self, showNumericHelp=False):
 		self.list = []
 		self.menuID = None
 		for x in self.parentmenu: #walk through the actual nodelist
@@ -278,7 +285,7 @@ class Menu(Screen, ProtectedScreen):
 			# Sort by Weight
 			self.list.sort(key=lambda x: int(x[3]))
 
-		if config.usage.menu_show_numbers.value:
+		if config.usage.menu_show_numbers.value in ("menu&plugins", "menu") or showNumericHelp:
 			self.list = [(str(x[0] + 1) + " " +x[1][0], x[1][1], x[1][2]) for x in enumerate(self.list)]
 
 		self["menu"].updateList(self.list)

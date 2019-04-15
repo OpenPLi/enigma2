@@ -81,35 +81,36 @@ class AutoInstallWizard(Screen):
 		self.container.appClosed.append(self.appClosed)
 		self.container.dataAvail.append(self.dataAvail)
 		self.package = None
-		self.counter = 0
 
 		import glob
-		autoinstallfiles = glob.glob('/media/*/backup/autoinstall%s' % open('/sys/class/net/eth0/address', 'r').readline().strip().replace(":", ""))
+		mac_address = open('/sys/class/net/eth0/address', 'r').readline().strip().replace(":", "")
+		autoinstallfiles = glob.glob('/media/*/backup/autoinstall%s' % mac_address) + glob.glob('/media/net/*/backup/autoinstall%s' % mac_address)
+		if not autoinstallfiles:
+			autoinstallfiles = glob.glob('/media/*/backup/autoinstall') + glob.glob('/media/net/*/backup/autoinstall')
 		autoinstallfiles.sort(key=os.path.getmtime, reverse=True)
 		for autoinstallfile in autoinstallfiles:
-			self.packages = [x.strip() for x in open(autoinstallfile).readlines()]
+			self.packages = [package.strip() for package in open(autoinstallfile).readlines()]
 			if self.packages:
-				self.totalpackages = len(self.packages)
+				self.number_of_packages = len(self.packages)
 				# make sure we have a valid package list before attempting to restore packages
 				self.container.execute("opkg update")
 				return
 		self.abort()
 
 	def run_console(self):
-		self.counter += 1
-		self["progress"].setValue(100 * self.counter/self.totalpackages)
+		self["progress"].setValue(100 * (self.number_of_packages - len(self.packages))/self.number_of_packages)
+		try:
+			open("/proc/progress", "w").write(str(self["progress"].value))
+		except IOError:
+			pass
 		self.package = self.packages.pop(0)
-		self["header"].setText(_("Autoinstalling %s") % self.package)
-		if self.package in [line.strip().split(":", 1)[1].strip() for line in open('/var/lib/opkg/status').readlines() if line.startswith('Package:')]:
-			self.dataAvail('skip already installed package %s\n' % self.package)
-			self.appClosed()
-		else:
-			try:
-				if self.container.execute('opkg install %s' % self.package):
-					raise Exception, "failed to execute command!"
-					self.appClosed(True)
-			except Exception, e:
+		self["header"].setText(_("%s%% Autoinstalling %s") % (self["progress"].value, self.package))
+		try:
+			if self.container.execute('opkg install %s' % self.package):
+				raise Exception, "failed to execute command!"
 				self.appClosed(True)
+		except Exception, e:
+			self.appClosed(True)
 
 	def dataAvail(self, data):
 		self["AboutScrollLabel"].appendText(data)
@@ -121,9 +122,12 @@ class AutoInstallWizard(Screen):
 				self.dataAvail("An error occurred during installing %s - Please try again later\n" % self.package)
 			else:
 				self.dataAvail("An error occurred during opkg update - Please try again later\n")
+		installed = [line.strip().split(":", 1)[1].strip() for line in open('/var/lib/opkg/status').readlines() if line.startswith('Package:')]
+		self.packages = [package for package in self.packages if package not in installed]
 		if self.packages:
 			self.run_console()
 		else:
+			self["progress"].setValue(100)
 			self["header"].setText(_("Autoinstalling Completed"))
 			self.delay = eTimer()
 			self.delay.callback.append(self.abort)

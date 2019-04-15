@@ -256,7 +256,10 @@ int eServiceWebTS::openHttpConnection(std::string url)
 	request.append("Connection: close\r\n");
 	request.append("\r\n");
 	//eDebug(request.c_str());
-	write(fd, request.c_str(), request.length());
+	if (write(fd, request.c_str(), request.length()) == -1)
+	{
+		eDebug("[eServiceWebTS] failed to write response %m");
+	}
 
 	int rc;
 	size_t buflen = 1000;

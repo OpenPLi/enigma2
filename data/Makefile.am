@@ -17,7 +17,8 @@ dist_pkgdata_DATA = \
 	freesat.t2 \
 	iso-639-3.pck \
 	timezone.xml \
-	unicable.xml
+	unicable.xml \
+	groupedservices
 
 if HAVE_TEXTLCD
 dist_pkgdata_DATA += skin_text.xml

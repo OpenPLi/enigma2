@@ -133,7 +133,19 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 			self.list.append(getConfigListEntry(_("Show notification when import channels was not successful"),
 				config.usage.remote_fallback_nok,
 				_("Show notification when import channels and/or EPG from remote receiver URL did not complete")))
-
+			self.list.append(getConfigListEntry(_("Customize OpenWebIF settings for fallback tuner"),
+				config.usage.remote_fallback_openwebif_customize,
+				_("When enabled you can customize the OpenWebIf settings for the fallback tuner")))
+			if config.usage.remote_fallback_openwebif_customize.value:
+				self.list.append(getConfigListEntry(_("User ID"),
+					config.usage.remote_fallback_openwebif_userid,
+					_("Set the User ID of the OpenWebif from your fallback tuner")))
+				self.list.append(getConfigListEntry(_("Password"),
+					config.usage.remote_fallback_openwebif_password,
+					_("Set the password of the OpenWebif from your fallback tuner")))
+				self.list.append(getConfigListEntry(_("Port"),
+					config.usage.remote_fallback_openwebif_port,
+					_("Set the port of the OpenWebif from your fallback tuner")))
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
@@ -174,6 +186,10 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 		config.usage.remote_fallback_nok.save()
 		config.usage.remote_fallback.save()
 		config.usage.remote_fallback_external_timer.save()
+		config.usage.remote_fallback_openwebif_customize.save()
+		config.usage.remote_fallback_openwebif_userid.save()
+		config.usage.remote_fallback_openwebif_password.save()
+		config.usage.remote_fallback_openwebif_port.save()
 		configfile.save()
 		if not self.remote_fallback_prev and config.usage.remote_fallback_import.value:
 			ImportChannels()

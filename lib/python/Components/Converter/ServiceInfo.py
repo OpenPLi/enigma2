@@ -1,5 +1,6 @@
 from Components.Converter.Converter import Converter
 from enigma import iServiceInformation, iPlayableService
+from Screens.InfoBarGenerics import hasActiveSubservicesForCurrentChannel
 from Components.Element import cached
 
 WIDESCREEN = [3, 4, 7, 8, 0xB, 0xC, 0xF, 0x10]
@@ -36,6 +37,10 @@ class ServiceInfo(Converter, object):
 	IS_NOT_WIDESCREEN = 28
 	IS_1080 = 29
 	IS_720 = 30
+	IS_SDR = 31
+	IS_HDR = 32
+	IS_HDR10 = 33
+	IS_HLG = 34
 
 	def __init__(self, type):
 		Converter.__init__(self, type)
@@ -71,6 +76,10 @@ class ServiceInfo(Converter, object):
 				"Is4K": (self.IS_4K, (iPlayableService.evVideoSizeChanged,)),
 				"Is1080": (self.IS_1080, (iPlayableService.evVideoSizeChanged,)),
 				"Is720": (self.IS_720, (iPlayableService.evVideoSizeChanged,)),
+				"IsSDR": (self.IS_SDR, (iPlayableService.evVideoGammaChanged,)),
+				"IsHDR": (self.IS_HDR, (iPlayableService.evVideoGammaChanged,)),
+				"IsHDR10": (self.IS_HDR10, (iPlayableService.evVideoGammaChanged,)),
+				"IsHLG": (self.IS_HLG, (iPlayableService.evVideoGammaChanged,)),
 			}[type]
 
 	def getServiceInfoString(self, info, what, convert = lambda x: "%d" % x):
@@ -118,8 +127,7 @@ class ServiceInfo(Converter, object):
 		elif self.type == self.IS_NOT_WIDESCREEN:
 			return info.getInfo(iServiceInformation.sAspect) not in WIDESCREEN
 		elif self.type == self.SUBSERVICES_AVAILABLE:
-			subservices = service.subServices()
-			return bool(subservices) and subservices.getNumberOfSubservices() > 0
+			return hasActiveSubservicesForCurrentChannel(':'.join(info.getInfoString(iServiceInformation.sServiceref).split(':')[:11]))
 		elif self.type == self.HAS_HBBTV:
 			return info.getInfoString(iServiceInformation.sHBBTVUrl) != ""
 		elif self.type == self.AUDIOTRACKS_AVAILABLE:
@@ -149,6 +157,14 @@ class ServiceInfo(Converter, object):
 			return info.getInfo(iServiceInformation.sVideoHeight) > 1000 and info.getInfo(iServiceInformation.sVideoHeight) <= 1080
 		elif self.type == self.IS_720:
 			return info.getInfo(iServiceInformation.sVideoHeight) == 720
+		elif self.type == self.IS_SDR:
+			return info.getInfo(iServiceInformation.sGamma) == 0
+		elif self.type == self.IS_HDR:
+			return info.getInfo(iServiceInformation.sGamma) == 1
+		elif self.type == self.IS_HDR10:
+			return info.getInfo(iServiceInformation.sGamma) == 2
+		elif self.type == self.IS_HLG:
+			return info.getInfo(iServiceInformation.sGamma) == 3
 		return False
 
 	boolean = property(getBoolean)

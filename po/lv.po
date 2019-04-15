@@ -3,9 +3,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-17 16:32+0100\n"
+"POT-Creation-Date: 2019-04-10 14:52+0430\n"
 "PO-Revision-Date: 2014-11-12 00:49+0200\n"
-"Last-Translator: Tapat <taapat@gmail.com>\n"
+"Last-Translator: Taapat <taapat@gmail.com>\n"
 "Language-Team: Taapat <taapat@gmail.com>\n"
 "Language: lv_LV\n"
 "MIME-Version: 1.0\n"
@@ -121,7 +121,7 @@ msgid ""
 "Timer '%s' disabled!"
 msgstr ""
 "\n"
-"Timeris '%s' izslēgts!"
+"Taimeris '%s' izslēgts!"
 
 msgid ""
 "\n"
@@ -165,6 +165,9 @@ msgstr " (mazāks kā jebkurš auto)"
 msgid " extensions."
 msgstr " paplašinājumiem."
 
+msgid " min"
+msgstr " min"
+
 msgid " ms"
 msgstr " ms"
 
@@ -172,7 +175,7 @@ msgid " packages selected."
 msgstr " pakotnes izvēlētas."
 
 msgid " updates available."
-msgstr " atjaunojumi pieejami."
+msgstr " atjauninājumi pieejami."
 
 #, python-format
 msgid "%.0f GB"
@@ -221,29 +224,26 @@ msgstr "%A %d %B"
 
 #. TRANSLATORS: long date representations dayname daynum monthname in strftime() format! See 'man strftime'
 msgid "%A %e %B"
-msgstr "%A %e %B"
+msgstr "%A %e.%B"
 
 #. TRANSLATORS: full date representation dayname daynum monthname year in strftime() format! See 'man strftime'
 msgid "%A %e %B %Y"
-msgstr "%A %e %B %Y"
+msgstr "%A %e.%B %Y"
 
 msgid "%H:%M"
 msgstr "%H:%M"
 
-msgid "%Y-%m-%d %H:%M"
-msgstr "%Y-%m-%d %H:%M"
-
 #. TRANSLATORS: full date representations short dayname daynum monthname long year in strftime() format! See 'man strftime'
 msgid "%a %e %B %Y"
-msgstr "%a %e %B %Y"
+msgstr "%a %e.%B %Y"
 
 #. TRANSLATORS: short date representation short dayname daynum short monthname in strftime() format! See 'man strftime'
 msgid "%a %e/%m"
-msgstr "%a %e/%m"
+msgstr "%a %e.%m"
 
 #. TRANSLATORS: long date representation short dayname daynum short monthname hour:minute in strftime() format! See 'man strftime'
 msgid "%a %e/%m  %-H:%M"
-msgstr "%a %e/%m  %-H:%M"
+msgstr "%a %e.%m  %-H:%M"
 
 #, python-format
 msgid "%d B"
@@ -384,7 +384,17 @@ msgstr "%d:%02d"
 
 #. TRANSLATORS: VFD hour:minute daynum short monthname in strftime() format! See 'man strftime'
 msgid "%k:%M %e/%m"
-msgstr "%k:%M %e/%m"
+msgstr "%k:%M %e.%m"
+
+#, python-format
+msgid ""
+"%s\n"
+"Do you still want to flash image\n"
+"%s?"
+msgstr ""
+"%s\n"
+"Vai tiešam vēlaties uzstādīt imidžu\n"
+"%s?"
 
 #, python-format
 msgid ""
@@ -416,9 +426,13 @@ msgstr "%s vairs neizmanto. Vai izdzēst?"
 #, python-format
 msgid "%s updated package available"
 msgid_plural "%s updated packages available"
-msgstr[0] "%s pakotnes atjaunojums pieejams"
-msgstr[1] "%s pakotņu atjaunojumi pieejami"
-msgstr[2] "%s pakotņu atjaunojumi pieejami"
+msgstr[0] "%s pakotnes atjauninājums pieejams"
+msgstr[1] "%s pakotņu atjauninājumi pieejami"
+msgstr[2] "%s pakotņu atjauninājumi pieejami"
+
+#, python-format
+msgid "%s%% Autoinstalling %s"
+msgstr "%s%% Uzstāda %s"
 
 #, python-format
 msgid "%s%d min"
@@ -606,10 +620,13 @@ msgid ": 0000 - default (disabled)"
 msgstr ": 0000 - pēc noklusējuma (nedarbosies)"
 
 msgid "<Current movielist location>"
-msgstr "<Tekošā media saraksta atrašanās vieta>"
+msgstr "<Tekošā mediju saraksta atrašanās vieta>"
+
+msgid "<Default Skin>"
+msgstr "Pēc noklusējuma"
 
 msgid "<Default movie location>"
-msgstr "<Media atrašanās vieta pēc noklusējuma>"
+msgstr "<Mediju atrašanās vieta pēc noklusējuma>"
 
 msgid "<Last timer location>"
 msgstr "<Pēdējā taimera atrašanās vieta>"
@@ -642,19 +659,22 @@ msgstr ""
 "Konfigurācijas fails (%s) kopš uzstādīšanas ir izmainīts.\n"
 "Vai vēlaties paturēt izmainīto versiju?"
 
+msgid "A file from media is in use!"
+msgstr "Tiek izmantoti faili no datu nesēja!"
+
 msgid ""
 "A finished record timer wants to set your\n"
 "receiver to standby. Do that now?"
 msgstr ""
 "Taimeris ir beidzis ierakstu un vēlas izslēgt\n"
-"uzvērēju gaidstāvē. Vai to darīt?"
+"uztvērēju gaidstāvē. Vai to darīt?"
 
 msgid ""
 "A finished record timer wants to shut down\n"
 "your receiver. Shutdown now?"
 msgstr ""
 "Taimeris ir beidzis ierakstu un vēlas izslēgt\n"
-"uzvērēju. Vai izslēgt?"
+"uztvērēju. Vai izslēgt?"
 
 msgid "A graphical EPG for all services of a specific bouquet"
 msgstr "Grafiskais EPG visiem kanāliem izvēlētajā buķetē"
@@ -688,7 +708,7 @@ msgid "A required tool (%s) was not found."
 msgstr "Vajadzīgais rīks (%s) netika atrasts."
 
 msgid "A search for available updates is currently in progress."
-msgstr "Notiek pieejamo atjaunojumu meklēšana."
+msgstr "Notiek pieejamo atjauninājumu meklēšana."
 
 msgid ""
 "A second configured interface has been found.\n"
@@ -711,7 +731,7 @@ msgid ""
 "your receiver. Shutdown now?"
 msgstr ""
 "Miega taimeris vēlas izslēgt\n"
-"uzvērēju. Vai izslēgt?"
+"uztvērēju. Vai izslēgt?"
 
 msgid "A small overview of the available icon states and actions."
 msgstr "Vienkāršs pārskats par pieejamām ikonām un darbībām."
@@ -737,6 +757,9 @@ msgstr "ACQUIRING TSID/ONID"
 
 msgid "AGC:"
 msgstr "AGC:"
+
+msgid "ASS File"
+msgstr "ASS fails"
 
 msgid "ASS file"
 msgstr "ASS fails"
@@ -880,7 +903,7 @@ msgid "After event"
 msgstr "Pēc notikuma"
 
 msgid "Aland Islands"
-msgstr "Ālandu salas"
+msgstr "Ālantu salas"
 
 msgid "Albania"
 msgstr "Albānija"
@@ -937,10 +960,10 @@ msgid "Allow 12bit"
 msgstr "Atļaut 12bit"
 
 msgid "Allow quit movieplayer with exit"
-msgstr "Iziet no media atskaņotāja ar exit taustiņu"
+msgstr "Iziet no mediju atskaņotāja ar exit taustiņu"
 
 msgid "Allow quitting movieplayer with exit"
-msgstr "Iziet no media atskaņotāja ar exit taustiņu"
+msgstr "Iziet no mediju atskaņotāja ar exit taustiņu"
 
 msgid "Allow subtitle language to equal audio language"
 msgstr "Atļaut subtitru valodu vienādu ar audio valodu"
@@ -969,6 +992,17 @@ msgstr "Arī pēc gaidstāves"
 msgid "Alternative"
 msgstr "Alternatīvas"
 
+#, fuzzy
+msgid "Alternative 1"
+msgstr "Alternatīvas"
+
+#, fuzzy
+msgid "Alternative 2"
+msgstr "Alternatīvas"
+
+msgid "Alternative URL for images listed on FlashImage"
+msgstr "Adrese papildus imidžu uzstādīšanai"
+
 msgid "Alternative numbering mode"
 msgstr "Alternatīvais numuru režīms"
 
@@ -994,7 +1028,7 @@ msgid "An empty filename is illegal."
 msgstr "Faila nosaukums nevar būt tukšs."
 
 msgid "An error occurred - Please try again later"
-msgstr "Ir gadījusies kļūda - Lūdzu mēginiet vēlāk"
+msgstr "Ir gadījusies kļūda - Lūdzu mēģiniet vēlāk"
 
 msgid "An error occurred while downloading the packetlist. Please try again."
 msgstr "Kļūda lejupielādējot pakotņu sarakstu. Lūdzu mēģiniet vēlreiz."
@@ -1140,8 +1174,15 @@ msgstr "Audio un video iestatījumi"
 msgid "Audio PID"
 msgstr "Audio PID"
 
+#, python-format
+msgid "Audio PID%s, codec & lang"
+msgstr "Audio PID%s informācija"
+
+msgid "Audio PID, codec & lang"
+msgstr "Audio informācija"
+
 msgid "Audio auto volume level"
-msgstr "Automatiskā skaļuma līmenis"
+msgstr "Automātiskā skaļuma līmenis"
 
 msgid "Audio language selection 1"
 msgstr "Audio valodas izvēle 1"
@@ -1217,10 +1258,6 @@ msgstr "Automātiski atskaņot blu-ray"
 
 msgid "Auto scart switching"
 msgstr "Automātiska SCART pārslēgšana"
-
-#, python-format
-msgid "Autoinstalling %s"
-msgstr "Uzstāda %s"
 
 msgid "Autoinstalling Completed"
 msgstr "Uzstādīšana pabeigta"
@@ -1325,6 +1362,9 @@ msgstr "Bangladeša"
 msgid "Barbados"
 msgstr "Barbadosa"
 
+msgid "Basic PID info"
+msgstr "Pamata info"
+
 msgid "Basque"
 msgstr "Basku"
 
@@ -1332,7 +1372,7 @@ msgid "Begin time"
 msgstr "Sākuma laiks"
 
 msgid "Behavior of 'pause and ok' when paused"
-msgstr "Taustiņu 'pause un ok' darbība pauzē"
+msgstr "Taustiņu 'pauze un ok' darbība pauzē"
 
 msgid "Behavior of 0 key in PiP-mode"
 msgstr "0 taustiņa nozīme PiP režīmā"
@@ -1523,6 +1563,9 @@ msgstr "Kamerūna"
 msgid "Can be used for different fps between external subtitles and video."
 msgstr "Tiek lietots dažādiem fps starp ārējiem subtitriem un video"
 
+msgid "Can only find a network drive to store the backup this means after the flash the autorestore will not work. Alternativaly you can mount the network drive after the flash and perform a manufacurer reset to autorestore"
+msgstr "Ir atrasts tikai tīkla disks kur saglabāt rezerves kopiju. Tas nozīmē, ka pēc imidža uzstādīšanas automātiskā atjaunošana nenotiks. Jūs varat piemontēt tīkla disku pēc imidža uzstādīšanas un izmantot rūpnīcas uzstādījumus lai automātiski atjaunotu iestatījumus."
+
 msgid "Canada"
 msgstr "Kanāda"
 
@@ -1534,6 +1577,9 @@ msgstr "Atcelt teksta izmaiņas un iziet"
 
 msgid "Cancelled upon user request"
 msgstr "Atcelts pēc lietotāja pieprasījuma"
+
+msgid "Cannot delete downloaded image"
+msgstr "Nevar izdzēst lejupielādēto imidžu!"
 
 msgid "Cannot determine"
 msgstr "Nevar noteikt"
@@ -1669,7 +1715,7 @@ msgid "Check the internet connection again"
 msgstr "Pārbaudīt interneta savienojumu vēlreiz"
 
 msgid "Checking filesystem..."
-msgstr "Pārbauda failsistēmu..."
+msgstr "Pārbauda failu sistēmu..."
 
 msgid "Checking the internet connection"
 msgstr "Pārbauda interneta savienojumu"
@@ -1736,6 +1782,9 @@ msgstr "Dzēst žurnālu"
 msgid "Clear playlist"
 msgstr "Dzēst repertuāru"
 
+msgid "Client is streaming from this box!"
+msgstr "Klients straumē no uztvērēja!"
+
 msgid "Clone TV screen to LCD"
 msgstr "Kopēt TV ekrānu uz LCD"
 
@@ -1746,7 +1795,7 @@ msgid "Close"
 msgstr "Aizvērt"
 
 msgid "Close PiP on exit"
-msgstr "Izejot aizvēt PiP"
+msgstr "Izejot aizvērt PiP"
 
 msgid "Close title selection"
 msgstr "Aizvērt virsrakstu atlasi"
@@ -1774,6 +1823,9 @@ msgstr "Kolumbija"
 
 msgid "Color format"
 msgstr "Krāsu formāts"
+
+msgid "Combined"
+msgstr "Apvienotais"
 
 msgid "Combo"
 msgstr "Combo"
@@ -1830,6 +1882,18 @@ msgstr "Konfigurēšanas režīms: %s"
 msgid "Configuration..."
 msgstr "Konfigurācija..."
 
+msgid "Configure ATSC"
+msgstr "Iestatīt ATSC"
+
+msgid "Configure DVB-C"
+msgstr "Iestatīt DVB-C"
+
+msgid "Configure DVB-S"
+msgstr "Iestatīt DVB-S"
+
+msgid "Configure DVB-T"
+msgstr "Iestatīt DVB-T"
+
 msgid "Configure an additional delay to improve external subtitle synchronisation."
 msgstr "Uzstāda papildus aizturi lai darbotos ārējo subtitru sinhronizācija."
 
@@ -1858,13 +1922,13 @@ msgid "Configure if and how long the latest service in the PiP will be remembere
 msgstr "Uzstāda vai un cik ilgi atcerēsies pēdējo attēls attēlā kanālu."
 
 msgid "Configure if and how service type icons will be shown in the channel selection list."
-msgstr "Uzstāda vai un kā tiks rādītas kanālu tipu ikonas kanālu srakstā."
+msgstr "Uzstāda vai un kā tiks rādītas kanālu tipu ikonas kanālu sarakstā."
 
 msgid "Configure if and how the record indicator will be shown in the channel selection list."
-msgstr "Uzstāda vai un kā tiks attēlots ieraksta indikators kanālu srakstā."
+msgstr "Uzstāda vai un kā tiks attēlots ieraksta indikators kanālu sarakstā."
 
 msgid "Configure if and how wide columns will be shown in the channel selection list."
-msgstr "Uzstāda vai un kādā platumā kolona tiks attēlota kanālu srakstā."
+msgstr "Uzstāda vai un kādā platumā kolona tiks attēlota kanālu sarakstā."
 
 msgid "Configure if behind the subtitles a background is shown."
 msgstr "Uzstāda vai subtitriem lietot tumšu fonu."
@@ -1903,7 +1967,7 @@ msgid "Configure the aspect ratio of the screen."
 msgstr "Konfigurēt ekrāna proporcijas."
 
 msgid "Configure the behavior of the 'pause and ok' key when movie playback is already paused."
-msgstr "Uzstāda darbību 'pause and ok' taustiņiem kad filmas atskaņošana ir nopauzēta."
+msgstr "Uzstāda darbību pauze un ok taustiņiem kad filmas atskaņošana ir nopauzēta."
 
 msgid "Configure the behavior when movie playback is manually stopped."
 msgstr "Uzstāda darbību kad filma ir manuāli apturēta."
@@ -1924,7 +1988,7 @@ msgid "Configure the brightness level of the front panel display."
 msgstr "Uzstāda spilgtuma līmeni priekšējā paneļa displejā."
 
 msgid "Configure the color of the external subtitles, alternative (normal in white, italic in yellow, bold in cyan, underscore in green), white or yellow."
-msgstr "Uzstāda ārējo subtitru krāsu, altrenatīvie (normāli balti, slīpi dzelteni, trekni gaiši zili, pasvītroti zaļi), balti vai dzelteni."
+msgstr "Uzstāda ārējo subtitru krāsu, alternatīvie (normāli balti, slīpi dzelteni, trekni gaiši zili, pasvītroti zaļi), balti vai dzelteni."
 
 msgid "Configure the color of the teletext subtitles."
 msgstr "Uzstāda teleteksta subtitru krāsa."
@@ -1933,7 +1997,7 @@ msgid "Configure the contrast level of the front panel display."
 msgstr "Uzstāda kontrasta līmeni priekšējā paneļa displejā."
 
 msgid "Configure the cursor behaviour in the channel selection list. When opening the channel selection list you can keep on the current service or already select up/down and you are able to revert the B+/B- buttons."
-msgstr "Uzstāda kursora darbību atverot kanālu srakstu ar augšup/lejup taustiņiem. Kad atverat kanālu srakstu jūs varat izvēlēties aktīvo kanālu, vai izvēlēties un revertēt nākošo ar B+/B- taustiņiem."
+msgstr "Uzstāda kursora darbību atverot kanālu sarakstu ar augšup/lejup taustiņiem. Kad atverat kanālu sarakstu jūs varat paturēt aktīvo kanālu, vai izvēlēties sarakstā kanālu augšup vai lejup un atcelt B+/B- taustiņus."
 
 msgid "Configure the duration in hours the receiver should go to standby when the receiver is not controlled."
 msgstr "Uzstāda laiku stundās pēc kāda uztvērējam pāriet gaidstāvē ja uztvērēju nekontrolē."
@@ -2080,7 +2144,7 @@ msgid "Configure the tuner mode."
 msgstr "Uzstāda uztvērēja režīmu."
 
 msgid "Configure the type of status indication icons shown in the movielist."
-msgstr "Uzstāda statusa indikatora ikonas veidu media sarakstā."
+msgstr "Uzstāda statusa indikatora ikonas veidu mediju sarakstā."
 
 msgid "Configure the vertical position of the subtitles, measured from the bottom of the screen."
 msgstr "Uzstāda subtitru vertikālo pozīciju no ekrāna apakšas."
@@ -2119,10 +2183,10 @@ msgid "Configure which color format should be used on the SCART output."
 msgstr "Uzstāda kādu krāsu formātu lietot SCART izejā."
 
 msgid "Configure which tuner for recordings will be preferred, when more than one tuner is available."
-msgstr "Uzstāda kuram uztvērējam dot priekšroku ierakstot, ja pieejams virāk kā viens uztvērējs."
+msgstr "Uzstāda kuram uztvērējam dot priekšroku ierakstot, ja pieejams vairāk kā viens uztvērējs."
 
 msgid "Configure which tuner type will be preferred when the same service is available on different types of tuners. Choose 'no priority' to try each alternative one by one regardless of the tuner type."
-msgstr "Uzstāda kādam uztvērēja tipam dot priekšroku, ja viens un tas pats kanāls pieejams dažādos uztvērējos. Ivēlieties 'bez prioritātes' lai neatkarīgi no uztvērēja tipa mēģinātu visus pēc kārtas."
+msgstr "Uzstāda kādam uztvērēja tipam dot priekšroku, ja viens un tas pats kanāls pieejams dažādos uztvērējos. Izvēlieties 'bez prioritātes' lai neatkarīgi no uztvērēja tipa mēģinātu visus pēc kārtas."
 
 msgid "Configure which tuner will be preferred, when more than one tuner is available. If set to 'auto' the system will give priority to the tuner having the lowest number of channels/satellites."
 msgstr "Uzstāda kuram uztvērējam dot priekšroku ja pieejams vairāk kā viens uztvērējs. Ja norādīsiet 'auto', sistēma izvēlēsies uztvērēju ar mazāko kanāla/pavadoņa numuru."
@@ -2134,7 +2198,7 @@ msgid "Configure your network again"
 msgstr "Atkārtoti konfigurēt jūsu tīklu"
 
 msgid "Configure your network settings and press OK to scan"
-msgstr "Uztādiet jūsu tīkla iestatījumus un nospiediet OK lai sāktu pārbaudi"
+msgstr "Iestatiet jūsu tīkla iestatījumus un nospiediet OK lai sāktu pārbaudi"
 
 msgid "Configure your wireless LAN again"
 msgstr "Atkārtoti uzstāda jūsu bezvadu tīklu"
@@ -2178,9 +2242,8 @@ msgstr "Konsole"
 msgid "Constellation & FFT mode"
 msgstr "Modulācija un FFT režīms"
 
-#, fuzzy
 msgid "Consult your SCR device spec sheet for this information."
-msgstr "Lai iegūtu papildus informāciju izmantojiet Unicable ierīces specifikāciju."
+msgstr "Lai iegūtu papildus informāciju izmantojiet SCR ierīces specifikāciju."
 
 msgid "Consult your motor's spec sheet for this information, or leave the default setting."
 msgstr "Lai iegūtu papildus informāciju izmantojiet motora specifikāciju vai izmantojiet noklusētos iestatījumus."
@@ -2255,7 +2318,7 @@ msgid "Creating directory %s failed."
 msgstr "Neizdevās izveidot mapi %s."
 
 msgid "Creating filesystem"
-msgstr "Izveido failsistēmu"
+msgstr "Izveido failu sistēmu"
 
 msgid "Creating partition"
 msgstr "Izveidot partīciju"
@@ -2305,7 +2368,7 @@ msgid "Current value: "
 msgstr "Pašreizējā vērtība: "
 
 msgid "Currently the commit log cannot be retrieved - please try later again"
-msgstr "Pašreiz izmaiņu žurnāls nav pieejams- lūdzu mēginiet vēlāk"
+msgstr "Pašreiz izmaiņu žurnāls nav pieejams- lūdzu mēģiniet vēlāk"
 
 msgid "Custom skip time for '1'/'3' buttons"
 msgstr "Pārlēciena laiks '1'/'3' taustiņiem"
@@ -2319,8 +2382,11 @@ msgstr "Pārlēciena laiks '7'/'9' taustiņiem"
 msgid "Customize"
 msgstr "Iestatījumi"
 
+msgid "Customize OpenWebIF settings for fallback tuner"
+msgstr "Pielāgot OpenWebIF iestatījumus attālinātam uztvērējam"
+
 msgid "Customize channel list cursor behavior"
-msgstr "Kursora darbība atverot kanālu srakstu"
+msgstr "Kursora darbība atverot kanālu sarakstu"
 
 msgid "Cut"
 msgstr "Griezt"
@@ -2363,6 +2429,9 @@ msgstr "Dubultslāņu DVD"
 
 msgid "DVB CI Delay"
 msgstr "DVB CI aizture"
+
+msgid "DVB Subtitles PID & lang"
+msgstr "DVB subtitri un valoda"
 
 msgid "DVB driver version: "
 msgstr "DVB draivera versija: "
@@ -2425,7 +2494,10 @@ msgid "Date/time input"
 msgstr "Datuma/laika ievade"
 
 msgid "Debug to file"
-msgstr "Rakstīt drabību failā"
+msgstr "Rakstīt darbību failā"
+
+msgid "Deep Standby LED"
+msgstr "LED izslēdzot"
 
 msgid "Deep standby"
 msgstr "Izslēgt"
@@ -2437,7 +2509,7 @@ msgid "Default Services Scanner"
 msgstr "Kanālu meklētājs pēc noklusējuma"
 
 msgid "Default movie location"
-msgstr "Media failu atrašanās vieta pēc noklusējuma"
+msgstr "Mediju failu atrašanās vieta pēc noklusējuma"
 
 msgid "Default settings"
 msgstr "Noklusējuma iestatījumi"
@@ -2446,13 +2518,13 @@ msgid "Define the location of the EPG Cache file."
 msgstr "Norādiet EPG kešatmiņas faila atrašanās vietu."
 
 msgid "Delay after change voltage before switch command"
-msgstr "Aizture pēc sprieguma izamiņas līdz komutatora komandai"
+msgstr "Aizture pēc sprieguma izmaiņas līdz komutatora komandai"
 
 msgid "Delay after continuous tone disable before diseqc"
 msgstr "Aizture pēc nepārtraukta signāla atslēgšanas pirms DiSEqC"
 
 msgid "Delay after diseqc peripherial poweron command"
-msgstr "Aizture pēc DiSEqC perifērijas barošanas izslēg. komandas"
+msgstr "Aizture pēc DiSEqC perifērijas barošanas izslēgt komandas"
 
 msgid "Delay after diseqc reset command"
 msgstr "Aizture pēc DiSEqC reset komandas"
@@ -2664,6 +2736,15 @@ msgstr "Attēlot 4:3 saturu"
 msgid "Display >16:9 content as"
 msgstr "Attēlot >16:9 saturu"
 
+msgid "Display EPG as MultiEPG"
+msgstr "Rādīt daudzkanālu EPG"
+
+msgid "Display EPG info for current event"
+msgstr "Rādīt EPG informāciju pašreizējai pārraidei."
+
+msgid "Display EPG list for current channel"
+msgstr "Rādīt EPG sarakstu pašreizējai pārraidei."
+
 msgid "Display and userinterface"
 msgstr "Attēla un lietotāja interfeiss"
 
@@ -2671,13 +2752,13 @@ msgid "Display message before playing next movie"
 msgstr "Parādīt paziņojumu pirms atskaņo nākošo filmu"
 
 msgid "Display movie length in movielist (except single line style)."
-msgstr "Attēlot ierakstu garumu madia sarakstā (izņemot vienas rindas režīmā)."
+msgstr "Attēlot ierakstu garumu mediju sarakstā (izņemot vienas rindas režīmā)."
 
 msgid "Display setup"
 msgstr "Displeja iestatījumi"
 
 msgid "Djibouti"
-msgstr "Džibutija"
+msgstr "Džibuti"
 
 msgid "Do a cable service scan now"
 msgstr "Veikt kabeļu kanālu meklēšanu"
@@ -2704,7 +2785,7 @@ msgid "Do not record"
 msgstr "Nerakstīt"
 
 msgid "Do not show file extensions for registered multimedia files."
-msgstr "Nerādīt failu paplašinājumus zināmiem multimedia failiem."
+msgstr "Nerādīt failu paplašinājumus zināmiem multimediju failiem."
 
 msgid "Do nothing"
 msgstr "Nedarīt neko"
@@ -2713,7 +2794,7 @@ msgid ""
 "Do you really want to check the filesystem?\n"
 "This could take lots of time!"
 msgstr ""
-"Vai tiešām vēlaties pārbaudīt failsistēmu?\n"
+"Vai tiešām vēlaties pārbaudīt failu sistēmu?\n"
 "Tas var prasīt daudz laika!"
 
 #, python-format
@@ -2754,6 +2835,10 @@ msgstr "Vai tiešām vēlaties dzēst mapi %s no diska?"
 msgid "Do you really want to remove your bookmark of %s?"
 msgstr "Vai tiešām vēlaties dzēst grāmatzīmi %s?"
 
+#, python-format
+msgid "Do you really want to stop current event and delete timer %s?"
+msgstr "Vai tiešām vēlaties apturēt pašreizējo notikumu un dzēst taimeri %s?"
+
 msgid "Do you want this?"
 msgstr "Vai to vēlaties?"
 
@@ -2784,7 +2869,7 @@ msgid "Do you want to play DVD in drive?"
 msgstr "Vai vēlaties atskaņot DVD?"
 
 msgid "Do you want to preview this DVD before burning?"
-msgstr "Vai vēlaties priekšskatīt šo DVD pirms rakstīšanas?"
+msgstr "Vai vēlaties priekš skatīt šo DVD pirms rakstīšanas?"
 
 msgid "Do you want to quit the overscan wizard?"
 msgstr "Vai tiešām vēlaties iziet no šī veidņa?"
@@ -2793,7 +2878,7 @@ msgid "Do you want to reboot your receiver?"
 msgstr "Vai vēlaties pārstartēt uztvērēju?"
 
 msgid "Do you want to remove all the crahs logfiles"
-msgstr "Vai vēlaties dzēst visus logfailus"
+msgstr "Vai vēlaties dzēst visus žurnāla failus"
 
 msgid "Do you want to remove the package:\n"
 msgstr "Vai vēlaties dzēst pakotni:\n"
@@ -2824,7 +2909,7 @@ msgid "Dominica"
 msgstr "Dominika"
 
 msgid "Dominican Republic"
-msgstr "Dominikānas republika"
+msgstr "Dominikas republika"
 
 msgid "Don't save and stop timeshift"
 msgstr "Nesaglabāt un apturēt laika aizturi"
@@ -2840,6 +2925,9 @@ msgstr "Nepārslēgt izslēgt taimeri"
 
 msgid "Don't zap and remove timer"
 msgstr "Nepārslēgt un dzēst taimeri"
+
+msgid "Done"
+msgstr ""
 
 #, python-format
 msgid "Done - Installed, upgraded or removed %d package (%s)"
@@ -2958,6 +3046,9 @@ msgstr "Salvadora"
 msgid "Electronic Program Guide"
 msgstr "Elektroniskais Programmu Gids"
 
+msgid "Embedded"
+msgstr "Iekšējais"
+
 msgid "Empty slot"
 msgstr "Tukšs slots"
 
@@ -2975,6 +3066,9 @@ msgstr "Aktivizēt 5V aktīvai antenai"
 
 msgid "Enable EIT EPG"
 msgstr "Aktivizēt EIT EPG"
+
+msgid "Enable HDMI-CEC"
+msgstr "Izmantot HDMI-CEC iestatījumus"
 
 msgid "Enable MHW EPG"
 msgstr "Aktivizēt MHW EPG"
@@ -2995,14 +3089,14 @@ msgid "Enable Virgin EPG"
 msgstr "Aktivizēt Virgin EPG"
 
 msgid "Enable auto cable scan"
-msgstr "Aktivizēt kabeļu tīkla auto skanēšanu"
+msgstr "Aktivizēt kabeļu tīkla auto skenēšanu"
 
 msgid "Enable auto fast scan"
-msgstr "Aktivizēt ātro auto skanēšanu"
+msgstr "Aktivizēt ātro auto skenēšanu"
 
 #, python-format
 msgid "Enable auto fast scan for %s"
-msgstr "Aktivizēt ātro auto skanēšanu priekš %s"
+msgstr "Aktivizēt ātro auto skenēšanu priekš %s"
 
 msgid "Enable bouquet selection in multi-EPG"
 msgstr "Aktivizēt buķešu izvēli multi-EPG"
@@ -3023,7 +3117,7 @@ msgid "Enable parental protection"
 msgstr "Aktivizēt vecāku kontroli"
 
 msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
-msgstr "Izmantot citu Enigma2 uztvērēju, kuru lietot lai mēģinātu uztvert kanālu kurš nav uztverams lokāli (piem. uztvērējs ir aizņemts vai kanāla veids nav pieejams lokālajā uztvērējā). Norādiet pilnu adresi ieskaitot http:// un porta numuru (pēc nolkusējuma ...:8001), piem. http://second_box:8001."
+msgstr "Izmantot citu Enigma2 uztvērēju, kuru lietot lai mēģinātu uztvert kanālu kurš nav uztverams lokāli (piem. uztvērējs ir aizņemts vai kanāla veids nav pieejams lokālajā uztvērējā). Norādiet pilnu adresi ieskaitot http:// un porta numuru (pēc noklusējuma ...:8001), piem. http://second_box:8001."
 
 msgid "Enable teletext caching"
 msgstr "Aktivizēt teleteksta kešošanu"
@@ -3080,11 +3174,15 @@ msgstr "Angļu"
 msgid "Enigma (re)starts: %d\n"
 msgstr "Enigma (pār)startēta: %d reizes\n"
 
+#, python-format
+msgid "Enigma debug level: %d\n"
+msgstr "Atkļūdošanas līmenis: %d\n"
+
 msgid "Enigma version: "
 msgstr "Enigmas versija: "
 
 msgid "Enigma2 skin selector"
-msgstr "Enigma2 noformējuma izvēle"
+msgstr "Noformējuma izvēle"
 
 #, fuzzy
 msgid "Enter"
@@ -3098,6 +3196,9 @@ msgstr "Ievadiet PIN"
 
 msgid "Enter URL"
 msgstr "Adrese (URL)"
+
+msgid "Enter an URL where alternative images could be listed for FlashImage"
+msgstr "Ievadiet adresi (URL), kur atrodas alternatīvie imidži kurus izmantot uzstādīšanai."
 
 msgid "Enter if you are in the east or west hemisphere."
 msgstr "Ievadiet, ja esat austrumu vai rietumu puslodē."
@@ -3113,10 +3214,6 @@ msgstr "Ievadiet patstāvīgo PIN kodu"
 
 msgid "Enter pin code"
 msgstr "Ievadiet PIN kodu"
-
-#, fuzzy
-msgid "Enter text and exit"
-msgstr "Atcelt teksta izmaiņas un iziet"
 
 msgid "Enter the frequency at which you LNB switches between low band and high band. For more information consult the spec sheet of your LNB."
 msgstr "Ievadiet frekvenci, kurā jūs LNB pārslēdzas no zemas joslas uz augstu joslu. Plašāku informāciju skatiet LNB specifikācijā."
@@ -3288,10 +3385,10 @@ msgid "Exit mediaplayer"
 msgstr "Iziet no mediju atskaņotāja"
 
 msgid "Exit movie list"
-msgstr "Iziet no media saraksta"
+msgstr "Iziet no mediju saraksta"
 
 msgid "Exit movie player?"
-msgstr "Iziet no media atskaņotāja?"
+msgstr "Iziet no mediju atskaņotāja?"
 
 msgid "Exit nameserver configuration"
 msgstr "Iziet no DNS konfigurācijas"
@@ -3322,6 +3419,9 @@ msgstr "Paildzināt miega taimeri par 15 minūtēm"
 
 msgid "Extended"
 msgstr "Papildus"
+
+msgid "Extended PID info"
+msgstr "Papildus info"
 
 msgid "Extended Software"
 msgstr "Papildus programmatūra"
@@ -3426,7 +3526,7 @@ msgid ""
 "\n"
 "Do you really want to proceed?"
 msgstr ""
-"Rūpnīcas iestatījumi atjaunos jūsu uztvērēju uz noklusējuma konfigurāciju. Visi lietotāja dati, tostarp sistēmas iestatījumi, uztvērēja konfigurācija, buķetes, kanāli un spraudņi tiks DZĒSTI. Ieraksti un citi faili, kas tiek saglabāti cietajā diskā un USB datu nesējos, paliks neskarti. Pēc pabeigšanas sistēma automātiski restartēsies!\n"
+"Rūpnīcas iestatījumi atjaunos jūsu uztvērēju uz noklusējuma konfigurāciju. Visi lietotāja dati, tostarp sistēmas iestatījumi, uztvērēja konfigurācija, buķetes, kanāli un spraudņi tiks DZĒSTI. Ieraksti un citi faili, kas tiek saglabāti cietajā diskā un USB datu nesējos, paliks neskarti. Pēc pabeigšanas sistēma automātiski pārstartēsies!\n"
 "\n"
 "Vai tiešām vēlaties turpināt?"
 
@@ -3512,7 +3612,7 @@ msgid "Filename"
 msgstr "Fails"
 
 msgid "Filesystem check"
-msgstr "Failsistēmas pārbaude"
+msgstr "Failu sistēmas pārbaude"
 
 msgid "Final position at"
 msgstr "Beigu pozīcija"
@@ -3521,7 +3621,7 @@ msgid "Final position at index"
 msgstr "Beigu pozīcija indeksā"
 
 msgid "Final scroll delay"
-msgstr "Pēdājās ritināšanas aizture"
+msgstr "Pēdējās ritināšanas aizture"
 
 msgid "Fine movement"
 msgstr "Precīzā pārvietošana"
@@ -3556,12 +3656,12 @@ msgstr "Uzstādīt imidžu"
 msgid "Flashing Image"
 msgstr "Uzstāda imidžu"
 
-msgid "Flashing image succesfull"
+msgid "Flashing image successful"
 msgstr "Imidžs ir veiksmīgi uzstādīts"
 
 #, python-format
 msgid ""
-"Flashing image was not succesfull\n"
+"Flashing image was not successful\n"
 "%s"
 msgstr ""
 "Imidžs nav veiksmīgi uzstādīts\n"
@@ -3569,12 +3669,6 @@ msgstr ""
 
 msgid "Following tasks will be done after you press OK!"
 msgstr "Šādi uzdevumi tiks veikti pēc tam, kad nospiedīsiet OK!"
-
-msgid "Force LNB Power"
-msgstr "Izslēgt LNB barošanu"
-
-msgid "Force ToneBurst"
-msgstr "Piespiedu toņsignāls"
 
 msgid "Force legacy signal stats"
 msgstr "Piespiedu mantoto signālu statistika"
@@ -3874,9 +3968,8 @@ msgstr "HDR10"
 msgid "HDR10 support"
 msgstr "HDR10 atbalsts"
 
-#, fuzzy
 msgid "HDx1/HD1xxx/HD5x0C/VS1x00/et7x00/et8500/et7000mini"
-msgstr "HD11/HD51/HD1100/HD1200/HD1265/HD1500/HD500C/HD530C/VS1000/VS1500/et7x00/et8500/et7000mini"
+msgstr "HDx1/HD1xxx/HD5x0C/VS1x00/et7x00/et8500/et7000mini"
 
 msgid "HELP"
 msgstr "Palīdzība"
@@ -3921,7 +4014,7 @@ msgid "Hebrew"
 msgstr "Ebreju"
 
 msgid "Helps setting up your antenna"
-msgstr "Palīdzēs ietstīt jūsu antenu"
+msgstr "Palīdzēs iestatīt jūsu antenu"
 
 msgid "Hidden network"
 msgstr "Neredzams tīkls"
@@ -4035,16 +4128,19 @@ msgid "IP of fallback remote receiver"
 msgstr "Attālinātā rezerves uztvērēja IP adrese"
 
 msgid "ISO file is too large for this filesystem!"
-msgstr "ISO fails ir par lielu šai failsistēmai!"
+msgstr "ISO fails ir par lielu šai failu sistēmai!"
 
 msgid "ISO path"
 msgstr "ISO ceļš"
 
 msgid "Iceland"
-msgstr "Īslande"
+msgstr "Islande"
 
 msgid "Icons"
 msgstr "Ikona"
+
+msgid "If enabled, bookmarks will be updated with the new location when you move or copy a recording."
+msgstr "Ja iespējots, pēc tam kad jūs pārvietosiet vai kopēsiet ierakstu, grāmatzīmes tiks atjaunotas."
 
 msgid "If enabled, display shows 12 chars instead 8, but in latin-1/translit only."
 msgstr "Ja iespējots, attēlo 12 rindas nevis 8. Izmantojams tikai priekš latin-1/translit."
@@ -4052,14 +4148,11 @@ msgstr "Ja iespējots, attēlo 12 rindas nevis 8. Izmantojams tikai priekš lati
 msgid "If enabled, then there will be displayed icons for new/unseen items too."
 msgstr "Ja ieslēgts, tad jauniem vai neskatītiem ierakstiem arī tiks rādīta statusa ikona."
 
-msgid "If is disabled, then after Copy/Move will not be target directory stored into bookmarks."
-msgstr "Ja ieslēgts, tad pēc faila kopēšanas vai pārvietošanas mērķa direktorija tiks saglabāta grāmatzīmēs."
-
 msgid "If is enabled and movie playback is finished, then after return to movielist will not be automaticaly start service playback."
-msgstr "Ja ieslēgts un filmas atskaņošana bidzas, tad pēc atgriešanās media sarakstā kanāls netiks atskaņots."
+msgstr "Ja ieslēgts un filmas atskaņošana beidzas, tad pēc atgriešanās mediju sarakstā kanāls netiks atskaņots."
 
 msgid "If set as 'Yes', then audiofiles are played in 'list mode' only, instead in full screen player."
-msgstr "Ja iestatīts 'jā', tad audio failus atskaņos 'saraksta režīmā', nevis standarta media atskaņotāja logā."
+msgstr "Ja iestatīts 'jā', tad audio failus atskaņos 'saraksta režīmā', nevis standarta mediju atskaņotāja logā."
 
 msgid "If set to 'yes' signal values (SNR, etc) will be calculated from API V3. This is an old API version that has now been superseded."
 msgstr "Ja iestatīts 'jā', signāla vērtības (SNR utt.) tiks aprēķinātas no API V3. Šī ir vecā API versija, kas tagad ir aizstāta."
@@ -4089,7 +4182,7 @@ msgid ""
 "Do not care about the bright shades now. They will be set up in the next step.\n"
 "If you are happy with the result, press OK."
 msgstr ""
-"Ja Jūsu TV ir ieslēgta spilgtuma vai kontrasta uzlabošana, deaktivizējiet to. Ja ir iestatījums ar nosaukumu \"dinamiskā \", lietojiet standarta iestatījumu. Noregulējiet fona līmeni līdz jums tīkamai vērtībai. Noregulējiet iespējami zemu TV kontrastu.\n"
+"Ja Jūsu TV ir ieslēgta spilgtuma vai kontrasta uzlabošana, deaktivējiet to. Ja ir iestatījums ar nosaukumu \"dinamiskā \", lietojiet standarta iestatījumu. Noregulējiet fona līmeni līdz jums tīkamai vērtībai. Noregulējiet iespējami zemu TV kontrastu.\n"
 "Tad noregulējiet iespējami zemu spilgtuma iestatījumu, bet pārliecinieties, ka divi apakšējie pelēkā toņi ir izšķirami.\n"
 "Pašreiz nepievērsiet uzmanību spilgtajiem toņiem. Tie tiks instalēti nākamajā solī.\n"
 "Ja esat apmierināts ar rezultātu, spiediet OK."
@@ -4118,13 +4211,13 @@ msgid "Image: "
 msgstr "Imidžs: "
 
 msgid "Import channels and/or EPG from remote receiver URL also when the receiver is getting out of standby"
-msgstr "Importēt kanālus un/vai EPG no attālinātā uztvērēja arī eslēdzoties no gaidstāves"
+msgstr "Importēt kanālus un/vai EPG no attālinātā uztvērēja arī ieslēdzoties no gaidstāves"
 
 msgid "Import channels and/or EPG from remote receiver URL when receiver is booted"
 msgstr "Importēt kanālus un/vai EPG no attālinātā uztvērēja kad uztvērējs tiek islēgts"
 
 msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
-msgstr "Importēt kanālus un/vai EPG no attālinātā uztvērēja kad enigma tiek restartēta"
+msgstr "Importēt kanālus un/vai EPG no attālinātā uztvērēja kad enigma tiek pārstartēta"
 
 msgid "Import channels from fallback tuner"
 msgstr "Importēt kanālus no attālinātā uztvērēja"
@@ -4244,7 +4337,7 @@ msgid "Install"
 msgstr "Instalēt"
 
 msgid "Install channel list"
-msgstr "Instalēt kanālu srakstu"
+msgstr "Instalēt kanālu sarakstu"
 
 msgid "Install extensions"
 msgstr "Instalēt paplašinājumus"
@@ -4323,7 +4416,7 @@ msgid "Iran (Islamic Republic of)"
 msgstr "Irāna"
 
 msgid "Iran, Islamic Republic"
-msgstr "Irāna, Islama republika"
+msgstr "Irāna, Islāma republika"
 
 msgid "Iraq"
 msgstr "Irāka"
@@ -4444,7 +4537,7 @@ msgid "Kyrgyzstan"
 msgstr "Kirgīzija"
 
 msgid "LAN adapter"
-msgstr "Tīkla adapteris"
+msgstr "Tīkla adapters"
 
 msgid "LAN connection"
 msgstr "Tīkla savienojums"
@@ -4629,7 +4722,7 @@ msgid "Log results to /tmp"
 msgstr "Žurnalēt rezultātus /tmp"
 
 msgid "Logfile does not exist anymore"
-msgstr "Logfaili vairs neeksistē"
+msgstr "Žurnāla fails vairs neeksistē"
 
 msgid "Long filenames"
 msgstr "Garie failu vārdi"
@@ -4692,7 +4785,7 @@ msgid "Malaysia"
 msgstr "Malaizija"
 
 msgid "Maldives"
-msgstr "Maldīvas"
+msgstr "Maldivas"
 
 msgid "Mali"
 msgstr "Mali"
@@ -4761,7 +4854,7 @@ msgid "Media player"
 msgstr "Mediju atskaņotājs"
 
 msgid "Media scanner"
-msgstr "Mediju skanētājs"
+msgstr "Mediju skenētājs"
 
 msgid "Medium is not a writeable DVD!"
 msgstr "Datu nesējs nav ierakstāms DVD!"
@@ -4810,6 +4903,9 @@ msgstr "Minimālais sūtīšanas intervāls"
 msgid "Missing "
 msgstr "Trūkst"
 
+msgid "Mode"
+msgstr "Režīms"
+
 msgctxt "Satellite configuration mode"
 msgid "Mode"
 msgstr "Režīms"
@@ -4823,6 +4919,9 @@ msgstr "Modelis"
 
 msgid "Model: "
 msgstr "Modelis: "
+
+msgid "Modes"
+msgstr "Režīmi"
 
 msgid "Modulation"
 msgstr "Modulācija"
@@ -4924,19 +5023,19 @@ msgid "Movement"
 msgstr "Kustība"
 
 msgid "Movie list configuration"
-msgstr "Media iestatījumi"
+msgstr "Mediju iestatījumi"
 
 msgid "Movie location"
-msgstr "Media atrašanās vieta"
+msgstr "Mediju atrašanās vieta"
 
 msgid "Movie selection"
-msgstr "Media faili"
+msgstr "Mediju faili"
 
 msgid "Movie/Drama"
 msgstr "Filma/Drāma"
 
 msgid "Movielist menu"
-msgstr "Media saraksta izvēlne"
+msgstr "Mediju saraksta izvēlne"
 
 msgid "Moving"
 msgstr "Griezt"
@@ -4961,6 +5060,9 @@ msgstr "Dudzkanālu skaņas dekodēšana"
 
 msgid "Multi-EPG bouquet selection"
 msgstr "Daudzkanālu EPG buķetes izvēle"
+
+msgid "MultiType"
+msgstr "Vairāku veidu"
 
 msgid "Multiboot"
 msgstr "Multiboot"
@@ -5026,8 +5128,8 @@ msgstr "DNS iestatījumi"
 msgid "Nameserver setup"
 msgstr "DNS iestatīšana"
 
-msgid "Namespace"
-msgstr "Namespace"
+msgid "Namespace & Orbital pos."
+msgstr "Apakštīkls un pozīcija"
 
 msgid "Namibia"
 msgstr "Namībija"
@@ -5169,13 +5271,13 @@ msgid "No epg.dat file found server"
 msgstr "Serverī nav atrasts epg.dat fails"
 
 msgid "No event info found, recording indefinitely."
-msgstr "Nav atrasta informācija par pārraidi, ierakstīs nepārtrukti."
+msgstr "Nav atrasta informācija par pārraidi, ierakstīs nepārtraukti."
 
 msgid "No fast winding possible yet.. but you can use the number buttons to skip forward/backward!"
 msgstr "Pārtīšana pašreiz nav iespējama.. bet varat lietot ciparu taustiņus lai pārlektu uz priekšu/atpakaļ!"
 
 msgid "No free index available"
-msgstr "Nav  pieiejami brīvi indeksi"
+msgstr "Nav pieejami brīvi indeksi"
 
 msgid "No free tuner!"
 msgstr "Nav brīva uztvērēja!"
@@ -5187,7 +5289,7 @@ msgid "No networks found"
 msgstr "Tīkli nav atrasti"
 
 msgid "No new plugins found"
-msgstr "Nav atrasti jauni sparudņi"
+msgstr "Nav atrasti jauni spraudņi"
 
 msgid "No positioner capable frontend found."
 msgstr "Nav atrasts pozicionierim piemērots pavadonis."
@@ -5213,9 +5315,6 @@ msgstr "Nav gaidstāves"
 msgid "No stream clients"
 msgstr "Nav neviena straumēšanas klienta"
 
-msgid "No suitable sat tuner found!"
-msgstr "Nav atrasts piemērots sat uztvērējs!"
-
 msgid "No tags are set on these movies."
 msgstr "Šiem ierakstiem nav pievienotas birkas"
 
@@ -5239,10 +5338,10 @@ msgstr ""
 "Lūdzu iestatiet uztvērēju pirms sākat meklēt kanālus."
 
 msgid "No updates available"
-msgstr "Atjaunojumi nav pieejami"
+msgstr "atjauninājumi nav pieejami"
 
 msgid "No updates available. Please try again later."
-msgstr "Atjaunojumi nav pieejami. Lūdzu mēģiniet vēlāk."
+msgstr "atjauninājumi nav pieejami. Lūdzu mēģiniet vēlāk."
 
 msgid "No wireless networks found! Searching..."
 msgstr "Bezvadu tīkli nav atrasti! Meklē..."
@@ -5251,14 +5350,14 @@ msgid ""
 "No working local network adapter found.\n"
 "Please verify that you have attached a network cable and your network is configured correctly."
 msgstr ""
-"Netika atrasts strādājošs lokālā tīkla adapteris.\n"
+"Netika atrasts strādājošs lokālā tīkla adapters.\n"
 "Lūdzu pārliecinieties, ka ir pievienots tīkla kabelis un tīkls ir pareizi konfigurēts."
 
 msgid ""
 "No working wireless network adapter found.\n"
 "Please verify that you have attached a compatible WLAN device and your network is configured correctly."
 msgstr ""
-"Netika atrasts strādājošs bezvadu tīkla adapteris.\n"
+"Netika atrasts strādājošs bezvadu tīkla adapters.\n"
 "Lūdzu pārliecinieties, ka ir pievienota saderīga bezvadu tīkla ierīce un tīkls ir pareizi konfigurēts."
 
 msgid ""
@@ -5323,9 +5422,6 @@ msgstr "Nav pietiekami vietas uz diska. Lūdzu atbrīvot vietu uz diska un mēģ
 
 msgid "Not tested:"
 msgstr "Nav pārbaudīts:"
-
-msgid "Not yet implemented!"
-msgstr "Nav izveidots!"
 
 msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'."
 msgstr "Ja iespējots, bet vēlaties pāriet gaidstāvē pēc ieslēgšanas iestatījumā 'Ieslēdzot pāriet gaidstāvē' norādiet 'Lietojot pamodināšanas taimeri'"
@@ -5410,9 +5506,8 @@ msgstr "Derīgu ONID gadījumā ignorēt frekvences apakšgrupas tīkla daļu"
 msgid "One"
 msgstr "Viens"
 
-#, fuzzy
 msgid "Only change this setting if you are using a SCR device that has been reprogrammed with a custom programmer. For further information check with the person that reprogrammed the device."
-msgstr "Mainiet šo iestatījumu tikai tad, ja izmantojat Unicable ierīci, kas ir pārprogrammēta. Papildinformāciju prasiet personai, kura pārprogrammēja ierīci."
+msgstr "Mainiet šo iestatījumu tikai tad, ja izmantojat SCR ierīci, kas ir pārprogrammēta. Papildinformāciju prasiet personai, kura pārprogrammēja ierīci."
 
 msgid "Only extensions."
 msgstr "Paplašinājumi"
@@ -5445,7 +5540,7 @@ msgid "Open setup tuner "
 msgstr "Atvērt iestatījumus uztvērējam "
 
 msgid "Open the movie list"
-msgstr "Atvērt media sarakstu"
+msgstr "Atvērt mediju sarakstu"
 
 msgid "Options disable timer"
 msgstr "Iespēja izslēgt taimeri"
@@ -5462,6 +5557,9 @@ msgstr "Oriģināls"
 msgid "Other"
 msgstr "Cits"
 
+msgid "Other Subtitles & lang"
+msgstr "Citi subtitri un valodas"
+
 msgid "Output"
 msgstr "Izeja"
 
@@ -5472,7 +5570,7 @@ msgid "Overscan wizard"
 msgstr "Attēla vednis"
 
 msgid "Overwrite configuration files during software upgrade?"
-msgstr "Pārrakstīt konfigurācijas failus atjaunojot programmatūru?"
+msgstr "Pārrakstīt konfigurācijas failus atjauninot programmatūru?"
 
 msgid "Overwrite configuration files?"
 msgstr "Pārrakstīt konfigurācijas failus?"
@@ -5488,6 +5586,9 @@ msgstr "PCR PID"
 
 msgid "PDC"
 msgstr "PDC"
+
+msgid "PGS File"
+msgstr "PGS fails"
 
 msgid "PGS file"
 msgstr "PGS fails"
@@ -5514,7 +5615,7 @@ msgid "Package list update"
 msgstr "Pakotņu saraksta atjaunināšana"
 
 msgid "Packages to update"
-msgstr "Atjaunojamās paketes"
+msgstr "atjaunināmās paketes"
 
 msgid "Packet management"
 msgstr "Pakotņu pārvaldība"
@@ -5558,6 +5659,9 @@ msgstr "Vecāku kontroles kanālu redaktors"
 
 msgid "Parental control setup"
 msgstr "Vecāku kontroles iestatījumi"
+
+msgid "Password"
+msgstr "Parole"
 
 msgid "Pause"
 msgstr "Pauze"
@@ -5645,7 +5749,7 @@ msgid "Play next"
 msgstr "Atskaņot nākošo"
 
 msgid "Play next (return to movie list)"
-msgstr "Atskaņot nākošo (atgriesties media sarakstā)"
+msgstr "Atskaņot nākošo (atgriezties mediju sarakstā)"
 
 msgid "Play next (return to previous service)"
 msgstr "Atskaņot nākošo (atgriezties iepriekšējā kanālā)"
@@ -5746,7 +5850,7 @@ msgid "Please select a subservice..."
 msgstr "Lūdzu izvēlieties papildkanālu..."
 
 msgid "Please select medium to be scanned"
-msgstr "Lūdzu izvēlieties datu nesēju skanēšanai"
+msgstr "Lūdzu izvēlieties datu nesēju skenēšanai"
 
 msgid "Please select medium to use as backup location"
 msgstr "Lūdzu izvēlieties datu nesēju dublējumkopijas veidošanai"
@@ -5755,7 +5859,7 @@ msgid "Please select tag to filter..."
 msgstr "Lūdzu izvēlieties etiķeti filtrēšanai..."
 
 msgid "Please select the movie path..."
-msgstr "Lūdzu izvēlieties ceļu uz media..."
+msgstr "Lūdzu izvēlieties ceļu uz mediju failu..."
 
 msgid ""
 "Please select the network interface that you want to use for your internet connection.\n"
@@ -5895,6 +5999,9 @@ msgstr "Polarizācija"
 msgid "Polish"
 msgstr "Poļu"
 
+msgid "Port"
+msgstr "Ports"
+
 msgid "Port A"
 msgstr "Ieeja A"
 
@@ -5936,6 +6043,9 @@ msgstr "Pozicioniera iestatījumi"
 
 msgid "Positioner setup log"
 msgstr "Pozicioniera iestatījumu logs"
+
+msgid "Power LED"
+msgstr "Ieslēgt LED"
 
 msgid "Power management. Consult your receiver's manual for more information."
 msgstr "Barošanas pārvaldīšana. Lai iegūtu papildinformāciju, skatiet uztvērēja rokasgrāmatu."
@@ -6009,6 +6119,18 @@ msgstr "Sagatavo... Lūdzu uzgaidiet"
 msgid "Press '0' to toggle PiP mode"
 msgstr "Nospiediet '0' lai pārslēgtu PiP režīmu"
 
+msgid "Press 'OK' for attach function."
+msgstr "Nospiediet OK, lai pievienotu darbību."
+
+msgid "Press 'OK' for attach next function or 'CH+/-' for edit attached."
+msgstr "Nospiediet OK, lai pievienotu nākošo darbību, vai CH+/- lai izmainīto pievienoto."
+
+msgid "Press 'OK' for remove item or 'CH+/-' for toggle to list of features."
+msgstr "Nospiediet OK, lai noņemtu darbību, vai CH+/- lai pārslēgtos uz blakus sarakstu."
+
+msgid "Press 'OK' for remove item or < > for change order or 'CH+/-' for toggle to list of features."
+msgstr "Nospiediet OK, lai noņemtu darbību, < > lai izmainītu kārtību, vai CH+/- lai pārslēgtos uz blakus sarakstu."
+
 msgid "Press INFO on your remote control for additional information."
 msgstr "Papildus informācijai spiediet INFO uz tālvadības pults."
 
@@ -6057,6 +6179,12 @@ msgstr "Nospiediet OK, lai pārslēgtu izvēli."
 
 msgid "Press OK, save and exit..."
 msgstr "Spiediet OK, lai saglabātu un izietu..."
+
+msgid "Press or select button and then press 'OK' for attach function."
+msgstr "Izvēlieties pogu un spiediet OK, lai pievienotu darbību."
+
+msgid "Press or select button and then press 'OK' for attach next function or edit attached."
+msgstr "Izvēlieties pogu un spiediet OK, lai pievienotu nākošo darbību vai izmainītu esošo."
 
 msgid "Press yellow to set this interface as default interface."
 msgstr "Spiediet dzelteno, lai iestatītu šo interfeisu kā noklusējuma."
@@ -6123,13 +6251,13 @@ msgid "Protect menu sort"
 msgstr "Aizsargāt izvēlnes kārtošanu"
 
 msgid "Protect movie list"
-msgstr "Aizsargāt media sarakstu"
+msgstr "Aizsargāt mediju sarakstu"
 
 msgid "Protect on epg age"
 msgstr "Aizsargāt pēc epg norādītā vecuma"
 
 msgid "Protect plugin browser"
-msgstr "Aizsargāt ppraudņu pārlūku"
+msgstr "Aizsargāt spraudņu pārlūku"
 
 msgid "Protect services"
 msgstr "Aizsargāt kanālus"
@@ -6233,7 +6361,7 @@ msgid "Really upgrade your settop box and reboot now?"
 msgstr "Vai tiešām atjaunot uztvērēju un pārstartēt tagad?"
 
 msgid "Reboot"
-msgstr "Pārstgartēt"
+msgstr "Pārstartēt"
 
 msgid "Rec"
 msgstr "Ier"
@@ -6272,16 +6400,6 @@ msgstr "Ieraksta veids"
 msgid "Recording(s) are in progress or coming up in few seconds!"
 msgstr "Pašreiz notiek ieraksts, vai sāksies pēc neilga laika!"
 
-#, python-format
-msgid ""
-"Recording(s) are in progress or coming up in few seconds!\n"
-"Do you still want to flash image\n"
-"%s?"
-msgstr ""
-"Pašreiz notiek ieraksts, vai sāksies pēc neilga laika!\n"
-"Vai tiešām vēlaties uzstādīt imidžu\n"
-"%s?"
-
 msgid "Recordings"
 msgstr "Ieraksti"
 
@@ -6311,9 +6429,6 @@ msgstr "Atjaunināšanas biežums"
 
 msgid "Refresh rate selection."
 msgstr "Atjaunināšanas ātruma izvēle."
-
-msgid "Refreshing image list - Please wait..."
-msgstr "Atjauno imidžu sarakstu - Lūdzu uzgaidiet..."
 
 msgid "Refusing to move to the same directory"
 msgstr "Nevar pārvietot tajā pašā mapē!"
@@ -6367,7 +6482,7 @@ msgid "Remove a nameserver entry"
 msgstr "Dzēst DNS ierakstu"
 
 msgid "Remove all logfiles"
-msgstr "Dzēst visus logfailus"
+msgstr "Dzēst visus žurnāla failus"
 
 msgid "Remove bookmark"
 msgstr "Dzēst"
@@ -6385,7 +6500,7 @@ msgid "Remove plugins"
 msgstr "Dzēst spraudņus"
 
 msgid "Remove this logfile"
-msgstr "Dzēst šo logfailu"
+msgstr "Dzēst šo žurnāla failu"
 
 msgid "Remove title"
 msgstr "Dzēst virsrakstu"
@@ -6491,6 +6606,9 @@ msgstr "Pārstartēt enigmu"
 msgid "Restart enigma in debug mode"
 msgstr "Pārstartēt enigmu testa režīmā"
 
+msgid "Restart enigma in standard mode"
+msgstr "Pārstartēt enigmu standarta režīmā"
+
 msgid "Restart network"
 msgstr "Pārstartēt tīklu"
 
@@ -6533,13 +6651,13 @@ msgid "Resuming playback"
 msgstr "Turpina atskaņošanu"
 
 msgid "Retrieving image list - Please wait..."
-msgstr "Iegūst imidžu srakstu - Lūdzu gaidiet..."
+msgstr "Iegūst imidžu sarakstu - Lūdzu gaidiet..."
 
 msgid "Retrieving image slots - Please wait..."
 msgstr "Iegūst pieejamos slotus - Lūdzu uzgaidiet..."
 
 msgid "Return to movie list"
-msgstr "Atgriezties uz media sarakstu"
+msgstr "Atgriezties uz mediju sarakstu"
 
 msgid "Return to previous service"
 msgstr "Atgriezties uz iepriekšējo kanālu"
@@ -6566,7 +6684,7 @@ msgid "Right from servicename"
 msgstr "Pa labi no kanāla nosaukuma"
 
 msgid "Roll-off"
-msgstr "Skrullēt-uz"
+msgstr "Roll-off faktors"
 
 msgid "Romania"
 msgstr "Rumānija"
@@ -6631,8 +6749,14 @@ msgstr "SNR:"
 msgid "SPDIF"
 msgstr "SPDIF"
 
+msgid "SRT File"
+msgstr "SRT fails"
+
 msgid "SRT file"
 msgstr "SRT fails"
+
+msgid "SSA File"
+msgstr "SSA fails"
 
 msgid "SSA file"
 msgstr "SSA fails"
@@ -6712,11 +6836,14 @@ msgstr "Saūda Arābija"
 msgid "Save"
 msgstr "Saglabāt"
 
+msgid "Save / Enter text and exit"
+msgstr "Saglabāt vai ievadīt tekstu un iziet"
+
 msgid "Save and exit"
 msgstr "Saglabāt un iziet"
 
 msgid "Save and restart timeshift"
-msgstr "Saglabāt un restartēt laika aizturi"
+msgstr "Saglabāt un pārstartēt laika aizturi"
 
 msgid "Save and stop timeshift"
 msgstr "Saglabāt un apturēt laika aizturi"
@@ -6832,6 +6959,10 @@ msgstr "Ritināšanas aizture"
 msgid "Scroll repeats"
 msgstr "Ritināšanas atkārtojums"
 
+#, fuzzy
+msgid "Search"
+msgstr "Meklē"
+
 msgid "Search east"
 msgstr "Meklēt austrumos"
 
@@ -6845,7 +6976,7 @@ msgid "Searching east ..."
 msgstr "Meklē austrumos ..."
 
 msgid "Searching for available updates. Please wait..."
-msgstr "Meklē pieejamos atjaunojumus. Lūdzu uzgaidiet..."
+msgstr "Meklē pieejamos atjauninājumus. Lūdzu uzgaidiet..."
 
 msgid "Searching for new installed or removed packages. Please wait..."
 msgstr "Meklē no jauna Instalētās vai dzēstās pakotnes. Lūdzu uzgaidiet..."
@@ -6881,11 +7012,22 @@ msgid "Select '1.0' for standard committed switches, '1.1' for uncommitted switc
 msgstr "Izvēlieties '1.0' standarta saistītajiem slēdžiem (committed switches), '1.1' nesaistītiem slēdžiem (uncommitted switches), '1.2' sistēmām, kuras izmanto pozicionēšanas ierīci."
 
 msgid "Select 'A' or 'B' if your aerial system requires this, otherwise select 'none'. If you are unsure select 'none'."
-msgstr "Izvēlieties 'A' vai 'B', ja tas nepieciešmas jūsu antenu sistēmai, pretējā gadījumā izvēlieties 'nav'. Ja neesat pārliecināts, izvēlieties 'nav'."
+msgstr "Izvēlieties 'A' vai 'B', ja tas nepieciešams jūsu antenu sistēmai, pretējā gadījumā izvēlieties 'nav'. Ja neesat pārliecināts, izvēlieties 'nav'."
 
-#, fuzzy
 msgid "Select 'FBC SCR' if this tuner will connect to a SCR (Unicable/JESS) device. For all other setups select 'FBC automatic'."
-msgstr "Izvēlieties Unicable, ja šis uztvērējs izmantos Unicable ierīci. Visiem citiem iestatījumiem izvēlieties 'FBC automatic'."
+msgstr "Izvēlieties 'FBC SCR', ja šis uztvērējs izmantos SCR (Unicable/JESS) ierīci. Visiem citiem iestatījumiem izvēlieties 'FBC automātiski'."
+
+msgid "Select 'Yes' when you want to configure this tuner for ATSC"
+msgstr "Ja vēlaties izmantot šo uztvērēju ATSC uztveršanai izvēlieties 'Jā'"
+
+msgid "Select 'Yes' when you want to configure this tuner for DVB-C"
+msgstr "Ja vēlaties izmantot šo uztvērēju DVB-C uztveršanai izvēlieties 'Jā'"
+
+msgid "Select 'Yes' when you want to configure this tuner for DVB-S"
+msgstr "Ja vēlaties izmantot šo uztvērēju DVB-S uztveršanai izvēlieties 'Jā'"
+
+msgid "Select 'Yes' when you want to configure this tuner for DVB-T"
+msgstr "Ja vēlaties izmantot šo uztvērēju DVB-T uztveršanai izvēlieties 'Jā'"
 
 msgid "Select 'band' if using a 'universal' LNB, otherwise consult your LNB spec sheet."
 msgstr "Ja izmantojat 'universālo' LNB, izvēlieties 'josla', pretējā gadījumā skatiet LNB specifikāciju."
@@ -6899,9 +7041,8 @@ msgstr "Ja izmantojot 'Universālā LNB', izvēlieties 'polarizācija', pretēj�
 msgid "Select 'provider' to scan from the predefined list of cable multiplexes. Select 'bands' to only scan certain parts of the spectrum. Select 'steps' to scan in steps of a particular frequency bandwidth."
 msgstr "Izvēlieties 'Operators', lai skenētu no iepriekš definēta kabeļu multipleksu saraksta. Izvēlieties 'Frekvenču joslas', lai skenētu tikai noteiktas spektra daļas. Izvēlieties 'Frekvenču soļi', lai skenētu noteiktas frekvenču joslas platuma posmos."
 
-#, fuzzy
 msgid "Select 'yes' if this tuner is connected to the SCR device through another tuner, otherwise select 'no'."
-msgstr "Izvēlieties 'jā', ja šis uztvērējs ir savienots ar Unicable ierīci izmantojot citu uztvērēju, pretējā gadījumā izvēlieties 'nē'."
+msgstr "Izvēlieties 'jā', ja šis uztvērējs ir savienots ar SCR ierīci izmantojot citu uztvērēju, pretējā gadījumā izvēlieties 'nē'."
 
 msgid "Select 'yes' to choose what bands or step sizes will be scanned."
 msgstr "Izvēlieties 'jā', lai izvēlētos, kādas joslas vai soļa lielumus skenēs."
@@ -7001,7 +7142,7 @@ msgid "Select files for backup."
 msgstr "Izvēlieties failus dublējumkopijai"
 
 msgid "Select files/folders to backup"
-msgstr "Izvēlieties failus/mapes dublējumkopijai"
+msgstr "Izvēlieties dublējumkopijas failus vai mapes"
 
 msgid "Select function"
 msgstr "Darbība"
@@ -7016,7 +7157,7 @@ msgid "Select how quickly the dish should move between satellites."
 msgstr "Izvēlieties, cik ātri satelītantenai pārvietot starp satelītiem."
 
 msgid "Select how the satellite dish is set up. i.e. fixed dish, single LNB, DiSEqC switch, positioner, etc."
-msgstr "Izvēlieties kā satelītantena ir iestatīta. Viena satelītantena, viens LNB, DiSEqC slēdzis, pozicionētājs utt."
+msgstr "Izvēlieties kā satelītantena ir iestatīta. Viena satelītantena, viens LNB, DiSEqC slēdzis, pozicionieris utt."
 
 msgid "Select input device"
 msgstr "Izvēlieties ievades ierīci"
@@ -7061,31 +7202,28 @@ msgid "Select target folder"
 msgstr "Izvēlieties mērķa mapi"
 
 msgid "Select the User Band channel to be assigned to this tuner. This is an index into the table of frequencies the SCR switch or SCR LNB uses to pass the requested transponder to the tuner."
-msgstr ""
+msgstr "Izvēlieties joslas kanālu (User Band channel) kuru piešķirt šim uztvērējam. Tas ir indekss SCR slēdža frekvenču tabulā vai SCR LNB, kuru tie izmanto lai piešķirtu pieprasīto transponderi uztvērējam."
 
 msgid "Select the User Band frequency to be assigned to this tuner. This is the frequency the SCR switch or SCR LNB uses to pass the requested transponder to the tuner."
-msgstr ""
+msgstr "Izvēlieties joslas frekvenci (User Band frequency) kuru piešķirt šim uztvērējam. Tas ir indekss SCR slēdža frekvenču tabulā vai SCR LNB, kuru tie izmanto lai piešķirtu pieprasīto transponderi uztvērējam."
 
-msgid "Select the User Band to be assigned to this tuner. This is an index into the table of frequencies the SCR switch or SCR LNB uses to pass the requested tranponder to the tuner."
-msgstr ""
+msgid "Select the User Band to be assigned to this tuner. This is an index into the table of frequencies the SCR switch or SCR LNB uses to pass the requested transponder to the tuner."
+msgstr "Izvēlieties joslu (User Band) kuru piešķirt šim uztvērējam. Tas ir indekss SCR slēdža frekvenču tabulā vai SCR LNB, kuru tie izmanto lai piešķirtu pieprasīto transponderi uztvērējam."
 
 msgid "Select the character or action under the virtual keyboard cursor"
 msgstr "Izvēlieties darbību virtuālās tastatūras kursoram"
 
-#, fuzzy
 msgid "Select the manufacturer of your SCR device. If the manufacturer is not listed, set 'SCR' to 'user defined' and enter the device parameters manually according to its spec sheet."
-msgstr "Izvēlieties savas Unicable ierīces ražotāju. Ja ražotājs nav norādīts, iestatiet 'SCR' uz 'lietotāja definēts' un ievadiet ierīces parametrus manuāli, atbilstoši tā specifikācijai."
+msgstr "Izvēlieties savas SCR ierīces ražotāju. Ja ražotājs nav norādīts, iestatiet 'SCR' uz 'lietotāja definēts' un ievadiet ierīces parametrus manuāli, atbilstoši tā specifikācijai."
 
-#, fuzzy
 msgid "Select the model number of your SCR device. If the model number is not listed, set 'SCR' to 'user defined' and enter the device parameters manually according to its spec sheet."
-msgstr "Izvēlieties savas Unicable ierīces modeļa numuru. Ja modeļa numurs nav norādīts, iestatiet 'SCR' uz 'lietotāja definēts' un ievadiet ierīces parametrus manuāli, atbilstoši tā specifikācijai."
+msgstr "Izvēlieties savas SCR ierīces modeļa numuru. Ja modeļa numurs nav norādīts, iestatiet 'SCR' uz 'lietotāja definēts' un ievadiet ierīces parametrus manuāli, atbilstoši tā specifikācijai."
 
 msgid "Select the movie path"
 msgstr "Izvēlieties ceļu ierakstiem"
 
-#, fuzzy
 msgid "Select the protocol used by your SCR device. Choices are 'SCR Unicable' (Unicable), or 'SCR JESS' (JESS, also known as Unicable II)."
-msgstr "Izvēlieties Unicable ierīces formātu. Izvēles ir 'SCR Unicable' (Unicable I formāts) vai 'SCR JESS' (Unicable II formāts)."
+msgstr "Izvēlieties SCR ierīces protokolu. Izvēles ir 'SCR Unicable' (Unicable) vai 'SCR JESS' (JESS, Unicable II formāts)."
 
 msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr "Izvēlieties satelītu, kas ir pievienots slēdža ieejai A. Ja neesat pārliecināts, izvēlieties 'automātiski', un uztvērējs mēģinās to noteikt pats. Ja nekas nav pievienots šai ieejai, izvēlieties 'nekas nav pievienots'"
@@ -7111,16 +7249,14 @@ msgstr "Izvēlieties uztvērēju, kas kontrolē motorizēto satelītantenu."
 msgid "Select the tuner that this loopthrough depends on."
 msgstr "Izvēlieties uztvērēju, kas atkarīgs no šīs cilpas."
 
-#, fuzzy
 msgid "Select the tuner to which the signal cable of the SCR device is connected."
-msgstr "Izvēlieties uztvērēju, uz kuru ir savienots Unicable ierīces signāla kabelis."
+msgstr "Izvēlieties uztvērēju, pie kura pieslēgts SCR ierīces kabelis."
 
 msgid "Select the type of LNB/device being used (normally 'Universal'). If your LNB type is not available select 'user defined'."
 msgstr "Izvēlieties izmantojamās LNB veidu (parasti 'Universālā LNB'). Ja jūsu LNB veids nav pieejams, izvēlieties 'lietotāja definēts'."
 
-#, fuzzy
 msgid "Select the type of Single Cable Reception device you are using."
-msgstr "Izvēlieties Unicable ierīces veidu, kuru izmantojat."
+msgstr "Izvēlieties SCR ierīces veidu kuru izmantojat."
 
 msgid "Select the virtual keyboard locale from a menu"
 msgstr "Izvēlieties virtuālās tastatūras lokalizāciju"
@@ -7219,16 +7355,22 @@ msgid "Service info"
 msgstr "Kanāla info"
 
 msgid "Service info - ECM Info"
-msgstr "Kanāla info - ECM informācija"
+msgstr "ECM informācija"
+
+msgid "Service info - service & Basic PID Info"
+msgstr "Pamata PID informācija"
+
+msgid "Service info - service & Extended PID Info"
+msgstr "Papildus PID informācija"
 
 msgid "Service info - service & PIDs"
-msgstr "Kanāla info - kanāls un PIDi"
+msgstr "PID informācija"
 
 msgid "Service info - tuner live values"
-msgstr "Kanāla info - tekošās vērtības"
+msgstr "Tekošās vērtības"
 
 msgid "Service info - tuner setting values"
-msgstr "Kanāla info - iestatītās vērtības"
+msgstr "Iestatītās vērtības"
 
 msgid ""
 "Service invalid!\n"
@@ -7279,7 +7421,7 @@ msgid "Set PIN"
 msgstr "Iestatīt PIN"
 
 msgid "Set action when movie playback is finished."
-msgstr "Iestatiet ko darīt kad filma vai media fails beidzas."
+msgstr "Iestatiet ko darīt kad filma vai mediju fails beidzas."
 
 msgid "Set all hotkey to default?"
 msgstr "Iestatīt visu taustiņu noklusētās vērtības?"
@@ -7303,7 +7445,7 @@ msgid "Set fps for external subtitles"
 msgstr "Iestatīt fps ārējiem subtitriem"
 
 msgid "Set if You want see status icons, progress bars or nothing."
-msgstr "Iestatiet vai vēlaties redzēt media sarakstā statusa ikonu vai progresa joslu."
+msgstr "Iestatiet vai vēlaties redzēt mediju sarakstā statusa ikonu vai progresa joslu."
 
 msgid "Set interface as default Interface"
 msgstr "Iestatīt interfeisu kā noklusēto"
@@ -7312,7 +7454,7 @@ msgid "Set limits"
 msgstr "Iestatīt limitus"
 
 msgid "Set movielist type."
-msgstr "Iestatiet media sarakstu veidu."
+msgstr "Iestatiet mediju sarakstu veidu."
 
 msgid "Set pin code persistent"
 msgstr "Iestatīt patstāvīgo PIN kodu"
@@ -7322,6 +7464,15 @@ msgstr "Iestatītā secība atkārtojas, ja tas nepieciešams uztveršanas sist�
 
 msgid "Set startup service"
 msgstr "Iestatīt kā starta kanālu"
+
+msgid "Set the User ID of the OpenWebif from your fallback tuner"
+msgstr "OpenWebif lietotāja ID attālinātā uztvērējā"
+
+msgid "Set the password of the OpenWebif from your fallback tuner"
+msgstr "OpenWebif parole attālinātā uztvērējā"
+
+msgid "Set the port of the OpenWebif from your fallback tuner"
+msgstr "OpenWebif ports attālinātā uztvērējā"
 
 msgid "Set the type of the progress indication in the channel selection screen."
 msgstr "Iestatīt norises indikatora veidu kanālu pārslēgšanas logā."
@@ -7459,7 +7610,7 @@ msgid "Show event-progress in channel selection"
 msgstr "Rādīt notikuma norisi kanālu izvēlnē"
 
 msgid "Show eventinfo plugins"
-msgstr "Rādīt notikumu sprudņus"
+msgstr "Rādīt notikumu spraudņus"
 
 msgid "Show extended description"
 msgstr "Rādīt paplašināto aprakstu"
@@ -7503,8 +7654,8 @@ msgstr "Parādīt jaunākās izmaiņas"
 msgid "Show latest upgrade log"
 msgstr "Rādīt pēdējās atjaunošanas žurnālu"
 
-msgid "Show menu numbers"
-msgstr "Rādīt iestatījumiem numurus"
+msgid "Show menu or plugin numbers"
+msgstr "Rādīt numurus iestatījumiem vai spraudņiem"
 
 msgid "Show menu paths"
 msgstr "Rādīt iestatījumu ceļu"
@@ -7537,7 +7688,7 @@ msgid "Show packages to be upgraded"
 msgstr "Parādīt paketes kuras tiks atjaunotas"
 
 msgid "Show picons in channel selection list"
-msgstr "Rādīt pikonas kanālu srakstā"
+msgstr "Rādīt pikonas kanālu sarakstā"
 
 msgid "Show picons in display"
 msgstr "Rādīt displejā pikonas"
@@ -7570,7 +7721,7 @@ msgid "Show service type icons"
 msgstr "Rādīt kanālu tipu ikonas"
 
 msgid "Show servicelist or movies"
-msgstr "Atvērt kanālu saraksu vai ierakstus"
+msgstr "Atvērt kanālu sarakstu vai ierakstus"
 
 msgid "Show single service EPG"
 msgstr "Rādīt atsevišķa kanāla EPG"
@@ -7585,7 +7736,7 @@ msgid "Show status icons in movielist"
 msgstr "Statusa ikona filmu sarakstā"
 
 msgid "Show subservice selection"
-msgstr "Apakšservisu izvēlne"
+msgstr "Apakš servisu izvēlne"
 
 msgid "Show subtitle selection"
 msgstr "Subtitru iestatīšana"
@@ -7689,6 +7840,10 @@ msgstr "Vietas garums"
 msgid "Skin"
 msgstr "Noformējums"
 
+#, python-format
+msgid "Skin & Resolution: %s (%sx%s)\n"
+msgstr "Noformējums: %s (%sx%s)\n"
+
 msgid "Skins"
 msgstr "Noformējumi"
 
@@ -7696,7 +7851,7 @@ msgid "Skip empty services"
 msgstr "Izlaist tukšos kanālus"
 
 msgid "Skip internet connection check (disables automatic package installation)"
-msgstr "Izlaist interneta savienojuma pārbudi (atspējo automātisku pakotņu uzstādīšanu)"
+msgstr "Izlaist interneta savienojuma pārbaudi (atspējo automātisku pakotņu uzstādīšanu)"
 
 msgid "Sleep timer"
 msgstr "Miega taimeris"
@@ -7829,10 +7984,10 @@ msgid "Sort order for menu entries"
 msgstr "Izvēlnes izkārtojums"
 
 msgid "Sort order for setup entries"
-msgstr "Istatījumu izkārtojums"
+msgstr "Iestatījumu izkārtojums"
 
 msgid "Sort plugins list to default?"
-msgstr "Sakārtot sprudņus noklusētā kārtībā?"
+msgstr "Sakārtot spraudņus noklusētā kārtībā?"
 
 #. TRANSLATORS: This must fit into the header button in the EPG-List
 msgid "Sort time"
@@ -7872,7 +8027,7 @@ msgid "Special 2"
 msgstr "Īpašs 2"
 
 msgid "Specify extra timeframe to ignore inactivity sleeptimer"
-msgstr "Iestatīt papildus laiku neaktivitātes miega taimeria ignorēšanai"
+msgstr "Iestatīt papildus laiku neaktivitātes miega taimera ignorēšanai"
 
 msgid "Specify if you want to set the blocktimes separately by weekday"
 msgstr "Katrā nedēļas dienā iestatīt atšķirīgus bloķēšanas laikus"
@@ -7902,7 +8057,7 @@ msgid "Specify timeframe to ignore the shutdown in standby"
 msgstr "Iestatīt laiku izslēgšanas ignorēšanai gaidstāvē"
 
 msgid "Split preview mode"
-msgstr "Sadalīt priekšskatīšanas režīmu"
+msgstr "Sadalīt priekš skatīšanas režīmu"
 
 msgid "Splitscreen"
 msgstr "Sadalīts"
@@ -7925,6 +8080,9 @@ msgstr "Gaidstāve"
 msgid "Standby / restart"
 msgstr "Izslēgšana"
 
+msgid "Standby LED"
+msgstr "LED gaidstāvē"
+
 msgid "Standby after current event"
 msgstr "Gaidstāve pēc pašreizējās pārraides"
 
@@ -7938,9 +8096,6 @@ msgstr "Ventilatora spriegums %d gaidstāvē"
 
 msgid "Standby in "
 msgstr "Gaidstāvē "
-
-msgid "StandbyLED"
-msgstr "GaidstāvesLED"
 
 msgid "Start from the beginning"
 msgstr "Sākt no sākuma"
@@ -8051,7 +8206,7 @@ msgid "Stop recordings:"
 msgstr "Apturēt ierakstus:"
 
 msgid "Stop service on return to movie list"
-msgstr "Apturēt kanālu un atgriesties filmu sarakstā"
+msgstr "Apturēt kanālu un atgriezties filmu sarakstā"
 
 msgid "Stop test"
 msgstr "Apturēt pārbaudi"
@@ -8239,9 +8394,6 @@ msgstr "Pārslēgt uz iepriekšējo papildkanālu"
 msgid "Switch to radio mode"
 msgstr "Pārslēgt uz radio režīmu"
 
-msgid "Switchable tuner types:"
-msgstr "Pārslēdzamo uztvērēju tipi:"
-
 msgid "Switzerland"
 msgstr "Šveice"
 
@@ -8266,6 +8418,20 @@ msgstr "Sistēma"
 msgid "System & Modulation"
 msgstr "Sistēma un modulācija"
 
+#, fuzzy
+msgid "T2MI PID"
+msgstr "PMT PID"
+
+msgid "T2MI PLP"
+msgstr ""
+
+#, fuzzy
+msgid "T2MI PLP ID"
+msgstr "PLP ID"
+
+msgid "T2MI RAW Mode"
+msgstr "T2MI RAW režīms"
+
 #. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
 msgid "TRANSLATOR_INFO"
 msgstr "Taapat, Madars Auns Latvija, Talsi"
@@ -8287,6 +8453,9 @@ msgstr "TV fiziskās adreses ziņojums"
 
 msgid "TXT PID"
 msgstr "TXT PID"
+
+msgid "TXT Subtitles page & lang"
+msgstr "TXT subtitri un valoda"
 
 msgid "Table of contents for collection"
 msgstr "Satura rādītājs kolekcijai"
@@ -8401,7 +8570,7 @@ msgid ""
 msgstr ""
 "Attēla veidnis ir pabeigts.\n"
 "\n"
-"Jūs vienmēt varat atkārtot attēla veidni izmantojot\n"
+"Jūs vienmēr varat atkārtot attēla veidni izmantojot\n"
 "\n"
 "Izvēlne->Iestatījumu->Sistēma->Audio un Video->Attēla veidnis"
 
@@ -8421,7 +8590,7 @@ msgid ""
 msgstr ""
 "Attēla veidnis atļauj iestatīt TV korekti.\n"
 "\n"
-"Lielai daļai TV pēc noklusējuma ir iespējots overscan. Tas nozīmē, ka jūs vienmēr skatāties palielinātu attēlu, nevis reālu HD, un daļa no noformējuma nav redzema.\n"
+"Lielai daļai TV pēc noklusējuma ir iespējots overscan. Tas nozīmē, ka jūs vienmēr skatāties palielinātu attēlu, nevis reālu HD, un daļa no noformējuma nav redzama.\n"
 "\n"
 "Dzeltenais apgabals nozīmē 5% robežu no pilna HD attēla.\n"
 "Zaļais apgabals nozīmē 10% robežu no pilna HD attēla.\n"
@@ -8499,10 +8668,16 @@ msgstr "Vismaz "
 
 #, python-format
 msgid "There are at least %s updates available."
-msgstr "Vismaz %s atjaunojumi pieejami."
+msgstr "Vismaz %s atjauninājumi pieejami."
 
 msgid "There are currently no outstanding actions."
 msgstr "Pašlaik nav aktuālu darbību."
+
+msgid "There are no saved playlists to delete!"
+msgstr "Nav saglabātu repertuāru kurus izdzēst!"
+
+msgid "There are no saved playlists to load!"
+msgstr "Nav saglabātu repertuāru kurus ielādēt!"
 
 msgid "There are no updates available."
 msgstr "Pašlaik atjauninājumi nav pieejami."
@@ -8533,11 +8708,11 @@ msgstr ""
 "Vienkāršam lietotājam tā nav svarīga.\n"
 "Lūdzu neuztraucieties ja jums liekas, ka šeit attēlotas aizdomīgas vērtības!"
 
-msgid "This is a multitype tuner. Available options depend on the hardware. Cable and terrestrial cannot be configured at the same time. If you want to use as cable + satellite or terrestrial + satellite, configure cable/terrestrial first and then save. Re-open and configure again as satellite."
-msgstr "Šis ir vairāku veidu uztvērējs. Pieejamās opcijas ir atkarīgas no aparatūras. Vienlaikus nevar konfigurēt kabeļu un virszemes uztveršanu. Ja vēlaties izmantot kā kabeļu + satelīta vai virszemes + satelīta, vispirms konfigurējiet kā kabeļu vai virszemes uztvērēju un pēc tam saglabājiet. Atkārtoti atveriet un konfigurējiet kā satelīta uztvērēju."
+msgid "This is a multitype tuner. Available options depend on the hardware."
+msgstr "Šis ir vairāku veidu uztvērējs. Pieejamās opcijas ir atkarīgas no aparatūras."
 
 msgid "This is the order in which DiSEqC commands are sent to the aerial system. The order must correspond exactly with the order the physical devices are arranged along the signal cable (starting from the receiver end)."
-msgstr "Komadu rinda, kādā DiSEqC komandas tiek nosūtītas. Komandu rindai precīzi jāatbilst kārtībai, kādā sākot no uztvērēja fiziskās ierīces tiek pielēgtas kabelim."
+msgstr "Komandu rinda, kādā DiSEqC komandas tiek nosūtītas. Komandu rindai precīzi jāatbilst kārtībai, kādā sākot no uztvērēja fiziskās ierīces tiek pieslēgtas kabelim."
 
 msgid "This option allows to reduce the block-noise in the picture. Obviously this is at the cost of the picture's sharpness."
 msgstr "Atļauj samazināt trokšņus attēlā. Diemžēl tas samazina arī attēla asumu."
@@ -8552,13 +8727,13 @@ msgid "This option allows you enable smoothing filter to control the dithering p
 msgstr "Atļauj ieslēgt izlīdzināšanas filtru, lai kontrolētu atkodēšanas procesus."
 
 msgid "This option allows you enable the vertical scaler dejagging."
-msgstr "Atļauj iespājot asuma vertikālo nojaukšanu."
+msgstr "Atļauj iespējot asuma vertikālo nojaukšanu."
 
 msgid "This option allows you to add the softcam setup in the extensions menu."
 msgstr "Pievieno softcam iestatījumus paplašinājumu izvēlnē."
 
 msgid "This option allows you to alphabetically sort setup menu entries."
-msgstr "Atļauj sortēt iestatījumus alfabētiski."
+msgstr "Atļauj kārtot iestatījumus alfabētiski."
 
 msgid "This option allows you to boost the blue tones in the picture."
 msgstr "Atļauj pastiprināt zilos toņus attēlā."
@@ -8611,8 +8786,8 @@ msgstr "Atļauj izslēgt displeju."
 msgid "This option allows you to show all symbols on the display."
 msgstr "Atļauj parādīt simbolus displejā."
 
-msgid "This option allows you to show menu number quick links."
-msgstr "Attēlo ciparus pie iestatījumiem lai tos izmantotu ātrai piekļuvei."
+msgid "This option allows you to show menu and/or plugin number quick links."
+msgstr "Attēlo ciparus pie iestatījumiem vai spraudņiem lai tos izmantotu ātrai piekļuvei."
 
 msgid "This option allows you to show menu paths."
 msgstr "Attēlo iestatījumu ceļu noformējumā."
@@ -8683,7 +8858,7 @@ msgid ""
 msgstr ""
 "Šis tests pārbauda domēna vārdu serveru (DNS) konfigurāciju.\n"
 "Ja Jūs saņemat \"neapstiprināts \" paziņojumu:\n"
-"- lūdzu pārbaudiet DHCP, kabeļus un adaptera iestījumus\n"
+"- lūdzu pārbaudiet DHCP, kabeļus un adaptera iestatījumus\n"
 "- ja uzstādījāt domēna vārdu serverus manuāli, pārbaudiet savus ierakstus \"DNS\" iestatījumos"
 
 msgid ""
@@ -8703,10 +8878,10 @@ msgid ""
 "- no valid IP address was found\n"
 "- please check your DHCP, cabling and adapter setup"
 msgstr ""
-"Šis tests pārbauda vai tīkla adapterim ir atrasta derīga IP adrese. \n"
+"Šis tests pārbauda vai tīkla adapteram ir atrasta derīga IP adrese. \n"
 "Ja Jūs saņemat \"neapstiprināts \" paziņojumu:\n"
 "- nav atrasta derīga IP adrese\n"
-"- lūdzu pārbaudiet DHCP, kabeļus un adaptera iestījumus"
+"- lūdzu pārbaudiet DHCP, kabeļus un adaptera iestatījumus"
 
 msgid ""
 "This test checks whether your LAN adapter is set up for automatic IP address configuration with DHCP.\n"
@@ -8716,10 +8891,10 @@ msgid ""
 "If you get an \"enabeld\" message:\n"
 "-verify that you have a configured and working DHCP server in your network."
 msgstr ""
-"Šis tests pārbauda vai tīkla adapteris ir iestatīts automātiskai IP adrešu konfigurēšanai ar DHCP.\n"
+"Šis tests pārbauda vai tīkla adapters ir iestatīts automātiskai IP adrešu konfigurēšanai ar DHCP.\n"
 "Ja saņemat \"neaktīvs \" paziņojumu:\n"
-"- tīkla adapteris ir konfigurēts manuālai IP iestatīšanai\n"
-"- pārbaudiet, vai ir ievadīta korekta IP informācija adaptera iestatījumu dialoglogā. \n"
+"- tīkla adapters ir konfigurēts manuālai IP iestatīšanai\n"
+"- pārbaudiet, vai ir ievadīta korekta IP informācija adaptera iestatījumos. \n"
 "Ja saņemat \"aktīvs \" paziņojumu:\n"
 "- pārbaudiet, vai DHCP serveris ir konfigurēts un darbojas jūsu tīklā."
 
@@ -8996,8 +9171,14 @@ msgstr "Turkmenistāna"
 msgid "Turks and Caicos Islands"
 msgstr "Turks un Kaikosas salas"
 
+msgid "Turn on the power LED during deep standby."
+msgstr "Ieslēgt LED dziļās gaidstāves režīmā."
+
 msgid "Turn on the power LED during standby."
-msgstr "Ieslēgt LED gaidstāvē"
+msgstr "Ieslēgt LED gaidstāvē."
+
+msgid "Turn on the power LED."
+msgstr "Ieslēgt LED darbības laikā."
 
 msgid "Turning step size"
 msgstr "Noskaņošanas soļa lielums"
@@ -9048,7 +9229,10 @@ msgid "Ukrainian"
 msgstr "Ukraiņu"
 
 msgid "Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"
-msgstr "Nav iespējams izveidot iestatījumu dublējumkopiju jo sparudnis dublējumkopijas izveidošanai nav pieejams, vai vēlaties turpināt?"
+msgstr "Nav iespējams izveidot iestatījumu dublējumkopiju jo spraudnis dublējumkopijas izveidošanai nav pieejams, vai vēlaties turpināt?"
+
+msgid "Unable to create the required directories on the media (e.g. USB stick or Harddisk) - Please verify media and try again!"
+msgstr "Nevarēja izveidot nepieciešamās direktorijas datu nesējā (USB zibatmiņā vai HDD). Pārbaudiet datu nesēju un mēģiniet vēlreiz!"
 
 msgid ""
 "Unattended upgrade in progress\n"
@@ -9066,7 +9250,7 @@ msgid "Undefined"
 msgstr "Nedefinēts"
 
 msgid "Undo install"
-msgstr "Atsukt uzstādīšanu"
+msgstr "Atsaukt uzstādīšanu"
 
 msgid "Undo uninstall"
 msgstr "Atsaukt atinstalēšanu"
@@ -9084,7 +9268,7 @@ msgid "Unhide parental control services"
 msgstr "Parādīt servisus ar vecāku aizsardzību"
 
 msgid "Unicable delay after change voltage before switch command"
-msgstr "Unicable aizture pēc sprieguma izamiņas līdz komutatora komandai"
+msgstr "Unicable aizture pēc sprieguma izmaiņas līdz komutatora komandai"
 
 msgid "Unicable delay after enable voltage before switch command"
 msgstr "Unicable aizture pēc sprieguma ieslēgšanas līdz komutatora komandai"
@@ -9238,7 +9422,7 @@ msgid "Use interface"
 msgstr "Lietot interfeisu"
 
 msgid "Use official channel numbering"
-msgstr "Lietot oficiālo kanālu numurēšnu"
+msgstr "Lietot oficiālo kanālu numurēšanu"
 
 msgid "Use original DVB subtitle position"
 msgstr "Lietot oriģinālo DVB subtitru pozīciju"
@@ -9271,13 +9455,16 @@ msgid "Use this video enhancement settings?"
 msgstr "Lietot šos video uzlabošanas iestatījumus?"
 
 msgid "Use trash can in movielist"
-msgstr "Lietot miskasti media sarakstā"
+msgstr "Lietot miskasti mediju sarakstā"
 
 msgid "Used service scan type"
 msgstr "Lietotais kanālu meklēšanas veids"
 
 msgid "User - bouquets"
 msgstr "Lietotāja - buķetes"
+
+msgid "User ID"
+msgstr "Lietotāja ID"
 
 msgid "User Mode"
 msgstr "Lietotāja režīms"
@@ -9316,6 +9503,9 @@ msgstr "VLAN savienojums"
 
 msgid "VMGM (intro trailer)"
 msgstr "VMGM (ievada treileris)"
+
+msgid "VOB File"
+msgstr "VOB fails"
 
 msgid "VOB file"
 msgstr "VOB fails"
@@ -9386,7 +9576,7 @@ msgid "VideoMode"
 msgstr "Video režīms"
 
 msgid "Videocodec, size & format"
-msgstr "Video kodeks, izmērs, formāts"
+msgstr "Video informācija"
 
 msgid "Viet Nam"
 msgstr "Vjetnama"
@@ -9446,10 +9636,10 @@ msgid "View video CD..."
 msgstr "Skatīt video CD..."
 
 msgid "Virgin Islands (British)"
-msgstr "Virdžīnu salas (britu)"
+msgstr "Virdžīniju salas (britu)"
 
 msgid "Virgin Islands (U.S.)"
-msgstr "Virdžīnu salas (ASV)"
+msgstr "Virdžīniju salas (ASV)"
 
 msgid "Virtual KeyBoard Functions"
 msgstr "Virtuālās tastatūras funkcijas"
@@ -9512,7 +9702,7 @@ msgid "Wakeup TV from standby"
 msgstr "Pamodināt TV no gidstāves"
 
 msgid "Wakeup receiver for start timer"
-msgstr "Pamodināt uztvērēju strtēšanas taimerim"
+msgstr "Pamodināt uztvērēju startēšanas taimerim"
 
 msgid "Wakeup receiver from standby"
 msgstr "Pamodināt uztvērēju no gidstāves"
@@ -9615,13 +9805,13 @@ msgid "What type of service scan do you want?"
 msgstr "Kāda veida kanālu meklēšanu vēlaties veikt?"
 
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are upgraded"
-msgstr "Ja ieslēgts, enigma2 ielādēs neiekļutās buķetes. Tas nozīmē ka buķetes tiek izmantotas, bet nav iekļutas bouquets.tv vai bouquets.radio failos. Tas atļuj, piemēram, saglabāt jūsu individuālās buķetes, ja tiek atjaunoti uzstādījumi."
+msgstr "Ja ieslēgts, enigma ielādēs neiekļautās buķetes. Tas nozīmē ka buķetes tiek izmantotas, bet nav iekļautas bouquets.tv vai bouquets.radio failos. Tas atļauj saglabāt jūsu individuālās buķetes ja tiek atjaunoti uzstādījumi."
 
 msgid "When enabled the PiP can be closed by the exit button."
 msgstr "Ja ieslēgts attēls attēlā, var aizvērt ar exit taustiņu."
 
 msgid "When enabled the arrow buttons around the OK button will follow the 'neutrino' style zap controls instead of the enigma2 style."
-msgstr "Ja ieslēgts, virziena pogas ap OK kananālu pārslēgšanai izmantos 'neutrino' stilu, nevis enigma2."
+msgstr "Ja ieslēgts, virziena pogas ap OK kanālu pārslēgšanai izmantos 'neutrino' stilu, nevis enigma2."
 
 msgid "When enabled the left, right, CH+/-, B+/-, P+/- buttons will follow the 'neutrino' style zap controls instead of the enigma2 style."
 msgstr "Ja ieslēgts, pogas pa kreisi, pa labi, CH+/-, B+/-, P+/- pārslēgšanai izmantos 'neutrino' stilu nevis enigma2."
@@ -9638,14 +9828,17 @@ msgstr "Ja ieslēgts, tad ja kanālu izvēlnē izvēlēsieties jaunu kanālu, iz
 msgid "When enabled you can control the volume with the arrow buttons instead of getting the channel selection list"
 msgstr "Ja ieslēgts, ar virziena pogām ap OK jūs varat regulēt skaļumu, nevis atvērt kanālu sarakstu"
 
+msgid "When enabled you can customize the OpenWebIf settings for the fallback tuner"
+msgstr "Ja ieslēgts, jūs varat pielāgot OpenWebIf iestatījumus attālinātam uztvērējam"
+
 msgid "When enabled you can specify a timeframe to ignore the shutdown timer when the receiver is in standby mode"
-msgstr "Ja ieslēgts jūs varat iestatīt laiku kādā ignorēt izslēgšanu, kamēr uztvērējs ir gaidstāves režīmā"
+msgstr "Ja ieslēgts, jūs varat iestatīt laiku kādā ignorēt izslēgšanu, kamēr uztvērējs ir gaidstāves režīmā"
 
 msgid "When enabled you can specify a timeframe when the inactivity sleeptimer is ignored. Not the detection is disabled during this timeframe but the inactivity timeout is disabled"
-msgstr "Ja ieslēgts jūs varat iestatīt laiku kad neaktivitātes miega taimeris tiks ignorēts. Šinī laikā nav izslēgta neaktivitātes noteikšna, bet nestrādās izslēgšana ja nav aktivitātes"
+msgstr "Ja ieslēgts, jūs varat iestatīt laiku kad neaktivitātes miega taimeris tiks ignorēts. Šinī laikā nav izslēgta neaktivitātes noteikšana, bet nestrādās izslēgšana ja nav aktivitātes"
 
 msgid "When enabled you can specify an extra timeframe when the inactivity sleeptimer is ignored. Not the detection is disabled during this timeframe but the inactivity timeout is disabled"
-msgstr "Ja ieslēgts jūs varat iestatīt papildus laiku kad neaktivitātes miega taimeris tiks ignorēts. Šinī laikā nav izslēgta neaktivitātes noteikšna, bet nestrādās izslēgšana ja nav aktivitātes"
+msgstr "Ja ieslēgts jūs varat iestatīt papildus laiku kad neaktivitātes miega taimeris tiks ignorēts. Šinī laikā nav izslēgta neaktivitātes noteikšana, bet nestrādās izslēgšana ja nav aktivitātes"
 
 msgid "When enabled you can zap channels with the  CH+/-, B+/-, P+/- buttons instead of opening the channel selection list."
 msgstr "Ja ieslēgts, jūs pa tiešo varat pārslēgt kanālus ar CH+/-, B+/-, P+/- pogām, nevis tikai atverot kanālu sarakstu."
@@ -9662,6 +9855,9 @@ msgstr "Ja ieslēgts, ECM dati tiks iekļauti http plūsmās. Tas atļaus klient
 msgid "When enabled, EIT data will be included in http streams. This allows a client receiver to show EPG."
 msgstr "Ja ieslēgts, EIT dati tiks iekļauti http plūsmās. Tas atļaus klienta uztvērējam attēlot EPG."
 
+msgid "When enabled, HDMI-CEC is enabled with standard configuration"
+msgstr "Ja ieslēgts, HDMI-CEC būs pieejams izmantojot standarta konfigurāciju"
+
 msgid "When enabled, a popup message will be shown when a movie has finished and the next one will start."
 msgstr "Ja ieslēgts, kad filma beigsies tiks parādīts paziņojums, un sāksies nākošā."
 
@@ -9675,10 +9871,10 @@ msgid "When enabled, a recording is allowed to interrupt live tv, when there are
 msgstr "Ja ieslēgts, tiks atļauts ieraksts ignorējot tiešās pārraides ja nav brīvu uztvērēju."
 
 msgid "When enabled, a warning will be displayed and the user will get an option to stop or to continue the timeshift."
-msgstr "Ja ieslēgts, tiks parādīts brīdinājums un lietotājs varēs izvēlēties vai apstādīnāt, vai turpināt laika aizturi."
+msgstr "Ja ieslēgts, tiks parādīts brīdinājums un lietotājs varēs izvēlēties vai apstādināt, vai turpināt laika aizturi."
 
 msgid "When enabled, always descramble receiving http streams. This takes up more resources (descrambling demuxers), only enable if necessary. Individual streams are always descrambled if 0x100 is added to the service type, regardless of this setting. Default off."
-msgstr "Ja ieslēgts, http straumes tiks dekodētas. Tas prasa vairāk resursus dekodēsanai un demuksēšanai tādēļ lietojiet tikai tad ja nepieciešmas. Neatkarīgi no šī iestatījuma straumes tiks dekodētas ja 0x100 norādīts pie servisa tipa. Pēc noklusējuma izslēgts."
+msgstr "Ja ieslēgts, http straumes tiks dekodētas. Tas prasa vairāk resursus dekodēšanai un demuksēšanai tādēļ lietojiet tikai tad ja nepieciešams. Neatkarīgi no šī iestatījuma straumes tiks dekodētas ja 0x100 norādīts pie servisa tipa. Pēc noklusējuma izslēgts."
 
 msgid "When enabled, authentication is required to watch http streams."
 msgstr "Ja ieslēgts, nepieciešama autentifikācija lai skatītos http straumējumu"
@@ -9723,7 +9919,7 @@ msgid "When enabled, http streams are descrambled on the server side. The (remot
 msgstr "Ja ieslēgts, http straumes tiks dekodētas serverī. Klientiem nebūs jādekodē. Pēc noklusējuma ieslēgts."
 
 msgid "When enabled, it is possible to leave the movieplayer with exit."
-msgstr "Ja ieslēgts, ir iespējams iziet no media atskaņotāja ar exit taustiņu."
+msgstr "Ja ieslēgts, ir iespējams iziet no mediju atskaņotāja ar exit taustiņu."
 
 msgid "When enabled, measure power consumption to detect when the rotor stops turning (when supported by the tuner)."
 msgstr "Ja ieslēgts, tiks mērīta patērētā jauda lai noskaidrotu kad pozicionieris apstājies (ja to uztur uztvērējs)."
@@ -9750,7 +9946,7 @@ msgid "When enabled, teletext pages will be cached, allowing faster access."
 msgstr "Ja ieslēgts, teleteksta lapas tiks saglabātas kešatmiņā lai būtu ātrāka piekļuve."
 
 msgid "When enabled, teletext subtitles will be displayed at their original position."
-msgstr "Ja ieslēgts, teleteksta subtirtri tiks attēloti to oriģinālajā pozīcijā."
+msgstr "Ja ieslēgts, teleteksta subtitri tiks attēloti to oriģinālajā pozīcijā."
 
 msgid "When enabled, the VCR scart option will be shown on the main menu"
 msgstr "Ja ieslēgts, VCR scart tiks rādīts galvenajā izvēlnē"
@@ -9768,7 +9964,7 @@ msgid "When enabled, the infobar will be displayed when skipping forwards/backwa
 msgstr "Ja ieslēgts, pārtinot uz priekšu vai atpakaļ mediju failus tiks parādīta infojosla."
 
 msgid "When enabled, the lenght of each recording will be shown in the movielist (this might cause some additional loading time)."
-msgstr "Ja ieslēgts, media sarakstā tiks parādīts katra ieraksta garums (tas prasa zināmu ielādes laiku)."
+msgstr "Ja ieslēgts, mediju sarakstā tiks parādīts katra ieraksta garums (tas prasa zināmu ielādes laiku)."
 
 msgid "When enabled, the receiver will automatically use the audio track which you selected before."
 msgstr "Ja ieslēgts, uztvērējs automātiski lietos audio celiņu, kuru iepriekš norādījāt."
@@ -9835,6 +10031,9 @@ msgstr "Bezvadu tīkla savienojuma iestatījumi."
 
 msgid "Wireless network state"
 msgstr "Bezvadu tīkla statuss"
+
+msgid "With T2MI RAW mode disabled (default) we can use single T2MI PLP de-encapsulation. With T2MI RAW mode enabled we can use astra-sm to analyze T2MI"
+msgstr "Ja T2MI RAW režīms atspējots (pēc noklusējuma) varat izmantot iebūvēto T2MI PLP dekapsulēšanu. Ja T2MI RAW režīms iespējots varat izmantot astra-sm lai analizētu T2MI."
 
 msgid "With errors:"
 msgstr "Ar kļūdām:"
@@ -9916,7 +10115,7 @@ msgid "Yes, and delete this movie"
 msgstr "Jā, un dzēst šo filmu"
 
 msgid "Yes, delete this movie and return to movie list"
-msgstr "Jā, dzēst šo filmu un atgriesties media sarakstā"
+msgstr "Jā, dzēst šo filmu un atgriezties mediju sarakstā"
 
 msgid "Yes, only from deep standby"
 msgstr "Jā, tikai no dziļās gaidstāves"
@@ -9925,7 +10124,7 @@ msgid "Yes, only from standby"
 msgstr "Jā, tikai no gaidstāves"
 
 msgid "Yes, returning to movie list"
-msgstr "Jā, atgriezties uz media sarakstu"
+msgstr "Jā, atgriezties uz mediju sarakstu"
 
 msgid "Yes, with backup"
 msgstr "Jā, ar dublējumkopiju"
@@ -9971,13 +10170,13 @@ msgid "You can remove this plugin."
 msgstr "Jūs varat izdzēst šo spraudni."
 
 msgid "You can set how will be finished movieplayer with 'Exit' button."
-msgstr "Iestatiet vai atļut iziet no media atskaņotāja ar 'Iziet' pogu."
+msgstr "Iestatiet vai atļaut iziet no mediju atskaņotāja ar 'Iziet' pogu."
 
 msgid "You can set selected directory as 'root' directory for movie player."
-msgstr "Iestatiet noklusēto (root) mapi media atskaņotājam."
+msgstr "Iestatiet noklusēto (root) mapi mediju atskaņotājam."
 
 msgid "You can set sorting type for items in movielist."
-msgstr "Iestatiet media saraksta kārtošanas veidu."
+msgstr "Iestatiet mediju saraksta kārtošanas veidu."
 
 msgid "You cannot delete this!"
 msgstr "Jūs šo nevarat dzēst!"
@@ -9999,7 +10198,7 @@ msgstr ""
 "\n"
 "Kad izvēlēsieties citu noformējumu jūsu uztvērējs pārstartēsies.\n"
 "\n"
-"Jūs vienmēt varat atkārtot attēla veidni izmantojot\n"
+"Jūs vienmēr varat atkārtot attēla veidni izmantojot\n"
 "\n"
 "Izvēlne->Iestatījumu->Sistēma->Attēla veidnis"
 
@@ -10173,9 +10372,8 @@ msgstr "Pārslēdz uz taimera kanālu %s!"
 msgid "Zgemma H.S/H.2S/H.2H/H5/H7"
 msgstr "Zgemma H.S/H.2S/H.2H/H5/H7"
 
-#, fuzzy
 msgid "Zgemma H9/i55 Plus"
-msgstr "Zgemma H9"
+msgstr "Zgemma H9/i55 Plus"
 
 msgid "Zgemma Star S/2S/H1/H2"
 msgstr "Zgemma Star S/2S/H1/H2"
@@ -10386,7 +10584,7 @@ msgid "config menu"
 msgstr "konfigurācijas izvēlne"
 
 msgid "configure in which resolution pictures are displayed with the picture viewer and movieplayer"
-msgstr "konfigurē kādā izšķirtspējā attēli tiks attēloti attēlu un media atskaņotājos"
+msgstr "konfigurē kādā izšķirtspējā attēli tiks attēloti attēlu un mediju atskaņotājos"
 
 msgid "confirmed"
 msgstr "apstiprināts"
@@ -10440,7 +10638,7 @@ msgid "disconnected"
 msgstr "atvienots"
 
 msgid "discussion/interview/debate"
-msgstr "diskusijas/intervbijas/debates"
+msgstr "diskusijas/intervijas/debates"
 
 msgid "do nothing"
 msgstr "neko nedarīt"
@@ -10511,17 +10709,14 @@ msgstr "izklaide (6-14 gadu veciem)"
 msgid "epg cache backup"
 msgstr "epg kešatmiņas dublējumkopija"
 
-msgid "equal to"
-msgstr "vienāds ar"
-
 msgid "equestrian"
 msgstr "jātnieka"
 
 msgid "error starting scanning"
-msgstr "kļūda uzsākot skanēšanu"
+msgstr "kļūda uzsākot skenēšanu"
 
 msgid "error while scanning"
-msgstr "kļūda skanējot"
+msgstr "kļūda skenējot"
 
 msgid "et4000"
 msgstr "et4000"
@@ -10575,7 +10770,7 @@ msgid "film/cinema"
 msgstr "filmas/kino"
 
 msgid "find currently played service"
-msgstr "atrast servisu kuru pašreiz skataties"
+msgstr "atrast servisu kuru pašreiz skatieties"
 
 msgid "fine arts"
 msgstr "tēlotājmāksla"
@@ -10646,6 +10841,15 @@ msgstr "palīdzība..."
 msgid "horizontal"
 msgstr "horizontālā"
 
+msgid "in menu and plugins"
+msgstr "iestatījumiem un spraudņiem"
+
+msgid "in menu only"
+msgstr "iestatījumiem"
+
+msgid "in plugins only"
+msgstr "spraudņiem"
+
 msgid "information/education/school program"
 msgstr "informācija/izglītība/skolas programma"
 
@@ -10677,7 +10881,7 @@ msgid "languages"
 msgstr "valodas"
 
 msgid "leave movie player..."
-msgstr "iziet no media atskaņotāja..."
+msgstr "iziet no mediju atskaņotāja..."
 
 msgid "left"
 msgstr "kreisā"
@@ -10717,9 +10921,6 @@ msgstr "noenkurojies"
 
 msgid "long"
 msgstr "ilgi"
-
-msgid "loopthrough to"
-msgstr "cilpot uz"
 
 msgid "magazines/reports/documentary"
 msgstr "avīzes/atskaites/dokumentālais"
@@ -10806,7 +11007,7 @@ msgid "no CI slots found"
 msgstr "modulis nav atrasts"
 
 msgid "no channel list"
-msgstr "nav kanālu sraksta"
+msgstr "nav kanālu saraksta"
 
 msgid "no module found"
 msgstr "modulis nav atrasts"
@@ -10908,13 +11109,13 @@ msgid "popular culture/traditional arts"
 msgstr "tautas kultūra/tradicionālā māksla"
 
 msgid "pre-school children's program"
-msgstr "pirmskolas bērnu programma"
+msgstr "pirmsskolas bērnu programma"
 
 msgid "purge deleted userbouquets"
 msgstr "iztīrīt dzēstās buķetes"
 
 msgid "receiver software because updates are available."
-msgstr "uztvērēja programmatūru jo atjaunojumi pieejami."
+msgstr "uztvērēja programmatūru jo atjauninājumi pieejami."
 
 msgid "record"
 msgstr "ierakstīt"
@@ -11023,9 +11224,6 @@ msgstr "meklēšanas statuss"
 
 msgid "science fiction/fantasy/horror"
 msgstr "zinātniskā fantastika/fantāzijas/šausmu"
-
-msgid "second cable of motorized LNB"
-msgstr "otrs motorizētās LNB kabelis"
 
 msgid "seconds"
 msgstr "sekundes"
@@ -11147,7 +11345,7 @@ msgid "special format data DVD (HDTV compatible)"
 msgstr "īpaša formāta datu DVD (HDTV)"
 
 msgid "sports (general)"
-msgstr "sprts (vispārīgi)"
+msgstr "sports (vispārīgi)"
 
 msgid "sports magazine"
 msgstr "sporta žurnāls"
@@ -11198,7 +11396,7 @@ msgid "team sports"
 msgstr "komandu sports"
 
 msgid "technology/natural science"
-msgstr "tehnoloģijas/dabaszinātna"
+msgstr "tehnoloģijas/dabaszinātnes"
 
 msgid "template file"
 msgstr "šablona fails"
@@ -11256,6 +11454,9 @@ msgstr "netestēts"
 
 msgid "until standby/restart"
 msgstr "līdz gaidstāvei/pārstartēšanai"
+
+msgid "update bookmarks"
+msgstr "atjaunot grāmatzīmes"
 
 msgid "user defined"
 msgstr "lietotāja definēts"

@@ -4,4 +4,4 @@ SUBDIRS = meta
 
 install_PYTHON =	\
 	__init__.py \
-	plugin.py VideoFinetune.py
+	plugin.py VideoFinetune.py testbeeld-4k.mvi

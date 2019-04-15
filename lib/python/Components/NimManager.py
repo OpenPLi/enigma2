@@ -506,6 +506,7 @@ class NIM(object):
 			}
 
 		# get multi type using delsys information
+		self.combined = False
 		if self.frontend_id is not None:
 			types = [type for type in nim_types if eDVBResourceManager.getInstance().frontendIsCompatible(self.frontend_id, type)]
 			if "DVB-T2" in types:
@@ -516,17 +517,32 @@ class NIM(object):
 				types.remove("DVB-S")
 			if len(types) > 1:
 				self.multi_type = {}
+				self.combined = not(os.path.exists("/proc/stb/frontend/%d/mode" % self.frontend_id) or self.isFBCTuner())
 				for type in types:
 					self.multi_type[str(types.index(type))] = type
 
+	def getTunerTypesEnabled(self):
+		try:
+			if self.combined:
+				return [x for x in self.multi_type.values() if
+					self.config.configModeDVBS.value and x.startswith("DVB-S") or
+					self.config.configModeDVBC.value and x.startswith("DVB-C") or
+					self.config.configModeDVBT.value and x.startswith("DVB-T") or
+					self.config.configModeATSC.value and x.startswith("ATSC")]
+		except:
+			pass
+		return [self.getType()]
+
 	def isCompatible(self, what):
-		return self.isSupported() and what in self.compatible[self.getType()]
+		return self.isSupported() and bool([x for x in self.getTunerTypesEnabled() if what in self.compatible[x]])
 
 	def canBeCompatible(self, what):
-		return self.isSupported() and (self.isCompatible(what) or [x for x in self.multi_type.values() if what in self.compatible[x]]) and True
+		return self.isSupported() and bool([x for x in self.multi_type.values() if what in self.compatible[x]] if self.multi_type else self.isCompatible(what))
 
 	def getType(self):
 		try:
+			if self.isCombined():
+				return [x for x in self.multi_type.values() if x.startswith("DVB-S")][0]
 			if self.isMultiType():
 				return self.multi_type[self.config.multiType.value]
 		except:
@@ -575,7 +591,10 @@ class NIM(object):
 			open("/proc/stb/frontend/%d/rf_switch" % self.frontend_id, "w").write("external")
 
 	def isMultiType(self):
-		return len(self.multi_type) and True
+		return not self.isCombined() and bool(len(self.multi_type))
+
+	def isCombined(self):
+		return self.combined
 
 	def isEmpty(self):
 		return self.__is_empty
@@ -592,6 +611,10 @@ class NIM(object):
 		if not multistream and "TBS" in self.description:
 			multistream = True
 		return multistream
+
+	def isT2MI(self):
+		# Check if t2mi feature exists using procfs due to missing FE_CAN_T2MI in DVB API
+		return os.path.exists("/proc/stb/frontend/%d/t2mi" % self.frontend_id)
 
 	def supportsBlindScan(self):
 		return self.supports_blind_scan
@@ -613,6 +636,9 @@ class NIM(object):
 		return self.isFBCTuner() and self.slot % 8 and True
 
 	def getFriendlyType(self):
+		if self.multi_type.values():
+			returnValue = "/".join([x[1].replace("DVB-", "") for x in sorted([({ "DVB-S" :1, "DVB-C": 2, "DVB-T": 3, "ATSC": 4}[x[:5]], x) for x in self.multi_type.values()])])
+			return "%s %s" % (_("Combined") if self.combined else _("MultiType"), returnValue if returnValue == 'ATSC' else "DVB-%s" % returnValue)
 		return self.getType() or _("empty")
 
 	def getFullDescription(self):
@@ -649,7 +675,7 @@ class NimManager:
 			else: # remove multistream transponders
 				def isMultistreamTP(tp):
 					# since we are using Gold sequences there is no need to check the PLS Mode
-					return tp[5] == eDVBFrontendParametersSatellite.System_DVB_S2 and (tp[10] > -1 or tp[12] > 0)
+					return tp[5] == eDVBFrontendParametersSatellite.System_DVB_S2 and (tp[10] > eDVBFrontendParametersSatellite.No_Stream_Id_Filter or tp[12] > eDVBFrontendParametersSatellite.PLS_Default_Gold_Code)
 				return [tp for tp in self.transponders[pos] if not isMultistreamTP(tp)]
 		else:
 			return []
@@ -1136,13 +1162,8 @@ def InitSecParams():
 
 def InitNimManager(nimmgr, update_slots = []):
 	hw = HardwareInfo()
-	addNimConfig = False
-	try:
-		config.Nims
-	except:
-		addNimConfig = True
 
-	if addNimConfig:
+	if not hasattr(config, "Nims"):
 		InitSecParams()
 		config.Nims = ConfigSubList()
 		for x in range(len(nimmgr.nim_slots)):
@@ -1346,43 +1367,8 @@ def InitNimManager(nimmgr, update_slots = []):
 			tmp = ConfigSelection(lnb_choices, lnb_choices_default)
 			tmp.slot_id = x
 			tmp.lnb_id = lnb
-			tmp.addNotifier(configLOFChanged, initial_call = False)
+			tmp.addNotifier(configLOFChanged)
 			section.lof = tmp
-
-	def configModeChanged(configMode):
-		slot_id = configMode.slot_id
-		nim = config.Nims[slot_id]
-		if configMode.value == "advanced" and isinstance(nim.advanced, ConfigNothing):
-			# advanced config:
-			nim.advanced = ConfigSubsection()
-			nim.advanced.sat = ConfigSubDict()
-			nim.advanced.sats = getConfigSatlist(192, advanced_satlist_choices)
-			nim.advanced.lnb = ConfigSubDict()
-			nim.advanced.lnb[0] = ConfigNothing()
-			for x in nimmgr.satList:
-				tmp = ConfigSubsection()
-				tmp.voltage = ConfigSelection(advanced_voltage_choices, "polarization")
-				tmp.tonemode = ConfigSelection(advanced_tonemode_choices, "band")
-				tmp.usals = ConfigYesNo(True)
-				tmp.rotorposition = ConfigInteger(default=1, limits=(1, 255))
-				lnb = ConfigSelection(advanced_lnb_choices, "0")
-				lnb.slot_id = slot_id
-				lnb.addNotifier(configLNBChanged, initial_call = False)
-				tmp.lnb = lnb
-				nim.advanced.sat[x[0]] = tmp
-			for x in range(3601, 3607):
-				tmp = ConfigSubsection()
-				tmp.voltage = ConfigSelection(advanced_voltage_choices, "polarization")
-				tmp.tonemode = ConfigSelection(advanced_tonemode_choices, "band")
-				tmp.usals = ConfigYesNo(default=True)
-				tmp.userSatellitesList = ConfigText('[]')
-				tmp.rotorposition = ConfigInteger(default=1, limits=(1, 255))
-				lnbnum = 65+x-3601
-				lnb = ConfigSelection([("0", _("not configured")), (str(lnbnum), "LNB %d"%(lnbnum))], "0")
-				lnb.slot_id = slot_id
-				lnb.addNotifier(configLNBChanged, initial_call = False)
-				tmp.lnb = lnb
-				nim.advanced.sat[x] = tmp
 
 	def scpcSearchRangeChanged(configElement):
 		fe_id = configElement.fe_id
@@ -1396,248 +1382,266 @@ def InitNimManager(nimmgr, update_slots = []):
 		if os.path.exists("/proc/stb/frontend/%d/tone_amplitude" % fe_id):
 			open("/proc/stb/frontend/%d/tone_amplitude" %(fe_id), "w").write(configElement.value)
 
-	def createSatConfig(nim, x, empty_slots):
-		try:
-			nim.toneAmplitude
-		except:
-			nim.toneAmplitude = ConfigSelection([("11", "340mV"), ("10", "360mV"), ("9", "600mV"), ("8", "700mV"), ("7", "800mV"), ("6", "900mV"), ("5", "1100mV")], "7")
-			nim.toneAmplitude.fe_id = x - empty_slots
-			nim.toneAmplitude.slot_id = x
-			nim.toneAmplitude.addNotifier(toneAmplitudeChanged)
-			nim.scpcSearchRange = ConfigSelection([("0", _("no")), ("1", _("yes"))], "0")
-			nim.scpcSearchRange.fe_id = x - empty_slots
-			nim.scpcSearchRange.slot_id = x
-			nim.scpcSearchRange.addNotifier(scpcSearchRangeChanged)
-			nim.diseqc13V = ConfigYesNo(False)
-			nim.diseqcMode = ConfigSelection(diseqc_mode_choices, "diseqc_a_b")
-			nim.connectedTo = ConfigSelection([(str(id), nimmgr.getNimDescription(id)) for id in nimmgr.getNimListOfType("DVB-S") if id != x])
-			nim.simpleSingleSendDiSEqC = ConfigYesNo(False)
-			nim.simpleDiSEqCSetVoltageTone = ConfigYesNo(True)
-			nim.simpleDiSEqCOnlyOnSatChange = ConfigYesNo(False)
-			nim.simpleDiSEqCSetCircularLNB = ConfigYesNo(True)
-			nim.diseqcA = ConfigSatlist(list = diseqc_satlist_choices)
-			nim.diseqcB = ConfigSatlist(list = diseqc_satlist_choices)
-			nim.diseqcC = ConfigSatlist(list = diseqc_satlist_choices)
-			nim.diseqcD = ConfigSatlist(list = diseqc_satlist_choices)
-			nim.positionerMode = ConfigSelection(positioner_mode_choices, "usals")
-			nim.userSatellitesList = ConfigText('[]')
-			nim.pressOKtoList = ConfigNothing()
-			nim.longitude = ConfigFloat(default=[5,100], limits=[(0,359),(0,999)])
-			nim.longitudeOrientation = ConfigSelection(longitude_orientation_choices, "east")
-			nim.latitude = ConfigFloat(default=[50,767], limits=[(0,359),(0,999)])
-			nim.latitudeOrientation = ConfigSelection(latitude_orientation_choices, "north")
-			nim.tuningstepsize = ConfigFloat(default = [0,360], limits = [(0,9),(0,999)])
-			nim.rotorPositions = ConfigInteger(default = 99, limits = [1,999])
-			nim.turningspeedH = ConfigFloat(default = [2,3], limits = [(0,9),(0,9)])
-			nim.turningspeedV = ConfigFloat(default = [1,7], limits = [(0,9),(0,9)])
-			nim.powerMeasurement = ConfigYesNo(True)
-			nim.powerThreshold = ConfigInteger(default=hw.get_device_name() == "dm8000" and 15 or 50, limits=(0, 100))
-			nim.turningSpeed = ConfigSelection(turning_speed_choices, "fast")
-			btime = datetime(1970, 1, 1, 7, 0)
-			nim.fastTurningBegin = ConfigDateTime(default = mktime(btime.timetuple()), formatstring = _("%H:%M"), increment = 900)
-			etime = datetime(1970, 1, 1, 19, 0)
-			nim.fastTurningEnd = ConfigDateTime(default = mktime(etime.timetuple()), formatstring = _("%H:%M"), increment = 900)
+	def t2miRawModeChanged(configElement):
+		slot = configElement.slot
+		if os.path.exists("/proc/stb/frontend/%d/t2mirawmode" % slot):
+			open("/proc/stb/frontend/%d/t2mirawmode" % slot, "w").write(configElement.value)
+
+	def createSatConfig(nim, slot_id):
+		nim.toneAmplitude = ConfigSelection([("11", "340mV"), ("10", "360mV"), ("9", "600mV"), ("8", "700mV"), ("7", "800mV"), ("6", "900mV"), ("5", "1100mV")], "7")
+		nim.toneAmplitude.fe_id = slot_id
+		nim.toneAmplitude.slot_id = slot_id
+		nim.toneAmplitude.addNotifier(toneAmplitudeChanged)
+		nim.scpcSearchRange = ConfigSelection([("0", _("no")), ("1", _("yes"))], "0")
+		nim.scpcSearchRange.fe_id = slot_id
+		nim.scpcSearchRange.slot_id = slot_id
+		nim.scpcSearchRange.addNotifier(scpcSearchRangeChanged)
+		nim.t2miRawMode = ConfigSelection([("disable", _("disabled")), ("enable", _("enabled"))], "disable")
+		nim.t2miRawMode.slot = slot_id
+		nim.t2miRawMode.addNotifier(t2miRawModeChanged)
+		nim.diseqc13V = ConfigYesNo(False)
+		nim.diseqcMode = ConfigSelection(diseqc_mode_choices, "diseqc_a_b")
+		nim.connectedTo = ConfigSelection([(str(id), nimmgr.getNimDescription(id)) for id in nimmgr.getNimListOfType("DVB-S") if id != slot_id])
+		nim.simpleSingleSendDiSEqC = ConfigYesNo(False)
+		nim.simpleDiSEqCSetVoltageTone = ConfigYesNo(True)
+		nim.simpleDiSEqCOnlyOnSatChange = ConfigYesNo(False)
+		nim.simpleDiSEqCSetCircularLNB = ConfigYesNo(True)
+		nim.diseqcA = ConfigSatlist(list = diseqc_satlist_choices)
+		nim.diseqcB = ConfigSatlist(list = diseqc_satlist_choices)
+		nim.diseqcC = ConfigSatlist(list = diseqc_satlist_choices)
+		nim.diseqcD = ConfigSatlist(list = diseqc_satlist_choices)
+		nim.positionerMode = ConfigSelection(positioner_mode_choices, "usals")
+		nim.userSatellitesList = ConfigText('[]')
+		nim.pressOKtoList = ConfigNothing()
+		nim.longitude = ConfigFloat(default=[5,100], limits=[(0,359),(0,999)])
+		nim.longitudeOrientation = ConfigSelection(longitude_orientation_choices, "east")
+		nim.latitude = ConfigFloat(default=[50,767], limits=[(0,359),(0,999)])
+		nim.latitudeOrientation = ConfigSelection(latitude_orientation_choices, "north")
+		nim.tuningstepsize = ConfigFloat(default = [0,360], limits = [(0,9),(0,999)])
+		nim.rotorPositions = ConfigInteger(default = 99, limits = [1,999])
+		nim.turningspeedH = ConfigFloat(default = [2,3], limits = [(0,9),(0,9)])
+		nim.turningspeedV = ConfigFloat(default = [1,7], limits = [(0,9),(0,9)])
+		nim.powerMeasurement = ConfigYesNo(True)
+		nim.powerThreshold = ConfigInteger(default=hw.get_device_name() == "dm8000" and 15 or 50, limits=(0, 100))
+		nim.turningSpeed = ConfigSelection(turning_speed_choices, "fast")
+		btime = datetime(1970, 1, 1, 7, 0)
+		nim.fastTurningBegin = ConfigDateTime(default = mktime(btime.timetuple()), formatstring = _("%H:%M"), increment = 900)
+		etime = datetime(1970, 1, 1, 19, 0)
+		nim.fastTurningEnd = ConfigDateTime(default = mktime(etime.timetuple()), formatstring = _("%H:%M"), increment = 900)
+
+		nim.advanced = ConfigSubsection()
+		nim.advanced.sat = ConfigSubDict()
+		nim.advanced.sats = getConfigSatlist(192, advanced_satlist_choices)
+		nim.advanced.lnb = ConfigSubDict()
+		nim.advanced.lnb[0] = ConfigNothing()
+		for x in nimmgr.satList:
+			tmp = ConfigSubsection()
+			tmp.voltage = ConfigSelection(advanced_voltage_choices, "polarization")
+			tmp.tonemode = ConfigSelection(advanced_tonemode_choices, "band")
+			tmp.usals = ConfigYesNo(True)
+			tmp.rotorposition = ConfigInteger(default=1, limits=(1, 255))
+			lnb = ConfigSelection(advanced_lnb_choices, "0")
+			lnb.slot_id = slot_id
+			lnb.addNotifier(configLNBChanged)
+			tmp.lnb = lnb
+			nim.advanced.sat[x[0]] = tmp
+		for x in range(3601, 3607):
+			tmp = ConfigSubsection()
+			tmp.voltage = ConfigSelection(advanced_voltage_choices, "polarization")
+			tmp.tonemode = ConfigSelection(advanced_tonemode_choices, "band")
+			tmp.usals = ConfigYesNo(default=True)
+			tmp.userSatellitesList = ConfigText('[]')
+			tmp.rotorposition = ConfigInteger(default=1, limits=(1, 255))
+			lnbnum = 65 + x - 3601
+			lnb = ConfigSelection([("0", _("not configured")), (str(lnbnum), "LNB %d"%(lnbnum))], "0")
+			lnb.slot_id = slot_id
+			lnb.addNotifier(configLNBChanged)
+			tmp.lnb = lnb
+			nim.advanced.sat[x] = tmp
 
 	def createCableConfig(nim, x):
-		try:
-			nim.cable
-		except:
-			list = [(x[0], x[0]) for x in nimmgr.cablesList]
-			nim.cable = ConfigSubsection()
-			nim.cable.scan_networkid = ConfigInteger(default = 0, limits = (0, 99999))
-			possible_scan_types = [("bands", _("Frequency bands")), ("steps", _("Frequency steps"))]
-			if list:
-				possible_scan_types.append(("provider", _("Provider")))
-				nim.cable.scan_provider = ConfigSelection(default = "0", choices = list)
-			nim.cable.config_scan_details = ConfigYesNo(default = False)
-			nim.cable.scan_type = ConfigSelection(default = "bands", choices = possible_scan_types)
-			nim.cable.scan_band_EU_VHF_I = ConfigYesNo(default = True)
-			nim.cable.scan_band_EU_MID = ConfigYesNo(default = True)
-			nim.cable.scan_band_EU_VHF_III = ConfigYesNo(default = True)
-			nim.cable.scan_band_EU_UHF_IV = ConfigYesNo(default = True)
-			nim.cable.scan_band_EU_UHF_V = ConfigYesNo(default = True)
-			nim.cable.scan_band_EU_SUPER = ConfigYesNo(default = True)
-			nim.cable.scan_band_EU_HYPER = ConfigYesNo(default = True)
-			nim.cable.scan_band_US_LOW = ConfigYesNo(default = False)
-			nim.cable.scan_band_US_MID = ConfigYesNo(default = False)
-			nim.cable.scan_band_US_HIGH = ConfigYesNo(default = False)
-			nim.cable.scan_band_US_SUPER = ConfigYesNo(default = False)
-			nim.cable.scan_band_US_HYPER = ConfigYesNo(default = False)
-			nim.cable.scan_frequency_steps = ConfigInteger(default = 1000, limits = (1000, 10000))
-			nim.cable.scan_mod_qam16 = ConfigYesNo(default = False)
-			nim.cable.scan_mod_qam32 = ConfigYesNo(default = False)
-			nim.cable.scan_mod_qam64 = ConfigYesNo(default = True)
-			nim.cable.scan_mod_qam128 = ConfigYesNo(default = False)
-			nim.cable.scan_mod_qam256 = ConfigYesNo(default = True)
-			nim.cable.scan_sr_6900 = ConfigYesNo(default = True)
-			nim.cable.scan_sr_6875 = ConfigYesNo(default = True)
-			nim.cable.scan_sr_ext1 = ConfigInteger(default = 0, limits = (0, 7230))
-			nim.cable.scan_sr_ext2 = ConfigInteger(default = 0, limits = (0, 7230))
+		list = [(x[0], x[0]) for x in nimmgr.cablesList]
+		nim.cable = ConfigSubsection()
+		nim.cable.scan_networkid = ConfigInteger(default = 0, limits = (0, 99999))
+		possible_scan_types = [("bands", _("Frequency bands")), ("steps", _("Frequency steps"))]
+		if list:
+			possible_scan_types.append(("provider", _("Provider")))
+			nim.cable.scan_provider = ConfigSelection(default = "0", choices = list)
+		nim.cable.config_scan_details = ConfigYesNo(default = False)
+		nim.cable.scan_type = ConfigSelection(default = "bands", choices = possible_scan_types)
+		nim.cable.scan_band_EU_VHF_I = ConfigYesNo(default = True)
+		nim.cable.scan_band_EU_MID = ConfigYesNo(default = True)
+		nim.cable.scan_band_EU_VHF_III = ConfigYesNo(default = True)
+		nim.cable.scan_band_EU_UHF_IV = ConfigYesNo(default = True)
+		nim.cable.scan_band_EU_UHF_V = ConfigYesNo(default = True)
+		nim.cable.scan_band_EU_SUPER = ConfigYesNo(default = True)
+		nim.cable.scan_band_EU_HYPER = ConfigYesNo(default = True)
+		nim.cable.scan_band_US_LOW = ConfigYesNo(default = False)
+		nim.cable.scan_band_US_MID = ConfigYesNo(default = False)
+		nim.cable.scan_band_US_HIGH = ConfigYesNo(default = False)
+		nim.cable.scan_band_US_SUPER = ConfigYesNo(default = False)
+		nim.cable.scan_band_US_HYPER = ConfigYesNo(default = False)
+		nim.cable.scan_frequency_steps = ConfigInteger(default = 1000, limits = (1000, 10000))
+		nim.cable.scan_mod_qam16 = ConfigYesNo(default = False)
+		nim.cable.scan_mod_qam32 = ConfigYesNo(default = False)
+		nim.cable.scan_mod_qam64 = ConfigYesNo(default = True)
+		nim.cable.scan_mod_qam128 = ConfigYesNo(default = False)
+		nim.cable.scan_mod_qam256 = ConfigYesNo(default = True)
+		nim.cable.scan_sr_6900 = ConfigYesNo(default = True)
+		nim.cable.scan_sr_6875 = ConfigYesNo(default = True)
+		nim.cable.scan_sr_ext1 = ConfigInteger(default = 0, limits = (0, 7230))
+		nim.cable.scan_sr_ext2 = ConfigInteger(default = 0, limits = (0, 7230))
 
 	def createTerrestrialConfig(nim, x):
-		try:
-			nim.terrestrial
-		except:
-			list = [(x[0], x[0]) for x in nimmgr.terrestrialsList]
-			nim.terrestrial = ConfigSelection(choices = list)
-			nim.terrestrial_5V = ConfigOnOff()
+		list = [(x[0], x[0]) for x in nimmgr.terrestrialsList]
+		nim.terrestrial = ConfigSelection(choices = list)
+		nim.terrestrial_5V = ConfigOnOff()
 
 	def createATSCConfig(nim, x):
-		try:
-			nim.atsc
-		except:
-			list = [(x[0], x[0]) for x in nimmgr.atscList]
-			nim.atsc = ConfigSelection(choices = list)
+		list = [(x[0], x[0]) for x in nimmgr.atscList]
+		nim.atsc = ConfigSelection(choices = list)
 
 	def tunerTypeChanged(nimmgr, configElement, initial=False):
 		fe_id = configElement.fe_id
-		eDVBResourceManager.getInstance().setFrontendType(nimmgr.nim_slots[fe_id].frontend_id, nimmgr.nim_slots[fe_id].getType())
-		try:
-			raw_channel = eDVBResourceManager.getInstance().allocateRawChannel(fe_id)
-			if raw_channel is None:
-				import NavigationInstance
-				if NavigationInstance.instance:
-					NavigationInstance.instance.stopService()
-					raw_channel = eDVBResourceManager.getInstance().allocateRawChannel(fe_id)
+		if configElement.value == 'nothing':
+			"[InitNimManager] disable multitype tuner %s" % fe_id
+			eDVBResourceManager.getInstance().setFrontendType(nimmgr.nim_slots[fe_id].frontend_id, "UNDEFINED")
+		else:
+			print "[InitNimManager] tunerTypeChanged: setFrontendType %s" % nimmgr.nim_slots[fe_id].getType()
+			eDVBResourceManager.getInstance().setFrontendType(nimmgr.nim_slots[fe_id].frontend_id, nimmgr.nim_slots[fe_id].getType())
+			try:
+				raw_channel = eDVBResourceManager.getInstance().allocateRawChannel(fe_id)
 				if raw_channel is None:
-					print "[InitNimManager] %d: tunerTypeChanged to '%s' failed (BUSY)" %(fe_id, configElement.getText())
-					return
-			frontend = raw_channel.getFrontend()
-			is_changed_mode = os.path.exists("/proc/stb/frontend/%d/mode" % fe_id)
-			if not is_changed_mode and frontend.setDeliverySystem(nimmgr.nim_slots[fe_id].getType()):
-				print "[InitNimManager] tunerTypeChanged feid %d to mode %d" % (fe_id, int(configElement.value))
-				InitNimManager(nimmgr, [fe_id])
-				if not hasattr(config.misc, 'firstrun') or not config.misc.firstrun.value:
-					configElement.save()
-			elif is_changed_mode:
-				cur_type = int(open("/proc/stb/frontend/%d/mode" % (fe_id), "r").read())
-				if cur_type != int(configElement.value):
-					print "[InitNimManager] tunerTypeChanged feid %d from %d to mode %d" % (fe_id, cur_type, int(configElement.value))
-
-					is_dvb_shutdown_timeout = os.path.exists("/sys/module/dvb_core/parameters/dvb_shutdown_timeout")
-					if is_dvb_shutdown_timeout:
-						try:
-							oldvalue = open("/sys/module/dvb_core/parameters/dvb_shutdown_timeout", "r").readline()
-							open("/sys/module/dvb_core/parameters/dvb_shutdown_timeout", "w").write("0")
-						except:
-							print "[InitNimManager] tunerTypeChanged read /sys/module/dvb_core/parameters/dvb_shutdown_timeout failed"
-
-					frontend.closeFrontend()
-					open("/proc/stb/frontend/%d/mode" % (fe_id), "w").write(configElement.value)
-					frontend.reopenFrontend()
-
-					if is_dvb_shutdown_timeout:
-						try:
-							open("/sys/module/dvb_core/parameters/dvb_shutdown_timeout", "w").write(oldvalue)
-						except:
-							print "[InitNimManager] tunerTypeChanged write to /sys/module/dvb_core/parameters/dvb_shutdown_timeout failed"
-
-					nimmgr.enumerateNIMs()
-					if initial:
-						print "[InitNimManager] tunerTypeChanged force update setting"
-						nimmgr.sec.update()
+					import NavigationInstance
+					if NavigationInstance.instance:
+						NavigationInstance.instance.stopService()
+						raw_channel = eDVBResourceManager.getInstance().allocateRawChannel(fe_id)
+					if raw_channel is None:
+						print "[InitNimManager] %d: tunerTypeChanged to '%s' failed (BUSY)" %(fe_id, configElement.getText())
+						return
+				frontend = raw_channel.getFrontend()
+				is_changed_mode = os.path.exists("/proc/stb/frontend/%d/mode" % fe_id)
+				if not is_changed_mode and frontend.setDeliverySystem(nimmgr.nim_slots[fe_id].getType()):
+					print "[InitNimManager] tunerTypeChanged feid %d to mode %d" % (fe_id, int(configElement.value))
+					InitNimManager(nimmgr, [fe_id])
 					if not hasattr(config.misc, 'firstrun') or not config.misc.firstrun.value:
 						configElement.save()
-				else:
-					print "[InitNimManager] tunerTypeChanged tuner type is already %d" % cur_type
-		except Exception as e:
-			print "[InitNimManager] tunerTypeChanged error: ", e
+				elif is_changed_mode:
+					cur_type = int(open("/proc/stb/frontend/%d/mode" % (fe_id), "r").read())
+					if cur_type != int(configElement.value):
+						print "[InitNimManager] tunerTypeChanged feid %d from %d to mode %d" % (fe_id, cur_type, int(configElement.value))
 
-	empty_slots = 0
+						is_dvb_shutdown_timeout = os.path.exists("/sys/module/dvb_core/parameters/dvb_shutdown_timeout")
+						if is_dvb_shutdown_timeout:
+							try:
+								oldvalue = open("/sys/module/dvb_core/parameters/dvb_shutdown_timeout", "r").readline()
+								open("/sys/module/dvb_core/parameters/dvb_shutdown_timeout", "w").write("0")
+							except:
+								print "[InitNimManager] tunerTypeChanged read /sys/module/dvb_core/parameters/dvb_shutdown_timeout failed"
+
+						frontend.closeFrontend()
+						open("/proc/stb/frontend/%d/mode" % (fe_id), "w").write(configElement.value)
+						frontend.reopenFrontend()
+
+						if is_dvb_shutdown_timeout:
+							try:
+								open("/sys/module/dvb_core/parameters/dvb_shutdown_timeout", "w").write(oldvalue)
+							except:
+								print "[InitNimManager] tunerTypeChanged write to /sys/module/dvb_core/parameters/dvb_shutdown_timeout failed"
+
+						nimmgr.enumerateNIMs()
+						if initial:
+							print "[InitNimManager] tunerTypeChanged force update setting"
+							nimmgr.sec.update()
+						if not hasattr(config.misc, 'firstrun') or not config.misc.firstrun.value:
+							configElement.save()
+					else:
+						print "[InitNimManager] tunerTypeChanged tuner type is already %d" % cur_type
+			except Exception as e:
+				print "[InitNimManager] tunerTypeChanged error: ", e
+
+	def combinedConfigChanged(nim, slot, slot_id, configElement=None):
+		tunersEnabled = slot.getTunerTypesEnabled()
+		if tunersEnabled:
+			tunersEnabled = ",".join(tunersEnabled)
+			print "[InitNimManager] enable combined tuner type(s) %s" % tunersEnabled
+			eDVBResourceManager.getInstance().setFrontendType(nimmgr.nim_slots[slot_id].frontend_id, tunersEnabled)
+			if nim.configMode.value == 'nothing':
+				nim.configMode.value = nim.configMode.default = "simple" if slot.canBeCompatible("DVB-S") else "enabled"
+		else:
+			print "[InitNimManager] disable combined tuner"
+			eDVBResourceManager.getInstance().setFrontendType(nimmgr.nim_slots[slot_id].frontend_id, "UNDEFINED")
+			nim.configMode.choices.choices.update({ "nothing": _("Disabled")})
+			nim.configMode.value = nim.configMode.default = "nothing"
+
+	def createConfig(nim, slot):
+		slot_id = slot.slot
+		if slot.isCombined() and slot.canBeCompatible("DVB-S") or slot.isCompatible("DVB-S"):
+			if slot.isFBCLink():
+				config_mode_choices = {"nothing": _("FBC automatic"), "advanced": _("FBC SCR (Unicable/JESS)")}
+			else:
+				#Just define all and redefine them in Satconfig.py as here all tuners are not defined yet
+				config_mode_choices = {"nothing": _("Disabled"), "simple": _("Simple"), "advanced": _("Advanced"), "equal": _("Equal to"), "satposdepends": _("Second cable of motorized LNB"), "loopthrough": _("Loop through from")}
+			nim.configMode = ConfigSelection(config_mode_choices, "nothing" if slot.isFBCLink() else "simple")
+			nim.configMode.slot_id = slot_id
+		elif slot.canBeCompatible("DVB-C") or slot.canBeCompatible("DVB-T") or slot.canBeCompatible("ATSC"):
+			nim.configMode = ConfigSelection(choices = {"enabled": _("Enabled"), "nothing": _("Disabled")}, default="enabled")
+		else:
+			nim.configMode = ConfigSelection(choices = {"nothing": _("Disabled")}, default="nothing")
+			if not slot.canBeCompatible("DVB-S"):
+				if slot.type is not None:
+					print "[InitNimManager] pls add support for this frontend type!", slot.type
+
 	for slot in nimmgr.nim_slots:
-		x = slot.slot
-
-		if update_slots and (x not in update_slots):
+		slot_id = slot.slot
+		if update_slots and (slot_id not in update_slots):
 			continue
-
-		nim = config.Nims[x]
+		nim = config.Nims[slot_id]
 		nim.force_legacy_signal_stats = ConfigYesNo(default = False)
 
-		if slot.isCompatible("DVB-S"):
-			createSatConfig(nim, x, empty_slots)
-			config_mode_choices = [("nothing", _("disabled")),
-				("simple", _("simple")), ("advanced", _("advanced"))]
-			if len(nimmgr.getNimListOfType(slot.type, exception = x)) > 0:
-				config_mode_choices.append(("equal", _("equal to")))
-				config_mode_choices.append(("satposdepends", _("second cable of motorized LNB")))
-			if len(nimmgr.canConnectTo(x)) > 0:
-				config_mode_choices.append(("loopthrough", _("loopthrough to")))
-			nim.advanced = ConfigNothing()
-			tmp = ConfigSelection(config_mode_choices, slot.isFBCLink() and "nothing" or "simple")
-			tmp.slot_id = x
-			tmp.addNotifier(configModeChanged, initial_call = False)
-			nim.configMode = tmp
-		elif slot.isCompatible("DVB-C"):
-			nim.configMode = ConfigSelection(
-				choices = {
-					"enabled": _("enabled"),
-					"nothing": _("disabled"),
-					},
-				default = "enabled")
-			createCableConfig(nim, x)
-		elif slot.isCompatible("DVB-T"):
-			nim.configMode = ConfigSelection(
-				choices = {
-					"enabled": _("enabled"),
-					"nothing": _("disabled"),
-					},
-				default = "enabled")
-			createTerrestrialConfig(nim, x)
-		elif slot.isCompatible("ATSC"):
-			nim.configMode = ConfigSelection(
-				choices = {
-					"enabled": _("enabled"),
-					"nothing": _("disabled"),
-					},
-				default = "enabled")
-			createATSCConfig(nim, x)
-		else:
-			empty_slots += 1
-			nim.configMode = ConfigSelection(choices = { "nothing": _("disabled") }, default="nothing")
-			if slot.type is not None:
-				print "[InitNimManager] pls add support for this frontend type!", slot.type
+		if slot.isCombined():
+			nim.configModeDVBS = ConfigYesNo()
+			nim.configModeDVBC = ConfigYesNo()
+			nim.configModeDVBT = ConfigYesNo()
+			nim.configModeATSC = ConfigYesNo()
 
-	nimmgr.sec = SecConfigure(nimmgr)
-
-	empty_slots = 0
-	for slot in nimmgr.nim_slots:
-		x = slot.slot
-
-		if update_slots and (x not in update_slots):
-			continue
-
-		nim = config.Nims[x]
-		empty = True
+		createConfig(nim, slot)
 
 		if slot.canBeCompatible("DVB-S"):
-			createSatConfig(nim, x, empty_slots)
-			empty = False
+			createSatConfig(nim, slot_id)
 		if slot.canBeCompatible("DVB-C"):
-			createCableConfig(nim, x)
-			empty = False
+			createCableConfig(nim, slot_id)
 		if slot.canBeCompatible("DVB-T"):
-			createTerrestrialConfig(nim, x)
-			empty = False
+			createTerrestrialConfig(nim, slot_id)
 		if slot.canBeCompatible("ATSC"):
-			createATSCConfig(nim, x)
-			empty = False
-		if empty:
-			empty_slots += 1
+			createATSCConfig(nim, slot_id)
 
-		# check for multitype tuners
-		addMultiType = False
-		try:
-			nim.multiType
-		except:
-			addMultiType = True
+		if slot.isMultiType() and not hasattr(nim, "multiType"):
+			nim.multiType = ConfigSelection([(id, slot.getMultiTypeList()[id]) for id in slot.getMultiTypeList().keys()] + [("nothing", _("disabled"))], "0")
+			nim.multiType.fe_id = slot_id
+			nim.multiType.addNotifier(boundFunction(tunerTypeChanged, nimmgr))
+			if nim.multiType.value == "nothing":
+				nim.configMode.value = "nothing"
 
-		if slot.isMultiType() and addMultiType:
-			typeList = []
-			for id in slot.getMultiTypeList().keys():
-				type = slot.getMultiTypeList()[id]
-				typeList.append((id, type))
-			nim.multiType = ConfigSelection(typeList, "0")
-			nim.multiType.fe_id = x - empty_slots
-			nim.multiType.addNotifier(boundFunction(tunerTypeChanged, nimmgr), initial_call=True)
+		if slot.isCombined():
+
+			#Convert during an upgrade that multiType is 'converted' to combined config when needed
+			if nim.configMode.value != "nothing" and not slot.getTunerTypesEnabled():
+				nim.multiType = ConfigText(default = "")
+				if nim.multiType.value:
+					type = slot.multi_type.get(nim.multiType.value[:5], "")
+					nim.configModeDVBS.value = type == "DVB-S"
+					nim.configModeDVBC.value = type == "DVB-C"
+					nim.configModeDVBT.value = type == "DVB-T"
+					nim.configModeATSC.value = type == "ATSC"
+					nim.multiType.value = ""
+					nim.save()
+
+			nim.configModeDVBS.addNotifier(boundFunction(combinedConfigChanged, nim, slot, slot_id), initial_call=False)
+			nim.configModeDVBC.addNotifier(boundFunction(combinedConfigChanged, nim, slot, slot_id), initial_call=False)
+			nim.configModeDVBT.addNotifier(boundFunction(combinedConfigChanged, nim, slot, slot_id), initial_call=False)
+			nim.configModeATSC.addNotifier(boundFunction(combinedConfigChanged, nim, slot, slot_id))
+
+	nimmgr.sec = SecConfigure(nimmgr)
 
 nimmanager = NimManager()
