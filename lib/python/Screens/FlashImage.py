@@ -439,16 +439,19 @@ class MultibootSelection(SelectImage):
 		list = []
 		currentimageslot = GetCurrentImage()
 		mode = GetCurrentImageMode() or 0
-		for x in sorted(imagesdict.keys()):
-			if imagesdict[x]["imagename"] != _("Empty slot"):
-				list.append(ChoiceEntryComponent('',((_("slot%s - %s mode 1 (current image)") if x == currentimageslot and mode != 12 else _("slot%s - %s mode 1")) % (x, imagesdict[x]['imagename']), x)))
-				if SystemInfo["canMode12"]:
-					list.append(ChoiceEntryComponent('',((_("slot%s - %s mode 12 (current image)") if x == currentimageslot and mode == 12 else _("slot%s - %s mode 12")) % (x, imagesdict[x]['imagename']), x + 12)))
+		if imagesdict:
+			for x in sorted(imagesdict.keys()):
+				if imagesdict[x]["imagename"] != _("Empty slot"):
+					list.append(ChoiceEntryComponent('',((_("slot%s - %s mode 1 (current image)") if x == currentimageslot and mode != 12 else _("slot%s - %s mode 1")) % (x, imagesdict[x]['imagename']), x)))
+					if SystemInfo["canMode12"]:
+						list.append(ChoiceEntryComponent('',((_("slot%s - %s mode 12 (current image)") if x == currentimageslot and mode == 12 else _("slot%s - %s mode 12")) % (x, imagesdict[x]['imagename']), x + 12)))
+		else:
+			list.append(ChoiceEntryComponent('',((_("No images found")), "Waiter")))
 		self["list"].setList(list)
 
 	def keyOk(self):
 		self.currentSelected = self["list"].l.getCurrentSelection()
-		if self.currentSelected and self.currentSelected[0][1] != "Waiter":
+		if self.currentSelected[0][1] != "Waiter":
 			self.container = Console()
 			if os.path.isdir('/tmp/startupmount'):
 				self.ContainterFallback()
