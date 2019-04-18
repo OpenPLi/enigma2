@@ -28,7 +28,7 @@ class GetImagelist():
 
 	def run(self):
 		if SystemInfo["HasRootSubdir"]:
-			if self.slot == 1:
+			if self.slot == 1 and os.path.islink("/dev/block/by-name/linuxrootfs"):
 				self.container.ePopen('mount /dev/block/by-name/linuxrootfs /tmp/testmount' if self.phase == self.MOUNT else 'umount /tmp/testmount', self.appClosed)
 			else:
 				self.container.ePopen('mount /dev/block/by-name/userdata /tmp/testmount' if self.phase == self.MOUNT else 'umount /tmp/testmount', self.appClosed)
