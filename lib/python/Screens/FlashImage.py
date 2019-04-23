@@ -456,10 +456,10 @@ class MultibootSelection(SelectImage):
 			if os.path.isdir('/tmp/startupmount'):
 				self.ContainterFallback()
 			else:
-				if os.path.isfile("/dev/block/by-name/bootoptions"):
+				if os.path.islink("/dev/block/by-name/bootoptions"):
 					os.mkdir('/tmp/startupmount')
 					self.container.ePopen('mount /dev/block/by-name/bootoptions /tmp/startupmount', self.ContainterFallback)
-				elif os.path.isfile("/dev/block/by-name/boot"):
+				elif os.path.islink("/dev/block/by-name/boot"):
 					os.mkdir('/tmp/startupmount')
 					self.container.ePopen('mount /dev/block/by-name/boot /tmp/startupmount', self.ContainterFallback)
 				else:
