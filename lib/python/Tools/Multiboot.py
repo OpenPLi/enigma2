@@ -28,7 +28,7 @@ class GetImagelist():
 
 	def run(self):
 		if SystemInfo["HasRootSubdir"]:
-			if self.slot == 1:
+			if self.slot == 1 and os.path.islink("/dev/block/by-name/linuxrootfs"):
 				self.container.ePopen('mount /dev/block/by-name/linuxrootfs /tmp/testmount' if self.phase == self.MOUNT else 'umount /tmp/testmount', self.appClosed)
 			else:
 				self.container.ePopen('mount /dev/block/by-name/userdata /tmp/testmount' if self.phase == self.MOUNT else 'umount /tmp/testmount', self.appClosed)
@@ -38,7 +38,7 @@ class GetImagelist():
 	def appClosed(self, data, retval, extra_args):
 		if retval == 0 and self.phase == self.MOUNT:
 			if SystemInfo["HasRootSubdir"]:
-				if os.path.isfile("/tmp/testmount/linuxrootfs1/usr/bin/enigma2"):
+				if self.slot == 1 and os.path.isfile("/tmp/testmount/linuxrootfs1/usr/bin/enigma2"):
 					import datetime
 					self.imagelist[self.slot] =  { 'imagename': "%s (%s)" % (open("/tmp/testmount/linuxrootfs1/etc/issue").readlines()[-2].capitalize().strip()[:-6], datetime.datetime.fromtimestamp(os.stat("/tmp/testmount/linuxrootfs1/usr/share/bootlogo.mvi").st_mtime).strftime('%Y-%m-%d'))}
 				elif os.path.isfile("/tmp/testmount/linuxrootfs%s/usr/bin/enigma2" % self.slot):

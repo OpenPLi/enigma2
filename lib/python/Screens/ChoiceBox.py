@@ -89,7 +89,9 @@ class ChoiceBox(Screen):
 			"down": self.down,
 			"moveUp": self.additionalMoveUp,
 			"moveDown": self.additionalMoveDown,
-			"menu": self.setDefaultChoiceList
+			"menu": self.setDefaultChoiceList,
+			"rightUp": self.rightUp,
+			"leftUp": self.leftUp
 		}, -1)
 		self.setTitle(windowTitle or _("Select"))
 
@@ -138,6 +140,16 @@ class ChoiceBox(Screen):
 
 	def keyRight(self):
 		pass
+
+	def rightUp(self):
+		self.updateDescription()
+
+	def leftUp(self):
+		self.updateDescription()
+
+	def updateDescription(self):
+		if len(self["list"].list) > 0:
+			self.displayDescription(self["list"].l.getCurrentSelectionIndex())
 
 	def up(self):
 		if len(self["list"].list) > 0:
