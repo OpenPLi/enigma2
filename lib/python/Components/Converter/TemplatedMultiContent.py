@@ -27,10 +27,8 @@ class TemplatedMultiContent(StringList):
 			self.content = eListboxPythonMultiContent()
 
 			# also setup fonts (also given by source)
-			index = 0
-			for f in self.template["fonts"]:
+			for index, f in enumerate(self.template["fonts"]):
 				self.content.setFont(index, f)
-				index += 1
 
 		# if only template changed, don't reload list
 		if what[0] == self.CHANGED_SPECIFIC and what[1] == "style":
