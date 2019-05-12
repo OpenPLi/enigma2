@@ -54,6 +54,8 @@ class HardwareInfo:
 		# map for Xtrend device models to machine names
 		if self.device_model.startswith(("et9", "et4", "et5", "et6", "et7")):
 			self.machine_name = "%sx00" % self.device_model[:3]
+		elif self.device_model == "et11000":
+			self.machine_name = "et1x000"
 		else:
 			self.machine_name = self.device_model
 
