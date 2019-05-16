@@ -3,7 +3,6 @@ from config import ConfigSubsection, ConfigYesNo, config, ConfigSelection, Confi
 from Tools.Directories import defaultRecordingLocation
 from enigma import setTunerTypePriorityOrder, setPreferredTuner, setSpinnerOnOff, setEnableTtCachingOnOff, eEnv, eDVBDB, Misc_Options, eBackgroundFileEraser, eServiceEvent
 from Components.NimManager import nimmanager
-from Components.Harddisk import harddiskmanager
 from Components.ServiceList import refreshServiceList
 from SystemInfo import SystemInfo
 import os
