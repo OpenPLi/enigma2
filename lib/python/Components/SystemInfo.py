@@ -7,6 +7,8 @@ import os
 SystemInfo = {}
 
 def getNumVideoDecoders():
+	if os.system("grep -q config.usage.pip_complete_disable=true /etc/enigma2/settings") == 0:
+		return 0
 	number_of_video_decoders = 0
 	while fileExists("/dev/dvb/adapter0/video%d" % (number_of_video_decoders), 'f'):
 		number_of_video_decoders += 1
