@@ -93,6 +93,7 @@ class FullUHDTestScreen(OverscanTestScreen):
 			"5": self.keyNumber,
 			"6": self.keyNumber,
 			"7": self.keyNumber,
+			"8": self.keyNumber,
 			"ok": self.ok,
 			"cancel": self.cancel
 		})
