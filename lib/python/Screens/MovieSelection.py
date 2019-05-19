@@ -255,13 +255,18 @@ class MovieBrowserConfiguration(ConfigListScreen,Screen):
 		cfg.moviesort = ConfigSelection(default=str(config.movielist.moviesort.value), choices = l_moviesort)
 		cfg.listtype = ConfigSelection(default=str(config.movielist.listtype.value), choices = l_listtype)
 		cfg.description = ConfigYesNo(default=(config.movielist.description.value != MovieList.HIDE_DESCRIPTION))
+
+		sort = _("Sort")
+		descr = _("Show extended description")
+		typ = _("Type")
+		eof = _("Behavior when a movie reaches the end")
 		configList = [
-			getConfigListEntry(_("Sort"), cfg.moviesort, _("You can set sorting type for items in movielist.")),
-			getConfigListEntry(_("Show extended description"), cfg.description, _("You can enable if will be displayed extended EPG description for item.")),
-			getConfigListEntry(_("Type"), cfg.listtype, _("Set movielist type.")),
-			getConfigListEntry(_("Use individual settings for each directory"), config.movielist.settings_per_directory, _("Settings can be different for each directory separately (for non removeable devices only).")),
+			getConfigListEntry(sort, cfg.moviesort, _("You can set sorting type for items in movielist.")),
+			getConfigListEntry(descr, cfg.description, _("You can enable if will be displayed extended EPG description for item.")),
+			getConfigListEntry(typ, cfg.listtype, _("Set movielist type.")),
+			getConfigListEntry(eof, config.usage.on_movie_eof, _("Set action when movie playback is finished.")),
+			getConfigListEntry(_("Use individual settings for each directory"), config.movielist.settings_per_directory, _("Settings '%s', '%s', '%s' and '%s' can be different for each directory separately (rewritable devices only).") % (sort,descr,typ,eof)),
 			getConfigListEntry(_("Allow quitting movieplayer with exit"), config.usage.leave_movieplayer_onExit, _("You can set how will be finished movieplayer with 'Exit' button.")),
-			getConfigListEntry(_("Behavior when a movie reaches the end"), config.usage.on_movie_eof, _("Set action when movie playback is finished.")),
 			getConfigListEntry(_("Stop service on return to movie list"), config.movielist.stop_service, _("If is enabled and movie playback is finished, then after return to movielist will not be automaticaly start service playback.")),
 			getConfigListEntry(_("Load length of movies in movie list"), config.usage.load_length_of_movies_in_moviellist, _("Display movie length in movielist (except single line style).")),
 			getConfigListEntry(_("Show status icons in movie list"), config.usage.show_icons_in_movielist, _("Set if You want see status icons, progress bars or nothing.")),
@@ -1223,6 +1228,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				pickle.dump(self.settings, open(path, "wb"))
 			except Exception, e:
 				print "Failed to save settings to %s: %s" % (path, e)
+			return
 		# Also set config items, in case the user has a read-only disk
 		config.movielist.moviesort.value = self.settings["moviesort"]
 		config.movielist.listtype.value = self.settings["listtype"]
@@ -1241,10 +1247,10 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				self.applyConfigSettings(updates)
 			except IOError, e:
 				updates = {
-					"listtype": config.movielist.listtype.default,
-					"moviesort": config.movielist.moviesort.default,
-					"description": config.movielist.description.default,
-					"movieoff": config.usage.on_movie_eof.default
+					"listtype": config.movielist.listtype.value,
+					"moviesort": config.movielist.moviesort.value,
+					"description": config.movielist.description.value,
+					"movieoff": config.usage.on_movie_eof.value
 				}
 				self.applyConfigSettings(updates)
 				pass # ignore fail to open errors
