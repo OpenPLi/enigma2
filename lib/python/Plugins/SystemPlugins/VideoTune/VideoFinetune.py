@@ -27,6 +27,7 @@ class OverscanTestScreen(Screen):
 			"5": self.keyNumber,
 			"7": self.keyNumber,
 			"8": self.keyNumber,
+			"9": self.keyNumber,
 			"ok": self.ok,
 			"cancel": self.cancel
 		})
@@ -65,6 +66,7 @@ class FullHDTestScreen(OverscanTestScreen):
 			"5": self.keyNumber,
 			"6": self.keyNumber,
 			"8": self.keyNumber,
+			"9": self.keyNumber,
 			"ok": self.ok,
 			"cancel": self.cancel
 		})
@@ -94,6 +96,7 @@ class FullUHDTestScreen(OverscanTestScreen):
 			"6": self.keyNumber,
 			"7": self.keyNumber,
 			"8": self.keyNumber,
+			"9": self.keyNumber,
 			"ok": self.ok,
 			"cancel": self.cancel
 		})
@@ -140,6 +143,7 @@ class VideoFinetune(Screen):
 			"6": self.keyNumber,
 			"7": self.keyNumber,
 			"8": self.keyNumber,
+			"9": self.keyNumber,
 			"ok": self.callNext,
 			"cancel": self.close,
 		})
@@ -425,9 +429,9 @@ class PixelsTestScreen(Screen):
 			"6": self.keyNumber,
 			"7": self.keyNumber,
 			"8": self.keyNumber,
-			"red": self.red,
-			"green": self.green,
-			"blue": self.blue,
+			"red": self.togglered,
+			"green": self.togglegreen,
+			"blue": self.toggleblue,
 			"ok": self.ok,
 			"cancel": self.cancel,
 			"left": self.left,
@@ -447,6 +451,7 @@ class PixelsTestScreen(Screen):
 			"Screens change with left/right buttons or use red, green, blue.\n"),
 			RT_WRAP)
 		c.flush()
+		self.color = 0
 		self.idx = 0
 
 	def left(self):
@@ -459,28 +464,35 @@ class PixelsTestScreen(Screen):
 		self.idx %= 9
 		(self.intro, self.red, self.green, self.blue, self.white, self.black, self.cyan, self.magenta, self.yellow)[self.idx]()
 
+	def togglered(self):
+		self.setArea(1, self.color ^ 4)
+	def togglegreen(self):
+		self.setArea(1, self.color ^ 2)
+	def toggleblue(self):
+		self.setArea(1, self.color ^ 1)
 	def red(self):
-		self.setArea(1, RGB(255,0,0))
+		self.setArea(1, 4)
 	def green(self):
-		self.setArea(2, RGB(0,255,0))
+		self.setArea(2, 2)
 	def blue(self):
-		self.setArea(3, RGB(0,0,255))
+		self.setArea(3, 1)
 	def white(self):
-		self.setArea(4, RGB(255,255,255))
+		self.setArea(4, 7)
 	def black(self):
-		self.setArea(5, RGB(0,0,0))
+		self.setArea(5, 0)
 	def cyan(self):
-		self.setArea(6, RGB(0,255,255))
+		self.setArea(6, 3)
 	def magenta(self):
-		self.setArea(7, RGB(255,0,255))
+		self.setArea(7, 5)
 	def yellow(self):
-		self.setArea(8, RGB(255,255,0))
+		self.setArea(8, 6)
 
 	def setArea(self, index, color):
 		self.idx = index
+		self.color = color
 		self.show()
 		c = self["Canvas"]
-		c.fill(0, 0, self.xres, self.yres, color)
+		c.fill(0, 0, self.xres, self.yres, RGB(color & 4 and 255, color & 2 and 255, color & 1 and 255))
 		c.flush()
 
 	def ok(self):
