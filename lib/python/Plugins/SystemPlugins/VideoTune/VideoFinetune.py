@@ -431,6 +431,7 @@ class PixelsTestScreen(Screen):
 			"8": self.keyNumber,
 			"red": self.togglered,
 			"green": self.togglegreen,
+			"yellow": self.intro,
 			"blue": self.toggleblue,
 			"ok": self.ok,
 			"cancel": self.cancel,
@@ -445,55 +446,39 @@ class PixelsTestScreen(Screen):
 		c.writeText(self.xres / 10, self.yres / 6 - self.fontsize * 2, self.xres * 3 / 5, 40, RGB(255,128,255), RGB(0,0,0), gFont("Regular", self.fontsize * 2),
 			_("Pixels\n"))
 		c.writeText(self.xres / 10, self.yres / 6, self.xres / 2, self.yres * 4 / 6, RGB(255,255,255), RGB(0,0,0), gFont("Regular", self.fontsize),
-			_("Can be used to test defect pixels on TV screen.\n"
+			_("Can be used to test defect pixels on TV screen.\n\n"
 			"Available color test screens:\n\n"
 			"red\ngreen\nblue\nwhite\nblack\ncyan\nmagenta\nyellow\n\n"
-			"Screens change with left/right buttons or use red, green, blue.\n"),
+			"Screens change with left/right buttons or use red, green, blue to toggle.\n"
+			"Yellow for returning back to this intro"),
 			RT_WRAP)
 		c.flush()
-		self.color = 0
-		self.idx = 0
+		self.color = 8
 
 	def left(self):
-		self.idx-=1
-		self.show_screen()
+		self.setArea((7, 2, 4, 0, 8, 3, 5, 1, 6)[self.color])
+
 	def right(self):
-		self.idx+=1
-		self.show_screen()
-	def show_screen(self):
-		self.idx %= 9
-		(self.intro, self.red, self.green, self.blue, self.white, self.black, self.cyan, self.magenta, self.yellow)[self.idx]()
+		self.setArea((3, 7, 1, 5, 2, 6, 8, 0, 4)[self.color])
 
 	def togglered(self):
-		self.setArea(1, self.color ^ 4)
-	def togglegreen(self):
-		self.setArea(1, self.color ^ 2)
-	def toggleblue(self):
-		self.setArea(1, self.color ^ 1)
-	def red(self):
-		self.setArea(1, 4)
-	def green(self):
-		self.setArea(2, 2)
-	def blue(self):
-		self.setArea(3, 1)
-	def white(self):
-		self.setArea(4, 7)
-	def black(self):
-		self.setArea(5, 0)
-	def cyan(self):
-		self.setArea(6, 3)
-	def magenta(self):
-		self.setArea(7, 5)
-	def yellow(self):
-		self.setArea(8, 6)
+		self.setArea(self.color ^ 4)
 
-	def setArea(self, index, color):
-		self.idx = index
-		self.color = color
-		self.show()
-		c = self["Canvas"]
-		c.fill(0, 0, self.xres, self.yres, RGB(color & 4 and 255, color & 2 and 255, color & 1 and 255))
-		c.flush()
+	def togglegreen(self):
+		self.setArea(self.color ^ 2)
+
+	def toggleblue(self):
+		self.setArea(self.color ^ 1)
+
+	def setArea(self, color):
+		if color == 8:
+			self.intro()
+		else:
+			self.color = color & 7
+			self.show()
+			c = self["Canvas"]
+			c.fill(0, 0, self.xres, self.yres, RGB(color & 4 and 255, color & 2 and 255, color & 1 and 255))
+			c.flush()
 
 	def ok(self):
 		self.close(True)
