@@ -35,5 +35,5 @@ def startup(reason, **kwargs):
 
 def Plugins(**kwargs):
 	from Plugins.Plugin import PluginDescriptor
-	return [PluginDescriptor(name = "Overscan wizard", description = "", where = PluginDescriptor.WHERE_SESSIONSTART, fnc = startup),
-		PluginDescriptor(name = "Overscan wizard", description = _("Wizard to arrange the overscan"), where = PluginDescriptor.WHERE_MENU, fnc = startSetup)]
+	return [PluginDescriptor(name = _("Overscan wizard"), description = "", where = PluginDescriptor.WHERE_SESSIONSTART, fnc = startup),
+		PluginDescriptor(name = _("Overscan wizard"), description = _("Wizard to arrange the overscan"), where = PluginDescriptor.WHERE_MENU, fnc = startSetup)]

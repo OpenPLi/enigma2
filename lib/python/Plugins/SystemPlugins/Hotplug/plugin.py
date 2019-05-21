@@ -95,4 +95,4 @@ def autostart(reason, **kwargs):
 		reactor.listenUNIX("/tmp/hotplug.socket", factory)
 
 def Plugins(**kwargs):
-	return PluginDescriptor(name = "Hotplug", description = "listens to hotplug events", where = PluginDescriptor.WHERE_AUTOSTART, needsRestart = True, fnc = autostart)
+	return PluginDescriptor(name = _("Hotplug"), description = _("listens to hotplug events"), where = PluginDescriptor.WHERE_AUTOSTART, needsRestart = True, fnc = autostart)
