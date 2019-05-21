@@ -3,15 +3,41 @@
 #  
 # Pre-requisite:
 # The following tools must be installed on your system and accessible from path
-# gawk, find, xgettext, gsed, python, msguniq, msgmerge, msgattrib, msgfmt, msginit
+# gawk, find, xgettext, sed, python, msguniq, msgmerge, msgattrib, msgfmt, msginit
 #
 # Run this script from within the po folder.
 #
 # Author: Pr2 for OpenPLi Team
-# Version: 1.0
+# Version: 1.1
 #
 # Retrieve languages from Makefile.am LANGS variable for backward compatibility
 #
+localgsed="sed"
+findoptions=""
+
+#
+# Script only run with gsed but on some distro normal sed is already gsed so checking it.
+#
+gsed --version 2> /dev/null | grep -q "GNU"
+if [ $? -eq 0 ]; then
+	localgsed="gsed"
+else
+	"$localgsed" --version | grep -q "GNU"
+	if [ $? -eq 0 ]; then
+		printf "GNU sed found: [%s]\n" $localgsed
+	fi
+fi
+
+#
+# On Mac OSX find option are specific
+#
+if [[ "$OSTYPE" == "darwin"* ]]
+	then
+		# Mac OSX
+		printf "Script running on Mac OSX [%s]\n" "$OSTYPE"
+    	findoptions=" -s -X "
+fi
+
 printf "Po files update/creation from script starting.\n"
 languages=($(gawk ' BEGIN { FS=" " } 
 		/^LANGS/ {
@@ -28,10 +54,10 @@ languages=($(gawk ' BEGIN { FS=" " }
 #
 
 printf "Creating temporary file enigma2-py.pot\n"
-find -s -X .. -name "*.py" -exec xgettext --no-wrap -L Python --from-code=UTF-8 -kpgettext:1c,2 --add-comments="TRANSLATORS:" -d enigma2 -s -o enigma2-py.pot {} \+
-gsed --in-place enigma2-py.pot --expression=s/CHARSET/UTF-8/
+find $findoptions .. -name "*.py" -exec xgettext --no-wrap -L Python --from-code=UTF-8 -kpgettext:1c,2 --add-comments="TRANSLATORS:" -d enigma2 -s -o enigma2-py.pot {} \+
+$localgsed --in-place enigma2-py.pot --expression=s/CHARSET/UTF-8/
 printf "Creating temporary file enigma2-xml.pot\n"
-find -s -X .. -name "*.xml" -exec python xml2po.py {} \+ > enigma2-xml.pot
+find $findoptions .. -name "*.xml" -exec python xml2po.py {} \+ > enigma2-xml.pot
 printf "Merging pot files to create: enigma2.pot\n"
 cat enigma2-py.pot enigma2-xml.pot | msguniq --no-wrap --no-location -o enigma2.pot -
 OLDIFS=$IFS
