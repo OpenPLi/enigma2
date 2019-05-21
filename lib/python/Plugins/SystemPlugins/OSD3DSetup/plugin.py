@@ -132,5 +132,5 @@ def Plugins(**kwargs):
 	if SystemInfo["3DMode"]:
 		from Plugins.Plugin import PluginDescriptor
 		return [PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART], fnc = autostart),
-			PluginDescriptor(name = "OSD 3D setup", description = _("Adjust 3D settings"), where = PluginDescriptor.WHERE_MENU, fnc = startSetup)]
+			PluginDescriptor(name = _("OSD 3D setup"), description = _("Adjust 3D settings"), where = PluginDescriptor.WHERE_MENU, fnc = startSetup)]
 	return []
