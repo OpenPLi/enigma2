@@ -2795,6 +2795,8 @@ class InfoBarSubserviceSelection:
 					selection += 2
 				if tlist:
 					self.session.openWithCallback(self.subserviceSelected, ChoiceBox, title=_("Please select a sub service..."), list=tlist, selection=selection, keys=keys, skin_name ="SubserviceSelection")
+				else:
+					self.session.open(MessageBox, _("No active subservices available."), MessageBox.TYPE_INFO, timeout=5, simple = True)
 
 	def subserviceSelected(self, service):
 		if service and len(service) > 1:
