@@ -482,6 +482,8 @@ class MultibootSelection(SelectImage):
 				shutil.copyfile("/tmp/startupmount/STARTUP_LINUX_%s_BOXMODE_12" % slot, "/tmp/startupmount/STARTUP")
 		elif os.path.isfile("/tmp/startupmount/STARTUP_LINUX_4"):
 			shutil.copyfile("/tmp/startupmount/STARTUP_LINUX_%s" % slot, "/tmp/startupmount/STARTUP")
+		elif os.path.isfile("/tmp/startupmount/STARTUP_4"):
+			shutil.copyfile("/tmp/startupmount/STARTUP_%s" % slot, "/tmp/startupmount/STARTUP")
 		else:
 			if slot < 12:
 				startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=1'\n" % (slot, slot * 2 + 1, model)
