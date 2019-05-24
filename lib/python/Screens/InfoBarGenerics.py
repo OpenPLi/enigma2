@@ -2781,6 +2781,7 @@ class InfoBarSubserviceSelection:
 			if subservices and len(subservices) > 1 and serviceRef.toString() in [x[1] for x in subservices]:
 				selection = [x[1] for x in subservices].index(serviceRef.toString())
 				self.bouquets = self.servicelist and self.servicelist.getBouquetList()
+				tlist = None
 				if self.bouquets and len(self.bouquets):
 					keys = ["red", "blue", "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 					call_func_title = _("Add to favourites")
@@ -2792,7 +2793,8 @@ class InfoBarSubserviceSelection:
 					tlist = [(_("Quick zap"), "quickzap", subservices), ("--", "")] + subservices
 					keys = ["red", "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 					selection += 2
-				self.session.openWithCallback(self.subserviceSelected, ChoiceBox, title=_("Please select a sub service..."), list=tlist, selection=selection, keys=keys, skin_name ="SubserviceSelection")
+				if tlist:
+					self.session.openWithCallback(self.subserviceSelected, ChoiceBox, title=_("Please select a sub service..."), list=tlist, selection=selection, keys=keys, skin_name ="SubserviceSelection")
 
 	def subserviceSelected(self, service):
 		if service and len(service) > 1:
