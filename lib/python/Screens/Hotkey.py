@@ -106,6 +106,8 @@ def getHotkeys():
 		("Homepage" + " " + _("long"), "homepage_long", ""),
 		("EjectCD", "ejectcd", ""),
 		("EjectCD" + " " + _("long"), "ejectcd_long", ""),
+		("VOD", "vod", ""),
+		("VOD" + " " + _("long"), "vod_long", ""),
 		("WWW Portal", "www", ""),
 		("WWW Portal" + " " + _("long"), "www_long", "")]
 
