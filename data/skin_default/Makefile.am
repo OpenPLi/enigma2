@@ -90,6 +90,7 @@ dist_install_DATA = \
 	vkey_sel_l.png \
 	vkey_sel_m.png \
 	vkey_sel_r.png \
+	vkey_shift.png \
 	vkey_shift0.png \
 	vkey_shift1.png \
 	vkey_shift2.png \
