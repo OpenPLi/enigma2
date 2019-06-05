@@ -49,13 +49,13 @@ def getEnigmaVersionString():
 		enigma_version = enigma_version [:-12]
 	return enigma_version
 
-def getGStreamerVersionString():
+def getGStreamerVersionString(cpu):
 	try:
 		from glob import glob
 		gst = [x.split("Version: ") for x in open(glob("/var/lib/opkg/info/gstreamer[0-9].[0-9].control")[0], "r") if x.startswith("Version:")][0]
 		return "%s" % gst[1].split("+")[0].replace("\n","")
 	except:
-		return _("unknown")
+		return _("Not Required") if cpu.upper().startswith('HI') else _("Not Installed")
 
 def getKernelVersionString():
 	try:
