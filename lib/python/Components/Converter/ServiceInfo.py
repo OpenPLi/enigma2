@@ -82,6 +82,10 @@ class ServiceInfo(Converter, object):
 				"IsHLG": (self.IS_HLG, (iPlayableService.evVideoGammaChanged, iPlayableService.evUpdatedInfo)),
 			}[type]
 
+	def isVideoService(self, info):
+		serviceInfo = info.getInfoString(iServiceInformation.sServiceref).split(':')
+		return len(serviceInfo) < 3 or serviceInfo[2] != '2'
+
 	def getServiceInfoString(self, info, what, convert = lambda x: "%d" % x):
 		v = info.getInfo(what)
 		if v == -1:
@@ -137,15 +141,15 @@ class ServiceInfo(Converter, object):
 				return hasattr(self.source, "editmode") and not not self.source.editmode
 			elif self.type == self.IS_STREAM:
 				return service.streamed() is not None
-			elif info.getInfoString(iServiceInformation.sServiceref).split(':')[2] != "2":
+			elif self.isVideoService(info):
 				if self.type == self.IS_SD:
-					return info.getInfo(iServiceInformation.sVideoHeight) < 720
+					return info.getInfo(iServiceInformation.sVideoHeight) > 0 and info.getInfo(iServiceInformation.sVideoHeight) < 720
 				elif self.type == self.IS_HD:
 					return info.getInfo(iServiceInformation.sVideoHeight) >= 720 and info.getInfo(iServiceInformation.sVideoHeight) < 2100
 				elif self.type == self.IS_SD_AND_WIDESCREEN:
-					return info.getInfo(iServiceInformation.sVideoHeight) < 720 and info.getInfo(iServiceInformation.sAspect) in WIDESCREEN
+					return info.getInfo(iServiceInformation.sVideoHeight) > 0 and info.getInfo(iServiceInformation.sVideoHeight) < 720 and info.getInfo(iServiceInformation.sAspect) in WIDESCREEN
 				elif self.type == self.IS_SD_AND_NOT_WIDESCREEN:
-					return info.getInfo(iServiceInformation.sVideoHeight) < 720 and info.getInfo(iServiceInformation.sAspect) not in WIDESCREEN
+					return info.getInfo(iServiceInformation.sVideoHeight) > 0 and info.getInfo(iServiceInformation.sVideoHeight) < 720 and info.getInfo(iServiceInformation.sAspect) not in WIDESCREEN
 				elif self.type == self.IS_4K:
 					return info.getInfo(iServiceInformation.sVideoHeight) >= 2100
 				elif self.type == self.IS_1080:
@@ -191,7 +195,7 @@ class ServiceInfo(Converter, object):
 				return self.getServiceInfoString(info, iServiceInformation.sTransferBPS, lambda x: _("%d kB/s") % (x/1024))
 			elif self.type == self.HAS_HBBTV:
 				return info.getInfoString(iServiceInformation.sHBBTVUrl)
-			elif info.getInfoString(iServiceInformation.sServiceref).split(':')[2] != "2":
+			elif self.isVideoService(info):
 				if self.type == self.XRES:
 					return self.getServiceInfoString(info, iServiceInformation.sVideoWidth)
 				elif self.type == self.YRES:
@@ -208,7 +212,7 @@ class ServiceInfo(Converter, object):
 	def getValue(self):
 		service = self.source.service
 		info = service and service.info()
-		if info and info.getInfoString(iServiceInformation.sServiceref).split(':')[2] != "2":
+		if info and self.isVideoService(info):
 			if self.type == self.XRES:
 				return info.getInfo(iServiceInformation.sVideoWidth)
 			if self.type == self.YRES:
