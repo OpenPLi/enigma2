@@ -81,6 +81,10 @@ class ServiceInfo(Converter, object):
 				"IsHDR10": (self.IS_HDR10, (iPlayableService.evVideoGammaChanged, iPlayableService.evUpdatedInfo)),
 				"IsHLG": (self.IS_HLG, (iPlayableService.evVideoGammaChanged, iPlayableService.evUpdatedInfo)),
 			}[type]
+		if self.type in (self.IS_SD, self.IS_HD, self.IS_SD_AND_WIDESCREEN, self.IS_SD_AND_NOT_WIDESCREEN, self.IS_4K, self.IS_1080, self.IS_720):
+			self.videoHeight = None
+			if self.type in (self.IS_SD_AND_WIDESCREEN, self.IS_SD_AND_NOT_WIDESCREEN):
+				self.aspect = 0
 
 	def isVideoService(self, info):
 		serviceInfo = info.getInfoString(iServiceInformation.sServiceref).split(':')
@@ -130,33 +134,16 @@ class ServiceInfo(Converter, object):
 				return info.getInfoString(iServiceInformation.sHBBTVUrl) != ""
 			elif self.type == self.AUDIOTRACKS_AVAILABLE:
 				audio = service.audioTracks()
-				return bool(audio) and audio.getNumberOfTracks() > 1
+				return bool(audio and audio.getNumberOfTracks())
 			elif self.type == self.SUBTITLES_AVAILABLE:
 				subtitle = service and service.subtitle()
-				subtitlelist = subtitle and subtitle.getSubtitleList()
-				if subtitlelist:
-					return len(subtitlelist) > 0
-				return False
+				bool(subtitle and subtitle.getSubtitleList())
 			elif self.type == self.EDITMODE:
-				return hasattr(self.source, "editmode") and not not self.source.editmode
+				return boot(hasattr(self.source, "editmode") and self.source.editmode)
 			elif self.type == self.IS_STREAM:
 				return service.streamed() is not None
 			elif self.isVideoService(info):
-				if self.type == self.IS_SD:
-					return info.getInfo(iServiceInformation.sVideoHeight) > 0 and info.getInfo(iServiceInformation.sVideoHeight) < 720
-				elif self.type == self.IS_HD:
-					return info.getInfo(iServiceInformation.sVideoHeight) >= 720 and info.getInfo(iServiceInformation.sVideoHeight) < 2100
-				elif self.type == self.IS_SD_AND_WIDESCREEN:
-					return info.getInfo(iServiceInformation.sVideoHeight) > 0 and info.getInfo(iServiceInformation.sVideoHeight) < 720 and info.getInfo(iServiceInformation.sAspect) in WIDESCREEN
-				elif self.type == self.IS_SD_AND_NOT_WIDESCREEN:
-					return info.getInfo(iServiceInformation.sVideoHeight) > 0 and info.getInfo(iServiceInformation.sVideoHeight) < 720 and info.getInfo(iServiceInformation.sAspect) not in WIDESCREEN
-				elif self.type == self.IS_4K:
-					return info.getInfo(iServiceInformation.sVideoHeight) >= 2100
-				elif self.type == self.IS_1080:
-					return info.getInfo(iServiceInformation.sVideoHeight) > 1000 and info.getInfo(iServiceInformation.sVideoHeight) <= 1080
-				elif self.type == self.IS_720:
-					return info.getInfo(iServiceInformation.sVideoHeight) == 720
-				elif self.type == self.IS_SDR:
+				if self.type == self.IS_SDR:
 					return info.getInfo(iServiceInformation.sGamma) == 0
 				elif self.type == self.IS_HDR:
 					return info.getInfo(iServiceInformation.sGamma) == 1
@@ -168,6 +155,26 @@ class ServiceInfo(Converter, object):
 					return info.getInfo(iServiceInformation.sAspect) in WIDESCREEN
 				elif self.type == self.IS_NOT_WIDESCREEN:
 					return info.getInfo(iServiceInformation.sAspect) not in WIDESCREEN
+				else:
+					videoHeight = info.getInfo(iServiceInformation.sVideoHeight)
+					self.videoHeight = videoHeight if videoHeight > 0 else self.videoHeight
+					if self.type == self.IS_SD:
+						return self.videoHeight and self.videoHeight < 720
+					elif self.type == self.IS_HD:
+						return self.videoHeight >= 720 and self.videoHeight < 2100
+					elif self.type == self.IS_4K:
+						return self.videoHeight >= 2100
+					elif self.type == self.IS_1080:
+						return self.videoHeight > 1000 and self.videoHeight <= 1080
+					elif self.type == self.IS_720:
+						return self.videoHeight == 720
+					else:
+						aspect = info.getInfo(iServiceInformation.sAspect)
+						self.aspect = aspect if aspect > -1 else self.aspect
+						if self.type == self.IS_SD_AND_WIDESCREEN:
+							return self.videoHeight and self.aspect and self.videoHeight < 720 and self.aspect in WIDESCREEN
+						if self.type == self.IS_SD_AND_NOT_WIDESCREEN:
+							return self.videoHeight and self.aspect and self.videoHeight < 720 and self.aspect not in WIDESCREEN
 		return False
 
 	boolean = property(getBoolean)
