@@ -139,13 +139,13 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 			if config.usage.remote_fallback_openwebif_customize.value:
 				self.list.append(getConfigListEntry(_("User ID"),
 					config.usage.remote_fallback_openwebif_userid,
-					_("Set the User ID of the OpenWebif from your fallback tuner")))
+					"  %s" % _("Set the User ID of the OpenWebif from your fallback tuner")))
 				self.list.append(getConfigListEntry(_("Password"),
 					config.usage.remote_fallback_openwebif_password,
-					_("Set the password of the OpenWebif from your fallback tuner")))
+					"  %s" % _("Set the password of the OpenWebif from your fallback tuner")))
 				self.list.append(getConfigListEntry(_("Port"),
 					config.usage.remote_fallback_openwebif_port,
-					_("Set the port of the OpenWebif from your fallback tuner")))
+					"  %s" % _("Set the port of the OpenWebif from your fallback tuner")))
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
