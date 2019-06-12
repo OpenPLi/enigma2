@@ -92,14 +92,14 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 				self.avahiselect,
 				_("Destination of fallback remote receiver")))
 			if self.avahiselect.value == "ip":
-				self.list.append(getConfigListEntry(_("Fallback remote receiver IP"),
+				self.list.append(getConfigListEntry("  %s" % _("Fallback remote receiver IP"),
 					self.ip,
 					_("IP of fallback remote receiver")))			
-				self.list.append(getConfigListEntry(_("Fallback remote receiver Port"),
+				self.list.append(getConfigListEntry("  %s" % _("Fallback remote receiver Port"),
 					self.port,
 					_("Port of fallback remote receiver")))			
 			if self.avahiselect.value == "url":
-				self.list.append(getConfigListEntry(_("Fallback remote receiver URL"),
+				self.list.append(getConfigListEntry("  %s" % _("Fallback remote receiver URL"),
 					config.usage.remote_fallback,
 					_("URL of fallback remote receiver")))
 		if config.usage.remote_fallback_enabled.value and config.usage.remote_fallback_import.value and config.usage.remote_fallback.value:
@@ -107,14 +107,14 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 				self.avahiselect_seperate,
 				_("URL of fallback remote receiver")))
 			if self.avahiselect_seperate.value == "ip":
-				self.list.append(getConfigListEntry(_("Fallback remote receiver IP"),
+				self.list.append(getConfigListEntry("  %s" % _("Fallback remote receiver IP"),
 					self.ip_seperate,
 					_("IP of fallback remote receiver")))			
-				self.list.append(getConfigListEntry(_("Fallback remote receiver Port"),
+				self.list.append(getConfigListEntry("  %s" % _("Fallback remote receiver Port"),
 					self.port_seperate,
 					_("Port of fallback remote receiver")))			
 			if self.avahiselect_seperate.value == "url":
-				self.list.append(getConfigListEntry(_("Fallback remote receiver URL"),
+				self.list.append(getConfigListEntry("  %s" % _("Fallback remote receiver URL"),
 					config.usage.remote_fallback_import_url,
 					_("URL of fallback remote receiver")))
 		if config.usage.remote_fallback_enabled.value and config.usage.remote_fallback_import.value:
@@ -145,7 +145,7 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 					_("Set the password of the OpenWebif from your fallback tuner")))
 				self.list.append(getConfigListEntry("  %s" % _("Port"),
 					config.usage.remote_fallback_openwebif_port,
-					_("Set the port of the OpenWebif from your fallback tuner")))
+					"  %s" % _("Set the port of the OpenWebif from your fallback tuner")))
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
