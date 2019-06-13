@@ -440,10 +440,10 @@ class MultibootSelection(SelectImage):
 		currentimageslot = GetCurrentImage()
 		mode = GetCurrentImageMode() or 0
 		if imagesdict:
-			for x in sorted(imagesdict.keys()):
+			for index, x in enumerate(sorted(imagesdict.keys())):
 				if imagesdict[x]["imagename"] != _("Empty slot"):
 					if SystemInfo["canMode12"]:
-						list.append(ChoiceEntryComponent('',((_("slot%s - %s mode 1 (current image)") if x == currentimageslot and mode != 12 else _("slot%s - %s mode 1")) % (x, imagesdict[x]['imagename']), x)))
+						list.insert(index, ChoiceEntryComponent('',((_("slot%s - %s mode 1 (current image)") if x == currentimageslot and mode != 12 else _("slot%s - %s mode 1")) % (x, imagesdict[x]['imagename']), x)))
 						list.append(ChoiceEntryComponent('',((_("slot%s - %s mode 12 (current image)") if x == currentimageslot and mode == 12 else _("slot%s - %s mode 12")) % (x, imagesdict[x]['imagename']), x + 12)))
 					else:
 						list.append(ChoiceEntryComponent('',((_("slot%s - %s (current image)") if x == currentimageslot and mode != 12 else _("slot%s - %s")) % (x, imagesdict[x]['imagename']), x)))
