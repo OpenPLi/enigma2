@@ -33,32 +33,30 @@ class HelpMenuList(GUIComponent):
 
 				for n in buttons:
 					(name, flags) = (getKeyDescription(n[0]), n[1])
-					if name is not None:
-						break
 
-				# only show entries with keys that are available on the used rc
-				if name is None:
-					continue
+					# only show entries with keys that are available on the used rc
+					if name is None:
+						continue
 
-				if flags & 8: # for long keypresses, prepend l_ into the key name.
-					name = (name[0], "long")
+					if flags & 8: # for long keypresses, prepend l_ into the key name.
+						name = (name[0], "long")
 
-				entry = [ (actionmap, context, action, name ) ]
+					entry = [ (actionmap, context, action, name ) ]
 
-				if isinstance(help, list):
-					self.extendedHelp = True
-					print "extendedHelpEntry found"
-					x, y, w, h = skin.parameters.get("HelpMenuListExtHlp0",(0, 0, 600, 26))
-					x1, y1, w1, h1 = skin.parameters.get("HelpMenuListExtHlp1",(0, 28, 600, 20))
-					entry.extend((
-						(eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, 0, help[0]),
-						(eListboxPythonMultiContent.TYPE_TEXT, x1, y1, w1, h1, 1, 0, help[1])
-					))
-				else:
-					x, y, w, h = skin.parameters.get("HelpMenuListHlp",(0, 0, 600, 28))
-					entry.append( (eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, 0, help) )
+					if isinstance(help, list):
+						self.extendedHelp = True
+						print "extendedHelpEntry found"
+						x, y, w, h = skin.parameters.get("HelpMenuListExtHlp0",(0, 0, 600, 26))
+						x1, y1, w1, h1 = skin.parameters.get("HelpMenuListExtHlp1",(0, 28, 600, 20))
+						entry.extend((
+							(eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, 0, help[0]),
+							(eListboxPythonMultiContent.TYPE_TEXT, x1, y1, w1, h1, 1, 0, help[1])
+						))
+					else:
+						x, y, w, h = skin.parameters.get("HelpMenuListHlp",(0, 0, 600, 28))
+						entry.append( (eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, 0, help) )
 
-				l.append(entry)
+					l.append(entry)
 
 		self.l.setList(l)
 		if self.extendedHelp is True:
