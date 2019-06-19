@@ -26,7 +26,7 @@
 		<item level="0" text="Plugins" entryID="plugin_selection"><screen module="PluginBrowser" screen="PluginBrowser"/></item>
 		<menu level="0" text="Setup" flushConfigOnClose="1" entryID="setup_selection" >
 			<id val="setup"/>
-			<menu weight="7" level="0" text="Service searching" entryID="service_searching_selection">
+			<menu weight="7" level="0" text="Tuners &amp; scanning" entryID="service_searching_selection">
 				<id val="scan"/>
 				<item text="Tuner configuration" entryID="tuner_setup" conditional="nimmanager.nim_slots"><screen module="Satconfig" screen="NimSelection"/></item>
 				<item text="Automatic scan" entryID="auto_scan" conditional="nimmanager.somethingConnected()"><screen module="ScanSetup" screen="ScanSimple"/></item>
