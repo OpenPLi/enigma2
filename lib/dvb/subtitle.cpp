@@ -10,7 +10,6 @@
 #include <lib/base/smartptr.h>
 #include <lib/base/eerror.h>
 #include <lib/gdi/gpixmap.h>
-#include <lib/gdi/region.h>
 #include <lib/base/nconfig.h>
 
 void bitstream_init(bitstream *bit, const void *buffer, int size)
@@ -350,40 +349,34 @@ int eDVBSubtitleParser::subtitle_process_segment(uint8_t *segment)
 
 		page->page_version_number = page_version_number;
 
+		subtitle_page_region **r = &page->page_regions;
+
+		// go to last entry
+		while (*r)
+			r = &(*r)->next;
+
 		if (processed_length == segment_length && !page->page_regions)
 			subtitle_redraw(page->page_id);
 
 		while (processed_length < segment_length)
 		{
-			int region_id = *segment++; processed_length++;
+			subtitle_page_region *pr;
 
-			// find the region or go to the last region
-			subtitle_page_region *region, **pregion;
-			region = page->page_regions; pregion = &page->page_regions;
-			while (region)
-			{
-				if (region->region_id == region_id)
-					break;
-				pregion = &region->next;
-				region = region->next;
-			}
-
-			if (!region)
-			{
 				// append new entry to list
-				*pregion = region = new subtitle_page_region;
-				region->next = 0;
-				pregion = &region->next;
-				region->region_id = region_id;
-			}
+			pr = new subtitle_page_region;
+			pr->next = 0;
+			*r = pr;
+			r = &pr->next;
 
+			pr->region_id = *segment++; processed_length++;
 			segment++; processed_length++;
-			region->region_horizontal_address  = *segment++ << 8;
-			region->region_horizontal_address |= *segment++;
+
+			pr->region_horizontal_address  = *segment++ << 8;
+			pr->region_horizontal_address |= *segment++;
 			processed_length += 2;
 
-			region->region_vertical_address  = *segment++ << 8;
-			region->region_vertical_address |= *segment++;
+			pr->region_vertical_address  = *segment++ << 8;
+			pr->region_vertical_address |= *segment++;
 			processed_length += 2;
 		}
 
@@ -418,13 +411,10 @@ int eDVBSubtitleParser::subtitle_process_segment(uint8_t *segment)
 			region = region->next;
 		}
 
-		ePtr<gPixmap> previousBuffer;
-
 		if (!region)
 		{
 			*pregion = region = new subtitle_region;
 			region->next = 0;
-			region->region_id = region_id;
 			region->committed = false;
 		}
 		else if (region->version_number != version_number)
@@ -438,7 +428,6 @@ int eDVBSubtitleParser::subtitle_process_segment(uint8_t *segment)
 			}
 			if (region->buffer)
 			{
-				previousBuffer = region->buffer;
 				region->buffer=0;
 			}
 			region->committed = false;
@@ -446,6 +435,7 @@ int eDVBSubtitleParser::subtitle_process_segment(uint8_t *segment)
 		else
 			break;
 
+		region->region_id = region_id;
 		region->version_number = version_number;
 
 		region->width  = *segment++ << 8;
@@ -491,15 +481,6 @@ int eDVBSubtitleParser::subtitle_process_segment(uint8_t *segment)
 				memset(region->buffer->surface->data, region_8bit_pixel_code, region->height * region->width);
 			else
 				eDebug("[eDVBSubtitleParser] !!!! invalid depth");
-		}
-
-		// If this is a version update of a region, take a copy of the previous version's bitmap
-		// (so we don't modify any subtitles that are already in the queue) and draw the additional changes
-		// on the copied pixmap
-		if (previousBuffer &&
-			previousBuffer->size().width() == region->width && previousBuffer->size().height() == region->height)
-		{
-			memcpy(region->buffer->surface->data, previousBuffer->surface->data, region->height * region->buffer->surface->stride);
 		}
 
 		region->objects = 0;
@@ -868,7 +849,7 @@ void eDVBSubtitleParser::subtitle_reset()
 			delete region;
 		}
 
-		/* free CLUTs */
+			/* free CLUTs */
 		while (page->cluts)
 		{
 			subtitle_clut *clut = page->cluts;
@@ -894,20 +875,14 @@ void eDVBSubtitleParser::subtitle_redraw(int page_id)
 	if (!page)
 		return;
 
-	eDVBSubtitlePage dvbPage;
-	dvbPage.m_show_time = m_show_time;
-	dvbPage.m_display_size = m_display_size;
+	/* iterate all regions in this pcs */
+	subtitle_page_region *region = page->page_regions;
 
-	/* iterate all page regions in this pcs */
-	for (subtitle_page_region *region = page->page_regions; region; region=region->next)
+	eDVBSubtitlePage Page;
+	Page.m_show_time = m_show_time;
+	for (; region; region=region->next)
 	{
-		int x0 = region->region_horizontal_address;
-		int y0 = region->region_vertical_address;
-
-		if (x0 < 0 || y0 < 0)
-			continue;
-
-		/* find corresponding region detail */
+		/* find corresponding region */
 		subtitle_region *reg = page->regions;
 		while (reg)
 		{
@@ -915,11 +890,17 @@ void eDVBSubtitleParser::subtitle_redraw(int page_id)
 				break;
 			reg = reg->next;
 		}
-		if (!reg)
-			continue;
-
-		if (!reg->committed)
+		if (reg)
 		{
+			if (reg->committed)
+				continue;
+
+			int x0 = region->region_horizontal_address;
+			int y0 = region->region_vertical_address;
+
+			if ((x0 < 0) || (y0 < 0))
+				continue;
+
 			/* find corresponding clut */
 			subtitle_clut *clut = page->cluts;
 			while (clut)
@@ -932,7 +913,6 @@ void eDVBSubtitleParser::subtitle_redraw(int page_id)
 			int clut_size = reg->buffer->surface->clut.colors = reg->depth == subtitle_region::bpp2 ?
 				4 : reg->depth == subtitle_region::bpp4 ? 16 : 256;
 
-			// The clut data will be freed when the buffer pixmap is destroyed
 			reg->buffer->surface->clut.data = new gRGB[clut_size];
 
 			gRGB *palette = reg->buffer->surface->clut.data;
@@ -1080,17 +1060,18 @@ void eDVBSubtitleParser::subtitle_redraw(int page_id)
 					}
 				}
 			}
-		}
-		
-		eDVBSubtitleRegion subtitleRegion;
-		subtitleRegion.m_pixmap = reg->buffer;
-		subtitleRegion.m_position.setX(x0);
-		subtitleRegion.m_position.setY(y0);
-		dvbPage.m_regions.push_back(subtitleRegion);
 
-		reg->committed = true;
+			eDVBSubtitleRegion Region;
+			Region.m_pixmap = reg->buffer;
+			Region.m_position.setX(x0);
+			Region.m_position.setY(y0);
+			Page.m_regions.push_back(Region);
+			reg->committed = true;
+		}
 	}
-	m_new_subtitle_page(dvbPage);
+	Page.m_display_size = m_display_size;
+	m_new_subtitle_page(Page);
+	Page.m_regions.clear();
 }
 
 DEFINE_REF(eDVBSubtitleParser);

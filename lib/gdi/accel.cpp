@@ -258,7 +258,7 @@ int gAccel::accelAlloc(gUnmanagedSurface* surface)
 		}
 	}
 
-	eDebug("[gAccel] accel alloc failed %d allocations already in place", m_accel_allocation.size());
+	eDebug("[gAccel] alloc failed");
 	return -3;
 }
 
