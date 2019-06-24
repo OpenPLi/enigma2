@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-19 17:39+0200\n"
+"POT-Creation-Date: 2019-06-24 19:27+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi <ims@openpli.org>\n"
@@ -441,6 +441,10 @@ msgstr "%s %s volného místa"
 #, python-format
 msgid "%s (%s)\n"
 msgstr "%s (%s)\n"
+
+#, python-format
+msgid "%s imported from fallback tuner"
+msgstr "%s importováno ze záložního přijímače"
 
 #. TRANSLATORS: The satellite with name '%s' is no longer used after a configuration change. The user is asked whether or not the satellite should be deleted.
 #, python-format
@@ -1941,13 +1945,6 @@ msgstr "Číslo kanálu, pikona a název programu"
 
 msgid "Channels and EPG"
 msgstr "Programy a EPG"
-
-#, python-format
-msgid "Channels from fallback tuner failed %s"
-msgstr "Import ze záložního přijímače selhal - %s"
-
-msgid "Channels from fallback tuner imported"
-msgstr "Import úspěšně dokončen"
 
 msgid "Channels only"
 msgstr "Pouze programy"
@@ -4828,8 +4825,9 @@ msgstr "Ze záložního přijímače se importují programy a/nebo EPG po spušt
 msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
 msgstr "Ze záložního přijímače se importují programy a/nebo EPG také v případě, že jsou přijímač nebo enigma2 zrestartovány."
 
-msgid "Import channels from fallback tuner"
-msgstr "Import ze záložního přijímače"
+#, python-format
+msgid "Import from fallback tuner failed, %s"
+msgstr "Import ze záložního přijímače selhal, %s"
 
 msgid "Import from remote receiver URL"
 msgstr "Importovat ze záložního přijímače"
@@ -5530,6 +5528,9 @@ msgstr "Ruční prohledávání"
 #
 msgid "Manual transponder"
 msgstr "ručně definovaný transpondér"
+
+msgid "Manually import from fallback tuner"
+msgstr "Import ze záložního přijímače"
 
 #
 msgid "Manufacturer"
@@ -9774,7 +9775,7 @@ msgstr ""
 "Pro případné korekce můžete kontaktovat autora\n"
 "na výše uvedené adrese.\n"
 "\n"
-"®19.6.2019"
+"®24.6.2019"
 
 #
 msgid "TS file is too large for ISO9660 level 1!"
@@ -10583,7 +10584,7 @@ msgid "Tuner type"
 msgstr "Typ tuneru"
 
 msgid "Tuners & scanning"
-msgstr "Hledání programů a tunery"
+msgstr "Hledání programů, tunery"
 
 msgid "Tunisia"
 msgstr "Tunis"
