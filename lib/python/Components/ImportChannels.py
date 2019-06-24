@@ -24,17 +24,17 @@ class ImportChannels():
 			self.thread = threading.Thread(target=self.threaded_function, name="ChannelsImport")
 			self.thread.start()
 
-	def getUrl(self, url):
+	def getUrl(self, url, timeout=5):
 		request = urllib2.Request(url)
 		if self.header:
 			request.add_header("Authorization", self.header)
-		return urllib2.urlopen(request, timeout=5)
+		return urllib2.urlopen(request, timeout=timeout)
 
 	def threaded_function(self):
 		if "epg" in config.usage.remote_fallback_import.value:
 			print "Writing epg.dat file on sever box"
 			try:
-				self.getUrl("%s/web/saveepg" % self.url).read()
+				self.getUrl("%s/web/saveepg" % self.url, 30).read()
 			except:
 				self.ImportChannelsDone(False, _("Error when writing epg.dat on server"))
 				return
