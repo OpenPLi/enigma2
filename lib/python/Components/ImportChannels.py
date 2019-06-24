@@ -93,7 +93,7 @@ class ImportChannels():
 			for file in files:
 				shutil.move("/tmp/tmp/%s" % file, "/etc/enigma2/%s" % file)
 			os.rmdir("/tmp/tmp")
-		self.ImportChannelsDone(True, ','.join(imported)
+		self.ImportChannelsDone(True, ','.join(imported))
 
 	def ImportChannelsDone(self, flag, message=None):
 		if flag:
