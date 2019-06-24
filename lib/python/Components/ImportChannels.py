@@ -31,7 +31,9 @@ class ImportChannels():
 		return urllib2.urlopen(request, timeout=timeout)
 
 	def threaded_function(self):
+		imported = []
 		if "epg" in config.usage.remote_fallback_import.value:
+			imported.append('EPG')
 			print "Writing epg.dat file on sever box"
 			try:
 				self.getUrl("%s/web/saveepg" % self.url, 30).read()
@@ -59,6 +61,7 @@ class ImportChannels():
 			else:
 				self.ImportChannelsDone(False, _("No epg.dat file found server"))
 		if "channels" in config.usage.remote_fallback_import.value:
+			imported.append('Channels')
 			try:
 				os.mkdir("/tmp/tmp")
 			except:
@@ -90,10 +93,10 @@ class ImportChannels():
 			for file in files:
 				shutil.move("/tmp/tmp/%s" % file, "/etc/enigma2/%s" % file)
 			os.rmdir("/tmp/tmp")
-		self.ImportChannelsDone(True)
+		self.ImportChannelsDone(True, ','.join(imported)
 
-	def ImportChannelsDone(self, flag, errorstring=None):
+	def ImportChannelsDone(self, flag, message=None):
 		if flag:
-			Notifications.AddNotificationWithID("ChannelsImportOK", MessageBox, _("Channels from fallback tuner imported"), type=MessageBox.TYPE_INFO, timeout=5)
+			Notifications.AddNotificationWithID("ChannelsImportOK", MessageBox, _("%s imported from fallback tuner") % message, type=MessageBox.TYPE_INFO, timeout=5)
 		else:
-			Notifications.AddNotificationWithID("ChannelsImportNOK", MessageBox, _("Channels from fallback tuner failed %s") % errorstring, type=MessageBox.TYPE_ERROR, timeout=5)
+			Notifications.AddNotificationWithID("ChannelsImportNOK", MessageBox, _("Import from fallback tuner failed, %s") % message, type=MessageBox.TYPE_ERROR, timeout=5)
