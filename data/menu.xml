@@ -91,7 +91,7 @@ def msgClosed(ret):
 		_exit(0)
 self.session.openWithCallback(msgClosed, FactoryReset)
 </code>
-			</item>		
+			</item>
 			<item weight="15" level="0" text="Flash image" entryID="flash_image" requires="canFlashWithOfgwrite" ><screen module="FlashImage" screen="SelectImage"/></item>
 			<item weight="15" level="0" text="Software update" entryID="software_update"><screen module="SoftwareUpdate" screen="UpdatePlugin"/></item>
 		</menu>
