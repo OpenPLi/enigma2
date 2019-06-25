@@ -49,7 +49,6 @@
 				<id val="gui"/>
 				<item level="0" text="Language" entryID="language_setup"><screen module="LanguageSelection"/></item>
 				<item level="0" entryID="timezone_setup"><setup id="timezone"/></item>
-				<item level="2" entryID="epg_settings"><setup id="epgsettings"/></item>
 				<item level="0" entryID="user_interface"><setup id="userinterface"/></item>
 				</menu>
 				<item level="1" entryID="rfmod_setup" requires="RfModulator"><setup id="RFmod"/></item>
@@ -91,6 +90,12 @@ self.session.openWithCallback(msgClosed, FactoryReset)
 			</item>
 			<item weight="15" level="0" text="Flash image" entryID="flash_image" requires="canFlashWithOfgwrite" ><screen module="FlashImage" screen="SelectImage"/></item>
 			<item weight="15" level="0" text="Software update" entryID="software_update"><screen module="SoftwareUpdate" screen="UpdatePlugin"/></item>
+
+			<!-- Menu / Setup / EPG -->
+			<menu weight="20" text="EPG" entryID="epg_menu">
+				<id val="epg"/>
+				<item level="0" entryID="epg_setup"><setup id="epgsettings"/></item>
+			</menu>
 		</menu>
 		<menu text="Standby / restart" entryID="standby_restart_list">
 			<id val="shutdown"/>
