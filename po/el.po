@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPLI Enigma2 Official Greek Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-25 06:50+0200\n"
+"POT-Creation-Date: 2019-06-26 23:01+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: MCelliotG <mcelliotg@gmail.com>\n"
 "Language-Team: MCelliotG <mcelliotg@gmail.com>\n"
@@ -406,6 +406,10 @@ msgstr "%s %s ελεύθερος χώρος δίσκου"
 #, python-format
 msgid "%s (%s)\n"
 msgstr "%s (%s)\n"
+
+#, fuzzy, python-format
+msgid "%s imported from fallback tuner"
+msgstr "Ενεργοποίηση εισαγωγής χρονοδιακόπτη από το εφεδρικό tuner"
 
 #. TRANSLATORS: The satellite with name '%s' is no longer used after a configuration change. The user is asked whether or not the satellite should be deleted.
 #, python-format
@@ -1699,13 +1703,6 @@ msgstr "Αριθμός καναλιού, λογότυπο και όνομα υπ
 
 msgid "Channels and EPG"
 msgstr "Κανάλια και EPG"
-
-#, python-format
-msgid "Channels from fallback tuner failed %s"
-msgstr "Αποτυχία καναλιών από το εφεδρικό tuner %s"
-
-msgid "Channels from fallback tuner imported"
-msgstr "Έγινε εισαγωγή των καναλιών από το εφεδρικό tuner"
 
 msgid "Channels only"
 msgstr "Μόνο κανάλια"
@@ -4237,8 +4234,9 @@ msgstr "Εισαγωγή καναλιών ή/και EPG από την απομα
 msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
 msgstr "Εισαγωγή καναλιών ή/και EPG από την απομακρυσμένη URL δέκτη κατά την εκκίνηση του δέκτη ή του enigma2"
 
-msgid "Import channels from fallback tuner"
-msgstr "Εισαγωγή καναλιών από το εφεδρικό tuner"
+#, fuzzy, python-format
+msgid "Import from fallback tuner failed, %s"
+msgstr "Αποτυχία καναλιών από το εφεδρικό tuner %s"
 
 msgid "Import from remote receiver URL"
 msgstr "Εισαγωγή από απομακρυσμένη URL δέκτη"
@@ -4832,6 +4830,10 @@ msgstr "Χειροκίνητη ανίχνευση"
 
 msgid "Manual transponder"
 msgstr "Χειροκίνητος αναμεταδότης"
+
+#, fuzzy
+msgid "Manually import from fallback tuner"
+msgstr "Ενεργοποίηση εισαγωγής χρονοδιακόπτη από το εφεδρικό tuner"
 
 msgid "Manufacturer"
 msgstr "Κατασκευαστής"
@@ -5436,6 +5438,14 @@ msgid "Norwegian"
 msgstr "Νορβηγικά"
 
 msgid "Not Defined"
+msgstr "Απροσδιόριστο"
+
+#, fuzzy
+msgid "Not Installed"
+msgstr "Εγκατάσταση"
+
+#, fuzzy
+msgid "Not Required"
 msgstr "Απροσδιόριστο"
 
 msgid "Not associated"
@@ -7198,9 +7208,6 @@ msgstr "Επιλογή συσκευής εισόδου."
 msgid "Select interface"
 msgstr "Επιλογή διεπαφής"
 
-msgid "Select locale"
-msgstr "Επιλογή γλώσσας"
-
 msgid "Select location"
 msgstr "Επιλογή τοποθεσίας"
 
@@ -7292,6 +7299,10 @@ msgid "Select the virtual keyboard locale from a menu"
 msgstr "Επιλογή της γλώσσας του εικονικού πληκτρολογίου μέσω μενού"
 
 msgid "Select the virtual keyboard shifted character set"
+msgstr "Επιλογή του σετ χαρακτήρων με shift"
+
+#, fuzzy
+msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr "Επιλογή του σετ χαρακτήρων με shift"
 
 msgid "Select upgrade source"
@@ -7425,9 +7436,6 @@ msgstr "Αναφορά υπηρεσίας"
 msgid "Service scan"
 msgstr "Ανίχνευση υπηρεσιών"
 
-msgid "Service searching"
-msgstr "Αναζήτηση υπηρεσιών"
-
 msgid "Service title mode"
 msgstr "Λειτουργία τίτλου υπηρεσίας"
 
@@ -7560,6 +7568,9 @@ msgstr "Οξύτητα"
 
 msgid "Shellscript"
 msgstr "Script κελύφους"
+
+msgid "Shift"
+msgstr ""
 
 msgid "Short filenames"
 msgstr "Σύντομα ονόματα"
@@ -9190,6 +9201,10 @@ msgstr "Κατάσταση tuner:"
 
 msgid "Tuner type"
 msgstr "Τύπος tuner"
+
+#, fuzzy
+msgid "Tuners & scanning"
+msgstr "σφάλμα κατά την ανίχνευση"
 
 msgid "Tunisia"
 msgstr "Τυνησία"

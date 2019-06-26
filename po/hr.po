@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-25 06:50+0200\n"
+"POT-Creation-Date: 2019-06-26 23:01+0200\n"
 "PO-Revision-Date: 2019-05-27 00:08+0200\n"
 "Last-Translator: Željko <zeljko2@hi.ht.hr>\n"
 "Language-Team: Željko\n"
@@ -415,6 +415,10 @@ msgstr "%s %s slobodnog prostora na disku"
 #, python-format
 msgid "%s (%s)\n"
 msgstr "%s (%s)\n"
+
+#, fuzzy, python-format
+msgid "%s imported from fallback tuner"
+msgstr "Omogućite uvoz tajmera iz zamjenskog tjunera"
 
 #. TRANSLATORS: The satellite with name '%s' is no longer used after a configuration change. The user is asked whether or not the satellite should be deleted.
 #, python-format
@@ -1713,13 +1717,6 @@ msgstr "Broj kanala, pikon i naziv usluge"
 
 msgid "Channels and EPG"
 msgstr "Kanali i EPG"
-
-#, python-format
-msgid "Channels from fallback tuner failed %s"
-msgstr "Nije moguće uvesti feedove s udaljenog primatelja %s"
-
-msgid "Channels from fallback tuner imported"
-msgstr "Uvezeni kanali udaljenog primatelja"
 
 msgid "Channels only"
 msgstr "Samo kanale"
@@ -4253,8 +4250,9 @@ msgstr "Uvezite kanale i/ili EPG iz udaljenog URL-a primatelja kada se on pokren
 msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
 msgstr "Uvoz kanala i/ili EPG iz URL-a udaljenog primatelja kada se prijemnik ili enigma2 ponovno pokrene"
 
-msgid "Import channels from fallback tuner"
-msgstr "Uvezite kanale iz zamjenskog tjunera"
+#, fuzzy, python-format
+msgid "Import from fallback tuner failed, %s"
+msgstr "Nije moguće uvesti feedove s udaljenog primatelja %s"
 
 msgid "Import from remote receiver URL"
 msgstr "Uvoz iz URL-a udaljenog primatelja"
@@ -4850,6 +4848,10 @@ msgstr "Ručno pretraživanje"
 
 msgid "Manual transponder"
 msgstr "Ručni transponder"
+
+#, fuzzy
+msgid "Manually import from fallback tuner"
+msgstr "Omogućite uvoz tajmera iz zamjenskog tjunera"
 
 msgid "Manufacturer"
 msgstr "Proizvođač"
@@ -5454,6 +5456,14 @@ msgid "Norwegian"
 msgstr "Norveški"
 
 msgid "Not Defined"
+msgstr "Nije definirano"
+
+#, fuzzy
+msgid "Not Installed"
+msgstr "Instaliranje"
+
+#, fuzzy
+msgid "Not Required"
 msgstr "Nije definirano"
 
 msgid "Not associated"
@@ -7219,9 +7229,6 @@ msgstr "Odaberite ulazni uređaj."
 msgid "Select interface"
 msgstr "Odaberite sučelje"
 
-msgid "Select locale"
-msgstr "Odaberite oznaku zemlje/jezika"
-
 msgid "Select location"
 msgstr "Odaberite lokaciju"
 
@@ -7313,6 +7320,10 @@ msgid "Select the virtual keyboard locale from a menu"
 msgstr "Odaberite jezičnu oznaku virtualne tipkovnice iz izbornika"
 
 msgid "Select the virtual keyboard shifted character set"
+msgstr "Odaberite skup znakova pomaknutih virtualnom tipkovnicom"
+
+#, fuzzy
+msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr "Odaberite skup znakova pomaknutih virtualnom tipkovnicom"
 
 msgid "Select upgrade source"
@@ -7446,9 +7457,6 @@ msgstr "Referentna usluga"
 msgid "Service scan"
 msgstr "Pretraživanje usluge"
 
-msgid "Service searching"
-msgstr "Traženje usluga"
-
 msgid "Service title mode"
 msgstr "Način naziva usluge"
 
@@ -7581,6 +7589,9 @@ msgstr "Oštrina"
 
 msgid "Shellscript"
 msgstr "Shell skripta"
+
+msgid "Shift"
+msgstr ""
 
 msgid "Short filenames"
 msgstr "Kratka imena datoteka"
@@ -9209,6 +9220,10 @@ msgstr "Status tjunera:"
 
 msgid "Tuner type"
 msgstr "Tip tjunera"
+
+#, fuzzy
+msgid "Tuners & scanning"
+msgstr "pogreška pretraživanja"
 
 msgid "Tunisia"
 msgstr "Tunis"

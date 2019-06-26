@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-25 06:50+0200\n"
+"POT-Creation-Date: 2019-06-26 23:01+0200\n"
 "PO-Revision-Date: 2016-06-17 12:13+0800\n"
 "Last-Translator: nx111 <gdzdz@163.com>\n"
 "Language-Team: NEWBOLT\n"
@@ -388,6 +388,10 @@ msgstr ""
 #, python-format
 msgid "%s (%s)\n"
 msgstr "%s (%s)\n"
+
+#, python-format
+msgid "%s imported from fallback tuner"
+msgstr ""
 
 #. TRANSLATORS: The satellite with name '%s' is no longer used after a configuration change. The user is asked whether or not the satellite should be deleted.
 #, python-format
@@ -1674,13 +1678,6 @@ msgstr ""
 #, fuzzy
 msgid "Channels and EPG"
 msgstr "频道列表菜单"
-
-#, python-format
-msgid "Channels from fallback tuner failed %s"
-msgstr ""
-
-msgid "Channels from fallback tuner imported"
-msgstr ""
 
 #, fuzzy
 msgid "Channels only"
@@ -4223,7 +4220,8 @@ msgstr ""
 msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
 msgstr ""
 
-msgid "Import channels from fallback tuner"
+#, python-format
+msgid "Import from fallback tuner failed, %s"
 msgstr ""
 
 msgid "Import from remote receiver URL"
@@ -4825,6 +4823,9 @@ msgstr ""
 
 msgid "Manual transponder"
 msgstr "手动转发器扫描"
+
+msgid "Manually import from fallback tuner"
+msgstr ""
 
 msgid "Manufacturer"
 msgstr "制造商"
@@ -5444,6 +5445,13 @@ msgid "Norwegian"
 msgstr "挪威语"
 
 msgid "Not Defined"
+msgstr ""
+
+#, fuzzy
+msgid "Not Installed"
+msgstr "安装"
+
+msgid "Not Required"
 msgstr ""
 
 msgid "Not associated"
@@ -7240,10 +7248,6 @@ msgstr "输入设备"
 msgid "Select interface"
 msgstr "选择接口"
 
-#, fuzzy
-msgid "Select locale"
-msgstr "选择Softcam"
-
 msgid "Select location"
 msgstr ""
 
@@ -7336,6 +7340,9 @@ msgid "Select the virtual keyboard locale from a menu"
 msgstr ""
 
 msgid "Select the virtual keyboard shifted character set"
+msgstr ""
+
+msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr ""
 
 msgid "Select upgrade source"
@@ -7473,9 +7480,6 @@ msgstr "频道参考"
 msgid "Service scan"
 msgstr "频道扫描"
 
-msgid "Service searching"
-msgstr ""
-
 msgid "Service title mode"
 msgstr ""
 
@@ -7609,6 +7613,9 @@ msgid "Sharpness"
 msgstr "锐度"
 
 msgid "Shellscript"
+msgstr ""
+
+msgid "Shift"
 msgstr ""
 
 msgid "Short filenames"
@@ -9205,6 +9212,9 @@ msgstr "调谐器状态"
 
 msgid "Tuner type"
 msgstr "调谐器类型"
+
+msgid "Tuners & scanning"
+msgstr ""
 
 msgid "Tunisia"
 msgstr ""

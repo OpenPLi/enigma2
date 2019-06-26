@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-25 06:50+0200\n"
+"POT-Creation-Date: 2019-06-26 23:01+0200\n"
 "PO-Revision-Date: 2019-02-13 20:52+0200\n"
 "Last-Translator: jamu\n"
 "Language-Team: BoxFreak/jamu\n"
@@ -423,6 +423,10 @@ msgstr "%s %s vapaata levytilaa"
 #, python-format
 msgid "%s (%s)\n"
 msgstr "%s (%s)\n"
+
+#, fuzzy, python-format
+msgid "%s imported from fallback tuner"
+msgstr "Tuo ajastimet etävastaaottimelta"
 
 #. TRANSLATORS: The satellite with name '%s' is no longer used after a configuration change. The user is asked whether or not the satellite should be deleted.
 #, python-format
@@ -1852,13 +1856,6 @@ msgstr "Kanavanumero, logo ja nimi"
 #
 msgid "Channels and EPG"
 msgstr "Kanavat ja ohjelmaopas"
-
-#, python-format
-msgid "Channels from fallback tuner failed %s"
-msgstr ""
-
-msgid "Channels from fallback tuner imported"
-msgstr ""
 
 #
 msgid "Channels only"
@@ -4644,7 +4641,8 @@ msgstr "Tuo kanavat ja/tai ohjelmaopas etävastaanottimelta uudelleenkäynnistyk
 msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
 msgstr "Tuo kanavat ja/tai ohjelmaopas etävastaanottimelta uudelleenkäynnistyksen yhteydessä"
 
-msgid "Import channels from fallback tuner"
+#, fuzzy, python-format
+msgid "Import from fallback tuner failed, %s"
 msgstr "Tuo kanavat etävastaanottimelta"
 
 msgid "Import from remote receiver URL"
@@ -5330,6 +5328,10 @@ msgstr "Manuaalihaku"
 #
 msgid "Manual transponder"
 msgstr "Manuaalinen lähetin"
+
+#, fuzzy
+msgid "Manually import from fallback tuner"
+msgstr "Tuo ajastimet etävastaaottimelta"
 
 #
 msgid "Manufacturer"
@@ -6043,6 +6045,16 @@ msgstr "Norja"
 
 #
 msgid "Not Defined"
+msgstr "Ei määritetty"
+
+#
+#, fuzzy
+msgid "Not Installed"
+msgstr "Asenna"
+
+#
+#, fuzzy
+msgid "Not Required"
 msgstr "Ei määritetty"
 
 msgid "Not associated"
@@ -8067,10 +8079,6 @@ msgid "Select interface"
 msgstr "Valitse verkkosovitin"
 
 #
-msgid "Select locale"
-msgstr "Valitse kieli"
-
-#
 msgid "Select location"
 msgstr "Hakemiston valinta"
 
@@ -8172,6 +8180,9 @@ msgid "Select the virtual keyboard locale from a menu"
 msgstr ""
 
 msgid "Select the virtual keyboard shifted character set"
+msgstr ""
+
+msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr ""
 
 #
@@ -8329,10 +8340,6 @@ msgstr "Referenssi"
 msgid "Service scan"
 msgstr "Kanavahaku"
 
-#
-msgid "Service searching"
-msgstr "Kanavien haku"
-
 msgid "Service title mode"
 msgstr "Kanavan otsikko"
 
@@ -8473,6 +8480,9 @@ msgid "Sharpness"
 msgstr "Terävyys"
 
 msgid "Shellscript"
+msgstr ""
+
+msgid "Shift"
 msgstr ""
 
 msgid "Short filenames"
@@ -10304,6 +10314,10 @@ msgstr "Virittimen tila:"
 
 msgid "Tuner type"
 msgstr "Virittimen tyyppi"
+
+#, fuzzy
+msgid "Tuners & scanning"
+msgstr "Virhe haun aikana"
 
 msgid "Tunisia"
 msgstr "Tunisia"

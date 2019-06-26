@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-25 06:50+0200\n"
-"PO-Revision-Date: 2019-05-25 06:58+0200\n"
+"POT-Creation-Date: 2019-06-26 23:01+0200\n"
+"PO-Revision-Date: 2019-06-26 23:03+0200\n"
 "Last-Translator: Pr2\n"
 "Language-Team: french\n"
 "Language: fr\n"
@@ -405,6 +405,10 @@ msgstr "%s %s espace disque libre"
 #, python-format
 msgid "%s (%s)\n"
 msgstr "%s (%s)\n"
+
+#, python-format
+msgid "%s imported from fallback tuner"
+msgstr "%s importés du tuner de repli"
 
 #. TRANSLATORS: The satellite with name '%s' is no longer used after a configuration change. The user is asked whether or not the satellite should be deleted.
 #, python-format
@@ -1703,13 +1707,6 @@ msgstr "Numéro de la chaîne, picon et nom du service"
 
 msgid "Channels and EPG"
 msgstr "Chaînes et EPG"
-
-#, python-format
-msgid "Channels from fallback tuner failed %s"
-msgstr "Les chaînes du tuner de repli ont échoué %s"
-
-msgid "Channels from fallback tuner imported"
-msgstr "Les chaînes du récepteur de repli ont été importées"
 
 msgid "Channels only"
 msgstr "Uniquement les chaînes"
@@ -4239,8 +4236,9 @@ msgstr "Importer les chaînes et/ou l’EPG depuis l’URL du récepteur distant
 msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
 msgstr "Importer les chaînes et/ou l’EPG depuis l’URL du récepteur distant lorsque le récepteur ou Enigma2 est redémarré"
 
-msgid "Import channels from fallback tuner"
-msgstr "Importer les chaînes du récepteur distant de repli"
+#, python-format
+msgid "Import from fallback tuner failed, %s"
+msgstr "L'importation du tuner de repli a échoué, %s"
 
 msgid "Import from remote receiver URL"
 msgstr "Importer depuis l’URL du récepteur distant"
@@ -4834,6 +4832,9 @@ msgstr "Recherche manuelle"
 
 msgid "Manual transponder"
 msgstr "Transpondeur manuel"
+
+msgid "Manually import from fallback tuner"
+msgstr "Importation manuelle du tuner de repli"
 
 msgid "Manufacturer"
 msgstr "Constructeur"
@@ -5439,6 +5440,12 @@ msgstr "Norvégien"
 
 msgid "Not Defined"
 msgstr "Pas défini"
+
+msgid "Not Installed"
+msgstr "Non installé"
+
+msgid "Not Required"
+msgstr "Non requis"
 
 msgid "Not associated"
 msgstr "Non-Associé"
@@ -7200,9 +7207,6 @@ msgstr "Sélectionner le périphérique entrée."
 msgid "Select interface"
 msgstr "Sélectionner l'interface"
 
-msgid "Select locale"
-msgstr "Sélectionner les locales"
-
 msgid "Select location"
 msgstr "Sélectionner la localisation"
 
@@ -7295,6 +7299,9 @@ msgstr "Sélectionnez les paramètres régionaux du clavier virtuel dans un menu
 
 msgid "Select the virtual keyboard shifted character set"
 msgstr "Sélectionnez le jeu de caractères décalé du clavier virtuel"
+
+msgid "Select the virtual keyboard shifted character set for the next character only"
+msgstr "Sélectionnez le clavier virtuel décalé pour le caractère suivant uniquement"
 
 msgid "Select upgrade source"
 msgstr "Sélectionnez la source de mise à jour"
@@ -7426,9 +7433,6 @@ msgstr "Référence service"
 
 msgid "Service scan"
 msgstr "Recherche des services"
-
-msgid "Service searching"
-msgstr "Recherche de services"
 
 msgid "Service title mode"
 msgstr "Picon et/ou nom du service"
@@ -7562,6 +7566,9 @@ msgstr "Netteté"
 
 msgid "Shellscript"
 msgstr "Shellscript"
+
+msgid "Shift"
+msgstr ""
 
 msgid "Short filenames"
 msgstr "Noms de fichiers court"
@@ -8476,7 +8483,7 @@ msgstr ""
 "\n"
 "Traducteur: Pr2\n"
 "Support: www.openpli.org\n"
-"Dernière MAJ: 25-05-2019"
+"Dernière MAJ: 26-06-2019"
 
 msgid "TS file is too large for ISO9660 level 1!"
 msgstr "Fichier TS trop grand pour le niveau 1 ISO9660!"
@@ -9199,6 +9206,9 @@ msgstr "Etat du tuner:"
 
 msgid "Tuner type"
 msgstr "Type tuner"
+
+msgid "Tuners & scanning"
+msgstr "Tuners & recherche"
 
 msgid "Tunisia"
 msgstr "Tunisie"

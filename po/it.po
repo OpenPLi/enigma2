@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPLi-enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-25 06:50+0200\n"
+"POT-Creation-Date: 2019-06-26 23:01+0200\n"
 "PO-Revision-Date: 2018-05-22 13:54+0200\n"
 "Last-Translator: Gringo <openpli@tiscali.it>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -406,6 +406,10 @@ msgstr "%s %s di spazio libero su disco"
 #, python-format
 msgid "%s (%s)\n"
 msgstr "%s (%s)\n"
+
+#, fuzzy, python-format
+msgid "%s imported from fallback tuner"
+msgstr "Importare i canali dal sintonizzatore di fallback"
 
 #. TRANSLATORS: The satellite with name '%s' is no longer used after a configuration change. The user is asked whether or not the satellite should be deleted.
 #, python-format
@@ -1700,13 +1704,6 @@ msgstr "Numero, Picon e nome del canale"
 
 msgid "Channels and EPG"
 msgstr "Canali ed EPG"
-
-#, python-format
-msgid "Channels from fallback tuner failed %s"
-msgstr "Canali dal sintonizzatore di fallback non riusciti %s"
-
-msgid "Channels from fallback tuner imported"
-msgstr "Canali dal sintonizzatore di fallback importati"
 
 msgid "Channels only"
 msgstr "Solo canali"
@@ -4256,8 +4253,9 @@ msgstr "Importare i canali e/o l'EPG dall'URL del ricevitore remoto quando il ri
 msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
 msgstr "Importare i canali e/o l'EPG dall'URL del ricevitore remoto quando il ricevitore o Enigma2 viene riavviato"
 
-msgid "Import channels from fallback tuner"
-msgstr "Importare i canali dal sintonizzatore di fallback"
+#, fuzzy, python-format
+msgid "Import from fallback tuner failed, %s"
+msgstr "Canali dal sintonizzatore di fallback non riusciti %s"
 
 msgid "Import from remote receiver URL"
 msgstr "Importare dall'URL del ricevitore remoto"
@@ -4855,6 +4853,10 @@ msgstr "Ricerca manuale"
 
 msgid "Manual transponder"
 msgstr "Transponder definito dall'utente"
+
+#, fuzzy
+msgid "Manually import from fallback tuner"
+msgstr "Importare i canali dal sintonizzatore di fallback"
 
 msgid "Manufacturer"
 msgstr "Produttore"
@@ -5464,6 +5466,14 @@ msgid "Norwegian"
 msgstr "Norvegese"
 
 msgid "Not Defined"
+msgstr "Non definito"
+
+#, fuzzy
+msgid "Not Installed"
+msgstr "Installare"
+
+#, fuzzy
+msgid "Not Required"
 msgstr "Non definito"
 
 msgid "Not associated"
@@ -7245,10 +7255,6 @@ msgstr "Selezionare la periferica di ingresso."
 msgid "Select interface"
 msgstr "Selezionare l'interfaccia"
 
-#, fuzzy
-msgid "Select locale"
-msgstr "Selezionare la posizione"
-
 msgid "Select location"
 msgstr "Selezionare la posizione"
 
@@ -7345,6 +7351,9 @@ msgid "Select the virtual keyboard locale from a menu"
 msgstr ""
 
 msgid "Select the virtual keyboard shifted character set"
+msgstr ""
+
+msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr ""
 
 msgid "Select upgrade source"
@@ -7478,9 +7487,6 @@ msgid "Service reference"
 msgstr "Dati del canale"
 
 msgid "Service scan"
-msgstr "Ricerca canali"
-
-msgid "Service searching"
 msgstr "Ricerca canali"
 
 msgid "Service title mode"
@@ -7618,6 +7624,9 @@ msgstr "Nitidezza"
 
 msgid "Shellscript"
 msgstr "Script di shell"
+
+msgid "Shift"
+msgstr ""
 
 msgid "Short filenames"
 msgstr "Nomi file brevi"
@@ -9280,6 +9289,10 @@ msgstr "Stato del sintonizzatore:"
 
 msgid "Tuner type"
 msgstr "Tipo di sintonizzatore"
+
+#, fuzzy
+msgid "Tuners & scanning"
+msgstr "Errore durante la ricerca"
 
 msgid "Tunisia"
 msgstr "Tunisia"

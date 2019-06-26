@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-25 06:50+0200\n"
+"POT-Creation-Date: 2019-06-26 23:01+0200\n"
 "PO-Revision-Date: 2017-03-05 13:24+0100\n"
 "Last-Translator: Magnus Nilsson <mag_nilsson@hotmail.com>\n"
 "Language-Team: \n"
@@ -417,6 +417,10 @@ msgstr "%s %s ledigt diskutrymme"
 #, python-format
 msgid "%s (%s)\n"
 msgstr "%s (%s)\n"
+
+#, python-format
+msgid "%s imported from fallback tuner"
+msgstr ""
 
 #. TRANSLATORS: The satellite with name '%s' is no longer used after a configuration change. The user is asked whether or not the satellite should be deleted.
 #, python-format
@@ -1897,13 +1901,6 @@ msgstr "Kanalnummer, picon och kanalnamn"
 #, fuzzy
 msgid "Channels and EPG"
 msgstr "Kanal info"
-
-#, python-format
-msgid "Channels from fallback tuner failed %s"
-msgstr ""
-
-msgid "Channels from fallback tuner imported"
-msgstr ""
 
 #, fuzzy
 msgid "Channels only"
@@ -4756,7 +4753,8 @@ msgstr ""
 msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
 msgstr ""
 
-msgid "Import channels from fallback tuner"
+#, python-format
+msgid "Import from fallback tuner failed, %s"
 msgstr ""
 
 #, fuzzy
@@ -5451,6 +5449,9 @@ msgstr "Manuell sökning"
 #
 msgid "Manual transponder"
 msgstr "Manuell transponder"
+
+msgid "Manually import from fallback tuner"
+msgstr ""
 
 #
 msgid "Manufacturer"
@@ -6158,6 +6159,15 @@ msgid "Norwegian"
 msgstr "Norska"
 
 msgid "Not Defined"
+msgstr "Inte definerad"
+
+#
+#, fuzzy
+msgid "Not Installed"
+msgstr "Installera"
+
+#, fuzzy
+msgid "Not Required"
 msgstr "Inte definerad"
 
 msgid "Not associated"
@@ -8219,10 +8229,6 @@ msgstr "Välj inmatningsenhet."
 msgid "Select interface"
 msgstr "Välj kort"
 
-#, fuzzy
-msgid "Select locale"
-msgstr "Välj sökväg"
-
 msgid "Select location"
 msgstr "Välj sökväg"
 
@@ -8322,6 +8328,9 @@ msgid "Select the virtual keyboard locale from a menu"
 msgstr ""
 
 msgid "Select the virtual keyboard shifted character set"
+msgstr ""
+
+msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr ""
 
 #
@@ -8479,10 +8488,6 @@ msgstr "Kanalreferens"
 msgid "Service scan"
 msgstr "Kanalsökning"
 
-#
-msgid "Service searching"
-msgstr "Kanalsökning"
-
 msgid "Service title mode"
 msgstr "Kanalens titelläge"
 
@@ -8630,6 +8635,9 @@ msgstr "Skärpa"
 
 msgid "Shellscript"
 msgstr "Shellskript"
+
+msgid "Shift"
+msgstr ""
 
 msgid "Short filenames"
 msgstr "Korta filnamn"
@@ -10497,6 +10505,10 @@ msgstr "Tunerstatus"
 #
 msgid "Tuner type"
 msgstr "Tunertyp"
+
+#, fuzzy
+msgid "Tuners & scanning"
+msgstr "Fel vid skanning"
 
 msgid "Tunisia"
 msgstr ""

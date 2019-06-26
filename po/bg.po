@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-25 06:50+0200\n"
+"POT-Creation-Date: 2019-06-26 23:01+0200\n"
 "PO-Revision-Date: 2018-11-12 20:51+0200\n"
 "Last-Translator: Мартин Петков <marto74bg@yahoo.co.uk>\n"
 "Language-Team: Bulgarian\n"
@@ -398,6 +398,10 @@ msgstr "%s %s свободно място на диска"
 #, python-format
 msgid "%s (%s)\n"
 msgstr "%s (%s)\n"
+
+#, fuzzy, python-format
+msgid "%s imported from fallback tuner"
+msgstr "Импортиране на канали от резервния тунер"
 
 #. TRANSLATORS: The satellite with name '%s' is no longer used after a configuration change. The user is asked whether or not the satellite should be deleted.
 #, python-format
@@ -1695,13 +1699,6 @@ msgstr "Номер на канала, пикон и име на услугата
 
 msgid "Channels and EPG"
 msgstr "Канали и EPG"
-
-#, python-format
-msgid "Channels from fallback tuner failed %s"
-msgstr "Канали които не могат да се импортират от резервния приемник %s"
-
-msgid "Channels from fallback tuner imported"
-msgstr "Каналите от резервния приемник са импортирани!"
 
 msgid "Channels only"
 msgstr "Само канали"
@@ -4265,8 +4262,9 @@ msgstr "Импортиране на канали/EPG от резервния п�
 msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
 msgstr "Импортиране на канали/EPG от резервния приемник при рестарт на приемника или enigma2"
 
-msgid "Import channels from fallback tuner"
-msgstr "Импортиране на канали от резервния тунер"
+#, fuzzy, python-format
+msgid "Import from fallback tuner failed, %s"
+msgstr "Канали които не могат да се импортират от резервния приемник %s"
 
 msgid "Import from remote receiver URL"
 msgstr "Импортиране от URL на резервния приемник"
@@ -4863,6 +4861,10 @@ msgstr "Ръчно търсене"
 
 msgid "Manual transponder"
 msgstr "Ръчен транспондер"
+
+#, fuzzy
+msgid "Manually import from fallback tuner"
+msgstr "Импортиране на канали от резервния тунер"
 
 msgid "Manufacturer"
 msgstr "Производител"
@@ -5472,6 +5474,14 @@ msgid "Norwegian"
 msgstr "Норвежки"
 
 msgid "Not Defined"
+msgstr "Не определен"
+
+#, fuzzy
+msgid "Not Installed"
+msgstr "Инсталирай"
+
+#, fuzzy
+msgid "Not Required"
 msgstr "Не определен"
 
 msgid "Not associated"
@@ -7255,10 +7265,6 @@ msgstr "Изберете устройство за въвеждане"
 msgid "Select interface"
 msgstr "Избор на интерфейс"
 
-#, fuzzy
-msgid "Select locale"
-msgstr "Избор местоположение"
-
 msgid "Select location"
 msgstr "Избор местоположение"
 
@@ -7355,6 +7361,9 @@ msgid "Select the virtual keyboard locale from a menu"
 msgstr ""
 
 msgid "Select the virtual keyboard shifted character set"
+msgstr ""
+
+msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr ""
 
 msgid "Select upgrade source"
@@ -7489,9 +7498,6 @@ msgid "Service reference"
 msgstr "Референс на канала"
 
 msgid "Service scan"
-msgstr "Търсене на Канали"
-
-msgid "Service searching"
 msgstr "Търсене на Канали"
 
 msgid "Service title mode"
@@ -7631,6 +7637,9 @@ msgstr "Острота/Рязкост"
 
 msgid "Shellscript"
 msgstr "Shell-скрипт"
+
+msgid "Shift"
+msgstr ""
 
 msgid "Short filenames"
 msgstr "Кратко название"
@@ -9269,6 +9278,10 @@ msgstr "Тунер статус:"
 
 msgid "Tuner type"
 msgstr "Тип на тунера"
+
+#, fuzzy
+msgid "Tuners & scanning"
+msgstr "грешка при търсенето"
 
 msgid "Tunisia"
 msgstr "Тунис"
