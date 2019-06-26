@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-11 22:12+0200\n"
+"POT-Creation-Date: 2019-06-26 23:01+0200\n"
 "PO-Revision-Date: 2019-05-15 22:50+0200\n"
 "Last-Translator: Jose Juan <jzapater@gmail.com>\n"
 "Language-Team: ANGELODOS  angelo2807@hotmail.com\n"
@@ -430,6 +430,10 @@ msgstr "%s %s espacio libre en disco"
 #, python-format
 msgid "%s (%s)\n"
 msgstr "%s (%s)\n"
+
+#, fuzzy, python-format
+msgid "%s imported from fallback tuner"
+msgstr "Habilitar el temporizador de importación desde el sintonizador de retroceso"
 
 #. TRANSLATORS: The satellite with name '%s' is no longer used after a configuration change. The user is asked whether or not the satellite should be deleted.
 #, python-format
@@ -1726,6 +1730,24 @@ msgstr "Camerun"
 msgid "Can be used for different fps between external subtitles and video."
 msgstr "Se puede utilizar para diferentes fps entre subtítulos externos y vídeo."
 
+msgid ""
+"Can be used to test defect pixels on TV screen.\n"
+"\n"
+"Available color test screens:\n"
+"\n"
+"red\n"
+"green\n"
+"blue\n"
+"white\n"
+"black\n"
+"cyan\n"
+"magenta\n"
+"yellow\n"
+"\n"
+"Screens change with left/right buttons or use red, green, blue to toggle.\n"
+"Yellow for returning back to this intro"
+msgstr ""
+
 msgid "Can only find a network drive to store the backup this means after the flash the autorestore will not work. Alternativaly you can mount the network drive after the flash and perform a manufacurer reset to autorestore"
 msgstr "Solo puede encontrar una unidad de red para almacenar la copia de seguridad; esto significa que después del flash, el autorestore no funcionará. Alternativamente, puede montar la unidad de red después del flash y realizar un reinicio del fabricante para que se realice automáticamente la restauración."
 
@@ -1863,13 +1885,6 @@ msgstr "Numero, picon y nombre del canal"
 
 msgid "Channels and EPG"
 msgstr "Canales y EPG"
-
-#, python-format
-msgid "Channels from fallback tuner failed %s"
-msgstr "Los canales del sintonizador de respaldo fallaron% s"
-
-msgid "Channels from fallback tuner imported"
-msgstr "Canales del sintonizador de respaldo importados"
 
 msgid "Channels only"
 msgstr "Solo canales"
@@ -2746,6 +2761,11 @@ msgstr "Reproductor DVD"
 #
 msgid "DVD titlelist"
 msgstr "Lista de títulos de DVD"
+
+#
+#, fuzzy
+msgid "DVDPlayer"
+msgstr "Reproductor DVD"
 
 #
 msgid "Danish"
@@ -4524,6 +4544,9 @@ msgstr "Configuración de teclas de acceso rápido"
 msgid "Hotkey zap"
 msgstr "Tecla de acceso rápido"
 
+msgid "Hotplug"
+msgstr ""
+
 msgid "How many minutes do you want add to the recording?"
 msgstr "¿Cuántos minutos quieres agregar a la grabación?"
 
@@ -4660,8 +4683,9 @@ msgstr "Importe canales y / o EPG desde la URL del receptor remoto cuando se ini
 msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
 msgstr "Importe canales y / o EPG desde la URL del receptor remoto cuando se reinicie el receptor o enigma2"
 
-msgid "Import channels from fallback tuner"
-msgstr "Importar canales desde el sintonizador de respaldo"
+#, fuzzy, python-format
+msgid "Import from fallback tuner failed, %s"
+msgstr "Los canales del sintonizador de respaldo fallaron% s"
 
 msgid "Import from remote receiver URL"
 msgstr "Importar desde el receptor remoto URL"
@@ -5341,6 +5365,10 @@ msgstr "Exploración manual"
 msgid "Manual transponder"
 msgstr "Transponder manual"
 
+#, fuzzy
+msgid "Manually import from fallback tuner"
+msgstr "Habilitar el temporizador de importación desde el sintonizador de retroceso"
+
 #
 msgid "Manufacturer"
 msgstr "Fabricante"
@@ -5833,6 +5861,11 @@ msgstr "No ECMPids disponible (Servicio FTA)"
 msgid "No HDD found or HDD not initialized!"
 msgstr "¡HDD no encontrado o no inicializado!"
 
+#
+#, fuzzy
+msgid "No active subservices available."
+msgstr "No hay actualizaciones disponibles"
+
 msgid "No age block"
 msgstr "Sin bloqueo de edad"
 
@@ -6028,6 +6061,15 @@ msgid "Norwegian"
 msgstr "Noruego"
 
 msgid "Not Defined"
+msgstr "No Definido"
+
+#
+#, fuzzy
+msgid "Not Installed"
+msgstr "Instalar"
+
+#, fuzzy
+msgid "Not Required"
 msgstr "No Definido"
 
 msgid "Not associated"
@@ -6366,12 +6408,20 @@ msgstr "Piloto"
 msgid "Pitcairn"
 msgstr "Pitcairn"
 
+msgid "Pixels\n"
+msgstr ""
+
 #
 msgid "Play"
 msgstr "Reproducir"
 
 #
 msgid "Play DVD"
+msgstr "Reproducir DVD"
+
+#
+#, fuzzy
+msgid "Play DVDs"
 msgstr "Reproducir DVD"
 
 #
@@ -8019,9 +8069,6 @@ msgstr "Seleccione dispositivo de entrada."
 msgid "Select interface"
 msgstr "Seleccione interfaz"
 
-msgid "Select locale"
-msgstr "Seleccionar locale"
-
 msgid "Select location"
 msgstr "Seleccionar ubicación"
 
@@ -8119,6 +8166,10 @@ msgid "Select the virtual keyboard locale from a menu"
 msgstr "Seleccione la configuración regional del teclado virtual desde un menú"
 
 msgid "Select the virtual keyboard shifted character set"
+msgstr "Seleccione el teclado virtual cambiado el conjunto de caracteres"
+
+#, fuzzy
+msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr "Seleccione el teclado virtual cambiado el conjunto de caracteres"
 
 #
@@ -8271,10 +8322,6 @@ msgid "Service scan"
 msgstr "Buscar canales"
 
 #
-msgid "Service searching"
-msgstr "Búsqueda de servicios"
-
-#
 msgid "Service title mode"
 msgstr "Modo de título de servicio"
 
@@ -8417,6 +8464,9 @@ msgstr "Nitidez"
 
 msgid "Shellscript"
 msgstr "Shellscript"
+
+msgid "Shift"
+msgstr ""
 
 msgid "Short filenames"
 msgstr "Nombres de ficheros cortos"
@@ -8835,6 +8885,9 @@ msgstr "Suave"
 
 msgid "Social/Political/Economics"
 msgstr "Social / Política / Economía"
+
+msgid "SocketMMI"
+msgstr ""
 
 msgid "SoftCam / CI"
 msgstr "SoftCam / CI"
@@ -10235,6 +10288,10 @@ msgstr "Estado del sintonizador:"
 
 msgid "Tuner type"
 msgstr "Tipo de tuner"
+
+#, fuzzy
+msgid "Tuners & scanning"
+msgstr "Error al escanear"
 
 msgid "Tunisia"
 msgstr "Tunisia"
@@ -12183,6 +12240,10 @@ msgstr "estilo de lista por defecto"
 msgid "list style single line"
 msgstr "estilo de lista en una línea"
 
+#, fuzzy
+msgid "listens to hotplug events"
+msgstr "Alienacion de eventos"
+
 msgid "literature"
 msgstr "literatura"
 
@@ -12628,6 +12689,14 @@ msgstr "saltar adelante"
 #
 msgid "skip forward"
 msgstr "saltar adelante"
+
+#, fuzzy, python-format
+msgid "slot%s - %s"
+msgstr "ranura% s -% s modo 1"
+
+#, fuzzy, python-format
+msgid "slot%s - %s (current image)"
+msgstr "ranura% s -% s modo 1 (imagen actual)"
 
 #, python-format
 msgid "slot%s - %s (current image) with, backup"

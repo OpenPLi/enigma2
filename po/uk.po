@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-25 06:50+0200\n"
+"POT-Creation-Date: 2019-06-26 23:01+0200\n"
 "PO-Revision-Date: 2016-11-17 12:51+0200\n"
 "Last-Translator: vovan43<vovan43@ex.ua>, sety <tim1065@mail.ru>, Irkoff <irkoff@gmail.com>\n"
 "Language-Team: gisclub.tv <http://gisclub.tv/>\n"
@@ -410,6 +410,10 @@ msgstr "%s %s вільне місце на диску"
 #, python-format
 msgid "%s (%s)\n"
 msgstr "%s (%s)\n"
+
+#, python-format
+msgid "%s imported from fallback tuner"
+msgstr ""
 
 #. TRANSLATORS: The satellite with name '%s' is no longer used after a configuration change. The user is asked whether or not the satellite should be deleted.
 #, python-format
@@ -1722,13 +1726,6 @@ msgstr "Номер каналу,пікон і назва сервісу"
 #, fuzzy
 msgid "Channels and EPG"
 msgstr "Інформація про канал"
-
-#, python-format
-msgid "Channels from fallback tuner failed %s"
-msgstr ""
-
-msgid "Channels from fallback tuner imported"
-msgstr ""
 
 #, fuzzy
 msgid "Channels only"
@@ -4313,7 +4310,8 @@ msgstr ""
 msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
 msgstr ""
 
-msgid "Import channels from fallback tuner"
+#, python-format
+msgid "Import from fallback tuner failed, %s"
 msgstr ""
 
 #, fuzzy
@@ -4929,6 +4927,9 @@ msgstr "Ручний пошук"
 
 msgid "Manual transponder"
 msgstr "Транспондер в ручну"
+
+msgid "Manually import from fallback tuner"
+msgstr ""
 
 msgid "Manufacturer"
 msgstr "Виробник"
@@ -5548,6 +5549,14 @@ msgid "Norwegian"
 msgstr "Норвезька"
 
 msgid "Not Defined"
+msgstr "Не визначений"
+
+#, fuzzy
+msgid "Not Installed"
+msgstr "Встановити"
+
+#, fuzzy
+msgid "Not Required"
 msgstr "Не визначений"
 
 msgid "Not associated"
@@ -7365,10 +7374,6 @@ msgstr "Вибір пристрою введення"
 msgid "Select interface"
 msgstr "Виберіть інтерфейс"
 
-#, fuzzy
-msgid "Select locale"
-msgstr "Вибір місця"
-
 msgid "Select location"
 msgstr "Вибір місця"
 
@@ -7461,6 +7466,9 @@ msgid "Select the virtual keyboard locale from a menu"
 msgstr ""
 
 msgid "Select the virtual keyboard shifted character set"
+msgstr ""
+
+msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr ""
 
 msgid "Select upgrade source"
@@ -7599,9 +7607,6 @@ msgstr "Референс"
 msgid "Service scan"
 msgstr "Сканування сервісів"
 
-msgid "Service searching"
-msgstr "Пошук сервісів"
-
 msgid "Service title mode"
 msgstr "Режим назви сервісу"
 
@@ -7737,6 +7742,9 @@ msgstr "Різкість"
 
 msgid "Shellscript"
 msgstr "Наступний скрипт"
+
+msgid "Shift"
+msgstr ""
 
 msgid "Short filenames"
 msgstr "Коротка назва"
@@ -9413,6 +9421,10 @@ msgstr "Статус тюнера %s"
 
 msgid "Tuner type"
 msgstr "Тюнер"
+
+#, fuzzy
+msgid "Tuners & scanning"
+msgstr "помилка під час сканування"
 
 msgid "Tunisia"
 msgstr ""

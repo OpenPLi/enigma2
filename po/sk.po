@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-25 06:50+0200\n"
+"POT-Creation-Date: 2019-06-26 23:01+0200\n"
 "PO-Revision-Date: 2019-02-06 13:41+0100\n"
 "Last-Translator: Andrej Tobola <andrej.tobola@gmail.com>\n"
 "Language-Team: \n"
@@ -417,6 +417,10 @@ msgstr "%s %s voľného miesta na disku"
 #, python-format
 msgid "%s (%s)\n"
 msgstr "%s (%s)\n"
+
+#, fuzzy, python-format
+msgid "%s imported from fallback tuner"
+msgstr "Povoliť import časovača zo záložného tuneru"
 
 #. TRANSLATORS: The satellite with name '%s' is no longer used after a configuration change. The user is asked whether or not the satellite should be deleted.
 #, python-format
@@ -1702,13 +1706,6 @@ msgstr "Číslo kanálu, picona a názov služby"
 
 msgid "Channels and EPG"
 msgstr "Stanice a EPG"
-
-#, python-format
-msgid "Channels from fallback tuner failed %s"
-msgstr "Stanice zo záložného tuneru zlyhali %s"
-
-msgid "Channels from fallback tuner imported"
-msgstr "Stanice zo záložného tuneru boli importované"
 
 msgid "Channels only"
 msgstr "Len stanice"
@@ -4247,8 +4244,9 @@ msgstr "Importovať stanice a/alebo EPG z URL adresy vzdialeného prijímača v 
 msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
 msgstr "Importovať stanice a/alebo EPG z URL adresy vzdialeného prijímača v prípade, že sa prijímač alebo Enigma2 reštartuje"
 
-msgid "Import channels from fallback tuner"
-msgstr "Import staníc zo záložného tuneru"
+#, fuzzy, python-format
+msgid "Import from fallback tuner failed, %s"
+msgstr "Stanice zo záložného tuneru zlyhali %s"
 
 msgid "Import from remote receiver URL"
 msgstr "Importovať stanice z URL adresy vzdialeného prijímača"
@@ -4843,6 +4841,10 @@ msgstr "Ručné vyhľadávanie"
 
 msgid "Manual transponder"
 msgstr "Transpondér ručne"
+
+#, fuzzy
+msgid "Manually import from fallback tuner"
+msgstr "Povoliť import časovača zo záložného tuneru"
 
 msgid "Manufacturer"
 msgstr "Výrobca"
@@ -5452,6 +5454,14 @@ msgid "Norwegian"
 msgstr "Nórčina"
 
 msgid "Not Defined"
+msgstr "Nedefinované"
+
+#, fuzzy
+msgid "Not Installed"
+msgstr "Inštalovať"
+
+#, fuzzy
+msgid "Not Required"
 msgstr "Nedefinované"
 
 msgid "Not associated"
@@ -7221,9 +7231,6 @@ msgstr "Zvoľte vstupné zariadenie."
 msgid "Select interface"
 msgstr "Zvoľte rozhranie"
 
-msgid "Select locale"
-msgstr "Výber jazyka"
-
 msgid "Select location"
 msgstr "Zvoľte umiestnenie"
 
@@ -7315,6 +7322,10 @@ msgid "Select the virtual keyboard locale from a menu"
 msgstr "Vyberte jazyk virtuálnej klávesnice z menu"
 
 msgid "Select the virtual keyboard shifted character set"
+msgstr "Vyberte znakovú sadu virtuálnej klávesnice po stlačení klávesy Shift"
+
+#, fuzzy
+msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr "Vyberte znakovú sadu virtuálnej klávesnice po stlačení klávesy Shift"
 
 msgid "Select upgrade source"
@@ -7447,9 +7458,6 @@ msgstr "Referencia služby"
 
 msgid "Service scan"
 msgstr "Vyhľadávanie staníc"
-
-msgid "Service searching"
-msgstr "Hľadanie staníc"
 
 msgid "Service title mode"
 msgstr "Režim názvu služby"
@@ -7584,6 +7592,9 @@ msgstr "Ostrosť"
 
 msgid "Shellscript"
 msgstr "Konzolový skript"
+
+msgid "Shift"
+msgstr ""
 
 msgid "Short filenames"
 msgstr "Krátke názvy súborov"
@@ -9217,6 +9228,10 @@ msgstr "Stav tunera:"
 
 msgid "Tuner type"
 msgstr "Typ tunera"
+
+#, fuzzy
+msgid "Tuners & scanning"
+msgstr "chyba počas vyhľadávania"
 
 msgid "Tunisia"
 msgstr "Tunisko"

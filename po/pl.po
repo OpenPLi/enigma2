@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-11 22:12+0200\n"
+"POT-Creation-Date: 2019-06-26 23:01+0200\n"
 "PO-Revision-Date: 2019-05-30 21:14+0200\n"
 "Last-Translator: blzr <blzr@o2.pl>\n"
 "Language-Team: \n"
@@ -415,6 +415,10 @@ msgstr "%s %s wolnej przestrzeni dyskowej"
 #, python-format
 msgid "%s (%s)\n"
 msgstr "%s (%s)\n"
+
+#, fuzzy, python-format
+msgid "%s imported from fallback tuner"
+msgstr "Włącz import timerów z tunera rezerwowego"
 
 #. TRANSLATORS: The satellite with name '%s' is no longer used after a configuration change. The user is asked whether or not the satellite should be deleted.
 #, python-format
@@ -1699,13 +1703,6 @@ msgstr "Numer kanału, pikona i nazwa"
 
 msgid "Channels and EPG"
 msgstr "Kanały i EPG"
-
-#, python-format
-msgid "Channels from fallback tuner failed %s"
-msgstr "Kanały z tunera rezerwowego niezaimportowane %s"
-
-msgid "Channels from fallback tuner imported"
-msgstr "Kanały z tunera rezerwowego zaimportowane"
 
 msgid "Channels only"
 msgstr "Tylko kanały"
@@ -4239,8 +4236,9 @@ msgstr "Importuj kanały i / lub EPG ze zdalnego odbiornika wtedy, gdy odbiornik
 msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
 msgstr "Importuj kanały i / lub EPG ze zdalnego odbiornika wtedy, gdy odbiornik lub enigma się restartuje"
 
-msgid "Import channels from fallback tuner"
-msgstr "Importuj kanały z rezerwowego tunera"
+#, fuzzy, python-format
+msgid "Import from fallback tuner failed, %s"
+msgstr "Kanały z tunera rezerwowego niezaimportowane %s"
 
 msgid "Import from remote receiver URL"
 msgstr "Importuj ze zdalnego odbiornika"
@@ -4835,6 +4833,10 @@ msgstr "Skanowanie ręczne"
 
 msgid "Manual transponder"
 msgstr "Własny transponder"
+
+#, fuzzy
+msgid "Manually import from fallback tuner"
+msgstr "Włącz import timerów z tunera rezerwowego"
 
 msgid "Manufacturer"
 msgstr "Producent"
@@ -5440,6 +5442,14 @@ msgid "Norwegian"
 msgstr "Norweski"
 
 msgid "Not Defined"
+msgstr "Niezdefiniowany"
+
+#, fuzzy
+msgid "Not Installed"
+msgstr "Instalacja"
+
+#, fuzzy
+msgid "Not Required"
 msgstr "Niezdefiniowany"
 
 msgid "Not associated"
@@ -7206,9 +7216,6 @@ msgstr "Wybierz urządzenie wejściowe."
 msgid "Select interface"
 msgstr "Wybierz interfejs"
 
-msgid "Select locale"
-msgstr "Ustawienia regionalne"
-
 msgid "Select location"
 msgstr "Wybierz lokalizację"
 
@@ -7300,6 +7307,10 @@ msgid "Select the virtual keyboard locale from a menu"
 msgstr "Wybierz ustawienia regionalne klawiatury wirtualnej z menu"
 
 msgid "Select the virtual keyboard shifted character set"
+msgstr "Wybierz zestaw znaków klawiatury wirtualnej z 'SHIFT'"
+
+#, fuzzy
+msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr "Wybierz zestaw znaków klawiatury wirtualnej z 'SHIFT'"
 
 msgid "Select upgrade source"
@@ -7433,9 +7444,6 @@ msgstr ""
 msgid "Service scan"
 msgstr "Skanowanie kanałów"
 
-msgid "Service searching"
-msgstr "Szukanie kanałów"
-
 msgid "Service title mode"
 msgstr "Identyfikacja kanału"
 
@@ -7568,6 +7576,9 @@ msgstr "Ostrość"
 
 msgid "Shellscript"
 msgstr "Skrypty shell"
+
+msgid "Shift"
+msgstr ""
 
 msgid "Short filenames"
 msgstr "Krótkie nazwy plików"
@@ -9201,6 +9212,10 @@ msgstr "Status tunera:"
 
 msgid "Tuner type"
 msgstr "Typ tunera"
+
+#, fuzzy
+msgid "Tuners & scanning"
+msgstr "błąd w trakcie skanowania"
 
 msgid "Tunisia"
 msgstr "Tunezja"

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-25 06:50+0200\n"
+"POT-Creation-Date: 2019-06-26 23:01+0200\n"
 "PO-Revision-Date: 2014-11-12 00:49+0200\n"
 "Last-Translator: Taapat <taapat@gmail.com>\n"
 "Language-Team: Taapat <taapat@gmail.com>\n"
@@ -417,6 +417,10 @@ msgstr "%s %s brīva vieta uz diska"
 #, python-format
 msgid "%s (%s)\n"
 msgstr "%s (%s)\n"
+
+#, fuzzy, python-format
+msgid "%s imported from fallback tuner"
+msgstr "Importēt taimerus no attālinātā uztvērēja"
 
 #. TRANSLATORS: The satellite with name '%s' is no longer used after a configuration change. The user is asked whether or not the satellite should be deleted.
 #, python-format
@@ -1703,13 +1707,6 @@ msgstr "Kanāla numurs, pikona un kanāla nosaukums"
 
 msgid "Channels and EPG"
 msgstr "Kanālus un EPG"
-
-#, python-format
-msgid "Channels from fallback tuner failed %s"
-msgstr "Kanālu importēšana no attālinātā uztvērēja neizdevās %s"
-
-msgid "Channels from fallback tuner imported"
-msgstr "Kanāli no attālinātā uztvērēja importēti!"
 
 msgid "Channels only"
 msgstr "Tikai kanālus"
@@ -4244,8 +4241,9 @@ msgstr "Importēt kanālus un/vai EPG no attālinātā uztvērēja kad uztvērē
 msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
 msgstr "Importēt kanālus un/vai EPG no attālinātā uztvērēja kad enigma tiek pārstartēta"
 
-msgid "Import channels from fallback tuner"
-msgstr "Importēt kanālus no attālinātā uztvērēja"
+#, fuzzy, python-format
+msgid "Import from fallback tuner failed, %s"
+msgstr "Kanālu importēšana no attālinātā uztvērēja neizdevās %s"
 
 msgid "Import from remote receiver URL"
 msgstr "Importēt no attālinātā uztvērēja"
@@ -4838,6 +4836,10 @@ msgstr "Manuālā meklēšana"
 
 msgid "Manual transponder"
 msgstr "Manuāls transponderis"
+
+#, fuzzy
+msgid "Manually import from fallback tuner"
+msgstr "Importēt taimerus no attālinātā uztvērēja"
 
 msgid "Manufacturer"
 msgstr "Ražotājs"
@@ -5444,6 +5446,14 @@ msgid "Norwegian"
 msgstr "Norvēģu"
 
 msgid "Not Defined"
+msgstr "Nav definēts"
+
+#, fuzzy
+msgid "Not Installed"
+msgstr "Instalēt"
+
+#, fuzzy
+msgid "Not Required"
 msgstr "Nav definēts"
 
 msgid "Not associated"
@@ -7212,9 +7222,6 @@ msgstr "Izvēlieties ievades ierīci."
 msgid "Select interface"
 msgstr "Izvēlieties interfeisu"
 
-msgid "Select locale"
-msgstr "Valoda"
-
 msgid "Select location"
 msgstr "Izvēlieties atrašanās vietu"
 
@@ -7306,6 +7313,10 @@ msgid "Select the virtual keyboard locale from a menu"
 msgstr "Izvēlieties virtuālās tastatūras lokalizāciju"
 
 msgid "Select the virtual keyboard shifted character set"
+msgstr "Izvēlieties virtuālās tastatūras speciālo izkārtojumu"
+
+#, fuzzy
+msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr "Izvēlieties virtuālās tastatūras speciālo izkārtojumu"
 
 msgid "Select upgrade source"
@@ -7439,9 +7450,6 @@ msgstr "Kanāla atsauce"
 msgid "Service scan"
 msgstr "Kanālu meklēšana"
 
-msgid "Service searching"
-msgstr "Kanālu iestatīšana"
-
 msgid "Service title mode"
 msgstr "Izvēlieties kanāla attēla režīmu"
 
@@ -7574,6 +7582,9 @@ msgstr "Asums"
 
 msgid "Shellscript"
 msgstr "Skripti"
+
+msgid "Shift"
+msgstr ""
 
 msgid "Short filenames"
 msgstr "Īsie failu nosaukumi"
@@ -9202,6 +9213,10 @@ msgstr "Uztvērēja statuss:"
 
 msgid "Tuner type"
 msgstr "Uztvērēja veids"
+
+#, fuzzy
+msgid "Tuners & scanning"
+msgstr "kļūda skenējot"
 
 msgid "Tunisia"
 msgstr "Tunisija"

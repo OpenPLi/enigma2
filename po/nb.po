@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-25 06:50+0200\n"
+"POT-Creation-Date: 2019-06-26 23:01+0200\n"
 "PO-Revision-Date: 2019-05-03 17:38+0200\n"
 "Last-Translator: GeirJ <dummy@dummy.com>\n"
 "Language-Team: GeirJ\n"
@@ -422,6 +422,10 @@ msgstr "%s %s ledig diskplass"
 #, python-format
 msgid "%s (%s)\n"
 msgstr "%s (%s)\n"
+
+#, fuzzy, python-format
+msgid "%s imported from fallback tuner"
+msgstr "Aktiver import timer fra reserve tuner"
 
 #. TRANSLATORS: The satellite with name '%s' is no longer used after a configuration change. The user is asked whether or not the satellite should be deleted.
 #, python-format
@@ -1860,13 +1864,6 @@ msgstr "Kanalnummer, kanallogo og kanalnavn"
 #
 msgid "Channels and EPG"
 msgstr "Kanaler og EPG"
-
-#, python-format
-msgid "Channels from fallback tuner failed %s"
-msgstr "Kanaler fra ekstermottaker mislyktes%s"
-
-msgid "Channels from fallback tuner imported"
-msgstr "Kanaler fra eksternmottaker er importert"
 
 #
 msgid "Channels only"
@@ -4666,8 +4663,9 @@ msgstr "Importer kanaler og/eller EPG fra ekstern mottakeradresse når mottakere
 msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
 msgstr "Importer kanaler og/eller EPG fra ekstern mottakeradresse når mottakeren eller enigma2 har startet på nytt"
 
-msgid "Import channels from fallback tuner"
-msgstr "Importere kanaler fra reserve tuner"
+#, fuzzy, python-format
+msgid "Import from fallback tuner failed, %s"
+msgstr "Kanaler fra ekstermottaker mislyktes%s"
 
 msgid "Import from remote receiver URL"
 msgstr "Importer fra ekstern mottakeradresse"
@@ -5354,6 +5352,10 @@ msgstr "Manuelt søk"
 msgid "Manual transponder"
 msgstr "Manuell transponder"
 
+#, fuzzy
+msgid "Manually import from fallback tuner"
+msgstr "Aktiver import timer fra reserve tuner"
+
 #
 msgid "Manufacturer"
 msgstr "Produsent"
@@ -6039,6 +6041,16 @@ msgstr "Norsk"
 
 #
 msgid "Not Defined"
+msgstr "Ikke angitt"
+
+#
+#, fuzzy
+msgid "Not Installed"
+msgstr "Installer"
+
+#
+#, fuzzy
+msgid "Not Required"
 msgstr "Ikke angitt"
 
 msgid "Not associated"
@@ -8026,10 +8038,6 @@ msgid "Select interface"
 msgstr "Velg grensesnitt"
 
 #
-msgid "Select locale"
-msgstr "Velg nasjon"
-
-#
 msgid "Select location"
 msgstr "Velg sted"
 
@@ -8128,6 +8136,10 @@ msgid "Select the virtual keyboard locale from a menu"
 msgstr "Velg nasjonale innstillinger for virtuelt tastatur fra en meny"
 
 msgid "Select the virtual keyboard shifted character set"
+msgstr "Velg virtuell tastaturs shift tegnsett"
+
+#, fuzzy
+msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr "Velg virtuell tastaturs shift tegnsett"
 
 msgid "Select upgrade source"
@@ -8269,9 +8281,6 @@ msgid "Service reference"
 msgstr "Kanalreferanse"
 
 msgid "Service scan"
-msgstr "Kanalsøk"
-
-msgid "Service searching"
 msgstr "Kanalsøk"
 
 #
@@ -8416,6 +8425,9 @@ msgstr "Skarphet"
 #
 msgid "Shellscript"
 msgstr "Shellskript"
+
+msgid "Shift"
+msgstr ""
 
 msgid "Short filenames"
 msgstr "Korte filnavn"
@@ -10246,6 +10258,10 @@ msgstr "Tuner status:"
 #
 msgid "Tuner type"
 msgstr "Tuner"
+
+#, fuzzy
+msgid "Tuners & scanning"
+msgstr "feil under søket"
 
 msgid "Tunisia"
 msgstr "Tunisia"

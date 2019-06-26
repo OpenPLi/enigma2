@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1-En-Th\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-25 06:50+0200\n"
+"POT-Creation-Date: 2019-06-26 23:01+0200\n"
 "PO-Revision-Date: 2010-04-08 18:13+0700\n"
 "Last-Translator: Tony - Thaidreambox\n"
 "Language-Team: Tony @ Thai Dreambox <tonyboyth@gmail.com>\n"
@@ -390,6 +390,10 @@ msgstr "เนื้อที่เหลือยู่"
 #, python-format
 msgid "%s (%s)\n"
 msgstr "%s (%s)\n"
+
+#, python-format
+msgid "%s imported from fallback tuner"
+msgstr ""
 
 #. TRANSLATORS: The satellite with name '%s' is no longer used after a configuration change. The user is asked whether or not the satellite should be deleted.
 #, python-format
@@ -1716,13 +1720,6 @@ msgstr ""
 #, fuzzy
 msgid "Channels and EPG"
 msgstr "เมนูช่องรายการ"
-
-#, python-format
-msgid "Channels from fallback tuner failed %s"
-msgstr ""
-
-msgid "Channels from fallback tuner imported"
-msgstr ""
 
 #, fuzzy
 msgid "Channels only"
@@ -4343,7 +4340,8 @@ msgstr ""
 msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
 msgstr ""
 
-msgid "Import channels from fallback tuner"
+#, python-format
+msgid "Import from fallback tuner failed, %s"
 msgstr ""
 
 msgid "Import from remote receiver URL"
@@ -4980,6 +4978,9 @@ msgstr "ค้นหาเอง"
 msgid "Manual transponder"
 msgstr "ป้อนทรานสปอนเดอร์เอง"
 
+msgid "Manually import from fallback tuner"
+msgstr ""
+
 msgid "Manufacturer"
 msgstr "ผู้ผลิต"
 
@@ -5615,6 +5616,13 @@ msgid "Norwegian"
 msgstr "ภาษานอร์เว"
 
 msgid "Not Defined"
+msgstr ""
+
+#, fuzzy
+msgid "Not Installed"
+msgstr "ติดตั้ง"
+
+msgid "Not Required"
 msgstr ""
 
 msgid "Not associated"
@@ -7466,10 +7474,6 @@ msgstr ""
 msgid "Select interface"
 msgstr "เลือกอินเตอร์เฟซ"
 
-#, fuzzy
-msgid "Select locale"
-msgstr "เลือกภาพยนต์"
-
 msgid "Select location"
 msgstr ""
 
@@ -7565,6 +7569,9 @@ msgid "Select the virtual keyboard locale from a menu"
 msgstr ""
 
 msgid "Select the virtual keyboard shifted character set"
+msgstr ""
+
+msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr ""
 
 #, fuzzy
@@ -7707,10 +7714,6 @@ msgid "Service scan"
 msgstr "ค้นหาบริการ"
 
 #, fuzzy
-msgid "Service searching"
-msgstr "กำลังค้นหาบริการ"
-
-#, fuzzy
 msgid "Service title mode"
 msgstr "เลือกโหมดวีดีโอ"
 
@@ -7849,6 +7852,9 @@ msgid "Sharpness"
 msgstr "ความคม"
 
 msgid "Shellscript"
+msgstr ""
+
+msgid "Shift"
 msgstr ""
 
 msgid "Short filenames"
@@ -9529,6 +9535,9 @@ msgid "Tuner status:"
 msgstr "สถานะของ Tuner"
 
 msgid "Tuner type"
+msgstr ""
+
+msgid "Tuners & scanning"
 msgstr ""
 
 msgid "Tunisia"

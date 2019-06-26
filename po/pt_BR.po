@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-25 06:50+0200\n"
+"POT-Creation-Date: 2019-06-26 23:01+0200\n"
 "PO-Revision-Date: 2013-10-20 19:13-0300\n"
 "Last-Translator: Diogo <pingflood@gmail.com>\n"
 "Language-Team: Traduzido por Frank Viana <franksrviana@gmail.com>\n"
@@ -397,6 +397,10 @@ msgstr "%s %s de espaço livre"
 
 #, python-format
 msgid "%s (%s)\n"
+msgstr ""
+
+#, python-format
+msgid "%s imported from fallback tuner"
 msgstr ""
 
 #. TRANSLATORS: The satellite with name '%s' is no longer used after a configuration change. The user is asked whether or not the satellite should be deleted.
@@ -1700,13 +1704,6 @@ msgstr ""
 #, fuzzy
 msgid "Channels and EPG"
 msgstr "Informação do canal"
-
-#, python-format
-msgid "Channels from fallback tuner failed %s"
-msgstr ""
-
-msgid "Channels from fallback tuner imported"
-msgstr ""
 
 #, fuzzy
 msgid "Channels only"
@@ -4264,7 +4261,8 @@ msgstr ""
 msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
 msgstr ""
 
-msgid "Import channels from fallback tuner"
+#, python-format
+msgid "Import from fallback tuner failed, %s"
 msgstr ""
 
 msgid "Import from remote receiver URL"
@@ -4866,6 +4864,9 @@ msgstr "Busca avançada"
 
 msgid "Manual transponder"
 msgstr "Transponder manual"
+
+msgid "Manually import from fallback tuner"
+msgstr ""
 
 msgid "Manufacturer"
 msgstr "Fabricante"
@@ -5485,6 +5486,13 @@ msgid "Norwegian"
 msgstr "Norueguês"
 
 msgid "Not Defined"
+msgstr ""
+
+#, fuzzy
+msgid "Not Installed"
+msgstr "Instalar"
+
+msgid "Not Required"
 msgstr ""
 
 msgid "Not associated"
@@ -7287,10 +7295,6 @@ msgstr "Selecione o dispositivo de entrada."
 msgid "Select interface"
 msgstr "Selecione a interface"
 
-#, fuzzy
-msgid "Select locale"
-msgstr "Selecione um vídeo"
-
 msgid "Select location"
 msgstr ""
 
@@ -7383,6 +7387,9 @@ msgid "Select the virtual keyboard locale from a menu"
 msgstr ""
 
 msgid "Select the virtual keyboard shifted character set"
+msgstr ""
+
+msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr ""
 
 msgid "Select upgrade source"
@@ -7521,9 +7528,6 @@ msgstr "Referência"
 msgid "Service scan"
 msgstr "Busca de canais"
 
-msgid "Service searching"
-msgstr "Tuner e serviços"
-
 msgid "Service title mode"
 msgstr ""
 
@@ -7658,6 +7662,9 @@ msgid "Sharpness"
 msgstr "Nitidez"
 
 msgid "Shellscript"
+msgstr ""
+
+msgid "Shift"
 msgstr ""
 
 msgid "Short filenames"
@@ -9291,6 +9298,9 @@ msgstr "Tuner"
 
 msgid "Tuner type"
 msgstr "Tipo de tuner"
+
+msgid "Tuners & scanning"
+msgstr ""
 
 msgid "Tunisia"
 msgstr ""

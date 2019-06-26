@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-25 06:50+0200\n"
+"POT-Creation-Date: 2019-06-26 23:01+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Budiarno Pedode\n"
 "Language-Team: \n"
@@ -404,6 +404,10 @@ msgstr "%s %s sisa penyimpanan disk"
 #, python-format
 msgid "%s (%s)\n"
 msgstr "%s (%s)\n"
+
+#, fuzzy, python-format
+msgid "%s imported from fallback tuner"
+msgstr "Impor kanal dari penala digunakan"
 
 #. TRANSLATORS: The satellite with name '%s' is no longer used after a configuration change. The user is asked whether or not the satellite should be deleted.
 #, python-format
@@ -1716,13 +1720,6 @@ msgstr "Nomor kanal, pikon dan nama layanan"
 #, fuzzy
 msgid "Channels and EPG"
 msgstr "Kanal dan EPG"
-
-#, python-format
-msgid "Channels from fallback tuner failed %s"
-msgstr "Kanal dari penala terpakai gagal %s"
-
-msgid "Channels from fallback tuner imported"
-msgstr "Kanal dari penala terpakai diimpor"
 
 #, fuzzy
 msgid "Channels only"
@@ -4321,8 +4318,9 @@ msgstr "Impor kanal dan/atau EPG dari URL Rx jauh ketika Rx dihidupkan."
 msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
 msgstr "Impor kanal dan/atau EPG dari URL Rx jauh ketika Rx atau enigma2 dimulai ulang"
 
-msgid "Import channels from fallback tuner"
-msgstr "Impor kanal dari penala digunakan"
+#, fuzzy, python-format
+msgid "Import from fallback tuner failed, %s"
+msgstr "Kanal dari penala terpakai gagal %s"
 
 #, fuzzy
 msgid "Import from remote receiver URL"
@@ -4931,6 +4929,10 @@ msgstr "Pelacakan manual"
 
 msgid "Manual transponder"
 msgstr "Transponder manual"
+
+#, fuzzy
+msgid "Manually import from fallback tuner"
+msgstr "Impor kanal dari penala digunakan"
 
 msgid "Manufacturer"
 msgstr "Pabrikan"
@@ -5550,6 +5552,14 @@ msgid "Norwegian"
 msgstr "Norwegia"
 
 msgid "Not Defined"
+msgstr "Tak ditetapkan"
+
+#, fuzzy
+msgid "Not Installed"
+msgstr "Pasang"
+
+#, fuzzy
+msgid "Not Required"
 msgstr "Tak ditetapkan"
 
 msgid "Not associated"
@@ -7356,10 +7366,6 @@ msgstr "Pilih perangkat input."
 msgid "Select interface"
 msgstr "Pilih antarmuka"
 
-#, fuzzy
-msgid "Select locale"
-msgstr "Pilih lokal"
-
 msgid "Select location"
 msgstr "Pilih lokasi"
 
@@ -7452,6 +7458,10 @@ msgid "Select the virtual keyboard locale from a menu"
 msgstr "Pilih lokal papankunci virtual dari menu"
 
 msgid "Select the virtual keyboard shifted character set"
+msgstr "Pilih set karakter geser pada papankunci virtual"
+
+#, fuzzy
+msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr "Pilih set karakter geser pada papankunci virtual"
 
 msgid "Select upgrade source"
@@ -7590,9 +7600,6 @@ msgstr "Referensi layanan"
 msgid "Service scan"
 msgstr "Pelacakan layanan"
 
-msgid "Service searching"
-msgstr "Pencarian layanan"
-
 msgid "Service title mode"
 msgstr "Mode judul layanan"
 
@@ -7727,6 +7734,9 @@ msgid "Sharpness"
 msgstr "Ketajaman"
 
 msgid "Shellscript"
+msgstr ""
+
+msgid "Shift"
 msgstr ""
 
 msgid "Short filenames"
@@ -9384,6 +9394,10 @@ msgstr "Status penala:"
 
 msgid "Tuner type"
 msgstr "Jenis penala"
+
+#, fuzzy
+msgid "Tuners & scanning"
+msgstr "gagal saat memindai"
 
 msgid "Tunisia"
 msgstr ""

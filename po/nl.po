@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-25 06:50+0200\n"
+"POT-Creation-Date: 2019-06-26 23:01+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Frenske <voorzitter@openpli.org>\n"
 "Language-Team: PLiteam <translators@openpli.org>\n"
@@ -405,6 +405,10 @@ msgstr "%s %s beschikbare schijfruimte"
 #, python-format
 msgid "%s (%s)\n"
 msgstr "%s (%s)\n"
+
+#, fuzzy, python-format
+msgid "%s imported from fallback tuner"
+msgstr "Activeer de import van timers van de Fallback tuner"
 
 #. TRANSLATORS: The satellite with name '%s' is no longer used after a configuration change. The user is asked whether or not the satellite should be deleted.
 #, python-format
@@ -1693,13 +1697,6 @@ msgstr "Kanaalnummer, picon en servicenaam"
 
 msgid "Channels and EPG"
 msgstr "Zenders + EPG"
-
-#, python-format
-msgid "Channels from fallback tuner failed %s"
-msgstr "%s kanalen mislukt van de Fallback tuner"
-
-msgid "Channels from fallback tuner imported"
-msgstr "De zenders van de Fallback tuner zijn ingelezen"
 
 msgid "Channels only"
 msgstr "Alléén de zenders"
@@ -4425,8 +4422,9 @@ msgstr ""
 msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
 msgstr "Indien geactiveerd, dan importeert u de zenders en/of de EPG vanaf de de externe ontvanger als de ontvanger of enigma2 is herstart."
 
-msgid "Import channels from fallback tuner"
-msgstr "Importeer de zenders vanaf de Fallback tuner"
+#, fuzzy, python-format
+msgid "Import from fallback tuner failed, %s"
+msgstr "%s kanalen mislukt van de Fallback tuner"
 
 msgid "Import from remote receiver URL"
 msgstr "Importeer div. data vanaf een externe ontvanger"
@@ -5019,6 +5017,10 @@ msgstr "Handmatig zoeken"
 
 msgid "Manual transponder"
 msgstr "Transponder handmatig"
+
+#, fuzzy
+msgid "Manually import from fallback tuner"
+msgstr "Activeer de import van timers van de Fallback tuner"
 
 msgid "Manufacturer"
 msgstr "Fabrikant"
@@ -5626,6 +5628,14 @@ msgid "Norwegian"
 msgstr "Noors"
 
 msgid "Not Defined"
+msgstr "Niet vestgelegd"
+
+#, fuzzy
+msgid "Not Installed"
+msgstr "Installeer"
+
+#, fuzzy
+msgid "Not Required"
 msgstr "Niet vestgelegd"
 
 msgid "Not associated"
@@ -7429,9 +7439,6 @@ msgstr "Kies invoerapparaat."
 msgid "Select interface"
 msgstr "Selecteer interface"
 
-msgid "Select locale"
-msgstr "Kies de taal"
-
 msgid "Select location"
 msgstr "Kies locatie"
 
@@ -7523,6 +7530,10 @@ msgid "Select the virtual keyboard locale from a menu"
 msgstr "Kies de landinstelling van het virtuele toetsenbord vanuit het menu"
 
 msgid "Select the virtual keyboard shifted character set"
+msgstr "Kies de variabele tekenset op het virtuele toetsenbord"
+
+#, fuzzy
+msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr "Kies de variabele tekenset op het virtuele toetsenbord"
 
 msgid "Select upgrade source"
@@ -7654,9 +7665,6 @@ msgid "Service reference"
 msgstr "Zenderreferentie"
 
 msgid "Service scan"
-msgstr "Zenders zoeken"
-
-msgid "Service searching"
 msgstr "Zenders zoeken"
 
 msgid "Service title mode"
@@ -7797,6 +7805,9 @@ msgstr "Scherpte"
 
 msgid "Shellscript"
 msgstr "Shellscript"
+
+msgid "Shift"
+msgstr ""
 
 msgid "Short filenames"
 msgstr "Korte bestandsnamen"
@@ -9453,6 +9464,10 @@ msgstr "Tunerstatus:"
 
 msgid "Tuner type"
 msgstr "Tunertype"
+
+#, fuzzy
+msgid "Tuners & scanning"
+msgstr "fout tijdens het scannen"
 
 msgid "Tunisia"
 msgstr "Tunesië"

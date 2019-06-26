@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-25 06:50+0200\n"
+"POT-Creation-Date: 2019-06-26 23:01+0200\n"
 "PO-Revision-Date: 2019-03-05 15:26+0200\n"
 "Last-Translator: Audronis Grincevicius <adga45@gmail.com>\n"
 "Language-Team: Adga (C) <adga45@gmail.com>\n"
@@ -417,6 +417,10 @@ msgstr "%s %s laisvos vietos diske"
 #, python-format
 msgid "%s (%s)\n"
 msgstr "%s (%s)\n"
+
+#, fuzzy, python-format
+msgid "%s imported from fallback tuner"
+msgstr "Įjungti importo laikmatį iš atsarginio imtuvo"
 
 #. TRANSLATORS: The satellite with name '%s' is no longer used after a configuration change. The user is asked whether or not the satellite should be deleted.
 #, python-format
@@ -1703,13 +1707,6 @@ msgstr "Kanalo numeris, logotipas ir kanalo pavadinimas"
 
 msgid "Channels and EPG"
 msgstr "Kanalai ir EPG"
-
-#, python-format
-msgid "Channels from fallback tuner failed %s"
-msgstr "Iš nuotolinio imtuvo nepavykę parsisiųsti kanalai %s"
-
-msgid "Channels from fallback tuner imported"
-msgstr "Kanalai, importuoti iš nuotolinio imtuvo"
 
 msgid "Channels only"
 msgstr "Tik kanalai"
@@ -4244,8 +4241,9 @@ msgstr "Importuoti kanalus ir/arba EPG iš nuotolinio imtuvo URL, kai imtuvas yr
 msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
 msgstr "Importuoti kanalus ir/arba EPG iš nuotolinio imtuvo URL, kai imtuvas arba enigma2 yra paleidžiami iš naujo"
 
-msgid "Import channels from fallback tuner"
-msgstr "Importuoti kanalus iš atsarginio imtuvo"
+#, fuzzy, python-format
+msgid "Import from fallback tuner failed, %s"
+msgstr "Iš nuotolinio imtuvo nepavykę parsisiųsti kanalai %s"
 
 msgid "Import from remote receiver URL"
 msgstr "Importuoti epg iš nuotolinio imtuvo URL"
@@ -4841,6 +4839,10 @@ msgstr "Rankinė paieška"
 
 msgid "Manual transponder"
 msgstr "Rankinis transponderio pasirinkimas"
+
+#, fuzzy
+msgid "Manually import from fallback tuner"
+msgstr "Įjungti importo laikmatį iš atsarginio imtuvo"
 
 msgid "Manufacturer"
 msgstr "Gamintojas"
@@ -5451,6 +5453,14 @@ msgid "Norwegian"
 msgstr "Norvegų"
 
 msgid "Not Defined"
+msgstr "Neapibrėžta"
+
+#, fuzzy
+msgid "Not Installed"
+msgstr "Įdiegti"
+
+#, fuzzy
+msgid "Not Required"
 msgstr "Neapibrėžta"
 
 msgid "Not associated"
@@ -7221,9 +7231,6 @@ msgstr "Pasirinkite įvesties įrenginį."
 msgid "Select interface"
 msgstr "Pasrinkite sąsają"
 
-msgid "Select locale"
-msgstr "Pasirinkite vietą"
-
 msgid "Select location"
 msgstr "Pasirinkite vietą"
 
@@ -7315,6 +7322,10 @@ msgid "Select the virtual keyboard locale from a menu"
 msgstr "Pasirinkite virtualiosios klaviatūros vietą iš meniu"
 
 msgid "Select the virtual keyboard shifted character set"
+msgstr "Pasirinkite simbolių rinkinį su virtualia klaviatūra"
+
+#, fuzzy
+msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr "Pasirinkite simbolių rinkinį su virtualia klaviatūra"
 
 msgid "Select upgrade source"
@@ -7447,9 +7458,6 @@ msgstr "Kanalo nuoroda"
 
 msgid "Service scan"
 msgstr "Kanalo paieška"
-
-msgid "Service searching"
-msgstr "Kanalų paieška"
 
 msgid "Service title mode"
 msgstr "Kanalo pavadinimo režimas"
@@ -7585,6 +7593,9 @@ msgstr "Ryškumas"
 
 msgid "Shellscript"
 msgstr "Grafinės aplinkos scenarijus"
+
+msgid "Shift"
+msgstr ""
 
 msgid "Short filenames"
 msgstr "Trumpi failų pavadinimai"
@@ -9217,6 +9228,10 @@ msgstr "Imtuvo būsena:"
 
 msgid "Tuner type"
 msgstr "Imtuvo tipas"
+
+#, fuzzy
+msgid "Tuners & scanning"
+msgstr "klaida, skenuojant"
 
 msgid "Tunisia"
 msgstr "Tunisas"

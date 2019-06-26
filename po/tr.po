@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OPENPLi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-25 06:50+0200\n"
+"POT-Creation-Date: 2019-06-26 23:01+0200\n"
 "PO-Revision-Date: 2015-12-18 21:05+0200\n"
 "Last-Translator: Yetkin AYDIN <yetkina@gmail.com>\n"
 "Language-Team: http://www.hurforum.com <yetkina@gmail.com>\n"
@@ -394,6 +394,10 @@ msgstr "%s %s boş disk alanı"
 #, python-format
 msgid "%s (%s)\n"
 msgstr "%s (%s)\n"
+
+#, python-format
+msgid "%s imported from fallback tuner"
+msgstr ""
 
 #. TRANSLATORS: The satellite with name '%s' is no longer used after a configuration change. The user is asked whether or not the satellite should be deleted.
 #, python-format
@@ -1700,13 +1704,6 @@ msgstr ""
 #, fuzzy
 msgid "Channels and EPG"
 msgstr "Kanal Bilgisi"
-
-#, python-format
-msgid "Channels from fallback tuner failed %s"
-msgstr ""
-
-msgid "Channels from fallback tuner imported"
-msgstr ""
 
 #, fuzzy
 msgid "Channels only"
@@ -4281,7 +4278,8 @@ msgstr ""
 msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
 msgstr ""
 
-msgid "Import channels from fallback tuner"
+#, python-format
+msgid "Import from fallback tuner failed, %s"
 msgstr ""
 
 #, fuzzy
@@ -4884,6 +4882,9 @@ msgstr "Elle Tarama"
 
 msgid "Manual transponder"
 msgstr "Transponder bilgilerini elle gir"
+
+msgid "Manually import from fallback tuner"
+msgstr ""
 
 msgid "Manufacturer"
 msgstr "Üretici"
@@ -5503,6 +5504,14 @@ msgid "Norwegian"
 msgstr "Norveççe"
 
 msgid "Not Defined"
+msgstr "Tanımlanmamış"
+
+#, fuzzy
+msgid "Not Installed"
+msgstr "Yükle"
+
+#, fuzzy
+msgid "Not Required"
 msgstr "Tanımlanmamış"
 
 msgid "Not associated"
@@ -7309,10 +7318,6 @@ msgstr "Kumanda seç."
 msgid "Select interface"
 msgstr "Arayüz seçimi"
 
-#, fuzzy
-msgid "Select locale"
-msgstr "Yer seçimi"
-
 msgid "Select location"
 msgstr "Yer seçimi"
 
@@ -7405,6 +7410,9 @@ msgid "Select the virtual keyboard locale from a menu"
 msgstr ""
 
 msgid "Select the virtual keyboard shifted character set"
+msgstr ""
+
+msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr ""
 
 msgid "Select upgrade source"
@@ -7543,9 +7551,6 @@ msgstr "Kanal referansı"
 msgid "Service scan"
 msgstr "Kanal arama"
 
-msgid "Service searching"
-msgstr "Kanal Arama"
-
 msgid "Service title mode"
 msgstr "Kanal başlığı modu"
 
@@ -7681,6 +7686,9 @@ msgstr "Keskinlik"
 
 msgid "Shellscript"
 msgstr "Komut Çalıştır (ShellScript)"
+
+msgid "Shift"
+msgstr ""
 
 msgid "Short filenames"
 msgstr "Kısa dosya adları"
@@ -9332,6 +9340,10 @@ msgstr "Tuner durumu"
 
 msgid "Tuner type"
 msgstr "Tuner tipi"
+
+#, fuzzy
+msgid "Tuners & scanning"
+msgstr "Tarama yapılırken hata"
 
 msgid "Tunisia"
 msgstr ""
