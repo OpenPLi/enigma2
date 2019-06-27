@@ -69,9 +69,7 @@ class ImportChannels():
 			print "[Import Channels] reading dir"
 			try:
 				files = [file for file in loads(self.getUrl("%s/file?dir=/etc/enigma2" % self.url).read())["files"] if os.path.basename(file).startswith(settingfiles)]
-				count = 0
 				for file in files:
-					count += 1
 					file = file.encode("UTF-8")
 					print "[Import Channels] Downloading %s" % file
 					destination = "/tmp/tmp"
