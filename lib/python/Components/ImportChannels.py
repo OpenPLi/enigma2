@@ -31,9 +31,7 @@ class ImportChannels():
 		return urllib2.urlopen(request, timeout=timeout)
 
 	def threaded_function(self):
-		imported = []
 		if "epg" in config.usage.remote_fallback_import.value:
-			imported.append('EPG')
 			print "Writing epg.dat file on sever box"
 			try:
 				self.getUrl("%s/web/saveepg" % self.url, 30).read()
@@ -61,7 +59,6 @@ class ImportChannels():
 			else:
 				self.ImportChannelsDone(False, _("No epg.dat file found server"))
 		if "channels" in config.usage.remote_fallback_import.value:
-			imported.append('Channels')
 			try:
 				os.mkdir("/tmp/tmp")
 			except:
@@ -91,7 +88,7 @@ class ImportChannels():
 			for file in files:
 				shutil.move("/tmp/tmp/%s" % file, "/etc/enigma2/%s" % file)
 			os.rmdir("/tmp/tmp")
-		self.ImportChannelsDone(True, ','.join(imported))
+		self.ImportChannelsDone(True, {"channels": _("Channels"), "epg": _("EPG"), "channels_epg": _("Channels and EPG")}[config.usage.remote_fallback_import.value])
 
 	def ImportChannelsDone(self, flag, message=None):
 		if flag:
