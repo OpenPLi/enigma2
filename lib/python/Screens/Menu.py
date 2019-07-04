@@ -163,7 +163,7 @@ class Menu(Screen, ProtectedScreen):
 	def __init__(self, session, parent):
 		self.parentmenu = parent
 		Screen.__init__(self, session)
-
+		self["key_blue"] = StaticText("")
 		self["menu"] = List([])
 		self["menu"].enableWrapAround = True
 		self.showNumericHelp = False
@@ -177,7 +177,7 @@ class Menu(Screen, ProtectedScreen):
 
 		ProtectedScreen.__init__(self)
 
-		self["actions"] = NumberActionMap(["OkCancelActions", "MenuActions", "NumberActions", "HelpActions"],
+		self["actions"] = NumberActionMap(["OkCancelActions", "MenuActions", "NumberActions", "HelpActions", "ColorActions"],
 			{
 				"ok": self.okbuttonClick,
 				"cancel": self.closeNonRecursive,
@@ -193,13 +193,8 @@ class Menu(Screen, ProtectedScreen):
 				"8": self.keyNumberGlobal,
 				"9": self.keyNumberGlobal,
 				"displayHelp": self.showHelp,
-			})
-		if config.usage.menu_sort_mode.value == "user":
-			self["EditActions"] = ActionMap(["ColorActions"],
-			{
 				"blue": self.keyBlue,
 			})
-
 		title = parent.get("title", "").encode("UTF-8") or None
 		title = title and _(title) or _(parent.get("text", "").encode("UTF-8"))
 		title = self.__class__.__name__ == "MenuSort" and _("Menusort (%s)") % title or title
@@ -217,6 +212,10 @@ class Menu(Screen, ProtectedScreen):
 			self.createMenuList(self.showNumericHelp)
 
 	def createMenuList(self, showNumericHelp=False):
+		if config.usage.menu_sort_mode.value == "user":
+			self["key_blue"].text = _("Edit menu")
+		else:
+			self["key_blue"].text = ""
 		self.list = []
 		self.menuID = None
 		for x in self.parentmenu: #walk through the actual nodelist
@@ -329,6 +328,8 @@ class Menu(Screen, ProtectedScreen):
 	def keyBlue(self):
 		if config.usage.menu_sort_mode.value == "user":
 			self.session.openWithCallback(self.menuSortCallBack, MenuSort, self.parentmenu)
+		else:
+			return 0
 
 	def menuSortCallBack(self, key=False):
 		self.createMenuList()
