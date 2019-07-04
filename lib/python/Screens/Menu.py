@@ -212,10 +212,7 @@ class Menu(Screen, ProtectedScreen):
 			self.createMenuList(self.showNumericHelp)
 
 	def createMenuList(self, showNumericHelp=False):
-		if config.usage.menu_sort_mode.value == "user":
-			self["key_blue"].text = _("Edit menu")
-		else:
-			self["key_blue"].text = ""
+		self["key_blue"].text = _("Edit menu") if config.usage.menu_sort_mode.value == "user" else ""
 		self.list = []
 		self.menuID = None
 		for x in self.parentmenu: #walk through the actual nodelist
