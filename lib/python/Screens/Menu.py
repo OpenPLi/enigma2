@@ -249,7 +249,7 @@ class Menu(Screen, ProtectedScreen):
 						break
 				self.list.append((l[0], boundFunction(l[1], self.session, close=self.close), l[2], l[3] or 50))
 
-		if config.usage.menu_sort_mode.value == "user" and self.menuID == "mainmenu":
+		if "user" in config.usage.menu_sort_mode.value and self.menuID == "mainmenu":
 			plugin_list = []
 			id_list = []
 			for l in plugins.getPlugins([PluginDescriptor.WHERE_PLUGINMENU ,PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_EVENTINFO]):
@@ -258,7 +258,7 @@ class Menu(Screen, ProtectedScreen):
 					id_list.append(l.id)
 					plugin_list.append((l.name, boundFunction(l.__call__, self.session), l.id, 200))
 
-		if self.menuID is not None and config.usage.menu_sort_mode.value == "user":
+		if self.menuID is not None and "user" in config.usage.menu_sort_mode.value:
 			self.sub_menu_sort = NoSave(ConfigDictionarySet())
 			self.sub_menu_sort.value = config.usage.menu_sort_weight.getConfigValue(self.menuID, "submenu") or {}
 			idx = 0
@@ -274,7 +274,7 @@ class Menu(Screen, ProtectedScreen):
 		if config.usage.menu_sort_mode.value == "a_z":
 			# Sort by Name
 			self.list.sort(key=self.sortByName)
-		elif config.usage.menu_sort_mode.value == "user":
+		elif "user" in config.usage.menu_sort_mode.value:
 			self.hide_show_entries()
 		else:
 			# Sort by Weight
