@@ -16,7 +16,6 @@ dist_install_DATA = \
 	vkey_green_l.png \
 	vkey_green_m.png \
 	vkey_green_r.png \
-	vkey_icon.png \
 	vkey_last.png \
 	vkey_left.png \
 	vkey_locale.png \
