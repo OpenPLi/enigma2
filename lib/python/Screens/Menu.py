@@ -105,6 +105,8 @@ class Menu(Screen, ProtectedScreen):
 	def menuClosed(self, *res):
 		if res and res[0]:
 			self.close(True)
+		elif len(self.list) == 1:
+			self.close()
 		else:
 			self.createMenuList()
 
@@ -204,6 +206,12 @@ class Menu(Screen, ProtectedScreen):
 		self.number = 0
 		self.nextNumberTimer = eTimer()
 		self.nextNumberTimer.callback.append(self.okbuttonClick)
+		if len(self.list) == 1:
+			self.onExecBegin.append(self.__onExecBegin)
+
+	def __onExecBegin(self):
+		self.onExecBegin.remove(self.__onExecBegin)
+		self.okbuttonClick()
 
 	def showHelp(self):
 		if config.usage.menu_show_numbers.value not in ("menu&plugins", "menu"):
