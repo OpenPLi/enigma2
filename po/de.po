@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-12 10:02+0200\n"
+"POT-Creation-Date: 2019-06-26 23:01+0200\n"
 "PO-Revision-Date: 2018-10-22T21:44:30+02:00\n"
 "Last-Translator: daddelfalk <OpenPLi>\n"
 "Language-Team: Sfteam  angelo2807@hotmail.com\n"
@@ -406,6 +406,10 @@ msgstr "%s %s freier Festplattenspeicher"
 #, python-format
 msgid "%s (%s)\n"
 msgstr "%s (%s)\n"
+
+#, fuzzy, python-format
+msgid "%s imported from fallback tuner"
+msgstr "Aktivieren Sie den Import-Timer vom Fallback-Tuner"
 
 #. TRANSLATORS: The satellite with name '%s' is no longer used after a configuration change. The user is asked whether or not the satellite should be deleted.
 #, python-format
@@ -1550,6 +1554,24 @@ msgstr "Cameroon"
 msgid "Can be used for different fps between external subtitles and video."
 msgstr "Kann für unterschiedliche fps-Werte zwischen externen Untertiteln und dem Video verwendet werden."
 
+msgid ""
+"Can be used to test defect pixels on TV screen.\n"
+"\n"
+"Available color test screens:\n"
+"\n"
+"red\n"
+"green\n"
+"blue\n"
+"white\n"
+"black\n"
+"cyan\n"
+"magenta\n"
+"yellow\n"
+"\n"
+"Screens change with left/right buttons or use red, green, blue to toggle.\n"
+"Yellow for returning back to this intro"
+msgstr ""
+
 msgid "Can only find a network drive to store the backup this means after the flash the autorestore will not work. Alternativaly you can mount the network drive after the flash and perform a manufacurer reset to autorestore"
 msgstr "Für das Backup wurde nur eine Netzwerkfestplatte gefunden, daher ist ein automatischer Restore der Einstellungen nach dem Flash nicht möglich. Alternativ kann nach dem Flash die Netzwerkfestplatte erneut eingebunden und dann die Box auf Werkseinstellungen zurückgesetzt werden um Autorestore zu nutzen."
 
@@ -1672,13 +1694,6 @@ msgstr "Kanalnummer, Picon und Sendername"
 
 msgid "Channels and EPG"
 msgstr "Kanäle und EPG"
-
-#, python-format
-msgid "Channels from fallback tuner failed %s"
-msgstr "Kanäle von Fallback-Tuner fehlgeschlagen% s"
-
-msgid "Channels from fallback tuner imported"
-msgstr "Kanäle von Fallback-Tuner importiert"
 
 msgid "Channels only"
 msgstr "Nur Kanäle"
@@ -2472,6 +2487,10 @@ msgstr "DVD Player"
 msgid "DVD titlelist"
 msgstr "DVD Titelliste"
 
+#, fuzzy
+msgid "DVDPlayer"
+msgstr "DVD Player"
+
 msgid "Danish"
 msgstr "Dänisch"
 
@@ -3148,7 +3167,7 @@ msgid "End time to ignore inactivity sleeptimer"
 msgstr "Endzeit zum Ignorieren des Inaktivität-Sleeptimers"
 
 msgid "End time to ignore shutdown in standby"
-msgstr "Zeitpunkt nachdem nicht mehr vom Standby in den Schlafmodus gewechselt wird"
+msgstr "Endzeit kein Wechsel vom Standby in Deep-Standby"
 
 msgid "English"
 msgstr "Englisch"
@@ -4073,6 +4092,9 @@ msgstr "Hotkey-Tastenbelegung"
 msgid "Hotkey zap"
 msgstr "Tastenkombination \"umschalten\""
 
+msgid "Hotplug"
+msgstr ""
+
 msgid "How many minutes do you want add to the recording?"
 msgstr "Wie viele Minuten wollen Sie der Aufnahme hinzufügen?"
 
@@ -4201,8 +4223,9 @@ msgstr "Mport-Kanäle und / oder EPG von der Empfänger-URL des Empfängers beim
 msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
 msgstr "Mport Kanäle und / oder EPG von Remote-Empfänger-URL, wenn Empfänger oder enigma2 neu gestartet wird"
 
-msgid "Import channels from fallback tuner"
-msgstr "Importieren Sie Kanäle vom Fallback-Tuner"
+#, fuzzy, python-format
+msgid "Import from fallback tuner failed, %s"
+msgstr "Kanäle von Fallback-Tuner fehlgeschlagen% s"
 
 msgid "Import from remote receiver URL"
 msgstr "Import von der Remote-Empfänger-URL"
@@ -4797,6 +4820,10 @@ msgstr "Manuelle Suche"
 msgid "Manual transponder"
 msgstr "Manueller Transponder"
 
+#, fuzzy
+msgid "Manually import from fallback tuner"
+msgstr "Aktivieren Sie den Import-Timer vom Fallback-Tuner"
+
 msgid "Manufacturer"
 msgstr "Hersteller"
 
@@ -5231,6 +5258,10 @@ msgstr ""
 "Keine Festplatte gefunden oder\n"
 "Festplatte nicht initialisiert."
 
+#, fuzzy
+msgid "No active subservices available."
+msgstr "Keine Aktualisierungen verfügbar"
+
 msgid "No age block"
 msgstr "Keine Altersbeschränkung"
 
@@ -5400,6 +5431,14 @@ msgid "Norwegian"
 msgstr "Norwegisch"
 
 msgid "Not Defined"
+msgstr "Nicht definiert"
+
+#, fuzzy
+msgid "Not Installed"
+msgstr "Installiere"
+
+#, fuzzy
+msgid "Not Required"
 msgstr "Nicht definiert"
 
 msgid "Not associated"
@@ -5707,10 +5746,17 @@ msgstr "Pilot"
 msgid "Pitcairn"
 msgstr "Pitcairn"
 
+msgid "Pixels\n"
+msgstr ""
+
 msgid "Play"
 msgstr "Abspielen"
 
 msgid "Play DVD"
+msgstr "DVD abspielen"
+
+#, fuzzy
+msgid "Play DVDs"
 msgstr "DVD abspielen"
 
 msgid "Play audio-CD..."
@@ -7166,9 +7212,6 @@ msgstr "Eingabegerät auswählen."
 msgid "Select interface"
 msgstr "Netzwerkkarte auswählen"
 
-msgid "Select locale"
-msgstr "Wählen Sie das Gebietsschema"
-
 msgid "Select location"
 msgstr "Speicherort auswählen"
 
@@ -7260,6 +7303,10 @@ msgid "Select the virtual keyboard locale from a menu"
 msgstr "Wählen Sie das Gebietsschema der virtuellen Tastatur aus einem Menü"
 
 msgid "Select the virtual keyboard shifted character set"
+msgstr "Wählen Sie den Zeichensatz für die Shift Tastatur aus"
+
+#, fuzzy
+msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr "Wählen Sie den Zeichensatz für die Shift Tastatur aus"
 
 msgid "Select upgrade source"
@@ -7391,9 +7438,6 @@ msgid "Service reference"
 msgstr "Kanal-Referenz"
 
 msgid "Service scan"
-msgstr "Kanalsuche"
-
-msgid "Service searching"
 msgstr "Kanalsuche"
 
 msgid "Service title mode"
@@ -7528,6 +7572,9 @@ msgstr "Schärfe"
 
 msgid "Shellscript"
 msgstr "Shell-Skript"
+
+msgid "Shift"
+msgstr ""
 
 msgid "Short filenames"
 msgstr "Kurze Dateinamen"
@@ -7906,6 +7953,9 @@ msgstr "Glatt"
 msgid "Social/Political/Economics"
 msgstr "Soziales/Politik/Wirtschaft"
 
+msgid "SocketMMI"
+msgstr ""
+
 msgid "SoftCam / CI"
 msgstr "SoftCam / CI"
 
@@ -8025,34 +8075,34 @@ msgid "Special 2"
 msgstr "Spezial 2"
 
 msgid "Specify extra timeframe to ignore inactivity sleeptimer"
-msgstr "Spezifiziere den Extra-Zeitbereich, in dem der Inaktivitäts-Ausschalttimer ignoriert werden soll."
+msgstr "Extra-Zeitbereich, in dem der Inaktivitäts-Ausschalttimer ignoriert wird"
 
 msgid "Specify if you want to set the blocktimes separately by weekday"
-msgstr "Geben Sie an, ob Sie die Blockzeiten getrennt nach Wochentag festlegen wollen"
+msgstr "Blockzeiten getrennt nach Wochentag festlegen ?"
 
 msgid "Specify the end time to ignore the shutdown timer when the receiver is in standby mode"
-msgstr "Angabe der Endzeit, bis wann der Ausschalt-Timer ignoriert werden soll, wenn sich der Receiver im Standby-Modus befindet"
+msgstr "Endzeit um den Ausschalt-Timer zu ignorieren, wenn Receiver im Standby"
 
 msgid "Specify the end time until the inactivity sleeptimer should be ignored"
-msgstr "Angabe der Endzeit, bis wann der Inaktivität-Ausschalt-Timer ignoriert werden soll"
+msgstr "Endzeit bis wann der Inaktivitäts-Ausschalttimer ignoriert wird"
 
 msgid "Specify the extra end time until the inactivity sleeptimer should be ignored"
-msgstr "Spezifiziere die Extra-Endzeit, bis wann der Inaktivität-Ausschalt-Timer ignoriert werden soll"
+msgstr "Extra-Endzeit bis wann der Inaktivitäts-Ausschalttimer ignoriert wird"
 
 msgid "Specify the extra start time when the inactivity sleeptimer should be ignored"
-msgstr "Spezifiziere die Extra-Anfangszeit, bis wann der Inaktivität-Ausschalt-Timer ignoriert werden soll"
+msgstr "Extra-Startzeit ab wann der Inaktivitäts-Ausschalttimer ignoriert wird"
 
 msgid "Specify the start time to ignore the shutdown timer when the receiver is in standby mode"
-msgstr "Angabe der Startzeit, ab dem Ausschalt-Timer ignoriert werden soll, wenn sich der Receiver im Standby-Modus befindet"
+msgstr "Startzeit um den Ausschalt-Timer zu ignorieren, wenn Receiver im Standby"
 
 msgid "Specify the start time when the inactivity sleeptimer should be ignored"
-msgstr "Spezifiziere die Anfangszeit, aber wann der Inaktivität-Sleeptimer ignoriert werden soll"
+msgstr "Startzeit ab wann der Inaktivitäts-Ausschalttimer ignoriert wird"
 
 msgid "Specify timeframe to ignore inactivity sleeptimer"
-msgstr "Spezifiziere den Zeitbereich, in dem der Inaktivitäts-Ausschalttimer ignoriert werden soll."
+msgstr "Zeitbereich in dem der Inaktivitäts-Ausschalttimer ignoriert wird"
 
 msgid "Specify timeframe to ignore the shutdown in standby"
-msgstr "Angabe des Zeitfensters indem nicht vom Standby-Modus in den Deep-Standby gewechselt wird"
+msgstr "Zeitbereich in dem nicht vom Standby in den Deep-Standby geschalten wird"
 
 msgid "Split preview mode"
 msgstr "Splitscreen für Vorschau-Modus"
@@ -8893,7 +8943,7 @@ msgid ""
 msgstr ""
 "Dieser Test überprüft, ob Ihr LAN-Adapter für die automatische IP-Adresskonfiguration mit DHCP eingerichtet ist.\n"
 "Wenn Sie eine “deaktivierte” Nachricht erhalten:\n"
-"  - dann ist Ihr LAN-Adapter für die manuelle IP-Einrichtung konfiguriert\n"
+"  - dann ist Ihr LAN-Adapter für die manuelle IP-Einrichtung konfiguriert\n"
 "- Vergewissern Sie sich, dass Sie die korrekten IP-Informationen im Adapter-Setup-Dialogfeld eingegeben haben.\n"
 "Wenn Sie eine “Enabeld” -Nachricht erhalten:\n"
 "- Vergewissern Sie sich, dass Sie einen konfigurierten und funktionierenden DHCP-Server in Ihrem Netzwerk haben."
@@ -9155,6 +9205,10 @@ msgstr "Tunerstatus:"
 
 msgid "Tuner type"
 msgstr "Tunertyp"
+
+#, fuzzy
+msgid "Tuners & scanning"
+msgstr "Fehler während Suche"
 
 msgid "Tunisia"
 msgstr "Tunisia"
@@ -10909,6 +10963,10 @@ msgstr "Standard Listenansicht"
 msgid "list style single line"
 msgstr "Einzeilige Listenansicht"
 
+#, fuzzy
+msgid "listens to hotplug events"
+msgstr "Ausrichtung der Sendungstitel"
+
 msgid "literature"
 msgstr "Literatur"
 
@@ -11292,6 +11350,14 @@ msgstr "Rückwärts spulen"
 
 msgid "skip forward"
 msgstr "Vorwärts spulen"
+
+#, fuzzy, python-format
+msgid "slot%s - %s"
+msgstr "Steckplatz% s -% s Modus 1"
+
+#, fuzzy, python-format
+msgid "slot%s - %s (current image)"
+msgstr "Slot% s -% s Modus 1 (aktuelles Image)"
 
 #, python-format
 msgid "slot%s - %s (current image) with, backup"
