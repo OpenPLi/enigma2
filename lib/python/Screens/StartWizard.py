@@ -42,11 +42,30 @@ class StartWizard(WizardLanguage, Rc):
 		config.misc.firstrun.save()
 		configfile.save()
 
+def setLanguageFromBackup(backupfile):
+	try:
+		print backupfile
+		import tarfile
+		tar = tarfile.open(backupfile)
+		for member in tar.getmembers():
+			if member.name == 'etc/enigma2/settings':
+				for line in tar.extractfile(member):
+					if line.startswith('config.osd.language'):
+						print line
+						languageToSelect = line.strip().split('=')[1]
+						if languageToSelect:
+							from Components.Language import language
+							language.activateLanguage(languageToSelect)
+							break
+		tar.close()
+	except:
+		pass
+
 def checkForAvailableAutoBackup():
-	for dir in [name for name in os.listdir("/media/") if os.path.isdir(os.path.join("/media/", name))]:
-		if os.path.isfile("/media/%s/backup/PLi-AutoBackup.tar.gz" % dir):
+	for backupfile in ["/media/%s/backup/PLi-AutoBackup.tar.gz" % media for media in os.listdir("/media/") if os.path.isdir(os.path.join("/media/", media))]:
+		if os.path.isfile(backupfile):
+			setLanguageFromBackup(backupfile)
 			return True
-	return False
 
 class AutoRestoreWizard(MessageBox):
 	def __init__(self, session):
