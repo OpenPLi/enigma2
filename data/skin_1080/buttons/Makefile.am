@@ -1,6 +1,17 @@
 installdir = $(pkgdatadir)/skin_1080/buttons
 
 dist_install_DATA = \
+	blue.png \
+	blue30.png \
+	green.png \
+	green30.png \
+	grey.png \
+	left.png \
+	rec.png \
+	red.png \
+	red30.png \
+	right.png \
+	stream.png \
 	vkey_backspace.png \
 	vkey_bg_l.png \
 	vkey_bg_m.png \
@@ -36,4 +47,6 @@ dist_install_DATA = \
 	vkey_text.png \
 	vkey_yellow_l.png \
 	vkey_yellow_m.png \
-	vkey_yellow_r.png
+	vkey_yellow_r.png \
+	yellow.png \
+	yellow30.png
