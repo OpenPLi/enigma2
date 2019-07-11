@@ -1,3 +1,3 @@
-SUBDIRS = border buttons dvr epg extensions icons infobar skin_default window
+SUBDIRS = buttons
 
 installdir = $(pkgdatadir)/skin_1080

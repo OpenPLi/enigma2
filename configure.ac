@@ -257,17 +257,7 @@ data/keymaps/Makefile
 data/hw_info/Makefile
 data/rc_models/Makefile
 data/skin_1080/Makefile
-data/skin_1080/border/Makefile
 data/skin_1080/buttons/Makefile
-data/skin_1080/dvr/Makefile
-data/skin_1080/epg/Makefile
-data/skin_1080/extensions/Makefile
-data/skin_1080/icons/Makefile
-data/skin_1080/infobar/Makefile
-data/skin_1080/skin_default/Makefile
-data/skin_1080/skin_default/buttons/Makefile
-data/skin_1080/skin_default/icons/Makefile
-data/skin_1080/window/Makefile
 data/skin_default/Makefile
 data/skin_default/menu/Makefile
 data/skin_default/icons/Makefile
