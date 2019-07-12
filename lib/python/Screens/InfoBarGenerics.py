@@ -151,22 +151,21 @@ def getPossibleSubservicesForCurrentChannel(current_service):
 
 def getActiveSubservicesForCurrentChannel(service):
 	info = service and service.info()
-	current_service = ':'.join(info.getInfoString(iServiceInformation.sServiceref).split(':')[:11])
-	if info:
-		if current_service:
-			possibleSubservices = getPossibleSubservicesForCurrentChannel(current_service)
-			activeSubservices = []
-			epgCache = eEPGCache.getInstance()
-			for subservice in possibleSubservices:
-				events = epgCache.lookupEvent(['BDTS', (subservice, 0, -1)])
-				if events and len(events) == 1:
-					event = events[0]
-					title = event[2]
-					if title and "Sendepause" not in title:
-						starttime = datetime.datetime.fromtimestamp(event[0]).strftime('%H:%M')
-						endtime = datetime.datetime.fromtimestamp(event[0] + event[1]).strftime('%H:%M')
-						current_show_name = "%s %s-%s" % (title, str(starttime), str(endtime))
-						activeSubservices.append((current_show_name, subservice))
+	current_service = info and ':'.join(info.getInfoString(iServiceInformation.sServiceref).split(':')[:11])
+	if current_service:
+		possibleSubservices = getPossibleSubservicesForCurrentChannel(current_service)
+		activeSubservices = []
+		epgCache = eEPGCache.getInstance()
+		for subservice in possibleSubservices:
+			events = epgCache.lookupEvent(['BDTS', (subservice, 0, -1)])
+			if events and len(events) == 1:
+				event = events[0]
+				title = event[2]
+				if title and "Sendepause" not in title:
+					starttime = datetime.datetime.fromtimestamp(event[0]).strftime('%H:%M')
+					endtime = datetime.datetime.fromtimestamp(event[0] + event[1]).strftime('%H:%M')
+					current_show_name = "%s %s-%s" % (title, str(starttime), str(endtime))
+					activeSubservices.append((current_show_name, subservice))
 	if not activeSubservices:
 		subservices = service and service.subServices()
 		if subservices:
