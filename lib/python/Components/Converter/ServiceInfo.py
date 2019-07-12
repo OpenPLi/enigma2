@@ -129,7 +129,7 @@ class ServiceInfo(Converter, object):
 			elif self.type == self.IS_CRYPTED:
 				return info.getInfo(iServiceInformation.sIsCrypted) == 1
 			elif self.type == self.SUBSERVICES_AVAILABLE:
-				return hasActiveSubservicesForCurrentChannel(':'.join(info.getInfoString(iServiceInformation.sServiceref).split(':')[:11]))
+				return hasActiveSubservicesForCurrentChannel(service)
 			elif self.type == self.HAS_HBBTV:
 				return info.getInfoString(iServiceInformation.sHBBTVUrl) != ""
 			elif self.type == self.AUDIOTRACKS_AVAILABLE:
