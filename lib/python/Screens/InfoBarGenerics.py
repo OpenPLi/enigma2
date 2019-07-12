@@ -171,7 +171,6 @@ def getActiveSubservicesForCurrentChannel(service):
 		if subservices:
 			for idx in range(0, subservices.getNumberOfSubservices()):
 				subservice = subservices.getSubservice(idx)
-				print "     ---->",subservice.toString()
 				activeSubservices.append((subservice.getName(), subservice.toString()))
 	return activeSubservices
 
