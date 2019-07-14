@@ -152,9 +152,9 @@ def getPossibleSubservicesForCurrentChannel(current_service):
 def getActiveSubservicesForCurrentChannel(service):
 	info = service and service.info()
 	current_service = info and ':'.join(info.getInfoString(iServiceInformation.sServiceref).split(':')[:11])
+	activeSubservices = []
 	if current_service:
 		possibleSubservices = getPossibleSubservicesForCurrentChannel(current_service)
-		activeSubservices = []
 		epgCache = eEPGCache.getInstance()
 		for subservice in possibleSubservices:
 			events = epgCache.lookupEvent(['BDTS', (subservice, 0, -1)])
