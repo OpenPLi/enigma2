@@ -9,9 +9,10 @@ from Components.Sources.StaticText import StaticText
 
 import os
 from Tools.camcontrol import CamControl
-from enigma import eTimer
+from enigma import eTimer, getDesktop
 
 class SoftcamSetup(Screen, ConfigListScreen):
+      if getDesktop(0).size().width() == 1280:
 	skin = """
 	<screen name="SoftcamSetup" position="center,center" size="560,550" >
 		<widget name="config" position="5,10" size="550,180" />
@@ -22,6 +23,20 @@ class SoftcamSetup(Screen, ConfigListScreen):
 		<widget objectTypes="key_green,StaticText" source="key_green" render="Label" position="140,510" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
 		<widget objectTypes="key_blue,StaticText" source="key_blue" render="Label"  position="420,510" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1"/>
 		<widget objectTypes="key_blue,StaticText" source="key_blue" render="Pixmap" pixmap="skin_default/buttons/blue.png"  position="420,510" zPosition="1" size="140,40" transparent="1" alphatest="on">
+			<convert type="ConditionalShowHide"/>
+		</widget>
+	</screen>"""
+      else:
+	skin = """
+	<screen name="SoftcamSetup" position="485,center" size="951,860" >
+		<widget name="config" position="5,10" size="941,180" font="Fixed;28" itemHeight="32" />
+		<widget name="info" position="5,200" size="941,500" font="Fixed;32" />
+		<ePixmap name="red" position="0,819" zPosition="1" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+		<ePixmap name="green" position="140,819" zPosition="1" size="141,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+		<widget objectTypes="key_red,StaticText" source="key_red" render="Label" position="0,819" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;28" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
+		<widget objectTypes="key_green,StaticText" source="key_green" render="Label" position="140,819" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;28" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
+		<widget objectTypes="key_blue,StaticText" source="key_blue" render="Label"  position="809,819" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;28" transparent="1" shadowColor="black" shadowOffset="-1,-1"/>
+		<widget objectTypes="key_blue,StaticText" source="key_blue" render="Pixmap" pixmap="skin_default/buttons/blue.png"  position="809,819" zPosition="1" size="140,40" transparent="1" alphatest="on">
 			<convert type="ConditionalShowHide"/>
 		</widget>
 	</screen>"""
