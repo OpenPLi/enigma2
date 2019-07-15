@@ -236,24 +236,27 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 			config.usage.remote_fallback_import_url.value = ""
 		elif self.avahiselect_seperate.value != "url":
 			config.usage.remote_fallback_import_url.value = self.avahiselect_seperate.value
-		if self.avahi_dvb_t.value == "ip":
-			config.usage.remote_fallback_dvb_t.value = "http://%d.%d.%d.%d:%d" % (tuple(self.ip_dvb_t.value) + (self.port_dvb_t.value,))
-		elif self.avahi_dvb_t.value == "same":
-			config.usage.remote_fallback_dvb_t.value = config.usage.remote_fallback.value
-		elif self.avahi_dvb_t.value != "url":
-			config.usage.remote_fallback_dvb_t.value = self.avahi_dvb_t.value
-		if self.avahi_dvb_c.value == "ip":
-			config.usage.remote_fallback_dvb_c.value = "http://%d.%d.%d.%d:%d" % (tuple(self.ip_dvb_c.value) + (self.port_dvb_c.value,))
-		elif self.avahi_dvb_c.value == "same":
-			config.usage.remote_fallback_dvb_c.value = config.usage.remote_fallback.value
-		elif self.avahi_dvb_c.value != "url":
-			config.usage.remote_fallback_dvb_c.value = self.avahi_dvb_c.value
-		if self.avahi_atsc.value == "ip":
-			config.usage.remote_fallback_atsc.value = "http://%d.%d.%d.%d:%d" % (tuple(self.ip_atsc.value) + (self.port_atsc.value,))
-		elif self.avahi_atsc.value == "same":
-			config.usage.remote_fallback_atsc.value = config.usage.remote_fallback.value
-		elif self.avahi_atsc.value != "url":
-			config.usage.remote_fallback_atsc.value = self.avahi_atsc.value
+		if config.usage.remote_fallback_alternative.value:
+			if self.avahi_dvb_t.value == "ip":
+				config.usage.remote_fallback_dvb_t.value = "http://%d.%d.%d.%d:%d" % (tuple(self.ip_dvb_t.value) + (self.port_dvb_t.value,))
+			elif self.avahi_dvb_t.value == "same":
+				config.usage.remote_fallback_dvb_t.value = config.usage.remote_fallback.value
+			elif self.avahi_dvb_t.value != "url":
+				config.usage.remote_fallback_dvb_t.value = self.avahi_dvb_t.value
+			if self.avahi_dvb_c.value == "ip":
+				config.usage.remote_fallback_dvb_c.value = "http://%d.%d.%d.%d:%d" % (tuple(self.ip_dvb_c.value) + (self.port_dvb_c.value,))
+			elif self.avahi_dvb_c.value == "same":
+				config.usage.remote_fallback_dvb_c.value = config.usage.remote_fallback.value
+			elif self.avahi_dvb_c.value != "url":
+				config.usage.remote_fallback_dvb_c.value = self.avahi_dvb_c.value
+			if self.avahi_atsc.value == "ip":
+				config.usage.remote_fallback_atsc.value = "http://%d.%d.%d.%d:%d" % (tuple(self.ip_atsc.value) + (self.port_atsc.value,))
+			elif self.avahi_atsc.value == "same":
+				config.usage.remote_fallback_atsc.value = config.usage.remote_fallback.value
+			elif self.avahi_atsc.value != "url":
+				config.usage.remote_fallback_atsc.value = self.avahi_atsc.value
+		else:
+			config.usage.remote_fallback_dvb_t.value = config.usage.remote_fallback_dvb_c.value = config.usage.remote_fallback_atsc.value = config.usage.remote_fallback.value
 		if config.usage.remote_fallback_import_url.value == config.usage.remote_fallback.value:
 			config.usage.remote_fallback_import_url.value = ""
 		config.usage.remote_fallback_enabled.save()
