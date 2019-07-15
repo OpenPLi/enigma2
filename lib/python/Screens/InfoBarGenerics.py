@@ -151,28 +151,26 @@ def getPossibleSubservicesForCurrentChannel(current_service):
 
 def getActiveSubservicesForCurrentChannel(service):
 	info = service and service.info()
-	current_service = ':'.join(info.getInfoString(iServiceInformation.sServiceref).split(':')[:11])
-	if info:
-		activeSubservices = []
-		if current_service:
-			possibleSubservices = getPossibleSubservicesForCurrentChannel(current_service)
-			epgCache = eEPGCache.getInstance()
-			for subservice in possibleSubservices:
-				events = epgCache.lookupEvent(['BDTS', (subservice, 0, -1)])
-				if events and len(events) == 1:
-					event = events[0]
-					title = event[2]
-					if title and "Sendepause" not in title:
-						starttime = datetime.datetime.fromtimestamp(event[0]).strftime('%H:%M')
-						endtime = datetime.datetime.fromtimestamp(event[0] + event[1]).strftime('%H:%M')
-						current_show_name = "%s %s-%s" % (title, str(starttime), str(endtime))
-						activeSubservices.append((current_show_name, subservice))
+	current_service = info and ':'.join(info.getInfoString(iServiceInformation.sServiceref).split(':')[:11])
+	activeSubservices = []
+	if current_service:
+		possibleSubservices = getPossibleSubservicesForCurrentChannel(current_service)
+		epgCache = eEPGCache.getInstance()
+		for subservice in possibleSubservices:
+			events = epgCache.lookupEvent(['BDTS', (subservice, 0, -1)])
+			if events and len(events) == 1:
+				event = events[0]
+				title = event[2]
+				if title and "Sendepause" not in title:
+					starttime = datetime.datetime.fromtimestamp(event[0]).strftime('%H:%M')
+					endtime = datetime.datetime.fromtimestamp(event[0] + event[1]).strftime('%H:%M')
+					current_show_name = "%s %s-%s" % (title, str(starttime), str(endtime))
+					activeSubservices.append((current_show_name, subservice))
 	if not activeSubservices:
 		subservices = service and service.subServices()
 		if subservices:
 			for idx in range(0, subservices.getNumberOfSubservices()):
 				subservice = subservices.getSubservice(idx)
-				print "     ---->",subservice.toString()
 				activeSubservices.append((subservice.getName(), subservice.toString()))
 	return activeSubservices
 
@@ -2138,7 +2136,7 @@ class InfoBarExtensions:
 	def __init__(self):
 		self.list = []
 		self.addExtension((lambda: _("Softcam Setup"), self.openSoftcamSetup, lambda: config.misc.softcam_setup.extension_menu.value and SystemInfo["HasSoftcamInstalled"]), "1")
-		self.addExtension((lambda: _("Import channels from fallback tuner"), self.importChannels, lambda: config.usage.remote_fallback_extension_menu.value and config.usage.remote_fallback_import.value))
+		self.addExtension((lambda: _("Manually import from fallback tuner"), self.importChannels, lambda: config.usage.remote_fallback_extension_menu.value and config.usage.remote_fallback_import.value))
 		self["InstantExtensionsActions"] = HelpableActionMap(self, "InfobarExtensions",
 			{
 				"extensions": (self.showExtensionSelection, _("Show extensions...")),
@@ -2775,7 +2773,7 @@ class InfoBarSubserviceSelection:
 		if serviceRef:
 			service = self.session.nav.getCurrentService()
 			subservices = getActiveSubservicesForCurrentChannel(service)
-			if subservices and len(subservices) > 1 and serviceRef.toString() in [x[1] for x in subservices]:
+			if subservices and serviceRef.toString() in [x[1] for x in subservices]:
 				selection = [x[1] for x in subservices].index(serviceRef.toString())
 				selection += direction % len(subservices)
 				try:
@@ -2790,7 +2788,7 @@ class InfoBarSubserviceSelection:
 		if serviceRef:
 			service = self.session.nav.getCurrentService()
 			subservices = getActiveSubservicesForCurrentChannel(service)
-			if subservices and len(subservices) > 1 and (serviceRef.toString() in [x[1] for x in subservices] or service.subServices()):
+			if subservices and (serviceRef.toString() in [x[1] for x in subservices] or service.subServices()):
 				try:
 					selection = [x[1] for x in subservices].index(serviceRef.toString())
 				except:
