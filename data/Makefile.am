@@ -1,4 +1,4 @@
-SUBDIRS = countries fonts extensions keymaps skin_1080 skin_default rc_models hw_info
+SUBDIRS = countries fonts extensions keymaps skin_default skin_fallback_1080 rc_models hw_info
 
 dist_pkgdata_DATA = \
 	encoding.conf \
