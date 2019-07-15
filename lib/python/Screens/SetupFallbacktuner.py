@@ -54,6 +54,9 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 			if configElement.value not in ("url", "ip") and configElement.value in self.seperateBoxes:
 				self.seperateBoxes.remove(configElement.value)
 			self.avahiselect_seperate = ConfigSelection(default=peerDefault_sepearate, choices=self.seperateBoxes)
+			self.avahi_dvb_t = ConfigSelection(default=config.usage.remote_fallback_dvb_t.value if config.usage.remote_fallback_dvb_t.value != config.usage.remote_fallback.value else "same", choices=self.seperateBoxes)
+			self.avahi_dvb_c = ConfigSelection(default=config.usage.remote_fallback_dvb_c.value if config.usage.remote_fallback_dvb_c.value != config.usage.remote_fallback.value else "same", choices=self.seperateBoxes)
+			self.avahi_atsc = ConfigSelection(default=config.usage.remote_fallback_atsc.value if config.usage.remote_fallback_atsc.value != config.usage.remote_fallback.value else "same", choices=self.seperateBoxes)
 
 		self.peerStreamingBoxes = getPeerStreamingBoxes() + [("ip", _("Enter IP address")), ("url", _("Enter URL"))]
 		peerDefault = peerDefault_sepearate = None
@@ -63,6 +66,12 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 				self.peerStreamingBoxes = [config.usage.remote_fallback.value] + self.peerStreamingBoxes
 			if config.usage.remote_fallback_import_url.value and config.usage.remote_fallback_import_url.value not in self.peerStreamingBoxes:
 				self.peerStreamingBoxes = [config.usage.remote_fallback_import_url.value] + self.peerStreamingBoxes
+			if config.usage.remote_fallback_dvb_t.value and config.usage.remote_fallback_dvb_t.value not in self.peerStreamingBoxes:
+				self.peerStreamingBoxes = [config.usage.remote_fallback_dvb_t.value] + self.peerStreamingBoxes
+			if config.usage.remote_fallback_dvb_c.value and config.usage.remote_fallback_dvb_c.value not in self.peerStreamingBoxes:
+				self.peerStreamingBoxes = [config.usage.remote_fallback_dvb_c.value] + self.peerStreamingBoxes
+			if config.usage.remote_fallback_atsc.value and config.usage.remote_fallback_atsc.value not in self.peerStreamingBoxes:
+				self.peerStreamingBoxes = [config.usage.remote_fallback_atsc.value] + self.peerStreamingBoxes
 		self.avahiselect = ConfigSelection(default=peerDefault, choices=self.peerStreamingBoxes)
 		self.avahiselect.addNotifier(set_avahiselect_seperate)
 		try:
@@ -75,6 +84,12 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 		self.port = ConfigInteger(default=portDefault, limits=(1,65535))
 		self.ip_seperate = ConfigIP( default=ipDefault, auto_jump=True)
 		self.port_seperate = ConfigInteger(default=portDefault, limits=(1,65535))
+		self.ip_dvb_t = ConfigIP( default=ipDefault, auto_jump=True)
+		self.port_dvb_t = ConfigInteger(default=portDefault, limits=(1,65535))
+		self.ip_dvb_c = ConfigIP( default=ipDefault, auto_jump=True)
+		self.port_dvb_c = ConfigInteger(default=portDefault, limits=(1,65535))
+		self.ip_atsc = ConfigIP( default=ipDefault, auto_jump=True)
+		self.port_atsc = ConfigInteger(default=portDefault, limits=(1,65535))
 
 	def createSetup(self):
 		self.list = []
@@ -146,6 +161,53 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 				self.list.append(getConfigListEntry("  %s" % _("Port"),
 					config.usage.remote_fallback_openwebif_port,
 					"  %s" % _("Set the port of the OpenWebif from your fallback tuner")))
+		if config.usage.remote_fallback_enabled.value:
+			self.list.append(getConfigListEntry(_("Alternative URLs for DVB-T/C or ATSC"),
+				config.usage.remote_fallback_alternative,
+				_("Set alternative fallback tuners for DVB-T/C or ATSC")))
+			if config.usage.remote_fallback_alternative.value:
+				self.list.append(getConfigListEntry("  %s" % _("Fallback remote receiver for DVB-T"),
+					self.avahi_dvb_t,
+					_("Destination of fallback remote receiver for DVB-T")))
+				if self.avahi_dvb_t.value == "ip":
+					self.list.append(getConfigListEntry("    %s" % _("Fallback remote receiver IP"),
+						self.ip_dvb_t,
+						_("IP of fallback remote receiver")))
+					self.list.append(getConfigListEntry("    %s" % _("Fallback remote receiver Port"),
+						self.port_dvb_t,
+						_("Port of fallback remote receiver")))
+				if self.avahi_dvb_t.value == "url":
+					self.list.append(getConfigListEntry("    %s" % _("Fallback remote receiver URL"),
+						config.usage.remote_fallback_dvb_t,
+						_("URL of fallback remote receiver")))
+				self.list.append(getConfigListEntry("  %s" % _("Fallback remote receiver for DVB-C"),
+					self.avahi_dvb_c,
+					_("Destination of fallback remote receiver for DVB-C")))
+				if self.avahi_dvb_c.value == "ip":
+					self.list.append(getConfigListEntry("    %s" % _("Fallback remote receiver IP"),
+						self.ip_dvb_c,
+						_("IP of fallback remote receiver")))
+					self.list.append(getConfigListEntry("    %s" % _("Fallback remote receiver Port"),
+						self.port_dvb_c,
+						_("Port of fallback remote receiver")))
+				if self.avahi_dvb_c.value == "url":
+					self.list.append(getConfigListEntry("    %s" % _("Fallback remote receiver URL"),
+						config.usage.remote_fallback_dvb_c,
+						_("URL of fallback remote receiver")))
+				self.list.append(getConfigListEntry("  %s" % _("Fallback remote receiver for ATSC"),
+					self.avahi_atsc,
+					_("Destination of fallback remote receiver for ATSC")))
+				if self.avahi_atsc.value == "ip":
+					self.list.append(getConfigListEntry("    %s" % _("Fallback remote receiver IP"),
+						self.ip_atsc,
+						_("IP of fallback remote receiver")))
+					self.list.append(getConfigListEntry("    %s" % _("Fallback remote receiver Port"),
+						self.port_atsc,
+						_("Port of fallback remote receiver")))
+				if self.avahi_atsc.value == "url":
+					self.list.append(getConfigListEntry("    %s" % _("Fallback remote receiver URL"),
+						config.usage.remote_fallback_atsc,
+						_("URL of fallback remote receiver")))
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
@@ -174,6 +236,24 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 			config.usage.remote_fallback_import_url.value = ""
 		elif self.avahiselect_seperate.value != "url":
 			config.usage.remote_fallback_import_url.value = self.avahiselect_seperate.value
+		if self.avahi_dvb_t.value == "ip":
+			config.usage.remote_fallback_dvb_t.value = "http://%d.%d.%d.%d:%d" % (tuple(self.ip_dvb_t.value) + (self.port_dvb_t.value,))
+		elif self.avahi_dvb_t.value == "same":
+			config.usage.remote_fallback_dvb_t.value = config.usage.remote_fallback.value
+		elif self.avahi_dvb_t.value != "url":
+			config.usage.remote_fallback_dvb_t.value = self.avahi_dvb_t.value
+		if self.avahi_dvb_c.value == "ip":
+			config.usage.remote_fallback_dvb_c.value = "http://%d.%d.%d.%d:%d" % (tuple(self.ip_dvb_c.value) + (self.port_dvb_c.value,))
+		elif self.avahi_dvb_c.value == "same":
+			config.usage.remote_fallback_dvb_c.value = config.usage.remote_fallback.value
+		elif self.avahi_dvb_c.value != "url":
+			config.usage.remote_fallback_dvb_c.value = self.avahi_dvb_c.value
+		if self.avahi_atsc.value == "ip":
+			config.usage.remote_fallback_atsc.value = "http://%d.%d.%d.%d:%d" % (tuple(self.ip_atsc.value) + (self.port_atsc.value,))
+		elif self.avahi_atsc.value == "same":
+			config.usage.remote_fallback_atsc.value = config.usage.remote_fallback.value
+		elif self.avahi_atsc.value != "url":
+			config.usage.remote_fallback_atsc.value = self.avahi_atsc.value
 		if config.usage.remote_fallback_import_url.value == config.usage.remote_fallback.value:
 			config.usage.remote_fallback_import_url.value = ""
 		config.usage.remote_fallback_enabled.save()
@@ -190,6 +270,10 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 		config.usage.remote_fallback_openwebif_userid.save()
 		config.usage.remote_fallback_openwebif_password.save()
 		config.usage.remote_fallback_openwebif_port.save()
+		config.usage.remote_fallback_alternative.save()
+		config.usage.remote_fallback_dvb_t.save()
+		config.usage.remote_fallback_dvb_c.save()
+		config.usage.remote_fallback_atsc.save()
 		configfile.save()
 		if not self.remote_fallback_prev and config.usage.remote_fallback_import.value:
 			ImportChannels()
