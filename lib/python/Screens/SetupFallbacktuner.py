@@ -160,7 +160,7 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 				self.list.append(getConfigListEntry("  %s" % _("Port"),
 					config.usage.remote_fallback_openwebif_port,
 					"  %s" % _("Set the port of the OpenWebif from your fallback tuner")))
-		if config.usage.remote_fallback_enabled.value:
+		if config.usage.remote_fallback_enabled.value and config.usage.remote_fallback.value:
 			self.list.append(getConfigListEntry(_("Alternative URLs for DVB-T/C or ATSC"),
 				config.usage.remote_fallback_alternative,
 				_("Set alternative fallback tuners for DVB-T/C or ATSC")))
