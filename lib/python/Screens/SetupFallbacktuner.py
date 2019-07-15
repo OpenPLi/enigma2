@@ -45,18 +45,17 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 	def createConfig(self):
 
 		def set_avahiselect_seperate(configElement):
-			if config.usage.remote_fallback_import_url.value and config.usage.remote_fallback_import_url.value != config.usage.remote_fallback.value:
-				peerDefault_sepearate = config.usage.remote_fallback_import_url.value
-			else:
-				peerDefault_sepearate = "same"
-				config.usage.remote_fallback_import_url.value = config.usage.remote_fallback.value
 			self.seperateBoxes = [("same", _("Same as stream"))] + self.peerStreamingBoxes
 			if configElement.value not in ("url", "ip") and configElement.value in self.seperateBoxes:
 				self.seperateBoxes.remove(configElement.value)
-			self.avahiselect_seperate = ConfigSelection(default=peerDefault_sepearate, choices=self.seperateBoxes)
-			self.avahi_dvb_t = ConfigSelection(default=config.usage.remote_fallback_dvb_t.value if config.usage.remote_fallback_dvb_t.value != config.usage.remote_fallback.value else "same", choices=self.seperateBoxes)
-			self.avahi_dvb_c = ConfigSelection(default=config.usage.remote_fallback_dvb_c.value if config.usage.remote_fallback_dvb_c.value != config.usage.remote_fallback.value else "same", choices=self.seperateBoxes)
-			self.avahi_atsc = ConfigSelection(default=config.usage.remote_fallback_atsc.value if config.usage.remote_fallback_atsc.value != config.usage.remote_fallback.value else "same", choices=self.seperateBoxes)
+			default = config.usage.remote_fallback_import_url.value if config.usage.remote_fallback_import_url.value and config.usage.remote_fallback_import_url.value != config.usage.remote_fallback.value else "same"
+			self.avahiselect_seperate = ConfigSelection(default=default, choices=self.seperateBoxes)
+			default = config.usage.remote_fallback_dvb_t.value if config.usage.remote_fallback_dvb_t.value and config.usage.remote_fallback_dvb_t.value != config.usage.remote_fallback.value else "same"
+			self.avahi_dvb_t = ConfigSelection(default=default, choices=self.seperateBoxes)
+			default = config.usage.remote_fallback_dvb_c.value if config.usage.remote_fallback_dvb_c.value and config.usage.remote_fallback_dvb_c.value != config.usage.remote_fallback.value else "same"
+			self.avahi_dvb_c = ConfigSelection(default=default, choices=self.seperateBoxes)
+			default = config.usage.remote_fallback_atsc.value if config.usage.remote_fallback_atsc.value and config.usage.remote_fallback_atsc.value != config.usage.remote_fallback.value else "same"
+			self.avahi_atsc = ConfigSelection(default=default, choices=self.seperateBoxes)
 
 		self.peerStreamingBoxes = getPeerStreamingBoxes() + [("ip", _("Enter IP address")), ("url", _("Enter URL"))]
 		peerDefault = peerDefault_sepearate = None
@@ -236,7 +235,7 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 			config.usage.remote_fallback_import_url.value = ""
 		elif self.avahiselect_seperate.value != "url":
 			config.usage.remote_fallback_import_url.value = self.avahiselect_seperate.value
-		if config.usage.remote_fallback_alternative.value:
+		if config.usage.remote_fallback_alternative.value and not(self.avahi_dvb_t.value == self.avahi_dvb_c.value == self.avahi_atsc.value == "same"):
 			if self.avahi_dvb_t.value == "ip":
 				config.usage.remote_fallback_dvb_t.value = "http://%d.%d.%d.%d:%d" % (tuple(self.ip_dvb_t.value) + (self.port_dvb_t.value,))
 			elif self.avahi_dvb_t.value == "same":
@@ -256,7 +255,8 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 			elif self.avahi_atsc.value != "url":
 				config.usage.remote_fallback_atsc.value = self.avahi_atsc.value
 		else:
-			config.usage.remote_fallback_dvb_t.value = config.usage.remote_fallback_dvb_c.value = config.usage.remote_fallback_atsc.value = config.usage.remote_fallback.value
+			config.usage.remote_fallback_dvb_t.value = config.usage.remote_fallback_dvb_c.value = config.usage.remote_fallback_atsc.value = ""
+			config.usage.remote_fallback_alternative.value = False
 		if config.usage.remote_fallback_import_url.value == config.usage.remote_fallback.value:
 			config.usage.remote_fallback_import_url.value = ""
 		config.usage.remote_fallback_enabled.save()
