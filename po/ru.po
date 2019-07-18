@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-26 23:01+0200\n"
+"POT-Creation-Date: 2019-07-18 13:44+0200\n"
 "PO-Revision-Date: 2019-03-17 13:14+0200\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: openPLi Dimitrij\n"
@@ -416,6 +416,7 @@ msgstr "%s %s свободное место на диске"
 msgid "%s (%s)\n"
 msgstr "%s (%s)\n"
 
+#, python-format
 msgid "%s imported from fallback tuner"
 msgstr "%s импортируем из резервного ресивера"
 
@@ -1002,6 +1003,9 @@ msgstr "Альтернатива 2"
 msgid "Alternative URL for images listed on FlashImage"
 msgstr "Альтернативный URL для списка имиджей онлайн прошивки"
 
+msgid "Alternative URLs for DVB-T/C or ATSC"
+msgstr ""
+
 msgid "Alternative numbering mode"
 msgstr "Альтернативный режим нумерации каналов"
 
@@ -1438,6 +1442,12 @@ msgstr "Увеличение синего"
 msgid "Boost green"
 msgstr "Увеличение зеленого"
 
+msgid "Boot to Android image"
+msgstr ""
+
+msgid "Boot to Recovery menu"
+msgstr ""
+
 msgid "Bosnia and Herzegovina"
 msgstr "Bosnia and Herzegovina"
 
@@ -1698,6 +1708,10 @@ msgstr "Номер канала и название сервиса"
 
 msgid "Channelnumber, picon and servicename"
 msgstr "Номер канала, пикон и название сервиса"
+
+#, fuzzy
+msgid "Channels"
+msgstr "Канал"
 
 msgid "Channels and EPG"
 msgstr "каналы и EPG"
@@ -2649,6 +2663,18 @@ msgstr "Не выбирать"
 msgid "Destination of fallback remote receiver"
 msgstr "Назначение запасного удаленного ресивера"
 
+#, fuzzy
+msgid "Destination of fallback remote receiver for ATSC"
+msgstr "Назначение запасного удаленного ресивера"
+
+#, fuzzy
+msgid "Destination of fallback remote receiver for DVB-C"
+msgstr "Назначение запасного удаленного ресивера"
+
+#, fuzzy
+msgid "Destination of fallback remote receiver for DVB-T"
+msgstr "Назначение запасного удаленного ресивера"
+
 msgid "Details for plugin: "
 msgstr "Подробнее о плагине: "
 
@@ -3024,6 +3050,10 @@ msgstr "Редактировать DNS"
 
 msgid "Edit chapters of current title"
 msgstr "Редактировать главы текущего заголовка"
+
+#, fuzzy
+msgid "Edit menu"
+msgstr "Редактировать таймер"
 
 msgid "Edit selection"
 msgstr "Удалить выбранное"
@@ -3567,6 +3597,18 @@ msgstr "Порт удаленного резервного ресивера"
 
 msgid "Fallback remote receiver URL"
 msgstr "URL запасного удаленного ресивера"
+
+#, fuzzy
+msgid "Fallback remote receiver for ATSC"
+msgstr "Порт удаленного резервного ресивера"
+
+#, fuzzy
+msgid "Fallback remote receiver for DVB-C"
+msgstr "Порт удаленного резервного ресивера"
+
+#, fuzzy
+msgid "Fallback remote receiver for DVB-T"
+msgstr "Порт удаленного резервного ресивера"
 
 msgid "Fallback remote receiver setup"
 msgstr "Настройки удаленного резервного ресивера"
@@ -4233,6 +4275,7 @@ msgstr "Импортировать каналы /EPG при загрузке р�
 msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
 msgstr "Импортировать каналы/EPG после рестарта enigma2"
 
+#, python-format
 msgid "Import from fallback tuner failed, %s"
 msgstr "Ошибка импорта из резевного ресивера %s"
 
@@ -7466,6 +7509,9 @@ msgstr "Установите действие, когда воспроизвед
 msgid "Set all hotkey to default?"
 msgstr "Установить все горячие кнопки по умолчанию?"
 
+msgid "Set alternative fallback tuners for DVB-T/C or ATSC"
+msgstr ""
+
 msgid "Set blocktimes by weekday"
 msgstr "Установка время игнорирования по дням"
 
@@ -8821,7 +8867,8 @@ msgstr "Этот параметр позволяет принудительно 
 msgid "This option allows you to force the HLG modes for UHD"
 msgstr "Этот параметр позволяет принудительно использовать режим HLG для UHD"
 
-msgid "This option allows you to hide and sort menu entries. When selecting user you can change order and hide menu items via the blue button"
+#, fuzzy
+msgid "This option allows you to hide and sort menu entries. When selecting user you can change order and hide menu items via the blue button. With the user defined hidden the blue button is not shown in the menus"
 msgstr "Эта настройка позволяет скрывать и сортировать порядок пунктов меню. При выборе пользовательского варианта, Вы можете изменить порядок и скрыть пункты меню с помощью синей кнопки."
 
 msgid "This option allows you to power off the display."
@@ -11343,9 +11390,11 @@ msgstr "перемотка назад"
 msgid "skip forward"
 msgstr "перемотка вперед"
 
+#, python-format
 msgid "slot%s - %s"
 msgstr "слот%s - %s"
 
+#, python-format
 msgid "slot%s - %s (current image)"
 msgstr "слот%s - %s (текущий имидж)"
 
@@ -11514,6 +11563,10 @@ msgid "update bookmarks"
 msgstr "обновить закладки"
 
 msgid "user defined"
+msgstr "пользовательский вариант"
+
+#, fuzzy
+msgid "user defined hidden"
 msgstr "пользовательский вариант"
 
 msgid "variety show"
