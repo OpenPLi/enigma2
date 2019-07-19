@@ -4,7 +4,7 @@ from enigma import eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT
 from Tools.LoadPixmap import LoadPixmap
 import skin
 
-selectionpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/lock_on.png"))
+selectionpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "icons/lock_on.png"))
 
 def SelectionEntryComponent(description, value, index, selected):
 	dx, dy, dw, dh = skin.parameters.get("SelectionListDescr",(25, 3, 650, 30))

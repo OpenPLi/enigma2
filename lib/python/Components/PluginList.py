@@ -9,7 +9,7 @@ import skin
 
 def PluginEntryComponent(plugin, width=440):
 	if plugin.icon is None:
-		png = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/plugin.png"))
+		png = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/plugin.png"))
 	else:
 		png = plugin.icon
 	nx, ny, nh = skin.parameters.get("PluginBrowserName",(120, 5, 25))
@@ -33,7 +33,7 @@ def PluginCategoryComponent(name, png, width=440):
 
 def PluginDownloadComponent(plugin, name, version=None, width=440):
 	if plugin.icon is None:
-		png = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/plugin.png"))
+		png = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/plugin.png"))
 	else:
 		png = plugin.icon
 	if version:
