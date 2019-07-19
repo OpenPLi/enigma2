@@ -43,7 +43,7 @@
 		<widget source="global.CurrentTime" render="Label" position="right" size="240,*" font="Big" halign="right" valign="center" noWrap="1" foregroundColor="lcd_lightcyan">
 			<convert type="ClockToText"></convert>
 		</widget>
-		<widget source="session.RecordState" render="Pixmap" pixmap="skin_default/icons/record.png" position="right" size="30,30">
+		<widget source="session.RecordState" render="Pixmap" pixmap="icons/record.png" position="right" size="30,30">
 			<convert type="ConditionalShowHide"></convert>
 		</widget>
 	</screen>
@@ -65,11 +65,11 @@
 		<widget source="session.CurrentService" render="Picon" isFrontDisplayPicon="1" position="10,10" size="220,132" transparent="1" halign="center" valign="center" alphatest="blend" >
 			<convert type="ServiceName">Reference</convert>
 		</widget>
-		<widget source="session.CurrentService" position="260,10" render="Pixmap" pixmap="skin_default/icons/stream.png" foregroundColor="#ff0000" size="55,45" zPosition="1" alphatest="blend" >
+		<widget source="session.CurrentService" position="260,10" render="Pixmap" pixmap="icons/stream.png" foregroundColor="#ff0000" size="55,45" zPosition="1" alphatest="blend" >
 			<convert type="ClientsStreaming"/>
 			<convert type="ConditionalShowHide"/>
 		</widget>
-		<widget source="session.HddSleepingState"  position="320,10" render="Pixmap" pixmap="skin_default/icons/hdd.png" foregroundColor="#ff0000" size="55,45" zPosition="1" alphatest="blend" >
+		<widget source="session.HddSleepingState"  position="320,10" render="Pixmap" pixmap="icons/hdd.png" foregroundColor="#ff0000" size="55,45" zPosition="1" alphatest="blend" >
 			<convert type="ConditionalShowHide"/>
 		</widget>
 		<widget source="session.RecordState" render="FixedLabel" text="&#174;" position="380,10" foregroundColor="#ff0000" size="55,45" font="FdLcD;40" halign="left" valign="center" zPosition="22">
@@ -106,11 +106,11 @@
 		<widget source="parent.ServiceEvent" render="Picon" isFrontDisplayPicon="1" position="10,10" size="220,132" transparent="1" halign="center" valign="center" alphatest="blend" >
 			<convert type="ServiceName">Reference</convert>
 		</widget>
-		<widget source="session.CurrentService" position="260,10" render="Pixmap" pixmap="skin_default/icons/stream.png" foregroundColor="#ff0000" size="55,45" zPosition="1" alphatest="blend" >
+		<widget source="session.CurrentService" position="260,10" render="Pixmap" pixmap="icons/stream.png" foregroundColor="#ff0000" size="55,45" zPosition="1" alphatest="blend" >
 			<convert type="ClientsStreaming"/>
 			<convert type="ConditionalShowHide"/>
 		</widget>
-		<widget source="session.HddSleepingState"  position="320,10" render="Pixmap" pixmap="skin_default/icons/hdd.png" foregroundColor="#ff0000" size="55,45" zPosition="1" alphatest="blend" >
+		<widget source="session.HddSleepingState"  position="320,10" render="Pixmap" pixmap="icons/hdd.png" foregroundColor="#ff0000" size="55,45" zPosition="1" alphatest="blend" >
 			<convert type="ConditionalShowHide"/>
 		</widget>
 		<widget source="session.RecordState" render="FixedLabel" text="&#174;" position="380,10" foregroundColor="#ff0000" size="55,45" font="FdLcD;40" halign="left" valign="center" zPosition="22">
@@ -153,11 +153,11 @@
 		<widget source="parent.Service" render="Picon" isFrontDisplayPicon="1" position="10,10" size="220,132" transparent="1" halign="center" valign="center" alphatest="blend" >
 			<convert type="ServiceName">Reference</convert>
 		</widget>
-		<widget source="session.CurrentService" position="260,10" render="Pixmap" pixmap="skin_default/icons/stream.png" foregroundColor="#ff0000" size="55,45" zPosition="1" alphatest="blend" >
+		<widget source="session.CurrentService" position="260,10" render="Pixmap" pixmap="icons/stream.png" foregroundColor="#ff0000" size="55,45" zPosition="1" alphatest="blend" >
 			<convert type="ClientsStreaming"/>
 			<convert type="ConditionalShowHide"/>
 		</widget>
-		<widget source="session.HddSleepingState"  position="320,10" render="Pixmap" pixmap="skin_default/icons/hdd.png" foregroundColor="#ff0000" size="55,45" zPosition="1" alphatest="blend" >
+		<widget source="session.HddSleepingState"  position="320,10" render="Pixmap" pixmap="icons/hdd.png" foregroundColor="#ff0000" size="55,45" zPosition="1" alphatest="blend" >
 			<convert type="ConditionalShowHide"/>
 		</widget>
 		<widget source="session.RecordState" render="FixedLabel" text="&#174;" position="380,10" foregroundColor="#ff0000" size="55,45" font="FdLcD;40" halign="left" valign="center" zPosition="22">
@@ -216,11 +216,11 @@
 		<widget source="session.FrontendInfo" render="Label" position="10,410" size="770,50" borderWidth="1" borderColor="black" zPosition="1" halign="center" valign="bottom" backgroundColor="transpBlack" transparent="1" font="FdLcD;42">
 			<convert type="FrontendInfo">STRING,24,0</convert>
 		</widget>
-		<widget source="session.CurrentService" render="Pixmap" pixmap="skin_default/icons/stream.png" foregroundColor="#ff0000" size="60,50" position="305,300" zPosition="1" alphatest="blend" >
+		<widget source="session.CurrentService" render="Pixmap" pixmap="icons/stream.png" foregroundColor="#ff0000" size="60,50" position="305,300" zPosition="1" alphatest="blend" >
 			<convert type="ClientsStreaming"/>
 			<convert type="ConditionalShowHide"/>
 		</widget>
-		<widget source="session.HddSleepingState" render="Pixmap" pixmap="skin_default/icons/hdd.png" foregroundColor="#ff0000" size="50,60" position="355,300" zPosition="1" alphatest="blend" >
+		<widget source="session.HddSleepingState" render="Pixmap" pixmap="icons/hdd.png" foregroundColor="#ff0000" size="50,60" position="355,300" zPosition="1" alphatest="blend" >
 			<convert type="ConditionalShowHide"/>
 		</widget>
 		<widget source="session.RecordState" render="FixedLabel" text="&#174;" position="405,300" foregroundColor="#ff0000" size="40,46" font="FdLcD;50" halign="left" valign="center" zPosition="22">

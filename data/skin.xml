@@ -36,14 +36,14 @@
 		<color name="WindowTitleBackground" color="#25062748" />
 		<!-- Main screen border png's -->
 		<borderset name="bsWindow">
-			<pixmap pos="bpTopLeft" filename="skin_default/b_tl.png" />
-			<pixmap pos="bpTop" filename="skin_default/b_t.png"  />
-			<pixmap pos="bpTopRight" filename="skin_default/b_tr.png" />
-			<pixmap pos="bpLeft" filename="skin_default/b_l.png"  />
-			<pixmap pos="bpRight" filename="skin_default/b_r.png"  />
-			<pixmap pos="bpBottomLeft" filename="skin_default/b_bl.png" />
-			<pixmap pos="bpBottom" filename="skin_default/b_b.png"  />
-			<pixmap pos="bpBottomRight" filename="skin_default/b_br.png" />
+			<pixmap pos="bpTopLeft" filename="b_tl.png" />
+			<pixmap pos="bpTop" filename="b_t.png"  />
+			<pixmap pos="bpTopRight" filename="b_tr.png" />
+			<pixmap pos="bpLeft" filename="b_l.png"  />
+			<pixmap pos="bpRight" filename="b_r.png"  />
+			<pixmap pos="bpBottomLeft" filename="b_bl.png" />
+			<pixmap pos="bpBottom" filename="b_b.png"  />
+			<pixmap pos="bpBottomRight" filename="b_br.png" />
 		</borderset>
 	</windowstyle>
 	<!-- Fonts -->
@@ -51,8 +51,8 @@
 	<!-- Main infobar -->
 	<screen name="InfoBar" flags="wfNoBorder" position="0,380" size="720,160" title="Info bar" backgroundColor="transparent">
 		<!-- Background -->
-		<ePixmap position="0,0" zPosition="-1" size="720,160" pixmap="skin_default/info-bg.png" />
-		<ePixmap position="27,73" size="665,71" pixmap="skin_default/screws.png" alphatest="on" transparent="1" />
+		<ePixmap position="0,0" zPosition="-1" size="720,160" pixmap="info-bg.png" />
+		<ePixmap position="27,73" size="665,71" pixmap="screws.png" alphatest="on" transparent="1" />
 		<!-- Signal Quality -->
 		<eLabel text="SNR" position="205,3" size="40,22" font="Regular;16" backgroundColor="#102e59" foregroundColor="#cccccc" shadowColor="#27384f" shadowOffset="-1,-1" transparent="1" />
 		<widget source="session.FrontendStatus" render="Label" position="242,3" size="80,22" font="Regular;16" backgroundColor="#102e59" foregroundColor="#e7e7e7" shadowColor="#27384f" shadowOffset="-1,-1" transparent="1">
@@ -72,27 +72,27 @@
 			<convert type="ServiceName">Name</convert>
 		</widget>
 		<!-- Time -->
-		<ePixmap pixmap="skin_default/icons/clock.png" position="600,23" size="14,14" alphatest="on" />
+		<ePixmap pixmap="icons/clock.png" position="600,23" size="14,14" alphatest="on" />
 		<widget source="global.CurrentTime" render="Label" position="615,21" size="55,24" font="Regular;21" halign="right" backgroundColor="#4e5a74" transparent="1">
 			<convert type="ClockToText">Default</convert>
 		</widget>
 		<!-- tuners in use? -->
-		<widget source="session.FrontendInfo" render="Pixmap" position="142,6" size="8,9" pixmap="skin_default/nim_active.png" alphatest="on">
+		<widget source="session.FrontendInfo" render="Pixmap" position="142,6" size="8,9" pixmap="nim_active.png" alphatest="on">
 			<convert type="FrontendInfo">NUMBER</convert>
 			<convert type="ValueRange">0,0</convert>
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget source="session.FrontendInfo" render="Pixmap" position="142,19" size="8,9" pixmap="skin_default/nim_active.png" alphatest="on">
+		<widget source="session.FrontendInfo" render="Pixmap" position="142,19" size="8,9" pixmap="nim_active.png" alphatest="on">
 			<convert type="FrontendInfo">NUMBER</convert>
 			<convert type="ValueRange">1,1</convert>
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget source="session.FrontendInfo" render="Pixmap" position="142,32" size="8,9" pixmap="skin_default/nim_active.png" alphatest="on">
+		<widget source="session.FrontendInfo" render="Pixmap" position="142,32" size="8,9" pixmap="nim_active.png" alphatest="on">
 			<convert type="FrontendInfo">NUMBER</convert>
 			<convert type="ValueRange">2,2</convert>
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget source="session.FrontendInfo" render="Pixmap" position="142,45" size="8,9" pixmap="skin_default/nim_active.png" alphatest="on">
+		<widget source="session.FrontendInfo" render="Pixmap" position="142,45" size="8,9" pixmap="nim_active.png" alphatest="on">
 			<convert type="FrontendInfo">NUMBER</convert>
 			<convert type="ValueRange">3,3</convert>
 			<convert type="ConditionalShowHide" />
@@ -118,38 +118,38 @@
 			<convert type="ConditionalShowHide" />
 		</widget>
 		<!-- Crypt icon (encrypted service?) -->
-		<ePixmap position="563,48" zPosition="0" size="107,15" pixmap="skin_default/icons/icons_off.png" />
-		<widget source="session.CurrentService" render="Pixmap" pixmap="skin_default/icons/icon_crypt.png" position="563,48" zPosition="1" size="12,16" alphatest="on">
+		<ePixmap position="563,48" zPosition="0" size="107,15" pixmap="icons/icons_off.png" />
+		<widget source="session.CurrentService" render="Pixmap" pixmap="icons/icon_crypt.png" position="563,48" zPosition="1" size="12,16" alphatest="on">
 			<convert type="ServiceInfo">IsCrypted</convert>
 			<convert type="ConditionalShowHide" />
 		</widget>
 		<!-- Teletext icon (is teletext available?) -->
-		<widget source="session.CurrentService" render="Pixmap" pixmap="skin_default/icons/icon_txt.png" position="580,48" zPosition="1" size="26,16" alphatest="on">
+		<widget source="session.CurrentService" render="Pixmap" pixmap="icons/icon_txt.png" position="580,48" zPosition="1" size="26,16" alphatest="on">
 			<convert type="ServiceInfo">HasTelext</convert>
 			<convert type="ConditionalShowHide" />
 		</widget>
 		<!-- Videoformat icon (16:9?) -->
-		<widget source="session.CurrentService" render="Pixmap" pixmap="skin_default/icons/icon_format.png" position="611,48" zPosition="1" size="29,16" alphatest="on">
+		<widget source="session.CurrentService" render="Pixmap" pixmap="icons/icon_format.png" position="611,48" zPosition="1" size="29,16" alphatest="on">
 			<convert type="ServiceInfo">IsWidescreen</convert>
 			<convert type="ConditionalShowHide" />
 		</widget>
 		<!-- Audio icon (is there multichannel audio?) -->
-		<widget source="session.CurrentService" render="Pixmap" pixmap="skin_default/icons/icon_dolby.png" position="645,48" zPosition="1" size="26,16" alphatest="on">
+		<widget source="session.CurrentService" render="Pixmap" pixmap="icons/icon_dolby.png" position="645,48" zPosition="1" size="26,16" alphatest="on">
 			<convert type="ServiceInfo">IsMultichannel</convert>
 			<convert type="ConditionalShowHide" />
 		</widget>
 		<!-- Progressbar (current event duration)-->
-		<ePixmap pixmap="skin_default/progress_bg.png" position="48,77" size="84,7" transparent="1" alphatest="on" />
-		<widget source="session.Event_Now" render="Progress" pixmap="skin_default/progress_small.png" position="50,78" zPosition="1" size="80,5" transparent="1">
+		<ePixmap pixmap="progress_bg.png" position="48,77" size="84,7" transparent="1" alphatest="on" />
+		<widget source="session.Event_Now" render="Progress" pixmap="progress_small.png" position="50,78" zPosition="1" size="80,5" transparent="1">
 			<convert type="EventTime">Progress</convert>
 		</widget>
 		<!-- Blinking pixmap (recording in progress?) -->
-		<ePixmap pixmap="skin_default/icons/icon_rec_off.png" position="561,21" size="34,21" />
-		<widget source="session.RecordState" render="Pixmap" pixmap="skin_default/icons/icon_rec.png" position="561,21" zPosition="1" size="34,21">
+		<ePixmap pixmap="icons/icon_rec_off.png" position="561,21" size="34,21" />
+		<widget source="session.RecordState" render="Pixmap" pixmap="icons/icon_rec.png" position="561,21" zPosition="1" size="34,21">
 			<convert type="ConditionalShowHide">Blink</convert>
 		</widget>
 		<!-- Event (now) -->
-		<ePixmap pixmap="skin_default/icons/icon_event.png" position="182,78" size="15,10" alphatest="on" />
+		<ePixmap pixmap="icons/icon_event.png" position="182,78" size="15,10" alphatest="on" />
 		<widget source="session.Event_Now" render="Label" position="205,73" size="60,24" font="Regular;20" backgroundColor="#34406f" shadowColor="#1d354c" shadowOffset="-1,-1" transparent="1">
 			<convert type="EventTime">StartTime</convert>
 			<convert type="ClockToText">Default</convert>
@@ -174,8 +174,8 @@
 			<convert type="ClockToText">InMinutes</convert>
 		</widget>
 		<!-- Red button (is recording possible?) -->
-		<ePixmap pixmap="skin_default/buttons/button_red_off.png" position="212,130" size="15,16" alphatest="on" />
-		<widget source="RecordingPossible" render="Pixmap" pixmap="skin_default/buttons/button_red.png" position="212,130" zPosition="1" size="15,16" alphatest="on">
+		<ePixmap pixmap="buttons/button_red_off.png" position="212,130" size="15,16" alphatest="on" />
+		<widget source="RecordingPossible" render="Pixmap" pixmap="buttons/button_red.png" position="212,130" zPosition="1" size="15,16" alphatest="on">
 			<convert type="ConditionalShowHide" />
 		</widget>
 		<!--eLabel text="Record" position="232,130" size="80,22" font="Regular;16" foregroundColor="#7f848d" backgroundColor="#182946" transparent="1" /-->
@@ -186,8 +186,8 @@
 			<convert type="ConditionalShowHide" />
 		</widget>
 		<!-- Green button (is subservices available?) -->
-		<ePixmap pixmap="skin_default/buttons/button_green_off.png" position="315,130" size="15,16" alphatest="on" />
-		<widget source="session.CurrentService" render="Pixmap" pixmap="skin_default/buttons/button_green.png" position="315,130" zPosition="1" size="15,16" alphatest="on">
+		<ePixmap pixmap="buttons/button_green_off.png" position="315,130" size="15,16" alphatest="on" />
+		<widget source="session.CurrentService" render="Pixmap" pixmap="buttons/button_green.png" position="315,130" zPosition="1" size="15,16" alphatest="on">
 			<convert type="ServiceInfo">SubservicesAvailable</convert>
 			<convert type="ConditionalShowHide" />
 		</widget>
@@ -197,8 +197,8 @@
 			<convert type="ConditionalShowHide" />
 		</widget>
 		<!-- Yellow button (is timeshift possible?) -->
-		<ePixmap pixmap="skin_default/buttons/button_yellow_off.png" position="440,130" size="15,16" alphatest="on" />
-		<widget source="TimeshiftPossible" render="Pixmap" pixmap="skin_default/buttons/button_yellow.png" position="440,130" zPosition="1" size="15,16" alphatest="on">
+		<ePixmap pixmap="buttons/button_yellow_off.png" position="440,130" size="15,16" alphatest="on" />
+		<widget source="TimeshiftPossible" render="Pixmap" pixmap="buttons/button_yellow.png" position="440,130" zPosition="1" size="15,16" alphatest="on">
 			<convert type="ConditionalShowHide" />
 		</widget>
 		<widget source="ShowTimeshiftOnYellow" render="FixedLabel" text="Timeshift" position="460,130" zPosition="1" size="85,22" font="Regular;16" foregroundColor="#7f848d" backgroundColor="#182946" shadowOffset="-1,-1" transparent="1">
@@ -209,15 +209,15 @@
 		</widget>
 
 		<!-- Yellow button (used for audio on boxes with new rc?) -->
-		<widget source="ShowAudioOnYellow" render="Pixmap" pixmap="skin_default/buttons/button_yellow.png" position="440,130" zPosition="1" size="15,16" alphatest="on">
+		<widget source="ShowAudioOnYellow" render="Pixmap" pixmap="buttons/button_yellow.png" position="440,130" zPosition="1" size="15,16" alphatest="on">
 			<convert type="ConditionalShowHide" />
 		</widget>
 		<widget source="ShowAudioOnYellow" render="FixedLabel" text="Audio" position="460,130" zPosition="1" size="85,22" font="Regular;16" backgroundColor="#182946" shadowColor="#1d354c" shadowOffset="-1,-1" transparent="1">
 			<convert type="ConditionalShowHide" />
 		</widget>
 		<!-- Blue button (is extensions available?) -->
-		<ePixmap pixmap="skin_default/buttons/button_blue_off.png" position="545,130" size="15,16" alphatest="on" />
-		<widget source="ExtensionsAvailable" render="Pixmap" pixmap="skin_default/buttons/button_blue.png" position="545,130" zPosition="1" size="15,16" alphatest="on">
+		<ePixmap pixmap="buttons/button_blue_off.png" position="545,130" size="15,16" alphatest="on" />
+		<widget source="ExtensionsAvailable" render="Pixmap" pixmap="buttons/button_blue.png" position="545,130" zPosition="1" size="15,16" alphatest="on">
 			<convert type="ConditionalShowHide" />
 		</widget>
 		<eLabel text="Extensions" position="565,130" size="110,22" font="Regular;16" foregroundColor="#7f848d" backgroundColor="#182946" transparent="1" />
@@ -231,39 +231,39 @@
 		<widget source="menu" render="Listbox" position="170,55" size="200,225" scrollbarMode="showOnDemand">
 			<convert type="StringList" />
 		</widget>
-		<widget source="menu" render="Pixmap" pixmap="skin_default/menu/shutdown.png" position="20,20" size="128,128" alphatest="on">
+		<widget source="menu" render="Pixmap" pixmap="menu/shutdown.png" position="20,20" size="128,128" alphatest="on">
 			<convert type="MenuEntryCompare">standby_restart_list</convert>
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget source="menu" render="Pixmap" pixmap="skin_default/menu/setup.png" position="20,20" size="128,128" alphatest="on">
+		<widget source="menu" render="Pixmap" pixmap="menu/setup.png" position="20,20" size="128,128" alphatest="on">
 			<convert type="MenuEntryCompare">setup_selection</convert>
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget source="menu" render="Pixmap" pixmap="skin_default/menu/plugins.png" position="20,20" size="128,128" alphatest="on">
+		<widget source="menu" render="Pixmap" pixmap="menu/plugins.png" position="20,20" size="128,128" alphatest="on">
 			<convert type="MenuEntryCompare">plugin_selection</convert>
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget source="menu" render="Pixmap" pixmap="skin_default/menu/information.png" position="20,20" size="128,128" alphatest="on">
+		<widget source="menu" render="Pixmap" pixmap="menu/information.png" position="20,20" size="128,128" alphatest="on">
 			<convert type="MenuEntryCompare">info_screen</convert>
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget source="menu" render="Pixmap" pixmap="skin_default/menu/scart.png" position="20,20" size="128,128" alphatest="on">
+		<widget source="menu" render="Pixmap" pixmap="menu/scart.png" position="20,20" size="128,128" alphatest="on">
 			<convert type="MenuEntryCompare">scart_switch</convert>
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget source="menu" render="Pixmap" pixmap="skin_default/menu/timer.png" position="20,20" size="128,128" alphatest="on">
+		<widget source="menu" render="Pixmap" pixmap="menu/timer.png" position="20,20" size="128,128" alphatest="on">
 			<convert type="MenuEntryCompare">timer_edit</convert>
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget source="menu" render="Pixmap" pixmap="skin_default/menu/media_player.png" position="20,20" size="128,128" alphatest="on">
+		<widget source="menu" render="Pixmap" pixmap="menu/media_player.png" position="20,20" size="128,128" alphatest="on">
 			<convert type="MenuEntryCompare">media_player</convert>
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget source="menu" render="Pixmap" pixmap="skin_default/menu/dvd_player.png" position="20,20" size="128,128" alphatest="on">
+		<widget source="menu" render="Pixmap" pixmap="menu/dvd_player.png" position="20,20" size="128,128" alphatest="on">
 			<convert type="MenuEntryCompare">dvd_player</convert>
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget source="menu" render="Pixmap" pixmap="skin_default/menu/subtitles.png" position="20,20" size="128,128" alphatest="on">
+		<widget source="menu" render="Pixmap" pixmap="menu/subtitles.png" position="20,20" size="128,128" alphatest="on">
 			<convert type="MenuEntryCompare">subtitle_selection</convert>
 			<convert type="ConditionalShowHide"/>
 		</widget>
@@ -271,12 +271,12 @@
 	<!-- Movieplayer infobar -->
 	<screen name="MoviePlayer" flags="wfNoBorder" position="0,380" size="720,160" title="Info bar" backgroundColor="transparent">
 		<!-- Background -->
-		<ePixmap position="0,0" pixmap="skin_default/info-bg_mp.png" zPosition="-1" size="720,160" />
-		<ePixmap position="29,40" pixmap="skin_default/screws_mp.png" size="665,104" alphatest="on" />
+		<ePixmap position="0,0" pixmap="info-bg_mp.png" zPosition="-1" size="720,160" />
+		<ePixmap position="29,40" pixmap="screws_mp.png" size="665,104" alphatest="on" />
 		<!-- colorbuttons -->
-		<ePixmap position="48,70" pixmap="skin_default/icons/mp_buttons.png" size="108,13" alphatest="on" />
+		<ePixmap position="48,70" pixmap="icons/mp_buttons.png" size="108,13" alphatest="on" />
 		<!-- Servicename -->
-		<ePixmap pixmap="skin_default/icons/icon_event.png" position="207,78" size="15,10" alphatest="on" />
+		<ePixmap pixmap="icons/icon_event.png" position="207,78" size="15,10" alphatest="on" />
 		<widget source="session.CurrentService" render="Label" position="230,73" size="360,40" font="Regular;20" backgroundColor="#263c59" shadowColor="#1d354c" shadowOffset="-1,-1" transparent="1">
 			<convert type="ServiceName">Name</convert>
 		</widget>
@@ -289,7 +289,7 @@
 			<convert type="ServicePosition">Position</convert>
 		</widget>
 		<!-- Progressbar (movie position)-->
-		<widget source="session.CurrentService" render="PositionGauge" position="300,133" size="270,10" zPosition="2" pointer="skin_default/position_pointer.png:540,0" transparent="1" foregroundColor="#20224f">
+		<widget source="session.CurrentService" render="PositionGauge" position="300,133" size="270,10" zPosition="2" pointer="position_pointer.png:540,0" transparent="1" foregroundColor="#20224f">
 			<convert type="ServicePosition">Gauge</convert>
 		</widget>
 		<!-- Remaining time -->

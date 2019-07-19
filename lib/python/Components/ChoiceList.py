@@ -14,15 +14,15 @@ def ChoiceEntryComponent(key = None, text = ["--"]):
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, RT_HALIGN_LEFT, text[0]))
 		if key:
 			if key == "expandable":
-				png = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/expandable.png"))
+				png = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/expandable.png"))
 			elif key == "expanded":
-				png = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/expanded.png"))
+				png = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/expanded.png"))
 			elif key == "verticalline":
-				png = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/verticalline.png"))
+				png = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/verticalline.png"))
 			elif key == "bullet":
-				png = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/bullet.png"))
+				png = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/bullet.png"))
 			else:
-				png = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/buttons/key_%s.png" % key))
+				png = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "buttons/key_%s.png" % key))
 			if png:
 				x, y, w, h = skin.parameters.get("ChoicelistIcon",(5, 0, 35, 25))
 				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, x, y, w, h, png))

@@ -184,13 +184,13 @@ class MovieList(GUIComponent):
 		self.onSelectionChanged = [ ]
 		self.iconPart = []
 		for part in range(5):
-			self.iconPart.append(LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/part_%d_4.png" % part)))
-		self.iconMovieRec = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/part_new.png"))
-		self.iconMoviePlay = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/movie_play.png"))
-		self.iconMoviePlayRec = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/movie_play_rec.png"))
-		self.iconUnwatched = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/part_unwatched.png"))
-		self.iconFolder = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/folder.png"))
-		self.iconTrash = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/trashcan.png"))
+			self.iconPart.append(LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/part_%d_4.png" % part)))
+		self.iconMovieRec = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/part_new.png"))
+		self.iconMoviePlay = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/movie_play.png"))
+		self.iconMoviePlayRec = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/movie_play_rec.png"))
+		self.iconUnwatched = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/part_unwatched.png"))
+		self.iconFolder = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/folder.png"))
+		self.iconTrash = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/trashcan.png"))
 		self.runningTimers = {}
 		self.updateRecordings()
 
