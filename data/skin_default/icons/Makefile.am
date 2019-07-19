@@ -76,6 +76,7 @@ dist_install_DATA = \
 	part_new.png \
 	part_unwatched.png \
 	pause.png \
+	pic_frame.png \
 	playlist.png \
 	playlistquit.png \
 	plilogo-fs8.png \
