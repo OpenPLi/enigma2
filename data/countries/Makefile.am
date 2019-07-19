@@ -39,5 +39,6 @@ dist_install_DATA = \
 	th.png \
 	tr.png \
 	ua.png \
+	vn.png \
 	fy_NL.png \
 	yu.png
