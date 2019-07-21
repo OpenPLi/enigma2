@@ -116,6 +116,7 @@ public:
 	uint16_t getOriginalNetworkId(void) const;
 	uint16_t getTransportStreamId(void) const;
 	uint16_t getOrbitalPosition(void) const;
+	uint8_t getWestEastFlag(void) const;
 	uint32_t getFrequency(void) const;
 	uint8_t getPolarization(void) const;
 	uint8_t getRollOff(void) const;
