@@ -221,8 +221,8 @@ class ServiceInfo(Screen):
 
 	def getTrackList(self):
 		trackList = []
-		currentTrack = self.audio and self.audio.getCurrentTrack()
 		if self.numberofTracks:
+			currentTrack = self.audio.getCurrentTrack()
 			for i in range(0, self.numberofTracks):
 				audioDesc = self.audio.getTrackInfo(i).getDescription()
 				audioPID = self.audio.getTrackInfo(i).getPID()
