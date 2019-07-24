@@ -651,7 +651,7 @@ class NIM(object):
 		if self.isFBCTuner():
 			return "%s-%s: %s" % (self.getSlotName(self.slot & ~7), self.getSlotID((self.slot & ~7) + 7), self.getFullDescription())
 		#compress by combining dual tuners by checking if the next tuner has a rf switch
-		elif self.frontend_id is not None and os.access("/proc/stb/frontend/%d/rf_switch" % (self.frontend_id + 1), os.F_OK):
+		elif self.frontend_id is not None and len(nimmanager.nim_slots) > self.frontend_id + 1 and os.access("/proc/stb/frontend/%d/rf_switch" % (self.frontend_id + 1), os.F_OK):
 			return "%s-%s: %s" % (self.slot_name, self.getSlotID(self.slot + 1), self.getFullDescription())
 		return self.getFriendlyFullDescription()
 
