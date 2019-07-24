@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-20 22:26+0200\n"
-"PO-Revision-Date: 2019-07-20 22:54+0200\n"
+"POT-Creation-Date: 2019-07-19 21:52+0200\n"
+"PO-Revision-Date: 2019-07-24 20:23+0200\n"
 "Last-Translator: Pike_Bishop <alfredzngr023@gmail.com>\n"
 "Language-Team: Sfteam  angelo2807@hotmail.com\n"
 "Language: de\n"
@@ -406,6 +406,10 @@ msgstr "%s %s freier Festplattenspeicher"
 #, python-format
 msgid "%s (%s)\n"
 msgstr "%s (%s)\n"
+
+#, python-format
+msgid "%s imported from fallback tuner"
+msgstr "%s importiert vom Reserve-Tuner"
 
 #. TRANSLATORS: The satellite with name '%s' is no longer used after a configuration change. The user is asked whether or not the satellite should be deleted.
 #, python-format
@@ -989,6 +993,9 @@ msgstr "Alternative Zwei"
 msgid "Alternative URL for images listed on FlashImage"
 msgstr "Alternative URL für Images gelistet in \"Flashe Image\""
 
+msgid "Alternative URLs for DVB-T/C or ATSC"
+msgstr "Alternative URLs für DVB-T / C oder ATSC"
+
 msgid "Alternative numbering mode"
 msgstr "Alternativer Nummerierungs-Modus"
 
@@ -1425,6 +1432,12 @@ msgstr "Boost blau"
 msgid "Boost green"
 msgstr "Boost grün"
 
+msgid "Boot to Android image"
+msgstr "Android Booten (Hochfahren)"
+
+msgid "Boot to Recovery menu"
+msgstr "Recovery-Menü Booten (Hochfahren)"
+
 msgid "Bosnia and Herzegovina"
 msgstr "Bosnien und Herzegowina"
 
@@ -1548,6 +1561,39 @@ msgstr "Cameroon"
 msgid "Can be used for different fps between external subtitles and video."
 msgstr "Kann für unterschiedliche fps-Werte zwischen externen Untertiteln und dem Video verwendet werden."
 
+msgid ""
+"Can be used to test defect pixels on TV screen.\n"
+"\n"
+"Available color test screens:\n"
+"\n"
+"red\n"
+"green\n"
+"blue\n"
+"white\n"
+"black\n"
+"cyan\n"
+"magenta\n"
+"yellow\n"
+"\n"
+"Screens change with left/right buttons or use red, green, blue to toggle.\n"
+"Yellow for returning back to this intro"
+msgstr ""
+"Kann verwendet werden um auf Defekte Pixel am TV zu testen.\n"
+"\n"
+"Verfügbare Farb Test-Bildschirme:\n"
+"\n"
+"rot\n"
+"grün\n"
+"blau\n"
+"weiss\n"
+"schwarz\n"
+"cyan\n"
+"magenta\n"
+"gelb\n"
+"\n"
+"Bildschirm wechseln mit links / rechts Tasten oder mit den Tasten rot, grün, blau umschalten.\n"
+"Mit Taste gelb zurück zur Einführung."
+
 msgid "Can only find a network drive to store the backup this means after the flash the autorestore will not work. Alternativaly you can mount the network drive after the flash and perform a manufacurer reset to autorestore"
 msgstr "Für das Backup wurde nur eine Netzwerkfestplatte gefunden, daher ist ein automatischer Restore der Einstellungen nach dem Flash nicht möglich. Alternativ kann nach dem Flash die Netzwerkfestplatte erneut eingebunden und dann die Box auf Werkseinstellungen zurückgesetzt werden um Autorestore zu nutzen."
 
@@ -1668,15 +1714,11 @@ msgstr "Kanalnummer und Sendername"
 msgid "Channelnumber, picon and servicename"
 msgstr "Kanalnummer, Picon und Sendername"
 
+msgid "Channels"
+msgstr "Kanäle"
+
 msgid "Channels and EPG"
 msgstr "Kanäle und EPG"
-
-#, python-format
-msgid "Channels from fallback tuner failed %s"
-msgstr "Kanäle vom Reserve-Tuner fehlgeschlagen %s"
-
-msgid "Channels from fallback tuner imported"
-msgstr "Kanäle vom Reserve-Receiver importiert"
 
 msgid "Channels only"
 msgstr "Nur Kanäle"
@@ -1901,7 +1943,7 @@ msgid "Configure how the fan should operate"
 msgstr "Lüfterverhalten konfigurieren"
 
 msgid "Configure if and how crypto icons will be shown in the channel selection list."
-msgstr "Konfigurieren, ob Verschlüsselungssymbole in der Kanalauswahlliste angezeigt werden sollen."
+msgstr "Konfigurieren Sie ob und wie Verschlüsselungssymbole in der Kanalauswahlliste angezeigt werden sollen."
 
 msgid "Configure if and how long the latest service in the PiP will be remembered."
 msgstr "Konfiguriere, ob und wie lange der letzte PiP-Kanal gespeichert wird."
@@ -1982,7 +2024,7 @@ msgid "Configure the contrast level of the front panel display."
 msgstr "Kontrast des Frontdisplays."
 
 msgid "Configure the cursor behaviour in the channel selection list. When opening the channel selection list you can keep on the current service or already select up/down and you are able to revert the B+/B- buttons."
-msgstr "Konfiguriert das Verhalten des Cursors in Kanalauswahllisten. Beim Öffnen von Kanalauswahllisten kann der Cursor auf dem aktuellen Sender bleiben oder bereits den oberen/unteren Kanal markieren (oben/unten kann dabei nach Wunsch invertiert werden)."
+msgstr "Bestimmt das Verhalten des Cursors in den Kanalauswahllisten. Beim Öffnen von Kanalauswahllisten kann der Cursor auf dem aktuellen Sender bleiben, oder bereits den oberen / unteren Kanal markieren, und man kann die B+ / B-  Tasten umstellen."
 
 msgid "Configure the duration in hours the receiver should go to standby when the receiver is not controlled."
 msgstr "Konfiguriere den Zeitraum in Stunden, nach dem der Receiver in den Standby-Modus wechseln soll, wenn dieser nicht mehr gesteuert wird."
@@ -2160,7 +2202,7 @@ msgid "Configure whether multi channel sound tracks should be downmixed to stere
 msgstr "Heruntermischen von Multi-Kanal-Sound in Stereo."
 
 msgid "Configure whether or not a rotor position will be displayed on the infobar"
-msgstr "Konfigurieren Sie, ob eine Rotorposition auf der Infoba angezeigt wird oder nicht"
+msgstr "Konfigurieren Sie ob die Rotorposition in der Infobar angezeigt werden soll oder nicht."
 
 msgid "Configure whether or not an icon should be shown when your motorized dish is moving."
 msgstr "Anzeige eines Hinweissymbols bei Bewegung der motorisierten Antennenschüssel."
@@ -2372,7 +2414,7 @@ msgid "Customize"
 msgstr "Anpassen"
 
 msgid "Customize OpenWebIF settings for fallback tuner"
-msgstr "Fallback Tuner in den OpenWebIF Einstellungen anpassen"
+msgstr "Reserve-Tuner in den OpenWebIF Einstellungen anpassen"
 
 msgid "Customize channel list cursor behavior"
 msgstr "Cursor-Verhalten in Kanalauswahlliste einstellen"
@@ -2472,6 +2514,9 @@ msgstr "DVD Player"
 
 msgid "DVD titlelist"
 msgstr "DVD Titelliste"
+
+msgid "DVDPlayer"
+msgstr "DVD-Player"
 
 msgid "Danish"
 msgstr "Dänisch"
@@ -2624,7 +2669,16 @@ msgid "Deselect"
 msgstr "Markierung aufheben"
 
 msgid "Destination of fallback remote receiver"
-msgstr "Fallback-Remote-Receiver auswählen"
+msgstr "Reserve-Receiver auswählen"
+
+msgid "Destination of fallback remote receiver for ATSC"
+msgstr "Bestimmungsort vom Reserve-Receiver für ATSC"
+
+msgid "Destination of fallback remote receiver for DVB-C"
+msgstr "Bestimmungsort vom Reserve-Receiver für DVB-C"
+
+msgid "Destination of fallback remote receiver for DVB-T"
+msgstr "Bestimmungsort vom Reserve-Receiver für DVB-T"
 
 msgid "Details for plugin: "
 msgstr "Details des Plugins: "
@@ -2997,6 +3051,9 @@ msgstr "Bearbeite DNS"
 msgid "Edit chapters of current title"
 msgstr "Kapitel des ausgewählten Titels schneiden"
 
+msgid "Edit menu"
+msgstr "Menü editieren"
+
 msgid "Edit selection"
 msgstr "Auswahl bearbeiten"
 
@@ -3040,10 +3097,10 @@ msgid "Enable"
 msgstr "Ein"
 
 msgid "Enable 'neutrino' style channel select controlling"
-msgstr "Aktiviere Kanalauswahlverhalten im 'Neutrino'-Style"
+msgstr "Aktiviere Kanalauswahlverhalten im Neutrino-Stil"
 
 msgid "Enable 'neutrino' style zap controlling"
-msgstr "Aktiviere Kanalumschaltverhalten im 'Neutrino'-Style"
+msgstr "Aktiviere Kanalumschaltverhalten im Neutrino-Stil"
 
 msgid "Enable 5V for active antenna"
 msgstr "5V für aktive Antenne"
@@ -3083,16 +3140,16 @@ msgid "Enable auto fast scan for %s"
 msgstr "Aktiviere automatischen schnellen Kanalscan für %s"
 
 msgid "Enable bouquet selection in multi-EPG"
-msgstr "Aktiviere Bouquet-Auswahl im Multi-EPG"
+msgstr "Aktiviere die Bouquet-Auswahl im Multi-EPG."
 
 msgid "Enable fallback remote receiver"
-msgstr "Aktiviere Fallback-Remote-Receiver"
+msgstr "Aktiviere Reserve-Receiver"
 
 msgid "Enable freesat EPG"
 msgstr "Aktiviere Freesat EPG"
 
 msgid "Enable import timer from fallback tuner"
-msgstr "Aktivieren Sie den Import-Timer vom Fallback-Tuner"
+msgstr "Aktivieren Sie den Import-Timer vom Reserve-Tuner"
 
 msgid "Enable multiple bouquets"
 msgstr "Mehrere Bouquets erlauben"
@@ -3101,7 +3158,7 @@ msgid "Enable parental protection"
 msgstr "Jugendschutz aktivieren"
 
 msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
-msgstr "Aktiviert einen Fallback-Remote-Receiver, der versucht wird wenn ein Sender lokal nicht empfangen werden kann. (z.B. wenn Tuner belegt oder Sender lokal nicht verfügbar ist). Angabe der kompletten URL inklusive http:// und Port-Nummer (normal …:8001), z.B. http://zweite_box:8001. notwendig."
+msgstr "Aktiviert einen Reserve-Receiver, der versucht wird wenn ein Sender lokal nicht empfangen werden kann. (z.B. wenn Tuner belegt oder Sender lokal nicht verfügbar ist). Angabe der kompletten URL inklusive http:// und Port-Nummer (normal …:8001), z.B. http://zweite_box:8001. notwendig."
 
 msgid "Enable teletext caching"
 msgstr "Aktiviere Teletext Cache"
@@ -3113,7 +3170,10 @@ msgid "Enable timer conflict detection"
 msgstr "Aktiviere Timer-Konflikt-Erkennung"
 
 msgid "Enable to display all true/false, yes/no, on/off and enable/disable set up options as a graphical switch."
-msgstr "Aktivieren Sie diese Option, um alle Optionen für “Wahr / Falsch”, “Ja / Nein”, “Ein / Aus” und “Ein- / Ausschalten” als grafischen Schalter anzuzeigen."
+msgstr ""
+"Wenn aktiviert, werden alle Einstell-Optionen für\n"
+"“Wahr / Falsch”, “Ja / Nein”, “Ein / Aus” und\n"
+"“Ein- / Ausschalten” als grafischer Schalter angezeigt."
 
 msgid "Enable volume control with arrow buttons"
 msgstr "Aktiviere Lautstärkeregelung mit Pfeiltasten"
@@ -3284,7 +3344,7 @@ msgid ""
 "Error while retreiving fallback timer information\n"
 "%s"
 msgstr ""
-"Fehler beim Wiederherstellen der Fallback-Timer-Informationen\n"
+"Fehler beim Wiederherstellen der Reserve-Timer-Informationen\n"
 "% s"
 
 msgid "Error while retreiving location of epg.dat on server"
@@ -3526,25 +3586,34 @@ msgid "Falkland Islands (Malvinas)"
 msgstr "Falklandinseln (Malvinas)"
 
 msgid "Fallback Timer"
-msgstr "Fallback-Timer"
+msgstr "Reserve-Timer"
 
 msgid "Fallback remote receiver"
-msgstr "Fallback-Remote-Receiver"
+msgstr "Reserve-Receiver"
 
 msgid "Fallback remote receiver IP"
-msgstr "Fallback-Remote-Receiver IP"
+msgstr "Reserve-Receiver IP"
 
 msgid "Fallback remote receiver Port"
-msgstr "Fallback-Remote-Receiver Port"
+msgstr "Reserve-Receiver Port"
 
 msgid "Fallback remote receiver URL"
-msgstr "Fallback-Remote-Receiver URL"
+msgstr "Reserve-Receiver URL"
+
+msgid "Fallback remote receiver for ATSC"
+msgstr "Reserve-Receiver für ATSC"
+
+msgid "Fallback remote receiver for DVB-C"
+msgstr "Reserve-Receiver für  DVB-C"
+
+msgid "Fallback remote receiver for DVB-T"
+msgstr "Reserve-Receiver für  DVB-T"
 
 msgid "Fallback remote receiver setup"
-msgstr "Fallback-Remote-Receiver Einstellungen"
+msgstr "Reserve-Receiver Einstellungen"
 
 msgid "Fallback tuner setup"
-msgstr "Fallback-Tuner-Setup"
+msgstr "Reserve-Tuner-Einstellung"
 
 #, python-format
 msgid "Fan %d"
@@ -4074,6 +4143,9 @@ msgstr "Hotkey-Tastenbelegung"
 msgid "Hotkey zap"
 msgstr "Tastenkombination \"umschalten\""
 
+msgid "Hotplug"
+msgstr "Hot-Plug"
+
 msgid "How many minutes do you want add to the recording?"
 msgstr "Wie viele Minuten wollen Sie der Aufnahme hinzufügen?"
 
@@ -4108,7 +4180,7 @@ msgid "IP address"
 msgstr "IP-Adresse"
 
 msgid "IP of fallback remote receiver"
-msgstr "IP des Fallback-Remote-Receivers"
+msgstr "IP des Reserve-Receivers"
 
 msgid "ISO file is too large for this filesystem!"
 msgstr "Die ISO-Datei ist für dieses Dateisystem zu groß!"
@@ -4201,6 +4273,10 @@ msgstr "Importiert die Kanäle und / oder den EPG der Receiver-URL des Remote-Re
 
 msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
 msgstr "Importiere Kanäle und / oder EPG von Remote-Receiver-URL, wenn Receiver oder Enigma2 neu gestartet wird."
+
+#, python-format
+msgid "Import from fallback tuner failed, %s"
+msgstr "Import vom Reserve-Tuner fehlgeschlagen, %s"
 
 msgid "Import from remote receiver URL"
 msgstr "Import der Remote-Receiver-URL"
@@ -5716,11 +5792,17 @@ msgstr "Pilot"
 msgid "Pitcairn"
 msgstr "Pitcairn"
 
+msgid "Pixels\n"
+msgstr "Pixel\n"
+
 msgid "Play"
 msgstr "Abspielen"
 
 msgid "Play DVD"
 msgstr "DVD abspielen"
+
+msgid "Play DVDs"
+msgstr "DVDs abspielen"
 
 msgid "Play audio-CD..."
 msgstr "Musik-CD abspielen…"
@@ -5775,7 +5857,7 @@ msgstr ""
 "Drücken Sie OK zum Fortfahren"
 
 msgid "Please configure the fallback tuner setup?"
-msgstr "Das Fallback-Tuner-Setup konfigurieren?"
+msgstr "Die Reserve-Tuner-Einstellung konfigurieren ?"
 
 msgid ""
 "Please configure your internet connection by filling out the required values.\n"
@@ -6017,7 +6099,7 @@ msgid "Port D"
 msgstr "Port D"
 
 msgid "Port of fallback remote receiver"
-msgstr "Port des Fallback-Remote-Receivers"
+msgstr "Port des Reserve-Receivers"
 
 msgid "Portugal"
 msgstr "Portugal"
@@ -7169,9 +7251,6 @@ msgstr "Eingabegerät auswählen."
 msgid "Select interface"
 msgstr "Netzwerkkarte auswählen"
 
-msgid "Select locale"
-msgstr "Sprache wählen"
-
 msgid "Select location"
 msgstr "Speicherort auswählen"
 
@@ -7264,6 +7343,9 @@ msgstr "Wählen Sie das Gebietsschema der virtuellen Tastatur aus einem Menü"
 
 msgid "Select the virtual keyboard shifted character set"
 msgstr "Wählen Sie den Zeichensatz für die Shift Tastatur aus"
+
+msgid "Select the virtual keyboard shifted character set for the next character only"
+msgstr "Shift nur für das nächste Zeichen benutzen"
 
 msgid "Select upgrade source"
 msgstr "Wählen Sie eine Update-Quelle"
@@ -7396,9 +7478,6 @@ msgstr "Kanal-Referenz"
 msgid "Service scan"
 msgstr "Kanalsuche"
 
-msgid "Service searching"
-msgstr "Kanalsuche / Empfang"
-
 msgid "Service title mode"
 msgstr "Kanal Titel Modus"
 
@@ -7426,6 +7505,9 @@ msgstr "Aktion einstellen, wenn die Filmwiedergabe beendet ist."
 
 msgid "Set all hotkey to default?"
 msgstr "Alle Hotkeys auf standard setzen?"
+
+msgid "Set alternative fallback tuners for DVB-T/C or ATSC"
+msgstr "Bestimme alternativen Reserve-Tuner für DVB-T / C oder ATSC"
 
 msgid "Set blocktimes by weekday"
 msgstr "Setze Blockzeiten nach Wochentag"
@@ -7467,16 +7549,16 @@ msgid "Set startup service"
 msgstr "Als Startsender benutzen"
 
 msgid "Set the User ID of the OpenWebif from your fallback tuner"
-msgstr "Fügen Sie die User ID des OpenWebIf des Fallback-Tuners ein"
+msgstr "Fügen Sie die User ID des OpenWebIf vom Reserve-Tuner ein"
 
 msgid "Set the password of the OpenWebif from your fallback tuner"
-msgstr "Fügen Sie das Passwort des OpenWebIf des Fallback-Tuners ein"
+msgstr "Bestimmen Sie das Passwort vom OpenWebIf des Reserve-Tuners"
 
 msgid "Set the port of the OpenWebif from your fallback tuner"
-msgstr "Fügen Sie den Port des OpenWebIf des Fallback-Tuners ein"
+msgstr "Bestimmen Sie den Port vom OpenWebIf des Reserve-Tuners"
 
 msgid "Set the type of the progress indication in the channel selection screen."
-msgstr "Sendungs-Fortschritt in der Kanalauswahlliste anzeigen"
+msgstr "Auswahl der Fortschritts-Anzeige welche in der Kanalauswahlliste angezeigt werden soll."
 
 msgid "Set time window to 1 hour"
 msgstr "Setze das Zeitfenster auf 1 Stunde"
@@ -7532,6 +7614,9 @@ msgstr "Schärfe"
 msgid "Shellscript"
 msgstr "Shell-Skript"
 
+msgid "Shift"
+msgstr "Wechsel"
+
 msgid "Short filenames"
 msgstr "Kurze Dateinamen"
 
@@ -7566,7 +7651,7 @@ msgid "Show SNR percentage instead of dB value"
 msgstr "SNR-Prozentsatz anstelle von dB-Wert anzeigen"
 
 msgid "Show True/False as graphical switch"
-msgstr "True/False als grafischen Schalter anzeigen"
+msgstr "Zeige True / False als grafischen Schalter"
 
 msgid "Show VCR scart on main menu"
 msgstr "VCR-SCART im Hauptmenü anzeigen"
@@ -7908,6 +7993,9 @@ msgstr "Glatt"
 
 msgid "Social/Political/Economics"
 msgstr "Soziales/Politik/Wirtschaft"
+
+msgid "SocketMMI"
+msgstr "Socket-MMI"
 
 msgid "SoftCam / CI"
 msgstr "SoftCam / CI"
@@ -8784,7 +8872,7 @@ msgstr "Mit dieser Option können Sie die HDR10-Modi für UHD erzwingen"
 msgid "This option allows you to force the HLG modes for UHD"
 msgstr "Mit dieser Option können Sie die HLG-Modi für UHD erzwingen"
 
-msgid "This option allows you to hide and sort menu entries. When selecting user you can change order and hide menu items via the blue button"
+msgid "This option allows you to hide and sort menu entries. When selecting user you can change order and hide menu items via the blue button. With the user defined hidden the blue button is not shown in the menus"
 msgstr "Diese Option erlaubt Ihnen Menü-Einträge zu verstecken und zu sortieren. Bei Auswahl 'Benutzerdefiniert' kann das Verändern der Reihenfolge und das Verstecken von Menü-Einträgen über die blaue Taste vorgenommen werden."
 
 msgid "This option allows you to power off the display."
@@ -9165,6 +9253,9 @@ msgstr "Tunerstatus:"
 msgid "Tuner type"
 msgstr "Tunertyp"
 
+msgid "Tuners & scanning"
+msgstr "Tuner & Suchlauf"
+
 msgid "Tunisia"
 msgstr "Tunisia"
 
@@ -9214,7 +9305,7 @@ msgid "URL"
 msgstr "URL"
 
 msgid "URL of fallback remote receiver"
-msgstr "URL vom Fallback-Remote-Receiver."
+msgstr "URL vom Reserve-Receiver."
 
 msgid "USALS"
 msgstr "USALS"
@@ -9268,7 +9359,7 @@ msgid "Unencrypted"
 msgstr "Unverschlüsselt"
 
 msgid "Unexpected error while retreiving fallback tuner's timer information"
-msgstr "Unerwarteter Fehler beim Abrufen der Timer-Informationen des Fallback-Tuners"
+msgstr "Unerwarteter Fehler beim Abrufen der Timer-Informationen des Reserve-Tuners"
 
 msgid "UnhandledKey"
 msgstr "UnhandledKey"
@@ -9819,25 +9910,25 @@ msgid "When enabled the PiP can be closed by the exit button."
 msgstr "Falls aktiviert, kann PiP mit der Exit-Taste geschlossen werden."
 
 msgid "When enabled the arrow buttons around the OK button will follow the 'neutrino' style zap controls instead of the enigma2 style."
-msgstr "Falls aktiviert, kann das Verhalten der Pfeil-Tasten, welche die OK-Taste umschließen, auf den Neutrino-Stil angepasst werden."
+msgstr "Wenn aktiviert, kann das Verhalten der Steuerkreuz-Tasten auf den Neutrino-Stil angepasst werden."
 
 msgid "When enabled the left, right, CH+/-, B+/-, P+/- buttons will follow the 'neutrino' style zap controls instead of the enigma2 style."
-msgstr "Falls aktiviert, können die links, rechts,  CH+/-, B+/-, P+/- Tasten auf den Neutrino-Stil angepasst werden."
+msgstr "Wenn aktiviert, können die Tasten links / rechts sowie die  CH+/-, B+/-, P+/- Tasten auf den Neutrino-Stil angepasst werden."
 
 msgid "When enabled the set top box is able to wakeup on LAN"
 msgstr "Wenn aktiviert, kann die Set-Top-Box über LAN aufwachen."
 
 msgid "When enabled the timer from the fallback tuner is imported"
-msgstr "Wenn aktiviert, wird der Timer vom Fallback-Tuner importiert"
+msgstr "Wenn aktiviert, wird der Timer vom Reserve-Tuner importiert."
 
 msgid "When enabled then when you select a new channel in the channel selection the channel selection will not close. It will only close when you select the current playing service. This is a kind of preview mode"
-msgstr "Falls aktiviert, dann wird bei Auswahl eines Senders in der Kanalauswahlliste, die Kanalauswahlliste nicht geschlossen. Die Kanalauswahlliste schließt nur wenn der aktuell laufende Sender ausgewählt wird. Das ist eine Art Vorschau-Modus."
+msgstr "Wenn aktiviert wird bei Auswahl eines neuen Senders in der Kanalauswahlliste diese nicht geschlossen. Die Kanalauswahlliste schließt nur wenn der aktuell laufende Sender ausgewählt wird. Das ist eine Art Vorschau-Modus."
 
 msgid "When enabled you can control the volume with the arrow buttons instead of getting the channel selection list"
 msgstr "Falls aktiviert, dann lässt sich die Lautstärke über die Pfeiltasten regeln, anstatt die Kanalauswahlliste aufzurufen."
 
 msgid "When enabled you can customize the OpenWebIf settings for the fallback tuner"
-msgstr "Wenn aktiviert, kann der Fallback Tuner im OpenWebIf konfiguriert werden"
+msgstr "Wenn aktiviert, kann der Reserve-Tuner im OpenWebIf konfiguriert werden."
 
 msgid "When enabled you can specify a timeframe to ignore the shutdown timer when the receiver is in standby mode"
 msgstr ""
@@ -9853,7 +9944,7 @@ msgid "When enabled you can specify an extra timeframe when the inactivity sleep
 msgstr "Wenn diese Option aktiviert ist, können Sie einen zusätzlichen Zeitrahmen angeben, wann der Inaktivitäts-Ausschalt-Timer ignoriert wird. Während dieses Zeitraums ist die Erkennung nicht deaktiviert, das Inaktivitätszeitlimit ist jedoch deaktiviert."
 
 msgid "When enabled you can zap channels with the  CH+/-, B+/-, P+/- buttons instead of opening the channel selection list."
-msgstr "Falls aktiviert, kann mit den links, rechts,  CH+/-, B+/-, P+/- Tasten zwischen den Kanälen umgeschaltet werden anstelle die Kanalliste zu öffnen."
+msgstr "Wenn aktiviert, kann mit den Tasten links / rechts sowie mit den CH+/-, B+/-, P+/- Tasten zwischen den Kanälen umgeschaltet werden statt die Kanalliste zu öffnen."
 
 msgid "When enabled you get the channel selection list via the OK button, the infobar toggle is then transfered to exit button"
 msgstr "Beim Betätigen der OK-Taste wird die Kanalauswahlliste angezeigt und die Anzeige der Infoleiste auf die EXIT-Taste gelegt, wenn diese Einstellung aktiviert ist."
@@ -9883,7 +9974,7 @@ msgid "When enabled, a recording is allowed to interrupt live tv, when there are
 msgstr "Ein geplanter Aufnahme-Timer kann die aktuelle Live-Sendung unterbrechen, wenn ansonsten keine freien Tuner zur Verfügung stehen."
 
 msgid "When enabled, a warning will be displayed and the user will get an option to stop or to continue the timeshift."
-msgstr "Falls aktiviert, dann wird eine Warnung angezeigt und der Benutzer kann wählen zwischen dem Beenden oder Fortfahren der Timeshift-Aufnahme."
+msgstr "Wenn aktiviert, wird eine Warnung angezeigt und der Benutzer kann wählen zwischen dem Beenden oder Fortfahren der Timeshift-Aufnahme."
 
 msgid "When enabled, always descramble receiving http streams. This takes up more resources (descrambling demuxers), only enable if necessary. Individual streams are always descrambled if 0x100 is added to the service type, regardless of this setting. Default off."
 msgstr "Wenn aktiviert, werden empfangene HTTP-Streams immer entschlüsselt. Dies verbraucht mehr Ressourcen (Demuxer). Aktivieren Sie diese Option nur, wenn es notwendig ist. Individuelle Streams werden immer entschlüsselt, wenn 0x100 zum Servicetyp hinzugefügt wurde, unabhängig von dieser Einstellung."
@@ -9969,7 +10060,7 @@ msgid "When enabled, the channel selection list will be hidden while listening t
 msgstr "Kanalliste während dem Radiohören verstecken."
 
 msgid "When enabled, the infobar will be displayed when a new event starts."
-msgstr "Infoleiste anzeigen bei Sendungswechsel."
+msgstr "Wenn aktiviert, wird die Infoleiste beim Sendungswechsel eingeblendet."
 
 msgid "When enabled, the infobar will be displayed when changing channels."
 msgstr "Infoleiste bei Kanalwechsel anzeigen."
@@ -10002,7 +10093,7 @@ msgid "When enabled, this setting has more weight than 'Preferred tuner'."
 msgstr "Wenn diese Einstellung aktiviert ist, hat sie mehr Gewicht als “Bevorzugter Tuner”."
 
 msgid "When enabled, timeshift starts automatically in background after specified time."
-msgstr "Falls aktiviert, startet im Hintergrund automatisch die Timeshift-Aufnahme nach der eingestellten Zeit."
+msgstr "Wenn aktiviert, startet die Timeshift-Aufnahme nach der eingestellten Zeit automatisch im Hintergrund."
 
 msgid "When enabled, use DHCP for the IP configuration."
 msgstr "Dynamische IP Adressen (DHCP) für IP-Vergabe verwenden."
@@ -10926,6 +11017,9 @@ msgstr "Standard Listenansicht"
 msgid "list style single line"
 msgstr "Einzeilige Listenansicht"
 
+msgid "listens to hotplug events"
+msgstr "Auf Hot-Plug Events lauschen"
+
 msgid "literature"
 msgstr "Literatur"
 
@@ -11484,6 +11578,9 @@ msgstr "Automatische Lesezeichen"
 
 msgid "user defined"
 msgstr "Benutzerdefiniert"
+
+msgid "user defined hidden"
+msgstr "Benutzerdefiniert versteckt"
 
 msgid "variety show"
 msgstr "Abwechslungsreiche Sendung"
