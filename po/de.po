@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-19 21:52+0200\n"
+"POT-Creation-Date: 2019-07-25 10:12+0200\n"
 "PO-Revision-Date: 2019-07-24 20:23+0200\n"
 "Last-Translator: Pike_Bishop <alfredzngr023@gmail.com>\n"
 "Language-Team: Sfteam  angelo2807@hotmail.com\n"
@@ -406,10 +406,6 @@ msgstr "%s %s freier Festplattenspeicher"
 #, python-format
 msgid "%s (%s)\n"
 msgstr "%s (%s)\n"
-
-#, python-format
-msgid "%s imported from fallback tuner"
-msgstr "%s importiert vom Reserve-Tuner"
 
 #. TRANSLATORS: The satellite with name '%s' is no longer used after a configuration change. The user is asked whether or not the satellite should be deleted.
 #, python-format
@@ -993,9 +989,6 @@ msgstr "Alternative Zwei"
 msgid "Alternative URL for images listed on FlashImage"
 msgstr "Alternative URL für Images gelistet in \"Flashe Image\""
 
-msgid "Alternative URLs for DVB-T/C or ATSC"
-msgstr "Alternative URLs für DVB-T / C oder ATSC"
-
 msgid "Alternative numbering mode"
 msgstr "Alternativer Nummerierungs-Modus"
 
@@ -1432,12 +1425,6 @@ msgstr "Boost blau"
 msgid "Boost green"
 msgstr "Boost grün"
 
-msgid "Boot to Android image"
-msgstr "Android Booten (Hochfahren)"
-
-msgid "Boot to Recovery menu"
-msgstr "Recovery-Menü Booten (Hochfahren)"
-
 msgid "Bosnia and Herzegovina"
 msgstr "Bosnien und Herzegowina"
 
@@ -1561,39 +1548,6 @@ msgstr "Cameroon"
 msgid "Can be used for different fps between external subtitles and video."
 msgstr "Kann für unterschiedliche fps-Werte zwischen externen Untertiteln und dem Video verwendet werden."
 
-msgid ""
-"Can be used to test defect pixels on TV screen.\n"
-"\n"
-"Available color test screens:\n"
-"\n"
-"red\n"
-"green\n"
-"blue\n"
-"white\n"
-"black\n"
-"cyan\n"
-"magenta\n"
-"yellow\n"
-"\n"
-"Screens change with left/right buttons or use red, green, blue to toggle.\n"
-"Yellow for returning back to this intro"
-msgstr ""
-"Kann verwendet werden um auf Defekte Pixel am TV zu testen.\n"
-"\n"
-"Verfügbare Farb Test-Bildschirme:\n"
-"\n"
-"rot\n"
-"grün\n"
-"blau\n"
-"weiss\n"
-"schwarz\n"
-"cyan\n"
-"magenta\n"
-"gelb\n"
-"\n"
-"Bildschirm wechseln mit links / rechts Tasten oder mit den Tasten rot, grün, blau umschalten.\n"
-"Mit Taste gelb zurück zur Einführung."
-
 msgid "Can only find a network drive to store the backup this means after the flash the autorestore will not work. Alternativaly you can mount the network drive after the flash and perform a manufacurer reset to autorestore"
 msgstr "Für das Backup wurde nur eine Netzwerkfestplatte gefunden, daher ist ein automatischer Restore der Einstellungen nach dem Flash nicht möglich. Alternativ kann nach dem Flash die Netzwerkfestplatte erneut eingebunden und dann die Box auf Werkseinstellungen zurückgesetzt werden um Autorestore zu nutzen."
 
@@ -1714,11 +1668,16 @@ msgstr "Kanalnummer und Sendername"
 msgid "Channelnumber, picon and servicename"
 msgstr "Kanalnummer, Picon und Sendername"
 
-msgid "Channels"
-msgstr "Kanäle"
-
 msgid "Channels and EPG"
 msgstr "Kanäle und EPG"
+
+#, fuzzy, python-format
+msgid "Channels from fallback tuner failed %s"
+msgstr "Import vom Reserve-Tuner fehlgeschlagen, %s"
+
+#, fuzzy
+msgid "Channels from fallback tuner imported"
+msgstr "Wenn aktiviert, wird der Timer vom Reserve-Tuner importiert."
 
 msgid "Channels only"
 msgstr "Nur Kanäle"
@@ -2515,9 +2474,6 @@ msgstr "DVD Player"
 msgid "DVD titlelist"
 msgstr "DVD Titelliste"
 
-msgid "DVDPlayer"
-msgstr "DVD-Player"
-
 msgid "Danish"
 msgstr "Dänisch"
 
@@ -2670,15 +2626,6 @@ msgstr "Markierung aufheben"
 
 msgid "Destination of fallback remote receiver"
 msgstr "Reserve-Receiver auswählen"
-
-msgid "Destination of fallback remote receiver for ATSC"
-msgstr "Bestimmungsort vom Reserve-Receiver für ATSC"
-
-msgid "Destination of fallback remote receiver for DVB-C"
-msgstr "Bestimmungsort vom Reserve-Receiver für DVB-C"
-
-msgid "Destination of fallback remote receiver for DVB-T"
-msgstr "Bestimmungsort vom Reserve-Receiver für DVB-T"
 
 msgid "Details for plugin: "
 msgstr "Details des Plugins: "
@@ -3050,9 +2997,6 @@ msgstr "Bearbeite DNS"
 
 msgid "Edit chapters of current title"
 msgstr "Kapitel des ausgewählten Titels schneiden"
-
-msgid "Edit menu"
-msgstr "Menü editieren"
 
 msgid "Edit selection"
 msgstr "Auswahl bearbeiten"
@@ -3600,15 +3544,6 @@ msgstr "Reserve-Receiver Port"
 msgid "Fallback remote receiver URL"
 msgstr "Reserve-Receiver URL"
 
-msgid "Fallback remote receiver for ATSC"
-msgstr "Reserve-Receiver für ATSC"
-
-msgid "Fallback remote receiver for DVB-C"
-msgstr "Reserve-Receiver für  DVB-C"
-
-msgid "Fallback remote receiver for DVB-T"
-msgstr "Reserve-Receiver für  DVB-T"
-
 msgid "Fallback remote receiver setup"
 msgstr "Reserve-Receiver Einstellungen"
 
@@ -4143,9 +4078,6 @@ msgstr "Hotkey-Tastenbelegung"
 msgid "Hotkey zap"
 msgstr "Tastenkombination \"umschalten\""
 
-msgid "Hotplug"
-msgstr "Hot-Plug"
-
 msgid "How many minutes do you want add to the recording?"
 msgstr "Wie viele Minuten wollen Sie der Aufnahme hinzufügen?"
 
@@ -4273,10 +4205,6 @@ msgstr "Importiert die Kanäle und / oder den EPG der Receiver-URL des Remote-Re
 
 msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
 msgstr "Importiere Kanäle und / oder EPG von Remote-Receiver-URL, wenn Receiver oder Enigma2 neu gestartet wird."
-
-#, python-format
-msgid "Import from fallback tuner failed, %s"
-msgstr "Import vom Reserve-Tuner fehlgeschlagen, %s"
 
 msgid "Import from remote receiver URL"
 msgstr "Import der Remote-Receiver-URL"
@@ -5792,17 +5720,11 @@ msgstr "Pilot"
 msgid "Pitcairn"
 msgstr "Pitcairn"
 
-msgid "Pixels\n"
-msgstr "Pixel\n"
-
 msgid "Play"
 msgstr "Abspielen"
 
 msgid "Play DVD"
 msgstr "DVD abspielen"
-
-msgid "Play DVDs"
-msgstr "DVDs abspielen"
 
 msgid "Play audio-CD..."
 msgstr "Musik-CD abspielen…"
@@ -7251,6 +7173,10 @@ msgstr "Eingabegerät auswählen."
 msgid "Select interface"
 msgstr "Netzwerkkarte auswählen"
 
+#, fuzzy
+msgid "Select locale"
+msgstr "Speicherort auswählen"
+
 msgid "Select location"
 msgstr "Speicherort auswählen"
 
@@ -7343,9 +7269,6 @@ msgstr "Wählen Sie das Gebietsschema der virtuellen Tastatur aus einem Menü"
 
 msgid "Select the virtual keyboard shifted character set"
 msgstr "Wählen Sie den Zeichensatz für die Shift Tastatur aus"
-
-msgid "Select the virtual keyboard shifted character set for the next character only"
-msgstr "Shift nur für das nächste Zeichen benutzen"
 
 msgid "Select upgrade source"
 msgstr "Wählen Sie eine Update-Quelle"
@@ -7478,6 +7401,10 @@ msgstr "Kanal-Referenz"
 msgid "Service scan"
 msgstr "Kanalsuche"
 
+#, fuzzy
+msgid "Service searching"
+msgstr "Kanalsuche"
+
 msgid "Service title mode"
 msgstr "Kanal Titel Modus"
 
@@ -7505,9 +7432,6 @@ msgstr "Aktion einstellen, wenn die Filmwiedergabe beendet ist."
 
 msgid "Set all hotkey to default?"
 msgstr "Alle Hotkeys auf standard setzen?"
-
-msgid "Set alternative fallback tuners for DVB-T/C or ATSC"
-msgstr "Bestimme alternativen Reserve-Tuner für DVB-T / C oder ATSC"
 
 msgid "Set blocktimes by weekday"
 msgstr "Setze Blockzeiten nach Wochentag"
@@ -7613,9 +7537,6 @@ msgstr "Schärfe"
 
 msgid "Shellscript"
 msgstr "Shell-Skript"
-
-msgid "Shift"
-msgstr "Wechsel"
 
 msgid "Short filenames"
 msgstr "Kurze Dateinamen"
@@ -7993,9 +7914,6 @@ msgstr "Glatt"
 
 msgid "Social/Political/Economics"
 msgstr "Soziales/Politik/Wirtschaft"
-
-msgid "SocketMMI"
-msgstr "Socket-MMI"
 
 msgid "SoftCam / CI"
 msgstr "SoftCam / CI"
@@ -8872,7 +8790,8 @@ msgstr "Mit dieser Option können Sie die HDR10-Modi für UHD erzwingen"
 msgid "This option allows you to force the HLG modes for UHD"
 msgstr "Mit dieser Option können Sie die HLG-Modi für UHD erzwingen"
 
-msgid "This option allows you to hide and sort menu entries. When selecting user you can change order and hide menu items via the blue button. With the user defined hidden the blue button is not shown in the menus"
+#, fuzzy
+msgid "This option allows you to hide and sort menu entries. When selecting user you can change order and hide menu items via the blue button"
 msgstr "Diese Option erlaubt Ihnen Menü-Einträge zu verstecken und zu sortieren. Bei Auswahl 'Benutzerdefiniert' kann das Verändern der Reihenfolge und das Verstecken von Menü-Einträgen über die blaue Taste vorgenommen werden."
 
 msgid "This option allows you to power off the display."
@@ -9252,9 +9171,6 @@ msgstr "Tunerstatus:"
 
 msgid "Tuner type"
 msgstr "Tunertyp"
-
-msgid "Tuners & scanning"
-msgstr "Tuner & Suchlauf"
 
 msgid "Tunisia"
 msgstr "Tunisia"
@@ -11017,9 +10933,6 @@ msgstr "Standard Listenansicht"
 msgid "list style single line"
 msgstr "Einzeilige Listenansicht"
 
-msgid "listens to hotplug events"
-msgstr "Auf Hot-Plug Events lauschen"
-
 msgid "literature"
 msgstr "Literatur"
 
@@ -11578,9 +11491,6 @@ msgstr "Automatische Lesezeichen"
 
 msgid "user defined"
 msgstr "Benutzerdefiniert"
-
-msgid "user defined hidden"
-msgstr "Benutzerdefiniert versteckt"
 
 msgid "variety show"
 msgstr "Abwechslungsreiche Sendung"
