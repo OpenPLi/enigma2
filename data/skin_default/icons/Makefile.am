@@ -46,6 +46,7 @@ dist_install_DATA = \
 	input_info.png \
 	input_keyboard-configured.png \
 	input_keyboard.png \
+	input_message.png \
 	input_mouse-configured.png \
 	input_mouse.png \
 	input_question.png \
@@ -53,6 +54,7 @@ dist_install_DATA = \
 	input_rcnew.png \
 	input_rcold-configured.png \
 	input_rcold.png \
+	input_warning.png \
 	lock_error.png \
 	lock_off.png \
 	lock_on.png \
