@@ -265,6 +265,7 @@ data/skin_default/spinner/Makefile
 data/skin_default/LCDIcons/Makefile
 data/skin_fallback_1080/Makefile
 data/skin_fallback_1080/buttons/Makefile
+data/skin_fallback_1080/icons/Makefile
 include/Makefile
 lib/Makefile
 lib/base/eenv.cpp
