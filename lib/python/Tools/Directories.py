@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
+import re
 
 from enigma import eEnv, getDesktop
 from re import compile
@@ -88,7 +89,11 @@ def resolveFilename(scope, base="", path_prefix=None):
 			return None
 	# Remove any suffix data and restore it at the end.
 	suffix = None
-	data = base.split(":", 1)
+	# This is a hack to get around OpenPLi using "#" as suffix separator. "#" is 
+	# also a perfectly valid and common filename character. This hack should be 
+	# removed when OpenPLi switch to using the more common ":".
+	# data = base.split(":", 1)
+	data = re.split("[:#]", base, 1)
 	if len(data) > 1:
 		base = data[0]
 		suffix = data[1]
