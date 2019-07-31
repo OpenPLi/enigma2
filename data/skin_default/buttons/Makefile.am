@@ -48,7 +48,7 @@ dist_install_DATA = \
 	red-big.png \
 	red.png \
 	repeat-off.png \
-	repeat_on.png \
+	repeat-on.png \
 	right.png \
 	sel.png \
 	sel2.png \
