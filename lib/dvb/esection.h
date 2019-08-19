@@ -26,7 +26,7 @@ protected:
 	virtual int createTable(unsigned int nr, const uint8_t *data, unsigned int max)=0;
 	virtual unsigned int totalSections(unsigned int max) { return max + 1; }
 public:
-	sigc::signal1<void, int> tableReady;
+	sigc::signal<void(int)> tableReady;
 	eGTable();
 	RESULT start(iDVBSectionReader *reader, const eDVBTableSpec &table);
 	RESULT start(iDVBDemux *reader, const eDVBTableSpec &table);
@@ -90,7 +90,7 @@ protected:
 	void slotTableReady(int);
 public:
 	virtual ~eAUGTable(){};
-	sigc::signal1<void, int> tableReady;
+	sigc::signal<void(int)> tableReady;
 	virtual void getNext(int err)=0;
 };
 
@@ -147,11 +147,11 @@ public:
 	{
 		if (current)
 		{
-			/*emit*/ tableReady(0);
+			/*emit*/ tableReady.emit(0);
 			return 0;
 		} else if (!next)
 		{
-			/*emit*/ tableReady(-1);
+			/*emit*/ tableReady.emit(-1);
 			return 0;
 		} else
 			return 1;
@@ -194,7 +194,7 @@ public:
 		{
 			next=0;
 			if (first)
-				/*emit*/ tableReady(error);
+				/*emit*/ tableReady.emit(error);
 			first=0;
 			return;
 		} else
@@ -205,7 +205,7 @@ public:
 
 		ASSERT(current->ready);
 
-		/*emit*/ tableReady(0);
+		/*emit*/ tableReady.emit(0);
 
 		eDVBTableSpec spec;
 

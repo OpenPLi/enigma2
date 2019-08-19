@@ -114,7 +114,7 @@ eServiceHDMI::~eServiceHDMI()
 
 DEFINE_REF(eServiceHDMI);
 
-RESULT eServiceHDMI::connectEvent(const sigc::slot2<void,iPlayableService*,int> &event, ePtr<eConnection> &connection)
+RESULT eServiceHDMI::connectEvent(const sigc::slot<void(iPlayableService*,int)> &event, ePtr<eConnection> &connection)
 {
 	connection = new eConnection((iPlayableService*)this, m_event.connect(event));
 	return 0;
@@ -127,14 +127,14 @@ RESULT eServiceHDMI::start()
 	if (!m_noaudio)
 		m_decoder->setAudioPID(1, 0);
 	m_decoder->play();
-	m_event(this, evStart);
+	m_event.emit(this, evStart);
 	return 0;
 }
 
 RESULT eServiceHDMI::stop()
 {
 	m_decoder = NULL;
-	m_event(this, evStopped);
+	m_event.emit(this, evStopped);
 	return 0;
 }
 
@@ -210,7 +210,7 @@ RESULT eServiceHDMIRecord::prepareStreaming(bool descramble, bool includeecm)
 RESULT eServiceHDMIRecord::start(bool simulate)
 {
 	m_simulate = simulate;
-	m_event((iRecordableService*)this, evStart);
+	m_event.emit((iRecordableService*)this, evStart);
 	return doRecord();
 }
 
@@ -241,7 +241,7 @@ RESULT eServiceHDMIRecord::stop()
 		m_encoder_fd = -1;
 		m_state = stateIdle;
 	}
-	m_event((iRecordableService*)this, evRecordStopped);
+	m_event.emit((iRecordableService*)this, evRecordStopped);
 	return 0;
 }
 
@@ -262,7 +262,7 @@ int eServiceHDMIRecord::doRecord()
 	if (err)
 	{
 		m_error = errTuneFailed;
-		m_event((iRecordableService*)this, evRecordFailed);
+		m_event.emit((iRecordableService*)this, evRecordFailed);
 		return err;
 	}
 
@@ -275,7 +275,7 @@ int eServiceHDMIRecord::doRecord()
 		{
 			eDebug("[eServiceHDMIRecord] can't open recording file: %m");
 			m_error = errOpenRecordFile;
-			m_event((iRecordableService*)this, evRecordFailed);
+			m_event.emit((iRecordableService*)this, evRecordFailed);
 			return errOpenRecordFile;
 		}
 
@@ -298,7 +298,7 @@ int eServiceHDMIRecord::doRecord()
 	}
 
 	m_error = 0;
-	m_event((iRecordableService*)this, evRecordRunning);
+	m_event.emit((iRecordableService*)this, evRecordRunning);
 	return 0;
 }
 
@@ -320,7 +320,7 @@ RESULT eServiceHDMIRecord::frontendInfo(ePtr<iFrontendInformation> &ptr)
 	return 0;
 }
 
-RESULT eServiceHDMIRecord::connectEvent(const sigc::slot2<void,iRecordableService*,int> &event, ePtr<eConnection> &connection)
+RESULT eServiceHDMIRecord::connectEvent(const sigc::slot<void(iRecordableService*,int)> &event, ePtr<eConnection> &connection)
 {
 	connection = new eConnection((iRecordableService*)this, m_event.connect(event));
 	return 0;

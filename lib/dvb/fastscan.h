@@ -195,10 +195,10 @@ public:
 	int createTable(unsigned int nr, const uint8_t *data, unsigned int max)
 	{
 		seen.insert(nr);
-		tableProgress(seen.size(), max);
+		tableProgress.emit(seen.size(), max);
 		return eTable<Section>::createTable(nr, data, max);
 	}
-	sigc::signal2<void, int, int> tableProgress;
+	sigc::signal<void(int, int)> tableProgress;
 };
 
 template <class Section>

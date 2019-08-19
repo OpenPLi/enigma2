@@ -48,7 +48,7 @@ public:
 	virtual ~eServiceTS();
 
 	// iPlayableService
-	RESULT connectEvent(const sigc::slot2<void,iPlayableService*,int> &event, ePtr<eConnection> &connection);
+	RESULT connectEvent(const sigc::slot<void(iPlayableService*,int)> &event, ePtr<eConnection> &connection);
 	RESULT start();
 	RESULT stop();
 	RESULT pause(ePtr<iPauseableService> &ptr);
@@ -111,9 +111,10 @@ private:
 	ePtr<TSAudioInfo> m_audioInfo;
 
 	eServiceTS(const eServiceReference &url);
+
 	int openHttpConnection(std::string url);
 
-	sigc::signal2<void,iPlayableService*,int> m_event;
+	sigc::signal<void(iPlayableService*,int)> m_event;
 	eFixedMessagePump<int> m_pump;
 	void recv_event(int evt);
 	void setAudioPid(int pid, int type);
@@ -134,7 +135,7 @@ public:
 	RESULT getAudioInfo(ePtr<TSAudioInfo> &ptr);
 
 	enum { evtEOS, evtSOS, evtReadError, evtWriteError, evtUser, evtStreamInfo };
-	sigc::signal1<void,int> m_event;
+	sigc::signal<void(int)> m_event;
 private:
 	bool m_stop;
 	bool m_running;
