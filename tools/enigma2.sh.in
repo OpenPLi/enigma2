@@ -22,7 +22,13 @@ LIBS=@libdir@/libopen.so.0.0.0
 while : ; do
 	# show bootlogo on enigma2 start
 	if [ -x @bindir@/showiframe ]; then
-		if [ -f @sysconfdir@/enigma2/backdrop.mvi ]; then
+		skin=`sed -En 's;config\.skin\.primary_skin=(.+)/skin\.xml;\1;p' @sysconfdir@/enigma2/settings`
+		if [ -z $skin ]; then
+			skin=`strings -n 10 @prefix@/lib/enigma2/python/skin.pyo | egrep -o -m 1 ".+/skin.xml" | sed 's|/skin.xml.*||'`
+		fi
+		if [ -n $skin -a -f @datarootdir@/enigma2/$skin/backdrop.mvi ]; then
+			@bindir@/showiframe @datarootdir@/enigma2/$skin/backdrop.mvi
+		elif [ -f @sysconfdir@/enigma2/backdrop.mvi ]; then
 			@bindir@/showiframe @sysconfdir@/enigma2/backdrop.mvi
 		elif [ -f @sysconfdir@/enigma2/bootlogo.mvi ]; then
 			@bindir@/showiframe @sysconfdir@/enigma2/bootlogo.mvi
