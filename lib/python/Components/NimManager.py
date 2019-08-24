@@ -891,10 +891,21 @@ class NimManager:
 	def getI2CDevice(self, slotid):
 		return self.nim_slots[slotid].getI2C()
 
-	def getNimListOfType(self, type, exception = -1):
+	def getNimListOfType(self, type, exception=-1):
 		# returns a list of indexes for NIMs compatible to the given type, except for 'exception'
-		list = [x.slot for x in self.nim_slots if x.isCompatible(type) and x.slot != exception]
-		return list
+		return [x.slot for x in self.nim_slots if x.isCompatible(type) and x.slot != exception]
+
+	def getEnabledNimListOfType(self, type, exception=-1):
+		nimList = []
+		for n in self.nim_slots:
+			if not n.isCompatible(type) or n.slot == exception or n.config_mode == "nothing":
+				continue
+			if type.startswith("DVB-S") and n.config_mode in ("loopthrough", "satposdepends"):
+				root_id = nimmanager.sec.getRoot(n.slot_id, int(n.config.connectedTo.value))
+				if n.type == nimmanager.nim_slots[root_id].type: # check if connected from a DVB-S to DVB-S2 Nim or vice versa
+					continue
+			nimList.append((str(n.slot), n.friendly_full_description))
+		return nimList
 
 	def __init__(self):
 		self.satList = [ ]
