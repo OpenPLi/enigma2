@@ -97,8 +97,11 @@ class InstallWizard(Screen, ConfigListScreen):
 			self.list.append(getConfigListEntry(_("I do not want to perform any service scans"), self.noscan))
 			self.list.append(getConfigListEntry(_("Do an automatic service scan now"), self.autoscan))
 			self.list.append(getConfigListEntry(_("Do a manual service scan now"), self.manualscan))
-			self.list.append(getConfigListEntry(_("Do a fast service scan now"), self.fastscan))
-			self.list.append(getConfigListEntry(_("Do a cable service scan now"), self.cablescan))
+			from Components.NimManager import nimmanager
+			if nimmanager.getEnabledNimListOfType("DVB-S"):
+				self.list.append(getConfigListEntry(_("Do a fast service scan now"), self.fastscan))
+			if nimmanager.getEnabledNimListOfType("DVB-C"):
+				self.list.append(getConfigListEntry(_("Do a cable service scan now"), self.cablescan))
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
