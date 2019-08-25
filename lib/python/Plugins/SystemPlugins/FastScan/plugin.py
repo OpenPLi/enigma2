@@ -22,6 +22,41 @@ config.misc.fastscan.auto = ConfigSelection(default="true", choices=[("true", _(
 config.misc.fastscan.autoproviders = ConfigText(default="()")
 config.misc.fastscan.drop = ConfigYesNo(default = True)
 
+providers = [
+	('Canal Digitaal', (1, 900, True)),
+	('TV Vlaanderen', (1, 910, True)),
+	('TéléSAT', (0, 920, True)),
+	('HD Austria', (0, 950, False)),
+	('Diveo', (0, 960, False)),
+	('Skylink Czech Republic', (1, 30, False)),
+	('Skylink Slovak Republic', (1, 31, False)),
+	('FreeSAT CZ', (2, 82, False)),
+	('FreeSAT SK', (2, 83, False)),
+	('FocusSAT Thor', (2, 84, False)),
+	('UPC Direct Thor', (2, 81, False)),
+	('KabelKiosk', (0, 970, False)),
+	('TéléSAT Astra3', (1, 920, True)),
+	('HD Austria Astra3', (1, 950, False)),
+	('Diveo Astra3', (1, 960, False)),
+	('Canal Digitaal Astra 1', (0, 900, True)),
+	('TV Vlaanderen  Astra 1', (0, 910, True))]
+
+transponders = ((12515000, 22000000, eDVBFrontendParametersSatellite.FEC_5_6, 192,
+	eDVBFrontendParametersSatellite.Polarisation_Horizontal, eDVBFrontendParametersSatellite.Inversion_Unknown,
+	eDVBFrontendParametersSatellite.System_DVB_S, eDVBFrontendParametersSatellite.Modulation_QPSK,
+	eDVBFrontendParametersSatellite.RollOff_alpha_0_35, eDVBFrontendParametersSatellite.Pilot_Off),
+	(12070000, 27500000, eDVBFrontendParametersSatellite.FEC_3_4, 235,
+	eDVBFrontendParametersSatellite.Polarisation_Horizontal, eDVBFrontendParametersSatellite.Inversion_Unknown,
+	eDVBFrontendParametersSatellite.System_DVB_S, eDVBFrontendParametersSatellite.Modulation_QPSK,
+	eDVBFrontendParametersSatellite.RollOff_alpha_0_35, eDVBFrontendParametersSatellite.Pilot_Off),
+	(11727000, 28000000, eDVBFrontendParametersSatellite.FEC_7_8, 3592,
+	eDVBFrontendParametersSatellite.Polarisation_Vertical, eDVBFrontendParametersSatellite.Inversion_Unknown,
+	eDVBFrontendParametersSatellite.System_DVB_S, eDVBFrontendParametersSatellite.Modulation_QPSK,
+	eDVBFrontendParametersSatellite.RollOff_alpha_0_35, eDVBFrontendParametersSatellite.Pilot_Off))
+
+def getProviderList():
+	return [x[0] for x in providers if nimmanager.getNimListForSat(transponders[x[1][0]][3])]
+
 class FastScanStatus(Screen):
 	skin = """
 	<screen position="150,115" size="420,180" title="Fast Scan">
@@ -121,39 +156,7 @@ class FastScanScreen(ConfigListScreen, Screen):
 		<widget name="introduction" position="10,265" size="500,25" font="Regular;20" halign="center" />
 	</screen>"""
 
-	providers = [
-		('Canal Digitaal', (1, 900, True)),
-		('TV Vlaanderen', (1, 910, True)),
-		('TéléSAT', (0, 920, True)),
-		('HD Austria', (0, 950, False)),
-		('Diveo', (0, 960, False)),
-		('Skylink Czech Republic', (1, 30, False)),
-		('Skylink Slovak Republic', (1, 31, False)),
-		('FreeSAT CZ', (2, 82, False)),
-		('FreeSAT SK', (2, 83, False)),
-		('FocusSAT Thor', (2, 84, False)),
-		('UPC Direct Thor', (2, 81, False)),
-		('KabelKiosk', (0, 970, False)),
-		('TéléSAT Astra3', (1, 920, True)),
-		('HD Austria Astra3', (1, 950, False)),
-		('Diveo Astra3', (1, 960, False)),
-		('Canal Digitaal Astra 1', (0, 900, True)),
-		('TV Vlaanderen  Astra 1', (0, 910, True))]
-
-	transponders = ((12515000, 22000000, eDVBFrontendParametersSatellite.FEC_5_6, 192,
-		eDVBFrontendParametersSatellite.Polarisation_Horizontal, eDVBFrontendParametersSatellite.Inversion_Unknown,
-		eDVBFrontendParametersSatellite.System_DVB_S, eDVBFrontendParametersSatellite.Modulation_QPSK,
-		eDVBFrontendParametersSatellite.RollOff_alpha_0_35, eDVBFrontendParametersSatellite.Pilot_Off),
-		(12070000, 27500000, eDVBFrontendParametersSatellite.FEC_3_4, 235,
-		eDVBFrontendParametersSatellite.Polarisation_Horizontal, eDVBFrontendParametersSatellite.Inversion_Unknown,
-		eDVBFrontendParametersSatellite.System_DVB_S, eDVBFrontendParametersSatellite.Modulation_QPSK,
-		eDVBFrontendParametersSatellite.RollOff_alpha_0_35, eDVBFrontendParametersSatellite.Pilot_Off),
-		(11727000, 28000000, eDVBFrontendParametersSatellite.FEC_7_8, 3592,
-		eDVBFrontendParametersSatellite.Polarisation_Vertical, eDVBFrontendParametersSatellite.Inversion_Unknown,
-		eDVBFrontendParametersSatellite.System_DVB_S, eDVBFrontendParametersSatellite.Modulation_QPSK,
-		eDVBFrontendParametersSatellite.RollOff_alpha_0_35, eDVBFrontendParametersSatellite.Pilot_Off))
-
-	def __init__(self, session, nimList):
+	def __init__(self, session):
 		Screen.__init__(self, session)
 
 		self.setTitle(_("Fast Scan"))
@@ -166,18 +169,22 @@ class FastScanScreen(ConfigListScreen, Screen):
 			"menu": self.closeRecursive,
 		}, -2)
 
-		providerList = list(x[0] for x in self.providers)
 		lastConfiguration = eval(config.misc.fastscan.last_configuration.value)
-		if not lastConfiguration or not lastConfiguration[1] in [x[0] for x in self.providers]:
-			self.scan_provider = ConfigSelection(default=None, choices=[(None, _("None"))] + providerList)
-			self.scan_nims = ConfigSelection(default=nimList[0][0], choices=nimList)
+
+		def providerChanged(configEntry):
+			nimList = [(str(x), nimmanager.nim_slots[x].friendly_full_description) for x in nimmanager.getNimListForSat(transponders[[x[1][0] for x in providers if x[0] == configEntry.value][0]][3])]
+			self.scan_nims = ConfigSelection(default=lastConfiguration[0] if lastConfiguration and lastConfiguration[0] in [x[0] for x in nimList] else nimList[0][0], choices=nimList)
+
+		if not lastConfiguration or not lastConfiguration[1] in [x[0] for x in providers]:
+			self.scan_provider = ConfigSelection(default=None, choices=[(None, _("None"))] + getProviderList())
+			self.scan_provider.addNotifier(providerChanged)
 			self.scan_hd = ConfigYesNo(default=True)
 			self.scan_keepnumbering = ConfigYesNo(default=True)
 			self.scan_keepsettings = ConfigYesNo(default=False)
 			self.scan_create_radio_bouquet = ConfigYesNo(default=False)
 		else:
-			self.scan_provider = ConfigSelection(default=lastConfiguration[1], choices=[(None, _("None"))] + providerList)
-			self.scan_nims = ConfigSelection(default=lastConfiguration[0] if lastConfiguration[0] in [x[0] for x in nimList] else nimList[0][0], choices=nimList)
+			self.scan_provider = ConfigSelection(default=lastConfiguration[1], choices=[(None, _("None"))] + getProviderList())
+			self.scan_provider.addNotifier(providerChanged)
 			self.scan_hd = ConfigYesNo(default=lastConfiguration[2])
 			self.scan_keepnumbering = ConfigYesNo(default=lastConfiguration[3])
 			self.scan_keepsettings = ConfigYesNo(default=lastConfiguration[4])
@@ -187,7 +194,7 @@ class FastScanScreen(ConfigListScreen, Screen):
 		self.scanHD = getConfigListEntry(_("HD list"), self.scan_hd)
 		self.config_autoproviders = {}
 		auto_providers = config.misc.fastscan.autoproviders.value.split(",")
-		for provider in self.providers:
+		for provider in providers:
 			self.config_autoproviders[provider[0]] = ConfigYesNo(default=provider[0] in auto_providers )
 		self.list = []
 		ConfigListScreen.__init__(self, self.list)
@@ -209,8 +216,9 @@ class FastScanScreen(ConfigListScreen, Screen):
 			self.list.append(getConfigListEntry(_("Drop unconfigured satellites"), config.misc.fastscan.drop))
 			self.list.append(getConfigListEntry(_("Enable auto fast scan"), config.misc.fastscan.auto))
 			if config.misc.fastscan.auto.value == "multi":
-				for provider in self.providers:
-					self.list.append(getConfigListEntry(_("Enable auto fast scan for %s") % provider[0], self.config_autoproviders[provider[0]]))
+				for provider in providers:
+					if nimmanager.getNimListForSat(transponders[provider[1][0]][3]):
+						self.list.append(getConfigListEntry(_("Enable auto fast scan for %s") % provider[0], self.config_autoproviders[provider[0]]))
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
@@ -226,7 +234,7 @@ class FastScanScreen(ConfigListScreen, Screen):
 		if self.scan_provider.value:
 			config.misc.fastscan.last_configuration.value = `(self.scan_nims.value, self.scan_provider.value, self.scan_hd.value, self.scan_keepnumbering.value, self.scan_keepsettings.value, self.scan_create_radio_bouquet.value)`
 			auto_providers = []
-			for provider in self.providers:
+			for provider in providers:
 				if self.config_autoproviders[provider[0]].value:
 					auto_providers.append(provider[0])
 			config.misc.fastscan.autoproviders.value = ",".join(auto_providers)
@@ -245,23 +253,23 @@ class FastScanScreen(ConfigListScreen, Screen):
 
 	def getTransponderParameters(self, number):
 		transponderParameters = eDVBFrontendParametersSatellite()
-		transponderParameters.frequency = self.transponders[number][0]
-		transponderParameters.symbol_rate = self.transponders[number][1]
-		transponderParameters.fec = self.transponders[number][2]
-		transponderParameters.orbital_position = self.transponders[number][3]
-		transponderParameters.polarisation = self.transponders[number][4]
-		transponderParameters.inversion = self.transponders[number][5]
-		transponderParameters.system = self.transponders[number][6]
-		transponderParameters.modulation = self.transponders[number][7]
-		transponderParameters.rolloff = self.transponders[number][8]
-		transponderParameters.pilot = self.transponders[number][9]
+		transponderParameters.frequency = transponders[number][0]
+		transponderParameters.symbol_rate = transponders[number][1]
+		transponderParameters.fec = transponders[number][2]
+		transponderParameters.orbital_position = transponders[number][3]
+		transponderParameters.polarisation = transponders[number][4]
+		transponderParameters.inversion = transponders[number][5]
+		transponderParameters.system = transponders[number][6]
+		transponderParameters.modulation = transponders[number][7]
+		transponderParameters.rolloff = transponders[number][8]
+		transponderParameters.pilot = transponders[number][9]
 		transponderParameters.is_id = eDVBFrontendParametersSatellite.No_Stream_Id_Filter
 		transponderParameters.pls_mode = eDVBFrontendParametersSatellite.PLS_Gold
 		transponderParameters.pls_code = eDVBFrontendParametersSatellite.PLS_Default_Gold_Code
 		return transponderParameters
 
 	def startScan(self):
-		parameters = tuple(x[1] for x in self.providers if x[0] == self.scan_provider.value)[0]
+		parameters = tuple(x[1] for x in providers if x[0] == self.scan_provider.value)[0]
 		pid = parameters[1]
 		if self.scan_hd.value and parameters[2]:
 			pid += 1
@@ -289,7 +297,7 @@ class FastScanAutoScreen(FastScanScreen):
 
 		self.onClose.append(self.__onClose)
 
-		parameters = tuple(x[1] for x in self.providers if x[0] == lastConfiguration[1])
+		parameters = tuple(x[1] for x in providers if x[0] == lastConfiguration[1])
 		if parameters:
 			parameters = parameters[0]
 			pid = parameters[1]
@@ -326,7 +334,7 @@ def FastScanMain(session, **kwargs):
 	if session.nav.RecordTimer.isRecording():
 		session.open(MessageBox, _("A recording is currently running. Please stop the recording before trying to scan."), MessageBox.TYPE_ERROR)
 	else:
-		session.open(FastScanScreen, nimmanager.getEnabledNimListOfType("DVB-S"))
+		session.open(FastScanScreen)
 
 Session = None
 FastScanAutoStartTimer = eTimer()
@@ -382,7 +390,7 @@ def autostart(reason, **kwargs):
 		config.misc.standbyCounter.removeNotifier(standbyCountChanged)
 
 def FastScanStart(menuid, **kwargs):
-	if menuid == "scan" and nimmanager.getEnabledNimListOfType("DVB-S"):
+	if menuid == "scan" and getProviderList():
 		return [(_("Fast Scan"), FastScanMain, "fastscan", None)]
 	else:
 		return []
