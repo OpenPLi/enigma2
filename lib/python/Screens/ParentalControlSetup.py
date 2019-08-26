@@ -103,7 +103,7 @@ class ParentalControlSetup(Screen, ConfigListScreen, ProtectedScreen):
 				self.oldPinEntered(True)
 		elif self["config"].l.getCurrentSelection() == self.reloadLists:
 			from Components.ParentalControl import parentalControl
-			parentalControl.open()
+			parentalControl.open(True)
 			self.session.open(MessageBox, _("Lists reloaded!"), MessageBox.TYPE_INFO, timeout=3)
 		else:
 			ConfigListScreen.keyRight(self)
