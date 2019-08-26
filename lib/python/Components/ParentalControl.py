@@ -224,7 +224,9 @@ class ParentalControl:
 	def save(self):
 		self.saveListToFile(LIST_BLACKLIST, self.blacklist)
 
-	def open(self):
+	def open(self, save=False):
+		if save:
+			self.save()
 		self.blacklist = self.openListFromFile(LIST_BLACKLIST)
 		self.hideBlacklist()
 		if not self.filesOpened:
