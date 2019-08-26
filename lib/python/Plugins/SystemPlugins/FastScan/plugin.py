@@ -172,8 +172,10 @@ class FastScanScreen(ConfigListScreen, Screen):
 		lastConfiguration = eval(config.misc.fastscan.last_configuration.value)
 
 		def providerChanged(configEntry):
-			nimList = [(str(x), nimmanager.nim_slots[x].friendly_full_description) for x in nimmanager.getNimListForSat(transponders[[x[1][0] for x in providers if x[0] == configEntry.value][0]][3])]
-			self.scan_nims = ConfigSelection(default=lastConfiguration[0] if lastConfiguration and lastConfiguration[0] in [x[0] for x in nimList] else nimList[0][0], choices=nimList)
+			if configEntry.value:
+				nimList = [(str(x), nimmanager.nim_slots[x].friendly_full_description) for x in nimmanager.getNimListForSat(transponders[[x[1][0] for x in providers if x[0] == configEntry.value][0]][3])]
+				self.scan_nims = ConfigSelection(default=lastConfiguration[0] if lastConfiguration and lastConfiguration[0] in [x[0] for x in nimList] else nimList[0][0], choices=nimList)
+				self.tunerEntry = getConfigListEntry(_("Tuner"), self.scan_nims)
 
 		if not lastConfiguration or not lastConfiguration[1] in [x[0] for x in providers]:
 			self.scan_provider = ConfigSelection(default=None, choices=[(None, _("None"))] + getProviderList())
@@ -189,7 +191,6 @@ class FastScanScreen(ConfigListScreen, Screen):
 			self.scan_keepnumbering = ConfigYesNo(default=lastConfiguration[3])
 			self.scan_keepsettings = ConfigYesNo(default=lastConfiguration[4])
 			self.scan_create_radio_bouquet = ConfigYesNo(default=len(lastConfiguration) > 5 and lastConfiguration[5])
-		self.tunerEntry = getConfigListEntry(_("Tuner"), self.scan_nims)
 		self.scanProvider = getConfigListEntry(_("Provider"), self.scan_provider)
 		self.scanHD = getConfigListEntry(_("HD list"), self.scan_hd)
 		self.config_autoproviders = {}
