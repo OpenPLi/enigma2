@@ -896,16 +896,14 @@ class NimManager:
 		return [x.slot for x in self.nim_slots if x.isCompatible(type) and x.slot != exception]
 
 	def getEnabledNimListOfType(self, type, exception=-1):
-		nimList = []
-		for n in self.nim_slots:
-			if not n.isCompatible(type) or n.slot == exception or n.config_mode == "nothing":
-				continue
-			if type.startswith("DVB-S") and n.config_mode in ("loopthrough", "satposdepends"):
-				root_id = nimmanager.sec.getRoot(n.slot_id, int(n.config.connectedTo.value))
-				if n.type == nimmanager.nim_slots[root_id].type: # check if connected from a DVB-S to DVB-S2 Nim or vice versa
-					continue
-			nimList.append((str(n.slot), n.friendly_full_description))
-		return nimList
+		def enabled(n):
+			if n.isCompatible(type) and n.slot != exception and n.config_mode != "nothing":
+				if type.startswith("DVB-S") and n.config_mode in ("loopthrough", "satposdepends"):
+					root_id = nimmanager.sec.getRoot(n.slot_id, int(n.config.connectedTo.value))
+					if n.type = nimmanager.nim_slots[root_id].type: # check if connected from a DVB-S to DVB-S2 Nim or vice versa
+						return True
+				return True	
+		return [x.slot for x in self.nim_slots if x.slot != exception and enabled(x)]
 
 	def __init__(self):
 		self.satList = [ ]
