@@ -176,7 +176,7 @@ def getActiveSubservicesForCurrentChannel(service):
 
 def hasActiveSubservicesForCurrentChannel(service):
 	activeSubservices = getActiveSubservicesForCurrentChannel(service)
-	return bool(activeSubservices and len(activeSubservices))
+	return bool(activeSubservices and len(activeSubservices) >= 2)
 
 class InfoBarDish:
 	def __init__(self):
@@ -2773,7 +2773,7 @@ class InfoBarSubserviceSelection:
 		if serviceRef:
 			service = self.session.nav.getCurrentService()
 			subservices = getActiveSubservicesForCurrentChannel(service)
-			if subservices and len(subservices) > 1 and serviceRef.toString() in [x[1] for x in subservices]:
+			if subservices and len(subservices) >= 2 and serviceRef.toString() in [x[1] for x in subservices]:
 				selection = [x[1] for x in subservices].index(serviceRef.toString())
 				selection += direction % len(subservices)
 				try:
@@ -2788,7 +2788,7 @@ class InfoBarSubserviceSelection:
 		if serviceRef:
 			service = self.session.nav.getCurrentService()
 			subservices = getActiveSubservicesForCurrentChannel(service)
-			if subservices and len(subservices) > 1 and (serviceRef.toString() in [x[1] for x in subservices] or service.subServices()):
+			if subservices and len(subservices) >= 2 and (serviceRef.toString() in [x[1] for x in subservices] or service.subServices()):
 				try:
 					selection = [x[1] for x in subservices].index(serviceRef.toString())
 				except:
