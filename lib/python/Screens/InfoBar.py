@@ -347,15 +347,12 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 			self.session.nav.playService(self.cur_service)
 
 	def doEofInternal(self, playing):
-		if not self.execing:
-			return
-		if not playing :
-			return
-		ref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
-		if ref:
-			delResumePoint(ref)
-		self.session.nav.stopService()
-		self.handleLeave(config.usage.on_movie_eof.value)
+		if self.execing and playing:
+			ref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
+			if ref:
+				delResumePoint(ref)
+			self.session.nav.stopService()
+			self.handleLeave(config.usage.on_movie_eof.value)
 
 	def up(self):
 		if self.servicelist and self.servicelist.dopipzap:
