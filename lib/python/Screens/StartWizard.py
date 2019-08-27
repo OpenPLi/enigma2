@@ -15,9 +15,10 @@ from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
 from Components.config import config, ConfigBoolean, configfile
 from LanguageSelection import LanguageWizard
-from enigma import eConsoleAppContainer, eTimer
+from enigma import eConsoleAppContainer, eTimer, eActionMap
 
 import os
+from sys import maxint
 
 config.misc.firstrun = ConfigBoolean(default = True)
 config.misc.languageselected = ConfigBoolean(default = True)
@@ -149,9 +150,12 @@ class AutoInstallWizard(Screen):
 			self["header"].setText(_("Autoinstalling Completed"))
 			self.delay = eTimer()
 			self.delay.callback.append(self.abort)
+			eActionMap.getInstance().bindAction('', -maxint - 1, self.abort)
 			self.delay.startLongTimer(5)
 
 	def abort(self):
+		self.delay.stop()
+		eActionMap.getInstance().unbindAction('', self.abort)
 		self.container.appClosed.remove(self.appClosed)
 		self.container.dataAvail.remove(self.dataAvail)
 		self.container = None
