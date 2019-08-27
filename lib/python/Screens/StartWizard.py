@@ -44,14 +44,12 @@ class StartWizard(WizardLanguage, Rc):
 
 def setLanguageFromBackup(backupfile):
 	try:
-		print backupfile
 		import tarfile
 		tar = tarfile.open(backupfile)
 		for member in tar.getmembers():
 			if member.name == 'etc/enigma2/settings':
 				for line in tar.extractfile(member):
 					if line.startswith('config.osd.language'):
-						print line
 						languageToSelect = line.strip().split('=')[1]
 						if languageToSelect:
 							from Components.Language import language
