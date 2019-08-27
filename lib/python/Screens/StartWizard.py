@@ -18,7 +18,6 @@ from LanguageSelection import LanguageWizard
 from enigma import eConsoleAppContainer, eTimer, eActionMap
 
 import os
-from sys import maxint
 
 config.misc.firstrun = ConfigBoolean(default = True)
 config.misc.languageselected = ConfigBoolean(default = True)
@@ -150,7 +149,7 @@ class AutoInstallWizard(Screen):
 			self["header"].setText(_("Autoinstalling Completed"))
 			self.delay = eTimer()
 			self.delay.callback.append(self.abort)
-			eActionMap.getInstance().bindAction('', -maxint - 1, self.abort)
+			eActionMap.getInstance().bindAction('', 0, self.abort)
 			self.delay.startLongTimer(5)
 
 	def abort(self):
