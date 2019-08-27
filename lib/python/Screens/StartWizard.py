@@ -106,7 +106,8 @@ class AutoInstallWizard(Screen):
 			autoinstallfiles = glob.glob('/media/*/backup/autoinstall') + glob.glob('/media/net/*/backup/autoinstall')
 		autoinstallfiles.sort(key=os.path.getmtime, reverse=True)
 		for autoinstallfile in autoinstallfiles:
-			self.packages = [package.strip() for package in open(autoinstallfile).readlines()]
+			autoinstalldir = os.path.dirname(autoinstallfile)
+			self.packages = [package.strip() for package in open(autoinstallfile).readlines()] + [os.path.join(autoinstalldir, file) for file in os.listdir(autoinstalldir) if file.endswith(".ipk")]
 			if self.packages:
 				self.number_of_packages = len(self.packages)
 				# make sure we have a valid package list before attempting to restore packages
