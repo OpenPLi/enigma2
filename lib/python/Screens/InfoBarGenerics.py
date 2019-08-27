@@ -155,9 +155,8 @@ def getActiveSubservicesForCurrentChannel(service):
 	activeSubservices = []
 	if current_service:
 		possibleSubservices = getPossibleSubservicesForCurrentChannel(current_service)
-		epgCache = eEPGCache.getInstance()
 		for subservice in possibleSubservices:
-			events = epgCache.lookupEvent(['BDTS', (subservice, 0, -1)])
+			events = eEPGCache.getInstance().lookupEvent(['BDTS', (subservice, 0, -1)])
 			if events and len(events) == 1:
 				event = events[0]
 				title = event[2]
