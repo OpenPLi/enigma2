@@ -176,7 +176,7 @@ def getActiveSubservicesForCurrentChannel(service):
 
 def hasActiveSubservicesForCurrentChannel(service):
 	activeSubservices = getActiveSubservicesForCurrentChannel(service)
-	return bool(activeSubservices and len(activeSubservices) >= 2)
+	return bool(activeSubservices)
 
 class InfoBarDish:
 	def __init__(self):
