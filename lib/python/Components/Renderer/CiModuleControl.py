@@ -1,5 +1,6 @@
 from Renderer import Renderer
-from enigma import eDVBCI_UI, eDVBCIInterfaces, eLabel, iPlayableService
+from enigma import eDVBCI_UI, eLabel, iPlayableService
+from Components.SystemInfo import SystemInfo
 from Components.VariableText import VariableText
 
 class CiModuleControl(Renderer, VariableText):
@@ -8,7 +9,6 @@ class CiModuleControl(Renderer, VariableText):
 		VariableText.__init__(self)
 		self.eDVBCIUIInstance = eDVBCI_UI.getInstance()
 		self.eDVBCIUIInstance and self.eDVBCIUIInstance.ciStateChanged.get().append(self.ciModuleStateChanged)
-		self.NUM_CI = eDVBCIInterfaces.getInstance() and eDVBCIInterfaces.getInstance().getNumOfSlots()
 		self.text = ""
 		self.allVisible = False
 
@@ -30,9 +30,10 @@ class CiModuleControl(Renderer, VariableText):
 	def changed(self, what):
 		if what == True or what[0] == self.CHANGED_SPECIFIC and what[1] == iPlayableService.evStart:
 			string = ""
-			if self.NUM_CI and self.NUM_CI > 0:
+			NUM_CI = SystemInfo["CommonInterface"]
+			if NUM_CI and NUM_CI > 0:
 				if self.eDVBCIUIInstance:
-					for slot in range(self.NUM_CI):
+					for slot in range(NUM_CI):
 						add_num = True
 						if string:
 							string += " "
