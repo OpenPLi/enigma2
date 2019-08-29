@@ -320,7 +320,7 @@ void eListboxServiceContent::sort()
 DEFINE_REF(eListboxServiceContent);
 
 eListboxServiceContent::eListboxServiceContent()
-	:m_visual_mode(visModeSimple), m_size(0), m_current_marked(false), m_itemheight(25), m_hide_number_marker(false), m_servicetype_icon_mode(0), m_crypto_icon_mode(0), m_record_indicator_mode(0), m_column_width(0), m_progressbar_height(6), m_progressbar_border_width(2), m_nonplayable_margins(10), m_items_distances(8)
+	:m_visual_mode(visModeSimple), m_size(0), m_current_marked(false), m_itemheight(25), m_hide_number_marker(false), m_show_two_lines(false), m_servicetype_icon_mode(0), m_crypto_icon_mode(0), m_record_indicator_mode(0), m_column_width(0), m_progressbar_height(6), m_progressbar_border_width(2), m_nonplayable_margins(10), m_items_distances(8)
 {
 	memset(m_color_set, 0, sizeof(m_color_set));
 	cursorHome();
@@ -739,6 +739,8 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 			painter.blit(local_style->m_selection, offset, eRect(), gPainter::BT_ALPHATEST);
 
 		int xoffset=0;  // used as offset when painting the folder/marker symbol or the serviceevent progress
+		int nameLeft=0, nameWidth=0, nameYoffs=0; // used as temporary values for 'show two lines' option
+
 		time_t now = time(0);
 
 		for (int e = 0; e != celServiceTypePixmap; ++e)
@@ -865,6 +867,8 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 					m_element_position[celServiceInfo].setTop(area.top());
 					m_element_position[celServiceInfo].setWidth(area.width() - (servicenameWidth + m_items_distances + xoffs));
 					m_element_position[celServiceInfo].setHeight(area.height());
+					nameLeft = area.left();
+					nameWidth = area.width();
 
 					if (isPlayable)
 					{
@@ -876,7 +880,7 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 							 * bit wider in case the icons are diffently
 							 * shaped, and to add a bit of margin between
 							 * icon and text. */
-							const int iconWidth = area.height() * 9 / 5;
+							const int iconWidth = area.height() * 9 / (m_show_two_lines ? 10 : 5);
 							m_element_position[celServiceInfo].setLeft(area.left() + iconWidth);
 							m_element_position[celServiceInfo].setWidth(area.width() - iconWidth);
 							area = m_element_position[celServiceName];
@@ -980,6 +984,11 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 							painter.blit(m_pixmaps[picRecord], ePoint(area.left() + offs, offset.y() + correction), area, gPainter::BT_ALPHATEST);
 							painter.clippop();
 						}
+						if (m_show_two_lines)
+						{
+							m_element_position[celServiceInfo].setLeft(nameLeft + xoffs);
+							m_element_position[celServiceInfo].setWidth(nameWidth - xoffs);
+						}
 					}
 				}
 
@@ -993,9 +1002,16 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 				if (flags & gPainter::RT_VALIGN_CENTER)
 				{
 					eRect bbox = para->getBoundBox();
-					yoffs = (area.height() - bbox.height()) / 2 - bbox.top();
+					if (m_show_two_lines && e == celServiceName && isPlayable)
+					{
+						yoffs = ((area.height()/2) - bbox.height()) / 2 - bbox.top();
+						nameYoffs = yoffs/2;
+					}
+					else if (m_show_two_lines && e == celServiceInfo)
+						yoffs = (area.height()/2) + (((area.height()/2) - bbox.height()) / 2) - (bbox.top() - nameYoffs);
+					else
+						yoffs = (area.height() - bbox.height())/2 - bbox.top();
 				}
-
 				painter.renderPara(para, offset+ePoint(xoffs, yoffs));
 			}
 			else if ((e == celFolderPixmap && m_cursor->flags & eServiceReference::isDirectory) ||
