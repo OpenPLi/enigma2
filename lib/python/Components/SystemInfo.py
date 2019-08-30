@@ -97,7 +97,7 @@ SystemInfo["Has3DSurroundSoftLimiter"] = fileExists("/proc/stb/audio/3dsurround_
 SystemInfo["hasXcoreVFD"] = HardwareInfo().get_device_model() in ('osmega','spycat4k','spycat4kmini','spycat4kcombo') and fileCheck("/sys/module/brcmstb_%s/parameters/pt6302_cgram" % HardwareInfo().get_device_model())
 SystemInfo["HasOfflineDecoding"] = HardwareInfo().get_device_model() not in ('osmini', 'osminiplus', 'et7000mini', 'et11000', 'mbmicro', 'mbtwinplus', 'mbmicrov2', 'et7000', 'et8500')
 SystemInfo["HasRootSubdir"] = fileHas("/proc/cmdline", "rootsubdir=")
-SystemInfo["canMultiBoot"] = SystemInfo["HasRootSubdir"] and (1, 4, "mmcblk0", False) or fileHas("/proc/cmdline", "_4.boxmode=") and (1, 4, "mmcblk0", False) or HardwareInfo().get_device_model() in ('gbue4k', 'gbquad4k') and (3, 3, "mmcblk0", True) or HardwareInfo().get_device_model() in ('e4hd') and (1, 4, "mmcblk0", False) or HardwareInfo().get_device_model() in ('osmio4k') and (1, 4, "mmcblk1", True)
+SystemInfo["canMultiBoot"] = SystemInfo["HasRootSubdir"] and (1, 4, "mmcblk0", False) or fileHas("/proc/cmdline", "_4.boxmode=") and (1, 4, "mmcblk0", False) or HardwareInfo().get_device_model() in ('gbue4k', 'gbquad4k') and (3, 3, "mmcblk0", True) or HardwareInfo().get_device_model() in ('e4hd') and (1, 4, "mmcblk0", False) or HardwareInfo().get_device_model() in ('osmio4k', 'osmio4kplus') and (1, 4, "mmcblk1", True)
 SystemInfo["canMode12"] = fileHas("/proc/cmdline", "_4.boxmode=1 ") and '192M' or fileHas("/proc/cmdline", "_4.boxmode=12") and '192M'
 SystemInfo["canFlashWithOfgwrite"] = not(HardwareInfo().get_device_model().startswith("dm"))
 SystemInfo["HDRSupport"] = fileExists("/proc/stb/hdmi/hlg_support_choices") and fileCheck("/proc/stb/hdmi/hlg_support")
