@@ -2086,11 +2086,13 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 		if enable_pipzap and self.dopipzap:
 			ref = self.session.pip.getCurrentService()
 			if ref is None or ref != nref:
-				nref = self.session.pip.resolveAlternatePipService(nref)
-				if nref and (not checkParentalControl or Components.ParentalControl.parentalControl.isServicePlayable(nref, boundFunction(self.zap, enable_pipzap=True, checkParentalControl=False))):
-					self.session.pip.playService(nref)
-					self.__evServiceStart()
-					self.showPipzapMessage()
+				if nref:
+					if not checkParentalControl or Components.ParentalControl.parentalControl.isServicePlayable(nref, boundFunction(self.zap, enable_pipzap=True, checkParentalContr
+						self.session.pip.playService(self.session.pip.resolveAlternatePipService(nref))
+						self.__evServiceStart()
+						self.showPipzapMessage()
+						self.setStartRoot(self.curRoot)
+						self.setCurrentSelection(nref)
 				else:
 					self.setStartRoot(self.curRoot)
 					self.setCurrentSelection(ref)
