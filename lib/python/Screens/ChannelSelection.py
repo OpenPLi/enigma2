@@ -2083,7 +2083,6 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 						self.session.pip.playService(nref)
 						self.__evServiceStart()
 						self.showPipzapMessage()
-						self.setStartRoot(self.curRoot)
 						self.setCurrentSelection(nref)
 				else:
 					self.setStartRoot(self.curRoot)
