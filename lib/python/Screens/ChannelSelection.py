@@ -2080,7 +2080,7 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 			if ref is None or ref != nref:
 				if nref:
 					if not checkParentalControl or Components.ParentalControl.parentalControl.isServicePlayable(nref, boundFunction(self.zap, enable_pipzap=True, checkParentalControl=False)):
-						self.session.pip.playService(self.session.pip.resolveAlternatePipService(nref))
+						self.session.pip.playService(nref)
 						self.__evServiceStart()
 						self.showPipzapMessage()
 						self.setStartRoot(self.curRoot)
