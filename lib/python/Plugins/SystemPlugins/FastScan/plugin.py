@@ -177,20 +177,21 @@ class FastScanScreen(ConfigListScreen, Screen):
 				self.scan_nims = ConfigSelection(default=lastConfiguration[0] if lastConfiguration and lastConfiguration[0] in [x[0] for x in nimList] else nimList[0][0], choices=nimList)
 				self.tunerEntry = getConfigListEntry(_("Tuner"), self.scan_nims)
 
-		if not lastConfiguration or not lastConfiguration[1] in [x[0] for x in providers]:
-			self.scan_provider = ConfigSelection(default=None, choices=[(None, _("None"))] + getProviderList())
-			self.scan_provider.addNotifier(providerChanged)
-			self.scan_hd = ConfigYesNo(default=True)
-			self.scan_keepnumbering = ConfigYesNo(default=True)
-			self.scan_keepsettings = ConfigYesNo(default=False)
-			self.scan_create_radio_bouquet = ConfigYesNo(default=False)
-		else:
-			self.scan_provider = ConfigSelection(default=lastConfiguration[1], choices=[(None, _("None"))] + getProviderList())
+		providerList = getProviderList();
+		if lastConfiguration and lastConfiguration[1] in providerList:
+			self.scan_provider = ConfigSelection(default=lastConfiguration[1], choices=[(None, _("None"))] + providerList)
 			self.scan_provider.addNotifier(providerChanged)
 			self.scan_hd = ConfigYesNo(default=lastConfiguration[2])
 			self.scan_keepnumbering = ConfigYesNo(default=lastConfiguration[3])
 			self.scan_keepsettings = ConfigYesNo(default=lastConfiguration[4])
 			self.scan_create_radio_bouquet = ConfigYesNo(default=len(lastConfiguration) > 5 and lastConfiguration[5])
+		else:
+			self.scan_provider = ConfigSelection(default=None, choices=[(None, _("None"))] + providerList)
+			self.scan_provider.addNotifier(providerChanged)
+			self.scan_hd = ConfigYesNo(default=True)
+			self.scan_keepnumbering = ConfigYesNo(default=True)
+			self.scan_keepsettings = ConfigYesNo(default=False)
+			self.scan_create_radio_bouquet = ConfigYesNo(default=False)
 		self.scanProvider = getConfigListEntry(_("Provider"), self.scan_provider)
 		self.scanHD = getConfigListEntry(_("HD list"), self.scan_hd)
 		self.config_autoproviders = {}
