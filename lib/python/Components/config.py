@@ -298,7 +298,7 @@ class ConfigSelection(ConfigElement):
 
 		self._descr = None
 		self.default = self._value = self.last_value = default
-		self.graphic = True
+		self.graphic = graphic
 
 	def setChoices(self, choices, default=None):
 		self.choices = choicesList(choices)
