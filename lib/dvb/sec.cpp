@@ -393,9 +393,9 @@ RESULT eDVBSatelliteEquipmentControl::prepare(iDVBFrontend &frontend, const eDVB
 			if(!is_unicable)
 			{
 				// calc Frequency
-				int local = absdiff(sat.frequency, lof);
+				int local = lnb_param.m_reversed_spectrum ? absdiff(lof, sat.frequency) : absdiff(sat.frequency, lof);
 				frequency = ((((local * 2) / 125) + 1) / 2) * 125;
-				frontend.setData(eDVBFrontend::FREQ_OFFSET, sat.frequency - frequency);
+				frontend.setData(eDVBFrontend::FREQ_OFFSET, lnb_param.m_reversed_spectrum ? frequency - sat.frequency : sat.frequency - frequency);
 
 				/* Dishpro bandstacking HACK */
 				if (lnb_param.m_lof_threshold == 1000)
