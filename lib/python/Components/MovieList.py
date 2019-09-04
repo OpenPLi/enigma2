@@ -622,7 +622,7 @@ class MovieList(GUIComponent):
 				break
 			if config.ParentalControl.servicepinactive.value and config.ParentalControl.storeservicepin.value != "never":
 				from Components.ParentalControl import parentalControl
-				if not parentalControl.sessionPinCached and parentalControl.isProtected(serviceref):
+				if not parentalControl.sessionPinCached and parentalControl.isProtected(serviceref) and config.ParentalControl.storeservicepin.value != 'never' and config.ParentalControl.hideBlacklist.value:
 					continue
 			info = serviceHandler.info(serviceref)
 			if info is None:
