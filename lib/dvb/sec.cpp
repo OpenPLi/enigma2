@@ -221,9 +221,8 @@ int eDVBSatelliteEquipmentControl::canTune(const eDVBFrontendParametersSatellite
 
 				if (ret && !is_unicable)
 				{
-					int lof = sat.frequency > lnb_param.m_lof_threshold ?
-						lnb_param.m_lof_hi : lnb_param.m_lof_lo;
-					unsigned int tuner_freq = absdiff(sat.frequency, lof);
+					int lof = sat.frequency > lnb_param.m_lof_threshold ? lnb_param.m_lof_hi : lnb_param.m_lof_lo;
+					unsigned int tuner_freq = lnb_param.m_reversed_spectrum ? absdiff(lof, sat.frequency) : absdiff(sat.frequency, lof);
 					if (tuner_freq < fe_info.frequency_min || tuner_freq > fe_info.frequency_max)
 						ret = 0;
 				}
@@ -1258,6 +1257,16 @@ RESULT eDVBSatelliteEquipmentControl::setLNBThreshold(int threshold)
 	eSecDebug("[eDVBSatelliteEquipmentControl::setLNBThreshold] threshold=%d", threshold);
 	if ( currentLNBValid() )
 		m_lnbs[m_lnbidx].m_lof_threshold = threshold;
+	else
+		return -ENOENT;
+	return 0;
+}
+
+RESULT eDVBSatelliteEquipmentControl::setLNBReversedSpectrum(bool reversedspectrum)
+{
+	eSecDebug("[eDVBSatelliteEquipmentControl::setLNBReversedSpectrum] threshold=%d", reversedspectrum);
+	if ( currentLNBValid() )
+		m_lnbs[m_lnbidx].m_reversed_spectrum = reversedspectrum;
 	else
 		return -ENOENT;
 	return 0;
