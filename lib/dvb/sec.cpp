@@ -1264,7 +1264,7 @@ RESULT eDVBSatelliteEquipmentControl::setLNBThreshold(int threshold)
 
 RESULT eDVBSatelliteEquipmentControl::setLNBReversedSpectrum(bool reversedspectrum)
 {
-	eSecDebug("[eDVBSatelliteEquipmentControl::setLNBReversedSpectrum] threshold=%d", reversedspectrum);
+	eSecDebug("[eDVBSatelliteEquipmentControl::setLNBReversedSpectrum] reversed spectrum=%d", reversedspectrum);
 	if ( currentLNBValid() )
 		m_lnbs[m_lnbidx].m_reversed_spectrum = reversedspectrum;
 	else
