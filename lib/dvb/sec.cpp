@@ -221,8 +221,9 @@ int eDVBSatelliteEquipmentControl::canTune(const eDVBFrontendParametersSatellite
 
 				if (ret && !is_unicable)
 				{
-					int lof = sat.frequency > lnb_param.m_lof_threshold ? lnb_param.m_lof_hi : lnb_param.m_lof_lo;
-					unsigned int tuner_freq = lnb_param.m_reversed_spectrum ? absdiff(lof, sat.frequency) : absdiff(sat.frequency, lof);
+					int lof = sat.frequency > lnb_param.m_lof_threshold ?
+						lnb_param.m_lof_hi : lnb_param.m_lof_lo;
+					unsigned int tuner_freq = absdiff(sat.frequency, lof);
 					if (tuner_freq < fe_info.frequency_min || tuner_freq > fe_info.frequency_max)
 						ret = 0;
 				}
@@ -393,9 +394,9 @@ RESULT eDVBSatelliteEquipmentControl::prepare(iDVBFrontend &frontend, const eDVB
 			if(!is_unicable)
 			{
 				// calc Frequency
-				int local = lnb_param.m_reversed_spectrum ? absdiff(lof, sat.frequency) : absdiff(sat.frequency, lof);
+				int local = absdiff(sat.frequency, lof);
 				frequency = ((((local * 2) / 125) + 1) / 2) * 125;
-				frontend.setData(eDVBFrontend::FREQ_OFFSET, lnb_param.m_reversed_spectrum ? frequency - sat.frequency : sat.frequency - frequency);
+				frontend.setData(eDVBFrontend::FREQ_OFFSET, sat.frequency - frequency);
 
 				/* Dishpro bandstacking HACK */
 				if (lnb_param.m_lof_threshold == 1000)
@@ -1257,16 +1258,6 @@ RESULT eDVBSatelliteEquipmentControl::setLNBThreshold(int threshold)
 	eSecDebug("[eDVBSatelliteEquipmentControl::setLNBThreshold] threshold=%d", threshold);
 	if ( currentLNBValid() )
 		m_lnbs[m_lnbidx].m_lof_threshold = threshold;
-	else
-		return -ENOENT;
-	return 0;
-}
-
-RESULT eDVBSatelliteEquipmentControl::setLNBReversedSpectrum(bool reversedspectrum)
-{
-	eSecDebug("[eDVBSatelliteEquipmentControl::setLNBReversedSpectrum] reversed spectrum=%d", reversedspectrum);
-	if ( currentLNBValid() )
-		m_lnbs[m_lnbidx].m_reversed_spectrum = reversedspectrum;
 	else
 		return -ENOENT;
 	return 0;

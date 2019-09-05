@@ -379,8 +379,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 				self.list.append(getConfigListEntry(self.indent % "LOF/L", currLnb.lofl, _("Enter your low band local oscillator frequency. For more information consult the spec sheet of your LNB.")))
 				self.list.append(getConfigListEntry(self.indent % "LOF/H", currLnb.lofh, _("Enter your high band local oscillator frequency. For more information consult the spec sheet of your LNB.")))
 				self.list.append(getConfigListEntry(self.indent % _("Threshold"), currLnb.threshold, _("Enter the frequency at which you LNB switches between low band and high band. For more information consult the spec sheet of your LNB.")))
-			if currLnb.lof.value == "reversed_spectrum":
-				self.list.append(getConfigListEntry(self.indent % "LOF", currLnb.lofl, _("Enter your local oscillator frequency. For more information consult the spec sheet of your LNB.")))
+
 			if currLnb.lof.value == "unicable":
 				self.advancedUnicable = getConfigListEntry(self.indent % ("%s%s" % ("SCR (Unicable/JESS) ", _("type"))), currLnb.unicable, _("Select the type of Single Cable Reception device you are using."))
 				self.list.append(self.advancedUnicable)

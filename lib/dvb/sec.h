@@ -250,7 +250,7 @@ class eDVBSatelliteLNBParameters
 #ifndef SWIG
 			m_12V_relais_state = OFF;
 			m_lof_hi = m_lof_lo = m_lof_threshold = 0;
-			m_increased_voltage = m_reversed_spectrum = false;
+			m_increased_voltage = false;
 			m_prio = -1;
 #endif
 		}
@@ -267,7 +267,7 @@ class eDVBSatelliteLNBParameters
 				m_lof_lo,	// for 2 band universal lnb  9750 Mhz (low band offset frequency)
 				m_lof_threshold;	// for 2 band universal lnb 11750 Mhz (band switch frequency)
 
-	bool m_increased_voltage, m_reversed_spectrum; // use increased voltage ( 14/18V ) and reversed spectrum
+	bool m_increased_voltage; // use increased voltage ( 14/18V )
 
 	std::map<int, eDVBSatelliteSwitchParameters> m_satellites;
 	eDVBSatelliteDiseqcParameters m_diseqc_parameters;
@@ -361,7 +361,6 @@ public:
 	RESULT setLNBLOFL(int lofl);
 	RESULT setLNBLOFH(int lofh);
 	RESULT setLNBThreshold(int threshold);
-	RESULT setLNBReversedSpectrum(bool reversedspectrum);
 	RESULT setLNBIncreasedVoltage(bool onoff);
 	RESULT setLNBPrio(int prio);
 	RESULT setLNBNum(int LNBNum);
