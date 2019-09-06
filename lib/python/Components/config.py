@@ -298,7 +298,7 @@ class ConfigSelection(ConfigElement):
 
 		self._descr = None
 		self.default = self._value = self.last_value = default
-		self.graphic = graphic
+		self.graphic = graphic:
 
 	def setChoices(self, choices, default=None):
 		self.choices = choicesList(choices)
@@ -366,7 +366,7 @@ class ConfigSelection(ConfigElement):
 			self._descr = self.description[self.value]
 		from config import config
 		from skin import switchPixmap
-		if self.graphic and config.usage.boolean_graphic.value and switchPixmap.get("menu_on", False) and switchPixmap.get("menu_off", False):
+		if self.graphic and config.usage.boolean_graphic.value and "menu_on" in switchPixmap and "menu_off" in switchPixmap:
 			boolvalue = self._descr in (_('True'), _('true'), _('Yes'), _('yes'), _('Enable'), _('enable'), _('Enabled'), _('enabled'), _('On'), _('on'))
 			if boolvalue or self._descr in (_('False'), _('false'), _('No'), _('no'), _("Disable"), _('disable'), _('Disabled'), _('disabled'), _('Off'), _('off'), _('None'), _('none')):
 				return ('pixmap', switchPixmap["menu_on" if boolvalue else "menu_off"])
@@ -416,7 +416,7 @@ class ConfigBoolean(ConfigElement):
 	def getMulti(self, selected):
 		from config import config
 		from skin import switchPixmap
-		if self.graphic and config.usage.boolean_graphic.value and switchPixmap.get("menu_on", False) and switchPixmap.get("menu_off", False):
+		if self.graphic and config.usage.boolean_graphic.value and "menu_on" in switchPixmap and "menu_off" in switchPixmap:
 			return ('pixmap', switchPixmap["menu_on" if self.value else "menu_off"])
 		else:
 			return ("text", self.descriptions[self.value])
