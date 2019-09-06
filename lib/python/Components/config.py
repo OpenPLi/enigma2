@@ -367,7 +367,7 @@ class ConfigSelection(ConfigElement):
 		from config import config
 		from skin import switchPixmap
 		if self.graphic and config.usage.boolean_graphic.value and switchPixmap.get("menu_on", False) and switchPixmap.get("menu_off", False):
-			boolvalue = self._descr in (_('True'),_('Yes'),_('Enabled'),_('On')) or (False if self._descr in (_('False'),_('No'),_("Disable"),_('Disabled'),_('Off'), _("None")) else None)
+			boolvalue = self._descr.lower() in [_(x).lower() for x in ('True', 'Yes', 'Enabled', 'Enable', 'On')] or (False if self._descr.lower() in [_(x).lower() for x in ('False', 'No', "Disabled", 'Disable', 'Off', "None")] else None)
 			if boolvalue is not None:
 				return ('pixmap', switchPixmap["menu_on" if boolvalue else "menu_off"])
 		return ("text", self._descr)
