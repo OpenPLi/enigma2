@@ -1,5 +1,6 @@
 import xml.sax
 from Tools.Directories import crawlDirectory, resolveFilename, SCOPE_CONFIG, SCOPE_SKIN, copyfile, copytree
+from Components.Console import Console
 from Components.NimManager import nimmanager
 from Components.Ipkg import IpkgComponent
 from Components.config import config, configfile
@@ -367,7 +368,7 @@ class PackageInfoHandler:
 
 	def installIPK(self, directory, name):
 		if self.blocking:
-			os.system("opkg install " + directory + name)
+			Console().ePopen("opkg install %s%s" % (directory, name))
 			self.installNext()
 		else:
 			self.ipkg = IpkgComponent()
