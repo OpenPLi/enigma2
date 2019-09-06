@@ -274,8 +274,8 @@ class MovieBrowserConfiguration(ConfigListScreen,Screen):
 		for btn in ('red', 'green', 'yellow', 'blue', 'TV', 'Radio', 'Text', 'F1', 'F2', 'F3'):
 			configList.append(getConfigListEntry(_(btn), userDefinedButtons[btn]))
 		ConfigListScreen.__init__(self, configList, session=session, on_change = self.changedEntry)
-		self["key_red"] = Button(_("Cancel"))
-		self["key_green"] = Button(_("Ok"))
+		self["key_red"] = StaticText(_("Cancel"))
+		self["key_green"] = StaticText(_("Ok"))
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions",  "MenuActions"],
 		{
 			"red": self.cancel,
@@ -511,8 +511,8 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			InfoBarBase.__init__(self) # For ServiceEventTracker
 		ProtectedScreen.__init__(self)
 		self.protectContextMenu = True
+		self.initialRun = True
 
-		self.initUserDefinedActions()
 		self.tags = {}
 		if selectedmovie:
 			self.selected_tags = config.movielist.last_selected_tags.value
@@ -555,9 +555,6 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		self.movieOff = self.settings["movieoff"]
 
 		self["list"] = MovieList(None, list_type=self.settings["listtype"], sort_type=self.settings["moviesort"], descr_state=self.settings["description"])
-
-		self.loadLocalSettings()
-
 		self.list = self["list"]
 		self.selectedmovie = selectedmovie
 
@@ -569,28 +566,16 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		# Need list for init
 		SelectionEventInfo.__init__(self)
 
-		self["key_red"] = Button("")
-		self["key_green"] = Button("")
-		self["key_yellow"] = Button("")
-		self["key_blue"] = Button("")
-		self._updateButtonTexts()
-
+		self["key_red"] = StaticText("")
+		self["key_green"] = StaticText("")
+		self["key_yellow"] = StaticText("")
+		self["key_blue"] = StaticText("")
 		self["movie_off"] = MultiPixmap()
 		self["movie_off"].hide()
-
 		self["movie_sort"] = MultiPixmap()
 		self["movie_sort"].hide()
 
 		self["freeDiskSpace"] = self.diskinfo = DiskInfo(config.movielist.last_videodir.value, DiskInfo.FREE, update=False)
-
-		self["InfobarActions"] = HelpableActionMap(self, "InfobarActions",
-			{
-				"showMovies": (self.doPathSelect, _("Select the movie path")),
-				"showRadio": (self.btn_radio, boundFunction(self.getinitUserDefinedActionsDescription, "btn_radio")),
-				"showTv": (self.btn_tv, boundFunction(self.getinitUserDefinedActionsDescription, "btn_tv")),
-				"toggleTvRadio": (self.btn_tv, boundFunction(self.getinitUserDefinedActionsDescription, "btn_tv")),
-				"showText": (self.btn_text, boundFunction(self.getinitUserDefinedActionsDescription, "btn_text")),
-			})
 
 		self["NumberActions"] =  NumberActionMap(["NumberActions", "InputAsciiActions"],
 			{
@@ -621,19 +606,6 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				"showEventInfo": (self.showEventInformation, _("Show event details")),
 			})
 
-		self["ColorActions"] = HelpableActionMap(self, "ColorActions",
-			{
-				"red": (self.btn_red, boundFunction(self.getinitUserDefinedActionsDescription, "btn_red")),
-				"green": (self.btn_green, boundFunction(self.getinitUserDefinedActionsDescription, "btn_green")),
-				"yellow": (self.btn_yellow, boundFunction(self.getinitUserDefinedActionsDescription, "btn_yellow")),
-				"blue": (self.btn_blue, boundFunction(self.getinitUserDefinedActionsDescription, "btn_blue")),
-			})
-		self["FunctionKeyActions"] = HelpableActionMap(self, "FunctionKeyActions",
-			{
-				"f1": (self.btn_F1, boundFunction(self.getinitUserDefinedActionsDescription, "btn_F1")),
-				"f2": (self.btn_F2, boundFunction(self.getinitUserDefinedActionsDescription, "btn_F2")),
-				"f3": (self.btn_F3, boundFunction(self.getinitUserDefinedActionsDescription, "btn_F3")),
-			})
 		self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions",
 			{
 				"cancel": (self.abort, _("Exit movie list")),
@@ -644,6 +616,31 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				"up": (self.keyUp, _("Go up the list")),
 				"down": (self.keyDown, _("Go down the list"))
 			}, prio = -2)
+
+		def getinitUserDefinedActionsDescription(key):
+			return _(userDefinedActions.get(eval("config.movielist.%s.value" % key), _("Not Defined")))
+
+		self["InfobarActions"] = HelpableActionMap(self, "InfobarActions",
+			{
+				"showMovies": (self.doPathSelect, _("Select the movie path")),
+				"showRadio": (self.btn_radio, boundFunction(getinitUserDefinedActionsDescription, "btn_radio")),
+				"showTv": (self.btn_tv, boundFunction(getinitUserDefinedActionsDescription, "btn_tv")),
+				"toggleTvRadio": (self.btn_tv, boundFunction(getinitUserDefinedActionsDescription, "btn_tv")),
+				"showText": (self.btn_text, boundFunction(getinitUserDefinedActionsDescription, "btn_text")),
+			})
+		self["ColorActions"] = HelpableActionMap(self, "ColorActions",
+			{
+				"red": (self.btn_red, boundFunction(getinitUserDefinedActionsDescription, "btn_red")),
+				"green": (self.btn_green, boundFunction(getinitUserDefinedActionsDescription, "btn_green")),
+				"yellow": (self.btn_yellow, boundFunction(getinitUserDefinedActionsDescription, "btn_yellow")),
+				"blue": (self.btn_blue, boundFunction(getinitUserDefinedActionsDescription, "btn_blue")),
+			})
+		self["FunctionKeyActions"] = HelpableActionMap(self, "FunctionKeyActions",
+			{
+				"f1": (self.btn_F1, boundFunction(getinitUserDefinedActionsDescription, "btn_F1")),
+				"f2": (self.btn_F2, boundFunction(getinitUserDefinedActionsDescription, "btn_F2")),
+				"f3": (self.btn_F3, boundFunction(getinitUserDefinedActionsDescription, "btn_F3")),
+			})
 
 		tPreview = _("Preview")
 		tFwd = _("skip forward") + " (" + tPreview +")"
@@ -663,7 +660,6 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			}, prio=5)
 		self.onShown.append(self.onFirstTimeShown)
 		self.onLayoutFinish.append(self.saveListsize)
-		self.list.connectSelChanged(self.updateButtons)
 		self.onClose.append(self.__onClose)
 		NavigationInstance.instance.RecordTimer.on_state_change.append(self.list.updateRecordings)
 		self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
@@ -712,59 +708,57 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		rcinput.setKeyboardMode(rcinput.kmNone)
 
 	def initUserDefinedActions(self):
-		global userDefinedButtons, userDefinedActions, config
-		if userDefinedButtons is None:
-			userDefinedActions = {
-				'delete': _("Delete"),
-				'move': _("Move"),
-				'copy': _("Copy"),
-				'reset': _("Reset"),
-				'tags': _("Tags"),
-				'addbookmark': _("Add bookmark"),
-				'bookmarks': _("Location"),
-				'rename': _("Rename"),
-				'gohome': _("Home"),
-				'sort': _("Sort"),
-				'sortby': _("Sort by"),
-				'listtype': _("List type"),
-				'preview': _("Preview"),
-				'movieoff': _("On end of movie"),
-				'movieoff_menu': _("On end of movie (as menu)")
-			}
-			for p in plugins.getPlugins(PluginDescriptor.WHERE_MOVIELIST):
-				userDefinedActions['@' + p.name] = p.description
-			locations = []
-			buildMovieLocationList(locations)
-			prefix = _("Goto") + ": "
-			for d,p in locations:
-				if p and p.startswith('/'):
-					userDefinedActions[p] = prefix + d
-			config.movielist.btn_red = ConfigSelection(default='delete', choices=userDefinedActions)
-			config.movielist.btn_green = ConfigSelection(default='move', choices=userDefinedActions)
-			config.movielist.btn_yellow = ConfigSelection(default='bookmarks', choices=userDefinedActions)
-			config.movielist.btn_blue = ConfigSelection(default='sort', choices=userDefinedActions)
-			config.movielist.btn_radio = ConfigSelection(default='tags', choices=userDefinedActions)
-			config.movielist.btn_tv = ConfigSelection(default='gohome', choices=userDefinedActions)
-			config.movielist.btn_text = ConfigSelection(default='movieoff', choices=userDefinedActions)
-			config.movielist.btn_F1 = ConfigSelection(default='movieoff_menu', choices=userDefinedActions)
-			config.movielist.btn_F2 = ConfigSelection(default='preview', choices=userDefinedActions)
-			config.movielist.btn_F3 = ConfigSelection(default='/media', choices=userDefinedActions)
-			userDefinedButtons ={
-				'red': config.movielist.btn_red,
-				'green': config.movielist.btn_green,
-				'yellow': config.movielist.btn_yellow,
-				'blue': config.movielist.btn_blue,
-				'Radio': config.movielist.btn_radio,
-				'TV': config.movielist.btn_tv,
-				'TV2': config.movielist.btn_tv,
-				'Text': config.movielist.btn_text,
-				'F1': config.movielist.btn_F1,
-				'F2': config.movielist.btn_F2,
-				'F3': config.movielist.btn_F3
-			}
-
-	def getinitUserDefinedActionsDescription(self, key):
-		return _(userDefinedActions.get(eval("config.movielist." + key + ".value"), _("Not Defined")))
+		global userDefinedButtons, userDefinedActions
+		userDefinedActions = {
+			'delete': _("Delete"),
+			'move': _("Move"),
+			'copy': _("Copy"),
+			'reset': _("Reset"),
+			'tags': _("Tags"),
+			'addbookmark': _("Add bookmark"),
+			'bookmarks': _("Location"),
+			'rename': _("Rename"),
+			'gohome': _("Home"),
+			'sort': _("Sort"),
+			'sortby': _("Sort by"),
+			'listtype': _("List type"),
+			'preview': _("Preview"),
+			'movieoff': _("On end of movie"),
+			'movieoff_menu': _("On end of movie (as menu)")
+		}
+		for p in plugins.getPlugins(PluginDescriptor.WHERE_MOVIELIST):
+			userDefinedActions['@' + p.name] = p.description
+		locations = []
+		buildMovieLocationList(locations)
+		prefix = _("Goto") + ": "
+		for d,p in locations:
+			if p and p.startswith('/'):
+				userDefinedActions[p] = prefix + d
+		config.movielist.btn_red = ConfigSelection(default='delete', choices=userDefinedActions)
+		config.movielist.btn_green = ConfigSelection(default='move', choices=userDefinedActions)
+		config.movielist.btn_yellow = ConfigSelection(default='bookmarks', choices=userDefinedActions)
+		config.movielist.btn_blue = ConfigSelection(default='sort', choices=userDefinedActions)
+		config.movielist.btn_radio = ConfigSelection(default='tags', choices=userDefinedActions)
+		config.movielist.btn_tv = ConfigSelection(default='gohome', choices=userDefinedActions)
+		config.movielist.btn_text = ConfigSelection(default='movieoff', choices=userDefinedActions)
+		config.movielist.btn_F1 = ConfigSelection(default='movieoff_menu', choices=userDefinedActions)
+		config.movielist.btn_F2 = ConfigSelection(default='preview', choices=userDefinedActions)
+		config.movielist.btn_F3 = ConfigSelection(default='/media', choices=userDefinedActions)
+		userDefinedButtons ={
+			'red': config.movielist.btn_red,
+			'green': config.movielist.btn_green,
+			'yellow': config.movielist.btn_yellow,
+			'blue': config.movielist.btn_blue,
+			'Radio': config.movielist.btn_radio,
+			'TV': config.movielist.btn_tv,
+			'TV2': config.movielist.btn_tv,
+			'Text': config.movielist.btn_text,
+			'F1': config.movielist.btn_F1,
+			'F2': config.movielist.btn_F2,
+			'F3': config.movielist.btn_F3
+		}
+		self.list.connectSelChanged(self.updateButtons)
+		self._updateButtonTexts()
 
 	def _callButton(self, name):
 		if name.startswith('@'):
@@ -971,11 +965,11 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 					check = getattr(self, 'can_' + action)
 				except:
 					check = self.can_default
-			gui = self["key_" + name]
 			if check(item):
-				gui.show()
+				if userDefinedButtons[name].value != "sort":
+					self['key_%s' % name].setText(userDefinedActions[userDefinedButtons[name].value])
 			else:
-				gui.hide()
+				self["key_%s" % name].setText("")
 
 	def showEventInformation(self):
 		from Screens.EventView import EventViewSimple
@@ -1067,11 +1061,6 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		if seek is None or not seek.isCurrentlySeekable():
 			return None
 		return seek
-
-	def callLater(self, function):
-		self.previewTimer = eTimer()
-		self.previewTimer.callback.append(function)
-		self.previewTimer.start(10, True)
 
 	def __evEOF(self):
 		playInBackground = self.list.playInBackground
@@ -1242,7 +1231,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			except IOError, e:
 				updates = {
 					"listtype": config.movielist.listtype.default,
-					"moviesort": config.movielist.moviesort.default,
+					"movie": config.movielist.moviesort.default,
 					"description": config.movielist.description.default,
 					"movieoff": config.usage.on_movie_eof.default
 				}
@@ -1379,6 +1368,8 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		self.callLater(self.reloadWithDelay)
 
 	def reloadWithDelay(self):
+		if self.initialRun:
+			self.loadLocalSettings()
 		if not os.path.isdir(config.movielist.last_videodir.value):
 			path = defaultMoviePath()
 			config.movielist.last_videodir.value = path
@@ -1415,6 +1406,9 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 
 	def enablePathSelect(self):
 		self.pathselectEnabled = True
+		if self.initialRun:
+			self.callLater(self.initUserDefinedActions)
+			self.initialRun = False
 
 	def doPathSelect(self):
 		if self.pathselectEnabled:
@@ -1425,13 +1419,13 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				config.movielist.last_videodir.value
 			)
 
-	def gotFilename(self, res, selItem=None):
+	def gotFilename(self, res, selItem=None, checkParentControl=True):
 		def servicePinEntered(res, selItem, result):
 			if result:
 				from Components.ParentalControl import parentalControl
 				parentalControl.setSessionPinCached()
 				parentalControl.hideBlacklist()
-				self.gotFilename(res, selItem)
+				self.gotFilename(res, selItem, checkParentControl=False)
 			elif result == False:
 				self.session.open(MessageBox, _("The pin code you entered is wrong."), MessageBox.TYPE_INFO, timeout=3)
 		if not res:
@@ -1443,7 +1437,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		if res != currentDir:
 			if os.path.isdir(res):
 				baseName = os.path.basename(res[:-1])
-				if config.ParentalControl.servicepinactive.value and baseName.startswith(".") and not baseName.startswith(".Trash"):
+				if checkParentControl and config.ParentalControl.servicepinactive.value and baseName.startswith(".") and not baseName.startswith(".Trash"):
 					from Components.ParentalControl import parentalControl
 					if not parentalControl.sessionPinCached:
 						self.session.openWithCallback(boundFunction(servicePinEntered, res, selItem), PinInput, pinList=[x.value for x in config.ParentalControl.servicepin], triesEntry=config.ParentalControl.retries.servicepin, title=_("Please enter the correct pin code"), windowTitle=_("Enter pin code"))
