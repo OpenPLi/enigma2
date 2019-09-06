@@ -16,7 +16,7 @@ from Tools.HardwareInfo import HardwareInfo
 from Tools.Multiboot import GetImagelist, GetCurrentImage, GetCurrentImageMode
 import os, urllib2, json, time, zipfile, shutil
 
-from enigma import eTimer, eEPGCache
+from enigma import eEPGCache
 
 def checkimagefiles(files):
 	return len([x for x in files if 'kernel' in x and '.bin' in x or x in ('uImage', 'rootfs.bin', 'root_cfe_auto.bin', 'root_cfe_auto.jffs2', 'oe_rootfs.bin', 'e2jffs2.img', 'rootfs.tar.bz2', 'rootfs.ubi')]) == 2
@@ -55,9 +55,7 @@ class SelectImage(Screen):
 			"menu": boundFunction(self.close, True),
 		}, -1)
 
-		self.delay = eTimer()
-		self.delay.callback.append(self.getImagesList)
-		self.delay.start(0, True)
+		self.callLater(self.getImagesList)
 
 	def getImagesList(self):
 
@@ -209,10 +207,7 @@ class FlashImage(Screen):
 			"green": self.ok,
 		}, -1)
 
-		self.delay = eTimer()
-		self.delay.callback.append(self.confirmation)
-		self.delay.start(0, True)
-		self.hide()
+		self.callLater(self.confirmation)
 
 	def confirmation(self):
 		if self.reasons:
@@ -351,9 +346,7 @@ class FlashImage(Screen):
 		self["header"].setText(_("Unzipping Image"))
 		self["info"].setText("%s\n%s"% (self.imagename, _("Please wait")))
 		self["progress"].hide()
-		self.delay.callback.remove(self.confirmation)
-		self.delay.callback.append(self.doUnzip)
-		self.delay.start(0, True)
+		self.callLater(self.doUnzip)
 
 	def doUnzip(self):
 		try:
@@ -431,9 +424,7 @@ class MultibootSelection(SelectImage):
 			"menu": boundFunction(self.cancel, True),
 		}, -1)
 
-		self.delay = eTimer()
-		self.delay.callback.append(self.getBootOptions)
-		self.delay.start(0, True)
+		self.callLater(self.getBootOptions)
 
 	def cancel(self, value=None):
 		self.container = Console()
