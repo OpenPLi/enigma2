@@ -421,6 +421,7 @@ class MovieContextMenu(Screen, ProtectedScreen):
 			append_to_menu(menu, (_("Add bookmark"), csel.do_addbookmark))
 		append_to_menu(menu, (_("create directory"), csel.do_createdir), key="7")
 		append_to_menu(menu, (_("Sort by") + "...", csel.selectSortby))
+		append_to_menu(menu, (_("On end of movie") + "...", csel.do_movieoff_menu))
 		append_to_menu(menu, (_("Network") + "...", csel.showNetworkSetup), key="yellow")
 		append_to_menu(menu, (_("Settings") + "...", csel.configure), key="menu")
 
