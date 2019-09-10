@@ -8,6 +8,7 @@ from Screens.Satconfig import NimSetup
 from Screens.InfoBar import InfoBar
 from Components.Label import Label
 from Components.Button import Button
+from Components.Sources.StaticText import StaticText
 from Components.ConfigList import ConfigList
 from Components.ConfigList import ConfigListScreen
 from Components.TunerInfo import TunerInfo
@@ -1293,9 +1294,13 @@ class PositionerSetupLog(Screen):
 
 class TunerScreen(ConfigListScreen, Screen):
 	skin = """
-		<screen position="center,center" size="520,400" title="Tune">
-			<widget name="config" position="20,10" size="460,350" scrollbarMode="showOnDemand" />
-			<widget name="introduction" position="60,360" size="450,23" halign="left" font="Regular;20" />
+		<screen position="center,center" size="520,450" title="Tune">
+			<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on"/>
+			<ePixmap pixmap="buttons/green.png" position="140,0" size="140,40" alphatest="on"/>
+			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1"/>
+			<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1"/>
+			<widget name="config" position="10,50" size="500,350" scrollbarMode="showOnDemand" />
+			<widget name="introduction" position="60,420" size="450,23" halign="left" font="Regular;20" />
 		</screen>"""
 
 	def __init__(self, session, feid, fe_data):
@@ -1311,11 +1316,16 @@ class TunerScreen(ConfigListScreen, Screen):
 		self.tuning.type.addNotifier(self.tuningTypeChanged)
 		self.scan_sat.system.addNotifier(self.systemChanged)
 
-		self["actions"] = NumberActionMap(["SetupActions"],
+		self["actions"] = NumberActionMap(["SetupActions", "ColorActions"],
 		{
 			"ok": self.keyGo,
 			"cancel": self.keyCancel,
+			"red": self.keyCancel,
+			"green": self.keyGo,
 		}, -2)
+
+		self["key_red"] = StaticText(_("Cancel"))
+		self["key_green"] = StaticText(_("OK"))
 		self["introduction"] = Label(_("Press OK, save and exit..."))
 
 	def createConfig(self, frontendData):
