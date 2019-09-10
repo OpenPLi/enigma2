@@ -211,7 +211,10 @@ class FastScanScreen(ConfigListScreen, Screen):
 		self.list.append(self.scanProvider)
 		if self.scan_provider.value:
 			self.list.append(self.tunerEntry)
-			self.list.append(self.scanHD)
+			for index in providers:
+				if index[0] == self.scan_provider.value and index[1][2]:
+					self.list.append(self.scanHD)
+					break
 			self.list.append(getConfigListEntry(_("Use fastscan channel numbering"), self.scan_keepnumbering))
 			self.list.append(getConfigListEntry(_("Use fastscan channel names"), self.scan_keepsettings))
 			self.list.append(getConfigListEntry(_("Create separate radio userbouquet"), self.scan_create_radio_bouquet))
