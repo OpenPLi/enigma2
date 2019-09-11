@@ -1,6 +1,9 @@
 installdir = $(pkgdatadir)/skin_fallback_1080/buttons
 
 dist_install_DATA = \
+	blue.png \
+	green.png \
+	red.png \
 	vkey_backspace.png \
 	vkey_bg_l.png \
 	vkey_bg_m.png \
@@ -36,4 +39,5 @@ dist_install_DATA = \
 	vkey_text.png \
 	vkey_yellow_l.png \
 	vkey_yellow_m.png \
-	vkey_yellow_r.png
+	vkey_yellow_r.png \
+	yellow.png
