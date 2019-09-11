@@ -411,7 +411,7 @@ def InitUsageConfig():
 		config.usage.LcdLiveDecoder = ConfigSelection(default = "0", choices=[str(x) for x in range(0,4)])
 		config.usage.LcdLiveDecoder.addNotifier(setLcdLiveDecoder)
 
-	config.usage.boolean_graphic = ConfigYesNo(default=True)
+	config.usage.boolean_graphic = ConfigSelection(default=True, choices={False: _("no"), True: _("yes"), "onlyBool": _("yes, but not in multi selections")})
 
 	config.epg = ConfigSubsection()
 	config.epg.eit = ConfigYesNo(default = True)
