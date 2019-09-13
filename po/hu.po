@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-09-07 13:00+0200\n"
-"PO-Revision-Date: 2019-05-30 12:03+0200\n"
+"PO-Revision-Date: 2019-09-13 23:02+0200\n"
 "Last-Translator: mcfly82\n"
 "Language-Team: mcfly82 & wysless\n"
 "Language: hu_HU\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.2.3\n"
 
 msgid ""
 "\n"
@@ -405,9 +405,9 @@ msgstr "%s %s szabad tárterület"
 msgid "%s (%s)\n"
 msgstr "%s (%s)\n"
 
-#, fuzzy, python-format
+#, python-format
 msgid "%s imported from fallback tuner"
-msgstr "Csatornák importálása a tartalék tunerből"
+msgstr "%s importálva a tartalék tunerből"
 
 #. TRANSLATORS: The satellite with name '%s' is no longer used after a configuration change. The user is asked whether or not the satellite should be deleted.
 #, python-format
@@ -934,9 +934,8 @@ msgstr "Minden műhold 4 (USALS)"
 msgid "All services provider"
 msgstr "Minden szolgáltató"
 
-#, fuzzy
 msgid "All slots"
-msgstr "Válasszon partíciót"
+msgstr "Minden partíció"
 
 msgid "Allocate"
 msgstr "Hozzárendelés"
@@ -996,7 +995,7 @@ msgid "Alternative URL for images listed on FlashImage"
 msgstr "Alternatív URL az image listához"
 
 msgid "Alternative URLs for DVB-T/C or ATSC"
-msgstr ""
+msgstr "Alternatív URL DVB-T/C vagy ATSC vételhez"
 
 msgid "Alternative numbering mode"
 msgstr "Alternatív számozás"
@@ -1436,10 +1435,10 @@ msgid "Boost green"
 msgstr "Kék kiemelése"
 
 msgid "Boot to Android image"
-msgstr ""
+msgstr "Bootolás Androidba"
 
 msgid "Boot to Recovery menu"
-msgstr ""
+msgstr "Bootolás a visszaállítási menübe"
 
 msgid "Bosnia and Herzegovina"
 msgstr "Bosznia-Hercegovina"
@@ -1717,9 +1716,8 @@ msgstr "Csatornaszám és szolgáltatásnév"
 msgid "Channelnumber, picon and servicename"
 msgstr "Csatornaszám, picon és szolgáltatásnév"
 
-#, fuzzy
 msgid "Channels"
-msgstr "Csatorna"
+msgstr "Csatornák"
 
 msgid "Channels and EPG"
 msgstr "Csatornák és EPG"
@@ -2669,17 +2667,14 @@ msgstr "Kijelölés törlése"
 msgid "Destination of fallback remote receiver"
 msgstr "Tartalék távoli vevő cél"
 
-#, fuzzy
 msgid "Destination of fallback remote receiver for ATSC"
-msgstr "Tartalék távoli vevő cél"
+msgstr "Tartalék távoli vevő célja ATSC vételhez"
 
-#, fuzzy
 msgid "Destination of fallback remote receiver for DVB-C"
-msgstr "Tartalék távoli vevő cél"
+msgstr "Tartalék távoli vevő célja DVB-C vételhez"
 
-#, fuzzy
 msgid "Destination of fallback remote receiver for DVB-T"
-msgstr "Tartalék távoli vevő cél"
+msgstr "Tartalék távoli vevő célja DVB-T vételhez"
 
 msgid "Details for plugin: "
 msgstr "Bővítmény részletei: "
@@ -3056,9 +3051,8 @@ msgstr "DNS módosítása"
 msgid "Edit chapters of current title"
 msgstr "Aktuális cím jeleneteinek módosítása"
 
-#, fuzzy
 msgid "Edit menu"
-msgstr "Időzítő módosítása"
+msgstr "Menü módosítása"
 
 msgid "Edit selection"
 msgstr "Kiválasztás módosítása"
@@ -3129,9 +3123,8 @@ msgstr "OK gomb engedélyezése csatorna előnézetéhez"
 msgid "Enable OK for channel selection"
 msgstr "OK gomb engedélyezése csatornaválasztáshoz"
 
-#, fuzzy
 msgid "Enable OpenTV EPG"
-msgstr "EIT EPG engedélyezése"
+msgstr "OpenTV EPG engedélyezése"
 
 msgid "Enable ViaSat EPG"
 msgstr "ViaSat EPG engedélyezése"
@@ -3603,17 +3596,14 @@ msgstr "Tartalék távoli vevő portja"
 msgid "Fallback remote receiver URL"
 msgstr "Tartalék távoli vevő URL címe"
 
-#, fuzzy
 msgid "Fallback remote receiver for ATSC"
-msgstr "Tartalék távoli vevő portja"
+msgstr "Tartalék távoli vevő ATSC vételhez"
 
-#, fuzzy
 msgid "Fallback remote receiver for DVB-C"
-msgstr "Tartalék távoli vevő portja"
+msgstr "Tartalék távoli vevő DVB-C vételhez"
 
-#, fuzzy
 msgid "Fallback remote receiver for DVB-T"
-msgstr "Tartalék távoli vevő portja"
+msgstr "Tartalék távoli vevő DVB-T vételhez"
 
 msgid "Fallback remote receiver setup"
 msgstr "Tartalék távoli vevő beállítása"
@@ -3621,9 +3611,8 @@ msgstr "Tartalék távoli vevő beállítása"
 msgid "Fallback tuner setup"
 msgstr "Tartalék távoli vevő beállítása"
 
-#, fuzzy
 msgid "False"
-msgstr "nem"
+msgstr "Hamis"
 
 #, python-format
 msgid "Fan %d"
@@ -4286,7 +4275,7 @@ msgstr "A csatornák és/vagy az EPG importálása a távoli vevő URL címébő
 msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
 msgstr "A csatornák és/vagy az EPG importálása a távoli vevő URL címéből a kezelőfelület újraindításakor"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Import from fallback tuner failed, %s"
 msgstr "A csatornák importálása a tartalék tunerből sikertelen: %s"
 
@@ -4883,9 +4872,8 @@ msgstr "Kézi keresés"
 msgid "Manual transponder"
 msgstr "Kézi transzponder"
 
-#, fuzzy
 msgid "Manually import from fallback tuner"
-msgstr "Csatornák importálása a tartalék tunerből"
+msgstr "Csatornák kézi importálása a tartalék tunerből"
 
 msgid "Manufacturer"
 msgstr "Gyártó"
@@ -5492,13 +5480,11 @@ msgstr "Norvég"
 msgid "Not Defined"
 msgstr "Nincs megadva"
 
-#, fuzzy
 msgid "Not Installed"
-msgstr "Telepítés"
+msgstr "Nincs telepítve"
 
-#, fuzzy
 msgid "Not Required"
-msgstr "Nincs megadva"
+msgstr "Nem szükséges"
 
 msgid "Not associated"
 msgstr "Nem-csatlakozott"
@@ -7353,9 +7339,8 @@ msgstr "Virtuális billentyűzet nyelvének kiválasztása"
 msgid "Select the virtual keyboard shifted character set"
 msgstr "Váltás a virtuális billentyűzeten a 'shift' karakterkiosztásra"
 
-#, fuzzy
 msgid "Select the virtual keyboard shifted character set for the next character only"
-msgstr "Váltás a virtuális billentyűzeten a 'shift' karakterkiosztásra"
+msgstr "Váltás a virtuális billentyűzeten a 'shift' karakterkiosztásra csak a következő karakterre vonatkozóan"
 
 msgid "Select upgrade source"
 msgstr "Válasszon szerkesztendő frissítési forrást"
@@ -7517,7 +7502,7 @@ msgid "Set all hotkey to default?"
 msgstr "Minden hotkey-t visszaállít alapértelmezett állapotba?"
 
 msgid "Set alternative fallback tuners for DVB-T/C or ATSC"
-msgstr ""
+msgstr "Alternatív tartalék tuner beállítása DVB-T/C vagy ATSC vételhez"
 
 msgid "Set blocktimes by weekday"
 msgstr "Blokkidők megadása a hét napjai alapján"
@@ -7537,7 +7522,6 @@ msgstr "Beállítás fixre"
 msgid "Set fps for external subtitles"
 msgstr "Külső feliratokhoz FPS"
 
-#
 msgid "Set if You want see status icons, progress bars or nothing."
 msgstr "Állítsa be aszerint, hogy mit szeretne: állapotjelző ikonokat, folyamatsávot vagy semmit."
 
@@ -7627,7 +7611,7 @@ msgid "Shellscript"
 msgstr "Shellscript (parancssor)"
 
 msgid "Shift"
-msgstr ""
+msgstr "Shift"
 
 msgid "Short filenames"
 msgstr "Rövid fájlnevek"
@@ -8536,7 +8520,7 @@ msgid "TRANSLATOR_INFO"
 msgstr ""
 "A fordítást készítette:\n"
 "mcfly82 & wysless\n"
-"Utolsó fordítás időpontja: 2019.05.30.\n"
+"Utolsó fordítás időpontja: 2019.09.14.\n"
 "Eredeti fordítás: MediaVox-Team, Robertut\n"
 "A magyar fordítás az OpenPLi projekthez készült.\n"
 "További információ: http://openpli.org"
@@ -8884,9 +8868,8 @@ msgstr "A HDR10 mód kényszerítése UHD esetén"
 msgid "This option allows you to force the HLG modes for UHD"
 msgstr "A HLG mód kényszerítése UHD esetén"
 
-#, fuzzy
 msgid "This option allows you to hide and sort menu entries. When selecting user you can change order and hide menu items via the blue button. With the user defined hidden the blue button is not shown in the menus"
-msgstr "A menü bejegyzések elrejtése és rendezése. Ha engedélyezi, a kék gombbal meg tudja változtatni a menü egyes elemeinek elrejtését és sorrendjét."
+msgstr "A menü bejegyzések elrejtése és rendezése. Ha engedélyezi, a kék gombbal meg tudja változtatni a menü egyes elemeinek elrejtését és sorrendjét. Ha a 'felhasználó által megadva' elrejtését választja, a kék gomb nem jelenik meg a menüben."
 
 msgid "This option allows you to power off the display."
 msgstr "Ezzel kikapcsolhatja a kijelzőt."
@@ -9211,7 +9194,7 @@ msgid "Troubleshoot"
 msgstr "Hibakeresés"
 
 msgid "True"
-msgstr ""
+msgstr "Igaz"
 
 msgid "Try to find used transponders in cable network.. please wait..."
 msgstr "Felhasználói transzponderek keresése a kábeles hálózaton.. Kérem, várjon..."
@@ -9267,9 +9250,8 @@ msgstr "Tuner állapota:"
 msgid "Tuner type"
 msgstr "Tuner típus"
 
-#, fuzzy
 msgid "Tuners & scanning"
-msgstr "hiba a keresés közben"
+msgstr "Tunerek és keresés"
 
 msgid "Tunisia"
 msgstr "Tunézia"
@@ -9499,9 +9481,8 @@ msgstr "MHW EPG információk beolvasása a jelforrásból."
 msgid "Use Netmed EPG information when it is available."
 msgstr "Netmed EPG információk beolvasása a jelforrásból."
 
-#, fuzzy
 msgid "Use OpenTV EPG information when it is available."
-msgstr "EPG információk beolvasása a DVB jelfolyamból (EIT)."
+msgstr "OpenTV EPG használata, amennyiben elérhető."
 
 msgid "Use TV remote control"
 msgstr "TV-távvezérlő használata"
@@ -11589,9 +11570,8 @@ msgstr "könyvjelzők frissítése"
 msgid "user defined"
 msgstr "felhasználó által megadva"
 
-#, fuzzy
 msgid "user defined hidden"
-msgstr "felhasználó által megadva"
+msgstr "'felhasználó által megadva' elrejtése"
 
 msgid "variety show"
 msgstr "varieté"
