@@ -319,7 +319,7 @@ class ConfigSelection(ConfigElement):
 		self.changed()
 
 	def tostring(self, val):
-		return val
+		return str(val)
 
 	def getValue(self):
 		return self._value
