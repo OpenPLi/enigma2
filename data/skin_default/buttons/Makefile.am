@@ -2,7 +2,12 @@ installdir = $(pkgdatadir)/skin_default/buttons
 
 dist_install_DATA = \
 	blue.png \
+	blue_circle.png \
+	blue_oval.png \
 	blue_pressed.png \
+	blue_rectangle.png \
+	blue_round.png \
+	blue_square.png \
 	button_blue.png \
 	button_blue_off.png \
 	button_green.png \
@@ -13,6 +18,11 @@ dist_install_DATA = \
 	button_yellow_off.png \
 	green-big.png \
 	green.png \
+	green_circle.png \
+	green_oval.png \
+	green_rectangle.png \
+	green_round.png \
+	green_square.png \
 	grey.png \
 	key_0.png \
 	key_1.png \
@@ -47,6 +57,11 @@ dist_install_DATA = \
 	rec.png \
 	red-big.png \
 	red.png \
+	red_circle.png \
+	red_oval.png \
+	red_rectangle.png \
+	red_round.png \
+	red_square.png \
 	repeat-off.png \
 	repeat-on.png \
 	right.png \
@@ -90,4 +105,9 @@ dist_install_DATA = \
 	vkey_yellow_l.png \
 	vkey_yellow_m.png \
 	vkey_yellow_r.png \
-	yellow.png
+	yellow.png \
+	yellow_circle.png \
+	yellow_oval.png \
+	yellow_rectangle.png \
+	yellow_round.png \
+	yellow_square.png
