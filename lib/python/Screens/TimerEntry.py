@@ -450,13 +450,8 @@ class TimerEntry(Screen, ConfigListScreen):
 									self.timer.end = self.timer.begin
 								else:
 									self.timer.end -= config.recording.margin_after.value * 60
-						elif zap_margin_time:
-							self.timer.flags.remove("zap_margin_time")
-							self.timer.begin -= config.recording.margin_before.value * 60
-							if not self.timerentry_showendtime.value:
-								self.timer.end = self.timer.begin
-							else:
-								self.timer.end += config.recording.margin_after.value * 60
+						else:
+							self.check_remove_flags()
 				else:
 					self.check_remove_flags()
 				if self.timer.end < self.timer.begin:
