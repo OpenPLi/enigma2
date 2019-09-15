@@ -129,6 +129,7 @@ class TimerEntry(Screen, ConfigListScreen):
 		self.timerentry_renamerepeat = ConfigYesNo(default = rename_repeat)
 		self.timerentry_pipzap = ConfigYesNo(default = pipzap)
 		self.timerentry_conflictdetection = ConfigYesNo(default = conflict_detection)
+		self.timerentry_zap_margin_time = ConfigYesNo(default = "zap_margin_time" not in self.timer.flags)
 
 		self.timerentry_date = ConfigDateTime(default = self.timer.begin, formatstring = _("%d.%B %Y"), increment = 86400)
 		self.timerentry_starttime = ConfigClock(default = self.timer.begin)
@@ -223,6 +224,9 @@ class TimerEntry(Screen, ConfigListScreen):
 		self.entryEndTime = getConfigListEntry(_("End time"), self.timerentry_endtime)
 		if self.timerentry_justplay.value != "zap" or self.timerentry_showendtime.value:
 			self.list.append(self.entryEndTime)
+
+		if self.timerentry_type.value == "once" and self.timerentry_justplay.value == "zap" and (config.recording.margin_before.value or config.recording.margin_after.value and self.timerentry_showendtime.value) and "autotimer" not in self.timer.flags:
+			self.list.append(getConfigListEntry(_("Use margin after/before minutes"), self.timerentry_zap_margin_time))
 
 		self.channelEntry = getConfigListEntry(_("Channel"), self.timerentry_service)
 		self.list.append(self.channelEntry)
@@ -433,10 +437,31 @@ class TimerEntry(Screen, ConfigListScreen):
 					self.timer.dirname = self.timerentry_dirname.value
 					config.movielist.last_timer_videodir.value = self.timer.dirname
 					config.movielist.last_timer_videodir.save()
-
 			if self.timerentry_type.value == "once":
 				self.timer.begin, self.timer.end = self.getBeginEnd()
-			if self.timerentry_type.value == "repeated":
+				if self.timerentry_justplay.value == "zap":
+					if "autotimer" not in self.timer.flags:
+						zap_margin_time = "zap_margin_time" in self.timer.flags
+						if not self.timerentry_zap_margin_time.value:
+							if not zap_margin_time:
+								self.timer.flags.add("zap_margin_time")
+								self.timer.begin += config.recording.margin_before.value * 60
+								if not self.timerentry_showendtime.value:
+									self.timer.end = self.timer.begin
+								else:
+									self.timer.end -= config.recording.margin_after.value * 60
+						elif zap_margin_time:
+							self.timer.flags.remove("zap_margin_time")
+							self.timer.begin -= config.recording.margin_before.value * 60
+							if not self.timerentry_showendtime.value:
+								self.timer.end = self.timer.begin
+							else:
+								self.timer.end += config.recording.margin_after.value * 60
+				else:
+					self.check_remove_flags()
+				if self.timer.end < self.timer.begin:
+					self.timer.end += 86400
+			elif self.timerentry_type.value == "repeated":
 				if self.timerentry_repeated.value == "daily":
 					for x in (0, 1, 2, 3, 4, 5, 6):
 						self.timer.setRepeated(x)
@@ -461,6 +486,7 @@ class TimerEntry(Screen, ConfigListScreen):
 					self.timer.begin = self.getTimestamp(time(), self.timerentry_starttime.value)
 					self.timer.end = self.getTimestamp(time(), self.timerentry_endtime.value)
 
+				self.check_remove_flags()
 				# when a timer end is set before the start, add 1 day
 				if self.timer.end < self.timer.begin:
 					self.timer.end += 86400
@@ -486,6 +512,15 @@ class TimerEntry(Screen, ConfigListScreen):
 						self.timer.service_ref = ServiceReference(event.getLinkageService(parent, 0))
 			self.saveTimer()
 			self.close((True, self.timer))
+
+	def check_remove_flags(self):
+		if "zap_margin_time" in self.timer.flags:
+			self.timer.flags.remove("zap_margin_time")
+			self.timer.begin -= config.recording.margin_before.value * 60
+			if not self.timerentry_showendtime.value:
+				self.timer.end = self.timer.begin
+			else:
+				self.timer.end += config.recording.margin_after.value * 60
 
 	def changeTimerType(self):
 		self.timerentry_justplay.selectNext()
