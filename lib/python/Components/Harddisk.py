@@ -244,7 +244,7 @@ class Harddisk:
 
 	def createPartition(self):
 		cmd = 'printf "8,\n;0,0\n;0,0\n;0,0\ny\n" | sfdisk -f -uS ' + self.disk_path
-		res = Console().ePopen(cmd)
+		res = os.system(cmd)
 		return (res >> 8)
 
 	def mkfs(self):
@@ -270,13 +270,13 @@ class Harddisk:
 			if fspath == dev:
 				print "[Harddisk] mounting:", fspath
 				cmd = "mount -t auto " + fspath
-				res = Console().ePopen(cmd)
+				res = os.system(cmd)
 				return (res >> 8)
 		# device is not in fstab
 		res = -1
 		if self.type == DEVTYPE_UDEV:
 			# we can let udev do the job, re-read the partition table
-			res = Console().ePopen("hdparm -z %s" % self.disk_path)
+			res = os.system("hdparm -z %s" % self.disk_path)
 			# give udev some time to make the mount, which it will do asynchronously
 			from time import sleep
 			sleep(3)
