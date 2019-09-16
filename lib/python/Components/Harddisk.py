@@ -239,7 +239,7 @@ class Harddisk:
 			return 0
 		cmd = 'umount ' + dev
 		print "[Harddisk]", cmd
-		res = Console().ePopen(cmd)
+		res = os.system(cmd)
 		return (res >> 8)
 
 	def createPartition(self):
