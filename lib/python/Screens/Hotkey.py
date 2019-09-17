@@ -558,6 +558,7 @@ class helpableHotkeyActionMap(HelpableActionMap):
 class InfoBarHotkey():
 	def __init__(self):
 		self.hotkeys = getHotkeys()
+		self.hotkeyFunctions = getHotkeyFunctions()
 		self["HotkeyButtonActions"] = helpableHotkeyActionMap(self, "HotkeyActions",
 			dict((x[1],(self.hotkeyGlobal, boundFunction(self.getHelpText, x[1]))) for x in self.hotkeys), -10)
 
@@ -572,7 +573,7 @@ class InfoBarHotkey():
 			elif x.startswith("Zap"):
 				selected.append(((_("Zap to") + " " + ServiceReference(eServiceReference(x.split("/", 1)[1]).toString()).getServiceName()), x))
 			else:
-				function = list(function for function in getHotkeyFunctions() if function[1] == x )
+				function = list(function for function in self.hotkeyFunctions if function[1] == x )
 				if function:
 					selected.append(function[0])
 		return selected
