@@ -51,8 +51,9 @@ class ImportChannels():
 
 	def saveEpgCallback(self, data):
 		if xml.etree.cElementTree.fromstring(data).find("e2state").text == "True":
-			return self.getUrl("file?file=/etc/enigma2/settings").addCallback(self.getSettingsCallback).addErrback(self.endFallback)
-		self.endFallback()
+			self.getUrl("file?file=/etc/enigma2/settings").addCallback(self.getSettingsCallback).addErrback(self.endFallback)
+		else:
+			self.endFallback()
 
 	def getSettingsCallback(self, data):
 		self.epgdatfile = [x for x in data if x.startswith('config.misc.epgcache_filename=')]
@@ -97,23 +98,19 @@ class ImportChannels():
 			file = self.files.pop(0)
 			self.downloadUrl("file?file=%s" % file, "%s/%s" % (TMPDIR, os.path.basename(file))).addCallback(self.getSettingFile).addErrback(self.endFallback)
 		else:
-			self.allSettingsFilesDownloaded()
-
-	def allSettingsFilesDownloaded(self):
-		print "[ImportChannels] Removing files..."
-		for file in [file for file in os.listdir("/etc/enigma2") if file.startswith(SETTINGFILES)]:
-		       os.remove(os.path.join("/etc/enigma2", file))
-		print "[ImportChannels] copying files..."
-		for file in [x for x in os.listdir(TMPDIR) if x.startswith(SETTINGFILES)]:
-		       shutil.move(os.path.join(TMPDIR, file), os.path.join("/etc/enigma2", file))
-		self.endFallback()
+			print "[ImportChannels] Removing files..."
+			for file in [file for file in os.listdir("/etc/enigma2") if file.startswith(SETTINGFILES)]:
+				os.remove(os.path.join("/etc/enigma2", file))
+			print "[ImportChannels] copying files..."
+			for file in [x for x in os.listdir(TMPDIR) if x.startswith(SETTINGFILES)]:
+				shutil.move(os.path.join(TMPDIR, file), os.path.join("/etc/enigma2", file))
+			self.endFallback()
 
 	def endFallback(self, message=""):
 		if message:
 			message = "%s\n%s" % (self.message, str(message).translate(None, '[]').strip())
 			Notifications.AddNotificationWithID("ChannelsImportNOK", MessageBox, _("Import from fallback tuner failed, %s") % message, MessageBox.TYPE_ERROR, timeout=5)
 		else:
-
 			message = {"channels": _("Channels"), "epg": _("EPG"), "channels_epg": _("Channels and EPG")}[config.usage.remote_fallback_import.value]
 			Notifications.AddNotificationWithID("ChannelsImportOK", MessageBox, _("%s imported from fallback tuner") % message, MessageBox.TYPE_INFO, timeout=5)
 		if os.path.isdir(TMPDIR):
