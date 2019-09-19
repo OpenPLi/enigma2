@@ -96,7 +96,7 @@ class ImportChannels():
 	def getSettingFile(self, data=None):
 		if self.files:
 			file = self.files.pop(0)
-			self.downloadUrl("file?file=%s" % file, "%s/%s" % (TMPDIR, os.path.basename(file))).addCallback(self.getSettingFile).addErrback(self.endFallback)
+			self.downloadUrl("file?file=%s" % file, os.path.join(TMPDIR, os.path.basename(file))).addCallback(self.getSettingFile).addErrback(self.endFallback)
 		else:
 			print "[ImportChannels] Removing files..."
 			for file in [file for file in os.listdir("/etc/enigma2") if file.startswith(SETTINGFILES)]:
