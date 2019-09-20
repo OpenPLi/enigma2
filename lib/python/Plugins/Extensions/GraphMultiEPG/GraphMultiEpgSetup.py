@@ -24,14 +24,16 @@ class GraphMultiEpgSetup(Screen, ConfigListScreen):
 		Screen.__init__(self, session)
 		self.setTitle(_("GraphMultiEpg Settings"))
 
-		self["oktext"] = Label(_("OK"))
-		self["canceltext"] = Label(_("Cancel"))
+		self["key_green"] = self["oktext"] = Label(_("OK"))
+		self["key_red"] = self["canceltext"] = Label(_("Cancel"))
 
-		self["actions"] = ActionMap(["SetupActions", "MenuActions"],
+		self["actions"] = ActionMap(["SetupActions", "MenuActions", "ColorActions"],
 		{
 			"ok": self.keySave,
 			"save": self.keySave,
+			"green": self.keySave,
 			"cancel": self.keyCancel,
+			"red": self.keyCancel,
 			"menu": self.closeRecursive,
 		}, -1)
 
