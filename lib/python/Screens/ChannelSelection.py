@@ -30,7 +30,7 @@ from Screens.InputBox import PinInput
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Screens.MessageBox import MessageBox
 from Screens.ServiceInfo import ServiceInfo
-from Screens.Hotkey import InfoBarHotkey, hotkeyActionMap, getHotkeyFunctions
+from Screens.Hotkey import InfoBarHotkey, hotkeyActionMap, hotkey
 profile("ChannelSelection.py 4")
 from Screens.PictureInPicture import PictureInPicture
 from Screens.RdsDisplay import RassInteractive
@@ -689,7 +689,7 @@ class ChannelSelectionEPG(InfoBarHotkey):
 		selection = eval("config.misc.hotkey." + key + ".value.split(',')")
 		selected = []
 		for x in selection:
-			function = list(function for function in getHotkeyFunctions() if function[1] == x and function[2] == "EPG")
+			function = list(function for function in hotkey.functions if function[1] == x and function[2] == "EPG")
 			if function:
 				selected.append(function[0])
 		return selected
