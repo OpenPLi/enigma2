@@ -16,7 +16,7 @@ from Components.Label import Label
 import os
 
 class hotkey:
-        functions = None
+	functions = None
 	hotkeys = [(_("Red") + " " + _("long"), "red_long", ""),
 		(_("Green") + " " + _("long"), "green_long", ""),
 		(_("Yellow") + " " + _("long"), "yellow_long", "Plugins/Extensions/GraphMultiEPG/1"),
