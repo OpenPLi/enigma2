@@ -42,19 +42,21 @@ class GetImagelist():
 
 	def appClosed(self, data, retval, extra_args):
 		if retval == 0 and self.phase == self.MOUNT:
+			import datetime
+			try:
+				imagedate = datetime.datetime.fromtimestamp(os.stat("/tmp/testmount/linuxrootfs1/usr/share/bootlogo.mvi").st_mtime).strftime('%Y-%m-%d')
+			except:
+				imagedate = _("Unknown")
 			if SystemInfo["HasRootSubdir"]:
 				if self.slot == 1 and os.path.isfile("/tmp/testmount/linuxrootfs1/usr/bin/enigma2"):
-					import datetime
-					self.imagelist[self.slot] =  { 'imagename': "%s (%s)" % (open("/tmp/testmount/linuxrootfs1/etc/issue").readlines()[-2].capitalize().strip()[:-6], datetime.datetime.fromtimestamp(os.stat("/tmp/testmount/linuxrootfs1/usr/share/bootlogo.mvi").st_mtime).strftime('%Y-%m-%d'))}
+					self.imagelist[self.slot] =  { 'imagename': "%s (%s)" % (open("/tmp/testmount/linuxrootfs1/etc/issue").readlines()[-2].capitalize().strip()[:-6], imagedate)}
 				elif os.path.isfile("/tmp/testmount/linuxrootfs%s/usr/bin/enigma2" % self.slot):
-					import datetime
-					self.imagelist[self.slot] =  { 'imagename': "%s (%s)" % (open("/tmp/testmount/linuxrootfs%s/etc/issue" % self.slot).readlines()[-2].capitalize().strip()[:-6], datetime.datetime.fromtimestamp(os.stat("/tmp/testmount/linuxrootfs%s/usr/share/bootlogo.mvi" % self.slot).st_mtime).strftime('%Y-%m-%d'))}
+					self.imagelist[self.slot] =  { 'imagename': "%s (%s)" % (open("/tmp/testmount/linuxrootfs%s/etc/issue" % self.slot).readlines()[-2].capitalize().strip()[:-6], imagedate)}
 				else:
 					self.imagelist[self.slot] = { 'imagename': _("Empty slot")}
 			else:
 				if os.path.isfile("/tmp/testmount/usr/bin/enigma2"):
-					import datetime
-					self.imagelist[self.slot] =  { 'imagename': "%s (%s)" % (open("/tmp/testmount/etc/issue").readlines()[-2].capitalize().strip()[:-6], datetime.datetime.fromtimestamp(os.stat("/tmp/testmount/usr/share/bootlogo.mvi").st_mtime).strftime('%Y-%m-%d'))}
+					self.imagelist[self.slot] =  { 'imagename': "%s (%s)" % (open("/tmp/testmount/etc/issue").readlines()[-2].capitalize().strip()[:-6], imagedate)}
 				else:
 					self.imagelist[self.slot] = { 'imagename': _("Empty slot")}
 			self.phase = self.UNMOUNT
