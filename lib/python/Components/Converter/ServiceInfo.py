@@ -134,12 +134,12 @@ class ServiceInfo(Converter, object):
 				return info.getInfoString(iServiceInformation.sHBBTVUrl) != ""
 			elif self.type == self.AUDIOTRACKS_AVAILABLE:
 				audio = service.audioTracks()
-				return bool(audio and audio.getNumberOfTracks())
+				return bool(audio and audio.getNumberOfTracks() > 1)
 			elif self.type == self.SUBTITLES_AVAILABLE:
 				subtitle = service and service.subtitle()
-				bool(subtitle and subtitle.getSubtitleList())
+				return bool(subtitle and subtitle.getSubtitleList())
 			elif self.type == self.EDITMODE:
-				return boot(hasattr(self.source, "editmode") and self.source.editmode)
+				return bool(hasattr(self.source, "editmode") and self.source.editmode)
 			elif self.type == self.IS_STREAM:
 				return service.streamed() is not None
 			elif self.isVideoService(info):
