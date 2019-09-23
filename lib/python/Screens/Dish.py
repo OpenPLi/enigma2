@@ -38,8 +38,8 @@ class Dish(Screen):
 		self["turnTime"] = Label("")
 		self["posFrom"] = Label("")
 		self["posGoto"] = Label("")
-		self["From"] = Label(_("From :"))
-		self["Goto"] = Label(_("Goto :"))
+		self["From"] = Label(_("From:"))
+		self["Goto"] = Label(_("Goto:"))
 		self["tunerName"] = Label("")
 		self["turnSpeed"] = Label("")
 
@@ -246,8 +246,8 @@ class Dish(Screen):
 			return _("N/A")
 		if orbpos > 1800:
 			orbpos = 3600 - orbpos
-			return "%d.%d°W" % (orbpos/10, orbpos%10)
-		return "%d.%d°E" % (orbpos/10, orbpos%10)
+			return _("%.1f°W") % (orbpos / 10.0)
+		return _("%.1f°E") % (orbpos / 10.0)
 
 	def FormatTurnTime(self, time):
 		t = abs(time)
@@ -279,8 +279,8 @@ class Dishpip(Dish, Screen):
 		self["turnTime"] = Label("")
 		self["posFrom"] = Label("")
 		self["posGoto"] = Label("")
-		self["From"] = Label(_("From :"))
-		self["Goto"] = Label(_("Goto :"))
+		self["From"] = Label(_("From:"))
+		self["Goto"] = Label(_("Goto:"))
 		self["tunerName"] = Label("")
 		self["turnSpeed"] = Label("")
 		self.updateRotorSatList()
