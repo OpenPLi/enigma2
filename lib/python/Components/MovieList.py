@@ -218,7 +218,7 @@ class MovieList(GUIComponent):
 		result = {}
 		for timer in NavigationInstance.instance.RecordTimer.timer_list:
 			if timer.isRunning() and not timer.justplay:
-				result[os.path.split(timer.Filename)[1]+'.ts'] = timer
+				result[os.path.split(timer.Filename)[1] + timer.record_service.getFilenameExtension()] = timer
 		if self.runningTimers == result:
 			return
 		self.runningTimers = result
