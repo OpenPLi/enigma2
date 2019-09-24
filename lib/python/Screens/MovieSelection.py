@@ -1935,8 +1935,9 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			if not args:
 				rec_filename = os.path.split(current.getPath())[1]
 				if rec_filename.endswith(".ts"): rec_filename = rec_filename[:-3]
+				if rec_filename.endswith(".stream"): rec_filename = rec_filename[:-7]
 				for timer in NavigationInstance.instance.RecordTimer.timer_list:
-					if timer.isRunning() and not timer.justplay and rec_filename in timer.Filename:
+					if timer.isRunning() and not timer.justplay and os.path.split(timer.Filename)[1] in rec_filename:
 						choices = [
 							(_("Cancel"), None),
 							(_("Stop recording"), ("s", timer)),
