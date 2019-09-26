@@ -2,7 +2,7 @@ import threading, urllib2, os, shutil
 from json import loads
 from enigma import eDVBDB, eEPGCache
 from Screens.MessageBox import MessageBox
-from config import config
+from config import config, ConfigText
 from Tools import Notifications
 from base64 import encodestring
 
@@ -32,6 +32,7 @@ class ImportChannels():
 
 	def threaded_function(self):
 		if "epg" in config.usage.remote_fallback_import.value:
+			config.misc.epgcache_filename = ConfigText(default="/epg.dat")
 			print "Writing epg.dat file on sever box"
 			try:
 				self.getUrl("%s/web/saveepg" % self.url, timeout=30).read()
@@ -53,7 +54,7 @@ class ImportChannels():
 			if epg_location:
 				print "[Import Channels] Copy EPG file..."
 				try:
-					open("/hdd/epg.dat" if os.path.isdir("/hdd") else "/epg.dat", "wb").write(self.getUrl("%s/file?file=%s" % (self.url, epg_location)).read())
+					open(config.misc.epgcache_filename.value, "wb").write(self.getUrl("%s/file?file=%s" % (self.url, epg_location)).read())
 				except:
 					self.ImportChannelsDone(False, _("Error while retreiving epg.dat from server"))
 			else:
