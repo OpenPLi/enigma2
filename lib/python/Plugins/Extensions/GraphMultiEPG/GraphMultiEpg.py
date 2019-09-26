@@ -853,7 +853,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 		else:
 			self["key_yellow"] = Button(_("List mode"))
 
-		self["key_blue"] = Button(_("PrimeTime"))
+		self["key_blue"] = Button(_("Prime time"))
 
 		self.key_green_choice = self.EMPTY
 		self.key_red_choice = self.EMPTY
@@ -1054,7 +1054,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 			date = time() - config.epg.histminutes.getValue() * 60
 			if type == "now_time":
 				self.time_mode = self.TIME_NOW
-				self["key_blue"].setText(_("PrimeTime"))
+				self["key_blue"].setText(_("Prime time"))
 			elif type == "prime_time":
 				now = [x for x in localtime(date)]
 				prime = config.misc.graph_mepg.prime_time.value
@@ -1105,7 +1105,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 		l.fillMultiEPG(None, self.ask_time)
 		self.moveTimeLines(True)
 		self.time_mode = self.TIME_NOW
-		self["key_blue"].setText(_("PrimeTime"))
+		self["key_blue"].setText(_("Prime time"))
 
 	def closeScreen(self):
 		self.zapFunc(None, zapback = True)
