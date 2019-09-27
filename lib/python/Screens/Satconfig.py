@@ -93,6 +93,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 			self.nimConfig.configMode.setChoices(config_mode_choices, "simple")
 
 	def createSetup(self):
+		self.adaptConfigModeChoices()
 		self.list = [ ]
 
 		self.multiType = self.configMode = self.diseqcModeEntry = self.advancedSatsEntry = self.advancedLnbsEntry = self.advancedDiseqcMode = self.advancedUsalsEntry = self.advancedLof =\
@@ -135,26 +136,13 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 					if self.nimConfig.diseqcMode.value in ("positioner", "positioner_select"):
 						self.createPositionerSetup(self.list)
 				elif self.nimConfig.configMode.value == "equal":
-					choices = []
-					nimlist = nimmanager.canEqualTo(self.nim.slot)
-					for id in nimlist:
-						choices.append((str(id), nimmanager.getNimDescription(id)))
-					self.nimConfig.connectedTo.setChoices(choices)
+					self.nimConfig.connectedTo.setChoices([((str(id), nimmanager.getNimDescription(id))) for id in nimmanager.canEqualTo(self.nim.slot)])
 					self.list.append(getConfigListEntry(self.indent % _("Tuner"), self.nimConfig.connectedTo, _("This setting allows the tuner configuration to be a duplication of how another tuner is already configured.")))
 				elif self.nimConfig.configMode.value == "satposdepends":
-					choices = []
-					nimlist = nimmanager.canDependOn(self.nim.slot)
-					for id in nimlist:
-						choices.append((str(id), nimmanager.getNimDescription(id)))
-					self.nimConfig.connectedTo.setChoices(choices)
+					self.nimConfig.connectedTo.setChoices([((str(id), nimmanager.getNimDescription(id)) for id in nimmanager.canDependOn(self.nim.slot))])
 					self.list.append(getConfigListEntry(self.indent % _("Tuner"), self.nimConfig.connectedTo, _("Select the tuner that controls the motorised dish.")))
 				elif self.nimConfig.configMode.value == "loopthrough":
-					choices = []
-					print "connectable to:", nimmanager.canConnectTo(self.slotid)
-					connectable = nimmanager.canConnectTo(self.slotid)
-					for id in connectable:
-						choices.append((str(id), nimmanager.getNimDescription(id)))
-					self.nimConfig.connectedTo.setChoices(choices)
+					self.nimConfig.connectedTo.setChoices([((str(id), nimmanager.getNimDescription(id))) for id in nimmanager.canConnectTo(self.slotid)])
 					self.list.append(getConfigListEntry(self.indent % _("Connected to"), self.nimConfig.connectedTo, _("Select the tuner that this loopthrough depends on.")))
 				elif self.nimConfig.configMode.value == "nothing":
 					pass
@@ -587,7 +575,6 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 		self.slotid = slotid
 		self.nim = nimmanager.nim_slots[slotid]
 		self.nimConfig = self.nim.config
-		self.adaptConfigModeChoices()
 		self.createSetup()
 		self.setTitle(_("Setup") + " " + self.nim.friendly_full_description)
 		
