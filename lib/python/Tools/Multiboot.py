@@ -44,14 +44,14 @@ class GetImagelist():
 		if retval == 0 and self.phase == self.MOUNT:
 			def getImagename(target):
 				from datetime import datetime
-				date = datetime.fromtimestamp(os.stat(os.path.join(target, "/var/lib/opkg/status")).st_mtime).strftime('%Y-%m-%d')
+				date = datetime.fromtimestamp(os.stat(os.path.join(target, "var/lib/opkg/status")).st_mtime).strftime('%Y-%m-%d')
 				if date.startswith("1970"):
 					try:
 						date = datetime.fromtimestamp(os.stat(os.path.join(target, "usr/share/bootlogo.mvi")).st_mtime).strftime('%Y-%m-%d')
 					except:
 						pass
 					date = max(date, datetime.fromtimestamp(os.stat(os.path.join(target, "usr/bin/enigma2")).st_mtime).strftime('%Y-%m-%d'))
-				return "%s (%s)" % (open(os.path.join(target, "/etc/issue")).readlines()[-2].capitalize().strip()[:-6], date)
+				return "%s (%s)" % (open(os.path.join(target, "etc/issue")).readlines()[-2].capitalize().strip()[:-6], date)
 			if SystemInfo["HasRootSubdir"]:
 				if os.path.isfile("/tmp/testmount/linuxrootfs%s/usr/bin/enigma2" % self.slot):
 					self.imagelist[self.slot] = { 'imagename': getImagename("/tmp/testmount/linuxrootfs%s" % self.slot) }
