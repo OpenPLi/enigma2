@@ -172,6 +172,29 @@ class AutoDiseqc(Screen, ConfigListScreen):
 			"Hispasat 30.0w"),
 	]
 
+	circular_sat_frequencies = [
+		# express AMU1 360 NHK World Japan
+		(
+			12341,
+			27500,
+			eDVBFrontendParametersSatellite.Polarisation_CircularLeft,
+			eDVBFrontendParametersSatellite.FEC_3_4,
+			eDVBFrontendParametersSatellite.Inversion_Off,
+			360,
+			eDVBFrontendParametersSatellite.System_DVB_S,
+			eDVBFrontendParametersSatellite.Modulation_Auto,
+			eDVBFrontendParametersSatellite.RollOff_auto,
+			eDVBFrontendParametersSatellite.Pilot_Unknown,
+			eDVBFrontendParametersSatellite.No_Stream_Id_Filter,
+			eDVBFrontendParametersSatellite.PLS_Gold,
+			eDVBFrontendParametersSatellite.PLS_Default_Gold_Code,
+			eDVBFrontendParametersSatellite.No_T2MI_PLP_Id,
+			eDVBFrontendParametersSatellite.T2MI_Default_Pid,
+			11,
+			112,
+			"Express AMU1 36.0e"),
+	]
+
 	SAT_TABLE_FREQUENCY = 0
 	SAT_TABLE_SYMBOLRATE = 1
 	SAT_TABLE_POLARISATION = 2
@@ -213,6 +236,17 @@ class AutoDiseqc(Screen, ConfigListScreen):
 		self.simple_tone = simple_tone
 		self.simple_sat_change = simple_sat_change
 		self.found_sats = []
+		self.circular_setup = False
+		sat_found = False
+		for x in self.sat_frequencies:
+			if x[self.SAT_TABLE_ORBPOS] == 360:
+				sat_found = True
+		if self.nr_of_ports == 1:
+			if not sat_found:
+				self.sat_frequencies += self.circular_sat_frequencies
+		elif sat_found:
+			self.sat_frequencies.remove(x)
+
 
 		if not self.openFrontend():
 			self.oldref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
@@ -295,15 +329,30 @@ class AutoDiseqc(Screen, ConfigListScreen):
 				config.Nims[self.feid].diseqcMode.value = "diseqc_a_b"
 			else:
 				config.Nims[self.feid].diseqcMode.value = "single"
+				if self.sat_frequencies[self.index][self.SAT_TABLE_ORBPOS] == 360 and not self.found_sats:
+					config.Nims[self.feid].simpleDiSEqCSetCircularLNB.value = True
+					self.circular_setup = True
 
 			config.Nims[self.feid].configMode.value = "simple"
 			config.Nims[self.feid].simpleDiSEqCSetVoltageTone = self.simple_tone
 			config.Nims[self.feid].simpleDiSEqCOnlyOnSatChange = self.simple_sat_change
 
+
 			self.saveAndReloadNimConfig()
 			self.state += 1
 
 		elif self.state == 1:
+			if self.circular_setup:
+				if self.raw_channel:
+					self.raw_channel.receivedTsidOnid.get().remove(self.gotTsidOnid)
+				del self.frontend
+				del self.raw_channel
+				if not self.openFrontend():
+					self.frontend = None
+					self.raw_channel = None
+				if self.raw_channel:
+					self.raw_channel.receivedTsidOnid.get().append(self.gotTsidOnid)
+
 			InitNimManager(nimmanager)
 
 			self.tuner = Tuner(self.frontend)
