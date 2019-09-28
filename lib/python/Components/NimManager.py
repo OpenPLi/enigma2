@@ -939,16 +939,16 @@ class NimManager:
 			slots.append(self.nim_slots[slotid].internallyConnectableTo())
 		for type in self.nim_slots[slotid].connectableTo():
 			for slot in self.getNimListOfType(type, exception = slotid):
-				if self.hasOutputs(slot):
+				if slot not in slots and self.hasOutputs(slot):
 					slots.append(slot)
 		# remove nims, that have a conntectedTo reference on
 		for testnim in slots[:]:
 			for nim in self.getNimListOfType("DVB-S", slotid):
 				nimConfig = self.getNimConfig(nim)
-				if "configMode" in nimConfig.content.items and nimConfig.configMode.value == "loopthrough" and int(nimConfig.connectedTo.value) == testnim:
+				if nim.isFBCLink() or "configMode" in nimConfig.content.items and nimConfig.configMode.value == "loopthrough" and int(nimConfig.connectedTo.value) == testnim:
 					slots.remove(testnim)
 					break
-		return list(set(slots))
+		return slots
 
 	def canEqualTo(self, slotid):
 		type = self.getNimType(slotid)
@@ -956,7 +956,7 @@ class NimManager:
 		nimList = self.getNimListOfType(type, slotid)
 		for nim in nimList[:]:
 			mode = self.getNimConfig(nim)
-			if mode.configMode.value == "loopthrough" or mode.configMode.value == "satposdepends":
+			if nim.isFBCLink() or mode.configMode.value == "loopthrough" or mode.configMode.value == "satposdepends":
 				nimList.remove(nim)
 		return nimList
 
