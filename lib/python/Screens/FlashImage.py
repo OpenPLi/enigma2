@@ -477,32 +477,36 @@ class MultibootSelection(SelectImage):
 
 	def keyOk(self):
 		self.currentSelected = self["list"].l.getCurrentSelection()
-		slot = self.currentSelected[0][1]
-		if slot != "Waiter":
-			if slot == "Recovery":
+		self.slot = self.currentSelected[0][1]
+		if self.slot != "Waiter":
+			self.session.openWithCallback(self.doReboot, MessageBox, "%s:\n%s" % (_("Are you sure to reboot to"), self.currentSelected[0][0]), simple=True)
+
+	def doReboot(self, answer):
+		if answer:
+			if self.slot == "Recovery":
 				shutil.copyfile("/tmp/startupmount/STARTUP_RECOVERY", "/tmp/startupmount/STARTUP")
-			elif slot == "Android":
+			elif self.slot == "Android":
 				shutil.copyfile("/tmp/startupmount/STARTUP_ANDROID", "/tmp/startupmount/STARTUP")
 			else:
 				model = HardwareInfo().get_machine_name()
 				if SystemInfo["canMultiBoot"][3]:
-					shutil.copyfile("/tmp/startupmount/STARTUP_%s" % slot, "/tmp/startupmount/STARTUP")
+					shutil.copyfile("/tmp/startupmount/STARTUP_%s" % self.slot, "/tmp/startupmount/STARTUP")
 				elif os.path.isfile("/tmp/startupmount/STARTUP_LINUX_4_BOXMODE_12"):
-					if slot < 12:
-						shutil.copyfile("/tmp/startupmount/STARTUP_LINUX_%s_BOXMODE_1" % slot, "/tmp/startupmount/STARTUP")
+					if self.slot < 12:
+						shutil.copyfile("/tmp/startupmount/STARTUP_LINUX_%s_BOXMODE_1" % self.slot, "/tmp/startupmount/STARTUP")
 					else:
-						slot -= 12
-						shutil.copyfile("/tmp/startupmount/STARTUP_LINUX_%s_BOXMODE_12" % slot, "/tmp/startupmount/STARTUP")
+						self.slot -= 12
+						shutil.copyfile("/tmp/startupmount/STARTUP_LINUX_%s_BOXMODE_12" % self.slot, "/tmp/startupmount/STARTUP")
 				elif os.path.isfile("/tmp/startupmount/STARTUP_LINUX_4"):
-					shutil.copyfile("/tmp/startupmount/STARTUP_LINUX_%s" % slot, "/tmp/startupmount/STARTUP")
+					shutil.copyfile("/tmp/startupmount/STARTUP_LINUX_%s" % self.slot, "/tmp/startupmount/STARTUP")
 				elif os.path.isfile("/tmp/startupmount/STARTUP_4"):
-					shutil.copyfile("/tmp/startupmount/STARTUP_%s" % slot, "/tmp/startupmount/STARTUP")
+					shutil.copyfile("/tmp/startupmount/STARTUP_%s" % self.slot, "/tmp/startupmount/STARTUP")
 				else:
-					if slot < 12:
-						startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=1'\n" % (slot, slot * 2 + 1, model)
+					if self.slot < 12:
+						startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=1'\n" % (self.slot, self.slot * 2 + 1, model)
 					else:
-						slot -= 12
-						startupFileContents = "boot emmcflash0.kernel%s 'brcm_cma=520M@248M brcm_cma=%s@768M root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=12'\n" % (slot, SystemInfo["canMode12"], slot * 2 + 1, model)
+						self.slot -= 12
+						startupFileContents = "boot emmcflash0.kernel%s 'brcm_cma=520M@248M brcm_cma=%s@768M root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=12'\n" % (self.slot, SystemInfo["canMode12"], self.slot * 2 + 1, model)
 					open('/tmp/startupmount/STARTUP', 'w').write(startupFileContents)
 			from Screens.Standby import TryQuitMainloop
 			self.session.open(TryQuitMainloop, 2)
