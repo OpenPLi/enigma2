@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-07 13:00+0200\n"
+"POT-Creation-Date: 2019-09-29 09:27+0200\n"
 "PO-Revision-Date: 2019-07-25 17:52+0300\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: openPLi Dimitrij\n"
@@ -186,6 +186,14 @@ msgstr "%.0f MB"
 #, python-format
 msgid "%.0f kB"
 msgstr "%.0f kB"
+
+#, python-format
+msgid "%.1f°E"
+msgstr "%.1f°E"
+
+#, python-format
+msgid "%.1f°W"
+msgstr "%.1f°W"
 
 #, python-format
 msgid "%.2f GB"
@@ -662,7 +670,7 @@ msgstr ""
 "Сохранить вашу версию?"
 
 msgid "A file from media is in use!"
-msgstr ""
+msgstr "Медиа файл используется!"
 
 msgid ""
 "A finished record timer wants to set your\n"
@@ -1068,6 +1076,9 @@ msgstr "Арабский"
 
 msgid "Are you sure to purge all deleted userbouquets?"
 msgstr "Вы действительно хотите очистить все удаленные пользовательские букеты?"
+
+msgid "Are you sure to reboot to"
+msgstr "Вы действительно хотите выполнить перезагрузку ресивера?"
 
 #, python-format
 msgid "Are you sure to remove all %d.%d%s%s services?"
@@ -1591,6 +1602,21 @@ msgid ""
 "Screens change with left/right buttons or use red, green, blue to toggle.\n"
 "Yellow for returning back to this intro"
 msgstr ""
+"Может использоваться для проверки дефектных пикселей на экране ТВ.\n"
+"\n"
+"Доступны цветовые тестовые экраны:\n"
+"\n"
+"красный\n"
+"зеленый\n"
+"синий\n"
+"белый\n"
+"черный\n"
+"бирюзовый\n"
+"magenta\n"
+"пурпурно-красный\n"
+"\n"
+"Экраны меняются с помощью кнопок влево/вправо или используйте красный, зеленый, синий для переключения.\n"
+"Желтый для возвращения к этому вступлению."
 
 msgid "Can only find a network drive to store the backup this means after the flash the autorestore will not work. Alternativaly you can mount the network drive after the flash and perform a manufacurer reset to autorestore"
 msgstr "Можно только найти сетевой диск для хранения резервной копии, это означает, что после прошивки автообновление не будет работать. Альтернативно вы можете смонтировать сетевой диск после прошивки и выполнить автоматическое восстановление."
@@ -3122,9 +3148,8 @@ msgstr "Включить ОК как превью, в списке выбора 
 msgid "Enable OK for channel selection"
 msgstr "Включить OK для списка выбора каналов"
 
-#, fuzzy
 msgid "Enable OpenTV EPG"
-msgstr "Включить EIT EPG"
+msgstr "Включить OpenTV EPG"
 
 msgid "Enable ViaSat EPG"
 msgstr "Включить ViaSat EPG"
@@ -3615,7 +3640,6 @@ msgstr "Настройки удаленного резервного ресив�
 msgid "Fallback tuner setup"
 msgstr "Настройки удаленного резервного ресивера"
 
-#, fuzzy
 msgid "False"
 msgstr "нет"
 
@@ -3904,9 +3928,6 @@ msgstr "Переход"
 msgid "Goto 0"
 msgstr "Переход на позицию 0"
 
-msgid "Goto:"
-msgstr "Куда:"
-
 msgid "Goto X"
 msgstr "Переход на позицию Х"
 
@@ -3933,6 +3954,9 @@ msgstr "Переход прайм-тайм/сейчас"
 
 msgid "Goto specific date/time"
 msgstr "Переход на конкретную дату/время"
+
+msgid "Goto:"
+msgstr "Куда:"
 
 msgid "GotoX calibration"
 msgstr "Калибровка позиции Х"
@@ -5798,7 +5822,7 @@ msgid "Pitcairn"
 msgstr "Pitcairn"
 
 msgid "Pixels\n"
-msgstr ""
+msgstr "Пиксель\n"
 
 msgid "Play"
 msgstr "Воспроизвести"
@@ -6294,9 +6318,6 @@ msgid "Primary DNS"
 msgstr "Первичный DNS"
 
 msgid "Prime time"
-msgstr "Прайм-тайм"
-
-msgid "PrimeTime"
 msgstr "Прайм-тайм"
 
 msgid "Priority"
@@ -9196,7 +9217,7 @@ msgid "Troubleshoot"
 msgstr "Решение проблем (просмотр)"
 
 msgid "True"
-msgstr ""
+msgstr "да"
 
 msgid "Try to find used transponders in cable network.. please wait..."
 msgstr "Пытаемся найти транспондеры, используемые в кабельной сети... пожалуйста, подождите..."
@@ -9484,9 +9505,8 @@ msgstr "Использовать информацию MHW EPG (Canal+), если
 msgid "Use Netmed EPG information when it is available."
 msgstr "Использовать информацию Netmed EPG (провайдеры 13E), если она доступна."
 
-#, fuzzy
 msgid "Use OpenTV EPG information when it is available."
-msgstr "Использовать информацию EIT EPG (сейчас/далее), если она доступна."
+msgstr "Использовать информацию OpenTV EPG), если она доступна."
 
 msgid "Use TV remote control"
 msgstr "Использовать пульт ТВ для управления"
@@ -11571,6 +11591,9 @@ msgstr "до режима ожидания/перезагрузки"
 msgid "update bookmarks"
 msgstr "обновить закладки"
 
+msgid "used"
+msgstr "используется"
+
 msgid "user defined"
 msgstr "пользовательский вариант"
 
@@ -11655,6 +11678,9 @@ msgstr "да"
 
 msgid "yes (keep feeds)"
 msgstr "да (сохранить feeds сервисы)"
+
+msgid "yes, but not in multi selections"
+msgstr "да, но только в да/нет (без множеств. выбора)"
 
 msgid "zap"
 msgstr "перейти"
