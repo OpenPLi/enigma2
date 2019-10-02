@@ -98,6 +98,11 @@ class AutoInstallWizard(Screen):
 		self.container.appClosed.append(self.appClosed)
 		self.container.dataAvail.append(self.dataAvail)
 		self.package = None
+		self.packages = []
+		self.number_of_packages = None
+
+		# make sure we have a valid package list before attempting to restore packages
+		self.container.execute("opkg update")
 
 		import glob
 		mac_address = open('/sys/class/net/eth0/address', 'r').readline().strip().replace(":", "")
@@ -107,13 +112,9 @@ class AutoInstallWizard(Screen):
 		autoinstallfiles.sort(key=os.path.getmtime, reverse=True)
 		for autoinstallfile in autoinstallfiles:
 			autoinstalldir = os.path.dirname(autoinstallfile)
-			self.packages = [package.strip() for package in open(autoinstallfile).readlines()] + [os.path.join(autoinstalldir, file) for file in os.listdir(autoinstalldir) if file.endswith(".ipk")]
+			self.packages = self.packages + [package.strip() for package in open(autoinstallfile).readlines()] + [os.path.join(autoinstalldir, file) for file in os.listdir(autoinstalldir) if file.endswith(".ipk")]
 			if self.packages:
 				self.number_of_packages = len(self.packages)
-				# make sure we have a valid package list before attempting to restore packages
-				self.container.execute("opkg update")
-				return
-		self.abort()
 
 	def run_console(self):
 		self["progress"].setValue(100 * (self.number_of_packages - len(self.packages))/self.number_of_packages)
