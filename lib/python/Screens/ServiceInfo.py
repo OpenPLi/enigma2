@@ -387,7 +387,7 @@ class ServiceInfo(Screen):
 				from Tools.GetEcmInfo import GetEcmInfo
 				ecmdata = GetEcmInfo().getEcmData()
 				formatstring = "ECMPid %04X (%d) %04X-%s %s"
-				if caid[0] == int(ecmdata[1], 16) and (caid[1] == int(ecmdata[3], 16) or str(int(ecmdata[2], 16)) in provid)
+				if caid[0] == int(ecmdata[1], 16) and (caid[1] == int(ecmdata[3], 16) or str(int(ecmdata[2], 16)) in provid):
 					 formatstring = "%s (%s)" % (formatstring, _("active"))
 				tlist.append(ServiceInfoListEntry(formatstring % (caid[1], caid[1], caid[0], CaIdDescription, extra_info)))
 			if not tlist:
