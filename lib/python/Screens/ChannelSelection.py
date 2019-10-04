@@ -104,12 +104,9 @@ OFF = 0
 EDIT_BOUQUET = 1
 EDIT_ALTERNATIVES = 2
 
-def append_when_current_valid(current, menu, args, level=0, key=""):
+def append_when_current_valid(current, menu, args, level=0, key="dummy"):
 	if current and current.valid() and level <= config.usage.setup_level.index:
-		if key:
-			menu.append(ChoiceEntryComponent(key, args))
-		else:
-			menu.append(ChoiceEntryComponent("dummy", args))
+		menu.append(ChoiceEntryComponent(key, args))
 
 def removed_userbouquets_available():
 	for file in os.listdir("/etc/enigma2/"):
