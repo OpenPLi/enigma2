@@ -388,7 +388,7 @@ class MovieContextMenu(Screen, ProtectedScreen):
 				"8": boundFunction(self.close, csel.do_delete),
 			})
 
-		def append_to_menu(menu, args, key=""):
+		def append_to_menu(menu, args, key="dummy"):
 			menu.append(ChoiceEntryComponent(key, args))
 
 		menu = []
