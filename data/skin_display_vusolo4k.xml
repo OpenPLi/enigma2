@@ -275,7 +275,7 @@
 					<convert type="ServicePosition">Position,ShowHours</convert>
 				</widget>
 				<widget source="session.CurrentService" render="Label" position="fill" font="Medium" halign="right" valign="center" >
-					<convert type="ServicePosition">Remaining,Negate,ShowHours</convert>
+					<convert type="ServicePosition">Remaining,Plus,ShowHours</convert>
 				</widget>
 			</panel>
 			<panel name="SummaryClockRecPanel" position="bottom" size="*,40" />

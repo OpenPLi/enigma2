@@ -249,7 +249,7 @@
 			<convert type="ServicePosition">Position,ShowHours</convert>
 		</widget>
 		<widget source="session.CurrentService" render="Label" position="410,390" size="365,70" font="Medium" halign="right" valign="bottom" >
-			<convert type="ServicePosition">Remaining,Negate,ShowHours</convert>
+			<convert type="ServicePosition">Remaining,Plus,ShowHours</convert>
 		</widget>
 		<widget source="session.FrontendInfo" render="Label" position="240,102" size="540,50" halign="right" valign="bottom" font="FdLcD;42">
 			<convert type="FrontendInfo">STRING,24,0</convert>
