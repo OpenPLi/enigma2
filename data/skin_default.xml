@@ -1219,10 +1219,10 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y() + (or
 	</screen>
 	<!-- Time & date input -->
 	<screen name="TimeDateInput" position="center,center" size="400,200" title="Date/time input">
-		<widget name="cancel" pixmap="buttons/red.png" position="10,0" size="140,40" alphatest="on"/>
-		<widget name="ok" pixmap="buttons/green.png" position="250,0" size="140,40" alphatest="on"/>
-		<widget name="canceltext" position="10,0" zPosition="1" size="140,40" font="Regular;19" halign="center" valign="center" transparent="1"/>
-		<widget name="oktext" position="250,0" zPosition="1" size="140,40" font="Regular;19" halign="center" valign="center" transparent="1"/>
+		<ePixmap pixmap="buttons/red.png" position="10,0" size="140,40" alphatest="on"/>
+		<ePixmap pixmap="buttons/green.png" position="250,0" size="140,40" alphatest="on"/>
+		<widget source="key_red" render="Label" position="10,0" zPosition="1" size="140,40" font="Regular;19" halign="center" valign="center" transparent="1"/>
+		<widget source="key_green" render="Label" position="250,0" zPosition="1" size="140,40" font="Regular;19" halign="center" valign="center" transparent="1"/>
 		<widget name="config" position="10,40" size="380,150"/>
 	</screen>
 	<!-- Timer edit -->
