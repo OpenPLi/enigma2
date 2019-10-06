@@ -57,6 +57,7 @@ class HarddiskSelection(Screen):
 		else:
 			self["hddlist"] = MenuList(harddiskmanager.HDDList())
 		self["key_red"] = Label(_("Cancel"))
+		self["key_green"] = Label(_("Select"))
 		self["actions"] = ActionMap(["OkCancelActions"],
 		{
 			"ok": self.okbuttonClick,
@@ -64,7 +65,8 @@ class HarddiskSelection(Screen):
 		})
 		self["shortcuts"] = ActionMap(["ShortcutActions"],
 		{
-			"red": self.close
+			"red": self.close,
+			"green": self.okbuttonClick
 		})
 
 	def doIt(self, selection):
