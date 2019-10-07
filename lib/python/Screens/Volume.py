@@ -1,6 +1,6 @@
-from Screen import Screen
-from Components.VolumeBar import VolumeBar
 from Components.Label import Label
+from Components.VolumeBar import VolumeBar
+from Screens.Screen import Screen
 
 class Volume(Screen):
 	def __init__(self, session):
@@ -10,6 +10,6 @@ class Volume(Screen):
 		self["VolumeText"] = Label("")
 
 	def setValue(self, vol):
-		print "setValue", vol
+		print "[Volume] Volume set to %d." % vol
 		self.volumeBar.setValue(vol)
-		self["VolumeText"].setText(str(vol))
+		self["VolumeText"].text = str(vol)
