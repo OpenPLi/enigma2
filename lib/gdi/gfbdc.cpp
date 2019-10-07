@@ -182,17 +182,6 @@ void gFBDC::exec(const gOpcode *o)
 		}
 #endif
 		break;
-	case gOpcode::sendShow:
-	{
-		delete o->parm.setShowHideInfo;
-		break;
-	}
-	case gOpcode::sendHide:
-	{
-		delete o->parm.setShowHideInfo;
-		break;
-	}
-
 	default:
 		gDC::exec(o);
 		break;
