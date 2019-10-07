@@ -186,6 +186,11 @@ public:
 	virtual ~gRC();
 
 	void submit(const gOpcode &o);
+	
+#ifdef CONFIG_ION
+	void lock();
+	void unlock();
+#endif
 
 	sigc::signal0<void> notify;
 
