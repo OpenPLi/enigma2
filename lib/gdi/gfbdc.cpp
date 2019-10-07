@@ -157,6 +157,39 @@ void gFBDC::exec(const gOpcode *o)
 	}
 	case gOpcode::flush:
 		fb->blit();
+#ifdef CONFIG_ION
+		if (surface_back.data_phys)
+		{
+			gUnmanagedSurface s(surface);
+			surface = surface_back;
+			surface_back = s;
+
+			fb->waitVSync();
+			if (surface.data_phys > surface_back.data_phys)
+			{
+				fb->setOffset(0);
+			}
+			else
+			{
+				fb->setOffset(surface_back.y);
+			}
+			bcm_accel_blit(
+				surface_back.data_phys, surface_back.x, surface_back.y, surface_back.stride, 0,
+				surface.data_phys, surface.x, surface.y, surface.stride,
+				0, 0, surface.x, surface.y,
+				0, 0, surface.x, surface.y,
+				0, 0);
+		}
+#endif
+		break;
+	case gOpcode::sendShow:
+	{
+		delete o->parm.setShowHideInfo;
+		break;
+	}
+	case gOpcode::sendHide:
+	{
+		delete o->parm.setShowHideInfo;
 		break;
 	}
 
