@@ -868,9 +868,9 @@ void eDVBCIInterfaces::removePMTHandler(eDVBServicePMTHandler *pmthandler)
 					{
 						eDebug("[CI] warning: CI streaming finish mode not set, assuming \"tuner A\"");
 #ifdef DREAMBOX_DUAL_TUNER
-							finish_source = eDVBCISlot::getTunerLetterDM(0);
+						finish_source = eDVBCISlot::getTunerLetterDM(0);
 #else
-							finish_source = "A";
+						finish_source = "A";
 #endif
 					}
 
