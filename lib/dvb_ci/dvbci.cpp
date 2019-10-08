@@ -35,7 +35,7 @@
 
 eDVBCIInterfaces *eDVBCIInterfaces::instance = 0;
 
-static char* eDVBCISlot::readInputCI(int tuner_no)
+char* eDVBCISlot::readInputCI(int tuner_no)
 {
 	char id1[] = "NIM Socket";
 	char id2[] = "Input_Name";
@@ -89,7 +89,7 @@ static char* eDVBCISlot::readInputCI(int tuner_no)
 	return inputName;
 }
 
-static std::string eDVBCISlot::getTunerLetterDM(int tuner_no)
+std::string eDVBCISlot::getTunerLetterDM(int tuner_no)
 {
 	char *srcCI = readInputCI(tuner_no);
 	if (srcCI) return std::string(srcCI);

@@ -93,6 +93,8 @@ public:
 	int setSource(const std::string &source);
 	int setClockRate(int);
 	static std::string getTunerLetter(int tuner_no) { return std::string(1, char(65 + tuner_no)); }
+	static std::string getTunerLetterDM(int);
+	static char* readInputCI(int);
 };
 
 struct CIPmtHandler
