@@ -6,7 +6,7 @@ installdir = $(pkglibdir)/python
 install_PYTHON = \
 	Navigation.py NavigationInstance.py RecordTimer.py ServiceReference.py \
 	keyids.py keymapparser.py mytest.py skin.py timer.py GlobalActions.py \
-	e2reactor.py
+	e2reactor.py BoxBrandingTest.py
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = enigma2.pc
