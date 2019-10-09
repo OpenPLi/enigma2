@@ -135,7 +135,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 			if param in self.sliderPackages:
 				self.slider.setValue(self.sliderPackages[param])
 			self.package.setText(param)
-			self.status.setText(_("Upgrading") + ": %s/%s" % (self.packages, self.total_packages))
+			self.status.setText(_("Updating") + ": %s/%s" % (self.packages, self.total_packages))
 			if not param in self.processed_packages:
 				self.processed_packages.append(param)
 				self.packages += 1
@@ -185,12 +185,12 @@ class UpdatePlugin(Screen, ProtectedScreen):
 						choices = [(_("Update and reboot (recommended)"), "cold"),
 						(_("Update and ask to reboot"), "hot")]
 					choices.append((_("Update channel list only"), "channels"))
-					choices.append((_("Show packages to be upgraded"), "showlist"))
+					choices.append((_("Show packages to be updated"), "showlist"))
 				else:
 					message = _("No updates available")
 					choices = []
 				if fileExists("/home/root/ipkgupgrade.log"):
-					choices.append((_("Show latest upgrade log"), "log"))
+					choices.append((_("Show latest update log"), "log"))
 				choices.append((_("Show latest commits"), "commits"))
 				choices.append((_("Cancel"), ""))
 				self.session.openWithCallback(self.startActualUpgrade, ChoiceBox, title=message, list=choices, windowTitle=self.title)
@@ -252,7 +252,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 			self.session.openWithCallback(boundFunction(self.ipkgCallback, IpkgComponent.EVENT_DONE, None), TextBox, text, _("Packages to update"), True)
 		elif answer[1] == "log":
 			text = open("/home/root/ipkgupgrade.log", "r").read()
-			self.session.openWithCallback(boundFunction(self.ipkgCallback, IpkgComponent.EVENT_DONE, None), TextBox, text, _("Latest upgrade log"), True)
+			self.session.openWithCallback(boundFunction(self.ipkgCallback, IpkgComponent.EVENT_DONE, None), TextBox, text, _("Latest update log"), True)
 		else:
 			self.ipkg.startCmd(IpkgComponent.CMD_UPGRADE, args = {'test_only': False})
 

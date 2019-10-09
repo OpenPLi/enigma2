@@ -55,7 +55,7 @@ class Ipkg(Screen):
 			self.slider.setValue(len(self.cmdList))
 
 			self.package.setText("")
-			self.status.setText(ngettext("Done - Installed, upgraded or removed %d package (%s)", "Done - Installed, upgraded or removed %d packages (%s)", self.packages) % (self.packages, ngettext("with %d error", "with %d errors", self.error) % self.error))
+			self.status.setText(ngettext("Done - Installed, updated or removed %d package (%s)", "Done - Installed, updated or removed %d packages (%s)", self.packages) % (self.packages, ngettext("with %d error", "with %d errors", self.error) % self.error))
 			return False
 		else:
 			cmd = self.cmdList[self.runningCmd]
@@ -85,7 +85,7 @@ class Ipkg(Screen):
 			if param in self.sliderPackages:
 				self.slider.setValue(self.sliderPackages[param])
 			self.package.setText(param)
-			self.status.setText(_("Upgrading"))
+			self.status.setText(_("Updating"))
 			if not param in self.processed_packages:
 				self.processed_packages.append(param)
 				self.packages += 1
