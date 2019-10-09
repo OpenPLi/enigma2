@@ -651,12 +651,13 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 			self.changeEntry(0)
 			self.switchToPlayList()
 
-	def applySettings(self):
-		self.savePlaylistOnExit = config.mediaplayer.savePlaylistOnExit.getValue()
-		if config.mediaplayer.repeat.getValue() == True:
-			self["repeat"].setPixmapNum(1)
-		else:
-			self["repeat"].setPixmapNum(0)
+	def applySettings(self, answer=True):
+		if answer is True:
+			self.savePlaylistOnExit = config.mediaplayer.savePlaylistOnExit.getValue()
+			if config.mediaplayer.repeat.getValue() == True:
+				self["repeat"].setPixmapNum(1)
+			else:
+				self["repeat"].setPixmapNum(0)
 
 	def showEventInformation(self):
 		from Screens.EventView import EventViewSimple
