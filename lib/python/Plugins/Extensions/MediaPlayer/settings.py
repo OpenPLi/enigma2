@@ -84,14 +84,14 @@ class MediaPlayerSettings(Screen, ConfigListScreen):
 		print "[initConfigList]", element
 		try:
 			self.list = []
-			self.list.append(getConfigListEntry(_("repeat playlist"), config.mediaplayer.repeat))
-			self.list.append(getConfigListEntry(_("save playlist on exit"), config.mediaplayer.savePlaylistOnExit))
-			self.list.append(getConfigListEntry(_("save last directory on exit"), config.mediaplayer.saveDirOnExit))
+			self.list.append(getConfigListEntry(_("Repeat playlist"), config.mediaplayer.repeat))
+			self.list.append(getConfigListEntry(_("Save playlist on exit"), config.mediaplayer.savePlaylistOnExit))
+			self.list.append(getConfigListEntry(_("Save last directory on exit"), config.mediaplayer.saveDirOnExit))
 			if not config.mediaplayer.saveDirOnExit.getValue():
-				self.list.append(getConfigListEntry(_("start directory"), config.mediaplayer.defaultDir))
-			self.list.append(getConfigListEntry(_("sorting of playlists"), config.mediaplayer.sortPlaylists))
+				self.list.append(getConfigListEntry(_("Start directory"), config.mediaplayer.defaultDir))
+			self.list.append(getConfigListEntry(_("Sorting of playlists"), config.mediaplayer.sortPlaylists))
 			self.list.append(getConfigListEntry(_("Always hide infobar"), config.mediaplayer.alwaysHideInfoBar))
-			self.list.append(getConfigListEntry(_("show mediaplayer on mainmenu"), config.mediaplayer.onMainMenu))
+			self.list.append(getConfigListEntry(_("Show media player on main menu"), config.mediaplayer.onMainMenu))
 			self["config"].setList(self.list)
 		except KeyError:
 			print "keyError"
