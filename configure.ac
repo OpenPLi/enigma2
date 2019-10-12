@@ -70,7 +70,6 @@ AM_CONDITIONAL(DM800SE, test "$BOXTYPE" == dm800se)
 AM_CONDITIONAL(DM800SEV2, test "$BOXTYPE" == dm800sev2)
 AM_CONDITIONAL(DM500HD, test "$BOXTYPE" == dm500hd)
 AM_CONDITIONAL(DM500HDV2, test "$BOXTYPE" == dm500hdv2)
-#AM_CONDITIONAL(HAVE_TEMPFANCONTROL, test "$BOXTYPE" == dm8000 -o "$BOXTYPE" == dm800se -o "$BOXTYPE" == dm500hd)
 AM_CONDITIONAL(HAVE_TEMPFANCONTROL, test "$BOXTYPE" == dm8000 -o "$BOXTYPE" == dm500hd)
 
 if test `echo "$BOXTYPE" | cut -b 1-2` == "dm"; then
@@ -340,8 +339,8 @@ lib/python/Plugins/SystemPlugins/DiseqcTester/meta/Makefile
 lib/python/Plugins/SystemPlugins/Hotplug/Makefile
 lib/python/Plugins/SystemPlugins/Hotplug/meta/Makefile
 lib/python/Plugins/SystemPlugins/Makefile
-lib/python/Plugins/SystemPlugins/TempFanControl/Makefile
-lib/python/Plugins/SystemPlugins/TempFanControl/meta/Makefile
+#lib/python/Plugins/SystemPlugins/TempFanControl/Makefile
+#lib/python/Plugins/SystemPlugins/TempFanControl/meta/Makefile
 lib/python/Plugins/SystemPlugins/NetworkWizard/Makefile
 lib/python/Plugins/SystemPlugins/NetworkWizard/meta/Makefile
 lib/python/Plugins/SystemPlugins/PositionerSetup/Makefile
