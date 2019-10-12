@@ -275,7 +275,7 @@ class MovieBrowserConfiguration(ConfigListScreen,Screen):
 			configList.append(getConfigListEntry(_(btn), userDefinedButtons[btn]))
 		ConfigListScreen.__init__(self, configList, session=session, on_change = self.changedEntry)
 		self["key_red"] = StaticText(_("Cancel"))
-		self["key_green"] = StaticText(_("Ok"))
+		self["key_green"] = StaticText(_("OK"))
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions",  "MenuActions"],
 		{
 			"red": self.cancel,
@@ -419,11 +419,11 @@ class MovieContextMenu(Screen, ProtectedScreen):
 			append_to_menu(menu, (_("Remove bookmark"), csel.do_addbookmark))
 		else:
 			append_to_menu(menu, (_("Add bookmark"), csel.do_addbookmark))
-		append_to_menu(menu, (_("create directory"), csel.do_createdir), key="7")
+		append_to_menu(menu, (_("Create directory"), csel.do_createdir), key="7")
 		append_to_menu(menu, (_("Sort by") + "...", csel.selectSortby))
 		append_to_menu(menu, (_("On end of movie") + "...", csel.do_movieoff_menu))
 		append_to_menu(menu, (_("Network") + "...", csel.showNetworkSetup), key="yellow")
-		append_to_menu(menu, (_("Settings") + "...", csel.configure), key="menu")
+		append_to_menu(menu, (_("Settings"), csel.configure), key="menu")
 
 		self["menu"] = ChoiceList(menu)
 
@@ -619,7 +619,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			}, prio = -2)
 
 		def getinitUserDefinedActionsDescription(key):
-			return _(userDefinedActions.get(eval("config.movielist.%s.value" % key), _("Not Defined")))
+			return _(userDefinedActions.get(eval("config.movielist.%s.value" % key), _("Not defined")))
 
 		self["InfobarActions"] = HelpableActionMap(self, "InfobarActions",
 			{
