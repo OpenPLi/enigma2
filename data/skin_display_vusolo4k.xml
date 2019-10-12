@@ -279,6 +279,9 @@
 				</widget>
 			</panel>
 			<panel name="SummaryClockRecPanel" position="bottom" size="*,40" />
+			<widget source="session.CurrentService" render="Picon" isFrontDisplayPicon="1" position="10,10" size="220,132" transparent="1" halign="center" valign="center" alphatest="blend" >
+				<convert type="ServiceName">Reference</convert>
+			</widget>
 		</panel>
 	</screen>
 	<screen name="MovieContextMenuSummary" position="fill">
