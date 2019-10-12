@@ -126,7 +126,7 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 				"right": self.right,
 				"up": self.up,
 				"down": self.down,
-				"ok": (self.ok, _("select")),
+				"ok": (self.ok, _("Select")),
 				"back": (self.cancel, _("Cancel")),
 			}, -2)
 
@@ -140,13 +140,13 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 
 		self["EPGSelectActions"] = LocationBoxActionMap(self, "EPGSelectActions",
 			{
-				"prevBouquet": (self.switchToBookList, _("switch to bookmarks")),
-				"nextBouquet": (self.switchToFileList, _("switch to filelist")),
+				"prevBouquet": (self.switchToBookList, _("Switch to bookmarks")),
+				"nextBouquet": (self.switchToFileList, _("Switch to filelist")),
 			}, -2)
 
 		self["MenuActions"] = LocationBoxActionMap(self, "MenuActions",
 			{
-				"menu": (self.showMenu, _("menu")),
+				"menu": (self.showMenu, _("Menu")),
 			}, -2)
 
 		# Actions used by quickselect
@@ -436,20 +436,20 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 		if not self.userMode and self.realBookmarks:
 			if self.currList == "filelist":
 				menu = [
-					(_("switch to bookmarks"), self.switchToBookList),
-					(_("add bookmark"), self.addRemoveBookmark),
-					(_("update bookmarks"), self.updateBookmarks)
+					(_("Switch to bookmarks"), self.switchToBookList),
+					(_("Add bookmark"), self.addRemoveBookmark),
+					(_("Update bookmarks"), self.updateBookmarks)
 				]
 				if self.editDir:
 					menu.extend((
-						(_("create directory"), self.createDir),
-						(_("remove directory"), self.removeDir)
+						(_("Create directory"), self.createDir),
+						(_("Remove directory"), self.removeDir)
 					))
 			else:
 				menu = (
-					(_("switch to filelist"), self.switchToFileList),
-					(_("remove bookmark"), self.addRemoveBookmark),
-					(_("update bookmarks"), self.updateBookmarks)
+					(_("Switch to filelist"), self.switchToFileList),
+					(_("Remove bookmark"), self.addRemoveBookmark),
+					(_("Update bookmarks"), self.updateBookmarks)
 				)
 
 			self.session.openWithCallback(
