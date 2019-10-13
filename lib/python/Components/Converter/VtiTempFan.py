@@ -85,37 +85,36 @@ class VtiTempFan(Poll, Converter, object):
 		return fan
 
 	def getCamName(self):
-		camnameinfo = ""
 		if os.path.exists("/etc/CurrentBhCamName"):
 			try:
 				for line in open("/etc/CurrentBhCamName"):
 					line = line.lower()
 					if "wicardd" in line:
-						camnameinfo = "Wicardd"
+						return "Wicardd"
 					elif "incubus" in line:
-						camnameinfo = "Incubus"
+						return "Incubus"
 					elif "gbox" in line:
-						camnameinfo = "Gbox"
+						return "Gbox"
 					elif "mbox" in line:
-						camnameinfo = "Mbox"
+						return "Mbox"
 					elif "cccam" in line:
-						camnameinfo = "CCcam"
+						return "CCcam"
 					elif "oscam" in line:
-						camnameinfo = "OScam"
+						return "OScam"
 					elif "camd3" in line:
-						camnameinfo = "Camd3"
+						return "Camd3"
 					elif "mgcamd" in line:
-						camnameinfo = "Mgcamd"
+						return "Mgcamd"
 					elif "gcam" in line:
-						camnameinfo = "GCam"
+						return "GCam"
 					elif "ncam" in line:
-						camnameinfo = "NCam"
+						return "NCam"
 					elif "common" in line:
-						camnameinfo = "CI"
+						return "CI"
 					elif "interface" in line:
-						camnameinfo = "CI"
-					if camnameinfo:
-						return camnameinfo
+						return "CI"
+					else:
+						return ""
 			except:
 				pass
 		elif os.path.exists("/etc/init.d/softcam"):
@@ -123,34 +122,34 @@ class VtiTempFan(Poll, Converter, object):
 				for line in open("/etc/init.d/softcam"):
 					line = line.lower()
 					if "wicardd" in line:
-						camnameinfo = "Wicardd"
+						return "Wicardd"
 					elif "incubus" in line:
-						camnameinfo = "Incubus"
+						return "Incubus"
 					elif "gbox" in line:
-						camnameinfo = "Gbox"
+						return "Gbox"
 					elif "mbox" in line:
-						camnameinfo = "Mbox"
+						return "Mbox"
 					elif "cccam" in line:
-						camnameinfo = "CCcam"
+						return "CCcam"
 					elif "oscam" in line:
-						camnameinfo = "OScam"
+						return "OScam"
 					elif "camd3" in line:
-						camnameinfo = "Camd3"
+						return "Camd3"
 					elif "mgcamd" in line:
-						camnameinfo = "Mgcamd"
+						return "Mgcamd"
 					elif "gcam" in line:
-						camnameinfo = "GCam"
+						return "GCam"
 					elif "ncam" in line:
-						camnameinfo = "NCam"
+						return "NCam"
 					elif "common" in line:
-						camnameinfo = "CI"
+						return "CI"
 					elif "interface" in line:
-						camnameinfo = "CI"
-					if camnameinfo:
-						return camnameinfo
+						return "CI"
+					else:
+						return ""
 			except:
 				pass
-		return camnameinfo
+		return ""
 
 	def changed(self, what):
 		if what[0] == self.CHANGED_POLL:
