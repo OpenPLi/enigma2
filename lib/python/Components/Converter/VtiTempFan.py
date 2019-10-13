@@ -102,19 +102,19 @@ class VtiTempFan(Poll, Converter, object):
 					elif "oscam" in line:
 						return "OScam"
 					elif "camd3" in line:
-						return "Camd3"
+						if "mgcamd" not in line:
+							return "Camd3"
 					elif "mgcamd" in line:
 						return "Mgcamd"
 					elif "gcam" in line:
-						return "GCam"
+						if "mgcamd" not in line:
+							return "GCam"
 					elif "ncam" in line:
 						return "NCam"
 					elif "common" in line:
 						return "CI"
 					elif "interface" in line:
 						return "CI"
-					else:
-						return ""
 			except:
 				pass
 		elif os.path.exists("/etc/init.d/softcam"):
@@ -134,19 +134,19 @@ class VtiTempFan(Poll, Converter, object):
 					elif "oscam" in line:
 						return "OScam"
 					elif "camd3" in line:
-						return "Camd3"
+						if "mgcamd" not in line:
+							return "Camd3"
 					elif "mgcamd" in line:
 						return "Mgcamd"
 					elif "gcam" in line:
-						return "GCam"
+						if "mgcamd" not in line:
+							return "GCam"
 					elif "ncam" in line:
 						return "NCam"
 					elif "common" in line:
 						return "CI"
 					elif "interface" in line:
 						return "CI"
-					else:
-						return ""
 			except:
 				pass
 		return ""
