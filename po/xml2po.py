@@ -10,7 +10,8 @@ try:
 	no_comments = False
 except ImportError:
 	class LexicalHandler:
-		pass
+		def __init__(self):
+			pass
 	no_comments = True
 
 class parseXML(ContentHandler, LexicalHandler):
@@ -25,11 +26,11 @@ class parseXML(ContentHandler, LexicalHandler):
 			self.last_comment = comment
 
 	def startElement(self, name, attrs):
-		for x in ["text", "title", "value", "caption", "description"]:
+		for x in ["text", "title", "titleshort", "value", "caption", "description"]:
 			try:
-				k = str(attrs[x].encode('utf-8'))
+				k = str(attrs[x])
 				if k.strip() != "" and not self.ishex.match(k):
-					attrlist.add((k, self.last_comment))
+					attrlist.add((attrs[x], self.last_comment))
 					self.last_comment = None
 			except KeyError:
 				pass
