@@ -504,8 +504,8 @@ class DiseqcTesterTestTypeSelection(Screen, ConfigListScreen):
 
 	def __init__(self, session, feid):
 		Screen.__init__(self, session)
-		# for the skin: first try MediaPlayerSettings, then Setup, this allows individual skinning
-		self.skinName = ["DiseqcTesterTestTypeSelection", "Setup" ]
+		# for the skin: first try 'DiseqcTesterTestTypeSelection', then 'Setup', this allows individual skinning
+		self.skinName = ["DiseqcTesterTestTypeSelection", "Setup"]
 		self.setup_title = _("DiSEqC-tester settings")
 		self.onChangedEntry = [ ]
 		self.feid = feid
@@ -579,24 +579,11 @@ class DiseqcTesterTestTypeSelection(Screen, ConfigListScreen):
 		return SetupSummary
 
 class DiseqcTesterNimSelection(NimSelection):
-	skin = """
-		<screen position="center,center" size="400,330" title="Choose Tuner">
-		<widget source="nimlist" render="Listbox" position="0,0" size="380,300" scrollbarMode="showOnDemand">
-			<convert type="TemplatedMultiContent">
-				{"template": [
-						MultiContentEntryText(pos = (10, 5), size = (360, 30), flags = RT_HALIGN_LEFT, text = 1), # index 1 is the nim name,
-						MultiContentEntryText(pos = (50, 30), size = (320, 34), font = 1, flags = RT_HALIGN_LEFT, text = 2), # index 2 is a description of the nim settings,
-					],
-				 "fonts": [gFont("Regular", 20), gFont("Regular", 15)],
-				 "itemHeight": 70
-				}
-			</convert>
-		</widget>
-	</screen>"""
 
 	def __init__(self, session, args = None):
 		NimSelection.__init__(self, session)
-		self.setTitle(_("Choose Tuner"))
+		# for the skin: first try 'DiseqcTesterNimSelection', then 'NimSelection', this allows individual skinning
+		self.skinName = ["DiseqcTesterNimSelection", "NimSelection"]
 
 	def setResultClass(self):
 		self.resultclass = DiseqcTesterTestTypeSelection
