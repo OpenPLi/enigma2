@@ -1,5 +1,7 @@
 from Components.Converter.Converter import Converter
+from Components.Sensors import sensors
 from Components.Element import cached
+from enigma import getBoxType
 from Poll import Poll
 import os
 
@@ -41,48 +43,91 @@ class VtiTempFan(Poll, Converter, object):
 
 	def tempfile(self):
 		tempinfo = ""
-		if os.path.exists("/proc/stb/sensors/temp0/value"):
+		mark = str("\xc2\xb0")
+		sensor_info = None
+	 	if getBoxType() not in ('dm7020hd',):
+			try:
+				sensor_info = sensors.getSensorsList(sensors.TYPE_TEMPERATURE)
+				if sensor_info and len(sensor_info) > 0:			
+					tempinfo = str(sensors.getSensorValue(sensor_info[0]))
+					tempinfo = _("Temp:") + tempinfo + mark + "C"
+					return tempinfo
+			except:
+				pass
+
+		elif os.path.exists("/proc/stb/sensors/temp0/value"):
 			f = open("/proc/stb/sensors/temp0/value", "r")
 			tempinfo = str(f.readline().strip())
 			f.close()
+			if tempinfo and int(tempinfo) > 0:
+				tempinfo = _("Temp:") + tempinfo + mark + "C"
+				return tempinfo
+
 		elif os.path.exists("/proc/stb/fp/temp_sensor"):
 			f = open("/proc/stb/fp/temp_sensor", "r")
 			tempinfo = str(f.readline().strip())
 			f.close()
+			if tempinfo and int(tempinfo) > 0:
+				tempinfo = _("Temp:") + tempinfo + mark + "C"
+				return tempinfo
+
 		elif os.path.exists("/proc/stb/sensors/temp/value"):
 			f = open("/proc/stb/sensors/temp/value", "r")
 			tempinfo = str(f.readline().strip())
 			f.close()
+			if tempinfo and int(tempinfo) > 0:
+				tempinfo = _("Temp:") + tempinfo + mark + "C"
+				return tempinfo
+
 		elif os.path.exists('/proc/stb/fp/temp_sensor_avs'):
 			f = open('/proc/stb/fp/temp_sensor_avs', 'r')
-			tempinfo = f.read()
+			tempinfo = str(f.readline().strip())
 			f.close()
+			if tempinfo and int(tempinfo) > 0:
+				tempinfo = _("Temp:") + tempinfo + mark + "C"
+				return tempinfo
+
 		elif os.path.exists('/sys/devices/virtual/thermal/thermal_zone0/temp'):
-			try:
-				f = open('/sys/devices/virtual/thermal/thermal_zone0/temp', 'r')
-				tempinfo = f.read()
-				tempinfo = tempinfo[:-4]
-				f.close()
-			except:
-				tempinfo = ""
+			f = open('/sys/devices/virtual/thermal/thermal_zone0/temp', 'r')
+			tempinfo = f.read()
+			tempinfo = tempinfo[:-4]
+			tempinfo = str(tempinfo.strip())
+			f.close()
+			if tempinfo and int(tempinfo) > 0:
+				tempinfo = _("Temp:") + tempinfo + mark + "C"
+				return tempinfo
+
 		elif os.path.exists('/proc/hisi/msp/pm_cpu'):
 			try:
 				tempinfo = search('temperature = (\d+) degree', open("/proc/hisi/msp/pm_cpu").read()).group(1)
 			except:
-				tempinfo = ""
+				pass
+			tempinfo = str(tempinfo.strip())
+			if tempinfo and int(tempinfo) > 0:
+				tempinfo = _("Temp:") + tempinfo + mark + "C"
+				return tempinfo
 
-		if tempinfo and int(tempinfo) > 0:
-			mark = str("\xc2\xb0")
-			tempinfo = _("Temp:") + tempinfo.replace('\n', '').replace(' ','') + mark + "C"
 		return tempinfo
 
 	def fanfile(self):
-		fan = ""
+		fan = None
+		flash_info = None
 		if os.path.exists("/proc/stb/fp/fan_speed"):
 			f = open("/proc/stb/fp/fan_speed", "rb")
 			fan = str(f.readline().strip())
 			f.close()
-		return fan
+			if fan is not None:
+				return _("Fan:") + fan
+
+		try:
+			flash_info = os.statvfs("/")
+			if flash_info is not None:			
+				free_flash = int((flash_info.f_frsize) * (flash_info.f_bavail) / 1024 / 1024)
+				return _("Flash: %s MB") % free_flash
+		except:
+			pass
+
+		return ""
 
 	def getCamName(self):
 		if os.path.exists("/etc/CurrentBhCamName"):
