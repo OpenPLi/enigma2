@@ -80,7 +80,9 @@ class OpenEcmInfo(Poll, Converter, object):
 			return ""
 			
 		elif self.type == self.bitrate:
-			return _("Video:") + str(self.video) + "  " + _("Audio:") + str(self.audio)
+			if self.video>0 and self.audio>0:
+				return _("Video:") + str(self.video) + "  " + _("Audio:") + str(self.audio)
+			return ""
 
 		elif self.type == self.vbitrate:
 			return _("Video:") + str(self.video)
