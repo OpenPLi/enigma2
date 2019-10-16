@@ -76,11 +76,11 @@ class OpenEcmInfo(Poll, Converter, object):
 	def getText(self):
 		service = self.source.service
 		info = service and service.info()
-		if not info:
+		if not info or service.streamed() is not None:
 			return ""
 			
-		elif self.type == self.bitrate:
-			if self.video>0 and self.audio>0:
+		if self.type == self.bitrate:
+			if self.video > 0 and self.audio > 0:
 				return _("Video:") + str(self.video) + "  " + _("Audio:") + str(self.audio)
 			return ""
 
@@ -111,7 +111,7 @@ class OpenEcmInfo(Poll, Converter, object):
 	def changed(self, what):
 		if what[0] == self.CHANGED_SPECIFIC:
 			if what[1] == iPlayableService.evStart:
-				self.initTimer.start(2000, True)
+				self.initTimer.start(1000, True)
 			elif what[1] == iPlayableService.evEnd:
 				self.clearData()
 				Converter.changed(self, what)
