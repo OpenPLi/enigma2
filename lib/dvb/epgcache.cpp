@@ -1321,6 +1321,7 @@ void eEPGCache::load()
 {
 	if (m_channel_pending)
 	{
+		eDebug("[eEPGCache] delay epgcache load until channel data is ready");
 		m_load_pending = true;
 		return;
 	}
