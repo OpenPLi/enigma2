@@ -75,8 +75,6 @@ class ImportChannels():
 
 	def EPGDatDownloadedCallback(self, data=None):
 		destination = config.misc.epgcache_filename.value if os.path.isdir(os.path.dirname(config.misc.epgcache_filename.value)) else "/epg.dat"
-		if os.path.isfile(destination):
-			os.remove(destination)
 		shutil.move(os.path.join(TMPDIR, "epg.dat"), destination)
 		self.startDownloadSettings()
 
