@@ -445,7 +445,7 @@ def mediafilesInUse(session):
 			filename = None
 		else:
 			filename = os.path.basename(filename)
-	return set([file for file in files if not(filename and file.startswith(filename) and files.count(filename) < 2)])
+	return set([file for file in files if not(filename and file == filename and files.count(filename) < 2)])
 
 # Prepare filenames for use in external shell processing. Filenames may
 # contain spaces or other special characters.  This method adjusts the
