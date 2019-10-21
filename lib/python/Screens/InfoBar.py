@@ -351,7 +351,6 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 			ref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 			if ref:
 				delResumePoint(ref)
-			self.session.nav.stopService()
 			self.handleLeave(config.usage.on_movie_eof.value)
 
 	def up(self):
