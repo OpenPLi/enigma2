@@ -46,7 +46,7 @@ class ImportChannels():
 
 	def downloadUrl(self, url, file, timeout=5):
 		from twisted.web.client import downloadPage
-		self.setMessage("downloading %s/%s -> %s" % (self.url, url, file))
+		self.setMessage("downloading %s/%s" % (self.url, url))
 		return downloadPage("%s/%s" % (self.url, url.encode("utf-8")), file.encode("utf-8"), headers=self.headers, timeout=timeout)
 
 	def saveEpgCallback(self, data):
