@@ -4,8 +4,6 @@ from enigma import eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT
 from Tools.LoadPixmap import LoadPixmap
 import skin
 
-selectionpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "icons/lock_on.png"))
-
 def SelectionEntryComponent(description, value, index, selected):
 	dx, dy, dw, dh = skin.parameters.get("SelectionListDescr",(25, 3, 650, 30))
 	res = [
@@ -13,8 +11,11 @@ def SelectionEntryComponent(description, value, index, selected):
 		(eListboxPythonMultiContent.TYPE_TEXT, dx, dy, dw, dh, 0, RT_HALIGN_LEFT, description)
 	]
 	if selected:
-		ix, iy, iw, ih = skin.parameters.get("SelectionListLock",(0, 2, 25, 24))
-		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, ix, iy, iw, ih, selectionpng))
+		selectionpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "icons/lock_on.png"))
+	else:
+		selectionpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "icons/lock_off.png"))
+	ix, iy, iw, ih = skin.parameters.get("SelectionListLock",(0, 2, 25, 24))
+	res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, ix, iy, iw, ih, selectionpng))
 	return res
 
 class SelectionList(MenuList):
