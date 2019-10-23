@@ -20,7 +20,7 @@ class ProtectedScreen:
 		if result is None:
 			self.closeProtectedScreen()
 		elif not result:
-			self.session.openWithCallback(self.closeProtectedScreen, MessageBox, _("The pin code you entered is wrong."), MessageBox.TYPE_ERROR, timeout=3)
+			self.session.openWithCallback(self.closeProtectedScreen, MessageBox, _("The pin code you entered is wrong."), MessageBox.TYPE_ERROR, timeout=5)
 
 	def closeProtectedScreen(self, result=None):
 		self.close(None)
@@ -167,7 +167,7 @@ class ParentalControlSetup(Screen, ConfigListScreen, ProtectedScreen):
 		if answer:
 			self.session.openWithCallback(self.newPinEntered, PinInput, title=_("Please enter the new PIN code"), windowTitle=_("Enter pin code"))
 		elif answer == False:
-			self.session.open(MessageBox, _("The pin code you entered is wrong."), MessageBox.TYPE_ERROR, timeout=3)
+			self.session.open(MessageBox, _("The pin code you entered is wrong."), MessageBox.TYPE_ERROR, timeout=5)
 
 	def newPinEntered(self, answer):
 		if answer is not None:
@@ -179,9 +179,9 @@ class ParentalControlSetup(Screen, ConfigListScreen, ProtectedScreen):
 				warning_text = ""
 				if not answer2:
 					warning_text = _("You PIN code is 0000. This is the default PIN code and it disables parental control!\n")
-				self.session.open(MessageBox, warning_text + _("The PIN code has been changed successfully."), MessageBox.TYPE_INFO, timeout=3)
+				self.session.open(MessageBox, warning_text + _("The PIN code has been changed successfully."), MessageBox.TYPE_INFO, timeout=10)
 				config.ParentalControl.servicepin[0].value = answer1
 				config.ParentalControl.servicepin[0].save()
 				self.createSetup()
 			else:
-				self.session.open(MessageBox, _("The PIN codes you entered are different."), MessageBox.TYPE_ERROR, timeout=3)
+				self.session.open(MessageBox, _("The PIN codes you entered are different."), MessageBox.TYPE_ERROR, timeout=5)

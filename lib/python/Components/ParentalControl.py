@@ -176,9 +176,9 @@ class ParentalControl:
 		elif result == False:
 			messageText = _("The pin code you entered is wrong.")
 			if self.session:
-				self.session.open(MessageBox, messageText, MessageBox.TYPE_INFO, timeout=3)
+				self.session.open(MessageBox, messageText, MessageBox.TYPE_INFO, timeout=5)
 			else:
-				AddPopup(messageText, MessageBox.TYPE_ERROR, timeout = 3)
+				AddPopup(messageText, MessageBox.TYPE_ERROR, timeout=5)
 
 	def saveListToFile(self, sWhichList, vList):
 		file = open(resolveFilename(SCOPE_CONFIG, sWhichList), 'w')
