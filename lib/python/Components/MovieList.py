@@ -397,7 +397,7 @@ class MovieList(GUIComponent):
 					data.icon = self.iconMovieRec
 			elif self.playInBackground and serviceref == self.playInBackground:
 				data.icon = self.iconMoviePlay
-			elif pathName.endswith(" tmpcut.ts"): # cutting with moviecut plugin to same filename
+			elif pathName.endswith(".tmpcut.ts"): # cutting with moviecut plugin to same filename
 				data.icon = self.iconCutting
 			else:
 				switch = config.usage.show_icons_in_movielist.value
