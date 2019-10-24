@@ -389,7 +389,7 @@ class MenuSort(Menu):
 		self.list.sort(key=lambda listweight : int(listweight[4]))
 
 	def selectionChanged(self):
-		selection = self["menu"].getCurrent()[2]
+		selection = self["menu"].getCurrent() and len(self["menu"].getCurrent()) > 2 and self["menu"].getCurrent()[2] or ""
 		if self.sub_menu_sort.getConfigValue(selection, "hidden"):
 			self["key_yellow"].setText(_("Show"))
 		else:
