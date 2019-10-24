@@ -939,13 +939,13 @@ class NimManager:
 			slots.append(self.nim_slots[slotid].internallyConnectableTo())
 		for type in self.nim_slots[slotid].connectableTo():
 			for slot in self.getNimListOfType(type, exception = slotid):
-				if slot not in slots and self.hasOutputs(slot):
+				if slot not in slots and (self.hasOutputs(slot) or self.nim_slots[slotid].isFBCRoot()):
 					slots.append(slot)
 		# remove nims, that have a conntectedTo reference on
 		for testnim in slots[:]:
 			for nim in self.getNimListOfType("DVB-S", slotid):
 				nimConfig = self.getNimConfig(nim)
-				if self.nim_slots[nim].isFBCLink() or "configMode" in nimConfig.content.items and nimConfig.configMode.value == "loopthrough" and int(nimConfig.connectedTo.value) == testnim:
+				if not self.nim_slots[testnim].isFBCRoot() and (self.nim_slots[nim].isFBCLink() or "configMode" in nimConfig.content.items and nimConfig.configMode.value == "loopthrough" and int(nimConfig.connectedTo.value) == testnim):
 					slots.remove(testnim)
 					break
 		return slots
