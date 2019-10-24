@@ -4,27 +4,28 @@ from enigma import eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT
 from Tools.LoadPixmap import LoadPixmap
 import skin
 
-selectionpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "icons/lock_on.png"))
-
 def SelectionEntryComponent(description, value, index, selected):
-	dx, dy, dw, dh = skin.parameters.get("SelectionListDescr",(25, 3, 650, 30))
+	dx, dy, dw, dh = skin.parameters.get("SelectionListDescr", (25, 3, 650, 30))
 	res = [
 		(description, value, index, selected),
 		(eListboxPythonMultiContent.TYPE_TEXT, dx, dy, dw, dh, 0, RT_HALIGN_LEFT, description)
 	]
 	if selected:
-		ix, iy, iw, ih = skin.parameters.get("SelectionListLock",(0, 2, 25, 24))
-		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, ix, iy, iw, ih, selectionpng))
+		selectionpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "icons/lock_on.png"))
+	else:
+		selectionpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "icons/lock_off.png"))
+	ix, iy, iw, ih = skin.parameters.get("SelectionListLock", (0, 2, 25, 24))
+	res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, ix, iy, iw, ih, selectionpng))
 	return res
 
 class SelectionList(MenuList):
-	def __init__(self, list = None, enableWrapAround = False):
-		MenuList.__init__(self, list or [], enableWrapAround, content = eListboxPythonMultiContent)
+	def __init__(self, list=None, enableWrapAround=False):
+		MenuList.__init__(self, list or [], enableWrapAround, content=eListboxPythonMultiContent)
 		font = skin.fonts.get("SelectionList", ("Regular", 20, 30))
 		self.l.setFont(0, gFont(font[0], font[1]))
 		self.l.setItemHeight(font[2])
 
-	def addSelection(self, description, value, index, selected = True):
+	def addSelection(self, description, value, index, selected=True):
 		self.list.append(SelectionEntryComponent(description, value, index, selected))
 		self.setList(self.list)
 
@@ -36,7 +37,7 @@ class SelectionList(MenuList):
 			self.setList(self.list)
 
 	def getSelectionsList(self):
-		return [ (item[0][0], item[0][1], item[0][2]) for item in self.list if item[0][3] ]
+		return [(item[0][0], item[0][1], item[0][2]) for item in self.list if item[0][3]]
 
 	def toggleAllSelection(self):
 		for idx,item in enumerate(self.list):
@@ -65,8 +66,5 @@ class SelectionList(MenuList):
 		# 1 - value
 		# 2 - index
 		# 3 - selected
-		self.list.sort(key=lambda x: x[0][sortType],reverse=flag)
+		self.list.sort(key=lambda x: x[0][sortType], reverse=flag)
 		self.setList(self.list)
-
-	def len(self):
-		return len(self.list)
