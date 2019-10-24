@@ -5,6 +5,7 @@ dist_install_DATA = \
 	az.png \
 	bullet.png \
 	clock.png \
+	cutting.png \
 	default.png \
 	dish.png \
 	dish_scan.png \

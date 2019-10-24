@@ -191,6 +191,7 @@ class MovieList(GUIComponent):
 		self.iconUnwatched = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/part_unwatched.png"))
 		self.iconFolder = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/folder.png"))
 		self.iconTrash = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/trashcan.png"))
+		self.iconCutting = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/cutting.png"))
 		self.runningTimers = {}
 		self.updateRecordings()
 
@@ -396,6 +397,8 @@ class MovieList(GUIComponent):
 					data.icon = self.iconMovieRec
 			elif self.playInBackground and serviceref == self.playInBackground:
 				data.icon = self.iconMoviePlay
+			elif pathName.endswith(".tmpcut.ts"): # cutting with moviecut plugin to same filename
+				data.icon = self.iconCutting
 			else:
 				switch = config.usage.show_icons_in_movielist.value
 				data.part = moviePlayState(pathName + '.cuts', serviceref, data.len)
