@@ -226,7 +226,9 @@ def parseColor(s):
 	return gRGB(int(s[1:], 0x10))
 
 def parseParameter(s):
-	"""This function is responsible for parsing parameters in the skin, it can parse integers, floats, hex colors, hex integers and named colors."""
+	"""This function is responsible for parsing parameters in the skin, it can parse integers, floats, hex colors, hex integers, named colors and string."""
+	if s[0] == '*':
+		return s[1:]
 	if s[0] == '#':
 		return int(s[1:], 16)
 	elif s[:2] == '0x':
