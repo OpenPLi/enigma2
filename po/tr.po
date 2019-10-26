@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OPENPLi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-29 09:27+0200\n"
+"POT-Creation-Date: 2019-10-26 09:34+0200\n"
 "PO-Revision-Date: 2015-12-18 21:05+0200\n"
 "Last-Translator: Yetkin AYDIN <yetkina@gmail.com>\n"
 "Language-Team: http://www.hurforum.com <yetkina@gmail.com>\n"
@@ -2361,6 +2361,9 @@ msgstr ""
 msgid "Create DVD-ISO"
 msgstr "DVD-ISO oluştur"
 
+msgid "Create directory"
+msgstr "Klasör Oluştur"
+
 msgid "Create new folder and exit"
 msgstr "Yeni dosya oluştur ve çık"
 
@@ -2978,15 +2981,15 @@ msgstr "Oynatmaya kaldığınız yerden devam etmek istiyor musunuz?"
 msgid "Do you want to select a different skin?"
 msgstr ""
 
+msgid "Do you want to update the package:\n"
+msgstr "Seçilen paketi güncellemek istiyor musunuz?:\n"
+
 #, python-format
 msgid "Do you want to update your receiver to %s?"
 msgstr "Alıcıyı %s 'ye güncellemek istiyor musunuz?"
 
 msgid "Do you want to update your receiver?"
 msgstr "Güncelleme yapılsın mı?"
-
-msgid "Do you want to update the package:\n"
-msgstr "Seçilen paketi güncellemek istiyor musunuz?:\n"
 
 msgid "Dolby"
 msgstr ""
@@ -4005,9 +4008,6 @@ msgstr "Yunanca"
 msgid "Greek"
 msgstr "Yunanca"
 
-msgid "Greek (Modern)"
-msgstr ""
-
 msgid "Green"
 msgstr "Yeşil"
 
@@ -4470,9 +4470,6 @@ msgstr "Kanal listesi yükle"
 
 msgid "Install extensions"
 msgstr "Eklenti yükle"
-
-msgid "Install extensions."
-msgstr "Eklentileri yükle."
 
 msgid "Install local extension"
 msgstr "Yerel (lokal)'den eklenti yükle"
@@ -5568,9 +5565,6 @@ msgstr "Norveççe"
 msgid "Norwegian"
 msgstr "Norveççe"
 
-msgid "Not defined"
-msgstr "Tanımlanmamış"
-
 #, fuzzy
 msgid "Not Installed"
 msgstr "Yükle"
@@ -5581,6 +5575,9 @@ msgstr "Tanımlanmamış"
 
 msgid "Not associated"
 msgstr "İlişkili değil"
+
+msgid "Not defined"
+msgstr "Tanımlanmamış"
 
 #, python-format
 msgid "Not enough disk space. Please free up some disk space and try again. (%d MB required, %d MB available)"
@@ -5653,9 +5650,6 @@ msgstr "Kapalı"
 
 msgid "Offline decode delay (ms)"
 msgstr "Çevrimdışı kod çözme gecikmesi (ms)"
-
-msgid "Ok"
-msgstr "OK"
 
 msgid "Oman"
 msgstr ""
@@ -6690,6 +6684,9 @@ msgstr "Tamamlanmış zamanlayıcıları kaldırın (gün) sonra"
 msgid "Remove currently selected title"
 msgstr "Seçilen geçerli başlığı sil"
 
+msgid "Remove directory"
+msgstr "Klasörü sil"
+
 msgid "Remove items from trash can after (days)"
 msgstr "Çöp Kutusu öğelerini (gün) sonra kaldır"
 
@@ -6723,6 +6720,9 @@ msgstr "Tekrar"
 
 msgid "Repeat leave standby messages"
 msgstr ""
+
+msgid "Repeat playlist"
+msgstr "Oynatma Listesini Tekrarla"
 
 msgid "Repeat type"
 msgstr "Çeşidi yineleyin"
@@ -7060,8 +7060,14 @@ msgstr "ZamanKaydırmayı Kaydet ve Durdur"
 msgid "Save changes"
 msgstr ""
 
+msgid "Save last directory on exit"
+msgstr "Çıkışta, son klasörü kaydet"
+
 msgid "Save playlist"
 msgstr "Çalma listesini Kaydet"
+
+msgid "Save playlist on exit"
+msgstr "Çıkışta, oynatma listesini kaydet"
 
 msgid "Save settings and EPG data"
 msgstr ""
@@ -7879,6 +7885,9 @@ msgstr "Son kayıtları göster."
 msgid "Show latest update log"
 msgstr "Son güncelleme günlüğünü göster"
 
+msgid "Show media player on main menu"
+msgstr "Ana menüde Media Player'ı gösterir"
+
 #, fuzzy
 msgid "Show menu or plugin numbers"
 msgstr "Olay bilgisi eklentilerini göster"
@@ -8227,6 +8236,9 @@ msgstr "Eklenti Listesini varsayılan olarak sırala?"
 msgid "Sort time"
 msgstr "Sıralama zamanı"
 
+msgid "Sorting of playlists"
+msgstr "Çalma listelerini sırala"
+
 msgid "Sound"
 msgstr "Ses"
 
@@ -8334,6 +8346,9 @@ msgstr "Fan bekleme modu %d voltaj"
 
 msgid "Standby in "
 msgstr "Bekleme modunda"
+
+msgid "Start directory"
+msgstr "Başlangıç klasörü"
 
 msgid "Start from the beginning"
 msgstr "En baştan başla"
@@ -8602,6 +8617,9 @@ msgstr "Kanal Yukarı"
 
 msgid "Switch to TV mode"
 msgstr "TV moduna geç"
+
+msgid "Switch to bookmarks"
+msgstr "İşaretçileri atla"
 
 msgid "Switch to filelist"
 msgstr "Dosya listesine geç"
@@ -9593,6 +9611,10 @@ msgstr "Güncelle ve yeniden başlatmak için sor"
 msgid "Update and reboot (recommended)"
 msgstr "Güncelle ve yeniden başlat (önerilen)"
 
+#, fuzzy
+msgid "Update bookmarks"
+msgstr "Otomatik Tarama"
+
 msgid "Update channel list only"
 msgstr "Sadece kanal listesini güncelle"
 
@@ -9613,11 +9635,11 @@ msgstr "Güncelleme tamamladı."
 msgid "Updatefeed not available."
 msgstr "Güncelleme sunucusu kullanılamıyor."
 
-msgid "Updating software catalog"
-msgstr "Yazılım kataloğu güncelleniyor"
-
 msgid "Updating"
 msgstr "Güncelleme"
+
+msgid "Updating software catalog"
+msgstr "Yazılım kataloğu güncelleniyor"
 
 msgid "Upper case"
 msgstr ""
@@ -10691,14 +10713,15 @@ msgstr "Başlamak üzere"
 msgid "activate network adapter configuration"
 msgstr "Etkin ağ adaptörü ayarları"
 
+#, fuzzy
+msgid "active"
+msgstr "İlgili"
+
 msgid "actual time only"
 msgstr "Sadece gerçek zamanlı"
 
 msgid "add alternatives"
 msgstr "Alternatiflere ekle"
-
-msgid "add bookmark"
-msgstr "yer işareti koy"
 
 msgid "add bouquet"
 msgstr "Buket oluştur"
@@ -10872,9 +10895,6 @@ msgstr "Yemek"
 
 msgid "copy to bouquets"
 msgstr "Buketlere Kopyala"
-
-msgid "Create directory"
-msgstr "Klasör Oluştur"
 
 msgid "daily"
 msgstr "Günlük"
@@ -11426,17 +11446,11 @@ msgstr "Yeni bulundu, İşaretlerinin Tümünü Kaldır"
 msgid "remove before this position"
 msgstr "Bu noktadan öncekileri kaldır."
 
-msgid "remove bookmark"
-msgstr "Yer işaretini sil"
-
 msgid "remove bouquet from parental protection"
 msgstr "Aile korumasından çıkar"
 
 msgid "remove cable services"
 msgstr "Kablo servisleri sil"
-
-msgid "Remove directory"
-msgstr "Klasörü sil"
 
 msgid "remove entry"
 msgstr "Seçili Kanalı/Buketi Sil"
@@ -11458,9 +11472,6 @@ msgstr "Sil"
 
 msgid "rename entry"
 msgstr "Ad değiştir "
-
-msgid "Repeat playlist"
-msgstr "Oynatma Listesini Tekrarla"
 
 msgid "repeated"
 msgstr "Tekrarla"
@@ -11496,12 +11507,6 @@ msgstr "Romantik"
 msgid "running"
 msgstr "Uyarı"
 
-msgid "Save last directory on exit"
-msgstr "Çıkışta, son klasörü kaydet"
-
-msgid "Save playlist on exit"
-msgstr "Çıkışta, oynatma listesini kaydet"
-
 msgid "scan state"
 msgstr "Kanal arama durumu"
 
@@ -11510,9 +11515,6 @@ msgstr "Bilim Kurgu/Fantastik/Korku"
 
 msgid "seconds"
 msgstr "Saniye"
-
-msgid "select"
-msgstr "Seç"
 
 msgid "select CAId's"
 msgstr "CAId' leri seç"
@@ -11547,9 +11549,6 @@ msgstr "Alternatifleri göster"
 
 msgid "show event details"
 msgstr "EPG detaylarını göster"
-
-msgid "Show media player on main menu"
-msgstr "Ana menüde Media Player'ı gösterir"
 
 msgid "show softwaremanager in setup menu"
 msgstr "Kurulum menüsünde yazılım yöneticisini gösterir"
@@ -11627,9 +11626,6 @@ msgstr "Sosyal/Siyasi/Ekonomi (Genel)"
 msgid "social/spiritual science"
 msgstr "Sosyal/Ruhasal"
 
-msgid "Sorting of playlists"
-msgstr "Çalma listelerini sırala"
-
 msgid "special events"
 msgstr "Özel etkinlikler"
 
@@ -11648,9 +11644,6 @@ msgstr "Standart"
 msgid "start cut here"
 msgstr "Buradan kes"
 
-msgid "Start directory"
-msgstr "Başlangıç klasörü"
-
 #, fuzzy
 msgid "starts in a few seconds"
 msgstr "Çevrimdışı kod çözmeyi başlat"
@@ -11666,9 +11659,6 @@ msgstr "Başlangıç servislerini durdurun"
 
 msgid "successful"
 msgstr ""
-
-msgid "Switch to bookmarks"
-msgstr "İşaretçileri atla"
 
 msgid "switch to the next angle"
 msgstr "Sonraki açıyı seç"
@@ -11745,13 +11735,6 @@ msgstr ""
 
 msgid "until standby/restart"
 msgstr "H.Bekle/Y.Başlatana Kadar"
-
-#, fuzzy
-msgid "Update bookmarks"
-msgstr "Otomatik Tarama"
-
-msgid "used"
-msgstr ""
 
 msgid "user defined"
 msgstr "Kullanıcı Tanımlı"
