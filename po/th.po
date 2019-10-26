@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1-En-Th\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-29 09:27+0200\n"
+"POT-Creation-Date: 2019-10-26 09:34+0200\n"
 "PO-Revision-Date: 2010-04-08 18:13+0700\n"
 "Last-Translator: Tony - Thaidreambox\n"
 "Language-Team: Tony @ Thai Dreambox <tonyboyth@gmail.com>\n"
@@ -2392,6 +2392,9 @@ msgstr ""
 msgid "Create DVD-ISO"
 msgstr "สร้างแผ่นดีวีดีแบบ ISO"
 
+msgid "Create directory"
+msgstr "สร้างโฟล์เดอร์"
+
 msgid "Create new folder and exit"
 msgstr ""
 
@@ -3019,15 +3022,15 @@ msgstr "ต้องการเล่นต่อจากที่เดิม
 msgid "Do you want to select a different skin?"
 msgstr ""
 
+msgid "Do you want to update the package:\n"
+msgstr "ยืนยันจะปรับปรุงส่วนประกอบนี้:\n"
+
 #, fuzzy, python-format
 msgid "Do you want to update your receiver to %s?"
 msgstr "ท่านต้องการที่จะนำการตั้งค่าต่างๆ กลับมาใช้หรือไม่?"
 
 msgid "Do you want to update your receiver?"
 msgstr ""
-
-msgid "Do you want to update the package:\n"
-msgstr "ยืนยันจะปรับปรุงส่วนประกอบนี้:\n"
 
 msgid "Dolby"
 msgstr ""
@@ -4058,9 +4061,6 @@ msgstr "ภาษากรีก"
 msgid "Greek"
 msgstr "ภาษากรีก"
 
-msgid "Greek (Modern)"
-msgstr ""
-
 msgid "Green"
 msgstr ""
 
@@ -4526,9 +4526,6 @@ msgstr "รายการต่อไปในหน่วยความจำ
 
 msgid "Install extensions"
 msgstr ""
-
-msgid "Install extensions."
-msgstr "ติดตั้งส่วนเพิ่มเติม"
 
 msgid "Install local extension"
 msgstr "ติดตั้งส่วนเพิ่มเติมจากในเครื่อง"
@@ -5670,9 +5667,6 @@ msgstr "ภาษานอร์เว"
 msgid "Norwegian"
 msgstr "ภาษานอร์เว"
 
-msgid "Not defined"
-msgstr ""
-
 #, fuzzy
 msgid "Not Installed"
 msgstr "ติดตั้ง"
@@ -5681,6 +5675,9 @@ msgid "Not Required"
 msgstr ""
 
 msgid "Not associated"
+msgstr ""
+
+msgid "Not defined"
 msgstr ""
 
 #, fuzzy, python-format
@@ -5755,9 +5752,6 @@ msgid "Off"
 msgstr "ปิด"
 
 msgid "Offline decode delay (ms)"
-msgstr ""
-
-msgid "Ok"
 msgstr ""
 
 msgid "Oman"
@@ -6819,6 +6813,9 @@ msgstr ""
 msgid "Remove currently selected title"
 msgstr "ลบเชื่อเรื่องที่เลือกออก"
 
+msgid "Remove directory"
+msgstr "ลบโฟล์เดอร์ออก"
+
 msgid "Remove items from trash can after (days)"
 msgstr ""
 
@@ -6853,6 +6850,9 @@ msgstr ""
 
 msgid "Repeat leave standby messages"
 msgstr ""
+
+msgid "Repeat playlist"
+msgstr "กลับไปที่สารบัญ"
 
 #, fuzzy
 msgid "Repeat type"
@@ -7187,9 +7187,15 @@ msgstr ""
 msgid "Save changes"
 msgstr ""
 
+msgid "Save last directory on exit"
+msgstr "บันทึกโฟล์เดอร์ปัจจุบันเมื่อออก"
+
 #, fuzzy
 msgid "Save playlist"
 msgstr "บันทึกสารบัญรายการ"
+
+msgid "Save playlist on exit"
+msgstr "บันทึกสารบัญเมื่อออก"
 
 msgid "Save settings and EPG data"
 msgstr ""
@@ -8045,6 +8051,9 @@ msgstr ""
 msgid "Show latest update log"
 msgstr ""
 
+msgid "Show media player on main menu"
+msgstr ""
+
 msgid "Show menu or plugin numbers"
 msgstr ""
 
@@ -8408,6 +8417,9 @@ msgstr ""
 msgid "Sort time"
 msgstr "จัดเรียงเวลา"
 
+msgid "Sorting of playlists"
+msgstr ""
+
 msgid "Sound"
 msgstr "เสียง"
 
@@ -8516,6 +8528,9 @@ msgstr ""
 
 msgid "Standby in "
 msgstr ""
+
+msgid "Start directory"
+msgstr "โฟล์เดอร์เริ่มต้น"
 
 msgid "Start from the beginning"
 msgstr "เริ่มตั้งแต่ต้น"
@@ -8795,6 +8810,9 @@ msgstr ""
 
 msgid "Switch to TV mode"
 msgstr ""
+
+msgid "Switch to bookmarks"
+msgstr "เข้าสู่บุ๊คมาร์ค"
 
 #, fuzzy
 msgid "Switch to filelist"
@@ -9770,6 +9788,10 @@ msgid "Update and reboot (recommended)"
 msgstr ""
 
 #, fuzzy
+msgid "Update bookmarks"
+msgstr "ค้นหาอัตโนมัติ"
+
+#, fuzzy
 msgid "Update channel list only"
 msgstr "รายการต่อไปในหน่วยความจำ"
 
@@ -9791,11 +9813,11 @@ msgstr ""
 msgid "Updatefeed not available."
 msgstr ""
 
-msgid "Updating software catalog"
-msgstr ""
-
 msgid "Updating"
 msgstr "กำลังอัพเกรด"
+
+msgid "Updating software catalog"
+msgstr ""
 
 msgid "Upper case"
 msgstr ""
@@ -10861,14 +10883,14 @@ msgstr "กำลังจะเริ่ม"
 msgid "activate network adapter configuration"
 msgstr ""
 
+msgid "active"
+msgstr ""
+
 msgid "actual time only"
 msgstr ""
 
 msgid "add alternatives"
 msgstr "เพิ่มทางเลือกอื่น"
-
-msgid "add bookmark"
-msgstr "เพิ่มบุ๊คมาร์ค"
 
 msgid "add bouquet"
 msgstr "เพิ่มกลุ่มรายการ"
@@ -11044,9 +11066,6 @@ msgstr ""
 
 msgid "copy to bouquets"
 msgstr "คัดลอกเข้าสู่กลุ่มรายการ"
-
-msgid "Create directory"
-msgstr "สร้างโฟล์เดอร์"
 
 msgid "daily"
 msgstr "รายวัน"
@@ -11600,17 +11619,11 @@ msgstr "ลบเครื่องหมาย\"ใหม่\" ออกทั�
 msgid "remove before this position"
 msgstr "ลบก่อนหน้าตำแหน่งนี้ออก"
 
-msgid "remove bookmark"
-msgstr "ลบบุ๊คมาร์ค"
-
 msgid "remove bouquet from parental protection"
 msgstr ""
 
 msgid "remove cable services"
 msgstr ""
-
-msgid "Remove directory"
-msgstr "ลบโฟล์เดอร์ออก"
 
 msgid "remove entry"
 msgstr "ลบรายการนี้ออก"
@@ -11632,9 +11645,6 @@ msgstr "ลบรายการนี้ออก"
 
 msgid "rename entry"
 msgstr ""
-
-msgid "Repeat playlist"
-msgstr "กลับไปที่สารบัญ"
 
 msgid "repeated"
 msgstr "เล่นซ้ำ"
@@ -11669,12 +11679,6 @@ msgstr ""
 msgid "running"
 msgstr ""
 
-msgid "Save last directory on exit"
-msgstr "บันทึกโฟล์เดอร์ปัจจุบันเมื่อออก"
-
-msgid "Save playlist on exit"
-msgstr "บันทึกสารบัญเมื่อออก"
-
 msgid "scan state"
 msgstr "สถานะการค้นหา"
 
@@ -11683,9 +11687,6 @@ msgstr ""
 
 msgid "seconds"
 msgstr "วินาที"
-
-msgid "select"
-msgstr "เลือก"
 
 msgid "select CAId's"
 msgstr "เลือก CAId's"
@@ -11720,9 +11721,6 @@ msgstr "แสดงทางเลือกอื่น"
 
 msgid "show event details"
 msgstr "แสดงรายละเอียดรายการ"
-
-msgid "Show media player on main menu"
-msgstr ""
 
 msgid "show softwaremanager in setup menu"
 msgstr ""
@@ -11800,9 +11798,6 @@ msgstr ""
 msgid "social/spiritual science"
 msgstr ""
 
-msgid "Sorting of playlists"
-msgstr ""
-
 msgid "special events"
 msgstr ""
 
@@ -11821,9 +11816,6 @@ msgstr "มาตรฐาน"
 msgid "start cut here"
 msgstr "ตัดตรงนี้"
 
-msgid "Start directory"
-msgstr "โฟล์เดอร์เริ่มต้น"
-
 msgid "starts in a few seconds"
 msgstr ""
 
@@ -11838,9 +11830,6 @@ msgstr ""
 
 msgid "successful"
 msgstr ""
-
-msgid "Switch to bookmarks"
-msgstr "เข้าสู่บุ๊คมาร์ค"
 
 msgid "switch to the next angle"
 msgstr "เลือกมุมมองอันต่อไป"
@@ -11916,13 +11905,6 @@ msgid "untestable"
 msgstr ""
 
 msgid "until standby/restart"
-msgstr ""
-
-#, fuzzy
-msgid "Update bookmarks"
-msgstr "ค้นหาอัตโนมัติ"
-
-msgid "used"
 msgstr ""
 
 msgid "user defined"
