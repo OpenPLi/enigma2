@@ -1714,6 +1714,8 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 					for ext in ('.eit', self.extension + '.cuts', self.extension):
 						newfilename = os.path.join(path, newbasename) + ext
 						oldfilename = os.path.join(path, oldbasename) + ext
+						if not os.path.isfile(oldfilename): # .eit and .cuts maybe not present
+							continue
 						if not os.path.isfile(newfilename):
 							renamelist.append((oldfilename, newfilename))
 						else:
