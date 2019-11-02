@@ -170,71 +170,71 @@ class EPGList(GUIComponent):
 
 		self.listHeight = None
 		self.listWidth = None
-		self.serviceBorderVerWidth = 1
-		self.serviceBorderHorWidth = 1
+		self.serviceBorderWidth = 1 # for solid backgrounds only (we are limited to the same horizontal and vertical border width)
+		self.serviceBorderVerWidth = 1 # for png backgrounds only
+		self.serviceBorderHorWidth = 1 # for png backgrounds only
 		self.serviceNamePadding = 0
-		self.eventBorderVerWidth = 1
-		self.eventBorderHorWidth = 1
+		self.eventBorderWidth = 1 # for solid backgrounds only (we are limited to the same horizontal and vertical border width)
+		self.eventBorderVerWidth = 1 # for png backgrounds only
+		self.eventBorderHorWidth = 1 # for png backgrounds only
 		self.eventNamePadding = 0
 		self.recIconSize = 21
 		self.iconXPadding = 1
 		self.iconYPadding = 1
 
 	def applySkin(self, desktop, screen):
+		def EntryFont(value):
+			font = parseFont(value, ((1,1),(1,1)) )
+			self.entryFontName = font.family
+			self.entryFontSize = font.pointSize
 		def EntryForegroundColor(value):
 			self.foreColor = parseColor(value).argb()
 		def EntryForegroundColorSelected(value):
 			self.foreColorSelected = parseColor(value).argb()
+		def EntryForegroundColorNow(value):
+			self.foreColorNow = parseColor(value).argb()
 		def EntryForegroundColorSelectedRec(value):
 			self.foreColorSelectedRec = parseColor(value).argb()
 		def EntryBackgroundColor(value):
 			self.backColor = parseColor(value).argb()
 		def EntryBackgroundColorSelected(value):
 			self.backColorSelected = parseColor(value).argb()
+		def EntryBackgroundColorNow(value):
+			self.backColorNow = parseColor(value).argb()
 		def EntryBorderColor(value):
 			self.borderColor = parseColor(value).argb()
-		def EntryFont(value):
-			font = parseFont(value, ((1,1),(1,1)) )
-			self.entryFontName = font.family
-			self.entryFontSize = font.pointSize
+		def EventBorderWidth(value): # for solid backgrounds only (we are limited to the same horizontal and vertical border width)
+			self.eventBorderWidth = int(value)
+		def EventBorderHorWidth(value): # for png backgrounds only
+			self.eventBorderHorWidth = int(value)
+		def EventBorderVerWidth(value): # for png backgrounds only
+			self.eventBorderVerWidth = int(value)
+		def EventNamePadding(value):
+			self.eventNamePadding = int(value)
+		def ServiceFont(value):
+			self.serviceFont = parseFont(value, ((1,1),(1,1)))
 		def ServiceForegroundColor(value):
-			self.foreColorService = parseColor(value).argb()
-		def ServiceNameForegroundColor(value):
 			self.foreColorService = parseColor(value).argb()
 		def ServiceForegroundColorSelected(value):
 			self.foreColorServiceSelected = parseColor(value).argb()
+		def ServiceForegroundColorRecording(value):
+			self.foreColorRec = parseColor(value).argb()
 		def ServiceBackgroundColor(value):
-			self.backColorService = parseColor(value).argb()
-		def ServiceNameBackgroundColor(value):
 			self.backColorService = parseColor(value).argb()
 		def ServiceBackgroundColorSelected(value):
 			self.backColorServiceSelected = parseColor(value).argb()
 		def ServiceBackgroundColorRecording(value):
 			self.backColorRec = parseColor(value).argb()
-		def ServiceNameBackgroundColor(value):
-			self.backColorRec = parseColor(value).argb()
-		def ServiceForegroundColorRecording(value):
-			self.foreColorRec = parseColor(value).argb()
 		def ServiceBorderColor(value):
 			self.borderColorService = parseColor(value).argb()
-		def ServiceFont(value):
-			self.serviceFont = parseFont(value, ((1,1),(1,1)) )
-		def EntryBackgroundColorNow(value):
-			self.backColorNow = parseColor(value).argb()
-		def EntryForegroundColorNow(value):
-			self.foreColorNow = parseColor(value).argb()
-		def ServiceBorderVerWidth(value):
-			self.serviceBorderVerWidth = int(value)
-		def ServiceBorderHorWidth(value):
+		def ServiceBorderWidth(value): # for solid backgrounds only (we are limited to the same horizontal and vertical border width)
+			self.serviceBorderWidth = int(value)
+		def ServiceBorderHorWidth(value): # for png backgrounds only
 			self.serviceBorderHorWidth = int(value)
+		def ServiceBorderVerWidth(value): # for png backgrounds only
+			self.serviceBorderVerWidth = int(value)
 		def ServiceNamePadding(value):
 			self.serviceNamePadding = int(value)
-		def EventBorderHorWidth(value):
-			self.eventBorderHorWidth = int(value)
-		def EventBorderVerWidth(value):
-			self.eventBorderVerWidth = int(value)
-		def EventNamePadding(value):
-			self.eventNamePadding = int(value)
 		def RecIconSize(value):
 			self.recIconSize = int(value)
 		def IconXPadding(value):
@@ -390,6 +390,13 @@ class EPGList(GUIComponent):
 		self.recEvPix = loadPNG(resolveFilename(SCOPE_CURRENT_SKIN, 'epg/RecordingEvent.png'))
 		self.curSerPix = loadPNG(resolveFilename(SCOPE_CURRENT_SKIN, 'epg/CurrentService.png'))
 
+		# if no background png's are present at all, use the solid background borders for further calculations
+		if (self.nowEvPix, self.othEvPix, self.selEvPix, self.recEvPix, self.curSerPix) == (None, None, None, None, None):
+			self.eventBorderHorWidth = self.eventBorderWidth
+			self.eventBorderVerWidth = self.eventBorderWidth
+			self.serviceBorderHorWidth = self.serviceBorderWidth
+			self.serviceBorderVerWidth = self.serviceBorderWidth
+
 	def setEventFontsize(self):
 		self.l.setFont(1, gFont(self.entryFontName, self.entryFontSize + config.misc.graph_mepg.ev_fontsize.getValue()))
 
@@ -466,8 +473,9 @@ class EPGList(GUIComponent):
 					size = (r1.w, r1.h),
 					font = 0, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER,
 					text = "",
-					color = serviceForeColor, color_sel = serviceForeColor,
-					backcolor = serviceBackColor, backcolor_sel = serviceBackColor))
+					color = None, color_sel = None,
+					backcolor = serviceBackColor, backcolor_sel = serviceBackColor,
+					border_width = self.serviceBorderWidth, border_color = self.borderColorService))
 		displayPicon = None
 		if self.number_width:
 			res.append(MultiContentEntryText(
@@ -476,7 +484,7 @@ class EPGList(GUIComponent):
 				font = 0, flags = RT_HALIGN_RIGHT | RT_VALIGN_CENTER,
 				text = serviceref and serviceref.ref and str(serviceref.ref.getChannelNum()) or "---",
 				color = serviceForeColor, color_sel = serviceForeColor,
-				backcolor = None, backcolor_sel = None))
+				backcolor = serviceBackColor if bgpng is None else None, backcolor_sel = serviceBackColor if bgpng is None else None))
 		if self.showPicon:
 			if picon is None: # go find picon and cache its location
 				picon = getPiconName(service)
@@ -515,7 +523,7 @@ class EPGList(GUIComponent):
 				font = namefont, flags = namefontflag,
 				text = service_name,
 				color = serviceForeColor, color_sel = serviceForeColor,
-				backcolor = None, backcolor_sel = None))
+				backcolor = serviceBackColor if bgpng is None else None, backcolor_sel = serviceBackColor if bgpng is None else None))
 
 		# Events for service
 		backColorSel = self.backColorSelected
@@ -572,7 +580,8 @@ class EPGList(GUIComponent):
 						pos = (left + xpos, top), size = (ewidth, height),
 						font = 1, flags = int(config.misc.graph_mepg.event_alignment.value),
 						text = "", color = None, color_sel = None,
-						backcolor = backColor, backcolor_sel = backColorSel))
+						backcolor = backColor, backcolor_sel = backColorSel,
+						border_width = self.eventBorderWidth, border_color = self.borderColor))
 
 				# event text
 				evX = left + xpos + self.eventBorderVerWidth + self.eventNamePadding
@@ -587,7 +596,8 @@ class EPGList(GUIComponent):
 						flags = int(config.misc.graph_mepg.event_alignment.value),
 						text = ev[1],
 						color = foreColor,
-						color_sel = foreColorSelected))
+						color_sel = foreColorSelected,
+						backcolor = backColor if bgpng is None else None, backcolor_sel = backColorSel if bgpng is None else None))
 				# recording icons
 				if config.misc.graph_mepg.show_record_clocks.value and rec is not None:
 					for i in range(len(rec[1])):
