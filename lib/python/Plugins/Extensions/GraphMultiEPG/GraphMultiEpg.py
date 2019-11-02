@@ -460,7 +460,7 @@ class EPGList(GUIComponent):
 					size = (r1.w, r1.h),
 					font = 0, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER,
 					text = "",
-					color = serviceForeColor, color_sel = serviceForeColor,
+					color = None, color_sel = None,
 					backcolor = serviceBackColor, backcolor_sel = serviceBackColor))
 		displayPicon = None
 		if self.number_width:
@@ -470,7 +470,7 @@ class EPGList(GUIComponent):
 				font = 0, flags = RT_HALIGN_RIGHT | RT_VALIGN_CENTER,
 				text = serviceref and serviceref.ref and str(serviceref.ref.getChannelNum()) or "---",
 				color = serviceForeColor, color_sel = serviceForeColor,
-				backcolor = None, backcolor_sel = None))
+				backcolor = serviceBackColor if bgpng is None else None, backcolor_sel = serviceBackColor if bgpng is None else None))
 		if self.showPicon:
 			if picon is None: # go find picon and cache its location
 				picon = getPiconName(service)
@@ -509,7 +509,7 @@ class EPGList(GUIComponent):
 				font = namefont, flags = namefontflag,
 				text = service_name,
 				color = serviceForeColor, color_sel = serviceForeColor,
-				backcolor = None, backcolor_sel = None))
+				backcolor = serviceBackColor if bgpng is None else None, backcolor_sel = serviceBackColor if bgpng is None else None))
 
 		# Events for service
 		backColorSel = self.backColorSelected
@@ -581,7 +581,8 @@ class EPGList(GUIComponent):
 						flags = int(config.misc.graph_mepg.event_alignment.value),
 						text = ev[1],
 						color = foreColor,
-						color_sel = foreColorSelected))
+						color_sel = foreColorSelected,
+						backcolor = backColor if bgpng is None else None, backcolor_sel = backColorSel if bgpng is None else None))
 				# recording icons
 				if config.misc.graph_mepg.show_record_clocks.value and rec is not None:
 					for i in range(len(rec[1])):
