@@ -1134,7 +1134,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 			if menu:
 				text += ": %s" % event.getEventName()
 			keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "red", "green", "yellow"][:len(menu)] + (len(menu) - 13) * [""] + keys
-		menu.append((_("Timer Overview"), self.openTimerOverview))
+		menu.append((_("Timer overview"), self.openTimerOverview))
 		menu.append((_("Setup menu"), self.showSetup, "menu"))
 		def boxAction(choice):
 			if choice:
@@ -1328,7 +1328,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 			elif prev_state == 2 and firstNextRepeatEvent:
 				menu.append((_("Options disable timer"), "disablerepeatrunning"))
 				buttons.append("yellow")
-			menu.append((_("Timer Overview"), "timereditlist"))
+			menu.append((_("Timer overview"), "timereditlist"))
 			def timerAction(choice):
 				if choice is not None:
 					if choice[1] == "delete":
