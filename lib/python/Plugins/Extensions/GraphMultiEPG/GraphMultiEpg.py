@@ -1329,6 +1329,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 				menu.append((_("Options disable timer"), "disablerepeatrunning"))
 				buttons.append("yellow")
 			menu.append((_("Timer overview"), "timereditlist"))
+			buttons.append("blue")
 			def timerAction(choice):
 				if choice is not None:
 					if choice[1] == "delete":
