@@ -323,8 +323,6 @@ private:
 	updateMap channelLastUpdated;
 	std::string m_filename;
 	bool m_running;
-	bool m_channel_pending;
-	bool m_load_pending;
 	bool load_epg;
 
 #ifdef ENABLE_PRIVATE_EPG
