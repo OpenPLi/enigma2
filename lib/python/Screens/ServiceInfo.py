@@ -4,11 +4,9 @@ from Screens.AudioSelection import AudioSelection
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from ServiceReference import ServiceReference
-from enigma import eListboxPythonMultiContent, eListbox, gFont, iServiceInformation, eServiceCenter, eDVBFrontendParametersSatellite
+from enigma import eListboxPythonMultiContent, eListbox, gFont, iServiceInformation, eServiceCenter, eDVBFrontendParametersSatellite, RT_HALIGN_LEFT, RT_VALIGN_CENTER
 from Tools.Transponder import ConvertToHumanReadable, getChannelNumber
 import skin
-
-RT_HALIGN_LEFT = 0
 
 TYPE_TEXT = 0
 TYPE_VALUE_HEX = 1
@@ -23,7 +21,7 @@ TYPE_VALUE_BITRATE = 8
 def to_unsigned(x):
 	return x & 0xFFFFFFFF
 
-def ServiceInfoListEntry(a, b="", valueType=TYPE_TEXT, param=4):
+def ServiceInfoListEntry(a, b="", valueType=TYPE_TEXT, param=4, altColor=False):
 	print "b:", b
 	if not isinstance(b, str):
 		if valueType == TYPE_VALUE_HEX:
@@ -44,22 +42,16 @@ def ServiceInfoListEntry(a, b="", valueType=TYPE_TEXT, param=4):
 			b = ("%d.%d%s") % (b // 10, b % 10, direction)
 		else:
 			b = str(b)
-	x, y, w, h = skin.parameters.get("ServiceInfo",(0, 0, 300, 30))
-	xa, ya, wa, ha = skin.parameters.get("ServiceInfoLeft",(0, 0, 300, 25))
-	xb, yb, wb, hb = skin.parameters.get("ServiceInfoRight",(300, 0, 600, 25))
+	xa, ya, wa, ha = skin.parameters.get("ServiceInfoLeft", (0, 0, 300, 25))
+	xb, yb, wb, hb = skin.parameters.get("ServiceInfoRight", (300, 0, 600, 25))
+	color = skin.parameters.get("ServiceInfoAltColor", (0x00FFBF00)) # alternative foreground color
+	res = [ None ]
 	if b:
-		return [
-			#PyObject *type, *px, *py, *pwidth, *pheight, *pfnt, *pstring, *pflags;
-			(eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, RT_HALIGN_LEFT, ""),
-			(eListboxPythonMultiContent.TYPE_TEXT, xa, ya, wa, ha, 0, RT_HALIGN_LEFT, a),
-			(eListboxPythonMultiContent.TYPE_TEXT, xb, yb, wb, hb, 0, RT_HALIGN_LEFT, b)
-		]
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, xa, ya, wa, ha, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, a))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, xb, yb, wb, hb, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, b))
 	else:
-		return [
-			#PyObject *type, *px, *py, *pwidth, *pheight, *pfnt, *pstring, *pflags;
-			(eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, RT_HALIGN_LEFT, ""),
-			(eListboxPythonMultiContent.TYPE_TEXT, xa, ya, wa + wb, ha + hb, 0, RT_HALIGN_LEFT, a)
-		]
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, xa, ya, wa + wb, ha, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, a, color if altColor is True else None)) # spread horizontally
+	return res
 
 class ServiceInfoList(GUIComponent):
 	def __init__(self, source):
@@ -217,7 +209,7 @@ class ServiceInfo(Screen):
 			if posi > 1800:
 				posi = 3600 - posi
 				EW = "W"
-		return "%s - %s\xc2\xb0 %s" % (namespace, (float(posi) / 10.0), EW) 
+		return "%s - %s\xc2\xb0 %s" % (namespace, (float(posi) / 10.0), EW)
 
 	def getTrackList(self):
 		trackList = []
@@ -232,7 +224,7 @@ class ServiceInfo(Screen):
 				if self.showAll or currentTrack == i:
 					trackList += [(_("Audio PID%s, codec & lang") % ((" %s") % (i + 1) if self.numberofTracks > 1 and self.showAll else ""), "%04X (%d) - %s - %s" % (to_unsigned(audioPID), audioPID, audioDesc, audioLang), TYPE_TEXT)]
 				if self.getServiceInfoValue(iServiceInformation.sAudioPID) == "N/A":
-					trackList = [(_("Audio PID, codec & lang"), "N/A - %s - %s" % (audioDesc, audioLang), TYPE_TEXT)] 
+					trackList = [(_("Audio PID, codec & lang"), "N/A - %s - %s" % (audioDesc, audioLang), TYPE_TEXT)]
 		else:
 			trackList = [(_("Audio PID"), "N/A", TYPE_TEXT)]
 		return trackList
@@ -387,9 +379,11 @@ class ServiceInfo(Screen):
 				from Tools.GetEcmInfo import GetEcmInfo
 				ecmdata = GetEcmInfo().getEcmData()
 				formatstring = "ECMPid %04X (%d) %04X-%s %s"
+				altColor = False
 				if caid[0] == int(ecmdata[1], 16) and (caid[1] == int(ecmdata[3], 16) or str(int(ecmdata[2], 16)) in provid):
 					formatstring = "%s (%s)" % (formatstring, _("active"))
-				tlist.append(ServiceInfoListEntry(formatstring % (caid[1], caid[1], caid[0], CaIdDescription, extra_info)))
+					altColor = True
+				tlist.append(ServiceInfoListEntry(formatstring % (caid[1], caid[1], caid[0], CaIdDescription, extra_info), altColor=altColor))
 			if not tlist:
 				tlist.append(ServiceInfoListEntry(_("No ECMPids available (FTA Service)")))
 			self["infolist"].l.setList(tlist)
