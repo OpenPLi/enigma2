@@ -86,7 +86,7 @@ class IpkgComponent:
 			append = ""
 			if args["test_only"]:
 				append = " -test"
-			self.runCmdEx("upgrade" + append)
+			self.runCmdEx("upgrade" + append + " > /home/root/ipkgupgrade.log")
 		elif cmd == self.CMD_LIST:
 			self.fetchedList = []
 			if args['installed_only']:
