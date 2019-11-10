@@ -136,10 +136,10 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 					if self.nimConfig.diseqcMode.value in ("positioner", "positioner_select"):
 						self.createPositionerSetup(self.list)
 				elif self.nimConfig.configMode.value == "equal":
-					self.nimConfig.connectedTo.setChoices([((str(id), nimmanager.getNimDescription(id))) for id in nimmanager.canEqualTo(self.nim.slot)])
+					self.nimConfig.connectedTo.setChoices([((str(id), nimmanager.getNimDescription(id))) for id in nimmanager.canEqualTo(self.slotid)])
 					self.list.append(getConfigListEntry(self.indent % _("Tuner"), self.nimConfig.connectedTo, _("This setting allows the tuner configuration to be a duplication of how another tuner is already configured.")))
 				elif self.nimConfig.configMode.value == "satposdepends":
-					self.nimConfig.connectedTo.setChoices([((str(id), nimmanager.getNimDescription(id)) for id in nimmanager.canDependOn(self.nim.slot))])
+					self.nimConfig.connectedTo.setChoices([((str(id), nimmanager.getNimDescription(id))) for id in nimmanager.canDependOn(self.slotid)])
 					self.list.append(getConfigListEntry(self.indent % _("Tuner"), self.nimConfig.connectedTo, _("Select the tuner that controls the motorised dish.")))
 				elif self.nimConfig.configMode.value == "loopthrough":
 					self.nimConfig.connectedTo.setChoices([((str(id), nimmanager.getNimDescription(id))) for id in nimmanager.canConnectTo(self.slotid)])
