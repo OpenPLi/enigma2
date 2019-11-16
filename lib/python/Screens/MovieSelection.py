@@ -52,7 +52,7 @@ config.movielist.root = ConfigSelection(default="/media", choices=["/","/media",
 config.movielist.hide_extensions = ConfigYesNo(default=False)
 config.movielist.stop_service = ConfigYesNo(default=True)
 config.movielist.add_bookmark = ConfigYesNo(default=True)
-config.movielist.show_underlines = ConfigYesNo(default=True)
+config.movielist.show_underlines = ConfigYesNo(default=False)
 
 userDefinedButtons = None
 last_selected_dest = []
