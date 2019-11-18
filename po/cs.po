@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-10 14:32+0100\n"
+"POT-Creation-Date: 2019-11-18 18:59+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi <ims@openpli.org>\n"
@@ -13,10 +13,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Poedit 2.0.6\n"
-
-#
-msgid "Advanced options and settings."
-msgstr "Pokročilé volby a nastavení."
 
 #
 msgid ""
@@ -32,10 +28,6 @@ msgid ""
 msgstr ""
 "\n"
 "Detekce konfliktů zakázána!"
-
-#
-msgid "Edit the update source address."
-msgstr "Upravit adresy aktualizačních zdrojů."
 
 #
 msgid ""
@@ -60,16 +52,6 @@ msgstr ""
 "\n"
 "Nahrává se."
 
-#
-msgid "Restore your backups by date."
-msgstr "Obnova záloh podle data."
-
-#
-msgid "Select your backup device.\n"
-"Current device: "
-msgstr "Zvolte zařízení pro zálohování.\n"
-"Současné zařízení: "
-
 #, python-format
 msgid ""
 "\n"
@@ -77,10 +59,6 @@ msgid ""
 msgstr ""
 "\n"
 "Časovač '%s' zakázán!"
-
-#
-msgid "View, install and remove available or installed packages."
-msgstr "Zobrazit, instalovat a odstranit dostupné nebo instalované balíčky."
 
 msgid " (0 - all networks)"
 msgstr " (0 - všechny sítě)"
@@ -869,6 +847,11 @@ msgid "Add bookmark"
 msgstr "Přidat záložku"
 
 #
+#, fuzzy
+msgid "Add bouquet"
+msgstr "Přidat přehled"
+
+#
 msgid "Add directory to playlist"
 msgstr "Přidat adresář do playlistu"
 
@@ -903,6 +886,11 @@ msgstr "Přidat nahrávání (ukončit po této události)"
 #
 msgid "Add service"
 msgstr "Přidat program"
+
+#
+#, fuzzy
+msgid "Add services to this bouquet?"
+msgstr "Přidat program do přehledu"
 
 #
 msgid "Add timer"
@@ -944,6 +932,10 @@ msgstr "Rozšířený"
 #
 msgid "Advanced options"
 msgstr "Pokročilé možnosti"
+
+#
+msgid "Advanced options and settings."
+msgstr "Pokročilé volby a nastavení."
 
 #
 msgid "Advanced restore"
@@ -1921,6 +1913,11 @@ msgstr "Kanály"
 
 msgid "Channels and EPG"
 msgstr "Programy a EPG"
+
+#
+#, fuzzy
+msgid "Channels only"
+msgstr "Kanály"
 
 #
 msgid "Chap."
@@ -3424,6 +3421,9 @@ msgstr "EPG jazyk 1"
 msgid "EPG language selection 2"
 msgstr "EPG jazyk 2"
 
+msgid "EPG only"
+msgstr ""
+
 #
 msgid "EPG selection"
 msgstr "Výběr EPG"
@@ -3478,6 +3478,10 @@ msgstr "Upravuje nastavení DNS.\n"
 
 msgid "Edit the network configuration of your receiver.\n"
 msgstr "Upravuje nastavení sítě.\n"
+
+#
+msgid "Edit the update source address."
+msgstr "Upravit adresy aktualizačních zdrojů."
 
 #
 msgid "Edit timer"
@@ -4743,6 +4747,9 @@ msgstr "Island"
 msgid "Icons"
 msgstr "Ikony"
 
+msgid "If disabled, underline characters in file and directory names are not shown and are replaced with spaces."
+msgstr ""
+
 #
 msgid "If enabled, bookmarks will be updated with the new location when you move or copy a recording."
 msgstr "Jestliže je povoleno, funkce Kopírovat/Přemístit budou ukládat cílový adresář do záložek."
@@ -4823,12 +4830,12 @@ msgstr ""
 msgid "Import channels and/or EPG from remote receiver URL also when the receiver is getting out of standby"
 msgstr "Ze záložního přijímače se importují programy a/nebo EPG také v případě probuzení z pohotovostního režimu."
 
+#, fuzzy
+msgid "Import channels and/or EPG from remote receiver URL when receiver is booted"
+msgstr "Ze záložního přijímače se importují programy a/nebo EPG po spuštění přijímače."
+
 msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
 msgstr "Ze záložního přijímače se importují programy a/nebo EPG také v případě, že jsou přijímač nebo enigma2 zrestartovány."
-
-#, fuzzy
-msgid "Import channels from remote receiver URL when receiver is booted"
-msgstr "Ze záložního přijímače se importují programy a/nebo EPG po spuštění přijímače."
 
 #, python-format
 msgid "Import from fallback tuner failed, %s"
@@ -7712,6 +7719,10 @@ msgstr "Obnovit zálohu"
 msgid "Restore system settings"
 msgstr "Obnova nastavení"
 
+#
+msgid "Restore your backups by date."
+msgstr "Obnova záloh podle data."
+
 msgid "Restore your receiver settings."
 msgstr "Obnova nastavení Vašeho přijímače."
 
@@ -8476,6 +8487,14 @@ msgstr "Vyberte ATSC poskytovatele."
 msgid "Select your Skin"
 msgstr "Vyberte skin"
 
+#
+msgid ""
+"Select your backup device.\n"
+"Current device: "
+msgstr ""
+"Zvolte zařízení pro zálohování.\n"
+"Současné zařízení: "
+
 msgid "Select your country. If not available select 'all'."
 msgstr "Vyberte Vaši zemi. Pokud není k dispozici, vyberte možnost 'Vše'."
 
@@ -9004,6 +9023,11 @@ msgstr "Zobrazit přehrávač rádií"
 #
 msgid "Show the tv player..."
 msgstr "Zobrazit TV..."
+
+#
+#, fuzzy
+msgid "Show underline characters in filenames"
+msgstr "Omezená znaková sada pro názvy nahrávaných souborů"
 
 msgid "Show vertical timelines"
 msgstr "Zobrazovat časové linky"
@@ -11193,6 +11217,10 @@ msgstr "Teletext..."
 #
 msgid "View video CD..."
 msgstr "Zobrazit video CD..."
+
+#
+msgid "View, install and remove available or installed packages."
+msgstr "Zobrazit, instalovat a odstranit dostupné nebo instalované balíčky."
 
 msgid "Virgin Islands (British)"
 msgstr "Panenské ostrovy (Britské)"
