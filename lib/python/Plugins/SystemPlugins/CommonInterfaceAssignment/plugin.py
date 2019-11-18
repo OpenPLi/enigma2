@@ -210,17 +210,31 @@ class CIconfigMenu(Screen):
 		self.setServiceListInfo()
 
 	def finishedChannelSelection(self, *args):
-		if len(args):
-			ref = args[0]
-			service_ref = ServiceReference(ref)
-			service_name = service_ref.getServiceName()
-			if find_in_list(self.servicelist, service_name, 0) == False:
-				str_service = service_ref.ref.toString()
-				split_ref = str_service.split(":")
-				if split_ref[0] == "1" and not str_service.startswith("1:134:") and "%3a//" not in str_service:
-					self.servicelist.append((service_name, ConfigNothing(), 0, str_service))
-					self["ServiceList"].l.setList(self.servicelist)
-					self.setServiceListInfo()
+		item = len(args)
+		if item > 0:
+			if item > 2 and args[2] is True:
+				for ref in args[0]:
+					service_ref = ServiceReference(ref)
+					service_name = service_ref.getServiceName()
+					if len(service_name) and find_in_list(self.servicelist, service_name, 0) == False:
+						str_service = service_ref.ref.toString()
+						split_ref = str_service.split(":")
+						if split_ref[0] == "1" and not str_service.startswith("1:134:") and "%3a//" not in str_service:
+							self.servicelist.append((service_name, ConfigNothing(), 0, str_service))
+				self["ServiceList"].l.setList(self.servicelist)
+				self.setServiceListInfo()
+			else:
+				ref = args[0]
+				if ref:
+					service_ref = ServiceReference(ref)
+					service_name = service_ref.getServiceName()
+					if find_in_list(self.servicelist, service_name, 0) == False:
+						str_service = service_ref.ref.toString()
+						split_ref = str_service.split(":")
+						if split_ref[0] == "1" and not str_service.startswith("1:134:") and "%3a//" not in str_service:
+							self.servicelist.append((service_name, ConfigNothing(), 0, str_service))
+							self["ServiceList"].l.setList(self.servicelist)
+							self.setServiceListInfo()
 
 	def finishedProviderSelection(self, *args):
 		item = len(args)
@@ -590,9 +604,46 @@ class myChannelSelection(ChannelSelectionBase):
 	def __onExecCallback(self):
 		self.setModeTv()
 		self.setTitle(_("Select service to add..."))
+		self.isFavourites()
+
+	def isFavourites(self):
+		ref = self.getCurrentSelection()
+		if ref:
+			if (ref.flags & 7) == 7 and "FROM BOUQUET" in ref.toString():
+				self["key_yellow"].setText(_("Add bouquet"))
+				return True
+			else:
+				self["key_yellow"].setText("")
+		return False
+
+	def showFavourites(self):
+		ChannelSelectionBase.showFavourites(self)
+		self.isFavourites()
 
 	def showProviders(self):
-		pass
+		if self.isFavourites():
+			self.session.openWithCallback(self.addAllBouquet, MessageBox, _("Add services to this bouquet?"), MessageBox.TYPE_YESNO)
+
+	def addAllBouquet(self, answer):
+		ref = self.getCurrentSelection()
+		if answer and ref:
+			serviceHandler = eServiceCenter.getInstance()
+			servicelist = serviceHandler.list(ref)
+			if not servicelist is None:
+				providerlist = []
+				while True:
+					service = servicelist.getNext()
+					if not service.valid():
+						break
+					providerlist.append((service))
+				if providerlist:
+					self.close(providerlist, None, True)
+				else:
+					self.close(None)
+
+	def showAllServices(self):
+		ChannelSelectionBase.showAllServices(self)
+		self.isFavourites()
 
 	def showSatellites(self, changeMode=False):
 		if changeMode:
@@ -602,6 +653,7 @@ class myChannelSelection(ChannelSelectionBase):
 		ref = self.getCurrentSelection()
 		if (ref.flags & 7) == 7:
 			self.enterPath(ref)
+			self.isFavourites()
 		elif not (ref.flags & eServiceReference.isMarker):
 			ref = self.getCurrentSelection()
 			self.close(ref)
