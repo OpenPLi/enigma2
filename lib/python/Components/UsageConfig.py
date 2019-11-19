@@ -236,7 +236,7 @@ def InitUsageConfig():
 	config.usage.remote_fallback_dvb_c.addNotifier(remote_fallback_changed, immediate_feedback=False)
 	config.usage.remote_fallback_atsc = ConfigText(default = "", fixed_size = False)
 	config.usage.remote_fallback_atsc.addNotifier(remote_fallback_changed, immediate_feedback=False)
-	config.usage.remote_fallback_import = ConfigSelection(default = "", choices = [("", _("Disable")), ("channels", _("Enable"))])
+	config.usage.remote_fallback_import = ConfigSelection(default = "", choices = [("", _("No")), ("channels", _("Channels only")), ("channels_epg", _("Channels and EPG")), ("epg", _("EPG only"))])
 	config.usage.remote_fallback_import_restart = ConfigYesNo(default = False)
 	config.usage.remote_fallback_import_standby = ConfigYesNo(default = False)
 	config.usage.remote_fallback_ok = ConfigYesNo(default = False)

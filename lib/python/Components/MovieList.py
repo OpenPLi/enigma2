@@ -369,7 +369,8 @@ class MovieList(GUIComponent):
 					res.append(MultiContentEntryText(pos=(x, 0), size=(width-x-tn-r, self.itemHeight), font = 0, flags = RT_HALIGN_LEFT|valign_center, text = _("Deleted items")))
 					res.append(MultiContentEntryText(pos=(width-tn-r, 0), size=(tn, self.itemHeight), font=1, flags=RT_HALIGN_RIGHT|valign_center, text=_("Trash can")))
 					return res
-			txt = txt.replace('_', ' ')
+			if not config.movielist.show_underlines.value:
+				txt = txt.replace('_', ' ').strip()
 			res.append(MultiContentEntryPixmapAlphaTest(pos=(0,self.dirShift), size=(iconSize,iconSize), png=self.iconFolder))
 			res.append(MultiContentEntryText(pos=(x, 0), size=(width-x-tn-r, self.itemHeight), font = 0, flags = RT_HALIGN_LEFT|valign_center, text = txt))
 			res.append(MultiContentEntryText(pos=(width-tn-r, 0), size=(tn, self.itemHeight), font=1, flags=RT_HALIGN_RIGHT|valign_center, text=_("Directory")))
@@ -383,7 +384,10 @@ class MovieList(GUIComponent):
 			else:
 				data.len = 0 #dont recalc movielist to speedup loading the list
 			self.list[cur_idx] = (x[0], x[1], x[2], data) #update entry in list... so next time we don't need to recalc
-			data.txt = info.getName(serviceref).replace('_', ' ')
+			if config.movielist.show_underlines.value:
+				data.txt = info.getName(serviceref)
+			else:
+				data.txt = info.getName(serviceref).replace('_', ' ').strip()
 			if config.movielist.hide_extensions.value:
 				fileName, fileExtension = os.path.splitext(data.txt)
 				if fileExtension in KNOWN_EXTENSIONS:

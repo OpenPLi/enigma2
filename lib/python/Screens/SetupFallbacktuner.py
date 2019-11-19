@@ -97,7 +97,7 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 			_("Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001.")))
 		self.list.append(getConfigListEntry(_("Import from remote receiver URL"),
 			config.usage.remote_fallback_import,
-			_("Import channels from remote receiver URL when receiver is booted")))
+			_("Import channels and/or EPG from remote receiver URL when receiver is booted")))
 		if config.usage.remote_fallback_enabled.value or config.usage.remote_fallback_import.value:
 			self.list.append(getConfigListEntry(_("Enable import timer from fallback tuner"),
 				config.usage.remote_fallback_external_timer,

@@ -52,6 +52,7 @@ config.movielist.root = ConfigSelection(default="/media", choices=["/","/media",
 config.movielist.hide_extensions = ConfigYesNo(default=False)
 config.movielist.stop_service = ConfigYesNo(default=True)
 config.movielist.add_bookmark = ConfigYesNo(default=True)
+config.movielist.show_underlines = ConfigYesNo(default=False)
 
 userDefinedButtons = None
 last_selected_dest = []
@@ -270,6 +271,7 @@ class MovieBrowserConfiguration(ConfigListScreen,Screen):
 			getConfigListEntry(_("Root directory"), config.movielist.root, _("You can set selected directory as 'root' directory for movie player.")),
 			getConfigListEntry(_("Hide known extensions"), config.movielist.hide_extensions, _("Do not show file extensions for registered multimedia files.")),
 			getConfigListEntry(_("Automatic bookmarks"), config.movielist.add_bookmark, _("If enabled, bookmarks will be updated with the new location when you move or copy a recording.")),
+			getConfigListEntry(_("Show underline characters in filenames"), config.movielist.show_underlines, _("If disabled, underline characters in file and directory names are not shown and are replaced with spaces.")),
 			]
 		for btn in ('red', 'green', 'yellow', 'blue', 'TV', 'Radio', 'Text', 'F1', 'F2', 'F3'):
 			configList.append(getConfigListEntry(_(btn), userDefinedButtons[btn]))
