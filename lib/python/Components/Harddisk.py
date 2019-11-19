@@ -602,7 +602,6 @@ class HarddiskManager:
 		removable = False
 		blacklisted = False
 		is_cdrom = False
-		bootdevice = None
 		partitions = []
 		try:
 			if os.path.exists('/dev/root'):
@@ -622,7 +621,7 @@ class HarddiskManager:
 			if not blacklisted and dev == 179:
 				if  subdev != 0:
 					blacklisted = True
-				elif bootdevice.startswith(blockdev):
+				elif SystemInfo['BootDevice'] and SystemInfo['BootDevice'].startswith(blockdev):
 					blacklisted = True
 			if blockdev[0:2] == 'sr':
 				is_cdrom = True
