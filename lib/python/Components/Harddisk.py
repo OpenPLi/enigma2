@@ -604,8 +604,6 @@ class HarddiskManager:
 		is_cdrom = False
 		partitions = []
 		try:
-			if os.path.exists('/dev/root'):
-				bootdevice = os.readlink('/dev/root')
 			if os.path.exists(devpath + "/removable"):
 				removable = bool(int(readFile(devpath + "/removable")))
 			if os.path.exists(devpath + "/dev"):
