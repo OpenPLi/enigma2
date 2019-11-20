@@ -107,7 +107,7 @@ class Harddisk:
 
 	def partitionPath(self, n):
 		if self.type == DEVTYPE_UDEV:
-			if self.dev_path.startswith('/dev/mmcblk0'):
+			if self.dev_path.startswith('/dev/mmcblk'):
 				return self.dev_path + "p" + n
 			else:
 				return self.dev_path + n
@@ -173,7 +173,7 @@ class Harddisk:
 				vendor = readFile(self.sysfsPath('device/vendor'))
 				model = readFile(self.sysfsPath('device/model'))
 				return vendor + '(' + model + ')'
-			elif self.device.startswith('mmcblk0'):
+			elif self.device.startswith('mmcblk'):
 				return readFile(self.sysfsPath('device/name'))
 			else:
 				raise Exception, "[Harddisk] no hdX or sdX or mmcX"
@@ -602,24 +602,24 @@ class HarddiskManager:
 		removable = False
 		blacklisted = False
 		is_cdrom = False
+		is_mmc = False
 		partitions = []
 		try:
 			if os.path.exists(devpath + "/removable"):
 				removable = bool(int(readFile(devpath + "/removable")))
 			if os.path.exists(devpath + "/dev"):
 				dev = readFile(devpath + "/dev")
-				subdev = int(dev.split(':')[1])
+				subdev = False if int(dev.split(':')[1]) % 32 == 0 else True
 				dev = int(dev.split(':')[0])
 			else:
 				dev = None
-				subdev = None
+				subdev = False
 			# blacklist ram, loop, mtdblock, romblock, ramzswap
 			blacklisted = dev in [1, 7, 31, 253, 254] 
 			# blacklist non-root eMMC devices
 			if not blacklisted and dev == 179:
-				if  subdev != 0:
-					blacklisted = True
-				elif SystemInfo['BootDevice'] and SystemInfo['BootDevice'].startswith(blockdev):
+				is_mmc = True
+				if (SystemInfo['BootDevice'] and SystemInfo['BootDevice'].startswith(blockdev)) or subdev:
 					blacklisted = True
 			if blockdev[0:2] == 'sr':
 				is_cdrom = True
@@ -631,7 +631,7 @@ class HarddiskManager:
 				except IOError:
 					error = True
 			# check for partitions
-			if not is_cdrom and os.path.exists(devpath):
+			if not is_cdrom and not is_mmc and os.path.exists(devpath):
 				for partition in os.listdir(devpath):
 					if partition[0:len(blockdev)] != blockdev:
 						continue
@@ -691,7 +691,7 @@ class HarddiskManager:
 				self.on_partition_list_change("add", p)
 			# see if this is a harddrive
 			l = len(device)
-			if l and (not device[l-1].isdigit() or device == 'mmcblk0'):
+			if l and (not device[l-1].isdigit() or device.startswith('mmcblk')):
 				self.hdd.append(Harddisk(device, removable))
 				self.hdd.sort()
 				SystemInfo["Harddisk"] = True
