@@ -480,7 +480,7 @@ class EPGList(GUIComponent):
 		if self.number_width:
 			res.append(MultiContentEntryText(
 				pos = (r1.x, r1.y + self.serviceBorderHorWidth),
-				size = (self.number_width - self.serviceBorderVerWidth, r1.h * self.serviceBorderHorWidth),
+				size = (self.number_width - self.serviceBorderVerWidth, r1.h - 2 * self.serviceBorderHorWidth),
 				font = 0, flags = RT_HALIGN_RIGHT | RT_VALIGN_CENTER,
 				text = serviceref and serviceref.ref and str(serviceref.ref.getChannelNum()) or "---",
 				color = serviceForeColor, color_sel = serviceForeColor,
