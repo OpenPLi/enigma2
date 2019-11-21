@@ -109,4 +109,8 @@ SystemInfo["CanDownmixAC3"] = fileHas("/proc/stb/audio/ac3_choices", "downmix")
 SystemInfo["CanDownmixDTS"] = fileHas("/proc/stb/audio/dts_choices", "downmix")
 SystemInfo["CanDownmixAAC"] = fileHas("/proc/stb/audio/aac_choices", "downmix")
 SystemInfo["HDMIAudioSource"] = fileCheck("/proc/stb/hdmi/audio_source")
-SystemInfo["BootDevice"] = ("root" in cmdline and cmdline['root'].startswith('/dev/')) and cmdline['root'][5:]
+
+dev = ("root" in cmdline and cmdline['root'].startswith('/dev/')) and cmdline['root'][5:]
+while dev and not fileExists('/sys/block/' + dev):
+    dev = dev[:-1]
+SystemInfo["BootDevice"] = dev

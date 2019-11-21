@@ -619,7 +619,7 @@ class HarddiskManager:
 			# blacklist non-root eMMC devices
 			if not blacklisted and dev == 179:
 				is_mmc = True
-				if (SystemInfo['BootDevice'] and SystemInfo['BootDevice'].startswith(blockdev)) or subdev:
+				if (SystemInfo['BootDevice'] and blockdev.startswith(SystemInfo['BootDevice'])) or subdev:
 					blacklisted = True
 			if blockdev[0:2] == 'sr':
 				is_cdrom = True
