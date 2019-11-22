@@ -1254,7 +1254,7 @@ class PositionerSetupLog(Screen):
 		self.session = session
 		Screen.__init__(self, session)
 		self.setTitle(_("Positioner setup log"))
-		self["key_red"] = Button(_("Exit/OK"))
+		self["key_red"] = Button(_("Exit"))
 		self["key_green"] = Button(_("Save"))
 		self["key_blue"] = Button(_("Clear"))
 		self["list"] = ScrollLabel(log.getvalue())
