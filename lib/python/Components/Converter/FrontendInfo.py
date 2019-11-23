@@ -2,6 +2,8 @@ from Components.Converter.Converter import Converter
 from Components.Element import cached
 from Components.config import config
 from Components.NimManager import nimmanager
+from skin import parameters
+from Tools.Hex2strColor import Hex2strColor
 
 class FrontendInfo(Converter, object):
 	BER = 0
@@ -44,6 +46,7 @@ class FrontendInfo(Converter, object):
 		assert self.type not in (self.LOCK, self.SLOT_NUMBER), "the text output of FrontendInfo cannot be used for lock info"
 		percent = None
 		swapsnr = config.usage.swap_snr_on_osd.value
+		colors = parameters.get("FrontendInfoColors", (0x0000FF00, 0x00FFFF00, 0x007F7F7F)) # tuner active, busy, available colors
 		if self.type == self.BER: # as count
 			count = self.source.ber
 			if count is not None:
@@ -66,11 +69,11 @@ class FrontendInfo(Converter, object):
 			for n in nimmanager.nim_slots:
 				if n.type:
 					if n.slot == self.source.slot_number:
-						color = "\c0000??00"
+						color = Hex2strColor(colors[0])
 					elif self.source.tuner_mask & 1 << n.slot:
-						color = "\c00????00"
+						color = Hex2strColor(colors[1])
 					elif len(nimmanager.nim_slots) <= self.space_for_tuners or self.show_all_non_link_tuners and not (n.isFBCLink() or n.internally_connectable):
-						color = "\c007?7?7?"
+						color = Hex2strColor(colors[2])
 					else:
 						continue
 					if string and len(nimmanager.nim_slots) <= self.space_for_tuners_with_spaces:
@@ -82,9 +85,9 @@ class FrontendInfo(Converter, object):
 			for n in nimmanager.nim_slots:
 				if n.type:
 					if n.slot == self.source.slot_number:
-						color = "\c0000??00"
+						color = Hex2strColor(colors[0])
 					elif self.source.tuner_mask & 1 << n.slot:
-						color = "\c00????00"
+						color = Hex2strColor(colors[1])
 					else:
 						continue
 					if string:
