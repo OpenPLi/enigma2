@@ -214,6 +214,7 @@ class ConfigListScreen:
 		if callback is not None:
 			self["config"].getCurrent()[1].setValue(callback)
 			self["config"].invalidate(self["config"].getCurrent())
+			self.__changed()
 		self["config"].showHelp()
 
 	def keyOK(self):
