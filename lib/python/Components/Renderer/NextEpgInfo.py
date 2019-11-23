@@ -3,6 +3,7 @@ from Renderer import Renderer
 from enigma import eLabel, eEPGCache, eServiceReference
 from time import time, localtime, strftime
 from skin import parseColor
+from Tools.Hex2strColor import Hex2strColor
 
 class NextEpgInfo(Renderer, VariableText):
 	def __init__(self):
@@ -13,7 +14,7 @@ class NextEpgInfo(Renderer, VariableText):
 		self.hideLabel = 0
 		self.timecolor = ""
 		self.labelcolor = ""
-		self.foregroundColor = "00?0?0?0"
+		self.foregroundColor = "\c00?0?0?0"
 		self.numOfSpaces = 1
 
 	GUI_WIDGET = eLabel
@@ -54,32 +55,18 @@ class NextEpgInfo(Renderer, VariableText):
 				self.numOfSpaces = int(value)
 				attribs.append((attrib, value))
 			if attrib == "timeColor":
-				self.timecolor = self.hex2strColor(parseColor(value).argb())
+				self.timecolor = Hex2strColor(parseColor(value).argb())
 				attribs.append((attrib, value))
 			if attrib == "labelColor":
-				self.labelcolor = self.hex2strColor(parseColor(value).argb())
+				self.labelcolor = Hex2strColor(parseColor(value).argb())
 				attribs.append((attrib, value))
 			if attrib == "foregroundColor":
-				self.foregroundColor = self.hex2strColor(parseColor(value).argb())
+				self.foregroundColor = Hex2strColor(parseColor(value).argb())
 				attribs.append((attrib, value))
 		for (attrib, value) in attribs:
 			self.skinAttributes.remove((attrib, value))
-		self.timecolor = self.formatColorString(self.timecolor)
-		self.labelcolor  = self.formatColorString(self.labelcolor)
-		self.foregroundColor  = self.formatColorString(self.foregroundColor)
+		if self.timecolor == "": # fallback to foregroundColor
+			self.timecolor = self.foregroundColor
+		if self.labelcolor == "": # fallback to foregroundColor
+			self.labelcolor = self.foregroundColor
 		return Renderer.applySkin(self, desktop, parent)
-
-# 	hex:
-#	0 1 2 3 4 5 6 7 8 9 a b c d e f
-# 	converts to:
-#	0 1 2 3 4 5 6 7 8 9 : ; < = > ?
-	def hex2strColor(self, rgb):
-		out = ""
-		for i in range(28,-1,-4):
-			out += "%s" % chr(0x30 + (rgb>>i & 0xf))
-		return  out
-
-	def formatColorString(self, color):
-		if color:
-			return "%s%s" % ('\c', color)
-		return "%s%s" % ('\c', self.foregroundColor)
