@@ -23,7 +23,8 @@ caid_data = (
 	("0x2700", "0x2710", "Dre3",     "D3", False ),
 	("0x4ae0", "0x4ae1", "Dre",      "D",  False ),
 	("0x4aee", "0x4aee", "BulCrypt", "B1", False ),
-	("0x5581", "0x5581", "BulCrypt", "B2", False )
+	("0x5581", "0x5581", "BulCrypt", "B2", False ),
+	("0x5601", "0x5604", "Verimatrix", "Vm", False )
 )
 
 # stream type to codec map
@@ -80,6 +81,7 @@ class PliExtraInfo(Poll, Converter, object):
 			("CryptoCaidDreAvailable",	"D",	False),
 			("CryptoCaidBulCrypt1Available","B1",	False),
 			("CryptoCaidBulCrypt2Available","B2",	False),
+			("CryptoCaidVerimatrixAvailable","Vm",  False),
 			("CryptoCaidTandbergAvailable", "TB",   False),
 			("CryptoCaidSecaSelected",	"S",	True),
 			("CryptoCaidViaSelected",	"V",	True),
@@ -95,6 +97,7 @@ class PliExtraInfo(Poll, Converter, object):
 			("CryptoCaidDreSelected",	"D",	True),
 			("CryptoCaidBulCrypt1Selected",	"B1",	True),
 			("CryptoCaidBulCrypt2Selected",	"B2",	True),
+			("CryptoCaidVerimatrixSelected","Vm",   True),
 			("CryptoCaidTandbergSelected",  "TB",   True),
 		)
 		self.ecmdata = GetEcmInfo()
