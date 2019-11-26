@@ -9,6 +9,9 @@ from Tools.GetEcmInfo import GetEcmInfo
 from Poll import Poll
 
 caid_data = (
+	("0x4a30", "0x4a30", _("DVN-JET"),	"TB", False),
+	("0x4ad2", "0x4ad3", _("STREAMGUARD"),	"SM", False),
+	("0x4a02", "0x4a02", _("TONGFANG"),	"TF", False),
 	( "0x100",  "0x1ff", _("Seca"),		"S",  True ),
 	( "0x500",  "0x5ff", _("Via"),		"V",  True ),
 	( "0x600",  "0x6ff", _("Irdeto"),	"I",  True ),
@@ -23,10 +26,7 @@ caid_data = (
 	("0x2700", "0x2710", _("Dre3"),		"D3", False),
 	("0x4ae0", "0x4ae1", _("Dre"),		"D",  False),
 	("0x4aee", "0x4aee", _("BulCrypt"),	"B1", False),
-	("0x5581", "0x5581", _("BulCrypt"),	"B2", False),
-	("0x4a30", "0x4a30", _("DVN-JET"),	"TB", False),
-	("0x4ad2", "0x4ad3", _("STREAMGUARD"),	"SM", False),
-	("0x4a02", "0x4a02", _("TONGFANG"),	"TF", False)
+	("0x5581", "0x5581", _("BulCrypt"),	"B2", False)
 )
 
 # stream type to codec map
@@ -69,6 +69,9 @@ class PliExtraInfo(Poll, Converter, object):
 		self.poll_interval = 1000
 		self.poll_enabled = True
 		self.ca_table = (
+			("CryptoCaidDvnAvailable", 	"TB",	False),
+			("CryptoCaidSmsxAvailable",	"SM",	False),
+			("CryptoCaidTongfangAvailable",	"TF",	False),
 			("CryptoCaidSecaAvailable",	"S",	False),
 			("CryptoCaidViaAvailable",	"V",	False),
 			("CryptoCaidIrdetoAvailable",	"I",	False),
@@ -83,12 +86,12 @@ class PliExtraInfo(Poll, Converter, object):
 			("CryptoCaidDreAvailable",	"D",	False),
 			("CryptoCaidBulCrypt1Available","B1",	False),
 			("CryptoCaidBulCrypt2Available","B2",	False),
-			("CryptoCaidTandbergAvailable",	"T",	False),
-			("CryptoCaidDvnAvailable", 	"TB",	False),
-			("CryptoCaidSmsxAvailable",	"SM",	False),
-			("CryptoCaidTongfangAvailable",	"TF",	False),
+			("CryptoCaidTandbergAvailable",	"TB",	False),
 			("CryptoCaidSecaSelected",	"S",	True),
 			("CryptoCaidViaSelected",	"V",	True),
+			("CryptoCaidDvnSelected",	"TB",	True),
+			("CryptoCaidSmsxSelected",	"SM",	True),
+			("CryptoCaidTongfangSelected",	"TF",	True),
 			("CryptoCaidIrdetoSelected",	"I",	True),
 			("CryptoCaidNDSSelected",	"Nd",	True),
 			("CryptoCaidConaxSelected",	"Co",	True),
@@ -101,10 +104,7 @@ class PliExtraInfo(Poll, Converter, object):
 			("CryptoCaidDreSelected",	"D",	True),
 			("CryptoCaidBulCrypt1Selected",	"B1",	True),
 			("CryptoCaidBulCrypt2Selected",	"B2",	True),
-			("CryptoCaidTandbergSelected",  "T",	True),
-			("CryptoCaidDvnSelected",	"TB",	True),
-			("CryptoCaidSmsxSelected",	"SM",	True),
-			("CryptoCaidTongfangSelected",	"TF",	True),
+			("CryptoCaidTandbergSelected",  "TB",	True),
 		)
 		self.ecmdata = GetEcmInfo()
 		self.feraw = self.fedata = self.updateFEdata = None
