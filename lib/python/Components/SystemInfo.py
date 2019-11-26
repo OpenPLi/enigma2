@@ -1,7 +1,6 @@
 from enigma import eDVBResourceManager, Misc_Options, eDVBCIInterfaces, eGetEnigmaDebugLvl
 from Tools.Directories import fileExists, fileCheck, pathExists, fileHas
 from Tools.HardwareInfo import HardwareInfo
-from enigma import getBoxType
 
 import os, re
 
@@ -110,8 +109,6 @@ SystemInfo["CanDownmixAC3"] = fileHas("/proc/stb/audio/ac3_choices", "downmix")
 SystemInfo["CanDownmixDTS"] = fileHas("/proc/stb/audio/dts_choices", "downmix")
 SystemInfo["CanDownmixAAC"] = fileHas("/proc/stb/audio/aac_choices", "downmix")
 SystemInfo["HDMIAudioSource"] = fileCheck("/proc/stb/hdmi/audio_source")
-SystemInfo["RecoveryMode"] = fileCheck("/proc/stb/fp/boot_mode")
-SystemInfo["HaveTouchSensor"] = getBoxType() in ('dm520', 'dm525', 'dm900', 'dm920')
 
 dev = ("root" in cmdline and cmdline['root'].startswith('/dev/')) and cmdline['root'][5:]
 while dev and not fileExists('/sys/block/' + dev):
