@@ -10,7 +10,6 @@ from Poll import Poll
 
 caid_data = (
 	("0x4a30", "0x4a30", _("DVN-JET"),	"TB", False),
-	("0x4ad2", "0x4ad2", _("STREAMGUARD"),	"SM", False),
 	("0x4ad2", "0x4ad3", _("STREAMGUARD"),	"SM", False),
 	("0x4a02", "0x4a02", _("TONGFANG"),	"TF", False),
 	( "0x100",  "0x1ff", _("Seca"),		"S",  True ),
