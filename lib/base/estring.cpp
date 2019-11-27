@@ -640,12 +640,6 @@ std::string convertDVBUTF8(const unsigned char *data, int len, int table, int ts
 		string_to_hex(std::string((char*)data, len < 15 ? len : 15)).c_str(),
 		output.c_str());
 
-	// filter short name markers
-	while((i = output.find("\xc2\x86")) != std::string::npos)
-		output.erase(i,2);
-	while((i = output.find("\xc2\x87")) != std::string::npos)
-		output.erase(i,2);
-
 	return output;
 }
 
