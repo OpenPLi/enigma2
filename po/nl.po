@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-18 18:59+0100\n"
+"POT-Creation-Date: 2019-11-30 07:47+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Frenske <voorzitter@openpli.org>\n"
 "Language-Team: PLiteam <translators@openpli.org>\n"
@@ -700,6 +700,15 @@ msgstr "ATSC aanbieder"
 msgid "Abort"
 msgstr "Afbreken"
 
+msgid "Abort alternatives edit"
+msgstr "Sluit de bewerking van de alternatieven af"
+
+msgid "Abort bouquet edit"
+msgstr "Bouquet bewerken afsluiten"
+
+msgid "Abort favourites edit"
+msgstr "Favorieten bewerken afsluiten"
+
 msgid "About"
 msgstr "Uw ontvanger"
 
@@ -745,8 +754,17 @@ msgstr "Voeg een nameserver toe"
 msgid "Add a new title"
 msgstr "Voeg een nieuwe titel toe"
 
+msgid "Add alternatives"
+msgstr "Voeg alternatieven toe"
+
 msgid "Add bookmark"
 msgstr "Maak markeerpunt"
+
+msgid "Add bouquet"
+msgstr "Voeg een bouquet toe"
+
+msgid "Add bouquet to parental protection"
+msgstr "Voeg dit bouquet toe aan het kinderslot"
 
 msgid "Add directory to playlist"
 msgstr "Voeg de map aan de afspeellijst toe"
@@ -756,6 +774,9 @@ msgstr "Voeg het bestand toe aan de afspeellijst"
 
 msgid "Add files to playlist"
 msgstr "Voeg de bestanden toe aan de afspeellijst"
+
+msgid "Add marker"
+msgstr "Voeg een markeerpunt in"
 
 msgid "Add provider"
 msgstr "Provider toevoegen"
@@ -775,6 +796,12 @@ msgstr "Voeg een opname toe (stop na huidige uitzending)"
 msgid "Add service"
 msgstr "Voeg een zender toe"
 
+msgid "Add service to bouquet"
+msgstr "Deze zender toevoegen aan een bouquet"
+
+msgid "Add service to favourites"
+msgstr "Zender toevoegen aan favorieten"
+
 #, fuzzy
 msgid "Add services to this bouquet?"
 msgstr "Deze zender toevoegen aan een bouquet"
@@ -790,6 +817,9 @@ msgstr "Voeg toe aan een bouquet"
 
 msgid "Add to favourites"
 msgstr "Voeg toe aan favorieten"
+
+msgid "Add to parental protection"
+msgstr "Zender op kinderslot zetten"
 
 msgid "Add/remove change timer for current event"
 msgstr "Voeg een timerwijziging voor het huidige programma toe of verwijder deze"
@@ -1862,15 +1892,15 @@ msgstr "Configureer scan-instellingen"
 msgid "Config resolution of pictures"
 msgstr "Stel de resolutie van de afbeeldingen in"
 
+msgid "Configuration"
+msgstr "Configuratie"
+
 msgid "Configuration mode"
 msgstr "Configuratiemodus"
 
 #, python-format
 msgid "Configuration mode: %s"
 msgstr "Configuratiemodus: %s"
-
-msgid "Configuration"
-msgstr "Configuratie"
 
 msgid "Configure ATSC"
 msgstr "Stel ATSC in"
@@ -2425,6 +2455,9 @@ msgstr "Cook eilanden"
 msgid "Copy"
 msgstr "Kopieër"
 
+msgid "Copy to bouquets"
+msgstr "Kopieer naar bouquetten"
+
 msgid "Costa Rica"
 msgstr "Costa Rica"
 
@@ -2886,6 +2919,9 @@ msgstr "Achtergrondscan uitschakelen"
 msgid "Disable current event but not coming events"
 msgstr "Deactiveer het huidige, maar niet de komende programma's"
 
+msgid "Disable move mode"
+msgstr "Verplaatsmode deactiveren"
+
 msgid "Disable timer"
 msgstr "Timer uitschakelen"
 
@@ -3187,6 +3223,9 @@ msgstr "Bewerk"
 msgid "Edit DNS"
 msgstr "DNS wijzigen"
 
+msgid "Edit alternatives"
+msgstr "Alternatieven bewerken"
+
 msgid "Edit chapters of current title"
 msgstr "Wijzig hoofdstuk van de huidige titel"
 
@@ -3288,17 +3327,26 @@ msgstr "Wilt u de automatische Fastscan activeren"
 msgid "Enable auto fast scan for %s"
 msgstr "Activeer automatische fastscan voor %s"
 
+msgid "Enable bouquet edit"
+msgstr "Activeer het bewerken van een bouquet"
+
 msgid "Enable bouquet selection in multi-EPG"
 msgstr "Indien geactiveerd, dan wordt het bouquet selectiemenu weergegeven in de multi-EPG."
 
 msgid "Enable fallback remote receiver"
 msgstr "Activeer de 'Fallback tuner'"
 
+msgid "Enable favourites edit"
+msgstr "Favorieten bewerken activeren"
+
 msgid "Enable freesat EPG"
 msgstr "Freesat EPG inschakelen"
 
 msgid "Enable import timer from fallback tuner"
 msgstr "Activeer de import van timers van de Fallback tuner"
+
+msgid "Enable move mode"
+msgstr "Activeer de verplaatsmodus"
 
 msgid "Enable multiple bouquets"
 msgstr "Zenders in meerdere bouquetten toestaan"
@@ -3350,6 +3398,15 @@ msgstr "Coderingssleuteltype"
 
 msgid "Encryption:"
 msgstr "Codering:"
+
+msgid "End alternatives edit"
+msgstr "Alternatieven bewerken stoppen"
+
+msgid "End bouquet edit"
+msgstr "Bouquet bewerken stoppen"
+
+msgid "End favourites edit"
+msgstr "Favorieten bewerken stoppen "
 
 msgid "End time"
 msgstr "Eindtijd"
@@ -3594,10 +3651,6 @@ msgstr "Verlaat netwerkwizard"
 msgid "Exit the wizard"
 msgstr "Wizard afsluiten."
 
-# # Rick: Ik denk dat Exit/OK moet blijven bestaan omdat de Exit waarschijnlijk de Exit knop bedoelt wordt.
-msgid "Exit/OK"
-msgstr "Exit/Ok"
-
 msgid "Expand"
 msgstr "Uitvouwen"
 
@@ -3827,6 +3880,9 @@ msgstr "Eindpositie op index"
 
 msgid "Final scroll delay"
 msgstr "Definitieve scroll vertraging"
+
+msgid "Find currently playing service"
+msgstr "Zoek de zender die momenteel speelt"
 
 msgid "Fine movement"
 msgstr "Exact positioneren"
@@ -5969,6 +6025,9 @@ msgstr "DVD afspelen"
 msgid "Play DVDs"
 msgstr "DVD's afspelen"
 
+msgid "Play as Picture in Picture"
+msgstr "Speel deze zender af in het PIP venster"
+
 msgid "Play audio-CD..."
 msgstr "Muziek CD afspelen..."
 
@@ -5986,6 +6045,9 @@ msgstr "Afspelen vanaf het volgende markeerpunt of de volgende opname"
 
 msgid "Play from previous mark or playlist entry"
 msgstr "Afspelen vanaf het vorige markeerpunt of de vorige opname"
+
+msgid "Play in main window"
+msgstr "Afspelen in hoofdscherm"
 
 msgid "Play music..."
 msgstr "Muziek afspelen..."
@@ -6550,6 +6612,9 @@ msgstr "Providers"
 msgid "Puerto Rico"
 msgstr "Puerto Rico"
 
+msgid "Purge deleted user bouquets"
+msgstr "Ruim gewiste gebruikersboeket(ten) op"
+
 msgid "Put TV in standby"
 msgstr "Zet de TV in stand-by"
 
@@ -6751,11 +6816,23 @@ msgstr "Wis markeerpunt"
 msgid "Remove a nameserver entry"
 msgstr "Verwijder een nameserver ingave"
 
+msgid "Remove all alternatives"
+msgstr "Verwijder alle alternatieven"
+
 msgid "Remove all logfiles"
 msgstr "Verwijder alle logbestanden"
 
+msgid "Remove all new found flags"
+msgstr "Verwijder alle 'nieuw gevonden' markeringen"
+
 msgid "Remove bookmark"
 msgstr "Wis markeerpunt"
+
+msgid "Remove bouquet from parental protection"
+msgstr "Verwijder bouquet uit het kinderslot"
+
+msgid "Remove cable services"
+msgstr "Verwijder kabelkanalen"
 
 msgid "Remove completed timers after (days)"
 msgstr "Verwijder de afgeronde timers na ... dagen"
@@ -6766,11 +6843,26 @@ msgstr "Verwijder de huidig geselecteerde titel"
 msgid "Remove directory"
 msgstr "Map verwijderen"
 
+msgid "Remove entry"
+msgstr "Verwijder het huidige item"
+
+msgid "Remove from parental protection"
+msgstr "Verwijder kinderslot"
+
 msgid "Remove items from trash can after (days)"
 msgstr "Verwijder de opnames uit de prullenbak na ... dagen"
 
+msgid "Remove new found flag"
+msgstr "Verwijder 'nieuw gevonden' markering"
+
 msgid "Remove plugins"
 msgstr "Verwijderen plugins"
+
+msgid "Remove selected satellite"
+msgstr "Deze satelliet verwijderen"
+
+msgid "Remove terrestrial services"
+msgstr "Verwijder DVB-T kanalen"
 
 msgid "Remove this logfile"
 msgstr "Verwijder dit logbestand"
@@ -6790,6 +6882,9 @@ msgstr "Verwijderd de partitietabel"
 
 msgid "Rename"
 msgstr "Wijzigen"
+
+msgid "Rename entry"
+msgstr "Wijzig de naam van het huidige item"
 
 msgid "Rename name and description for new events"
 msgstr "Wijzig de naam + de omschrijving voor nieuwe programma's"
@@ -6906,6 +7001,9 @@ msgstr "Herstellen"
 
 msgid "Restore backups"
 msgstr "Backups terugzetten"
+
+msgid "Restore deleted user bouquets"
+msgstr "Herstel verwijderde gebruikersbouquet(ten)"
 
 msgid "Restore system settings"
 msgstr "Herstel uw instellingen"
@@ -7643,6 +7741,9 @@ msgstr "Service & PIDs"
 msgid "Service ID"
 msgstr "Service ID"
 
+msgid "Service belongs to a parental protected bouquet"
+msgstr "Kanaal valt onder het kinderslot"
+
 msgid "Service has been added to the favourites."
 msgstr "De zender is toegevoegd aan de favorieten."
 
@@ -7726,6 +7827,9 @@ msgstr "Zet alle Hotkey instellingen terug?"
 
 msgid "Set alternative fallback tuners for DVB-T/C or ATSC"
 msgstr "Stel de alternatieve Fallback tuners in t.b.v. DVB-T/C or ATSC"
+
+msgid "Set as startup service"
+msgstr "Kanaal kiezen bij opstarten"
 
 msgid "Set blocktimes by weekday"
 msgstr "Stel bloktijden in als wekelijks"
@@ -7879,6 +7983,9 @@ msgstr "Toon VCR scart in het hoofdmenu"
 
 msgid "Show WLAN status"
 msgstr "WIFIstatus weergeven"
+
+msgid "Show alternatives"
+msgstr "Alternatieven weergeven"
 
 msgid "Show animation while busy"
 msgstr "Laat een animatie zien bij lopende activiteiten"
@@ -8059,6 +8166,9 @@ msgstr "Radio weergave modus..."
 
 msgid "Show the tv player..."
 msgstr "TV weergave modus..."
+
+msgid "Show transponder info"
+msgstr "Geef de transponderinfo weer"
 
 #, fuzzy
 msgid "Show underline characters in filenames"
@@ -8551,6 +8661,9 @@ msgstr "Beëindig de timeshift"
 
 msgid "Stop timeshift?"
 msgstr "Beëindig de timeshift?"
+
+msgid "Stop using as startup service"
+msgstr "Stop met het gebruiken als opstartzender"
 
 msgid "Stopped"
 msgstr "Gestopt"
@@ -10815,15 +10928,6 @@ msgstr "een GUI om zenders/providers aan de CI modules toe te voegen"
 msgid "a gui to assign services/providers/caids to common interface modules"
 msgstr "een GUI om zenders/providers/ caids aan de CI modules toe te voegen"
 
-msgid "Abort alternatives edit"
-msgstr "Sluit de bewerking van de alternatieven af"
-
-msgid "Abort bouquet edit"
-msgstr "Bouquet bewerken afsluiten"
-
-msgid "Abort favourites edit"
-msgstr "Favorieten bewerken afsluiten"
-
 msgid "about to start"
 msgstr "start zodadelijk"
 
@@ -10835,27 +10939,6 @@ msgstr "actief"
 
 msgid "actual time only"
 msgstr "enkel de actuele tijd"
-
-msgid "Add alternatives"
-msgstr "Voeg alternatieven toe"
-
-msgid "Add bouquet"
-msgstr "Voeg een bouquet toe"
-
-msgid "Add bouquet to parental protection"
-msgstr "Voeg dit bouquet toe aan het kinderslot"
-
-msgid "Add marker"
-msgstr "Voeg een markeerpunt in"
-
-msgid "Add service to bouquet"
-msgstr "Deze zender toevoegen aan een bouquet"
-
-msgid "Add service to favourites"
-msgstr "Zender toevoegen aan favorieten"
-
-msgid "Add to parental protection"
-msgstr "Zender op kinderslot zetten"
 
 msgid "adult movie/drama"
 msgstr "Erotiek/Drama"
@@ -11012,9 +11095,6 @@ msgstr "geregeld door de HDMI"
 msgid "cooking"
 msgstr "Kookprogramma"
 
-msgid "Copy to bouquets"
-msgstr "Kopieer naar bouquetten"
-
 msgid "daily"
 msgstr "dagelijks"
 
@@ -11038,9 +11118,6 @@ msgstr "gedéactiveerd"
 
 msgid "disable intro screen"
 msgstr "introdutiescherm overslaan"
-
-msgid "Disable move mode"
-msgstr "Verplaatsmode deactiveren"
 
 msgid "disabled"
 msgstr "Gedéactiveerd"
@@ -11069,9 +11146,6 @@ msgstr "oost"
 msgid "economics/social advisory"
 msgstr "Economisch/Sociaal"
 
-msgid "Edit alternatives"
-msgstr "Alternatieven bewerken"
-
 msgid "education/science/factual topics (general)"
 msgstr "Educatief/Wetenschappelijk/Feiten (Algemeen)"
 
@@ -11084,32 +11158,14 @@ msgstr "leeg"
 msgid "enable"
 msgstr "Geactiveerd"
 
-msgid "Enable bouquet edit"
-msgstr "Activeer het bewerken van een bouquet"
-
-msgid "Enable favourites edit"
-msgstr "Favorieten bewerken activeren"
-
 msgid "enable intro screen"
 msgstr "introductiescherm inschakelen"
-
-msgid "Enable move mode"
-msgstr "Activeer de verplaatsmodus"
 
 msgid "enabled"
 msgstr "Ingeschakeld"
 
-msgid "End alternatives edit"
-msgstr "Alternatieven bewerken stoppen"
-
-msgid "End bouquet edit"
-msgstr "Bouquet bewerken stoppen"
-
 msgid "end cut here"
 msgstr "Stop snijpunt hier"
-
-msgid "End favourites edit"
-msgstr "Favorieten bewerken stoppen "
 
 msgid "entertainment (10-16 year old)"
 msgstr "Amusement (10-16 jaar)"
@@ -11179,9 +11235,6 @@ msgstr "bestandnaam"
 
 msgid "film/cinema"
 msgstr "Film/Bioscoop"
-
-msgid "Find currently playing service"
-msgstr "Zoek de zender die momenteel speelt"
 
 msgid "fine arts"
 msgstr "Fijne kunst"
@@ -11507,12 +11560,6 @@ msgstr "gepauseerd"
 msgid "performing arts"
 msgstr "Uitvoerende kunsten"
 
-msgid "Play as Picture in Picture"
-msgstr "Speel deze zender af in het PIP venster"
-
-msgid "Play in main window"
-msgstr "Afspelen in hoofdscherm"
-
 msgid "please press OK when ready"
 msgstr "druk op Ok als u klaar bent"
 
@@ -11524,9 +11571,6 @@ msgstr "Moderne cultuur/Traditionele kunst"
 
 msgid "pre-school children's program"
 msgstr "Peuter/Kleuterprogramma"
-
-msgid "Purge deleted user bouquets"
-msgstr "Ruim gewiste gebruikersboeket(ten) op"
 
 msgid "receiver software because updates are available."
 msgstr "ontvanger software omdat updates verkrijgbaar zijn."
@@ -11549,50 +11593,17 @@ msgstr "opmerkelijke personen"
 msgid "remove after this position"
 msgstr "Verwijder achter deze positie"
 
-msgid "Remove all alternatives"
-msgstr "Verwijder alle alternatieven"
-
-msgid "Remove all new found flags"
-msgstr "Verwijder alle 'nieuw gevonden' markeringen"
-
 msgid "remove before this position"
 msgstr "Verwijder voor deze positie"
 
-msgid "Remove bouquet from parental protection"
-msgstr "Verwijder bouquet uit het kinderslot"
-
-msgid "Remove cable services"
-msgstr "Verwijder kabelkanalen"
-
-msgid "Remove entry"
-msgstr "Verwijder het huidige item"
-
-msgid "Remove from parental protection"
-msgstr "Verwijder kinderslot"
-
-msgid "Remove new found flag"
-msgstr "Verwijder 'nieuw gevonden' markering"
-
-msgid "Remove selected satellite"
-msgstr "Deze satelliet verwijderen"
-
-msgid "Remove terrestrial services"
-msgstr "Verwijder DVB-T kanalen"
-
 msgid "remove this mark"
 msgstr "verwijder deze markering"
-
-msgid "Rename entry"
-msgstr "Wijzig de naam van het huidige item"
 
 msgid "repeated"
 msgstr "herhalen"
 
 msgid "reserved for future use"
 msgstr "gereserveerd voor toekomstig gebruik"
-
-msgid "Restore deleted user bouquets"
-msgstr "Herstel verwijderde gebruikersbouquet(ten)"
 
 msgid "reverse by date"
 msgstr "Terug op datum"
@@ -11639,24 +11650,15 @@ msgstr "Serieuze muziek/Klassieke muziek"
 msgid "serious/classical/religious/historical movie/drama"
 msgstr "Serieuze/Klassiek/Religieus/Historische film/Drama"
 
-msgid "Service belongs to a parental protected bouquet"
-msgstr "Kanaal valt onder het kinderslot"
-
 # Graag een acceptabele correctie.
 msgid "service off-air"
 msgstr "zenders buiten gebruik"
-
-msgid "Set as startup service"
-msgstr "Kanaal kiezen bij opstarten"
 
 msgid "show DVD main menu"
 msgstr "DVD hoofdmenu weergeven"
 
 msgid "show all tags"
 msgstr "Laat alle tags zien"
-
-msgid "Show alternatives"
-msgstr "Alternatieven weergeven"
 
 msgid "show event details"
 msgstr "EPG details weergeven"
@@ -11666,9 +11668,6 @@ msgstr "Softwaremanager zichtbaar in setup menu"
 
 msgid "show softwaremanager on blue button"
 msgstr "Softwaremanager zichtbaar onder blauwe knop"
-
-msgid "Show transponder info"
-msgstr "Geef de transponderinfo weer"
 
 msgid "show/game show (general)"
 msgstr "Show/Quiz (Algemeen)"
@@ -11763,9 +11762,6 @@ msgstr "stapgrootte"
 
 msgid "stereo"
 msgstr "Stereo"
-
-msgid "Stop using as startup service"
-msgstr "Stop met het gebruiken als opstartzender"
 
 msgid "successful"
 msgstr "gelukt"
