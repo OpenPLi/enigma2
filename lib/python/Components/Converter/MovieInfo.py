@@ -3,7 +3,7 @@ from Components.Element import cached, ElementError
 from enigma import iServiceInformation, eServiceReference
 from ServiceReference import ServiceReference
 
-class MovieInfo(Converter, object):
+class MovieInfo(Converter):
 	MOVIE_SHORT_DESCRIPTION = 0 # meta description when available.. when not .eit short description
 	MOVIE_META_DESCRIPTION = 1 # just meta description when available
 	MOVIE_REC_SERVICE_NAME = 2 # name of recording service
@@ -33,12 +33,12 @@ class MovieInfo(Converter, object):
 					# Short description for Directory is the full path
 					return service.getPath()
 				return (info.getInfoString(service, iServiceInformation.sDescription)
-				    or (event and event.getShortDescription())
-				    or service.getPath())
+					or (event and event.getShortDescription())
+					or service.getPath())
 			elif self.type == self.MOVIE_META_DESCRIPTION:
 				return ((event and (event.getExtendedDescription() or event.getShortDescription()))
-				    or info.getInfoString(service, iServiceInformation.sDescription)
-				    or service.getPath())
+					or info.getInfoString(service, iServiceInformation.sDescription)
+					or service.getPath())
 			elif self.type == self.MOVIE_REC_SERVICE_NAME:
 				rec_ref_str = info.getInfoString(service, iServiceInformation.sServiceref)
 				return ServiceReference(rec_ref_str).getServiceName()
