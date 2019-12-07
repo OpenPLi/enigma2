@@ -9,22 +9,22 @@ from Tools.GetEcmInfo import GetEcmInfo
 from Poll import Poll
 
 caid_data = (
-	( "0x100",  "0x1ff", "Seca",     "S",  True  ),
-	( "0x500",  "0x5ff", "Via",      "V",  True  ),
-	( "0x600",  "0x6ff", "Irdeto",   "I",  True  ),
-	( "0x900",  "0x9ff", "NDS",      "Nd", True  ),
-	( "0xb00",  "0xbff", "Conax",    "Co", True  ),
-	( "0xd00",  "0xdff", "CryptoW",  "Cw", True  ),
-	( "0xe00",  "0xeff", "PowerVU",  "P",  False ),
-	("0x1000", "0x10FF", "Tandberg", "TB", False ),
-	("0x1700", "0x17ff", "Beta",     "B",  True  ),
-	("0x1800", "0x18ff", "Nagra",    "N",  True  ),
-	("0x2600", "0x2600", "Biss",     "Bi", False ),
-	("0x2700", "0x2710", "Dre3",     "D3", False ),
-	("0x4ae0", "0x4ae1", "Dre",      "D",  False ),
-	("0x4aee", "0x4aee", "BulCrypt", "B1", False ),
-	("0x5581", "0x5581", "BulCrypt", "B2", False ),
-	("0x5601", "0x5604", "Verimatrix", "Vm", False )
+	("0x0100", "0x01ff", "Seca",       "S",  True),
+	("0x0500", "0x05ff", "Via",        "V",  True),
+	("0x0600", "0x06ff", "Irdeto",     "I",  True),
+	("0x0900", "0x09ff", "NDS",        "Nd", True),
+	("0x0b00", "0x0bff", "Conax",      "Co", True),
+	("0x0d00", "0x0dff", "CryptoW",    "Cw", True),
+	("0x0e00", "0x0eff", "PowerVU",    "P",  False),
+	("0x1000", "0x10FF", "Tandberg",   "TB", False),
+	("0x1700", "0x17ff", "Beta",       "B",  True),
+	("0x1800", "0x18ff", "Nagra",      "N",  True),
+	("0x2600", "0x2600", "Biss",       "Bi", False),
+	("0x2700", "0x2710", "Dre3",       "D3", False),
+	("0x4ae0", "0x4ae1", "Dre",        "D",  False),
+	("0x4aee", "0x4aee", "BulCrypt",   "B1", False),
+	("0x5581", "0x5581", "BulCrypt",   "B2", False),
+	("0x5601", "0x5604", "Verimatrix", "Vm", False)
 )
 
 # stream type to codec map
@@ -59,7 +59,7 @@ def addspace(text):
 		text += " "
 	return text
 
-class PliExtraInfo(Poll, Converter, object):
+class PliExtraInfo(Poll, Converter):
 	def __init__(self, type):
 		Converter.__init__(self, type)
 		Poll.__init__(self)
@@ -67,38 +67,38 @@ class PliExtraInfo(Poll, Converter, object):
 		self.poll_interval = 1000
 		self.poll_enabled = True
 		self.ca_table = (
-			("CryptoCaidSecaAvailable",	"S",	False),
-			("CryptoCaidViaAvailable",	"V",	False),
-			("CryptoCaidIrdetoAvailable",	"I",	False),
-			("CryptoCaidNDSAvailable",	"Nd",	False),
-			("CryptoCaidConaxAvailable",	"Co",	False),
-			("CryptoCaidCryptoWAvailable",	"Cw",	False),
-			("CryptoCaidPowerVUAvailable",	"P",	False),
-			("CryptoCaidBetaAvailable",	"B",	False),
-			("CryptoCaidNagraAvailable",	"N",	False),
-			("CryptoCaidBissAvailable",	"Bi",	False),
-			("CryptoCaidDre3Available",	"D3",	False),
-			("CryptoCaidDreAvailable",	"D",	False),
-			("CryptoCaidBulCrypt1Available","B1",	False),
-			("CryptoCaidBulCrypt2Available","B2",	False),
-			("CryptoCaidVerimatrixAvailable","Vm",  False),
-			("CryptoCaidTandbergAvailable", "TB",   False),
-			("CryptoCaidSecaSelected",	"S",	True),
-			("CryptoCaidViaSelected",	"V",	True),
-			("CryptoCaidIrdetoSelected",	"I",	True),
-			("CryptoCaidNDSSelected",	"Nd",	True),
-			("CryptoCaidConaxSelected",	"Co",	True),
-			("CryptoCaidCryptoWSelected",	"Cw",	True),
-			("CryptoCaidPowerVUSelected",	"P",	True),
-			("CryptoCaidBetaSelected",	"B",	True),
-			("CryptoCaidNagraSelected",	"N",	True),
-			("CryptoCaidBissSelected",	"Bi",	True),
-			("CryptoCaidDre3Selected",	"D3",	True),
-			("CryptoCaidDreSelected",	"D",	True),
-			("CryptoCaidBulCrypt1Selected",	"B1",	True),
-			("CryptoCaidBulCrypt2Selected",	"B2",	True),
-			("CryptoCaidVerimatrixSelected","Vm",   True),
-			("CryptoCaidTandbergSelected",  "TB",   True),
+			("CryptoCaidSecaAvailable",       "S",  False),
+			("CryptoCaidViaAvailable",        "V",  False),
+			("CryptoCaidIrdetoAvailable",     "I",  False),
+			("CryptoCaidNDSAvailable",        "Nd", False),
+			("CryptoCaidConaxAvailable",      "Co", False),
+			("CryptoCaidCryptoWAvailable",    "Cw", False),
+			("CryptoCaidPowerVUAvailable",    "P",  False),
+			("CryptoCaidBetaAvailable",       "B",  False),
+			("CryptoCaidNagraAvailable",      "N",  False),
+			("CryptoCaidBissAvailable",       "Bi", False),
+			("CryptoCaidDre3Available",       "D3", False),
+			("CryptoCaidDreAvailable",        "D",  False),
+			("CryptoCaidBulCrypt1Available",  "B1", False),
+			("CryptoCaidBulCrypt2Available",  "B2", False),
+			("CryptoCaidVerimatrixAvailable", "Vm", False),
+			("CryptoCaidTandbergAvailable",   "TB", False),
+			("CryptoCaidSecaSelected",        "S",  True),
+			("CryptoCaidViaSelected",         "V",  True),
+			("CryptoCaidIrdetoSelected",      "I",  True),
+			("CryptoCaidNDSSelected",         "Nd", True),
+			("CryptoCaidConaxSelected",       "Co", True),
+			("CryptoCaidCryptoWSelected",     "Cw", True),
+			("CryptoCaidPowerVUSelected",     "P",  True),
+			("CryptoCaidBetaSelected",        "B",  True),
+			("CryptoCaidNagraSelected",       "N",  True),
+			("CryptoCaidBissSelected",        "Bi", True),
+			("CryptoCaidDre3Selected",        "D3", True),
+			("CryptoCaidDreSelected",         "D",  True),
+			("CryptoCaidBulCrypt1Selected",   "B1", True),
+			("CryptoCaidBulCrypt2Selected",   "B2", True),
+			("CryptoCaidVerimatrixSelected",  "Vm", True),
+			("CryptoCaidTandbergSelected",    "TB", True),
 		)
 		self.ecmdata = GetEcmInfo()
 		self.feraw = self.fedata = self.updateFEdata = None
@@ -122,13 +122,13 @@ class PliExtraInfo(Poll, Converter, object):
 
 		for caid_entry in caid_data:
 			if int(caid_entry[0], 16) <= int(self.current_caid, 16) <= int(caid_entry[1], 16):
-				color="\c0000??00"
+				color = "\c0000??00"
 			else:
 				color = "\c007?7?7?"
 				try:
 					for caid in available_caids:
 						if int(caid_entry[0], 16) <= caid <= int(caid_entry[1], 16):
-							color="\c00????00"
+							color = "\c00????00"
 				except:
 					pass
 
@@ -146,7 +146,7 @@ class PliExtraInfo(Poll, Converter, object):
 				if int(caid_entry[0], 16) <= int(self.current_caid, 16) <= int(caid_entry[1], 16):
 					caid_name = caid_entry[2]
 					break
-			return caid_name + ":%04x:%04x:%04x:%04x" % (int(self.current_caid,16), int(self.current_provid,16), info.getInfo(iServiceInformation.sSID), int(self.current_ecmpid,16))
+			return caid_name + ":%04x:%04x:%04x:%04x" % (int(self.current_caid, 16), int(self.current_provid, 16), info.getInfo(iServiceInformation.sSID), int(self.current_ecmpid, 16))
 		except:
 			pass
 		return ""
@@ -227,7 +227,7 @@ class PliExtraInfo(Poll, Converter, object):
 		if "DVB-T" in feraw.get("tuner_type"):
 			code_rate_lp = fedata.get("code_rate_lp")
 			code_rate_hp = fedata.get("code_rate_hp")
-			guard_interval = fedata.get('guard_interval')
+			guard_interval = fedata.get("guard_interval")
 			if code_rate_lp and code_rate_hp and guard_interval:
 				return code_rate_lp + "-" + code_rate_hp + "-" + guard_interval
 		else:
@@ -261,7 +261,7 @@ class PliExtraInfo(Poll, Converter, object):
 			return str((float(orbpos)) / 10.0) + "\xc2\xb0 E"
 		return ""
 
-	def createOrbPosOrTunerSystem(self, fedata,feraw):
+	def createOrbPosOrTunerSystem(self, fedata, feraw):
 		orbpos = self.createOrbPos(feraw)
 		if orbpos is not "":
 			return orbpos
@@ -375,7 +375,7 @@ class PliExtraInfo(Poll, Converter, object):
 			return self.createTunerSystem(fedata)
 
 		if self.type == "OrbitalPositionOrTunerSystem":
-			return self.createOrbPosOrTunerSystem(fedata,feraw)
+			return self.createOrbPosOrTunerSystem(fedata, feraw)
 
 		if self.type == "TerrestrialChannelNumber":
 			return self.createChannelNumber(fedata, feraw)
@@ -410,7 +410,7 @@ class PliExtraInfo(Poll, Converter, object):
 		if data is None:
 			return False
 
-		current_caid	= data[1]
+		current_caid = data[1]
 
 		available_caids = info.getInfoObject(iServiceInformation.sCAIDs)
 
