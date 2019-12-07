@@ -6,7 +6,9 @@ from Components.Element import cached
 from Components.config import config
 from Tools.Transponder import ConvertToHumanReadable
 from Tools.GetEcmInfo import GetEcmInfo
+from Tools.Hex2strColor import Hex2strColor
 from Poll import Poll
+from skin import parameters
 
 caid_data = (
 	("0x0100", "0x01ff", "Seca",       "S",  True),
@@ -119,24 +121,25 @@ class PliExtraInfo(Poll, Converter):
 	def createCryptoBar(self, info):
 		res = ""
 		available_caids = info.getInfoObject(iServiceInformation.sCAIDs)
+		colors = parameters.get("PliExtraInfoColors", (0x0000FF00, 0x00FFFF00, 0x007F7F7F, 0x00FFFFFF)) # "found", "not found", "available", "default" colors
 
 		for caid_entry in caid_data:
 			if int(caid_entry[0], 16) <= int(self.current_caid, 16) <= int(caid_entry[1], 16):
-				color = "\c0000??00"
+				color = Hex2strColor(colors[0]) # green
 			else:
-				color = "\c007?7?7?"
+				color = Hex2strColor(colors[2]) # grey
 				try:
 					for caid in available_caids:
 						if int(caid_entry[0], 16) <= caid <= int(caid_entry[1], 16):
-							color = "\c00????00"
+							color = Hex2strColor(colors[1]) # yellow
 				except:
 					pass
 
-			if color != "\c007?7?7?" or caid_entry[4]:
+			if color != Hex2strColor(colors[2]) or caid_entry[4]:
 				if res: res += " "
 				res += color + caid_entry[3]
 
-		res += "\c00??????"
+		res += Hex2strColor(colors[3]) # white (this acts like a color "reset" for following strings
 		return res
 
 	def createCryptoSpecial(self, info):
