@@ -163,8 +163,10 @@ class PliExtraInfo(Poll, Converter):
 				fps = (int(open("/proc/stb/vmpeg/0/framerate", "r").read()) + 500) / 1000
 			except:
 				pass
-		gamma = ("SDR", "HDR", "HDR10", "HLG", "")[info.getInfo(iServiceInformation.sGamma)]
-		return "%sx%s%s%s %s" % (xres, yres, mode, fps, gamma)
+		return "%sx%s%s%s" % (xres, yres, mode, fps)
+
+	def createGamma(self, info):
+		return ("SDR", "HDR", "HDR10", "HLG", "")[info.getInfo(iServiceInformation.sGamma)]
 
 	def createVideoCodec(self, info):
 		return codec_data.get(info.getInfo(iServiceInformation.sVideoType), "N/A")
@@ -305,11 +307,17 @@ class PliExtraInfo(Poll, Converter):
 			self.getCryptoInfo(info)
 			return self.createCryptoSpecial(info)
 
-		if self.type == "ResolutionString":
+		if self.type == "Resolution":
 			return self.createResolution(info)
+
+		if self.type == "ResolutionString":
+			return addspace(self.createResolution(info)) + self.createGamma(info)
 
 		if self.type == "VideoCodec":
 			return self.createVideoCodec(info)
+
+		if self.type == "Gamma":
+			return self.createGamma(info)
 
 		if self.updateFEdata:
 			feinfo = service.frontendInfo()
@@ -330,11 +338,11 @@ class PliExtraInfo(Poll, Converter):
 			if config.usage.show_cryptoinfo.value:
 				return addspace(self.createProviderName(info)) + self.createTransponderInfo(fedata, feraw, info) + "\n" \
 				+ addspace(self.createCryptoBar(info)) + addspace(self.createCryptoSpecial(info)) + "\n" \
-				+ addspace(self.createPIDInfo(info)) + addspace(self.createVideoCodec(info)) + self.createResolution(info)
+				+ addspace(self.createPIDInfo(info)) + addspace(self.createVideoCodec(info)) + addspace(self.createResolution(info)) + self.createGamma(info)
 			else:
 				return addspace(self.createProviderName(info)) + self.createTransponderInfo(fedata, feraw, info) + "\n" \
 				+ addspace(self.createCryptoBar(info)) + self.current_source + "\n" \
-				+ addspace(self.createCryptoSpecial(info)) + addspace(self.createVideoCodec(info)) + self.createResolution(info)
+				+ addspace(self.createCryptoSpecial(info)) + addspace(self.createVideoCodec(info)) + addspace(self.createResolution(info)) + self.createGamma(info)
 
 		if self.type == "PIDInfo":
 			return self.createPIDInfo(info)
@@ -345,7 +353,7 @@ class PliExtraInfo(Poll, Converter):
 		if self.type == "ServiceInfo":
 			return addspace(self.createProviderName(info)) + addspace(self.createTunerSystem(fedata)) + addspace(self.createFrequency(feraw)) + addspace(self.createPolarization(fedata)) \
 			+ addspace(self.createSymbolRate(fedata, feraw)) + addspace(self.createFEC(fedata, feraw)) + addspace(self.createModulation(fedata)) + addspace(self.createOrbPos(feraw)) \
-			+ addspace(self.createVideoCodec(info)) + self.createResolution(info)
+			+ addspace(self.createVideoCodec(info)) + addspace(self.createResolution(info)) + self.createGamma(info)
 
 		if self.type == "TransponderInfo":
 			return self.createTransponderInfo(fedata, feraw, info)
