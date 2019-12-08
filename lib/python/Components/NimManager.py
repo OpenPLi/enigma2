@@ -332,7 +332,7 @@ class SecConfigure:
 					sec.setLNBLOFL(10750000)
 					sec.setLNBLOFH(10750000)
 					sec.setLNBThreshold(10750000)
-				elif currLnb.lof.value == "ka_sat":
+				elif currLnb.lof.value == "ka_band":
 					sec.setLNBLOFL(21200000)
 					sec.setLNBLOFH(21200000)
 					sec.setLNBThreshold(21200000)
@@ -716,7 +716,7 @@ class NimManager:
 
 	def getCableFlags(self, nim):
 		return self.cablesList[config.Nims[nim].cable.scan_provider.index][1]
-		
+
 	def getCableCountrycode(self, nim):
 		return self.cablesList and self.cablesList[config.Nims[nim].cable.scan_provider.index][2] or None
 
@@ -902,7 +902,7 @@ class NimManager:
 					root_id = nimmanager.sec.getRoot(n.slot_id, int(n.config.connectedTo.value))
 					if n.type == nimmanager.nim_slots[root_id].type: # check if connected from a DVB-S to DVB-S2 Nim or vice versa
 						return False
-				return True	
+				return True
 		return [x.slot for x in self.nim_slots if x.slot != exception and enabled(x)]
 
 	def __init__(self):
@@ -1187,7 +1187,7 @@ def InitNimManager(nimmgr, update_slots = []):
 		"unicable": _("SCR (Unicable/JESS)"),
 		"c_band": _("C-Band"),
 		"circular_lnb": _("Circular LNB"),
-		"ka_sat": _("KA-SAT"),
+		"ka_band": _("Ka-Band"),
 		"user_defined": _("User defined")}
 
 	lnb_choices_default = "universal_lnb"
