@@ -5,7 +5,7 @@ from Components.Element import cached
 
 WIDESCREEN = [3, 4, 7, 8, 0xB, 0xC, 0xF, 0x10]
 
-class ServiceInfo(Converter, object):
+class ServiceInfo(Converter):
 	HAS_TELETEXT = 0
 	IS_MULTICHANNEL = 1
 	IS_CRYPTED = 2
@@ -41,6 +41,9 @@ class ServiceInfo(Converter, object):
 	IS_HDR = 32
 	IS_HDR10 = 33
 	IS_HLG = 34
+	IS_VIDEO_MPEG2 = 35
+	IS_VIDEO_AVC = 36
+	IS_VIDEO_HEVC = 37
 
 	def __init__(self, type):
 		Converter.__init__(self, type)
@@ -80,6 +83,9 @@ class ServiceInfo(Converter, object):
 				"IsHDR": (self.IS_HDR, (iPlayableService.evVideoGammaChanged, iPlayableService.evUpdatedInfo)),
 				"IsHDR10": (self.IS_HDR10, (iPlayableService.evVideoGammaChanged, iPlayableService.evUpdatedInfo)),
 				"IsHLG": (self.IS_HLG, (iPlayableService.evVideoGammaChanged, iPlayableService.evUpdatedInfo)),
+				"IsVideoMPEG2": (self.IS_VIDEO_MPEG2, (iPlayableService.evUpdatedInfo,)),
+				"IsVideoAVC": (self.IS_VIDEO_AVC, (iPlayableService.evUpdatedInfo,)),
+				"IsVideoHEVC": (self.IS_VIDEO_HEVC,(iPlayableService.evUpdatedInfo,)),
 			}[type]
 		if self.type in (self.IS_SD, self.IS_HD, self.IS_SD_AND_WIDESCREEN, self.IS_SD_AND_NOT_WIDESCREEN, self.IS_4K, self.IS_1080, self.IS_720):
 			self.videoHeight = None
@@ -155,6 +161,12 @@ class ServiceInfo(Converter, object):
 					return info.getInfo(iServiceInformation.sAspect) in WIDESCREEN
 				elif self.type == self.IS_NOT_WIDESCREEN:
 					return info.getInfo(iServiceInformation.sAspect) not in WIDESCREEN
+				elif self.type == self.IS_VIDEO_MPEG2:
+					return info.getInfo(iServiceInformation.sVideoType) == 0
+				elif self.type == self.IS_VIDEO_AVC:
+					return info.getInfo(iServiceInformation.sVideoType) == 1
+				elif self.type == self.IS_VIDEO_HEVC:
+					return info.getInfo(iServiceInformation.sVideoType) == 7
 				else:
 					videoHeight = info.getInfo(iServiceInformation.sVideoHeight)
 					self.videoHeight = videoHeight if videoHeight > 0 else self.videoHeight
