@@ -11,22 +11,25 @@ from Poll import Poll
 from skin import parameters
 
 caid_data = (
-	("0x0100", "0x01ff", "Seca",       "S",  True),
-	("0x0500", "0x05ff", "Via",        "V",  True),
-	("0x0600", "0x06ff", "Irdeto",     "I",  True),
-	("0x0900", "0x09ff", "NDS",        "Nd", True),
-	("0x0b00", "0x0bff", "Conax",      "Co", True),
-	("0x0d00", "0x0dff", "CryptoW",    "Cw", True),
-	("0x0e00", "0x0eff", "PowerVU",    "P",  False),
-	("0x1000", "0x10FF", "Tandberg",   "TB", False),
-	("0x1700", "0x17ff", "Beta",       "B",  True),
-	("0x1800", "0x18ff", "Nagra",      "N",  True),
-	("0x2600", "0x2600", "Biss",       "Bi", False),
-	("0x2700", "0x2710", "Dre3",       "D3", False),
-	("0x4ae0", "0x4ae1", "Dre",        "D",  False),
-	("0x4aee", "0x4aee", "BulCrypt",   "B1", False),
-	("0x5581", "0x5581", "BulCrypt",   "B2", False),
-	("0x5601", "0x5604", "Verimatrix", "Vm", False)
+	("0x4a30", "0x4a30", _("DVN-JET"),	"TB", False),
+	("0x4ad2", "0x4ad3", _("STREAMGUARD"),	"SM", False),
+	("0x4a02", "0x4a02", _("TONGFANG"),	"TF", False),
+	( "0x100",  "0x1ff", _("Seca"),		"S",  True ),
+	( "0x500",  "0x5ff", _("Via"),		"V",  True ),
+	( "0x600",  "0x6ff", _("Irdeto"),	"I",  True ),
+	( "0x900",  "0x9ff", _("NDS"),		"Nd", True ),
+	( "0xb00",  "0xbff", _("Conax"),	"Co", True ),
+	( "0xd00",  "0xdff", _("CryptoW"),	"Cw", True ),
+	( "0xe00",  "0xeff", _("PowerVU"),	"P",  False),
+	("0x1000", "0x10FF", _("Tandberg"),	"T",  False),
+	("0x1700", "0x17ff", _("Beta"),		"B",  True ),
+	("0x1800", "0x18ff", _("Nagra"),	"N",  True ),
+	("0x2600", "0x2600", _("Biss"),		"Bi", False),
+	("0x2700", "0x2710", _("Dre3"),		"D3", False),
+	("0x4ae0", "0x4ae1", _("Dre"),		"D",  False),
+	("0x4aee", "0x4aee", _("BulCrypt"),	"B1", False),
+	("0x5581", "0x5581", _("BulCrypt"),	"B2", False),
+	("0x5601", "0x5604", _("Verimatrix"),	"Vm", False)
 )
 
 # stream type to codec map
@@ -69,38 +72,44 @@ class PliExtraInfo(Poll, Converter):
 		self.poll_interval = 1000
 		self.poll_enabled = True
 		self.ca_table = (
-			("CryptoCaidSecaAvailable",       "S",  False),
-			("CryptoCaidViaAvailable",        "V",  False),
-			("CryptoCaidIrdetoAvailable",     "I",  False),
-			("CryptoCaidNDSAvailable",        "Nd", False),
-			("CryptoCaidConaxAvailable",      "Co", False),
-			("CryptoCaidCryptoWAvailable",    "Cw", False),
-			("CryptoCaidPowerVUAvailable",    "P",  False),
-			("CryptoCaidBetaAvailable",       "B",  False),
-			("CryptoCaidNagraAvailable",      "N",  False),
-			("CryptoCaidBissAvailable",       "Bi", False),
-			("CryptoCaidDre3Available",       "D3", False),
-			("CryptoCaidDreAvailable",        "D",  False),
-			("CryptoCaidBulCrypt1Available",  "B1", False),
-			("CryptoCaidBulCrypt2Available",  "B2", False),
-			("CryptoCaidVerimatrixAvailable", "Vm", False),
-			("CryptoCaidTandbergAvailable",   "TB", False),
-			("CryptoCaidSecaSelected",        "S",  True),
-			("CryptoCaidViaSelected",         "V",  True),
-			("CryptoCaidIrdetoSelected",      "I",  True),
-			("CryptoCaidNDSSelected",         "Nd", True),
-			("CryptoCaidConaxSelected",       "Co", True),
-			("CryptoCaidCryptoWSelected",     "Cw", True),
-			("CryptoCaidPowerVUSelected",     "P",  True),
-			("CryptoCaidBetaSelected",        "B",  True),
-			("CryptoCaidNagraSelected",       "N",  True),
-			("CryptoCaidBissSelected",        "Bi", True),
-			("CryptoCaidDre3Selected",        "D3", True),
-			("CryptoCaidDreSelected",         "D",  True),
-			("CryptoCaidBulCrypt1Selected",   "B1", True),
-			("CryptoCaidBulCrypt2Selected",   "B2", True),
-			("CryptoCaidVerimatrixSelected",  "Vm", True),
-			("CryptoCaidTandbergSelected",    "TB", True),
+			("CryptoCaidDvnAvailable", 	"TB",	False),
+			("CryptoCaidSmsxAvailable",	"SM",	False),
+			("CryptoCaidTongfangAvailable",	"TF",	False),
+			("CryptoCaidSecaAvailable",	"S",	False),
+			("CryptoCaidViaAvailable",	"V",	False),
+			("CryptoCaidIrdetoAvailable",	"I",	False),
+			("CryptoCaidNDSAvailable",	"Nd",	False),
+			("CryptoCaidConaxAvailable",	"Co",	False),
+			("CryptoCaidCryptoWAvailable",	"Cw",	False),
+			("CryptoCaidPowerVUAvailable",	"P",	False),
+			("CryptoCaidBetaAvailable",	"B",	False),
+			("CryptoCaidNagraAvailable",	"N",	False),
+			("CryptoCaidBissAvailable",	"Bi",	False),
+			("CryptoCaidDre3Available",	"D3",	False),
+			("CryptoCaidDreAvailable",	"D",	False),
+			("CryptoCaidBulCrypt1Available","B1",	False),
+			("CryptoCaidBulCrypt2Available","B2",	False),
+			("CryptoCaidVerimatrixAvailable","Vm",  False),
+			("CryptoCaidTandbergAvailable", "T",	False),
+			("CryptoCaidDvnSelected",	"TB",	True ),
+			("CryptoCaidSmsxSelected",	"SM",	True ),
+			("CryptoCaidTongfangSelected",	"TF",	True ),			
+			("CryptoCaidSecaSelected",	"S",	True ),
+			("CryptoCaidViaSelected",	"V",	True ),
+			("CryptoCaidIrdetoSelected",	"I",	True ),
+			("CryptoCaidNDSSelected",	"Nd",	True ),
+			("CryptoCaidConaxSelected",	"Co",	True ),
+			("CryptoCaidCryptoWSelected",	"Cw",	True ),
+			("CryptoCaidPowerVUSelected",	"P",	True ),
+			("CryptoCaidBetaSelected",	"B",	True ),
+			("CryptoCaidNagraSelected",	"N",	True ),
+			("CryptoCaidBissSelected",	"Bi",	True ),
+			("CryptoCaidDre3Selected",	"D3",	True ),
+			("CryptoCaidDreSelected",	"D",	True ),
+			("CryptoCaidBulCrypt1Selected",	"B1",	True ),
+			("CryptoCaidBulCrypt2Selected",	"B2",	True ),
+			("CryptoCaidVerimatrixSelected","Vm",   True ),
+			("CryptoCaidTandbergSelected",  "T",	True ),
 		)
 		self.ecmdata = GetEcmInfo()
 		self.feraw = self.fedata = self.updateFEdata = None
@@ -143,13 +152,18 @@ class PliExtraInfo(Poll, Converter):
 		return res
 
 	def createCryptoSpecial(self, info):
-		caid_name = "FTA"
+		caid_system = _("CA System: ")
+		caid_name = _("FTA")
+		if int(self.current_caid,16) == 0:
+			return caid_system + caid_name
 		try:
 			for caid_entry in caid_data:
 				if int(caid_entry[0], 16) <= int(self.current_caid, 16) <= int(caid_entry[1], 16):
 					caid_name = caid_entry[2]
 					break
-			return caid_name + ":%04x:%04x:%04x:%04x" % (int(self.current_caid, 16), int(self.current_provid, 16), info.getInfo(iServiceInformation.sSID), int(self.current_ecmpid, 16))
+			caid_num = "%04x" % (int(self.current_caid,16))
+			caid_num = caid_num.upper()
+			return caid_system + caid_name + "@" + caid_num
 		except:
 			pass
 		return ""
