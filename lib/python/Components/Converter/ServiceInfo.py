@@ -28,6 +28,11 @@ class ServiceInfo(Converter, object):
 	SUBTITLES_AVAILABLE = 19
 	EDITMODE = 20
 	IS_STREAM = 21
+
+	HAS_NOT_HBBTV = 38
+	HAS_NOT_TELETEXT = 39
+	IS_NOT_CRYPTED = 40
+
 	IS_SD = 22
 	IS_HD = 23
 	IS_SD_AND_WIDESCREEN = 24
@@ -41,9 +46,7 @@ class ServiceInfo(Converter, object):
 	IS_HDR = 32
 	IS_HDR10 = 33
 	IS_HLG = 34
-	HAS_NOT_HBBTV = 35
-	HAS_NOT_TELETEXT = 36
-	IS_NOT_CRYPTED = 37
+
 
 	def __init__(self, type):
 		Converter.__init__(self, type)
