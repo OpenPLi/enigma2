@@ -99,11 +99,8 @@ while : ; do
 			done < /tmp/upgrade_mountpoints.txt
 			# bind the console (when available)
 			[ -f /sys/class/vtconsole/vtcon1/bind ] && echo 1 > /sys/class/vtconsole/vtcon1/bind
-			echo "" > /home/root/ipkgupgrade.log
-			pkgs=`opkg list-upgradable $DESTS | cut -f 1 -d ' '`
-			for pkg in $pkgs; do
-					opkg upgrade $DESTS $pkg 2>&1 | tee -a /home/root/ipkgupgrade.log
-			done
+			opkg update 2>&1 | tee /home/root/ipkgupgrade.log
+			opkg upgrade $DESTS 2>&1 | tee -a /home/root/ipkgupgrade.log
 			/sbin/reboot
 			;;
 		43)
