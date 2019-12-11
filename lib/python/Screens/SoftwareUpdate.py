@@ -84,8 +84,8 @@ class UpdatePlugin(Screen, ProtectedScreen):
 
 		# try to fetch the trafficlight json from the website
 		try:
-			status = dict(json.load(urllib2.urlopen(url, timeout=5)))
-			print("[SoftwareUpdate] status is: ", status)
+			status = dict(json.load(urlopen(url, timeout=5)))
+			print "[SoftwareUpdate] status is: ", status
 		except:
 			pass
 
@@ -94,19 +94,26 @@ class UpdatePlugin(Screen, ProtectedScreen):
 
 			try:
 				# get image version and machine name
-				machine = HardwareInfo.get_machine_name()
+				machine = HardwareInfo().get_machine_name()
 				version = open("/etc/issue").readlines()[-2].split()[1]
 
 				# do we have an entry for this version
-				if version in status and machine in status['version']['machines']:
-					abort = status[version]['abort'] is not None or False
-					starttime = datetime.strptime(status[version]['from'], '%Y%m%d%H%M%S')
-					endtime = datetime.strptime(status[version]['to'], '%Y%m%d%H%M%S')
-					if (starttime <= datetime.now() and endtime >= datetime.now()):
-						message = status[version]['message']
+				if version in status and machine in status[version]['machines']:
+					if 'abort' in status[version]:
+						abort = status[version]['abort']
+					if 'from' in status[version]:
+						starttime = datetime.datetime.strptime(status[version]['from'], '%Y%m%d%H%M%S')
+					else:
+						starttime = datetime.datetime.now()
+					if 'to' in status[version]:
+						endtime = datetime.datetime.strptime(status[version]['to'], '%Y%m%d%H%M%S')
+					else:
+						endtime = datetime.datetime.now()
+					if (starttime <= datetime.datetime.now() and endtime >= datetime.datetime.now()):
+						message = str(status[version]['message'])
 
 			except Exception, e:
-				print("[SoftwareUpdate] status error: ", str(e))
+				print "[SoftwareUpdate] status error: ", str(e)
 				message =  _("The current image might not be stable.\nFor more information see %s.") % ("openpli.org")
 
 		# or display a generic warning if fetching failed
@@ -116,9 +123,9 @@ class UpdatePlugin(Screen, ProtectedScreen):
 		# show the user the message first
 		if message is not None:
 			if abort:
-				self.session.openWithCallback(self.close, MessageBox, message, picon = picon)
+				self.session.openWithCallback(self.close, MessageBox, message, type=MessageBox.TYPE_ERROR, picon = picon)
 			else:
-				message += "\n" + _("Do you want to update your receiver?")
+				message += "\n\n" + _("Do you want to update your receiver?")
 				self.session.openWithCallback(self.startActualUpdate, MessageBox, message, picon = picon)
 
 		# no message, continue with the update
