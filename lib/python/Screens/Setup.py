@@ -126,8 +126,8 @@ class Setup(ConfigListScreen, Screen):
 				if conditional and not eval(conditional):
 					continue
 
-				item_text = _(x.get("text").encode("UTF-8")) or _("unknown")
-				item_description = _(x.get("description").encode("UTF-8")) or _("unknown")
+				item_text = _(x.get("text", "unknown entry").encode("UTF-8"))
+				item_description = _(x.get("description", "unknown entry").encode("UTF-8"))
 				b = eval(x.text or "")
 				if b == "":
 					continue
