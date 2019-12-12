@@ -156,9 +156,9 @@ class AutoInstallWizard(Screen):
 	def abort(self, key=None, flag=None):
 		if hasattr(self, 'delay'):
 			self.delay.stop()
-		eActionMap.getInstance().unbindAction('', self.abort)
-		self.container.appClosed.remove(self.appClosed)
-		self.container.dataAvail.remove(self.dataAvail)
+			eActionMap.getInstance().unbindAction('', self.abort)
+			self.container.appClosed.remove(self.appClosed)
+			self.container.dataAvail.remove(self.dataAvail)
 		self.container = None
 		self.logfile.close()
 		os.remove("/etc/.doAutoinstall")
