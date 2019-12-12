@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # shamelessly copied from pliExpertInfo (Vali, Mirakels, Littlesat)
 
 from enigma import iServiceInformation, iPlayableService
@@ -186,7 +187,7 @@ class PliExtraInfo(Poll, Converter):
 		return ("SDR", "HDR", "HDR10", "HLG", "")[info.getInfo(iServiceInformation.sGamma)]
 
 	def createVideoCodec(self, info):
-		return codec_data.get(info.getInfo(iServiceInformation.sVideoType), "N/A")
+		return codec_data.get(info.getInfo(iServiceInformation.sVideoType)) or _("N/A")
 
 	def createPIDInfo(self, info):
 		vpid = info.getInfo(iServiceInformation.sVideoPID)
@@ -275,9 +276,9 @@ class PliExtraInfo(Poll, Converter):
 	def createOrbPos(self, feraw):
 		orbpos = feraw.get("orbital_position")
 		if orbpos > 1800:
-			return str((float(3600 - orbpos)) / 10.0) + "\xc2\xb0 W"
+			return _("%.1f° W") % ((3600 - orbpos) / 10.0)
 		elif orbpos > 0:
-			return str((float(orbpos)) / 10.0) + "\xc2\xb0 E"
+			return _("%.1f° E") % (orbpos / 10.0)
 		return ""
 
 	def createOrbPosOrTunerSystem(self, fedata, feraw):

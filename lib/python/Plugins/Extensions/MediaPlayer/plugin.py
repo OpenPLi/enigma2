@@ -9,7 +9,7 @@ from Screens.InputBox import InputBox
 from Screens.ChoiceBox import ChoiceBox
 from Screens.InfoBar import InfoBar
 from Screens.InfoBarGenerics import InfoBarSeek, InfoBarScreenSaver, InfoBarAudioSelection, InfoBarCueSheetSupport, InfoBarNotifications, InfoBarSubtitleSupport
-from Components.ActionMap import NumberActionMap, HelpableActionMap
+from Components.ActionMap import NumberActionMap, HelpableActionMap, eActionMap
 from Components.Label import Label
 from Components.Pixmap import Pixmap, MultiPixmap
 from Components.FileList import FileList
@@ -996,6 +996,14 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 
 	def unPauseService(self):
 		self.setSeekState(self.SEEK_STATE_PLAY)
+
+	def keypressScreenSaver(self, key, flag):
+		if flag:
+			self.screensaver.hide()
+			if self.seekstate == self.SEEK_STATE_PAUSE:
+				self.show()
+			self.ScreenSaverTimerStart()
+			eActionMap.getInstance().unbindAction('', self.keypressScreenSaver)
 
 	def subtitleSelection(self):
 		from Screens.AudioSelection import SubtitleSelection
