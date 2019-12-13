@@ -173,10 +173,10 @@ def getHotkeyFunctions():
 	hotkey.functions.append((_("Toggle infoBar"), "Infobar/toggleShow", "InfoBar"))
 	hotkey.functions.append((_("Letterbox zoom"), "Infobar/vmodeSelection", "InfoBar"))
 	if SystemInfo["PIPAvailable"]:
-		hotkey.functions.append((_("Show PIP"), "Infobar/showPiP", "InfoBar"))
-		hotkey.functions.append((_("Swap PIP"), "Infobar/swapPiP", "InfoBar"))
-		hotkey.functions.append((_("Move PIP"), "Infobar/movePiP", "InfoBar"))
-		hotkey.functions.append((_("Toggle PIPzap"), "Infobar/togglePipzap", "InfoBar"))
+		hotkey.functions.append((_("Show PiP"), "Infobar/showPiP", "InfoBar"))
+		hotkey.functions.append((_("Swap PiP"), "Infobar/swapPiP", "InfoBar"))
+		hotkey.functions.append((_("Move PiP"), "Infobar/movePiP", "InfoBar"))
+		hotkey.functions.append((_("Toggle PiPzap"), "Infobar/togglePipzap", "InfoBar"))
 	hotkey.functions.append((_("Activate HbbTV (Redbutton)"), "Infobar/activateRedButton", "InfoBar"))
 	hotkey.functions.append((_("Toggle HDMI In"), "Infobar/HDMIIn", "InfoBar"))
 	if SystemInfo["LcdLiveTV"]:

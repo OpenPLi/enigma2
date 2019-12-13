@@ -445,7 +445,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 								self.InfoBarInstance.session.pip.servicePath = self.InfoBarInstance.servicelist and self.InfoBarInstance.servicelist.getCurrentServicePath()
 								self.log(11, "zapping as PiP")
 								if notify:
-									Notifications.AddPopup(text=_("Zapped to timer service %s as PiP!") % self.service_ref.getServiceName(), type=MessageBox.TYPE_INFO, timeout=5)
+									Notifications.AddPopup(text=_("Zapped to timer service %s as Picture in Picture!") % self.service_ref.getServiceName(), type=MessageBox.TYPE_INFO, timeout=5)
 								return True
 							else:
 								del self.InfoBarInstance.session.pip
