@@ -10,7 +10,7 @@ class GUIComponent(object):
 		self.onVisibilityChange = [ ]
 		self.__visible = False
 		self.visible = True
-		self.skinAttributes = None
+		self.skinAttributes = []
 		self.deprecationInfo = None
 
 	def execBegin(self):
@@ -33,11 +33,10 @@ class GUIComponent(object):
 		if not self.visible:
 			self.instance.hide()
 
-		if self.skinAttributes is None:
-			return False
-
-		skin.applyAllAttributes(self.instance, desktop, self.skinAttributes, parent.scale)
-		return True
+		if self.skinAttributes:
+			skin.applyAllAttributes(self.instance, desktop, self.skinAttributes, parent.scale)
+			return True
+		return False
 
 	def move(self, x, y = None):
 		# we assume, that x is already an ePoint
