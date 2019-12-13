@@ -210,7 +210,7 @@ class PictureInPicture(Screen):
 				self.currentService = None
 				self.currentServiceReference = None
 				if not config.usage.hide_zap_errors.value:
-					Notifications.AddPopup(text = _("Incorrect type service for PiP!"), type = MessageBox.TYPE_ERROR, timeout = 5, id = "ZapPipError")
+					Notifications.AddPopup(text = _("Incorrect service type for Picture in Picture!"), type = MessageBox.TYPE_ERROR, timeout = 5, id = "ZapPipError")
 		return False
 
 	def getCurrentService(self):
