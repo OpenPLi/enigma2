@@ -203,9 +203,9 @@ class DiseqcTester(Screen, TuneTest, ResultParser):
 		if index in self.indexlist:
 			for entry in self.list:
 				if entry[0] == index:
-					self.changeProgressListStatus(index, _("working"))
+					self.changeProgressListStatus(index, _("testing"))
 					return
-			self.list.append(self.getProgressListComponent(index, _("working")))
+			self.list.append(self.getProgressListComponent(index, _("testing")))
 			self["progress_list"].list = self.list
 			self["progress_list"].setIndex(len(self.list) - 1)
 
@@ -411,7 +411,7 @@ class DiseqcTester(Screen, TuneTest, ResultParser):
 		elif oldstatus == _("not_tested"):
 			self.results[index]["status"] = status
 
-		if self.results[index]["status"] != _("working"):
+		if self.results[index]["status"] != _("testing"):
 			self.results[index]["internalstatus"] = self.results[index]["status"]
 		self.results[index]["failed"] = failedTune + self.results[index]["failed"]
 		self.results[index]["successful"] = successfullyTune + self.results[index]["successful"]
