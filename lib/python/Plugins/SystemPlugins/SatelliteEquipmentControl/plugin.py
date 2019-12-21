@@ -12,9 +12,9 @@ class SecParameterSetup(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.skinName = ["SecParameterSetup", "Setup"]
-		self.setTitle(_("Satellite equipment control setup"))
+		self.setTitle(_("Satellite equipment setup"))
 		self["key_red"] = StaticText(_("Cancel"))
-		self["key_green"] = StaticText(_("Save and exit"))
+		self["key_green"] = StaticText(_("OK"))
 		self["key_blue"] = StaticText(_("Restore defaults"))
 
 		self["actions"] = ActionMap(["SetupActions", "MenuActions", "ColorActions"],
@@ -57,38 +57,30 @@ class SecParameterSetup(Screen, ConfigListScreen):
 		self["config"].l.setList(self.secList)
 
 	def resetDefaults(self):
-		for description, secItem in self.secList:
-			secItem.value = secItem.default
+		for secItem in self.secList:
+			secItem[1].value = secItem[1].default
 		self.createSetup() # force new values to show
 
-session = None
-
-def confirmed(answer):
-	global session
-	if answer:
-		session.open(SecParameterSetup)
-
-def SecSetupMain(Session, **kwargs):
-	global session
-	session = Session
+def SecSetupMain(session, **kwargs):
+	def confirmed(answer):
+		if answer is True:
+			session.open(SecParameterSetup)
 	session.openWithCallback(confirmed, MessageBox, _("Please do not change any values unless you know what you are doing!"), MessageBox.TYPE_INFO)
 
 def SecSetupStart(menuid):
-	show = False
-
 	# other menu than "scan"?
 	if menuid != "scan":
-		return [ ]
+		return []
 
 	# only show if DVB-S frontends are available
 	for slot in nimmgr.nim_slots:
 		if slot.isCompatible("DVB-S"):
 			return [(_("Satellite equipment setup"), SecSetupMain, "satellite_equipment_setup", None)]
 
-	return [ ]
+	return []
 
 def Plugins(**kwargs):
 	if nimmgr.hasNimType("DVB-S"):
-		return PluginDescriptor(name=_("Satellite equipment setup"), description=_("Setup your satellite equipment"), where = PluginDescriptor.WHERE_MENU, needsRestart = False, fnc=SecSetupStart)
+		return PluginDescriptor(name=_("Satellite equipment setup"), description=_("Setup your satellite equipment"), where=PluginDescriptor.WHERE_MENU, needsRestart=False, fnc=SecSetupStart)
 	else:
 		return []
