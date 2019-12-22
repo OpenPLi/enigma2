@@ -1,47 +1,69 @@
 from Tools.Profile import profile
 profile("LOAD:ElementTree")
-import xml.etree.cElementTree
 import os
+import xml.etree.cElementTree
 
 profile("LOAD:enigma_skin")
-from enigma import eSize, ePoint, eRect, gFont, eWindow, eLabel, ePixmap, eWindowStyleManager, addFont, gRGB, eWindowStyleSkinned, getDesktop
+from enigma import addFont, eLabel, ePixmap, ePoint, eRect, eSize, eWindow, eWindowStyleManager, eWindowStyleSkinned, getDesktop, gFont, gRGB
 from Components.config import ConfigSubsection, ConfigText, config
-from Components.Converter.Converter import Converter
-from Components.Sources.Source import Source, ObsoleteSource
-from Tools.Directories import resolveFilename, SCOPE_SKIN, SCOPE_FONTS, SCOPE_CURRENT_SKIN, SCOPE_CONFIG, fileExists, SCOPE_SKIN_IMAGE
+from Components.RcModel import rc_model
+from Components.Sources.Source import ObsoleteSource
+from Components.SystemInfo import SystemInfo
+from Tools.Directories import SCOPE_CONFIG, SCOPE_CURRENT_SKIN, SCOPE_FONTS, SCOPE_SKIN, SCOPE_SKIN_IMAGE, fileExists, resolveFilename
 from Tools.Import import my_import
 from Tools.LoadPixmap import LoadPixmap
-from Components.RcModel import rc_model
-from Components.SystemInfo import SystemInfo
 
-colorNames = {}
-switchPixmap = {}
-# Predefined fonts, typically used in built-in screens and for components like
-# the movie list and so.
-fonts = {
+GUI_SKIN_ID = 0  # Main frame-buffer.
+DISPLAY_SKIN_ID = 1  # Front panel / display / LCD.
+
+dom_skins = []  # List of skins to be processed into the dom_screens dictionary.
+dom_screens = {}  # Dictionary of skin based screens.
+colorNames = {}  # Dictionary of skin color names.
+switchPixmap = {}  # Dictionary of switch images.
+parameters = {}  # Dictionary of skin parameters used to modify code behavior.
+fonts = {  # Dictionary of predefined and skin defined font aliases.
 	"Body": ("Regular", 18, 22, 16),
 	"ChoiceList": ("Regular", 20, 24, 18),
 }
 
-parameters = {}
+# Skins are loaded in order of priority.  Skin with highest priority is
+# loaded first.  This is usually the user-specified skin.
+#
+# Currently, loadSingleSkinData (colors, bordersets etc.) are applied
+# one-after-each, in order of ascending priority.  The domSkin will keep
+# all screens in descending priority, so the first screen found will be
+# used.
+#
+# GUI skins are saved in the settings file as the path relative to
+# SCOPE_SKIN.  The full path is NOT saved.  E.g. "MySkin/skin.xml"
+#
+# Display skins are saved in the settings file as the path relative to
+# SCOPE_CURRENT_LCDSKIN.  The full path is NOT saved.
+# E.g. "MySkin/skin_display.xml"
 
-def dump(x, i=0):
-	print " " * i + str(x)
-	try:
-		for n in x.childNodes:
-			dump(n, i + 1)
-	except Exception:
-		None
+config.skin = ConfigSubsection()
+DEFAULT_SKIN = SystemInfo["HasFullHDSkinSupport"] and "PLi-FullNightHD/skin.xml" or "PLi-HD/skin.xml"
+# on SD hardware, PLi-HD will not be available
+if not fileExists(resolveFilename(SCOPE_SKIN, DEFAULT_SKIN)):
+	# in that case, fallback to Magic (which is an SD skin)
+	DEFAULT_SKIN = "Magic/skin.xml"
+	if not fileExists(resolveFilename(SCOPE_SKIN, DEFAULT_SKIN)):
+		DEFAULT_SKIN = "skin.xml"
+config.skin.primary_skin = ConfigText(default=DEFAULT_SKIN)
 
-class SkinError(Exception):
-	def __init__(self, message):
-		self.msg = message
-
-	def __str__(self):
-		return "[Skin] {%s}: %s!  Please contact the skin's author!" % (config.skin.primary_skin.value, self.msg)
-
-
-dom_skins = []
+# Look for a skin related user skin "skin_user_<SkinName>.xml" file,
+# if one exists.  If a skin related user skin does not exist then a
+# generic user skin "skin_user.xml" will be used, if one exists.
+#
+# ...but first check that the relevant base dir exists, otherwise
+# we may well get into a start-up loop with skin failures
+#
+def skin_user_skinname():
+	name = "skin_user_" + config.skin.primary_skin.value[:config.skin.primary_skin.value.rfind("/")] + ".xml"
+	filename = resolveFilename(SCOPE_CONFIG, name)
+	if fileExists(filename):
+		return name
+	return None
 
 def addSkin(name, scope=SCOPE_CURRENT_SKIN):
 	# read the skin
@@ -57,35 +79,6 @@ def addSkin(name, scope=SCOPE_CURRENT_SKIN):
 			return True
 	return False
 
-# get own skin_user_skinname.xml file, if exist
-def skin_user_skinname():
-	name = "skin_user_" + config.skin.primary_skin.value[:config.skin.primary_skin.value.rfind("/")] + ".xml"
-	filename = resolveFilename(SCOPE_CONFIG, name)
-	if fileExists(filename):
-		return name
-	return None
-
-# we do our best to always select the "right" value
-# skins are loaded in order of priority: skin with
-# highest priority is loaded last, usually the user-provided
-# skin.
-
-# currently, loadSingleSkinData (colors, bordersets etc.)
-# are applied one-after-each, in order of ascending priority.
-# the dom_skin will keep all screens in descending priority,
-# so the first screen found will be used.
-
-
-# example: loadSkin("nemesis_greenline/skin.xml")
-config.skin = ConfigSubsection()
-DEFAULT_SKIN = SystemInfo["HasFullHDSkinSupport"] and "PLi-FullNightHD/skin.xml" or "PLi-HD/skin.xml"
-# on SD hardware, PLi-HD will not be available
-if not fileExists(resolveFilename(SCOPE_SKIN, DEFAULT_SKIN)):
-	# in that case, fallback to Magic (which is an SD skin)
-	DEFAULT_SKIN = "Magic/skin.xml"
-	if not fileExists(resolveFilename(SCOPE_SKIN, DEFAULT_SKIN)):
-		DEFAULT_SKIN = "skin.xml"
-config.skin.primary_skin = ConfigText(default=DEFAULT_SKIN)
 
 profile("LoadSkin")
 
@@ -98,16 +91,22 @@ if name:
 if not name or not res:
 	addSkin("skin_user.xml", SCOPE_CONFIG)
 
-# some boxes lie about their dimensions
+# Add an optional adjustment skin as some boxes lie about their dimensions.
 addSkin("skin_box.xml")
-# add optional discrete second infobar
+
+# Add an optional discrete second infobar skin.
 addSkin("skin_second_infobar.xml")
 
-display_skin_id = 1
+# Add the front panel / display / lcd skin.
 addSkin("skin_display.xml")
+
+# Add the text skin.
 addSkin("skin_text.xml")
+
+# Add the subtitle skin.
 addSkin("skin_subtitles.xml")
 
+# Add the main GUI skin.
 try:
 	if not addSkin(config.skin.primary_skin.value):
 		raise SkinError("primary skin not found")
@@ -122,7 +121,16 @@ except Exception, err:
 	del skin
 
 addSkin("skin_default.xml")
+
 profile("LoadSkinDefaultDone")
+
+
+class SkinError(Exception):
+	def __init__(self, message):
+		self.msg = message
+
+	def __str__(self):
+		return "[Skin] {%s}: %s!  Please contact the skin's author!" % (config.skin.primary_skin.value, self.msg)
 
 # Convert a coordinate string into a number.  Used to convert object position and
 # size attributes into a number.
@@ -519,8 +527,8 @@ def loadSingleSkinData(desktop, skin, path_prefix):
 		if id:
 			id = int(id)
 		else:
-			id = 0
-		if id == 0:  # framebuffer
+			id = GUI_SKIN_ID
+		if id == GUI_SKIN_ID:
 			for res in c.findall("resolution"):
 				get_attr = res.attrib.get
 				xres = get_attr("xres")
@@ -546,60 +554,60 @@ def loadSingleSkinData(desktop, skin, path_prefix):
 					# Load palette (Not yet implemented!)
 					pass
 				if yres >= 1080:
-					parameters["FileListName"] = (68, 4, 1000, 34)
-					parameters["FileListIcon"] = (7, 4, 52, 37)
-					parameters["FileListMultiName"] = (90, 3, 1000, 32)
-					parameters["FileListMultiIcon"] = (45, 4, 30, 30)
-					parameters["FileListMultiLock"] = (2, 0, 36, 36)
-					parameters["ChoicelistDash"] = (0, 3, 1000, 30)
-					parameters["ChoicelistName"] = (68, 3, 1000, 30)
-					parameters["ChoicelistNameSingle"] = (7, 3, 1000, 30)
-					parameters["ChoicelistIcon"] = (7, 0, 52, 38)
-					parameters["PluginBrowserName"] = (180, 8, 38)
-					parameters["PluginBrowserDescr"] = (180, 42, 25)
-					parameters["PluginBrowserIcon"] = (15, 8, 150, 60)
-					parameters["PluginBrowserDownloadName"] = (120, 8, 38)
-					parameters["PluginBrowserDownloadDescr"] = (120, 42, 25)
-					parameters["PluginBrowserDownloadIcon"] = (15, 0, 90, 76)
-					parameters["ServiceInfoLeft"] = (0, 0, 450, 45)
-					parameters["ServiceInfoRight"] = (450, 0, 1000, 45)
-					parameters["SelectionListDescr"] = (45, 6, 1000, 45)
-					parameters["SelectionListLock"] = (0, 2, 36, 36)
-					parameters["ConfigListSeperator"] = 500
-					parameters["VirtualKeyboard"] = (68, 68)
-					parameters["PartnerBoxEntryListName"] = (8, 2, 225, 38)
-					parameters["PartnerBoxEntryListIP"] = (180, 2, 225, 38)
-					parameters["PartnerBoxEntryListPort"] = (405, 2, 150, 38)
-					parameters["PartnerBoxEntryListType"] = (615, 2, 150, 38)
-					parameters["PartnerBoxTimerServicename"] = (0, 0, 45)
-					parameters["PartnerBoxTimerName"] = (0, 42, 30)
-					parameters["PartnerBoxE1TimerTime"] = (0, 78, 255, 30)
-					parameters["PartnerBoxE1TimerState"] = (255, 78, 255, 30)
-					parameters["PartnerBoxE2TimerTime"] = (0, 78, 225, 30)
-					parameters["PartnerBoxE2TimerState"] = (225, 78, 225, 30)
-					parameters["PartnerBoxE2TimerIcon"] = (1050, 8, 20, 20)
-					parameters["PartnerBoxE2TimerIconRepeat"] = (1050, 38, 20, 20)
-					parameters["PartnerBoxBouquetListName"] = (0, 0, 45)
-					parameters["PartnerBoxChannelListName"] = (0, 0, 45)
-					parameters["PartnerBoxChannelListTitle"] = (0, 42, 30)
-					parameters["PartnerBoxChannelListTime"] = (0, 78, 225, 30)
-					parameters["HelpMenuListHlp"] = (0, 0, 900, 42)
-					parameters["HelpMenuListExtHlp0"] = (0, 0, 900, 39)
-					parameters["HelpMenuListExtHlp1"] = (0, 42, 900, 30)
 					parameters["AboutHddSplit"] = 1
-					parameters["DreamexplorerName"] = (62, 0, 1200, 38)
-					parameters["DreamexplorerIcon"] = (15, 4, 30, 30)
-					parameters["PicturePlayerThumb"] = (30, 285, 45, 300, 30, 25)
-					parameters["PlayListName"] = (38, 2, 1000, 34)
-					parameters["PlayListIcon"] = (7, 7, 24, 24)
-					parameters["SHOUTcastListItem"] = (30, 27, 35, 96, 35, 33, 60, 32)
+					parameters["AutotimerListChannels"] = (2, 60, 4, 32)
+					parameters["AutotimerListDays"] = (1, 40, 5, 25)
+					parameters["AutotimerListHasTimespan"] = (154, 4, 150, 25)
 					parameters["AutotimerListIcon"] = (3, -1, 36, 36)
 					parameters["AutotimerListRectypeicon"] = (39, 4, 30, 30)
 					parameters["AutotimerListTimerName"] = (76, 4, 26, 32)
 					parameters["AutotimerListTimespan"] = (2, 40, 5, 25)
-					parameters["AutotimerListChannels"] = (2, 60, 4, 32)
-					parameters["AutotimerListHasTimespan"] = (154, 4, 150, 25)
-					parameters["AutotimerListDays"] = (1, 40, 5, 25)
+					parameters["ChoicelistDash"] = (0, 3, 1000, 30)
+					parameters["ChoicelistIcon"] = (7, 0, 52, 38)
+					parameters["ChoicelistName"] = (68, 3, 1000, 30)
+					parameters["ChoicelistNameSingle"] = (7, 3, 1000, 30)
+					parameters["ConfigListSeperator"] = 500
+					parameters["DreamexplorerIcon"] = (15, 4, 30, 30)
+					parameters["DreamexplorerName"] = (62, 0, 1200, 38)
+					parameters["FileListIcon"] = (7, 4, 52, 37)
+					parameters["FileListMultiIcon"] = (45, 4, 30, 30)
+					parameters["FileListMultiLock"] = (2, 0, 36, 36)
+					parameters["FileListMultiName"] = (90, 3, 1000, 32)
+					parameters["FileListName"] = (68, 4, 1000, 34)
+					parameters["HelpMenuListExtHlp0"] = (0, 0, 900, 39)
+					parameters["HelpMenuListExtHlp1"] = (0, 42, 900, 30)
+					parameters["HelpMenuListHlp"] = (0, 0, 900, 42)
+					parameters["PartnerBoxBouquetListName"] = (0, 0, 45)
+					parameters["PartnerBoxChannelListName"] = (0, 0, 45)
+					parameters["PartnerBoxChannelListTime"] = (0, 78, 225, 30)
+					parameters["PartnerBoxChannelListTitle"] = (0, 42, 30)
+					parameters["PartnerBoxE1TimerState"] = (255, 78, 255, 30)
+					parameters["PartnerBoxE1TimerTime"] = (0, 78, 255, 30)
+					parameters["PartnerBoxE2TimerIcon"] = (1050, 8, 20, 20)
+					parameters["PartnerBoxE2TimerIconRepeat"] = (1050, 38, 20, 20)
+					parameters["PartnerBoxE2TimerState"] = (225, 78, 225, 30)
+					parameters["PartnerBoxE2TimerTime"] = (0, 78, 225, 30)
+					parameters["PartnerBoxEntryListIP"] = (180, 2, 225, 38)
+					parameters["PartnerBoxEntryListName"] = (8, 2, 225, 38)
+					parameters["PartnerBoxEntryListPort"] = (405, 2, 150, 38)
+					parameters["PartnerBoxEntryListType"] = (615, 2, 150, 38)
+					parameters["PartnerBoxTimerName"] = (0, 42, 30)
+					parameters["PartnerBoxTimerServicename"] = (0, 0, 45)
+					parameters["PicturePlayerThumb"] = (30, 285, 45, 300, 30, 25)
+					parameters["PlayListIcon"] = (7, 7, 24, 24)
+					parameters["PlayListName"] = (38, 2, 1000, 34)
+					parameters["PluginBrowserDescr"] = (180, 42, 25)
+					parameters["PluginBrowserDownloadDescr"] = (120, 42, 25)
+					parameters["PluginBrowserDownloadIcon"] = (15, 0, 90, 76)
+					parameters["PluginBrowserDownloadName"] = (120, 8, 38)
+					parameters["PluginBrowserIcon"] = (15, 8, 150, 60)
+					parameters["PluginBrowserName"] = (180, 8, 38)
+					parameters["SHOUTcastListItem"] = (30, 27, 35, 96, 35, 33, 60, 32)
+					parameters["SelectionListDescr"] = (45, 6, 1000, 45)
+					parameters["SelectionListLock"] = (0, 2, 36, 36)
+					parameters["ServiceInfoLeft"] = (0, 0, 450, 45)
+					parameters["ServiceInfoRight"] = (450, 0, 1000, 45)
+					parameters["VirtualKeyboard"] = (68, 68)
 	for skininclude in skin.findall("include"):
 		filename = skininclude.attrib.get("filename")
 		if filename:
@@ -713,7 +721,7 @@ def loadSingleSkinData(desktop, skin, path_prefix):
 		if style_id:
 			style_id = int(style_id)
 		else:
-			style_id = 0
+			style_id = GUI_SKIN_ID
 		font = gFont("Regular", 20)  # Default
 		offset = eSize(20, 5)  # Default
 		for title in windowstyle.findall("title"):
@@ -750,7 +758,7 @@ def loadSingleSkinData(desktop, skin, path_prefix):
 		if style_id:
 			style_id = int(style_id)
 		else:
-			style_id = 0
+			style_id = GUI_SKIN_ID
 		r = eRect(0, 0, 0, 0)
 		v = margin.attrib.get("left")
 		if v:
@@ -768,13 +776,10 @@ def loadSingleSkinData(desktop, skin, path_prefix):
 		# for the one that this actually applies to.
 		getDesktop(style_id).setMargins(r)
 
-
-dom_screens = {}
-
 # Now a utility for plugins to add skin data to the screens.
 #
 def loadSkin(name, scope=SCOPE_SKIN):
-	global dom_screens, display_skin_id
+	global dom_screens, DISPLAY_SKIN_ID
 	filename = resolveFilename(scope, name)
 	if fileExists(filename):
 		path = os.path.dirname(filename) + "/"
@@ -783,7 +788,7 @@ def loadSkin(name, scope=SCOPE_SKIN):
 				name = elem.attrib.get("name", None)
 				if name:
 					sid = elem.attrib.get("id", None)
-					if sid and (sid != display_skin_id):
+					if sid and (sid != DISPLAY_SKIN_ID):
 						# Not for this display
 						elem.clear()
 						continue
@@ -812,7 +817,7 @@ def loadSkinData(desktop):
 				name = elem.attrib.get("name", None)
 				if name:
 					sid = elem.attrib.get("id", None)
-					if sid and (sid != display_skin_id):
+					if sid and (sid != DISPLAY_SKIN_ID):
 						# Not for this display.
 						elem.clear()
 						continue
@@ -939,7 +944,6 @@ def readSkin(screen, skin, names, desktop):
 			break
 	else:
 		name = "<embedded-in-'%s'>" % screen.__class__.__name__
-
 	# Otherwise try embedded skin.
 	if myscreen is None:
 		myscreen = getattr(screen, "parsedSkin", None)
@@ -952,7 +956,7 @@ def readSkin(screen, skin, names, desktop):
 				candidate = xml.etree.cElementTree.fromstring(s)
 				if candidate.tag == "screen":
 					sid = candidate.attrib.get("id", None)
-					if (not sid) or (int(sid) == display_skin_id):
+					if (not sid) or (int(sid) == DISPLAY_SKIN_ID):
 						myscreen = candidate
 						break
 			else:
@@ -1145,3 +1149,11 @@ def readSkin(screen, skin, names, desktop):
 	# things around.
 	screen = None
 	visited_components = None
+
+def dump(x, i=0):
+	print " " * i + str(x)
+	try:
+		for n in x.childNodes:
+			dump(n, i + 1)
+	except Exception:
+		None
