@@ -412,11 +412,14 @@ class AttributeParser:
 		self.guiObject.setScrollbarBackgroundPicture(ptr)
 
 	def alphatest(self, value):
-		self.guiObject.setAlphatest({
-			"on": 1,
-			"off": 0,
-			"blend": 2
-		}[value])
+		try:
+			self.guiObject.setAlphatest({
+				"on": 1,
+				"off": 0,
+				"blend": 2,
+			}[value])
+		except KeyError:
+			print "[Skin] Error: Invalid alphatest '%s'!  Must be one of 'on', 'off', 'off' or 'blend'." % value
 
 	def scale(self, value):
 		self.guiObject.setScale(1)
@@ -508,12 +511,15 @@ class AttributeParser:
 		self.guiObject.setSliderForegroundColor(parseColor(value))
 
 	def scrollbarMode(self, value):
-		self.guiObject.setScrollbarMode(getattr(self.guiObject, value))
-		# 	{ "showOnDemand": self.guiObject.showOnDemand,
-		# 		"showAlways": self.guiObject.showAlways,
-		# 		"showNever": self.guiObject.showNever,
-		# 		"showLeft": self.guiObject.showLeft
-		# 	}[value])
+		try:
+			self.guiObject.setScrollbarMode({
+				"showOnDemand": self.guiObject.showOnDemand,
+				"showAlways": self.guiObject.showAlways,
+				"showNever": self.guiObject.showNever,
+				"showLeft": self.guiObject.showLeft
+			}[value])
+		except KeyError:
+			print "[Skin] Error: Invalid scrollbarMode '%s'!  Must be one of 'showOnDemand', 'showAlways', 'showNever' or 'showLeft'." % value
 
 	def enableWrapAround(self, value):
 		self.guiObject.setWrapAround(True)
