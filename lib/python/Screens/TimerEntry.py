@@ -19,7 +19,7 @@ from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Tools.Alternatives import GetWithAlternative
 from Tools.FallbackTimer import FallbackTimerDirs
 from RecordTimer import AFTEREVENT
-from enigma import eEPGCache
+from enigma import eEPGCache, iRecordableServicePtr
 from time import localtime, mktime, time, strftime
 from datetime import datetime
 import urllib
@@ -425,6 +425,10 @@ class TimerEntry(Screen, ConfigListScreen):
 			self.timer.service_ref = self.timerentry_service_ref
 			self.timer.tags = self.timerentry_tags
 
+			# reset state when edit timer type
+			if not self.timer.external and self.timer.justplay != "zap" and self.timer.isRunning():
+				if self.timer in self.session.nav.RecordTimer.timer_list and (not self.timer.record_service or not isinstance(self.timer.record_service, iRecordableServicePtr)):
+					self.timer.resetState()
 
 			if self.timerentry_fallback.value:
 				self.timer.dirname = self.timerentry_fallbackdirname.value
