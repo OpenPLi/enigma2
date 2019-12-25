@@ -173,13 +173,13 @@ class SkinError(Exception):
 def parseCoordinate(s, e, size=0, font=None):
 	s = s.strip()
 	if s == "center":  # For speed as this can be common case.
-		val = (e - size) / 2
+		val = 0 if not size else (e - size) / 2
 	elif s == "*":
 		return None
 	else:
 		try:
-			val = int(s)  # for speed
-		except Exception:
+			val = int(s)  # For speed try a simple number first.
+		except ValueError:
 			if "t" in s:
 				s = s.replace("center", str((e - size) / 2.0))
 			if "e" in s:
@@ -187,19 +187,19 @@ def parseCoordinate(s, e, size=0, font=None):
 			if "c" in s:
 				s = s.replace("c", str(e / 2.0))
 			if "w" in s:
-				s = s.replace("w", "*" + str(fonts[font][3]))
+				s = s.replace("w", "*%s" % str(fonts[font][3]))
 			if "h" in s:
-				s = s.replace("h", "*" + str(fonts[font][2]))
+				s = s.replace("h", "*%s" % str(fonts[font][2]))
 			if "%" in s:
-				s = s.replace("%", "*" + str(e / 100.0))
+				s = s.replace("%", "*%s" % str(e / 100.0))
 			try:
-				val = int(s)  # for speed
-			except Exception:
-				val = eval(s)
+				val = int(s)  # For speed try a simple number first.
+			except ValueError:
+				val = int(eval(s))
+	# print "[Skin] DEBUG: parseCoordinate s='%s', e='%s', size=%s, font='%s', val='%s'" % (s, e, size, font, val)
 	if val < 0:
-		return 0
-	return int(val)  # make sure an integer value is returned
-
+		val = 0
+	return val
 
 def getParentSize(object, desktop):
 	size = eSize()
