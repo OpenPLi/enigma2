@@ -60,10 +60,10 @@ config.skin.primary_skin = ConfigText(default=DEFAULT_SKIN)
 # we may well get into a start-up loop with skin failures
 #
 def findUserRelatedSkin():
-	name = "skin_user_" + config.skin.primary_skin.value[:config.skin.primary_skin.value.rfind("/")] + ".xml"
-	filename = resolveFilename(SCOPE_CURRENT_SKIN, name)
-	if fileExists(filename):
-		return name
+	if os.path.isfile(resolveFilename(SCOPE_SKIN, config.skin.primary_skin.value)):
+		name = "skin_user_%s.xml" % os.path.dirname(config.skin.primary_skin.value)
+		if fileExists(resolveFilename(SCOPE_CURRENT_SKIN, name)):
+			return name
 	return None
 
 def addSkin(name, scope=SCOPE_CURRENT_SKIN):
