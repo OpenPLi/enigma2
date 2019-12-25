@@ -187,7 +187,7 @@ class PliExtraInfo(Poll, Converter):
 		return ("SDR", "HDR", "HDR10", "HLG", "")[info.getInfo(iServiceInformation.sGamma)]
 
 	def createVideoCodec(self, info):
-		return codec_data.get(info.getInfo(iServiceInformation.sVideoType)) or _("N/A")
+		return codec_data.get(info.getInfo(iServiceInformation.sVideoType), _("N/A"))
 
 	def createPIDInfo(self, info):
 		vpid = info.getInfo(iServiceInformation.sVideoPID)

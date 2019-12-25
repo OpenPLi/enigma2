@@ -6,25 +6,28 @@ from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import ActionMap
 from Components.config import config
 from Components.NimManager import nimmanager as nimmgr
+from Components.Sources.StaticText import StaticText
 
 class SecParameterSetup(Screen, ConfigListScreen):
-	skin = """
-		<screen position="center,center" size="620,455" title="Satellite equipment setup" >
-			<widget name="config" position="10,10" size="600,450" />
-		</screen>"""
 	def __init__(self, session):
-		self.skin = SecParameterSetup.skin
+		Screen.__init__(self, session)
+		self.skinName = ["SecParameterSetup", "Setup"]
+		self.setTitle(_("Satellite equipment setup"))
+		self["key_red"] = StaticText(_("Cancel"))
+		self["key_green"] = StaticText(_("OK"))
+		self["key_blue"] = StaticText(_("Restore defaults"))
 
-		self["actions"] = ActionMap(["SetupActions", "MenuActions"],
+		self["actions"] = ActionMap(["SetupActions", "MenuActions", "ColorActions"],
 		{
 			"ok": self.keySave,
+			"green": self.keySave,
 			"cancel": self.keyCancel,
-			"menu": self.setDefault,
+			"red": self.keyCancel,
+			"blue": self.resetDefaults,
+			"menu": self.closeRecursive,
 		}, -2)
 
-		Screen.__init__(self, session)
-		self.setTitle(_("Satellite equipment setup"))
-		list = [
+		self.secList = [
 			(_("Delay after diseqc reset command"), config.sec.delay_after_diseqc_reset_cmd),
 			(_("Delay after diseqc peripherial poweron command"), config.sec.delay_after_diseqc_peripherial_poweron_cmd),
 			(_("Delay after continuous tone disable before diseqc"), config.sec.delay_after_continuous_tone_disable_before_diseqc),
@@ -46,79 +49,38 @@ class SecParameterSetup(Screen, ConfigListScreen):
 			(_("Unicable delay after enable voltage before switch command"), config.sec.unicable_delay_after_enable_voltage_before_switch_command),
 			(_("Unicable delay after change voltage before switch command"), config.sec.unicable_delay_after_change_voltage_before_switch_command),
 			(_("Unicable delay after last diseqc command"), config.sec.unicable_delay_after_last_diseqc_command) ]
-		ConfigListScreen.__init__(self, list)
+		ConfigListScreen.__init__(self, [])
+		self.createSetup()
 
-	def setDefault(self):
-		self.session.openWithCallback(self.setDefaultCallback, MessageBox, _("Set default settings?"), MessageBox.TYPE_YESNO)
+	def createSetup(self):
+		self["config"].list = self.secList
+		self["config"].l.setList(self.secList)
 
-	def setDefaultCallback(self, answer):
-		if answer:
-			config.sec.delay_after_diseqc_reset_cmd.value = 50
-			config.sec.delay_after_diseqc_peripherial_poweron_cmd.value = 150
-			config.sec.delay_after_continuous_tone_disable_before_diseqc.value = 25
-			config.sec.delay_after_final_continuous_tone_change.value = 10
-			config.sec.delay_after_final_voltage_change.value = 10
-			config.sec.delay_between_diseqc_repeats.value = 120
-			config.sec.delay_after_last_diseqc_command.value = 50
-			config.sec.delay_after_toneburst.value = 50
-			config.sec.delay_after_change_voltage_before_switch_command.value = 20
-			config.sec.delay_after_enable_voltage_before_switch_command.value = 200
-			config.sec.delay_between_switch_and_motor_command.value = 700
-			config.sec.delay_after_voltage_change_before_measure_idle_inputpower.value = 500
-			config.sec.delay_after_enable_voltage_before_motor_command.value = 900
-			config.sec.delay_after_motor_stop_command.value = 500
-			config.sec.delay_after_voltage_change_before_motor_command.value = 500
-			config.sec.delay_before_sequence_repeat.value = 70
-			config.sec.motor_running_timeout.value = 360
-			config.sec.motor_command_retries.value = 1
-			config.sec.delay_after_diseqc_reset_cmd.save()
-			config.sec.delay_after_diseqc_peripherial_poweron_cmd.save()
-			config.sec.delay_after_continuous_tone_disable_before_diseqc.save()
-			config.sec.delay_after_final_continuous_tone_change.save()
-			config.sec.delay_after_final_voltage_change.save()
-			config.sec.delay_between_diseqc_repeats.save()
-			config.sec.delay_after_last_diseqc_command.save()
-			config.sec.delay_after_toneburst.save()
-			config.sec.delay_after_change_voltage_before_switch_command.save()
-			config.sec.delay_after_enable_voltage_before_switch_command.save()
-			config.sec.delay_between_switch_and_motor_command.save()
-			config.sec.delay_after_voltage_change_before_measure_idle_inputpower.save()
-			config.sec.delay_after_enable_voltage_before_motor_command.save()
-			config.sec.delay_after_motor_stop_command.save()
-			config.sec.delay_after_voltage_change_before_motor_command.save()
-			config.sec.delay_before_sequence_repeat.save()
-			config.sec.motor_running_timeout.save()
-			config.sec.motor_command_retries.save()
-			self.close(True)
+	def resetDefaults(self):
+		for secItem in self.secList:
+			secItem[1].value = secItem[1].default
+		self.createSetup() # force new values to show
 
-session = None
-
-def confirmed(answer):
-	global session
-	if answer:
-		session.open(SecParameterSetup)
-
-def SecSetupMain(Session, **kwargs):
-	global session
-	session = Session
+def SecSetupMain(session, **kwargs):
+	def confirmed(answer):
+		if answer is True:
+			session.open(SecParameterSetup)
 	session.openWithCallback(confirmed, MessageBox, _("Please do not change any values unless you know what you are doing!"), MessageBox.TYPE_INFO)
 
 def SecSetupStart(menuid):
-	show = False
-
 	# other menu than "scan"?
 	if menuid != "scan":
-		return [ ]
+		return []
 
 	# only show if DVB-S frontends are available
 	for slot in nimmgr.nim_slots:
 		if slot.isCompatible("DVB-S"):
 			return [(_("Satellite equipment setup"), SecSetupMain, "satellite_equipment_setup", None)]
 
-	return [ ]
+	return []
 
 def Plugins(**kwargs):
-	if (nimmgr.hasNimType("DVB-S")):
-		return PluginDescriptor(name=_("Satellite equipment setup"), description=_("Setup your satellite equipment"), where = PluginDescriptor.WHERE_MENU, needsRestart = False, fnc=SecSetupStart)
+	if nimmgr.hasNimType("DVB-S"):
+		return PluginDescriptor(name=_("Satellite equipment setup"), description=_("Setup your satellite equipment"), where=PluginDescriptor.WHERE_MENU, needsRestart=False, fnc=SecSetupStart)
 	else:
 		return []
