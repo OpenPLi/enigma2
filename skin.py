@@ -21,6 +21,7 @@ domScreens = {}  # Dictionary of skin based screens.
 colorNames = {}  # Dictionary of skin color names.
 switchPixmap = {}  # Dictionary of switch images.
 parameters = {}  # Dictionary of skin parameters used to modify code behavior.
+fontNames = []  # List of fonts added but not aliased.
 fonts = {  # Dictionary of predefined and skin defined font aliases.
 	"Body": ("Regular", 18, 22, 16),
 	"ChoiceList": ("Regular", 20, 24, 18),
@@ -238,13 +239,22 @@ def parseSize(s, scale, object=None, desktop=None):
 	(x, y) = parseValuePair(s, scale, object, desktop)
 	return eSize(x, y)
 
-def parseFont(s, scale):
-	try:
-		f = fonts[s]
-		name = f[0]
-		size = f[1]
-	except Exception:
+def parseFont(s, scale=((1, 1), (1, 1))):
+	if ";" in s:
 		name, size = s.split(";")
+	else:
+		name = s
+		size = None
+	try:
+		f = fonts[name]
+		name = f[0]
+		size = f[1] if size is None else size
+	except KeyError:
+		if name not in fontNames:
+			f = fonts["Body"]
+			print "[Skin] Error: Font '%s' (in '%s') is not defined!  Using 'Body' font ('%s') instead." % (name, s, f[0])
+			name = f[0]
+			size = f[1] if size is None else size
 	return gFont(name, int(size) * scale[0][0] / scale[0][1])
 
 def parseColor(s):
@@ -539,7 +549,7 @@ def applyAllAttributes(guiObject, desktop, attributes, scale):
 def loadSingleSkinData(desktop, domSkin, pathSkin):
 	"""Loads skin data like colors, windowstyle etc."""
 	assert domSkin.tag == "skin", "root element in skin must be 'skin'!"
-	global colorNames, fonts, parameters, switchPixmap
+	global colorNames, fontNames, fonts, parameters, switchPixmap
 	for c in domSkin.findall("output"):
 		id = c.attrib.get("id")
 		if id:
@@ -672,11 +682,8 @@ def loadSingleSkinData(desktop, domSkin, pathSkin):
 			else:
 				render = 0
 			filename = resolveFilename(SCOPE_FONTS, filename, path_prefix=pathSkin)
-			if not fileExists(filename):  # When font is not available look at current skin path.
-				skin_path = resolveFilename(SCOPE_CURRENT_SKIN, filename)
-				if fileExists(skin_path):
-					filename = skin_path
 			addFont(filename, name, scale, isReplacement, render)
+			fontNames.append(name)
 			# print "[Skin] Add font: Font path='%s', name='%s', scale=%d, isReplacement=%s, render=%d." % (filename, name, scale, isReplacement, render)
 		fallbackFont = resolveFilename(SCOPE_FONTS, "fallback.font", path_prefix=pathSkin)
 		if fileExists(fallbackFont):
