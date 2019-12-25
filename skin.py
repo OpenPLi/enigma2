@@ -889,7 +889,7 @@ class additionalWidget:
 # that size is a string and try to parse it. This class makes that work.
 class SizeTuple(tuple):
 	def split(self, *args):
-		return (str(self[0]), str(self[1]))
+		return str(self[0]), str(self[1])
 
 	def strip(self, *args):
 		return "%s,%s" % self
@@ -982,7 +982,6 @@ def readSkin(screen, skin, names, desktop):
 	if not isinstance(names, list):
 		names = [names]
 	# Try all skins, first existing one has priority.
-	global domScreens
 	for n in names:
 		myScreen, path = domScreens.get(n, (None, None))
 		if myScreen is not None:
@@ -1179,7 +1178,12 @@ def readSkin(screen, skin, names, desktop):
 	}
 
 	try:
-		print "[Skin] Processing screen '%s'." % name
+		msg = " from list '%s'" % ", ".join(names) if len(names) > 1 else ""
+		posX = "?" if context.x is None else str(context.x)
+		posY = "?" if context.y is None else str(context.y)
+		sizeW = "?" if context.w is None else str(context.w)
+		sizeH = "?" if context.h is None else str(context.h)
+		print "[Skin] Processing screen '%s'%s, position=(%s, %s), size=(%s x %s) for module '%s'." % (name, msg, posX, posY, sizeW, sizeH, screen.__class__.__name__)
 		# Reset offsets, all components are relative to screen coordinates.
 		context.x = 0
 		context.y = 0
