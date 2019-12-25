@@ -645,11 +645,11 @@ def loadSingleSkinData(desktop, domSkin, pathSkin):
 		filename = skininclude.attrib.get("filename")
 		if filename:
 			filename = resolveFilename(SCOPE_CURRENT_SKIN, filename, path_prefix=pathSkin)
-			if not fileExists(filename):
-				filename = resolveFilename(SCOPE_SKIN_IMAGE, filename, path_prefix=pathSkin)
 			if fileExists(filename):
 				print "[Skin] Loading included file '%s'." % filename
 				loadSkin(filename)
+			else:
+				print "[Skin] Error: Included file '%s' not found!" % filename
 	for c in domSkin.findall("switchpixmap"):
 		for pixmap in c.findall("pixmap"):
 			name = pixmap.attrib.get("name")
