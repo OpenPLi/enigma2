@@ -640,7 +640,10 @@ def loadSingleSkinData(desktop, domSkin, pathSkin, scope=SCOPE_CURRENT_SKIN):
 					parameters["SelectionListLock"] = (0, 2, 36, 36)
 					parameters["ServiceInfoLeft"] = (0, 0, 450, 45)
 					parameters["ServiceInfoRight"] = (450, 0, 1000, 45)
-					parameters["VirtualKeyboard"] = (68, 68)
+					parameters["VirtualKeyBoard"] = (68, 68)
+					parameters["VirtualKeyBoardAlignment"] = (0, 0)
+					parameters["VirtualKeyBoardPadding"] = (7, 7)
+					parameters["VirtualKeyBoardShiftColors"] = (0x00ffffff, 0x00ffffff, 0x0000ffff, 0x00ff00ff)
 	for skininclude in domSkin.findall("include"):
 		filename = skininclude.attrib.get("filename")
 		if filename:
