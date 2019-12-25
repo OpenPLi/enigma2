@@ -66,17 +66,34 @@ def findUserRelatedSkin():
 	return None
 
 def addSkin(name, scope=SCOPE_CURRENT_SKIN):
-	# read the skin
+	global domSkins
 	filename = resolveFilename(scope, name)
 	if fileExists(filename):
-		mpath = os.path.dirname(filename) + "/"
-		try:
-			domSkins.append((mpath, xml.etree.cElementTree.parse(filename).getroot()))
-		except Exception:
-			print "[SKIN ERROR] error in %s" % filename
-			return False
+		if os.path.isfile(filename):
+			try:
+				file = open(filename, "r")  # This open gets around a possible file handle leak in Python's XML parser.
+				domSkins.append(("%s/" % os.path.dirname(filename), xml.etree.cElementTree.parse(file).getroot()))
+				file.close()
+				print "[Skin] Skin '%s' added successfully." % filename
+				return True
+			except OSError, e:
+				print "[Skin] Error %d: Opening file '%s'! (%s)" % (e.errno, filename, os.strerror(e.errno))
+			except xml.etree.cElementTree.ParseError as e:
+				file.seek(0)
+				content = file.readlines()
+				file.close()
+				line, column = e.position
+				print "[Skin] XML Parse Error: '%s' in '%s'!" % (e, filename)
+				data = content[line - 1].replace("\t", " ").rstrip()
+				print "[Skin] XML Parse Error: '%s'" % data
+				print "[Skin] XML Parse Error: '%s^%s'" % ("-" * column, " " * (len(data) - column - 1))
+			except Exception:
+				file.close()
+				print "[Skin] Error: Unable to parse skin data in '%s'!" % filename
 		else:
-			return True
+			print "[Skin] Error: Skin '%s' is not a file!" % filename
+	else:
+		print "[Skin] Warning: Skin '%s' does not exist!" % filename
 	return False
 
 
@@ -769,30 +786,52 @@ def loadSingleSkinData(desktop, domSkin, pathSkin):
 # Now a utility for plugins to add skin data to the screens.
 #
 def loadSkin(filename, scope=SCOPE_SKIN):
-	global domScreens, DISPLAY_SKIN_ID
+	global domScreens
 	filename = resolveFilename(scope, filename)
 	if fileExists(filename):
-		path = os.path.dirname(filename) + "/"
-		for elem in xml.etree.cElementTree.parse(filename).getroot():
-			if elem.tag == "screen":
-				name = elem.attrib.get("name", None)
-				if name:
-					sid = elem.attrib.get("id", None)
-					if sid and (sid != DISPLAY_SKIN_ID):
-						# Not for this display
-						elem.clear()
-						continue
-					if name in domScreens:
-						print "loadSkin: Screen already defined elsewhere:", name
-						elem.clear()
+		if os.path.isfile(filename):
+			try:
+				path = "%s/" % os.path.dirname(filename)
+				file = open(filename, "r")  # This open gets around a possible file handle leak in Python's XML parser.
+				for elem in xml.etree.cElementTree.parse(file).getroot():
+					if elem.tag == "screen":
+						name = elem.attrib.get("name", None)
+						if name:
+							sid = elem.attrib.get("id", None)
+							if sid and (sid != DISPLAY_SKIN_ID):
+								# Not for this display
+								elem.clear()
+								continue
+							if name in domScreens:
+								print "loadSkin: Screen already defined elsewhere:", name
+								elem.clear()
+							else:
+								domScreens[name] = (elem, path)
+						else:
+							# Without a name, it's useless!
+							elem.clear()
 					else:
-						domScreens[name] = (elem, path)
-				else:
-					# Without a name, it's useless!
-					elem.clear()
-			else:
-				# Non-screen element, no need for it any longer.
-				elem.clear()
+						# Non-screen element, no need for it any longer.
+						elem.clear()
+				file.close()
+			except OSError, e:
+				print "[Skin] Error %d: Opening file '%s'! (%s)" % (e.errno, filename, os.strerror(e.errno))
+			except xml.etree.cElementTree.ParseError as e:
+				file.seek(0)
+				content = file.readlines()
+				file.close()
+				line, column = e.position
+				print "[Skin] XML Parse Error: '%s' in '%s'!" % (e, filename)
+				data = content[line - 1].replace("\t", " ").rstrip()
+				print "[Skin] XML Parse Error: '%s'" % data
+				print "[Skin] XML Parse Error: '%s^%s'" % ("-" * column, " " * (len(data) - column - 1))
+			except Exception:
+				file.close()
+				print "[Skin] Error: Unable to parse skin data in '%s'!" % filename
+		else:
+			print "[Skin] Error: Skin '%s' is not a file!" % filename
+	else:
+		print "[Skin] Warning: Skin '%s' does not exist!" % filename
 
 # Kinda hackish, but this is called once by mytest.py.
 #
