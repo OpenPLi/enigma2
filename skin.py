@@ -13,6 +13,17 @@ from Tools.Directories import SCOPE_CONFIG, SCOPE_CURRENT_LCDSKIN, SCOPE_CURRENT
 from Tools.Import import my_import
 from Tools.LoadPixmap import LoadPixmap
 
+DEFAULT_SKIN = SystemInfo["HasFullHDSkinSupport"] and "PLi-FullNightHD/skin.xml" or "PLi-HD/skin.xml"  # On SD hardware PLi-HD will not be available.
+DEFAULT_SD_SKIN = "Magic/skin.xml"
+EMERGENCY_SKIN = "skin.xml"
+DEFAULT_DISPLAY_SKIN = "skin_default/skin_display.xml"
+USER_SKIN = "skin_user.xml"
+USER_SKIN_TEMPLATE = "skin_user_%s.xml"
+BOX_SKIN = "skin_box.xml"  # DEBUG: Is this actually used?
+TEXT_SKIN = "skin_text.xml"  # DEBUG: Is this actually used?
+SECOND_INFOBAR_SKIN = "skin_second_infobar.xml"  # DEBUG: Is this actually used?
+SUBTITLE_SKIN = "skin_subtitles.xml"
+
 GUI_SKIN_ID = 0  # Main frame-buffer.
 DISPLAY_SKIN_ID = 1  # Front panel / display / LCD.
 
@@ -41,16 +52,20 @@ fonts = {  # Dictionary of predefined and skin defined font aliases.
 # Display skins are saved in the settings file as the path relative to
 # SCOPE_CURRENT_LCDSKIN.  The full path is NOT saved.
 # E.g. "MySkin/skin_display.xml"
-
+#
 config.skin = ConfigSubsection()
-DEFAULT_SKIN = SystemInfo["HasFullHDSkinSupport"] and "PLi-FullNightHD/skin.xml" or "PLi-HD/skin.xml"
-# on SD hardware, PLi-HD will not be available
-if not fileExists(resolveFilename(SCOPE_SKIN, DEFAULT_SKIN)):
-	# in that case, fallback to Magic (which is an SD skin)
-	DEFAULT_SKIN = "Magic/skin.xml"
-	if not fileExists(resolveFilename(SCOPE_SKIN, DEFAULT_SKIN)):
+# On SD hardware, DEFAULT_SKIN will not be available.
+skin = resolveFilename(SCOPE_SKIN, DEFAULT_SKIN)
+if not fileExists(skin) or not os.path.isfile(skin):
+	# In that case, fallback to the DEFAULT_SD_SKIN.
+	DEFAULT_SKIN = DEFAULT_SD_SKIN
+	print "[Skin] Error: Default HD skin '%s' is not readable or is not a file!  Using default SD skin." % skin
+	skin = resolveFilename(SCOPE_SKIN, DEFAULT_SKIN)
+	if not fileExists(skin) or not os.path.isfile(skin):
 		DEFAULT_SKIN = "skin.xml"
+		print "[Skin] Error: Default SD skin '%s' is not also readable or is not a file!  Using emergency skin." % skin
 config.skin.primary_skin = ConfigText(default=DEFAULT_SKIN)
+config.skin.display_skin = ConfigText(default=DEFAULT_DISPLAY_SKIN)
 
 # Look for a skin related user skin "skin_user_<SkinName>.xml" file,
 # if one exists.  If a skin related user skin does not exist then a
@@ -61,7 +76,7 @@ config.skin.primary_skin = ConfigText(default=DEFAULT_SKIN)
 #
 def findUserRelatedSkin():
 	if os.path.isfile(resolveFilename(SCOPE_SKIN, config.skin.primary_skin.value)):
-		name = "skin_user_%s.xml" % os.path.dirname(config.skin.primary_skin.value)
+		name = USER_SKIN_TEMPLATE % os.path.dirname(config.skin.primary_skin.value)
 		if fileExists(resolveFilename(SCOPE_CURRENT_SKIN, name)):
 			return name
 	return None
@@ -102,43 +117,56 @@ profile("LoadSkin")
 
 # Add an optional skin related user skin "user_skin_<SkinName>.xml".  If there is
 # not a skin related user skin then try to add am optional generic user skin.
-res = None
+result = None
 name = findUserRelatedSkin()
 if name:
-	res = addSkin(name, scope=SCOPE_CURRENT_SKIN)
-if not name or not res:
-	addSkin("skin_user.xml", scope=SCOPE_CURRENT_SKIN)
+	result = addSkin(name, scope=SCOPE_CURRENT_SKIN)
+if not name or not result:
+	addSkin(USER_SKIN, scope=SCOPE_CURRENT_SKIN)
 
 # Add an optional adjustment skin as some boxes lie about their dimensions.
-addSkin("skin_box.xml", scope=SCOPE_CURRENT_SKIN)
-
-# Add an optional discrete second infobar skin.
-addSkin("skin_second_infobar.xml", scope=SCOPE_CURRENT_SKIN)
-
-# Add the front panel / display / lcd skin.
-addSkin("skin_display.xml", scope=SCOPE_CURRENT_LCDSKIN)
+addSkin(BOX_SKIN, scope=SCOPE_CURRENT_SKIN)
 
 # Add the text skin.
-addSkin("skin_text.xml", scope=SCOPE_CURRENT_SKIN)
+addSkin(TEXT_SKIN, scope=SCOPE_CURRENT_SKIN)
+
+# Add an optional discrete second infobar skin.
+addSkin(SECOND_INFOBAR_SKIN, scope=SCOPE_CURRENT_SKIN)
 
 # Add the subtitle skin.
-addSkin("skin_subtitles.xml", scope=SCOPE_CURRENT_SKIN)
+addSkin(SUBTITLE_SKIN, scope=SCOPE_CURRENT_SKIN)
+
+# Add the front panel / display / lcd skin.
+result = []
+for skin, name in [(config.skin.display_skin.value, "current"), (DEFAULT_SKIN, "default")]:
+	if skin in result:  # Don't try to add a skin that has already failed.
+		continue
+	config.skin.display_skin.value = skin
+	if addSkin(config.skin.display_skin.value, scope=SCOPE_CURRENT_LCDSKIN):
+		break
+	print "[Skin] Error: Adding %s display skin '%s' has failed!" % (name, config.skin.display_skin.value)
+	result.append(skin)
 
 # Add the main GUI skin.
-try:
-	if not addSkin(config.skin.primary_skin.value, scope=SCOPE_CURRENT_SKIN):
-		raise SkinError("primary skin not found")
-except Exception, err:
-	print "SKIN ERROR:", err
-	skin = DEFAULT_SKIN
-	if config.skin.primary_skin.value == skin:
-		skin = "skin.xml"
-	print "defaulting to standard skin...", skin
+result = []
+for skin, name in [(config.skin.primary_skin.value, "current"), (DEFAULT_SKIN, "default"), (EMERGENCY_SKIN, "emergency")]:
+	if skin in result:  # Don't try to add a skin that has already failed.
+		continue
 	config.skin.primary_skin.value = skin
-	addSkin(skin, scope=SCOPE_CURRENT_SKIN)
-	del skin
+	if addSkin(config.skin.primary_skin.value, scope=SCOPE_CURRENT_SKIN):
+		break
+	print "[Skin] Error: Adding %s GUI skin '%s' has failed!" % (name, config.skin.primary_skin.value)
+	result.append(skin)
 
-addSkin("skin_default.xml", scope=SCOPE_CURRENT_SKIN)
+# Add the emergency skin.  This skin should provide enough functionality
+# to enable basic GUI functions to work.
+if config.skin.primary_skin.value != EMERGENCY_SKIN:
+	addSkin(EMERGENCY_SKIN, scope=SCOPE_CURRENT_SKIN)
+
+# Remove global working variables.
+del skin
+del name
+del result
 
 profile("LoadSkinDefaultDone")
 
@@ -266,7 +294,7 @@ def parseColor(s):
 	return gRGB(int(s[1:], 0x10))
 
 def parseParameter(s):
-	"""This function is responsible for parsing parameters in the skin, it can parse integers, floats, hex colors, hex integers, named colors and string."""
+	"""This function is responsible for parsing parameters in the skin, it can parse integers, floats, hex colors, hex integers, named colors and strings."""
 	if s[0] == "*":
 		return s[1:]
 	elif s[0] == "#":
