@@ -98,7 +98,7 @@ addSkin("skin_box.xml", scope=SCOPE_CURRENT_SKIN)
 addSkin("skin_second_infobar.xml", scope=SCOPE_CURRENT_SKIN)
 
 # Add the front panel / display / lcd skin.
-addSkin("skin_display.xml", scope=SCOPE_CURRENT_LCDSKIN if os.path.exists(SCOPE_CURRENT_LCDSKIN) else SCOPE_CURRENT_SKIN)
+addSkin("skin_display.xml", scope=SCOPE_CURRENT_LCDSKIN)
 
 # Add the text skin.
 addSkin("skin_text.xml", scope=SCOPE_CURRENT_SKIN)
