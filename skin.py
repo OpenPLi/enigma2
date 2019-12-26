@@ -142,7 +142,7 @@ for skin, name in [(config.skin.display_skin.value, "current"), (DEFAULT_DISPLAY
 	if skin in result:  # Don't try to add a skin that has already failed.
 		continue
 	config.skin.display_skin.value = skin
-	if addSkin(config.skin.display_skin.value, scope=SCOPE_CURRENT_LCDSKIN):
+	if addSkin(config.skin.display_skin.value, scope=SCOPE_CURRENT_SKIN):
 		break
 	print "[Skin] Error: Adding %s display skin '%s' has failed!" % (name, config.skin.display_skin.value)
 	result.append(skin)
