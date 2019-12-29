@@ -84,29 +84,25 @@ def addSkin(name, scope=SCOPE_CURRENT_SKIN):
 	global domSkins
 	filename = resolveFilename(scope, name)
 	if fileExists(filename):
-		if os.path.isfile(filename):
-			try:
-				file = open(filename, "r")  # This open gets around a possible file handle leak in Python's XML parser.
-				domSkins.append((scope, "%s/" % os.path.dirname(filename), xml.etree.cElementTree.parse(file).getroot()))
-				file.close()
-				print "[Skin] Skin '%s' added successfully." % filename
-				return True
-			except OSError, e:
-				print "[Skin] Error %d: Opening file '%s'! (%s)" % (e.errno, filename, os.strerror(e.errno))
-			except xml.etree.cElementTree.ParseError as e:
-				file.seek(0)
-				content = file.readlines()
-				file.close()
-				line, column = e.position
-				print "[Skin] XML Parse Error: '%s' in '%s'!" % (e, filename)
-				data = content[line - 1].replace("\t", " ").rstrip()
-				print "[Skin] XML Parse Error: '%s'" % data
-				print "[Skin] XML Parse Error: '%s^%s'" % ("-" * column, " " * (len(data) - column - 1))
-			except Exception:
-				file.close()
-				print "[Skin] Error: Unable to parse skin data in '%s'!" % filename
-		else:
-			print "[Skin] Error: Skin '%s' is not a file!" % filename
+		try:
+			# This open gets around a possible file handle leak in Python's XML parser.
+			with open(filename, "r") as fd:
+				try:
+					domSkins.append((scope, "%s/" % os.path.dirname(filename), xml.etree.cElementTree.parse(fd).getroot()))
+					print "[Skin] Skin '%s' added successfully." % filename
+					return True
+				except xml.etree.cElementTree.ParseError as e:
+					fd.seek(0)
+					content = fd.readlines()
+					line, column = e.position
+					print "[Skin] XML Parse Error: '%s' in '%s'!" % (e, filename)
+					data = content[line - 1].replace("\t", " ").rstrip()
+					print "[Skin] XML Parse Error: '%s'" % data
+					print "[Skin] XML Parse Error: '%s^%s'" % ("-" * column, " " * (len(data) - column - 1))
+				except Exception:
+					print "[Skin] Error: Unable to parse skin data in '%s'!" % filename
+		except OSError, e:
+			print "[Skin] Error %d: Opening file '%s'! (%s)" % (e.errno, filename, os.strerror(e.errno))
 	else:
 		print "[Skin] Warning: Skin '%s' does not exist!" % filename
 	return False
@@ -228,7 +224,6 @@ def parseCoordinate(s, e, size=0, font=None):
 	return val
 
 def getParentSize(object, desktop):
-	size = eSize()
 	if object:
 		parent = object.getParent()
 		# For some widgets (e.g. ScrollLabel) the skin attributes are applied to a
@@ -241,11 +236,11 @@ def getParentSize(object, desktop):
 		if parent and parent.size().isEmpty():
 			parent = parent.getParent()
 		if parent:
-			size = parent.size()
+			return parent.size()
 		elif desktop:
 			# Widget has no parent, use desktop size instead for relative coordinates.
-			size = desktop.size()
-	return size
+			return desktop.size()
+	return eSize()
 
 def parseValuePair(s, scale, object=None, desktop=None, size=None):
 	x, y = s.split(",")
@@ -257,12 +252,10 @@ def parseValuePair(s, scale, object=None, desktop=None, size=None):
 	return (xval * scale[0][0] / scale[0][1], yval * scale[1][0] / scale[1][1])
 
 def parsePosition(s, scale, object=None, desktop=None, size=None):
-	(x, y) = parseValuePair(s, scale, object, desktop, size)
-	return ePoint(x, y)
+	return ePoint(*parseValuePair(s, scale, object, desktop, size))
 
 def parseSize(s, scale, object=None, desktop=None):
-	(x, y) = parseValuePair(s, scale, object, desktop)
-	return eSize(x, y)
+	return eSize(*parseValuePair(s, scale, object, desktop))
 
 def parseFont(s, scale=((1, 1), (1, 1))):
 	if ";" in s:
@@ -865,36 +858,31 @@ def loadSkin(filename, desktop=None, scope=SCOPE_SKIN):
 	global domScreens
 	filename = resolveFilename(scope, filename)
 	if fileExists(filename):
-		if os.path.isfile(filename):
-			try:
-				path = "%s/" % os.path.dirname(filename)
-				file = open(filename, "r")  # This open gets around a possible file handle leak in Python's XML parser.
-				domSkin = xml.etree.cElementTree.parse(file).getroot()
-				if desktop is not None:
-					loadSingleSkinData(desktop, domSkin, filename, scope=scope)
-				for element in domSkin:
-					name = evaluateElement(element, DISPLAY_SKIN_ID)
-					if name is None:
-						element.clear()
-					else:
-						domScreens[name] = (element, path)
-				file.close()
-			except OSError, e:
-				print "[Skin] Error %d: Opening file '%s'! (%s)" % (e.errno, filename, os.strerror(e.errno))
-			except xml.etree.cElementTree.ParseError as e:
-				file.seek(0)
-				content = file.readlines()
-				file.close()
-				line, column = e.position
-				print "[Skin] XML Parse Error: '%s' in '%s'!" % (e, filename)
-				data = content[line - 1].replace("\t", " ").rstrip()
-				print "[Skin] XML Parse Error: '%s'" % data
-				print "[Skin] XML Parse Error: '%s^%s'" % ("-" * column, " " * (len(data) - column - 1))
-			except Exception:
-				file.close()
-				print "[Skin] Error: Unable to parse skin data in '%s'!" % filename
-		else:
-			print "[Skin] Error: Skin '%s' is not a file!" % filename
+		try:
+			# This open gets around a possible file handle leak in Python's XML parser.
+			with open(filename, "r") as fd:
+				try:
+					domSkin = xml.etree.cElementTree.parse(fd).getroot()
+					if desktop is not None:
+						loadSingleSkinData(desktop, domSkin, filename, scope=scope)
+					for element in domSkin:
+						name = evaluateElement(element, DISPLAY_SKIN_ID)
+						if name is None:
+							element.clear()
+						else:
+							domScreens[name] = (element, "%s/" % os.path.dirname(filename))
+				except xml.etree.cElementTree.ParseError as e:
+					fd.seek(0)
+					content = fd.readlines()
+					line, column = e.position
+					print "[Skin] XML Parse Error: '%s' in '%s'!" % (e, filename)
+					data = content[line - 1].replace("\t", " ").rstrip()
+					print "[Skin] XML Parse Error: '%s'" % data
+					print "[Skin] XML Parse Error: '%s^%s'" % ("-" * column, " " * (len(data) - column - 1))
+				except Exception:
+					print "[Skin] Error: Unable to parse skin data in '%s'!" % filename
+		except OSError, e:
+			print "[Skin] Error %d: Opening file '%s'! (%s)" % (e.errno, filename, os.strerror(e.errno))
 	else:
 		print "[Skin] Warning: Skin '%s' does not exist!" % filename
 
