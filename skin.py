@@ -83,27 +83,32 @@ def findUserRelatedSkin():
 def addSkin(name, scope=SCOPE_CURRENT_SKIN):
 	global domSkins
 	filename = resolveFilename(scope, name)
-	try:
-		# This open gets around a possible file handle leak in Python's XML parser.
-		with open(filename, "r") as fd:
+	if fileExists(filename):
+		if os.path.isfile(filename):
 			try:
-				domSkins.append((scope, "%s/" % os.path.dirname(filename), xml.etree.cElementTree.parse(fd).getroot()))
+				file = open(filename, "r")  # This open gets around a possible file handle leak in Python's XML parser.
+				domSkins.append((scope, "%s/" % os.path.dirname(filename), xml.etree.cElementTree.parse(file).getroot()))
+				file.close()
 				print "[Skin] Skin '%s' added successfully." % filename
 				return True
+			except OSError, e:
+				print "[Skin] Error %d: Opening file '%s'! (%s)" % (e.errno, filename, os.strerror(e.errno))
 			except xml.etree.cElementTree.ParseError as e:
-				fd.seek(0)
-				content = fd.readlines()
+				file.seek(0)
+				content = file.readlines()
+				file.close()
 				line, column = e.position
 				print "[Skin] XML Parse Error: '%s' in '%s'!" % (e, filename)
 				data = content[line - 1].replace("\t", " ").rstrip()
 				print "[Skin] XML Parse Error: '%s'" % data
 				print "[Skin] XML Parse Error: '%s^%s'" % ("-" * column, " " * (len(data) - column - 1))
 			except Exception:
+				file.close()
 				print "[Skin] Error: Unable to parse skin data in '%s'!" % filename
-			else:
-				print "[Skin] Error: Skin '%s' is not a file!" % filename
-	except Exception, e:
-		print "[Skin] ERROR loading file '%s': %s" % (filename, e)
+		else:
+			print "[Skin] Error: Skin '%s' is not a file!" % filename
+	else:
+		print "[Skin] Warning: Skin '%s' does not exist!" % filename
 	return False
 
 
@@ -118,14 +123,16 @@ if name:
 if not name or not result:
 	addSkin(USER_SKIN, scope=SCOPE_CURRENT_SKIN)
 
-# Add an optional adjustment skin as some boxes lie about their dimensions.
-addSkin(BOX_SKIN, scope=SCOPE_CURRENT_SKIN)
-
-# Add an optional discrete second infobar skin.
-addSkin(SECOND_INFOBAR_SKIN, scope=SCOPE_CURRENT_SKIN)
-
-# Add the subtitle skin.
-addSkin(SUBTITLE_SKIN, scope=SCOPE_CURRENT_SKIN)
+# Add the main GUI skin.
+result = []
+for skin, name in [(config.skin.primary_skin.value, "current"), (DEFAULT_SKIN, "default"), (EMERGENCY_SKIN, "emergency")]:
+	if skin in result:  # Don't try to add a skin that has already failed.
+		continue
+	config.skin.primary_skin.value = skin
+	if addSkin(config.skin.primary_skin.value, scope=SCOPE_CURRENT_SKIN):
+		break
+	print "[Skin] Error: Adding %s GUI skin '%s' has failed!" % (name, config.skin.primary_skin.value)
+	result.append(skin)
 
 # Add the front panel / display / lcd skin.
 result = []
@@ -138,16 +145,14 @@ for skin, name in [(config.skin.display_skin.value, "current"), (DEFAULT_DISPLAY
 	print "[Skin] Error: Adding %s display skin '%s' has failed!" % (name, config.skin.display_skin.value)
 	result.append(skin)
 
-# Add the main GUI skin.
-result = []
-for skin, name in [(config.skin.primary_skin.value, "current"), (DEFAULT_SKIN, "default"), (EMERGENCY_SKIN, "emergency")]:
-	if skin in result:  # Don't try to add a skin that has already failed.
-		continue
-	config.skin.primary_skin.value = skin
-	if addSkin(config.skin.primary_skin.value, scope=SCOPE_CURRENT_SKIN):
-		break
-	print "[Skin] Error: Adding %s GUI skin '%s' has failed!" % (name, config.skin.primary_skin.value)
-	result.append(skin)
+# Add an optional adjustment skin as some boxes lie about their dimensions.
+# addSkin(BOX_SKIN, scope=SCOPE_CURRENT_SKIN)
+
+# Add an optional discrete second infobar skin.
+# addSkin(SECOND_INFOBAR_SKIN, scope=SCOPE_CURRENT_SKIN)
+
+# Add the subtitle skin.
+addSkin(SUBTITLE_SKIN, scope=SCOPE_CURRENT_SKIN)
 
 # Add the emergency skin.  This skin should provide enough functionality
 # to enable basic GUI functions to work.
@@ -223,6 +228,7 @@ def parseCoordinate(s, e, size=0, font=None):
 	return val
 
 def getParentSize(object, desktop):
+	size = eSize()
 	if object:
 		parent = object.getParent()
 		# For some widgets (e.g. ScrollLabel) the skin attributes are applied to a
@@ -235,11 +241,11 @@ def getParentSize(object, desktop):
 		if parent and parent.size().isEmpty():
 			parent = parent.getParent()
 		if parent:
-			return parent.size()
+			size = parent.size()
 		elif desktop:
 			# Widget has no parent, use desktop size instead for relative coordinates.
-			return desktop.size()
-	return eSize()
+			size = desktop.size()
+	return size
 
 def parseValuePair(s, scale, object=None, desktop=None, size=None):
 	x, y = s.split(",")
@@ -251,10 +257,12 @@ def parseValuePair(s, scale, object=None, desktop=None, size=None):
 	return (xval * scale[0][0] / scale[0][1], yval * scale[1][0] / scale[1][1])
 
 def parsePosition(s, scale, object=None, desktop=None, size=None):
-	return ePoint(*parseValuePair(s, scale, object, desktop, size))
+	(x, y) = parseValuePair(s, scale, object, desktop, size)
+	return ePoint(x, y)
 
 def parseSize(s, scale, object=None, desktop=None):
-	return eSize(*parseValuePair(s, scale, object, desktop))
+	(x, y) = parseValuePair(s, scale, object, desktop)
+	return eSize(x, y)
 
 def parseFont(s, scale=((1, 1), (1, 1))):
 	if ";" in s:
