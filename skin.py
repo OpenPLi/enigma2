@@ -20,7 +20,6 @@ DEFAULT_DISPLAY_SKIN = "skin_display.xml"
 USER_SKIN = "skin_user.xml"
 USER_SKIN_TEMPLATE = "skin_user_%s.xml"
 BOX_SKIN = "skin_box.xml"  # DEBUG: Is this actually used?
-TEXT_SKIN = "skin_text.xml"  # DEBUG: Is this actually used?
 SECOND_INFOBAR_SKIN = "skin_second_infobar.xml"  # DEBUG: Is this actually used?
 SUBTITLE_SKIN = "skin_subtitles.xml"
 
@@ -126,9 +125,6 @@ if not name or not result:
 
 # Add an optional adjustment skin as some boxes lie about their dimensions.
 addSkin(BOX_SKIN, scope=SCOPE_CURRENT_SKIN)
-
-# Add the text skin.
-addSkin(TEXT_SKIN, scope=SCOPE_CURRENT_SKIN)
 
 # Add an optional discrete second infobar skin.
 addSkin(SECOND_INFOBAR_SKIN, scope=SCOPE_CURRENT_SKIN)
