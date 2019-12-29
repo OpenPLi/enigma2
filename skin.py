@@ -710,7 +710,7 @@ def loadSingleSkinData(desktop, domSkin, pathSkin, scope=SCOPE_CURRENT_SKIN):
 			filename = resolveFilename(scope, filename, path_prefix=pathSkin)
 			if fileExists(filename):
 				print "[Skin] Loading included file '%s'." % filename
-				loadSkin(filename)
+				loadSkin(filename, desktop=desktop, scope=scope)
 			else:
 				print "[Skin] Error: Included file '%s' not found!" % filename
 	for tag in domSkin.findall("switchpixmap"):
@@ -861,7 +861,7 @@ def loadSingleSkinData(desktop, domSkin, pathSkin, scope=SCOPE_CURRENT_SKIN):
 
 # Now a utility for plugins to add skin data to the screens.
 #
-def loadSkin(filename, scope=SCOPE_SKIN):
+def loadSkin(filename, desktop=None, scope=SCOPE_SKIN):
 	global domScreens
 	filename = resolveFilename(scope, filename)
 	if fileExists(filename):
@@ -869,26 +869,15 @@ def loadSkin(filename, scope=SCOPE_SKIN):
 			try:
 				path = "%s/" % os.path.dirname(filename)
 				file = open(filename, "r")  # This open gets around a possible file handle leak in Python's XML parser.
-				for elem in xml.etree.cElementTree.parse(file).getroot():
-					if elem.tag == "screen":
-						name = elem.attrib.get("name", None)
-						if name:
-							sid = elem.attrib.get("id", None)
-							if sid and (sid != DISPLAY_SKIN_ID):
-								# Not for this display
-								elem.clear()
-								continue
-							if name in domScreens:
-								print "[Skin] Warning: Screen '%s' already defined!  Using first definition." % name
-								elem.clear()
-							else:
-								domScreens[name] = (elem, path)
-						else:
-							# Without a name, it's useless!
-							elem.clear()
+				domSkin = xml.etree.cElementTree.parse(file).getroot()
+				if desktop is not None:
+					loadSingleSkinData(desktop, domSkin, filename, scope=scope)
+				for element in domSkin:
+					name = evaluateElement(element, DISPLAY_SKIN_ID)
+					if name is None:
+						element.clear()
 					else:
-						# Non-screen element, no need for it any longer.
-						elem.clear()
+						domScreens[name] = (element, path)
 				file.close()
 			except OSError, e:
 				print "[Skin] Error %d: Opening file '%s'! (%s)" % (e.errno, filename, os.strerror(e.errno))
@@ -917,28 +906,23 @@ def loadSkinData(desktop):
 	skins.reverse()
 	for (scope, pathSkin, domSkin) in skins:
 		loadSingleSkinData(desktop, domSkin, pathSkin, scope=scope)
-		for elem in domSkin:
-			if elem.tag == "screen":
-				name = elem.attrib.get("name", None)
-				if name:
-					sid = elem.attrib.get("id", None)
-					if sid and (sid != DISPLAY_SKIN_ID):
-						# Not for this display.
-						elem.clear()
-						continue
-					if name in domScreens:
-						# Kill old versions, save memory.
-						domScreens[name][0].clear()
-					domScreens[name] = (elem, pathSkin)
-				else:
-					# Without a name, it's useless!
-					elem.clear()
+		for element in domSkin:
+			name = evaluateElement(element, DISPLAY_SKIN_ID)
+			if name is None:
+				element.clear()
 			else:
-				# Non-screen element, no need for it any longer.
-				elem.clear()
+				domScreens[name] = (element, pathSkin)
 	# No longer needed, we know where the screens are now.
 	del domSkins
 
+def evaluateElement(element, screenID):
+	if element.tag == "screen":  # If non-screen element, no need for it any longer.
+		name = element.attrib.get("name", None)
+		if name:  # Without a name, it's useless!
+			sid = element.attrib.get("id", None)
+			if not sid or (sid == screenID):  # If for this display.
+				return name
+	return None
 
 class additionalWidget:
 	def __init__(self):
