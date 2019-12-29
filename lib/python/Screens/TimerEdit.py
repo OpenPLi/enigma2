@@ -17,7 +17,7 @@ from Tools.FallbackTimer import FallbackTimerList
 from time import time
 from timer import TimerEntry as RealTimerEntry
 from ServiceReference import ServiceReference
-from enigma import eServiceReference
+from enigma import eServiceReference, eEPGCache
 
 class TimerEditList(Screen):
 	EMPTY = 0
@@ -164,8 +164,22 @@ class TimerEditList(Screen):
 			else:
 				self["key_info"].setText(_("Info"))
 			text = cur.description
+			event = eEPGCache.getInstance().lookupEventId(cur.service_ref.ref, cur.eit)
+			if event:
+				ext_description = event.getExtendedDescription()
+				short_description = event.getShortDescription()
+				if text != short_description:
+					if text and short_description:
+						text = text + " [Timer]" + "\n" + short_description + " [EPG]"
+					elif short_description:
+						text = short_description
+				if ext_description and ext_description != text:
+					if text:
+						text += "\n" + ext_description
+					else:
+						text = ext_description
 			if not cur.conflict_detection:
-				text += _("\nConflict detection disabled!")
+				text += "\n" + _("\nConflict detection disabled!")
 			self["description"].setText(text)
 			stateRunning = cur.state in (1, 2)
 			if cur.state == 2 and self.key_red_choice != self.STOP:
