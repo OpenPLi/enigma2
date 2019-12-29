@@ -616,14 +616,14 @@ def loadSingleSkinData(desktop, domSkin, pathSkin, scope=SCOPE_CURRENT_SKIN):
 	"""Loads skin data like colors, windowstyle etc."""
 	assert domSkin.tag == "skin", "root element in skin must be 'skin'!"
 	global colorNames, fontNames, fonts, parameters, switchPixmap
-	for c in domSkin.findall("output"):
-		id = c.attrib.get("id")
+	for tag in domSkin.findall("output"):
+		id = tag.attrib.get("id")
 		if id:
 			id = int(id)
 		else:
 			id = GUI_SKIN_ID
 		if id == GUI_SKIN_ID:
-			for res in c.findall("resolution"):
+			for res in tag.findall("resolution"):
 				xres = res.attrib.get("xres")
 				if xres:
 					xres = int(xres)
@@ -704,8 +704,8 @@ def loadSingleSkinData(desktop, domSkin, pathSkin, scope=SCOPE_CURRENT_SKIN):
 					parameters["VirtualKeyBoardAlignment"] = (0, 0)
 					parameters["VirtualKeyBoardPadding"] = (7, 7)
 					parameters["VirtualKeyBoardShiftColors"] = (0x00ffffff, 0x00ffffff, 0x0000ffff, 0x00ff00ff)
-	for skininclude in domSkin.findall("include"):
-		filename = skininclude.attrib.get("filename")
+	for tag in domSkin.findall("include"):
+		filename = tag.attrib.get("filename")
 		if filename:
 			filename = resolveFilename(scope, filename, path_prefix=pathSkin)
 			if fileExists(filename):
@@ -713,8 +713,8 @@ def loadSingleSkinData(desktop, domSkin, pathSkin, scope=SCOPE_CURRENT_SKIN):
 				loadSkin(filename)
 			else:
 				print "[Skin] Error: Included file '%s' not found!" % filename
-	for c in domSkin.findall("switchpixmap"):
-		for pixmap in c.findall("pixmap"):
+	for tag in domSkin.findall("switchpixmap"):
+		for pixmap in tag.findall("pixmap"):
 			name = pixmap.attrib.get("name")
 			if not name:
 				raise SkinError("Pixmap needs name attribute")
@@ -726,8 +726,8 @@ def loadSingleSkinData(desktop, domSkin, pathSkin, scope=SCOPE_CURRENT_SKIN):
 				switchPixmap[name] = LoadPixmap(resolved, cached=True)
 			else:
 				raise SkinError("The switchpixmap pixmap filename='%s' (%s) not found" % (filename, resolved))
-	for c in domSkin.findall("colors"):
-		for color in c.findall("color"):
+	for tag in domSkin.findall("colors"):
+		for color in tag.findall("color"):
 			name = color.attrib.get("name")
 			color = color.attrib.get("value")
 			if name and color:
@@ -735,8 +735,8 @@ def loadSingleSkinData(desktop, domSkin, pathSkin, scope=SCOPE_CURRENT_SKIN):
 				# print "[Skin] Color name='%s', color='%s'." % (name, color)
 			else:
 				raise SkinError("Tag 'color' needs a name and color, got name='%s' and color='%s'" % (name, color))
-	for c in domSkin.findall("fonts"):
-		for font in c.findall("font"):
+	for tag in domSkin.findall("fonts"):
+		for font in tag.findall("font"):
 			filename = font.attrib.get("filename", "<NONAME>")
 			name = font.attrib.get("name", "Regular")
 			scale = font.attrib.get("scale")
@@ -757,7 +757,7 @@ def loadSingleSkinData(desktop, domSkin, pathSkin, scope=SCOPE_CURRENT_SKIN):
 		fallbackFont = resolveFilename(SCOPE_FONTS, "fallback.font", path_prefix=pathSkin)
 		if fileExists(fallbackFont):
 			addFont(fallbackFont, "Fallback", 100, -1, 0)
-		for alias in c.findall("alias"):
+		for alias in tag.findall("alias"):
 			try:
 				name = alias.attrib.get("name")
 				font = alias.attrib.get("font")
@@ -768,18 +768,18 @@ def loadSingleSkinData(desktop, domSkin, pathSkin, scope=SCOPE_CURRENT_SKIN):
 				# print "[Skin] Add font alias: name='%s', font='%s', size=%d, height=%s, width=%d." % (name, font, size, height, width)
 			except Exception, ex:
 				print "[Skin] Error: Bad font alias -", ex
-	for c in domSkin.findall("parameters"):
-		for parameter in c.findall("parameter"):
+	for tag in domSkin.findall("parameters"):
+		for parameter in tag.findall("parameter"):
 			try:
 				name = parameter.attrib.get("name")
 				value = parameter.attrib.get("value")
 				parameters[name] = "," in value and map(parseParameter, value.split(",")) or parseParameter(value)
 			except Exception, ex:
 				print "[Skin] Bad parameter:", ex
-	for c in domSkin.findall("subtitles"):
+	for tag in domSkin.findall("subtitles"):
 		from enigma import eSubtitleWidget
 		scale = ((1, 1), (1, 1))
-		for substyle in c.findall("sub"):
+		for substyle in tag.findall("sub"):
 			font = parseFont(substyle.attrib.get("font"), scale)
 			col = substyle.attrib.get("foregroundColor")
 			if col:
@@ -801,22 +801,22 @@ def loadSingleSkinData(desktop, domSkin, pathSkin, scope=SCOPE_CURRENT_SKIN):
 				borderWidth = int(borderwidth)
 			face = eSubtitleWidget.__dict__[substyle.attrib.get("name")]
 			eSubtitleWidget.setFontStyle(face, font, haveColor, foregroundColor, borderColor, borderWidth)
-	for windowstyle in domSkin.findall("windowstyle"):
+	for tag in domSkin.findall("windowstyle"):
 		style = eWindowStyleSkinned()
-		styleId = windowstyle.attrib.get("id")
+		styleId = tag.attrib.get("id")
 		if styleId:
 			styleId = int(styleId)
 		else:
 			styleId = GUI_SKIN_ID
 		font = gFont("Regular", 20)  # Default
 		offset = eSize(20, 5)  # Default
-		for title in windowstyle.findall("title"):
+		for title in tag.findall("title"):
 			offset = parseSize(title.attrib.get("offset"), ((1, 1), (1, 1)))
 			font = parseFont(title.attrib.get("font"), ((1, 1), (1, 1)))
 		style.setTitleFont(font)
 		style.setTitleOffset(offset)
 		# print "[Skin] WindowStyle font, offset:", font, offset
-		for borderset in windowstyle.findall("borderset"):
+		for borderset in tag.findall("borderset"):
 			bsName = str(borderset.attrib.get("name"))
 			for pixmap in borderset.findall("pixmap"):
 				bpName = pixmap.attrib.get("pos")
@@ -825,7 +825,7 @@ def loadSingleSkinData(desktop, domSkin, pathSkin, scope=SCOPE_CURRENT_SKIN):
 					png = loadPixmap(resolveFilename(scope, filename, path_prefix=pathSkin), desktop)
 					style.setPixmap(eWindowStyleSkinned.__dict__[bsName], eWindowStyleSkinned.__dict__[bpName], png)
 				# print "[Skin] WindowStyle borderset name, filename:", bpName, filename
-		for color in windowstyle.findall("color"):
+		for color in tag.findall("color"):
 			colorType = color.attrib.get("name")
 			color = parseColor(color.attrib.get("color"))
 			try:
@@ -836,23 +836,23 @@ def loadSingleSkinData(desktop, domSkin, pathSkin, scope=SCOPE_CURRENT_SKIN):
 			# print "[Skin] WindowStyle color type, color:", type, color
 		x = eWindowStyleManager.getInstance()
 		x.setStyle(styleId, style)
-	for margin in domSkin.findall("margin"):
-		styleId = margin.attrib.get("id")
+	for tag in domSkin.findall("margin"):
+		styleId = tag.attrib.get("id")
 		if styleId:
 			styleId = int(styleId)
 		else:
 			styleId = GUI_SKIN_ID
 		r = eRect(0, 0, 0, 0)
-		v = margin.attrib.get("left")
+		v = tag.attrib.get("left")
 		if v:
 			r.setLeft(int(v))
-		v = margin.attrib.get("top")
+		v = tag.attrib.get("top")
 		if v:
 			r.setTop(int(v))
-		v = margin.attrib.get("right")
+		v = tag.attrib.get("right")
 		if v:
 			r.setRight(int(v))
-		v = margin.attrib.get("bottom")
+		v = tag.attrib.get("bottom")
 		if v:
 			r.setBottom(int(v))
 		# The "desktop" parameter is hard-coded to the GUI screen, so we must ask
