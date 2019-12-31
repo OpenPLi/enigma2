@@ -15,7 +15,7 @@ from Tools.LoadPixmap import LoadPixmap
 
 DEFAULT_SKIN = SystemInfo["HasFullHDSkinSupport"] and "PLi-FullNightHD/skin.xml" or "PLi-HD/skin.xml"  # On SD hardware PLi-HD will not be available.
 DEFAULT_SD_SKIN = "Magic/skin.xml"
-EMERGENCY_SKIN = "/usr/share/enigma2/skin.xml"
+EMERGENCY_SKIN = "skin_default.xml"
 DEFAULT_DISPLAY_SKIN = "skin_display.xml"
 USER_SKIN = "skin_user.xml"
 USER_SKIN_TEMPLATE = "skin_user_%s.xml"
@@ -154,7 +154,6 @@ addSkin(SUBTITLE_SKIN, scope=SCOPE_CURRENT_SKIN)
 # to enable basic GUI functions to work.
 if config.skin.primary_skin.value != EMERGENCY_SKIN:
 	addSkin(EMERGENCY_SKIN, scope=SCOPE_CURRENT_SKIN)
-	addSkin("skin_default.xml", scope=SCOPE_CURRENT_SKIN)
 
 # Remove global working variables.
 del skin
