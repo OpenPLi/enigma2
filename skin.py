@@ -1232,6 +1232,47 @@ def readSkin(screen, skin, names, desktop):
 	screen = None
 	usedComponents = None
 
+def addSkinFont(filename, name, size=20, height=25, width=18, scale=100, isReplacement=False, render=0):
+	filename = resolveFilename(SCOPE_FONTS, filename)
+	if fileExists(filename):
+		if name and name not in (fontNames):
+			if isinstance(size, int):
+				size = int(size)
+			else:
+				print "[Skin] Error: Font size '%s' is not an integer!" % size
+				size = 20
+			if isinstance(height, int):
+				height = int(height)
+			else:
+				print "[Skin] Error: Font height '%s' is not an integer!" % height
+				height = 25
+			if isinstance(width, int):
+				width = int(width)
+			else:
+				print "[Skin] Error: Font width '%s' is not an integer!" % width
+				width = 18
+			if isinstance(scale, int):
+				scale = int(scale)
+			else:
+				print "[Skin] Error: Font scale '%s' is not an integer!" % scale
+				scale = 100
+			isReplacement = isReplacement and True or False
+			if isinstance(render, int):
+				render = int(render)
+			else:
+				print "[Skin] Error: Font render '%s' is not an integer!" % render
+				render = 0
+			addFont(filename, name, scale, isReplacement, render)
+			fontNames.append(name)
+			fonts[name] = (name, size, height, width)
+			print "[Skin] Font '%s' added to skin as '%s'.  (size=%d, height=%d, width=%d, scale=%d, isReplacement=%s, render=%d)" % (filename, name, size, height, width, scale, isReplacement, render)
+		elif name:
+			print "[Skin] Error: Font name '%s' is already defined!" % name
+		else:
+			print "[Skin] Error: Font file '%s' must be given a name!" % filename
+	else:
+		print "[Skin] Error: Font file '%s' named '%s' can not be found!" % (filename, name)
+
 def dump(x, i=0):
 	print " " * i + str(x)
 	try:
