@@ -4,7 +4,7 @@ import os
 import xml.etree.cElementTree
 
 profile("LOAD:enigma_skin")
-from enigma import addFont, eLabel, ePixmap, ePoint, eRect, eSize, eWindow, eWindowStyleManager, eWindowStyleSkinned, getDesktop, gFont, gRGB
+from enigma import addFont, eLabel, ePixmap, ePoint, eRect, eSize, eWindow, eWindowStyleManager, eWindowStyleSkinned, getDesktop, getFontFaces, gFont, gRGB
 from Components.config import ConfigSubsection, ConfigText, config
 from Components.RcModel import rc_model
 from Components.Sources.Source import ObsoleteSource
@@ -267,7 +267,7 @@ def parseFont(s, scale=((1, 1), (1, 1))):
 		name = f[0]
 		size = f[1] if size is None else size
 	except KeyError:
-		if name not in fontNames:
+		if name not in getFontFaces():
 			f = fonts["Body"]
 			print "[Skin] Error: Font '%s' (in '%s') is not defined!  Using 'Body' font ('%s') instead." % (name, s, f[0])
 			name = f[0]
