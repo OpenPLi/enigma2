@@ -83,28 +83,23 @@ def findUserRelatedSkin():
 def addSkin(name, scope=SCOPE_CURRENT_SKIN):
 	global domSkins
 	filename = resolveFilename(scope, name)
-	if fileExists(filename):
-		try:
-			# This open gets around a possible file handle leak in Python's XML parser.
-			with open(filename, "r") as fd:
-				try:
-					domSkins.append((scope, "%s/" % os.path.dirname(filename), xml.etree.cElementTree.parse(fd).getroot()))
-					print "[Skin] Skin '%s' added successfully." % filename
-					return True
-				except xml.etree.cElementTree.ParseError as e:
-					fd.seek(0)
-					content = fd.readlines()
-					line, column = e.position
-					print "[Skin] XML Parse Error: '%s' in '%s'!" % (e, filename)
-					data = content[line - 1].replace("\t", " ").rstrip()
-					print "[Skin] XML Parse Error: '%s'" % data
-					print "[Skin] XML Parse Error: '%s^%s'" % ("-" * column, " " * (len(data) - column - 1))
-				except Exception:
-					print "[Skin] Error: Unable to parse skin data in '%s'!" % filename
-		except OSError, e:
-			print "[Skin] Error %d: Opening file '%s'! (%s)" % (e.errno, filename, os.strerror(e.errno))
-	else:
-		print "[Skin] Warning: Skin '%s' does not exist!" % filename
+	try:
+		# This open gets around a possible file handle leak in Python's XML parser.
+		with open(filename, "r") as fd:
+			try:
+				domSkins.append((scope, "%s/" % os.path.dirname(filename), xml.etree.cElementTree.parse(fd).getroot()))
+				print "[Skin] Skin '%s' added successfully." % filename
+				return True
+			except xml.etree.cElementTree.ParseError as e:
+				fd.seek(0)
+				content = fd.readlines()
+				line, column = e.position
+				print "[Skin] XML Parse Error: '%s' in '%s'!" % (e, filename)
+				data = content[line - 1].replace("\t", " ").rstrip()
+				print "[Skin] XML Parse Error: '%s'" % data
+				print "[Skin] XML Parse Error: '%s^%s'" % ("-" * column, " " * (len(data) - column - 1))
+	except Exception, e:
+		print "[Skin] Error in '%s': %s" % (filename, e)
 	return False
 
 
