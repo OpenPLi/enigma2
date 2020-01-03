@@ -170,16 +170,16 @@ class TimerEditList(Screen):
 				short_description = event.getShortDescription()
 				if text != short_description:
 					if text and short_description:
-						text = text + " [Timer]" + "\n" + short_description + " [EPG]"
+						text = _("Timer:") + " " + text + "\n\n" + _("EPG:") + " " + short_description
 					elif short_description:
 						text = short_description
 				if ext_description and ext_description != text:
 					if text:
-						text += "\n" + ext_description
+						text += "\n\n" + ext_description
 					else:
 						text = ext_description
 			if not cur.conflict_detection:
-				text += "\n" + _("\nConflict detection disabled!")
+				text = _("\nConflict detection disabled!") + "\n\n" + text
 			self["description"].setText(text)
 			stateRunning = cur.state in (1, 2)
 			if cur.state == 2 and self.key_red_choice != self.STOP:
