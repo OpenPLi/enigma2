@@ -98,13 +98,15 @@ def addSkin(name, scope=SCOPE_CURRENT_SKIN):
 				data = content[line - 1].replace("\t", " ").rstrip()
 				print "[Skin] XML Parse Error: '%s'" % data
 				print "[Skin] XML Parse Error: '%s^%s'" % ("-" * column, " " * (len(data) - column - 1))
-			except Exception:
-				print "[Skin] Error: Unable to parse skin data in '%s'!" % filename
-	except IOError, e:
+			except Exception as e:
+				print "[Skin] Error: Unable to parse skin data in '%s' - '%s'!" % (filename, e)
+	except IOError as e:
 		if e.errno == errno.ENOENT:  #  No such file or directory
 			print "[Skin] Warning: Skin '%s' does not exist!" % filename
 		else:
 			print "[Skin] Error %d: Opening file '%s'! (%s)" % (e.errno, filename, os.strerror(e.errno))
+	except Exception as e:
+		print "[Skin] Error: Unexpected error opening file '%s'! (%s)" % (filename, e)
 	return False
 
 
@@ -617,20 +619,11 @@ def loadSingleSkinData(desktop, domSkin, pathSkin, scope=SCOPE_CURRENT_SKIN):
 		if id == GUI_SKIN_ID:
 			for res in tag.findall("resolution"):
 				xres = res.attrib.get("xres")
-				if xres:
-					xres = int(xres)
-				else:
-					xres = 720
+				xres = int(xres) if xres else 720
 				yres = res.attrib.get("yres")
-				if yres:
-					yres = int(yres)
-				else:
-					yres = 576
+				yres = int(yres) if yres else 576
 				bpp = res.attrib.get("bpp")
-				if bpp:
-					bpp = int(bpp)
-				else:
-					bpp = 32
+				bpp = int(bpp) if bpp else 32
 				# print "[Skin] Resolution xres=%d, yres=%d, bpp=%d." % (xres, yres, bpp)
 				from enigma import gMainDC
 				gMainDC.getInstance().setResolution(xres, yres)
@@ -876,13 +869,15 @@ def loadSkin(filename, desktop=None, scope=SCOPE_SKIN):
 				data = content[line - 1].replace("\t", " ").rstrip()
 				print "[Skin] XML Parse Error: '%s'" % data
 				print "[Skin] XML Parse Error: '%s^%s'" % ("-" * column, " " * (len(data) - column - 1))
-			except Exception:
-				print "[Skin] Error: Unable to parse skin data in '%s'!" % filename
-	except IOError, e:
+			except Exception as e:
+				print "[Skin] Error: Unable to parse skin data in '%s' - '%s'!" % (filename, e)
+	except IOError as e:
 		if e.errno == errno.ENOENT:  #  No such file or directory
 			print "[Skin] Warning: Skin '%s' does not exist!" % filename
 		else:
 			print "[Skin] Error %d: Opening file '%s'! (%s)" % (e.errno, filename, os.strerror(e.errno))
+	except Exception as e:
+		print "[Skin] Error: Unexpected error opening file '%s'! (%s)" % (filename, e)
 
 # Kinda hackish, but this is called once by mytest.py.
 #
