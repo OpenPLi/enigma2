@@ -78,7 +78,6 @@ def findUserRelatedSkin():
 		name = USER_SKIN_TEMPLATE % os.path.dirname(config.skin.primary_skin.value)
 		if fileExists(resolveFilename(SCOPE_CURRENT_SKIN, name)):
 			return name
-	return None
 
 def addSkin(name, scope=SCOPE_CURRENT_SKIN):
 	global domSkins
@@ -903,7 +902,6 @@ def evaluateElement(element, screenID):
 			sid = element.attrib.get("id", None)
 			if not sid or (sid == screenID):  # If for this display.
 				return name
-	return None
 
 class additionalWidget:
 	def __init__(self):
@@ -1238,7 +1236,6 @@ def findSkinScreen(names):
 		screen, path = domScreens.get(name, (None, None))
 		if screen is not None:
 			return name
-	return None
 
 def dump(x, i=0):
 	print " " * i + str(x)
