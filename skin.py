@@ -102,11 +102,11 @@ def addSkin(name, scope=SCOPE_CURRENT_SKIN):
 				print "[Skin] Error: Unable to parse skin data in '%s' - '%s'!" % (filename, e)
 	except IOError as e:
 		if e.errno == errno.ENOENT:  #  No such file or directory
-			print "[Skin] Warning: Skin '%s' does not exist!" % filename
+			print "[Skin] Warning: Skin file '%s' does not exist!" % filename
 		else:
-			print "[Skin] Error %d: Opening file '%s'! (%s)" % (e.errno, filename, os.strerror(e.errno))
+			print "[Skin] Error %d: Opening skin file '%s'! (%s)" % (e.errno, filename, os.strerror(e.errno))
 	except Exception as e:
-		print "[Skin] Error: Unexpected error opening file '%s'! (%s)" % (filename, e)
+		print "[Skin] Error: Unexpected error opening skin file '%s'! (%s)" % (filename, e)
 	return False
 
 
@@ -873,11 +873,11 @@ def loadSkin(filename, desktop=None, scope=SCOPE_SKIN):
 				print "[Skin] Error: Unable to parse skin data in '%s' - '%s'!" % (filename, e)
 	except IOError as e:
 		if e.errno == errno.ENOENT:  #  No such file or directory
-			print "[Skin] Warning: Skin '%s' does not exist!" % filename
+			print "[Skin] Warning: Skin file '%s' does not exist!" % filename
 		else:
-			print "[Skin] Error %d: Opening file '%s'! (%s)" % (e.errno, filename, os.strerror(e.errno))
+			print "[Skin] Error %d: Opening skin file '%s'! (%s)" % (e.errno, filename, os.strerror(e.errno))
 	except Exception as e:
-		print "[Skin] Error: Unexpected error opening file '%s'! (%s)" % (filename, e)
+		print "[Skin] Error: Unexpected error opening skin file '%s'! (%s)" % (filename, e)
 
 # Kinda hackish, but this is called once by mytest.py.
 #
@@ -1224,6 +1224,21 @@ def readSkin(screen, skin, names, desktop):
 	# things around.
 	screen = None
 	usedComponents = None
+
+# Search the domScreens dictionary to see if any of the screen names provided
+# have a skin based screen.  This will allow coders to know if the named
+# screen will be skinned by the skin code.  A return of None implies that the
+# code must provide its own skin for the screen to be displayed to the user.
+#
+def findSkinScreen(names):
+	if not isinstance(names, list):
+		names = [names]
+	# Try all names given, the first one found is the one that will be used by the skin engine.
+	for name in names:
+		screen, path = domScreens.get(name, (None, None))
+		if screen is not None:
+			return name
+	return None
 
 def dump(x, i=0):
 	print " " * i + str(x)
