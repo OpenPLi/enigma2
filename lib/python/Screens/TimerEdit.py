@@ -10,10 +10,12 @@ from Screen import Screen
 from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
 from Screens.InputBox import PinInput
+from Screens.ServiceInfo import ServiceInfo
 from ServiceReference import ServiceReference
 from TimerEntry import TimerEntry, TimerLog
 from Tools.BoundFunction import boundFunction
 from Tools.FallbackTimer import FallbackTimerList
+from Tools.Alternatives import GetWithAlternative
 from time import time
 from timer import TimerEntry as RealTimerEntry
 from ServiceReference import ServiceReference
@@ -47,7 +49,7 @@ class TimerEditList(Screen):
 
 		self["description"] = Label("")
 
-		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ShortcutActions", "TimerEditActions"],
+		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ShortcutActions", "TimerEditActions", "MenuActions"],
 			{
 				"ok": self.openEdit,
 				"cancel": self.leave,
@@ -56,7 +58,8 @@ class TimerEditList(Screen):
 				"left": self.left,
 				"right": self.right,
 				"up": self.up,
-				"down": self.down
+				"down": self.down,
+				"menu": self.showServiceInfo
 			}, -1)
 		self.setTitle(_("Timer overview"))
 
@@ -256,6 +259,13 @@ class TimerEditList(Screen):
 			self.list.sort(key = lambda x: x[0].begin)
 		self["timerlist"].l.setList(self.list)
 		self.updateState()
+
+	def showServiceInfo(self):
+		cur = self["timerlist"].getCurrent()
+		if cur and not cur.external and cur.service_ref:
+			serviceref = cur.service_ref.ref and eServiceReference(GetWithAlternative(cur.service_ref.ref.toString()))
+			if serviceref:
+				self.session.open(ServiceInfo, serviceref)
 
 	def showLog(self):
 		cur = self["timerlist"].getCurrent()
