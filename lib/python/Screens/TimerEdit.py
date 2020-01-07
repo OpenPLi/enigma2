@@ -173,6 +173,7 @@ class TimerEditList(Screen):
 						text = _("Timer:") + " " + text + "\n\n" + _("EPG:") + " " + short_description
 					elif short_description:
 						text = short_description
+						cur.description = short_description
 				if ext_description and ext_description != text:
 					if text:
 						text += "\n\n" + ext_description
