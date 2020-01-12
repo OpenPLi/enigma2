@@ -385,10 +385,10 @@ class AttributeParser:
 		else:
 			self.guiObject.resize(parseSize(value, self.scaleTuple, self.guiObject, self.desktop))
 
-# OpenPLi is missing the C++ code to support these animation methods.
-#
-# 	def animationPaused(self, value):
-# 		pass
+	def animationPaused(self, value):
+		pass
+
+# OpenPLi is missing the C++ code to support this animation method.
 #
 # 	def animationMode(self, value):
 # 		try:
