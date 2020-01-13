@@ -401,6 +401,8 @@ class EPGSelection(Screen):
 			self.session.openWithCallback(timerAction, ChoiceBox, title=title_text + _("Select action for timer '%s'.") % timer.name, list=menu, keys=buttons)
 		else:
 			newEntry = RecordTimerEntry(serviceref, checkOldTimers = True, dirname = preferredTimerPath(), *parseEvent(event))
+			newEntry.justplay = config.recording.timer_default_type.value == "zap"
+			newEntry.always_zap = config.recording.timer_default_type.value == "zap+record"
 			self.session.openWithCallback(self.finishedAdd, TimerEntry, newEntry)
 
 	def finishedEdit(self, answer):
