@@ -99,8 +99,15 @@ while : ; do
 			done < /tmp/upgrade_mountpoints.txt
 			# bind the console (when available)
 			[ -f /sys/class/vtconsole/vtcon1/bind ] && echo 1 > /sys/class/vtconsole/vtcon1/bind
+			prevupd=0
+			currupd=999
 			opkg update 2>&1 | tee /home/root/ipkgupgrade.log
-			opkg upgrade $DESTS 2>&1 | tee -a /home/root/ipkgupgrade.log
+			while [ $currupd -gt 0 -a $currupd -ne $prevupd ]; do
+				echo "===> INSTALLING $currupd PACKAGES" >> /home/root/ipkupgrade.log
+				opkg upgrade $DESTS 2>&1 | tee -a /home/root/ipkgupgrade.log
+				prevupd=$currupd
+				currupd=`opkg list-upgradable | wc -l`
+			done
 			/sbin/reboot
 			;;
 		43)
