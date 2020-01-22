@@ -4,7 +4,7 @@ from Components.Sources.CanvasSource import CanvasSource
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Console import Console
 from Components.SystemInfo import SystemInfo
-from Tools.Directories import fileExists
+from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 from enigma import gFont, getDesktop, gMainDC, eSize, RT_HALIGN_RIGHT, RT_WRAP
 
 def RGB(r,g,b):
@@ -82,7 +82,7 @@ class FullUHDTestScreen(OverscanTestScreen):
 		Screen.__init__(self, session)
 		self.oldref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 		self.session.nav.stopService()
-		Console().ePopen("/usr/bin/showiframe /usr/lib/enigma2/python/Plugins/SystemPlugins/VideoTune/testbeeld-4k.mvi")
+		Console().ePopen("/usr/bin/showiframe %s") % resolveFilename(SCOPE_PLUGINS, "SystemPlugins/VideoTune/testbeeld-4k.mvi")
 		self.hide()
 		self.onClose.append(self.__close)
 
