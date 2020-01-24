@@ -1,5 +1,6 @@
 from Screens.MessageBox import MessageBox
 from Screens.ParentalControlSetup import ProtectedScreen
+from Screens.Standby import TryQuitMainloop, QUIT_MANUFACTURER_RESET
 from Components.config import config
 
 class FactoryReset(MessageBox, ProtectedScreen):
@@ -16,3 +17,10 @@ class FactoryReset(MessageBox, ProtectedScreen):
 		return config.ParentalControl.setuppinactive.value and\
 			(not config.ParentalControl.config_sections.main_menu.value and not config.ParentalControl.config_sections.configuration.value  or hasattr(self.session, 'infobar') and self.session.infobar is None) and\
 			config.ParentalControl.config_sections.manufacturer_reset.value
+
+	def close(self, value):
+		if value:
+			open('/etc/.doNotAutoinstall', 'w')
+			self.session.open(TryQuitMainloop, QUIT_MANUFACTURER_RESET)
+		else:
+			MessageBox.close(self, False)

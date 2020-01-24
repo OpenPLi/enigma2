@@ -58,6 +58,7 @@ while : ; do
 	#  4 - front processor upgrade
 	#  5 - install new settings
 	#  6 - restart enigma in debug mode
+	#  7 - manufacturer reset
 	# 42 - offline update
 	# 43 - restart for autoinstall
 	#
@@ -89,6 +90,9 @@ while : ; do
 			;;
 		6)
 			DEBUG_LVL=4
+			;;
+		7)
+			rm -R /etc/enigma2
 			;;
 		42)
 			df -P | grep -v "tmpfs " | awk '{print $6}' | tail -n +3 > /tmp/upgrade_mountpoints.txt
