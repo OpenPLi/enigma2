@@ -259,7 +259,7 @@ class TryQuitMainloop(MessageBox):
 				QUIT_UPGRADE_FP: _("Really update the frontprocessor and reboot now?"),
 				QUIT_DEBUG_RESTART: _("Really restart in debug mode now?"),
 				QUIT_UPGRADE_PROGRAM: _("Really update your settop box and reboot now?"),
-				QUIT_MANUFACTURER_RESET: _("Really perform a manufactuerer resetFactory reset now?")
+				QUIT_MANUFACTURER_RESET: _("Really perform a manufacturer reset now?")
 			}.get(retvalue, None)
 			if text:
 				MessageBox.__init__(self, session, "%s\n%s" % (reason, text), type=MessageBox.TYPE_YESNO, timeout=timeout, default=default_yes)
