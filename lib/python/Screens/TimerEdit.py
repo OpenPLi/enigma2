@@ -164,7 +164,7 @@ class TimerEditList(Screen):
 			else:
 				self["key_info"].setText(_("Info"))
 			text = cur.description
-			event = eEPGCache.getInstance().lookupEventId(cur.service_ref.ref, cur.eit)
+			event = eEPGCache.getInstance().lookupEventId(cur.service_ref.ref, cur.eit) if cur.eit is not None else None
 			if event:
 				ext_description = event.getExtendedDescription()
 				short_description = event.getShortDescription()
