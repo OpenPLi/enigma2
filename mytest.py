@@ -1,8 +1,5 @@
 import sys
 import os
-if os.path.isfile("/usr/lib/enigma2/python/enigma.zip"):
-	sys.path.append("/usr/lib/enigma2/python/enigma.zip")
-
 from Tools.Profile import profile, profile_final
 profile("PYTHON_START")
 
