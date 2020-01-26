@@ -37,6 +37,7 @@ SCOPE_AUTORECORD = 22
 SCOPE_DEFAULTDIR = 23
 SCOPE_DEFAULTPARTITION = 24
 SCOPE_DEFAULTPARTITIONMOUNTDIR = 25
+SCOPE_LIBDIR = 26
 
 PATH_CREATE = 0
 PATH_DONTCREATE = 1
@@ -52,6 +53,7 @@ defaultPaths = {
 	SCOPE_LANGUAGE: (eEnv.resolve("${datadir}/enigma2/po/"), PATH_DONTCREATE),
 	SCOPE_HDD: ("/media/hdd/movie/", PATH_DONTCREATE),
 	SCOPE_PLUGINS: (eEnv.resolve("${libdir}/enigma2/python/Plugins/"), PATH_CREATE),
+	SCOPE_LIBDIR: (eEnv.resolve("${libdir}/"), PATH_DONTCREATE),
 	SCOPE_MEDIA: ("/media/", PATH_DONTCREATE),
 	SCOPE_PLAYLIST: (eEnv.resolve("${sysconfdir}/enigma2/playlist/"), PATH_CREATE),
 	SCOPE_CURRENT_SKIN: (eEnv.resolve("${datadir}/enigma2/"), PATH_DONTCREATE),
