@@ -40,7 +40,7 @@ self.selectKey("OK")
 		</step>
 		<step id="networkfailed" >
 			<condition>
-self.condition = not config.misc.installwizard.ipkgloaded.value
+self.condition = not config.misc.installwizard.opkgloaded.value
 			</condition>
 			<text value="Your receiver does not have an internet connection"/>
 			<list>
@@ -222,7 +222,7 @@ self.selectKey("RIGHT")
 		<step id="channels">
 			<condition>
 from Components.NimManager import nimmanager
-self.condition = nimmanager.somethingConnected() and config.misc.installwizard.hasnetwork.value and config.misc.installwizard.ipkgloaded.value
+self.condition = nimmanager.somethingConnected() and config.misc.installwizard.hasnetwork.value and config.misc.installwizard.opkgloaded.value
 			</condition>
 			<text value="Do you want to install a channel list?"/>
 			<config screen="InstallWizard" module="InstallWizard" args="1" type="ConfigList"/>
@@ -235,7 +235,7 @@ self.selectKey("RIGHT")
 		<step id="fallbacktuner">
 			<condition>
 from Components.NimManager import nimmanager
-self.condition = not nimmanager.somethingConnected() and config.misc.installwizard.hasnetwork.value and config.misc.installwizard.ipkgloaded.value
+self.condition = not nimmanager.somethingConnected() and config.misc.installwizard.hasnetwork.value and config.misc.installwizard.opkgloaded.value
 			</condition>
 			<text value="Please configure the fallback tuner setup?"/>
 			<config screen="SetupFallbacktuner" module="SetupFallbacktuner" type="ConfigList"/>
@@ -259,7 +259,7 @@ self.selectKey("OK")
 		</step>
 		<step id="plugins">
 			<condition>
-self.condition = config.misc.installwizard.hasnetwork.value and config.misc.installwizard.ipkgloaded.value
+self.condition = config.misc.installwizard.hasnetwork.value and config.misc.installwizard.opkgloaded.value
 			</condition>
 			<text value="Do you want to install Plugins?"/>
 			<config screen="InstallWizard" module="InstallWizard" args="2" type="ConfigList"/>
