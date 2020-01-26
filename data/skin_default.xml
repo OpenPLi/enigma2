@@ -497,8 +497,8 @@ self.autoResize()
 		<widget name="text" position="10,20" size="550,25" font="Regular;23"/>
 		<widget name="input" position="10,55" size="550,25" font="Regular;20"/>
 	</screen>
-	<!-- IPKG -->
-	<screen name="Ipkg" position="center,center" size="550,200" title="Installing software...">
+	<!-- OPKG -->
+	<screen name="Opkg" position="center,center" size="550,200" title="Installing software...">
 		<widget name="activityslider" position="0,0" size="550,5" pixmap="progress_small.png"/>
 		<widget name="package" position="10,30" size="550,20" font="Regular;18"/>
 		<widget name="status" position="10,60" size="550,45" font="Regular;18"/>
@@ -539,7 +539,7 @@ self.autoResize()
 			</widget>
 		</panel>
 	</screen>
-	<screen name="InstallWizardIpkgUpdater" position="fill" flags="wfNoBorder">
+	<screen name="InstallWizardOpkgUpdater" position="fill" flags="wfNoBorder">
 		<panel name="WizardMarginsTemplate"/>
 		<panel position="top" size="*,100"/>
 		<panel name="RemoteControlTemplate"/>
