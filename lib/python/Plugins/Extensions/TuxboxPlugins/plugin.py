@@ -1,12 +1,12 @@
 # must be fixed for the new plugin interface
 from Tools.BoundFunction import boundFunction
-from Tools.Directories import pathExists
+from Tools.Directories import pathExists, resolveFilename, SCOPE_LIBDIR
 from Plugins.Plugin import PluginDescriptor
 from pluginrunner import PluginRunner
 
 from os import listdir
 
-TUXBOX_PLUGINS_PATH = "/usr/lib/tuxbox/plugins/"
+TUXBOX_PLUGINS_PATH = resolveFilename(SCOPE_LIBDIR, "tuxbox/plugins/")
 
 def getPlugins():
 	pluginlist = []
