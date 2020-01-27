@@ -1,5 +1,5 @@
 from enigma import eDVBResourceManager, Misc_Options, eDVBCIInterfaces, eGetEnigmaDebugLvl
-from Tools.Directories import fileExists, fileCheck, pathExists, fileHas
+from Tools.Directories import fileExists, fileCheck, pathExists, fileHas, resolveFilename, SCOPE_PLUGINS
 from Tools.HardwareInfo import HardwareInfo
 
 import os, re
@@ -88,7 +88,7 @@ SystemInfo["Has2160p"] = fileHas("/proc/stb/video/videomode_preferred", "2160p50
 SystemInfo["HasHDMIpreemphasis"] = fileCheck("/proc/stb/hdmi/preemphasis")
 SystemInfo["HasColorimetry"] = fileCheck("/proc/stb/video/hdmi_colorimetry")
 SystemInfo["HasHdrType"] = fileCheck("/proc/stb/video/hdmi_hdrtype")
-SystemInfo["HasHDMI-CEC"] = HardwareInfo().has_hdmi() and fileExists("/usr/lib/enigma2/python/Plugins/SystemPlugins/HdmiCEC/plugin.pyo") and (fileExists("/dev/cec0") or fileExists("/dev/hdmi_cec") or fileExists("/dev/misc/hdmi_cec0"))
+SystemInfo["HasHDMI-CEC"] = HardwareInfo().has_hdmi() and fileExists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/HdmiCEC/plugin.pyo")) and (fileExists("/dev/cec0") or fileExists("/dev/hdmi_cec") or fileExists("/dev/misc/hdmi_cec0"))
 SystemInfo["HasYPbPr"] = model in ("dm8000", "et5000", "et6000", "et6500", "et9000", "et9200", "et9500", "et10000", "formuler1", "mbtwinplus", "spycat", "vusolo", "vuduo", "vuduo2", "vuultimo")
 SystemInfo["HasScart"] = model in ("dm800", "dm800se", "dm800sev2", "dm8000", "et4000", "et6500", "et8000", "et9000", "et9200", "et9500", "et10000", "formuler1", "hd1100", "hd1200", "hd1265", "hd2400", "vusolo", "vusolo2", "vuduo", "vuduo2", "vuultimo", "vuuno", "xp1000")
 SystemInfo["HasSVideo"] = model in ("dm8000")
@@ -102,7 +102,7 @@ SystemInfo["Has3DSurroundSoftLimiter"] = fileExists("/proc/stb/audio/3dsurround_
 SystemInfo["hasXcoreVFD"] = model in ('osmega','spycat4k','spycat4kmini','spycat4kcombo') and fileCheck("/sys/module/brcmstb_%s/parameters/pt6302_cgram" % model)
 SystemInfo["HasOfflineDecoding"] = model not in ('osmini', 'osminiplus', 'et7000mini', 'et11000', 'mbmicro', 'mbtwinplus', 'mbmicrov2', 'et7000', 'et8500')
 SystemInfo["HasRootSubdir"] = "rootsubdir" in cmdline
-SystemInfo["canMultiBoot"] = SystemInfo["HasRootSubdir"] and (1, 4, "mmcblk0", False) or "%s_4.boxmode" % model in cmdline and (1, 4, "mmcblk0", False) or model in ('gbue4k', 'gbquad4k') and (3, 3, "mmcblk0", True) or model in ('e4hd') and (1, 4, "mmcblk0", False) or model in ('osmio4k', 'osmio4kplus') and (1, 4, "mmcblk1", True)
+SystemInfo["canMultiBoot"] = SystemInfo["HasRootSubdir"] and (1, 4, "mmcblk0", False) or "%s_4.boxmode" % model in cmdline and (1, 4, "mmcblk0", False) or model in ('gbue4k', 'gbquad4k') and (3, 3, "mmcblk0", True) or model in ('e4hd') and (1, 4, "mmcblk0", False) or model in ('osmio4k', 'osmio4kplus', 'osmini4k') and (1, 4, "mmcblk1", True)
 SystemInfo["canMode12"] = "%s_4.boxmode" % model in cmdline and cmdline["%s_4.boxmode" % model] in ("1","12") and "192M"
 SystemInfo["canFlashWithOfgwrite"] = not(model.startswith("dm"))
 SystemInfo["HDRSupport"] = fileExists("/proc/stb/hdmi/hlg_support_choices") and fileCheck("/proc/stb/hdmi/hlg_support")

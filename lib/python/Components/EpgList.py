@@ -238,7 +238,7 @@ class EPGList(GUIComponent):
 		res = [
 			None, # no private data needed
 			(eListboxPythonMultiContent.TYPE_TEXT, r1.x, r1.y, r1.w, r1.h, 0, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, self.days[t[6]]),
-			(eListboxPythonMultiContent.TYPE_TEXT, r2.x, r2.y, r2.w, r1.h, 0, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, "%2d.%02d, %02d:%02d"%(t[2],t[1],t[3],t[4]))
+			(eListboxPythonMultiContent.TYPE_TEXT, r2.x, r2.y, r2.w, r1.h, 0, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, "%02d.%02d, %02d:%02d"%(t[2],t[1],t[3],t[4]))
 		]
 		if clock_types:
 			for i in range(len(clock_types)):

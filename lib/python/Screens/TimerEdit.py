@@ -17,7 +17,7 @@ from Tools.FallbackTimer import FallbackTimerList
 from time import time
 from timer import TimerEntry as RealTimerEntry
 from ServiceReference import ServiceReference
-from enigma import eServiceReference
+from enigma import eServiceReference, eEPGCache
 
 class TimerEditList(Screen):
 	EMPTY = 0
@@ -164,8 +164,23 @@ class TimerEditList(Screen):
 			else:
 				self["key_info"].setText(_("Info"))
 			text = cur.description
+			event = eEPGCache.getInstance().lookupEventId(cur.service_ref.ref, cur.eit)
+			if event:
+				ext_description = event.getExtendedDescription()
+				short_description = event.getShortDescription()
+				if text != short_description:
+					if text and short_description:
+						text = _("Timer:") + " " + text + "\n\n" + _("EPG:") + " " + short_description
+					elif short_description:
+						text = short_description
+						cur.description = short_description
+				if ext_description and ext_description != text:
+					if text:
+						text += "\n\n" + ext_description
+					else:
+						text = ext_description
 			if not cur.conflict_detection:
-				text += _("\nConflict detection disabled!")
+				text = _("\nConflict detection disabled!") + "\n\n" + text
 			self["description"].setText(text)
 			stateRunning = cur.state in (1, 2)
 			if cur.state == 2 and self.key_red_choice != self.STOP:
@@ -310,8 +325,10 @@ class TimerEditList(Screen):
 			data = (int(time()), int(time() + 60), "", "", None)
 		else:
 			data = parseEvent(event, description = False)
-
-		self.addTimer(RecordTimerEntry(serviceref, checkOldTimers = True, dirname = preferredTimerPath(), *data))
+		timer = RecordTimerEntry(serviceref, checkOldTimers = True, dirname = preferredTimerPath(), *data)
+		timer.justplay = config.recording.timer_default_type.value == "zap"
+		timer.always_zap = config.recording.timer_default_type.value == "zap+record"
+		self.addTimer(timer)
 
 	def addTimer(self, timer):
 		self.session.openWithCallback(self.finishedAdd, TimerEntry, timer)

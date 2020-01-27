@@ -1,4 +1,4 @@
-from enigma import eServiceCenter, eServiceReference, pNavigation, getBestPlayableServiceReference, iPlayableService, setPreferredTuner, eStreamServer
+from enigma import eServiceCenter, eServiceReference, pNavigation, getBestPlayableServiceReference, iPlayableService, setPreferredTuner, eStreamServer, iRecordableServicePtr
 from Components.ImportChannels import ImportChannels
 from Components.ParentalControl import parentalControl
 from Components.SystemInfo import SystemInfo
@@ -178,7 +178,9 @@ class Navigation:
 		return service
 
 	def stopRecordService(self, service):
-		ret = self.pnav and self.pnav.stopRecordService(service)
+		ret = -1
+		if service and isinstance(service, iRecordableServicePtr):
+			ret = self.pnav and self.pnav.stopRecordService(service)
 		return ret
 
 	def getRecordings(self, simulate=False):
