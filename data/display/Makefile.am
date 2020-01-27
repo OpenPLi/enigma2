@@ -1,4 +1,4 @@
-installdir = $(pkgdatadir)/display
+installdir = $(pkgdatadir)/display/skin_default
 
 if HAVE_TEXTLCD
 DISPLAYTYPE = text
