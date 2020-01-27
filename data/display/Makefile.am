@@ -1,4 +1,4 @@
-SUBDIRS = $(pkgdatadir)/display/skin_default
+SUBDIRS = skin_default
 
 if HAVE_TEXTLCD
 DISPLAYTYPE = text
