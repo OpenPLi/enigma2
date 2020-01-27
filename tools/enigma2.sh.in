@@ -68,6 +68,10 @@ while : ; do
 		1)
 			/sbin/halt
 			;;
+		16)
+			echo "rescue" > /proc/stb/fp/boot_mode
+			/sbin/reboot
+			;;
 		2)
 			/sbin/reboot
 			;;
@@ -89,10 +93,6 @@ while : ; do
 			;;
 		6)
 			DEBUG_LVL=4
-			;;
-		16)
-			echo "rescue" > /proc/stb/fp/boot_mode
-			/sbin/reboot
 			;;
 		42)
 			df -P | grep -v "tmpfs " | awk '{print $6}' | tail -n +3 > /tmp/upgrade_mountpoints.txt

@@ -23,9 +23,10 @@ QUIT_RESTART = 3
 QUIT_UPGRADE_FP = 4
 QUIT_ERROR_RESTART = 5
 QUIT_DEBUG_RESTART = 6
-QUIT_REBOOT_RECOVERY = 16
+QUIT_MAINT = 16
 QUIT_UPGRADE_PROGRAM = 42
 QUIT_IMAGE_RESTORE = 43
+QUIT_REBOOT_RECOVERY = 86
 
 class Standby(Screen):
 	def Power(self):
@@ -212,12 +213,12 @@ class QuitMainloopScreen(Screen):
 		from Components.Label import Label
 		text = {
 			QUIT_SHUTDOWN: _("Your receiver is shutting down"),
+			QUIT_REBOOT_RECOVERY: _("Your receiver is rebooting into Recovery Mode"),
 			QUIT_REBOOT: _("Your receiver is rebooting"),
 			QUIT_RESTART: _("The user interface of your receiver is restarting"),
 			QUIT_UPGRADE_FP: _("Your frontprocessor will be updated\nPlease wait until your receiver reboots\nThis may take a few minutes"),
 			QUIT_ERROR_RESTART: _("The user interface of your receiver is restarting\ndue to an error in mytest.py"),
 			QUIT_DEBUG_RESTART: _("The user interface of your receiver is restarting in debug mode"),
-			QUIT_REBOOT_RECOVERY: _("Your receiver is rebooting into Recovery Mode"),
 			QUIT_UPGRADE_PROGRAM: _("Unattended update in progress\nPlease wait until your receiver reboots\nThis may take a few minutes")
 		}.get(retvalue)
 		self["text"] = Label(text)
@@ -253,11 +254,11 @@ class TryQuitMainloop(MessageBox):
 		if reason:
 			text = {
 				QUIT_SHUTDOWN: _("Really shutdown now?"),
+				QUIT_REBOOT_RECOVERY: _("Really reboot into Recovery Mode?"),
 				QUIT_REBOOT: _("Really reboot now?"),
 				QUIT_RESTART: _("Really restart now?"),
 				QUIT_UPGRADE_FP: _("Really update the frontprocessor and reboot now?"),
 				QUIT_DEBUG_RESTART: _("Really restart in debug mode now?"),
-				QUIT_REBOOT_RECOVERY: _("Really reboot into Recovery Mode?"),
 				QUIT_UPGRADE_PROGRAM: _("Really update your settop box and reboot now?")
 			}.get(retvalue, None)
 			if text:
