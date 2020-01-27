@@ -124,6 +124,7 @@ if not name or not result:
 	addSkin(USER_SKIN, scope=SCOPE_CURRENT_SKIN)
 
 # Add the main GUI skin.
+currentPrimarySkin = None
 result = []
 for skin, name in [(config.skin.primary_skin.value, "current"), (DEFAULT_SKIN, "default"), (EMERGENCY_SKIN, "emergency")]:
 	if skin in result:  # Don't try to add a skin that has already failed.
@@ -136,6 +137,7 @@ for skin, name in [(config.skin.primary_skin.value, "current"), (DEFAULT_SKIN, "
 	result.append(skin)
 
 # Add the front panel / display / lcd skin.
+currentDisplaySkin = None
 result = []
 for skin, name in [(config.skin.display_skin.value, "current"), (DEFAULT_DISPLAY_SKIN, "default")]:
 	if skin in result:  # Don't try to add a skin that has already failed.
