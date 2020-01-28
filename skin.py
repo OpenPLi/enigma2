@@ -15,8 +15,8 @@ from Tools.Import import my_import
 from Tools.LoadPixmap import LoadPixmap
 
 DEFAULT_SKIN = SystemInfo["HasFullHDSkinSupport"] and "PLi-FullNightHD/skin.xml" or "PLi-HD/skin.xml"  # SD hardware is no longer supported by the default skin.
-EMERGENCY_SKIN = "skin_default.xml"
-DEFAULT_DISPLAY_SKIN = "skin_display.xml"
+EMERGENCY_SKIN = "skin_default/skin.xml"
+DEFAULT_DISPLAY_SKIN = "skin_default/skin_display.xml"
 USER_SKIN = "skin_user.xml"
 USER_SKIN_TEMPLATE = "skin_user_%s.xml"
 # BOX_SKIN = "skin_box.xml"  # DEBUG: Is this actually used?
@@ -28,15 +28,22 @@ DISPLAY_SKIN_ID = 1  # Front panel / display / LCD.
 
 domSkins = []  # List of skins to be processed into the domScreens dictionary.
 domScreens = {}  # Dictionary of skin based screens.
-colorNames = {}  # Dictionary of skin color names.
-switchPixmap = {}  # Dictionary of switch images.
-parameters = {}  # Dictionary of skin parameters used to modify code behavior.
-menus = {}  # Dictionary of images associated with menu entries.
-setups = {}  # Dictionary of images associated with setup menus.
+colorNames = {  # Dictionary of skin color names.
+	"key_back": gRGB(0x00313131),
+	"key_blue": gRGB(0x0018188b),
+	"key_green": gRGB(0x001f771f),
+	"key_red": gRGB(0x009f1313),
+	"key_text": gRGB(0x00ffffff),
+	"key_yellow": gRGB(0x00a08500)
+}
 fonts = {  # Dictionary of predefined and skin defined font aliases.
 	"Body": ("Regular", 18, 22, 16),
-	"ChoiceList": ("Regular", 20, 24, 18),
+	"ChoiceList": ("Regular", 20, 24, 18)
 }
+menus = {}  # Dictionary of images associated with menu entries.
+parameters = {}  # Dictionary of skin parameters used to modify code behavior.
+setups = {}  # Dictionary of images associated with setup menus.
+switchPixmap = {}  # Dictionary of switch images.
 
 # Skins are loaded in order of priority.  Skin with highest priority is
 # loaded first.  This is usually the user-specified skin.
@@ -117,23 +124,27 @@ if not name or not result:
 	addSkin(USER_SKIN, scope=SCOPE_CURRENT_SKIN)
 
 # Add the main GUI skin.
+currentPrimarySkin = None
 result = []
 for skin, name in [(config.skin.primary_skin.value, "current"), (DEFAULT_SKIN, "default"), (EMERGENCY_SKIN, "emergency")]:
 	if skin in result:  # Don't try to add a skin that has already failed.
 		continue
 	config.skin.primary_skin.value = skin
 	if addSkin(config.skin.primary_skin.value, scope=SCOPE_CURRENT_SKIN):
+		currentPrimarySkin = config.skin.primary_skin.value
 		break
 	print "[Skin] Error: Adding %s GUI skin '%s' has failed!" % (name, config.skin.primary_skin.value)
 	result.append(skin)
 
 # Add the front panel / display / lcd skin.
+currentDisplaySkin = None
 result = []
 for skin, name in [(config.skin.display_skin.value, "current"), (DEFAULT_DISPLAY_SKIN, "default")]:
 	if skin in result:  # Don't try to add a skin that has already failed.
 		continue
 	config.skin.display_skin.value = skin
-	if addSkin(config.skin.display_skin.value, scope=SCOPE_CURRENT_SKIN):
+	if addSkin(config.skin.display_skin.value, scope=SCOPE_CURRENT_LCDSKIN):
+		currentDisplaySkin = config.skin.display_skin.value
 		break
 	print "[Skin] Error: Adding %s display skin '%s' has failed!" % (name, config.skin.display_skin.value)
 	result.append(skin)
