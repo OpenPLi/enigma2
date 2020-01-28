@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-11 19:39+0200\n"
+"POT-Creation-Date: 2020-01-28 02:35+0200\n"
 "PO-Revision-Date: 2016-06-17 12:13+0800\n"
 "Last-Translator: nx111 <gdzdz@163.com>\n"
 "Language-Team: NEWBOLT\n"
@@ -112,11 +112,11 @@ msgid "%.0f kB"
 msgstr ""
 
 #, python-format
-msgid "%.1f°E"
+msgid "%.1f° E"
 msgstr ""
 
 #, python-format
-msgid "%.1f°W"
+msgid "%.1f° W"
 msgstr ""
 
 #, python-format
@@ -454,6 +454,9 @@ msgstr "16:9 信箱模式"
 msgid "16:9 always"
 msgstr "16:9 固定"
 
+msgid "16K"
+msgstr ""
+
 msgid "18 V"
 msgstr "18 V"
 
@@ -514,6 +517,9 @@ msgstr "4:3 信箱模式"
 msgid "4:3 PanScan"
 msgstr "4:3 伸缩"
 
+msgid "4K"
+msgstr ""
+
 msgid "5"
 msgstr ""
 
@@ -529,6 +535,9 @@ msgstr ""
 msgid "8"
 msgstr ""
 
+msgid "8K"
+msgstr ""
+
 msgid "8bit"
 msgstr ""
 
@@ -538,12 +547,26 @@ msgstr ""
 msgid ": 0000 - default (disabled)"
 msgstr ""
 
-msgid "<Current movielist location>"
-msgstr "<当前影片列表位置>"
+#, fuzzy
+msgid "< Current >"
+msgstr "当前值:"
 
 #, fuzzy
-msgid "<Default Skin>"
+msgid "< Default + Picon >"
 msgstr "默认设置"
+
+#, fuzzy
+msgid "< Default >"
+msgstr "默认设置"
+
+msgid "< Emergency >"
+msgstr ""
+
+msgid "< Pending restart >"
+msgstr ""
+
+msgid "<Current movielist location>"
+msgstr "<当前影片列表位置>"
 
 msgid "<Default movie location>"
 msgstr "<影片默认位置>"
@@ -697,9 +720,6 @@ msgstr "放弃编辑喜爱频道"
 
 msgid "About"
 msgstr "关于"
-
-msgid "About..."
-msgstr "关于..."
 
 msgid "Accesspoint:"
 msgstr "存取点:"
@@ -1560,8 +1580,18 @@ msgstr ""
 msgid "Cancel"
 msgstr "取消"
 
+msgid "Cancel any changes to the currently active skin"
+msgstr ""
+
+msgid "Cancel any changes to the currently active skin and exit all menus"
+msgstr ""
+
 msgid "Cancel any text changes and exit"
 msgstr ""
+
+#, fuzzy
+msgid "Cancel execution?"
+msgstr "频道选择"
 
 msgid "Cancelled upon user request"
 msgstr ""
@@ -1893,6 +1923,9 @@ msgid "Configure an additional delay to improve external subtitle synchronisatio
 msgstr ""
 
 msgid "Configure an additional delay to improve subtitle synchronisation."
+msgstr ""
+
+msgid "Configure default type for new timers."
 msgstr ""
 
 msgid "Configure for how long the infobar will remain visible after activation."
@@ -2523,6 +2556,10 @@ msgstr "影片默认位置"
 msgid "Default settings"
 msgstr "默认设置"
 
+#, fuzzy
+msgid "Default timer type"
+msgstr "影片默认位置"
+
 msgid "Define the location of the EPG Cache file."
 msgstr ""
 
@@ -2768,6 +2805,10 @@ msgstr ""
 msgid "Display EPG list for current channel"
 msgstr ""
 
+#, fuzzy
+msgid "Display Skin"
+msgstr "显示设置"
+
 msgid "Display and userinterface"
 msgstr ""
 
@@ -3012,6 +3053,9 @@ msgstr ""
 msgid "EPG settings"
 msgstr ""
 
+msgid "EPG:"
+msgstr ""
+
 #, python-format
 msgid "ERROR - failed to scan (%s)!"
 msgstr "错误 - 扫描 (%s)失败!"
@@ -3241,9 +3285,6 @@ msgstr ""
 msgid "Enigma version: "
 msgstr "反向:"
 
-msgid "Enigma2 skin selector"
-msgstr ""
-
 msgid "Enter"
 msgstr ""
 
@@ -3336,9 +3377,6 @@ msgid ""
 "Error during unzipping image\n"
 "%s"
 msgstr ""
-
-msgid "Error executing plugin"
-msgstr "执行插件发生错误"
 
 #, fuzzy
 msgid "Error stop stream!"
@@ -3557,6 +3595,9 @@ msgid "FEC"
 msgstr "前向纠错码(FEC)"
 
 msgid "FEC:"
+msgstr ""
+
+msgid "FHD"
 msgstr ""
 
 msgid "FTA"
@@ -3822,13 +3863,12 @@ msgstr "新版本:"
 msgid "GUI Settings"
 msgstr "设置"
 
-msgid ""
-"GUI needs a restart to apply a new language\n"
-"Do you want to restart the GUI now?"
-msgstr ""
+#, fuzzy
+msgid "GUI Skin"
+msgstr "设置"
 
 msgid ""
-"GUI needs a restart to apply a new skin\n"
+"GUI needs a restart to apply a new language\n"
 "Do you want to restart the GUI now?"
 msgstr ""
 
@@ -3988,6 +4028,9 @@ msgid "Guyana"
 msgstr ""
 
 msgid "H"
+msgstr ""
+
+msgid "HD"
 msgstr ""
 
 msgid "HD list"
@@ -4476,9 +4519,6 @@ msgstr ""
 msgid "Invert"
 msgstr "反向"
 
-msgid "Ipkg"
-msgstr ""
-
 msgid "Iran (Islamic Republic of)"
 msgstr ""
 
@@ -4894,6 +4934,11 @@ msgstr ""
 msgid "Manufacturer"
 msgstr "制造商"
 
+msgid ""
+"Manufacturer reset in progress\n"
+"Pease wait until enigma2 restarts"
+msgstr ""
+
 msgid "Margin after recording (minutes)"
 msgstr ""
 
@@ -5092,6 +5137,22 @@ msgstr ""
 
 msgid "Move to position X"
 msgstr ""
+
+#, fuzzy
+msgid "Move to the next page"
+msgstr "切换到下一个角度"
+
+#, fuzzy
+msgid "Move to the next skin"
+msgstr "向下移动到下一个项目"
+
+#, fuzzy
+msgid "Move to the previous page"
+msgstr "退回上一个章节"
+
+#, fuzzy
+msgid "Move to the previous skin"
+msgstr "向上移动到上一个项目"
 
 msgid "Move west"
 msgstr "西移"
@@ -5648,6 +5709,9 @@ msgid "Open setup tuner "
 msgstr ""
 
 msgid "Open the movie list"
+msgstr ""
+
+msgid "Opkg"
 msgstr ""
 
 msgid "Options disable timer"
@@ -6273,7 +6337,8 @@ msgstr "按MENU键查看更多选项."
 msgid "Press OK on your remote control to continue."
 msgstr "按OK键确认."
 
-msgid "Press OK to activate the selected skin."
+#, fuzzy, python-format
+msgid "Press OK to activate the selected%s skin."
 msgstr "按OK键激活所选皮肤."
 
 msgid "Press OK to activate the settings."
@@ -6285,6 +6350,10 @@ msgstr "按OK键修改设置"
 #, python-format
 msgid "Press OK to get further details for %s"
 msgstr "按OK键获取 %s 详细说明"
+
+#, fuzzy, python-format
+msgid "Press OK to keep the currently selected%s skin."
+msgstr "按OK键激活所选皮肤."
 
 msgid "Press OK to scan"
 msgstr "按OK键开始扫描."
@@ -6471,6 +6540,9 @@ msgstr "确实要删除定时器?"
 
 msgid "Really exit the subservices quickzap?"
 msgstr "退出字幕快速切换?"
+
+msgid "Really perform a manufacturer reset now?"
+msgstr ""
 
 msgid "Really reboot now?"
 msgstr "立即重启(Reboot)?"
@@ -6804,6 +6876,10 @@ msgstr "恢复"
 msgid "Restore backups"
 msgstr "恢复备份"
 
+#, fuzzy
+msgid "Restore defaults"
+msgstr "恢复备份"
+
 msgid "Restore deleted user bouquets"
 msgstr ""
 
@@ -7028,6 +7104,10 @@ msgstr "保存"
 
 msgid "Save / Enter text and exit"
 msgstr ""
+
+#, fuzzy
+msgid "Save and activate the currently selected skin"
+msgstr "按OK键激活所选皮肤."
 
 msgid "Save and exit"
 msgstr ""
@@ -7488,9 +7568,6 @@ msgstr "选择无线网络"
 msgid "Select your ATSC provider."
 msgstr "选择要添加的提供商..."
 
-msgid "Select your Skin"
-msgstr ""
-
 msgid ""
 "Select your backup device.\n"
 "Current device: "
@@ -7652,9 +7729,6 @@ msgid "Set blocktimes by weekday"
 msgstr ""
 
 msgid "Set default"
-msgstr ""
-
-msgid "Set default settings?"
 msgstr ""
 
 msgid "Set end time"
@@ -8078,11 +8152,15 @@ msgstr ""
 msgid "Site longitude"
 msgstr ""
 
-msgid "Skin"
-msgstr "皮肤"
-
 #, python-format
 msgid "Skin & Resolution: %s (%sx%s)\n"
+msgstr ""
+
+#, fuzzy
+msgid "Skin Selection Actions"
+msgstr "选择位置"
+
+msgid "SkinSelector: Restart GUI"
 msgstr ""
 
 msgid "Skins"
@@ -9191,6 +9269,10 @@ msgstr ""
 msgid "Timer type"
 msgstr ""
 
+#, fuzzy
+msgid "Timer:"
+msgstr "定时器"
+
 msgid "Timeshift"
 msgstr "时光平移"
 
@@ -9221,8 +9303,16 @@ msgstr "标题属性"
 msgid "Titleset mode"
 msgstr "标题设置模式"
 
+#, python-format
+msgid "To apply the selected '%s' skin the GUI needs to restart.  Would you like to restart the GUI now?"
+msgstr ""
+
 msgid "To audio selection"
 msgstr "音频选择"
+
+#, python-format
+msgid "To save and apply the selected '%s' skin the GUI needs to restart.  Would you like to save the selection and restart the GUI now?"
+msgstr ""
 
 msgid "To subtitle selection"
 msgstr "字幕选择"
@@ -11474,6 +11564,9 @@ msgstr "临时文件"
 msgid "tennis/squash"
 msgstr ""
 
+msgid "testing"
+msgstr ""
+
 msgid "this bouquet is protected by a parental control pin"
 msgstr ""
 
@@ -11593,9 +11686,6 @@ msgid "with tuner name"
 msgstr ""
 
 msgid "with_errors"
-msgstr ""
-
-msgid "testing"
 msgstr ""
 
 msgid "xp1000"

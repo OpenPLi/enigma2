@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-11 19:39+0200\n"
+"POT-Creation-Date: 2020-01-28 02:35+0200\n"
 "PO-Revision-Date: 2019-11-19 08:58+0700\n"
 "Last-Translator: krong\n"
 "Language-Team: none\n"
@@ -462,6 +462,9 @@ msgstr "Hộp thư 16: 9"
 msgid "16:9 always"
 msgstr "16: 9 luôn"
 
+msgid "16K"
+msgstr ""
+
 msgid "18 V"
 msgstr "18 V"
 
@@ -522,6 +525,10 @@ msgstr "Hộp thư 4: 3"
 msgid "4:3 PanScan"
 msgstr "Quét 4: 3 Pan"
 
+#, fuzzy
+msgid "4K"
+msgstr "4"
+
 msgid "5"
 msgstr "5"
 
@@ -537,6 +544,10 @@ msgstr "7"
 msgid "8"
 msgstr "8"
 
+#, fuzzy
+msgid "8K"
+msgstr "8"
+
 msgid "8bit"
 msgstr "8bit"
 
@@ -546,11 +557,26 @@ msgstr "9"
 msgid ": 0000 - default (disabled)"
 msgstr ": 0000 - mặc định (bị tắt)"
 
+#, fuzzy
+msgid "< Current >"
+msgstr "Giá trị hiện tại: "
+
+#, fuzzy
+msgid "< Default + Picon >"
+msgstr "<Da mặc định>"
+
+#, fuzzy
+msgid "< Default >"
+msgstr "<Da mặc định>"
+
+msgid "< Emergency >"
+msgstr ""
+
+msgid "< Pending restart >"
+msgstr ""
+
 msgid "<Current movielist location>"
 msgstr "<Vị trí di chuyển hiện tại>"
-
-msgid "<Default Skin>"
-msgstr "<Da mặc định>"
 
 msgid "<Default movie location>"
 msgstr "<Vị trí phim mặc định>"
@@ -711,9 +737,6 @@ msgstr "Hủy bỏ yêu thích chỉnh sửa"
 
 msgid "About"
 msgstr "Thông tin phần mền"
-
-msgid "About..."
-msgstr "Thông tin phần mền..."
 
 msgid "Accesspoint:"
 msgstr "Điểm truy cập:"
@@ -1580,8 +1603,18 @@ msgstr "Canada"
 msgid "Cancel"
 msgstr "Hủy bỏ"
 
+msgid "Cancel any changes to the currently active skin"
+msgstr ""
+
+msgid "Cancel any changes to the currently active skin and exit all menus"
+msgstr ""
+
 msgid "Cancel any text changes and exit"
 msgstr "Hủy bỏ mọi thay đổi văn bản và thoát"
+
+#, fuzzy
+msgid "Cancel execution?"
+msgstr "Chọn kênh"
 
 msgid "Cancelled upon user request"
 msgstr "Hủy theo yêu cầu của người dùng"
@@ -1903,6 +1936,10 @@ msgstr "Định cấu hình độ trễ bổ sung để cải thiện đồng b�
 
 msgid "Configure an additional delay to improve subtitle synchronisation."
 msgstr "Định cấu hình độ trễ bổ sung để cải thiện đồng bộ hóa phụ đề."
+
+#, fuzzy
+msgid "Configure default type for new timers."
+msgstr "Cấu hình netmask."
 
 msgid "Configure for how long the infobar will remain visible after activation."
 msgstr "Định cấu hình trong bao lâu infobar sẽ vẫn hiển thị sau khi kích hoạt."
@@ -2527,6 +2564,10 @@ msgstr "Vị trí phim mặc định"
 msgid "Default settings"
 msgstr "Thiết lập mặc định"
 
+#, fuzzy
+msgid "Default timer type"
+msgstr "Xóa bộ đếm thời gian"
+
 msgid "Define the location of the EPG Cache file."
 msgstr "Xác định vị trí của tệp EPG Cache."
 
@@ -2770,6 +2811,10 @@ msgstr "Hiển thị thông tin EPG cho sự kiện hiện tại"
 msgid "Display EPG list for current channel"
 msgstr "Hiển thị danh sách EPG cho kênh hiện tại"
 
+#, fuzzy
+msgid "Display Skin"
+msgstr "Thiết lập hiển thị"
+
 msgid "Display and userinterface"
 msgstr "Giao diện hiển thị và người dùng"
 
@@ -3011,6 +3056,9 @@ msgstr "Lựa chọn EPG"
 msgid "EPG settings"
 msgstr "Cài đặt EPG"
 
+msgid "EPG:"
+msgstr ""
+
 #, python-format
 msgid "ERROR - failed to scan (%s)!"
 msgstr "ERROR - failed to scan (%s)!"
@@ -3235,9 +3283,6 @@ msgstr "Mức gỡ lỗi Enigma: %d\n"
 msgid "Enigma version: "
 msgstr "Phiên bản Enigma: "
 
-msgid "Enigma2 skin selector"
-msgstr "Bộ chọn da Enigma2"
-
 msgid "Enter"
 msgstr "Đi vào"
 
@@ -3336,9 +3381,6 @@ msgid ""
 msgstr ""
 "Lỗi trong khi giải nén hình ảnh\n"
 "%s"
-
-msgid "Error executing plugin"
-msgstr "Lỗi thực thi plugin"
 
 msgid "Error stop stream!"
 msgstr "Lỗi dừng luồng!"
@@ -3564,6 +3606,9 @@ msgstr "FEC"
 
 msgid "FEC:"
 msgstr "FEC:"
+
+msgid "FHD"
+msgstr ""
 
 msgid "FTA"
 msgstr "FTA"
@@ -3824,18 +3869,15 @@ msgstr "Phiên bản GStreamer: "
 msgid "GUI Settings"
 msgstr "Cài đặt GUI"
 
+#, fuzzy
+msgid "GUI Skin"
+msgstr "Cài đặt GUI"
+
 msgid ""
 "GUI needs a restart to apply a new language\n"
 "Do you want to restart the GUI now?"
 msgstr ""
 "GUI cần khởi động lại để áp dụng ngôn ngữ mới\n"
-"Bạn có muốn khởi động lại GUI bây giờ không?"
-
-msgid ""
-"GUI needs a restart to apply a new skin\n"
-"Do you want to restart the GUI now?"
-msgstr ""
-"GUI cần khởi động lại để áp dụng giao diện mới\n"
 "Bạn có muốn khởi động lại GUI bây giờ không?"
 
 msgid "Gabon"
@@ -3993,6 +4035,10 @@ msgstr "Guyana"
 
 msgid "H"
 msgstr "H"
+
+#, fuzzy
+msgid "HD"
+msgstr "D"
 
 msgid "HD list"
 msgstr "Danh sách HD"
@@ -4475,9 +4521,6 @@ msgstr "Đảo ngược, thí điểm và triển khai"
 msgid "Invert"
 msgstr "Đảo ngược"
 
-msgid "Ipkg"
-msgstr "Ipkg"
-
 msgid "Iran (Islamic Republic of)"
 msgstr "Iran (Cộng hòa Hồi giáo)"
 
@@ -4889,6 +4932,11 @@ msgstr "Nhập thủ công từ bộ điều chỉnh dự phòng"
 msgid "Manufacturer"
 msgstr "Nhà chế tạo"
 
+msgid ""
+"Manufacturer reset in progress\n"
+"Pease wait until enigma2 restarts"
+msgstr ""
+
 msgid "Margin after recording (minutes)"
 msgstr "Ký quỹ sau khi ghi (phút)"
 
@@ -5081,6 +5129,22 @@ msgstr "Di chuyển con trỏ bàn phím ảo lên"
 
 msgid "Move to position X"
 msgstr "Di chuyển đến vị trí X"
+
+#, fuzzy
+msgid "Move to the next page"
+msgstr "chuyển sang góc tiếp theo"
+
+#, fuzzy
+msgid "Move to the next skin"
+msgstr "chuyển xuống mục tiếp theo"
+
+#, fuzzy
+msgid "Move to the previous page"
+msgstr "tua lại chương trước"
+
+#, fuzzy
+msgid "Move to the previous skin"
+msgstr "di chuyển đến mục trước"
 
 msgid "Move west"
 msgstr "Di chuyển về phía tây"
@@ -5625,6 +5689,9 @@ msgstr "Mở bộ chỉnh cài đặt "
 
 msgid "Open the movie list"
 msgstr "Mở danh sách phim"
+
+msgid "Opkg"
+msgstr ""
 
 msgid "Options disable timer"
 msgstr "Tùy chọn tắt hẹn giờ"
@@ -6239,7 +6306,8 @@ msgstr "Nhấn MENU trên điều khiển từ xa của bạn để có thêm t�
 msgid "Press OK on your remote control to continue."
 msgstr "Nhấn OK trên điều khiển từ xa của bạn để tiếp tục."
 
-msgid "Press OK to activate the selected skin."
+#, fuzzy, python-format
+msgid "Press OK to activate the selected%s skin."
 msgstr "Nhấn OK để kích hoạt giao diện đã chọn."
 
 msgid "Press OK to activate the settings."
@@ -6251,6 +6319,10 @@ msgstr "Nhấn OK để chỉnh sửa cài đặt."
 #, python-format
 msgid "Press OK to get further details for %s"
 msgstr "Nhấn OK để biết thêm chi tiết cho%s"
+
+#, fuzzy, python-format
+msgid "Press OK to keep the currently selected%s skin."
+msgstr "Nhấn OK để kích hoạt giao diện đã chọn."
 
 msgid "Press OK to scan"
 msgstr "Nhấn OK để quét"
@@ -6436,6 +6508,10 @@ msgstr "Thực sự xóa bộ tính giờ thực hiện?"
 
 msgid "Really exit the subservices quickzap?"
 msgstr "Thực sự thoát khỏi dịch vụ phụ quickzap?"
+
+#, fuzzy
+msgid "Really perform a manufacturer reset now?"
+msgstr "Bảo vệ màn hình đặt lại của nhà sản xuất"
 
 msgid "Really reboot now?"
 msgstr "Thực sự khởi động lại bây giờ?"
@@ -6762,6 +6838,10 @@ msgstr "Khôi phục"
 msgid "Restore backups"
 msgstr "Khôi phục bản sao lưu"
 
+#, fuzzy
+msgid "Restore defaults"
+msgstr "Đặt mặc định"
+
 msgid "Restore deleted user bouquets"
 msgstr "Khôi phục lại những người dùng đã xóa"
 
@@ -6982,6 +7062,10 @@ msgstr "Lưu lại"
 
 msgid "Save / Enter text and exit"
 msgstr "Lưu / Nhập văn bản và thoát"
+
+#, fuzzy
+msgid "Save and activate the currently selected skin"
+msgstr "Nhấn OK để kích hoạt giao diện đã chọn."
 
 msgid "Save and exit"
 msgstr "Lưu và thoát"
@@ -7431,9 +7515,6 @@ msgstr "Chọn mạng không dây"
 msgid "Select your ATSC provider."
 msgstr "Chọn nhà cung cấp ATSC của bạn."
 
-msgid "Select your Skin"
-msgstr "Chọn làn da của bạn"
-
 msgid ""
 "Select your backup device.\n"
 "Current device: "
@@ -7593,9 +7674,6 @@ msgstr "Đặt blocktimes theo ngày trong tuần"
 
 msgid "Set default"
 msgstr "Đặt mặc định"
-
-msgid "Set default settings?"
-msgstr "Đặt cài đặt mặc định?"
 
 msgid "Set end time"
 msgstr "Đặt thời gian kết thúc"
@@ -8014,12 +8092,16 @@ msgstr "Vĩ độ trang web"
 msgid "Site longitude"
 msgstr "Kinh độ trang web"
 
-msgid "Skin"
-msgstr "Da"
-
 #, python-format
 msgid "Skin & Resolution: %s (%sx%s)\n"
 msgstr "Da & Độ phân giải:%s (%sx%s)\n"
+
+#, fuzzy
+msgid "Skin Selection Actions"
+msgstr "Chọn hành động"
+
+msgid "SkinSelector: Restart GUI"
+msgstr ""
 
 msgid "Skins"
 msgstr "Da"
@@ -9164,6 +9246,10 @@ msgstr "Lựa chọn hẹn giờ ..."
 msgid "Timer type"
 msgstr "Loại hẹn giờ"
 
+#, fuzzy
+msgid "Timer:"
+msgstr "Hẹn giờ"
+
 msgid "Timeshift"
 msgstr "Timeshift"
 
@@ -9194,8 +9280,16 @@ msgstr "Thuộc tính tiêu đề"
 msgid "Titleset mode"
 msgstr "Chế độ tiêu đề"
 
+#, python-format
+msgid "To apply the selected '%s' skin the GUI needs to restart.  Would you like to restart the GUI now?"
+msgstr ""
+
 msgid "To audio selection"
 msgstr "Để lựa chọn âm thanh"
+
+#, python-format
+msgid "To save and apply the selected '%s' skin the GUI needs to restart.  Would you like to save the selection and restart the GUI now?"
+msgstr ""
 
 msgid "To subtitle selection"
 msgstr "Để lựa chọn phụ đề"
@@ -11466,6 +11560,9 @@ msgstr "tệp mẫu"
 msgid "tennis/squash"
 msgstr "quần vợt / bóng quần"
 
+msgid "testing"
+msgstr "đang làm việc"
+
 msgid "this bouquet is protected by a parental control pin"
 msgstr "gói kênh này được bảo vệ bởi một chốt kiểm soát của cha mẹ"
 
@@ -11585,9 +11682,6 @@ msgstr "với tên bộ chỉnh"
 
 msgid "with_errors"
 msgstr "có -nỗi"
-
-msgid "testing"
-msgstr "đang làm việc"
 
 msgid "xp1000"
 msgstr "xp1000"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-11 19:39+0200\n"
+"POT-Creation-Date: 2020-01-28 02:35+0200\n"
 "PO-Revision-Date: 2017-03-05 13:24+0100\n"
 "Last-Translator: Magnus Nilsson <mag_nilsson@hotmail.com>\n"
 "Language-Team: \n"
@@ -123,11 +123,11 @@ msgid "%.0f kB"
 msgstr ""
 
 #, python-format
-msgid "%.1f°E"
+msgid "%.1f° E"
 msgstr ""
 
 #, python-format
-msgid "%.1f°W"
+msgid "%.1f° W"
 msgstr ""
 
 #, python-format
@@ -486,6 +486,9 @@ msgstr "16:9 Letterbox"
 msgid "16:9 always"
 msgstr "16:9 alltid"
 
+msgid "16K"
+msgstr ""
+
 #
 msgid "18 V"
 msgstr "18 V"
@@ -554,6 +557,11 @@ msgid "4:3 PanScan"
 msgstr "4:3 PanScan"
 
 #
+#, fuzzy
+msgid "4K"
+msgstr "4"
+
+#
 msgid "5"
 msgstr "5"
 
@@ -572,6 +580,11 @@ msgstr "7"
 msgid "8"
 msgstr "8"
 
+#
+#, fuzzy
+msgid "8K"
+msgstr "8"
+
 msgid "8bit"
 msgstr ""
 
@@ -583,13 +596,29 @@ msgid ": 0000 - default (disabled)"
 msgstr ": 0000 - standard (avstängd)"
 
 #
-msgid "<Current movielist location>"
-msgstr "<Filmlistans aktuella plats>"
+#, fuzzy
+msgid "< Current >"
+msgstr "Nuvarande värde : "
 
 #
 #, fuzzy
-msgid "<Default Skin>"
+msgid "< Default + Picon >"
 msgstr "Grundinställningar"
+
+#
+#, fuzzy
+msgid "< Default >"
+msgstr "Grundinställningar"
+
+msgid "< Emergency >"
+msgstr ""
+
+msgid "< Pending restart >"
+msgstr ""
+
+#
+msgid "<Current movielist location>"
+msgstr "<Filmlistans aktuella plats>"
 
 #
 msgid "<Default movie location>"
@@ -774,10 +803,6 @@ msgstr "Avbryt att editera favoriter"
 #
 msgid "About"
 msgstr "Om"
-
-#
-msgid "About..."
-msgstr "Om..."
 
 #
 msgid "Accesspoint:"
@@ -1767,8 +1792,19 @@ msgstr ""
 msgid "Cancel"
 msgstr "Avbryt"
 
+msgid "Cancel any changes to the currently active skin"
+msgstr ""
+
+msgid "Cancel any changes to the currently active skin and exit all menus"
+msgstr ""
+
 msgid "Cancel any text changes and exit"
 msgstr ""
+
+#
+#, fuzzy
+msgid "Cancel execution?"
+msgstr "Kanallista"
 
 msgid "Cancelled upon user request"
 msgstr ""
@@ -2153,6 +2189,11 @@ msgstr "Konfigurera ytterligare en fördröjning för att förbättra extern und
 
 msgid "Configure an additional delay to improve subtitle synchronisation."
 msgstr "Konfigurera ytterligare en fördröjning för att förbättra undertextsynkronisering."
+
+#
+#, fuzzy
+msgid "Configure default type for new timers."
+msgstr "Konfigurera nätmasken."
 
 msgid "Configure for how long the infobar will remain visible after activation."
 msgstr "Konfigurera hur länge infobalken är synlig efter aktivering."
@@ -2854,6 +2895,10 @@ msgid "Default settings"
 msgstr "Grundinställningar"
 
 #, fuzzy
+msgid "Default timer type"
+msgstr "Radera timer"
+
+#, fuzzy
 msgid "Define the location of the EPG Cache file."
 msgstr "Konfigurera bildförhållandet på skärmen."
 
@@ -3130,6 +3175,11 @@ msgstr "Spara endast timeshift för aktuellt program"
 #, fuzzy
 msgid "Display EPG list for current channel"
 msgstr "Visa EPG för aktuell kanal ..."
+
+#
+#, fuzzy
+msgid "Display Skin"
+msgstr "Displayinställningar"
 
 #
 msgid "Display and userinterface"
@@ -3419,6 +3469,9 @@ msgstr "EPG val"
 msgid "EPG settings"
 msgstr "EPG inställningar"
 
+msgid "EPG:"
+msgstr ""
+
 #, python-format
 msgid "ERROR - failed to scan (%s)!"
 msgstr "FEL - misslyckad sökning (%s)!"
@@ -3676,9 +3729,6 @@ msgstr ""
 msgid "Enigma version: "
 msgstr "Kernel Version : "
 
-msgid "Enigma2 skin selector"
-msgstr "Val av utseende"
-
 #, fuzzy
 msgid "Enter"
 msgstr "centrera"
@@ -3779,10 +3829,6 @@ msgid ""
 "Error during unzipping image\n"
 "%s"
 msgstr ""
-
-#
-msgid "Error executing plugin"
-msgstr "Fel vid körning av plugin"
 
 msgid "Error stop stream!"
 msgstr ""
@@ -4030,6 +4076,9 @@ msgstr "FEC"
 
 msgid "FEC:"
 msgstr "FEC :"
+
+msgid "FHD"
+msgstr ""
 
 msgid "FTA"
 msgstr "FTA"
@@ -4332,19 +4381,16 @@ msgstr "Kernel Version : "
 msgid "GUI Settings"
 msgstr "Inställningar"
 
+#
+#, fuzzy
+msgid "GUI Skin"
+msgstr "Inställningar"
+
 msgid ""
 "GUI needs a restart to apply a new language\n"
 "Do you want to restart the GUI now?"
 msgstr ""
 "GUI måste startas om för att aktivera ett nytt språk\n"
-"Vill du starta om GUI nu?"
-
-#
-msgid ""
-"GUI needs a restart to apply a new skin\n"
-"Do you want to restart the GUI now?"
-msgstr ""
-"GUI måste startas om för att aktivera ett nytt utseende\n"
 "Vill du starta om GUI nu?"
 
 msgid "Gabon"
@@ -4517,6 +4563,11 @@ msgstr ""
 
 msgid "H"
 msgstr ""
+
+#
+#, fuzzy
+msgid "HD"
+msgstr "D"
 
 msgid "HD list"
 msgstr "HD lista"
@@ -5058,10 +5109,6 @@ msgstr ""
 msgid "Invert"
 msgstr "Invertera"
 
-#
-msgid "Ipkg"
-msgstr "Ipkg"
-
 msgid "Iran (Islamic Republic of)"
 msgstr ""
 
@@ -5541,6 +5588,11 @@ msgstr ""
 msgid "Manufacturer"
 msgstr "Tillverkare"
 
+msgid ""
+"Manufacturer reset in progress\n"
+"Pease wait until enigma2 restarts"
+msgstr ""
+
 #
 msgid "Margin after recording (minutes)"
 msgstr "Marginal efter inspelning (i minuter)"
@@ -5767,6 +5819,26 @@ msgstr ""
 
 msgid "Move to position X"
 msgstr "Flytta till position X"
+
+#
+#, fuzzy
+msgid "Move to the next page"
+msgstr "byt till nästa position"
+
+#
+#, fuzzy
+msgid "Move to the next skin"
+msgstr "flytta ner till nästa post"
+
+#
+#, fuzzy
+msgid "Move to the previous page"
+msgstr "spola bakåt till föregående kapitel"
+
+#
+#, fuzzy
+msgid "Move to the previous skin"
+msgstr "flytta upp till föregående post"
 
 #
 msgid "Move west"
@@ -6398,6 +6470,9 @@ msgstr "Öppna inställning för tuner"
 #
 msgid "Open the movie list"
 msgstr "Öppna filmlistan"
+
+msgid "Opkg"
+msgstr ""
 
 msgid "Options disable timer"
 msgstr "Val stäng av timer"
@@ -7119,7 +7194,8 @@ msgid "Press OK on your remote control to continue."
 msgstr "Tryck OK på din fjärrkontroll för att fortsätta."
 
 #
-msgid "Press OK to activate the selected skin."
+#, fuzzy, python-format
+msgid "Press OK to activate the selected%s skin."
 msgstr "Tryck OK för aktivera valt utseende."
 
 #
@@ -7134,6 +7210,11 @@ msgstr "Tryck OK för att ändra inställningar."
 #, python-format
 msgid "Press OK to get further details for %s"
 msgstr "Tryck OK för att få utförligare information om %s"
+
+#
+#, fuzzy, python-format
+msgid "Press OK to keep the currently selected%s skin."
+msgstr "Tryck OK för aktivera valt utseende."
 
 #
 msgid "Press OK to scan"
@@ -7347,6 +7428,10 @@ msgstr "Verkligen ta bort färdiga timerinspelningar?"
 #
 msgid "Really exit the subservices quickzap?"
 msgstr "Verkligen avsluta underkanals snabbzapp?"
+
+#, fuzzy
+msgid "Really perform a manufacturer reset now?"
+msgstr "Skydda tillverkarens återställningsskärm"
 
 #
 msgid "Really reboot now?"
@@ -7736,6 +7821,10 @@ msgstr "Återställ"
 msgid "Restore backups"
 msgstr "Återställ säkerhetskopia"
 
+#, fuzzy
+msgid "Restore defaults"
+msgstr "Ange standard"
+
 msgid "Restore deleted user bouquets"
 msgstr "Återställ borttagna favoritlistor"
 
@@ -7996,6 +8085,11 @@ msgstr "Spara"
 #, fuzzy
 msgid "Save / Enter text and exit"
 msgstr "Spara och avsluta"
+
+#
+#, fuzzy
+msgid "Save and activate the currently selected skin"
+msgstr "Tryck OK för aktivera valt utseende."
 
 msgid "Save and exit"
 msgstr "Spara och avsluta"
@@ -8511,9 +8605,6 @@ msgstr "Välj trådlöst nätverk"
 msgid "Select your ATSC provider."
 msgstr "ATSC operatör"
 
-msgid "Select your Skin"
-msgstr "Välj ditt utseende (Skin)"
-
 #
 msgid ""
 "Select your backup device.\n"
@@ -8695,9 +8786,6 @@ msgstr "Sätt blocktider med veckodag"
 
 msgid "Set default"
 msgstr "Ange standard"
-
-msgid "Set default settings?"
-msgstr "Ange standardinställningar?"
 
 #
 msgid "Set end time"
@@ -9167,12 +9255,15 @@ msgstr "Platsens latitud"
 msgid "Site longitude"
 msgstr "Platsens longitud"
 
-#
-msgid "Skin"
-msgstr "Utseende"
-
 #, python-format
 msgid "Skin & Resolution: %s (%sx%s)\n"
+msgstr ""
+
+#, fuzzy
+msgid "Skin Selection Actions"
+msgstr "Välj åtgärd"
+
+msgid "SkinSelector: Restart GUI"
 msgstr ""
 
 #
@@ -10492,6 +10583,11 @@ msgid "Timer type"
 msgstr "Timertyp"
 
 #
+#, fuzzy
+msgid "Timer:"
+msgstr "Timer"
+
+#
 msgid "Timeshift"
 msgstr "Timeshift"
 
@@ -10528,8 +10624,16 @@ msgstr "Titel egenskaper"
 msgid "Titleset mode"
 msgstr "Titelset läge"
 
+#, python-format
+msgid "To apply the selected '%s' skin the GUI needs to restart.  Would you like to restart the GUI now?"
+msgstr ""
+
 msgid "To audio selection"
 msgstr "Till ljudval"
+
+#, python-format
+msgid "To save and apply the selected '%s' skin the GUI needs to restart.  Would you like to save the selection and restart the GUI now?"
+msgstr ""
 
 msgid "To subtitle selection"
 msgstr "Till undertextval"
@@ -13116,6 +13220,10 @@ msgstr "mallfil"
 msgid "tennis/squash"
 msgstr "tennis / squash"
 
+#
+msgid "testing"
+msgstr "arbetar"
+
 msgid "this bouquet is protected by a parental control pin"
 msgstr "denna favoritlista är skyddad av föräldraskyddskod"
 
@@ -13252,10 +13360,6 @@ msgstr "med tunernamn"
 
 msgid "with_errors"
 msgstr "med_fel"
-
-#
-msgid "testing"
-msgstr "arbetar"
 
 msgid "xp1000"
 msgstr ""

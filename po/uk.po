@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-11 19:39+0200\n"
+"POT-Creation-Date: 2020-01-28 02:35+0200\n"
 "PO-Revision-Date: 2016-11-17 12:51+0200\n"
 "Last-Translator: vovan43<vovan43@ex.ua>, sety <tim1065@mail.ru>, Irkoff <irkoff@gmail.com>\n"
 "Language-Team: gisclub.tv <http://gisclub.tv/>\n"
@@ -116,11 +116,11 @@ msgid "%.0f kB"
 msgstr ""
 
 #, python-format
-msgid "%.1f°E"
+msgid "%.1f° E"
 msgstr ""
 
 #, python-format
-msgid "%.1f°W"
+msgid "%.1f° W"
 msgstr ""
 
 #, python-format
@@ -470,6 +470,9 @@ msgstr "16:9 Режим ящика"
 msgid "16:9 always"
 msgstr "16:9 завжди"
 
+msgid "16K"
+msgstr ""
+
 msgid "18 V"
 msgstr "18 V"
 
@@ -530,6 +533,10 @@ msgstr "4:3 Режим ящика"
 msgid "4:3 PanScan"
 msgstr "4:3 Панорама"
 
+#, fuzzy
+msgid "4K"
+msgstr "4"
+
 msgid "5"
 msgstr "5"
 
@@ -545,6 +552,10 @@ msgstr "7"
 msgid "8"
 msgstr "8"
 
+#, fuzzy
+msgid "8K"
+msgstr "8"
+
 msgid "8bit"
 msgstr ""
 
@@ -554,12 +565,26 @@ msgstr "9"
 msgid ": 0000 - default (disabled)"
 msgstr ": 0000 - за замовчуванням (відключено)"
 
-msgid "<Current movielist location>"
-msgstr "<Поточне місце списку відео>"
+#, fuzzy
+msgid "< Current >"
+msgstr "Поточне значення: "
 
 #, fuzzy
-msgid "<Default Skin>"
+msgid "< Default + Picon >"
 msgstr "Налаштування за замовчуванням"
+
+#, fuzzy
+msgid "< Default >"
+msgstr "Налаштування за замовчуванням"
+
+msgid "< Emergency >"
+msgstr ""
+
+msgid "< Pending restart >"
+msgstr ""
+
+msgid "<Current movielist location>"
+msgstr "<Поточне місце списку відео>"
 
 msgid "<Default movie location>"
 msgstr "<Місце відео по дефолту>"
@@ -723,9 +748,6 @@ msgstr "Перервати редагування фаворитів"
 
 msgid "About"
 msgstr "Інформація"
-
-msgid "About..."
-msgstr "Інформація..."
 
 msgid "Accesspoint:"
 msgstr "Точка доступу:"
@@ -1602,8 +1624,18 @@ msgstr ""
 msgid "Cancel"
 msgstr "Відмінити"
 
+msgid "Cancel any changes to the currently active skin"
+msgstr ""
+
+msgid "Cancel any changes to the currently active skin and exit all menus"
+msgstr ""
+
 msgid "Cancel any text changes and exit"
 msgstr ""
+
+#, fuzzy
+msgid "Cancel execution?"
+msgstr "Селектор каналів"
 
 msgid "Cancelled upon user request"
 msgstr ""
@@ -1939,6 +1971,10 @@ msgstr "Налаштування додаткової затримки для п
 
 msgid "Configure an additional delay to improve subtitle synchronisation."
 msgstr "Налаштування додаткової затримки для поліпшення синхронізації субтитрів."
+
+#, fuzzy
+msgid "Configure default type for new timers."
+msgstr "Ви можете задати мережеву маску."
 
 msgid "Configure for how long the infobar will remain visible after activation."
 msgstr "Вкажіть, як довго інфобар залишатиметься видимим після його активації."
@@ -2580,6 +2616,10 @@ msgid "Default settings"
 msgstr "Налаштування за замовчуванням"
 
 #, fuzzy
+msgid "Default timer type"
+msgstr "Видалити таймер"
+
+#, fuzzy
 msgid "Define the location of the EPG Cache file."
 msgstr "Налаштування співвідношення сторін екрану."
 
@@ -2830,6 +2870,10 @@ msgstr "Зберегти таймшифт тільки для поточної �
 msgid "Display EPG list for current channel"
 msgstr "Показати EPG поточного каналу..."
 
+#, fuzzy
+msgid "Display Skin"
+msgstr "Налаштування дисплея"
+
 msgid "Display and userinterface"
 msgstr "Екран і інтерфейс"
 
@@ -3079,6 +3123,9 @@ msgstr "Вибір EPG"
 msgid "EPG settings"
 msgstr "Налаштування EPG"
 
+msgid "EPG:"
+msgstr ""
+
 #, python-format
 msgid "ERROR - failed to scan (%s)!"
 msgstr "Помилка - неможливе сканування (%s)!"
@@ -3309,9 +3356,6 @@ msgstr ""
 msgid "Enigma version: "
 msgstr "Версія ядра: "
 
-msgid "Enigma2 skin selector"
-msgstr "Вибір скіна Enigma2"
-
 #, fuzzy
 msgid "Enter"
 msgstr "центр"
@@ -3407,9 +3451,6 @@ msgid ""
 "Error during unzipping image\n"
 "%s"
 msgstr ""
-
-msgid "Error executing plugin"
-msgstr "Помилка запуску плагіна"
 
 msgid "Error stop stream!"
 msgstr ""
@@ -3631,6 +3672,9 @@ msgstr "FEC"
 
 msgid "FEC:"
 msgstr "FEC:"
+
+msgid "FHD"
+msgstr ""
 
 msgid "FTA"
 msgstr "FTA"
@@ -3901,17 +3945,14 @@ msgstr "Версія ядра: "
 msgid "GUI Settings"
 msgstr "Налаштування"
 
+#, fuzzy
+msgid "GUI Skin"
+msgstr "Налаштування"
+
 msgid ""
 "GUI needs a restart to apply a new language\n"
 "Do you want to restart the GUI now?"
 msgstr ""
-
-msgid ""
-"GUI needs a restart to apply a new skin\n"
-"Do you want to restart the GUI now?"
-msgstr ""
-"Для активації нового скіна необхідний рестарт GUI.\n"
-"Ви хочете зробити це зараз?"
 
 msgid "Gabon"
 msgstr ""
@@ -4071,6 +4112,10 @@ msgstr ""
 
 msgid "H"
 msgstr "H"
+
+#, fuzzy
+msgid "HD"
+msgstr "D"
 
 msgid "HD list"
 msgstr "HD лист"
@@ -4571,9 +4616,6 @@ msgstr "Інверсія, Pilot & Roll-off"
 msgid "Invert"
 msgstr "Вибрати всі"
 
-msgid "Ipkg"
-msgstr "Ipkg"
-
 msgid "Iran (Islamic Republic of)"
 msgstr ""
 
@@ -5001,6 +5043,11 @@ msgstr ""
 msgid "Manufacturer"
 msgstr "Виробник"
 
+msgid ""
+"Manufacturer reset in progress\n"
+"Pease wait until enigma2 restarts"
+msgstr ""
+
 msgid "Margin after recording (minutes)"
 msgstr "Об'єднати після запису (у хвилинах)"
 
@@ -5199,6 +5246,22 @@ msgstr ""
 
 msgid "Move to position X"
 msgstr "Переміщення до позиції Х"
+
+#, fuzzy
+msgid "Move to the next page"
+msgstr "перейти в наступній кут"
+
+#, fuzzy
+msgid "Move to the next skin"
+msgstr "перемістити вниз до наступного запису"
+
+#, fuzzy
+msgid "Move to the previous page"
+msgstr "назад на попередній розділ"
+
+#, fuzzy
+msgid "Move to the previous skin"
+msgstr "перемістити вгору до попереднього запису"
 
 msgid "Move west"
 msgstr "Переміщення на захід"
@@ -5757,6 +5820,9 @@ msgstr "Відкрити налаштування тюнера"
 
 msgid "Open the movie list"
 msgstr "Відкрити список відео"
+
+msgid "Opkg"
+msgstr ""
 
 msgid "Options disable timer"
 msgstr "Функції таймера відключення"
@@ -6389,7 +6455,8 @@ msgstr "Натисніть кнопку MENU на пульті для додат
 msgid "Press OK on your remote control to continue."
 msgstr "Натисніть OK на пульті, щоб продовжити."
 
-msgid "Press OK to activate the selected skin."
+#, fuzzy, python-format
+msgid "Press OK to activate the selected%s skin."
 msgstr "Натисніть OK для активації вибраного скіна."
 
 msgid "Press OK to activate the settings."
@@ -6401,6 +6468,10 @@ msgstr "Натисніть OK, щоб змінити настройки."
 #, python-format
 msgid "Press OK to get further details for %s"
 msgstr "Натисніть ОК, щоб отримати детальну інформацію для %s"
+
+#, fuzzy, python-format
+msgid "Press OK to keep the currently selected%s skin."
+msgstr "Натисніть OK для активації вибраного скіна."
 
 msgid "Press OK to scan"
 msgstr "Натисніть OK для пошуку."
@@ -6588,6 +6659,10 @@ msgstr "Дійсно видалити виконані таймери?"
 
 msgid "Really exit the subservices quickzap?"
 msgstr "Дійсно вийти з меню підсервісів?"
+
+#, fuzzy
+msgid "Really perform a manufacturer reset now?"
+msgstr "Захистіть екран скидання виробника"
 
 msgid "Really reboot now?"
 msgstr "Дійсно вийти з меню підсервісів?"
@@ -6923,6 +6998,10 @@ msgstr "Відновити"
 msgid "Restore backups"
 msgstr "Відновлення резрвних копій"
 
+#, fuzzy
+msgid "Restore defaults"
+msgstr "Встановити за замовчуванням"
+
 msgid "Restore deleted user bouquets"
 msgstr "Відновити видалені  букети  користувача"
 
@@ -7152,6 +7231,10 @@ msgstr "Зберегти"
 #, fuzzy
 msgid "Save / Enter text and exit"
 msgstr "Збереження і вихід"
+
+#, fuzzy
+msgid "Save and activate the currently selected skin"
+msgstr "Натисніть OK для активації вибраного скіна."
 
 msgid "Save and exit"
 msgstr "Збереження і вихід"
@@ -7617,9 +7700,6 @@ msgstr "Виберіть бездротову мережу"
 msgid "Select your ATSC provider."
 msgstr "ATSC провайдер"
 
-msgid "Select your Skin"
-msgstr "Виберіть ваш Скін"
-
 msgid ""
 "Select your backup device.\n"
 "Current device: "
@@ -7784,9 +7864,6 @@ msgstr "Встановити блокування по буднях"
 
 msgid "Set default"
 msgstr "Встановити за замовчуванням"
-
-msgid "Set default settings?"
-msgstr "Налаштування параметрів за замовчуванням?"
 
 msgid "Set end time"
 msgstr "Встановити час закінчення"
@@ -8213,11 +8290,15 @@ msgstr "Широта по сайту"
 msgid "Site longitude"
 msgstr "Довгота по сайту"
 
-msgid "Skin"
-msgstr "Вибір графічної оболочки"
-
 #, python-format
 msgid "Skin & Resolution: %s (%sx%s)\n"
+msgstr ""
+
+#, fuzzy
+msgid "Skin Selection Actions"
+msgstr "Виберіть дію"
+
+msgid "SkinSelector: Restart GUI"
 msgstr ""
 
 msgid "Skins"
@@ -9406,6 +9487,10 @@ msgstr "Вибір таймера..."
 msgid "Timer type"
 msgstr "Тип таймера"
 
+#, fuzzy
+msgid "Timer:"
+msgstr "Таймер"
+
 msgid "Timeshift"
 msgstr "Таймшифт"
 
@@ -9436,8 +9521,16 @@ msgstr "Властивості заголовка"
 msgid "Titleset mode"
 msgstr "Режим установки заголовка"
 
+#, python-format
+msgid "To apply the selected '%s' skin the GUI needs to restart.  Would you like to restart the GUI now?"
+msgstr ""
+
 msgid "To audio selection"
 msgstr "Вибір звуку"
+
+#, python-format
+msgid "To save and apply the selected '%s' skin the GUI needs to restart.  Would you like to save the selection and restart the GUI now?"
+msgstr ""
 
 msgid "To subtitle selection"
 msgstr "Вибір субтитрів"
@@ -11772,6 +11865,9 @@ msgstr "шаблон файла"
 msgid "tennis/squash"
 msgstr "теніс/сквош"
 
+msgid "testing"
+msgstr "працюючий"
+
 msgid "this bouquet is protected by a parental control pin"
 msgstr "цей букет захищений батьківським контролем"
 
@@ -11894,9 +11990,6 @@ msgstr "з назвою тюнера"
 
 msgid "with_errors"
 msgstr "з помилками"
-
-msgid "testing"
-msgstr "працюючий"
 
 msgid "xp1000"
 msgstr "xp1000"

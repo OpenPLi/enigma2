@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OPENPLi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-11 19:39+0200\n"
+"POT-Creation-Date: 2020-01-28 02:35+0200\n"
 "PO-Revision-Date: 2015-12-18 21:05+0200\n"
 "Last-Translator: Yetkin AYDIN <yetkina@gmail.com>\n"
 "Language-Team: http://www.hurforum.com <yetkina@gmail.com>\n"
@@ -120,11 +120,11 @@ msgid "%.0f kB"
 msgstr ""
 
 #, python-format
-msgid "%.1f°E"
+msgid "%.1f° E"
 msgstr ""
 
 #, python-format
-msgid "%.1f°W"
+msgid "%.1f° W"
 msgstr ""
 
 #, python-format
@@ -451,6 +451,9 @@ msgstr "16:9 Sinemaskop"
 msgid "16:9 always"
 msgstr "16:9 Her Zaman"
 
+msgid "16K"
+msgstr ""
+
 msgid "18 V"
 msgstr "18 V"
 
@@ -511,6 +514,10 @@ msgstr "4:3 Sinemaskop"
 msgid "4:3 PanScan"
 msgstr "4:3 PanScan"
 
+#, fuzzy
+msgid "4K"
+msgstr "4"
+
 msgid "5"
 msgstr "5"
 
@@ -526,6 +533,10 @@ msgstr "7"
 msgid "8"
 msgstr "8"
 
+#, fuzzy
+msgid "8K"
+msgstr "8"
+
 msgid "8bit"
 msgstr ""
 
@@ -535,12 +546,26 @@ msgstr "9"
 msgid ": 0000 - default (disabled)"
 msgstr ""
 
-msgid "<Current movielist location>"
-msgstr "<Mevcut film listesi konumu>"
+#, fuzzy
+msgid "< Current >"
+msgstr "Mevcut değer: "
 
 #, fuzzy
-msgid "<Default Skin>"
+msgid "< Default + Picon >"
 msgstr "Varsayılan ayarlar"
+
+#, fuzzy
+msgid "< Default >"
+msgstr "Varsayılan ayarlar"
+
+msgid "< Emergency >"
+msgstr ""
+
+msgid "< Pending restart >"
+msgstr ""
+
+msgid "<Current movielist location>"
+msgstr "<Mevcut film listesi konumu>"
 
 msgid "<Default movie location>"
 msgstr "<Varsayılan film konumu>"
@@ -703,9 +728,6 @@ msgstr "Favori düzenlemekten vazgeç"
 
 msgid "About"
 msgstr "Hakkında"
-
-msgid "About..."
-msgstr "Hakkında..."
 
 msgid "Accesspoint:"
 msgstr "Erişim noktası:"
@@ -1580,8 +1602,18 @@ msgstr ""
 msgid "Cancel"
 msgstr "Vazgeç"
 
+msgid "Cancel any changes to the currently active skin"
+msgstr ""
+
+msgid "Cancel any changes to the currently active skin and exit all menus"
+msgstr ""
+
 msgid "Cancel any text changes and exit"
 msgstr ""
+
+#, fuzzy
+msgid "Cancel execution?"
+msgstr "Kanal Seçimi"
 
 msgid "Cancelled upon user request"
 msgstr ""
@@ -1915,6 +1947,10 @@ msgstr "Altyazı senkronizasyonu için gecikme yapılandırması."
 
 msgid "Configure an additional delay to improve subtitle synchronisation."
 msgstr "Altyazı senkronizasyonu için gecikme yapılandırması."
+
+#, fuzzy
+msgid "Configure default type for new timers."
+msgstr "Ağ maskesini yapılandırın."
 
 msgid "Configure for how long the infobar will remain visible after activation."
 msgstr "Bilgi çubuğunun görünme süresi."
@@ -2554,6 +2590,10 @@ msgid "Default settings"
 msgstr "Varsayılan ayarlar"
 
 #, fuzzy
+msgid "Default timer type"
+msgstr "Zamanlayıcıyı sil"
+
+#, fuzzy
 msgid "Define the location of the EPG Cache file."
 msgstr "Ekranın en boy oranını yapılandırın."
 
@@ -2804,6 +2844,10 @@ msgstr "Zaman Kaydırmayı kaydet geçerli olay için"
 msgid "Display EPG list for current channel"
 msgstr "Mevcut kanal için EPG göster..."
 
+#, fuzzy
+msgid "Display Skin"
+msgstr "Ekran kurulumu"
+
 msgid "Display and userinterface"
 msgstr "Görüntüleme ve kullanıcı arayüzü"
 
@@ -3051,6 +3095,9 @@ msgstr "EPG Dil seçimi"
 msgid "EPG settings"
 msgstr "EPG ayarları"
 
+msgid "EPG:"
+msgstr ""
+
 #, python-format
 msgid "ERROR - failed to scan (%s)!"
 msgstr "HATA - Tarama başarısız (%s)!"
@@ -3280,9 +3327,6 @@ msgstr ""
 msgid "Enigma version: "
 msgstr "Çekirdek sürümü:"
 
-msgid "Enigma2 skin selector"
-msgstr "Arayüz Seçici"
-
 #, fuzzy
 msgid "Enter"
 msgstr "Merkez"
@@ -3377,9 +3421,6 @@ msgid ""
 "Error during unzipping image\n"
 "%s"
 msgstr ""
-
-msgid "Error executing plugin"
-msgstr "Eklentinin çalıştırılması sırasında hata oluştu"
 
 msgid "Error stop stream!"
 msgstr ""
@@ -3600,6 +3641,9 @@ msgstr "FEC"
 
 msgid "FEC:"
 msgstr "FEC:"
+
+msgid "FHD"
+msgstr ""
 
 msgid "FTA"
 msgstr "FTA"
@@ -3872,17 +3916,14 @@ msgstr "Çekirdek sürümü:"
 msgid "GUI Settings"
 msgstr "Ayarlar"
 
+#, fuzzy
+msgid "GUI Skin"
+msgstr "Ayarlar"
+
 msgid ""
 "GUI needs a restart to apply a new language\n"
 "Do you want to restart the GUI now?"
 msgstr ""
-
-msgid ""
-"GUI needs a restart to apply a new skin\n"
-"Do you want to restart the GUI now?"
-msgstr ""
-"Yeni arayüzü etkinleştirmek için yeniden başlatma gerekiyor\n"
-"Grafik arayüzünü (GUI) yeniden başlatmak istiyor musunuz?"
 
 msgid "Gabon"
 msgstr ""
@@ -4042,6 +4083,10 @@ msgstr ""
 
 msgid "H"
 msgstr ""
+
+#, fuzzy
+msgid "HD"
+msgstr "D"
 
 msgid "HD list"
 msgstr "HD listesi"
@@ -4537,9 +4582,6 @@ msgstr ""
 msgid "Invert"
 msgstr "Ters"
 
-msgid "Ipkg"
-msgstr "Ipkg"
-
 msgid "Iran (Islamic Republic of)"
 msgstr ""
 
@@ -4956,6 +4998,11 @@ msgstr ""
 msgid "Manufacturer"
 msgstr "Üretici"
 
+msgid ""
+"Manufacturer reset in progress\n"
+"Pease wait until enigma2 restarts"
+msgstr ""
+
 msgid "Margin after recording (minutes)"
 msgstr "Kayıttan sonra Marj (dakika)"
 
@@ -5154,6 +5201,22 @@ msgstr ""
 
 msgid "Move to position X"
 msgstr "'X' pozisyonuna taşı"
+
+#, fuzzy
+msgid "Move to the next page"
+msgstr "Sonraki açıyı seç"
+
+#, fuzzy
+msgid "Move to the next skin"
+msgstr "Bir alta taşı"
+
+#, fuzzy
+msgid "Move to the previous page"
+msgstr "Önceki bölüme geri git"
+
+#, fuzzy
+msgid "Move to the previous skin"
+msgstr "Bir üste taşı"
 
 msgid "Move west"
 msgstr "Batıya taşı"
@@ -5712,6 +5775,9 @@ msgstr "Tuner Kurulumu"
 
 msgid "Open the movie list"
 msgstr "Film listesinden aç"
+
+msgid "Opkg"
+msgstr ""
 
 msgid "Options disable timer"
 msgstr "Zamanlayıcı Devredışı"
@@ -6343,7 +6409,8 @@ msgstr "Ek seçenekler için uzaktan kumanda üzerindeki MENU düğmesine basın
 msgid "Press OK on your remote control to continue."
 msgstr "Devam etmek için kumandanızın OK tuşuna basın."
 
-msgid "Press OK to activate the selected skin."
+#, fuzzy, python-format
+msgid "Press OK to activate the selected%s skin."
 msgstr "Arayüzü etkinleştirmek için OK'a basın."
 
 msgid "Press OK to activate the settings."
@@ -6355,6 +6422,10 @@ msgstr "Düzenlemek için OK tuşuna basın."
 #, python-format
 msgid "Press OK to get further details for %s"
 msgstr "%s detayları için OK tuşuna basın"
+
+#, fuzzy, python-format
+msgid "Press OK to keep the currently selected%s skin."
+msgstr "Arayüzü etkinleştirmek için OK'a basın."
 
 msgid "Press OK to scan"
 msgstr "Arama için OK'a basın"
@@ -6542,6 +6613,10 @@ msgstr "Tamamlanan zamanlayıcıları silmek istiyor musunuz?"
 
 msgid "Really exit the subservices quickzap?"
 msgstr "Alt servislerde hızlı kanal değiştirme iptal olsun mu?"
+
+#, fuzzy
+msgid "Really perform a manufacturer reset now?"
+msgstr "Fabrika ayarları koruması"
 
 msgid "Really reboot now?"
 msgstr "Yeniden başlatmak istiyor musunuz?"
@@ -6876,6 +6951,10 @@ msgstr "Geri Yükle"
 msgid "Restore backups"
 msgstr "Yedekten geri yükle"
 
+#, fuzzy
+msgid "Restore defaults"
+msgstr "Varsayılan olarak ayarla"
+
 msgid "Restore deleted user bouquets"
 msgstr "Silinen buketleri geri yükle"
 
@@ -7103,6 +7182,10 @@ msgstr "Kaydet"
 #, fuzzy
 msgid "Save / Enter text and exit"
 msgstr "Kaydet ve çık"
+
+#, fuzzy
+msgid "Save and activate the currently selected skin"
+msgstr "Arayüzü etkinleştirmek için OK'a basın."
 
 msgid "Save and exit"
 msgstr "Kaydet ve çık"
@@ -7561,9 +7644,6 @@ msgstr "Kablosuz ağ seçin"
 msgid "Select your ATSC provider."
 msgstr "Eklenecek yayıncıyı seçin..."
 
-msgid "Select your Skin"
-msgstr ""
-
 msgid ""
 "Select your backup device.\n"
 "Current device: "
@@ -7728,9 +7808,6 @@ msgstr ""
 
 msgid "Set default"
 msgstr "Varsayılan olarak ayarla"
-
-msgid "Set default settings?"
-msgstr ""
 
 msgid "Set end time"
 msgstr "Bitiş zamanını ayarla"
@@ -8156,11 +8233,15 @@ msgstr "Sayfa enlemi"
 msgid "Site longitude"
 msgstr "Sayfa boylamı"
 
-msgid "Skin"
-msgstr "Arayüz"
-
 #, python-format
 msgid "Skin & Resolution: %s (%sx%s)\n"
+msgstr ""
+
+#, fuzzy
+msgid "Skin Selection Actions"
+msgstr "Eylem seçimi"
+
+msgid "SkinSelector: Restart GUI"
 msgstr ""
 
 msgid "Skins"
@@ -9323,6 +9404,10 @@ msgstr "Zamanlayıcı seçimi..."
 msgid "Timer type"
 msgstr "Zamanlayıcı tipi"
 
+#, fuzzy
+msgid "Timer:"
+msgstr "Zamanlayıcı"
+
 msgid "Timeshift"
 msgstr "Zaman Kaydırma"
 
@@ -9353,8 +9438,16 @@ msgstr "Başlık özellikleri"
 msgid "Titleset mode"
 msgstr "Başlıkseti kipi"
 
+#, python-format
+msgid "To apply the selected '%s' skin the GUI needs to restart.  Would you like to restart the GUI now?"
+msgstr ""
+
 msgid "To audio selection"
 msgstr "Ses seçimi için"
+
+#, python-format
+msgid "To save and apply the selected '%s' skin the GUI needs to restart.  Would you like to save the selection and restart the GUI now?"
+msgstr ""
 
 msgid "To subtitle selection"
 msgstr "Altyazı seçimi için"
@@ -11655,6 +11748,9 @@ msgstr "Taslak dosya"
 msgid "tennis/squash"
 msgstr "Tenis"
 
+msgid "testing"
+msgstr "Çalışıyor"
+
 msgid "this bouquet is protected by a parental control pin"
 msgstr "Bu buket Aile Koruma Şifresi ile Kilitlenmiş"
 
@@ -11775,9 +11871,6 @@ msgstr "Tuner adının yanında"
 
 msgid "with_errors"
 msgstr ""
-
-msgid "testing"
-msgstr "Çalışıyor"
 
 msgid "xp1000"
 msgstr "xp1000"
