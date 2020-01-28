@@ -448,7 +448,7 @@ class PluginDownloadBrowser(Screen):
 			from Components import opkg
 			pluginlist = []
 			self.pluginlist = pluginlist
-			for plugin in opkg.enumPlugins(self.PLUGIN_PREFIX):
+			for plugin in Opkg.enumPlugins(self.PLUGIN_PREFIX):
 				if plugin[0] not in self.installedplugins:
 					pluginlist.append(plugin + (plugin[0][15:],))
 			if pluginlist:
