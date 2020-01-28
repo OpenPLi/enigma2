@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-11 19:39+0200\n"
+"POT-Creation-Date: 2020-01-28 02:35+0200\n"
 "PO-Revision-Date: 2019-11-28 20:02+0200\n"
 "Last-Translator: Audronis Grincevicius <adga45@gmail.com>\n"
 "Language-Team: Adga (C) <adga45@gmail.com>\n"
@@ -474,6 +474,9 @@ msgstr "16:9 įterpiant juodas juostas šonuose"
 msgid "16:9 always"
 msgstr "Visada 16:9"
 
+msgid "16K"
+msgstr ""
+
 msgid "18 V"
 msgstr "18 V"
 
@@ -534,6 +537,10 @@ msgstr "4:3 Įterpiant juodas juostas šonuose"
 msgid "4:3 PanScan"
 msgstr "4:3 nukerpant šonus"
 
+#, fuzzy
+msgid "4K"
+msgstr "4"
+
 msgid "5"
 msgstr "5"
 
@@ -549,6 +556,10 @@ msgstr "7"
 msgid "8"
 msgstr "8"
 
+#, fuzzy
+msgid "8K"
+msgstr "8"
+
 msgid "8bit"
 msgstr "8 bitų"
 
@@ -558,11 +569,26 @@ msgstr "9"
 msgid ": 0000 - default (disabled)"
 msgstr ": 0000 - numatytasis (išjungta)"
 
+#, fuzzy
+msgid "< Current >"
+msgstr "Dabartinė reikšmė: "
+
+#, fuzzy
+msgid "< Default + Picon >"
+msgstr "<Numatytoji tema>"
+
+#, fuzzy
+msgid "< Default >"
+msgstr "<Numatytoji tema>"
+
+msgid "< Emergency >"
+msgstr ""
+
+msgid "< Pending restart >"
+msgstr ""
+
 msgid "<Current movielist location>"
 msgstr "<Dabartinė filmų sąrašo vieta>"
-
-msgid "<Default Skin>"
-msgstr "<Numatytoji tema>"
 
 msgid "<Default movie location>"
 msgstr "<Numatytoji filmų vieta>"
@@ -723,9 +749,6 @@ msgstr "Nutraukti mėgstamų redagavimą"
 
 msgid "About"
 msgstr "Apie"
-
-msgid "About..."
-msgstr "Apie..."
 
 msgid "Accesspoint:"
 msgstr "Prieigos taškas:"
@@ -1596,8 +1619,18 @@ msgstr "Kanados"
 msgid "Cancel"
 msgstr "Atšaukti"
 
+msgid "Cancel any changes to the currently active skin"
+msgstr ""
+
+msgid "Cancel any changes to the currently active skin and exit all menus"
+msgstr ""
+
 msgid "Cancel any text changes and exit"
 msgstr "Atšaukti bet kokius tekstinius pakeitimus ir užverti"
+
+#, fuzzy
+msgid "Cancel execution?"
+msgstr "Kanalo pasirinkimas"
 
 msgid "Cancelled upon user request"
 msgstr "Atšaukta vartotojo"
@@ -1919,6 +1952,10 @@ msgstr "Nustatykite papildomą delsą, kad pagerinti išorinį subtitrų sinchro
 
 msgid "Configure an additional delay to improve subtitle synchronisation."
 msgstr "Nustatykite papildomą delsą, kad pagerinti subtitrų sinchronizavimą."
+
+#, fuzzy
+msgid "Configure default type for new timers."
+msgstr "Nurodykite potinklio kaukę."
 
 msgid "Configure for how long the infobar will remain visible after activation."
 msgstr "Nustatykite, kiek laiko ekrane išliks matoma info juosta."
@@ -2543,6 +2580,10 @@ msgstr "Numatytoji filmų vieta"
 msgid "Default settings"
 msgstr "Numatytosios nuostatos"
 
+#, fuzzy
+msgid "Default timer type"
+msgstr "Ištrinti laikmatį"
+
 msgid "Define the location of the EPG Cache file."
 msgstr "Nustatykite EPG talpyklos failo vietą."
 
@@ -2785,6 +2826,10 @@ msgstr "Rodyti EPG informaciją apie dabartinį įvykį"
 
 msgid "Display EPG list for current channel"
 msgstr "Rodyti dabartinio kanalo EPG sąrašą"
+
+#, fuzzy
+msgid "Display Skin"
+msgstr "Monitoriaus nustatymai"
 
 msgid "Display and userinterface"
 msgstr "Ekranas ir vartotojo sąsaja"
@@ -3030,6 +3075,9 @@ msgstr "EPG pasirinkimas"
 msgid "EPG settings"
 msgstr "EPG nustatymai"
 
+msgid "EPG:"
+msgstr ""
+
 #, python-format
 msgid "ERROR - failed to scan (%s)!"
 msgstr "KLAIDA - paieška nepavyko (%s)!"
@@ -3254,9 +3302,6 @@ msgstr "Enigma derinimo lygis: %d\n"
 msgid "Enigma version: "
 msgstr "Enigmos versija: "
 
-msgid "Enigma2 skin selector"
-msgstr "Enigma2 temos parinkėjas"
-
 msgid "Enter"
 msgstr "Įveskite"
 
@@ -3355,9 +3400,6 @@ msgid ""
 msgstr ""
 "Išarchyvuojamo atvaizdo klaida\n"
 "%s"
-
-msgid "Error executing plugin"
-msgstr "Priedo paleisti nepavyko"
 
 msgid "Error stop stream!"
 msgstr "Srauto stabdymo klaida!"
@@ -3579,6 +3621,9 @@ msgstr "FEC"
 
 msgid "FEC:"
 msgstr "FEC:"
+
+msgid "FHD"
+msgstr ""
 
 msgid "FTA"
 msgstr "NEKODUOTI"
@@ -3839,18 +3884,15 @@ msgstr "GStreamer versija: "
 msgid "GUI Settings"
 msgstr "Grafinės aplinkos nustatymai"
 
+#, fuzzy
+msgid "GUI Skin"
+msgstr "Grafinės aplinkos nustatymai"
+
 msgid ""
 "GUI needs a restart to apply a new language\n"
 "Do you want to restart the GUI now?"
 msgstr ""
 "Naujos kalbos patvirtinimui grafinę aplinką reikia paleisti iš naujo\n"
-"Ar paleisti iš naujo grafinę aplinką dabar?"
-
-msgid ""
-"GUI needs a restart to apply a new skin\n"
-"Do you want to restart the GUI now?"
-msgstr ""
-"Naujos temos aktyvavimui, grafinę aplinką reikia paleisti iš naujo\n"
 "Ar paleisti iš naujo grafinę aplinką dabar?"
 
 msgid "Gabon"
@@ -4008,6 +4050,10 @@ msgstr "Gajana"
 
 msgid "H"
 msgstr "H"
+
+#, fuzzy
+msgid "HD"
+msgstr "D"
 
 msgid "HD list"
 msgstr "HD sąrašas"
@@ -4492,9 +4538,6 @@ msgstr "Inversija, Pilot ir Roll-off"
 msgid "Invert"
 msgstr "Žymėti visus"
 
-msgid "Ipkg"
-msgstr "Ipkg"
-
 msgid "Iran (Islamic Republic of)"
 msgstr "Irano Islamo Respublika"
 
@@ -4907,6 +4950,11 @@ msgstr "Rankiniu būdu importuoti iš nuotolinio imtuvo"
 msgid "Manufacturer"
 msgstr "Gamintojas"
 
+msgid ""
+"Manufacturer reset in progress\n"
+"Pease wait until enigma2 restarts"
+msgstr ""
+
 msgid "Margin after recording (minutes)"
 msgstr "Intarpas po įrašymo (minutėmis)"
 
@@ -5099,6 +5147,22 @@ msgstr "Perkelti virtualiosios klaviatūros žymeklį aukštyn"
 
 msgid "Move to position X"
 msgstr "Sukti į poziciją X"
+
+#, fuzzy
+msgid "Move to the next page"
+msgstr "perjungti į kitą kampą"
+
+#, fuzzy
+msgid "Move to the next skin"
+msgstr "perkelti žemyn prie kito įrašo"
+
+#, fuzzy
+msgid "Move to the previous page"
+msgstr "atsukti atgal į ankstesnį skyrių"
+
+#, fuzzy
+msgid "Move to the previous skin"
+msgstr "perkelti aukštyn prie ankstesnio įrašo"
 
 msgid "Move west"
 msgstr "Sukti į vakarus"
@@ -5643,6 +5707,9 @@ msgstr "Atidaryti imtuvo konfigūravimą "
 
 msgid "Open the movie list"
 msgstr "Atidaryti filmų sąrašą"
+
+msgid "Opkg"
+msgstr ""
 
 msgid "Options disable timer"
 msgstr "Nustatymai laikmačiui išjungti"
@@ -6257,7 +6324,8 @@ msgstr "Papildomų galimybių pasirinkimui, spauskite 'MENU'."
 msgid "Press OK on your remote control to continue."
 msgstr "Spauskite OK savo valdymo pulte ir tęskite."
 
-msgid "Press OK to activate the selected skin."
+#, fuzzy, python-format
+msgid "Press OK to activate the selected%s skin."
 msgstr "Spauskite OK, kad aktyvuoti pasirinktą temą."
 
 msgid "Press OK to activate the settings."
@@ -6269,6 +6337,10 @@ msgstr "Spauskite OK ir redaguokite nustatymus."
 #, python-format
 msgid "Press OK to get further details for %s"
 msgstr "Spauskite OK, kad gautumėte tolimesnes detales dėl %s"
+
+#, fuzzy, python-format
+msgid "Press OK to keep the currently selected%s skin."
+msgstr "Spauskite OK, kad aktyvuoti pasirinktą temą."
 
 msgid "Press OK to scan"
 msgstr "Kad pradėti paiešką, spauskite 'OK'"
@@ -6454,6 +6526,10 @@ msgstr "Tikrai ištrinti baigtus laikmačius?"
 
 msgid "Really exit the subservices quickzap?"
 msgstr "Ar tikrai užverti greitą subkanalų perjungimą?"
+
+#, fuzzy
+msgid "Really perform a manufacturer reset now?"
+msgstr "Apsaugoti ekrano nustatymą iš naujo"
 
 msgid "Really reboot now?"
 msgstr "Tikrai perjungti dabar?"
@@ -6780,6 +6856,10 @@ msgstr "Atkurti"
 msgid "Restore backups"
 msgstr "Atkurti atsargines kopijas"
 
+#, fuzzy
+msgid "Restore defaults"
+msgstr "Nustatykite numatytuoju"
+
 msgid "Restore deleted user bouquets"
 msgstr "Atkurti ištrintus vartotojo paketus"
 
@@ -7000,6 +7080,10 @@ msgstr "Išsaugoti"
 
 msgid "Save / Enter text and exit"
 msgstr "Įrašykite / įveskite tekstą ir išeikite"
+
+#, fuzzy
+msgid "Save and activate the currently selected skin"
+msgstr "Spauskite OK, kad aktyvuoti pasirinktą temą."
 
 msgid "Save and exit"
 msgstr "Išsaugoti ir užverti"
@@ -7452,9 +7536,6 @@ msgstr "Pasirinkite belaidį tinklą"
 msgid "Select your ATSC provider."
 msgstr "Pasirinkite savo ATSC paslaugų teikėją."
 
-msgid "Select your Skin"
-msgstr "Pasirinkite norimą temą"
-
 msgid ""
 "Select your backup device.\n"
 "Current device: "
@@ -7614,9 +7695,6 @@ msgstr "Nustatykite blokavimo kartus pagal savaitės dieną"
 
 msgid "Set default"
 msgstr "Nustatykite numatytuoju"
-
-msgid "Set default settings?"
-msgstr "Nustatyti numatytus parametrus?"
 
 msgid "Set end time"
 msgstr "Nustatykite pabaigos laiką"
@@ -8037,12 +8115,16 @@ msgstr "Vietos platuma"
 msgid "Site longitude"
 msgstr "Vietos ilguma"
 
-msgid "Skin"
-msgstr "Vartotojo aplinkos tema"
-
 #, python-format
 msgid "Skin & Resolution: %s (%sx%s)\n"
 msgstr "Tema ir rezoliucija: %s (%sx%s)\n"
+
+#, fuzzy
+msgid "Skin Selection Actions"
+msgstr "Pasirinkite veiksmą"
+
+msgid "SkinSelector: Restart GUI"
+msgstr ""
 
 msgid "Skins"
 msgstr "Vartotojo aplinkos temos"
@@ -9189,6 +9271,10 @@ msgstr "Laikmačio pasirinkimas..."
 msgid "Timer type"
 msgstr "Laikmačio tipas"
 
+#, fuzzy
+msgid "Timer:"
+msgstr "Laikmatis"
+
 msgid "Timeshift"
 msgstr "Laiko poslinkis"
 
@@ -9219,8 +9305,16 @@ msgstr "Antraštės ypatybės"
 msgid "Titleset mode"
 msgstr "Pavadinimo nustatymo režimas"
 
+#, python-format
+msgid "To apply the selected '%s' skin the GUI needs to restart.  Would you like to restart the GUI now?"
+msgstr ""
+
 msgid "To audio selection"
 msgstr "Garso pasirinkimas"
+
+#, python-format
+msgid "To save and apply the selected '%s' skin the GUI needs to restart.  Would you like to save the selection and restart the GUI now?"
+msgstr ""
 
 msgid "To subtitle selection"
 msgstr "Subtitrų pasirinkimas"
@@ -11496,6 +11590,9 @@ msgstr "šablono failas"
 msgid "tennis/squash"
 msgstr "tenisas, skvošas"
 
+msgid "testing"
+msgstr "dirba"
+
 msgid "this bouquet is protected by a parental control pin"
 msgstr "šis paketas apsaugotas tėvų kontrolės PIN kodu"
 
@@ -11616,9 +11713,6 @@ msgstr "su imtuvo pavadinimu"
 
 msgid "with_errors"
 msgstr "su klaidomis"
-
-msgid "testing"
-msgstr "dirba"
 
 msgid "xp1000"
 msgstr "xp1000"

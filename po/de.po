@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-11 19:39+0200\n"
+"POT-Creation-Date: 2020-01-28 02:35+0200\n"
 "PO-Revision-Date: 2019-11-28 17:53+0100\n"
 "Last-Translator: Pike_Bishop <alfredzngr023@gmail.com>\n"
 "Language-Team: Sfteam  angelo2807@hotmail.com\n"
@@ -463,6 +463,9 @@ msgstr "16:9 Letterbox"
 msgid "16:9 always"
 msgstr "immer 16:9"
 
+msgid "16K"
+msgstr ""
+
 msgid "18 V"
 msgstr "18 V"
 
@@ -523,6 +526,10 @@ msgstr "4:3 Letterbox"
 msgid "4:3 PanScan"
 msgstr "4:3 PanScan"
 
+#, fuzzy
+msgid "4K"
+msgstr "4"
+
 msgid "5"
 msgstr "5"
 
@@ -538,6 +545,10 @@ msgstr "7"
 msgid "8"
 msgstr "8"
 
+#, fuzzy
+msgid "8K"
+msgstr "8"
+
 msgid "8bit"
 msgstr "8bit"
 
@@ -547,11 +558,26 @@ msgstr "9"
 msgid ": 0000 - default (disabled)"
 msgstr ": 0000 - Standard (deaktiviert)"
 
+#, fuzzy
+msgid "< Current >"
+msgstr "Aktueller Wert: "
+
+#, fuzzy
+msgid "< Default + Picon >"
+msgstr "Voreinstellungen"
+
+#, fuzzy
+msgid "< Default >"
+msgstr "Voreinstellungen"
+
+msgid "< Emergency >"
+msgstr ""
+
+msgid "< Pending restart >"
+msgstr ""
+
 msgid "<Current movielist location>"
 msgstr "<Aktuelles Filmlisten-Verzeichnis>"
-
-msgid "<Default Skin>"
-msgstr "Voreinstellungen"
 
 msgid "<Default movie location>"
 msgstr "<Standard Filmlisten-Verzeichnis>"
@@ -712,9 +738,6 @@ msgstr "Favoriteneditor abbrechen"
 
 msgid "About"
 msgstr "Über"
-
-msgid "About..."
-msgstr "Über…"
 
 msgid "Accesspoint:"
 msgstr "Zugangspunkt:"
@@ -1584,8 +1607,18 @@ msgstr "Kanada"
 msgid "Cancel"
 msgstr "Abbrechen"
 
+msgid "Cancel any changes to the currently active skin"
+msgstr ""
+
+msgid "Cancel any changes to the currently active skin and exit all menus"
+msgstr ""
+
 msgid "Cancel any text changes and exit"
 msgstr "Brechen Sie alle Textänderungen ab und beenden Sie sie"
+
+#, fuzzy
+msgid "Cancel execution?"
+msgstr "Kanalliste"
 
 msgid "Cancelled upon user request"
 msgstr "Auf Benutzeranfrage abgebrochen"
@@ -1907,6 +1940,10 @@ msgstr "Konfiguration einer zusätzlichen Verzögerung zur besseren Synchronisat
 
 msgid "Configure an additional delay to improve subtitle synchronisation."
 msgstr "Konfiguriert eine zusätzliche Verzögerung zur besseren Synchronisation der Untertitel."
+
+#, fuzzy
+msgid "Configure default type for new timers."
+msgstr "Netzmaske konfigurieren"
 
 msgid "Configure for how long the infobar will remain visible after activation."
 msgstr "Konfigurieren Sie wie lange die Infoleiste nach Einblendung sichtbar bleibt."
@@ -2535,6 +2572,10 @@ msgstr "Standard Filmlisten-Verzeichnis"
 msgid "Default settings"
 msgstr "Voreinstellungen"
 
+#, fuzzy
+msgid "Default timer type"
+msgstr "Timer löschen"
+
 msgid "Define the location of the EPG Cache file."
 msgstr "Definieren Sie den Speicherort der EPG-Cache-Datei."
 
@@ -2778,6 +2819,10 @@ msgstr "Timeshift nur für aktuelle Sendung speichern"
 msgid "Display EPG list for current channel"
 msgstr "EPG für aktuellen Kanal anzeigen…"
 
+#, fuzzy
+msgid "Display Skin"
+msgstr "Display-Einstellungen"
+
 msgid "Display and userinterface"
 msgstr "Display und Benutzeroberfläche"
 
@@ -3015,6 +3060,9 @@ msgstr "EPG-Auswahl"
 msgid "EPG settings"
 msgstr "EPG-Einstellungen"
 
+msgid "EPG:"
+msgstr ""
+
 #, python-format
 msgid "ERROR - failed to scan (%s)!"
 msgstr "FEHLER - Suche fehlgeschlagen (%s)!"
@@ -3242,9 +3290,6 @@ msgstr "Enigma Debug Level: %d\n"
 msgid "Enigma version: "
 msgstr "Enigma-Version:"
 
-msgid "Enigma2 skin selector"
-msgstr "Enigma2 Skin-Auswahl"
-
 msgid "Enter"
 msgstr "Enter"
 
@@ -3343,9 +3388,6 @@ msgid ""
 msgstr ""
 "Fehler beim Entpacken des Images\n"
 "% s"
-
-msgid "Error executing plugin"
-msgstr "Ausführen des Plugins fehlgeschlagen"
 
 msgid "Error stop stream!"
 msgstr "Fehler beim Stoppen des Streams!"
@@ -3571,6 +3613,9 @@ msgstr "FEC"
 
 msgid "FEC:"
 msgstr "FEC:"
+
+msgid "FHD"
+msgstr ""
 
 msgid "FTA"
 msgstr "FTA"
@@ -3831,18 +3876,15 @@ msgstr "GStreamer-Version:"
 msgid "GUI Settings"
 msgstr "GUI-Einstellungen"
 
+#, fuzzy
+msgid "GUI Skin"
+msgstr "GUI-Einstellungen"
+
 msgid ""
 "GUI needs a restart to apply a new language\n"
 "Do you want to restart the GUI now?"
 msgstr ""
 "Zur Übernahme der neuen Sprache muss die Benutzerobfläche neu gestartet werden\n"
-"Wollen Sie die Benutzerobfläche neu starten?"
-
-msgid ""
-"GUI needs a restart to apply a new skin\n"
-"Do you want to restart the GUI now?"
-msgstr ""
-"Zur Übernahme des neuen Skins muss die Benutzerobfläche neu gestartet werden\n"
 "Wollen Sie die Benutzerobfläche neu starten?"
 
 msgid "Gabon"
@@ -4000,6 +4042,10 @@ msgstr "Guyana"
 
 msgid "H"
 msgstr "H"
+
+#, fuzzy
+msgid "HD"
+msgstr "D"
 
 msgid "HD list"
 msgstr "HD Liste"
@@ -4482,9 +4528,6 @@ msgstr "Inversion, Pilot & Roll-off"
 msgid "Invert"
 msgstr "Umkehren"
 
-msgid "Ipkg"
-msgstr "Ipkg"
-
 msgid "Iran (Islamic Republic of)"
 msgstr "Iran (Islamische Republik)"
 
@@ -4897,6 +4940,11 @@ msgstr "Manueller Import vom Reserve-Tuner"
 msgid "Manufacturer"
 msgstr "Hersteller"
 
+msgid ""
+"Manufacturer reset in progress\n"
+"Pease wait until enigma2 restarts"
+msgstr ""
+
 msgid "Margin after recording (minutes)"
 msgstr "Nachlauf hinter Aufnahme (in Minuten)"
 
@@ -5089,6 +5137,22 @@ msgstr "Bewegen Sie den Cursor nach oben"
 
 msgid "Move to position X"
 msgstr "Drehe zur Position X"
+
+#, fuzzy
+msgid "Move to the next page"
+msgstr "Zur nächsten Kameraperspektive wechseln"
+
+#, fuzzy
+msgid "Move to the next skin"
+msgstr "Zum nächsten Eintrag gehen"
+
+#, fuzzy
+msgid "Move to the previous page"
+msgstr "Zum vorherigen Kapitel zurück"
+
+#, fuzzy
+msgid "Move to the previous skin"
+msgstr "Zum vorherigen Eintrag gehen"
 
 msgid "Move west"
 msgstr "Drehen nach Westen"
@@ -5635,6 +5699,9 @@ msgstr "Öffnen Sie den Setup-Tuner"
 
 msgid "Open the movie list"
 msgstr "Zurück zur Videoliste"
+
+msgid "Opkg"
+msgstr ""
 
 msgid "Options disable timer"
 msgstr "Optionen deaktivieren Zeit"
@@ -6250,7 +6317,8 @@ msgstr "MENU drücken für zusätzliche Optionen."
 msgid "Press OK on your remote control to continue."
 msgstr "OK drücken zum Fortfahren."
 
-msgid "Press OK to activate the selected skin."
+#, fuzzy, python-format
+msgid "Press OK to activate the selected%s skin."
 msgstr "OK drücken, um den markierten Skin zu aktivieren."
 
 msgid "Press OK to activate the settings."
@@ -6262,6 +6330,10 @@ msgstr "OK drücken zum Editieren."
 #, python-format
 msgid "Press OK to get further details for %s"
 msgstr "Drücken Sie OK, um weitere Details zu %s zu erhalten."
+
+#, fuzzy, python-format
+msgid "Press OK to keep the currently selected%s skin."
+msgstr "OK drücken, um den markierten Skin zu aktivieren."
 
 msgid "Press OK to scan"
 msgstr "Zum Starten der Suche OK drücken."
@@ -6447,6 +6519,10 @@ msgstr "Vollendete Timer wirklich löschen?"
 
 msgid "Really exit the subservices quickzap?"
 msgstr "Den Subservices-Schnellumschalter wirklich beenden?"
+
+#, fuzzy
+msgid "Really perform a manufacturer reset now?"
+msgstr "Werkseinstellungen (zurück)setzen schützen"
 
 msgid "Really reboot now?"
 msgstr "Wollen Sie trotzdem neu booten?"
@@ -6776,6 +6852,10 @@ msgstr "Zurückspielen"
 msgid "Restore backups"
 msgstr "Einstellungen wiederherstellen"
 
+#, fuzzy
+msgid "Restore defaults"
+msgstr "Als Standard setzen"
+
 msgid "Restore deleted user bouquets"
 msgstr "Gelöschte Userbouquets wiederherstellen"
 
@@ -6996,6 +7076,10 @@ msgstr "Speichern"
 
 msgid "Save / Enter text and exit"
 msgstr "Text eingeben und speichern, danach beenden."
+
+#, fuzzy
+msgid "Save and activate the currently selected skin"
+msgstr "OK drücken, um den markierten Skin zu aktivieren."
 
 msgid "Save and exit"
 msgstr "Speichern und beenden"
@@ -7445,9 +7529,6 @@ msgstr "Funk-Netzwerk auswählen"
 msgid "Select your ATSC provider."
 msgstr "Wählen Sie Ihren ATSC-Anbieter aus."
 
-msgid "Select your Skin"
-msgstr "Ihren Skin auswählen"
-
 msgid ""
 "Select your backup device.\n"
 "Current device: "
@@ -7607,9 +7688,6 @@ msgstr "Setze Blockzeiten nach Wochentag"
 
 msgid "Set default"
 msgstr "Als Standard setzen"
-
-msgid "Set default settings?"
-msgstr "Standardeinstellungen festlegen?"
 
 msgid "Set end time"
 msgstr "End-Zeit eingeben"
@@ -8028,12 +8106,16 @@ msgstr "Breitengrad ausrichten"
 msgid "Site longitude"
 msgstr "Längengrad ausrichten"
 
-msgid "Skin"
-msgstr "Skin"
-
 #, python-format
 msgid "Skin & Resolution: %s (%sx%s)\n"
 msgstr "Skin & Auflösung: %s (%sx%s)\n"
+
+#, fuzzy
+msgid "Skin Selection Actions"
+msgstr "Wähle Vorgang"
+
+msgid "SkinSelector: Restart GUI"
+msgstr ""
 
 msgid "Skins"
 msgstr "Skins"
@@ -9186,6 +9268,10 @@ msgstr "Timer-Auswahl…"
 msgid "Timer type"
 msgstr "Timertyp"
 
+#, fuzzy
+msgid "Timer:"
+msgstr "Timer"
+
 msgid "Timeshift"
 msgstr "Timeshift"
 
@@ -9216,8 +9302,16 @@ msgstr "Titeldetails"
 msgid "Titleset mode"
 msgstr "Titelsatz-Modus"
 
+#, python-format
+msgid "To apply the selected '%s' skin the GUI needs to restart.  Would you like to restart the GUI now?"
+msgstr ""
+
 msgid "To audio selection"
 msgstr "Zur Ton-Auswahl"
+
+#, python-format
+msgid "To save and apply the selected '%s' skin the GUI needs to restart.  Would you like to save the selection and restart the GUI now?"
+msgstr ""
 
 msgid "To subtitle selection"
 msgstr "Zur Untertitel-Auswahl"
@@ -11498,6 +11592,9 @@ msgstr "Dateivorlage"
 msgid "tennis/squash"
 msgstr "Tennis/Squash"
 
+msgid "testing"
+msgstr "Arbeite"
+
 msgid "this bouquet is protected by a parental control pin"
 msgstr "Dieses Bouquet ist durch einen Jugendschutz-PIN Code geschützt"
 
@@ -11617,9 +11714,6 @@ msgstr "mit Tuner Namen"
 
 msgid "with_errors"
 msgstr "mit_Fehlern"
-
-msgid "testing"
-msgstr "Arbeite"
 
 msgid "xp1000"
 msgstr "xp1000"
