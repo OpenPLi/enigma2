@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-11 19:39+0200\n"
+"POT-Creation-Date: 2020-01-28 02:35+0200\n"
 "PO-Revision-Date: 2010-03-09 21:03+0100\n"
 "Last-Translator: \n"
 "Language-Team: HDTV ROMANIA(superonic,costel_mbc,neutrin,otheitis,cipy_1982,neutrin,runcanion)\n"
@@ -113,11 +113,11 @@ msgid "%.0f kB"
 msgstr ""
 
 #, python-format
-msgid "%.1f°E"
+msgid "%.1f° E"
 msgstr ""
 
 #, python-format
-msgid "%.1f°W"
+msgid "%.1f° W"
 msgstr ""
 
 #, python-format
@@ -454,6 +454,9 @@ msgstr ""
 msgid "16:9 always"
 msgstr "16:9 mereu"
 
+msgid "16K"
+msgstr ""
+
 msgid "18 V"
 msgstr ""
 
@@ -514,6 +517,9 @@ msgstr ""
 msgid "4:3 PanScan"
 msgstr ""
 
+msgid "4K"
+msgstr ""
+
 msgid "5"
 msgstr ""
 
@@ -529,6 +535,9 @@ msgstr ""
 msgid "8"
 msgstr ""
 
+msgid "8K"
+msgstr ""
+
 msgid "8bit"
 msgstr ""
 
@@ -538,12 +547,25 @@ msgstr ""
 msgid ": 0000 - default (disabled)"
 msgstr ""
 
-msgid "<Current movielist location>"
+msgid "< Current >"
 msgstr ""
 
 #, fuzzy
-msgid "<Default Skin>"
+msgid "< Default + Picon >"
 msgstr "Setari implicite"
+
+#, fuzzy
+msgid "< Default >"
+msgstr "Setari implicite"
+
+msgid "< Emergency >"
+msgstr ""
+
+msgid "< Pending restart >"
+msgstr ""
+
+msgid "<Current movielist location>"
+msgstr ""
 
 msgid "<Default movie location>"
 msgstr ""
@@ -696,9 +718,6 @@ msgstr "Renunta la editarea favoritelor"
 
 msgid "About"
 msgstr "Despre"
-
-msgid "About..."
-msgstr "Despre..."
 
 msgid "Accesspoint:"
 msgstr ""
@@ -1593,8 +1612,18 @@ msgstr ""
 msgid "Cancel"
 msgstr "Anuleaza"
 
+msgid "Cancel any changes to the currently active skin"
+msgstr ""
+
+msgid "Cancel any changes to the currently active skin and exit all menus"
+msgstr ""
+
 msgid "Cancel any text changes and exit"
 msgstr ""
+
+#, fuzzy
+msgid "Cancel execution?"
+msgstr "Selectie canal"
 
 msgid "Cancelled upon user request"
 msgstr ""
@@ -1937,6 +1966,10 @@ msgstr ""
 
 msgid "Configure an additional delay to improve subtitle synchronisation."
 msgstr ""
+
+#, fuzzy
+msgid "Configure default type for new timers."
+msgstr "Mod configurare"
 
 msgid "Configure for how long the infobar will remain visible after activation."
 msgstr ""
@@ -2589,6 +2622,10 @@ msgstr ""
 msgid "Default settings"
 msgstr "Setari implicite"
 
+#, fuzzy
+msgid "Default timer type"
+msgstr "Tip Timer"
+
 msgid "Define the location of the EPG Cache file."
 msgstr ""
 
@@ -2837,6 +2874,10 @@ msgstr ""
 #, fuzzy
 msgid "Display EPG list for current channel"
 msgstr "Arata bara de informatii la schimbarea evenimentelor"
+
+#, fuzzy
+msgid "Display Skin"
+msgstr "Configurare afisaj"
 
 #, fuzzy
 msgid "Display and userinterface"
@@ -3091,6 +3132,9 @@ msgstr "Selectie EPG"
 msgid "EPG settings"
 msgstr ""
 
+msgid "EPG:"
+msgstr ""
+
 #, python-format
 msgid "ERROR - failed to scan (%s)!"
 msgstr "EROARE - scanare esuata (%s)!"
@@ -3322,10 +3366,6 @@ msgstr ""
 msgid "Enigma version: "
 msgstr "Versiune noua:"
 
-#, fuzzy
-msgid "Enigma2 skin selector"
-msgstr "enigma2 si retea"
-
 msgid "Enter"
 msgstr ""
 
@@ -3418,9 +3458,6 @@ msgid ""
 "Error during unzipping image\n"
 "%s"
 msgstr ""
-
-msgid "Error executing plugin"
-msgstr "Eroare la executia pluginului"
 
 msgid "Error stop stream!"
 msgstr ""
@@ -3648,6 +3685,9 @@ msgid "FEC"
 msgstr "FEC"
 
 msgid "FEC:"
+msgstr ""
+
+msgid "FHD"
 msgstr ""
 
 msgid "FTA"
@@ -3912,15 +3952,14 @@ msgstr "Versiune noua:"
 msgid "GUI Settings"
 msgstr "Setari"
 
+#, fuzzy
+msgid "GUI Skin"
+msgstr "Setari"
+
 msgid ""
 "GUI needs a restart to apply a new language\n"
 "Do you want to restart the GUI now?"
 msgstr ""
-
-msgid ""
-"GUI needs a restart to apply a new skin\n"
-"Do you want to restart the GUI now?"
-msgstr "Interfata grafica necesita repornirea pentru aplicarea noilor decoratiuniDoriti repornirea interfetei grafice acum?"
 
 msgid "Gabon"
 msgstr ""
@@ -4087,6 +4126,10 @@ msgstr ""
 
 msgid "H"
 msgstr ""
+
+#, fuzzy
+msgid "HD"
+msgstr "D"
 
 msgid "HD list"
 msgstr ""
@@ -4587,9 +4630,6 @@ msgstr ""
 msgid "Invert"
 msgstr ""
 
-msgid "Ipkg"
-msgstr "Ipkg"
-
 msgid "Iran (Islamic Republic of)"
 msgstr ""
 
@@ -5026,6 +5066,11 @@ msgstr ""
 msgid "Manufacturer"
 msgstr "Fabricant"
 
+msgid ""
+"Manufacturer reset in progress\n"
+"Pease wait until enigma2 restarts"
+msgstr ""
+
 #, fuzzy
 msgid "Margin after recording (minutes)"
 msgstr "Creaza margini inainte de inregistrare (minute)"
@@ -5230,6 +5275,22 @@ msgstr ""
 
 msgid "Move to position X"
 msgstr ""
+
+#, fuzzy
+msgid "Move to the next page"
+msgstr "mergi la urmatorul unghi"
+
+#, fuzzy
+msgid "Move to the next skin"
+msgstr "muta jos la urmatoarea intrare"
+
+#, fuzzy
+msgid "Move to the previous page"
+msgstr "deruleaza la capitolul anterior"
+
+#, fuzzy
+msgid "Move to the previous skin"
+msgstr "muta sus la anterioara intrare"
 
 msgid "Move west"
 msgstr "Misca spre vest"
@@ -5801,6 +5862,9 @@ msgstr ""
 #, fuzzy
 msgid "Open the movie list"
 msgstr "Revenire la lista de filme"
+
+msgid "Opkg"
+msgstr ""
 
 msgid "Options disable timer"
 msgstr ""
@@ -6437,8 +6501,9 @@ msgstr ""
 msgid "Press OK on your remote control to continue."
 msgstr "Va rugam apasati OK de pe telecomanda pentru a continua"
 
-msgid "Press OK to activate the selected skin."
-msgstr ""
+#, fuzzy, python-format
+msgid "Press OK to activate the selected%s skin."
+msgstr "Apasati OK pentru a activa setarile"
 
 msgid "Press OK to activate the settings."
 msgstr "Apasati OK pentru a activa setarile"
@@ -6449,6 +6514,10 @@ msgstr "Apasati OK pentru a edita setarile."
 #, python-format
 msgid "Press OK to get further details for %s"
 msgstr "Apasati OK pentru a primi detaliile urmatoare pentru %s"
+
+#, fuzzy, python-format
+msgid "Press OK to keep the currently selected%s skin."
+msgstr "Apasati OK pentru a edita setarile."
 
 msgid "Press OK to scan"
 msgstr "Apasati OK pentru scanare"
@@ -6638,6 +6707,9 @@ msgstr "Stergeti timpii de terminare?"
 
 msgid "Really exit the subservices quickzap?"
 msgstr "Iesiti din subserviciul zap rapid?"
+
+msgid "Really perform a manufacturer reset now?"
+msgstr ""
 
 msgid "Really reboot now?"
 msgstr "Reporniti sistemul acum?"
@@ -6975,6 +7047,10 @@ msgstr "Revenire"
 msgid "Restore backups"
 msgstr ""
 
+#, fuzzy
+msgid "Restore defaults"
+msgstr "listeaza stilul default"
+
 msgid "Restore deleted user bouquets"
 msgstr ""
 
@@ -7202,6 +7278,10 @@ msgstr "Salvare"
 
 msgid "Save / Enter text and exit"
 msgstr ""
+
+#, fuzzy
+msgid "Save and activate the currently selected skin"
+msgstr "Eliminare titlu curent selectat"
 
 msgid "Save and exit"
 msgstr ""
@@ -7683,9 +7763,6 @@ msgstr ""
 msgid "Select your ATSC provider."
 msgstr "Alegeti furnizor pentru a fi adaugat..."
 
-msgid "Select your Skin"
-msgstr ""
-
 msgid ""
 "Select your backup device.\n"
 "Current device: "
@@ -7851,9 +7928,6 @@ msgid "Set blocktimes by weekday"
 msgstr ""
 
 msgid "Set default"
-msgstr ""
-
-msgid "Set default settings?"
 msgstr ""
 
 #, fuzzy
@@ -8295,11 +8369,15 @@ msgstr ""
 msgid "Site longitude"
 msgstr ""
 
-msgid "Skin"
-msgstr ""
-
 #, python-format
 msgid "Skin & Resolution: %s (%sx%s)\n"
+msgstr ""
+
+#, fuzzy
+msgid "Skin Selection Actions"
+msgstr "Alege locatia copiei de siguranta"
+
+msgid "SkinSelector: Restart GUI"
 msgstr ""
 
 msgid "Skins"
@@ -9469,6 +9547,10 @@ msgstr ""
 msgid "Timer type"
 msgstr "Tip Timer"
 
+#, fuzzy
+msgid "Timer:"
+msgstr "Timer"
+
 msgid "Timeshift"
 msgstr "Timeshift"
 
@@ -9499,7 +9581,15 @@ msgstr "Proprietati titlu"
 msgid "Titleset mode"
 msgstr "Mod titlu"
 
+#, python-format
+msgid "To apply the selected '%s' skin the GUI needs to restart.  Would you like to restart the GUI now?"
+msgstr ""
+
 msgid "To audio selection"
+msgstr ""
+
+#, python-format
+msgid "To save and apply the selected '%s' skin the GUI needs to restart.  Would you like to save the selection and restart the GUI now?"
 msgstr ""
 
 msgid "To subtitle selection"
@@ -11780,6 +11870,9 @@ msgstr "fisier template"
 msgid "tennis/squash"
 msgstr ""
 
+msgid "testing"
+msgstr "lucreaza"
+
 msgid "this bouquet is protected by a parental control pin"
 msgstr ""
 
@@ -11901,9 +11994,6 @@ msgstr ""
 
 msgid "with_errors"
 msgstr ""
-
-msgid "testing"
-msgstr "lucreaza"
 
 msgid "xp1000"
 msgstr ""

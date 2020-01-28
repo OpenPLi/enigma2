@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Openpli\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-11 19:39+0200\n"
+"POT-Creation-Date: 2020-01-28 02:35+0200\n"
 "PO-Revision-Date: 2019-04-03 06:49+0300\n"
 "Last-Translator: \n"
 "Language-Team: Raivo, Henkka, eesatfan, rimas, zeros\\n faas, sateks, valgekotkas, tigekala, rootsikunn\\n kain, i70, mustkass, pelmeen, Scott\\n <digi-tv.ee>\n"
@@ -117,11 +117,11 @@ msgid "%.0f kB"
 msgstr "%.0f kB"
 
 #, python-format
-msgid "%.1f°E"
+msgid "%.1f° E"
 msgstr ""
 
 #, python-format
-msgid "%.1f°W"
+msgid "%.1f° W"
 msgstr ""
 
 #, python-format
@@ -459,6 +459,9 @@ msgstr "16:9 letterbox"
 msgid "16:9 always"
 msgstr "16:9 alati"
 
+msgid "16K"
+msgstr ""
+
 msgid "18 V"
 msgstr "18 V"
 
@@ -519,6 +522,10 @@ msgstr "4:3 letterbox"
 msgid "4:3 PanScan"
 msgstr "4:3 PanScan"
 
+#, fuzzy
+msgid "4K"
+msgstr "4"
+
 msgid "5"
 msgstr "5"
 
@@ -534,6 +541,10 @@ msgstr "7"
 msgid "8"
 msgstr "8"
 
+#, fuzzy
+msgid "8K"
+msgstr "8"
+
 msgid "8bit"
 msgstr "8bit"
 
@@ -543,12 +554,26 @@ msgstr "9"
 msgid ": 0000 - default (disabled)"
 msgstr ": 0000 - vakimisi (keelatud)"
 
-msgid "<Current movielist location>"
-msgstr "<Salvestusnimekirja hetkeasukoht >"
+#, fuzzy
+msgid "< Current >"
+msgstr "Praegune väärtus: "
 
 #, fuzzy
-msgid "<Default Skin>"
+msgid "< Default + Picon >"
 msgstr "Vaikeväärtused"
+
+#, fuzzy
+msgid "< Default >"
+msgstr "Vaikeväärtused"
+
+msgid "< Emergency >"
+msgstr ""
+
+msgid "< Pending restart >"
+msgstr ""
+
+msgid "<Current movielist location>"
+msgstr "<Salvestusnimekirja hetkeasukoht >"
 
 msgid "<Default movie location>"
 msgstr "<Salvestuste tavaasukoht >"
@@ -709,9 +734,6 @@ msgid "Abort favourites edit"
 msgstr "Tühista muudatused"
 
 msgid "About"
-msgstr "Süsteemiinfo"
-
-msgid "About..."
 msgstr "Süsteemiinfo"
 
 msgid "Accesspoint:"
@@ -1576,8 +1598,18 @@ msgstr "Kanada"
 msgid "Cancel"
 msgstr "Tühista"
 
+msgid "Cancel any changes to the currently active skin"
+msgstr ""
+
+msgid "Cancel any changes to the currently active skin and exit all menus"
+msgstr ""
+
 msgid "Cancel any text changes and exit"
 msgstr ""
+
+#, fuzzy
+msgid "Cancel execution?"
+msgstr "Kanali valik"
 
 msgid "Cancelled upon user request"
 msgstr "Tühistatud kasutaja nõudmisel"
@@ -1902,6 +1934,10 @@ msgstr "Määra lisaviide väliste subtiitrite ajastamise parendamiseks. "
 
 msgid "Configure an additional delay to improve subtitle synchronisation."
 msgstr "Määra lisaviide subtiitrite ajastamise parendamiseks."
+
+#, fuzzy
+msgid "Configure default type for new timers."
+msgstr "Seadista võrgumask."
 
 msgid "Configure for how long the infobar will remain visible after activation."
 msgstr "Määra inforiba kuvamise aeg."
@@ -2532,6 +2568,10 @@ msgstr "Salvestuste tavaasukoht"
 msgid "Default settings"
 msgstr "Vaikeväärtused"
 
+#, fuzzy
+msgid "Default timer type"
+msgstr "Kustuta taimer"
+
 msgid "Define the location of the EPG Cache file."
 msgstr ""
 
@@ -2780,6 +2820,10 @@ msgstr "Salvesta ajanihe ainult käimasoleva sündmuse jaoks"
 msgid "Display EPG list for current channel"
 msgstr "Kanali saatekava"
 
+#, fuzzy
+msgid "Display Skin"
+msgstr "Esipaneeli seaded"
+
 msgid "Display and userinterface"
 msgstr "Esipaneel ja kasutajaliides"
 
@@ -3021,6 +3065,9 @@ msgstr "Saatekava"
 msgid "EPG settings"
 msgstr "Saatekava seaded"
 
+msgid "EPG:"
+msgstr ""
+
 #, python-format
 msgid "ERROR - failed to scan (%s)!"
 msgstr "VIGA - (%s) otsing nurjus!"
@@ -3248,9 +3295,6 @@ msgstr ""
 msgid "Enigma version: "
 msgstr "Enigma versioon: "
 
-msgid "Enigma2 skin selector"
-msgstr "Enigma2 kujunduse valik"
-
 #, fuzzy
 msgid "Enter"
 msgstr "keskel"
@@ -3350,9 +3394,6 @@ msgid ""
 msgstr ""
 "Viga tarkvara lahtipakkimisel\n"
 "%s"
-
-msgid "Error executing plugin"
-msgstr "Viga laienduse käivitamisel"
 
 msgid "Error stop stream!"
 msgstr "Viga, peata voog!"
@@ -3577,6 +3618,9 @@ msgstr "FEC"
 
 msgid "FEC:"
 msgstr "FEC:"
+
+msgid "FHD"
+msgstr ""
 
 msgid "FTA"
 msgstr "FTA"
@@ -3839,19 +3883,16 @@ msgstr "GStreameri versioon: "
 msgid "GUI Settings"
 msgstr "Ekraanigraafika seaded"
 
+#, fuzzy
+msgid "GUI Skin"
+msgstr "Ekraanigraafika seaded"
+
 msgid ""
 "GUI needs a restart to apply a new language\n"
 "Do you want to restart the GUI now?"
 msgstr ""
 "Kasutajaliides vajab taaskäivitust uue keele lisamiseks.\n"
 "Kas soovid liidest kohe taaskäivitada?"
-
-msgid ""
-"GUI needs a restart to apply a new skin\n"
-"Do you want to restart the GUI now?"
-msgstr ""
-"Kas soovid taaskäivitada kasutajaliidest \n"
-"uue kujunduse aktiveerimiseks?"
 
 msgid "Gabon"
 msgstr "Gabon"
@@ -4008,6 +4049,10 @@ msgstr "Guajaana"
 
 msgid "H"
 msgstr "H"
+
+#, fuzzy
+msgid "HD"
+msgstr "D"
 
 msgid "HD list"
 msgstr "HD nimekiri"
@@ -4492,9 +4537,6 @@ msgstr "Inversioon, piloot ja roll-off"
 msgid "Invert"
 msgstr "Vastupidi"
 
-msgid "Ipkg"
-msgstr "Ipkg"
-
 msgid "Iran (Islamic Republic of)"
 msgstr "Iraan (Islamivabariik)"
 
@@ -4906,6 +4948,11 @@ msgstr ""
 msgid "Manufacturer"
 msgstr "Tootja"
 
+msgid ""
+"Manufacturer reset in progress\n"
+"Pease wait until enigma2 restarts"
+msgstr ""
+
 msgid "Margin after recording (minutes)"
 msgstr "Salvestuse lõppu lisatakse (minutit)"
 
@@ -5100,6 +5147,22 @@ msgstr ""
 
 msgid "Move to position X"
 msgstr "Liigu asukohta X"
+
+#, fuzzy
+msgid "Move to the next page"
+msgstr "vali järgmine vaatenurk"
+
+#, fuzzy
+msgid "Move to the next skin"
+msgstr "liigu järgmisele reale"
+
+#, fuzzy
+msgid "Move to the previous page"
+msgstr "tagasi eelmisele peatükile"
+
+#, fuzzy
+msgid "Move to the previous skin"
+msgstr "liigu eelmisele reale"
 
 msgid "Move west"
 msgstr "Liiguta läände"
@@ -5650,6 +5713,9 @@ msgstr "Ava tuuneri seadistamine "
 
 msgid "Open the movie list"
 msgstr "Ava filmilist"
+
+msgid "Opkg"
+msgstr ""
 
 msgid "Options disable timer"
 msgstr "Taimeri keelamise valikud"
@@ -6271,7 +6337,8 @@ msgstr "Vajuta MENU puldil lisavõimaluste kasutamiseks."
 msgid "Press OK on your remote control to continue."
 msgstr "Jätkamiseks vajuta OK."
 
-msgid "Press OK to activate the selected skin."
+#, fuzzy, python-format
+msgid "Press OK to activate the selected%s skin."
 msgstr "Vajuta OK uue välimuse aktiveerimiseks."
 
 msgid "Press OK to activate the settings."
@@ -6283,6 +6350,10 @@ msgstr "Sätete muutmiseks vajuta OK."
 #, python-format
 msgid "Press OK to get further details for %s"
 msgstr "Vajuta OK %s üksikasjade nägemiseks"
+
+#, fuzzy, python-format
+msgid "Press OK to keep the currently selected%s skin."
+msgstr "Vajuta OK uue välimuse aktiveerimiseks."
 
 msgid "Press OK to scan"
 msgstr "Otsingu alustamiseks vajuta OK"
@@ -6469,6 +6540,10 @@ msgstr "Kustutame möödunud taimerid?"
 
 msgid "Really exit the subservices quickzap?"
 msgstr "Väljuda alamteenuste valikust?"
+
+#, fuzzy
+msgid "Really perform a manufacturer reset now?"
+msgstr "Kaitse algseadistuse taastamise eest"
 
 msgid "Really reboot now?"
 msgstr "Teeme taaskäivituse?"
@@ -6798,6 +6873,10 @@ msgstr "Taasta"
 msgid "Restore backups"
 msgstr "Taasta varukoopia"
 
+#, fuzzy
+msgid "Restore defaults"
+msgstr "Sea vaikeseadesse"
+
 msgid "Restore deleted user bouquets"
 msgstr "Taasta kustutatud lemmiknimekirjad"
 
@@ -7021,6 +7100,10 @@ msgstr "Salvesta"
 #, fuzzy
 msgid "Save / Enter text and exit"
 msgstr "Salvesta ja välju"
+
+#, fuzzy
+msgid "Save and activate the currently selected skin"
+msgstr "Vajuta OK uue välimuse aktiveerimiseks."
 
 msgid "Save and exit"
 msgstr "Salvesta ja välju"
@@ -7478,9 +7561,6 @@ msgstr "Vali WiFi võrk"
 msgid "Select your ATSC provider."
 msgstr "Vali oma ATSC levitaja."
 
-msgid "Select your Skin"
-msgstr "Vali Enigma2 kujundus"
-
 msgid ""
 "Select your backup device.\n"
 "Current device: "
@@ -7642,9 +7722,6 @@ msgstr "Sea keeluajad nädalapäeviti"
 
 msgid "Set default"
 msgstr "Sea vaikeseadesse"
-
-msgid "Set default settings?"
-msgstr "Määrata vaikimisi seaded?"
 
 msgid "Set end time"
 msgstr "Määra lõppaeg"
@@ -8066,12 +8143,16 @@ msgstr "Koha laiuskraad"
 msgid "Site longitude"
 msgstr "Koha pikkuskraad"
 
-msgid "Skin"
-msgstr "Kujundus"
-
 #, python-format
 msgid "Skin & Resolution: %s (%sx%s)\n"
 msgstr "Kujundus & Resolutsioon: %s (%sx%s)\n"
+
+#, fuzzy
+msgid "Skin Selection Actions"
+msgstr "Vali tegevus"
+
+msgid "SkinSelector: Restart GUI"
+msgstr ""
 
 msgid "Skins"
 msgstr "Kujundused"
@@ -9241,6 +9322,10 @@ msgstr "Taimeri valik..."
 msgid "Timer type"
 msgstr "Taimeri liik"
 
+#, fuzzy
+msgid "Timer:"
+msgstr "Taimer"
+
 msgid "Timeshift"
 msgstr "Ajanihe"
 
@@ -9271,8 +9356,16 @@ msgstr "Pealkirja omadused"
 msgid "Titleset mode"
 msgstr "Pealkirja seadmine"
 
+#, python-format
+msgid "To apply the selected '%s' skin the GUI needs to restart.  Would you like to restart the GUI now?"
+msgstr ""
+
 msgid "To audio selection"
 msgstr "Heli valik"
+
+#, python-format
+msgid "To save and apply the selected '%s' skin the GUI needs to restart.  Would you like to save the selection and restart the GUI now?"
+msgstr ""
 
 msgid "To subtitle selection"
 msgstr "Subtiitrite valik"
@@ -11568,6 +11661,9 @@ msgstr "mallifail"
 msgid "tennis/squash"
 msgstr "tennis/squash"
 
+msgid "testing"
+msgstr "töös"
+
 msgid "this bouquet is protected by a parental control pin"
 msgstr "see kanalivalik on kaitstud lapseluku PIN koodiga"
 
@@ -11688,9 +11784,6 @@ msgstr "koos tuuneri nimega"
 
 msgid "with_errors"
 msgstr "vigadega"
-
-msgid "testing"
-msgstr "töös"
 
 msgid "xp1000"
 msgstr "xp1000"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-11 19:39+0200\n"
+"POT-Creation-Date: 2020-01-28 02:35+0200\n"
 "PO-Revision-Date: 2011-05-07 12:23+0200\n"
 "Last-Translator: Baldur <bsveinsson@gmail.com>\n"
 "Language-Team: Polar Team/LT Team <baddi@oreind.is>\n"
@@ -120,11 +120,11 @@ msgid "%.0f kB"
 msgstr ""
 
 #, python-format
-msgid "%.1f°E"
+msgid "%.1f° E"
 msgstr ""
 
 #, python-format
-msgid "%.1f°W"
+msgid "%.1f° W"
 msgstr ""
 
 #, python-format
@@ -494,6 +494,9 @@ msgstr "16:9 Letterbox"
 msgid "16:9 always"
 msgstr "16:9 alltaf"
 
+msgid "16K"
+msgstr ""
+
 #
 msgid "18 V"
 msgstr "18 V"
@@ -562,6 +565,11 @@ msgid "4:3 PanScan"
 msgstr "4:3 PanScan"
 
 #
+#, fuzzy
+msgid "4K"
+msgstr "4"
+
+#
 msgid "5"
 msgstr "5"
 
@@ -580,6 +588,11 @@ msgstr "7"
 msgid "8"
 msgstr "8"
 
+#
+#, fuzzy
+msgid "8K"
+msgstr "8"
+
 msgid "8bit"
 msgstr ""
 
@@ -590,13 +603,28 @@ msgstr "9"
 msgid ": 0000 - default (disabled)"
 msgstr ""
 
-msgid "<Current movielist location>"
-msgstr "<Núverandi staður bíómyndalista>"
+#, fuzzy
+msgid "< Current >"
+msgstr "Núverandi val:"
 
 #
 #, fuzzy
-msgid "<Default Skin>"
+msgid "< Default + Picon >"
 msgstr "Upphafs stillingar"
+
+#
+#, fuzzy
+msgid "< Default >"
+msgstr "Upphafs stillingar"
+
+msgid "< Emergency >"
+msgstr ""
+
+msgid "< Pending restart >"
+msgstr ""
+
+msgid "<Current movielist location>"
+msgstr "<Núverandi staður bíómyndalista>"
 
 msgid "<Default movie location>"
 msgstr "<Sjálfgefinn staður bíómynda>"
@@ -764,9 +792,6 @@ msgstr "Hætta við að breyta eftirlætis lista"
 
 msgid "About"
 msgstr "Um"
-
-msgid "About..."
-msgstr "Um..."
 
 #
 msgid "Accesspoint:"
@@ -1709,8 +1734,18 @@ msgstr ""
 msgid "Cancel"
 msgstr "Hætta við"
 
+msgid "Cancel any changes to the currently active skin"
+msgstr ""
+
+msgid "Cancel any changes to the currently active skin and exit all menus"
+msgstr ""
+
 msgid "Cancel any text changes and exit"
 msgstr ""
+
+#, fuzzy
+msgid "Cancel execution?"
+msgstr "Rása val"
 
 msgid "Cancelled upon user request"
 msgstr ""
@@ -2060,6 +2095,10 @@ msgstr ""
 
 msgid "Configure an additional delay to improve subtitle synchronisation."
 msgstr ""
+
+#, fuzzy
+msgid "Configure default type for new timers."
+msgstr "Stilla netkort"
 
 msgid "Configure for how long the infobar will remain visible after activation."
 msgstr ""
@@ -2742,6 +2781,11 @@ msgstr "Sjálfgefin staðsetning bíómynda"
 msgid "Default settings"
 msgstr "Upphafs stillingar"
 
+#
+#, fuzzy
+msgid "Default timer type"
+msgstr "Gerð Tímastillngar"
+
 msgid "Define the location of the EPG Cache file."
 msgstr ""
 
@@ -3020,6 +3064,11 @@ msgstr ""
 #, fuzzy
 msgid "Display EPG list for current channel"
 msgstr "Sýna upplýsinga borða við breytingu á atriði"
+
+#
+#, fuzzy
+msgid "Display Skin"
+msgstr "Uppsetning skjás"
 
 #
 #, fuzzy
@@ -3307,6 +3356,9 @@ msgstr "EPG val"
 msgid "EPG settings"
 msgstr ""
 
+msgid "EPG:"
+msgstr ""
+
 #, python-format
 msgid "ERROR - failed to scan (%s)!"
 msgstr "VILLA - gat ekki leitað (%s)!"
@@ -3563,11 +3615,6 @@ msgstr ""
 msgid "Enigma version: "
 msgstr "Ný útgáfa:"
 
-#
-#, fuzzy
-msgid "Enigma2 skin selector"
-msgstr "enigma2 og netkerfi"
-
 msgid "Enter"
 msgstr ""
 
@@ -3664,9 +3711,6 @@ msgid ""
 "Error during unzipping image\n"
 "%s"
 msgstr ""
-
-msgid "Error executing plugin"
-msgstr "Villa við keyrslu íforrits"
 
 msgid "Error stop stream!"
 msgstr ""
@@ -3913,6 +3957,9 @@ msgid "FEC"
 msgstr "FEC"
 
 msgid "FEC:"
+msgstr ""
+
+msgid "FHD"
 msgstr ""
 
 msgid "FTA"
@@ -4204,18 +4251,15 @@ msgstr "Ný útgáfa:"
 msgid "GUI Settings"
 msgstr "Stillingar"
 
+#
+#, fuzzy
+msgid "GUI Skin"
+msgstr "Stillingar"
+
 msgid ""
 "GUI needs a restart to apply a new language\n"
 "Do you want to restart the GUI now?"
 msgstr ""
-
-#
-msgid ""
-"GUI needs a restart to apply a new skin\n"
-"Do you want to restart the GUI now?"
-msgstr ""
-"Gluggakerfi þarf að endurræsa til að virkja nýtt skinn\n"
-"Viltu endurræsa gluggakerfi núna?"
 
 msgid "Gabon"
 msgstr ""
@@ -4398,6 +4442,10 @@ msgstr ""
 
 msgid "H"
 msgstr ""
+
+#, fuzzy
+msgid "HD"
+msgstr "D"
 
 msgid "HD list"
 msgstr ""
@@ -4945,10 +4993,6 @@ msgstr ""
 msgid "Invert"
 msgstr "Snúa við"
 
-#
-msgid "Ipkg"
-msgstr "Ipkg"
-
 msgid "Iran (Islamic Republic of)"
 msgstr ""
 
@@ -5444,6 +5488,11 @@ msgstr ""
 msgid "Manufacturer"
 msgstr "Framleiðandi"
 
+msgid ""
+"Manufacturer reset in progress\n"
+"Pease wait until enigma2 restarts"
+msgstr ""
+
 #
 #, fuzzy
 msgid "Margin after recording (minutes)"
@@ -5676,6 +5725,26 @@ msgstr ""
 
 msgid "Move to position X"
 msgstr ""
+
+#
+#, fuzzy
+msgid "Move to the next page"
+msgstr "skipta í næstu sýn"
+
+#
+#, fuzzy
+msgid "Move to the next skin"
+msgstr "fara niður í næsta atriði"
+
+#
+#, fuzzy
+msgid "Move to the previous page"
+msgstr "fara til baka á fyrri kafla"
+
+#
+#, fuzzy
+msgid "Move to the previous skin"
+msgstr "fara upp í næsta atriði"
 
 #
 msgid "Move west"
@@ -6326,6 +6395,9 @@ msgstr ""
 #, fuzzy
 msgid "Open the movie list"
 msgstr "Til baka til mynda lista"
+
+msgid "Opkg"
+msgstr ""
 
 msgid "Options disable timer"
 msgstr ""
@@ -7054,7 +7126,8 @@ msgid "Press OK on your remote control to continue."
 msgstr "Ýttu á OK á fjarstýringunni til að halda áfram."
 
 #
-msgid "Press OK to activate the selected skin."
+#, fuzzy, python-format
+msgid "Press OK to activate the selected%s skin."
 msgstr "Ýttu á OK til að velja valið skinn."
 
 #
@@ -7069,6 +7142,11 @@ msgstr "Ýttu á OK til að breyta stillingum."
 #, python-format
 msgid "Press OK to get further details for %s"
 msgstr "Ýttu á OK til að fá nánari upplýsingar um %s"
+
+#
+#, fuzzy, python-format
+msgid "Press OK to keep the currently selected%s skin."
+msgstr "Ýttu á OK til að velja valið skinn."
 
 #
 msgid "Press OK to scan"
@@ -7283,6 +7361,9 @@ msgstr "Viltu eyða liðnum tímastillingum?"
 #
 msgid "Really exit the subservices quickzap?"
 msgstr "Viltu hætta í undirrása hraðstökki?"
+
+msgid "Really perform a manufacturer reset now?"
+msgstr ""
 
 #
 msgid "Really reboot now?"
@@ -7676,6 +7757,11 @@ msgstr "Setja inn"
 msgid "Restore backups"
 msgstr "Setja inn afrit"
 
+#
+#, fuzzy
+msgid "Restore defaults"
+msgstr "Setja inn afrit"
+
 msgid "Restore deleted user bouquets"
 msgstr ""
 
@@ -7928,6 +8014,11 @@ msgstr "Vista"
 
 msgid "Save / Enter text and exit"
 msgstr ""
+
+#
+#, fuzzy
+msgid "Save and activate the currently selected skin"
+msgstr "Ýttu á OK til að velja valið skinn."
 
 msgid "Save and exit"
 msgstr ""
@@ -8461,9 +8552,6 @@ msgstr "Veldu þráðlaust net"
 msgid "Select your ATSC provider."
 msgstr "Veldu sendanda til að bæta við..."
 
-msgid "Select your Skin"
-msgstr ""
-
 #
 msgid ""
 "Select your backup device.\n"
@@ -8650,9 +8738,6 @@ msgid "Set blocktimes by weekday"
 msgstr ""
 
 msgid "Set default"
-msgstr ""
-
-msgid "Set default settings?"
 msgstr ""
 
 #, fuzzy
@@ -9137,12 +9222,15 @@ msgstr ""
 msgid "Site longitude"
 msgstr ""
 
-#
-msgid "Skin"
-msgstr "Skinn"
-
 #, python-format
 msgid "Skin & Resolution: %s (%sx%s)\n"
+msgstr ""
+
+#, fuzzy
+msgid "Skin Selection Actions"
+msgstr "Veldu stað fyrir afrit"
+
+msgid "SkinSelector: Restart GUI"
 msgstr ""
 
 #
@@ -10460,6 +10548,11 @@ msgid "Timer type"
 msgstr "Gerð Tímastillngar"
 
 #
+#, fuzzy
+msgid "Timer:"
+msgstr "Tímastilling"
+
+#
 msgid "Timeshift"
 msgstr "Lifandi pása"
 
@@ -10495,7 +10588,15 @@ msgstr "Upplýsingar titils"
 msgid "Titleset mode"
 msgstr "Titla stillingar"
 
+#, python-format
+msgid "To apply the selected '%s' skin the GUI needs to restart.  Would you like to restart the GUI now?"
+msgstr ""
+
 msgid "To audio selection"
+msgstr ""
+
+#, python-format
+msgid "To save and apply the selected '%s' skin the GUI needs to restart.  Would you like to save the selection and restart the GUI now?"
 msgstr ""
 
 msgid "To subtitle selection"
@@ -13037,6 +13138,10 @@ msgstr "sniðmáts skrá"
 msgid "tennis/squash"
 msgstr ""
 
+#
+msgid "testing"
+msgstr "er að vinna"
+
 msgid "this bouquet is protected by a parental control pin"
 msgstr ""
 
@@ -13173,10 +13278,6 @@ msgstr ""
 
 msgid "with_errors"
 msgstr ""
-
-#
-msgid "testing"
-msgstr "er að vinna"
 
 msgid "xp1000"
 msgstr ""
