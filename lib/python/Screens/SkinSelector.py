@@ -3,7 +3,7 @@ import xml.etree.cElementTree
 
 from enigma import ePicLoad, getDesktop
 from os import listdir
-from os.path import dirname, exists, isdir, join as pathjoin
+from os.path import dirname, exists, isdir, join as pathjoin, split as pathsplit
 
 from skin import DEFAULT_SKIN, DEFAULT_DISPLAY_SKIN, EMERGENCY_SKIN, currentDisplaySkin, currentPrimarySkin, domScreens
 from Components.ActionMap import HelpableNumberActionMap
@@ -118,15 +118,6 @@ class SkinSelector(Screen, HelpableScreen):
 		self.refreshList()
 
 	def refreshList(self):
-		resolutions = {
-			"480": _("NTSC"),
-			"576": _("PAL"),
-			"720": _("HD"),
-			"1080": _("FHD"),
-			"2160": _("4K"),
-			"4320": _("8K"),
-			"8640": _("16K")
-		}
 		emergency = _("< Emergency >")
 		default = _("< Default >")
 		defaultPicon = _("< Default + Picon >")
@@ -141,18 +132,9 @@ class SkinSelector(Screen, HelpableScreen):
 				skin = pathjoin(dir, skinFile)
 				skinPath = pathjoin(self.rootDir, skin)
 				if exists(skinPath):
-					resolution = None
-					if skinFile == "skin.xml":
-						with open(skinPath) as chan:
-							resolution = chan.read(65536)
-						try:
-							resolution = re.search("\<resolution.*?\syres\s*=\s*\"(\d+)\"", resolution).group(1)
-						except Exception:
-							resolution = ""
-						resolution = resolutions.get(resolution, None)
-						msg = "an unknown" if resolution is None else "a %s" % resolution
-						print "[SkinSelector] Skin '%s' is %s resolution skin." % (skinPath, msg)
-						# Code can be added here to reject unsupported resolutions.
+					resolution = self.findResolution(skinPath)
+					msg = "an unknown" if resolution is None else "a %s" % resolution
+					print "[SkinSelector] Skin '%s' is %s resolution skin." % (skinPath, msg)
 					# The "piconprev.png" image should be "prevpicon.png" to keep it with its partner preview image.
 					preview = pathjoin(previewPath, "piconprev.png" if skinFile == "skin_display_picon.xml" else "prev.png")
 					if skin == EMERGENCY_SKIN:
@@ -179,6 +161,57 @@ class SkinSelector(Screen, HelpableScreen):
 				self["skins"].setIndex(index)
 				break
 		self.loadPreview()
+
+	def findResolution(self, skinPath):
+		resolutions = {
+			"480": _("NTSC"),
+			"576": _("PAL"),
+			"720": _("HD"),
+			"1080": _("FHD"),
+			"2160": _("4K"),
+			"4320": _("8K"),
+			"8640": _("16K")
+		}
+		skinDir, skinFile = pathsplit(skinPath)
+		resolution = None
+		if skinFile == "skin.xml":
+			# print "[SkinSelector] DEBUG: Trying XML mode."
+			try:  # Try to extract the skin resolution via XML.
+				# This open gets around a possible file handle leak in Python's XML parser.
+				with open(skinPath, "r") as fd:
+					try:
+						root = xml.etree.cElementTree.parse(fd)
+						resolution = root.find('output').find('resolution').attrib.get('yres', None)
+						resolution = resolutions.get(resolution, None)
+					except xml.etree.cElementTree.ParseError as err:
+						fd.seek(0)
+						content = fd.readlines()
+						line, column = err.position
+						print "[SkinSelector] XML Parse Error: '%s' in '%s'!" % (err, skinPath)
+						data = content[line - 1].replace("\t", " ").rstrip()
+						print "[SkinSelector] XML Parse Error: '%s'" % data
+						print "[SkinSelector] XML Parse Error: '%s^%s'" % ("-" * column, " " * (len(data) - column - 1))
+					except Exception as err:
+						# print "[SkinSelector] Error: Unable to parse skin data in '%s' - '%s'!" % (skinPath, err)
+						pass
+			except (IOError, OSError) as err:
+				print "[SkinSelector] Error %d: Opening skin file '%s'! (%s)" % (err.errno, skinPath, err.strerror)
+			except Exception as err:
+				print "[SkinSelector] Error: Unexpected error opening skin file '%s'! (%s)" % (skinPath, err)
+			if resolution is None:
+				# print "[SkinSelector] DEBUG: Trying search mode."
+				try:  # Try to extract the skin resolution via pattern matching.
+					with open(skinPath) as fd:
+						resolution = fd.read(65536)
+					try:
+						resolution = re.search("\Wresolution.*?\syres\s*=\s*\"(\d+)\"", resolution).group(1)
+					except Exception:
+						resolution = None
+					resolution = resolutions.get(resolution, None)
+				except Exception as err:
+					print "[SkinSelector] Error %d: Unable to search skin file '%s'! (%s)" % (err.errno, skinPath, err.strerror)
+		# Code can be added here to reject unsupported resolutions.
+		return resolution
 
 	def loadPreview(self):
 		self.changedEntry()
