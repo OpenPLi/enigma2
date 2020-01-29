@@ -445,7 +445,6 @@ class PluginDownloadBrowser(Screen):
 				self.startOpkgListInstalled()
 		elif self.run == 1 and self.type == self.DOWNLOAD:
 			self.run = 2
-			from Components import opkg
 			pluginlist = []
 			self.pluginlist = pluginlist
 			for plugin in Opkg.enumPlugins(self.PLUGIN_PREFIX):
