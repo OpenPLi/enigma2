@@ -261,6 +261,7 @@ class SkinSelector(Screen, HelpableScreen):
 class LcdSkinSelector(SkinSelector):
 	def __init__(self, session, screenTitle=_("Display Skin")):
 		SkinSelector.__init__(self, session, screenTitle=screenTitle)
+		self.skinName = ["LcdSkinSelector", "SkinSelector"]
 		self.rootDir = resolveFilename(SCOPE_LCDSKIN)
 		self.config = config.skin.display_skin
 		self.current = currentDisplaySkin
