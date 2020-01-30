@@ -145,11 +145,8 @@ class SkinSelector(Screen, HelpableScreen):
 					if skinFile == "skin.xml":
 						with open(skinPath, "r") as fd:
 							mm = mmap.mmap(fd.fileno(), 0, prot=mmap.PROT_READ)
-							try:
-								resolution = re.search("\<?resolution.*?\syres\s*=\s*\"(\d+)\"", mm).group(1)
-								resolution = resolutions.get(resolution, None)
-							except Exception:
-								resolution = None
+							resolution = re.search("\<?resolution.*?\syres\s*=\s*\"(\d+)\"", mm)
+							resolution = resolution and resolutions.get(resolution.group(1), None)
 							mm.close()
 						print "[SkinSelector] Resolution of skin '%s': '%s'." % (skinPath, "Unknown" if resolution is None else resolution)
 						# Code can be added here to reject unsupported resolutions.
