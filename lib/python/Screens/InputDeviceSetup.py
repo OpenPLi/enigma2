@@ -301,18 +301,20 @@ class RemoteControlType(Screen, ConfigListScreen):
 			("4", _("DMM normal")),
 			("5", _("et9000/et9100")),
 			("6", _("DMM advanced")),
-			("7", _("et5000/6000")),
+			("7", _("et5000/et6000")),
 			("8", _("VU+")),
 			("9", _("et8000/et10000")),
-			("11", _("et9200/9500/6500")),
+			("11", _("et9200/et9500/et6500")),
 			("13", _("et4000")),
 			("14", _("xp1000")),
 			("16", _("HDx1/HD1xxx/HD5x0C/VS1x00/et7x00/et8500/et7000mini")),
 			("18", _("F1/F3/F4/F4-TURBO")),
 			("19", _("HD2400")),
 			("20", _("Zgemma Star S/2S/H1/H2")),
-			("21", _("Zgemma H.S/H.2S/H.2H/H5/H7")),
-			("25", _("Zgemma H9/i55 Plus"))
+			("21", _("Zgemma H.S/H.2S/H.2H/H5/H7(old model)")),
+			("25", _("Zgemma H9(old model)/I55Plus")),
+			("27", _("HD60")),
+			("28", _("Zgemma H7(new model)/H9(new model)/H9COMBO/H9TWIN/H10"))
 		]
 
 	defaultRcList = [
@@ -341,15 +343,18 @@ class RemoteControlType(Screen, ConfigListScreen):
 			("hd1265", 16),
 			("hd1100", 16),
 			("hd2400", 19),
+			("hd60", 27),
+			("et7000mini", 16),
 			("et7000", 16),
 			("et7500", 16),
 			("et8500", 16),
 			("sh1", 20),
 			("h3", 21),
 			("h5", 21),
-			("h7", 21),
-			("h9", 25),
-			("et7000mini", 16)
+			("h7", 28), # new model /old 21
+			("h9", 28), # new model /old 25
+			("h9combo", 28),
+			("h10", 28)
 		]
 
 	def __init__(self, session):
