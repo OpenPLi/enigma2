@@ -1,5 +1,5 @@
+import mmap
 import re
-import xml.etree.cElementTree
 
 from enigma import ePicLoad, getDesktop
 from os import listdir
@@ -143,15 +143,12 @@ class SkinSelector(Screen, HelpableScreen):
 				if exists(skinPath):
 					resolution = None
 					if skinFile == "skin.xml":
-						with open(skinPath) as chan:
-							resolution = chan.read(65536)
-						try:
-							resolution = re.search("\<resolution.*?\syres\s*=\s*\"(\d+)\"", resolution).group(1)
-						except Exception:
-							resolution = ""
-						resolution = resolutions.get(resolution, None)
-						msg = "an unknown" if resolution is None else "a %s" % resolution
-						print "[SkinSelector] Skin '%s' is %s resolution skin." % (skinPath, msg)
+						with open(skinPath, "r") as fd:
+							mm = mmap.mmap(fd.fileno(), 0, prot=mmap.PROT_READ)
+							resolution = re.search("\<?resolution.*?\syres\s*=\s*\"(\d+)\"", mm)
+							resolution = resolution and resolutions.get(resolution.group(1), None)
+							mm.close()
+						print "[SkinSelector] Resolution of skin '%s': '%s'." % (skinPath, "Unknown" if resolution is None else resolution)
 						# Code can be added here to reject unsupported resolutions.
 					# The "piconprev.png" image should be "prevpicon.png" to keep it with its partner preview image.
 					preview = pathjoin(previewPath, "piconprev.png" if skinFile == "skin_display_picon.xml" else "prev.png")
