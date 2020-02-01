@@ -34,7 +34,7 @@ class SkinSelector(Screen, HelpableScreen):
 				}
 			</convert>
 		</widget>
-		<widget source="description" render="Label" position="center,%d" size="%d,%d" font="Regular;%d" valign="center" />
+		<widget source="description" render="Label" position="center,e-%d" size="%d,%d" font="Regular;%d" valign="center" />
 		<widget source="key_red" render="Label" position="%d,e-%d" size="%d,%d" backgroundColor="key_red" font="Regular;%d" foregroundColor="key_text" halign="center" valign="center" />
 		<widget source="key_green" render="Label" position="%d,e-%d" size="%d,%d" backgroundColor="key_green" font="Regular;%d" foregroundColor="key_text" halign="center" valign="center" />
 	</screen>"""
@@ -46,7 +46,7 @@ class SkinSelector(Screen, HelpableScreen):
 		370, 260, 30,
 		25,
 		30,
-		490, 650, 25, 20,
+		85, 650, 25, 20,
 		10, 50, 140, 40, 20,
 		160, 50, 140, 40, 20
 	]
@@ -101,10 +101,9 @@ class SkinSelector(Screen, HelpableScreen):
 						buildSkin = True
 						break
 		if buildSkin:  # Build the embedded skin and scale it to the current screen resolution.
-			minRes = 720
-			height = max(minRes, getDesktop(0).size().height())
-			SkinSelector.skin = SkinSelector.skinTemplate % tuple([x * height / minRes for x in SkinSelector.scaleData])
-			# print "[SkinSelector] DEBUG: Height=%d\n" % height, SkinSelector.skin
+			# The skin template is designed for a HD screen so the scaling factor is 720.
+			SkinSelector.skin = SkinSelector.skinTemplate % tuple([x * getDesktop(0).size().height() / 720 for x in SkinSelector.scaleData])
+			# print "[SkinSelector] DEBUG: Height=%d\n" % getDesktop(0).size().height(), SkinSelector.skin
 		else:
 			SkinSelector.skin = "<screen />"
 
