@@ -30,7 +30,7 @@ def getBootdevice():
 
 def getMultibootStartupDevice():
 	for device in ('/dev/block/by-name/bootoptions', '/dev/block/by-name/bootoptions', "/dev/mmcblk1sp1" if model in ('osmio4k', 'osmio4kplus', 'osmini4k') else "/dev/mmcblk0sp1"):
-		if os.path.islink(device):
+		if os.path.exists(device):
 			return device
 
 def getparam(line, param):
