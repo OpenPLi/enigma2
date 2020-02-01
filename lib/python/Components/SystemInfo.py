@@ -39,9 +39,9 @@ def getparam(line, param):
 def getMultibootslots():
 	TMP_MOUNT = '/tmp/bootcheck'
 	bootslots = {}
-	if not os.path.isdir(TMP_MOUNT):
-		os.mkdir(TMP_MOUNT)
 	if SystemInfo["MultibootStartupDevice"]:
+		if not os.path.isdir(TMP_MOUNT):
+			os.mkdir(TMP_MOUNT)
 		Console().ePopen('mount %s %s' % (SystemInfo["MultibootStartupDevice"], TMP_MOUNT))
 		for file in glob.glob('%s/STARTUP_*' % TMP_MOUNT):
 			slotnumber = file.rsplit('_', 3 if 'BOXMODE' in file else 1)[1]
