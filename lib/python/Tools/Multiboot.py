@@ -1,4 +1,4 @@
-from Components.SystemInfo import SystemInfo
+from Components.SystemInfo import SystemInfo, getparam
 from Components.Console import Console
 import os
 
