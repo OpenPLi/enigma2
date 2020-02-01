@@ -37,9 +37,9 @@ def getparam(line, param):
 	return line.rsplit('%s=' % param, 1)[1].split(' ', 1)[0]
 
 def getMultibootslots():
-	TMP_MOUNT = '/tmp/bootcheck'
 	bootslots = {}
 	if SystemInfo["MultibootStartupDevice"]:
+		TMP_MOUNT = '/tmp/bootcheck'
 		if not os.path.isdir(TMP_MOUNT):
 			os.mkdir(TMP_MOUNT)
 		Console().ePopen('mount %s %s' % (SystemInfo["MultibootStartupDevice"], TMP_MOUNT))
