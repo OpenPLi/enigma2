@@ -30,7 +30,7 @@ class SelectImage(Screen):
 		self.imagesList = {}
 		self.setIndex = 0
 		self.expanded = []
-		self.setTitle(_("Multiboot Image Selector"))
+		self.setTitle(_("Multiboot image selector"))
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText()
 		self["key_yellow"] = StaticText()
@@ -403,7 +403,7 @@ class MultibootSelection(SelectImage):
 		self.session = session
 		self.imagesList = None
 		self.expanded = []
-		self.setTitle(_("Multiboot Image Selector"))
+		self.setTitle(_("Multiboot image selector"))
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Reboot"))
 		self["list"] = ChoiceList(list=[ChoiceEntryComponent('',((_("Retrieving image slots - Please wait...")), "Waiter"))])
