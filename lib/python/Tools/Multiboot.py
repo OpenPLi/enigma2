@@ -2,16 +2,21 @@ from Components.SystemInfo import SystemInfo
 from Components.Console import Console
 import os
 
+TMP_MOUNT = '/tmp/multibootcheck'
+
 def GetCurrentImage():
 	if SystemInfo["canMultiBoot"]:
 		slot = [x[-1] for x in open('/sys/firmware/devicetree/base/chosen/bootargs', 'r').read().split() if x.startswith('rootsubdir')]
 		if slot:
 			return int(slot[0])
 		else:
-			return (int(open('/sys/firmware/devicetree/base/chosen/bootargs', 'r').read()[:-1].split("%sp" % SystemInfo["canMultiBoot"][2])[1].split(' ')[0])-SystemInfo["canMultiBoot"][0])/2
+			device = getparam(open('/sys/firmware/devicetree/base/chosen/bootargs', 'r').read(), 'root')
+			for slot in SystemInfo["canMultiBoot"].keys():
+				if SystemInfo["canMultiBoot"][slot]['device'] == device:
+					return slot
 
 def GetCurrentImageMode():
-	return SystemInfo["canMultiBoot"] and SystemInfo["canMode12"] and int(open('/sys/firmware/devicetree/base/chosen/bootargs', 'r').read().replace('\0', '').split('=')[-1])
+	return bool(SystemInfo["canMultiBoot"]) and SystemInfo["canMode12"] and int(open('/sys/firmware/devicetree/base/chosen/bootargs', 'r').read().replace('\0', '').split('=')[-1])
 
 class GetImagelist():
 	MOUNT = 0
@@ -19,28 +24,31 @@ class GetImagelist():
 
 	def __init__(self, callback):
 		if SystemInfo["canMultiBoot"]:
-			(self.firstslot, self.numberofslots) = SystemInfo["canMultiBoot"][:2]
+			self.slots = SystemInfo["canMultiBoot"].keys()
 			self.callback = callback
 			self.imagelist = {}
-			if not os.path.isdir('/tmp/testmount'):
-				os.mkdir('/tmp/testmount')
+			if not os.path.isdir(TMP_MOUNT):
+				os.mkdir(TMP_MOUNT)
 			self.container = Console()
-			self.slot = 1
 			self.phase = self.MOUNT
 			self.run()
-		else:	
+		else:
 			callback({})
 
 	def run(self):
-		if SystemInfo["HasRootSubdir"]:
-			if self.slot == 1 and os.path.islink("/dev/block/by-name/linuxrootfs"):
-				self.container.ePopen('mount /dev/block/by-name/linuxrootfs /tmp/testmount' if self.phase == self.MOUNT else 'umount /tmp/testmount', self.appClosed)
-			else:
-				self.container.ePopen('mount /dev/block/by-name/userdata /tmp/testmount' if self.phase == self.MOUNT else 'umount /tmp/testmount', self.appClosed)
+		if self.phase == self.UNMOUNT:
+			self.container.ePopen('umount %s' % TMP_MOUNT, self.appClosed)
 		else:
-			self.container.ePopen('mount /dev/%sp%s /tmp/testmount' % (SystemInfo["canMultiBoot"][2], str(self.slot * 2 + self.firstslot)) if self.phase == self.MOUNT else 'umount /tmp/testmount', self.appClosed)
+			self.slot = self.slots.pop(0)
+			if 'rootsubdir' in SystemInfo["canMultiBoot"][self.slot]:
+				if self.slot == 1 and os.path.islink("/dev/block/by-name/linuxrootfs"):
+					self.container.ePopen('mount /dev/block/by-name/linuxrootfs %s' % TMP_MOUNT, self.appClosed)
+				else:
+					self.container.ePopen('mount /dev/block/by-name/userdata %s'% TMP_MOUNT, self.appClosed)
+			else:
+				self.container.ePopen('mount /dev/%s %s' % (SystemInfo["canMultiBoot"][self.slot]['device'], TMP_MOUNT), self.appClosed)
 
-	def appClosed(self, data, retval, extra_args):
+	def appClosed(self, data, retval, extra_args=None):
 		if retval == 0 and self.phase == self.MOUNT:
 			def getImagename(target):
 				from datetime import datetime
@@ -52,25 +60,24 @@ class GetImagelist():
 						pass
 					date = max(date, datetime.fromtimestamp(os.stat(os.path.join(target, "usr/bin/enigma2")).st_mtime).strftime('%Y-%m-%d'))
 				return "%s (%s)" % (open(os.path.join(target, "etc/issue")).readlines()[-2].capitalize().strip()[:-6], date)
-			if SystemInfo["HasRootSubdir"]:
-				if os.path.isfile("/tmp/testmount/linuxrootfs%s/usr/bin/enigma2" % self.slot):
-					self.imagelist[self.slot] = { 'imagename': getImagename("/tmp/testmount/linuxrootfs%s" % self.slot) }
+			if 'rootsubdir' in SystemInfo["canMultiBoot"][self.slot]:
+				imagedir = "%s/%s/" % (TMP_MOUNT, SystemInfo["canMultiBoot"][self.slot]['rootsubdir'])
+				if os.path.isfile('%s/usr/bin/enigma2' % imagedir):
+					self.imagelist[self.slot] = { 'imagename': getImagename(imagedir) }
 				else:
 					self.imagelist[self.slot] = { 'imagename': _("Empty slot")}
 			else:
-				if os.path.isfile("/tmp/testmount/usr/bin/enigma2"):
-					self.imagelist[self.slot] = { 'imagename': getImagename("/tmp/testmount") }
+				if os.path.isfile("%s/usr/bin/enigma2" % TMP_MOUNT):
+					self.imagelist[self.slot] = { 'imagename': getImagename(TMP_MOUNT) }
 				else:
 					self.imagelist[self.slot] = { 'imagename': _("Empty slot")}
 			self.phase = self.UNMOUNT
 			self.run()
-		elif self.slot < self.numberofslots:
-			self.slot += 1
-			self.imagelist[self.slot] = { 'imagename': _("Empty slot")}
+		elif self.slots:
 			self.phase = self.MOUNT
 			self.run()
 		else:
 			self.container.killAll()
-			if not os.path.ismount('/tmp/testmount'):
-				os.rmdir('/tmp/testmount')
+			if not os.path.ismount(TMP_MOUNT):
+				os.rmdir(TMP_MOUNT)
 			self.callback(self.imagelist)
