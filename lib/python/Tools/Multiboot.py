@@ -18,7 +18,7 @@ def getMultibootslots():
 		if not os.path.isdir(TMP_MOUNT):
 			os.mkdir(TMP_MOUNT)
 		postix = PosixSpawn()
-		postix.execute('mount %s %s' % (SystemInfo["MultibootStartupDevice"], TMP_MOUNT))
+		postix.execute('/bin/mount', [SystemInfo["MultibootStartupDevice"], TMP_MOUNT])
 		for file in glob.glob('%s/STARTUP_*' % TMP_MOUNT):
 			slotnumber = file.rsplit('_', 3 if 'BOXMODE' in file else 1)[1]
 			if slotnumber.isdigit() and slotnumber not in bootslots:
@@ -34,7 +34,7 @@ def getMultibootslots():
 						break
 				if slot:
 					bootslots[int(slotnumber)] = slot
-		postix.execute('umount %s' % TMP_MOUNT)
+		postix.execute('/bin/umount', [TMP_MOUNT])
 		if not os.path.ismount(TMP_MOUNT):
 			os.rmdir(TMP_MOUNT)
 	return bootslots
