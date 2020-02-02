@@ -1,8 +1,43 @@
-from Components.SystemInfo import SystemInfo, getparam
-from Components.Console import Console
-import os
+from Components.SystemInfo import SystemInfo
+from Components.Console import Console, PosixSpawn
+import os, glob
 
 TMP_MOUNT = '/tmp/multibootcheck'
+
+def getMultibootStartupDevice(model):
+	for device in ('/dev/block/by-name/bootoptions', '/dev/block/by-name/bootoptions', "/dev/mmcblk1p1" if model in ('osmio4k', 'osmio4kplus', 'osmini4k') else "/dev/mmcblk0p1"):
+		if os.path.exists(device):
+			return device
+
+def getparam(line, param):
+	return line.rsplit('%s=' % param, 1)[1].split(' ', 1)[0]
+
+def getMultibootslots():
+	bootslots = {}
+	if SystemInfo["MultibootStartupDevice"]:
+		if not os.path.isdir(TMP_MOUNT):
+			os.mkdir(TMP_MOUNT)
+		postix = PosixSpawn()
+		postix.execute('mount %s %s' % (SystemInfo["MultibootStartupDevice"], TMP_MOUNT))
+		for file in glob.glob('%s/STARTUP_*' % TMP_MOUNT):
+			slotnumber = file.rsplit('_', 3 if 'BOXMODE' in file else 1)[1]
+			if slotnumber.isdigit() and slotnumber not in bootslots:
+				slot = {}
+				for line in open(file).readlines():
+					if 'root=' in line:
+						device = getparam(line, 'root')
+						if os.path.exists(device):
+							slot['device'] = device
+							slot['startupfile'] = os.path.basename(file).split('_BOXMODE')[0]
+							if 'rootsubdir' in line:
+								slot['rootsubdir'] = getparam(line, 'rootsubdir')
+						break
+				if slot:
+					bootslots[int(slotnumber)] = slot
+		postix.execute('umount %s' % TMP_MOUNT)
+		if not os.path.ismount(TMP_MOUNT):
+			os.rmdir(TMP_MOUNT)
+	return bootslots
 
 def GetCurrentImage():
 	if SystemInfo["canMultiBoot"]:
