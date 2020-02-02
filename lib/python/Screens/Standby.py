@@ -219,7 +219,7 @@ class QuitMainloopScreen(Screen):
 			QUIT_ERROR_RESTART: _("The user interface of your receiver is restarting\ndue to an error in mytest.py"),
 			QUIT_DEBUG_RESTART: _("The user interface of your receiver is restarting in debug mode"),
 			QUIT_UPGRADE_PROGRAM: _("Unattended update in progress\nPlease wait until your receiver reboots\nThis may take a few minutes"),
-			QUIT_MANUFACTURER_RESET: _("Manufacturer reset in progress\nPease wait until enigma2 restarts")
+			QUIT_MANUFACTURER_RESET: _("Manufacturer reset in progress\nPlease wait until enigma2 restarts")
 		}.get(retvalue)
 		self["text"] = Label(text)
 
