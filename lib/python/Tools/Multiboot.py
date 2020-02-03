@@ -75,13 +75,7 @@ class GetImagelist():
 			self.container.ePopen('umount %s' % TMP_MOUNT, self.appClosed)
 		else:
 			self.slot = self.slots.pop(0)
-			if 'rootsubdir' in SystemInfo["canMultiBoot"][self.slot]:
-				if self.slot == 1 and os.path.exists("/dev/block/by-name/linuxrootfs"):
-					self.container.ePopen('mount /dev/block/by-name/linuxrootfs %s' % TMP_MOUNT, self.appClosed)
-				else:
-					self.container.ePopen('mount /dev/block/by-name/userdata %s'% TMP_MOUNT, self.appClosed)
-			else:
-				self.container.ePopen('mount %s %s' % (SystemInfo["canMultiBoot"][self.slot]['device'], TMP_MOUNT), self.appClosed)
+			self.container.ePopen('mount %s %s' % (SystemInfo["canMultiBoot"][self.slot]['device'], TMP_MOUNT), self.appClosed)
 
 	def appClosed(self, data, retval, extra_args=None):
 		if retval == 0 and self.phase == self.MOUNT:
@@ -95,17 +89,11 @@ class GetImagelist():
 						pass
 					date = max(date, datetime.fromtimestamp(os.stat(os.path.join(target, "usr/bin/enigma2")).st_mtime).strftime('%Y-%m-%d'))
 				return "%s (%s)" % (open(os.path.join(target, "etc/issue")).readlines()[-2].capitalize().strip()[:-6], date)
-			if 'rootsubdir' in SystemInfo["canMultiBoot"][self.slot]:
-				imagedir = "%s/%s/" % (TMP_MOUNT, SystemInfo["canMultiBoot"][self.slot]['rootsubdir'])
-				if os.path.isfile('%s/usr/bin/enigma2' % imagedir):
-					self.imagelist[self.slot] = { 'imagename': getImagename(imagedir) }
-				else:
-					self.imagelist[self.slot] = { 'imagename': _("Empty slot")}
+			imagedir = "/".join(filter(None, [TMP_MOUNT, SystemInfo["canMultiBoot"][self.slot].get('rootsubdir', '')]))
+			if os.path.isfile('%s/usr/bin/enigma2' % imagedir):
+				self.imagelist[self.slot] = { 'imagename': getImagename(imagedir) }
 			else:
-				if os.path.isfile("%s/usr/bin/enigma2" % TMP_MOUNT):
-					self.imagelist[self.slot] = { 'imagename': getImagename(TMP_MOUNT) }
-				else:
-					self.imagelist[self.slot] = { 'imagename': _("Empty slot")}
+				self.imagelist[self.slot] = { 'imagename': _("Empty slot") }
 			self.phase = self.UNMOUNT
 			self.run()
 		elif self.slots:
