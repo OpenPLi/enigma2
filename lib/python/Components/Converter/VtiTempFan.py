@@ -45,17 +45,8 @@ class VtiTempFan(Poll, Converter, object):
 		tempinfo = ""
 		mark = str("\xc2\xb0")
 		sensor_info = None
-	 	if getBoxType() not in ('dm7020hd',):
-			try:
-				sensor_info = sensors.getSensorsList(sensors.TYPE_TEMPERATURE)
-				if sensor_info and len(sensor_info) > 0:			
-					tempinfo = str(sensors.getSensorValue(sensor_info[0]))
-					tempinfo = _("Temp:") + tempinfo + mark + "C"
-					return tempinfo
-			except:
-				pass
-
-		elif os.path.exists("/proc/stb/sensors/temp0/value"):
+		temperature = 0
+		if os.path.exists("/proc/stb/sensors/temp0/value"):
 			f = open("/proc/stb/sensors/temp0/value", "r")
 			tempinfo = str(f.readline().strip())
 			f.close()
@@ -87,16 +78,6 @@ class VtiTempFan(Poll, Converter, object):
 				tempinfo = _("Temp:") + tempinfo + mark + "C"
 				return tempinfo
 
-		elif os.path.exists('/sys/devices/virtual/thermal/thermal_zone0/temp'):
-			f = open('/sys/devices/virtual/thermal/thermal_zone0/temp', 'r')
-			tempinfo = f.read()
-			tempinfo = tempinfo[:-4]
-			tempinfo = str(tempinfo.strip())
-			f.close()
-			if tempinfo and int(tempinfo) > 0:
-				tempinfo = _("Temp:") + tempinfo + mark + "C"
-				return tempinfo
-
 		elif os.path.exists('/proc/hisi/msp/pm_cpu'):
 			try:
 				tempinfo = search('temperature = (\d+) degree', open("/proc/hisi/msp/pm_cpu").read()).group(1)
@@ -105,6 +86,15 @@ class VtiTempFan(Poll, Converter, object):
 			tempinfo = str(tempinfo.strip())
 			if tempinfo and int(tempinfo) > 0:
 				tempinfo = _("Temp:") + tempinfo + mark + "C"
+				return tempinfo
+
+		elif os.path.isfile("/sys/devices/virtual/thermal/thermal_zone0/temp"):
+			try:
+				temperature = int(open("/sys/devices/virtual/thermal/thermal_zone0/temp").read().strip())/1000
+			except:
+				pass
+			if temperature > 0:
+				tempinfo = _("Temp:") + str(temperature) + mark + "C"
 				return tempinfo
 
 		return tempinfo
