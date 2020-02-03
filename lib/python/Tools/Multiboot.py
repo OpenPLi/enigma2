@@ -88,7 +88,7 @@ class GetImagelist():
 						pass
 					date = max(date, datetime.fromtimestamp(os.stat(os.path.join(target, "usr/bin/enigma2")).st_mtime).strftime('%Y-%m-%d'))
 				return "%s (%s)" % (open(os.path.join(target, "etc/issue")).readlines()[-2].capitalize().strip()[:-6], date)
-			imagedir = "/".join(filter(None, [TMP_MOUNT, SystemInfo["canMultiBoot"][self.slot].get('rootsubdir', '')]))
+			imagedir = os.sep.join(filter(None, [TMP_MOUNT, SystemInfo["canMultiBoot"][self.slot].get('rootsubdir', '')]))
 			if os.path.isfile('%s/usr/bin/enigma2' % imagedir):
 				self.imagelist[self.slot] = { 'imagename': getImagename(imagedir) }
 			else:
