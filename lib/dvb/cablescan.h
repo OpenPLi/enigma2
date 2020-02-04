@@ -25,7 +25,12 @@ class eCableScan: public sigc::trackable, public iObject
 	int networkId;
 	std::map<std::string, int> providerNames;
 
-	std::list<ePtr<eDVBFrontendParameters> > scanChannels;
+	struct TransponderInfo
+	{
+		int tsid;
+		ePtr<eDVBFrontendParameters> feparm;
+	};
+	std::list<TransponderInfo> scanChannels;
 	ePtr<iDVBFrontendParameters> currentScanChannel;
 	int totalChannels;
 

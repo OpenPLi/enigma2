@@ -94,6 +94,7 @@ void eCableScan::SDTReady(int error)
 int eCableScan::nextChannel()
 {
 	ePtr<iDVBFrontend> fe;
+	int tsid;
 
 	m_SDT = NULL;
 
@@ -106,7 +107,8 @@ int eCableScan::nextChannel()
 
 	scanProgress(100 - (scanChannels.size() * 90) / totalChannels);
 
-	currentScanChannel = scanChannels.front();
+	currentScanChannel = scanChannels.front().feparm;
+	tsid = scanChannels.front().tsid;
 	scanChannels.pop_front();
 
 	if (m_channel->getFrontend(fe))
@@ -121,16 +123,7 @@ int eCableScan::nextChannel()
 
 	m_SDT = new eTable<ServiceDescriptionSection>;
 	CONNECT(m_SDT->tableReady, eCableScan::SDTReady);
-	eDVBTableSpec spec = eDVBSDTSpec();
-	/*
-	 * limit the SDT timeout to 5s (e2 defaults to 60s),
-	 * so we do not have to wait for too long when channels
-	 * from the NIT are not available.
-	 * We should actually implement a channel statechange handler
-	 * (to receive tune failed status) but limiting the SDT reader
-	 * timeout has the same effect, and is a lot simpler
-	 */
-	spec.timeout = 5000;
+	eDVBTableSpec spec = eDVBSDTSpec(tsid);
 	m_SDT->start(m_demux, spec);
 	return 0;
 }
@@ -152,12 +145,14 @@ void eCableScan::parseNIT()
 				{
 				case CABLE_DELIVERY_SYSTEM_DESCRIPTOR:
 				{
+					TransponderInfo transponderinfo;
 					CableDeliverySystemDescriptor &d = (CableDeliverySystemDescriptor&)**desc;
-					ePtr<eDVBFrontendParameters> feparm = new eDVBFrontendParameters;
+					transponderinfo.feparm = new eDVBFrontendParameters;
+					transponderinfo.tsid = (*tsinfo)->getTransportStreamId();
 					eDVBFrontendParametersCable cable;
 					cable.set(d);
-					feparm->setDVBC(cable);
-					scanChannels.push_back(feparm);
+					transponderinfo.feparm->setDVBC(cable);
+					scanChannels.push_back(transponderinfo);
 					break;
 				}
 				case LOGICAL_CHANNEL_DESCRIPTOR:
