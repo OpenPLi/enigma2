@@ -22,7 +22,7 @@ def getparam(line, param):
 def getMultibootslots():
 	bootslots = {}
 	if SystemInfo["MultibootStartupDevice"]:
-		for file in glob.glob('%s/STARTUP_*' % TMP_MOUNT):
+		for file in glob.glob(os.path.join(TMP_MOUNT, 'STARTUP_*')):
 			slotnumber = file.rsplit('_', 3 if 'BOXMODE' in file else 1)[1]
 			if slotnumber.isdigit() and slotnumber not in bootslots:
 				slot = {}
@@ -93,7 +93,7 @@ class GetImagelist():
 					date = max(date, datetime.fromtimestamp(os.stat(os.path.join(target, "usr/bin/enigma2")).st_mtime).strftime('%Y-%m-%d'))
 				return "%s (%s)" % (open(os.path.join(target, "etc/issue")).readlines()[-2].capitalize().strip()[:-6], date)
 			imagedir = os.sep.join(filter(None, [TMP_MOUNT, SystemInfo["canMultiBoot"][self.slot].get('rootsubdir', '')]))
-			if os.path.isfile('%s/usr/bin/enigma2' % imagedir):
+			if os.path.isfile(os.path.join(imagedir, '/usr/bin/enigma2')):
 				self.imagelist[self.slot] = { 'imagename': getImagename(imagedir) }
 			else:
 				self.imagelist[self.slot] = { 'imagename': _("Empty slot") }
