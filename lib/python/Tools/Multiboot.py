@@ -83,6 +83,8 @@ class GetImagelist():
 			self.container.ePopen('mount %s %s' % (SystemInfo["canMultiBoot"][self.slot]['device'], TMP_MOUNT), self.appClosed)
 
 	def appClosed(self, data, retval, extra_args=None):
+		if retval:
+			self.imagelist[self.slot] = { 'imagename': _("Empty slot") }
 		if retval == 0 and self.phase == self.MOUNT:
 			def getImagename(target):
 				from datetime import datetime
