@@ -4,6 +4,7 @@
 #include <dvbsi++/ca_identifier_descriptor.h>
 #include <dvbsi++/logical_channel_descriptor.h>
 #include <dvbsi++/service_list_descriptor.h>
+#include <dvbsi++/network_name_descriptor.h>
 
 #include <lib/dvb/db.h>
 #include <lib/dvb/dvb.h>
@@ -37,6 +38,7 @@ void eCableScan::start(int frontendid)
 	ePtr<iDVBFrontend> fe;
 
 	serviceIdToTsid.clear();
+	providerName = "";
 
 	if (res->allocateRawChannel(m_channel, frontendid))
 	{
@@ -136,6 +138,22 @@ void eCableScan::parseNIT()
 	std::vector<NetworkInformationSection*>::const_iterator i;
 	for (i = m_NIT->getSections().begin(); i != m_NIT->getSections().end(); ++i)
 	{
+		if (providerName == "")
+		{
+			for (DescriptorConstIterator desc = (*i)->getDescriptors()->begin();
+					desc != (*i)->getDescriptors()->end(); ++desc)
+			{
+				switch ((*desc)->getTag())
+				{
+				case NETWORK_NAME_DESCRIPTOR:
+				{
+					NetworkNameDescriptor &d = (NetworkNameDescriptor&)**desc;
+					providerName = d.getNetworkName();
+					break;
+				}
+				}
+			}
+		}
 		const TransportStreamInfoList &tsinfovec = *(*i)->getTsInfo();
 
 		for (TransportStreamInfoConstIterator tsinfo(tsinfovec.begin());
@@ -374,13 +392,16 @@ void eCableScan::createBouquets()
 	res->getChannelList(db);
 	eDVBDB *dvbdb = eDVBDB::getInstance();
 
-	int most = 0;
-	for (std::map<std::string, int>::iterator it = providerNames.begin(); it != providerNames.end(); ++it)
+	if (providerName == "")
 	{
-		if (it->second > most)
+		int most = 0;
+		for (std::map<std::string, int>::iterator it = providerNames.begin(); it != providerNames.end(); ++it)
 		{
-			most = it->second;
-			providerName = it->first;
+			if (it->second > most)
+			{
+				most = it->second;
+				providerName = it->first;
+			}
 		}
 	}
 	bouquetFilename = replace_all(providerName, " ", "");
