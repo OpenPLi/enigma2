@@ -36,7 +36,7 @@ class eCableScan: public sigc::trackable, public iObject
 
 	std::map<eServiceReferenceDVB, ePtr<eDVBService> > newServices;
 
-	std::map<int, int> serviceIdToChannelId, serviceIdToHDChannelId;
+	std::map<int, int> serviceIdToChannelId, serviceIdToHDChannelId, serviceIdToTsid;
 	std::map<int, eServiceReferenceDVB> numberedServiceRefs, numberedRadioServiceRefs;
 
 	ePtr<eTable<NetworkInformationSection> > m_NIT;

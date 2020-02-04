@@ -3,6 +3,7 @@
 #include <dvbsi++/cable_delivery_system_descriptor.h>
 #include <dvbsi++/ca_identifier_descriptor.h>
 #include <dvbsi++/logical_channel_descriptor.h>
+#include <dvbsi++/service_list_descriptor.h>
 
 #include <lib/dvb/db.h>
 #include <lib/dvb/dvb.h>
@@ -34,6 +35,8 @@ void eCableScan::start(int frontendid)
 	ePtr<eDVBResourceManager> res;
 	eDVBResourceManager::getInstance(res);
 	ePtr<iDVBFrontend> fe;
+
+	serviceIdToTsid.clear();
 
 	if (res->allocateRawChannel(m_channel, frontendid))
 	{
@@ -179,6 +182,18 @@ void eCableScan::parseNIT()
 					}
 					break;
 				}
+				case SERVICE_LIST_DESCRIPTOR:
+				{
+					unsigned char buf[(*desc)->getLength() + 2];
+					(*desc)->writeToBuffer(buf);
+					ServiceListDescriptor d(buf);
+					const ServiceListItemList &services = *d.getServiceList();
+					for (ServiceListItemConstIterator s(services.begin()); s != services.end(); ++s)
+					{
+						serviceIdToTsid[(*s)->getServiceId()] = (*tsinfo)->getTransportStreamId();
+					}
+					break;
+				}
 				default:
 					break;
 				}
@@ -214,6 +229,18 @@ void eCableScan::parseSDT()
 		for (ServiceDescriptionConstIterator s(services.begin()); s != services.end(); ++s)
 		{
 			unsigned short service_id = (*s)->getServiceId();
+			if (!serviceIdToTsid.empty()
+				&& serviceIdToTsid.find(service_id) != serviceIdToTsid.end()
+				&& serviceIdToTsid[service_id] != (**m_SDT->getSections().begin()).getTransportStreamId())
+			{
+				/*
+				 * This SID does not belong to the current TSID, according to the ServiceListDescriptor in the NIT.
+				 * This probably means the SDT contains data from the original network, which is not valid on the
+				 * selected Network_Id
+				 */
+				eDebug("[eCableScan] skip SID %x on TSID %x (not in the linked services list in the NIT)", service_id, (**m_SDT->getSections().begin()).getTransportStreamId());
+				break;
+			}
 			eServiceReferenceDVB ref;
 			ePtr<eDVBService> service = new eDVBService;
 
