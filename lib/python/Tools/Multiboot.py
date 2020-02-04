@@ -4,10 +4,17 @@ import os, glob
 
 TMP_MOUNT = '/tmp/multibootcheck'
 
-def getMultibootStartupDevice(model):
-	for device in ('/dev/block/by-name/bootoptions', '/dev/block/by-name/bootoptions', "/dev/mmcblk1p1" if model in ('osmio4k', 'osmio4kplus', 'osmini4k') else "/dev/mmcblk0p1"):
+def getMultibootStartupDevice():
+	if not os.path.isdir(TMP_MOUNT):
+		os.mkdir(TMP_MOUNT)
+	for device in ('/dev/block/by-name/bootoptions', '/dev/mmcblk0p1', '/dev/mmcblk1p1', '/dev/mmcblk0p3', '/dev/mmcblk0p4'):
 		if os.path.exists(device):
-			return device
+			Console().ePopen('mount %s %s' % (device, TMP_MOUNT))
+			if os.path.isfile(os.path.join(TMP_MOUNT, "STARTUP")):
+				return device
+			Console().ePopen('umount %s' % TMP_MOUNT)
+	if not os.path.ismount(TMP_MOUNT):
+		os.rmdir(TMP_MOUNT)
 
 def getparam(line, param):
 	return line.rsplit('%s=' % param, 1)[1].split(' ', 1)[0]
@@ -15,9 +22,6 @@ def getparam(line, param):
 def getMultibootslots():
 	bootslots = {}
 	if SystemInfo["MultibootStartupDevice"]:
-		if not os.path.isdir(TMP_MOUNT):
-			os.mkdir(TMP_MOUNT)
-		Console().ePopen('/bin/mount %s %s' % (SystemInfo["MultibootStartupDevice"], TMP_MOUNT))
 		for file in glob.glob('%s/STARTUP_*' % TMP_MOUNT):
 			slotnumber = file.rsplit('_', 3 if 'BOXMODE' in file else 1)[1]
 			if slotnumber.isdigit() and slotnumber not in bootslots:
@@ -33,7 +37,7 @@ def getMultibootslots():
 						break
 				if slot:
 					bootslots[int(slotnumber)] = slot
-		Console().ePopen('/bin/umount %s' % TMP_MOUNT)
+		Console().ePopen('umount %s' % TMP_MOUNT)
 		if not os.path.ismount(TMP_MOUNT):
 			os.rmdir(TMP_MOUNT)
 	return bootslots
