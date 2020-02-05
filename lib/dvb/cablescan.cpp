@@ -258,7 +258,7 @@ void eCableScan::parseSDT()
 				 * selected Network_Id
 				 */
 				eDebug("[eCableScan] skip SID %x on TSID %x (not in the linked services list in the NIT)", service_id, (**m_SDT->getSections().begin()).getTransportStreamId());
-				break;
+				continue;
 			}
 			eServiceReferenceDVB ref;
 			ePtr<eDVBService> service = new eDVBService;
