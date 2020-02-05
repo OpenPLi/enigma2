@@ -18,6 +18,7 @@ class eCableScan: public sigc::trackable, public iObject
 	ePtr<iDVBDemux> m_demux;
 	bool originalNumbering;
 	bool hdList;
+	bool useNetworkName;
 	unsigned int initialFrequency;
 	unsigned int initialSymbolRate;
 	int initialModulation;
@@ -54,7 +55,7 @@ class eCableScan: public sigc::trackable, public iObject
 #endif /* no SWIG */
 
 public:
-	eCableScan(int networkid, unsigned int frequency, unsigned int symbolrate, int modulation, bool originalnumbering = false, bool hdlist = false);
+	eCableScan(int networkid, unsigned int frequency, unsigned int symbolrate, int modulation, bool originalnumbering = false, bool hdlist = false, bool networkname = false);
 	~eCableScan();
 
 	void start(int frontendid = 0);

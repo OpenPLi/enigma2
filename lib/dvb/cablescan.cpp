@@ -16,7 +16,7 @@
 
 DEFINE_REF(eCableScan);
 
-eCableScan::eCableScan(int networkid, unsigned int frequency, unsigned int symbolrate, int modulation, bool originalnumbering, bool hdlist)
+eCableScan::eCableScan(int networkid, unsigned int frequency, unsigned int symbolrate, int modulation, bool originalnumbering, bool hdlist, bool networkname)
 {
 	networkId = networkid;
 	initialFrequency = frequency;
@@ -24,6 +24,7 @@ eCableScan::eCableScan(int networkid, unsigned int frequency, unsigned int symbo
 	initialModulation = modulation;
 	originalNumbering = originalnumbering;
 	hdList = hdlist;
+	useNetworkName = networkname;
 }
 
 eCableScan::~eCableScan()
@@ -138,7 +139,7 @@ void eCableScan::parseNIT()
 	std::vector<NetworkInformationSection*>::const_iterator i;
 	for (i = m_NIT->getSections().begin(); i != m_NIT->getSections().end(); ++i)
 	{
-		if (providerName == "")
+		if (useNetworkName && providerName == "")
 		{
 			for (DescriptorConstIterator desc = (*i)->getDescriptors()->begin();
 					desc != (*i)->getDescriptors()->end(); ++desc)
