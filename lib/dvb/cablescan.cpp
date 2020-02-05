@@ -253,11 +253,11 @@ void eCableScan::parseSDT()
 				&& serviceIdToTsid[service_id] != (**m_SDT->getSections().begin()).getTransportStreamId())
 			{
 				/*
-				 * This SID does not belong to the current TSID, according to the ServiceListDescriptor in the NIT.
+				 * This SID belongs to a different TSID, according to the ServiceListDescriptor in the NIT.
 				 * This probably means the SDT contains data from the original network, which is not valid on the
 				 * selected Network_Id
 				 */
-				eDebug("[eCableScan] skip SID %x on TSID %x (not in the linked services list in the NIT)", service_id, (**m_SDT->getSections().begin()).getTransportStreamId());
+				eDebug("[eCableScan] skip SID %x on TSID %x (which belongs to TSID %x according to the NIT)", service_id, (**m_SDT->getSections().begin()).getTransportStreamId(), serviceIdToTsid[service_id]);
 				continue;
 			}
 			eServiceReferenceDVB ref;
