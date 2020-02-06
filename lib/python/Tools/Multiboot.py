@@ -64,7 +64,7 @@ class GetImagelist():
 
 	def __init__(self, callback):
 		if SystemInfo["canMultiBoot"]:
-			self.slots = SystemInfo["canMultiBoot"].keys()
+			self.slots = sorted(SystemInfo["canMultiBoot"].keys())
 			self.callback = callback
 			self.imagelist = {}
 			if not os.path.isdir(TMP_MOUNT):
@@ -82,7 +82,9 @@ class GetImagelist():
 			self.slot = self.slots.pop(0)
 			self.container.ePopen('mount %s %s' % (SystemInfo["canMultiBoot"][self.slot]['device'], TMP_MOUNT), self.appClosed)
 
-	def appClosed(self, data, retval, extra_args=None):
+	def appClosed(self, data="", retval=0, extra_args=None):
+		if retval:
+			self.imagelist[self.slot] = { 'imagename': _("Empty slot") }
 		if retval == 0 and self.phase == self.MOUNT:
 			def getImagename(target):
 				from datetime import datetime
@@ -99,8 +101,12 @@ class GetImagelist():
 				self.imagelist[self.slot] = { 'imagename': getImagename(imagedir) }
 			else:
 				self.imagelist[self.slot] = { 'imagename': _("Empty slot") }
-			self.phase = self.UNMOUNT
-			self.run()
+			if self.slots and SystemInfo["canMultiBoot"][self.slot]['device'] == SystemInfo["canMultiBoot"][self.slots[0]]['device']:
+				self.slot = self.slots.pop(0)
+				self.appClosed()
+			else:
+				self.phase = self.UNMOUNT
+				self.run()
 		elif self.slots:
 			self.phase = self.MOUNT
 			self.run()

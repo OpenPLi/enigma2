@@ -18,6 +18,7 @@ class eCableScan: public sigc::trackable, public iObject
 	ePtr<iDVBDemux> m_demux;
 	bool originalNumbering;
 	bool hdList;
+	bool useNetworkName;
 	unsigned int initialFrequency;
 	unsigned int initialSymbolRate;
 	int initialModulation;
@@ -25,13 +26,18 @@ class eCableScan: public sigc::trackable, public iObject
 	int networkId;
 	std::map<std::string, int> providerNames;
 
-	std::list<ePtr<eDVBFrontendParameters> > scanChannels;
+	struct TransponderInfo
+	{
+		int tsid;
+		ePtr<eDVBFrontendParameters> feparm;
+	};
+	std::list<TransponderInfo> scanChannels;
 	ePtr<iDVBFrontendParameters> currentScanChannel;
 	int totalChannels;
 
 	std::map<eServiceReferenceDVB, ePtr<eDVBService> > newServices;
 
-	std::map<int, int> serviceIdToChannelId, serviceIdToHDChannelId;
+	std::map<int, int> serviceIdToChannelId, serviceIdToHDChannelId, serviceIdToTsid;
 	std::map<int, eServiceReferenceDVB> numberedServiceRefs, numberedRadioServiceRefs;
 
 	ePtr<eTable<NetworkInformationSection> > m_NIT;
@@ -49,7 +55,7 @@ class eCableScan: public sigc::trackable, public iObject
 #endif /* no SWIG */
 
 public:
-	eCableScan(int networkid, unsigned int frequency, unsigned int symbolrate, int modulation, bool originalnumbering = false, bool hdlist = false);
+	eCableScan(int networkid, unsigned int frequency, unsigned int symbolrate, int modulation, bool originalnumbering = false, bool hdlist = false, bool networkname = false);
 	~eCableScan();
 
 	void start(int frontendid = 0);
