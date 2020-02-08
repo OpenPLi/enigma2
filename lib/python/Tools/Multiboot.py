@@ -87,7 +87,7 @@ class GetImagelist():
 			self.imagelist[self.slot] = { 'imagename': _("Empty slot") }
 		if retval == 0 and self.phase == self.MOUNT:
 			imagedir = os.sep.join(filter(None, [TMP_MOUNT, SystemInfo["canMultiBoot"][self.slot].get('rootsubdir', '')]))
-			if os.path.isfile('%s/usr/bin/enigma2' % imagedir):
+			if os.path.isfile(os.path.join(imagedir, '/usr/bin/enigma2')):
 				try:
 					from datetime import datetime
 					date = datetime.fromtimestamp(os.stat(os.path.join(imagedir, "var/lib/opkg/status")).st_mtime).strftime('%Y-%m-%d')

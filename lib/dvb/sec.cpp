@@ -714,7 +714,7 @@ RESULT eDVBSatelliteEquipmentControl::prepare(iDVBFrontend &frontend, const eDVB
 				compare.voltage = iDVBFrontend::voltageOff;
 				sec_sequence.push_back( eSecCommand(eSecCommand::IF_NOT_VOLTAGE_GOTO, compare) );
 				sec_sequence.push_back( eSecCommand(eSecCommand::SET_VOLTAGE, VOLTAGE(13)) );
-				sec_sequence.push_back( eSecCommand(eSecCommand::SLEEP, m_params[UNICABLE_DELAY_AFTER_ENABLE_VOLTAGE_BEFORE_SWITCH_CMDS] ) );
+				sec_sequence.push_back( eSecCommand(eSecCommand::SLEEP, m_params[UNICABLE_DELAY_AFTER_ENABLE_VOLTAGE_BEFORE_SWITCH_CMDS] > lnb_param.boot_up_time ? m_params[DELAY_AFTER_ENABLE_VOLTAGE_BEFORE_SWITCH_CMDS] : lnb_param.boot_up_time ) );
 
 				sec_sequence.push_back( eSecCommand(eSecCommand::SET_VOLTAGE, VOLTAGE(18)) );
 				sec_sequence.push_back( eSecCommand(eSecCommand::SET_TONE, iDVBFrontend::toneOff) );
@@ -1538,6 +1538,18 @@ RESULT eDVBSatelliteEquipmentControl::setLNBSatCRPositionNumber(unsigned int pos
 	else
 		return -ENOENT;
 
+	return 0;
+}
+
+RESULT eDVBSatelliteEquipmentControl::setLNBBootupTime(int BootUpTime)
+{
+	eSecDebug("eDVBSatelliteEquipmentControl::setLNBBootupTime(%d)", BootUpTime);
+	if(!((BootUpTime >= 0)))
+		return -EPERM;
+	if ( currentLNBValid() )
+		m_lnbs[m_lnbidx].boot_up_time = BootUpTime;
+	else
+		return -ENOENT;
 	return 0;
 }
 

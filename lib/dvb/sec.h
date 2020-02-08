@@ -297,6 +297,7 @@ public:
 	int old_orbital_position;
 	int guard_offset_old;
 	int guard_offset;
+	int boot_up_time = 0;
 };
 
 class eDVBRegisteredFrontend;
@@ -391,6 +392,7 @@ public:
 	RESULT setLNBSatCRpositions(int SatCR_positions);
 	RESULT setLNBSatCRformat(SatCR_format_t SatCR_format);
 	RESULT setLNBSatCRPositionNumber(unsigned int position_number);
+	RESULT setLNBBootupTime(int BootUpTime);
 	RESULT getLNBSatCR();
 	RESULT getLNBSatCRvco();
 	RESULT getLNBSatCRpositions();
