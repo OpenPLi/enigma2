@@ -86,19 +86,17 @@ class GetImagelist():
 		if retval:
 			self.imagelist[self.slot] = { 'imagename': _("Empty slot") }
 		if retval == 0 and self.phase == self.MOUNT:
-			def getImagename(target):
-				from datetime import datetime
-				date = datetime.fromtimestamp(os.stat(os.path.join(target, "var/lib/opkg/status")).st_mtime).strftime('%Y-%m-%d')
-				if date.startswith("1970"):
-					try:
-						date = datetime.fromtimestamp(os.stat(os.path.join(target, "usr/share/bootlogo.mvi")).st_mtime).strftime('%Y-%m-%d')
-					except:
-						pass
-					date = max(date, datetime.fromtimestamp(os.stat(os.path.join(target, "usr/bin/enigma2")).st_mtime).strftime('%Y-%m-%d'))
-				return "%s (%s)" % (open(os.path.join(target, "etc/issue")).readlines()[-2].capitalize().strip()[:-6], date)
 			imagedir = os.sep.join(filter(None, [TMP_MOUNT, SystemInfo["canMultiBoot"][self.slot].get('rootsubdir', '')]))
-			if os.path.isfile(os.path.join(imagedir, '/usr/bin/enigma2')):
-				self.imagelist[self.slot] = { 'imagename': getImagename(imagedir) }
+			if os.path.isfile('%s/usr/bin/enigma2' % imagedir):
+				try:
+					from datetime import datetime
+					date = datetime.fromtimestamp(os.stat(os.path.join(imagedir, "var/lib/opkg/status")).st_mtime).strftime('%Y-%m-%d')
+					if date.startswith("1970"):
+						date = datetime.fromtimestamp(os.stat(os.path.join(imagedir, "usr/share/bootlogo.mvi")).st_mtime).strftime('%Y-%m-%d')
+					date = max(date, datetime.fromtimestamp(os.stat(os.path.join(imagedir, "usr/bin/enigma2")).st_mtime).strftime('%Y-%m-%d'))
+				except:
+					date = _("Unknown")
+				self.imagelist[self.slot] = { 'imagename': "%s (%s)" % (open(os.path.join(imagedir, "etc/issue")).readlines()[-2].capitalize().strip()[:-6], date) }
 			else:
 				self.imagelist[self.slot] = { 'imagename': _("Empty slot") }
 			if self.slots and SystemInfo["canMultiBoot"][self.slot]['device'] == SystemInfo["canMultiBoot"][self.slots[0]]['device']:
