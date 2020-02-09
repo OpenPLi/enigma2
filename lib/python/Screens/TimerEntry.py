@@ -123,7 +123,7 @@ class TimerEntry(Screen, ConfigListScreen):
 		self.timerentry_name = ConfigText(default = self.timer.name, visible_width = 50, fixed_size = False)
 		self.timerentry_description = ConfigText(default = self.timer.description, visible_width = 50, fixed_size = False)
 		self.timerentry_tags = self.timer.tags[:]
-		self.timerentry_tagsset = ConfigSelection(choices = [not self.timerentry_tags and "None" or " ".join(self.timerentry_tags)])
+		self.timerentry_tagsset = ConfigSelection(choices = [not self.timerentry_tags and _("None") or " ".join(self.timerentry_tags)])
 
 		self.timerentry_repeated = ConfigSelection(default = repeated, choices = [("weekly", _("weekly")), ("daily", _("daily")), ("weekdays", _("Mon-Fri")), ("user", _("user defined"))])
 		self.timerentry_renamerepeat = ConfigYesNo(default = rename_repeat)
@@ -547,7 +547,7 @@ class TimerEntry(Screen, ConfigListScreen):
 	def tagEditFinished(self, ret):
 		if ret is not None:
 			self.timerentry_tags = ret
-			self.timerentry_tagsset.setChoices([not ret and "None" or " ".join(ret)])
+			self.timerentry_tagsset.setChoices([not ret and _("None") or " ".join(ret)])
 			self["config"].invalidate(self.tagsSet)
 
 class TimerLog(Screen):
