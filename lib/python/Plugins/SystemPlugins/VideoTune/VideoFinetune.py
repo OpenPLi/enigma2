@@ -82,7 +82,7 @@ class FullUHDTestScreen(OverscanTestScreen):
 		Screen.__init__(self, session)
 		self.oldref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 		self.session.nav.stopService()
-		Console().ePopen("/usr/bin/showiframe %s") % resolveFilename(SCOPE_PLUGINS, "SystemPlugins/VideoTune/testbeeld-4k.mvi")
+		Console().ePopen("/usr/bin/showiframe %s" % resolveFilename(SCOPE_PLUGINS, "SystemPlugins/VideoTune/testbeeld-4k.mvi"))
 		self.hide()
 		self.onClose.append(self.__close)
 
