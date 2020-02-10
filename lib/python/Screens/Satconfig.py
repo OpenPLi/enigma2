@@ -383,7 +383,8 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 					self.list.append(getConfigListEntry(self.indent % "LOF/L", currLnb.lofl, _("Consult your SCR device spec sheet for this information.")))
 					self.list.append(getConfigListEntry(self.indent % "LOF/H", currLnb.lofh, _("Consult your SCR device spec sheet for this information.")))
 					self.list.append(getConfigListEntry(self.indent % _("Threshold"), currLnb.threshold, _("Consult your SCR device spec sheet for this information.")))
-					self.list.append(self.externallyPowered)
+					if not SystemInfo["LnbPowerAlwaysOn"]:
+						self.list.append(self.externallyPowered)
 					if not currLnb.powerinserter.value:
 						self.list.append(getConfigListEntry(self.indent % _("Bootup time"), currLnb.bootuptime, _("Consult your SCR device spec sheet for this information.")))
 				else:
@@ -396,7 +397,8 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 					if currLnb.positions.value > 1:
 						self.list.append(self.advancedPosition)
 					self.list.append(self.advancedSCR)
-					self.list.append(self.externallyPowered)
+					if not SystemInfo["LnbPowerAlwaysOn"]:
+						self.list.append(self.externallyPowered)
 				choices = []
 				connectable = nimmanager.canConnectTo(self.slotid)
 				for id in connectable:
