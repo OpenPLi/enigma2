@@ -1,5 +1,6 @@
 import os
 
+from SystemInfo import SystemInfo
 from Tools.HardwareInfo import HardwareInfo
 from Tools.BoundFunction import boundFunction
 
