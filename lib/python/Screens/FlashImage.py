@@ -484,9 +484,9 @@ class MultibootSelection(SelectImage):
 			elif SystemInfo["canMultiBoot"][self.slot]['startupfile']:
 				if SystemInfo["canMode12"]:
 					if self.slot < 12:
-						startupfile = "/tmp/startupmount/%s_BOXMODE_1" % SystemInfo["canMultiBoot"][self.slot]['startupfile']
+						startupfile = "/tmp/startupmount/%s_1" % SystemInfo["canMultiBoot"][self.slot]['startupfile'].rsplit('_', 1)[0]
 					else:
-						startupfile = "/tmp/startupmount/%s_BOXMODE_1" % SystemInfo["canMultiBoot"][self.slot - 12]['startupfile']
+						startupfile = "/tmp/startupmount/%s_12" % SystemInfo["canMultiBoot"][self.slot - 12]['startupfile'].rsplit('_', 1)[0]
 				else:
 					startupfile = "/tmp/startupmount/%s" % SystemInfo["canMultiBoot"][self.slot]['startupfile']
 				shutil.copyfile(startupfile, "/tmp/startupmount/STARTUP")
