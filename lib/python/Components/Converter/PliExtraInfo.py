@@ -10,6 +10,7 @@ from Tools.GetEcmInfo import GetEcmInfo
 from Tools.Hex2strColor import Hex2strColor
 from Poll import Poll
 from skin import parameters
+import os
 
 caid_data = (
 	("0x4a30", "0x4a30", _("DVN-JET"),	"TB", False),
@@ -174,11 +175,23 @@ class PliExtraInfo(Poll, Converter):
 		if xres == -1:
 			return ""
 		yres = info.getInfo(iServiceInformation.sVideoHeight)
-		mode = ("i", "p", " ")[info.getInfo(iServiceInformation.sProgressive)]
+		mode = ("i", "p", "")[info.getInfo(iServiceInformation.sProgressive)]
 		fps = (info.getInfo(iServiceInformation.sFrameRate) + 500) / 1000
 		if not fps:
 			try:
-				fps = (int(open("/proc/stb/vmpeg/0/framerate", "r").read()) + 500) / 1000
+				if os.path.exists("/proc/stb/vmpeg/0/framerate"):
+					fps = (int(open("/proc/stb/vmpeg/0/framerate", "r").read()) + 500) / 1000
+				elif os.path.exists("/proc/stb/vmpeg/0/fallback_framerate"):
+					fps = (int(open("/proc/stb/vmpeg/0/fallback_framerate", "r").read()) + 0) / 1000
+			except:
+				pass
+		if not mode:
+			try:
+				mab = int(open("/proc/stb/vmpeg/0/progressive", "r").read())
+				if mab == 1:
+					mode = "p"
+				else:
+					mode = "i"
 			except:
 				pass
 		return "%sx%s%s%s" % (xres, yres, mode, fps)
