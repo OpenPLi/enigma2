@@ -37,7 +37,7 @@ def getMultibootslots():
 						device = getparam(line, 'root')
 						if os.path.exists(device):
 							slot['device'] = device
-							slot['startupfile'] = os.path.basename(file).split('_BOXMODE')[0].split('_MODE')[0]
+							slot['startupfile'] = os.path.basename(file)
 							if 'rootsubdir' in line:
 								slot['rootsubdir'] = getparam(line, 'rootsubdir')
 						break
