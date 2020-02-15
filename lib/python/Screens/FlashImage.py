@@ -481,7 +481,7 @@ class MultibootSelection(SelectImage):
 				shutil.copyfile("/tmp/startupmount/STARTUP_RECOVERY", "/tmp/startupmount/STARTUP")
 			elif self.slot == "Android":
 				shutil.copyfile("/tmp/startupmount/STARTUP_ANDROID", "/tmp/startupmount/STARTUP")
-			else:
+			elif SystemInfo["canMultiBoot"][self.slot]['startupfile']:
 				if SystemInfo["canMode12"]:
 					if self.slot < 12:
 						startupfile = "/tmp/startupmount/%s_BOXMODE_1" % SystemInfo["canMultiBoot"][self.slot]['startupfile']
@@ -490,6 +490,14 @@ class MultibootSelection(SelectImage):
 				else:
 					startupfile = "/tmp/startupmount/%s" % SystemInfo["canMultiBoot"][self.slot]['startupfile']
 				shutil.copyfile(startupfile, "/tmp/startupmount/STARTUP")
+			else:
+				model = HardwareInfo().get_machine_name()
+				if self.slot < 12:
+					startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=1'\n" % (self.slot, self.slot * 2 + 1, model)
+				else:
+					self.slot -= 12
+					startupFileContents = "boot emmcflash0.kernel%s 'brcm_cma=520M@248M brcm_cma=%s@768M root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=12'\n" % (self.slot, SystemInfo["canMode12"], self.slot * 2 + 1, model)
+				open('/tmp/startupmount/STARTUP', 'w').write(startupFileContents)
 			from Screens.Standby import TryQuitMainloop
 			self.session.open(TryQuitMainloop, 2)
 
