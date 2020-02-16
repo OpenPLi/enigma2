@@ -58,6 +58,7 @@ while : ; do
 	#  4 - front processor upgrade
 	#  5 - install new settings
 	#  6 - restart enigma in debug mode
+	#  7 - manufacturer reset
 	# 42 - offline update
 	# 43 - restart for autoinstall
 	#
@@ -90,6 +91,9 @@ while : ; do
 		6)
 			DEBUG_LVL=4
 			;;
+		7)
+			rm -R /etc/enigma2
+			;;
 		42)
 			df -P | grep -v "tmpfs " | awk '{print $6}' | tail -n +3 > /tmp/upgrade_mountpoints.txt
 			while read line; do
@@ -99,8 +103,15 @@ while : ; do
 			done < /tmp/upgrade_mountpoints.txt
 			# bind the console (when available)
 			[ -f /sys/class/vtconsole/vtcon1/bind ] && echo 1 > /sys/class/vtconsole/vtcon1/bind
+			prevupd=0
+			currupd=999
 			opkg update 2>&1 | tee /home/root/ipkgupgrade.log
-			opkg upgrade $DESTS 2>&1 | tee -a /home/root/ipkgupgrade.log
+			while [ $currupd -gt 0 -a $currupd -ne $prevupd ]; do
+				opkg upgrade $DESTS 2>&1 | tee -a /home/root/ipkgupgrade.log
+				prevupd=$currupd
+				currupd=`opkg list-upgradable | wc -l`
+				echo "===> $currupd PACKAGE(S) REMAINING" >> /home/root/ipkupgrade.log
+			done
 			/sbin/reboot
 			;;
 		43)
@@ -118,7 +129,11 @@ while : ; do
 			/etc/init.d/dbus-1 reload
 			/etc/init.d/networking start
 			/etc/init.d/avahi-daemon start
-			[ ! -f /home/root/autoinstall.log ] && touch /etc/.doAutoinstall
+			if [ ! -f /etc/.doNotAutoinstall ]; then
+				touch /etc/.doAutoinstall
+			else
+				rm -f /etc/.doNotAutoInstall
+			fi
 			break
 			;;
 		*)
@@ -127,3 +142,4 @@ while : ; do
 	esac
 
 done
+
