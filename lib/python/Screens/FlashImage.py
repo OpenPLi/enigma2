@@ -481,7 +481,7 @@ class MultibootSelection(SelectImage):
 				shutil.copyfile("/tmp/startupmount/STARTUP_RECOVERY", "/tmp/startupmount/STARTUP")
 			elif self.slot == "Android":
 				shutil.copyfile("/tmp/startupmount/STARTUP_ANDROID", "/tmp/startupmount/STARTUP")
-			elif SystemInfo["canMultiBoot"][self.slot]['startupfile']:
+			elif SystemInfo["canMultiBoot"][self.slot % 12]['startupfile']:
 				if SystemInfo["canMode12"]:
 					if self.slot < 12:
 						startupfile = "/tmp/startupmount/%s_1" % SystemInfo["canMultiBoot"][self.slot]['startupfile'].rsplit('_', 1)[0]
