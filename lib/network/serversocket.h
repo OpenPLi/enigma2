@@ -8,6 +8,7 @@ class eServerSocket: public eSocket
 	void notifier(int handle);
 	int okflag;
 	std::string strRemoteHost;
+	int m_port;
 protected:
 	virtual void newConnection(int socket) = 0;
 	int startListening(struct addrinfo *addr);
@@ -22,6 +23,7 @@ public:
 	virtual ~eServerSocket();
 	bool ok();
 	std::string RemoteHost() { return strRemoteHost;}
+	int Port() { return m_port; }
 };
 
 #endif /* __serversocket_h */
