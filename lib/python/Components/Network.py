@@ -97,6 +97,21 @@ class Network:
 						data['up'] = True
 						if iface is not 'lo':
 							self.configuredInterfaces.append(iface)
+				try:
+					ipconfigfile = '/tmp/.ipcfg'
+					if not os.path.isfile(ipconfigfile):
+						os.system('ifconfig > ' + ipconfigfile)
+					with open(ipconfigfile, 'r') as arch:
+						for line in arch:
+							splitstr = line.split()[0]
+							if splitstr == 'eth0':
+								data['mac'] = line.split()[4]
+								break
+							elif splitstr == 'wlan0':
+								data['mac'] = line.split()[4]
+								break
+				except:
+					pass
 				if split[0] == "link/ether":
 					mac = self.regExpMatch(macPattern, self.regExpMatch(macLinePattern, split[0]))
 					bcast = self.regExpMatch(ipPattern, self.regExpMatch(bcastLinePattern, split[2]))
