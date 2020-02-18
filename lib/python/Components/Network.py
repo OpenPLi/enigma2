@@ -100,8 +100,8 @@ class Network:
 				havemac = False
 				try:
 					ipconfigfile = '/tmp/.ipcfg'
-					if not os.path.isfile(ipconfigfile):
-						os.system('ifconfig > ' + ipconfigfile)
+					#if not os.path.isfile(ipconfigfile):
+					os.system('ifconfig > ' + ipconfigfile)
 					with open(ipconfigfile, 'r') as arch:
 						for line in arch:
 							splitstr = line.split()[0]
