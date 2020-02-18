@@ -89,6 +89,39 @@ class Network:
 		macPattern = re.compile(macRegexp)
 		macLinePattern = re.compile('link/ether ' + macRegexp)
 		if oeversion.startswith('9'):
+			havemac = False
+			try:
+				ipconfigfile = '/tmp/.ipcfg'
+				os.system('ifconfig > ' + ipconfigfile)
+				with open(ipconfigfile, 'r') as arch:
+					for line in arch:
+						splitstr = line.split()[0]
+						if splitstr == 'eth0':
+							data['mac'] = line.split()[4]
+							havemac = True
+							break
+						elif splitstr == 'eth1':
+							data['mac'] = line.split()[4]
+							havemac = True
+							break
+						elif splitstr == 'wlan0':
+							data['mac'] = line.split()[4]
+							havemac = True
+							break
+						elif splitstr == 'atml0':
+							data['mac'] = line.split()[4]
+							havemac = True
+							break
+						elif splitstr == 'bnep0':
+							data['mac'] = line.split()[4]
+							havemac = True
+							break
+						elif splitstr == 'usb0':
+							data['mac'] = line.split()[4]
+							havemac = True
+							break
+			except:
+				pass
 			for line in result.splitlines():
 				split = line.strip().split(' ',2)
 				if (split[1][:-1] == iface) or (split[1][:-1] == (iface + '@sys0')):
@@ -97,39 +130,6 @@ class Network:
 						data['up'] = True
 						if iface is not 'lo':
 							self.configuredInterfaces.append(iface)
-				havemac = False
-				try:
-					ipconfigfile = '/tmp/.ipcfg'
-					os.system('ifconfig > ' + ipconfigfile)
-					with open(ipconfigfile, 'r') as arch:
-						for line in arch:
-							splitstr = line.split()[0]
-							if splitstr == 'eth0':
-								data['mac'] = line.split()[4]
-								havemac = True
-								break
-							elif splitstr == 'eth1':
-								data['mac'] = line.split()[4]
-								havemac = True
-								break
-							elif splitstr == 'wlan0':
-								data['mac'] = line.split()[4]
-								havemac = True
-								break
-							elif splitstr == 'atml0':
-								data['mac'] = line.split()[4]
-								havemac = True
-								break
-							elif splitstr == 'bnep0':
-								data['mac'] = line.split()[4]
-								havemac = True
-								break
-							elif splitstr == 'usb0':
-								data['mac'] = line.split()[4]
-								havemac = True
-								break
-				except:
-					pass
 				if split[0] == "link/ether":
 					mac = split[1]
 					bcast = self.regExpMatch(ipPattern, self.regExpMatch(bcastLinePattern, split[2]))
