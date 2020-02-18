@@ -100,7 +100,6 @@ class Network:
 				havemac = False
 				try:
 					ipconfigfile = '/tmp/.ipcfg'
-					#if not os.path.isfile(ipconfigfile):
 					os.system('ifconfig > ' + ipconfigfile)
 					with open(ipconfigfile, 'r') as arch:
 						for line in arch:
@@ -109,7 +108,23 @@ class Network:
 								data['mac'] = line.split()[4]
 								havemac = True
 								break
+							elif splitstr == 'eth1':
+								data['mac'] = line.split()[4]
+								havemac = True
+								break
 							elif splitstr == 'wlan0':
+								data['mac'] = line.split()[4]
+								havemac = True
+								break
+							elif splitstr == 'atml0':
+								data['mac'] = line.split()[4]
+								havemac = True
+								break
+							elif splitstr == 'bnep0':
+								data['mac'] = line.split()[4]
+								havemac = True
+								break
+							elif splitstr == 'usb0':
 								data['mac'] = line.split()[4]
 								havemac = True
 								break
