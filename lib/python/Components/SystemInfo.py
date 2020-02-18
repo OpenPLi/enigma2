@@ -12,7 +12,8 @@ from Tools.Multiboot import getMultibootStartupDevice, getMultibootslots  # This
 
 # Parse the boot commandline.
 #
-cmdline = open("/proc/cmdline", "r").read()
+with open("/proc/cmdline", "r") as fd:
+    cmdline = fd.read()
 cmdline = {k: v.strip('"') for k, v in re.findall(r'(\S+)=(".*?"|\S+)', cmdline)}
 
 def getNumVideoDecoders():
