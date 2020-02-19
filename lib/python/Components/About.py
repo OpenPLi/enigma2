@@ -4,6 +4,16 @@ import re
 from Tools.HardwareInfo import HardwareInfo
 from enigma import getBoxType
 
+def getFlashMemory(folder='/'):
+	try:
+		diskSpace = os.statvfs(folder)
+		available = float(diskSpace.f_bsize * diskSpace.f_bavail)
+		fspace=round(float((available) / (1024.0*1024.0)),2)
+		spacestr=str(fspace)+'MB'
+		return spacestr
+	except:
+		return "unavaiable"
+
 def getVersionString():
 	return getImageVersionString()
 
