@@ -9,10 +9,11 @@ def getFlashMemory(folder='/'):
 		diskSpace = os.statvfs(folder)
 		available = float(diskSpace.f_bsize * diskSpace.f_bavail)
 		fspace=round(float((available) / (1024.0*1024.0)),2)
-		spacestr=str(fspace)+'MB'
+		spacestr=str(fspace)+'M'
 		return spacestr
 	except:
-		return "unavaiable"
+		pass
+	return _("unavailable")
 
 def getVersionString():
 	return getImageVersionString()
