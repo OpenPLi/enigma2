@@ -25,7 +25,6 @@ class LanguageSelection(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.setTitle(_("Language selection"))
-		language.InitLang()
 		self.oldActiveLanguage = language.getActiveLanguage()
 
 		self.list = []

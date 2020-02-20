@@ -5,8 +5,6 @@ import os
 
 from Tools.Directories import SCOPE_LANGUAGE, resolveFilename
 
-LPATH = resolveFilename(SCOPE_LANGUAGE, "")
-
 class Language:
 	def __init__(self):
 		gettext.install('enigma2', resolveFilename(SCOPE_LANGUAGE, ""), unicode=0, codeset="utf-8")
@@ -15,13 +13,7 @@ class Language:
 		self.activeLanguage = 0
 		self.catalog = None
 		self.lang = {}
-		self.InitLang()
-		self.callbacks = []
-
-	def InitLang(self):
 		self.langlist = []
-		self.langlistselection = []
-		self.ll = os.listdir(LPATH)
 		# FIXME make list dynamically
 		# name, iso-639 language, iso-3166 country. Please don't mix language&country!
 		self.addLanguage("Arabic",	"ar", "AE", "ISO-8859-15")
@@ -66,75 +58,39 @@ class Language:
 		self.addLanguage("SChinese",	"zh", "CN", "UTF-8")
 		self.addLanguage("TChinese",	"zh", "HK", "UTF-8")
 
+		self.callbacks = []
+
 	def addLanguage(self, name, lang, country, encoding):
 		try:
-			if lang in self.ll or (lang + "_" + country) in self.ll:
-				self.lang[str(lang + "_" + country)] = ((name, lang, country, encoding))
-				self.langlist.append(str(lang + "_" + country))
+			self.lang[str(lang + "_" + country)] = ((name, lang, country, encoding))
+			self.langlist.append(str(lang + "_" + country))
 		except:
 			print "Language " + str(name) + " not found"
-		self.langlistselection.append((str(lang + "_" + country), name))
 
 	def activateLanguage(self, index):
 		try:
 			if index not in self.lang:
 				print "Selected language %s does not exist, fallback to en_EN!" % index
 				index = "en_EN"
-				Notifications.AddNotification(MessageBox, _("The selected langugage is unavailable - using en_EN"), MessageBox.TYPE_INFO, timeout=3)
 			lang = self.lang[index]
 			print "Activating language " + lang[0]
 			os.environ["LANGUAGE"] = lang[1] # set languange in order gettext to work properly on external plugins
-			self.catalog = gettext.translation('enigma2', resolveFilename(SCOPE_LANGUAGE, ""), languages=[index], fallback=True)
+			self.catalog = gettext.translation('enigma2', resolveFilename(SCOPE_LANGUAGE, ""), languages=[index])
 			self.catalog.install(names=("ngettext", "pgettext"))
 			self.activeLanguage = index
 			for x in self.callbacks:
-				if x:
-					x()
+				x()
 		except:
 			print "Error in activating language!"
-
-		# These should always be C.UTF-8 (or POSIX if C.UTF-8 is unavaible) or program code might behave
-		# differently depending on language setting
-		try:
-			locale.setlocale(locale.LC_CTYPE, ('C', 'UTF-8'))
-		except:
-			pass
-		try:
-			locale.setlocale(locale.LC_COLLATE, ('C', 'UTF-8'))
-		except:
-			try:
-				locale.setlocale(locale.LC_COLLATE, ('POSIX', ''))
-			except:
-				pass
-
 		# NOTE: we do not use LC_ALL, because LC_ALL will not set any of the categories, when one of the categories fails.
 		# We'd rather try to set all available categories, and ignore the others
-		for category in [locale.LC_TIME, locale.LC_MONETARY, locale.LC_MESSAGES, locale.LC_NUMERIC]:
+		for category in [locale.LC_CTYPE, locale.LC_COLLATE, locale.LC_TIME, locale.LC_MONETARY, locale.LC_MESSAGES, locale.LC_NUMERIC]:
 			try:
 				locale.setlocale(category, (self.getLanguage(), 'UTF-8'))
 			except:
 				pass
-
-		# Also write a locale.conf as /home/root/.config/locale.conf to apply language to interactive shells as well:
-		try:
-			os.stat('/home/root/.config')
-		except:
-			os.mkdir('/home/root/.config') 
-
-		localeconf = open('/home/root/.config/locale.conf', 'w')
-		for category in ["LC_TIME", "LC_DATE", "LC_MONETARY", "LC_MESSAGES", "LC_NUMERIC", "LC_NAME", "LC_TELEPHONE", "LC_ADDRESS", "LC_PAPER", "LC_IDENTIFICATION", "LC_MEASUREMENT", "LANG" ]:
-			if category == "LANG" or (category == "LC_DATE" and os.path.exists('/usr/lib/locale/' + self.getLanguage() + '/LC_TIME')) or os.path.exists('/usr/lib/locale/' + self.getLanguage() + '/' + category):
-				localeconf.write('export %s="%s.%s"\n' % (category, self.getLanguage(), "UTF-8" ))
-			else:
-				if os.path.exists('/usr/lib/locale/C.UTF-8/' + category):
-					localeconf.write('export %s="C.UTF-8"\n' % category)
-				else:
-					localeconf.write('export %s="POSIX"\n' % category)
-		localeconf.close()
-
 		# HACK: sometimes python 2.7 reverts to the LC_TIME environment value, so make sure it has the correct value
 		os.environ["LC_TIME"] = self.getLanguage() + '.UTF-8'
-		os.environ["LANGUAGE"] = self.getLanguage() + '.UTF-8'
 		os.environ["GST_SUBTITLE_ENCODING"] = self.getGStreamerSubtitleEncoding()
 
 	def activateLanguageIndex(self, index):
