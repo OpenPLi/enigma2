@@ -105,7 +105,7 @@ eServerSocket::eServerSocket(int port, eMainloop *ml): eSocket(ml)
 	freeaddrinfo(addr);
 }
 
-eServerSocket::eServerSocket(std::string path, eMainloop *ml): eSocket(ml)
+eServerSocket::eServerSocket(std::string path, eMainloop *ml) : eSocket(ml)
 {
 	struct sockaddr_un serv_addr_un;
 	struct addrinfo addr;
