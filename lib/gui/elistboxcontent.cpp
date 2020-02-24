@@ -798,6 +798,7 @@ void eListboxPythonMultiContent::paint(gPainter &painter, eWindowStyle &style, c
 
 		if (!items)
 		{
+			PyErr_Print();
 			eDebug("[eListboxPythonMultiContent] error getting item %d", m_cursor);
 			goto error_out;
 		}
