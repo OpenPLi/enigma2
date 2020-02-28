@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-18 00:36+0200\n"
+"POT-Creation-Date: 2020-02-28 22:31+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Frenske <voorzitter@openpli.org>\n"
 "Language-Team: PLiteam <translators@openpli.org>\n"
@@ -2507,6 +2507,10 @@ msgstr "Kon geen geschikt medium vinden - Verwijder aub enkele gedownloade image
 msgid "Could not load medium! No disc inserted?"
 msgstr "Kon het medium niet laden! Is er geen schijf geplaatst?"
 
+#, fuzzy
+msgid "Could not locate epg file on fallback tuner"
+msgstr "Activeer de import van timers van de Fallback tuner"
+
 msgid "Could not open Picture in Picture"
 msgstr "Kan Picture In Picture niet openen"
 
@@ -3247,10 +3251,6 @@ msgstr "EPG:"
 msgid "ERROR - failed to scan (%s)!"
 msgstr "Fout - zoeken mislukt (%s)!"
 
-#, python-format
-msgid "ERROR downloading file %s"
-msgstr "FOUT tijdens het downloaden van %s"
-
 msgid "East"
 msgstr "Oost"
 
@@ -3540,10 +3540,6 @@ msgstr "Eritrea"
 msgid "Error"
 msgstr "Fout"
 
-#, python-format
-msgid "Error %s"
-msgstr "Fout %s"
-
 msgid "Error code"
 msgstr "Foutcode"
 
@@ -3576,12 +3572,6 @@ msgstr ""
 msgid "Error stop stream!"
 msgstr "Fout stop de stream!"
 
-msgid "Error when writing epg.dat on server"
-msgstr "Fout tijdens het opslaan van de epg.dat op de server"
-
-msgid "Error while retreiving epg.dat from server"
-msgstr "Fout tijdens het ophalen van de epg.dat van de server"
-
 #, python-format
 msgid ""
 "Error while retreiving fallback timer information\n"
@@ -3589,9 +3579,6 @@ msgid ""
 msgstr ""
 "Fout tijdens het ophalen van de Fallback timer informatie\n"
 "%s"
-
-msgid "Error while retreiving location of epg.dat on server"
-msgstr "Fout tijdens het benaderen van de epg.dat locatie op de server "
 
 #, python-format
 msgid ""
@@ -5608,9 +5595,6 @@ msgstr "Geen beschrijving beschikbaar."
 msgid "No displayable files on this medium found!"
 msgstr "Geen weer te geven bestanden op dit medium gevonden!"
 
-msgid "No epg.dat file found server"
-msgstr "Geen epg.dat file gevonden op de server"
-
 msgid "No event info found, recording indefinitely."
 msgstr "Geen EPG gegevens gevonden. Opname voor onbepaalde tijd."
 
@@ -5652,6 +5636,9 @@ msgstr "Geen uitzending"
 
 msgid "No services/providers selected"
 msgstr "Geen zender/provider gekozen"
+
+msgid "No settings files to download on fallback tuner"
+msgstr ""
 
 msgid "No standby"
 msgstr "Geen stand-by"
