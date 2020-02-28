@@ -357,6 +357,8 @@ class Troubleshoot(Screen):
 				"cancel": self.close,
 				"up": self["AboutScrollLabel"].pageUp,
 				"down": self["AboutScrollLabel"].pageDown,
+				"moveUp": self["AboutScrollLabel"].homePage,
+				"moveDown": self["AboutScrollLabel"].endPage,
 				"left": self.left,
 				"right": self.right,
 				"red": self.red,
