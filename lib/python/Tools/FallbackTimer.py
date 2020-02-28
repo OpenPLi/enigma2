@@ -25,6 +25,13 @@ class FallbackTimerList():
 			self.list = []
 			parent.onLayoutFinish.append(self.fallbackFunction)
 
+	# remove any trailing channel name from the service reference
+	def cleanServiceRef(self, service_ref):
+		service_ref = str(service_ref)
+		if not service_ref.endswith(":"):
+		    service_ref = service_ref.rsplit("::", 1)[0] + ":"
+		return service_ref
+
 	def getUrl(self, url):
 		print "[FallbackTimer] getURL", url
 		from twisted.web.client import getPage
@@ -37,7 +44,7 @@ class FallbackTimerList():
 				self.getUrl("web/timerlist").addCallback(self.gotFallbackTimerList).addErrback(self.fallback)
 			except:
 				self.fallback(_("Unexpected error while retreiving fallback tuner's timer information"))
-		else:		
+		else:
 			self.fallback()
 
 	def gotFallbackTimerList(self, data):
@@ -66,22 +73,22 @@ class FallbackTimerList():
 		print "[FallbackTimer] read %s timers from fallback tuner" % len(self.list)
 		self.parent.session.nav.RecordTimer.setFallbackTimerList(self.list)
 		self.fallback()
-		
+
 	def removeTimer(self, timer, fallbackFunction, fallbackFunctionNOK=None):
 		self.fallbackFunction = fallbackFunction
 		self.fallbackFunctionNOK = fallbackFunctionNOK or fallbackFunction
-		self.getUrl("web/timerdelete?sRef=%s&begin=%s&end=%s" % (timer.service_ref, timer.begin, timer.end)).addCallback(self.getUrlFallback).addErrback(self.fallback)
+		self.getUrl("web/timerdelete?sRef=%s&begin=%s&end=%s" % (self.cleanServiceRef(timer.service_ref), timer.begin, timer.end)).addCallback(self.getUrlFallback).addErrback(self.fallback)
 
 	def toggleTimer(self, timer, fallbackFunction, fallbackFunctionNOK=None):
 		self.fallbackFunction = fallbackFunction
 		self.fallbackFunctionNOK = fallbackFunctionNOK or fallbackFunction
-		self.getUrl("web/timertogglestatus?sRef=%s&begin=%s&end=%s" % (timer.service_ref, timer.begin, timer.end)).addCallback(self.getUrlFallback).addErrback(self.fallback)
-	
+		self.getUrl("web/timertogglestatus?sRef=%s&begin=%s&end=%s" % (self.cleanServiceRef(timer.service_ref), timer.begin, timer.end)).addCallback(self.getUrlFallback).addErrback(self.fallback)
+
 	def cleanupTimers(self, fallbackFunction, fallbackFunctionNOK=None):
 		self.fallbackFunction = fallbackFunction
 		self.fallbackFunctionNOK = fallbackFunctionNOK or fallbackFunction
 		if self.url:
-			self.getUrl("web/timercleanup?cleanup=true").addCallback(self.getUrlFallback).addErrback(self.fallback)	
+			self.getUrl("web/timercleanup?cleanup=true").addCallback(self.getUrlFallback).addErrback(self.fallback)
 		else:
 			self.fallback()
 
@@ -89,7 +96,7 @@ class FallbackTimerList():
 		self.fallbackFunction = fallbackFunction
 		self.fallbackFunctionNOK = fallbackFunctionNOK or fallbackFunction
 		url = "web/timeradd?sRef=%s&begin=%s&end=%s&name=%s&description=%s&disabled=%s&justplay=%s&afterevent=%s&repeated=%s&dirname=%s&eit=%s" % (
-			timer.service_ref,
+			self.cleanServiceRef(timer.service_ref),
 			timer.begin,
 			timer.end,
 			quote(timer.name.decode('utf8').encode('utf8','ignore')),
@@ -101,13 +108,13 @@ class FallbackTimerList():
 			timer.dirname,
 			timer.eit or 0,
 		)
-		self.getUrl(url).addCallback(self.getUrlFallback).addErrback(self.fallback)	
+		self.getUrl(url).addCallback(self.getUrlFallback).addErrback(self.fallback)
 
 	def editTimer(self, timer, fallbackFunction, fallbackFunctionNOK=None):
 		self.fallbackFunction = fallbackFunction
 		self.fallbackFunctionNOK = fallbackFunctionNOK or fallbackFunction
 		url = "web/timerchange?sRef=%s&begin=%s&end=%s&name=%s&description=%s&disabled=%s&justplay=%s&afterevent=%s&repeated=%s&channelOld=%s&beginOld=%s&endOld=%s&dirname=%s&eit=%s" % (
-			timer.service_ref,
+			self.cleanServiceRef(timer.service_ref),
 			timer.begin,
 			timer.end,
 			quote(timer.name.decode('utf8').encode('utf8','ignore')),
@@ -133,7 +140,7 @@ class FallbackTimerList():
 				self.fallback(root[1].text)
 		except:
 				self.fallback("Unexpected Error")
-	
+
 	def fallback(self, message=None):
 		if message:
 			self.parent.session.openWithCallback(self.fallbackNOK, MessageBox, _("Error while retreiving fallback timer information\n%s") % message, MessageBox.TYPE_ERROR)
