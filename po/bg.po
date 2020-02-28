@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-18 00:36+0200\n"
+"POT-Creation-Date: 2020-02-28 22:31+0100\n"
 "PO-Revision-Date: 2018-11-12 20:51+0200\n"
 "Last-Translator: Мартин Петков <marto74bg@yahoo.co.uk>\n"
 "Language-Team: Bulgarian\n"
@@ -2342,6 +2342,9 @@ msgstr ""
 msgid "Could not load medium! No disc inserted?"
 msgstr "Не може да се зареди съдържанието! Не е вкаран диск?"
 
+msgid "Could not locate epg file on fallback tuner"
+msgstr ""
+
 msgid "Could not open Picture in Picture"
 msgstr "Не може да се отвори Картина в Картината"
 
@@ -3082,10 +3085,6 @@ msgstr ""
 msgid "ERROR - failed to scan (%s)!"
 msgstr "Грешка при сканиране (%s)!"
 
-#, python-format
-msgid "ERROR downloading file %s"
-msgstr "Грешка при изтегляне на файл %s"
-
 msgid "East"
 msgstr "Изток"
 
@@ -3374,10 +3373,6 @@ msgstr "Еритрея"
 msgid "Error"
 msgstr "Грешка"
 
-#, python-format
-msgid "Error %s"
-msgstr "Грешка %s"
-
 msgid "Error code"
 msgstr "Грешен код"
 
@@ -3410,19 +3405,10 @@ msgstr ""
 msgid "Error stop stream!"
 msgstr "Грешка при спиране на стрийма!"
 
-msgid "Error when writing epg.dat on server"
-msgstr "Грешка при записване epg.dat на сървъра"
-
-msgid "Error while retreiving epg.dat from server"
-msgstr "Грешка при получаване на epg.dat от сървъра"
-
 #, fuzzy, python-format
 msgid ""
 "Error while retreiving fallback timer information\n"
 "%s"
-msgstr "Грешка при получаване местоположението на файла epg.dat от сървъра"
-
-msgid "Error while retreiving location of epg.dat on server"
 msgstr "Грешка при получаване местоположението на файла epg.dat от сървъра"
 
 #, python-format
@@ -5467,9 +5453,6 @@ msgstr "Няма налично описание."
 msgid "No displayable files on this medium found!"
 msgstr "Няма поддържани файлове на този носител!"
 
-msgid "No epg.dat file found server"
-msgstr "Не е открит сървър с epg.dat"
-
 msgid "No event info found, recording indefinitely."
 msgstr "Няма инфо за предаването, незабавен запис."
 
@@ -5512,6 +5495,9 @@ msgstr "Няма канал"
 
 msgid "No services/providers selected"
 msgstr "Не са избрани канали/провайдери"
+
+msgid "No settings files to download on fallback tuner"
+msgstr ""
 
 msgid "No standby"
 msgstr "Не преминавай в режим готовност"

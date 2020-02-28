@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-18 00:36+0200\n"
+"POT-Creation-Date: 2020-02-28 22:31+0100\n"
 "PO-Revision-Date: 2020-02-02 22:39+0200\n"
 "Last-Translator: Audronis Grincevicius <adga45@gmail.com>\n"
 "Language-Team: Adga (C) <adga45@gmail.com>\n"
@@ -2344,6 +2344,10 @@ msgstr "Nepavyko rasti tinkamos laikmenos - Pašalinkite kai kuriuos atsisiųstu
 msgid "Could not load medium! No disc inserted?"
 msgstr "Nepavyko atverti laikmenos! Neįdėtas diskas?"
 
+#, fuzzy
+msgid "Could not locate epg file on fallback tuner"
+msgstr "Įjungti importo laikmatį iš atsarginio imtuvo"
+
 msgid "Could not open Picture in Picture"
 msgstr "Vaizdo vaizde atverti nepavyko"
 
@@ -3077,10 +3081,6 @@ msgstr "Elektroninis programų vadovas:"
 msgid "ERROR - failed to scan (%s)!"
 msgstr "KLAIDA - paieška nepavyko (%s)!"
 
-#, python-format
-msgid "ERROR downloading file %s"
-msgstr "KLAIDA, parsiunčiant failą %s"
-
 msgid "East"
 msgstr "Rytai"
 
@@ -3363,10 +3363,6 @@ msgstr "Eritrėja"
 msgid "Error"
 msgstr "Klaida"
 
-#, python-format
-msgid "Error %s"
-msgstr "Klaida %s"
-
 msgid "Error code"
 msgstr "Klaidos kodas"
 
@@ -3399,12 +3395,6 @@ msgstr ""
 msgid "Error stop stream!"
 msgstr "Srauto stabdymo klaida!"
 
-msgid "Error when writing epg.dat on server"
-msgstr "Klaida, įrašant epg.dat serveryje"
-
-msgid "Error while retreiving epg.dat from server"
-msgstr "Klaida, ieškant epg.data iš serverio"
-
 #, python-format
 msgid ""
 "Error while retreiving fallback timer information\n"
@@ -3412,9 +3402,6 @@ msgid ""
 msgstr ""
 "Klaida atsisiunčiant atsarginio imtuvo laikmačio informaciją\n"
 "%s"
-
-msgid "Error while retreiving location of epg.dat on server"
-msgstr "Klaida atkūrus epg.dat vietą serveryje"
 
 #, python-format
 msgid ""
@@ -5423,9 +5410,6 @@ msgstr "Joks aprašymas nepasiekiamas."
 msgid "No displayable files on this medium found!"
 msgstr "Jokių failų čia nerasta!"
 
-msgid "No epg.dat file found server"
-msgstr "Failo epg.dat serveryje nerasta"
-
 msgid "No event info found, recording indefinitely."
 msgstr "Informacija apie įvykius nerasta, tęsiamas įrašymas."
 
@@ -5467,6 +5451,9 @@ msgstr "Nėra kanalų"
 
 msgid "No services/providers selected"
 msgstr "Nepasirinkti kanalai/teikėjai"
+
+msgid "No settings files to download on fallback tuner"
+msgstr ""
 
 msgid "No standby"
 msgstr "Nebudėti"
