@@ -195,6 +195,9 @@ class FallbackTimerClass(TimerObject):
 		self.dirname = dirname
 		self.description = description
 
+		self.findRunningEvent = True
+		self.findNextEvent = False
+
 		self.flags = ""
 		self.conflict_detection = True
 		self.external = True
