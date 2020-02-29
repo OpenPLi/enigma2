@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-18 00:36+0200\n"
+"POT-Creation-Date: 2020-02-28 22:31+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi <ims@openpli.org>\n"
@@ -126,11 +126,11 @@ msgstr "%.0f kB"
 
 #, python-format
 msgid "%.1f° E"
-msgstr ""
+msgstr "%.1f° E"
 
 #, python-format
 msgid "%.1f° W"
-msgstr ""
+msgstr "%.1f° W"
 
 #, python-format
 msgid "%.2f GB"
@@ -374,7 +374,7 @@ msgstr "%s (%s)\n"
 
 #, python-format
 msgid "%s imported from fallback tuner"
-msgstr "%s importováno ze záložního přijímače"
+msgstr "%s importováno ze záložního tuneru"
 
 #. TRANSLATORS: The satellite with name '%s' is no longer used after a configuration change. The user is asked whether or not the satellite should be deleted.
 #, python-format
@@ -1654,9 +1654,8 @@ msgid "Boot to Recovery menu"
 msgstr "Boot do Recovery menu"
 
 #
-#, fuzzy
 msgid "Bootup time"
-msgstr "Setřídit dle času"
+msgstr "Čas spuštění"
 
 msgid "Bosnia and Herzegovina"
 msgstr "Bosna a Hercegovina"
@@ -2655,6 +2654,9 @@ msgstr "Nebylo nalezeno vhodné médium - odstraňte některé stažené obrázk
 msgid "Could not load medium! No disc inserted?"
 msgstr "Nelze načíst médium. Není vložen disk?"
 
+msgid "Could not locate epg file on fallback tuner"
+msgstr "V záložním tuneru nelze najít soubor epg"
+
 #
 msgid "Could not open Picture in Picture"
 msgstr "Nelze otevřít obraz v obraze"
@@ -2771,7 +2773,7 @@ msgid "Customize"
 msgstr "Přizpůsobení"
 
 msgid "Customize OpenWebIF settings for fallback tuner"
-msgstr "Úprava nastavení OpenWebIf pro záložní přijímač"
+msgstr "Úprava nastavení OpenWebIf pro záložní tuner"
 
 #
 msgid "Customize channel list cursor behavior"
@@ -3077,7 +3079,7 @@ msgstr "Umístění vzdáleného záložního přijímače"
 
 # ##
 msgid "Destination of fallback remote receiver for ATSC"
-msgstr "Umístění záložního přijímače pro ATSC"
+msgstr "Umístění záložního tuneru pro ATSC"
 
 # ##
 msgid "Destination of fallback remote receiver for DVB-C"
@@ -3493,7 +3495,7 @@ msgstr "Dynamický kontrast"
 
 #
 msgid "E"
-msgstr "Východní"
+msgstr "E"
 
 #
 msgid "ECM Info"
@@ -3527,10 +3529,6 @@ msgstr ""
 #, python-format
 msgid "ERROR - failed to scan (%s)!"
 msgstr "CHYBA - prohledávání selhalo (%s)!"
-
-#, python-format
-msgid "ERROR downloading file %s"
-msgstr "Chyba při stahování souboru %s"
 
 #
 msgid "East"
@@ -3685,7 +3683,7 @@ msgid "Enable freesat EPG"
 msgstr "Povolit freesat EPG"
 
 msgid "Enable import timer from fallback tuner"
-msgstr "Importovat časovače ze záložního přijímače"
+msgstr "Importovat časovače ze záložního tuneru"
 
 #
 msgid "Enable move mode"
@@ -3860,10 +3858,6 @@ msgstr "Eritrea"
 msgid "Error"
 msgstr "Chyba"
 
-#, python-format
-msgid "Error %s"
-msgstr "Chyba %s"
-
 #
 msgid "Error code"
 msgstr "Kód chyby"
@@ -3897,22 +3891,13 @@ msgstr ""
 msgid "Error stop stream!"
 msgstr "Chyba při zrušení streamu!"
 
-msgid "Error when writing epg.dat on server"
-msgstr "Chyba při zápisu epg.dat na serveru"
-
-msgid "Error while retreiving epg.dat from server"
-msgstr "Chyba při načítání epg.dat na serveru"
-
 #, python-format
 msgid ""
 "Error while retreiving fallback timer information\n"
 "%s"
 msgstr ""
-"Chyba při získávání informací o záložních časovačích\n"
+"Chyba při získávání informací ze záložního časovače\n"
 "%s"
-
-msgid "Error while retreiving location of epg.dat on server"
-msgstr "Chyba při načítání umístění epg.dat na serveru"
 
 #
 #, python-format
@@ -4094,9 +4079,8 @@ msgstr "Obarvení dialogů pro externí titulky"
 msgid "External subtitle switch fonts"
 msgstr "Přepínání fontu pro externí titulky"
 
-#, fuzzy
 msgid "Externally powered"
-msgstr "Externí uložiště %s"
+msgstr "Externě napájeno"
 
 msgid "Extra end time to ignore inactivity sleeptimer"
 msgstr "Konec dalšího úseku ignorování časovače vypnutí"
@@ -4961,7 +4945,7 @@ msgstr "Ze záložního přijímače se importují programy a/nebo EPG také v p
 
 #, python-format
 msgid "Import from fallback tuner failed, %s"
-msgstr "Import ze záložního přijímače selhal, %s"
+msgstr "Import ze záložního tuneru selhal, %s"
 
 msgid "Import from remote receiver URL"
 msgstr "Importovat ze záložního přijímače"
@@ -5659,7 +5643,7 @@ msgid "Manual transponder"
 msgstr "ručně definovaný transpondér"
 
 msgid "Manually import from fallback tuner"
-msgstr "Import ze záložního přijímače"
+msgstr "Import ze záložního tuneru"
 
 #
 msgid "Manufacturer"
@@ -6218,9 +6202,6 @@ msgstr "Žádný popis k dispozici."
 msgid "No displayable files on this medium found!"
 msgstr "Žádné zobrazitelné soubory na tomto médiu nebyly nalezeny!"
 
-msgid "No epg.dat file found server"
-msgstr "Nenalezen soubor epg.dat na serveru"
-
 #
 msgid "No event info found, recording indefinitely."
 msgstr "Žádná informace o programu. Nekonečné nahrávání."
@@ -6271,6 +6252,9 @@ msgstr "Žádný kanál"
 #
 msgid "No services/providers selected"
 msgstr "Žádný program/poskytovatel není vybrán"
+
+msgid "No settings files to download on fallback tuner"
+msgstr "V záložním tuneru nejsou žádné soubory nastavení"
 
 #
 msgid "No standby"
@@ -8681,7 +8665,7 @@ msgid "Select video mode"
 msgstr "Zvolte video mód"
 
 msgid "Select whether your SCR device is externally powered."
-msgstr ""
+msgstr "Vyberte, zda je Vaše SCR zařízení externě napájeno."
 
 #
 msgid "Select wireless network"
@@ -8858,7 +8842,7 @@ msgid "Set all hotkey to default?"
 msgstr "Výchozí nastavení hotkey?"
 
 msgid "Set alternative fallback tuners for DVB-T/C or ATSC"
-msgstr "Nastavení záložního přijímače pro DVB-T/C nebo ATSC"
+msgstr "Nastavení záložních tunerů pro DVB-T/C nebo ATSC"
 
 msgid "Set as startup service"
 msgstr "Nastavit jako program po spuštění"
@@ -8905,13 +8889,13 @@ msgid "Set startup service"
 msgstr "Nastavit kanál po spuštění"
 
 msgid "Set the User ID of the OpenWebif from your fallback tuner"
-msgstr "Nastavte uživatelské jméno pro OpenWebIf z Vašeho záložního přijímače."
+msgstr "Nastavte uživatelské jméno pro OpenWebIf z Vašeho záložního tuneru."
 
 msgid "Set the password of the OpenWebif from your fallback tuner"
-msgstr "Nastavte heslo pro OpenWebIf z Vašeho záložního přijímače."
+msgstr "Nastavte heslo pro OpenWebIf z Vašeho záložního tuneru."
 
 msgid "Set the port of the OpenWebif from your fallback tuner"
-msgstr "Nastavte port pro OpenWebIf z Vašeho záložního přijímače."
+msgstr "Nastavte port pro OpenWebIf z Vašeho záložního tuneru."
 
 #
 msgid "Set the type of the progress indication in the channel selection screen."
@@ -10060,7 +10044,7 @@ msgstr ""
 "Pro případné korekce můžete kontaktovat autora\n"
 "na výše uvedené adrese.\n"
 "\n"
-"®17.2.2020"
+"®29.2.2020"
 
 #
 msgid "TS file is too large for ISO9660 level 1!"
@@ -11005,7 +10989,7 @@ msgid "Unencrypted"
 msgstr "Nezabezpečeno"
 
 msgid "Unexpected error while retreiving fallback tuner's timer information"
-msgstr "Neočekávaná chyba při načítání informací o časovači záložního přijímače."
+msgstr "Neočekávaná chyba při načítání informací o časovači záložního tuneru."
 
 #
 msgid "UnhandledKey"
@@ -11489,7 +11473,7 @@ msgstr "Zasílit zvuk"
 
 #
 msgid "W"
-msgstr "Západní"
+msgstr "W"
 
 #
 msgid "WEP"
@@ -11659,7 +11643,7 @@ msgid "When enabled the set top box is able to wakeup on LAN"
 msgstr "Jestliže je zapnuto, pak je možné přijímač probouzet v síti LAN pomocí Magic packetu."
 
 msgid "When enabled the timer from the fallback tuner is imported"
-msgstr "Jestliže je povoleno, pak jsou do přehledu časovačů importovány časovače ze záložního přijímače"
+msgstr "Do přehledu časovačů jsou importovány časovače ze záložního tuneru"
 
 msgid "When enabled then when you select a new channel in the channel selection the channel selection will not close. It will only close when you select the current playing service. This is a kind of preview mode"
 msgstr "Pokud je povoleno a vyberete nový kanál ve výběru kanálů, pak výběr kanálů nebude uzavřen a zavře se pouze tehdy, jestliže vyberete aktuální přehrávaný program. Jde o druh režimu náhledu."
@@ -11668,7 +11652,7 @@ msgid "When enabled you can control the volume with the arrow buttons instead of
 msgstr "Pokud je povoleno, pak můžete ovládat pomocí tlačítek se šipkami hlasitost namísto přístupu do seznamu kanálů"
 
 msgid "When enabled you can customize the OpenWebIf settings for the fallback tuner"
-msgstr "Jestliže je povoleno, můžete přizpůsobit nastavení OpenWebIf pro záložní přijímač"
+msgstr "Můžete přizpůsobit nastavení OpenWebIf pro záložní tuner"
 
 #
 msgid "When enabled you can specify a timeframe to ignore the shutdown timer when the receiver is in standby mode"

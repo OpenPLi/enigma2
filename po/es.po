@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-18 00:36+0200\n"
+"POT-Creation-Date: 2020-02-28 22:31+0100\n"
 "PO-Revision-Date: 2019-05-15 22:50+0200\n"
 "Last-Translator: Jose Juan <jzapater@gmail.com>\n"
 "Language-Team: ANGELODOS  angelo2807@hotmail.com\n"
@@ -2595,6 +2595,10 @@ msgstr "No se pudieron encontrar los medios adecuados: elimine algunas imágenes
 msgid "Could not load medium! No disc inserted?"
 msgstr "No puedo cargar el Medio! Hay disco insertado?"
 
+#, fuzzy
+msgid "Could not locate epg file on fallback tuner"
+msgstr "Habilitar el temporizador de importación desde el sintonizador de retroceso"
+
 #
 msgid "Could not open Picture in Picture"
 msgstr "No puedo abrir el PiP"
@@ -3431,10 +3435,6 @@ msgstr ""
 msgid "ERROR - failed to scan (%s)!"
 msgstr "ERROR - ¡falló la búsqueda (%s)!"
 
-#, python-format
-msgid "ERROR downloading file %s"
-msgstr "ERROR descargando archivo% s"
-
 #
 msgid "East"
 msgstr "Este"
@@ -3752,11 +3752,6 @@ msgstr "Eritrea"
 msgid "Error"
 msgstr "Error"
 
-#
-#, python-format
-msgid "Error %s"
-msgstr "Error %s"
-
 msgid "Error code"
 msgstr "Codigo error"
 
@@ -3789,12 +3784,6 @@ msgstr ""
 msgid "Error stop stream!"
 msgstr "Error stop stream!"
 
-msgid "Error when writing epg.dat on server"
-msgstr "Error al escribir epg.dat en el servidor"
-
-msgid "Error while retreiving epg.dat from server"
-msgstr "Error al recuperar epg.data del servidor"
-
 #, python-format
 msgid ""
 "Error while retreiving fallback timer information\n"
@@ -3802,9 +3791,6 @@ msgid ""
 msgstr ""
 "Error al recuperar la información del temporizador de reserva\n"
 "% s"
-
-msgid "Error while retreiving location of epg.dat on server"
-msgstr "Error al recuperar la ubicación de epg.dat en el servidor"
 
 #
 #, python-format
@@ -6061,9 +6047,6 @@ msgstr "No hay descripción."
 msgid "No displayable files on this medium found!"
 msgstr "¡No hay ficheros visualizables en su medio!"
 
-msgid "No epg.dat file found server"
-msgstr "No se encontró el archivo epg.dat"
-
 #
 msgid "No event info found, recording indefinitely."
 msgstr "No hay info del evento, grabando indefinidamente."
@@ -6113,6 +6096,9 @@ msgstr "No servicio"
 #
 msgid "No services/providers selected"
 msgstr "No se seleccionaron servicios / proveedores"
+
+msgid "No settings files to download on fallback tuner"
+msgstr ""
 
 #
 msgid "No standby"
