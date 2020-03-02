@@ -8,7 +8,6 @@ dist_pkgdata_DATA = \
 	groupedservices \
 	iso-639-3.pck \
 	keymap.xml \
-	keytranslation.xml \
 	menu.xml \
 	otv_00820000_fbff_16a8.dict \
 	otv_011a0000_0002_07d4.dict \
