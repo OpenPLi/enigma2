@@ -8,12 +8,19 @@ def getTunerDescription(nim):
 	try:
 		return nimmanager.getTerrestrialDescription(nim)
 	except:
-		print "[ChannelNumber] nimmanager.getTerrestrialDescription(nim) failed, nim:", nim
+		print "[Transponder] nimmanager.getTerrestrialDescription(nim) failed, nim:", nim
+		try:
+			print "[Transponder] trying use fallback", config.usage.remote_fallback_dvbt_region.value
+			return config.usage.remote_fallback_dvbt_region.value
+		except:
+			print "[Transponder] no description"
 	return ""
 
 def getMHz(frequency):
 	return (frequency+50000)/100000/10.
 
+# Note: newly added region add into ImportChannels to getTerrestrialRegion()
+#	due using for fallback tuner too
 def getChannelNumber(frequency, nim):
 	if nim == "DVB-T":
 		for n in nimmanager.nim_slots:

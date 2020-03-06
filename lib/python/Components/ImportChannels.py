@@ -5,6 +5,7 @@ from Screens.MessageBox import MessageBox
 from config import config, ConfigText
 from Tools import Notifications
 from base64 import encodestring
+import xml.etree.ElementTree as et
 
 settingfiles = ('lamedb', 'bouquets.', 'userbouquet.', 'blacklist', 'whitelist', 'alternatives.')
 
@@ -30,7 +31,28 @@ class ImportChannels():
 			request.add_header("Authorization", self.header)
 		return urllib2.urlopen(request, timeout=timeout)
 
+	def getTerrestrialUrl(self):
+		return config.usage.remote_fallback_dvb_t.value[:config.usage.remote_fallback_dvb_t.value.rfind(":")] if config.usage.remote_fallback_dvb_t.value else self.url
+
+	def getFallbackSettingsItem(self, string):
+		buff = self.getUrl("%s/web/settings" % self.getTerrestrialUrl()).read()
+		root = et.fromstring(buff)
+		for e2setting in root:
+			if string in e2setting[0].text:
+				return e2setting[1].text
+		return ""
+
+	def getTerrestrialRegion(self):
+		description = ""
+		value = self.getFallbackSettingsItem(".terrestrial=")
+		if "Europe" in value:
+			description = "fallback DVB-T/T2 Europe"
+		if "Australia" in value:
+			description = "fallback DVB-T/T2 Australia"
+		config.usage.remote_fallback_dvbt_region.value = description
+
 	def threaded_function(self):
+		self.getTerrestrialRegion()
 		if "epg" in config.usage.remote_fallback_import.value:
 			config.misc.epgcache_filename = ConfigText(default="/epg.dat")
 			print "Writing epg.dat file on sever box"
