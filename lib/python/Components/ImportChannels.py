@@ -44,7 +44,7 @@ class ImportChannels():
 
 	def getTerrestrialRegion(self):
 		description = ""
-		value = self.getFallbackSettingsItem(".terrestrial=")
+		value = self.getFallbackSettingsItem(".terrestrial")
 		if "Europe" in value:
 			description = "fallback DVB-T/T2 Europe"
 		if "Australia" in value:
