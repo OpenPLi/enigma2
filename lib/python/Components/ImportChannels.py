@@ -32,7 +32,8 @@ class ImportChannels():
 		return urllib2.urlopen(request, timeout=timeout)
 
 	def getTerrestrialUrl(self):
-		return config.usage.remote_fallback_dvb_t.value[:config.usage.remote_fallback_dvb_t.value.rfind(":")] if config.usage.remote_fallback_dvb_t.value else self.url
+		url = config.usage.remote_fallback_dvb_t.value
+		return url[:url.rfind(":")] if url else self.url
 
 	def getFallbackSettingsItem(self, string):
 		buff = self.getUrl("%s/web/settings" % self.getTerrestrialUrl()).read()
@@ -44,10 +45,10 @@ class ImportChannels():
 
 	def getTerrestrialRegion(self):
 		description = ""
-		value = self.getFallbackSettingsItem(".terrestrial")
-		if "Europe" in value:
+		descr = self.getFallbackSettingsItem(".terrestrial")
+		if "Europe" in descr:
 			description = "fallback DVB-T/T2 Europe"
-		if "Australia" in value:
+		if "Australia" in descr:
 			description = "fallback DVB-T/T2 Australia"
 		config.usage.remote_fallback_dvbt_region.value = description
 
