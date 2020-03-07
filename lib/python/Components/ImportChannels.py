@@ -35,17 +35,19 @@ class ImportChannels():
 		url = config.usage.remote_fallback_dvb_t.value
 		return url[:url.rfind(":")] if url else self.url
 
-	def getFallbackSettingsItem(self, string):
-		buff = self.getUrl("%s/web/settings" % self.getTerrestrialUrl()).read()
-		root = et.fromstring(buff)
+	def getFallbackSettings(self):
+		return self.getUrl("%s/web/settings" % self.getTerrestrialUrl()).read()
+
+	def getFallbackSettingsValue(self, settings, e2settingname):
+		root = et.fromstring(settings)
 		for e2setting in root:
-			if string in e2setting[0].text:
+			if e2settingname in e2setting[0].text:
 				return e2setting[1].text
 		return ""
 
-	def getTerrestrialRegion(self):
+	def getTerrestrialRegion(self, settings):
 		description = ""
-		descr = self.getFallbackSettingsItem(".terrestrial")
+		descr = self.getFallbackSettingsValue(settings, ".terrestrial")
 		if "Europe" in descr:
 			description = "fallback DVB-T/T2 Europe"
 		if "Australia" in descr:
@@ -53,7 +55,8 @@ class ImportChannels():
 		config.usage.remote_fallback_dvbt_region.value = description
 
 	def threaded_function(self):
-		self.getTerrestrialRegion()
+		settings = self.getFallbackSettings()
+		self.getTerrestrialRegion(settings)
 		if "epg" in config.usage.remote_fallback_import.value:
 			config.misc.epgcache_filename = ConfigText(default="/epg.dat")
 			print "Writing epg.dat file on sever box"
@@ -64,8 +67,7 @@ class ImportChannels():
 				return
 			print "[Import Channels] Get EPG Location"
 			try:
-				epgdatfile = [x for x in self.getUrl("%s/file?file=/etc/enigma2/settings" % self.url).readlines() if x.startswith('config.misc.epgcache_filename=')]
-				epgdatfile = epgdatfile and epgdatfile[0].split('=')[1].strip() or "/hdd/epg.dat"
+				epgdatfile = self.getFallbackSettingsValue(settings, "config.misc.epgcache_filename") or "/hdd/epg.dat"
 				try:
 					files = [file for file in loads(self.getUrl("%s/file?dir=%s" % (self.url, os.path.dirname(epgdatfile))).read())["files"] if os.path.basename(file).startswith(os.path.basename(epgdatfile))]
 				except:
