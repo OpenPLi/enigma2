@@ -242,7 +242,7 @@ class FlashImage(Screen):
 
 			def findmedia(path):
 				def avail(path):
-					if not '/mmc' in path and os.path.isdir(path) and os.access(path, os.W_OK):
+					if not path.startswith('/mmc') and os.path.isdir(path) and os.access(path, os.W_OK):
 						try:
 							statvfs = os.statvfs(path)
 							return (statvfs.f_bavail * statvfs.f_frsize) / (1 << 20)
