@@ -111,6 +111,7 @@ class OpenEcmInfo(Poll, Converter, object):
 	def changed(self, what):
 		if what[0] == self.CHANGED_SPECIFIC:
 			if what[1] == iPlayableService.evStart:
+				self.initTimer.stop
 				self.initTimer.start(1000, True)
 			elif what[1] == iPlayableService.evEnd:
 				self.clearData()
