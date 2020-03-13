@@ -2,6 +2,7 @@ from Converter import Converter
 from Poll import Poll
 from enigma import iPlayableService
 from Components.Element import cached, ElementError
+from time import localtime, strftime, time
 
 class ServicePosition(Poll, Converter, object):
 	TYPE_LENGTH = 0
@@ -9,6 +10,7 @@ class ServicePosition(Poll, Converter, object):
 	TYPE_REMAINING = 2
 	TYPE_GAUGE = 3
 	TYPE_SUMMARY = 4
+	TYPE_START_END_TIME = 5
 
 	def __init__(self, type):
 		Poll.__init__(self)
@@ -34,20 +36,26 @@ class ServicePosition(Poll, Converter, object):
 			self.type = self.TYPE_GAUGE
 		elif type == "Summary":
 			self.type = self.TYPE_SUMMARY
+		elif type == "Startendtime":
+			self.type = self.TYPE_START_END_TIME
 		else:
-			raise ElementError("type must be {Length|Position|Remaining|Gauge|Summary} with optional arguments {Negate|Plus|Detailed|ShowHours|ShowNoSeconds|7segment} for ServicePosition converter")
+			raise ElementError("type must be {Length|Position|Remaining|Gauge|Summary|Startendtime} with optional arguments {Negate|Plus|Detailed|ShowHours|ShowNoSeconds|7segment} for ServicePosition converter")
 
 		if self.detailed:
 			self.poll_interval = 100
-		elif self.type == self.TYPE_LENGTH:
+		elif self.type == self.TYPE_LENGTH or self.TYPE_START_END_TIME:
 			self.poll_interval = 2000
 		else:
 			self.poll_interval = 500
 
+		self.start_time = self.service = None
 		self.poll_enabled = True
 
 	def getSeek(self):
 		s = self.source.service
+		if self.type == self.TYPE_START_END_TIME and s and (self.service is None or s != self.service):
+			self.service = s
+			self.start_time = None
 		return s and s.seek()
 
 	@cached
@@ -88,10 +96,18 @@ class ServicePosition(Poll, Converter, object):
 				l = self.position
 			elif self.type == self.TYPE_REMAINING:
 				l = self.length - self.position
-			elif self.type == self.TYPE_SUMMARY:
+			elif self.type == self.TYPE_SUMMARY or self.TYPE_START_END_TIME:
 				s = self.position / 90000
 				e = (self.length / 90000) - s
-				return "%02d:%02d +%2dm" % (s/60, s%60, e/60)
+				if self.type == self.TYPE_SUMMARY:
+					return "%02d:%02d +%2dm" % (s/60, s%60, e/60)
+				start_time = strftime("%H:%M", localtime(time() - s))
+				end_time = strftime("%H:%M", localtime(time() + e))
+				if self.start_time is None:
+					self.start_time = start_time
+				elif self.start_time != start_time:
+					start_time = self.start_time
+				return start_time + " - " + end_time
 
 			if l < 0:
 				return ""
