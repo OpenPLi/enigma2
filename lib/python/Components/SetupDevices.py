@@ -1,15 +1,14 @@
 from Components.config import ConfigOnOff, ConfigSelection, ConfigSubsection, ConfigText, config
-from Components.Timezones import timezones
-from Components.Language import language
 from Components.Keyboard import keyboard
+from Components.Language import language
 
 def InitSetupDevices():
-	def timezoneNotifier(configElement):
-		timezones.activateTimezone(configElement.index)
+	def languageNotifier(configElement):
+		language.activateLanguage(configElement.value)
 
-	config.timezone = ConfigSubsection()
-	config.timezone.val = ConfigSelection(default=timezones.getDefaultTimezone(), choices=timezones.getTimezoneList())
-	config.timezone.val.addNotifier(timezoneNotifier)
+	config.osd = ConfigSubsection()
+	config.osd.language = ConfigText(default="en_EN")
+	config.osd.language.addNotifier(languageNotifier)
 
 	def keyboardNotifier(configElement):
 		keyboard.activateKeyboardMap(configElement.index)
@@ -17,13 +16,6 @@ def InitSetupDevices():
 	config.keyboard = ConfigSubsection()
 	config.keyboard.keymap = ConfigSelection(default=keyboard.getDefaultKeyboardMap(), choices=keyboard.getKeyboardMaplist())
 	config.keyboard.keymap.addNotifier(keyboardNotifier)
-
-	def languageNotifier(configElement):
-		language.activateLanguage(configElement.value)
-
-	config.osd = ConfigSubsection()
-	config.osd.language = ConfigText(default="en_EN")
-	config.osd.language.addNotifier(languageNotifier)
 
 	config.parental = ConfigSubsection()
 	config.parental.lock = ConfigOnOff(default=False)
