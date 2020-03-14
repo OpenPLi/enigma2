@@ -872,7 +872,7 @@ def loadSingleSkinData(desktop, domSkin, pathSkin, scope=SCOPE_CURRENT_SKIN):
 
 # Now a utility for plugins to add skin data to the screens.
 #
-def loadSkin(filename, desktop=None, scope=SCOPE_SKIN):
+def loadSkin(filename, desktop=None, scope=SCOPE_SKIN, override=False):
 	global domScreens
 	filename = resolveFilename(scope, filename)
 	try:
@@ -886,8 +886,14 @@ def loadSkin(filename, desktop=None, scope=SCOPE_SKIN):
 					name = evaluateElement(element, DISPLAY_SKIN_ID)
 					if name is None:
 						element.clear()
-					else:
+					elif name not in domScreens:
 						domScreens[name] = (element, "%s/" % os.path.dirname(filename))
+						print "[Skin] Load skin screen name '%s' added to the skin." % name
+					elif override:
+						domScreens[name] = (element, "%s/" % os.path.dirname(filename))
+						print "[Skin] Load skin screen name '%s' replacing existing screen in the skin." % name
+					else:
+						print "[Skin] Load skin screen name '%s' already exists in the skin and has been skipped." % name
 			except xml.etree.cElementTree.ParseError as err:
 				fd.seek(0)
 				content = fd.readlines()
