@@ -99,7 +99,7 @@ class Timezones:
 		# until AutoTimers are updated to use the Timezones
 		# callbacks.  Once AutoTimers are updated *all* AutoTimer
 		# code should be removed from the Timezones.py code!
-		self.autotimerInit()
+		# self.autotimerInit()
 
 	# Scan the zoneinfo directory tree and all load all timezones found.
 	#
