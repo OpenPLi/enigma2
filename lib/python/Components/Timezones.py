@@ -47,7 +47,7 @@ from Tools.StbHardware import setRTCoffset
 DEFAULT_AREA = "Classic"  # OpenATV, OpenPLi, OpenViX
 DEFAULT_ZONE = "Athens"  # OpenATV, OpenPLi
 # DEFAULT_ZONE = "London"  # OpenViX
-TIMEZONE_FILE = "/etc/timezone.xml"  # This should be SCOPE_TIMEZONES_FILE!  This file moves arond the filesystem!!!  :(
+TIMEZONE_FILE = "/usr/share/enigma2/timezone.xml"  # This should be SCOPE_TIMEZONES_FILE!  This file moves arond the filesystem!!!  :(
 TIMEZONE_DATA = "/usr/share/zoneinfo/"  # This should be SCOPE_TIMEZONES_DATA!
 
 def InitTimeZones():
