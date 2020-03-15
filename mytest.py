@@ -19,6 +19,10 @@ profile("SetupDevices")
 import Components.SetupDevices
 Components.SetupDevices.InitSetupDevices()
 
+profile("Geolocation")
+import Tools.Geolocation
+Tools.Geolocation.InitGeolocation()
+
 profile("SimpleSummary")
 from Screens import InfoBar
 from Screens.SimpleSummary import SimpleSummary
@@ -546,6 +550,10 @@ Components.RecordingConfig.InitRecordingConfig()
 profile("UsageConfig")
 import Components.UsageConfig
 Components.UsageConfig.InitUsageConfig()
+
+profile("Timezones")
+import Components.Timezones
+Components.Timezones.InitTimeZones()
 
 profile("keymapparser")
 import keymapparser
