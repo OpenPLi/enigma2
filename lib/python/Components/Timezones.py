@@ -43,11 +43,8 @@ from Tools.StbHardware import setRTCoffset
 # Internet the defaults described above and listed below will be used.
 #
 # DEFAULT_AREA = "Classic"  # Use the classic timezone based list of timezones.
-# DEFAULT_AREA = "Australia"  # Beyonwiz
-DEFAULT_AREA = "Classic"  # OpenATV, OpenPLi, OpenViX
-DEFAULT_ZONE = "Athens"  # OpenATV, OpenPLi
-# DEFAULT_ZONE = "Berlin"  # OpenATV
-# DEFAULT_ZONE = "London"  # OpenViX
+DEFAULT_AREA = "Classic"  # OpenPLi
+DEFAULT_ZONE = "Athens"  # OpenPLi
 TIMEZONE_FILE = "/usr/share/enigma2/timezone.xml"  # This should be SCOPE_TIMEZONES_FILE!  This file moves arond the filesystem!!!  :(
 TIMEZONE_DATA = "/usr/share/zoneinfo/"  # This should be SCOPE_TIMEZONES_DATA!
 
@@ -72,28 +69,6 @@ def InitTimeZones():
 	config.timezone = ConfigSubsection()
 	config.timezone.area = ConfigSelection(default=area, choices=timezones.getTimezoneAreaList())
 	config.timezone.val = ConfigSelection(default=timezones.getTimezoneDefault(), choices=timezones.getTimezoneList())
-	if not config.timezone.area.value and config.timezone.val.value.find("/") == -1:
-		config.timezone.area.value = "Generic"
-	try:
-		tzLink = path.realpath("/etc/localtime")[20:]
-		tzSplit = tzLink.find("/")
-		if tzSplit == -1:
-			tzArea = "Generic"
-			tzVal = tzLink
-		else:
-			tzArea = tzLink[:tzSplit]
-			tzVal = tzLink[tzSplit + 1:]
-		msgs = []
-		if config.timezone.area.value != tzArea:
-			msgs.append("area '%s' != '%s'" % (tzArea, config.timezone.area.value))
-			config.timezone.area.value = tzArea
-		if config.timezone.val.value != tzVal:
-			msgs.append("zone '%s' != '%s'" % (tzVal, config.timezone.val.value))
-			config.timezone.val.value = tzVal
-		if len(msgs):
-			print "[Timezones] Warning: System timezone does not match Enigma2 timezone (%s), setting Enigma2 to system timezone!" % ",".join(msgs)
-	except (IOError, OSError):
-		pass
 
 	def timezoneAreaChoices(configElement):
 		choices = timezones.getTimezoneList(area=configElement.value)
