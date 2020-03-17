@@ -43,7 +43,7 @@ class ServicePosition(Poll, Converter, object):
 
 		if self.detailed:
 			self.poll_interval = 100
-		elif self.type == self.TYPE_LENGTH or self.TYPE_START_END_TIME:
+		elif self.type == self.TYPE_LENGTH or self.type == self.TYPE_START_END_TIME:
 			self.poll_interval = 2000
 		else:
 			self.poll_interval = 500
@@ -96,7 +96,7 @@ class ServicePosition(Poll, Converter, object):
 				l = self.position
 			elif self.type == self.TYPE_REMAINING:
 				l = self.length - self.position
-			elif self.type == self.TYPE_SUMMARY or self.TYPE_START_END_TIME:
+			elif self.type == self.TYPE_SUMMARY or self.type == self.TYPE_START_END_TIME:
 				s = self.position / 90000
 				e = (self.length / 90000) - s
 				if self.type == self.TYPE_SUMMARY:
