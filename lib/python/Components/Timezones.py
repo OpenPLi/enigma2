@@ -69,6 +69,28 @@ def InitTimeZones():
 	config.timezone = ConfigSubsection()
 	config.timezone.area = ConfigSelection(default=area, choices=timezones.getTimezoneAreaList())
 	config.timezone.val = ConfigSelection(default=timezones.getTimezoneDefault(), choices=timezones.getTimezoneList())
+	if not config.timezone.area.value and config.timezone.val.value.find("/") == -1:
+		config.timezone.area.value = "Generic"
+	try:
+		tzLink = path.realpath("/etc/localtime")[20:]
+		tzSplit = tzLink.find("/")
+		if tzSplit == -1:
+			tzArea = "Generic"
+			tzVal = tzLink
+		else:
+			tzArea = tzLink[:tzSplit]
+			tzVal = tzLink[tzSplit + 1:]
+		msgs = []
+		if config.timezone.area.value != tzArea:
+			msgs.append("area '%s' != '%s'" % (tzArea, config.timezone.area.value))
+			config.timezone.area.value = tzArea
+		if config.timezone.val.value != tzVal:
+			msgs.append("zone '%s' != '%s'" % (tzVal, config.timezone.val.value))
+			config.timezone.val.value = tzVal
+		if len(msgs):
+			print "[Timezones] Warning: System timezone does not match Enigma2 timezone (%s), setting Enigma2 to system timezone!" % ",".join(msgs)
+	except (IOError, OSError):
+		pass
 
 	def timezoneAreaChoices(configElement):
 		choices = timezones.getTimezoneList(area=configElement.value)
