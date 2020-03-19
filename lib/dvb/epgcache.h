@@ -352,8 +352,7 @@ private:
 #endif // SWIG
 public:
 	static eEPGCache *getInstance() { return instance; }
-	void restartAllChannelsEPG();
-	void abortAllChannelsEPG();
+
 	void save();
 	void load();
 	void timeUpdated();
