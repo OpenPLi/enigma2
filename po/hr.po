@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-28 22:35+0100\n"
+"POT-Creation-Date: 2020-03-21 09:07+0100\n"
 "PO-Revision-Date: 2020-03-03 08:50+0100\n"
 "Last-Translator: Željko <zeljko2@hi.ht.hr>\n"
 "Language-Team: Željko\n"
@@ -2342,9 +2342,6 @@ msgstr "Nije moguće pronaći odgovarajući medij. Uklonite neke preuzete image 
 msgid "Could not load medium! No disc inserted?"
 msgstr "Učitavanje medija nije uspjelo! Nije umetnut disk?"
 
-msgid "Could not locate epg file on fallback tuner"
-msgstr "Epg datoteku nije moguće pronaći na rezervnom tjuneru"
-
 msgid "Could not open Picture in Picture"
 msgstr "Nije moguće otvoriti sliku u slici"
 
@@ -3078,6 +3075,10 @@ msgstr "EPG:"
 msgid "ERROR - failed to scan (%s)!"
 msgstr "GREŠKA - nije uspjelo skeniranje (%s)!"
 
+#, python-format
+msgid "ERROR downloading file %s"
+msgstr ""
+
 msgid "East"
 msgstr "Istok"
 
@@ -3360,6 +3361,10 @@ msgstr "Eritreja"
 msgid "Error"
 msgstr "Greška"
 
+#, fuzzy, python-format
+msgid "Error %s"
+msgstr "Greška"
+
 msgid "Error code"
 msgstr "Greška koda"
 
@@ -3392,10 +3397,25 @@ msgstr ""
 msgid "Error stop stream!"
 msgstr "Pogreška pri zaustavljanju web prijenosa!"
 
+msgid "Error when writing epg.dat on server"
+msgstr ""
+
+#, fuzzy
+msgid "Error while retreiving epg.dat from server"
+msgstr ""
+"Pogreška tijekom preuzimanja podataka o rezervnom tajmeru\n"
+"%s"
+
 #, python-format
 msgid ""
 "Error while retreiving fallback timer information\n"
 "%s"
+msgstr ""
+"Pogreška tijekom preuzimanja podataka o rezervnom tajmeru\n"
+"%s"
+
+#, fuzzy
+msgid "Error while retreiving location of epg.dat on server"
 msgstr ""
 "Pogreška tijekom preuzimanja podataka o rezervnom tajmeru\n"
 "%s"
@@ -5408,6 +5428,9 @@ msgstr "Opis nije dostupan."
 msgid "No displayable files on this medium found!"
 msgstr "Nema pronađenih datoteka na ovom mediju!"
 
+msgid "No epg.dat file found server"
+msgstr ""
+
 msgid "No event info found, recording indefinitely."
 msgstr "Nije pronađen nijedan podatak o događaju, snimanje na neodređeno vrijeme."
 
@@ -5449,9 +5472,6 @@ msgstr "Nema kanala"
 
 msgid "No services/providers selected"
 msgstr "Nisu odabrane usluge/pružatelji usluga"
-
-msgid "No settings files to download on fallback tuner"
-msgstr "Nema datoteka s postavkama za preuzimanje s rezervnog tunera"
 
 msgid "No standby"
 msgstr "Bez čekanja"
@@ -7493,6 +7513,13 @@ msgstr "Odaberite skup znakova pomaknutih virtualnom tipkovnicom"
 msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr "Odaberite skup znakova virtualne tipkovnice pomaknut samo za sljedeći znak"
 
+#, fuzzy
+msgid "Select timezone area or region."
+msgstr "Odaberite horizontalnu rezoluciju:"
+
+msgid "Select timezone in the area or region."
+msgstr ""
+
 msgid "Select update source"
 msgstr "Odaberite izvor ažuriranja"
 
@@ -9263,6 +9290,10 @@ msgid "Timeshift not possible!"
 msgstr "Vremenski pomak nije moguć!"
 
 msgid "Timezone"
+msgstr "Vremenska zona"
+
+#, fuzzy
+msgid "Timezone area"
 msgstr "Vremenska zona"
 
 msgid "Timor-Leste"

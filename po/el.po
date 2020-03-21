@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPLI Enigma2 Official Greek Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-28 22:31+0100\n"
+"POT-Creation-Date: 2020-03-21 09:07+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: MCelliotG <mcelliotg@gmail.com>\n"
 "Language-Team: MCelliotG <mcelliotg@gmail.com>\n"
@@ -2327,10 +2327,6 @@ msgstr "Δεν βρέθηκε το κατάλληλο μέσο - Αφαιρέσ�
 msgid "Could not load medium! No disc inserted?"
 msgstr "Το μέσο δεν φορτώθηκε! Δεν έγινε εισαγωγή δίσκου;"
 
-#, fuzzy
-msgid "Could not locate epg file on fallback tuner"
-msgstr "Ενεργοποίηση εισαγωγής χρονοδιακόπτη από το εφεδρικό tuner"
-
 msgid "Could not open Picture in Picture"
 msgstr "Αδυναμία εκκίνησης PiP"
 
@@ -3061,6 +3057,10 @@ msgstr "EPG:"
 msgid "ERROR - failed to scan (%s)!"
 msgstr "ΣΦΑΛΜΑ - Αποτυχία ανίχνευσης (%s)!"
 
+#, python-format
+msgid "ERROR downloading file %s"
+msgstr ""
+
 msgid "East"
 msgstr "Ανατολικά"
 
@@ -3343,6 +3343,10 @@ msgstr "Ερυθραία"
 msgid "Error"
 msgstr "Σφάλμα"
 
+#, fuzzy, python-format
+msgid "Error %s"
+msgstr "Σφάλμα"
+
 msgid "Error code"
 msgstr "Κωδικός σφάλματος"
 
@@ -3375,10 +3379,25 @@ msgstr ""
 msgid "Error stop stream!"
 msgstr "Σφάλμα διακοπής ροής!"
 
+msgid "Error when writing epg.dat on server"
+msgstr ""
+
+#, fuzzy
+msgid "Error while retreiving epg.dat from server"
+msgstr ""
+"Σφάλμα ανάκτησης πληροφοριών χρονοδιακόπτη από το εφεδρικό tuner\n"
+"%s"
+
 #, python-format
 msgid ""
 "Error while retreiving fallback timer information\n"
 "%s"
+msgstr ""
+"Σφάλμα ανάκτησης πληροφοριών χρονοδιακόπτη από το εφεδρικό tuner\n"
+"%s"
+
+#, fuzzy
+msgid "Error while retreiving location of epg.dat on server"
 msgstr ""
 "Σφάλμα ανάκτησης πληροφοριών χρονοδιακόπτη από το εφεδρικό tuner\n"
 "%s"
@@ -5390,6 +5409,9 @@ msgstr "Μη διαθέσιμη περιγραφή."
 msgid "No displayable files on this medium found!"
 msgstr "Δεν υπάρχουν αρχεία προς εμφάνιση σε αυτό το μέσο!"
 
+msgid "No epg.dat file found server"
+msgstr ""
+
 msgid "No event info found, recording indefinitely."
 msgstr "Δεν βρέθηκαν πληροφορίες προγράμματος, η εγγραφή δεν θα σταματήσει."
 
@@ -5431,9 +5453,6 @@ msgstr "Καμία υπηρεσία"
 
 msgid "No services/providers selected"
 msgstr "Δεν έχουν επιλεγεί υπηρεσίες/πάροχοι"
-
-msgid "No settings files to download on fallback tuner"
-msgstr ""
 
 msgid "No standby"
 msgstr "Χωρίς αναμονή"
@@ -7472,6 +7491,13 @@ msgstr "Επιλογή του σετ χαρακτήρων με shift"
 msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr "Επιλογή του σετ χαρακτήρων με shift του εικονικού πληκτρολογίου μόνο για τον επόμενο χαρακτήρα"
 
+#, fuzzy
+msgid "Select timezone area or region."
+msgstr "Επιλογή οριζόντιας ανάλυσης:"
+
+msgid "Select timezone in the area or region."
+msgstr ""
+
 msgid "Select update source"
 msgstr "Επιλογή πηγής ενημερώσεων"
 
@@ -9244,6 +9270,10 @@ msgid "Timeshift not possible!"
 msgstr "Αδυναμία χρονομετατόπισης!"
 
 msgid "Timezone"
+msgstr "Χρονική ζώνη"
+
+#, fuzzy
+msgid "Timezone area"
 msgstr "Χρονική ζώνη"
 
 msgid "Timor-Leste"

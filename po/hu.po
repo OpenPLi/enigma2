@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-28 22:31+0100\n"
+"POT-Creation-Date: 2020-03-21 09:07+0100\n"
 "PO-Revision-Date: 2020-02-19 11:12+0100\n"
 "Last-Translator: mcfly82\n"
 "Language-Team: mcfly82 & wysless\n"
@@ -2330,10 +2330,6 @@ msgstr "Nem található megfelelő adathordozó. Kérem, töröljön néhány le
 msgid "Could not load medium! No disc inserted?"
 msgstr "Nem lehet betölteni a hordozót! Van bennt lemez?"
 
-#, fuzzy
-msgid "Could not locate epg file on fallback tuner"
-msgstr "Csatornák importálása a tartalék tunerből"
-
 msgid "Could not open Picture in Picture"
 msgstr "A Kép-a-Képben funkció nem indítható el"
 
@@ -3062,6 +3058,10 @@ msgstr "EPG:"
 msgid "ERROR - failed to scan (%s)!"
 msgstr "HIBA - nem sikerült a keresés (%s)!"
 
+#, python-format
+msgid "ERROR downloading file %s"
+msgstr ""
+
 msgid "East"
 msgstr "Kelet"
 
@@ -3344,6 +3344,10 @@ msgstr "Eritrea"
 msgid "Error"
 msgstr "Hiba"
 
+#, fuzzy, python-format
+msgid "Error %s"
+msgstr "Hiba"
+
 msgid "Error code"
 msgstr "Hibakód"
 
@@ -3372,10 +3376,25 @@ msgstr "Hiba az image kicsomagolása során %s"
 msgid "Error stop stream!"
 msgstr "A stream leállítása sikertelen!"
 
+msgid "Error when writing epg.dat on server"
+msgstr ""
+
+#, fuzzy
+msgid "Error while retreiving epg.dat from server"
+msgstr ""
+"Hiba történt a tartalék tuner időzítők letöltésekor\n"
+"%s"
+
 #, python-format
 msgid ""
 "Error while retreiving fallback timer information\n"
 "%s"
+msgstr ""
+"Hiba történt a tartalék tuner időzítők letöltésekor\n"
+"%s"
+
+#, fuzzy
+msgid "Error while retreiving location of epg.dat on server"
 msgstr ""
 "Hiba történt a tartalék tuner időzítők letöltésekor\n"
 "%s"
@@ -5389,6 +5408,9 @@ msgstr "Nincs elérhető leírás."
 msgid "No displayable files on this medium found!"
 msgstr "A hordozón nem található lejátszható fájl!"
 
+msgid "No epg.dat file found server"
+msgstr ""
+
 msgid "No event info found, recording indefinitely."
 msgstr "Nincs esemény infó, felvétel korlátlanul."
 
@@ -5430,9 +5452,6 @@ msgstr "Nincs csatorna"
 
 msgid "No services/providers selected"
 msgstr "Nincs szolgáltató kiválasztva"
-
-msgid "No settings files to download on fallback tuner"
-msgstr ""
 
 msgid "No standby"
 msgstr "Nincs kikapcsolás"
@@ -7471,6 +7490,13 @@ msgstr "Váltás a virtuális billentyűzeten a 'shift' karakterkiosztásra"
 msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr "Váltás a virtuális billentyűzeten a 'shift' karakterkiosztásra csak a következő karakterre vonatkozóan"
 
+#, fuzzy
+msgid "Select timezone area or region."
+msgstr "Válasszon függőleges felbontást:"
+
+msgid "Select timezone in the area or region."
+msgstr ""
+
 msgid "Select update source"
 msgstr "Válasszon szerkesztendő frissítési forrást"
 
@@ -9248,6 +9274,10 @@ msgid "Timeshift not possible!"
 msgstr "Időcsúsztatás nem lehetséges!"
 
 msgid "Timezone"
+msgstr "Időzóna"
+
+#, fuzzy
+msgid "Timezone area"
 msgstr "Időzóna"
 
 msgid "Timor-Leste"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-02 20:03+0100\n"
+"POT-Creation-Date: 2020-03-21 09:07+0100\n"
 "PO-Revision-Date: 2020-02-29 08:52+0200\n"
 "Last-Translator: Audronis Grincevicius <adga45@gmail.com>\n"
 "Language-Team: Adga (C) <adga45@gmail.com>\n"
@@ -2343,9 +2343,6 @@ msgstr "Nepavyko rasti tinkamos laikmenos - Pašalinkite kai kuriuos atsisiųstu
 msgid "Could not load medium! No disc inserted?"
 msgstr "Nepavyko atverti laikmenos! Neįdėtas diskas?"
 
-msgid "Could not locate epg file on fallback tuner"
-msgstr "Nepavyko rasti epg failo atsarginiame imtuve"
-
 msgid "Could not open Picture in Picture"
 msgstr "Vaizdo vaizde atverti nepavyko"
 
@@ -3079,6 +3076,10 @@ msgstr "Elektroninis programų vadovas:"
 msgid "ERROR - failed to scan (%s)!"
 msgstr "KLAIDA - paieška nepavyko (%s)!"
 
+#, python-format
+msgid "ERROR downloading file %s"
+msgstr ""
+
 msgid "East"
 msgstr "Rytai"
 
@@ -3361,6 +3362,10 @@ msgstr "Eritrėja"
 msgid "Error"
 msgstr "Klaida"
 
+#, fuzzy, python-format
+msgid "Error %s"
+msgstr "Klaida"
+
 msgid "Error code"
 msgstr "Klaidos kodas"
 
@@ -3393,10 +3398,25 @@ msgstr ""
 msgid "Error stop stream!"
 msgstr "Srauto stabdymo klaida!"
 
+msgid "Error when writing epg.dat on server"
+msgstr ""
+
+#, fuzzy
+msgid "Error while retreiving epg.dat from server"
+msgstr ""
+"Klaida atsisiunčiant atsarginio imtuvo laikmačio informaciją\n"
+"%s"
+
 #, python-format
 msgid ""
 "Error while retreiving fallback timer information\n"
 "%s"
+msgstr ""
+"Klaida atsisiunčiant atsarginio imtuvo laikmačio informaciją\n"
+"%s"
+
+#, fuzzy
+msgid "Error while retreiving location of epg.dat on server"
 msgstr ""
 "Klaida atsisiunčiant atsarginio imtuvo laikmačio informaciją\n"
 "%s"
@@ -5406,6 +5426,9 @@ msgstr "Joks aprašymas nepasiekiamas."
 msgid "No displayable files on this medium found!"
 msgstr "Jokių failų čia nerasta!"
 
+msgid "No epg.dat file found server"
+msgstr ""
+
 msgid "No event info found, recording indefinitely."
 msgstr "Informacija apie įvykius nerasta, tęsiamas įrašymas."
 
@@ -5447,9 +5470,6 @@ msgstr "Nėra kanalų"
 
 msgid "No services/providers selected"
 msgstr "Nepasirinkti kanalai/teikėjai"
-
-msgid "No settings files to download on fallback tuner"
-msgstr "Negalima atsisiųsti nustatymų failų naudojant atsarginį imtuvą"
 
 msgid "No standby"
 msgstr "Nebudėti"
@@ -7491,6 +7511,13 @@ msgstr "Pasirinkite simbolių rinkinį su virtualia klaviatūra"
 msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr "Pasirinkite tik pakeistą virtualios klaviatūros simbolių rinkinį"
 
+#, fuzzy
+msgid "Select timezone area or region."
+msgstr "Pasirinkite horizontalią rezoliuciją:"
+
+msgid "Select timezone in the area or region."
+msgstr ""
+
 msgid "Select update source"
 msgstr "Pasirinkite atnaujinimo šaltinį"
 
@@ -9265,6 +9292,10 @@ msgid "Timeshift not possible!"
 msgstr "Laiko poslinkis negalimas!"
 
 msgid "Timezone"
+msgstr "Laiko juosta"
+
+#, fuzzy
+msgid "Timezone area"
 msgstr "Laiko juosta"
 
 msgid "Timor-Leste"
