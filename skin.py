@@ -704,7 +704,8 @@ def loadSingleSkinData(desktop, domSkin, pathSkin, scope=SCOPE_CURRENT_SKIN):
 			filename = resolveFilename(scope, filename, path_prefix=pathSkin)
 			if fileExists(filename):
 				print "[Skin] Loading included file '%s'." % filename
-				loadSkin(filename, desktop=desktop, scope=scope)
+				override = "/etc/enigma2/" == pathSkin
+				loadSkin(filename, desktop=desktop, scope=scope, override=override)
 			else:
 				print "[Skin] Error: Included file '%s' not found!" % filename
 	for tag in domSkin.findall("switchpixmap"):
