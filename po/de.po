@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-28 22:31+0100\n"
+"POT-Creation-Date: 2020-03-21 09:07+0100\n"
 "PO-Revision-Date: 2019-11-28 17:53+0100\n"
 "Last-Translator: Pike_Bishop <alfredzngr023@gmail.com>\n"
 "Language-Team: Sfteam  angelo2807@hotmail.com\n"
@@ -2343,10 +2343,6 @@ msgstr "Es konnte kein geeignetes Medium gefunden werden. Bitte entfernen Sie ei
 msgid "Could not load medium! No disc inserted?"
 msgstr "Konnte das Medium nicht laden! Keine DVD eingelegt?"
 
-#, fuzzy
-msgid "Could not locate epg file on fallback tuner"
-msgstr "Aktivieren Sie den Import-Timer vom Reserve-Tuner"
-
 msgid "Could not open Picture in Picture"
 msgstr "Bild im Bild konnte nicht geladen werden."
 
@@ -3075,6 +3071,10 @@ msgstr ""
 msgid "ERROR - failed to scan (%s)!"
 msgstr "FEHLER - Suche fehlgeschlagen (%s)!"
 
+#, python-format
+msgid "ERROR downloading file %s"
+msgstr ""
+
 msgid "East"
 msgstr "Ost"
 
@@ -3360,6 +3360,10 @@ msgstr "Eritrea"
 msgid "Error"
 msgstr "Fehler"
 
+#, fuzzy, python-format
+msgid "Error %s"
+msgstr "Fehler"
+
 msgid "Error code"
 msgstr "Fehler-Code"
 
@@ -3392,10 +3396,25 @@ msgstr ""
 msgid "Error stop stream!"
 msgstr "Fehler beim Stoppen des Streams!"
 
+msgid "Error when writing epg.dat on server"
+msgstr ""
+
+#, fuzzy
+msgid "Error while retreiving epg.dat from server"
+msgstr ""
+"Fehler beim Wiederherstellen der Reserve-Timer-Informationen\n"
+"% s"
+
 #, python-format
 msgid ""
 "Error while retreiving fallback timer information\n"
 "%s"
+msgstr ""
+"Fehler beim Wiederherstellen der Reserve-Timer-Informationen\n"
+"% s"
+
+#, fuzzy
+msgid "Error while retreiving location of epg.dat on server"
 msgstr ""
 "Fehler beim Wiederherstellen der Reserve-Timer-Informationen\n"
 "% s"
@@ -5415,6 +5434,9 @@ msgstr "Keine Beschreibung verfügbar."
 msgid "No displayable files on this medium found!"
 msgstr "Keine anzeigbaren Dateien auf diesem Medium gefunden!"
 
+msgid "No epg.dat file found server"
+msgstr ""
+
 msgid "No event info found, recording indefinitely."
 msgstr "Keine EPG-Daten gefunden. Starte unbegrenzte Aufnahme."
 
@@ -5456,9 +5478,6 @@ msgstr "Kein Sender"
 
 msgid "No services/providers selected"
 msgstr "Keine Sender/Anbieter ausgewählt"
-
-msgid "No settings files to download on fallback tuner"
-msgstr ""
 
 msgid "No standby"
 msgstr "Kein Standby"
@@ -7504,6 +7523,13 @@ msgstr "Wählen Sie den Zeichensatz für die Shift Tastatur aus"
 msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr "Shift nur für das nächste Zeichen benutzen"
 
+#, fuzzy
+msgid "Select timezone area or region."
+msgstr "Wählen Sie die horizontale Auflösung:"
+
+msgid "Select timezone in the area or region."
+msgstr ""
+
 msgid "Select update source"
 msgstr "Wählen Sie eine Update-Quelle"
 
@@ -9284,6 +9310,10 @@ msgid "Timeshift not possible!"
 msgstr "Timeshift nicht möglich!"
 
 msgid "Timezone"
+msgstr "Zeitzone"
+
+#, fuzzy
+msgid "Timezone area"
 msgstr "Zeitzone"
 
 msgid "Timor-Leste"

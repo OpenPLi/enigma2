@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-28 22:31+0100\n"
+"POT-Creation-Date: 2020-03-21 09:07+0100\n"
 "PO-Revision-Date: 2018-11-12 20:51+0200\n"
 "Last-Translator: Мартин Петков <marto74bg@yahoo.co.uk>\n"
 "Language-Team: Bulgarian\n"
@@ -2342,9 +2342,6 @@ msgstr ""
 msgid "Could not load medium! No disc inserted?"
 msgstr "Не може да се зареди съдържанието! Не е вкаран диск?"
 
-msgid "Could not locate epg file on fallback tuner"
-msgstr ""
-
 msgid "Could not open Picture in Picture"
 msgstr "Не може да се отвори Картина в Картината"
 
@@ -3085,6 +3082,10 @@ msgstr ""
 msgid "ERROR - failed to scan (%s)!"
 msgstr "Грешка при сканиране (%s)!"
 
+#, python-format
+msgid "ERROR downloading file %s"
+msgstr ""
+
 msgid "East"
 msgstr "Изток"
 
@@ -3373,6 +3374,10 @@ msgstr "Еритрея"
 msgid "Error"
 msgstr "Грешка"
 
+#, fuzzy, python-format
+msgid "Error %s"
+msgstr "Грешка"
+
 msgid "Error code"
 msgstr "Грешен код"
 
@@ -3405,10 +3410,21 @@ msgstr ""
 msgid "Error stop stream!"
 msgstr "Грешка при спиране на стрийма!"
 
+msgid "Error when writing epg.dat on server"
+msgstr ""
+
+#, fuzzy
+msgid "Error while retreiving epg.dat from server"
+msgstr "Грешка при получаване местоположението на файла epg.dat от сървъра"
+
 #, fuzzy, python-format
 msgid ""
 "Error while retreiving fallback timer information\n"
 "%s"
+msgstr "Грешка при получаване местоположението на файла epg.dat от сървъра"
+
+#, fuzzy
+msgid "Error while retreiving location of epg.dat on server"
 msgstr "Грешка при получаване местоположението на файла epg.dat от сървъра"
 
 #, python-format
@@ -5453,6 +5469,9 @@ msgstr "Няма налично описание."
 msgid "No displayable files on this medium found!"
 msgstr "Няма поддържани файлове на този носител!"
 
+msgid "No epg.dat file found server"
+msgstr ""
+
 msgid "No event info found, recording indefinitely."
 msgstr "Няма инфо за предаването, незабавен запис."
 
@@ -5495,9 +5514,6 @@ msgstr "Няма канал"
 
 msgid "No services/providers selected"
 msgstr "Не са избрани канали/провайдери"
-
-msgid "No settings files to download on fallback tuner"
-msgstr ""
 
 msgid "No standby"
 msgstr "Не преминавай в режим готовност"
@@ -7561,6 +7577,13 @@ msgstr ""
 msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr ""
 
+#, fuzzy
+msgid "Select timezone area or region."
+msgstr "Избор на хоризонтална резолюция:"
+
+msgid "Select timezone in the area or region."
+msgstr ""
+
 msgid "Select update source"
 msgstr "Избор на източника за обновяване"
 
@@ -9343,6 +9366,10 @@ msgid "Timeshift not possible!"
 msgstr "Таймшифт не е възможен!"
 
 msgid "Timezone"
+msgstr "Часова зона"
+
+#, fuzzy
+msgid "Timezone area"
 msgstr "Часова зона"
 
 msgid "Timor-Leste"

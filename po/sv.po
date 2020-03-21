@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-28 22:31+0100\n"
+"POT-Creation-Date: 2020-03-21 09:07+0100\n"
 "PO-Revision-Date: 2017-03-05 13:24+0100\n"
 "Last-Translator: Magnus Nilsson <mag_nilsson@hotmail.com>\n"
 "Language-Team: \n"
@@ -2621,9 +2621,6 @@ msgstr ""
 msgid "Could not load medium! No disc inserted?"
 msgstr "Kunde inte ladda media! Ingen disk istoppad?"
 
-msgid "Could not locate epg file on fallback tuner"
-msgstr ""
-
 #
 msgid "Could not open Picture in Picture"
 msgstr "Gick inte att öppna Bild i Bild"
@@ -3484,6 +3481,10 @@ msgstr ""
 msgid "ERROR - failed to scan (%s)!"
 msgstr "FEL - misslyckad sökning (%s)!"
 
+#, python-format
+msgid "ERROR downloading file %s"
+msgstr ""
+
 #
 msgid "East"
 msgstr "Öst"
@@ -3807,6 +3808,11 @@ msgstr "Strömning"
 msgid "Error"
 msgstr "Fel"
 
+#
+#, fuzzy, python-format
+msgid "Error %s"
+msgstr "Fel"
+
 msgid "Error code"
 msgstr "Felkod"
 
@@ -3832,10 +3838,19 @@ msgstr ""
 msgid "Error stop stream!"
 msgstr ""
 
+msgid "Error when writing epg.dat on server"
+msgstr ""
+
+msgid "Error while retreiving epg.dat from server"
+msgstr ""
+
 #, python-format
 msgid ""
 "Error while retreiving fallback timer information\n"
 "%s"
+msgstr ""
+
+msgid "Error while retreiving location of epg.dat on server"
 msgstr ""
 
 #
@@ -6135,6 +6150,9 @@ msgstr "Ingen beskrivning tillgänglig."
 msgid "No displayable files on this medium found!"
 msgstr "Inga visningsbara filer hittade på detta media!"
 
+msgid "No epg.dat file found server"
+msgstr ""
+
 #
 msgid "No event info found, recording indefinitely."
 msgstr "Ingen programinfo hittades, inspelning oändlig."
@@ -6184,9 +6202,6 @@ msgstr "Ingen kanal"
 #
 msgid "No services/providers selected"
 msgstr "Ingen kanal / operatör vald"
-
-msgid "No settings files to download on fallback tuner"
-msgstr ""
 
 #
 msgid "No standby"
@@ -8568,6 +8583,13 @@ msgstr ""
 msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr ""
 
+#, fuzzy
+msgid "Select timezone area or region."
+msgstr "Välj sorteringsmetod :"
+
+msgid "Select timezone in the area or region."
+msgstr ""
+
 #
 msgid "Select update source"
 msgstr "Ange uppdateringskälla."
@@ -10597,6 +10619,11 @@ msgstr "Timeshift inte möjligt!"
 
 #
 msgid "Timezone"
+msgstr "Tidszon"
+
+#
+#, fuzzy
+msgid "Timezone area"
 msgstr "Tidszon"
 
 msgid "Timor-Leste"

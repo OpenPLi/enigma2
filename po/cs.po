@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-28 22:31+0100\n"
+"POT-Creation-Date: 2020-03-21 09:07+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi <ims@openpli.org>\n"
@@ -2654,9 +2654,6 @@ msgstr "Nebylo nalezeno vhodné médium - odstraňte některé stažené obrázk
 msgid "Could not load medium! No disc inserted?"
 msgstr "Nelze načíst médium. Není vložen disk?"
 
-msgid "Could not locate epg file on fallback tuner"
-msgstr "V záložním tuneru nelze najít soubor epg"
-
 #
 msgid "Could not open Picture in Picture"
 msgstr "Nelze otevřít obraz v obraze"
@@ -3530,6 +3527,10 @@ msgstr ""
 msgid "ERROR - failed to scan (%s)!"
 msgstr "CHYBA - prohledávání selhalo (%s)!"
 
+#, python-format
+msgid "ERROR downloading file %s"
+msgstr ""
+
 #
 msgid "East"
 msgstr "Východní"
@@ -3859,6 +3860,11 @@ msgid "Error"
 msgstr "Chyba"
 
 #
+#, fuzzy, python-format
+msgid "Error %s"
+msgstr "Chyba"
+
+#
 msgid "Error code"
 msgstr "Kód chyby"
 
@@ -3891,10 +3897,25 @@ msgstr ""
 msgid "Error stop stream!"
 msgstr "Chyba při zrušení streamu!"
 
+msgid "Error when writing epg.dat on server"
+msgstr ""
+
+#, fuzzy
+msgid "Error while retreiving epg.dat from server"
+msgstr ""
+"Chyba při získávání informací ze záložního časovače\n"
+"%s"
+
 #, python-format
 msgid ""
 "Error while retreiving fallback timer information\n"
 "%s"
+msgstr ""
+"Chyba při získávání informací ze záložního časovače\n"
+"%s"
+
+#, fuzzy
+msgid "Error while retreiving location of epg.dat on server"
 msgstr ""
 "Chyba při získávání informací ze záložního časovače\n"
 "%s"
@@ -6202,6 +6223,9 @@ msgstr "Žádný popis k dispozici."
 msgid "No displayable files on this medium found!"
 msgstr "Žádné zobrazitelné soubory na tomto médiu nebyly nalezeny!"
 
+msgid "No epg.dat file found server"
+msgstr ""
+
 #
 msgid "No event info found, recording indefinitely."
 msgstr "Žádná informace o programu. Nekonečné nahrávání."
@@ -6252,9 +6276,6 @@ msgstr "Žádný kanál"
 #
 msgid "No services/providers selected"
 msgstr "Žádný program/poskytovatel není vybrán"
-
-msgid "No settings files to download on fallback tuner"
-msgstr "V záložním tuneru nejsou žádné soubory nastavení"
 
 #
 msgid "No standby"
@@ -8649,6 +8670,14 @@ msgid "Select the virtual keyboard shifted character set for the next character 
 msgstr "Shift pro následující znak"
 
 #
+#, fuzzy
+msgid "Select timezone area or region."
+msgstr "Zvolte horizontání rozlišení:"
+
+msgid "Select timezone in the area or region."
+msgstr ""
+
+#
 msgid "Select update source"
 msgstr "Vyberte zdroje pro aktualizaci"
 
@@ -10657,6 +10686,11 @@ msgstr "Timeshift není možný!"
 
 #
 msgid "Timezone"
+msgstr "Časové pásmo"
+
+#
+#, fuzzy
+msgid "Timezone area"
 msgstr "Časové pásmo"
 
 msgid "Timor-Leste"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPLi-enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-28 22:31+0100\n"
+"POT-Creation-Date: 2020-03-21 09:07+0100\n"
 "PO-Revision-Date: 2018-05-22 13:54+0200\n"
 "Last-Translator: Gringo <openpli@tiscali.it>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -2331,10 +2331,6 @@ msgstr "Impossibile trovare dei supporti adatti. Inserire un supporto (ad. es un
 msgid "Could not load medium! No disc inserted?"
 msgstr "Impossibile caricare il supporto. Nessun disco inserito?"
 
-#, fuzzy
-msgid "Could not locate epg file on fallback tuner"
-msgstr "Abilita il timer di importazione dal sintonizzatore di fallback"
-
 msgid "Could not open Picture in Picture"
 msgstr "Impossibile attivare il PIP"
 
@@ -3067,6 +3063,10 @@ msgstr ""
 msgid "ERROR - failed to scan (%s)!"
 msgstr "ERRORE - Ricerca non riuscita (%s)!"
 
+#, python-format
+msgid "ERROR downloading file %s"
+msgstr ""
+
 msgid "East"
 msgstr "Est"
 
@@ -3349,6 +3349,10 @@ msgstr "Eritrea"
 msgid "Error"
 msgstr "Errore"
 
+#, fuzzy, python-format
+msgid "Error %s"
+msgstr "Errore"
+
 msgid "Error code"
 msgstr "Codice errore"
 
@@ -3381,10 +3385,25 @@ msgstr ""
 msgid "Error stop stream!"
 msgstr "Errore di interruzione nel flusso!"
 
+msgid "Error when writing epg.dat on server"
+msgstr ""
+
+#, fuzzy
+msgid "Error while retreiving epg.dat from server"
+msgstr ""
+"Errore durante il recupero delle informazioni del timer di fallback\n"
+"%s"
+
 #, python-format
 msgid ""
 "Error while retreiving fallback timer information\n"
 "%s"
+msgstr ""
+"Errore durante il recupero delle informazioni del timer di fallback\n"
+"%s"
+
+#, fuzzy
+msgid "Error while retreiving location of epg.dat on server"
 msgstr ""
 "Errore durante il recupero delle informazioni del timer di fallback\n"
 "%s"
@@ -5402,6 +5421,9 @@ msgstr "Nessuna descrizione disponibile."
 msgid "No displayable files on this medium found!"
 msgstr "Questo supporto non contiene file riproducibili!"
 
+msgid "No epg.dat file found server"
+msgstr ""
+
 msgid "No event info found, recording indefinitely."
 msgstr "Nessuna informazione disponibile sull'evento, registrazione illimitata in corso."
 
@@ -5443,9 +5465,6 @@ msgstr "Nessun canale"
 
 msgid "No services/providers selected"
 msgstr "Nessun canale/provider selezionato"
-
-msgid "No settings files to download on fallback tuner"
-msgstr ""
 
 msgid "No standby"
 msgstr "Nessuna sospensione"
@@ -7487,6 +7506,13 @@ msgstr "Selezionare il set di caratteri spostati dalla tastiera virtuale"
 msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr "Selezionare il set di caratteri con spostamento della tastiera virtuale solo per il carattere successivo"
 
+#, fuzzy
+msgid "Select timezone area or region."
+msgstr "Selezionare la risoluzione orizzontale:"
+
+msgid "Select timezone in the area or region."
+msgstr ""
+
 msgid "Select update source"
 msgstr "Selezionare l'origine degli aggiornamenti"
 
@@ -9274,6 +9300,10 @@ msgid "Timeshift not possible!"
 msgstr "Timeshift impossibile!"
 
 msgid "Timezone"
+msgstr "Fuso orario"
+
+#, fuzzy
+msgid "Timezone area"
 msgstr "Fuso orario"
 
 msgid "Timor-Leste"

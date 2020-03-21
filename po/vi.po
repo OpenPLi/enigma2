@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-28 22:31+0100\n"
+"POT-Creation-Date: 2020-03-21 09:07+0100\n"
 "PO-Revision-Date: 2019-11-19 08:58+0700\n"
 "Last-Translator: krong\n"
 "Language-Team: none\n"
@@ -2335,10 +2335,6 @@ msgstr "Không thể tìm thấy phương tiện phù hợp - Vui lòng xóa m�
 msgid "Could not load medium! No disc inserted?"
 msgstr "Không thể tải trung bình! Không có đĩa được đưa vào?"
 
-#, fuzzy
-msgid "Could not locate epg file on fallback tuner"
-msgstr "Kích hoạt tính năng hẹn giờ nhập từ bộ điều chỉnh dự phòng"
-
 msgid "Could not open Picture in Picture"
 msgstr "Không thể mở Ảnh trong Ảnh"
 
@@ -3071,6 +3067,10 @@ msgstr ""
 msgid "ERROR - failed to scan (%s)!"
 msgstr "ERROR - failed to scan (%s)!"
 
+#, python-format
+msgid "ERROR downloading file %s"
+msgstr ""
+
 msgid "East"
 msgstr "Đông"
 
@@ -3353,6 +3353,10 @@ msgstr "Eritrea"
 msgid "Error"
 msgstr "Lỗi"
 
+#, fuzzy, python-format
+msgid "Error %s"
+msgstr "Lỗi"
+
 msgid "Error code"
 msgstr "Mã lỗi"
 
@@ -3385,10 +3389,25 @@ msgstr ""
 msgid "Error stop stream!"
 msgstr "Lỗi dừng luồng!"
 
+msgid "Error when writing epg.dat on server"
+msgstr ""
+
+#, fuzzy
+msgid "Error while retreiving epg.dat from server"
+msgstr ""
+"Lỗi trong khi truy xuất thông tin hẹn giờ dự phòng\n"
+"%s"
+
 #, python-format
 msgid ""
 "Error while retreiving fallback timer information\n"
 "%s"
+msgstr ""
+"Lỗi trong khi truy xuất thông tin hẹn giờ dự phòng\n"
+"%s"
+
+#, fuzzy
+msgid "Error while retreiving location of epg.dat on server"
 msgstr ""
 "Lỗi trong khi truy xuất thông tin hẹn giờ dự phòng\n"
 "%s"
@@ -5405,6 +5424,9 @@ msgstr "Không có mô tả."
 msgid "No displayable files on this medium found!"
 msgstr "Không tìm thấy tập tin nào trên phương tiện này!"
 
+msgid "No epg.dat file found server"
+msgstr ""
+
 msgid "No event info found, recording indefinitely."
 msgstr "Không tìm thấy thông tin sự kiện, ghi lại vô thời hạn."
 
@@ -5446,9 +5468,6 @@ msgstr "Không dịch vụ"
 
 msgid "No services/providers selected"
 msgstr "Không có dịch vụ / nhà cung cấp nào được chọn"
-
-msgid "No settings files to download on fallback tuner"
-msgstr ""
 
 msgid "No standby"
 msgstr "Không có chế độ chờ"
@@ -7490,6 +7509,13 @@ msgstr "Chọn bộ ký tự dịch chuyển bàn phím ảo"
 msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr "Chọn bộ ký tự dịch chuyển bàn phím ảo cho chỉ ký tự tiếp theo"
 
+#, fuzzy
+msgid "Select timezone area or region."
+msgstr "Chọn độ phân giải ngang:"
+
+msgid "Select timezone in the area or region."
+msgstr ""
+
 msgid "Select update source"
 msgstr "Chọn nguồn nâng cấp"
 
@@ -9262,6 +9288,10 @@ msgid "Timeshift not possible!"
 msgstr "Timeshift không thể!"
 
 msgid "Timezone"
+msgstr "Múi giờ"
+
+#, fuzzy
+msgid "Timezone area"
 msgstr "Múi giờ"
 
 msgid "Timor-Leste"
