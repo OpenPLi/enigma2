@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-28 22:31+0100\n"
+"POT-Creation-Date: 2020-03-21 09:07+0100\n"
 "PO-Revision-Date: 2019-07-25 17:52+0300\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: openPLi Dimitrij\n"
@@ -2342,10 +2342,6 @@ msgstr "Не удалось найти подходящие носители. У
 msgid "Could not load medium! No disc inserted?"
 msgstr "Не удалось загрузить носитель! Проверьте, вставлен ли диск?"
 
-#, fuzzy
-msgid "Could not locate epg file on fallback tuner"
-msgstr "Включить импорт таймеров из резервного ресивера"
-
 msgid "Could not open Picture in Picture"
 msgstr "Невозможно открыть PiP (картинку в картинке)"
 
@@ -3077,6 +3073,10 @@ msgstr "EPG:"
 msgid "ERROR - failed to scan (%s)!"
 msgstr "ОШИБКА - сканирование не удалось (%s)!"
 
+#, python-format
+msgid "ERROR downloading file %s"
+msgstr ""
+
 msgid "East"
 msgstr "Восток"
 
@@ -3359,6 +3359,10 @@ msgstr "Eritrea"
 msgid "Error"
 msgstr "Ошибка"
 
+#, fuzzy, python-format
+msgid "Error %s"
+msgstr "Ошибка"
+
 msgid "Error code"
 msgstr "Код ошибки"
 
@@ -3391,10 +3395,25 @@ msgstr ""
 msgid "Error stop stream!"
 msgstr "Ошибка при остановке стрима!"
 
+msgid "Error when writing epg.dat on server"
+msgstr ""
+
+#, fuzzy
+msgid "Error while retreiving epg.dat from server"
+msgstr ""
+"Ошибка получения информации о резервных таймерах\n"
+"%s"
+
 #, python-format
 msgid ""
 "Error while retreiving fallback timer information\n"
 "%s"
+msgstr ""
+"Ошибка получения информации о резервных таймерах\n"
+"%s"
+
+#, fuzzy
+msgid "Error while retreiving location of epg.dat on server"
 msgstr ""
 "Ошибка получения информации о резервных таймерах\n"
 "%s"
@@ -5408,6 +5427,9 @@ msgstr "Нет доступного описания."
 msgid "No displayable files on this medium found!"
 msgstr "Нет отображаемых файлов на этом носителе!"
 
+msgid "No epg.dat file found server"
+msgstr ""
+
 msgid "No event info found, recording indefinitely."
 msgstr "Информация о событии не найдена, запись на неопределенное время."
 
@@ -5449,9 +5471,6 @@ msgstr "Нет сервиса"
 
 msgid "No services/providers selected"
 msgstr "Не выбраны сервисы/провайдеры"
-
-msgid "No settings files to download on fallback tuner"
-msgstr ""
 
 msgid "No standby"
 msgstr "не переходить в режим ожидания"
@@ -7497,6 +7516,13 @@ msgstr "Выберите набор символов с виртуальной �
 msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr "Выберите набор символов со сдвигом виртуальной клавиатуры только для следующего символа"
 
+#, fuzzy
+msgid "Select timezone area or region."
+msgstr "Выбор горизонтального разрешения:"
+
+msgid "Select timezone in the area or region."
+msgstr ""
+
 msgid "Select update source"
 msgstr "Выбор источника обновления"
 
@@ -9265,6 +9291,10 @@ msgid "Timeshift not possible!"
 msgstr "Таймшифт не возможен!"
 
 msgid "Timezone"
+msgstr "Часовой пояс"
+
+#, fuzzy
+msgid "Timezone area"
 msgstr "Часовой пояс"
 
 msgid "Timor-Leste"

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-28 22:31+0100\n"
-"PO-Revision-Date: 2020-03-04 22:12+0100\n"
+"POT-Creation-Date: 2020-03-21 09:07+0100\n"
+"PO-Revision-Date: 2020-03-21 09:12+0100\n"
 "Last-Translator: Pr2\n"
 "Language-Team: french\n"
 "Language: fr\n"
@@ -2331,9 +2331,6 @@ msgstr "Impossible de trouver un média qui convient - Veuillez effacer certaine
 msgid "Could not load medium! No disc inserted?"
 msgstr "Impossible de charger le support! Aucun disque inséré?"
 
-msgid "Could not locate epg file on fallback tuner"
-msgstr "Impossible de localiser le fichier epg sur le récepteur de repli distant"
-
 msgid "Could not open Picture in Picture"
 msgstr "Impossible d’ouvrir l’incrustation d’image (PiP)"
 
@@ -3064,6 +3061,10 @@ msgstr "EPG:"
 msgid "ERROR - failed to scan (%s)!"
 msgstr "ERREUR - échec lors de la recherche (%s)!"
 
+#, python-format
+msgid "ERROR downloading file %s"
+msgstr "ERREUR lors du téléchargement du fichier %s"
+
 msgid "East"
 msgstr "Est"
 
@@ -3346,6 +3347,10 @@ msgstr "Eritrée"
 msgid "Error"
 msgstr "Erreur"
 
+#, python-format
+msgid "Error %s"
+msgstr "Erreur %s"
+
 msgid "Error code"
 msgstr "Code d'erreur"
 
@@ -3378,6 +3383,12 @@ msgstr ""
 msgid "Error stop stream!"
 msgstr "Erreur arrêt du stream (diffusion)!"
 
+msgid "Error when writing epg.dat on server"
+msgstr "Erreur lors de l’écriture du epg.dat sur le serveur"
+
+msgid "Error while retreiving epg.dat from server"
+msgstr "Erreur lors de la récupération du epg.dat sur le serveur"
+
 #, python-format
 msgid ""
 "Error while retreiving fallback timer information\n"
@@ -3385,6 +3396,9 @@ msgid ""
 msgstr ""
 "Erreur lors de la récupération des informations de programmation de repli\n"
 "%s"
+
+msgid "Error while retreiving location of epg.dat on server"
+msgstr "Erreur lors de la localisation du epg.dat sur le serveur"
 
 #, python-format
 msgid ""
@@ -5391,6 +5405,9 @@ msgstr "Description non disponible."
 msgid "No displayable files on this medium found!"
 msgstr "Aucun fichier affichable trouvé sur ce support!"
 
+msgid "No epg.dat file found server"
+msgstr "Pas de epg.dat trouvé sur le serveur"
+
 msgid "No event info found, recording indefinitely."
 msgstr "Aucune information sur l’événement trouvée, enregistrement indéfini."
 
@@ -5432,9 +5449,6 @@ msgstr "Pas de service"
 
 msgid "No services/providers selected"
 msgstr "Aucun services/opérateurs sélectionnés"
-
-msgid "No settings files to download on fallback tuner"
-msgstr "Pas de fichiers de configuration à télécharger sur le récepteur de repli distant"
 
 msgid "No standby"
 msgstr "Pas de veille"
@@ -7473,6 +7487,12 @@ msgstr "Sélectionnez le jeu de caractères décalé du clavier virtuel"
 msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr "Sélectionnez le clavier virtuel décalé pour le caractère suivant uniquement"
 
+msgid "Select timezone area or region."
+msgstr "Sélectionner votre fuseau horaire ou votre région."
+
+msgid "Select timezone in the area or region."
+msgstr "Sélectionnez la fuseau horaire ou la région."
+
 msgid "Select update source"
 msgstr "Sélectionnez la source de mise à jour"
 
@@ -8693,7 +8713,7 @@ msgstr ""
 "\n"
 "Traducteur: Pr2\n"
 "Support: www.openpli.org\n"
-"Dernière MAJ: 04-03-2020"
+"Dernière MAJ: 21-03-2020"
 
 msgid "TS file is too large for ISO9660 level 1!"
 msgstr "Fichier TS trop grand pour le niveau 1 ISO9660!"
@@ -9252,6 +9272,9 @@ msgid "Timeshift not possible!"
 msgstr "PauseDirect impossible!"
 
 msgid "Timezone"
+msgstr "Fuseau horaire"
+
+msgid "Timezone area"
 msgstr "Fuseau horaire"
 
 msgid "Timor-Leste"
