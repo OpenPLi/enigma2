@@ -43,8 +43,8 @@ from Tools.StbHardware import setRTCoffset
 # Internet the defaults described above and listed below will be used.
 #
 # DEFAULT_AREA = "Classic"  # Use the classic timezone based list of timezones.
-DEFAULT_AREA = "Classic"  # OpenPLi
-DEFAULT_ZONE = "Athens"  # OpenPLi
+DEFAULT_AREA = "Europe"  # OpenATV, OpenPLi, OpenViX
+DEFAULT_ZONE = "Amsterdam"  # OpenPLi
 TIMEZONE_FILE = "/usr/share/enigma2/timezone.xml"  # This should be SCOPE_TIMEZONES_FILE!  This file moves arond the filesystem!!!  :(
 TIMEZONE_DATA = "/usr/share/zoneinfo/"  # This should be SCOPE_TIMEZONES_DATA!
 
