@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-21 09:07+0100\n"
-"PO-Revision-Date: 2020-03-03 08:50+0100\n"
+"POT-Creation-Date: 2020-03-22 19:05+0100\n"
+"PO-Revision-Date: 2020-03-22 11:02+0100\n"
 "Last-Translator: Željko <zeljko2@hi.ht.hr>\n"
 "Language-Team: Željko\n"
 "Language: hr_HR\n"
@@ -579,7 +579,7 @@ msgid "< Emergency >"
 msgstr "< Hitna pomoć >"
 
 msgid "< Pending restart >"
-msgstr "< U tijeku ponovno pokretanje >"
+msgstr "< U tijeku je ponovno pokretanje >"
 
 msgid "<Current movielist location>"
 msgstr "<Trenutna lokacija popisa videozapisa>"
@@ -1060,7 +1060,7 @@ msgid "Are you sure to purge all deleted user bouquets?"
 msgstr "Želite li zaista očistiti sve izbrisane korisničke pakete?"
 
 msgid "Are you sure to reboot to"
-msgstr "Želite li ponovno pokretanje sustava?"
+msgstr "Želite li ponovno pokrenuti sustav?"
 
 #, python-format
 msgid "Are you sure to remove all %d.%d%s%s services?"
@@ -2438,13 +2438,13 @@ msgid "Custom skip time for '7'/'9' buttons"
 msgstr "Prilagođeno vrijeme preskakanja tipki za '7'/'9'"
 
 msgid "Customize"
-msgstr "Prilagodite"
+msgstr "Prilagođavanje"
 
 msgid "Customize OpenWebIF settings for fallback tuner"
-msgstr "Prilagodite OpenWebIF postavke za rezervni tjuner"
+msgstr "Prilagoditi OpenWebIF postavke za rezervni tjuner"
 
 msgid "Customize channel list cursor behavior"
-msgstr "Prilagodite ponašanje pokazivača na popisu kanala"
+msgstr "Prilagoditi ponašanje pokazivača na popisu kanala"
 
 msgid "Cut"
 msgstr "Izreži"
@@ -3077,7 +3077,7 @@ msgstr "GREŠKA - nije uspjelo skeniranje (%s)!"
 
 #, python-format
 msgid "ERROR downloading file %s"
-msgstr ""
+msgstr "GREŠKA u preuzimanju datoteke %s"
 
 msgid "East"
 msgstr "Istok"
@@ -3264,7 +3264,7 @@ msgid "Encryption:"
 msgstr "Kodiranje:"
 
 msgid "End alternatives edit"
-msgstr "Završite alternativno uređivanje"
+msgstr "Završi alternativno uređivanje"
 
 msgid "End bouquet edit"
 msgstr "Završi uređivanje paketa"
@@ -3361,9 +3361,9 @@ msgstr "Eritreja"
 msgid "Error"
 msgstr "Greška"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Error %s"
-msgstr "Greška"
+msgstr "Greška %s"
 
 msgid "Error code"
 msgstr "Greška koda"
@@ -3398,13 +3398,10 @@ msgid "Error stop stream!"
 msgstr "Pogreška pri zaustavljanju web prijenosa!"
 
 msgid "Error when writing epg.dat on server"
-msgstr ""
+msgstr "Pogreška prilikom pisanja epg.dat na serveru"
 
-#, fuzzy
 msgid "Error while retreiving epg.dat from server"
-msgstr ""
-"Pogreška tijekom preuzimanja podataka o rezervnom tajmeru\n"
-"%s"
+msgstr "Pogreška prilikom preuzimanja epg.data sa servera"
 
 #, python-format
 msgid ""
@@ -3414,11 +3411,8 @@ msgstr ""
 "Pogreška tijekom preuzimanja podataka o rezervnom tajmeru\n"
 "%s"
 
-#, fuzzy
 msgid "Error while retreiving location of epg.dat on server"
-msgstr ""
-"Pogreška tijekom preuzimanja podataka o rezervnom tajmeru\n"
-"%s"
+msgstr "Pogreška prilikom dohvaćanja lokacije epg.data na serveru"
 
 #, python-format
 msgid ""
@@ -5429,7 +5423,7 @@ msgid "No displayable files on this medium found!"
 msgstr "Nema pronađenih datoteka na ovom mediju!"
 
 msgid "No epg.dat file found server"
-msgstr ""
+msgstr "Nije pronađen nijedan server epg.dat datoteke"
 
 msgid "No event info found, recording indefinitely."
 msgstr "Nije pronađen nijedan podatak o događaju, snimanje na neodređeno vrijeme."
@@ -5711,6 +5705,15 @@ msgstr "Otvorite postavke tjunera "
 
 msgid "Open the movie list"
 msgstr "Otvorite popis filmova"
+
+msgid "Operating LED status in deep standby mode"
+msgstr ""
+
+msgid "Operating LED status in standby mode"
+msgstr ""
+
+msgid "Operating LED status while running."
+msgstr ""
 
 msgid "Opkg"
 msgstr "Opkg"
@@ -6845,7 +6848,7 @@ msgid "Restart network"
 msgstr "Ponovno pokretanje mreže"
 
 msgid "Restart softcam"
-msgstr "Ponovno pokretanje SoftCam-a"
+msgstr "Ponovno pokrenite SoftCam"
 
 msgid "Restart test"
 msgstr "Ponovno pokretanje testa"
@@ -7513,12 +7516,11 @@ msgstr "Odaberite skup znakova pomaknutih virtualnom tipkovnicom"
 msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr "Odaberite skup znakova virtualne tipkovnice pomaknut samo za sljedeći znak"
 
-#, fuzzy
 msgid "Select timezone area or region."
-msgstr "Odaberite horizontalnu rezoluciju:"
+msgstr "Odaberite vremensku zonu ili regiju."
 
 msgid "Select timezone in the area or region."
-msgstr ""
+msgstr "Odaberite vremensku zonu u području ili regiji."
 
 msgid "Select update source"
 msgstr "Odaberite izvor ažuriranja"
@@ -8654,6 +8656,16 @@ msgstr "Promijenite kanal prema dolje"
 msgid "Switch channel up"
 msgstr "Promijenite kanal prema gore"
 
+msgid "Switch off the display during Standby Mode"
+msgstr ""
+
+msgid "Switch off the display during Suspend Mode"
+msgstr ""
+
+#, fuzzy
+msgid "Switch off the display during operation."
+msgstr "Pogledajte popis dostupnih proširenja zaslona i korisničkog sučelja."
+
 msgid "Switch to TV mode"
 msgstr "Prebacite se na TV način"
 
@@ -9292,9 +9304,8 @@ msgstr "Vremenski pomak nije moguć!"
 msgid "Timezone"
 msgstr "Vremenska zona"
 
-#, fuzzy
 msgid "Timezone area"
-msgstr "Vremenska zona"
+msgstr "Područje vremenske zone"
 
 msgid "Timor-Leste"
 msgstr "Timor-Leste"
@@ -10373,6 +10384,20 @@ msgstr "S pogreškama:"
 msgid "With popup"
 msgstr "S porukom"
 
+#, fuzzy
+msgid "With this option you can switch off the display during operation."
+msgstr "Ova opcija omogućuje vam da isključite zaslon."
+
+msgid "With this option you can switch off the display in Deep Standby Mode."
+msgstr ""
+
+#, fuzzy
+msgid "With this option you can switch off the display in Standby Mode."
+msgstr "Ova opcija omogućuje vam da isključite zaslon."
+
+msgid "With this option you can switch the LED color or deactivate the LED."
+msgstr ""
+
 msgid "Without popup"
 msgstr "Bez poruke"
 
@@ -10737,7 +10762,7 @@ msgid "a gui to assign services/providers/caids to common interface modules"
 msgstr "GUI za dodjeljivanje usluga/pružatelja usluga/caids-a zajedničkim modulima sučelja"
 
 msgid "about to start"
-msgstr "počinje"
+msgstr "o početku"
 
 msgid "activate network adapter configuration"
 msgstr "aktivirati konfiguraciju mrežnog adaptera"
@@ -11659,6 +11684,9 @@ msgstr "variete šou"
 msgid "vertical"
 msgstr "vertikalno"
 
+msgid "violet"
+msgstr ""
+
 msgid "wait for ci..."
 msgstr "pričekajte za CI..."
 
@@ -11709,7 +11737,7 @@ msgid "with errors"
 msgstr "s greškama"
 
 msgid "with text"
-msgstr "с tekstom"
+msgstr "s tekstom"
 
 msgid "with tuner name"
 msgstr "s imenom tjunera"
