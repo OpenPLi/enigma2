@@ -659,6 +659,10 @@ class SelectionEventInfo:
 		self.timer = eTimer()
 		self.timer.callback.append(self.updateEventInfo)
 		self.onShown.append(self.__selectionChanged)
+		self.onHide.append(self.__stopTimer)
+
+	def __stopTimer(self):
+		self.timer.stop()
 
 	def __selectionChanged(self):
 		self.timer.stop()
@@ -673,9 +677,9 @@ class SelectionEventInfo:
 			service.newService(cur)
 			self["Event"].newEvent(service.event)
 			if cur and service.event:
-				if self.update_root and self.shown:
+				if self.update_root and self.shown and self.getMutableList():
 					root = self.getRoot()
-					if root:
+					if root and hasattr(self, "editMode") and not self.editMode:
 						self.clearPath()
 						if self.bouquet_root:
 							self.enterPath(self.bouquet_root)
