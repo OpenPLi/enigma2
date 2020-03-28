@@ -13,7 +13,9 @@ class EnigmaLog:
 			data = data.encode(encoding="UTF-8", errors="ignore")
 		self.line += data
 		if "\n" in data:
-			ePythonOutput(self.line, self.level)
+			ePythonOutput(self.line, self.level)  # OpenPLi, OpenViX
+			# frame = sys._getframe(1)  # OpenATV
+			# ePythonOutput(frame.f_code.co_filename, frame.f_lineno, frame.f_code.co_name, self.line)  # OpenATV
 			self.line = ""
 
 	def flush(self):
