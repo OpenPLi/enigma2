@@ -390,10 +390,10 @@ int eSubtitleWidget::event(int event, void *data, void *data2)
 					text = replace_all(text, "<b>", "");
 				}
 				text = replace_all(text, "</font>", "");
-				unsigned subtitleFont = 0;
+				size_t subtitleFont = 0;
 				while ((subtitleFont = text.find("<font ", subtitleFont)) != std::string::npos)
 				{
-					unsigned end = text.find('>', subtitleFont);
+					size_t end = text.find('>', subtitleFont);
 					text.erase(subtitleFont, end - subtitleFont + 1);
 				}
 				subtitleStyles[face].font->pointSize=fontsize;
