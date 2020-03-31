@@ -23,7 +23,7 @@ class AutoDiseqc(Screen, ConfigListScreen):
 	]
 
 	sat_frequencies = [
-		# thor 08w Sky News
+		# Thor 0.8W Sky News
 		(
 			12418,
 			28000,
@@ -44,7 +44,7 @@ class AutoDiseqc(Screen, ConfigListScreen):
 			70,
 			"Thor 5/6/7 0.8w"),
 
-		# eutelsat 90e cctv
+		# Eutelsat 9.0E CCTV Europe
 		(
 			11996,
 			27500,
@@ -65,7 +65,7 @@ class AutoDiseqc(Screen, ConfigListScreen):
 			156,
 			"Eutelsat 9B 9.0e"),
 
-		# hotbird 130e rai
+		# Hotbird 13.0E Rai 1
 		(
 			10992,
 			27500,
@@ -86,10 +86,10 @@ class AutoDiseqc(Screen, ConfigListScreen):
 			318,
 			"Hotbird 13.0e"),
 
- 		# eutelsat 160e hrt
+ 		# Eutelsat 16.0E OTV
  		(
- 			10721,
- 			27500,
+ 			11345,
+ 			30000,
  			eDVBFrontendParametersSatellite.Polarisation_Horizontal,
  			eDVBFrontendParametersSatellite.FEC_3_4,
  			eDVBFrontendParametersSatellite.Inversion_Off,
@@ -103,11 +103,11 @@ class AutoDiseqc(Screen, ConfigListScreen):
 			eDVBFrontendParametersSatellite.PLS_Default_Gold_Code,
 			eDVBFrontendParametersSatellite.No_T2MI_PLP_Id,
 			eDVBFrontendParametersSatellite.T2MI_Default_Pid,
- 			20100,
+ 			24100,
  			366,
  			"Eutelsat 16A 16.0e"),
  
-		# astra 192e zdf
+		# Astra 19.2E ZDF
 		(
 			11953,
 			27500,
@@ -128,7 +128,7 @@ class AutoDiseqc(Screen, ConfigListScreen):
 			1,
 			"Astra 1 19.2e"),
 
-		# astra 235e astra ses
+		# Astra 23.5E Astra SES
 		(
 			12168,
 			27500,
@@ -149,7 +149,7 @@ class AutoDiseqc(Screen, ConfigListScreen):
 			3,
 			"Astra 3 23.5e"),
 
-		# astra 282e EPG background audio
+		# Astra 28.2E EPG background audio
 		(
 			11778,
 			27500,
@@ -170,7 +170,7 @@ class AutoDiseqc(Screen, ConfigListScreen):
 			2,
 			"Astra 2 28.2e"),
 
-		# hispasat 300e tsa
+		# Hispasat 30.0W TSA
 		(
 			10890,
 			27500,
@@ -187,13 +187,13 @@ class AutoDiseqc(Screen, ConfigListScreen):
 			eDVBFrontendParametersSatellite.PLS_Default_Gold_Code,
 			eDVBFrontendParametersSatellite.No_T2MI_PLP_Id,
 			eDVBFrontendParametersSatellite.T2MI_Default_Pid,
-			1388,
-			1388,
+			15,
+			2,
 			"Hispasat 30.0w"),
 	]
 
 	circular_sat_frequencies = [
-		# express AMU1 360 NHK World Japan
+		# Express AMU1 36.0E NHK World Japan
 		(
 			12341,
 			27500,
