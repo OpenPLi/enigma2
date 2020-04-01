@@ -1963,6 +1963,10 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 		lastservice = eServiceReference(self.lastservice.value)
 		if lastservice.valid():
 			self.setCurrentSelection(lastservice)
+			ref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
+			if ref and Components.ParentalControl.parentalControl.isProtected(ref):
+				if self.getCurrentSelection() and self.getCurrentSelection() != ref:
+					self.setCurrentSelection(ref)
 
 	def doTVButton(self):
 		if self.mode == MODE_TV:
