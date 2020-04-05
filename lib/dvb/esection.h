@@ -26,7 +26,7 @@ protected:
 	virtual int createTable(unsigned int nr, const uint8_t *data, unsigned int max)=0;
 	virtual unsigned int totalSections(unsigned int max) { return max + 1; }
 public:
-	sigc::signal1<void, int> tableReady;
+	sigc::signal<void(int)> tableReady;
 	eGTable();
 	RESULT start(iDVBSectionReader *reader, const eDVBTableSpec &table);
 	RESULT start(iDVBDemux *reader, const eDVBTableSpec &table);
@@ -90,7 +90,7 @@ protected:
 	void slotTableReady(int);
 public:
 	virtual ~eAUGTable(){};
-	sigc::signal1<void, int> tableReady;
+	sigc::signal<void(int)> tableReady;
 	virtual void getNext(int err)=0;
 };
 

@@ -646,12 +646,12 @@ void eDVBTeletextParser::setPageAndMagazine(int page, int magazine, const char *
 		m_page_X &= 0xFF;
 }
 
-void eDVBTeletextParser::connectNewStream(const sigc::slot0<void> &slot, ePtr<eConnection> &connection)
+void eDVBTeletextParser::connectNewStream(const sigc::slot<void()> &slot, ePtr<eConnection> &connection)
 {
 	connection = new eConnection(this, m_new_subtitle_stream.connect(slot));
 }
 
-void eDVBTeletextParser::connectNewPage(const sigc::slot1<void, const eDVBTeletextSubtitlePage&> &slot, ePtr<eConnection> &connection)
+void eDVBTeletextParser::connectNewPage(const sigc::slot<void(const eDVBTeletextSubtitlePage&)> &slot, ePtr<eConnection> &connection)
 {
 	connection = new eConnection(this, m_new_subtitle_page.connect(slot));
 }
