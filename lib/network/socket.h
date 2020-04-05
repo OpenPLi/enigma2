@@ -54,12 +54,12 @@ public:
 			Listening, Connection, Closing };
 	int state();
 
-	sigc::signal0<void> connectionClosed_;
-	sigc::signal0<void> connected_;
-	sigc::signal0<void> readyRead_;
-	sigc::signal0<void> hangup;
-	sigc::signal1<void,int> bytesWritten_;
-	sigc::signal1<void,int> error_;
+	sigc::signal<void()> connectionClosed_;
+	sigc::signal<void()> connected_;
+	sigc::signal<void()> readyRead_;
+	sigc::signal<void()> hangup;
+	sigc::signal<void(int)> bytesWritten_;
+	sigc::signal<void(int)> error_;
 };
 
 class eUnixDomainSocket: public eSocket
