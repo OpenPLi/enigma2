@@ -187,11 +187,8 @@ class PliExtraInfo(Poll, Converter):
 				pass
 		if not mode:
 			try:
-				mab = int(open("/proc/stb/vmpeg/0/progressive", "r").read())
-				if mab == 1:
-					mode = "p"
-				else:
-					mode = "i"
+				if os.path.exists("/proc/stb/vmpeg/0/progressive"):
+					mode = "p" if int(open("/proc/stb/vmpeg/0/progressive", "r").read(),16) else "i"
 			except:
 				pass
 		return "%sx%s%s%s" % (xres, yres, mode, fps)
