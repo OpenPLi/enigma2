@@ -95,7 +95,7 @@ static int frequency[3][4] = {
 	{ 11025,12000,8000,0 }
 };
 
-void eDVBRdsDecoder::connectEvent(const sigc::slot1<void, int> &slot, ePtr<eConnection> &connection)
+void eDVBRdsDecoder::connectEvent(const sigc::slot<void(int)> &slot, ePtr<eConnection> &connection)
 {
 	connection = new eConnection(this, m_event.connect(slot));
 }

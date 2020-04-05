@@ -90,7 +90,7 @@ class eDVBScan: public sigc::trackable, public iObject
 
 	void channelDone();
 
-	sigc::signal1<void,int> m_event;
+	sigc::signal<void(int)> m_event;
 	RESULT processSDT(eDVBNamespace dvbnamespace, const ServiceDescriptionSection &sdt);
 	RESULT processVCT(eDVBNamespace dvbnamespace, const VirtualChannelTableSection &vct, int onid);
 
@@ -112,7 +112,7 @@ public:
 	void start(const eSmartPtrList<iDVBFrontendParameters> &known_transponders, int flags, int networkid = 0);
 
 	enum { evtUpdate, evtNewService, evtFinish, evtFail };
-	RESULT connectEvent(const sigc::slot1<void,int> &event, ePtr<eConnection> &connection);
+	RESULT connectEvent(const sigc::slot<void(int)> &event, ePtr<eConnection> &connection);
 	void insertInto(iDVBChannelList *db, bool backgroundscanresult=false);
 
 	void getStats(int &transponders_done, int &transponders_total, int &services);

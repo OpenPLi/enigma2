@@ -578,7 +578,7 @@ void eDVBVideo::video_event(int)
 	}
 }
 
-RESULT eDVBVideo::connectEvent(const sigc::slot1<void, struct iTSMPEGDecoder::videoEvent> &event, ePtr<eConnection> &conn)
+RESULT eDVBVideo::connectEvent(const sigc::slot<void(struct iTSMPEGDecoder::videoEvent)> &event, ePtr<eConnection> &conn)
 {
 	conn = new eConnection(this, m_event.connect(event));
 	return 0;
@@ -1308,7 +1308,7 @@ void eTSMPEGDecoder::finishShowSinglePic()
 	}
 }
 
-RESULT eTSMPEGDecoder::connectVideoEvent(const sigc::slot1<void, struct videoEvent> &event, ePtr<eConnection> &conn)
+RESULT eTSMPEGDecoder::connectVideoEvent(const sigc::slot<void(struct videoEvent)> &event, ePtr<eConnection> &conn)
 {
 	conn = new eConnection(this, m_video_event.connect(event));
 	return 0;
