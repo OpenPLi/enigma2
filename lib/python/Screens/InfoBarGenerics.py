@@ -2027,7 +2027,7 @@ class InfoBarTimeshift():
 		if int(config.usage.timeshift_start_delay.value):
 			self.ts_start_delay_timer.start(int(config.usage.timeshift_start_delay.value) * 1000, True)
 
-	def checkTimeshiftRunning(self, returnFunction):
+	def checkTimeshiftRunning(self, returnFunction, timeout=-1):
 		if self.timeshiftEnabled() and config.usage.check_timeshift.value and self.timeshift_was_activated:
 			message = _("Stop timeshift?")
 			if not self.save_timeshift_file:
@@ -2039,7 +2039,7 @@ class InfoBarTimeshift():
 					remaining = self.currentEventTime()
 					if remaining > 0:
 						message += "\n" + _("The %d min remaining before the end of the event.") % abs(remaining / 60)
-			self.session.openWithCallback(boundFunction(self.checkTimeshiftRunningCallback, returnFunction), MessageBox, message, simple = True, list = choice)
+			self.session.openWithCallback(boundFunction(self.checkTimeshiftRunningCallback, returnFunction), MessageBox, message, timeout=timeout, simple=True, list=choice)
 		else:
 			returnFunction(True)
 
