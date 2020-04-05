@@ -45,13 +45,13 @@ RESULT eNavigation::playService(const eServiceReference &service)
 	return res;
 }
 
-RESULT eNavigation::connectEvent(const sigc::slot1<void,int> &event, ePtr<eConnection> &connection)
+RESULT eNavigation::connectEvent(const sigc::slot<void(int)> &event, ePtr<eConnection> &connection)
 {
 	connection = new eConnection(this, m_event.connect(event));
 	return 0;
 }
 
-RESULT eNavigation::connectRecordEvent(const sigc::slot2<void,ePtr<iRecordableService>,int> &event, ePtr<eConnection> &connection)
+RESULT eNavigation::connectRecordEvent(const sigc::slot<void(ePtr<iRecordableService>,int)> &event, ePtr<eConnection> &connection)
 {
 	connection = new eConnection(this, m_record_event.connect(event));
 	return 0;

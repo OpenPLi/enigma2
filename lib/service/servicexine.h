@@ -49,7 +49,7 @@ public:
 	virtual ~eServiceXine();
 
 		// iPlayableService
-	RESULT connectEvent(const sigc::slot2<void,iPlayableService*,int> &event, ePtr<eConnection> &connection);
+	RESULT connectEvent(const sigc::slot<void(iPlayableService*,int)> &event, ePtr<eConnection> &connection);
 	RESULT start();
 	RESULT stop();
 
@@ -94,7 +94,7 @@ private:
 	friend class eServiceFactoryXine;
 	std::string m_filename;
 	eServiceXine(const char *filename);
-	sigc::signal2<void,iPlayableService*,int> m_event;
+	sigc::signal<void(iPlayableService*,int)> m_event;
 
 	xine_stream_t *stream;
 	xine_video_port_t *vo_port;

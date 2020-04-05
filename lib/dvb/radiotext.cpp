@@ -135,7 +135,7 @@ void eDVBRdsDecoder::convertRdsMessageToUTF8(unsigned char* buffer, std::string&
 	}
 }
 
-void eDVBRdsDecoder::connectEvent(const sigc::slot1<void, int> &slot, ePtr<eConnection> &connection)
+void eDVBRdsDecoder::connectEvent(const sigc::slot<void(int)> &slot, ePtr<eConnection> &connection)
 {
 	connection = new eConnection(this, m_event.connect(slot));
 }
