@@ -2,6 +2,7 @@ from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
 from Components.Label import Label
 from Components.config import config
+from Components.Sources.ServiceEvent import ServiceEvent
 from Components.TimerList import TimerList
 from Components.TimerSanityCheck import TimerSanityCheck
 from Components.UsageConfig import preferredTimerPath
@@ -34,6 +35,7 @@ class TimerEditList(Screen):
 		self.list = list
 		self.url = None
 		self["timerlist"] = TimerList(list)
+		self["Service"] = ServiceEvent()
 
 		self.key_red_choice = self.EMPTY
 		self.key_yellow_choice = self.EMPTY
@@ -159,6 +161,7 @@ class TimerEditList(Screen):
 	def updateState(self):
 		cur = self["timerlist"].getCurrent()
 		if cur:
+			self["Service"].newService(cur.service_ref.ref)
 			if cur.external:
 				self["key_info"].setText("")
 			else:
