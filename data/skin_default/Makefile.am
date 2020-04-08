@@ -41,7 +41,7 @@ dist_install_DATA = \
 	picon_default.png \
 	position_arrow.png \
 	position_pointer.png \
-	prev.png \	
+	prev.png \
 	progress_bg.png \
 	progress_big.png \
 	progress_medium.png \
