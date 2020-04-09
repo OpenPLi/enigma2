@@ -859,7 +859,7 @@ void eDVBScan::channelDone()
 						eDVBFrontendParametersSatellite p;
 						m_ch_current->getDVBS(p);
 
-						if (p.is_id != sat.is_id || p.pls_mode != sat.pls_code || p.pls_code != sat.pls_code)
+						if (p.is_id != sat.is_id || p.pls_mode != sat.pls_mode || p.pls_code != sat.pls_code)
 						{
 							p.set(d); //set multistream descriptor to current tuned data
 							feparm->setDVBS(p);
