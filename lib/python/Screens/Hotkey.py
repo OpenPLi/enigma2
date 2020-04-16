@@ -143,6 +143,8 @@ def getHotkeyFunctions():
 	hotkey.functions.append((_("Show extension selection"), "Infobar/showExtensionSelection", "InfoBar"))
 	hotkey.functions.append((_("Zap down"), "Infobar/zapDown", "InfoBar"))
 	hotkey.functions.append((_("Zap up"), "Infobar/zapUp", "InfoBar"))
+	hotkey.functions.append((_("Volume up"), "Infobar/volumeUp", "InfoBar"))
+	hotkey.functions.append((_("Volume down"), "Infobar/volumeDown", "InfoBar"))
 	hotkey.functions.append((_("Switch channel up"), "Infobar/switchChannelUp", "InfoBar"))
 	hotkey.functions.append((_("Switch channel down"), "Infobar/switchChannelDown", "InfoBar"))
 	hotkey.functions.append((_("Show service list"), "Infobar/openServiceList", "InfoBar"))
