@@ -10,7 +10,7 @@ from time import time
 import RecordTimer
 import Screens.Standby
 import NavigationInstance
-import ServiceReference
+from ServiceReference import ServiceReference, isPlayableForCur
 from Screens.InfoBar import InfoBar
 from Components.Sources.StreamService import StreamServiceList
 
@@ -73,16 +73,16 @@ class Navigation:
 			self.currentlyPlayingService = None
 
 	def dispatchRecordEvent(self, rec_service, event):
-#		print "record_event", rec_service, event
+#		print "[Navigation] record_event", rec_service, event
 		for x in self.record_event:
 			x(rec_service, event)
 
 	def playService(self, ref, checkParentalControl=True, forceRestart=False, adjust=True):
 		oldref = self.currentlyPlayingServiceOrGroup
 		if ref and oldref and ref == oldref and not forceRestart:
-			print "ignore request to play already running service(1)"
+			print "[Navigation] ignore request to play already running service(1)"
 			return 1
-		print "playing", ref and ref.toString()
+		print "[Navigation] playing: ", ref and ref.toString()
 		if ref is None:
 			self.stopService()
 			return 0
@@ -91,10 +91,20 @@ class Navigation:
 		if not checkParentalControl or parentalControl.isServicePlayable(ref, boundFunction(self.playService, checkParentalControl=False, forceRestart=forceRestart, adjust=adjust)):
 			if ref.flags & eServiceReference.isGroup:
 				oldref = self.currentlyPlayingServiceReference or eServiceReference()
-				playref = getBestPlayableServiceReference(ref, oldref)
-				print "playref", playref
+				if config.misc.use_ci_assignment.value:
+					def ResolveCiAlternative(ref):
+						serviceList = self.ServiceHandler and self.ServiceHandler.list(ref)
+						if serviceList:
+							for service in serviceList.getContent("R"):
+								if isPlayableForCur(service):
+									return service
+						return None
+					playref = ResolveCiAlternative(ref)
+				else:
+					playref = getBestPlayableServiceReference(ref, oldref)
+				print "[Navigation] alternative ref: ", playref and playref.toString()
 				if playref and oldref and playref == oldref and not forceRestart:
-					print "ignore request to play already running service(2)"
+					print "[Navigation] ignore request to play already running service(2)"
 					return 1
 				if not playref:
 					alternativeref = getBestPlayableServiceReference(ref, eServiceReference(), True)
@@ -103,7 +113,7 @@ class Navigation:
 						self.currentlyPlayingServiceReference = alternativeref
 						self.currentlyPlayingServiceOrGroup = ref
 						if self.pnav.playService(alternativeref):
-							print "Failed to start", alternativeref
+							print "[Navigation] Failed to start: ", alternativeref.toString()
 							self.currentlyPlayingServiceReference = None
 							self.currentlyPlayingServiceOrGroup = None
 					return 0
@@ -148,7 +158,7 @@ class Navigation:
 									setPreferredTuner(int(config.usage.frontend_priority_dvbs.value))
 									setPriorityFrontend = True
 				if self.pnav.playService(playref):
-					print "Failed to start", playref
+					print "[Navigation] Failed to start: ", playref.toString()
 					self.currentlyPlayingServiceReference = None
 					self.currentlyPlayingServiceOrGroup = None
 				if setPriorityFrontend:
@@ -166,15 +176,15 @@ class Navigation:
 
 	def recordService(self, ref, simulate=False):
 		service = None
-		if not simulate: print "recording service: %s" % (str(ref))
-		if isinstance(ref, ServiceReference.ServiceReference):
+		if not simulate: print "[Navigation] recording service: %s" % (str(ref))
+		if isinstance(ref, ServiceReference):
 			ref = ref.ref
 		if ref:
 			if ref.flags & eServiceReference.isGroup:
 				ref = getBestPlayableServiceReference(ref, eServiceReference(), simulate)
 			service = ref and self.pnav and self.pnav.recordService(ref, simulate)
 			if service is None:
-				print "record returned non-zero"
+				print "[Navigation] record returned non-zero"
 		return service
 
 	def stopRecordService(self, service):
