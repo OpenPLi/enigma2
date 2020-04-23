@@ -116,7 +116,7 @@ class ImportChannels():
 		self.ImportChannelsDone(True, {"channels": _("Channels"), "epg": _("EPG"), "channels_epg": _("Channels and EPG")}[config.usage.remote_fallback_import.value])
 
 	def ImportChannelsDone(self, flag, message=None):
-		os.rmdir("/tmp/tmp")
+		shutil.rmtree("/tmp/tmp", True)
 		if flag:
 			Notifications.AddNotificationWithID("ChannelsImportOK", MessageBox, _("%s imported from fallback tuner") % message, type=MessageBox.TYPE_INFO, timeout=5)
 		else:
