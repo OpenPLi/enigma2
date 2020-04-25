@@ -94,7 +94,7 @@ class ImportChannels():
 					file = file.encode("UTF-8")
 					print "[Import Channels] Downloading %s" % file
 					try:
-						open(os.join(self.tmp_dir, os.path.basename(file)), "wb").write(self.getUrl("%s/file?file=%s" % (self.url, file)).read())
+						open(os.path.join(self.tmp_dir, os.path.basename(file)), "wb").write(self.getUrl("%s/file?file=%s" % (self.url, file)).read())
 					except:
 						self.ImportChannelsDone(False, _("ERROR downloading file %s") % file)
 						return
@@ -104,15 +104,15 @@ class ImportChannels():
 			print "[Import Channels] Removing files..."
 			files = [file for file in os.listdir("/etc/enigma2") if file.startswith(settingfiles)]
 			for file in files:
-				os.remove(os.join("/etc/enigma2", file)
+				os.remove(os.path.join("/etc/enigma2", file))
 			print "[Import Channels] copying files..."
 			files = [x for x in os.listdir(self.tmp_dir) if x.startswith(settingfiles)]
 			for file in files:
-				shutil.move(os.join(self.tmp_dir, file), os.join("/etc/enigma2", file))
+				shutil.move(os.path.join(self.tmp_dir, file), os.path.join("/etc/enigma2", file))
 		self.ImportChannelsDone(True, {"channels": _("Channels"), "epg": _("EPG"), "channels_epg": _("Channels and EPG")}[config.usage.remote_fallback_import.value])
 
 	def ImportChannelsDone(self, flag, message=None):
-		shutil.rmtree("/tmp/tmp", True)
+		shutil.rmtree(self.tmp_dir, True)
 		if flag:
 			Notifications.AddNotificationWithID("ChannelsImportOK", MessageBox, _("%s imported from fallback tuner") % message, type=MessageBox.TYPE_INFO, timeout=5)
 		else:
