@@ -36,4 +36,9 @@ std::string strip_non_graph(std::string s);
 std::vector<std::string> split(std::string s, const std::string& separator);
 int strcasecmp(const std::string& s1, const std::string& s2);
 
+std::string formatNumber(size_t size, const std::string& suffix={}, bool binary = false);
+inline std::string formatBits(size_t size) { return formatNumber(size, "bit"); }
+inline std::string formatBytes(size_t size) { return formatNumber(size, "B", true); }
+inline std::string formatHz(size_t size) { return formatNumber(size, "Hz"); }
+
 #endif // __E_STRING__

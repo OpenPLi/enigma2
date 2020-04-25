@@ -3,6 +3,8 @@
 #include <cctype>
 #include <climits>
 #include <string>
+#include <sstream>
+#include <map>
 #include <lib/base/eerror.h>
 #include <lib/base/encoding.h>
 #include <lib/base/estring.h>
@@ -958,4 +960,36 @@ std::vector<std::string> split(std::string s, const std::string& separator)
 int strcasecmp(const std::string& s1, const std::string& s2)
 {
 	return ::strcasecmp(s1.c_str(), s2.c_str());
+}
+
+std::string formatNumber(size_t size, const std::string& suffix, bool binary)
+{
+	std::map<uint8_t, std::string> unit = {
+		{  24, "Y" },
+		{  21, "Z" },
+		{  18, "E" },
+		{  15, "P" },
+		{  12, "T" },
+		{   9, "G" },
+		{   6, "M" },
+		{   3, binary ? "K" : "k" },
+		{   0, ""  }
+	};
+
+	uint8_t k = 0;
+	size_t rem = 0;
+	uint16_t base = binary ? 1024 : 1000;
+
+	while (size >= base)
+	{
+		rem = size % base;
+		k += 3;
+		size /= base;
+	}
+
+	float num = size + (rem*1.0f/base);
+
+	std::stringstream ss;
+	ss << num << " " << unit[k] << suffix;
+	return ss.str();
 }
