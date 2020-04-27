@@ -435,7 +435,8 @@ class MultibootSelection(SelectImage):
 
 	def unmountCallback(self, value, data=None, retval=None, extra_args=None):
 		self.container.killAll()
-		shutil.rmtree(self.tmp_dir, True)
+		if not os.path.ismount(self.tmp_dir):
+			os.rmdir(self.tmp_dir)
 		if value == 2:
 			from Screens.Standby import TryQuitMainloop
 			self.session.open(TryQuitMainloop, 2)
