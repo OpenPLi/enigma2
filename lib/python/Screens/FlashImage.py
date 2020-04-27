@@ -15,7 +15,7 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from Tools.Downloader import downloadWithProgress
 from Tools.HardwareInfo import HardwareInfo
 from Tools.Multiboot import GetImagelist, GetCurrentImage, GetCurrentImageMode
-import os, urllib2, json, time, zipfile, shutil
+import os, urllib2, json, time, zipfile, shutil, tempfile
 
 from enigma import eEPGCache
 
@@ -404,6 +404,7 @@ class MultibootSelection(SelectImage):
 		self.session = session
 		self.imagesList = None
 		self.expanded = []
+		self.tmp_dir = None
 		self.setTitle(_("Multiboot image selector"))
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Reboot"))
@@ -430,21 +431,24 @@ class MultibootSelection(SelectImage):
 
 	def cancel(self, value=None):
 		self.container = Console()
-		self.container.ePopen('umount /tmp/startupmount', boundFunction(self.unmountCallback, value))
+		self.container.ePopen('umount %s' % self.tmp_dir, boundFunction(self.unmountCallback, value))
 
 	def unmountCallback(self, value, data=None, retval=None, extra_args=None):
 		self.container.killAll()
-		if not os.path.ismount('/tmp/startupmount'):
-			os.rmdir('/tmp/startupmount')
-		self.close(value)
+		shutil.rmtree(self.tmp_dir, True)
+		if value == 2:
+			from Screens.Standby import TryQuitMainloop
+			self.session.open(TryQuitMainloop, 2)
+		else:
+			self.close(value)
 
 	def getBootOptions(self, value=None):
 		self.container = Console()
-		if os.path.isdir('/tmp/startupmount'):
+		if self.tmp_dir:
 			self.getImagesList()
 		else:
-			os.mkdir('/tmp/startupmount')
-			self.container.ePopen('mount %s /tmp/startupmount' % SystemInfo["MultibootStartupDevice"], self.getImagesList)
+			self.tmp_dir = tempfile.mkdtemp(prefix="MultibootSelection")
+			self.container.ePopen('mount %s %s' % (SystemInfo["MultibootStartupDevice"], self.tmp_dir), self.getImagesList)
 
 	def getImagesList(self, data=None, retval=None, extra_args=None):
 		self.container.killAll()
@@ -462,9 +466,9 @@ class MultibootSelection(SelectImage):
 						list.append(ChoiceEntryComponent('',((_("slot%s - %s mode 12 (current image)") if x == currentimageslot and mode == 12 else _("slot%s - %s mode 12")) % (x, imagesdict[x]['imagename']), x + 12)))
 					else:
 						list.append(ChoiceEntryComponent('',((_("slot%s - %s (current image)") if x == currentimageslot and mode != 12 else _("slot%s - %s")) % (x, imagesdict[x]['imagename']), x)))
-		if os.path.isfile("/tmp/startupmount/STARTUP_RECOVERY"):
+		if os.path.isfile(os.path.join(self.tmp_dir, "STARTUP_RECOVERY")):
 			list.append(ChoiceEntryComponent('',((_("Boot to Recovery menu")), "Recovery")))
-		if os.path.isfile("/tmp/startupmount/STARTUP_ANDROID"):
+		if os.path.isfile(os.path.join(self.tmp_dir, "STARTUP_ANDROID")):
 			list.append(ChoiceEntryComponent('',((_("Boot to Android image")), "Android")))
 		if not list:
 			list.append(ChoiceEntryComponent('',((_("No images found")), "Waiter")))
@@ -479,18 +483,18 @@ class MultibootSelection(SelectImage):
 	def doReboot(self, answer):
 		if answer:
 			if self.slot == "Recovery":
-				shutil.copyfile("/tmp/startupmount/STARTUP_RECOVERY", "/tmp/startupmount/STARTUP")
+				shutil.copyfile(os.path.join(self.tmp_dir, "STARTUP_RECOVERY"), os.path.join(self.tmp_dir, "STARTUP"))
 			elif self.slot == "Android":
-				shutil.copyfile("/tmp/startupmount/STARTUP_ANDROID", "/tmp/startupmount/STARTUP")
+				shutil.copyfile(os.path.join(self.tmp_dir, "STARTUP_ANDROID"), os.path.join(self.tmp_dir, "STARTUP"))
 			elif SystemInfo["canMultiBoot"][self.slot % 12]['startupfile']:
 				if SystemInfo["canMode12"]:
 					if self.slot < 12:
-						startupfile = "/tmp/startupmount/%s_1" % SystemInfo["canMultiBoot"][self.slot]['startupfile'].rsplit('_', 1)[0]
+						startupfile = os.path.join(self.tmp_dir, "%s_1" % SystemInfo["canMultiBoot"][self.slot]['startupfile'].rsplit('_', 1)[0])
 					else:
-						startupfile = "/tmp/startupmount/%s_12" % SystemInfo["canMultiBoot"][self.slot - 12]['startupfile'].rsplit('_', 1)[0]
+						startupfile = os.path.join(self.tmp_dir, "%s_12" % SystemInfo["canMultiBoot"][self.slot - 12]['startupfile'].rsplit('_', 1)[0])
 				else:
-					startupfile = "/tmp/startupmount/%s" % SystemInfo["canMultiBoot"][self.slot]['startupfile']
-				shutil.copyfile(startupfile, "/tmp/startupmount/STARTUP")
+					startupfile = os.path.join(self.tmp_dir, "%s" % SystemInfo["canMultiBoot"][self.slot]['startupfile'])
+				shutil.copyfile(startupfile, os.path.join(self.tmp_dir, "STARTUP"))
 			else:
 				model = HardwareInfo().get_machine_name()
 				if self.slot < 12:
@@ -498,9 +502,8 @@ class MultibootSelection(SelectImage):
 				else:
 					self.slot -= 12
 					startupFileContents = "boot emmcflash0.kernel%s 'brcm_cma=520M@248M brcm_cma=%s@768M root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=12'\n" % (self.slot, SystemInfo["canMode12"], self.slot * 2 + 1, model)
-				open('/tmp/startupmount/STARTUP', 'w').write(startupFileContents)
-			from Screens.Standby import TryQuitMainloop
-			self.session.open(TryQuitMainloop, 2)
+				open(os.path.join(self.tmp_dir, "STARTUP"), 'w').write(startupFileContents)
+			self.cancel(2)
 
 	def selectionChanged(self):
 		pass
