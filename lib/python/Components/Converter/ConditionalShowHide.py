@@ -8,7 +8,12 @@ class ConditionalShowHide(Converter, object):
 		self.invert = "Invert" in args
 		self.blink = "Blink" in args
 		if self.blink:
-			self.blinktime = len(args) == 2 and args[1].isdigit() and int(args[1]) or 500
+			self.blinktime = len(args) > 1 and args[1].isdigit() and int(args[1]) or 500
+			if len(args) == 3:
+				self.asymmetric = True
+				self.blinkhide = args[2].isdigit() and int(args[2]) or 500
+			else:
+				self.asymmetric = False
 			self.timer = eTimer()
 			self.timer.callback.append(self.blinkFunc)
 		else:
@@ -20,12 +25,19 @@ class ConditionalShowHide(Converter, object):
 
 	def blinkFunc(self):
 		if self.blinking:
+			show = False
 			for x in self.downstream_elements:
 				x.visible = not x.visible
+				show = x.visible
+			if self.asymmetric:
+				self.timer.start(self.blinkhide if show else self.blinktime, True)
 
 	def startBlinking(self):
 		self.blinking = True
-		self.timer.start(self.blinktime)
+		if self.asymmetric:
+			self.timer.start(self.blinktime, True)
+		else:
+			self.timer.start(self.blinktime)
 
 	def stopBlinking(self):
 		self.blinking = False
