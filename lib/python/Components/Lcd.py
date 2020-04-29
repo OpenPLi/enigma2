@@ -3,6 +3,7 @@ from enigma import eDBoxLCD
 from Components.SystemInfo import SystemInfo
 from Screens.InfoBar import InfoBar
 from Screens.Screen import Screen
+from enigma import getBoxType
 
 class dummyScreen(Screen):
 	skin = """<screen position="0,0" size="0,0" transparent="1">
@@ -74,7 +75,10 @@ def InitLcd():
 			config.lcd.contrast.addNotifier(setLCDcontrast);
 		else:
 			config.lcd.contrast = ConfigNothing()
-			standby_default = 1
+			if getBoxType() in ('dm900','dm920'):
+				standby_default = 4
+			else:
+				standby_default = 1
 
 		config.lcd.standby = ConfigSlider(default=standby_default, limits=(0, 10))
 		config.lcd.standby.addNotifier(setLCDbright);

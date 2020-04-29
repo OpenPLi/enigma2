@@ -28,6 +28,11 @@ class ServiceInfo(Converter):
 	SUBTITLES_AVAILABLE = 19
 	EDITMODE = 20
 	IS_STREAM = 21
+
+	HAS_NOT_HBBTV = 38
+	HAS_NOT_TELETEXT = 39
+	IS_NOT_CRYPTED = 40
+
 	IS_SD = 22
 	IS_HD = 23
 	IS_SD_AND_WIDESCREEN = 24
@@ -45,15 +50,18 @@ class ServiceInfo(Converter):
 	IS_VIDEO_AVC = 36
 	IS_VIDEO_HEVC = 37
 
+
 	def __init__(self, type):
 		Converter.__init__(self, type)
 		self.type, self.interesting_events = {
 				"HasTelext": (self.HAS_TELETEXT, (iPlayableService.evUpdatedInfo,)),
+				"HasNotTelext": (self.HAS_NOT_TELETEXT, (iPlayableService.evUpdatedInfo,)),
 				"IsMultichannel": (self.IS_MULTICHANNEL, (iPlayableService.evUpdatedInfo,)),
 				"IsStereo": (self.IS_STEREO, (iPlayableService.evUpdatedInfo,)),
 				"IsCrypted": (self.IS_CRYPTED, (iPlayableService.evUpdatedInfo,)),
-				"IsWidescreen": (self.IS_WIDESCREEN, (iPlayableService.evVideoSizeChanged,)),
-				"IsNotWidescreen": (self.IS_NOT_WIDESCREEN, (iPlayableService.evVideoSizeChanged,)),
+				"IsNotCrypted": (self.IS_NOT_CRYPTED, (iPlayableService.evUpdatedInfo,)),
+				"IsWidescreen": (self.IS_WIDESCREEN, (iPlayableService.evVideoSizeChanged, iPlayableService.evUpdatedInfo)),
+				"IsNotWidescreen": (self.IS_NOT_WIDESCREEN, (iPlayableService.evVideoSizeChanged, iPlayableService.evUpdatedInfo)),
 				"SubservicesAvailable": (self.SUBSERVICES_AVAILABLE, (iPlayableService.evStart,)),
 				"VideoWidth": (self.XRES, (iPlayableService.evVideoSizeChanged,)),
 				"VideoHeight": (self.YRES, (iPlayableService.evVideoSizeChanged,)),
@@ -68,6 +76,7 @@ class ServiceInfo(Converter):
 				"Framerate": (self.FRAMERATE, (iPlayableService.evVideoSizeChanged, iPlayableService.evUpdatedInfo)),
 				"TransferBPS": (self.TRANSFERBPS, (iPlayableService.evUpdatedInfo)),
 				"HasHBBTV": (self.HAS_HBBTV, (iPlayableService.evUpdatedInfo,iPlayableService.evHBBTVInfo, iPlayableService.evStart)),
+				"HasNotHBBTV": (self.HAS_NOT_HBBTV, (iPlayableService.evUpdatedInfo,iPlayableService.evHBBTVInfo, iPlayableService.evStart)),
 				"AudioTracksAvailable": (self.AUDIOTRACKS_AVAILABLE, (iPlayableService.evUpdatedInfo, iPlayableService.evStart)),
 				"SubtitlesAvailable": (self.SUBTITLES_AVAILABLE, (iPlayableService.evUpdatedInfo, iPlayableService.evStart)),
 				"Editmode": (self.EDITMODE, (iPlayableService.evUpdatedInfo, iPlayableService.evStart)),
@@ -112,6 +121,9 @@ class ServiceInfo(Converter):
 			if self.type == self.HAS_TELETEXT:
 				tpid = info.getInfo(iServiceInformation.sTXTPID)
 				return tpid != -1
+			if self.type == self.HAS_NOT_TELETEXT:
+				tpid = info.getInfo(iServiceInformation.sTXTPID)
+				return tpid == -1
 			elif self.type in (self.IS_MULTICHANNEL, self.IS_STEREO):
 				# FIXME. but currently iAudioTrackInfo doesn't provide more information.
 				audio = service.audioTracks()
@@ -134,10 +146,14 @@ class ServiceInfo(Converter):
 				return False
 			elif self.type == self.IS_CRYPTED:
 				return info.getInfo(iServiceInformation.sIsCrypted) == 1
+			elif self.type == self.IS_NOT_CRYPTED:
+				return info.getInfo(iServiceInformation.sIsCrypted) != 1
 			elif self.type == self.SUBSERVICES_AVAILABLE:
 				return hasActiveSubservicesForCurrentChannel(service)
 			elif self.type == self.HAS_HBBTV:
 				return info.getInfoString(iServiceInformation.sHBBTVUrl) != ""
+			elif self.type == self.HAS_NOT_HBBTV:
+				return info.getInfoString(iServiceInformation.sHBBTVUrl) == ""
 			elif self.type == self.AUDIOTRACKS_AVAILABLE:
 				audio = service.audioTracks()
 				return bool(audio and audio.getNumberOfTracks() > 1)
@@ -214,6 +230,8 @@ class ServiceInfo(Converter):
 				return self.getServiceInfoString(info, iServiceInformation.sTransferBPS, lambda x: _("%d kB/s") % (x/1024))
 			elif self.type == self.HAS_HBBTV:
 				return info.getInfoString(iServiceInformation.sHBBTVUrl)
+			elif self.type == self.HAS_NOT_HBBTV:
+				return ""
 			elif self.isVideoService(info):
 				if self.type == self.XRES:
 					return self.getServiceInfoString(info, iServiceInformation.sVideoWidth)
