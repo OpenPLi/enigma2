@@ -121,7 +121,7 @@ class ServiceInfo(Converter):
 			if self.type == self.HAS_TELETEXT:
 				tpid = info.getInfo(iServiceInformation.sTXTPID)
 				return tpid != -1
-			if self.type == self.HAS_NOT_TELETEXT:
+			elif self.type == self.HAS_NOT_TELETEXT:
 				tpid = info.getInfo(iServiceInformation.sTXTPID)
 				return tpid == -1
 			elif self.type in (self.IS_MULTICHANNEL, self.IS_STEREO):

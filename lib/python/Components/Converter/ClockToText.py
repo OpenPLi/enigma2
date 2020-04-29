@@ -100,7 +100,6 @@ class ClockToText(Converter, object):
 			return fix_space(_("%2d:%02d") % (t.tm_hour, t.tm_min))
 		elif self.type == self.DATE:
 			# TRANSLATORS: full date representation dayname daynum monthname year in strftime() format! See 'man strftime'
-			#d = _("%A %e %B %Y")
 			d = _("%Y.%m.%e %A")
 		elif self.type == self.FULL:
 			# TRANSLATORS: long date representation short dayname daynum short monthname hour:minute in strftime() format! See 'man strftime'
