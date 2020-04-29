@@ -1,6 +1,6 @@
 from Screens.Screen import Screen
 
 class SubtitleDisplay(Screen):
-    pass
+	pass
 
-    # not really much to do...
+	# not really much to do...

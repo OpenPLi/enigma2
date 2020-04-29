@@ -31,7 +31,7 @@ config.plugins.wlan.psk = NoSave(ConfigPassword(default = "", fixed_size = False
 
 
 class WlanStatus(Screen):
-    skin = """
+	skin = """
 		<screen name="WlanStatus" position="center,center" size="560,400" title="Wireless network status" >
 			<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
@@ -56,127 +56,127 @@ class WlanStatus(Screen):
 			<widget name="statuspic" pixmaps="buttons/button_green.png,buttons/button_green_off.png" position="130,380" zPosition="10" size="15,16" transparent="1" alphatest="on"/>
 		</screen>"""
 
-    def __init__(self, session, iface):
-        Screen.__init__(self, session)
-        self.session = session
-        self.iface = iface
+	def __init__(self, session, iface):
+		Screen.__init__(self, session)
+		self.session = session
+		self.iface = iface
 
-        self["LabelBSSID"] = StaticText(_('Accesspoint:'))
-        self["LabelESSID"] = StaticText(_('SSID:'))
-        self["LabelQuality"] = StaticText(_('Link quality:'))
-        self["LabelSignal"] = StaticText(_('Signal strength:'))
-        self["LabelBitrate"] = StaticText(_('Bitrate:'))
-        self["LabelEnc"] = StaticText(_('Encryption:'))
+		self["LabelBSSID"] = StaticText(_('Accesspoint:'))
+		self["LabelESSID"] = StaticText(_('SSID:'))
+		self["LabelQuality"] = StaticText(_('Link quality:'))
+		self["LabelSignal"] = StaticText(_('Signal strength:'))
+		self["LabelBitrate"] = StaticText(_('Bitrate:'))
+		self["LabelEnc"] = StaticText(_('Encryption:'))
 
-        self["BSSID"] = StaticText()
-        self["ESSID"] = StaticText()
-        self["quality"] = StaticText()
-        self["signal"] = StaticText()
-        self["bitrate"] = StaticText()
-        self["enc"] = StaticText()
+		self["BSSID"] = StaticText()
+		self["ESSID"] = StaticText()
+		self["quality"] = StaticText()
+		self["signal"] = StaticText()
+		self["bitrate"] = StaticText()
+		self["enc"] = StaticText()
 
-        self["IFtext"] = StaticText()
-        self["IF"] = StaticText()
-        self["Statustext"] = StaticText()
-        self["statuspic"] = MultiPixmap()
-        self["statuspic"].hide()
-        self["key_red"] = StaticText(_("Close"))
+		self["IFtext"] = StaticText()
+		self["IF"] = StaticText()
+		self["Statustext"] = StaticText()
+		self["statuspic"] = MultiPixmap()
+		self["statuspic"].hide()
+		self["key_red"] = StaticText(_("Close"))
 
-        self.resetList()
-        self.updateStatusbar()
+		self.resetList()
+		self.updateStatusbar()
 
-        self["actions"] = NumberActionMap(["WizardActions", "InputActions", "EPGSelectActions", "ShortcutActions"],
-        {
-                "ok": self.exit,
-                "back": self.exit,
-                "red": self.exit,
-        }, -1)
-        self.timer = eTimer()
-        self.timer.timeout.get().append(self.resetList)
-        self.onShown.append(lambda: self.timer.start(8000))
-        self.onLayoutFinish.append(self.layoutFinished)
-        self.onClose.append(self.cleanup)
+		self["actions"] = NumberActionMap(["WizardActions", "InputActions", "EPGSelectActions", "ShortcutActions"],
+		{
+			"ok": self.exit,
+			"back": self.exit,
+			"red": self.exit,
+		}, -1)
+		self.timer = eTimer()
+		self.timer.timeout.get().append(self.resetList)
+		self.onShown.append(lambda: self.timer.start(8000))
+		self.onLayoutFinish.append(self.layoutFinished)
+		self.onClose.append(self.cleanup)
 
-    def cleanup(self):
-        iStatus.stopWlanConsole()
+	def cleanup(self):
+		iStatus.stopWlanConsole()
 
-    def layoutFinished(self):
-        self.setTitle(_("Wireless network state"))
+	def layoutFinished(self):
+		self.setTitle(_("Wireless network state"))
 
-    def resetList(self):
-        iStatus.getDataForInterface(self.iface,self.getInfoCB)
+	def resetList(self):
+		iStatus.getDataForInterface(self.iface,self.getInfoCB)
 
-    def getInfoCB(self,data,status):
-        if data is not None:
-            if data is True:
-                if status is not None:
-                    if status[self.iface]["essid"] == "off":
-                        essid = _("No Connection")
-                    else:
-                        essid = status[self.iface]["essid"]
-                    if status[self.iface]["accesspoint"] == "Not-Associated":
-                        accesspoint = _("Not associated")
-                        essid = _("No Connection")
-                    else:
-                        accesspoint = status[self.iface]["accesspoint"]
-                    if "BSSID" in self:
-                        self["BSSID"].setText(accesspoint)
-                    if "ESSID" in self:
-                        self["ESSID"].setText(essid)
+	def getInfoCB(self,data,status):
+		if data is not None:
+			if data is True:
+				if status is not None:
+					if status[self.iface]["essid"] == "off":
+						essid = _("No Connection")
+					else:
+						essid = status[self.iface]["essid"]
+					if status[self.iface]["accesspoint"] == "Not-Associated":
+						accesspoint = _("Not associated")
+						essid = _("No Connection")
+					else:
+						accesspoint = status[self.iface]["accesspoint"]
+					if "BSSID" in self:
+						self["BSSID"].setText(accesspoint)
+					if "ESSID" in self:
+						self["ESSID"].setText(essid)
 
-                    quality = status[self.iface]["quality"]
-                    if "quality" in self:
-                        self["quality"].setText(quality)
+					quality = status[self.iface]["quality"]
+					if "quality" in self:
+						self["quality"].setText(quality)
 
-                    if status[self.iface]["bitrate"] == '0':
-                        bitrate = _("Unsupported")
-                    else:
-                        bitrate = str(status[self.iface]["bitrate"]) + " Mb/s"
-                    if "bitrate" in self:
-                        self["bitrate"].setText(bitrate)
+					if status[self.iface]["bitrate"] == '0':
+						bitrate = _("Unsupported")
+					else:
+						bitrate = str(status[self.iface]["bitrate"]) + " Mb/s"
+					if "bitrate" in self:
+						self["bitrate"].setText(bitrate)
 
-                    signal = status[self.iface]["signal"]
-                    if "signal" in self:
-                        self["signal"].setText(signal)
+					signal = status[self.iface]["signal"]
+					if "signal" in self:
+						self["signal"].setText(signal)
 
-                    if status[self.iface]["encryption"] == "off":
-                        if accesspoint == "Not-Associated":
-                            encryption = _("Disabled")
-                        else:
-                            encryption = _("off or wpa2 on")
-                    else:
-                        encryption = _("Enabled")
-                    if "enc" in self:
-                        self["enc"].setText(encryption)
-                    self.updateStatusLink(status)
+					if status[self.iface]["encryption"] == "off":
+						if accesspoint == "Not-Associated":
+							encryption = _("Disabled")
+						else:
+							encryption = _("off or wpa2 on")
+					else:
+						encryption = _("Enabled")
+					if "enc" in self:
+						self["enc"].setText(encryption)
+					self.updateStatusLink(status)
 
-    def exit(self):
-        self.timer.stop()
-        self.close(True)
+	def exit(self):
+		self.timer.stop()
+		self.close(True)
 
-    def updateStatusbar(self):
-        wait_txt = _("Please wait...")
-        self["BSSID"].setText(wait_txt)
-        self["ESSID"].setText(wait_txt)
-        self["quality"].setText(wait_txt)
-        self["signal"].setText(wait_txt)
-        self["bitrate"].setText(wait_txt)
-        self["enc"].setText(wait_txt)
-        self["IFtext"].setText(_("Network:"))
-        self["IF"].setText(iNetwork.getFriendlyAdapterName(self.iface))
-        self["Statustext"].setText(_("Link:"))
+	def updateStatusbar(self):
+		wait_txt = _("Please wait...")
+		self["BSSID"].setText(wait_txt)
+		self["ESSID"].setText(wait_txt)
+		self["quality"].setText(wait_txt)
+		self["signal"].setText(wait_txt)
+		self["bitrate"].setText(wait_txt)
+		self["enc"].setText(wait_txt)
+		self["IFtext"].setText(_("Network:"))
+		self["IF"].setText(iNetwork.getFriendlyAdapterName(self.iface))
+		self["Statustext"].setText(_("Link:"))
 
-    def updateStatusLink(self,status):
-        if status is not None:
-            if status[self.iface]["essid"] == "off" or status[self.iface]["accesspoint"] == "Not-Associated" or status[self.iface]["accesspoint"] == False:
-                self["statuspic"].setPixmapNum(1)
-            else:
-                self["statuspic"].setPixmapNum(0)
-            self["statuspic"].show()
+	def updateStatusLink(self,status):
+		if status is not None:
+			if status[self.iface]["essid"] == "off" or status[self.iface]["accesspoint"] == "Not-Associated" or status[self.iface]["accesspoint"] == False:
+				self["statuspic"].setPixmapNum(1)
+			else:
+				self["statuspic"].setPixmapNum(0)
+			self["statuspic"].show()
 
 
 class WlanScan(Screen):
-    skin = """
+	skin = """
 		<screen name="WlanScan" position="center,center" size="560,400" title="Select a wireless network" >
 			<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="buttons/green.png" position="140,0" size="140,40" alphatest="on" />
@@ -203,196 +203,196 @@ class WlanScan(Screen):
 			<widget source="info" render="Label" position="0,350" size="560,50" font="Regular;24" halign="center" valign="center" backgroundColor="#25062748" transparent="1" />
 		</screen>"""
 
-    def __init__(self, session, iface):
-        Screen.__init__(self, session)
-        self.session = session
-        self.iface = iface
-        self.skin_path = plugin_path
-        self.oldInterfaceState = iNetwork.getAdapterAttribute(self.iface, "up")
-        self.APList = None
-        self.newAPList = None
-        self.WlanList = None
-        self.cleanList = None
-        self.oldlist = {}
-        self.listLength = None
-        self.divpng = LoadPixmap(path=resolveFilename(SCOPE_SKIN_IMAGE, "div-h.png"))
+	def __init__(self, session, iface):
+		Screen.__init__(self, session)
+		self.session = session
+		self.iface = iface
+		self.skin_path = plugin_path
+		self.oldInterfaceState = iNetwork.getAdapterAttribute(self.iface, "up")
+		self.APList = None
+		self.newAPList = None
+		self.WlanList = None
+		self.cleanList = None
+		self.oldlist = {}
+		self.listLength = None
+		self.divpng = LoadPixmap(path=resolveFilename(SCOPE_SKIN_IMAGE, "div-h.png"))
 
-        self.rescanTimer = eTimer()
-        self.rescanTimer.callback.append(self.rescanTimerFired)
+		self.rescanTimer = eTimer()
+		self.rescanTimer.callback.append(self.rescanTimerFired)
 
-        self["info"] = StaticText()
+		self["info"] = StaticText()
 
-        self.list = []
-        self["list"] = List(self.list)
+		self.list = []
+		self["list"] = List(self.list)
 
-        self["key_red"] = StaticText(_("Close"))
-        self["key_green"] = StaticText(_("Connect"))
-        self["key_yellow"] = StaticText()
+		self["key_red"] = StaticText(_("Close"))
+		self["key_green"] = StaticText(_("Connect"))
+		self["key_yellow"] = StaticText()
 
-        self["actions"] = NumberActionMap(["WizardActions", "InputActions", "EPGSelectActions"],
-        {
-                "ok": self.select,
-                "back": self.cancel,
-        }, -1)
+		self["actions"] = NumberActionMap(["WizardActions", "InputActions", "EPGSelectActions"],
+		{
+			"ok": self.select,
+			"back": self.cancel,
+		}, -1)
 
-        self["shortcuts"] = ActionMap(["ShortcutActions"],
-        {
-                "red": self.cancel,
-                "green": self.select,
-        })
-        iWlan.setInterface(self.iface)
-        self.w = iWlan.getInterface()
-        self.onLayoutFinish.append(self.layoutFinished)
-        self.getAccessPoints(refresh = False)
+		self["shortcuts"] = ActionMap(["ShortcutActions"],
+		{
+			"red": self.cancel,
+			"green": self.select,
+		})
+		iWlan.setInterface(self.iface)
+		self.w = iWlan.getInterface()
+		self.onLayoutFinish.append(self.layoutFinished)
+		self.getAccessPoints(refresh = False)
 
-    def layoutFinished(self):
-        self.setTitle(_("Select a wireless network"))
+	def layoutFinished(self):
+		self.setTitle(_("Select a wireless network"))
 
-    def select(self):
-        cur = self["list"].getCurrent()
-        if cur is not None:
-            iWlan.stopGetNetworkList()
-            self.rescanTimer.stop()
-            del self.rescanTimer
-            if cur[0] is not None:
-                self.close(cur[0])
-            else:
-                self.close(None)
-        else:
-            iWlan.stopGetNetworkList()
-            self.rescanTimer.stop()
-            del self.rescanTimer
-            self.close(None)
+	def select(self):
+		cur = self["list"].getCurrent()
+		if cur is not None:
+			iWlan.stopGetNetworkList()
+			self.rescanTimer.stop()
+			del self.rescanTimer
+			if cur[0] is not None:
+				self.close(cur[0])
+			else:
+				self.close(None)
+		else:
+			iWlan.stopGetNetworkList()
+			self.rescanTimer.stop()
+			del self.rescanTimer
+			self.close(None)
 
-    def cancel(self):
-        iWlan.stopGetNetworkList()
-        self.rescanTimer.stop()
-        del self.rescanTimer
-        self.close(None)
+	def cancel(self):
+		iWlan.stopGetNetworkList()
+		self.rescanTimer.stop()
+		del self.rescanTimer
+		self.close(None)
 
-    def rescanTimerFired(self):
-        self.rescanTimer.stop()
-        self.updateAPList()
+	def rescanTimerFired(self):
+		self.rescanTimer.stop()
+		self.updateAPList()
 
-    def buildEntryComponent(self, essid, bssid, encrypted, iface, maxrate, signal):
-        encryption = encrypted and _("Yes") or _("No")
-        return((essid, bssid, _("Signal: ") + str(signal), _("Max. bitrate: ") + str(maxrate), _("Encrypted: ") + encryption, _("Interface: ") + str(iface), self.divpng))
+	def buildEntryComponent(self, essid, bssid, encrypted, iface, maxrate, signal):
+		encryption = encrypted and _("Yes") or _("No")
+		return((essid, bssid, _("Signal: ") + str(signal), _("Max. bitrate: ") + str(maxrate), _("Encrypted: ") + encryption, _("Interface: ") + str(iface), self.divpng))
 
-    def updateAPList(self):
-        newList = []
-        newList = self.getAccessPoints(refresh = True)
-        self.newAPList = []
-        tmpList = []
-        newListIndex = None
-        currentListEntry = None
-        currentListIndex = None
+	def updateAPList(self):
+		newList = []
+		newList = self.getAccessPoints(refresh = True)
+		self.newAPList = []
+		tmpList = []
+		newListIndex = None
+		currentListEntry = None
+		currentListIndex = None
 
-        for ap in self.oldlist.keys():
-            data = self.oldlist[ap]['data']
-            if data is not None:
-                tmpList.append(data)
+		for ap in self.oldlist.keys():
+			data = self.oldlist[ap]['data']
+			if data is not None:
+				tmpList.append(data)
 
-        if len(tmpList):
-            for entry in tmpList:
-                self.newAPList.append(self.buildEntryComponent( entry[0], entry[1], entry[2], entry[3], entry[4], entry[5] ))
+		if len(tmpList):
+			for entry in tmpList:
+				self.newAPList.append(self.buildEntryComponent( entry[0], entry[1], entry[2], entry[3], entry[4], entry[5] ))
 
-            currentListEntry = self["list"].getCurrent()
-            if currentListEntry is not None:
-                idx = 0
-                for entry in self.newAPList:
-                    if entry[0] == currentListEntry[0]:
-                        newListIndex = idx
-                    idx +=1
-            self['list'].setList(self.newAPList)
-            if newListIndex is not None:
-                self["list"].setIndex(newListIndex)
-            self["list"].updateList(self.newAPList)
-            self.listLength = len(self.newAPList)
-            self.buildWlanList()
-            self.setInfo()
+			currentListEntry = self["list"].getCurrent()
+			if currentListEntry is not None:
+				idx = 0
+				for entry in self.newAPList:
+					if entry[0] == currentListEntry[0]:
+						newListIndex = idx
+					idx +=1
+			self['list'].setList(self.newAPList)
+			if newListIndex is not None:
+				self["list"].setIndex(newListIndex)
+			self["list"].updateList(self.newAPList)
+			self.listLength = len(self.newAPList)
+			self.buildWlanList()
+			self.setInfo()
 
-    def getAccessPoints(self, refresh = False):
-        self.APList = []
-        self.cleanList = []
-        aps = iWlan.getNetworkList()
-        if aps is not None:
-            print "[WirelessLan.py] got Accespoints!"
-            tmpList = []
-            compList = []
-            for ap in aps:
-                a = aps[ap]
-                if a['active']:
-                    tmpList.append( (a['essid'], a['bssid']) )
-                    compList.append( (a['essid'], a['bssid'], a['encrypted'], a['iface'], a['maxrate'], a['signal']) )
+	def getAccessPoints(self, refresh = False):
+		self.APList = []
+		self.cleanList = []
+		aps = iWlan.getNetworkList()
+		if aps is not None:
+			print "[WirelessLan.py] got Accespoints!"
+			tmpList = []
+			compList = []
+			for ap in aps:
+				a = aps[ap]
+				if a['active']:
+					tmpList.append( (a['essid'], a['bssid']) )
+					compList.append( (a['essid'], a['bssid'], a['encrypted'], a['iface'], a['maxrate'], a['signal']) )
 
-            for entry in tmpList:
-                if entry[0] == "":
-                    for compentry in compList:
-                        if compentry[1] == entry[1]:
-                            compList.remove(compentry)
-            for entry in compList:
-                self.cleanList.append( ( entry[0], entry[1], entry[2], entry[3], entry[4], entry[5] ) )
-                if entry[0] not in self.oldlist:
-                    self.oldlist[entry[0]] = { 'data': entry }
-                else:
-                    self.oldlist[entry[0]]['data'] = entry
+			for entry in tmpList:
+				if entry[0] == "":
+					for compentry in compList:
+						if compentry[1] == entry[1]:
+							compList.remove(compentry)
+			for entry in compList:
+				self.cleanList.append( ( entry[0], entry[1], entry[2], entry[3], entry[4], entry[5] ) )
+				if entry[0] not in self.oldlist:
+					self.oldlist[entry[0]] = { 'data': entry }
+				else:
+					self.oldlist[entry[0]]['data'] = entry
 
-        for entry in self.cleanList:
-            self.APList.append(self.buildEntryComponent( entry[0], entry[1], entry[2], entry[3], entry[4], entry[5] ))
+		for entry in self.cleanList:
+			self.APList.append(self.buildEntryComponent( entry[0], entry[1], entry[2], entry[3], entry[4], entry[5] ))
 
-        if refresh is False:
-            self['list'].setList(self.APList)
-        self.listLength = len(self.APList)
-        self.setInfo()
-        self.rescanTimer.start(5000)
-        return self.cleanList
+		if refresh is False:
+			self['list'].setList(self.APList)
+		self.listLength = len(self.APList)
+		self.setInfo()
+		self.rescanTimer.start(5000)
+		return self.cleanList
 
-    def setInfo(self):
-        length = self.getLength()
-        if length == 0:
-            self["info"].setText(_("No wireless networks found! Searching..."))
-        else:
-            self["info"].setText(ngettext("%d wireless network found!", "%d wireless networks found!", length) % length)
+	def setInfo(self):
+		length = self.getLength()
+		if length == 0:
+			self["info"].setText(_("No wireless networks found! Searching..."))
+		else:
+			self["info"].setText(ngettext("%d wireless network found!", "%d wireless networks found!", length) % length)
 
-    def buildWlanList(self):
-        self.WlanList = []
-        for entry in self['list'].list:
-            self.WlanList.append( (entry[0], entry[0]) )
+	def buildWlanList(self):
+		self.WlanList = []
+		for entry in self['list'].list:
+			self.WlanList.append( (entry[0], entry[0]) )
 
-    def getLength(self):
-        return self.listLength
+	def getLength(self):
+		return self.listLength
 
-    def getWlanList(self):
-        if self.WlanList is None:
-            self.buildWlanList()
-        return self.WlanList
+	def getWlanList(self):
+		if self.WlanList is None:
+			self.buildWlanList()
+		return self.WlanList
 
 
 def WlanStatusScreenMain(session, iface):
-    session.open(WlanStatus, iface)
+	session.open(WlanStatus, iface)
 
 def callFunction(iface):
-    iWlan.setInterface(iface)
-    i = iWlan.getWirelessInterfaces()
-    if iface in i or iNetwork.isWirelessInterface(iface):
-        return WlanStatusScreenMain
-    return None
+	iWlan.setInterface(iface)
+	i = iWlan.getWirelessInterfaces()
+	if iface in i or iNetwork.isWirelessInterface(iface):
+		return WlanStatusScreenMain
+	return None
 
 def configStrings(iface):
-    driver = iNetwork.detectWlanModule(iface)
-    ret = ""
-    if existBcmWifi(iface):
-        encryption = config.plugins.wlan.encryption.value
-        psk = config.plugins.wlan.psk.value
-        essid = config.plugins.wlan.essid.value
-        ret += '\tpre-up wl-config.sh -m ' + encryption.lower() + ' -k ' + psk + ' -s "' + essid + '" \n'
-        ret += '\tpost-down wl-down.sh\n'
-    else:
-        if driver == 'madwifi' and config.plugins.wlan.hiddenessid.value:
-            ret += "\tpre-up iwconfig " + iface + " essid \"" + re.escape(config.plugins.wlan.essid.value) + "\" || true\n"
-        ret += "\tpre-up wpa_supplicant -i" + iface + " -c" + getWlanConfigName(iface) + " -B -dd -D" + driver + " || true\n"
-        ret += "\tpre-down wpa_cli -i" + iface + " terminate || true\n"
-    return ret
+	driver = iNetwork.detectWlanModule(iface)
+	ret = ""
+	if existBcmWifi(iface):
+		encryption = config.plugins.wlan.encryption.value
+		psk = config.plugins.wlan.psk.value
+		essid = config.plugins.wlan.essid.value
+		ret += '\tpre-up wl-config.sh -m ' + encryption.lower() + ' -k ' + psk + ' -s "' + essid + '" \n'
+		ret += '\tpost-down wl-down.sh\n'
+	else:
+		if driver == 'madwifi' and config.plugins.wlan.hiddenessid.value:
+			ret += "\tpre-up iwconfig " + iface + " essid \"" + re.escape(config.plugins.wlan.essid.value) + "\" || true\n"
+		ret += "\tpre-up wpa_supplicant -i" + iface + " -c" + getWlanConfigName(iface) + " -B -dd -D" + driver + " || true\n"
+		ret += "\tpre-down wpa_cli -i" + iface + " terminate || true\n"
+	return ret
 
 def Plugins(**kwargs):
-    return PluginDescriptor(name=_("Wireless LAN"), description=_("Connect to a wireless network"), where = PluginDescriptor.WHERE_NETWORKSETUP, needsRestart = False, fnc={"ifaceSupported": callFunction, "configStrings": configStrings, "WlanPluginEntry": lambda x: _("Wireless network configuration...")})
+	return PluginDescriptor(name=_("Wireless LAN"), description=_("Connect to a wireless network"), where = PluginDescriptor.WHERE_NETWORKSETUP, needsRestart = False, fnc={"ifaceSupported": callFunction, "configStrings": configStrings, "WlanPluginEntry": lambda x: _("Wireless network configuration...")})
