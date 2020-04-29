@@ -54,7 +54,7 @@ class HddState(Source):
 				if string and self.diskName:
 					string += " "
 				if (hdd[1].max_idle_time or force) and not hdd[1].isSleeping():
- 					state = True
+					state = True
 				if self.diskName:
 					color = state and "\c0000??00" or "\c00????00"
 					string += color

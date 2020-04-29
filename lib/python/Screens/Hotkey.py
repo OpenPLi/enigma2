@@ -240,7 +240,7 @@ def getHotkeyFunctions():
 config.misc.hotkey = ConfigSubsection()
 config.misc.hotkey.additional_keys = ConfigYesNo(default=False)
 for x in hotkey.hotkeys:
-        exec "config.misc.hotkey.%s = ConfigText(default='%s')" % x[1:]
+	exec "config.misc.hotkey.%s = ConfigText(default='%s')" % x[1:]
 
 class HotkeySetup(Screen):
 	ALLOW_SUSPEND = False
