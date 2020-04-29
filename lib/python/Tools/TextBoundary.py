@@ -4,4 +4,4 @@ from enigma import eLabel
 # on the parent container which is detrimental to UI performance, 
 # particularly in a complex screen like the graph EPG
 def getTextBoundarySize(instance, font, targetSize, text):
-    return eLabel.calculateTextSize(font, text, targetSize)
+	return eLabel.calculateTextSize(font, text, targetSize)

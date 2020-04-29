@@ -12,7 +12,7 @@ from Components.FanControl import fancontrol
 import skin
 
 class TempFanControl(Screen, ConfigListScreen):
-    skin = """
+	skin = """
 		<screen position="center,center" size="570,420" title="Temperature and fan control" >
 			<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="buttons/green.png" position="140,0" size="140,40" alphatest="on" />
@@ -92,83 +92,83 @@ class TempFanControl(Screen, ConfigListScreen):
 			</widget>
 		</screen>"""
 
-    def __init__(self, session, args = None):
-        Screen.__init__(self, session)
+	def __init__(self, session, args = None):
+		Screen.__init__(self, session)
 
-        self.setTitle(_("Temperature and fan control"))
+		self.setTitle(_("Temperature and fan control"))
 
-        templist = sensors.getSensorsList(sensors.TYPE_TEMPERATURE)
-        tempcount = len(templist)
-        fanlist = sensors.getSensorsList(sensors.TYPE_FAN_RPM)
-        fancount = len(fanlist)
+		templist = sensors.getSensorsList(sensors.TYPE_TEMPERATURE)
+		tempcount = len(templist)
+		fanlist = sensors.getSensorsList(sensors.TYPE_FAN_RPM)
+		fancount = len(fanlist)
 
-        self["red"] = StaticText(_("Cancel"))
-        self["green"] = StaticText(_("OK"))
-        self["yellow"] = StaticText("")
-        self["blue"] = StaticText("")
+		self["red"] = StaticText(_("Cancel"))
+		self["green"] = StaticText(_("OK"))
+		self["yellow"] = StaticText("")
+		self["blue"] = StaticText("")
 
-        for count in range(8):
-            if count < tempcount:
-                id = templist[count]
-                self["SensorTempText%d" % count] = StaticText(sensors.getSensorName(id))
-                self["SensorTemp%d" % count] = SensorSource(sensorid = id)
-            else:
-                self["SensorTempText%d" % count] = StaticText("")
-                self["SensorTemp%d" % count] = SensorSource()
+		for count in range(8):
+			if count < tempcount:
+				id = templist[count]
+				self["SensorTempText%d" % count] = StaticText(sensors.getSensorName(id))
+				self["SensorTemp%d" % count] = SensorSource(sensorid = id)
+			else:
+				self["SensorTempText%d" % count] = StaticText("")
+				self["SensorTemp%d" % count] = SensorSource()
 
-            if count < fancount:
-                id = fanlist[count]
-                self["SensorFanText%d" % count] = StaticText(sensors.getSensorName(id))
-                self["SensorFan%d" % count] = SensorSource(sensorid = id)
-            else:
-                self["SensorFanText%d" % count] = StaticText("")
-                self["SensorFan%d" % count] = SensorSource()
+			if count < fancount:
+				id = fanlist[count]
+				self["SensorFanText%d" % count] = StaticText(sensors.getSensorName(id))
+				self["SensorFan%d" % count] = SensorSource(sensorid = id)
+			else:
+				self["SensorFanText%d" % count] = StaticText("")
+				self["SensorFan%d" % count] = SensorSource()
 
-        self.list = []
-        for count in range(fancontrol.getFanCount()):
-            self.list.append(getConfigListEntry(_("Fan %d voltage") % (count + 1), fancontrol.getConfig(count).vlt))
-            self.list.append(getConfigListEntry(_("Fan %d PWM") % (count + 1), fancontrol.getConfig(count).pwm))
-            self.list.append(getConfigListEntry(_("Standby fan %d voltage") % (count + 1), fancontrol.getConfig(count).vlt_standby))
-            self.list.append(getConfigListEntry(_("Standby fan %d PWM") % (count + 1), fancontrol.getConfig(count).pwm_standby))
+		self.list = []
+		for count in range(fancontrol.getFanCount()):
+			self.list.append(getConfigListEntry(_("Fan %d voltage") % (count + 1), fancontrol.getConfig(count).vlt))
+			self.list.append(getConfigListEntry(_("Fan %d PWM") % (count + 1), fancontrol.getConfig(count).pwm))
+			self.list.append(getConfigListEntry(_("Standby fan %d voltage") % (count + 1), fancontrol.getConfig(count).vlt_standby))
+			self.list.append(getConfigListEntry(_("Standby fan %d PWM") % (count + 1), fancontrol.getConfig(count).pwm_standby))
 
-        ConfigListScreen.__init__(self, self.list, session = self.session)
-        #self["config"].list = self.list
-        #self["config"].setList(self.list)
-        seperation = skin.parameters.get("ConfigListSeperator", 300)
-        self["config"].l.setSeperation(seperation)
+		ConfigListScreen.__init__(self, self.list, session = self.session)
+		#self["config"].list = self.list
+		#self["config"].setList(self.list)
+		seperation = skin.parameters.get("ConfigListSeperator", 300)
+		self["config"].l.setSeperation(seperation)
 
-        self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "MenuActions"],
-        {
-                "ok": self.save,
-                "cancel": self.revert,
-                "red": self.revert,
-                "green": self.save,
-                "menu": self.closeRecursive,
-        }, -1)
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "MenuActions"],
+		{
+			"ok": self.save,
+			"cancel": self.revert,
+			"red": self.revert,
+			"green": self.save,
+			"menu": self.closeRecursive,
+		}, -1)
 
-    def save(self):
-        for count in range(fancontrol.getFanCount()):
-            fancontrol.getConfig(count).vlt.save()
-            fancontrol.getConfig(count).pwm.save()
-            fancontrol.getConfig(count).vlt_standby.save()
-            fancontrol.getConfig(count).pwm_standby.save()
-        self.close()
+	def save(self):
+		for count in range(fancontrol.getFanCount()):
+			fancontrol.getConfig(count).vlt.save()
+			fancontrol.getConfig(count).pwm.save()
+			fancontrol.getConfig(count).vlt_standby.save()
+			fancontrol.getConfig(count).pwm_standby.save()
+		self.close()
 
-    def revert(self):
-        for count in range(fancontrol.getFanCount()):
-            fancontrol.getConfig(count).vlt.load()
-            fancontrol.getConfig(count).pwm.load()
-            fancontrol.getConfig(count).vlt_standby.load()
-            fancontrol.getConfig(count).pwm_standby.load()
-        self.close()
+	def revert(self):
+		for count in range(fancontrol.getFanCount()):
+			fancontrol.getConfig(count).vlt.load()
+			fancontrol.getConfig(count).pwm.load()
+			fancontrol.getConfig(count).vlt_standby.load()
+			fancontrol.getConfig(count).pwm_standby.load()
+		self.close()
 
 def main(session, **kwargs):
-    session.open(TempFanControl)
+	session.open(TempFanControl)
 
 def startMenu(menuid):
-    if menuid != "system":
-        return []
-    return [(_("Temperature and fan control"), main, "tempfancontrol", 80)]
+	if menuid != "system":
+		return []
+	return [(_("Temperature and fan control"), main, "tempfancontrol", 80)]
 
 def Plugins(**kwargs):
-    return PluginDescriptor(name = _("Temperature and fan control"), description = _("Temperature and fan control"), where = PluginDescriptor.WHERE_MENU, needsRestart = False, fnc = startMenu)
+	return PluginDescriptor(name = _("Temperature and fan control"), description = _("Temperature and fan control"), where = PluginDescriptor.WHERE_MENU, needsRestart = False, fnc = startMenu)

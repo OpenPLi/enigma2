@@ -4,25 +4,25 @@ from Renderer import Renderer
 from enigma import eLabel
 
 class Label(VariableText, Renderer):
-    def __init__(self):
-        Renderer.__init__(self)
-        VariableText.__init__(self)
+	def __init__(self):
+		Renderer.__init__(self)
+		VariableText.__init__(self)
 
-    GUI_WIDGET = eLabel
+	GUI_WIDGET = eLabel
 
-    def connect(self, source):
-        if source:
-            Renderer.connect(self, source)
-            self.changed((self.CHANGED_DEFAULT,))
-        else:
-            print "SKINERROR: render label has no source"
+	def connect(self, source):
+		if source:
+			Renderer.connect(self, source)
+			self.changed((self.CHANGED_DEFAULT,))
+		else:
+			print "SKINERROR: render label has no source"
 
-    def changed(self, what):
-        if what[0] == self.CHANGED_CLEAR:
-            self.text = ""
-        elif self.source:
-            if hasattr(self.source, "text"):
-                self.text = self.source.text
-        else:
-            self.text = "<No Source>"
-            print "SKINERROR: render label has no source"
+	def changed(self, what):
+		if what[0] == self.CHANGED_CLEAR:
+			self.text = ""
+		elif self.source:
+			if hasattr(self.source, "text"):
+				self.text = self.source.text
+		else:
+			self.text = "<No Source>"
+			print "SKINERROR: render label has no source"
