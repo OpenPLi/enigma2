@@ -95,7 +95,7 @@ class PliExtraInfo(Poll, Converter):
 			("CryptoCaidTandbergAvailable", "T",	False),
 			("CryptoCaidDvnSelected",	"TB",	True ),
 			("CryptoCaidSmsxSelected",	"SM",	True ),
-			("CryptoCaidTongfangSelected",	"TF",	True ),			
+			("CryptoCaidTongfangSelected",	"TF",	True ),
 			("CryptoCaidSecaSelected",	"S",	True ),
 			("CryptoCaidViaSelected",	"V",	True ),
 			("CryptoCaidIrdetoSelected",	"I",	True ),
