@@ -2,6 +2,17 @@
 import sys, os, time
 import re
 from Tools.HardwareInfo import HardwareInfo
+from enigma import getBoxType
+
+def getFlashMemory(folder='/'):
+    try:
+        diskSpace = os.statvfs(folder)
+        available = float(diskSpace.f_bsize * diskSpace.f_bavail)
+        fspace=round(float((available) / (1024.0*1024.0)),2)
+        spacestr=str(fspace)+'M'
+        return spacestr
+    except:
+        return "unavaiable"
 
 def getVersionString():
     return getImageVersionString()
@@ -125,8 +136,12 @@ def getDriverInstalledDate():
     try:
         from glob import glob
         try:
-            driver = [x.split("-")[-2:-1][0][-8:] for x in open(glob("/var/lib/opkg/info/*-dvb-modules-*.control")[0], "r") if x.startswith("Version:")][0]
-            return  "%s-%s-%s" % (driver[:4], driver[4:6], driver[6:])
+            if getBoxType() in ("dm800","dm8000"):
+                driver = [x.split("-")[-2:-1][0][-9:] for x in open(glob("/var/lib/opkg/info/*-dvb-modules-*.control")[0], "r") if x.startswith("Version:")][0]
+                return  "%s-%s-%s" % (driver[:4], driver[4:6], driver[6:])
+            else:
+                driver = [x.split("-")[-2:-1][0][-8:] for x in open(glob("/var/lib/opkg/info/*-dvb-modules-*.control")[0], "r") if x.startswith("Version:")][0]
+                return  "%s-%s-%s" % (driver[:4], driver[4:6], driver[6:])
         except:
             try:
                 driver = [x.split("Version:") for x in open(glob("/var/lib/opkg/info/*-dvb-proxy-*.control")[0], "r") if x.startswith("Version:")][0]
