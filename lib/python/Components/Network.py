@@ -4,6 +4,9 @@ from socket import *
 from Components.Console import Console
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
+from boxbranding import getVisionVersion
+
+oeversion = getVisionVersion()
 
 class Network:
     def __init__(self):
@@ -40,7 +43,7 @@ class Network:
         return self.remoteRootFS
 
     def isBlacklisted(self, iface):
-        return iface in ('lo', 'wifi0', 'wmaster0', 'sit0', 'tun0', 'sys0', 'p2p0')
+        return iface in ('lo', 'wifi0', 'wmaster0', 'sit0', 'tun0', 'sys0', 'p2p0', 'tap0', 'tunl0', 'ip6tnl0')
 
     def getInterfaces(self, callback = None):
         self.configuredInterfaces = []
@@ -61,7 +64,10 @@ class Network:
         return [ int(n) for n in ip.split('.') ]
 
     def getAddrInet(self, iface, callback):
-        cmd = ("/sbin/ip", "/sbin/ip", "-o", "addr", "show", "dev", iface)
+        if oeversion.startswith('9'):
+            cmd = ("/sbin/ip", "/sbin/ip", "addr", "show", "dev", iface)
+        else:
+            cmd = ("/sbin/ip", "/sbin/ip", "-o", "addr", "show", "dev", iface)
         self.console.ePopen(cmd, self.IPaddrFinished, [iface, callback])
 
     def IPaddrFinished(self, result, retval, extra_args):
@@ -71,7 +77,10 @@ class Network:
         ipRegexp = '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'
         netRegexp = '[0-9]{1,2}'
         macRegexp = '[0-9a-fA-F]{2}\:[0-9a-fA-F]{2}\:[0-9a-fA-F]{2}\:[0-9a-fA-F]{2}\:[0-9a-fA-F]{2}\:[0-9a-fA-F]{2}'
-        ipLinePattern = re.compile('inet ' + ipRegexp + '/')
+        if oeversion.startswith('9'):
+            ipLinePattern = re.compile(ipRegexp + '/')
+        else:
+            ipLinePattern = re.compile('inet ' + ipRegexp + '/')
         ipPattern = re.compile(ipRegexp)
         netmaskLinePattern = re.compile('/' + netRegexp)
         netmaskPattern = re.compile(netRegexp)
@@ -79,30 +88,85 @@ class Network:
         upPattern = re.compile('UP')
         macPattern = re.compile(macRegexp)
         macLinePattern = re.compile('link/ether ' + macRegexp)
-
-        for line in result.splitlines():
-            split = line.strip().split(' ',2)
-            if (split[1][:-1] == iface) or (split[1][:-1] == (iface + '@sys0')):
-                up = self.regExpMatch(upPattern, split[2])
-                mac = self.regExpMatch(macPattern, self.regExpMatch(macLinePattern, split[2]))
-                if up is not None:
-                    data['up'] = True
-                    if iface is not 'lo':
-                        self.configuredInterfaces.append(iface)
-                if mac is not None:
-                    data['mac'] = mac
-            if split[1] == iface:
-                if re.search(globalIPpattern, split[2]):
-                    ip = self.regExpMatch(ipPattern, self.regExpMatch(ipLinePattern, split[2]))
-                    netmask = self.calc_netmask(self.regExpMatch(netmaskPattern, self.regExpMatch(netmaskLinePattern, split[2])))
+        if oeversion.startswith('9'):
+            havemac = False
+            try:
+                ipconfigfile = '/tmp/.ipcfg'
+                os.system('ifconfig > ' + ipconfigfile)
+                with open(ipconfigfile, 'r') as arch:
+                    for line in arch:
+                        splitstr = line.split()[0]
+                        if splitstr == 'eth0':
+                            data['mac'] = line.split()[4]
+                            havemac = True
+                            break
+                        elif splitstr == 'eth1':
+                            data['mac'] = line.split()[4]
+                            havemac = True
+                            break
+                        elif splitstr == 'wlan0':
+                            data['mac'] = line.split()[4]
+                            havemac = True
+                            break
+                        elif splitstr == 'atml0':
+                            data['mac'] = line.split()[4]
+                            havemac = True
+                            break
+                        elif splitstr == 'bnep0':
+                            data['mac'] = line.split()[4]
+                            havemac = True
+                            break
+                        elif splitstr == 'usb0':
+                            data['mac'] = line.split()[4]
+                            havemac = True
+                            break
+            except:
+                pass
+            for line in result.splitlines():
+                split = line.strip().split(' ',2)
+                if (split[1][:-1] == iface) or (split[1][:-1] == (iface + '@sys0')):
+                    up = self.regExpMatch(upPattern, split[2])
+                    if up is not None:
+                        data['up'] = True
+                        if iface is not 'lo':
+                            self.configuredInterfaces.append(iface)
+                if split[0] == "link/ether":
+                    mac = split[1]
                     bcast = self.regExpMatch(ipPattern, self.regExpMatch(bcastLinePattern, split[2]))
+                    if not havemac and mac is not None:
+                        data['mac'] = mac
+                    if bcast is not None:
+                        data['bcast'] = self.convertIP(bcast)
+                if split[0] == "inet":
+                    ip = self.regExpMatch(ipPattern, self.regExpMatch(ipLinePattern, split[1]))
+                    netmask = self.calc_netmask(self.regExpMatch(netmaskPattern, self.regExpMatch(netmaskLinePattern, split[1])))
                     if ip is not None:
                         data['ip'] = self.convertIP(ip)
                     if netmask is not None:
                         data['netmask'] = self.convertIP(netmask)
-                    if bcast is not None:
-                        data['bcast'] = self.convertIP(bcast)
-
+        else:
+            for line in result.splitlines():
+                split = line.strip().split(' ',2)
+                if (split[1][:-1] == iface) or (split[1][:-1] == (iface + '@sys0')):
+                    up = self.regExpMatch(upPattern, split[2])
+                    mac = self.regExpMatch(macPattern, self.regExpMatch(macLinePattern, split[2]))
+                    if up is not None:
+                        data['up'] = True
+                        if iface is not 'lo':
+                            self.configuredInterfaces.append(iface)
+                    if mac is not None:
+                        data['mac'] = mac
+                if split[1] == iface:
+                    if re.search(globalIPpattern, split[2]):
+                        ip = self.regExpMatch(ipPattern, self.regExpMatch(ipLinePattern, split[2]))
+                        netmask = self.calc_netmask(self.regExpMatch(netmaskPattern, self.regExpMatch(netmaskLinePattern, split[2])))
+                        bcast = self.regExpMatch(ipPattern, self.regExpMatch(bcastLinePattern, split[2]))
+                        if ip is not None:
+                            data['ip'] = self.convertIP(ip)
+                        if netmask is not None:
+                            data['netmask'] = self.convertIP(netmask)
+                        if bcast is not None:
+                            data['bcast'] = self.convertIP(bcast)
         if 'ip' not in data:
             data['dhcp'] = True
             data['ip'] = [0, 0, 0, 0]
@@ -180,7 +244,7 @@ class Network:
         currif = ""
         for i in interfaces:
             split = i.strip().split(' ')
-            if split[0] == "iface":
+            if split[0] == "iface" and split[2] != "inet6":
                 currif = split[1]
                 ifaces[currif] = {}
                 if len(split) == 4 and split[3] == "dhcp":
@@ -424,7 +488,7 @@ class Network:
     def checkNetworkState(self,statecallback):
         self.NetworkState = 0
         self.pingConsole = Console()
-        for server in ("www.openpli.org", "www.google.nl", "www.google.com"):
+        for server in ("www.openpli.org", "www.bing.com", "www.microsoft.com"):
             self.pingConsole.ePopen(("/bin/ping", "/bin/ping", "-c", "1", server), self.checkNetworkStateFinished,statecallback)
 
     def checkNetworkStateFinished(self, result, retval,extra_args):
@@ -496,7 +560,7 @@ class Network:
     def checkDNSLookup(self,statecallback):
         self.DnsState = 0
         self.dnsConsole = Console()
-        for server in ("www.openpli.org", "www.google.nl", "www.google.com"):
+        for server in ("www.openpli.org", "www.bing.com", "www.microsoft.com"):
             self.dnsConsole.ePopen(("/usr/bin/nslookup", "/usr/bin/nslookup", server), self.checkDNSLookupFinished, statecallback)
 
     def checkDNSLookupFinished(self, result, retval,extra_args):
@@ -616,7 +680,7 @@ class Network:
             module = os.path.basename(os.path.realpath(moduledir))
             if module in ('ath_pci','ath5k'):
                 return 'madwifi'
-            if module in ('rt73','rt73'):
+            if module == 'rt73':
                 return 'ralink'
             if module == 'zd1211b':
                 return 'zydas'
