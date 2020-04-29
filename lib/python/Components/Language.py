@@ -115,7 +115,6 @@ class Language:
             except:
                 pass
 
-
         # Also write a locale.conf as /home/root/.config/locale.conf to apply language to interactive shells as well:
         try:
             os.stat('/home/root/.config')
@@ -132,7 +131,6 @@ class Language:
                 else:
                     localeconf.write('export %s="POSIX"\n' % category)
         localeconf.close()
-
 
         # HACK: sometimes python 2.7 reverts to the LC_TIME environment value, so make sure it has the correct value
         os.environ["LC_TIME"] = self.getLanguage() + '.UTF-8'
