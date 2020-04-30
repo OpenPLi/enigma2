@@ -12,16 +12,16 @@ from Plugins.SystemPlugins.Hotplug.plugin import hotplugNotifier
 class DVDToolbox(Screen):
 	skin = """
 		<screen name="DVDToolbox" position="center,center"  size="560,445" title="DVD media toolbox" >
-		    <ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
-		    <ePixmap pixmap="buttons/green.png" position="140,0" size="140,40" alphatest="on" />
-		    <ePixmap pixmap="buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
-		    <widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
-		    <widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
-		    <widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
-		    <widget source="info" render="Label" position="20,60" size="520,100" font="Regular;20" />
-		    <widget name="details" position="20,200" size="520,200" font="Regular;16" />
-		    <widget source="space_bar" render="Progress" position="10,410" size="540,26" borderWidth="1" backgroundColor="#254f7497" />
-		    <widget source="space_label" render="Label" position="20,414" size="520,22" zPosition="2" font="Regular;18" halign="center" transparent="1" foregroundColor="#000000" />
+			<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
+			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
+			<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+			<widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
+			<widget source="info" render="Label" position="20,60" size="520,100" font="Regular;20" />
+			<widget name="details" position="20,200" size="520,200" font="Regular;16" />
+			<widget source="space_bar" render="Progress" position="10,410" size="540,26" borderWidth="1" backgroundColor="#254f7497" />
+			<widget source="space_label" render="Label" position="20,414" size="520,22" zPosition="2" font="Regular;18" halign="center" transparent="1" foregroundColor="#000000" />
 		</screen>"""
 
 	def __init__(self, session):
@@ -41,12 +41,12 @@ class DVDToolbox(Screen):
 
 		self["toolboxactions"] = ActionMap(["ColorActions", "DVDToolbox", "OkCancelActions"],
 		{
-		    "red": self.exit,
-		    "green": self.update,
-		    "yellow": self.format,
-		    "cancel": self.exit,
-		    "pageUp": self.pageUp,
-		    "pageDown": self.pageDown
+			"red": self.exit,
+			"green": self.update,
+			"yellow": self.format,
+			"cancel": self.exit,
+			"pageUp": self.pageUp,
+			"pageDown": self.pageDown
 		})
 		self.update()
 		hotplugNotifier.append(self.update)

@@ -104,7 +104,7 @@ class MoveFileTask(CopyFileTask):
 			except Exception, e:
 				errors.append(e)
 		if errors:
-			 raise errors[0]
+			raise errors[0]
 
 def copyFiles(fileList, name):
 	name = _("Copy") + " " + name

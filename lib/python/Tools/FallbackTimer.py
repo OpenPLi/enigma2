@@ -29,7 +29,7 @@ class FallbackTimerList():
 	def cleanServiceRef(self, service_ref):
 		service_ref = str(service_ref)
 		if not service_ref.endswith(":"):
-		    service_ref = service_ref.rsplit("::", 1)[0] + ":"
+			service_ref = service_ref.rsplit("::", 1)[0] + ":"
 		return service_ref
 
 	def getUrl(self, url):
