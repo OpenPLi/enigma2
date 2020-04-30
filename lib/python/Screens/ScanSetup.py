@@ -663,7 +663,7 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 
 		self.DVB_TypeEntry = getConfigListEntry(_("DVB type"), self.DVB_type) # multitype?
 		if len(self.nim_type_dict[index_to_scan]["modes"]) > 1:
-			 self.list.append(self.DVB_TypeEntry)
+			self.list.append(self.DVB_TypeEntry)
 		self.typeOfScanEntry = None
 		self.typeOfInputEntry = None
 		self.systemEntry = None
@@ -1397,10 +1397,10 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 		elif self.DVB_type.value == "DVB-C":
 			if self.scan_typecable.value == "single_transponder":
 				self.addCabTransponder(tlist, self.scan_cab.frequency.floatint,
-											  self.scan_cab.symbolrate.value*1000,
-											  self.scan_cab.modulation.value,
-											  self.scan_cab.fec.value,
-											  self.scan_cab.inversion.value)
+							self.scan_cab.symbolrate.value*1000,
+							self.scan_cab.modulation.value,
+							self.scan_cab.fec.value,
+							self.scan_cab.inversion.value)
 				removeAll = False
 			elif self.scan_typecable.value == "predefined_transponder":
 				tps = nimmanager.getTranspondersCable(index_to_scan)
@@ -1414,11 +1414,10 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 					getInitialCableTransponderList(tlist, index_to_scan)
 				elif nimmanager.nim_slots[index_to_scan].supportsBlindScan():
 					flags |= eComponentScan.scanBlindSearch
-					self.addCabTransponder(tlist, 73000,
-												  (866000 - 73000) / 1000,
-												  eDVBFrontendParametersCable.Modulation_Auto,
-												  eDVBFrontendParametersCable.FEC_Auto,
-												  eDVBFrontendParametersCable.Inversion_Unknown)
+					self.addCabTransponder(tlist, 73000, (866000 - 73000) / 1000,
+								eDVBFrontendParametersCable.Modulation_Auto,
+								eDVBFrontendParametersCable.FEC_Auto,
+								eDVBFrontendParametersCable.Inversion_Unknown)
 					removeAll = False
 				else:
 					action = SEARCH_CABLE_TRANSPONDERS

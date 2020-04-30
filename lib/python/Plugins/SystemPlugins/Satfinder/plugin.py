@@ -143,7 +143,7 @@ class Satfinder(ScanSetup, ServiceScan):
 		self.DVB_type = self.nim_type_dict[int(self.satfinder_scan_nims.value)]["selection"]
 		self.DVB_TypeEntry = getConfigListEntry(_("DVB type"), self.DVB_type) # multitype?
 		if len(self.nim_type_dict[int(self.satfinder_scan_nims.value)]["modes"]) > 1:
-			 self.list.append(self.DVB_TypeEntry)
+			self.list.append(self.DVB_TypeEntry)
 		if self.DVB_type.value == "DVB-S":
 			self.tuning_sat = self.scan_satselection[self.getSelectedSatIndex(self.feid)]
 			self.satEntry = getConfigListEntry(_('Satellite'), self.tuning_sat)
