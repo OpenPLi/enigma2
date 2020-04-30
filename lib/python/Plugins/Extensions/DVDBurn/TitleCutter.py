@@ -66,12 +66,13 @@ class CutlistReader(TitleCutter):
 		<widget name="SeekState" position="0,0" />
 		<widget source="cutlist" position="0,0" render="Listbox" >
 			<convert type="TemplatedMultiContent">
-				{"template": [
+				{
+					"template": [
 						MultiContentEntryText(text = 1),
 						MultiContentEntryText(text = 2)
 					],
-				 "fonts": [gFont("Regular", 18)],
-				 "itemHeight": 20
+					"fonts": [gFont("Regular", 18)],
+					"itemHeight": 20
 				}
 			</convert>
 		</widget>

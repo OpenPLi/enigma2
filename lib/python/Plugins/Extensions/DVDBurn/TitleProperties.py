@@ -51,11 +51,11 @@ class TitleProperties(Screen,ConfigListScreen):
 
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
-		    "green": self.exit,
-		    "red": self.cancel,
-		    "yellow": self.editTitle,
-		    "cancel": self.cancel,
-		    "ok": self.ok,
+			"green": self.exit,
+			"red": self.cancel,
+			"yellow": self.editTitle,
+			"cancel": self.cancel,
+			"ok": self.ok,
 		}, -2)
 
 		self.onShown.append(self.update)
