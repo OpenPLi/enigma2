@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-22 22:37+0100\n"
-"PO-Revision-Date: 2020-03-22 22:42+0100\n"
+"POT-Creation-Date: 2020-05-02 18:15+0200\n"
+"PO-Revision-Date: 2020-05-02 18:27+0200\n"
 "Last-Translator: Pr2\n"
 "Language-Team: french\n"
 "Language: fr\n"
@@ -1130,6 +1130,10 @@ msgstr "Demander à l'utilisateur"
 
 msgid "Aspect ratio"
 msgstr "Format d'image"
+
+#, python-format
+msgid "Aspect ratio changed to %s"
+msgstr "Format d'image changé en %s"
 
 msgid "Assigned CAIds:"
 msgstr "CAIds assignés:"
@@ -2654,10 +2658,13 @@ msgstr "Supprimer l’entrée de la liste de lecture"
 msgid "Delete saved playlist"
 msgstr "Supprimer la liste de lecture sauvegardée"
 
-msgid "Delete the character to the left of text buffer cursor"
+msgid "Delete the all the text"
+msgstr "Supprimer tout le texte"
+
+msgid "Delete the character to the left of text cursor"
 msgstr "Supprimer le caractère à gauche du curseur du texte"
 
-msgid "Delete the character under the text buffer cursor"
+msgid "Delete the character under the text cursor"
 msgstr "Supprimer le caractère sous le curseur du texte"
 
 msgid "Delete timer"
@@ -5106,29 +5113,29 @@ msgstr "Déplacer l'incrustation d'image (PiP)"
 msgid "Move east"
 msgstr "Déplacer vers l'est"
 
-msgid "Move the text buffer cursor left"
+msgid "Move the keyboard cursor down"
+msgstr "Déplacez le curseur du clavier vers le bas"
+
+msgid "Move the keyboard cursor left"
+msgstr "Déplacez le curseur du clavier à gauche"
+
+msgid "Move the keyboard cursor right"
+msgstr "Déplacez le curseur du clavier à droite"
+
+msgid "Move the keyboard cursor up"
+msgstr "Déplacez le curseur du clavier vers le haut"
+
+msgid "Move the text cursor left"
 msgstr "Déplacez le curseur de texte à gauche"
 
-msgid "Move the text buffer cursor right"
+msgid "Move the text cursor right"
 msgstr "Déplacer le curseur de texte à droite"
 
-msgid "Move the text buffer cursor to the first character"
+msgid "Move the text cursor to the first character"
 msgstr "Déplacez le curseur de texte vers le premier caractère"
 
-msgid "Move the text buffer cursor to the last character"
+msgid "Move the text cursor to the last character"
 msgstr "Déplacez le curseur de texte vers le dernier caractère"
-
-msgid "Move the virtual keyboard cursor down"
-msgstr "Déplacez le curseur du clavier virtuel vers le bas"
-
-msgid "Move the virtual keyboard cursor left"
-msgstr "Déplacez le curseur du clavier virtuel à gauche"
-
-msgid "Move the virtual keyboard cursor right"
-msgstr "Déplacez le curseur du clavier virtuel à droite"
-
-msgid "Move the virtual keyboard cursor up"
-msgstr "Déplacez le curseur du clavier virtuel vers le haut"
 
 msgid "Move to position X"
 msgstr "Déplacer vers la position X"
@@ -6235,6 +6242,9 @@ msgstr "Seuil de puissance. Consulter le manuel de votre récepteur pour plus d�
 
 msgid "PowerMenu"
 msgstr "Menu alimentation"
+
+msgid "Powerless"
+msgstr ""
 
 msgid "Predefined transponder"
 msgstr "Transpondeur prédéfini"
@@ -7439,8 +7449,11 @@ msgstr "Choisir la fréquence de la bande utilisateur (User Band) a assigné à 
 msgid "Select the User Band to be assigned to this tuner. This is an index into the table of frequencies the SCR switch or SCR LNB uses to pass the requested transponder to the tuner."
 msgstr "Sélectionner la bande utilisateur (User Band) assignée à ce tuner. Ceci est un index dans la table des fréquences du switch SCR ou du LNB SCR utilisé pour passer le transpondeur demandé au tuner."
 
-msgid "Select the character or action under the virtual keyboard cursor"
-msgstr "Sélectionnez le caractère ou l'action sous le curseur du clavier virtuel"
+msgid "Select the character or action under the keyboard cursor"
+msgstr "Sélectionnez le caractère ou l'action sous le curseur du clavier"
+
+msgid "Select the locale from a menu"
+msgstr "Sélectionnez les paramètres régionaux à partir d’un menu"
 
 msgid "Select the manufacturer of your SCR device. If the manufacturer is not listed, set 'SCR' to 'user defined' and enter the device parameters manually according to its spec sheet."
 msgstr "Sélectionnez le fabricant de votre appareil SCR. Si le fabricant n’est pas listé, définir ‘SCR’ ou ‘défini par l’utilisateur’ et entrez les paramètres de l’appareil en fonction de la fiche technique."
@@ -7472,6 +7485,12 @@ msgstr "Sélectionnez le satellite que vous voulez configurer. Lorsque ce satell
 msgid "Select the satellite your dish receives from. If you are unsure select 'automatic' and the receiver will attempt to determine this for you."
 msgstr "Sélectionnez le satellite que reçoit votre antenne. Si vous n’êtes pas certains choisissez ‘automatique’ et le receveur va essayer de déterminer ceci pour vous."
 
+msgid "Select the shifted character set"
+msgstr "Sélectionnez le jeu de caractères décalé"
+
+msgid "Select the shifted character set for the next character only"
+msgstr "Sélectionnez le caractère décalé uniquement pour le suivant"
+
 msgid "Select the time zone within the area or region."
 msgstr "Sélectionnez le fuseau horaire dans la zone ou la région."
 
@@ -7489,15 +7508,6 @@ msgstr "Sélectionnez le type de LNB/périphérique étant utilisé (normallemen
 
 msgid "Select the type of Single Cable Reception device you are using."
 msgstr "Sélectionnez le type de SCR (Single Cable Réception) que vous utilisez."
-
-msgid "Select the virtual keyboard locale from a menu"
-msgstr "Sélectionnez les paramètres régionaux du clavier virtuel dans un menu"
-
-msgid "Select the virtual keyboard shifted character set"
-msgstr "Sélectionnez le jeu de caractères décalé du clavier virtuel"
-
-msgid "Select the virtual keyboard shifted character set for the next character only"
-msgstr "Sélectionnez le clavier virtuel décalé pour le caractère suivant uniquement"
 
 msgid "Select update source"
 msgstr "Sélectionnez la source de mise à jour"
@@ -8720,6 +8730,9 @@ msgstr "T2MI PLP ID"
 msgid "T2MI RAW Mode"
 msgstr "T2MI mode RAW"
 
+msgid "TEXT"
+msgstr "TEXTE"
+
 #. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
 msgid "TRANSLATOR_INFO"
 msgstr ""
@@ -8731,7 +8744,7 @@ msgstr ""
 "\n"
 "Traducteur: Pr2\n"
 "Support: www.openpli.org\n"
-"Dernière MAJ: 25-03-2020"
+"Dernière MAJ: 02-05-2020"
 
 msgid "TS file is too large for ISO9660 level 1!"
 msgstr "Fichier TS trop grand pour le niveau 1 ISO9660!"
@@ -9341,6 +9354,9 @@ msgstr "Basculer du mode TV/RADIO"
 
 msgid "Toggle a cut mark at the current position"
 msgstr "Commuter un marqueur coupé à cette position"
+
+msgid "Toggle aspect ratio..."
+msgstr "Basculer le format d’image…"
 
 msgid "Toggle dashed flickering line for this service"
 msgstr "Basculer les scintillements en pointillés pour ce service"
@@ -10576,6 +10592,9 @@ msgstr "Vous devez attendre %s!"
 #, python-format
 msgid "You must switch to the service %s (%s - '%s')!\n"
 msgstr "Vous devez basculer vers le service %s (%s - '%s')!\n"
+
+msgid "You seem to be in timeshift!"
+msgstr "Vous semblez être en PauseDirect!"
 
 msgid "Your collection exceeds the size of a single layer medium, you will need a blank dual layer DVD!"
 msgstr "Votre collection dépasse la taille d'un support simple couche, vous aurez besoin d'un DVD double couche vierge!"

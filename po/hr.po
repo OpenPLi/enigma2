@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-22 22:41+0100\n"
+"POT-Creation-Date: 2020-05-02 18:15+0200\n"
 "PO-Revision-Date: 2020-03-23 11:15+0100\n"
 "Last-Translator: Željko <zeljko2@hi.ht.hr>\n"
 "Language-Team: Željko\n"
@@ -1140,6 +1140,10 @@ msgid "Ask user"
 msgstr "Pitaj korisnika"
 
 msgid "Aspect ratio"
+msgstr "Omjer slike"
+
+#, fuzzy, python-format
+msgid "Aspect ratio changed to %s"
 msgstr "Omjer slike"
 
 msgid "Assigned CAIds:"
@@ -2665,10 +2669,15 @@ msgstr "Izbrišite unos s popisa za reprodukciju"
 msgid "Delete saved playlist"
 msgstr "Izbrišite spremljeni popis pjesama"
 
-msgid "Delete the character to the left of text buffer cursor"
+msgid "Delete the all the text"
+msgstr ""
+
+#, fuzzy
+msgid "Delete the character to the left of text cursor"
 msgstr "Izbrišite znak s lijeve strane pokazivača međuspremnika"
 
-msgid "Delete the character under the text buffer cursor"
+#, fuzzy
+msgid "Delete the character under the text cursor"
 msgstr "Izbrišite znak ispod pokazivača međuspremnika"
 
 msgid "Delete timer"
@@ -5123,29 +5132,37 @@ msgstr "Premjestite sliku u slici"
 msgid "Move east"
 msgstr "Pomaknite na istok"
 
-msgid "Move the text buffer cursor left"
-msgstr "Premjestite kursor ulijevo"
-
-msgid "Move the text buffer cursor right"
-msgstr "Pomaknite kursor tekstnog međuspremnika udesno"
-
-msgid "Move the text buffer cursor to the first character"
-msgstr "Pomaknite kursor tekstnog međuspremnika na prvi znak"
-
-msgid "Move the text buffer cursor to the last character"
-msgstr "Pomaknite pokazivač međuspremnika teksta na posljednji znak"
-
-msgid "Move the virtual keyboard cursor down"
+#, fuzzy
+msgid "Move the keyboard cursor down"
 msgstr "Pomaknite kursor virtualne tipkovnice prema dolje"
 
-msgid "Move the virtual keyboard cursor left"
+#, fuzzy
+msgid "Move the keyboard cursor left"
 msgstr "Pomaknite kursor virtualne tipkovnice prema lijevo"
 
-msgid "Move the virtual keyboard cursor right"
+#, fuzzy
+msgid "Move the keyboard cursor right"
 msgstr "Pomaknite kursor virtualne tipkovnice prema desno"
 
-msgid "Move the virtual keyboard cursor up"
+#, fuzzy
+msgid "Move the keyboard cursor up"
 msgstr "Pomaknite kursor virtualne tipkovnice prema gore"
+
+#, fuzzy
+msgid "Move the text cursor left"
+msgstr "Premjestite kursor ulijevo"
+
+#, fuzzy
+msgid "Move the text cursor right"
+msgstr "Pomaknite kursor tekstnog međuspremnika udesno"
+
+#, fuzzy
+msgid "Move the text cursor to the first character"
+msgstr "Pomaknite kursor tekstnog međuspremnika na prvi znak"
+
+#, fuzzy
+msgid "Move the text cursor to the last character"
+msgstr "Pomaknite pokazivač međuspremnika teksta na posljednji znak"
 
 msgid "Move to position X"
 msgstr "Pomaknite na poziciju X"
@@ -6251,6 +6268,10 @@ msgid "Power threshold. Consult your receiver's manual for more information."
 msgstr "Prag snage. Dodatne informacije potražite u priručniku prijemnika."
 
 msgid "PowerMenu"
+msgstr "Izbornik napajanja"
+
+#, fuzzy
+msgid "Powerless"
 msgstr "Izbornik napajanja"
 
 msgid "Predefined transponder"
@@ -7459,8 +7480,13 @@ msgstr "Odaberite korisnički opseg frekvencije koju želite dodijeliti ovom tju
 msgid "Select the User Band to be assigned to this tuner. This is an index into the table of frequencies the SCR switch or SCR LNB uses to pass the requested transponder to the tuner."
 msgstr "Odaberite korisnički opseg koji će biti dodijeljen ovom tjuneru. Ovo je indeks u tablici frekvencija koje SCR preklopnik ili SCR LNB koristi za prijenos traženog transpondera u tjuner."
 
-msgid "Select the character or action under the virtual keyboard cursor"
+#, fuzzy
+msgid "Select the character or action under the keyboard cursor"
 msgstr "Odaberite znak ili radnju ispod pokazivača virtualne tipkovnice"
+
+#, fuzzy
+msgid "Select the locale from a menu"
+msgstr "Odaberite jezičnu oznaku virtualne tipkovnice iz izbornika"
 
 msgid "Select the manufacturer of your SCR device. If the manufacturer is not listed, set 'SCR' to 'user defined' and enter the device parameters manually according to its spec sheet."
 msgstr "Odaberite proizvođača vašeg SCR uređaja. Ako proizvođač nije na popisu, postavite 'SCR' na 'korisnički definirano' i ručno unesite parametre uređaja prema specifikacijama."
@@ -7492,6 +7518,14 @@ msgstr "Odaberite satelit koji želite konfigurirati. Nakon konfiguriranja tog s
 msgid "Select the satellite your dish receives from. If you are unsure select 'automatic' and the receiver will attempt to determine this for you."
 msgstr "Odaberite satelit od kojeg vaše antene primaju signal. Ako niste sigurni odaberite 'automatsko' i primatelj će to pokušati odrediti."
 
+#, fuzzy
+msgid "Select the shifted character set"
+msgstr "Odaberite skup znakova pomaknutih virtualnom tipkovnicom"
+
+#, fuzzy
+msgid "Select the shifted character set for the next character only"
+msgstr "Odaberite skup znakova virtualne tipkovnice pomaknut samo za sljedeći znak"
+
 msgid "Select the time zone within the area or region."
 msgstr "Odaberite vremensku zonu unutar područja ili regije."
 
@@ -7509,15 +7543,6 @@ msgstr "Odaberite vrstu LNB/uređaja koji se koristi (uobičajeno 'univerzalan')
 
 msgid "Select the type of Single Cable Reception device you are using."
 msgstr "Odaberite tjuner na koji je priključen signalni kabel SCR uređaja."
-
-msgid "Select the virtual keyboard locale from a menu"
-msgstr "Odaberite jezičnu oznaku virtualne tipkovnice iz izbornika"
-
-msgid "Select the virtual keyboard shifted character set"
-msgstr "Odaberite skup znakova pomaknutih virtualnom tipkovnicom"
-
-msgid "Select the virtual keyboard shifted character set for the next character only"
-msgstr "Odaberite skup znakova virtualne tipkovnice pomaknut samo za sljedeći znak"
 
 msgid "Select update source"
 msgstr "Odaberite izvor ažuriranja"
@@ -8740,6 +8765,9 @@ msgstr "T2MI PLP ID"
 msgid "T2MI RAW Mode"
 msgstr "T2MI RAW način"
 
+msgid "TEXT"
+msgstr ""
+
 #. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
 msgid "TRANSLATOR_INFO"
 msgstr "INFORMACIJE O PREVODITELJU"
@@ -9352,6 +9380,10 @@ msgstr "TV/RADIO način"
 
 msgid "Toggle a cut mark at the current position"
 msgstr "Dodajte/uklonite oznaku na trenutnoj poziciji"
+
+#, fuzzy
+msgid "Toggle aspect ratio..."
+msgstr "Omjer slike"
 
 msgid "Toggle dashed flickering line for this service"
 msgstr "Prikažite/sakrijte crtu koja treperi za ovu uslugu"
@@ -10584,6 +10616,9 @@ msgstr "Morate pričekati %s!"
 #, python-format
 msgid "You must switch to the service %s (%s - '%s')!\n"
 msgstr "Morate se prebaciti na uslugu %s (%s - '%s')!\n"
+
+msgid "You seem to be in timeshift!"
+msgstr ""
 
 msgid "Your collection exceeds the size of a single layer medium, you will need a blank dual layer DVD!"
 msgstr "Vaša zbirka premašuje veličinu jednog sloja medija, trebat će vam prazan dvoslojni DVD!"

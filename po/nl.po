@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-22 22:37+0100\n"
+"POT-Creation-Date: 2020-05-02 18:15+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Frenske <voorzitter@openpli.org>\n"
 "Language-Team: PLiteam <translators@openpli.org>\n"
@@ -1128,6 +1128,10 @@ msgid "Ask user"
 msgstr "Vraag de gebruiker."
 
 msgid "Aspect ratio"
+msgstr "Beeldverhouding"
+
+#, fuzzy, python-format
+msgid "Aspect ratio changed to %s"
 msgstr "Beeldverhouding"
 
 msgid "Assigned CAIds:"
@@ -2830,10 +2834,15 @@ msgstr "Verwijder een item uit de afspeellijst"
 msgid "Delete saved playlist"
 msgstr "Verwijder een opgeslagen afspeellijst"
 
-msgid "Delete the character to the left of text buffer cursor"
+msgid "Delete the all the text"
+msgstr ""
+
+#, fuzzy
+msgid "Delete the character to the left of text cursor"
 msgstr "Verwijder het teken links van de cursor"
 
-msgid "Delete the character under the text buffer cursor"
+#, fuzzy
+msgid "Delete the character under the text cursor"
 msgstr "Verwijder het teken onder de cursor"
 
 msgid "Delete timer"
@@ -5313,29 +5322,37 @@ msgstr "Verplaats het PIP scherm"
 msgid "Move east"
 msgstr "Draai oost"
 
-msgid "Move the text buffer cursor left"
-msgstr "Verplaatst de cursor naar links"
-
-msgid "Move the text buffer cursor right"
-msgstr "Verplaatst de cursor naar rechts"
-
-msgid "Move the text buffer cursor to the first character"
-msgstr "Verplaatst de cursor naar het eerste teken"
-
-msgid "Move the text buffer cursor to the last character"
-msgstr "Verplaats de cursor naar het laatste teken"
-
-msgid "Move the virtual keyboard cursor down"
+#, fuzzy
+msgid "Move the keyboard cursor down"
 msgstr "Verplaats de cursor van het virtuale toetsenbord naar onder"
 
-msgid "Move the virtual keyboard cursor left"
+#, fuzzy
+msgid "Move the keyboard cursor left"
 msgstr "Verplaats de cursor van het virtuale toetsenbord naar kinks"
 
-msgid "Move the virtual keyboard cursor right"
+#, fuzzy
+msgid "Move the keyboard cursor right"
 msgstr "Verplaats de cursor van het virtuale toetsenbord naar rechts"
 
-msgid "Move the virtual keyboard cursor up"
+#, fuzzy
+msgid "Move the keyboard cursor up"
 msgstr "Verplaats de cursor van het virtuale toetsenbord naar boven"
+
+#, fuzzy
+msgid "Move the text cursor left"
+msgstr "Verplaatst de cursor naar links"
+
+#, fuzzy
+msgid "Move the text cursor right"
+msgstr "Verplaatst de cursor naar rechts"
+
+#, fuzzy
+msgid "Move the text cursor to the first character"
+msgstr "Verplaatst de cursor naar het eerste teken"
+
+#, fuzzy
+msgid "Move the text cursor to the last character"
+msgstr "Verplaats de cursor naar het laatste teken"
 
 msgid "Move to position X"
 msgstr "Ga naar positie X"
@@ -6473,6 +6490,10 @@ msgid "Power threshold. Consult your receiver's manual for more information."
 msgstr "Maximaal voltage. Raadpleeg de handleiding van uw ontvanger voor meer details."
 
 msgid "PowerMenu"
+msgstr "Powermenu"
+
+#, fuzzy
+msgid "Powerless"
 msgstr "Powermenu"
 
 msgid "Predefined transponder"
@@ -7682,8 +7703,13 @@ msgstr "Selecteer het User Band frequentie dat aan deze tuner wordt toegewezen. 
 msgid "Select the User Band to be assigned to this tuner. This is an index into the table of frequencies the SCR switch or SCR LNB uses to pass the requested transponder to the tuner."
 msgstr "Selecteer het User Band die aan deze tuner wordt toegewezen. Dit is een index voor de frequentietabel die de SCR switch of SCR LNB gebruikt om de gevraagde transponder toe te kennen aan de tuner."
 
-msgid "Select the character or action under the virtual keyboard cursor"
+#, fuzzy
+msgid "Select the character or action under the keyboard cursor"
 msgstr "Selecteer het teken of de actie onder de cursor van het virtuele toetsenbord"
+
+#, fuzzy
+msgid "Select the locale from a menu"
+msgstr "Kies de landinstelling van het virtuele toetsenbord vanuit het menu"
 
 msgid "Select the manufacturer of your SCR device. If the manufacturer is not listed, set 'SCR' to 'user defined' and enter the device parameters manually according to its spec sheet."
 msgstr "Kies de fabrikant van uw Unicable device. Indien de naam niet wordt vermeld, zet 'SCR' op 'gebruiker-gedefinieerd' en voer de juiste details handmatig in conform de specificaties van het apparaat."
@@ -7716,6 +7742,14 @@ msgid "Select the satellite your dish receives from. If you are unsure select 'a
 msgstr "Kies de satelliet die door uw schotel ontvangen wordt. Bij twijfel kies dan voor 'automatisch' en de ontvanger zal proberen om deze automatisch te bepalen."
 
 #, fuzzy
+msgid "Select the shifted character set"
+msgstr "Kies de variabele tekenset op het virtuele toetsenbord"
+
+#, fuzzy
+msgid "Select the shifted character set for the next character only"
+msgstr "Kies enkel voor het volgende teken de variabele tekenset op het virtuele toetsenbord"
+
+#, fuzzy
 msgid "Select the time zone within the area or region."
 msgstr "Kies de horizontale resolutie:"
 
@@ -7733,15 +7767,6 @@ msgstr "Kies het type LNB die u gebruikt. (normaal is dit universeel). Indien uw
 
 msgid "Select the type of Single Cable Reception device you are using."
 msgstr "Kies het type Unicable device welke u gebruikt."
-
-msgid "Select the virtual keyboard locale from a menu"
-msgstr "Kies de landinstelling van het virtuele toetsenbord vanuit het menu"
-
-msgid "Select the virtual keyboard shifted character set"
-msgstr "Kies de variabele tekenset op het virtuele toetsenbord"
-
-msgid "Select the virtual keyboard shifted character set for the next character only"
-msgstr "Kies enkel voor het volgende teken de variabele tekenset op het virtuele toetsenbord"
 
 msgid "Select update source"
 msgstr "Kies de bron om te updaten"
@@ -8976,6 +9001,9 @@ msgstr "T2MI PLP ID"
 msgid "T2MI RAW Mode"
 msgstr "T2MI RAW Modus"
 
+msgid "TEXT"
+msgstr ""
+
 #. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
 msgid "TRANSLATOR_INFO"
 msgstr ""
@@ -9611,6 +9639,10 @@ msgstr "Schakel tussen TV/RADIO"
 
 msgid "Toggle a cut mark at the current position"
 msgstr "Op de huidige positie een snijmarkering aanbrengen"
+
+#, fuzzy
+msgid "Toggle aspect ratio..."
+msgstr "Beeldverhouding"
 
 msgid "Toggle dashed flickering line for this service"
 msgstr "Activeer de optie 'verberg de stippellijn' voor dit kanaal"
@@ -10889,6 +10921,9 @@ msgstr "Wacht op %s!"
 #, python-format
 msgid "You must switch to the service %s (%s - '%s')!\n"
 msgstr "U moet naar %s (%s-'%s') omschakelen!\n"
+
+msgid "You seem to be in timeshift!"
+msgstr ""
 
 msgid "Your collection exceeds the size of a single layer medium, you will need a blank dual layer DVD!"
 msgstr "Uw verzameling is groter dan wat erop een single layer medium past, u heeft een lege dual layer DVD nodig!"
