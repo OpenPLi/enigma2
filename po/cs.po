@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-22 22:37+0100\n"
+"POT-Creation-Date: 2020-05-02 18:15+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi <ims@openpli.org>\n"
@@ -1294,6 +1294,11 @@ msgstr "Zeptat se"
 
 #
 msgid "Aspect ratio"
+msgstr "Poměr stran"
+
+#
+#, fuzzy, python-format
+msgid "Aspect ratio changed to %s"
 msgstr "Poměr stran"
 
 #
@@ -3030,10 +3035,15 @@ msgstr "Smazat položku playlistu"
 msgid "Delete saved playlist"
 msgstr "Smazat uložený playlist"
 
-msgid "Delete the character to the left of text buffer cursor"
+msgid "Delete the all the text"
+msgstr ""
+
+#, fuzzy
+msgid "Delete the character to the left of text cursor"
 msgstr "Smazat znak před kurzorem"
 
-msgid "Delete the character under the text buffer cursor"
+#, fuzzy
+msgid "Delete the character under the text cursor"
 msgstr "Smazat znak pod kurzorem"
 
 #
@@ -5867,29 +5877,37 @@ msgstr "Posunout obraz v obraze"
 msgid "Move east"
 msgstr "Posun východně"
 
-msgid "Move the text buffer cursor left"
-msgstr "Kurzor o jeden znak vlevo"
-
-msgid "Move the text buffer cursor right"
-msgstr "Kurzor o jeden znak vpravo"
-
-msgid "Move the text buffer cursor to the first character"
-msgstr "Kurzor na začátek textu"
-
-msgid "Move the text buffer cursor to the last character"
-msgstr "Kurzor na konec textu"
-
-msgid "Move the virtual keyboard cursor down"
+#, fuzzy
+msgid "Move the keyboard cursor down"
 msgstr "Dolů"
 
-msgid "Move the virtual keyboard cursor left"
+#, fuzzy
+msgid "Move the keyboard cursor left"
 msgstr "Vlevo"
 
-msgid "Move the virtual keyboard cursor right"
+#, fuzzy
+msgid "Move the keyboard cursor right"
 msgstr "Vpravo"
 
-msgid "Move the virtual keyboard cursor up"
+#, fuzzy
+msgid "Move the keyboard cursor up"
 msgstr "Nahoru"
+
+#, fuzzy
+msgid "Move the text cursor left"
+msgstr "Kurzor o jeden znak vlevo"
+
+#, fuzzy
+msgid "Move the text cursor right"
+msgstr "Kurzor o jeden znak vpravo"
+
+#, fuzzy
+msgid "Move the text cursor to the first character"
+msgstr "Kurzor na začátek textu"
+
+#, fuzzy
+msgid "Move the text cursor to the last character"
+msgstr "Kurzor na konec textu"
 
 msgid "Move to position X"
 msgstr "Natáčí se na pozici X"
@@ -7198,6 +7216,11 @@ msgstr "Prahová hodnota napájení. Další informace získáte v návodu k př
 
 #
 msgid "PowerMenu"
+msgstr "Menu napájení"
+
+#
+#, fuzzy
+msgid "Powerless"
 msgstr "Menu napájení"
 
 #
@@ -8614,8 +8637,13 @@ msgstr "Vyberte frekvenci uživatelského pásma, která bude přiřazena tomuto
 msgid "Select the User Band to be assigned to this tuner. This is an index into the table of frequencies the SCR switch or SCR LNB uses to pass the requested transponder to the tuner."
 msgstr "Vyberte uživatelské pásmo, které bude přiřazeno tomuto tuneru. Jde o index do tabulky kmitočtů, který přepínač SCR nebo SCN LNB používá k předání požadovaného transponderu do tuneru."
 
-msgid "Select the character or action under the virtual keyboard cursor"
+#, fuzzy
+msgid "Select the character or action under the keyboard cursor"
 msgstr "Vybrat znak nebo akci pod kurzorem"
+
+#, fuzzy
+msgid "Select the locale from a menu"
+msgstr "Výběr lokalizace z menu"
 
 msgid "Select the manufacturer of your SCR device. If the manufacturer is not listed, set 'SCR' to 'user defined' and enter the device parameters manually according to its spec sheet."
 msgstr "Vyberte výrobce SRC zařízení. Není-li výrobce uveden, nastavte \"SCR\" na \"uživatelsky definované\" a zadejte parametry zařízení ručně podle specifikačního listu."
@@ -8648,6 +8676,14 @@ msgstr "Zvolte satelit, který chcete konfigurovat. Po nakonfigurování tohoto 
 msgid "Select the satellite your dish receives from. If you are unsure select 'automatic' and the receiver will attempt to determine this for you."
 msgstr "Vyberte satelit na který je natočena Vaše parabola. Pokud si nejste jisti, vyberte možnost 'Automaticky' a přijímač se o to pokusí zjistit sám."
 
+#, fuzzy
+msgid "Select the shifted character set"
+msgstr "Další rozložení znaků"
+
+#, fuzzy
+msgid "Select the shifted character set for the next character only"
+msgstr "Shift pro následující znak"
+
 #
 msgid "Select the time zone within the area or region."
 msgstr "Vyberte časové pásmo v oblasti nebo regionu."
@@ -8666,15 +8702,6 @@ msgstr "Zvolte typ použitého LNB/zařízení (obvykle 'Univerzální LNB'). Ne
 
 msgid "Select the type of Single Cable Reception device you are using."
 msgstr "Vyberte typ používaného Single Cable Reception (SRC) zařízení."
-
-msgid "Select the virtual keyboard locale from a menu"
-msgstr "Výběr lokalizace z menu"
-
-msgid "Select the virtual keyboard shifted character set"
-msgstr "Další rozložení znaků"
-
-msgid "Select the virtual keyboard shifted character set for the next character only"
-msgstr "Shift pro následující znak"
 
 #
 msgid "Select update source"
@@ -10079,6 +10106,9 @@ msgstr "T2MI PLP ID"
 msgid "T2MI RAW Mode"
 msgstr "T2MI RAW mód"
 
+msgid "TEXT"
+msgstr ""
+
 #
 #. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
 msgid "TRANSLATOR_INFO"
@@ -10759,6 +10789,11 @@ msgstr "Přepínat TV/RADIO mód"
 #
 msgid "Toggle a cut mark at the current position"
 msgstr "Přepnout střihovou značku na této pozici"
+
+#
+#, fuzzy
+msgid "Toggle aspect ratio..."
+msgstr "Poměr stran"
 
 msgid "Toggle dashed flickering line for this service"
 msgstr "Přepínat blikající linku pro tento program"
@@ -12143,6 +12178,9 @@ msgstr "Musíte počkat %s!"
 #, python-format
 msgid "You must switch to the service %s (%s - '%s')!\n"
 msgstr "Z důvodu časovače (%s) je potřeba přejít na %s ( '%s')!\n"
+
+msgid "You seem to be in timeshift!"
+msgstr ""
 
 #
 msgid "Your collection exceeds the size of a single layer medium, you will need a blank dual layer DVD!"

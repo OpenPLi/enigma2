@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-22 22:37+0100\n"
+"POT-Creation-Date: 2020-05-02 18:15+0200\n"
 "PO-Revision-Date: 2020-02-10 12:49+0100\n"
 "Last-Translator: Andrej Tobola <andrej.tobola@gmail.com>\n"
 "Language-Team: \n"
@@ -1140,6 +1140,10 @@ msgid "Ask user"
 msgstr "Opýtať sa"
 
 msgid "Aspect ratio"
+msgstr "Pomer strán"
+
+#, fuzzy, python-format
+msgid "Aspect ratio changed to %s"
 msgstr "Pomer strán"
 
 msgid "Assigned CAIds:"
@@ -2666,10 +2670,15 @@ msgstr "Zmazať položku v zozname prehrávok"
 msgid "Delete saved playlist"
 msgstr "Zmazať uložený zoznam prehrávok"
 
-msgid "Delete the character to the left of text buffer cursor"
+msgid "Delete the all the text"
+msgstr ""
+
+#, fuzzy
+msgid "Delete the character to the left of text cursor"
 msgstr "Vymazať znak vľavo od kurzora"
 
-msgid "Delete the character under the text buffer cursor"
+#, fuzzy
+msgid "Delete the character under the text cursor"
 msgstr "Vymazať znak pod kurzorom"
 
 msgid "Delete timer"
@@ -5129,29 +5138,37 @@ msgstr "Premiestniť obraz v obraze"
 msgid "Move east"
 msgstr "Pootočiť východne"
 
-msgid "Move the text buffer cursor left"
-msgstr "Presunúť textový kurzor vľavo"
-
-msgid "Move the text buffer cursor right"
-msgstr "Presunúť textový kurzor vpravo"
-
-msgid "Move the text buffer cursor to the first character"
-msgstr "Presunúť textový kurzor na prvý znak"
-
-msgid "Move the text buffer cursor to the last character"
-msgstr "Presunúť textový kurzor na posledný znak"
-
-msgid "Move the virtual keyboard cursor down"
+#, fuzzy
+msgid "Move the keyboard cursor down"
 msgstr "Presunúť kurzor virtuálnej klávesnice nadol"
 
-msgid "Move the virtual keyboard cursor left"
+#, fuzzy
+msgid "Move the keyboard cursor left"
 msgstr "Presunúť kurzor virtuálnej klávesnice vľavo"
 
-msgid "Move the virtual keyboard cursor right"
+#, fuzzy
+msgid "Move the keyboard cursor right"
 msgstr "Presunúť kurzor virtuálnej klávesnice vpravo"
 
-msgid "Move the virtual keyboard cursor up"
+#, fuzzy
+msgid "Move the keyboard cursor up"
 msgstr "Presunúť kurzor virtuálnej klávesnice nahor"
+
+#, fuzzy
+msgid "Move the text cursor left"
+msgstr "Presunúť textový kurzor vľavo"
+
+#, fuzzy
+msgid "Move the text cursor right"
+msgstr "Presunúť textový kurzor vpravo"
+
+#, fuzzy
+msgid "Move the text cursor to the first character"
+msgstr "Presunúť textový kurzor na prvý znak"
+
+#, fuzzy
+msgid "Move the text cursor to the last character"
+msgstr "Presunúť textový kurzor na posledný znak"
 
 msgid "Move to position X"
 msgstr "Pootočiť na pozíciu X"
@@ -6258,6 +6275,10 @@ msgid "Power threshold. Consult your receiver's manual for more information."
 msgstr "Úroveň napájania. Pre viac informácií si preštudujte návod k prijímaču."
 
 msgid "PowerMenu"
+msgstr "Menu napájania"
+
+#, fuzzy
+msgid "Powerless"
 msgstr "Menu napájania"
 
 msgid "Predefined transponder"
@@ -7464,8 +7485,13 @@ msgstr "Vyberte frekvenciu užívateľského pásma, ktorý bude priradený k to
 msgid "Select the User Band to be assigned to this tuner. This is an index into the table of frequencies the SCR switch or SCR LNB uses to pass the requested transponder to the tuner."
 msgstr "Vyberte užívateľské pásmo, ktoré bude priradené k tomuto tuneru. Toto je index do tabuľky frekvencií, ktorý používa SCR prepínač alebo SCR LNB na prechod požadovaného transpondéra to tuneru."
 
-msgid "Select the character or action under the virtual keyboard cursor"
+#, fuzzy
+msgid "Select the character or action under the keyboard cursor"
 msgstr "Vyberte znak alebo akciu pod kurzorom virtuálnej klávesnice"
+
+#, fuzzy
+msgid "Select the locale from a menu"
+msgstr "Vyberte jazyk virtuálnej klávesnice z menu"
 
 msgid "Select the manufacturer of your SCR device. If the manufacturer is not listed, set 'SCR' to 'user defined' and enter the device parameters manually according to its spec sheet."
 msgstr "Vyberte výrobcu vášho SCR zariadenia. Ak nie je výrobca v zozname, nastavte 'SCR' na 'Užívateľsky definované' a manuálne vložte parametre zariadenia podľa technickej špecifikácie."
@@ -7498,6 +7524,14 @@ msgid "Select the satellite your dish receives from. If you are unsure select 'a
 msgstr "Vyberte satelit, ktorý sa prijíma z vašej paraboly. Ak si nie ste istý, vyberte voľbu 'automaticky', prijímač sa to pokúsi zistiť za vás."
 
 #, fuzzy
+msgid "Select the shifted character set"
+msgstr "Vyberte znakovú sadu virtuálnej klávesnice po stlačení klávesy Shift"
+
+#, fuzzy
+msgid "Select the shifted character set for the next character only"
+msgstr "Vyberte znakovú sadu virtuálnej klávesnice po stlačení klávesy Shift iba pre ďalší znak"
+
+#, fuzzy
 msgid "Select the time zone within the area or region."
 msgstr "Voľba horizontálneho rozlíšenia:"
 
@@ -7515,15 +7549,6 @@ msgstr "Vyberte typ LNB/zariadenia ktoré sa používa (štandardne to je 'Unive
 
 msgid "Select the type of Single Cable Reception device you are using."
 msgstr "Vyberte typ SCR (Single Cable Reception) zariadenia, ktoré používate."
-
-msgid "Select the virtual keyboard locale from a menu"
-msgstr "Vyberte jazyk virtuálnej klávesnice z menu"
-
-msgid "Select the virtual keyboard shifted character set"
-msgstr "Vyberte znakovú sadu virtuálnej klávesnice po stlačení klávesy Shift"
-
-msgid "Select the virtual keyboard shifted character set for the next character only"
-msgstr "Vyberte znakovú sadu virtuálnej klávesnice po stlačení klávesy Shift iba pre ďalší znak"
 
 msgid "Select update source"
 msgstr "Zvoľte zdroj aktualizácie"
@@ -8748,6 +8773,9 @@ msgstr "T2MI PLP ID"
 msgid "T2MI RAW Mode"
 msgstr "Režim T2MI RAW"
 
+msgid "TEXT"
+msgstr ""
+
 #. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
 msgid "TRANSLATOR_INFO"
 msgstr ""
@@ -9365,6 +9393,10 @@ msgstr "Prepnúť TV/RÁDIO mód"
 
 msgid "Toggle a cut mark at the current position"
 msgstr "Prepnúť strihovú značku na tejto pozícii"
+
+#, fuzzy
+msgid "Toggle aspect ratio..."
+msgstr "Pomer strán"
 
 msgid "Toggle dashed flickering line for this service"
 msgstr "Prepnúť čiarkovaný blikajúci riadok pre túto stanicu"
@@ -10597,6 +10629,9 @@ msgstr "Musíte čakať %s!"
 #, python-format
 msgid "You must switch to the service %s (%s - '%s')!\n"
 msgstr "Prepnite na stanicu %s (%s - '%s')\n"
+
+msgid "You seem to be in timeshift!"
+msgstr ""
 
 msgid "Your collection exceeds the size of a single layer medium, you will need a blank dual layer DVD!"
 msgstr "Zostava presahuje kapacitu jednovrstvového média. Budete potrebovať prázdny dvojvrstvový disk DVD!"

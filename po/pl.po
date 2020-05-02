@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-22 22:37+0100\n"
+"POT-Creation-Date: 2020-05-02 18:15+0200\n"
 "PO-Revision-Date: 2019-12-03 20:02+0100\n"
 "Last-Translator: blzr <blzr@o2.pl>\n"
 "Language-Team: \n"
@@ -1145,6 +1145,10 @@ msgid "Ask user"
 msgstr "Zapytaj użytkownika"
 
 msgid "Aspect ratio"
+msgstr ""
+
+#, python-format
+msgid "Aspect ratio changed to %s"
 msgstr ""
 
 msgid "Assigned CAIds:"
@@ -2674,10 +2678,15 @@ msgstr "Usuń pozycję playlisty"
 msgid "Delete saved playlist"
 msgstr "Usuń zachowaną playlistę"
 
-msgid "Delete the character to the left of text buffer cursor"
+msgid "Delete the all the text"
+msgstr ""
+
+#, fuzzy
+msgid "Delete the character to the left of text cursor"
 msgstr "Usuń znak po lewej stronie kursora bufora tekstowego"
 
-msgid "Delete the character under the text buffer cursor"
+#, fuzzy
+msgid "Delete the character under the text cursor"
 msgstr "Usuń znak pod kursorem bufora tekstu"
 
 msgid "Delete timer"
@@ -5138,29 +5147,37 @@ msgstr "Przesuń PiP"
 msgid "Move east"
 msgstr "Przesuń na wschód"
 
-msgid "Move the text buffer cursor left"
-msgstr "Przenieś kursor bufora tekstowego w lewo"
-
-msgid "Move the text buffer cursor right"
-msgstr "Przenieś kursor bufora tekstowego w prawo"
-
-msgid "Move the text buffer cursor to the first character"
-msgstr "Przenieś kursor bufora tekstowego do pierwszego znaku"
-
-msgid "Move the text buffer cursor to the last character"
-msgstr "Przenieś kursor bufora tekstowego do ostatniego znaku"
-
-msgid "Move the virtual keyboard cursor down"
+#, fuzzy
+msgid "Move the keyboard cursor down"
 msgstr "Przejdź wirtualnym kursorem w dół"
 
-msgid "Move the virtual keyboard cursor left"
+#, fuzzy
+msgid "Move the keyboard cursor left"
 msgstr "Przejdź wirtualnym kursorem w lewo"
 
-msgid "Move the virtual keyboard cursor right"
+#, fuzzy
+msgid "Move the keyboard cursor right"
 msgstr "Przejdź wirtualnym kursorem w prawo"
 
-msgid "Move the virtual keyboard cursor up"
+#, fuzzy
+msgid "Move the keyboard cursor up"
 msgstr "Przejdź wirtualnym kursorem w górę"
+
+#, fuzzy
+msgid "Move the text cursor left"
+msgstr "Przenieś kursor bufora tekstowego w lewo"
+
+#, fuzzy
+msgid "Move the text cursor right"
+msgstr "Przenieś kursor bufora tekstowego w prawo"
+
+#, fuzzy
+msgid "Move the text cursor to the first character"
+msgstr "Przenieś kursor bufora tekstowego do pierwszego znaku"
+
+#, fuzzy
+msgid "Move the text cursor to the last character"
+msgstr "Przenieś kursor bufora tekstowego do ostatniego znaku"
 
 msgid "Move to position X"
 msgstr "Idź do pozycji X"
@@ -6271,6 +6288,10 @@ msgid "Power threshold. Consult your receiver's manual for more information."
 msgstr "Próg mocy. Więcej informacji znajdziesz w instrukcji obsługi odbiornika."
 
 msgid "PowerMenu"
+msgstr "Menu zasilania"
+
+#, fuzzy
+msgid "Powerless"
 msgstr "Menu zasilania"
 
 msgid "Predefined transponder"
@@ -7482,8 +7503,13 @@ msgstr "Wybierz częstotliwość pasma użytkownika, która ma zostać przypisan
 msgid "Select the User Band to be assigned to this tuner. This is an index into the table of frequencies the SCR switch or SCR LNB uses to pass the requested transponder to the tuner."
 msgstr "Wybierz pasmo użytkownika, które ma zostać przypisane do tego tunera. Jest to indeks w tablicy częstotliwości, za pomocą którego przełącznik SCR lub SCR LNB przekazuje żądany transponder do tunera."
 
-msgid "Select the character or action under the virtual keyboard cursor"
+#, fuzzy
+msgid "Select the character or action under the keyboard cursor"
 msgstr "Wybierz znak lub działanie pod kursorem wirtualnej klawiatury"
+
+#, fuzzy
+msgid "Select the locale from a menu"
+msgstr "Wybierz ustawienia regionalne klawiatury wirtualnej z menu"
 
 msgid "Select the manufacturer of your SCR device. If the manufacturer is not listed, set 'SCR' to 'user defined' and enter the device parameters manually according to its spec sheet."
 msgstr "Wybierz producenta twojego urządzenia unicable / SCR. Jeśli nie ma go na liście, ustaw 'SCR' na 'zdefiniowany przez użytkownika' i wpisz parametry ręcznie, zgodnie ze specyfikacją urządzenia."
@@ -7516,6 +7542,14 @@ msgid "Select the satellite your dish receives from. If you are unsure select 'a
 msgstr "Wybierz satelitę, na którego jest ustawiona twoja antena. Jeśli nie jesteś pewien wybierz 'automatycznie' i odbiornik spróbuje ustalić to za ciebie."
 
 #, fuzzy
+msgid "Select the shifted character set"
+msgstr "Wybierz zestaw znaków klawiatury wirtualnej z 'SHIFT'"
+
+#, fuzzy
+msgid "Select the shifted character set for the next character only"
+msgstr "Wybierz alternatywny znak (z SHIFT) klawiatury wirtualnej tylko dla kolejnego znaku"
+
+#, fuzzy
 msgid "Select the time zone within the area or region."
 msgstr "Wybierz rozdzielczość poziomą:"
 
@@ -7533,15 +7567,6 @@ msgstr "Wybierz typ konwetera/urządzenia którego używasz (standardowo 'Uniwer
 
 msgid "Select the type of Single Cable Reception device you are using."
 msgstr "Wybierz typ urządzenia unicable / SCR, którego używasz."
-
-msgid "Select the virtual keyboard locale from a menu"
-msgstr "Wybierz ustawienia regionalne klawiatury wirtualnej z menu"
-
-msgid "Select the virtual keyboard shifted character set"
-msgstr "Wybierz zestaw znaków klawiatury wirtualnej z 'SHIFT'"
-
-msgid "Select the virtual keyboard shifted character set for the next character only"
-msgstr "Wybierz alternatywny znak (z SHIFT) klawiatury wirtualnej tylko dla kolejnego znaku"
 
 msgid "Select update source"
 msgstr "Wybierz źródło aktualizacji"
@@ -8767,6 +8792,9 @@ msgstr ""
 msgid "T2MI RAW Mode"
 msgstr "Tryb T2MI RAW"
 
+msgid "TEXT"
+msgstr ""
+
 #. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
 msgid "TRANSLATOR_INFO"
 msgstr ""
@@ -9385,6 +9413,9 @@ msgstr "Przełączaj między trybami TV/Radio"
 
 msgid "Toggle a cut mark at the current position"
 msgstr "Wstaw znacznik cięcia w aktualnej pozycji"
+
+msgid "Toggle aspect ratio..."
+msgstr ""
 
 msgid "Toggle dashed flickering line for this service"
 msgstr "Ukryj/pokaż przerywaną linie dla tego kanału"
@@ -10619,6 +10650,9 @@ msgstr "Musisz poczekać %s!"
 #, python-format
 msgid "You must switch to the service %s (%s - '%s')!\n"
 msgstr "Musisz przełączyć na kanał %s (%s - '%s')!\n"
+
+msgid "You seem to be in timeshift!"
+msgstr ""
 
 msgid "Your collection exceeds the size of a single layer medium, you will need a blank dual layer DVD!"
 msgstr "Twoja kolekcja przekracza rozmiar zwykłego nośnika DVD, będziesz potrzebował czystegodwuwarstwowego DVD!"
