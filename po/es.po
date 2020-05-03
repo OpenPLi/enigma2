@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-22 22:37+0100\n"
-"PO-Revision-Date: 2020-03-17 01:28+0100\n"
+"POT-Creation-Date: 2020-05-02 18:18+0200\n"
+"PO-Revision-Date: 2020-04-06 21:37+0200\n"
 "Last-Translator: Jose Juan <jzapater@gmail.com>\n"
 "Language-Team: ANGELODOS  angelo2807@hotmail.com\n"
 "Language: es\n"
@@ -1265,6 +1265,11 @@ msgstr "Preguntar al usuario"
 
 #
 msgid "Aspect ratio"
+msgstr "Relación de aspecto"
+
+#
+#, fuzzy, python-format
+msgid "Aspect ratio changed to %s"
 msgstr "Relación de aspecto"
 
 #
@@ -2955,10 +2960,15 @@ msgstr "borrar entrada en la lista de reproducción"
 msgid "Delete saved playlist"
 msgstr "borrar lista de reproducción guardada"
 
-msgid "Delete the character to the left of text buffer cursor"
+msgid "Delete the all the text"
+msgstr ""
+
+#, fuzzy
+msgid "Delete the character to the left of text cursor"
 msgstr "Eliminar el carácter a la izquierda del cursor del búfer de texto."
 
-msgid "Delete the character under the text buffer cursor"
+#, fuzzy
+msgid "Delete the character under the text cursor"
 msgstr "Elimina el carácter debajo del cursor de texto"
 
 msgid "Delete timer"
@@ -4806,7 +4816,7 @@ msgstr ""
 "% s"
 
 msgid "Image: "
-msgstr "Imagen"
+msgstr "Imagen:"
 
 msgid "Import channels and/or EPG from remote receiver URL also when the receiver is getting out of standby"
 msgstr "Importe canales y / o EPG desde la URL del receptor remoto también cuando el receptor salga del modo de espera"
@@ -5698,29 +5708,37 @@ msgstr "Mover PiP"
 msgid "Move east"
 msgstr "Mover al este"
 
-msgid "Move the text buffer cursor left"
-msgstr "Mueve el cursor del búfer de texto a la izquierda"
-
-msgid "Move the text buffer cursor right"
-msgstr "Mueve el cursor del búfer de texto a la izquierda"
-
-msgid "Move the text buffer cursor to the first character"
-msgstr "Mueve el cursor del búfer de texto al primer carácter."
-
-msgid "Move the text buffer cursor to the last character"
-msgstr "Mueve el cursor del búfer de texto al último carácter."
-
-msgid "Move the virtual keyboard cursor down"
+#, fuzzy
+msgid "Move the keyboard cursor down"
 msgstr "Mueve el cursor del teclado virtual hacia abajo"
 
-msgid "Move the virtual keyboard cursor left"
+#, fuzzy
+msgid "Move the keyboard cursor left"
 msgstr "Mueve el cursor del teclado virtual a la izquierda"
 
-msgid "Move the virtual keyboard cursor right"
+#, fuzzy
+msgid "Move the keyboard cursor right"
 msgstr "Mueve el cursor del teclado virtual a la derecha"
 
-msgid "Move the virtual keyboard cursor up"
+#, fuzzy
+msgid "Move the keyboard cursor up"
 msgstr "Mueve el cursor del teclado virtual hacia arriba"
+
+#, fuzzy
+msgid "Move the text cursor left"
+msgstr "Mueve el cursor del búfer de texto a la izquierda"
+
+#, fuzzy
+msgid "Move the text cursor right"
+msgstr "Mueve el cursor del búfer de texto a la izquierda"
+
+#, fuzzy
+msgid "Move the text cursor to the first character"
+msgstr "Mueve el cursor del búfer de texto al primer carácter."
+
+#, fuzzy
+msgid "Move the text cursor to the last character"
+msgstr "Mueve el cursor del búfer de texto al último carácter."
 
 msgid "Move to position X"
 msgstr "Mover a la posición X"
@@ -6991,6 +7009,10 @@ msgid "Power threshold. Consult your receiver's manual for more information."
 msgstr "Umbral de potencia Consulte el manual de su receptor para más información."
 
 msgid "PowerMenu"
+msgstr "PowerMenu"
+
+#, fuzzy
+msgid "Powerless"
 msgstr "PowerMenu"
 
 #
@@ -8354,8 +8376,13 @@ msgstr "Seleccione el canal de la banda de usuario que se asignará a este sinto
 msgid "Select the User Band to be assigned to this tuner. This is an index into the table of frequencies the SCR switch or SCR LNB uses to pass the requested transponder to the tuner."
 msgstr "Seleccione la banda de usuario que se asignará a este sintonizador. Este es un índice en la tabla de frecuencias que utiliza el interruptor SCR o SCR LNB para pasar el transpondedor solicitado al sintonizador."
 
-msgid "Select the character or action under the virtual keyboard cursor"
+#, fuzzy
+msgid "Select the character or action under the keyboard cursor"
 msgstr "Selecciona el personaje o acción debajo del cursor del teclado virtual."
+
+#, fuzzy
+msgid "Select the locale from a menu"
+msgstr "Seleccione la configuración regional del teclado virtual desde un menú"
 
 msgid "Select the manufacturer of your SCR device. If the manufacturer is not listed, set 'SCR' to 'user defined' and enter the device parameters manually according to its spec sheet."
 msgstr "Seleccione el fabricante de su dispositivo SCR. Si el fabricante no está en la lista, configure ‘SCR’ en ‘definido por el usuario’ e ingrese los parámetros del dispositivo manualmente de acuerdo con su hoja de especificaciones.."
@@ -8389,8 +8416,15 @@ msgid "Select the satellite your dish receives from. If you are unsure select 'a
 msgstr "Selecciona el satélite que recibe tu plato. Si no está seguro, seleccione ‘automático’ y el receptor intentará determinarlo por usted."
 
 #, fuzzy
+msgid "Select the shifted character set"
+msgstr "Seleccione el teclado virtual cambiado el conjunto de caracteres"
+
+#, fuzzy
+msgid "Select the shifted character set for the next character only"
+msgstr "Seleccione el teclado virtual cambiado el conjunto de caracteres solo"
+
 msgid "Select the time zone within the area or region."
-msgstr "Seleccione la resolución horizontal:"
+msgstr ""
 
 msgid "Select the tuner that controls the motorised dish."
 msgstr "Seleccione el sintonizador que controla el plato motorizado."
@@ -8406,15 +8440,6 @@ msgstr "Seleccione el tipo de LNB / dispositivo que se utiliza (normalmente ‘U
 
 msgid "Select the type of Single Cable Reception device you are using."
 msgstr "Seleccione el tipo de dispositivo de recepción de cable único que está utilizando."
-
-msgid "Select the virtual keyboard locale from a menu"
-msgstr "Seleccione la configuración regional del teclado virtual desde un menú"
-
-msgid "Select the virtual keyboard shifted character set"
-msgstr "Seleccione el teclado virtual cambiado el conjunto de caracteres"
-
-msgid "Select the virtual keyboard shifted character set for the next character only"
-msgstr "Seleccione el teclado virtual cambiado el conjunto de caracteres solo"
 
 #
 msgid "Select update source"
@@ -9774,6 +9799,9 @@ msgstr "T2MI PLP ID"
 msgid "T2MI RAW Mode"
 msgstr "Modo T2MI RAW"
 
+msgid "TEXT"
+msgstr ""
+
 #
 #. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
 msgid "TRANSLATOR_INFO"
@@ -10464,6 +10492,11 @@ msgstr "Alternar el modo TV / RADIO"
 #
 msgid "Toggle a cut mark at the current position"
 msgstr "Alternar una marca de corte en la posición actual"
+
+#
+#, fuzzy
+msgid "Toggle aspect ratio..."
+msgstr "Relación de aspecto"
 
 msgid "Toggle dashed flickering line for this service"
 msgstr "Conmutar una línea de parpadeo discontinuo para este servicio"
@@ -11819,6 +11852,9 @@ msgstr "Tiene que esperar %s!"
 #, python-format
 msgid "You must switch to the service %s (%s - '%s')!\n"
 msgstr "Debe cambiar al servicio% s (% s - ‘% s’)!\n"
+
+msgid "You seem to be in timeshift!"
+msgstr ""
 
 #
 msgid "Your collection exceeds the size of a single layer medium, you will need a blank dual layer DVD!"

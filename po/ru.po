@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-22 22:37+0100\n"
+"POT-Creation-Date: 2020-05-02 18:15+0200\n"
 "PO-Revision-Date: 2020-04-20 21:51+0300\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: openPLi Dimitrij\n"
@@ -1139,6 +1139,10 @@ msgid "Ask user"
 msgstr "Спросить пользователя"
 
 msgid "Aspect ratio"
+msgstr "Соотношение сторон"
+
+#, fuzzy, python-format
+msgid "Aspect ratio changed to %s"
 msgstr "Соотношение сторон"
 
 msgid "Assigned CAIds:"
@@ -2664,10 +2668,15 @@ msgstr "удалить запись из плейлиста"
 msgid "Delete saved playlist"
 msgstr "удалить сохраненный плейлист"
 
-msgid "Delete the character to the left of text buffer cursor"
+msgid "Delete the all the text"
+msgstr ""
+
+#, fuzzy
+msgid "Delete the character to the left of text cursor"
 msgstr "Удалить символ слева от курсора текстового буфера"
 
-msgid "Delete the character under the text buffer cursor"
+#, fuzzy
+msgid "Delete the character under the text cursor"
 msgstr "Удалить символ под курсором текстового буфера"
 
 msgid "Delete timer"
@@ -3358,6 +3367,7 @@ msgstr "Eritrea"
 msgid "Error"
 msgstr "Ошибка"
 
+#, python-format
 msgid "Error %s"
 msgstr "Ошибка %s"
 
@@ -5119,29 +5129,37 @@ msgstr "Переместить картинку в картинке"
 msgid "Move east"
 msgstr "Перемещение на восток"
 
-msgid "Move the text buffer cursor left"
-msgstr "Переместить курсор текстового буфера влево"
-
-msgid "Move the text buffer cursor right"
-msgstr "Переместить курсор текстового буфера вправо"
-
-msgid "Move the text buffer cursor to the first character"
-msgstr "Переместите курсор текстового буфера на первый символ"
-
-msgid "Move the text buffer cursor to the last character"
-msgstr "Переместите курсор текстового буфера на последний символ"
-
-msgid "Move the virtual keyboard cursor down"
+#, fuzzy
+msgid "Move the keyboard cursor down"
 msgstr "Перемещение курсора виртуальной клавиатуры вниз"
 
-msgid "Move the virtual keyboard cursor left"
+#, fuzzy
+msgid "Move the keyboard cursor left"
 msgstr "Перемещение курсора виртуальной клавиатуры влево"
 
-msgid "Move the virtual keyboard cursor right"
+#, fuzzy
+msgid "Move the keyboard cursor right"
 msgstr "Перемещение курсора виртуальной клавиатуры вправо"
 
-msgid "Move the virtual keyboard cursor up"
+#, fuzzy
+msgid "Move the keyboard cursor up"
 msgstr "Перемещение курсора виртуальной клавиатуры вверх"
+
+#, fuzzy
+msgid "Move the text cursor left"
+msgstr "Переместить курсор текстового буфера влево"
+
+#, fuzzy
+msgid "Move the text cursor right"
+msgstr "Переместить курсор текстового буфера вправо"
+
+#, fuzzy
+msgid "Move the text cursor to the first character"
+msgstr "Переместите курсор текстового буфера на первый символ"
+
+#, fuzzy
+msgid "Move the text cursor to the last character"
+msgstr "Переместите курсор текстового буфера на последний символ"
 
 msgid "Move to position X"
 msgstr "Перемещение к позиции Х"
@@ -6249,6 +6267,10 @@ msgid "Power threshold. Consult your receiver's manual for more information."
 msgstr "Порог мощности. Для получения дополнительной информации обратитесь к инструкции."
 
 msgid "PowerMenu"
+msgstr "Меню выключения"
+
+#, fuzzy
+msgid "Powerless"
 msgstr "Меню выключения"
 
 msgid "Predefined transponder"
@@ -7459,8 +7481,13 @@ msgstr "Выберите частоту полосы пользователя, �
 msgid "Select the User Band to be assigned to this tuner. This is an index into the table of frequencies the SCR switch or SCR LNB uses to pass the requested transponder to the tuner."
 msgstr "Выберите пользовательский диапазон, который будет назначен данному тюнеру. Это индекс в таблице частот, который коммутатор SCR или LNB SCR использует для передачи запрошенного транспондера тюнеру."
 
-msgid "Select the character or action under the virtual keyboard cursor"
+#, fuzzy
+msgid "Select the character or action under the keyboard cursor"
 msgstr "Выберите символ или действие под курсором виртуальной клавиатуры"
+
+#, fuzzy
+msgid "Select the locale from a menu"
+msgstr "Выберите язык виртуальной клавиатуры из меню"
 
 msgid "Select the manufacturer of your SCR device. If the manufacturer is not listed, set 'SCR' to 'user defined' and enter the device parameters manually according to its spec sheet."
 msgstr "Выберите производителя Вашего SCR устройства."
@@ -7492,6 +7519,14 @@ msgstr "Выберите спутник, который Вы хотите нас
 msgid "Select the satellite your dish receives from. If you are unsure select 'automatic' and the receiver will attempt to determine this for you."
 msgstr "Выберите спутник, к которому подключена Ваша тарелка. Если вы не уверены, выберите 'автоматически', и ресивер попытается определить это для Вас."
 
+#, fuzzy
+msgid "Select the shifted character set"
+msgstr "Выберите набор символов с виртуальной клавиатурой"
+
+#, fuzzy
+msgid "Select the shifted character set for the next character only"
+msgstr "Выберите набор символов со сдвигом виртуальной клавиатуры только для следующего символа"
+
 msgid "Select the time zone within the area or region."
 msgstr "Выберите часовой пояс в пределах области или региона."
 
@@ -7509,15 +7544,6 @@ msgstr "Выберите тип используемого LNB/устройст�
 
 msgid "Select the type of Single Cable Reception device you are using."
 msgstr "Выберите тип используемого устройства."
-
-msgid "Select the virtual keyboard locale from a menu"
-msgstr "Выберите язык виртуальной клавиатуры из меню"
-
-msgid "Select the virtual keyboard shifted character set"
-msgstr "Выберите набор символов с виртуальной клавиатурой"
-
-msgid "Select the virtual keyboard shifted character set for the next character only"
-msgstr "Выберите набор символов со сдвигом виртуальной клавиатуры только для следующего символа"
 
 msgid "Select update source"
 msgstr "Выбор источника обновления"
@@ -8740,6 +8766,9 @@ msgstr "T2MI PLP ID"
 msgid "T2MI RAW Mode"
 msgstr "T2MI RAW режим"
 
+msgid "TEXT"
+msgstr ""
+
 #. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
 msgid "TRANSLATOR_INFO"
 msgstr "Дмитрий - 11.04.2019"
@@ -9350,6 +9379,10 @@ msgstr "Переключатель ТВ/РАДИО режима"
 
 msgid "Toggle a cut mark at the current position"
 msgstr "Добавить/удалить метку в текущей позиции"
+
+#, fuzzy
+msgid "Toggle aspect ratio..."
+msgstr "Соотношение сторон"
 
 msgid "Toggle dashed flickering line for this service"
 msgstr "Показать/скрыть мигающую строку для этого сервиса"
@@ -10582,6 +10615,9 @@ msgstr "Вам необходимо подождать %s!"
 #, python-format
 msgid "You must switch to the service %s (%s - '%s')!\n"
 msgstr "Вам необходимо переключить на сервис %s (%s - '%s')!\n"
+
+msgid "You seem to be in timeshift!"
+msgstr ""
 
 msgid "Your collection exceeds the size of a single layer medium, you will need a blank dual layer DVD!"
 msgstr "Ваша коллекция превышает размер однослойного диска. Вам необходим чистый двух слойный DVD!"

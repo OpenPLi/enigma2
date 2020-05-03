@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-22 22:37+0100\n"
+"POT-Creation-Date: 2020-05-02 18:15+0200\n"
 "PO-Revision-Date: 2020-02-19 11:12+0100\n"
 "Last-Translator: mcfly82\n"
 "Language-Team: mcfly82 & wysless\n"
@@ -1128,6 +1128,10 @@ msgid "Ask user"
 msgstr "Felhasználó kérdezése"
 
 msgid "Aspect ratio"
+msgstr "Kép méretarány"
+
+#, fuzzy, python-format
+msgid "Aspect ratio changed to %s"
 msgstr "Kép méretarány"
 
 msgid "Assigned CAIds:"
@@ -2651,10 +2655,15 @@ msgstr "Lejátszási lista bejegyzés törlése"
 msgid "Delete saved playlist"
 msgstr "Mentett lejátszási lista törlése"
 
-msgid "Delete the character to the left of text buffer cursor"
+msgid "Delete the all the text"
+msgstr ""
+
+#, fuzzy
+msgid "Delete the character to the left of text cursor"
 msgstr "A kurzortól balra lévő karakter törlése"
 
-msgid "Delete the character under the text buffer cursor"
+#, fuzzy
+msgid "Delete the character under the text cursor"
 msgstr "A kurzor alatti karakter törlése"
 
 msgid "Delete timer"
@@ -5109,29 +5118,37 @@ msgstr "Kép-A-Képben mozgatása"
 msgid "Move east"
 msgstr "Kelet felé"
 
-msgid "Move the text buffer cursor left"
-msgstr "A szövegkurzor balra mozgatása"
-
-msgid "Move the text buffer cursor right"
-msgstr "A szövegkurzor jobbra mozgatása"
-
-msgid "Move the text buffer cursor to the first character"
-msgstr "A szövegkurzor mozgatása az első karakterhez"
-
-msgid "Move the text buffer cursor to the last character"
-msgstr "A szövegkurzor mozgatása az utolsó karakterhez"
-
-msgid "Move the virtual keyboard cursor down"
+#, fuzzy
+msgid "Move the keyboard cursor down"
 msgstr "A virtuális billentyűzet kurzor mozgatása lefelé"
 
-msgid "Move the virtual keyboard cursor left"
+#, fuzzy
+msgid "Move the keyboard cursor left"
 msgstr "A virtuális billentyűzet kurzor mozgatása balra"
 
-msgid "Move the virtual keyboard cursor right"
+#, fuzzy
+msgid "Move the keyboard cursor right"
 msgstr "A virtuális billentyűzet kurzor mozgatása jobbra"
 
-msgid "Move the virtual keyboard cursor up"
+#, fuzzy
+msgid "Move the keyboard cursor up"
 msgstr "A virtuális billentyűzet kurzor mozgatása felfelé"
+
+#, fuzzy
+msgid "Move the text cursor left"
+msgstr "A szövegkurzor balra mozgatása"
+
+#, fuzzy
+msgid "Move the text cursor right"
+msgstr "A szövegkurzor jobbra mozgatása"
+
+#, fuzzy
+msgid "Move the text cursor to the first character"
+msgstr "A szövegkurzor mozgatása az első karakterhez"
+
+#, fuzzy
+msgid "Move the text cursor to the last character"
+msgstr "A szövegkurzor mozgatása az utolsó karakterhez"
 
 msgid "Move to position X"
 msgstr "Mozgatás az X pozícióra"
@@ -6239,6 +6256,10 @@ msgid "Power threshold. Consult your receiver's manual for more information."
 msgstr "Áram határérték. További információkért olvassa el készüléke használati útmutatóját."
 
 msgid "PowerMenu"
+msgstr "Kikapcsolási menü"
+
+#, fuzzy
+msgid "Powerless"
 msgstr "Kikapcsolási menü"
 
 msgid "Predefined transponder"
@@ -7442,8 +7463,13 @@ msgstr "Válassza ki a tunerhez rendelt felhasználói sáv frekvenciáját. Ez 
 msgid "Select the User Band to be assigned to this tuner. This is an index into the table of frequencies the SCR switch or SCR LNB uses to pass the requested transponder to the tuner."
 msgstr "Válassza ki a tunerhez rendelt felhasználói sávot. Ez egy olyan index a frekvenciatáblázatban, amelyet az Unicable switch vagy az Unicable LNB használ a tuner és a kívánt transzponder között."
 
-msgid "Select the character or action under the virtual keyboard cursor"
+#, fuzzy
+msgid "Select the character or action under the keyboard cursor"
 msgstr "Váltás karakter vagy művelet mód között a virtuális billentyűzeten"
+
+#, fuzzy
+msgid "Select the locale from a menu"
+msgstr "Virtuális billentyűzet nyelvének kiválasztása"
 
 msgid "Select the manufacturer of your SCR device. If the manufacturer is not listed, set 'SCR' to 'user defined' and enter the device parameters manually according to its spec sheet."
 msgstr "Válassza ki az Unicable eszközének gyártóját. Ha nincs a listában, állítsa az 'SCR'-t erre: 'felhasználó által megadva', majd adja meg a készülék paramétereit a technikai adatlapja alapján."
@@ -7476,6 +7502,14 @@ msgid "Select the satellite your dish receives from. If you are unsure select 'a
 msgstr "Válassza ki, hogy mely műholdra van állítva az antennája. Ha nem tudja, válassza az 'Automatikus'-t, ekkor a készüléke megpróbálja azonosítani."
 
 #, fuzzy
+msgid "Select the shifted character set"
+msgstr "Váltás a virtuális billentyűzeten a 'shift' karakterkiosztásra"
+
+#, fuzzy
+msgid "Select the shifted character set for the next character only"
+msgstr "Váltás a virtuális billentyűzeten a 'shift' karakterkiosztásra csak a következő karakterre vonatkozóan"
+
+#, fuzzy
 msgid "Select the time zone within the area or region."
 msgstr "Válasszon függőleges felbontást:"
 
@@ -7493,15 +7527,6 @@ msgstr "Válassza ki a használt fej/készülék típusát (alapesetben 'Univerz
 
 msgid "Select the type of Single Cable Reception device you are using."
 msgstr "Válassza ki a használt Unicable eszköz típusát."
-
-msgid "Select the virtual keyboard locale from a menu"
-msgstr "Virtuális billentyűzet nyelvének kiválasztása"
-
-msgid "Select the virtual keyboard shifted character set"
-msgstr "Váltás a virtuális billentyűzeten a 'shift' karakterkiosztásra"
-
-msgid "Select the virtual keyboard shifted character set for the next character only"
-msgstr "Váltás a virtuális billentyűzeten a 'shift' karakterkiosztásra csak a következő karakterre vonatkozóan"
 
 msgid "Select update source"
 msgstr "Válasszon szerkesztendő frissítési forrást"
@@ -8727,6 +8752,9 @@ msgstr "T2MI PLP ID"
 msgid "T2MI RAW Mode"
 msgstr "T2MI RAW mód"
 
+msgid "TEXT"
+msgstr ""
+
 #. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
 msgid "TRANSLATOR_INFO"
 msgstr ""
@@ -9347,6 +9375,10 @@ msgstr "TV/Rádió mód be/ki"
 
 msgid "Toggle a cut mark at the current position"
 msgstr "Jelenlegi pozícióra vágási jelet tenni"
+
+#, fuzzy
+msgid "Toggle aspect ratio..."
+msgstr "Kép méretarány"
 
 msgid "Toggle dashed flickering line for this service"
 msgstr "A kép tetején lévő villogó csík eltakarása ezen csatornánál be/ki"
@@ -10579,6 +10611,9 @@ msgstr "Várnia kell (%s)!"
 #, python-format
 msgid "You must switch to the service %s (%s - '%s')!\n"
 msgstr "Váltson át a csatornára %s (%s - '%s')!\n"
+
+msgid "You seem to be in timeshift!"
+msgstr ""
 
 msgid "Your collection exceeds the size of a single layer medium, you will need a blank dual layer DVD!"
 msgstr "A gyüjteményének mérete meghaladja egy sima rétegű DVD kapacitását, egy dupla-rétegű üres DVD lemezre lesz szüksége!"
