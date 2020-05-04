@@ -883,44 +883,6 @@ class InfoBarChannelSelection:
 	def volumeDown(self):
 		VolumeControl.instance and VolumeControl.instance.volDown()
 
-class InfoBarAspectRatio:
-	def __init__(self):
-		self["AspectRatioActions"] = HelpableActionMap(self, "InfobarAspectRatio",
-			{
-				"toggleAspectRatio": (self.toggleAspectRatio, _("Toggle aspect ratio...")),
-			})
-
-		self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
-			{
-				iPlayableService.evEnd: self.__serviceEnded,
-			})
-		self.__aspectRatioChanged = False
-		self.__messageVisible = False
-		self.__hideTimer = eTimer()
-		self.__hideTimer.callback.append(self.__hideNotification)
-
-	def toggleAspectRatio(self):
-		self.__currentAspectRatioValue = config.av.aspect.value
-		choices = sorted(config.av.aspect.choices.choices.keys())
-		config.av.aspect.value = choices[(choices.index(self.__currentAspectRatioValue) + 1) % len(choices)]
-		Notifications.AddPopup(text=_("Aspect ratio changed to %s") % config.av.aspect.choices.choices[config.av.aspect.value], type=MessageBox.TYPE_INFO, timeout=5, id="AspectRatioMessage")
-		self.__messageVisible = True
-		self.__aspectRatioChanged = True
-		self.__hideTimer.startLongTimer(3)
-
-	def __serviceEnded(self):
-		self.__hideTimer.stop()
-		if self.__aspectRatioChanged:
-			config.av.aspect.value = self.__currentAspectRatioValue
-			self.__aspectRatioChanged = False
-		self.__hideNotification()
-
-	def __hideNotification(self):
-		if self.__messageVisible:
-			self.closeNotificationInstantiateDialog()
-			Notifications.RemovePopup(id="AspectRatioMessage")
-			self.__messageVisible = False
-
 class InfoBarMenu:
 	""" Handles a menu action, to open the (main) menu """
 	def __init__(self):
@@ -2710,7 +2672,8 @@ class InfoBarInstantRecord:
 		if not findSafeRecordPath(pirr) and not findSafeRecordPath(defaultMoviePath()):
 			if not pirr:
 				pirr = ""
-			self.session.open(MessageBox, _("Missing ") + "\n" + pirr + "\n" + _("No HDD found or HDD not initialized!"), MessageBox.TYPE_ERROR)
+			self.session.open(MessageBox, _("Missing ") + "\n" + pirr +
+						"\n" + _("No HDD found or HDD not initialized!"), MessageBox.TYPE_ERROR)
 			return
 
 		if isStandardInfoBar(self):
@@ -3020,7 +2983,7 @@ class InfoBarNotifications:
 					return
 			if cb:
 				dlg = self.session.openWithCallback(cb, n[1], *n[2], **n[3])
-			elif not Notifications.current_notifications and n[4] in ("ZapError", "AspectRatioMessage"):
+			elif not Notifications.current_notifications and n[4] == "ZapError":
 				if "timeout" in n[3]:
 					del n[3]["timeout"]
 				n[3]["enable_input"] = False
