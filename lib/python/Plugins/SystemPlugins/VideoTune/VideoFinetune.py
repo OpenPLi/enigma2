@@ -296,7 +296,7 @@ class VideoFinetune(Screen):
 					self.bbox(x, offset, width, eh, RGB(0,0,0), bbw, bbh)
 
 		c.writeText(xres / 10, yres / 6 - self.fontsize * 2, xres * 3 / 5, 40, RGB(128,0,0), RGB(255,255,255), gFont("Regular", self.fontsize * 2),
-			("Color"))
+			_("Color"))
 		c.writeText(xres / 10, yres / 6, xres / 2, yres * 4 / 6, RGB(0,0,0), RGB(255,255,255), gFont("Regular", self.fontsize),
 			_("Adjust the color settings so that all the color shades are distinguishable, but appear as saturated as possible. "
 				"If you are happy with the result, press OK to close the video fine-tuning, or use the number keys to select other test screens."),
