@@ -4,14 +4,14 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-06 20:06+0200\n"
-"PO-Revision-Date: 2020-05-07 13:43+0200\n"
+"PO-Revision-Date: 2020-05-08 08:52+0200\n"
 "Last-Translator: Andrej Tobola <andrej.tobola@gmail.com>\n"
 "Language-Team: \n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 msgid ""
@@ -249,7 +249,7 @@ msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d minúta"
 msgstr[1] "%d minúty"
-msgstr[2] "%d minút"
+msgstr[2] "%d minútach"
 
 #, python-format
 msgid "%d minutes"
@@ -402,7 +402,7 @@ msgid "(empty)"
 msgstr "(prázdne)"
 
 msgid "(not activated)"
-msgstr "(nie je aktivovaný)"
+msgstr "(neaktívny)"
 
 msgid "(show optional DVD audio menu)"
 msgstr "(zobraziť voliteľné menu zvuku DVD)"
@@ -3575,13 +3575,13 @@ msgid "Externally powered"
 msgstr "Externe napájané"
 
 msgid "Extra end time to ignore inactivity sleeptimer"
-msgstr "Zadajte extra časový rámec ignorovania nečinnosti časovača prechodu do pohotovostného režimu"
+msgstr "Dodatočný čas konca ignorovania pri nečinnosti"
 
 msgid "Extra motor options"
 msgstr "Rozšírené možnosti motora"
 
 msgid "Extra start time to ignore inactivity sleeptimer"
-msgstr "Zadajte extra časový rámec ignorovania nečinnosti časovača prechodu do pohotovostného režimu"
+msgstr "Dodatočný čas začiatku ignorovania pri nečinnosti"
 
 msgid "F"
 msgstr "F"
@@ -4370,7 +4370,7 @@ msgid "In progress"
 msgstr "Prebieha"
 
 msgid "Inactivity Sleeptimer"
-msgstr "Časovač nekativity"
+msgstr "Časovač pri neaktivite"
 
 msgid "Include AIT in http streams"
 msgstr "Zahrnúť AIT (HbbTV) do http streamov"
@@ -8060,7 +8060,7 @@ msgid "Shutdown"
 msgstr "Vypnúť"
 
 msgid "Shutdown when in Standby"
-msgstr "Vypnúť počas úsporného režimu"
+msgstr "Vypnúť počas pohotovostného režimu"
 
 msgid "Side by side"
 msgstr "Vedľa seba"
@@ -8321,7 +8321,7 @@ msgid "Special 2"
 msgstr "Špeciálne 2"
 
 msgid "Specify extra timeframe to ignore inactivity sleeptimer"
-msgstr "Zadajte extra časový rámec ignorovania nečinnosti časovača prechodu do pohotovostného režimu"
+msgstr "Dodatočné časové rozpätie ignorovania pri neaktivite"
 
 msgid "Specify if you want to set the blocktimes separately by weekday"
 msgstr "Špecifikujte, ci chcete nastaviť blokovanie času o víkende samostatne"
@@ -8333,10 +8333,10 @@ msgid "Specify the end time until the inactivity sleeptimer should be ignored"
 msgstr "Zadajte čas ukončenia dokedy má byť ignorovaná neaktivita časovača prechodu do pohotovostného režimu"
 
 msgid "Specify the extra end time until the inactivity sleeptimer should be ignored"
-msgstr "Zadajte extra čas ukončenia dokedy má byť ignorovaná neaktivita časovača prechodu do pohotovostného režimu"
+msgstr "Zadajte dodatočný čas ukončenia, dokedy má byť ignorovaná neaktivita časovača pri prechode do pohotovostného režimu"
 
 msgid "Specify the extra start time when the inactivity sleeptimer should be ignored"
-msgstr "Zadajte extra čas začiatku keď má byť ignorovaná neaktivita časovača prechodu do pohotovostného režimu"
+msgstr "Zadajte dodatočný čas začiatku, kedy má byť ignorovaná neaktivita časovača pri prechode do pohotovostného režimu"
 
 msgid "Specify the start time to ignore the shutdown timer when the receiver is in standby mode"
 msgstr "Zadajte čas začiatku ignorovania časovača vypnutia keď je prijímač v pohotovostnom režime"
@@ -8345,7 +8345,7 @@ msgid "Specify the start time when the inactivity sleeptimer should be ignored"
 msgstr "Zadajte čas začiatku keď má byť ignorovaná neaktivita časovača prechodu do pohotovostného režimu"
 
 msgid "Specify timeframe to ignore inactivity sleeptimer"
-msgstr "Zadajte časový rámec ignorovania nečinnosti časovača prechodu do pohotovostného režimu"
+msgstr "Časové rozpätie ignorovania pri neaktivite"
 
 msgid "Specify timeframe to ignore the shutdown in standby"
 msgstr "Zadajte časový rámec ignorovania vypnutia v pohotovostnom režime"
@@ -8416,10 +8416,10 @@ msgid "Start time"
 msgstr "Začiatok"
 
 msgid "Start time to ignore inactivity sleeptimer"
-msgstr "Začiatok ignorovania neaktivity časovača prechodu do pohotovostného režimu"
+msgstr "Začiatok ignorovania časovača pri naktivite"
 
 msgid "Start time to ignore shutdown in standby"
-msgstr "Začiatok ignorovania vypnutia v pohotovostnom režime"
+msgstr "Koniec ignorovania časovača pri naktivite"
 
 msgid "Start timeshift"
 msgstr "Spustiť časový posun"
@@ -10192,7 +10192,7 @@ msgid "When enabled you can specify a timeframe when the inactivity sleeptimer i
 msgstr "Ak je povolené, môžete zadať časový rámec, v ktorom bude ignorovaná nečinnosť časovača vypnutia. Nie detekcia, ale časový rámec nečinnosti je zakázaný. "
 
 msgid "When enabled you can specify an extra timeframe when the inactivity sleeptimer is ignored. Not the detection is disabled during this timeframe but the inactivity timeout is disabled"
-msgstr "Ak je povolené, môžete zadať ďalší časový rámec, v ktorom bude ignorovaná nečinnosť časovača vypnutia. Nie detekcia, ale časový rámec nečinnosti je zakázaný. "
+msgstr "Ak je povolené, môžete zadať ďalší časový rámec, v ktorom bude ignorovaná nečinnosť časovača vypnutia. Nie detekcia, ale časový rámec nečinnosti je zakázaný."
 
 msgid "When enabled you can zap channels with the  CH+/-, B+/-, P+/- buttons instead of opening the channel selection list."
 msgstr "Ak je povolené, môžete prepínať kanály tlačidlami CH +/-,B+/-, P+/- namiesto otvorenia zoznamu staníc."
