@@ -14,7 +14,7 @@ from Tools.BoundFunction import boundFunction
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from Tools.Downloader import downloadWithProgress
 from Tools.HardwareInfo import HardwareInfo
-from Tools.Multiboot import GetImagelist, GetCurrentImage, GetCurrentImageMode
+from Tools.Multiboot import GetImagelist, GetCurrentImage, GetCurrentImageMode, DeleteImage, RestoreImages
 import os, urllib2, json, time, zipfile, shutil, tempfile
 
 from enigma import eEPGCache
@@ -402,12 +402,12 @@ class MultibootSelection(SelectImage):
 		Screen.__init__(self, session)
 		self.skinName = "SelectImage"
 		self.session = session
-		self.imagesList = None
 		self.expanded = []
 		self.tmp_dir = None
 		self.setTitle(_("Multiboot image selector"))
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Reboot"))
+		self["key_yellow"] = StaticText()
 		self["list"] = ChoiceList(list=[ChoiceEntryComponent('',((_("Retrieving image slots - Please wait...")), "Waiter"))])
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "KeyboardInputActions", "MenuActions"],
@@ -416,6 +416,7 @@ class MultibootSelection(SelectImage):
 			"cancel": self.cancel,
 			"red": self.cancel,
 			"green": self.keyOk,
+			"yellow": self.deleteImage,
 			"up": self.keyUp,
 			"down": self.keyDown,
 			"left": self.keyLeft,
@@ -427,14 +428,13 @@ class MultibootSelection(SelectImage):
 			"menu": boundFunction(self.cancel, True),
 		}, -1)
 
-		self.callLater(self.getBootOptions)
+		self.currentimageslot = GetCurrentImage()
+		self.tmp_dir = tempfile.mkdtemp(prefix="MultibootSelection")
+		Console().ePopen('mount %s %s' % (SystemInfo["MultibootStartupDevice"], self.tmp_dir))
+		self.callLater(self.getImagesList)
 
 	def cancel(self, value=None):
-		self.container = Console()
-		self.container.ePopen('umount %s' % self.tmp_dir, boundFunction(self.unmountCallback, value))
-
-	def unmountCallback(self, value, data=None, retval=None, extra_args=None):
-		self.container.killAll()
+		Console().ePopen('umount %s' % self.tmp_dir)
 		if not os.path.ismount(self.tmp_dir):
 			os.rmdir(self.tmp_dir)
 		if value == 2:
@@ -443,30 +443,21 @@ class MultibootSelection(SelectImage):
 		else:
 			self.close(value)
 
-	def getBootOptions(self, value=None):
-		self.container = Console()
-		if self.tmp_dir:
-			self.getImagesList()
-		else:
-			self.tmp_dir = tempfile.mkdtemp(prefix="MultibootSelection")
-			self.container.ePopen('mount %s %s' % (SystemInfo["MultibootStartupDevice"], self.tmp_dir), self.getImagesList)
-
 	def getImagesList(self, data=None, retval=None, extra_args=None):
-		self.container.killAll()
-		self.getImageList = GetImagelist(self.getImagelistCallback)
+		GetImagelist(self.getImagelistCallback)
 
 	def getImagelistCallback(self, imagesdict):
 		list = []
-		currentimageslot = GetCurrentImage()
 		mode = GetCurrentImageMode() or 0
 		if imagesdict:
 			for index, x in enumerate(sorted(imagesdict.keys())):
 				if imagesdict[x]["imagename"] != _("Empty slot"):
 					if SystemInfo["canMode12"]:
-						list.insert(index, ChoiceEntryComponent('',((_("slot%s - %s mode 1 (current image)") if x == currentimageslot and mode != 12 else _("slot%s - %s mode 1")) % (x, imagesdict[x]['imagename']), (x, 1))))
-						list.append(ChoiceEntryComponent('',((_("slot%s - %s mode 12 (current image)") if x == currentimageslot and mode == 12 else _("slot%s - %s mode 12")) % (x, imagesdict[x]['imagename']), (x, 12))))
+						list.insert(index, ChoiceEntryComponent('',((_("slot%s - %s mode 1 (current image)") if x == self.currentimageslot and mode != 12 else _("slot%s - %s mode 1")) % (x, imagesdict[x]['imagename']), (x, 1))))
+						list.append(ChoiceEntryComponent('',((_("slot%s - %s mode 12 (current image)") if x == self.currentimageslot and mode == 12 else _("slot%s - %s mode 12")) % (x, imagesdict[x]['imagename']), (x, 12))))
 					else:
-						list.append(ChoiceEntryComponent('',((_("slot%s - %s (current image)") if x == currentimageslot and mode != 12 else _("slot%s - %s")) % (x, imagesdict[x]['imagename']), (x, 1))))
+						list.append(ChoiceEntryComponent('',((_("slot%s - %s (current image)") if x == self.currentimageslot and mode != 12 else _("slot%s - %s")) % (x, imagesdict[x]['imagename']), (x, 1))))
+		self.numberOfImages = len(list)
 		if os.path.isfile(os.path.join(self.tmp_dir, "STARTUP_RECOVERY")):
 			list.append(ChoiceEntryComponent('',((_("Boot to Recovery menu")), "Recovery")))
 		if os.path.isfile(os.path.join(self.tmp_dir, "STARTUP_ANDROID")):
@@ -474,6 +465,23 @@ class MultibootSelection(SelectImage):
 		if not list:
 			list.append(ChoiceEntryComponent('',((_("No images found")), "Waiter")))
 		self["list"].setList(list)
+		self.selectionChanged()
+
+	def deleteImage(self):
+		if self["key_yellow"].text:
+			self.currentSelected = self["list"].l.getCurrentSelection()
+			if self.currentimageslot == self.currentSelected[0][1][0]:
+				self.session.openWithCallback(self.deleteImageCallback, MessageBox, _("Are you sure to restore all deleted images"), simple=True)
+			else:
+				self.session.openWithCallback(self.deleteImageCallback, MessageBox, "%s:\n%s" % (_("Are you sure to delete image:"), self.currentSelected[0][0]), simple=True)
+
+	def deleteImageCallback(self, answer):
+		if answer:
+			if self.currentimageslot == self.currentSelected[0][1][0]:
+				RestoreImages()
+			else:
+				DeleteImage(self.currentSelected[0][1][0])
+			self.getImagesList()
 
 	def keyOk(self):
 		self.currentSelected = self["list"].l.getCurrentSelection()
@@ -503,4 +511,14 @@ class MultibootSelection(SelectImage):
 			self.cancel(2)
 
 	def selectionChanged(self):
-		pass
+		self.currentSelected = self["list"].l.getCurrentSelection()
+		if type(self.currentSelected[0][1]) is tuple:
+			if self.currentimageslot == self.currentSelected[0][1][0]:
+				if self.numberOfImages < len(SystemInfo["canMultiBoot"]):
+					self["key_yellow"].setText(_("Restore deleted images"))
+				else:
+					self["key_yellow"].setText("")
+			else:
+				self["key_yellow"].setText(_("Delete Image"))
+		else:
+			self["key_yellow"].setText("")

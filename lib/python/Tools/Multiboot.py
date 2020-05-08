@@ -67,6 +67,26 @@ def GetCurrentImage():
 def GetCurrentImageMode():
 	return bool(SystemInfo["canMultiBoot"]) and SystemInfo["canMode12"] and int(open('/sys/firmware/devicetree/base/chosen/bootargs', 'r').read().replace('\0', '').split('=')[-1])
 
+def DeleteImage(slot):
+	tmp.dir = tempfile.mkdtemp(prefix="Multiboot")
+	Console().ePopen('mount %s %s' % (SystemInfo["canMultiBoot"][slot]['device'], tmp.dir))
+	enigma2binaryfile = os.path.join(os.sep.join(filter(None, [tmp.dir, SystemInfo["canMultiBoot"][slot].get('rootsubdir', '')])), 'usr/bin/enigma2')
+	os.rename(enigma2binaryfile, '%s.bak' % enigma2binaryfile)
+	Console().ePopen('umount %s' % SystemInfo["canMultiBoot"][slot]['device'])
+	if not os.path.ismount(tmp.dir):
+		os.rmdir(tmp.dir)
+
+def RestoreImages():
+	for slot in SystemInfo["canMultiBoot"]:
+		tmp.dir = tempfile.mkdtemp(prefix="Multiboot")
+		Console().ePopen('mount %s %s' % (SystemInfo["canMultiBoot"][slot]['device'], tmp.dir))
+		enigma2binaryfile = os.path.join(os.sep.join(filter(None, [tmp.dir, SystemInfo["canMultiBoot"][slot].get('rootsubdir', '')])), 'usr/bin/enigma2')
+		if not os.path.exists(enigma2binaryfile) and os.path.exists('%s.bak' % enigma2binaryfile):
+			os.rename('%s.bak' % enigma2binaryfile, enigma2binaryfile)
+		Console().ePopen('umount %s' % SystemInfo["canMultiBoot"][slot]['device'])
+		if not os.path.ismount(tmp.dir):
+			os.rmdir(tmp.dir)
+
 class GetImagelist():
 	MOUNT = 0
 	UNMOUNT = 1
