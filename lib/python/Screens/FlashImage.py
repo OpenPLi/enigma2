@@ -463,8 +463,8 @@ class MultibootSelection(SelectImage):
 			for index, x in enumerate(sorted(imagesdict.keys())):
 				if imagesdict[x]["imagename"] != _("Empty slot"):
 					if SystemInfo["canMode12"]:
-						list.insert(index, ChoiceEntryComponent('',((_("slot%s - %s mode 1 (current image)") if x == currentimageslot and mode != 12 else _("slot%s - %s mode 1")) % (x, imagesdict[x]['imagename']), x)))
-						list.append(ChoiceEntryComponent('',((_("slot%s - %s mode 12 (current image)") if x == currentimageslot and mode == 12 else _("slot%s - %s mode 12")) % (x, imagesdict[x]['imagename']), x + 12)))
+						list.insert(index, ChoiceEntryComponent('',((_("slot%s - %s mode 1 (current image)") if x == currentimageslot and mode != 12 else _("slot%s - %s mode 1")) % (x, imagesdict[x]['imagename']), (x, 1))))
+						list.append(ChoiceEntryComponent('',((_("slot%s - %s mode 12 (current image)") if x == currentimageslot and mode == 12 else _("slot%s - %s mode 12")) % (x, imagesdict[x]['imagename']), (x, 12))))
 					else:
 						list.append(ChoiceEntryComponent('',((_("slot%s - %s (current image)") if x == currentimageslot and mode != 12 else _("slot%s - %s")) % (x, imagesdict[x]['imagename']), x)))
 		if os.path.isfile(os.path.join(self.tmp_dir, "STARTUP_RECOVERY")):
@@ -489,10 +489,7 @@ class MultibootSelection(SelectImage):
 				shutil.copyfile(os.path.join(self.tmp_dir, "STARTUP_ANDROID"), os.path.join(self.tmp_dir, "STARTUP"))
 			elif SystemInfo["canMultiBoot"][self.slot % 12]['startupfile']:
 				if SystemInfo["canMode12"]:
-					if self.slot < 12:
-						startupfile = os.path.join(self.tmp_dir, "%s_1" % SystemInfo["canMultiBoot"][self.slot]['startupfile'].rsplit('_', 1)[0])
-					else:
-						startupfile = os.path.join(self.tmp_dir, "%s_12" % SystemInfo["canMultiBoot"][self.slot - 12]['startupfile'].rsplit('_', 1)[0])
+					startupfile = os.path.join(self.tmp_dir, "%s_%s" % (SystemInfo["canMultiBoot"][self.slot[0]]['startupfile'].rsplit('_', 1)[0], self.slot[1]))
 				else:
 					startupfile = os.path.join(self.tmp_dir, "%s" % SystemInfo["canMultiBoot"][self.slot]['startupfile'])
 				shutil.copyfile(startupfile, os.path.join(self.tmp_dir, "STARTUP"))
