@@ -468,7 +468,6 @@ class MultibootSelection(SelectImage):
 		self.selectionChanged()
 
 	def deleteImage(self):
-		print self["key_yellow"].text, bool(self["key_yellow"].text)
 		if self["key_yellow"].text:
 			self.currentSelected = self["list"].l.getCurrentSelection()
 			if self.currentimageslot == self.currentSelected[0][1][0]:
