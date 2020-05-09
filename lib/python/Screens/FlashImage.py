@@ -405,7 +405,7 @@ class MultibootSelection(SelectImage):
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Reboot"))
 		self["key_yellow"] = StaticText()
-		self["list"] = ChoiceList(list=[ChoiceEntryComponent('',((_("Retrieving image slots - Please wait...")), "Waiter"))])
+		self["list"] = ChoiceList([])
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "KeyboardInputActions", "MenuActions"],
 		{
@@ -444,15 +444,17 @@ class MultibootSelection(SelectImage):
 		list = []
 		imagesList = getImagelist()
 		mode = getCurrentImageMode() or 0
+		self.deletedImagesExists = False
 		if imagesList:
 			for index, x in enumerate(sorted(imagesList.keys())):
-				if imagesList[x]["imagename"] != _("Empty slot"):
+				if imagesList[x]["imagename"] == _("Deleted image"):
+					self.deletedImagesExists = True
+				elif imagesList[x]["imagename"] != _("Empty slot"):
 					if SystemInfo["canMode12"]:
 						list.insert(index, ChoiceEntryComponent('',((_("slot%s - %s mode 1 (current image)") if x == self.currentimageslot and mode != 12 else _("slot%s - %s mode 1")) % (x, imagesList[x]['imagename']), (x, 1))))
 						list.append(ChoiceEntryComponent('',((_("slot%s - %s mode 12 (current image)") if x == self.currentimageslot and mode == 12 else _("slot%s - %s mode 12")) % (x, imagesList[x]['imagename']), (x, 12))))
 					else:
 						list.append(ChoiceEntryComponent('',((_("slot%s - %s (current image)") if x == self.currentimageslot and mode != 12 else _("slot%s - %s")) % (x, imagesList[x]['imagename']), (x, 1))))
-		self.numberOfImages = len(list)
 		if os.path.isfile(os.path.join(self.tmp_dir, "STARTUP_RECOVERY")):
 			list.append(ChoiceEntryComponent('',((_("Boot to Recovery menu")), "Recovery")))
 		if os.path.isfile(os.path.join(self.tmp_dir, "STARTUP_ANDROID")):
@@ -463,25 +465,24 @@ class MultibootSelection(SelectImage):
 		self.selectionChanged()
 
 	def deleteImage(self):
-		if self["key_yellow"].text:
-			self.currentSelected = self["list"].l.getCurrentSelection()
-			if self.currentimageslot == self.currentSelected[0][1][0]:
-				self.session.openWithCallback(self.deleteImageCallback, MessageBox, _("Are you sure to restore all deleted images"), simple=True)
-			else:
-				self.session.openWithCallback(self.deleteImageCallback, MessageBox, "%s:\n%s" % (_("Are you sure to delete image:"), self.currentSelected[0][0]), simple=True)
+		self.currentSelected = self["list"].l.getCurrentSelection()
+		if self["key_yellow"].text == _("Restore deleted images"):
+			self.session.openWithCallback(self.deleteImageCallback, MessageBox, _("Are you sure to restore all deleted images"), simple=True)
+		elif self["key_yellow"].text == _("Delete Image"):
+			self.session.openWithCallback(self.deleteImageCallback, MessageBox, "%s:\n%s" % (_("Are you sure to delete image:"), self.currentSelected[0][0]), simple=True)
 
 	def deleteImageCallback(self, answer):
 		if answer:
-			if self.currentimageslot == self.currentSelected[0][1][0]:
+			if self["key_yellow"].text == _("Restore deleted images"):
 				restoreImages()
 			else:
 				deleteImage(self.currentSelected[0][1][0])
 			self.getImagesList()
 
 	def keyOk(self):
-		self.currentSelected = self["list"].l.getCurrentSelection()
-		self.slot = self.currentSelected[0][1]
 		if self.slot != "Waiter":
+			self.currentSelected = self["list"].l.getCurrentSelection()
+			self.slot = self.currentSelected[0][1]
 			self.session.openWithCallback(self.doReboot, MessageBox, "%s:\n%s" % (_("Are you sure to reboot to"), self.currentSelected[0][0]), simple=True)
 
 	def doReboot(self, answer):
@@ -507,13 +508,9 @@ class MultibootSelection(SelectImage):
 
 	def selectionChanged(self):
 		self.currentSelected = self["list"].l.getCurrentSelection()
-		if type(self.currentSelected[0][1]) is tuple:
-			if self.currentimageslot == self.currentSelected[0][1][0]:
-				if self.numberOfImages < len(SystemInfo["canMultiBoot"]):
-					self["key_yellow"].setText(_("Restore deleted images"))
-				else:
-					self["key_yellow"].setText("")
-			else:
-				self["key_yellow"].setText(_("Delete Image"))
+		if type(self.currentSelected[0][1]) is tuple and self.currentimageslot != self.currentSelected[0][1][0]:
+			self["key_yellow"].setText(_("Delete Image"))
+		elif self.deletedImagesExists:
+			self["key_yellow"].setText(_("Restore deleted images"))
 		else:
 			self["key_yellow"].setText("")

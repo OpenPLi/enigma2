@@ -71,7 +71,8 @@ def deleteImage(slot):
 	tmp.dir = tempfile.mkdtemp(prefix="Multiboot")
 	Console().ePopen('mount %s %s' % (SystemInfo["canMultiBoot"][slot]['device'], tmp.dir))
 	enigma2binaryfile = os.path.join(os.sep.join(filter(None, [tmp.dir, SystemInfo["canMultiBoot"][slot].get('rootsubdir', '')])), 'usr/bin/enigma2')
-	os.rename(enigma2binaryfile, '%s.bak' % enigma2binaryfile)
+	if os.path.exists(enigma2binaryfile):
+		os.rename(enigma2binaryfile, '%s.bak' % enigma2binaryfile)
 	Console().ePopen('umount %s' % tmp.dir)
 	if not os.path.ismount(tmp.dir):
 		os.rmdir(tmp.dir)
@@ -81,7 +82,7 @@ def restoreImages():
 		tmp.dir = tempfile.mkdtemp(prefix="Multiboot")
 		Console().ePopen('mount %s %s' % (SystemInfo["canMultiBoot"][slot]['device'], tmp.dir))
 		enigma2binaryfile = os.path.join(os.sep.join(filter(None, [tmp.dir, SystemInfo["canMultiBoot"][slot].get('rootsubdir', '')])), 'usr/bin/enigma2')
-		if not os.path.exists(enigma2binaryfile) and os.path.exists('%s.bak' % enigma2binaryfile):
+		if os.path.exists('%s.bak' % enigma2binaryfile):
 			os.rename('%s.bak' % enigma2binaryfile, enigma2binaryfile)
 		Console().ePopen('umount %s' % tmp.dir)
 		if not os.path.ismount(tmp.dir):
@@ -104,6 +105,8 @@ def getImagelist():
 				except:
 					date = _("Unknown")
 				imagelist[slot] = { 'imagename': "%s (%s)" % (open(os.path.join(imagedir, "etc/issue")).readlines()[-2].capitalize().strip()[:-6], date) }
+			elif os.path.isfile(os.path.join(imagedir, 'usr/bin/enigma2.bak')):
+				imagelist[slot] = { 'imagename': _("Deleted image") }
 			else:
 				imagelist[slot] = { 'imagename': _("Empty slot") }
 			Console().ePopen('umount %s' % tmp.dir)
