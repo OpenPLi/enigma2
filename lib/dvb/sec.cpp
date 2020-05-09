@@ -399,8 +399,10 @@ RESULT eDVBSatelliteEquipmentControl::prepare(iDVBFrontend &frontend, const eDVB
 				frequency = ((((local * 2) / 125) + 1) / 2) * 125;
 				frontend.setData(eDVBFrontend::FREQ_OFFSET, sat.frequency - frequency);
 
+				if ( voltage_mode == eDVBSatelliteSwitchParameters::_0V)
+					voltage = iDVBFrontend::voltageOff;
 				/* Dishpro bandstacking HACK */
-				if (lnb_param.m_lof_threshold == 1000)
+				else if (lnb_param.m_lof_threshold == 1000)
 					voltage = VOLTAGE(18);
 				else if ( voltage_mode == eDVBSatelliteSwitchParameters::_14V
 					|| ( sat.polarisation & eDVBFrontendParametersSatellite::Polarisation_Vertical
