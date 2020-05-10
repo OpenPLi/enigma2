@@ -465,7 +465,6 @@ class MultibootSelection(SelectImage):
 		self.selectionChanged()
 
 	def deleteImage(self):
-		self.currentSelected = self["list"].l.getCurrentSelection()
 		if self["key_yellow"].text == _("Restore deleted images"):
 			self.session.openWithCallback(self.deleteImageCallback, MessageBox, _("Are you sure to restore all deleted images"), simple=True)
 		elif self["key_yellow"].text == _("Delete Image"):
@@ -480,29 +479,27 @@ class MultibootSelection(SelectImage):
 			self.getImagesList()
 
 	def keyOk(self):
-		if self.slot != "Waiter":
-			self.currentSelected = self["list"].l.getCurrentSelection()
-			self.slot = self.currentSelected[0][1]
-			self.session.openWithCallback(self.doReboot, MessageBox, "%s:\n%s" % (_("Are you sure to reboot to"), self.currentSelected[0][0]), simple=True)
+		self.session.openWithCallback(self.doReboot, MessageBox, "%s:\n%s" % (_("Are you sure to reboot to"), self.currentSelected[0][0]), simple=True)
 
 	def doReboot(self, answer):
 		if answer:
-			if self.slot == "Recovery":
+			slot = self.currentSelected[0][1]
+			if slot == "Recovery":
 				shutil.copyfile(os.path.join(self.tmp_dir, "STARTUP_RECOVERY"), os.path.join(self.tmp_dir, "STARTUP"))
-			elif self.slot == "Android":
+			elif slot == "Android":
 				shutil.copyfile(os.path.join(self.tmp_dir, "STARTUP_ANDROID"), os.path.join(self.tmp_dir, "STARTUP"))
-			elif SystemInfo["canMultiBoot"][self.slot[0]]['startupfile']:
+			elif SystemInfo["canMultiBoot"][slot[0]]['startupfile']:
 				if SystemInfo["canMode12"]:
-					startupfile = os.path.join(self.tmp_dir, "%s_%s" % (SystemInfo["canMultiBoot"][self.slot[0]]['startupfile'].rsplit('_', 1)[0], self.slot[1]))
+					startupfile = os.path.join(self.tmp_dir, "%s_%s" % (SystemInfo["canMultiBoot"][slot[0]]['startupfile'].rsplit('_', 1)[0], slot[1]))
 				else:
-					startupfile = os.path.join(self.tmp_dir, "%s" % SystemInfo["canMultiBoot"][self.slot[0]]['startupfile'])
+					startupfile = os.path.join(self.tmp_dir, "%s" % SystemInfo["canMultiBoot"][slot[0]]['startupfile'])
 				shutil.copyfile(startupfile, os.path.join(self.tmp_dir, "STARTUP"))
 			else:
 				model = HardwareInfo().get_machine_name()
-				if self.slot[1] == 1:
-					startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=1'\n" % (self.slot[0], self.slot[0] * 2 + 1, model)
+				if slot[1] == 1:
+					startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=1'\n" % (slot[0], slot[0] * 2 + 1, model)
 				else:
-					startupFileContents = "boot emmcflash0.kernel%s 'brcm_cma=520M@248M brcm_cma=%s@768M root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=12'\n" % (self.slot[0], SystemInfo["canMode12"], self.slot[0] * 2 + 1, model)
+					startupFileContents = "boot emmcflash0.kernel%s 'brcm_cma=520M@248M brcm_cma=%s@768M root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=12'\n" % (slot[0], SystemInfo["canMode12"], slot[0] * 2 + 1, model)
 				open(os.path.join(self.tmp_dir, "STARTUP"), 'w').write(startupFileContents)
 			self.cancel(2)
 
