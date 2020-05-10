@@ -465,7 +465,6 @@ class MultibootSelection(SelectImage):
 		self.selectionChanged()
 
 	def deleteImage(self):
-		self.currentSelected = self["list"].l.getCurrentSelection()
 		if self["key_yellow"].text == _("Restore deleted images"):
 			self.session.openWithCallback(self.deleteImageCallback, MessageBox, _("Are you sure to restore all deleted images"), simple=True)
 		elif self["key_yellow"].text == _("Delete Image"):
@@ -480,10 +479,8 @@ class MultibootSelection(SelectImage):
 			self.getImagesList()
 
 	def keyOk(self):
-		if self.slot != "Waiter":
-			self.currentSelected = self["list"].l.getCurrentSelection()
-			self.slot = self.currentSelected[0][1]
-			self.session.openWithCallback(self.doReboot, MessageBox, "%s:\n%s" % (_("Are you sure to reboot to"), self.currentSelected[0][0]), simple=True)
+		self.slot = self.currentSelected[0][1]
+		self.session.openWithCallback(self.doReboot, MessageBox, "%s:\n%s" % (_("Are you sure to reboot to"), self.currentSelected[0][0]), simple=True)
 
 	def doReboot(self, answer):
 		if answer:
