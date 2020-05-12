@@ -13,13 +13,15 @@ dist_pkgdata_DATA = \
 	otv_011a0000_0002_07d4.dict \
 	otv_06180000_1000_0011.dict \
 	otv_06400000_00a9_0003.dict \
-	radio.mvi \
 	rcpositions.xml \
 	setup.xml \
 	skin_subtitles.xml \
 	startwizard.xml \
 	timezone.xml \
 	unicable.xml
+
+radio.mvi:
+	ls -s ../radio.mvi $@
 
 iso-639-3.pck: $(srcdir)/iso-639-3.tab
 	python $(srcdir)/convert-iso-639-3.py $< $@
