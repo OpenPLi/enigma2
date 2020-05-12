@@ -118,7 +118,7 @@ def InitLcd():
 		if SystemInfo["Power4x7Standby"]:
 			def setPower4x7Standby(configElement):
 				open(SystemInfo["Power4x7Standby"], "w").write(configElement.value)
-			config.lcd.power4x7standby = ConfigSelection(default = "off", choices = [("off", _("Off")), ("on", _("On"))])
+			config.lcd.power4x7standby = ConfigSelection(default = "on", choices = [("off", _("Off")), ("on", _("On"))])
 			config.lcd.power4x7standby.addNotifier(setPower4x7Standby)
 
 		if SystemInfo["Power4x7Suspend"]:
