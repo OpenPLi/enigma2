@@ -2,6 +2,7 @@ SUBDIRS = countries display fonts extensions keymaps skin_default skin_fallback_
 
 dist_pkgdata_DATA = \
 	black.mvi \
+	radio.mvi \
 	encoding.conf \
 	freesat.t1 \
 	freesat.t2 \
@@ -19,9 +20,6 @@ dist_pkgdata_DATA = \
 	startwizard.xml \
 	timezone.xml \
 	unicable.xml
-
-radio.mvi:
-	ls -s ../radio.mvi $@
 
 iso-639-3.pck: $(srcdir)/iso-639-3.tab
 	python $(srcdir)/convert-iso-639-3.py $< $@
