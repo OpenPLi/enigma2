@@ -48,6 +48,8 @@ class Harddisk:
 
 		if os.access("/dev/.udev", 0):
 			self.type = DEVTYPE_UDEV
+		elif os.access("/dev/udev_network_queue", 0):
+			self.type = DEVTYPE_UDEV
 		elif os.access("/dev/.devfsd", 0):
 			self.type = DEVTYPE_DEVFS
 		else:
