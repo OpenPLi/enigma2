@@ -364,6 +364,8 @@ class Harddisk:
 		task.check = lambda: os.path.exists(self.partitionPath("1"))
 		task.weighting = 1
 
+		if self.type == DEVTYPE_UDEV:
+			task = UnmountTask(job, self)
 		task = MkfsTask(job, _("Creating filesystem"))
 		big_o_options = ["dir_index"]
 		if isFileSystemSupported("ext4"):
