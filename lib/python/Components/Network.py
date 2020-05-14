@@ -5,9 +5,6 @@ from socket import *
 from Components.Console import Console
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
-from boxbranding import getVisionVersion
-
-oeversion = getVisionVersion()
 
 class Network:
 	def __init__(self):
@@ -44,7 +41,7 @@ class Network:
 		return self.remoteRootFS
 
 	def isBlacklisted(self, iface):
-		return iface in ('lo', 'wifi0', 'wmaster0', 'sit0', 'tun0', 'sys0', 'p2p0', 'tap0', 'tunl0', 'ip6tnl0')
+		return iface in ('lo', 'wifi0', 'wmaster0', 'sit0', 'tun0', 'sys0', 'p2p0')
 
 	def getInterfaces(self, callback = None):
 		self.configuredInterfaces = []
