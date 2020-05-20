@@ -2891,6 +2891,13 @@ class VideoMode(Screen):
 	def __init__(self,session):
 		Screen.__init__(self, session)
 		self["videomode"] = Label()
+		self.timer = eTimer()
+		self.timer.callback.append(self.hide)
+
+	def setText(self, text=""):
+		self["videomode"].setText(text)
+		self.show()
+		self.timer.startLongTimer(3)
 
 class InfoBarVmodeButton:
 	def __init__(self):
@@ -2899,15 +2906,11 @@ class InfoBarVmodeButton:
 				"vmodeSelection": (self.ToggleVideoMode, _("Letterbox zoom")),
 			})
 		self.VideoMode_window = self.session.instantiateDialog(VideoMode)
-		self.__timer = eTimer()
-		self.__timer.callback.append(self.VideoMode_window.hide)
 
 	def ToggleVideoMode(self):
 		policy = config.av.policy_169 if self.isWideScreen() else config.av.policy_43
 		policy.value = policy.choices[(policy.choices.index(policy.value) + 1) % len(policy.choices)]
-		self.VideoMode_window["videomode"].setText(policy.value)
-		self.VideoMode_window.show()
-		self.__timer.startLongTimer(3)
+		self.VideoMode_window.setText(policy.value)
 
 	def isWideScreen(self):
 		from Components.Converter.ServiceInfo import WIDESCREEN
