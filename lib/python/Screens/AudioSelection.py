@@ -183,7 +183,7 @@ class AudioSelection(Screen, ConfigListScreen):
 				language = ""
 				selected = ""
 
-				if self.selectedSubtitle and x[:4] == self.selectedSubtitle[:4]:
+				if config.subtitles.show.value and self.selectedSubtitle and x[:4] == self.selectedSubtitle[:4]:
 					selected = "X"
 					selectedidx = idx
 
@@ -235,24 +235,12 @@ class AudioSelection(Screen, ConfigListScreen):
 		service = self.session.nav.getCurrentService()
 		subtitle = service and service.subtitle()
 		subtitlelist = subtitle and subtitle.getSubtitleList()
-		self.selectedSubtitle = None
-		if self.subtitlesEnabled():
-			self.selectedSubtitle = self.infobar.selected_subtitle
-			if self.selectedSubtitle and self.selectedSubtitle[:4] == (0,0,0,0):
-				self.selectedSubtitle = None
-			elif self.selectedSubtitle and not self.selectedSubtitle[:4] in (x[:4] for x in subtitlelist):
-				subtitlelist.append(self.selectedSubtitle)
+		self.selectedSubtitle = self.infobar.selected_subtitle
+		if self.selectedSubtitle and self.selectedSubtitle[:4] == (0,0,0,0):
+			self.selectedSubtitle = None
+		elif self.selectedSubtitle and not self.selectedSubtitle[:4] in (x[:4] for x in subtitlelist):
+			subtitlelist.append(self.selectedSubtitle)
 		return subtitlelist
-
-	def subtitlesEnabled(self):
-		try:
-			return self.infobar.subtitle_window.shown
-		except:
-			return False
-
-	def enableSubtitle(self, subtitle):
-		if self.infobar.selected_subtitle != subtitle:
-			self.infobar.enableSubtitle(subtitle)
 
 	def changeAC3Downmix(self, downmix):
 		config.av.downmix_ac3.value = downmix.getValue() == True
@@ -370,13 +358,14 @@ class AudioSelection(Screen, ConfigListScreen):
 				self.changeAudio(cur[0])
 				self.__updatedInfo()
 			if self.settings.menupage.getValue() == PAGE_SUBTITLES and cur[0] is not None:
-				if self.infobar.selected_subtitle and self.infobar.selected_subtitle[:4] == cur[0][:4]:
-					self.enableSubtitle(None)
+				if config.subtitles.show.value and self.infobar.selected_subtitle and self.infobar.selected_subtitle[:4] == cur[0][:4]:
+					self.infobar.enableSubtitle(None)
 					selectedidx = self["streams"].getIndex()
 					self.__updatedInfo()
 					self["streams"].setIndex(selectedidx)
 				else:
-					self.enableSubtitle(cur[0][:5])
+					config.subtitles.show.value = True
+					self.infobar.enableSubtitle(cur[0][:5])
 					self.__updatedInfo()
 			self.close(0)
 		elif self.focus == FOCUS_CONFIG:
