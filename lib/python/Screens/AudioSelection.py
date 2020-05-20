@@ -236,19 +236,12 @@ class AudioSelection(Screen, ConfigListScreen):
 		subtitle = service and service.subtitle()
 		subtitlelist = subtitle and subtitle.getSubtitleList()
 		self.selectedSubtitle = None
-		if self.subtitlesEnabled():
-			self.selectedSubtitle = self.infobar.selected_subtitle
-			if self.selectedSubtitle and self.selectedSubtitle[:4] == (0,0,0,0):
-				self.selectedSubtitle = None
-			elif self.selectedSubtitle and not self.selectedSubtitle[:4] in (x[:4] for x in subtitlelist):
-				subtitlelist.append(self.selectedSubtitle)
+		self.selectedSubtitle = self.infobar.selected_subtitle
+		if self.selectedSubtitle and self.selectedSubtitle[:4] == (0,0,0,0):
+			self.selectedSubtitle = None
+		elif self.selectedSubtitle and not self.selectedSubtitle[:4] in (x[:4] for x in subtitlelist):
+			subtitlelist.append(self.selectedSubtitle)
 		return subtitlelist
-
-	def subtitlesEnabled(self):
-		try:
-			return self.infobar.subtitle_window.shown
-		except:
-			return False
 
 	def enableSubtitle(self, subtitle):
 		if self.infobar.selected_subtitle != subtitle:
