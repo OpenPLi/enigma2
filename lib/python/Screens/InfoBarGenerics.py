@@ -3314,8 +3314,6 @@ class InfoBarSubtitleSupport(object):
 			self.subtitle_window = InfoBar.instance.subtitle_window
 
 		self.subtitle_window.hide()
-		self.VideoMode_window = self.session.instantiateDialog(VideoMode)
-
 		self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
 			{
 				iPlayableService.evStart: self.__serviceChanged,
