@@ -47,7 +47,7 @@ def InitGeolocation():
 	if config.misc.enableGeolocation.value:
 		if len(geolocation) == 0:
 			try:
-				response = urlopen("http://ip-api.com/json/?fields=33288191", data=None, timeout=10).read()
+				response = urlopen("http://ip-api.com/json/?fields=33279807", data=None, timeout=10).read()
 				# print "[Geolocation] DEBUG:", response
 				if response:
 					geolocation = loads(response)
