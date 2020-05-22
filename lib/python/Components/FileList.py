@@ -64,7 +64,7 @@ EXTENSIONS = {
 
 def FileEntryComponent(name, absolute = None, isDir = False):
 	res = [ (absolute, isDir) ]
-	x, y, w, h = skin.parameters.get("FileListName",(35, 1, 470, 20))
+	x, y, w, h = skin.parameters.get("FileListName",(35, 1, 600, 20))
 	res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, RT_HALIGN_LEFT, name))
 	if isDir:
 		png = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "extensions/directory.png"))
@@ -300,7 +300,7 @@ class FileList(MenuList):
 
 def MultiFileSelectEntryComponent(name, absolute = None, isDir = False, selected = False):
 	res = [ (absolute, isDir, selected, name) ]
-	x, y, w, h = skin.parameters.get("FileListMultiName",(55, 0, 470, 25))
+	x, y, w, h = skin.parameters.get("FileListMultiName",(55, 0, 600, 25))
 	res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, RT_HALIGN_LEFT, name))
 	if isDir:
 		png = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "extensions/directory.png"))
