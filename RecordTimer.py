@@ -13,11 +13,13 @@ import Screens.InfoBar
 import Components.ParentalControl
 from Tools import Directories, Notifications, ASCIItranslit, Trashcan
 from Tools.XMLTools import stringToXML
+from Tools.Alternatives import ResolveCiAlternative
+from Tools.CIHelper import cihelper
 
 import timer
 import xml.etree.cElementTree
 import NavigationInstance
-from ServiceReference import ServiceReference
+from ServiceReference import ServiceReference, isPlayableForCur
 
 from time import localtime, strftime, ctime, time
 from bisect import insort
@@ -165,6 +167,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 		self.disabled = disabled
 		self.timer = None
 		self.__record_service = None
+		self.rec_ref = None
 		self.start_prepare = 0
 		self.justplay = justplay
 		self.always_zap = always_zap
@@ -264,6 +267,43 @@ class RecordTimerEntry(timer.TimerEntry, object):
 				if not rec_ref:
 					self.log(1, "'get best playable service for group... record' failed")
 					return False
+			if rec_ref and config.misc.use_ci_assignment.value and not (self.record_ecm and not self.descramble):
+				current_ref = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
+				is_playable = isPlayableForCur(rec_ref)
+				live_ci_ref = False
+				if current_ref and current_ref != rec_ref:
+					cur_assignment = cihelper.ServiceIsAssigned(current_ref.toString())
+					rec_assignment = cihelper.ServiceIsAssigned(rec_ref.toString())
+					if cur_assignment and rec_assignment and cur_assignment[0] == rec_assignment[0]:
+						if cihelper.canMultiDescramble(rec_assignment[0]):
+							for x in (4, 2, 3):
+								if current_ref.getUnsignedData(x) != rec_ref.getUnsignedData(x):
+									live_ci_ref = True
+									break
+						else:
+							live_ci_ref = True
+				if live_ci_ref or not is_playable:
+					start_zap = record_ecm_notdescramble = False
+					if self.service_ref.ref.flags & eServiceReference.isGroup:
+						alternative_ci_ref = ResolveCiAlternative(self.service_ref.ref, ignore_ref = not is_playable and rec_ref, record_mode = live_ci_ref and cur_assignment)
+						if alternative_ci_ref:
+							rec_ref = alternative_ci_ref
+						elif live_ci_ref and is_playable:
+							start_zap = True
+						elif not is_playable:
+							record_ecm_notdescramble = True
+					elif live_ci_ref and is_playable:
+						start_zap = True
+					elif not is_playable:
+						record_ecm_notdescramble = True
+					if record_ecm_notdescramble:
+						self.record_ecm = True
+						self.descramble = False
+					if start_zap:
+						self.log(1, "zapping in CI+ use")
+						NavigationInstance.instance.playService(rec_ref)
+						Notifications.AddNotification(MessageBox, _("In order to record a timer, the TV was switched to the recording service!\n"), type=MessageBox.TYPE_INFO, timeout=20)
+			self.log(1, "'record ref' %s" % rec_ref and rec_ref.toString())
 			self.setRecordingPreferredTuner()
 			self.record_service = rec_ref and NavigationInstance.instance.recordService(rec_ref)
 
@@ -272,11 +312,13 @@ class RecordTimerEntry(timer.TimerEntry, object):
 				self.setRecordingPreferredTuner(setdefault=True)
 				return False
 
+			self.rec_ref = rec_ref
+
 			name = self.name
 			description = self.description
 			if self.repeated:
 				epgcache = eEPGCache.getInstance()
-				queryTime=self.begin+(self.end-self.begin)/2
+				queryTime = self.begin+(self.end-self.begin)/2
 				evt = epgcache.lookupEventTime(rec_ref, queryTime)
 				if evt:
 					if self.rename_repeat:
@@ -300,7 +342,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 				if event_id is None:
 					event_id = -1
 
-			prep_res=self.record_service.prepare(self.Filename + self.record_service.getFilenameExtension(), self.begin, self.end, event_id, name.replace("\n", ""), description.replace("\n", ""), ' '.join(self.tags), bool(self.descramble), bool(self.record_ecm))
+			prep_res = self.record_service.prepare(self.Filename + self.record_service.getFilenameExtension(), self.begin, self.end, event_id, name.replace("\n", ""), description.replace("\n", ""), ' '.join(self.tags), bool(self.descramble), bool(self.record_ecm))
 			if prep_res:
 				if prep_res == -255:
 					self.log(4, "failed to write meta information")
@@ -314,6 +356,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 
 				NavigationInstance.instance.stopRecordService(self.record_service)
 				self.record_service = None
+				self.rec_ref = None
 				self.setRecordingPreferredTuner(setdefault=True)
 				return False
 			return True
@@ -337,7 +380,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 		next_state = self.state + 1
 		self.log(5, "activating state %d" % next_state)
 
-		if next_state == 1:
+		if next_state == self.StatePrepared:
 			if self.always_zap:
 				if Screens.Standby.inStandby:
 					self.log(5, "wakeup and zap to recording service")
@@ -362,7 +405,6 @@ class RecordTimerEntry(timer.TimerEntry, object):
 							self.failureCB(True)
 							self.log(5, "zap to recording service")
 
-		if next_state == self.StatePrepared:
 			if self.tryPrepare():
 				self.log(6, "prepare ok, waiting for begin")
 				# create file to "reserve" the filename
@@ -492,6 +534,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 			if not self.justplay:
 				NavigationInstance.instance.stopRecordService(self.record_service)
 				self.record_service = None
+				self.rec_ref = None
 			if not checkForRecordings():
 				if self.afterEvent == AFTEREVENT.DEEPSTANDBY or self.afterEvent == AFTEREVENT.AUTO and (Screens.Standby.inStandby or RecordTimerEntry.wasInStandby) and not config.misc.standbyCounter.value:
 					if not Screens.Standby.inTryQuitMainloop:
