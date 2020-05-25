@@ -178,19 +178,18 @@ class TimerSanityCheck:
 		cnt = 0
 		idx = 0
 		overlaplist = []
-		is_ci_use = 0
-		is_ci_timer_conflict = 0
-
+		is_ci_timer_conflict = False
 		ci_timer = False
-		if config.misc.use_ci_assignment.value and cihelper.ServiceIsAssigned(self.newtimer.service_ref.ref, self.newtimer.state) and not (self.newtimer.record_ecm and not self.newtimer.descramble):
-			ci_timer = self.newtimer
-			ci_timer_begin = ci_timer.begin
-			ci_timer_end = ci_timer.end
-			ci_timer_dur = ci_timer_end - ci_timer_begin
-			ci_timer_events = []
-			for ev in self.nrep_eventlist:
-				if ev[2] == -1:
-					ci_timer_events.append((ev[0], ev[0] + ci_timer_dur))
+
+		if config.misc.use_ci_assignment.value and not (self.newtimer.record_ecm and not self.newtimer.descramble):
+			new_assignment = cihelper.ServiceIsAssigned(self.newtimer.service_ref.ref.toString(), self.newtimer)
+			if new_assignment:
+				ci_timer = self.newtimer
+				ci_timer_dur = ci_timer.end - ci_timer.begin
+				ci_timer_events = []
+				for ev in self.nrep_eventlist:
+					if ev[2] == -1:
+						ci_timer_events.append((ev[0], ev[0] + ci_timer_dur))
 
 		for event in self.nrep_eventlist:
 			cnt += event[1]
@@ -203,7 +202,13 @@ class TimerSanityCheck:
 				ref = timer.service_ref and timer.service_ref.ref
 				timer_ref = timer.service_ref
 				if ref and ref.flags & eServiceReference.isGroup and timer.isRunning():
-					timer_ref = getBestPlayableServiceReference(timer.service_ref.ref, eServiceReference())
+					alternativeref = None
+					if not timer.justplay:
+						alternativeref = hasattr(timer, "rec_ref") and timer.rec_ref
+						if alternativeref:
+							timer_ref = alternativeref
+					if not alternativeref:
+						timer_ref = getBestPlayableServiceReference(timer.service_ref.ref, eServiceReference())
 				fakeRecService = NavigationInstance.instance.recordService(timer_ref, True)
 				if fakeRecService:
 					fakeRecResult = fakeRecService.start(True)
@@ -256,28 +261,32 @@ class TimerSanityCheck:
 			else:
 				print "[TimerSanityCheck] bug: unknown flag!"
 
-			if ci_timer and timer != ci_timer and not is_ci_timer_conflict and cihelper.ServiceIsAssigned(timer.service_ref.ref, timer.state) and not (timer.record_ecm and not timer.descramble):
-				if event[1] == self.bflag:
-					timer_begin = event[0]
-					timer_end = event[0] + (timer.end - timer.begin)
-				else:
-					timer_end = event[0]
-					timer_begin = event[0] - (timer.end - timer.begin)
-				for ci_ev in ci_timer_events:
-					if (ci_ev[0] >= timer_begin and ci_ev[0] <= timer_end) or (ci_ev[1] >= timer_begin and ci_ev[1] <= timer_end):
-						if ci_timer.service_ref.ref != timer.service_ref.ref:
-							if cihelper.canMultiDescramble(timer.service_ref.ref, timer.state):
-								getUnsignedDataRef1 = ci_timer.service_ref.ref.getUnsignedData
-								getUnsignedDataRef2 = timer.service_ref.ref.getUnsignedData
-								for x in (4, 2, 3):
-									if getUnsignedDataRef1.getUnsignedData(x) != getUnsignedDataRef2.getUnsignedData(x):
-										is_ci_timer_conflict = 1
-							else:
-								is_ci_timer_conflict = 1
-							if is_ci_timer_conflict:
-								break
-				if is_ci_timer_conflict == 1:
-					if ConflictTimer is None:
+			if ci_timer and timer != ci_timer and not is_ci_timer_conflict and not (timer.record_ecm and not timer.descramble):
+				is_assignment = cihelper.ServiceIsAssigned(timer.service_ref.ref.toString(), timer)
+				if is_assignment and new_assignment[0] == is_assignment[0]:
+					if event[1] == self.bflag:
+						timer_begin = event[0]
+						timer_end = event[0] + (timer.end - timer.begin)
+					else:
+						timer_end = event[0]
+						timer_begin = event[0] - (timer.end - timer.begin)
+					for ci_ev in ci_timer_events:
+						if (ci_ev[0] >= timer_begin and ci_ev[0] <= timer_end) or (ci_ev[1] >= timer_begin and ci_ev[1] <= timer_end):
+							timerstr = is_assignment[1] or timer.service_ref.ref.toString()
+							ci_timerstr = ci_timer.service_ref.ref.toString()
+							if ci_timerstr != timerstr:
+								if not ci_timerstr.startswith('1:134:') and not timerstr.startswith('1:134:') and cihelper.canMultiDescramble(is_assignment[0]):
+									eService = eServiceReference(timerstr)
+									eService1 = ci_timer.service_ref.ref
+									for x in (4, 2, 3):
+										if eService.getUnsignedData(x) != eService1.getUnsignedData(x):
+											is_ci_timer_conflict = True
+											break
+								else:
+									is_ci_timer_conflict = True
+								if is_ci_timer_conflict:
+									break
+					if is_ci_timer_conflict and ConflictTimer is None:
 						ConflictTimer = timer
 						ConflictTunerType = tunerType
 
