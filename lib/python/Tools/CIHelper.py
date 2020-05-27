@@ -10,7 +10,7 @@ class CIHelper:
 	CI_ASSIGNMENT_SERVICES_LIST = None
 	CI_MULTIDESCRAMBLE = None
 	CI_RECORDS_LIST = None
-	CI_MULTIDESCRAMBLE_MODULES = ("AlphaCrypt",)
+	CI_MULTIDESCRAMBLE_MODULES = ("AlphaCrypt", "M7 CAM701 Multi-2")
 
 	def parse_ci_assignment(self):
 		NUM_CI = SystemInfo["CommonInterface"]
