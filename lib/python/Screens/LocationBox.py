@@ -242,9 +242,10 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 			self["booklist"].setList(self.bookmarks)
 
 	def updateBookmarks(self):
-		config.movielist.videodirs.load()
-		self.bookmarks = config.movielist.videodirs and config.movielist.videodirs.value[:] or []
-		self["booklist"].setList(self.bookmarks)
+		if self.realBookmarks:
+			self.realBookmarks.load()
+			self.bookmarks = self.realBookmarks and self.realBookmarks.value[:] or []
+			self["booklist"].setList(self.bookmarks)
 
 	def createDir(self):
 		if self["filelist"].current_directory is not None:
