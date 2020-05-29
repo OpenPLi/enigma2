@@ -22,6 +22,7 @@ from Tools.NumericalTextInput import NumericalTextInput
 from Components.ActionMap import NumberActionMap, HelpableActionMap
 from Components.Label import Label
 from Components.Pixmap import Pixmap
+from Components.Sources.StaticText import StaticText
 from Components.Button import Button
 from Components.FileList import FileList
 from Components.MenuList import MenuList
@@ -70,7 +71,7 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 
 		# Set Text
 		self["text"] = Label(text)
-		self["textbook"] = Label(_("Bookmarks"))
+		self["textbook"] = Label(_("Bookmarks") if bookmarks else '')
 
 		# Save parameters locally
 		self.text = text
@@ -91,9 +92,9 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 
 		# Buttons
 		self["key_green"] = Button(_("OK"))
-		self["key_yellow"] = Button(_("Rename"))
-		self["key_blue"] = Button(_("Remove bookmark"))
 		self["key_red"] = Button(_("Cancel"))
+		self["key_yellow"] = StaticText(_("Rename"))
+		self["key_blue"] = StaticText(_("Remove bookmark") if self.realBookmarks else '')
 
 		# Background for Buttons
 		self["green"] = Pixmap()
@@ -193,30 +194,34 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 	def showHideRename(self):
 		# Don't allow renaming when filename is empty
 		if not self.filename:
-			self["key_yellow"].hide()
+			self["key_yellow"].setText("")
 
 	def switchToFileList(self):
 		if not self.userMode:
 			self.currList = "filelist"
 			self["filelist"].selectionEnabled(1)
 			self["booklist"].selectionEnabled(0)
-			self["key_blue"].text = _("Add bookmark")
+			self["key_blue"].setText(_("Add bookmark" if self.realBookmarks else None))
 			self.updateTarget()
 
 	def switchToBookList(self):
+		if not self.realBookmarks:
+			return
 		self.currList = "booklist"
 		self["filelist"].selectionEnabled(0)
 		self["booklist"].selectionEnabled(1)
-		self["key_blue"].text = _("Remove bookmark")
+		self["key_blue"].setText(_("Remove bookmark"))
 		self.updateTarget()
 
 	def addRemoveBookmark(self):
+		if not self.realBookmarks:
+			return
 		if self.currList == "filelist":
 			# add bookmark
 			folder = self["filelist"].getSelection()[0]
 			if folder is not None and not folder in self.bookmarks:
 				self.bookmarks.append(folder)
-				if self.realBookmarks and self.bookmarks != self.realBookmarks.value:
+				if self.bookmarks != self.realBookmarks.value:
 					self.realBookmarks.value = self.bookmarks
 					self.realBookmarks.save()
 				self.bookmarks.sort()
@@ -236,7 +241,7 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 			return
 		if name in self.bookmarks:
 			self.bookmarks.remove(name)
-			if self.realBookmarks and self.bookmarks != self.realBookmarks.value:
+			if self.bookmarks != self.realBookmarks.value:
 				self.realBookmarks.value = self.bookmarks
 				self.realBookmarks.save()
 			self["booklist"].setList(self.bookmarks)
@@ -467,7 +472,7 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 	def usermodeOn(self):
 		self.switchToBookList()
 		self["filelist"].hide()
-		self["key_blue"].hide()
+		self["key_blue"].SetText("")
 
 	def keyNumberGlobal(self, number):
 		# Cancel Timeout
