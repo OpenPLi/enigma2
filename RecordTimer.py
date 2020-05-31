@@ -472,9 +472,11 @@ class RecordTimerEntry(timer.TimerEntry, object):
 					if RecordTimerEntry.wasInDeepStandby:
 						RecordTimerEntry.setWasInStandby()
 					notify = config.usage.show_message_when_recording_starts.value and self.InfoBarInstance and self.InfoBarInstance.execing
-					if self.pipzap:
-						cur_ref = NavigationInstance.instance.getCurrentlyPlayingServiceOrGroup()
-						if cur_ref and cur_ref != self.service_ref.ref and self.InfoBarInstance and hasattr(self.InfoBarInstance.session, 'pipshown') and not Components.ParentalControl.parentalControl.isProtected(self.service_ref.ref):
+					cur_ref = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
+					pip_zap = self.pipzap or (cur_ref and cur_ref.getPath() and SystemInfo["PIPAvailable"])
+					if pip_zap:
+						cur_ref_group = NavigationInstance.instance.getCurrentlyPlayingServiceOrGroup()
+						if cur_ref_group and cur_ref_group != self.service_ref.ref and self.InfoBarInstance and hasattr(self.InfoBarInstance.session, 'pipshown') and not Components.ParentalControl.parentalControl.isProtected(self.service_ref.ref):
 							if self.InfoBarInstance.session.pipshown:
 								hasattr(self.InfoBarInstance, "showPiP") and self.InfoBarInstance.showPiP()
 							if hasattr(self.InfoBarInstance.session, 'pip'):
@@ -497,8 +499,35 @@ class RecordTimerEntry(timer.TimerEntry, object):
 							self.openChoiceActionBeforeZap()
 					else:
 						self.log(11, "zapping")
-						NavigationInstance.instance.playService(self.service_ref.ref)
-						if notify:
+						force = False
+						if cur_ref and cur_ref.getPath():
+							if self.InfoBarInstance:
+								self.InfoBarInstance.lastservice = self.service_ref.ref
+							from Screens.InfoBar import MoviePlayer
+							MoviePlayerinstance = MoviePlayer.movie_instance
+							try:
+								from Plugins.Extensions.MediaPlayer.plugin import MediaPlayer
+								MediaPlayerinstance = MediaPlayer.media_instance
+							except:
+								MediaPlayerinstance = None
+							if MoviePlayerinstance:
+								MoviePlayerinstance.lastservice = self.service_ref.ref
+								if hasattr(MoviePlayerinstance, "movieselection_dlg") and MoviePlayerinstance.movieselection_dlg:
+									MoviePlayerinstance.returning = True
+									MoviePlayerinstance.movieselection_dlg.close(None)
+									force = True
+								elif hasattr(MoviePlayerinstance, "execing") and MoviePlayerinstance.execing:
+									from Screens.InfoBarGenerics import setResumePoint
+									setResumePoint(MoviePlayerinstance.session)
+									MoviePlayerinstance.close()
+									force = True
+							if not force and MediaPlayerinstance and hasattr(MediaPlayerinstance, "execing") and MediaPlayerinstance.execing:
+								MediaPlayerinstance.oldService = self.service_ref.ref
+								MediaPlayerinstance.exitCallback(True)
+								force = True
+						if not force:
+							NavigationInstance.instance.playService(self.service_ref.ref)
+						if notify or force:
 							Notifications.AddPopup(text=_("Zapped to timer service %s!") % self.service_ref.getServiceName(), type=MessageBox.TYPE_INFO, timeout=5)
 				return True
 			else:
