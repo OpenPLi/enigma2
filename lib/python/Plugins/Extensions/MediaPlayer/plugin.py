@@ -100,6 +100,7 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 	ALLOW_SUSPEND = True
 	ENABLE_RESUME_SUPPORT = True
 	FLAG_CENTER_DVB_SUBS = 2048
+	media_instance =None
 
 	def __init__(self, session, args = None):
 		Screen.__init__(self, session)
@@ -113,6 +114,8 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 		self.summary = None
 		self.oldService = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 		self.session.nav.stopService()
+
+		MediaPlayer.media_instance = self
 
 		self.setTitle(_("Media player"))
 
