@@ -174,7 +174,8 @@ class TimerEntry(Screen, ConfigListScreen):
 		self.entryDescription = getConfigListEntry(_("Description"), self.timerentry_description)
 		self.list.append(self.entryDescription)
 		self.timerJustplayEntry = getConfigListEntry(_("Timer type"), self.timerentry_justplay)
-		self.list.append(self.timerJustplayEntry)
+		if config.usage.setup_level.index >= 1:
+			self.list.append(self.timerJustplayEntry)
 		self.timerTypeEntry = getConfigListEntry(_("Repeat type"), self.timerentry_type)
 		self.list.append(self.timerTypeEntry)
 
