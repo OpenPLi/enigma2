@@ -409,16 +409,14 @@ class TimerSanityConflict(Screen):
 		Screen.__init__(self, session)
 		self.skinName = "TimerEditList"
 		self.timer = timer
-
 		self.list = []
 		count = 0
 		for x in timer:
 			self.list.append((timer[count], False))
 			count += 1
-		if count == 1:
-			self.setTitle((_("Channel not in services list")))
-		else:
-			self.setTitle(_("Timer sanity error"))
+		warning_color = "\c00????00" # yellow
+		title_text = count == 1 and warning_color + _("Channel not in services list") or warning_color + _("Timer sanity error")
+		self.setTitle(title_text)
 
 		self["timerlist"] = TimerList(self.list)
 
