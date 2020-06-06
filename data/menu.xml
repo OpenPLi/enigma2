@@ -48,7 +48,7 @@
 					<item level="0" entryID="timezone_setup"><setup id="timezone"/></item>
 					<item level="0" entryID="user_interface"><setup id="userinterface"/></item>
 					<item level="0" text="GUI Skin" entryID="primary_skin_selector"><screen module="SkinSelector" screen="SkinSelector"/></item>
-					<item level="0" text="Display Skin" entryID="display_skin_selector"><screen module="SkinSelector" screen="LcdSkinSelector"/></item>
+					<item level="0" requires="FrontpanelDisplay" text="Display Skin" entryID="display_skin_selector"><screen module="SkinSelector" screen="LcdSkinSelector"/></item>
 				</menu>
 				<menu level="0" text="EPG" entryID="epg_menu">
 					<id val="epg"/>
