@@ -94,7 +94,7 @@ class HelpableActionMap(ActionMap):
 		def exists(record):
 			for context in parent.helpList:
 				if record in context[2]:
-					print "[HelpActionMap] removed duplicity: %s - %s" % (context[1], action)
+					print "[HelpActionMap] removed duplicity: %s %s" % (context[1], record)
 					return True
 			return False
 
