@@ -91,6 +91,13 @@ class HelpableActionMap(ActionMap):
 	# context, action) is added to the screen's "helpList", which will
 	# be picked up by the "HelpableScreen".
 	def __init__(self, parent, contexts, actions=None, prio=0, description=None):
+		def exists(record):
+			for context in parent.helpList:
+				if record in context[2]:
+					print "[HelpActionMap] removed duplicity: %s %s" % (context[1], record)
+					return True
+			return False
+
 		if not hasattr(contexts, '__iter__'):
 			contexts = [contexts]
 		actions = actions or {}
@@ -102,11 +109,13 @@ class HelpableActionMap(ActionMap):
 				# Check if this is a tuple.
 				if isinstance(funchelp, tuple):
 					if queryKeyBinding(context, action):
-						alist.append((action, funchelp[1]))
+						if not exists((action, funchelp[1])):
+							alist.append((action, funchelp[1]))
 					adict[action] = funchelp[0]
 				else:
 					if queryKeyBinding(context, action):
-						alist.append((action, None))
+						if not exists((action, None)):
+							alist.append((action, None))
 					adict[action] = funchelp
 			parent.helpList.append((self, context, alist))
 		ActionMap.__init__(self, contexts, adict, prio)
