@@ -453,7 +453,7 @@ std::string convertDVBUTF8(const unsigned char *data, int len, int table, int ts
 		table &= ~MASK_IGNORE_TABLEID;
 	}
 
-        int table_preset = table;
+	int table_preset = table;
 
 	// first byte in strings may override general encoding table.
 	switch(data[0] | mask_no_tableid)
@@ -763,17 +763,16 @@ int isUTF8(const std::string &string)
 
 unsigned int truncateUTF8(std::string &s, unsigned int newsize)
 {
-        unsigned int len = s.size();
-
-        // Assume s is a real UTF8 string!!!
-        while (len > newsize) {
-                while (len-- > 0  && (s[len] & 0xC0) == 0x80)
-                        ; // remove UTF data bytes,  e.g. range 0x80 - 0xBF
-                if (len > 0)   // remove the UTF startbyte, or normal ascii character
-                         --len;
-        }
-        s.resize(len);
-        return len;
+	unsigned int len = s.size();
+	// Assume s is a real UTF8 string!!!
+	while (len > newsize) {
+		while (len-- > 0 && (s[len] & 0xC0) == 0x80)
+			// ; // remove UTF data bytes,  e.g. range 0x80 - 0xBF
+			if (len > 0) // remove the UTF startbyte, or normal ascii character
+				--len;
+	}
+	s.resize(len);
+	return len;
 }
 
 
@@ -909,20 +908,20 @@ std::string urlDecode(const std::string &s)
 
 std::string string_to_hex(const std::string& input)
 {
-    static const char* const lut = "0123456789ABCDEF";
-    size_t len = input.length();
+	static const char* const lut = "0123456789ABCDEF";
+	size_t len = input.length();
 
-    std::string output;
-    output.reserve(3 * len);
-    for (size_t i = 0; i < len; ++i)
-    {
-        const unsigned char c = input[i];
-        if (i)
-		output.push_back(' ');
-        output.push_back(lut[c >> 4]);
-        output.push_back(lut[c & 15]);
-    }
-    return output;
+	std::string output;
+	output.reserve(3 * len);
+	for (size_t i = 0; i < len; ++i)
+	{
+		const unsigned char c = input[i];
+		if (i)
+			output.push_back(' ');
+			output.push_back(lut[c >> 4]);
+			output.push_back(lut[c & 15]);
+	}
+	return output;
 }
 
 std::string strip_non_graph(std::string s)
