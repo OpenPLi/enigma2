@@ -1140,7 +1140,7 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 		strstr(m_description, "NIM(45308 FBC)") ||
 		strstr(m_description, "NIM(45308X FBC)"))
 	{
-		ret = (int)((snr < 50900 ? (snr < 32300 ? ((double)snr)/3800. : ((double)snr - 35.)/3796.) : ((double)snr + 64675.)/8625.)*100);
+		ret = (int)(snr < 50900 ? (snr < 32300 ? 0.02584 * snr : 0.0284 * snr - 107.21893) : 0.01325 * snr + 654.43709);
 	}
 	else if (!strcmp(m_description, "DVB-C NIM(3128 FBC)"))
 	{
