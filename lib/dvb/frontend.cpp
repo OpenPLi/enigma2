@@ -1238,7 +1238,23 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 				break;
 		}
 	}
-	else if (!strncmp(m_description, "Si2166D", 7))
+	else if (!strcmp(m_description, "Si21682") || !strcmp(m_description, "Si2168")) // SF4008 T/T2/C and Zgemma TC Models
+	{
+		int type = -1;
+		oparm.getSystem(type);
+		switch (type)
+		{
+			case feCable:
+				ret = (int)(snr / 17);
+				cab_max = 3800;
+				break;
+			case feTerrestrial:
+				ret = (int)(snr / 22.3);
+				ter_max = 2900;
+				break;
+		}
+	}
+	else if (!strncmp(m_description, "Si2166D", 7)) // SF8008 S2
 	{
 		ret = snr;
 		sat_max = 1620;
@@ -1246,6 +1262,8 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 	else if (!strncmp(m_description, "Si216", 5)) // New models with SI tuners
 	{
 		ret = snr;
+		if (!strcmp(m_description, "Si2169")) // DVB-T/C Xtrend
+			ret = snr / 10;
 	}
 
 	signalqualitydb = ret;
