@@ -3319,7 +3319,7 @@ PyObject *eEPGCache::search(ePyObject arg)
 	int eventid = -1;
 	const char *argstring=0;
 	char *refstr=0;
-	int argcount=0;
+	ssize_t argcount=0;
 	int querytype=-1;
 	bool needServiceEvent=false;
 	int maxmatches=0;
@@ -3336,10 +3336,13 @@ PyObject *eEPGCache::search(ePyObject arg)
 			{
 #if PY_VERSION_HEX < 0x02060000
 				argcount = PyString_GET_SIZE(obj);
-#else
-				argcount = PyString_Size(obj);
-#endif
 				argstring = PyString_AS_STRING(obj);
+#elif PY_VERSION_HEX < 0x03000000
+				argcount = PyString_Size(obj);
+				argstring = PyString_AS_STRING(obj);
+#else
+				argstring = PyUnicode_AsUTF8AndSize(obj, &argcount);
+#endif
 				for (int i=0; i < argcount; ++i)
 					switch(argstring[i])
 					{
@@ -3434,11 +3437,15 @@ PyObject *eEPGCache::search(ePyObject arg)
 				if (PyString_Check(obj))
 				{
 					int casetype = PyLong_AsLong(PyTuple_GET_ITEM(arg, 4));
-					const char *str = PyString_AS_STRING(obj);
 #if PY_VERSION_HEX < 0x02060000
-					int strlen = PyString_GET_SIZE(obj);
+					ssize_t strlen = PyString_GET_SIZE(obj);
+					const char *str = PyString_AS_STRING(obj);
+#elif PY_VERSION_HEX < 0x03000000
+					ssize_t strlen = PyString_Size(obj);
+					const char *str = PyString_AS_STRING(obj);
 #else
-					int strlen = PyString_Size(obj);
+					ssize_t strlen;
+					const char *str = PyUnicode_AsUTF8AndSize(obj, &strlen);
 #endif
 					switch (querytype)
 					{
