@@ -5,7 +5,7 @@ from enigma import ePicLoad, getDesktop
 from os import listdir
 from os.path import dirname, exists, isdir, join as pathjoin
 
-from skin import DEFAULT_SKIN, DEFAULT_DISPLAY_SKIN, EMERGENCY_SKIN, currentDisplaySkin, currentPrimarySkin, domScreens
+from skin import DEFAULT_SKIN, DEFAULT_DISPLAY_SKIN, EMERGENCY_NAME, EMERGENCY_SKIN, currentDisplaySkin, currentPrimarySkin, domScreens
 from Components.ActionMap import HelpableNumberActionMap
 from Components.config import config
 from Components.Pixmap import Pixmap
@@ -56,9 +56,9 @@ class SkinSelector(Screen, HelpableScreen):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 		if SkinSelector.skin is None:
-			self.initialiseSkin()
+			# The skin template is designed for a HD screen so the scaling factor is 720.
+			SkinSelector.skin = SkinSelector.skinTemplate % tuple([x * getDesktop(0).size().height() / 720 for x in SkinSelector.scaleData])
 		Screen.setTitle(self, screenTitle)
-
 		self.rootDir = resolveFilename(SCOPE_SKIN)
 		self.config = config.skin.primary_skin
 		self.current = currentPrimarySkin
@@ -84,29 +84,6 @@ class SkinSelector(Screen, HelpableScreen):
 		self.picload.PictureData.get().append(self.showPic)
 		self.onLayoutFinish.append(self.layoutFinished)
 
-	def initialiseSkin(self):
-		element, path = domScreens.get("SkinSelector", (None, None))
-		if element is None:  # This skin does not have a SkinConverter screen.
-			buildSkin = True
-		else:  # Test the skin's SkinConverter screen to ensure it works with the new code.
-			buildSkin = False
-			widgets = element.findall("widget")
-			if widgets is not None:
-				for widget in widgets:
-					name = widget.get("name", None)
-					source = widget.get("source", None)
-					if name and name in ("Preview", "SkinList") or source == "introduction":
-						print "[SkinSelector] Warning: Current skin '%s' does not support this version of SkinSelector!    Please contact the skin's author!" % config.skin.primary_skin.value
-						del domScreens["SkinSelector"]  # It is incompatible, delete the screen from the skin.
-						buildSkin = True
-						break
-		if buildSkin:  # Build the embedded skin and scale it to the current screen resolution.
-			# The skin template is designed for a HD screen so the scaling factor is 720.
-			SkinSelector.skin = SkinSelector.skinTemplate % tuple([x * getDesktop(0).size().height() / 720 for x in SkinSelector.scaleData])
-			# print "[SkinSelector] DEBUG: Height=%d\n" % getDesktop(0).size().height(), SkinSelector.skin
-		else:
-			SkinSelector.skin = "<screen />"
-
 	def showPic(self, picInfo=""):
 		ptr = self.picload.getData()
 		if ptr is not None:
@@ -126,11 +103,11 @@ class SkinSelector(Screen, HelpableScreen):
 			"4320": _("8K"),
 			"8640": _("16K")
 		}
-		emergency = _("< Emergency >")
-		default = _("< Default >")
-		defaultPicon = _("< Default + Picon >")
-		current = _("< Current >")
-		pending = _("< Pending restart >")
+		emergency = _("<Emergency>")
+		default = _("<Default>")
+		defaultPicon = _("<Default+Picon>")
+		current = _("<Current>")
+		pending = _("<Pending restart>")
 		displayPicon = pathjoin(dirname(DEFAULT_DISPLAY_SKIN), "skin_display_picon.xml")
 		skinList = []
 		# Find and list the available skins...
@@ -147,12 +124,12 @@ class SkinSelector(Screen, HelpableScreen):
 							resolution = re.search("\<?resolution.*?\syres\s*=\s*\"(\d+)\"", mm)
 							resolution = resolution and resolutions.get(resolution.group(1), None)
 							mm.close()
-						print "[SkinSelector] Resolution of skin '%s': '%s'." % (skinPath, "Unknown" if resolution is None else resolution)
+						print("[SkinSelector] Resolution of skin '%s': '%s'." % (skinPath, "Unknown" if resolution is None else resolution))
 						# Code can be added here to reject unsupported resolutions.
 					# The "piconprev.png" image should be "prevpicon.png" to keep it with its partner preview image.
 					preview = pathjoin(previewPath, "piconprev.png" if skinFile == "skin_display_picon.xml" else "prev.png")
 					if skin == EMERGENCY_SKIN:
-						list = [emergency, emergency, dir, skin, resolution, preview]
+						list = [EMERGENCY_NAME, emergency, dir, skin, resolution, preview]
 					elif skin == DEFAULT_SKIN:
 						list = [dir, default, dir, skin, resolution, preview]
 					elif skin == DEFAULT_DISPLAY_SKIN:
@@ -165,7 +142,8 @@ class SkinSelector(Screen, HelpableScreen):
 						list[1] = current
 					elif skin == self.config.value:
 						list[1] = pending
-					# 0=SortKey, 1=Label, 2=Flag, 3=Directory, 4=Skin, 5=Resolution, 6=Preview
+					list.append("%s  %s" % (list[0], list[1]))
+					# 0=SortKey, 1=Label, 2=Flag, 3=Directory, 4=Skin, 5=Resolution, 6=Preview, 7=Label + Flag
 					skinList.append(tuple([list[0].upper()] + list))
 		skinList.sort()
 		self["skins"].setList(skinList)
@@ -184,10 +162,7 @@ class SkinSelector(Screen, HelpableScreen):
 		self.picload.startDecode(preview)
 		resolution = self["skins"].getCurrent()[5]
 		msg = "" if resolution is None else " %s" % resolution
-		if self["skins"].getCurrent()[4] == self.config.value:
-			self["description"].setText(_("Press OK to keep the currently selected%s skin.") % msg)
-		else:
-			self["description"].setText(_("Press OK to activate the selected%s skin.") % msg)
+		self["description"].setText(resolution)
 
 	def cancel(self):
 		self.close(False)
@@ -200,19 +175,19 @@ class SkinSelector(Screen, HelpableScreen):
 		skin = self["skins"].getCurrent()[4]
 		if skin == self.config.value:
 			if skin == self.current:
-				print "[SkinSelector] Selected skin: '%s' (Unchanged!)" % pathjoin(self.rootDir, skin)
+				print("[SkinSelector] Selected skin: '%s' (Unchanged!)" % pathjoin(self.rootDir, skin))
 				self.cancel()
 			else:
-				print "[SkinSelector] Selected skin: '%s' (Trying to restart again!)" % pathjoin(self.rootDir, skin)
+				print("[SkinSelector] Selected skin: '%s' (Trying to restart again!)" % pathjoin(self.rootDir, skin))
 				restartBox = self.session.openWithCallback(self.restartGUI, MessageBox, _("To apply the selected '%s' skin the GUI needs to restart. Would you like to restart the GUI now?") % label, MessageBox.TYPE_YESNO)
 				restartBox.setTitle(_("SkinSelector: Restart GUI"))
 		elif skin == self.current:
-			print "[SkinSelector] Selected skin: '%s' (Pending skin '%s' cancelled!)" % (pathjoin(self.rootDir, skin), pathjoin(self.rootDir, self.config.value))
+			print("[SkinSelector] Selected skin: '%s' (Pending skin '%s' cancelled!)" % (pathjoin(self.rootDir, skin), pathjoin(self.rootDir, self.config.value)))
 			self.config.value = skin
 			self.config.save()
 			self.cancel()
 		else:
-			print "[SkinSelector] Selected skin: '%s'" % pathjoin(self.rootDir, skin)
+			print("[SkinSelector] Selected skin: '%s'" % pathjoin(self.rootDir, skin))
 			restartBox = self.session.openWithCallback(self.restartGUI, MessageBox, _("To save and apply the selected '%s' skin the GUI needs to restart. Would you like to save the selection and restart the GUI now?") % label, MessageBox.TYPE_YESNO)
 			restartBox.setTitle(_("SkinSelector: Restart GUI"))
 
