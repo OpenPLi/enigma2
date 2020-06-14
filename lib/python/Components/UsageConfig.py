@@ -563,8 +563,8 @@ def InitUsageConfig():
 
 	if SystemInfo["HasBypassEdidChecking"]:
 		def setHasBypassEdidChecking(configElement):
-			open(SystemInfo["HasBypassEdidChecking"], "w").write(configElement.value)
-		config.av.bypassEdidChecking = ConfigSelection(default = "00000000", choices = [ ("00000001", _("yes")), ("00000000", _("no"))] )
+			open(SystemInfo["HasBypassEdidChecking"], "w").write("00000001" if configElement.value else "00000000")
+		config.av.bypassEdidChecking = ConfigYesNo(default=False)
 		config.av.bypassEdidChecking.addNotifier(setHasBypassEdidChecking)
 
 	if SystemInfo["HasColorspace"]:
@@ -584,8 +584,8 @@ def InitUsageConfig():
 
 	if SystemInfo["HasHDMIpreemphasis"]:
 		def setHDMIpreemphasis(configElement):
-			open(SystemInfo["HasHDMIpreemphasis"], "w").write(configElement.value)
-		config.av.hdmipreemphasis = ConfigSelection(default = "off", choices = [ ("on", _("yes")), ("off", _("no"))] )
+			open(SystemInfo["HasHDMIpreemphasis"], "w").write("on" if configElement.value else "off")
+		config.av.hdmipreemphasis = ConfigYesNo(default=False)
 		config.av.hdmipreemphasis.addNotifier(setHDMIpreemphasis)
 
 	if SystemInfo["HasColorimetry"]:
@@ -614,13 +614,13 @@ def InitUsageConfig():
 		config.av.hdr10_support.addNotifier(setHdr10Support)
 
 		def setDisable12Bit(configElement):
-			open("/proc/stb/video/disable_12bit", "w").write(configElement.value)
-		config.av.allow_12bit = ConfigSelection(default = "0", choices = [ ("0", _("yes")), ("1", _("no")) ]);
+			open("/proc/stb/video/disable_12bit", "w").write("on" if configElement.value else "off")
+		config.av.allow_12bit = ConfigYesNo(default=False)
 		config.av.allow_12bit.addNotifier(setDisable12Bit)
 
 		def setDisable10Bit(configElement):
-			open("/proc/stb/video/disable_10bit", "w").write(configElement.value)
-		config.av.allow_10bit = ConfigSelection(default = "0", choices = [ ("0", _("yes")), ("1", _("no")) ]);
+			open("/proc/stb/video/disable_10bit", "w").write("on" if configElement.value else "off")
+		config.av.allow_10bit = ConfigYesNo(default=False)
 		config.av.allow_10bit.addNotifier(setDisable10Bit)
 
 	config.subtitles = ConfigSubsection()
