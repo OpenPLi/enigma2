@@ -81,8 +81,9 @@ class AutoInstallWizard(Screen):
 		<panel position="right" size="5%,*"/>
 		<panel position="top" size="*,5%"/>
 		<panel position="bottom" size="*,5%"/>
-		<widget name="header" position="top" size="*,50" font="Regular;40"/>
+		<widget name="header" position="top" size="*,48" font="Regular;38" noWrap="1"/>
 		<widget name="progress" position="top" size="*,24" backgroundColor="#00242424"/>
+		<eLabel position="top" size="*,2"/>
 		<widget name="AboutScrollLabel" font="Fixed;20" position="fill"/>
 	</screen>"""
 	def __init__(self, session):
