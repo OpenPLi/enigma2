@@ -1444,28 +1444,6 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y() + (or
 		<widget name="key_blue" position="420,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" transparent="1"/>
 		<widget name="list" position="00,45" size="560,364" scrollbarMode="showOnDemand"/>
 	</screen>
-	<!-- Skin Selector -->
-	<screen name="SkinSelector" position="center,center" size="600,400" title="Select a skin">
-		<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" zPosition="1" alphatest="on"/>
-		<ePixmap pixmap="buttons/green.png" position="140,0" size="140,40" zPosition="1" alphatest="on"/>
-		<widget source="key_red" render="Label" position="0,0" zPosition="2" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1"/>
-		<widget source="key_green" render="Label" position="140,0" zPosition="2" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1"/>
-		<ePixmap pixmap="border_menu_300.png" position="5,50" zPosition="1" size="300,300" transparent="1" alphatest="on"/>
-		<widget source="skins" render="Listbox" position="10,60" size="290,260" enableWrapAround="1" scrollbarMode="showOnDemand">
-			<convert type="TemplatedMultiContent">
-				{
-				"template": [
-					MultiContentEntryText(pos = (10, 0), size = (270, 25), font = 0, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 7)
-				],
-				"fonts": [gFont("Regular",20)],
-				"itemHeight": 25
-				}
-			</convert>
-		</widget>
-		<widget name="preview" position="310,50" size="280,210" alphatest="on"/>
-		<ePixmap pixmap="div-h.png" position="20,360" zPosition="1" size="600,2"/>
-		<widget source="description" render="Label" position="0,370" size="560,30" font="Regular;21" halign="center" valign="center" backgroundColor="#25062748" transparent="1"/>
-	</screen>
 	<!-- Standby mode -->
 	<screen name="Standby" flags="wfNoBorder" position="fill" title="Standby"/>
 	<!-- Extra margin for wizard, never know how bad the TV is... -->
