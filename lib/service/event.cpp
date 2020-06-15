@@ -89,6 +89,20 @@ bool eServiceEvent::loadLanguage(Event *evt, const std::string &lang, int tsidon
 					{
 						m_extended_description += convertDVBUTF8(eed->getText(), table, tsidonid);
 					}
+					const ExtendedEventList *itemlist = eed->getItems();
+					for (ExtendedEventConstIterator it = itemlist->begin(); it != itemlist->end(); ++it)
+					{
+						int cnt = 0;
+						for(int i=0; m_extended_description[i]; i++)
+							if ('\n' == m_extended_description[i]) cnt++;
+						if (cnt < 3) //limit to 3 entry
+						{
+							m_extended_description += convertDVBUTF8((*it)->getItemDescription());
+							m_extended_description += ": ";
+							m_extended_description += convertDVBUTF8((*it)->getItem());
+							m_extended_description += '\n';
+						}
+					}
 					retval=1;
 				}
 #if 0
