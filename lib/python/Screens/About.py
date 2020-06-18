@@ -100,8 +100,8 @@ class About(Screen):
 		AboutText += hddinfo + "\n\n" + _("Network Info:")
 		for x in about.GetIPsFromNetworkInterfaces():
 			AboutText += "\n" + x[0] + ": " + x[1]
-
 		self["AboutScrollLabel"] = ScrollLabel(AboutText)
+		self["description"] = Label(about.getBoxUptime())
 		self["key_green"] = Button(_("Translations"))
 		self["key_red"] = Button(_("Latest Commits"))
 		self["key_yellow"] = Button(_("Troubleshoot"))
