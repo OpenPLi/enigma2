@@ -65,18 +65,6 @@ bool eServiceEvent::loadLanguage(Event *evt, const std::string &lang, int tsidon
 				{
 					/* stick to this language, avoid merging or mixing descriptors of different languages */
 					language = cc;
-					/*
-					 * Bit of a hack, some providers put the event description partly in the short descriptor,
-					 * and the remainder in extended event descriptors.
-					 * In that case, we cannot really treat short/extended description as separate descriptions.
-					 * Unfortunately we cannot recognise this, but we'll use the length of the short description
-					 * to guess whether we should concatenate both descriptions (without any spaces)
-					 */
-					if (eed->getText().empty() && m_short_description.size() >= 180)
-					{
-						m_extended_description = m_short_description;
-						m_short_description = "";
-					}
 					if (table == 0) // Two Char Mapping EED must be processed in one pass
 					{
 						m_tmp_extended_description += eed->getText();
