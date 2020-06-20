@@ -199,5 +199,23 @@ def GetIPsFromNetworkInterfaces():
 			ifaces.append((iface_name, iface_addr))
 	return ifaces
 
+def getBoxUptime():
+	try:
+		time = ''
+		f = open("/proc/uptime", "rb")
+		secs = int(f.readline().split('.')[0])
+		f.close()
+		if secs > 86400:
+			days = secs / 86400
+			secs = secs % 86400
+			time = ngettext("%d day","%d days", days) % days + " "
+		h = secs / 3600
+		m = (secs % 3600) / 60
+		time += ngettext("%d hour", "%d hours", h) % h + " "
+		time += ngettext("%d minute", "%d minuts", m) % m
+		return  "%s" % time
+	except:
+		return '-'
+
 # For modules that do "from About import about"
 about = sys.modules[__name__]
