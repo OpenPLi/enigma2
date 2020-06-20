@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-16 18:29+0200\n"
+"POT-Creation-Date: 2020-06-20 17:32+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi <ims@openpli.org>\n"
@@ -215,6 +215,13 @@ msgid_plural "%d cores"
 msgstr[0] "%d jádro"
 msgstr[1] "%d jádra"
 msgstr[2] "%d jader"
+
+#, python-format
+msgid "%d day"
+msgid_plural "%d days"
+msgstr[0] "%d den"
+msgstr[1] "%d dny"
+msgstr[2] "%d dnů"
 
 #, python-format
 msgid "%d file"
@@ -620,24 +627,6 @@ msgstr "9"
 
 msgid ": 0000 - default (disabled)"
 msgstr ": 0000 - výchozí (zakázáno)"
-
-#
-msgid "< Current >"
-msgstr "< aktuální >"
-
-#
-msgid "< Default + Picon >"
-msgstr "< výchozí + pikony >"
-
-#
-msgid "< Default >"
-msgstr "< výchozí >"
-
-msgid "< Emergency >"
-msgstr "< nouzový >"
-
-msgid "< Pending restart >"
-msgstr "< čekání na restart >"
 
 #
 msgid "<Current movielist location>"
@@ -1844,7 +1833,7 @@ msgid "Cancel"
 msgstr "Zavřít"
 
 msgid "Cancel any changes to the currently active skin"
-msgstr "Zrušit všechny změny v aktuálním aktivním skinu"
+msgstr "Zrušit všechny změny v aktuálně aktivním skinu"
 
 msgid "Cancel any changes to the currently active skin and exit all menus"
 msgstr "Zrušit všechny změny aktuálního aktivního skinu a zavřít všechna menu"
@@ -2725,6 +2714,10 @@ msgstr "Kuba"
 msgid "Curacao"
 msgstr "Curaçao"
 
+#
+msgid "Current"
+msgstr "Aktuální"
+
 msgid "Current CEC address"
 msgstr "Současná CEC adresa"
 
@@ -2947,6 +2940,10 @@ msgstr "Standardní nastavení"
 msgid "Default timer type"
 msgstr "Výchozí typ časovače"
 
+#
+msgid "Default+Picon"
+msgstr "Výchozí+Pikona"
+
 msgid "Define the location of the EPG Cache file."
 msgstr "Určuje umístění souboru pro EPG cache."
 
@@ -3021,6 +3018,9 @@ msgstr "Smazat"
 msgid "Delete Image"
 msgstr "Odstranit image"
 
+msgid "Delete all the text"
+msgstr "Smazat vše"
+
 #
 msgid "Delete entry"
 msgstr "smazat položku"
@@ -3043,9 +3043,6 @@ msgstr "Smazat položku playlistu"
 #
 msgid "Delete saved playlist"
 msgstr "Smazat uložený playlist"
-
-msgid "Delete the all the text"
-msgstr "Smazat vše"
 
 msgid "Delete the character to the left of text cursor"
 msgstr "Smazat znak před kurzorem"
@@ -3626,6 +3623,9 @@ msgstr "EPG"
 msgid "Embedded"
 msgstr "Vestavěný"
 
+msgid "Emergency"
+msgstr "Nouzový"
+
 msgid "Empty slot"
 msgstr "volný slot"
 
@@ -4171,7 +4171,7 @@ msgid "FEC:"
 msgstr "FEC:"
 
 msgid "FHD"
-msgstr ""
+msgstr "FullHD"
 
 msgid "FTA"
 msgstr "FTA"
@@ -6730,6 +6730,9 @@ msgstr "Pauza/přehrávání"
 msgid "Pause/Continue playback"
 msgstr "Pozastavit/Pokračovat v přehrávání"
 
+msgid "Pending restart"
+msgstr "Čekání na restart"
+
 msgid "Percentage left"
 msgstr "Procenta vlevo"
 
@@ -7311,8 +7314,8 @@ msgstr "Stiskněte OK na dálkovém ovladači pro pokračování."
 
 #
 #, python-format
-msgid "Press OK to activate the selected%s skin."
-msgstr "Stiskněte OK pro aktivaci zvoleného%s skinu."
+msgid "Press OK to activate the selected %s skin."
+msgstr "Stiskněte OK pro aktivaci zvoleného %s skinu."
 
 #
 msgid "Press OK to activate the settings."
@@ -7329,8 +7332,8 @@ msgstr "Stiskněte OK a získejte detaily pro %s"
 
 #
 #, python-format
-msgid "Press OK to keep the currently selected%s skin."
-msgstr "Stiskněte OK pro zachování zvoleného%s skinu."
+msgid "Press OK to keep the currently selected %s skin."
+msgstr "Stiskněte OK pro zachování zvoleného %s skinu."
 
 #
 msgid "Press OK to scan"
@@ -8499,10 +8502,6 @@ msgid "Select a network adapter"
 msgstr "Vyberte síťový adaptér"
 
 #
-msgid "Select a skin"
-msgstr "Vyberte skin"
-
-#
 msgid "Select a tuner"
 msgstr "Vyberte tuner"
 
@@ -9387,7 +9386,7 @@ msgstr "Skin & Rozlišení: %s (%sx%s)\n"
 
 #
 msgid "Skin Selection Actions"
-msgstr ""
+msgstr "Akce pro výběr skinu"
 
 msgid "SkinSelector: Restart GUI"
 msgstr "Výběr skinu - restartovat rozhraní"
@@ -9939,11 +9938,21 @@ msgid "Subtitle settings"
 msgstr "Nastavení titulků"
 
 #
+msgid "Subtitle show/hide..."
+msgstr "Titulky zobrazit/skrýt..."
+
+#
 msgid "Subtitles"
 msgstr "Titulky"
 
 msgid "Subtitles Settings"
 msgstr "Nastavení titulků"
+
+msgid "Subtitles disabled"
+msgstr "Titulky zakázány"
+
+msgid "Subtitles enabled"
+msgstr "Titulky povoleny"
 
 msgid "Succeeded:"
 msgstr "Uspěl:"
@@ -10109,7 +10118,7 @@ msgstr ""
 "Pro případné korekce můžete kontaktovat autora\n"
 "na výše uvedené adrese.\n"
 "\n"
-"®4.6.2020"
+"®20.6.2020"
 
 #
 msgid "TS file is too large for ISO9660 level 1!"
@@ -10795,6 +10804,9 @@ msgstr "Přepínání mezi vkládáním a přepisováním"
 msgid "Toggle show/hide"
 msgstr "Přepínat zobrazit/skrýt"
 
+msgid "Toggle subtitles show/hide"
+msgstr "Přepínat zobrazit/skrýt titulky"
+
 #
 msgid "Toggle the tv and the radio player..."
 msgstr "Přepínat mezi TV a Rádio přehrávačem..."
@@ -11176,6 +11188,9 @@ msgstr "Aktualizace katalogu programů"
 
 msgid "Upper case"
 msgstr "Velká písmena"
+
+msgid "Uptime"
+msgstr "Doba provozu"
 
 msgid "Uruguay"
 msgstr "Uruguay"
