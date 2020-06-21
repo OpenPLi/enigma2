@@ -116,7 +116,7 @@ class CIHelper:
 
 	def ServiceIsAssigned(self, ref, timer=None): 
 		if self.CI_ASSIGNMENT_SERVICES_LIST is not None:
-			if self.CI_RECORDS_LIST is None and NavigationInstance.instance:
+			if self.CI_RECORDS_LIST is None and NavigationInstance.instance and hasattr(NavigationInstance.instance, "RecordTimer") and hasattr(NavigationInstance.instance, "record_event"):
 				NavigationInstance.instance.record_event.append(self.ciRecordEvent)
 				self.ciRecordEvent(None, None)
 			if ref and ref.startswith('1:134:'):
