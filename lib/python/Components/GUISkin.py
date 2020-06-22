@@ -21,12 +21,12 @@ class GUISkin:
 
 	def __init__(self):
 		self["Title"] = StaticText()
-		self["screen_path"] = StaticText()
+		self["ScreenPath"] = StaticText()
+		self["screen_path"] = StaticText()  # Support legacy OpenPLi screen history.
 		self.onLayoutFinish = []
 		self.summaries = CList()
 		self.instance = None
 		self.desktop = None
-		self.screenPathMode = False
 
 	def createGUIScreen(self, parent, desktop, updateonly=False):
 		for val in self.renderer:
@@ -86,19 +86,18 @@ class GUISkin:
 		screenPath.pathList = screenPath.pathList and screenPath.pathList[:-1]
 		screenPath.lastSelf = None
 
-	def setScreenPathMode(self, mode):
-		self.screenPathMode = mode
+	def setScreenPathMode(self, mode):  # This method is deprecated and can be removed when it is no longer referenced!
+		pass
 
-	def setTitle(self, title):
+	def setTitle(self, title, addToPathList=True):
 		pathText = ""
-		if self.screenPathMode is not None and title and config.usage.menu_path.value != "off":
-			if self.screenPathMode and not screenPath.pathList or screenPath.pathList and screenPath.pathList[-1] != title:
+		if addToPathList and title and config.usage.menu_path.value != "off":
+			if screenPath.lastSelf != self:
+				screenPath.pathList.append(title)
 				self.onClose.append(self.removeScreenPath)
-				if screenPath.lastSelf != self:
-					screenPath.pathList.append(title)
-					screenPath.lastSelf = self
-				elif screenPath.pathList:
-					screenPath.pathList[-1] = title
+				screenPath.lastSelf = self
+			elif screenPath.pathList:
+				screenPath.pathList[-1] = title
 			if config.usage.menu_path.value == "small":
 				pathText = len(screenPath.pathList) > 1 and " > ".join(screenPath.pathList[:-1]) + " >" or ""
 			else:
@@ -107,7 +106,8 @@ class GUISkin:
 		if self.instance:
 			self.instance.setTitle(title)
 		self["Title"].text = title
-		self["screen_path"].text = pathText
+		self["ScreenPath"].text = pathText
+		self["screen_path"].text = pathText  # Support legacy OpenPLi screen history.
 		self.summaries.setTitle(title)
 
 	def getTitle(self):
