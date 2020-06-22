@@ -900,6 +900,11 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 							}
 						}
 
+						//record icon stuff part1
+						int rec_pixmap_xoffs = 0;
+						if (isRecorded && m_record_indicator_mode == 1 && m_pixmaps[picRecord])
+							rec_pixmap_xoffs = m_pixmaps[picRecord]->size().width() + m_items_distances;
+
 						//service type marker stuff
 						if (m_servicetype_icon_mode)
 						{
@@ -916,7 +921,7 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 								eRect area = m_element_position[celServiceInfo];
 								m_element_position[celServiceInfo].setLeft(area.left() + pixmap_size.width() + m_items_distances);
 								m_element_position[celServiceInfo].setWidth(area.width() - pixmap_size.width() - m_items_distances);
-								int offs = 0;
+								int offs = rec_pixmap_xoffs;
 								if (m_servicetype_icon_mode == 1)
 								{
 									area = m_element_position[celServiceName];
@@ -938,7 +943,7 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 						{
 							eSize pixmap_size = m_pixmaps[picCrypto]->size();
 							eRect area = m_element_position[celServiceInfo];
-							int offs = 0;
+							int offs = rec_pixmap_xoffs;
 							if (m_crypto_icon_mode == 1)
 							{
 								m_element_position[celServiceInfo].setLeft(area.left() + pixmap_size.width() + m_items_distances);
@@ -962,7 +967,7 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 							}
 						}
 
-						//record icon stuff
+						//record icon stuff part2
 						if (isRecorded && m_record_indicator_mode < 3 && m_pixmaps[picRecord])
 						{
 							eSize pixmap_size = m_pixmaps[picRecord]->size();
