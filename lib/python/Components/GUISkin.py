@@ -22,7 +22,6 @@ class GUISkin:
 	def __init__(self):
 		self["Title"] = StaticText()
 		self["screen_path"] = StaticText()
-		self.skin_title = ""
 		self.onLayoutFinish = []
 		self.summaries = CList()
 		self.instance = None
@@ -92,7 +91,6 @@ class GUISkin:
 
 	def setTitle(self, title):
 		pathText = ""
-		self.skin_title = title
 		if self.screenPathMode is not None and title and config.usage.menu_path.value != "off":
 			if self.screenPathMode and not screenPath.pathList or screenPath.pathList and screenPath.pathList[-1] != title:
 				self.onClose.append(self.removeScreenPath)
@@ -105,6 +103,7 @@ class GUISkin:
 				pathText = len(screenPath.pathList) > 1 and " > ".join(screenPath.pathList[:-1]) + " >" or ""
 			else:
 				title = screenPath.pathList and " > ".join(screenPath.pathList) or title
+			# print("[GUISkin] DEBUG: title='%s', pathList='%s', self='%s'." % (title, str(screenPath.pathList), str(self)))
 		if self.instance:
 			self.instance.setTitle(title)
 		self["Title"].text = title
@@ -112,10 +111,7 @@ class GUISkin:
 		self.summaries.setTitle(title)
 
 	def getTitle(self):
-		return self.skin_title
-
-	def getSkinTitle(self):
-		return hasattr(self, "skin_title") and self.skin_title or ""
+		return self["Title"].text
 
 	title = property(getTitle, setTitle)
 
@@ -133,13 +129,12 @@ class GUISkin:
 			if key == "zPosition":
 				z = int(value)
 			elif key == "title":
-				self.skin_title = _(value)
-				skin_title_idx = idx
+				skinTitleIndex = idx
 				if title:
 					self.skinAttributes[skinTitleIndex] = ("title", title)
 				else:
-					self["Title"].text = self.skin_title
-					self.summaries.setTitle(self.skin_title)
+					self["Title"].text = value
+					self.summaries.setTitle(value)
 			elif key == "baseResolution":
 				baseRes = tuple([int(x) for x in value.split(",")])
 			idx += 1
