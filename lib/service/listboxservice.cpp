@@ -746,6 +746,11 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 
 		time_t now = time(0);
 
+		std::string event_name = "";
+		bool is_event = isPlayable && service_info && !service_info->getEvent(*m_cursor, evt);
+		if (is_event)
+			event_name = evt->getEventName();
+
 		for (int e = 0; e != celServiceTypePixmap; ++e)
 		{
 			if (m_element_font[e])
@@ -790,11 +795,9 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 				}
 				case celServiceInfo:
 				{
-					if ( isPlayable && service_info && !service_info->getEvent(*m_cursor, evt) )
+					if (!event_name.empty())
 					{
-						text = evt->getEventName();
-						if (text.empty())
-							continue;
+						text = event_name;
 						std::replace(text.begin(), text.end(), '\n', ' ');
 						if (serviceAvail)
 						{
@@ -817,7 +820,7 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 				}
 				case celServiceEventProgressbar:
 				{
-					if (area.width() > 0 && isPlayable && service_info && !service_info->getEvent(*m_cursor, evt))
+					if (area.width() > 0 && is_event)
 					{
 						char buffer[15];
 						snprintf(buffer, sizeof(buffer), "%d %%", (int)(100 * (now - evt->getBeginTime()) / evt->getDuration()));
@@ -930,7 +933,7 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 								}
 								else if (m_crypto_icon_mode == 1 && m_pixmaps[picCrypto])
 									offs = offs + m_pixmaps[picCrypto]->size().width() + m_items_distances;
-								int correction = (m_show_two_lines && m_servicetype_icon_mode == 2) ? (((area.height()/2) - pixmap_size.height()) / 2) + 2 : (area.height() - pixmap_size.height()) / 2;
+								int correction = (!event_name.empty() && m_show_two_lines && m_servicetype_icon_mode == 2) ? (((area.height()/2) - pixmap_size.height()) / 2) + 2 : (area.height() - pixmap_size.height()) / 2;
 								area.moveBy(offset);
 								painter.clip(area);
 								painter.blit(pixmap, ePoint(area.left() + offs, offset.y() + correction), area, gPainter::BT_ALPHABLEND);
@@ -952,7 +955,7 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 								offs = xoffs;
 								xoffs += pixmap_size.width() + m_items_distances;
 							}
-							int correction = (m_show_two_lines && m_crypto_icon_mode == 2) ? (((area.height()/2) - pixmap_size.height()) / 2) + 2 : (area.height() - pixmap_size.height()) / 2;
+							int correction = (!event_name.empty() && m_show_two_lines && m_crypto_icon_mode == 2) ? (((area.height()/2) - pixmap_size.height()) / 2) + 2 : (area.height() - pixmap_size.height()) / 2;
 							area.moveBy(offset);
 							if (service_info && service_info->isCrypted())
 							{
@@ -981,7 +984,7 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 								offs = xoffs;
 								xoffs += pixmap_size.width() + m_items_distances;
 							}
-							int correction = (m_show_two_lines && m_record_indicator_mode == 2) ? (((area.height()/2) - pixmap_size.height()) / 2) + 2 : (area.height() - pixmap_size.height()) / 2;
+							int correction = (!event_name.empty() && m_show_two_lines && m_record_indicator_mode == 2) ? (((area.height()/2) - pixmap_size.height()) / 2) + 2 : (area.height() - pixmap_size.height()) / 2;
 							area.moveBy(offset);
 							if (m_record_indicator_mode == 2)
 							{
@@ -1010,12 +1013,12 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 				if (flags & gPainter::RT_VALIGN_CENTER)
 				{
 					eRect bbox = para->getBoundBox();
-					if (m_show_two_lines && e == celServiceName && isPlayable)
+					if (!event_name.empty() && m_show_two_lines && e == celServiceName)
 					{
 						yoffs = ((area.height()/2) - bbox.height()) / 2 - bbox.top();
 						nameYoffs = yoffs/2;
 					}
-					else if (m_show_two_lines && e == celServiceInfo)
+					else if (!event_name.empty() && m_show_two_lines && e == celServiceInfo)
 						yoffs = (area.height()/2) + (((area.height()/2) - bbox.height()) / 2) - (bbox.top() - nameYoffs);
 					else
 						yoffs = (area.height() - bbox.height())/2 - bbox.top();
