@@ -7,17 +7,10 @@ from Components.Sources.StaticText import StaticText
 from Tools.CList import CList
 
 
-class ScreenPath():
-	def __init__(self):
-		self.pathList = []
-		self.lastSelf = None
-
-
-screenPath = ScreenPath()
-
-
 class GUISkin:
 	__module__ = __name__
+	pathList = []
+	lastSelf = None
 
 	def __init__(self):
 		self["Title"] = StaticText()
@@ -79,12 +72,13 @@ class GUISkin:
 			self.summaries.remove(summary)
 
 	def clearScreenPath(self):
-		screenPath.pathList = []
-		screenPath.lastSelf = None
+		GUISkin.pathList = []
+		GUISkin.lastSelf = None
 
 	def removeScreenPath(self):
-		screenPath.pathList = screenPath.pathList and screenPath.pathList[:-1]
-		screenPath.lastSelf = None
+		if GUISkin.pathList:
+			GUISkin.pathList.pop()
+		GUISkin.lastSelf = None
 
 	def setScreenPathMode(self, mode):  # This method is deprecated and can be removed when it is no longer referenced!
 		pass
@@ -92,17 +86,17 @@ class GUISkin:
 	def setTitle(self, title, addToPathList=True):
 		pathText = ""
 		if addToPathList and title and config.usage.menu_path.value != "off":
-			if screenPath.lastSelf != self:
-				screenPath.pathList.append(title)
+			if GUISkin.lastSelf != self:
+				GUISkin.pathList.append(title)
 				self.onClose.append(self.removeScreenPath)
-				screenPath.lastSelf = self
-			elif screenPath.pathList:
-				screenPath.pathList[-1] = title
+				GUISkin.lastSelf = self
+			elif GUISkin.pathList:
+				GUISkin.pathList[-1] = title
 			if config.usage.menu_path.value == "small":
-				pathText = len(screenPath.pathList) > 1 and " > ".join(screenPath.pathList[:-1]) + " >" or ""
+				pathText = len(GUISkin.pathList) > 1 and " > ".join(GUISkin.pathList[:-1]) + " >" or ""
 			else:
-				title = screenPath.pathList and " > ".join(screenPath.pathList) or title
-			# print("[GUISkin] DEBUG: title='%s', pathList='%s', self='%s'." % (title, str(screenPath.pathList), str(self)))
+				title = GUISkin.pathList and " > ".join(GUISkin.pathList) or title
+			# print("[GUISkin] DEBUG: title='%s', pathList='%s', self='%s'." % (title, str(GUISkin.pathList), str(self)))
 		if self.instance:
 			self.instance.setTitle(title)
 		self["Title"].text = title
