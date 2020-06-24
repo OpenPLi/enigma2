@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-10 20:19+0200\n"
+"POT-Creation-Date: 2020-06-23 15:56+0200\n"
 "PO-Revision-Date: 2020-05-11 00:06+0300\n"
 "Last-Translator: Audronis Grincevicius <adga45@gmail.com>\n"
 "Language-Team: Adga (C) <adga45@gmail.com>\n"
@@ -208,6 +208,13 @@ msgstr[1] "%d branduoliai"
 msgstr[2] "%d branduolių"
 
 #, python-format
+msgid "%d day"
+msgid_plural "%d days"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#, python-format
 msgid "%d file"
 msgid_plural "%d files"
 msgstr[0] "%d failas"
@@ -244,9 +251,9 @@ msgstr "%d kB/s"
 msgid "%d min"
 msgstr "%d min"
 
-#, python-format
+#, fuzzy, python-format
 msgid "%d minute"
-msgid_plural "%d minutes"
+msgid_plural "%d minuts"
 msgstr[0] "%d minutė"
 msgstr[1] "%d minutės"
 msgstr[2] "%d minučių"
@@ -566,21 +573,6 @@ msgstr "9"
 
 msgid ": 0000 - default (disabled)"
 msgstr ": 0000 - numatytasis (išjungta)"
-
-msgid "< Current >"
-msgstr "< Dabartinis >"
-
-msgid "< Default + Picon >"
-msgstr "< Numatytasis + logotipas >"
-
-msgid "< Default >"
-msgstr "< Numatytasis >"
-
-msgid "< Emergency >"
-msgstr "< Skubus atvejis >"
-
-msgid "< Pending restart >"
-msgstr "< Paleidimo iš naujo laukimas >"
 
 msgid "<Current movielist location>"
 msgstr "<Dabartinė filmų sąrašo vieta>"
@@ -2403,6 +2395,10 @@ msgstr "Kuba"
 msgid "Curacao"
 msgstr "Kiurasao"
 
+#, fuzzy
+msgid "Current"
+msgstr "< Dabartinis >"
+
 msgid "Current CEC address"
 msgstr "Dabartinis CEC adresas"
 
@@ -2588,6 +2584,10 @@ msgstr "Numatytosios nuostatos"
 msgid "Default timer type"
 msgstr "Numatytasis laikmačio tipas"
 
+#, fuzzy
+msgid "Default+Picon"
+msgstr "< Numatytasis + logotipas >"
+
 msgid "Define the location of the EPG Cache file."
 msgstr "Nustatykite EPG talpyklos failo vietą."
 
@@ -2660,6 +2660,10 @@ msgstr "Ištrinti"
 msgid "Delete Image"
 msgstr "Ištrinti atvaizdą"
 
+#, fuzzy
+msgid "Delete all the text"
+msgstr "Trinti visą tekstą"
+
 msgid "Delete entry"
 msgstr "Ištrinti įrašą"
 
@@ -2677,9 +2681,6 @@ msgstr "Ištrinti įrašą iš grojaraščio"
 
 msgid "Delete saved playlist"
 msgstr "Ištrinti išsaugotą grojaraštį"
-
-msgid "Delete the all the text"
-msgstr "Trinti visą tekstą"
 
 msgid "Delete the character to the left of text cursor"
 msgstr "Trinti simbolį teksto žymeklio kairėje"
@@ -2977,7 +2978,8 @@ msgstr "Ar norite išeiti iš rodomos vaizdo kraštinės vedlio?"
 msgid "Do you want to reboot your receiver?"
 msgstr "Ar norite iš naujo paleisti savo imtuvą?"
 
-msgid "Do you want to remove all the crahs logfiles"
+#, fuzzy
+msgid "Do you want to remove all the crash logfiles"
 msgstr "Ar norite pašalinti visus \"lūžimo\" žurnalų failus"
 
 msgid "Do you want to remove the package:\n"
@@ -3160,6 +3162,10 @@ msgstr "Elektroninis programų vadovas"
 
 msgid "Embedded"
 msgstr "Įterpta"
+
+#, fuzzy
+msgid "Emergency"
+msgstr "< Skubus atvejis >"
 
 msgid "Empty slot"
 msgstr "Tuščias lizdas"
@@ -5867,6 +5873,10 @@ msgstr "Sustabdyti atkūrimą"
 msgid "Pause/Continue playback"
 msgstr "Pristabdyti/tęsti atkūrimą"
 
+#, fuzzy
+msgid "Pending restart"
+msgstr "< Paleidimo iš naujo laukimas >"
+
 msgid "Percentage left"
 msgstr "Procentai kairėje"
 
@@ -6347,8 +6357,8 @@ msgstr "Papildomų galimybių pasirinkimui, spauskite 'MENU'."
 msgid "Press OK on your remote control to continue."
 msgstr "Spauskite OK savo valdymo pulte ir tęskite."
 
-#, python-format
-msgid "Press OK to activate the selected%s skin."
+#, fuzzy, python-format
+msgid "Press OK to activate the selected %s skin."
 msgstr "Paspauskite OK, kad suaktyvintumėte pasirinktą %s temą."
 
 msgid "Press OK to activate the settings."
@@ -6361,8 +6371,8 @@ msgstr "Spauskite OK ir redaguokite nustatymus."
 msgid "Press OK to get further details for %s"
 msgstr "Spauskite OK, kad gautumėte tolimesnes detales dėl %s"
 
-#, python-format
-msgid "Press OK to keep the currently selected%s skin."
+#, fuzzy, python-format
+msgid "Press OK to keep the currently selected %s skin."
 msgstr "Paspauskite OK, kad išlaikyti šiuo metu pasirinktą %s temą."
 
 msgid "Press OK to scan"
@@ -7362,9 +7372,6 @@ msgstr "Pasirinkite filmą"
 
 msgid "Select a network adapter"
 msgstr "Pasirinkite tinklo modulį"
-
-msgid "Select a skin"
-msgstr "Pasirinkite temą"
 
 msgid "Select a tuner"
 msgstr "Pasirinkite imtuvą"
@@ -8614,11 +8621,23 @@ msgstr "Subtitrų pasirinkimas..."
 msgid "Subtitle settings"
 msgstr "Subtitrų nustatymai"
 
+#, fuzzy
+msgid "Subtitle show/hide..."
+msgstr "Subtitrų pasirinkimas..."
+
 msgid "Subtitles"
 msgstr "Subtitrai"
 
 msgid "Subtitles Settings"
 msgstr "Subtitrų nustatymai"
+
+#, fuzzy
+msgid "Subtitles disabled"
+msgstr "Subtitrų nustatymai"
+
+#, fuzzy
+msgid "Subtitles enabled"
+msgstr "Apribojimai įjungti"
 
 msgid "Succeeded:"
 msgstr "Pavyko:"
@@ -8674,13 +8693,16 @@ msgstr "Perjungti kanalą žemyn"
 msgid "Switch channel up"
 msgstr "Perjungti kanalą aukštyn"
 
-msgid "Switch off the display during Standby Mode"
+#, fuzzy
+msgid "Switch on the display during Standby Mode"
 msgstr "Budėjimo režime išjunkite ekraną"
 
-msgid "Switch off the display during Suspend Mode"
+#, fuzzy
+msgid "Switch on the display during Suspend Mode"
 msgstr "Laukimo režime išjunkite ekraną"
 
-msgid "Switch off the display during operation."
+#, fuzzy
+msgid "Switch on the display during operation."
 msgstr "Veikimo metu išjunkite ekraną."
 
 msgid "Switch to TV mode"
@@ -9388,6 +9410,10 @@ msgstr "Įjunkite naujus teksto įterpimus prieš esamą tekstą arba perrašyki
 msgid "Toggle show/hide"
 msgstr "Perjungti rodyti/slėpti"
 
+#, fuzzy
+msgid "Toggle subtitles show/hide"
+msgstr "Perjungti rodyti/slėpti"
+
 msgid "Toggle the tv and the radio player..."
 msgstr "Perjungti tv ir radijo grotuvus..."
 
@@ -9719,6 +9745,10 @@ msgstr "Atnaujinamas programinės įrangos katalogas"
 
 msgid "Upper case"
 msgstr "Didžiosios raidės"
+
+#, fuzzy
+msgid "Uptime"
+msgstr "Miego laikmatis"
 
 msgid "Uruguay"
 msgstr "Urugvajus"
@@ -10412,13 +10442,16 @@ msgstr "Su klaidomis:"
 msgid "With popup"
 msgstr "Su iškylančiu pranešimu"
 
-msgid "With this option you can switch off the display during operation."
+#, fuzzy
+msgid "With this option you can switch on the display during operation."
 msgstr "Naudodami šią parinktį, galite išjungti ekraną veikimo metu."
 
-msgid "With this option you can switch off the display in Deep Standby Mode."
+#, fuzzy
+msgid "With this option you can switch on the display in Deep Standby Mode."
 msgstr "Naudodami šią parinktį galite išjungti ekraną gilaus budėjimo režime."
 
-msgid "With this option you can switch off the display in Standby Mode."
+#, fuzzy
+msgid "With this option you can switch on the display in Standby Mode."
 msgstr "Naudodami šią parinktį galite išjungti ekraną budėjimo režime."
 
 msgid "With this option you can switch the LED color or deactivate the LED."
@@ -11803,95 +11836,3 @@ msgstr "perjungta"
 
 msgid "®"
 msgstr "®"
-
-#~ msgid "Retrieving image slots - Please wait..."
-#~ msgstr "Gaunami atvaizdo siužetai - prašome laukti..."
-
-#, python-format
-#~ msgid "Aspect ratio changed to %s"
-#~ msgstr "Vaizdo formatas pakeistas į %s"
-
-#~ msgid "Powerless"
-#~ msgstr "Mažiau energijos"
-
-#~ msgid "Toggle aspect ratio..."
-#~ msgstr "Perjungti kraštinių santykį..."
-
-#~ msgid "Could not locate epg file on fallback tuner"
-#~ msgstr "Nepavyko rasti epg failo atsarginiame imtuve"
-
-#~ msgid "No settings files to download on fallback tuner"
-#~ msgstr "Negalima atsisiųsti nustatymų failų naudojant atsarginį imtuvą"
-
-#~ msgid "Multiboot"
-#~ msgstr "Daugiafunkcinė įkrova"
-
-#~ msgid "Select Image"
-#~ msgstr "Pasirinkite atvaizdą"
-
-#~ msgid "Select Multiboot"
-#~ msgstr "Pasirinktinis atvaizdų įkėlimas"
-
-#~ msgid "About..."
-#~ msgstr "Apie..."
-
-#~ msgid "Enigma2 skin selector"
-#~ msgstr "Enigma2 temos parinkėjas"
-
-#~ msgid "Error executing plugin"
-#~ msgstr "Priedo paleisti nepavyko"
-
-#~ msgid ""
-#~ "GUI needs a restart to apply a new skin\n"
-#~ "Do you want to restart the GUI now?"
-#~ msgstr ""
-#~ "Naujos temos aktyvavimui, grafinę aplinką reikia paleisti iš naujo\n"
-#~ "Ar paleisti iš naujo grafinę aplinką dabar?"
-
-#~ msgid "Ipkg"
-#~ msgstr "Ipkg"
-
-#~ msgid "Select your Skin"
-#~ msgstr "Pasirinkite norimą temą"
-
-#~ msgid "Set default settings?"
-#~ msgstr "Nustatyti numatytus parametrus?"
-
-#~ msgid "Skin"
-#~ msgstr "Vartotojo aplinkos tema"
-
-#~ msgid "working"
-#~ msgstr "dirba"
-
-#~ msgid "[a]"
-#~ msgstr "[a]"
-
-#~ msgid "Exit/OK"
-#~ msgstr "Užverti/OK"
-
-#~ msgid "add bouquet"
-#~ msgstr "pridėti paketą"
-
-#~ msgid "service is in bouquet parental protection"
-#~ msgstr "kanalas yra tėvų kontrolės pakete"
-
-#~ msgid "Greek (Modern)"
-#~ msgstr "Graikų (modernus)"
-
-#~ msgid "Install extensions."
-#~ msgstr "Įdiekite išplėtimus."
-
-#~ msgid "Ok"
-#~ msgstr "Gerai"
-
-#~ msgid "add bookmark"
-#~ msgstr "pridėti žymą"
-
-#~ msgid "remove bookmark"
-#~ msgstr "pašalinti žymę"
-
-#~ msgid "select"
-#~ msgstr "pasirinkti"
-
-#~ msgid "used"
-#~ msgstr "naudotas"

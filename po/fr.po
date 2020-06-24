@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-16 18:29+0200\n"
-"PO-Revision-Date: 2020-05-16 18:35+0200\n"
+"POT-Creation-Date: 2020-06-23 15:56+0200\n"
+"PO-Revision-Date: 2020-06-23 16:08+0200\n"
 "Last-Translator: Pr2\n"
 "Language-Team: french\n"
 "Language: fr\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.0.6\n"
 
 msgid ""
 "\n"
@@ -205,6 +205,12 @@ msgstr[0] "%d coeur"
 msgstr[1] "%d coeurs"
 
 #, python-format
+msgid "%d day"
+msgid_plural "%d days"
+msgstr[0] "%d jour"
+msgstr[1] "%d jours"
+
+#, python-format
 msgid "%d file"
 msgid_plural "%d files"
 msgstr[0] "%d fichier"
@@ -240,7 +246,7 @@ msgstr "%d min"
 
 #, python-format
 msgid "%d minute"
-msgid_plural "%d minutes"
+msgid_plural "%d minuts"
 msgstr[0] "%d minute"
 msgstr[1] "%d minutes"
 
@@ -554,21 +560,6 @@ msgstr "9"
 
 msgid ": 0000 - default (disabled)"
 msgstr ": 0000 - par défaut (désactivé)"
-
-msgid "< Current >"
-msgstr "< Actuel >"
-
-msgid "< Default + Picon >"
-msgstr "< Défaut + Picon >"
-
-msgid "< Default >"
-msgstr "< Défaut >"
-
-msgid "< Emergency >"
-msgstr "< Urgence >"
-
-msgid "< Pending restart >"
-msgstr "< En attente de redémarrage >"
 
 msgid "<Current movielist location>"
 msgstr "<Emplacement actuel de la liste des films>"
@@ -2391,6 +2382,9 @@ msgstr "Cuba"
 msgid "Curacao"
 msgstr "Curacao"
 
+msgid "Current"
+msgstr "Actuel"
+
 msgid "Current CEC address"
 msgstr "Adresse CEC actuelle"
 
@@ -2576,6 +2570,9 @@ msgstr "Paramètres par défaut"
 msgid "Default timer type"
 msgstr "Type de programmation par défaut"
 
+msgid "Default+Picon"
+msgstr "Défaut+Picon"
+
 msgid "Define the location of the EPG Cache file."
 msgstr "Définir la localisation du fichier de cache EPG."
 
@@ -2648,6 +2645,9 @@ msgstr "Supprimer"
 msgid "Delete Image"
 msgstr "Supprimer l’image"
 
+msgid "Delete all the text"
+msgstr "Supprimer tout le texte"
+
 msgid "Delete entry"
 msgstr "Supprimer l’entrée"
 
@@ -2665,9 +2665,6 @@ msgstr "Supprimer l’entrée de la liste de lecture"
 
 msgid "Delete saved playlist"
 msgstr "Supprimer la liste de lecture sauvegardée"
-
-msgid "Delete the all the text"
-msgstr "Supprimer tout le texte"
 
 msgid "Delete the character to the left of text cursor"
 msgstr "Supprimer le caractère à gauche du curseur du texte"
@@ -3145,6 +3142,9 @@ msgstr "Guide électronique programme (EPG)"
 
 msgid "Embedded"
 msgstr "Embarqué"
+
+msgid "Emergency"
+msgstr "Urgence"
 
 msgid "Empty slot"
 msgstr "Emplacement vide."
@@ -5852,6 +5852,9 @@ msgstr "Reprise de la lecture"
 msgid "Pause/Continue playback"
 msgstr "Pause/Continue la lecture"
 
+msgid "Pending restart"
+msgstr "En attente de redémarrage"
+
 msgid "Percentage left"
 msgstr "Pourcentage gauche"
 
@@ -6333,7 +6336,7 @@ msgid "Press OK on your remote control to continue."
 msgstr "Appuyez sur OK de votre télécommande pour continuer."
 
 #, python-format
-msgid "Press OK to activate the selected%s skin."
+msgid "Press OK to activate the selected %s skin."
 msgstr "Appuyez sur OK pour activer le thème sélectionné %s."
 
 msgid "Press OK to activate the settings."
@@ -6347,8 +6350,8 @@ msgid "Press OK to get further details for %s"
 msgstr "Appuyez sur OK pour avoir des détails sur %s"
 
 #, python-format
-msgid "Press OK to keep the currently selected%s skin."
-msgstr "Appuyez sur OK pour activer le thème sélectionné %s."
+msgid "Press OK to keep the currently selected %s skin."
+msgstr "Appuyez sur OK pour conserver le thème actuellement sélectionné %s."
 
 msgid "Press OK to scan"
 msgstr "Appuyez sur OK pour lancer la recherche"
@@ -7344,9 +7347,6 @@ msgstr "Sélectionner un film"
 
 msgid "Select a network adapter"
 msgstr "Sélectionner un adaptateur réseau"
-
-msgid "Select a skin"
-msgstr "Sélectionner un skin/thème"
 
 msgid "Select a tuner"
 msgstr "Sélectionner un tuner"
@@ -8594,11 +8594,20 @@ msgstr "Sélection des sous-titres..."
 msgid "Subtitle settings"
 msgstr "Paramètres sous-titres"
 
+msgid "Subtitle show/hide..."
+msgstr "Sous-titres affichés/masqués..."
+
 msgid "Subtitles"
 msgstr "Sous-titres"
 
 msgid "Subtitles Settings"
 msgstr "Paramètres des sous-titres"
+
+msgid "Subtitles disabled"
+msgstr "Sous-titres désactivés"
+
+msgid "Subtitles enabled"
+msgstr "Sous-titres activés"
 
 msgid "Succeeded:"
 msgstr "Réussi:"
@@ -9375,6 +9384,9 @@ msgstr "Bascule les nouvelles insertions de texte avant ou écrase le texte exis
 msgid "Toggle show/hide"
 msgstr "Inverser afficher/cacher"
 
+msgid "Toggle subtitles show/hide"
+msgstr "Basculer les sous-titres affichés/masqués"
+
 msgid "Toggle the tv and the radio player..."
 msgstr "Bascule entre le mode TV et le lecteur radio..."
 
@@ -9709,6 +9721,9 @@ msgstr "Mise à jour du catalogue logiciel"
 
 msgid "Upper case"
 msgstr "Majuscules"
+
+msgid "Uptime"
+msgstr "Durée de fonctionnement"
 
 msgid "Uruguay"
 msgstr "Uruguay"
