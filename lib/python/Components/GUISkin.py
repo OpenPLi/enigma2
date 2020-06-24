@@ -7,27 +7,18 @@ from Components.Sources.StaticText import StaticText
 from Tools.CList import CList
 
 
-class ScreenPath():
-	def __init__(self):
-		self.pathList = []
-		self.lastSelf = None
-
-
-screenPath = ScreenPath()
-
-
 class GUISkin:
 	__module__ = __name__
 
 	def __init__(self):
 		self["Title"] = StaticText()
-		self["screen_path"] = StaticText()
-		self.skin_title = ""
+		self["ScreenPath"] = StaticText()
+		self["screen_path"] = StaticText()  # Support legacy screen history skins.
 		self.onLayoutFinish = []
 		self.summaries = CList()
 		self.instance = None
 		self.desktop = None
-		self.screenPathMode = False
+		self.screenPathMode = True
 
 	def createGUIScreen(self, parent, desktop, updateonly=False):
 		for val in self.renderer:
@@ -79,43 +70,28 @@ class GUISkin:
 		if summary is not None:
 			self.summaries.remove(summary)
 
-	def clearScreenPath(self):
-		screenPath.pathList = []
-		screenPath.lastSelf = None
+	def clearScreenPath(self):  # This method is deprecated and can be removed when it is no longer referenced!
+		pass
 
-	def removeScreenPath(self):
-		screenPath.pathList = screenPath.pathList and screenPath.pathList[:-1]
-		screenPath.lastSelf = None
-
-	def setScreenPathMode(self, mode):
+	def setScreenPathMode(self, mode):  # This method is deprecated and can be removed when it is no longer referenced!
 		self.screenPathMode = mode
 
-	def setTitle(self, title):
+	def setTitle(self, title, showPath=True):
 		pathText = ""
-		self.skin_title = title
-		if self.screenPathMode is not None and title and config.usage.menu_path.value != "off":
-			if self.screenPathMode and not screenPath.pathList or screenPath.pathList and screenPath.pathList[-1] != title:
-				self.onClose.append(self.removeScreenPath)
-				if screenPath.lastSelf != self:
-					screenPath.pathList.append(title)
-					screenPath.lastSelf = self
-				elif screenPath.pathList:
-					screenPath.pathList[-1] = title
+		if self.screenPathMode is not None and showPath and config.usage.menu_path.value != "off" and len(self.session.dialog_stack) > 2:
 			if config.usage.menu_path.value == "small":
-				pathText = len(screenPath.pathList) > 1 and " > ".join(screenPath.pathList[:-1]) + " >" or ""
+				pathText = "%s >" % " > ".join(ds[0].getTitle() for ds in self.session.dialog_stack[1:])
 			else:
-				title = screenPath.pathList and " > ".join(screenPath.pathList) or title
+				title = "%s > %s" % (self.session.dialog_stack[-1][0].getTitle(), title)
 		if self.instance:
 			self.instance.setTitle(title)
-		self["Title"].text = title
-		self["screen_path"].text = pathText
 		self.summaries.setTitle(title)
+		self["Title"].text = title
+		self["ScreenPath"].text = pathText
+		self["screen_path"].text = pathText  # Support legacy screen history skins.
 
 	def getTitle(self):
-		return self.skin_title
-
-	def getSkinTitle(self):
-		return hasattr(self, "skin_title") and self.skin_title or ""
+		return self["Title"].text
 
 	title = property(getTitle, setTitle)
 
@@ -133,13 +109,12 @@ class GUISkin:
 			if key == "zPosition":
 				z = int(value)
 			elif key == "title":
-				self.skin_title = _(value)
-				skin_title_idx = idx
+				skinTitleIndex = idx
 				if title:
 					self.skinAttributes[skinTitleIndex] = ("title", title)
 				else:
-					self["Title"].text = self.skin_title
-					self.summaries.setTitle(self.skin_title)
+					self["Title"].text = value
+					self.summaries.setTitle(value)
 			elif key == "baseResolution":
 				baseRes = tuple([int(x) for x in value.split(",")])
 			idx += 1
