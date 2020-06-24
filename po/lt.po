@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-23 15:56+0200\n"
-"PO-Revision-Date: 2020-05-11 00:06+0300\n"
+"POT-Creation-Date: 2020-06-24 23:29+0200\n"
+"PO-Revision-Date: 2020-06-24 23:32+0200\n"
 "Last-Translator: Audronis Grincevicius <adga45@gmail.com>\n"
 "Language-Team: Adga (C) <adga45@gmail.com>\n"
 "Language: lt_LT\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.0.6\n"
 
 msgid ""
 "\n"
@@ -210,9 +210,9 @@ msgstr[2] "%d branduolių"
 #, python-format
 msgid "%d day"
 msgid_plural "%d days"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d diena"
+msgstr[1] "%d dienos"
+msgstr[2] "%d dienų"
 
 #, python-format
 msgid "%d file"
@@ -251,9 +251,9 @@ msgstr "%d kB/s"
 msgid "%d min"
 msgstr "%d min"
 
-#, fuzzy, python-format
+#, python-format
 msgid "%d minute"
-msgid_plural "%d minuts"
+msgid_plural "%d minutes"
 msgstr[0] "%d minutė"
 msgstr[1] "%d minutės"
 msgstr[2] "%d minučių"
@@ -720,7 +720,7 @@ msgid "ATSC"
 msgstr "ATSC"
 
 msgid "ATSC provider"
-msgstr "ATSC tiekėjas"
+msgstr "ATSC teikėjas"
 
 msgid "Abort"
 msgstr "Nutraukti"
@@ -801,7 +801,7 @@ msgid "Add marker"
 msgstr "Pridėti žymeklį"
 
 msgid "Add provider"
-msgstr "Pridėti tiekėją"
+msgstr "Pridėti teikėją"
 
 msgid "Add recording (enter recording duration)"
 msgstr "Pradėti įrašymą (nurodant įrašo trukmę)"
@@ -927,7 +927,7 @@ msgid "All satellites 4 (USALS)"
 msgstr "Visi palydovai 4 (USALS)"
 
 msgid "All services provider"
-msgstr "Visų kanalų tiekėjas"
+msgstr "Visų paslaugų teikėjas"
 
 msgid "All slots"
 msgstr "Visi lizdai"
@@ -1145,7 +1145,7 @@ msgid "Assigned CAIds:"
 msgstr "Priskirti CAId:"
 
 msgid "Assigned services/provider:"
-msgstr "Priskirti kanalai/tiekėjas:"
+msgstr "Priskirti kanalai/teikėjai:"
 
 msgid "At beginning"
 msgstr "Pradžioje"
@@ -2395,9 +2395,8 @@ msgstr "Kuba"
 msgid "Curacao"
 msgstr "Kiurasao"
 
-#, fuzzy
 msgid "Current"
-msgstr "< Dabartinis >"
+msgstr "Dabartinis"
 
 msgid "Current CEC address"
 msgstr "Dabartinis CEC adresas"
@@ -2584,9 +2583,8 @@ msgstr "Numatytosios nuostatos"
 msgid "Default timer type"
 msgstr "Numatytasis laikmačio tipas"
 
-#, fuzzy
 msgid "Default+Picon"
-msgstr "< Numatytasis + logotipas >"
+msgstr "Numatytasis + logotipas"
 
 msgid "Define the location of the EPG Cache file."
 msgstr "Nustatykite EPG talpyklos failo vietą."
@@ -2660,9 +2658,8 @@ msgstr "Ištrinti"
 msgid "Delete Image"
 msgstr "Ištrinti atvaizdą"
 
-#, fuzzy
 msgid "Delete all the text"
-msgstr "Trinti visą tekstą"
+msgstr "Ištrinti visą tekstą"
 
 msgid "Delete entry"
 msgstr "Ištrinti įrašą"
@@ -2978,9 +2975,8 @@ msgstr "Ar norite išeiti iš rodomos vaizdo kraštinės vedlio?"
 msgid "Do you want to reboot your receiver?"
 msgstr "Ar norite iš naujo paleisti savo imtuvą?"
 
-#, fuzzy
 msgid "Do you want to remove all the crash logfiles"
-msgstr "Ar norite pašalinti visus \"lūžimo\" žurnalų failus"
+msgstr "Ar norite pašalinti visus gedimo žurnalo failus"
 
 msgid "Do you want to remove the package:\n"
 msgstr "Ar norite pašalinti paketą:\n"
@@ -3163,9 +3159,8 @@ msgstr "Elektroninis programų vadovas"
 msgid "Embedded"
 msgstr "Įterpta"
 
-#, fuzzy
 msgid "Emergency"
-msgstr "< Skubus atvejis >"
+msgstr "Skubus atvejis"
 
 msgid "Empty slot"
 msgstr "Tuščias lizdas"
@@ -5873,9 +5868,8 @@ msgstr "Sustabdyti atkūrimą"
 msgid "Pause/Continue playback"
 msgstr "Pristabdyti/tęsti atkūrimą"
 
-#, fuzzy
 msgid "Pending restart"
-msgstr "< Paleidimo iš naujo laukimas >"
+msgstr "Laukiama paleidimo iš naujo"
 
 msgid "Percentage left"
 msgstr "Procentai kairėje"
@@ -6357,7 +6351,7 @@ msgstr "Papildomų galimybių pasirinkimui, spauskite 'MENU'."
 msgid "Press OK on your remote control to continue."
 msgstr "Spauskite OK savo valdymo pulte ir tęskite."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Press OK to activate the selected %s skin."
 msgstr "Paspauskite OK, kad suaktyvintumėte pasirinktą %s temą."
 
@@ -6371,7 +6365,7 @@ msgstr "Spauskite OK ir redaguokite nustatymus."
 msgid "Press OK to get further details for %s"
 msgstr "Spauskite OK, kad gautumėte tolimesnes detales dėl %s"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Press OK to keep the currently selected %s skin."
 msgstr "Paspauskite OK, kad išlaikyti šiuo metu pasirinktą %s temą."
 
@@ -6382,7 +6376,7 @@ msgid "Press OK to select a group of satellites to configure in one block."
 msgstr "Paspauskite OK, kad pasirinktumėte palydovų grupę, kurią norite konfigūruoti viename bloke."
 
 msgid "Press OK to select a provider."
-msgstr "Tiekėjui pasirinkti, spauskite OK."
+msgstr "Teikėjo pasirinkimui spauskite OK."
 
 msgid "Press OK to select a service."
 msgstr "Kanalo pasirinkimui, spauskite OK."
@@ -6491,10 +6485,10 @@ msgid "Protect timer menu"
 msgstr "Apsaugoti laikmačio meniu"
 
 msgid "Provider"
-msgstr "Tiekėjas"
+msgstr "Teikėjas"
 
 msgid "Providers"
-msgstr "Tiekėjai"
+msgstr "Teikėjai"
 
 msgid "Puerto Rico"
 msgstr "Puerto Rikas"
@@ -7323,7 +7317,7 @@ msgid "Select 'polarisation' if using a 'universal' LNB, otherwise consult your 
 msgstr "Jei naudojate 'universalią' LNB, pasirinkite 'polarizacija', kitaip kreipkitės į savo LNB specifikacijų lapą."
 
 msgid "Select 'provider' to scan from the predefined list of cable multiplexes. Select 'bands' to only scan certain parts of the spectrum. Select 'steps' to scan in steps of a particular frequency bandwidth."
-msgstr "Pasirinkite 'tiekėjas', kad skenuoti iš anksto nustatyto kabelių multipleksų sąrašo. Pasirinkite 'juostos', kad tik skenuoti tam tikras spektro dalis. Pasirinkite 'žingsniai', kad skenuotumėte tam tikros dažnių juostos plotyje."
+msgstr "Pasirinkite 'teikėjas', kad skenuoti iš anksto nustatyto kabelių multipleksų sąrašo. Pasirinkite 'juostos', kad tik skenuoti tam tikras spektro dalis. Pasirinkite 'žingsniai', kad skenuotumėte tam tikros dažnių juostos plotyje."
 
 msgid "Select 'yes' if this tuner is connected to the SCR device through another tuner, otherwise select 'no'."
 msgstr "Pasirinkite 'taip', jei šis imtuvas yra prijungtas prie SCR įrenginio per kitą imtuvą, kitaip pasirinkite 'ne'."
@@ -7453,7 +7447,7 @@ msgid "Select path for logfile"
 msgstr "Pasirinkite žurnalo failo kelią"
 
 msgid "Select provider to add..."
-msgstr "Pasirinkite tiekėją, kurį norite pridėti..."
+msgstr "Pasirinkite teikėją, kurį norite pridėti..."
 
 msgid "Select refresh rate"
 msgstr "Pasirinkite atnaujinimo dažnį"
@@ -7574,10 +7568,10 @@ msgid "Select your country. If not available select 'all'."
 msgstr "Pasirinkite savo šalį. Jei nėra pasirinkti 'visos'."
 
 msgid "Select your provider and region. If not present in this list you will need to select one of the other 'service scan types'."
-msgstr "Pasirinkite tiekėją ir regioną. Jei šio sąrašo nėra, turėsite pasirinkti vieną iš kitų 'kanalų paieškos tipų'."
+msgstr "Pasirinkite teikėją ir regioną. Jei šio sąrašo nėra, turėsite pasirinkti vieną iš kitų 'kanalų paieškos tipų'."
 
 msgid "Select your provider, and press OK to start the scan"
-msgstr "Pasirinkite tiekėją ir paieškai pradėti, spauskite OK"
+msgstr "Pasirinkite teikėją ir spauskite OK paieškai pradėti"
 
 msgid "Select your region. If not available change 'Country' to 'all' and select one of the default alternatives."
 msgstr "Pasirinkite savo regioną. Jei negalima, pakeiskite 'Šalis' į 'visos' ir pasirinkite vieną iš numatytųjų alternatyvų."
@@ -8621,9 +8615,8 @@ msgstr "Subtitrų pasirinkimas..."
 msgid "Subtitle settings"
 msgstr "Subtitrų nustatymai"
 
-#, fuzzy
 msgid "Subtitle show/hide..."
-msgstr "Subtitrų pasirinkimas..."
+msgstr "Subtitrų rodymas / slėpimas..."
 
 msgid "Subtitles"
 msgstr "Subtitrai"
@@ -8631,13 +8624,11 @@ msgstr "Subtitrai"
 msgid "Subtitles Settings"
 msgstr "Subtitrų nustatymai"
 
-#, fuzzy
 msgid "Subtitles disabled"
-msgstr "Subtitrų nustatymai"
+msgstr "Subtitrai išjungti"
 
-#, fuzzy
 msgid "Subtitles enabled"
-msgstr "Apribojimai įjungti"
+msgstr "Subtitrai įjungti"
 
 msgid "Succeeded:"
 msgstr "Pavyko:"
@@ -8693,15 +8684,12 @@ msgstr "Perjungti kanalą žemyn"
 msgid "Switch channel up"
 msgstr "Perjungti kanalą aukštyn"
 
-#, fuzzy
 msgid "Switch on the display during Standby Mode"
-msgstr "Budėjimo režime išjunkite ekraną"
+msgstr "Įjungti ekraną budėjimo režime"
 
-#, fuzzy
 msgid "Switch on the display during Suspend Mode"
-msgstr "Laukimo režime išjunkite ekraną"
+msgstr "Įjungti ekraną laukimo režime"
 
-#, fuzzy
 msgid "Switch on the display during operation."
 msgstr "Veikimo metu išjunkite ekraną."
 
@@ -8787,7 +8775,7 @@ msgstr "TEKSTAS"
 msgid "TRANSLATOR_INFO"
 msgstr ""
 "P&C Adga, adga45@gmail.com\n"
-"Pasvalys, 2020-05-11versija"
+"Pasvalys, 2020-06-23 versija"
 
 msgid "TS file is too large for ISO9660 level 1!"
 msgstr "TS failas per didelis 1 lygio ISO9660!"
@@ -9203,7 +9191,7 @@ msgid "This setting allows the tuner configuration to be a duplication of how an
 msgstr "Šis nustatymas leidžia nustatyti imtuvo konfigūraciją, kad dubliuoti kito imtuvo nustatymus."
 
 msgid "This setting depends on your cable provider and location. If you don't know the correct setting refer to the menu in the official cable receiver, or get it from your cable provider, or seek help via internet forum."
-msgstr "Šis nustatymas priklauso nuo kabelinės televizijos tiekėjo ir vietos. Jei nežinote teisingo nustatymo, skaitykite oficialaus kabelinio imtuvo meniu arba gaukite jį iš savo kabelinės televizijos paslaugų teikėjo arba kreipkitės pagalbos per interneto forumą."
+msgstr "Šis nustatymas priklauso nuo kabelinės televizijos teikėjo ir vietos. Jei nežinote teisingo nustatymo, skaitykite oficialaus kabelinio imtuvo meniu arba gaukite jį iš savo kabelinės televizijos paslaugų teikėjo arba kreipkitės pagalbos per interneto forumą."
 
 msgid "This setting is for special setups only. It gives this LNB higher priority over other LNBs with lower values. The free LNB with the highest priority will be the first LNB selected for tuning services."
 msgstr "Šis nustatymas skirtas tik specialiems nustatymams. Tai suteikia LNB aukštesnį prioritetą nei kiti LNB su mažesnėmis reikšmėmis. Laisvas LNB, turintis aukščiausią prioritetą, bus pirmasis pasirinktas LNB kanalų paieškoje."
@@ -9410,9 +9398,8 @@ msgstr "Įjunkite naujus teksto įterpimus prieš esamą tekstą arba perrašyki
 msgid "Toggle show/hide"
 msgstr "Perjungti rodyti/slėpti"
 
-#, fuzzy
 msgid "Toggle subtitles show/hide"
-msgstr "Perjungti rodyti/slėpti"
+msgstr "Perjungti subtitrus rodyti / slėpti"
 
 msgid "Toggle the tv and the radio player..."
 msgstr "Perjungti tv ir radijo grotuvus..."
@@ -9746,9 +9733,8 @@ msgstr "Atnaujinamas programinės įrangos katalogas"
 msgid "Upper case"
 msgstr "Didžiosios raidės"
 
-#, fuzzy
 msgid "Uptime"
-msgstr "Miego laikmatis"
+msgstr "Veikimo laikas"
 
 msgid "Uruguay"
 msgstr "Urugvajus"
@@ -10442,17 +10428,14 @@ msgstr "Su klaidomis:"
 msgid "With popup"
 msgstr "Su iškylančiu pranešimu"
 
-#, fuzzy
 msgid "With this option you can switch on the display during operation."
-msgstr "Naudodami šią parinktį, galite išjungti ekraną veikimo metu."
+msgstr "Pasirinkę šią parinktį, galite įjungti ekraną veikimo metu."
 
-#, fuzzy
 msgid "With this option you can switch on the display in Deep Standby Mode."
-msgstr "Naudodami šią parinktį galite išjungti ekraną gilaus budėjimo režime."
+msgstr "Naudodami šią parinktį galite įjungti ekraną giliojo budėjimo režime."
 
-#, fuzzy
 msgid "With this option you can switch on the display in Standby Mode."
-msgstr "Naudodami šią parinktį galite išjungti ekraną budėjimo režime."
+msgstr "Naudodami šią parinktį galite įjungti ekraną budėjimo režime."
 
 msgid "With this option you can switch the LED color or deactivate the LED."
 msgstr "Naudodami šią parinktį galite įjungti LED spalvą arba išjungti LED."
@@ -10821,10 +10804,10 @@ msgid "[move mode]"
 msgstr "[perkėlimo režimas]"
 
 msgid "a gui to assign services/providers to common interface modules"
-msgstr "kad priskirti kanalus/tiekėjus bendriems įstatomiems moduliams"
+msgstr "kad priskirti kanalus/teikėjus bendriems įstatomiems moduliams"
 
 msgid "a gui to assign services/providers/caids to common interface modules"
-msgstr "kad priskirti kanalus/tiekėjus/caids bendriems įstatomiems moduliams"
+msgstr "kad priskirti kanalus/teikėjus/caids bendriems įstatomiems moduliams"
 
 msgid "about to start"
 msgstr "apie pradžią"
