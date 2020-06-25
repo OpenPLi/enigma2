@@ -77,7 +77,7 @@ class hotkey:
 		("Fastforward", "fastforward", ""),
 		("Skip back", "skip_back", ""),
 		("Skip forward", "skip_forward", ""),
-		("activatePiP", "activatePiP", ""),
+		("Activate PiP", "activatePiP", ""),
 		("Timer", "timer", ""),
 		("Timer" + " " + _("long"), "timer_long", ""),
 		("Playlist", "playlist", ""),
