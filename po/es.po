@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-16 18:29+0200\n"
+"POT-Creation-Date: 2020-06-24 23:29+0200\n"
 "PO-Revision-Date: 2020-05-10 20:14+0200\n"
 "Last-Translator: Jose Juan <jzapater@gmail.com>\n"
 "Language-Team: ANGELODOS  angelo2807@hotmail.com\n"
@@ -217,6 +217,12 @@ msgstr[0] "%d core"
 msgstr[1] "%d cores"
 
 #, python-format
+msgid "%d day"
+msgid_plural "%d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
 msgid "%d file"
 msgid_plural "%d files"
 msgstr[0] "%d archivo"
@@ -252,7 +258,7 @@ msgstr "%d kB/s"
 msgid "%d min"
 msgstr "%d min"
 
-#, python-format
+#, fuzzy, python-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d minuto"
@@ -606,24 +612,6 @@ msgstr "9"
 
 msgid ": 0000 - default (disabled)"
 msgstr ": 0000 - por defecto (desactivado)"
-
-#
-msgid "< Current >"
-msgstr "< Valor actual >"
-
-#
-msgid "< Default + Picon >"
-msgstr "< Piel predeterminada + Picon >"
-
-#
-msgid "< Default >"
-msgstr "< Piel predeterminada >"
-
-msgid "< Emergency >"
-msgstr "< Emergencia >"
-
-msgid "< Pending restart >"
-msgstr "<Pendiente de reinicio>"
 
 #
 msgid "<Current movielist location>"
@@ -2661,6 +2649,11 @@ msgstr "Cuba"
 msgid "Curacao"
 msgstr "Curacao"
 
+#
+#, fuzzy
+msgid "Current"
+msgstr "< Valor actual >"
+
 msgid "Current CEC address"
 msgstr "Editar la dirección fuente de actualización."
 
@@ -2874,6 +2867,11 @@ msgstr "Parámetros por Defecto"
 msgid "Default timer type"
 msgstr "Tipo de temporizador predeterminado"
 
+#
+#, fuzzy
+msgid "Default+Picon"
+msgstr "< Piel predeterminada + Picon >"
+
 msgid "Define the location of the EPG Cache file."
 msgstr "Defina la ubicación del archivo EPG Cache."
 
@@ -2949,6 +2947,11 @@ msgid "Delete Image"
 msgstr "Borrar imagen"
 
 #
+#, fuzzy
+msgid "Delete all the text"
+msgstr "borrar entrada en la lista de reproducción"
+
+#
 msgid "Delete entry"
 msgstr "Borrar entrada"
 
@@ -2970,9 +2973,6 @@ msgstr "borrar entrada en la lista de reproducción"
 #
 msgid "Delete saved playlist"
 msgstr "borrar lista de reproducción guardada"
-
-msgid "Delete the all the text"
-msgstr ""
 
 #, fuzzy
 msgid "Delete the character to the left of text cursor"
@@ -3522,6 +3522,10 @@ msgstr "Guía de Programación Electrónica"
 
 msgid "Embedded"
 msgstr "Incrustado"
+
+#, fuzzy
+msgid "Emergency"
+msgstr "< Emergencia >"
 
 msgid "Empty slot"
 msgstr "Slot vacío"
@@ -6553,6 +6557,10 @@ msgstr "Pusar la reproducción"
 msgid "Pause/Continue playback"
 msgstr "Pausar / continuar la reproducción"
 
+#, fuzzy
+msgid "Pending restart"
+msgstr "<Pendiente de reinicio>"
+
 msgid "Percentage left"
 msgstr "Porcentaje a la izquierda"
 
@@ -7109,8 +7117,8 @@ msgid "Press OK on your remote control to continue."
 msgstr "Pulse OK en el mando a distancia para continuar."
 
 #
-#, python-format
-msgid "Press OK to activate the selected%s skin."
+#, fuzzy, python-format
+msgid "Press OK to activate the selected %s skin."
 msgstr "Presione OK para activar la piel% s seleccionada."
 
 #
@@ -7127,8 +7135,8 @@ msgid "Press OK to get further details for %s"
 msgstr "Pulse OK para obtener más detalles para %s"
 
 #
-#, python-format
-msgid "Press OK to keep the currently selected%s skin."
+#, fuzzy, python-format
+msgid "Press OK to keep the currently selected %s skin."
 msgstr "Presione OK para mantener la piel% s seleccionada actualmente."
 
 #
@@ -8260,10 +8268,6 @@ msgstr "Seleccionar una película"
 #
 msgid "Select a network adapter"
 msgstr "Seleccione un adaptador de red"
-
-#
-msgid "Select a skin"
-msgstr "Seleccione un skin"
 
 #
 msgid "Select a tuner"
@@ -9650,12 +9654,24 @@ msgstr "Selección de subtítulos …"
 msgid "Subtitle settings"
 msgstr "Configuración de subtítulos"
 
+#, fuzzy
+msgid "Subtitle show/hide..."
+msgstr "Selección de subtítulos …"
+
 #
 msgid "Subtitles"
 msgstr "Subtítulos"
 
 msgid "Subtitles Settings"
 msgstr "Configuración de subtítulos"
+
+#, fuzzy
+msgid "Subtitles disabled"
+msgstr "Configuración de subtítulos"
+
+#, fuzzy
+msgid "Subtitles enabled"
+msgstr "Límites habilitados"
 
 msgid "Succeeded:"
 msgstr "Sucedió:"
@@ -10517,6 +10533,10 @@ msgstr "Alternar nuevo texto inserta antes o sobrescribe texto existente"
 msgid "Toggle show/hide"
 msgstr "Alternar mostrar / ocultar"
 
+#, fuzzy
+msgid "Toggle subtitles show/hide"
+msgstr "Alternar mostrar / ocultar"
+
 msgid "Toggle the tv and the radio player..."
 msgstr "Cambiar la televisión y el reproductor de radio …"
 
@@ -10885,6 +10905,10 @@ msgstr "Actualizando el catálogo de software"
 
 msgid "Upper case"
 msgstr "Mayúsculas"
+
+#, fuzzy
+msgid "Uptime"
+msgstr "Tiempo de dormir"
 
 msgid "Uruguay"
 msgstr "Uruguay"

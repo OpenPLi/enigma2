@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-16 18:29+0200\n"
+"POT-Creation-Date: 2020-06-24 23:29+0200\n"
 "PO-Revision-Date: 2020-04-20 21:51+0300\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: openPLi Dimitrij\n"
@@ -207,6 +207,13 @@ msgstr[1] "%d ядра"
 msgstr[2] "%d ядра"
 
 #, python-format
+msgid "%d day"
+msgid_plural "%d days"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#, python-format
 msgid "%d file"
 msgid_plural "%d files"
 msgstr[0] "%d файл"
@@ -243,7 +250,7 @@ msgstr "%d kB/s"
 msgid "%d min"
 msgstr "%d мин"
 
-#, python-format
+#, fuzzy, python-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d минута"
@@ -565,21 +572,6 @@ msgstr "9"
 
 msgid ": 0000 - default (disabled)"
 msgstr ": 0000 - по умолчанию (отключено)"
-
-msgid "< Current >"
-msgstr "< Текущий >"
-
-msgid "< Default + Picon >"
-msgstr "<Дефолт + пикон >"
-
-msgid "< Default >"
-msgstr "<Дефолт >"
-
-msgid "< Emergency >"
-msgstr "< Чрезвычайная ситуация >"
-
-msgid "< Pending restart >"
-msgstr "< Ожидание рестарта >"
 
 msgid "<Current movielist location>"
 msgstr "<Текущее место списка видео>"
@@ -1056,9 +1048,8 @@ msgstr "Любая активность"
 msgid "Arabic"
 msgstr "Арабский"
 
-#, fuzzy
 msgid "Are you sure to delete image:"
-msgstr "Вы действительно хотите выполнить перезагрузку ресивера?"
+msgstr "Вы действительно хотите удалить имидж:"
 
 msgid "Are you sure to purge all deleted user bouquets?"
 msgstr "Вы действительно хотите очистить все удаленные пользовательские букеты?"
@@ -1079,9 +1070,8 @@ msgstr "Вы действительно хотите удалить все на�
 msgid "Are you sure to remove this entry?"
 msgstr "Вы действительно хотите удалить выбранное?"
 
-#, fuzzy
 msgid "Are you sure to restore all deleted images"
-msgstr "Вы действительно хотите удалить все кабельные сервисы?"
+msgstr "Вы уверены, что хотите восстановить все удаленные имиджы?"
 
 msgid ""
 "Are you sure you want to activate this network configuration?\n"
@@ -1877,9 +1867,8 @@ msgstr "Настройки коллекции"
 msgid "Colombia"
 msgstr "Colombia"
 
-#, fuzzy
 msgid "Color"
-msgstr "Colombia"
+msgstr "Цвет"
 
 msgid "Color format"
 msgstr "Формат цвета"
@@ -2404,6 +2393,10 @@ msgstr "Cuba"
 msgid "Curacao"
 msgstr "Curacao"
 
+#, fuzzy
+msgid "Current"
+msgstr "< Текущий >"
+
 msgid "Current CEC address"
 msgstr "Текущий адрес CEC"
 
@@ -2589,6 +2582,10 @@ msgstr "Дефолтные настройки"
 msgid "Default timer type"
 msgstr "Тип таймера по дефолту"
 
+#, fuzzy
+msgid "Default+Picon"
+msgstr "<Дефолт + пикон >"
+
 msgid "Define the location of the EPG Cache file."
 msgstr "Выбор расположения кеша EPG файла."
 
@@ -2658,9 +2655,12 @@ msgstr "Задержка прокрутки в миллисекундах меж
 msgid "Delete"
 msgstr "Удалить"
 
-#, fuzzy
 msgid "Delete Image"
 msgstr "Удалить имидж"
+
+#, fuzzy
+msgid "Delete all the text"
+msgstr "удалить запись из плейлиста"
 
 msgid "Delete entry"
 msgstr "удалить выбранное"
@@ -2680,16 +2680,11 @@ msgstr "удалить запись из плейлиста"
 msgid "Delete saved playlist"
 msgstr "удалить сохраненный плейлист"
 
-msgid "Delete the all the text"
-msgstr ""
-
-#, fuzzy
 msgid "Delete the character to the left of text cursor"
-msgstr "Удалить символ слева от курсора текстового буфера"
+msgstr "Удалить символ слева от текстового курсора"
 
-#, fuzzy
 msgid "Delete the character under the text cursor"
-msgstr "Удалить символ под курсором текстового буфера"
+msgstr "Удалить символ под текстовым курсором"
 
 msgid "Delete timer"
 msgstr "Удалить таймер"
@@ -2697,9 +2692,8 @@ msgstr "Удалить таймер"
 msgid "Deleted"
 msgstr "Удалено"
 
-#, fuzzy
 msgid "Deleted image"
-msgstr "Удалить имидж"
+msgstr "Имидж удален"
 
 msgid "Deleted items"
 msgstr "Удаленные файлы"
@@ -3163,6 +3157,10 @@ msgstr "Электронный Программный Гид"
 
 msgid "Embedded"
 msgstr "Встроенные"
+
+#, fuzzy
+msgid "Emergency"
+msgstr "< Чрезвычайная ситуация >"
 
 msgid "Empty slot"
 msgstr "Пустой слот"
@@ -5145,35 +5143,27 @@ msgstr "Переместить картинку в картинке"
 msgid "Move east"
 msgstr "Перемещение на восток"
 
-#, fuzzy
 msgid "Move the keyboard cursor down"
 msgstr "Перемещение курсора виртуальной клавиатуры вниз"
 
-#, fuzzy
 msgid "Move the keyboard cursor left"
 msgstr "Перемещение курсора виртуальной клавиатуры влево"
 
-#, fuzzy
 msgid "Move the keyboard cursor right"
 msgstr "Перемещение курсора виртуальной клавиатуры вправо"
 
-#, fuzzy
 msgid "Move the keyboard cursor up"
 msgstr "Перемещение курсора виртуальной клавиатуры вверх"
 
-#, fuzzy
 msgid "Move the text cursor left"
-msgstr "Переместить курсор текстового буфера влево"
+msgstr "Переместить текстовый курсор влево"
 
-#, fuzzy
 msgid "Move the text cursor right"
 msgstr "Переместить курсор текстового буфера вправо"
 
-#, fuzzy
 msgid "Move the text cursor to the first character"
 msgstr "Переместите курсор текстового буфера на первый символ"
 
-#, fuzzy
 msgid "Move the text cursor to the last character"
 msgstr "Переместите курсор текстового буфера на последний символ"
 
@@ -5883,6 +5873,10 @@ msgstr "Пауза воспроизведения"
 msgid "Pause/Continue playback"
 msgstr "Пауза/продолжение воспроизведение"
 
+#, fuzzy
+msgid "Pending restart"
+msgstr "< Ожидание рестарта >"
+
 msgid "Percentage left"
 msgstr "Проценты слева"
 
@@ -6363,8 +6357,8 @@ msgstr "Нажмите кнопку MENU на Вашем пульте Д/У дл
 msgid "Press OK on your remote control to continue."
 msgstr "Нажмите ОК на Вашем пульте Д/У для продолжения."
 
-#, python-format
-msgid "Press OK to activate the selected%s skin."
+#, fuzzy, python-format
+msgid "Press OK to activate the selected %s skin."
 msgstr "Нажмите OK, для активации выбранного%s скина."
 
 msgid "Press OK to activate the settings."
@@ -6377,8 +6371,8 @@ msgstr "Нажмите OK, для измения настройки."
 msgid "Press OK to get further details for %s"
 msgstr "Нажмите ОК, чтобы получить подробную информацию для %s"
 
-#, python-format
-msgid "Press OK to keep the currently selected%s skin."
+#, fuzzy, python-format
+msgid "Press OK to keep the currently selected %s skin."
 msgstr "Нажмите OK, чтобы сохранить выбранный%s скин."
 
 msgid "Press OK to scan"
@@ -6713,7 +6707,7 @@ msgid "Remove a nameserver entry"
 msgstr "Удалить запись сервера имен"
 
 msgid "Remove all alternatives"
-msgstr "Удалить все альтернативы"
+msgstr "Удалить эту альтернативу"
 
 msgid "Remove all logfiles"
 msgstr "Удалить все лог-файлы"
@@ -6899,9 +6893,8 @@ msgstr "Востановление бэкапов"
 msgid "Restore defaults"
 msgstr "Установить по дефолту"
 
-#, fuzzy
 msgid "Restore deleted images"
-msgstr "Восстановить удаленные пользовательские букеты"
+msgstr "Восстановить удаленные имиджы?"
 
 msgid "Restore deleted user bouquets"
 msgstr "Восстановить удаленные пользовательские букеты"
@@ -7382,9 +7375,6 @@ msgstr "Выбрать видео"
 msgid "Select a network adapter"
 msgstr "Выбор сетевого адаптера"
 
-msgid "Select a skin"
-msgstr "Выбрать скин"
-
 msgid "Select a tuner"
 msgstr "Выбор тюнера"
 
@@ -7494,11 +7484,9 @@ msgstr "Выберите частоту полосы пользователя, �
 msgid "Select the User Band to be assigned to this tuner. This is an index into the table of frequencies the SCR switch or SCR LNB uses to pass the requested transponder to the tuner."
 msgstr "Выберите пользовательский диапазон, который будет назначен данному тюнеру. Это индекс в таблице частот, который коммутатор SCR или LNB SCR использует для передачи запрошенного транспондера тюнеру."
 
-#, fuzzy
 msgid "Select the character or action under the keyboard cursor"
 msgstr "Выберите символ или действие под курсором виртуальной клавиатуры"
 
-#, fuzzy
 msgid "Select the locale from a menu"
 msgstr "Выберите язык виртуальной клавиатуры из меню"
 
@@ -7532,11 +7520,9 @@ msgstr "Выберите спутник, который Вы хотите нас
 msgid "Select the satellite your dish receives from. If you are unsure select 'automatic' and the receiver will attempt to determine this for you."
 msgstr "Выберите спутник, к которому подключена Ваша тарелка. Если вы не уверены, выберите 'автоматически', и ресивер попытается определить это для Вас."
 
-#, fuzzy
 msgid "Select the shifted character set"
 msgstr "Выберите набор символов с виртуальной клавиатурой"
 
-#, fuzzy
 msgid "Select the shifted character set for the next character only"
 msgstr "Выберите набор символов со сдвигом виртуальной клавиатуры только для следующего символа"
 
@@ -8635,11 +8621,23 @@ msgstr "Выбор субтитров..."
 msgid "Subtitle settings"
 msgstr "Меню настройки субтитров"
 
+#, fuzzy
+msgid "Subtitle show/hide..."
+msgstr "Выбор субтитров..."
+
 msgid "Subtitles"
 msgstr "Субтитры"
 
 msgid "Subtitles Settings"
 msgstr "Настройки субтитров"
+
+#, fuzzy
+msgid "Subtitles disabled"
+msgstr "Настройки субтитров"
+
+#, fuzzy
+msgid "Subtitles enabled"
+msgstr "Ограничения включены"
 
 msgid "Succeeded:"
 msgstr "Успешных:"
@@ -8695,17 +8693,14 @@ msgstr "Сменить канал вниз"
 msgid "Switch channel up"
 msgstr "Сменить канал вверх"
 
-#, fuzzy
 msgid "Switch on the display during Standby Mode"
-msgstr "Выключить дисплей в режиме ожидания"
+msgstr "Включить дисплей в режиме ожидания"
 
-#, fuzzy
 msgid "Switch on the display during Suspend Mode"
-msgstr "Выключить дисплей в режиме глубокого ожидания"
+msgstr "Включить дисплей в режиме глубокого ожидания"
 
-#, fuzzy
 msgid "Switch on the display during operation."
-msgstr "Выключить дисплей во время работы."
+msgstr "Включить дисплей во время работы."
 
 msgid "Switch to TV mode"
 msgstr "Перейти к режиму ТВ"
@@ -9408,12 +9403,15 @@ msgstr "Переключить новые текстовые вставки до
 msgid "Toggle show/hide"
 msgstr "Переключатель показать/скрыть"
 
+#, fuzzy
+msgid "Toggle subtitles show/hide"
+msgstr "Переключатель показать/скрыть"
+
 msgid "Toggle the tv and the radio player..."
 msgstr "Переключение между тв и радио плеером..."
 
-#, fuzzy
 msgid "Toggle videomode"
-msgstr "Выберите видеорежим"
+msgstr "Смена видеорежима"
 
 msgid "Togo"
 msgstr "Togo"
@@ -9740,6 +9738,10 @@ msgstr "Обновление каталога ПО"
 
 msgid "Upper case"
 msgstr "Верхний регистр"
+
+#, fuzzy
+msgid "Uptime"
+msgstr "Таймер сна"
 
 msgid "Uruguay"
 msgstr "Uruguay"
@@ -10433,17 +10435,14 @@ msgstr "С ошибками:"
 msgid "With popup"
 msgstr "С сообщением"
 
-#, fuzzy
 msgid "With this option you can switch on the display during operation."
-msgstr "С помощью этой опции вы можете отключить дисплей во время работы."
+msgstr "С помощью этой опции вы можете включить дисплей во время работы."
 
-#, fuzzy
 msgid "With this option you can switch on the display in Deep Standby Mode."
-msgstr "С помощью этой опции вы можете отключить дисплей в режиме глубокого ожидания."
+msgstr "С помощью этой опции вы можете включить дисплей в режиме глубокого ожидания."
 
-#, fuzzy
 msgid "With this option you can switch on the display in Standby Mode."
-msgstr "С помощью этой опции вы можете отключить дисплей в режиме ожидания."
+msgstr "С помощью этой опции вы можете включить дисплей в режиме ожидания."
 
 msgid "With this option you can switch the LED color or deactivate the LED."
 msgstr "С помощью этой опции вы можете переключить цвет LED или отключить LED."
