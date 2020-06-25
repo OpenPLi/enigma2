@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-16 18:29+0200\n"
+"POT-Creation-Date: 2020-06-24 23:29+0200\n"
 "PO-Revision-Date: 2020-04-26 13:56+0200\n"
 "Last-Translator: GeirJ <dummy@dummy.com>\n"
 "Language-Team: GeirJ\n"
@@ -217,6 +217,12 @@ msgstr[0] "%d kjerne"
 msgstr[1] "%d kjerner"
 
 #, python-format
+msgid "%d day"
+msgid_plural "%d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
 msgid "%d file"
 msgid_plural "%d files"
 msgstr[0] "%d fil"
@@ -251,7 +257,7 @@ msgstr "%d kB/s"
 msgid "%d min"
 msgstr "%d min"
 
-#, python-format
+#, fuzzy, python-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d minutt"
@@ -604,24 +610,6 @@ msgstr "9"
 
 msgid ": 0000 - default (disabled)"
 msgstr ": 0000 - standard (frakoblet)"
-
-#
-msgid "< Current >"
-msgstr "< Gjeldende >"
-
-#
-msgid "< Default + Picon >"
-msgstr "< Standard + Kanallogo >"
-
-#
-msgid "< Default >"
-msgstr "< Standard >"
-
-msgid "< Emergency >"
-msgstr "< Nødsituasjon >"
-
-msgid "< Pending restart >"
-msgstr "< Venter på omstart >"
 
 msgid "<Current movielist location>"
 msgstr "<Gjeldende opptaksmappe>"
@@ -2639,6 +2627,11 @@ msgstr "Cuba"
 msgid "Curacao"
 msgstr "Curacao"
 
+#
+#, fuzzy
+msgid "Current"
+msgstr "< Gjeldende >"
+
 msgid "Current CEC address"
 msgstr "Gjeldende CEC adresse"
 
@@ -2851,6 +2844,11 @@ msgstr "Standard innstillinger"
 msgid "Default timer type"
 msgstr "Standard timer type"
 
+#
+#, fuzzy
+msgid "Default+Picon"
+msgstr "< Standard + Kanallogo >"
+
 msgid "Define the location of the EPG Cache file."
 msgstr "Velg sti til EPG hurtigbuffer fil."
 
@@ -2927,6 +2925,11 @@ msgid "Delete Image"
 msgstr "Slett programvare"
 
 #
+#, fuzzy
+msgid "Delete all the text"
+msgstr "Slett oppføring i opptaksliste"
+
+#
 msgid "Delete entry"
 msgstr "Slett oppføring"
 
@@ -2949,9 +2952,6 @@ msgstr "Slett oppføring i opptaksliste"
 #
 msgid "Delete saved playlist"
 msgstr "Slett lagret opptaksliste"
-
-msgid "Delete the all the text"
-msgstr ""
 
 #, fuzzy
 msgid "Delete the character to the left of text cursor"
@@ -3494,6 +3494,10 @@ msgstr "Elektronisk Program Guide"
 
 msgid "Embedded"
 msgstr "Innebygd"
+
+#, fuzzy
+msgid "Emergency"
+msgstr "< Nødsituasjon >"
 
 msgid "Empty slot"
 msgstr "Tom"
@@ -6537,6 +6541,10 @@ msgstr "Pause avspilling"
 msgid "Pause/Continue playback"
 msgstr "Pause / Fortsett avspilling"
 
+#, fuzzy
+msgid "Pending restart"
+msgstr "< Venter på omstart >"
+
 msgid "Percentage left"
 msgstr "Prosent venstre"
 
@@ -7086,8 +7094,8 @@ msgstr "Trykk på MENU på fjernkontrollen for flere alternativer."
 msgid "Press OK on your remote control to continue."
 msgstr "Trykk OK for å fortsette."
 
-#, python-format
-msgid "Press OK to activate the selected%s skin."
+#, fuzzy, python-format
+msgid "Press OK to activate the selected %s skin."
 msgstr "Trykk OK for å ta i bruk det valgte%s skin."
 
 msgid "Press OK to activate the settings."
@@ -7100,8 +7108,8 @@ msgstr "Trykk OK for å endre innstillinger."
 msgid "Press OK to get further details for %s"
 msgstr "Trykk OK for å få ytterligere detaljer for %s"
 
-#, python-format
-msgid "Press OK to keep the currently selected%s skin."
+#, fuzzy, python-format
+msgid "Press OK to keep the currently selected %s skin."
 msgstr "Trykk OK for å beholde den valgte %s skin."
 
 msgid "Press OK to scan"
@@ -8215,10 +8223,6 @@ msgstr "Velg film"
 #
 msgid "Select a network adapter"
 msgstr "Velg et nettverkskort"
-
-#
-msgid "Select a skin"
-msgstr "Velg utseende"
 
 #
 msgid "Select a tuner"
@@ -9604,11 +9608,23 @@ msgstr "Undertekst valg..."
 msgid "Subtitle settings"
 msgstr "Undertekst innstilling"
 
+#, fuzzy
+msgid "Subtitle show/hide..."
+msgstr "Undertekst valg..."
+
 msgid "Subtitles"
 msgstr "Undertekst"
 
 msgid "Subtitles Settings"
 msgstr "Undertekst innstilling"
+
+#, fuzzy
+msgid "Subtitles disabled"
+msgstr "Undertekst innstilling"
+
+#, fuzzy
+msgid "Subtitles enabled"
+msgstr "Grenser aktivert"
 
 msgid "Succeeded:"
 msgstr "Vellykket:"
@@ -10466,6 +10482,10 @@ msgstr "Bruk nye tekst valg først eller overskriv eksisterende tekst"
 msgid "Toggle show/hide"
 msgstr "Bytt mellom vis/skjul"
 
+#, fuzzy
+msgid "Toggle subtitles show/hide"
+msgstr "Bytt mellom vis/skjul"
+
 #
 msgid "Toggle the tv and the radio player..."
 msgstr "Skift mellom TV og Radio spiller..."
@@ -10839,6 +10859,10 @@ msgstr "Oppdaterer programvarekatalog"
 
 msgid "Upper case"
 msgstr "Store bokstaver"
+
+#, fuzzy
+msgid "Uptime"
+msgstr "Dvale timer"
 
 msgid "Uruguay"
 msgstr "Uruguay"

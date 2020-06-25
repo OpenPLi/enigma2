@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-16 18:29+0200\n"
+"POT-Creation-Date: 2020-06-24 23:29+0200\n"
 "PO-Revision-Date: 2020-05-10 20:14+0200\n"
 "Last-Translator: Oriol Pellicer <oriol@elsud.org>\n"
 "Language-Team: angelodos angelo2807@hotmail.com\n"
@@ -219,6 +219,12 @@ msgstr[0] "%d core"
 msgstr[1] "%d cores"
 
 #, python-format
+msgid "%d day"
+msgid_plural "%d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
 msgid "%d file"
 msgid_plural "%d files"
 msgstr[0] "%d file"
@@ -253,7 +259,7 @@ msgstr "%d kB/s"
 msgid "%d min"
 msgstr "%d min"
 
-#, python-format
+#, fuzzy, python-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "% d minut"
@@ -608,23 +614,6 @@ msgstr "9"
 
 msgid ": 0000 - default (disabled)"
 msgstr ": 0000 - predeterminat (desactivat)"
-
-msgid "< Current >"
-msgstr "<Actual>"
-
-#
-msgid "< Default + Picon >"
-msgstr "<Predeterminat + picó>"
-
-#
-msgid "< Default >"
-msgstr "<Predeterminat>"
-
-msgid "< Emergency >"
-msgstr "< Emergencia >"
-
-msgid "< Pending restart >"
-msgstr "<Pendent de reiniciar>"
 
 #
 msgid "<Current movielist location>"
@@ -2649,6 +2638,10 @@ msgstr "Cuba"
 msgid "Curacao"
 msgstr "Curacao"
 
+#, fuzzy
+msgid "Current"
+msgstr "<Actual>"
+
 msgid "Current CEC address"
 msgstr "Adreça actual del CEC"
 
@@ -2864,6 +2857,11 @@ msgstr "Configuració per defecte"
 msgid "Default timer type"
 msgstr "Tipus de temporitzador predeterminat"
 
+#
+#, fuzzy
+msgid "Default+Picon"
+msgstr "<Predeterminat + picó>"
+
 msgid "Define the location of the EPG Cache file."
 msgstr "Definiu la ubicació del fitxer de memòria cau EPG."
 
@@ -2940,6 +2938,11 @@ msgid "Delete Image"
 msgstr "Ha fallat l'eliminació"
 
 #
+#, fuzzy
+msgid "Delete all the text"
+msgstr "Esborrar entrada de la llista"
+
+#
 msgid "Delete entry"
 msgstr "Esborrar entrada"
 
@@ -2962,9 +2965,6 @@ msgstr "Esborrar entrada de la llista"
 #
 msgid "Delete saved playlist"
 msgstr "Esborrar llista gravada"
-
-msgid "Delete the all the text"
-msgstr ""
 
 #, fuzzy
 msgid "Delete the character to the left of text cursor"
@@ -3521,6 +3521,10 @@ msgstr "Guia electrònica de programes"
 
 msgid "Embedded"
 msgstr "Incrustat"
+
+#, fuzzy
+msgid "Emergency"
+msgstr "< Emergencia >"
 
 msgid "Empty slot"
 msgstr "Ranura buida"
@@ -6556,6 +6560,10 @@ msgstr "Pausa la reproducció"
 msgid "Pause/Continue playback"
 msgstr "Pausa la reproducció"
 
+#, fuzzy
+msgid "Pending restart"
+msgstr "<Pendent de reiniciar>"
+
 msgid "Percentage left"
 msgstr "Percentatge restant"
 
@@ -7117,8 +7125,8 @@ msgid "Press OK on your remote control to continue."
 msgstr "Per continuar, premeu OK al comandament a distància."
 
 #
-#, python-format
-msgid "Press OK to activate the selected%s skin."
+#, fuzzy, python-format
+msgid "Press OK to activate the selected %s skin."
 msgstr "Premeu OK per activar el% s de pell seleccionat."
 
 #
@@ -7135,8 +7143,8 @@ msgid "Press OK to get further details for %s"
 msgstr "Premeu OK per obtenir més detalls per a% s"
 
 #
-#, python-format
-msgid "Press OK to keep the currently selected%s skin."
+#, fuzzy, python-format
+msgid "Press OK to keep the currently selected %s skin."
 msgstr "Premeu OK per mantenir %s pell actualment seleccionada."
 
 #
@@ -8277,10 +8285,6 @@ msgstr "Seleccionar una pel·lícula"
 #
 msgid "Select a network adapter"
 msgstr "Selecciona interfície de xarxaSeleccioneu un adaptador de xarxa"
-
-#
-msgid "Select a skin"
-msgstr "Selecciona una pell"
 
 #
 msgid "Select a tuner"
@@ -9666,12 +9670,24 @@ msgstr "Selecció de subtítols…"
 msgid "Subtitle settings"
 msgstr "Configuració de subtítols"
 
+#, fuzzy
+msgid "Subtitle show/hide..."
+msgstr "Selecció de subtítols…"
+
 #
 msgid "Subtitles"
 msgstr "Subtítols"
 
 msgid "Subtitles Settings"
 msgstr "Configuració de Subtítols"
+
+#, fuzzy
+msgid "Subtitles disabled"
+msgstr "Configuració de Subtítols"
+
+#, fuzzy
+msgid "Subtitles enabled"
+msgstr "Límits habilitats"
 
 msgid "Succeeded:"
 msgstr "Va tenir èxit:"
@@ -10518,6 +10534,10 @@ msgstr "Commuta o inserta el text nou abans o sobreescriu el text existent"
 msgid "Toggle show/hide"
 msgstr "Commuta / amaga"
 
+#, fuzzy
+msgid "Toggle subtitles show/hide"
+msgstr "Commuta / amaga"
+
 msgid "Toggle the tv and the radio player..."
 msgstr "Canvia la televisió i el reproductor de ràdio …"
 
@@ -10896,6 +10916,10 @@ msgstr "Actualització del catàleg de programari"
 
 msgid "Upper case"
 msgstr "Majúscula"
+
+#, fuzzy
+msgid "Uptime"
+msgstr "Sleeptimer"
 
 msgid "Uruguay"
 msgstr "Uruguai"

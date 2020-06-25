@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Openpli\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-16 18:29+0200\n"
+"POT-Creation-Date: 2020-06-24 23:29+0200\n"
 "PO-Revision-Date: 2019-04-03 06:49+0300\n"
 "Last-Translator: \n"
 "Language-Team: Raivo, Henkka, eesatfan, rimas, zeros\\n faas, sateks, valgekotkas, tigekala, rootsikunn\\n kain, i70, mustkass, pelmeen, Scott\\n <digi-tv.ee>\n"
@@ -206,6 +206,12 @@ msgstr[0] "%d tuumaga"
 msgstr[1] "%d tuumaga"
 
 #, python-format
+msgid "%d day"
+msgid_plural "%d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
 msgid "%d file"
 msgid_plural "%d files"
 msgstr[0] "%d fail"
@@ -239,7 +245,7 @@ msgstr "%d kB/s"
 msgid "%d min"
 msgstr "%d min"
 
-#, python-format
+#, fuzzy, python-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d minut"
@@ -553,24 +559,6 @@ msgstr "9"
 
 msgid ": 0000 - default (disabled)"
 msgstr ": 0000 - vakimisi (keelatud)"
-
-#, fuzzy
-msgid "< Current >"
-msgstr "Praegune väärtus: "
-
-#, fuzzy
-msgid "< Default + Picon >"
-msgstr "Vaikeväärtused"
-
-#, fuzzy
-msgid "< Default >"
-msgstr "Vaikeväärtused"
-
-msgid "< Emergency >"
-msgstr ""
-
-msgid "< Pending restart >"
-msgstr ""
 
 msgid "<Current movielist location>"
 msgstr "<Salvestusnimekirja hetkeasukoht >"
@@ -2400,6 +2388,10 @@ msgstr "Kuuba"
 msgid "Curacao"
 msgstr "Curacao"
 
+#, fuzzy
+msgid "Current"
+msgstr "Praegune väärtus: "
+
 msgid "Current CEC address"
 msgstr "Praegune CEC aadress"
 
@@ -2588,6 +2580,10 @@ msgstr "Vaikeväärtused"
 msgid "Default timer type"
 msgstr "Kustuta taimer"
 
+#, fuzzy
+msgid "Default+Picon"
+msgstr "Vaikeväärtused"
+
 msgid "Define the location of the EPG Cache file."
 msgstr ""
 
@@ -2661,6 +2657,10 @@ msgstr "Kustuta"
 msgid "Delete Image"
 msgstr "Kustuta image"
 
+#, fuzzy
+msgid "Delete all the text"
+msgstr "Kustuta esitusloendi kirje"
+
 msgid "Delete entry"
 msgstr "Kustuta valik"
 
@@ -2678,9 +2678,6 @@ msgstr "Kustuta esitusloendi kirje"
 
 msgid "Delete saved playlist"
 msgstr "Kustuta salvestatud esitusloend"
-
-msgid "Delete the all the text"
-msgstr ""
 
 msgid "Delete the character to the left of text cursor"
 msgstr ""
@@ -3167,6 +3164,9 @@ msgstr "EPG"
 #, fuzzy
 msgid "Embedded"
 msgstr "sisseehitatud"
+
+msgid "Emergency"
+msgstr ""
 
 msgid "Empty slot"
 msgstr ""
@@ -5898,6 +5898,10 @@ msgstr "Peata taasesitus"
 msgid "Pause/Continue playback"
 msgstr "Peata/Jätka taasesitust"
 
+#, fuzzy
+msgid "Pending restart"
+msgstr "Seiskamine"
+
 msgid "Percentage left"
 msgstr "Protsent vasakul"
 
@@ -6384,7 +6388,7 @@ msgid "Press OK on your remote control to continue."
 msgstr "Jätkamiseks vajuta OK."
 
 #, fuzzy, python-format
-msgid "Press OK to activate the selected%s skin."
+msgid "Press OK to activate the selected %s skin."
 msgstr "Vajuta OK uue välimuse aktiveerimiseks."
 
 msgid "Press OK to activate the settings."
@@ -6398,7 +6402,7 @@ msgid "Press OK to get further details for %s"
 msgstr "Vajuta OK %s üksikasjade nägemiseks"
 
 #, fuzzy, python-format
-msgid "Press OK to keep the currently selected%s skin."
+msgid "Press OK to keep the currently selected %s skin."
 msgstr "Vajuta OK uue välimuse aktiveerimiseks."
 
 msgid "Press OK to scan"
@@ -7409,9 +7413,6 @@ msgstr "Vali salvestis"
 
 msgid "Select a network adapter"
 msgstr "Vali võrgukaart"
-
-msgid "Select a skin"
-msgstr "Vali kujundus"
 
 msgid "Select a tuner"
 msgstr "Vali tuuner"
@@ -8676,11 +8677,23 @@ msgstr "Subtiitrite valik..."
 msgid "Subtitle settings"
 msgstr "Subtiitrite seadistus"
 
+#, fuzzy
+msgid "Subtitle show/hide..."
+msgstr "Subtiitrite valik..."
+
 msgid "Subtitles"
 msgstr "Subtiitrid"
 
 msgid "Subtitles Settings"
 msgstr "Subtiitrite seaded"
+
+#, fuzzy
+msgid "Subtitles disabled"
+msgstr "Subtiitrite seaded"
+
+#, fuzzy
+msgid "Subtitles enabled"
+msgstr "Piirid on kasutuses"
 
 msgid "Succeeded:"
 msgstr "Õnnestus:"
@@ -9477,6 +9490,10 @@ msgstr ""
 msgid "Toggle show/hide"
 msgstr "Vaheta näita/peida"
 
+#, fuzzy
+msgid "Toggle subtitles show/hide"
+msgstr "Vaheta näita/peida"
+
 msgid "Toggle the tv and the radio player..."
 msgstr "Kuula raadiot"
 
@@ -9816,6 +9833,10 @@ msgstr "Uuendan tarkvara kataloogi"
 
 msgid "Upper case"
 msgstr "Suurtähed"
+
+#, fuzzy
+msgid "Uptime"
+msgstr "Unetaimer"
 
 msgid "Uruguay"
 msgstr "Uruguay"
