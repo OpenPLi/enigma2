@@ -3,6 +3,7 @@ import sys, os, time
 import re
 from Tools.HardwareInfo import HardwareInfo
 from enigma import getBoxType
+from Tools.Directories import fileExists
 
 def getFlashMemory(folder='/'):
 	try:
@@ -79,26 +80,24 @@ def getFFmpegVersionString():
 		return ""
 
 def getKernelVersionString():
-	try:
+	if fileExists("/proc/version"):
 		f = open("/proc/version","r")
 		return f.read().split(' ', 4)[2].split('-',2)[0]
-	except:
-		return _("unknown")
-	finally:
 		f.close()
+	else:
+		return _("unknown")
 
 def getHardwareTypeString():
 	return HardwareInfo().get_device_string()
 
 def getImageTypeString():
-	try:
+	if fileExists("/etc/issue"):
 		f = open("/etc/issue")
 		image_type = f.readlines()[-2].strip()[:-6]
 		return image_type.capitalize()
-	except:
-		return _("undefined")
-	finally:
 		f.close()
+	else:
+		return _("undefined")
 
 def getCPUInfoString():
 	try:
@@ -122,22 +121,14 @@ def getCPUInfoString():
 			f.close()
 
 		if not cpu_speed:
-			try:
+			if fileExists("/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq"):
 				f = open("/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq")
 				cpu_speed = int(f.read()) / 1000
-			except:
-				pass
-			finally:
 				f.close()
-
-		if not cpu_speed:
-			try:
+			elif fileExists("/sys/firmware/devicetree/base/cpus/cpu@0/clock-frequency"):
 				import binascii
 				f = open('/sys/firmware/devicetree/base/cpus/cpu@0/clock-frequency', 'rb')
 				cpu_speed = int(int(binascii.hexlify(f.read()), 16) / 100000000) * 100
-			except:
-				cpu_speed = "-"
-			finally:
 				f.close()
 
 		temperature = None
@@ -154,21 +145,19 @@ def getCPUInfoString():
 			temperature = f.readline().replace('\n','')
 			f.close()
 		elif os.path.isfile("/sys/devices/virtual/thermal/thermal_zone0/temp"):
+			f = open("/sys/devices/virtual/thermal/thermal_zone0/temp")
 			try:
-				f = open("/sys/devices/virtual/thermal/thermal_zone0/temp")
 				temperature = int(f.read().strip())/1000
 			except:
 				pass
-			finally:
-				f.close()
+			f.close()
 		elif os.path.isfile("/proc/hisi/msp/pm_cpu"):
+			f = open("/proc/hisi/msp/pm_cpu")
 			try:
-				f = open("/proc/hisi/msp/pm_cpu")
 				temperature = re.search('temperature = (\d+) degree', f.read()).group(1)
 			except:
 				pass
-			finally:
-				f.close()
+			f.close()
 		if temperature:
 			return "%s %s MHz (%s) %s\xb0C" % (processor, cpu_speed, ngettext("%d core", "%d cores", cpu_count) % cpu_count, temperature)
 		return "%s %s MHz (%s)" % (processor, cpu_speed, ngettext("%d core", "%d cores", cpu_count) % cpu_count)
@@ -233,6 +222,8 @@ def GetIPsFromNetworkInterfaces():
 	return ifaces
 
 def getBoxUptime():
+	if not fileExists("/proc/uptime"):
+		return '-'
 	try:
 		time = ''
 		f = open("/proc/uptime", "rb")
