@@ -5,6 +5,7 @@ from socket import *
 from Components.Console import Console
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
+from Tools.Directories import fileExists
 
 class Network:
 	def __init__(self):
@@ -63,24 +64,29 @@ class Network:
 
 	def getAddrInet(self, iface, callback):
 		data = { 'up': False, 'dhcp': False, 'preup' : False, 'predown' : False }
-		try:
-			fp = open('/sys/class/net/%s/flags' % iface)
-			data['up'] = int(fp.read().strip(), 16) & 1 == 1
-			if data['up']:
-				self.configuredInterfaces.append(iface)
-			nit = ni.ifaddresses(iface)
-			data['ip'] = self.convertIP(nit[ni.AF_INET][0]['addr']) # ipv4
-			data['netmask'] = self.convertIP(nit[ni.AF_INET][0]['netmask'])
-			data['bcast'] = self.convertIP(nit[ni.AF_INET][0]['broadcast'])
-			data['mac'] = nit[ni.AF_LINK][0]['addr'] # mac
-			data['gateway'] = self.convertIP(ni.gateways()['default'][ni.AF_INET][0]) # default gw
-		except:
+		if fileExists('/sys/class/net/%s/flags' % iface):
+			try:
+				fp = open('/sys/class/net/%s/flags' % iface)
+				data['up'] = int(fp.read().strip(), 16) & 1 == 1
+				if data['up']:
+					self.configuredInterfaces.append(iface)
+				fp.close()
+				nit = ni.ifaddresses(iface)
+				data['ip'] = self.convertIP(nit[ni.AF_INET][0]['addr']) # ipv4
+				data['netmask'] = self.convertIP(nit[ni.AF_INET][0]['netmask'])
+				data['bcast'] = self.convertIP(nit[ni.AF_INET][0]['broadcast'])
+				data['mac'] = nit[ni.AF_LINK][0]['addr'] # mac
+				data['gateway'] = self.convertIP(ni.gateways()['default'][ni.AF_INET][0]) # default gw
+			except:
+				data['dhcp'] = True
+				data['ip'] = [0, 0, 0, 0]
+				data['netmask'] = [0, 0, 0, 0]
+				data['gateway'] = [0, 0, 0, 0]
+		else:
 			data['dhcp'] = True
 			data['ip'] = [0, 0, 0, 0]
 			data['netmask'] = [0, 0, 0, 0]
 			data['gateway'] = [0, 0, 0, 0]
-		finally:
-			fp.close()
 		self.ifaces[iface] = data
 		self.loadNetworkConfig(iface,callback)
 
