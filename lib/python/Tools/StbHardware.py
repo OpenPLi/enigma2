@@ -13,18 +13,24 @@ def getFPVersion():
 		else:
 			ret = long(fp.read())
 		return ret
+	except IOError:
+		pass
 	finally:
     		fp.close()
 	try:
 		fp = open("/dev/dbox/fp0")
 		ret = ioctl(fp.fileno(),0)
 		return ret
+	except IOError:
+		pass
 	finally:
     		fp.close()
 	try:
 		fp = open("/sys/firmware/devicetree/base/bolt/tag", "r")
 		ret = fp.read().rstrip("\0")
 		return ret
+	except IOError:
+		pass
 	finally:
     		fp.close()
 	print "getFPVersion failed!"
@@ -35,12 +41,16 @@ def setFPWakeuptime(wutime):
 		fp = open("/proc/stb/fp/wakeup_time", "w")
 		fp.write(str(wutime))
 		return
+	except IOError:
+		pass
 	finally:
     		fp.close()
 	try:
 		fp = open("/dev/dbox/fp0")
 		ioctl(fp.fileno(), 6, pack('L', wutime))
 		return
+	except IOError:
+		pass
 	finally:
     		fp.close()
 	print "setFPWakeupTime failed!"
@@ -64,12 +74,16 @@ def setRTCtime(wutime):
 		fp = open("/proc/stb/fp/rtc", "w")
 		fp.write(str(wutime))
 		return
+	except IOError:
+		pass
 	finally:
     		fp.close()
 	try:
 		fp = open("/dev/dbox/fp0")
 		ioctl(fp.fileno(), 0x101, pack('L', wutime))
 		return
+	except IOError:
+		pass
 	finally:
     		fp.close()
 	print "setRTCtime failed!"
@@ -80,12 +94,16 @@ def getFPWakeuptime():
 		fp = open("/proc/stb/fp/wakeup_time", "r")
 		ret = long(fp.read())
 		return ret
+	except IOError:
+		pass
 	finally:
     		fp.close()
 	try:
 		fp = open("/dev/dbox/fp0")
 		ret = unpack('L', ioctl(fp.fileno(), 5, '    '))[0]
 		return ret
+	except IOError:
+		pass
 	finally:
     		fp.close()
 	print "getFPWakeupTime failed!"
@@ -104,6 +122,8 @@ def getFPWasTimerWakeup():
 		if wasTimerWakeup:
 			clearFPWasTimerWakeup()
 		return wasTimerWakeup
+	except IOError:
+		pass
 	finally:
     		fp.close()
 	try:
@@ -112,6 +132,8 @@ def getFPWasTimerWakeup():
 		if wasTimerWakeup:
 			clearFPWasTimerWakeup()
 		return wasTimerWakeup
+	except IOError:
+		pass
 	finally:
     		fp.close()
 	print "wasTimerWakeup failed!"
@@ -122,12 +144,16 @@ def clearFPWasTimerWakeup():
 		fp = open("/proc/stb/fp/was_timer_wakeup", "w")
 		fp.write('0')
 		return
+	except IOError:
+		pass
 	finally:
     		fp.close()
 	try:
 		fp = open("/dev/dbox/fp0")
 		ioctl(fp.fileno(), 10)
 		return
+	except IOError:
+		pass
 	finally:
     		fp.close()
 	print "clearFPWasTimerWakeup failed!"
