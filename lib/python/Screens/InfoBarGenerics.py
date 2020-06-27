@@ -119,11 +119,10 @@ def loadResumePoints():
 	try:
 		f = open('/home/root/resumepoints.pkl', 'rb')
 		return cPickle.load(f)
+		f.close()
 	except Exception, ex:
 		print "[InfoBar] Failed to load resumepoints:", ex
 		return {}
-	finally:
-		f.close()
 
 resumePointCache = loadResumePoints()
 resumePointCacheLast = int(time())
