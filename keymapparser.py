@@ -89,9 +89,8 @@ def readKeymap(filename):
 		dom = xml.etree.cElementTree.parse(source)
 	except:
 		raise KeymapError("[keymapparser] keymap %s not well-formed." % filename)
-	finally:
-		source.close()
-
+	
+	source.close()
 	keymap = dom.getroot()
 
 	for cmap in keymap.findall("map"):
