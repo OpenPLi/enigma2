@@ -1579,10 +1579,9 @@ def InitNimManager(nimmgr, update_slots = []):
 								f = open("/sys/module/dvb_core/parameters/dvb_shutdown_timeout", "w+")
 								oldvalue = f.readline()
 								f.write("0")
+								f.close()
 							except:
 								print "[InitNimManager] tunerTypeChanged read /sys/module/dvb_core/parameters/dvb_shutdown_timeout failed"
-							finally:
-								f.close()
 
 						frontend.closeFrontend()
 						f = open("/proc/stb/frontend/%d/mode" % (fe_id), "w")
@@ -1594,10 +1593,9 @@ def InitNimManager(nimmgr, update_slots = []):
 							try:
 								f = open("/sys/module/dvb_core/parameters/dvb_shutdown_timeout", "w")
 								f.write(oldvalue)
+								f.close()
 							except:
 								print "[InitNimManager] tunerTypeChanged write to /sys/module/dvb_core/parameters/dvb_shutdown_timeout failed"
-							finally:
-								f.close()
 
 						nimmgr.enumerateNIMs()
 						if initial:
