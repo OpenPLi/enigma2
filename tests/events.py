@@ -50,9 +50,7 @@ def end_log(test_name):
 	if expected is not None:
 		print "expected:"
 		if expected != results:
-			f = open(test_name + ".bogus_results", "wb")
-			f.write(results)
-			f.close()
+			open(test_name + ".bogus_results", "wb").write(results)
 			raise tests.TestError("test data does not match")
 		else:
 			print "test compared ok"
