@@ -1,6 +1,7 @@
 from config import config, ConfigSlider, ConfigSelection, ConfigYesNo, ConfigEnableDisable, ConfigSubsection, ConfigBoolean, ConfigSelectionNumber, ConfigNothing, NoSave
 from enigma import eAVSwitch, eDVBVolumecontrol, getDesktop
 from SystemInfo import SystemInfo
+from Tools.Directories import fileExists
 import os
 
 class AVSwitch:
@@ -22,14 +23,13 @@ class AVSwitch:
 		if valstr in ("4_3_letterbox", "4_3_panscan"): # 4:3
 			return (4,3)
 		elif valstr == "16_9": # auto ... 4:3 or 16:9
-			try:
+			if fileExists("/proc/stb/vmpeg/0/aspect"):
 				f = open("/proc/stb/vmpeg/0/aspect", "r")
 				if "1" in f.read(): # 4:3
+					f.close()
 					return (4,3)
-			except IOError:
-				pass
-			finally:
-				f.close()
+				else:
+					f.close()
 		elif valstr in ("16_9_always", "16_9_letterbox"): # 16:9
 			pass
 		elif valstr in ("16_10_letterbox", "16_10_panscan"): # 16:10
@@ -102,23 +102,14 @@ def InitAVSwitch():
 	"panscan": _("Pan&scan"),
 	# TRANSLATORS: (aspect ratio policy: scale as close to fullscreen as possible)
 	"scale": _("Just scale")}
-	try:
+	if fileExists("/proc/stb/video/policy2_choices"):
 		f = open("/proc/stb/video/policy2_choices")
 		if "full" in f.read():
 			# TRANSLATORS: (aspect ratio policy: display as fullscreen, even if the content aspect ratio does not match the screen ratio)
 			policy2_choices.update({"full": _("Full screen")})
-	except:
-		pass
-	finally:
-		f.close()
-	try:
-		f = open("/proc/stb/video/policy2_choices")
-		if "auto" in f.read():
+		elif "auto" in f.read():
 			# TRANSLATORS: (aspect ratio policy: automatically select the best aspect ratio mode)
 			policy2_choices.update({"auto": _("Auto")})
-	except:
-		pass
-	finally:
 		f.close()
 	config.av.policy_169 = ConfigSelection(choices=policy2_choices, default = "letterbox")
 	policy_choices = {
@@ -128,32 +119,17 @@ def InitAVSwitch():
 	"panscan": _("Pan&scan"),
 	# TRANSLATORS: (aspect ratio policy: scale as close to fullscreen as possible)
 	"scale": _("Just scale")}
-	try:
+	if fileExists("/proc/stb/video/policy_choices"):
 		f = open("/proc/stb/video/policy_choices")
 		if "nonlinear" in f.read():
 			# TRANSLATORS: (aspect ratio policy: display as fullscreen, with stretching the left/right)
 			policy_choices.update({"nonlinear": _("Nonlinear")})
-	except:
-		pass
-	finally:
-		f.close()
-	try:
-		f = open("/proc/stb/video/policy_choices")
-		if "full" in f.read():
+		elif "full" in f.read():
 			# TRANSLATORS: (aspect ratio policy: display as fullscreen, even if the content aspect ratio does not match the screen ratio)
 			policy_choices.update({"full": _("Full screen")})
-	except:
-		pass
-	finally:
-		f.close()
-	try:
-		f = open("/proc/stb/video/policy_choices")
-		if "auto" in f.read():
+		elif "auto" in f.read():
 			# TRANSLATORS: (aspect ratio policy: automatically select the best aspect ratio mode)
 			policy_choices.update({"auto": _("Auto")})
-	except:
-		pass
-	finally:
 		f.close()
 	config.av.policy_43 = ConfigSelection(choices=policy_choices, default = "pillarbox")
 	config.av.tvsystem = ConfigSelection(choices = {"pal": _("PAL"), "ntsc": _("NTSC"), "multinorm": _("multinorm")}, default="pal")
@@ -212,13 +188,12 @@ def InitAVSwitch():
 		config.av.downmix_aac = ConfigYesNo(default = True)
 		config.av.downmix_aac.addNotifier(setAACDownmix)
 
-	try:
+	if fileExists("/proc/stb/video/alpha"):
 		f = open("/proc/stb/video/alpha", "r")
 		SystemInfo["CanChangeOsdAlpha"] = f and True or False
-	except:
-		SystemInfo["CanChangeOsdAlpha"] = False
-	finally:
 		f.close()
+	else:
+		SystemInfo["CanChangeOsdAlpha"] = False
 
 	if SystemInfo["CanChangeOsdAlpha"]:
 		def setAlpha(config):
@@ -235,17 +210,17 @@ def InitAVSwitch():
 				print "--> setting scaler_sharpness to: %0.8X" % myval
 				f = open("/proc/stb/vmpeg/0/pep_scaler_sharpness", "w")
 				f.write("%0.8X" % myval)
+				f.close()
 			except IOError:
 				print "couldn't write pep_scaler_sharpness"
-			finally:
-				f.close()
-			try:
-				f = open("/proc/stb/vmpeg/0/pep_apply", "w")
-				f.write("1")
-			except IOError:
-				print "couldn't write pep_apply"
-			finally:
-				f.close()
+
+			if fileExists("/proc/stb/vmpeg/0/pep_apply"):
+				try:
+					f = open("/proc/stb/vmpeg/0/pep_apply", "w")
+					f.write("1")
+					f.close()
+				except IOError:
+					print "couldn't write pep_apply"
 
 		config.av.scaler_sharpness = ConfigSlider(default=13, limits=(0,26))
 		config.av.scaler_sharpness.addNotifier(setScaler_sharpness)
