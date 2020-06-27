@@ -1,4 +1,5 @@
 from Components.Element import Element
+from Tools.Directories import fileExists
 
 # this is not a GUI renderer.
 class FrontpanelLed(Element):
@@ -15,33 +16,32 @@ class FrontpanelLed(Element):
 			val = self.source.value
 
 		(speed, pattern, pattern_4bit) = self.patterns[val]
-
-		try:
-			f = open("/proc/stb/fp/led%d_pattern" % self.which, "w")
-			f.write("%08x" % pattern)
-		except IOError:
-			pass
-		finally:
-			f.close()
+		if fileExists("/proc/stb/fp/led%d_pattern" % self.which):
+			try:
+				f = open("/proc/stb/fp/led%d_pattern" % self.which, "w")
+				f.write("%08x" % pattern)
+				f.close()
+			except:
+				pass
 		if self.which == 0:
-			try:
-				f = open("/proc/stb/fp/led_set_pattern", "w")
-				f.write("%08x" % pattern_4bit)
-			except IOError:
-				pass
-			finally:
-				f.close()
-			try:
-				f = open("/proc/stb/fp/led_set_speed", "w")
-				f.write("%d" % speed)
-			except IOError:
-				pass
-			finally:
-				f.close()
-			try:
-				f = open("/proc/stb/fp/led_pattern_speed", "w")
-				f.write("%d" % speed)
-			except IOError:
-				pass
-			finally:
-				f.close()
+			if fileExists("/proc/stb/fp/led_set_pattern"):
+				try:
+					f = open("/proc/stb/fp/led_set_pattern", "w")
+					f.write("%08x" % pattern_4bit)
+					f.close()
+				except:
+					pass
+			if fileExists("/proc/stb/fp/led_set_speed"):				
+				try:
+					f = open("/proc/stb/fp/led_set_speed", "w")
+					f.write("%d" % speed)
+					f.close()
+				except:
+					pass
+			if fileExists("/proc/stb/fp/led_pattern_speed"):				
+				try:
+					f = open("/proc/stb/fp/led_pattern_speed", "w")
+					f.write("%d" % speed)
+					f.close()
+				except:
+					pass
