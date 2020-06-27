@@ -589,12 +589,16 @@ class NIM(object):
 	def setInternalLink(self):
 		if self.internally_connectable is not None:
 			print "[NIM] setting internal link on frontend id", self.frontend_id
-			open("/proc/stb/frontend/%d/rf_switch" % self.frontend_id, "w").write("internal")
+			f = open("/proc/stb/frontend/%d/rf_switch" % self.frontend_id, "w")
+			f.write("internal")
+			f.close()
 
 	def removeInternalLink(self):
 		if self.internally_connectable is not None:
 			print "[NIM] removing internal link on frontend id", self.frontend_id
-			open("/proc/stb/frontend/%d/rf_switch" % self.frontend_id, "w").write("external")
+			f = open("/proc/stb/frontend/%d/rf_switch" % self.frontend_id, "w")
+			f.write("external")
+			f.close()
 
 	def isMultiType(self):
 		return not self.isCombined() and bool(len(self.multi_type))
@@ -1404,18 +1408,24 @@ def InitNimManager(nimmgr, update_slots = []):
 		fe_id = configElement.fe_id
 		slot_id = configElement.slot_id
 		if os.path.exists("/proc/stb/frontend/%d/use_scpc_optimized_search_range" % fe_id):
-			open("/proc/stb/frontend/%d/use_scpc_optimized_search_range" % (fe_id), "w").write(configElement.value)
+			f = open("/proc/stb/frontend/%d/use_scpc_optimized_search_range" % (fe_id), "w")
+			f.write(configElement.value)
+			f.close()
 
 	def toneAmplitudeChanged(configElement):
 		fe_id = configElement.fe_id
 		slot_id = configElement.slot_id
 		if os.path.exists("/proc/stb/frontend/%d/tone_amplitude" % fe_id):
-			open("/proc/stb/frontend/%d/tone_amplitude" %(fe_id), "w").write(configElement.value)
+			f = open("/proc/stb/frontend/%d/tone_amplitude" %(fe_id), "w")
+			f.write(configElement.value)
+			f.close()
 
 	def t2miRawModeChanged(configElement):
 		slot = configElement.slot
 		if os.path.exists("/proc/stb/frontend/%d/t2mirawmode" % slot):
-			open("/proc/stb/frontend/%d/t2mirawmode" % slot, "w").write(configElement.value)
+			f = open("/proc/stb/frontend/%d/t2mirawmode" % slot, "w")
+			f.write(configElement.value)
+			f.close()
 
 	def createSatConfig(nim, slot_id):
 		nim.toneAmplitude = ConfigSelection([("11", "340mV"), ("10", "360mV"), ("9", "600mV"), ("8", "700mV"), ("7", "800mV"), ("6", "900mV"), ("5", "1100mV")], "7")
@@ -1557,27 +1567,37 @@ def InitNimManager(nimmgr, update_slots = []):
 					if not hasattr(config.misc, 'firstrun') or not config.misc.firstrun.value:
 						configElement.save()
 				elif is_changed_mode:
-					cur_type = int(open("/proc/stb/frontend/%d/mode" % (fe_id), "r").read())
+					fp = open("/proc/stb/frontend/%d/mode" % (fe_id), "r")
+					cur_type = int(fp.read())
+					fp.close()
 					if cur_type != int(configElement.value):
 						print "[InitNimManager] tunerTypeChanged feid %d from %d to mode %d" % (fe_id, cur_type, int(configElement.value))
 
 						is_dvb_shutdown_timeout = os.path.exists("/sys/module/dvb_core/parameters/dvb_shutdown_timeout")
 						if is_dvb_shutdown_timeout:
 							try:
-								oldvalue = open("/sys/module/dvb_core/parameters/dvb_shutdown_timeout", "r").readline()
-								open("/sys/module/dvb_core/parameters/dvb_shutdown_timeout", "w").write("0")
+								f = open("/sys/module/dvb_core/parameters/dvb_shutdown_timeout", "w+")
+								oldvalue = f.readline()
+								f.write("0")
 							except:
 								print "[InitNimManager] tunerTypeChanged read /sys/module/dvb_core/parameters/dvb_shutdown_timeout failed"
+							finally:
+								f.close()
 
 						frontend.closeFrontend()
-						open("/proc/stb/frontend/%d/mode" % (fe_id), "w").write(configElement.value)
+						f = open("/proc/stb/frontend/%d/mode" % (fe_id), "w")
+						f.write(configElement.value)
+						f.close()
 						frontend.reopenFrontend()
 
 						if is_dvb_shutdown_timeout:
 							try:
-								open("/sys/module/dvb_core/parameters/dvb_shutdown_timeout", "w").write(oldvalue)
+								f = open("/sys/module/dvb_core/parameters/dvb_shutdown_timeout", "w")
+								f.write(oldvalue)
 							except:
 								print "[InitNimManager] tunerTypeChanged write to /sys/module/dvb_core/parameters/dvb_shutdown_timeout failed"
+							finally:
+								f.close()
 
 						nimmgr.enumerateNIMs()
 						if initial:

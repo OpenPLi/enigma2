@@ -110,15 +110,20 @@ def saveResumePoints():
 		cPickle.dump(resumePointCache, f, cPickle.HIGHEST_PROTOCOL)
 	except Exception, ex:
 		print "[InfoBar] Failed to write resumepoints:", ex
+	finally:
+		f.close()
 	resumePointCacheLast = int(time())
 
 def loadResumePoints():
 	import cPickle
 	try:
-		return cPickle.load(open('/home/root/resumepoints.pkl', 'rb'))
+		f = open('/home/root/resumepoints.pkl', 'rb')
+		return cPickle.load(f)
 	except Exception, ex:
 		print "[InfoBar] Failed to load resumepoints:", ex
 		return {}
+	finally:
+		f.close()
 
 resumePointCache = loadResumePoints()
 resumePointCacheLast = int(time())
@@ -127,7 +132,12 @@ class whitelist:
 	vbi = []
 
 def reload_whitelist_vbi():
-	whitelist.vbi = [line.strip() for line in open('/etc/enigma2/whitelist_vbi', 'r').readlines()] if os.path.isfile('/etc/enigma2/whitelist_vbi') else []
+	if os.path.isfile('/etc/enigma2/whitelist_vbi'):
+		f = open('/etc/enigma2/whitelist_vbi', 'r')
+		whitelist.vbi = [line.strip() for line in f.readlines()]
+		f.close()
+	else:
+		whitelist.vbi = []
 reload_whitelist_vbi()
 
 class subservice:
@@ -442,7 +452,9 @@ class InfoBarShowHide(InfoBarScreenSaver):
 				whitelist.vbi.remove(service)
 			else:
 				whitelist.vbi.append(service)
-			open('/etc/enigma2/whitelist_vbi', 'w').write('\n'.join(whitelist.vbi))
+			f = open('/etc/enigma2/whitelist_vbi', 'w')
+			f.write('\n'.join(whitelist.vbi))
+			f.close()
 			self.showHideVBI()
 
 class BufferIndicator(Screen):

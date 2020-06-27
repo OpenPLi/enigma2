@@ -23,10 +23,13 @@ class AVSwitch:
 			return (4,3)
 		elif valstr == "16_9": # auto ... 4:3 or 16:9
 			try:
-				if "1" in open("/proc/stb/vmpeg/0/aspect", "r").read(): # 4:3
+				f = open("/proc/stb/vmpeg/0/aspect", "r")
+				if "1" in f.read(): # 4:3
 					return (4,3)
 			except IOError:
 				pass
+			finally:
+				f.close()
 		elif valstr in ("16_9_always", "16_9_letterbox"): # 16:9
 			pass
 		elif valstr in ("16_10_letterbox", "16_10_panscan"): # 16:10
@@ -100,17 +103,23 @@ def InitAVSwitch():
 	# TRANSLATORS: (aspect ratio policy: scale as close to fullscreen as possible)
 	"scale": _("Just scale")}
 	try:
-		if "full" in open("/proc/stb/video/policy2_choices").read():
+		f = open("/proc/stb/video/policy2_choices")
+		if "full" in f.read():
 			# TRANSLATORS: (aspect ratio policy: display as fullscreen, even if the content aspect ratio does not match the screen ratio)
 			policy2_choices.update({"full": _("Full screen")})
 	except:
 		pass
+	finally:
+		f.close()
 	try:
-		if "auto" in open("/proc/stb/video/policy2_choices").read():
+		f = open("/proc/stb/video/policy2_choices")
+		if "auto" in f.read():
 			# TRANSLATORS: (aspect ratio policy: automatically select the best aspect ratio mode)
 			policy2_choices.update({"auto": _("Auto")})
 	except:
 		pass
+	finally:
+		f.close()
 	config.av.policy_169 = ConfigSelection(choices=policy2_choices, default = "letterbox")
 	policy_choices = {
 	# TRANSLATORS: (aspect ratio policy: black bars on left/right) in doubt, keep english term.
@@ -120,23 +129,32 @@ def InitAVSwitch():
 	# TRANSLATORS: (aspect ratio policy: scale as close to fullscreen as possible)
 	"scale": _("Just scale")}
 	try:
-		if "nonlinear" in open("/proc/stb/video/policy_choices").read():
+		f = open("/proc/stb/video/policy_choices")
+		if "nonlinear" in f.read():
 			# TRANSLATORS: (aspect ratio policy: display as fullscreen, with stretching the left/right)
 			policy_choices.update({"nonlinear": _("Nonlinear")})
 	except:
 		pass
+	finally:
+		f.close()
 	try:
-		if "full" in open("/proc/stb/video/policy_choices").read():
+		f = open("/proc/stb/video/policy_choices")
+		if "full" in f.read():
 			# TRANSLATORS: (aspect ratio policy: display as fullscreen, even if the content aspect ratio does not match the screen ratio)
 			policy_choices.update({"full": _("Full screen")})
 	except:
 		pass
+	finally:
+		f.close()
 	try:
-		if "auto" in open("/proc/stb/video/policy_choices").read():
+		f = open("/proc/stb/video/policy_choices")
+		if "auto" in f.read():
 			# TRANSLATORS: (aspect ratio policy: automatically select the best aspect ratio mode)
 			policy_choices.update({"auto": _("Auto")})
 	except:
 		pass
+	finally:
+		f.close()
 	config.av.policy_43 = ConfigSelection(choices=policy_choices, default = "pillarbox")
 	config.av.tvsystem = ConfigSelection(choices = {"pal": _("PAL"), "ntsc": _("NTSC"), "multinorm": _("multinorm")}, default="pal")
 	config.av.wss = ConfigEnableDisable(default = True)
@@ -172,30 +190,41 @@ def InitAVSwitch():
 
 	if SystemInfo["CanDownmixAC3"]:
 		def setAC3Downmix(configElement):
-			open("/proc/stb/audio/ac3", "w").write(configElement.value and "downmix" or "passthrough")
+			f = open("/proc/stb/audio/ac3", "w")
+			f.write(configElement.value and "downmix" or "passthrough")
+			f.close()
 		config.av.downmix_ac3 = ConfigYesNo(default = True)
 		config.av.downmix_ac3.addNotifier(setAC3Downmix)
 
 	if SystemInfo["CanDownmixDTS"]:
 		def setDTSDownmix(configElement):
-			open("/proc/stb/audio/dts", "w").write(configElement.value and "downmix" or "passthrough")
+			f = open("/proc/stb/audio/dts", "w")
+			f.write(configElement.value and "downmix" or "passthrough")
+			f.close()
 		config.av.downmix_dts = ConfigYesNo(default = True)
 		config.av.downmix_dts.addNotifier(setDTSDownmix)
 
 	if SystemInfo["CanDownmixAAC"]:
 		def setAACDownmix(configElement):
-			open("/proc/stb/audio/aac", "w").write(configElement.value and "downmix" or "passthrough")
+			f = open("/proc/stb/audio/aac", "w")
+			f.write(configElement.value and "downmix" or "passthrough")
+			f.close()
 		config.av.downmix_aac = ConfigYesNo(default = True)
 		config.av.downmix_aac.addNotifier(setAACDownmix)
 
 	try:
-		SystemInfo["CanChangeOsdAlpha"] = open("/proc/stb/video/alpha", "r") and True or False
+		f = open("/proc/stb/video/alpha", "r")
+		SystemInfo["CanChangeOsdAlpha"] = f and True or False
 	except:
 		SystemInfo["CanChangeOsdAlpha"] = False
+	finally:
+		f.close()
 
 	if SystemInfo["CanChangeOsdAlpha"]:
 		def setAlpha(config):
-			open("/proc/stb/video/alpha", "w").write(str(config.value))
+			f = open("/proc/stb/video/alpha", "w")
+			f.write(str(config.value))
+			f.close()
 		config.av.osd_alpha = ConfigSlider(default=255, limits=(0,255))
 		config.av.osd_alpha.addNotifier(setAlpha)
 
@@ -204,10 +233,19 @@ def InitAVSwitch():
 			myval = int(config.value)
 			try:
 				print "--> setting scaler_sharpness to: %0.8X" % myval
-				open("/proc/stb/vmpeg/0/pep_scaler_sharpness", "w").write("%0.8X" % myval)
-				open("/proc/stb/vmpeg/0/pep_apply", "w").write("1")
+				f = open("/proc/stb/vmpeg/0/pep_scaler_sharpness", "w")
+				f.write("%0.8X" % myval)
 			except IOError:
 				print "couldn't write pep_scaler_sharpness"
+			finally:
+				f.close()
+			try:
+				f = open("/proc/stb/vmpeg/0/pep_apply", "w")
+				f.write("1")
+			except IOError:
+				print "couldn't write pep_apply"
+			finally:
+				f.close()
 
 		config.av.scaler_sharpness = ConfigSlider(default=13, limits=(0,26))
 		config.av.scaler_sharpness.addNotifier(setScaler_sharpness)

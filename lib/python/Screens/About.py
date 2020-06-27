@@ -301,7 +301,8 @@ class MemoryInfo(Screen):
 			mem = 1
 			free = 0
 			rows_in_column = self["params"].rows_in_column
-			for i, line in enumerate(open('/proc/meminfo','r')):
+			fp = open('/proc/meminfo','r')
+			for i, line in enumerate(fp):
 				s = line.strip().split(None, 2)
 				if len(s) == 3:
 					name, size, units = s
@@ -329,10 +330,14 @@ class MemoryInfo(Screen):
 			self['pused'].setText("%.1f %s" % (100.*(mem-free)/mem,'%'))
 		except Exception, e:
 			print "[About] getMemoryInfo FAIL:", e
+		finally:
+			fp.close()
 
 	def clearMemory(self):
 		eConsoleAppContainer().execute("sync")
-		open("/proc/sys/vm/drop_caches", "w").write("3")
+		f = open("/proc/sys/vm/drop_caches", "w")
+		f.write("3")
+		f.close()
 		self.getMemoryInfo()
 
 class MemoryInfoSkinParams(GUIComponent):

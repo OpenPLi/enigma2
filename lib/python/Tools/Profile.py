@@ -12,7 +12,8 @@ total_time = 1
 profile_file = None
 
 try:
-	profile_old = open(resolveFilename(SCOPE_CONFIG, "profile"), "r").readlines()
+	f = open(resolveFilename(SCOPE_CONFIG, "profile"), "r")
+	profile_old = f.readlines()
 
 	t = None
 	for line in profile_old:
@@ -22,6 +23,8 @@ try:
 		profile_data[id] = t
 except:
 	print "no profile data available"
+finally:
+	f.close()
 
 try:
 	profile_file = open(resolveFilename(SCOPE_CONFIG, "profile"), "w")
@@ -40,9 +43,12 @@ def profile(id):
 			else:
 				perc = PERCENTAGE_START
 			try:
-				open("/proc/progress", "w").write("%d \n" % perc)
+				fp = open("/proc/progress", "w")
+				fp.write("%d \n" % perc)
 			except IOError:
 				pass
+			finally:
+				fp.close()
 
 def profile_final():
 	global profile_file

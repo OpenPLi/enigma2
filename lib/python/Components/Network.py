@@ -64,7 +64,8 @@ class Network:
 	def getAddrInet(self, iface, callback):
 		data = { 'up': False, 'dhcp': False, 'preup' : False, 'predown' : False }
 		try:
-			data['up'] = int(open('/sys/class/net/%s/flags' % iface).read().strip(), 16) & 1 == 1
+			fp = open('/sys/class/net/%s/flags' % iface)
+			data['up'] = int(fp.read().strip(), 16) & 1 == 1
 			if data['up']:
 				self.configuredInterfaces.append(iface)
 			nit = ni.ifaddresses(iface)
@@ -78,6 +79,8 @@ class Network:
 			data['ip'] = [0, 0, 0, 0]
 			data['netmask'] = [0, 0, 0, 0]
 			data['gateway'] = [0, 0, 0, 0]
+		finally:
+			fp.close()
 		self.ifaces[iface] = data
 		self.loadNetworkConfig(iface,callback)
 
@@ -529,6 +532,7 @@ class Network:
 				ifnames.append(device.search(line).group()[:-1])
 			except AttributeError:
 				pass
+		fp.close()
 		if iface in ifnames:
 			return True
 

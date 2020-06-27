@@ -36,7 +36,9 @@ def getFlashDateString():
 def getBuildDateString():
 	try:
 		if os.path.isfile('/etc/version'):
-			version = open("/etc/version","r").read()
+			f = open("/etc/version","r")
+			version = f.read()
+			f.close()
 			return "%s-%s-%s" % (version[:4], version[4:6], version[6:8])
 	except:
 		pass
@@ -78,26 +80,33 @@ def getFFmpegVersionString():
 
 def getKernelVersionString():
 	try:
-		return open("/proc/version","r").read().split(' ', 4)[2].split('-',2)[0]
+		f = open("/proc/version","r")
+		return f.read().split(' ', 4)[2].split('-',2)[0]
 	except:
 		return _("unknown")
+	finally:
+		f.close()
 
 def getHardwareTypeString():
 	return HardwareInfo().get_device_string()
 
 def getImageTypeString():
 	try:
-		image_type = open("/etc/issue").readlines()[-2].strip()[:-6]
+		f = open("/etc/issue")
+		image_type = f.readlines()[-2].strip()[:-6]
 		return image_type.capitalize()
 	except:
 		return _("undefined")
+	finally:
+		f.close()
 
 def getCPUInfoString():
 	try:
 		cpu_count = 0
 		cpu_speed = 0
 		processor = ""
-		for line in open("/proc/cpuinfo").readlines():
+		f = open("/proc/cpuinfo")
+		for line in f.readlines():
 			line = [x.strip() for x in line.strip().split(":")]
 			if not processor and line[0] in ("system type", "model name", "Processor"):
 				processor = line[1].split()[0]
@@ -105,37 +114,61 @@ def getCPUInfoString():
 				cpu_speed = "%1.0f" % float(line[1])
 			elif line[0] == "processor":
 				cpu_count += 1
+		f.close()
 
 		if processor.startswith("ARM") and os.path.isfile("/proc/stb/info/chipset"):
-			processor = "%s (%s)" % (open("/proc/stb/info/chipset").readline().strip().upper(), processor)
+			f = open("/proc/stb/info/chipset")
+			processor = "%s (%s)" % (f.readline().strip().upper(), processor)
+			f.close()
 
 		if not cpu_speed:
 			try:
-				cpu_speed = int(open("/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq").read()) / 1000
+				f = open("/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq")
+				cpu_speed = int(f.read()) / 1000
 			except:
-				try:
-					import binascii
-					cpu_speed = int(int(binascii.hexlify(open('/sys/firmware/devicetree/base/cpus/cpu@0/clock-frequency', 'rb').read()), 16) / 100000000) * 100
-				except:
-					cpu_speed = "-"
+				pass
+			finally:
+				f.close()
+
+		if not cpu_speed:
+			try:
+				import binascii
+				f = open('/sys/firmware/devicetree/base/cpus/cpu@0/clock-frequency', 'rb')
+				cpu_speed = int(int(binascii.hexlify(f.read()), 16) / 100000000) * 100
+			except:
+				cpu_speed = "-"
+			finally:
+				f.close()
 
 		temperature = None
 		if os.path.isfile('/proc/stb/fp/temp_sensor_avs'):
-			temperature = open("/proc/stb/fp/temp_sensor_avs").readline().replace('\n','')
+			f = open("/proc/stb/fp/temp_sensor_avs")
+			temperature = f.readline().replace('\n','')
+			f.close()
 		elif os.path.isfile('/proc/stb/power/avs'):
-			temperature = open("/proc/stb/power/avs").readline().replace('\n','')
+			f = open("/proc/stb/power/avs")
+			temperature = f.readline().replace('\n','')
+			f.close()
 		elif os.path.isfile('/proc/stb/fp/temp_sensor'):
-			temperature = open("/proc/stb/fp/temp_sensor").readline().replace('\n','')
+			f = open("/proc/stb/fp/temp_sensor")
+			temperature = f.readline().replace('\n','')
+			f.close()
 		elif os.path.isfile("/sys/devices/virtual/thermal/thermal_zone0/temp"):
 			try:
-				temperature = int(open("/sys/devices/virtual/thermal/thermal_zone0/temp").read().strip())/1000
+				f = open("/sys/devices/virtual/thermal/thermal_zone0/temp")
+				temperature = int(f.read().strip())/1000
 			except:
 				pass
+			finally:
+				f.close()
 		elif os.path.isfile("/proc/hisi/msp/pm_cpu"):
 			try:
-				temperature = re.search('temperature = (\d+) degree', open("/proc/hisi/msp/pm_cpu").read()).group(1)
+				f = open("/proc/hisi/msp/pm_cpu")
+				temperature = re.search('temperature = (\d+) degree', f.read()).group(1)
 			except:
 				pass
+			finally:
+				f.close()
 		if temperature:
 			return "%s %s MHz (%s) %s\xb0C" % (processor, cpu_speed, ngettext("%d core", "%d cores", cpu_count) % cpu_count, temperature)
 		return "%s %s MHz (%s)" % (processor, cpu_speed, ngettext("%d core", "%d cores", cpu_count) % cpu_count)

@@ -1,5 +1,6 @@
 import enigma
 import xml.etree.cElementTree
+from Tools.Directories import fileExists
 
 from keyids import KEYIDS
 
@@ -78,9 +79,9 @@ def readKeymap(filename):
 	p = enigma.eActionMap.getInstance()
 	assert p
 
-	try:
+	if fileExists(filename):
 		source = open(filename)
-	except:
+	else:
 		print "[keymapparser] keymap file " + filename + " not found"
 		return
 
@@ -88,6 +89,8 @@ def readKeymap(filename):
 		dom = xml.etree.cElementTree.parse(source)
 	except:
 		raise KeymapError("[keymapparser] keymap %s not well-formed." % filename)
+	finally:
+		source.close()
 
 	keymap = dom.getroot()
 
