@@ -3,6 +3,7 @@ import time
 from Tools.CList import CList
 from SystemInfo import SystemInfo
 from Components.Console import Console
+from Tools.Directories import fileExists
 import Task
 
 def readFile(filename):
@@ -12,30 +13,31 @@ def readFile(filename):
 	return data
 
 def getProcMounts():
-	try:
+	if fileExists("/proc/mounts"):
 		mounts = open("/proc/mounts", 'r')
 		result = [line.strip().split(' ') for line in mounts]
-	except IOError, ex:
-		print "[Harddisk] Failed to open /proc/mounts", ex
-		return []
-	finally:
 		mounts.close()
+	else:
+		print "[Harddisk] Failed to open /proc/mounts"
+		return []
+
 	for item in result:
 		# Spaces are encoded as \040 in mounts
 		item[1] = item[1].replace('\\040', ' ')
 	return result
 
 def isFileSystemSupported(filesystem):
-	try:
+	if fileExists("/proc/filesystems"):
 		fp = open('/proc/filesystems', 'r')
 		for fs in fp:
 			if fs.strip().endswith(filesystem):
+				fp.close()
 				return True
-		return False
-	except Exception, ex:
-		print "[Harddisk] Failed to read /proc/filesystems:", ex
-	finally:
 		fp.close()
+		return False
+	else:
+		print "[Harddisk] Failed to read /proc/filesystems"
+		return False
 
 def findMountPoint(path):
 	'Example: findMountPoint("/media/hdd/some/file") returns "/media/hdd"'
@@ -77,14 +79,13 @@ class Harddisk:
 
 		self.removable = removable
 		self.internal = "pci" in self.phys_path or "ahci" in self.phys_path or "sata" in self.phys_path
-		try:
+		if fileExists("/sys/block/%s/queue/rotational" % device):
 			f = open("/sys/block/%s/queue/rotational" % device, "r")
 			data = f.read().strip()
 			self.rotational = int(data)
-		except:
-			self.rotational = True
-		finally:
 			f.close()
+		else:
+			self.rotational = True
 
 		if self.type == DEVTYPE_UDEV:
 			self.dev_path = '/dev/' + self.device
@@ -381,17 +382,20 @@ class Harddisk:
 		if isFileSystemSupported("ext4"):
 			task.setTool("mkfs.ext4")
 			if size > 20000:
-				try:
-					f = open("/proc/version","r")
-					version = map(int, f.read().split(' ', 4)[2].split('.',2)[:2])
-					if (version[0] > 3) or (version[0] > 2 and version[1] >= 2):
-						# Linux version 3.2 supports bigalloc and -C option, use 256k blocks
-						task.args += ["-C", "262144"]
-						big_o_options.append("bigalloc")
-				except Exception, ex:
-					print "Failed to detect Linux version:", ex
-				finally:
-					f.close()
+				if fileExists("/proc/version"):
+					try:
+						f = open("/proc/version","r")
+						version = map(int, f.read().split(' ', 4)[2].split('.',2)[:2])
+						if (version[0] > 3) or (version[0] > 2 and version[1] >= 2):
+							# Linux version 3.2 supports bigalloc and -C option, use 256k blocks
+							task.args += ["-C", "262144"]
+							big_o_options.append("bigalloc")
+						f.close()
+					except:
+						pass
+				else:
+					print "Failed to detect Linux version"
+
 		else:
 			task.setTool("mkfs.ext3")
 		if size > 250000:
@@ -455,13 +459,12 @@ class Harddisk:
 	# any access has been made to the disc. If there has been no access over a specifed time,
 	# we set the hdd into standby.
 	def readStats(self):
-		try:
-			fp = open("/sys/block/%s/stat" % self.device)
-			l = fp.read()
-		except IOError:
+		if fileExists("/sys/block/%s/stat" % self.device):
+			f = open("/sys/block/%s/stat" % self.device)
+			l = f.read()
+			f.close()
+		else:
 			return -1,-1
-		finally:
-			fp.close()
 		data = l.split(None,5)
 		return (int(data[0]), int(data[4]))
 
