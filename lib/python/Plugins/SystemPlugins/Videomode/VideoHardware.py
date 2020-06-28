@@ -103,12 +103,11 @@ class VideoHardware:
 					if aspect == "16:10":
 						ret = (16,10)
 			elif is_auto:
-				try:
-					aspect_str = open("/proc/stb/vmpeg/0/aspect", "r").read()
-					if aspect_str == "1": # 4:3
-						ret = (4,3)
-				except IOError:
-					pass
+				if os.path.exists("/proc/stb/vmpeg/0/aspect"):
+					with open("/proc/stb/vmpeg/0/aspect", "r") as f:
+						aspect_str = f.read()
+						if aspect_str == "1": # 4:3
+							ret = (4,3)
 			else:  # 4:3
 				ret = (4,3)
 		return ret
@@ -145,20 +144,21 @@ class VideoHardware:
 		config.av.policy_43.addNotifier(self.updateAspect)
 
 	def readAvailableModes(self):
-		try:
-			modes = open("/proc/stb/video/videomode_choices").read()[:-1]
-		except IOError:
+		if os.path.exists("/proc/stb/video/videomode_choices"):
+			with open("/proc/stb/video/videomode_choices") as f:
+				modes = f.read()[:-1]
+				self.modes_available = modes.split(' ')
+		else:
 			print "[VideoHardware] couldn't read available videomodes."
 			self.modes_available = [ ]
-			return
-		self.modes_available = modes.split(' ')
 
 	def readPreferredModes(self):
 		if config.av.edid_override.value == False:
-			try:
-				modes = open("/proc/stb/video/videomode_preferred").read()[:-1]
-				self.modes_preferred = modes.split(' ')
-			except IOError:
+			if os.path.exists("/proc/stb/video/videomode_preferred"):
+				with open("/proc/stb/video/videomode_preferred") as f:
+					modes = f.read()[:-1]
+					self.modes_preferred = modes.split(' ')
+			else:
 				print "[VideoHardware] reading preferred modes failed, using all video modes"
 				self.modes_preferred = self.modes_available
 
@@ -207,23 +207,28 @@ class VideoHardware:
 				mode_24 = mode_50
 
 		try:
-			open("/proc/stb/video/videomode_50hz", "w").write(mode_50)
-			open("/proc/stb/video/videomode_60hz", "w").write(mode_60)
+			with open("/proc/stb/video/videomode_50hz", "w") as f:
+				f.write(mode_50)
+			with open("/proc/stb/video/videomode_60hz", "w") as f:
+				f.write(mode_60)			
 		except IOError:
 			try:
 				# fallback if no possibility to setup 50/60 hz mode
-				open("/proc/stb/video/videomode", "w").write(mode_50)
+				with open("/proc/stb/video/videomode", "w") as f:
+					f.write(mode_50)
 			except IOError:
 				print "[VideoHardware] setting videomode failed."
 
 		try:
-			open("/etc/videomode", "w").write(mode_50) # use 50Hz mode (if available) for booting
+			with open("/etc/videomode", "w") as f:
+				f.write(mode_50) # use 50Hz mode (if available) for booting
 		except IOError:
 			print "[VideoHardware] writing initial videomode to /etc/videomode failed."
 
 		if SystemInfo["Has24hz"]:
 			try:
-				open("/proc/stb/video/videomode_24hz", "w").write(mode_24)
+				with open("/proc/stb/video/videomode_24hz", "w") as f:
+					f.write(mode_24)
 			except IOError:
 				print "[VideoHardware] cannot open /proc/stb/video/videomode_24hz"
 
@@ -372,14 +377,18 @@ class VideoHardware:
 			wss = "auto"
 
 		print "[VideoHardware] -> setting aspect, policy, policy2, wss", aspect, policy, policy2, wss
-		open("/proc/stb/video/aspect", "w").write(aspect)
-		open("/proc/stb/video/policy", "w").write(policy)
+		with open("/proc/stb/video/aspect", "w") as f:
+			f.write(aspect)
+		with open("/proc/stb/video/policy", "w") as f:
+			f.write(policy)
 		try:
-			open("/proc/stb/denc/0/wss", "w").write(wss)
+			with open("/proc/stb/denc/0/wss", "w") as f:
+				f.write(wss)
 		except IOError:
 			pass
 		try:
-			open("/proc/stb/video/policy2", "w").write(policy2)
+			with open("/proc/stb/video/policy2", "w") as f:
+				f.write(policy2)
 		except IOError:
 			pass
 

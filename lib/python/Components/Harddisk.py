@@ -664,7 +664,8 @@ class HarddiskManager:
 		# check for medium
 		medium_found = True
 		try:
-			open("/dev/" + blockdev).close()
+			if os.path.exists("/dev/" + blockdev):
+				open("/dev/" + blockdev).close()
 		except IOError, err:
 			if err.errno == 159: # no medium present
 				medium_found = False
