@@ -66,17 +66,16 @@ class Network:
 		data = { 'up': False, 'dhcp': False, 'preup' : False, 'predown' : False }
 		if fileExists('/sys/class/net/%s/flags' % iface):
 			try:
-				fp = open('/sys/class/net/%s/flags' % iface)
-				data['up'] = int(fp.read().strip(), 16) & 1 == 1
-				if data['up']:
-					self.configuredInterfaces.append(iface)
-				fp.close()
-				nit = ni.ifaddresses(iface)
-				data['ip'] = self.convertIP(nit[ni.AF_INET][0]['addr']) # ipv4
-				data['netmask'] = self.convertIP(nit[ni.AF_INET][0]['netmask'])
-				data['bcast'] = self.convertIP(nit[ni.AF_INET][0]['broadcast'])
-				data['mac'] = nit[ni.AF_LINK][0]['addr'] # mac
-				data['gateway'] = self.convertIP(ni.gateways()['default'][ni.AF_INET][0]) # default gw
+				with open('/sys/class/net/%s/flags' % iface) as fp:
+					data['up'] = int(fp.read().strip(), 16) & 1 == 1
+					if data['up']:
+						self.configuredInterfaces.append(iface)
+					nit = ni.ifaddresses(iface)
+					data['ip'] = self.convertIP(nit[ni.AF_INET][0]['addr']) # ipv4
+					data['netmask'] = self.convertIP(nit[ni.AF_INET][0]['netmask'])
+					data['bcast'] = self.convertIP(nit[ni.AF_INET][0]['broadcast'])
+					data['mac'] = nit[ni.AF_LINK][0]['addr'] # mac
+					data['gateway'] = self.convertIP(ni.gateways()['default'][ni.AF_INET][0]) # default gw
 			except:
 				data['dhcp'] = True
 				data['ip'] = [0, 0, 0, 0]

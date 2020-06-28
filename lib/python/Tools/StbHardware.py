@@ -30,9 +30,11 @@ def setFPWakeuptime(wutime):
 	if fileExists("/proc/stb/fp/wakeup_time"):
 		fp = open("/proc/stb/fp/wakeup_time", "w")
 		fp.write(str(wutime))
+		fp.close()
 	elif fileExists("/dev/dbox/fp0"):
 		fp = open("/dev/dbox/fp0")
 		ioctl(fp.fileno(), 6, pack('L', wutime))
+		fp.close()
 	else:
 		print "setFPWakeupTime failed!"
 

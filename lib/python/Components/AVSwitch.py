@@ -24,12 +24,9 @@ class AVSwitch:
 			return (4,3)
 		elif valstr == "16_9": # auto ... 4:3 or 16:9
 			if fileExists("/proc/stb/vmpeg/0/aspect"):
-				f = open("/proc/stb/vmpeg/0/aspect", "r")
-				if "1" in f.read(): # 4:3
-					f.close()
-					return (4,3)
-				else:
-					f.close()
+				with open("/proc/stb/vmpeg/0/aspect", "r") as f:
+					if "1" in f.read():
+						return (4,3)
 		elif valstr in ("16_9_always", "16_9_letterbox"): # 16:9
 			pass
 		elif valstr in ("16_10_letterbox", "16_10_panscan"): # 16:10
@@ -103,14 +100,13 @@ def InitAVSwitch():
 	# TRANSLATORS: (aspect ratio policy: scale as close to fullscreen as possible)
 	"scale": _("Just scale")}
 	if fileExists("/proc/stb/video/policy2_choices"):
-		f = open("/proc/stb/video/policy2_choices")
-		if "full" in f.read():
-			# TRANSLATORS: (aspect ratio policy: display as fullscreen, even if the content aspect ratio does not match the screen ratio)
-			policy2_choices.update({"full": _("Full screen")})
-		elif "auto" in f.read():
-			# TRANSLATORS: (aspect ratio policy: automatically select the best aspect ratio mode)
-			policy2_choices.update({"auto": _("Auto")})
-		f.close()
+		with open("/proc/stb/video/policy2_choices") as f:
+			if "full" in f.read():
+				# TRANSLATORS: (aspect ratio policy: display as fullscreen, even if the content aspect ratio does not match the screen ratio)
+				policy2_choices.update({"full": _("Full screen")})
+			elif "auto" in f.read():
+				# TRANSLATORS: (aspect ratio policy: automatically select the best aspect ratio mode)
+				policy2_choices.update({"auto": _("Auto")})
 	config.av.policy_169 = ConfigSelection(choices=policy2_choices, default = "letterbox")
 	policy_choices = {
 	# TRANSLATORS: (aspect ratio policy: black bars on left/right) in doubt, keep english term.
@@ -120,17 +116,16 @@ def InitAVSwitch():
 	# TRANSLATORS: (aspect ratio policy: scale as close to fullscreen as possible)
 	"scale": _("Just scale")}
 	if fileExists("/proc/stb/video/policy_choices"):
-		f = open("/proc/stb/video/policy_choices")
-		if "nonlinear" in f.read():
-			# TRANSLATORS: (aspect ratio policy: display as fullscreen, with stretching the left/right)
-			policy_choices.update({"nonlinear": _("Nonlinear")})
-		elif "full" in f.read():
-			# TRANSLATORS: (aspect ratio policy: display as fullscreen, even if the content aspect ratio does not match the screen ratio)
-			policy_choices.update({"full": _("Full screen")})
-		elif "auto" in f.read():
-			# TRANSLATORS: (aspect ratio policy: automatically select the best aspect ratio mode)
-			policy_choices.update({"auto": _("Auto")})
-		f.close()
+		with open("/proc/stb/video/policy_choices") as f:
+			if "nonlinear" in f.read():
+				# TRANSLATORS: (aspect ratio policy: display as fullscreen, with stretching the left/right)
+				policy_choices.update({"nonlinear": _("Nonlinear")})
+			elif "full" in f.read():
+				# TRANSLATORS: (aspect ratio policy: display as fullscreen, even if the content aspect ratio does not match the screen ratio)
+				policy_choices.update({"full": _("Full screen")})
+			elif "auto" in f.read():
+				# TRANSLATORS: (aspect ratio policy: automatically select the best aspect ratio mode)
+				policy_choices.update({"auto": _("Auto")})
 	config.av.policy_43 = ConfigSelection(choices=policy_choices, default = "pillarbox")
 	config.av.tvsystem = ConfigSelection(choices = {"pal": _("PAL"), "ntsc": _("NTSC"), "multinorm": _("multinorm")}, default="pal")
 	config.av.wss = ConfigEnableDisable(default = True)
@@ -229,49 +224,65 @@ def InitAVSwitch():
 
 	if SystemInfo["HasMultichannelPCM"]:
 		def setMultichannelPCM(configElement):
-			open(SystemInfo["HasMultichannelPCM"], "w").write(configElement.value and "enable" or "disable")
+			f = open(SystemInfo["HasMultichannelPCM"], "w")
+			f.write(configElement.value and "enable" or "disable")
+			f.close()
 		config.av.multichannel_pcm = ConfigYesNo(default = False)
 		config.av.multichannel_pcm.addNotifier(setMultichannelPCM)
 
 	if SystemInfo["HasAutoVolume"]:
 		def setAutoVolume(configElement):
-			open(SystemInfo["HasAutoVolume"], "w").write(configElement.value)
+			f = open(SystemInfo["HasAutoVolume"], "w")
+			f.write(configElement.value)
+			f.close()
 		config.av.autovolume = ConfigSelection(default = "none", choices = [("none", _("off")), ("hdmi", _("HDMI")), ("spdif", _("SPDIF")), ("dac", _("DAC"))])
 		config.av.autovolume.addNotifier(setAutoVolume)
 
 	if SystemInfo["HasAutoVolumeLevel"]:
 		def setAutoVolumeLevel(configElement):
-			open(SystemInfo["HasAutoVolumeLevel"], "w").write(configElement.value and "enabled" or "disabled")
+			f = open(SystemInfo["HasAutoVolumeLevel"], "w")
+			f.write(configElement.value and "enabled" or "disabled")
+			f.close()
 		config.av.autovolumelevel = ConfigYesNo(default = False)
 		config.av.autovolumelevel.addNotifier(setAutoVolumeLevel)
 
 	if SystemInfo["Has3DSurround"]:
 		def set3DSurround(configElement):
-			open(SystemInfo["Has3DSurround"], "w").write(configElement.value)
+			f = open(SystemInfo["Has3DSurround"], "w")
+			f.write(configElement.value)
+			f.close()
 		config.av.surround_3d = ConfigSelection(default = "none", choices = [("none", _("off")), ("hdmi", _("HDMI")), ("spdif", _("SPDIF")), ("dac", _("DAC"))])
 		config.av.surround_3d.addNotifier(set3DSurround)
 
 	if SystemInfo["Has3DSpeaker"]:
 		def set3DSpeaker(configElement):
-			open(SystemInfo["Has3DSpeaker"], "w").write(configElement.value)
+			f = open(SystemInfo["Has3DSpeaker"], "w")
+			f.write(configElement.value)
+			f.close()
 		config.av.speaker_3d = ConfigSelection(default = "center", choices = [("center", _("center")), ("wide", _("wide")), ("extrawide", _("extra wide"))])
 		config.av.speaker_3d.addNotifier(set3DSpeaker)
 
 	if SystemInfo["Has3DSurroundSpeaker"]:
 		def set3DSurroundSpeaker(configElement):
-			open(SystemInfo["Has3DSurroundSpeaker"], "w").write(configElement.value)
+			f = open(SystemInfo["Has3DSurroundSpeaker"], "w")
+			f.write(configElement.value)
+			f.close()
 		config.av.surround_3d_speaker = ConfigSelection(default = "disabled", choices = [("disabled", _("off")), ("center", _("center")), ("wide", _("wide")), ("extrawide", _("extra wide"))])
 		config.av.surround_3d_speaker.addNotifier(set3DSurroundSpeaker)
 
 	if SystemInfo["Has3DSurroundSoftLimiter"]:
 		def set3DSurroundSoftLimiter(configElement):
-			open(SystemInfo["Has3DSurroundSoftLimiter"], "w").write(configElement.value and "enabled" or "disabled")
+			f = open(SystemInfo["Has3DSurroundSoftLimiter"], "w")
+			f.write(configElement.value and "enabled" or "disabled")
+			f.close()
 		config.av.surround_softlimiter_3d = ConfigYesNo(default = False)
 		config.av.surround_softlimiter_3d.addNotifier(set3DSurroundSoftLimiter)
 		
 	if SystemInfo["HDMIAudioSource"]:
 		def setHDMIAudioSource(configElement):
-			open(SystemInfo["HDMIAudioSource"], "w").write(configElement.value)
+			f = open(SystemInfo["HDMIAudioSource"], "w")
+			f.write(configElement.value)
+			f.close()
 		config.av.hdmi_audio_source = ConfigSelection(default = "pcm", choices = [("pcm", _("PCM")), ("spdif", _("SPDIF"))])
 		config.av.hdmi_audio_source.addNotifier(setHDMIAudioSource)
 
