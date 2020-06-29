@@ -432,7 +432,8 @@ class Troubleshoot(Screen):
 		command = self.commands[self.commandIndex]
 		if command.startswith("cat "):
 			try:
-				self["AboutScrollLabel"].setText(open(command[4:], "r").read())
+				with open(command[4:], "r") as fp:
+					self["AboutScrollLabel"].setText(fp.read())
 			except:
 				self["AboutScrollLabel"].setText(_("Logfile does not exist anymore"))
 		else:
