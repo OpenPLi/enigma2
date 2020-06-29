@@ -96,7 +96,8 @@ class UpdatePlugin(Screen, ProtectedScreen):
 			try:
 				# get image version and machine name
 				machine = HardwareInfo().get_machine_name()
-				version = open("/etc/issue").readlines()[-2].split()[1]
+				with open("/etc/issue") as fp:
+					version = fp.readlines()[-2].split()[1]
 
 				# do we have an entry for this version
 				if version in status and machine in status[version]['machines']:
@@ -149,7 +150,8 @@ class UpdatePlugin(Screen, ProtectedScreen):
 				return str(datetime.datetime.strptime(urlopen("%s/Packages.gz" % url).info()["Last-Modified"], '%a, %d %b %Y %H:%M:%S %Z'))
 			except:
 				return ""
-		return sorted([gettime(open("/etc/opkg/%s" % file, "r").readlines()[0].split()[2]) for file in os.listdir("/etc/opkg") if not file.startswith("3rd-party") and file not in ("arch.conf", "opkg.conf")], reverse=True)[0]
+		with open("/etc/opkg/%s" % file, "r") as fp:
+			return sorted([gettime(fp.readlines()[0].split()[2]) for file in os.listdir("/etc/opkg") if not file.startswith("3rd-party") and file not in ("arch.conf", "opkg.conf")], reverse=True)[0]
 
 	def startActualUpdate(self,answer):
 		if answer:
@@ -290,7 +292,9 @@ class UpdatePlugin(Screen, ProtectedScreen):
 			text = "\n".join([x[0] for x in sorted(self.opkg.getFetchedList(), key=lambda d: d[0])])
 			self.session.openWithCallback(boundFunction(self.opkgCallback, OpkgComponent.EVENT_DONE, None), TextBox, text, _("Packages to update"), True)
 		elif answer[1] == "log":
-			text = open("/home/root/opkgupgrade.log", "r").read()
+			if os.path.isfile("/home/root/opkgupgrade.log"):
+				with open("/home/root/opkgupgrade.log", "r") as fp:
+					text = fp.read()
 			self.session.openWithCallback(boundFunction(self.opkgCallback, OpkgComponent.EVENT_DONE, None), TextBox, text, _("Latest update log"), True)
 		else:
 			self.opkg.startCmd(OpkgComponent.CMD_UPGRADE, args = {'test_only': False})

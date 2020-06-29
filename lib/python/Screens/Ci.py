@@ -17,11 +17,13 @@ def setCIBitrate(configElement):
 	eDVBCI_UI.getInstance().setClockRate(configElement.slotid, eDVBCI_UI.rateNormal if configElement.value == "no" else eDVBCI_UI.rateHigh)
 
 def setdvbCiDelay(configElement):
-	open(SystemInfo["CommonInterfaceCIDelay"], "w").write(configElement.value)
+	with open(SystemInfo["CommonInterfaceCIDelay"], "w") as fp:
+		fp.write(configElement.value)
 	configElement.save()
 
 def setRelevantPidsRouting(configElement):
-	open(SystemInfo["CI%dRelevantPidsRoutingSupport" % configElement.slotid], "w").write("yes" if configElement.value else "no")
+	with open(SystemInfo["CI%dRelevantPidsRoutingSupport" % configElement.slotid], "w") as fp:
+		fp.write("yes" if configElement.value else "no")
 
 def InitCiConfig():
 	config.ci = ConfigSubList()

@@ -101,7 +101,8 @@ class AutoInstallWizard(Screen):
 		self.package = None
 
 		import glob
-		mac_address = open('/sys/class/net/eth0/address', 'r').readline().strip().replace(":", "")
+		with open('/sys/class/net/eth0/address', 'r') as fp:
+			mac_address = fp.readline().strip().replace(":", "")
 		autoinstallfiles = glob.glob('/media/*/backup/autoinstall%s' % mac_address) + glob.glob('/media/net/*/backup/autoinstall%s' % mac_address)
 		if not autoinstallfiles:
 			autoinstallfiles = glob.glob('/media/*/backup/autoinstall') + glob.glob('/media/net/*/backup/autoinstall')
@@ -109,7 +110,8 @@ class AutoInstallWizard(Screen):
 		for autoinstallfile in autoinstallfiles:
 			if os.path.isfile(autoinstallfile):
 				autoinstalldir = os.path.dirname(autoinstallfile)
-				self.packages = [package.strip() for package in open(autoinstallfile).readlines()] + [os.path.join(autoinstalldir, file) for file in os.listdir(autoinstalldir) if file.endswith(".ipk")]
+				with open(autoinstallfile) as fp:
+					self.packages = [package.strip() for package in fp.readlines()] + [os.path.join(autoinstalldir, file) for file in os.listdir(autoinstalldir) if file.endswith(".ipk")]
 				if self.packages:
 					self.number_of_packages = len(self.packages)
 					# make sure we have a valid package list before attempting to restore packages
@@ -120,7 +122,8 @@ class AutoInstallWizard(Screen):
 	def run_console(self):
 		self["progress"].setValue(100 * (self.number_of_packages - len(self.packages))/self.number_of_packages)
 		try:
-			open("/proc/progress", "w").write(str(self["progress"].value))
+			with open("/proc/progress", "w") as fp:
+				fp.write(str(self["progress"].value))
 		except IOError:
 			pass
 		self.package = self.packages.pop(0)
@@ -142,7 +145,8 @@ class AutoInstallWizard(Screen):
 				self.dataAvail("An error occurred during installing %s - Please try again later\n" % self.package)
 			else:
 				self.dataAvail("An error occurred during opkg update - Please try again later\n")
-		installed = [line.strip().split(":", 1)[1].strip() for line in open('/var/lib/opkg/status').readlines() if line.startswith('Package:')]
+		with open('/var/lib/opkg/status') as fp:
+			installed = [line.strip().split(":", 1)[1].strip() for line in fp.readlines() if line.startswith('Package:')]
 		self.packages = [package for package in self.packages if package not in installed]
 		if self.packages:
 			self.run_console()

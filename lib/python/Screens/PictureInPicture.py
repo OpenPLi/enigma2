@@ -18,7 +18,8 @@ def timedStopPipPigMode():
 	from Screens.InfoBar import InfoBar
 	if InfoBar.instance and InfoBar.instance.session:
 		if SystemInfo["hasPIPVisibleProc"]:
-			open(SystemInfo["hasPIPVisibleProc"], "w").write("1")
+			with open(SystemInfo["hasPIPVisibleProc"], "w") as fp:
+				fp.write("1")
 		elif hasattr(InfoBar.instance.session, "pip"):
 			InfoBar.instance.session.pip.relocate()
 	global PipPigModeEnabled
@@ -34,7 +35,8 @@ def PipPigMode(value):
 			global PipPigModeEnabled
 			if not PipPigModeEnabled:
 				if SystemInfo["hasPIPVisibleProc"]:
-					open(SystemInfo["hasPIPVisibleProc"], "w").write("0")
+					with open(SystemInfo["hasPIPVisibleProc"], "w") as fp:
+						fp.write("0")
 				else:
 					import skin
 					x, y, w, h = skin.parameters.get("PipHidePosition",(16, 16, 16, 16))
@@ -149,7 +151,8 @@ class PictureInPicture(Screen):
 
 	def setExternalPiP(self, onoff):
 		if SystemInfo["HasExternalPIP"]:
-			open(SystemInfo["HasExternalPIP"], "w").write(onoff and "on" or "off")
+			with open(SystemInfo["HasExternalPIP"], "w") as fp:
+				fp.write(onoff and "on" or "off")
 
 	def active(self):
 		self.pipActive.show()

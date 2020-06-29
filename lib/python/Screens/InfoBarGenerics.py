@@ -106,12 +106,10 @@ def saveResumePoints():
 	global resumePointCache, resumePointCacheLast
 	import cPickle
 	try:
-		f = open('/home/root/resumepoints.pkl', 'wb')
-		cPickle.dump(resumePointCache, f, cPickle.HIGHEST_PROTOCOL)
+		with open('/home/root/resumepoints.pkl', 'wb') as f:
+			cPickle.dump(resumePointCache, f, cPickle.HIGHEST_PROTOCOL)
 	except Exception, ex:
 		print "[InfoBar] Failed to write resumepoints:", ex
-	finally:
-		f.close()
 	resumePointCacheLast = int(time())
 
 def loadResumePoints():
@@ -148,7 +146,8 @@ def reload_subservice_groupslist(force=False):
 			groupedservices = "/etc/enigma2/groupedservices"
 			if not os.path.isfile(groupedservices):
 				groupedservices = "/usr/share/enigma2/groupedservices"
-			subservice.groupslist = [list(g) for k,g in itertools.groupby([line.split('#')[0].strip() for line in open(groupedservices).readlines()], lambda x:not x) if not k]
+			with open(groupedservices) as fp:
+				subservice.groupslist = [list(g) for k,g in itertools.groupby([line.split('#')[0].strip() for line in fp.readlines()], lambda x:not x) if not k]
 		except:
 			subservice.groupslist = []
 reload_subservice_groupslist()
@@ -2035,7 +2034,8 @@ class InfoBarTimeshift():
 
 	def setLCDsymbolTimeshift(self):
 		if SystemInfo["LCDsymbol_timeshift"]:
-			open(SystemInfo["LCDsymbol_timeshift"], "w").write(self.timeshiftEnabled() and "1" or "0")
+			with open(SystemInfo["LCDsymbol_timeshift"], "w") as fp:
+				fp.write(self.timeshiftEnabled() and "1" or "0")
 
 	def __serviceStarted(self):
 		self.pvrStateDialog.hide()
