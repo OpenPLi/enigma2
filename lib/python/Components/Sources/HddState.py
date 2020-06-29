@@ -87,7 +87,8 @@ class HddState(Source):
 		self.state_text = string
 		if prev_state != self.isSleeping or force:
 			if SystemInfo["LCDsymbol_hdd"]:
-				open(SystemInfo["LCDsymbol_hdd"], "w").write(self.isSleeping and "1" or "0")
+				with open(SystemInfo["LCDsymbol_hdd"], "w") as fp:
+					fp.write(self.isSleeping and "1" or "0")
 			self.changed((self.CHANGED_ALL,))
 
 	def setStandbyTime(self, cfgElem):
