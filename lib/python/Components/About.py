@@ -4,6 +4,7 @@ import re
 from Tools.HardwareInfo import HardwareInfo
 from enigma import getBoxType
 from Tools.Directories import fileExists
+from glob import glob
 
 def getFlashMemory(folder='/'):
 	try:
@@ -46,13 +47,11 @@ def getBuildDateString():
 	return _("unknown")
 
 def getUpdateDateString():
-	try:
-		from glob import glob
-		build = [x.split("-")[-2:-1][0][-8:] for x in open(glob("/var/lib/opkg/info/openpli-bootlogo.control")[0], "r") if x.startswith("Version:")][0]
-		if build.isdigit():
-			return  "%s-%s-%s" % (build[:4], build[4:6], build[6:])
-	except:
-		pass
+	if fileExists("/var/lib/opkg/info/openpli-bootlogo.control"):
+		with open("/var/lib/opkg/info/openpli-bootlogo.control", "r") as fp:
+			build = [x.split("-")[-2:-1][0][-8:] for x in fp if x.startswith("Version:")][0]
+			if build.isdigit():
+				return  "%s-%s-%s" % (build[:4], build[4:6], build[6:])
 	return _("unknown")
 
 def getEnigmaVersionString():
@@ -63,20 +62,20 @@ def getEnigmaVersionString():
 	return enigma_version
 
 def getGStreamerVersionString(cpu):
-	try:
-		from glob import glob
-		gst = [x.split("Version: ") for x in open(glob("/var/lib/opkg/info/gstreamer[0-9].[0-9].control")[0], "r") if x.startswith("Version:")][0]
-		return "%s" % gst[1].split("+")[0].replace("\n","")
-	except:
+	if fileExists(glob("/var/lib/opkg/info/gstreamer[0-9].[0-9].control")[0]):
+		with open(glob("/var/lib/opkg/info/gstreamer[0-9].[0-9].control")[0], "r") as fp:
+			gst = [x.split("Version: ") for x in fp if x.startswith("Version:")][0]
+			return "%s" % gst[1].split("+")[0].replace("\n","")
+	else:
 		return _("Not Required") if cpu.upper().startswith('HI') else _("Not Installed")
 
 def getFFmpegVersionString():
-	try:
-		from glob import glob
-		ffmpeg = [x.split("Version: ") for x in open(glob("/var/lib/opkg/info/ffmpeg.control")[0], "r") if x.startswith("Version:")][0]
-		version = ffmpeg[1].split("-")[0].replace("\n","")
-		return "%s" % version.split("+")[0]
-	except:
+	if fileExists("/var/lib/opkg/info/ffmpeg.control"):
+		with open("/var/lib/opkg/info/ffmpeg.control", "r") as fp:
+			ffmpeg = [x.split("Version: ") for x in fp if x.startswith("Version:")][0]
+			version = ffmpeg[1].split("-")[0].replace("\n","")
+			return "%s" % version.split("+")[0]
+	else:
 		return ""
 
 def getKernelVersionString():
@@ -104,16 +103,15 @@ def getCPUInfoString():
 		cpu_count = 0
 		cpu_speed = 0
 		processor = ""
-		f = open("/proc/cpuinfo")
-		for line in f.readlines():
-			line = [x.strip() for x in line.strip().split(":")]
-			if not processor and line[0] in ("system type", "model name", "Processor"):
-				processor = line[1].split()[0]
-			elif not cpu_speed and line[0] == "cpu MHz":
-				cpu_speed = "%1.0f" % float(line[1])
-			elif line[0] == "processor":
-				cpu_count += 1
-		f.close()
+		with open("/proc/cpuinfo") as f:
+			for line in f.readlines():
+				line = [x.strip() for x in line.strip().split(":")]
+				if not processor and line[0] in ("system type", "model name", "Processor"):
+					processor = line[1].split()[0]
+				elif not cpu_speed and line[0] == "cpu MHz":
+					cpu_speed = "%1.0f" % float(line[1])
+				elif line[0] == "processor":
+					cpu_count += 1
 
 		if processor.startswith("ARM") and os.path.isfile("/proc/stb/info/chipset"):
 			f = open("/proc/stb/info/chipset")
@@ -165,23 +163,23 @@ def getCPUInfoString():
 		return _("undefined")
 
 def getDriverInstalledDate():
-	try:
-		from glob import glob
-		try:
+	if fileExists(glob("/var/lib/opkg/info/*-dvb-modules-*.control")[0]):
+		with open(glob("/var/lib/opkg/info/*-dvb-modules-*.control")[0], "r") as fp:
 			if getBoxType() in ("dm800","dm8000"):
-				driver = [x.split("-")[-2:-1][0][-9:] for x in open(glob("/var/lib/opkg/info/*-dvb-modules-*.control")[0], "r") if x.startswith("Version:")][0]
+				driver = [x.split("-")[-2:-1][0][-9:] for x in fp if x.startswith("Version:")][0]
 				return  "%s-%s-%s" % (driver[:4], driver[4:6], driver[6:])
 			else:
-				driver = [x.split("-")[-2:-1][0][-8:] for x in open(glob("/var/lib/opkg/info/*-dvb-modules-*.control")[0], "r") if x.startswith("Version:")][0]
+				driver = [x.split("-")[-2:-1][0][-8:] for x in fp if x.startswith("Version:")][0]
 				return  "%s-%s-%s" % (driver[:4], driver[4:6], driver[6:])
-		except:
-			try:
-				driver = [x.split("Version:") for x in open(glob("/var/lib/opkg/info/*-dvb-proxy-*.control")[0], "r") if x.startswith("Version:")][0]
-				return  "%s" % driver[1].replace("\n","")
-			except:
-				driver = [x.split("Version:") for x in open(glob("/var/lib/opkg/info/*-platform-util-*.control")[0], "r") if x.startswith("Version:")][0]
-				return  "%s" % driver[1].replace("\n","")
-	except:
+	elif fileExists(glob("/var/lib/opkg/info/*-dvb-proxy-*.control")[0]):
+		with open(glob("/var/lib/opkg/info/*-dvb-proxy-*.control")[0], "r") as fp:
+			driver = [x.split("Version:") for x in fp if x.startswith("Version:")][0]
+			return  "%s" % driver[1].replace("\n","")
+	elif fileExists(glob("/var/lib/opkg/info/*-platform-util-*.control")[0]):
+		with open(glob("/var/lib/opkg/info/*-platform-util-*.control")[0], "r") as fp:
+			driver = [x.split("Version:") for x in fp if x.startswith("Version:")][0]
+			return  "%s" % driver[1].replace("\n","")	
+	else:
 		return _("unknown")
 
 def getPythonVersionString():

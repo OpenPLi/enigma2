@@ -190,9 +190,10 @@ class ParentalControl:
 	def openListFromFile(self, sWhichList):
 		result = {}
 		try:
-			for x in open(resolveFilename(SCOPE_CONFIG, sWhichList ), 'r'):
-				sPlain = x.strip()
-				self.serviceMethodWrapper(sPlain, self.addServiceToList, result)
+			with open(resolveFilename(SCOPE_CONFIG, sWhichList ), 'r') as fp:
+				for x in fp:
+					sPlain = x.strip()
+					self.serviceMethodWrapper(sPlain, self.addServiceToList, result)
 		except:
 			pass
 		return result

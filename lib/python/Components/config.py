@@ -1777,17 +1777,17 @@ class Config(ConfigSubsection):
 		text = self.pickle()
 		try:
 			import os
-			f = open(filename + ".writing", "w")
-			f.write(text)
-			f.flush()
-			os.fsync(f.fileno())
-			f.close()
-			os.rename(filename + ".writing", filename)
+			with open(filename + ".writing", "w") as f:
+				f.write(text)
+				f.flush()
+				os.fsync(f.fileno())
+				os.rename(filename + ".writing", filename)
 		except IOError:
 			print "Config: Couldn't write %s" % filename
 
 	def loadFromFile(self, filename, base_file=True):
-		self.unpickle(open(filename, "r"), base_file)
+		with open(filename, "r") as f:
+			self.unpickle(f, base_file)
 
 
 config = Config()

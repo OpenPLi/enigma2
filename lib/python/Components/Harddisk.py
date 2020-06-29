@@ -7,16 +7,16 @@ from Tools.Directories import fileExists
 import Task
 
 def readFile(filename):
-	file = open(filename)
-	data = file.read().strip()
-	file.close()
-	return data
+	ret = None
+	if fileExists(filename):
+		with open(filename) as f:
+			ret = f.read().strip()
+	return ret
 
 def getProcMounts():
 	if fileExists("/proc/mounts"):
-		mounts = open("/proc/mounts", 'r')
-		result = [line.strip().split(' ') for line in mounts]
-		mounts.close()
+		with open("/proc/mounts", 'r') as f:
+			result = [line.strip().split(' ') for line in f]
 	else:
 		print "[Harddisk] Failed to open /proc/mounts"
 		return []
@@ -28,16 +28,13 @@ def getProcMounts():
 
 def isFileSystemSupported(filesystem):
 	if fileExists("/proc/filesystems"):
-		fp = open('/proc/filesystems', 'r')
-		for fs in fp:
-			if fs.strip().endswith(filesystem):
-				fp.close()
-				return True
-		fp.close()
-		return False
+		with open('/proc/filesystems', 'r') as fp:
+			for fs in fp:
+				if fs.strip().endswith(filesystem):
+					return True
 	else:
 		print "[Harddisk] Failed to read /proc/filesystems"
-		return False
+	return False
 
 def findMountPoint(path):
 	'Example: findMountPoint("/media/hdd/some/file") returns "/media/hdd"'

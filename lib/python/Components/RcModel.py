@@ -9,10 +9,12 @@ class RcModel:
 		self.model = HardwareInfo().get_device_model()
 		# cfg files has modelname  rcname entries.
 		# modelname is boxname optionally followed by .rctype
-		for line in open((resolveFilename(SCOPE_SKIN, 'rc_models/rc_models.cfg')), 'r'):
-			if line.startswith(self.model):
-				m, r = line.strip().split()
-				self.RcModels[m] = r
+		if os.path.exists(resolveFilename(SCOPE_SKIN, 'rc_models/rc_models.cfg')):
+			with open(resolveFilename(SCOPE_SKIN, 'rc_models/rc_models.cfg'), 'r') as fp:
+				for line in fp:
+					if line.startswith(self.model):
+						m, r = line.strip().split()
+						self.RcModels[m] = r
 
 	def rcIsDefault(self):
 		# Default RC can only happen with DMM type remote controls...
@@ -21,8 +23,9 @@ class RcModel:
 	def getRcFile(self, ext):
 		# check for rc/type every time so rctype changes will be noticed
 		if os.path.exists('/proc/stb/ir/rc/type'):
-			rc = open('/proc/stb/ir/rc/type').read().strip()
-			modeltype = '%s.%s' % (self.model, rc)
+			with open('/proc/stb/ir/rc/type') as fp:
+				rc = fp.read().strip()
+				modeltype = '%s.%s' % (self.model, rc)
 		else:
 			modeltype = None
 
