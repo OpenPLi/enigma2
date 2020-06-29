@@ -3,7 +3,8 @@ from Components.Sensors import sensors
 from Components.Element import cached
 from enigma import getBoxType
 from Poll import Poll
-import os
+from os.path import exists, isfile
+from Components.About import about
 
 class VtiTempFan(Poll, Converter, object):
 	TEMPINFO = 0
@@ -46,7 +47,7 @@ class VtiTempFan(Poll, Converter, object):
 		mark = str("\xc2\xb0")
 		sensor_info = None
 		temperature = 0
-		if os.path.exists("/proc/stb/sensors/temp0/value"):
+		if exists("/proc/stb/sensors/temp0/value"):
 			f = open("/proc/stb/sensors/temp0/value", "r")
 			tempinfo = str(f.readline().strip())
 			f.close()
@@ -54,7 +55,7 @@ class VtiTempFan(Poll, Converter, object):
 				tempinfo = _("Temp:") + tempinfo + mark + "C"
 				return tempinfo
 
-		elif os.path.exists("/proc/stb/fp/temp_sensor"):
+		elif exists("/proc/stb/fp/temp_sensor"):
 			f = open("/proc/stb/fp/temp_sensor", "r")
 			tempinfo = str(f.readline().strip())
 			f.close()
@@ -62,7 +63,7 @@ class VtiTempFan(Poll, Converter, object):
 				tempinfo = _("Temp:") + tempinfo + mark + "C"
 				return tempinfo
 
-		elif os.path.exists("/proc/stb/sensors/temp/value"):
+		elif exists("/proc/stb/sensors/temp/value"):
 			f = open("/proc/stb/sensors/temp/value", "r")
 			tempinfo = str(f.readline().strip())
 			f.close()
@@ -70,7 +71,7 @@ class VtiTempFan(Poll, Converter, object):
 				tempinfo = _("Temp:") + tempinfo + mark + "C"
 				return tempinfo
 
-		elif os.path.exists('/proc/stb/fp/temp_sensor_avs'):
+		elif exists('/proc/stb/fp/temp_sensor_avs'):
 			f = open('/proc/stb/fp/temp_sensor_avs', 'r')
 			tempinfo = str(f.readline().strip())
 			f.close()
@@ -78,51 +79,37 @@ class VtiTempFan(Poll, Converter, object):
 				tempinfo = _("Temp:") + tempinfo + mark + "C"
 				return tempinfo
 
-		elif os.path.exists('/proc/hisi/msp/pm_cpu'):
-			try:
-				tempinfo = search('temperature = (\d+) degree', open("/proc/hisi/msp/pm_cpu").read()).group(1)
-			except:
-				pass
-			tempinfo = str(tempinfo.strip())
-			if tempinfo and int(tempinfo) > 0:
-				tempinfo = _("Temp:") + tempinfo + mark + "C"
-				return tempinfo
+		elif exists('/proc/hisi/msp/pm_cpu'):
+			with open("/proc/hisi/msp/pm_cpu") as fp:
+				tempinfo = search('temperature = (\d+) degree', fp.read()).group(1)
+				tempinfo = str(tempinfo.strip())
+				if tempinfo and int(tempinfo) > 0:
+					tempinfo = _("Temp:") + tempinfo + mark + "C"
+					return tempinfo
 
-		elif os.path.isfile("/sys/devices/virtual/thermal/thermal_zone0/temp"):
-			try:
-				temperature = int(open("/sys/devices/virtual/thermal/thermal_zone0/temp").read().strip())/1000
-			except:
-				pass
-			if temperature > 0:
-				tempinfo = _("Temp:") + str(temperature) + mark + "C"
-				return tempinfo
+		elif isfile("/sys/devices/virtual/thermal/thermal_zone0/temp"):
+			with open("/sys/devices/virtual/thermal/thermal_zone0/temp") as fp:
+				temperature = int(fp.read().strip())/1000
+				if temperature > 0:
+					tempinfo = _("Temp:") + str(temperature) + mark + "C"
+					return tempinfo
 
 		return tempinfo
 
 	def fanfile(self):
 		fan = None
-		flash_info = None
-		if os.path.exists("/proc/stb/fp/fan_speed"):
+		if exists("/proc/stb/fp/fan_speed"):
 			f = open("/proc/stb/fp/fan_speed", "rb")
 			fan = str(f.readline().strip())
 			f.close()
-			if fan is not None:
+			if fan:
 				return _("Fan:") + fan
-
-		try:
-			flash_info = os.statvfs("/")
-			if flash_info is not None:			
-				free_flash = int((flash_info.f_frsize) * (flash_info.f_bavail) / 1024 / 1024)
-				return _("Flash: %s MB") % free_flash
-		except:
-			pass
-
-		return ""
+		return _("Flash: %s MB") % about.getFlashMemory()
 
 	def getCamName(self):
-		if os.path.exists("/etc/CurrentBhCamName"):
-			try:
-				for line in open("/etc/CurrentBhCamName"):
+		if exists("/etc/CurrentBhCamName"):
+			with open("/etc/CurrentBhCamName") as fp:
+				for line in fp:
 					line = line.lower()
 					if "wicardd" in line:
 						return "Wicardd"
@@ -150,11 +137,9 @@ class VtiTempFan(Poll, Converter, object):
 						return "CI"
 					elif "interface" in line:
 						return "CI"
-			except:
-				pass
-		elif os.path.exists("/etc/init.d/softcam"):
-			try:
-				for line in open("/etc/init.d/softcam"):
+		elif exists("/etc/init.d/softcam"):
+			with open("/etc/init.d/softcam") as fp:
+				for line in fp:
 					line = line.lower()
 					if "wicardd" in line:
 						return "Wicardd"
@@ -182,8 +167,6 @@ class VtiTempFan(Poll, Converter, object):
 						return "CI"
 					elif "interface" in line:
 						return "CI"
-			except:
-				pass
 		return ""
 
 	def changed(self, what):
