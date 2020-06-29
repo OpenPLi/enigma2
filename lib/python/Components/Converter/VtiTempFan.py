@@ -1,7 +1,5 @@
 from Components.Converter.Converter import Converter
-from Components.Sensors import sensors
 from Components.Element import cached
-from enigma import getBoxType
 from Poll import Poll
 from os.path import exists, isfile
 from Components.About import about
