@@ -1,4 +1,5 @@
 from Tools.Directories import SCOPE_SKIN, resolveFilename
+from os.path import isfile
 
 hw_info = None
 
@@ -17,37 +18,35 @@ class HardwareInfo:
 
 		print "[HardwareInfo] Scanning hardware info"
 		# Version
-		try:
-			self.device_version = open("/proc/stb/info/version").read().strip()
-		except:
-			pass
+		if isfile("/proc/stb/info/version"):
+			with open("/proc/stb/info/version") as fp:
+				self.device_version = fp.read().strip()
 
 		# Revision
-		try:
-			self.device_revision = open("/proc/stb/info/board_revision").read().strip()
-		except:
-			pass
+		if isfile("/proc/stb/info/board_revision"):
+			with open("/proc/stb/info/board_revision") as fp:
+				self.device_revision = fp.read().strip()
 
 		# Name ... bit odd, but history prevails
-		try:
-			self.device_name = open("/proc/stb/info/model").read().strip()
-		except:
-			pass
+		if isfile("/proc/stb/info/model"):
+			with open("/proc/stb/info/model") as fp:
+				self.device_name = fp.read().strip()
 
 		# Model
-		for line in open((resolveFilename(SCOPE_SKIN, 'hw_info/hw_info.cfg')), 'r'):
-			if not line.startswith('#') and not line.isspace():
-				l = line.strip().replace('\t', ' ')
-				if ' ' in l:
-					infoFname, prefix = l.split()
-				else:
-					infoFname = l
-					prefix = ""
-				try:
-					self.device_model = prefix + open("/proc/stb/info/" + infoFname).read().strip()
-					break
-				except:
-					pass
+		with open((resolveFilename(SCOPE_SKIN, 'hw_info/hw_info.cfg')), 'r') as fp:
+			for line in fp:
+				if not line.startswith('#') and not line.isspace():
+					l = line.strip().replace('\t', ' ')
+					if ' ' in l:
+						infoFname, prefix = l.split()
+					else:
+						infoFname = l
+						prefix = ""
+
+					if isfile("/proc/stb/info/" + infoFname):
+						with open("/proc/stb/info/" + infoFname) as fd:
+							self.device_model = prefix + fd.read().strip()
+							break
 
 		self.device_model = self.device_model or self.device_name
 

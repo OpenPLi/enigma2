@@ -32,15 +32,16 @@ def getMultibootslots():
 				slotnumber = file.rsplit('_', 1)[1]
 			if slotnumber.isdigit() and slotnumber not in bootslots:
 				slot = {}
-				for line in open(file).readlines():
-					if 'root=' in line:
-						device = getparam(line, 'root')
-						if os.path.exists(device):
-							slot['device'] = device
-							slot['startupfile'] = os.path.basename(file)
-							if 'rootsubdir' in line:
-								slot['rootsubdir'] = getparam(line, 'rootsubdir')
-						break
+				with open(file) as fp:
+					for line in fp.readlines():
+						if 'root=' in line:
+							device = getparam(line, 'root')
+							if os.path.exists(device):
+								slot['device'] = device
+								slot['startupfile'] = os.path.basename(file)
+								if 'rootsubdir' in line:
+									slot['rootsubdir'] = getparam(line, 'rootsubdir')
+							break
 				if slot:
 					bootslots[int(slotnumber)] = slot
 		Console().ePopen('umount %s' % tmp.dir)
@@ -55,17 +56,20 @@ def getMultibootslots():
 
 def getCurrentImage():
 	if SystemInfo["canMultiBoot"]:
-		slot = [x[-1] for x in open('/sys/firmware/devicetree/base/chosen/bootargs', 'r').read().split() if x.startswith('rootsubdir')]
+		with open('/sys/firmware/devicetree/base/chosen/bootargs', 'r') as fp:
+			slot = [x[-1] for x in fp.read().split() if x.startswith('rootsubdir')]
 		if slot:
 			return int(slot[0])
 		else:
-			device = getparam(open('/sys/firmware/devicetree/base/chosen/bootargs', 'r').read(), 'root')
+			with open('/sys/firmware/devicetree/base/chosen/bootargs', 'r') as fp:
+				device = getparam(fp.read(), 'root')
 			for slot in SystemInfo["canMultiBoot"].keys():
 				if SystemInfo["canMultiBoot"][slot]['device'] == device:
 					return slot
 
 def getCurrentImageMode():
-	return bool(SystemInfo["canMultiBoot"]) and SystemInfo["canMode12"] and int(open('/sys/firmware/devicetree/base/chosen/bootargs', 'r').read().replace('\0', '').split('=')[-1])
+	with open('/sys/firmware/devicetree/base/chosen/bootargs', 'r') as fp:
+		return bool(SystemInfo["canMultiBoot"]) and SystemInfo["canMode12"] and int(fp.read().replace('\0', '').split('=')[-1])
 
 def deleteImage(slot):
 	tmp.dir = tempfile.mkdtemp(prefix="Multiboot")
@@ -104,7 +108,8 @@ def getImagelist():
 					date = max(date, datetime.fromtimestamp(os.stat(os.path.join(imagedir, "usr/bin/enigma2")).st_mtime).strftime('%Y-%m-%d'))
 				except:
 					date = _("Unknown")
-				imagelist[slot] = { 'imagename': "%s (%s)" % (open(os.path.join(imagedir, "etc/issue")).readlines()[-2].capitalize().strip()[:-6], date) }
+				with open(os.path.join(imagedir, "etc/issue")) as fp:
+					imagelist[slot] = { 'imagename': "%s (%s)" % (fp.readlines()[-2].capitalize().strip()[:-6], date) }
 			elif os.path.isfile(os.path.join(imagedir, 'usr/bin/enigma2.bak')):
 				imagelist[slot] = { 'imagename': _("Deleted image") }
 			else:
