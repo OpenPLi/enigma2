@@ -251,7 +251,8 @@ class FlashImage(Screen):
 					st_dev = os.stat(path).st_dev
 					return (os.major(st_dev), os.minor(st_dev)) in diskstats
 
-				diskstats = [(int(x[0]), int(x[1])) for x in [x.split()[0:3] for x in open('/proc/diskstats').readlines()] if x[2].startswith("sd")]
+				with open('/proc/diskstats') as fp:
+					diskstats = [(int(x[0]), int(x[1])) for x in [x.split()[0:3] for x in fp.readlines()] if x[2].startswith("sd")]
 				if os.path.isdir(path) and checkIfDevice(path, diskstats) and avail(path) > 500:
 					return (path, True)
 				mounts = []
@@ -500,7 +501,8 @@ class MultibootSelection(SelectImage):
 					startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=1'\n" % (slot[0], slot[0] * 2 + 1, model)
 				else:
 					startupFileContents = "boot emmcflash0.kernel%s 'brcm_cma=520M@248M brcm_cma=%s@768M root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=12'\n" % (slot[0], SystemInfo["canMode12"], slot[0] * 2 + 1, model)
-				open(os.path.join(self.tmp_dir, "STARTUP"), 'w').write(startupFileContents)
+				with open(os.path.join(self.tmp_dir, "STARTUP"), 'w') as fp:
+					fp.write(startupFileContents)
 			self.cancel(2)
 
 	def selectionChanged(self):
