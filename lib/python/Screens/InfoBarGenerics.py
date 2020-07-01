@@ -42,7 +42,7 @@ from Tools.Directories import fileExists, getRecordingFilename, moveFiles
 from enigma import eTimer, eServiceCenter, eDVBServicePMTHandler, iServiceInformation, iPlayableService, eServiceReference, eEPGCache, eActionMap, getDesktop, eDVBDB
 
 from time import time, localtime, strftime
-import os
+import os, cPickle
 from bisect import insort
 from sys import maxint
 import itertools, datetime
@@ -104,7 +104,6 @@ def getResumePoint(session):
 
 def saveResumePoints():
 	global resumePointCache, resumePointCacheLast
-	import cPickle
 	try:
 		with open('/home/root/resumepoints.pkl', 'wb') as f:
 			cPickle.dump(resumePointCache, f, cPickle.HIGHEST_PROTOCOL)
@@ -113,7 +112,6 @@ def saveResumePoints():
 	resumePointCacheLast = int(time())
 
 def loadResumePoints():
-	import cPickle
 	try:
 		if os.path.isfile('/home/root/resumepoints.pkl'):
 			with open('/home/root/resumepoints.pkl', 'rb') as f:
