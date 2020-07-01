@@ -199,7 +199,8 @@ class RcTypeControl():
 	def __init__(self):
 		if SystemInfo["RcTypeChangable"] and os.path.exists('/proc/stb/info/boxtype'):
 			self.isSupported = True
-			self.boxType = open('/proc/stb/info/boxtype', 'r').read().strip()
+			with open('/proc/stb/info/boxtype', 'r') as fp:
+				self.boxType = fp.read().strip()
 			if config.plugins.remotecontroltype.rctype.value != 0:
 				self.writeRcType(config.plugins.remotecontroltype.rctype.value)
 		else:
@@ -213,12 +214,14 @@ class RcTypeControl():
 
 	def writeRcType(self, rctype):
 		if self.isSupported and rctype > 0:
-			open('/proc/stb/ir/rc/type', 'w').write('%d' % rctype)
+			with open('/proc/stb/ir/rc/type', 'w') as fp:
+				fp.write('%d' % rctype)
 
 	def readRcType(self):
 		rc = 0
 		if self.isSupported:
-			rc = open('/proc/stb/ir/rc/type', 'r').read().strip()
+			with open('/proc/stb/ir/rc/type', 'r') as fp:
+				rc = fp.read().strip()
 		return int(rc)
 
 iRcTypeControl = RcTypeControl()
