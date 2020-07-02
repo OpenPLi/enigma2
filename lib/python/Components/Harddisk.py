@@ -15,16 +15,17 @@ def readFile(filename):
 
 def getProcMounts():
 	if fileExists("/proc/mounts"):
+		result = []
 		with open("/proc/mounts", 'r') as f:
-			result = [line.strip().split(' ') for line in f]
+			tmp = [line.strip().split(' ') for line in f]
+		for item in tmp:
+			# Spaces are encoded as \040 in mounts
+			item[1] = item[1].replace('\\040', ' ')
+			result.append(item)
+		return result
 	else:
 		print "[Harddisk] Failed to open /proc/mounts"
 		return []
-
-	for item in result:
-		# Spaces are encoded as \040 in mounts
-		item[1] = item[1].replace('\\040', ' ')
-	return result
 
 def isFileSystemSupported(filesystem):
 	if fileExists("/proc/filesystems"):
@@ -456,14 +457,14 @@ class Harddisk:
 	# any access has been made to the disc. If there has been no access over a specifed time,
 	# we set the hdd into standby.
 	def readStats(self):
-		if fileExists("/sys/block/%s/stat" % self.device):
+		if os.path.exists("/sys/block/%s/stat" % self.device):
 			f = open("/sys/block/%s/stat" % self.device)
 			l = f.read()
 			f.close()
+			data = l.split(None,5)
+			return int(data[0]), int(data[4])
 		else:
 			return -1,-1
-		data = l.split(None,5)
-		return (int(data[0]), int(data[4]))
 
 	def startIdle(self):
 		from enigma import eTimer
