@@ -764,7 +764,6 @@ int isUTF8(const std::string &string)
 unsigned int truncateUTF8(std::string &s, unsigned int newsize)
 {
 	unsigned int len = s.size();
-	unsigned int slen = len;
 	// Assume s is a real UTF8 string!!!
 	while (len > newsize) {
 		while (len > 0 && (s[len] & 0xC0) == 0x80)
