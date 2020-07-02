@@ -1768,6 +1768,7 @@ class Config(ConfigSubsection):
 				except (SyntaxError, KeyError):
 					pass
 
+		lines.close()
 		# we inherit from ConfigSubsection, so ...
 		# object.__setattr__(self, "saved_value", tree["config"])
 		if "config" in tree:
@@ -1776,19 +1777,17 @@ class Config(ConfigSubsection):
 	def saveToFile(self, filename):
 		text = self.pickle()
 		try:
-			import os
-			with open(filename + ".writing", "w") as f:
-				f.write(text)
-				f.flush()
-				os.fsync(f.fileno())
-				os.rename(filename + ".writing", filename)
+			f = open(filename + ".writing", "w")
+			f.write(text)
+			f.flush()
+			os.fsync(f.fileno())
+			f.close()
+			os.rename(filename + ".writing", filename)
 		except IOError:
 			print "Config: Couldn't write %s" % filename
 
 	def loadFromFile(self, filename, base_file=True):
-		with open(filename, "r") as f:
-			self.unpickle(f, base_file)
-
+		self.unpickle(open(filename, "r"), base_file)
 
 config = Config()
 config.misc = ConfigSubsection()
