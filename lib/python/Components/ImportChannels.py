@@ -81,7 +81,7 @@ class ImportChannels():
 				try:
 					with open(os.path.join(self.tmp_dir, "epg.dat"), "wb") as fp:
 						fp.write(self.getUrl("%s/file?file=%s" % (self.url, epg_location)).read())
-						shutil.move(os.path.join(self.tmp_dir, "epg.dat"), config.misc.epgcache_filename.value)
+					shutil.move(os.path.join(self.tmp_dir, "epg.dat"), config.misc.epgcache_filename.value)
 				except:
 					self.ImportChannelsDone(False, _("Error while retreiving epg.dat from server"))
 					return
