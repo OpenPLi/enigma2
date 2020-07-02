@@ -13,15 +13,15 @@ def getFPVersion():
 				ret = fp.read()
 			else:
 				ret = long(fp.read())
-			return ret
+		return ret
 	elif fileExists("/dev/dbox/fp0"):
 		with open("/dev/dbox/fp0") as fp:
 			ret = ioctl(fp.fileno(),0)
-			return ret
+		return ret
 	elif fileExists("/sys/firmware/devicetree/base/bolt/tag"):
 		with open("/sys/firmware/devicetree/base/bolt/tag", "r") as fp:
 			ret = fp.read().rstrip("\0")
-			return ret
+		return ret
 	else:
 		print "getFPVersion failed!"
 		return ret
@@ -30,11 +30,11 @@ def setFPWakeuptime(wutime):
 	if fileExists("/proc/stb/fp/wakeup_time"):
 		with open("/proc/stb/fp/wakeup_time", "w") as fp:
 			fp.write(str(wutime))
-			return
+		return
 	elif fileExists("/dev/dbox/fp0"):
 		with open("/dev/dbox/fp0") as fp:
 			ioctl(fp.fileno(), 6, pack('L', wutime))
-			return
+		return
 	else:
 		print "setFPWakeupTime failed!"
 
@@ -43,7 +43,7 @@ def setRTCoffset(forsleep=None):
 		forsleep = (localtime(time()).tm_hour-gmtime(time()).tm_hour)*3600
 	with open("/proc/stb/fp/rtc_offset", "w") as fp:
 		fp.write(str(forsleep))
-		print "[RTC] set RTC offset to %s sec." % (forsleep)
+	print "[RTC] set RTC offset to %s sec." % (forsleep)
 
 def setRTCtime(wutime):
 	if path.exists("/proc/stb/fp/rtc_offset"):
@@ -51,11 +51,11 @@ def setRTCtime(wutime):
 	if fileExists("/proc/stb/fp/rtc"):
 		with open("/proc/stb/fp/rtc", "w") as fp:
 			fp.write(str(wutime))
-			return
+		return
 	elif fileExists("/dev/dbox/fp0"):
 		with open("/dev/dbox/fp0") as fp:
 			ioctl(fp.fileno(), 0x101, pack('L', wutime))
-			return
+		return
 	else:
 		print "setRTCtime failed!"
 
@@ -64,11 +64,11 @@ def getFPWakeuptime():
 	if fileExists("/proc/stb/fp/wakeup_time"):
 		with open("/proc/stb/fp/wakeup_time", "r") as fp:
 			ret = long(fp.read())
-			return ret
+		return ret
 	elif fileExists("/dev/dbox/fp0"):
 		with open("/dev/dbox/fp0") as fp:
 			ret = unpack('L', ioctl(fp.fileno(), 5, '    '))[0]
-			return ret
+		return ret
 	else:
 		print "getFPWakeupTime failed!"
 		return ret
@@ -84,15 +84,15 @@ def getFPWasTimerWakeup():
 	if fileExists("/proc/stb/fp/was_timer_wakeup"):
 		with open("/proc/stb/fp/was_timer_wakeup", "r") as fp:
 			wasTimerWakeup = int(fp.read()) and True or False
-			if wasTimerWakeup:
-				clearFPWasTimerWakeup()
-			return wasTimerWakeup
+		if wasTimerWakeup:
+			clearFPWasTimerWakeup()
+		return wasTimerWakeup
 	elif fileExists("/dev/dbox/fp0"):
 		with open("/dev/dbox/fp0") as fp:
 			wasTimerWakeup = unpack('B', ioctl(fp.fileno(), 9, ' '))[0] and True or False
-			if wasTimerWakeup:
-				clearFPWasTimerWakeup()
-			return wasTimerWakeup
+		if wasTimerWakeup:
+			clearFPWasTimerWakeup()
+		return wasTimerWakeup
 	else:
 		print "wasTimerWakeup failed!"
 		return wasTimerWakeup
@@ -101,10 +101,10 @@ def clearFPWasTimerWakeup():
 	if fileExists("/proc/stb/fp/was_timer_wakeup"):
 		with open("/proc/stb/fp/was_timer_wakeup", "w") as fp:
 			fp.write('0')
-			return
+		return
 	elif fileExists("/dev/dbox/fp0"):
 		with open("/dev/dbox/fp0") as fp:
 			ioctl(fp.fileno(), 10)
-			return
+		return
 	else:
 		print "clearFPWasTimerWakeup failed!"
