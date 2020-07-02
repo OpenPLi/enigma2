@@ -767,15 +767,12 @@ unsigned int truncateUTF8(std::string &s, unsigned int newsize)
 	unsigned int slen = len;
 	// Assume s is a real UTF8 string!!!
 	while (len > newsize) {
-		while (len-- > 0 && (s[len] & 0xC0) == 0x80)
-			if (len > 0) // remove the UTF startbyte, or normal ascii character
-				--len;
+		while (len > 0 && (s[len] & 0xC0) == 0x80)
+			len--;	// remove UTF bytes
+		if (len > 0)	// remove the UTF startbyte, or normal ascii character
+			--len;
 	}
 	s.resize(len);
-	if (slen > newsize) {
-		s.insert (s.end(),3,'.'); //Indicate what string been truncated
-		len += 3;
-	}
 	return len;
 }
 
