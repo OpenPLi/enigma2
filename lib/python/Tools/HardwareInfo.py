@@ -33,20 +33,22 @@ class HardwareInfo:
 				self.device_name = fp.read().strip()
 
 		# Model
-		with open((resolveFilename(SCOPE_SKIN, 'hw_info/hw_info.cfg')), 'r') as fp:
-			for line in fp:
-				if not line.startswith('#') and not line.isspace():
-					l = line.strip().replace('\t', ' ')
-					if ' ' in l:
-						infoFname, prefix = l.split()
-					else:
-						infoFname = l
-						prefix = ""
+		fp = open((resolveFilename(SCOPE_SKIN, 'hw_info/hw_info.cfg')), 'r')
+		for line in fp:
+			if not line.startswith('#') and not line.isspace():
+				l = line.strip().replace('\t', ' ')
+				if ' ' in l:
+					infoFname, prefix = l.split()
+				else:
+					infoFname = l
+					prefix = ""
 
-					if isfile("/proc/stb/info/" + infoFname):
-						with open("/proc/stb/info/" + infoFname) as fd:
-							self.device_model = prefix + fd.read().strip()
-							break
+				if isfile("/proc/stb/info/" + infoFname):
+					fd = open("/proc/stb/info/" + infoFname)
+					self.device_model = prefix + fd.read().strip()
+					fd.close()
+					break
+		fp.close()
 
 		self.device_model = self.device_model or self.device_name
 
