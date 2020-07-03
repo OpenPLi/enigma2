@@ -3,8 +3,8 @@ from Tools.NumericalTextInput import NumericalTextInput
 from Tools.Directories import resolveFilename, SCOPE_CONFIG, fileExists
 from Components.Harddisk import harddiskmanager
 from Tools.LoadPixmap import LoadPixmap
-import copy
-import os
+from copy import copy as copy_copy
+from os import path as os_path
 from time import localtime, strftime
 
 # ConfigElement, the base class of all ConfigElements.
@@ -508,7 +508,7 @@ class ConfigSequence(ConfigElement):
 		self.censor_char = censor_char
 
 		self.last_value = self.default = default
-		self.value = copy.copy(default)
+		self.value = copy_copy(default)
 		self.endNotifier = None
 
 	def validate(self):
@@ -651,7 +651,7 @@ class ConfigSequence(ConfigElement):
 	def onDeselect(self, session):
 		if self.last_value != self._value:
 			self.changedFinal()
-			self.last_value = copy.copy(self._value)
+			self.last_value = copy_copy(self._value)
 
 
 ip_limits = [(0, 255), (0, 255), (0, 255), (0, 255)]
@@ -1485,7 +1485,7 @@ class ConfigLocations(ConfigElement):
 				self.addedMount(x)
 
 	def getMountpoint(self, file):
-		file = os.path.realpath(file) + "/"
+		file = os_path.realpath(file) + "/"
 		for m in self.mountpoints:
 			if file.startswith(m):
 				return m
@@ -1776,6 +1776,7 @@ class Config(ConfigSubsection):
 	def saveToFile(self, filename):
 		text = self.pickle()
 		try:
+			import os
 			f = open(filename + ".writing", "w")
 			f.write(text)
 			f.flush()
@@ -1787,6 +1788,7 @@ class Config(ConfigSubsection):
 
 	def loadFromFile(self, filename, base_file=True):
 		self.unpickle(open(filename, "r"), base_file)
+
 
 config = Config()
 config.misc = ConfigSubsection()
