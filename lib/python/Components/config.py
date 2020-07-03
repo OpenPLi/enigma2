@@ -1768,7 +1768,6 @@ class Config(ConfigSubsection):
 				except (SyntaxError, KeyError):
 					pass
 
-		lines.close()
 		# we inherit from ConfigSubsection, so ...
 		# object.__setattr__(self, "saved_value", tree["config"])
 		if "config" in tree:
