@@ -770,14 +770,14 @@ unsigned int truncateUTF8(std::string &s, unsigned int newsize)
 
 	if (len > idx){
 		while (idx > 0) {
-			if (s[idx] < 0x80 || (s[idx] & 0xc0) == 0xc0){		// standard char or UTF startByte
-				if (s[idx] < 0x80)				// standard char
+			if (s[idx] < 0x80 || (s[idx] & 0xc0) == 0xc0){
+				if (s[idx] < 0x80)
 					idx++;
-				else if ((s[idx] & 0xF8) == 0xf0 && n == 3)	// 3B UTF startByte
+				else if ((s[idx] & 0xF8) == 0xf0 && n == 3)
 					idx += n + 1;
-				else if ((s[idx] & 0xF0) == 0xe0 && n == 2)	// 2B UTF startByte
+				else if ((s[idx] & 0xF0) == 0xe0 && n == 2)
 					idx += n + 1;
-				else if ((s[idx] & 0xE0) == 0xc0 && n == 1)	// 1B UTF startByte
+				else if ((s[idx] & 0xE0) == 0xc0 && n == 1)
 					idx += n + 1;
 				break;
 			}
