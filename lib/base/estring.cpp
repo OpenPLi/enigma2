@@ -765,11 +765,27 @@ unsigned int truncateUTF8(std::string &s, unsigned int newsize)
 {
 	unsigned int len = s.size();
 	// Assume s is a real UTF8 string!!!
-	while (len > newsize) {
-		while (len > 0 && (s[len] & 0xC0) == 0x80)
-			len--;	// remove UTF bytes
-		if (len > 0)	// remove the UTF startbyte, or normal ascii character
-			--len;
+	unsigned int n = 0;
+	unsigned int idx = newsize - 1;
+
+	if (len > idx){
+		while (idx > 0) {
+			if (s[idx] < 0x80 || (s[idx] & 0xc0) == 0xc0){		// standard char or UTF startByte
+				if (s[idx] < 0x80)				// standard char
+					idx++;
+				else if ((s[idx] & 0xF8) == 0xf0 && n == 3)	// 3B UTF startByte
+					idx += n + 1;
+				else if ((s[idx] & 0xF0) == 0xe0 && n == 2)	// 2B UTF startByte
+					idx += n + 1;
+				else if ((s[idx] & 0xE0) == 0xc0 && n == 1)	// 1B UTF startByte
+					idx += n + 1;
+				break;
+			}
+			n++;
+			if (idx > 0)
+				idx--;
+		}
+		len = idx;
 	}
 	s.resize(len);
 	return len;
