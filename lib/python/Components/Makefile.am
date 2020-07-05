@@ -3,7 +3,7 @@ installdir = $(pkglibdir)/python/Components
 SUBDIRS = Sources Converter Renderer
 
 install_PYTHON = \
-	ActionMap.py GUISkin.py PerServiceDisplay.py                            \
+	ActionMap.py PerServiceDisplay.py \
 	Button.py HTMLComponent.py ProgressBar.py TimerList.py config.py        \
 	ServiceList.py VariableText.py                                          \
 	ConfigList.py VariableValue.py                                          \
