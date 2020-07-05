@@ -16,7 +16,6 @@ class MessageBox(Screen):
 	def __init__(self, session, text, type=TYPE_YESNO, timeout=-1, close_on_any_key=False, default=True, enable_input=True, msgBoxID=None, picon=None, simple=False, list=[], timeout_default=None, title=None):
 		self.type = type
 		Screen.__init__(self, session)
-		self.setScreenPathMode(None)
 		if simple:
 			self.skinName="MessageBoxSimple"
 
