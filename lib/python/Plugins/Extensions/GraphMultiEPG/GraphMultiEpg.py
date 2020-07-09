@@ -912,7 +912,9 @@ class GraphMultiEPG(Screen, HelpableScreen):
 				"preview":     (self.preview,        _("Preview selected channel")),
 				"window":      (self.showhideWindow, _("Show/hide window")),
 				"nextDay":     (self.nextDay,        _("Goto next day of events")),
-				"prevDay":     (self.prevDay,        _("Goto previous day of events"))
+				"prevDay":     (self.prevDay,        _("Goto previous day of events")),
+				"moveUp":      (self.moveUp,         _("Goto up service")),
+				"moveDown":    (self.moveDown,      _("Goto down service"))
 			}, -1)
 		self["gmepgactions"].csel = self
 
@@ -940,6 +942,14 @@ class GraphMultiEPG(Screen, HelpableScreen):
 		self.onLayoutFinish.append(self.onCreate)
 		self.previousref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 		self.fallbackTimer = FallbackTimerList(self, self.onCreate)
+
+	def moveUp(self):
+		self.showhideWindow(True)
+		self["list"].moveTo(eListbox.moveUp)
+
+	def moveDown(self):
+		self.showhideWindow(True)
+		self["list"].moveTo(eListbox.moveDown)
 
 	def prevPage(self):
 		self.showhideWindow(True)
