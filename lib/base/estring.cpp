@@ -427,9 +427,9 @@ std::string Big5ToUTF8(const char *szIn, int len, int *pconvertedLen)
 
 std::string GEOSTD8ToUTF8(const char *szIn, int len, int *pconvertedLen)
 {
-// Each GEOSTD8 char is pair formed by prefix (0x10) and char <0xA0;0xFF> except 0xC6,<0xC8;0xCC>,0xCE,0xCF)
-// But in most cases is broadcasted without prefix due save space
-// Conversion to UTF8 is then made without 0x10 prefixes
+	// Each GEOSTD8 char is pair formed by prefix (0x10) and char <0xA0;0xFF> except 0xC6,<0xC8;0xCC>,0xCE,0xCF
+	// But in most cases is broadcasted without prefix due save space
+	// Conversion to UTF8 is then made without 0x10 prefixes
 
 	std::string szOut = "";
 	std::string prefix1 = "\xE1\x82";
