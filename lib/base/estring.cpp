@@ -425,6 +425,53 @@ std::string Big5ToUTF8(const char *szIn, int len, int *pconvertedLen)
 	return szOut;
 }
 
+std::string GEOSTD8ToUTF8(const char *szIn, int len, int *pconvertedLen)
+{
+	// Each GEOSTD8 char is pair formed by prefix (0x10) and char <0xA0;0xFF> except 0xC6,<0xC8;0xCC>,0xCE,0xCF
+	// But in most cases is broadcasted without prefix due save space
+	// Conversion to UTF8 is then made without 0x10 prefixes
+
+	std::string szOut = "";
+	std::string prefix1 = "\xE1\x82";
+	std::string prefix2 = "\xE1\x83";
+
+	int i = 0;
+	int j = 0;
+
+	for (;i < len; i++)
+	{
+		// Drop 0x10 prefix, if exists
+		if ((unsigned char)szIn[i] == 0x10)
+			continue;
+		// no GEOSTD8 chars. drop it
+		if ((unsigned char)szIn[i] >= 0x80 && (unsigned char)szIn[i] < 0xA0 ||
+			(unsigned char)szIn[i] == 0xC6 ||
+			(unsigned char)szIn[i] >= 0xC8 && (unsigned char)szIn[i] <= 0xCC ||
+			(unsigned char)szIn[i] == 0xCE || (unsigned char)szIn[i] == 0xCF)
+			continue;
+
+		if ((unsigned char)szIn[i] >= 0xA0 && (unsigned char)szIn[i] < 0xC0)
+		{
+			szOut += prefix1; j=j+2;
+			szOut += szIn[i]; j++;
+		}
+		else if ((unsigned char)szIn[i] >= 0xC0 && (unsigned char)szIn[i] <= 0xFF)
+		{
+			szOut += prefix2; j=j+2;
+			szOut += (unsigned char)(int(szIn[i])-0x40);j++;
+		}
+		else
+		{
+			szOut += szIn[i]; j++;
+		}
+	}
+	if (pconvertedLen)
+		*pconvertedLen = j;
+
+	szOut.resize(j);
+	return szOut;
+}
+
 std::string convertDVBUTF8(const unsigned char *data, int len, int table, int tsidonid,int *pconvertedLen)
 {
 	if (!len){
@@ -511,6 +558,10 @@ std::string convertDVBUTF8(const unsigned char *data, int len, int table, int ts
 			++i;
 			table = UTF16LE_ENCODING;
 			break;
+		case GEOSTD8_ENCODING:
+			++i;
+			table = GEOSTD8_ENCODING;
+			break;
 		case HUFFMAN_ENCODING:
 			{
 				// Attempt to decode Freesat Huffman encoded string
@@ -526,7 +577,7 @@ std::string convertDVBUTF8(const unsigned char *data, int len, int table, int ts
 			break;
 		case 0x0:
 		case 0xC ... 0xF:
-		case 0x18 ... 0x1E:
+		case 0x18 ... 0x1D:
 			eDebug("[convertDVBUTF8] reserved %d", data[0]);
 			++i;
 			break;
@@ -569,6 +620,10 @@ std::string convertDVBUTF8(const unsigned char *data, int len, int table, int ts
 			break;
 		case BIG5_ENCODING:
 			output = Big5ToUTF8((const char *)(data + i), len - i, &convertedLen);
+			convertedLen += i;
+			break;
+		case GEOSTD8_ENCODING:
+			output = GEOSTD8ToUTF8((const char *)(data + i), len - i, &convertedLen);
 			convertedLen += i;
 			break;
 		default:
@@ -831,6 +886,7 @@ std::string replace_all(const std::string &in, const std::string &entity, const 
 {
 	std::string out = in;
 	std::string::size_type loc = 0;
+
 	if( table == -1 )
 		table = defaultEncodingTable;
 
@@ -883,7 +939,6 @@ std::string replace_all(const std::string &in, const std::string &entity, const 
 			loc += 2;
 		}
 		break;
-
 	default:
 		while ((loc = out.find(entity, loc)) != std::string::npos)
 		{
