@@ -209,6 +209,10 @@ int eDVBMetaParser::updateMeta(const std::string &tsname)
 	eServiceReference ref = m_ref;
 	ref.path = "";
 
+	/* To make sure you only modify the meta file you're looking at, and not one that is hardlinked to this one, remove the file first.
+	 * We don't care about the result - if it doesn't exist that's also just fine. */
+	::unlink(filename.c_str());
+
 	CFile f(filename.c_str(), "w");
 	if (!f)
 		return -ENOENT;
