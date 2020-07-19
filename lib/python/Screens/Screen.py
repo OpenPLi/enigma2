@@ -154,10 +154,11 @@ class Screen(dict):
 		except AttributeError:
 			pass
 		self.screenTitle = title
-		if config.usage.menu_path.value == "large":
+		dont_use_menu_path = "ChannelSelection" in self.__class__.__name__
+		if config.usage.menu_path.value == "large" and not dont_use_menu_path:
 			screenPath = ""
 			screenTitle = "%s > %s" % (self.screenPath, title) if self.screenPath else title
-		elif config.usage.menu_path.value == "small":
+		elif config.usage.menu_path.value == "small" and not dont_use_menu_path:
 			screenPath = "%s >" % self.screenPath if self.screenPath else ""
 			screenTitle = title
 		else:
@@ -228,8 +229,8 @@ class Screen(dict):
 				if title:
 					self.skinAttributes[skinTitleIndex] = ("title", title)
 				else:
-					self["Title"].text = value
-					self.summaries.setTitle(value)
+					self["Title"].text = _(value)
+					self.summaries.setTitle(_(value))
 			elif key == "baseResolution":
 				baseRes = tuple([int(x) for x in value.split(",")])
 			idx += 1
