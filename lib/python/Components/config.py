@@ -1738,7 +1738,8 @@ class Config(ConfigSubsection):
 		self.pickle_this("config", self.saved_value, result)
 		return ''.join(result)
 
-	def unpickle(self, lines, base_file=True):
+	def unpickle(self, filename, base_file=True):
+		lines = open(filename, "r")
 		tree = {}
 		configbase = tree.setdefault("config", {})
 		for l in lines:
@@ -1767,6 +1768,7 @@ class Config(ConfigSubsection):
 						configEntry.value = val
 				except (SyntaxError, KeyError):
 					pass
+		lines.close()
 
 		# we inherit from ConfigSubsection, so ...
 		# object.__setattr__(self, "saved_value", tree["config"])
@@ -1787,7 +1789,10 @@ class Config(ConfigSubsection):
 			print "Config: Couldn't write %s" % filename
 
 	def loadFromFile(self, filename, base_file=True):
-		self.unpickle(open(filename, "r"), base_file)
+		if os_path.isfile(filename):
+			self.unpickle(filename, base_file)
+		else:
+			print "Config File: %s not find" % filename
 
 
 config = Config()
