@@ -49,15 +49,21 @@ class HardwareInfo:
 				except:
 					pass
 
+		# standard values
 		self.device_model = self.device_model or self.device_name
+		self.machine_name = self.device_model
 
-		# map for Xtrend device models to machine names
+		# custom overrides for specific receivers
 		if self.device_model.startswith(("et9", "et4", "et5", "et6", "et7")):
 			self.machine_name = "%sx00" % self.device_model[:3]
 		elif self.device_model == "et11000":
 			self.machine_name = "et1x000"
-		else:
-			self.machine_name = self.device_model
+		elif self.device_model.startswith("H9 "):
+			self.device_name = self.device_model
+			self.device_model = "h9combo"
+		elif self.device_model.startswith("H9"):
+			self.device_name = self.device_model
+			self.device_model = "h9"
 
 		if self.device_revision:
 			self.device_string = "%s (%s-%s)" % (self.device_model, self.device_revision, self.device_version)
