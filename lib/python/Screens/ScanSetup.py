@@ -1817,28 +1817,29 @@ class ScanSimple(ConfigListScreen, Screen, CableTransponderSearchSupport, Terres
 				networks.discard(self.known_networks)
 
 				tlist = [ ]
-				if nim.isCompatible("DVB-S"):
-					# get initial transponders for each satellite to be scanned
-					for sat in networks:
-						getInitialTransponderList(tlist, sat[0], n.nim_index)
-				elif nim.isCompatible("DVB-C"):
-					if config.Nims[nim.slot].cable.scan_type.value == "provider":
-						getInitialCableTransponderList(tlist, nim.slot)
-					else:
-						action = SEARCH_CABLE_TRANSPONDERS
-						networkid = config.Nims[nim.slot].cable.scan_networkid.value
-				elif nim.isCompatible("DVB-T"):
-					skip_t2 = False
-					if SystemInfo["Blindscan_t2_available"]:
-						skip_t2 = True
-						if nim.canBeCompatible("DVB-T2"):
-							if len(self.terrestrialTransponderGetCmd(nim.slot)):
-								action = SEARCH_TERRESTRIAL2_TRANSPONDERS
-							else:
-								skip_t2 = False
-					getInitialTerrestrialTransponderList(tlist, nimmanager.getTerrestrialDescription(nim.slot), skip_t2=skip_t2)
-				elif nim.isCompatible("ATSC"):
-					getInitialATSCTransponderList(tlist, nim.slot)
+				if nim.isSupported():
+					if nim.isCompatible("DVB-S"):
+						# get initial transponders for each satellite to be scanned
+						for sat in networks:
+							getInitialTransponderList(tlist, sat[0], n.nim_index)
+					if nim.isCompatible("DVB-C"):
+						if config.Nims[nim.slot].cable.scan_type.value == "provider":
+							getInitialCableTransponderList(tlist, nim.slot)
+						else:
+							action = SEARCH_CABLE_TRANSPONDERS
+							networkid = config.Nims[nim.slot].cable.scan_networkid.value
+					if nim.isCompatible("DVB-T"):
+						skip_t2 = False
+						if SystemInfo["Blindscan_t2_available"]:
+							skip_t2 = True
+							if nim.canBeCompatible("DVB-T2"):
+								if len(self.terrestrialTransponderGetCmd(nim.slot)):
+									action = SEARCH_TERRESTRIAL2_TRANSPONDERS
+								else:
+									skip_t2 = False
+						getInitialTerrestrialTransponderList(tlist, nimmanager.getTerrestrialDescription(nim.slot), skip_t2=skip_t2)
+					if nim.isCompatible("ATSC"):
+						getInitialATSCTransponderList(tlist, nim.slot)
 				else:
 					assert False
 
