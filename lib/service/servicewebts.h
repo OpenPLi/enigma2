@@ -103,6 +103,7 @@ public:
 	RESULT stream(ePtr<iStreamableService> &ptr) { ptr = nullptr; return -1; };
 	RESULT streamed(ePtr<iStreamedService> &ptr) { ptr = nullptr; return -1; };
 	RESULT keys(ePtr<iServiceKeys> &ptr) { ptr = nullptr; return -1; };
+	RESULT tap(ePtr<iTapService> &ptr) { ptr = nullptr; return -1; };
 
 	// iPausableService
 	RESULT pause();
