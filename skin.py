@@ -370,6 +370,8 @@ def collectAttributes(skinAttributes, node, context, skinPath=None, ignore=(), f
 			elif attrib == "font":
 				font = value.encode("utf-8")
 				skinAttributes.append((attrib, font))
+			elif attrib in ("title", "text"):
+				skinAttributes.append((attrib, _(value.encode("utf-8"))))
 			else:
 				skinAttributes.append((attrib, value.encode("utf-8")))
 	if pos is not None:
@@ -438,10 +440,10 @@ class AttributeParser:
 #			print("[Skin] Error: Invalid animationMode '%s'!  Must be one of 'disable', 'off', 'offshow', 'offhide', 'onshow' or 'onhide'." % value)
 
 	def title(self, value):
-		self.guiObject.setTitle(_(value))
+		self.guiObject.setTitle(value)
 
 	def text(self, value):
-		self.guiObject.setText(_(value))
+		self.guiObject.setText(value)
 
 	def font(self, value):
 		self.guiObject.setFont(parseFont(value, self.scaleTuple))
