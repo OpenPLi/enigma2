@@ -2242,7 +2242,9 @@ class InfoBarJobman:
 		return [((boundFunction(self.getJobName, job), boundFunction(self.showJobView, job), lambda: True), None) for job in job_manager.getPendingJobs()]
 
 	def getJobName(self, job):
-		return "%s: %s (%d%%)" % (job.getStatustext(), job.name, int(100*job.progress/float(job.end)))
+		if job.status == job.IN_PROGRESS:
+			return "%s: (%d%%), %s" % (job.getStatustext(), int(100*job.progress/float(job.end)), job.name)
+		return "%s: %s" % (job.getStatustext(), job.name)
 
 	def showJobView(self, job):
 		from Screens.TaskView import JobView
