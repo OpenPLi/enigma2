@@ -4,7 +4,7 @@
 #include <vector>
 
 #include <lib/nav/core.h>
-#include <lib/base/thread.h>
+#include <lib/dvb/streamserver.h>
 
 class eEncoder
 {
@@ -24,22 +24,26 @@ class eEncoder
 			IOCTL_BROADCOM_STOP_TRANSCODING = 200,
 		};
 
-		class encoder_t : public eThread
+		class EncoderContext : public eThread
 		{
 			public:
 
-				encoder_t(int encoder_in, int decoder_in, eNavigation *navigation_instance_in) :
-						encoder(encoder_in),
-						decoder(decoder_in),
-						fd(-1),
-						state(state_idle),
-						navigation_instance(navigation_instance_in)
+				EncoderContext(int encoder_index_in, int decoder_index_in, eNavigation *navigation_instance_in)
 				{
+					encoder_index = encoder_index_in;
+					decoder_index = decoder_index_in;
+					file_fd = -1;
+					encoder_fd = -1;
+					state = state_idle;
+					navigation_instance = navigation_instance_in;
+					stream_thread = nullptr;
 				}
 
-				int encoder;
-				int decoder;
-				int fd;
+				int encoder_index;
+				int decoder_index;
+				int encoder_fd;
+				int file_fd;
+				eDVBRecordStreamThread *stream_thread;
 
 				enum
 				{
@@ -55,7 +59,7 @@ class eEncoder
 				void thread(void);
 		};
 
-		std::vector<encoder_t> encoder;
+		std::vector<EncoderContext> encoder;
 		bool bcm_encoder;
 		ePtr<eConnection> m_nav_event_connection_0;
 		ePtr<eConnection> m_nav_event_connection_1;
@@ -71,8 +75,8 @@ class eEncoder
 		eEncoder();
 		~eEncoder();
 
-		//FIXME: const
-		int allocateEncoder(const std::string &serviceref, const int bitrate, const int width, const int height, const int framerate, const int interlaced, const int aspectratio, int &buffersize, const std::string &vcodec = "", const std::string &acodec = "");
+		int allocateEncoder(const std::string &serviceref, int &buffersize, int bitrate, int width, int height, int framerate, int interlaced, int aspectratio,
+				const std::string &vcodec = "", const std::string &acodec = "");
 		void freeEncoder(int encoderfd);
 		int getUsedEncoderCount();
 

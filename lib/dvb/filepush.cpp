@@ -343,8 +343,8 @@ void eFilePushThreadRecorder::thread()
 		/* (works like O_NONBLOCK even when not opened as such), prevent idle waiting for the data */
 		/* this won't ever hurt, because it will return immediately when there is data or an error condition */
 
-		struct pollfd pfd = { m_fd_source, POLLIN | POLLRDHUP | POLLERR | POLLHUP | POLLNVAL, 0 };
-		poll(&pfd, 1, 1000);
+		struct pollfd pfd = { m_fd_source, POLLIN, 0 };
+		poll(&pfd, 1, 100);
 
 		ssize_t bytes = ::read(m_fd_source, m_buffer, m_buffersize);
 		if (bytes < 0)
@@ -380,7 +380,7 @@ void eFilePushThreadRecorder::thread()
 #endif
 		if (w < 0)
 		{
-			eDebug("[eFilePushThreadRecorder] WRITE ERROR, aborting thread: %m");
+			eWarning("[eFilePushThreadRecorder] WRITE ERROR, aborting thread: %m");
 			sendEvent(evtWriteError);
 			break;
 		}
