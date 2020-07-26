@@ -251,7 +251,7 @@ int eServiceHDMIRecord::doPrepare()
 
 	if (!m_simulate && m_encoder_fd < 0)
 	{
-		if (eEncoder::getInstance()) m_encoder_fd = eEncoder::getInstance()->allocateEncoder(m_ref.toString(), 8 * 1024 * 1024, 1280, 720, 25000, false, 0, buffersize);
+		if (eEncoder::getInstance()) m_encoder_fd = eEncoder::getInstance()->allocateEncoder(m_ref.toString(), buffersize, 8 * 1024 * 1024, 1280, 720, 25000, 0, 0);
 		if (m_encoder_fd < 0) return -1;
 	}
 	m_state = statePrepared;
