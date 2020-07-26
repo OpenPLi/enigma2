@@ -45,6 +45,8 @@ class PluginComponent:
 			if not os.path.isdir(directory_category):
 				continue
 			for pluginname in os.listdir(directory_category):
+				if pluginname == "__pycache__" or pluginname == "WebInterface":
+					continue
 				path = os.path.join(directory_category, pluginname)
 				if os.path.isdir(path):
 						profile('plugin '+pluginname)
