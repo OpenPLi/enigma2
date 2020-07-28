@@ -99,7 +99,7 @@
 	</screen>
 
 	<screen name="MenuSummary" position="0,0" size="220,176">
-		<widget source="parent.title" render="Label" position="5,0" size="210,60" font="GBLcd;26" valign="center"/>
+		<widget source="parent.SummaryTitle" render="Label" position="5,0" size="210,60" font="GBLcd;26" valign="center"/>
 		<widget source="parent.menu" render="Label" position="5,60" size="215,49" font="GBLcd;20" valign="bottom" foregroundColor="GBLcdGrey">
 			<convert type="StringListSelection"/>
 		</widget>
@@ -118,21 +118,21 @@
 	</screen>
 
 	<screen name="MovieContextMenuSummary" position="0,0" size="220,176">
-		<widget source="parent.Title" render="Label" position="5,0" size="210,60" font="GBLcd;26" valign="center"/>
+		<widget source="parent.SummaryTitle" render="Label" position="5,0" size="210,60" font="GBLcd;26" valign="center"/>
 		<widget source="selected" render="Label" position="5,60" size="215,49" font="GBLcd;20" valign="bottom" foregroundColor="GBLcdGrey"/>
 		<eLabel position="5,109" size="210,6" backgroundColor="GBLcdWhite"/>
 		<panel name="GBLcdClockTemplate"/>
 	</screen>
 
 	<screen name="MovieSelectionSummary" position="0,0" size="220,176">
-		<widget source="parent.Title" render="Label" position="5,0" size="210,60" font="GBLcd;26" valign="center"/>
+		<widget source="parent.SummaryTitle" render="Label" position="5,0" size="210,60" font="GBLcd;26" valign="center"/>
 		<widget source="name" render="Label" position="5,60" size="215,49" font="GBLcd;20" valign="bottom" foregroundColor="GBLcdGrey"/>
 		<eLabel position="5,109" size="210,6" backgroundColor="GBLcdWhite"/>
 		<panel name="GBLcdClockTemplate"/>
 	</screen>
 
 	<screen name="PluginBrowserSummary" position="0,0" size="220,176">
-		<widget source="parent.Title" render="Label" position="5,0" size="210,60" font="GBLcd;26" valign="center"/>
+		<widget source="parent.SummaryTitle" render="Label" position="5,0" size="210,60" font="GBLcd;26" valign="center"/>
 		<widget source="entry" render="Label" position="5,60" size="215,49" font="GBLcd;20" foregroundColor="GBLcdGrey" valign="center"/>
 		<widget source="desc" render="Label" position="5,109" size="215,67" font="GBLcd;20"/>
 	</screen>
@@ -155,7 +155,7 @@
 	</screen>
 
 	<screen name="SimpleSummary" position="0,0" size="220,176">
-		<widget source="parent.Title" render="Label" position="5,0" size="210,109" font="GBLcd;26"/>
+		<widget source="parent.SummaryTitle" render="Label" position="5,0" size="210,109" font="GBLcd;26"/>
 		<eLabel position="5,109" size="210,6" backgroundColor="GBLcdWhite"/>
 		<panel name="GBLcdClockTemplate"/>
 	</screen>
