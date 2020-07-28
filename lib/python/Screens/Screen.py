@@ -45,6 +45,7 @@ class Screen(dict):
 		self.instance = None
 		self.summaries = CList()
 		self["Title"] = StaticText()
+		self["SummaryTitle"] = StaticText()
 		self["ScreenPath"] = StaticText()
 		self["screen_path"] = StaticText()  # Support legacy screen history skins.
 		self.screenPath = ""  # This is the current screen path without the title.
@@ -168,6 +169,7 @@ class Screen(dict):
 		self["ScreenPath"].text = screenPath
 		self["screen_path"].text = screenPath  # Support legacy screen history skins.
 		self["Title"].text = screenTitle
+		self["SummaryTitle"].text = self.screenTitle
 
 	def getTitle(self):
 		return self.screenTitle
@@ -216,30 +218,23 @@ class Screen(dict):
 		self.__callLaterTimer.start(0, True)
 
 	def applySkin(self):
-		z = 0
 		# DEBUG: baseRes = (getDesktop(GUI_SKIN_ID).size().width(), getDesktop(GUI_SKIN_ID).size().height())
 		baseRes = (720, 576)  # FIXME: A skin might have set another resolution, which should be the base res.
-		idx = 0
-		skinTitleIndex = -1
-		title = self.title
+		zPosition = 0
 		for (key, value) in self.skinAttributes:
-			if key == "zPosition":
-				z = int(value)
-			elif key == "title":
-				skinTitleIndex = idx
-				if title:
-					self.skinAttributes[skinTitleIndex] = ("title", title)
-				else:
-					self["Title"].text = value
-					self.summaries.setTitle(value)
-			elif key == "baseResolution":
+			if key == "baseResolution":
 				baseRes = tuple([int(x) for x in value.split(",")])
-			idx += 1
+			elif key == "zPosition":
+				zPosition = int(value)
 		self.scale = ((baseRes[0], baseRes[0]), (baseRes[1], baseRes[1]))
 		if not self.instance:
-			self.instance = eWindow(self.desktop, z)
-		if skinTitleIndex == -1 and title:
-			self.skinAttributes.append(("title", title))
+			self.instance = eWindow(self.desktop, zPosition)
+		if "title" not in self.skinAttributes and self.screenTitle:
+			self.skinAttributes.append(("title", self.screenTitle))
+		else:
+			for attribute in self.skinAttributes:
+				if attribute[0] == "title":
+					self.setTitle(_(attribute[1]))
 		self.skinAttributes.sort(key=lambda a: {"position": 1}.get(a[0], 0))  # We need to make sure that certain attributes come last.
 		applyAllAttributes(self.instance, self.desktop, self.skinAttributes, self.scale)
 		self.createGUIScreen(self.instance, self.desktop)
