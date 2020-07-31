@@ -11,8 +11,9 @@ from Components.Button import Button
 
 from Components.Label import Label
 from Components.ProgressBar import ProgressBar
-
+from Components.SystemInfo import SystemInfo
 from Tools.StbHardware import getFPVersion
+from Tools.Multiboot import getCurrentImage
 from enigma import eTimer, eLabel, eConsoleAppContainer, getDesktop, eGetEnigmaDebugLvl
 
 from Components.GUIComponent import GUIComponent
@@ -30,6 +31,18 @@ class About(Screen):
 		AboutText += _("Image: ") + about.getImageTypeString() + "\n"
 		AboutText += _("Build date: ") + about.getBuildDateString() + "\n"
 		AboutText += _("Last update: ") + about.getUpdateDateString() + "\n"
+
+		if SystemInfo["canMultiBoot"]:
+			slot = image = getCurrentImage()
+			bootmode = ""
+			part = _("eMMC slot %s") % slot
+			if "sda" in SystemInfo["canMultiBoot"][slot]['device']:
+				if slot > 4:
+					image -=4
+				else:
+					image -=1
+				part = _("SD-card slot %s") % image
+			AboutText += _("Selected image: %s") % _("STARTUP_") + str(slot) + "  (" + part + ")\n"
 
 		# [WanWizard] Removed until we find a reliable way to determine the installation date
 		# AboutText += _("Installed: ") + about.getFlashDateString() + "\n"
