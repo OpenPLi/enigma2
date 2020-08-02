@@ -45,7 +45,6 @@ class Screen(dict):
 		self.instance = None
 		self.summaries = CList()
 		self["Title"] = StaticText()
-		self["SummaryTitle"] = StaticText()
 		self["ScreenPath"] = StaticText()
 		self["screen_path"] = StaticText()  # Support legacy screen history skins.
 		self.screenPath = ""  # This is the current screen path without the title.
@@ -169,7 +168,6 @@ class Screen(dict):
 		self["ScreenPath"].text = screenPath
 		self["screen_path"].text = screenPath  # Support legacy screen history skins.
 		self["Title"].text = screenTitle
-		self["SummaryTitle"].text = self.screenTitle
 
 	def getTitle(self):
 		return self.screenTitle
