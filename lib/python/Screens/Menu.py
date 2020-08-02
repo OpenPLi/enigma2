@@ -41,8 +41,12 @@ class MenuUpdater:
 
 menuupdater = MenuUpdater()
 
+
 class MenuSummary(Screen):
-	pass
+	def __init__(self, session, parent):
+		Screen.__init__(self, session, parent=parent)
+		self["Title"] = StaticText(parent.getTitle())
+
 
 class Menu(Screen, ProtectedScreen):
 	ALLOW_SUSPEND = True
