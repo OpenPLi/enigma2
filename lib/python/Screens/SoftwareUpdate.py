@@ -18,6 +18,7 @@ from Tools.HardwareInfo import HardwareInfo
 from enigma import eTimer, getBoxType, eDVBDB
 from urllib2 import urlopen
 import datetime, os, json
+import locale
 
 class UpdatePlugin(Screen, ProtectedScreen):
 	skin = """
@@ -149,7 +150,12 @@ class UpdatePlugin(Screen, ProtectedScreen):
 				return str(datetime.datetime.strptime(urlopen("%s/Packages.gz" % url).info()["Last-Modified"], '%a, %d %b %Y %H:%M:%S %Z'))
 			except:
 				return ""
-		return sorted([gettime(open("/etc/opkg/%s" % file, "r").readlines()[0].split()[2]) for file in os.listdir("/etc/opkg") if not file.startswith("3rd-party") and file not in ("arch.conf", "opkg.conf")], reverse=True)[0]
+
+		loc = locale.getlocale()
+		locale.setlocale(locale.LC_TIME, 'C')
+		timestamp = sorted([gettime(open("/etc/opkg/%s" % file, "r").readlines()[0].split()[2]) for file in os.listdir("/etc/opkg") if not file.startswith("3rd-party") and file not in ("arch.conf", "opkg.conf")], reverse=True)[0]
+		locale.setlocale(locale.LC_TIME, loc)
+		return timestamp
 
 	def startActualUpdate(self,answer):
 		if answer:
