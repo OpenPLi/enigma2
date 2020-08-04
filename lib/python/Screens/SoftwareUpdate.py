@@ -146,6 +146,8 @@ class UpdatePlugin(Screen, ProtectedScreen):
 	def getLatestImageTimestamp(self):
 		def gettime(url):
 			try:
+				import locale
+				locale.setlocale(locale.LC_TIME, '')
 				return str(datetime.datetime.strptime(urlopen("%s/Packages.gz" % url).info()["Last-Modified"], '%a, %d %b %Y %H:%M:%S %Z'))
 			except:
 				return ""
