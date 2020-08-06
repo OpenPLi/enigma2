@@ -18,6 +18,8 @@ from Tools.HardwareInfo import HardwareInfo
 from enigma import eTimer, getBoxType, eDVBDB
 from urllib2 import urlopen
 import datetime, os, json
+import time
+import calendar
 
 class UpdatePlugin(Screen, ProtectedScreen):
 	skin = """
