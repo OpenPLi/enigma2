@@ -1660,17 +1660,37 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			text = name)
 
 	def do_decode(self):
-		from ServiceReference import ServiceReference
+		def gotDecodeToCurrent(retval=False):
+			if retval:
+				if retval[1] == "timerpath":
+					self.gotDecodeDest(name, filepath, description, preferredTimerPath() or "*" )
+				elif retval[1] == "current":
+					self.gotDecodeDest(name, filepath, description, path)
+				else:
+					self.selectMovieLocation(title=_("Select destination for decoded file:") + " " + name, callback=boundFunction(self.gotDecodeDest, name, filepath, description))
 		item = self.getCurrentSelection()
 		info = item[1]
 		filepath = item[0].getPath()
 		if not filepath.endswith('.ts'):
 			return
-		serviceref = ServiceReference(None, reftype = eServiceReference.idDVB, path = filepath)
-		name = info.getName(item[0]) + ' - decoded'
+		name = info.getName(item[0])
 		description = info.getInfoString(item[0], iServiceInformation.sDescription)
+		path, filename = os.path.split(filepath)
+		choices = [
+			(_("Timer recording location"), "timerpath"),
+			(_("Current directory"), "current"),
+			(_("Select path..."), "select")]
+		self.session.openWithCallback(gotDecodeToCurrent, ChoiceBox, title=_("Select directory for decoded file"), list=choices)
+
+	def gotDecodeDest(self, name, filepath, description, choice):
+		if not choice:
+			return
+		newpath = None if choice == "*" else os.path.normpath(choice)
+		from ServiceReference import ServiceReference
+		serviceref = ServiceReference(None, reftype = eServiceReference.idDVB, path = filepath)
+		name += ' - decoded'
 		begin = int(time.time())
-		recording = RecordTimer.RecordTimerEntry(serviceref, begin, begin + 3600, name, description, 0, dirname = preferredTimerPath())
+		recording = RecordTimer.RecordTimerEntry(serviceref, begin, begin + 3600, name, description, 0, dirname = newpath)
 		recording.dontSave = True
 		recording.autoincrease = True
 		recording.setAutoincreaseEnd()
