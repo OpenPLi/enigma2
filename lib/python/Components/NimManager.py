@@ -263,7 +263,7 @@ class SecConfigure:
 			pass
 
 		lnbSat = {}
-		for x in range(1, 71):
+		for x in range(1, 72):
 			lnbSat[x] = []
 
 		#wildcard for all satellites ( for rotor )
@@ -292,11 +292,20 @@ class SecConfigure:
 				print "[SecConfigure] add", x[0], "to", lnb
 				lnbSat[lnb].append(x[0])
 
-		for x in range(1, 71):
+		lnb = int(config.Nims[slotid].advanced.sat[3607].lnb.value)
+		if lnb != 0:
+			root_id = int(config.Nims[slotid].connectedTo.value)
+			for x in self.NimManager.getRotorSatListForNim(root_id):
+				print "[SecConfigure] add", x[0], "to", lnb
+				lnbSat[lnb].append(x[0])
+
+		for x in range(1, 72):
 			if len(lnbSat[x]) > 0:
 				currLnb = config.Nims[slotid].advanced.lnb[x]
 				sec.addLNB()
-
+				if x == 71:
+					root_id = int(config.Nims[slotid].connectedTo.value)
+					sec.setLNBsatposdepends(root_id)
 				if x <= self.maxLnbNum:
 					sec.setLNBNum(x)
 
@@ -907,7 +916,7 @@ class NimManager:
 					root_id = nimmanager.sec.getRoot(n.slot_id, int(n.config.connectedTo.value))
 					if n.type == nimmanager.nim_slots[root_id].type: # check if connected from a DVB-S to DVB-S2 Nim or vice versa
 						return False
-				return True	
+				return True
 		return [x.slot for x in self.nim_slots if x.slot != exception and enabled(x)]
 
 	def __init__(self):
@@ -965,7 +974,7 @@ class NimManager:
 				nimList.remove(nim)
 		return nimList
 
-	def canDependOn(self, slotid):
+	def canDependOn(self, slotid, advanced_satposdepends=False):
 		type = self.getNimType(slotid)
 		type = type[:5] # DVB-S2X --> DVB-S, DVB-S2 --> DVB-S, DVB-T2 --> DVB-T, DVB-C2 --> DVB-C
 		nimList = self.getNimListOfType(type, slotid)
@@ -987,14 +996,17 @@ class NimManager:
 							nimHaveRotor = True
 							break
 			if nimHaveRotor:
-				alreadyConnected = False
-				for testnim in nimList:
-					testmode = self.getNimConfig(testnim)
-					if testmode.configMode.value == "satposdepends" and int(testmode.connectedTo.value) == int(nim):
-						alreadyConnected = True
-						break
-				if not alreadyConnected:
+				if advanced_satposdepends:
 					positionerList.append(nim)
+				else:
+					alreadyConnected = False
+					for testnim in nimList:
+						testmode = self.getNimConfig(testnim)
+						if testmode.configMode.value == "satposdepends" and int(testmode.connectedTo.value) == int(nim):
+							alreadyConnected = True
+							break
+					if not alreadyConnected:
+						positionerList.append(nim)
 		return positionerList
 
 	def getNimConfig(self, slotid):
@@ -1226,7 +1238,6 @@ def InitNimManager(nimmgr, update_slots = []):
 	longitude_orientation_choices = [("east", _("East")), ("west", _("West"))]
 	latitude_orientation_choices = [("north", _("North")), ("south", _("South"))]
 	turning_speed_choices = [("fast", _("Fast")), ("slow", _("Slow")), ("fast epoch", _("Fast epoch"))]
-
 	advanced_satlist_choices = nimmgr.satList + [
 		(3601, _('All satellites 1 (USALS)'), 1), (3602, _('All satellites 2 (USALS)'), 1),
 		(3603, _('All satellites 3 (USALS)'), 1), (3604, _('All satellites 4 (USALS)'), 1), (3605, _('Selecting satellites 1 (USALS)'), 1), (3606, _('Selecting satellites 2 (USALS)'), 1)]
@@ -1235,6 +1246,7 @@ def InitNimManager(nimmgr, update_slots = []):
 	advanced_tonemode_choices = [("band", _("Band")), ("on", _("On")), ("off", _("Off"))]
 	advanced_lnb_toneburst_choices = [("none", _("None")), ("A", _("A")), ("B", _("B"))]
 	advanced_lnb_allsat_diseqcmode_choices = [("1_2", _("1.2"))]
+	advanced_lnb_satposdepends_diseqcmode_choices = [("none", _("None")), ("1_0", _("1.0")), ("1_1", _("1.1"))]
 	advanced_lnb_diseqcmode_choices = [("none", _("None")), ("1_0", _("1.0")), ("1_1", _("1.1")), ("1_2", _("1.2"))]
 	advanced_lnb_commandOrder1_0_choices = [("ct", "DiSEqC 1.0, toneburst"), ("tc", "toneburst, DiSEqC 1.0")]
 	advanced_lnb_commandOrder_choices = [
@@ -1376,12 +1388,12 @@ def InitNimManager(nimmgr, update_slots = []):
 			section.increased_voltage = ConfigYesNo(False)
 			section.toneburst = ConfigSelection(advanced_lnb_toneburst_choices, "none")
 			section.longitude = ConfigNothing()
-			if lnb > 64:
+			if 64 < lnb < 71:
 				tmp = ConfigSelection(advanced_lnb_allsat_diseqcmode_choices, "1_2")
 				tmp.section = section
 				configDiSEqCModeChanged(tmp)
 			else:
-				tmp = ConfigSelection(advanced_lnb_diseqcmode_choices, "none")
+				tmp = ConfigSelection(lnb == 71 and advanced_lnb_satposdepends_diseqcmode_choices or advanced_lnb_diseqcmode_choices, "none")
 				tmp.section = section
 				tmp.addNotifier(configDiSEqCModeChanged)
 			section.diseqcMode = tmp
@@ -1475,11 +1487,11 @@ def InitNimManager(nimmgr, update_slots = []):
 			lnb.addNotifier(configLNBChanged)
 			tmp.lnb = lnb
 			nim.advanced.sat[x[0]] = tmp
-		for x in range(3601, 3607):
+		for x in range(3601, 3608):
 			tmp = ConfigSubsection()
 			tmp.voltage = ConfigSelection(advanced_voltage_choices, "polarization")
 			tmp.tonemode = ConfigSelection(advanced_tonemode_choices, "band")
-			tmp.usals = ConfigYesNo(default=True)
+			tmp.usals = ConfigYesNo(True)
 			tmp.userSatellitesList = ConfigText('[]')
 			tmp.rotorposition = ConfigInteger(default=1, limits=(1, 255))
 			lnbnum = 65 + x - 3601
