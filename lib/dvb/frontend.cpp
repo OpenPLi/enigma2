@@ -759,6 +759,15 @@ int eDVBFrontend::closeFrontend(bool force, bool no_delayed)
 	if (m_fd >= 0)
 	{
 		eDebugNoSimulate("[eDVBFrontend%d] close frontend", m_dvbid);
+
+		long link = m_data[ADVANCED_SATPOSDEPENDS_LINK];
+		if (link != -1)
+		{
+			m_data[ADVANCED_SATPOSDEPENDS_LINK] = -1;
+			if (m_sec && !m_simulate)
+				m_sec->resetAdvancedsatposdependsRoot(link);
+		}
+
 		if (m_data[SATCR] != -1)
 		{
 			if (!no_delayed)
@@ -2752,7 +2761,7 @@ RESULT eDVBFrontend::setData(int num, long val)
 	return -EINVAL;
 }
 
-int eDVBFrontend::isCompatibleWith(ePtr<iDVBFrontendParameters> &feparm)
+int eDVBFrontend::isCompatibleWith(ePtr<iDVBFrontendParameters> &feparm, bool is_configured_sat)
 {
 	int type;
 	int score = 0;
@@ -2785,7 +2794,13 @@ int eDVBFrontend::isCompatibleWith(ePtr<iDVBFrontendParameters> &feparm)
 		{
 			return 0;
 		}
+
 		score = m_sec ? m_sec->canTune(parm, this, 1 << m_slotid) : 0;
+
+		/* additional check is orbital position configured for busy tuner use type SATPOS_DEPENDS_PTR/ADVANCED_SATPOSDEPENDS_ROOT(LINK) */
+		if (is_configured_sat && !score && m_sec && m_sec->isOrbitalPositionConfigured(parm.orbital_position))
+			score = 1;
+
 		if (score > 1 && parm.system == eDVBFrontendParametersSatellite::System_DVB_S && can_handle_dvbs2)
 		{
 			/* prefer to use an S tuner, try to keep S2 free for S2 transponders */
