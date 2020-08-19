@@ -108,6 +108,8 @@ public:
 
 	void setContent(iListboxContent *content);
 
+	void allowNativeKeys(bool allow);
+
 /*	enum Movement {
 		moveUp,
 		moveDown,
@@ -190,6 +192,9 @@ private:
 	int m_itemheight;
 	int m_items_per_page;
 	int m_selection_enabled;
+
+	bool m_native_keys_bound;
+
 	ePtr<iListboxContent> m_content;
 	eSlider *m_scrollbar;
 	eListboxStyle m_style;

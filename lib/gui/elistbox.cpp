@@ -7,15 +7,13 @@ eListbox::eListbox(eWidget *parent) :
 	eWidget(parent), m_scrollbar_mode(showNever), m_prev_scrollbar_page(-1),
 	m_content_changed(false), m_enabled_wrap_around(false), m_scrollbar_width(20),
 	m_top(0), m_selected(0), m_itemheight(25),
-	m_items_per_page(0), m_selection_enabled(1), m_scrollbar(nullptr)
+	m_items_per_page(0), m_selection_enabled(1), m_scrollbar(nullptr), m_native_keys_bound(false)
 {
 	memset(static_cast<void*>(&m_style), 0, sizeof(m_style));
 	m_style.m_text_offset = ePoint(1,1);
 //	setContent(new eListboxStringContent());
 
-	ePtr<eActionMap> ptr;
-	eActionMap::getInstance(ptr);
-	ptr->bindAction("ListboxActions", 0, 0, this);
+	allowNativeKeys(true);
 }
 
 eListbox::~eListbox()
@@ -23,9 +21,7 @@ eListbox::~eListbox()
 	if (m_scrollbar)
 		delete m_scrollbar;
 
-	ePtr<eActionMap> ptr;
-	eActionMap::getInstance(ptr);
-	ptr->unbindAction(this, 0);
+	allowNativeKeys(false);
 }
 
 void eListbox::setScrollbarMode(int mode)
@@ -63,6 +59,20 @@ void eListbox::setContent(iListboxContent *content)
 	if (content)
 		m_content->setListbox(this);
 	entryReset();
+}
+
+void eListbox::allowNativeKeys(bool allow)
+{
+	if (m_native_keys_bound != allow)
+	{
+		ePtr<eActionMap> ptr;
+		eActionMap::getInstance(ptr);
+		if (allow)
+			ptr->bindAction("ListboxActions", 0, 0, this);
+		else
+			ptr->unbindAction(this, 0);
+		m_native_keys_bound = allow;
+	}
 }
 
 bool eListbox::atBegin()
