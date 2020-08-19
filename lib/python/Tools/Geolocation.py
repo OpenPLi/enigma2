@@ -65,6 +65,8 @@ def InitGeolocation():
 					print "[Geolocation] Error: Geolocation data not available! (Reason: %s)" % err.reason
 			except ValueError:
 				print "[Geolocation] Error: Geolocation data returned can not be processed!"
+			except Exception:
+				print "[Geolocation] Error: Geolocation network connection failed!"
 		else:
 			print "[Geolocation] Note: Geolocation has already been run for this boot."
 	else:
