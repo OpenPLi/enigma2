@@ -149,12 +149,21 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 				elif self.nimConfig.configMode.value == "advanced":
 					advanced_satposdepends_satlist_choices = (3607, _('Additional cable of motorized LNB'), 1)
 					advanced_satlist_choices = self.nimConfig.advanced.sats.choices.choices
+					advanced_setchoices = False
 					if nimmanager.canDependOn(self.slotid, True):
 						if advanced_satposdepends_satlist_choices not in advanced_satlist_choices:
 							advanced_satlist_choices.append(advanced_satposdepends_satlist_choices)
+							advanced_setchoices = True
 					elif advanced_satposdepends_satlist_choices in advanced_satlist_choices:
 						advanced_satlist_choices.remove(advanced_satposdepends_satlist_choices)
-					self.nimConfig.advanced.sats.setChoices(advanced_satlist_choices, 192)
+						advanced_setchoices = True
+					if advanced_setchoices:
+						default_orbpos = None
+						for x in self.nimConfig.advanced.sat.keys():
+							if x == 192:
+								default_orbpos = "192"
+								break
+						self.nimConfig.advanced.sats.setChoices(advanced_satlist_choices, default=default_orbpos)
 					self.advancedSatsEntry = getConfigListEntry(self.indent % _("Satellite"), self.nimConfig.advanced.sats, _("Select the satellite you want to configure. Once that satellite is configured you can select and configure other satellites that will be accessed using this same tuner."))
 					self.list.append(self.advancedSatsEntry)
 					current_config_sats = self.nimConfig.advanced.sats.value

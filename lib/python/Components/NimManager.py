@@ -295,9 +295,17 @@ class SecConfigure:
 		lnb = int(config.Nims[slotid].advanced.sat[3607].lnb.value)
 		if lnb != 0:
 			root_id = int(config.Nims[slotid].connectedTo.value)
-			for x in self.NimManager.getRotorSatListForNim(root_id):
-				print "[SecConfigure] add", x[0], "to", lnb
-				lnbSat[lnb].append(x[0])
+			rotor_sat_list = self.NimManager.getRotorSatListForNim(root_id)
+			if rotor_sat_list:
+				for x in rotor_sat_list:
+					print "[SecConfigure] add", x[0], "to", lnb
+					lnbSat[lnb].append(x[0])
+			else:
+				config.Nims[slotid].advanced.sat[3607].lnb.value = "0"
+				config.Nims[slotid].advanced.sat[3607].lnb.save()
+				if len(self.NimManager.getSatListForNim(slotid)) < 1:
+					config.Nims[slotid].configMode.value = "nothing"
+					config.Nims[slotid].configMode.save()
 
 		for x in range(1, 72):
 			if len(lnbSat[x]) > 0:
