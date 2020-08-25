@@ -188,7 +188,8 @@ int eDVBSatelliteEquipmentControl::canTune(const eDVBFrontendParametersSatellite
 					}
 					else
 					{
-						ret -= abs(rotor_orbital_position - sat.orbital_position) + 10;
+						ret -= 10;
+						satcount = old_satcount + 1;
 					}
 					eSecDebugNoSimulate("[eDVBSatelliteEquipmentControl] ret1 %d", ret);
 				}
