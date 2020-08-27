@@ -51,13 +51,10 @@ class SkinSelector(Screen, HelpableScreen):
 	]
 
 	def __init__(self, session, screenTitle=_("GUI Skin")):
-		Screen.__init__(self, session)
+		Screen.__init__(self, session, mandatoryWidgets=["description", "skins"])
 		HelpableScreen.__init__(self)
 
 		element = domScreens.get("SkinSelector", (None, None))[0]
-		if element and 'introduction' in [widget.get('source', None) for widget in element.findall("widget")]:
-			#screen from loaded skin is  not compatible so remove the screen
-			del domScreens["SkinSelector"]
 		Screen.setTitle(self, screenTitle)
 		self.rootDir = resolveFilename(SCOPE_SKIN)
 		self.config = config.skin.primary_skin
