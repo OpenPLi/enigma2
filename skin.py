@@ -994,7 +994,11 @@ def readSkin(screen, skin, names, desktop):
 	if myScreen is None:  # Otherwise try embedded skin.
 		myScreen = getattr(screen, "parsedSkin", None)
 	if myScreen is None and getattr(screen, "skin", None):  # Try uncompiled embedded skin.
-		skin = screen.skin
+		if isinstance(screen.skin, list):
+			print("[Skin] Resizable embedded skin %s template found!" % name)
+			skin = screen.skin[0] % tuple([x * getDesktop(0).size().height() / 720 for x in screen.skin[1:]])
+		else:
+			skin = screen.skin
 		print("[Skin] Parsing embedded skin '%s'." % name)
 		if isinstance(skin, tuple):
 			for s in skin:
