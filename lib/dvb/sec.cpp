@@ -246,7 +246,7 @@ int eDVBSatelliteEquipmentControl::canTune(const eDVBFrontendParametersSatellite
 				}
 
 				// advanced satposdepends in use?
-				if (rotor && advanced_satposdepends_ptr != -1 && rotor_pos != -1 && rotor_pos != sat.orbital_position)
+				if (rotor && advanced_satposdepends_ptr != -1 && rotor_pos != -1 && rotor_pos != sat.orbital_position && tunerAdvancedsatposdependsInUse(advanced_satposdepends_ptr))
 				{
 					ret = 0;
 					satcount = old_satcount;
@@ -1800,6 +1800,21 @@ RESULT eDVBSatelliteEquipmentControl::setTunerDepends(int tu1, int tu2)
 	}
 
 	return -1;
+}
+
+bool eDVBSatelliteEquipmentControl::tunerAdvancedsatposdependsInUse(int root)
+{
+	long advanced_satposdepends_link = -1;
+
+	for (eSmartPtrList<eDVBRegisteredFrontend>::iterator it(m_avail_frontends.begin()); it != m_avail_frontends.end(); ++it)
+	{
+		it->m_frontend->getData(eDVBFrontend::ADVANCED_SATPOSDEPENDS_LINK, advanced_satposdepends_link);
+		if (advanced_satposdepends_link != -1 && advanced_satposdepends_link == root && it->m_inuse)
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 int eDVBSatelliteEquipmentControl::getRotorAdvancedsatposdependsPosition(int advanced_satposdepends)
