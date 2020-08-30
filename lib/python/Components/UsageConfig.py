@@ -82,18 +82,6 @@ def InitUsageConfig():
 	config.usage.menu_sort_mode = ConfigSelection(default = "default", choices = [("a_z", _("alphabetical")), ("default", _("Default")), ("user", _("user defined")), ("user_hidden", _("user defined hidden"))])
 	config.usage.menu_show_numbers = ConfigSelection(default = "no", choices = [("no", _("no")), ("menu&plugins", _("in menu and plugins")), ("menu", _("in menu only")), ("plugins", _("in plugins only"))])
 	config.usage.showScreenPath = ConfigSelection(default="small", choices=[("off", _("Disabled")), ("small", _("Small")), ("large", _("Large"))])
-	# The following code is to be short lived and exists to transition
-	# settings from the old config.usage.menu_path to the new
-	# config.usage.showScreenPath as this is the value to now shared
-	# by all images.  Thise code will transition the setting and then
-	# remove the old entry from user's settings files.
-	config.usage.menu_path = ConfigSelection(default="small", choices=[("off", _("Disabled")), ("small", _("Small")), ("large", _("Large"))])
-	if config.usage.menu_path.value != config.usage.menu_path.default:
-		config.usage.showScreenPath.value = config.usage.menu_path.value
-		config.usage.menu_path.value = config.usage.menu_path.default
-		config.usage.save()
-		print("[UserConfig] DEBUG: The 'menu_path' setting of '%s' has been transferred to 'showScreenPath'." % config.usage.showScreenPath.value)
-	# End of temporary code.
 	config.usage.enable_tt_caching = ConfigYesNo(default = True)
 	config.usage.sort_settings = ConfigYesNo(default=False)
 	choicelist = []
