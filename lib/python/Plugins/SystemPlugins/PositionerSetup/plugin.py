@@ -1,4 +1,4 @@
-from enigma import eTimer, eDVBSatelliteEquipmentControl, eDVBResourceManager, eDVBDiseqcCommand, eDVBFrontendParametersSatellite, eDVBFrontendParameters, iDVBFrontend
+from enigma import eTimer, eDVBSatelliteEquipmentControl, eDVBResourceManager, eDVBDiseqcCommand, eDVBFrontendParametersSatellite, iDVBFrontend
 
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -108,9 +108,12 @@ class PositionerSetup(Screen):
 					self.oldref_stop = True
 				else:
 					for n in nimmanager.nim_slots:
-						if n.config_mode in ("loopthrough", "satposdepends"):
-							root_id = nimmanager.sec.getRoot(n.slot_id, int(n.config.connectedTo.value))
-							if int(n.config.connectedTo.value) == self.feid:
+						try:
+							advanced_satposdepends = n.config_mode == 'advanced' and int(n.config.advanced.sat[3607].lnb.value) != 0
+						except:
+							advanced_satposdepends = False
+						if n.config_mode in ("loopthrough", "satposdepends") or advanced_satposdepends:
+							if n.config.connectedTo.value and int(n.config.connectedTo.value) == self.feid:
 								self.oldref_stop = True
 				if self.oldref_stop:
 					self.session.nav.stopService() # try to disable foreground service
@@ -212,7 +215,7 @@ class PositionerSetup(Screen):
 		if self.rotor_pos:
 			if hasattr(eDVBSatelliteEquipmentControl.getInstance(), "getTargetOrbitalPosition"):
 				current_pos = eDVBSatelliteEquipmentControl.getInstance().getTargetOrbitalPosition()
-				if current_pos != 0 and current_pos != config.misc.lastrotorposition.value:
+				if current_pos in self.availablesats and current_pos != config.misc.lastrotorposition.value:
 					config.misc.lastrotorposition.value = current_pos
 					config.misc.lastrotorposition.save()
 			text = _("Current rotor position: ") + self.OrbToStr(config.misc.lastrotorposition.value)
@@ -701,7 +704,7 @@ class PositionerSetup(Screen):
 		elif entry == "storage":
 			if self.advanced and self.getUsals() is False:
 				self.printMsg(_("Allocate unused memory index"))
-				while(True):
+				while True:
 					if not len(self.allocatedIndices):
 						for sat in self.availablesats:
 							usals = self.advancedsats[sat].usals.value
@@ -1599,7 +1602,7 @@ def PositionerSetupStart(menuid, **kwargs):
 		return []
 
 def Plugins(**kwargs):
-	if (nimmanager.hasNimType("DVB-S")):
+	if nimmanager.hasNimType("DVB-S"):
 		return PluginDescriptor(name=_("Positioner setup"), description = _("Setup your positioner"), where = PluginDescriptor.WHERE_MENU, needsRestart = False, fnc = PositionerSetupStart)
 	else:
 		return []
