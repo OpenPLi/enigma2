@@ -216,7 +216,7 @@ class choicesList(object):  # XXX: we might want a better name for this
 
 	def index(self, value):
 		try:
-			return self.__list__().index(value)
+			return list(map(str, self.__list__())).index(str(value))
 		except (ValueError, IndexError):
 			# occurs e.g. when default is not in list
 			return 0
@@ -281,12 +281,31 @@ class descriptionList(choicesList):  # XXX: we might want a better name for this
 			self.choices[index] = value
 
 #
-# ConfigSelection is a "one of.."-type.
-# it has the "choices", usually a list, which contains
-# (id, desc)-tuples (or just only the ids, in case the id
-# will be used as description)
+# ConfigSelection is a "one of.."-type.  it has the "choices", usually
+# a list, which contains (id, desc)-tuples (or just only the ids, in
+# case str(id) will be used as description)
 #
-# all ids MUST be plain strings.
+# The ids in "choices" may be of any type, provided that for there
+# is a one-to-one mapping between x and str(x) for every x in "choices".
+# The ids do not necessarily all have to have the same type, but
+# managing that is left to the programmer.  For example:
+#  choices=[1, 2, "3", "4"] is permitted, but
+#  choices=[1, 2, "1", "2"] is not,
+# because str(1) == "1" and str("1") =="1", and because str(2) == "2"
+# and str("2") == "2".
+#
+# This requirement is not enforced by the code.
+#
+# config.item.value and config.item.getValue always return an object
+# of the type of the selected item.
+#
+# When assigning to config.item.value or using config.item.setValue,
+# where x is in the "choices" list, either x or str(x) may be used
+# to set the choice. The form of the assignment will not affect the
+# choices list or the type returned by the ConfigSelection instance.
+#
+# This replaces the former requirement that all ids MUST be plain
+# strings, but is compatible with that requirement.
 #
 class ConfigSelection(ConfigElement):
 	def __init__(self, choices, default=None, graphic=True):
@@ -311,8 +330,8 @@ class ConfigSelection(ConfigElement):
 			self.value = default
 
 	def setValue(self, value):
-		if value in self.choices:
-			self._value = value
+		if str(value) in map(str, self.choices):
+			self._value = self.choices[self.choices.index(value)]
 		else:
 			self._value = self.default
 		self._descr = None
@@ -323,6 +342,13 @@ class ConfigSelection(ConfigElement):
 
 	def getValue(self):
 		return self._value
+
+	def load(self):
+		sv = self.saved_value
+		if sv is None:
+			self.value = self.default
+		else:
+			self.value = self.choices[self.choices.index(sv)]
 
 	def setCurrentText(self, text):
 		i = self.choices.index(self.value)
