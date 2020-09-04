@@ -261,9 +261,9 @@ class descriptionList(choicesList):  # XXX: we might want a better name for this
 		if self.type == choicesList.LIST_TYPE_LIST:
 			for x in self.choices:
 				if isinstance(x, tuple):
-					if x[0] == index:
+					if str(x[0]) == str(index):
 						return str(x[1])
-				elif x == index:
+				elif str(x) == str(index):
 					return str(x)
 			return str(index)  # Fallback!
 		else:
