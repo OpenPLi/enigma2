@@ -424,17 +424,14 @@ class TerrestrialTransponderSearchSupport:
 						parm.system = 'DVB-T2' in data[1] and parm.System_DVB_T_T2 or parm.System_DVB_T
 						parm.plp_id = 0
 						self.__tlist.append(parm)
-					tmpstr = _("Try to find used transponders in terrestrial network... please wait...")
-					tmpstr += "\n\n"
+					tmpstr = _("Try to find used transponders in terrestrial network... please wait...") + "\n\n"
 					if 'MODE' in line:
-						tmpstr += data[3]
-						tmpstr += " kHz "
+						tmpstr += data[3] + " kHz"
 					else:
-						title = _("Succeeded this device supports Hardware Blindscan...\nPlease wait for the background scan to finish...")
+						title = _("Sundtek - hardware blind scan in progress.\nPlease wait(3-20 min) for the scan to finish.")
 						if "Succeeded this device supports Hardware Blindscan" in line: 
-							line = "'Sundtek' - " + title
-						tmpstr += line
-			self.terrestrial_search_session["text"].setText(tmpstr)
+							tmpstr += title
+					self.terrestrial_search_session["text"].setText(tmpstr)
 		else:
 			self.terrestrial_search_data += str
 
