@@ -515,6 +515,7 @@ class NIM(object):
 		self.i2c = i2c
 		self.frontend_id = frontend_id
 		self.__is_empty = is_empty
+		self.ignore_delsys_info = "Sundtek" in description
 
 		self.compatible = {
 				None: (None,),
@@ -530,7 +531,7 @@ class NIM(object):
 
 		# get multi type using delsys information
 		self.combined = False
-		if self.frontend_id is not None:
+		if self.frontend_id is not None and not self.ignore_delsys_info:
 			types = [type for type in nim_types if eDVBResourceManager.getInstance().frontendIsCompatible(self.frontend_id, type)]
 			if "DVB-T2" in types:
 				# DVB-T2 implies DVB-T support
