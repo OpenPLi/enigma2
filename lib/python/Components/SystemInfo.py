@@ -1,8 +1,5 @@
 import re
-
 from enigma import Misc_Options, eDVBCIInterfaces, eDVBResourceManager, eGetEnigmaDebugLvl
-
-from Components.Console import Console
 from Tools.Directories import SCOPE_PLUGINS, fileCheck, fileExists, fileHas, pathExists, resolveFilename
 from Tools.HardwareInfo import HardwareInfo
 
@@ -38,6 +35,13 @@ def getBootdevice():
 		dev = dev[:-1]
 	return dev
 
+def getNameOverlap(systeminfo="", description=""):
+	current_overlap = SystemInfo.get(str(systeminfo), [])
+	if current_overlap and description:
+		for name in current_overlap:
+			if name in description:
+				return True
+	return False
 
 model = HardwareInfo().get_device_model()
 SystemInfo["InDebugMode"] = eGetEnigmaDebugLvl() >= 4
@@ -130,3 +134,5 @@ SystemInfo["CanDownmixAAC"] = fileHas("/proc/stb/audio/aac_choices", "downmix")
 SystemInfo["HDMIAudioSource"] = fileCheck("/proc/stb/hdmi/audio_source")
 SystemInfo["BootDevice"] = getBootdevice()
 SystemInfo["FbcTunerPowerAlwaysOn"] = HardwareInfo().get_device_model() in ("vusolo4k", "vuduo4k", "vuultimo4k", "vuuno4k", "vuuno4kse", "gbquad4k", "gbue4k")
+SystemInfo["TunerIgnoreDelsysInfo"] = ["Sundtek",]
+SystemInfo["TunerIsMultistream"] = ["TBS",]
