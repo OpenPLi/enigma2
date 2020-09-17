@@ -530,7 +530,7 @@ class NIM(object):
 
 		# get multi type using delsys information
 		self.combined = False
-		if self.frontend_id is not None:
+		if self.frontend_id is not None and not [tunerTender for tunerTender in SystemInfo["TunerIgnoreDelsysInfo"] if tunerTender in description]:
 			types = [type for type in nim_types if eDVBResourceManager.getInstance().frontendIsCompatible(self.frontend_id, type)]
 			if "DVB-T2" in types:
 				# DVB-T2 implies DVB-T support
