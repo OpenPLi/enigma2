@@ -35,12 +35,16 @@ def getBootdevice():
 		dev = dev[:-1]
 	return dev
 
-def getNameOverlap(systeminfo="", description=""):
-	current_overlap = SystemInfo.get(str(systeminfo), [])
-	if current_overlap and description:
-		for name in current_overlap:
-			if name in description:
-				return True
+def getMultiFuncSysteminfoCheck(systeminfo="", description=""):
+	is_found = SystemInfo.get(str(systeminfo))
+	if is_found is not None:
+		if isinstance(is_found, list):
+			if is_found and description:
+				for name in is_found:
+					if name in description:
+						return True
+		elif:
+			return is_found
 	return False
 
 model = HardwareInfo().get_device_model()

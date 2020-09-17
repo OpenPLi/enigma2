@@ -1,6 +1,6 @@
 import os
 
-from SystemInfo import SystemInfo, getNameOverlap
+from SystemInfo import SystemInfo, getMultiFuncSysteminfoCheck
 from Tools.HardwareInfo import HardwareInfo
 from Tools.BoundFunction import boundFunction
 
@@ -515,7 +515,6 @@ class NIM(object):
 		self.i2c = i2c
 		self.frontend_id = frontend_id
 		self.__is_empty = is_empty
-		self.ignore_delsys_info = getNameOverlap("TunerIgnoreDelsysInfo", description)
 
 		self.compatible = {
 				None: (None,),
@@ -531,7 +530,7 @@ class NIM(object):
 
 		# get multi type using delsys information
 		self.combined = False
-		if self.frontend_id is not None and not self.ignore_delsys_info:
+		if self.frontend_id is not None and not getMultiFuncSysteminfoCheck("TunerIgnoreDelsysInfo", description):
 			types = [type for type in nim_types if eDVBResourceManager.getInstance().frontendIsCompatible(self.frontend_id, type)]
 			if "DVB-T2" in types:
 				# DVB-T2 implies DVB-T support
@@ -632,7 +631,7 @@ class NIM(object):
 		# HACK due to poor support for VTUNER_SET_FE_INFO
 		# When vtuner does not accept fe_info we have to fallback to detection using tuner name
 		# More tuner names will be added when confirmed as multistream (FE_CAN_MULTISTREAM)
-		if not multistream and getNameOverlap("TunerIsMultistream", self.description):
+		if not multistream and getMultiFuncSysteminfoCheck("TunerIsMultistream", self.description):
 			multistream = True
 		return multistream
 
