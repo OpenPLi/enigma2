@@ -1,5 +1,8 @@
 import re
+
 from enigma import Misc_Options, eDVBCIInterfaces, eDVBResourceManager, eGetEnigmaDebugLvl
+
+from Components.Console import Console
 from Tools.Directories import SCOPE_PLUGINS, fileCheck, fileExists, fileHas, pathExists, resolveFilename
 from Tools.HardwareInfo import HardwareInfo
 
@@ -127,4 +130,3 @@ SystemInfo["CanDownmixAAC"] = fileHas("/proc/stb/audio/aac_choices", "downmix")
 SystemInfo["HDMIAudioSource"] = fileCheck("/proc/stb/hdmi/audio_source")
 SystemInfo["BootDevice"] = getBootdevice()
 SystemInfo["FbcTunerPowerAlwaysOn"] = HardwareInfo().get_device_model() in ("vusolo4k", "vuduo4k", "vuultimo4k", "vuuno4k", "vuuno4kse", "gbquad4k", "gbue4k")
-SystemInfo["TunerIgnoreDelsysInfo"] = ["Sundtek",]
