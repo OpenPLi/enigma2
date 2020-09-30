@@ -56,6 +56,7 @@ public:
 		celServiceEventProgressbar,
 		celServiceName,
 		celServiceInfo, // "now" event
+		celServiceNextInfo, // "next" event
 		celServiceTypePixmap,
 		celElements
 	};
@@ -85,7 +86,7 @@ public:
 	int getItemHeight() { return m_itemheight; }
 	void setItemHeight(int height);
 	void setHideNumberMarker(bool doHide) { m_hide_number_marker = doHide; }
-	void setShowTwoLines(bool twoLines) { m_show_two_lines = twoLines; }
+	void setShowTwoLines(int mode) { m_show_two_lines = mode; }
 	void setServiceTypeIconMode(int mode) { m_servicetype_icon_mode = mode; }
 	void setCryptoIconMode(int mode) { m_crypto_icon_mode = mode; }
 	void setRecordIndicatorMode(int mode) { m_record_indicator_mode = mode; }
@@ -94,6 +95,8 @@ public:
 	void setProgressbarBorderWidth(int value) { m_progressbar_border_width = value; }
 	void setNonplayableMargins(int value) { m_nonplayable_margins = value; }
 	void setItemsDistances(int value) { m_items_distances = value; }
+
+	void setNextTitle(const std::string &string) { m_next_title = string; }
 
 	static void setGetPiconNameFunc(SWIG_PYOBJECT(ePyObject) func);
 
@@ -109,6 +112,10 @@ public:
 		eventborderForegroundSelected,
 		eventForegroundFallback,
 		eventForegroundSelectedFallback,
+		eventNextForeground,
+		eventNextForegroundSelected,
+		eventNextForegroundFallback,
+		eventNextForegroundSelectedFallback,
 		serviceItemFallback,
 		serviceSelectedFallback,
 		serviceEventProgressbarColor,
@@ -175,7 +182,7 @@ private:
 
 	int m_itemheight;
 	bool m_hide_number_marker;
-	bool m_show_two_lines;
+	int m_show_two_lines;
 	int m_servicetype_icon_mode;
 	int m_crypto_icon_mode;
 	int m_record_indicator_mode;
@@ -184,6 +191,8 @@ private:
 	int m_progressbar_border_width;
 	int m_nonplayable_margins;
 	int m_items_distances;
+
+	std::string m_next_title;
 };
 
 #endif
