@@ -329,7 +329,7 @@ class ServiceList(GUIComponent):
 
 	def setMode(self, mode):
 		two_lines_val = config.usage.servicelist_twolines.value
-		show_two_lines = two_lines_val != "no" and mode == self.MODE_FAVOURITES
+		show_two_lines = int(two_lines_val) and mode == self.MODE_FAVOURITES
 		if config.usage.servicelist_number_of_services.value == "by skin":
 			ItemHeight = self.ItemHeight * (2 if show_two_lines else 1)
 			ServiceNameFont = self.ServiceNameFont
