@@ -207,6 +207,8 @@ class choicesList(object):  # XXX: we might want a better name for this
 		return len(self.choices) or 1
 
 	def __getitem__(self, index):
+		if index == 0 and not self.choices:
+			return ""
 		if self.type == choicesList.LIST_TYPE_LIST:
 			ret = self.choices[index]
 			if isinstance(ret, tuple):
@@ -222,6 +224,8 @@ class choicesList(object):  # XXX: we might want a better name for this
 			return 0
 
 	def __setitem__(self, index, value):
+		if index == 0 and not self.choices:
+			return
 		if self.type == choicesList.LIST_TYPE_LIST:
 			orig = self.choices[index]
 			if isinstance(orig, tuple):
@@ -270,6 +274,8 @@ class descriptionList(choicesList):  # XXX: we might want a better name for this
 			return str(self.choices.get(index, ""))
 
 	def __setitem__(self, index, value):
+		if not self.choices:
+			return
 		if self.type == choicesList.LIST_TYPE_LIST:
 			i = self.index(index)
 			orig = self.choices[i]
