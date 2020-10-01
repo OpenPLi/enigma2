@@ -23,7 +23,7 @@ def InitUsageConfig():
 		refreshServiceList()
 	config.usage.alternative_number_mode.addNotifier(alternativeNumberModeChange)
 
-	config.usage.servicelist_twolines = ConfigSelection(default = "0", choices = [("0", _("None")), ("1", _("two lines")), ("2", _("two lines and next event"))])
+	config.usage.servicelist_twolines = ConfigSelection(default = "0", choices = [("0", _("Single line mode")), ("1", _("Two lines")), ("2", _("Two lines and next event"))])
 	config.usage.servicelist_twolines.addNotifier(refreshServiceList)
 
 	config.usage.hide_number_markers = ConfigYesNo(default = True)
