@@ -55,8 +55,8 @@ public:
 		celFolderPixmap,
 		celServiceEventProgressbar,
 		celServiceName,
-		celServiceInfo, // "now" event
 		celServiceNextInfo, // "next" event
+		celServiceInfo, // "now" event
 		celServiceTypePixmap,
 		celElements
 	};
