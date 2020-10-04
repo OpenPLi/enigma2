@@ -387,7 +387,7 @@ class ServiceList(GUIComponent):
 			self.l.setNextTitle(nextTitle)
 		if "perc" in config.usage.show_event_progress_in_servicelist.value:
 			self.l.setElementFont(self.l.celServiceEventProgressbar, ServiceInfoFont)
-		self.l.setShowTwoLines(int(two_lines_val))
+		self.l.setShowTwoLines(show_two_lines and int(two_lines_val) or 0)
 		self.l.setHideNumberMarker(config.usage.hide_number_markers.value)
 		self.l.setServiceTypeIconMode(int(config.usage.servicetype_icon_mode.value))
 		self.l.setCryptoIconMode(int(config.usage.crypto_icon_mode.value))
