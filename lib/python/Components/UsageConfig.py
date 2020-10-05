@@ -285,10 +285,10 @@ def InitUsageConfig():
 	atsc_nims.insert(1,("-1", _("auto")))
 	config.usage.recording_frontend_priority_atsc = ConfigSelection(default = "-2", choices = atsc_nims)
 
-	SystemInfo["DVB-S_priority_tuner_available"] = len(dvbs_nims) > 1
-	SystemInfo["DVB-T_priority_tuner_available"] = len(dvbt_nims) > 1
-	SystemInfo["DVB-C_priority_tuner_available"] = len(dvbc_nims) > 1
-	SystemInfo["ATSC_priority_tuner_available"] = len(atsc_nims) > 1
+	SystemInfo["DVB-S_priority_tuner_available"] = len(dvbs_nims) > 3 and any(len(i) > 2 for i in (dvbt_nims, dvbc_nims, atsc_nims))
+	SystemInfo["DVB-T_priority_tuner_available"] = len(dvbt_nims) > 3 and any(len(i) > 2 for i in (dvbs_nims, dvbc_nims, atsc_nims))
+	SystemInfo["DVB-C_priority_tuner_available"] = len(dvbc_nims) > 3 and any(len(i) > 2 for i in (dvbs_nims, dvbt_nims, atsc_nims))
+	SystemInfo["ATSC_priority_tuner_available"] = len(atsc_nims) > 3 and any(len(i) > 2 for i in (dvbs_nims, dvbc_nims, dvbt_nims))
 
 	config.misc.disable_background_scan = ConfigYesNo(default = False)
 	config.misc.use_ci_assignment = ConfigYesNo(default = False)
