@@ -385,7 +385,7 @@ def configStrings(iface):
 		encryption = config.plugins.wlan.encryption.value
 		psk = config.plugins.wlan.psk.value
 		essid = config.plugins.wlan.essid.value
-		ret += '\tpre-up wl-config.sh -m ' + encryption.lower() + ' -k ' + psk + ' -s "' + essid + '" \n'
+		ret += '\tpre-up wl-config.sh -m ' + encryption.lower() + ' -k "' + psk + '" -s "' + essid + '" \n'
 		ret += '\tpost-down wl-down.sh\n'
 	else:
 		if driver == 'madwifi' and config.plugins.wlan.hiddenessid.value:

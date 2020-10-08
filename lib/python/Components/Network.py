@@ -176,7 +176,7 @@ class Network:
 			safe_ifaces = self.ifaces.copy()
 			for intf in safe_ifaces:
 				if 'preup' in safe_ifaces[intf] and safe_ifaces[intf]['preup'] is not False:
-					safe_ifaces[intf]['preup'] = re.sub(' -k \S* ', ' -k ********* ', safe_ifaces[intf]['preup'])
+					safe_ifaces[intf]['preup'] = re.sub(' -k "\S*" ', ' -k ********* ', safe_ifaces[intf]['preup'])
 			print "self.ifaces after loading:", safe_ifaces
 			self.config_ready = True
 			self.msgPlugins()
@@ -232,8 +232,8 @@ class Network:
 			if iface not in self.lan_interfaces:
 				if iface == "eth1":
 					name = _("VLAN connection")
-				else:	
-					name = _("LAN connection")	
+				else:
+					name = _("LAN connection")
 				if len(self.lan_interfaces) and not iface == "eth1":
 					name += " " + str(len(self.lan_interfaces)+1)
 				self.lan_interfaces.append(iface)
