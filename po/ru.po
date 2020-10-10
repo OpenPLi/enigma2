@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-12 12:17+0200\n"
+"POT-Creation-Date: 2020-10-10 21:34+0200\n"
 "PO-Revision-Date: 2020-09-06 21:40+0300\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: openPLi Dimitrij\n"
@@ -844,6 +844,9 @@ msgstr "Добавить в родительский контроль"
 msgid "Add/remove change timer for current event"
 msgstr "Добавить/удалить/изменить таймер для текущего события"
 
+msgid "Additional cable of motorized LNB"
+msgstr "Дополнительный кабель от LNB на моторе"
+
 msgid "Additional motor options allow you to enter details from your motor's spec sheet so enigma can work out how long it will take to move the dish from one satellite to another satellite."
 msgstr "Дополнительные опции позволяют вводить детали из спецификации вашего мотора, поэтому энигма может подсчитать, сколько времени потребуется, чтобы переместить тарелку с одного спутника на другой."
 
@@ -1251,6 +1254,9 @@ msgstr "Авто выбор языка"
 
 msgid "Auto play blu-ray file"
 msgstr "Авто проигрывание blu-ray файла"
+
+msgid "Auto play last service in radio mode"
+msgstr "Авто включение последнего сервиса в режиме радио"
 
 msgid "Auto scart switching"
 msgstr "Автоматическое переключение SCART"
@@ -5793,6 +5799,9 @@ msgstr "PGS файл"
 msgid "PGS file"
 msgstr "PGS файл"
 
+msgid "PID Filtering"
+msgstr "PID фильтрация(для высокоскоростных частот)"
+
 msgid "PIN code needed"
 msgstr "Необходим PIN-код"
 
@@ -6667,9 +6676,6 @@ msgstr "Регион"
 
 msgid "Relative"
 msgstr "относительная"
-
-msgid "PID Filtering"
-msgstr "PID фильтрация(для высокоскоростных частот)"
 
 msgid "Reload"
 msgstr "Обновить"
@@ -7960,9 +7966,6 @@ msgstr "Показать медиаплеер в главном меню"
 msgid "Show menu or plugin numbers"
 msgstr "Показать номера меню или плагинов"
 
-msgid "Show menu paths"
-msgstr "Показывать путь к меню"
-
 msgid "Show message when recording starts"
 msgstr "Показать сообщение при начале записи"
 
@@ -8008,6 +8011,10 @@ msgstr "Показать иконки записей"
 msgid "Show record indicator"
 msgstr "Показать индикатор записи"
 
+#, fuzzy
+msgid "Show screen path"
+msgstr "Показывать путь к меню"
+
 msgid "Show screensaver"
 msgstr "Запустить хранитель экрана через"
 
@@ -8019,9 +8026,6 @@ msgstr "Показать второй инфобар"
 
 msgid "Show service list"
 msgstr "Показать список сервисов"
-
-msgid "Show service name and event description among each other instead of side by side."
-msgstr "Показать название канала и описание события друг под другом, а не в одну строку."
 
 msgid "Show service type icons"
 msgstr "Показать иконки типа сервиса"
@@ -8052,6 +8056,9 @@ msgstr "Показать символы на дисплее"
 
 msgid "Show the radio player..."
 msgstr "Показать радио плеер..."
+
+msgid "Show the service information on two lines in the channel selection screen. You can choose between the current event description below the channel name, or the current event description next to the channel name, and the next event description on the second line."
+msgstr ""
 
 msgid "Show the tv player..."
 msgstr "Показать тв плеер..."
@@ -8136,6 +8143,10 @@ msgstr "Одиночный"
 
 msgid "Single EPG"
 msgstr "Одиночное EPG"
+
+#, fuzzy
+msgid "Single line mode"
+msgstr "Выберите видеорежим"
 
 msgid "Single satellite"
 msgstr "Одиночный спутник"
@@ -8655,6 +8666,13 @@ msgstr "Вс"
 msgid "Sunday"
 msgstr "Воскресенье"
 
+msgid ""
+"Sundtek - hardware blind scan in progress.\n"
+"Please wait(3-20 min) for the scan to finish."
+msgstr ""
+"Sundtek - аппаратное слепое сканирование в процессе.\n"
+"Пожалуйста, подождите (около 3-20 мин), пока сканирование завершится."
+
 msgid "Suriname"
 msgstr "Suriname"
 
@@ -9144,8 +9162,9 @@ msgstr "Эта опция позволяет Вам показывать все 
 msgid "This option allows you to show menu and/or plugin number quick links."
 msgstr "Эта опция позволяет показать номер меню и/или плагина, для быстрого перехода на него, через цифровые кнопки."
 
-msgid "This option allows you to show menu paths."
-msgstr "Эта опция позволяет показать путь к меню."
+#, fuzzy
+msgid "This option allows you to show the full screen path leading to the current screen."
+msgstr "Эта опция позволяет вам увеличивать зеленые тона изображения."
 
 msgid "This option allows you to view the old and new settings side by side."
 msgstr "Эта опция позволяет вам просматривать старые и новые настройки рядом друг с другом."
@@ -9572,6 +9591,14 @@ msgstr "Tuvalu"
 
 msgid "Two"
 msgstr "Два"
+
+#, fuzzy
+msgid "Two lines"
+msgstr "показать инфолинию"
+
+#, fuzzy
+msgid "Two lines and next event"
+msgstr "Перейти к следующему событию"
 
 msgid "Type"
 msgstr "Тип"
@@ -10317,6 +10344,9 @@ msgstr "Если это включено, то http стрим потоки де
 msgid "When enabled, it is possible to leave the movieplayer with exit."
 msgstr "Если включено, то можно закрыть видеоплеер с помощью кнопки выход."
 
+msgid "When enabled, it will automatically play to the last saved radio service when switching to radio mode."
+msgstr "Если это включено,то при переключении в режим радио автоматически произойдет воспроизведение последнего сохраненного радио сервиса."
+
 msgid "When enabled, measure power consumption to detect when the rotor stops turning (when supported by the tuner)."
 msgstr "Если включено, используется измерение мощности для обнаружения, когда ротор перестал поворачиваться (если есть поддержка в ресивере)."
 
@@ -10826,6 +10856,9 @@ msgstr "активно"
 
 msgid "actual time only"
 msgstr "только фактическое время"
+
+msgid "additional cable of rotor"
+msgstr "дополнительный кабель от мотора"
 
 msgid "adult movie/drama"
 msgstr "эротический фтльм/драма"
@@ -11509,6 +11542,9 @@ msgstr "рок/поп"
 msgid "romance"
 msgstr "романс"
 
+msgid "rotor"
+msgstr "мотор"
+
 msgid "running"
 msgstr "запущено"
 
@@ -11825,21 +11861,3 @@ msgstr "переключено"
 
 msgid "®"
 msgstr "®"
-
-msgid "Auto play last service in radio mode"
-msgstr "Авто включение последнего сервиса в режиме радио"
-
-msgid "When enabled, it will automatically play to the last saved radio service when switching to radio mode."
-msgstr "Если это включено,то при переключении в режим радио автоматически произойдет воспроизведение последнего сохраненного радио сервиса."
-
-msgid "Additional cable of motorized LNB"
-msgstr "Дополнительный кабель от LNB на моторе"
-
-msgid "additional cable of rotor"
-msgstr "дополнительный кабель от мотора"
-
-msgid "rotor"
-msgstr "мотор"
-
-msgid "Sundtek - hardware blind scan in progress.\nPlease wait(3-20 min) for the scan to finish."
-msgstr "Sundtek - аппаратное слепое сканирование в процессе.\nПожалуйста, подождите (около 3-20 мин), пока сканирование завершится."
