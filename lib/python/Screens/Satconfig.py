@@ -289,6 +289,15 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 				self.terrestrialRegionsEntry = getConfigListEntry(self.indent % _("Region"), self.terrestrialRegions, _("Select your region. If not available change 'Country' to 'all' and select one of the default alternatives."))
 				self.list.append(self.terrestrialCountriesEntry)
 				self.list.append(self.terrestrialRegionsEntry)
+				nimcount = 0
+				for slot in nimmanager.nim_slots:
+					if slot.isCompatible("DVB-T") and slot.config.configMode.value != "nothing":
+						nimcount += 1
+				if nimcount > 1:
+					self.list.append(getConfigListEntry(self.indent % _("Auto detect region"), self.nimConfig.smart_region, _("If you use more than one DVB-T tuner with different regions, you can enable this option to select the correct tuner when zap in service.")))
+				elif self.nimConfig.smart_region.value:
+					self.nimConfig.smart_region.value = False
+					self.nimConfig.smart_region.save()
 				self.list.append(getConfigListEntry(self.indent % _("Enable 5V for active antenna"), self.nimConfig.terrestrial_5V, _("Enable this setting if your aerial system needs power")))
 		if self.nim.isCompatible("ATSC") or (self.nim.isCombined() and self.nim.canBeCompatible("ATSC")):
 			if self.nim.isCombined():

@@ -4,7 +4,7 @@ from SystemInfo import SystemInfo
 from Tools.HardwareInfo import HardwareInfo
 from Tools.BoundFunction import boundFunction
 
-from config import config, ConfigSubsection, ConfigSelection, ConfigFloat, ConfigSatlist, ConfigYesNo, ConfigInteger, ConfigSubList, ConfigNothing, ConfigSubDict, ConfigOnOff, ConfigDateTime, ConfigText
+from config import config, ConfigSubsection, ConfigSelection, ConfigFloat, ConfigSatlist, ConfigYesNo, ConfigInteger, ConfigSubList, ConfigNothing, ConfigSubDict, ConfigOnOff, ConfigDateTime, ConfigText, NoSave
 
 from enigma import eDVBFrontendParametersSatellite, eDVBSatelliteEquipmentControl as secClass, eDVBSatelliteDiseqcParameters as diseqcParam, eDVBSatelliteSwitchParameters as switchParam, eDVBSatelliteRotorParameters as rotorParam, eDVBResourceManager, eDVBDB, eEnv
 
@@ -138,7 +138,8 @@ class SecConfigure:
 
 		nim_slots = self.NimManager.nim_slots
 
-		used_nim_slots = [ ]
+		used_nim_slots = []
+		terrestrial_nim_slots = []
 
 		for slot in nim_slots:
 			if slot.type is not None:
@@ -168,6 +169,10 @@ class SecConfigure:
 					if connto not in self.satposdepends:
 						self.satposdepends[connto] = []
 					self.satposdepends[connto].append(x)
+			elif slot.isCompatible("DVB-T"):
+				if nim.configMode.value != "nothing":
+					terrestrial_nim_slots.append(slot)
+				nim.smart_region_list.setValue("")
 
 		for slot in nim_slots:
 			x = slot.slot
@@ -245,6 +250,11 @@ class SecConfigure:
 								diseqc13V = nim.diseqc13V.value)
 					elif nim.configMode.value == "advanced": #advanced config
 						self.updateAdvanced(sec, x)
+			elif slot.isCompatible("DVB-T"):
+				if nim.configMode.value != "nothing" and len(terrestrial_nim_slots) > 1 and nim.smart_region.value:
+					region = self.NimManager.transpondersterrestrial[nim.terrestrial.value]
+					if region:
+						nim.smart_region_list.setValue(';'.join([str(x[1]) for x in region]))
 		print "[SecConfigure] sec config completed"
 
 	def updateAdvanced(self, sec, slotid):
@@ -1546,6 +1556,8 @@ def InitNimManager(nimmgr, update_slots = []):
 		list = [(x[0], x[0]) for x in nimmgr.terrestrialsList]
 		nim.terrestrial = ConfigSelection(choices = list)
 		nim.terrestrial_5V = ConfigOnOff()
+		nim.smart_region = ConfigYesNo(default = False)
+		nim.smart_region_list = NoSave(ConfigText())
 
 	def createATSCConfig(nim, x):
 		list = [(x[0], x[0]) for x in nimmgr.atscList]

@@ -2871,6 +2871,22 @@ int eDVBFrontend::isCompatibleWith(ePtr<iDVBFrontendParameters> &feparm, bool is
 			/* prefer to use a T tuner, try to keep T2 free for T2 transponders */
 			score--;
 		}
+		/* auto detect region - check if this frequency is in the frontend list */
+		if (is_configured_sat)
+		{
+			char configStr[255];
+			snprintf(configStr, 255, "config.Nims.%d.smart_region_list", m_slotid);
+			std::string smart_region_list = eConfigManager::getConfigValue(configStr);
+			if (!smart_region_list.empty())
+			{
+				std::stringstream ss;
+				ss << parm.frequency;
+				std::string freq;
+				freq = ss.str();
+				if (smart_region_list.find(freq) == std::string::npos)
+					return 0;
+			}
+		}
 	}
 	else if (type == eDVBFrontend::feATSC)
 	{
