@@ -138,10 +138,12 @@ class Picon(Renderer):
 		self.changed((self.CHANGED_ALL,))
 		return Renderer.applySkin(self, desktop, parent)
 
+		
 	GUI_WIDGET = ePixmap
 	
-		def postWidgetCreate(self, instance):
+	def postWidgetCreate(self, instance):
 		self.changed((self.CHANGED_DEFAULT,))
+		
 	def updatePicon(self, picInfo=None):
 		ptr = self.PicLoad.getData()
 		if ptr is not None:
