@@ -1,7 +1,6 @@
 import os, re, unicodedata
 from Renderer import Renderer
-from enigma import ePixmap, eServiceCenter, eServiceReference, iServiceInformation
-from enigma import ePicLoad
+from enigma import ePixmap, ePicLoad, eServiceCenter, eServiceReference, iServiceInformation
 from Tools.Alternatives import GetWithAlternative
 from Tools.Directories import pathExists, SCOPE_SKIN_IMAGE, SCOPE_CURRENT_SKIN, resolveFilename
 from Components.Harddisk import harddiskmanager
