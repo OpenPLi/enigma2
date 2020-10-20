@@ -6,8 +6,9 @@ class TemplatedMultiContent(StringList):
 	def __init__(self, args):
 		StringList.__init__(self, args)
 		from enigma import BT_SCALE, RT_HALIGN_CENTER, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_BOTTOM, RT_VALIGN_CENTER, RT_VALIGN_TOP, RT_WRAP, eListboxPythonMultiContent, gFont
-		from skin import parseFont
+		from skin import parseFont, getSkinFactor
 		from Components.MultiContent import MultiContentEntryPixmap, MultiContentEntryPixmapAlphaBlend, MultiContentEntryPixmapAlphaTest, MultiContentEntryProgress, MultiContentEntryProgressPixmap, MultiContentEntryText, MultiContentTemplateColor
+		f = getSkinFactor()
 		loc = locals()
 		del loc["self"]  # Cleanup locals a bit.
 		del loc["args"]

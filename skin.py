@@ -227,7 +227,8 @@ class SkinError(Exception):
 #         c      : Take the center point of parent size/width.
 #         %      : Take given percentage of parent size/width.
 #         w      : Multiply by current font width. (Only to be used in elements where the font attribute is available, i.e. not "None")
-#         h      : Multiply by current font width. (Only to be used in elements where the font attribute is available, i.e. not "None")
+#         h      : Multiply by current font height. (Only to be used in elements where the font attribute is available, i.e. not "None")
+#         f      : Replace with getSkinFactor().
 #
 def parseCoordinate(s, e, size=0, font=None):
 	orig = s = s.strip()
@@ -254,6 +255,8 @@ def parseCoordinate(s, e, size=0, font=None):
 				s = s.replace("h", "*%s" % str(fonts[font][2]))
 			if "%" in s:
 				s = s.replace("%", "*%s" % str(e / 100.0))
+			if "f" in s:
+				s = s.replace("f", str(getSkinFactor()))
 			try:
 				val = int(s)  # For speed try a simple number first.
 			except ValueError:
@@ -303,6 +306,16 @@ def parseSize(s, scale, object=None, desktop=None):
 def parseFont(s, scale=((1, 1), (1, 1))):
 	if ";" in s:
 		name, size = s.split(";")
+		orig = size
+		try:
+			size = int(size)
+		except ValueError:
+			try:
+				size = size.replace("f", str(getSkinFactor()))
+				size = int(eval(size))
+			except Exception as err:
+				print("[Skin] %s '%s': font size formula '%s', processed to '%s', cannot be evaluated!" % (type(err).__name__, err, orig, s))
+				size = None
 	else:
 		name = s
 		size = None
