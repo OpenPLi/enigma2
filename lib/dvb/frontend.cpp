@@ -1207,10 +1207,10 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 		ret = (int)(snr / 40.5);
 		sat_max = 1900;
 	}
-	else if (strstr(m_description, "BCM3148"))
+	else if (strstr(m_description, "Vuplus DVB-C NIM(BCM3148)")) // VU+ FBC DVB-C 
 	{
-		ret = (int)(snr / 15.61);
-		sat_max = 4200;
+		ret = (int)(snr / 150.61);
+		cab_max = 4200;
 	}
 	else if(!strcmp(m_description, "TBS-5925") || !strcmp(m_description, "DVBS2BOX") || !strcmp(m_description, "TechniSat USB device"))
 	{
