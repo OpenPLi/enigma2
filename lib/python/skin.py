@@ -355,6 +355,19 @@ def parseParameter(s):
 	else:  # Integer.
 		return int(s)
 
+def parseScale(s):
+	orig = s
+	try:
+		val = int(s)
+	except ValueError:
+		try:
+			s = s.replace("f", str(getSkinFactor()))
+			val = int(eval(s))
+		except Exception as err:
+			print("[Skin] %s '%s': size formula '%s', processed to '%s', cannot be evaluated!" % (type(err).__name__, err, orig, s))
+			val = 0
+	return val > 0 and val or 0
+
 def loadPixmap(path, desktop, width=0, height=0):
 	option = path.find("#")
 	if option != -1:
@@ -466,7 +479,7 @@ class AttributeParser:
 		self.guiObject.setZPosition(int(value))
 
 	def itemHeight(self, value):
-		self.guiObject.setItemHeight(int(value))
+		self.guiObject.setItemHeight(parseScale(value))
 
 	def pixmap(self, value):
 		self.guiObject.setPixmap(loadPixmap(value, self.desktop, self.guiObject.size().width(), self.guiObject.size().height()))
@@ -802,9 +815,9 @@ def loadSingleSkinData(desktop, screenID, domSkin, pathSkin, scope=SCOPE_CURRENT
 			try:
 				name = alias.attrib.get("name")
 				font = alias.attrib.get("font")
-				size = int(alias.attrib.get("size"))
-				height = int(alias.attrib.get("height", size))  # To be calculated some day.
-				width = int(alias.attrib.get("width", size))
+				size = parseScale(alias.attrib.get("size"))
+				height = parseScale(alias.attrib.get("height", size))  # To be calculated some day.
+				width = parseScale(alias.attrib.get("width", size))  # To be calculated some day.
 				fonts[name] = (font, size, height, width)
 				# print("[Skin] Add font alias: name='%s', font='%s', size=%d, height=%s, width=%d." % (name, font, size, height, width))
 			except Exception as err:
