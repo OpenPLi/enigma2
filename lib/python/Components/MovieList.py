@@ -10,7 +10,7 @@ from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import SCOPE_CURRENT_SKIN, resolveFilename
 from Screens.LocationBox import defaultInhibitDirs
 import NavigationInstance
-import skin
+from skin import parseColor, parseFont, parseScale
 
 from enigma import eListboxPythonMultiContent, eListbox, gFont, iServiceInformation, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, eServiceReference, eServiceCenter, eTimer, RT_VALIGN_CENTER
 
@@ -255,7 +255,7 @@ class MovieList(GUIComponent):
 		def warningWrongSkinParameter(string):
 			print "[MovieList] wrong '%s' skin parameters" % string
 		def fontName(value):
-			self.fontName = value
+			self.fontName = parseFont(value, ((1,1),(1,1)))
 		def fontSizesOriginal(value):
 			self.fontSizesOriginal = map(int, value.split(","))
 			if len(self.fontSizesOriginal) != 3:
@@ -287,7 +287,7 @@ class MovieList(GUIComponent):
 		def spaceIconeText(value):
 			self.spaceIconeText = int(value)
 		def iconsWidth(value):
-			self.iconsWidth = int(value)
+			self.iconsWidth = parseScale(value)
 		def trashShift(value):
 			self.trashShift = int(value)
 		def dirShift(value):
