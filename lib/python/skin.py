@@ -366,7 +366,7 @@ def parseScale(s):
 		except Exception as err:
 			print("[Skin] %s '%s': size formula '%s', processed to '%s', cannot be evaluated!" % (type(err).__name__, err, orig, s))
 			val = 0
-	return val > 0 and val or 0
+	return val
 
 def loadPixmap(path, desktop, width=0, height=0):
 	option = path.find("#")
