@@ -266,8 +266,6 @@ def parseCoordinate(s, e, size=0, font=None):
 					print("[Skin] %s '%s': Coordinate '%s', processed to '%s', cannot be evaluated!" % (type(err).__name__, err, orig, s))
 					val = 0
 	# print("[Skin] DEBUG: parseCoordinate s='%s', e='%s', size=%s, font='%s', val='%s'." % (s, e, size, font, val))
-	if val < 0:
-		val = 0
 	return val
 
 def getParentSize(object, desktop):
