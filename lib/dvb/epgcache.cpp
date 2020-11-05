@@ -2,7 +2,7 @@
 #include <lib/dvb/dvb.h>
 #include <lib/dvb/lowlevel/eit.h>
 
-#undef EPG_DEBUG
+#define EPG_DEBUG
 
 #ifdef EPG_DEBUG
 #include <lib/service/event.h>
@@ -297,6 +297,10 @@ eventData::~eventData()
 		if ( it != descriptors.end() )
 		{
 			DescriptorPair &p = it->second;
+			if (p.reference_count == 0)
+			{
+				eDebug("[eEPGCache] Eventdata reference count is already zero!");
+			}
 			if (!--p.reference_count) // no more used descriptor
 			{
 				CacheSize -= it->second.data[1];
