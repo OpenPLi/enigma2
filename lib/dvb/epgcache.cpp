@@ -1056,12 +1056,35 @@ next:
 	}
 }
 
-void eEPGCache::flushEPG(const uniqueEPGKey & s)
+// epg cache needs to be locked(cache_lock) before calling the procedure
+void eEPGCache::clearCompleteEPGCache()
+{
+	// cache_lock needs to be set in calling procedure!
+	for (eventCache::iterator it(eventDB.begin()); it != eventDB.end(); ++it)
+	{
+		eventMap &evMap = it->second.byEvent;
+		timeMap &tmMap = it->second.byTime;
+		for (eventMap::iterator i = evMap.begin(); i != evMap.end(); ++i)
+			delete i->second;
+		evMap.clear();
+		tmMap.clear();
+	}
+	eventDB.clear();
+#ifdef ENABLE_PRIVATE_EPG
+	content_time_tables.clear();
+#endif
+	channelLastUpdated.clear();
+	singleLock m(channel_map_lock);
+	for (ChannelMap::const_iterator it(m_knownChannels.begin()); it != m_knownChannels.end(); ++it)
+		it->second->startEPG();
+}
+
+void eEPGCache::flushEPG(const uniqueEPGKey & s, bool lock) // lock only affects complete flush
 {
 	eDebug("[eEPGCache] flushEPG %d", (int)(bool)s);
-	singleLock l(cache_lock);
 	if (s)  // clear only this service
 	{
+		singleLock l(cache_lock);
 		eventCache::iterator it = eventDB.find(s);
 		if ( it != eventDB.end() )
 		{
@@ -1087,24 +1110,13 @@ void eEPGCache::flushEPG(const uniqueEPGKey & s)
 	}
 	else // clear complete EPG Cache
 	{
-		for (eventCache::iterator it(eventDB.begin());
-			it != eventDB.end(); ++it)
+		if (lock)
 		{
-			eventMap &evMap = it->second.byEvent;
-			timeMap &tmMap = it->second.byTime;
-			for (eventMap::iterator i = evMap.begin(); i != evMap.end(); ++i)
-				delete i->second;
-			evMap.clear();
-			tmMap.clear();
+			singleLock l(cache_lock);
+			clearCompleteEPGCache();
 		}
-		eventDB.clear();
-#ifdef ENABLE_PRIVATE_EPG
-		content_time_tables.clear();
-#endif
-		channelLastUpdated.clear();
-		singleLock m(channel_map_lock);
-		for (ChannelMap::const_iterator it(m_knownChannels.begin()); it != m_knownChannels.end(); ++it)
-			it->second->startEPG();
+		else
+			clearCompleteEPGCache();
 	}
 }
 
@@ -1367,6 +1379,10 @@ void eEPGCache::load()
 		if ( !memcmp( text1, "ENIGMA_EPG_V7", 13) )
 		{
 			singleLock s(cache_lock);
+			if (eventDB.size() > 0)
+			{
+				clearCompleteEPGCache();
+			}
 			ret = fread( &size, sizeof(int), 1, f);
 			eventDB.rehash(size); /* Reserve buckets in advance */
 			while(size--)
