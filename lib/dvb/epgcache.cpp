@@ -2,7 +2,7 @@
 #include <lib/dvb/dvb.h>
 #include <lib/dvb/lowlevel/eit.h>
 
-#define EPG_DEBUG
+#undef EPG_DEBUG
 
 #ifdef EPG_DEBUG
 #include <lib/service/event.h>
