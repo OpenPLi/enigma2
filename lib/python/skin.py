@@ -351,9 +351,9 @@ def parseParameter(s):
 		return colors[s].argb()
 	elif s.find(";") != -1:  # Font.
 		font, size = [x.strip() for x in s.split(";", 1)]
-		return [font, int(size)]
+		return [font, parseScale(size)]
 	else:  # Integer.
-		return int(s)
+		return parseScale(s)
 
 def parseScale(s):
 	orig = s
