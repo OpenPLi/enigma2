@@ -655,6 +655,7 @@ int eTextPara::renderString(const char *string, int rflags, int border)
 		return -1;
 	}
 	if (!current_face->size)
+	{
 		eWarning("[eTextPara] renderString: No current_face->size!");
 		return -1;
 	}
