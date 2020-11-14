@@ -1,5 +1,5 @@
 from GUIComponent import GUIComponent
-from skin import parseColor, parseFont
+from skin import parseColor, parseFont, parseScale
 
 from enigma import eListboxServiceContent, eListbox, eServiceCenter, eServiceReference, gFont, eRect
 from Tools.LoadPixmap import LoadPixmap
@@ -123,19 +123,19 @@ class ServiceList(GUIComponent):
 		def serviceNumberFont(value):
 			self.ServiceNumberFont = parseFont(value, ((1,1),(1,1)))
 		def progressbarHeight(value):
-			self.l.setProgressbarHeight(int(value))
+			self.l.setProgressbarHeight(parseScale(value))
 		def progressbarBorderWidth(value):
-			self.l.setProgressbarBorderWidth(int(value))
+			self.l.setProgressbarBorderWidth(parseScale(value))
 		def progressBarWidth(value):
-			self.progressBarWidth = int(value)
+			self.progressBarWidth = parseScale(value)
 		def progressPercentWidth(value):
 			self.progressPercentWidth = int(value)
 		def fieldMargins(value):
-			self.fieldMargins = int(value)
+			self.fieldMargins = parseScale(value)
 		def nonplayableMargins(value):
-			self.l.setNonplayableMargins(int(value))
+			self.l.setNonplayableMargins(parseScale(value))
 		def itemsDistances(value):
-			self.l.setItemsDistances(int(value))
+			self.l.setItemsDistances(parseScale(value))
 		for (attrib, value) in list(self.skinAttributes):
 			try:
 				locals().get(attrib)(value)
