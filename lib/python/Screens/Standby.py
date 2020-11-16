@@ -110,13 +110,14 @@ class StandbyScreen(Screen):
 		if gotoShutdownTime:
 			self.standbyTimeoutTimer.startLongTimer(gotoShutdownTime)
 
-		gotoWakeupTime = isNextWakeupTime(True)
-		if gotoWakeupTime != -1:
-			curtime = localtime(time())
-			if curtime.tm_year > 1970:
-				wakeup_time = int(gotoWakeupTime - time())
-				if wakeup_time > 0:
-					self.standbyWakeupTimer.startLongTimer(wakeup_time)
+		if self.StandbyCounterIncrease is not 1:
+			gotoWakeupTime = isNextWakeupTime(True)
+			if gotoWakeupTime != -1:
+				curtime = localtime(time())
+				if curtime.tm_year > 1970:
+					wakeup_time = int(gotoWakeupTime - time())
+					if wakeup_time > 0:
+						self.standbyWakeupTimer.startLongTimer(wakeup_time)
 
 		self.onFirstExecBegin.append(self.__onFirstExecBegin)
 		self.onClose.append(self.__onClose)
