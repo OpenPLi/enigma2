@@ -132,7 +132,7 @@ def GetDeviceId(filter, nim_idx):
 		try:
 			name_token = nim.description.split(' ')[-1][4:-1]
 		except:
-			continue
+			name_token = ""
 		if name_token == filter:
 			if socket_id == nim_idx:
 				break
