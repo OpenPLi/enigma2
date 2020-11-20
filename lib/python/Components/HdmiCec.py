@@ -105,6 +105,8 @@ class HdmiCec:
 		self.delay.timeout.get().append(self.sendStandbyMessages)
 		self.useStandby = True
 
+		self.handlingStandbyFromTV = False
+
 		eHdmiCEC.getInstance().messageReceived.get().append(self.messageReceived)
 		config.misc.standbyCounter.addNotifier(self.onEnterStandby, initial_call = False)
 		config.misc.DeepStandby.addNotifier(self.onEnterDeepStandby, initial_call = False)
@@ -253,7 +255,7 @@ class HdmiCec:
 	def sendStandbyMessages(self):
 			messages = []
 			if config.hdmicec.control_tv_standby.value:
-				if self.useStandby:
+				if self.useStandby and not self.handlingStandbyFromTV:
 					messages.append("standby")
 				else:
 					messages.append("sourceinactive")
@@ -367,7 +369,12 @@ class HdmiCec:
 
 			# handle standby request from the tv
 			if cmd == 0x36 and config.hdmicec.handle_tv_standby.value:
+				# avoid echoing the 'System Standby' command back to the tv
+				self.handlingStandbyFromTV = True
+				# handle standby
 				self.standby()
+				# after handling the standby command, we are free to send 'standby' ourselves again
+				self.handlingStandbyFromTV = False
 
 			# handle wakeup requests from the tv
 			if inStandby and config.hdmicec.handle_tv_wakeup.value:
