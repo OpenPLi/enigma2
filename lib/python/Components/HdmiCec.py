@@ -66,6 +66,12 @@ config.hdmicec.tv_wakeup_detection = ConfigSelection(
 	"activity": _("Any activity"),
 	},
 	default = "streamrequest")
+config.hdmicec.tv_wakeup_command = ConfigSelection(
+	choices = {
+	"imageview": _("Image View On"),
+	"textview": _("Text View On"),
+	},
+	default = "imageview")
 config.hdmicec.fixed_physical_address = ConfigText(default = "0.0.0.0")
 config.hdmicec.volume_forwarding = ConfigYesNo(default = False)
 config.hdmicec.control_receiver_wakeup = ConfigYesNo(default = False)
@@ -142,7 +148,10 @@ class HdmiCec:
 		cmd = 0
 		data = ''
 		if message == "wakeup":
-			cmd = 0x04
+			if config.hdmicec.tv_wakeup_command.value == 'textview':
+				cmd = 0x0d
+			else:
+				cmd = 0x04
 		elif message == "sourceactive":
 			address = 0x0f # use broadcast for active source command
 			cmd = 0x82
