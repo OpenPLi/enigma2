@@ -59,6 +59,8 @@ class HdmiCECSetupScreen(Screen, ConfigListScreen):
 		if config.hdmicec.enabled.value:
 			self.list.append(getConfigListEntry(_("Put TV in standby"), config.hdmicec.control_tv_standby))
 			self.list.append(getConfigListEntry(_("Wakeup TV from standby"), config.hdmicec.control_tv_wakeup))
+			if config.hdmicec.control_tv_wakeup.value:
+				self.list.append(getConfigListEntry(_("Wakeup command for TV"), config.hdmicec.tv_wakeup_command))
 			self.list.append(getConfigListEntry(_("Regard deep standby as standby"), config.hdmicec.handle_deepstandby_events))
 			self.list.append(getConfigListEntry(_("Switch TV to correct input"), config.hdmicec.report_active_source))
 			self.list.append(getConfigListEntry(_("Use TV remote control"), config.hdmicec.report_active_menu))
