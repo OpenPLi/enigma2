@@ -321,15 +321,19 @@ int eDVBSubtitleParser::subtitle_process_segment(uint8_t *segment)
 
 		page->state = page_state;
 
-		// when acquisition point or mode change: remove all displayed pages.
+		// Clear page_region list before processing any type of PCS
+		while (page->page_regions)
+		{
+			subtitle_page_region *p = page->page_regions->next;
+			delete page->page_regions;
+			page->page_regions = p;
+		}
+		page->page_regions=0;
+
+		// when acquisition point or mode change: remove all displayed regions.
 		if ((page_state == 1) || (page_state == 2))
 		{
-			while (page->page_regions)
-			{
-				subtitle_page_region *p = page->page_regions->next;
-				delete page->page_regions;
-				page->page_regions = p;
-			}
+
 			while (page->regions)
 			{
 				subtitle_region *p = page->regions->next;
@@ -355,9 +359,6 @@ int eDVBSubtitleParser::subtitle_process_segment(uint8_t *segment)
 		while (*r)
 			r = &(*r)->next;
 
-		if (processed_length == segment_length && !page->page_regions)
-			subtitle_redraw(page->page_id);
-
 		while (processed_length < segment_length)
 		{
 			subtitle_page_region *pr;
@@ -380,8 +381,6 @@ int eDVBSubtitleParser::subtitle_process_segment(uint8_t *segment)
 			processed_length += 2;
 		}
 
-		if (processed_length != segment_length)
-			eDebug("[eDVBSubtitleParser] %d != %d", processed_length, segment_length);
 		break;
 	}
 	case 0x11: // region composition segment
@@ -415,6 +414,7 @@ int eDVBSubtitleParser::subtitle_process_segment(uint8_t *segment)
 		{
 			*pregion = region = new subtitle_region;
 			region->next = 0;
+			region->buffer=0;
 			region->committed = false;
 		}
 		else if (region->version_number != version_number)
@@ -426,11 +426,6 @@ int eDVBSubtitleParser::subtitle_process_segment(uint8_t *segment)
 				delete objects;
 				objects = n;
 			}
-			if (region->buffer)
-			{
-				region->buffer=0;
-			}
-			region->committed = false;
 		}
 		else
 			break;
@@ -445,9 +440,6 @@ int eDVBSubtitleParser::subtitle_process_segment(uint8_t *segment)
 		region->height  = *segment++ << 8;
 		region->height |= *segment++;
 		processed_length += 2;
-
-		region->buffer = new gPixmap(eSize(region->width, region->height), 8, 1);
-		memset(region->buffer->surface->data, 0, region->height * region->buffer->surface->stride);
 
 		int depth;
 		depth = (*segment++ >> 2) & 7;
@@ -471,16 +463,23 @@ int eDVBSubtitleParser::subtitle_process_segment(uint8_t *segment)
 			region_fill_flag = 1;
 		}
 
-		if (region_fill_flag)
-		{
-			if (depth == 1)
-				memset(region->buffer->surface->data, region_2bit_pixel_code, region->height * region->width);
-			else if (depth == 2)
-				memset(region->buffer->surface->data, region_4bit_pixel_code, region->height * region->width);
-			else if (depth == 3)
-				memset(region->buffer->surface->data, region_8bit_pixel_code, region->height * region->width);
-			else
-				eDebug("[eDVBSubtitleParser] !!!! invalid depth");
+//	create and initialise buffer only when buffer does not yet exist.
+
+		if (region->buffer==0) {
+			region->buffer = new gPixmap(eSize(region->width, region->height), 8, 1);
+			memset(region->buffer->surface->data, 0, region->height * region->buffer->surface->stride);
+
+			if (region_fill_flag)
+			{
+				if (depth == 1)
+					memset(region->buffer->surface->data, region_2bit_pixel_code, region->height * region->width);
+				else if (depth == 2)
+					memset(region->buffer->surface->data, region_4bit_pixel_code, region->height * region->width);
+				else if (depth == 3)
+					memset(region->buffer->surface->data, region_8bit_pixel_code, region->height * region->width);
+				else
+					eDebug("[eDVBSubtitleParser] !!!! invalid depth");
+			}
 		}
 
 		region->objects = 0;
@@ -802,11 +801,9 @@ void eDVBSubtitleParser::subtitle_process_pes(uint8_t *pkt, int len)
 
 		if (len && *pkt != 0xFF)
 			eDebug("[eDVBSubtitleParser] strange data at the end");
-
-		if (!m_seen_eod)
-			subtitle_redraw_all();
 	}
 }
+
 
 void eDVBSubtitleParser::subtitle_redraw_all()
 {
@@ -892,9 +889,6 @@ void eDVBSubtitleParser::subtitle_redraw(int page_id)
 		}
 		if (reg)
 		{
-			if (reg->committed)
-				continue;
-
 			int x0 = region->region_horizontal_address;
 			int y0 = region->region_vertical_address;
 
