@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-21 15:48+0100\n"
+"POT-Creation-Date: 2020-11-23 20:40+0100\n"
 "PO-Revision-Date: 2016-11-17 12:51+0200\n"
 "Last-Translator: vovan43<vovan43@ex.ua>, sety <tim1065@mail.ru>, Irkoff <irkoff@gmail.com>\n"
 "Language-Team: gisclub.tv <http://gisclub.tv/>\n"
@@ -592,6 +592,10 @@ msgstr "??"
 
 msgid "A"
 msgstr "A"
+
+#, fuzzy
+msgid "A command sent from TV will wake up the receiver from standby."
+msgstr "Підняти ресивер з режиму очікування"
 
 #, python-format
 msgid ""
@@ -1395,6 +1399,9 @@ msgstr ""
 
 msgid "Basque"
 msgstr "Баскський"
+
+msgid "Before sending command for switch TV to standby receiver tests if all other receivers pluged to TV are in standby. If are not, 'sourceactive' instead 'stanby' is sent to the TV."
+msgstr ""
 
 msgid "Begin time"
 msgstr "Час початку"
@@ -2707,6 +2714,9 @@ msgstr "Затримка в мілісекундах перед початком
 msgid "Delay in miliseconds between scrolling characters on display."
 msgstr "Затримка в мілісекундах між прокрутки символів на дисплеї."
 
+msgid "Delay in queue between sending CEC commands. For working HDMI-CEC protocol must be for some receivers used delay. Usualy between 50-150ms."
+msgstr ""
+
 msgid "Delete"
 msgstr "Видалити"
 
@@ -3313,6 +3323,10 @@ msgstr "Увімкнути режим переміщення"
 
 msgid "Enable multiple bouquets"
 msgstr "Дозволити мульти-букети"
+
+#, fuzzy
+msgid "Enable or disable using HDMI-CEC."
+msgstr "Увімкнути EIT EPG"
 
 msgid "Enable parental protection"
 msgstr "Включити батьківський контроль"
@@ -4391,6 +4405,9 @@ msgid "Icons"
 msgstr "Іконки"
 
 msgid "If disabled, underline characters in file and directory names are not shown and are replaced with spaces."
+msgstr ""
+
+msgid "If enabled, CEC protocol traffic can be saved to a logfile 'hdmicec.log'."
 msgstr ""
 
 msgid "If enabled, bookmarks will be updated with the new location when you move or copy a recording."
@@ -6519,6 +6536,10 @@ msgstr "Натисніть кнопку INFO на пульті для додат
 msgid "Press MENU on your remote control for additional options."
 msgstr "Натисніть кнопку MENU на пульті для додаткової інформації."
 
+#, fuzzy
+msgid "Press OK and select directory as path for logfile."
+msgstr "Не вдалося створити каталог %s"
+
 msgid "Press OK on your remote control to continue."
 msgstr "Натисніть OK на пульті, щоб продовжити."
 
@@ -6669,8 +6690,15 @@ msgstr ""
 msgid "Purge deleted user bouquets"
 msgstr "Очистити віддалені  букети користувача"
 
+#, fuzzy
+msgid "Put A/V receiver to standby."
+msgstr "Перехід ресивера в Режим Очікування"
+
 msgid "Put TV in standby"
 msgstr "Перехід ТБ в Режим Очікування"
+
+msgid "Put TV to standby when receiver goes to standby or to deep standby."
+msgstr ""
 
 msgid "Put receiver in standby"
 msgstr "Перехід ресивера в Режим Очікування"
@@ -6830,6 +6858,9 @@ msgstr "Будь ласка, введіть ім'я нового каталог�
 
 msgid "Regard deep standby as standby"
 msgstr "Вважати вимкнення як Режим Очікування"
+
+msgid "Regard deep standby as standby. It will be sending same commands when box goest to deep standby."
+msgstr ""
 
 msgid "Region"
 msgstr "Регіон"
@@ -8482,6 +8513,9 @@ msgstr ""
 msgid "Some plugins are not available:\n"
 msgstr "Деякі плагіни недоступні:\n"
 
+msgid "Some tv's do not handle command 'Image View On' for wakingup correctly, so you can try sending 'Text View On' as alternative."
+msgstr ""
+
 #, python-format
 msgid "Sorry, %s has not been installed!"
 msgstr "Вибачте, %s не встановлений!"
@@ -9255,6 +9289,9 @@ msgstr ""
 #, fuzzy
 msgid "The user interface of your receiver is restarting in debug mode"
 msgstr "Рестарт GUI ресивера"
+
+msgid "The wake up command can be sent multiple times."
+msgstr ""
 
 msgid ""
 "The wireless LAN plugin is not installed!\n"
@@ -10087,6 +10124,10 @@ msgstr "Використовувати інформацію EIT EPG, коли в
 msgid "Use TV remote control"
 msgstr "Використовувати Тип пульта ДУ"
 
+#, fuzzy
+msgid "Use TV remote control for your receiver."
+msgstr "Використовувати Тип пульта ДУ"
+
 msgid "Use USALS for this sat"
 msgstr "Використовувати USALS для цього супутника"
 
@@ -10408,6 +10449,10 @@ msgstr "Wake On LAN (включення по мережі)"
 msgid "Wakeup"
 msgstr "Увімкнення ТБ"
 
+#, fuzzy
+msgid "Wakeup A/V receiver from standby."
+msgstr "Підняти ресивер з режиму очікування"
+
 msgid "Wakeup TV from standby"
 msgstr "Пробудити ТБ з режиму очікування"
 
@@ -10517,6 +10562,12 @@ msgid "Western Sahara"
 msgstr ""
 
 msgid "What type of service scan do you want?"
+msgstr ""
+
+msgid "When TV is turned off, the receiver will switch to standby by a command received from the TV."
+msgstr ""
+
+msgid "When TV is turned on, the receiver will be awakened by a command received from the TV."
 msgstr ""
 
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
@@ -10736,6 +10787,12 @@ msgstr "Вкажіть на скільки хвилин раніше почин�
 
 msgid "When nonzero, a recording will stop later than the ending time indicated by the EPG."
 msgstr "Вкажіть на скільки хвилин пізніше закінчити запис, ніж час закінчення запису по EPG."
+
+msgid "When receiver wakes up/starts, it will send command for switch TV to correct input to which the receiver is pluged."
+msgstr ""
+
+msgid "When receiver wakes up/starts, it will try wake up TV by sending the appropriate command."
+msgstr ""
 
 msgid "When selected this allows video modes to be selected even if they are not reported as supported."
 msgstr ""
@@ -11075,6 +11132,9 @@ msgstr ""
 "Ви підключили USB WLAN адаптер?\n"
 "\n"
 "Оберіть, що будете робити далі."
+
+msgid "ZAP timers can send command 'sourceactive' before zap for set TV to correct input."
+msgstr ""
 
 msgid "Zambia"
 msgstr ""

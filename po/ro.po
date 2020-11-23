@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-21 15:48+0100\n"
+"POT-Creation-Date: 2020-11-23 20:40+0100\n"
 "PO-Revision-Date: 2010-03-09 21:03+0100\n"
 "Last-Translator: \n"
 "Language-Team: HDTV ROMANIA(superonic,costel_mbc,neutrin,otheitis,cipy_1982,neutrin,runcanion)\n"
@@ -572,6 +572,9 @@ msgid "??"
 msgstr ""
 
 msgid "A"
+msgstr ""
+
+msgid "A command sent from TV will wake up the receiver from standby."
 msgstr ""
 
 #, fuzzy, python-format
@@ -1383,6 +1386,9 @@ msgid "Basic PID info"
 msgstr ""
 
 msgid "Basque"
+msgstr ""
+
+msgid "Before sending command for switch TV to standby receiver tests if all other receivers pluged to TV are in standby. If are not, 'sourceactive' instead 'stanby' is sent to the TV."
 msgstr ""
 
 msgid "Begin time"
@@ -2712,6 +2718,9 @@ msgstr ""
 msgid "Delay in miliseconds between scrolling characters on display."
 msgstr ""
 
+msgid "Delay in queue between sending CEC commands. For working HDMI-CEC protocol must be for some receivers used delay. Usualy between 50-150ms."
+msgstr ""
+
 msgid "Delete"
 msgstr "Sterge"
 
@@ -3320,6 +3329,9 @@ msgstr "Activeaza mod mutare"
 
 msgid "Enable multiple bouquets"
 msgstr "Activeaza buchete multiple"
+
+msgid "Enable or disable using HDMI-CEC."
+msgstr ""
 
 msgid "Enable parental protection"
 msgstr ""
@@ -4400,6 +4412,9 @@ msgid "Icons"
 msgstr ""
 
 msgid "If disabled, underline characters in file and directory names are not shown and are replaced with spaces."
+msgstr ""
+
+msgid "If enabled, CEC protocol traffic can be saved to a logfile 'hdmicec.log'."
 msgstr ""
 
 msgid "If enabled, bookmarks will be updated with the new location when you move or copy a recording."
@@ -6562,6 +6577,10 @@ msgstr ""
 msgid "Press MENU on your remote control for additional options."
 msgstr ""
 
+#, fuzzy
+msgid "Press OK and select directory as path for logfile."
+msgstr "Crearea directorului %s a esuat"
+
 msgid "Press OK on your remote control to continue."
 msgstr "Va rugam apasati OK de pe telecomanda pentru a continua"
 
@@ -6712,7 +6731,13 @@ msgstr ""
 msgid "Purge deleted user bouquets"
 msgstr ""
 
+msgid "Put A/V receiver to standby."
+msgstr ""
+
 msgid "Put TV in standby"
+msgstr ""
+
+msgid "Put TV to standby when receiver goes to standby or to deep standby."
 msgstr ""
 
 msgid "Put receiver in standby"
@@ -6875,6 +6900,9 @@ msgid "Refusing to move to the same directory"
 msgstr "Va rugam introduceti numele noului director"
 
 msgid "Regard deep standby as standby"
+msgstr ""
+
+msgid "Regard deep standby as standby. It will be sending same commands when box goest to deep standby."
 msgstr ""
 
 msgid "Region"
@@ -8558,6 +8586,9 @@ msgstr ""
 msgid "Some plugins are not available:\n"
 msgstr "Anumite plugin-uri nu sunt disponibile:\n"
 
+msgid "Some tv's do not handle command 'Image View On' for wakingup correctly, so you can try sending 'Text View On' as alternative."
+msgstr ""
+
 #, fuzzy, python-format
 msgid "Sorry, %s has not been installed!"
 msgstr "MediaScanner nu este instalat!"
@@ -9328,6 +9359,9 @@ msgstr ""
 #, fuzzy
 msgid "The user interface of your receiver is restarting in debug mode"
 msgstr "Va rugam asteptati pana cand reteaua se va restarta..."
+
+msgid "The wake up command can be sent multiple times."
+msgstr ""
 
 msgid ""
 "The wireless LAN plugin is not installed!\n"
@@ -10131,6 +10165,9 @@ msgstr ""
 msgid "Use TV remote control"
 msgstr ""
 
+msgid "Use TV remote control for your receiver."
+msgstr ""
+
 #, fuzzy
 msgid "Use USALS for this sat"
 msgstr "Foloseste usals pentru acest satelit"
@@ -10467,6 +10504,9 @@ msgstr ""
 msgid "Wakeup"
 msgstr ""
 
+msgid "Wakeup A/V receiver from standby."
+msgstr ""
+
 msgid "Wakeup TV from standby"
 msgstr ""
 
@@ -10565,6 +10605,12 @@ msgid "Western Sahara"
 msgstr ""
 
 msgid "What type of service scan do you want?"
+msgstr ""
+
+msgid "When TV is turned off, the receiver will switch to standby by a command received from the TV."
+msgstr ""
+
+msgid "When TV is turned on, the receiver will be awakened by a command received from the TV."
 msgstr ""
 
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
@@ -10768,6 +10814,12 @@ msgid "When nonzero, a recording will start earlier than the starting time indic
 msgstr ""
 
 msgid "When nonzero, a recording will stop later than the ending time indicated by the EPG."
+msgstr ""
+
+msgid "When receiver wakes up/starts, it will send command for switch TV to correct input to which the receiver is pluged."
+msgstr ""
+
+msgid "When receiver wakes up/starts, it will try wake up TV by sending the appropriate command."
 msgstr ""
 
 msgid "When selected this allows video modes to be selected even if they are not reported as supported."
@@ -11070,6 +11122,9 @@ msgid ""
 "Have you attached your USB WLAN Stick?\n"
 "\n"
 "Please choose what you want to do next."
+msgstr ""
+
+msgid "ZAP timers can send command 'sourceactive' before zap for set TV to correct input."
 msgstr ""
 
 msgid "Zambia"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Openpli\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-21 15:48+0100\n"
+"POT-Creation-Date: 2020-11-23 20:40+0100\n"
 "PO-Revision-Date: 2019-04-03 06:49+0300\n"
 "Last-Translator: \n"
 "Language-Team: Raivo, Henkka, eesatfan, rimas, zeros\\n faas, sateks, valgekotkas, tigekala, rootsikunn\\n kain, i70, mustkass, pelmeen, Scott\\n <digi-tv.ee>\n"
@@ -580,6 +580,10 @@ msgstr "??"
 
 msgid "A"
 msgstr "A"
+
+#, fuzzy
+msgid "A command sent from TV will wake up the receiver from standby."
+msgstr "Käivita vastuvõtja"
 
 #, python-format
 msgid ""
@@ -1373,6 +1377,9 @@ msgstr ""
 
 msgid "Basque"
 msgstr "Baski"
+
+msgid "Before sending command for switch TV to standby receiver tests if all other receivers pluged to TV are in standby. If are not, 'sourceactive' instead 'stanby' is sent to the TV."
+msgstr ""
 
 msgid "Begin time"
 msgstr "Algusaeg"
@@ -2658,6 +2665,9 @@ msgstr "Viide millisekundites enne näidikul liikuva teksti algust."
 msgid "Delay in miliseconds between scrolling characters on display."
 msgstr "Näidikul liikuvate tähtede vaheline viide millisekundites."
 
+msgid "Delay in queue between sending CEC commands. For working HDMI-CEC protocol must be for some receivers used delay. Usualy between 50-150ms."
+msgstr ""
+
 msgid "Delete"
 msgstr "Kustuta"
 
@@ -3252,6 +3262,10 @@ msgstr "Luba liigutamine nimekirjades"
 
 msgid "Enable multiple bouquets"
 msgstr "Luba mitmed nimekirjad"
+
+#, fuzzy
+msgid "Enable or disable using HDMI-CEC."
+msgstr "Luba HDMI-CEC"
 
 msgid "Enable parental protection"
 msgstr "Luba vanemate poolne kontroll"
@@ -4316,6 +4330,9 @@ msgid "Icons"
 msgstr "Ikoonid"
 
 msgid "If disabled, underline characters in file and directory names are not shown and are replaced with spaces."
+msgstr ""
+
+msgid "If enabled, CEC protocol traffic can be saved to a logfile 'hdmicec.log'."
 msgstr ""
 
 msgid "If enabled, bookmarks will be updated with the new location when you move or copy a recording."
@@ -6401,6 +6418,10 @@ msgstr "Vajuta INFO nuppu puldil lisainfo saamiseks."
 msgid "Press MENU on your remote control for additional options."
 msgstr "Vajuta MENU puldil lisavõimaluste kasutamiseks."
 
+#, fuzzy
+msgid "Press OK and select directory as path for logfile."
+msgstr "Vali logifaili kaust"
+
 msgid "Press OK on your remote control to continue."
 msgstr "Jätkamiseks vajuta OK."
 
@@ -6550,8 +6571,15 @@ msgstr "Puerto Rico"
 msgid "Purge deleted user bouquets"
 msgstr "Kustutatud lemmiknimekirjade puhastamine"
 
+#, fuzzy
+msgid "Put A/V receiver to standby."
+msgstr "Pane vastuvõtja ooterežiimi"
+
 msgid "Put TV in standby"
 msgstr "Lülita TV välja"
+
+msgid "Put TV to standby when receiver goes to standby or to deep standby."
+msgstr ""
 
 msgid "Put receiver in standby"
 msgstr "Pane vastuvõtja ooterežiimi"
@@ -6710,6 +6738,9 @@ msgstr "Keeldub liigutamast samasse kausta"
 
 msgid "Regard deep standby as standby"
 msgstr "Käsitle sügavooterežiimi tavalise ooterežiimina"
+
+msgid "Regard deep standby as standby. It will be sending same commands when box goest to deep standby."
+msgstr ""
 
 msgid "Region"
 msgstr "Piirkond"
@@ -8334,6 +8365,9 @@ msgstr "Somaalia"
 msgid "Some plugins are not available:\n"
 msgstr "Mõned laiendused pole saadaval:\n"
 
+msgid "Some tv's do not handle command 'Image View On' for wakingup correctly, so you can try sending 'Text View On' as alternative."
+msgstr ""
+
 #, python-format
 msgid "Sorry, %s has not been installed!"
 msgstr "%s ei  paigaldatud!"
@@ -9101,6 +9135,9 @@ msgstr ""
 #, fuzzy
 msgid "The user interface of your receiver is restarting in debug mode"
 msgstr "Vastuvõtja kasutajaliides taaskäivitub."
+
+msgid "The wake up command can be sent multiple times."
+msgstr ""
 
 msgid ""
 "The wireless LAN plugin is not installed!\n"
@@ -9917,6 +9954,10 @@ msgstr "Kasuta EIT EPG infot kui see on saadaval."
 msgid "Use TV remote control"
 msgstr "Kasuta teleri pulti"
 
+#, fuzzy
+msgid "Use TV remote control for your receiver."
+msgstr "Kasuta teleri pulti"
+
 msgid "Use USALS for this sat"
 msgstr "Kasuta selle satelliidi jaoks USALS"
 
@@ -10233,6 +10274,10 @@ msgstr "Kohtvõrgus äratamine WOL"
 msgid "Wakeup"
 msgstr "Ärata"
 
+#, fuzzy
+msgid "Wakeup A/V receiver from standby."
+msgstr "Käivita vastuvõtja"
+
 msgid "Wakeup TV from standby"
 msgstr "Käivita teler"
 
@@ -10342,6 +10387,12 @@ msgstr "Lääne-Sahara"
 
 msgid "What type of service scan do you want?"
 msgstr "Mis tüüpi teenuse otsingut soovid?"
+
+msgid "When TV is turned off, the receiver will switch to standby by a command received from the TV."
+msgstr ""
+
+msgid "When TV is turned on, the receiver will be awakened by a command received from the TV."
+msgstr ""
 
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr "Määrates 'jah', laeb enigma2 ka sidumata lemmiknimekirjad. See tähendab, et lemmiknimekirjad, mis on olemas, aga puuduvad bouquets.tv või bouquets.radio failides, laetakse ikkagi. Nii on võimalik oma lemmiknimekirjad säilitada ka paigaldatud kanalinimekirjade uuendamisel."
@@ -10549,6 +10600,12 @@ msgstr "Salvestamist alustatakse enne saatekavas näidatud aega."
 
 msgid "When nonzero, a recording will stop later than the ending time indicated by the EPG."
 msgstr "Salvestamine lõpetatakse pärast saatekavas näidatud aega."
+
+msgid "When receiver wakes up/starts, it will send command for switch TV to correct input to which the receiver is pluged."
+msgstr ""
+
+msgid "When receiver wakes up/starts, it will try wake up TV by sending the appropriate command."
+msgstr ""
 
 msgid "When selected this allows video modes to be selected even if they are not reported as supported."
 msgstr ""
@@ -10885,6 +10942,9 @@ msgstr ""
 "Kas WLAN USB pulk on ühendatud?\n"
 "\n"
 "Vali, mida soovid teha edasi."
+
+msgid "ZAP timers can send command 'sourceactive' before zap for set TV to correct input."
+msgstr ""
 
 msgid "Zambia"
 msgstr "Sambia"

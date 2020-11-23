@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-21 15:48+0100\n"
+"POT-Creation-Date: 2020-11-23 20:40+0100\n"
 "PO-Revision-Date: 2020-10-26 12:33+0100\n"
 "Last-Translator: mcfly82\n"
 "Language-Team: mcfly82 & wysless\n"
@@ -580,6 +580,10 @@ msgstr "??"
 
 msgid "A"
 msgstr "A"
+
+#, fuzzy
+msgid "A command sent from TV will wake up the receiver from standby."
+msgstr "A készülék felébresztése készenlétből"
 
 #, python-format
 msgid ""
@@ -1360,6 +1364,9 @@ msgstr "Alapvető PID info"
 
 msgid "Basque"
 msgstr "Baszk"
+
+msgid "Before sending command for switch TV to standby receiver tests if all other receivers pluged to TV are in standby. If are not, 'sourceactive' instead 'stanby' is sent to the TV."
+msgstr ""
 
 msgid "Begin time"
 msgstr "Kezdési idő"
@@ -2642,6 +2649,9 @@ msgstr "A kijelzőn a görgetett szöveg indítása előtti késleltetés (ms)."
 msgid "Delay in miliseconds between scrolling characters on display."
 msgstr "A kijelzőn az egyes karakterek görgetése közötti késleltetés (ms)."
 
+msgid "Delay in queue between sending CEC commands. For working HDMI-CEC protocol must be for some receivers used delay. Usualy between 50-150ms."
+msgstr ""
+
 msgid "Delete"
 msgstr "Törlés"
 
@@ -3224,6 +3234,10 @@ msgstr "Mozgatási mód engedélyezése"
 
 msgid "Enable multiple bouquets"
 msgstr "Többszörös listák engedélyezése"
+
+#, fuzzy
+msgid "Enable or disable using HDMI-CEC."
+msgstr "HDMI-CEC engedélyezése"
 
 msgid "Enable parental protection"
 msgstr "Gyermekzár védelem engedélyezése"
@@ -4277,6 +4291,9 @@ msgstr "Ikonok"
 
 msgid "If disabled, underline characters in file and directory names are not shown and are replaced with spaces."
 msgstr "Ha nem engedélyezi ezt a beállítást, akkor a fájlok és könyvtárak neveiben lévő aláhúzott karakterek szóközzel helyettesítődnek."
+
+msgid "If enabled, CEC protocol traffic can be saved to a logfile 'hdmicec.log'."
+msgstr ""
 
 msgid "If enabled, bookmarks will be updated with the new location when you move or copy a recording."
 msgstr "Ha engedélyezi, a könyvjelzők az új hely szerint lesznek frissítve amennyiben áthelyez vagy átmásol egy felvételt."
@@ -6344,6 +6361,10 @@ msgstr "Nyomja le az INFO gombot a távírányítón a részletekért."
 msgid "Press MENU on your remote control for additional options."
 msgstr "Nyomja le a MENÜ gombot a távírányítón további opciókért."
 
+#, fuzzy
+msgid "Press OK and select directory as path for logfile."
+msgstr "Mappa választása naplófájloknak"
+
 msgid "Press OK on your remote control to continue."
 msgstr "Nyomja le az OK gombot a távirányítón a folytatáshoz."
 
@@ -6492,8 +6513,15 @@ msgstr "Puerto Rico"
 msgid "Purge deleted user bouquets"
 msgstr "Törölt felhasználói listák végleges eltávolítása"
 
+#, fuzzy
+msgid "Put A/V receiver to standby."
+msgstr "Készülék kikapcsolása"
+
 msgid "Put TV in standby"
 msgstr "TV kikapcsolása"
+
+msgid "Put TV to standby when receiver goes to standby or to deep standby."
+msgstr ""
 
 msgid "Put receiver in standby"
 msgstr "Készülék kikapcsolása"
@@ -6650,6 +6678,9 @@ msgstr "Ugyanabba a mappába való áthelyezés elutasítása"
 
 msgid "Regard deep standby as standby"
 msgstr "A kikapcsolás legyen az alapértelmezett készenlét"
+
+msgid "Regard deep standby as standby. It will be sending same commands when box goest to deep standby."
+msgstr ""
 
 msgid "Region"
 msgstr "Régió"
@@ -8245,6 +8276,9 @@ msgstr "Szomália"
 msgid "Some plugins are not available:\n"
 msgstr "Egyes bővítmények nem elérhetőek:\n"
 
+msgid "Some tv's do not handle command 'Image View On' for wakingup correctly, so you can try sending 'Text View On' as alternative."
+msgstr ""
+
 #, python-format
 msgid "Sorry, %s has not been installed!"
 msgstr "Sajnálom, a %s nincs feltelepítve!"
@@ -9004,6 +9038,9 @@ msgstr ""
 
 msgid "The user interface of your receiver is restarting in debug mode"
 msgstr "A kezelőfelület hibakeresési módban indul újra"
+
+msgid "The wake up command can be sent multiple times."
+msgstr ""
 
 msgid ""
 "The wireless LAN plugin is not installed!\n"
@@ -9787,6 +9824,10 @@ msgstr "OpenTV EPG használata, amennyiben elérhető."
 msgid "Use TV remote control"
 msgstr "TV-távvezérlő használata"
 
+#, fuzzy
+msgid "Use TV remote control for your receiver."
+msgstr "TV-távvezérlő használata"
+
 msgid "Use USALS for this sat"
 msgstr "Használja az USALS-t ennél a műholdnál"
 
@@ -10099,6 +10140,10 @@ msgstr "Ébresztés LAN-on"
 msgid "Wakeup"
 msgstr "Felébresztés"
 
+#, fuzzy
+msgid "Wakeup A/V receiver from standby."
+msgstr "A készülék felébresztése készenlétből"
+
 msgid "Wakeup TV from standby"
 msgstr "A TV felébresztése készenléti módból"
 
@@ -10205,6 +10250,12 @@ msgstr "Nyugat-Szahara"
 
 msgid "What type of service scan do you want?"
 msgstr "Milyen típusú szolgáltatást szeretne keresni?"
+
+msgid "When TV is turned off, the receiver will switch to standby by a command received from the TV."
+msgstr ""
+
+msgid "When TV is turned on, the receiver will be awakened by a command received from the TV."
+msgstr ""
 
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr "Ha engedélyezi, a leválasztott listák is betöltődnek. Ez azt jelenti, hogy az olyan felhasználói listák is betöltődnek, amelyek léteznek, de nincsnek benne a bouquets.tv vagy bouquets.radio fájlban. Ez lehetőséget ad arra, hogy a saját listáit megtartsa, ha a csatornák frissülnek."
@@ -10406,6 +10457,12 @@ msgstr "Ennyivel korábban kezdje a felvételt, mint amennyi időt mond az EPG."
 
 msgid "When nonzero, a recording will stop later than the ending time indicated by the EPG."
 msgstr "Ennyivel később fejezze be a felvételt, mint amennyi időt mond az EPG."
+
+msgid "When receiver wakes up/starts, it will send command for switch TV to correct input to which the receiver is pluged."
+msgstr ""
+
+msgid "When receiver wakes up/starts, it will try wake up TV by sending the appropriate command."
+msgstr ""
 
 msgid "When selected this allows video modes to be selected even if they are not reported as supported."
 msgstr "Ezzel engedélyezheti a nem támogatott videómódok kiválasztását."
@@ -10741,6 +10798,9 @@ msgstr ""
 "Csatlakoztatva van az USB-s vezeték nélküli adapter?\n"
 "\n"
 "Kérem, válassza ki, mi legyen a teendő."
+
+msgid "ZAP timers can send command 'sourceactive' before zap for set TV to correct input."
+msgstr ""
 
 msgid "Zambia"
 msgstr "Zambia"
