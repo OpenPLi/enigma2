@@ -77,7 +77,7 @@ class HdmiCECSetupScreen(Screen, ConfigListScreen):
 	###
 
 	def updateDescription(self):
-		self["description"].setText("%s\n\n%s\n\n%s" % (self.getCurrentDescription(), self.current_address, self.fixed_address))
+		self["description"].setText("%s\n\n%s\n\n%s" % (self.current_address, self.fixed_address, self.getCurrentDescription()))
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
