@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-21 15:48+0100\n"
+"POT-Creation-Date: 2020-11-23 20:40+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: satdreamgr\n"
 "Language-Team: \n"
@@ -573,6 +573,10 @@ msgstr "??"
 
 msgid "A"
 msgstr "A"
+
+#, fuzzy
+msgid "A command sent from TV will wake up the receiver from standby."
+msgstr "Wakeup receiver from standby"
 
 #, python-format
 msgid ""
@@ -1371,6 +1375,9 @@ msgstr ""
 
 msgid "Basque"
 msgstr "Basque"
+
+msgid "Before sending command for switch TV to standby receiver tests if all other receivers pluged to TV are in standby. If are not, 'sourceactive' instead 'stanby' is sent to the TV."
+msgstr ""
 
 msgid "Begin time"
 msgstr "Begin time"
@@ -2672,6 +2679,9 @@ msgstr ""
 msgid "Delay in miliseconds between scrolling characters on display."
 msgstr ""
 
+msgid "Delay in queue between sending CEC commands. For working HDMI-CEC protocol must be for some receivers used delay. Usualy between 50-150ms."
+msgstr ""
+
 msgid "Delete"
 msgstr "Delete"
 
@@ -3270,6 +3280,10 @@ msgstr "Enable move mode"
 
 msgid "Enable multiple bouquets"
 msgstr "Enable multiple bouquets"
+
+#, fuzzy
+msgid "Enable or disable using HDMI-CEC."
+msgstr "Enable EIT EPG"
 
 msgid "Enable parental protection"
 msgstr ""
@@ -4331,6 +4345,9 @@ msgid "Icons"
 msgstr "Icons"
 
 msgid "If disabled, underline characters in file and directory names are not shown and are replaced with spaces."
+msgstr ""
+
+msgid "If enabled, CEC protocol traffic can be saved to a logfile 'hdmicec.log'."
 msgstr ""
 
 msgid "If enabled, bookmarks will be updated with the new location when you move or copy a recording."
@@ -6441,6 +6458,10 @@ msgstr "Press INFO on your remote control for additional information."
 msgid "Press MENU on your remote control for additional options."
 msgstr "Press MENU on your remote control for additional options."
 
+#, fuzzy
+msgid "Press OK and select directory as path for logfile."
+msgstr "Creating directory %s failed."
+
 msgid "Press OK on your remote control to continue."
 msgstr "Press OK on your remote control to continue."
 
@@ -6590,8 +6611,15 @@ msgstr ""
 msgid "Purge deleted user bouquets"
 msgstr ""
 
+#, fuzzy
+msgid "Put A/V receiver to standby."
+msgstr "Put receiver in standby"
+
 msgid "Put TV in standby"
 msgstr "Put TV in standby"
+
+msgid "Put TV to standby when receiver goes to standby or to deep standby."
+msgstr ""
 
 msgid "Put receiver in standby"
 msgstr "Put receiver in standby"
@@ -6750,6 +6778,9 @@ msgstr "Please enter name of the new directory"
 
 msgid "Regard deep standby as standby"
 msgstr "Regard deep standby as standby"
+
+msgid "Regard deep standby as standby. It will be sending same commands when box goest to deep standby."
+msgstr ""
 
 msgid "Region"
 msgstr ""
@@ -8389,6 +8420,9 @@ msgstr ""
 msgid "Some plugins are not available:\n"
 msgstr "Some plugins are not available:\n"
 
+msgid "Some tv's do not handle command 'Image View On' for wakingup correctly, so you can try sending 'Text View On' as alternative."
+msgstr ""
+
 #, python-format
 msgid "Sorry, %s has not been installed!"
 msgstr "Sorry, %s has not been installed!"
@@ -9145,6 +9179,9 @@ msgstr ""
 #, fuzzy
 msgid "The user interface of your receiver is restarting in debug mode"
 msgstr "The user interface of your receiver is restarting"
+
+msgid "The wake up command can be sent multiple times."
+msgstr ""
 
 msgid ""
 "The wireless LAN plugin is not installed!\n"
@@ -9943,6 +9980,10 @@ msgstr "Use EIT EPG information when it is available."
 msgid "Use TV remote control"
 msgstr "Use TV remote control"
 
+#, fuzzy
+msgid "Use TV remote control for your receiver."
+msgstr "Use TV remote control"
+
 msgid "Use USALS for this sat"
 msgstr "Use USALS for this sat"
 
@@ -10263,6 +10304,10 @@ msgstr ""
 msgid "Wakeup"
 msgstr "Wakeup"
 
+#, fuzzy
+msgid "Wakeup A/V receiver from standby."
+msgstr "Wakeup receiver from standby"
+
 msgid "Wakeup TV from standby"
 msgstr "Wakeup TV from standby"
 
@@ -10368,6 +10413,12 @@ msgid "Western Sahara"
 msgstr ""
 
 msgid "What type of service scan do you want?"
+msgstr ""
+
+msgid "When TV is turned off, the receiver will switch to standby by a command received from the TV."
+msgstr ""
+
+msgid "When TV is turned on, the receiver will be awakened by a command received from the TV."
 msgstr ""
 
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
@@ -10574,6 +10625,12 @@ msgstr "When nonzero, a recording will start earlier than the starting time indi
 
 msgid "When nonzero, a recording will stop later than the ending time indicated by the EPG."
 msgstr "When nonzero, a recording will stop later than the ending time indicated by the EPG."
+
+msgid "When receiver wakes up/starts, it will send command for switch TV to correct input to which the receiver is pluged."
+msgstr ""
+
+msgid "When receiver wakes up/starts, it will try wake up TV by sending the appropriate command."
+msgstr ""
 
 msgid "When selected this allows video modes to be selected even if they are not reported as supported."
 msgstr ""
@@ -10898,6 +10955,9 @@ msgstr ""
 "Have you attached your USB WLAN Stick?\n"
 "\n"
 "Please choose what you want to do next."
+
+msgid "ZAP timers can send command 'sourceactive' before zap for set TV to correct input."
+msgstr ""
 
 msgid "Zambia"
 msgstr ""
