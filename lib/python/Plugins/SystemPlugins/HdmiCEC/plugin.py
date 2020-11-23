@@ -1,29 +1,13 @@
 from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen
 from Components.config import config, getConfigListEntry
+from Components.Label import Label
 from Components.Sources.StaticText import StaticText
 
 class HdmiCECSetupScreen(Screen, ConfigListScreen):
-	skin = """
-	<screen position="c-300,c-250" size="600,540" title="HDMI-CEC setup">
-		<widget name="config" position="25,25" size="550,300" scrollbarMode="showOnDemand"/>
-		<widget source="current_address" render="Label" position="25,335" size="550,25" zPosition="10" font="Regular;21" halign="left" valign="center" />
-		<widget source="fixed_address" render="Label" position="25,360" size="550,25" zPosition="10" font="Regular;21" halign="left" valign="center" />
-		<widget source="description" render="Label" position="25,390" size="550,92" zPosition="10" font="Regular;20" halign="left" />
-		<ePixmap pixmap="buttons/red.png" position="20,e-45" size="140,40" alphatest="on" />
-		<ePixmap pixmap="buttons/green.png" position="160,e-45" size="140,40" alphatest="on" />
-		<ePixmap pixmap="buttons/yellow.png" position="300,e-45" size="140,40" alphatest="on" />
-		<ePixmap pixmap="buttons/blue.png" position="440,e-45" size="140,40" alphatest="on" />
-		<widget source="key_red" render="Label" position="20,e-55" zPosition="1" size="140,50" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
-		<widget source="key_green" render="Label" position="160,e-55" zPosition="1" size="140,50" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
-		<widget source="key_yellow" render="Label" position="300,e-55" zPosition="1" size="140,50" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
-		<widget source="key_blue" render="Label" position="440,e-55" zPosition="1" size="140,50" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" transparent="1" />
-	</screen>"""
-
 	def __init__(self, session):
-		self.skin = HdmiCECSetupScreen.skin
 		Screen.__init__(self, session)
-
+		self.skinName = "Setup"
 		self.setTitle(_("HDMI-CEC setup"))
 
 		from Components.ActionMap import ActionMap
@@ -33,9 +17,7 @@ class HdmiCECSetupScreen(Screen, ConfigListScreen):
 		self["key_green"] = StaticText(_("OK"))
 		self["key_yellow"] = StaticText(_("Set fixed"))
 		self["key_blue"] = StaticText(_("Clear fixed"))
-		self["current_address"] = StaticText()
-		self["fixed_address"] = StaticText()
-		self["description"] = StaticText("")
+		self["description"] = Label("")
 
 		self["actions"] = ActionMap(["SetupActions", "ColorActions", "MenuActions"],
 		{
@@ -85,18 +67,17 @@ class HdmiCECSetupScreen(Screen, ConfigListScreen):
 		self["config"].l.setList(self.list)
 
 	# for summary:
-	def changedEntry(self):
-		for x in self.onChangedEntry:
-			x()
 	def getCurrentEntry(self):
-		self["description"].setText(self.getCurrentDescription())
-		return self["config"].getCurrent()[0]
-	def getCurrentValue(self):
-		return str(self["config"].getCurrent()[1].getText())
+		self.updateDescription()
+		return ConfigListScreen.getCurrentEntry(self)
+
 	def createSummary(self):
 		from Screens.Setup import SetupSummary
 		return SetupSummary
 	###
+
+	def updateDescription(self):
+		self["description"].setText("%s\n\n%s\n\n%s" % (self.current_address, self.fixed_address, self.getCurrentDescription()))
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -135,12 +116,12 @@ class HdmiCECSetupScreen(Screen, ConfigListScreen):
 
 	def updateAddress(self):
 		import Components.HdmiCec
-		self["current_address"].setText(_("Current CEC address") + ": " + Components.HdmiCec.hdmi_cec.getPhysicalAddress())
+		self.current_address = _("Current CEC address") + ": " + Components.HdmiCec.hdmi_cec.getPhysicalAddress()
 		if config.hdmicec.fixed_physical_address.value == "0.0.0.0":
-			fixedaddresslabel = ""
+			self.fixed_address = ""
 		else:
-			fixedaddresslabel = _("Using fixed address") + ": " + config.hdmicec.fixed_physical_address.value
-		self["fixed_address"].setText(fixedaddresslabel)
+			self.fixed_address = _("Using fixed address") + ": " + config.hdmicec.fixed_physical_address.value
+		self.updateDescription()
 
 	def logPath(self, res):
 		if res is not None:
