@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-21 15:48+0100\n"
-"PO-Revision-Date: 2020-11-23 20:57+0100\n"
+"POT-Creation-Date: 2020-11-23 20:40+0100\n"
+"PO-Revision-Date: 2020-11-24 18:47+0100\n"
 "Last-Translator: Željko <zeljko2@hi.ht.hr>\n"
 "Language-Team: Željko\n"
 "Language: hr_HR\n"
@@ -593,6 +593,9 @@ msgstr "??"
 
 msgid "A"
 msgstr "A"
+
+msgid "A command sent from TV will wake up the receiver from standby."
+msgstr "Naredba poslana s TV-a probudit će prijamnik iz stanja čekanja."
 
 #, python-format
 msgid ""
@@ -1373,6 +1376,9 @@ msgstr "Osnovni PID podaci"
 
 msgid "Basque"
 msgstr "Baskijski"
+
+msgid "Before sending command for switch TV to standby receiver tests if all other receivers pluged to TV are in standby. If are not, 'sourceactive' instead 'stanby' is sent to the TV."
+msgstr "Prije slanja naredbe za prebacivanje televizora u stanje čekanja prijemnik provjerava jesu li svi ostali prijemnici priključeni na TV u stanju čekanja."
 
 msgid "Begin time"
 msgstr "Vrijeme početka"
@@ -2657,6 +2663,9 @@ msgstr "Odgoda u milisekundama prije početka pomicanja teksta na zaslonu."
 msgid "Delay in miliseconds between scrolling characters on display."
 msgstr "Odgoda u milisekundama između pomicanja znakova na zaslonu."
 
+msgid "Delay in queue between sending CEC commands. For working HDMI-CEC protocol must be for some receivers used delay. Usualy between 50-150ms."
+msgstr "Kašnjenje u redu između slanja CEC naredbi. Za rad HDMI-CEC protokola mora se za neke prijamnike koristiti odgoda. Uobičajeno između 50-150ms."
+
 msgid "Delete"
 msgstr "Izbrisati"
 
@@ -3242,6 +3251,9 @@ msgstr "Omogući sortiranje kanala"
 
 msgid "Enable multiple bouquets"
 msgstr "Omogućite više paketa"
+
+msgid "Enable or disable using HDMI-CEC."
+msgstr "Omogućite ili onemogućite korištenje HDMI-CEC-a."
 
 msgid "Enable parental protection"
 msgstr "Omogućite roditeljsku zaštitu"
@@ -4299,6 +4311,9 @@ msgstr "Ikone"
 
 msgid "If disabled, underline characters in file and directory names are not shown and are replaced with spaces."
 msgstr "Ako je onemogućeno, podcrtani znakovi u imenima datoteka i direktorija nisu prikazani i zamijenjeni su razmacima."
+
+msgid "If enabled, CEC protocol traffic can be saved to a logfile 'hdmicec.log'."
+msgstr "Ako je omogućeno, promet CEC protokola može se spremiti u datoteku dnevnika 'hdmicec.log'."
 
 msgid "If enabled, bookmarks will be updated with the new location when you move or copy a recording."
 msgstr "Ako je omogućeno, oznake će se ažurirati novim mjestom kada premjestite ili kopirate snimku."
@@ -6362,6 +6377,9 @@ msgstr "Pritisnite INFO na daljinskom upravljaču za dodatne informacije."
 msgid "Press MENU on your remote control for additional options."
 msgstr "Pritisnite MENU na daljinskom upravljaču za dodatne opcije."
 
+msgid "Press OK and select directory as path for logfile."
+msgstr "Pritisnite OK i odaberite direktorij za put datoteke dnevnika."
+
 msgid "Press OK on your remote control to continue."
 msgstr "Pritisnite OK na daljinskom upravljaču za nastavak."
 
@@ -6510,8 +6528,14 @@ msgstr "Puerto Rico"
 msgid "Purge deleted user bouquets"
 msgstr "Očisti izbrisane korisničke pakete"
 
+msgid "Put A/V receiver to standby."
+msgstr "Stavite A/V prijamnik u stanje čekanja."
+
 msgid "Put TV in standby"
 msgstr "Stavite TV u stanje čekanja"
+
+msgid "Put TV to standby when receiver goes to standby or to deep standby."
+msgstr "Stavite TV u stanje čekanja kada resiver pređe u stanje čekanja ili u duboko stanje čekanja."
 
 msgid "Put receiver in standby"
 msgstr "Stavite STB u stanje čekanja"
@@ -6668,6 +6692,9 @@ msgstr "Odbija premještanje u isti direktorij"
 
 msgid "Regard deep standby as standby"
 msgstr "Duboko stanje čekanja kao čekanje"
+
+msgid "Regard deep standby as standby. It will be sending same commands when box goest to deep standby."
+msgstr "Duboko stanje čekanja smatrajte stanjem čekanja. Iste će naredbe slati kad okvir pređe u duboko stanje čekanja."
 
 msgid "Region"
 msgstr "Regija"
@@ -8267,6 +8294,9 @@ msgstr "Somalija"
 msgid "Some plugins are not available:\n"
 msgstr "Neki dodaci nisu dostupni:\n"
 
+msgid "Some tv's do not handle command 'Image View On' for wakingup correctly, so you can try sending 'Text View On' as alternative."
+msgstr "Neki televizori ne raspolažu naredbom 'Uključen pregled slike' za pravilno buđenje, pa možete pokušati poslati 'Uključen pregled teksta' kao alternativu."
+
 #, python-format
 msgid "Sorry, %s has not been installed!"
 msgstr "Žao nam je, %s nije instaliran!"
@@ -8864,7 +8894,7 @@ msgid "Testscreens that are helpfull to fine-tune your display"
 msgstr "Testirajte zaslone koji su korisni za fino podešavanje zaslona"
 
 msgid "Text View On"
-msgstr "Uključen prikaz teksta"
+msgstr "Uključen pregled teksta"
 
 msgid "Text color"
 msgstr "Boja teksta"
@@ -9020,6 +9050,9 @@ msgstr ""
 
 msgid "The user interface of your receiver is restarting in debug mode"
 msgstr "Korisničko sučelje vašeg prijemnika ponovno se pokreće u načinu za otklanjanje pogrešaka"
+
+msgid "The wake up command can be sent multiple times."
+msgstr "Naredba za buđenje može se poslati više puta."
 
 msgid ""
 "The wireless LAN plugin is not installed!\n"
@@ -9804,6 +9837,9 @@ msgstr "Koristite OpenTV EPG informacije kada su dostupne."
 msgid "Use TV remote control"
 msgstr "Koristite daljinski upravljač za TV"
 
+msgid "Use TV remote control for your receiver."
+msgstr "Koristite daljinski upravljač za vaš resiver"
+
 msgid "Use USALS for this sat"
 msgstr "Koristite USALS za ovaj satelit"
 
@@ -10117,6 +10153,9 @@ msgstr "Uključivanje u LAN"
 msgid "Wakeup"
 msgstr "Buđenje"
 
+msgid "Wakeup A/V receiver from standby."
+msgstr "Buđenje A/V resivera iz stanja čekanja"
+
 msgid "Wakeup TV from standby"
 msgstr "Buđenje TV-a iz stanja čekanja"
 
@@ -10124,13 +10163,13 @@ msgid "Wakeup command for TV"
 msgstr "Naredba za buđenje TV-a"
 
 msgid "Wakeup receiver for start timer"
-msgstr "Naredba resiveru za pokretanje tajmera"
+msgstr "Omogućite prijemniku pokretanje tajmera"
 
 msgid "Wakeup receiver from standby"
 msgstr "Buđenje resivera iz stanja čekanja"
 
 msgid "Wakeup signal from TV"
-msgstr "Signal buđenja iz televizora"
+msgstr "Naredba buđenja od televizora"
 
 msgid "Wakeup time"
 msgstr "Vrijeme buđenja"
@@ -10225,6 +10264,12 @@ msgstr "Zapadna Sahara"
 
 msgid "What type of service scan do you want?"
 msgstr "Koju vrstu skeniranja usluga želite?"
+
+msgid "When TV is turned off, the receiver will switch to standby by a command received from the TV."
+msgstr "Kad je TV isključen, resiver će prebaciti u stanje čekanja naredbom primljenom od televizora."
+
+msgid "When TV is turned on, the receiver will be awakened by a command received from the TV."
+msgstr "Kad je TV uključen, prijamnik će se probuditi naredbom primljenom od televizora."
 
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr "Kada je omogućeno enigma2 učitat će nepovezane korisničke pakete. To znači da će korisnički paketi koji su dostupni, ali nisu uključeni u bouquets.tv ili bouquets.radio datoteke i dalje biti učitani. To vam omogućuje, primjerice da zadržite vlastiti korisnički paket dok su instalirane postavke ažurirane."
@@ -10426,6 +10471,12 @@ msgstr "Kada vrijednost nije nula, snimanje će početi ranije od vremena počet
 
 msgid "When nonzero, a recording will stop later than the ending time indicated by the EPG."
 msgstr "Kada vrijednost nije nula, snimanje će se zaustaviti kasnije od vremena završetka naznačenog u EPG-u."
+
+msgid "When receiver wakes up/starts, it will send command for switch TV to correct input to which the receiver is pluged."
+msgstr "Kad se resiver probudi/pokrene, poslat će naredbu za ispravljanje ulaza na koji je TV priključen."
+
+msgid "When receiver wakes up/starts, it will try wake up TV by sending the appropriate command."
+msgstr "Kad se resiver probudi/pokrene, pokušat će probuditi TV slanjem odgovarajuće naredbe."
 
 msgid "When selected this allows video modes to be selected even if they are not reported as supported."
 msgstr "Kada je odabrano, to omogućuje odabir video načina rada čak i ako nisu prijavljeni kao podržani."
@@ -10757,6 +10808,9 @@ msgstr ""
 "Je li priključen vaš USB WLAN stick?\n"
 "\n"
 "Odaberite što želite učiniti sljedeće."
+
+msgid "ZAP timers can send command 'sourceactive' before zap for set TV to correct input."
+msgstr "ZAP tajmeri mogu poslati naredbu 'aktivan izvor' prije postavljanja TV-a na ispravan ulaz."
 
 msgid "Zambia"
 msgstr "Zambija"
