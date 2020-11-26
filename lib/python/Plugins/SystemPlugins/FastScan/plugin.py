@@ -25,23 +25,15 @@ config.misc.fastscan.drop = ConfigYesNo(default = True)
 providers = [
 	('Canal Digitaal', (1, 900, True)),
 	('TV Vlaanderen', (1, 910, True)),
-	('TeleSAT Belgium', (0, 920, False)),
-	('TeleSAT Luxembourg', (0, 921, False)),
+	('TéléSAT', (0, 920, False)),
 	('HD Austria', (0, 950, False)),
 	('Diveo', (0, 960, False)),
-	('Skylink Czech Republic', (1, 30, False)),
-	('Skylink Slovak Republic', (1, 31, False)),
+	('Skylink CK', (1, 30, False)),
+	('Skylink SK', (1, 31, False)),
 	('FreeSAT CZ', (2, 82, False)),
 	('FreeSAT SK', (2, 83, False)),
 	('FocusSAT Thor', (2, 84, False)),
-	('UPC Direct Thor', (2, 81, False)),
-	('KabelKiosk', (0, 970, False)),
-	('TeleSAT Belgium Astra3', (1, 920, False)),
-	('TeleSAT Luxembourg Astra3', (1, 921, False)),
-	('HD Austria Astra3', (1, 950, False)),
-	('Diveo Astra3', (1, 960, False)),
-	('Canal Digitaal Astra 1', (0, 900, True)),
-	('TV Vlaanderen  Astra 1', (0, 910, True))]
+	('UPC Direct Thor', (2, 81, False))]
 
 transponders = ((12515000, 22000000, eDVBFrontendParametersSatellite.FEC_5_6, 192,
 	eDVBFrontendParametersSatellite.Polarisation_Horizontal, eDVBFrontendParametersSatellite.Inversion_Unknown,
@@ -69,7 +61,7 @@ class FastScanStatus(Screen):
 
 	def __init__(self, session, scanTuner=0, transponderParameters=None, scanPid=900, keepNumbers=False, keepSettings=False, providerName='Favorites', createRadioBouquet=False):
 		Screen.__init__(self, session)
-		self.setTitle(_("Fast Scan"))
+		self.setTitle(_("Fastscan"))
 		self.scanPid = scanPid
 		self.scanTuner = scanTuner
 		self.transponderParameters = transponderParameters
@@ -153,7 +145,7 @@ class FastScanStatus(Screen):
 
 class FastScanScreen(ConfigListScreen, Screen):
 	skin = """
-	<screen position="100,115" size="520,290" title="Fast Scan">
+	<screen position="100,115" size="520,290" title="Fastscan">
 		<widget name="config" position="10,10" size="500,250" scrollbarMode="showOnDemand" />
 		<widget name="introduction" position="10,265" size="500,25" font="Regular;20" halign="center" />
 	</screen>"""
@@ -161,7 +153,7 @@ class FastScanScreen(ConfigListScreen, Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 
-		self.setTitle(_("Fast Scan"))
+		self.setTitle(_("Fastscan"))
 
 		self["actions"] = ActionMap(["SetupActions", "MenuActions"],
 		{
@@ -221,11 +213,11 @@ class FastScanScreen(ConfigListScreen, Screen):
 			self.list.append(getConfigListEntry(_("Use fastscan channel names"), self.scan_keepsettings))
 			self.list.append(getConfigListEntry(_("Create separate radio userbouquet"), self.scan_create_radio_bouquet))
 			self.list.append(getConfigListEntry(_("Drop unconfigured satellites"), config.misc.fastscan.drop))
-			self.list.append(getConfigListEntry(_("Enable auto fast scan"), config.misc.fastscan.auto))
+			self.list.append(getConfigListEntry(_("Enable auto fastscan"), config.misc.fastscan.auto))
 			if config.misc.fastscan.auto.value == "multi":
 				for provider in providers:
 					if nimmanager.getNimListForSat(transponders[provider[1][0]][3]):
-						self.list.append(getConfigListEntry(_("Enable auto fast scan for %s") % provider[0], self.config_autoproviders[provider[0]]))
+						self.list.append(getConfigListEntry(_("Enable auto fastscan for %s") % provider[0], self.config_autoproviders[provider[0]]))
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
@@ -398,13 +390,13 @@ def autostart(reason, **kwargs):
 
 def FastScanStart(menuid, **kwargs):
 	if menuid == "scan" and getProviderList():
-		return [(_("Fast Scan"), FastScanMain, "fastscan", None)]
+		return [(_("Fastscan"), FastScanMain, "fastscan", None)]
 	else:
 		return []
 
 def Plugins(**kwargs):
 	if (nimmanager.hasNimType("DVB-S")):
-		return [PluginDescriptor(name=_("Fast Scan"), description="Scan M7 Brands, BE/NL/DE/AT/CZ", where = PluginDescriptor.WHERE_MENU, fnc=FastScanStart),
+		return [PluginDescriptor(name=_("FastScan"), description="Scan M7 Brands, BE/NL/DE/AT/CZ", where = PluginDescriptor.WHERE_MENU, fnc=FastScanStart),
 			PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=autostart)]
 	else:
 		return []
