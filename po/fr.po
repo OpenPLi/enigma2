@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-23 20:40+0100\n"
+"POT-Creation-Date: 2020-11-26 20:07+0100\n"
 "PO-Revision-Date: 2020-11-23 21:02+0100\n"
 "Last-Translator: Pr2\n"
 "Language-Team: french\n"
@@ -582,9 +582,6 @@ msgstr "??"
 msgid "A"
 msgstr "A"
 
-msgid "A command sent from TV will wake up the receiver from standby."
-msgstr "Une commande envoyée depuis la télévision réveillera le récepteur de la veille."
-
 #, python-format
 msgid ""
 "A configuration file (%s) has been modified since it was installed.\n"
@@ -955,6 +952,10 @@ msgstr "Autoriser les sous-titres pour malentendants"
 msgid "Allow unsupported modes"
 msgstr "Autoriser les modes non supportés"
 
+#, fuzzy
+msgid "Allows the TV remote to be used to control the receiver."
+msgstr "Utiliser la télécommande TV pour votre récepteur."
+
 msgid "Alpha"
 msgstr "Transparence"
 
@@ -1271,6 +1272,10 @@ msgstr "Signets automatiques"
 msgid "Automatic scan"
 msgstr "Recherche automatique"
 
+#, fuzzy
+msgid "Automatically put the TV in standby whenever the receiver goes into standby or deep standby."
+msgstr "Mettre la télévision en veille lorsque le récepteur est en veille ou en veille profonde."
+
 msgid "Automatically start timeshift after"
 msgstr "Démarrer automatiquement la PauseDirect après"
 
@@ -1365,7 +1370,8 @@ msgstr "Info de base PID"
 msgid "Basque"
 msgstr "Basque"
 
-msgid "Before sending command for switch TV to standby receiver tests if all other receivers pluged to TV are in standby. If are not, 'sourceactive' instead 'stanby' is sent to the TV."
+#, fuzzy
+msgid "Before sending the command to switch the TV to standby, the receiver tests if all the other devices plugged to TV are in standby. If they are not, the 'sourceinactive' command will be sent to the TV instead of the 'standby' command."
 msgstr "Avant d’envoyer la commande pour passer le téléviseur en veille tester si tous les autres équipements branchés à la télévision sont en veille. Si ce n’est pas le cas, « source active » au lieu de « vieille » est envoyé à la télévision."
 
 msgid "Begin time"
@@ -1885,6 +1891,9 @@ msgstr "Exécution de la commande..."
 
 msgid "Command order"
 msgstr "Ordre de la commande"
+
+msgid "Command the TV to switch to the correct HDMI input when zap timers activate."
+msgstr ""
 
 msgid "Commit info"
 msgstr "Info sur les commits"
@@ -2633,6 +2642,9 @@ msgstr "Délai avant que la répétition des touches commence:"
 msgid "Delay before sequence repeat"
 msgstr "Délai entre la répétition d'une séquence"
 
+msgid "Delay between CEC commands when sending a series of commands. Some devices require this delay for correct functioning, usually between 50-150ms."
+msgstr ""
+
 msgid "Delay between diseqc commands"
 msgstr "Délai entre les commandes diseqc"
 
@@ -2650,9 +2662,6 @@ msgstr "Délai en millisecondes avant le démarrage du défilement sur l'afficha
 
 msgid "Delay in miliseconds between scrolling characters on display."
 msgstr "Délai en millisecondes entre les caractères qui défilent sur l'affichage."
-
-msgid "Delay in queue between sending CEC commands. For working HDMI-CEC protocol must be for some receivers used delay. Usualy between 50-150ms."
-msgstr "Délai entre l’envoi des commandes CEC. Pour le bon fonctionnement du protocole HDMI-CEC un délai doit être introduit pour certains récepteurs. D’habitude entre 50-150ms."
 
 msgid "Delete"
 msgstr "Supprimer"
@@ -4298,7 +4307,8 @@ msgstr "Icônes"
 msgid "If disabled, underline characters in file and directory names are not shown and are replaced with spaces."
 msgstr "Si désactivé, les caractères soulignés dans le nom des fichiers et des répertoires ne seront pas affichés et seront remplacés par des espaces."
 
-msgid "If enabled, CEC protocol traffic can be saved to a logfile 'hdmicec.log'."
+#, fuzzy
+msgid "If enabled, a log will be kept of CEC protocol traffic ('hdmicec.log')"
 msgstr "S’il est activé, le trafic du protocole CEC peut être enregistré sur un logfile 'hdmicec.log'."
 
 msgid "If enabled, bookmarks will be updated with the new location when you move or copy a recording."
@@ -4318,6 +4328,9 @@ msgstr "Si défini à ‘Oui’, alors les fichiers audios sont lus uniquement e
 
 msgid "If set to 'yes' signal values (SNR, etc) will be calculated from API V3. This is an old API version that has now been superseded."
 msgstr "Si défini à ‘oui’ les valeurs du signal (SNR,etc) seront calculés depuis l’API v3. Ceci est une ancienne version de l’API qui a maintenant été remplacée."
+
+msgid "If set to 'yes' the same commands will be sent to the TV for deep standby events, as are sent during regular standby events."
+msgstr ""
 
 msgid "If using multiple uncommitted switches the DiSEqC commands must be sent multiple times. Set to the number of uncommitted switches in the chain minus one."
 msgstr "Si vous utilisez plusieurs commutateurs DiSEqC non-commité les commandes doivent être envoyées plusieurs fois. Définir le nombre de commutateur non commité dans la chaîne moins un."
@@ -6359,9 +6372,6 @@ msgstr "Appuyez sur INFO de votre télécommande pour plus d'informations."
 msgid "Press MENU on your remote control for additional options."
 msgstr "Appuyez sur MENU de votre télécommande pour d'autres options."
 
-msgid "Press OK and select directory as path for logfile."
-msgstr "Appuyez sur OK et sélectionnez le chemin du répertoire pour le logfile."
-
 msgid "Press OK on your remote control to continue."
 msgstr "Appuyez sur OK de votre télécommande pour continuer."
 
@@ -6397,6 +6407,10 @@ msgstr "Appuyez sur OK pour sélectionner un service."
 
 msgid "Press OK to select satellites"
 msgstr "Appuyez sur OK pour sélectionner les satellites"
+
+#, fuzzy
+msgid "Press OK to select the save location of the log file."
+msgstr "Appuyez sur OK et sélectionnez le chemin du répertoire pour le logfile."
 
 msgid "Press OK to select/deselect a CAId."
 msgstr "Appuyez sur OK pour (dé)sélectionner un CAId."
@@ -6510,14 +6524,12 @@ msgstr "Porto Rico"
 msgid "Purge deleted user bouquets"
 msgstr "Éliminer les bouquets utilisateurs supprimés"
 
-msgid "Put A/V receiver to standby."
+#, fuzzy
+msgid "Put A/V receiver to standby too."
 msgstr "Mettre le récepteur A/V en veille."
 
 msgid "Put TV in standby"
 msgstr "Mettre la TV en veille"
-
-msgid "Put TV to standby when receiver goes to standby or to deep standby."
-msgstr "Mettre la télévision en veille lorsque le récepteur est en veille ou en veille profonde."
 
 msgid "Put receiver in standby"
 msgstr "Mettre le récepteur en veille"
@@ -6674,9 +6686,6 @@ msgstr "Refus de déplacer vers le même répertoire"
 
 msgid "Regard deep standby as standby"
 msgstr "Gérer la mise en veille profonde comme en veille"
-
-msgid "Regard deep standby as standby. It will be sending same commands when box goest to deep standby."
-msgstr "Considérez la veille profonde comme la veille. Il enverra les mêmes commandes lorsque le récepteur passera en veille profonde."
 
 msgid "Region"
 msgstr "Région"
@@ -8270,11 +8279,11 @@ msgstr "Îles Salomon"
 msgid "Somalia"
 msgstr "Somalie"
 
+msgid "Some TVs do not wake from standby when they receive the 'Image View On' command. If this is the case try the 'Text View On' command instead."
+msgstr ""
+
 msgid "Some plugins are not available:\n"
 msgstr "Certains plugins ne sont pas disponibles:\n"
-
-msgid "Some tv's do not handle command 'Image View On' for wakingup correctly, so you can try sending 'Text View On' as alternative."
-msgstr "Certains téléviseurs ne gèrent pas la commande ‘A’fficher Image Sur’ pour se réveiller correctement, vous pouvez alors essayer d’envoyer ‘A’fficher Texte Sur’ comme alternative."
 
 #, python-format
 msgid "Sorry, %s has not been installed!"
@@ -8923,6 +8932,10 @@ msgstr "Le code PIN a été enregistré avec succès."
 msgid "The PIN codes you entered are different."
 msgstr "Les codes PIN saisis sont différents."
 
+#, fuzzy
+msgid "The command to wake from standby will be sent multiple times."
+msgstr "La commande de réveil peut être envoyée plusieurs fois."
+
 #, python-format
 msgid ""
 "The current image might not be stable.\n"
@@ -9038,9 +9051,6 @@ msgstr ""
 
 msgid "The user interface of your receiver is restarting in debug mode"
 msgstr "L'interface utilisateur de votre récepteur redémarre en mode déboggage"
-
-msgid "The wake up command can be sent multiple times."
-msgstr "La commande de réveil peut être envoyée plusieurs fois."
 
 msgid ""
 "The wireless LAN plugin is not installed!\n"
@@ -9828,9 +9838,6 @@ msgstr "Utilisez les informations EPG OpenTV lorsqu'elles sont disponibles."
 msgid "Use TV remote control"
 msgstr "Utiliser la télécommande de la TV"
 
-msgid "Use TV remote control for your receiver."
-msgstr "Utiliser la télécommande TV pour votre récepteur."
-
 msgid "Use USALS for this sat"
 msgstr "Utiliser USALS pour ce satellite"
 
@@ -10105,6 +10112,9 @@ msgstr "Volume"
 msgid "Volume down"
 msgstr "Volume bas"
 
+msgid "Volume keys on the receiver remote will control the TV volume."
+msgstr ""
+
 msgid "Volume up"
 msgstr "Volume haut"
 
@@ -10141,10 +10151,15 @@ msgstr "Attendre pour partitionner"
 msgid "Wake On LAN"
 msgstr "Réveil sur réseau (Wake on LAN)"
 
+#, fuzzy
+msgid "Wake the receiver from standby when selected wake command is sent from the TV."
+msgstr "Lorsque la télévision est allumée, le récepteur sera réveillé par une commande reçue de la télévision."
+
 msgid "Wakeup"
 msgstr "Réveil"
 
-msgid "Wakeup A/V receiver from standby."
+#, fuzzy
+msgid "Wakeup A/V receiver from standby too."
 msgstr "Réveiller le récepteur A/V en veille."
 
 msgid "Wakeup TV from standby"
@@ -10256,12 +10271,6 @@ msgstr "Sahara Occidental"
 msgid "What type of service scan do you want?"
 msgstr "Quel type de recherche de service voulez-vous?"
 
-msgid "When TV is turned off, the receiver will switch to standby by a command received from the TV."
-msgstr "Lorsque le téléviseur est éteint, le récepteur passe en veille par une commande reçue du téléviseur."
-
-msgid "When TV is turned on, the receiver will be awakened by a command received from the TV."
-msgstr "Lorsque la télévision est allumée, le récepteur sera réveillé par une commande reçue de la télévision."
-
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr "Lorsqu'elle est activée, enigma2 chargera les userbouquets non liés. Cela signifie que les userbouquets qui sont disponibles, mais pas repris dans les fichiers bouquets.tv ou bouquets.radio, seront chargés."
 
@@ -10273,6 +10282,14 @@ msgstr "Lorsqu'elle est activée, les boutons flèches autour du bouton OK réag
 
 msgid "When enabled the left, right, CH+/-, B+/-, P+/- buttons will follow the 'neutrino' style zap controls instead of the enigma2 style."
 msgstr "Lorsqu'elle est activée, les boutons Gauche, Droite, CH+/-, B+/-, P+/-  réagiront comme le style de zapping 'neutrino' à la place de enigma2."
+
+#, fuzzy
+msgid "When enabled the receiver will automatically return to standby when the TV is turned off."
+msgstr "Lorsqu'elle est activée, le récepteur utilisera automatiquement la piste audio que vous avez sélectionné auparavant."
+
+#, fuzzy
+msgid "When enabled the receiver will automatically wake from standby when the TV is turned on."
+msgstr "Lorsqu'elle est activée, le récepteur utilisera automatiquement la piste audio que vous avez sélectionné auparavant."
 
 msgid "When enabled the set top box is able to wakeup on LAN"
 msgstr "Lorsqu'elle est activée, le récepteur est capable de réagir au réveil depuis le réseau (wakeup on LAN)"
@@ -10463,11 +10480,9 @@ msgstr "Lorsque différent de zéro, un enregistrement commence plus tôt que l'
 msgid "When nonzero, a recording will stop later than the ending time indicated by the EPG."
 msgstr "Lorsque différent de zéro, un enregistrement s'arrêtera plus tard que l'heure de fin indiquée par l'EPG."
 
-msgid "When receiver wakes up/starts, it will send command for switch TV to correct input to which the receiver is pluged."
+#, fuzzy
+msgid "When receiver wakes from standby, it will command the TV to switch to the HDMI input the receiver is connected to."
 msgstr "Lorsque le récepteur se réveille/démarre, il envoie la commande pour passer le téléviseur sur l’entrée correcte, celle sur laquelle le récepteur est branché."
-
-msgid "When receiver wakes up/starts, it will try wake up TV by sending the appropriate command."
-msgstr "Lorsque le récepteur se réveille/démarre, il essaie de réveiller la télévision en envoyant la commande appropriée."
 
 msgid "When selected this allows video modes to be selected even if they are not reported as supported."
 msgstr "Lorsque c’est activé cela permet de sélectionner des modes vidéos même s’ils ne sont pas signalés comme supporté."
@@ -10477,6 +10492,10 @@ msgstr "Lorsque le contenu a un format d'image 16:9, choisir de redimensionner/�
 
 msgid "When the content has an aspect ratio of 4:3, choose whether to scale/stretch the picture."
 msgstr "Lorsque le contenu a un format d'image 4:3, choisir de redimensionner/étirer l'image."
+
+#, fuzzy
+msgid "When the receiver wakes from standby or deep standby, it will send a command to the TV to bring it out of standby too."
+msgstr "Lorsque le récepteur se réveille/démarre, il envoie la commande pour passer le téléviseur sur l’entrée correcte, celle sur laquelle le récepteur est branché."
 
 msgid "Where to save temporary timeshift recordings?"
 msgstr "Où sauver les enregistrements temporaires PauseDirect?"
@@ -10800,9 +10819,6 @@ msgstr ""
 "Avez-vous connecté correctement votre clé USB WLAN?\n"
 "\n"
 "Veuillez choisir ce que vous voulez faire ensuite."
-
-msgid "ZAP timers can send command 'sourceactive' before zap for set TV to correct input."
-msgstr "Les programmations ZAP peuvent envoyer la commande 'source active' avant de zapper pour régler le téléviseur sur la bonne entrée."
 
 msgid "Zambia"
 msgstr "Zambie"

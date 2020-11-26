@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-23 20:40+0100\n"
+"POT-Creation-Date: 2020-11-26 20:07+0100\n"
 "PO-Revision-Date: 2020-05-16 18:41+0200\n"
 "Last-Translator: jamu\n"
 "Language-Team: BoxFreak/jamu\n"
@@ -620,10 +620,6 @@ msgstr "??"
 msgid "A"
 msgstr "A"
 
-#, fuzzy
-msgid "A command sent from TV will wake up the receiver from standby."
-msgstr "Käynnistä vastaanotin valmiustilasta"
-
 #, python-format
 msgid ""
 "A configuration file (%s) has been modified since it was installed.\n"
@@ -1055,6 +1051,10 @@ msgstr "Salli kuulovammaisten tekstitys"
 msgid "Allow unsupported modes"
 msgstr "Salli kaikki videotilat"
 
+#, fuzzy
+msgid "Allows the TV remote to be used to control the receiver."
+msgstr "Käytä TV:n kaukosäädintä"
+
 #
 msgid "Alpha"
 msgstr "Aakkonen"
@@ -1403,6 +1403,9 @@ msgstr "Automaattiset kirjanmerkit"
 msgid "Automatic scan"
 msgstr "Automaattihaku"
 
+msgid "Automatically put the TV in standby whenever the receiver goes into standby or deep standby."
+msgstr ""
+
 msgid "Automatically start timeshift after"
 msgstr "Aloita ajansiirto automaattisesti asetetun ajan kuluttua"
 
@@ -1509,7 +1512,7 @@ msgstr ""
 msgid "Basque"
 msgstr "Baski"
 
-msgid "Before sending command for switch TV to standby receiver tests if all other receivers pluged to TV are in standby. If are not, 'sourceactive' instead 'stanby' is sent to the TV."
+msgid "Before sending the command to switch the TV to standby, the receiver tests if all the other devices plugged to TV are in standby. If they are not, the 'sourceinactive' command will be sent to the TV instead of the 'standby' command."
 msgstr ""
 
 #
@@ -2084,6 +2087,9 @@ msgstr "Komennon suoritus..."
 #
 msgid "Command order"
 msgstr "Käskyjen järjestys"
+
+msgid "Command the TV to switch to the correct HDMI input when zap timers activate."
+msgstr ""
 
 msgid "Commit info"
 msgstr ""
@@ -2895,6 +2901,9 @@ msgstr "Viive ennen kuin näppäimen toisto alkaa"
 msgid "Delay before sequence repeat"
 msgstr "Viive ennen komennon toistoa"
 
+msgid "Delay between CEC commands when sending a series of commands. Some devices require this delay for correct functioning, usually between 50-150ms."
+msgstr ""
+
 msgid "Delay between diseqc commands"
 msgstr "Viive diseqc-komentojen välillä"
 
@@ -2911,9 +2920,6 @@ msgid "Delay in miliseconds before start of scrolling text on display."
 msgstr "Viive (ms) ennen rullaavia näyttötekstejä."
 
 msgid "Delay in miliseconds between scrolling characters on display."
-msgstr ""
-
-msgid "Delay in queue between sending CEC commands. For working HDMI-CEC protocol must be for some receivers used delay. Usualy between 50-150ms."
 msgstr ""
 
 #
@@ -4760,7 +4766,7 @@ msgstr "Kuvake"
 msgid "If disabled, underline characters in file and directory names are not shown and are replaced with spaces."
 msgstr ""
 
-msgid "If enabled, CEC protocol traffic can be saved to a logfile 'hdmicec.log'."
+msgid "If enabled, a log will be kept of CEC protocol traffic ('hdmicec.log')"
 msgstr ""
 
 msgid "If enabled, bookmarks will be updated with the new location when you move or copy a recording."
@@ -4780,6 +4786,9 @@ msgstr "Toistetaanko äänitiedostot listaus-tilassa, vai kokoruudun soittimessa
 
 msgid "If set to 'yes' signal values (SNR, etc) will be calculated from API V3. This is an old API version that has now been superseded."
 msgstr "Jos päällä, signaalitiedot (SNR, jne) lasketaan API V3:lla. Tämä on vanhentunut API versio."
+
+msgid "If set to 'yes' the same commands will be sent to the TV for deep standby events, as are sent during regular standby events."
+msgstr ""
 
 msgid "If using multiple uncommitted switches the DiSEqC commands must be sent multiple times. Set to the number of uncommitted switches in the chain minus one."
 msgstr ""
@@ -7146,10 +7155,6 @@ msgstr "Katso lisätietoja painamalla INFO-näppäintä."
 msgid "Press MENU on your remote control for additional options."
 msgstr "Avaa lisäasetukset painamalla MENU-näppäintä."
 
-#, fuzzy
-msgid "Press OK and select directory as path for logfile."
-msgstr "Valitse hakemisto lokitiedostolle"
-
 #
 msgid "Press OK on your remote control to continue."
 msgstr "Jatka painamalla OK-näppäintä."
@@ -7196,6 +7201,10 @@ msgstr "Valitse kanava painamalla OK."
 #
 msgid "Press OK to select satellites"
 msgstr "Valitse palveluntarjoaja painamalla OK."
+
+#, fuzzy
+msgid "Press OK to select the save location of the log file."
+msgstr "Valitse hakemisto lokitiedostolle"
 
 #
 msgid "Press OK to select/deselect a CAId."
@@ -7329,14 +7338,11 @@ msgid "Purge deleted user bouquets"
 msgstr ""
 
 #, fuzzy
-msgid "Put A/V receiver to standby."
+msgid "Put A/V receiver to standby too."
 msgstr "Laita vastaanotin valmiustilaan"
 
 msgid "Put TV in standby"
 msgstr "Laita TV valmiustilaan"
-
-msgid "Put TV to standby when receiver goes to standby or to deep standby."
-msgstr ""
 
 msgid "Put receiver in standby"
 msgstr "Laita vastaanotin valmiustilaan"
@@ -7520,9 +7526,6 @@ msgstr "Samaan hakemistoon siirtäminen ei mahdollista"
 
 msgid "Regard deep standby as standby"
 msgstr "Käytä virransäästötilaa valmiustilana"
-
-msgid "Regard deep standby as standby. It will be sending same commands when box goest to deep standby."
-msgstr ""
 
 msgid "Region"
 msgstr "Alue"
@@ -9344,12 +9347,12 @@ msgstr "Solomon Islands"
 msgid "Somalia"
 msgstr "Somalia"
 
+msgid "Some TVs do not wake from standby when they receive the 'Image View On' command. If this is the case try the 'Text View On' command instead."
+msgstr ""
+
 #
 msgid "Some plugins are not available:\n"
 msgstr "Seuraavat lisäosat eivät ole saatavilla:\n"
-
-msgid "Some tv's do not handle command 'Image View On' for wakingup correctly, so you can try sending 'Text View On' as alternative."
-msgstr ""
 
 #, python-format
 msgid "Sorry, %s has not been installed!"
@@ -10076,6 +10079,9 @@ msgstr "PIN-koodin tallennus onnistui."
 msgid "The PIN codes you entered are different."
 msgstr "Syöttämäsi PIN-koodit olivat erilaiset."
 
+msgid "The command to wake from standby will be sent multiple times."
+msgstr ""
+
 #, python-format
 msgid ""
 "The current image might not be stable.\n"
@@ -10197,9 +10203,6 @@ msgstr ""
 
 msgid "The user interface of your receiver is restarting in debug mode"
 msgstr "Vastaanottimesi käyttöliittymä käynnistyy uudelleen debug tilaan"
-
-msgid "The wake up command can be sent multiple times."
-msgstr ""
 
 #
 msgid ""
@@ -11076,10 +11079,6 @@ msgstr "Käytä ohjelmaoppaan EIT-tietoja, jos saatavilla."
 msgid "Use TV remote control"
 msgstr "Käytä TV:n kaukosäädintä"
 
-#, fuzzy
-msgid "Use TV remote control for your receiver."
-msgstr "Käytä TV:n kaukosäädintä"
-
 msgid "Use USALS for this sat"
 msgstr "Käytä USALS:ia tälle satelliitille"
 
@@ -11402,6 +11401,9 @@ msgstr "Äänenvoimakkuus"
 msgid "Volume down"
 msgstr "Vähennä ääntä"
 
+msgid "Volume keys on the receiver remote will control the TV volume."
+msgstr ""
+
 msgid "Volume up"
 msgstr "Lisää ääntä"
 
@@ -11445,11 +11447,14 @@ msgstr "Odotetaan osiointia"
 msgid "Wake On LAN"
 msgstr "Käynnisty verkosta"
 
+msgid "Wake the receiver from standby when selected wake command is sent from the TV."
+msgstr ""
+
 msgid "Wakeup"
 msgstr "Käynnisty"
 
 #, fuzzy
-msgid "Wakeup A/V receiver from standby."
+msgid "Wakeup A/V receiver from standby too."
 msgstr "Käynnistä vastaanotin valmiustilasta"
 
 msgid "Wakeup TV from standby"
@@ -11568,12 +11573,6 @@ msgstr "Western Sahara"
 msgid "What type of service scan do you want?"
 msgstr ""
 
-msgid "When TV is turned off, the receiver will switch to standby by a command received from the TV."
-msgstr ""
-
-msgid "When TV is turned on, the receiver will be awakened by a command received from the TV."
-msgstr ""
-
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr "Kun päällä, suosikkilistat jotka ovat saatavilla ladataan vaikka ne eivät olisi bouquets.tv tai bouquets.radio tiedostoissa. Tämä antaa sinun pitää omat suosikkilistasi samalla kun asennettuja päivitetään."
 
@@ -11585,6 +11584,14 @@ msgstr "Käy käytössä, nuolinäppäimet OK:n ympärillä käyttäytyvät 'neu
 
 msgid "When enabled the left, right, CH+/-, B+/-, P+/- buttons will follow the 'neutrino' style zap controls instead of the enigma2 style."
 msgstr "Käy käytössä, vasen, oikea, CH+/-, B+/- ja P+/- näppäimet käyttäytyvät 'neutrino' -tyylisesti enigma2-tyylin sijasta."
+
+#, fuzzy
+msgid "When enabled the receiver will automatically return to standby when the TV is turned off."
+msgstr "Kun päällä, vastaanotin käyttää kanavalle aiemmin valitsemaasi ääniraitaa automaattisesti."
+
+#, fuzzy
+msgid "When enabled the receiver will automatically wake from standby when the TV is turned on."
+msgstr "Kun päällä, vastaanotin käyttää kanavalle aiemmin valitsemaasi ääniraitaa automaattisesti."
 
 msgid "When enabled the set top box is able to wakeup on LAN"
 msgstr "Käy käytössä, vastaanotin voi käynnistyä verkkokomennolla"
@@ -11776,10 +11783,7 @@ msgstr "Kun arvo ei ole nolla, tallennus alkaa aiemmin kuin ohjelmaoppaassa olev
 msgid "When nonzero, a recording will stop later than the ending time indicated by the EPG."
 msgstr "Kun arvo ei ole nolla, tallennus päättyy myöhemmin kuin ohjelmaoppaassa oleva lopetusaika."
 
-msgid "When receiver wakes up/starts, it will send command for switch TV to correct input to which the receiver is pluged."
-msgstr ""
-
-msgid "When receiver wakes up/starts, it will try wake up TV by sending the appropriate command."
+msgid "When receiver wakes from standby, it will command the TV to switch to the HDMI input the receiver is connected to."
 msgstr ""
 
 msgid "When selected this allows video modes to be selected even if they are not reported as supported."
@@ -11790,6 +11794,9 @@ msgstr "Kun ohjelman kuvasuhde on 16:9, valitse skaalataanko/venytetäänkö kuv
 
 msgid "When the content has an aspect ratio of 4:3, choose whether to scale/stretch the picture."
 msgstr "Kun ohjelman kuvasuhde on 4:3, valitse skaalataanko/venytetäänkö kuvaa."
+
+msgid "When the receiver wakes from standby or deep standby, it will send a command to the TV to bring it out of standby too."
+msgstr ""
 
 #
 msgid "Where to save temporary timeshift recordings?"
@@ -12133,9 +12140,6 @@ msgstr ""
 "Oletko kytkenyt USB WLAN-tikun?\n"
 "\n"
 "Valitse mitä haluat tehdä seuraavaksi."
-
-msgid "ZAP timers can send command 'sourceactive' before zap for set TV to correct input."
-msgstr ""
 
 msgid "Zambia"
 msgstr "Zambia"

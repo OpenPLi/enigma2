@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-23 20:40+0100\n"
+"POT-Creation-Date: 2020-11-26 20:07+0100\n"
 "PO-Revision-Date: 2011-04-14 00:02+0200\n"
 "Last-Translator: majevica <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -648,9 +648,6 @@ msgstr "??"
 msgid "A"
 msgstr "A"
 
-msgid "A command sent from TV will wake up the receiver from standby."
-msgstr ""
-
 #
 #, fuzzy, python-format
 msgid ""
@@ -1095,6 +1092,9 @@ msgstr ""
 msgid "Allow unsupported modes"
 msgstr "nije podržano"
 
+msgid "Allows the TV remote to be used to control the receiver."
+msgstr ""
+
 #
 msgid "Alpha"
 msgstr "Alfa"
@@ -1470,6 +1470,9 @@ msgstr "Automatsko skeniranje "
 msgid "Automatic scan"
 msgstr "Automatsko skeniranje "
 
+msgid "Automatically put the TV in standby whenever the receiver goes into standby or deep standby."
+msgstr ""
+
 msgid "Automatically start timeshift after"
 msgstr ""
 
@@ -1583,7 +1586,7 @@ msgstr ""
 msgid "Basque"
 msgstr ""
 
-msgid "Before sending command for switch TV to standby receiver tests if all other receivers pluged to TV are in standby. If are not, 'sourceactive' instead 'stanby' is sent to the TV."
+msgid "Before sending the command to switch the TV to standby, the receiver tests if all the other devices plugged to TV are in standby. If they are not, the 'sourceinactive' command will be sent to the TV instead of the 'standby' command."
 msgstr ""
 
 #
@@ -2174,6 +2177,9 @@ msgstr "Izvršenje komandi"
 #
 msgid "Command order"
 msgstr "Redosled komandi"
+
+msgid "Command the TV to switch to the correct HDMI input when zap timers activate."
+msgstr ""
 
 msgid "Commit info"
 msgstr ""
@@ -3056,6 +3062,9 @@ msgstr ""
 msgid "Delay before sequence repeat"
 msgstr ""
 
+msgid "Delay between CEC commands when sending a series of commands. Some devices require this delay for correct functioning, usually between 50-150ms."
+msgstr ""
+
 msgid "Delay between diseqc commands"
 msgstr ""
 
@@ -3072,9 +3081,6 @@ msgid "Delay in miliseconds before start of scrolling text on display."
 msgstr ""
 
 msgid "Delay in miliseconds between scrolling characters on display."
-msgstr ""
-
-msgid "Delay in queue between sending CEC commands. For working HDMI-CEC protocol must be for some receivers used delay. Usualy between 50-150ms."
 msgstr ""
 
 #
@@ -4990,7 +4996,7 @@ msgstr ""
 msgid "If disabled, underline characters in file and directory names are not shown and are replaced with spaces."
 msgstr ""
 
-msgid "If enabled, CEC protocol traffic can be saved to a logfile 'hdmicec.log'."
+msgid "If enabled, a log will be kept of CEC protocol traffic ('hdmicec.log')"
 msgstr ""
 
 msgid "If enabled, bookmarks will be updated with the new location when you move or copy a recording."
@@ -5009,6 +5015,9 @@ msgid "If set as 'Yes', then audiofiles are played in 'list mode' only, instead 
 msgstr ""
 
 msgid "If set to 'yes' signal values (SNR, etc) will be calculated from API V3. This is an old API version that has now been superseded."
+msgstr ""
+
+msgid "If set to 'yes' the same commands will be sent to the TV for deep standby events, as are sent during regular standby events."
 msgstr ""
 
 msgid "If using multiple uncommitted switches the DiSEqC commands must be sent multiple times. Set to the number of uncommitted switches in the chain minus one."
@@ -7482,11 +7491,6 @@ msgid "Press MENU on your remote control for additional options."
 msgstr "Pritisni MENI na svom daljinskom za dodatne opcije."
 
 #
-#, fuzzy
-msgid "Press OK and select directory as path for logfile."
-msgstr "Pravljenje direktorijuma %s nije uspelo"
-
-#
 msgid "Press OK on your remote control to continue."
 msgstr "Pritisnite OK na daljinskom upravljaču da nastavite."
 
@@ -7532,6 +7536,11 @@ msgstr "Pritisnite OK da izaberete provajdera."
 
 msgid "Press OK to select satellites"
 msgstr ""
+
+#
+#, fuzzy
+msgid "Press OK to select the save location of the log file."
+msgstr "Pravljenje direktorijuma %s nije uspelo"
 
 #
 msgid "Press OK to select/deselect a CAId."
@@ -7657,13 +7666,10 @@ msgstr ""
 msgid "Purge deleted user bouquets"
 msgstr ""
 
-msgid "Put A/V receiver to standby."
+msgid "Put A/V receiver to standby too."
 msgstr ""
 
 msgid "Put TV in standby"
-msgstr ""
-
-msgid "Put TV to standby when receiver goes to standby or to deep standby."
 msgstr ""
 
 msgid "Put receiver in standby"
@@ -7853,9 +7859,6 @@ msgid "Refusing to move to the same directory"
 msgstr "Molimo unesite ime novog direktorijuma"
 
 msgid "Regard deep standby as standby"
-msgstr ""
-
-msgid "Regard deep standby as standby. It will be sending same commands when box goest to deep standby."
 msgstr ""
 
 msgid "Region"
@@ -9770,12 +9773,12 @@ msgstr ""
 msgid "Somalia"
 msgstr ""
 
+msgid "Some TVs do not wake from standby when they receive the 'Image View On' command. If this is the case try the 'Text View On' command instead."
+msgstr ""
+
 #
 msgid "Some plugins are not available:\n"
 msgstr "Neki dodaci nisu dostupni:\n"
-
-msgid "Some tv's do not handle command 'Image View On' for wakingup correctly, so you can try sending 'Text View On' as alternative."
-msgstr ""
 
 #
 #, fuzzy, python-format
@@ -10541,6 +10544,9 @@ msgstr ""
 msgid "The PIN codes you entered are different."
 msgstr "PIN kodovi koji ste uneli su različiti. "
 
+msgid "The command to wake from standby will be sent multiple times."
+msgstr ""
+
 #, python-format
 msgid ""
 "The current image might not be stable.\n"
@@ -10650,9 +10656,6 @@ msgstr ""
 #, fuzzy
 msgid "The user interface of your receiver is restarting in debug mode"
 msgstr "Molim sačekajte dok se vaša mreža ponovo startuje"
-
-msgid "The wake up command can be sent multiple times."
-msgstr ""
 
 #
 msgid ""
@@ -11560,9 +11563,6 @@ msgstr ""
 msgid "Use TV remote control"
 msgstr ""
 
-msgid "Use TV remote control for your receiver."
-msgstr ""
-
 #
 #, fuzzy
 msgid "Use USALS for this sat"
@@ -11911,6 +11911,9 @@ msgstr "Volumen"
 msgid "Volume down"
 msgstr ""
 
+msgid "Volume keys on the receiver remote will control the TV volume."
+msgstr ""
+
 msgid "Volume up"
 msgstr ""
 
@@ -11954,10 +11957,13 @@ msgstr ""
 msgid "Wake On LAN"
 msgstr ""
 
+msgid "Wake the receiver from standby when selected wake command is sent from the TV."
+msgstr ""
+
 msgid "Wakeup"
 msgstr ""
 
-msgid "Wakeup A/V receiver from standby."
+msgid "Wakeup A/V receiver from standby too."
 msgstr ""
 
 msgid "Wakeup TV from standby"
@@ -12068,12 +12074,6 @@ msgstr ""
 msgid "What type of service scan do you want?"
 msgstr ""
 
-msgid "When TV is turned off, the receiver will switch to standby by a command received from the TV."
-msgstr ""
-
-msgid "When TV is turned on, the receiver will be awakened by a command received from the TV."
-msgstr ""
-
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr ""
 
@@ -12084,6 +12084,12 @@ msgid "When enabled the arrow buttons around the OK button will follow the 'neut
 msgstr ""
 
 msgid "When enabled the left, right, CH+/-, B+/-, P+/- buttons will follow the 'neutrino' style zap controls instead of the enigma2 style."
+msgstr ""
+
+msgid "When enabled the receiver will automatically return to standby when the TV is turned off."
+msgstr ""
+
+msgid "When enabled the receiver will automatically wake from standby when the TV is turned on."
 msgstr ""
 
 msgid "When enabled the set top box is able to wakeup on LAN"
@@ -12279,10 +12285,7 @@ msgstr ""
 msgid "When nonzero, a recording will stop later than the ending time indicated by the EPG."
 msgstr ""
 
-msgid "When receiver wakes up/starts, it will send command for switch TV to correct input to which the receiver is pluged."
-msgstr ""
-
-msgid "When receiver wakes up/starts, it will try wake up TV by sending the appropriate command."
+msgid "When receiver wakes from standby, it will command the TV to switch to the HDMI input the receiver is connected to."
 msgstr ""
 
 msgid "When selected this allows video modes to be selected even if they are not reported as supported."
@@ -12292,6 +12295,9 @@ msgid "When the content has an aspect ratio of 16:9, choose whether to scale/str
 msgstr ""
 
 msgid "When the content has an aspect ratio of 4:3, choose whether to scale/stretch the picture."
+msgstr ""
+
+msgid "When the receiver wakes from standby or deep standby, it will send a command to the TV to bring it out of standby too."
 msgstr ""
 
 #
@@ -12629,9 +12635,6 @@ msgstr ""
 "Da li ste spojili vaš USB WLAN stik?\n"
 "\n"
 "Molim izaberite šta želite sledeće da učinite."
-
-msgid "ZAP timers can send command 'sourceactive' before zap for set TV to correct input."
-msgstr ""
 
 msgid "Zambia"
 msgstr ""
