@@ -28,7 +28,7 @@ providers = [
 	('TéléSAT', (0, 920, False)),
 	('HD Austria', (0, 950, False)),
 	('Diveo', (0, 960, False)),
-	('Skylink CK', (1, 30, False)),
+	('Skylink CZ', (1, 30, False)),
 	('Skylink SK', (1, 31, False)),
 	('FreeSAT CZ', (2, 82, False)),
 	('FreeSAT SK', (2, 83, False)),
