@@ -606,13 +606,13 @@ class AttributeParser:
 		self.guiObject.setBorderColor(parseColor(value))
 
 	def borderWidth(self, value):
-		self.guiObject.setBorderWidth(int(value))
+		self.guiObject.setBorderWidth(parseScale(value))
 
 	def scrollbarSliderBorderWidth(self, value):
-		self.guiObject.setScrollbarSliderBorderWidth(int(value))
+		self.guiObject.setScrollbarSliderBorderWidth(parseScale(value))
 
 	def scrollbarWidth(self, value):
-		self.guiObject.setScrollbarWidth(int(value))
+		self.guiObject.setScrollbarWidth(parseScale(value))
 
 	def scrollbarSliderBorderColor(self, value):
 		self.guiObject.setSliderBorderColor(parseColor(value))
