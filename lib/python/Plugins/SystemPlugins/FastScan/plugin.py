@@ -61,7 +61,7 @@ class FastScanStatus(Screen):
 
 	def __init__(self, session, scanTuner=0, transponderParameters=None, scanPid=900, keepNumbers=False, keepSettings=False, providerName='Favorites', createRadioBouquet=False):
 		Screen.__init__(self, session)
-		self.setTitle(_("Fastscan"))
+		self.setTitle(_("FastScan"))
 		self.scanPid = scanPid
 		self.scanTuner = scanTuner
 		self.transponderParameters = transponderParameters
@@ -145,7 +145,7 @@ class FastScanStatus(Screen):
 
 class FastScanScreen(ConfigListScreen, Screen):
 	skin = """
-	<screen position="100,115" size="520,290" title="Fastscan">
+	<screen position="100,115" size="520,290" title="FastScan">
 		<widget name="config" position="10,10" size="500,250" scrollbarMode="showOnDemand" />
 		<widget name="introduction" position="10,265" size="500,25" font="Regular;20" halign="center" />
 	</screen>"""
@@ -153,7 +153,7 @@ class FastScanScreen(ConfigListScreen, Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 
-		self.setTitle(_("Fastscan"))
+		self.setTitle(_("FastScan"))
 
 		self["actions"] = ActionMap(["SetupActions", "MenuActions"],
 		{
@@ -390,7 +390,7 @@ def autostart(reason, **kwargs):
 
 def FastScanStart(menuid, **kwargs):
 	if menuid == "scan" and getProviderList():
-		return [(_("Fastscan"), FastScanMain, "fastscan", None)]
+		return [(_("FastScan"), FastScanMain, "fastscan", None)]
 	else:
 		return []
 
