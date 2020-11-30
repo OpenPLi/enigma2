@@ -874,6 +874,10 @@ class InfoBarChannelSelection:
 		self.servicelist.showFavourites()
 		self.openServiceList()
 
+	def openSatellitesList(self):
+		self.servicelist.showSatellites()
+		self.openServiceList()
+
 	def openServiceList(self):
 		self.session.execDialog(self.servicelist)
 
