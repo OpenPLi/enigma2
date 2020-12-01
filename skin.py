@@ -299,7 +299,7 @@ def parsePosition(s, scale, object=None, desktop=None, size=None):
 	return ePoint(*parseValuePair(s, scale, object, desktop, size))
 
 def parseSize(s, scale, object=None, desktop=None):
-	return eSize(*parseValuePair(s, scale, object, desktop))
+	return eSize(*[max(0,x) for x in parseValuePair(s, scale, object, desktop)])
 
 def parseFont(s, scale=((1, 1), (1, 1))):
 	if ";" in s:
