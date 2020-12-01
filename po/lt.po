@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: PLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-27 17:04+0100\n"
-"PO-Revision-Date: 2020-11-24 15:26+0200\n"
+"PO-Revision-Date: 2020-12-01 08:36+0200\n"
 "Last-Translator: Audronis Grincevicius <adga45@gmail.com>\n"
 "Language-Team: Adga (C) <adga45@gmail.com>\n"
 "Language: lt_LT\n"
@@ -965,9 +965,8 @@ msgstr "Leisti subtitrus turintiems klausos sutrukimų"
 msgid "Allow unsupported modes"
 msgstr "Leisti nepalaikomus režimus"
 
-#, fuzzy
 msgid "Allows the TV remote to be used to control the receiver."
-msgstr "Imtuvui naudokite televizoriaus nuotolinio valdymo pultą."
+msgstr "Leidžia naudoti televizoriaus nuotolinio valdymo pultą imtuvui valdyti."
 
 msgid "Alpha"
 msgstr "Alfa"
@@ -1285,9 +1284,8 @@ msgstr "Automatinės žymos"
 msgid "Automatic scan"
 msgstr "Automatinė paieška"
 
-#, fuzzy
 msgid "Automatically put the TV in standby whenever the receiver goes into standby or deep standby."
-msgstr "Nustatykite televizorių į budėjimo režimą, kai imtuvas eina į budėjimo režimą arba į gilų budėjimą."
+msgstr "Automatiškai nustatykite televizorių į budėjimo režimą, kai imtuvas pereina į budėjimo režimą arba gilų budėjimo režimą."
 
 msgid "Automatically start timeshift after"
 msgstr "Automatiškai paleisti laiko poslinkį po"
@@ -1383,9 +1381,8 @@ msgstr "Pagrindinė PID info"
 msgid "Basque"
 msgstr "Baskų"
 
-#, fuzzy
 msgid "Before sending the command to switch the TV to standby, the receiver tests if all the other devices plugged to TV are in standby. If they are not, the 'sourceinactive' command will be sent to the TV instead of the 'standby' command."
-msgstr "Prieš siųsdami televizoriaus perjungimo į budėjimo imtuvą komandą, galite atlikti bandymus, jei visi kiti prie televizoriaus prijungti imtuvai budi. Jei ne, \"šaltinis aktyvus\", o ne \"budėjimo režime\" siunčiamas į televizorių."
+msgstr "Prieš siųsdamas komandą, kad televizorius būtų perjungtas į budėjimo režimą, imtuvas tikrina, ar visi kiti prie televizoriaus prijungti įrenginiai yra budėjimo režime. Jei ne, komanda 'šaltinis neaktyvus' bus nusiųsta į televizorių, o ne į komandą \"budėjimo režimas\"."
 
 msgid "Begin time"
 msgstr "Pradžios laikas"
@@ -1906,7 +1903,7 @@ msgid "Command order"
 msgstr "Komandų seka"
 
 msgid "Command the TV to switch to the correct HDMI input when zap timers activate."
-msgstr ""
+msgstr "Duokite komandą televizoriui perjungti į teisingą HDMI įvestį, kai suaktyvinami laikmačiai."
 
 msgid "Commit info"
 msgstr "Vykdymo info"
@@ -2656,7 +2653,7 @@ msgid "Delay before sequence repeat"
 msgstr "Delsa prieš visų komandų kartojimą"
 
 msgid "Delay between CEC commands when sending a series of commands. Some devices require this delay for correct functioning, usually between 50-150ms."
-msgstr ""
+msgstr "Delsa tarp CEC komandų siunčiant komandų seką. Kai kuriems įrenginiams reikia šios delsos, kad tinkamai veiktų, paprastai tarp 50-150ms."
 
 msgid "Delay between diseqc commands"
 msgstr "Delsa tarp DiSEqC komandų"
@@ -3231,13 +3228,12 @@ msgstr "Įjungti Virgin EPG"
 msgid "Enable auto cable scan"
 msgstr "Įjungti kabelinės TV auto paiešką"
 
-#, fuzzy
 msgid "Enable auto fastscan"
-msgstr "Įjungti automatinę sparčią paiešką"
+msgstr "Įjungti automatinį greitą paiešką"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Enable auto fastscan for %s"
-msgstr "Įjungti automatinę sparčią paiešką %s"
+msgstr "Įjungti automatinę greitą paiešką %s"
 
 msgid "Enable bouquet edit"
 msgstr "Įjungti paketų redagavimą"
@@ -3762,12 +3758,10 @@ msgstr "Greitas laikotarpis"
 msgid "Fast forward speeds"
 msgstr "Spartaus prasukimo pirmyn greičiai"
 
-#, fuzzy
 msgid "FastScan"
 msgstr "Greita paieška"
 
-#, fuzzy
-msgid "FastScan"
+msgid "Fastscan"
 msgstr "Greita paieška"
 
 msgid "Favourites"
@@ -4324,9 +4318,8 @@ msgstr "Piktogramos"
 msgid "If disabled, underline characters in file and directory names are not shown and are replaced with spaces."
 msgstr "Jei išjungta, failų ir katalogų pavadinimų pabraukimo simboliai nerodomi ir pakeičiami tarpais."
 
-#, fuzzy
 msgid "If enabled, a log will be kept of CEC protocol traffic ('hdmicec.log')"
-msgstr "Jei įjungta, CEC protokolo srautą galima įrašyti į logfile \"hdmicec.log\"."
+msgstr "Jei įjungta, bus saugomas CEC protokolo srauto žurnalas ('hdmicec.log')"
 
 msgid "If enabled, bookmarks will be updated with the new location when you move or copy a recording."
 msgstr "Jei įjungta, perkeliant ar kopijuojant įrašą, žymės bus atnaujintos su nauja vieta."
@@ -4349,7 +4342,7 @@ msgid "If set to 'yes' signal values (SNR, etc) will be calculated from API V3. 
 msgstr "Jei nustatyta \"taip\", signalo reikšmės (SNR ir t.t.) bus apskaičiuotos pagal API V3. Tai senoji API versija, kuri dabar buvo pakeista."
 
 msgid "If set to 'yes' the same commands will be sent to the TV for deep standby events, as are sent during regular standby events."
-msgstr ""
+msgstr "Jei nustatyta į 'taip', į televizorių bus siunčiamos tos pačios komandos gilaus budėjimo režimo įvykiams, kaip ir įprastų laukimo režimo įvykių metu."
 
 msgid "If using multiple uncommitted switches the DiSEqC commands must be sent multiple times. Set to the number of uncommitted switches in the chain minus one."
 msgstr "Jei naudojate kelis neprijungtus jungiklius, DiSEqC komandos turi būti siunčiamos kelis kartus. Nustatykite nenaudojamų jungiklių skaičių grandinėje, atėmus vieną."
@@ -6430,9 +6423,8 @@ msgstr "Kanalo pasirinkimui, spauskite OK."
 msgid "Press OK to select satellites"
 msgstr "Paspauskite OK norėdami pasirinkti palydovus"
 
-#, fuzzy
 msgid "Press OK to select the save location of the log file."
-msgstr "Paspauskite OK ir pasirinkite katalogą kaip logfile kelią."
+msgstr "Paspauskite OK, kad pasirinktumėte žurnalo failo įrašymo vietą."
 
 msgid "Press OK to select/deselect a CAId."
 msgstr "Spauskite OK, kad pasirinkti/nepasirinkti CAId."
@@ -6546,15 +6538,14 @@ msgstr "Puerto Rikas"
 msgid "Purge deleted user bouquets"
 msgstr "Išvalyti ištrintus vartotojo paketus"
 
-#, fuzzy
 msgid "Put A/V receiver to standby too."
-msgstr "Įjunkite A/V imtuvą į budėjimo režimą."
+msgstr "Taip pat perjunkite A/V imtuvą į budėjimo režimą."
 
 msgid "Put TV in standby"
 msgstr "Perjungti TV į budėjimo režimą"
 
 msgid "Put receiver in standby"
-msgstr "Nustatykite imtuvą į budėjimo režimą"
+msgstr "Perjunkite imtuvą į budėjimo režimą"
 
 msgid "Python frontend for /tmp/mmi.socket"
 msgstr "Python išorinės sąsajos dėl /tmp/mmi.socket"
@@ -8307,7 +8298,7 @@ msgid "Somalia"
 msgstr "Somalis"
 
 msgid "Some TVs do not wake from standby when they receive the 'Image View On' command. If this is the case try the 'Text View On' command instead."
-msgstr ""
+msgstr "Kai kurie televizoriai nepabunda iš budėjimo režimo, kai gauna komandą 'Vaizdo peržiūra įjungta'. Tokiu atveju pabandykite komandą 'Teksto rodinys įjungtas'."
 
 msgid "Some plugins are not available:\n"
 msgstr "Kai kurių priedų nėra:\n"
@@ -8845,7 +8836,7 @@ msgstr "TEKSTAS"
 msgid "TRANSLATOR_INFO"
 msgstr ""
 "P&C Adga, adga45@gmail.com\n"
-"Pasvalys, 2020-11-24 versija"
+"Pasvalys, 2020-11-27 versija"
 
 msgid "TS file is too large for ISO9660 level 1!"
 msgstr "TS failas per didelis 1 lygio ISO9660!"
@@ -8952,9 +8943,8 @@ msgstr "PIN kodas sėkmingai išsaugotas."
 msgid "The PIN codes you entered are different."
 msgstr "Jūsų įrašyti PIN kodai yra skirtingi."
 
-#, fuzzy
 msgid "The command to wake from standby will be sent multiple times."
-msgstr "Pažadinimo komandą galima siųsti kelis kartus."
+msgstr "Komanda pažadinti iš budėjimo režimo bus siunčiama kelis kartus."
 
 #, python-format
 msgid ""
@@ -10130,7 +10120,7 @@ msgid "Volume down"
 msgstr "Patildyti"
 
 msgid "Volume keys on the receiver remote will control the TV volume."
-msgstr ""
+msgstr "Imtuvo nuotolinio valdymo pulto garsumo klavišai valdys televizoriaus garsumą."
 
 msgid "Volume up"
 msgstr "Pagarsinti"
@@ -10168,16 +10158,14 @@ msgstr "Laukiama skaidinio"
 msgid "Wake On LAN"
 msgstr "Pabusti vietiniame tinkle"
 
-#, fuzzy
 msgid "Wake the receiver from standby when selected wake command is sent from the TV."
-msgstr "Įjungus televizorių, imtuvą pažadins komanda, gauta iš televizoriaus."
+msgstr "Pažadinkite imtuvą iš budėjimo režimo, kai iš televizoriaus siunčiama pasirinkta pažadinimo komanda."
 
 msgid "Wakeup"
 msgstr "Pabusti"
 
-#, fuzzy
 msgid "Wakeup A/V receiver from standby too."
-msgstr "Pažadinkite A/V imtuvą iš budėjimo režimo."
+msgstr "Pažadinti A/V imtuvą ir iš budėjimo režimo."
 
 msgid "Wakeup TV from standby"
 msgstr "Pažadinti TV iš budėjimo"
@@ -10300,13 +10288,11 @@ msgstr "Kai čia įjungta, rodyklių mygtukai, esantys apie 'OK' mygtuką, elgsi
 msgid "When enabled the left, right, CH+/-, B+/-, P+/- buttons will follow the 'neutrino' style zap controls instead of the enigma2 style."
 msgstr "Kai čia įjungta, mygtukai kairėn, dešinėn, CH+/-, B+/-, P+/- elgsis 'neutrino' perjungimo stiliuje, o ne kaip enigma2."
 
-#, fuzzy
 msgid "When enabled the receiver will automatically return to standby when the TV is turned off."
-msgstr "Kai čia įjungta, imtuvas automatiškai naudos anksčiau pasirinktą garso takelį."
+msgstr "Kai įjungta, imtuvas automatiškai grįš į budėjimo režimą, kai televizorius bus išjungtas."
 
-#, fuzzy
 msgid "When enabled the receiver will automatically wake from standby when the TV is turned on."
-msgstr "Kai čia įjungta, imtuvas automatiškai naudos anksčiau pasirinktą garso takelį."
+msgstr "Kai įjungta, imtuvas automatiškai pažadins budėjimo režimą, kai televizorius bus įjungtas."
 
 msgid "When enabled the set top box is able to wakeup on LAN"
 msgstr "Kai čia įjungta, aparatą galima pažadinti nuo tinklo veiklos"
@@ -10497,9 +10483,8 @@ msgstr "Kai čia nelygu '0', įrašymas prasidės nurodytą laiką anksčiau, ne
 msgid "When nonzero, a recording will stop later than the ending time indicated by the EPG."
 msgstr "Kai čia nelygu '0', įrašymas pasibaigs nurodytą laiką vėliau, nei įvykio pabaigos laikas pagal EPG."
 
-#, fuzzy
 msgid "When receiver wakes from standby, it will command the TV to switch to the HDMI input the receiver is connected to."
-msgstr "Kai imtuvas atsibunda / paleidžiamas, jis nusiųs komandą perjungti televizorių, kad būtų teisinga įvestis, prie kurios prijungtas imtuvas."
+msgstr "Kai imtuvas atsibunda iš budėjimo režimo, jis duos komandą televizoriui perjungti HDMI įvestį, prie kurios prijungtas imtuvas."
 
 msgid "When selected this allows video modes to be selected even if they are not reported as supported."
 msgstr "Pasirinkus šį variantą, galima pasirinkti vaizdo režimus, net jei jie nepateikiami kaip palaikomi."
@@ -10510,9 +10495,8 @@ msgstr "Kai turinys yra kraštinių santykis 16:9, pasirinkti, ar didinti mastel
 msgid "When the content has an aspect ratio of 4:3, choose whether to scale/stretch the picture."
 msgstr "Kai turinys yra kraštinių santykis 4:3, pasirinkti, ar didinti mastelį/ištempti vaizdą."
 
-#, fuzzy
 msgid "When the receiver wakes from standby or deep standby, it will send a command to the TV to bring it out of standby too."
-msgstr "Kai imtuvas atsibunda / paleidžiamas, jis nusiųs komandą perjungti televizorių, kad būtų teisinga įvestis, prie kurios prijungtas imtuvas."
+msgstr "Kai imtuvas atsibunda iš budėjimo arba gilaus budėjimo režimo, jis išsiųs komandą televizoriui kad išjungti budėjimo režimą."
 
 msgid "Where to save temporary timeshift recordings?"
 msgstr "Kur saugoti laikinus laiko poslinkio įrašus?"
@@ -11941,3 +11925,137 @@ msgstr "perjungta"
 
 msgid "®"
 msgstr "®"
+
+#~ msgid "A command sent from TV will wake up the receiver from standby."
+#~ msgstr "Komanda, siunčiama iš televizoriaus, pažadins imtuvą iš budėjimo režimo."
+
+#~ msgid "Delay in queue between sending CEC commands. For working HDMI-CEC protocol must be for some receivers used delay. Usualy between 50-150ms."
+#~ msgstr "Delsa eilėje tarp CEC komandų siuntimo. Darbui HDMI-CEC protokolas turi būti skirtas kai kuriems imtuvams, naudojamiems delsai. Įprasta tarp 50-150ms."
+
+#~ msgid "Regard deep standby as standby. It will be sending same commands when box goest to deep standby."
+#~ msgstr "Giliai budėjimo režimą laikyti budėjimo režimu. Jis siųs tas pačias komandas, kai imtuvas eis į gilų budėjimo režimą."
+
+#~ msgid "Some tv's do not handle command 'Image View On' for wakingup correctly, so you can try sending 'Text View On' as alternative."
+#~ msgstr "Kai kurie tv netinkamai tvarko komandą 'Vaizdo peržiūra įjungta', kad tinkamai pabustumėte, todėl galite pabandyti siųsti 'Teksto rodinys įjungtas' kaip alternatyvą."
+
+#~ msgid "When TV is turned off, the receiver will switch to standby by a command received from the TV."
+#~ msgstr "Išjungus televizorių, imtuvas persijungs į budėjimo režimą komanda, gauta iš televizoriaus."
+
+#~ msgid "When receiver wakes up/starts, it will try wake up TV by sending the appropriate command."
+#~ msgstr "Kai imtuvas atsibunda / paleidžiamas, jis bandys pažadinti televizorių siųsdamas atitinkamą komandą."
+
+#~ msgid "ZAP timers can send command 'sourceactive' before zap for set TV to correct input."
+#~ msgstr "Jungimo laikmačiai gali siųsti komandą 'šaltinis aktyvus' prieš jungiant nustatytą TV korektišką įvestį."
+
+#~ msgid "No positioner capable frontend found."
+#~ msgstr "Su pozicionierimi suderinamos sąsajos nerasta."
+
+#~ msgid "No tuner is configured for use with a diseqc positioner!"
+#~ msgstr "Nėra imtuvo, suderinto naudotis su diseqc pozicionieriumi!"
+
+#~ msgid "Relevant PIDs routing"
+#~ msgstr "Aktualus PIDs maršrutizavimas"
+
+#~ msgid "Show service name and event description among each other instead of side by side."
+#~ msgstr "Rodyti kanalo pavadinimą ir įvykio aprašą tarpusavyje, o ne vienas šalia kito."
+
+#~ msgid "This option allows you to show menu paths."
+#~ msgstr "Ši funkcija leidžia jums rodyti meniu kelius."
+
+#~ msgid "< Default >"
+#~ msgstr "< Numatytasis >"
+
+#~ msgid "Select a skin"
+#~ msgstr "Pasirinkite temą"
+
+#~ msgid "Retrieving image slots - Please wait..."
+#~ msgstr "Gaunami atvaizdo siužetai - prašome laukti..."
+
+#, python-format
+#~ msgid "Aspect ratio changed to %s"
+#~ msgstr "Vaizdo formatas pakeistas į %s"
+
+#~ msgid "Powerless"
+#~ msgstr "Mažiau energijos"
+
+#~ msgid "Toggle aspect ratio..."
+#~ msgstr "Perjungti kraštinių santykį..."
+
+#~ msgid "Could not locate epg file on fallback tuner"
+#~ msgstr "Nepavyko rasti epg failo atsarginiame imtuve"
+
+#~ msgid "No settings files to download on fallback tuner"
+#~ msgstr "Negalima atsisiųsti nustatymų failų naudojant atsarginį imtuvą"
+
+#~ msgid "Multiboot"
+#~ msgstr "Daugiafunkcinė įkrova"
+
+#~ msgid "Select Image"
+#~ msgstr "Pasirinkite atvaizdą"
+
+#~ msgid "Select Multiboot"
+#~ msgstr "Pasirinktinis atvaizdų įkėlimas"
+
+#~ msgid "About..."
+#~ msgstr "Apie..."
+
+#~ msgid "Enigma2 skin selector"
+#~ msgstr "Enigma2 temos parinkėjas"
+
+#~ msgid "Error executing plugin"
+#~ msgstr "Priedo paleisti nepavyko"
+
+#~ msgid ""
+#~ "GUI needs a restart to apply a new skin\n"
+#~ "Do you want to restart the GUI now?"
+#~ msgstr ""
+#~ "Naujos temos aktyvavimui, grafinę aplinką reikia paleisti iš naujo\n"
+#~ "Ar paleisti iš naujo grafinę aplinką dabar?"
+
+#~ msgid "Ipkg"
+#~ msgstr "Ipkg"
+
+#~ msgid "Select your Skin"
+#~ msgstr "Pasirinkite norimą temą"
+
+#~ msgid "Set default settings?"
+#~ msgstr "Nustatyti numatytus parametrus?"
+
+#~ msgid "Skin"
+#~ msgstr "Vartotojo aplinkos tema"
+
+#~ msgid "working"
+#~ msgstr "dirba"
+
+#~ msgid "[a]"
+#~ msgstr "[a]"
+
+#~ msgid "Exit/OK"
+#~ msgstr "Užverti/OK"
+
+#~ msgid "add bouquet"
+#~ msgstr "pridėti paketą"
+
+#~ msgid "service is in bouquet parental protection"
+#~ msgstr "kanalas yra tėvų kontrolės pakete"
+
+#~ msgid "Greek (Modern)"
+#~ msgstr "Graikų (modernus)"
+
+#~ msgid "Install extensions."
+#~ msgstr "Įdiekite išplėtimus."
+
+#~ msgid "Ok"
+#~ msgstr "Gerai"
+
+#~ msgid "add bookmark"
+#~ msgstr "pridėti žymą"
+
+#~ msgid "remove bookmark"
+#~ msgstr "pašalinti žymę"
+
+#~ msgid "select"
+#~ msgstr "pasirinkti"
+
+#~ msgid "used"
+#~ msgstr "naudotas"
