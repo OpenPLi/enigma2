@@ -40,6 +40,8 @@ class Satfinder(ScanSetup, ServiceScan):
 		self.frontend = None
 		self.is_id_boolEntry = None
 		self.t2mi_plp_id_boolEntry = None
+		self.timer = eTimer()
+		self.timer.callback.append(self.updateFrontendStatus)
 
 		ScanSetup.__init__(self, session)
 		self.setTitle(_("Signal finder"))
@@ -56,8 +58,6 @@ class Satfinder(ScanSetup, ServiceScan):
 		self.session.postScanService = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 		self.onClose.append(self.__onClose)
 		self.onShow.append(self.prepareFrontend)
-		self.timer = eTimer()
-		self.timer.callback.append(self.updateFrontendStatus)
 
 	def openFrontend(self):
 		res_mgr = eDVBResourceManager.getInstance()
