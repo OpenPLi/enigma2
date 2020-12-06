@@ -643,6 +643,16 @@ class AttributeParser:
 		value = 1 if value.lower() in ("1", "enabled", "nowrap", "on", "true", "yes") else 0
 		self.guiObject.setNoWrap(value)
 
+	def split(self, value):
+		pass
+
+	def colposition(self, value):
+		pass
+
+	def dividechar(self, value):
+		pass
+
+
 def applySingleAttribute(guiObject, desktop, attrib, value, scale=((1, 1), (1, 1))):
 	# Is anyone still using applySingleAttribute?
 	AttributeParser(guiObject, desktop, scale).applyOne(attrib, value)
