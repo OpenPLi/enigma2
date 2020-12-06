@@ -39,7 +39,7 @@ class ScrollLabel(GUIComponent):
 					scrollbarBorderWidth = int(value)
 					self.skinAttributes.remove((attrib, value))
 				elif "split" in attrib:
-					self.split = int(value)
+					self.split = 1 if value.lower() in ("1", "enabled", "on", "split", "true", "yes") else 0
 					if self.split:
 						self.right_text = eLabel(self.instance)
 					self.skinAttributes.remove((attrib, value))	
