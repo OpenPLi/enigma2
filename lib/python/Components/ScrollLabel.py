@@ -25,10 +25,16 @@ class ScrollLabel(GUIComponent):
 		if self.skinAttributes:
 			widget_attribs = []
 			scrollbar_attribs = []
-			scrollbarAttrib = ["borderColor", "borderWidth", "scrollbarSliderForegroundColor", "scrollbarSliderBorderColor", "scrollbarSliderPicture", "scrollbarBackgroundPicture"]
-			for (attrib, value) in self.skinAttributes:
+			scrollbarAttrib = ["borderColor", "borderWidth", "scrollbarSliderForegroundColor", "scrollbarSliderBorderColor"]
+			for (attrib, value) in self.skinAttributes[:]:
 				if attrib in scrollbarAttrib:
 					scrollbar_attribs.append((attrib, value))
+					self.skinAttributes.remove((attrib, value))
+				elif attrib in ("scrollbarSliderPicture", "sliderPixmap"):
+					self.scrollbar.setPixmap(skin.loadPixmap(value, desktop))
+					self.skinAttributes.remove((attrib, value))
+				elif attrib in ("scrollbarBackgroundPicture", "scrollbarbackgroundPixmap"):
+					self.scrollbar.setBackgroundPixmap(skin.loadPixmap(value, desktop))
 					self.skinAttributes.remove((attrib, value))
 				elif "transparent" in attrib or "backgroundColor" in attrib:
 					widget_attribs.append((attrib, value))
