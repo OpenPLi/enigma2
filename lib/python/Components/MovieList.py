@@ -6,6 +6,7 @@ from Components.config import config
 import os
 import struct
 import random
+import weakref
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import SCOPE_CURRENT_SKIN, resolveFilename
 from Screens.LocationBox import defaultInhibitDirs
@@ -179,7 +180,7 @@ class MovieList(GUIComponent):
 		if root is not None:
 			self.reload(root)
 
-		self.l.setBuildFunc(self.buildMovieListEntry)
+		self.l.setBuildFunc(weakref.ref(self.buildMovieListEntry)) # weakref needed for WebIf as otherwise a cyclic reference prevents object destruction
 
 		self.onSelectionChanged = [ ]
 		self.iconPart = []
