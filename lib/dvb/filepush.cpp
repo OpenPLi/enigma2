@@ -381,19 +381,40 @@ void eFilePushThreadRecorder::thread()
 
 		result = ppoll(&pfd, 1, &timeout, &sigset);
 
-		if((result < 0) && (errno == EINTR))
-			continue; /* this will test m_stop immediately -> while(!m_stop) */
-
 		if(result < 0)
-			bytes = result;
+		{
+			if(errno == EINTR)
+				continue; /* caught an SIGUSR1 interrupt; continue, this will test m_stop immediately -> while(!m_stop) */
+
+			bytes = result; /* poll failed; this is unlikely, handle like read() returned the error */
+		}
 		else
 		{
-			if(result == 1)
-				bytes = ::read(m_fd_source, m_buffer, m_buffersize);
-			else
+			if(result == 0) /* nothing happened, try again, handle like read() return EAGAIN */
 			{
 				errno = EAGAIN;
 				bytes = -1;
+			}
+			else
+			{
+				if(result == 1)
+				{
+					if(pfd.revents & POLLIN) /* something really happened, we can read */
+						bytes = ::read(m_fd_source, m_buffer, m_buffersize);
+					else /* an error occured on the fd, don't read it and stop or abort whatever is applicable */
+					{
+						if(m_stop)
+							errno = EAGAIN; /* stop after SIGUSR1 */
+						else
+							errno = EINVAL; /* abort after actual error */
+						bytes = -1;
+					}
+				}
+				else /* catch-all, shouldn't happen */
+				{
+					errno = EINVAL;
+					bytes = -1;
+				}
 			}
 		}
 
