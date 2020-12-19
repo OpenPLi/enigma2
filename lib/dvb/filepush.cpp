@@ -12,7 +12,7 @@ DEFINE_REF(eFilePushThread);
 
 static void global_signal_SIGUSR1_handler(int x)
 {
-	eWarning("signal SIGUSR1 caught\n");
+	eDebug("signal SIGUSR1 caught");
 }
 
 eFilePushThread::eFilePushThread(int blocksize, size_t buffersize):
