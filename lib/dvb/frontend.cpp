@@ -2144,7 +2144,7 @@ void eDVBFrontend::setFrontend(bool recvEvents)
 					p[cmdseq.num].cmd = DTV_STREAM_ID, p[cmdseq.num].u.data = parm.is_id | (parm.pls_code << 8) | (parm.pls_mode << 26), cmdseq.num++;
 				}
 				/* FIXME HACK ALERT use unused by enigma2 ISDBT SEGMENT IDX to pass T2MI PLP ID and T2MI PID */
-				p[cmdseq.num].cmd = DTV_ISDBT_SB_SEGMENT_IDX, p[cmdseq.num].u.data = (parm.t2mi_plp_id == eDVBFrontendParametersSatellite::No_T2MI_PLP_Id ? 0 : (0x80000000 | (parm.t2mi_pid << 16) | parm.t2mi_plp_id)), cmdseq.num++;
+				p[cmdseq.num].cmd = DTV_ISDBT_SB_SEGMENT_IDX, p[cmdseq.num].u.data = (static_cast<unsigned int>(parm.t2mi_plp_id) == eDVBFrontendParametersSatellite::No_T2MI_PLP_Id ? 0 : (0x80000000 | (parm.t2mi_pid << 16) | parm.t2mi_plp_id)), cmdseq.num++;
 			}
 		}
 		else if (type == iDVBFrontend::feCable)
