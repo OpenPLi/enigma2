@@ -135,6 +135,7 @@ void gLookup::build(int _size, const gPalette &pal, const gRGB &start, const gRG
 
 gUnmanagedSurface::gUnmanagedSurface():
 	x(0), y(0), bpp(0), bypp(0), stride(0),
+	clut(),
 	data(0),
 	data_phys(0)
 {
@@ -144,6 +145,7 @@ gUnmanagedSurface::gUnmanagedSurface(int width, int height, int _bpp):
 	x(width),
 	y(height),
 	bpp(_bpp),
+	clut(),
 	data(0),
 	data_phys(0)
 {
