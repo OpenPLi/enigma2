@@ -106,9 +106,9 @@ void gLookup::build(int _size, const gPalette &pal, const gRGB &start, const gRG
 		size=0;
 	}
 	size=_size;
-	if (!size)
+	if (size <= 0)
 		return;
-	lookup=new gColor[size];
+	lookup=new gColor[static_cast<size_t>(size)];
 
 	lookup[0] = pal.findColor(start);
 
@@ -983,7 +983,7 @@ void gPixmap::blit(const gPixmap &src, const eRect &_pos, const gRegion &clip, i
 
 void gPixmap::mergePalette(const gPixmap &target)
 {
-	if ((!surface->clut.colors) || (!target.surface->clut.colors))
+	if (surface->clut.colors <= 0 || target.surface->clut.colors <= 0)
 		return;
 
 	gColor *lookup=new gColor[static_cast<size_t>(surface->clut.colors)];

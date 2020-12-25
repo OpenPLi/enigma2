@@ -434,6 +434,8 @@ void gPainter::setPalette(gRGB *colors, int start, int len)
 {
 	if ( m_dc->islocked() )
 		return;
+	if (len <= 0)
+		return;
 	ASSERT(colors);
 	gOpcode o;
 	o.opcode=gOpcode::setPalette;
