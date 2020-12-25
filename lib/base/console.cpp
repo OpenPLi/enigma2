@@ -243,7 +243,10 @@ void eConsoleAppContainer::readyRead(int what)
 			/*emit*/ dataAvail(std::make_pair(buf, rd));
 			stdoutAvail(std::make_pair(buf, rd));
 			if ( filefd[1] >= 0 )
-				::write(filefd[1], buf, rd);
+			{
+				ssize_t ret = ::write(filefd[1], buf, rd);
+				if (ret < 0) eDebug("[eConsoleAppContainer] write failed: %m");
+			}
 			if (!hungup)
 				break;
 		}
