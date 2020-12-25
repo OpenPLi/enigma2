@@ -984,7 +984,7 @@ void gPixmap::mergePalette(const gPixmap &target)
 	if ((!surface->clut.colors) || (!target.surface->clut.colors))
 		return;
 
-	gColor *lookup=new gColor[surface->clut.colors];
+	gColor *lookup=new gColor[static_cast<size_t>(surface->clut.colors)];
 
 	for (int i=0; i<surface->clut.colors; i++)
 		lookup[i].color=target.surface->clut.findColor(surface->clut.data[i]);
