@@ -1,7 +1,7 @@
 language: cpp
 
-sudo: required
 dist: trusty
+os: linux
 
 addons:
   apt:
@@ -25,7 +25,7 @@ addons:
     - libjpeg-turbo8-dev
     - libgif-dev
 
-matrix:
+jobs:
   include:
     - os: linux
       addons:
