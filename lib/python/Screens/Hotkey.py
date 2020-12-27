@@ -152,6 +152,7 @@ def getHotkeyFunctions():
 	hotkey.functions.append((_("Show movies"), "Infobar/showMovies", "InfoBar"))
 	hotkey.functions.append((_("Show servicelist or movies"), "Infobar/showServiceListOrMovies", "InfoBar"))
 	hotkey.functions.append((_("Show favourites list"), "Infobar/openFavouritesList", "InfoBar"))
+	hotkey.functions.append((_("Show satellites list"), "Infobar/openSatellitesList", "InfoBar"))
 	hotkey.functions.append((_("History back"), "Infobar/historyBack", "InfoBar"))
 	hotkey.functions.append((_("History next"), "Infobar/historyNext", "InfoBar"))
 	hotkey.functions.append((_("Recall to previous service"), "Infobar/servicelist/recallPrevService", "InfoBar"))
@@ -183,7 +184,8 @@ def getHotkeyFunctions():
 		hotkey.functions.append((_("Move PiP"), "Infobar/movePiP", "InfoBar"))
 		hotkey.functions.append((_("Toggle PiPzap"), "Infobar/togglePipzap", "InfoBar"))
 	hotkey.functions.append((_("Activate HbbTV (Redbutton)"), "Infobar/activateRedButton", "InfoBar"))
-	hotkey.functions.append((_("Toggle HDMI In"), "Infobar/HDMIIn", "InfoBar"))
+	if SystemInfo["HasHDMIin"]:
+		hotkey.functions.append((_("Toggle HDMI In"), "Infobar/HDMIIn", "InfoBar"))
 	if SystemInfo["LcdLiveTV"]:
 		hotkey.functions.append((_("Toggle LCD LiveTV"), "Infobar/ToggleLCDLiveTV", "InfoBar"))
 	hotkey.functions.append((_("Toggle dashed flickering line for this service"), "Infobar/ToggleHideVBI", "InfoBar"))

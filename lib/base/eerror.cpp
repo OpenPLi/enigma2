@@ -180,7 +180,8 @@ void eDebugImpl(int flags, const char* fmt, ...)
 
 	logOutput(buf, pos);
 
-	::write(2, buf, pos);
+	ssize_t ret = ::write(2, buf, pos);
+	if (ret < 0) (void)ret;
 
 	delete[] buf;
 	if (flags & _DBGFLG_FATAL)

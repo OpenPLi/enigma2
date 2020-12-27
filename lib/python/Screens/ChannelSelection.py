@@ -259,8 +259,9 @@ class ChannelContextMenu(Screen):
 					append_when_current_valid(current, menu, (_("Disable move mode"), self.toggleMoveMode), level=0, key="6")
 				else:
 					append_when_current_valid(current, menu, (_("Enable move mode"), self.toggleMoveMode), level=0, key="6")
-				append_when_current_valid(current, menu, (_("Remove entry"), self.removeEntry), level=0, key="8")
-				self.removeFunction = self.removeCurrentService
+				if csel.entry_marked and not inAlternativeList:
+					append_when_current_valid(current, menu, (_("Remove entry"), self.removeEntry), level=0, key="8")
+					self.removeFunction = self.removeCurrentService
 				if not csel.entry_marked and not inBouquetRootList and current_root and not (current_root.flags & eServiceReference.isGroup):
 					if current.type != -1:
 						menu.append(ChoiceEntryComponent("dummy", (_("Add marker"), self.showMarkerInputBox)))

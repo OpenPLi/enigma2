@@ -265,6 +265,8 @@ void eEncoder::freeEncoder(int encoderfd)
 			eWarning("[eEncoder] trying to release inactive encoder %d fd=%d, state=%d", encoder_index, encoderfd, encoder[encoder_index].state);
 			return;
 		}
+		default:
+			break;
 	}
 
 	if(encoder[encoder_index].stream_thread != nullptr)
@@ -305,6 +307,8 @@ int eEncoder::getUsedEncoderCount()
 				count++;
 				break;
 			}
+			default:
+				break;
 		}
 	}
 

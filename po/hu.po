@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-27 17:04+0100\n"
-"PO-Revision-Date: 2020-10-26 12:33+0100\n"
+"POT-Creation-Date: 2020-12-01 09:56+0000\n"
+"PO-Revision-Date: 2020-12-05 15:11+0100\n"
 "Last-Translator: mcfly82\n"
 "Language-Team: mcfly82 & wysless\n"
 "Language: hu_HU\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 2.4.2\n"
 
 msgid ""
 "\n"
@@ -951,9 +951,8 @@ msgstr "Hallássérülteknek szánt feliratok engedélyezése"
 msgid "Allow unsupported modes"
 msgstr "Nem támogatott módok engedélyezése"
 
-#, fuzzy
 msgid "Allows the TV remote to be used to control the receiver."
-msgstr "TV-távvezérlő használata"
+msgstr "TV-távirányító használata a beltéri egység irányításához"
 
 msgid "Alpha"
 msgstr "Alfa"
@@ -1019,7 +1018,7 @@ msgid "An unknown error occurred!"
 msgstr "Ismeretlen hiba keletkezett!"
 
 msgid "And will put your receiver in standby over "
-msgstr "Készenlétbe kerülés "
+msgstr "A beltéri egység készenléti módba kapcsolása"
 
 msgid "Andorra"
 msgstr "Andorra"
@@ -1272,7 +1271,7 @@ msgid "Automatic scan"
 msgstr "Automatikus keresés"
 
 msgid "Automatically put the TV in standby whenever the receiver goes into standby or deep standby."
-msgstr ""
+msgstr "Automatikusan készenléti módba helyezi a TV-készüléket, amikor a beltéri egységet készenlétbe vagy mély-készenlétbe kapcsolja."
 
 msgid "Automatically start timeshift after"
 msgstr "Időcsúszatás automatikus bekapcsolása ennyi idő múlva"
@@ -1369,7 +1368,7 @@ msgid "Basque"
 msgstr "Baszk"
 
 msgid "Before sending the command to switch the TV to standby, the receiver tests if all the other devices plugged to TV are in standby. If they are not, the 'sourceinactive' command will be sent to the TV instead of the 'standby' command."
-msgstr ""
+msgstr "Mielőtt elküldi a TV-készülék számára a készenléti mód parancsát, a beltéri egység ellenőrzi, hogy a TV-készülékhez csatlakoztatott többi eszköz is készenlétben van-e. Ha nem, akkor 'sourceinactive' (a forrás inaktív) parancsot küld a TV-készüléknek a 'készenlét' parancs helyett."
 
 msgid "Begin time"
 msgstr "Kezdési idő"
@@ -1890,7 +1889,7 @@ msgid "Command order"
 msgstr "Parancs sorrend"
 
 msgid "Command the TV to switch to the correct HDMI input when zap timers activate."
-msgstr ""
+msgstr "Csatornaváltási időzítő esetén parancs küldése a TV-készüléknek, hogy váltson a megfelelő HDMI bementre."
 
 msgid "Commit info"
 msgstr "Kötelező információk"
@@ -2638,7 +2637,7 @@ msgid "Delay before sequence repeat"
 msgstr "Késleltetés a sorozat ismétlése előtt"
 
 msgid "Delay between CEC commands when sending a series of commands. Some devices require this delay for correct functioning, usually between 50-150ms."
-msgstr ""
+msgstr "A késleltetés a CEC-parancsok között több parancs esetén. Néhány készülék megfelelő működéséhez szükséges, hogy a parancsok között 50-150 ms késleltetés legyen."
 
 msgid "Delay between diseqc commands"
 msgstr "Késleltetés a DiSEqC parancsok között"
@@ -3210,11 +3209,10 @@ msgstr "Virgin EPG engedélyezése"
 msgid "Enable auto cable scan"
 msgstr "Automatikus kábel keresés engedélyezése"
 
-#, fuzzy
 msgid "Enable auto fastscan"
 msgstr "Automatikus gyorskeresés engedélyezése"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Enable auto fastscan for %s"
 msgstr "Automatikus gyorskeresés engedélyezése ehhez: %s"
 
@@ -3242,9 +3240,8 @@ msgstr "Mozgatási mód engedélyezése"
 msgid "Enable multiple bouquets"
 msgstr "Többszörös listák engedélyezése"
 
-#, fuzzy
 msgid "Enable or disable using HDMI-CEC."
-msgstr "HDMI-CEC engedélyezése"
+msgstr "HDMI-CEC engedélyezése vagy letiltása"
 
 msgid "Enable parental protection"
 msgstr "Gyermekzár védelem engedélyezése"
@@ -3742,13 +3739,11 @@ msgstr "Gyors korszak"
 msgid "Fast forward speeds"
 msgstr "Előretekerési sebességek"
 
-#, fuzzy
 msgid "FastScan"
-msgstr "Szolgáltatói keresés"
+msgstr "Gyorskeresés"
 
-#, fuzzy
 msgid "Fastscan"
-msgstr "Szolgáltatói keresés"
+msgstr "Gyorskeresés"
 
 msgid "Favourites"
 msgstr "Kedvencek"
@@ -4305,7 +4300,7 @@ msgid "If disabled, underline characters in file and directory names are not sho
 msgstr "Ha nem engedélyezi ezt a beállítást, akkor a fájlok és könyvtárak neveiben lévő aláhúzott karakterek szóközzel helyettesítődnek."
 
 msgid "If enabled, a log will be kept of CEC protocol traffic ('hdmicec.log')"
-msgstr ""
+msgstr "Ha engedélyezi, a napló a CEC protokoll forgalmat is eltárolja ('hdmicec.log')"
 
 msgid "If enabled, bookmarks will be updated with the new location when you move or copy a recording."
 msgstr "Ha engedélyezi, a könyvjelzők az új hely szerint lesznek frissítve amennyiben áthelyez vagy átmásol egy felvételt."
@@ -4328,7 +4323,7 @@ msgid "If set to 'yes' signal values (SNR, etc) will be calculated from API V3. 
 msgstr "'Igen' beállítás esetén a jelszint értékek (SNR, stb.) az API V3-ból lesznek kiszámítva. Ez egy régebbi API verzió, amely már elavult."
 
 msgid "If set to 'yes' the same commands will be sent to the TV for deep standby events, as are sent during regular standby events."
-msgstr ""
+msgstr "Ha 'igen'-re állítja, ugyanazokat a parancsokat küldi a TV-készüléknek mély-készenlét eseményeknél, mint a hagyományos készenlét eseményeknél."
 
 msgid "If using multiple uncommitted switches the DiSEqC commands must be sent multiple times. Set to the number of uncommitted switches in the chain minus one."
 msgstr "Ha több nem elkötelezett DiSEqC kapcsolót használ, a parancsokat többször kell elküldeni. Adja meg a rendszerében lévő kapcsolók számát eggyel csökkentve."
@@ -4372,9 +4367,8 @@ msgstr "DVB-T alhálózati azonosító figyelmen kívül hagyása"
 msgid "Ignore conflict"
 msgstr "Hagyja figyelmen kívül az ütközést"
 
-#, fuzzy
 msgid "Image View On"
-msgstr "Image: "
+msgstr "Image View On"
 
 #, python-format
 msgid ""
@@ -6412,9 +6406,8 @@ msgstr "Nyomja le az OK gombot egy szolgáltató kiválasztásához."
 msgid "Press OK to select satellites"
 msgstr "Nyomja le az OK gombot a műholdak kiválasztásához"
 
-#, fuzzy
 msgid "Press OK to select the save location of the log file."
-msgstr "Mappa választása naplófájloknak"
+msgstr "Nyomja meg az OK gombot a naplófájlok mappájának kiválasztásához."
 
 msgid "Press OK to select/deselect a CAId."
 msgstr "Nyomja le az OK gombot a CAId ki/bejelöléséhez."
@@ -6528,9 +6521,8 @@ msgstr "Puerto Rico"
 msgid "Purge deleted user bouquets"
 msgstr "Törölt felhasználói listák végleges eltávolítása"
 
-#, fuzzy
 msgid "Put A/V receiver to standby too."
-msgstr "Készülék kikapcsolása"
+msgstr "Az A/V erősítő egyidejű készenlétbe kapcsolása."
 
 msgid "Put TV in standby"
 msgstr "TV kikapcsolása"
@@ -8025,6 +8017,9 @@ msgstr "Felvételi óra ikonok megjelenítése"
 msgid "Show record indicator"
 msgstr "Felvétel jelző ikon mutatása"
 
+msgid "Show satellites list"
+msgstr "Műholdlista megjelenítése"
+
 msgid "Show screen path"
 msgstr "Menü útvonalak mutatása"
 
@@ -8283,7 +8278,7 @@ msgid "Somalia"
 msgstr "Szomália"
 
 msgid "Some TVs do not wake from standby when they receive the 'Image View On' command. If this is the case try the 'Text View On' command instead."
-msgstr ""
+msgstr "Néhány TV-készülék nem ébred fel készenléti módból, ha 'Image View On' parancsot kap. Ebben az esetben próbálja meg a 'Text View On' parancsot."
 
 msgid "Some plugins are not available:\n"
 msgstr "Egyes bővítmények nem elérhetőek:\n"
@@ -8822,7 +8817,7 @@ msgid "TRANSLATOR_INFO"
 msgstr ""
 "A fordítást készítette:\n"
 "mcfly82 & wysless\n"
-"Utolsó fordítás időpontja: 2020.10.26.\n"
+"Utolsó fordítás időpontja: 2020.12.05.\n"
 "Eredeti fordítás: MediaVox-Team, Robertut\n"
 "A magyar fordítás az OpenPLi projekthez készült.\n"
 "További információ: http://openpli.org"
@@ -8891,7 +8886,7 @@ msgid "Testscreens that are helpfull to fine-tune your display"
 msgstr "A tesztképernyők segítenek a kijelző finomhangolását elvégezni."
 
 msgid "Text View On"
-msgstr ""
+msgstr "Text View On"
 
 msgid "Text color"
 msgstr "Szöveg színe"
@@ -8933,7 +8928,7 @@ msgid "The PIN codes you entered are different."
 msgstr "A megadott PIN-kódok eltérnek egymástól."
 
 msgid "The command to wake from standby will be sent multiple times."
-msgstr ""
+msgstr "A készenlétből való felébresztés parancsának többszöri küldése"
 
 #, python-format
 msgid ""
@@ -10107,7 +10102,7 @@ msgid "Volume down"
 msgstr "Hangerő le"
 
 msgid "Volume keys on the receiver remote will control the TV volume."
-msgstr ""
+msgstr "A beltéri egység hangerőszabályozó gombjai a TV-készülék hangerejét is vezéreljék."
 
 msgid "Volume up"
 msgstr "Hangerő fel"
@@ -10146,21 +10141,19 @@ msgid "Wake On LAN"
 msgstr "Ébresztés LAN-on"
 
 msgid "Wake the receiver from standby when selected wake command is sent from the TV."
-msgstr ""
+msgstr "A beltéri egység felébresztése készenléti módból ha a kiválasztott ébresztési parancs a TV-készüléktől érkezik."
 
 msgid "Wakeup"
 msgstr "Felébresztés"
 
-#, fuzzy
 msgid "Wakeup A/V receiver from standby too."
-msgstr "A készülék felébresztése készenlétből"
+msgstr "Az A/V erősítő egyidejű felébresztése készenlétből."
 
 msgid "Wakeup TV from standby"
 msgstr "A TV felébresztése készenléti módból"
 
-#, fuzzy
 msgid "Wakeup command for TV"
-msgstr "Bekapcsolási jelzés a TV-től"
+msgstr "Bekapcsolási jelzés a TV részére"
 
 msgid "Wakeup receiver for start timer"
 msgstr "A készülék felébresztése időzítővel"
@@ -10274,13 +10267,11 @@ msgstr "Ha engedélyezi, az 'OK' gomb körül lévő nyíl gombok az 'enigma2' s
 msgid "When enabled the left, right, CH+/-, B+/-, P+/- buttons will follow the 'neutrino' style zap controls instead of the enigma2 style."
 msgstr "Ha engedélyezi, a bal, jobb, CH+/-, B+/-, P+/- gombok az 'enigma2' stílus helyett 'neutrino' stílusban fognak csatornát váltani."
 
-#, fuzzy
 msgid "When enabled the receiver will automatically return to standby when the TV is turned off."
-msgstr "A készülék ugyanazt a hangsávot fogja legközelebb is kiválasztani, amit Ön legutoljára kiválasztott."
+msgstr "Ha engedélyezi, a készülék automatikusan készenléti módba kapcsol, amikor kikapcsolja a TV készüléket."
 
-#, fuzzy
 msgid "When enabled the receiver will automatically wake from standby when the TV is turned on."
-msgstr "A készülék ugyanazt a hangsávot fogja legközelebb is kiválasztani, amit Ön legutoljára kiválasztott."
+msgstr "Ha engedélyezi, a készülék automatikusan felébred a készenlétből, amikor bekapcsolja a TV készüléket."
 
 msgid "When enabled the set top box is able to wakeup on LAN"
 msgstr "Ha engedélyezi, a készülék képes lesz LAN-on keresztül bekapcsolni."
@@ -10472,7 +10463,7 @@ msgid "When nonzero, a recording will stop later than the ending time indicated 
 msgstr "Ennyivel később fejezze be a felvételt, mint amennyi időt mond az EPG."
 
 msgid "When receiver wakes from standby, it will command the TV to switch to the HDMI input the receiver is connected to."
-msgstr ""
+msgstr "Amikor a beltéri egység felébred készenlétből, parancsot küld a TV-készüléknek, hogy váltson arra a HDMI bementre, amelyhez a beltéri egység kapcsolódik."
 
 msgid "When selected this allows video modes to be selected even if they are not reported as supported."
 msgstr "Ezzel engedélyezheti a nem támogatott videómódok kiválasztását."
@@ -10484,7 +10475,7 @@ msgid "When the content has an aspect ratio of 4:3, choose whether to scale/stre
 msgstr "Egy 4:3-as kép méretarányú tartalom nagyítva vagy széthúzva legyen."
 
 msgid "When the receiver wakes from standby or deep standby, it will send a command to the TV to bring it out of standby too."
-msgstr ""
+msgstr "Amikor a beltéri egység felébred készenlétből vagy mély-készenlétből, parancsot küld a TV-készüléknek, hogy szintén ébredjen fel a készenlétből."
 
 msgid "Where to save temporary timeshift recordings?"
 msgstr "Hová kerüljenek az átmeneti időcsúsztatás felvételek?"

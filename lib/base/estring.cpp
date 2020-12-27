@@ -444,9 +444,9 @@ std::string GEOSTD8ToUTF8(const char *szIn, int len, int *pconvertedLen)
 		if ((unsigned char)szIn[i] == 0x10)
 			continue;
 		// no GEOSTD8 chars. drop it
-		if ((unsigned char)szIn[i] >= 0x80 && (unsigned char)szIn[i] < 0xA0 ||
+		if (((unsigned char)szIn[i] >= 0x80 && (unsigned char)szIn[i] < 0xA0) ||
 			(unsigned char)szIn[i] == 0xC6 ||
-			(unsigned char)szIn[i] >= 0xC8 && (unsigned char)szIn[i] <= 0xCC ||
+			((unsigned char)szIn[i] >= 0xC8 && (unsigned char)szIn[i] <= 0xCC) ||
 			(unsigned char)szIn[i] == 0xCE || (unsigned char)szIn[i] == 0xCF)
 			continue;
 
@@ -825,8 +825,8 @@ unsigned int truncateUTF8(std::string &s, unsigned int newsize)
 
 	if (len > idx){
 		while (idx > 0) {
-			if (!s.at(idx) & 0x80 || (s.at(idx) & 0xc0) == 0xc0){
-				if (!s.at(idx) & 0x80)
+			if (!(s.at(idx) & 0x80) || (s.at(idx) & 0xc0) == 0xc0){
+				if (!(s.at(idx) & 0x80))
 					idx++;
 				else if ((s.at(idx) & 0xF8) == 0xf0 && n == 3)
 					idx += n + 1;

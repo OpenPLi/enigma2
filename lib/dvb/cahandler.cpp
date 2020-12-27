@@ -155,7 +155,7 @@ void ePMTClient::clientTLVReceived(unsigned char *tag, int length, unsigned char
 			if (displayText)
 			{
 				strncat(displayText, (const char*)value, length);
-				strncat(displayText, "\n", 1);
+				strcat(displayText, "\n");
 			}
 			break;
 		case 0x05: /* text last */
