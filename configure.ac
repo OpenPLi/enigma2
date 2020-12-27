@@ -246,6 +246,7 @@ AX_CXX_COMPILE_STDCXX_11([ext],[mandatory])
 CPPFLAGS="$CPPFLAGS $PYTHON_CPPFLAGS"
 FLAGS="$CFLAGS -Wall"
 CXXFLAGS="$CXXFLAGS -Wall -Werror \
+						-Wno-error=stringop-truncation \
 						-Warray-bounds=1 \
 						$BASE_CFLAGS $ENIGMA2_CFLAGS $PTHREAD_CFLAGS $OPENMP_CFLAGS $ALSA_CFLAGS"
 
