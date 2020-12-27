@@ -244,7 +244,7 @@ AC_SUBST(ENIGMA2_CFLAGS)
 AX_CXX_COMPILE_STDCXX_11([ext],[mandatory])
 
 CPPFLAGS="$CPPFLAGS $PYTHON_CPPFLAGS"
-FLAGS="$CFLAGS -Wall"
+CFLAGS="$CFLAGS -Wall"
 CXXFLAGS="$CXXFLAGS -Wall -Werror \
 						-Wno-error=stringop-truncation \
 						-Warray-bounds=1 \
