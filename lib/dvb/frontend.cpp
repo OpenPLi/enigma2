@@ -633,7 +633,7 @@ int eDVBFrontend::openFrontend()
 				m_fd = -1;
 				return -1;
 			}
-			strncpy(m_description, fe_info.name, sizeof(m_description));
+			strncpy(m_description, fe_info.name, sizeof(m_description) - 1);
 #if defined DTV_ENUM_DELSYS
 			struct dtv_property p[1];
 			p[0].cmd = DTV_ENUM_DELSYS;
@@ -3016,7 +3016,7 @@ bool eDVBFrontend::setSlotInfo(int id, const char *descr, bool enabled, bool isD
 	}
 	m_slotid = id;
 	m_enabled = enabled;
-	strncpy(m_description, descr, sizeof(m_description));
+	strncpy(m_description, descr, sizeof(m_description) - 1);
 
 	// HACK.. the rotor workaround is neede for all NIMs with LNBP21 voltage regulator...
 	m_need_rotor_workaround = !!strstr(m_description, "Alps BSBE1") ||

@@ -605,10 +605,10 @@ void eDVBRdsDecoder::gotAncillaryData(const uint8_t *buf, int len)
 					rtplus_osd[0]=0;
 
 					if ( rtp_item[4][0] != 0 )//artist
-						sprintf((char*)rtplus_osd_tmp," (%s)",rtp_item[4]);
+						sprintf((char*)rtplus_osd_tmp," (%.58s)",rtp_item[4]);
 
 					if ( rtp_item[1][0] != 0 )//title
-						sprintf((char*)rtplus_osd,"%s%s",rtp_item[1],rtplus_osd_tmp);
+						sprintf((char*)rtplus_osd,"%.31s%.31s",rtp_item[1],rtplus_osd_tmp);
 
 					if ( rtplus_osd[0] != 0 )
 					{
