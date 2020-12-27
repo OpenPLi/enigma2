@@ -21,9 +21,7 @@ static std::string getSize(const char* file)
 	struct stat64 s;
 	if (stat64(file, &s) < 0)
 		return "";
-	char tmp[20];
-	snprintf(tmp, 20, "%ld kB", (long)s.st_size / 1024);
-	return tmp;
+	return std::to_string((long)(s.st_size / 1024)) + " kB";
 }
 
 static unsigned char *color_resize(unsigned char * orgin, int ox, int oy, int dx, int dy)
