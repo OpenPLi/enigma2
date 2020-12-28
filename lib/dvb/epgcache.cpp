@@ -4243,6 +4243,7 @@ void eEPGCache::PMTready(eDVBServicePMTHandler *pmthandler)
 								break;
 						}
 					}
+					break;
 				case 0x05: // private
 					for (DescriptorConstIterator desc = (*es)->getDescriptors()->begin();
 						desc != (*es)->getDescriptors()->end(); ++desc)

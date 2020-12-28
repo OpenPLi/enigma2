@@ -236,6 +236,7 @@ static inline unsigned int doVideoTexSuppl(int c1, int c2)
 				case 0x45: return 274;				case 0x65: return 275;
 				case 0x49: return 298;				case 0x69: return 299;
 				case 0x4f: return 332;				case 0x6f: return 333;
+				default: return 0;
 			}
 		case 0xC6: // breve
 			switch (c2)

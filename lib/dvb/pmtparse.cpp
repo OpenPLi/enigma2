@@ -105,42 +105,45 @@ int eDVBPMTParser::getProgramInfo(program &program)
 				case 0x1b: // AVC Video Stream (MPEG4 H264)
 					video.type = videoStream::vtMPEG4_H264;
 					isvideo = 1;
-					//break; fall through !!!
+					[[fallthrough]];
 				case 0x24: // H265 HEVC
+					[[fallthrough]];
 				case 0x27: // H265 HEVC
 					if (!isvideo)
 					{
 						video.type = videoStream::vtH265_HEVC;
 						isvideo = 1;
 					}
+					[[fallthrough]];
 				case 0x42: // CAVS
 					if (!isvideo)
 					{
 						video.type = videoStream::vtCAVS;
 						isvideo = 1;
 					}
+					[[fallthrough]];
 				case 0x10: // MPEG 4 Part 2
 					if (!isvideo)
 					{
 						video.type = videoStream::vtMPEG4_Part2;
 						isvideo = 1;
 					}
-					//break; fall through !!!
+					[[fallthrough]];
 				case 0x01: // MPEG 1 video
 					if (!isvideo)
 						video.type = videoStream::vtMPEG1;
-					//break; fall through !!!
+					[[fallthrough]];
 				case 0x02: // MPEG 2 video
 					isvideo = 1;
 					forced_video = 1;
-					//break; fall through !!!
+					[[fallthrough]];
 				case 0x03: // MPEG 1 audio
 				case 0x04: // MPEG 2 audio:
 					if (!isvideo) {
 						isaudio = 1;
 						forced_audio = 1;
 					}
-					//break; fall through !!!
+					[[fallthrough]];
 				case 0x0f: // MPEG 2 AAC
 					if (!isvideo && !isaudio)
 					{
@@ -148,7 +151,7 @@ int eDVBPMTParser::getProgramInfo(program &program)
 						audio.type = audioStream::atAAC;
 						forced_audio = 1;
 					}
-					//break; fall through !!!
+					[[fallthrough]];
 				case 0x11: // MPEG 4 AAC
 					if (!isvideo && !isaudio)
 					{
@@ -156,6 +159,7 @@ int eDVBPMTParser::getProgramInfo(program &program)
 						audio.type = audioStream::atAACHE;
 						forced_audio = 1;
 					}
+					[[fallthrough]];
 				case 0x80: // user private ... but bluray LPCM
 				case 0xA0: // bluray secondary LPCM
 					if (!isvideo && !isaudio && is_hdmv)
@@ -163,6 +167,7 @@ int eDVBPMTParser::getProgramInfo(program &program)
 						isaudio = 1;
 						audio.type = audioStream::atLPCM;
 					}
+					[[fallthrough]];
 				case 0x81: // user private ... but bluray AC3
 				case 0xA1: // bluray secondary AC3
 					if (!isvideo && !isaudio)
@@ -170,6 +175,7 @@ int eDVBPMTParser::getProgramInfo(program &program)
 						isaudio = 1;
 						audio.type = audioStream::atAC3;
 					}
+					[[fallthrough]];
 				case 0x82: // bluray DTS (dvb user private...)
 				case 0xA2: // bluray secondary DTS
 					if (!isvideo && !isaudio && is_hdmv)
@@ -177,6 +183,7 @@ int eDVBPMTParser::getProgramInfo(program &program)
 						isaudio = 1;
 						audio.type = audioStream::atDTS;
 					}
+					[[fallthrough]];
 				case 0x84: // DDP (blueray)
 				case 0x87: // DDP (ATSC)
 					if (!isvideo && !isaudio)
@@ -184,6 +191,7 @@ int eDVBPMTParser::getProgramInfo(program &program)
 						isaudio = 1;
 						audio.type = audioStream::atDDP;
 					}
+					[[fallthrough]];
 				case 0x85: // bluray DTS-HD HRA(dvb user private...)
 				case 0x86: // bluray DTS-HD MA(dvb user private...)
 				case 0xA6: // bluray secondary DTS-HD
@@ -192,6 +200,7 @@ int eDVBPMTParser::getProgramInfo(program &program)
 						isaudio = 1;
 						audio.type = audioStream::atDTSHD;
 					}
+					[[fallthrough]];
 				case 0x06: // PES Private
 				case 0xEA: // TS_PSI_ST_SMPTE_VC1
 				{

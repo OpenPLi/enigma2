@@ -71,6 +71,7 @@ void gLCDDC::exec(const gOpcode *o)
 #endif
 	case gOpcode::flush:
 		lcd->update();
+		[[fallthrough]];
 	default:
 		gDC::exec(o);
 		break;
