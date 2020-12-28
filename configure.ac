@@ -243,6 +243,9 @@ AC_SUBST(ENIGMA2_CFLAGS)
 
 AX_CXX_COMPILE_STDCXX_11([ext],[mandatory])
 
+AX_CHECK_COMPILE_FLAG([-Wattribute-alias], [CXXFLAGS="$CXXFLAGS -Wattribute-alias"])
+AX_CHECK_COMPILE_FLAG([-Wattribute-alias=1], [CXXFLAGS="$CXXFLAGS -Wattribute-alias=1"])
+
 CPPFLAGS="$CPPFLAGS $PYTHON_CPPFLAGS"
 CFLAGS="$CFLAGS -Wall"
 CXXFLAGS="$CXXFLAGS -Wall -Werror \
@@ -252,7 +255,7 @@ CXXFLAGS="$CXXFLAGS -Wall -Werror \
 	-Wunused-but-set-parameter -Wunused-const-variable=1 -Wuninitialized \
 	-Wstringop-overflow=3 \
 	-Wunsafe-loop-optimizations -Wpointer-arith \
-	-Wattribute-alias=1 -Wfloat-equal -Wlogical-op \
+	-Wfloat-equal -Wlogical-op \
 	-Wno-error=cast-align=strict \
 	-Wno-error=stringop-truncation -Wno-error=shadow -Wno-error=cast-qual \
 	$BASE_CFLAGS $ENIGMA2_CFLAGS $PTHREAD_CFLAGS $OPENMP_CFLAGS $ALSA_CFLAGS"
