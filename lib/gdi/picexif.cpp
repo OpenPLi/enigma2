@@ -341,7 +341,7 @@ bool Cexif::process_EXIF(unsigned char * CharBuf, unsigned int length)
 	if (!ProcessExifDir(CharBuf+14, CharBuf+6, length-6, &LastExifRefd))
 		return false;
 
-	if (m_exifinfo->FocalplaneXRes != 0)
+	if ((m_exifinfo->FocalplaneXRes < -0.1) || (m_exifinfo->FocalplaneXRes > 0.1))
 		m_exifinfo->CCDWidth = (float)(ExifImageWidth * m_exifinfo->FocalplaneUnits / m_exifinfo->FocalplaneXRes);
 
 	return true;
@@ -462,7 +462,7 @@ bool Cexif::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBase,
 			break;
 		case TAG_APERTURE:
 		case TAG_MAXAPERTURE:
-			if (m_exifinfo->ApertureFNumber == 0)
+			if ((m_exifinfo->ApertureFNumber > -0.1) && (m_exifinfo->ApertureFNumber < 0.1))
 			{
 				//m_exifinfo->ApertureFNumber = (float)exp(ConvertAnyFormat(ValuePtr, Format)*log(2)*0.5);
 			}
@@ -480,7 +480,7 @@ bool Cexif::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBase,
 			m_exifinfo->ExposureTime = (float)ConvertAnyFormat(ValuePtr, Format);
 			break;
 		case TAG_SHUTTERSPEED:
-			if (m_exifinfo->ExposureTime == 0)
+			if ((m_exifinfo->ExposureTime > -0.1) && (m_exifinfo->ExposureTime < 0.1))
 			{
 				//m_exifinfo->ExposureTime = (float) (1/exp(ConvertAnyFormat(ValuePtr, Format)*log(2)));
 			}
