@@ -899,13 +899,14 @@ std::string replace_all(const std::string &in, const std::string &entity, const 
 				loc += symbol.length();
 				continue;
 			}
-			if (out.at(loc) < 0x80)
+			unsigned char c = static_cast<unsigned char>(out.at(loc));
+			if (c < 0x80)
 				++loc;
-			else if ((out.at(loc) & 0xE0) == 0xC0)
+			else if ((c & 0xE0) == 0xC0)
 				loc += 2;
-			else if ((out.at(loc) & 0xF0) == 0xE0)
+			else if ((c & 0xF0) == 0xE0)
 				loc += 3;
-			else if ((out.at(loc) & 0xF8) == 0xF0)
+			else if ((c & 0xF8) == 0xF0)
 				loc += 4;
 		}
 		break;
