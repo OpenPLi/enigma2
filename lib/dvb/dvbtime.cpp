@@ -102,7 +102,7 @@ static inline void parseDVBtime_impl(tm& t, const uint8_t *data)
 
 time_t parseDVBtime(uint16_t mjd, uint32_t stime_bcd)
 {
-	tm t = {0};
+	tm t{};
 	parseDVBdate(t, mjd);
 	t.tm_hour = fromBCD(stime_bcd >> 16);
 	t.tm_min = fromBCD((stime_bcd >> 8) & 0xFF);
@@ -112,14 +112,14 @@ time_t parseDVBtime(uint16_t mjd, uint32_t stime_bcd)
 
 time_t parseDVBtime(const uint8_t *data)
 {
-	tm t = {0};
+	tm t{};
 	parseDVBtime_impl(t, data);
 	return timegm(&t);
 }
 
 time_t parseDVBtime(const uint8_t *data, uint16_t *hash)
 {
-	tm t = {0};
+	tm t{};
 	parseDVBtime_impl(t, data);
 	*hash = t.tm_hour * 60 + t.tm_min;
 	*hash |= t.tm_mday << 11;

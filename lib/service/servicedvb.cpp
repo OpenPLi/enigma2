@@ -365,7 +365,7 @@ RESULT eStaticServiceDVBPVRInformation::getName(const eServiceReference &ref, st
 			std::size_t dash2 = name.find(" - ", 16, 3);
 			if (dash2 != std::string::npos)
 			{
-				struct tm stm = {0};
+				struct tm stm{};
 				if (strptime(name.c_str(), "%Y%m%d %H%M", &stm) != NULL)
 				{
 					m_parser.m_time_create = mktime(&stm);
