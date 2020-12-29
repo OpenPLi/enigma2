@@ -62,7 +62,7 @@ static PyGetSetDef eConsolePy_getseters[] = {
 	 (getter)eConsolePy_appClosed, (setter)0,
 	 (char*)"appClosed callback list",
 	 NULL},
-	{NULL} /* Sentinel */
+	{} /* Sentinel */
 };
 
 static int
@@ -331,52 +331,26 @@ static PyMethodDef eConsolePy_methods[] = {
 	{(char*)"running", (PyCFunction)eConsolePy_running, METH_NOARGS,
 	 (char*)"returns the running state"
 	},
-	{NULL}  /* Sentinel */
+	{}  /* Sentinel */
 };
 
 static PyTypeObject eConsolePyType = {
 	PyVarObject_HEAD_INIT(NULL, 0)
 	"eConsoleImpl.eConsoleAppContainer", /*tp_name*/
 	sizeof(eConsolePy), /*tp_basicsize*/
-	0, /*tp_itemsize*/
-	(destructor)eConsolePy_dealloc, /*tp_dealloc*/
-	0, /*tp_print*/
-	0, /*tp_getattr*/
-	0, /*tp_setattr*/
-	0, /*tp_compare*/
-	0, /*tp_repr*/
-	0, /*tp_as_number*/
-	0, /*tp_as_sequence*/
-	0, /*tp_as_mapping*/
-	0, /*tp_hash */
-	0, /*tp_call*/
-	0, /*tp_str*/
-	0, /*tp_getattro*/
-	0, /*tp_setattro*/
-	0, /*tp_as_buffer*/
-	Py_TPFLAGS_DEFAULT | Py_TPFLAGS_HAVE_GC, /*tp_flags*/
-	"eConsoleAppContainer objects", /* tp_doc */
-	(traverseproc)eConsolePy_traverse, /* tp_traverse */
-	(inquiry)eConsolePy_clear, /* tp_clear */
-	0, /* tp_richcompare */
-	offsetof(eConsolePy, in_weakreflist), /* tp_weaklistoffset */
-	0, /* tp_iter */
-	0, /* tp_iternext */
-	eConsolePy_methods, /* tp_methods */
-	0, /* tp_members */
-	eConsolePy_getseters, /* tp_getset */
-	0, /* tp_base */
-	0, /* tp_dict */
-	0, /* tp_descr_get */
-	0, /* tp_descr_set */
-	0, /* tp_dictoffset */
-	0, /* tp_init */
-	0, /* tp_alloc */
-	eConsolePy_new, /* tp_new */
+	.tp_dealloc = (destructor)eConsolePy_dealloc,
+	.tp_flags = Py_TPFLAGS_DEFAULT | Py_TPFLAGS_HAVE_GC,
+	.tp_doc = "eConsoleAppContainer objects",
+	.tp_traverse = (traverseproc)eConsolePy_traverse,
+	.tp_clear = (inquiry)eConsolePy_clear,
+	.tp_weaklistoffset = offsetof(eConsolePy, in_weakreflist),
+	.tp_methods = eConsolePy_methods,
+	.tp_getset = eConsolePy_getseters,
+	.tp_new = eConsolePy_new,
 };
 
 static PyMethodDef console_module_methods[] = {
-	{NULL}  /* Sentinel */
+	{}  /* Sentinel */
 };
 
 void eConsoleInit(void)
