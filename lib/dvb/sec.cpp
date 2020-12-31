@@ -143,7 +143,7 @@ int eDVBSatelliteEquipmentControl::canTune(const eDVBFrontendParametersSatellite
 				}
 				else
 				{
-					if ( sat.frequency > lnb_param.m_lof_threshold )
+					if ((unsigned)sat.frequency > lnb_param.m_lof_threshold)
 						band |= 1;
 					if (!(sat.polarisation & eDVBFrontendParametersSatellite::Polarisation_Vertical))
 						band |= 2;
@@ -259,7 +259,7 @@ int eDVBSatelliteEquipmentControl::canTune(const eDVBFrontendParametersSatellite
 
 				if (ret && !is_unicable)
 				{
-					int lof = sat.frequency > lnb_param.m_lof_threshold ?
+					int lof = (unsigned)sat.frequency > lnb_param.m_lof_threshold ?
 						lnb_param.m_lof_hi : lnb_param.m_lof_lo;
 					unsigned int tuner_freq = absdiff(sat.frequency, lof);
 					if (tuner_freq < (fe_info.type ? fe_info.frequency_min/1000 : fe_info.frequency_min)
@@ -428,7 +428,7 @@ RESULT eDVBSatelliteEquipmentControl::prepare(iDVBFrontend &frontend, const eDVB
 			}
 			else
 			{
-				if ( sat.frequency > lnb_param.m_lof_threshold )
+				if ((unsigned)sat.frequency > lnb_param.m_lof_threshold)
 					band |= 1;
 				if (!(sat.polarisation & eDVBFrontendParametersSatellite::Polarisation_Vertical))
 					band |= 2;
