@@ -408,8 +408,10 @@ static unsigned char *jpeg_load(const char *file, int *ox, int *oy, unsigned int
 	struct jpeg_decompress_struct cinfo;
 	struct jpeg_decompress_struct *ciptr = &cinfo;
 	struct r_jpeg_error_mgr emgr;
-	unsigned char *pic_buffer=NULL;
+	unsigned char *pic_buffer;
 	CFile fh(file, "rb");
+
+	pic_buffer = nullptr;
 
 	if (!fh)
 		return NULL;

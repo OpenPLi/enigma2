@@ -456,7 +456,7 @@ std::string GEOSTD8ToUTF8(const char *szIn, int len, int *pconvertedLen)
 			szOut += prefix1; j=j+2;
 			szOut += szIn[i]; j++;
 		}
-		else if ((unsigned char)szIn[i] >= 0xC0 && (unsigned char)szIn[i] <= 0xFF)
+		else if ((unsigned char)szIn[i] >= 0xC0)
 		{
 			szOut += prefix2; j=j+2;
 			szOut += (unsigned char)(int(szIn[i])-0x40);j++;

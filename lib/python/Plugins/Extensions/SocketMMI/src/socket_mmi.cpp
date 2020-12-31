@@ -428,7 +428,7 @@ socketmmi_get_name(PyObject *self, PyObject *args)
 }
 
 static PyMethodDef module_methods[] = {
-	{"getSocketStateChangedCallbackList", (PyCFunction)socketmmi_get_socket_state_changed_cb_list, METH_NOARGS,
+	{"getSocketStateChangedCallbackList", (PyCFunction)(void *)socketmmi_get_socket_state_changed_cb_list, METH_NOARGS,
 	 "get socket state change callback list"
 	},
 	{"setInit", (PyCFunction)socketmmi_set_init, METH_VARARGS,

@@ -20,12 +20,12 @@ StringSegment::~StringSegment()
 {
 }
 
-const uint8_t StringSegment::getMode(void) const
+uint8_t StringSegment::getMode(void) const
 {
 	return mode;
 }
 
-const uint8_t StringSegment::getCompression(void) const
+uint8_t StringSegment::getCompression(void) const
 {
 	return compression;
 }
@@ -175,7 +175,7 @@ const std::string StringValue::getValue(void) const
 	return value;
 }
 
-const uint32_t StringValue::getSize(void) const
+uint32_t StringValue::getSize(void) const
 {
 	return size;
 }

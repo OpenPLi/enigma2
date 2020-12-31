@@ -18,8 +18,8 @@ public:
 	StringSegment(const uint8_t *const buffer);
 	~StringSegment(void);
 
-	const uint8_t getMode(void) const;
-	const uint8_t getCompression(void) const;
+	uint8_t getMode(void) const;
+	uint8_t getCompression(void) const;
 	const std::vector<uint8_t> &getData(void) const;
 	const std::string getValue(void) const;
 };
@@ -35,7 +35,7 @@ public:
 	StringValue(const uint8_t *const buffer);
 	~StringValue(void);
 
-	const uint32_t getSize(void) const;
+	uint32_t getSize(void) const;
 	const std::string &getIso639LanguageCode(void) const;
 	const std::vector<StringSegment *> &getSegments(void) const;
 	const std::string getValue(void) const;

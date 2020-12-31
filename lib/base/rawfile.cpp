@@ -78,8 +78,6 @@ ssize_t eRawFile::read(off_t offset, void *buf, size_t count)
 	{
 		if (static_cast<size_t>(m_current_offset+count) > static_cast<size_t>(m_totallength))
 			count = m_totallength - m_current_offset;
-		if (count < 0)
-			return 0;
 	}
 
 	ssize_t ret = ::read(m_fd, buf, count);
