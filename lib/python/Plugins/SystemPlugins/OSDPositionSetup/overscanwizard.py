@@ -11,10 +11,10 @@ class OverscanWizard(Screen, ConfigListScreen):
 		if getDesktop(0).size().height() == 1080:
 			self.skin = """<screen position="fill" flags="wfNoBorder">
 				<ePixmap pixmap="overscan1920x1080.png" position="0,0" size="1920,1080" zPosition="3" alphatest="on"/>
-				<eLabel position="378,180" size="1244,686" zPosition="3"/>
-				<widget name="title" position="383,185" size="1234,50" font="Regular;40" foregroundColor="blue" zPosition="4"/>
-				<widget name="introduction" position="383,235" size="1234,623" halign="center" valign="center" font="Regular;30" zPosition="4"/>
-				<widget name="config" position="383,635" size="1234,226" font="Regular;30" itemHeight="40" zPosition="4"/>
+				<eLabel position="338,190" size="1244,698" zPosition="3"/>
+				<widget name="title" position="353,202" size="1224,50" font="Regular;40" foregroundColor="blue" zPosition="4"/>
+				<widget name="introduction" position="343,252" size="1234,623" halign="center" valign="center" font="Regular;30" zPosition="4"/>
+				<widget name="config" position="343,662" size="1234,226" font="Regular;30" itemHeight="40" zPosition="4"/>
 			</screen>"""
 		else:
 			self.skin = """<screen position="fill"  flags="wfNoBorder">
@@ -60,7 +60,7 @@ class OverscanWizard(Screen, ConfigListScreen):
 		from enigma import eSize, ePoint
 		if getDesktop(0).size().height() == 1080:
 			lenlist = len(self.list)*40
-			self["config"].instance.move(ePoint(383, 863 - lenlist))
+			self["config"].instance.move(ePoint(343, 873 - lenlist))
 			self["config"].instance.resize(eSize(1234, lenlist))
 			self["introduction"].instance.resize(eSize(1234, 623 - lenlist))
 		else:
