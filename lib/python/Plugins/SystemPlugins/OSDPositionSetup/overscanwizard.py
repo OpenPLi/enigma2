@@ -19,10 +19,10 @@ class OverscanWizard(Screen, ConfigListScreen):
 		else:
 			self.skin = """<screen position="fill"  flags="wfNoBorder">
 				<ePixmap pixmap="overscan1280x720.png" position="0,0" size="1280,720" zPosition="3" alphatest="on"/>
-				<eLabel position="223,120" size="810,475" zPosition="3"/>
-				<widget name="title" position="228,125" size="800,40" font="Regular;30" foregroundColor="blue" zPosition="4"/>
-				<widget name="introduction" position="228,165" size="800,623" halign="center" valign="center" font="Regular;20" zPosition="4"/>
-				<widget name="config" position="228,590" size="800,120" font="Regular;20" itemHeight="30" zPosition="4"/>
+				<eLabel position="235,131" size="810,457" zPosition="3"/>
+				<widget name="title" position="240,135" size="800,40" font="Regular;30" foregroundColor="blue" zPosition="4"/>
+				<widget name="introduction" position="240,175" size="800,623" halign="center" valign="center" font="Regular;18" zPosition="4"/>
+				<widget name="config" position="240,590" size="800,120" font="Regular;20" itemHeight="30" zPosition="4"/>
 			</screen>"""
 
 		Screen.__init__(self, session)
@@ -65,9 +65,9 @@ class OverscanWizard(Screen, ConfigListScreen):
 			self["introduction"].instance.resize(eSize(1234, 623 - lenlist))
 		else:
 			lenlist = len(self.list)*30
-			self["config"].instance.move(ePoint(228, 590 - lenlist))
+			self["config"].instance.move(ePoint(240, 580 - lenlist))
 			self["config"].instance.resize(eSize(800, lenlist))
-			self["introduction"].instance.resize(eSize(800, 415 - lenlist))
+			self["introduction"].instance.resize(eSize(800, 405 - lenlist))
 
 	def setScreen(self):
 		self.list = []
