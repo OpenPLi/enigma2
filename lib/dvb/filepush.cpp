@@ -3,6 +3,7 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <sys/ioctl.h>
+#include <poll.h>
 #include <time.h>
 
 //#define SHOW_WRITE_TIME
@@ -324,6 +325,11 @@ eFilePushThreadRecorder::eFilePushThreadRecorder(unsigned char* buffer, size_t b
 
 void eFilePushThreadRecorder::thread()
 {
+	ssize_t bytes;
+	int rv;
+	bool poll_required;
+	struct pollfd pfd;
+
 	setIoPrio(IOPRIO_CLASS_RT, 7);
 
 	eDebug("[eFilePushThreadRecorder] THREAD START");
@@ -334,12 +340,74 @@ void eFilePushThreadRecorder::thread()
 	act.sa_flags = 0;
 	sigaction(SIGUSR1, &act, 0);
 
+	poll_required = false;
 	hasStarted();
 
 	/* m_stop must be evaluated after each syscall. */
 	while (!m_stop)
 	{
-		ssize_t bytes = ::read(m_fd_source, m_buffer, m_buffersize);
+		if(poll_required)
+		{
+			/* make sure there is data to be read */
+
+			pfd.fd = m_fd_source;
+			pfd.events = POLLIN;
+			pfd.revents = 0;
+
+			rv = poll(&pfd, 1, 100);
+
+			if(rv < 0)
+			{
+				if(errno == EINTR)
+					continue;
+
+				eWarning("[eFilePushThreadRecorder] POLL ERROR, aborting thread: %m");
+				sendEvent(evtWriteError);
+
+				break;
+			}
+
+			if(rv != 1)
+			{
+				eWarning("[eFilePushThreadRecorder] POLL WEIRDNESS, fds != 1 , aborting thread");
+				sendEvent(evtWriteError);
+
+				break;
+			}
+
+			if(rv == 0)
+				continue;
+
+			if(pfd.revents & (POLLRDHUP | POLLERR | POLLHUP | POLLNVAL))
+			{
+				eWarning("[eFilePushThreadRecorder] POLL STATUS ERROR, aborting thread: %x\n", pfd.revents);
+				sendEvent(evtWriteError);
+
+				break;
+			}
+
+			if(!(pfd.revents & POLLIN))
+			{
+				eWarning("[eFilePushThreadRecorder] POLL WEIRDNESS, fd not ready, aborting thread: %x\n", pfd.revents);
+				sendEvent(evtWriteError);
+
+				break;
+			}
+
+			/* there is data available on the fd, we can continue */
+		}
+
+		bytes = ::read(m_fd_source, m_buffer, m_buffersize);
+		if(bytes == 0)
+		{
+			/* Broadcom transcoding device bug: sometimes returns zero bytes even
+			 * if not "EOF" and not non-blocking, need poll() to block. */
+
+			eDebug("[eFilePushThreadRecorder] Broadcom transcoding bug workaround engaged");
+
+			poll_required = true;
+			continue;
+		}
 		if (bytes < 0)
 		{
 			bytes = 0;
