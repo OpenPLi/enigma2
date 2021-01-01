@@ -3,6 +3,7 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <sys/ioctl.h>
+#include <time.h>
 
 //#define SHOW_WRITE_TIME
 
@@ -380,24 +381,43 @@ void eFilePushThreadRecorder::thread()
 	flush();
 	sendEvent(evtStopped);
 	eDebug("[eFilePushThreadRecorder] THREAD STOP");
+	m_stopped = true;
 }
 
 void eFilePushThreadRecorder::start(int fd)
 {
 	m_fd_source = fd;
 	m_stop = 0;
+	m_stopped = false;
 	run();
 }
 
 void eFilePushThreadRecorder::stop()
 {
-	/* if we aren't running, don't bother stopping. */
+	static const struct timespec timespec_1 = { .tv_sec =  0, .tv_nsec = 1000000000 / 10 };
+
+	int safeguard;
+
 	if (m_stop == 1)
 		return;
+
 	m_stop = 1;
-	eDebug("[eFilePushThreadRecorder] stopping thread."); /* just do it ONCE. it won't help to do this more than once. */
-	sendSignal(SIGUSR1);
-	kill();
+
+	for(safeguard = 10; safeguard > 0; safeguard--)
+	{
+		eDebug("[eFilePushThreadRecorder] stopping thread: %d", safeguard);
+		sendSignal(SIGUSR1);
+
+		nanosleep(&timespec_1, nullptr);
+
+		if(m_stopped)
+			break;
+	}
+
+	if(safeguard > 0)
+		kill();
+	else
+		eWarning("[eFilePushThreadRecorder] thread could not be stopped!");
 }
 
 void eFilePushThreadRecorder::sendEvent(int evt)
