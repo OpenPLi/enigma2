@@ -21,9 +21,7 @@ static std::string getSize(const char* file)
 	struct stat64 s;
 	if (stat64(file, &s) < 0)
 		return "";
-	char tmp[20];
-	snprintf(tmp, 20, "%ld kB", (long)s.st_size / 1024);
-	return tmp;
+	return std::to_string((long)(s.st_size / 1024)) + " kB";
 }
 
 static unsigned char *color_resize(unsigned char * orgin, int ox, int oy, int dx, int dy)
@@ -410,8 +408,10 @@ static unsigned char *jpeg_load(const char *file, int *ox, int *oy, unsigned int
 	struct jpeg_decompress_struct cinfo;
 	struct jpeg_decompress_struct *ciptr = &cinfo;
 	struct r_jpeg_error_mgr emgr;
-	unsigned char *pic_buffer=NULL;
+	unsigned char *pic_buffer;
 	CFile fh(file, "rb");
+
+	pic_buffer = nullptr;
 
 	if (!fh)
 		return NULL;
@@ -957,22 +957,22 @@ PyObject *ePicLoad::getInfo(const char *filename)
 		PyList_SET_ITEM(list, pos++,  PyString_FromString(m_exif->m_exifinfo->LightSource));
 		PyList_SET_ITEM(list, pos++,  PyString_FromFormat("%d", m_exif->m_exifinfo->CompressionLevel));
 		PyList_SET_ITEM(list, pos++,  PyString_FromFormat("%d", m_exif->m_exifinfo->ISOequivalent));
-		sprintf(tmp, "%.2f", m_exif->m_exifinfo->Xresolution);
+		snprintf(tmp, sizeof(tmp) - 1, "%.2f", m_exif->m_exifinfo->Xresolution);
 		PyList_SET_ITEM(list, pos++,  PyString_FromString(tmp));
-		sprintf(tmp, "%.2f", m_exif->m_exifinfo->Yresolution);
+		snprintf(tmp, sizeof(tmp) - 1, "%.2f", m_exif->m_exifinfo->Yresolution);
 		PyList_SET_ITEM(list, pos++,  PyString_FromString(tmp));
 		PyList_SET_ITEM(list, pos++,  PyString_FromString(m_exif->m_exifinfo->ResolutionUnit));
-		sprintf(tmp, "%.2f", m_exif->m_exifinfo->Brightness);
+		snprintf(tmp, sizeof(tmp) - 1, "%.2f", m_exif->m_exifinfo->Brightness);
 		PyList_SET_ITEM(list, pos++,  PyString_FromString(tmp));
-		sprintf(tmp, "%.5f sec.", m_exif->m_exifinfo->ExposureTime);
+		snprintf(tmp, sizeof(tmp) - 1, "%.5f sec.", m_exif->m_exifinfo->ExposureTime);
 		PyList_SET_ITEM(list, pos++,  PyString_FromString(tmp));
-		sprintf(tmp, "%.5f", m_exif->m_exifinfo->ExposureBias);
+		snprintf(tmp, sizeof(tmp) - 1, "%.5f", m_exif->m_exifinfo->ExposureBias);
 		PyList_SET_ITEM(list, pos++,  PyString_FromString(tmp));
-		sprintf(tmp, "%.5f", m_exif->m_exifinfo->Distance);
+		snprintf(tmp, sizeof(tmp) - 1, "%.5f", m_exif->m_exifinfo->Distance);
 		PyList_SET_ITEM(list, pos++,  PyString_FromString(tmp));
-		sprintf(tmp, "%.5f", m_exif->m_exifinfo->CCDWidth);
+		snprintf(tmp, sizeof(tmp) - 1, "%.5f", m_exif->m_exifinfo->CCDWidth);
 		PyList_SET_ITEM(list, pos++,  PyString_FromString(tmp));
-		sprintf(tmp, "%.2f", m_exif->m_exifinfo->ApertureFNumber);
+		snprintf(tmp, sizeof(tmp) - 1, "%.2f", m_exif->m_exifinfo->ApertureFNumber);
 		PyList_SET_ITEM(list, pos++,  PyString_FromString(tmp));
 	}
 	else
@@ -1026,7 +1026,7 @@ int ePicLoad::getData(ePtr<gPixmap> &result)
 	// center image      : xoff, yoff
 	int scrx, scry; // Aspect ratio calculation
 	int orientation = m_conf.auto_orientation ? (m_exif && m_exif->m_exifinfo->Orient ? m_exif->m_exifinfo->Orient : 1) : 1;
-	if (m_conf.aspect_ratio == 0)  // do not keep aspect ratio but just fill the destination area
+	if ((m_conf.aspect_ratio > -0.1) && (m_conf.aspect_ratio < 0.1)) // do not keep aspect ratio but just fill the destination area
 	{
 		scrx = m_filepara->max_x;
 		scry = m_filepara->max_y;

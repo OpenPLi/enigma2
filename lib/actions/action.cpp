@@ -189,7 +189,7 @@ struct call_entry
 	ePyObject m_fnc, m_arg;
 	eWidget *m_widget;
 	void *m_widget_arg, *m_widget_arg2;
-	call_entry(ePyObject fnc, ePyObject arg): m_fnc(fnc), m_arg(arg), m_widget(0), m_widget_arg(0) { }
+	call_entry(ePyObject fnc, ePyObject arg): m_fnc(fnc), m_arg(arg), m_widget(0), m_widget_arg(0), m_widget_arg2(0) { }
 	call_entry(eWidget *widget, void *arg, void *arg2): m_widget(widget), m_widget_arg(arg), m_widget_arg2(arg2) { }
 };
 

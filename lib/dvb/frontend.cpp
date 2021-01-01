@@ -363,7 +363,7 @@ RESULT eDVBFrontendParameters::calculateDifference(const iDVBFrontendParameters 
 	{
 		case iDVBFrontend::feSatellite:
 		{
-			eDVBFrontendParametersSatellite osat = {0};
+			eDVBFrontendParametersSatellite osat{};
 			if (parm->getDVBS(osat))
 				return -2;
 
@@ -394,7 +394,7 @@ RESULT eDVBFrontendParameters::calculateDifference(const iDVBFrontendParameters 
 		}
 		case iDVBFrontend::feCable:
 		{
-			eDVBFrontendParametersCable ocable = {0};
+			eDVBFrontendParametersCable ocable{};
 			if (parm->getDVBC(ocable))
 				return -2;
 
@@ -413,7 +413,7 @@ RESULT eDVBFrontendParameters::calculateDifference(const iDVBFrontendParameters 
 		}
 		case iDVBFrontend::feTerrestrial:
 		{
-			eDVBFrontendParametersTerrestrial oterrestrial = {0};
+			eDVBFrontendParametersTerrestrial oterrestrial{};
 			if (parm->getDVBT(oterrestrial))
 				return -2;
 
@@ -454,7 +454,7 @@ RESULT eDVBFrontendParameters::calculateDifference(const iDVBFrontendParameters 
 		}
 		case iDVBFrontend::feATSC:
 		{
-			eDVBFrontendParametersATSC oatsc = {0};
+			eDVBFrontendParametersATSC oatsc{};
 			if (parm->getATSC(oatsc))
 				return -2;
 
@@ -633,7 +633,7 @@ int eDVBFrontend::openFrontend()
 				m_fd = -1;
 				return -1;
 			}
-			strncpy(m_description, fe_info.name, sizeof(m_description));
+			strncpy(m_description, fe_info.name, sizeof(m_description) - 1);
 #if defined DTV_ENUM_DELSYS
 			struct dtv_property p[1];
 			p[0].cmd = DTV_ENUM_DELSYS;
@@ -916,7 +916,7 @@ int eDVBFrontend::calculateSignalPercentage(int signalqualitydb)
 			break;
 		case feATSC:
 		{
-			eDVBFrontendParametersATSC parm = {0};
+			eDVBFrontendParametersATSC parm{};
 			oparm.getATSC(parm);
 			switch (parm.modulation)
 			{
@@ -962,7 +962,7 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 	}
 	else if (!strcmp(m_description, "BCM4501 (internal)"))
 	{
-		eDVBFrontendParametersSatellite parm = {0};
+		eDVBFrontendParametersSatellite parm{};
 		float SDS_SNRE = snr << 16;
 		float snr_in_db;
 		oparm.getDVBS(parm);
@@ -1075,7 +1075,7 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 	}
 	else if (!strcmp(m_description, "Philips CU1216Mk3"))
 	{
-		eDVBFrontendParametersCable parm = {0};
+		eDVBFrontendParametersCable parm{};
 		int mse = (~snr) & 0xFF;
 		oparm.getDVBC(parm);
 		switch (parm.modulation)
@@ -1166,7 +1166,7 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 	}
 	else if (!strcmp(m_description, "CXD1981"))
 	{
-		eDVBFrontendParametersCable parm = {0};
+		eDVBFrontendParametersCable parm{};
 		int mse = (~snr) & 0xFF;
 		oparm.getDVBC(parm);
 		switch (parm.modulation)
@@ -1190,7 +1190,7 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 	}
 	else if (!strcmp(m_description, "Si216x"))
 	{
-		eDVBFrontendParametersTerrestrial parm = {0};
+		eDVBFrontendParametersTerrestrial parm{};
 
 		oparm.getDVBT(parm);
 
@@ -1229,7 +1229,7 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 	}
 	else if(!strcmp(m_description, "WinTV HVR-850") || !strcmp(m_description, "Hauppauge") || !strcmp(m_description, "LG Electronics LGDT3306A VSB/QAM Frontend"))
 	{
-		eDVBFrontendParametersATSC parm = {0};
+		eDVBFrontendParametersATSC parm{};
 		oparm.getATSC(parm);
 		switch (parm.modulation)
 		{
@@ -2060,7 +2060,7 @@ void eDVBFrontend::setFrontend(bool recvEvents)
 		p[cmdseq.num].cmd = DTV_CLEAR, cmdseq.num++;
 		if (type == iDVBFrontend::feSatellite)
 		{
-			eDVBFrontendParametersSatellite parm = {0};
+			eDVBFrontendParametersSatellite parm{};
 			fe_rolloff_t rolloff = ROLLOFF_35;
 			fe_pilot_t pilot = PILOT_OFF;
 			fe_modulation_t modulation = QPSK;
@@ -2149,7 +2149,7 @@ void eDVBFrontend::setFrontend(bool recvEvents)
 		}
 		else if (type == iDVBFrontend::feCable)
 		{
-			eDVBFrontendParametersCable parm = {0};
+			eDVBFrontendParametersCable parm{};
 			oparm.getDVBC(parm);
 
 			p[cmdseq.num].cmd = DTV_DELIVERY_SYSTEM;
@@ -2219,7 +2219,7 @@ void eDVBFrontend::setFrontend(bool recvEvents)
 		}
 		else if (type == iDVBFrontend::feTerrestrial)
 		{
-			eDVBFrontendParametersTerrestrial parm = {0};
+			eDVBFrontendParametersTerrestrial parm{};
 			fe_delivery_system_t system = SYS_DVBT;
 			oparm.getDVBT(parm);
 			switch (parm.system)
@@ -2348,7 +2348,7 @@ void eDVBFrontend::setFrontend(bool recvEvents)
 		}
 		else if (type == iDVBFrontend::feATSC)
 		{
-			eDVBFrontendParametersATSC parm = {0};
+			eDVBFrontendParametersATSC parm{};
 			oparm.getATSC(parm);
 			p[cmdseq.num].cmd = DTV_DELIVERY_SYSTEM;
 			switch (parm.system)
@@ -2645,11 +2645,13 @@ RESULT eDVBFrontend::setVoltage(int voltage)
 			break;
 		case voltage13_5:
 			increased = true;
+			[[fallthrough]];
 		case voltage13:
 			vlt = SEC_VOLTAGE_13;
 			break;
 		case voltage18_5:
 			increased = true;
+			[[fallthrough]];
 		case voltage18:
 			vlt = SEC_VOLTAGE_18;
 			break;
@@ -3016,7 +3018,7 @@ bool eDVBFrontend::setSlotInfo(int id, const char *descr, bool enabled, bool isD
 	}
 	m_slotid = id;
 	m_enabled = enabled;
-	strncpy(m_description, descr, sizeof(m_description));
+	strncpy(m_description, descr, sizeof(m_description) - 1);
 
 	// HACK.. the rotor workaround is neede for all NIMs with LNBP21 voltage regulator...
 	m_need_rotor_workaround = !!strstr(m_description, "Alps BSBE1") ||

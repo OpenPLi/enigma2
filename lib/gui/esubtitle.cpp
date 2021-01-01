@@ -123,22 +123,38 @@ void eSubtitleWidget::setPage(const eDVBSubtitlePage &p)
 	m_dvb_page = p;
 	invalidate(m_visible_region); // invalidate old visible regions
 	m_visible_region.rects.clear();
-	int line = 0;
+
+	int verticalShift=0;
 	int original_position = eConfigManager::getConfigIntValue("config.subtitles.dvb_subtitles_original_position");
+	
+//	In case of absolute positioning determine bottom of lowest region (Note that the regions are not necessarily in order)
+//	Compute vertcial shift of all regions, and make sure it does not extend above the top of the display.
+	if (original_position==1)
+	{
+		int lowestLine=0;
+		int highestLine=99999;
+		int lowerborder = eConfigManager::getConfigIntValue("config.subtitles.subtitle_position", -1);
+		for (std::list<eDVBSubtitleRegion>::iterator it(m_dvb_page.m_regions.begin()); it != m_dvb_page.m_regions.end(); ++it) {
+			int ll=it->m_position.y() +it->m_pixmap->size().height();
+			int hl=it->m_position.y();
+			lowestLine=std::max(ll,lowestLine);
+			highestLine=std::min(hl,highestLine);
+		}
+		verticalShift=std::min(highestLine,lowestLine-(p.m_display_size.height()-lowerborder));
+	}
+	
 	for (std::list<eDVBSubtitleRegion>::iterator it(m_dvb_page.m_regions.begin()); it != m_dvb_page.m_regions.end(); ++it)
 	{
 		if (original_position)
 		{
-			int lines = m_dvb_page.m_regions.size();
 			int lowerborder = eConfigManager::getConfigIntValue("config.subtitles.subtitle_position", -1);
 			if (lowerborder >= 0)
 			{
 				if (original_position == 1)
-					it->m_position=ePoint(it->m_position.x(), p.m_display_size.height() - (lines - line) * it->m_pixmap->size().height() - lowerborder);
+					it->m_position=ePoint(it->m_position.x(), it->m_position.y()-verticalShift);
 				else
 					it->m_position=ePoint(it->m_position.x(), it->m_position.y() + 55 - lowerborder);
 			}
-			line++;
 		}
 		eDebug("[eSubtitleWidget] add %d %d %d %d", it->m_position.x(), it->m_position.y(), it->m_pixmap->size().width(), it->m_pixmap->size().height());
 		//eDebug("[eSubtitleWidget] disp width %d, disp height %d", p.m_display_size.width(), p.m_display_size.height());

@@ -1,7 +1,7 @@
 language: cpp
 
-sudo: required
-dist: trusty
+dist: bionic
+os: linux
 
 addons:
   apt:
@@ -25,64 +25,8 @@ addons:
     - libjpeg-turbo8-dev
     - libgif-dev
 
-matrix:
+jobs:
   include:
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-6
-            - linux-libc-dev
-            - git
-            - build-essential
-            - automake
-            - libtool
-            - python-dev
-            - zlib1g-dev
-            - gettext
-            - swig
-            - libgstreamer1.0-dev
-            - libgstreamer-plugins-base1.0-dev
-            - libfreetype6-dev
-            - libsigc++-2.0-dev
-            - libfribidi-dev
-            - libssl-dev
-            - libavahi-client-dev
-            - libjpeg-turbo8-dev
-            - libgif-dev
-      env:
-        - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
-
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-7
-            - linux-libc-dev
-            - git
-            - build-essential
-            - automake
-            - libtool
-            - python-dev
-            - zlib1g-dev
-            - gettext
-            - swig
-            - libgstreamer1.0-dev
-            - libgstreamer-plugins-base1.0-dev
-            - libfreetype6-dev
-            - libsigc++-2.0-dev
-            - libfribidi-dev
-            - libssl-dev
-            - libavahi-client-dev
-            - libjpeg-turbo8-dev
-            - libgif-dev
-      env:
-        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
-
     - os: linux
       addons:
         apt:
@@ -110,6 +54,34 @@ matrix:
             - libgif-dev
       env:
         - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
+
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-10
+            - linux-libc-dev
+            - git
+            - build-essential
+            - automake
+            - libtool
+            - python-dev
+            - zlib1g-dev
+            - gettext
+            - swig
+            - libgstreamer1.0-dev
+            - libgstreamer-plugins-base1.0-dev
+            - libfreetype6-dev
+            - libsigc++-2.0-dev
+            - libfribidi-dev
+            - libssl-dev
+            - libavahi-client-dev
+            - libjpeg-turbo8-dev
+            - libgif-dev
+      env:
+        - MATRIX_EVAL="CC=gcc-10 && CXX=g++-10"
 
 git:
   depth: 10

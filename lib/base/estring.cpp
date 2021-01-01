@@ -236,6 +236,7 @@ static inline unsigned int doVideoTexSuppl(int c1, int c2)
 				case 0x45: return 274;				case 0x65: return 275;
 				case 0x49: return 298;				case 0x69: return 299;
 				case 0x4f: return 332;				case 0x6f: return 333;
+				default: return 0;
 			}
 		case 0xC6: // breve
 			switch (c2)
@@ -455,7 +456,7 @@ std::string GEOSTD8ToUTF8(const char *szIn, int len, int *pconvertedLen)
 			szOut += prefix1; j=j+2;
 			szOut += szIn[i]; j++;
 		}
-		else if ((unsigned char)szIn[i] >= 0xC0 && (unsigned char)szIn[i] <= 0xFF)
+		else if ((unsigned char)szIn[i] >= 0xC0)
 		{
 			szOut += prefix2; j=j+2;
 			szOut += (unsigned char)(int(szIn[i])-0x40);j++;
@@ -898,13 +899,14 @@ std::string replace_all(const std::string &in, const std::string &entity, const 
 				loc += symbol.length();
 				continue;
 			}
-			if (out.at(loc) < 0x80)
+			unsigned char c = static_cast<unsigned char>(out.at(loc));
+			if (c < 0x80)
 				++loc;
-			else if ((out.at(loc) & 0xE0) == 0xC0)
+			else if ((c & 0xE0) == 0xC0)
 				loc += 2;
-			else if ((out.at(loc) & 0xF0) == 0xE0)
+			else if ((c & 0xF0) == 0xE0)
 				loc += 3;
-			else if ((out.at(loc) & 0xF8) == 0xF0)
+			else if ((c & 0xF8) == 0xF0)
 				loc += 4;
 		}
 		break;

@@ -190,7 +190,7 @@ void eDVBCISession::createSession(eDVBCISlot *slot, const unsigned char *resourc
 	case 0x00100041:
 //		session=new eDVBCIAuthSession;
 		eDebug("[CI SESS] AuthSession");
-//		break;
+		[[fallthrough]];
 	case 0x00240041:
 		if (!eDVBCIInterfaces::getInstance()->isClientConnected())
 		{
@@ -198,6 +198,7 @@ void eDVBCISession::createSession(eDVBCISlot *slot, const unsigned char *resourc
 			eDebug("[CI SESS] DATE-TIME");
 			break;
 		}
+		[[fallthrough]];
 	case 0x008C1001:
 	case 0x008D1001:
 	case 0x008E1001:

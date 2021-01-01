@@ -46,6 +46,7 @@ int eDVBCIDateTimeSession::doAction()
 		return 0;
 	case stateFinal:
 		eDebug("[CI DT] stateFinal and action should not happen");
+		[[fallthrough]];
 	default:
 		return 0;
 	}

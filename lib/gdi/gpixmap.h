@@ -65,6 +65,7 @@ struct gRGB
 	{
 		value = val;
 	}
+	gRGB& operator=(const gRGB&) = default;
 	bool operator < (const gRGB &c) const
 	{
 		if (b < c.b)
@@ -91,7 +92,7 @@ struct gRGB
 	{
 		return c.value != value;
 	}
-	operator const std::string () const
+	operator std::string () const
 	{
 		unsigned int val = value;
 		std::string escapecolor = "\\c";

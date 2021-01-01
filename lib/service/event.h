@@ -24,6 +24,7 @@ struct eComponentData
 	std::string m_text;
 public:
 	eComponentData(const eComponentData& d) { *this = d; }
+	eComponentData& operator =(const eComponentData &) = default;
 	eComponentData() { m_streamContent = m_componentType = m_componentTag = 0; }
 	int getStreamContent(void) const { return m_streamContent; }
 	int getComponentType(void) const { return m_componentType; }
@@ -44,6 +45,7 @@ struct eGenreData
 	uint8_t m_user2;
 public:
 	eGenreData(const eGenreData& d) { *this = d; }
+	eGenreData& operator =(const eGenreData &) = default;
 	eGenreData() { m_level1 = m_level2 = m_user1 = m_user2 = 0; }
 	int getLevel1(void) const { return m_level1; }
 	int getLevel2(void) const { return m_level2; }
@@ -61,6 +63,7 @@ struct eParentalData
 	uint8_t m_rating;
 public:
 	eParentalData(const eParentalData& d) { *this = d; }
+	eParentalData& operator =(const eParentalData &) = default;
 	eParentalData() { m_country_code = ""; m_rating = 0; }
 	std::string getCountryCode(void) const { return m_country_code; }
 	int getRating(void) const { return m_rating; }

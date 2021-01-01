@@ -385,6 +385,7 @@ void eHdmiCEC::hdmiEvent(int what)
 					case 0x44: /* key pressed */
 						keypressed = true;
 						pressedkey = rxmessage.data[1];
+						break;
 					case 0x45: /* key released */
 					{
 						long code = translateKey(pressedkey);
