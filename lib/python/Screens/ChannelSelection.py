@@ -2432,6 +2432,7 @@ class ChannelSelectionRadio(ChannelSelectionBase, ChannelSelectionEdit, ChannelS
 				"keyRadio": self.cancel,
 				"cancel": self.cancel,
 				"ok": self.channelSelected,
+				"audio": self.audioSelection
 			})
 
 		self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
@@ -2458,7 +2459,7 @@ class ChannelSelectionRadio(ChannelSelectionBase, ChannelSelectionEdit, ChannelS
 		self.session.nav.playService(lastservice)
 
 	def startRassInteractive(self):
-		self.info.hide();
+		self.info.hide()
 		self.infobar.rass_interactive = self.session.openWithCallback(self.RassInteractiveClosed, RassInteractive)
 
 	def RassInteractiveClosed(self):
@@ -2565,6 +2566,9 @@ class ChannelSelectionRadio(ChannelSelectionBase, ChannelSelectionEdit, ChannelS
 
 	def zapBack(self):
 		self.channelSelected()
+
+	def audioSelection(self):
+		Screens.InfoBar.InfoBar.instance and Screens.InfoBar.InfoBar.instance.audioSelection()
 
 class SimpleChannelSelection(ChannelSelectionBase, SelectionEventInfo):
 	def __init__(self, session, title, currentBouquet=False, returnBouquet=False, setService=None, setBouquet=None):
