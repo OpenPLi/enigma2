@@ -278,10 +278,12 @@ void eEncoder::freeEncoder(int encoderfd)
 
 	encoder[encoder_index].state = EncoderContext::state_finishing;
 	encoder[encoder_index].kill();
-
 	encoder[encoder_index].navigation_instance->getCurrentService(service);
+
 	service->tap(tservice);
-	tservice->stopTapToFD();
+
+	if(tservice)
+		tservice->stopTapToFD();
 
 	encoder[encoder_index].navigation_instance->stopService();
 
