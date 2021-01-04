@@ -29,7 +29,7 @@ eEncoder::eEncoder()
 {
 	int decoder_index;
 	ePtr<iServiceHandler> service_center;
-	eNavigation *navigation_instance;
+	eNavigation *navigation_instance_normal, *navigation_instance_alternative;
 
 	instance = this;
 	eServiceCenter::getInstance(service_center);
@@ -49,6 +49,12 @@ eEncoder::eEncoder()
 		 * OTOH the "xtrend" transcoding engine has the video decoder connected to
 		 * the selected encoder internally. So we need to use the right decoder,
 		 * connected to the selected encoder. This is usually 2 -> 0, 3 -> 1.
+		 *
+		 * To complicate matters even more, Broadcom transcoding uses the "xtrend"
+		 * interface when recording from HDMI input, so we need to always construct
+		 * two navigation instances, one with the normal, usual video decoder
+		 * connected for "xtrend" transcoding and for HDMI input, and one with the
+		 * dummy video decoder for Broadcom transcoding.
 		 */
 
 		for(int index = 0; index < 4; index++) // increase this if machines appear with more than 4 encoding engines
@@ -60,13 +66,20 @@ eEncoder::eEncoder()
 			if (CFile::parseInt(&decoder_index, filename) < 0)
 				break;
 
-			if(bcm_encoder)
-				decoder_index = index + 4;
-
-			if((navigation_instance = new eNavigation(service_center, decoder_index)) == nullptr)
+			/* the connected video decoder for "Xtrend" transcoding / encoding or for Broadcom HDMI recording */
+			if((navigation_instance_normal = new eNavigation(service_center, decoder_index)) == nullptr)
 				break;
 
-			encoder.push_back(EncoderContext(index, decoder_index, navigation_instance));
+			if(bcm_encoder)
+			{
+				/* use a non-existing (+4) video decoder for Broadcom transcoding, we don't want a decoder there */
+				if((navigation_instance_alternative = new eNavigation(service_center, index + 4)) == nullptr)
+					break;
+			}
+			else
+				navigation_instance_alternative = nullptr;
+
+			encoder.push_back(EncoderContext(navigation_instance_normal, navigation_instance_alternative));
 		}
 	}
 }
@@ -76,7 +89,9 @@ eEncoder::~eEncoder()
 	for(int encoder_index = 0; encoder_index < (int)encoder.size(); encoder_index++)
 	{
 		encoder[encoder_index].state = EncoderContext::state_destroyed;
-		encoder[encoder_index].navigation_instance = nullptr; /* apparently we're not allowed to delete */
+		encoder[encoder_index].navigation_instance = nullptr;
+		encoder[encoder_index].navigation_instance_normal = nullptr; /* apparently we're not allowed to delete */
+		encoder[encoder_index].navigation_instance_alternative = nullptr; /* apparently we're not allowed to delete */
 	}
 
 	instance = nullptr;
@@ -96,18 +111,7 @@ int eEncoder::allocateEncoder(const std::string &serviceref, int &buffersize,
 	eDebug("[eEncoder] allocateEncoder serviceref=%s bitrate=%d width=%d height=%d vcodec=%s acodec=%s",
 			serviceref.c_str(), bitrate, width, height, vcodec.c_str(), acodec.c_str());
 
-	if(bcm_encoder)
-	{
-		vcodec_node = "video_codec";
-		acodec_node = "audio_codec";
-	}
-	else
-	{
-		vcodec_node = "vcodec";
-		acodec_node = "acodec";
-	}
-
-	// extract file path from serviceref, this is needed for Broadcom transcoding
+	// extract file path from serviceref, this is needed for Broadcom file transcoding
 	if(serviceref.compare(0, sizeof(fileref) - 1, std::string(fileref), 0, std::string::npos) == 0)
 		source_file = serviceref.substr(sizeof(fileref) - 1, std::string::npos);
 
@@ -123,6 +127,19 @@ int eEncoder::allocateEncoder(const std::string &serviceref, int &buffersize,
 	{
 		eWarning("[eEncoder] no encoders free");
 		return(-1);
+	}
+
+	if(bcm_encoder)
+	{
+		vcodec_node = "video_codec";
+		acodec_node = "audio_codec";
+		encoder[encoder_index].navigation_instance = encoder[encoder_index].navigation_instance_alternative;
+	}
+	else
+	{
+		vcodec_node = "vcodec";
+		acodec_node = "acodec";
+		encoder[encoder_index].navigation_instance = encoder[encoder_index].navigation_instance_normal;
 	}
 
 	snprintf(filename, sizeof(filename), "/proc/stb/encoder/%d/bitrate", encoder_index);
@@ -234,6 +251,85 @@ int eEncoder::allocateEncoder(const std::string &serviceref, int &buffersize,
 	return(encoder[encoder_index].encoder_fd);
 }
 
+int eEncoder::allocateHDMIEncoder(const std::string &serviceref, int &buffersize)
+{
+	/* these are hardcoded because they're ignored anyway */
+
+	static const int hdmi_encoding_bitrate = 100000;
+	static const int hdmi_encoding_width = 1280;
+	static const int hdmi_encoding_height = 720;
+	static const int hdmi_encoding_framerate = 25000;
+	static const int hdmi_encoding_interlaced = 0;
+	static const int hdmi_encoding_aspect_ratio = 0;
+	static const char *hdmi_encoding_vcodec = "h264";
+	static const char *hdmi_encoding_acodec = "aac";
+
+	char filename[128];
+	const char *vcodec_node;
+	const char *acodec_node;
+
+	if(bcm_encoder)
+	{
+		vcodec_node = "video_codec";
+		acodec_node = "audio_codec";
+		buffersize = 188 * 256; /* broadcom magic value */
+	}
+	else
+	{
+		vcodec_node = "vcodec";
+		acodec_node = "acodec";
+		buffersize = -1;
+	}
+
+	/* both systems can only use the first encoder for HDMI recording */
+
+	if((encoder.size() < 1) || (encoder[0].state != EncoderContext::state_idle))
+	{
+		eWarning("[eEncoder] no encoders free");
+		return(-1);
+	}
+
+	encoder[0].navigation_instance = encoder[0].navigation_instance_normal;
+
+	CFile::writeInt("/proc/stb/encoder/0/bitrate", hdmi_encoding_bitrate);
+	CFile::writeInt("/proc/stb/encoder/0/width", hdmi_encoding_width);
+	CFile::writeInt("/proc/stb/encoder/0/height", hdmi_encoding_height);
+
+	if(bcm_encoder)
+		CFile::write("/proc/stb/encoder/0/display_format", "720p");
+
+	CFile::writeInt("/proc/stb/encoder/0/framerate", hdmi_encoding_framerate);
+	CFile::writeInt("/proc/stb/encoder/0/interlaced", hdmi_encoding_interlaced);
+	CFile::writeInt("/proc/stb/encoder/0/aspectratio", hdmi_encoding_aspect_ratio);
+
+	snprintf(filename, sizeof(filename), "/proc/stb/encoder/%d/%s", 0, vcodec_node);
+	CFile::write(filename, hdmi_encoding_vcodec);
+
+	snprintf(filename, sizeof(filename), "/proc/stb/encoder/%d/%s", 0, acodec_node);
+	CFile::write(filename, hdmi_encoding_acodec);
+
+	snprintf(filename, sizeof(filename), "/proc/stb/encoder/%d/apply", 0);
+	CFile::writeInt(filename, 1);
+
+	if(encoder[0].navigation_instance->playService(serviceref) < 0)
+	{
+		eWarning("[eEncoder] navigation->playservice failed");
+		return(-1);
+	}
+
+	snprintf(filename, sizeof(filename), "/dev/%s%d", "encoder", 0);
+
+	if((encoder[0].encoder_fd = open(filename, O_RDONLY)) < 0)
+	{
+		eWarning("[eEncoder] open encoder failed");
+		return(-1);
+	}
+
+	encoder[0].state = EncoderContext::state_running;
+
+	return(encoder[0].encoder_fd);
+}
+
 void eEncoder::freeEncoder(int encoderfd)
 {
 	int encoder_index;
@@ -291,7 +387,7 @@ void eEncoder::freeEncoder(int encoderfd)
 	close(encoder[encoder_index].file_fd);
 	encoder[encoder_index].encoder_fd = -1;
 	encoder[encoder_index].file_fd = -1;
-
+	encoder[encoder_index].navigation_instance = nullptr;
 	encoder[encoder_index].state = EncoderContext::state_idle;
 }
 
