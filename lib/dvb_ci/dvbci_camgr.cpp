@@ -34,7 +34,7 @@ int eDVBCICAManagerSession::receivedAPDU(const unsigned char *tag, const void *d
 			}
 			std::sort(caids.begin(), caids.end());
 			eDebugNoNewLine("\n");
-			eDVBCIInterfaces::getInstance()->recheckPMTHandlers();
+			eDVBCIInterfaces::getInstance()->executeRecheckPMTHandlersInMainloop();
 			break;
 		default:
 			eDebug("[CI CA] unknown APDU tag 9F 80 %02x", tag[2]);

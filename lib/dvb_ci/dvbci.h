@@ -4,6 +4,8 @@
 #ifndef SWIG
 
 #include <lib/base/ebase.h>
+#include <lib/base/message.h>
+#include <lib/base/thread.h>
 #include <lib/service/iservice.h>
 #include <lib/python/python.h>
 #include <set>
@@ -61,6 +63,24 @@ class eDVBCISlot: public iObject, public sigc::trackable
 	bool user_mapped;
 	void data(int);
 	bool plugged;
+
+	eDVBCIApplicationManagerSession *getAppManager() { return application_manager; }
+	eDVBCIMMISession *getMMIManager() { return mmi_session; }
+	eDVBCICAManagerSession *getCAManager() { return ca_manager; }
+
+	int getState() { return state; }
+	int reset();
+	int startMMI();
+	int stopMMI();
+	int answerText(int answer);
+	int answerEnq(char *value);
+	int cancelEnq();
+	int getMMIState();
+	int sendCAPMT(eDVBServicePMTHandler *ptr, const std::vector<uint16_t> &caids=std::vector<uint16_t>());
+	void removeService(uint16_t program_number=0xFFFF);
+	int setSource(const std::string &source);
+	int setClockRate(int);
+	static std::string getTunerLetter(int tuner_no) { return std::string(1, char(65 + tuner_no)); }
 public:
 	enum {stateRemoved, stateInserted, stateInvalid, stateResetted};
 	eDVBCISlot(eMainloop *context, int nr);
@@ -72,25 +92,8 @@ public:
 	void setMMIManager( eDVBCIMMISession *session );
 	void setCAManager( eDVBCICAManagerSession *session );
 
-	eDVBCIApplicationManagerSession *getAppManager() { return application_manager; }
-	eDVBCIMMISession *getMMIManager() { return mmi_session; }
-	eDVBCICAManagerSession *getCAManager() { return ca_manager; }
-
-	int getState() { return state; }
 	int getSlotID();
-	int reset();
-	int startMMI();
-	int stopMMI();
-	int answerText(int answer);
-	int answerEnq(char *value);
-	int cancelEnq();
-	int getMMIState();
-	int sendCAPMT(eDVBServicePMTHandler *ptr, const std::vector<uint16_t> &caids=std::vector<uint16_t>());
-	void removeService(uint16_t program_number=0xFFFF);
-	int getNumOfServices() { return running_services.size(); }
-	int setSource(const std::string &source);
-	int setClockRate(int);
-	static std::string getTunerLetter(int tuner_no) { return std::string(1, char(65 + tuner_no)); }
+	int getNumOfServices();
 };
 
 struct CIPmtHandler
@@ -113,7 +116,7 @@ typedef std::list<CIPmtHandler> PMTHandlerList;
 
 #endif // SWIG
 
-class eDVBCIInterfaces
+class eDVBCIInterfaces: public eMainloop, private eThread
 {
 private:
 	typedef enum
@@ -140,15 +143,29 @@ private:
 	eSmartPtrList<eDVBCISlot> m_slots;
 	eDVBCISlot *getSlot(int slotid);
 	PMTHandlerList m_pmt_handlers;
+	eFixedMessagePump<int> m_messagepump_thread; // message handling in the thread
+	eFixedMessagePump<int> m_messagepump_main; // message handling in the e2 mainloop
+	ePtr<eTimer> m_runTimer; // workaround to interrupt thread mainloop as some ci drivers don't implement poll properly
+	static pthread_mutex_t m_pmt_handler_lock;
+
+	int sendCAPMT(int slot);
+
+	void thread();
+	void gotMessageThread(const int &message);
+	void gotMessageMain(const int &message);
+
 #ifndef SWIG
 public:
 #endif
 	eDVBCIInterfaces();
 	~eDVBCIInterfaces();
 
+	static pthread_mutex_t m_slot_lock;
+
 	void addPMTHandler(eDVBServicePMTHandler *pmthandler);
 	void removePMTHandler(eDVBServicePMTHandler *pmthandler);
 	void recheckPMTHandlers();
+	void executeRecheckPMTHandlersInMainloop();
 	void gotPMT(eDVBServicePMTHandler *pmthandler);
 	void ciRemoved(eDVBCISlot *slot);
 	int getSlotState(int slot);
@@ -161,9 +178,9 @@ public:
 	int answerEnq(int slot, char *value);
 	int cancelEnq(int slot);
 	int getMMIState(int slot);
-	int sendCAPMT(int slot);
 	int setInputSource(int tunerno, const std::string &source);
 	int setCIClockRate(int slot, int rate);
+	bool canDescrambleMultipleServices(eDVBCISlot* slot);
 #ifdef SWIG
 public:
 #endif
@@ -172,6 +189,32 @@ public:
 	PyObject *getDescrambleRules(int slotid);
 	RESULT setDescrambleRules(int slotid, SWIG_PYOBJECT(ePyObject) );
 	PyObject *readCICaIds(int slotid);
+	struct Message
+	{
+		enum
+		{
+			slotStateChanged,
+			mmiSessionDestroyed,
+			mmiDataReceived,
+			appNameChanged
+		};
+		int m_type;
+		int m_slotid;
+		int m_state;
+		unsigned char m_tag[3];
+		unsigned char m_data[4096];
+		int m_len;
+		std::string m_appName;
+		Message(int type, int slotid): m_type(type), m_slotid(slotid) {};
+		Message(int type, int slotid, int state): m_type(type), m_slotid(slotid), m_state(state) {};
+		Message(int type, int slotid, std::string appName): m_type(type), m_slotid(slotid), m_appName(appName) {};
+		Message(int type, int slotid, const unsigned char* tag, unsigned char* data, int len): m_type(type), m_slotid(slotid), m_len(len)
+		{
+			memcpy(m_tag, tag, 3);
+			memcpy(m_data, data, len);
+		};
+	};
+
 };
 
 #endif
