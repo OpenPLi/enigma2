@@ -458,7 +458,7 @@ void eFilePushThreadRecorder::stop()
 
 	m_stop = 1;
 
-	for(safeguard = 10; safeguard > 0; safeguard--)
+	for(safeguard = 100; safeguard > 0; safeguard--)
 	{
 		eDebug("[eFilePushThreadRecorder] stopping thread: %d", safeguard);
 		sendSignal(SIGUSR1);
