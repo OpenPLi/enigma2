@@ -2552,6 +2552,7 @@ RESULT eDVBFrontend::tune(const iDVBFrontendParameters &where, bool blindscan)
 		if (res)
 			goto tune_error;
 
+		m_sec_sequence.push_back( eSecCommand(eSecCommand::SET_VOLTAGE, iDVBFrontend::voltageOff) );
 		m_sec_sequence.push_back( eSecCommand(eSecCommand::START_TUNE_TIMEOUT, timeout) );
 		m_sec_sequence.push_back( eSecCommand(eSecCommand::SET_FRONTEND, 1) );
 		break;
@@ -2573,9 +2574,7 @@ RESULT eDVBFrontend::tune(const iDVBFrontendParameters &where, bool blindscan)
 		snprintf(configStr, 255, "config.Nims.%d.terrestrial_5V", m_slotid);
 		m_sec_sequence.push_back( eSecCommand(eSecCommand::START_TUNE_TIMEOUT, timeout) );
 		if (eConfigManager::getConfigBoolValue(configStr))
-			m_sec_sequence.push_back( eSecCommand(eSecCommand::SET_VOLTAGE, iDVBFrontend::voltage13) );
-		else
-			m_sec_sequence.push_back( eSecCommand(eSecCommand::SET_VOLTAGE, iDVBFrontend::voltageOff) );
+			m_sec_sequence.push_back( eSecCommand(eSecCommand::SET_VOLTAGE, iDVBFrontend::voltage5_terrestrial) );
 		m_sec_sequence.push_back( eSecCommand(eSecCommand::SET_FRONTEND, 1) );
 		break;
 	}
@@ -2636,17 +2635,24 @@ RESULT eDVBFrontend::connectStateChange(const sigc::slot1<void,iDVBFrontend*> &s
 RESULT eDVBFrontend::setVoltage(int voltage)
 {
 	bool increased=false;
+	int active_antenna_power = -1;
 	fe_sec_voltage_t vlt;
 	m_data[CUR_VOLTAGE]=voltage;
+
 	switch (voltage)
 	{
 		case voltageOff:
 			m_data[CSW]=m_data[UCSW]=m_data[TONEBURST]=-1; // reset diseqc
 			vlt = SEC_VOLTAGE_OFF;
+			active_antenna_power = 0;
 			break;
 		case voltage13_5:
 			increased = true;
 			[[fallthrough]];
+		case voltage5_terrestrial:
+			vlt = SEC_VOLTAGE_13;
+			active_antenna_power = 1;
+			break;
 		case voltage13:
 			vlt = SEC_VOLTAGE_13;
 			break;
@@ -2659,8 +2665,22 @@ RESULT eDVBFrontend::setVoltage(int voltage)
 		default:
 			return -ENODEV;
 	}
+
 	if (m_simulate)
 		return 0;
+
+	if (active_antenna_power != -1 && (m_type == feTerrestrial || m_type == feCable))
+	{
+		char filename[256];
+		snprintf(filename, sizeof(filename), "/proc/stb/frontend/%d/active_antenna_power", m_slotid);
+		CFile proc_name(filename, "w");
+		if(proc_name && fprintf(proc_name, "%s", active_antenna_power ? "on" : "off") > 0)
+		{
+			eDebug("[eDVBFrontend%d] set Voltage via proc %s", m_dvbid, active_antenna_power ? "on" : "off");
+			return 1;
+		}
+	}
+
 	eDebug("[eDVBFrontend%d] setVoltage FE_ENABLE_HIGH_LNB_VOLTAGE %d FE_SET_VOLTAGE %d", m_dvbid, increased, vlt);
 	::ioctl(m_fd, FE_ENABLE_HIGH_LNB_VOLTAGE, increased);
 	return ::ioctl(m_fd, FE_SET_VOLTAGE, vlt);
