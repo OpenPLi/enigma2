@@ -43,6 +43,7 @@ protected:
 private:
 	iFilePushScatterGather *m_sg;
 	int m_stop;
+	bool m_stopped;
 	int m_fd_dest;
 	int m_send_pvr_commit;
 	int m_stream_mode;
