@@ -2674,9 +2674,9 @@ RESULT eDVBFrontend::setVoltage(int voltage)
 		char filename[256];
 		snprintf(filename, sizeof(filename), "/proc/stb/frontend/%d/active_antenna_power", m_slotid);
 		CFile proc_name(filename, "w");
-		if(proc_name && fprintf(proc_name, "%s", active_antenna_power ? "on" : "off") > 0)
+		if(proc_name && fprintf(proc_name, "%s", active_antenna_power == 1 ? "on" : "off") > 0)
 		{
-			eDebug("[eDVBFrontend%d] set Voltage via proc %s", m_dvbid, active_antenna_power ? "on" : "off");
+			eDebug("[eDVBFrontend%d] set Voltage via proc %s", m_dvbid, active_antenna_power == 1 ? "on" : "off");
 			return 1;
 		}
 	}
