@@ -56,169 +56,168 @@ void eFilePushThread::thread()
 
 	do
 	{
-	int eofcount = 0;
-	int buf_end = 0;
-	size_t bytes_read = 0;
-	off_t current_span_offset = 0;
-	size_t current_span_remaining = 0;
-	m_sof = 0;
+		int eofcount = 0;
+		int buf_end = 0;
+		size_t bytes_read = 0;
+		off_t current_span_offset = 0;
+		size_t current_span_remaining = 0;
+		m_sof = 0;
 
-	while (!m_stop)
-	{
-		if (m_sg && !current_span_remaining)
+		while (!m_stop)
 		{
-			m_sg->getNextSourceSpan(m_current_position, bytes_read, current_span_offset, current_span_remaining, m_blocksize, m_sof);
-			ASSERT(!(current_span_remaining % m_blocksize));
-			m_current_position = current_span_offset;
-			bytes_read = 0;
-		}
+			if (m_sg && !current_span_remaining)
+			{
+				m_sg->getNextSourceSpan(m_current_position, bytes_read, current_span_offset, current_span_remaining, m_blocksize, m_sof);
+				ASSERT(!(current_span_remaining % m_blocksize));
+				m_current_position = current_span_offset;
+				bytes_read = 0;
+			}
 
-		size_t maxread = m_buffersize;
+			size_t maxread = m_buffersize;
 
 			/* if we have a source span, don't read past the end */
-		if (m_sg && maxread > current_span_remaining)
-			maxread = current_span_remaining;
+			if (m_sg && maxread > current_span_remaining)
+				maxread = current_span_remaining;
 
 			/* align to blocksize */
-		maxread -= maxread % m_blocksize;
+			maxread -= maxread % m_blocksize;
 
-		if (maxread && !m_sof)
-		{
-#ifdef SHOW_WRITE_TIME
-			struct timeval starttime;
-			struct timeval now;
-			gettimeofday(&starttime, NULL);
-#endif
-			buf_end = m_source->read(m_current_position, m_buffer, maxread);
-#ifdef SHOW_WRITE_TIME
-			gettimeofday(&now, NULL);
-			suseconds_t diff = (1000000 * (now.tv_sec - starttime.tv_sec)) + now.tv_usec - starttime.tv_usec;
-			eDebug("[eFilePushThread] read %d bytes time: %9u us", buf_end, (unsigned int)diff);
-#endif
-		}
-		else
-			buf_end = 0;
-
-		if (buf_end < 0)
-		{
-			buf_end = 0;
-			/* Check m_stop after interrupted syscall. */
-			if (m_stop) {
-				break;
-			}
-			if (errno == EINTR || errno == EBUSY || errno == EAGAIN)
-				continue;
-			if (errno == EOVERFLOW)
+			if (maxread && !m_sof)
 			{
-				eWarning("[eFilePushThread] OVERFLOW while playback?");
-				continue;
+#ifdef SHOW_WRITE_TIME
+				struct timeval starttime;
+				struct timeval now;
+				gettimeofday(&starttime, NULL);
+#endif
+				buf_end = m_source->read(m_current_position, m_buffer, maxread);
+#ifdef SHOW_WRITE_TIME
+				gettimeofday(&now, NULL);
+				suseconds_t diff = (1000000 * (now.tv_sec - starttime.tv_sec)) + now.tv_usec - starttime.tv_usec;
+				eDebug("[eFilePushThread] read %d bytes time: %9u us", buf_end, (unsigned int)diff);
+#endif
 			}
-			eDebug("[eFilePushThread] read error: %m");
-		}
+			else
+				buf_end = 0;
+
+			if (buf_end < 0)
+			{
+				buf_end = 0;
+				/* Check m_stop after interrupted syscall. */
+				if (m_stop)
+					break;
+				if (errno == EINTR || errno == EBUSY || errno == EAGAIN)
+					continue;
+				if (errno == EOVERFLOW)
+				{
+					eWarning("[eFilePushThread] OVERFLOW while playback?");
+					continue;
+				}
+				eDebug("[eFilePushThread] read error: %m");
+			}
 
 			/* a read might be mis-aligned in case of a short read. */
-		int d = buf_end % m_blocksize;
-		if (d)
-			buf_end -= d;
+			int d = buf_end % m_blocksize;
+			if (d)
+				buf_end -= d;
 
-		if (buf_end == 0 || m_sof == 1)
-		{
-				/* on EOF, try COMMITting once. */
-			if (m_send_pvr_commit)
+			if (buf_end == 0 || m_sof == 1)
 			{
-				struct pollfd pfd;
-				pfd.fd = m_fd_dest;
-				pfd.events = POLLIN;
-				switch (poll(&pfd, 1, 250)) // wait for 250ms
+				/* on EOF, try COMMITting once. */
+				if (m_send_pvr_commit)
 				{
-					case 0:
-						eDebug("[eFilePushThread] wait for driver eof timeout");
-						continue;
-					case 1:
-						eDebug("[eFilePushThread] wait for driver eof ok");
-						break;
-					default:
-						eDebug("[eFilePushThread] wait for driver eof aborted by signal");
-						/* Check m_stop after interrupted syscall. */
-						if (m_stop)
+					struct pollfd pfd;
+					pfd.fd = m_fd_dest;
+					pfd.events = POLLIN;
+					switch (poll(&pfd, 1, 250)) // wait for 250ms
+					{
+						case 0:
+							eDebug("[eFilePushThread] wait for driver eof timeout");
+							continue;
+						case 1:
+							eDebug("[eFilePushThread] wait for driver eof ok");
 							break;
-						continue;
+						default:
+							eDebug("[eFilePushThread] wait for driver eof aborted by signal");
+							/* Check m_stop after interrupted syscall. */
+							if (m_stop)
+								break;
+							continue;
+					}
 				}
-			}
 
-			if (m_stop)
-				break;
+				if (m_stop)
+					break;
 
 				/* in stream_mode, we are sending EOF events
 				   over and over until somebody responds.
-
 				   in stream_mode, think of evtEOF as "buffer underrun occurred". */
-			if (m_sof == 0)
-				sendEvent(evtEOF);
-			else
-				sendEvent(evtUser); // start of file event
+				if (m_sof == 0)
+					sendEvent(evtEOF);
+				else
+					sendEvent(evtUser); // start of file event
 
-			if (m_stream_mode)
-			{
-				eDebug("[eFilePushThread] reached EOF, but we are in stream mode. delaying 1 second.");
-				sleep(1);
-				continue;
-			}
-			else if (++eofcount < 10)
-			{
-				eDebug("[eFilePushThread] reached EOF, but the file may grow. delaying 1 second.");
-				sleep(1);
-				continue;
-			}
-			break;
-		} else
-		{
-			/* Write data to mux */
-			int buf_start = 0;
-			filterRecordData(m_buffer, buf_end);
-			while ((buf_start != buf_end) && !m_stop)
-			{
-				int w = write(m_fd_dest, m_buffer + buf_start, buf_end - buf_start);
-
-				if (w <= 0)
+				if (m_stream_mode)
 				{
-					/* Check m_stop after interrupted syscall. */
-					if (m_stop) {
-						w = 0;
-						buf_start = 0;
-						buf_end = 0;
+					eDebug("[eFilePushThread] reached EOF, but we are in stream mode. delaying 1 second.");
+					sleep(1);
+					continue;
+				}
+				else if (++eofcount < 10)
+				{
+					eDebug("[eFilePushThread] reached EOF, but the file may grow. delaying 1 second.");
+					sleep(1);
+					continue;
+				}
+				break;
+			}
+			else
+			{
+				/* Write data to mux */
+				int buf_start = 0;
+				filterRecordData(m_buffer, buf_end);
+				while ((buf_start != buf_end) && !m_stop)
+				{
+					int w = write(m_fd_dest, m_buffer + buf_start, buf_end - buf_start);
+
+					if (w <= 0)
+					{
+						/* Check m_stop after interrupted syscall. */
+						if (m_stop)
+						{
+							w = 0;
+							buf_start = 0;
+							buf_end = 0;
+							break;
+						}
+						if (w < 0 && (errno == EINTR || errno == EAGAIN || errno == EBUSY))
+							continue;
+						eDebug("[eFilePushThread] write: %m");
+						sendEvent(evtWriteError);
 						break;
 					}
-					if (w < 0 && (errno == EINTR || errno == EAGAIN || errno == EBUSY))
-						continue;
-					eDebug("[eFilePushThread] write: %m");
-					sendEvent(evtWriteError);
-					break;
+					buf_start += w;
 				}
-				buf_start += w;
+
+				eofcount = 0;
+				m_current_position += buf_end;
+				bytes_read += buf_end;
+				if (m_sg)
+					current_span_remaining -= buf_end;
 			}
-
-			eofcount = 0;
-			m_current_position += buf_end;
-			bytes_read += buf_end;
-			if (m_sg)
-				current_span_remaining -= buf_end;
 		}
-	}
-	sendEvent(evtStopped);
+		sendEvent(evtStopped);
 
-	{ /* mutex lock scope */
-		eSingleLocker lock(m_run_mutex);
-		m_run_state = 0;
-		m_run_cond.signal(); /* Tell them we're here */
-		while (m_stop == 2) {
-			eDebug("[eFilePushThread] PAUSED");
-			m_run_cond.wait(m_run_mutex);
+		{ /* mutex lock scope */
+			eSingleLocker lock(m_run_mutex);
+			m_run_state = 0;
+			m_run_cond.signal(); /* Tell them we're here */
+			while (m_stop == 2) {
+				eDebug("[eFilePushThread] PAUSED");
+				m_run_cond.wait(m_run_mutex);
+			}
+			if (m_stop == 0)
+				m_run_state = 1;
 		}
-		if (m_stop == 0)
-			m_run_state = 1;
-	}
-
 	} while (m_stop == 0);
 	eDebug("[eFilePushThread] STOP");
 }
@@ -323,9 +322,6 @@ void eFilePushThread::recvEvent(const int &evt)
 void eFilePushThread::filterRecordData(const unsigned char *data, int len)
 {
 }
-
-
-
 
 eFilePushThreadRecorder::eFilePushThreadRecorder(unsigned char* buffer, size_t buffersize):
 	m_fd_source(-1),
