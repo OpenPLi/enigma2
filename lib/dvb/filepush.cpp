@@ -37,21 +37,22 @@ static void signal_handler(int x)
 	eDebug("[eFilePush] SIGUSR1 received");
 }
 
-static void ignore_but_report_signals()
-{
-	/* we set the signal to not restart syscalls, so we can detect our signal. */
-	struct sigaction act;
-	act.sa_handler = signal_handler; // no, SIG_IGN doesn't do it. we want to receive the -EINTR
-	act.sa_flags = 0;
-	sigaction(SIGUSR1, &act, 0);
-}
-
 void eFilePushThread::thread()
 {
-	ignore_but_report_signals();
-	hasStarted(); /* "start()" blocks until we get here */
-	setIoPrio(IOPRIO_CLASS_BE, 0);
+	sigset_t sigmask;
+
 	eDebug("[eFilePushThread] START thread");
+
+	setIoPrio(IOPRIO_CLASS_BE, 0);
+
+	/* Only allow SIGUSR1 to be delivered to our thread, don't let any
+	 * other signals (like SIGHCHLD) interrupt our system calls.
+	 * NOTE: signal block masks are per thread, so set it in the thread itself. */
+	sigfillset(&sigmask);
+	sigdelset(&sigmask, SIGUSR1);
+	pthread_sigmask(SIG_SETMASK, &sigmask, nullptr);
+
+	hasStarted(); /* "start()" blocks until we get here */
 
 	do
 	{
@@ -229,6 +230,19 @@ void eFilePushThread::start(ePtr<iTsSource> &source, int fd_dest)
 	m_current_position = 0;
 	m_run_state = 1;
 	m_stop = 0;
+
+	/* Use a signal to interrupt blocking systems calls (like read()).
+	 * We don't want to get enigma killed by the signal (default action),
+	 * so install a handler. Don't use SIG_IGN (ignore signal) because
+	 * then the system calls won't be interrupted by the signal.
+	 * NOTE: signal options and handlers (except for a block mask) are
+	 * global for the process, so install the handler here and not
+	 * in the thread. */
+	struct sigaction act;
+	act.sa_handler = signal_handler;
+	act.sa_flags = 0;
+	sigaction(SIGUSR1, &act, nullptr);
+
 	run();
 }
 
