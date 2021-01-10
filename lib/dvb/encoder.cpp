@@ -238,6 +238,9 @@ int eEncoder::allocateEncoder(const std::string &serviceref, int &buffersize,
 			default:
 			{
 				eWarning("[eEncoder] only encoder 0 and encoder 1 implemented");
+				close(encoder[encoder_index].encoder_fd);
+				encoder[encoder_index].encoder_fd = -1;
+				return(-1);
 				break;
 			}
 		}
