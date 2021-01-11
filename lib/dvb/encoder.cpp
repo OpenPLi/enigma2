@@ -448,7 +448,7 @@ void eEncoder::navigation_event(int encoder_index, int event)
 
 			if((vpid > 0) && (apid > 0) && (pmtpid > 0))
 			{
-				eDebug("[eEncoder] info complete: %d, %d, %d", vpid, apid, pmtpid);
+				eDebug("[eEncoder] info complete, vpid: %d (0x%x), apid: %d (0x%x), pmptpid: %d (0x%x)", vpid, vpid, apid, apid, pmtpid, pmtpid);
 
 				pids.push_back(pmtpid);
 				pids.push_back(vpid);
@@ -518,8 +518,12 @@ void eEncoder::EncoderContext::thread(void)
 {
 	hasStarted();
 
+	eDebug("[EncoderContext %x] start ioctl transcoding", (int)pthread_self());
+
 	if(ioctl(encoder_fd, IOCTL_BROADCOM_START_TRANSCODING, 0))
 		eWarning("[eEncoder] thread encoder failed");
+
+	eDebug("[EncoderContext %x] finish ioctl transcoding", (int)pthread_self());
 }
 
 eAutoInitPtr<eEncoder> init_eEncoder(eAutoInitNumbers::service + 1, "Encoders");
