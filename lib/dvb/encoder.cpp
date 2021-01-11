@@ -454,6 +454,24 @@ void eEncoder::navigation_event(int encoder_index, int event)
 				pids.push_back(vpid);
 				pids.push_back(apid);
 
+				if(ioctl(encoder[encoder_index].encoder_fd, IOCTL_BROADCOM_SET_PMTPID_MIPS, pmtpid) ||
+						ioctl(encoder[encoder_index].encoder_fd, IOCTL_BROADCOM_SET_VPID_MIPS, vpid) ||
+						ioctl(encoder[encoder_index].encoder_fd, IOCTL_BROADCOM_SET_APID_MIPS, apid))
+				{
+					eDebug("[eEncoder] set ioctl(mips) failed");
+
+					if(ioctl(encoder[encoder_index].encoder_fd, IOCTL_BROADCOM_SET_PMTPID_ARM, pmtpid) ||
+							ioctl(encoder[encoder_index].encoder_fd, IOCTL_BROADCOM_SET_VPID_ARM, vpid) ||
+							ioctl(encoder[encoder_index].encoder_fd, IOCTL_BROADCOM_SET_APID_ARM, apid))
+					{
+						eWarning("[eEncoder] set ioctl(arm) failed too, giving up");
+						freeEncoder(encoder[encoder_index].encoder_fd);
+						return;
+					}
+				}
+
+				encoder[encoder_index].run();
+
 				if(encoder[encoder_index].file_fd < 0)
 				{
 					service->tap(tservice);
@@ -483,24 +501,7 @@ void eEncoder::navigation_event(int encoder_index, int event)
 					encoder[encoder_index].stream_thread->start(encoder[encoder_index].file_fd);
 				}
 
-				if(ioctl(encoder[encoder_index].encoder_fd, IOCTL_BROADCOM_SET_PMTPID_MIPS, pmtpid) ||
-						ioctl(encoder[encoder_index].encoder_fd, IOCTL_BROADCOM_SET_VPID_MIPS, vpid) ||
-						ioctl(encoder[encoder_index].encoder_fd, IOCTL_BROADCOM_SET_APID_MIPS, apid))
-				{
-					eDebug("[eEncoder] set ioctl(mips) failed");
-
-					if(ioctl(encoder[encoder_index].encoder_fd, IOCTL_BROADCOM_SET_PMTPID_ARM, pmtpid) ||
-							ioctl(encoder[encoder_index].encoder_fd, IOCTL_BROADCOM_SET_VPID_ARM, vpid) ||
-							ioctl(encoder[encoder_index].encoder_fd, IOCTL_BROADCOM_SET_APID_ARM, apid))
-					{
-						eWarning("[eEncoder] set ioctl(arm) failed too, giving up");
-						freeEncoder(encoder[encoder_index].encoder_fd);
-						return;
-					}
-				}
-
 				encoder[encoder_index].state = EncoderContext::state_running;
-				encoder[encoder_index].run();
 			}
 		}
 	}
