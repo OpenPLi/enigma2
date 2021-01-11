@@ -495,8 +495,7 @@ void eEncoder::navigation_event(int encoder_index, int event)
 						return;
 					}
 
-					encoder[encoder_index].stream_thread = new eDVBRecordStreamThread(188, -1, true);
-
+					encoder[encoder_index].stream_thread = new eDVBRecordStreamThread(188, 188 * 256, true);
 					encoder[encoder_index].stream_thread->setTargetFD(encoder[encoder_index].encoder_fd);
 					encoder[encoder_index].stream_thread->start(encoder[encoder_index].file_fd);
 				}
