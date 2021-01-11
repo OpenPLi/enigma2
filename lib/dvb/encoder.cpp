@@ -469,6 +469,8 @@ void eEncoder::navigation_event(int encoder_index, int event)
 				}
 				else
 				{
+					service->stop();
+
 					if(encoder[encoder_index].stream_thread != nullptr)
 					{
 						eWarning("[eEncoder] datapump already running");
