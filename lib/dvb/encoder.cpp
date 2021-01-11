@@ -196,12 +196,6 @@ int eEncoder::allocateEncoder(const std::string &serviceref, int &buffersize,
 	snprintf(filename, sizeof(filename), "/proc/stb/encoder/%d/apply", encoder_index);
 	CFile::writeInt(filename, 1);
 
-	if(encoder[encoder_index].navigation_instance->playService(serviceref) < 0)
-	{
-		eWarning("[eEncoder] navigation->playservice failed");
-		return(-1);
-	}
-
 	if(source_file.empty())
 		encoder[encoder_index].file_fd = -1;
 	else
@@ -254,6 +248,12 @@ int eEncoder::allocateEncoder(const std::string &serviceref, int &buffersize,
 	{
 		buffersize = -1;
 		encoder[encoder_index].state = EncoderContext::state_running;
+	}
+
+	if(encoder[encoder_index].navigation_instance->playService(serviceref) < 0)
+	{
+		eWarning("[eEncoder] navigation->playservice failed");
+		return(-1);
 	}
 
 	return(encoder[encoder_index].encoder_fd);
