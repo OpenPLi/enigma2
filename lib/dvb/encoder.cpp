@@ -202,10 +202,15 @@ int eEncoder::allocateEncoder(const std::string &serviceref, int &buffersize,
 		return(-1);
 	}
 
-	if(!source_file.empty() && ((encoder[encoder_index].file_fd = open(source_file.c_str(), O_RDONLY, 0)) < 0))
+	if(source_file.empty())
+		encoder[encoder_index].file_fd = -1;
+	else
 	{
-		eWarning("[eEncoder] open source file failed");
-		return(-1);
+		if((encoder[encoder_index].file_fd = open(source_file.c_str(), O_RDONLY, 0)) < 0)
+		{
+			eWarning("[eEncoder] open source file failed");
+			return(-1);
+		}
 	}
 
 	snprintf(filename, sizeof(filename), "/dev/%s%d", bcm_encoder ? "bcm_enc" : "encoder", encoder_index);
