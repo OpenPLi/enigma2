@@ -394,7 +394,7 @@ void eFilePushThreadRecorder::thread()
 				pfd.revents = 0;
 
 				errno = 0;
-				rv = poll(&pfd, 1, 500);
+				rv = poll(&pfd, 1, 30000);
 
 				if(rv < 0)
 				{
