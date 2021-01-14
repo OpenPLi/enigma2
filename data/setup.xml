@@ -43,7 +43,7 @@
 		<item level="2" text="Ignore DVB-C namespace sub network" description="On valid ONIDs, ignore frequency sub network part">config.usage.subnetwork_cable</item>
 		<item level="2" text="Ignore DVB-T namespace sub network" description="On valid ONIDs, ignore frequency sub network part">config.usage.subnetwork_terrestrial</item>
 		<item level="2" text="Alternative URL for images listed on FlashImage" description="Enter an URL where alternative images could be listed for FlashImage" requires="canFlashWithOfgwrite">config.usage.alternative_imagefeed</item>
-		<item level="1" text="Time Synchronization Method" description="Here you can select if you want to synchronize the date/time via the internet (ntp) or the date/time on the transponder. When set to auto it will prefer internet (ntp) time, but when after a startup from enigma2 the time is unknown it automatically fallsback to the transponder date/time">config.ntp.timesync</item>
+		<item level="1" text="Time Synchronization Method" description="Here you can select if you want to synchronize the date/time from the internet (ntp) or from the transponder. When set to auto, it will prefer internet (ntp) time, but in case the time is unknown after a restart of enigma2 it will automatically fall back to the transponder date/time">config.ntp.timesync</item>
 		<item level="1" text="Set ntp server url" conditional="config.ntp.timesync.value != 'dvb'" description="Set the url of the ntp server the time need to be sycnhronized with.">config.ntp.server</item>
 	</setup>
 	<setup key="userinterface" title="User interface">
