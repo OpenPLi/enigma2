@@ -798,6 +798,7 @@ def InitUsageConfig():
 	config.misc.softcam_setup = ConfigSubsection()
 	config.misc.softcam_setup.extension_menu = ConfigYesNo(default = True)
 
+	config.ntp = ConfigSubsection()
 	def timesyncChanged(configElement):
 		if configElement.value == "dvb" or not GetIPsFromNetworkInterfaces():
 			eDVBLocalTimeHandler.getInstance().setUseDVBTime(True)
@@ -809,8 +810,9 @@ def InitUsageConfig():
 			eEPGCache.getInstance().timeUpdated()
 			if not os.path.islink('/etc/network/if-up.d/ntpdate-sync'):
 				Console().ePopen("echo '30 * * * *    /usr/bin/ntpdate-sync silent' >>/etc/cron/crontabs/root;ln -s /usr/bin/ntpdate-sync /etc/network/if-up.d/ntpdate-sync")
-	config.misc.timesync = ConfigSelection(default = "auto", choices = [("auto", _("auto")), ("dvb", _("Transponder Time")), ("ntp", _("Internet (ntp)"))])
-	config.misc.timesync.addNotifier(timesyncChanged)
+	config.ntp.timesync = ConfigSelection(default = "auto", choices = [("auto", _("auto")), ("dvb", _("Transponder Time")), ("ntp", _("Internet (ntp)"))])
+	config.ntp.timesync.addNotifier(timesyncChanged)
+	config.ntp.server = ConfigText("pool.ntp.org")
 
 def updateChoices(sel, choices):
 	if choices:
