@@ -812,7 +812,7 @@ def InitUsageConfig():
 				Console().ePopen("echo '30 * * * *    /usr/bin/ntpdate-sync silent' >>/etc/cron/crontabs/root;ln -s /usr/bin/ntpdate-sync /etc/network/if-up.d/ntpdate-sync")
 	config.ntp.timesync = ConfigSelection(default = "auto", choices = [("auto", _("auto")), ("dvb", _("Transponder Time")), ("ntp", _("Internet (ntp)"))])
 	config.ntp.timesync.addNotifier(timesyncChanged)
-	config.ntp.server = ConfigText("pool.ntp.org")
+	config.ntp.server = ConfigText("pool.ntp.org",  fixed_size=False)
 
 def updateChoices(sel, choices):
 	if choices:
