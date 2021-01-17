@@ -697,7 +697,8 @@ std::string convertDVBUTF8(const unsigned char *data, int len, int table, int ts
 		table, (unsigned int)tsidonid >> 16, tsidonid & 0xFFFFU,
 		string_to_hex(std::string((char*)data, len < 15 ? len : 15)).c_str(),
 		output.c_str());
-
+	// replace EIT CR/LF with standard newline:
+	output = replace_all(replace_all(output, "\xC2\x8A", "\n"), "\xEE\x82\x8A", "\n");
 	return output;
 }
 
