@@ -146,8 +146,8 @@ class Screen(dict):
 
 	def setTitle(self, title, showPath=True):
 		try:  # This protects against calls to setTitle() before being fully initialised like self.session is accessed *before* being defined.
-			if self.session and len(self.session.dialog_stack) > 1:
-				self.screenPath = " > ".join(ds[0].getTitle() for ds in self.session.dialog_stack[1:])
+			if self.session and len(self.session.dialog_stack) > 2:
+				self.screenPath = " > ".join(ds[0].getTitle() for ds in self.session.dialog_stack[2:])
 			else:
 				self.screenPath = ""
 			if self.instance:
