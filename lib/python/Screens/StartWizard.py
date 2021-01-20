@@ -86,7 +86,7 @@ def checkForDevelopImage():
 
 class DevelopWizard(MessageBox):
 	def __init__(self, session):
-		MessageBox.__init__(self, session, _("This image is intended for developers and testers.\nNo support will be provided!\nDo you understand this?"), type=MessageBox.TYPE_YESNO, simple=True)
+		MessageBox.__init__(self, session, _("This image is intended for developers and testers.\nNo support will be provided!\nDo you understand this?"), type=MessageBox.TYPE_YESNO, timeout=20, default=False, simple=True)
 
 	def close(self, value):
 		if value:
