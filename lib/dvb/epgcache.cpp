@@ -2291,82 +2291,86 @@ PyObject *eEPGCache::search(ePyObject arg)
 							break;
 					}
 					Py_BEGIN_ALLOW_THREADS; /* No Python code in this section, so other threads can run */
-					singleLock s(cache_lock);
-					std::string text;
-					for (DescriptorMap::iterator it(eventData::descriptors.begin());
-						it != eventData::descriptors.end(); ++it)
 					{
-						uint8_t *data = it->second.data;
-						int textlen = 0;
-						const char *textptr = NULL;
-						if ( data[0] == 0x4D && querytype > 0 && querytype < 5 ) // short event descriptor
+						/* new block to release epgcache lock before Py_END_ALLOW_THREADS is called
+						   otherwise there might be a deadlock with other python thread waiting for the epgcache lock */
+						singleLock s(cache_lock);
+						std::string text;
+						for (DescriptorMap::iterator it(eventData::descriptors.begin());
+							it != eventData::descriptors.end(); ++it)
 						{
-							textptr = (const char*)&data[6];
-							textlen = data[5];
-							if (data[6] < 0x20)
+							uint8_t *data = it->second.data;
+							int textlen = 0;
+							const char *textptr = NULL;
+							if ( data[0] == 0x4D && querytype > 0 && querytype < 5 ) // short event descriptor
 							{
-								/* custom encoding */
-								text = convertDVBUTF8((unsigned char*)textptr, textlen, 0x40, 0);
-								textptr = text.data();
-								textlen = text.length();
-							}
-						}
-						else if ( data[0] == 0x4E && querytype == 5 ) // extended event descriptor
-						{
-							textptr = (const char*)&data[8];
-							textlen = data[7];
-							if (data[8] < 0x20)
-							{
-								/* custom encoding */
-								text = convertDVBUTF8((unsigned char*)textptr, textlen, 0x40, 0);
-								textptr = text.data();
-								textlen = text.length();
-							}
-						}
-						/* if we have a descriptor, the argument may not be bigger */
-						if (textlen > 0 && strlen <= textlen )
-						{
-							if (querytype == 1)
-							{
-								/* require exact text match */
-								if (textlen != strlen)
-									continue;
-							}
-							else if (querytype == 3)
-							{
-								/* Do a "startswith" match by pretending the text isn't that long */
-								textlen = strlen;
-							}
-							else if (querytype == 4)
-							{
-								/* Offset to adjust the pointer based on the text length difference */
-								textptr = textptr + textlen - strlen;
-								textlen = strlen;
-							}
-							if (casetype)
-							{
-								while (textlen >= strlen)
+								textptr = (const char*)&data[6];
+								textlen = data[5];
+								if (data[6] < 0x20)
 								{
-									if (!strncasecmp(textptr, str, strlen))
-									{
-										descr.push_back(it->first);
-										break;
-									}
-									textlen--;
-									textptr++;
+									/* custom encoding */
+									text = convertDVBUTF8((unsigned char*)textptr, textlen, 0x40, 0);
+									textptr = text.data();
+									textlen = text.length();
 								}
 							}
-							else
+							else if ( data[0] == 0x4E && querytype == 5 ) // extended event descriptor
 							{
-								while (textlen >= strlen)
+								textptr = (const char*)&data[8];
+								textlen = data[7];
+								if (data[8] < 0x20)
 								{
-									if (!memcmp(textptr, str, strlen))
+									/* custom encoding */
+									text = convertDVBUTF8((unsigned char*)textptr, textlen, 0x40, 0);
+									textptr = text.data();
+									textlen = text.length();
+								}
+							}
+							/* if we have a descriptor, the argument may not be bigger */
+							if (textlen > 0 && strlen <= textlen )
+							{
+								if (querytype == 1)
+								{
+									/* require exact text match */
+									if (textlen != strlen)
+										continue;
+								}
+								else if (querytype == 3)
+								{
+									/* Do a "startswith" match by pretending the text isn't that long */
+									textlen = strlen;
+								}
+								else if (querytype == 4)
+								{
+									/* Offset to adjust the pointer based on the text length difference */
+									textptr = textptr + textlen - strlen;
+									textlen = strlen;
+								}
+								if (casetype)
+								{
+									while (textlen >= strlen)
 									{
-										descr.push_back(it->first);
-										break;
+										if (!strncasecmp(textptr, str, strlen))
+										{
+											descr.push_back(it->first);
+											break;
+										}
+										textlen--;
+										textptr++;
 									}
-									textlen--;
-									textptr++;
+								}
+								else
+								{
+									while (textlen >= strlen)
+									{
+										if (!memcmp(textptr, str, strlen))
+										{
+											descr.push_back(it->first);
+											break;
+										}
+										textlen--;
+										textptr++;
+									}
 								}
 							}
 						}
