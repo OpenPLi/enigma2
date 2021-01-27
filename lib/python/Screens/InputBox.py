@@ -86,9 +86,9 @@ class InputBox(Screen):
 		self["input"].toggleOverwrite()
 
 class PinInput(InputBox):
-	def __init__(self, session, service = "", triesEntry = None, pinList = [], popup = False, simple=True, *args, **kwargs):
+	def __init__(self, session, service = "", triesEntry = None, pinList = [], popup = False, simple=True, zap=False, *args, **kwargs):
 		InputBox.__init__(self, session = session, text = "    ", maxSize = True, type = Input.PIN, *args, **kwargs)
-
+		self.zap = zap
 		self.waitTime = 15
 		self.triesEntry = triesEntry
 		self.pinList = pinList
@@ -141,6 +141,7 @@ class PinInput(InputBox):
 				self.setTries(3)
 				self.closePinCorrect()
 			else:
+				self["input"].setText("    ")
 				self.keyHome()
 				self.decTries()
 				if self.getTries() == 0:
@@ -181,4 +182,13 @@ class PinInput(InputBox):
 		self["tries"].setText(self.triesEntry and _("Tries left:") + " " + str(self.getTries() or ""))
 
 	def keyRight(self):
-		pass
+		if self.zap and self["input"].getText() == "    ":
+			self.close("right")
+		else:
+			self["input"].right()
+
+	def keyLeft(self):
+		if self.zap and self["input"].getText() == "    ":
+			self.close("left")
+		else:
+			self["input"].left()
