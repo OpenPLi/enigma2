@@ -1,7 +1,8 @@
 from enigma import getPrevAsciiCode
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
-from Components.ActionMap import NumberActionMap
+from Components.config import config
+from Components.ActionMap import NumberActionMap, ActionMap
 from Components.Label import Label
 from Components.Input import Input
 from Tools.BoundFunction import boundFunction
@@ -94,6 +95,14 @@ class PinInput(InputBox):
 		self.pinList = pinList
 		self["service"] = Label(service)
 
+		self["ChannelSelectActions"] = ActionMap(["InfobarChannelSelection"],
+		{
+			"keyUp": self.keyUp,
+			"keyDown": self.keyDown,
+			"keyChannelUp": self.keyChannelUp,
+			"keyChannelDown": self.keyChannelDown,
+		}, -1)
+
 		if service and simple:
 			self.skinName = "PinInputPopup"
 
@@ -181,14 +190,30 @@ class PinInput(InputBox):
 	def showTries(self):
 		self["tries"].setText(self.triesEntry and _("Tries left:") + " " + str(self.getTries() or ""))
 
-	def keyRight(self):
+	def keyRight(self, setCursor=True):
 		if self.zap and self["input"].getText() == "    ":
 			self.close("right")
-		else:
+		elif setCursor:
 			self["input"].right()
 
-	def keyLeft(self):
+	def keyLeft(self, setCursor=True):
 		if self.zap and self["input"].getText() == "    ":
 			self.close("left")
-		else:
+		elif setCursor:
 			self["input"].left()
+
+	def keyUp(self):
+		if config.usage.oldstyle_zap_controls.value:
+			self.keyRight(False)
+
+	def keyDown(self):
+		if config.usage.oldstyle_zap_controls.value:
+			self.keyLeft(False)
+
+	def keyChannelUp(self):
+		if config.usage.zap_with_ch_buttons.value:
+			self.keyRight(False)
+
+	def keyChannelDown(self):
+		if config.usage.zap_with_ch_buttons.value:
+			self.keyLeft(False)
