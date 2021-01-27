@@ -190,21 +190,22 @@ class PinInput(InputBox):
 	def showTries(self):
 		self["tries"].setText(self.triesEntry and _("Tries left:") + " " + str(self.getTries() or ""))
 
-	def keyRight(self, setCursor=True):
+	def keyRight(self):
 		if self.zap and self["input"].getText() == "    ":
 			self.close("right")
-		elif setCursor:
-			self["input"].right()
 
 	def keyLeft(self, setCursor=True):
 		if self.zap and self["input"].getText() == "    ":
 			self.close("left")
 		elif setCursor:
 			self["input"].left()
+			pos = self["input"].currPos
+			self["input"].setText("%s%s" % (self["input"].getText()[:pos], "    "[:4 - pos]))
+			self.zap = False
 
 	def keyUp(self):
 		if config.usage.oldstyle_zap_controls.value:
-			self.keyRight(False)
+			self.keyRight()
 
 	def keyDown(self):
 		if config.usage.oldstyle_zap_controls.value:
@@ -212,7 +213,7 @@ class PinInput(InputBox):
 
 	def keyChannelUp(self):
 		if config.usage.zap_with_ch_buttons.value:
-			self.keyRight(False)
+			self.keyRight()
 
 	def keyChannelDown(self):
 		if config.usage.zap_with_ch_buttons.value:
