@@ -192,11 +192,11 @@ class PinInput(InputBox):
 
 	def keyRight(self):
 		if self.zap and self["input"].getText() == "    ":
-			self.close("right")
+			self.close("zapdown")
 
 	def keyLeft(self, setCursor=True):
 		if self.zap and self["input"].getText() == "    ":
-			self.close("left")
+			self.close("zapup")
 		elif setCursor:
 			self["input"].left()
 			pos = self["input"].currPos

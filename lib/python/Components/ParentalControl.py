@@ -169,12 +169,12 @@ class ParentalControl:
 			self.sessionPinTimer.startLongTimer(self.pinIntervalSeconds)
 
 	def servicePinEntered(self, service, result=None):
-		if result in ("left", "right"):
+		if result in ("zapup", "zapdown"):
 			from Screens.InfoBar import InfoBar
 			InfoBarInstance = InfoBar.instance
 			if InfoBarInstance and hasattr(InfoBarInstance, "servicelist"):
 				InfoBarInstance.servicelist.servicelist.setCurrent(service)
-				if result == "right":
+				if result == "zapdown":
 					InfoBarInstance.servicelist.servicelist.moveDown()
 
 				else:
