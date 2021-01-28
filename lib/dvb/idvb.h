@@ -463,7 +463,7 @@ public:
 	enum { feSatellite, feCable, feTerrestrial, feATSC };
 	enum { stateIdle, stateTuning, stateFailed, stateLock, stateLostLock, stateClosed };
 	enum { toneOff, toneOn };
-	enum { voltageOff, voltage13, voltage18, voltage13_5, voltage18_5 };
+	enum { voltageOff, voltage13, voltage18, voltage13_5, voltage18_5, voltage5_terrestrial };
 };
 
 class iDVBFrontendStatus:  public iDVBFrontend_ENUMS, public iObject

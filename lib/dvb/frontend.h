@@ -100,6 +100,7 @@ private:
 	char m_description[128];
 	dvb_frontend_info fe_info;
 	int satfrequency;
+	int m_voltage5_terrestrial; // -1 undefined, 0 off, 1 on
 	eDVBFrontendParameters oparm;
 
 	int m_state;
