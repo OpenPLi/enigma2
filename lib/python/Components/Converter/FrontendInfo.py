@@ -67,12 +67,12 @@ class FrontendInfo(Converter):
 		elif self.type == self.STRING:
 			string = ""
 			for n in nimmanager.nim_slots:
-				if n.type:
+				if n.enabled:
 					if n.slot == self.source.slot_number:
 						color = Hex2strColor(colors[0])
 					elif self.source.tuner_mask & 1 << n.slot:
 						color = Hex2strColor(colors[1])
-					elif len(nimmanager.nim_slots) <= self.space_for_tuners or self.show_all_non_link_tuners and not (n.isFBCLink() or n.internally_connectable):
+					elif len(nimmanager.nim_slots) <= self.space_for_tuners or n.isFBCRoot() or self.show_all_non_link_tuners and not(n.isFBCLink() or n.internally_connectable):
 						color = Hex2strColor(colors[2])
 					else:
 						continue
@@ -83,7 +83,7 @@ class FrontendInfo(Converter):
 		if self.type == self.USE_TUNERS_STRING:
 			string = ""
 			for n in nimmanager.nim_slots:
-				if n.type:
+				if n.enabled:
 					if n.slot == self.source.slot_number:
 						color = Hex2strColor(colors[0])
 					elif self.source.tuner_mask & 1 << n.slot:
