@@ -36,7 +36,7 @@ int eDVBCISession::buildLengthField(unsigned char *pkt, int len)
 		return 3;
 	} else
 	{
-		eDebug("[CI SESS] too big length");
+		eWarning("[CI SESS] too big length");
 		exit(0);
 	}
 }
@@ -202,7 +202,7 @@ void eDVBCISession::createSession(eDVBCISlot *slot, const unsigned char *resourc
 
 	if (!session)
 	{
-		eDebug("[CI SESS] unknown session.. expect crash");
+		eWarning("[CI SESS] unknown session.. expect crash");
 		return;
 	}
 
@@ -253,10 +253,10 @@ void eDVBCISession::receiveData(eDVBCISlot *slot, const unsigned char *ptr, size
 
 	eDebug("[CI SESS] slot: %p",slot);
 
-	eDebugNoNewLineStart("[CI SESS]: ");
+	eTraceNoNewLineStart("[CI SESS]: ");
 	for(unsigned int i=0;i<len;i++)
-		eDebugNoNewLine("%02x ",ptr[i]);
-	eDebugNoNewLine("\n");
+		eTraceNoNewLineStart("%02x ",ptr[i]);
+	eTraceNoNewLineStart("\n");
 
 	llen = parseLengthField(pkt, hlen);
 	pkt += llen;
@@ -283,14 +283,14 @@ void eDVBCISession::receiveData(eDVBCISlot *slot, const unsigned char *ptr, size
 
 		if ((!session_nb) || (session_nb >= SLMS))
 		{
-			eDebug("[CI SESS] PROTOCOL: illegal session number %x", session_nb);
+			eWarning("[CI SESS] PROTOCOL: illegal session number %x", session_nb);
 			return;
 		}
 
 		session=sessions[session_nb-1];
 		if (!session)
 		{
-			eDebug("[CI SESS] PROTOCOL: data on closed session %x", session_nb);
+			eWarning("[CI SESS] PROTOCOL: data on closed session %x", session_nb);
 			return;
 		}
 
@@ -342,7 +342,7 @@ void eDVBCISession::receiveData(eDVBCISlot *slot, const unsigned char *ptr, size
 		}
 
 	if (len)
-		eDebug("[CI SESS] PROTOCOL: warning, TL-Data has invalid length");
+		eWarning("[CI SESS] PROTOCOL: warning, TL-Data has invalid length");
 }
 
 eDVBCISession::~eDVBCISession()

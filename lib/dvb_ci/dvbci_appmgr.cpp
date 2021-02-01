@@ -18,10 +18,10 @@ eDVBCIApplicationManagerSession::~eDVBCIApplicationManagerSession()
 
 int eDVBCIApplicationManagerSession::receivedAPDU(const unsigned char *tag,const void *data, int len)
 {
-	eDebugNoNewLine("[CI AM] SESSION(%d)/APP %02x %02x %02x: ", session_nb, tag[0], tag[1], tag[2]);
+	eTraceNoNewLine("[CI AM] SESSION(%d)/APP %02x %02x %02x: ", session_nb, tag[0], tag[1], tag[2]);
 	for (int i=0; i<len; i++)
-		eDebugNoNewLine("%02x ", ((const unsigned char*)data)[i]);
-	eDebugNoNewLine("\n");
+		eTraceNoNewLine("%02x ", ((const unsigned char*)data)[i]);
+	eTraceNoNewLine("\n");
 
 	if ((tag[0]==0x9f) && (tag[1]==0x80))
 	{
@@ -56,7 +56,7 @@ int eDVBCIApplicationManagerSession::receivedAPDU(const unsigned char *tag,const
 			break;
 		}
 		default:
-			eDebug("[CI AM] unknown APDU tag 9F 80 %02x", tag[2]);
+			eWarning("[CI AM] unknown APDU tag 9F 80 %02x", tag[2]);
 			break;
 		}
 	}

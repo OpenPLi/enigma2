@@ -33,10 +33,10 @@ eDVBCIMMISession::~eDVBCIMMISession()
 
 int eDVBCIMMISession::receivedAPDU(const unsigned char *tag, const void *data, int len)
 {
-	eDebugNoNewLineStart("[CI MMI] SESSION(%d)/MMI %02x %02x %02x: ", session_nb, tag[0], tag[1],tag[2]);
+	eTraceNoNewLineStart("[CI MMI] SESSION(%d)/MMI %02x %02x %02x: ", session_nb, tag[0], tag[1],tag[2]);
 	for (int i=0; i<len; i++)
-		eDebugNoNewLine("%02x ", ((const unsigned char*)data)[i]);
-	eDebugNoNewLine("\n");
+		eTraceNoNewLineStart("%02x ", ((const unsigned char*)data)[i]);
+	eTraceNoNewLineStart("\n");
 
 	if ((tag[0]==0x9f) && (tag[1]==0x88))
 	{

@@ -26,13 +26,6 @@
 
 #include <dvbsi++/ca_program_map_section.h>
 
-//#define CIDEBUG 1
-
-#ifdef CIDEBUG
-	#define eDebugCI(x...) eDebug(x)
-#else
-	#define eDebugCI(x...)
-#endif
 
 eDVBCIInterfaces *eDVBCIInterfaces::instance = 0;
 
@@ -165,7 +158,7 @@ eDVBCISlot *eDVBCIInterfaces::getSlot(int slotid)
 		if(i->getSlotID() == slotid)
 			return i;
 
-	eDebug("[CI] FIXME: request for unknown slot");
+	eWarning("[CI] FIXME: request for unknown slot");
 
 	return 0;
 }
@@ -356,7 +349,7 @@ void eDVBCIInterfaces::recheckPMTHandlers()
 {
 	singleLock s1(m_pmt_handler_lock);
 	singleLock s2(m_slot_lock);
-	eDebugCI("[CI] recheckPMTHAndlers()");
+	eTrace("[CI] recheckPMTHAndlers()");
 	for (PMTHandlerList::iterator it(m_pmt_handlers.begin());
 		it != m_pmt_handlers.end(); ++it)
 	{
@@ -371,7 +364,7 @@ void eDVBCIInterfaces::recheckPMTHandlers()
 		pmthandler->getServiceReference(ref);
 		pmthandler->getService(service);
 
-		eDebugCI("[CI] recheck %p %s", pmthandler, ref.toString().c_str());
+		eTrace("[CI] recheck %p %s", pmthandler, ref.toString().c_str());
 		for (eSmartPtrList<eDVBCISlot>::iterator ci_it(m_slots.begin()); ci_it != m_slots.end(); ++ci_it)
 			if (ci_it->plugged && ci_it->getCAManager())
 			{
@@ -391,7 +384,7 @@ void eDVBCIInterfaces::recheckPMTHandlers()
 			}
 			if (tmp) // we dont like to change tsmux for running services
 			{
-				eDebugCI("[CI] already assigned and running CI!\n");
+				eTrace("[CI] already assigned and running CI!\n");
 				continue;
 			}
 		}
@@ -414,7 +407,7 @@ void eDVBCIInterfaces::recheckPMTHandlers()
 
 		for (eSmartPtrList<eDVBCISlot>::iterator ci_it(m_slots.begin()); ci_it != m_slots.end(); ++ci_it)
 		{
-			eDebugCI("[CI] check Slot %d", ci_it->getSlotID());
+			eTrace("[CI] check Slot %d", ci_it->getSlotID());
 			bool useThis=false;
 			bool user_mapped=true;
 			eDVBCICAManagerSession *ca_manager = ci_it->getCAManager();
@@ -509,10 +502,10 @@ void eDVBCIInterfaces::recheckPMTHandlers()
 				}
 				if (tmp) // ignore already assigned cislots...
 				{
-					eDebugCI("[CI] already assigned!");
+					eTrace("[CI] already assigned!");
 					continue;
 				}
-				eDebugCI("[CI] current slot %d usecount %d", ci_it->getSlotID(), ci_it->use_count);
+				eTrace("[CI] current slot %d usecount %d", ci_it->getSlotID(), ci_it->use_count);
 				if (ci_it->use_count)  // check if this CI can descramble more than one service
 				{
 					bool found = false;
@@ -520,39 +513,39 @@ void eDVBCIInterfaces::recheckPMTHandlers()
 					PMTHandlerList::iterator tmp = m_pmt_handlers.begin();
 					while (!found && tmp != m_pmt_handlers.end())
 					{
-						eDebugCI("[CI] .");
+						eTrace("[CI] .");
 						eDVBCISlot *tmp_cislot = tmp->cislot;
 						while (!found && tmp_cislot)
 						{
-							eDebugCI("[CI] ..");
+							eTrace("[CI] ..");
 							eServiceReferenceDVB ref2;
 							tmp->pmthandler->getServiceReference(ref2);
 							if ( tmp_cislot == ci_it && it->pmthandler != tmp->pmthandler )
 							{
-								eDebugCI("[CI] check pmthandler %s for same service/tp", ref2.toString().c_str());
+								eTrace("[CI] check pmthandler %s for same service/tp", ref2.toString().c_str());
 								eDVBChannelID s1, s2;
 								if (ref != ref2)
 								{
-									eDebugCI("[CI] different services!");
+									eTrace("[CI] different services!");
 									ref.getChannelID(s1);
 									ref2.getChannelID(s2);
 								}
 								if (ref == ref2 || (s1 == s2 && canDescrambleMultipleServices(tmp_cislot)))
 								{
 									found = true;
-									eDebugCI("[CI] found!");
+									eTrace("[CI] found!");
 									eDVBCISlot *tmpci = it->cislot = tmp->cislot;
 									while(tmpci)
 									{
 										++tmpci->use_count;
-										eDebug("[CI] (2)CISlot %d, usecount now %d", tmpci->getSlotID(), tmpci->use_count);
+										eTrace("[CI] (2)CISlot %d, usecount now %d", tmpci->getSlotID(), tmpci->use_count);
 										tmpci=tmpci->linked_next;
 									}
 								}
 							}
 							tmp_cislot=tmp_cislot->linked_next;
 						}
-						eDebugCI("[CI] ...");
+						eTrace("[CI] ...");
 						++tmp;
 					}
 				}
@@ -561,7 +554,7 @@ void eDVBCIInterfaces::recheckPMTHandlers()
 				{
 					if (ci_it->user_mapped)  // we dont like to link user mapped CIs
 					{
-						eDebugCI("[CI] user mapped CI already in use... dont link!");
+						eTrace("[CI] user mapped CI already in use... dont link!");
 						continue;
 					}
 
@@ -630,13 +623,13 @@ void eDVBCIInterfaces::recheckPMTHandlers()
 						ci_it->linked_next->setSource(ci_source.str());
 					}
 					it->cislot = ci_it;
-					eDebugCI("[CI] assigned!");
+					eTrace("[CI] assigned!");
 					gotPMT(pmthandler);
 				}
 
 				if (it->cislot && user_mapped) // CI assigned to this pmthandler in this run.. and user mapped? then we break here.. we dont like to link other CIs to user mapped CIs
 				{
-					eDebugCI("[CI] user mapped CI assigned... dont link CIs!");
+					eTrace("[CI] user mapped CI assigned... dont link CIs!");
 					break;
 				}
 			}
@@ -791,7 +784,7 @@ void eDVBCIInterfaces::gotPMT(eDVBServicePMTHandler *pmthandler)
 		eDVBCISlot *tmp = it->cislot;
 		while(tmp)
 		{
-			eDebugCI("[CI] check slot %d %d %d", tmp->getSlotID(), tmp->running_services.empty(), canDescrambleMultipleServices(tmp));
+			eTrace("[CI] check slot %d %d %d", tmp->getSlotID(), tmp->running_services.empty(), canDescrambleMultipleServices(tmp));
 			if (tmp->running_services.empty() || canDescrambleMultipleServices(tmp))
 				tmp->sendCAPMT(pmthandler);
 			tmp = tmp->linked_next;
@@ -1044,11 +1037,11 @@ int eDVBCISlot::send(const unsigned char *data, size_t len)
 {
 	singleLock s(eDVBCIInterfaces::m_slot_lock);
 	int res=0;
-	//int i;
-	//eDebugNoNewLineStart("< ");
-	//for(i=0;i<len;i++)
-	//	eDebugNoNewLine("%02x ",data[i]);
-	//eDebugNoNewLine("\n");
+	unsigned int i;
+	eTraceNoNewLineStart("< ");
+	for(i = 0; i < len; i++)
+		eTraceNoNewLine("%02x ",data[i]);
+	eTraceNoNewLine("\n");
 
 	if (sendqueue.empty())
 		res = ::write(fd, data, len);
@@ -1067,7 +1060,7 @@ int eDVBCISlot::send(const unsigned char *data, size_t len)
 void eDVBCISlot::data(int what)
 {
 	singleLock s(eDVBCIInterfaces::m_slot_lock);
-	eDebugCI("[CI] Slot %d what %d\n", getSlotID(), what);
+	eTrace("[CI] Slot %d what %d\n", getSlotID(), what);
 	if(what == eSocketNotifier::Priority) {
 		if(state != stateRemoved) {
 			state = stateRemoved;
@@ -1101,11 +1094,11 @@ void eDVBCISlot::data(int what)
 		int r;
 		r = ::read(fd, data, 4096);
 		if(r > 0) {
-//			int i;
-//			eDebugNoNewLineStart("> ");
-//			for(i=0;i<r;i++)
-//				eDebugNoNewLine("%02x ",data[i]);
-//			eDebugNoNewLine("\n");
+			int i;
+			eTraceNoNewLineStart("> ");
+			for(i=0;i<r;i++)
+				eTraceNoNewLine("%02x ",data[i]);
+			eTraceNoNewLine("\n");
 			eDVBCISession::receiveData(this, data, r);
 			eDVBCISession::pollAll();
 			return;
@@ -1152,7 +1145,7 @@ eDVBCISlot::eDVBCISlot(eMainloop *context, int nr)
 
 	fd = ::open(filename, O_RDWR | O_NONBLOCK | O_CLOEXEC);
 
-	eDebugCI("[CI] Slot %d has fd %d", getSlotID(), fd);
+	eTrace("[CI] Slot %d has fd %d", getSlotID(), fd);
 	state = stateInvalid;
 
 	if (fd >= 0)
@@ -1211,13 +1204,13 @@ void eDVBCISlot::determineCIVersion()
 	char lv1Info[256] = { 0 };
 
 	if (ioctl(fd, 1, lv1Info) < 0) {
-		eDebugCI("[CI] Slot %d ioctl not supported: assume CI+ version 1", getSlotID());
+		eTrace("[CI] Slot %d ioctl not supported: assume CI+ version 1", getSlotID());
 		m_ci_version = versionCIPlus1;
 		return;
 	}
 
 	if (strlen(lv1Info) == 0) {
-		eDebugCI("[CI] Slot %d no LV1 info: assume CI+ version 1", getSlotID());
+		eTrace("[CI] Slot %d no LV1 info: assume CI+ version 1", getSlotID());
 		m_ci_version = versionCIPlus1;
 		return;
 	}
@@ -1240,12 +1233,12 @@ void eDVBCISlot::determineCIVersion()
 	}
 
 	if(!compatId) {
-		eDebugCI("[CI] Slot %d CI CAM detected", getSlotID());
+		eTrace("[CI] Slot %d CI CAM detected", getSlotID());
 		m_ci_version = versionCI;
 		return;
 	}
 
-	eDebugCI("[CI] Slot %d CI+ compatibility ID: %s", getSlotID(), compatId);
+	eTrace("[CI] Slot %d CI+ compatibility ID: %s", getSlotID(), compatId);
 
 	char *label, *id, flag = '+';
 	int version = versionCI;

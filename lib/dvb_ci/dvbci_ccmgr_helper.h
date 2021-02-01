@@ -4,6 +4,7 @@
 #include <openssl/x509.h>
 #include <openssl/x509v3.h>
 
+void traceHexdump(const uint8_t *data, unsigned int len);
 int get_random(uint8_t *dest, int len);
 int add_padding(uint8_t *dest, unsigned int len, unsigned int blocklen);
 void str2bin(uint8_t *dst, char *data, int len);

@@ -6,10 +6,10 @@
 
 int eDVBCIResourceManagerSession::receivedAPDU(const unsigned char *tag,const void *data, int len)
 {
-	eDebugNoNewLineStart("[CI RM] SESSION(%d) %02x %02x %02x: ", session_nb, tag[0], tag[1], tag[2]);
+	eTraceNoNewLineStart("[CI RM] SESSION(%d) %02x %02x %02x: ", session_nb, tag[0], tag[1], tag[2]);
 	for (int i=0; i<len; i++)
-		eDebugNoNewLine("%02x ", ((const unsigned char*)data)[i]);
-	eDebugNoNewLine("\n");
+		eTraceNoNewLineStart("%02x ", ((const unsigned char*)data)[i]);
+	eTraceNoNewLineStart("\n");
 	if ((tag[0]==0x9f) && (tag[1]==0x80))
 	{
 		switch (tag[2])
@@ -36,7 +36,7 @@ int eDVBCIResourceManagerSession::receivedAPDU(const unsigned char *tag,const vo
 			state=stateFinal;
 			break;
 		default:
-			eDebug("[CI RM] unknown APDU tag 9F 80 %02x", tag[2]);
+			eWarning("[CI RM] unknown APDU tag 9F 80 %02x", tag[2]);
 		}
 	}
 
@@ -63,7 +63,7 @@ int eDVBCIResourceManagerSession::doAction()
 	}
 	case stateProfileChange:
 	{
-		eDebug("[CI RM] cannot deal with statProfileChange");
+		eWarning("[CI RM] cannot deal with statProfileChange");
 		break;
 	}
 	case stateProfileEnquiry:
@@ -112,7 +112,7 @@ int eDVBCIResourceManagerSession::doAction()
 		return 0;
 	}
 	case stateFinal:
-		eDebug("[CI RM] Should not happen: action on stateFinal");
+		eWarning("[CI RM] Should not happen: action on stateFinal");
 	default:
 		break;
 	}
