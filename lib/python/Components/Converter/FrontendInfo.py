@@ -52,11 +52,12 @@ class FrontendInfo(Converter):
 			if count is not None:
 				return str(count)
 			else:
-				return _("N/A")
+				return
 		elif self.type == self.AGC:
 			percent = self.source.agc
 		elif (self.type == self.SNR and not swapsnr) or (self.type == self.SNRdB and swapsnr):
-			percent = self.source.snr
+			if self.source.snr is not None:
+				percent = self.source.snr
 		elif self.type == self.SNR or self.type == self.SNRdB:
 			if self.source.snr_db is not None:
 				return _("%3.01f dB") % (self.source.snr_db / 100.0)
@@ -80,7 +81,7 @@ class FrontendInfo(Converter):
 						string += " "
 					string += color + chr(ord("A")+n.slot)
 			return string
-		if self.type == self.USE_TUNERS_STRING:
+		elif self.type == self.USE_TUNERS_STRING:
 			string = ""
 			for n in nimmanager.nim_slots:
 				if n.enabled:
@@ -95,7 +96,7 @@ class FrontendInfo(Converter):
 					string += color + chr(ord("A") + n.slot)
 			return string
 		if percent is None:
-			return _("N/A")
+			return
 		return "%d %%" % (percent * 100 / 65535)
 
 	@cached
