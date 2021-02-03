@@ -985,7 +985,7 @@ class NimManager:
 		nimList = self.getNimListOfType(type, slotid)
 		for nim in nimList[:]:
 			mode = self.getNimConfig(nim)
-			if self.nim_slots[nim].isFBCLink() or mode.configMode.value == "loopthrough" or mode.configMode.value == "satposdepends":
+			if self.nim_slots[nim].isFBCLink() or mode.configMode.value in ("loopthrough", "satposdepends", "equal"):
 				nimList.remove(nim)
 		return nimList
 
