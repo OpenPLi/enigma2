@@ -158,7 +158,7 @@ private:
 
 	void gotMessage(const Message &message);
 	void cleanLoop();
-	void submitEventData(const std::vector<int>& sids, const std::vector<eDVBChannelID>& chids, long start, long duration, const char* title, const char* short_summary, const char* long_description, char event_type, int source);
+	void submitEventData(const std::vector<int>& sids, const std::vector<eDVBChannelID>& chids, long start, long duration, const char* title, const char* short_summary, const char* long_description, char event_type, int event_id, int source);
 	void clearCompleteEPGCache();
 
 	eServiceReferenceDVB *m_timeQueryRef;

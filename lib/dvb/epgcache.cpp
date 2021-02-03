@@ -1857,12 +1857,12 @@ void eEPGCache::submitEventData(const std::vector<eServiceReferenceDVB>& service
 			service->m_flags |= eDVBService::dxNoEIT;
 		}
 	}
-	submitEventData(sids, chids, start, duration, title, short_summary, long_description, event_type, EPG_IMPORT);
+	submitEventData(sids, chids, start, duration, title, short_summary, long_description, event_type, 0, EPG_IMPORT);
 }
 
 void eEPGCache::submitEventData(const std::vector<int>& sids, const std::vector<eDVBChannelID>& chids, long start,
 	long duration, const char* title, const char* short_summary,
-	const char* long_description, char event_type, int source)
+	const char* long_description, char event_type, int event_id, int source)
 {
 	if (!title)
 		return;
@@ -1886,7 +1886,7 @@ void eEPGCache::submitEventData(const std::vector<int>& sids, const std::vector<
 
 	eit_event_t *evt_struct = (eit_event_t*) (data + EIT_SIZE);
 
-	uint16_t eventId = start & 0xFFFF;
+	uint16_t eventId = (event_id == 0) ? start & 0xFFFF : event_id;
 	evt_struct->setEventId(eventId);
 
 	//6 bytes start time, 3 bytes duration
