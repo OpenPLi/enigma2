@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-21 17:43+0100\n"
-"PO-Revision-Date: 2020-12-21 17:45+0100\n"
+"POT-Creation-Date: 2021-01-31 11:28+0100\n"
+"PO-Revision-Date: 2021-01-31 11:41+0100\n"
 "Last-Translator: GeirJ <dummy@dummy.com>\n"
 "Language-Team: GeirJ\n"
 "Language: nb\n"
@@ -1862,7 +1862,7 @@ msgid "Clear playlist"
 msgstr "Slett opptaksliste"
 
 msgid "Client is streaming from this box!"
-msgstr "Klienten strømmer fra denne boksen!"
+msgstr "Klient streamer fra denne boksen!"
 
 #
 msgid "Close"
@@ -2392,13 +2392,13 @@ msgid "Default+Picon"
 msgstr "Standard+Kanallogo"
 
 msgid "Delay after change voltage before switch command"
-msgstr "Forsinkelse etter voltendring før kommando til switch"
+msgstr "Forsinkelse etter endringsspenning før kommando til switch"
 
 msgid "Delay after continuous tone disable before diseqc"
 msgstr "Forsinkelse etter frakobling av vedvarende tonesignal før DiSEqC"
 
 msgid "Delay after diseqc peripherial poweron command"
-msgstr "Forsinkelse etter DiSEqC styring av 'utstyr på'  kommando"
+msgstr "Forsinkelse etter DiSEqC styring av 'utstyr på' kommando"
 
 msgid "Delay after diseqc reset command"
 msgstr "Forsinkelse etter DiSEqC reset kommando"
@@ -2422,7 +2422,7 @@ msgid "Delay after motor stop command"
 msgstr "Forsinkelse etter motor stopp kommando"
 
 msgid "Delay after set voltage before measure motor power"
-msgstr "Forsinkelse etter valgt voltstyrke før måle motorstyrke"
+msgstr "Forsinkelse etter valgt voltstyrke før måling av motorstyrke"
 
 msgid "Delay after toneburst"
 msgstr "Forsinkelse etter toneburst"
@@ -4243,7 +4243,7 @@ msgid "Input "
 msgstr "Inngang "
 
 msgid "Input Stream ID"
-msgstr "Still inn Stream ID"
+msgstr "Inngående stream ID"
 
 msgid "Input device setup"
 msgstr "Enhetsinnstilling"
@@ -4303,6 +4303,9 @@ msgstr "Internt minne"
 
 msgid "Internal hdd only"
 msgstr "Bare for intern lagring"
+
+msgid "Internet (ntp)"
+msgstr "Internett (ntp)"
 
 msgid "Interval between keys when repeating:"
 msgstr "Tidsintervall mellom tastene ved repeterende:"
@@ -5300,7 +5303,7 @@ msgid "No standby"
 msgstr "Ikke slå av"
 
 msgid "No stream clients"
-msgstr "Ingen streaming klienter"
+msgstr "Ingen stream klienter"
 
 msgid "No tags are set on these movies."
 msgstr "Ingen merker er satt på disse opptakene."
@@ -5870,7 +5873,7 @@ msgid "Please select a subservice..."
 msgstr "Velg en underleverandør..."
 
 msgid "Please select medium to be scanned"
-msgstr "Velg medium som skal skannes"
+msgstr "Velg medium som skal gjennomsøkes"
 
 #
 msgid "Please select medium to use as backup location"
@@ -6982,8 +6985,8 @@ msgstr[1] "Kanalsøk pågår - %d%% fullført"
 #, python-format
 msgid "Scanning completed, %d channel found"
 msgid_plural "Scanning completed, %d channels found"
-msgstr[0] "Kanalsøket er ferdig. %d kanal ble funnet"
-msgstr[1] "Kanalsøket er ferdig. %d kanaler ble funnet"
+msgstr[0] "Kanalsøket er ferdig. %d kanal funnet"
+msgstr[1] "Kanalsøket er ferdig. %d kanaler funnet"
 
 msgid "Scanning failed!"
 msgstr "Kanalsøket feilet!"
@@ -7090,7 +7093,7 @@ msgid "Select 'yes' if this tuner is connected to the SCR device through another
 msgstr "Velg 'Ja' Hvis denne tuneren er koblet til SCR enheten via en annen mottaker, ellers velger du 'nei'."
 
 msgid "Select 'yes' to choose what bands or step sizes will be scanned."
-msgstr "Velg 'Ja' for å velge hvilke band eller trinn størrelser som skal skannes."
+msgstr "Velg 'Ja' for å velge hvilke bånd eller trinnsteg som skal gjennomsøkes."
 
 #, python-format
 msgid "Select 'yes' to include %s multiplexes in your search."
@@ -8170,7 +8173,7 @@ msgstr "Stopp alle pågående opptak"
 
 #
 msgid "Stop all streams"
-msgstr "Stopp alle streams"
+msgstr "Stopp alle streamer"
 
 msgid "Stop and delete all current recordings"
 msgstr "Stopp og slett alle pågående opptak"
@@ -8265,7 +8268,7 @@ msgid "Stream request"
 msgstr "Stream forespørsel"
 
 msgid "Streaming clients info"
-msgstr "Klient streaming info"
+msgstr "Info over klienter som streamer"
 
 msgid "Strongest position"
 msgstr "Sterkeste posisjon"
@@ -8438,7 +8441,7 @@ msgid "Symbol rate:"
 msgstr "Symbolrate:"
 
 msgid "Sync failure moving back to origin !"
-msgstr "Synkroniseringsfeil går tilbake til opprinnelsen!"
+msgstr "Synkroniseringsfeil, går tilbake til starten!"
 
 msgid "Syrian Arab Republic"
 msgstr "Syria"
@@ -8464,11 +8467,11 @@ msgid "T2MI RAW Mode"
 msgstr "T2MI RAW-modus"
 
 msgid "TEXT"
-msgstr "Tekst"
+msgstr "TEKST"
 
 #. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
 msgid "TRANSLATOR_INFO"
-msgstr "Oversettelse til norsk bokmål oppdatert: 21.12.2020"
+msgstr "Oversettelse til norsk bokmål oppdatert: 31.01.2021"
 
 #
 msgid "TS file is too large for ISO9660 level 1!"
@@ -8735,6 +8738,15 @@ msgid "This field allows you to search an additional symbol rate up to %s."
 msgstr "Dette feltet lar deg søke en ekstra symbolrate hastighet opp til %s."
 
 msgid ""
+"This image is intended for developers and testers.\n"
+"No support will be provided!\n"
+"Do you understand this?"
+msgstr ""
+"Dette operativsystemet er ment for utviklere og testere.\n"
+"Ingen støtte vil bli gitt!\n"
+"Forstår du dette?"
+
+msgid ""
 "This info is for developers only.\n"
 "For normal users it is not relevant.\n"
 "Please don't panic if you see values displayed looking suspicious!"
@@ -8857,7 +8869,7 @@ msgstr "Denne utvidelse vil slettes."
 
 #, python-format
 msgid "This receiver cannot decode %s streams!"
-msgstr "Mottakeren kan ikke dekode %s streams!"
+msgstr "Denne mottakeren kan ikke dekode %s streams!"
 
 msgid "This setting allows the tuner configuration to be a duplication of how another tuner is already configured."
 msgstr "Denne innstillingen dupliserer mottaker konfigurasjonen hvordan en annen mottaker allerede er konfigurert."
@@ -9118,7 +9130,7 @@ msgstr "Topp og bunn"
 
 #, python-format
 msgid "Total clients streaming: %d (%s)"
-msgstr "Antall streaming klienter: %d (%s)"
+msgstr "Antall stream klienter: %d (%s)"
 
 #
 msgid "Track"
@@ -9143,6 +9155,10 @@ msgstr "Sendingstype"
 #
 msgid "Transponder"
 msgstr "Transponder"
+
+#
+msgid "Transponder Time"
+msgstr "Transponder tid"
 
 #
 msgid "Transport Stream Type"
@@ -11480,7 +11496,7 @@ msgid "Tuner configuration"
 msgstr "Tunerinnstilling"
 
 msgid "Tuners & scanning"
-msgstr "Tunere & skanning"
+msgstr "Tunere & kanalsøk"
 
 msgid "VCR scart"
 msgstr "VCR scart"
@@ -11789,10 +11805,10 @@ msgid "Configure the speed of the background deletion process. Lower speed will 
 msgstr "Still inn hastighetsprosessen for bakgrunnssletting. Lavere hastighet vil bruke mindre disk ytelse."
 
 msgid "Configure the speed of the fan"
-msgstr "Still inn turtallet på kjølevifte"
+msgstr "Konfigurer hastigheten på viften"
 
 msgid "Configure the subtitle delay when timing information is not available."
-msgstr "Still inn forsinkelse på undertekst når tidtakingsinformasjon mangler."
+msgstr "Konfigurer undertekstforsinkelse når tidsinformasjon ikke er tilgjengelig."
 
 msgid "Configure the third audio language."
 msgstr "Still inn tredjevalg på lyd språk."
@@ -11801,14 +11817,14 @@ msgid "Configure the third subtitle language."
 msgstr "Still inn tredjevalg på undertekst språk."
 
 msgid "Configure the transparency of the black background of graphical DVB subtitles."
-msgstr "Still inn transparent svart bakgrunns nivå på DVB undertekst."
+msgstr "Konfigurer gjennomsiktighet til den svarte bakgrunnen i grafiske DVB-undertekster."
 
 #
 msgid "Configure the tuner mode."
-msgstr "Still inn tunervalg."
+msgstr "Konfigurer tunermodus."
 
 msgid "Configure the type of status indication icons shown in the movielist."
-msgstr "Still inn hvordan avspillingsindikatoren skal vises i opptakslisten."
+msgstr "Konfigurer visning for avspillingsindikator i opptakslisten."
 
 msgid "Configure the vertical position of the subtitles, measured from the bottom of the screen."
 msgstr "Still inn vertikal posisjon for undertekst målt fra bunnen av skjermen."
@@ -11867,31 +11883,31 @@ msgid "Default timer type"
 msgstr "Standard timer type"
 
 msgid "Define the location of the EPG Cache file."
-msgstr "Velg sti til EPG hurtigbuffer fil."
+msgstr "Velg plassering for EPG hurtigbuffer fil."
 
 msgid "Delay for external subtitles"
-msgstr "Ekstern undertekst forsinkelse"
+msgstr "Forsinkelse for ekstern undertekster"
 
 msgid "Delay in miliseconds after finish scrolling text on display."
-msgstr "Forsinkelse i millisekunder etter at den rullende teksten er ferdig på skjermen."
+msgstr "Forsinkelse i millisekunder etter at rullende tekst er ferdig på skjermen."
 
 msgid "Delay in miliseconds before start of scrolling text on display."
-msgstr "Forsinkelse i millisekunder før starten av rullende tekst på skjermen."
+msgstr "Forsinkelse i millisekunder før start av rullende tekst på skjermen."
 
 msgid "Delay in miliseconds between scrolling characters on display."
 msgstr "Forsinkelse i millisekunder mellom rullende tegn på skjermen."
 
 msgid "Descramble receiving http streams"
-msgstr "Dekode mottatte http streams"
+msgstr "Dekode mottatt http stream"
 
 msgid "Descramble sending http streams"
-msgstr "Dekode sendte http streams"
+msgstr "Dekode sendt http stream"
 
 msgid "DiSEqC"
 msgstr "DiSEqC"
 
 msgid "Disable background scanning"
-msgstr "Deaktiver bakgrunnsskanning"
+msgstr "Deaktiver bakgrunnssøk"
 
 msgid "Disk space to reserve for recordings (in GB)"
 msgstr "Lagringsplass avsatt til opptak (i GB)"
@@ -11983,11 +11999,11 @@ msgstr "Ekstern undertekst skriftype"
 
 #
 msgid "Fan operation"
-msgstr "Kjølevifte drift"
+msgstr "Viftedrift"
 
 #
 msgid "Fan speed"
-msgstr "Kjølevifte turtall"
+msgstr "Viftehastighet"
 
 #
 msgid "Fast forward speeds"
@@ -12099,6 +12115,9 @@ msgstr "Modulator"
 msgid "Multi-EPG bouquet selection"
 msgstr "Multi EPG valg i kanalliste"
 
+msgid "NTP Hostname"
+msgstr "NTP-vertsnavn"
+
 msgid "Never decrypt the content while recording. This overrides the individual timer settings globally. If enabled, recordings are stored in crypted presentation and must be decrypted afterwards (sometimes called offline decoding). Default: off."
 msgstr "Aldri dekode innholdet under opptak. Dette overstyrer egne globale timer innstillinger. Når dette er på, vil opptak lagres kryptert og må dekodes i ettertid (offline dekoding). Standardinnstilling: av."
 
@@ -12207,7 +12226,7 @@ msgid "Replace `- ` in dialogs with colored text per speaker (like teletext subt
 msgstr "Erstatt `- ` i dialogboksen med farget tekst for tale (som tekst-TV tekst for hørselshemmede)"
 
 msgid "Require authentication for http streams"
-msgstr "Bruk autentisering for http streams"
+msgstr "Krever autentisering for http stream"
 
 #
 msgid "Rewind speeds"
@@ -12224,6 +12243,9 @@ msgstr "Rulle forsinkelse"
 
 msgid "Scroll repeats"
 msgstr "Rulle gjentakelser"
+
+msgid "Select how you want your receiver to keep the correct time, either from the DVB transponder, or from the internet using NTP. Or use Auto, which will favour using NTP, but will fall back to transponder time when no internet connection is available."
+msgstr "Velg hvordan du vil at mottakeren skal beholde riktig tid, enten fra DVB-transponderen eller fra internett ved hjelp av NTP. Eller bruk Auto, som vil favorisere bruk av NTP, men vil falle tilbake til transponder tid når ingen Internett-tilkobling er tilgjengelig."
 
 msgid "Select the time zone within the area or region."
 msgstr "Velg tidssonen i området eller region."
@@ -12442,6 +12464,9 @@ msgstr "Undertekst farge"
 msgid "Test mode"
 msgstr "Testmodus"
 
+msgid "The hostname or the IP address of the NTP server to synchronise the time with."
+msgstr "Vertsnavnet eller IP-adressen til NTP-serveren for å synkronisere tiden med."
+
 msgid "This option allows you to add the softcam setup in the extensions menu."
 msgstr "Med dette valget kan du legge til softcam innstilling i blåtast meny."
 
@@ -12462,6 +12487,9 @@ msgstr "Dette alternativet lar deg vise meny med eller uten snarveis nummer."
 
 msgid "This option allows you to show the full screen path leading to the current screen."
 msgstr "Med dette alternativet kan du vise fullskjermbanen som fører til gjeldende visning."
+
+msgid "Time synchronization method"
+msgstr "Metode for tidssynkronisering"
 
 #
 msgid "Time zone"
@@ -12559,13 +12587,13 @@ msgid "When enabled you get the channel selection list via the OK button, the in
 msgstr "Hvis aktivert, vil kanallisten vises på OK tast. Infobar skrus av/på ved hjelp av exit tast"
 
 msgid "When enabled, AIT data will be included in http streams. This allows a client receiver to use HbbTV."
-msgstr "Hvis aktivert, vil AIT data inngå i http strøm. Dette tillater en klient mottaker å bruke HbbTV."
+msgstr "Hvis aktivert, vil AIT data inngå i http stream. Dette tillater en klient mottaker å bruke HbbTV."
 
 msgid "When enabled, ECM data will be included in http streams. This allows a client receiver to do the descrambling."
-msgstr "Hvis aktivert, vil ECM data inngå i http strøm. Dette tillater at klient mottakeren foretar dekodingen."
+msgstr "Hvis aktivert, vil ECM data inngå i http stream. Dette tillater at klient mottaker foretar dekodingen."
 
 msgid "When enabled, EIT data will be included in http streams. This allows a client receiver to show EPG."
-msgstr "Hvis aktivert, vil EIT data inngå i http strøm. Dette tillater klient mottakeren å vise EPG."
+msgstr "Hvis aktivert, vil EIT data inngå i http stream. Dette tillater klient mottaker å vise EPG."
 
 msgid "When enabled, HDMI-CEC is enabled with standard configuration"
 msgstr "Hvis aktivert, blir HDMI-CEC aktivert med standard innstilling"
@@ -12577,7 +12605,7 @@ msgid "When enabled, a popup message will be shown when a recording starts."
 msgstr "Hvis aktivert, en popup-melding vil bli vist når et opptak starter."
 
 msgid "When enabled, a radio background image will be visible while listening to a radio channel."
-msgstr "Hvis aktivert, vil et radio bakgrunnsbilde være synlig mens du lytter til en radiokanal."
+msgstr "Hvis aktivert, vil radio bakgrunnsbilde være synlig mens du lytter til en radiokanal."
 
 msgid "When enabled, a recording is allowed to interrupt live tv, when there are no free tuners."
 msgstr "Hvis aktivert, kan et opptak avbryte direktesendt TV når det ikke finnes noen ledige tunere."
@@ -12586,10 +12614,10 @@ msgid "When enabled, a warning will be displayed and the user will get an option
 msgstr "Hvis aktivert, vil en popup-melding vises med valget stopp eller fortsett timeskift."
 
 msgid "When enabled, always descramble receiving http streams. This takes up more resources (descrambling demuxers), only enable if necessary. Individual streams are always descrambled if 0x100 is added to the service type, regardless of this setting. Default off."
-msgstr "Hvis aktivert, vil mottatt http strøm dekodes. Dette bruker mere data ressurser (dekode, demuxere bilde) og brukes bare når det er nødvendig. Individuell strøm blir alltid dekodet hvis 0x100 er tillagt i service typen, uavhengig av denne innstillingen. Standardinnstilling er av."
+msgstr "Hvis aktivert, vil mottatt http strøm dekodes. Dette bruker mere data ressurser (dekode, demuxe bilde) og brukes bare når det er nødvendig. Individuell stream blir alltid dekodet hvis 0x100 er tillagt i service typen, uavhengig av denne innstillingen. Standardinnstilling er av."
 
 msgid "When enabled, authentication is required to watch http streams."
-msgstr "Hvis aktivert, vil autentisering kreves for å se på http strøm."
+msgstr "Hvis aktivert, vil autentisering kreves for å se http stream."
 
 msgid "When enabled, channel numbering will start at '1' for each bouquet."
 msgstr "Hvis aktivert, vil kanal nummer starte på '1' i hver enkelt kanalliste."
@@ -12625,7 +12653,7 @@ msgid "When enabled, graphical DVB subtitles will be displayed in yellow, instea
 msgstr "Hvis aktivert, vil DVB undertekst vises i gult i stedet for den originale fargen."
 
 msgid "When enabled, http streams are descrambled on the server side. The (remote) client receiver does not have to do descrambling. Default on."
-msgstr "Hvis aktivert, vil http strøm bli dekodet på serversiden. Ekstern klient trenger ikke foreta dekodingen. Standardinnstilling er på."
+msgstr "Hvis aktivert, vil http stream bli dekodet på serversiden. Ekstern klient trenger ikke foreta dekodingen. Standardinnstilling er på."
 
 msgid "When enabled, it is possible to leave the movieplayer with exit."
 msgstr "Hvis aktivert, er det mulig å forlate mediespiller med exit."

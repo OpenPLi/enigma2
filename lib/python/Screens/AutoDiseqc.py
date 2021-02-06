@@ -109,7 +109,7 @@ class AutoDiseqc(Screen, ConfigListScreen):
 
 		# Astra 19.2E ZDF
 		(
-			11953,
+			11954,
 			27500,
 			eDVBFrontendParametersSatellite.Polarisation_Horizontal,
 			eDVBFrontendParametersSatellite.FEC_3_4,
@@ -175,7 +175,7 @@ class AutoDiseqc(Screen, ConfigListScreen):
 			11054,
 			29950,
 			eDVBFrontendParametersSatellite.Polarisation_Vertical,
-			eDVBFrontendParametersSatellite.FEC_3_4,
+			eDVBFrontendParametersSatellite.FEC_2_3,
 			eDVBFrontendParametersSatellite.Inversion_Off,
 			3550,
 			eDVBFrontendParametersSatellite.System_DVB_S2,
@@ -189,7 +189,7 @@ class AutoDiseqc(Screen, ConfigListScreen):
 			eDVBFrontendParametersSatellite.T2MI_Default_Pid,
 			20500,
 			1375,
-			"Eutelsat A/B 5.0w"),
+			"Eutelsat 5 West B 5.0w"),
 
 		# Hispasat 30.0W TSA
 		(

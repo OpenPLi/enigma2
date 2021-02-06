@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-01 09:56+0000\n"
-"PO-Revision-Date: 2020-11-29 10:58+0200\n"
+"POT-Creation-Date: 2021-01-27 18:30+0100\n"
+"PO-Revision-Date: 2021-02-01 18:13+0200\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: openPLi Dimitrij\n"
 "Language: ru\n"
@@ -3761,7 +3761,6 @@ msgstr "Скорость перемотки вперед"
 msgid "FastScan"
 msgstr "Быстрый поиск - провайдеры 23.5E-19.2E"
 
-#, fuzzy
 msgid "Fastscan"
 msgstr "Быстрый поиск - провайдеры 23.5E-19.2E"
 
@@ -4573,6 +4572,9 @@ msgstr "Внутренняя флешь"
 msgid "Internal hdd only"
 msgstr "Только внутренний HDD"
 
+msgid "Internet (ntp)"
+msgstr "Интернет (NTP)"
+
 msgid "Interval between keys when repeating:"
 msgstr "Интервал задержки кнопок между повторами:"
 
@@ -5319,6 +5321,9 @@ msgstr "НЕТ"
 
 msgid "NOW"
 msgstr "СЕЙЧАС"
+
+msgid "NTP Hostname"
+msgstr "Адрес хоста NTP"
 
 msgid "NTSC"
 msgstr "NTSC"
@@ -7474,6 +7479,9 @@ msgstr "Выбор скорости перемещения мотоподвес�
 msgid "Select how the satellite dish is set up. i.e. fixed dish, single LNB, DiSEqC switch, positioner, etc."
 msgstr "Выбор способ настройки спутниковой антенны, то есть фиксированной тарелки, одного LNB, переключателя DiSEqC, позиционера и т.д."
 
+msgid "Select how you want your receiver to keep the correct time, either from the DVB transponder, or from the internet using NTP. Or use Auto, which will favour using NTP, but will fall back to transponder time when no internet connection is available."
+msgstr "Выбор сохранения/настройки правильного времени Вашего ресивера, либо с DVB транспондера, либо из интернета с использованием NTP. Или используйте Auto, что предпочтительней использовать NTP, но будет возвращаться к времени транспондера, когда нет подключения к интернету."
+
 msgid "Select input device"
 msgstr "Выберите устройства ввода"
 
@@ -8042,9 +8050,8 @@ msgstr "Показать иконки записей"
 msgid "Show record indicator"
 msgstr "Показать индикатор записи"
 
-#, fuzzy
 msgid "Show satellites list"
-msgstr "Показать список сервисов"
+msgstr "Показать список спутников"
 
 msgid "Show screen path"
 msgstr "Показывать путь к меню"
@@ -8840,7 +8847,7 @@ msgstr "TEXT"
 
 #. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
 msgid "TRANSLATOR_INFO"
-msgstr "Dimitrij - 23.08.2020"
+msgstr "Dimitrij - 01.02.2021"
 
 msgid "TS file is too large for ISO9660 level 1!"
 msgstr "TS файл слишком большой для ISO9660 level 1!"
@@ -8968,6 +8975,9 @@ msgstr ""
 
 msgid "The following files were found..."
 msgstr "Следующие файлы были найдены ..."
+
+msgid "The hostname or the IP address of the NTP server to synchronise the time with."
+msgstr "Имя хоста или IP-адрес NTP-сервера, с которого нужно синхронизировать время."
 
 msgid ""
 "The network wizard extension is not installed!\n"
@@ -9113,6 +9123,15 @@ msgstr "Этот DVD RW контент уже отформатирован - п�
 #, python-format
 msgid "This field allows you to search an additional symbol rate up to %s."
 msgstr "Это позволяет вам искать дополнительную скорость передачи до %s."
+
+msgid ""
+"This image is intended for developers and testers.\n"
+"No support will be provided!\n"
+"Do you understand this?"
+msgstr ""
+"Этот имидж предназначен для разработчиков и тестировщиков.\n"
+"Никакой поддержки не будет!\n"
+"Вам это понятно?"
 
 msgid ""
 "This info is for developers only.\n"
@@ -9344,6 +9363,9 @@ msgstr "Время"
 msgid "Time scale"
 msgstr "Временной масштаб сетки"
 
+msgid "Time synchronization method"
+msgstr "Метод синхронизации времени"
+
 msgid "Time zone"
 msgstr "Часовой пояс"
 
@@ -9524,6 +9546,9 @@ msgstr "Режим передачи"
 
 msgid "Transponder"
 msgstr "Транспондер"
+
+msgid "Transponder Time"
+msgstr "Время с транспондера"
 
 msgid "Transport Stream Type"
 msgstr "Тип транспортного потока"

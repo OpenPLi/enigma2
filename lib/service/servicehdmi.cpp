@@ -188,6 +188,7 @@ eServiceHDMIRecord::eServiceHDMIRecord(const eServiceReference &ref)
 	m_target_fd = -1;
 	m_error = 0;
 	m_encoder_fd = -1;
+	m_buffersize = -1;
 	m_thread = NULL;
 }
 
@@ -237,7 +238,8 @@ RESULT eServiceHDMIRecord::stop()
 	if (m_state == statePrepared)
 	{
 		m_thread = NULL;
-		if (eEncoder::getInstance()) eEncoder::getInstance()->freeEncoder(m_encoder_fd);
+		if (!m_simulate && eEncoder::getInstance())
+			eEncoder::getInstance()->freeEncoder(m_encoder_fd);
 		m_encoder_fd = -1;
 		m_state = stateIdle;
 	}
@@ -247,12 +249,12 @@ RESULT eServiceHDMIRecord::stop()
 
 int eServiceHDMIRecord::doPrepare()
 {
-	int buffersize; /* unused here */
-
 	if (!m_simulate && m_encoder_fd < 0)
 	{
-		if (eEncoder::getInstance()) m_encoder_fd = eEncoder::getInstance()->allocateEncoder(m_ref.toString(), buffersize, 8 * 1024 * 1024, 1280, 720, 25000, 0, 0);
-		if (m_encoder_fd < 0) return -1;
+		if (eEncoder::getInstance())
+			m_encoder_fd = eEncoder::getInstance()->allocateHDMIEncoder(m_ref.toString(), m_buffersize);
+		if (m_encoder_fd < 0)
+			return -1;
 	}
 	m_state = statePrepared;
 	return 0;
@@ -281,7 +283,7 @@ int eServiceHDMIRecord::doRecord()
 			return errOpenRecordFile;
 		}
 
-		m_thread = new eDVBRecordFileThread(188, 20);
+		m_thread = new eDVBRecordFileThread(188, 20, m_buffersize);
 		m_thread->setTargetFD(fd);
 
 		m_target_fd = fd;

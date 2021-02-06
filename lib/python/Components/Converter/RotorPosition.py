@@ -34,7 +34,13 @@ class RotorPosition(Converter, object):
 				return orbpos(config.misc.lastrotorposition.value)
 		return ""
 
+	@cached
+	def getBool(self):
+		return bool(self.getText())	
+
 	text = property(getText)
+
+	boolean = property(getBool)
 
 	def isMotorizedTuner(self):
 		for x in nimmanager.nim_slots:

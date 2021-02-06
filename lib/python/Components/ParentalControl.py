@@ -105,9 +105,9 @@ class ParentalControl:
 				Notifications.RemovePopup("Parental control")
 				if self.PinDlg:
 					self.PinDlg.close()
-				self.PinDlg = session.openWithCallback(boundFunction(self.servicePinEntered, ref), PinInput, triesEntry=config.ParentalControl.retries.servicepin, pinList=self.getPinList(), service=ServiceReference(ref).getServiceName(), title=title, windowTitle=_("Parental control"), simple=False)
+				self.PinDlg = session.openWithCallback(boundFunction(self.servicePinEntered, ref), PinInput, triesEntry=config.ParentalControl.retries.servicepin, pinList=self.getPinList(), service=ServiceReference(ref).getServiceName(), title=title, windowTitle=_("Parental control"), simple=False, zap=True)
 			else:
-				Notifications.AddNotificationParentalControl(boundFunction(self.servicePinEntered, ref), PinInput, triesEntry=config.ParentalControl.retries.servicepin, pinList=self.getPinList(), service=ServiceReference(ref).getServiceName(), title=title, windowTitle=_("Parental control"))
+				Notifications.AddNotificationParentalControl(boundFunction(self.servicePinEntered, ref), PinInput, triesEntry=config.ParentalControl.retries.servicepin, pinList=self.getPinList(), service=ServiceReference(ref).getServiceName(), title=title, windowTitle=_("Parental control"), zap=True)
 			return False
 		else:
 			return True
@@ -169,7 +169,18 @@ class ParentalControl:
 			self.sessionPinTimer.startLongTimer(self.pinIntervalSeconds)
 
 	def servicePinEntered(self, service, result=None):
-		if result:
+		if result in ("zapup", "zapdown"):
+			from Screens.InfoBar import InfoBar
+			InfoBarInstance = InfoBar.instance
+			if InfoBarInstance and hasattr(InfoBarInstance, "servicelist"):
+				InfoBarInstance.servicelist.servicelist.setCurrent(service)
+				if result == "zapdown":
+					InfoBarInstance.servicelist.servicelist.moveDown()
+
+				else:
+					InfoBarInstance.servicelist.servicelist.moveUp()
+				InfoBarInstance.servicelist.zap()
+		elif result:
 			self.setSessionPinCached()
 			self.hideBlacklist()
 			self.callback(ref = service)

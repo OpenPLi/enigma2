@@ -1,7 +1,8 @@
 from enigma import getPrevAsciiCode
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
-from Components.ActionMap import NumberActionMap
+from Components.config import config
+from Components.ActionMap import NumberActionMap, ActionMap
 from Components.Label import Label
 from Components.Input import Input
 from Tools.BoundFunction import boundFunction
@@ -86,13 +87,21 @@ class InputBox(Screen):
 		self["input"].toggleOverwrite()
 
 class PinInput(InputBox):
-	def __init__(self, session, service = "", triesEntry = None, pinList = [], popup = False, simple=True, *args, **kwargs):
+	def __init__(self, session, service = "", triesEntry = None, pinList = [], popup = False, simple=True, zap=False, *args, **kwargs):
 		InputBox.__init__(self, session = session, text = "    ", maxSize = True, type = Input.PIN, *args, **kwargs)
-
+		self.zap = zap
 		self.waitTime = 15
 		self.triesEntry = triesEntry
 		self.pinList = pinList
 		self["service"] = Label(service)
+
+		self["ChannelSelectActions"] = ActionMap(["InfobarChannelSelection"],
+		{
+			"keyUp": self.keyUp,
+			"keyDown": self.keyDown,
+			"keyChannelUp": self.keyChannelUp,
+			"keyChannelDown": self.keyChannelDown,
+		}, -1)
 
 		if service and simple:
 			self.skinName = "PinInputPopup"
@@ -141,6 +150,7 @@ class PinInput(InputBox):
 				self.setTries(3)
 				self.closePinCorrect()
 			else:
+				self["input"].setText("    ")
 				self.keyHome()
 				self.decTries()
 				if self.getTries() == 0:
@@ -181,4 +191,30 @@ class PinInput(InputBox):
 		self["tries"].setText(self.triesEntry and _("Tries left:") + " " + str(self.getTries() or ""))
 
 	def keyRight(self):
-		pass
+		if self.zap and self["input"].getText() == "    ":
+			self.close("zapdown")
+
+	def keyLeft(self, setCursor=True):
+		if self.zap and self["input"].getText() == "    ":
+			self.close("zapup")
+		elif setCursor:
+			self["input"].left()
+			pos = self["input"].currPos
+			self["input"].setText("%s%s" % (self["input"].getText()[:pos], "    "[:4 - pos]))
+			self.zap = False
+
+	def keyUp(self):
+		if config.usage.oldstyle_zap_controls.value:
+			self.keyRight()
+
+	def keyDown(self):
+		if config.usage.oldstyle_zap_controls.value:
+			self.keyLeft(False)
+
+	def keyChannelUp(self):
+		if config.usage.zap_with_ch_buttons.value:
+			self.keyRight()
+
+	def keyChannelDown(self):
+		if config.usage.zap_with_ch_buttons.value:
+			self.keyLeft(False)

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-01 09:48+0000\n"
+"POT-Creation-Date: 2021-01-27 18:30+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi <ims@openpli.org>\n"
@@ -4310,7 +4310,6 @@ msgid "FastScan"
 msgstr "Fastscan"
 
 #
-#, fuzzy
 msgid "Fastscan"
 msgstr "Fastscan"
 
@@ -5222,6 +5221,9 @@ msgstr "Vnitřní flash"
 msgid "Internal hdd only"
 msgstr "Pouze interní disk"
 
+msgid "Internet (ntp)"
+msgstr "Internet (ntp)"
+
 #
 msgid "Interval between keys when repeating:"
 msgstr "Rychlost opakování:"
@@ -6091,6 +6093,9 @@ msgstr ""
 #
 msgid "NOW"
 msgstr "NYNÍ"
+
+msgid "NTP Hostname"
+msgstr "Název NTP serveru"
 
 #
 msgid "NTSC"
@@ -8620,6 +8625,9 @@ msgstr "Nastavte jak rychle by se měla parabola natáčet mezi družicemi."
 msgid "Select how the satellite dish is set up. i.e. fixed dish, single LNB, DiSEqC switch, positioner, etc."
 msgstr "Vyberte jak je nastavena parabola. Např. jeden LNB, přepínač DiSEqC, pozicioner atd."
 
+msgid "Select how you want your receiver to keep the correct time, either from the DVB transponder, or from the internet using NTP. Or use Auto, which will favour using NTP, but will fall back to transponder time when no internet connection is available."
+msgstr "Vyberte způsob udržování správného času přijímače. Můžete použít čas z DVB transpondéru nebo čas z internetu (NTP server). Při použití 'Automaticky' bude upřednostněno používání NTP serveru, ale v případě neexistujícího připojení k internetu se použije čas transpondéru."
+
 msgid "Select input device"
 msgstr "Vyberte vstupní zařízení"
 
@@ -9262,9 +9270,8 @@ msgstr "Zobrazovat ikony časovačů"
 msgid "Show record indicator"
 msgstr "Zobrazovat indikátor záznamu"
 
-#, fuzzy
 msgid "Show satellites list"
-msgstr "Přehled programů"
+msgstr "Ukázat přehled satelitů"
 
 msgid "Show screen path"
 msgstr "Zobrazovat cestu menu"
@@ -10187,7 +10194,7 @@ msgstr ""
 "Pro případné korekce můžete kontaktovat autora\n"
 "na výše uvedené adrese.\n"
 "\n"
-"®27.11.2020"
+"®27.1.2021"
 
 #
 msgid "TS file is too large for ISO9660 level 1!"
@@ -10327,6 +10334,9 @@ msgstr ""
 #
 msgid "The following files were found..."
 msgstr "Následující soubory byly nalezeny..."
+
+msgid "The hostname or the IP address of the NTP server to synchronise the time with."
+msgstr "Název nebo IP adresa NTP serveru použitého k synchronizaci času."
 
 #
 msgid ""
@@ -10485,6 +10495,15 @@ msgstr "DVD RW médium je již naformátováno - nové formátování smaže ve�
 #, python-format
 msgid "This field allows you to search an additional symbol rate up to %s."
 msgstr "Umožňuje vyhledat další symbol rate až do %s."
+
+msgid ""
+"This image is intended for developers and testers.\n"
+"No support will be provided!\n"
+"Do you understand this?"
+msgstr ""
+"Tento obraz je určen pro vývojáře a testery.\n"
+"Je bez jakékoliv podpory!\n"
+"Rozumíte tomu?"
 
 msgid ""
 "This info is for developers only.\n"
@@ -10732,6 +10751,9 @@ msgstr "Čas"
 msgid "Time scale"
 msgstr "Měřítko času"
 
+msgid "Time synchronization method"
+msgstr "Způsob synchronizace času"
+
 #
 msgid "Time zone"
 msgstr "Časové pásmo"
@@ -10949,6 +10971,10 @@ msgstr "Přenosový mód"
 msgid "Transponder"
 msgstr "Transpondér"
 
+#
+msgid "Transponder Time"
+msgstr "Čas transpondéru"
+
 msgid "Transport Stream Type"
 msgstr "Typ transportního toku"
 
@@ -10974,7 +11000,7 @@ msgid "Try to find used transponders in cable network.. please wait..."
 msgstr "Zkouším najít použité transpondéry v kabelové síti ... prosím, čekejte ..."
 
 msgid "Try to find used transponders in terrestrial network... please wait..."
-msgstr "Zkouší se najít použité transpondéry v pozemní síti ... čekejte prosím ..."
+msgstr "Hledají se použité transpondéry v pozemní síti... Čekejte, prosím..."
 
 #
 msgid "Trying to download a new packetlist. Please wait..."

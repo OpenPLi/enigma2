@@ -772,6 +772,8 @@ class NimSelection(Screen):
 	def updateList(self, index=None):
 		self.list = [ ]
 		for x in nimmanager.nim_slots:
+			if x.isFBCLink() and not x.isFBCLinkEnabled():
+				continue
 			slotid = x.slot
 			nimConfig = nimmanager.getNimConfig(x.slot)
 			text = ""
