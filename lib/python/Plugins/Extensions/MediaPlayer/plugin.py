@@ -778,7 +778,9 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 				if recursive:
 					if x[0][0] != directory:
 						self.copyDirectory(x[0][0])
-			elif filelist.getServiceRef() and filelist.getServiceRef().type == 4097:
+			elif filelist.getServiceRef() and filelist.getServiceRef().type in (1, 4097):
+				self.playlist.addFile(x[0][0])
+			elif x[0][0] and x[0][0].type == 1:
 				self.playlist.addFile(x[0][0])
 		self.playlist.updateList()
 
