@@ -27,6 +27,7 @@ providers = [
 	('TV Vlaanderen', (1, 910, True)),
 	('TéléSAT', (0, 920, False)),
 	('HD Austria', (0, 950, False)),
+	('KabelKiosk', (0, 970, False)),
 	('Diveo', (0, 960, False)),
 	('Skylink CZ', (1, 30, False)),
 	('Skylink SK', (1, 31, False)),
