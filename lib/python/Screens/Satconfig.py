@@ -147,10 +147,13 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 				elif self.nimConfig.configMode.value == "nothing":
 					pass
 				elif self.nimConfig.configMode.value == "advanced":
-					advanced_satposdepends_satlist_choices = ("3607", _("Additional cable of motorized LNB"), 1)
-					advanced_satlist_choices = self.nimConfig.advanced.sats.choices.choices
 					advanced_setchoices = False
-					if nimmanager.canDependOn(self.slotid, True):
+					advanced_satposdepends_satlist_choices = ("3607", _("Additional cable of motorized LNB"), 1)
+					advanced_satlist_choices = self.nimConfig.advanced.sats.choices.choices[:]
+					if self.nim.isFBCLink() and ("3602", _('All satellites 2 (USALS)')) in advanced_satlist_choices:
+						advanced_satlist_choices = nimmanager.satList[:]
+						advanced_setchoices = True
+					if nimmanager.canDependOn(self.slotid, advanced_satposdepends=self.nim.isFBCLink() and "fbc" or "all"):
 						if advanced_satposdepends_satlist_choices not in advanced_satlist_choices:
 							advanced_satlist_choices.append(advanced_satposdepends_satlist_choices)
 							advanced_setchoices = True
@@ -168,7 +171,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 					self.list.append(self.advancedSatsEntry)
 					current_config_sats = self.nimConfig.advanced.sats.value
 					if current_config_sats == "3607":
-						self.nimConfig.connectedTo.setChoices([((str(id), nimmanager.getNimDescription(id))) for id in nimmanager.canDependOn(self.slotid, True)])
+						self.nimConfig.connectedTo.setChoices([((str(id), nimmanager.getNimDescription(id))) for id in nimmanager.canDependOn(self.slotid, advanced_satposdepends=self.nim.isFBCLink() and "fbc" or "all")])
 						self.list.append(getConfigListEntry(self.indent % _("Tuner"), self.nimConfig.connectedTo, _("Select the tuner that controls the motorised dish.")))
 					if current_config_sats in ("3605", "3606", "3607"):
 						if current_config_sats != "3607":
@@ -439,6 +442,8 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 				self.list.append(getConfigListEntry(self.indent % _("Tone mode"), Sat.tonemode, _("Select 'band' if using a 'universal' LNB, otherwise consult your LNB spec sheet.")))
 
 			if lnbnum < 65 or lnbnum == 71:
+				if self.nim.isFBCLink() and ("1_2", _("1.2")) in currLnb.diseqcMode.choices.choices:
+					currLnb.diseqcMode.setChoices([("none", _("None")), ("1_0", _("1.0")), ("1_1", _("1.1"))], "none")
 				self.advancedDiseqcMode = getConfigListEntry(self.indent % _("DiSEqC mode"), currLnb.diseqcMode, _("Select '1.0' for standard committed switches, '1.1' for uncommitted switches, and '1.2' for systems using a positioner."))
 				self.list.append(self.advancedDiseqcMode)
 			if currLnb.diseqcMode.value != "none":
