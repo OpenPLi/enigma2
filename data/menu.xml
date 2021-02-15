@@ -89,11 +89,11 @@
 			<item text="Sleep timer" entryID="sleep"><screen module="SleepTimerEdit" screen="SleepTimerEdit"/></item>
 			<item text="Standby" entryID="standby"><screen module="Standby" screen="Standby"/></item>
 			<item text="Restart" entryID="restart"><screen module="Standby" screen="TryQuitMainloop">2</screen></item>
-			<item text="Multiboot image selector" entryID="multiboot" requires="canMultiBoot"><screen module="FlashImage" screen="MultibootSelection">1</screen></item>
 			<item text="Restart enigma" requires="InDebugMode" entryID="restart_enigma_debug"><screen module="Standby" screen="TryQuitMainloop">6</screen></item>
 			<item text="Restart enigma" requires="!InDebugMode" entryID="restart_enigma"><screen module="Standby" screen="TryQuitMainloop">3</screen></item>
 			<item text="Restart enigma in standard mode" requires="InDebugMode" entryID="restart_enigma"><screen module="Standby" screen="TryQuitMainloop">3</screen></item>
 			<item text="Restart enigma in debug mode" requires="!InDebugMode" entryID="restart_enigma_debug"><screen module="Standby" screen="TryQuitMainloop">6</screen></item>
+			<item text="Multiboot image selector" entryID="multiboot" requires="canMultiBoot"><screen module="FlashImage" screen="MultibootSelection">1</screen></item>
 			<item text="Deep standby" requires="DeepstandbySupport" entryID="deep_standby"><screen module="Standby" screen="TryQuitMainloop">1</screen></item>
 			<item text="Shutdown" requires="!DeepstandbySupport" entryID="deep_standby"><screen module="Standby" screen="TryQuitMainloop">1</screen></item>
 		</menu>
