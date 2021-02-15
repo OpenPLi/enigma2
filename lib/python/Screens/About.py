@@ -48,9 +48,16 @@ class About(Screen):
 
 		AboutText += _("DVB driver version: ") + about.getDriverInstalledDate() + "\n"
 
-		GStreamerVersion = _("GStreamer version: ") + about.getGStreamerVersionString(cpu).replace("GStreamer","")
+		GStreamerVersion = _("Media player: GStreamer, version ") + about.getGStreamerVersionString().replace("GStreamer","")
 		self["GStreamerVersion"] = StaticText(GStreamerVersion)
-		AboutText += GStreamerVersion + "\n"
+
+		ffmpegVersion = _("Media player: ffmpeg, version ") + about.getffmpegVersionString()
+		self["ffmpegVersion"] = StaticText(ffmpegVersion)
+
+		if cpu.upper().startswith('HI') or os.path.isdir('/proc/hisi'):
+			AboutText += ffmpegVersion + "\n"
+		else:
+			AboutText += GStreamerVersion + "\n"
 
 		AboutText += _("Python version: ") + about.getPythonVersionString() + "\n"
 
