@@ -32,12 +32,13 @@ class InfoBarScreenSaver:
 	def ScreenSaverTimerStart(self):
 		time = int(config.usage.screen_saver.value)
 		flag = hasattr(self, "seekstate") and self.seekstate[0]
+		pip_show = hasattr(self.session, "pipshown") and self.session.pipshown
 		if not flag:
 			ref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
-			if ref and not (hasattr(self.session, "pipshown") and self.session.pipshown):
+			if ref and not pip_show:
 				ref = ref.toString().split(":")
 				flag = ref[2] == "2" or os.path.splitext(ref[10])[1].lower() in AUDIO_EXTENSIONS
-		if time and flag:
+		if time and flag and not pip_show:
 			self.screenSaverTimer.startLongTimer(time)
 		else:
 			self.screenSaverTimer.stop()
