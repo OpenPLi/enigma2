@@ -989,7 +989,7 @@ class NimManager:
 				nimList.remove(nim)
 		return nimList
 
-	def canDependOn(self, slotid, advanced_satposdepends=False):
+	def canDependOn(self, slotid, advanced_satposdepends=""):
 		type = self.getNimType(slotid)
 		type = type[:5] # DVB-S2X --> DVB-S, DVB-S2 --> DVB-S, DVB-T2 --> DVB-T, DVB-C2 --> DVB-C
 		nimList = self.getNimListOfType(type, slotid)
@@ -1012,7 +1012,8 @@ class NimManager:
 							break
 			if nimHaveRotor:
 				if advanced_satposdepends:
-					positionerList.append(nim)
+					if advanced_satposdepends == "all" or self.nim_slots[nim].isFBCRoot():
+						positionerList.append(nim)
 				else:
 					alreadyConnected = False
 					for testnim in nimList:
