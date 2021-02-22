@@ -7,7 +7,6 @@ from Components.Element import cached
 from Components.config import config
 from Tools.Transponder import ConvertToHumanReadable
 from Tools.GetEcmInfo import GetEcmInfo
-from Tools.Hex2strColor import Hex2strColor
 from Poll import Poll
 from skin import parameters
 
@@ -128,22 +127,22 @@ class PliExtraInfo(Poll, Converter):
 
 		for caid_entry in caid_data:
 			if int(caid_entry[0], 16) <= int(self.current_caid, 16) <= int(caid_entry[1], 16):
-				color = Hex2strColor(colors[0]) # green
+				color = "\c%08x" % colors[0] # green
 			else:
-				color = Hex2strColor(colors[2]) # grey
+				color = "\c%08x" % colors[2] # grey
 				try:
 					for caid in available_caids:
 						if int(caid_entry[0], 16) <= caid <= int(caid_entry[1], 16):
-							color = Hex2strColor(colors[1]) # yellow
+							color = "\c%08x" % colors[1] # yellow
 				except:
 					pass
 
-			if color != Hex2strColor(colors[2]) or caid_entry[4]:
+			if color != "\c%08x" % colors[2] or caid_entry[4]:
 				if res:
 					res += " "
 				res += color + caid_entry[3]
 
-		res += Hex2strColor(colors[3]) # white (this acts like a color "reset" for following strings
+		res += "\c%08x" % colors[3] # white (this acts like a color "reset" for following strings
 		return res
 
 	def createCryptoSpecial(self, info):

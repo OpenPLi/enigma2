@@ -3,7 +3,6 @@ from enigma import eDVBCI_UI, eLabel, iPlayableService
 from skin import parameters
 from Components.SystemInfo import SystemInfo
 from Components.VariableText import VariableText
-from Tools.Hex2strColor import Hex2strColor
 from os import popen
 
 class CiModuleControl(Renderer, VariableText):
@@ -51,17 +50,17 @@ class CiModuleControl(Renderer, VariableText):
 									string += ""
 									add_num = False
 								else:
-									string += Hex2strColor(self.colors[0]) # no module
+									string += "\c%08x" % self.colors[0] # no module
 							elif state == 1:
-								string += Hex2strColor(self.colors[1]) # init module
+								string += "\c%08x" % self.colors[1] # init module
 							elif state == 2:
-								string += Hex2strColor(self.colors[2]) # module ready
+								string += "\c%08x" % self.colors[2] # module ready
 						else:
 							if not self.allVisible:
 								string += ""
 								add_num = False
 							else:
-								string += Hex2strColor(self.colors[3]) # error
+								string += "\c%08x" % self.colors[3] # error
 						if add_num:
 							string += "%d" % (slot + 1)
 					if string:
