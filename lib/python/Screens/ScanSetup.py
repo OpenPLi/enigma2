@@ -113,7 +113,7 @@ cable_autoscan_nimtype = {
 'TURBO' : 'vuplus_turbo_c',
 'TURBO2' : 'vuplus_turbo2_c',
 'TT2L08' : 'tt2l08',
-'BCM3148' : 'bcm3148',
+'BCM3148' : 'bcm3148', #BCM3158/BCM3148 use the same bcm3148 utility 
 'BCM3158': 'bcm3148'
 }
 
