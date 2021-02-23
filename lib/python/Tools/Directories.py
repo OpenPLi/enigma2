@@ -127,11 +127,11 @@ def resolveFilename(scope, base="", path_prefix=None):
 		resolveList = [
 			os.path.join(defaultPaths[SCOPE_CONFIG][0], skin),
 			os.path.join(defaultPaths[SCOPE_CONFIG][0], "skin_common"),
-			defaultPaths[SCOPE_CONFIG][0],  # Can we deprecate top level of SCOPE_CONFIG directory to allow a clean up?
+			defaultPaths[SCOPE_CONFIG][0],
 			os.path.join(defaultPaths[SCOPE_SKIN][0], skin),
 			os.path.join(defaultPaths[SCOPE_SKIN][0], "skin_fallback_%d" % getDesktop(0).size().height()),
 			os.path.join(defaultPaths[SCOPE_SKIN][0], "skin_default"),
-			defaultPaths[SCOPE_SKIN][0]  # Can we deprecate top level of SCOPE_SKIN directory to allow a clean up?
+			defaultPaths[SCOPE_SKIN][0]
 		]
 		for item in resolveList:
 			file = os.path.join(item, base)
@@ -148,11 +148,11 @@ def resolveFilename(scope, base="", path_prefix=None):
 		resolveList = [
 			os.path.join(defaultPaths[SCOPE_CONFIG][0], "display", skin),
 			os.path.join(defaultPaths[SCOPE_CONFIG][0], "display", "skin_common"),
-			defaultPaths[SCOPE_CONFIG][0],  # Can we deprecate top level of SCOPE_CONFIG directory to allow a clean up?
+			defaultPaths[SCOPE_CONFIG][0],
 			os.path.join(defaultPaths[SCOPE_LCDSKIN][0], skin),
 			os.path.join(defaultPaths[SCOPE_LCDSKIN][0], "skin_fallback_%s" % getDesktop(1).size().height()),
 			os.path.join(defaultPaths[SCOPE_LCDSKIN][0], "skin_default"),
-			defaultPaths[SCOPE_LCDSKIN][0]  # Can we deprecate top level of SCOPE_LCDSKIN directory to allow a clean up?
+			defaultPaths[SCOPE_LCDSKIN][0]
 		]
 		for item in resolveList:
 			file = os.path.join(item, base)
@@ -166,13 +166,16 @@ def resolveFilename(scope, base="", path_prefix=None):
 		display = os.path.dirname(config.skin.display_skin.value) if hasattr(config.skin, "display_skin") else None
 		resolveList = [
 			os.path.join(defaultPaths[SCOPE_CONFIG][0], "fonts"),
+			os.path.join(defaultPaths[SCOPE_CONFIG][0], skin, "fonts"),
 			os.path.join(defaultPaths[SCOPE_CONFIG][0], skin)
 		]
 		if display:
 			resolveList.append(os.path.join(defaultPaths[SCOPE_CONFIG][0], "display", display))
 		resolveList.append(os.path.join(defaultPaths[SCOPE_CONFIG][0], "skin_common"))
-		resolveList.append(defaultPaths[SCOPE_CONFIG][0])  # Can we deprecate top level of SCOPE_CONFIG directory to allow a clean up?
+		resolveList.append(defaultPaths[SCOPE_CONFIG][0])
+		resolveList.append(os.path.join(defaultPaths[SCOPE_SKIN][0], skin, "fonts"))
 		resolveList.append(os.path.join(defaultPaths[SCOPE_SKIN][0], skin))
+		resolveList.append(os.path.join(defaultPaths[SCOPE_SKIN][0], "skin_default", "fonts"))
 		resolveList.append(os.path.join(defaultPaths[SCOPE_SKIN][0], "skin_default"))
 		if display:
 			resolveList.append(os.path.join(defaultPaths[SCOPE_LCDSKIN][0], display))
