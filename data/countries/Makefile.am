@@ -28,6 +28,7 @@ dist_install_DATA = \
 	lt.png \
 	lv.png \
 	missing.png \
+	mk.png \
 	nl.png \
 	no.png \
 	pl.png \
