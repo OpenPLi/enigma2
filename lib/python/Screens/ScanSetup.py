@@ -111,8 +111,9 @@ cable_autoscan_nimtype = {
 'SSH108' : 'ssh108',
 'TT3L10' : 'tt3l10',
 'TURBO' : 'vuplus_turbo_c',
+'TURBO2' : 'vuplus_turbo2_c',
 'TT2L08' : 'tt2l08',
-'BCM3148' : 'bcm3148',
+'BCM3148' : 'bcm3148', #BCM3158/BCM3148 use the same bcm3148 utility 
 'BCM3158': 'bcm3148'
 }
 
@@ -120,11 +121,13 @@ terrestrial_autoscan_nimtype = {
 'SSH108' : 'ssh108_t2_scan',
 'TT3L10' : 'tt3l10_t2_scan',
 'TURBO' : 'vuplus_turbo_t',
+'TURBO2' : 'vuplus_turbo2_t',
 'TT2L08' : 'tt2l08_t2_scan',
 'BCM3466' : 'bcm3466'
 }
 
 dual_tuner_list = ('TT3L10', 'BCM3466')
+vtuner_need_idx_list = ('TURBO2',)
 
 def GetDeviceId(filter, nim_idx):
 	socket_id = device_id = 0
@@ -143,6 +146,15 @@ def GetDeviceId(filter, nim_idx):
 		socket_id += 1
 	return device_id
 
+def getVtunerId(filter, nim_idx):
+	idx_count = 1
+	for slot in nimmanager.nim_slots:
+		if filter in slot.description:
+			if slot.slot == nim_idx:
+				return "--idx " + str(idx_count)
+			else:
+				idx_count += 1
+	return ""
 
 class CableTransponderSearchSupport:
 
@@ -239,6 +251,8 @@ class CableTransponderSearchSupport:
 					except Exception, err:
 						device_id = "--device=0"
 						print "[startCableTransponderSearch] GetCommand ->", err
+				elif nim_name in vtuner_need_idx_list:
+					device_id = getVtunerId(nim_name, nim_idx)
 				return "%s %s" % (cable_autoscan_nimtype[nim_name], device_id)
 			except Exception, err:
 				print "[startCableTransponderSearch] GetCommand ->", err
@@ -508,14 +522,16 @@ class TerrestrialTransponderSearchSupport:
 	def terrestrialTransponderGetCmd(self, nim_idx):
 		try:
 			device_id = ""
-			tunerName = nimmanager.getNimName(nim_idx).strip(':VTUNER').split(' ')[-1][4:-1]
-			if tunerName in dual_tuner_list:
+			nim_name = nimmanager.getNimName(nim_idx).strip(':VTUNER').split(' ')[-1][4:-1]
+			if nim_name in dual_tuner_list:
 				try:
-					device_id = "--device %s" % GetDeviceId(tunerName, nim_idx)
+					device_id = "--device %s" % GetDeviceId(nim_name, nim_idx)
 				except Exception, err:
 					device_id = "--device 0"
 					print "terrestrialTransponderGetCmd set device 0 ->", err
-			return "%s %s" % (terrestrial_autoscan_nimtype[tunerName], device_id)
+			elif nim_name in vtuner_need_idx_list:
+				device_id = getVtunerId(nim_name, nim_idx)
+			return "%s %s" % (terrestrial_autoscan_nimtype[nim_name], device_id)
 		except Exception, err:
 			print "terrestrialTransponderGetCmd ->", err
 		return ""
