@@ -337,28 +337,22 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		]
 		self.latvian = [
 			[
-				[u"", u"1", u"2", u"3", u"4", u"5", u"6", u"7", u"8", u"9", u"0", u"-", u"f", u"BACKSPACEICON"],
-				[u"FIRSTICON", u"\u016B", u"g", u"j", u"r", u"m", u"v", u"n", u"z", u"\u0113", u"\u010D", u"\u017E", u"h", u"\u0137"],
-				[u"LASTICON", u"\u0161", u"u", u"s", u"i", u"l", u"d", u"a", u"t", u"e", u"c", u"\u00B4", self.green, self.green],
-				[u"CAPSLOCKICON", u"\u0123", u"\u0146", u"b", u"\u012B", u"k", u"p", u"o", u"\u0101", u",", u".", u"\u013C", u"CAPSLOCKICON", u"CAPSLOCKICON"],
+				[u"`", u"1", u"2", u"3", u"4", u"5", u"6", u"7", u"8", u"9", u"0", u"-", u"=", u"BACKSPACEICON"],
+				[u"FIRSTICON", u"q", u"w", u"e", u"r", u"t", u"y", u"u", u"i", u"o", u"p", u"[", u"]", u"\\"],
+				[u"LASTICON", u"a", u"s", u"d", u"f", u"g", u"h", u"j", u"k", u"l", u";", u"'", self.green, self.green],
+				[u"CAPSLOCKICON", u"CAPSLOCKICON", u"z", u"x", u"c", u"v", u"b", u"n", u"m", u",", u".", u"/", u"CAPSLOCKICON", u"CAPSLOCKICON"],
 				self.footer
 			], [
-				[u"?", u"!", u"\u00AB", u"\u00BB", u"$", u"%", u"/", u"&", u"\u00D7", u"(", u")", u"_", u"F", u"BACKSPACEICON"],
-				[u"FIRSTICON", u"\u016A", u"G", u"J", u"R", u"M", u"V", u"N", u"Z", u"\u0112", u"\u010C", u"\u017D", u"H", u"\u0136"],
-				[u"LASTICON", u"\u0160", u"U", u"S", u"I", u"L", u"D", u"A", u"T", u"E", u"C", u"\u00B0", self.green, self.green],
-				[u"CAPSLOCKICON", u"\u0122", u"\u0145", u"B", u"\u012A", u"K", u"P", u"O", u"\u0100", u";", u":", u"\u013B", u"CAPSLOCKICON", u"CAPSLOCKICON"],
+				[u"~", u"!", u"@", u"#", u"$", u"%", u"^", u"&", u"*", u"(", u")", u"_", u"+", u"BACKSPACEICON"],
+				[u"FIRSTICON", u"Q", u"W", u"E", u"R", u"T", u"Y", u"U", u"I", u"O", u"P", u"{", u"}", u"|"],
+				[u"LASTICON", u"A", u"S", u"D", u"F", u"G", u"H", u"J", u"K", u"L", u":", u"\"", self.green, self.green],
+				[u"CAPSLOCKICON", u"CAPSLOCKICON", u"Z", u"X", u"C", u"V", u"B", u"N", u"M", u"<", u">", u"?", u"CAPSLOCKICON", u"CAPSLOCKICON"],
 				self.footer
 			], [
-				[u"", u"\u00AB", u"", u"", u"\u20AC", u"\"", u"'", u"", u":", u"", u"", u"\u2013", u"=", u"BACKSPACEICON"],
-				[u"FIRSTICON", u"q", u"\u0123", u"", u"\u0157", u"w", u"y", u"", u"", u"", u"", u"[", u"]", u""],
-				[u"LASTICON", u"", u"", u"", u"", u"", u"", u"", u"", u"\u20AC", u"", u"\u00B4", self.green, self.green],
-				[u"CAPSLOCKICON", u"\\", u"", u"x", u"", u"\u0137", u"", u"\u00F5", u"", u"<", u">", u"", u"CAPSLOCKICON", u"CAPSLOCKICON"],
-				self.footer
-			], [
-				[u"", u"", u"@", u"#", u"$", u"~", u"^", u"\u00B1", u"", u"", u"", u"\u2014", u";", u"BACKSPACEICON"],
-				[u"FIRSTICON", u"Q", u"\u0122", u"", u"\u0156", u"W", u"Y", u"", u"", u"", u"", u"{", u"}", u""],
-				[u"LASTICON", u"", u"", u"", u"", u"", u"", u"", u"", u"", u"", u"\u00A8", self.green, self.green],
-				[u"CAPSLOCKICON", u"|", u"", u"X", u"", u"\u0136", u"", u"\u00D5", u"", u"", u"", u"", u"CAPSLOCKICON", u"CAPSLOCKICON"],
+				[u"\u00b4", u"\u00b9", u"\u00b2", u"\u00b3", u"\u20ac", u"\u00bd", u"\u00be", u"\u007b", u"\u005b", u"\u005d", u"\u007d ", u"\u005c", u"\u2013", u"BACKSPACEICON"],
+				[u"FIRSTICON", u"q", u"\u0113", u"\u0112", u"\u0157", u"\u0156", u"\u016B", u"\u016A", u"\u012B", u"\u012A", u"\u014D", u"\u014C", u"\u00ab", u"\u00bb"],
+				[u"LASTICON", u"\u0101", u"\u0100", u"\u0161", u"\u0160", u"\u0123", u"\u0122", u"\u0137", u"\u0136", u"\u013C", u"\u013B", u"\u003b", self.green, self.green],
+				[u"CAPSLOCKICON", u"CAPSLOCKICON", u"\u017E", u"\u017D", u"\u010D", u"\u010C", u"b", u"\u0146", u"\u0145", u"\u0060", u"\u00b7", u"\u002f", u"CAPSLOCKICON", u"CAPSLOCKICON"],
 				self.footer
 			]
 		]
@@ -473,9 +467,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 			"de_CH": [_("German"), _("Switzerland"), self.germanSwiss(self.german)],
 			"el_GR": [_("Greek"), _("Greece"), self.greek],
 			"hu_HU": [_("Hungarian"), _("Hungary"), self.hungarian(self.german)],
-			"lv_01": [_("Latvian"), _("Alternative 1"), self.latvianStandard(self.english)],
-			"lv_02": [_("Latvian"), _("Alternative 2"), self.latvian],
-			"lv_LV": [_("Latvian"), _("Latvia"), self.latvianQWERTY(self.english)],
+			"lv_LV": [_("Latvian"), _("Latvia"), self.latvian],
 			"lt_LT": [_("Lithuanian"), _("Lithuania"), self.lithuanian(self.english)],
 			"nb_NO": [_("Norwegian"), _("Norway"), self.norwegian(self.scandinavian)],
 			"fa_IR": [_("Persian"), _("Iran, Islamic Republic"), self.persian(self.english)],
@@ -723,33 +715,6 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 			[u"FIRSTICON", u"\\", u"|", u"\u00C4", u"", u"", u"", u"\u20AC", u"\u00CD", u"", u"", u"\u00F7", u"\u00D7", u"\u00A4"],
 			[u"LASTICON", u"\u00E4", u"\u0111", u"\u0110", u"[", u"]", u"", u"\u00ED", u"\u0142", u"\u0141", u"$", u"\u00DF", self.green, self.green],
 			[u"CAPSLOCKICON", u"<", u">", u"#", u"&", u"@", u"{", u"}", u"<", u";", u">", u"*", u"CAPSLOCKICON", u"CAPSLOCKICON"],
-			self.footer
-		])
-		return keyList
-
-	def latvianQWERTY(self, base):
-		keyList = self.latvianStandard(base)
-		keyList[0][1][13] = u"\u00B0"
-		keyList[2][1][9] = u"\u00F5"
-		keyList[3][1][9] = u"\u00D5"
-		return keyList
-
-	def latvianStandard(self, base):
-		keyList = deepcopy(base)
-		keyList[0][3][1] = u"\\"
-		keyList[1][3][1] = u"|"
-		keyList.append([
-			[u"", u"", u"\u00AB", u"\u00BB", u"\u20AC", u"", u"\u2019", u"", u"", u"", u"", u"\u2013", u"", u"BACKSPACEICON"],
-			[u"FIRSTICON", u"", u"", u"\u0113", u"\u0157", u"", u"", u"\u016B", u"\u012B", u"\u014D", u"", u"", u"", u""],
-			[u"LASTICON", u"\u0101", u"\u0161", u"", u"", u"\u0123", u"", u"", u"\u0137", u"\u013C", u"", u"\u00B4", self.green, self.green],
-			[u"CAPSLOCKICON", u"", u"\u017E", u"", u"\u010D", u"", u"", u"\u0146", u"", u"", u"", u"", u"CAPSLOCKICON", u"CAPSLOCKICON"],
-			self.footer
-		])
-		keyList.append([
-			[u"", u"", u"", u"", u"\u00A7", u"\u00B0", u"", u"\u00B1", u"\u00D7", u"", u"", u"\u2014", u"", u"BACKSPACEICON"],
-			[u"FIRSTICON", u"", u"", u"\u0112", u"\u0156", u"", u"", u"\u016A", u"\u012A", u"\u014C", u"", u"", u"", u""],
-			[u"LASTICON", u"\u0100", u"\u0160", u"", u"", u"\u0122", u"", u"", u"\u0136", u"\u013B", u"", u"\u00A8", self.green, self.green],
-			[u"CAPSLOCKICON", u"", u"\u017D", u"", u"\u010C", u"", u"", u"\u0145", u"", u"", u"", u"", u"CAPSLOCKICON", u"CAPSLOCKICON"],
 			self.footer
 		])
 		return keyList
