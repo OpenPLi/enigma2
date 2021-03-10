@@ -362,12 +362,12 @@ static int savePNGto(FILE *fp, gPixmap *pixmap)
 	return 0;
 }
 
-int loadSVG(ePtr<gPixmap> &result, const char *filename, int accel)
+int loadSVG(ePtr<gPixmap> &result, const char *filename, int accel, int cached)
 {
 	result = nullptr;
 
-        if (pixmapFromTable(result, filename) == 0)
-                return 0;
+	if (cached && (result = PixmapCache::Get(filename)))
+		return 0;
 
 	// load svg
 	NSVGimage *image = nullptr;
@@ -392,7 +392,7 @@ int loadSVG(ePtr<gPixmap> &result, const char *filename, int accel)
 	w = image->width*scale;
 	h = image->height*scale;
 
-	result = new gPixmap(w, h, 32, pixmapDisposed, accel);
+	result = new gPixmap(w, h, 32, cached ? PixmapCache::PixmapDisposed : NULL, accel);
 	if (result == nullptr)
 	{
 		nsvgDeleteRasterizer(rast);
@@ -404,7 +404,8 @@ int loadSVG(ePtr<gPixmap> &result, const char *filename, int accel)
 	// Rasterizes SVG image, returns RGBA image (non-premultiplied alpha)
 	nsvgRasterize(rast, image, 0, 0, scale, (unsigned char*)result->surface->data, w, h, w*4);
 
-	pixmapToTable(result, filename);
+	if (cached)
+		PixmapCache::Set(filename, result);
 
 	nsvgDeleteRasterizer(rast);
 	nsvgDelete(image);
