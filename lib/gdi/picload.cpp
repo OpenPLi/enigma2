@@ -580,7 +580,7 @@ static void svg_load(Cfilepara* filepara, bool forceRGB = false)
 		{
 			return;
 		}
-		for (size_t i=0; i<w*h; i++)
+		for (int i=0; i<w*h; i++)
 		{
 			pic_buffer2[3*i]   = pic_buffer[4*i];
 			pic_buffer2[3*i+1] = pic_buffer[4*i+1];
