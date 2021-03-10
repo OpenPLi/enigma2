@@ -39,7 +39,10 @@ void ePixmap::setPixmapFromFile(const char *filename)
 {
 	if(endsWith(filename, ".svg"))
 	{
-		loadSVG(m_pixmap, filename, m_scale);
+		if (m_scale)
+			loadSVG(m_pixmap, filename, false, false, size().width(), size().height());
+		else
+			loadSVG(m_pixmap, filename);
 	}
 	else
 	{
