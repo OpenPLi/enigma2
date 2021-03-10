@@ -362,7 +362,7 @@ static int savePNGto(FILE *fp, gPixmap *pixmap)
 	return 0;
 }
 
-int loadSVG(ePtr<gPixmap> &result, const char *filename, int accel, int cached, int height, int width)
+int loadSVG(ePtr<gPixmap> &result, const char *filename, int cached, int height, int width)
 {
 	result = nullptr;
 
@@ -399,7 +399,7 @@ int loadSVG(ePtr<gPixmap> &result, const char *filename, int accel, int cached, 
 		height = image->height;
 	}
 
-	result = new gPixmap(width, height, 32, cached ? PixmapCache::PixmapDisposed : NULL, accel);
+	result = new gPixmap(width, height, 32, cached ? PixmapCache::PixmapDisposed : NULL);
 	if (result == nullptr)
 	{
 		nsvgDeleteRasterizer(rast);
