@@ -11,13 +11,13 @@ def LoadPixmap(path, desktop=None, cached=None):
 		# don't cache unless caller explicity requests caching
 		ptr = loadJPG(path, 1 if cached == True else 0)
 	elif path[-4:] == ".svg":
-		ptr = loadSVG(path)
+		ptr = loadSVG(path, 0, 0 if cached == False else 1)
 	elif path[-1:] == ".":
 		# caching mechanism isn't suitable for multi file images, so it's explicitly disabled
 		alpha = loadPNG(path + "a.png", 0, 0)
 		ptr = loadJPG(path + "rgb.jpg", alpha, 0)
 	else:
-		raise Exception("neither .png nor .jpg, please fix file extension")
+		raise Exception("Neither .png nor .jpg nor .svg, please fix file extension")
 	if ptr and desktop:
 		desktop.makeCompatiblePixmap(ptr)
 	return ptr
