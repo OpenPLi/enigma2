@@ -206,7 +206,9 @@ void nsvgDelete(NSVGimage* image);
 #define NSVG_ALIGN_SLICE 2
 
 #define NSVG_NOTUSED(v) do { (void)(1 ? (void)0 : ( (void)(v) ) ); } while(0)
-#define NSVG_RGB(r, g, b) ((static_cast<unsigned int>(r)) | (static_cast<unsigned int>(g) << 8) | (static_cast<unsigned int>(b) << 16))
+// I don't know why but in enigma need to swap red and blue color
+// #define NSVG_RGB(r, g, b) ((static_cast<unsigned int>(r)) | (static_cast<unsigned int>(g) << 8) | (static_cast<unsigned int>(b) << 16))
+#define NSVG_RGB(r, g, b) ((static_cast<unsigned int>(b)) | (static_cast<unsigned int>(g) << 8) | (static_cast<unsigned int>(r) << 16))
 
 #ifdef _MSC_VER
 	#pragma warning (disable: 4996) // Switch off security warnings
