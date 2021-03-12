@@ -561,7 +561,7 @@ static void svg_load(Cfilepara* filepara, bool forceRGB = false)
 		return;
 	}
 
-	eDebug("[ePicLoad] svg_load max %dx%d from %dx%d scale %f new %dx%d", filepara->max_x, filepara->max_y, (int)image->width, (int)image->height, scale, w, h);
+	eDebug("[ePicLoad] svg_load %s size %dx%d from %dx%d scale %f", filepara->file, filepara->max_x, filepara->max_y, (int)image->width, (int)image->height, scale);
 	// Rasterizes SVG image, returns RGBA image (non-premultiplied alpha)
 	nsvgRasterize(rast, image, 0, 0, scale, pic_buffer, w, h, w*4);
 
