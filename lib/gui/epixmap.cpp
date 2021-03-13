@@ -1,3 +1,4 @@
+#include <lib/base/wrappers.h>
 #include <lib/gui/epixmap.h>
 #include <lib/gdi/epng.h>
 #include <lib/gui/ewidgetdesktop.h>
@@ -36,11 +37,21 @@ void ePixmap::setPixmap(ePtr<gPixmap> &pixmap)
 
 void ePixmap::setPixmapFromFile(const char *filename)
 {
-	loadPNG(m_pixmap, filename, m_scale);
+	if(endsWith(filename, ".svg"))
+	{
+		if (m_scale)
+			loadSVG(m_pixmap, filename, false, size().width(), size().height());
+		else
+			loadSVG(m_pixmap, filename);
+	}
+	else
+	{
+		loadPNG(m_pixmap, filename, m_scale);
+	}
 
 	if (!m_pixmap)
 	{
-		eDebug("[ePixmap] setPixmapFromFile: loadPNG failed");
+		eDebug("[ePixmap] setPixmapFromFile: load %s failed", filename);
 		return;
 	}
 

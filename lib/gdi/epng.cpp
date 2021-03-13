@@ -11,6 +11,9 @@ extern "C" {
 #include <jpeglib.h>
 }
 
+#include <nanosvg.h>
+#include <nanosvgrast.h>
+
 /* TODO: I wonder why this function ALWAYS returns 0 */
 int loadPNG(ePtr<gPixmap> &result, const char *filename, int accel, int cached)
 {
@@ -356,6 +359,64 @@ static int savePNGto(FILE *fp, gPixmap *pixmap)
 
 	png_write_end(png_ptr, info_ptr);
 	png_destroy_write_struct(&png_ptr, &info_ptr);
+	return 0;
+}
+
+int loadSVG(ePtr<gPixmap> &result, const char *filename, int cached, int height, int width)
+{
+	result = nullptr;
+
+	if (cached && (result = PixmapCache::Get(filename)))
+		return 0;
+
+	// load svg
+	NSVGimage *image = nullptr;
+	NSVGrasterizer *rast = nullptr;
+	double xscale = 1.0;
+	double yscale = 1.0;
+
+	image = nsvgParseFromFile(filename, "px", 96.0);
+	if (image == nullptr)
+	{
+		return 0;
+	}
+
+	rast = nsvgCreateRasterizer();
+	if (rast == nullptr)
+	{
+		nsvgDelete(image);
+		return 0;
+	}
+
+	if (height > 0 && width > 0)
+	{
+		xscale = ((double) width) / image->width;
+		yscale = ((double) height) / image->height;
+	}
+	else
+	{
+		width = image->width;
+		height = image->height;
+	}
+
+	result = new gPixmap(width, height, 32, cached ? PixmapCache::PixmapDisposed : NULL);
+	if (result == nullptr)
+	{
+		nsvgDeleteRasterizer(rast);
+		nsvgDelete(image);
+		return 0;
+	}
+
+	eDebug("[ePNG] loadSVG %s=%dx%d", filename, width, height);
+	// Rasterizes SVG image, returns RGBA image (non-premultiplied alpha)
+	nsvgRasterizeFull(rast, image, 0, 0, xscale, yscale, (unsigned char*)result->surface->data, width, height, width * 4);
+
+	if (cached)
+		PixmapCache::Set(filename, result);
+
+	nsvgDeleteRasterizer(rast);
+	nsvgDelete(image);
+
 	return 0;
 }
 
