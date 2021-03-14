@@ -313,8 +313,8 @@ class RemoteControlType(Screen, ConfigListScreen):
 			("20", _("Zgemma Star S/2S/H1/H2")),
 			("21", _("Zgemma H.S/H.2S/H.2H/H5/H7(old model)")),
 			("25", _("Zgemma H9(old model)/I55Plus")),
-			("27", _("HD60")),
-			("28", _("Zgemma H7(new model)/H9(new model)/H9COMBO/H9TWIN/H10"))
+			("27", _("HD60/Multibox/Multibox SE")),
+			("28", _("I55SE/H7(new model)/H9(new model)/H9COMBO/H9TWIN/H9SE/H9COMBOSE/H10"))
 		]
 
 	defaultRcList = [
@@ -344,6 +344,8 @@ class RemoteControlType(Screen, ConfigListScreen):
 			("hd1100", 16),
 			("hd2400", 19),
 			("hd60", 27),
+			("multibox", 27),
+			("multiboxse", 27),
 			("et7000mini", 16),
 			("et7000", 16),
 			("et7500", 16),
@@ -351,6 +353,10 @@ class RemoteControlType(Screen, ConfigListScreen):
 			("sh1", 20),
 			("h3", 21),
 			("h5", 21),
+			("h9se", 28),
+			("h9combo", 28),
+			("h9combose", 28),
+			("i55se", 28),
 			("h7", 28), # new model /old 21
 			("h9", 28), # new model /old 25
 			("h9combo", 28),
