@@ -9,6 +9,7 @@
 #include <dvbsi++/linkage_descriptor.h>
 #include <dvbsi++/component_descriptor.h>
 #include <dvbsi++/content_descriptor.h>
+#include <dvbsi++/content_identifier_descriptor.h>
 #include <dvbsi++/parental_rating_descriptor.h>
 #include <dvbsi++/descriptor_tag.h>
 #include <dvbsi++/pdc_descriptor.h>
@@ -137,11 +138,37 @@ bool eServiceEvent::loadLanguage(Event *evt, const std::string &lang, int tsidon
 					for (ContentClassificationConstIterator it = con->begin(); it != con->end(); ++it)
 					{
 						eGenreData data;
-				                data.m_level1 = (*it)->getContentNibbleLevel1();
+						data.m_level1 = (*it)->getContentNibbleLevel1();
 						data.m_level2 = (*it)->getContentNibbleLevel2();
 						data.m_user1  = (*it)->getUserNibble1();
 						data.m_user2  = (*it)->getUserNibble2();
 						m_genres.push_back(data);
+					}
+					break;
+				}
+				case CONTENT_IDENTIFIER_DESCRIPTOR:
+				{
+					auto cid = (ContentIdentifierDescriptor *)*desc;
+					auto cril = cid->getIdentifier();
+					for (auto it = cril->begin(); it != cril->end(); ++it)
+					{
+						auto crid = std::string((const char*)(*it)->getBytes()->data(), (*it)->getLength());
+						switch ((*it)->getType())
+						{
+							case 0x01:
+							case 0x31:
+								m_episode_crid = crid;
+								break;
+							case 0x02:
+							case 0x32:
+								m_series_crid = crid;
+								break;
+							case 0x03:
+								break;
+							default:
+								eDebug("[Event] Unrecognised crid type %d %s", (*it)->getType(), crid.c_str());
+								break;
+						}
 					}
 					break;
 				}
