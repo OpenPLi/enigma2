@@ -24,7 +24,7 @@ def onMountpointAdded(mountpoint):
 		path = os.path.join(mountpoint, 'picon') + '/'
 		if os.path.isdir(path) and path not in searchPaths:
 			for fn in os.listdir(path):
-				if fn.endswith('.png'):
+				if fn.endswith('.png') or fn.endswith('.svg'):
 					print "[Picon] adding path:", path
 					searchPaths.append(path)
 					break
@@ -49,16 +49,18 @@ def onPartitionChange(why, part):
 def findPicon(serviceName):
 	global lastPiconPath
 	if lastPiconPath is not None:
-		pngname = lastPiconPath + serviceName + ".png"
-		if pathExists(pngname):
-			return pngname
+		for ext in ('.png', '.svg'):
+			pngname = lastPiconPath + serviceName + ext
+			if pathExists(pngname):
+				return pngname
 	global searchPaths
 	for path in searchPaths:
 		if pathExists(path):
-			pngname = path + serviceName + ".png"
-			if pathExists(pngname):
-				lastPiconPath = path
-				return pngname
+			for ext in ('.png', '.svg'):
+				pngname = path + serviceName + ext
+				if pathExists(pngname):
+					lastPiconPath = path
+					return pngname
 	return ""
 
 def getPiconName(serviceRef):
