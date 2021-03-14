@@ -353,7 +353,7 @@ class RemoteControlType(Screen, ConfigListScreen):
 			("sh1", 20),
 			("h3", 21),
 			("h5", 21),
-			"h9se", 28),
+			("h9se", 28),
 			("h9combo", 28),
 			("h9combose", 28),
 			("i55se", 28),
