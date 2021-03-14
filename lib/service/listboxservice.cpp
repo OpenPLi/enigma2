@@ -1,3 +1,4 @@
+#include <lib/base/wrappers.h>
 #include <lib/service/listboxservice.h>
 #include <lib/service/service.h>
 #include <lib/gdi/font.h>
@@ -894,7 +895,12 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 							{
 								std::string piconFilename = PyString_AS_STRING(pRet);
 								if (!piconFilename.empty())
-									loadPNG(piconPixmap, piconFilename.c_str());
+								{
+									if (endsWith(piconFilename, ".svg"))
+										loadSVG(piconPixmap, piconFilename.c_str());
+									else
+										loadPNG(piconPixmap, piconFilename.c_str());
+								}
 							}
 							Py_DECREF(pRet);
 						}
