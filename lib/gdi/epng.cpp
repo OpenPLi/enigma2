@@ -395,8 +395,8 @@ int loadSVG(ePtr<gPixmap> &result, const char *filename, int cached, int height,
 	}
 	else
 	{
-		width = image->width;
-		height = image->height;
+		width = (int)image->width;
+		height = (int)image->height;
 	}
 
 	result = new gPixmap(width, height, 32, cached ? PixmapCache::PixmapDisposed : NULL, -1);
@@ -409,7 +409,7 @@ int loadSVG(ePtr<gPixmap> &result, const char *filename, int cached, int height,
 
 	eDebug("[ePNG] loadSVG %s %dx%d from %dx%d", filename, width, height, (int)image->width, (int)image->height);
 	// Rasterizes SVG image, returns RGBA image (non-premultiplied alpha)
-	nsvgRasterizeFull(rast, image, 0, 0, xscale, yscale, (unsigned char*)result->surface->data, width, height, width * 4);
+	nsvgRasterizeFull(rast, image, 0, 0, xscale, yscale, (unsigned char*)result->surface->data, width, height, width * 4, 1);
 
 	if (cached)
 		PixmapCache::Set(filename, result);
