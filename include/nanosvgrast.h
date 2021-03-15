@@ -68,7 +68,7 @@ void nsvgRasterize(NSVGrasterizer* r,
 
 void nsvgRasterizeFull(NSVGrasterizer* r, NSVGimage* image,
 						double tx, double ty, double scalex, double scaley,
-						unsigned char* dst, int w, int h, int stride);
+						unsigned char* dst, int w, int h, int stride, int bgr);
 
 // Deletes rasterizer context.
 void nsvgDeleteRasterizer(NSVGrasterizer*);
@@ -1271,6 +1271,66 @@ static void nsvg__unpremultiplyAlpha(unsigned char* image, int w, int h, int str
 }
 
 
+static void nsvg__unpremultiplyBGRAlpha(unsigned char* image, int w, int h, int stride)
+{
+	int x,y;
+
+	// Unpremultiply
+	for (y = 0; y < h; y++) {
+		unsigned char *row = &image[y*stride];
+		for (x = 0; x < w; x++) {
+			int b = row[0], g = row[1], r = row[2], a = row[3];
+			if (a != 0) {
+				row[0] = static_cast<unsigned char>(r*255/a);
+				row[1] = static_cast<unsigned char>(g*255/a);
+				row[2] = static_cast<unsigned char>(b*255/a);
+			}
+			row += 4;
+		}
+	}
+
+	// Defringe
+	for (y = 0; y < h; y++) {
+		unsigned char *row = &image[y*stride];
+		for (x = 0; x < w; x++) {
+			int r = 0, g = 0, b = 0, a = row[3], n = 0;
+			if (a == 0) {
+				if (x-1 > 0 && row[-1] != 0) {
+					b += row[-4];
+					g += row[-3];
+					r += row[-2];
+					n++;
+				}
+				if (x+1 < w && row[7] != 0) {
+					b += row[4];
+					g += row[5];
+					r += row[6];
+					n++;
+				}
+				if (y-1 > 0 && row[-stride+3] != 0) {
+					b += row[-stride];
+					g += row[-stride+1];
+					r += row[-stride+2];
+					n++;
+				}
+				if (y+1 < h && row[stride+3] != 0) {
+					b += row[stride];
+					g += row[stride+1];
+					r += row[stride+2];
+					n++;
+				}
+				if (n > 0) {
+					row[0] = static_cast<unsigned char>(b/n);
+					row[1] = static_cast<unsigned char>(g/n);
+					row[2] = static_cast<unsigned char>(r/n);
+				}
+			}
+			row += 4;
+		}
+	}
+}
+
+
 static void nsvg__initPaint(NSVGcachedPaint* cache, NSVGpaint* paint, double opacity)
 {
 	int i, j;
@@ -1331,46 +1391,10 @@ static void nsvg__initPaint(NSVGcachedPaint* cache, NSVGpaint* paint, double opa
 
 }
 
-/*
-static void dumpEdges(NSVGrasterizer* r, const char* name)
-{
-	double xmin = 0, xmax = 0, ymin = 0, ymax = 0;
-	NSVGedge *e = nullptr;
-	int i;
-	if (r->nedges == 0) return;
-	FILE* fp = fopen(name, "w");
-	if (fp == nullptr) return;
-	xmin = xmax = r->edges[0].x0;
-	ymin = ymax = r->edges[0].y0;
-	for (i = 0; i < r->nedges; i++) {
-		e = &r->edges[i];
-		xmin = nsvg__minf(xmin, e->x0);
-		xmin = nsvg__minf(xmin, e->x1);
-		xmax = nsvg__maxf(xmax, e->x0);
-		xmax = nsvg__maxf(xmax, e->x1);
-		ymin = nsvg__minf(ymin, e->y0);
-		ymin = nsvg__minf(ymin, e->y1);
-		ymax = nsvg__maxf(ymax, e->y0);
-		ymax = nsvg__maxf(ymax, e->y1);
-	}
-	fprintf(fp, "<svg viewBox=\"%f %f %f %f\" xmlns=\"http://www.w3.org/2000/svg\">", xmin, ymin, (xmax - xmin), (ymax - ymin));
-	for (i = 0; i < r->nedges; i++) {
-		e = &r->edges[i];
-		fprintf(fp ,"<line x1=\"%f\" y1=\"%f\" x2=\"%f\" y2=\"%f\" style=\"stroke:#000;\" />", e->x0,e->y0, e->x1,e->y1);
-	}
-	for (i = 0; i < r->npoints; i++) {
-		if (i+1 < r->npoints)
-			fprintf(fp ,"<line x1=\"%f\" y1=\"%f\" x2=\"%f\" y2=\"%f\" style=\"stroke:#f00;\" />", r->points[i].x, r->points[i].y, r->points[i+1].x, r->points[i+1].y);
-		fprintf(fp ,"<circle cx=\"%f\" cy=\"%f\" r=\"1\" style=\"fill:%s;\" />", r->points[i].x, r->points[i].y, r->points[i].flags == 0 ? "#f00" : "#0f0");
-	}
-	fprintf(fp, "</svg>");
-	fclose(fp);
-}
-*/
 
 void nsvgRasterizeFull(NSVGrasterizer* r,
 				   NSVGimage* image, double tx, double ty, double scalex, double scaley,
-				   unsigned char* dst, int w, int h, int stride)
+				   unsigned char* dst, int w, int h, int stride, int bgr)
 {
 	NSVGshape *shape = nullptr;
 	NSVGedge *e = nullptr;
@@ -1447,7 +1471,10 @@ void nsvgRasterizeFull(NSVGrasterizer* r,
 		}
 	}
 
-	nsvg__unpremultiplyAlpha(dst, w, h, stride);
+	if (bgr)
+		nsvg__unpremultiplyBGRAlpha(dst, w, h, stride);
+	else
+		nsvg__unpremultiplyAlpha(dst, w, h, stride);
 
 	r->bitmap = nullptr;
 	r->width = 0;
@@ -1459,7 +1486,7 @@ void nsvgRasterize(NSVGrasterizer* r,
 					NSVGimage* image, double tx, double ty, double scale,
 					unsigned char* dst, int w, int h, int stride)
 {
-	return nsvgRasterizeFull(r, image, tx, ty, scale, scale, dst, w, h, stride);
+	return nsvgRasterizeFull(r, image, tx, ty, scale, scale, dst, w, h, stride, 0);
 }
 
 #endif
