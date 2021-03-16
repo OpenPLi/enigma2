@@ -635,9 +635,6 @@ class AttributeParser:
 		value = True if value.lower() in ("1", "enabled", "enablewraparound", "on", "true", "yes") else False
 		self.guiObject.setWrapAround(value)
 
-	def itemHeight(self, value):
-		self.guiObject.setItemHeight(int(value))
-
 	def pointer(self, value):
 		(name, pos) = value.split(":")
 		pos = parsePosition(pos, self.scaleTuple)
