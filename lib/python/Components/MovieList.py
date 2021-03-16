@@ -10,7 +10,7 @@ from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import SCOPE_CURRENT_SKIN, resolveFilename
 from Screens.LocationBox import defaultInhibitDirs
 import NavigationInstance
-from skin import parseColor, parseFont, parseScale
+from skin import parseScale
 
 from enigma import eListboxPythonMultiContent, eListbox, gFont, iServiceInformation, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, eServiceReference, eServiceCenter, eTimer, RT_VALIGN_CENTER
 
@@ -255,7 +255,7 @@ class MovieList(GUIComponent):
 		def warningWrongSkinParameter(string):
 			print "[MovieList] wrong '%s' skin parameters" % string
 		def fontName(value):
-			self.fontName = parseFont(value, ((1,1),(1,1)))
+			self.fontName = value
 		def fontSizesOriginal(value):
 			self.fontSizesOriginal = map(int, value.split(","))
 			if len(self.fontSizesOriginal) != 3:
@@ -273,27 +273,27 @@ class MovieList(GUIComponent):
 			if len(self.itemHeights) != 3:
 				warningWrongSkinParameter(attrib)
 		def pbarShift(value):
-			self.pbarShift = int(value)
+			self.pbarShift = parseScale(value)
 		def pbarHeight(value):
-			self.pbarHeight = int(value)
+			self.pbarHeight = parseScale(value)
 		def pbarLargeWidth(value):
-			self.pbarLargeWidth = int(value)
+			self.pbarLargeWidth = parseScale(value)
 		def partIconeShiftMinimal(value):
-			self.partIconeShiftMinimal = int(value)
+			self.partIconeShiftMinimal = parseScale(value)
 		def partIconeShiftCompact(value):
-			self.partIconeShiftCompact = int(value)
+			self.partIconeShiftCompact = parseScale(value)
 		def partIconeShiftOriginal(value):
-			self.partIconeShiftOriginal = int(value)
+			self.partIconeShiftOriginal = parseScale(value)
 		def spaceIconeText(value):
 			self.spaceIconeText = int(value)
 		def iconsWidth(value):
 			self.iconsWidth = parseScale(value)
 		def trashShift(value):
-			self.trashShift = int(value)
+			self.trashShift = parseScale(value)
 		def dirShift(value):
-			self.dirShift = int(value)
+			self.dirShift = parseScale(value)
 		def spaceRight(value):
-			self.spaceRight = int(value)
+			self.spaceRight = parseScale(value)
 		def columnsOriginal(value):
 			self.columnsOriginal = map(int, value.split(","))
 			if len(self.columnsOriginal) != 2:
@@ -303,9 +303,9 @@ class MovieList(GUIComponent):
 			if len(self.columnsCompactDescription) != 3:
 				warningWrongSkinParameter(attrib)
 		def compactColumn(value):
-			self.compactColumn = int(value)
+			self.compactColumn = parseScale(value)
 		def treeDescription(value):
-			self.treeDescription = int(value)
+			self.treeDescription = parseScale(value)
 		for (attrib, value) in self.skinAttributes[:]:
 			try:
 				locals().get(attrib)(value)
