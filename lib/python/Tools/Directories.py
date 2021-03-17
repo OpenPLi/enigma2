@@ -102,6 +102,19 @@ def resolveFilename(scope, base="", path_prefix=None):
 		base = data[0]
 		suffix = data[1]
 	path = base
+
+	def itemExists(resolveList, base):
+		baseList = [base]
+		if base.endswith(".png"):
+			baseList.append("%s%s" % (base[:-3], "svg"))
+		if base.endswith(".svg"):
+			baseList.append("%s%s" % (base[:-3], "png"))
+		for item in resolveList:
+			for base in baseList:
+				file = os.path.join(item, base)
+				if pathExists(file):
+					return file
+
 	# If base is "" then set path to the scope.  Otherwise use the scope to resolve the base filename.
 	if base is "":
 		path, flags = defaultPaths.get(scope)
@@ -133,11 +146,9 @@ def resolveFilename(scope, base="", path_prefix=None):
 			os.path.join(defaultPaths[SCOPE_SKIN][0], "skin_default"),
 			defaultPaths[SCOPE_SKIN][0]
 		]
-		for item in resolveList:
-			file = os.path.join(item, base)
-			if pathExists(file):
-				path = file
-				break
+		file = itemExists(resolveList, base)
+		if file:
+			path = file
 	elif scope == SCOPE_CURRENT_LCDSKIN:
 		# This import must be here as this module finds the config file as part of the config initialisation.
 		from Components.config import config
@@ -154,11 +165,9 @@ def resolveFilename(scope, base="", path_prefix=None):
 			os.path.join(defaultPaths[SCOPE_LCDSKIN][0], "skin_default"),
 			defaultPaths[SCOPE_LCDSKIN][0]
 		]
-		for item in resolveList:
-			file = os.path.join(item, base)
-			if pathExists(file):
-				path = file
-				break
+		file = itemExists(resolveList, base)
+		if file:
+			path = file
 	elif scope == SCOPE_FONTS:
 		# This import must be here as this module finds the config file as part of the config initialisation.
 		from Components.config import config
