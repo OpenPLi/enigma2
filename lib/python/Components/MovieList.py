@@ -257,19 +257,19 @@ class MovieList(GUIComponent):
 		def fontName(value):
 			self.fontName = value
 		def fontSizesOriginal(value):
-			self.fontSizesOriginal = map(int, value.split(","))
+			self.fontSizesOriginal = map(parseScale, value.split(","))
 			if len(self.fontSizesOriginal) != 3:
 				warningWrongSkinParameter(attrib)
 		def fontSizesCompact(value):
-			self.fontSizesCompact = map(int, value.split(","))
+			self.fontSizesCompact = map(parseScale, value.split(","))
 			if len(self.fontSizesCompact) != 2:
 				warningWrongSkinParameter(attrib)
 		def fontSizesMinimal(value):
-			self.fontSizesMinimal = map(int, value.split(","))
+			self.fontSizesMinimal = map(parseScale, value.split(","))
 			if len(self.fontSizesMinimal) != 2:
 				warningWrongSkinParameter(attrib)
 		def itemHeights(value):
-			self.itemHeights = map(int, value.split(","))
+			self.itemHeights = map(parseScale, value.split(","))
 			if len(self.itemHeights) != 3:
 				warningWrongSkinParameter(attrib)
 		def pbarShift(value):
@@ -285,7 +285,7 @@ class MovieList(GUIComponent):
 		def partIconeShiftOriginal(value):
 			self.partIconeShiftOriginal = parseScale(value)
 		def spaceIconeText(value):
-			self.spaceIconeText = int(value)
+			self.spaceIconeText = parseScale(value)
 		def iconsWidth(value):
 			self.iconsWidth = parseScale(value)
 		def trashShift(value):
@@ -295,11 +295,11 @@ class MovieList(GUIComponent):
 		def spaceRight(value):
 			self.spaceRight = parseScale(value)
 		def columnsOriginal(value):
-			self.columnsOriginal = map(int, value.split(","))
+			self.columnsOriginal = map(parseScale, value.split(","))
 			if len(self.columnsOriginal) != 2:
 				warningWrongSkinParameter(attrib)
 		def columnsCompactDescription(value):
-			self.columnsCompactDescription = map(int, value.split(","))
+			self.columnsCompactDescription = map(parseScale, value.split(","))
 			if len(self.columnsCompactDescription) != 3:
 				warningWrongSkinParameter(attrib)
 		def compactColumn(value):
