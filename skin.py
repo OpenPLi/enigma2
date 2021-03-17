@@ -414,15 +414,9 @@ class AttributeParser:
 			print("[Skin] Attribute '%s' with wrong (or unknown) value '%s' in object of type '%s'!" % (attrib, value, self.guiObject.__class__.__name__))
 
 	def applyAll(self, attrs):
-		pixmap_value = None
+		attrs.sort(key=lambda a: {"pixmap": 1}.get(a[0], 0))  # For svg pixmap scale required the size, so sort pixmap last
 		for attrib, value in attrs:
-			# For pixmap scale required the size of the widget, so apply pixmap last
-			if attrib == 'pixmap':
-				pixmap_value = value
-			else:
-				self.applyOne(attrib, value)
-		if pixmap_value:
-			self.applyOne('pixmap', pixmap_value)
+			self.applyOne(attrib, value)
 
 	def conditional(self, value):
 		pass
