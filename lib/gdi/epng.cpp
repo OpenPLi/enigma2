@@ -362,7 +362,7 @@ static int savePNGto(FILE *fp, gPixmap *pixmap)
 	return 0;
 }
 
-int loadSVG(ePtr<gPixmap> &result, const char *filename, int cached, int height, int width)
+int loadSVG(ePtr<gPixmap> &result, const char *filename, int cached, int width, int height)
 {
 	result = nullptr;
 
