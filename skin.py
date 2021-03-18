@@ -355,13 +355,13 @@ def parseParameter(s):
 	else:  # Integer.
 		return int(s)
 
-def loadPixmap(path, desktop, size=None):
+def loadPixmap(path, desktop, width=0, height=0):
 	option = path.find("#")
 	if option != -1:
 		path = path[:option]
 	if rc_model.rcIsDefault() is False and basename(path) in ("rc.png", "rc0.png", "rc1.png", "rc2.png", "oldrc.png"):
 		path = rc_model.getRcImg()
-	pixmap = LoadPixmap(path, desktop, None, size)
+	pixmap = LoadPixmap(path, desktop, None, width, height)
 	if pixmap is None:
 		raise SkinError("Pixmap file '%s' not found" % path)
 	return pixmap
@@ -475,7 +475,7 @@ class AttributeParser:
 		self.guiObject.setItemHeight(int(value))
 
 	def pixmap(self, value):
-		self.guiObject.setPixmap(loadPixmap(value, self.desktop, self.guiObject.size()))
+		self.guiObject.setPixmap(loadPixmap(value, self.desktop, self.guiObject.size().width(), self.guiObject.size().height()))
 
 	def backgroundPixmap(self, value):
 		self.guiObject.setBackgroundPicture(loadPixmap(value, self.desktop))
