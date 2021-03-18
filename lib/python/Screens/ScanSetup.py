@@ -430,7 +430,7 @@ class TerrestrialTransponderSearchSupport:
 							tmpstr += title
 					self.terrestrial_search_session["text"].setText(tmpstr)
 		else:
-			self.terrestrial_search_data += str
+			self.terrestrial_search_data = str
 
 	def setTerrestrialTransponderData(self):
 		data = self.terrestrial_search_data.split()
@@ -438,11 +438,12 @@ class TerrestrialTransponderSearchSupport:
 #			print "[setTerrestrialTransponderData] data : ", data
 			if data[0] == 'OK':
 				# DVB-T : OK frequency bandwidth delivery system -1
+				# DVB-T2:  OK frequency bandwidth delivery system -1 ( when binary returns "system == 2" but does not return plp data )
 				# DVB-T2 : OK frequency bandwidth delivery system number_of_plp plp_id0:plp_type0
-				if data[3] == 1: # DVB-T
+				if len(data) < 6: # DVB-T, or DVB-T2 with no plp data
 					parm = eDVBFrontendParametersTerrestrial()
 					parm.frequency = int(data[1])
-					parm.bandwidth = int(data[2])
+					parm.bandwidth = self.terrestrialTransponderconvBandwidth_P(int(data[2]))
 					parm.inversion = parm.Inversion_Unknown
 					parm.code_rate_HP = parm.FEC_Auto
 					parm.code_rate_LP = parm.FEC_Auto
@@ -450,7 +451,7 @@ class TerrestrialTransponderSearchSupport:
 					parm.transmission_mode = parm.TransmissionMode_Auto
 					parm.guard_interval = parm.GuardInterval_Auto
 					parm.hierarchy = parm.Hierarchy_Auto
-					parm.system = parm.System_DVB_T
+					parm.system = parm.System_DVB_T if int(data[3]) == 1 else parm.System_DVB_T2
 					parm.plp_id = 0
 					self.__tlist.append(parm)
 				else:
@@ -1500,7 +1501,7 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 		elif action == SEARCH_TERRESTRIAL2_TRANSPONDERS:
 			self.flags = flags
 			self.feid = index_to_scan
-			self.tlist = tlist
+			self.tlist = []
 			self.startTerrestrialTransponderSearch(self.feid, nimmanager.getTerrestrialDescription(self.feid))
 
 	def setCableTransponderSearchResult(self, tlist):
@@ -1513,8 +1514,7 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 			self.startScan(self.tlist, self.flags, self.feid)
 
 	def setTerrestrialTransponderSearchResult(self, tlist):
-		if tlist is not None:
-			self.tlist.extend(tlist)
+		self.tlist = tlist
 
 	def terrestrialTransponderSearchFinished(self):
 		if self.tlist is None:
