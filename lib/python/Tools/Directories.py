@@ -107,7 +107,7 @@ def resolveFilename(scope, base="", path_prefix=None):
 		baseList = [base]
 		if base.endswith(".png"):
 			baseList.append("%s%s" % (base[:-3], "svg"))
-		if base.endswith(".svg"):
+		elif base.endswith(".svg"):
 			baseList.append("%s%s" % (base[:-3], "png"))
 		for item in resolveList:
 			for base in baseList:
