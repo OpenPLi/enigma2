@@ -260,6 +260,8 @@ class ParentalControl:
 
 	def setHideFlag(self, ref, flag):
 		if TYPE_BOUQUET in ref:
+			if "alternatives" in ref:
+				return
 			ref = ref.split(":")
 			ref[1], ref[9] = '519', '1'
 			ref_remove = eServiceReference(":".join(ref))
