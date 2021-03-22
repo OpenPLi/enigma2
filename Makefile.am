@@ -2,12 +2,6 @@ SUBDIRS = include lib main data po tools
 
 ACLOCAL_AMFLAGS = -I m4
 
-installdir = $(pkglibdir)/python
-install_PYTHON = \
-	Navigation.py NavigationInstance.py RecordTimer.py ServiceReference.py \
-	keyids.py keymapparser.py Bootstrap.py Startup.py skin.py timer.py GlobalActions.py \
-	e2reactor.py
-
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = enigma2.pc
 

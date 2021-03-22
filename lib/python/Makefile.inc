@@ -17,9 +17,6 @@ pythoninclude_HEADERS = \
 nodist_python_libenigma_python_a_SOURCES = \
 	python/enigma_python.cpp
 
-noinst_PYTHON += \
-	python/enigma_py_patcher.py
-
 EXTRA_DIST += \
 	python/enigma_python.i \
 	python/python_service.i \
@@ -34,7 +31,8 @@ EXTRA_DIST += \
 .i.cpp:
 	$(AM_V_GEN)$(SWIG) $(AX_SWIG_PYTHON_OPT) -MT $@ -MD -MF $(DEPDIR)/$*.Tpo -I$(top_srcdir) -O -nortti -nothreads -o $@ $<
 	$(AM_V_at)mv -f $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Pcpp
-	$(AM_V_at)$(PYTHON) $(srcdir)/python/enigma_py_patcher.py python/enigma.py
+	$(AM_V_at)sed -i 's/_ENUMS\([(),]\)/\1/g' python/enigma.py
+# more details about why the sed transform is needed can be found in lib/service/iservice.h
 
 python/enigma.py: python/enigma_python.cpp
 
