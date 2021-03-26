@@ -362,14 +362,13 @@ static int savePNGto(FILE *fp, gPixmap *pixmap)
 	return 0;
 }
 
-int loadSVG(ePtr<gPixmap> &result, const char *filename, int cached, int width, int height)
+int loadSVG(ePtr<gPixmap> &result, const char *filename, int cached, int width, int height, float scale)
 {
 	result = nullptr;
 
 	if (cached && (result = PixmapCache::Get(filename)))
 		return 0;
 
-	// load svg
 	NSVGimage *image = nullptr;
 	NSVGrasterizer *rast = nullptr;
 	double xscale = 1.0;
@@ -402,6 +401,13 @@ int loadSVG(ePtr<gPixmap> &result, const char *filename, int cached, int width, 
 	{
 		xscale = yscale;
 		width = (int)(image->width * xscale);
+	}
+	else if (scale > 0)
+	{
+		xscale = (double) scale;
+		yscale = (double) scale;
+		width = (int)(image->width * scale);
+		height = (int)(image->height * scale);
 	}
 	else
 	{
