@@ -56,6 +56,19 @@ class TransponderInfo(Converter, object):
 
 	text = property(getText)
 
+	@cached
+	def getBoolean(self):
+		# finds "DVB-S", "DVB-S2", "DVB-T", "DVB-T2", "DVB-C", "ATSC", "Stream"  or combinations of these,
+		# e.g. <convert type="TransponderInfo">DVB-S;DVB-S2</convert> to return True for either.
+		s = self.getText()
+		# get the first group of characters, and, convert to lower case
+		s = s and s.strip().split() and s.strip().split()[0].lower()
+		# only populated entries, and, convert to lower case
+		t = self.type and [x.lower() for x in self.type if x]
+		return s and t and s in t
+	
+	boolean = property(getBoolean)
+
 	def rootBouquet(self):
 		servicelist = Screens.InfoBar.InfoBar.instance.servicelist
 		epg_bouquet = servicelist and servicelist.getRoot()
