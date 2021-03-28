@@ -65,7 +65,7 @@ class TransponderInfo(Converter, object):
 		s = s and s.strip().split() and s.strip().split()[0].lower()
 		# only populated entries, and, convert to lower case
 		t = self.type and [x.lower() for x in self.type if x]
-		return s and t and s in t
+		return bool(s and t and s in t)
 	
 	boolean = property(getBoolean)
 
