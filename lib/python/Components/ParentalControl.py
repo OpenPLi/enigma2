@@ -60,7 +60,7 @@ class ParentalControl:
 		self.getConfigValues()
 
 	def serviceMethodWrapper(self, service, method, *args):
-		if "FROM BOUQUET" in service:
+		if TYPE_BOUQUET in service:
 			method( service, TYPE_BOUQUET, *args)
 			servicelist = self.readServicesFromBouquet(service, "C")
 			for ref in servicelist:
@@ -260,7 +260,7 @@ class ParentalControl:
 
 	def setHideFlag(self, ref, flag):
 		if TYPE_BOUQUET in ref:
-			if "alternatives" in ref:
+			if "alternatives" in ref or TYPE_BOUQUETSERVICE in self.blacklist[ref]:
 				return
 			ref = ref.split(":")
 			ref[1], ref[9] = '519', '1'
