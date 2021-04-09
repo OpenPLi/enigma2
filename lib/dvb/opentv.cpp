@@ -224,7 +224,7 @@ uint16_t OpenTvTitle::getEventId(void) const
 	return eventId;
 }
 
-uint16_t OpenTvTitle::getDuration(void) const
+uint32_t OpenTvTitle::getDuration(void) const
 {
 	return duration;
 }
