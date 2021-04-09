@@ -970,7 +970,9 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				except:
 					check = self.can_default
 			if check(item):
-				if userDefinedButtons[name].value != "sort":
+				if item and isTrashFolder(item[0]) and userDefinedButtons[name].value == 'delete':
+					self['key_%s' % name].setText(_("Empty Trash"))
+				elif userDefinedButtons[name].value != "sort":
 					self['key_%s' % name].setText(userDefinedActions[userDefinedButtons[name].value])
 			else:
 				self["key_%s" % name].setText("")
