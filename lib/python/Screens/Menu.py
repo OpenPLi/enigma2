@@ -290,7 +290,7 @@ class Menu(Screen, ProtectedScreen):
 			self.list.sort(key=lambda x: int(x[3]))
 
 		if config.usage.menu_show_numbers.value in ("menu&plugins", "menu") or showNumericHelp:
-			self.list = [(str(x[0] + 1) + " " +x[1][0], x[1][1], x[1][2]) for x in enumerate(self.list)]
+			self.list = [(str(x[0] + 1) + " " + x[1][0], x[1][1], x[1][2]) for x in enumerate(self.list)]
 
 		self["menu"].updateList(self.list)
 

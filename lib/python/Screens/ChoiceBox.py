@@ -49,7 +49,7 @@ class ChoiceBox(Screen):
 				for x in self.__keys:
 					if (not x or x.isdigit()) and number <= 10:
 						new_keys.append(str(number % 10))
-						number+=1
+						number += 1
 					else:
 						new_keys.append(not x.isdigit() and x or "")
 				self.__keys = new_keys
@@ -133,7 +133,7 @@ class ChoiceBox(Screen):
 		self["list"].instance.resize(enigma.eSize(*(wsizex, offset)))
 		# center window
 		width,height = enigma.getDesktop(0).size().width(), enigma.getDesktop(0).size().height()
-		self.instance.move(enigma.ePoint((width - wsizex)/2,(height - wsizey)/2))
+		self.instance.move(enigma.ePoint((width - wsizex) / 2,(height - wsizey) / 2))
 
 	def keyLeft(self):
 		pass
@@ -212,7 +212,7 @@ class ChoiceBox(Screen):
 		pos = 0
 		summarytext = ""
 		for entry in self.summarylist:
-			if curpos-2 < pos < curpos+5:
+			if curpos - 2 < pos < curpos + 5:
 				if pos == curpos:
 					summarytext += ">"
 					self["summary_selection"].setText(entry[1])

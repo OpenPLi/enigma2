@@ -78,7 +78,7 @@ class FrontendInfo(Converter):
 						continue
 					if string and len(nimmanager.nim_slots) <= self.space_for_tuners_with_spaces:
 						string += " "
-					string += color + chr(ord("A")+n.slot)
+					string += color + chr(ord("A") + n.slot)
 			return string
 		if self.type == self.USE_TUNERS_STRING:
 			string = ""

@@ -2,7 +2,7 @@
 from Components.Converter.Converter import Converter
 from enigma import iServiceInformation, iPlayableService, iPlayableServicePtr, eServiceCenter
 from Components.Element import cached
-from ServiceReference import resolveAlternate,  ServiceReference
+from ServiceReference import resolveAlternate, ServiceReference
 from Tools.Transponder import ConvertToHumanReadable
 import Screens.InfoBar
 
@@ -40,13 +40,13 @@ class TransponderInfo(Converter, object):
 				transponderdata["system"] = transponderraw.get("tuner_type", "None")
 			try:
 				if "DVB-T" in transponderdata["system"]:
-					return "%s %s-%s %s %d MHz %s" % (transponderdata["system"], tsid, onid, transponderdata["channel"], transponderdata["frequency"]/1000000 + 0.5, transponderdata["bandwidth"])
+					return "%s %s-%s %s %d MHz %s" % (transponderdata["system"], tsid, onid, transponderdata["channel"], transponderdata["frequency"] / 1000000 + 0.5, transponderdata["bandwidth"])
 				elif "DVB-C" in transponderdata["system"]:
-					return "%s %s-%s %d MHz %d %s %s" % (transponderdata["system"], tsid, onid, transponderdata["frequency"]/1000 + 0.5, transponderdata["symbol_rate"]/1000 + 0.5, transponderdata["fec_inner"],
+					return "%s %s-%s %d MHz %d %s %s" % (transponderdata["system"], tsid, onid, transponderdata["frequency"] / 1000 + 0.5, transponderdata["symbol_rate"] / 1000 + 0.5, transponderdata["fec_inner"],
 						transponderdata["modulation"])
 				elif "ATSC" in transponderdata["system"]:
-					return "%s %s-%s %d MHz %s" % (transponderdata["system"], tsid, onid, transponderdata["frequency"]/1000 + 0.5, transponderdata["modulation"])
-				return "%s %s-%s %d %s %d %s %s %s" % (transponderdata["system"], tsid, onid, transponderdata["frequency"]/1000 + 0.5, transponderdata["polarization_abbreviation"], transponderdata["symbol_rate"]/1000 + 0.5,
+					return "%s %s-%s %d MHz %s" % (transponderdata["system"], tsid, onid, transponderdata["frequency"] / 1000 + 0.5, transponderdata["modulation"])
+				return "%s %s-%s %d %s %d %s %s %s" % (transponderdata["system"], tsid, onid, transponderdata["frequency"] / 1000 + 0.5, transponderdata["polarization_abbreviation"], transponderdata["symbol_rate"] / 1000 + 0.5,
 					transponderdata["fec_inner"], transponderdata["modulation"], transponderdata["detailed_satpos" in self.type and "orbital_position" or "orb_pos"])
 			except:
 				return ""

@@ -120,7 +120,7 @@ class TitleList(Screen, HelpableScreen):
 		self.checkBackgroundJobs()
 		if self.backgroundJob:
 			j = self.backgroundJob
-			menu.append(("%s: %s (%d%%)" % (j.getStatustext(), j.name, int(100*j.progress/float(j.end))), self.showBackgroundJob))
+			menu.append(("%s: %s (%d%%)" % (j.getStatustext(), j.name, int(100 * j.progress / float(j.end))), self.showBackgroundJob))
 		menu.append((_("DVD media toolbox"), self.toolbox))
 		if self.project.settings.output.getValue() == "dvd":
 			if len(self["titles"].list):
@@ -250,7 +250,7 @@ class TitleList(Screen, HelpableScreen):
 		self.updateTitleList()
 
 	def loadTemplate(self):
-		filename = resolveFilename(SCOPE_PLUGINS)+"Extensions/DVDBurn/DreamboxDVD.ddvdp.xml"
+		filename = resolveFilename(SCOPE_PLUGINS) + "Extensions/DVDBurn/DreamboxDVD.ddvdp.xml"
 		if self.project.load(filename):
 			self["error_label"].setText("")
 			return True
@@ -307,9 +307,9 @@ class TitleList(Screen, HelpableScreen):
 			self["title_label"].text = _("Please add titles to the compilation.")
 
 	def updateSize(self):
-		size = self.project.size/(1024*1024)
-		MAX_DL = self.project.MAX_DL-100
-		MAX_SL = self.project.MAX_SL-100
+		size = self.project.size / (1024 * 1024)
+		MAX_DL = self.project.MAX_DL - 100
+		MAX_SL = self.project.MAX_SL - 100
 		print "updateSize:", size, "MAX_DL:", MAX_DL, "MAX_SL:", MAX_SL
 		if size > MAX_DL:
 			percent = 100 * size / float(MAX_DL)

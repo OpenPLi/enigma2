@@ -272,8 +272,8 @@ class PositionerSetup(Screen):
 	def OrbToStr(self, orbpos):
 		if orbpos > 1800:
 			orbpos = 3600 - orbpos
-			return "%d.%d\xc2\xb0 W" % (orbpos/10, orbpos%10)
-		return "%d.%d\xc2\xb0 E" % (orbpos/10, orbpos%10)
+			return "%d.%d\xc2\xb0 W" % (orbpos / 10, orbpos % 10)
+		return "%d.%d\xc2\xb0 E" % (orbpos / 10, orbpos % 10)
 
 	def setDishOrbosValue(self):
 		if self.getRotorMovingState():
@@ -618,7 +618,7 @@ class PositionerSetup(Screen):
 						available_orbos = True
 						menu.append((_("Yes (save index in setup tuner)"), "save"))
 				index = int(self.positioner_storage.value)
-				text =  _("Really store at index %2d for current position?") % index
+				text = _("Really store at index %2d for current position?") % index
 				def saveAction(choice):
 					if choice:
 						if choice[1] in ("yes", "save"):
@@ -941,7 +941,7 @@ class PositionerSetup(Screen):
 		self.lock_count = 0.0
 		self.stat_count = 0
 		self.low_rate_adapter_count = 0
-		self.max_count = max(int((time * 1000 + self.UPDATE_INTERVAL / 2)/ self.UPDATE_INTERVAL), 1)
+		self.max_count = max(int((time * 1000 + self.UPDATE_INTERVAL / 2) / self.UPDATE_INTERVAL), 1)
 		self.collectingStatistics = True
 		self.dataAvailable.clear()
 		self.dataAvailable.wait()

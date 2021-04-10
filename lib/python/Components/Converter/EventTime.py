@@ -17,7 +17,7 @@ class EventTime(Poll, Converter, object):
 			self.type = self.ENDTIME
 		elif type == "Remaining":
 			self.type = self.REMAINING
-			self.poll_interval = 60*1000
+			self.poll_interval = 60 * 1000
 			self.poll_enabled = True
 		elif type == "StartTime":
 			self.type = self.STARTTIME
@@ -25,7 +25,7 @@ class EventTime(Poll, Converter, object):
 			self.type = self.DURATION
 		elif type == "Progress":
 			self.type = self.PROGRESS
-			self.poll_interval = 30*1000
+			self.poll_interval = 30 * 1000
 			self.poll_enabled = True
 		else:
 			raise ElementError("'%s' is not <StartTime|EndTime|Remaining|Duration|Progress> for EventTime converter" % type)

@@ -116,4 +116,4 @@ class MultiPixmap(Pixmap):
 			if len(self.pixmaps) > x:
 				self.instance.setPixmap(self.pixmaps[x])
 			else:
-				print "setPixmapNum(%d) failed! defined pixmaps:" %(x), self.pixmaps
+				print "setPixmapNum(%d) failed! defined pixmaps:" % (x), self.pixmaps

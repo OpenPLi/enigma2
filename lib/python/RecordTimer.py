@@ -318,7 +318,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 			description = self.description
 			if self.repeated:
 				epgcache = eEPGCache.getInstance()
-				queryTime = self.begin+(self.end-self.begin)/2
+				queryTime = self.begin + (self.end - self.begin) / 2
 				evt = epgcache.lookupEventTime(rec_ref, queryTime)
 				if evt:
 					if self.rename_repeat:
@@ -556,7 +556,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 			old_end = self.end
 			self.ts_dialog = None
 			if self.setAutoincreaseEnd():
-				self.log(12, "autoincrease recording %d minute(s)" % int((self.end - old_end)/60))
+				self.log(12, "autoincrease recording %d minute(s)" % int((self.end - old_end) / 60))
 				self.state -= 1
 				return True
 			self.log_tuner(12, "stop")
@@ -582,7 +582,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 		if not self.autoincrease:
 			return False
 		if entry is None:
-			new_end =  int(time()) + self.autoincreasetime
+			new_end = int(time()) + self.autoincreasetime
 		else:
 			new_end = entry.begin - 30
 
@@ -646,7 +646,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 						if choice in ("save", "save_movie"):
 							ts = self.InfoBarInstance.getTimeshift()
 							if ts and ts.isTimeshiftEnabled():
-								if choice =="save_movie":
+								if choice == "save_movie":
 									self.InfoBarInstance.save_timeshift_in_movie_dir = True
 								self.InfoBarInstance.save_timeshift_file = True
 								ts.saveTimeshiftFile()
