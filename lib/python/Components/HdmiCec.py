@@ -206,7 +206,7 @@ class HdmiCec:
 			address = 0x0f # use broadcast address
 			cmd = 0x85
 		elif message == "getpowerstatus":
-			self.useStandby = True;
+			self.useStandby = True
 			address = 0x0f # use broadcast address => boxes will send info
 			cmd = 0x8f
 
@@ -418,7 +418,8 @@ class HdmiCec:
 			self.volumeForwardingEnabled = False
 
 	def keyEvent(self, keyCode, keyEvent):
-		if not self.volumeForwardingEnabled: return
+		if not self.volumeForwardingEnabled:
+			return
 		cmd = 0
 		data = ''
 		if keyEvent == 0:
@@ -520,6 +521,8 @@ class HdmiCec:
 		log_path = config.hdmicec.log_path.value
 		path = os.path.join(log_path, LOGFILE)
 		if pathExists(log_path):
-			fp=file(path,'a');fp.write(output);fp.close()
+			fp=file(path,'a')
+			fp.write(output)
+			fp.close()
 
 hdmi_cec = HdmiCec()

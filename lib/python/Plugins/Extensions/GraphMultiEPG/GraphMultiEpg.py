@@ -416,7 +416,7 @@ class EPGList(GUIComponent):
 		width = esize.width()
 		height = esize.height()
 		if self.showServiceTitle:
-			w = width / 10 * 2;
+			w = width / 10 * 2
 		else:     # if self.showPicon:    # this must be set if showServiceTitle is None
 			w = 2 * height - 2 * self.serviceBorderVerWidth  # FIXME: could do better...
 		self.number_width = self.showChannelNumber and 'FROM BOUQUET' in self.epg_bouquet.toString() and getTextBoundarySize(self.instance, self.serviceFont, self.instance.size(), "0000" if config.usage.alternative_number_mode.value else "00000").width() + 2 * self.serviceBorderVerWidth or 0
@@ -432,10 +432,10 @@ class EPGList(GUIComponent):
 	def calcEntryPosAndWidthHelper(self, stime, duration, start, end, width):
 		xpos = (stime - start) * width / (end - start)
 		ewidth = (stime + duration - start) * width / (end - start)
-		ewidth -= xpos;
+		ewidth -= xpos
 		if xpos < 0:
-			ewidth += xpos;
-			xpos = 0;
+			ewidth += xpos
+			xpos = 0
 		if (xpos + ewidth) > width:
 			ewidth = width - xpos
 		return xpos, ewidth
@@ -657,7 +657,7 @@ class EPGList(GUIComponent):
 			elif dir == -3: #prev day
 				self.offs -= 60 * 24 / self.time_epoch
 				if self.offs < 0:
-					self.offs = 0;
+					self.offs = 0
 				self.fillMultiEPG(None) # refill
 				return True
 		if cur_service and valid_event:
@@ -737,7 +737,7 @@ class TimelineText(GUIComponent):
 		GUIComponent.__init__(self)
 		self.l = eListboxPythonMultiContent()
 		self.l.setSelectionClip(eRect(0, 0, 0, 0))
-		self.l.setItemHeight(25);
+		self.l.setItemHeight(25)
 		self.foreColor = 0xffc000
 		self.backColor = 0x000000
 		self.time_base = 0
@@ -1140,7 +1140,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 		text = _("Select action")
 		event = self["list"].getCurrent()[0]
 		if event:
-			menu = [(p.name, boundFunction(self.runPlugin, p)) for p in plugins.getPlugins(where = PluginDescriptor.WHERE_EVENTINFO) \
+			menu = [(p.name, boundFunction(self.runPlugin, p)) for p in plugins.getPlugins(where = PluginDescriptor.WHERE_EVENTINFO)
 				if 'selectedevent' in p.__call__.func_code.co_varnames]
 			if menu:
 				text += ": %s" % event.getEventName()

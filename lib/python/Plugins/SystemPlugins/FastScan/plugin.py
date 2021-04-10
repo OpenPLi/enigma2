@@ -172,7 +172,7 @@ class FastScanScreen(ConfigListScreen, Screen):
 				self.scan_nims = ConfigSelection(default=lastConfiguration[0] if lastConfiguration and lastConfiguration[0] in [x[0] for x in nimList] else nimList[0][0], choices=nimList)
 				self.tunerEntry = getConfigListEntry(_("Tuner"), self.scan_nims)
 
-		providerList = getProviderList();
+		providerList = getProviderList()
 		if lastConfiguration and lastConfiguration[1] in providerList:
 			self.scan_provider = ConfigSelection(default=lastConfiguration[1], choices=[(None, _("None"))] + providerList)
 			self.scan_provider.addNotifier(providerChanged)
