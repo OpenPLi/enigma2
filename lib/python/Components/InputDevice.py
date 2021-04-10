@@ -12,14 +12,14 @@ IOC_SIZEBITS = 13L if "mips" in platform.machine() else 14L
 IOC_DIRBITS = 3L if "mips" in platform.machine() else 2L
 
 IOC_NRSHIFT = 0L
-IOC_TYPESHIFT = IOC_NRSHIFT+IOC_NRBITS
-IOC_SIZESHIFT = IOC_TYPESHIFT+IOC_TYPEBITS
-IOC_DIRSHIFT = IOC_SIZESHIFT+IOC_SIZEBITS
+IOC_TYPESHIFT = IOC_NRSHIFT + IOC_NRBITS
+IOC_SIZESHIFT = IOC_TYPESHIFT + IOC_TYPEBITS
+IOC_DIRSHIFT = IOC_SIZESHIFT + IOC_SIZEBITS
 
 IOC_READ = 2L
 
 def EVIOCGNAME(length):
-	return (IOC_READ<<IOC_DIRSHIFT)|(length<<IOC_SIZESHIFT)|(0x45<<IOC_TYPESHIFT)|(0x06<<IOC_NRSHIFT)
+	return (IOC_READ << IOC_DIRSHIFT) | (length << IOC_SIZESHIFT) | (0x45 << IOC_TYPESHIFT) | (0x06 << IOC_NRSHIFT)
 
 
 class inputDevices:
@@ -34,7 +34,7 @@ class inputDevices:
 
 		for evdev in devices:
 			try:
-				buffer = "\0"*512
+				buffer = "\0" * 512
 				self.fd = os.open("/dev/input/" + evdev, os.O_RDWR | os.O_NONBLOCK)
 				self.name = ioctl(self.fd, EVIOCGNAME(256), buffer)
 				self.name = self.name[:self.name.find("\0")]

@@ -201,7 +201,7 @@ class AudioSelection(Screen, ConfigListScreen):
 
 				elif x[0] == 1:
 					description = "teletext"
-					number = "%x%02x" %(x[3] and x[3] or 8, x[2])
+					number = "%x%02x" % (x[3] and x[3] or 8, x[2])
 
 				elif x[0] == 2:
 					types = (_("unknown"), _("embedded"), _("SSA file"), _("ASS file"),
@@ -217,7 +217,7 @@ class AudioSelection(Screen, ConfigListScreen):
 
 			conflist.append(getConfigListEntry(_("To audio selection"), self.settings.menupage))
 
-			if self.infobar.selected_subtitle and self.infobar.selected_subtitle != (0,0,0,0)  and not ".DVDPlayer'>" in `self.infobar`:
+			if self.infobar.selected_subtitle and self.infobar.selected_subtitle != (0,0,0,0) and not ".DVDPlayer'>" in `self.infobar`:
 				self["key_blue"].setBoolean(True)
 				conflist.append(getConfigListEntry(_("Subtitle Quickmenu"), ConfigNothing()))
 
@@ -283,7 +283,7 @@ class AudioSelection(Screen, ConfigListScreen):
 				elif self.settings.menupage.getValue() == PAGE_SUBTITLES and self.infobar.selected_subtitle and self.infobar.selected_subtitle != (0,0,0,0):
 					self.session.open(QuickSubtitlesConfigMenu, self.infobar)
 		if self.focus == FOCUS_STREAMS and self["streams"].count() and config == False:
-			self["streams"].setIndex(self["streams"].count()-1)
+			self["streams"].setIndex(self["streams"].count() - 1)
 
 	def keyRed(self):
 		if self["key_red"].getBoolean():
@@ -320,14 +320,14 @@ class AudioSelection(Screen, ConfigListScreen):
 			if self["streams"].getIndex() == 0:
 				self["config"].instance.setSelectionEnable(True)
 				self["streams"].style = "notselected"
-				self["config"].setCurrentIndex(len(self["config"].getList())-1)
+				self["config"].setCurrentIndex(len(self["config"].getList()) - 1)
 				self.focus = FOCUS_CONFIG
 			else:
 				self["streams"].selectPrevious()
 
 	def keyDown(self):
 		if self.focus == FOCUS_CONFIG:
-			if self["config"].getCurrentIndex() < len(self["config"].getList())-1:
+			if self["config"].getCurrentIndex() < len(self["config"].getList()) - 1:
 				self["config"].instance.moveSelection(self["config"].instance.moveDown)
 			else:
 				self["config"].instance.setSelectionEnable(False)
@@ -347,7 +347,7 @@ class AudioSelection(Screen, ConfigListScreen):
 
 	def keyNumberGlobal(self, number):
 		if number <= len(self["streams"].list):
-			self["streams"].setIndex(number-1)
+			self["streams"].setIndex(number - 1)
 			self.keyOk()
 
 	def keyOk(self):
@@ -477,7 +477,7 @@ class QuickSubtitlesConfigMenu(ConfigListScreen, Screen):
 
 	def layoutFinished(self):
 		if not self["videofps"].text:
-			self.instance.resize(eSize(self.instance.size().width(), self["config"].l.getItemSize().height()*len(self["config"].getList()) + 10))
+			self.instance.resize(eSize(self.instance.size().width(), self["config"].l.getItemSize().height() * len(self["config"].getList()) + 10))
 
 	def changedEntry(self):
 		if self["config"].getCurrent() in [getConfigMenuItem("config.subtitles.pango_subtitles_delay"),getConfigMenuItem("config.subtitles.pango_subtitles_fps")]:
@@ -494,7 +494,7 @@ class QuickSubtitlesConfigMenu(ConfigListScreen, Screen):
 			return ""
 		fps = info.getInfo(iServiceInformation.sFrameRate)
 		if fps > 0:
-			return "%6.3f" % (fps/1000.)
+			return "%6.3f" % (fps / 1000.)
 		return ""
 
 	def cancel(self):

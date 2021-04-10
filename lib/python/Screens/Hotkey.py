@@ -44,7 +44,7 @@ class hotkey:
 		("Help", "displayHelp", ""),
 		("Help" + " " + _("long"), "displayHelp_long", ""),
 		("Subtitle", "subtitle", ""),
-		("Subtitle"+ " " + _("long"), "subtitle_long", ""),
+		("Subtitle" + " " + _("long"), "subtitle_long", ""),
 		("Menu", "mainMenu", ""),
 		("Info (EPG)", "info", "Infobar/openEventView"),
 		("Info (EPG)" + " " + _("long"), "info_long", "Infobar/showEventInfoPlugins"),
@@ -63,7 +63,7 @@ class hotkey:
 		("Channel up", "channelup", ""),
 		("Channel down", "channeldown", ""),
 		("Page up", "pageUp", ""),
-		("Page up"  + " " + _("long"), "pageUp_long", ""),
+		("Page up" + " " + _("long"), "pageUp_long", ""),
 		("Page down", "pageDown", ""),
 		("Page down" + " " + _("long"), "pageDown_long", ""),
 		("Next", "next", ""),
@@ -493,7 +493,7 @@ class HotkeySetupSelect(Screen):
 	def zaptoCallback(self, *args):
 		if args:
 			currentSelected = self["list"].l.getCurrentSelection()[:]
-			currentSelected[1]=currentSelected[1][:-1] + (currentSelected[0][0] + " " + ServiceReference(args[0]).getServiceName(),)
+			currentSelected[1] = currentSelected[1][:-1] + (currentSelected[0][0] + " " + ServiceReference(args[0]).getServiceName(),)
 			self.selected.append([(currentSelected[0][0], currentSelected[0][1] + "/" + args[0].toString()), currentSelected[1]])
 
 	def keyLeft(self):
@@ -646,7 +646,7 @@ class InfoBarHotkey():
 			elif selected[0] == "Module":
 				try:
 					exec "from %s import %s" % (selected[1], selected[2])
-					exec "self.session.open(%s)" %  ",".join(selected[2:])
+					exec "self.session.open(%s)" % ",".join(selected[2:])
 				except Exception as e:
 					print "[Hotkey] error during executing module %s, screen %s, %s" % (selected[1], selected[2], e)					
 					import traceback

@@ -204,6 +204,6 @@ def WakeupDayTimeOfWeek():
 			if wakeup_time > time():
 				return 0, wakeup_time
 		for i in range(1,8):
-			if config.usage.wakeup_day[(current_day+i)%7].value:
-				return i, int(mktime((now.tm_year, now.tm_mon, now.tm_mday, config.usage.wakeup_time[(current_day+i)%7].value[0], config.usage.wakeup_time[(current_day+i)%7].value[1], 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
+			if config.usage.wakeup_day[(current_day + i) % 7].value:
+				return i, int(mktime((now.tm_year, now.tm_mon, now.tm_mday, config.usage.wakeup_time[(current_day + i) % 7].value[0], config.usage.wakeup_time[(current_day + i) % 7].value[1], 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
 	return -1, None

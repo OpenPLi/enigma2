@@ -55,7 +55,7 @@ class RemainingToText(Converter, object):
 				elif self.type == self.NO_SECONDS or self.type == self.PROGRESS:
 					return "%s%d:%02d" % (prefix, hours, minutes)
 				elif self.type == self.IN_SECONDS:
-					return prefix+str(tsecs)
+					return prefix + str(tsecs)
 				elif self.type == self.DEFAULT or self.type == self.ONLY_MINUTES:
 					if remaining <= duration:
 						prefix = "+"

@@ -47,10 +47,10 @@ def ServiceInfoListEntry(a, b="", valueType=TYPE_TEXT, param=4, altColor=False):
 	color = skin.parameters.get("ServiceInfoAltColor", (0x00FFBF00)) # alternative foreground color
 	res = [None]
 	if b:
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, xa, ya, wa, ha, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, a))
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, xb, yb, wb, hb, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, b))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, xa, ya, wa, ha, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, a))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, xb, yb, wb, hb, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, b))
 	else:
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, xa, ya, wa + wb, ha, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, a, color if altColor is True else None)) # spread horizontally
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, xa, ya, wa + wb, ha, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, a, color if altColor is True else None)) # spread horizontally
 	return res
 
 class ServiceInfoList(GUIComponent):
@@ -94,7 +94,7 @@ class ServiceInfo(Screen):
 		play_service = session.nav.getCurrentlyPlayingServiceReference()
 		if serviceref and not (play_service and play_service == serviceref):
 			self.type = TYPE_TRANSPONDER_INFO
-			self.skinName="ServiceInfoSimple"
+			self.skinName = "ServiceInfoSimple"
 			self.transponder_info = eServiceCenter.getInstance().info(serviceref).getInfoObject(serviceref, iServiceInformation.sTransponderData)
 			# info is a iStaticServiceInformation, not a iServiceInformation
 		else:
@@ -112,7 +112,7 @@ class ServiceInfo(Screen):
 			if self.feinfo or self.transponder_info:
 				self["key_blue"] = self["blue"] = Label(_("Tuner setting values"))
 			else:
-				self.skinName="ServiceInfoSimple"
+				self.skinName = "ServiceInfoSimple"
 
 		self.onShown.append(self.ShowServiceInformation)
 
@@ -144,7 +144,7 @@ class ServiceInfo(Screen):
 					resolution += (" i", " p", "")[self.info.getInfo(iServiceInformation.sProgressive)]
 					aspect = self.getServiceInfoValue(iServiceInformation.sAspect)
 					aspect = aspect in (1, 2, 5, 6, 9, 0xA, 0xD, 0xE) and "4:3" or "16:9"
-					resolution += " - ["+aspect+"]"
+					resolution += " - [" + aspect + "]"
 				gamma = ("SDR", "HDR", "HDR10", "HLG", "")[self.info.getInfo(iServiceInformation.sGamma)]
 				if gamma:
 					resolution += " - " + gamma
@@ -257,7 +257,7 @@ class ServiceInfo(Screen):
 					subList += [(_("DVB Subtitles PID & lang"), "%04X (%d) - %s" % (to_unsigned(subPID), subPID, subLang), TYPE_TEXT)]
 
 				elif x[0] == 1: # Teletext
-					subNumber = "%x%02x" %(x[3] and x[3] or 8, x[2])
+					subNumber = "%x%02x" % (x[3] and x[3] or 8, x[2])
 					subList += [(_("TXT Subtitles page & lang"), "%s - %s" % (subNumber, subLang), TYPE_TEXT)]
 
 				elif x[0] == 2: # File
@@ -336,9 +336,9 @@ class ServiceInfo(Screen):
 			if item[1]:
 				value = item[1]
 				if len(item) < 4:
-					tlist.append(ServiceInfoListEntry(item[0]+":", value, item[2]))
+					tlist.append(ServiceInfoListEntry(item[0] + ":", value, item[2]))
 				else:
-					tlist.append(ServiceInfoListEntry(item[0]+":", value, item[2], item[3]))
+					tlist.append(ServiceInfoListEntry(item[0] + ":", value, item[2], item[3]))
 		self["infolist"].l.setList(tlist)
 
 	def getServiceInfoValue(self, what):
@@ -367,7 +367,7 @@ class ServiceInfo(Screen):
 						break
 				if caid[2]:
 					if CaIdDescription == "Seca":
-						provid = ",".join([caid[2][i:i+4] for i in range(0, len(caid[2]), 30)])
+						provid = ",".join([caid[2][i:i + 4] for i in range(0, len(caid[2]), 30)])
 					if CaIdDescription == "Nagra":
 						provid = caid[2][-4:]
 					if CaIdDescription == "Via":

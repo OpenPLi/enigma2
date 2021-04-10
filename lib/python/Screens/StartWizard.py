@@ -137,7 +137,7 @@ class AutoInstallWizard(Screen):
 		self.abort()
 
 	def run_console(self):
-		self["progress"].setValue(100 * (self.number_of_packages - len(self.packages))/self.number_of_packages)
+		self["progress"].setValue(100 * (self.number_of_packages - len(self.packages)) / self.number_of_packages)
 		try:
 			open("/proc/progress", "w").write(str(self["progress"].value))
 		except IOError:

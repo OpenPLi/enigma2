@@ -97,7 +97,7 @@ class PollReactor(posixbase.PosixReactorBase):
 		fd = reader.fileno()
 		if fd not in reads:
 			selectables[fd] = reader
-			reads[fd] =  1
+			reads[fd] = 1
 			self._updateRegistration(fd)
 
 	def addWriter(self, writer, writes=writes, selectables=selectables):
@@ -106,7 +106,7 @@ class PollReactor(posixbase.PosixReactorBase):
 		fd = writer.fileno()
 		if fd not in writes:
 			selectables[fd] = writer
-			writes[fd] =  1
+			writes[fd] = 1
 			self._updateRegistration(fd)
 
 	def removeReader(self, reader, reads=reads):

@@ -73,7 +73,7 @@ class DVDTitle:
 		template = template.replace("$i", str(track))
 		template = template.replace("$t", self.DVBname)
 		template = template.replace("$d", self.DVBdescr)
-		template = template.replace("$c", str(len(self.chaptermarks)+1))
+		template = template.replace("$c", str(len(self.chaptermarks) + 1))
 		template = template.replace("$f", self.inputfile)
 		template = template.replace("$C", self.DVBchannel)
 
@@ -93,7 +93,7 @@ class DVDTitle:
 
 		if template.find("$l") >= 0:
 			l = self.length
-			lengthstring = "%d:%02d:%02d" % (l/3600, l%3600/60, l%60)
+			lengthstring = "%d:%02d:%02d" % (l / 3600, l % 3600 / 60, l % 60)
 			template = template.replace("$l", lengthstring)
 		if self.timeCreate:
 			template = template.replace("$Y", str(self.timeCreate[0]))
@@ -145,7 +145,7 @@ class DVDTitle:
 				self.chaptermarks.append(reloc_pts)
 
 		if len(self.cutlist) > 1:
-			part = accumulated_in / (self.length*90000.0)
+			part = accumulated_in / (self.length * 90000.0)
 			usedsize = int(part * self.filesize)
 			self.estimatedDiskspace = usedsize
 			self.length = accumulated_in / 90000
@@ -156,7 +156,7 @@ class DVDTitle:
 		minutes = self.properties.autochapter.getValue()
 		if len(self.chaptermarks) < 1 and minutes > 0:
 			chapterpts = 0
-			while chapterpts < (self.length-60*minutes)*90000:
+			while chapterpts < (self.length - 60 * minutes) * 90000:
 				chapterpts += 90000 * 60 * minutes
 				chapters.append(chapterpts)
 		else:

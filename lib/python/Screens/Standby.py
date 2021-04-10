@@ -88,7 +88,7 @@ class StandbyScreen(Screen):
 				self.paused_action = hasattr(self.paused_service, "seekstate") and hasattr(self.paused_service, "SEEK_STATE_PLAY") and self.paused_service.seekstate == self.paused_service.SEEK_STATE_PLAY
 				self.paused_action and self.paused_service.pauseService()
 		if not self.paused_service:
-			self.timeHandler =  eDVBLocalTimeHandler.getInstance()
+			self.timeHandler = eDVBLocalTimeHandler.getInstance()
 			if self.timeHandler.ready():
 				if self.session.nav.getCurrentlyPlayingServiceOrGroup():
 					self.stopService()
@@ -183,10 +183,10 @@ class StandbyScreen(Screen):
 				begintime = tuple(config.usage.standby_to_shutdown_timer_blocktime_begin.value)
 				endtime = tuple(config.usage.standby_to_shutdown_timer_blocktime_end.value)
 				if begintime <= endtime and (curtime >= begintime and curtime < endtime) or begintime > endtime and (curtime >= begintime or curtime < endtime):
-					duration = (endtime[0]*3600 + endtime[1]*60) - (curtime[0]*3600 + curtime[1]*60 + curtime[2])
+					duration = (endtime[0] * 3600 + endtime[1] * 60) - (curtime[0] * 3600 + curtime[1] * 60 + curtime[2])
 					if duration:
 						if duration < 0:
-							duration += 24*3600
+							duration += 24 * 3600
 						self.standbyTimeoutTimer.startLongTimer(duration)
 						return
 		if self.session.screen["TunerInfo"].tuner_use_mask or mediafilesInUse(self.session):
@@ -267,7 +267,7 @@ def getReasons(session, retvalue=QUIT_SHUTDOWN):
 	if jobs:
 		if jobs == 1:
 			job = job_manager.getPendingJobs()[0]
-			reasons.append("%s: %s (%d%%)" % (job.getStatustext(), job.name, int(100*job.progress/float(job.end))))
+			reasons.append("%s: %s (%d%%)" % (job.getStatustext(), job.name, int(100 * job.progress / float(job.end))))
 		else:
 			reasons.append((ngettext("%d job is running in the background!", "%d jobs are running in the background!", jobs) % jobs))
 	if checkTimeshiftRunning():

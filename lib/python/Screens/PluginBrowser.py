@@ -216,8 +216,8 @@ class PluginBrowser(Screen, ProtectedScreen):
 		if config.usage.menu_show_numbers.value in ("menu&plugins", "plugins") or showHelp:
 			for x in enumerate(self.list):
 				tmp = list(x[1][1])
-				tmp[7] = "%s %s" % (x[0]+1, tmp[7])
-				x[1][1]=tuple(tmp)
+				tmp[7] = "%s %s" % (x[0] + 1, tmp[7])
+				x[1][1] = tuple(tmp)
 		self["list"].l.setList(self.list)
 
 	def showHelp(self):
@@ -284,11 +284,11 @@ class PluginDownloadBrowser(Screen):
 		if os.path.isfile('/usr/bin/opkg'):
 			self.opkg = '/usr/bin/opkg'
 			self.opkg_install = self.opkg + ' install'
-			self.opkg_remove =  self.opkg + ' remove --autoremove'
+			self.opkg_remove = self.opkg + ' remove --autoremove'
 		else:
 			self.opkg = 'opkg'
 			self.opkg_install = 'opkg install -force-defaults'
-			self.opkg_remove =  self.opkg + ' remove'
+			self.opkg_remove = self.opkg + ' remove'
 
 	def go(self):
 		sel = self["list"].l.getCurrentSelection()

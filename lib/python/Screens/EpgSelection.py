@@ -50,7 +50,7 @@ class EPGSelection(Screen):
 			self["key_yellow"] = StaticText()
 			self["key_blue"] = StaticText()
 			self["key_red"] = StaticText()
-			self.currentService=service
+			self.currentService = service
 			self.eventid = eventid
 			self.zapFunc = None
 		elif isinstance(service, eServiceReference) or isinstance(service, str):
@@ -58,7 +58,7 @@ class EPGSelection(Screen):
 			self.type = EPG_TYPE_SINGLE
 			self["key_yellow"] = StaticText()
 			self["key_blue"] = StaticText(_("Select Channel"))
-			self.currentService=ServiceReference(service)
+			self.currentService = ServiceReference(service)
 			self.zapFunc = zapFunc
 			self.sort_type = 0
 			self.setSortDescription()
@@ -133,7 +133,7 @@ class EPGSelection(Screen):
 		if self.type == EPG_TYPE_MULTI:
 			global mepg_config_initialized
 			if not mepg_config_initialized:
-				config.misc.prev_mepg_time=ConfigClock(default=time())
+				config.misc.prev_mepg_time = ConfigClock(default=time())
 				mepg_config_initialized = True
 			self.session.openWithCallback(self.onDateTimeInputClosed, TimeDateInput, config.misc.prev_mepg_time)
 
@@ -167,7 +167,7 @@ class EPGSelection(Screen):
 	def onDateTimeInputClosed(self, ret):
 		if len(ret) > 1:
 			if ret[0]:
-				self.ask_time=ret[1]
+				self.ask_time = ret[1]
 				self["list"].fillMultiEPG(self.services, ret[1])
 
 	def closeScreen(self):
@@ -555,9 +555,9 @@ class EPGSelection(Screen):
 				nowTime = localtime(now)
 				begTime = localtime(beg)
 				if nowTime[2] != begTime[2]:
-					datestr = '%s %d.%d.'%(days[begTime[6]], begTime[2], begTime[1])
+					datestr = '%s %d.%d.' % (days[begTime[6]], begTime[2], begTime[1])
 				else:
-					datestr = '%s %d.%d.'%(_("Today"), begTime[2], begTime[1])
+					datestr = '%s %d.%d.' % (_("Today"), begTime[2], begTime[1])
 			self["date"].setText(datestr)
 			if cur[1] is None:
 				self["Service"].newService(None)

@@ -144,7 +144,7 @@ class ParentalControl:
 		elif self.storeServicePin != "never":
 			self.checkPinInterval = True
 			iMinutes = float(self.storeServicePin)
-			iSeconds = int(iMinutes*60)
+			iSeconds = int(iMinutes * 60)
 			self.pinIntervalSeconds = iSeconds
 
 	def standbyCounterCallback(self, configElement):
