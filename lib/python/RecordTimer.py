@@ -1068,7 +1068,7 @@ class RecordTimer(timer.Timer):
 
 	def record(self, entry, ignoreTSC=False, dosave=True, loadtimer=False):
 		check_timer_list = self.timer_list[:]
-		timersanitycheck = TimerSanityCheck(check_timer_list,entry)
+		timersanitycheck = TimerSanityCheck(check_timer_list, entry)
 		answer = None
 		if not timersanitycheck.check():
 			if not ignoreTSC:
@@ -1341,7 +1341,7 @@ class RecordTimer(timer.Timer):
 							time_match = end - begin
 							type = type_offset + 2
 				if time_match:
-					if type in (2,7,12,17,22,27,32):
+					if type in (2, 7, 12, 17, 22, 27, 32):
 						# When full recording do not look further
 						returnValue = (time_match, [type])
 						break

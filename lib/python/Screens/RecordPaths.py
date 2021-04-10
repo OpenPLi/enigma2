@@ -8,7 +8,7 @@ from Components.ActionMap import ActionMap
 from Tools.Directories import fileExists
 from Components.UsageConfig import preferredPath
 
-class RecordPathsSettings(Screen,ConfigListScreen):
+class RecordPathsSettings(Screen, ConfigListScreen):
 	skin = """
 		<screen name="RecordPathsSettings" position="160,150" size="450,200" title="Recording paths">
 			<ePixmap pixmap="buttons/red.png" position="10,0" size="140,40" alphatest="on" />

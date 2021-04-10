@@ -12,40 +12,40 @@ LOGPATH = "/hdd/"
 LOGFILE = "hdmicec.log"
 
 # CEC Version's table
-CEC = ["1.1","1.2","1.2a","1.3","1.3a","1.4","2.0?","unknown"]
+CEC = ["1.1", "1.2", "1.2a", "1.3", "1.3a", "1.4", "2.0?", "unknown"]
 cmdList = {
-	0x00:"<Polling Message>",
-	0x04:"<Image View On>",
-	0x0d:"<Text View On>",
-	0x32:"<Set Menu Language>",
-	0x36:"<Standby>",
-	0x46:"<Give OSD Name>",
-	0x47:"<Set OSD Name>",
-	0x70:"<System Mode Audio Request>",
-	0x71:"<Give Audio Status>",
-	0x72:"<Set System Audio Mode>",
-	0x7a:"<Report Audio Status>",
-	0x7d:"<Give System Audio Mode Status>",
-	0x7e:"<System Audio Mode Status>",
-	0x80:"<Routing Change>",
-	0x81:"<Routing Information>",
-	0x82:"<Active Source>",
-	0x83:"<Give Physical Address>",
-	0x84:"<Report Physical Address>",
-	0x85:"<Request Active Source>",
-	0x86:"<Set Stream Path>",
-	0x87:"<Device Vendor ID>",
-	0x89:"<Vendor Command>",
-	0x8c:"<Give Device Vendor ID>",
-	0x8d:"<Menu Request>",
-	0x8e:"<Menu Status>",
-	0x8f:"<Give Device Power Status>",
-	0x90:"<Report Power Status>",
-	0x91:"<Get menu language>",
-	0x9e:"<CEC Version>",
-	0x9d:"<Inactive Source>",
-	0x9e:"<CEC Version>",
-	0x9f:"<Get CEC Version>",
+	0x00: "<Polling Message>",
+	0x04: "<Image View On>",
+	0x0d: "<Text View On>",
+	0x32: "<Set Menu Language>",
+	0x36: "<Standby>",
+	0x46: "<Give OSD Name>",
+	0x47: "<Set OSD Name>",
+	0x70: "<System Mode Audio Request>",
+	0x71: "<Give Audio Status>",
+	0x72: "<Set System Audio Mode>",
+	0x7a: "<Report Audio Status>",
+	0x7d: "<Give System Audio Mode Status>",
+	0x7e: "<System Audio Mode Status>",
+	0x80: "<Routing Change>",
+	0x81: "<Routing Information>",
+	0x82: "<Active Source>",
+	0x83: "<Give Physical Address>",
+	0x84: "<Report Physical Address>",
+	0x85: "<Request Active Source>",
+	0x86: "<Set Stream Path>",
+	0x87: "<Device Vendor ID>",
+	0x89: "<Vendor Command>",
+	0x8c: "<Give Device Vendor ID>",
+	0x8d: "<Menu Request>",
+	0x8e: "<Menu Status>",
+	0x8f: "<Give Device Power Status>",
+	0x90: "<Report Power Status>",
+	0x91: "<Get menu language>",
+	0x9e: "<CEC Version>",
+	0x9d: "<Inactive Source>",
+	0x9e: "<CEC Version>",
+	0x9f: "<Get CEC Version>",
 	}
 
 config.hdmicec = ConfigSubsection()
@@ -87,7 +87,7 @@ choicelist = []
 for i in [3] + range(5, 65, 5):
 	choicelist.append(("%d" % i, _("%d sec") % i))
 config.hdmicec.repeat_wakeup_timer = ConfigSelection(default="3", choices=[("0", _("Disabled"))] + choicelist)
-config.hdmicec.debug = ConfigSelection(default="0", choices=[("0", _("Disabled")), ("1",_("Messages")), ("2",_("Key Events")), ("3",_("All"))])
+config.hdmicec.debug = ConfigSelection(default="0", choices=[("0", _("Disabled")), ("1", _("Messages")), ("2", _("Key Events")), ("3", _("All"))])
 config.hdmicec.bookmarks = ConfigLocations(default=[LOGPATH])
 config.hdmicec.log_path = ConfigDirectory(LOGPATH)
 config.hdmicec.next_boxes_detect = ConfigYesNo(default=False)
@@ -217,7 +217,7 @@ class HdmiCec:
 					self.wait.start(int(config.hdmicec.minimum_send_interval.value), True)
 			else:
 				eHdmiCEC.getInstance().sendMessage(address, cmd, data, len(data))
-			if config.hdmicec.debug.value in["1","3"]:
+			if config.hdmicec.debug.value in["1", "3"]:
 				self.debugTx(address, cmd, data)
 
 	def sendCmd(self):
@@ -452,7 +452,7 @@ class HdmiCec:
 					self.waitKeyEvent.start(int(config.hdmicec.minimum_send_interval.value), True)
 			else:
 				eHdmiCEC.getInstance().sendMessage(self.volumeForwardingDestination, cmd, data, len(data))
-			if config.hdmicec.debug.value in["2","3"]:
+			if config.hdmicec.debug.value in["2", "3"]:
 				self.debugTx(self.volumeForwardingDestination, cmd, data)
 			return 1
 		else:
@@ -521,7 +521,7 @@ class HdmiCec:
 		log_path = config.hdmicec.log_path.value
 		path = os.path.join(log_path, LOGFILE)
 		if pathExists(log_path):
-			fp = file(path,'a')
+			fp = file(path, 'a')
 			fp.write(output)
 			fp.close()
 

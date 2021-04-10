@@ -238,7 +238,7 @@ class EPGList(GUIComponent):
 		res = [
 			None, # no private data needed
 			(eListboxPythonMultiContent.TYPE_TEXT, r1.x, r1.y, r1.w, r1.h, 0, RT_HALIGN_RIGHT | RT_VALIGN_CENTER, self.days[t[6]]),
-			(eListboxPythonMultiContent.TYPE_TEXT, r2.x, r2.y, r2.w, r1.h, 0, RT_HALIGN_RIGHT | RT_VALIGN_CENTER, "%02d.%02d, %02d:%02d" % (t[2],t[1],t[3],t[4]))
+			(eListboxPythonMultiContent.TYPE_TEXT, r2.x, r2.y, r2.w, r1.h, 0, RT_HALIGN_RIGHT | RT_VALIGN_CENTER, "%02d.%02d, %02d:%02d" % (t[2], t[1], t[3], t[4]))
 		]
 		if clock_types:
 			for i in range(len(clock_types)):
@@ -257,7 +257,7 @@ class EPGList(GUIComponent):
 		res = [
 			None,  # no private data needed
 			(eListboxPythonMultiContent.TYPE_TEXT, r1.x, r1.y, r1.w, r1.h, 0, RT_HALIGN_RIGHT | RT_VALIGN_CENTER, self.days[t[6]]),
-			(eListboxPythonMultiContent.TYPE_TEXT, r2.x, r2.y, r2.w, r1.h, 0, RT_HALIGN_RIGHT | RT_VALIGN_CENTER, "%2d.%02d, %02d:%02d" % (t[2],t[1],t[3],t[4]))
+			(eListboxPythonMultiContent.TYPE_TEXT, r2.x, r2.y, r2.w, r1.h, 0, RT_HALIGN_RIGHT | RT_VALIGN_CENTER, "%2d.%02d, %02d:%02d" % (t[2], t[1], t[3], t[4]))
 		]
 		if clock_types:
 			for i in range(len(clock_types)):
@@ -285,7 +285,7 @@ class EPGList(GUIComponent):
 				begin = localtime(beginTime)
 				end = localtime(beginTime + duration)
 				res.extend((
-					(eListboxPythonMultiContent.TYPE_TEXT, r4.x, r4.y, r4.w, r4.h, 1, RT_HALIGN_CENTER | RT_VALIGN_CENTER, "%02d.%02d - %02d.%02d" % (begin[3],begin[4],end[3],end[4])),
+					(eListboxPythonMultiContent.TYPE_TEXT, r4.x, r4.y, r4.w, r4.h, 1, RT_HALIGN_CENTER | RT_VALIGN_CENTER, "%02d.%02d - %02d.%02d" % (begin[3], begin[4], end[3], end[4])),
 					(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, self.gap(self.tw), r3.h, 1, RT_HALIGN_RIGHT | RT_VALIGN_CENTER, _("%d min") % (duration / 60)),
 					(eListboxPythonMultiContent.TYPE_TEXT, r3.x + self.tw, r3.y, r3.w, r3.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, EventName)
 				))
@@ -366,7 +366,7 @@ class EPGList(GUIComponent):
 		x = self.l.getCurrentSelection()
 		return x and x[1]
 
-	def moveToService(self,serviceref):
+	def moveToService(self, serviceref):
 		if not serviceref:
 			return
 		index = 0
@@ -403,9 +403,9 @@ class EPGList(GUIComponent):
 		def warningWrongSkinParameter(string):
 			print "[EPGList] wrong '%s' skin parameters" % string
 		def setEventItemFont(value):
-			self.eventItemFont = parseFont(value, ((1,1),(1,1)))
+			self.eventItemFont = parseFont(value, ((1, 1), (1, 1)))
 		def setEventTimeFont(value):
-			self.eventTimeFont = parseFont(value, ((1,1),(1,1)))
+			self.eventTimeFont = parseFont(value, ((1, 1), (1, 1)))
 		def setIconDistance(value):
 			self.iconDistance = int(value)
 		def setIconShift(value):

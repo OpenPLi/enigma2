@@ -105,7 +105,7 @@ class MultiPixmap(Pixmap):
 				elif attrib == "pixmap":
 					pixmap = resolveFilename(SCOPE_CURRENT_SKIN, value, path_prefix=skin_path_prefix)
 				else:
-					attribs.append((attrib,value))
+					attribs.append((attrib, value))
 			if pixmap:
 				attribs.append(("pixmap", pixmap))
 			self.skinAttributes = attribs

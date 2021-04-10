@@ -187,11 +187,11 @@ class TimerEditList(Screen):
 			self["description"].setText(text)
 			stateRunning = cur.state in (1, 2)
 			if cur.state == 2 and self.key_red_choice != self.STOP:
-				self["actions"].actions.update({"red":self.stopTimerQuestion})
+				self["actions"].actions.update({"red": self.stopTimerQuestion})
 				self["key_red"].setText(_("Stop"))
 				self.key_red_choice = self.STOP
 			elif cur.state != 2 and self.key_red_choice != self.DELETE:
-				self["actions"].actions.update({"red":self.removeTimerQuestion})
+				self["actions"].actions.update({"red": self.removeTimerQuestion})
 				self["key_red"].setText(_("Delete"))
 				self.key_red_choice = self.DELETE
 
@@ -201,7 +201,7 @@ class TimerEditList(Screen):
 					self["key_yellow"].setText("")
 					self.key_yellow_choice = self.EMPTY
 				else:
-					self["actions"].actions.update({"yellow":self.toggleDisabledState})
+					self["actions"].actions.update({"yellow": self.toggleDisabledState})
 					self["key_yellow"].setText(_("Enable"))
 					self.key_yellow_choice = self.ENABLE
 			elif stateRunning and (not cur.repeated or cur.state == 1) and (self.key_yellow_choice != self.EMPTY):
@@ -209,7 +209,7 @@ class TimerEditList(Screen):
 				self["key_yellow"].setText("")
 				self.key_yellow_choice = self.EMPTY
 			elif (not stateRunning or cur.repeated and cur.isRunning()) and not cur.disabled and (self.key_yellow_choice != self.DISABLE):
-				self["actions"].actions.update({"yellow":self.toggleDisabledState})
+				self["actions"].actions.update({"yellow": self.toggleDisabledState})
 				self["key_yellow"].setText(_("Disable"))
 				self.key_yellow_choice = self.DISABLE
 		else:
@@ -231,7 +231,7 @@ class TimerEditList(Screen):
 			showCleanup = False
 
 		if showCleanup and (self.key_blue_choice != self.CLEANUP):
-			self["actions"].actions.update({"blue":self.cleanupQuestion})
+			self["actions"].actions.update({"blue": self.cleanupQuestion})
 			self["key_blue"].setText(_("Cleanup"))
 			self.key_blue_choice = self.CLEANUP
 		elif (not showCleanup) and (self.key_blue_choice != self.EMPTY):

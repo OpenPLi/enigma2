@@ -155,7 +155,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 				return ""
 		return sorted([gettime(open("/etc/opkg/%s" % file, "r").readlines()[0].split()[2]) for file in os.listdir("/etc/opkg") if not file.startswith("3rd-party") and file not in ("arch.conf", "opkg.conf", "picons-feed.conf")], reverse=True)[0]
 
-	def startActualUpdate(self,answer):
+	def startActualUpdate(self, answer):
 		if answer:
 			self.updating = True
 			self.opkg.startCmd(OpkgComponent.CMD_UPDATE)
@@ -282,7 +282,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 			self.close()
 			return
 		if answer[1] == "cold":
-			self.session.open(TryQuitMainloop,retvalue=42)
+			self.session.open(TryQuitMainloop, retvalue=42)
 			self.close()
 		elif answer[1] == "channels":
 			self.channellist_only = 1

@@ -111,7 +111,7 @@ class EventViewBase:
 				break
 		if isRecordEvent:
 			title_text = timer.repeated and _("Attention, this is repeated timer!\n") or ""
-			menu = [(_("Delete timer"), "delete"),(_("Edit timer"), "edit")]
+			menu = [(_("Delete timer"), "delete"), (_("Edit timer"), "edit")]
 			buttons = ["red", "green"]
 			def timerAction(choice):
 				if choice is not None:
@@ -218,7 +218,7 @@ class EventViewBase:
 			else:
 				self["channel"].setText(_("unknown service"))
 
-	def sort_func(self,x,y):
+	def sort_func(self, x, y):
 		if x[1] < y[1]:
 			return -1
 		elif x[1] == y[1]:
@@ -253,7 +253,7 @@ class EventViewBase:
 		self["duration"].setText(_("%d min") % (event.getDuration() / 60))
 		self["key_red"].setText("")
 		if self.SimilarBroadcastTimer is not None:
-			self.SimilarBroadcastTimer.start(400,True)
+			self.SimilarBroadcastTimer.start(400, True)
 		self.setTimerState()	
 
 	def setTimerState(self):

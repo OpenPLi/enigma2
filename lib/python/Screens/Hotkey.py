@@ -256,7 +256,7 @@ class HotkeySetup(Screen):
 		self["description"] = Label()
 		self.list = []
 		for x in hotkey.hotkeys:
-			self.list.append(ChoiceEntryComponent('',(x[0], x[1])))
+			self.list.append(ChoiceEntryComponent('', (x[0], x[1])))
 		self["list"] = ChoiceList(list=self.list)
 		self["choosen"] = ChoiceList(list=[])
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "MenuActions"],
@@ -330,13 +330,13 @@ class HotkeySetup(Screen):
 			selected = []
 			for x in eval("config.misc.hotkey." + key + ".value.split(',')"):
 				if x.startswith("ZapPanic"):
-					selected.append(ChoiceEntryComponent('',((_("Panic to") + " " + ServiceReference(eServiceReference(x.split("/", 1)[1]).toString()).getServiceName()), x)))
+					selected.append(ChoiceEntryComponent('', ((_("Panic to") + " " + ServiceReference(eServiceReference(x.split("/", 1)[1]).toString()).getServiceName()), x)))
 				elif x.startswith("Zap"):
-					selected.append(ChoiceEntryComponent('',((_("Zap to") + " " + ServiceReference(eServiceReference(x.split("/", 1)[1]).toString()).getServiceName()), x)))
+					selected.append(ChoiceEntryComponent('', ((_("Zap to") + " " + ServiceReference(eServiceReference(x.split("/", 1)[1]).toString()).getServiceName()), x)))
 				else:
 					function = list(function for function in hotkey.functions if function[1] == x)
 					if function:
-						selected.append(ChoiceEntryComponent('',((function[0][0]), function[0][1])))
+						selected.append(ChoiceEntryComponent('', ((function[0][0]), function[0][1])))
 			self["choosen"].setList(selected)
 		self["description"].setText(_("Press or select button and then press 'OK' for attach next function or edit attached.") if len(selected) else _("Press or select button and then press 'OK' for attach function."))
 
@@ -360,13 +360,13 @@ class HotkeySetupSelect(Screen):
 		self.selected = []
 		for x in self.config.value.split(','):
 			if x.startswith("ZapPanic"):
-				self.selected.append(ChoiceEntryComponent('',((_("Panic to") + " " + ServiceReference(eServiceReference(x.split("/", 1)[1]).toString()).getServiceName()), x)))
+				self.selected.append(ChoiceEntryComponent('', ((_("Panic to") + " " + ServiceReference(eServiceReference(x.split("/", 1)[1]).toString()).getServiceName()), x)))
 			elif x.startswith("Zap"):
-				self.selected.append(ChoiceEntryComponent('',((_("Zap to") + " " + ServiceReference(eServiceReference(x.split("/", 1)[1]).toString()).getServiceName()), x)))
+				self.selected.append(ChoiceEntryComponent('', ((_("Zap to") + " " + ServiceReference(eServiceReference(x.split("/", 1)[1]).toString()).getServiceName()), x)))
 			else:
 				function = list(function for function in hotkey.functions if function[1] == x)
 				if function:
-					self.selected.append(ChoiceEntryComponent('',((function[0][0]), function[0][1])))
+					self.selected.append(ChoiceEntryComponent('', ((function[0][0]), function[0][1])))
 		text = _("Press 'OK' for attach next function or 'CH+/-' for edit attached.") if len(self.selected) else _("Press 'OK' for attach function.")
 		self.prevselected = self.selected[:]
 		if self.prevselected:
@@ -410,14 +410,14 @@ class HotkeySetupSelect(Screen):
 			catagories[function[2]].append(function)
 		for catagorie in sorted(list(catagories)):
 			if catagorie in self.expanded:
-				functionslist.append(ChoiceEntryComponent('expanded',((catagorie), "Expander")))
+				functionslist.append(ChoiceEntryComponent('expanded', ((catagorie), "Expander")))
 				for function in catagories[catagorie]:
-					functionslist.append(ChoiceEntryComponent('verticalline',((function[0]), function[1])))
+					functionslist.append(ChoiceEntryComponent('verticalline', ((function[0]), function[1])))
 				if catagorie == "InfoBar":
-					functionslist.append(ChoiceEntryComponent('verticalline',((_("Zap to")), "Zap")))
-					functionslist.append(ChoiceEntryComponent('verticalline',((_("Panic to")), "ZapPanic")))
+					functionslist.append(ChoiceEntryComponent('verticalline', ((_("Zap to")), "Zap")))
+					functionslist.append(ChoiceEntryComponent('verticalline', ((_("Panic to")), "ZapPanic")))
 			else:
-				functionslist.append(ChoiceEntryComponent('expandable',((catagorie), "Expander")))
+				functionslist.append(ChoiceEntryComponent('expandable', ((catagorie), "Expander")))
 		return functionslist
 
 	def description(self, msg=""):
@@ -566,7 +566,7 @@ class InfoBarHotkey():
 		if not hotkey.functions:
 			getHotkeyFunctions()
 		self["HotkeyButtonActions"] = helpableHotkeyActionMap(self, "HotkeyActions",
-			dict((x[1],(self.hotkeyGlobal, boundFunction(self.getHelpText, x[1]))) for x in hotkey.hotkeys), -10)
+			dict((x[1], (self.hotkeyGlobal, boundFunction(self.getHelpText, x[1]))) for x in hotkey.hotkeys), -10)
 
 	def getKeyFunctions(self, key):
 		if key in ("play", "playpause", "Stop", "stop", "pause", "rewind", "next", "previous", "fastforward", "skip_back", "skip_forward") and (self.__class__.__name__ == "MoviePlayer" or hasattr(self, "timeshiftActivated") and self.timeshiftActivated()):

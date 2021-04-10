@@ -26,7 +26,7 @@ def getFlashDateString():
 def getBuildDateString():
 	try:
 		if os.path.isfile('/etc/version'):
-			version = open("/etc/version","r").read()
+			version = open("/etc/version", "r").read()
 			return "%s-%s-%s" % (version[:4], version[4:6], version[6:8])
 	except:
 		pass
@@ -53,7 +53,7 @@ def getGStreamerVersionString():
 	try:
 		from glob import glob
 		gst = [x.split("Version: ") for x in open(glob("/var/lib/opkg/info/gstreamer[0-9].[0-9].control")[0], "r") if x.startswith("Version:")][0]
-		return "%s" % gst[1].split("+")[0].replace("\n","")
+		return "%s" % gst[1].split("+")[0].replace("\n", "")
 	except:
 		return _("Not Installed")
 
@@ -61,13 +61,13 @@ def getffmpegVersionString():
 	try:
 		from glob import glob
 		ffmpeg = [x.split("Version: ") for x in open(glob("/var/lib/opkg/info/ffmpeg.control")[0], "r") if x.startswith("Version:")][0]
-		return "%s" % ffmpeg[1].split("-")[0].replace("\n","")
+		return "%s" % ffmpeg[1].split("-")[0].replace("\n", "")
 	except:
 		return _("Not Installed")
 
 def getKernelVersionString():
 	try:
-		return open("/proc/version","r").read().split(' ', 4)[2].split('-',2)[0]
+		return open("/proc/version", "r").read().split(' ', 4)[2].split('-', 2)[0]
 	except:
 		return _("unknown")
 
@@ -110,11 +110,11 @@ def getCPUInfoString():
 
 		temperature = None
 		if os.path.isfile('/proc/stb/fp/temp_sensor_avs'):
-			temperature = open("/proc/stb/fp/temp_sensor_avs").readline().replace('\n','')
+			temperature = open("/proc/stb/fp/temp_sensor_avs").readline().replace('\n', '')
 		elif os.path.isfile('/proc/stb/power/avs'):
-			temperature = open("/proc/stb/power/avs").readline().replace('\n','')
+			temperature = open("/proc/stb/power/avs").readline().replace('\n', '')
 		elif os.path.isfile('/proc/stb/fp/temp_sensor'):
-			temperature = open("/proc/stb/fp/temp_sensor").readline().replace('\n','')
+			temperature = open("/proc/stb/fp/temp_sensor").readline().replace('\n', '')
 		elif os.path.isfile("/sys/devices/virtual/thermal/thermal_zone0/temp"):
 			try:
 				temperature = int(open("/sys/devices/virtual/thermal/thermal_zone0/temp").read().strip()) / 1000
@@ -140,10 +140,10 @@ def getDriverInstalledDate():
 		except:
 			try:
 				driver = [x.split("Version:") for x in open(glob("/var/lib/opkg/info/*-dvb-proxy-*.control")[0], "r") if x.startswith("Version:")][0]
-				return "%s" % driver[1].replace("\n","")
+				return "%s" % driver[1].replace("\n", "")
 			except:
 				driver = [x.split("Version:") for x in open(glob("/var/lib/opkg/info/*-platform-util-*.control")[0], "r") if x.startswith("Version:")][0]
-				return "%s" % driver[1].replace("\n","")
+				return "%s" % driver[1].replace("\n", "")
 	except:
 		return _("unknown")
 
@@ -197,7 +197,7 @@ def getBoxUptime():
 		if secs > 86400:
 			days = secs / 86400
 			secs = secs % 86400
-			time = ngettext("%d day","%d days", days) % days + " "
+			time = ngettext("%d day", "%d days", days) % days + " "
 		h = secs / 3600
 		m = (secs % 3600) / 60
 		time += ngettext("%d hour", "%d hours", h) % h + " "

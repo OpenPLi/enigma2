@@ -2,7 +2,7 @@ from Components.Element import Element
 
 # this is not a GUI renderer.
 class FrontpanelLed(Element):
-	def __init__(self, which=0, patterns=[(20, 0, 0xffffffff),(20, 0x55555555, 0x84fc8c04)], boolean=True):
+	def __init__(self, which=0, patterns=[(20, 0, 0xffffffff), (20, 0x55555555, 0x84fc8c04)], boolean=True):
 		self.which = which
 		self.boolean = boolean
 		self.patterns = patterns

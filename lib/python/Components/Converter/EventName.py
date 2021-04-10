@@ -115,7 +115,7 @@ class EventName(Converter, object):
 			description = event.getShortDescription()
 			extended = event.getExtendedDescription()
 			if description and extended:
-				if description.replace('\n','') == extended.replace('\n',''):
+				if description.replace('\n', '') == extended.replace('\n', ''):
 					return extended
 				description += '\n'
 			return description + extended
@@ -145,7 +145,7 @@ class EventName(Converter, object):
 					return _("running")
 				if running_status == 5:
 					return _("service off-air")
-				if running_status in (6,7):
+				if running_status in (6, 7):
 					return _("reserved for future use")
 				return _("undefined")
 			return ""
