@@ -139,7 +139,7 @@ class ServiceInfo(Screen):
 				height = self.info.getInfo(iServiceInformation.sVideoHeight)
 				if width > 0 and height > 0:
 					resolution = videocodec + " - "
-					resolution += "%dx%d - " % (width,height)
+					resolution += "%dx%d - " % (width, height)
 					resolution += str((self.info.getInfo(iServiceInformation.sFrameRate) + 500) / 1000)
 					resolution += (" i", " p", "")[self.info.getInfo(iServiceInformation.sProgressive)]
 					aspect = self.getServiceInfoValue(iServiceInformation.sAspect)
@@ -149,7 +149,7 @@ class ServiceInfo(Screen):
 				if gamma:
 					resolution += " - " + gamma
 			self.service = self.session.nav.getCurrentService()
-			if "%3a//" in refstr and reftype not in (1,257,4098,4114):
+			if "%3a//" in refstr and reftype not in (1, 257, 4098, 4114):
 			#IPTV 4097 5001, no PIDs shown
 				fillList = [(_("Service name"), name, TYPE_TEXT),
 					(_("Videocodec, size & format"), resolution, TYPE_TEXT),

@@ -37,7 +37,7 @@ def PipPigMode(value):
 					open(SystemInfo["hasPIPVisibleProc"], "w").write("0")
 				else:
 					import skin
-					x, y, w, h = skin.parameters.get("PipHidePosition",(16, 16, 16, 16))
+					x, y, w, h = skin.parameters.get("PipHidePosition", (16, 16, 16, 16))
 					pip = InfoBar.instance.session.pip
 					pip.move(x, y, doSave=False)
 					pip.resize(w, h, doSave=False)

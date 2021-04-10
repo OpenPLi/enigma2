@@ -150,10 +150,10 @@ class MovieList(GUIComponent):
 		self.firstFileEntry = 0
 		self.parentDirectory = 0
 		self.fontName = "Regular"
-		self.fontSizesOriginal = (22,18,16)
-		self.fontSizesCompact = (20,14)
-		self.fontSizesMinimal = (20,16)
-		self.itemHeights = (75,37,25)
+		self.fontSizesOriginal = (22, 18, 16)
+		self.fontSizesCompact = (20, 14)
+		self.fontSizesMinimal = (20, 16)
+		self.itemHeights = (75, 37, 25)
 		self.pbarShift = 5
 		self.pbarHeight = 16
 		self.pbarLargeWidth = 48
@@ -165,8 +165,8 @@ class MovieList(GUIComponent):
 		self.iconsWidth = 22
 		self.trashShift = 1
 		self.dirShift = 1
-		self.columnsOriginal = (180,200)
-		self.columnsCompactDescription = (120,140,154)
+		self.columnsOriginal = (180, 200)
+		self.columnsCompactDescription = (120, 140, 154)
 		self.compactColumn = 200
 		self.treeDescription = 165
 		self.reloadDelayTimer = None
@@ -363,13 +363,13 @@ class MovieList(GUIComponent):
 					p = os.path.split(p[0])
 				txt = p[1]
 				if txt == ".Trash":
-					res.append(MultiContentEntryPixmapAlphaTest(pos=(0,self.trashShift), size=(iconSize,self.iconTrash.size().height()), png=self.iconTrash))
+					res.append(MultiContentEntryPixmapAlphaTest(pos=(0, self.trashShift), size=(iconSize, self.iconTrash.size().height()), png=self.iconTrash))
 					res.append(MultiContentEntryText(pos=(x, 0), size=(width - x - tn - r, self.itemHeight), font=0, flags=RT_HALIGN_LEFT | valign_center, text=_("Deleted items")))
 					res.append(MultiContentEntryText(pos=(width - tn - r, 0), size=(tn, self.itemHeight), font=1, flags=RT_HALIGN_RIGHT | valign_center, text=_("Trash can")))
 					return res
 			if not config.movielist.show_underlines.value:
 				txt = txt.replace('_', ' ').strip()
-			res.append(MultiContentEntryPixmapAlphaTest(pos=(0,self.dirShift), size=(iconSize,iconSize), png=self.iconFolder))
+			res.append(MultiContentEntryPixmapAlphaTest(pos=(0, self.dirShift), size=(iconSize, iconSize), png=self.iconFolder))
 			res.append(MultiContentEntryText(pos=(x, 0), size=(width - x - tn - r, self.itemHeight), font=0, flags=RT_HALIGN_LEFT | valign_center, text=txt))
 			res.append(MultiContentEntryText(pos=(width - tn - r, 0), size=(tn, self.itemHeight), font=1, flags=RT_HALIGN_RIGHT | valign_center, text=_("Directory")))
 			return res
@@ -431,19 +431,19 @@ class MovieList(GUIComponent):
 			len = ""
 
 		if data.icon is not None:
-			if self.list_type in (MovieList.LISTTYPE_COMPACT_DESCRIPTION,MovieList.LISTTYPE_COMPACT):
-				pos = (0,self.partIconeShiftCompact)
+			if self.list_type in (MovieList.LISTTYPE_COMPACT_DESCRIPTION, MovieList.LISTTYPE_COMPACT):
+				pos = (0, self.partIconeShiftCompact)
 			elif self.list_type == MovieList.LISTTYPE_ORIGINAL:
-				pos = (0,self.partIconeShiftOriginal)
+				pos = (0, self.partIconeShiftOriginal)
 			else:
-				pos = (0,self.partIconeShiftMinimal)
-			res.append(MultiContentEntryPixmapAlphaTest(pos=pos, size=(iconSize,data.icon.size().height()), png=data.icon))
+				pos = (0, self.partIconeShiftMinimal)
+			res.append(MultiContentEntryPixmapAlphaTest(pos=pos, size=(iconSize, data.icon.size().height()), png=data.icon))
 		switch = config.usage.show_icons_in_movielist.value
 		if switch in ('p', 's'):
 			if switch == 'p':
 				iconSize = self.pbarLargeWidth
 			if data.part is not None:
-				res.append(MultiContentEntryProgress(pos=(0,self.pbarShift), size=(iconSize, self.pbarHeight), percent=data.part, borderWidth=2, foreColor=data.partcol, foreColorSelected=None, backColor=None, backColorSelected=None))
+				res.append(MultiContentEntryProgress(pos=(0, self.pbarShift), size=(iconSize, self.pbarHeight), percent=data.part, borderWidth=2, foreColor=data.partcol, foreColorSelected=None, backColor=None, backColorSelected=None))
 		elif switch == 'i':
 			pass
 		else:
@@ -644,7 +644,7 @@ class MovieList(GUIComponent):
 			name = info.getName(serviceref)
 			if this_tags == ['']:
 				# No tags? Auto tag!
-				this_tags = name.replace(',',' ').replace('.',' ').split()
+				this_tags = name.replace(',', ' ').replace('.', ' ').split()
 				# For auto tags, we are keeping a (tag, movies) dictionary.
 				#It will be used later to check if movies have a complete sentence in common.
 				for tag in this_tags:

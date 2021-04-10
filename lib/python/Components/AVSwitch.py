@@ -20,18 +20,18 @@ class AVSwitch:
 	def getOutputAspect(self):
 		valstr = config.av.aspectratio.value
 		if valstr in ("4_3_letterbox", "4_3_panscan"): # 4:3
-			return (4,3)
+			return (4, 3)
 		elif valstr == "16_9": # auto ... 4:3 or 16:9
 			try:
 				if "1" in open("/proc/stb/vmpeg/0/aspect", "r").read(): # 4:3
-					return (4,3)
+					return (4, 3)
 			except IOError:
 				pass
 		elif valstr in ("16_9_always", "16_9_letterbox"): # 16:9
 			pass
 		elif valstr in ("16_10_letterbox", "16_10_panscan"): # 16:10
-			return (16,10)
-		return (16,9)
+			return (16, 10)
+		return (16, 9)
 
 	def getFramebufferScale(self):
 		aspect = self.getOutputAspect()
@@ -196,7 +196,7 @@ def InitAVSwitch():
 	if SystemInfo["CanChangeOsdAlpha"]:
 		def setAlpha(config):
 			open("/proc/stb/video/alpha", "w").write(str(config.value))
-		config.av.osd_alpha = ConfigSlider(default=255, limits=(0,255))
+		config.av.osd_alpha = ConfigSlider(default=255, limits=(0, 255))
 		config.av.osd_alpha.addNotifier(setAlpha)
 
 	if os.path.exists("/proc/stb/vmpeg/0/pep_scaler_sharpness"):
@@ -209,7 +209,7 @@ def InitAVSwitch():
 			except IOError:
 				print "couldn't write pep_scaler_sharpness"
 
-		config.av.scaler_sharpness = ConfigSlider(default=13, limits=(0,26))
+		config.av.scaler_sharpness = ConfigSlider(default=13, limits=(0, 26))
 		config.av.scaler_sharpness.addNotifier(setScaler_sharpness)
 	else:
 		config.av.scaler_sharpness = NoSave(ConfigNothing())

@@ -185,7 +185,7 @@ class EPGList(GUIComponent):
 
 	def applySkin(self, desktop, screen):
 		def EntryFont(value):
-			font = parseFont(value, ((1,1),(1,1)))
+			font = parseFont(value, ((1, 1), (1, 1)))
 			self.entryFontName = font.family
 			self.entryFontSize = font.pointSize
 		def EntryForegroundColor(value):
@@ -213,7 +213,7 @@ class EPGList(GUIComponent):
 		def EventNamePadding(value):
 			self.eventNamePadding = int(value)
 		def ServiceFont(value):
-			self.serviceFont = parseFont(value, ((1,1),(1,1)))
+			self.serviceFont = parseFont(value, ((1, 1), (1, 1)))
 		def ServiceForegroundColor(value):
 			self.foreColorService = parseColor(value).argb()
 		def ServiceForegroundColorSelected(value):
@@ -664,7 +664,7 @@ class EPGList(GUIComponent):
 			entry = entries[self.cur_event] #(event_id, event_title, begin_time, duration)
 			time_base = self.time_base + self.offs * self.time_epoch * 60
 			xpos, width = self.calcEntryPosAndWidth(self.event_rect, time_base, self.time_epoch, entry[2], entry[3])
-			self.select_rect = Rect(xpos,0, width, self.event_rect.height)
+			self.select_rect = Rect(xpos, 0, width, self.event_rect.height)
 			self.l.setSelectionClip(eRect(xpos, 0, width, self.event_rect.h), visible and update)
 		else:
 			self.select_rect = self.event_rect
@@ -1261,12 +1261,12 @@ class GraphMultiEPG(Screen, HelpableScreen):
 		if repeat:
 			if record:
 				title_text = _("Repeating event currently recording.\nWhat do you want to do?")
-				menu = [(_("Stop current event but not coming events"), "stoponlycurrent"),(_("Stop current event and disable coming events"), "stopall")]
+				menu = [(_("Stop current event but not coming events"), "stoponlycurrent"), (_("Stop current event and disable coming events"), "stopall")]
 				if not timer.disabled:
 					menu.append((_("Don't stop current event but disable coming events"), "stoponlycoming"))
 			else:
 				title_text = _("Attention, this is repeated timer!\nWhat do you want to do?")
-				menu = [(_("Disable current event but not coming events"), "nextonlystop"),(_("Disable timer"), "simplestop")]
+				menu = [(_("Disable current event but not coming events"), "nextonlystop"), (_("Disable timer"), "simplestop")]
 			self.session.openWithCallback(boundFunction(self.runningEventCallback, timer, state), ChoiceBox, title=title_text, list=menu)
 		elif timer.state == state:
 			if timer.external:
@@ -1328,7 +1328,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 			isRunning = prev_state in (1, 2)
 			title_text = isRepeat and _("Attention, this is repeated timer!\n") or ""
 			firstNextRepeatEvent = isRepeat and (begin < timer.begin <= end or timer.begin <= begin <= timer.end) and not timer.justplay
-			menu = [(_("Delete timer"), "delete"),(_("Edit timer"), "edit")]
+			menu = [(_("Delete timer"), "delete"), (_("Edit timer"), "edit")]
 			buttons = ["red", "green"]
 			if not isRunning:
 				if firstNextRepeatEvent and timer.isFindRunningEvent() and not timer.isFindNextEvent():

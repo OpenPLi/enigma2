@@ -26,9 +26,9 @@ config.pic.lastDir = ConfigText(default=resolveFilename(SCOPE_MEDIA))
 config.pic.infoline = ConfigYesNo(default=True)
 config.pic.loop = ConfigYesNo(default=True)
 config.pic.stopPlayTv = ConfigYesNo(default=False)
-config.pic.bgcolor = ConfigSelection(default="#00000000", choices=[("#00000000", _("black")),("#009eb9ff", _("blue")),("#00ff5a51", _("red")), ("#00ffe875", _("yellow")), ("#0038FF48", _("green"))])
+config.pic.bgcolor = ConfigSelection(default="#00000000", choices=[("#00000000", _("black")), ("#009eb9ff", _("blue")), ("#00ff5a51", _("red")), ("#00ffe875", _("yellow")), ("#0038FF48", _("green"))])
 config.pic.autoOrientation = ConfigYesNo(default=False)
-config.pic.textcolor = ConfigSelection(default="#0038FF48", choices=[("#00000000", _("black")),("#009eb9ff", _("blue")),("#00ff5a51", _("red")), ("#00ffe875", _("yellow")), ("#0038FF48", _("green"))])
+config.pic.textcolor = ConfigSelection(default="#0038FF48", choices=[("#00000000", _("black")), ("#009eb9ff", _("blue")), ("#00ff5a51", _("red")), ("#00ffe875", _("yellow")), ("#0038FF48", _("green"))])
 
 class picshow(Screen):
 	skin = """
@@ -85,7 +85,7 @@ class picshow(Screen):
 			self["thn"].instance.setPixmap(ptr.__deref__())
 			self["thn"].show()
 
-		text = picInfo.split('\n',1)
+		text = picInfo.split('\n', 1)
 		self["label"].setText(text[1])
 		self["key_yellow"].setText(_("Exif"))
 
@@ -262,7 +262,7 @@ class Pic_Thumb(Screen):
 
 		self.textcolor = config.pic.textcolor.value
 		self.color = config.pic.bgcolor.value
-		self.spaceX, self.picX, self.spaceY, self.picY, textsize, thumtxt = skin.parameters.get("PicturePlayerThumb",(35, 190, 30, 200, 20, 14))
+		self.spaceX, self.picX, self.spaceY, self.picY, textsize, thumtxt = skin.parameters.get("PicturePlayerThumb", (35, 190, 30, 200, 20, 14))
 
 		pic_frame = resolveFilename(SCOPE_CURRENT_SKIN, "icons/pic_frame.png")
 
@@ -552,7 +552,7 @@ class Pic_Full_View(Screen):
 		if ptr is not None:
 			text = ""
 			try:
-				text = picInfo.split('\n',1)
+				text = picInfo.split('\n', 1)
 				text = "(" + str(self.index + 1) + "/" + str(self.maxentry + 1) + ") " + text[0].split('/')[-1]
 			except:
 				pass

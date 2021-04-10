@@ -49,7 +49,7 @@ class About(Screen):
 
 		AboutText += _("DVB driver version: ") + about.getDriverInstalledDate() + "\n"
 
-		GStreamerVersion = _("Media player: GStreamer, version ") + about.getGStreamerVersionString().replace("GStreamer","")
+		GStreamerVersion = _("Media player: GStreamer, version ") + about.getGStreamerVersionString().replace("GStreamer", "")
 		self["GStreamerVersion"] = StaticText(GStreamerVersion)
 
 		ffmpegVersion = _("Media player: ffmpeg, version ") + about.getffmpegVersionString()
@@ -301,7 +301,7 @@ class MemoryInfo(Screen):
 			mem = 1
 			free = 0
 			rows_in_column = self["params"].rows_in_column
-			for i, line in enumerate(open('/proc/meminfo','r')):
+			for i, line in enumerate(open('/proc/meminfo', 'r')):
 				s = line.strip().split(None, 2)
 				if len(s) == 3:
 					name, size, units = s
@@ -315,18 +315,18 @@ class MemoryInfo(Screen):
 				if name.startswith("MemFree") or name.startswith("Buffers") or name.startswith("Cached"):
 					free += int(size)
 				if i < rows_in_column:
-					ltext += "".join((name,"\n"))
-					lvalue += "".join((size," ",units,"\n"))
+					ltext += "".join((name, "\n"))
+					lvalue += "".join((size, " ", units, "\n"))
 				else:
-					rtext += "".join((name,"\n"))
-					rvalue += "".join((size," ",units,"\n"))
+					rtext += "".join((name, "\n"))
+					rvalue += "".join((size, " ", units, "\n"))
 			self['lmemtext'].setText(ltext)
 			self['lmemvalue'].setText(lvalue)
 			self['rmemtext'].setText(rtext)
 			self['rmemvalue'].setText(rvalue)
 			self["slide"].setValue(int(100.0 * (mem - free) / mem + 0.25))
-			self['pfree'].setText("%.1f %s" % (100. * free / mem,'%'))
-			self['pused'].setText("%.1f %s" % (100. * (mem - free) / mem,'%'))
+			self['pfree'].setText("%.1f %s" % (100. * free / mem, '%'))
+			self['pused'].setText("%.1f %s" % (100. * (mem - free) / mem, '%'))
 		except Exception, e:
 			print "[About] getMemoryInfo FAIL:", e
 

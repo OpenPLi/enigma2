@@ -576,7 +576,7 @@ class NIM(object):
 		connectable = {
 				"DVB-S": ("DVB-S", "DVB-S2", "DVB-S2X"),
 				"DVB-C": ("DVB-C", "DVB-C2"),
-				"DVB-T": ("DVB-T","DVB-T2"),
+				"DVB-T": ("DVB-T", "DVB-T2"),
 				"DVB-S2": ("DVB-S", "DVB-S2", "DVB-S2X"),
 				"DVB-S2X": ("DVB-S", "DVB-S2", "DVB-S2X"),
 				"DVB-C2": ("DVB-C", "DVB-C2"),
@@ -660,7 +660,7 @@ class NIM(object):
 
 	def getFriendlyType(self):
 		if self.multi_type.values():
-			returnValue = "/".join([x[1].replace("DVB-", "") for x in sorted([({"DVB-S":1, "DVB-C": 2, "DVB-T": 3, "ATSC": 4}[x[:5]], x) for x in self.multi_type.values()])])
+			returnValue = "/".join([x[1].replace("DVB-", "") for x in sorted([({"DVB-S": 1, "DVB-C": 2, "DVB-T": 3, "ATSC": 4}[x[:5]], x) for x in self.multi_type.values()])])
 			return "%s %s" % (_("Combined") if self.combined else _("MultiType"), returnValue if returnValue == 'ATSC' else "DVB-%s" % returnValue)
 		return self.getType() or _("empty")
 
@@ -1226,7 +1226,7 @@ def InitNimManager(nimmgr, update_slots=[]):
 	lnb_choices_default = "universal_lnb"
 
 	prio_list = [("-1", _("Auto"))]
-	for prio in range(65) + range(14000,14065) + range(19000,19065):
+	for prio in range(65) + range(14000, 14065) + range(19000, 19065):
 		description = ""
 		if prio == 0:
 			description = _(" (disabled)")
@@ -1374,14 +1374,14 @@ def InitNimManager(nimmgr, update_slots=[]):
 	def configDiSEqCModeChanged(configElement):
 		section = configElement.section
 		if configElement.value == "1_2" and isinstance(section.longitude, ConfigNothing):
-			section.longitude = ConfigFloat(default=[5,100], limits=[(0,359),(0,999)])
+			section.longitude = ConfigFloat(default=[5, 100], limits=[(0, 359), (0, 999)])
 			section.longitudeOrientation = ConfigSelection(longitude_orientation_choices, "east")
-			section.latitude = ConfigFloat(default=[50,767], limits=[(0,359),(0,999)])
+			section.latitude = ConfigFloat(default=[50, 767], limits=[(0, 359), (0, 999)])
 			section.latitudeOrientation = ConfigSelection(latitude_orientation_choices, "north")
-			section.tuningstepsize = ConfigFloat(default=[0,360], limits=[(0,9),(0,999)])
-			section.rotorPositions = ConfigInteger(default=99, limits=[1,999])
-			section.turningspeedH = ConfigFloat(default=[2,3], limits=[(0,9),(0,9)])
-			section.turningspeedV = ConfigFloat(default=[1,7], limits=[(0,9),(0,9)])
+			section.tuningstepsize = ConfigFloat(default=[0, 360], limits=[(0, 9), (0, 999)])
+			section.rotorPositions = ConfigInteger(default=99, limits=[1, 999])
+			section.turningspeedH = ConfigFloat(default=[2, 3], limits=[(0, 9), (0, 9)])
+			section.turningspeedV = ConfigFloat(default=[1, 7], limits=[(0, 9), (0, 9)])
 			section.powerMeasurement = ConfigYesNo(default=True)
 			section.powerThreshold = ConfigInteger(default=15, limits=(0, 100))
 			section.turningSpeed = ConfigSelection(turning_speed_choices, "fast")
@@ -1471,14 +1471,14 @@ def InitNimManager(nimmgr, update_slots=[]):
 		nim.positionerMode = ConfigSelection(positioner_mode_choices, "usals")
 		nim.userSatellitesList = ConfigText('[]')
 		nim.pressOKtoList = ConfigNothing()
-		nim.longitude = ConfigFloat(default=[5,100], limits=[(0,359),(0,999)])
+		nim.longitude = ConfigFloat(default=[5, 100], limits=[(0, 359), (0, 999)])
 		nim.longitudeOrientation = ConfigSelection(longitude_orientation_choices, "east")
-		nim.latitude = ConfigFloat(default=[50,767], limits=[(0,359),(0,999)])
+		nim.latitude = ConfigFloat(default=[50, 767], limits=[(0, 359), (0, 999)])
 		nim.latitudeOrientation = ConfigSelection(latitude_orientation_choices, "north")
-		nim.tuningstepsize = ConfigFloat(default=[0,360], limits=[(0,9),(0,999)])
-		nim.rotorPositions = ConfigInteger(default=99, limits=[1,999])
-		nim.turningspeedH = ConfigFloat(default=[2,3], limits=[(0,9),(0,9)])
-		nim.turningspeedV = ConfigFloat(default=[1,7], limits=[(0,9),(0,9)])
+		nim.tuningstepsize = ConfigFloat(default=[0, 360], limits=[(0, 9), (0, 999)])
+		nim.rotorPositions = ConfigInteger(default=99, limits=[1, 999])
+		nim.turningspeedH = ConfigFloat(default=[2, 3], limits=[(0, 9), (0, 9)])
+		nim.turningspeedV = ConfigFloat(default=[1, 7], limits=[(0, 9), (0, 9)])
 		nim.powerMeasurement = ConfigYesNo(True)
 		nim.powerThreshold = ConfigInteger(default=hw.get_device_name() == "dm8000" and 15 or 50, limits=(0, 100))
 		nim.turningSpeed = ConfigSelection(turning_speed_choices, "fast")

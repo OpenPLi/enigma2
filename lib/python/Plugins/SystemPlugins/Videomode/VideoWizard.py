@@ -83,7 +83,7 @@ class VideoWizard(WizardLanguage, Rc):
 				if descr == 'DVI' and has_hdmi:
 					descr = 'HDMI'
 				if port != "DVI-PC":
-					list.append((descr,port))
+					list.append((descr, port))
 		list.sort(key=lambda x: x[0])
 		print "[VideoWizard] listInputChannels:", list
 		return list
@@ -183,7 +183,7 @@ class VideoWizard(WizardLanguage, Rc):
 			config.misc.showtestcard.value = False
 
 	def keyNumberGlobal(self, number):
-		if number in (1,2,3):
+		if number in (1, 2, 3):
 			if number == 1:
 				self.hw.saveMode("DVI", "720p", "multi")
 			elif number == 2:

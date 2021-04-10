@@ -233,7 +233,7 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 	def showTutorial(self):
 		if config.plugins.CutListEditor.showIntro.value and not CutListEditor.tutorial_seen:
 			CutListEditor.tutorial_seen = True
-			self.session.open(MessageBox,_("Welcome to the cutlist editor.\n\nSeek to the start of the stuff you want to cut away. Press OK, select 'start cut'.\n\nThen seek to the end, press OK, select 'end cut'. That's it."), MessageBox.TYPE_INFO)
+			self.session.open(MessageBox, _("Welcome to the cutlist editor.\n\nSeek to the start of the stuff you want to cut away. Press OK, select 'start cut'.\n\nThen seek to the end, press OK, select 'end cut'. That's it."), MessageBox.TYPE_INFO)
 
 	def checkSkipShowHideLock(self):
 		pass
@@ -358,7 +358,7 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 		elif result == CutListContextMenu.RET_ENDCUT:
 			# remove in/out marks between the new cut
 			for (where, what) in self.cut_list[:]:
-				if self.cut_start <= where <= self.context_position and what in (0,1):
+				if self.cut_start <= where <= self.context_position and what in (0, 1):
 					self.cut_list.remove((where, what))
 
 			bisect.insort(self.cut_list, (self.cut_start, 1))
@@ -395,7 +395,7 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 		elif result == CutListContextMenu.RET_REMOVEBEFORE:
 			# remove in/out marks before current position
 			for (where, what) in self.cut_list[:]:
-				if where <= self.context_position and what in (0,1):
+				if where <= self.context_position and what in (0, 1):
 					self.cut_list.remove((where, what))
 			# add 'in' point
 			bisect.insort(self.cut_list, (self.context_position, 0))
@@ -405,7 +405,7 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 		elif result == CutListContextMenu.RET_REMOVEAFTER:
 			# remove in/out marks after current position
 			for (where, what) in self.cut_list[:]:
-				if where >= self.context_position and what in (0,1):
+				if where >= self.context_position and what in (0, 1):
 					self.cut_list.remove((where, what))
 			# add 'out' point
 			bisect.insort(self.cut_list, (self.context_position, 1))
@@ -446,11 +446,11 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 				x_size = choice[1]
 				path = service.getPath()
 				grabConsole = Console()
-				cmd = 'grab -vblpr%d "%s"' % (x_size, path.rsplit('.',1)[0] + strftime("_%Y%m%d%H%M%S", gmtime()) + ".png")
+				cmd = 'grab -vblpr%d "%s"' % (x_size, path.rsplit('.', 1)[0] + strftime("_%Y%m%d%H%M%S", gmtime()) + ".png")
 				grabConsole.ePopen(cmd)
 				self.playpauseService()
-			menu = [("1920",1920),("720",720),("360",360),("180",180)]
-			buttons = ["1","2","3","4"]
+			menu = [("1920", 1920), ("720", 720), ("360", 360), ("180", 180)]
+			buttons = ["1", "2", "3", "4"]
 			text = _("Select horizontal resolution:")
 			self.session.openWithCallback(grabCallback, ChoiceBox, title=text, list=menu, keys=buttons)
 

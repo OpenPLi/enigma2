@@ -42,7 +42,7 @@ class SelectImage(Screen):
 		self["key_yellow"] = StaticText()
 		self["key_blue"] = StaticText()
 		self["description"] = StaticText()
-		self["list"] = ChoiceList(list=[ChoiceEntryComponent('',((_("Retrieving image list - Please wait...")), "Waiter"))])
+		self["list"] = ChoiceList(list=[ChoiceEntryComponent('', ((_("Retrieving image list - Please wait...")), "Waiter"))])
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "KeyboardInputActions", "MenuActions"],
 		{
@@ -104,12 +104,12 @@ class SelectImage(Screen):
 		list = []
 		for catagorie in reversed(sorted(self.imagesList.keys())):
 			if catagorie in self.expanded:
-				list.append(ChoiceEntryComponent('expanded',((str(catagorie)), "Expander")))
+				list.append(ChoiceEntryComponent('expanded', ((str(catagorie)), "Expander")))
 				for image in reversed(sorted(self.imagesList[catagorie].keys())):
-					list.append(ChoiceEntryComponent('verticalline',((str(self.imagesList[catagorie][image]['name'])), str(self.imagesList[catagorie][image]['link']))))
+					list.append(ChoiceEntryComponent('verticalline', ((str(self.imagesList[catagorie][image]['name'])), str(self.imagesList[catagorie][image]['link']))))
 			else:
 				for image in self.imagesList[catagorie].keys():
-					list.append(ChoiceEntryComponent('expandable',((str(catagorie)), "Expander")))
+					list.append(ChoiceEntryComponent('expandable', ((str(catagorie)), "Expander")))
 					break
 		if list:
 			self["list"].setList(list)
@@ -225,7 +225,7 @@ class FlashImage(Screen):
 			imagesList = getImagelist()
 			currentimageslot = getCurrentImage()
 			choices = []
-			slotdict = {k:v for k, v in SystemInfo["canMultiBoot"].items() if not v['device'].startswith('/dev/sda')}
+			slotdict = {k: v for k, v in SystemInfo["canMultiBoot"].items() if not v['device'].startswith('/dev/sda')}
 			for x in range(1, len(slotdict) + 1):
 				choices.append(((_("slot%s - %s (current image) with, backup") if x == currentimageslot else _("slot%s - %s, with backup")) % (x, imagesList[x]['imagename']), (x, "with backup")))
 			for x in range(1, len(slotdict) + 1):
@@ -457,16 +457,16 @@ class MultibootSelection(SelectImage):
 					self.deletedImagesExists = True
 				elif imagesList[x]["imagename"] != _("Empty slot"):
 					if SystemInfo["canMode12"]:
-						list.insert(index, ChoiceEntryComponent('',((_("slot%s - %s mode 1 (current image)") if x == self.currentimageslot and mode != 12 else _("slot%s - %s mode 1")) % (x, imagesList[x]['imagename']), (x, 1))))
-						list.append(ChoiceEntryComponent('',((_("slot%s - %s mode 12 (current image)") if x == self.currentimageslot and mode == 12 else _("slot%s - %s mode 12")) % (x, imagesList[x]['imagename']), (x, 12))))
+						list.insert(index, ChoiceEntryComponent('', ((_("slot%s - %s mode 1 (current image)") if x == self.currentimageslot and mode != 12 else _("slot%s - %s mode 1")) % (x, imagesList[x]['imagename']), (x, 1))))
+						list.append(ChoiceEntryComponent('', ((_("slot%s - %s mode 12 (current image)") if x == self.currentimageslot and mode == 12 else _("slot%s - %s mode 12")) % (x, imagesList[x]['imagename']), (x, 12))))
 					else:
-						list.append(ChoiceEntryComponent('',((_("slot%s - %s (current image)") if x == self.currentimageslot and mode != 12 else _("slot%s - %s")) % (x, imagesList[x]['imagename']), (x, 1))))
+						list.append(ChoiceEntryComponent('', ((_("slot%s - %s (current image)") if x == self.currentimageslot and mode != 12 else _("slot%s - %s")) % (x, imagesList[x]['imagename']), (x, 1))))
 		if os.path.isfile(os.path.join(self.tmp_dir, "STARTUP_RECOVERY")):
-			list.append(ChoiceEntryComponent('',((_("Boot to Recovery menu")), "Recovery")))
+			list.append(ChoiceEntryComponent('', ((_("Boot to Recovery menu")), "Recovery")))
 		if os.path.isfile(os.path.join(self.tmp_dir, "STARTUP_ANDROID")):
-			list.append(ChoiceEntryComponent('',((_("Boot to Android image")), "Android")))
+			list.append(ChoiceEntryComponent('', ((_("Boot to Android image")), "Android")))
 		if not list:
-			list.append(ChoiceEntryComponent('',((_("No images found")), "Waiter")))
+			list.append(ChoiceEntryComponent('', ((_("No images found")), "Waiter")))
 		self["list"].setList(list)
 		self.selectionChanged()
 

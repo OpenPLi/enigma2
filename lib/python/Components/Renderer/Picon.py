@@ -131,10 +131,10 @@ class Picon(Renderer):
 		for (attrib, value) in self.skinAttributes:
 			if attrib == "path":
 				self.addPath(value)
-				attribs.remove((attrib,value))
+				attribs.remove((attrib, value))
 			elif attrib == "isFrontDisplayPicon":
 				self.showPicon = value == "0"
-				attribs.remove((attrib,value))
+				attribs.remove((attrib, value))
 		self.skinAttributes = attribs
 		self.changed((self.CHANGED_ALL,))
 		return Renderer.applySkin(self, desktop, parent)

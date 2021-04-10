@@ -28,7 +28,7 @@ class TransponderInfo(Converter, object):
 				ref = nref
 				info = eServiceCenter.getInstance().info(ref)
 			transponderraw = info.getInfoObject(ref, iServiceInformation.sTransponderData)
-			ref = ref.toString().replace("%3a",":")
+			ref = ref.toString().replace("%3a", ":")
 		else:
 			transponderraw = info.getInfoObject(iServiceInformation.sTransponderData)
 			ref = info.getInfoString(iServiceInformation.sServiceref)

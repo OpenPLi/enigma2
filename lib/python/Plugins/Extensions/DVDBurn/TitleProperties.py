@@ -9,7 +9,7 @@ from Components.ConfigList import ConfigListScreen
 from Components.AVSwitch import AVSwitch
 import DVDTitle
 
-class TitleProperties(Screen,ConfigListScreen):
+class TitleProperties(Screen, ConfigListScreen):
 	skin = """
 		<screen name="TitleProperties" position="center,center" size="560,445" title="Properties of current title" >
 			<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
@@ -107,7 +107,7 @@ class TitleProperties(Screen,ConfigListScreen):
 		self.loadThumb()
 
 	def loadThumb(self):
-		thumbfile = self.project.titles[self.title_idx].inputfile.rsplit('.',1)[0] + ".png"
+		thumbfile = self.project.titles[self.title_idx].inputfile.rsplit('.', 1)[0] + ".png"
 		sc = AVSwitch().getFramebufferScale()
 		self.picload.setPara((self["thumbnail"].instance.size().width(), self["thumbnail"].instance.size().height(), sc[0], sc[1], False, 1, "#00000000"))
 		self.picload.startDecode(thumbfile)
@@ -158,15 +158,15 @@ class LanguageChoices():
 				self.langdict[key] = val
 				self.choices.append((key, val))
 		self.choices.sort()
-		self.choices.insert(0,("nolang", ("unspecified")))
-		self.choices.insert(1,(syslang, self.langdict[syslang]))
+		self.choices.insert(0, ("nolang", ("unspecified")))
+		self.choices.insert(1, (syslang, self.langdict[syslang]))
 		if syslang != "en":
-			self.choices.insert(2,("en", self.langdict["en"]))
+			self.choices.insert(2, ("en", self.langdict["en"]))
 
 	def getLanguage(self, DVB_lang):
 		DVB_lang = DVB_lang.lower()
 		for word in ("stereo", "audio", "description", "2ch", "dolby digital"):
-			DVB_lang = DVB_lang.replace(word,"").strip()
+			DVB_lang = DVB_lang.replace(word, "").strip()
 		for key, val in LanguageCodes.iteritems():
 			if DVB_lang.find(key.lower()) == 0:
 				if len(key) == 2:

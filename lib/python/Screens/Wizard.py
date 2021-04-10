@@ -217,7 +217,7 @@ class Wizard(Screen):
 			"red": self.red,
 			"green": self.green,
 			"yellow": self.yellow,
-			"blue":self.blue,
+			"blue": self.blue,
 			"deleteBackward": self.deleteBackward,
 			"deleteForward": self.deleteForward,
 			"1": self.keyNumberGlobal,
@@ -637,7 +637,7 @@ class Wizard(Screen):
 					if self["config"].getCurrent()[1].help_window.instance is not None:
 						helpwindowpos = self["HelpWindow"].getPosition()
 						from enigma import ePoint
-						self["config"].getCurrent()[1].help_window.instance.move(ePoint(helpwindowpos[0],helpwindowpos[1]))
+						self["config"].getCurrent()[1].help_window.instance.move(ePoint(helpwindowpos[0], helpwindowpos[1]))
 			else:
 				if "VKeyIcon" in self:
 					self["VirtualKB"].setEnabled(False)
@@ -659,7 +659,7 @@ class Wizard(Screen):
 					if self["config"].getCurrent()[1].help_window.instance is not None:
 						helpwindowpos = self["HelpWindow"].getPosition()
 						from enigma import ePoint
-						self["config"].getCurrent()[1].help_window.instance.move(ePoint(helpwindowpos[0],helpwindowpos[1]))
+						self["config"].getCurrent()[1].help_window.instance.move(ePoint(helpwindowpos[0], helpwindowpos[1]))
 			self["config"].instance.moveSelectionTo(self.currentConfigIndex)
 			self["config"].setCurrentIndex(self.currentConfigIndex)
 			self["config"].getCurrent()[1].setValue(callback)

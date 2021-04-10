@@ -40,7 +40,7 @@ class SelectionList(MenuList):
 		return [(item[0][0], item[0][1], item[0][2]) for item in self.list if item[0][3]]
 
 	def toggleAllSelection(self):
-		for idx,item in enumerate(self.list):
+		for idx, item in enumerate(self.list):
 			item = self.list[idx][0]
 			self.list[idx] = SelectionEntryComponent(item[0], item[1], item[2], not item[3])
 		self.setList(self.list)

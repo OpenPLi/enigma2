@@ -100,7 +100,7 @@ class Wlan:
 					encryption = None
 
 				signal = str(result.quality.siglevel - 0x100) + " dBm"
-				quality = "%s/%s" % (result.quality.quality,ifobj.getQualityMax().quality)
+				quality = "%s/%s" % (result.quality.quality, ifobj.getQualityMax().quality)
 
 				extra = []
 				for element in result.custom:
@@ -179,7 +179,7 @@ class wpaSupplicant:
 
 			for line in lines:
 				try:
-					(key, value) = line.strip().split('=',1)
+					(key, value) = line.strip().split('=', 1)
 				except:
 					continue
 
@@ -192,7 +192,7 @@ class wpaSupplicant:
 				else:
 					continue
 		except:
-			print "[Wlan.py] Error parsing ",configfile
+			print "[Wlan.py] Error parsing ", configfile
 			wsconfig = {
 					'hiddenessid': False,
 					'ssid': "",
@@ -201,7 +201,7 @@ class wpaSupplicant:
 					'key': "",
 				}
 
-		for (k,v) in wsconf.items():
+		for (k, v) in wsconf.items():
 			print "[wsconf][%s] %s" % (k, v)
 
 		return wsconf
@@ -257,7 +257,7 @@ class wpaSupplicant:
 		fp.close()
 		#system('cat ' + getWlanConfigName(iface))
 
-	def loadConfig(self,iface):
+	def loadConfig(self, iface):
 		if existBcmWifi(iface):
 			return self.loadBcmWifiConfig(iface)
 
@@ -266,7 +266,7 @@ class wpaSupplicant:
 			configfile = '/etc/wpa_supplicant.conf'
 		try:
 			#parse the wpasupplicant configfile
-			print "[Wlan.py] parsing configfile: ",configfile
+			print "[Wlan.py] parsing configfile: ", configfile
 			fp = file(configfile, 'r')
 			supplicant = fp.readlines()
 			fp.close()
@@ -274,7 +274,7 @@ class wpaSupplicant:
 			encryption = "Unencrypted"
 
 			for s in supplicant:
-				split = s.strip().split('=',1)
+				split = s.strip().split('=', 1)
 				if split[0] == 'scan_ssid':
 					if split[1] == '1':
 						config.plugins.wlan.hiddenessid.value = True
@@ -331,7 +331,7 @@ class wpaSupplicant:
 					if key == 'key':
 						wsconfig['key'] = ""
 		except:
-			print "[Wlan.py] Error parsing ",configfile
+			print "[Wlan.py] Error parsing ", configfile
 			wsconfig = {
 					'hiddenessid': False,
 					'ssid': "",
@@ -440,7 +440,7 @@ class Status:
 			if not self.WlanConsole.appContainers:
 				print "[Wlan.py] self.wlaniface after loading:", self.wlaniface
 				if self.statusCallback is not None:
-						self.statusCallback(True,self.wlaniface)
+						self.statusCallback(True, self.wlaniface)
 						self.statusCallback = None
 
 	def getAdapterAttribute(self, iface, attribute):

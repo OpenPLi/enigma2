@@ -80,15 +80,15 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 			ipDefault = [0, 0, 0, 0]
 			portDefault = 8001
 		self.ip = ConfigIP(default=ipDefault, auto_jump=True)
-		self.port = ConfigInteger(default=portDefault, limits=(1,65535))
+		self.port = ConfigInteger(default=portDefault, limits=(1, 65535))
 		self.ip_seperate = ConfigIP(default=ipDefault, auto_jump=True)
-		self.port_seperate = ConfigInteger(default=portDefault, limits=(1,65535))
+		self.port_seperate = ConfigInteger(default=portDefault, limits=(1, 65535))
 		self.ip_dvb_t = ConfigIP(default=ipDefault, auto_jump=True)
-		self.port_dvb_t = ConfigInteger(default=portDefault, limits=(1,65535))
+		self.port_dvb_t = ConfigInteger(default=portDefault, limits=(1, 65535))
 		self.ip_dvb_c = ConfigIP(default=ipDefault, auto_jump=True)
-		self.port_dvb_c = ConfigInteger(default=portDefault, limits=(1,65535))
+		self.port_dvb_c = ConfigInteger(default=portDefault, limits=(1, 65535))
 		self.ip_atsc = ConfigIP(default=ipDefault, auto_jump=True)
-		self.port_atsc = ConfigInteger(default=portDefault, limits=(1,65535))
+		self.port_atsc = ConfigInteger(default=portDefault, limits=(1, 65535))
 
 	def createSetup(self):
 		self.list = []

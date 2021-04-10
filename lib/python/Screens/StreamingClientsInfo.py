@@ -62,7 +62,7 @@ class StreamingClientsInfo(Screen):
 						service_name = ServiceReference(stream.ref.toString()).getServiceName()
 						ip = stream.clientIP or ip
 			info = ("T %s %s %s") % (ip, service_name, _("(VU+ type)"))
-			self.clients.append((info,(-1, x)))
+			self.clients.append((info, (-1, x)))
 		self["menu"].setList(self.clients)
 		if self.clients:
 			self["info"].setText("")

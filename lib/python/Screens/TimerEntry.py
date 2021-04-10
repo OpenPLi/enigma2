@@ -119,7 +119,7 @@ class TimerEntry(Screen, ConfigListScreen):
 		self.timerentry_zapwakeup = ConfigSelection(choices=choicelist, default=zap_wakeup)
 		self.timerentry_afterevent = ConfigSelection(choices=[("nothing", _("do nothing")), ("standby", _("go to standby")), ("deepstandby", shutdownString), ("auto", _("auto"))], default=afterevent)
 		self.timerentry_recordingtype = ConfigSelection(choices=[("normal", _("normal")), ("descrambled+ecm", _("descramble and record ecm")), ("scrambled+ecm", _("don't descramble, record ecm"))], default=recordingtype)
-		self.timerentry_type = ConfigSelection(choices=[("once",_("once")), ("repeated", _("repeated"))], default=type)
+		self.timerentry_type = ConfigSelection(choices=[("once", _("once")), ("repeated", _("repeated"))], default=type)
 		self.timerentry_name = ConfigText(default=self.timer.name, visible_width=50, fixed_size=False)
 		self.timerentry_description = ConfigText(default=self.timer.description, visible_width=50, fixed_size=False)
 		self.timerentry_tags = self.timer.tags[:]
@@ -148,7 +148,7 @@ class TimerEntry(Screen, ConfigListScreen):
 
 		self.timerentry_repeatedbegindate = ConfigDateTime(default=self.timer.repeatedbegindate, formatstring=_("%d.%B %Y"), increment=86400)
 
-		self.timerentry_weekday = ConfigSelection(default=weekday_table[weekday], choices=[("mon",_("Monday")), ("tue", _("Tuesday")), ("wed",_("Wednesday")), ("thu", _("Thursday")), ("fri", _("Friday")), ("sat", _("Saturday")), ("sun", _("Sunday"))])
+		self.timerentry_weekday = ConfigSelection(default=weekday_table[weekday], choices=[("mon", _("Monday")), ("tue", _("Tuesday")), ("wed", _("Wednesday")), ("thu", _("Thursday")), ("fri", _("Friday")), ("sat", _("Saturday")), ("sun", _("Sunday"))])
 
 		self.timerentry_day = ConfigSubList()
 		for x in (0, 1, 2, 3, 4, 5, 6):
