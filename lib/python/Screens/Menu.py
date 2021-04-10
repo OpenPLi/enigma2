@@ -173,7 +173,7 @@ class Menu(Screen, ProtectedScreen):
 		self.createMenuList()
 
 		# for the skin: first try a menu_<menuID>, then Menu
-		self.skinName = [ ]
+		self.skinName = []
 		if self.menuID:
 			self.skinName.append("menu_" + self.menuID)
 		self.skinName.append("Menu")
@@ -261,7 +261,7 @@ class Menu(Screen, ProtectedScreen):
 		if "user" in config.usage.menu_sort_mode.value and self.menuID == "mainmenu":
 			plugin_list = []
 			id_list = []
-			for l in plugins.getPlugins([PluginDescriptor.WHERE_PLUGINMENU ,PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_EVENTINFO]):
+			for l in plugins.getPlugins([PluginDescriptor.WHERE_PLUGINMENU,PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_EVENTINFO]):
 				l.id = (l.name.lower()).replace(' ','_')
 				if l.id not in id_list:
 					id_list.append(l.id)
@@ -349,7 +349,7 @@ class Menu(Screen, ProtectedScreen):
 				self.list.append(entry)
 		if not self.list:
 			self.list.append(('',None,'dummy','10',10))
-		self.list.sort(key=lambda listweight : int(listweight[4]))
+		self.list.sort(key=lambda listweight: int(listweight[4]))
 
 class MenuSort(Menu):
 	def __init__(self, session, parent):
@@ -381,7 +381,7 @@ class MenuSort(Menu):
 		return config.ParentalControl.setuppinactive.value and config.ParentalControl.config_sections.menu_sort.value
 
 	def resetSortOrder(self, key=None):
-		config.usage.menu_sort_weight.value = { "mainmenu" : {"submenu" : {} }}
+		config.usage.menu_sort_weight.value = {"mainmenu": {"submenu": {}}}
 		config.usage.menu_sort_weight.save()
 		self.createMenuList()
 
@@ -389,7 +389,7 @@ class MenuSort(Menu):
 		self.list = list(self.full_list)
 		if not self.list:
 			self.list.append(('',None,'dummy','10',10))
-		self.list.sort(key=lambda listweight : int(listweight[4]))
+		self.list.sort(key=lambda listweight: int(listweight[4]))
 
 	def selectionChanged(self):
 		selection = self["menu"].getCurrent() and len(self["menu"].getCurrent()) > 2 and self["menu"].getCurrent()[2] or ""

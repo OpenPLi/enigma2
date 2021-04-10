@@ -155,7 +155,7 @@ class AudioSelection(Screen, ConfigListScreen):
 					def __call__(self, *args, **kwargs):
 						self.fnc(*self.args)
 
-				self.Plugins = [ (p.name, PluginCaller(self.infobar.runPlugin, p)) for p in plugins.getPlugins(where=PluginDescriptor.WHERE_AUDIOMENU) ]
+				self.Plugins = [(p.name, PluginCaller(self.infobar.runPlugin, p)) for p in plugins.getPlugins(where=PluginDescriptor.WHERE_AUDIOMENU)]
 
 				if self.Plugins:
 					self["key_blue"].setBoolean(True)

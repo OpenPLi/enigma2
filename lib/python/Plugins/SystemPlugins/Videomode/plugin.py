@@ -15,17 +15,17 @@ class VideoSetup(Screen, ConfigListScreen):
 	def __init__(self, session, hw):
 		Screen.__init__(self, session)
 		# for the skin: first try VideoSetup, then Setup, this allows individual skinning
-		self.skinName = ["VideoSetup", "Setup" ]
+		self.skinName = ["VideoSetup", "Setup"]
 		self.setup_title = _("A/V settings")
 		self.setTitle(self.setup_title)
 		self.hw = hw
-		self.onChangedEntry = [ ]
+		self.onChangedEntry = []
 
 		# handle hotplug by re-creating setup
 		self.onShow.append(self.startHotplug)
 		self.onHide.append(self.stopHotplug)
 
-		self.list = [ ]
+		self.list = []
 		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
 
 		from Components.ActionMap import ActionMap
@@ -258,7 +258,7 @@ def videoSetupMain(session, **kwargs):
 
 def startSetup(menuid):
 	if menuid != "video":
-		return [ ]
+		return []
 
 	return [(_("A/V settings"), videoSetupMain, "av_setup", 40)]
 

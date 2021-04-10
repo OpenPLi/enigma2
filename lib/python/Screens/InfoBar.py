@@ -328,7 +328,7 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 			self.doSeek(0)
 			self.setSeekState(self.SEEK_STATE_PLAY)
 		elif answer in ("playlist","playlistquit","loop"):
-			( next_service, item , lenght ) = self.getPlaylistServiceInfo(self.cur_service)
+			(next_service, item, lenght) = self.getPlaylistServiceInfo(self.cur_service)
 			if next_service is not None:
 				if config.usage.next_movie_msg.value:
 					self.displayPlayedName(next_service, item, lenght)
@@ -534,7 +534,7 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 					return (playlist[i], i+1, len(playlist))
 				elif config.usage.on_movie_eof.value == "loop":
 					return (playlist[0], 1, len(playlist))
-		return ( None, 0, 0 )
+		return (None, 0, 0)
 
 	def displayPlayedName(self, ref, index, n):
 		from Tools import Notifications

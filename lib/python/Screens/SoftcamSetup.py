@@ -40,7 +40,7 @@ class SoftcamSetup(Screen, ConfigListScreen):
 				"blue": self.ppanelShortcut,
 			},-1)
 
-		self.list = [ ]
+		self.list = []
 		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
 
 		self.softcam = CamControl('softcam')

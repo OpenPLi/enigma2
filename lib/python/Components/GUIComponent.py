@@ -7,7 +7,7 @@ class GUIComponent(object):
 
 	def __init__(self):
 		self.instance = None
-		self.onVisibilityChange = [ ]
+		self.onVisibilityChange = []
 		self.__visible = False
 		self.visible = True
 		self.skinAttributes = []

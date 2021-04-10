@@ -5,7 +5,7 @@ import os
 
 class AVSwitch:
 	def setInput(self, input):
-		INPUT = { "ENCODER": 0, "SCART": 1, "AUX": 2 }
+		INPUT = {"ENCODER": 0, "SCART": 1, "AUX": 2}
 		eAVSwitch.getInstance().setInput(INPUT[input])
 
 	def setColorFormat(self, value):
@@ -151,11 +151,11 @@ def InitAVSwitch():
 		iAVSwitch.setColorFormat(map[configElement.value])
 
 	def setAspectRatio(configElement):
-		map = {"4_3_letterbox": 0, "4_3_panscan": 1, "16_9": 2, "16_9_always": 3, "16_10_letterbox": 4, "16_10_panscan": 5, "16_9_letterbox" : 6}
+		map = {"4_3_letterbox": 0, "4_3_panscan": 1, "16_9": 2, "16_9_always": 3, "16_10_letterbox": 4, "16_10_panscan": 5, "16_9_letterbox": 6}
 		iAVSwitch.setAspectRatio(map[configElement.value])
 
 	def setSystem(configElement):
-		map = {"pal": 0, "ntsc": 1, "multinorm" : 2}
+		map = {"pal": 0, "ntsc": 1, "multinorm": 2}
 		iAVSwitch.setSystem(map[configElement.value])
 
 	def setWSS(configElement):

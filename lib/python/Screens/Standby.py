@@ -55,7 +55,7 @@ class StandbyScreen(Screen):
 		if os.path.exists("/usr/script/standby_enter.sh"):
 			Console().ePopen("/usr/script/standby_enter.sh")
 
-		self["actions"] = ActionMap( [ "StandbyActions" ],
+		self["actions"] = ActionMap(["StandbyActions"],
 		{
 			"power": self.Power,
 			"discrete_on": self.Power

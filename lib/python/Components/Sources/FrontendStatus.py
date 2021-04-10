@@ -31,7 +31,7 @@ class FrontendStatus(Source):
 	def getFrontendStatus(self):
 		if self.frontend_source:
 			frontend = self.frontend_source()
-			dict = { }
+			dict = {}
 			if frontend:
 				frontend.getFrontendStatus(dict)
 			return dict

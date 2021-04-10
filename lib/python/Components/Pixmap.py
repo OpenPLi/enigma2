@@ -94,12 +94,12 @@ class MultiPixmap(Pixmap):
 		if self.skinAttributes is not None:
 			skin_path_prefix = getattr(screen, "skin_path", path)
 			pixmap = None
-			attribs = [ ]
+			attribs = []
 			for (attrib, value) in self.skinAttributes:
 				if attrib == "pixmaps":
 					pixmaps = value.split(',')
 					for p in pixmaps:
-						self.pixmaps.append(loadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, p, path_prefix=skin_path_prefix), desktop) )
+						self.pixmaps.append(loadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, p, path_prefix=skin_path_prefix), desktop))
 					if not pixmap:
 						pixmap = resolveFilename(SCOPE_CURRENT_SKIN, pixmaps[0], path_prefix=skin_path_prefix)
 				elif attrib == "pixmap":

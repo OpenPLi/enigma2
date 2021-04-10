@@ -64,7 +64,7 @@ class BouquetSelector(Screen):
 				"ok": self.okbuttonClick,
 				"cancel": self.cancelClick
 			})
-		entrys = [ (x[0], x[1]) for x in bouquets ]
+		entrys = [(x[0], x[1]) for x in bouquets]
 		self["menu"] = MenuList(entrys, enableWrapAround)
 
 	def getCurrent(self):
@@ -140,7 +140,7 @@ class ChannelContextMenu(Screen):
 				"6": self.toggleMoveModeSelect,
 				"8": self.removeEntry
 			})
-		menu = [ ]
+		menu = []
 
 		self.removeFunction = False
 		self.addFunction = False
@@ -743,7 +743,7 @@ class ChannelSelectionEPG(InfoBarHotkey):
 			answer[1]()
 
 	def openEventView(self):
-		epglist = [ ]
+		epglist = []
 		self.epglist = epglist
 		ref = self.getCurrentSelection()
 		epg = eEPGCache.getInstance()
@@ -790,7 +790,7 @@ class ChannelSelectionEPG(InfoBarHotkey):
 		self.session.open(EPGSelection, refstr, None, eventid)
 
 	def getServicesList(self, root):
-		services = [ ]
+		services = []
 		servicelist = root and eServiceCenter.getInstance().list(root)
 		if not servicelist is None:
 			while True:
@@ -882,7 +882,7 @@ class ChannelSelectionEdit:
 		self.entry_marked = False
 		self.bouquet_mark_edit = OFF
 		self.mutableList = None
-		self.__marked = [ ]
+		self.__marked = []
 		self.saved_title = None
 		self.saved_root = None
 		self.current_ref = None
@@ -890,7 +890,7 @@ class ChannelSelectionEdit:
 		self.confirmRemove = True
 
 		class ChannelSelectionEditActionMap(ActionMap):
-			def __init__(self, csel, contexts=[ ], actions={ }, prio=0):
+			def __init__(self, csel, contexts=[], actions={}, prio=0):
 				ActionMap.__init__(self, contexts, actions, prio)
 				self.csel = csel
 
@@ -1322,10 +1322,10 @@ class ChannelSelectionBase(Screen):
 		self.numericalTextInput = NumericalTextInput(handleTimeout=False)
 		self.numericalTextInput.setUseableChars(u'1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ')
 
-		self.servicePathTV = [ ]
-		self.servicePathRadio = [ ]
-		self.servicePath = [ ]
-		self.history = [ ]
+		self.servicePathTV = []
+		self.servicePathRadio = []
+		self.servicePath = []
+		self.history = []
 		self.rootChanged = False
 		self.startRoot = None
 		self.selectionNumber = ""
@@ -1817,7 +1817,7 @@ class ChannelSelectionBase(Screen):
 		self.setCurrentSelection(ref)
 
 	def getBouquetList(self):
-		bouquets = [ ]
+		bouquets = []
 		serviceHandler = eServiceCenter.getInstance()
 		if config.usage.multibouquet.value:
 			list = serviceHandler.list(self.bouquet_root)
@@ -1913,7 +1913,7 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 
 		self.startServiceRef = None
 
-		self.history = [ ]
+		self.history = []
 		self.history_pos = 0
 
 		if config.servicelist.startupservice.value and config.servicelist.startuproot.value:

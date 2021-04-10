@@ -36,7 +36,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 		Screen.__init__(self, session)
 		ProtectedScreen.__init__(self)
 
-		self.sliderPackages = { "dreambox-dvb-modules": 1, "enigma2": 2, "tuxbox-image-info": 3 }
+		self.sliderPackages = {"dreambox-dvb-modules": 1, "enigma2": 2, "tuxbox-image-info": 3}
 
 		self.setTitle(_("Software update"))
 		self.slider = Slider(0, 4)

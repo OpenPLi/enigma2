@@ -59,10 +59,10 @@ class Network:
 
 	# helper function to convert ips from a sring to a list of ints
 	def convertIP(self, ip):
-		return [ int(n) for n in ip.split('.') ]
+		return [int(n) for n in ip.split('.')]
 
 	def getAddrInet(self, iface, callback):
-		data = { 'up': False, 'dhcp': False, 'preup' : False, 'predown' : False }
+		data = {'up': False, 'dhcp': False, 'preup': False, 'predown': False}
 		try:
 			data['up'] = int(open('/sys/class/net/%s/flags' % iface).read().strip(), 16) & 1 == 1
 			if data['up']:
@@ -413,7 +413,7 @@ class Network:
 		self.restartConsole.eBatch(self.commands, self.restartNetworkFinished, callback, debug=True)
 
 	def restartNetworkFinished(self,extra_args):
-		( callback ) = extra_args
+		(callback) = extra_args
 		if callback is not None:
 			callback(True)
 

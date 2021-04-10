@@ -694,7 +694,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 
 		return {self.StatePrepared: self.start_prepare,
 				self.StateRunning: self.begin,
-				self.StateEnded: self.end }[next_state]
+				self.StateEnded: self.end}[next_state]
 
 	def failureCB(self, answer):
 		self.ts_dialog = None

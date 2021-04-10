@@ -318,7 +318,7 @@ class EventViewBase:
 			text = _("Select action")
 			menu = [(p.name, boundFunction(self.runPlugin, p)) for p in plugins.getPlugins(where=PluginDescriptor.WHERE_EVENTINFO)
 				if 'servicelist' not in p.__call__.func_code.co_varnames
-					if 'selectedevent' not in p.__call__.func_code.co_varnames ]
+					if 'selectedevent' not in p.__call__.func_code.co_varnames]
 			if len(menu) == 1:
 				menu and menu[0][1]()
 			elif len(menu) > 1:

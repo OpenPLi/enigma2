@@ -68,7 +68,7 @@ class BackupScreen(Screen, ConfigListScreen):
 		try:
 			if (path.exists(self.backuppath) == False):
 				makedirs(self.backuppath)
-			self.backupdirs = ' '.join( config.plugins.configurationbackup.backupdirs.value )
+			self.backupdirs = ' '.join(config.plugins.configurationbackup.backupdirs.value)
 			if path.exists(self.fullbackupfilename):
 				dt = str(date.fromtimestamp(stat(self.fullbackupfilename).st_ctime))
 				self.newfilename = self.backuppath + "/" + dt + '-' + self.backupfile
@@ -81,9 +81,9 @@ class BackupScreen(Screen, ConfigListScreen):
 				self.session.open(Console, title=_("Backup is running..."), cmdlist=["tar -czvf " + self.fullbackupfilename + " " + self.backupdirs],finishedCallback=self.backupFinishedCB, closeOnSuccess=True)
 		except OSError:
 			if self.finished_cb:
-				self.session.openWithCallback(self.finished_cb, MessageBox, _("Sorry, your backup destination is not writeable.\nPlease select a different one."), MessageBox.TYPE_INFO, timeout=10 )
+				self.session.openWithCallback(self.finished_cb, MessageBox, _("Sorry, your backup destination is not writeable.\nPlease select a different one."), MessageBox.TYPE_INFO, timeout=10)
 			else:
-				self.session.openWithCallback(self.backupErrorCB,MessageBox, _("Sorry, your backup destination is not writeable.\nPlease select a different one."), MessageBox.TYPE_INFO, timeout=10 )
+				self.session.openWithCallback(self.backupErrorCB,MessageBox, _("Sorry, your backup destination is not writeable.\nPlease select a different one."), MessageBox.TYPE_INFO, timeout=10)
 
 	def backupFinishedCB(self,retval=None):
 		self.close(True)
@@ -117,7 +117,7 @@ class BackupSelection(Screen):
 		self.selectedFiles = config.plugins.configurationbackup.backupdirs.value
 		defaultDir = '/'
 		inhibitDirs = ["/bin", "/boot", "/dev", "/autofs", "/lib", "/proc", "/sbin", "/sys", "/hdd", "/tmp", "/mnt", "/media"]
-		self.filelist = MultiFileSelectList(self.selectedFiles, defaultDir, inhibitDirs=inhibitDirs )
+		self.filelist = MultiFileSelectList(self.selectedFiles, defaultDir, inhibitDirs=inhibitDirs)
 		self["checkList"] = self.filelist
 
 		self["actions"] = ActionMap(["DirectionActions", "OkCancelActions", "ShortcutActions"],

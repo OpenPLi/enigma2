@@ -1,11 +1,11 @@
 import threading
 lock = threading.Lock()
 
-notifications = [ ]
-notificationAdded = [ ]
+notifications = []
+notificationAdded = []
 
 # notifications which are currently on screen (and might be closed by similiar notifications)
-current_notifications = [ ]
+current_notifications = []
 
 def __AddNotification(fnc, screen, id, *args, **kwargs):
 	if ".MessageBox'>" in `screen`:

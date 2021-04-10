@@ -92,7 +92,7 @@ class PositionerSetup(Screen):
 			self.advanced = False
 			self.availablesats = map(lambda x: x[0], nimmanager.getRotorSatListForNim(self.feid))
 
-		cur = { }
+		cur = {}
 		if not self.openFrontend():
 			service = self.session.nav.getCurrentService()
 			feInfo = service and service.frontendInfo()
@@ -151,12 +151,12 @@ class PositionerSetup(Screen):
 				self.messageTimer = eTimer()
 				self.messageTimer.callback.append(self.showMessageBox)
 				self.messageTimer.start(2000, True)
-		self.frontendStatus = { }
+		self.frontendStatus = {}
 		self.diseqc = Diseqc(self.frontend)
 		# True means we dont like that the normal sec stuff sends commands to the rotor!
 		self.tuner = Tuner(self.frontend, ignore_rotor=True)
 
-		tp = ( cur.get("frequency", 0) / 1000,
+		tp = (cur.get("frequency", 0) / 1000,
 			cur.get("symbol_rate", 0) / 1000,
 			cur.get("polarization", eDVBFrontendParametersSatellite.Polarisation_Horizontal),
 			cur.get("fec_inner", eDVBFrontendParametersSatellite.FEC_Auto),
@@ -206,8 +206,8 @@ class PositionerSetup(Screen):
 		self["BER"] = Label(_("BER:"))
 		self["AGC"] = Label(_("AGC:"))
 		self["Frequency"] = Label(_("Frequency:"))
-		self["Symbolrate"] = Label (_("Symbol rate:"))
-		self["FEC"] = Label (_("FEC:"))
+		self["Symbolrate"] = Label(_("Symbol rate:"))
+		self["FEC"] = Label(_("FEC:"))
 		self["Lock"] = Label(_("Lock:"))
 		self["lock_off"] = Pixmap()
 		self["lock_on"] = Pixmap()
@@ -379,7 +379,7 @@ class PositionerSetup(Screen):
 		else:	# it is advanced
 			lnb = None
 			self.printMsg(_("Configuration mode: %s") % _("advanced"))
-			fe_data = { }
+			fe_data = {}
 			if self.frontend:
 				self.frontend.getFrontendData(fe_data)
 				self.frontend.getTransponderData(fe_data, True)
@@ -407,7 +407,7 @@ class PositionerSetup(Screen):
 		usals = None
 		if self.frontend is not None:
 			if self.advanced:
-				fe_data = { }
+				fe_data = {}
 				self.frontend.getFrontendData(fe_data)
 				self.frontend.getTransponderData(fe_data, True)
 				orb_pos = fe_data.get("orbital_position", -9999)
@@ -571,7 +571,7 @@ class PositionerSetup(Screen):
 			self.diseqccommand("limitOff")
 			self.statusMsg(_("Limits cancelled"), timeout=self.STATUS_MSG_TIMEOUT)
 		elif entry == "tune":
-			fe_data = { }
+			fe_data = {}
 			self.frontend.getFrontendData(fe_data)
 			self.frontend.getTransponderData(fe_data, True)
 			feparm = self.tuner.lastparm.getDVBS()
@@ -860,7 +860,7 @@ class PositionerSetup(Screen):
 		if len(self.tuner.getTransponderData()):
 			transponderdata = ConvertToHumanReadable(self.tuner.getTransponderData(), "DVB-S")
 		else:
-			transponderdata = { }
+			transponderdata = {}
 		polarization_text = ""
 		polarization = transponderdata.get("polarization")
 		if polarization:
@@ -980,7 +980,7 @@ class PositionerSetup(Screen):
 
 		def optimise(readings):
 			xi = readings.keys()
-			yi = map(lambda (x, y) : x, readings.values())
+			yi = map(lambda (x, y): x, readings.values())
 			x0 = sum(map(mul, xi, yi)) / sum(yi)
 			xm = xi[yi.index(max(yi))]
 			return (x0, xm)
@@ -1115,7 +1115,7 @@ class PositionerSetup(Screen):
 
 		def optimise(readings):
 			xi = readings.keys()
-			yi = map(lambda (x, y) : x, readings.values())
+			yi = map(lambda (x, y): x, readings.values())
 			x0 = int(round(sum(map(mul, xi, yi)) / sum(yi)))
 			xm = xi[yi.index(max(yi))]
 			return (x0, xm)
@@ -1337,8 +1337,8 @@ class TunerScreen(ConfigListScreen, Screen):
 		self.tuning = ConfigSubsection()
 		self.tuning.type = ConfigSelection(
 				default="manual_transponder",
-				choices={ "manual_transponder" : _("Manual transponder"),
-							"predefined_transponder" : _("Predefined transponder") } )
+				choices={"manual_transponder": _("Manual transponder"),
+							"predefined_transponder": _("Predefined transponder")})
 		self.tuning.sat = ConfigSatlist(list=satlist)
 		if orb_pos is not None:
 			orb_pos_str = str(orb_pos)
@@ -1358,7 +1358,7 @@ class TunerScreen(ConfigListScreen, Screen):
 			"fec_s2": eDVBFrontendParametersSatellite.FEC_9_10,
 			"modulation": eDVBFrontendParametersSatellite.Modulation_QPSK,
 			"pls_mode": eDVBFrontendParametersSatellite.PLS_Gold,
-			"pls_code": eDVBFrontendParametersSatellite.PLS_Default_Gold_Code }
+			"pls_code": eDVBFrontendParametersSatellite.PLS_Default_Gold_Code}
 		if frontendData is not None:
 			ttype = frontendData.get("tuner_type", "UNKNOWN")
 			defaultSat["system"] = frontendData.get("system", eDVBFrontendParametersSatellite.System_DVB_S)

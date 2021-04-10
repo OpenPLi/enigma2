@@ -34,7 +34,7 @@ class DVDToolbox(Screen):
 		self["space_label"] = StaticText()
 		self["space_bar"] = Progress()
 
-		self.mediuminfo = [ ]
+		self.mediuminfo = []
 		self.formattable = False
 		self["details"] = ScrollLabel()
 		self["info"] = StaticText()
@@ -185,9 +185,9 @@ class DVDformatTask(Task):
 		self.toolbox = job.toolbox
 		self.postconditions.append(DVDformatTaskPostcondition())
 		self.setTool("dvd+rw-format")
-		self.args += [ "/dev/" + harddiskmanager.getCD() ]
+		self.args += ["/dev/" + harddiskmanager.getCD()]
 		self.end = 1100
-		self.retryargs = [ ]
+		self.retryargs = []
 
 	def prepare(self):
 		self.error = None
@@ -195,10 +195,10 @@ class DVDformatTask(Task):
 	def processOutputLine(self, line):
 		if line.startswith("- media is already formatted"):
 			self.error = self.ERROR_ALREADYFORMATTED
-			self.retryargs = [ "-force" ]
+			self.retryargs = ["-force"]
 		if line.startswith("- media is not blank") or line.startswith("  -format=full  to perform full (lengthy) reformat;"):
 			self.error = self.ERROR_ALREADYFORMATTED
-			self.retryargs = [ "-blank" ]
+			self.retryargs = ["-blank"]
 		if line.startswith(":-( mounted media doesn't appear to be"):
 			self.error = self.ERROR_NOTWRITEABLE
 

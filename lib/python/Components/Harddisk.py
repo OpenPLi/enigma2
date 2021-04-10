@@ -575,10 +575,10 @@ def addInstallTask(job, package):
 
 class HarddiskManager:
 	def __init__(self):
-		self.hdd = [ ]
+		self.hdd = []
 		self.cd = ""
-		self.partitions = [ ]
-		self.devices_scanned_on_init = [ ]
+		self.partitions = []
+		self.devices_scanned_on_init = []
 		self.on_partition_list_change = CList()
 		self.enumerateBlockDevices()
 		# Find stuff not detected by the enumeration
@@ -739,7 +739,7 @@ class HarddiskManager:
 		return len(self.hdd)
 
 	def HDDList(self):
-		list = [ ]
+		list = []
 		for hd in self.hdd:
 			hdd = hd.model() + " - " + hd.bus()
 			cap = hd.capacity()

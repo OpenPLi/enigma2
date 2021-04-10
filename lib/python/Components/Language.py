@@ -100,7 +100,7 @@ class Language:
 			self.activateLanguage(self.langlist[index])
 
 	def getLanguageList(self):
-		return [ (x, self.lang[x]) for x in self.langlist ]
+		return [(x, self.lang[x]) for x in self.langlist]
 
 	def getActiveLanguage(self):
 		return self.activeLanguage

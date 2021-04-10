@@ -75,19 +75,19 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 		self.avahiselect.addNotifier(set_avahiselect_seperate)
 		try:
 			ipDefault = [int(x) for x in config.usage.remote_fallback.value.split(":")[1][2:].split(".")]
-			portDefault = int( config.usage.remote_fallback.value.split(":")[2])
+			portDefault = int(config.usage.remote_fallback.value.split(":")[2])
 		except:
 			ipDefault = [0, 0, 0, 0]
 			portDefault = 8001
 		self.ip = ConfigIP(default=ipDefault, auto_jump=True)
 		self.port = ConfigInteger(default=portDefault, limits=(1,65535))
-		self.ip_seperate = ConfigIP( default=ipDefault, auto_jump=True)
+		self.ip_seperate = ConfigIP(default=ipDefault, auto_jump=True)
 		self.port_seperate = ConfigInteger(default=portDefault, limits=(1,65535))
-		self.ip_dvb_t = ConfigIP( default=ipDefault, auto_jump=True)
+		self.ip_dvb_t = ConfigIP(default=ipDefault, auto_jump=True)
 		self.port_dvb_t = ConfigInteger(default=portDefault, limits=(1,65535))
-		self.ip_dvb_c = ConfigIP( default=ipDefault, auto_jump=True)
+		self.ip_dvb_c = ConfigIP(default=ipDefault, auto_jump=True)
 		self.port_dvb_c = ConfigInteger(default=portDefault, limits=(1,65535))
-		self.ip_atsc = ConfigIP( default=ipDefault, auto_jump=True)
+		self.ip_atsc = ConfigIP(default=ipDefault, auto_jump=True)
 		self.port_atsc = ConfigInteger(default=portDefault, limits=(1,65535))
 
 	def createSetup(self):

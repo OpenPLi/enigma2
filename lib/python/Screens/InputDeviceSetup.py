@@ -158,7 +158,7 @@ class InputDeviceSetup(Screen, ConfigListScreen):
 		self.setTitle(_("Input device setup"))
 		self.inputDevice = device
 		iInputDevices.currentDevice = self.inputDevice
-		self.onChangedEntry = [ ]
+		self.onChangedEntry = []
 		self.setup_title = _("Input device setup")
 		self.isStepSlider = None
 		self.enableEntry = None
@@ -167,7 +167,7 @@ class InputDeviceSetup(Screen, ConfigListScreen):
 		self.nameEntry = None
 		self.enableConfigEntry = None
 
-		self.list = [ ]
+		self.list = []
 		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
 
 		self["actions"] = ActionMap(["SetupActions", "MenuActions"],
@@ -197,7 +197,7 @@ class InputDeviceSetup(Screen, ConfigListScreen):
 		iInputDevices.currentDevice = ""
 
 	def createSetup(self):
-		self.list = [ ]
+		self.list = []
 		label = _("Change repeat and delay settings?")
 		cmd = "self.enableEntry = getConfigListEntry(label, config.inputDevices." + self.inputDevice + ".enabled)"
 		exec cmd
@@ -235,7 +235,7 @@ class InputDeviceSetup(Screen, ConfigListScreen):
 
 	def selectionChanged(self):
 		if self["config"].getCurrent() == self.enableEntry:
-			self["introduction"].setText(_("Current device: ") + str(iInputDevices.getDeviceAttribute(self.inputDevice, 'name')) )
+			self["introduction"].setText(_("Current device: ") + str(iInputDevices.getDeviceAttribute(self.inputDevice, 'name')))
 		else:
 			self["introduction"].setText(_("Current value: ") + self.getCurrentValue() + _(" ms"))
 
@@ -365,7 +365,7 @@ class RemoteControlType(Screen, ConfigListScreen):
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self.skinName = ["RemoteControlType", "Setup" ]
+		self.skinName = ["RemoteControlType", "Setup"]
 		self.setTitle(_("Remote control type setup"))
 
 		self["actions"] = ActionMap(["SetupActions"],

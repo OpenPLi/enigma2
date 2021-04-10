@@ -28,7 +28,7 @@ class NumericalTextInputHelpDialog(Screen):
 			item.instance.setNoWrap(nowrap)
 			return width
 
-		text_width = max([getsize(x) for x in range (0, 10)])
+		text_width = max([getsize(x) for x in range(0, 10)])
 		label_width = self["key0"].instance.size().width()
 		if label_width < text_width:
 			fnt = self["key0"].instance.getFont()
