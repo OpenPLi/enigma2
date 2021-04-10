@@ -715,7 +715,8 @@ class MovieList(GUIComponent):
 			if (len(movies) > 1):
 				movies = tuple(movies) # a tuple can be hashed, but a list not
 				item = rautotags.get(movies, [])
-				if not item: rautotags[movies] = item
+				if not item:
+					rautotags[movies] = item
 				item.append(tag)
 		self.tags = {}
 		for movies, tags in rautotags.items():

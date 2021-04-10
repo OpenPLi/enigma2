@@ -186,7 +186,8 @@ class Navigation:
 
 	def recordService(self, ref, simulate=False):
 		service = None
-		if not simulate: print "[Navigation] recording service: %s" % (str(ref))
+		if not simulate:
+			print "[Navigation] recording service: %s" % (str(ref))
 		if isinstance(ref, ServiceReference):
 			ref = ref.ref
 		if ref:

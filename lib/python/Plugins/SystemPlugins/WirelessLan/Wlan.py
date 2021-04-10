@@ -41,7 +41,8 @@ class Wlan:
 		self.iface = iface
 		self.oldInterfaceState = None
 
-		a = ''; b = ''
+		a = ''
+		b = ''
 		for i in range(0, 255):
 			a = a + chr(i)
 			if i < 32 or i > 127:
@@ -114,7 +115,8 @@ class Wlan:
 				channel = "Unknown"
 				try:
 					channel = frequencies.index(ifobj._formatFrequency(result.frequency.getFrequency())) + 1
-				except: channel = "Unknown"
+				except:
+					channel = "Unknown"
 
 				aps[bssid] = {
 					'active' : True,

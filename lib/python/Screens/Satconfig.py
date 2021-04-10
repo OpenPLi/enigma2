@@ -318,10 +318,10 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 			InitNimManager(nimmanager, update_slots)
 			self.nim = nimmanager.nim_slots[self.slotid]
 			self.nimConfig = self.nim.config
-		if self["config"].getCurrent() in (self.configMode, self.configModeDVBS, self.configModeDVBC, self.configModeDVBT, self.configModeATSC, self.diseqcModeEntry, self.advancedSatsEntry, self.advancedLnbsEntry, self.advancedDiseqcMode, self.advancedUsalsEntry,\
-			self.advancedLof, self.advancedPowerMeasurement, self.turningSpeed, self.advancedType, self.advancedSCR, self.advancedPosition, self.advancedFormat, self.advancedManufacturer,\
-			self.advancedUnicable, self.advancedConnected, self.toneburst, self.committedDiseqcCommand, self.uncommittedDiseqcCommand, self.singleSatEntry,	self.commandOrder,\
-			self.showAdditionalMotorOptions, self.cableScanType, self.multiType, self.cableConfigScanDetails, self.terrestrialCountriesEntry, self.cableCountriesEntry, \
+		if self["config"].getCurrent() in (self.configMode, self.configModeDVBS, self.configModeDVBC, self.configModeDVBT, self.configModeATSC, self.diseqcModeEntry, self.advancedSatsEntry, self.advancedLnbsEntry, self.advancedDiseqcMode, self.advancedUsalsEntry,
+			self.advancedLof, self.advancedPowerMeasurement, self.turningSpeed, self.advancedType, self.advancedSCR, self.advancedPosition, self.advancedFormat, self.advancedManufacturer,
+			self.advancedUnicable, self.advancedConnected, self.toneburst, self.committedDiseqcCommand, self.uncommittedDiseqcCommand, self.singleSatEntry,	self.commandOrder,
+			self.showAdditionalMotorOptions, self.cableScanType, self.multiType, self.cableConfigScanDetails, self.terrestrialCountriesEntry, self.cableCountriesEntry,
 			self.toneamplitude, self.scpc, self.t2mirawmode, self.forcelnbpower, self.forcetoneburst, self.externallyPowered):
 				self.createSetup()
 
@@ -741,7 +741,8 @@ class NimSelection(Screen):
 		self.resultclass = NimSetup
 
 	def OrbToStr(self, orbpos=-1):
-		if orbpos == -1 or orbpos > 3600: return "??"
+		if orbpos == -1 or orbpos > 3600:
+			return "??"
 		if orbpos > 1800:
 			orbpos = 3600 - orbpos
 			return "%d.%dW" % (orbpos/10, orbpos%10)

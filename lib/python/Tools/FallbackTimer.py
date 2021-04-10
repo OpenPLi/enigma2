@@ -176,9 +176,9 @@ class FallbackTimerDirs(FallbackTimerList):
 			self.fallbackFunction()
 
 class FallbackTimerClass(TimerObject):
-	def __init__(self, service_ref = "", name = "", disabled = 0, \
-			timebegin = 0, timeend = 0, duration = 0, startprepare = 0, \
-			state = 0, repeated = 0, justplay = 0, eit = 0, afterevent = 0, \
+	def __init__(self, service_ref = "", name = "", disabled = 0,
+			timebegin = 0, timeend = 0, duration = 0, startprepare = 0,
+			state = 0, repeated = 0, justplay = 0, eit = 0, afterevent = 0,
 			dirname = "", description = ""):
 		self.service_ref = ServiceReference(service_ref and ':'.join(service_ref.split(':')[:11]) or None)
 		self.name = name
