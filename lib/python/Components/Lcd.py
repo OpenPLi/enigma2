@@ -78,11 +78,11 @@ def InitLcd():
 
 		config.lcd.standby = ConfigSlider(default=standby_default, limits=(0, 10))
 		config.lcd.standby.addNotifier(setLCDbright)
-		config.lcd.standby.apply = lambda : setLCDbright(config.lcd.standby)
+		config.lcd.standby.apply = lambda: setLCDbright(config.lcd.standby)
 
 		config.lcd.bright = ConfigSlider(default=5, limits=(0, 10))
 		config.lcd.bright.addNotifier(setLCDbright)
-		config.lcd.bright.apply = lambda : setLCDbright(config.lcd.bright)
+		config.lcd.bright.apply = lambda: setLCDbright(config.lcd.bright)
 		config.lcd.bright.callNotifiersOnSaveAndCancel = True
 
 		config.lcd.invert = ConfigYesNo(default=False)
@@ -142,8 +142,8 @@ def InitLcd():
 		config.lcd.contrast = ConfigNothing()
 		config.lcd.bright = ConfigNothing()
 		config.lcd.standby = ConfigNothing()
-		config.lcd.bright.apply = lambda : doNothing()
-		config.lcd.standby.apply = lambda : doNothing()
+		config.lcd.bright.apply = lambda: doNothing()
+		config.lcd.standby.apply = lambda: doNothing()
 
 	config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call=False)
 

@@ -8,7 +8,7 @@ class MenuList(GUIComponent):
 		self.list = list
 		self.l = content()
 		self.l.setList(self.list)
-		self.onSelectionChanged = [ ]
+		self.onSelectionChanged = []
 		self.enableWrapAround = enableWrapAround
 
 	def getCurrent(self):

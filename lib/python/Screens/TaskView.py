@@ -68,7 +68,7 @@ class JobView(InfoBarNotifications, Screen, ConfigListScreen):
 
 	def setupList(self):
 		if self.afterEventChangeable:
-			self["config"].setList( [ getConfigListEntry(_("After event"), self.settings.afterEvent) ])
+			self["config"].setList([getConfigListEntry(_("After event"), self.settings.afterEvent)])
 		else:
 			self["config"].hide()
 		self.job.afterEvent = self.settings.afterEvent.getValue()

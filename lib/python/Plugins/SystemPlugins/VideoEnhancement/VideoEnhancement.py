@@ -7,7 +7,7 @@ class VideoEnhancement:
 	firstRun = True
 
 	def __init__(self):
-		self.last_modes_preferred =  [ ]
+		self.last_modes_preferred =  []
 		self.createConfig()
 
 	def createConfig(self, *args):
@@ -269,7 +269,7 @@ class VideoEnhancement:
 				if not VideoEnhancement.firstRun:
 					self.setConfiguredValues()
 
-			config.pep.scaler_vertical_dejagging = ConfigBoolean(default=False, descriptions={False: _("Disabled"), True: _("Enabled")} )
+			config.pep.scaler_vertical_dejagging = ConfigBoolean(default=False, descriptions={False: _("Disabled"), True: _("Enabled")})
 			config.pep.scaler_vertical_dejagging.addNotifier(setScaler_vertical_dejagging)
 		else:
 			config.pep.scaler_vertical_dejagging = NoSave(ConfigNothing())
@@ -286,7 +286,7 @@ class VideoEnhancement:
 				if not VideoEnhancement.firstRun:
 					self.setConfiguredValues()
 
-			config.pep.smooth = ConfigBoolean(default=False, descriptions={False: _("Disabled"), True: _("Enabled")} )
+			config.pep.smooth = ConfigBoolean(default=False, descriptions={False: _("Disabled"), True: _("Enabled")})
 			config.pep.smooth.addNotifier(setSmooth)
 		else:
 			config.pep.smooth = NoSave(ConfigNothing())

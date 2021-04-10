@@ -167,7 +167,7 @@ class DiseqcTester(Screen, TuneTest, ResultParser):
 		self["Failed"] = Label(_("Failed:"))
 		self["Succeeded"] = Label(_("Succeeded:"))
 		self["Not_tested"] = Label(_("Not tested:"))
-		self["With_errors"] = Label (_("With errors:"))
+		self["With_errors"] = Label(_("With errors:"))
 		self["actions"] = NumberActionMap(["SetupActions"],
 		{
 			"ok": self.select,
@@ -507,7 +507,7 @@ class DiseqcTesterTestTypeSelection(Screen, ConfigListScreen):
 		# for the skin: first try 'DiseqcTesterTestTypeSelection', then 'Setup', this allows individual skinning
 		self.skinName = ["DiseqcTesterTestTypeSelection", "Setup"]
 		self.setup_title = _("DiSEqC-tester settings")
-		self.onChangedEntry = [ ]
+		self.onChangedEntry = []
 		self.feid = feid
 		self.list = []
 		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)

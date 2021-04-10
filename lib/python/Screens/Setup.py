@@ -69,7 +69,7 @@ class Setup(ConfigListScreen, Screen):
 	def __init__(self, session, setup):
 		Screen.__init__(self, session)
 		# for the skin: first try a setup_<setupID>, then Setup
-		self.skinName = ["setup_" + setup, "Setup" ]
+		self.skinName = ["setup_" + setup, "Setup"]
 		self.list = []
 		self.force_update_list = False
 

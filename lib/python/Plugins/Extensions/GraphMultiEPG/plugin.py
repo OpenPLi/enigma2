@@ -37,7 +37,7 @@ def zapToService(service, preview=False, zapback=False):
 		Servicelist.startRoot = None
 
 def getBouquetServices(bouquet):
-	services = [ ]
+	services = []
 	Servicelist = eServiceCenter.getInstance().list(bouquet)
 	if not Servicelist is None:
 		while True:
@@ -90,12 +90,12 @@ def changeBouquetCB(direction, epgcall):
 		global bouquets
 		global epg_bouquet
 		try:
-			onSelectBouquetClose(None, bouquets[ ([x[1] for x in bouquets].index(epg_bouquet) + (direction > 0 and 1 or -1)) ][1])
+			onSelectBouquetClose(None, bouquets[([x[1] for x in bouquets].index(epg_bouquet) + (direction > 0 and 1 or -1))][1])
 		except:
 			pass
 	else:
 		if epg["list"].getCurrent() and epg["list"].getCurrent()[1]:
-			Session.openWithCallback(onSelectBouquetClose, SimpleChannelSelection, _("Select channel"), True, True, epg["list"].getCurrent()[1].ref )
+			Session.openWithCallback(onSelectBouquetClose, SimpleChannelSelection, _("Select channel"), True, True, epg["list"].getCurrent()[1].ref)
 
 def main(session, servicelist=None, **kwargs):
 	global ref
@@ -114,7 +114,7 @@ def runGraphMultiEpg():
 	global bouquets
 	global epg_bouquet
 	if epg_bouquet is not None:
-		if len(bouquets) > 1 :
+		if len(bouquets) > 1:
 			cb = changeBouquetCB
 		else:
 			cb = None

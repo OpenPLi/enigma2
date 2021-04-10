@@ -52,7 +52,7 @@ class RecordPathsSettings(Screen,ConfigListScreen):
 			return False
 
 	def initConfigList(self):
-		self.styles = [ ("<default>", _("<Default movie location>")), ("<current>", _("<Current movielist location>")), ("<timer>", _("<Last timer location>")) ]
+		self.styles = [("<default>", _("<Default movie location>")), ("<current>", _("<Current movielist location>")), ("<timer>", _("<Last timer location>"))]
 		styles_keys = [x[0] for x in self.styles]
 		tmp = config.movielist.videodirs.value
 		default = config.usage.default_path.value

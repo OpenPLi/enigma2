@@ -127,7 +127,7 @@ def getHotkeyFunctions():
 				twinPaths[plugin.path[24:]] += 1
 			else:
 				twinPaths[plugin.path[24:]] = 1
-			hotkey.functions.append((plugin.name, plugin.path[24:] + "/" + str(twinPaths[plugin.path[24:]]) , "EPG"))
+			hotkey.functions.append((plugin.name, plugin.path[24:] + "/" + str(twinPaths[plugin.path[24:]]), "EPG"))
 			twinPlugins.append(plugin.name)
 	pluginlist = plugins.getPlugins([PluginDescriptor.WHERE_PLUGINMENU, PluginDescriptor.WHERE_EXTENSIONSMENU])
 	pluginlist.sort(key=lambda p: p.name)
@@ -137,7 +137,7 @@ def getHotkeyFunctions():
 				twinPaths[plugin.path[24:]] += 1
 			else:
 				twinPaths[plugin.path[24:]] = 1
-			hotkey.functions.append((plugin.name, plugin.path[24:] + "/" + str(twinPaths[plugin.path[24:]]) , "Plugins"))
+			hotkey.functions.append((plugin.name, plugin.path[24:] + "/" + str(twinPaths[plugin.path[24:]]), "Plugins"))
 			twinPlugins.append(plugin.name)
 	hotkey.functions.append((_("Main menu"), "Infobar/mainMenu", "InfoBar"))
 	hotkey.functions.append((_("Show help"), "Infobar/showHelp", "InfoBar"))
@@ -334,7 +334,7 @@ class HotkeySetup(Screen):
 				elif x.startswith("Zap"):
 					selected.append(ChoiceEntryComponent('',((_("Zap to") + " " + ServiceReference(eServiceReference(x.split("/", 1)[1]).toString()).getServiceName()), x)))
 				else:
-					function = list(function for function in hotkey.functions if function[1] == x )
+					function = list(function for function in hotkey.functions if function[1] == x)
 					if function:
 						selected.append(ChoiceEntryComponent('',((function[0][0]), function[0][1])))
 			self["choosen"].setList(selected)
@@ -364,7 +364,7 @@ class HotkeySetupSelect(Screen):
 			elif x.startswith("Zap"):
 				self.selected.append(ChoiceEntryComponent('',((_("Zap to") + " " + ServiceReference(eServiceReference(x.split("/", 1)[1]).toString()).getServiceName()), x)))
 			else:
-				function = list(function for function in hotkey.functions if function[1] == x )
+				function = list(function for function in hotkey.functions if function[1] == x)
 				if function:
 					self.selected.append(ChoiceEntryComponent('',((function[0][0]), function[0][1])))
 		text = _("Press 'OK' for attach next function or 'CH+/-' for edit attached.") if len(self.selected) else _("Press 'OK' for attach function.")
@@ -579,7 +579,7 @@ class InfoBarHotkey():
 			elif x.startswith("Zap"):
 				selected.append(((_("Zap to") + " " + ServiceReference(eServiceReference(x.split("/", 1)[1]).toString()).getServiceName()), x))
 			else:
-				function = list(function for function in hotkey.functions if function[1] == x )
+				function = list(function for function in hotkey.functions if function[1] == x)
 				if function:
 					selected.append(function[0])
 		return selected

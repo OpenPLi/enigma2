@@ -26,7 +26,7 @@ class ChoiceBox(Screen):
 		self.list = []
 		self.summarylist = []
 		if keys is None:
-			self.__keys = [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "red", "green", "yellow", "blue" ] + (len(list) - 14) * ["dummy"]
+			self.__keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "red", "green", "yellow", "blue"] + (len(list) - 14) * ["dummy"]
 		else:
 			self.__keys = keys + (len(list) - len(keys)) * ["dummy"]
 
@@ -110,7 +110,7 @@ class ChoiceBox(Screen):
 					self["description"].setText(text[2])
 					return self["description"].instance.calculateSize().height()
 				return 0
-			return max([getDescrLineHeight(line[0]) for line in self["list"].list ])
+			return max([getDescrLineHeight(line[0]) for line in self["list"].list])
 
 		textsize = self["text"].getSize()
 		count = len(self.list)

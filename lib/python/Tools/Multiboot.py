@@ -51,7 +51,7 @@ def getMultibootslots():
 		if not mode12found and SystemInfo["canMode12"]:
 			#the boot device has ancient content and does not contain the correct STARTUP files
 			for slot in range(1,5):
-				bootslots[slot] = { 'device': '/dev/mmcblk0p%s' % (slot * 2 + 1), 'startupfile': None}
+				bootslots[slot] = {'device': '/dev/mmcblk0p%s' % (slot * 2 + 1), 'startupfile': None}
 	print '[Multiboot] Bootslots found:', bootslots
 	return bootslots
 
@@ -106,11 +106,11 @@ def getImagelist():
 					date = max(date, datetime.fromtimestamp(os.stat(os.path.join(imagedir, "usr/bin/enigma2")).st_mtime).strftime('%Y-%m-%d'))
 				except:
 					date = _("Unknown")
-				imagelist[slot] = { 'imagename': "%s (%s)" % (open(os.path.join(imagedir, "etc/issue")).readlines()[-2].capitalize().strip()[:-6], date) }
+				imagelist[slot] = {'imagename': "%s (%s)" % (open(os.path.join(imagedir, "etc/issue")).readlines()[-2].capitalize().strip()[:-6], date)}
 			elif os.path.isfile(os.path.join(imagedir, 'usr/bin/enigma2.bak')):
-				imagelist[slot] = { 'imagename': _("Deleted image") }
+				imagelist[slot] = {'imagename': _("Deleted image")}
 			else:
-				imagelist[slot] = { 'imagename': _("Empty slot") }
+				imagelist[slot] = {'imagename': _("Empty slot")}
 			Console().ePopen('umount %s' % tmp.dir)
 		if not os.path.ismount(tmp.dir):
 			os.rmdir(tmp.dir)

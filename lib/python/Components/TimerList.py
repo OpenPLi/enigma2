@@ -17,7 +17,7 @@ class TimerList(GUIComponent, object):
 #
 	def buildTimerEntry(self, timer, processed):
 		width = self.l.getItemSize().width()
-		res = [ None ]
+		res = [None]
 		serviceName = timer.service_ref.getServiceName()
 
 		serviceNameWidth = getTextBoundarySize(self.instance, self.serviceNameFont, self.l.getItemSize(), serviceName).width()
@@ -32,7 +32,7 @@ class TimerList(GUIComponent, object):
 
 		begin = FuzzyTime(timer.begin)
 		if timer.repeated:
-			days = ( _("Mon"), _("Tue"), _("Wed"), _("Thu"), _("Fri"), _("Sat"), _("Sun") )
+			days = (_("Mon"), _("Tue"), _("Wed"), _("Thu"), _("Fri"), _("Sat"), _("Sun"))
 			repeatedtext = []
 			flags = timer.repeated
 			for x in (0, 1, 2, 3, 4, 5, 6):

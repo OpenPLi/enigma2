@@ -61,7 +61,7 @@ class ParentalControl:
 
 	def serviceMethodWrapper(self, service, method, *args):
 		if TYPE_BOUQUET in service:
-			method( service, TYPE_BOUQUET, *args)
+			method(service, TYPE_BOUQUET, *args)
 			servicelist = self.readServicesFromBouquet(service, "C")
 			for ref in servicelist:
 				sRef = str(ref[0])
@@ -201,7 +201,7 @@ class ParentalControl:
 	def openListFromFile(self, sWhichList):
 		result = {}
 		try:
-			for x in open(resolveFilename(SCOPE_CONFIG, sWhichList ), 'r'):
+			for x in open(resolveFilename(SCOPE_CONFIG, sWhichList), 'r'):
 				sPlain = x.strip()
 				self.serviceMethodWrapper(sPlain, self.addServiceToList, result)
 		except:

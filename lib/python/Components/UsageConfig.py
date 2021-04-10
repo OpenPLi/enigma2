@@ -53,7 +53,7 @@ def InitUsageConfig():
 		("keep reverseB", _("Keep service") + " + " + _("Reverse bouquet buttons"))])
 
 	choicelist = [("by skin", _("As defined by the skin"))]
-	for i in range (5,41):
+	for i in range(5,41):
 		choicelist.append((str(i)))
 	config.usage.servicelist_number_of_services = ConfigSelection(default="by skin", choices=choicelist)
 	config.usage.servicelist_number_of_services.addNotifier(refreshServiceList)
@@ -80,7 +80,7 @@ def InitUsageConfig():
 	config.usage.volume_instead_of_channelselection = ConfigYesNo(default=False)
 	config.usage.channelselection_preview = ConfigYesNo(default=False)
 	config.usage.show_spinner = ConfigYesNo(default=True)
-	config.usage.menu_sort_weight = ConfigDictionarySet(default={ "mainmenu" : {"submenu" : {} }})
+	config.usage.menu_sort_weight = ConfigDictionarySet(default={"mainmenu": {"submenu": {}}})
 	config.usage.menu_sort_mode = ConfigSelection(default="default", choices=[("a_z", _("alphabetical")), ("default", _("Default")), ("user", _("user defined")), ("user_hidden", _("user defined hidden"))])
 	config.usage.menu_show_numbers = ConfigSelection(default="no", choices=[("no", _("no")), ("menu&plugins", _("in menu and plugins")), ("menu", _("in menu only")), ("plugins", _("in plugins only"))])
 	config.usage.showScreenPath = ConfigSelection(default="small", choices=[("off", _("Disabled")), ("small", _("Small")), ("large", _("Large"))])
@@ -607,13 +607,13 @@ def InitUsageConfig():
 		def setHlgSupport(configElement):
 			open("/proc/stb/hdmi/hlg_support", "w").write(configElement.value)
 		config.av.hlg_support = ConfigSelection(default="auto(EDID)",
-			choices=[ ("auto(EDID)", _("controlled by HDMI")), ("yes", _("force enabled")), ("no", _("force disabled"))])
+			choices=[("auto(EDID)", _("controlled by HDMI")), ("yes", _("force enabled")), ("no", _("force disabled"))])
 		config.av.hlg_support.addNotifier(setHlgSupport)
 
 		def setHdr10Support(configElement):
 			open("/proc/stb/hdmi/hdr10_support", "w").write(configElement.value)
 		config.av.hdr10_support = ConfigSelection(default="auto(EDID)",
-			choices=[ ("auto(EDID)", _("controlled by HDMI")), ("yes", _("force enabled")), ("no", _("force disabled"))])
+			choices=[("auto(EDID)", _("controlled by HDMI")), ("yes", _("force enabled")), ("no", _("force disabled"))])
 		config.av.hdr10_support.addNotifier(setHdr10Support)
 
 		def setDisable12Bit(configElement):
@@ -721,7 +721,7 @@ def InitUsageConfig():
 		("tur Audio_TUR", _("Turkish")),
 		("ukr Ukr", _("Ukrainian"))]
 
-	epg_language_choices = audio_language_choices[:1] + audio_language_choices [2:]
+	epg_language_choices = audio_language_choices[:1] + audio_language_choices[2:]
 	def setEpgLanguage(configElement):
 		eServiceEvent.setEPGLanguage(configElement.value)
 	def setEpgLanguageAlternative(configElement):
@@ -755,7 +755,7 @@ def InitUsageConfig():
 	config.autolanguage.audio_defaultddp = ConfigYesNo(default=False)
 	config.autolanguage.audio_usecache = ConfigYesNo(default=True)
 
-	subtitle_language_choices = audio_language_choices[:1] + audio_language_choices [2:]
+	subtitle_language_choices = audio_language_choices[:1] + audio_language_choices[2:]
 	def getselectedsublanguages(range):
 		return [eval("config.autolanguage.subtitle_autoselect%x.value" % x) for x in range]
 	def autolanguagesub(configElement):

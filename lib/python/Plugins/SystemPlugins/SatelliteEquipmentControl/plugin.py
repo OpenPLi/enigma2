@@ -48,7 +48,7 @@ class SecParameterSetup(Screen, ConfigListScreen):
 			(_("Motor command retries"), config.sec.motor_command_retries),
 			(_("Unicable delay after enable voltage before switch command"), config.sec.unicable_delay_after_enable_voltage_before_switch_command),
 			(_("Unicable delay after change voltage before switch command"), config.sec.unicable_delay_after_change_voltage_before_switch_command),
-			(_("Unicable delay after last diseqc command"), config.sec.unicable_delay_after_last_diseqc_command) ]
+			(_("Unicable delay after last diseqc command"), config.sec.unicable_delay_after_last_diseqc_command)]
 		ConfigListScreen.__init__(self, [])
 		self.createSetup()
 

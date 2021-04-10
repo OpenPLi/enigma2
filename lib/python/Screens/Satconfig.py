@@ -94,7 +94,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 
 	def createSetup(self):
 		self.adaptConfigModeChoices()
-		self.list = [ ]
+		self.list = []
 
 		self.multiType = self.configMode = self.diseqcModeEntry = self.advancedSatsEntry = self.advancedLnbsEntry = self.advancedDiseqcMode = self.advancedUsalsEntry = self.advancedLof =\
 		self.advancedPowerMeasurement = self.turningSpeed = self.turnFastEpochBegin = self.turnFastEpochEnd = self.toneburst = self.committedDiseqcCommand = self.uncommittedDiseqcCommand =\
@@ -512,7 +512,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 						self.list.append(getConfigListEntry(self.indent % ("  %s" % _("Max memory positions")), currLnb.rotorPositions, _("Consult your motor's spec sheet for this information, or leave the default setting.")))
 
 	def fillAdvancedList(self):
-		self.list = [ ]
+		self.list = []
 		self.configMode = getConfigListEntry(self.indent % _("Configuration mode"), self.nimConfig.configMode)
 		self.list.append(self.configMode)
 		self.advancedSatsEntry = getConfigListEntry(self.indent % _("Satellite"), self.nimConfig.advanced.sats)
@@ -586,7 +586,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 
 	def __init__(self, session, slotid):
 		Screen.__init__(self, session)
-		self.list = [ ]
+		self.list = []
 		ServiceStopScreen.__init__(self)
 		ConfigListScreen.__init__(self, self.list)
 
@@ -776,7 +776,7 @@ class NimSelection(Screen):
 		return True
 
 	def updateList(self, index=None):
-		self.list = [ ]
+		self.list = []
 		for x in nimmanager.nim_slots:
 			if x.isFBCLink() and not x.isFBCLinkEnabled():
 				continue
@@ -789,7 +789,7 @@ class NimSelection(Screen):
 						if x.isFBCLink():
 							text = _("FBC automatic\nconnected to")
 						else:
-							text = "%s %s" % ({ "loopthrough": _("Loop through from"), "equal": _("Equal to"), "satposdepends": _("Second cable of motorized LNB")} [nimConfig.configMode.value],
+							text = "%s %s" % ({"loopthrough": _("Loop through from"), "equal": _("Equal to"), "satposdepends": _("Second cable of motorized LNB")}[nimConfig.configMode.value],
 								nimmanager.getNim(int(nimConfig.connectedTo.value)).slot_name)
 					elif nimConfig.configMode.value == "nothing":
 						if x.isFBCLink():
@@ -855,7 +855,7 @@ class NimSelection(Screen):
 					elif nimConfig.configMode.value == "enabled" and not x.isCombined():
 						text = _("Enabled")
 				if x.multi_type:
-					enabledTuners = "/".join([y[1].replace("DVB-", "") for y in sorted([({ "DVB-S" :1, "DVB-C": 2, "DVB-T": 3, "ATSC": 4}[y[:5]], y) for y in x.getTunerTypesEnabled()])] if nimConfig.configMode.value != "nothing" else [])
+					enabledTuners = "/".join([y[1].replace("DVB-", "") for y in sorted([({"DVB-S":1, "DVB-C": 2, "DVB-T": 3, "ATSC": 4}[y[:5]], y) for y in x.getTunerTypesEnabled()])] if nimConfig.configMode.value != "nothing" else [])
 					text = ("%s: %s\n%s" % (_("Modes") if "/" in enabledTuners else _("Mode"), enabledTuners if enabledTuners == 'ATSC' else "DVB-%s" % enabledTuners, text)) if enabledTuners else _("Disabled")
 				if not x.isSupported():
 					text = _("Tuner is not supported")

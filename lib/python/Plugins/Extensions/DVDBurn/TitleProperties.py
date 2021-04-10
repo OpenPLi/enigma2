@@ -148,7 +148,7 @@ class LanguageChoices():
 	def __init__(self):
 		from Components.Language import language as syslanguage
 		syslang = syslanguage.getLanguage()[:2]
-		self.langdict = { }
+		self.langdict = {}
 		self.choices = []
 		for key, val in LanguageCodes.iteritems():
 			if len(key) == 2:

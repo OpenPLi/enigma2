@@ -31,7 +31,7 @@ class TimerEditList(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 
-		list = [ ]
+		list = []
 		self.list = list
 		self.url = None
 		self["timerlist"] = TimerList(list)
