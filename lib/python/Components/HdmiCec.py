@@ -49,15 +49,15 @@ cmdList = {
 	}
 
 config.hdmicec = ConfigSubsection()
-config.hdmicec.enabled = ConfigYesNo(default = False)
-config.hdmicec.control_tv_standby = ConfigYesNo(default = True)
-config.hdmicec.control_tv_wakeup = ConfigYesNo(default = True)
-config.hdmicec.report_active_source = ConfigYesNo(default = True)
-config.hdmicec.report_active_menu = ConfigYesNo(default = True)
-config.hdmicec.handle_tv_standby = ConfigYesNo(default = True)
-config.hdmicec.handle_tv_wakeup = ConfigYesNo(default = True)
+config.hdmicec.enabled = ConfigYesNo(default=False)
+config.hdmicec.control_tv_standby = ConfigYesNo(default=True)
+config.hdmicec.control_tv_wakeup = ConfigYesNo(default=True)
+config.hdmicec.report_active_source = ConfigYesNo(default=True)
+config.hdmicec.report_active_menu = ConfigYesNo(default=True)
+config.hdmicec.handle_tv_standby = ConfigYesNo(default=True)
+config.hdmicec.handle_tv_wakeup = ConfigYesNo(default=True)
 config.hdmicec.tv_wakeup_detection = ConfigSelection(
-	choices = {
+	choices={
 	"wakeup": _("Wakeup"),
 	"requestphysicaladdress": _("Request for physical address report"),
 	"tvreportphysicaladdress": _("TV physical address report"),
@@ -67,27 +67,27 @@ config.hdmicec.tv_wakeup_detection = ConfigSelection(
 	"osdnamerequest": _("OSD name request"),
 	"activity": _("Any activity"),
 	},
-	default = "streamrequest")
+	default="streamrequest")
 config.hdmicec.tv_wakeup_command = ConfigSelection(
-	choices = {
+	choices={
 	"imageview": _("Image View On"),
 	"textview": _("Text View On"),
 	},
-	default = "imageview")
-config.hdmicec.fixed_physical_address = ConfigText(default = "0.0.0.0")
-config.hdmicec.volume_forwarding = ConfigYesNo(default = False)
-config.hdmicec.control_receiver_wakeup = ConfigYesNo(default = False)
-config.hdmicec.control_receiver_standby = ConfigYesNo(default = False)
-config.hdmicec.handle_deepstandby_events = ConfigYesNo(default = False)
+	default="imageview")
+config.hdmicec.fixed_physical_address = ConfigText(default="0.0.0.0")
+config.hdmicec.volume_forwarding = ConfigYesNo(default=False)
+config.hdmicec.control_receiver_wakeup = ConfigYesNo(default=False)
+config.hdmicec.control_receiver_standby = ConfigYesNo(default=False)
+config.hdmicec.handle_deepstandby_events = ConfigYesNo(default=False)
 choicelist = []
 for i in (10, 50, 100, 150, 250, 500, 750, 1000):
 	choicelist.append(("%d" % i, _("%d ms") % i))
-config.hdmicec.minimum_send_interval = ConfigSelection(default = "0", choices = [("0", _("Disabled"))] + choicelist)
+config.hdmicec.minimum_send_interval = ConfigSelection(default="0", choices=[("0", _("Disabled"))] + choicelist)
 choicelist = []
 for i in [3] + range(5, 65, 5):
 	choicelist.append(("%d" % i, _("%d sec") % i))
-config.hdmicec.repeat_wakeup_timer = ConfigSelection(default = "3", choices = [("0", _("Disabled"))] + choicelist)
-config.hdmicec.debug = ConfigSelection(default = "0", choices = [("0", _("Disabled")), ("1",_("Messages")), ("2",_("Key Events")), ("3",_("All"))])
+config.hdmicec.repeat_wakeup_timer = ConfigSelection(default="3", choices=[("0", _("Disabled"))] + choicelist)
+config.hdmicec.debug = ConfigSelection(default="0", choices=[("0", _("Disabled")), ("1",_("Messages")), ("2",_("Key Events")), ("3",_("All"))])
 config.hdmicec.bookmarks = ConfigLocations(default=[LOGPATH])
 config.hdmicec.log_path = ConfigDirectory(LOGPATH)
 config.hdmicec.next_boxes_detect = ConfigYesNo(default=False)
@@ -116,8 +116,8 @@ class HdmiCec:
 		self.handlingStandbyFromTV = False
 
 		eHdmiCEC.getInstance().messageReceived.get().append(self.messageReceived)
-		config.misc.standbyCounter.addNotifier(self.onEnterStandby, initial_call = False)
-		config.misc.DeepStandby.addNotifier(self.onEnterDeepStandby, initial_call = False)
+		config.misc.standbyCounter.addNotifier(self.onEnterStandby, initial_call=False)
+		config.misc.DeepStandby.addNotifier(self.onEnterDeepStandby, initial_call=False)
 		self.setFixedPhysicalAddress(config.hdmicec.fixed_physical_address.value)
 
 		self.volumeForwardingEnabled = False

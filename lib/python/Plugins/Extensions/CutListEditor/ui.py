@@ -174,9 +174,9 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 		self.skin = CutListEditor.skin
 		Screen.__init__(self, session)
 		self.setTitle(_("Cutlist editor"))
-		InfoBarSeek.__init__(self, actionmap = "CutlistSeekActions")
+		InfoBarSeek.__init__(self, actionmap="CutlistSeekActions")
 		InfoBarCueSheetSupport.__init__(self)
-		InfoBarBase.__init__(self, steal_current_service = True)
+		InfoBarBase.__init__(self, steal_current_service=True)
 		HelpableScreen.__init__(self)
 		self.old_service = session.nav.getCurrentlyPlayingServiceOrGroup()
 		self.cut_service = service
@@ -199,7 +199,7 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 		self.updateStateLabel(self.seekstate)
 
 		desktopSize = getDesktop(0).size()
-		self["Video"] = VideoWindow(decoder = 0, fb_width=desktopSize.width(), fb_height=desktopSize.height())
+		self["Video"] = VideoWindow(decoder=0, fb_width=desktopSize.width(), fb_height=desktopSize.height())
 
 		self["actions"] = HelpableActionMap(self, "CutListEditorActions",
 			{
@@ -213,8 +213,7 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 			}, prio=-4)
 
 		self.onExecBegin.append(self.showTutorial)
-		self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
-			{
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evCuesheetChanged: self.refillList
 			})
 
@@ -440,7 +439,7 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 	def grabFrame(self):
 		service = self.session.nav.getCurrentlyPlayingServiceReference()
 		if service:
-			def grabCallback(choice = None):
+			def grabCallback(choice=None):
 				if choice is None:
 					self.playpauseService()
 					return

@@ -9,7 +9,7 @@ import os
 # available and preferred modes, as well as handling the currently
 # selected mode. No other strict checking is done.
 
-config.av.edid_override = ConfigYesNo(default = True)
+config.av.edid_override = ConfigYesNo(default=True)
 
 class VideoHardware:
 	rates = { } # high-level, use selectable modes.
@@ -186,7 +186,7 @@ class VideoHardware:
 	def isWidescreenMode(self, port, mode):
 		return mode in self.widescreen_modes
 
-	def setMode(self, port, mode, rate, force = None):
+	def setMode(self, port, mode, rate, force=None):
 		print "[VideoHardware] setMode - port:", port, "mode:", mode, "rate:", rate
 		# we can ignore "port"
 		self.current_mode = mode
@@ -287,7 +287,7 @@ class VideoHardware:
 			# create list of available modes
 			modes = self.getModeList(port)
 			if len(modes):
-				config.av.videomode[port] = ConfigSelection(choices = [mode for (mode, rates) in modes])
+				config.av.videomode[port] = ConfigSelection(choices=[mode for (mode, rates) in modes])
 			for (mode, rates) in modes:
 				ratelist = []
 				for rate in rates:
@@ -296,8 +296,8 @@ class VideoHardware:
 							ratelist.append((rate, rate))
 					else:
 						ratelist.append((rate, rate))
-				config.av.videorate[mode] = ConfigSelection(choices = ratelist)
-		config.av.videoport = ConfigSelection(choices = lst)
+				config.av.videorate[mode] = ConfigSelection(choices=ratelist)
+		config.av.videoport = ConfigSelection(choices=lst)
 
 	def setConfiguredMode(self):
 		port = config.av.videoport.value

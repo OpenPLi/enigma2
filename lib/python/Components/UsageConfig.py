@@ -496,14 +496,14 @@ def InitUsageConfig():
 			configElement.value = [2]
 		updateChoices(config.seek.enter_forward, configElement.value)
 
-	config.seek.speeds_forward.addNotifier(updateEnterForward, immediate_feedback = False)
+	config.seek.speeds_forward.addNotifier(updateEnterForward, immediate_feedback=False)
 
 	def updateEnterBackward(configElement):
 		if not configElement.value:
 			configElement.value = [2]
 		updateChoices(config.seek.enter_backward, configElement.value)
 
-	config.seek.speeds_backward.addNotifier(updateEnterBackward, immediate_feedback = False)
+	config.seek.speeds_backward.addNotifier(updateEnterBackward, immediate_feedback=False)
 
 	def updateEraseSpeed(el):
 		eBackgroundFileEraser.getInstance().setEraseSpeed(int(el.value))
@@ -514,19 +514,19 @@ def InitUsageConfig():
 		("20", _("20 MB/s")),
 		("50", _("50 MB/s")),
 		("100", _("100 MB/s"))])
-	config.misc.erase_speed.addNotifier(updateEraseSpeed, immediate_feedback = False)
+	config.misc.erase_speed.addNotifier(updateEraseSpeed, immediate_feedback=False)
 	config.misc.erase_flags = ConfigSelection(default="1", choices=[
 		("0", _("Disable")),
 		("1", _("Internal hdd only")),
 		("3", _("Everywhere"))])
-	config.misc.erase_flags.addNotifier(updateEraseFlags, immediate_feedback = False)
+	config.misc.erase_flags.addNotifier(updateEraseFlags, immediate_feedback=False)
 
 	if SystemInfo["ZapMode"]:
 		def setZapmode(el):
 			open(SystemInfo["ZapMode"], "w").write(el.value)
 		config.misc.zapmode = ConfigSelection(default="mute", choices=[
 			("mute", _("Black screen")), ("hold", _("Hold screen")), ("mutetilllock", _("Black screen till locked")), ("holdtilllock", _("Hold till locked"))])
-		config.misc.zapmode.addNotifier(setZapmode, immediate_feedback = False)
+		config.misc.zapmode.addNotifier(setZapmode, immediate_feedback=False)
 
 	if SystemInfo["VFD_scroll_repeats"]:
 		def scroll_repeats(el):
@@ -535,7 +535,7 @@ def InitUsageConfig():
 		for i in range(1, 11, 1):
 			choicelist.append((str(i)))
 		config.usage.vfd_scroll_repeats = ConfigSelection(default="3", choices=choicelist)
-		config.usage.vfd_scroll_repeats.addNotifier(scroll_repeats, immediate_feedback = False)
+		config.usage.vfd_scroll_repeats.addNotifier(scroll_repeats, immediate_feedback=False)
 
 	if SystemInfo["VFD_scroll_delay"]:
 		def scroll_delay(el):
@@ -544,7 +544,7 @@ def InitUsageConfig():
 		for i in range(0, 1001, 50):
 			choicelist.append((str(i)))
 		config.usage.vfd_scroll_delay = ConfigSelection(default="150", choices=choicelist)
-		config.usage.vfd_scroll_delay.addNotifier(scroll_delay, immediate_feedback = False)
+		config.usage.vfd_scroll_delay.addNotifier(scroll_delay, immediate_feedback=False)
 
 	if SystemInfo["VFD_initial_scroll_delay"]:
 		def initial_scroll_delay(el):
@@ -553,7 +553,7 @@ def InitUsageConfig():
 		for i in range(0, 20001, 500):
 			choicelist.append((str(i)))
 		config.usage.vfd_initial_scroll_delay = ConfigSelection(default="1000", choices=choicelist)
-		config.usage.vfd_initial_scroll_delay.addNotifier(initial_scroll_delay, immediate_feedback = False)
+		config.usage.vfd_initial_scroll_delay.addNotifier(initial_scroll_delay, immediate_feedback=False)
 
 	if SystemInfo["VFD_final_scroll_delay"]:
 		def final_scroll_delay(el):
@@ -562,7 +562,7 @@ def InitUsageConfig():
 		for i in range(0, 20001, 500):
 			choicelist.append((str(i)))
 		config.usage.vfd_final_scroll_delay = ConfigSelection(default="1000", choices=choicelist)
-		config.usage.vfd_final_scroll_delay.addNotifier(final_scroll_delay, immediate_feedback = False)
+		config.usage.vfd_final_scroll_delay.addNotifier(final_scroll_delay, immediate_feedback=False)
 
 	if SystemInfo["HasBypassEdidChecking"]:
 		def setHasBypassEdidChecking(configElement):

@@ -20,7 +20,7 @@ class SleepTimerEdit(ConfigListScreen, Screen):
 		self["description"] = Label("")
 
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = session)
+		ConfigListScreen.__init__(self, self.list, session=session)
 		self.createSetup()
 
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
@@ -131,7 +131,7 @@ class SleepTimerEdit(ConfigListScreen, Screen):
 			self.close(True)
 		self.close()
 
-	def cancel(self, answer = None):
+	def cancel(self, answer=None):
 		if answer is None:
 			if self["config"].isChanged():
 				self.session.openWithCallback(self.cancel, MessageBox, _("Really close without saving settings?"))

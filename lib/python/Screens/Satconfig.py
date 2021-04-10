@@ -214,7 +214,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 						cablecountrycode = nimmanager.getCableCountrycode(self.slotid)
 						default = cablecountrycode in cablecountrycodelist and cablecountrycode or None
 						choices = [("all", _("All"))]+sorted([(x, self.countrycodeToCountry(x)) for x in cablecountrycodelist], key=lambda listItem: listItem[1])
-						self.cableCountries = ConfigSelection(default = default, choices = choices)
+						self.cableCountries = ConfigSelection(default=default, choices=choices)
 						self.cableCountriesEntry = getConfigListEntry(self.indent % _("Country"), self.cableCountries, _("Select your country. If not available select 'all'."))
 						self.originalCableRegion = self.nimConfig.cable.scan_provider.value
 					# country/region tier two
@@ -223,7 +223,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 					else:
 						cableNames = sorted([x[0] for x in nimmanager.getCablesByCountrycode(self.cableCountries.value)])
 					default = self.nimConfig.cable.scan_provider.value in cableNames and self.nimConfig.cable.scan_provider.value or None
-					self.cableRegions = ConfigSelection(default = default, choices = cableNames)
+					self.cableRegions = ConfigSelection(default=default, choices=cableNames)
 					def updateCableProvider(configEntry):
 						self.nimConfig.cable.scan_provider.value = configEntry.value
 						self.nimConfig.cable.scan_provider.save()
@@ -275,7 +275,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 					terrestrialcountrycode = nimmanager.getTerrestrialCountrycode(self.slotid)
 					default = terrestrialcountrycode in terrestrialcountrycodelist and terrestrialcountrycode or None
 					choices = [("all", _("All"))]+sorted([(x, self.countrycodeToCountry(x)) for x in terrestrialcountrycodelist], key=lambda listItem: listItem[1])
-					self.terrestrialCountries = ConfigSelection(default = default, choices = choices)
+					self.terrestrialCountries = ConfigSelection(default=default, choices=choices)
 					self.terrestrialCountriesEntry = getConfigListEntry(self.indent % _("Country"), self.terrestrialCountries, _("Select your country. If not available select 'all'."))
 					self.originalTerrestrialRegion = self.nimConfig.terrestrial.value
 				# country/region tier two
@@ -284,7 +284,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 				else:
 					terrstrialNames = sorted([x[0] for x in nimmanager.getTerrestrialsByCountrycode(self.terrestrialCountries.value)])
 				default = self.nimConfig.terrestrial.value in terrstrialNames and self.nimConfig.terrestrial.value or None
-				self.terrestrialRegions = ConfigSelection(default = default, choices = terrstrialNames)
+				self.terrestrialRegions = ConfigSelection(default=default, choices=terrstrialNames)
 				def updateTerrestrialProvider(configEntry):
 					self.nimConfig.terrestrial.value = configEntry.value
 					self.nimConfig.terrestrial.save()
@@ -936,4 +936,4 @@ class SelectSatsEntryScreen(Screen):
 						reverse_flag = not reverse_flag
 					self["list"].sort(sortType=sort_type, flag=reverse_flag)
 					self["list"].moveToIndex(0)
-			self.session.openWithCallback(sortAction, ChoiceBox, title= _("Select sort method:"), list=menu)
+			self.session.openWithCallback(sortAction, ChoiceBox, title=_("Select sort method:"), list=menu)

@@ -205,7 +205,7 @@ class ChannelContextMenu(Screen):
 							append_when_current_valid(current, menu, (_("Add service to bouquet"), self.addServiceToBouquetSelected), level=0, key="5")
 							self.addFunction = self.addServiceToBouquetSelected
 						if not self.inBouquet:
-							append_when_current_valid(current, menu, (_("Remove entry"), self.removeEntry), level = 0, key="8")
+							append_when_current_valid(current, menu, (_("Remove entry"), self.removeEntry), level=0, key="8")
 							self.removeFunction = self.removeSatelliteService
 					else:
 						if not self.inBouquet:
@@ -222,11 +222,11 @@ class ChannelContextMenu(Screen):
 					if 'FROM SATELLITES' in current_root.getPath() and current and _("Services") in eServiceCenter.getInstance().info(current).getName(current):
 						unsigned_orbpos = current.getUnsignedData(4) >> 16
 						if unsigned_orbpos == 0xFFFF:
-							append_when_current_valid(current, menu, (_("Remove cable services"), self.removeSatelliteServices), level = 0)
+							append_when_current_valid(current, menu, (_("Remove cable services"), self.removeSatelliteServices), level=0)
 						elif unsigned_orbpos == 0xEEEE:
-							append_when_current_valid(current, menu, (_("Remove terrestrial services"), self.removeSatelliteServices), level = 0)
+							append_when_current_valid(current, menu, (_("Remove terrestrial services"), self.removeSatelliteServices), level=0)
 						else:
-							append_when_current_valid(current, menu, (_("Remove selected satellite"), self.removeSatelliteServices), level = 0)
+							append_when_current_valid(current, menu, (_("Remove selected satellite"), self.removeSatelliteServices), level=0)
 					if haveBouquets:
 						if not self.inBouquet and not "PROVIDERS" in current_sel_path:
 							append_when_current_valid(current, menu, (_("Copy to bouquets"), self.copyCurrentToBouquetList), level=0)
@@ -447,7 +447,7 @@ class ChannelContextMenu(Screen):
 		self.close()
 
 	def setStartupService(self):
-		self.session.openWithCallback(self.setStartupServiceCallback, MessageBox, _("Set startup service"), list = [(_("Only on startup"), "startup"), (_("Also on standby"), "standby")])
+		self.session.openWithCallback(self.setStartupServiceCallback, MessageBox, _("Set startup service"), list=[(_("Only on startup"), "startup"), (_("Also on standby"), "standby")])
 
 	def setStartupServiceCallback(self, answer):
 		if answer:
@@ -722,7 +722,7 @@ class ChannelSelectionEPG(InfoBarHotkey):
 		Screens.InfoBar.InfoBar.instance.runPlugin(plugin)
 
 	def getEPGPluginList(self, getAll=False):
-		pluginlist = [(p.name, boundFunction(self.runPlugin, p), p.description or p.name) for p in plugins.getPlugins(where = PluginDescriptor.WHERE_EVENTINFO)
+		pluginlist = [(p.name, boundFunction(self.runPlugin, p), p.description or p.name) for p in plugins.getPlugins(where=PluginDescriptor.WHERE_EVENTINFO)
 				if 'selectedevent' not in p.__call__.func_code.co_varnames] or []
 		from Components.ServiceEventTracker import InfoBarCount
 		if getAll or InfoBarCount == 1:
@@ -734,7 +734,7 @@ class ChannelSelectionEPG(InfoBarHotkey):
 	def showEventInfoPlugins(self):
 		pluginlist = self.getEPGPluginList()
 		if pluginlist:
-			self.session.openWithCallback(self.EventInfoPluginChosen, ChoiceBox, title=_("Please choose an extension..."), list = pluginlist, skin_name = "EPGExtensionsList")
+			self.session.openWithCallback(self.EventInfoPluginChosen, ChoiceBox, title=_("Please choose an extension..."), list=pluginlist, skin_name="EPGExtensionsList")
 		else:
 			self.openSingleServiceEPG()
 
@@ -1885,11 +1885,11 @@ config.radio = ConfigSubsection()
 config.radio.lastservice = ConfigText()
 config.radio.lastroot = ConfigText()
 config.servicelist = ConfigSubsection()
-config.servicelist.lastmode = ConfigText(default = "tv")
+config.servicelist.lastmode = ConfigText(default="tv")
 config.servicelist.startupservice = ConfigText()
-config.servicelist.startupservice_onstandby = ConfigYesNo(default = False)
+config.servicelist.startupservice_onstandby = ConfigYesNo(default=False)
 config.servicelist.startuproot = ConfigText()
-config.servicelist.startupmode = ConfigText(default = "tv")
+config.servicelist.startupmode = ConfigText(default="tv")
 
 class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelectionEPG, SelectionEventInfo):
 	def __init__(self, session):
@@ -1906,8 +1906,7 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 				"keyTV": self.doTVButton,
 			})
 
-		self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
-			{
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evStart: self.__evServiceStart,
 				iPlayableService.evEnd: self.__evServiceEnd
 			})
@@ -1979,7 +1978,7 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 
 	def doTVButton(self):
 		if self.mode == MODE_TV:
-			self.channelSelected(doClose = False)
+			self.channelSelected(doClose=False)
 		else:
 			self.setModeTv()
 
@@ -2144,7 +2143,7 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 	def zapCheckTimeshiftCallback(self, preview_zap, nref, answer):
 		if answer:
 			self.new_service_played = True
-			self.session.nav.playService(nref, adjust = preview_zap and [0, self.session] or True)
+			self.session.nav.playService(nref, adjust=preview_zap and [0, self.session] or True)
 			if not preview_zap:
 				self.saveRoot()
 				self.saveChannel(nref)
@@ -2438,8 +2437,7 @@ class ChannelSelectionRadio(ChannelSelectionBase, ChannelSelectionEdit, ChannelS
 				"audio": self.audioSelection
 			})
 
-		self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
-			{
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evStart: self.__evServiceStart,
 				iPlayableService.evEnd: self.__evServiceEnd
 			})

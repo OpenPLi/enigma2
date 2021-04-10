@@ -201,7 +201,7 @@ class MplexTaskPostcondition(Condition):
 
 class MplexTask(Task):
 	ERROR_UNDERRUN, ERROR_UNKNOWN = range(2)
-	def __init__(self, job, outputfile, inputfiles=None, demux_task=None, weighting = 500):
+	def __init__(self, job, outputfile, inputfiles=None, demux_task=None, weighting=500):
 		Task.__init__(self, job, "Mux ES into PS")
 		self.weighting = weighting
 		self.demux_task = demux_task
@@ -400,7 +400,7 @@ class CheckDiskspaceTask(Task):
 		self.weighting = 5
 
 	def abort(self):
-		self.finish(aborted = True)
+		self.finish(aborted=True)
 
 	def run(self, callback):
 		self.callback = callback
@@ -428,10 +428,10 @@ class PreviewTask(Task):
 				self.previewCB(False)
 			else:
 				from Tools import Notifications
-				Notifications.AddNotificationWithCallback(self.previewCB, MessageBox, _("Do you want to preview this DVD before burning?"), timeout = 60, default = False)
+				Notifications.AddNotificationWithCallback(self.previewCB, MessageBox, _("Do you want to preview this DVD before burning?"), timeout=60, default=False)
 
 	def abort(self):
-		self.finish(aborted = True)
+		self.finish(aborted=True)
 
 	def previewCB(self, answer):
 		if answer == True:
@@ -454,7 +454,7 @@ class PreviewTask(Task):
 
 	def previewProject(self):
 		from Screens.DVD import DVDPlayer
-		self.job.project.session.openWithCallback(self.playerClosed, DVDPlayer, dvd_filelist= [ self.path ])
+		self.job.project.session.openWithCallback(self.playerClosed, DVDPlayer, dvd_filelist=[ self.path ])
 
 class PreviewTaskPostcondition(Condition):
 	def check(self, task):
@@ -694,7 +694,7 @@ class Menus:
 			mpeg2encTask(job, job.workspace+"/dvdmenubg"+num+".yuv", menubgm2vfilename)
 			menubgmpgfilename = job.workspace+"/dvdmenubg"+num+".mpg"
 			menuaudiofilename = s.menuaudio.getValue()
-			MplexTask(job, outputfile=menubgmpgfilename, inputfiles = [menubgm2vfilename, menuaudiofilename], weighting = 20)
+			MplexTask(job, outputfile=menubgmpgfilename, inputfiles=[menubgm2vfilename, menuaudiofilename], weighting=20)
 			menuoutputfilename = job.workspace+"/dvdmenu"+num+".mpg"
 			spumuxTask(job, spuxmlfilename, menubgmpgfilename, menuoutputfilename)
 

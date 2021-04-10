@@ -98,20 +98,19 @@ class CableScanStatus(Screen):
 		self.close()
 
 config.plugins.CableScan = ConfigSubsection()
-config.plugins.CableScan.keepnumbering = ConfigYesNo(default = False)
-config.plugins.CableScan.hdlist = ConfigYesNo(default = False)
-config.plugins.CableScan.frequency = ConfigFloat(default = [474, 0], limits = [(50, 999),(0, 999)])
-config.plugins.CableScan.symbolrate = ConfigInteger(default = 6875, limits = (1, 9999))
-config.plugins.CableScan.networkid = ConfigInteger(default = 5555, limits = (0, 99999))
+config.plugins.CableScan.keepnumbering = ConfigYesNo(default=False)
+config.plugins.CableScan.hdlist = ConfigYesNo(default=False)
+config.plugins.CableScan.frequency = ConfigFloat(default=[474, 0], limits=[(50, 999),(0, 999)])
+config.plugins.CableScan.symbolrate = ConfigInteger(default=6875, limits=(1, 9999))
+config.plugins.CableScan.networkid = ConfigInteger(default=5555, limits=(0, 99999))
 config.plugins.CableScan.modulation = ConfigSelection(
-	choices =
-		[(str(eDVBFrontendParametersCable.Modulation_QAM16), "16-QAM"),
+	choices=[(str(eDVBFrontendParametersCable.Modulation_QAM16), "16-QAM"),
 		(str(eDVBFrontendParametersCable.Modulation_QAM32), "32-QAM"),
 		(str(eDVBFrontendParametersCable.Modulation_QAM64), "64-QAM"),
 		(str(eDVBFrontendParametersCable.Modulation_QAM128), "128-QAM"),
 		(str(eDVBFrontendParametersCable.Modulation_QAM256), "256-QAM")],
-	default = str(eDVBFrontendParametersCable.Modulation_QAM64))
-config.plugins.CableScan.auto = ConfigYesNo(default = True)
+	default=str(eDVBFrontendParametersCable.Modulation_QAM64))
+config.plugins.CableScan.auto = ConfigYesNo(default=True)
 
 class CableScanScreen(ConfigListScreen, Screen):
 	skin = """
@@ -289,7 +288,7 @@ def CableScanStart(menuid, **kwargs):
 
 def Plugins(**kwargs):
 	if nimmanager.hasNimType("DVB-C"):
-		return [PluginDescriptor(name=_("Cable Scan"), description="Scan cable provider channels", where = PluginDescriptor.WHERE_MENU, fnc=CableScanStart),
+		return [PluginDescriptor(name=_("Cable Scan"), description="Scan cable provider channels", where=PluginDescriptor.WHERE_MENU, fnc=CableScanStart),
 			PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=autostart)]
 	else:
 		return []

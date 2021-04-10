@@ -20,7 +20,7 @@ config.misc.fastscan = ConfigSubsection()
 config.misc.fastscan.last_configuration = ConfigText(default="()")
 config.misc.fastscan.auto = ConfigSelection(default="true", choices=[("true", _("yes")), ("false", _("no")), ("multi", _("multi"))])
 config.misc.fastscan.autoproviders = ConfigText(default="()")
-config.misc.fastscan.drop = ConfigYesNo(default = True)
+config.misc.fastscan.drop = ConfigYesNo(default=True)
 
 providers = [
 	('Canal Digitaal', (1, 900, True)),
@@ -274,10 +274,10 @@ class FastScanScreen(ConfigListScreen, Screen):
 		if self.scan_hd.value and parameters[2]:
 			pid += 1
 		if self.scan_nims.value:
-			self.session.open(FastScanStatus, scanTuner = int(self.scan_nims.value),
-				transponderParameters = self.getTransponderParameters(parameters[0]),
-				scanPid = pid, keepNumbers = self.scan_keepnumbering.value, keepSettings = self.scan_keepsettings.value, createRadioBouquet = self.scan_create_radio_bouquet.value,
-				providerName = self.scan_provider.getText())
+			self.session.open(FastScanStatus, scanTuner=int(self.scan_nims.value),
+				transponderParameters=self.getTransponderParameters(parameters[0]),
+				scanPid=pid, keepNumbers=self.scan_keepnumbering.value, keepSettings=self.scan_keepsettings.value, createRadioBouquet=self.scan_create_radio_bouquet.value,
+				providerName=self.scan_provider.getText())
 
 	def keyCancel(self):
 		self.close()
@@ -397,7 +397,7 @@ def FastScanStart(menuid, **kwargs):
 
 def Plugins(**kwargs):
 	if (nimmanager.hasNimType("DVB-S")):
-		return [PluginDescriptor(name=_("FastScan"), description="Scan M7 Brands, BE/NL/DE/AT/CZ", where = PluginDescriptor.WHERE_MENU, fnc=FastScanStart),
+		return [PluginDescriptor(name=_("FastScan"), description="Scan M7 Brands, BE/NL/DE/AT/CZ", where=PluginDescriptor.WHERE_MENU, fnc=FastScanStart),
 			PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=autostart)]
 	else:
 		return []

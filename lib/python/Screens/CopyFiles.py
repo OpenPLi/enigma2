@@ -22,7 +22,7 @@ class FailedPostcondition(Components.Task.Condition):
 		return self.exception is None
 
 # Same as Python 3.3 open(filename, "x"), we must be the creator
-def openex(filename, flags = os.O_CREAT | os.O_EXCL | os.O_WRONLY):
+def openex(filename, flags=os.O_CREAT | os.O_EXCL | os.O_WRONLY):
 	return os.fdopen(os.open(filename, flags), 'wb', 0)
 
 class CopyFileTask(Components.Task.PythonTask):

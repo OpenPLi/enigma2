@@ -130,7 +130,7 @@ class TimerEditList(Screen):
 								(_("Stop current event and disable coming events"), "stopall"),
 								(_("Don't stop current event but disable coming events"), "stoponlycoming")
 							)
-							self.session.openWithCallback(boundFunction(self.runningEventCallback, t), ChoiceBox, title=_("Repeating event currently recording... What do you want to do?"), list = list)
+							self.session.openWithCallback(boundFunction(self.runningEventCallback, t), ChoiceBox, title=_("Repeating event currently recording... What do you want to do?"), list=list)
 							timer_changed = False
 					else:
 						t.disable()
@@ -144,7 +144,7 @@ class TimerEditList(Screen):
 			if result[1] == "stoponlycurrent" or result[1] == "stopall":
 				findNextRunningEvent = False
 				t.enable()
-				t.processRepeated(findRunningEvent = False)
+				t.processRepeated(findRunningEvent=False)
 				self.session.nav.RecordTimer.doActivate(t)
 			if result[1] == "stoponlycoming" or result[1] == "stopall":
 				findNextRunningEvent = True
@@ -254,9 +254,9 @@ class TimerEditList(Screen):
 		self.list.extend([(timer, True) for timer in self.session.nav.RecordTimer.processed_timers])
 
 		if config.usage.timerlist_finished_timer_position.index: #end of list
-			self.list.sort(cmp = eol_compare)
+			self.list.sort(cmp=eol_compare)
 		else:
-			self.list.sort(key = lambda x: x[0].begin)
+			self.list.sort(key=lambda x: x[0].begin)
 		self["timerlist"].l.setList(self.list)
 		self.updateState()
 
@@ -327,8 +327,8 @@ class TimerEditList(Screen):
 		if event is None:
 			data = (int(time()), int(time() + 60), "", "", None)
 		else:
-			data = parseEvent(event, description = False)
-		timer = RecordTimerEntry(serviceref, checkOldTimers = True, dirname = preferredTimerPath(), *data)
+			data = parseEvent(event, description=False)
+		timer = RecordTimerEntry(serviceref, checkOldTimers=True, dirname=preferredTimerPath(), *data)
 		timer.justplay = config.recording.timer_default_type.value == "zap"
 		timer.always_zap = config.recording.timer_default_type.value == "zap+record"
 		self.addTimer(timer)
@@ -550,7 +550,7 @@ class TimerSanityConflict(Screen):
 					config.usage.show_timer_conflict_warning.value = True
 					config.usage.show_timer_conflict_warning.save()
 		if menu:
-			self.session.openWithCallback(showAction, ChoiceBox, title= _("Select action"), list=menu)
+			self.session.openWithCallback(showAction, ChoiceBox, title=_("Select action"), list=menu)
 
 	def up(self):
 		self["timerlist"].instance.moveSelection(self["timerlist"].instance.moveUp)

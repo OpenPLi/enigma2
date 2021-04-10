@@ -96,7 +96,7 @@ class ServiceInfo(Converter):
 		serviceInfo = info.getInfoString(iServiceInformation.sServiceref).split(':')
 		return len(serviceInfo) < 3 or serviceInfo[2] != '2'
 
-	def getServiceInfoString(self, info, what, convert = lambda x: "%d" % x):
+	def getServiceInfoString(self, info, what, convert=lambda x: "%d" % x):
 		v = info.getInfo(what)
 		if v == -1:
 			return _("N/A")

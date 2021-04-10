@@ -662,7 +662,7 @@ class InfoBarHotkey():
 					self.servicelist.history = []
 					self.pipShown() and self.showPiP()
 				self.servicelist.servicelist.setCurrent(eServiceReference("/".join(selected[1:])))
-				self.servicelist.zap(enable_pipzap = True)
+				self.servicelist.zap(enable_pipzap=True)
 				if hasattr(self, "lastservice"):
 					self.lastservice = eServiceReference("/".join(selected[1:]))
 					self.close()

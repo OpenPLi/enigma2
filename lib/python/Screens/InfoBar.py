@@ -68,8 +68,7 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 		self.helpList.append((self["actions"], "InfobarActions", [("showMovies", _("Watch recordings..."))]))
 		self.helpList.append((self["actions"], "InfobarActions", [("showRadio", _("Listen to the radio..."))]))
 
-		self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
-			{
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				enigma.iPlayableService.evUpdatedEventInfo: self.__eventInfoChanged
 			})
 
@@ -132,7 +131,7 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 
 	def showMovies(self, defaultRef=None):
 		self.lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
-		self.session.openWithCallback(self.movieSelected, Screens.MovieSelection.MovieSelection, defaultRef or eServiceReference(config.usage.last_movie_played.value), timeshiftEnabled = self.timeshiftEnabled())
+		self.session.openWithCallback(self.movieSelected, Screens.MovieSelection.MovieSelection, defaultRef or eServiceReference(config.usage.last_movie_played.value), timeshiftEnabled=self.timeshiftEnabled())
 
 	def movieSelected(self, service):
 		ref = self.lastservice
@@ -172,7 +171,7 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 			{
 				"left": self.left,
 				"right": self.right
-			}, prio = -2)
+			}, prio=-2)
 
 		self.allowPiP = True
 
@@ -231,7 +230,7 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 				)
 
 			from Screens.ChoiceBox import ChoiceBox
-			self.session.openWithCallback(self.leavePlayerConfirmed, ChoiceBox, title=_("Stop playing this movie?"), list = list)
+			self.session.openWithCallback(self.leavePlayerConfirmed, ChoiceBox, title=_("Stop playing this movie?"), list=list)
 		else:
 			self.leavePlayerConfirmed([True, how])
 
@@ -435,7 +434,7 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 								break
 			else:
 				slist.moveUp()
-			slist.zap(enable_pipzap = True)
+			slist.zap(enable_pipzap=True)
 
 	def zapDown(self):
 		slist = self.servicelist
@@ -456,7 +455,7 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 								break
 			else:
 				slist.moveDown()
-			slist.zap(enable_pipzap = True)
+			slist.zap(enable_pipzap=True)
 
 	def showPiP(self):
 		slist = self.servicelist
@@ -539,7 +538,7 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 
 	def displayPlayedName(self, ref, index, n):
 		from Tools import Notifications
-		Notifications.AddPopup(text = _("%s/%s: %s") % (index, n, self.ref2HumanName(ref)), type = MessageBox.TYPE_INFO, timeout = 5)
+		Notifications.AddPopup(text=_("%s/%s: %s") % (index, n, self.ref2HumanName(ref)), type=MessageBox.TYPE_INFO, timeout=5)
 
 	def ref2HumanName(self, ref):
 		return enigma.eServiceCenter.getInstance().info(ref).getName(ref)

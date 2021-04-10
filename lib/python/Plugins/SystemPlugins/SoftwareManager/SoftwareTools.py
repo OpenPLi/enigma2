@@ -28,7 +28,7 @@ class SoftwareTools(PackageInfoHandler):
 		else:
 			self.ImageVersion = 'Stable'
 		self.language = language.getLanguage()[:2] # getLanguage returns e.g. "fi_FI" for "language_country"
-		PackageInfoHandler.__init__(self, self.statusCallback, neededTag = 'ALL_TAGS', neededFlag = self.ImageVersion)
+		PackageInfoHandler.__init__(self, self.statusCallback, neededTag='ALL_TAGS', neededFlag=self.ImageVersion)
 		self.directory = resolveFilename(SCOPE_METADIR)
 		self.list = List([])
 		self.NotifierCallback = None
@@ -42,7 +42,7 @@ class SoftwareTools(PackageInfoHandler):
 	def statusCallback(self, status, progress):
 		pass
 
-	def startSoftwareTools(self, callback = None):
+	def startSoftwareTools(self, callback=None):
 		if callback is not None:
 			self.NotifierCallback = callback
 		iNetwork.checkNetworkState(self.checkNetworkCB)
@@ -56,7 +56,7 @@ class SoftwareTools(PackageInfoHandler):
 				self.NetworkConnectionAvailable = False
 				self.getUpdates()
 
-	def getUpdates(self, callback = None):
+	def getUpdates(self, callback=None):
 		if self.lastDownloadDate is None:
 				if self.NetworkConnectionAvailable == True:
 					self.lastDownloadDate = time()
@@ -108,7 +108,7 @@ class SoftwareTools(PackageInfoHandler):
 				self.startOpkgListAvailable()
 		pass
 
-	def startOpkgListAvailable(self, callback = None):
+	def startOpkgListAvailable(self, callback=None):
 		if callback is not None:
 			self.list_updating = True
 		if self.list_updating:
@@ -117,7 +117,7 @@ class SoftwareTools(PackageInfoHandler):
 			cmd = self.opkg.opkg + " list"
 			self.UpdateConsole.ePopen(cmd, self.OpkgListAvailableCB, callback)
 
-	def OpkgListAvailableCB(self, result, retval, extra_args = None):
+	def OpkgListAvailableCB(self, result, retval, extra_args=None):
 		(callback) = extra_args
 		if result:
 			if self.list_updating:
@@ -143,7 +143,7 @@ class SoftwareTools(PackageInfoHandler):
 					if callback is not None:
 						callback(False)
 
-	def startInstallMetaPackage(self, callback = None):
+	def startInstallMetaPackage(self, callback=None):
 		if callback is not None:
 			self.list_updating = True
 		if self.list_updating:
@@ -155,7 +155,7 @@ class SoftwareTools(PackageInfoHandler):
 			else:
 				self.InstallMetaPackageCB(True)
 
-	def InstallMetaPackageCB(self, result, retval = None, extra_args = None):
+	def InstallMetaPackageCB(self, result, retval=None, extra_args=None):
 		(callback) = extra_args
 		if result:
 			self.fillPackagesIndexList()
@@ -172,7 +172,7 @@ class SoftwareTools(PackageInfoHandler):
 					if callback is not None:
 						callback(False)
 
-	def startOpkgListInstalled(self, callback = None):
+	def startOpkgListInstalled(self, callback=None):
 		if callback is not None:
 			self.list_updating = True
 		if self.list_updating:
@@ -181,7 +181,7 @@ class SoftwareTools(PackageInfoHandler):
 			cmd = self.opkg.opkg + " list_installed"
 			self.UpdateConsole.ePopen(cmd, self.OpkgListInstalledCB, callback)
 
-	def OpkgListInstalledCB(self, result, retval, extra_args = None):
+	def OpkgListInstalledCB(self, result, retval, extra_args=None):
 		(callback) = extra_args
 		if result:
 			self.installed_packetlist = {}
@@ -213,7 +213,7 @@ class SoftwareTools(PackageInfoHandler):
 					if callback is not None:
 						callback(False)
 
-	def countUpdates(self, callback = None):
+	def countUpdates(self, callback=None):
 		self.available_updates = 0
 		self.available_updatelist  = []
 		for package in self.packagesIndexlist[:]:
@@ -236,13 +236,13 @@ class SoftwareTools(PackageInfoHandler):
 					self.NotifierCallback(True)
 					self.NotifierCallback = None
 
-	def startOpkgUpdate(self, callback = None):
+	def startOpkgUpdate(self, callback=None):
 		if not self.Console:
 			self.Console = Console()
 		cmd = self.opkg.opkg + " update"
 		self.Console.ePopen(cmd, self.OpkgUpdateCB, callback)
 
-	def OpkgUpdateCB(self, result, retval, extra_args = None):
+	def OpkgUpdateCB(self, result, retval, extra_args=None):
 		(callback) = extra_args
 		if result:
 			if self.Console:

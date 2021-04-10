@@ -32,7 +32,7 @@ class CIselectMainMenu(Screen):
 			<widget name="CiList" position="5,50" size="490,200" scrollbarMode="showOnDemand" />
 		</screen>"""
 
-	def __init__(self, session, args = 0):
+	def __init__(self, session, args=0):
 		Screen.__init__(self, session)
 		self["key_red"] = StaticText(_("Close"))
 		self["key_green"] = StaticText(_("Edit"))
@@ -505,7 +505,7 @@ class myProviderSelection(ChannelSelectionBase):
 									self.close(providerlist, self.dvbnamespace, True)
 								else:
 									self.close(None)
-				self.session.openWithCallback(addAction, ChoiceBox, title = _("Select action"), list=menu)
+				self.session.openWithCallback(addAction, ChoiceBox, title=_("Select action"), list=menu)
 
 	def showSatellites(self, changeMode=False):
 		if changeMode:
@@ -714,6 +714,6 @@ def Plugins(**kwargs):
 	description = _("a gui to assign services/providers to common interface modules")
 	if config.usage.setup_level.index > 1:
 		description = _("a gui to assign services/providers/caids to common interface modules")
-	return [PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, needsRestart = False, fnc = sessionstart),
-			PluginDescriptor(where = PluginDescriptor.WHERE_AUTOSTART, needsRestart = False, fnc = autostart),
-			PluginDescriptor(name = _("Common Interface assignment"), description = description, where = PluginDescriptor.WHERE_MENU, needsRestart = False, fnc = menu)]
+	return [PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, needsRestart=False, fnc=sessionstart),
+			PluginDescriptor(where=PluginDescriptor.WHERE_AUTOSTART, needsRestart=False, fnc=autostart),
+			PluginDescriptor(name=_("Common Interface assignment"), description=description, where=PluginDescriptor.WHERE_MENU, needsRestart=False, fnc=menu)]

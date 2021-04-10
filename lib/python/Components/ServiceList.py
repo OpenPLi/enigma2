@@ -10,7 +10,7 @@ from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
 from Components.Renderer.Picon import getPiconName
 from Components.config import config
 
-def refreshServiceList(configElement = None):
+def refreshServiceList(configElement=None):
 	from Screens.InfoBar import InfoBar
 	InfoBarInstance = InfoBar.instance
 	if InfoBarInstance is not None:

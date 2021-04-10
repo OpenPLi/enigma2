@@ -30,7 +30,7 @@ config.misc.pluginbrowser.plugin_order = ConfigText(default="")
 
 class PluginBrowserSummary(Screen):
 	def __init__(self, session, parent):
-		Screen.__init__(self, session, parent = parent)
+		Screen.__init__(self, session, parent=parent)
 		self["entry"] = StaticText("")
 		self["desc"] = StaticText("")
 		self.onShow.append(self.addWatcher)
@@ -138,7 +138,7 @@ class PluginBrowser(Screen, ProtectedScreen):
 			for (pluginname, error) in plugins.warnings:
 				text += _("%s (%s)\n") % (pluginname, error)
 			plugins.resetWarnings()
-			self.session.open(MessageBox, text = text, type = MessageBox.TYPE_WARNING)
+			self.session.open(MessageBox, text=text, type=MessageBox.TYPE_WARNING)
 
 	def save(self):
 		self.run()
@@ -241,7 +241,7 @@ class PluginBrowser(Screen, ProtectedScreen):
 			try:
 				from Plugins.SystemPlugins.SoftwareManager.plugin import PluginManager
 			except ImportError:
-				self.session.open(MessageBox, _("The software management extension is not installed!\nPlease install it."), type = MessageBox.TYPE_INFO,timeout = 10 )
+				self.session.open(MessageBox, _("The software management extension is not installed!\nPlease install it."), type=MessageBox.TYPE_INFO,timeout=10 )
 			else:
 				self.session.openWithCallback(self.PluginDownloadBrowserClosed, PluginManager)
 
@@ -251,7 +251,7 @@ class PluginDownloadBrowser(Screen):
 	PLUGIN_PREFIX = 'enigma2-plugin-'
 	lastDownloadDate = None
 
-	def __init__(self, session, type = 0, needupdate = True):
+	def __init__(self, session, type=0, needupdate=True):
 		Screen.__init__(self, session)
 
 		self.type = type
@@ -373,11 +373,11 @@ class PluginDownloadBrowser(Screen):
 
 	def doRemove(self, callback, pkgname):
 		pkgname = self.PLUGIN_PREFIX + pkgname
-		self.session.openWithCallback(callback, Console, cmdlist = [self.opkg_remove + Opkg.opkgExtraDestinations() + " " + pkgname, "sync"], skin="Console_Pig")
+		self.session.openWithCallback(callback, Console, cmdlist=[self.opkg_remove + Opkg.opkgExtraDestinations() + " " + pkgname, "sync"], skin="Console_Pig")
 
 	def doInstall(self, callback, pkgname):
 		pkgname = self.PLUGIN_PREFIX + pkgname
-		self.session.openWithCallback(callback, Console, cmdlist = [self.opkg_install + " " + pkgname, "sync"], skin="Console_Pig")
+		self.session.openWithCallback(callback, Console, cmdlist=[self.opkg_install + " " + pkgname, "sync"], skin="Console_Pig")
 
 	def runSettingsRemove(self, val):
 		if val:
@@ -386,7 +386,7 @@ class PluginDownloadBrowser(Screen):
 	def runSettingsInstall(self):
 		self.doInstall(self.installFinished, self.install_settings_name)
 
-	def startOpkgListInstalled(self, pkgname = PLUGIN_PREFIX + '*'):
+	def startOpkgListInstalled(self, pkgname=PLUGIN_PREFIX + '*'):
 		self.container.execute(self.opkg + Opkg.opkgExtraDestinations() + " list_installed '%s'" % pkgname)
 
 	def startOpkgListAvailable(self):
@@ -511,7 +511,7 @@ class PluginDownloadBrowser(Screen):
 			if split[0] not in self.plugins:
 				self.plugins[split[0]] = []
 
-			self.plugins[split[0]].append((PluginDescriptor(name = x[3], description = x[2], icon = verticallineIcon), split[1], x[1]))
+			self.plugins[split[0]].append((PluginDescriptor(name=x[3], description=x[2], icon=verticallineIcon), split[1], x[1]))
 
 		for x in self.plugins.keys():
 			if x in self.expanded:
