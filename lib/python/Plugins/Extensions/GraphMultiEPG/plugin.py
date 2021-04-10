@@ -14,7 +14,7 @@ epg_bouquet = None
 epg = None
 ref = None
 
-def zapToService(service, preview = False, zapback = False):
+def zapToService(service, preview=False, zapback=False):
 	if Servicelist.startServiceRef is None:
 		Servicelist.startServiceRef = Session.nav.getCurrentlyPlayingServiceOrGroup()
 	if not service is None:
@@ -97,7 +97,7 @@ def changeBouquetCB(direction, epgcall):
 		if epg["list"].getCurrent() and epg["list"].getCurrent()[1]:
 			Session.openWithCallback(onSelectBouquetClose, SimpleChannelSelection, _("Select channel"), True, True, epg["list"].getCurrent()[1].ref )
 
-def main(session, servicelist = None, **kwargs):
+def main(session, servicelist=None, **kwargs):
 	global ref
 	global Session
 	Session = session
@@ -134,7 +134,7 @@ def reopen(answer):
 def Plugins(**kwargs):
 	name = _("Graphical Multi EPG")
 	descr = _("A graphical EPG for all services of a specific bouquet")
-	list = [(PluginDescriptor(name=name, description=descr, where = PluginDescriptor.WHERE_EVENTINFO, needsRestart = False, fnc=main))]
+	list = [(PluginDescriptor(name=name, description=descr, where=PluginDescriptor.WHERE_EVENTINFO, needsRestart=False, fnc=main))]
 	if config.misc.graph_mepg.extension_menu.value:
-		list.append(PluginDescriptor(name=name, description=descr, where = PluginDescriptor.WHERE_EXTENSIONSMENU, needsRestart = False, fnc=main))
+		list.append(PluginDescriptor(name=name, description=descr, where=PluginDescriptor.WHERE_EXTENSIONSMENU, needsRestart=False, fnc=main))
 	return list

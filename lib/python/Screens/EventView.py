@@ -121,7 +121,7 @@ class EventViewBase:
 						self.session.openWithCallback(self.finishedEdit, TimerEntry, timer)
 			self.session.openWithCallback(timerAction, ChoiceBox, title=title_text + _("Select action for timer '%s'.") % timer.name, list=menu, keys=buttons)
 		else:
-			newEntry = RecordTimerEntry(self.currentService, checkOldTimers = True, dirname = preferredTimerPath(), *parseEvent(self.event))
+			newEntry = RecordTimerEntry(self.currentService, checkOldTimers=True, dirname=preferredTimerPath(), *parseEvent(self.event))
 			newEntry.justplay = config.recording.timer_default_type.value == "zap"
 			newEntry.always_zap = config.recording.timer_default_type.value == "zap+record"
 			self.session.openWithCallback(self.finishedAdd, TimerEntry, newEntry)
@@ -316,7 +316,7 @@ class EventViewBase:
 	def doContext(self):
 		if self.event:
 			text = _("Select action")
-			menu = [(p.name, boundFunction(self.runPlugin, p)) for p in plugins.getPlugins(where = PluginDescriptor.WHERE_EVENTINFO)
+			menu = [(p.name, boundFunction(self.runPlugin, p)) for p in plugins.getPlugins(where=PluginDescriptor.WHERE_EVENTINFO)
 				if 'servicelist' not in p.__call__.func_code.co_varnames
 					if 'selectedevent' not in p.__call__.func_code.co_varnames ]
 			if len(menu) == 1:

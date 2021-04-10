@@ -37,7 +37,7 @@ class VideoEnhancementSetup(Screen, ConfigListScreen):
 		self.list = [ ]
 		self.xtdlist = [ ]
 		self.seperation = skin.parameters.get("ConfigListSeperator", 300)
-		ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
 		self.createSetup()
 
 		self["actions"] = ActionMap(["SetupActions", "ColorActions", "MenuActions"],
@@ -208,7 +208,7 @@ class VideoEnhancementSetup(Screen, ConfigListScreen):
 			self.keySave()
 
 	def keyYellow(self):
-		self.session.openWithCallback(self.keyYellowConfirm, MessageBox, _("Reset video enhancement settings to your last configuration?"), MessageBox.TYPE_YESNO, timeout = 20, default = False)
+		self.session.openWithCallback(self.keyYellowConfirm, MessageBox, _("Reset video enhancement settings to your last configuration?"), MessageBox.TYPE_YESNO, timeout=20, default=False)
 
 	def keyBlueConfirm(self, confirmed):
 		if not confirmed:
@@ -290,7 +290,7 @@ class VideoEnhancementPreview(Screen, ConfigListScreen):
 
 		self.list = [ ]
 		self.configEntry = configEntry
-		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
 
 		self["actions"] = ActionMap(["SetupActions"],
 			{
@@ -393,5 +393,5 @@ def startSetup(menuid):
 def Plugins(**kwargs):
 	list = []
 	if config.usage.setup_level.index >= 2 and os.path.exists("/proc/stb/vmpeg/0/pep_apply"):
-		list.append(PluginDescriptor(name=_("Video enhancement setup"), description=_("Advanced video enhancement setup"), where = PluginDescriptor.WHERE_MENU, needsRestart = False, fnc=startSetup))
+		list.append(PluginDescriptor(name=_("Video enhancement setup"), description=_("Advanced video enhancement setup"), where=PluginDescriptor.WHERE_MENU, needsRestart=False, fnc=startSetup))
 	return list

@@ -10,8 +10,8 @@ from enigma import iPlayableService, iServiceInformation, eServiceCenter, eServi
 modelist = {"off": _("Off"), "auto": _("Auto"), "sidebyside": _("Side by side"), "topandbottom": _("Top and bottom")}
 
 config.plugins.OSD3DSetup = ConfigSubsection()
-config.plugins.OSD3DSetup.mode = ConfigSelection(choices = modelist, default = "auto")
-config.plugins.OSD3DSetup.znorm = ConfigInteger(default = 0)
+config.plugins.OSD3DSetup.mode = ConfigSelection(choices=modelist, default="auto")
+config.plugins.OSD3DSetup.znorm = ConfigInteger(default=0)
 
 class OSD3DSetupScreen(Screen, ConfigListScreen):
 	def __init__(self, session):
@@ -36,13 +36,13 @@ class OSD3DSetupScreen(Screen, ConfigListScreen):
 		}, -2)
 
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = self.session)
+		ConfigListScreen.__init__(self, self.list, session=self.session)
 
 		mode = config.plugins.OSD3DSetup.mode.value
 		znorm = config.plugins.OSD3DSetup.znorm.value
 
-		self.mode = ConfigSelection(choices = modelist, default = mode)
-		self.znorm = ConfigSlider(default = znorm + 50, increment = 1, limits = (0, 100))
+		self.mode = ConfigSelection(choices=modelist, default=mode)
+		self.znorm = ConfigSlider(default=znorm + 50, increment=1, limits=(0, 100))
 		self.list.append(getConfigListEntry(_("3d mode"), self.mode))
 		self.list.append(getConfigListEntry(_("Depth"), self.znorm))
 		self["config"].list = self.list
@@ -88,8 +88,7 @@ class auto3D(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.session = session
-		self.__event_tracker = ServiceEventTracker(screen = self, eventmap =
-			{
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evStart: self.__evStart
 			})
 
@@ -131,6 +130,6 @@ def autostart(reason, **kwargs):
 def Plugins(**kwargs):
 	if SystemInfo["3DMode"]:
 		from Plugins.Plugin import PluginDescriptor
-		return [PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART], fnc = autostart),
-			PluginDescriptor(name = _("OSD 3D setup"), description = _("Adjust 3D settings"), where = PluginDescriptor.WHERE_MENU, fnc = startSetup)]
+		return [PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=autostart),
+			PluginDescriptor(name=_("OSD 3D setup"), description=_("Adjust 3D settings"), where=PluginDescriptor.WHERE_MENU, fnc=startSetup)]
 	return []

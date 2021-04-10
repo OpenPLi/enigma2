@@ -38,7 +38,7 @@ class SetupError(Exception):
 class SetupSummary(Screen):
 
 	def __init__(self, session, parent):
-		Screen.__init__(self, session, parent = parent)
+		Screen.__init__(self, session, parent=parent)
 		self["SetupTitle"] = StaticText(parent.getTitle())
 		self["SetupEntry"] = StaticText("")
 		self["SetupValue"] = StaticText("")
@@ -97,7 +97,7 @@ class Setup(ConfigListScreen, Screen):
 				"menu": self.closeRecursive,
 			}, -2)
 
-		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
 		self.createSetupList()
 		self["config"].onSelectionChanged.append(self.__onSelectionChanged)
 

@@ -41,7 +41,7 @@ class SoftcamSetup(Screen, ConfigListScreen):
 			},-1)
 
 		self.list = [ ]
-		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
 
 		self.softcam = CamControl('softcam')
 		self.cardserver = CamControl('cardserver')
@@ -56,13 +56,13 @@ class SoftcamSetup(Screen, ConfigListScreen):
 		softcams = self.softcam.getList()
 		cardservers = self.cardserver.getList()
 
-		self.softcams = ConfigSelection(choices = softcams)
+		self.softcams = ConfigSelection(choices=softcams)
 		self.softcams.value = self.softcam.current()
 
 		self.softcams_text = _("Select Softcam")
 		self.list.append(getConfigListEntry(self.softcams_text, self.softcams))
 		if cardservers:
-			self.cardservers = ConfigSelection(choices = cardservers)
+			self.cardservers = ConfigSelection(choices=cardservers)
 			self.cardservers.value = self.cardserver.current()
 			self.list.append(getConfigListEntry(_("Select Card Server"), self.cardservers))
 
@@ -101,7 +101,7 @@ class SoftcamSetup(Screen, ConfigListScreen):
 			self.session.open(CCcamInfoMain)
 		elif os.path.isfile(ppanelFileName) and os.path.isfile(resolveFilename(SCOPE_PLUGINS, 'Extensions/PPanel/plugin.pyo')):
 			from Plugins.Extensions.PPanel.ppanel import PPanel
-			self.session.open(PPanel, name = self.softcams.value + ' PPanel', node = None, filename = ppanelFileName, deletenode = None)
+			self.session.open(PPanel, name=self.softcams.value + ' PPanel', node=None, filename=ppanelFileName, deletenode=None)
 		else:
 			return 0
 

@@ -17,17 +17,17 @@ class SessionGlobals(Screen):
 		self["CurrentService"] = CurrentService(session.nav)
 		self["Event_Now"] = EventInfo(session.nav, EventInfo.NOW)
 		self["Event_Next"] = EventInfo(session.nav, EventInfo.NEXT)
-		self["FrontendStatus"] = FrontendStatus(service_source = session.nav.getCurrentService)
-		self["FrontendInfo"] = FrontendInfo(navcore = session.nav)
+		self["FrontendStatus"] = FrontendStatus(service_source=session.nav.getCurrentService)
+		self["FrontendInfo"] = FrontendInfo(navcore=session.nav)
 		self["VideoPicture"] = Source()
 		self["TunerInfo"] = TunerInfo()
 		self["RecordState"] = RecordState(session)
-		self["Standby"] = Boolean(fixed = False)
+		self["Standby"] = Boolean(fixed=False)
 		self["HddSleepingState"] = HddState(session)
 
 		from Components.SystemInfo import SystemInfo
 
-		combine = Combine(func = lambda s: {(False, False): 0, (False, True): 1, (True, False): 2, (True, True): 3}[(s[0].boolean, s[1].boolean)])
+		combine = Combine(func=lambda s: {(False, False): 0, (False, True): 1, (True, False): 2, (True, True): 3}[(s[0].boolean, s[1].boolean)])
 		combine.connect(self["Standby"])
 		combine.connect(self["RecordState"])
 		combine.connect(self["HddSleepingState"])
@@ -46,7 +46,7 @@ class SessionGlobals(Screen):
 		nr_leds = SystemInfo.get("NumFrontpanelLEDs", 0)
 
 		if nr_leds == 1:
-			FrontpanelLed(which = 0, boolean = False, patterns = [PATTERN_OFF, PATTERN_BLINK, PATTERN_OFF, PATTERN_BLINK]).connect(combine)
+			FrontpanelLed(which=0, boolean=False, patterns=[PATTERN_OFF, PATTERN_BLINK, PATTERN_OFF, PATTERN_BLINK]).connect(combine)
 		elif nr_leds == 2:
-			FrontpanelLed(which = 0, boolean = False, patterns = [PATTERN_OFF, PATTERN_BLINK, PATTERN_ON, PATTERN_BLINK]).connect(combine)
-			FrontpanelLed(which = 1, boolean = False, patterns = [PATTERN_ON, PATTERN_ON, PATTERN_OFF, PATTERN_OFF]).connect(combine)
+			FrontpanelLed(which=0, boolean=False, patterns=[PATTERN_OFF, PATTERN_BLINK, PATTERN_ON, PATTERN_BLINK]).connect(combine)
+			FrontpanelLed(which=1, boolean=False, patterns=[PATTERN_ON, PATTERN_ON, PATTERN_OFF, PATTERN_OFF]).connect(combine)

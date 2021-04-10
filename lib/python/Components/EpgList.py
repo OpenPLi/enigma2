@@ -36,7 +36,7 @@ class Rect:
 		return self.w
 
 class EPGList(GUIComponent):
-	def __init__(self, type=EPG_TYPE_SINGLE, selChangedCB=None, timer = None):
+	def __init__(self, type=EPG_TYPE_SINGLE, selChangedCB=None, timer=None):
 		self.days = (_("Mon"), _("Tue"), _("Wed"), _("Thu"), _("Fri"), _("Sat"), _("Sun"))
 		self.timer = timer
 		self.onSelChanged = [ ]

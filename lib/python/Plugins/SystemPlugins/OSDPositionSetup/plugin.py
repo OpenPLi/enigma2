@@ -2,10 +2,10 @@ from Screens.Screen import Screen
 from Components.config import config, ConfigSubsection, ConfigInteger
 
 config.plugins.OSDPositionSetup = ConfigSubsection()
-config.plugins.OSDPositionSetup.dst_left = ConfigInteger(default = 0)
-config.plugins.OSDPositionSetup.dst_width = ConfigInteger(default = 720)
-config.plugins.OSDPositionSetup.dst_top = ConfigInteger(default = 0)
-config.plugins.OSDPositionSetup.dst_height = ConfigInteger(default = 576)
+config.plugins.OSDPositionSetup.dst_left = ConfigInteger(default=0)
+config.plugins.OSDPositionSetup.dst_width = ConfigInteger(default=720)
+config.plugins.OSDPositionSetup.dst_top = ConfigInteger(default=0)
+config.plugins.OSDPositionSetup.dst_height = ConfigInteger(default=576)
 
 def setPosition(dst_left, dst_width, dst_top, dst_height):
 	if dst_left + dst_width > 720:
@@ -35,5 +35,5 @@ def startup(reason, **kwargs):
 
 def Plugins(**kwargs):
 	from Plugins.Plugin import PluginDescriptor
-	return [PluginDescriptor(name = _("Overscan wizard"), description = "", where = PluginDescriptor.WHERE_SESSIONSTART, fnc = startup),
-		PluginDescriptor(name = _("Overscan wizard"), description = _("Wizard to arrange the overscan"), where = PluginDescriptor.WHERE_MENU, fnc = startSetup)]
+	return [PluginDescriptor(name=_("Overscan wizard"), description="", where=PluginDescriptor.WHERE_SESSIONSTART, fnc=startup),
+		PluginDescriptor(name=_("Overscan wizard"), description=_("Wizard to arrange the overscan"), where=PluginDescriptor.WHERE_MENU, fnc=startSetup)]

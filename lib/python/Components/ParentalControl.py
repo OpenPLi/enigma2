@@ -19,34 +19,34 @@ FLAG_IS_PARENTAL_PROTECTED_HIDDEN = 256
 
 def InitParentalControl():
 	config.ParentalControl = ConfigSubsection()
-	config.ParentalControl.storeservicepin = ConfigSelection(default = "never", choices = [("never", _("never")), ("5", _("%d minutes") % 5), ("15", _("%d minutes") % 15), ("30", _("%d minutes") % 30), ("60", _("%d minutes") % 60), ("120", _("%d minutes") % 120), ("standby", _("until standby/restart"))])
-	config.ParentalControl.configured = ConfigYesNo(default = False)
-	config.ParentalControl.setuppinactive = ConfigYesNo(default = False)
+	config.ParentalControl.storeservicepin = ConfigSelection(default="never", choices=[("never", _("never")), ("5", _("%d minutes") % 5), ("15", _("%d minutes") % 15), ("30", _("%d minutes") % 30), ("60", _("%d minutes") % 60), ("120", _("%d minutes") % 120), ("standby", _("until standby/restart"))])
+	config.ParentalControl.configured = ConfigYesNo(default=False)
+	config.ParentalControl.setuppinactive = ConfigYesNo(default=False)
 	config.ParentalControl.retries = ConfigSubsection()
 	config.ParentalControl.retries.servicepin = ConfigSubsection()
-	config.ParentalControl.retries.servicepin.tries = ConfigInteger(default = 3)
-	config.ParentalControl.retries.servicepin.time = ConfigInteger(default = 3)
+	config.ParentalControl.retries.servicepin.tries = ConfigInteger(default=3)
+	config.ParentalControl.retries.servicepin.time = ConfigInteger(default=3)
 	config.ParentalControl.servicepin = ConfigSubList()
-	config.ParentalControl.servicepin.append(ConfigPIN(default = 0))
-	config.ParentalControl.age = ConfigSelection(default = "18", choices = [("0", _("No age block"))] + list((str(x), "%d+" % x) for x in range(3,19)))
-	config.ParentalControl.hideBlacklist = ConfigYesNo(default = False)
+	config.ParentalControl.servicepin.append(ConfigPIN(default=0))
+	config.ParentalControl.age = ConfigSelection(default="18", choices=[("0", _("No age block"))] + list((str(x), "%d+" % x) for x in range(3,19)))
+	config.ParentalControl.hideBlacklist = ConfigYesNo(default=False)
 	config.ParentalControl.config_sections = ConfigSubsection()
-	config.ParentalControl.config_sections.main_menu = ConfigYesNo(default = False)
-	config.ParentalControl.config_sections.configuration = ConfigYesNo(default = False)
-	config.ParentalControl.config_sections.timer_menu = ConfigYesNo(default = False)
-	config.ParentalControl.config_sections.plugin_browser = ConfigYesNo(default = False)
-	config.ParentalControl.config_sections.standby_menu = ConfigYesNo(default = False)
-	config.ParentalControl.config_sections.software_update = ConfigYesNo(default = False)
-	config.ParentalControl.config_sections.manufacturer_reset = ConfigYesNo(default = True)
-	config.ParentalControl.config_sections.movie_list = ConfigYesNo(default = False)
-	config.ParentalControl.config_sections.context_menus = ConfigYesNo(default = False)
-	config.ParentalControl.config_sections.menu_sort = ConfigYesNo(default = False)
+	config.ParentalControl.config_sections.main_menu = ConfigYesNo(default=False)
+	config.ParentalControl.config_sections.configuration = ConfigYesNo(default=False)
+	config.ParentalControl.config_sections.timer_menu = ConfigYesNo(default=False)
+	config.ParentalControl.config_sections.plugin_browser = ConfigYesNo(default=False)
+	config.ParentalControl.config_sections.standby_menu = ConfigYesNo(default=False)
+	config.ParentalControl.config_sections.software_update = ConfigYesNo(default=False)
+	config.ParentalControl.config_sections.manufacturer_reset = ConfigYesNo(default=True)
+	config.ParentalControl.config_sections.movie_list = ConfigYesNo(default=False)
+	config.ParentalControl.config_sections.context_menus = ConfigYesNo(default=False)
+	config.ParentalControl.config_sections.menu_sort = ConfigYesNo(default=False)
 
 	#Added for backwards compatibility with some 3rd party plugins that depend on this config
 	config.ParentalControl.servicepinactive = config.ParentalControl.configured
 	config.ParentalControl.setuppin = config.ParentalControl.servicepin[0]
 	config.ParentalControl.retries.setuppin = config.ParentalControl.retries.servicepin
-	config.ParentalControl.type = ConfigSelection(default = "blacklist", choices = [(LIST_BLACKLIST, _("blacklist"))])
+	config.ParentalControl.type = ConfigSelection(default="blacklist", choices=[(LIST_BLACKLIST, _("blacklist"))])
 
 	global parentalControl
 	parentalControl = ParentalControl()
@@ -183,7 +183,7 @@ class ParentalControl:
 		elif result:
 			self.setSessionPinCached()
 			self.hideBlacklist()
-			self.callback(ref = service)
+			self.callback(ref=service)
 		elif result == False:
 			messageText = _("The pin code you entered is wrong.")
 			if self.session:

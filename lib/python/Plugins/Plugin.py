@@ -64,7 +64,7 @@ class PluginDescriptor:
 	WHERE_CHANNEL_CONTEXT_MENU = 15
 
 
-	def __init__(self, name = "Plugin", where = [ ], description = "", icon = None, fnc = None, wakeupfnc = None, needsRestart = None, internal = False, weight = 0):
+	def __init__(self, name="Plugin", where=[ ], description="", icon=None, fnc=None, wakeupfnc=None, needsRestart=None, internal=False, weight=0):
 		self.name = name
 		self.internal = internal
 		self.needsRestart = needsRestart

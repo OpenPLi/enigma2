@@ -30,18 +30,17 @@ def filescan(**kwargs):
 			return os.path.exists(file.path)
 
 	return \
-		LocalScanner(mimetypes = ["image/jpeg", "image/png", "image/gif", "image/bmp"],
-			paths_to_scan =
-				[
-					ScanPath(path = "DCIM", with_subdirs = True),
-					ScanPath(path = "", with_subdirs = False),
+		LocalScanner(mimetypes=["image/jpeg", "image/png", "image/gif", "image/bmp"],
+			paths_to_scan=[
+					ScanPath(path="DCIM", with_subdirs=True),
+					ScanPath(path="", with_subdirs=False),
 				],
-			name = "Pictures",
-			description = _("View photos..."),
-			openfnc = filescan_open,
+			name="Pictures",
+			description=_("View photos..."),
+			openfnc=filescan_open,
 		)
 
 def Plugins(**kwargs):
 	return \
-		[PluginDescriptor(name=_("Picture player"), description=_("fileformats (BMP, PNG, JPG, GIF)"), icon="pictureplayer.png", where = PluginDescriptor.WHERE_PLUGINMENU, needsRestart = False, fnc=main),
-		PluginDescriptor(name=_("Picture player"), where = PluginDescriptor.WHERE_FILESCAN, needsRestart = False, fnc = filescan)]
+		[PluginDescriptor(name=_("Picture player"), description=_("fileformats (BMP, PNG, JPG, GIF)"), icon="pictureplayer.png", where=PluginDescriptor.WHERE_PLUGINMENU, needsRestart=False, fnc=main),
+		PluginDescriptor(name=_("Picture player"), where=PluginDescriptor.WHERE_FILESCAN, needsRestart=False, fnc=filescan)]

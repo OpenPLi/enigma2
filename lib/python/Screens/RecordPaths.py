@@ -47,7 +47,7 @@ class RecordPathsSettings(Screen,ConfigListScreen):
 			self.session.open(
 				MessageBox,
 				_("The directory %s is not writable.\nMake sure you select a writable directory instead.") % value,
-				type = MessageBox.TYPE_ERROR
+				type=MessageBox.TYPE_ERROR
 				)
 			return False
 
@@ -60,28 +60,28 @@ class RecordPathsSettings(Screen,ConfigListScreen):
 			tmp = tmp[:]
 			tmp.append(default)
 		print "DefaultPath: ", default, tmp
-		self.default_dirname = ConfigSelection(default = default, choices = [("", _("<Default movie location>"))] + tmp)
+		self.default_dirname = ConfigSelection(default=default, choices=[("", _("<Default movie location>"))] + tmp)
 		tmp = config.movielist.videodirs.value
 		default = config.usage.timer_path.value
 		if default not in tmp and default not in styles_keys:
 			tmp = tmp[:]
 			tmp.append(default)
 		print "TimerPath: ", default, tmp
-		self.timer_dirname = ConfigSelection(default = default, choices = self.styles+tmp)
+		self.timer_dirname = ConfigSelection(default=default, choices=self.styles+tmp)
 		tmp = config.movielist.videodirs.value
 		default = config.usage.instantrec_path.value
 		if default not in tmp and default not in styles_keys:
 			tmp = tmp[:]
 			tmp.append(default)
 		print "InstantrecPath: ", default, tmp
-		self.instantrec_dirname = ConfigSelection(default = default, choices = self.styles+tmp)
+		self.instantrec_dirname = ConfigSelection(default=default, choices=self.styles+tmp)
 		default = config.usage.timeshift_path.value
 		tmp = config.usage.allowed_timeshift_paths.value
 		if default not in tmp:
 			tmp = tmp[:]
 			tmp.append(default)
 		print "TimeshiftPath: ", default, tmp
-		self.timeshift_dirname = ConfigSelection(default = default, choices = tmp)
+		self.timeshift_dirname = ConfigSelection(default=default, choices=tmp)
 		self.default_dirname.addNotifier(self.checkReadWriteDir, initial_call=False, immediate_feedback=False)
 		self.timer_dirname.addNotifier(self.checkReadWriteDir, initial_call=False, immediate_feedback=False)
 		self.instantrec_dirname.addNotifier(self.checkReadWriteDir, initial_call=False, immediate_feedback=False)

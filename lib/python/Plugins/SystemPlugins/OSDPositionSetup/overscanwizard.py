@@ -44,7 +44,7 @@ class OverscanWizard(Screen, ConfigListScreen):
 
 		self.step = 1
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
 		self.onChangedEntry = []
 		self.setScreen()
 
@@ -80,7 +80,7 @@ class OverscanWizard(Screen, ConfigListScreen):
 				"In other words, if the yellow box touches all four sides of your screen, you have at least 5% overscan on all sides.\n\n"
 				"If you see the tips of all eight arrowheads, then your TV has overscan disabled.\n\n"
 				"Test Pattern by TigerDave - www.tigerdave.com/ht_menu.htm"))
-			self.yes_no = ConfigYesNo(default = True, graphic = False)
+			self.yes_no = ConfigYesNo(default=True, graphic=False)
 			self.list.append(getConfigListEntry(_("Did you see all eight arrow heads?"), self.yes_no))
 			self.save_new_position = False
 			setPosition(0, 720, 0, 576)
@@ -101,10 +101,10 @@ class OverscanWizard(Screen, ConfigListScreen):
 				"you may also miss parts of the user interface, for example volume bars and more.\n\n"
 				"You can now try to resize and change the position of the user interface until you see the eight arrow heads.\n\n"
 				"When done press OK.\n\n"))
-			self.dst_left = ConfigSlider(default = config.plugins.OSDPositionSetup.dst_left.value, increment = 1, limits = (0, 720))
-			self.dst_right = ConfigSlider(default = config.plugins.OSDPositionSetup.dst_left.value + config.plugins.OSDPositionSetup.dst_width.value, increment = 1, limits = (0, 720))
-			self.dst_top = ConfigSlider(default = config.plugins.OSDPositionSetup.dst_top.value, increment = 1, limits = (0, 576))
-			self.dst_bottom = ConfigSlider(default = config.plugins.OSDPositionSetup.dst_top.value + config.plugins.OSDPositionSetup.dst_height.value, increment = 1, limits = (0, 576))
+			self.dst_left = ConfigSlider(default=config.plugins.OSDPositionSetup.dst_left.value, increment=1, limits=(0, 720))
+			self.dst_right = ConfigSlider(default=config.plugins.OSDPositionSetup.dst_left.value + config.plugins.OSDPositionSetup.dst_width.value, increment=1, limits=(0, 720))
+			self.dst_top = ConfigSlider(default=config.plugins.OSDPositionSetup.dst_top.value, increment=1, limits=(0, 576))
+			self.dst_bottom = ConfigSlider(default=config.plugins.OSDPositionSetup.dst_top.value + config.plugins.OSDPositionSetup.dst_height.value, increment=1, limits=(0, 576))
 			self.list.append(getConfigListEntry(_("left"), self.dst_left))
 			self.list.append(getConfigListEntry(_("right"), self.dst_right))
 			self.list.append(getConfigListEntry(_("top"), self.dst_top))
