@@ -16,7 +16,8 @@ from Tools.StbHardware import getFPVersion
 from enigma import eTimer, eLabel, eConsoleAppContainer, getDesktop, eGetEnigmaDebugLvl
 
 from Components.GUIComponent import GUIComponent
-import skin, os
+import skin
+import os
 
 class About(Screen):
 	def __init__(self, session):

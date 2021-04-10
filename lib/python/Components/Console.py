@@ -1,4 +1,6 @@
-import enigma, ctypes, os
+import enigma
+import ctypes
+import os
 
 class ConsoleItem:
 	def __init__(self, containers, cmd, callback, extra_args):
