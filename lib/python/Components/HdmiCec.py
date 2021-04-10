@@ -1,4 +1,6 @@
-import struct, os, time
+import struct
+import os
+import time
 from config import config, ConfigSelection, ConfigYesNo, ConfigSubsection, ConfigText, ConfigCECAddress, ConfigLocations, ConfigDirectory
 from enigma import eHdmiCEC, eActionMap
 from Tools.StbHardware import getFPWasTimerWakeup

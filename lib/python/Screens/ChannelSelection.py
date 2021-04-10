@@ -43,7 +43,8 @@ from Plugins.Plugin import PluginDescriptor
 from Components.PluginComponent import plugins
 from Screens.ChoiceBox import ChoiceBox
 from Screens.EventView import EventViewEPGSelect
-import os, unicodedata
+import os
+import unicodedata
 from time import time
 profile("ChannelSelection.py after imports")
 
