@@ -117,7 +117,7 @@ cable_autoscan_nimtype = {
 'TURBO': 'vuplus_turbo_c',
 'TURBO2': 'vuplus_turbo2_c',
 'TT2L08': 'tt2l08',
-'BCM3148': 'bcm3148', #BCM3158/BCM3148 use the same bcm3148 utility 
+'BCM3148': 'bcm3148', #BCM3158/BCM3148 use the same bcm3148 utility
 'BCM3158': 'bcm3148'
 }
 
@@ -434,7 +434,7 @@ class TerrestrialTransponderSearchSupport:
 						tmpstr += data[3] + " kHz"
 					else:
 						title = _("Sundtek - hardware blind scan in progress.\nPlease wait(3-20 min) for the scan to finish.")
-						if "Succeeded this device supports Hardware Blindscan" in line: 
+						if "Succeeded this device supports Hardware Blindscan" in line:
 							tmpstr += title
 					self.terrestrial_search_session["text"].setText(tmpstr)
 		else:
@@ -1090,7 +1090,7 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 		self.scan_sat.t2mi_plp_id = ConfigInteger(default=defaultSat["t2mi_plp_id"], limits=(eDVBFrontendParametersSatellite.No_T2MI_PLP_Id, 255))
 		self.scan_sat.t2mi_pid = ConfigInteger(default=defaultSat["t2mi_pid"] if self.scan_sat.t2mi_plp_id.value != eDVBFrontendParametersSatellite.No_T2MI_PLP_Id else eDVBFrontendParametersSatellite.T2MI_Default_Pid, limits=(0, 8191))
 		self.scan_sat.t2mi_plp_id_bool = ConfigSelection(default=defaultSat["t2mi_plp_id"] != eDVBFrontendParametersSatellite.No_T2MI_PLP_Id, choices=[(True, _("Enabled")), (False, _("Disabled"))])
-		
+
 		self.is_id_memory = self.scan_sat.is_id.value # used to prevent is_id value being lost when self.scan_sat.is_id_bool state changes
 		self.pls_mode_memory = self.scan_sat.pls_mode.value
 		self.pls_code_memory = self.scan_sat.pls_code.value

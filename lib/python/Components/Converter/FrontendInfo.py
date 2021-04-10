@@ -116,7 +116,7 @@ class FrontendInfo(Converter):
 		elif self.type == self.AGC:
 			return self.source.agc is not None
 		elif self.type in (self.STRING, self.USE_TUNERS_STRING):
-			return bool(self.getText())	
+			return bool(self.getText())
 
 	text = property(getText)
 

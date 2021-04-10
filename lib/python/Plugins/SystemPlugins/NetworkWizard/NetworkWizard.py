@@ -148,7 +148,7 @@ class NetworkWizard(WizardLanguage, Rc):
 		elif index == 'eth0':
 			self.NextStep = 'nwconfig'
 		elif index == 'eth1':
-			self.NextStep = 'nwconfig'			
+			self.NextStep = 'nwconfig'
 		else:
 			self.NextStep = 'asknetworktype'
 

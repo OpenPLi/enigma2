@@ -67,7 +67,7 @@ class TransponderInfo(Converter, object):
 		# only populated entries, and, convert to lower case
 		t = self.type and [x.lower() for x in self.type if x]
 		return bool(s and t and s in t)
-	
+
 	boolean = property(getBoolean)
 
 	def rootBouquet(self):

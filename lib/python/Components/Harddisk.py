@@ -629,7 +629,7 @@ class HarddiskManager:
 				dev = None
 				subdev = False
 			# blacklist ram, loop, mtdblock, romblock, ramzswap
-			blacklisted = dev in [1, 7, 31, 253, 254] 
+			blacklisted = dev in [1, 7, 31, 253, 254]
 			# blacklist non-root eMMC devices
 			if not blacklisted and dev == 179:
 				is_mmc = True
