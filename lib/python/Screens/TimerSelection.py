@@ -2,6 +2,7 @@ from Screen import Screen
 from Components.TimerList import TimerList
 from Components.ActionMap import ActionMap
 
+
 class TimerSelection(Screen):
 	def __init__(self, session, list):
 		Screen.__init__(self, session)

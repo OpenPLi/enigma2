@@ -6,6 +6,7 @@ from Components.RcModel import rc_model
 
 config.misc.rcused = ConfigInteger(default=1)
 
+
 class Rc:
 	def __init__(self):
 		self["rc"] = MultiPixmap()

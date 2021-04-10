@@ -288,7 +288,6 @@ class AutoDiseqc(Screen, ConfigListScreen):
 		elif sat_found:
 			self.sat_frequencies.remove(x)
 
-
 		if not self.openFrontend():
 			self.oldref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 			self.session.nav.stopService()

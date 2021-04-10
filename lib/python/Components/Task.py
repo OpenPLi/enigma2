@@ -3,8 +3,10 @@
 
 from Tools.CList import CList
 
+
 class Job(object):
 	NOT_STARTED, IN_PROGRESS, FINISHED, FAILED = range(4)
+
 	def __init__(self, name):
 		self.tasks = []
 		self.resident_tasks = []
@@ -111,6 +113,7 @@ class Job(object):
 
 	def __str__(self):
 		return "Components.Task.Job name=%s #tasks=%s" % (self.name, len(self.tasks))
+
 
 class Task(object):
 	def __init__(self, job, name):
@@ -261,10 +264,12 @@ class Task(object):
 	def __str__(self):
 		return "Components.Task.Task name=%s" % (self.name)
 
+
 class LoggingTask(Task):
 	def __init__(self, job, name):
 		Task.__init__(self, job, name)
 		self.log = []
+
 	def processOutput(self, data):
 		print "[%s]" % self.name, data,
 		self.log.append(data)
@@ -280,19 +285,24 @@ class PythonTask(Task):
 		self.timer = eTimer()
 		self.timer.callback.append(self.onTimer)
 		self.timer.start(5)
+
 	def work(self):
 		raise NotImplemented, "work"
+
 	def abort(self):
 		self.aborted = True
 		if self.callback is None:
 			self.finish(aborted=True)
+
 	def onTimer(self):
 		self.setProgress(self.pos)
+
 	def onComplete(self, result):
 		self.postconditions.append(FailedPostcondition(result))
 		self.timer.stop()
 		del self.timer
 		self.finish()
+
 
 class ConditionTask(Task):
 	"""
@@ -303,23 +313,29 @@ class ConditionTask(Task):
 	Default is to call trigger() once per second, override prepare/cleanup
 	to do something else (like waiting for hotplug)...
 	"""
+
 	def __init__(self, job, name, timeoutCount=None):
 		Task.__init__(self, job, name)
 		self.timeoutCount = timeoutCount
+
 	def _run(self):
 		self.triggerCount = 0
+
 	def prepare(self):
 		from enigma import eTimer
 		self.timer = eTimer()
 		self.timer.callback.append(self.trigger)
 		self.timer.start(1000)
+
 	def cleanup(self, failed):
 		if hasattr(self, 'timer'):
 			self.timer.stop()
 			del self.timer
+
 	def check(self):
 		# override to return True only when condition triggers
 		return True
+
 	def trigger(self):
 		self.triggerCount += 1
 		try:
@@ -335,6 +351,8 @@ class ConditionTask(Task):
 # The jobmanager will execute multiple jobs, each after another.
 # later, it will also support suspending jobs (and continuing them after reboot etc)
 # It also supports a notification when some error occurred, and possibly a retry.
+
+
 class JobManager:
 	def __init__(self):
 		self.active_jobs = []
@@ -442,15 +460,18 @@ class JobManager:
 #			self.args += ["-t", filesystem]
 #		self.args.append(device + "part%d" % partition)
 
+
 class Condition:
 	RECOVERABLE = False
 
 	def getErrorMessage(self, task):
 		return _("An unknown error occurred!") + " (%s @ task %s)" % (self.__class__.__name__, task.__class__.__name__)
 
+
 class WorkspaceExistsPrecondition(Condition):
 	def check(self, task):
 		return os.access(task.job.workspace, os.W_OK)
+
 
 class DiskspacePrecondition(Condition):
 	def __init__(self, diskspace_required):
@@ -468,6 +489,7 @@ class DiskspacePrecondition(Condition):
 
 	def getErrorMessage(self, task):
 		return _("Not enough disk space. Please free up some disk space and try again. (%d MB required, %d MB available)") % (self.diskspace_required / 1024 / 1024, self.diskspace_available / 1024 / 1024)
+
 
 class ToolExistsPrecondition(Condition):
 	def check(self, task):
@@ -489,13 +511,16 @@ class ToolExistsPrecondition(Condition):
 	def getErrorMessage(self, task):
 		return _("A required tool (%s) was not found.") % (self.realpath)
 
+
 class AbortedPostcondition(Condition):
 	def getErrorMessage(self, task):
 		return _("Cancelled upon user request")
 
+
 class ReturncodePostcondition(Condition):
 	def check(self, task):
 		return task.returncode == 0
+
 	def getErrorMessage(self, task):
 		if hasattr(task, 'log') and task.log:
 			log = ''.join(task.log).strip()
@@ -505,9 +530,11 @@ class ReturncodePostcondition(Condition):
 		else:
 			return _("Error code") + ": %s" % task.returncode
 
+
 class FailedPostcondition(Condition):
 	def __init__(self, exception):
 		self.exception = exception
+
 	def getErrorMessage(self, task):
 		if isinstance(self.exception, int):
 			if hasattr(task, 'log'):
@@ -518,6 +545,7 @@ class FailedPostcondition(Condition):
 			else:
 				return _("Error code") + " %s" % self.exception
 		return str(self.exception)
+
 	def check(self, task):
 		return (self.exception is None) or (self.exception == 0)
 
@@ -535,5 +563,6 @@ class FailedPostcondition(Condition):
 #
 #	def createDescription(self):
 #		return {"device": self.device}
+
 
 job_manager = JobManager()

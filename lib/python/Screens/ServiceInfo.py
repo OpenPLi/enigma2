@@ -18,8 +18,10 @@ TYPE_VALUE_FREQ = 6
 TYPE_VALUE_FREQ_FLOAT = 7
 TYPE_VALUE_BITRATE = 8
 
+
 def to_unsigned(x):
 	return x & 0xFFFFFFFF
+
 
 def ServiceInfoListEntry(a, b="", valueType=TYPE_TEXT, param=4, altColor=False):
 	print "b:", b
@@ -53,6 +55,7 @@ def ServiceInfoListEntry(a, b="", valueType=TYPE_TEXT, param=4, altColor=False):
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, xa, ya, wa + wb, ha, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, a, color if altColor is True else None)) # spread horizontally
 	return res
 
+
 class ServiceInfoList(GUIComponent):
 	def __init__(self, source):
 		GUIComponent.__init__(self)
@@ -68,8 +71,10 @@ class ServiceInfoList(GUIComponent):
 	def postWidgetCreate(self, instance):
 		self.instance.setContent(self.l)
 
+
 TYPE_SERVICE_INFO = 1
 TYPE_TRANSPONDER_INFO = 2
+
 
 class ServiceInfo(Screen):
 	def __init__(self, session, serviceref=None):

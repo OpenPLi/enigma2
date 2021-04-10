@@ -52,6 +52,7 @@ FLAG_SERVICE_NEW_FOUND = 64
 FLAG_IS_DEDICATED_3D = 128
 FLAG_CENTER_DVB_SUBS = 2048 #define in lib/dvb/idvb.h as dxNewFound = 64 and dxIsDedicated3D = 128
 
+
 class BouquetSelector(Screen):
 	def __init__(self, session, bouquets, selectedFunc, enableWrapAround=True):
 		Screen.__init__(self, session)
@@ -83,6 +84,7 @@ class BouquetSelector(Screen):
 	def cancelClick(self):
 		self.close(False)
 
+
 class SilentBouquetSelector:
 	def __init__(self, bouquets, enableWrapAround=False, current=0):
 		self.bouquets = [b[1] for b in bouquets]
@@ -101,20 +103,24 @@ class SilentBouquetSelector:
 	def getCurrent(self):
 		return self.bouquets[self.pos]
 
+
 # csel.bouquet_mark_edit values
 OFF = 0
 EDIT_BOUQUET = 1
 EDIT_ALTERNATIVES = 2
 
+
 def append_when_current_valid(current, menu, args, level=0, key="dummy"):
 	if current and current.valid() and level <= config.usage.setup_level.index:
 		menu.append(ChoiceEntryComponent(key, args))
+
 
 def removed_userbouquets_available():
 	for file in os.listdir("/etc/enigma2/"):
 		if file.startswith("userbouquet") and file.endswith(".del"):
 			return True
 	return False
+
 
 class ChannelContextMenu(Screen):
 	def __init__(self, session, csel):
@@ -655,6 +661,7 @@ class ChannelContextMenu(Screen):
 		plugin(session=self.session, service=self.csel.getCurrentSelection())
 		self.close()
 
+
 class SelectionEventInfo:
 	def __init__(self):
 		self["Service"] = self["ServiceEvent"] = ServiceEvent()
@@ -698,6 +705,7 @@ class SelectionEventInfo:
 						self.timer.start((end_time - now) * 1000, True)
 		except:
 			pass
+
 
 class ChannelSelectionEPG(InfoBarHotkey):
 	def __init__(self):
@@ -876,6 +884,7 @@ class ChannelSelectionEPG(InfoBarHotkey):
 			self.startServiceRef = None
 			self.startRoot = None
 			self.revertMode = None
+
 
 class ChannelSelectionEdit:
 	def __init__(self):
@@ -1291,6 +1300,7 @@ class ChannelSelectionEdit:
 		if close:
 			self.cancel()
 
+
 MODE_TV = 0
 MODE_RADIO = 1
 
@@ -1307,6 +1317,7 @@ MODE_RADIO = 1
 
 service_types_tv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 22) || (type == 25) || (type == 31) || (type == 134) || (type == 195)'
 service_types_radio = '1:7:2:0:0:0:0:0:0:0:(type == 2) || (type == 10)'
+
 
 class ChannelSelectionBase(Screen):
 	def __init__(self, session):
@@ -1875,6 +1886,7 @@ class ChannelSelectionBase(Screen):
 			if playingref:
 				self.setCurrentSelectionAlternative(playingref)
 
+
 HISTORYSIZE = 20
 
 #config for lastservice
@@ -1890,6 +1902,7 @@ config.servicelist.startupservice = ConfigText()
 config.servicelist.startupservice_onstandby = ConfigYesNo(default=False)
 config.servicelist.startuproot = ConfigText()
 config.servicelist.startupmode = ConfigText(default="tv")
+
 
 class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelectionEPG, SelectionEventInfo):
 	def __init__(self, session):
@@ -2407,10 +2420,12 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 			self.setCurrentSelection(tmp_ref)
 		self.revertMode = None
 
+
 class RadioInfoBar(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self["RdsDecoder"] = RdsDecoder(self.session.nav)
+
 
 class ChannelSelectionRadio(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelectionEPG, InfoBarBase, SelectionEventInfo, InfoBarScreenSaver):
 	ALLOW_SUSPEND = True
@@ -2570,6 +2585,7 @@ class ChannelSelectionRadio(ChannelSelectionBase, ChannelSelectionEdit, ChannelS
 
 	def audioSelection(self):
 		Screens.InfoBar.InfoBar.instance and Screens.InfoBar.InfoBar.instance.audioSelection()
+
 
 class SimpleChannelSelection(ChannelSelectionBase, SelectionEventInfo):
 	def __init__(self, session, title, currentBouquet=False, returnBouquet=False, setService=None, setBouquet=None):

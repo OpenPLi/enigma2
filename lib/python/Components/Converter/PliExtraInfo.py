@@ -57,10 +57,12 @@ codec_data = {
 	21: "SPARK",
 }
 
+
 def addspace(text):
 	if text:
 		text += " "
 	return text
+
 
 class PliExtraInfo(Poll, Converter):
 	def __init__(self, type):

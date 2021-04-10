@@ -6,6 +6,7 @@ from Plugins.SystemPlugins.OSDPositionSetup.plugin import setPosition, setConfig
 from enigma import quitMainloop, eTimer, getDesktop
 import os
 
+
 class OverscanWizard(Screen, ConfigListScreen):
 	def __init__(self, session, timeOut=True):
 		if getDesktop(0).size().height() == 1080:

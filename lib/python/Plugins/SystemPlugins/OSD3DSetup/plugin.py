@@ -13,6 +13,7 @@ config.plugins.OSD3DSetup = ConfigSubsection()
 config.plugins.OSD3DSetup.mode = ConfigSelection(choices=modelist, default="auto")
 config.plugins.OSD3DSetup.znorm = ConfigInteger(default=0)
 
+
 class OSD3DSetupScreen(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -69,8 +70,10 @@ class OSD3DSetupScreen(Screen, ConfigListScreen):
 		applySettings()
 		self.close()
 
+
 previous = None
 isDedicated3D = False
+
 
 def applySettings(mode=config.plugins.OSD3DSetup.mode.value, znorm=int(config.plugins.OSD3DSetup.znorm.value)):
 	global previous, isDedicated3D
@@ -83,6 +86,7 @@ def applySettings(mode=config.plugins.OSD3DSetup.mode.value, znorm=int(config.pl
 			previous = (mode, znorm)
 		except:
 			return
+
 
 class auto3D(Screen):
 	def __init__(self, session):
@@ -115,8 +119,10 @@ class auto3D(Screen):
 			else:
 				applySettings()
 
+
 def main(session, **kwargs):
 	session.open(OSD3DSetupScreen)
+
 
 def startSetup(menuid):
 	# show only in the menu when set at expert level
@@ -124,8 +130,10 @@ def startSetup(menuid):
 		return [(_("OSD 3D setup"), main, "auto_3d_setup", 0)]
 	return []
 
+
 def autostart(reason, **kwargs):
 	"session" in kwargs and kwargs["session"].open(auto3D)
+
 
 def Plugins(**kwargs):
 	if SystemInfo["3DMode"]:

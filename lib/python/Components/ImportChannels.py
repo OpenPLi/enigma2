@@ -13,6 +13,7 @@ import xml.etree.ElementTree as et
 
 settingfiles = ('lamedb', 'bouquets.', 'userbouquet.', 'blacklist', 'whitelist', 'alternatives.')
 
+
 class ImportChannels():
 
 	def __init__(self):

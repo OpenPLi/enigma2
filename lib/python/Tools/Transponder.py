@@ -2,8 +2,10 @@ from enigma import eDVBFrontendParametersSatellite, eDVBFrontendParametersCable,
 from Components.NimManager import nimmanager
 from Components.config import config
 
+
 def orbpos(pos):
 	return pos > 3600 and "N/A" or "%d.%d\xc2\xb0%s" % (pos > 1800 and ((3600 - pos) / 10, (3600 - pos) % 10, "W") or (pos / 10, pos % 10, "E"))
+
 
 def getTunerDescription(nim):
 	try:
@@ -17,11 +19,14 @@ def getTunerDescription(nim):
 			print "[Transponder] no description"
 	return ""
 
+
 def getMHz(frequency):
 	return (frequency + 50000) / 100000 / 10.
 
 # Note: newly added region add into ImportChannels to getTerrestrialRegion()
 #	due using for fallback tuner too
+
+
 def getChannelNumber(frequency, nim):
 	if nim == "DVB-T":
 		for n in nimmanager.nim_slots:
@@ -52,9 +57,11 @@ def getChannelNumber(frequency, nim):
 				return str(int(f - 526) / 7 + 28) + (d < 3 and "-" or d > 4 and "+" or "")
 	return ""
 
+
 def supportedChannels(nim):
 	descr = getTunerDescription(nim)
 	return "Europe" in descr and "DVB-T" in descr
+
 
 def channel2frequency(channel, nim):
 	descr = getTunerDescription(nim)
@@ -64,6 +71,7 @@ def channel2frequency(channel, nim):
 		elif 21 <= channel <= 69:
 			return (474000 + 8000 * (channel - 21)) * 1000
 	return 474000000
+
 
 def ConvertToHumanReadable(tp, tunertype=None):
 	ret = {}

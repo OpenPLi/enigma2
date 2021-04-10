@@ -27,6 +27,7 @@ except:
 config.plugins.CutListEditor = ConfigSubsection()
 config.plugins.CutListEditor.showIntro = ConfigYesNo(default=True)
 
+
 def CutListEntry(where, what):
 	w = where / 90
 	ms = w % 1000
@@ -46,6 +47,7 @@ def CutListEntry(where, what):
 		type = "LAST"
 		type_col = 0x000000
 	return ((where, what), "%dh:%02dm:%02ds:%03d" % (h, m, s, ms), type, type_col)
+
 
 class CutListContextMenu(FixedMenu):
 	RET_STARTCUT = 0
@@ -133,6 +135,7 @@ class CutListContextMenu(FixedMenu):
 
 	def callMovieCut(self):
 		self.close(self.RET_MOVIECUT)
+
 
 class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, HelpableScreen):
 	skin = """

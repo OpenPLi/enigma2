@@ -2,6 +2,7 @@ from Components.Converter.Converter import Converter
 from Components.Element import cached
 from Components.Converter.genre import getGenreStringSub
 
+
 class EventName(Converter, object):
 	NAME = 0
 	SHORT_DESCRIPTION = 1

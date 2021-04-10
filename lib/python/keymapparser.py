@@ -6,12 +6,14 @@ from keyids import KEYIDS
 # these are only informational (for help)...
 from Tools.KeyBindings import addKeyBinding
 
+
 class KeymapError(Exception):
 	def __init__(self, message):
 		self.msg = message
 
 	def __str__(self):
 		return self.msg
+
 
 def getKeyId(id):
 	if len(id) == 1:
@@ -103,6 +105,7 @@ def readKeymap(filename):
 	for ctrans in keymap.findall("translate"):
 		for device in ctrans.findall("device"):
 			parseTrans(filename, p, device.attrib.get("name"), device)
+
 
 def removeKeymap(filename):
 	p = enigma.eActionMap.getInstance()

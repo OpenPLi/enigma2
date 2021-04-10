@@ -5,8 +5,10 @@ import time
 import re
 from Tools.HardwareInfo import HardwareInfo
 
+
 def getVersionString():
 	return getImageVersionString()
+
 
 def getImageVersionString():
 	try:
@@ -20,8 +22,11 @@ def getImageVersionString():
 	return _("unavailable")
 
 # WW -placeholder for BC purposes, commented out for the moment in the Screen
+
+
 def getFlashDateString():
 	return _("unknown")
+
 
 def getBuildDateString():
 	try:
@@ -31,6 +36,7 @@ def getBuildDateString():
 	except:
 		pass
 	return _("unknown")
+
 
 def getUpdateDateString():
 	try:
@@ -42,12 +48,14 @@ def getUpdateDateString():
 		pass
 	return _("unknown")
 
+
 def getEnigmaVersionString():
 	import enigma
 	enigma_version = enigma.getEnigmaVersionString()
 	if '-(no branch)' in enigma_version:
 		enigma_version = enigma_version[:-12]
 	return enigma_version
+
 
 def getGStreamerVersionString():
 	try:
@@ -57,6 +65,7 @@ def getGStreamerVersionString():
 	except:
 		return _("Not Installed")
 
+
 def getffmpegVersionString():
 	try:
 		from glob import glob
@@ -65,14 +74,17 @@ def getffmpegVersionString():
 	except:
 		return _("Not Installed")
 
+
 def getKernelVersionString():
 	try:
 		return open("/proc/version", "r").read().split(' ', 4)[2].split('-', 2)[0]
 	except:
 		return _("unknown")
 
+
 def getHardwareTypeString():
 	return HardwareInfo().get_device_string()
+
 
 def getImageTypeString():
 	try:
@@ -80,6 +92,7 @@ def getImageTypeString():
 		return image_type.capitalize()
 	except:
 		return _("undefined")
+
 
 def getCPUInfoString():
 	try:
@@ -131,6 +144,7 @@ def getCPUInfoString():
 	except:
 		return _("undefined")
 
+
 def getDriverInstalledDate():
 	try:
 		from glob import glob
@@ -147,6 +161,7 @@ def getDriverInstalledDate():
 	except:
 		return _("unknown")
 
+
 def getPythonVersionString():
 	try:
 		import commands
@@ -154,6 +169,7 @@ def getPythonVersionString():
 		return output.split(' ')[1]
 	except:
 		return _("unknown")
+
 
 def GetIPsFromNetworkInterfaces():
 	import socket
@@ -188,6 +204,7 @@ def GetIPsFromNetworkInterfaces():
 			ifaces.append((iface_name, iface_addr))
 	return ifaces
 
+
 def getBoxUptime():
 	try:
 		time = ''
@@ -205,6 +222,7 @@ def getBoxUptime():
 		return "%s" % time
 	except:
 		return '-'
+
 
 # For modules that do "from About import about"
 about = sys.modules[__name__]

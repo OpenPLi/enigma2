@@ -131,6 +131,7 @@ subtype[11] = [
 					_("unpublished"),
 					_("live broadcast")]
 
+
 def getGenreStringMain(hn, ln):
 #	if hn == 0:
 #		return _("Undefined content")
@@ -140,6 +141,7 @@ def getGenreStringMain(hn, ln):
 		return maintype[hn]
 #	return _("Reserved") + " " + str(hn)
 	return ""
+
 
 def getGenreStringSub(hn, ln):
 #	if hn == 0:
@@ -154,6 +156,7 @@ def getGenreStringSub(hn, ln):
 #		return _("Reserved") " " + str(ln)
 #	return _("Reserved") + " " + str(hn) + "," + str(ln)
 	return ""
+
 
 def getGenreStringLong(hn, ln):
 #	if hn == 0:

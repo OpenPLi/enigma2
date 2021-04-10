@@ -2,6 +2,7 @@ import skin
 from GUIComponent import GUIComponent
 from enigma import eLabel, eWidget, eSlider, fontRenderClass, ePoint, eSize
 
+
 class ScrollLabel(GUIComponent):
 	def __init__(self, text="", showscrollbar=True):
 		GUIComponent.__init__(self)

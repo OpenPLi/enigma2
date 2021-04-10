@@ -7,12 +7,14 @@ import os
 hotplugNotifier = []
 audiocd = False
 
+
 def AudiocdAdded():
 	global audiocd
 	if audiocd:
 		return True
 	else:
 		return False
+
 
 def processHotplugData(self, v):
 	print "[Hotplug.plugin.py]:", v
@@ -64,6 +66,7 @@ def processHotplugData(self, v):
 		except AttributeError:
 			hotplugNotifier.remove(callback)
 
+
 class Hotplug(Protocol):
 	def connectionMade(self):
 		print "[Hotplug.plugin.py] connection!"
@@ -83,6 +86,7 @@ class Hotplug(Protocol):
 			v[var] = val
 		processHotplugData(self, v)
 
+
 def autostart(reason, **kwargs):
 	if reason == 0:
 		from twisted.internet import reactor
@@ -93,6 +97,7 @@ def autostart(reason, **kwargs):
 		factory = Factory()
 		factory.protocol = Hotplug
 		reactor.listenUNIX("/tmp/hotplug.socket", factory)
+
 
 def Plugins(**kwargs):
 	return PluginDescriptor(name=_("Hotplug"), description=_("listens to hotplug events"), where=PluginDescriptor.WHERE_AUTOSTART, needsRestart=True, fnc=autostart)

@@ -9,6 +9,7 @@ from Components.ConfigList import ConfigListScreen
 from Components.AVSwitch import AVSwitch
 import DVDTitle
 
+
 class TitleProperties(Screen, ConfigListScreen):
 	skin = """
 		<screen name="TitleProperties" position="center,center" size="560,445" title="Properties of current title" >
@@ -143,7 +144,10 @@ class TitleProperties(Screen, ConfigListScreen):
 	def cancel(self):
 		self.close()
 
+
 from Tools.ISO639 import LanguageCodes
+
+
 class LanguageChoices():
 	def __init__(self):
 		from Components.Language import language as syslanguage
@@ -182,5 +186,6 @@ class LanguageChoices():
 			if val == DVB_lang:
 				return key
 		return "nolang"
+
 
 languageChoices = LanguageChoices()

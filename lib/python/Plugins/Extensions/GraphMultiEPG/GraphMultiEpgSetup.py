@@ -8,6 +8,7 @@ from Components.ConfigList import ConfigList, ConfigListScreen
 
 addnotifier = None
 
+
 class GraphMultiEpgSetup(Screen, ConfigListScreen):
 	skin = """
 		<screen name="GraphMultiEPGSetup" position="center,center" size="560,490" title="Electronic Program Guide Setup">

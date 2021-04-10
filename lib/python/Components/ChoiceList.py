@@ -4,6 +4,7 @@ from enigma import RT_HALIGN_LEFT, eListboxPythonMultiContent, gFont
 from Tools.LoadPixmap import LoadPixmap
 import skin
 
+
 def ChoiceEntryComponent(key=None, text=["--"]):
 	res = [text]
 	if text[0] == "--":
@@ -32,6 +33,7 @@ def ChoiceEntryComponent(key=None, text=["--"]):
 			x, y, w, h = skin.parameters.get("ChoicelistNameSingle", (5, 0, 800, 25))
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, RT_HALIGN_LEFT, text[0]))
 	return res
+
 
 class ChoiceList(MenuList):
 	def __init__(self, list, selection=0, enableWrapAround=False):

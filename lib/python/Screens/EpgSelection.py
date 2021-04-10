@@ -26,6 +26,7 @@ from Tools.FallbackTimer import FallbackTimerList
 
 mepg_config_initialized = False
 
+
 class EPGSelection(Screen):
 	EMPTY = 0
 	ADD_TIMER = 1
@@ -384,6 +385,7 @@ class EPGSelection(Screen):
 				menu.append((_("Options disable timer"), "disablerepeatrunning"))
 				buttons.append("yellow")
 			menu.append((_("Timer Overview"), "timereditlist"))
+
 			def timerAction(choice):
 				if choice is not None:
 					if choice[1] == "delete":
@@ -412,6 +414,7 @@ class EPGSelection(Screen):
 				def removeEditTimer():
 					entry.service_ref, entry.begin, entry.end, entry.external = entry.service_ref_prev, entry.begin_prev, entry.end_prev, entry.external_prev
 					self.removeTimer(entry)
+
 				def moveEditTimerError():
 					entry.external = entry.external_prev
 					self.onSelectionChanged()

@@ -4,6 +4,8 @@ from VariableValue import VariableValue
 from enigma import eSlider
 
 # a general purpose progress bar
+
+
 class ProgressBar(VariableValue, GUIComponent, object):
 	def __init__(self):
 		GUIComponent.__init__(self)

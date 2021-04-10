@@ -7,6 +7,7 @@ from Tools.Directories import resolveFilename, SCOPE_CONFIG, copyfile
 from os import unlink
 from enigma import eTimer, eDVBDB
 
+
 class DefaultServiceScan(ServiceScan):
 	skin = """
 		<screen position="150,115" size="420,390" title="Service Scan">
@@ -44,6 +45,7 @@ class DefaultServiceScan(ServiceScan):
 		self.timer = eTimer()
 		self.timer.callback.append(self.ok)
 		self.timer.start(1000)
+
 
 class DefaultServicesScannerPlugin(ScanSetup):
 	skin = """
@@ -123,8 +125,10 @@ class DefaultServicesScannerPlugin(ScanSetup):
 			self.selectSat(self.scanIndex)
 			self.keyGo()
 
+
 def DefaultServicesScannerMain(session, **kwargs):
 	session.open(DefaultServicesScannerPlugin)
+
 
 def Plugins(**kwargs):
 	return PluginDescriptor(name=_("Default Services Scanner"), description=_("Scans default lamedbs sorted by satellite with a connected dish positioner"), where=PluginDescriptor.WHERE_PLUGINMENU, needsRestart=False, fnc=DefaultServicesScannerMain)

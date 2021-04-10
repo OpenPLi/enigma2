@@ -32,6 +32,7 @@ from enigma import eTimer
 
 defaultInhibitDirs = ["/bin", "/boot", "/dev", "/etc", "/lib", "/proc", "/sbin", "/sys", "/var"]
 
+
 class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 	"""Simple Class similar to MessageBox / ChoiceBox but used to choose a folder/pathname combination"""
 
@@ -366,6 +367,7 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 				if self.filename and not os.path.exists(ret):
 					menu = [(_("Create new folder and exit"), "folder"), (_("Save and exit"), "exit")]
 					text = _("Select action")
+
 					def dirAction(choice):
 						if choice:
 							if choice[1] == "folder":
@@ -547,8 +549,10 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 	def __repr__(self):
 		return str(type(self)) + "(" + self.text + ")"
 
+
 def MovieLocationBox(session, text, dir, filename="", minFree=None):
 	return LocationBox(session, text=text, filename=filename, currDir=dir, bookmarks=config.movielist.videodirs, autoAdd=config.movielist.add_bookmark.value, editDir=True, inhibitDirs=defaultInhibitDirs, minFree=minFree)
+
 
 class TimeshiftLocationBox(LocationBox):
 	def __init__(self, session):

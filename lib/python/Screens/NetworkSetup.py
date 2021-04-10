@@ -18,6 +18,7 @@ from Tools.LoadPixmap import LoadPixmap
 from Plugins.Plugin import PluginDescriptor
 from enigma import eTimer
 
+
 class NetworkAdapterSelection(Screen, HelpableScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -707,7 +708,6 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 		self.updateStatusbar()
 		self.onLayoutFinish.append(self.layoutFinished)
 		self.onClose.append(self.cleanup)
-
 
 	def queryWirelessDevice(self, iface):
 		try:

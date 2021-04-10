@@ -18,6 +18,7 @@ IOC_DIRSHIFT = IOC_SIZESHIFT + IOC_SIZEBITS
 
 IOC_READ = 2L
 
+
 def EVIOCGNAME(length):
 	return (IOC_READ << IOC_DIRSHIFT) | (length << IOC_SIZESHIFT) | (0x45 << IOC_TYPESHIFT) | (0x06 << IOC_NRSHIFT)
 
@@ -45,7 +46,6 @@ class inputDevices:
 
 			if self.name:
 				self.Devices[evdev] = {'name': self.name, 'type': self.getInputDeviceType(self.name), 'enabled': False, 'configuredName': None}
-
 
 	def getInputDeviceType(self, name):
 		if "remote control" in str(name).lower():
@@ -195,6 +195,7 @@ iInputDevices = inputDevices()
 config.plugins.remotecontroltype = ConfigSubsection()
 config.plugins.remotecontroltype.rctype = ConfigInteger(default=0)
 
+
 class RcTypeControl():
 	def __init__(self):
 		if SystemInfo["RcTypeChangable"] and os.path.exists('/proc/stb/info/boxtype'):
@@ -220,5 +221,6 @@ class RcTypeControl():
 		if self.isSupported:
 			rc = open('/proc/stb/ir/rc/type', 'r').read().strip()
 		return int(rc)
+
 
 iRcTypeControl = RcTypeControl()
