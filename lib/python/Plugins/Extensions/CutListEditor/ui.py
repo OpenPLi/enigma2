@@ -227,7 +227,7 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 		self.onClose.append(self.__onClose)
 
 	def __onClose(self):
-		need_restart = self.old_service and self.session.nav.getCurrentlyPlayingServiceOrGroup() and self.old_service != self.session.nav.getCurrentlyPlayingServiceOrGroup() 
+		need_restart = self.old_service and self.session.nav.getCurrentlyPlayingServiceOrGroup() and self.old_service != self.session.nav.getCurrentlyPlayingServiceOrGroup()
 		self.session.nav.playService(self.old_service, forceRestart=need_restart, adjust=False)
 
 	def updateStateLabel(self, state):
@@ -460,4 +460,3 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 	def toggleIntro(self):
 		config.plugins.CutListEditor.showIntro.value = not config.plugins.CutListEditor.showIntro.value
 		config.plugins.CutListEditor.showIntro.save()
-

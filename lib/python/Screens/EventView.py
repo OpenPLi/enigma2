@@ -257,7 +257,7 @@ class EventViewBase:
 		self["key_red"].setText("")
 		if self.SimilarBroadcastTimer is not None:
 			self.SimilarBroadcastTimer.start(400, True)
-		self.setTimerState()	
+		self.setTimerState()
 
 	def setTimerState(self):
 		serviceref = self.currentService

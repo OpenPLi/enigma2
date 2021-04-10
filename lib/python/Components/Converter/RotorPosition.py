@@ -37,7 +37,7 @@ class RotorPosition(Converter, object):
 
 	@cached
 	def getBool(self):
-		return bool(self.getText())	
+		return bool(self.getText())
 
 	text = property(getText)
 

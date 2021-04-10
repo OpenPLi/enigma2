@@ -749,7 +749,7 @@ class NimManager:
 
 	def getCableFlags(self, nim):
 		return self.cablesList[config.Nims[nim].cable.scan_provider.index][1]
-		
+
 	def getCableCountrycode(self, nim):
 		return self.cablesList and self.cablesList[config.Nims[nim].cable.scan_provider.index][2] or None
 

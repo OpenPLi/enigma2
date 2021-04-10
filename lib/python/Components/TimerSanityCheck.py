@@ -339,4 +339,3 @@ class TimerSanityCheck:
 
 		print "[TimerSanityCheck] conflict detected!"
 		return False
-

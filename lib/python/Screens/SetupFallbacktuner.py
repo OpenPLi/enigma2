@@ -109,10 +109,10 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 			if self.avahiselect.value == "ip":
 				self.list.append(getConfigListEntry("  %s" % _("Fallback remote receiver IP"),
 					self.ip,
-					_("IP of fallback remote receiver")))			
+					_("IP of fallback remote receiver")))
 				self.list.append(getConfigListEntry("  %s" % _("Fallback remote receiver Port"),
 					self.port,
-					_("Port of fallback remote receiver")))			
+					_("Port of fallback remote receiver")))
 			if self.avahiselect.value == "url":
 				self.list.append(getConfigListEntry("  %s" % _("Fallback remote receiver URL"),
 					config.usage.remote_fallback,
@@ -124,10 +124,10 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 			if self.avahiselect_seperate.value == "ip":
 				self.list.append(getConfigListEntry("  %s" % _("Fallback remote receiver IP"),
 					self.ip_seperate,
-					_("IP of fallback remote receiver")))			
+					_("IP of fallback remote receiver")))
 				self.list.append(getConfigListEntry("  %s" % _("Fallback remote receiver Port"),
 					self.port_seperate,
-					_("Port of fallback remote receiver")))			
+					_("Port of fallback remote receiver")))
 			if self.avahiselect_seperate.value == "url":
 				self.list.append(getConfigListEntry("  %s" % _("Fallback remote receiver URL"),
 					config.usage.remote_fallback_import_url,

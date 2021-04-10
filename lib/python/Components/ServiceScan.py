@@ -243,4 +243,3 @@ class ServiceScan:
 			self.scan.statusChanged.get().remove(self.scanStatusChanged)
 			self.scan.newService.get().remove(self.newService)
 			self.scan = None
-
