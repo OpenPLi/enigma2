@@ -2,6 +2,7 @@ from Converter import Converter
 from time import localtime, strftime
 from Components.Element import cached
 
+
 class ClockToText(Converter, object):
 	DEFAULT = 0
 	WITH_SECONDS = 1

@@ -5,6 +5,7 @@ from Components.Element import cached
 
 WIDESCREEN = [3, 4, 7, 8, 0xB, 0xC, 0xF, 0x10]
 
+
 class ServiceInfo(Converter):
 	HAS_TELETEXT = 0
 	IS_MULTICHANNEL = 1

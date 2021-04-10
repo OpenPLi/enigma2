@@ -11,6 +11,7 @@ from Components.Sources.HddState import HddState
 from Components.Converter.Combine import Combine
 from Components.Renderer.FrontpanelLed import FrontpanelLed
 
+
 class SessionGlobals(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)

@@ -6,6 +6,7 @@ from Components.Sources.StaticText import StaticText
 from Components.MenuList import MenuList
 from enigma import eTimer
 
+
 class MessageBox(Screen):
 	TYPE_YESNO = 0
 	TYPE_INFO = 1

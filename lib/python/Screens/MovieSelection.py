@@ -85,6 +85,7 @@ def defaultMoviePath():
 	from Tools import Directories
 	return Directories.defaultRecordingLocation(config.usage.default_path.value)
 
+
 def setPreferredTagEditor(te):
 	global preferredTagEditor
 	if preferredTagEditor is None:
@@ -93,9 +94,11 @@ def setPreferredTagEditor(te):
 	else:
 		print "Preferred tag editor already set to", preferredTagEditor, "ignoring", te
 
+
 def getPreferredTagEditor():
 	global preferredTagEditor
 	return preferredTagEditor
+
 
 def isTrashFolder(ref):
 	if not config.usage.movielist_trashcan.value or not ref.flags & eServiceReference.mustDescent:
@@ -103,11 +106,13 @@ def isTrashFolder(ref):
 	path = os.path.realpath(ref.getPath())
 	return path.endswith('.Trash') and path.startswith(Tools.Trashcan.getTrashFolder(path))
 
+
 def isInTrashFolder(ref):
 	if not config.usage.movielist_trashcan.value or not ref.flags & eServiceReference.mustDescent:
 		return False
 	path = os.path.realpath(ref.getPath())
 	return path.startswith(Tools.Trashcan.getTrashFolder(path))
+
 
 def isSimpleFile(item):
 	if not item:
@@ -115,6 +120,7 @@ def isSimpleFile(item):
 	if not item[0] or not item[1]:
 		return False
 	return (item[0].flags & eServiceReference.mustDescent) == 0
+
 
 def isFolder(item):
 	if not item:
@@ -133,7 +139,9 @@ def canMove(item):
 		return not isTrashFolder(item[0])
 	return True
 
+
 canDelete = canMove
+
 
 def canCopy(item):
 	if not item:
@@ -143,6 +151,7 @@ def canCopy(item):
 	if item[0].flags & eServiceReference.mustDescent:
 		return False
 	return True
+
 
 def createMoveList(serviceref, dest):
 	#normpath is to remove the trailing '/' from directories
@@ -166,6 +175,7 @@ def createMoveList(serviceref, dest):
 			if os.path.exists(candidate):
 				moveList.append((candidate, os.path.join(dest, baseName + ext)))
 	return moveList
+
 
 def moveServiceFiles(serviceref, dest, name=None, allowCopy=True):
 	moveList = createMoveList(serviceref, dest)
@@ -198,6 +208,7 @@ def moveServiceFiles(serviceref, dest, name=None, allowCopy=True):
 		# rethrow exception
 		raise
 
+
 def copyServiceFiles(serviceref, dest, name=None):
 	# current should be 'ref' type, dest a simple path string
 	moveList = createMoveList(serviceref, dest)
@@ -227,6 +238,8 @@ def copyServiceFiles(serviceref, dest, name=None):
 
 # Appends possible destinations to the bookmarks object. Appends tuples
 # in the form (description, path) to it.
+
+
 def buildMovieLocationList(bookmarks):
 	inlist = []
 	for d in config.movielist.videodirs.value:
@@ -244,6 +257,7 @@ def buildMovieLocationList(bookmarks):
 		else:
 			bookmarks.append((p.tabbedDescription(), d))
 		inlist.append(d)
+
 
 class MovieBrowserConfiguration(ConfigListScreen, Screen):
 	def __init__(self, session, args=0):
@@ -348,6 +362,7 @@ class MovieBrowserConfiguration(ConfigListScreen, Screen):
 				x[1].cancel()
 			self.close(False)
 
+
 class MovieContextMenuSummary(Screen):
 	def __init__(self, session, parent):
 		Screen.__init__(self, session, parent=parent)
@@ -366,7 +381,9 @@ class MovieContextMenuSummary(Screen):
 		item = self.parent["menu"].getCurrent()
 		self["selected"].text = item[0][0]
 
+
 from Screens.ParentalControlSetup import ProtectedScreen
+
 
 class MovieContextMenu(Screen, ProtectedScreen):
 	# Contract: On OK returns a callable object (e.g. delete)
@@ -450,6 +467,7 @@ class MovieContextMenu(Screen, ProtectedScreen):
 	def cancelClick(self):
 		self.close(None)
 
+
 class SelectionEventInfo:
 	def __init__(self):
 		self["Service"] = ServiceEvent()
@@ -465,6 +483,7 @@ class SelectionEventInfo:
 	def updateEventInfo(self):
 		serviceref = self.getCurrent()
 		self["Service"].newService(serviceref)
+
 
 class MovieSelectionSummary(Screen):
 	# Kludgy component to display current selection on LCD. Should use
@@ -502,6 +521,7 @@ class MovieSelectionSummary(Screen):
 			self["name"].text = name
 		else:
 			self["name"].text = ""
+
 
 class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, ProtectedScreen):
 	# SUSPEND_PAUSES actually means "please call my pauseService()"
@@ -1482,6 +1502,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 
 	def can_tags(self, item):
 		return self.tags
+
 	def do_tags(self):
 		self.showTagsN(None)
 
@@ -2168,6 +2189,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 					ext = os.path.splitext(item.getPath())[1].lower()
 					if ext not in IMAGE_EXTENSIONS:
 						items.append(item)
+
 
 playlist = []
 

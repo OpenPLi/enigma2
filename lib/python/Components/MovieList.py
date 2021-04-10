@@ -22,19 +22,26 @@ KNOWN_EXTENSIONS = MOVIE_EXTENSIONS.union(IMAGE_EXTENSIONS, DVD_EXTENSIONS, AUDI
 
 cutsParser = struct.Struct('>QI') # big-endian, 64-bit PTS and 32-bit type
 
+
 class MovieListData:
 	pass
 
 # iStaticServiceInformation
+
+
 class StubInfo:
 	def getName(self, serviceref):
 		return os.path.split(serviceref.getPath())[1]
+
 	def getLength(self, serviceref):
 		return -1
+
 	def getEvent(self, serviceref, *args):
 		return None
+
 	def isPlayable(self):
 		return True
+
 	def getInfo(self, serviceref, w):
 		if w == iServiceInformation.sTimeCreate:
 			return os.stat(serviceref.getPath()).st_ctime
@@ -43,13 +50,18 @@ class StubInfo:
 		if w == iServiceInformation.sDescription:
 			return serviceref.getPath()
 		return 0
+
 	def getInfoString(self, serviceref, w):
 		return ''
+
+
 justStubInfo = StubInfo()
+
 
 def lastPlayPosFromCache(ref):
 	from Screens.InfoBarGenerics import resumePointCache
 	return resumePointCache.get(ref.toString(), None)
+
 
 def moviePlayState(cutsFileName, ref, length):
 	'''Returns None, 0..100 for percentage'''
@@ -98,6 +110,7 @@ def moviePlayState(cutsFileName, ref, length):
 				if lastPosition:
 					return 50
 		return None
+
 
 def resetMoviePlayState(cutsFileName, ref=None):
 	try:
@@ -254,56 +267,76 @@ class MovieList(GUIComponent):
 	def applySkin(self, desktop, parent):
 		def warningWrongSkinParameter(string):
 			print "[MovieList] wrong '%s' skin parameters" % string
+
 		def fontName(value):
 			self.fontName = value
+
 		def fontSizesOriginal(value):
 			self.fontSizesOriginal = map(parseScale, value.split(","))
 			if len(self.fontSizesOriginal) != 3:
 				warningWrongSkinParameter(attrib)
+
 		def fontSizesCompact(value):
 			self.fontSizesCompact = map(parseScale, value.split(","))
 			if len(self.fontSizesCompact) != 2:
 				warningWrongSkinParameter(attrib)
+
 		def fontSizesMinimal(value):
 			self.fontSizesMinimal = map(parseScale, value.split(","))
 			if len(self.fontSizesMinimal) != 2:
 				warningWrongSkinParameter(attrib)
+
 		def itemHeights(value):
 			self.itemHeights = map(parseScale, value.split(","))
 			if len(self.itemHeights) != 3:
 				warningWrongSkinParameter(attrib)
+
 		def pbarShift(value):
 			self.pbarShift = parseScale(value)
+
 		def pbarHeight(value):
 			self.pbarHeight = parseScale(value)
+
 		def pbarLargeWidth(value):
 			self.pbarLargeWidth = parseScale(value)
+
 		def partIconeShiftMinimal(value):
 			self.partIconeShiftMinimal = parseScale(value)
+
 		def partIconeShiftCompact(value):
 			self.partIconeShiftCompact = parseScale(value)
+
 		def partIconeShiftOriginal(value):
 			self.partIconeShiftOriginal = parseScale(value)
+
 		def spaceIconeText(value):
 			self.spaceIconeText = parseScale(value)
+
 		def iconsWidth(value):
 			self.iconsWidth = parseScale(value)
+
 		def trashShift(value):
 			self.trashShift = parseScale(value)
+
 		def dirShift(value):
 			self.dirShift = parseScale(value)
+
 		def spaceRight(value):
 			self.spaceRight = parseScale(value)
+
 		def columnsOriginal(value):
 			self.columnsOriginal = map(parseScale, value.split(","))
 			if len(self.columnsOriginal) != 2:
 				warningWrongSkinParameter(attrib)
+
 		def columnsCompactDescription(value):
 			self.columnsCompactDescription = map(parseScale, value.split(","))
 			if len(self.columnsCompactDescription) != 3:
 				warningWrongSkinParameter(attrib)
+
 		def compactColumn(value):
 			self.compactColumn = parseScale(value)
+
 		def treeDescription(value):
 			self.treeDescription = parseScale(value)
 		for (attrib, value) in self.skinAttributes[:]:
@@ -854,6 +887,7 @@ class MovieList(GUIComponent):
 		self._char = ''
 		if self._lbl:
 			self._lbl.visible = False
+
 
 def getShortName(name, serviceref):
 	if serviceref.flags & eServiceReference.mustDescent: #Directory

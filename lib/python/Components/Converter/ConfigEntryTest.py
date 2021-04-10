@@ -3,6 +3,7 @@ from Components.Element import cached
 
 from Components.config import configfile
 
+
 class ConfigEntryTest(Converter, object):
 	def __init__(self, argstr):
 		Converter.__init__(self, argstr)

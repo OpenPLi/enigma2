@@ -11,6 +11,7 @@ config.misc.pluginlist = ConfigSubsection()
 config.misc.pluginlist.eventinfo_order = ConfigText(default="")
 config.misc.pluginlist.extension_order = ConfigText(default="")
 
+
 class ChoiceBox(Screen):
 	def __init__(self, session, title="", list=[], keys=None, selection=0, skin_name=[], reorderConfig="", windowTitle=None):
 		Screen.__init__(self, session)
@@ -98,6 +99,7 @@ class ChoiceBox(Screen):
 	def autoResize(self):
 		def x_offset():
 			return max([line[1][1] for line in self["list"].list])
+
 		def x_width(textsize):
 			def getListLineTextWidth(text):
 				self["autoresize"].setText(text)

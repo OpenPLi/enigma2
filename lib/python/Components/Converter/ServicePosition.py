@@ -4,6 +4,7 @@ from enigma import iPlayableService
 from Components.Element import cached, ElementError
 from time import localtime, strftime, time
 
+
 class ServicePosition(Poll, Converter, object):
 	TYPE_LENGTH = 0
 	TYPE_POSITION = 1

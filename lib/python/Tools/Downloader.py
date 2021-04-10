@@ -2,6 +2,7 @@ from twisted.web import client
 from twisted.internet import reactor, defer
 from urlparse import urlparse
 
+
 class HTTPProgressDownloader(client.HTTPDownloader):
 	def __init__(self, url, outfile, headers=None):
 		client.HTTPDownloader.__init__(self, url, outfile, headers=headers, agent="Enigma2 HbbTV/1.1.1 (+PVR+RTSP+DL;OpenPLi;;;)")
@@ -37,6 +38,7 @@ class HTTPProgressDownloader(client.HTTPDownloader):
 		if self.end_callback:
 			self.end_callback()
 		return ret
+
 
 class downloadWithProgress:
 	def __init__(self, url, outputfile, contextFactory=None, *args, **kwargs):

@@ -6,6 +6,7 @@ from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
 import skin
 
+
 class ConfigList(GUIComponent, object):
 	def __init__(self, list, session=None):
 		GUIComponent.__init__(self)
@@ -129,6 +130,7 @@ class ConfigList(GUIComponent, object):
 	def selectionEnabled(self, enabled):
 		if self.instance is not None:
 			self.instance.setSelectionEnable(enabled)
+
 
 class ConfigListScreen:
 	def __init__(self, list, session=None, on_change=None):

@@ -7,6 +7,7 @@ config.plugins.OSDPositionSetup.dst_width = ConfigInteger(default=720)
 config.plugins.OSDPositionSetup.dst_top = ConfigInteger(default=0)
 config.plugins.OSDPositionSetup.dst_height = ConfigInteger(default=576)
 
+
 def setPosition(dst_left, dst_width, dst_top, dst_height):
 	if dst_left + dst_width > 720:
 		dst_width = 720 - dst_left
@@ -20,18 +21,23 @@ def setPosition(dst_left, dst_width, dst_top, dst_height):
 	except:
 		return
 
+
 def setConfiguredPosition():
 	setPosition(int(config.plugins.OSDPositionSetup.dst_left.value), int(config.plugins.OSDPositionSetup.dst_width.value), int(config.plugins.OSDPositionSetup.dst_top.value), int(config.plugins.OSDPositionSetup.dst_height.value))
+
 
 def main(session, **kwargs):
 	from overscanwizard import OverscanWizard
 	session.open(OverscanWizard, timeOut=False)
 
+
 def startSetup(menuid):
 	return menuid == "video" and [(_("Overscan wizard"), main, "sd_position_setup", 0)] or []
 
+
 def startup(reason, **kwargs):
 	setConfiguredPosition()
+
 
 def Plugins(**kwargs):
 	from Plugins.Plugin import PluginDescriptor

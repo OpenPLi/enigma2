@@ -3,6 +3,7 @@ from enigma import eDVBCI_UI, eLabel, iPlayableService
 from Components.SystemInfo import SystemInfo
 from Components.VariableText import VariableText
 
+
 class CiModuleControl(Renderer, VariableText):
 	def __init__(self):
 		Renderer.__init__(self)

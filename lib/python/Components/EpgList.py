@@ -15,6 +15,7 @@ EPG_TYPE_SINGLE = 0
 EPG_TYPE_MULTI = 1
 EPG_TYPE_SIMILAR = 2
 
+
 class Rect:
 	def __init__(self, x, y, width, height):
 		self.x = x
@@ -34,6 +35,7 @@ class Rect:
 
 	def width(self):
 		return self.w
+
 
 class EPGList(GUIComponent):
 	def __init__(self, type=EPG_TYPE_SINGLE, selChangedCB=None, timer=None):
@@ -402,22 +404,29 @@ class EPGList(GUIComponent):
 	def applySkin(self, desktop, parent):
 		def warningWrongSkinParameter(string):
 			print "[EPGList] wrong '%s' skin parameters" % string
+
 		def setEventItemFont(value):
 			self.eventItemFont = parseFont(value, ((1, 1), (1, 1)))
+
 		def setEventTimeFont(value):
 			self.eventTimeFont = parseFont(value, ((1, 1), (1, 1)))
+
 		def setIconDistance(value):
 			self.iconDistance = int(value)
+
 		def setIconShift(value):
 			self.dy = int(value)
+
 		def setTimeWidth(value):
 			self.tw = int(value)
+
 		def setColWidths(value):
 			self.col = map(int, value.split(','))
 			if len(self.col) == 2:
 				self.skinColumns = True
 			else:
 				warningWrongSkinParameter(attrib)
+
 		def setColGap(value):
 			self.colGap = int(value)
 		for (attrib, value) in self.skinAttributes[:]:

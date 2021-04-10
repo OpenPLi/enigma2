@@ -12,6 +12,7 @@ config.misc.installwizard.hasnetwork = ConfigBoolean(default=False)
 config.misc.installwizard.opkgloaded = ConfigBoolean(default=False)
 config.misc.installwizard.channellistdownloaded = ConfigBoolean(default=False)
 
+
 class InstallWizard(Screen, ConfigListScreen):
 
 	STATE_UPDATE = 0
@@ -146,6 +147,7 @@ class InstallWizard(Screen, ConfigListScreen):
 				CableScanMain(self.session)
 			else:
 				self.doNextStep = True
+
 
 class InstallWizardOpkgUpdater(Screen):
 	skin = """

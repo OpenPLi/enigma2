@@ -50,11 +50,13 @@ def parseEvent(ev, description=True):
 	end += config.recording.margin_after.value * 60
 	return (begin, end, name, description, eit)
 
+
 class AFTEREVENT:
 	NONE = 0
 	STANDBY = 1
 	DEEPSTANDBY = 2
 	AUTO = 3
+
 
 def findSafeRecordPath(dirname):
 	if not dirname:
@@ -73,11 +75,13 @@ def findSafeRecordPath(dirname):
 			return None
 	return dirname
 
+
 def checkForRecordings():
 	if NavigationInstance.instance.getRecordings():
 		return True
 	rec_time = NavigationInstance.instance.RecordTimer.getNextTimerTime(isWakeup=True)
 	return rec_time > 0 and (rec_time - time()) < 360
+
 
 def createRecordTimerEntry(timer):
 	return RecordTimerEntry(timer.service_ref, timer.begin, timer.end, timer.name, timer.description,
@@ -638,6 +642,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 			#if self.justplay or self.always_zap:
 			#	choice.insert(2, (_("Don't zap"), "continue"))
 			choice.insert(2, (_("Don't zap"), "continue"))
+
 			def zapAction(choice):
 				start_zap = True
 				if choice:
@@ -767,6 +772,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 
 	record_service = property(lambda self: self.__record_service, setRecordService)
 
+
 def createTimer(xml):
 	begin = int(xml.get("begin"))
 	end = int(xml.get("end"))
@@ -820,6 +826,7 @@ def createTimer(xml):
 		entry.log_entries.append((time, code, msg))
 
 	return entry
+
 
 class RecordTimer(timer.Timer):
 	def __init__(self):
@@ -921,7 +928,6 @@ class RecordTimer(timer.Timer):
 			from Tools.Notifications import AddPopup
 			from Screens.MessageBox import MessageBox
 			AddPopup(_("Timer overlap in timers.xml detected!\nPlease recheck it!") + timer_text, type=MessageBox.TYPE_ERROR, timeout=0, id="TimerLoadFailed")
-
 
 	def saveTimer(self):
 		#root_element = xml.etree.cElementTree.Element('timers')

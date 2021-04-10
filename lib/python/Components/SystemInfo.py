@@ -14,11 +14,13 @@ with open("/proc/cmdline", "r") as fd:
 	cmdline = fd.read()
 cmdline = {k: v.strip('"') for k, v in re.findall(r'(\S+)=(".*?"|\S+)', cmdline)}
 
+
 def getNumVideoDecoders():
 	numVideoDecoders = 0
 	while fileExists("/dev/dvb/adapter0/video%d" % numVideoDecoders, "f"):
 		numVideoDecoders += 1
 	return numVideoDecoders
+
 
 def countFrontpanelLEDs():
 	numLeds = fileExists("/proc/stb/fp/led_set_pattern") and 1 or 0
@@ -26,9 +28,11 @@ def countFrontpanelLEDs():
 		numLeds += 1
 	return numLeds
 
+
 def hassoftcaminstalled():
 	from Tools.camcontrol import CamControl
 	return len(CamControl("softcam").getList()) > 1
+
 
 def getBootdevice():
 	dev = ("root" in cmdline and cmdline["root"].startswith("/dev/")) and cmdline["root"][5:]

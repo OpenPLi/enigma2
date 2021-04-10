@@ -2,6 +2,7 @@ import skin
 
 from enigma import ePoint, eSize
 
+
 class GUIComponent(object):
 	""" GUI component """
 

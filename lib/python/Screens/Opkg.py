@@ -6,6 +6,7 @@ from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from enigma import eTimer
 
+
 class Opkg(Screen):
 	def __init__(self, session, cmdList=[]):
 		Screen.__init__(self, session)

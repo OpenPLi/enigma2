@@ -2,6 +2,7 @@ from Components.config import ConfigOnOff, ConfigSelection, ConfigSubsection, Co
 from Components.Keyboard import keyboard
 from Components.Language import language
 
+
 def InitSetupDevices():
 	def languageNotifier(configElement):
 		language.activateLanguage(configElement.value)

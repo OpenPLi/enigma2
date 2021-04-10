@@ -11,12 +11,14 @@ MAX_W, MAX_H = SystemInfo["MaxPIPSize"]
 MIN_W = MAX_X / 8
 MIN_H = MAX_Y / 8
 
+
 def clip(val, min, max):
 	if min <= val <= max:
 		return val
 	if min <= val:
 		return max
 	return min
+
 
 class PiPSetup(Screen):
 	def __init__(self, session, pip):

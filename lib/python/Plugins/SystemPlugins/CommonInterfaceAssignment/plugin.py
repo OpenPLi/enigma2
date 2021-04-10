@@ -22,6 +22,7 @@ from Tools.XMLTools import stringToXML
 
 import os
 
+
 class CIselectMainMenu(Screen):
 	skin = """
 		<screen name="CIselectMainMenu" position="center,center" size="500,250" title="CI assignment" >
@@ -88,6 +89,7 @@ class CIselectMainMenu(Screen):
 					self.session.open(CIconfigMenu, slot)
 				else:
 					self.session.open(easyCIconfigMenu, slot)
+
 
 class CIconfigMenu(Screen):
 	skin = """
@@ -356,6 +358,7 @@ class CIconfigMenu(Screen):
 		self["ServiceList"].l.setList(self.servicelist)
 		self.setServiceListInfo()
 
+
 class easyCIconfigMenu(CIconfigMenu):
 	skin = """
 		<screen name="easyCIconfigMenu" position="center,center" size="560,440" title="CI assignment" >
@@ -380,6 +383,7 @@ class easyCIconfigMenu(CIconfigMenu):
 				"menu": self.menuPressed,
 				"cancel": self.cancel
 			}, -1)
+
 
 class CAidSelect(Screen):
 	skin = """
@@ -429,6 +433,7 @@ class CAidSelect(Screen):
 	def cancel(self):
 		self.close()
 
+
 class myProviderSelection(ChannelSelectionBase):
 	skin = """
 		<screen name="myProviderSelection" position="center,center" size="560,440" title="Select provider to add...">
@@ -462,7 +467,6 @@ class myProviderSelection(ChannelSelectionBase):
 		self["key_blue"] = StaticText()
 		self["introduction"] = StaticText(_("Press OK to select a provider."))
 
-
 	def showProviders(self):
 		pass
 
@@ -487,6 +491,7 @@ class myProviderSelection(ChannelSelectionBase):
 				self.enterPath(ref)
 			elif (ref.flags & 7) == 7 and 'provider' in ref.toString():
 				menu = [(_("Provider"), "provider"), (_("All services provider"), "providerlist")]
+
 				def addAction(choice):
 					if choice is not None:
 						if choice[1] == "provider":
@@ -564,6 +569,7 @@ class myProviderSelection(ChannelSelectionBase):
 
 	def cancel(self):
 		self.close(None)
+
 
 class myChannelSelection(ChannelSelectionBase):
 	skin = """
@@ -670,14 +676,17 @@ class myChannelSelection(ChannelSelectionBase):
 	def cancel(self):
 		self.close(None)
 
+
 def activate_all(session):
 	cihelper.load_ci_assignment()
+
 
 def find_in_list(list, search, listpos=0):
 	for item in list:
 		if item[listpos] == search:
 			return True
 	return False
+
 
 def isModule():
 	NUM_CI = SystemInfo["CommonInterface"]
@@ -688,11 +697,14 @@ def isModule():
 				return True
 	return False
 
+
 global_session = None
+
 
 def sessionstart(reason, session):
 	global global_session
 	global_session = session
+
 
 def autostart(reason, **kwargs):
 	global global_session
@@ -702,13 +714,16 @@ def autostart(reason, **kwargs):
 	elif reason == 1:
 		global_session = None
 
+
 def main(session, **kwargs):
 	session.open(CIselectMainMenu)
+
 
 def menu(menuid, **kwargs):
 	if menuid == "cam" and isModule():
 		return [(_("Common Interface assignment"), main, "ci_assign", 11)]
 	return []
+
 
 def Plugins(**kwargs):
 	description = _("a gui to assign services/providers to common interface modules")

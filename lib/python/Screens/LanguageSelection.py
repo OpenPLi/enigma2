@@ -12,6 +12,7 @@ from Screens.Standby import TryQuitMainloop
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
 from Tools.LoadPixmap import LoadPixmap
 
+
 def LanguageEntryComponent(file, name, index):
 	png = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "countries/" + index + ".png"))
 	if png is None:
@@ -20,6 +21,7 @@ def LanguageEntryComponent(file, name, index):
 			png = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "countries/missing.png"))
 	res = (index, name, png)
 	return res
+
 
 class LanguageSelection(Screen):
 	def __init__(self, session):
@@ -85,6 +87,7 @@ class LanguageSelection(Screen):
 			list = [LanguageEntryComponent(file=x[1][2].lower(), name=x[1][0], index=x[0]) for x in languageList]
 		self.list = list
 		self["languages"].list = list
+
 
 class LanguageWizard(LanguageSelection, Rc):
 	def __init__(self, session):

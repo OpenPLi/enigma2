@@ -20,7 +20,6 @@ class SoftwareTools(PackageInfoHandler):
 	available_packetlist = []
 	installed_packetlist = {}
 
-
 	def __init__(self):
 		aboutInfo = about.getImageVersionString()
 		if aboutInfo.startswith("dev-"):
@@ -270,5 +269,6 @@ class SoftwareTools(PackageInfoHandler):
 			if not hardware_found:
 				return False
 		return True
+
 
 iSoftwareTools = SoftwareTools()

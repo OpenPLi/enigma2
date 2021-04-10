@@ -20,6 +20,7 @@ from Components.Label import MultiColorLabel
 from enigma import gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
+
 class TitleList(Screen, HelpableScreen):
 	skin = """
 		<screen name="TitleList" position="center,center" size="560,470" title="DVD Tool" >
@@ -160,6 +161,7 @@ class TitleList(Screen, HelpableScreen):
 	def addTitle(self):
 		from Screens.MovieSelection import MovieSelection
 		from Components.ActionMap import HelpableActionMap
+
 		class DVDMovieSelection(MovieSelection):
 			skin = """<screen name="DVDMovieSelection" position="center,center" size="560,445" title="Select a movie">
 				<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
@@ -186,6 +188,7 @@ class TitleList(Screen, HelpableScreen):
 				</widget>
 				<widget name="freeDiskSpace" position="10,425" size="540,20" font="Regular;19" valign="center" halign="right" />
 			</screen>"""
+
 			def __init__(self, session):
 				MovieSelection.__init__(self, session)
 				self["key_red"] = StaticText(_("Close"))
@@ -197,18 +200,23 @@ class TitleList(Screen, HelpableScreen):
 					"green": (self.insertWithoutEdit, ("insert without cutlist editor")),
 					"yellow": (self.movieSelected, _("Add a new title"))
 				})
+
 			def updateTags(self):
 				pass
+
 			def doContext(self):
 				print "context menu forbidden inside DVDBurn to prevent calling multiple instances"
+
 			def updateButtons(self):
 				# the original will hide red/green, and crash...
 				pass
+
 			def insertWithoutEdit(self):
 				current = self.getCurrent()
 				if current is not None:
 					current.edit = False
 					self.close(current)
+
 			def movieSelected(self):
 				current = self.getCurrent()
 				if current is not None:

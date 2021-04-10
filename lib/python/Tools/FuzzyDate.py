@@ -31,7 +31,6 @@ def FuzzyTime(t, inPast=False):
 	return (date, timeres)
 
 
-
 if __name__ == "__main__":
 	def _(x): return x
 	print "now: %s %s" % FuzzyTime(time())

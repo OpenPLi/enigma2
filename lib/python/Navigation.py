@@ -16,6 +16,8 @@ from Screens.InfoBar import InfoBar
 from Components.Sources.StreamService import StreamServiceList
 
 # TODO: remove pNavgation, eNavigation and rewrite this stuff in python.
+
+
 class Navigation:
 	def __init__(self):
 		if NavigationInstance.instance is not None:

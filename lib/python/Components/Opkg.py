@@ -6,15 +6,18 @@ from Tools.Directories import resolveFilename, SCOPE_LIBDIR
 opkgDestinations = []
 opkgStatusPath = ''
 
+
 def opkgExtraDestinations():
 	global opkgDestinations
 	return ''.join([" --add-dest %s:%s" % (i, i) for i in opkgDestinations])
+
 
 def opkgAddDestination(mountpoint):
 	global opkgDestinations
 	if mountpoint not in opkgDestinations:
 		opkgDestinations.append(mountpoint)
 		print "[Opkg] Added to OPKG destinations:", mountpoint
+
 
 def onPartitionChange(why, part):
 	global opkgDestinations
@@ -37,6 +40,7 @@ def onPartitionChange(why, part):
 			except:
 				pass
 
+
 def enumFeeds():
 	for fn in os.listdir('/etc/opkg'):
 		if fn.endswith('-feed.conf'):
@@ -47,6 +51,7 @@ def enumFeeds():
 				pass
 			except IOError:
 				pass
+
 
 def enumPlugins(filter_start=''):
 	list_dir = listsDirPath()
@@ -82,6 +87,7 @@ def enumPlugins(filter_start=''):
 		except IOError:
 			pass
 
+
 def listsDirPath():
 	try:
 		for line in open('/etc/opkg/opkg.conf', "r"):
@@ -93,6 +99,7 @@ def listsDirPath():
 		print "[opkg]", ex
 	return '/var/lib/opkg/lists'
 
+
 if __name__ == '__main__':
 	for p in enumPlugins('enigma'):
 		print p
@@ -100,6 +107,7 @@ if __name__ == '__main__':
 harddiskmanager.on_partition_list_change.append(onPartitionChange)
 for part in harddiskmanager.getMountedPartitions():
 	onPartitionChange('add', part)
+
 
 class OpkgComponent:
 	EVENT_INSTALL = 0

@@ -15,6 +15,7 @@ import xml.etree.cElementTree
 
 config.unicable = ConfigSubsection()
 
+
 def getConfigSatlist(orbpos, satlist):
 	default_orbpos = None
 	for x in satlist:
@@ -22,6 +23,7 @@ def getConfigSatlist(orbpos, satlist):
 			default_orbpos = orbpos
 			break
 	return ConfigSatlist(satlist, default_orbpos)
+
 
 class SecConfigure:
 	def getConfiguredSats(self):
@@ -496,6 +498,7 @@ class SecConfigure:
 		self.configuredSatellites = set()
 		self.update()
 
+
 class NIM(object):
 	def __init__(self, slot, type, description, has_outputs=True, internally_connectable=None, multi_type={}, frontend_id=None, i2c=None, is_empty=False, supports_blind_scan=False, number_of_slots=0):
 		nim_types = ["DVB-S", "DVB-S2", "DVB-S2X", "DVB-C", "DVB-T", "DVB-T2", "ATSC"]
@@ -693,6 +696,7 @@ class NIM(object):
 	config = property(lambda self: config.Nims[self.slot])
 	empty = property(lambda self: self.getType() is None)
 	enabled = property(isEnabled)
+
 
 class NimManager:
 	def getConfiguredSats(self):
@@ -1154,6 +1158,7 @@ class NimManager:
 								list.append(user_sat)
 		return list
 
+
 def InitSecParams():
 	config.sec = ConfigSubsection()
 	config.sec.delay_after_continuous_tone_disable_before_diseqc = ConfigInteger(default=25, limits=(0, 9999))
@@ -1205,6 +1210,7 @@ def InitSecParams():
 # diseqc 1.0 / diseqc 1.1 / toneburst switch
 # the C(++) part should can handle this
 # the configElement should be only visible when diseqc 1.2 is disabled
+
 
 def InitNimManager(nimmgr, update_slots=[]):
 	hw = HardwareInfo()
@@ -1283,10 +1289,13 @@ def InitNimManager(nimmgr, update_slots=[]):
 			if isinstance(section.unicable, ConfigNothing):
 				def setPowerInserter(configEntry):
 					section.bootuptime.value = 0 if configEntry.value else section.bootuptime.default
+
 				def getformat(value, index):
 					return ("jess" if index >= int(value.split(",")[1] if "," in value else 4) else "unicable") if value.startswith("dSCR") else value
+
 				def positionsChanged(configEntry):
 					section.positionNumber = ConfigSelection(["%d" % (x + 1) for x in range(configEntry.value)], default="%d" % min(lnb, configEntry.value))
+
 				def scrListChanged(productparameters, srcfrequencylist, configEntry):
 					section.format = ConfigSelection(["unicable", "jess"], default=getformat(productparameters.get("format", "unicable"), configEntry.index))
 					section.scrfrequency = ConfigInteger(default=int(srcfrequencylist[configEntry.index]))
@@ -1296,6 +1305,7 @@ def InitNimManager(nimmgr, update_slots=[]):
 					section.lofl = ConfigInteger(default=int(productparameters.get("lofl", 9750)), limits=(0, 99999))
 					section.lofh = ConfigInteger(default=int(productparameters.get("lofh", 10600)), limits=(0, 99999))
 					section.threshold = ConfigInteger(default=int(productparameters.get("threshold", 11700)), limits=(0, 99999))
+
 				def unicableProductChanged(manufacturer, lnb_or_matrix, configEntry):
 					config.unicable.unicableProduct.value = configEntry.value
 					config.unicable.unicableProduct.save()
@@ -1309,6 +1319,7 @@ def InitNimManager(nimmgr, update_slots=[]):
 					section.scrList = ConfigSelection([("%d" % (x + 1), "User Band %d (%s)" % ((x + 1), srcfrequencylist[x])) for x in range(len(srcfrequencylist))])
 					section.scrList.save_forced = True
 					section.scrList.addNotifier(boundFunction(scrListChanged, productparameters, srcfrequencylist))
+
 				def unicableManufacturerChanged(lnb_or_matrix, configEntry):
 					config.unicable.unicableManufacturer.value = configEntry.value
 					config.unicable.unicableManufacturer.save()
@@ -1319,11 +1330,13 @@ def InitNimManager(nimmgr, update_slots=[]):
 					section.unicableProduct = ConfigSelection(productslist, default=config.unicable.unicableProduct.value)
 					section.unicableProduct.save_forced = True
 					section.unicableProduct.addNotifier(boundFunction(unicableProductChanged, configEntry.value, lnb_or_matrix))
+
 				def userScrListChanged(srcfrequencyList, configEntry):
 					section.scrfrequency = ConfigInteger(default=int(srcfrequencyList[configEntry.index]), limits=(0, 99999))
 					section.lofl = ConfigInteger(default=9750, limits=(0, 99999))
 					section.lofh = ConfigInteger(default=10600, limits=(0, 99999))
 					section.threshold = ConfigInteger(default=11700, limits=(0, 99999))
+
 				def formatChanged(configEntry):
 					section.positions = ConfigInteger(default=configEntry.value == "jess" and 64 or 2)
 					section.positions.addNotifier(positionsChanged)
@@ -1338,6 +1351,7 @@ def InitNimManager(nimmgr, update_slots=[]):
 					section.powerinserter = ConfigYesNo(default=SystemInfo["FbcTunerPowerAlwaysOn"])
 					section.powerinserter.save_forced = True
 					section.powerinserter.addNotifier(setPowerInserter)
+
 				def unicableChanged(configEntry):
 					config.unicable.unicable.value = configEntry.value
 					config.unicable.unicable.save()
@@ -1701,5 +1715,6 @@ def InitNimManager(nimmgr, update_slots=[]):
 			nim.configModeATSC.addNotifier(boundFunction(combinedConfigChanged, nim, slot, slot_id))
 
 	nimmgr.sec = SecConfigure(nimmgr)
+
 
 nimmanager = NimManager()

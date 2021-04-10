@@ -5,6 +5,7 @@ from Components.config import config
 from enigma import eTimer
 from Components.SystemInfo import SystemInfo
 
+
 class HddState(Source):
 	ALL = 0
 	INTERNAL = 1

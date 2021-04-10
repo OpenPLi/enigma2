@@ -3,9 +3,11 @@ from Components.config import config
 from ServiceReference import isPlayableForCur
 from Tools.CIHelper import cihelper
 
+
 def getAlternativeChannels(service):
 	alternativeServices = eServiceCenter.getInstance().list(eServiceReference(service))
 	return alternativeServices and alternativeServices.getContent("S", True)
+
 
 def CompareWithAlternatives(serviceA, serviceB):
 	return serviceA and serviceB and (
@@ -13,12 +15,14 @@ def CompareWithAlternatives(serviceA, serviceB):
 		serviceA.startswith('1:134:') and serviceB in getAlternativeChannels(serviceA) or
 		serviceB.startswith('1:134:') and serviceA in getAlternativeChannels(serviceB))
 
+
 def GetWithAlternative(service):
 	if service.startswith('1:134:'):
 		channels = getAlternativeChannels(service)
 		if channels:
 			return channels[0]
 	return service
+
 
 def ResolveCiAlternative(ref, ignore_ref=None, record_mode=False):
 	if ref and isinstance(ref, eServiceReference):
@@ -30,6 +34,7 @@ def ResolveCiAlternative(ref, ignore_ref=None, record_mode=False):
 				for service in serviceList.getContent("R"):
 					if not ignore_ref or service != ignore_ref:
 						refstr = service.toString()
+
 						def resolveRecordLiveMode():
 							if record_mode:
 								is_assignment = cihelper.ServiceIsAssigned(refstr)
