@@ -895,12 +895,7 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 							{
 								std::string piconFilename = PyString_AS_STRING(pRet);
 								if (!piconFilename.empty())
-								{
-									if (endsWith(piconFilename, ".svg"))
-										loadSVG(piconPixmap, piconFilename.c_str());
-									else
-										loadPNG(piconPixmap, piconFilename.c_str());
-								}
+									loadImage(piconPixmap, piconFilename.c_str());
 							}
 							Py_DECREF(pRet);
 						}

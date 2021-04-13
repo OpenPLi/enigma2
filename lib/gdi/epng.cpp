@@ -3,6 +3,7 @@
 #include <png.h>
 #include <stdio.h>
 #include <lib/base/cfile.h>
+#include <lib/base/wrappers.h>
 #include <lib/gdi/epng.h>
 #include <lib/gdi/pixmapcache.h>
 #include <unistd.h>
@@ -432,6 +433,18 @@ int loadSVG(ePtr<gPixmap> &result, const char *filename, int cached, int width, 
 
 	nsvgDeleteRasterizer(rast);
 	nsvgDelete(image);
+
+	return 0;
+}
+
+int loadImage(ePtr<gPixmap> &result, const char *filename, int accel, int width, int height)
+{
+	if (endsWith(filename, ".png"))
+		return loadPNG(result, filename, accel, 1);
+	else if (endsWith(filename, ".svg"))
+		return loadSVG(result, filename, 1, width, height, 0);
+	else if (endsWith(filename, ".jpg"))
+		return loadJPG(result, filename, 0);
 
 	return 0;
 }

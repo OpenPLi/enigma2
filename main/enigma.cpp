@@ -272,7 +272,7 @@ int main(int argc, char **argv)
 			if (::access(rfilename.c_str(), R_OK) < 0)
 				break;
 
-			loadPNG(wait[i], rfilename.c_str());
+			loadImage(wait[i], rfilename.c_str());
 			if (!wait[i])
 			{
 				eDebug("[MAIN] failed to load %s: %m", rfilename.c_str());
