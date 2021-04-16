@@ -501,7 +501,7 @@ class HdmiCec:
 		if out:
 			send = ">"
 		opCode = ''
-		if cmdList.has_key(cmd):
+		if cmd in cmdList:
 			opCode += "%s" % cmdList[cmd]
 		opCode += 30 * " "
 		return opCode[:28] + send + " "
