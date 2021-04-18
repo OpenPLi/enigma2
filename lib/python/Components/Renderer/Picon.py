@@ -1,4 +1,6 @@
-import os, re, unicodedata
+import os
+import re
+import unicodedata
 from Renderer import Renderer
 from enigma import ePixmap, eServiceCenter, eServiceReference, iServiceInformation
 from Tools.Alternatives import GetWithAlternative
@@ -10,6 +12,7 @@ from Components.config import config
 searchPaths = []
 lastPiconPath = None
 
+
 def initPiconPaths():
 	global searchPaths
 	searchPaths = []
@@ -18,18 +21,20 @@ def initPiconPaths():
 	for part in harddiskmanager.getMountedPartitions():
 		onMountpointAdded(part.mountpoint)
 
+
 def onMountpointAdded(mountpoint):
 	global searchPaths
 	try:
 		path = os.path.join(mountpoint, 'picon') + '/'
 		if os.path.isdir(path) and path not in searchPaths:
 			for fn in os.listdir(path):
-				if fn.endswith('.png'):
+				if fn.endswith('.png') or fn.endswith('.svg'):
 					print "[Picon] adding path:", path
 					searchPaths.append(path)
 					break
 	except Exception, ex:
 		print "[Picon] Failed to investigate %s:" % mountpoint, ex
+
 
 def onMountpointRemoved(mountpoint):
 	global searchPaths
@@ -40,26 +45,31 @@ def onMountpointRemoved(mountpoint):
 	except:
 		pass
 
+
 def onPartitionChange(why, part):
 	if why == 'add':
 		onMountpointAdded(part.mountpoint)
 	elif why == 'remove':
 		onMountpointRemoved(part.mountpoint)
 
+
 def findPicon(serviceName):
 	global lastPiconPath
 	if lastPiconPath is not None:
-		pngname = lastPiconPath + serviceName + ".png"
-		if pathExists(pngname):
-			return pngname
+		for ext in ('.png', '.svg'):
+			pngname = lastPiconPath + serviceName + ext
+			if pathExists(pngname):
+				return pngname
 	global searchPaths
 	for path in searchPaths:
 		if pathExists(path):
-			pngname = path + serviceName + ".png"
-			if pathExists(pngname):
-				lastPiconPath = path
-				return pngname
+			for ext in ('.png', '.svg'):
+				pngname = path + serviceName + ext
+				if pathExists(pngname):
+					lastPiconPath = path
+					return pngname
 	return ""
+
 
 def getPiconName(serviceRef):
 	service = eServiceReference(serviceRef)
@@ -97,6 +107,7 @@ def getPiconName(serviceRef):
 				pngname = findPicon(series)
 	return pngname
 
+
 class Picon(Renderer):
 	def __init__(self):
 		Renderer.__init__(self)
@@ -127,10 +138,10 @@ class Picon(Renderer):
 		for (attrib, value) in self.skinAttributes:
 			if attrib == "path":
 				self.addPath(value)
-				attribs.remove((attrib,value))
+				attribs.remove((attrib, value))
 			elif attrib == "isFrontDisplayPicon":
 				self.showPicon = value == "0"
-				attribs.remove((attrib,value))
+				attribs.remove((attrib, value))
 		self.skinAttributes = attribs
 		self.changed((self.CHANGED_ALL,))
 		return Renderer.applySkin(self, desktop, parent)
@@ -155,6 +166,7 @@ class Picon(Renderer):
 					self.pngname = pngname
 			elif self.visible:
 				self.instance.hide()
+
 
 harddiskmanager.on_partition_list_change.append(onPartitionChange)
 initPiconPaths()

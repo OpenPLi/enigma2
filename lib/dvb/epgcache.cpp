@@ -17,6 +17,7 @@
 #include <lib/dvb/epgtransponderdatareader.h>
 #include <lib/dvb/lowlevel/eit.h>
 #include <lib/base/nconfig.h>
+#include <dvbsi++/content_identifier_descriptor.h>
 #include <dvbsi++/descriptor_tag.h>
 
 /* Interval between "garbage collect" cycles */
@@ -37,7 +38,7 @@ struct eventData
 {
 	uint8_t rawEITdata[10];
 	uint8_t n_crc;
-	uint8_t type;
+	uint16_t type;
 	uint32_t *crc_list;
 	static DescriptorMap descriptors;
 	static uint8_t data[];
@@ -101,7 +102,7 @@ static uint32_t calculate_crc_hash(const uint8_t *data, int size)
 }
 
 eventData::eventData(const eit_event_struct* e, int size, int _type, int tsidonid)
-	:n_crc(0), type(_type & 0xFF), crc_list(NULL)
+	:n_crc(0), type(_type & 0xFFFF), crc_list(NULL)
 {
 	if (!e)
 		return; /* Used when loading from file */
@@ -126,6 +127,7 @@ eventData::eventData(const eit_event_struct* e, int size, int _type, int tsidoni
 				case LINKAGE_DESCRIPTOR:
 				case COMPONENT_DESCRIPTOR:
 				case CONTENT_DESCRIPTOR:
+				case CONTENT_IDENTIFIER_DESCRIPTOR:
 				case PARENTAL_RATING_DESCRIPTOR:
 				case PDC_DESCRIPTOR:
 				{
@@ -959,7 +961,7 @@ void eEPGCache::load()
 		}
 		char text1[13];
 		ret = fread( text1, 13, 1, f);
-		if ( !memcmp( text1, "ENIGMA_EPG_V7", 13) )
+		if ( !memcmp( text1, "ENIGMA_EPG_V8", 13) )
 		{
 			singleLock s(cache_lock);
 			if (eventDB.size() > 0)
@@ -978,9 +980,9 @@ void eEPGCache::load()
 				while(size--)
 				{
 					uint8_t len=0;
-					uint8_t type=0;
+					uint16_t type=0;
 					eventData *event=0;
-					ret = fread( &type, sizeof(uint8_t), 1, f);
+					ret = fread( &type, sizeof(uint16_t), 1, f);
 					ret = fread( &len, sizeof(uint8_t), 1, f);
 					event = new eventData(0, len, type);
 					event->n_crc = (len-10) / sizeof(uint32_t);
@@ -1109,7 +1111,7 @@ void eEPGCache::save()
 	int cnt=0;
 	unsigned int magic = 0x98765432;
 	fwrite( &magic, sizeof(int), 1, f);
-	const char *text = "UNFINISHED_V7";
+	const char *text = "UNFINISHED_V8";
 	fwrite( text, 13, 1, f );
 	int size = eventDB.size();
 	fwrite( &size, sizeof(int), 1, f );
@@ -1122,7 +1124,7 @@ void eEPGCache::save()
 		for (timeMap::iterator time_it(timemap.begin()); time_it != timemap.end(); ++time_it)
 		{
 			uint8_t len = time_it->second->n_crc * sizeof(uint32_t) + 10;
-			fwrite( &time_it->second->type, sizeof(uint8_t), 1, f );
+			fwrite( &time_it->second->type, sizeof(uint16_t), 1, f );
 			fwrite( &len, sizeof(uint8_t), 1, f);
 			fwrite( time_it->second->rawEITdata, 10, 1, f);
 			fwrite( time_it->second->crc_list, sizeof(uint32_t), time_it->second->n_crc, f);
@@ -1161,7 +1163,7 @@ void eEPGCache::save()
 	// has been written to disk.
 	fsync(fileno(f));
 	fseek(f, sizeof(int), SEEK_SET);
-	fwrite("ENIGMA_EPG_V7", 13, 1, f);
+	fwrite("ENIGMA_EPG_V8", 13, 1, f);
 	fclose(f);
 }
 
@@ -2135,6 +2137,7 @@ void eEPGCache::importEvents(ePyObject serviceReferences, ePyObject list)
 //     3 = search events starting with title name (START_TITLE_SEARCH)
 //     4 = search events ending with title name (END_TITLE_SEARCH)
 //     5 = search events with text in description (PARTIAL_DESCRIPTION_SEARCH)
+//     6 = search events with matching CRID
 //  when type is 0 (SIMILAR_BROADCASTINGS_SEARCH)
 //   the fourth is the servicereference string
 //   the fifth is the eventid
@@ -2143,6 +2146,11 @@ void eEPGCache::importEvents(ePyObject serviceReferences, ePyObject list)
 //   the fifth is
 //     0 = case sensitive (CASE_CHECK)
 //     1 = case insensitive (NO_CASECHECK)
+//  when type is 6 (CRID_SEARCH)
+//   the fourth is the CRID to search for
+//   the fifth is
+//     1 = search episode CRIDs
+//     2 = search series CRIDs
 
 PyObject *eEPGCache::search(ePyObject arg)
 {
@@ -2289,6 +2297,9 @@ PyObject *eEPGCache::search(ePyObject arg)
 						case 5:
 							eDebug("[eEPGCache] lookup events with '%s' in the description (%s)", str, casetype?"ignore case":"case sensitive");
 							break;
+						case 6:
+							eDebug("[eEPGCache] lookup events with '%s' in CRID %02x", str, casetype);
+							break;
 					}
 					Py_BEGIN_ALLOW_THREADS; /* No Python code in this section, so other threads can run */
 					{
@@ -2302,7 +2313,7 @@ PyObject *eEPGCache::search(ePyObject arg)
 							uint8_t *data = it->second.data;
 							int textlen = 0;
 							const char *textptr = NULL;
-							if ( data[0] == 0x4D && querytype > 0 && querytype < 5 ) // short event descriptor
+							if ( data[0] == SHORT_EVENT_DESCRIPTOR && querytype > 0 && querytype < 5 )
 							{
 								textptr = (const char*)&data[6];
 								textlen = data[5];
@@ -2314,7 +2325,7 @@ PyObject *eEPGCache::search(ePyObject arg)
 									textlen = text.length();
 								}
 							}
-							else if ( data[0] == 0x4E && querytype == 5 ) // extended event descriptor
+							else if ( data[0] == EXTENDED_EVENT_DESCRIPTOR && querytype == 5 )
 							{
 								textptr = (const char*)&data[8];
 								textlen = data[7];
@@ -2324,6 +2335,24 @@ PyObject *eEPGCache::search(ePyObject arg)
 									text = convertDVBUTF8((unsigned char*)textptr, textlen, 0x40, 0);
 									textptr = text.data();
 									textlen = text.length();
+								}
+							}
+							else if ( data[0] == CONTENT_IDENTIFIER_DESCRIPTOR && querytype == 6 )
+							{
+								auto cid = ContentIdentifierDescriptor(data);
+								auto cril = cid.getIdentifier();
+								for (auto crit = cril->begin(); crit != cril->end(); ++crit)
+								{
+									// UK broadcasters set the two top bits of crid_type, i.e. 0x31 and 0x32 rather than 
+									// the specification's 1 and 2 for episode and series respectively
+									if (((*crit)->getType() & 0xf) == casetype)
+									{
+										// Exact match required for CRID data
+										if ((*crit)->getLength() == strlen && memcmp((*crit)->getBytes()->data(), str, strlen) == 0)
+										{
+											descr.push_back(it->first);
+										}
+									}
 								}
 							}
 							/* if we have a descriptor, the argument may not be bigger */

@@ -14,7 +14,8 @@ epg_bouquet = None
 epg = None
 ref = None
 
-def zapToService(service, preview = False, zapback = False):
+
+def zapToService(service, preview=False, zapback=False):
 	if Servicelist.startServiceRef is None:
 		Servicelist.startServiceRef = Session.nav.getCurrentlyPlayingServiceOrGroup()
 	if not service is None:
@@ -36,8 +37,9 @@ def zapToService(service, preview = False, zapback = False):
 		Servicelist.startServiceRef = None
 		Servicelist.startRoot = None
 
+
 def getBouquetServices(bouquet):
-	services = [ ]
+	services = []
 	Servicelist = eServiceCenter.getInstance().list(bouquet)
 	if not Servicelist is None:
 		while True:
@@ -49,6 +51,7 @@ def getBouquetServices(bouquet):
 			services.append(ServiceReference(service))
 	return services
 
+
 def selectBouquet(bouquet, epg):
 	services = getBouquetServices(bouquet)
 	if services:
@@ -56,6 +59,7 @@ def selectBouquet(bouquet, epg):
 		epg_bouquet = bouquet
 		epg.setServices(services)
 		epg.parent.setServices(services)
+
 
 def cleanup():
 	global Session
@@ -69,8 +73,10 @@ def cleanup():
 	global epg
 	epg = None
 
+
 def closed(ret=False):
 	cleanup()
+
 
 def onSelectBouquetClose(*args):
 	if args and len(args) == 2:
@@ -83,6 +89,7 @@ def onSelectBouquetClose(*args):
 		if serviceref:
 			epg["list"].moveToService(serviceref)
 
+
 def changeBouquetCB(direction, epgcall):
 	global epg
 	epg = epgcall
@@ -90,14 +97,15 @@ def changeBouquetCB(direction, epgcall):
 		global bouquets
 		global epg_bouquet
 		try:
-			onSelectBouquetClose(None, bouquets[ ([x[1] for x in bouquets].index(epg_bouquet) + (direction > 0 and 1 or -1)) ][1])
+			onSelectBouquetClose(None, bouquets[([x[1] for x in bouquets].index(epg_bouquet) + (direction > 0 and 1 or -1))][1])
 		except:
 			pass
 	else:
 		if epg["list"].getCurrent() and epg["list"].getCurrent()[1]:
-			Session.openWithCallback(onSelectBouquetClose, SimpleChannelSelection, _("Select channel"), True, True, epg["list"].getCurrent()[1].ref )
+			Session.openWithCallback(onSelectBouquetClose, SimpleChannelSelection, _("Select channel"), True, True, epg["list"].getCurrent()[1].ref)
 
-def main(session, servicelist = None, **kwargs):
+
+def main(session, servicelist=None, **kwargs):
 	global ref
 	global Session
 	Session = session
@@ -110,16 +118,18 @@ def main(session, servicelist = None, **kwargs):
 	ref = Servicelist.getCurrentSelection()
 	runGraphMultiEpg()
 
+
 def runGraphMultiEpg():
 	global bouquets
 	global epg_bouquet
 	if epg_bouquet is not None:
-		if len(bouquets) > 1 :
+		if len(bouquets) > 1:
 			cb = changeBouquetCB
 		else:
 			cb = None
 		services = getBouquetServices(epg_bouquet)
 		Session.openWithCallback(reopen, GraphMultiEPG, services, zapToService, cb, ServiceReference(epg_bouquet).getServiceName(), selectBouquet, epg_bouquet)
+
 
 def reopen(answer):
 	if answer is None:
@@ -131,10 +141,11 @@ def reopen(answer):
 			Servicelist.setCurrentSelection(ref)
 		closed(answer)
 
+
 def Plugins(**kwargs):
 	name = _("Graphical Multi EPG")
 	descr = _("A graphical EPG for all services of a specific bouquet")
-	list = [(PluginDescriptor(name=name, description=descr, where = PluginDescriptor.WHERE_EVENTINFO, needsRestart = False, fnc=main))]
+	list = [(PluginDescriptor(name=name, description=descr, where=PluginDescriptor.WHERE_EVENTINFO, needsRestart=False, fnc=main))]
 	if config.misc.graph_mepg.extension_menu.value:
-		list.append(PluginDescriptor(name=name, description=descr, where = PluginDescriptor.WHERE_EXTENSIONSMENU, needsRestart = False, fnc=main))
+		list.append(PluginDescriptor(name=name, description=descr, where=PluginDescriptor.WHERE_EXTENSIONSMENU, needsRestart=False, fnc=main))
 	return list

@@ -3,6 +3,7 @@ import os
 
 config.plugins = ConfigSubsection()
 
+
 class PluginDescriptor:
 	"""An object to describe a plugin."""
 
@@ -19,7 +20,7 @@ class PluginDescriptor:
 	# argument: session
 	WHERE_EXTENSIONSMENU = 0
 	WHERE_MAINMENU = 1
-	WHERE_PLUGINMENU  = 2
+	WHERE_PLUGINMENU = 2
 	# argument: session, serviceref (currently selected)
 	WHERE_MOVIELIST = 3
 	# argument: menuid. Fnc must return list with menuitems (4-tuple of name, fnc to call, entryid or None, weight or None)
@@ -63,8 +64,7 @@ class PluginDescriptor:
 	# start as channellist context menu plugin. session, serviceref (currently selected)
 	WHERE_CHANNEL_CONTEXT_MENU = 15
 
-
-	def __init__(self, name = "Plugin", where = [ ], description = "", icon = None, fnc = None, wakeupfnc = None, needsRestart = None, internal = False, weight = 0):
+	def __init__(self, name="Plugin", where=[], description="", icon=None, fnc=None, wakeupfnc=None, needsRestart=None, internal=False, weight=0):
 		self.name = name
 		self.internal = internal
 		self.needsRestart = needsRestart
@@ -72,7 +72,7 @@ class PluginDescriptor:
 		if isinstance(where, list):
 			self.where = where
 		else:
-			self.where = [ where ]
+			self.where = [where]
 		self.description = description
 
 		if icon is None or isinstance(icon, str):
@@ -117,10 +117,10 @@ class PluginDescriptor:
 			return False
 
 	def __gt__(self, other):
-		return other<self
+		return other < self
 
 	def __ge__(self, other):
-		return not self<other
+		return not self < other
 
 	def __le__(self, other):
-		return not other<self
+		return not other < self

@@ -9,6 +9,7 @@ from Components.Sources.FrontendInfo import FrontendInfo
 from Components.config import config
 from enigma import eServiceReference
 
+
 class ServiceScanSummary(Screen):
 	skin = """
 	<screen position="0,0" size="132,64">
@@ -17,7 +18,7 @@ class ServiceScanSummary(Screen):
 		<widget name="Service" position="6,22" size="120,26" font="Regular;12" transparent="1" />
 	</screen>"""
 
-	def __init__(self, session, parent, showStepSlider = True):
+	def __init__(self, session, parent, showStepSlider=True):
 		Screen.__init__(self, session, parent)
 
 		self["Title"] = Label(parent.title or _("Service scan"))
@@ -29,6 +30,7 @@ class ServiceScanSummary(Screen):
 
 	def updateService(self, name):
 		self["Service"].setText(name)
+
 
 class ServiceScan(Screen):
 

@@ -6,8 +6,9 @@ from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from enigma import eTimer
 
+
 class Opkg(Screen):
-	def __init__(self, session, cmdList = []):
+	def __init__(self, session, cmdList=[]):
 		Screen.__init__(self, session)
 
 		self.cmdList = cmdList
@@ -60,7 +61,7 @@ class Opkg(Screen):
 		else:
 			cmd = self.cmdList[self.runningCmd]
 			self.slider.setValue(self.runningCmd)
-			self.opkg.startCmd(cmd[0], args = cmd[1])
+			self.opkg.startCmd(cmd[0], args=cmd[1])
 			self.startActivityTimer()
 
 	def doActivityTimer(self):

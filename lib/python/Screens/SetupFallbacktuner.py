@@ -10,6 +10,7 @@ from Components.ImportChannels import ImportChannels
 
 from enigma import getPeerStreamingBoxes
 
+
 class SetupFallbacktuner(ConfigListScreen, Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -17,7 +18,7 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 		self.skinName = ["FallbackTunerSetup", "Setup"]
 		self.onChangedEntry = []
 		self.session = session
-		ConfigListScreen.__init__(self, [], session = session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, [], session=session, on_change=self.changedEntry)
 
 		self["actions2"] = ActionMap(["SetupActions"],
 		{
@@ -75,20 +76,20 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 		self.avahiselect.addNotifier(set_avahiselect_seperate)
 		try:
 			ipDefault = [int(x) for x in config.usage.remote_fallback.value.split(":")[1][2:].split(".")]
-			portDefault = int( config.usage.remote_fallback.value.split(":")[2])
+			portDefault = int(config.usage.remote_fallback.value.split(":")[2])
 		except:
 			ipDefault = [0, 0, 0, 0]
 			portDefault = 8001
 		self.ip = ConfigIP(default=ipDefault, auto_jump=True)
-		self.port = ConfigInteger(default=portDefault, limits=(1,65535))
-		self.ip_seperate = ConfigIP( default=ipDefault, auto_jump=True)
-		self.port_seperate = ConfigInteger(default=portDefault, limits=(1,65535))
-		self.ip_dvb_t = ConfigIP( default=ipDefault, auto_jump=True)
-		self.port_dvb_t = ConfigInteger(default=portDefault, limits=(1,65535))
-		self.ip_dvb_c = ConfigIP( default=ipDefault, auto_jump=True)
-		self.port_dvb_c = ConfigInteger(default=portDefault, limits=(1,65535))
-		self.ip_atsc = ConfigIP( default=ipDefault, auto_jump=True)
-		self.port_atsc = ConfigInteger(default=portDefault, limits=(1,65535))
+		self.port = ConfigInteger(default=portDefault, limits=(1, 65535))
+		self.ip_seperate = ConfigIP(default=ipDefault, auto_jump=True)
+		self.port_seperate = ConfigInteger(default=portDefault, limits=(1, 65535))
+		self.ip_dvb_t = ConfigIP(default=ipDefault, auto_jump=True)
+		self.port_dvb_t = ConfigInteger(default=portDefault, limits=(1, 65535))
+		self.ip_dvb_c = ConfigIP(default=ipDefault, auto_jump=True)
+		self.port_dvb_c = ConfigInteger(default=portDefault, limits=(1, 65535))
+		self.ip_atsc = ConfigIP(default=ipDefault, auto_jump=True)
+		self.port_atsc = ConfigInteger(default=portDefault, limits=(1, 65535))
 
 	def createSetup(self):
 		self.list = []
@@ -108,10 +109,10 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 			if self.avahiselect.value == "ip":
 				self.list.append(getConfigListEntry("  %s" % _("Fallback remote receiver IP"),
 					self.ip,
-					_("IP of fallback remote receiver")))			
+					_("IP of fallback remote receiver")))
 				self.list.append(getConfigListEntry("  %s" % _("Fallback remote receiver Port"),
 					self.port,
-					_("Port of fallback remote receiver")))			
+					_("Port of fallback remote receiver")))
 			if self.avahiselect.value == "url":
 				self.list.append(getConfigListEntry("  %s" % _("Fallback remote receiver URL"),
 					config.usage.remote_fallback,
@@ -123,10 +124,10 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 			if self.avahiselect_seperate.value == "ip":
 				self.list.append(getConfigListEntry("  %s" % _("Fallback remote receiver IP"),
 					self.ip_seperate,
-					_("IP of fallback remote receiver")))			
+					_("IP of fallback remote receiver")))
 				self.list.append(getConfigListEntry("  %s" % _("Fallback remote receiver Port"),
 					self.port_seperate,
-					_("Port of fallback remote receiver")))			
+					_("Port of fallback remote receiver")))
 			if self.avahiselect_seperate.value == "url":
 				self.list.append(getConfigListEntry("  %s" % _("Fallback remote receiver URL"),
 					config.usage.remote_fallback_import_url,

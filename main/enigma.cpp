@@ -272,7 +272,7 @@ int main(int argc, char **argv)
 			if (::access(rfilename.c_str(), R_OK) < 0)
 				break;
 
-			loadPNG(wait[i], rfilename.c_str());
+			loadImage(wait[i], rfilename.c_str());
 			if (!wait[i])
 			{
 				eDebug("[MAIN] failed to load %s: %m", rfilename.c_str());
@@ -300,8 +300,7 @@ int main(int argc, char **argv)
 	/* start at full size */
 	eVideoWidget::setFullsize(true);
 
-//	python.execute("mytest", "__main__");
-	python.execFile(eEnv::resolve("${libdir}/enigma2/python/mytest.py").c_str());
+	python.execFile(eEnv::resolve("${libdir}/enigma2/python/StartEnigma.py").c_str());
 
 	/* restore both decoders to full size */
 	eVideoWidget::setFullsize(true);

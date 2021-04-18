@@ -28,7 +28,7 @@ from Components.config import ConfigYesNo, config
 # 	isp		ISP name				Google			string	No
 # 	org		Organization name			Google			string	No
 # 	as		AS number and organization, separated
-# 			by space (RIR). Empty for IP blocks 
+# 			by space (RIR). Empty for IP blocks
 # 			not being announced in BGP tables.	AS15169 Google Inc.	string	No
 # 	asname		AS name (RIR). Empty for IP blocks not
 # 			being announced in BGP tables.		GOOGLE			string	No
@@ -41,6 +41,7 @@ from Components.config import ConfigYesNo, config
 
 config.misc.enableGeolocation = ConfigYesNo(default=True)
 geolocation = {}
+
 
 def InitGeolocation():
 	global geolocation
@@ -72,6 +73,7 @@ def InitGeolocation():
 	else:
 		geolocation = {}
 		print "[Geolocation] Warning: Geolocation has been disabled by user configuration!"
+
 
 def RefreshGeolocation():
 	global geolocation

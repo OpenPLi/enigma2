@@ -5,6 +5,7 @@ from enigma import eServiceReference
 
 StreamServiceList = []
 
+
 class StreamService(Source):
 	def __init__(self, navcore):
 		Source.__init__(self)

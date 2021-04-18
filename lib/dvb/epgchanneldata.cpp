@@ -48,14 +48,14 @@ void eEPGChannelData::startChannel()
 
 	zapTimer->start(update, 1);
 	if (update >= 60000)
-		eDebug("[eEPGTransponderDataReader] next update in %i min", update/60000);
+		eDebug("[eEPGChannelData] next update in %i min", update/60000);
 	else if (update >= 1000)
-		eDebug("[eEPGTransponderDataReader] next update in %i sec", update/1000);
+		eDebug("[eEPGChannelData] next update in %i sec", update/1000);
 }
 
 void eEPGChannelData::startEPG()
 {
-	eDebug("[eEPGTransponderDataReader] start reading events(%ld)", ::time(0));
+	eDebug("[eEPGChannelData] start reading events(%ld)", ::time(0));
 	state=0;
 	haveData=0;
 	for (unsigned int i=0; i < sizeof(seenSections)/sizeof(tidMap); ++i)
@@ -137,7 +137,7 @@ void eEPGChannelData::startEPG()
 	if (it != epgReader->customeitpids.end())
 	{
 		mask.pid = it->second;
-		eDebug("[eEPGTransponderDataReader] Using non-standard pid %#x", mask.pid);
+		eDebug("[eEPGChannelData] Using non-standard pid %#x", mask.pid);
 	}
 
 	if (eEPGCache::getInstance()->getEpgSources() & eEPGCache::NOWNEXT && m_NowNextReader)
@@ -253,7 +253,7 @@ void eEPGChannelData::startEPG()
 			isRunning |= eEPGCache::OPENTV;
 		}
 		else
-			eDebug("[eEPGTransponderDataReader] abort non avail OpenTV EIT reading");
+			eDebug("[eEPGChannelData] abort non avail OpenTV EIT reading");
 	}
 #endif
 	if (eEPGCache::getInstance()->getEpgSources() & eEPGCache::VIASAT && m_ViasatReader)
@@ -278,9 +278,9 @@ void eEPGChannelData::finishEPG()
 {
 	if (!isRunning)  // epg ready
 	{
-		eDebug("[eEPGTransponderDataReader] stop caching events(%ld)", ::time(0));
+		eDebug("[eEPGChannelData] stop caching events(%ld)", ::time(0));
 		zapTimer->start(UPDATE_INTERVAL, 1);
-		eDebug("[eEPGTransponderDataReader] next update in %i min", UPDATE_INTERVAL / 60000);
+		eDebug("[eEPGChannelData] next update in %i min", UPDATE_INTERVAL / 60000);
 		for (unsigned int i=0; i < sizeof(seenSections)/sizeof(tidMap); ++i)
 		{
 			seenSections[i].clear();
@@ -317,7 +317,7 @@ void eEPGChannelData::abortEPG()
 	zapTimer->stop();
 	if (isRunning)
 	{
-		eDebug("[eEPGTransponderDataReader] abort caching events !!");
+		eDebug("[eEPGChannelData] abort caching events !!");
 		if (isRunning & eEPGCache::SCHEDULE)
 		{
 			isRunning &= ~eEPGCache::SCHEDULE;
@@ -457,14 +457,14 @@ void eEPGChannelData::readData( const uint8_t *data, int source)
 			break;
 #endif
 		default:
-			eDebug("[eEPGTransponderDataReader] unknown source");
+			eDebug("[eEPGChannelData] unknown source");
 			return;
 	}
 	tidMap &seenSections = this->seenSections[map];
 	tidMap &calcedSections = this->calcedSections[map];
 	if ( (state == 1 && calcedSections == seenSections) || state > 1 )
 	{
-		eDebugNoNewLineStart("[eEPGTransponderDataReader] ");
+		eDebugNoNewLineStart("[eEPGChannelData] ");
 		switch (source)
 		{
 			case eEPGCache::NOWNEXT:
@@ -551,21 +551,21 @@ void eEPGChannelData::abortNonAvail()
 	{
 		if ( !(haveData & eEPGCache::NOWNEXT) && (isRunning & eEPGCache::NOWNEXT) )
 		{
-			eDebug("[eEPGTransponderDataReader] abort non avail nownext reading");
+			eDebug("[eEPGChannelData] abort non avail nownext reading");
 			isRunning &= ~eEPGCache::NOWNEXT;
 			m_NowNextReader->stop();
 			m_NowNextConn=0;
 		}
 		if ( !(haveData & eEPGCache::SCHEDULE) && (isRunning & eEPGCache::SCHEDULE) )
 		{
-			eDebug("[eEPGTransponderDataReader] abort non avail schedule reading");
+			eDebug("[eEPGChannelData] abort non avail schedule reading");
 			isRunning &= ~eEPGCache::SCHEDULE;
 			m_ScheduleReader->stop();
 			m_ScheduleConn=0;
 		}
 		if ( !(haveData & eEPGCache::SCHEDULE_OTHER) && (isRunning & eEPGCache::SCHEDULE_OTHER) )
 		{
-			eDebug("[eEPGTransponderDataReader] abort non avail schedule other reading");
+			eDebug("[eEPGChannelData] abort non avail schedule other reading");
 			isRunning &= ~eEPGCache::SCHEDULE_OTHER;
 			m_ScheduleOtherReader->stop();
 			m_ScheduleOtherConn=0;
@@ -573,14 +573,14 @@ void eEPGChannelData::abortNonAvail()
 #ifdef ENABLE_VIRGIN
 		if ( !(haveData & eEPGCache::VIRGIN_NOWNEXT) && (isRunning & eEPGCache::VIRGIN_NOWNEXT) )
 		{
-			eDebug("[eEPGTransponderDataReader] abort non avail virgin nownext reading");
+			eDebug("[eEPGChannelData] abort non avail virgin nownext reading");
 			isRunning &= ~eEPGCache::VIRGIN_NOWNEXT;
 			m_VirginNowNextReader->stop();
 			m_VirginNowNextConn=0;
 		}
 		if ( !(haveData & eEPGCache::VIRGIN_SCHEDULE) && (isRunning & eEPGCache::VIRGIN_SCHEDULE) )
 		{
-			eDebug("[eEPGTransponderDataReader] abort non avail virgin schedule reading");
+			eDebug("[eEPGChannelData] abort non avail virgin schedule reading");
 			isRunning &= ~eEPGCache::VIRGIN_SCHEDULE;
 			m_VirginScheduleReader->stop();
 			m_VirginScheduleConn=0;
@@ -589,14 +589,14 @@ void eEPGChannelData::abortNonAvail()
 #ifdef ENABLE_NETMED
 		if ( !(haveData & eEPGCache::NETMED_SCHEDULE) && (isRunning & eEPGCache::NETMED_SCHEDULE) )
 		{
-			eDebug("[eEPGTransponderDataReader] abort non avail netmed schedule reading");
+			eDebug("[eEPGChannelData] abort non avail netmed schedule reading");
 			isRunning &= ~eEPGCache::NETMED_SCHEDULE;
 			m_NetmedScheduleReader->stop();
 			m_NetmedScheduleConn=0;
 		}
 		if ( !(haveData & eEPGCache::NETMED_SCHEDULE_OTHER) && (isRunning & eEPGCache::NETMED_SCHEDULE_OTHER) )
 		{
-			eDebug("[eEPGTransponderDataReader] abort non avail netmed schedule other reading");
+			eDebug("[eEPGChannelData] abort non avail netmed schedule other reading");
 			isRunning &= ~eEPGCache::NETMED_SCHEDULE_OTHER;
 			m_NetmedScheduleOtherReader->stop();
 			m_NetmedScheduleOtherConn=0;
@@ -605,7 +605,7 @@ void eEPGChannelData::abortNonAvail()
 #ifdef ENABLE_FREESAT
 		if ( !(haveData & eEPGCache::FREESAT_SCHEDULE_OTHER) && (isRunning & eEPGCache::FREESAT_SCHEDULE_OTHER) )
 		{
-			eDebug("[eEPGTransponderDataReader] abort non avail FreeSat schedule_other reading");
+			eDebug("[eEPGChannelData] abort non avail FreeSat schedule_other reading");
 			isRunning &= ~eEPGCache::FREESAT_SCHEDULE_OTHER;
 			m_FreeSatScheduleOtherReader->stop();
 			m_FreeSatScheduleOtherReader2->stop();
@@ -616,7 +616,7 @@ void eEPGChannelData::abortNonAvail()
 #endif
 		if ( !(haveData & eEPGCache::VIASAT) && (isRunning & eEPGCache::VIASAT) )
 		{
-			eDebug("[eEPGTransponderDataReader] abort non avail viasat reading");
+			eDebug("[eEPGChannelData] abort non avail viasat reading");
 			isRunning &= ~eEPGCache::VIASAT;
 			m_ViasatReader->stop();
 			m_ViasatConn=0;
@@ -624,7 +624,7 @@ void eEPGChannelData::abortNonAvail()
 #ifdef ENABLE_MHW_EPG
 		if ( !(haveData & eEPGCache::MHW) && (isRunning & eEPGCache::MHW) )
 		{
-			eDebug("[eEPGTransponderDataReader] abort non avail mhw reading");
+			eDebug("[eEPGChannelData] abort non avail mhw reading");
 			isRunning &= ~eEPGCache::MHW;
 			m_MHWReader->stop();
 			m_MHWConn=0;
@@ -635,7 +635,7 @@ void eEPGChannelData::abortNonAvail()
 #ifdef ENABLE_ATSC
 		if (!(haveData & eEPGCache::ATSC_EIT) && (isRunning & eEPGCache::ATSC_EIT))
 		{
-			eDebug("[eEPGTransponderDataReader] abort non avail ATSC EIT reading");
+			eDebug("[eEPGChannelData] abort non avail ATSC EIT reading");
 			isRunning &= ~eEPGCache::ATSC_EIT;
 			cleanupATSC();
 		}
@@ -643,7 +643,7 @@ void eEPGChannelData::abortNonAvail()
 #ifdef ENABLE_OPENTV
 		if (!(haveData & eEPGCache::OPENTV) && (isRunning & eEPGCache::OPENTV))
 		{
-			eDebug("[eEPGTransponderDataReader] abort non avail OpenTV EIT reading");
+			eDebug("[eEPGChannelData] abort non avail OpenTV EIT reading");
 			isRunning &= ~eEPGCache::OPENTV;
 			cleanupOPENTV();
 		}
@@ -676,118 +676,6 @@ void eEPGChannelData::abortNonAvail()
 
 
 #ifdef ENABLE_PRIVATE_EPG
-#include <dvbsi++/descriptor_tag.h>
-#include <dvbsi++/unknown_descriptor.h>
-#include <dvbsi++/private_data_specifier_descriptor.h>
-
-void eEPGTransponderDataReader::PMTready(eDVBServicePMTHandler *pmthandler)
-{
-	ePtr<eTable<ProgramMapSection> > ptr;
-	if (!pmthandler->getPMT(ptr) && ptr)
-	{
-		std::vector<ProgramMapSection*>::const_iterator i;
-		for (i = ptr->getSections().begin(); i != ptr->getSections().end(); ++i)
-		{
-			const ProgramMapSection &pmt = **i;
-
-			ElementaryStreamInfoConstIterator es;
-			for (es = pmt.getEsInfo()->begin(); es != pmt.getEsInfo()->end(); ++es)
-			{
-				int tmp=0;
-				switch ((*es)->getType())
-				{
-				case 0xC1: // user private
-					for (DescriptorConstIterator desc = (*es)->getDescriptors()->begin();
-						desc != (*es)->getDescriptors()->end(); ++desc)
-					{
-						switch ((*desc)->getTag())
-						{
-							case 0xC2: // user defined
-								if ((*desc)->getLength() == 8)
-								{
-									uint8_t buffer[10];
-									(*desc)->writeToBuffer(buffer);
-									if (!memcmp((const char *)buffer+2, "EPGDATA", 7))
-									{
-										eServiceReferenceDVB ref;
-										if (!pmthandler->getServiceReference(ref))
-										{
-											int pid = (*es)->getPid();
-											m_messages.send(Message(Message::got_mhw2_channel_pid, ref, pid));
-										}
-									}
-									else if(!memcmp((const char *)buffer+2, "FICHAS", 6))
-									{
-										eServiceReferenceDVB ref;
-										if (!pmthandler->getServiceReference(ref))
-										{
-											int pid = (*es)->getPid();
-											m_messages.send(Message(Message::got_mhw2_summary_pid, ref, pid));
-										}
-									}
-									else if(!memcmp((const char *)buffer+2, "GENEROS", 7))
-									{
-										eServiceReferenceDVB ref;
-										if (!pmthandler->getServiceReference(ref))
-										{
-											int pid = (*es)->getPid();
-											m_messages.send(Message(Message::got_mhw2_title_pid, ref, pid));
-										}
-									}
-								}
-								break;
-							default:
-								break;
-						}
-					}
-					break;
-				case 0x05: // private
-					for (DescriptorConstIterator desc = (*es)->getDescriptors()->begin();
-						desc != (*es)->getDescriptors()->end(); ++desc)
-					{
-						switch ((*desc)->getTag())
-						{
-							case PRIVATE_DATA_SPECIFIER_DESCRIPTOR:
-								if (((PrivateDataSpecifierDescriptor*)(*desc))->getPrivateDataSpecifier() == 190)
-									tmp |= 1;
-								break;
-							case 0x90:
-							{
-								Descriptor *descr = (Descriptor*)*desc;
-								int descr_len = descr->getLength();
-								if (descr_len == 4)
-								{
-									uint8_t data[descr_len+2];
-									descr->writeToBuffer(data);
-									if ( !data[2] && !data[3] && data[4] == 0xFF && data[5] == 0xFF )
-										tmp |= 2;
-								}
-								break;
-							}
-							default:
-								break;
-						}
-					}
-				default:
-					break;
-				}
-				if (tmp==3)
-				{
-					eServiceReferenceDVB ref;
-					if (!pmthandler->getServiceReference(ref))
-					{
-						int pid = (*es)->getPid();
-						m_messages.send(Message(Message::got_private_pid, ref, pid));
-						return;
-					}
-				}
-			}
-		}
-	}
-	else
-		eDebug("[eEPGTransponderDataReader] PMTready but no pmt!!");
-}
-
 void eEPGChannelData::startPrivateReader()
 {
 	eDVBSectionFilterMask mask;
@@ -796,7 +684,7 @@ void eEPGChannelData::startPrivateReader()
 	mask.flags = eDVBSectionFilterMask::rfCRC;
 	mask.data[0] = 0xA0;
 	mask.mask[0] = 0xFF;
-	eDebug("[eEPGTransponderDataReader] start privatefilter for pid %04x and version %d", m_PrivatePid, m_PrevVersion);
+	eDebug("[eEPGChannelData] start privatefilter for pid %04x and version %d", m_PrivatePid, m_PrevVersion);
 	if (m_PrevVersion != -1)
 	{
 		mask.data[3] = m_PrevVersion << 1;
@@ -819,7 +707,7 @@ void eEPGChannelData::readPrivateData( const uint8_t *data)
 	}
 	if ( seenPrivateSections.size() == (unsigned int)(data[7] + 1) )
 	{
-		eDebug("[eEPGTransponderDataReader] private finished");
+		eDebug("[eEPGChannelData] private finished");
 		eDVBChannelID chid = channel->getChannelID();
 		int tmp = chid.original_network_id.get();
 		tmp |= 0x80000000; // we use highest bit as private epg indicator
@@ -935,7 +823,7 @@ void eEPGChannelData::storeMHWTitle(std::map<uint32_t, mhw_title_t>::iterator it
 {
 	uint8_t name[34];
 
-	// For each title a separate EIT packet will be sent to eEPGTransponderDataReader::sectionRead()
+	// For each title a separate EIT packet will be sent to eEPGCache::sectionRead()
 	bool isMHW2 = itTitle->second.mhw2_mjd_hi || itTitle->second.mhw2_mjd_lo ||
 		itTitle->second.mhw2_duration_hi || itTitle->second.mhw2_duration_lo;
 
@@ -945,15 +833,15 @@ void eEPGChannelData::storeMHWTitle(std::map<uint32_t, mhw_title_t>::iterator it
 
 	packet->service_id_hi = m_channels[ itTitle->second.channel_id - 1 ].channel_id_hi;
 	packet->service_id_lo = m_channels[ itTitle->second.channel_id - 1 ].channel_id_lo;
-	packet->version_number = 0;	// eEPGTransponderDataReader::sectionRead() will dig this for the moment
+	packet->version_number = 0;	// eEPGCache::sectionRead() will dig this for the moment
 	packet->current_next_indicator = 0;
-	packet->section_number = 0;	// eEPGTransponderDataReader::sectionRead() will dig this for the moment
-	packet->last_section_number = 0;	// eEPGTransponderDataReader::sectionRead() will dig this for the moment
+	packet->section_number = 0;	// eEPGCache::sectionRead() will dig this for the moment
+	packet->last_section_number = 0;	// eEPGCache::sectionRead() will dig this for the moment
 	packet->transport_stream_id_hi = m_channels[ itTitle->second.channel_id - 1 ].transport_stream_id_hi;
 	packet->transport_stream_id_lo = m_channels[ itTitle->second.channel_id - 1 ].transport_stream_id_lo;
 	packet->original_network_id_hi = m_channels[ itTitle->second.channel_id - 1 ].network_id_hi;
 	packet->original_network_id_lo = m_channels[ itTitle->second.channel_id - 1 ].network_id_lo;
-	packet->segment_last_section_number = 0; // eEPGTransponderDataReader::sectionRead() will dig this for the moment
+	packet->segment_last_section_number = 0; // eEPGCache::sectionRead() will dig this for the moment
 	packet->segment_last_table_id = 0x50;
 
 	uint8_t *title = isMHW2 ? ((uint8_t*)(itTitle->second.title))-4 : (uint8_t*)itTitle->second.title;
@@ -1072,7 +960,7 @@ void eEPGChannelData::storeMHWTitle(std::map<uint32_t, mhw_title_t>::iterator it
 	packet->section_length_hi =  ((packet_length - 3)&0xf00)>>8;
 	packet->section_length_lo =  (packet_length - 3)&0xff;
 
-	// Feed the data to eEPGTransponderDataReader::sectionRead()
+	// Feed the data to eEPGCache::sectionRead()
 	if (eEPGCache::getInstance())
 		eEPGCache::getInstance()->sectionRead( data, eEPGCache::MHW, this );
 }
@@ -1088,7 +976,7 @@ void eEPGChannelData::startMHWReader(uint16_t pid, uint8_t tid)
 	m_MHWFilterMask.pid = pid;
 	m_MHWFilterMask.data[0] = tid;
 	m_MHWReader->start(m_MHWFilterMask);
-//	eDebug("[eEPGTransponderDataReader] start 0x%02x 0x%02x", pid, tid);
+//	eDebug("[eEPGChannelData] start 0x%02x 0x%02x", pid, tid);
 }
 
 void eEPGChannelData::startMHWReader2(uint16_t pid, uint8_t tid, int ext)
@@ -1099,13 +987,13 @@ void eEPGChannelData::startMHWReader2(uint16_t pid, uint8_t tid, int ext)
 	{
 		m_MHWFilterMask2.data[1] = ext;
 		m_MHWFilterMask2.mask[1] = 0xFF;
-//		eDebug("[eEPGTransponderDataReader] start 0x%03x 0x%02x 0x%02x", pid, tid, ext);
+//		eDebug("[eEPGChannelData] start 0x%03x 0x%02x 0x%02x", pid, tid, ext);
 	}
 	else
 	{
 		m_MHWFilterMask2.data[1] = 0;
 		m_MHWFilterMask2.mask[1] = 0;
-//		eDebug("[eEPGTransponderDataReader] start 0x%02x 0x%02x", pid, tid);
+//		eDebug("[eEPGChannelData] start 0x%02x 0x%02x", pid, tid);
 	}
 	m_MHWReader2->start(m_MHWFilterMask2);
 }
@@ -1119,7 +1007,7 @@ void eEPGChannelData::readMHWData(const uint8_t *data)
 		// have si data.. so we dont read mhw data
 		(haveData & (eEPGCache::SCHEDULE|eEPGCache::SCHEDULE_OTHER|eEPGCache::VIASAT)) )
 	{
-		eDebug("[eEPGTransponderDataReader] mhw aborted %d", state);
+		eDebug("[eEPGChannelData] mhw aborted %d", state);
 	}
 	else if (m_MHWFilterMask.pid == 0xD3 && m_MHWFilterMask.data[0] == 0x91)
 	// Channels table
@@ -1136,7 +1024,7 @@ void eEPGChannelData::readMHWData(const uint8_t *data)
 		}
 		haveData |= eEPGCache::MHW;
 
-		eDebug("[eEPGTransponderDataReader] mhw %zu channels found", m_channels.size());
+		eDebug("[eEPGChannelData] mhw %zu channels found", m_channels.size());
 
 		// Channels table has been read, start reading the themes table.
 		startMHWReader(0xD3, 0x92);
@@ -1167,7 +1055,7 @@ void eEPGChannelData::readMHWData(const uint8_t *data)
 
 			m_themes[idx+sub_idx] = *theme;
 		}
-		eDebug("[eEPGTransponderDataReader] mhw %zu themes found", m_themes.size());
+		eDebug("[eEPGChannelData] mhw %zu themes found", m_themes.size());
 		// Themes table has been read, start reading the titles table.
 		startMHWReader(0xD2, 0x90);
 		startMHWTimeout(4000);
@@ -1211,7 +1099,7 @@ void eEPGChannelData::readMHWData(const uint8_t *data)
 			// Titles table has been read, there are summaries to read.
 			// Start reading summaries, store corresponding titles on the fly.
 			startMHWReader(0xD3, 0x90);
-			eDebug("[eEPGTransponderDataReader] mhw %zu titles(%zu with summary) found",
+			eDebug("[eEPGChannelData] mhw %zu titles(%zu with summary) found",
 				m_titles.size(),
 				m_program_ids.size());
 			startMHWTimeout(4000);
@@ -1261,7 +1149,7 @@ void eEPGChannelData::readMHWData(const uint8_t *data)
 				return;	// Continue reading of the current table.
 		}
 	}
-	eDebug("[eEPGTransponderDataReader] mhw finished(%ld) %zu summaries not found",
+	eDebug("[eEPGChannelData] mhw finished(%ld) %zu summaries not found",
 		::time(0),
 		m_program_ids.size());
 	// Summaries have been read, titles that have summaries have been stored.
@@ -1287,7 +1175,7 @@ void eEPGChannelData::readMHWData2(const uint8_t *data)
 		// have si data.. so we dont read mhw data
 		(haveData & (eEPGCache::SCHEDULE|eEPGCache::SCHEDULE_OTHER|eEPGCache::VIASAT)) )
 	{
-		eDebug("[eEPGTransponderDataReader] mhw2 aborted %d", state);
+		eDebug("[eEPGChannelData] mhw2 aborted %d", state);
 	}
 	else if (m_MHWFilterMask2.pid == m_mhw2_channel_pid && m_MHWFilterMask2.data[0] == 0xC8 && m_MHWFilterMask2.data[1] == 0)
 	// Channels table
@@ -1323,7 +1211,7 @@ void eEPGChannelData::readMHWData2(const uint8_t *data)
 			channel.channel_id_hi = *(tmp++);
 			channel.channel_id_lo = *(tmp++);
 			m_channels[i]=channel;
-//			eDebug("[eEPGTransponderDataReader] %d(%02x) %04x: %02x %02x", i, i, (channel.channel_id_hi << 8) | channel.channel_id_lo, *tmp, *(tmp+1));
+//			eDebug("[eEPGChannelData] %d(%02x) %04x: %02x %02x", i, i, (channel.channel_id_hi << 8) | channel.channel_id_lo, *tmp, *(tmp+1));
 			tmp+=2;
 		}
 		for (int i=0; i < num_channels; ++i)
@@ -1334,15 +1222,15 @@ void eEPGChannelData::readMHWData2(const uint8_t *data)
 			for (; x < channel_name_len; ++x)
 				channel.name[x]=*(tmp++);
 			channel.name[x+1]=0;
-//			eDebug("[eEPGTransponderDataReader] %d(%02x) %s", i, i, channel.name);
+//			eDebug("[eEPGChannelData] %d(%02x) %s", i, i, channel.name);
 		}
 		haveData |= eEPGCache::MHW;
-		eDebug("[eEPGTransponderDataReader] mhw2 %zu channels found", m_channels.size());
+		eDebug("[eEPGChannelData] mhw2 %zu channels found", m_channels.size());
 	}
 	else if (m_MHWFilterMask2.pid == m_mhw2_channel_pid && m_MHWFilterMask2.data[0] == 0xC8 && m_MHWFilterMask2.data[1] == 1)
 	{
 		// Themes table
-		eDebug("[eEPGTransponderDataReader] mhw2 themes nyi");
+		eDebug("[eEPGChannelData] mhw2 themes nyi");
 	}
 	else if (m_MHWFilterMask2.pid == m_mhw2_title_pid && m_MHWFilterMask2.data[0] == 0xe6)
 	// Titles table
@@ -1351,7 +1239,7 @@ void eEPGChannelData::readMHWData2(const uint8_t *data)
 		bool valid=false;
 		bool finish=false;
 
-//		eDebug("[eEPGTransponderDataReader] %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x",
+//		eDebug("[eEPGChannelData] %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x",
 //			data[3], data[4], data[5], data[6], data[7], data[8], data[9], data[10],
 //			data[11], data[12], data[13], data[14], data[15], data[16], data[17] );
 
@@ -1366,7 +1254,7 @@ void eEPGChannelData::readMHWData2(const uint8_t *data)
 		if (!valid)
 		{
 			if (dataLen > 18)
-				eDebug("[eEPGTransponderDataReader] mhw2 title table invalid!!");
+				eDebug("[eEPGChannelData] mhw2 title table invalid!!");
 			if (checkMHWTimeout())
 				goto abort;
 			if (!m_MHWTimeoutTimer->isActive())
@@ -1379,7 +1267,7 @@ void eEPGChannelData::readMHWData2(const uint8_t *data)
 		pos = 18;
 		while (pos < dataLen)
 		{
-//			eDebugNoNewLineStart("[eEPGTransponderDataReader]     [%02x] %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x [%02x %02x %02x %02x %02x %02x %02x] LL - DESCR - ",
+//			eDebugNoNewLineStart("[eEPGChannelData]     [%02x] %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x [%02x %02x %02x %02x %02x %02x %02x] LL - DESCR - ",
 //				data[pos], data[pos+1], data[pos+2], data[pos+3], data[pos+4], data[pos+5], data[pos+6], data[pos+7],
 //				data[pos+8], data[pos+9], data[pos+10], data[pos+11], data[pos+12], data[pos+13], data[pos+14], data[pos+15], data[pos+16], data[pos+17]);
 			title.channel_id = data[pos]+1;
@@ -1406,12 +1294,12 @@ void eEPGChannelData::readMHWData2(const uint8_t *data)
 			uint32_t summary_id = (data[pos+1] << 8) | data[pos+2];
 
 //			if (title.channel_id > m_channels.size())
-//				eDebug("[eEPGTransponderDataReader] channel_id(%d %02x) to big!!", title.channel_id);
+//				eDebug("[eEPGChannelData] channel_id(%d %02x) to big!!", title.channel_id);
 
-//			eDebug("[eEPGTransponderDataReader] pos %d prog_id %02x %02x chid %02x summary_id %04x dest %p len %d\n",
+//			eDebug("[eEPGChannelData] pos %d prog_id %02x %02x chid %02x summary_id %04x dest %p len %d\n",
 //				pos, title.program_id_ml, title.program_id_lo, title.channel_id, summary_id, dest, slen);
 
-//			eDebug("[eEPGTransponderDataReader] title_id %08x -> summary_id %04x\n", title_id, summary_id);
+//			eDebug("[eEPGChannelData] title_id %08x -> summary_id %04x\n", title_id, summary_id);
 
 			pos += 3;
 
@@ -1446,7 +1334,7 @@ void eEPGChannelData::readMHWData2(const uint8_t *data)
 		}
 		if (finish)
 		{
-			eDebug("[eEPGTransponderDataReader] mhw2 %zu titles(%zu with summary) found", m_titles.size(), m_program_ids.size());
+			eDebug("[eEPGChannelData] mhw2 %zu titles(%zu with summary) found", m_titles.size(), m_program_ids.size());
 			if (!m_program_ids.empty())
 			{
 				// Titles table has been read, there are summaries to read.
@@ -1498,8 +1386,8 @@ void eEPGChannelData::readMHWData2(const uint8_t *data)
 			{
 				// data seems consistent...
 				uint32_t summary_id = (data[3]<<8)|data[4];
-//				eDebug ("[eEPGTransponderDataReader] summary id %04x\n", summary_id);
-//				eDebug("[eEPGTransponderDataReader] [%02x %02x] %02x %02x %02x %02x %02x %02x %02x %02x XX\n", data[3], data[4], data[5], data[6], data[7], data[8], data[9], data[10], data[11], data[12], data[13] );
+//				eDebug ("[eEPGChannelData] summary id %04x\n", summary_id);
+//				eDebug("[eEPGChannelData] [%02x %02x] %02x %02x %02x %02x %02x %02x %02x %02x XX\n", data[3], data[4], data[5], data[6], data[7], data[8], data[9], data[10], data[11], data[12], data[13] );
 
 				// ugly workaround to convert const __u8* to char*
 				char *tmp=0;
@@ -1533,11 +1421,11 @@ void eEPGChannelData::readMHWData2(const uint8_t *data)
 					startMHWTimeout(15000);
 					std::string the_text = (char *) (data + pos + 1);
 
-//					eDebug ("[eEPGTransponderDataReader] summary id %04x : %s\n", summary_id, data+pos+1);
+//					eDebug ("[eEPGChannelData] summary id %04x : %s\n", summary_id, data+pos+1);
 
 					while( itProgId != m_program_ids.end() && itProgId->first == summary_id )
 					{
-//						eDebug("[eEPGTransponderDataReader] .");
+//						eDebug("[eEPGChannelData] .");
 						// Find corresponding title, store title and summary in epgcache.
 						std::map<uint32_t, mhw_title_t>::iterator itTitle( m_titles.find( itProgId->second ) );
 						if ( itTitle != m_titles.end() )
@@ -1575,7 +1463,7 @@ void eEPGChannelData::readMHWData2(const uint8_t *data)
 			// Now store titles that do not have summaries.
 			for (std::map<uint32_t, mhw_title_t>::iterator itTitle(m_titles.begin()); itTitle != m_titles.end(); itTitle++)
 				storeMHWTitle( itTitle, "", data );
-			eDebug("[eEPGTransponderDataReader] mhw2 finished(%ld) %zu summaries not found",
+			eDebug("[eEPGChannelData] mhw2 finished(%ld) %zu summaries not found",
 				::time(0),
 				m_program_ids.size());
 		}
@@ -1674,7 +1562,7 @@ void eEPGChannelData::readFreeSatScheduleOtherData( const uint8_t *data)
 	if ( itmap == freeSatSubTableStatus.end() )
 	{
 		// New sub table. Store version.
-		//eDebug("[eEPGTransponderDataReader] New subtable (%x) version (%d) now/next (%d) tsid (%x/%x) onid (%x/%x)", subtableNo, eit->version_number, eit->current_next_indicator, eit->transport_stream_id_hi, eit->transport_stream_id_lo, eit->original_network_id_hi, eit->original_network_id_lo);
+		//eDebug("[eEPGChannelData] New subtable (%x) version (%d) now/next (%d) tsid (%x/%x) onid (%x/%x)", subtableNo, eit->version_number, eit->current_next_indicator, eit->transport_stream_id_hi, eit->transport_stream_id_lo, eit->original_network_id_hi, eit->original_network_id_lo);
 		fsstatus = new freesatEITSubtableStatus(eit->version_number, eit->last_section_number);
 		m_FreesatTablesToComplete++;
 		freeSatSubTableStatus.insert(std::pair<uint32_t,freesatEITSubtableStatus>(subtableNo, *fsstatus));
@@ -1685,7 +1573,7 @@ void eEPGChannelData::readFreeSatScheduleOtherData( const uint8_t *data)
 		// Existing subtable. Check version. Should check current / next as well? Seems to always be current for Freesat
 		if ( fsstatus->isVersionChanged(eit->version_number) )
 		{
-			eDebug("[eEPGTransponderDataReader] FS subtable (%x) version changed (%d) now/next (%d)", subtableNo, eit->version_number, eit->current_next_indicator);
+			eDebug("[eEPGChannelData] FS subtable (%x) version changed (%d) now/next (%d)", subtableNo, eit->version_number, eit->current_next_indicator);
 			m_FreesatTablesToComplete++;
 			fsstatus->updateVersion(eit->version_number, eit->last_section_number);
 		}
@@ -1693,13 +1581,13 @@ void eEPGChannelData::readFreeSatScheduleOtherData( const uint8_t *data)
 		{
 			if ( fsstatus->isSectionPresent(eit->section_number) )
 			{
-//				eDebug("[eEPGTransponderDataReader] DUP FS sub/sec/ver (%x/%d/%d)", subtableNo, eit->section_number, eit->version_number);
+//				eDebug("[eEPGChannelData] DUP FS sub/sec/ver (%x/%d/%d)", subtableNo, eit->section_number, eit->version_number);
 				return;
 			}
 		}
 	}
 
-//	eDebug("[eEPGTransponderDataReader] New FS sub/sec/ls/lss/ver (%x/%d/%d/%d/%d)", subtableNo, eit->section_number, eit->last_section_number, eit->segment_last_section_number, eit->version_number);
+//	eDebug("[eEPGChannelData] New FS sub/sec/ls/lss/ver (%x/%d/%d/%d/%d)", subtableNo, eit->section_number, eit->last_section_number, eit->segment_last_section_number, eit->version_number);
 	fsstatus->seen(eit->section_number, eit->segment_last_section_number);
 	if (fsstatus->isCompleted())
 	{
@@ -1716,7 +1604,7 @@ void eEPGChannelData::ATSC_checkCompletion()
 {
 	if (!m_ATSC_VCTConn && !m_ATSC_MGTConn && !m_ATSC_EITConn && !m_ATSC_ETTConn)
 	{
-		eDebug("[eEPGTransponderDataReader] ATSC EIT index %d completed", m_atsc_eit_index);
+		eDebug("[eEPGChannelData] ATSC EIT index %d completed", m_atsc_eit_index);
 		for (std::map<uint32_t, struct atsc_event>::const_iterator it = m_ATSC_EIT_map.begin(); it != m_ATSC_EIT_map.end(); ++it)
 		{
 			std::vector<int> sids;
@@ -1741,7 +1629,7 @@ void eEPGChannelData::ATSC_checkCompletion()
 		}
 		else
 		{
-			eDebug("[eEPGTransponderDataReader] ATSC EIT parsing completed");
+			eDebug("[eEPGChannelData] ATSC EIT parsing completed");
 			m_ATSC_VCT_map.clear();
 			isRunning &= ~eEPGCache::ATSC_EIT;
 			if (!isRunning)
@@ -1884,7 +1772,7 @@ void eEPGChannelData::OPENTV_checkCompletion(uint32_t data_crc)
 
 	if ((m_OPENTV_ChannelsConn && (m_OPENTV_EIT_index > 0xff)) || (m_OPENTV_ChannelsConn && !m_OPENTV_crc32))
 	{
-		eDebug("[eEPGTransponderDataReader] OpenTV channels, found=%d%s", (int)m_OPENTV_channels_map.size(), m_OPENTV_crc32 ? ", crc32 incomplete" : "");
+		eDebug("[eEPGChannelData] OpenTV channels, found=%d%s", (int)m_OPENTV_channels_map.size(), m_OPENTV_crc32 ? ", crc32 incomplete" : "");
 		m_OPENTV_ChannelsReader->stop();
 		m_OPENTV_ChannelsConn = NULL;
 		m_OPENTV_EIT_index = m_OPENTV_crc32 = 0;
@@ -1906,7 +1794,7 @@ void eEPGChannelData::OPENTV_checkCompletion(uint32_t data_crc)
 
 		if (m_OPENTV_pid < 0x48)
 		{
-			eDebug("[eEPGTransponderDataReader] OpenTV titles %d stored=%d%s", (int)m_OPENTV_EIT_map.size(), (int)m_OPENTV_descriptors_map.size(), m_OPENTV_crc32 ? ", crc32 incomplete" : "");
+			eDebug("[eEPGChannelData] OpenTV titles %d stored=%d%s", (int)m_OPENTV_EIT_map.size(), (int)m_OPENTV_descriptors_map.size(), m_OPENTV_crc32 ? ", crc32 incomplete" : "");
 			m_OPENTV_SummariesReader->connectRead(sigc::mem_fun(*this, &eEPGChannelData::OPENTV_SummariesSection), m_OPENTV_SummariesConn);
 			mask = {};
 			mask.pid = m_OPENTV_pid;
@@ -1924,7 +1812,7 @@ void eEPGChannelData::OPENTV_checkCompletion(uint32_t data_crc)
 		m_OPENTV_pid -= 0x10;
 
 		//cache remaining uncached events for which the provider only sends title with no summary data.. off air/overnight!
-		eDebug("[eEPGTransponderDataReader] OpenTV summaries, uncached=%d%s", (int)m_OPENTV_EIT_map.size(), m_OPENTV_crc32 ? ", crc32 incomplete" : "");
+		eDebug("[eEPGChannelData] OpenTV summaries, uncached=%d%s", (int)m_OPENTV_EIT_map.size(), m_OPENTV_crc32 ? ", crc32 incomplete" : "");
 
 		for (std::map<uint32_t, struct opentv_event>::const_iterator it = m_OPENTV_EIT_map.begin(); it != m_OPENTV_EIT_map.end(); ++it)
 		{
@@ -1957,14 +1845,14 @@ void eEPGChannelData::OPENTV_checkCompletion(uint32_t data_crc)
 			m_OPENTV_TitlesReader->start(mask);
 		}
 		else
-			eDebug("[eEPGTransponderDataReader] OpenTV finishing, uncached=%d", (int)m_OPENTV_EIT_map.size());
+			eDebug("[eEPGChannelData] OpenTV finishing, uncached=%d", (int)m_OPENTV_EIT_map.size());
 	}
 	else
 		m_OPENTV_EIT_index++;
 
 	if (!m_OPENTV_ChannelsConn && !m_OPENTV_TitlesConn && !m_OPENTV_SummariesConn)
 	{
-		eDebug("[eEPGTransponderDataReader] OpenTV EIT parsing completed");
+		eDebug("[eEPGChannelData] OpenTV EIT parsing completed");
 		isRunning &= ~eEPGCache::OPENTV;
 
 		if (!isRunning)

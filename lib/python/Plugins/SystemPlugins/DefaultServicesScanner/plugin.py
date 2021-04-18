@@ -7,6 +7,7 @@ from Tools.Directories import resolveFilename, SCOPE_CONFIG, copyfile
 from os import unlink
 from enigma import eTimer, eDVBDB
 
+
 class DefaultServiceScan(ServiceScan):
 	skin = """
 		<screen position="150,115" size="420,390" title="Service Scan">
@@ -35,7 +36,7 @@ class DefaultServiceScan(ServiceScan):
 
 	def __init__(self, session, scanList):
 		try:
-			unlink(resolveFilename(SCOPE_CONFIG) + "/lamedb");
+			unlink(resolveFilename(SCOPE_CONFIG) + "/lamedb")
 		except OSError:
 			pass
 		db = eDVBDB.getInstance()
@@ -45,6 +46,7 @@ class DefaultServiceScan(ServiceScan):
 		self.timer.callback.append(self.ok)
 		self.timer.start(1000)
 
+
 class DefaultServicesScannerPlugin(ScanSetup):
 	skin = """
 		<screen position="100,115" size="520,390" title="Service scan">
@@ -52,7 +54,7 @@ class DefaultServicesScannerPlugin(ScanSetup):
 			<widget name="introduction" position="10,365" size="500,25" font="Regular;20" halign="center" />
 		</screen>"""
 
-	def __init__(self, session, args = None):
+	def __init__(self, session, args=None):
 		ScanSetup.__init__(self, session)
 		# backup lamedb
 		confdir = resolveFilename(SCOPE_CONFIG)
@@ -74,7 +76,7 @@ class DefaultServicesScannerPlugin(ScanSetup):
 		print "runScan"
 		self.keyGo()
 
-	def startScan(self, tlist, flags, feid, networkid = 0):
+	def startScan(self, tlist, flags, feid, networkid=0):
 		print "startScan"
 		if len(tlist):
 			# flags |= eComponentScan.scanSearchBAT
@@ -82,7 +84,7 @@ class DefaultServicesScannerPlugin(ScanSetup):
 		else:
 			self.session.openWithCallback(self.scanFinished, MessageBox, _("Nothing to scan!\nPlease setup your tuner settings before you start a service scan."), MessageBox.TYPE_ERROR)
 
-	def scanFinished(self, value = None):
+	def scanFinished(self, value=None):
 		print "finished"
 		print "self.scanIndex:", self.scanIndex
 		db = eDVBDB.getInstance()
@@ -123,8 +125,10 @@ class DefaultServicesScannerPlugin(ScanSetup):
 			self.selectSat(self.scanIndex)
 			self.keyGo()
 
+
 def DefaultServicesScannerMain(session, **kwargs):
 	session.open(DefaultServicesScannerPlugin)
 
+
 def Plugins(**kwargs):
-	return PluginDescriptor(name=_("Default Services Scanner"), description=_("Scans default lamedbs sorted by satellite with a connected dish positioner"), where = PluginDescriptor.WHERE_PLUGINMENU, needsRestart = False, fnc=DefaultServicesScannerMain)
+	return PluginDescriptor(name=_("Default Services Scanner"), description=_("Scans default lamedbs sorted by satellite with a connected dish positioner"), where=PluginDescriptor.WHERE_PLUGINMENU, needsRestart=False, fnc=DefaultServicesScannerMain)

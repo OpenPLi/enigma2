@@ -7,6 +7,7 @@ from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
 from os import path
 from skin import loadPixmap
 
+
 class Pixmap(GUIComponent):
 	GUI_WIDGET = ePixmap
 
@@ -14,10 +15,12 @@ class Pixmap(GUIComponent):
 		s = self.instance.size()
 		return (s.width(), s.height())
 
+
 class PixmapConditional(ConditionalWidget, Pixmap):
-	def __init__(self, withTimer = True):
+	def __init__(self, withTimer=True):
 		ConditionalWidget.__init__(self)
 		Pixmap.__init__(self)
+
 
 class MovingPixmap(Pixmap):
 	def __init__(self):
@@ -34,7 +37,7 @@ class MovingPixmap(Pixmap):
 		self.moveTimer = eTimer()
 		self.moveTimer.callback.append(self.doMove)
 
-	def clearPath(self, repeated = False):
+	def clearPath(self, repeated=False):
 		if self.moving:
 			self.moving = False
 			self.moveTimer.stop()
@@ -43,10 +46,10 @@ class MovingPixmap(Pixmap):
 		self.currDest = 0
 		self.repeated = repeated
 
-	def addMovePoint(self, x, y, time = 20):
+	def addMovePoint(self, x, y, time=20):
 		self.path.append((x, y, time))
 
-	def moveTo(self, x, y, time = 20):
+	def moveTo(self, x, y, time=20):
 		self.clearPath()
 		self.addMovePoint(x, y, time)
 
@@ -85,6 +88,7 @@ class MovingPixmap(Pixmap):
 				self.moving = False
 				self.startMoving()
 
+
 class MultiPixmap(Pixmap):
 	def __init__(self):
 		Pixmap.__init__(self)
@@ -94,18 +98,18 @@ class MultiPixmap(Pixmap):
 		if self.skinAttributes is not None:
 			skin_path_prefix = getattr(screen, "skin_path", path)
 			pixmap = None
-			attribs = [ ]
+			attribs = []
 			for (attrib, value) in self.skinAttributes:
 				if attrib == "pixmaps":
 					pixmaps = value.split(',')
 					for p in pixmaps:
-						self.pixmaps.append(loadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, p, path_prefix=skin_path_prefix), desktop) )
+						self.pixmaps.append(loadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, p, path_prefix=skin_path_prefix), desktop))
 					if not pixmap:
 						pixmap = resolveFilename(SCOPE_CURRENT_SKIN, pixmaps[0], path_prefix=skin_path_prefix)
 				elif attrib == "pixmap":
 					pixmap = resolveFilename(SCOPE_CURRENT_SKIN, value, path_prefix=skin_path_prefix)
 				else:
-					attribs.append((attrib,value))
+					attribs.append((attrib, value))
 			if pixmap:
 				attribs.append(("pixmap", pixmap))
 			self.skinAttributes = attribs
@@ -116,4 +120,4 @@ class MultiPixmap(Pixmap):
 			if len(self.pixmaps) > x:
 				self.instance.setPixmap(self.pixmaps[x])
 			else:
-				print "setPixmapNum(%d) failed! defined pixmaps:" %(x), self.pixmaps
+				print "setPixmapNum(%d) failed! defined pixmaps:" % (x), self.pixmaps

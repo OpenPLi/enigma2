@@ -8,7 +8,8 @@ from Components.ActionMap import ActionMap
 from Tools.Directories import fileExists
 from Components.UsageConfig import preferredPath
 
-class RecordPathsSettings(Screen,ConfigListScreen):
+
+class RecordPathsSettings(Screen, ConfigListScreen):
 	skin = """
 		<screen name="RecordPathsSettings" position="160,150" size="450,200" title="Recording paths">
 			<ePixmap pixmap="buttons/red.png" position="10,0" size="140,40" alphatest="on" />
@@ -47,12 +48,12 @@ class RecordPathsSettings(Screen,ConfigListScreen):
 			self.session.open(
 				MessageBox,
 				_("The directory %s is not writable.\nMake sure you select a writable directory instead.") % value,
-				type = MessageBox.TYPE_ERROR
+				type=MessageBox.TYPE_ERROR
 				)
 			return False
 
 	def initConfigList(self):
-		self.styles = [ ("<default>", _("<Default movie location>")), ("<current>", _("<Current movielist location>")), ("<timer>", _("<Last timer location>")) ]
+		self.styles = [("<default>", _("<Default movie location>")), ("<current>", _("<Current movielist location>")), ("<timer>", _("<Last timer location>"))]
 		styles_keys = [x[0] for x in self.styles]
 		tmp = config.movielist.videodirs.value
 		default = config.usage.default_path.value
@@ -60,28 +61,28 @@ class RecordPathsSettings(Screen,ConfigListScreen):
 			tmp = tmp[:]
 			tmp.append(default)
 		print "DefaultPath: ", default, tmp
-		self.default_dirname = ConfigSelection(default = default, choices = [("", _("<Default movie location>"))] + tmp)
+		self.default_dirname = ConfigSelection(default=default, choices=[("", _("<Default movie location>"))] + tmp)
 		tmp = config.movielist.videodirs.value
 		default = config.usage.timer_path.value
 		if default not in tmp and default not in styles_keys:
 			tmp = tmp[:]
 			tmp.append(default)
 		print "TimerPath: ", default, tmp
-		self.timer_dirname = ConfigSelection(default = default, choices = self.styles+tmp)
+		self.timer_dirname = ConfigSelection(default=default, choices=self.styles + tmp)
 		tmp = config.movielist.videodirs.value
 		default = config.usage.instantrec_path.value
 		if default not in tmp and default not in styles_keys:
 			tmp = tmp[:]
 			tmp.append(default)
 		print "InstantrecPath: ", default, tmp
-		self.instantrec_dirname = ConfigSelection(default = default, choices = self.styles+tmp)
+		self.instantrec_dirname = ConfigSelection(default=default, choices=self.styles + tmp)
 		default = config.usage.timeshift_path.value
 		tmp = config.usage.allowed_timeshift_paths.value
 		if default not in tmp:
 			tmp = tmp[:]
 			tmp.append(default)
 		print "TimeshiftPath: ", default, tmp
-		self.timeshift_dirname = ConfigSelection(default = default, choices = tmp)
+		self.timeshift_dirname = ConfigSelection(default=default, choices=tmp)
 		self.default_dirname.addNotifier(self.checkReadWriteDir, initial_call=False, immediate_feedback=False)
 		self.timer_dirname.addNotifier(self.checkReadWriteDir, initial_call=False, immediate_feedback=False)
 		self.instantrec_dirname.addNotifier(self.checkReadWriteDir, initial_call=False, immediate_feedback=False)
@@ -158,13 +159,13 @@ class RecordPathsSettings(Screen,ConfigListScreen):
 				if default not in tmp and default not in styles_keys:
 					tmp = tmp[:]
 					tmp.append(default)
-				self.timer_dirname.setChoices(self.styles+tmp, default=default)
+				self.timer_dirname.setChoices(self.styles + tmp, default=default)
 				tmp = config.movielist.videodirs.value
 				default = self.instantrec_dirname.value
 				if default not in tmp and default not in styles_keys:
 					tmp = tmp[:]
 					tmp.append(default)
-				self.instantrec_dirname.setChoices(self.styles+tmp, default=default)
+				self.instantrec_dirname.setChoices(self.styles + tmp, default=default)
 				self.entrydirname.value = res
 			if config.usage.allowed_timeshift_paths.value != self.lasttimeshiftdirs:
 				tmp = config.usage.allowed_timeshift_paths.value

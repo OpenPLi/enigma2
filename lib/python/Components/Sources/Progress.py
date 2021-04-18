@@ -1,7 +1,8 @@
 from Source import Source
 
+
 class Progress(Source):
-	def __init__(self, value = 0, range = 100):
+	def __init__(self, value=0, range=100):
 		Source.__init__(self)
 		self.__value = value
 		self.range = range
@@ -13,7 +14,7 @@ class Progress(Source):
 		self.__value = value
 		self.changed((self.CHANGED_ALL,))
 
-	def setRange(self, range = 100):
+	def setRange(self, range=100):
 		self.range = range
 		self.changed((self.CHANGED_ALL,))
 

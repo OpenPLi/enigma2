@@ -11,6 +11,7 @@ from Plugins.Plugin import PluginDescriptor
 from Components.FanControl import fancontrol
 import skin
 
+
 class TempFanControl(Screen, ConfigListScreen):
 	skin = """
 		<screen position="center,center" size="570,420" title="Temperature and fan control" >
@@ -92,7 +93,7 @@ class TempFanControl(Screen, ConfigListScreen):
 			</widget>
 		</screen>"""
 
-	def __init__(self, session, args = None):
+	def __init__(self, session, args=None):
 		Screen.__init__(self, session)
 
 		self.setTitle(_("Temperature and fan control"))
@@ -111,7 +112,7 @@ class TempFanControl(Screen, ConfigListScreen):
 			if count < tempcount:
 				id = templist[count]
 				self["SensorTempText%d" % count] = StaticText(sensors.getSensorName(id))
-				self["SensorTemp%d" % count] = SensorSource(sensorid = id)
+				self["SensorTemp%d" % count] = SensorSource(sensorid=id)
 			else:
 				self["SensorTempText%d" % count] = StaticText("")
 				self["SensorTemp%d" % count] = SensorSource()
@@ -119,7 +120,7 @@ class TempFanControl(Screen, ConfigListScreen):
 			if count < fancount:
 				id = fanlist[count]
 				self["SensorFanText%d" % count] = StaticText(sensors.getSensorName(id))
-				self["SensorFan%d" % count] = SensorSource(sensorid = id)
+				self["SensorFan%d" % count] = SensorSource(sensorid=id)
 			else:
 				self["SensorFanText%d" % count] = StaticText("")
 				self["SensorFan%d" % count] = SensorSource()
@@ -131,7 +132,7 @@ class TempFanControl(Screen, ConfigListScreen):
 			self.list.append(getConfigListEntry(_("Standby fan %d voltage") % (count + 1), fancontrol.getConfig(count).vlt_standby))
 			self.list.append(getConfigListEntry(_("Standby fan %d PWM") % (count + 1), fancontrol.getConfig(count).pwm_standby))
 
-		ConfigListScreen.__init__(self, self.list, session = self.session)
+		ConfigListScreen.__init__(self, self.list, session=self.session)
 		#self["config"].list = self.list
 		#self["config"].setList(self.list)
 		seperation = skin.parameters.get("ConfigListSeperator", 300)
@@ -162,13 +163,16 @@ class TempFanControl(Screen, ConfigListScreen):
 			fancontrol.getConfig(count).pwm_standby.load()
 		self.close()
 
+
 def main(session, **kwargs):
 	session.open(TempFanControl)
+
 
 def startMenu(menuid):
 	if menuid != "system":
 		return []
 	return [(_("Temperature and fan control"), main, "tempfancontrol", 80)]
 
+
 def Plugins(**kwargs):
-	return PluginDescriptor(name = _("Temperature and fan control"), description = _("Temperature and fan control"), where = PluginDescriptor.WHERE_MENU, needsRestart = False, fnc = startMenu)
+	return PluginDescriptor(name=_("Temperature and fan control"), description=_("Temperature and fan control"), where=PluginDescriptor.WHERE_MENU, needsRestart=False, fnc=startMenu)

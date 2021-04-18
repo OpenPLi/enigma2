@@ -5,6 +5,7 @@ from Components.config import config
 from Components import Harddisk
 from twisted.internet import threads
 
+
 def getTrashFolder(path):
 	# Returns trash folder without symlinks. Path may be file or directory or whatever.
 	mountpoint = Harddisk.findMountPoint(os.path.realpath(path))
@@ -13,6 +14,7 @@ def getTrashFolder(path):
 		mountpoint = movie
 	return os.path.join(mountpoint, ".Trash")
 
+
 def createTrashFolder(path):
 	# Create and return trash folder for given file or dir
 	trash = getTrashFolder(path)
@@ -20,6 +22,7 @@ def createTrashFolder(path):
 		print "[Trashcan] create:", trash
 		os.mkdir(trash)
 	return trash
+
 
 def enumTrashFolders():
 	# Walk through all Trash folders. This may access network
@@ -33,6 +36,7 @@ def enumTrashFolders():
 			result = os.path.join(mountpoint, ".Trash")
 			if os.path.isdir(result):
 				yield result
+
 
 class Trashcan:
 	def __init__(self):
@@ -78,7 +82,7 @@ class Trashcan:
 			return
 		self.isCleaning = True
 		ctimeLimit = time.time() - (config.usage.movielist_trashcan_days.value * 3600 * 24)
-		reserveBytes = 1024*1024*1024 * int(config.usage.movielist_trashcan_reserve.value)
+		reserveBytes = 1024 * 1024 * 1024 * int(config.usage.movielist_trashcan_reserve.value)
 		cleanset = self.dirty
 		self.dirty = set()
 		threads.deferToThread(purge, cleanset, ctimeLimit, reserveBytes).addCallbacks(self.cleanReady, self.cleanFail)
@@ -91,6 +95,7 @@ class Trashcan:
 	def cleanFail(self, failure):
 		print "[Trashcan] ERROR in clean:", failure
 		self.isCleaning = False
+
 
 def purge(cleanset, ctimeLimit, reserveBytes):
 	# Remove expired items from trash, and attempt to have
@@ -118,7 +123,7 @@ def purge(cleanset, ctimeLimit, reserveBytes):
 						candidates.append((st.st_ctime, fn, st.st_size))
 						size += st.st_size
 				except Exception, e:
-					print "[Trashcan] Failed to stat %s:"% name, e
+					print "[Trashcan] Failed to stat %s:" % name, e
 			# Remove empty directories if possible
 			for name in dirs:
 				try:
@@ -136,6 +141,7 @@ def purge(cleanset, ctimeLimit, reserveBytes):
 			size -= st_size
 		print "[Trashcan] Size after purging:", size, trash
 
+
 def cleanAll(trash):
 	if not os.path.isdir(trash):
 		print "[Trashcan] No trash.", trash
@@ -146,7 +152,7 @@ def cleanAll(trash):
 			try:
 				enigma.eBackgroundFileEraser.getInstance().erase(fn)
 			except Exception, e:
-				print "[Trashcan] Failed to erase %s:"% name, e
+				print "[Trashcan] Failed to erase %s:" % name, e
 		# Remove empty directories if possible
 		for name in dirs:
 			try:
@@ -154,8 +160,10 @@ def cleanAll(trash):
 			except:
 				pass
 
+
 def init(session):
 	global instance
 	instance.init(session)
+
 
 instance = Trashcan()

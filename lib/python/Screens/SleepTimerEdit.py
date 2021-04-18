@@ -9,6 +9,7 @@ from Components.config import config, getConfigListEntry
 from enigma import eEPGCache
 from time import time, localtime, mktime
 
+
 class SleepTimerEdit(ConfigListScreen, Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -20,7 +21,7 @@ class SleepTimerEdit(ConfigListScreen, Screen):
 		self["description"] = Label("")
 
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = session)
+		ConfigListScreen.__init__(self, self.list, session=session)
 		self.createSetup()
 
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
@@ -131,7 +132,7 @@ class SleepTimerEdit(ConfigListScreen, Screen):
 			self.close(True)
 		self.close()
 
-	def cancel(self, answer = None):
+	def cancel(self, answer=None):
 		if answer is None:
 			if self["config"].isChanged():
 				self.session.openWithCallback(self.cancel, MessageBox, _("Really close without saving settings?"))
@@ -178,6 +179,7 @@ class SleepTimerEdit(ConfigListScreen, Screen):
 			return remaining + config.recording.margin_after.value * 60
 		return remaining
 
+
 def isNextWakeupTime(standby_timer=False):
 	wakeup_enabled = config.usage.wakeup_enabled.value
 	if wakeup_enabled != "no":
@@ -195,6 +197,7 @@ def isNextWakeupTime(standby_timer=False):
 		return wakeup_time + (86400 * wakeup_day)
 	return -1
 
+
 def WakeupDayTimeOfWeek():
 	now = localtime()
 	current_day = int(now.tm_wday)
@@ -203,7 +206,7 @@ def WakeupDayTimeOfWeek():
 			wakeup_time = int(mktime((now.tm_year, now.tm_mon, now.tm_mday, config.usage.wakeup_time[current_day].value[0], config.usage.wakeup_time[current_day].value[1], 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
 			if wakeup_time > time():
 				return 0, wakeup_time
-		for i in range(1,8):
-			if config.usage.wakeup_day[(current_day+i)%7].value:
-				return i, int(mktime((now.tm_year, now.tm_mon, now.tm_mday, config.usage.wakeup_time[(current_day+i)%7].value[0], config.usage.wakeup_time[(current_day+i)%7].value[1], 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
+		for i in range(1, 8):
+			if config.usage.wakeup_day[(current_day + i) % 7].value:
+				return i, int(mktime((now.tm_year, now.tm_mon, now.tm_mday, config.usage.wakeup_time[(current_day + i) % 7].value[0], config.usage.wakeup_time[(current_day + i) % 7].value[1], 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
 	return -1, None

@@ -6,6 +6,7 @@ from urllib import quote
 import xml
 from base64 import encodestring
 
+
 class FallbackTimerList():
 
 	def __init__(self, parent, fallbackFunction, fallbackFunctionNOK=None):
@@ -54,20 +55,20 @@ class FallbackTimerList():
 			self.fallback(e)
 		self.list = [
 				FallbackTimerClass(
-					service_ref = str(timer.findtext("e2servicereference", '').encode("utf-8", 'ignore')),
-					name = str(timer.findtext("e2name", '').encode("utf-8", 'ignore')),
-					disabled = int(timer.findtext("e2disabled", 0)),
-					timebegin = int(timer.findtext("e2timebegin", 0)),
-					timeend = int(timer.findtext("e2timeend", 0)),
-					duration = int(timer.findtext("e2duration", 0)),
-					startprepare = int(timer.findtext("e2startprepare", 0)),
-					state = int(timer.findtext("e2state", 0)),
-					repeated = int(timer.findtext("e2repeated", 0)),
-					justplay = int(timer.findtext("e2justplay", 0)),
-					eit = int(timer.findtext("e2eit", -1)),
-					afterevent = int(timer.findtext("e2afterevent", 0)),
-					dirname = str(timer.findtext("e2dirname", '').encode("utf-8", 'ignore')),
-					description = str(timer.findtext("e2description", '').encode("utf-8", 'ignore')))
+					service_ref=str(timer.findtext("e2servicereference", '').encode("utf-8", 'ignore')),
+					name=str(timer.findtext("e2name", '').encode("utf-8", 'ignore')),
+					disabled=int(timer.findtext("e2disabled", 0)),
+					timebegin=int(timer.findtext("e2timebegin", 0)),
+					timeend=int(timer.findtext("e2timeend", 0)),
+					duration=int(timer.findtext("e2duration", 0)),
+					startprepare=int(timer.findtext("e2startprepare", 0)),
+					state=int(timer.findtext("e2state", 0)),
+					repeated=int(timer.findtext("e2repeated", 0)),
+					justplay=int(timer.findtext("e2justplay", 0)),
+					eit=int(timer.findtext("e2eit", -1)),
+					afterevent=int(timer.findtext("e2afterevent", 0)),
+					dirname=str(timer.findtext("e2dirname", '').encode("utf-8", 'ignore')),
+					description=str(timer.findtext("e2description", '').encode("utf-8", 'ignore')))
 			for timer in root.findall("e2timer")
 		]
 		print "[FallbackTimer] read %s timers from fallback tuner" % len(self.list)
@@ -99,8 +100,8 @@ class FallbackTimerList():
 			self.cleanServiceRef(timer.service_ref),
 			timer.begin,
 			timer.end,
-			quote(timer.name.decode('utf8').encode('utf8','ignore')),
-			quote(timer.description.decode('utf8').encode('utf8','ignore')),
+			quote(timer.name.decode('utf8').encode('utf8', 'ignore')),
+			quote(timer.description.decode('utf8').encode('utf8', 'ignore')),
 			timer.disabled,
 			timer.justplay,
 			timer.afterEvent,
@@ -117,8 +118,8 @@ class FallbackTimerList():
 			self.cleanServiceRef(timer.service_ref),
 			timer.begin,
 			timer.end,
-			quote(timer.name.decode('utf8').encode('utf8','ignore')),
-			quote(timer.description.decode('utf8').encode('utf8','ignore')),
+			quote(timer.name.decode('utf8').encode('utf8', 'ignore')),
+			quote(timer.description.decode('utf8').encode('utf8', 'ignore')),
 			timer.disabled,
 			timer.justplay,
 			timer.afterEvent,
@@ -150,6 +151,7 @@ class FallbackTimerList():
 	def fallbackNOK(self, answer=None):
 		self.fallbackFunctionNOK()
 
+
 class FallbackTimerDirs(FallbackTimerList):
 
 	def getFallbackTimerList(self):
@@ -175,11 +177,12 @@ class FallbackTimerDirs(FallbackTimerList):
 		else:
 			self.fallbackFunction()
 
+
 class FallbackTimerClass(TimerObject):
-	def __init__(self, service_ref = "", name = "", disabled = 0, \
-			timebegin = 0, timeend = 0, duration = 0, startprepare = 0, \
-			state = 0, repeated = 0, justplay = 0, eit = 0, afterevent = 0, \
-			dirname = "", description = ""):
+	def __init__(self, service_ref="", name="", disabled=0,
+			timebegin=0, timeend=0, duration=0, startprepare=0,
+			state=0, repeated=0, justplay=0, eit=0, afterevent=0,
+			dirname="", description=""):
 		self.service_ref = ServiceReference(service_ref and ':'.join(service_ref.split(':')[:11]) or None)
 		self.name = name
 		self.disabled = disabled

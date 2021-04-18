@@ -1,10 +1,11 @@
 from Screens.Ci import MMIDialog
 import socketmmi
 
+
 class SocketMMIMessageHandler:
 	def __init__(self):
 		self.session = None
-		self.dlgs = { }
+		self.dlgs = {}
 		socketmmi.getSocketStateChangedCallbackList().append(self.socketStateChanged)
 
 	def setSession(self, session):

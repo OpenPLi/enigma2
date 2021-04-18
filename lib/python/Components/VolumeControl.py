@@ -7,10 +7,13 @@ from config import config, ConfigSubsection, ConfigInteger
 
 profile("VolumeControl")
 #TODO .. move this to a own .py file
+
+
 class VolumeControl:
 	instance = None
 	"""Volume control, handles volUp, volDown, volMute actions and display
 	a corresponding dialog"""
+
 	def __init__(self, session):
 		globalActionMap.actions["volumeUp"] = self.volUp
 		globalActionMap.actions["volumeDown"] = self.volDown
@@ -21,7 +24,7 @@ class VolumeControl:
 		VolumeControl.instance = self
 
 		config.audio = ConfigSubsection()
-		config.audio.volume = ConfigInteger(default = 50, limits = (0, 100))
+		config.audio.volume = ConfigInteger(default=50, limits=(0, 100))
 
 		self.volumeDialog = session.instantiateDialog(Volume)
 		self.muteDialog = session.instantiateDialog(Mute)

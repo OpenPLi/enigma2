@@ -6,15 +6,18 @@ from Tools.Directories import resolveFilename, SCOPE_LIBDIR
 opkgDestinations = []
 opkgStatusPath = ''
 
+
 def opkgExtraDestinations():
 	global opkgDestinations
-	return ''.join([" --add-dest %s:%s" % (i,i) for i in opkgDestinations])
+	return ''.join([" --add-dest %s:%s" % (i, i) for i in opkgDestinations])
+
 
 def opkgAddDestination(mountpoint):
 	global opkgDestinations
 	if mountpoint not in opkgDestinations:
 		opkgDestinations.append(mountpoint)
 		print "[Opkg] Added to OPKG destinations:", mountpoint
+
 
 def onPartitionChange(why, part):
 	global opkgDestinations
@@ -37,6 +40,7 @@ def onPartitionChange(why, part):
 			except:
 				pass
 
+
 def enumFeeds():
 	for fn in os.listdir('/etc/opkg'):
 		if fn.endswith('-feed.conf'):
@@ -48,6 +52,7 @@ def enumFeeds():
 			except IOError:
 				pass
 
+
 def enumPlugins(filter_start=''):
 	list_dir = listsDirPath()
 	for feed in enumFeeds():
@@ -55,7 +60,7 @@ def enumPlugins(filter_start=''):
 		try:
 			for line in open(os.path.join(list_dir, feed), 'r'):
 				if line.startswith('Package:'):
-					package = line.split(":",1)[1].strip()
+					package = line.split(":", 1)[1].strip()
 					version = ''
 					description = ''
 					if package.startswith(filter_start) and not package.endswith('-dev') and not package.endswith('-staticdev') and not package.endswith('-dbg') and not package.endswith('-doc') and not package.endswith('-src'):
@@ -64,23 +69,24 @@ def enumPlugins(filter_start=''):
 				if package is None:
 					continue
 				if line.startswith('Version:'):
-					version = line.split(":",1)[1].strip()
+					version = line.split(":", 1)[1].strip()
 				elif line.startswith('Description:'):
-					description = line.split(":",1)[1].strip()
+					description = line.split(":", 1)[1].strip()
 				elif description and line.startswith(' '):
 					description += line[:-1]
 				elif len(line) <= 1:
-					d = description.split(' ',3)
+					d = description.split(' ', 3)
 					if len(d) > 3:
 						# Get rid of annoying "version" and package repeating strings
 						if d[1] == 'version':
 							description = d[3]
 						if description.startswith('gitAUTOINC'):
-							description = description.split(' ',1)[1]
+							description = description.split(' ', 1)[1]
 					yield package, version, description.strip()
 					package = None
 		except IOError:
 			pass
+
 
 def listsDirPath():
 	try:
@@ -93,6 +99,7 @@ def listsDirPath():
 		print "[opkg]", ex
 	return '/var/lib/opkg/lists'
 
+
 if __name__ == '__main__':
 	for p in enumPlugins('enigma'):
 		print p
@@ -100,6 +107,7 @@ if __name__ == '__main__':
 harddiskmanager.on_partition_list_change.append(onPartitionChange)
 for part in harddiskmanager.getMountedPartitions():
 	onPartitionChange('add', part)
+
 
 class OpkgComponent:
 	EVENT_INSTALL = 0
@@ -120,14 +128,14 @@ class OpkgComponent:
 	CMD_UPGRADE = 4
 	CMD_UPGRADE_LIST = 5
 
-	def __init__(self, opkg = 'opkg'):
+	def __init__(self, opkg='opkg'):
 		self.opkg = opkg
 		self.cmd = eConsoleAppContainer()
 		self.cache = None
 		self.callbackList = []
 		self.setCurrentCommand()
 
-	def setCurrentCommand(self, command = None):
+	def setCurrentCommand(self, command=None):
 		self.currentCommand = command
 
 	def runCmdEx(self, cmd):
@@ -140,7 +148,7 @@ class OpkgComponent:
 		if self.cmd.execute("%s %s" % (self.opkg, cmd)):
 			self.cmdFinished(-1)
 
-	def startCmd(self, cmd, args = None):
+	def startCmd(self, cmd, args=None):
 		if cmd == self.CMD_UPDATE:
 			self.runCmdEx("update")
 		elif cmd == self.CMD_UPGRADE:
@@ -221,7 +229,7 @@ class OpkgComponent:
 			print "[Opkg] Failed to parse: '%s'" % data
 			print "[Opkg]", ex
 
-	def callCallbacks(self, event, param = None):
+	def callCallbacks(self, event, param=None):
 		for callback in self.callbackList:
 			callback(event, param)
 

@@ -1,7 +1,7 @@
 from time import localtime, time
 
 
-def FuzzyTime(t, inPast = False):
+def FuzzyTime(t, inPast=False):
 	d = localtime(t)
 	nt = time()
 	n = localtime()
@@ -13,7 +13,7 @@ def FuzzyTime(t, inPast = False):
 	elif d[0] == n[0] and d[7] == n[7] - 1 and inPast:
 		# won't work on New Year's day
 		date = _("Yesterday")
-	elif ((t - nt) < 7*86400) and (nt < t) and not inPast:
+	elif ((t - nt) < 7 * 86400) and (nt < t) and not inPast:
 		# same week (must be future)
 		date = dayOfWeek[d[6]]
 	elif d[0] == n[0]:
@@ -29,7 +29,6 @@ def FuzzyTime(t, inPast = False):
 	timeres = _("%d:%02d") % (d[3], d[4])
 
 	return (date, timeres)
-
 
 
 if __name__ == "__main__":

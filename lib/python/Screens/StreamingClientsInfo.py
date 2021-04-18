@@ -13,6 +13,7 @@ try:
 except:
 	streamList = []
 
+
 class StreamingClientsInfo(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -62,7 +63,7 @@ class StreamingClientsInfo(Screen):
 						service_name = ServiceReference(stream.ref.toString()).getServiceName()
 						ip = stream.clientIP or ip
 			info = ("T %s %s %s") % (ip, service_name, _("(VU+ type)"))
-			self.clients.append((info,(-1, x)))
+			self.clients.append((info, (-1, x)))
 		self["menu"].setList(self.clients)
 		if self.clients:
 			self["info"].setText("")
@@ -76,7 +77,7 @@ class StreamingClientsInfo(Screen):
 		if self.clients:
 			client = self["menu"].l.getCurrentSelection()
 			if client:
-				self.session.openWithCallback(self.stopCurrentStreamCallback, MessageBox, client[0] +" \n\n" + _("Stop current stream") + "?", MessageBox.TYPE_YESNO)
+				self.session.openWithCallback(self.stopCurrentStreamCallback, MessageBox, client[0] + " \n\n" + _("Stop current stream") + "?", MessageBox.TYPE_YESNO)
 
 	def stopCurrentStreamCallback(self, answer):
 		if answer:
@@ -85,7 +86,7 @@ class StreamingClientsInfo(Screen):
 				for x in self.streamServer.getConnectedClients():
 					if client[1][0] == x[0] and client[1][1] == x[1]:
 						if not self.streamServer.stopStreamClient(client[1][0], client[1][1]):
-							self.session.open(MessageBox,  client[0] +" \n\n" + _("Error stop stream!"), MessageBox.TYPE_WARNING)
+							self.session.open(MessageBox, client[0] + " \n\n" + _("Error stop stream!"), MessageBox.TYPE_WARNING)
 				self.updateClients()
 
 	def stopAllStreams(self):

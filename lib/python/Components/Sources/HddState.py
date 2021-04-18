@@ -5,6 +5,7 @@ from Components.config import config
 from enigma import eTimer
 from Components.SystemInfo import SystemInfo
 
+
 class HddState(Source):
 	ALL = 0
 	INTERNAL = 1
@@ -68,7 +69,7 @@ class HddState(Source):
 				if self.allVisible:
 					if not string:
 						string = "\c0000??00"
-						string += "standby" 
+						string += "standby"
 				self.isSleeping = False
 				idle = self.standby_time
 			else:
@@ -79,7 +80,7 @@ class HddState(Source):
 				idle = self.idle_time
 			if self.idle_time:
 				timeout = len(self.hdd_list) > 1 and self.standby_time or idle
-				self.timer.start(timeout * 100, True) 
+				self.timer.start(timeout * 100, True)
 		else:
 			self.isSleeping = False
 		if string:

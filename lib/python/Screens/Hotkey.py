@@ -16,6 +16,7 @@ from Components.Pixmap import Pixmap
 from Components.Label import Label
 import os
 
+
 class hotkey:
 	functions = None
 	hotkeys = [(_("Red") + " " + _("long"), "red_long", ""),
@@ -44,7 +45,7 @@ class hotkey:
 		("Help", "displayHelp", ""),
 		("Help" + " " + _("long"), "displayHelp_long", ""),
 		("Subtitle", "subtitle", ""),
-		("Subtitle"+ " " + _("long"), "subtitle_long", ""),
+		("Subtitle" + " " + _("long"), "subtitle_long", ""),
 		("Menu", "mainMenu", ""),
 		("Info (EPG)", "info", "Infobar/openEventView"),
 		("Info (EPG)" + " " + _("long"), "info_long", "Infobar/showEventInfoPlugins"),
@@ -63,7 +64,7 @@ class hotkey:
 		("Channel up", "channelup", ""),
 		("Channel down", "channeldown", ""),
 		("Page up", "pageUp", ""),
-		("Page up"  + " " + _("long"), "pageUp_long", ""),
+		("Page up" + " " + _("long"), "pageUp_long", ""),
 		("Page down", "pageDown", ""),
 		("Page down" + " " + _("long"), "pageDown_long", ""),
 		("Next", "next", ""),
@@ -115,6 +116,7 @@ class hotkey:
 		("WWW Portal", "www", ""),
 		("WWW Portal" + " " + _("long"), "www_long", "")]
 
+
 def getHotkeyFunctions():
 	hotkey.functions = []
 	twinPlugins = []
@@ -127,7 +129,7 @@ def getHotkeyFunctions():
 				twinPaths[plugin.path[24:]] += 1
 			else:
 				twinPaths[plugin.path[24:]] = 1
-			hotkey.functions.append((plugin.name, plugin.path[24:] + "/" + str(twinPaths[plugin.path[24:]]) , "EPG"))
+			hotkey.functions.append((plugin.name, plugin.path[24:] + "/" + str(twinPaths[plugin.path[24:]]), "EPG"))
 			twinPlugins.append(plugin.name)
 	pluginlist = plugins.getPlugins([PluginDescriptor.WHERE_PLUGINMENU, PluginDescriptor.WHERE_EXTENSIONSMENU])
 	pluginlist.sort(key=lambda p: p.name)
@@ -137,7 +139,7 @@ def getHotkeyFunctions():
 				twinPaths[plugin.path[24:]] += 1
 			else:
 				twinPaths[plugin.path[24:]] = 1
-			hotkey.functions.append((plugin.name, plugin.path[24:] + "/" + str(twinPaths[plugin.path[24:]]) , "Plugins"))
+			hotkey.functions.append((plugin.name, plugin.path[24:] + "/" + str(twinPaths[plugin.path[24:]]), "Plugins"))
 			twinPlugins.append(plugin.name)
 	hotkey.functions.append((_("Main menu"), "Infobar/mainMenu", "InfoBar"))
 	hotkey.functions.append((_("Show help"), "Infobar/showHelp", "InfoBar"))
@@ -241,13 +243,16 @@ def getHotkeyFunctions():
 			x = x[:-3]
 			hotkey.functions.append((_("Shellscript") + " " + x, "Shellscript/" + x, "Shellscripts"))
 
+
 config.misc.hotkey = ConfigSubsection()
 config.misc.hotkey.additional_keys = ConfigYesNo(default=False)
 for x in hotkey.hotkeys:
 	exec "config.misc.hotkey.%s = ConfigText(default='%s')" % x[1:]
 
+
 class HotkeySetup(Screen):
 	ALLOW_SUSPEND = False
+
 	def __init__(self, session, args=None):
 		Screen.__init__(self, session)
 		self.session = session
@@ -256,7 +261,7 @@ class HotkeySetup(Screen):
 		self["description"] = Label()
 		self.list = []
 		for x in hotkey.hotkeys:
-			self.list.append(ChoiceEntryComponent('',(x[0], x[1])))
+			self.list.append(ChoiceEntryComponent('', (x[0], x[1])))
 		self["list"] = ChoiceList(list=self.list)
 		self["choosen"] = ChoiceList(list=[])
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "MenuActions"],
@@ -330,15 +335,16 @@ class HotkeySetup(Screen):
 			selected = []
 			for x in eval("config.misc.hotkey." + key + ".value.split(',')"):
 				if x.startswith("ZapPanic"):
-					selected.append(ChoiceEntryComponent('',((_("Panic to") + " " + ServiceReference(eServiceReference(x.split("/", 1)[1]).toString()).getServiceName()), x)))
+					selected.append(ChoiceEntryComponent('', ((_("Panic to") + " " + ServiceReference(eServiceReference(x.split("/", 1)[1]).toString()).getServiceName()), x)))
 				elif x.startswith("Zap"):
-					selected.append(ChoiceEntryComponent('',((_("Zap to") + " " + ServiceReference(eServiceReference(x.split("/", 1)[1]).toString()).getServiceName()), x)))
+					selected.append(ChoiceEntryComponent('', ((_("Zap to") + " " + ServiceReference(eServiceReference(x.split("/", 1)[1]).toString()).getServiceName()), x)))
 				else:
-					function = list(function for function in hotkey.functions if function[1] == x )
+					function = list(function for function in hotkey.functions if function[1] == x)
 					if function:
-						selected.append(ChoiceEntryComponent('',((function[0][0]), function[0][1])))
+						selected.append(ChoiceEntryComponent('', ((function[0][0]), function[0][1])))
 			self["choosen"].setList(selected)
 		self["description"].setText(_("Press or select button and then press 'OK' for attach next function or edit attached.") if len(selected) else _("Press or select button and then press 'OK' for attach function."))
+
 
 class HotkeySetupSelect(Screen):
 	def __init__(self, session, key, args=None):
@@ -360,13 +366,13 @@ class HotkeySetupSelect(Screen):
 		self.selected = []
 		for x in self.config.value.split(','):
 			if x.startswith("ZapPanic"):
-				self.selected.append(ChoiceEntryComponent('',((_("Panic to") + " " + ServiceReference(eServiceReference(x.split("/", 1)[1]).toString()).getServiceName()), x)))
+				self.selected.append(ChoiceEntryComponent('', ((_("Panic to") + " " + ServiceReference(eServiceReference(x.split("/", 1)[1]).toString()).getServiceName()), x)))
 			elif x.startswith("Zap"):
-				self.selected.append(ChoiceEntryComponent('',((_("Zap to") + " " + ServiceReference(eServiceReference(x.split("/", 1)[1]).toString()).getServiceName()), x)))
+				self.selected.append(ChoiceEntryComponent('', ((_("Zap to") + " " + ServiceReference(eServiceReference(x.split("/", 1)[1]).toString()).getServiceName()), x)))
 			else:
-				function = list(function for function in hotkey.functions if function[1] == x )
+				function = list(function for function in hotkey.functions if function[1] == x)
 				if function:
-					self.selected.append(ChoiceEntryComponent('',((function[0][0]), function[0][1])))
+					self.selected.append(ChoiceEntryComponent('', ((function[0][0]), function[0][1])))
 		text = _("Press 'OK' for attach next function or 'CH+/-' for edit attached.") if len(self.selected) else _("Press 'OK' for attach function.")
 		self.prevselected = self.selected[:]
 		if self.prevselected:
@@ -410,14 +416,14 @@ class HotkeySetupSelect(Screen):
 			catagories[function[2]].append(function)
 		for catagorie in sorted(list(catagories)):
 			if catagorie in self.expanded:
-				functionslist.append(ChoiceEntryComponent('expanded',((catagorie), "Expander")))
+				functionslist.append(ChoiceEntryComponent('expanded', ((catagorie), "Expander")))
 				for function in catagories[catagorie]:
-					functionslist.append(ChoiceEntryComponent('verticalline',((function[0]), function[1])))
+					functionslist.append(ChoiceEntryComponent('verticalline', ((function[0]), function[1])))
 				if catagorie == "InfoBar":
-					functionslist.append(ChoiceEntryComponent('verticalline',((_("Zap to")), "Zap")))
-					functionslist.append(ChoiceEntryComponent('verticalline',((_("Panic to")), "ZapPanic")))
+					functionslist.append(ChoiceEntryComponent('verticalline', ((_("Zap to")), "Zap")))
+					functionslist.append(ChoiceEntryComponent('verticalline', ((_("Panic to")), "ZapPanic")))
 			else:
-				functionslist.append(ChoiceEntryComponent('expandable',((catagorie), "Expander")))
+				functionslist.append(ChoiceEntryComponent('expandable', ((catagorie), "Expander")))
 		return functionslist
 
 	def description(self, msg=""):
@@ -493,7 +499,7 @@ class HotkeySetupSelect(Screen):
 	def zaptoCallback(self, *args):
 		if args:
 			currentSelected = self["list"].l.getCurrentSelection()[:]
-			currentSelected[1]=currentSelected[1][:-1] + (currentSelected[0][0] + " " + ServiceReference(args[0]).getServiceName(),)
+			currentSelected[1] = currentSelected[1][:-1] + (currentSelected[0][0] + " " + ServiceReference(args[0]).getServiceName(),)
 			self.selected.append([(currentSelected[0][0], currentSelected[0][1] + "/" + args[0].toString()), currentSelected[1]])
 
 	def keyLeft(self):
@@ -541,6 +547,7 @@ class HotkeySetupSelect(Screen):
 	def cancelCallback(self, answer):
 		answer and self.close(None)
 
+
 class hotkeyActionMap(ActionMap):
 	def action(self, contexts, action):
 		if action in tuple(x[1] for x in hotkey.hotkeys) and action in self.actions:
@@ -550,6 +557,7 @@ class hotkeyActionMap(ActionMap):
 			return 1
 		else:
 			return ActionMap.action(self, contexts, action)
+
 
 class helpableHotkeyActionMap(HelpableActionMap):
 	def action(self, contexts, action):
@@ -561,12 +569,13 @@ class helpableHotkeyActionMap(HelpableActionMap):
 		else:
 			return ActionMap.action(self, contexts, action)
 
+
 class InfoBarHotkey():
 	def __init__(self):
 		if not hotkey.functions:
 			getHotkeyFunctions()
 		self["HotkeyButtonActions"] = helpableHotkeyActionMap(self, "HotkeyActions",
-			dict((x[1],(self.hotkeyGlobal, boundFunction(self.getHelpText, x[1]))) for x in hotkey.hotkeys), -10)
+			dict((x[1], (self.hotkeyGlobal, boundFunction(self.getHelpText, x[1]))) for x in hotkey.hotkeys), -10)
 
 	def getKeyFunctions(self, key):
 		if key in ("play", "playpause", "Stop", "stop", "pause", "rewind", "next", "previous", "fastforward", "skip_back", "skip_forward") and (self.__class__.__name__ == "MoviePlayer" or hasattr(self, "timeshiftActivated") and self.timeshiftActivated()):
@@ -579,7 +588,7 @@ class InfoBarHotkey():
 			elif x.startswith("Zap"):
 				selected.append(((_("Zap to") + " " + ServiceReference(eServiceReference(x.split("/", 1)[1]).toString()).getServiceName()), x))
 			else:
-				function = list(function for function in hotkey.functions if function[1] == x )
+				function = list(function for function in hotkey.functions if function[1] == x)
 				if function:
 					selected.append(function[0])
 		return selected
@@ -646,9 +655,9 @@ class InfoBarHotkey():
 			elif selected[0] == "Module":
 				try:
 					exec "from %s import %s" % (selected[1], selected[2])
-					exec "self.session.open(%s)" %  ",".join(selected[2:])
+					exec "self.session.open(%s)" % ",".join(selected[2:])
 				except Exception as e:
-					print "[Hotkey] error during executing module %s, screen %s, %s" % (selected[1], selected[2], e)					
+					print "[Hotkey] error during executing module %s, screen %s, %s" % (selected[1], selected[2], e)
 					import traceback
 					traceback.print_exc()
 			elif selected[0] == "SoftcamSetup" and SystemInfo["HasSoftcamInstalled"]:
@@ -662,7 +671,7 @@ class InfoBarHotkey():
 					self.servicelist.history = []
 					self.pipShown() and self.showPiP()
 				self.servicelist.servicelist.setCurrent(eServiceReference("/".join(selected[1:])))
-				self.servicelist.zap(enable_pipzap = True)
+				self.servicelist.zap(enable_pipzap=True)
 				if hasattr(self, "lastservice"):
 					self.lastservice = eServiceReference("/".join(selected[1:]))
 					self.close()

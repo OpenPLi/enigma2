@@ -1,13 +1,19 @@
-import threading, urllib2, os, shutil, tempfile
+import threading
+import urllib2
+import os
+import shutil
+import tempfile
 from json import loads
 from enigma import eDVBDB, eEPGCache
 from Screens.MessageBox import MessageBox
 from config import config, ConfigText
 from Tools import Notifications
 from base64 import encodestring
+from urllib import quote
 import xml.etree.ElementTree as et
 
 settingfiles = ('lamedb', 'bouquets.', 'userbouquet.', 'blacklist', 'whitelist', 'alternatives.')
+
 
 class ImportChannels():
 
@@ -95,8 +101,9 @@ class ImportChannels():
 					file = file.encode("UTF-8")
 					print "[Import Channels] Downloading %s" % file
 					try:
-						open(os.path.join(self.tmp_dir, os.path.basename(file)), "wb").write(self.getUrl("%s/file?file=%s" % (self.url, file)).read())
-					except:
+						open(os.path.join(self.tmp_dir, os.path.basename(file)), "wb").write(self.getUrl("%s/file?file=%s" % (self.url, quote(file))).read())
+					except Exception, e:
+						print "[Import Channels] Exception: %s" % str(e)
 						self.ImportChannelsDone(False, _("ERROR downloading file %s") % file)
 						return
 			except:

@@ -4,6 +4,7 @@ from enigma import iPlayableService
 from Components.Element import cached, ElementError
 from time import localtime, strftime, time
 
+
 class ServicePosition(Poll, Converter, object):
 	TYPE_LENGTH = 0
 	TYPE_POSITION = 1
@@ -100,7 +101,7 @@ class ServicePosition(Poll, Converter, object):
 				s = self.position / 90000
 				e = (self.length / 90000) - s
 				if self.type == self.TYPE_SUMMARY:
-					return "%02d:%02d +%2dm" % (s/60, s%60, e/60)
+					return "%02d:%02d +%2dm" % (s / 60, s % 60, e / 60)
 				start_time = strftime("%H:%M", localtime(time() - s))
 				end_time = strftime("%H:%M", localtime(time() + e))
 				if self.start_time is None:
@@ -128,27 +129,27 @@ class ServicePosition(Poll, Converter, object):
 				if not self.vfd:
 					if self.showHours:
 						if self.showNoSeconds:
-							return sign + "%d:%02d" % (l/3600, l%3600/60)
+							return sign + "%d:%02d" % (l / 3600, l % 3600 / 60)
 						else:
-							return sign + "%d:%02d:%02d" % (l/3600, l%3600/60, l%60)
+							return sign + "%d:%02d:%02d" % (l / 3600, l % 3600 / 60, l % 60)
 					else:
 						if self.showNoSeconds:
-							return sign + "%d" % (l/60)
+							return sign + "%d" % (l / 60)
 						else:
-							return sign + "%d:%02d" % (l/60, l%60)
+							return sign + "%d:%02d" % (l / 60, l % 60)
 				else:
-					f = l/60
+					f = l / 60
 					if f < 60:
-						s = l%60
+						s = l % 60
 					else:
 						f /= 60
-						s = l%3600/60
+						s = l % 3600 / 60
 					return "%2d:%02d" % (f, s)
 			else:
 				if self.showHours:
-					return sign + "%d:%02d:%02d:%03d" % ((l/3600/90000), (l/90000)%3600/60, (l/90000)%60, (l%90000)/90)
+					return sign + "%d:%02d:%02d:%03d" % ((l / 3600 / 90000), (l / 90000) % 3600 / 60, (l / 90000) % 60, (l % 90000) / 90)
 				else:
-					return sign + "%d:%02d:%03d" % ((l/60/90000), (l/90000)%60, (l%90000)/90)
+					return sign + "%d:%02d:%03d" % ((l / 60 / 90000), (l / 90000) % 60, (l % 90000) / 90)
 
 	# range/value are for the Progress renderer
 	range = 10000

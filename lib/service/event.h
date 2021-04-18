@@ -88,6 +88,7 @@ class eServiceEvent: public iObject
 	int m_pdc_pil;
 	int m_running_status;
 	std::string m_event_name, m_short_description, m_extended_description, m_tmp_extended_description, m_extended_description_items;
+	std::string m_series_crid, m_episode_crid;
 	static std::string m_language, m_language_alternative;
 	// .. additional info
 public:
@@ -108,6 +109,8 @@ public:
 	std::string getShortDescription() const { return m_short_description; }
 	std::string getExtendedDescription() const { return m_extended_description; }
 	std::string getBeginTimeString() const;
+	std::string getSeriesCrid() const { return m_series_crid; }
+	std::string getEpisodeCrid() const { return m_episode_crid; }
 	SWIG_VOID(RESULT) getComponentData(ePtr<eComponentData> &SWIG_OUTPUT, int tagnum) const;
 	PyObject *getComponentData() const;
 	int getNumOfLinkageServices() const { return m_linkage_services.size(); }

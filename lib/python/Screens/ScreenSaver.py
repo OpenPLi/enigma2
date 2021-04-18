@@ -5,8 +5,10 @@ from Components.Pixmap import Pixmap
 from Components.config import config
 import Screens.Standby
 from enigma import ePoint, eTimer, iPlayableService, eActionMap
-import os, random
+import os
+import random
 from sys import maxint
+
 
 class InfoBarScreenSaver:
 	def __init__(self):
@@ -58,6 +60,7 @@ class InfoBarScreenSaver:
 			self.ScreenSaverTimerStart()
 			eActionMap.getInstance().unbindAction('', self.keypressScreenSaver)
 
+
 class Screensaver(Screen):
 	def __init__(self, session):
 
@@ -74,8 +77,7 @@ class Screensaver(Screen):
 		self.onShow.append(self.__onShow)
 		self.onHide.append(self.__onHide)
 
-		self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
-			{
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evStart: self.serviceStarted
 			})
 
@@ -104,7 +106,7 @@ class Screensaver(Screen):
 					self.hide()
 
 	def doMovePicture(self):
-		self.posx = random.randint(1,self.maxx)
-		self.posy = random.randint(1,self.maxy)
+		self.posx = random.randint(1, self.maxx)
+		self.posy = random.randint(1, self.maxy)
 		self["picture"].instance.move(ePoint(self.posx, self.posy))
 		self.moveLogoTimer.startLongTimer(5)

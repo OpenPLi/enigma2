@@ -5,6 +5,7 @@ from Components.NimManager import nimmanager
 from skin import parameters
 from Tools.Hex2strColor import Hex2strColor
 
+
 class FrontendInfo(Converter):
 	BER = 0
 	SNR = 1
@@ -78,7 +79,7 @@ class FrontendInfo(Converter):
 						continue
 					if string and len(nimmanager.nim_slots) <= self.space_for_tuners_with_spaces:
 						string += " "
-					string += color + chr(ord("A")+n.slot)
+					string += color + chr(ord("A") + n.slot)
 			return string
 		if self.type == self.USE_TUNERS_STRING:
 			string = ""
@@ -115,7 +116,7 @@ class FrontendInfo(Converter):
 		elif self.type == self.AGC:
 			return self.source.agc is not None
 		elif self.type in (self.STRING, self.USE_TUNERS_STRING):
-			return bool(self.getText())	
+			return bool(self.getText())
 
 	text = property(getText)
 

@@ -157,7 +157,19 @@ OpenTvTitle::OpenTvTitle(const uint8_t * const buffer, uint16_t startMjd)
 		uint8_t descriptor_length = buffer[1];
 		uint8_t titleLength = descriptor_length > 7 ? descriptor_length-7 : 0;
 
-		startTimeBcd = (((startMjd - 40587) * 86400) + (UINT16(&buffer[2]) << 1));
+		uint32_t startSecond = (UINT16(&buffer[2]) << 1);
+
+		startTimeBcd = ((startMjd - 40587) * 86400) + startSecond;
+
+		// HACK ALERT: There is a bug somewhere in the data that causes some
+		// events to be cataloged 0x20000 seconds further into the future
+		// than they should be. In these cases "startSecond" will have a value
+		// of 86400 seconds or greater. i.e. more than one day. When this
+		// happens it indicates that the bug is present for the current event
+		// and therefore the excess 0x20000 seconds is removed from "startTimeBcd".
+		if (startSecond >= 86400)
+			startTimeBcd -= 0x20000;
+
 		duration = UINT16(&buffer[4]) << 1;
 
 		//genre content
@@ -212,7 +224,7 @@ uint16_t OpenTvTitle::getEventId(void) const
 	return eventId;
 }
 
-uint16_t OpenTvTitle::getDuration(void) const
+uint32_t OpenTvTitle::getDuration(void) const
 {
 	return duration;
 }

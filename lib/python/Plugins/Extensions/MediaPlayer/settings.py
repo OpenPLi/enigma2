@@ -15,6 +15,7 @@ config.mediaplayer.sortPlaylists = ConfigYesNo(default=False)
 config.mediaplayer.alwaysHideInfoBar = ConfigYesNo(default=True)
 config.mediaplayer.onMainMenu = ConfigYesNo(default=False)
 
+
 class DirectoryBrowser(Screen, HelpableScreen):
 
 	def __init__(self, session, currDir):
@@ -53,6 +54,7 @@ class DirectoryBrowser(Screen, HelpableScreen):
 
 	def exit(self):
 		self.close(False)
+
 
 class MediaPlayerSettings(Screen, ConfigListScreen):
 

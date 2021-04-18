@@ -8,6 +8,7 @@ from Components.config import config
 from Components.NimManager import nimmanager as nimmgr
 from Components.Sources.StaticText import StaticText
 
+
 class SecParameterSetup(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -48,7 +49,7 @@ class SecParameterSetup(Screen, ConfigListScreen):
 			(_("Motor command retries"), config.sec.motor_command_retries),
 			(_("Unicable delay after enable voltage before switch command"), config.sec.unicable_delay_after_enable_voltage_before_switch_command),
 			(_("Unicable delay after change voltage before switch command"), config.sec.unicable_delay_after_change_voltage_before_switch_command),
-			(_("Unicable delay after last diseqc command"), config.sec.unicable_delay_after_last_diseqc_command) ]
+			(_("Unicable delay after last diseqc command"), config.sec.unicable_delay_after_last_diseqc_command)]
 		ConfigListScreen.__init__(self, [])
 		self.createSetup()
 
@@ -61,11 +62,13 @@ class SecParameterSetup(Screen, ConfigListScreen):
 			secItem[1].value = secItem[1].default
 		self.createSetup() # force new values to show
 
+
 def SecSetupMain(session, **kwargs):
 	def confirmed(answer):
 		if answer is True:
 			session.open(SecParameterSetup)
 	session.openWithCallback(confirmed, MessageBox, _("Please do not change any values unless you know what you are doing!"), MessageBox.TYPE_INFO)
+
 
 def SecSetupStart(menuid):
 	# other menu than "scan"?
@@ -78,6 +81,7 @@ def SecSetupStart(menuid):
 			return [(_("Satellite equipment setup"), SecSetupMain, "satellite_equipment_setup", None)]
 
 	return []
+
 
 def Plugins(**kwargs):
 	if nimmgr.hasNimType("DVB-S"):

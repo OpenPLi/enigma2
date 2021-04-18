@@ -11,6 +11,7 @@ config.misc.pluginlist = ConfigSubsection()
 config.misc.pluginlist.eventinfo_order = ConfigText(default="")
 config.misc.pluginlist.extension_order = ConfigText(default="")
 
+
 class ChoiceBox(Screen):
 	def __init__(self, session, title="", list=[], keys=None, selection=0, skin_name=[], reorderConfig="", windowTitle=None):
 		Screen.__init__(self, session)
@@ -26,7 +27,7 @@ class ChoiceBox(Screen):
 		self.list = []
 		self.summarylist = []
 		if keys is None:
-			self.__keys = [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "red", "green", "yellow", "blue" ] + (len(list) - 14) * ["dummy"]
+			self.__keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "red", "green", "yellow", "blue"] + (len(list) - 14) * ["dummy"]
 		else:
 			self.__keys = keys + (len(list) - len(keys)) * ["dummy"]
 
@@ -49,20 +50,20 @@ class ChoiceBox(Screen):
 				for x in self.__keys:
 					if (not x or x.isdigit()) and number <= 10:
 						new_keys.append(str(number % 10))
-						number+=1
+						number += 1
 					else:
 						new_keys.append(not x.isdigit() and x or "")
 				self.__keys = new_keys
 		for x in list:
 			if x:
 				strpos = str(self.__keys[pos])
-				self.list.append(ChoiceEntryComponent(key = strpos, text = x))
+				self.list.append(ChoiceEntryComponent(key=strpos, text=x))
 				if self.__keys[pos] != "":
 					self.keymap[self.__keys[pos]] = list[pos]
-				self.summarylist.append((self.__keys[pos],x[0]))
+				self.summarylist.append((self.__keys[pos], x[0]))
 				pos += 1
 
-		self["list"] = ChoiceList(list = self.list, selection = selection)
+		self["list"] = ChoiceList(list=self.list, selection=selection)
 		self["summary_list"] = StaticText()
 		self["summary_selection"] = StaticText()
 		self.updateSummary(selection)
@@ -98,6 +99,7 @@ class ChoiceBox(Screen):
 	def autoResize(self):
 		def x_offset():
 			return max([line[1][1] for line in self["list"].list])
+
 		def x_width(textsize):
 			def getListLineTextWidth(text):
 				self["autoresize"].setText(text)
@@ -110,7 +112,7 @@ class ChoiceBox(Screen):
 					self["description"].setText(text[2])
 					return self["description"].instance.calculateSize().height()
 				return 0
-			return max([getDescrLineHeight(line[0]) for line in self["list"].list ])
+			return max([getDescrLineHeight(line[0]) for line in self["list"].list])
 
 		textsize = self["text"].getSize()
 		count = len(self.list)
@@ -132,8 +134,8 @@ class ChoiceBox(Screen):
 		# resize list
 		self["list"].instance.resize(enigma.eSize(*(wsizex, offset)))
 		# center window
-		width,height = enigma.getDesktop(0).size().width(), enigma.getDesktop(0).size().height()
-		self.instance.move(enigma.ePoint((width - wsizex)/2,(height - wsizey)/2))
+		width, height = enigma.getDesktop(0).size().width(), enigma.getDesktop(0).size().height()
+		self.instance.move(enigma.ePoint((width - wsizex) / 2, (height - wsizey) / 2))
 
 	def keyLeft(self):
 		pass
@@ -212,7 +214,7 @@ class ChoiceBox(Screen):
 		pos = 0
 		summarytext = ""
 		for entry in self.summarylist:
-			if curpos-2 < pos < curpos+5:
+			if curpos - 2 < pos < curpos + 5:
 				if pos == curpos:
 					summarytext += ">"
 					self["summary_selection"].setText(entry[1])

@@ -1,9 +1,10 @@
 from xml.etree.cElementTree import parse
-from enigma import eDVBCIInterfaces, eDVBCI_UI, eEnv, eServiceCenter, eServiceReference, getBestPlayableServiceReference, iRecordableService 
+from enigma import eDVBCIInterfaces, eDVBCI_UI, eEnv, eServiceCenter, eServiceReference, getBestPlayableServiceReference, iRecordableService
 from Components.SystemInfo import SystemInfo
 from Components.config import config
 import NavigationInstance
 import os
+
 
 class CIHelper:
 
@@ -18,9 +19,10 @@ class CIHelper:
 		NUM_CI = SystemInfo["CommonInterface"]
 		if NUM_CI and NUM_CI > 0:
 			self.CI_ASSIGNMENT_LIST = []
+
 			def getValue(definitions, default):
 				Len = len(definitions)
-				return Len > 0 and definitions[Len-1].text or default
+				return Len > 0 and definitions[Len - 1].text or default
 
 			for ci in range(NUM_CI):
 				filename = eEnv.resolve("${sysconfdir}/enigma2/ci") + str(ci) + ".xml"
@@ -70,7 +72,7 @@ class CIHelper:
 			if self.CI_ASSIGNMENT_LIST:
 				for item in self.CI_ASSIGNMENT_LIST:
 					try:
-						eDVBCIInterfaces.getInstance().setDescrambleRules(item[0],item[1])
+						eDVBCIInterfaces.getInstance().setDescrambleRules(item[0], item[1])
 						print "[CI_ASSIGNMENT %d] activate with following settings" % item[0]
 					except:
 						print "[CI_ASSIGNMENT %d] ERROR setting DescrambleRules" % item[0]
@@ -116,7 +118,7 @@ class CIHelper:
 						provider_services_refs.append(service.toString())
 		return provider_services_refs
 
-	def ServiceIsAssigned(self, ref, timer=None): 
+	def ServiceIsAssigned(self, ref, timer=None):
 		if self.CI_ASSIGNMENT_SERVICES_LIST is not None:
 			if self.CI_RECORDS_LIST is None and NavigationInstance.instance and hasattr(NavigationInstance.instance, "RecordTimer") and hasattr(NavigationInstance.instance, "record_event"):
 				NavigationInstance.instance.record_event.append(self.ciRecordEvent)
@@ -185,7 +187,9 @@ class CIHelper:
 				return 0
 		return 1
 
+
 cihelper = CIHelper()
+
 
 def isPlayable(service):
 	ret = cihelper.isPlayable(service)

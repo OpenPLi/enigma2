@@ -3,6 +3,7 @@
 #include <png.h>
 #include <stdio.h>
 #include <lib/base/cfile.h>
+#include <lib/base/wrappers.h>
 #include <lib/gdi/epng.h>
 #include <lib/gdi/pixmapcache.h>
 #include <unistd.h>
@@ -362,14 +363,13 @@ static int savePNGto(FILE *fp, gPixmap *pixmap)
 	return 0;
 }
 
-int loadSVG(ePtr<gPixmap> &result, const char *filename, int cached, int height, int width)
+int loadSVG(ePtr<gPixmap> &result, const char *filename, int cached, int width, int height, float scale)
 {
 	result = nullptr;
 
 	if (cached && (result = PixmapCache::Get(filename)))
 		return 0;
 
-	// load svg
 	NSVGimage *image = nullptr;
 	NSVGrasterizer *rast = nullptr;
 	double xscale = 1.0;
@@ -377,9 +377,7 @@ int loadSVG(ePtr<gPixmap> &result, const char *filename, int cached, int height,
 
 	image = nsvgParseFromFile(filename, "px", 96.0);
 	if (image == nullptr)
-	{
 		return 0;
-	}
 
 	rast = nsvgCreateRasterizer();
 	if (rast == nullptr)
@@ -388,18 +386,37 @@ int loadSVG(ePtr<gPixmap> &result, const char *filename, int cached, int height,
 		return 0;
 	}
 
-	if (height > 0 && width > 0)
+	if (height > 0)
+		yscale = ((double) height) / image->height;
+
+	if (width > 0)
 	{
 		xscale = ((double) width) / image->width;
-		yscale = ((double) height) / image->height;
+		if (height <= 0)
+		{
+			yscale = xscale;
+			height = (int)(image->height * yscale);
+		}
+	}
+	else if (height > 0)
+	{
+		xscale = yscale;
+		width = (int)(image->width * xscale);
+	}
+	else if (scale > 0)
+	{
+		xscale = (double) scale;
+		yscale = (double) scale;
+		width = (int)(image->width * scale);
+		height = (int)(image->height * scale);
 	}
 	else
 	{
-		width = image->width;
-		height = image->height;
+		width = (int)image->width;
+		height = (int)image->height;
 	}
 
-	result = new gPixmap(width, height, 32, cached ? PixmapCache::PixmapDisposed : NULL);
+	result = new gPixmap(width, height, 32, cached ? PixmapCache::PixmapDisposed : NULL, -1);
 	if (result == nullptr)
 	{
 		nsvgDeleteRasterizer(rast);
@@ -407,15 +424,27 @@ int loadSVG(ePtr<gPixmap> &result, const char *filename, int cached, int height,
 		return 0;
 	}
 
-	eDebug("[ePNG] loadSVG %s=%dx%d", filename, width, height);
+	eDebug("[ePNG] loadSVG %s %dx%d from %dx%d", filename, width, height, (int)image->width, (int)image->height);
 	// Rasterizes SVG image, returns RGBA image (non-premultiplied alpha)
-	nsvgRasterizeFull(rast, image, 0, 0, xscale, yscale, (unsigned char*)result->surface->data, width, height, width * 4);
+	nsvgRasterizeFull(rast, image, 0, 0, xscale, yscale, (unsigned char*)result->surface->data, width, height, width * 4, 1);
 
 	if (cached)
 		PixmapCache::Set(filename, result);
 
 	nsvgDeleteRasterizer(rast);
 	nsvgDelete(image);
+
+	return 0;
+}
+
+int loadImage(ePtr<gPixmap> &result, const char *filename, int accel, int width, int height)
+{
+	if (endsWith(filename, ".png"))
+		return loadPNG(result, filename, accel, 1);
+	else if (endsWith(filename, ".svg"))
+		return loadSVG(result, filename, 1, width, height, 0);
+	else if (endsWith(filename, ".jpg"))
+		return loadJPG(result, filename, 0);
 
 	return 0;
 }
