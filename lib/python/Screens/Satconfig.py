@@ -149,10 +149,10 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 					pass
 				elif self.nimConfig.configMode.value == "advanced":
 					advanced_setchoices = False
-					advanced_satposdepends_satlist_choices = ("3607", _("Additional cable of motorized LNB"), 1)
+					advanced_satposdepends_satlist_choices = ("3607", _("Additional cable of motorized LNB"))
 					advanced_satlist_choices = self.nimConfig.advanced.sats.choices.choices[:]
 					if self.nim.isFBCLink() and ("3602", _('All satellites 2 (USALS)')) in advanced_satlist_choices:
-						advanced_satlist_choices = nimmanager.satList[:]
+						advanced_satlist_choices = [(str(orbpos), desc) for (orbpos, desc, flags) in nimmanager.satList[:]]
 						advanced_setchoices = True
 					if nimmanager.canDependOn(self.slotid, advanced_satposdepends=self.nim.isFBCLink() and "fbc" or "all"):
 						if advanced_satposdepends_satlist_choices not in advanced_satlist_choices:
@@ -162,12 +162,10 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 						advanced_satlist_choices.remove(advanced_satposdepends_satlist_choices)
 						advanced_setchoices = True
 					if advanced_setchoices:
-						default_orbpos = None
-						for x in self.nimConfig.advanced.sat.keys():
-							if x == 192:
-								default_orbpos = str(x)
-								break
-						self.nimConfig.advanced.sats.setChoices(advanced_satlist_choices, default=default_orbpos)
+						saved_value = self.nimConfig.advanced.sats.saved_value
+						self.nimConfig.advanced.sats.setChoices(advanced_satlist_choices, default = saved_value is not None and saved_value or self.nimConfig.advanced.sats.value)
+						if saved_value is not None:
+							self.nimConfig.advanced.sats.value = saved_value
 					self.advancedSatsEntry = getConfigListEntry(self.indent % _("Satellite"), self.nimConfig.advanced.sats, _("Select the satellite you want to configure. Once that satellite is configured you can select and configure other satellites that will be accessed using this same tuner."))
 					self.list.append(self.advancedSatsEntry)
 					current_config_sats = self.nimConfig.advanced.sats.value
