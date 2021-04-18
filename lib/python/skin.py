@@ -32,9 +32,9 @@ colors = {  # Dictionary of skin color names.
 	"key_text": gRGB(0x00ffffff),
 	"key_yellow": gRGB(0x00a08500)
 }
+BodyFont = ("Regular", 20, 24, 18) # font which is used when a font alias definition is missing from the "fonts" dict.
 fonts = {  # Dictionary of predefined and skin defined font aliases.
-	"Body": ("Regular", 18, 22, 16),
-	"ChoiceList": ("Regular", 20, 24, 18)
+	"Body": BodyFont
 }
 menus = {}  # Dictionary of images associated with menu entries.
 parameters = {}  # Dictionary of skin parameters used to modify code behavior.
@@ -190,8 +190,7 @@ def reloadSkins():
 	}
 	fonts.clear()
 	fonts = {
-		"Body": ("Regular", 18, 22, 16),
-		"ChoiceList": ("Regular", 20, 24, 18)
+		"Body": BodyFont
 	}
 	menus.clear()
 	parameters.clear()
@@ -720,64 +719,57 @@ def loadSingleSkinData(desktop, screenID, domSkin, pathSkin, scope=SCOPE_CURRENT
 				desktop.resize(eSize(xres, yres))
 				if bpp != 32:
 					pass  # Load palette (Not yet implemented!)
-				if yres >= 1080:
-					parameters["AboutHddSplit"] = 1
-					parameters["AutotimerListChannels"] = (2, 60, 4, 32)
-					parameters["AutotimerListDays"] = (1, 40, 5, 25)
-					parameters["AutotimerListHasTimespan"] = (154, 4, 150, 25)
-					parameters["AutotimerListIcon"] = (3, -1, 36, 36)
-					parameters["AutotimerListRectypeicon"] = (39, 4, 30, 30)
-					parameters["AutotimerListTimerName"] = (76, 4, 26, 32)
-					parameters["AutotimerListTimespan"] = (2, 40, 5, 25)
-					parameters["ChoicelistDash"] = (0, 3, 1000, 30)
-					parameters["ChoicelistIcon"] = (7, 0, 52, 38)
-					parameters["ChoicelistName"] = (68, 3, 1000, 32)
-					parameters["ChoicelistNameSingle"] = (7, 3, 1000, 32)
-					parameters["ConfigListSeperator"] = 500
-					parameters["DreamexplorerIcon"] = (15, 4, 30, 30)
-					parameters["DreamexplorerName"] = (62, 0, 1200, 38)
-					parameters["FileListIcon"] = (7, 4, 52, 37)
-					parameters["FileListMultiIcon"] = (45, 4, 30, 30)
-					parameters["FileListMultiLock"] = (2, 0, 36, 36)
-					parameters["FileListMultiName"] = (90, 3, 1000, 32)
-					parameters["FileListName"] = (68, 4, 1000, 34)
-					parameters["HelpMenuListExtHlp0"] = (0, 0, 900, 39)
-					parameters["HelpMenuListExtHlp1"] = (0, 42, 900, 30)
-					parameters["HelpMenuListHlp"] = (0, 0, 900, 42)
-					parameters["PartnerBoxBouquetListName"] = (0, 0, 45)
-					parameters["PartnerBoxChannelListName"] = (0, 0, 45)
-					parameters["PartnerBoxChannelListTime"] = (0, 78, 225, 30)
-					parameters["PartnerBoxChannelListTitle"] = (0, 42, 30)
-					parameters["PartnerBoxE1TimerState"] = (255, 78, 255, 30)
-					parameters["PartnerBoxE1TimerTime"] = (0, 78, 255, 30)
-					parameters["PartnerBoxE2TimerIcon"] = (1050, 8, 20, 20)
-					parameters["PartnerBoxE2TimerIconRepeat"] = (1050, 38, 20, 20)
-					parameters["PartnerBoxE2TimerState"] = (225, 78, 225, 30)
-					parameters["PartnerBoxE2TimerTime"] = (0, 78, 225, 30)
-					parameters["PartnerBoxEntryListIP"] = (180, 2, 225, 38)
-					parameters["PartnerBoxEntryListName"] = (8, 2, 225, 38)
-					parameters["PartnerBoxEntryListPort"] = (405, 2, 150, 38)
-					parameters["PartnerBoxEntryListType"] = (615, 2, 150, 38)
-					parameters["PartnerBoxTimerName"] = (0, 42, 30)
-					parameters["PartnerBoxTimerServicename"] = (0, 0, 45)
-					parameters["PicturePlayerThumb"] = (30, 285, 45, 300, 30, 25)
-					parameters["PlayListIcon"] = (7, 7, 24, 24)
-					parameters["PlayListName"] = (38, 2, 1000, 34)
-					parameters["PluginBrowserDescr"] = (180, 42, 25)
-					parameters["PluginBrowserDownloadDescr"] = (120, 42, 25)
-					parameters["PluginBrowserDownloadIcon"] = (15, 0, 90, 76)
-					parameters["PluginBrowserDownloadName"] = (120, 8, 38)
-					parameters["PluginBrowserIcon"] = (15, 8, 150, 60)
-					parameters["PluginBrowserName"] = (180, 8, 38)
-					parameters["SHOUTcastListItem"] = (30, 27, 35, 96, 35, 33, 60, 32)
-					parameters["SelectionListDescr"] = (45, 6, 1000, 45)
-					parameters["SelectionListLock"] = (0, 2, 36, 36)
-					parameters["ServiceInfoLeft"] = (0, 0, 450, 45)
-					parameters["ServiceInfoRight"] = (450, 0, 1000, 45)
-					parameters["VirtualKeyBoard"] = (68, 68)
-					parameters["VirtualKeyBoardAlignment"] = (0, 0)
-					parameters["VirtualKeyBoardPadding"] = (7, 7)
-					parameters["VirtualKeyBoardShiftColors"] = (0x00ffffff, 0x00ffffff, 0x0000ffff, 0x00ff00ff)
+
+				fonts["Body"] = applySkinFactor(*BodyFont)
+
+				# Only add font aliases here for lists that are not part of enigma2 repo.
+				# Font aliases for modules in this repository should be dealt with directly in the corresponding py, not here.
+				fonts["Dreamexplorer"] = fonts["Body"]
+				fonts["ExpandableList"] = fonts["Body"]
+				fonts["ImsSelectionList"] = applySkinFactor("Regular", 22, 30)
+				fonts["PartnerBoxBouquetList0"] = applySkinFactor("Regular", 20, 30)
+				fonts["PartnerBoxBouquetList1"] = applySkinFactor("Regular", 18)
+				fonts["PartnerBoxChannelList0"] = applySkinFactor("Regular", 20, 70)
+				fonts["PartnerBoxChannelList1"] = applySkinFactor("Regular", 18)
+				fonts["PartnerBoxChannelEPGList0"] = applySkinFactor("Regular", 22, 30)
+				fonts["PartnerBoxE2TimerMenu0"] = applySkinFactor("Regular", 20, 70)
+				fonts["PartnerBoxE2TimerMenu1"] = applySkinFactor("Regular", 18)
+				fonts["PartnerBoxEntryList0"] = applySkinFactor("Regular", 20, 30)
+				fonts["PartnerBoxEntryList1"] = applySkinFactor("Regular", 18)
+
+				# Only add parameters here for lists that are not part of enigma2 repo.
+				# Parameters for modules in this repository should be dealt with directly in the corresponding py, not here.
+				parameters["AutotimerListChannels"] = applySkinFactor(2, 40, 3, 21)
+				parameters["AutotimerListDays"] = applySkinFactor(1, 26, 3, 17)
+				parameters["AutotimerListHasTimespan"] = applySkinFactor(103, 3, 100, 17)
+				parameters["AutotimerListIcon"] = applySkinFactor(2, -1, 24, 24)
+				parameters["AutotimerListRectypeicon"] = applySkinFactor(26, 3, 20, 20)
+				parameters["AutotimerListTimerName"] = applySkinFactor(50, 3, 18, 21)
+				parameters["AutotimerListTimespan"] = applySkinFactor(2, 26, 3, 17)
+				parameters["DreamexplorerIcon"] = applySkinFactor(12, 3, 20, 20)
+				parameters["DreamexplorerName"] = applySkinFactor(40, 2, 1000, 22)
+				parameters["ExpandableListCategory"] = applySkinFactor(45, 0, 655, 25)
+				parameters["ExpandableListIcon"] = applySkinFactor(5, 0, 30, 25)
+				parameters["ExpandableListItem"] = applySkinFactor(80, 3, 620, 25)
+				parameters["ExpandableListLock"] = applySkinFactor(45, 1, 25, 24)
+				parameters["PartnerBoxBouquetListName"] = applySkinFactor(0, 0, 30)
+				parameters["PartnerBoxChannelListName"] = applySkinFactor(0, 0, 30)
+				parameters["PartnerBoxChannelListTime"] = applySkinFactor(0, 50, 150, 20)
+				parameters["PartnerBoxChannelListTitle"] = applySkinFactor(0, 30, 20)
+				parameters["PartnerBoxE1TimerState"] = applySkinFactor(170, 50, 170, 20)
+				parameters["PartnerBoxE1TimerTime"] = applySkinFactor(0, 50, 170, 20)
+				parameters["PartnerBoxE2TimerIcon"] = applySkinFactor(510, 5, 20, 20)
+				parameters["PartnerBoxE2TimerIconRepeat"] = applySkinFactor(510, 30, 20, 20)
+				parameters["PartnerBoxE2TimerState"] = applySkinFactor(150, 50, 150, 20)
+				parameters["PartnerBoxE2TimerTime"] = applySkinFactor(0, 50, 150, 20)
+				parameters["PartnerBoxEntryListName"] = applySkinFactor(5, 0, 150, 20)
+				parameters["PartnerBoxEntryListIP"] = applySkinFactor(120, 0, 150, 20)
+				parameters["PartnerBoxEntryListPort"] = applySkinFactor(270, 0, 100, 20)
+				parameters["PartnerBoxEntryListType"] = applySkinFactor(410, 0, 100, 20)
+				parameters["PartnerBoxTimerName"] = applySkinFactor(0, 30, 20)
+				parameters["PartnerBoxTimerServicename"] = applySkinFactor(0, 0, 30)
+				parameters["SHOUTcastListItem"] = applySkinFactor(20, 18, 22, 69, 20, 23, 43, 22)
+
 	for tag in domSkin.findall("include"):
 		filename = tag.attrib.get("filename")
 		if filename:
@@ -1274,13 +1266,13 @@ def readSkin(screen, skin, names, desktop):
 	screen = None
 	usedComponents = None
 
-# Return a set of all the widgets found in a screen. Panels will be expanded
-# recursively until all referenced widgets are captured. This code only performs
-# a simple scan of the XML and no skin processing is performed.
-#
-
 
 def findWidgets(name):
+	"""
+	Return a set of all the widgets found in a screen. Panels will be expanded
+	recursively until all referenced widgets are captured. This code only performs
+	a simple scan of the XML and no skin processing is performed.
+	"""
 	widgetSet = set()
 	element, path = domScreens.get(name, (None, None))
 	if element is not None:
@@ -1301,27 +1293,37 @@ def findWidgets(name):
 					widgetSet.update(findWidgets(name))
 	return widgetSet
 
-# Return a scaling factor (float) that can be used to rescale screen displays
-# to suit the current resolution of the screen.  The scales are based on a
-# default screen resolution of HD (720p).  That is the scale factor for a HD
-# screen will be 1.
-#
-
 
 def getSkinFactor():
+	"""
+	Return a scaling factor (float) that can be used to rescale screen displays
+	to suit the current resolution of the screen.  The scales are based on a
+	default screen resolution of HD (720p).  That is the scale factor for a HD
+	screen will be 1.
+	"""
 	skinfactor = getDesktop(GUI_SKIN_ID).size().height() / 720.0
 	# if skinfactor not in [0.8, 1, 1.5, 3, 6]:
 	# 	print("[Skin] Warning: Unexpected result for getSkinFactor '%0.4f'!" % skinfactor)
 	return skinfactor
 
-# Search the domScreens dictionary to see if any of the screen names provided
-# have a skin based screen.  This will allow coders to know if the named
-# screen will be skinned by the skin code.  A return of None implies that the
-# code must provide its own skin for the screen to be displayed to the user.
-#
+
+def applySkinFactor(*d):
+	"""
+	Multiply the numeric input by the skin factor
+	and return the result as an integer.
+	"""
+	if len(d) == 1:
+		return int(d[0] * getSkinFactor())
+	return tuple([int(value * getSkinFactor()) if isinstance(value, (int, float)) else value for value in d])
 
 
 def findSkinScreen(names):
+	"""
+	Search the domScreens dictionary to see if any of the screen names provided
+	have a skin based screen.  This will allow coders to know if the named
+	screen will be skinned by the skin code.  A return of None implies that the
+	code must provide its own skin for the screen to be displayed to the user.
+	"""
 	if not isinstance(names, list):
 		names = [names]
 	for name in names:  # Try all names given, the first one found is the one that will be used by the skin engine.

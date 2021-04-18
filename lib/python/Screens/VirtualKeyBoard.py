@@ -2,7 +2,7 @@ from copy import copy, deepcopy
 
 from enigma import BT_SCALE, RT_HALIGN_CENTER, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_BOTTOM, RT_VALIGN_CENTER, RT_VALIGN_TOP, eListboxPythonMultiContent, getPrevAsciiCode, gFont
 
-from skin import fonts, parameters
+from skin import applySkinFactor, fonts, parameters
 from Components.ActionMap import HelpableNumberActionMap
 from Components.Input import Input
 from Components.Label import Label
@@ -16,6 +16,7 @@ from Screens.Screen import Screen
 from Tools.Directories import SCOPE_CURRENT_SKIN, resolveFilename
 from Tools.LoadPixmap import LoadPixmap
 from Tools.NumericalTextInput import NumericalTextInput
+
 
 VKB_DONE_ICON = 0
 VKB_ENTER_ICON = 1
@@ -34,7 +35,7 @@ SPACE = u"SPACEICON"  # Symbol to be used for a SPACE on the keyboard.  Must be 
 class VirtualKeyBoardList(MenuList):
 	def __init__(self, list, enableWrapAround=False):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
-		font = fonts.get("VirtualKeyBoard", ("Regular", 28, 45))
+		font = fonts.get("VirtualKeyBoard", applySkinFactor("Regular", 28, 45))
 		self.l.setFont(0, gFont(font[0], font[1]))
 		self.l.setFont(1, gFont(font[0], font[1] * 5 // 9))  # Smaller font is 56% the height of bigger font
 		self.l.setItemHeight(font[2])
@@ -526,7 +527,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		self["key_blue"] = StaticText(self.shiftMsgs[1])
 		self["key_text"] = StaticText(_("TEXT"))
 		self["key_help"] = StaticText(_("HELP"))
-		width, height = parameters.get("VirtualKeyBoard", (45, 45))
+		width, height = parameters.get("VirtualKeyBoard", applySkinFactor(45, 45))
 		if self.bg_l is None or self.bg_m is None or self.bg_r is None:
 			self.width = width
 			self.height = height
@@ -538,7 +539,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		# 	Vertical alignment: 0=Auto, 1=Top, 2=Center, 3=Bottom (Auto=Center).
 		self.alignment = parameters.get("VirtualKeyBoardAlignment", (0, 0))
 		# Padding -> (Left/Right, Top/Botton) in pixels
-		self.padding = parameters.get("VirtualKeyBoardPadding", (4, 4))
+		self.padding = parameters.get("VirtualKeyBoardPadding", applySkinFactor(4, 4))
 		# Text color for each shift level.  (Ensure there is a color for each shift level!)
 		self.shiftColors = parameters.get("VirtualKeyBoardShiftColors", (0x00ffffff, 0x00ffffff, 0x0000ffff, 0x00ff00ff))
 		self.language = None

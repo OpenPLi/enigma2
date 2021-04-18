@@ -6,7 +6,8 @@ from Components.Label import Label
 from ServiceReference import ServiceReference
 from enigma import eListboxPythonMultiContent, eListbox, gFont, iServiceInformation, eServiceCenter, eDVBFrontendParametersSatellite, RT_HALIGN_LEFT, RT_VALIGN_CENTER
 from Tools.Transponder import ConvertToHumanReadable, getChannelNumber
-import skin
+from skin import applySkinFactor, fonts, parameters
+
 
 TYPE_TEXT = 0
 TYPE_VALUE_HEX = 1
@@ -44,9 +45,9 @@ def ServiceInfoListEntry(a, b="", valueType=TYPE_TEXT, param=4, altColor=False):
 			b = ("%d.%d%s") % (b // 10, b % 10, direction)
 		else:
 			b = str(b)
-	xa, ya, wa, ha = skin.parameters.get("ServiceInfoLeft", (0, 0, 300, 25))
-	xb, yb, wb, hb = skin.parameters.get("ServiceInfoRight", (300, 0, 600, 25))
-	color = skin.parameters.get("ServiceInfoAltColor", (0x00FFBF00)) # alternative foreground color
+	xa, ya, wa, ha = parameters.get("ServiceInfoLeft", applySkinFactor(0, 0, 300, 25))
+	xb, yb, wb, hb = parameters.get("ServiceInfoRight", applySkinFactor(300, 0, 600, 25))
+	color = parameters.get("ServiceInfoAltColor", (0x00FFBF00)) # alternative foreground color
 	res = [None]
 	if b:
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, xa, ya, wa, ha, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, a))
@@ -62,7 +63,7 @@ class ServiceInfoList(GUIComponent):
 		self.l = eListboxPythonMultiContent()
 		self.list = source
 		self.l.setList(self.list)
-		font = skin.fonts.get("ServiceInfo", ("Regular", 21, 25))
+		font = fonts.get("ServiceInfo", applySkinFactor("Regular", 21, 25))
 		self.l.setFont(0, gFont(font[0], font[1]))
 		self.l.setItemHeight(font[2])
 

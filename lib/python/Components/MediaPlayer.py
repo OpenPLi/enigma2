@@ -6,7 +6,8 @@ from os import path
 from enigma import eListboxPythonMultiContent, RT_VALIGN_CENTER, gFont, eServiceCenter
 
 from Tools.LoadPixmap import LoadPixmap
-import skin
+from skin import applySkinFactor, fonts, parameters
+
 
 STATE_PLAY = 0
 STATE_PAUSE = 1
@@ -19,7 +20,7 @@ STATE_NONE = 5
 class PlayList(MenuList):
 	def __init__(self, enableWrapAround=False):
 		MenuList.__init__(self, [], enableWrapAround, eListboxPythonMultiContent)
-		font = skin.fonts.get("PlayList", ("Regular", 18, 23))
+		font = fonts.get("PlayList", applySkinFactor("Regular", 18, 23))
 		self.l.setFont(0, gFont(font[0], font[1]))
 		self.l.setItemHeight(font[2])
 		self.currPlaying = -1
@@ -39,11 +40,11 @@ class PlayList(MenuList):
 		text = serviceref.getName()
 		if text is "":
 			text = path.split(serviceref.getPath().split('/')[-1])[1]
-		x, y, w, h = skin.parameters.get("PlayListName", (25, 1, 470, 22))
+		x, y, w, h = parameters.get("PlayListName", applySkinFactor(25, 1, 470, 22))
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, RT_VALIGN_CENTER, text))
 		try:
 			png = self.icons[state]
-			x, y, w, h = skin.parameters.get("PlayListIcon", (5, 3, 16, 16))
+			x, y, w, h = parameters.get("PlayListIcon", applySkinFactor(5, 3, 16, 16))
 			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, x, y, w, h, png))
 		except:
 			pass
