@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-17 20:23+0100\n"
+"POT-Creation-Date: 2021-04-19 10:48+0430\n"
 "PO-Revision-Date: 2021-02-18 23:42+0200\n"
 "Last-Translator: Audronis Grincevicius <adga45@gmail.com>\n"
 "Language-Team: Adga (C) <adga45@gmail.com>\n"
@@ -986,12 +986,6 @@ msgstr "Ir budėjimo būsenoje"
 msgid "Alternative"
 msgstr "Alternatyva"
 
-msgid "Alternative 1"
-msgstr "1 alternatyva"
-
-msgid "Alternative 2"
-msgstr "2 alternatyva"
-
 msgid "Alternative URL for images listed on FlashImage"
 msgstr "Alternatyvus atvaizdų URL, rodomas vidiniame atvaizde"
 
@@ -1434,6 +1428,12 @@ msgstr "Juodas ekranas"
 
 msgid "Black screen till locked"
 msgstr "Juodas ekranas blokuojamas iki"
+
+msgid "Blindscan"
+msgstr ""
+
+msgid "Blindscan terrestrial (if possible)"
+msgstr ""
 
 msgid "Block noise reduction"
 msgstr "\"Kvadratavimosi\" triukšmų šalinimas"
@@ -3183,6 +3183,10 @@ msgstr "Įterpta"
 msgid "Emergency"
 msgstr "Skubus atvejis"
 
+#, fuzzy
+msgid "Empty Trash"
+msgstr "Tuščias lizdas"
+
 msgid "Empty slot"
 msgstr "Tuščias lizdas"
 
@@ -4105,8 +4109,8 @@ msgstr "HD sąrašas"
 msgid "HD2400"
 msgstr "HD2400"
 
-msgid "HD60"
-msgstr "HD60"
+msgid "HD60/Multibox/Multibox SE"
+msgstr ""
 
 msgid "HDMI"
 msgstr "HDMI"
@@ -4284,6 +4288,10 @@ msgstr "I"
 
 msgid "I do not want to perform any service scans"
 msgstr "Aš nenoriu atlikti jokių kanalų paieškos"
+
+#, fuzzy
+msgid "I55SE/H7(new model)/H9(new model)/H9COMBO/H9TWIN/H9SE/H9COMBOSE/H10"
+msgstr "Zgemma H7 (naujas modelis)/H9(naujas modelis)/H9COMBO/H9TWIN/H10"
 
 msgid "IDLE"
 msgstr "NENAUDOJAMAS"
@@ -9829,7 +9837,8 @@ msgstr "Atnaujinamas programinės įrangos katalogas"
 msgid "Upper case"
 msgstr "Didžiosios raidės"
 
-msgid "Uptime"
+#, fuzzy, python-format
+msgid "Uptime: %s\n"
 msgstr "Veikimo laikas"
 
 msgid "Uruguay"
@@ -10899,9 +10908,6 @@ msgstr "Perjungta į laikmačio kanalą %s!"
 msgid "Zgemma H.S/H.2S/H.2H/H5/H7(old model)"
 msgstr "Zgemma H.S/H.2S/H.2H/H5/H7(senas modelis)"
 
-msgid "Zgemma H7(new model)/H9(new model)/H9COMBO/H9TWIN/H10"
-msgstr "Zgemma H7 (naujas modelis)/H9(naujas modelis)/H9COMBO/H9TWIN/H10"
-
 msgid "Zgemma H9(old model)/I55Plus"
 msgstr "Zgemma H9 (senas modelis)/I55Plus"
 
@@ -11948,140 +11954,3 @@ msgstr "perjungta"
 
 msgid "®"
 msgstr "®"
-
-#~ msgid "Not Required"
-#~ msgstr "Nereikalaujama"
-
-#~ msgid "A command sent from TV will wake up the receiver from standby."
-#~ msgstr "Komanda, siunčiama iš televizoriaus, pažadins imtuvą iš budėjimo režimo."
-
-#~ msgid "Delay in queue between sending CEC commands. For working HDMI-CEC protocol must be for some receivers used delay. Usualy between 50-150ms."
-#~ msgstr "Delsa eilėje tarp CEC komandų siuntimo. Darbui HDMI-CEC protokolas turi būti skirtas kai kuriems imtuvams, naudojamiems delsai. Įprasta tarp 50-150ms."
-
-#~ msgid "Regard deep standby as standby. It will be sending same commands when box goest to deep standby."
-#~ msgstr "Giliai budėjimo režimą laikyti budėjimo režimu. Jis siųs tas pačias komandas, kai imtuvas eis į gilų budėjimo režimą."
-
-#~ msgid "Some tv's do not handle command 'Image View On' for wakingup correctly, so you can try sending 'Text View On' as alternative."
-#~ msgstr "Kai kurie tv netinkamai tvarko komandą 'Vaizdo peržiūra įjungta', kad tinkamai pabustumėte, todėl galite pabandyti siųsti 'Teksto rodinys įjungtas' kaip alternatyvą."
-
-#~ msgid "When TV is turned off, the receiver will switch to standby by a command received from the TV."
-#~ msgstr "Išjungus televizorių, imtuvas persijungs į budėjimo režimą komanda, gauta iš televizoriaus."
-
-#~ msgid "When receiver wakes up/starts, it will try wake up TV by sending the appropriate command."
-#~ msgstr "Kai imtuvas atsibunda / paleidžiamas, jis bandys pažadinti televizorių siųsdamas atitinkamą komandą."
-
-#~ msgid "ZAP timers can send command 'sourceactive' before zap for set TV to correct input."
-#~ msgstr "Jungimo laikmačiai gali siųsti komandą 'šaltinis aktyvus' prieš jungiant nustatytą TV korektišką įvestį."
-
-#~ msgid "No positioner capable frontend found."
-#~ msgstr "Su pozicionierimi suderinamos sąsajos nerasta."
-
-#~ msgid "No tuner is configured for use with a diseqc positioner!"
-#~ msgstr "Nėra imtuvo, suderinto naudotis su diseqc pozicionieriumi!"
-
-#~ msgid "Relevant PIDs routing"
-#~ msgstr "Aktualus PIDs maršrutizavimas"
-
-#~ msgid "Show service name and event description among each other instead of side by side."
-#~ msgstr "Rodyti kanalo pavadinimą ir įvykio aprašą tarpusavyje, o ne vienas šalia kito."
-
-#~ msgid "This option allows you to show menu paths."
-#~ msgstr "Ši funkcija leidžia jums rodyti meniu kelius."
-
-#~ msgid "< Default >"
-#~ msgstr "< Numatytasis >"
-
-#~ msgid "Select a skin"
-#~ msgstr "Pasirinkite temą"
-
-#~ msgid "Retrieving image slots - Please wait..."
-#~ msgstr "Gaunami atvaizdo siužetai - prašome laukti..."
-
-#, python-format
-#~ msgid "Aspect ratio changed to %s"
-#~ msgstr "Vaizdo formatas pakeistas į %s"
-
-#~ msgid "Powerless"
-#~ msgstr "Mažiau energijos"
-
-#~ msgid "Toggle aspect ratio..."
-#~ msgstr "Perjungti kraštinių santykį..."
-
-#~ msgid "Could not locate epg file on fallback tuner"
-#~ msgstr "Nepavyko rasti epg failo atsarginiame imtuve"
-
-#~ msgid "No settings files to download on fallback tuner"
-#~ msgstr "Negalima atsisiųsti nustatymų failų naudojant atsarginį imtuvą"
-
-#~ msgid "Multiboot"
-#~ msgstr "Daugiafunkcinė įkrova"
-
-#~ msgid "Select Image"
-#~ msgstr "Pasirinkite atvaizdą"
-
-#~ msgid "Select Multiboot"
-#~ msgstr "Pasirinktinis atvaizdų įkėlimas"
-
-#~ msgid "About..."
-#~ msgstr "Apie..."
-
-#~ msgid "Enigma2 skin selector"
-#~ msgstr "Enigma2 temos parinkėjas"
-
-#~ msgid "Error executing plugin"
-#~ msgstr "Priedo paleisti nepavyko"
-
-#~ msgid ""
-#~ "GUI needs a restart to apply a new skin\n"
-#~ "Do you want to restart the GUI now?"
-#~ msgstr ""
-#~ "Naujos temos aktyvavimui, grafinę aplinką reikia paleisti iš naujo\n"
-#~ "Ar paleisti iš naujo grafinę aplinką dabar?"
-
-#~ msgid "Ipkg"
-#~ msgstr "Ipkg"
-
-#~ msgid "Select your Skin"
-#~ msgstr "Pasirinkite norimą temą"
-
-#~ msgid "Set default settings?"
-#~ msgstr "Nustatyti numatytus parametrus?"
-
-#~ msgid "Skin"
-#~ msgstr "Vartotojo aplinkos tema"
-
-#~ msgid "working"
-#~ msgstr "dirba"
-
-#~ msgid "[a]"
-#~ msgstr "[a]"
-
-#~ msgid "Exit/OK"
-#~ msgstr "Užverti/OK"
-
-#~ msgid "add bouquet"
-#~ msgstr "pridėti paketą"
-
-#~ msgid "service is in bouquet parental protection"
-#~ msgstr "kanalas yra tėvų kontrolės pakete"
-
-#~ msgid "Greek (Modern)"
-#~ msgstr "Graikų (modernus)"
-
-#~ msgid "Install extensions."
-#~ msgstr "Įdiekite išplėtimus."
-
-#~ msgid "Ok"
-#~ msgstr "Gerai"
-
-#~ msgid "add bookmark"
-#~ msgstr "pridėti žymą"
-
-#~ msgid "remove bookmark"
-#~ msgstr "pašalinti žymę"
-
-#~ msgid "select"
-#~ msgstr "pasirinkti"
-
-#~ msgid "used"
-#~ msgstr "naudotas"

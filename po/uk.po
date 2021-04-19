@@ -2,16 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-11 19:27+0200\n"
+"POT-Creation-Date: 2021-04-19 10:48+0430\n"
 "PO-Revision-Date: 2021-03-11 01:18+0200\n"
+"Last-Translator: \n"
 "Language-Team: kvinto\n"
+"Language: uk_UA\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.4.2\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
-"Language: uk_UA\n"
 
 msgid ""
 "\n"
@@ -250,6 +250,7 @@ msgstr "%d кБ/с"
 msgid "%d min"
 msgstr "%d хв"
 
+#, python-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d хвилина"
@@ -310,12 +311,15 @@ msgstr "%d.%03d ГБ"
 msgid "%d.%B %Y"
 msgstr "%d.%B %Y"
 
+#, python-format
 msgid "%d.%d"
 msgstr "%d.%d"
 
+#, python-format
 msgid "%d.%d.%d"
 msgstr "%d.%d.%d"
 
+#, python-format
 msgid "%d:%02d"
 msgstr "%d:%02d"
 
@@ -323,10 +327,11 @@ msgstr "%d:%02d"
 msgid "%k:%M %e/%m"
 msgstr "%k:%M %e/%m"
 
+#, fuzzy, python-format
 msgid ""
 "%s\n"
 "Do you still want to flash image\n"
-"%s\n"
+"%s?"
 msgstr "Ви хочете записати імідж\n"
 
 #, python-format
@@ -367,6 +372,7 @@ msgstr[0] "%s оновлення пакету доступно"
 msgstr[1] "%s оновлення пакетів доступно"
 msgstr[2] "%s оновлень пакетів доступно"
 
+#, python-format
 msgid "%s%% Autoinstalling %s"
 msgstr "%s%% Автовстановлення %s"
 
@@ -976,12 +982,6 @@ msgstr "Також і в режимі очікування"
 msgid "Alternative"
 msgstr "Альтернативний"
 
-msgid "Alternative 1"
-msgstr "Альтернативний 1"
-
-msgid "Alternative 2"
-msgstr "Альтернативний 2"
-
 msgid "Alternative URL for images listed on FlashImage"
 msgstr "Альтернативна URL-адреса для іміджів, перелічених в FlashImage"
 
@@ -1329,9 +1329,6 @@ msgstr "Швидкість видалення у фоновому режимі"
 msgid "Backing up to: %s"
 msgstr "Резервне копіювання до: %s"
 
-msgid "Backup EPG cache"
-msgstr "Резервне кешування EPG"
-
 msgid "Backup completed."
 msgstr "Бекап успішно створений."
 
@@ -1368,7 +1365,8 @@ msgstr "Бангладеш"
 msgid "Barbados"
 msgstr "Барбадос"
 
-msgid "Basic PID Info"
+#, fuzzy
+msgid "Basic PID info"
 msgstr "Основна інформація про ПІД"
 
 msgid "Basque"
@@ -1427,6 +1425,12 @@ msgstr "Чорний екран"
 
 msgid "Black screen till locked"
 msgstr "Чорний екран заблокований"
+
+msgid "Blindscan"
+msgstr ""
+
+msgid "Blindscan terrestrial (if possible)"
+msgstr ""
 
 msgid "Block noise reduction"
 msgstr "Зниження блокових шумів"
@@ -2945,6 +2949,7 @@ msgstr "Ви дійсно хочете видалити каталог %s з д�
 msgid "Do you really want to remove your bookmark of %s?"
 msgstr "Ви дійсно хочете видалити Вашу закладку з %s?"
 
+#, python-format
 msgid "Do you really want to stop current event and delete timer %s?"
 msgstr "Ви дійсно хочете зупинити поточне завдання та видалити таймер %s?"
 
@@ -2957,6 +2962,7 @@ msgstr "Ви хочете автоматично відновити налашт
 msgid "Do you want to burn this collection to DVD medium?"
 msgstr "Ви хочете записати цю колекцію на DVD диск?"
 
+#, python-format
 msgid ""
 "Do you want to flash image\n"
 "%s"
@@ -3080,9 +3086,6 @@ msgstr "ECM Інфо"
 msgid "EPG"
 msgstr "Телегід"
 
-msgid "EPG cache backup"
-msgstr "Резервне копіювання кешу ЕПГ"
-
 msgid "EPG language selection 1"
 msgstr "Вибір мови EPG 1"
 
@@ -3174,6 +3177,10 @@ msgstr "Вбудований"
 
 msgid "Emergency"
 msgstr "Надзвичайна ситуація"
+
+#, fuzzy
+msgid "Empty Trash"
+msgstr "Порожній слот"
 
 msgid "Empty slot"
 msgstr "Порожній слот"
@@ -3843,9 +3850,6 @@ msgstr "Форматування"
 msgid "Forward volume keys"
 msgstr "Кнопки збільшення звуку"
 
-msgid "Frame rate"
-msgstr "Частота кадрів"
-
 msgid "Frame size in full view"
 msgstr "Повний розмір кадру"
 
@@ -4104,7 +4108,7 @@ msgstr "Список HD"
 msgid "HD2400"
 msgstr "HD2400"
 
-msgid "HD60"
+msgid "HD60/Multibox/Multibox SE"
 msgstr ""
 
 msgid "HDMI"
@@ -4283,6 +4287,10 @@ msgstr "I"
 
 msgid "I do not want to perform any service scans"
 msgstr "Не виконувати будь-яке сканування каналів"
+
+#, fuzzy
+msgid "I55SE/H7(new model)/H9(new model)/H9COMBO/H9TWIN/H9SE/H9COMBOSE/H10"
+msgstr "Zgemma H7(нова модель)/H9(нова модель)/H9COMBO/H9TWIN/H10"
 
 msgid "IDLE"
 msgstr ""
@@ -5775,9 +5783,6 @@ msgstr "Індикатор LED під час роботи."
 msgid "Opkg"
 msgstr ""
 
-msgid "Options/Restore"
-msgstr "Параметри/Відновлення"
-
 msgid "Options disable timer"
 msgstr "Параметри вимкнення таймера"
 
@@ -6411,6 +6416,7 @@ msgstr "Натисніть ОК для редагування налаштува
 msgid "Press OK to get further details for %s"
 msgstr "Натисніть OK для отримання додаткових відомостей %s"
 
+#, python-format
 msgid "Press OK to keep the currently selected %s skin."
 msgstr "Натисніть OK для переходу на вибраний %s скін."
 
@@ -6757,9 +6763,6 @@ msgstr "Видалити всі логи"
 msgid "Remove all new found flags"
 msgstr "Видалити всі нові знайдені прапорці"
 
-msgid "Remove autoinstall list"
-msgstr "Видалити список автовстановлення"
-
 msgid "Remove bookmark"
 msgstr "Видалити закладку"
 
@@ -7028,9 +7031,6 @@ msgstr "Ротор: "
 msgid "Round start time on"
 msgstr "Час початку кругового включення"
 
-msgid "Run autoinstall"
-msgstr "Запуск автовстановлення"
-
 msgid "Russian"
 msgstr "Російська"
 
@@ -7183,9 +7183,6 @@ msgstr "Зберегти список відтворення"
 
 msgid "Save playlist on exit"
 msgstr "Зберегти список відтворення при виході"
-
-msgid "Save previous backup"
-msgstr "Зберегти попередню резервну копію"
 
 msgid "Save settings and EPG data"
 msgstr "Зберегти налаштування і дані ЕПГ"
@@ -8966,6 +8963,7 @@ msgstr "Введені ПІН-коди не співпадають."
 msgid "The command to wake from standby will be sent multiple times."
 msgstr "Команда виходу з режиму очікування буде надіслана кілька разів."
 
+#, python-format
 msgid ""
 "The current image might not be stable.\n"
 "For more information see %s."
@@ -9664,6 +9662,10 @@ msgstr "Два"
 msgid "Two lines"
 msgstr "Два рядки"
 
+#, fuzzy
+msgid "Two lines and next event"
+msgstr "Перейти до наступної передачі"
+
 msgid "Type"
 msgstr "Тип"
 
@@ -9833,7 +9835,8 @@ msgstr "Каталог оновлення ПЗ"
 msgid "Upper case"
 msgstr "Верхній регістр"
 
-msgid "Uptime"
+#, fuzzy, python-format
+msgid "Uptime: %s\n"
 msgstr "Час роботи"
 
 msgid "Uruguay"
@@ -10017,9 +10020,6 @@ msgstr "Відео ПІД"
 
 msgid "Video clipping setup"
 msgstr "Налаштування редагування відео"
-
-msgid "Video codec"
-msgstr "Відео кодек"
 
 msgid "Video enhancement preview"
 msgstr "Перегляд покращення відео"
@@ -10894,14 +10894,12 @@ msgstr "Переключити вгору"
 msgid "Zapped to timer service %s as Picture in Picture!"
 msgstr "Застосовано до служби таймера %s як Картинка в Картинці!"
 
+#, python-format
 msgid "Zapped to timer service %s!"
 msgstr "Переключити на канал таймера %s!"
 
 msgid "Zgemma H.S/H.2S/H.2H/H5/H7(old model)"
 msgstr "Zgemma H.S/H.2S/H.2H/H5/H7 (стара модель)"
-
-msgid "Zgemma H7(new model)/H9(new model)/H9COMBO/H9TWIN/H10"
-msgstr "Zgemma H7(нова модель)/H9(нова модель)/H9COMBO/H9TWIN/H10"
 
 msgid "Zgemma H9(old model)/I55Plus"
 msgstr "Zgemma H9(стара модель)/I55Plus"
