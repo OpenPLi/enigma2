@@ -166,6 +166,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 						self.nimConfig.advanced.sats.setChoices(advanced_satlist_choices, default = saved_value is not None and saved_value or self.nimConfig.advanced.sats.value)
 						if saved_value is not None:
 							self.nimConfig.advanced.sats.value = saved_value
+						self.nimConfig.advanced.sats.save_forced = True
 					self.advancedSatsEntry = getConfigListEntry(self.indent % _("Satellite"), self.nimConfig.advanced.sats, _("Select the satellite you want to configure. Once that satellite is configured you can select and configure other satellites that will be accessed using this same tuner."))
 					self.list.append(self.advancedSatsEntry)
 					current_config_sats = self.nimConfig.advanced.sats.value
