@@ -117,11 +117,11 @@ msgstr "%.0f кБ"
 
 #, python-format
 msgid "%.1f° E"
-msgstr ""
+msgstr "%.1f° Сх"
 
 #, python-format
 msgid "%.1f° W"
-msgstr ""
+msgstr "%.1f° Зах"
 
 #, python-format
 msgid "%.2f GB"
@@ -327,12 +327,14 @@ msgstr "%d:%02d"
 msgid "%k:%M %e/%m"
 msgstr "%k:%M %e/%m"
 
-#, fuzzy, python-format
 msgid ""
 "%s\n"
 "Do you still want to flash image\n"
 "%s?"
-msgstr "Ви хочете записати імідж\n"
+msgstr ""
+"%s\n"
+"Ви ще хочете записати імідж\n"
+"%s?"
 
 #, python-format
 msgid ""
@@ -1365,9 +1367,8 @@ msgstr "Бангладеш"
 msgid "Barbados"
 msgstr "Барбадос"
 
-#, fuzzy
 msgid "Basic PID info"
-msgstr "Основна інформація про ПІД"
+msgstr "Основна Інформація про ПІД"
 
 msgid "Basque"
 msgstr "Баскська"
@@ -1427,10 +1428,10 @@ msgid "Black screen till locked"
 msgstr "Чорний екран заблокований"
 
 msgid "Blindscan"
-msgstr ""
+msgstr "Сліпе сканування"
 
 msgid "Blindscan terrestrial (if possible)"
-msgstr ""
+msgstr "Сліпе сканування наземного (якщо можливо)"
 
 msgid "Block noise reduction"
 msgstr "Зниження блокових шумів"
@@ -3178,9 +3179,8 @@ msgstr "Вбудований"
 msgid "Emergency"
 msgstr "Надзвичайна ситуація"
 
-#, fuzzy
 msgid "Empty Trash"
-msgstr "Порожній слот"
+msgstr "Порожній кошик"
 
 msgid "Empty slot"
 msgstr "Порожній слот"
@@ -3629,7 +3629,7 @@ msgid "F1/F3/F4/F4-TURBO"
 msgstr ""
 
 msgid "FAILED"
-msgstr ""
+msgstr "ПОМИЛКА"
 
 msgid "FBC SCR (Unicable/JESS)"
 msgstr ""
@@ -4288,9 +4288,8 @@ msgstr "I"
 msgid "I do not want to perform any service scans"
 msgstr "Не виконувати будь-яке сканування каналів"
 
-#, fuzzy
 msgid "I55SE/H7(new model)/H9(new model)/H9COMBO/H9TWIN/H9SE/H9COMBOSE/H10"
-msgstr "Zgemma H7(нова модель)/H9(нова модель)/H9COMBO/H9TWIN/H10"
+msgstr "I55SE/H7(нова модель)/H9(нова модель)/H9COMBO/H9TWIN/H9SE/H9COMBOSE/H10"
 
 msgid "IDLE"
 msgstr ""
@@ -4875,7 +4874,7 @@ msgid "Lithuanian"
 msgstr "Литовська"
 
 msgid "Live decoder"
-msgstr ""
+msgstr "Декодування на живо"
 
 msgid "Load"
 msgstr "Завантажити"
@@ -5285,7 +5284,7 @@ msgid "Multi-EPG bouquet selection"
 msgstr "Вибір фаворитів при старті мульти-EPG"
 
 msgid "MultiType"
-msgstr ""
+msgstr "БагатоТиповий"
 
 msgid "Multiboot image selector"
 msgstr "Селектор Іміджів MultiBoot"
@@ -8851,7 +8850,7 @@ msgstr ""
 #. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
 msgid "TRANSLATOR_INFO"
 msgstr ""
-"Переклад:  kvinto - 02.04.2021\n"
+"Переклад:  kvinto - 20.04.2021\n"
 "Сторінка:    https://gisclub.tv\n"
 "                  kvinto@rambler.ru"
 
@@ -9662,9 +9661,8 @@ msgstr "Два"
 msgid "Two lines"
 msgstr "Два рядки"
 
-#, fuzzy
 msgid "Two lines and next event"
-msgstr "Перейти до наступної передачі"
+msgstr "Два рядки і наступна передача"
 
 msgid "Type"
 msgstr "Тип"
@@ -9835,9 +9833,8 @@ msgstr "Каталог оновлення ПЗ"
 msgid "Upper case"
 msgstr "Верхній регістр"
 
-#, fuzzy, python-format
 msgid "Uptime: %s\n"
-msgstr "Час роботи"
+msgstr "Час роботи: %s\n"
 
 msgid "Uruguay"
 msgstr "Уругвай"
@@ -10673,6 +10670,9 @@ msgid ""
 "would you like to remove\n"
 "\"%s\"?"
 msgstr ""
+"У вас уже встановлений список каналів,\n"
+"Ви хочете видалити\n"
+"\"%s\"?"
 
 msgid "You can cancel the installation."
 msgstr "Ви можете відмінити встановлення."
