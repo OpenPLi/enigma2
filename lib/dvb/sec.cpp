@@ -381,8 +381,6 @@ RESULT eDVBSatelliteEquipmentControl::prepare(iDVBFrontend &frontend, const eDVB
 
 			frontend.getData(eDVBFrontend::SATPOS_DEPENDS_PTR, satposDependPtr);
 
-			if (diseqc_mode == eDVBSatelliteDiseqcParameters::V1_2)
-				m_target_orbital_position = sat.orbital_position;
 			if (!(m_not_linked_slot_mask & slot_id))  // frontend with direct connection?
 			{
 				long linked_prev_ptr;
@@ -404,6 +402,9 @@ RESULT eDVBSatelliteEquipmentControl::prepare(iDVBFrontend &frontend, const eDVB
 						forceChanged = true;
 				}
 			}
+
+			if (diseqc_mode == eDVBSatelliteDiseqcParameters::V1_2)
+				m_target_orbital_position = sat.orbital_position;
 
 			if (lnb_param.m_advanced_satposdepends != -1 && setAdvancedsatposdependsRoot(lnb_param.m_advanced_satposdepends))
 				sec_fe->setData(eDVBFrontend::ADVANCED_SATPOSDEPENDS_LINK, lnb_param.m_advanced_satposdepends);
@@ -1899,4 +1900,24 @@ bool eDVBSatelliteEquipmentControl::isOrbitalPositionConfigured(int orbital_posi
 		}
 	}
 	return false;
+}
+
+int eDVBSatelliteEquipmentControl::frontendLastRotorOrbitalPosition(int slot)
+{
+	long last_rotor_pos = -1;
+
+	for (eSmartPtrList<eDVBRegisteredFrontend>::iterator it(m_avail_frontends.begin()); it != m_avail_frontends.end(); ++it)
+	{
+		if (it->m_frontend->getSlotID() == slot)
+		{
+			it->m_frontend->getData(eDVBFrontend::ROTOR_POS, last_rotor_pos);
+			return last_rotor_pos;
+		}
+	}
+	return last_rotor_pos;
+}
+
+void eDVBSatelliteEquipmentControl::forceUpdateRotorPos(int slot, int orbital_position)
+{
+	slotRotorSatPosChanged(slot, orbital_position); // emit python
 }

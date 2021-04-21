@@ -194,6 +194,7 @@ typedef long time_t;
 %immutable iCryptoInfo::usedcardid;
 %immutable eTuxtxtApp::appClosed;
 %immutable iDVBChannel::receivedTsidOnid;
+%immutable eDVBSatelliteEquipmentControl::slotRotorSatPosChanged;
 %include <lib/base/message.h>
 %include <lib/driver/rc.h>
 %include <lib/driver/rcinput_swig.h>

@@ -557,6 +557,7 @@ public:
 	virtual void setRotorMoving(int slotid, bool)=0;
 	virtual RESULT resetAdvancedsatposdependsRoot(int link)=0;
 	virtual bool isOrbitalPositionConfigured(int orbital_position)=0;
+	virtual void forceUpdateRotorPos(int slot, int orbital_position)=0;
 };
 
 struct eDVBCIRouting

@@ -1,8 +1,8 @@
-from enigma import iPlayableService
+from enigma import iPlayableService, eDVBResourceManager, eDVBSatelliteEquipmentControl
 from Source import Source
 from Components.PerServiceDisplay import PerServiceBase
-from enigma import eDVBResourceManager
-
+from Components.NimManager import nimmanager
+from Components.config import config
 
 class FrontendInfo(Source, PerServiceBase):
 	def __init__(self, service_source=None, frontend_source=None, navcore=None):
@@ -20,11 +20,12 @@ class FrontendInfo(Source, PerServiceBase):
 		self.service_source = service_source
 		self.frontend_source = frontend_source
 		self.tuner_mask = 0
+		sec = eDVBSatelliteEquipmentControl.getInstance()
+		if sec:
+			sec.slotRotorSatPosChanged.get().append(self.updateSlotRotorSatPosition)
 		self.updateFrontendData()
 
 	def serviceEnd(self):
-#		import pdb
-#		pdb.set_trace()
 		self.slot_number = self.frontend_type = None
 		self.changed((self.CHANGED_CLEAR, ))
 
@@ -59,10 +60,23 @@ class FrontendInfo(Source, PerServiceBase):
 		else:
 			return None
 
+	def updateSlotRotorSatPosition(self, slot, orbital_position):
+		for nim in nimmanager.nim_slots:
+			if nim.slot == slot:
+				nim.config.lastsatrotorposition.value = str(orbital_position)
+				config.misc.lastrotorposition.value = orbital_position
+				nim.config.lastsatrotorposition.save()
+				config.misc.lastrotorposition.save()
+				self.changed((self.CHANGED_ALL, ))
+				break
+
 	def destroy(self):
 		if not self.frontend_source and not self.service_source:
 			PerServiceBase.destroy(self)
 		res_mgr = eDVBResourceManager.getInstance()
 		if res_mgr:
 			res_mgr.frontendUseMaskChanged.get().remove(self.updateTunerMask)
+		sec = eDVBSatelliteEquipmentControl.getInstance()
+		if sec:
+			sec.slotRotorSatPosChanged.get().remove(self.updateSlotRotorSatPosition)
 		Source.destroy(self)

@@ -4,6 +4,7 @@ from Components.Element import cached
 from Components.config import config
 from Tools.Transponder import orbpos
 from Components.NimManager import nimmanager
+from Components.SystemInfo import SystemInfo
 from enigma import eDVBSatelliteEquipmentControl
 
 
@@ -17,20 +18,48 @@ class RotorPosition(Converter, object):
 		self.LastRotorPos = config.misc.lastrotorposition.value
 		config.misc.lastrotorposition.addNotifier(self.forceChanged, initial_call=False)
 		config.misc.showrotorposition.addNotifier(self.show_hide, initial_call=False)
+		self.sec = eDVBSatelliteEquipmentControl.getInstance()
 
 	@cached
 	def getText(self):
-		if config.misc.showrotorposition.value != "no":
+		value = config.misc.showrotorposition.value
+		if SystemInfo["isRotorTuner"] and value != "no":
+			if value.isdigit():
+				nim_text = nimmanager.rotorLastPositionForNim(int(value), number=False)
+				if nim_text == _("undefined"):
+					def frontendRotorPosition(slot):
+						for x in nimmanager.nim_slots:
+							if x.slot == slot:
+								rotorposition = x.config.lastsatrotorposition.value
+								if rotorposition.isdigit():
+									return orbpos(int(rotorposition))
+						return ""
+					saved_text = frontendRotorPosition(int(value))
+					if saved_text:
+						nim_text = saved_textt
+				return "%s:%s" % ("\c0000?0?0" + chr(ord("A")+ int(value)), "\c00?0?0?0" + nim_text)
+			elif value == "all":
+				all_text = ""
+				for x in nimmanager.nim_slots:
+					print x.slot
+					nim_text = nimmanager.rotorLastPositionForNim(x.slot, number=False)
+					if nim_text != _("rotor is not used"):
+						if nim_text == _("undefined"):
+							rotorposition = x.config.lastsatrotorposition.value
+							if rotorposition.isdigit():
+								nim_text = orbpos(int(rotorposition))
+						all_text += "%s:%s " % ("\c0000?0?0" + chr(ord("A")+ x.slot), "\c00?0?0?0" + nim_text) 
+				return all_text
 			self.LastRotorPos = config.misc.lastrotorposition.value
 			(rotor, tuner) = self.isMotorizedTuner()
 			if rotor:
 				self.actualizeCfgLastRotorPosition()
-				if config.misc.showrotorposition.value == "withtext":
+				if value == "withtext":
 					return _("Rotor: ") + orbpos(config.misc.lastrotorposition.value)
-				if config.misc.showrotorposition.value == "tunername":
+				if value == "tunername":
 					active_tuner = self.getActiveTuner()
 					if tuner != active_tuner:
-						return _("%s:%s") % ("\c0000?0?0" + chr(ord("A") + tuner), "\c00?0?0?0" + orbpos(config.misc.lastrotorposition.value))
+						return "%s:%s" % ("\c0000?0?0" + chr(ord("A")+ tuner), "\c00?0?0?0" + orbpos(config.misc.lastrotorposition.value))
 					return ""
 				return orbpos(config.misc.lastrotorposition.value)
 		return ""
@@ -45,20 +74,19 @@ class RotorPosition(Converter, object):
 
 	def isMotorizedTuner(self):
 		for x in nimmanager.nim_slots:
-			for sat in nimmanager.getRotorSatListForNim(x.slot):
-				if sat[0]:
-					return (True, x.slot)
+			if nimmanager.getRotorSatListForNim(x.slot, only_first=True):
+				return (True, x.slot)
 		return (False, None)
 
 	def actualizeCfgLastRotorPosition(self):
-		if eDVBSatelliteEquipmentControl.getInstance().isRotorMoving():
-			current_pos = eDVBSatelliteEquipmentControl.getInstance().getTargetOrbitalPosition()
-			if current_pos != config.misc.lastrotorposition.value:
+		if self.sec and self.sec.isRotorMoving():
+			current_pos = self.sec and self.sec.getTargetOrbitalPosition() or -1
+			if current_pos != -1 and current_pos != config.misc.lastrotorposition.value:
 				self.LastRotorPos = config.misc.lastrotorposition.value = current_pos
 				config.misc.lastrotorposition.save()
 
 	def getActiveTuner(self):
-		if not eDVBSatelliteEquipmentControl.getInstance().isRotorMoving():
+		if self.sec and not self.sec.isRotorMoving():
 			service = self.source.service
 			feinfo = service and service.frontendInfo()
 			tuner = feinfo and feinfo.getAll(True)
