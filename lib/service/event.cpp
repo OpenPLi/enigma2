@@ -205,6 +205,9 @@ bool eServiceEvent::loadLanguage(Event *evt, const std::string &lang, int tsidon
 		m_extended_description_items = "";
 	}
 
+	// hack to fix split titles
+	undoAbbreviation(m_event_name, m_short_description);
+
 	return retval;
 }
 
