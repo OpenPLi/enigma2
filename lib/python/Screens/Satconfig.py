@@ -6,6 +6,7 @@ from Components.ConfigList import ConfigListScreen
 from Components.NimManager import nimmanager
 from Components.Button import Button
 from Components.Label import Label
+from Components.UsageConfig import showrotorpositionChoicesUpdate
 from Components.SelectionList import SelectionList, SelectionEntryComponent
 from Components.config import getConfigListEntry, config, ConfigNothing, ConfigYesNo, configfile, NoSave, ConfigSelection
 from Components.Sources.List import List
@@ -674,6 +675,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 			for x in self["config"].list:
 				x[1].save()
 			configfile.save()
+		showrotorpositionChoicesUpdate(update=True)
 
 	def cancelConfirm(self, result):
 		if not result:

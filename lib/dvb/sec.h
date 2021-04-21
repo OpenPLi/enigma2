@@ -3,7 +3,7 @@
 
 #include <lib/dvb/idvb.h>
 #include <lib/dvb/fbc.h>
-
+#include <lib/python/connections.h>
 #include <list>
 
 typedef enum
@@ -341,8 +341,8 @@ private:
 	eSmartPtrList<eDVBRegisteredFrontend> &m_avail_frontends, &m_avail_simulate_frontends;
 	int m_rotorMoving;
 	int m_not_linked_slot_mask;
-	int m_target_orbital_position;
 	bool m_canMeasureInputPower;
+	int m_target_orbital_position = -1;
 #endif
 #ifdef SWIG
 	eDVBSatelliteEquipmentControl();
@@ -419,6 +419,9 @@ public:
 	bool canMeasureInputPower() { return m_canMeasureInputPower; }
 	int getTargetOrbitalPosition() { return m_target_orbital_position; }
 	bool isOrbitalPositionConfigured(int orbital_position);
+	int frontendLastRotorOrbitalPosition(int slot);
+	PSignal2<void, int, int> slotRotorSatPosChanged;
+	void forceUpdateRotorPos(int slot, int orbital_position); // called from the frontend's
 
 	friend class eFBCTunerManager;
 };

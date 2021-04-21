@@ -7,6 +7,7 @@ from Components.Label import Label
 from Components.ServiceEventTracker import ServiceEventTracker
 from enigma import eDVBSatelliteEquipmentControl, eTimer, iPlayableService, eServiceCenter, iServiceInformation
 from Components.NimManager import nimmanager
+from Components.SystemInfo import SystemInfo
 from Components.Sources.FrontendStatus import FrontendStatus
 
 INVALID_POSITION = 9999
@@ -34,7 +35,6 @@ class Dish(Screen):
 	def __init__(self, session):
 		self.skin = Dish.skin
 		Screen.__init__(self, session)
-
 		self["Dishpixmap"] = Pixmap()
 		self["turnTime"] = Label("")
 		self["posFrom"] = Label("")
@@ -43,7 +43,6 @@ class Dish(Screen):
 		self["Goto"] = Label(_("Goto:"))
 		self["tunerName"] = Label("")
 		self["turnSpeed"] = Label("")
-
 		self.updateRotorSatList()
 		self.rotorTimer = eTimer()
 		self.rotorTimer.callback.append(self.updateRotorMovingState)
@@ -51,19 +50,13 @@ class Dish(Screen):
 		self.turnTimer.callback.append(self.turnTimerLoop)
 		self.timeoutTimer = eTimer()
 		self.timeoutTimer.callback.append(self.testIsTuned)
-
 		config.usage.showdish.addNotifier(self.configChanged)
-		self.configChanged(config.usage.showdish)
-
 		self.rotor_pos = self.cur_orbpos = config.misc.lastrotorposition.value
-		config.misc.lastrotorposition.addNotifier(self.rotorPositionChanged)
-		self.turn_time = self.total_time = self.pmt_timeout = self.close_timeout = self.rotor_sat = None
+		self.tuner = self.turn_time = self.total_time = self.pmt_timeout = self.close_timeout = self.rotor_sat = None
 		self.cur_polar = 0
 		self.__state = self.STATE_HIDDEN
-
 		self.onShow.append(self.__onShow)
 		self.onHide.append(self.__onHide)
-
 		self.__event_tracker = ServiceEventTracker(screen=self,
 			eventmap={
 				iPlayableService.evStart: self.__serviceStarted,
@@ -102,13 +95,18 @@ class Dish(Screen):
 
 	def __onShow(self):
 		self.__state = self.STATE_SHOWN
-
 		prev_rotor_pos = self.rotor_pos
+		if self.tuner is not None:
+			for x in nimmanager.nim_slots:
+				if x.slot == self.tuner:
+					rotorposition = hasattr(x.config, 'lastsatrotorposition') and x.config.lastsatrotorposition.value or ""
+					if rotorposition.isdigit():
+						prev_rotor_pos = int(rotorposition)
+					break
 		self.rotor_pos = self.cur_orbpos
 		self.total_time = self.getTurnTime(prev_rotor_pos, self.rotor_pos, self.cur_polar)
 		self.turn_time = self.total_time
 		self.close_timeout = round(self.total_time * 1.25) # aded 25%
-
 		self["posFrom"].setText(self.OrbToStr(prev_rotor_pos))
 		self["posGoto"].setText(self.OrbToStr(self.rotor_pos))
 		self["tunerName"].setText(self.getTunerName())
@@ -118,7 +116,6 @@ class Dish(Screen):
 		else:
 			self["turnTime"].setText(self.FormatTurnTime(self.turn_time))
 			self["turnSpeed"].setText(str(self.getTurningSpeed(self.cur_polar)) + chr(176) + _("/s"))
-
 		self.turnTimer.start(1000, False)
 
 	def __onHide(self):
@@ -129,27 +126,24 @@ class Dish(Screen):
 	def __serviceStarted(self):
 		if self.__state == self.STATE_SHOWN:
 			self.hide()
-		if not self.showdish:
-			return
-
-		service = self.session.nav.getCurrentService()
-		info = service and service.info()
-		data = info and info.getInfoObject(iServiceInformation.sTransponderData)
-		if not data or data == -1:
-			return
-
-		tuner_type = data.get("tuner_type")
-		if tuner_type and "DVB-S" in tuner_type:
-			cur_orbpos = data.get("orbital_position", INVALID_POSITION)
-			if cur_orbpos in self.available_sat:
-				self.cur_orbpos = cur_orbpos
-				self.cur_polar = data.get("polarization", 0)
-				self.rotorTimer.start(500, False)
+		if SystemInfo["isRotorTuner"] and self.showdish:
+			service = self.session.nav.getCurrentService()
+			info = service and service.info()
+			data = info and info.getInfoObject(iServiceInformation.sTransponderData)
+			if not data or data == -1:
+				return
+			tuner_type = data.get("tuner_type")
+			if tuner_type and "DVB-S" in tuner_type:
+				cur_orbpos = data.get("orbital_position", INVALID_POSITION)
+				if cur_orbpos in self.available_sat:
+					self.cur_orbpos = cur_orbpos
+					self.cur_polar  = data.get("polarization", 0)
+					self.rotorTimer.start(500, False)
 
 	def __toHide(self):
 		self.rotorTimer.stop()
 		self.timeoutTimer.stop()
-		self.rotor_sat = None
+		self.tuner = self.rotor_sat = None
 		if self.__state == self.STATE_SHOWN:
 			self.hide()
 
@@ -178,10 +172,6 @@ class Dish(Screen):
 	def configChanged(self, configElement):
 		self.showdish = configElement.value
 
-	def rotorPositionChanged(self, configElement=None):
-		if self.cur_orbpos != config.misc.lastrotorposition.value != INVALID_POSITION:
-			self.rotor_pos = self.cur_orbpos = config.misc.lastrotorposition.value
-
 	def getTurnTime(self, start, end, pol=0):
 		mrt = abs(start - end) if start and end else 0
 		if mrt > 0:
@@ -194,9 +184,9 @@ class Dish(Screen):
 
 	def isSatRotorMode(self):
 		satRotorMode = False
-		tuner = self.getCurrentTuner()
-		if tuner is not None:
-			for sat in nimmanager.getRotorSatListForNim(tuner):
+		self.tuner = self.getCurrentTuner()
+		if self.tuner is not None:
+			for sat in nimmanager.getRotorSatListForNim(self.tuner):
 				if sat[0] == self.cur_orbpos:
 					satRotorMode = True
 					break
@@ -296,17 +286,11 @@ class Dishpip(Dish, Screen):
 		self.timeoutTimer = eTimer()
 		self.timeoutTimer.callback.append(self.__toHide)
 		self.rotor_pos = self.cur_orbpos = config.misc.lastrotorposition.value
-		config.misc.lastrotorposition.addNotifier(self.RotorpositionChange)
 		self.turn_time = self.total_time = None
 		self.close_timeout = self.moving_timeout = self.cur_polar = 0
 		self.__state = self.STATE_HIDDEN
-
 		self.onShow.append(self.__onShow)
 		self.onHide.append(self.__onHide)
-
-	def RotorpositionChange(self, configElement=None):
-		if self.cur_orbpos != config.misc.lastrotorposition.value != INVALID_POSITION:
-			self.rotor_pos = self.cur_orbpos = config.misc.lastrotorposition.value
 
 	def getRotorMovingState(self):
 		return eDVBSatelliteEquipmentControl.getInstance().isRotorMoving()
@@ -317,7 +301,7 @@ class Dishpip(Dish, Screen):
 			if self.__state == self.STATE_HIDDEN:
 				self.rotorTimer.stop()
 				self.moving_timeout = 0
-				if config.usage.showdish.value:
+				if config.usage.showdish.value and SystemInfo["isRotorTuner"]:
 					self.show()
 				if self.cur_orbpos != INVALID_POSITION and self.cur_orbpos != config.misc.lastrotorposition.value:
 					config.misc.lastrotorposition.value = self.cur_orbpos
@@ -344,25 +328,32 @@ class Dishpip(Dish, Screen):
 	def startPiPService(self, ref=None):
 		if self.__state == self.STATE_SHOWN:
 			self.__toHide()
-		if ref is None:
-			return
-		info = eServiceCenter.getInstance().info(ref)
-		data = info and info.getInfoObject(ref, iServiceInformation.sTransponderData)
-		if not data or data == -1:
-			return
-		tuner_type = data.get("tuner_type")
-		if tuner_type and "DVB-S" in tuner_type:
-			cur_orbpos = data.get("orbital_position", INVALID_POSITION)
-			if cur_orbpos in self.available_sat:
-				self.cur_orbpos = cur_orbpos
-				self.cur_polar = data.get("polarization", 0)
-				self.moving_timeout = 3
-				if not self.rotorTimer.isActive():
-					self.rotorTimer.start(500, True)
+		if ref and SystemInfo["isRotorTuner"]:
+			info = eServiceCenter.getInstance().info(ref)
+			data = info and info.getInfoObject(ref, iServiceInformation.sTransponderData)
+			if not data or data == -1:
+				return
+			tuner_type = data.get("tuner_type")
+			if tuner_type and "DVB-S" in tuner_type:
+				cur_orbpos = data.get("orbital_position", INVALID_POSITION)
+				if cur_orbpos in self.available_sat:
+					self.cur_orbpos = cur_orbpos
+					self.cur_polar  = data.get("polarization", 0)
+					self.moving_timeout = 3
+					if not self.rotorTimer.isActive():
+						self.rotorTimer.start(500, True)
 
 	def __onShow(self):
 		self.__state = self.STATE_SHOWN
 		prev_rotor_pos = self.rotor_pos
+		tuner = self.getCurrentTuner()
+		if tuner is not None:
+			for x in nimmanager.nim_slots:
+				if x.slot == tuner:
+					rotorposition = hasattr(x.config, 'lastsatrotorposition') and x.config.lastsatrotorposition.value or ""
+					if rotorposition.isdigit():
+						prev_rotor_pos = int(rotorposition)
+					break
 		self.rotor_pos = self.cur_orbpos
 		self.total_time = self.getTurnTime(prev_rotor_pos, self.rotor_pos, self.cur_polar)
 		self.turn_time = self.total_time
