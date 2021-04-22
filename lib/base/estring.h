@@ -9,7 +9,7 @@
 
 std::string buildShortName( const std::string &str );
 
-void undoAbbreviation(std::string &title, std::string &summary);
+void undoAbbreviation(std::string &str1, std::string &str2);
 
 int strnicmp(const char*, const char*, int);
 
