@@ -27,69 +27,83 @@ std::string buildShortName( const std::string &str )
 	return tmp.length() ? tmp : str;
 }
 
-void undoAbbreviation(std::string &title, std::string &summary)
+void undoAbbreviation(std::string &str1, std::string &str2)
 {
-	//strip emphasis <EM>title...</EM> from eit
-	std::string sTitle = buildShortName(title);
-	std::string sSummary = summary;
+	std::string s1 = str1;
+	std::string s2 = str2;
 
-	if (sTitle.length() > 3 && sSummary.length() > 3)
+	// minimum length of ellipsis and emphasis brackets
+	if (s1.length() <= 5 || s2.length() <= 5)
+		return;
+
+	// check if string2 is abbreviated
+	if (s2.substr(0, 3) != "...")
+		return;
+
+	// check if the string1 is abbreviated
+	if (s1.substr(s1.length() - 3) == "...")
 	{
-		// check if the title is split
-		if (sTitle.substr(sTitle.length() - 3) == "..." && sSummary.substr(0, 3) == "...")
+		// found abbreviation
+	}
+	else if (s1.substr(s1.length() - 5) == "...\xc2\x87")
+	{
+		// ensure ellipsis occur after close emphasis brackets
+		// "Some <EM>string1 text...</EM>"
+		// "Some <EM>string1 text</EM>..."
+		size_t found = s1.find("...\xc2\x87");
+		if (found != std::string::npos)
+			s1.replace(found, s1.length(), "\xc2\x87...");
+	}
+	else
+		return;
+
+	// find the end of the string1 punctuation in string2
+	size_t found = s2.find_first_of(".:!?", 4);
+
+	if (found < s2.length())
+	{
+		std::string s1Tmp;
+		std::string s2Tmp;
+
+		// strip off the ellipsis and any leading/trailing space
+		if (s1.substr(s1.length() - 4, 1) == " ")
 		{
-			// find the end of the title in the sumarry
-			std::size_t found = sSummary.find_first_of(".:!?", 4);
+			s1Tmp = s1.substr(0, s1.length() - 4);
+		}
+		else
+		{
+			s1Tmp = s1.substr(0, s1.length() - 3);
+		}
 
-			if (found < sSummary.length())
+		if (s2.substr(3, 1) == " ")
+		{
+			s2Tmp = s2.substr(4);
+		}
+		else
+		{
+			s2Tmp = s2.substr(3);
+		}
+
+		// construct the new string1 and string2
+		found = s2Tmp.find_first_of(".:!?");
+		if (found < s2Tmp.length())
+		{
+			s1 = s1Tmp + " " + s2Tmp.substr(0, found);
+			if (s2Tmp.length() - found > 2)
 			{
-				std::string sTmpTitle;
-				std::string sTmpSummary;
-
-				// strip off the ellipsis and any leading/trailing space
-				if (sTitle.substr(sTitle.length() - 4, 1) == " ")
-				{
-					sTmpTitle  = sTitle.substr(0, sTitle.length() - 4);
-				}
-				else
-				{
-					sTmpTitle = sTitle.substr(0, sTitle.length() - 3);
-				}
-
-				if (sSummary.substr(3, 1) == " ")
-				{
-					sTmpSummary  = sSummary.substr(4);
-				}
-				else
-				{
-					sTmpSummary = sSummary.substr(3);
-				}
-
-				// construct the new title and summary
-				found = sTmpSummary.find_first_of(".:!?");
-				if (found < sTmpSummary.length())
-				{
-					sTitle = sTmpTitle + " " + sTmpSummary.substr(0, found);
-					if (sTmpSummary.length() - found > 2)
-					{
-						sSummary = sTmpSummary.substr(found + 2);
-					}
-					else
-					{
-						sSummary = "";
-					}
-				}
-				else
-				{
-					// shouldn't happen, but you never know...
-					sTitle = sTmpTitle;
-					sSummary = sTmpSummary;
-				}
+				s2 = s2Tmp.substr(found + 2);
+			}
+			else
+			{
+				s2 = "";
 			}
 		}
+		else
+			return;
+
+		str1 = s1;
+		str2 = s2;
 	}
-	title = sTitle;
-	summary = sSummary;
 }
 
 std::string getNum(int val, int sys)
