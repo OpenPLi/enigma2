@@ -9,7 +9,6 @@ try:
 except:
 	OverscanWizard = None
 
-from Components.About import about
 from Components.Pixmap import Pixmap
 from Components.ProgressBar import ProgressBar
 from Components.Label import Label
@@ -20,16 +19,14 @@ from enigma import eConsoleAppContainer, eTimer, eActionMap
 
 import os
 
-config.misc.firstrun = ConfigBoolean(default=True)
-config.misc.languageselected = ConfigBoolean(default=True)
-config.misc.do_overscanwizard = ConfigBoolean(default=OverscanWizard and config.skin.primary_skin.value == "PLi-FullNightHD/skin.xml")
-config.misc.check_developimage = ConfigBoolean(default=True)
-
+config.misc.firstrun = ConfigBoolean(default = True)
+config.misc.languageselected = ConfigBoolean(default = True)
+config.misc.do_overscanwizard = ConfigBoolean(default = OverscanWizard and config.skin.primary_skin.value == "PLi-FullNightHD/skin.xml")
 
 class StartWizard(WizardLanguage, Rc):
-	def __init__(self, session, silent=True, showSteps=False, neededTag=None):
+	def __init__(self, session, silent = True, showSteps = False, neededTag = None):
 		self.xmlfile = ["startwizard.xml"]
-		WizardLanguage.__init__(self, session, showSteps=False)
+		WizardLanguage.__init__(self, session, showSteps = False)
 		Rc.__init__(self)
 		self["wizard"] = Pixmap()
 
@@ -44,7 +41,6 @@ class StartWizard(WizardLanguage, Rc):
 		config.misc.firstrun.value = 0
 		config.misc.firstrun.save()
 		configfile.save()
-
 
 def setLanguageFromBackup(backupfile):
 	try:
@@ -63,13 +59,11 @@ def setLanguageFromBackup(backupfile):
 	except:
 		pass
 
-
 def checkForAvailableAutoBackup():
 	for backupfile in ["/media/%s/backup/PLi-AutoBackup.tar.gz" % media for media in os.listdir("/media/") if os.path.isdir(os.path.join("/media/", media))]:
 		if os.path.isfile(backupfile):
 			setLanguageFromBackup(backupfile)
 			return True
-
 
 class AutoRestoreWizard(MessageBox):
 	def __init__(self, session):
@@ -80,26 +74,6 @@ class AutoRestoreWizard(MessageBox):
 			MessageBox.close(self, 43)
 		else:
 			MessageBox.close(self)
-
-
-def checkForDevelopImage():
-	if about.getImageTypeString() == 'Openpli develop':
-		return config.misc.check_developimage.value
-	elif not config.misc.check_developimage.value:
-		config.misc.check_developimage.value = True
-		config.misc.check_developimage.save()
-
-
-class DevelopWizard(MessageBox):
-	def __init__(self, session):
-		MessageBox.__init__(self, session, _("This image is intended for developers and testers.\nNo support will be provided!\nDo you understand this?"), type=MessageBox.TYPE_YESNO, timeout=20, default=False, simple=True)
-
-	def close(self, value):
-		if value:
-			config.misc.check_developimage.value = False
-			config.misc.check_developimage.save()
-		MessageBox.close(self)
-
 
 class AutoInstallWizard(Screen):
 	skin = """<screen name="AutoInstall" position="fill" flags="wfNoBorder">
@@ -192,14 +166,12 @@ class AutoInstallWizard(Screen):
 		os.remove("/etc/.doAutoinstall")
 		self.close(3)
 
-
 if not os.path.isfile("/etc/installed"):
 	from Components.Console import Console
 	Console().ePopen("opkg list_installed | cut -d ' ' -f 1 > /etc/installed;chmod 444 /etc/installed")
 
 wizardManager.registerWizard(AutoInstallWizard, os.path.isfile("/etc/.doAutoinstall"), priority=0)
 wizardManager.registerWizard(AutoRestoreWizard, config.misc.languageselected.value and config.misc.firstrun.value and checkForAvailableAutoBackup(), priority=0)
-wizardManager.registerWizard(DevelopWizard, checkForDevelopImage(), priority=0)
 wizardManager.registerWizard(LanguageWizard, config.misc.languageselected.value, priority=10)
 if OverscanWizard:
 	wizardManager.registerWizard(OverscanWizard, config.misc.do_overscanwizard.value, priority=30)
