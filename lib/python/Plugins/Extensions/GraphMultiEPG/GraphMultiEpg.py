@@ -29,7 +29,7 @@ from Tools.LoadPixmap import LoadPixmap
 from Tools.Alternatives import CompareWithAlternatives
 from Tools.FallbackTimer import FallbackTimerList
 from Tools.TextBoundary import getTextBoundarySize
-from enigma import eEPGCache, eListbox, gFont, eListboxPythonMultiContent, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, RT_VALIGN_CENTER, RT_WRAP, BT_SCALE, BT_KEEP_ASPECT_RATIO, BT_ALIGN_CENTER, eSize, eRect, eTimer, loadPNG, eServiceReference
+from enigma import eEPGCache, eListbox, gFont, eListboxPythonMultiContent, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, RT_VALIGN_CENTER, RT_WRAP, BT_SCALE, BT_KEEP_ASPECT_RATIO, BT_ALIGN_CENTER, eSize, eRect, eTimer, eServiceReference
 from GraphMultiEpgSetup import GraphMultiEpgSetup
 from time import localtime, time, strftime, mktime
 from Components.PluginComponent import plugins
@@ -413,11 +413,11 @@ class EPGList(GUIComponent):
 			self.instance.resize(eSize(self.listWidth, itemHeight * config.misc.graph_mepg.items_per_page.getValue()))
 		self.l.setItemHeight(itemHeight)
 
-		self.nowEvPix = loadPNG(resolveFilename(SCOPE_CURRENT_SKIN, 'epg/CurrentEvent.png'))
-		self.othEvPix = loadPNG(resolveFilename(SCOPE_CURRENT_SKIN, 'epg/OtherEvent.png'))
-		self.selEvPix = loadPNG(resolveFilename(SCOPE_CURRENT_SKIN, 'epg/SelectedEvent.png'))
-		self.recEvPix = loadPNG(resolveFilename(SCOPE_CURRENT_SKIN, 'epg/RecordingEvent.png'))
-		self.curSerPix = loadPNG(resolveFilename(SCOPE_CURRENT_SKIN, 'epg/CurrentService.png'))
+		self.nowEvPix = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, 'epg/CurrentEvent.png'))
+		self.othEvPix = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, 'epg/OtherEvent.png'))
+		self.selEvPix = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, 'epg/SelectedEvent.png'))
+		self.recEvPix = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, 'epg/RecordingEvent.png'))
+		self.curSerPix = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, 'epg/CurrentService.png'))
 
 		# if no background png's are present at all, use the solid background borders for further calculations
 		if (self.nowEvPix, self.othEvPix, self.selEvPix, self.recEvPix, self.curSerPix) == (None, None, None, None, None):
@@ -522,7 +522,7 @@ class EPGList(GUIComponent):
 			piconWidth = self.picon_size.width()
 			piconHeight = self.picon_size.height()
 			if picon != "":
-				displayPicon = loadPNG(picon)
+				displayPicon = LoadPixmap(picon)
 			if displayPicon is not None:
 				res.append(MultiContentEntryPixmapAlphaTest(
 					pos=(r1.x + self.serviceBorderVerWidth + self.number_width, r1.y + self.serviceBorderHorWidth),
