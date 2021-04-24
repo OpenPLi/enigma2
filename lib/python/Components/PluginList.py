@@ -32,10 +32,7 @@ def PluginCategoryComponent(name, png, width=440):
 
 
 def PluginDownloadComponent(plugin, name, version=None, width=440):
-	if plugin.icon is None:
-		png = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/plugin.png"))
-	else:
-		png = plugin.icon
+	png = plugin.icon or LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/plugin.png"))
 	if version:
 		if "+git" in version:
 			# remove git "hash"
