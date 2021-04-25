@@ -36,74 +36,85 @@ void undoAbbreviation(std::string &str1, std::string &str2)
 	if (s1.length() <= 5 || s2.length() <= 5)
 		return;
 
-	// check if string2 is abbreviated
+	// check if string2 prefix has ellipsis abbreviation
 	if (s2.substr(0, 3) != "...")
 		return;
 
-	// check if the string1 is abbreviated
-	if (s1.substr(s1.length() - 3) == "...")
+	// check if string1 suffix has detected abbreviation
+	std::string suffix3 = s1.substr(s1.length() - 3);
+	std::string suffix5 = s1.substr(s1.length() - 5);
+
+	if (suffix3 == "...")
 	{
-		// found abbreviation
+		// found ellipsis abbreviation
 	}
-	else if (s1.substr(s1.length() - 5) == "...\xc2\x87")
+	else if (suffix3 == ":..")
+	{
+		// found colon ellipsis abbreviation
+		s1 = replace_all(s1, ":..", ": ...");
+	}
+	else if (suffix5 == "...\xc2\x87")
 	{
 		// ensure ellipsis occur after close emphasis brackets
 		// "Some <EM>string1 text...</EM>"
 		// "Some <EM>string1 text</EM>..."
-		size_t found = s1.find("...\xc2\x87");
-		if (found != std::string::npos)
-			s1.replace(found, s1.length(), "\xc2\x87...");
+		s1 = replace_all(s1, "...\xc2\x87", "\xc2\x87...");
+	}
+	else if (suffix5 == ":..\xc2\x87")
+	{
+		// ensure colon ellipsis occur after close emphasis brackets
+		// "Some <EM>string1 text:..</EM>"
+		// "Some <EM>string1 text</EM>:..."
+		s1 = replace_all(s1, ":..\xc2\x87", "\xc2\x87: ...");
 	}
 	else
 		return;
 
-	// find the end of the string1 punctuation in string2
+	// find the end of string1 punctuation in string2
 	size_t found = s2.find_first_of(".:!?", 4);
+	if (found == std::string::npos)
+		return;
 
-	if (found < s2.length())
+	// strip off the ellipsis and any leading/trailing space
+	if (s1.substr(s1.length() - 4, 1) == " ")
 	{
-		std::string s1Tmp;
-		std::string s2Tmp;
-
-		// strip off the ellipsis and any leading/trailing space
-		if (s1.substr(s1.length() - 4, 1) == " ")
-		{
-			s1Tmp = s1.substr(0, s1.length() - 4);
-		}
-		else
-		{
-			s1Tmp = s1.substr(0, s1.length() - 3);
-		}
-
-		if (s2.substr(3, 1) == " ")
-		{
-			s2Tmp = s2.substr(4);
-		}
-		else
-		{
-			s2Tmp = s2.substr(3);
-		}
-
-		// construct the new string1 and string2
-		found = s2Tmp.find_first_of(".:!?");
-		if (found < s2Tmp.length())
-		{
-			s1 = s1Tmp + " " + s2Tmp.substr(0, found);
-			if (s2Tmp.length() - found > 2)
-			{
-				s2 = s2Tmp.substr(found + 2);
-			}
-			else
-			{
-				s2 = "";
-			}
-		}
-		else
-			return;
-
-		str1 = s1;
-		str2 = s2;
+		s1 = s1.substr(0, s1.length() - 4);
 	}
+	else
+	{
+		s1 = s1.substr(0, s1.length() - 3);
+	}
+
+	if (s2.substr(3, 1) == " ")
+	{
+		s2 = s2.substr(4);
+	}
+	else
+	{
+		s2 = s2.substr(3);
+	}
+
+	found = s2.find_first_of(".:!?");
+	// check if punctuation too complex
+	if (found <= 2)
+		return;
+
+	// construct the new string1 and string2
+	if ((s2.length() - found) > 2)
+	{
+		s1 = s1 + " " + s2.substr(0, found);
+		s2 = s2.erase(0, s2.find_first_not_of(" ", found + 1));
+
+	}
+	else
+		return;
+
+	// don't undo sanity check
+	if (s1 == "" || s2 == "")
+		return;
+
+	str1 = s1;
+	str2 = s2;
 }
 
 std::string getNum(int val, int sys)
