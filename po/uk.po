@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-19 10:48+0430\n"
+"POT-Creation-Date: 2021-04-29 14:07+0200\n"
 "PO-Revision-Date: 2021-03-11 01:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: kvinto\n"
@@ -75,6 +75,10 @@ msgstr " (Радіо)"
 
 msgid " (TV)"
 msgstr " (ТБ)"
+
+#, fuzzy
+msgid " (auto detection)"
+msgstr "Вибір звуку"
 
 msgid " (disabled)"
 msgstr " (вимкнуто)"
@@ -327,6 +331,7 @@ msgstr "%d:%02d"
 msgid "%k:%M %e/%m"
 msgstr "%k:%M %e/%m"
 
+#, python-format
 msgid ""
 "%s\n"
 "Do you still want to flash image\n"
@@ -385,10 +390,6 @@ msgstr "%s%d хв"
 #, python-format
 msgid "%s/%s: %s"
 msgstr "%s/%s: %s"
-
-#, python-format
-msgid "%s:%s"
-msgstr "%s:%s"
 
 msgid "(VU+ type)"
 msgstr "(тип VU+)"
@@ -3923,9 +3924,6 @@ msgstr "Додаткові опції"
 
 msgid "G"
 msgstr "G"
-
-msgid "GStreamer version: "
-msgstr "Версія GStreamer: "
 
 msgid "GUI Settings"
 msgstr "Налаштування GUI"
@@ -9128,15 +9126,6 @@ msgid "This field allows you to search an additional symbol rate up to %s."
 msgstr "Це поле дозволяє шукати додаткову швидкість передачі символів до %s."
 
 msgid ""
-"This image is intended for developers and testers.\n"
-"No support will be provided!\n"
-"Do you understand this?"
-msgstr ""
-"Цей імідж призначене для розробників та тестування.\n"
-"Підтримка надаватися не буде!\n"
-"Ви це розумієте?"
-
-msgid ""
 "This info is for developers only.\n"
 "For normal users it is not relevant.\n"
 "Please don't panic if you see values displayed looking suspicious!"
@@ -9836,6 +9825,7 @@ msgstr "Каталог оновлення ПЗ"
 msgid "Upper case"
 msgstr "Верхній регістр"
 
+#, python-format
 msgid "Uptime: %s\n"
 msgstr "Час роботи: %s\n"
 
@@ -10967,6 +10957,10 @@ msgstr "через "
 msgid "all"
 msgstr "всі"
 
+#, fuzzy
+msgid "all tuners"
+msgstr "Налаштування резервного тюнера"
+
 msgid "alphabetic"
 msgstr "алфавітний"
 
@@ -11511,6 +11505,10 @@ msgstr "не підтримується"
 msgid "not tested"
 msgstr "не тестується"
 
+#, fuzzy
+msgid "not valid frontend"
+msgstr "Жодного супутникового інтерфейсу не знайдено!"
+
 msgid "not_tested"
 msgstr "не_тестується"
 
@@ -11633,6 +11631,10 @@ msgstr "романтика"
 
 msgid "rotor"
 msgstr "ротор"
+
+#, fuzzy
+msgid "rotor is not used"
+msgstr "Тюнер не підтримується"
 
 msgid "running"
 msgstr "працює"
