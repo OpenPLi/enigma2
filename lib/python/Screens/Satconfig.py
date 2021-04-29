@@ -397,7 +397,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 			if currLnb.lof.value == "unicable":
 				warning_text = ""
 				if "Vuplus DVB-S NIM(AVL6222)" in self.nim.description and self.nim.internallyConnectableTo() is not None:
-					warning_text = _("Warning! The second slot of this dual tuner does not support this type. ")
+					warning_text = _("Warning: the second input of this dual tuner may not support SCR LNBs. ")
 				self.advancedUnicable = getConfigListEntry(self.indent % ("%s%s" % ("SCR (Unicable/JESS) ", _("type"))), currLnb.unicable, warning_text + _("Select the type of Single Cable Reception device you are using."))
 				self.list.append(self.advancedUnicable)
 				self.externallyPowered = getConfigListEntry(self.indent % _("Externally powered"), currLnb.powerinserter, _("Select whether your SCR device is externally powered."))
