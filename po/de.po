@@ -3,15 +3,15 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-29 14:07+0200\n"
-"PO-Revision-Date: 2020-11-22 09:44+0100\n"
-"Last-Translator: Frenske <voorzitter@openpli.org>\n"
+"PO-Revision-Date: 2021-04-30 16:06+0200\n"
+"Last-Translator: kueken\n"
 "Language-Team: OpenPLi\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 2.3\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 msgid ""
@@ -77,9 +77,8 @@ msgstr " (Radio)"
 msgid " (TV)"
 msgstr " (TV)"
 
-#, fuzzy
 msgid " (auto detection)"
-msgstr "Zur Ton-Auswahl"
+msgstr "(automatische Auswahl)"
 
 msgid " (disabled)"
 msgstr "(deaktiviert)"
@@ -212,8 +211,8 @@ msgstr[1] "%d Prozessor-Kerne"
 #, python-format
 msgid "%d day"
 msgid_plural "%d days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d Tag"
+msgstr[1] "%d Tage"
 
 #, python-format
 msgid "%d file"
@@ -470,7 +469,7 @@ msgid "16:9 always"
 msgstr "immer 16:9"
 
 msgid "16K"
-msgstr ""
+msgstr "16K"
 
 msgid "18 V"
 msgstr "18 V"
@@ -741,7 +740,7 @@ msgid "Activate network settings"
 msgstr "Aktiviere Netzwerkeinstellungen"
 
 msgid "Activate the configured network settings."
-msgstr "Aktiviere Netzwerkeinstellungen"
+msgstr "Aktiviere die konfigurierten Netzwerkeinstellungen."
 
 msgid "Activate timeshift End"
 msgstr "Aktiviere TimeShift-Ende"
@@ -953,7 +952,6 @@ msgstr "Untertitel für Hörgeschädigte erlauben"
 msgid "Allow unsupported modes"
 msgstr "Erlaube nicht unterstützte Modi"
 
-#, fuzzy
 msgid "Allows the TV remote to be used to control the receiver."
 msgstr "Fernbedienungsbefehle des Fernsehers weiterleiten"
 
@@ -1183,7 +1181,7 @@ msgid "Audio language selection 4"
 msgstr "Ton Sprachwahl 4"
 
 msgid "Audio options..."
-msgstr "Ton-Optionen…"
+msgstr "Audio-Optionen…"
 
 msgid "Audio plugins"
 msgstr "Ton-Plugins"
@@ -1267,7 +1265,7 @@ msgid "Automatic scan"
 msgstr "Automatische Suche"
 
 msgid "Automatically put the TV in standby whenever the receiver goes into standby or deep standby."
-msgstr ""
+msgstr "Fernseher wird automatisch  mit dem Receiver ausgeschaltet (Standby / Deep Standby)"
 
 msgid "Automatically start timeshift after"
 msgstr "Automatischer Timeshift-Start nach"
@@ -1364,7 +1362,7 @@ msgid "Basque"
 msgstr "Baskisch"
 
 msgid "Before sending the command to switch the TV to standby, the receiver tests if all the other devices plugged to TV are in standby. If they are not, the 'sourceinactive' command will be sent to the TV instead of the 'standby' command."
-msgstr ""
+msgstr "Receiver sucht aktive HDMI Geräte am TV und schaltet den TV nur dann in den Standby-Modus, wenn alles inaktiv ist."
 
 msgid "Begin time"
 msgstr "Startzeit"
@@ -1418,10 +1416,10 @@ msgid "Black screen till locked"
 msgstr "Schwarzes Bild bis Abschluß"
 
 msgid "Blindscan"
-msgstr ""
+msgstr "Blindscan"
 
 msgid "Blindscan terrestrial (if possible)"
-msgstr ""
+msgstr "Blindscan terristisch (wenn möglich)"
 
 msgid "Block noise reduction"
 msgstr "Block Noise Reduzierung"
@@ -1891,7 +1889,7 @@ msgid "Command order"
 msgstr "Befehlsfolge"
 
 msgid "Command the TV to switch to the correct HDMI input when zap timers activate."
-msgstr ""
+msgstr "Sende Kommando zur Aktivierung des richtigen HDMI Eingangs (TV), wenn Aufnahme Timer aktiviert."
 
 msgid "Commit info"
 msgstr "Änderungsinfos"
@@ -2645,7 +2643,7 @@ msgid "Delay before sequence repeat"
 msgstr "Verzögerung bevor Sequenz wiederholt wird"
 
 msgid "Delay between CEC commands when sending a series of commands. Some devices require this delay for correct functioning, usually between 50-150ms."
-msgstr ""
+msgstr "Zeitintervall der Sende-Impulse HDMI zwischen 50-150ms einstellbar."
 
 msgid "Delay between diseqc commands"
 msgstr "Pause zwischen Diseqc Kommandos"
@@ -3056,7 +3054,7 @@ msgid "Downloading Image"
 msgstr "Image herunterladen"
 
 msgid "Downloading plugin information. Please wait..."
-msgstr "Lade Plugin-Informationen herunter. Bitte warten…"
+msgstr "Lade Plugin-Informationen . Bitte warten…"
 
 msgid "Drop unconfigured satellites"
 msgstr "Unkonfigurierte Satelliten löschen"
@@ -3092,7 +3090,7 @@ msgid "EPG settings"
 msgstr "EPG-Einstellungen"
 
 msgid "EPG:"
-msgstr ""
+msgstr "EPG:"
 
 #, python-format
 msgid "ERROR - failed to scan (%s)!"
@@ -3168,9 +3166,8 @@ msgstr "Integriert"
 msgid "Emergency"
 msgstr "Notfall"
 
-#, fuzzy
 msgid "Empty Trash"
-msgstr "Leerer Slot"
+msgstr "Papierkorb leeren"
 
 msgid "Empty slot"
 msgstr "Leerer Slot"
@@ -3217,11 +3214,10 @@ msgstr "Aktiviere Virgin EPG"
 msgid "Enable auto cable scan"
 msgstr "Automatischen Kabelscan aktivieren"
 
-#, fuzzy
 msgid "Enable auto fastscan"
-msgstr "Aktiviere automatischen schnellen Kanalscan"
+msgstr "Aktiviere automatischen Fastscan"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Enable auto fastscan for %s"
 msgstr "Aktiviere automatischen schnellen Kanalscan für %s"
 
@@ -3249,9 +3245,8 @@ msgstr "Verschiebemodus aktivieren"
 msgid "Enable multiple bouquets"
 msgstr "Mehrere Bouquets erlauben"
 
-#, fuzzy
 msgid "Enable or disable using HDMI-CEC."
-msgstr "Aktiviere HDMI-CEC"
+msgstr "Aktiviere oder deaktiviere HDMI-CEC"
 
 msgid "Enable parental protection"
 msgstr "Jugendschutz aktivieren"
@@ -3661,7 +3656,7 @@ msgid "FEC:"
 msgstr "FEC:"
 
 msgid "FHD"
-msgstr ""
+msgstr "FHD"
 
 msgid "FTA"
 msgstr "FTA"
@@ -3756,11 +3751,9 @@ msgstr "Schnell Zeitraum"
 msgid "Fast forward speeds"
 msgstr "Vorspul-Geschwindigkeiten"
 
-#, fuzzy
 msgid "FastScan"
 msgstr "Fast-Scan"
 
-#, fuzzy
 msgid "Fastscan"
 msgstr "Fast-Scan"
 
@@ -3795,7 +3788,7 @@ msgid "Fine movement"
 msgstr "Fein-Steuerung"
 
 msgid "Finetune"
-msgstr "Feineinst."
+msgstr "Feineinstellung"
 
 msgid "Finished"
 msgstr "Beendet"
@@ -4106,7 +4099,7 @@ msgid "HD2400"
 msgstr "HD2400"
 
 msgid "HD60/Multibox/Multibox SE"
-msgstr ""
+msgstr "HD60/Multibox/Multibox SE"
 
 msgid "HDMI"
 msgstr "HDMI"
@@ -4285,7 +4278,6 @@ msgstr "I"
 msgid "I do not want to perform any service scans"
 msgstr "Ich will keine Service-Scans durchführen"
 
-#, fuzzy
 msgid "I55SE/H7(new model)/H9(new model)/H9COMBO/H9TWIN/H9SE/H9COMBOSE/H10"
 msgstr "Zgemma H7(neues Modell)/H9(neues Modell)/H9COMBO/H9TWIN/H10"
 
@@ -4320,7 +4312,7 @@ msgid "If disabled, underline characters in file and directory names are not sho
 msgstr "Wenn deaktiviert, werden Unterstriche in Dateien und Verzeichnissen durch Leerzeichen ersetzt angezeigt."
 
 msgid "If enabled, a log will be kept of CEC protocol traffic ('hdmicec.log')"
-msgstr ""
+msgstr "Wenn aktiviert, so wird ein \"hdmi.log\" erstellt."
 
 msgid "If enabled, bookmarks will be updated with the new location when you move or copy a recording."
 msgstr "Wenn aktiviert, dann wird das Lesezeichen mit Aufnahmeverzeichniss aktualisiert."
@@ -4341,7 +4333,7 @@ msgid "If set to 'yes' signal values (SNR, etc) will be calculated from API V3. 
 msgstr "Bei “Ja” werden die Signalwerte (SNR usw.) aus API V3 berechnet. Dies ist eine alte API-Version, die jetzt ersetzt wurde."
 
 msgid "If set to 'yes' the same commands will be sent to the TV for deep standby events, as are sent during regular standby events."
-msgstr ""
+msgstr "Wenn hier \"ja\" gewählt wird, dann wird Standby und Deep-Standby am TV HDMI gleich behandelt."
 
 msgid "If using multiple uncommitted switches the DiSEqC commands must be sent multiple times. Set to the number of uncommitted switches in the chain minus one."
 msgstr "Wenn mehrere nicht festgeschriebene Switches verwendet werden, müssen die DiSEqC-Befehle mehrmals gesendet werden. Legen Sie die Anzahl der nicht festgeschriebenen Switches in der Kette minus eins fest."
@@ -4512,7 +4504,7 @@ msgid "Input"
 msgstr "Eingabe"
 
 msgid "Input "
-msgstr "Eingabe"
+msgstr "Eingabe  "
 
 msgid "Input Stream ID"
 msgstr "Input Stream ID"
@@ -4572,7 +4564,7 @@ msgid "Internal hdd only"
 msgstr "Nur interne Festplatte"
 
 msgid "Internet (ntp)"
-msgstr ""
+msgstr "NTP"
 
 msgid "Interval between keys when repeating:"
 msgstr "Intervall bei der Tastenwiederholung:"
@@ -5054,12 +5046,11 @@ msgstr "Mayotte"
 msgid "Media player"
 msgstr "Media Player"
 
-#, fuzzy
 msgid "Media player: GStreamer, version "
 msgstr "GStreamer-Version:"
 
 msgid "Media player: ffmpeg, version "
-msgstr ""
+msgstr "FFmpeg-Version: "
 
 msgid "Media scanner"
 msgstr "Media Scanner"
@@ -5330,7 +5321,7 @@ msgid "NOW"
 msgstr "Jetzt"
 
 msgid "NTP Hostname"
-msgstr ""
+msgstr "NTP Hostname"
 
 msgid "NTSC"
 msgstr "NTSC"
@@ -5726,7 +5717,7 @@ msgid "On end of movie (as menu)"
 msgstr "Am Ende des Films (als Menü)"
 
 msgid "On valid ONIDs, ignore frequency sub network part"
-msgstr "Ignoriere bei gültigen ONIDs die Frequenz vom Sub-Netzwerk Teil."
+msgstr "Ignoriere bei gültigen ONIDs die Frequenz vom Sub-Netzwerk."
 
 msgid "One"
 msgstr "Eins"
@@ -5780,7 +5771,7 @@ msgid "Operating LED status while running."
 msgstr "Status LED im Betrieb"
 
 msgid "Opkg"
-msgstr ""
+msgstr "Opkg"
 
 msgid "Options disable timer"
 msgstr "Optionen deaktivieren Zeit"
@@ -6117,7 +6108,7 @@ msgid "Please select tag to filter..."
 msgstr "Bitte einen Tag zum Filtern auswählen…"
 
 msgid "Please select the movie path..."
-msgstr "Bitte den Filmpfad angeben…"
+msgstr "Bitte den Pfad zum Movie Ordner angeben…"
 
 msgid ""
 "Please select the network interface that you want to use for your internet connection.\n"
@@ -6435,9 +6426,8 @@ msgstr "Drücken Sie OK, um einen Dienst auszuwählen."
 msgid "Press OK to select satellites"
 msgstr "Drücke OK zur Auswahl der Satelliten"
 
-#, fuzzy
 msgid "Press OK to select the save location of the log file."
-msgstr "Select directory for logfile"
+msgstr "OK für die Auswahl zur Speicherung der log Datei."
 
 msgid "Press OK to select/deselect a CAId."
 msgstr "Drücken Sie OK, um eine CAID zu selektieren/deselektieren."
@@ -6551,7 +6541,6 @@ msgstr "Puerto Rico"
 msgid "Purge deleted user bouquets"
 msgstr "Gelöschte Userbouquets entfernen"
 
-#, fuzzy
 msgid "Put A/V receiver to standby too."
 msgstr "A/V-Receiver in den Standby versetzen"
 
@@ -7485,7 +7474,7 @@ msgid "Select how the satellite dish is set up. i.e. fixed dish, single LNB, DiS
 msgstr "Wählen Sie, wie die Satellitenschüssel eingerichtet wird. d.h. feste Schüssel, einzelner LNB, DiSEqC-Schalter, Positionierer usw."
 
 msgid "Select how you want your receiver to keep the correct time, either from the DVB transponder, or from the internet using NTP. Or use Auto, which will favour using NTP, but will fall back to transponder time when no internet connection is available."
-msgstr ""
+msgstr "Wähle die bevorzugte Zeitsynchronisation. Transponder ->DVB, Internet->NTP oder \"Auto\". Auswahl \"Auto\" favorisiert NTP und nutzt automatisch den Transponder falls kein Internet vorhanden ist."
 
 msgid "Select input device"
 msgstr "Eingabegerät auswählen."
@@ -8055,7 +8044,6 @@ msgstr "Aufnahme-Uhr-Symbole anzeigen"
 msgid "Show record indicator"
 msgstr "Aufnahme-Symbole anzeigen"
 
-#, fuzzy
 msgid "Show satellites list"
 msgstr "Senderliste anzeigen"
 
@@ -8317,7 +8305,7 @@ msgid "Somalia"
 msgstr "Somalia"
 
 msgid "Some TVs do not wake from standby when they receive the 'Image View On' command. If this is the case try the 'Text View On' command instead."
-msgstr ""
+msgstr "Einige TV's lassen sich via HDMI nicht einschalten wenn  \"Image View On\" aktiviert ist, versuch dann stattdessen \"Text View On\"."
 
 msgid "Some plugins are not available:\n"
 msgstr "Einige Plugins sind nicht verfügbar:\n"
@@ -8887,7 +8875,7 @@ msgid "Tags"
 msgstr "Tags"
 
 msgid "Taiwan"
-msgstr ""
+msgstr "Taiwan"
 
 msgid "Tajikistan"
 msgstr "Tadschikistan"
@@ -8966,7 +8954,7 @@ msgid "The PIN codes you entered are different."
 msgstr "Die eingegebenen PIN-Codes sind unterschiedlich."
 
 msgid "The command to wake from standby will be sent multiple times."
-msgstr ""
+msgstr "Das Kommando \"Aufwachen nach Standby\" wird mehrere Male gesendet"
 
 #, python-format
 msgid ""
@@ -8988,7 +8976,7 @@ msgid "The following files were found..."
 msgstr "Die folgenden Dateien wurden gefunden…"
 
 msgid "The hostname or the IP address of the NTP server to synchronise the time with."
-msgstr ""
+msgstr "Der Hostname oder die IP-Adresse vom NTP Server für die Zeitsynchronisation"
 
 msgid ""
 "The network wizard extension is not installed!\n"
@@ -9364,7 +9352,7 @@ msgid "Time scale"
 msgstr "Zeitskala"
 
 msgid "Time synchronization method"
-msgstr ""
+msgstr "Zeit Synchronisation Methode"
 
 msgid "Time zone"
 msgstr "Zeitzone"
@@ -9493,7 +9481,7 @@ msgid "Toggle subtitles show/hide"
 msgstr "Untertitel ein- / ausblenden"
 
 msgid "Toggle the tv and the radio player..."
-msgstr "Toggle den Fernseher und den Radio-Player…"
+msgstr "Umschalten zwischen TV und  Radio-Player Modus…"
 
 msgid "Toggle videomode"
 msgstr "Video-Modus umstellen"
@@ -9547,9 +9535,8 @@ msgstr "Übertragungstyp"
 msgid "Transponder"
 msgstr "Transponder"
 
-#, fuzzy
 msgid "Transponder Time"
-msgstr "Transponder"
+msgstr "Transponder-Zeit"
 
 msgid "Transport Stream Type"
 msgstr "Transportstreamtyp"
@@ -9715,7 +9702,7 @@ msgid ""
 "Please wait until your receiver reboots\n"
 "This may take a few minutes"
 msgstr ""
-"Stille Aktualisierung wird durchgeführt.\n"
+"Hintergrund-Aktualisierung wird durchgeführt.\n"
 "Bitte warten Sie, bis Ihr Receiver automatisch neu startet.\n"
 "Das kann einige Minuten in Anspruch nehmen."
 
@@ -9768,7 +9755,7 @@ msgid "United States Minor Outlying Islands"
 msgstr "Kleine untergeordnete Inseln der Vereinigten Staaten"
 
 msgid "United States of America"
-msgstr "vereinigte"
+msgstr "United States of America"
 
 msgid "Universal LNB"
 msgstr "Universal-LNB"
@@ -9833,9 +9820,9 @@ msgstr "Softwarekatalog wird aktualisiert."
 msgid "Upper case"
 msgstr "Großbuchstaben"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Uptime: %s\n"
-msgstr "Betriebszeit"
+msgstr "Betriebszeit %s\n"
 
 msgid "Uruguay"
 msgstr "Uruguay"
@@ -10148,7 +10135,7 @@ msgid "Volume down"
 msgstr "Lautstärke veringern"
 
 msgid "Volume keys on the receiver remote will control the TV volume."
-msgstr ""
+msgstr "Lautstärke der Fernbedienung  steuert auch die Lautstärke des TV"
 
 msgid "Volume up"
 msgstr "Lautstärke erhöhen"
@@ -10187,12 +10174,11 @@ msgid "Wake On LAN"
 msgstr "Wake On LAN"
 
 msgid "Wake the receiver from standby when selected wake command is sent from the TV."
-msgstr ""
+msgstr "Receiver wird auch aufgewacht wenn der TV eingeschaltet wird."
 
 msgid "Wakeup"
 msgstr "Anschalten"
 
-#, fuzzy
 msgid "Wakeup A/V receiver from standby too."
 msgstr "A/V-Receiver aus Standby anschalten"
 
@@ -10317,13 +10303,11 @@ msgstr "Wenn aktiviert, kann das Verhalten der Steuerkreuz-Tasten auf den Neutri
 msgid "When enabled the left, right, CH+/-, B+/-, P+/- buttons will follow the 'neutrino' style zap controls instead of the enigma2 style."
 msgstr "Wenn aktiviert, können die Tasten links / rechts sowie die  CH+/-, B+/-, P+/- Tasten auf den Neutrino-Stil angepasst werden."
 
-#, fuzzy
 msgid "When enabled the receiver will automatically return to standby when the TV is turned off."
-msgstr "Automatische Wahl der zuvor ausgewählten Audiospur."
+msgstr "Wenn aktiviert, dann wird Receiver auch ausgeschaltet, sobald TV ausgeschaltet wird."
 
-#, fuzzy
 msgid "When enabled the receiver will automatically wake from standby when the TV is turned on."
-msgstr "Automatische Wahl der zuvor ausgewählten Audiospur."
+msgstr "Wenn aktiviert, dann wird Receiver auch eingeschaltet, sobald TV eingeschaltet wird."
 
 msgid "When enabled the set top box is able to wakeup on LAN"
 msgstr "Wenn aktiviert, kann die Set-Top-Box über LAN aufwachen."
@@ -10521,7 +10505,7 @@ msgid "When nonzero, a recording will stop later than the ending time indicated 
 msgstr "Legt standardmäßig fest, um wie viele Minuten eine Aufnahme später enden soll, als von den EPG Informationen angedacht. "
 
 msgid "When receiver wakes from standby, it will command the TV to switch to the HDMI input the receiver is connected to."
-msgstr ""
+msgstr "Wenn Receiver aus dem Standby aufwacht wird der HDMI am Fernsehen aktiviert."
 
 msgid "When selected this allows video modes to be selected even if they are not reported as supported."
 msgstr "Wenn ausgewählt, können Videomodi ausgewählt werden, auch wenn sie nicht als unterstützt gemeldet werden."
@@ -10533,7 +10517,7 @@ msgid "When the content has an aspect ratio of 4:3, choose whether to scale/stre
 msgstr "Skalieren / Strecken wenn Inhalt ein Bildformat von 4:3 aufweist."
 
 msgid "When the receiver wakes from standby or deep standby, it will send a command to the TV to bring it out of standby too."
-msgstr ""
+msgstr "Wenn der Receiver aus Standby oder Deep Standby startet wird auch der TV eingeschaltet."
 
 msgid "Where to save temporary timeshift recordings?"
 msgstr "Wo wollen Sie temporäre Timeshift Aufnahmen speichern?"
@@ -10798,7 +10782,7 @@ msgid "Your receiver can use SCPC optimized search range. Consult your receiver'
 msgstr "Ihr Empfänger kann SCPC-optimierten Suchbereich verwenden. Weitere Informationen finden Sie in der Bedienungsanleitung Ihres Receivers."
 
 msgid "Your receiver can use tone amplitude. Consult your receiver's manual for more information."
-msgstr "Reserviert für zukünftige Nutzung"
+msgstr "Your receiver can use tone amplitude. Consult your receiver's manual for more information."
 
 msgid "Your receiver does not have an internet connection"
 msgstr "Keine Verbindung zum Internet vorhanden"
@@ -10974,9 +10958,8 @@ msgstr "nach"
 msgid "all"
 msgstr "alle"
 
-#, fuzzy
 msgid "all tuners"
-msgstr "Reserve-Tuner-Einstellung"
+msgstr "Alle Tuner"
 
 msgid "alphabetic"
 msgstr "Alphabet"
@@ -11524,9 +11507,8 @@ msgstr "Nicht unterstützt"
 msgid "not tested"
 msgstr "nicht getestet"
 
-#, fuzzy
 msgid "not valid frontend"
-msgstr "Keinen Satellitentuner gefunden!"
+msgstr "Keinen Tuner gefunden"
 
 msgid "not_tested"
 msgstr "nicht_getestet"
@@ -11601,7 +11583,7 @@ msgid "record"
 msgstr "Aufnehmen"
 
 msgid "recording..."
-msgstr "Nimmt auf…"
+msgstr "Aufnahme läuft.."
 
 msgid "red"
 msgstr "Rot"
@@ -11651,9 +11633,8 @@ msgstr "Romanze"
 msgid "rotor"
 msgstr "Motor"
 
-#, fuzzy
 msgid "rotor is not used"
-msgstr "Tuner nicht unterstützt"
+msgstr "Roter ist nicht aktiv"
 
 msgid "running"
 msgstr "Laufen"
