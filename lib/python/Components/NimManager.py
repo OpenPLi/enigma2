@@ -976,19 +976,19 @@ class NimManager:
 
 	def canConnectTo(self, slotid):
 		slots = []
+		isFBCTuner = self.nim_slots[slotid].isFBCTuner()
 		if self.nim_slots[slotid].internallyConnectableTo() is not None:
 			slots.append(self.nim_slots[slotid].internallyConnectableTo())
-		for type in self.nim_slots[slotid].connectableTo():
-			for slot in self.getNimListOfType(type, exception=slotid):
-				if slot not in slots and (self.hasOutputs(slot) or self.nim_slots[slotid].isFBCRoot()):
+		if "DVB-S" in self.nim_slots[slotid].connectableTo():
+			for slot in self.getNimListOfType("DVB-S", exception=slotid):
+				if slot not in slots and ((not self.nim_slots[slotid].isFBCLink() and self.hasOutputs(slot)) or (isFBCTuner and self.nim_slots[slot].isFBCRoot())):
 					slots.append(slot)
-		# remove nims, that have a conntectedTo reference on
 		for testnim in slots[:]:
-			for nim in self.getNimListOfType("DVB-S", slotid):
-				nimConfig = self.getNimConfig(nim)
-				if not(self.nim_slots[testnim].isFBCRoot() and slotid >> 3 == testnim >> 3) and (self.nim_slots[nim].isFBCLink() or "configMode" in nimConfig.content.items and nimConfig.configMode.value == "loopthrough" and int(nimConfig.connectedTo.value) == testnim):
-					slots.remove(testnim)
-					break
+			nimConfig = self.getNimConfig(testnim)
+			if "configMode" in nimConfig.content.items and ((nimConfig.configMode.value == "loopthrough" and int(nimConfig.connectedTo.value) == slotid) or nimConfig.configMode.value == "nothing"):
+				slots.remove(testnim)
+			elif self.nim_slots[testnim].isFBCTuner() and ("configMode" in nimConfig.content.items and nimConfig.configMode.value == "loopthrough" or not (self.nim_slots[testnim].isFBCRoot() and slotid >> 3 == testnim >> 3)):
+				slots.remove(testnim)
 		return slots
 
 	def canEqualTo(self, slotid):
