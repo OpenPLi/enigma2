@@ -130,6 +130,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 			if (not self.nim.isMultiType() or self.nimConfig.configMode.value != "nothing") and (not self.nim.isCombined() or self.nimConfig.configModeDVBS.value):
 				self.configMode = getConfigListEntry(self.indent % _("Configuration mode"), self.nimConfig.configMode, _("Select 'FBC SCR' if this tuner will connect to a SCR (Unicable/JESS) device. For all other setups select 'FBC automatic'.") if self.nim.isFBCLink() else _("Configure this tuner using simple or advanced options, or loop it through to another tuner, or copy a configuration from another tuner, or disable it."))
 				self.list.append(self.configMode)
+				warning_text = _(" Warning: the selected tuner should not use SCR Unicable type for LNBs because each tuner need a own SCR number.")
 				if self.nimConfig.configMode.value == "simple":			#simple setup
 					self.diseqcModeEntry = getConfigListEntry(self.indent % pgettext("Satellite configuration mode", "Mode"), self.nimConfig.diseqcMode, _("Select how the satellite dish is set up. i.e. fixed dish, single LNB, DiSEqC switch, positioner, etc."))
 					self.list.append(self.diseqcModeEntry)
@@ -139,13 +140,13 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 						self.createPositionerSetup(self.list)
 				elif self.nimConfig.configMode.value == "equal":
 					self.nimConfig.connectedTo.setChoices([((str(id), nimmanager.getNimDescription(id))) for id in nimmanager.canEqualTo(self.slotid)])
-					self.list.append(getConfigListEntry(self.indent % _("Tuner"), self.nimConfig.connectedTo, _("This setting allows the tuner configuration to be a duplication of how another tuner is already configured.")))
+					self.list.append(getConfigListEntry(self.indent % _("Tuner"), self.nimConfig.connectedTo, _("This setting allows the tuner configuration to be a duplication of how another tuner is already configured.") + warning_text))
 				elif self.nimConfig.configMode.value == "satposdepends":
 					self.nimConfig.connectedTo.setChoices([((str(id), nimmanager.getNimDescription(id))) for id in nimmanager.canDependOn(self.slotid)])
-					self.list.append(getConfigListEntry(self.indent % _("Tuner"), self.nimConfig.connectedTo, _("Select the tuner that controls the motorised dish.")))
+					self.list.append(getConfigListEntry(self.indent % _("Tuner"), self.nimConfig.connectedTo, _("Select the tuner that controls the motorised dish.") + warning_text))
 				elif self.nimConfig.configMode.value == "loopthrough":
 					self.nimConfig.connectedTo.setChoices([((str(id), nimmanager.getNimDescription(id))) for id in nimmanager.canConnectTo(self.slotid)])
-					self.list.append(getConfigListEntry(self.indent % _("Connected to"), self.nimConfig.connectedTo, _("Select the tuner that this loopthrough depends on.")))
+					self.list.append(getConfigListEntry(self.indent % _("Connected to"), self.nimConfig.connectedTo, _("Select the tuner that this loopthrough depends on.") + warning_text))
 				elif self.nimConfig.configMode.value == "nothing":
 					pass
 				elif self.nimConfig.configMode.value == "advanced":
