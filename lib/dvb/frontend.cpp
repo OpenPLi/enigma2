@@ -1208,7 +1208,7 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 		ret = (int)(snr / 75);
 		ter_max = 1700;
 	}
-	else if (strstr(m_description, "Sundtek DVB-S/S2 (IV)"))
+	else if (strstr(m_description, "Sundtek DVB-S/S2")) // All version Sundtek DVB-S/S2
 	{
 		ret = (int)(snr / 40.5);
 		sat_max = 1900;
