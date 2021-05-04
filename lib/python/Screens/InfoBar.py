@@ -1,3 +1,8 @@
+from Components.Label import Label
+from Components.Pixmap import Pixmap
+
+from Tools.LoadPixmap import LoadPixmap
+from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN, fileExists
 from Tools.Profile import profile
 from enigma import eServiceReference
 
@@ -148,9 +153,13 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 	def openMoviePlayer(self, ref):
 		self.session.open(MoviePlayer, ref, slist=self.servicelist, lastservice=self.session.nav.getCurrentlyPlayingServiceOrGroup(), infobar=self)
 
+SEEK_STATE_PLAY = (0, 0, 0, ">")
+SEEK_STATE_PAUSE = (1, 0, 0, "||")
+SEEK_STATE_EOF = (1, 0, 0, "END")
+SEEK_STATE_STOP = (0, 0, 0, "STOP")
 
 class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBarShowMovies, InfoBarInstantRecord, InfoBarVmodeButton,
-		InfoBarAudioSelection, HelpableScreen, InfoBarNotifications, InfoBarServiceNotifications, InfoBarPVRState,
+		InfoBarAudioSelection, HelpableScreen, InfoBarNotifications, InfoBarServiceNotifications,
 		InfoBarCueSheetSupport, InfoBarMoviePlayerSummarySupport, InfoBarSubtitleSupport, Screen, InfoBarTeletextPlugin,
 		InfoBarServiceErrorPopupSupport, InfoBarExtensions, InfoBarPlugins, InfoBarPiP, InfoBarHDMI, InfoBarHotkey):
 
@@ -180,7 +189,7 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 		for x in HelpableScreen, InfoBarShowHide, InfoBarMenu, \
 				InfoBarBase, InfoBarSeek, InfoBarShowMovies, InfoBarInstantRecord, InfoBarVmodeButton,\
 				InfoBarAudioSelection, InfoBarNotifications, \
-				InfoBarServiceNotifications, InfoBarPVRState, InfoBarCueSheetSupport, \
+				InfoBarServiceNotifications, InfoBarCueSheetSupport, \
 				InfoBarMoviePlayerSummarySupport, InfoBarSubtitleSupport, \
 				InfoBarTeletextPlugin, InfoBarServiceErrorPopupSupport, InfoBarExtensions, \
 				InfoBarPlugins, InfoBarPiP, InfoBarHotkey:
@@ -189,13 +198,48 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 		self.servicelist = slist
 		self.infobar = infobar
 		self.lastservice = lastservice or session.nav.getCurrentlyPlayingServiceOrGroup()
+		self.onShow.append(self.__onShow)
+		self.currentSeekState = SEEK_STATE_PLAY
 		session.nav.playService(service)
 		self.cur_service = service
 		self.returning = False
 		self.onClose.append(self.__onClose)
+		self["statetext"] = Label(text="")
+		self["statetexticon"] = Label(text="")
+		self["stateicon"] = Pixmap()
+		self.onPlayStateChanged.append(self.__playMVStateChanged)
+		self.picFF = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/pvr/ff.png"))
+		self.picRew = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/pvr/rew.png"))
+		self.picPlay = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/pvr/play.png"))
+		self.picPause = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/pvr/pause.png"))
 		config.misc.standbyCounter.addNotifier(self.standbyCountChanged, initial_call=False)
 		self.movieselection_dlg = None
 		MoviePlayer.movie_instance = self
+
+	def __onShow(self):
+		self.__playMVStateChanged(self.currentSeekState)
+		
+	def __playMVStateChanged(self, state):
+		self.currentSeekState = state
+		statetext = state[3]
+		self["statetext"].setText(statetext)
+		if state[1] > 1:
+			self["statetext"].setText("x%d" % state[1])
+		elif state[1] < 0:
+			self["statetext"].setText("x%d" % -state[1])
+		elif state[1] == 0 and state[2] > 1:
+			self["statetext"].setText("x%d" % state[2])
+		else:
+			self["statetext"].setText("")
+			
+		if state[1] > 1 and self.picFF is not None:
+			self["stateicon"].setPixmap(self.picFF)
+		elif state[1] < 0 and self.picRew is not None:
+			self["stateicon"].setPixmap(self.picRew)
+		elif state == SEEK_STATE_PLAY and self.picPlay is not None:
+			self["stateicon"].setPixmap(self.picPlay)
+		elif state == SEEK_STATE_PAUSE and self.picPause is not None:
+			self["stateicon"].setPixmap(self.picPause)
 
 	def __onClose(self):
 		config.misc.standbyCounter.removeNotifier(self.standbyCountChanged)
