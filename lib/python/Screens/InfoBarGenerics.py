@@ -5,6 +5,7 @@ from Components.ActionMap import NumberActionMap
 from Components.Harddisk import harddiskmanager
 from Components.Input import Input
 from Components.Label import Label
+from Components.Pixmap import Pixmap
 from Components.MovieList import AUDIO_EXTENSIONS, MOVIE_EXTENSIONS, DVD_EXTENSIONS
 from Components.PluginComponent import plugins
 from Components.ServiceEventTracker import ServiceEventTracker
@@ -37,7 +38,8 @@ from Screens.UnhandledKey import UnhandledKey
 from ServiceReference import ServiceReference, isPlayableForCur
 
 from Tools import Notifications, ASCIItranslit
-from Tools.Directories import fileExists, getRecordingFilename, moveFiles
+from Tools.Directories import fileExists, getRecordingFilename, moveFiles, resolveFilename, SCOPE_CURRENT_SKIN
+from Tools.LoadPixmap import LoadPixmap
 
 from enigma import eTimer, eServiceCenter, eDVBServicePMTHandler, iServiceInformation, iPlayableService, eServiceReference, eEPGCache, eActionMap, getDesktop, eDVBDB
 
@@ -1747,25 +1749,68 @@ from Screens.PVRState import PVRState, TimeshiftState
 
 
 class InfoBarPVRState:
-	def __init__(self, screen=PVRState, force_show=False):
+	def __init__(self, screen=PVRState, force_show=False, show_external_dialog=False):
+		self["statetext"] = Label(text="")
+		self["statetexticon"] = Label(text="")
+		self["stateicon"] = Pixmap()
+		self.show_external_dialog = show_external_dialog
+		self.currentSeekState = self.SEEK_STATE_PLAY
+
+		self.picFF = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/pvr/ff.svg"))
+		if self.picFF is None:
+			self.picFF = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/pvr/ff.png"))
+		self.picRew = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/pvr/rew.svg"))
+		if self.picRew is None:
+			self.picRew = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/pvr/rew.png"))
+		self.picPlay = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/pvr/play.svg"))
+		if self.picPlay is None:
+			self.picPlay = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/pvr/play.png"))
+		self.picPause = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/pvr/pause.svg"))
+		if self.picPause is None:
+			self.picPause = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/pvr/pause.png"))
+
 		self.onPlayStateChanged.append(self.__playStateChanged)
-		self.pvrStateDialog = self.session.instantiateDialog(screen)
+		if show_external_dialog:
+			self.pvrStateDialog = self.session.instantiateDialog(screen)
+			self.onHide.append(self.pvrStateDialog.hide)
 		self.onShow.append(self._mayShow)
-		self.onHide.append(self.pvrStateDialog.hide)
 		self.force_show = force_show
 
 	def _mayShow(self):
-		if self.shown and self.seekstate != self.SEEK_STATE_PLAY:
+		if self.shown and self.currentSeekState != self.SEEK_STATE_PLAY and show_external_dialog:
 			self.pvrStateDialog.show()
+		if self.shown:
+			self.__playStateChanged(self.currentSeekState)
 
 	def __playStateChanged(self, state):
 		playstateString = state[3]
-		self.pvrStateDialog["state"].setText(playstateString)
+		if self.show_external_dialog:
+			self.pvrStateDialog["state"].setText(playstateString)
+
+		self.currentSeekState = state
+		self["statetexticon"].setText(playstateString)
+		if state[1] > 1:
+			self["statetext"].setText("x%d" % state[1])
+		elif state[1] < 0:
+			self["statetext"].setText("x%d" % -state[1])
+		elif state[1] == 0 and state[2] > 1:
+			self["statetext"].setText("x%d" % state[2])
+		else:
+			self["statetext"].setText("")
+			
+		if state[1] > 1 and self.picFF is not None:
+			self["stateicon"].setPixmap(self.picFF)
+		elif state[1] < 0 and self.picRew is not None:
+			self["stateicon"].setPixmap(self.picRew)
+		elif state == self.SEEK_STATE_PLAY and self.picPlay is not None:
+			self["stateicon"].setPixmap(self.picPlay)
+		elif state == self.SEEK_STATE_PAUSE and self.picPause is not None:
+			self["stateicon"].setPixmap(self.picPause)
 
 		# if we return into "PLAY" state, ensure that the dialog gets hidden if there will be no infobar displayed
-		if not config.usage.show_infobar_on_skip.value and self.seekstate == self.SEEK_STATE_PLAY and not self.force_show:
+		if not config.usage.show_infobar_on_skip.value and state == self.SEEK_STATE_PLAY and not self.force_show and self.show_external_dialog:
 			self.pvrStateDialog.hide()
-		else:
+		elif self.show_external_dialog:
 			self._mayShow()
 
 
@@ -1776,7 +1821,7 @@ class TimeshiftLive(Screen):
 
 class InfoBarTimeshiftState(InfoBarPVRState):
 	def __init__(self):
-		InfoBarPVRState.__init__(self, screen=TimeshiftState, force_show=True)
+		InfoBarPVRState.__init__(self, screen=TimeshiftState, force_show=True, show_external_dialog=True)
 		self.timeshiftLiveScreen = self.session.instantiateDialog(TimeshiftLive)
 		self.onHide.append(self.timeshiftLiveScreen.hide)
 		if isStandardInfoBar(self):
