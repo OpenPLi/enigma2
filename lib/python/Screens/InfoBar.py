@@ -222,7 +222,7 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 	def __playMVStateChanged(self, state):
 		self.currentSeekState = state
 		statetext = state[3]
-		self["statetext"].setText(statetext)
+		self["statetexticon"].setText(statetext)
 		if state[1] > 1:
 			self["statetext"].setText("x%d" % state[1])
 		elif state[1] < 0:
