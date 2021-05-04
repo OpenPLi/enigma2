@@ -50,6 +50,7 @@ dist_install_DATA = \
 	sel.png \
 	sel2.png \
 	text.png \
+	vkey_icon.png \
 	blue.svg \
 	green.svg \
 	red.svg \
@@ -68,7 +69,6 @@ dist_install_DATA = \
 	vkey_green_l.svg \
 	vkey_green_m.svg \
 	vkey_green_r.svg \
-	vkey_icon.svg \
 	vkey_last.svg \
 	vkey_left.svg \
 	vkey_locale.svg \
