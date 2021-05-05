@@ -48,8 +48,6 @@ class InfoBarScreenSaver:
 	def screensaverTimeout(self):
 		if self.execing and not Screens.Standby.inStandby and not Screens.Standby.inTryQuitMainloop:
 			self.hide()
-			if hasattr(self, "pvrStateDialog"):
-				self.pvrStateDialog.hide()
 			self.screensaver.show()
 			eActionMap.getInstance().bindAction('', -maxint - 1, self.keypressScreenSaver)
 
