@@ -5,7 +5,6 @@ from Components.ActionMap import NumberActionMap
 from Components.Harddisk import harddiskmanager
 from Components.Input import Input
 from Components.Label import Label
-from Components.Pixmap import Pixmap
 from Components.MovieList import AUDIO_EXTENSIONS, MOVIE_EXTENSIONS, DVD_EXTENSIONS
 from Components.PluginComponent import plugins
 from Components.ServiceEventTracker import ServiceEventTracker
@@ -38,8 +37,7 @@ from Screens.UnhandledKey import UnhandledKey
 from ServiceReference import ServiceReference, isPlayableForCur
 
 from Tools import Notifications, ASCIItranslit
-from Tools.Directories import fileExists, getRecordingFilename, moveFiles, resolveFilename, SCOPE_CURRENT_SKIN
-from Tools.LoadPixmap import LoadPixmap
+from Tools.Directories import fileExists, getRecordingFilename, moveFiles
 
 from enigma import eTimer, eServiceCenter, eDVBServicePMTHandler, iServiceInformation, iPlayableService, eServiceReference, eEPGCache, eActionMap, getDesktop, eDVBDB
 
@@ -1745,57 +1743,49 @@ class InfoBarSeek:
 			self.jumpNextMark()
 
 
+from Screens.PVRState import PVRState, TimeshiftState
+
 
 class InfoBarPVRState:
-	def __init__(self):
-		self["statespeedtext"] = Label(text="")
-		self["statetext"] = Label(text="")
-		self["stateicon"] = Pixmap()
-
+	def __init__(self, screen=PVRState, force_show=False):
 		self.seekstate = self.SEEK_STATE_PLAY
-
-		self.picFF = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/pvr/ff.svg"))
-		if self.picFF is None:
-			self.picFF = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/pvr/ff.png"))
-		self.picRew = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/pvr/rew.svg"))
-		if self.picRew is None:
-			self.picRew = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/pvr/rew.png"))
-		self.picPlay = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/pvr/play.svg"))
-		if self.picPlay is None:
-			self.picPlay = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/pvr/play.png"))
-		self.picPause = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/pvr/pause.svg"))
-		if self.picPause is None:
-			self.picPause = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/pvr/pause.png"))
-
 		self.onPlayStateChanged.append(self.__playStateChanged)
-		
+		self.pvrStateDialog = self.session.instantiateDialog(screen)
 		self.onShow.append(self._mayShow)
+		self.onHide.append(self.pvrStateDialog.hide)
+		self.force_show = force_show
 
 	def _mayShow(self):
 		if self.shown:
 			self.__playStateChanged(self.seekstate)
+			self.pvrStateDialog.show()
+
 
 	def __playStateChanged(self, state):
 		playstateString = state[3]
+		self.pvrStateDialog["state"].setText(playstateString)
 
-		self["statetext"].setText(playstateString)
 		if state[1] > 1:
-			self["statespeedtext"].setText("x%d" % state[1])
+			self["statespeed"].setText("x%d" % state[1])
 		elif state[1] < 0:
-			self["statespeedtext"].setText("x%d" % -state[1])
+			self["statespeed"].setText("x%d" % -state[1])
 		elif state[1] == 0 and state[2] > 1:
-			self["statespeedtext"].setText("x%d" % state[2])
+			self["statespeed"].setText("x%d" % state[2])
 		else:
-			self["statespeedtext"].setText("")
-			
-		if state[1] > 1 and self.picFF is not None:
-			self["stateicon"].instance.setPixmap(self.picFF)
-		elif state[1] < 0 and self.picRew is not None:
-			self["stateicon"].instance.setPixmap(self.picRew)
-		elif state == self.SEEK_STATE_PLAY and self.picPlay is not None:
-			self["stateicon"].instance.setPixmap(self.picPlay)
-		elif state == self.SEEK_STATE_PAUSE and self.picPause is not None:
-			self["stateicon"].instance.setPixmap(self.picPause)
+			self["statespeed"].setText("")
+
+		if state != self.SEEK_STATE_EOF:	
+			if state[1] > 1:
+				self["stateicon"].setPixmapNum(0) #stateFF
+			elif state[1] < 0:
+				self["stateicon"].setPixmapNum(1) #stateRew
+			elif state == self.SEEK_STATE_PLAY:
+				self["stateicon"].setPixmapNum(2) #statePlay
+			elif state == self.SEEK_STATE_PAUSE:
+				self["stateicon"].setPixmapNum(3) #statePause
+			self["stateicon"].show()
+		else:
+			self["stateicon"].hide()
 
 
 class TimeshiftLive(Screen):
@@ -1805,7 +1795,16 @@ class TimeshiftLive(Screen):
 
 class InfoBarTimeshiftState(InfoBarPVRState):
 	def __init__(self):
-		InfoBarPVRState.__init__(self)
+		InfoBarPVRState.__init__(self, screen=TimeshiftState, force_show=True)
+		self.timeshiftLiveScreen = self.session.instantiateDialog(TimeshiftLive)
+		self.onHide.append(self.timeshiftLiveScreen.hide)
+		if isStandardInfoBar(self):
+			self.secondInfoBarScreen and self.secondInfoBarScreen.onShow.append(self.timeshiftLiveScreen.hide)
+			self.secondInfoBarScreenSimple and self.secondInfoBarScreenSimple.onShow.append(self.timeshiftLiveScreen.hide)
+		self.timeshiftLiveScreen.hide()
+		self.__hideTimer = eTimer()
+		self.__hideTimer.callback.append(self.__hideTimeshiftState)
+		self.onFirstExecBegin.append(self.pvrStateDialog.show)
 
 	def _mayShow(self):
 		if self.timeshiftEnabled():
@@ -1814,6 +1813,21 @@ class InfoBarTimeshiftState(InfoBarPVRState):
 					self.secondInfoBarScreen.hide()
 				if self.secondInfoBarScreenSimple and self.secondInfoBarScreenSimple.shown:
 					self.secondInfoBarScreenSimple.hide()
+			if self.timeshiftActivated():
+				self.pvrStateDialog.show()
+				self.timeshiftLiveScreen.hide()
+			elif self.showTimeshiftState:
+				self.pvrStateDialog.hide()
+				self.timeshiftLiveScreen.show()
+				self.showTimeshiftState = False
+			if self.seekstate == self.SEEK_STATE_PLAY and config.usage.infobar_timeout.index and (self.pvrStateDialog.shown or self.timeshiftLiveScreen.shown):
+				self.__hideTimer.startLongTimer(config.usage.infobar_timeout.index)
+		else:
+			self.__hideTimeshiftState()
+
+	def __hideTimeshiftState(self):
+		self.pvrStateDialog.hide()
+		self.timeshiftLiveScreen.hide()
 
 
 class InfoBarShowMovies:
@@ -1904,6 +1918,7 @@ class InfoBarTimeshift():
 			-config.seek.selfdefined_46.value, False, config.seek.selfdefined_46.value,
 			-config.seek.selfdefined_79.value, False, config.seek.selfdefined_79.value)[key - 1]
 		self.doSeekRelative(time * 90000)
+		self.pvrStateDialog.show()
 		return 1
 
 	def getTimeshift(self):
@@ -1928,9 +1943,11 @@ class InfoBarTimeshift():
 			if pauseable:
 				if self.seekstate == self.SEEK_STATE_PLAY:
 					pauseable.pause()
+					self.pvrStateDialog.show()
 					self.seekstate = self.SEEK_STATE_PAUSE
 				else:
 					pauseable.unpause()
+					self.pvrStateDialog.hide()
 					self.seekstate = self.SEEK_STATE_PLAY
 				return
 		return 0
@@ -1993,6 +2010,7 @@ class InfoBarTimeshift():
 		ts = self.getTimeshift()
 		if answer and ts:
 			ts.stopTimeshift()
+			self.pvrStateDialog.hide()
 			self.setCurrentEventTimer()
 			self.setLCDsymbolTimeshift()
 			# disable actions
@@ -2075,6 +2093,7 @@ class InfoBarTimeshift():
 			open(SystemInfo["LCDsymbol_timeshift"], "w").write(self.timeshiftEnabled() and "1" or "0")
 
 	def __serviceStarted(self):
+		self.pvrStateDialog.hide()
 		self.__seekableStatusChanged()
 		if self.ts_start_delay_timer.isActive():
 			self.ts_start_delay_timer.stop()
