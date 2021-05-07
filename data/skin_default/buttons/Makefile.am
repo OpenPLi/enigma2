@@ -1,7 +1,6 @@
 installdir = $(pkgdatadir)/skin_default/buttons
 
 dist_install_DATA = \
-	blue.png \
 	blue_pressed.png \
 	button_blue.png \
 	button_blue_off.png \
@@ -12,7 +11,6 @@ dist_install_DATA = \
 	button_yellow.png \
 	button_yellow_off.png \
 	green-big.png \
-	green.png \
 	grey.png \
 	key_0.png \
 	key_1.png \
@@ -46,48 +44,50 @@ dist_install_DATA = \
 	play.png \
 	rec.png \
 	red-big.png \
-	red.png \
 	repeat-off.png \
 	repeat-on.png \
 	right.png \
 	sel.png \
 	sel2.png \
 	text.png \
-	vkey_backspace.png \
-	vkey_bg_l.png \
-	vkey_bg_m.png \
-	vkey_bg_r.png \
-	vkey_blue_l.png \
-	vkey_blue_m.png \
-	vkey_blue_r.png \
-	vkey_clear.png \
-	vkey_delete.png \
-	vkey_enter.png \
-	vkey_exit.png \
-	vkey_first.png \
-	vkey_green_l.png \
-	vkey_green_m.png \
-	vkey_green_r.png \
 	vkey_icon.png \
-	vkey_last.png \
-	vkey_left.png \
-	vkey_locale.png \
-	vkey_red_l.png \
-	vkey_red_m.png \
-	vkey_red_r.png \
-	vkey_right.png \
-	vkey_sel_l.png \
-	vkey_sel_m.png \
-	vkey_sel_r.png \
-	vkey_shift.png \
-	vkey_shift0.png \
-	vkey_shift1.png \
-	vkey_shift2.png \
-	vkey_shift3.png \
-	vkey_space.png \
-	vkey_space_alt.png \
-	vkey_text.png \
-	vkey_yellow_l.png \
-	vkey_yellow_m.png \
-	vkey_yellow_r.png \
-	yellow.png
+	blue.svg \
+	green.svg \
+	red.svg \
+	vkey_backspace.svg \
+	vkey_bg_l.svg \
+	vkey_bg_m.svg \
+	vkey_bg_r.svg \
+	vkey_blue_l.svg \
+	vkey_blue_m.svg \
+	vkey_blue_r.svg \
+	vkey_clear.svg \
+	vkey_delete.svg \
+	vkey_enter.svg \
+	vkey_exit.svg \
+	vkey_first.svg \
+	vkey_green_l.svg \
+	vkey_green_m.svg \
+	vkey_green_r.svg \
+	vkey_last.svg \
+	vkey_left.svg \
+	vkey_locale.svg \
+	vkey_red_l.svg \
+	vkey_red_m.svg \
+	vkey_red_r.svg \
+	vkey_right.svg \
+	vkey_sel_l.svg \
+	vkey_sel_m.svg \
+	vkey_sel_r.svg \
+	vkey_shift.svg \
+	vkey_shift0.svg \
+	vkey_shift1.svg \
+	vkey_shift2.svg \
+	vkey_shift3.svg \
+	vkey_space.svg \
+	vkey_space_alt.svg \
+	vkey_text.svg \
+	vkey_yellow_l.svg \
+	vkey_yellow_m.svg \
+	vkey_yellow_r.svg \
+	yellow.svg
