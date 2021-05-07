@@ -5,6 +5,7 @@ from Components.ActionMap import NumberActionMap
 from Components.Harddisk import harddiskmanager
 from Components.Input import Input
 from Components.Label import Label
+from Components.Pixmap import MultiPixmap
 from Components.MovieList import AUDIO_EXTENSIONS, MOVIE_EXTENSIONS, DVD_EXTENSIONS
 from Components.PluginComponent import plugins
 from Components.ServiceEventTracker import ServiceEventTracker
