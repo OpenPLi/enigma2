@@ -1749,6 +1749,10 @@ from Screens.PVRState import PVRState, TimeshiftState
 class InfoBarPVRState:
 	def __init__(self, screen=PVRState, force_show=False):
 		self.seekstate = self.SEEK_STATE_PLAY
+		self["statespeed"] = Label(text="")
+		self["state"] = Label(text="")
+		self["stateicon"] = MultiPixmap()
+		self["stateicon"].hide()
 		self.onPlayStateChanged.append(self.__playStateChanged)
 		self.pvrStateDialog = self.session.instantiateDialog(screen)
 		self.onShow.append(self._mayShow)
@@ -1764,27 +1768,38 @@ class InfoBarPVRState:
 	def __playStateChanged(self, state):
 		playstateString = state[3]
 		self.pvrStateDialog["state"].setText(playstateString)
+		self["state"].setText(playstateString)
 
 		if state[1] > 1:
+			self.pvrStateDialog["statespeed"].setText("x%d" % state[1])
 			self["statespeed"].setText("x%d" % state[1])
 		elif state[1] < 0:
+			self.pvrStateDialog["statespeed"].setText("x%d" % -state[1])
 			self["statespeed"].setText("x%d" % -state[1])
 		elif state[1] == 0 and state[2] > 1:
+			self.pvrStateDialog["statespeed"].setText("x%d" % state[2])
 			self["statespeed"].setText("x%d" % state[2])
 		else:
+			self.pvrStateDialog["statespeed"].setText("")
 			self["statespeed"].setText("")
 
 		if state != self.SEEK_STATE_EOF:	
 			if state[1] > 1:
+				self.pvrStateDialog["stateicon"].setPixmapNum(0) #stateFF
 				self["stateicon"].setPixmapNum(0) #stateFF
 			elif state[1] < 0:
+				self.pvrStateDialog["stateicon"].setPixmapNum(1) #stateRew
 				self["stateicon"].setPixmapNum(1) #stateRew
 			elif state == self.SEEK_STATE_PLAY:
+				self.pvrStateDialog["stateicon"].setPixmapNum(2) #statePlay
 				self["stateicon"].setPixmapNum(2) #statePlay
 			elif state == self.SEEK_STATE_PAUSE:
+				self.pvrStateDialog["stateicon"].setPixmapNum(3) #statePause
 				self["stateicon"].setPixmapNum(3) #statePause
+			self.pvrStateDialog["stateicon"].show()
 			self["stateicon"].show()
 		else:
+			self.pvrStateDialog["stateicon"].hide()
 			self["stateicon"].hide()
 
 
