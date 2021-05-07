@@ -3,7 +3,7 @@ import errno
 import inspect
 import os
 
-from enigma import eEnv, getDesktop
+from enigma import eEnv
 from re import compile
 from stat import S_IMODE
 
@@ -143,7 +143,6 @@ def resolveFilename(scope, base="", path_prefix=None):
 			os.path.join(defaultPaths[SCOPE_CONFIG][0], "skin_common"),
 			defaultPaths[SCOPE_CONFIG][0],
 			os.path.join(defaultPaths[SCOPE_SKIN][0], skin),
-			os.path.join(defaultPaths[SCOPE_SKIN][0], "skin_fallback_%d" % getDesktop(0).size().height()),
 			os.path.join(defaultPaths[SCOPE_SKIN][0], "skin_default"),
 			defaultPaths[SCOPE_SKIN][0]
 		]
@@ -162,7 +161,6 @@ def resolveFilename(scope, base="", path_prefix=None):
 			os.path.join(defaultPaths[SCOPE_CONFIG][0], "display", "skin_common"),
 			defaultPaths[SCOPE_CONFIG][0],
 			os.path.join(defaultPaths[SCOPE_LCDSKIN][0], skin),
-			os.path.join(defaultPaths[SCOPE_LCDSKIN][0], "skin_fallback_%s" % getDesktop(1).size().height()),
 			os.path.join(defaultPaths[SCOPE_LCDSKIN][0], "skin_default"),
 			defaultPaths[SCOPE_LCDSKIN][0]
 		]
