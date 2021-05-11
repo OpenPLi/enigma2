@@ -502,6 +502,8 @@ class AttributeParser:
 		self.guiObject.setItemHeight(parseScale(value))
 
 	def pixmap(self, value):
+		if value.endswith(".svg"): # if graphic is svg force alphatest to "blend"
+			self.guiObject.setAlphatest(2)
 		self.guiObject.setPixmap(loadPixmap(value, self.desktop, self.guiObject.size().width(), self.guiObject.size().height()))
 
 	def backgroundPixmap(self, value):
