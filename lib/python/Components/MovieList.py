@@ -1,7 +1,7 @@
 from GUIComponent import GUIComponent
 from Tools.FuzzyDate import FuzzyTime
 from ServiceReference import ServiceReference
-from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest, MultiContentEntryProgress
+from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaBlend, MultiContentEntryProgress
 from Components.config import config
 import os
 import struct
@@ -396,13 +396,13 @@ class MovieList(GUIComponent):
 					p = os.path.split(p[0])
 				txt = p[1]
 				if txt == ".Trash":
-					res.append(MultiContentEntryPixmapAlphaTest(pos=(0, self.trashShift), size=(iconSize, self.iconTrash.size().height()), png=self.iconTrash))
+					res.append(MultiContentEntryPixmapAlphaBlend(pos=(0, self.trashShift), size=(iconSize, self.iconTrash.size().height()), png=self.iconTrash))
 					res.append(MultiContentEntryText(pos=(x, 0), size=(width - x - tn - r, self.itemHeight), font=0, flags=RT_HALIGN_LEFT | valign_center, text=_("Deleted items")))
 					res.append(MultiContentEntryText(pos=(width - tn - r, 0), size=(tn, self.itemHeight), font=1, flags=RT_HALIGN_RIGHT | valign_center, text=_("Trash can")))
 					return res
 			if not config.movielist.show_underlines.value:
 				txt = txt.replace('_', ' ').strip()
-			res.append(MultiContentEntryPixmapAlphaTest(pos=(0, self.dirShift), size=(iconSize, iconSize), png=self.iconFolder))
+			res.append(MultiContentEntryPixmapAlphaBlend(pos=(0, self.dirShift), size=(iconSize, iconSize), png=self.iconFolder))
 			res.append(MultiContentEntryText(pos=(x, 0), size=(width - x - tn - r, self.itemHeight), font=0, flags=RT_HALIGN_LEFT | valign_center, text=txt))
 			res.append(MultiContentEntryText(pos=(width - tn - r, 0), size=(tn, self.itemHeight), font=1, flags=RT_HALIGN_RIGHT | valign_center, text=_("Directory")))
 			return res
@@ -470,7 +470,7 @@ class MovieList(GUIComponent):
 				pos = (0, self.partIconeShiftOriginal)
 			else:
 				pos = (0, self.partIconeShiftMinimal)
-			res.append(MultiContentEntryPixmapAlphaTest(pos=pos, size=(iconSize, data.icon.size().height()), png=data.icon))
+			res.append(MultiContentEntryPixmapAlphaBlend(pos=pos, size=(iconSize, data.icon.size().height()), png=data.icon))
 		switch = config.usage.show_icons_in_movielist.value
 		if switch in ('p', 's'):
 			if switch == 'p':

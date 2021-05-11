@@ -26,7 +26,7 @@ class InputDeviceSelection(Screen, HelpableScreen):
 			<convert type="TemplatedMultiContent">
 			<!--  device, description, devicepng, divpng  -->
 							{"template": [
-									MultiContentEntryPixmapAlphaTest(pos = (2, 8), size = (54, 54), png = 2), # index 3 is the interface pixmap
+									MultiContentEntryPixmapAlphaBlend(pos = (2, 8), size = (54, 54), png = 2), # index 3 is the interface pixmap
 									MultiContentEntryText(pos = (65, 6), size = (450, 54), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text = 1), # index 1 is the interfacename
 								],
 							"fonts": [gFont("Regular", 28),gFont("Regular", 20)],

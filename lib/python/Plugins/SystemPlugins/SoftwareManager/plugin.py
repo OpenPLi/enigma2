@@ -21,7 +21,6 @@ from Components.Harddisk import harddiskmanager
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigText, ConfigLocations, ConfigYesNo, ConfigSelection
 from Components.ConfigList import ConfigListScreen
 from Components.Console import Console
-from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
 from Components.SelectionList import SelectionList
 from Components.PluginComponent import plugins
 from Components.About import about
@@ -531,13 +530,13 @@ class PluginManager(Screen, PackageInfoHandler):
 					{"default": (51,[
 							MultiContentEntryText(pos = (0, 1), size = (470, 24), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is the name
 							MultiContentEntryText(pos = (0, 25), size = (470, 24), font=1, flags = RT_HALIGN_LEFT, text = 2), # index 2 is the description
-							MultiContentEntryPixmapAlphaTest(pos = (475, 0), size = (48, 48), png = 5), # index 5 is the status pixmap
-							MultiContentEntryPixmapAlphaTest(pos = (0, 49), size = (550, 2), png = 6), # index 6 is the div pixmap
+							MultiContentEntryPixmapAlphaBlend(pos = (475, 0), size = (48, 48), png = 5), # index 5 is the status pixmap
+							MultiContentEntryPixmapAlphaBlend(pos = (0, 49), size = (550, 2), png = 6), # index 6 is the div pixmap
 						]),
 					"category": (40,[
 							MultiContentEntryText(pos = (30, 0), size = (500, 22), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is the name
 							MultiContentEntryText(pos = (30, 22), size = (500, 16), font=2, flags = RT_HALIGN_LEFT, text = 1), # index 1 is the description
-							MultiContentEntryPixmapAlphaTest(pos = (0, 38), size = (550, 2), png = 3), # index 3 is the div pixmap
+							MultiContentEntryPixmapAlphaBlend(pos = (0, 38), size = (550, 2), png = 3), # index 3 is the div pixmap
 						])
 					},
 					"fonts": [gFont("Regular", 22),gFont("Regular", 20),gFont("Regular", 16)],
@@ -976,8 +975,8 @@ class PluginManagerInfo(Screen):
 					{"template": [
 							MultiContentEntryText(pos = (50, 0), size = (150, 26), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is the name
 							MultiContentEntryText(pos = (50, 27), size = (540, 23), font=1, flags = RT_HALIGN_LEFT, text = 1), # index 1 is the state
-							MultiContentEntryPixmapAlphaTest(pos = (0, 1), size = (48, 48), png = 2), # index 2 is the status pixmap
-							MultiContentEntryPixmapAlphaTest(pos = (0, 48), size = (550, 2), png = 3), # index 3 is the div pixmap
+							MultiContentEntryPixmapAlphaBlend(pos = (0, 1), size = (48, 48), png = 2), # index 2 is the status pixmap
+							MultiContentEntryPixmapAlphaBlend(pos = (0, 48), size = (550, 2), png = 3), # index 3 is the div pixmap
 						],
 					"fonts": [gFont("Regular", 24),gFont("Regular", 22)],
 					"itemHeight": 50
@@ -1077,8 +1076,8 @@ class PluginManagerHelp(Screen):
 					{"template": [
 							MultiContentEntryText(pos = (50, 0), size = (540, 26), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is the name
 							MultiContentEntryText(pos = (50, 27), size = (540, 23), font=1, flags = RT_HALIGN_LEFT, text = 1), # index 1 is the state
-							MultiContentEntryPixmapAlphaTest(pos = (0, 1), size = (48, 48), png = 2), # index 2 is the status pixmap
-							MultiContentEntryPixmapAlphaTest(pos = (0, 48), size = (550, 2), png = 3), # index 3 is the div pixmap
+							MultiContentEntryPixmapAlphaBlend(pos = (0, 1), size = (48, 48), png = 2), # index 2 is the status pixmap
+							MultiContentEntryPixmapAlphaBlend(pos = (0, 48), size = (550, 2), png = 3), # index 3 is the div pixmap
 						],
 					"fonts": [gFont("Regular", 24),gFont("Regular", 22)],
 					"itemHeight": 50
@@ -1527,8 +1526,8 @@ class PacketManager(Screen, NumericalTextInput):
 					{"template": [
 							MultiContentEntryText(pos = (5, 1), size = (440, 28), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is the name
 							MultiContentEntryText(pos = (5, 26), size = (440, 20), font=1, flags = RT_HALIGN_LEFT, text = 2), # index 2 is the description
-							MultiContentEntryPixmapAlphaTest(pos = (445, 2), size = (48, 48), png = 4), # index 4 is the status pixmap
-							MultiContentEntryPixmapAlphaTest(pos = (5, 50), size = (510, 2), png = 5), # index 4 is the div pixmap
+							MultiContentEntryPixmapAlphaBlend(pos = (445, 2), size = (48, 48), png = 4), # index 4 is the status pixmap
+							MultiContentEntryPixmapAlphaBlend(pos = (5, 50), size = (510, 2), png = 5), # index 4 is the div pixmap
 						],
 					"fonts": [gFont("Regular", 22),gFont("Regular", 14)],
 					"itemHeight": 52

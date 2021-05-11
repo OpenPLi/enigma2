@@ -192,7 +192,7 @@ class WlanScan(Screen):
 							MultiContentEntryText(pos = (175, 30), size = (175, 20), font=1, flags = RT_HALIGN_LEFT, text = 4), # index 0 is the encryption
 							MultiContentEntryText(pos = (350, 0), size = (200, 20), font=1, flags = RT_HALIGN_LEFT, text = 2), # index 0 is the signal
 							MultiContentEntryText(pos = (350, 30), size = (200, 20), font=1, flags = RT_HALIGN_LEFT, text = 3), # index 0 is the maxrate
-							MultiContentEntryPixmapAlphaTest(pos = (0, 52), size = (550, 2), png = 6), # index 6 is the div pixmap
+							MultiContentEntryPixmapAlphaBlend(pos = (0, 52), size = (550, 2), png = 6), # index 6 is the div pixmap
 						],
 					"fonts": [gFont("Regular", 28),gFont("Regular", 18)],
 					"itemHeight": 54
