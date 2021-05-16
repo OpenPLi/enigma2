@@ -70,7 +70,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 				nim.powerMeasurement.value = False
 				nim.powerMeasurement.save()
 		if not hasattr(self, 'additionalMotorOptions'):
-			self.additionalMotorOptions = ConfigYesNo(False)
+			self.additionalMotorOptions = NoSave(ConfigYesNo(default = not (nim.turningspeedH.value == [2, 3] and nim.turningspeedV.value == [1, 7] and nim.tuningstepsize.value == [0, 360] and nim.rotorPositions.value == 99)))
 		self.showAdditionalMotorOptions = getConfigListEntry(self.indent % _("Extra motor options"), self.additionalMotorOptions, _("Additional motor options allow you to enter details from your motor's spec sheet so enigma can work out how long it will take to move the dish from one satellite to another satellite."))
 		self.list.append(self.showAdditionalMotorOptions)
 		if self.additionalMotorOptions.value:
@@ -509,7 +509,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 					else:
 						self.list.append(getConfigListEntry(self.indent % _("Stored position"), Sat.rotorposition, _("Enter the number stored in the positioner that corresponds to this satellite.")))
 					if not hasattr(self, 'additionalMotorOptions'):
-						self.additionalMotorOptions = ConfigYesNo(False)
+						self.additionalMotorOptions = NoSave(ConfigYesNo(default = not (currLnb.turningspeedH.value == [2, 3] and currLnb.turningspeedV.value == [1, 7] and currLnb.tuningstepsize.value == [0, 360] and currLnb.rotorPositions.value == 99)))
 					self.showAdditionalMotorOptions = getConfigListEntry(self.indent % _("Extra motor options"), self.additionalMotorOptions, _("Additional motor options allow you to enter details from your motor's spec sheet so enigma can work out how long it will take to move to another satellite."))
 					self.list.append(self.showAdditionalMotorOptions)
 					if self.additionalMotorOptions.value:
@@ -661,6 +661,8 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 	def isChanged(self):
 		is_changed = False
 		for x in self["config"].list:
+			if x == self.showAdditionalMotorOptions:
+				continue
 			is_changed |= x[1].isChanged()
 		return is_changed
 
@@ -758,8 +760,8 @@ class NimSelection(Screen):
 		return "%d.%dE" % (orbpos / 10, orbpos % 10)
 
 	def extraInfo(self):
-		nim = self["nimlist"].getCurrent()
-		nim = nim and nim[3]
+		current = self["nimlist"].getCurrent()
+		nim = current and len(current) > 2 and current[3]
 		if config.usage.setup_level.index >= 2 and nim is not None:
 			text = _("Capabilities: ") + eDVBResourceManager.getInstance().getFrontendCapabilities(nim.slot)
 			self.session.open(MessageBox, text, MessageBox.TYPE_INFO, simple=True)
@@ -770,13 +772,14 @@ class NimSelection(Screen):
 		if recordings or (next_rec_time and next_rec_time > 0 and (next_rec_time - time()) < 360):
 			self.session.open(MessageBox, _("Recording(s) are in progress or coming up in few seconds!"), MessageBox.TYPE_INFO, timeout=5, enable_input=False)
 		else:
-			nim = self["nimlist"].getCurrent()
-			nim = nim and nim[3]
-			nimConfig = nimmanager.getNimConfig(nim.slot)
-			if nim.isFBCLink() and nimConfig.configMode.value == "nothing" and not getLinkedSlotID(nim.slot) == -1:
-				return
-			if nim is not None and (not nim.empty or nim.isMultiType()) and nim.isSupported():
-				self.session.openWithCallback(boundFunction(self.NimSetupCB, self["nimlist"].getIndex()), self.resultclass, nim.slot)
+			current = self["nimlist"].getCurrent()
+			nim = current and len(current) > 2 and current[3]
+			if nim is not None:
+				nimConfig = nimmanager.getNimConfig(nim.slot)
+				if nim.isFBCLink() and nimConfig.configMode.value == "nothing" and not getLinkedSlotID(nim.slot) == -1:
+					return
+				if (not nim.empty or nim.isMultiType()) and nim.isSupported():
+					self.session.openWithCallback(boundFunction(self.NimSetupCB, self["nimlist"].getIndex()), self.resultclass, nim.slot)
 
 	def NimSetupCB(self, index=None):
 		self.updateList(index)
