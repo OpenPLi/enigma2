@@ -237,7 +237,7 @@ self.selectKey("RIGHT")
 from Components.NimManager import nimmanager
 self.condition = not nimmanager.somethingConnected() and config.misc.installwizard.hasnetwork.value and config.misc.installwizard.opkgloaded.value
 			</condition>
-			<text value="Please configure the fallback tuner setup?"/>
+			<text value="Please configure the fallback tuner setup"/>
 			<config screen="SetupFallbacktuner" module="SetupFallbacktuner" type="ConfigList"/>
 			<code>
 self.clearSelectedKeys()
