@@ -508,7 +508,7 @@ class SecConfigure:
 
 
 class NIM(object):
-	def __init__(self, slot, type, description, has_outputs=True, internally_connectable=None, multi_type={}, frontend_id=None, i2c=None, is_empty=False, supports_blind_scan=False, number_of_slots=0):
+	def __init__(self, slot, type, description, has_outputs=True, internally_connectable=None, multi_type={}, frontend_id=None, i2c=None, is_empty=False, supports_blind_scan=False, is_fbc=[0, 0, 0], number_of_slots=0):
 		nim_types = ["DVB-S", "DVB-S2", "DVB-S2X", "DVB-C", "DVB-T", "DVB-T2", "ATSC"]
 
 		if type and type not in nim_types:
@@ -526,6 +526,7 @@ class NIM(object):
 		self.i2c = i2c
 		self.frontend_id = frontend_id
 		self.__is_empty = is_empty
+		self.is_fbc = is_fbc
 
 		self.compatible = {
 				None: (None,),
@@ -658,16 +659,16 @@ class NIM(object):
 		return self.multi_type
 
 	def isFBCTuner(self):
-		return self.frontend_id is not None and (self.frontend_id / 8 + 1) * 8 <= self.number_of_slots and os.access("/proc/stb/frontend/%d/fbc_id" % self.frontend_id, os.F_OK)
+		return self.is_fbc[0] != 0
 
 	def isFBCRoot(self):
-		return self.isFBCTuner() and (self.slot % 8 < (self.getType() == "DVB-C" and 1 or 2))
+		return self.is_fbc[0] == 1
 
 	def isFBCLink(self):
-		return self.isFBCTuner() and not (self.slot % 8 < (self.getType() == "DVB-C" and 1 or 2))
+		return self.is_fbc[0] == 2
 
 	def isNotFirstFBCTuner(self):
-		return self.isFBCTuner() and self.slot % 8 and True
+		return self.isFBCTuner() and self.is_fbc[1] != 1
 
 	def getFriendlyType(self):
 		if self.multi_type.values():
@@ -683,17 +684,21 @@ class NIM(object):
 
 	def getFriendlyFullDescriptionCompressed(self):
 		if self.isFBCTuner():
-			return "%s-%s: %s" % (self.getSlotName(self.slot & ~7), self.getSlotID((self.slot & ~7) + 7), self.getFullDescription())
+			return "%s-%s: %s" % (self.getSlotName(self.slot), self.getSlotID(self.slot + 7), self.getFullDescription())
 		#compress by combining dual tuners by checking if the next tuner has a rf switch
 		elif self.frontend_id is not None and self.number_of_slots > self.frontend_id + 1 and os.access("/proc/stb/frontend/%d/rf_switch" % (self.frontend_id + 1), os.F_OK):
 			return "%s-%s: %s" % (self.slot_name, self.getSlotID(self.slot + 1), self.getFullDescription())
 		return self.getFriendlyFullDescription()
 
 	def isFBCLinkEnabled(self):
-		return self.isFBCLink() and (config.Nims[(self.slot >> 3 << 3)].configMode.value != "nothing" or self.getType() != "DVB-C" and config.Nims[(self.slot >> 3 << 3) + 1].configMode.value != "nothing")
+		if self.isFBCLink():
+			for slot in nimmanager.nim_slots:
+				if slot.isFBCRoot() and slot.is_fbc[2] == self.is_fbc[2] and config.Nims[slot.slot].configMode.value != "nothing":
+					return True
+		return False
 
 	def isEnabled(self):
-		return self.config_mode != "nothing" or self.isFBCLinkEnabled() or self.internally_connectable is not None and config.Nims[self.internally_connectable].configMode.value != "nothing"
+		return self.config_mode != "nothing" or self.isFBCLinkEnabled()
 
 	slot_id = property(getSlotID)
 	slot_name = property(getSlotName)
@@ -902,6 +907,8 @@ class NimManager:
 				entries[current_slot]["isempty"] = True
 		nimfile.close()
 		self.number_of_slots = len(entries.keys())
+		fbc_number = 0
+		fbc_tuner = 1
 		for id, entry in entries.items():
 			if not ("name" in entry and "type" in entry):
 				entry["name"] = _("N/A")
@@ -921,7 +928,19 @@ class NimManager:
 				entry["multi_type"] = {}
 			if "supports_blind_scan" not in entry:
 				entry["supports_blind_scan"] = False
-			self.nim_slots.append(NIM(slot=id, description=entry["name"], type=entry["type"], has_outputs=entry["has_outputs"], internally_connectable=entry["internally_connectable"], multi_type=entry["multi_type"], frontend_id=entry["frontend_device"], i2c=entry["i2c"], is_empty=entry["isempty"], supports_blind_scan=entry["supports_blind_scan"], number_of_slots=self.number_of_slots))
+
+			entry["fbc"] = [0, 0, 0] # not fbc
+			if entry["name"] and ("fbc" in entry["name"].lower() or entry["name"] in SystemInfo["HasFBCtuner"]) and entry["frontend_device"] is not None and os.access("/proc/stb/frontend/%d/fbc_id" % entry["frontend_device"], os.F_OK):
+				if fbc_number > 8:
+					fbc_number = 0
+					fbc_tuner += 1
+				fbc_number += 1
+				if fbc_number <= (entry["type"] and "DVB-C" in entry["type"] and 1 or 2):
+					entry["fbc"] = [1, fbc_number, fbc_tuner] # fbc root
+				elif fbc_number <= 8:
+					entry["fbc"] = [2, 0, fbc_tuner] # fbc link
+
+			self.nim_slots.append(NIM(slot=id, description=entry["name"], type=entry["type"], has_outputs=entry["has_outputs"], internally_connectable=entry["internally_connectable"], multi_type=entry["multi_type"], frontend_id=entry["frontend_device"], i2c=entry["i2c"], is_empty=entry["isempty"], supports_blind_scan=entry["supports_blind_scan"], is_fbc=entry["fbc"], number_of_slots=self.number_of_slots))
 
 	def hasNimType(self, chktype):
 		return any(slot.canBeCompatible(chktype) for slot in self.nim_slots)
@@ -960,7 +979,7 @@ class NimManager:
 		return [slot.friendly_full_description for slot in self.nim_slots]
 
 	def nimListCompressed(self):
-		return [slot.friendly_full_description_compressed for slot in self.nim_slots if not(slot.isNotFirstFBCTuner() or slot.internally_connectable >= 0)]
+		return [slot.friendly_full_description_compressed for slot in self.nim_slots if not (slot.isNotFirstFBCTuner() or slot.internally_connectable is not None)]
 
 	def getSlotCount(self):
 		return len(self.nim_slots)
@@ -985,9 +1004,7 @@ class NimManager:
 					slots.append(slot)
 		for testnim in slots[:]:
 			nimConfig = self.getNimConfig(testnim)
-			if "configMode" in nimConfig.content.items and ((nimConfig.configMode.value == "loopthrough" and int(nimConfig.connectedTo.value) == slotid) or nimConfig.configMode.value == "nothing"):
-				slots.remove(testnim)
-			elif self.nim_slots[testnim].isFBCTuner() and ("configMode" in nimConfig.content.items and nimConfig.configMode.value == "loopthrough" or not (self.nim_slots[testnim].isFBCRoot() and slotid >> 3 == testnim >> 3)):
+			if "configMode" in nimConfig.content.items and ((nimConfig.configMode.value == "loopthrough" and ((isFBCTuner and self.nim_slots[testnim].isFBCTuner()) or int(nimConfig.connectedTo.value) == slotid)) or nimConfig.configMode.value == "nothing" or (isFBCTuner and self.nim_slots[slot].isFBCRoot() and self.nim_slots[slot].is_fbc[2] == self.nim_slots[slotid].is_fbc[2])):
 				slots.remove(testnim)
 		return slots
 
