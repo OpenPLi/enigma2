@@ -70,7 +70,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 				nim.powerMeasurement.value = False
 				nim.powerMeasurement.save()
 		if not hasattr(self, 'additionalMotorOptions'):
-			self.additionalMotorOptions = ConfigBoolean(default=any([x.value != x.default for x in (nim.turningspeedH, nim.turningspeedV, nim.tuningstepsize, nim.rotorPositions)]), descriptions={False: _("Show sub-menu"), True: _("Hide sub-menu")}
+			self.additionalMotorOptions = ConfigBoolean(default=any([x.value != x.default for x in (nim.turningspeedH, nim.turningspeedV, nim.tuningstepsize, nim.rotorPositions)]), descriptions={False: _("Show sub-menu"), True: _("Hide sub-menu")})
 		self.showAdditionalMotorOptions = getConfigListEntry(self.indent % _("Extra motor options"), self.additionalMotorOptions, _("Additional motor options allow you to enter details from your motor's spec sheet so enigma can work out how long it will take to move the dish from one satellite to another satellite."))
 		self.list.append(self.showAdditionalMotorOptions)
 		if self.additionalMotorOptions.value:
