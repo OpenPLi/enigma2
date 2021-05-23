@@ -931,14 +931,14 @@ class NimManager:
 
 			entry["fbc"] = [0, 0, 0] # not fbc
 			if entry["name"] and ("fbc" in entry["name"].lower() or entry["name"] in SystemInfo["HasFBCtuner"]) and entry["frontend_device"] is not None and os.access("/proc/stb/frontend/%d/fbc_id" % entry["frontend_device"], os.F_OK):
-				if fbc_number > 8:
-					fbc_number = 0
-					fbc_tuner += 1
 				fbc_number += 1
 				if fbc_number <= (entry["type"] and "DVB-C" in entry["type"] and 1 or 2):
 					entry["fbc"] = [1, fbc_number, fbc_tuner] # fbc root
 				elif fbc_number <= 8:
 					entry["fbc"] = [2, 0, fbc_tuner] # fbc link
+				if fbc_number == 8:
+					fbc_number = 0
+					fbc_tuner += 1
 
 			self.nim_slots.append(NIM(slot=id, description=entry["name"], type=entry["type"], has_outputs=entry["has_outputs"], internally_connectable=entry["internally_connectable"], multi_type=entry["multi_type"], frontend_id=entry["frontend_device"], i2c=entry["i2c"], is_empty=entry["isempty"], supports_blind_scan=entry["supports_blind_scan"], is_fbc=entry["fbc"], number_of_slots=self.number_of_slots))
 
