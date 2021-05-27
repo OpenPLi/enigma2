@@ -747,7 +747,7 @@ int eDVBFrontend::closeFrontend(bool force, bool no_delayed)
 		while (tmp != -1)
 		{
 			eDVBRegisteredFrontend *linked_fe = (eDVBRegisteredFrontend*)tmp;
-			if (linked_fe->m_inuse)
+			if (linked_fe->m_inuse || (m_fbc && m_sec && m_sec->tunerLinkedInUse(m_slotid)))
 			{
 				eDebugNoSimulate("[eDVBFrontend%d] dont close frontend while the linked frontend %d in slot %d is still in use",
 					m_dvbid, linked_fe->m_frontend->getDVBID(), linked_fe->m_frontend->getSlotID());
@@ -805,6 +805,7 @@ int eDVBFrontend::closeFrontend(bool force, bool no_delayed)
 			m_fd=-1;
 		else
 			eWarning("[eDVBFrontend %d] couldnt close frontend", m_dvbid);
+		m_data[SAT_POSITION] = -1;
 	}
 	else if (m_simulate)
 	{
@@ -1982,13 +1983,12 @@ int eDVBFrontend::tuneLoopInt()  // called by m_tuneTimer
 				break;
 			case eSecCommand::INVALIDATE_CURRENT_ROTORPARMS:
 				eDebugNoSimulate("[eDVBFrontend%d] invalidate current rotorparams", m_dvbid);
-				sec_fe_data[ROTOR_CMD] = -1;
-				sec_fe_data[ROTOR_POS] = -1;
+				sec_fe_data[ROTOR_CMD] = sec_fe_data[ROTOR_POS] = sec_fe_data[SAT_POSITION] = -1;
 				++m_sec_sequence.current();
 				break;
 			case eSecCommand::UPDATE_CURRENT_ROTORPARAMS:
 				sec_fe_data[ROTOR_CMD] = sec_fe_data[NEW_ROTOR_CMD];
-				sec_fe_data[ROTOR_POS] = sec_fe_data[NEW_ROTOR_POS];
+				sec_fe_data[ROTOR_POS] = sec_fe_data[SAT_POSITION] = sec_fe_data[NEW_ROTOR_POS];
 				if (!m_simulate)
 					m_sec->forceUpdateRotorPos(m_slotid, sec_fe_data[ROTOR_POS]);
 				eDebugNoSimulate("[eDVBFrontend%d] update current rotorparams %d %04lx %ld", m_dvbid, m_timeoutCount, sec_fe_data[ROTOR_CMD], sec_fe_data[ROTOR_POS]);
