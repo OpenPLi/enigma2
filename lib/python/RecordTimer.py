@@ -189,6 +189,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 		self.conflict_detection = conflict_detection
 		self.external = self.external_prev = False
 		self.setAdvancedPriorityFrontend = None
+		self.background_zap = None
 		if SystemInfo["DVB-T_priority_tuner_available"] or SystemInfo["DVB-C_priority_tuner_available"] or SystemInfo["DVB-S_priority_tuner_available"] or SystemInfo["ATSC_priority_tuner_available"]:
 			rec_ref = self.service_ref and self.service_ref.ref
 			str_service = rec_ref and rec_ref.toString()
@@ -541,6 +542,15 @@ class RecordTimerEntry(timer.TimerEntry, object):
 						config.misc.standbyCounter.value = 0
 					else:
 						Notifications.AddNotification(Screens.Standby.Standby, StandbyCounterIncrease=False)
+
+				if config.recording.zap_record_service_in_standby.value and Screens.Standby.inStandby:
+					cur_ref = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
+					if self.rec_ref and (not cur_ref or cur_ref != self.rec_ref):
+						NavigationInstance.instance.playService(self.rec_ref, checkParentalControl=False, adjust=False)
+						cur_ref = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
+						if cur_ref and self.rec_ref == cur_ref:
+							self.background_zap = cur_ref
+
 				record_res = self.record_service.start()
 				self.setRecordingPreferredTuner(setdefault=True)
 				if record_res:
@@ -566,8 +576,13 @@ class RecordTimerEntry(timer.TimerEntry, object):
 			self.log_tuner(12, "stop")
 			if not self.justplay:
 				NavigationInstance.instance.stopRecordService(self.record_service)
+				if self.background_zap is not None and Screens.Standby.inStandby:
+					cur_ref = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
+					if cur_ref and self.background_zap == cur_ref:
+						NavigationInstance.instance.stopService()
 				self.record_service = None
 				self.rec_ref = None
+				self.background_zap = None
 			if not checkForRecordings():
 				if self.afterEvent == AFTEREVENT.DEEPSTANDBY or self.afterEvent == AFTEREVENT.AUTO and (Screens.Standby.inStandby or RecordTimerEntry.wasInStandby) and not config.misc.standbyCounter.value:
 					if not Screens.Standby.inTryQuitMainloop:
