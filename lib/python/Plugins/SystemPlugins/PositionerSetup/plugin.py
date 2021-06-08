@@ -820,9 +820,9 @@ class PositionerSetup(Screen):
 
 	def gotTsidOnid(self, tsid, onid):
 		if tsid == self.tsid and onid == self.onid:
-			msg = "\c0000??00" + _("This valid ONID/TSID")
+			msg = _("This valid ONID/TSID")
 		else:
-			msg = "\c00??2525" + _("This not valid ONID/TSID")
+			msg =  _("This not valid ONID/TSID")
 		self.statusMsg(msg, blinking=True, timeout=10)
 		if self.raw_channel:
 			self.raw_channel.receivedTsidOnid.get().remove(self.gotTsidOnid)
