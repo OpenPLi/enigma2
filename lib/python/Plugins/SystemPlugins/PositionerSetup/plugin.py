@@ -16,7 +16,7 @@ from Components.ActionMap import NumberActionMap, ActionMap
 from Components.NimManager import nimmanager
 from Components.MenuList import MenuList
 from Components.ScrollLabel import ScrollLabel
-from Components.config import config, ConfigSatlist, ConfigNothing, ConfigSelection, ConfigSubsection, ConfigInteger, ConfigFloat, KEY_LEFT, KEY_RIGHT, KEY_0, getConfigListEntry
+from Components.config import config, ConfigSatlist, ConfigNothing, ConfigSelection, ConfigSubsection, ConfigInteger, ConfigFloat, KEY_LEFT, KEY_RIGHT, KEY_0, getConfigListEntry, NoSave
 from Components.TuneTest import Tuner
 from Components.Pixmap import Pixmap
 from Tools.Transponder import ConvertToHumanReadable
@@ -79,7 +79,8 @@ class PositionerSetup(Screen):
 		self.rotor_diseqc = True
 		self.frontend = None
 		self.rotor_pos = config.usage.showdish.value and config.misc.lastrotorposition.value != 9999
-		self.orb_pos = 0
+		self.tsid = self.onid = self.orb_pos = 0
+		self.checkingTsidOnid = False
 		getCurrentTuner = None
 		getCurrentSat = None
 		self.availablesats = []
@@ -88,10 +89,9 @@ class PositionerSetup(Screen):
 			self.advanced = True
 			self.advancedconfig = config.Nims[self.feid].advanced
 			self.advancedsats = self.advancedconfig.sat
-			self.availablesats = map(lambda x: x[0], nimmanager.getRotorSatListForNim(self.feid))
 		else:
 			self.advanced = False
-			self.availablesats = map(lambda x: x[0], nimmanager.getRotorSatListForNim(self.feid))
+		self.availablesats = map(lambda x: x[0], nimmanager.getRotorSatListForNim(self.feid))
 
 		cur = {}
 		if not self.openFrontend():
@@ -219,6 +219,15 @@ class PositionerSetup(Screen):
 				if current_pos in self.availablesats and current_pos != config.misc.lastrotorposition.value:
 					config.misc.lastrotorposition.value = current_pos
 					config.misc.lastrotorposition.save()
+				for x in nimmanager.nim_slots:
+					if x.slot == self.feid:
+						rotorposition = hasattr(x.config, 'lastsatrotorposition') and x.config.lastsatrotorposition.value or ""
+						if rotorposition.isdigit():
+							current_pos = int(rotorposition)
+							if current_pos != config.misc.lastrotorposition.value:
+								config.misc.lastrotorposition.value = current_pos
+								config.misc.lastrotorposition.save()
+						break
 			text = _("Current rotor position: ") + self.OrbToStr(config.misc.lastrotorposition.value)
 			self["rotorstatus"].setText(text)
 		self.statusMsgTimeoutTicks = 0
@@ -268,6 +277,10 @@ class PositionerSetup(Screen):
 	def __onClose(self):
 		self.statusTimer.stop()
 		log.close()
+		if self.frontend:
+			self.frontend = None
+		if hasattr(self, 'raw_channel'):
+			del self.raw_channel
 		self.session.nav.playService(self.oldref)
 
 	def OrbToStr(self, orbpos):
@@ -301,12 +314,7 @@ class PositionerSetup(Screen):
 		self.session.open(MessageBox, text, MessageBox.TYPE_ERROR)
 
 	def restartPrevService(self, yesno):
-		if yesno:
-			if self.frontend:
-				self.frontend = None
-				if hasattr(self, 'raw_channel'):
-					del self.raw_channel
-		else:
+		if not yesno:
 			self.oldref = None
 		self.close(None)
 
@@ -778,16 +786,47 @@ class PositionerSetup(Screen):
 	def furtherOptions(self):
 		menu = []
 		text = _("Select action")
+		if self.session.nav.getCurrentlyPlayingServiceOrGroup() and not self.oldref_stop:
+			menu.append((_("Stop live TV service"), self.stopService))
 		description = _("Open setup tuner ") + "%s" % chr(0x41 + self.feid)
 		menu.append((description, self.openTunerSetup))
-
+		if not self.checkingTsidOnid and self.frontend and self.isLocked() and not self.isMoving:
+			menu.append((_("Checking ONID/TSID"), self.openONIDTSIDScreen))
 		def openAction(choice):
 			if choice:
 				choice[1]()
 		self.session.openWithCallback(openAction, ChoiceBox, title=text, list=menu)
 
+	def stopService(self):
+		self.oldref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
+		self.session.nav.stopService()
+		self.oldref_stop = True
+
 	def openTunerSetup(self):
 		self.session.openWithCallback(self.closeTunerSetup, NimSetup, self.feid)
+
+	def openONIDTSIDScreen(self):
+		self.tsid = self.onid = 0
+		self.session.openWithCallback(self.startChecktsidonid, ONIDTSIDScreen)
+
+	def startChecktsidonid(self, tsidonid=None):
+		if tsidonid is not None:
+			self.onid = tsidonid[0]
+			self.tsid = tsidonid[1]
+			if self.frontend and self.isLocked() and not self.isMoving and hasattr(self, "raw_channel") and self.raw_channel:
+				self.checkingTsidOnid = True
+				self.raw_channel.receivedTsidOnid.get().append(self.gotTsidOnid)
+				self.raw_channel.requestTsidOnid()
+
+	def gotTsidOnid(self, tsid, onid):
+		if tsid == self.tsid and onid == self.onid:
+			msg = _("This valid ONID/TSID")
+		else:
+			msg =  _("This not valid ONID/TSID")
+		self.statusMsg(msg, blinking=True, timeout=10)
+		if self.raw_channel:
+			self.raw_channel.receivedTsidOnid.get().remove(self.gotTsidOnid)
+		self.checkingTsidOnid = False
 
 	def closeTunerSetup(self):
 		self.restartPrevService(True)
@@ -1301,6 +1340,56 @@ class PositionerSetupLog(Screen):
 		self.close(False)
 
 
+class ONIDTSIDScreen(ConfigListScreen, Screen):
+	skin = """
+		<screen position="center,center" size="520,250" title="Tune">
+			<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on"/>
+			<ePixmap pixmap="buttons/green.png" position="140,0" size="140,40" alphatest="on"/>
+			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1"/>
+			<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1"/>
+			<widget name="config" position="10,50" size="500,150" scrollbarMode="showOnDemand" />
+			<widget name="introduction" position="60,220" size="450,23" halign="left" font="Regular;20" />
+		</screen>"""
+
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		self.setTitle(_("Enter valid ONID/TSID"))
+		ConfigListScreen.__init__(self, None)
+		self.transponderTsid = NoSave(ConfigInteger(default=0, limits=(0, 65535)))
+		self.transponderOnid = NoSave(ConfigInteger(default=0, limits=(0, 65535)))
+		self.createSetup()
+		self["actions"] = NumberActionMap(["SetupActions", "ColorActions"],
+		{
+			"ok": self.keyGo,
+			"cancel": self.keyCancel,
+			"red": self.keyCancel,
+			"green": self.keyGo,
+		}, -2)
+
+		self["key_red"] = StaticText(_("Cancel"))
+		self["key_green"] = StaticText(_("OK"))
+		self["introduction"] = Label(_("Valid ONID/TSID look at www.lyngsat.com..."))
+
+	def createSetup(self):
+		self.list = []
+		self.list.append(getConfigListEntry(_("ONID"), self.transponderOnid))
+		self.list.append(getConfigListEntry(_("TSID"), self.transponderTsid))
+		self["config"].list = self.list
+		self["config"].l.setList(self.list)
+
+	def keyGo(self):
+		onid = int(self.transponderOnid.value)
+		tsid = int(self.transponderTsid.value)
+		if onid == 0 and tsid == 0:
+			self.close(None)
+		else:
+			returnvalue = (onid, tsid)
+			self.close(returnvalue)
+
+	def keyCancel(self):
+		self.close(None)
+
+
 class TunerScreen(ConfigListScreen, Screen):
 	skin = """
 		<screen position="center,center" size="520,450" title="Tune">
@@ -1478,8 +1567,9 @@ class TunerScreen(ConfigListScreen, Screen):
 					self.list.append(getConfigListEntry(_('Input Stream ID'), self.scan_sat.is_id))
 					self.list.append(getConfigListEntry(_('PLS Mode'), self.scan_sat.pls_mode))
 					self.list.append(getConfigListEntry(_('PLS Code'), self.scan_sat.pls_code))
-				self.list.append(getConfigListEntry(_('T2MI PLP ID'), self.scan_sat.t2mi_plp_id))
-				self.list.append(getConfigListEntry(_('T2MI PID'), self.scan_sat.t2mi_pid))
+				if nim.isT2MI():
+					self.list.append(getConfigListEntry(_('T2MI PLP ID'), self.scan_sat.t2mi_plp_id))
+					self.list.append(getConfigListEntry(_('T2MI PID'), self.scan_sat.t2mi_pid))
 		else: # "predefined_transponder"
 			self.list.append(getConfigListEntry(_("Transponder"), self.tuning.transponder))
 			currtp = self.transponderToString([None, self.scan_sat.frequency.value, self.scan_sat.symbolrate.value, self.scan_sat.polarization.value])
@@ -1587,7 +1677,7 @@ def getUsableRotorNims(only_first=False):
 	usableRotorNims = []
 	nimList = nimmanager.getNimListOfType("DVB-S")
 	for nim in nimList:
-		if nimmanager.getRotorSatListForNim(nim):
+		if nimmanager.getRotorSatListForNim(nim, only_first=only_first):
 			usableRotorNims.append(nim)
 			if only_first:
 				break
