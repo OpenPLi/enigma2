@@ -153,18 +153,26 @@ eventData::eventData(const eit_event_struct* e, int size, int _type, int tsidoni
 					std::transform(cc.begin(), cc.end(), cc.begin(), tolower);
 					int table = encodingHandler.getCountryCodeDefaultMapping(cc);
 
+					//if country code default table is cyrillic, use original encoding
+					//because convertion to utf8 would be limited to only 124 chars
+					bool isCyrillic = (table == 5) ? true : false;
+
 					int eventNameLen = descr[5];
-					int eventTextLen = descr[6 + eventNameLen];
+					int textLen = descr[6 + eventNameLen];
 
 					//convert our strings to UTF8
 					std::string eventNameUTF8 = convertDVBUTF8((const unsigned char*)&descr[6], eventNameLen, table, tsidonid);
-					std::string eventTextUTF8 = convertDVBUTF8((const unsigned char*)&descr[7 + eventNameLen], eventTextLen, table, tsidonid);
-					
-					//hack to fix split titles
-					undoAbbreviation(eventNameUTF8, eventTextUTF8);
+					std::string eventText((const char*)&descr[7 + eventNameLen], textLen);
+
+					if (!isCyrillic)
+					{
+						eventText = convertDVBUTF8((const unsigned char*)&descr[7 + eventNameLen], textLen, table, tsidonid);
+						//hack to fix split titles
+						undoAbbreviation(eventNameUTF8, eventText);
+					}
 
  					unsigned int eventNameUTF8len = eventNameUTF8.length();
- 					unsigned int eventTextUTF8len = eventTextUTF8.length();
+ 					unsigned int eventTextlen = eventText.length();
 
 					//Rebuild the short event descriptor with UTF-8 strings
 
@@ -206,11 +214,13 @@ eventData::eventData(const eit_event_struct* e, int size, int _type, int tsidoni
 						*pdescr++ = title_crc;
 					}
 
-					//save text with UTF-8 encoding
-					if( eventTextUTF8len > 0 ) //only store the data if there is something to store
+					//save text with UTF-8/original encoding
+					if( eventTextlen > 0 ) //only store the data if there is something to store
 					{
-						eventTextUTF8len = truncateUTF8(eventTextUTF8, 255 - 6);
-						int text_len = 6 + eventTextUTF8len;
+						if (!isCyrillic)
+							eventTextlen = truncateUTF8(eventText, 255 - 6);
+
+						int text_len = 6 + eventTextlen;
 						uint8_t *text_data = new uint8_t[text_len + 2];
 						text_data[0] = SHORT_EVENT_DESCRIPTOR;
 						text_data[1] = text_len;
@@ -218,9 +228,19 @@ eventData::eventData(const eit_event_struct* e, int size, int _type, int tsidoni
 						text_data[3] = descr[3];
 						text_data[4] = descr[4];
 						text_data[5] = 0;
-						text_data[6] = eventTextUTF8len + 1;
-						text_data[7] = 0x15; //identify event text as UTF-8
-						memcpy(&text_data[8], eventTextUTF8.data(), eventTextUTF8len);
+
+						if (isCyrillic)
+						{
+							//use original encoding
+							text_data[6] = eventTextlen;
+							memcpy(&text_data[7], eventText.data(), eventTextlen);
+						}
+						else
+						{
+							text_data[6] = eventTextlen + 1;
+							text_data[7] = 0x15; //identify event text as UTF-8
+							memcpy(&text_data[8], eventText.data(), eventTextlen);
+						}
 
 						text_len += 2; //add 2 the length to include the 2 bytes in the header
 						uint32_t text_crc = calculate_crc_hash(text_data, text_len);
