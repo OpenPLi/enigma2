@@ -56,7 +56,11 @@ int eThread::runAsync(int prio, int policy)
 	if (prio || policy)
 	{
 		struct sched_param p;
+#ifdef __GLIBC__
 		p.__sched_priority=prio;
+#else
+		p.sched_priority=prio;
+#endif
 		pthread_attr_setschedpolicy(&attr, policy);
 		pthread_attr_setschedparam(&attr, &p);
 	}
