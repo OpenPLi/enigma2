@@ -794,6 +794,7 @@ class PositionerSetup(Screen):
 		menu.append((description, self.openTunerSetup))
 		if not self.checkingTsidOnid and self.frontend and self.isLocked() and not self.isMoving:
 			menu.append((_("Checking ONID/TSID"), self.openONIDTSIDScreen))
+
 		def openAction(choice):
 			if choice:
 				choice[1]()
