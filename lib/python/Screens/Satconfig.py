@@ -638,7 +638,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 			self.newConfig()
 
 	def setTextKeyYellow(self):
-		self["key_yellow"].setText((self.nimConfig.configMode.value == "simple" and  self.nimConfig.diseqcMode.value in ("single", "diseqc_a_b", "diseqc_a_b_c_d") and (not self.nim.isCombined() or self.nimConfig.configModeDVBS.value)) and _("Auto Diseqc") or self.configMode and _("Configuration mode") or "")
+		self["key_yellow"].setText((self.nimConfig.configMode.value == "simple" and self.nimConfig.diseqcMode.value in ("single", "diseqc_a_b", "diseqc_a_b_c_d") and (not self.nim.isCombined() or self.nimConfig.configModeDVBS.value)) and _("Auto Diseqc") or self.configMode and _("Configuration mode") or "")
 
 	def setTextKeyBlue(self):
 		self["key_blue"].setText(self.isChanged() and _("Set default") or "")

@@ -137,7 +137,7 @@ class Dish(Screen):
 				cur_orbpos = data.get("orbital_position", INVALID_POSITION)
 				if cur_orbpos in self.available_sat:
 					self.cur_orbpos = cur_orbpos
-					self.cur_polar  = data.get("polarization", 0)
+					self.cur_polar = data.get("polarization", 0)
 					self.rotorTimer.start(500, False)
 
 	def __toHide(self):
@@ -338,7 +338,7 @@ class Dishpip(Dish, Screen):
 				cur_orbpos = data.get("orbital_position", INVALID_POSITION)
 				if cur_orbpos in self.available_sat:
 					self.cur_orbpos = cur_orbpos
-					self.cur_polar  = data.get("polarization", 0)
+					self.cur_polar = data.get("polarization", 0)
 					self.moving_timeout = 3
 					if not self.rotorTimer.isActive():
 						self.rotorTimer.start(500, True)
