@@ -840,10 +840,10 @@ class TimelineText(GUIComponent):
 			xpos = 0 # eventLeft
 			for x in range(0, num_lines):
 				res.append(MultiContentEntryText(
-					pos =(service_rect.width() + xpos - tlMove, 0),
+					pos=(service_rect.width() + xpos - tlMove, 0),
 					size=(incWidth, itemHeight),
 					font=0, flags=tlFlags,
-					text =strftime("%H:%M", localtime(time_base + x * timeStepsCalc)),
+					text=strftime("%H:%M", localtime(time_base + x * timeStepsCalc)),
 					color=self.foreColor, color_sel=self.foreColor,
 					backcolor=self.backColor, backcolor_sel=self.backColor))
 				line = time_lines[x]
