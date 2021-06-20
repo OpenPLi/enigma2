@@ -354,6 +354,10 @@ const char *getBoxType()
 
 void dump_malloc_stats(void)
 {
+#ifdef __GLIBC__
 	struct mallinfo mi = mallinfo();
 	eDebug("MALLOC: %d total", mi.uordblks);
+#else
+	eDebug("MALLOC: info not exposed");
+#endif
 }

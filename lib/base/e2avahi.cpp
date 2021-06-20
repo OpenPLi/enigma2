@@ -151,7 +151,11 @@ static void avahi_service_try_register(AvahiServiceEntry *entry)
 			AVAHI_IF_UNSPEC, AVAHI_PROTO_UNSPEC,
 			(AvahiPublishFlags)0,
 			service_name, entry->service_type,
+#ifdef __GLIBC__
 			NULL, NULL, entry->port_num, NULL))
+#else
+			NULL, NULL, entry->port_num, __null))
+#endif
 	{
 		avahi_entry_group_commit(entry->group);
 		eDebug("[Avahi] Registered %s (%s) on %s:%u",
