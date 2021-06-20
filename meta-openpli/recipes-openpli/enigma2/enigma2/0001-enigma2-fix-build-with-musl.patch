@@ -1,0 +1,270 @@
+From 7b264116e251e5932e636008df873325152e3926 Mon Sep 17 00:00:00 2001
+From: Andrea Adami <andrea.adami@gmail.com>
+Date: Tue, 15 Jun 2021 09:59:32 +0200
+Subject: [PATCH 1/1] enigma2: fix build with musl
+
+fixes:
+ lib/base/thread.cpp:59:5: error: 'struct sched_param' has no member named '__sched_priority';
+ lib/base/e2avahi.cpp:154:37: error: missing sentinel in function call [-Werror=format=]
+ lib/dvb/epgcache.cpp:400:2: error: 'PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP' was not declared in this scope;
+ lib/dvb/epgtransponderdatareader.cpp:10:65: error: 'PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP' was not declared in this scope;
+ lib/gdi/gpixmap.cpp:9:2: error: #error "no BYTE_ORDER defined!"
+ lib/gdi/font.cpp:35:31: error: 'PTHREAD_ADAPTIVE_MUTEX_INITIALIZER_NP' was not declared in this scope;
+ lib/gdi/pixmapcache.h:11:9: error: 'uint' does not name a type; did you mean 'rint'?
+ lib/gdi/pixmapcache.cpp:134:30: error: 'MaximumSize' was not declared in this scope
+ lib/gdi/font.cpp:35:31: error: 'PTHREAD_ADAPTIVE_MUTEX_INITIALIZER_NP' was not declared in this scope;
+ lib/gdi/pixmapcache.h:11:9: error: 'uint' does not name a type; did you mean 'rint'?
+ lib/gdi/pixmapcache.cpp:8:1: error: 'uint' does not name a type; did y
+ lib/gdi/pixmapcache.cpp:134:30: error: 'MaximumSize' was not declared
+
+ Plugins/Extensions/SocketMMI/src/socket_mmi.cpp:1:
+ ...../usr/include/sys/poll.h:1:2: error: #warning redirecting incorrect
+  include <sys/poll.h> to <poll.h> [-Werror=cpp]
+
+lib/gdi/font.cpp:35:31: error: 'PTHREAD_ADAPTIVE_MUTEX_INITIALIZER_NP' was not declared in this scope;
+main/bsod.cpp:6:10: fatal error: execinfo.h: No such file or directory
+main/enigma.cpp:357:18: error: variable 'dump_malloc_stats()::mallinfo mi' has initializer but incomplete type
+main/enigma.cpp:357:32: error: invalid use of incomplete type 'struct dump_malloc_stats()::mallinfo'
+
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ lib/base/e2avahi.cpp                 |  4 ++++
+ lib/base/ebase.h                     |  4 ++++
+ lib/base/eerror.cpp                  | 12 +++++++++++-
+ lib/base/thread.cpp                  |  4 ++++
+ lib/dvb/epgcache.cpp                 |  4 ++++
+ lib/dvb/epgtransponderdatareader.cpp | 14 ++++++++++++--
+ lib/gdi/font.cpp                     |  7 ++++++-
+ lib/gdi/gpixmap.cpp                  |  4 ++++
+ lib/gdi/pixmapcache.h                |  4 ++++
+ main/bsod.cpp                        |  6 ++++++
+ main/enigma.cpp                      |  4 ++++
+ 11 files changed, 63 insertions(+), 4 deletions(-)
+
+diff --git a/lib/base/e2avahi.cpp b/lib/base/e2avahi.cpp
+index 2c53e39de..fd77d7146 100644
+--- a/lib/base/e2avahi.cpp
++++ b/lib/base/e2avahi.cpp
+@@ -151,7 +151,11 @@ static void avahi_service_try_register(AvahiServiceEntry *entry)
+ 			AVAHI_IF_UNSPEC, AVAHI_PROTO_UNSPEC,
+ 			(AvahiPublishFlags)0,
+ 			service_name, entry->service_type,
++#ifdef __GLIBC__
+ 			NULL, NULL, entry->port_num, NULL))
++#else
++			NULL, NULL, entry->port_num, __null))
++#endif
+ 	{
+ 		avahi_entry_group_commit(entry->group);
+ 		eDebug("[Avahi] Registered %s (%s) on %s:%u",
+diff --git a/lib/base/ebase.h b/lib/base/ebase.h
+index 79be15b9f..4a59e6349 100644
+--- a/lib/base/ebase.h
++++ b/lib/base/ebase.h
+@@ -4,7 +4,11 @@
+ #ifndef SWIG
+ #include <vector>
+ #include <map>
++#ifdef __GLIBC__
+ #include <sys/poll.h>
++#else
++#include <poll.h>
++#endif
+ #include <sys/time.h>
+ #include <asm/types.h>
+ #include <time.h>
+diff --git a/lib/base/eerror.cpp b/lib/base/eerror.cpp
+index 224ab8c1b..a02d61672 100644
+--- a/lib/base/eerror.cpp
++++ b/lib/base/eerror.cpp
+@@ -13,7 +13,11 @@
+ #ifdef MEMLEAK_CHECK
+ AllocList *allocList;
+ pthread_mutex_t memLock =
++#ifdef __GLIBC__
+ 	PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP;
++#else
++	{{PTHREAD_MUTEX_RECURSIVE}};
++#endif
+ 
+ void DumpUnfreed()
+ {
+@@ -79,7 +83,13 @@ void DumpUnfreed()
+ int debugLvl = lvlDebug;
+ static bool debugTime = false;
+ 
+-static pthread_mutex_t DebugLock = PTHREAD_ADAPTIVE_MUTEX_INITIALIZER_NP;
++static pthread_mutex_t DebugLock = 
++#ifdef __GLIBC__
++    PTHREAD_ADAPTIVE_MUTEX_INITIALIZER_NP;
++#else
++    PTHREAD_MUTEX_INITIALIZER;
++#endif
++
+ #define RINGBUFFER_SIZE 16384
+ static char ringbuffer[RINGBUFFER_SIZE];
+ static unsigned int ringbuffer_head;
+diff --git a/lib/base/thread.cpp b/lib/base/thread.cpp
+index f64eb4c19..91e91af64 100644
+--- a/lib/base/thread.cpp
++++ b/lib/base/thread.cpp
+@@ -56,7 +56,11 @@ int eThread::runAsync(int prio, int policy)
+ 	if (prio || policy)
+ 	{
+ 		struct sched_param p;
++#ifdef __GLIBC__
+ 		p.__sched_priority=prio;
++#else
++		p.sched_priority=prio;
++#endif
+ 		pthread_attr_setschedpolicy(&attr, policy);
+ 		pthread_attr_setschedparam(&attr, &p);
+ 	}
+diff --git a/lib/dvb/epgcache.cpp b/lib/dvb/epgcache.cpp
+index 378f8a36a..3398def2c 100644
+--- a/lib/dvb/epgcache.cpp
++++ b/lib/dvb/epgcache.cpp
+@@ -397,7 +397,11 @@ void eventData::cacheCorrupt(const char* context)
+ 
+ eEPGCache* eEPGCache::instance;
+ static pthread_mutex_t cache_lock =
++#ifdef __GLIBC__
+ 	PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP;
++#else
++	{{PTHREAD_MUTEX_RECURSIVE}};
++#endif
+ 
+ DEFINE_REF(eEPGCache)
+ 
+diff --git a/lib/dvb/epgtransponderdatareader.cpp b/lib/dvb/epgtransponderdatareader.cpp
+index e182c6004..5fa652d07 100644
+--- a/lib/dvb/epgtransponderdatareader.cpp
++++ b/lib/dvb/epgtransponderdatareader.cpp
+@@ -7,8 +7,18 @@
+ 
+ 
+ eEPGTransponderDataReader* eEPGTransponderDataReader::instance;
+-pthread_mutex_t eEPGTransponderDataReader::known_channel_lock = PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP;
+-pthread_mutex_t eEPGTransponderDataReader::last_channel_update_lock = PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP;
++pthread_mutex_t eEPGTransponderDataReader::known_channel_lock = 
++#ifdef __GLIBC__
++	PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP;
++#else
++	{{PTHREAD_MUTEX_RECURSIVE}};
++#endif
++pthread_mutex_t eEPGTransponderDataReader::last_channel_update_lock = 
++#ifdef __GLIBC__
++	PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP;
++#else
++	{{PTHREAD_MUTEX_RECURSIVE}};
++#endif
+ 
+ DEFINE_REF(eEPGTransponderDataReader)
+ 
+diff --git a/lib/gdi/font.cpp b/lib/gdi/font.cpp
+index 738b5c46e..837c98437 100644
+--- a/lib/gdi/font.cpp
++++ b/lib/gdi/font.cpp
+@@ -32,7 +32,12 @@
+ 
+ fontRenderClass *fontRenderClass::instance;
+ 
+-static pthread_mutex_t ftlock=PTHREAD_ADAPTIVE_MUTEX_INITIALIZER_NP;
++static pthread_mutex_t ftlock= 
++#ifdef __GLIBC__
++	PTHREAD_ADAPTIVE_MUTEX_INITIALIZER_NP;
++#else
++	PTHREAD_MUTEX_INITIALIZER;
++#endif
+ 
+ struct fntColorCacheKey
+ {
+diff --git a/lib/gdi/gpixmap.cpp b/lib/gdi/gpixmap.cpp
+index b33e8b691..825fd56bb 100644
+--- a/lib/gdi/gpixmap.cpp
++++ b/lib/gdi/gpixmap.cpp
+@@ -5,9 +5,13 @@
+ #include <lib/gdi/accel.h>
+ #include <byteswap.h>
+ 
++#ifdef __GLIBC__
+ #ifndef BYTE_ORDER
+ #error "no BYTE_ORDER defined!"
+ #endif
++#else
++#define BYTE_ORDER __BYTE_ORDER
++#endif
+ 
+ /* surface acceleration threshold: do not attempt to accelerate surfaces smaller than the threshold (measured in bytes) */
+ #ifndef GFX_SURFACE_ACCELERATION_THRESHOLD
+diff --git a/lib/gdi/pixmapcache.h b/lib/gdi/pixmapcache.h
+index 4f41a3001..cb87d8d2e 100644
+--- a/lib/gdi/pixmapcache.h
++++ b/lib/gdi/pixmapcache.h
+@@ -3,6 +3,10 @@
+ 
+ #include <lib/gdi/gpixmap.h>
+ 
++#ifndef __GLIBC__
++#include <sys/types.h>
++#endif
++
+ #ifndef SWIG
+ 
+ class PixmapCache
+diff --git a/main/bsod.cpp b/main/bsod.cpp
+index cac47793b..100645958 100644
+--- a/main/bsod.cpp
++++ b/main/bsod.cpp
+@@ -3,7 +3,9 @@
+ #include <csignal>
+ #include <fstream>
+ #include <sstream>
++#ifdef __GLIBC__
+ #include <execinfo.h>
++#endif
+ #include <dlfcn.h>
+ #include <lib/base/eenv.h>
+ #include <lib/base/eerror.h>
+@@ -301,6 +303,7 @@ void oops(const mcontext_t &context)
+  * it's not async-signal-safe and so must not be used in signal
+  * handlers.
+  */
++#ifdef __GLIBC__
+ void print_backtrace()
+ {
+ 	void *array[15];
+@@ -320,12 +323,15 @@ void print_backtrace()
+ 		}
+ 	}
+ }
++#endif
+ 
+ void handleFatalSignal(int signum, siginfo_t *si, void *ctx)
+ {
+ 	ucontext_t *uc = (ucontext_t*)ctx;
+ 	oops(uc->uc_mcontext);
++#ifdef __GLIBC__
+ 	print_backtrace();
++#endif
+ 	eLog(lvlFatal, "-------FATAL SIGNAL");
+ 	bsodFatal("enigma2, signal");
+ }
+diff --git a/main/enigma.cpp b/main/enigma.cpp
+index f7cbe89f9..f1ff732e0 100644
+--- a/main/enigma.cpp
++++ b/main/enigma.cpp
+@@ -354,6 +354,10 @@ const char *getBoxType()
+ 
+ void dump_malloc_stats(void)
+ {
++#ifdef __GLIBC__
+ 	struct mallinfo mi = mallinfo();
+ 	eDebug("MALLOC: %d total", mi.uordblks);
++#else
++	eDebug("MALLOC: info not exposed");
++#endif
+ }
+-- 
+2.17.1
+
