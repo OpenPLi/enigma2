@@ -192,7 +192,7 @@ class OverscanWizard(Screen, ConfigListScreen):
 					config.plugins.OSDPositionSetup.dst_height.value = 576
 				config.misc.do_overscanwizard.value = False
 				config.misc.do_overscanwizard.save()
-				config.save()
+				config.plugins.OSDPositionSetup.save()
 				setConfiguredPosition()
 				self.close()
 			else:
