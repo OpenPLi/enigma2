@@ -28,7 +28,7 @@ eDVBCIMMISession::~eDVBCIMMISession()
 {
 	slot->setMMIManager(NULL);
 	if (is_mmi_active)
-		eDVBCI_UI::getInstance()->mmiSessionDestroyed(slot->getSlotID());
+		/* emit */ eDVBCI_UI::getInstance()->m_messagepump.send(eDVBCIInterfaces::Message(eDVBCIInterfaces::Message::mmiSessionDestroyed, slot->getSlotID()));
 }
 
 int eDVBCIMMISession::receivedAPDU(const unsigned char *tag, const void *data, int len)
@@ -40,7 +40,8 @@ int eDVBCIMMISession::receivedAPDU(const unsigned char *tag, const void *data, i
 
 	if ((tag[0]==0x9f) && (tag[1]==0x88))
 	{
-		if (eDVBCI_UI::getInstance()->processMMIData(slot->getSlotID(), tag, data, len) == 1)
+		/* emit */ eDVBCI_UI::getInstance()->m_messagepump.send(eDVBCIInterfaces::Message(eDVBCIInterfaces::Message::mmiDataReceived, slot->getSlotID(), tag, (unsigned char*) data, len));
+		if (tag[2] == 0x01)
 		{
 			state=stateDisplayReply;
 			return 1;
