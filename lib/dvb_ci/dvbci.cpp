@@ -22,6 +22,7 @@
 #include <lib/dvb_ci/dvbci_ui.h>
 #include <lib/dvb_ci/dvbci_appmgr.h>
 #include <lib/dvb_ci/dvbci_mmi.h>
+#include <lib/dvb_ci/dvbci_ccmgr.h>
 
 #include <dvbsi++/ca_program_map_section.h>
 
@@ -777,6 +778,10 @@ void eDVBCIInterfaces::removePMTHandler(eDVBServicePMTHandler *pmthandler)
 
 void eDVBCIInterfaces::gotPMT(eDVBServicePMTHandler *pmthandler)
 {
+	// language config can only be accessed by e2 mainloop
+	if (m_language == "")
+		m_language = eConfigManager::getConfigValue("config.osd.language");
+
 	singleLock s1(m_pmt_handler_lock);
 	singleLock s2(m_slot_lock);
 	eDebug("[eDVBCIInterfaces] gotPMT");
@@ -1085,6 +1090,7 @@ void eDVBCISlot::data(int what)
 	if(state != stateInserted) {
 		eDebug("[CI] ci inserted in slot %d", getSlotID());
 		state = stateInserted;
+		determineCIVersion();
 		/* emit */ eDVBCI_UI::getInstance()->m_messagepump.send(eDVBCIInterfaces::Message(eDVBCIInterfaces::Message::slotStateChanged, getSlotID(), 1));
 		notifier->setRequested(eSocketNotifier::Read|eSocketNotifier::Priority);
 		/* enable PRI to detect removal or errors */
@@ -1129,10 +1135,12 @@ eDVBCISlot::eDVBCISlot(eMainloop *context, int nr)
 	application_manager = 0;
 	mmi_session = 0;
 	ca_manager = 0;
+	cc_manager = 0;
 	use_count = 0;
 	linked_next = 0;
 	user_mapped = false;
 	plugged = true;
+	m_ci_version = versionUnknown;
 
 	slotid = nr;
 
@@ -1181,10 +1189,86 @@ void eDVBCISlot::setCAManager( eDVBCICAManagerSession *session )
 	ca_manager = session;
 }
 
+void eDVBCISlot::setCCManager( eDVBCICcSession *session )
+{
+	singleLock s(eDVBCIInterfaces::m_slot_lock);
+	cc_manager = session;
+}
+
 int eDVBCISlot::getSlotID()
 {
 	singleLock s(eDVBCIInterfaces::m_slot_lock);
 	return slotid;
+}
+
+int eDVBCISlot::getVersion()
+{
+	return m_ci_version;
+}
+
+void eDVBCISlot::determineCIVersion()
+{
+	char lv1Info[256] = { 0 };
+
+	if (ioctl(fd, 1, lv1Info) < 0) {
+		eDebugCI("[CI] Slot %d ioctl not supported: assume CI+ version 1", getSlotID());
+		m_ci_version = versionCIPlus1;
+		return;
+	}
+
+	if (strlen(lv1Info) == 0) {
+		eDebugCI("[CI] Slot %d no LV1 info: assume CI+ version 1", getSlotID());
+		m_ci_version = versionCIPlus1;
+		return;
+	}
+
+	const char *str1 = "$compatible[";
+	int len1 = strlen(str1);
+	char *compatId = 0;
+
+	for(unsigned int i=0;i<=(sizeof(lv1Info)-len1);i++) {
+		if(strncasecmp(&lv1Info[i], str1, len1) == 0) {
+			i += len1;
+			for(unsigned int j=i;j<=(sizeof(lv1Info)-2);j++) {
+				if(strncmp(&lv1Info[j], "]$", 2) == 0) {
+					lv1Info[j] = '\0';
+					compatId = &lv1Info[i];
+					break;
+				}
+			}
+		}
+	}
+
+	if(!compatId) {
+		eDebugCI("[CI] Slot %d CI CAM detected", getSlotID());
+		m_ci_version = versionCI;
+		return;
+	}
+
+	eDebugCI("[CI] Slot %d CI+ compatibility ID: %s", getSlotID(), compatId);
+
+	char *label, *id, flag = '+';
+	int version = versionCI;
+
+	while((label = strsep(&compatId, " ")) != 0) {
+		if (*label == '\0')
+			continue;
+
+		if(strncasecmp(label, "ciplus", 6) == 0) {
+			id = strchr(label, '=');
+			if(id) {
+				*id++ = '\0';
+				if(*id == '-' || *id == '+' || *id == '*')
+					flag = *id++;
+
+				version = strtol(id, 0, 0);
+				eDebug("[CI] Slot %d CI+ %c%d CAM detected", getSlotID(), flag, version);
+				break;
+			}
+		}
+	}
+
+	m_ci_version = version;
 }
 
 int eDVBCISlot::getNumOfServices()
@@ -1365,6 +1449,24 @@ int eDVBCISlot::sendCAPMT(eDVBServicePMTHandler *pmthandler, const std::vector<u
 			//dont need tag and lenfield
 			ca_manager->sendCAPMT(raw_data + hlen, wp - hlen);
 			running_services[program_number] = pmt_version;
+
+			std::vector<uint16_t> pids;
+			int prg_info_len = ((raw_data[hlen + 4] << 8) | raw_data[hlen + 5]) & 0xfff;
+			int es_info_len = 0;
+			for (int jj = hlen + prg_info_len + 6; jj < wp; jj += es_info_len + 5)
+			{
+				uint16_t es_pid = ((raw_data[jj + 1] << 8) | raw_data[jj + 2]) & 0x1fff;
+				pids.push_back( es_pid );
+				es_info_len = ((raw_data[jj + 3] << 8) | raw_data[jj + 4]) & 0xfff;
+			}
+
+			if (cc_manager)
+			{
+				if (!sendEmpty)
+					cc_manager->addProgram(program_number, pids);
+				else
+					cc_manager->removeProgram(program_number, pids);
+			}
 		}
 	}
 	return 0;
