@@ -7,6 +7,11 @@
 #include <lib/dvb_ci/dvbci_camgr.h>
 #include <lib/dvb_ci/dvbci_datetimemgr.h>
 #include <lib/dvb_ci/dvbci_mmi.h>
+#include <lib/dvb_ci/dvbci_ccmgr.h>
+#include <lib/dvb_ci/dvbci_hlcmgr.h>
+#include <lib/dvb_ci/dvbci_host_ctrl.h>
+#include <lib/dvb_ci/dvbci_cam_upgrade.h>
+#include <lib/dvb_ci/dvbci_app_mmi.h>
 
 DEFINE_REF(eDVBCISession);
 
@@ -144,16 +149,22 @@ void eDVBCISession::createSession(eDVBCISlot *slot, const unsigned char *resourc
 	switch (tag)
 	{
 	case 0x00010041:
-		session=new eDVBCIResourceManagerSession;
+	case 0x00010042:
+		session=new eDVBCIResourceManagerSession(slot->getVersion());
 		eDebug("[CI SESS] RESOURCE MANAGER");
 		break;
 	case 0x00020041:
+	case 0x00020043:
 		session=new eDVBCIApplicationManagerSession(slot);
 		eDebug("[CI SESS] APPLICATION MANAGER");
 		break;
 	case 0x00030041:
 		session = new eDVBCICAManagerSession(slot);
 		eDebug("[CI SESS] CA MANAGER");
+		break;
+	case 0x00200041:
+		session = new eDVBCIHostControlSession;
+		eDebug("[CI SESS] Host Control");
 		break;
 	case 0x00240041:
 		session=new eDVBCIDateTimeSession;
@@ -163,11 +174,26 @@ void eDVBCISession::createSession(eDVBCISlot *slot, const unsigned char *resourc
 		session = new eDVBCIMMISession(slot);
 		eDebug("[CI SESS] MMI - create session");
 		break;
+	case 0x00410041:
+		session = new eDVBCIApplicationMMISession;
+		eDebug("[CI SESS] Application MMI");
+		break;
+	case 0x008C1001:
+		session = new eDVBCICcSession(slot);
+		eDebug("[CI SESS] Content Control");
+		break;
+	case 0x008D1001:
+		session = new eDVBCIHostLanguageAndCountrySession;
+		eDebug("[CI SESS] Host Language & Country");
+		break;
+	case 0x008E1001:
+		session = new eDVBCICAMUpgradeSession;
+		eDebug("[CI SESS] CAM Upgrade");
+		break;
 	case 0x00100041:
 //		session=new eDVBCIAuthSession;
 		eDebug("[CI SESS] AuthSession");
 		[[fallthrough]];
-	case 0x00200041:
 	default:
 		eDebug("[CI SESS] unknown resource type %02x %02x %02x %02x", resource_identifier[0], resource_identifier[1], resource_identifier[2],resource_identifier[3]);
 		session=0;
