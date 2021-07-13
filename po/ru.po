@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-05 17:29+0200\n"
+"POT-Creation-Date: 2021-07-13 15:39+0200\n"
 "PO-Revision-Date: 2021-05-24 17:48+0300\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: openPLi Dimitrij\n"
@@ -1789,6 +1789,9 @@ msgstr "Проверьте подключение к интернету"
 msgid "Check the internet connection again"
 msgstr "Проверьте подключение к интернету снова"
 
+msgid "Checking ONID/TSID"
+msgstr "Проверка ONID/TSID"
+
 msgid "Checking filesystem..."
 msgstr "Проверка Файловой системы..."
 
@@ -2028,9 +2031,6 @@ msgstr "Настройка, нужно ли обойти проверку HDMI E
 
 msgid "Configure if the subtitle should switch between normal, italic, bold and bolditalic"
 msgstr "Настройка для переключения субтитров между шрифтами - нормальным, курсивом, жирным, жирным курсивом."
-
-msgid "Configure interface"
-msgstr "Настройка интерфейса"
 
 msgid "Configure nameservers"
 msgstr "Настройка серверов имен (DNS)"
@@ -2277,9 +2277,6 @@ msgstr "Настройка - приоритет тюнера, если дост�
 
 msgid "Configure your internal LAN"
 msgstr "Настройка Вашей внутренней LAN"
-
-msgid "Configure your network again"
-msgstr "Повторить настройку Вашей сети снова"
 
 msgid "Configure your network settings and press OK to scan"
 msgstr "Настройте параметры Вашей сети, а затем нажмите OK для начала поиска"
@@ -3394,6 +3391,9 @@ msgstr "Введите номер, сохраненный в позиционе�
 msgid "Enter the service pin"
 msgstr "Ввод PIN-код сервиса"
 
+msgid "Enter valid ONID/TSID"
+msgstr "Введите ONID/TSID транспондера"
+
 msgid "Enter your current latitude. This is the number of degrees you are from the equator as a decimal."
 msgstr "Введите текущую широту. Это число градусов от экватора как десятичное."
 
@@ -4315,7 +4315,8 @@ msgstr "I"
 msgid "I do not want to perform any service scans"
 msgstr "Я не хочу выполнять никакое сканирование"
 
-msgid "I55SE/H7(new model)/H9(new model)/H9COMBO/H9TWIN/H9SE/H9COMBOSE/H10"
+#, fuzzy
+msgid "I55SE/H7(new model)/H9(new model)/H9COMBO/H9TWIN/H9SE/H9COMBOSE/H10/H11"
 msgstr "I55SE/H7(новая модель)/H9(новая модель)/H9COMBO/H9TWIN/H9SE/H9COMBOSE/H10"
 
 msgid "IDLE"
@@ -4869,9 +4870,6 @@ msgstr "Ссылка:"
 msgid "Linked titles with a DVD menu"
 msgstr "Названия, связанные с DVD меню"
 
-msgid "List available networks"
-msgstr "Просмотр списка доступных сетей"
-
 msgid "List mode"
 msgstr "Режим списка"
 
@@ -5025,9 +5023,6 @@ msgstr "В ручную"
 
 msgid "Manual Scan"
 msgstr "Ручное сканирование"
-
-msgid "Manual configuration"
-msgstr "Ручная настройка"
 
 msgid "Manual scan"
 msgstr "Ручное сканирование"
@@ -5883,6 +5878,9 @@ msgstr "РМТ PID"
 msgid "PPanel"
 msgstr "PPanel (shell скрипты)"
 
+msgid "PULSe 4K"
+msgstr ""
+
 msgid "Package list update"
 msgstr "Список пакетов обновления"
 
@@ -6056,22 +6054,8 @@ msgstr "Пожалуйста, измените время окончания з�
 msgid "Please choose an extension..."
 msgstr "Пожалуйста, выберите дополнение..."
 
-msgid ""
-"Please configure or verify your Nameservers by filling out the required values.\n"
-"When you are ready press OK to continue."
-msgstr ""
-"Пожалуйста, настройте или проверьте конфигурацию сервера имен (DNS),заполнив нужные данные.\n"
-"Когда будете готовы - нажмите ОК для продолжения."
-
 msgid "Please configure the fallback tuner setup"
 msgstr "Хотите сконфигурировать настройки запасного удаленного ресивера"
-
-msgid ""
-"Please configure your internet connection by filling out the required values.\n"
-"When you are ready press OK to continue."
-msgstr ""
-"Пожалуйста, настройте интернет соединение,заполнив нужные данные.\n"
-"Когда будете готовы - нажмите ОК для продолжения."
 
 msgid "Please connect your receiver to the internet"
 msgstr "Пожалуйста, подключите ваш ресивер к интернету"
@@ -6109,9 +6093,6 @@ msgstr "Пожалуйста, введите новый PIN-код"
 msgid "Please enter the old PIN code"
 msgstr "Пожалуйста, введите старый PIN-код"
 
-msgid "Please follow the instructions on the TV"
-msgstr "Пожалуйста, следуйте инструкциям на ТВ"
-
 msgid "Please note that the previously selected media could not be accessed and therefore the default directory is being used instead."
 msgstr "Пожалуйста, обратите внимание, что ранее выбранный носитель видео недоступен, и вместо него будет использована директория по умолчанию"
 
@@ -6147,24 +6128,6 @@ msgstr "Пожалуйста, выберите тэг для фильтра..."
 
 msgid "Please select the movie path..."
 msgstr "Пожалуйста, выберите путь для видео..."
-
-msgid ""
-"Please select the network interface that you want to use for your internet connection.\n"
-"\n"
-"Please press OK to continue."
-msgstr ""
-"Пожалуйста, выберите сетевой интерфейс который будет использован для Вашего подключения к интернету.\n"
-"\n"
-"Нажмите ОК для продолжения."
-
-msgid ""
-"Please select the wireless network that you want to connect to.\n"
-"\n"
-"Please press OK to continue."
-msgstr ""
-"Пожалуйста, выберите беспроводную сеть для Вашего подключения.\n"
-"\n"
-"Нажмите ОК для продолжения."
 
 msgid "Please set up tuner A"
 msgstr "Пожалуйста, настройте тюнер А"
@@ -6730,9 +6693,6 @@ msgstr "Обновление"
 
 msgid "Refresh rate"
 msgstr "Частота обновления"
-
-msgid "Refresh rate selection."
-msgstr "Выбор частоты обновления"
 
 msgid "Refusing to move to the same directory"
 msgstr "Отказаться от перехода в тот же каталог"
@@ -7536,9 +7496,6 @@ msgstr "Выбор пути для файла лога"
 msgid "Select provider to add..."
 msgstr "Выбор провайдера для добавления..."
 
-msgid "Select refresh rate"
-msgstr "Выберите частоту обновления"
-
 msgid "Select satellites"
 msgstr "Выбор спутников"
 
@@ -7629,17 +7586,8 @@ msgstr "Выбор источника обновления"
 msgid "Select update source to edit"
 msgstr "Выбор источника обновления для редактирования"
 
-msgid "Select video input with up/down buttons"
-msgstr "Выберите видеовход кнопками вверх/вниз"
-
-msgid "Select video mode"
-msgstr "Выберите видеорежим"
-
 msgid "Select whether your SCR device is externally powered."
 msgstr "Выберите, имеет ли Ваше устройство SCR внешнее питание."
-
-msgid "Select wireless network"
-msgstr "Выберите беспроводную сеть"
 
 msgid "Select your ATSC provider."
 msgstr "Выбор Вашего ATSC провайдера."
@@ -8604,6 +8552,9 @@ msgstr "Остановка текущего стрима"
 msgid "Stop entry"
 msgstr "Остановить запись"
 
+msgid "Stop live TV service"
+msgstr "Остановка 'live ТВ' сервиса"
+
 msgid "Stop play TV"
 msgstr "Остановка текущего сервиса"
 
@@ -8961,13 +8912,6 @@ msgid "Thailand"
 msgstr "Thailand"
 
 msgid ""
-"Thank you for using the wizard.\n"
-"Please press OK to continue."
-msgstr ""
-"Спасибо Вам за использование мастера настройки.\n"
-"Пожалуйста, нажмите ОК для продолжения."
-
-msgid ""
 "Thank you for using the wizard. Your receiver is now ready for use.\n"
 "Press OK to start using your receiver."
 msgstr ""
@@ -9105,13 +9049,6 @@ msgstr "Рестарт GUI Вашего ресивера выполнен для
 
 msgid ""
 "The wireless LAN plugin is not installed!\n"
-"Please install it and choose what you want to do next."
-msgstr ""
-"Плагин беспроводной сети WLAN не установлен!\n"
-"Пожалуйста, установите его и выберите, что делать далее."
-
-msgid ""
-"The wireless LAN plugin is not installed!\n"
 "Please install it."
 msgstr ""
 "Плагин для настройки беспроводной сети не инсталлирован!\n"
@@ -9170,6 +9107,9 @@ msgstr "Это мульти-тюнер. Доступные типы завися
 
 msgid "This is the order in which DiSEqC commands are sent to the aerial system. The order must correspond exactly with the order the physical devices are arranged along the signal cable (starting from the receiver end)."
 msgstr "Это порядок, в котором команды DiSEqC отправляются системе. Порядок должен точно соответствовать порядку расположения физических устройств по кабелю (начиная от ресивера)."
+
+msgid "This not valid ONID/TSID"
+msgstr "Недействительные ONID/TSID"
 
 msgid "This option allows to reduce the block-noise in the picture. Obviously this is at the cost of the picture's sharpness."
 msgstr "Эта опция позволяет уменьшить блок-шум изображения. Очевидно ценой резкости картинки."
@@ -9357,6 +9297,9 @@ msgstr ""
 
 msgid "This test detects your configured LAN adapter."
 msgstr "Этот тест определит ваш сконфигурированный LAN адаптер."
+
+msgid "This valid ONID/TSID"
+msgstr "Действительные ONID/TSID"
 
 msgid ""
 "This will (re-)calculate all positions of your rotor and may remove previously memorised positions and fine-tuning!\n"
@@ -10021,6 +9964,9 @@ msgstr "VOB файл"
 msgid "VU+"
 msgstr "VU+"
 
+msgid "Valid ONID/TSID look at www.lyngsat.com..."
+msgstr "Необходимые ONID/TSID, ищите на www.lyngsat.com..."
+
 msgid "Vanuatu"
 msgstr "Vanuatu"
 
@@ -10050,22 +9996,6 @@ msgstr "Улучшение настроек видео"
 
 msgid "Video enhancement setup"
 msgstr "Настройки улучшения видео"
-
-msgid ""
-"Video input selection\n"
-"\n"
-"Please press OK if you can see this page on your TV (or select a different input port).\n"
-"\n"
-"The next input port will be automatically probed in 20 seconds."
-msgstr ""
-"Выбор видео входа\n"
-"\n"
-"Нажмите ОК, если Вы видите эту страницу на экране ТВ (или выберите другой входной порт).\n"
-"\n"
-"Следующий входной порт будет автоматически выбран через 20 секунд."
-
-msgid "Video mode selection."
-msgstr "Выбор режима видео."
 
 msgid "Video output"
 msgstr "Видео выход"
@@ -10290,19 +10220,6 @@ msgstr ""
 "Вначале найдите место в записи, которое Вы хотите сократить. Нажмите OK, выберите 'начало сокращения'.\n"
 "\n"
 "\"Затем найдите точку окончания сокращения. Нажмите OK, выберите 'окончание сокращения'. Это все. Для сокращения используйте плагин 'MovieCut/Выполнить сокращения...'.)"
-
-msgid ""
-"Welcome.\n"
-"\n"
-"If you want to connect your receiver to the Internet, this wizard will guide you through the basic network setup of your receiver.\n"
-"\n"
-"Press OK to start configuring your network"
-msgstr ""
-"Добро пожаловать.\n"
-"\n"
-"Если вы хотите подключить Ваш ресивер к  интернету, этот мастер настройки проведет Вас через основные настройки сети Вашего ресивера.\n"
-"\n"
-"Нажмите ОК для начала настройки сети."
 
 msgid ""
 "Welcome.\n"
@@ -10564,12 +10481,6 @@ msgstr "Беспроводная сеть"
 msgid "Wireless network configuration..."
 msgstr "Конфигурация беспроводной сети..."
 
-msgid "Wireless network connection setup"
-msgstr "Настройка беспроводной сети"
-
-msgid "Wireless network connection setup."
-msgstr "Настройка беспроводной сети."
-
 msgid "Wireless network state"
 msgstr "Статистика беспроводной сети"
 
@@ -10799,13 +10710,6 @@ msgstr ""
 "Дождитесь перезагрузки Вашего ресивера\n"
 "Это может занять несколько минут"
 
-msgid ""
-"Your internet connection is not working!\n"
-"Please choose what you want to do next."
-msgstr ""
-"Ваше интернет-соединение не работает!\n"
-"Пожалуйста, выберите, что будете делать дальше."
-
 #, python-format
 msgid "Your internet connection is working (ip: %s)"
 msgstr "Ваше интернет-соединение работает (ip: %s)"
@@ -10832,19 +10736,6 @@ msgstr ""
 "\n"
 "Ваше интернет-соединение работает.\n"
 
-msgid ""
-"Your receiver is now ready to use.\n"
-"\n"
-"Your internet connection is working now.\n"
-"\n"
-"Please press OK to continue."
-msgstr ""
-" Ваш ресивер теперь готов к использованию.\n"
-"\n"
-"Ваше интернет-соединение сейчас работает.\n"
-"\n"
-"Пожалуйста, нажмите ОК для продолжения."
-
 msgid "Your receiver is rebooting"
 msgstr "Перезагрузка Вашего ресивера"
 
@@ -10862,17 +10753,6 @@ msgstr "Ваш ресивер будет переведен в режим ожи
 
 msgid "Your receiver will restart after pressing OK on your remote control."
 msgstr "Ваш ресивер будет перезагружен после нажатия кнопки OK на Вашем пульте Д/У."
-
-msgid ""
-"Your wireless LAN internet connection could not be started!\n"
-"Have you attached your USB WLAN Stick?\n"
-"\n"
-"Please choose what you want to do next."
-msgstr ""
-"Ваше беспроводное интернет соединение не может быть активировано.\n"
-"Вы подключили USB WLAN адаптер?\n"
-"\n"
-"Выберите, что будете делать дальше."
 
 msgid "Zambia"
 msgstr "Zambia"
@@ -11982,21 +11862,3 @@ msgstr "переключено"
 
 msgid "®"
 msgstr "®"
-
-msgid "Stop live TV service"
-msgstr "Остановка 'live ТВ' сервиса"
-
-msgid "Checking ONID/TSID"
-msgstr "Проверка ONID/TSID"
-
-msgid "This valid ONID/TSID"
-msgstr "Действительные ONID/TSID"
-
-msgid "This not valid ONID/TSID"
-msgstr "Недействительные ONID/TSID"
-
-msgid "Enter valid ONID/TSID"
-msgstr "Введите ONID/TSID транспондера"
-
-msgid "Valid ONID/TSID look at www.lyngsat.com..."
-msgstr "Необходимые ONID/TSID, ищите на www.lyngsat.com..."
