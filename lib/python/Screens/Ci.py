@@ -392,13 +392,18 @@ class CiSelection(Screen):
 		menuList.l.setList(self.list)
 		self["entries"] = menuList
 		self["entries"].onSelectionChanged.append(self.selectionChanged)
-		self["text"] = Label(_("Slot %d") % 1)
+		self["text"] = Label("")
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def layoutFinished(self):
 		global forceNotShowCiMessages
 		forceNotShowCiMessages = False
 		self.setTitle(_("Common Interface"))
+		cur = self["entries"].getCurrent()
+		if cur and len(cur) > 2:
+			self["text"].setText(_("Slot %d") % (cur[3] + 1))
+		elif not cur:
+			self["text"].setText(_("no module found"))
 
 	def selectionChanged(self):
 		if self.slot > 1:
