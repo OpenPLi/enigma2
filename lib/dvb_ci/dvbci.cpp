@@ -115,6 +115,9 @@ eDVBCIInterfaces::eDVBCIInterfaces()
 			eDebug("[CI] Streaming CI finish interface not advertised, assuming \"tuner\" method");
 		}
 	}
+	m_ciplus_routing_active = false;
+	m_ciplus_routing_tunernum = -1;
+
 	run();
 }
 
@@ -1031,6 +1034,113 @@ int eDVBCIInterfaces::setCIClockRate(int slotid, int rate)
 	if (slot)
 		return slot->setClockRate(rate);
 	return -1;
+}
+
+/* For authentication process transponder data needs to be routed through the CI (doesn't matter which channel)
+   This is mandatory for many CI+ 1.3 modules. For many CI+ 1.2 modules you can also switch to an encrypted channel
+   (with correct caid) */
+void eDVBCIInterfaces::setCIPlusRouting(int slotid)
+{
+	eDebug("[CI] setCIRouting slotid=%d", slotid);
+	singleLock s(m_pmt_handler_lock);
+	if (m_pmt_handlers.size() == 0)
+	{
+		eDebug("[CI] setCIRouting no pmt handler available! Unplug/plug again the CI module.");
+		return;
+	}
+	if (m_ciplus_routing_active)
+	{
+		eDebug("[CI] setCIRouting authentification of other module active. Unplug/plug again the CI module after first authentification was successful.");
+		return;
+	}
+	eDVBCISlot *slot = getSlot(slotid);
+	PMTHandlerList::iterator it = m_pmt_handlers.begin();
+	while (it != m_pmt_handlers.end())
+	{
+		int tunernum = -1;
+		eUsePtr<iDVBChannel> channel;
+		if (!it->pmthandler->getChannel(channel))
+		{
+			ePtr<iDVBFrontend> frontend;
+			if (!channel->getFrontend(frontend))
+			{
+				eDVBFrontend *fe = (eDVBFrontend*) &(*frontend);
+				tunernum = fe->getSlotID();
+			}
+		}
+		eTrace("[CI] setCIRouting tunernum=%d", tunernum);
+		if (tunernum < 0)
+			continue;
+
+		// read and store old routing config
+		char file_name[64];
+		char tmp[8];
+		int rd;
+
+		snprintf(file_name, 64, "/proc/stb/tsmux/input%d", tunernum);
+		int fd = open(file_name, O_RDONLY);
+		if (fd > -1)
+		{
+			rd = read(fd, tmp, 8);
+			if (rd > 0)
+			{
+				if (m_ciplus_routing_tunernum != tunernum)
+					m_ciplus_routing_input = std::string(tmp, rd-1);
+			}
+			else
+				continue;
+			close(fd);
+		}
+		else
+			continue;
+
+		snprintf(file_name, 64, "/proc/stb/tsmux/ci%d_input", slotid);
+		fd = open(file_name, O_RDONLY);
+		if (fd > -1)
+		{
+			rd = read(fd, tmp, 8);
+			if (rd > 0)
+			{
+				if (m_ciplus_routing_tunernum != tunernum)
+					m_ciplus_routing_ci_input = std::string(tmp, rd-1);
+			}
+			else
+				continue;
+			close(fd);
+		}
+		else
+			continue;
+
+		std::stringstream new_input_source;
+		new_input_source << "CI" << slot->getSlotID();
+
+		setInputSource(tunernum, new_input_source.str());
+		slot->setSource(eDVBCISlot::getTunerLetter(tunernum));
+
+		m_ciplus_routing_tunernum = tunernum;
+		m_ciplus_routing_active = true;
+		break;
+
+		++it;
+	}
+	eDebug("[CI] setCIRouting slotid=%d tuner=%d old_input=%s old_ci_input=%s", slotid, m_ciplus_routing_tunernum, m_ciplus_routing_input.c_str(), m_ciplus_routing_ci_input.c_str());
+}
+
+void eDVBCIInterfaces::revertCIPlusRouting(int slotid)
+{
+	eDVBCISlot *slot = getSlot(slotid);
+
+	eDebug("[CI] revertCIPlusRouting: active=%d slot=%d tuner=%d input=%s ci_input=%s", m_ciplus_routing_active, slotid, m_ciplus_routing_tunernum, m_ciplus_routing_input.c_str(), m_ciplus_routing_ci_input.c_str());
+
+	if(m_ciplus_routing_active)
+	{
+		slot->setSource(m_ciplus_routing_ci_input);
+		setInputSource(m_ciplus_routing_tunernum, m_ciplus_routing_input);
+	}
+	m_ciplus_routing_active = false;
+	m_ciplus_routing_tunernum = -1;
+	m_ciplus_routing_input = "";
+	m_ciplus_routing_ci_input = "";
 }
 
 int eDVBCISlot::send(const unsigned char *data, size_t len)

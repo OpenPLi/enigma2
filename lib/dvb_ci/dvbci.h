@@ -156,6 +156,10 @@ private:
 	eFixedMessagePump<int> m_messagepump_main; // message handling in the e2 mainloop
 	ePtr<eTimer> m_runTimer; // workaround to interrupt thread mainloop as some ci drivers don't implement poll properly
 	static pthread_mutex_t m_pmt_handler_lock;
+	bool m_ciplus_routing_active;
+	int m_ciplus_routing_tunernum;
+	std::string m_ciplus_routing_input;
+	std::string m_ciplus_routing_ci_input;
 
 	int sendCAPMT(int slot);
 
@@ -189,6 +193,8 @@ public:
 	int getMMIState(int slot);
 	int setInputSource(int tunerno, const std::string &source);
 	int setCIClockRate(int slot, int rate);
+	void setCIPlusRouting(int slotid);
+	void revertCIPlusRouting(int slotid);
 	bool canDescrambleMultipleServices(eDVBCISlot* slot);
 	std::string getLanguage() { return m_language; };
 #ifdef SWIG
