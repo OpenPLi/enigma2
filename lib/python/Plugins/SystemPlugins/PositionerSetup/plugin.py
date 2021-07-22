@@ -1357,6 +1357,7 @@ class ONIDTSIDScreen(ConfigListScreen, Screen):
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
+		self.skinName = ["ONIDTSIDScreen", "TunerScreen"]
 		self.setTitle(_("Enter valid ONID/TSID"))
 		ConfigListScreen.__init__(self, None)
 		self.transponderTsid = NoSave(ConfigInteger(default=0, limits=(0, 65535)))
