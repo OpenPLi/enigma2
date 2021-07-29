@@ -681,6 +681,11 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 			# sanity check for empty sat list
 			if not (self.nimConfig.configMode.value == "satposdepends" or self.nimConfig.configMode.value == "advanced" and int(self.nimConfig.advanced.sat[3607].lnb.value) != 0) and len(nimmanager.getSatListForNim(self.slotid)) < 1:
 				self.nimConfig.configMode.value = "nothing"
+		elif self.nim.isCompatible("DVB-C") and self.nim.isFBCRoot() and self.nimConfig.configMode.value == "nothing":
+			for slot in nimmanager.nim_slots:
+				if slot.isFBCLink() and slot.is_fbc[2] == self.nim.is_fbc[2] and slot.config.configMode.value != "nothing":
+					slot.config.configMode.value = "nothing"
+					slot.config.configMode.save()
 		if self.isChanged():
 			for x in self["config"].list:
 				x[1].save()
