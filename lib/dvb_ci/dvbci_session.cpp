@@ -150,7 +150,6 @@ void eDVBCISession::createSession(eDVBCISlot *slot, const unsigned char *resourc
 	{
 	case 0x00010041:
 	case 0x00010042:
-		eDVBCIInterfaces::getInstance()->setCIPlusRouting(slot->getSlotID());
 		session=new eDVBCIResourceManagerSession(slot->getVersion());
 		eDebug("[CI SESS] RESOURCE MANAGER");
 		break;
@@ -180,6 +179,7 @@ void eDVBCISession::createSession(eDVBCISlot *slot, const unsigned char *resourc
 		eDebug("[CI SESS] Application MMI");
 		break;
 	case 0x008C1001:
+		eDVBCIInterfaces::getInstance()->setCIPlusRouting(slot->getSlotID());
 		session = new eDVBCICcSession(slot);
 		eDebug("[CI SESS] Content Control");
 		break;
