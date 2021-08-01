@@ -6,7 +6,7 @@ from Components.ConfigList import ConfigListScreen
 from Components.NimManager import nimmanager
 from Components.Button import Button
 from Components.Label import Label
-from Components.UsageConfig import showrotorpositionChoicesUpdate
+from Components.UsageConfig import showrotorpositionChoicesUpdate, preferredTunerChoicesUpdate
 from Components.SelectionList import SelectionList, SelectionEntryComponent
 from Components.config import getConfigListEntry, config, ConfigNothing, ConfigYesNo, configfile, ConfigBoolean, ConfigSelection
 from Components.Sources.List import List
@@ -207,7 +207,10 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 				self.configModeDVBC = getConfigListEntry(_("Configure DVB-C"), self.nimConfig.configModeDVBC, _("Select 'Yes' when you want to configure this tuner for DVB-C"))
 				self.list.append(self.configModeDVBC)
 			elif not self.nim.isMultiType():
-				self.configMode = getConfigListEntry(self.indent % _("Configuration mode"), self.nimConfig.configMode, _("Select 'enabled' if this tuner has a signal cable connected, otherwise select 'nothing connected'."))
+				warning_text = ""
+				if "Vuplus DVB-C NIM(BCM3148)" in self.nim.description and self.nim.isFBCRoot() and self.nim.is_fbc[2] != 1:
+					warning_text = _("Warning: FBC-C V1 tuner should be connected to the first slot to work correctly. Otherwise, only 2 out of 8 demodulators will be available when connected in the second slot. ")
+				self.configMode = getConfigListEntry(self.indent % _("Configuration mode"), self.nimConfig.configMode, warning_text + _("Select 'enabled' if this tuner has a signal cable connected, otherwise select 'nothing connected'."))
 				self.list.append(self.configMode)
 			if self.nimConfig.configModeDVBC.value if self.nim.isCombined() else self.nimConfig.configMode.value != "nothing":
 				self.list.append(getConfigListEntry(self.indent % _("Network ID"), self.nimConfig.cable.scan_networkid, _("This setting depends on your cable provider and location. If you don't know the correct setting refer to the menu in the official cable receiver, or get it from your cable provider, or seek help via internet forum.")))
@@ -691,6 +694,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 				x[1].save()
 			configfile.save()
 		showrotorpositionChoicesUpdate(update=True)
+		preferredTunerChoicesUpdate(update=True)
 
 	def cancelConfirm(self, result):
 		if not result:
