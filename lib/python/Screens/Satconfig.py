@@ -209,7 +209,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 			elif not self.nim.isMultiType():
 				warning_text = ""
 				if "Vuplus DVB-C NIM(BCM3148)" in self.nim.description and self.nim.isFBCRoot() and self.nim.is_fbc[2] != 1:
-					warning_text = _("Warning: FBC-C V1 tuner should be connected to first slot for correct work. Only 2 out of 8 demodulators will work in the second slot. ")
+					warning_text = _("Warning: FBC-C V1 tuner should be connected to the first slot to work correctly. Otherwise, only 2 out of 8 demodulators will be available when connected in the second slot. ")
 				self.configMode = getConfigListEntry(self.indent % _("Configuration mode"), self.nimConfig.configMode, warning_text + _("Select 'enabled' if this tuner has a signal cable connected, otherwise select 'nothing connected'."))
 				self.list.append(self.configMode)
 			if self.nimConfig.configModeDVBC.value if self.nim.isCombined() else self.nimConfig.configMode.value != "nothing":
