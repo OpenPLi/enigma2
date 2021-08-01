@@ -847,10 +847,10 @@ def showrotorpositionChoicesUpdate(update=False):
 	SystemInfo["isRotorTuner"] = count > 0
 
 def preferredTunerChoicesUpdate(update=False):
-	dvbs_nims = [("-2", _("Disabled"))]
-	dvbt_nims = [("-2", _("Disabled"))]
-	dvbc_nims = [("-2", _("Disabled"))]
-	atsc_nims = [("-2", _("Disabled"))]
+	dvbs_nims = [("-2", _("disabled"))]
+	dvbt_nims = [("-2", _("disabled"))]
+	dvbc_nims = [("-2", _("disabled"))]
+	atsc_nims = [("-2", _("disabled"))]
 
 	nims = [("-1", _("auto"))]
 	for slot in nimmanager.nim_slots:
@@ -870,7 +870,7 @@ def preferredTunerChoicesUpdate(update=False):
 		config.usage.frontend_priority = ConfigSelection(default="-1", choices=list(nims))
 	else:
 		cconfig.usage.frontend_priority.setChoices(list(nims), "-1")
-	nims.insert(0, ("-2", _("Disabled")))
+	nims.insert(0, ("-2", _("disabled")))
 	if not update:
 		config.usage.recording_frontend_priority = ConfigSelection(default="-2", choices=nims)
 	else:
