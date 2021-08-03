@@ -869,7 +869,7 @@ def preferredTunerChoicesUpdate(update=False):
 	if not update:
 		config.usage.frontend_priority = ConfigSelection(default="-1", choices=list(nims))
 	else:
-		cconfig.usage.frontend_priority.setChoices(list(nims), "-1")
+		config.usage.frontend_priority.setChoices(list(nims), "-1")
 	nims.insert(0, ("-2", _("disabled")))
 	if not update:
 		config.usage.recording_frontend_priority = ConfigSelection(default="-2", choices=nims)
