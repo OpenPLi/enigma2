@@ -365,7 +365,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 				x[1].value = int(mktime(dt.timetuple()))
 			x[1].save()
 		nimmanager.sec.update()
-		self.saveAll()
+		self.saveAll(reopen=True)
 		return True
 
 	def autoDiseqcRun(self, ports):
@@ -673,7 +673,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 			is_changed |= x[1].isChanged()
 		return is_changed
 
-	def saveAll(self):
+	def saveAll(self, reopen=False):
 		if self.nim.isCompatible("DVB-S"):
 			# reset connectedTo to all choices to properly store the default value
 			choices = []
@@ -689,6 +689,21 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 				if slot.isFBCLink() and slot.is_fbc[2] == self.nim.is_fbc[2] and slot.config.configMode.value != "nothing":
 					slot.config.configMode.value = "nothing"
 					slot.config.configMode.save()
+		if reopen and self.oldref and self.slot_number == self.slotid:
+			refstr = self.oldAlternativeref.toString()
+			force_reopen = False
+			if "EEEE0000" in refstr and (self.nim.isCompatible("DVB-T") and self.nimConfig.configMode.value == "nothing") or (self.nim.isCombined() and self.nim.canBeCompatible("DVB-T") and not self.nimConfig.configModeDVBT.value):
+				force_reopen = True
+			elif "FFFF0000" in refstr and ((self.nim.isCompatible("DVB-C") and self.nimConfig.configMode.value == "nothing") or (self.nim.isCombined() and self.nim.canBeCompatible("DVB-C") and not self.nimConfig.configModeDVBC.value)) or ((self.nim.isCompatible("ATSC") and self.nimConfig.configMode.value == "nothing") or (self.nim.isCombined() and self.nim.canBeCompatible("ATSC") and not self.nimConfig.configModeATSC.value)):
+				force_reopen = True
+			if force_reopen:
+				raw_channel = eDVBResourceManager.getInstance().allocateRawChannel(self.slotid)
+				if raw_channel:
+					frontend = raw_channel.getFrontend()
+					if frontend:
+						frontend.closeFrontend()
+						frontend.reopenFrontend()
+				del raw_channel
 		if self.isChanged():
 			for x in self["config"].list:
 				x[1].save()
