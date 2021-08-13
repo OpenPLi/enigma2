@@ -345,30 +345,31 @@ class MultiFileSelectList(FileList):
 			f()
 
 	def changeSelectionState(self):
-		idx = self.l.getCurrentSelectionIndex()
-		newList = self.list[:]
-		x = self.list[idx]
-		if not x[0][3].startswith('<'):
-			if x[0][1] is True:
-				realPathname = x[0][0]
-			else:
-				realPathname = self.current_directory + x[0][0]
-			if x[0][2]:
-				SelectState = False
-				try:
-					self.selectedFiles.remove(realPathname)
-				except:
+		if len(self.list):
+			idx = self.l.getCurrentSelectionIndex()
+			newList = self.list[:]
+			x = self.list[idx]
+			if x and len(x[0]) > 2 and not x[0][3].startswith('<'):
+				if x[0][1] is True:
+					realPathname = x[0][0]
+				else:
+					realPathname = self.current_directory + x[0][0]
+				if x[0][2]:
+					SelectState = False
 					try:
-						self.selectedFiles.remove(os.path.normpath(realPathname))
+						self.selectedFiles.remove(realPathname)
 					except:
-						print "Couldn't remove:", realPathname
-			else:
-				SelectState = True
-				if (realPathname not in self.selectedFiles) and (os.path.normpath(realPathname) not in self.selectedFiles):
-					self.selectedFiles.append(realPathname)
-			newList[idx] = MultiFileSelectEntryComponent(name=x[0][3], absolute=x[0][0], isDir=x[0][1], selected=SelectState)
-		self.list = newList
-		self.l.setList(self.list)
+						try:
+							self.selectedFiles.remove(os.path.normpath(realPathname))
+						except (IOError, OSError) as err:
+							print "[FileList] Error: Can't remove '%s'!  (%s)" % (err.errno, realPathname, err.strerror)
+				else:
+					SelectState = True
+					if (realPathname not in self.selectedFiles) and (os.path.normpath(realPathname) not in self.selectedFiles):
+						self.selectedFiles.append(realPathname)
+				newList[idx] = MultiFileSelectEntryComponent(name=x[0][3], absolute=x[0][0], isDir=x[0][1], selected=SelectState)
+			self.list = newList
+			self.l.setList(self.list)
 
 	def getSelectedList(self):
 		return self.selectedFiles
