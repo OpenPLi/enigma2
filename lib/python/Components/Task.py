@@ -488,7 +488,7 @@ class DiskspacePrecondition(Condition):
 			return False
 
 	def getErrorMessage(self, task):
-		return _("Not enough disk space. Please free up some disk space and try again. (%d MB required, %d MB available)") % (self.diskspace_required / 1024 / 1024, self.diskspace_available / 1024 / 1024)
+		return _("Not enough disk space. Please free up some disk space and try again. (%(req)d MB required, %(avail)d MB available)") % {"req": self.diskspace_required / 1024 / 1024, "avail": self.diskspace_available / 1024 / 1024}
 
 
 class ToolExistsPrecondition(Condition):
