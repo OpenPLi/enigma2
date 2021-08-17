@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPLI Enigma2 Official Greek Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-06 08:40+0200\n"
+"POT-Creation-Date: 2021-08-17 23:01+0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: MCelliotG <mcelliotg@gmail.com>\n"
 "Language-Team: MCelliotG <mcelliotg@gmail.com>\n"
@@ -120,6 +120,20 @@ msgid " updates available."
 msgstr " διαθέσιμες ενημερώσεις."
 
 #, python-format
+msgid "%(freespace)s %(percent)s free disk space"
+msgstr "%(freespace)s ελεύθερος χώρος δίσκου %(percent)s"
+
+#. TRANSLATORS: short time representation hour:minute
+#, python-format
+msgid "%(hour)2d:%(min)02d"
+msgstr ""
+
+#. TRANSLATORS: full time representation hour:minute:seconds
+#, python-format
+msgid "%(hour)2d:%(min)02d:%(sec)02d"
+msgstr ""
+
+#, python-format
 msgid "%.0f GB"
 msgstr "%.0f GB"
 
@@ -154,16 +168,6 @@ msgstr "%03d MB"
 #, python-format
 msgid "%2.1f sec"
 msgstr "%2.1f δευτ."
-
-#. TRANSLATORS: short time representation hour:minute
-#, python-format
-msgid "%2d:%02d"
-msgstr "%2d:%02d"
-
-#. TRANSLATORS: full time representation hour:minute:seconds
-#, python-format
-msgid "%2d:%02d:%02d"
-msgstr "%2d:%02d:%02d"
 
 #, python-format
 msgid "%3.01f dB"
@@ -355,10 +359,6 @@ msgstr ""
 #, python-format
 msgid "%s %d.%d"
 msgstr "%s %d.%d"
-
-#, python-format
-msgid "%(freespace)s %(percent)s free disk space"
-msgstr "%(freespace)s ελεύθερος χώρος δίσκου %(percent)s"
 
 #, python-format
 msgid "%s (%s)\n"
@@ -7356,7 +7356,7 @@ msgid "Select"
 msgstr "Επιλογή"
 
 msgid "Select '1.0' for standard committed switches, '1.1' for uncommitted switches, and '1.2' for systems using a positioner."
-msgstr "Επιλέξτε '1.0' για στάνταρ δεσμευμένους διακόπτες, '1.1' για μη δεσμευμένους διακόπτες, και '1.2 για συστήματα με μοτέρ κίνησης."
+msgstr "Επιλέξτε '1.0' για στάνταρ δεσμευμένους διακόπτες, '1.1' για μη δεσμευμένους διακόπτες, και '1.2' για συστήματα με μοτέρ κίνησης."
 
 msgid "Select 'A' or 'B' if your aerial system requires this, otherwise select 'none'. If you are unsure select 'none'."
 msgstr "Επιλέξτε 'A' ή 'B' αν το απαιτεί το κεραιοσύστημά σας, αλλιώς ή αν δεν είστε σίγουροι επιλέξτε 'κανένα'."
@@ -7404,7 +7404,7 @@ msgstr "Επιλέξτε 'ναι' για να συμπεριλάβετε τον 
 
 #, python-format
 msgid "Select 'yes' to include the %s band in your search."
-msgstr "Επιλέξτε 'ναι' για να συμπεριλάβετε τη μπάντα %s στην αναζήτηση."
+msgstr "Επιλέξτε 'ναι' για να συμπεριλάβετε την μπάντα %s στην αναζήτηση."
 
 msgid "Select 'yes' to only send the DiSEqC command when changing from one satellite to another, or select 'no' for the DiSEqC command to be resent on every zap."
 msgstr "Επιλέξτε 'ναι' για να αποστέλλεται η εντολή DiSEqC κατά την αλλαγή δορυφόρου ή επιλέξτε 'όχι' για να αποστέλλεται η εντολή DiSEqC σε κάθε ζάπινγκ."
@@ -7546,7 +7546,7 @@ msgid "Select the User Band frequency to be assigned to this tuner. This is the 
 msgstr "Επιλέξτε τη συχνότητα της μπάντας χρήστη για αυτό το tuner. Πρόκειται για τη συχνότητα που χρησιμοποιεί ο διακόπτης SCR ή το SCR LNB για να περάσει τον επιλεγμένο αναμεταδότη στο tuner."
 
 msgid "Select the User Band to be assigned to this tuner. This is an index into the table of frequencies the SCR switch or SCR LNB uses to pass the requested transponder to the tuner."
-msgstr "Επιλέξτε τη μπάντα χρήστη για αυτό το tuner. Πρόκειται για ένα ευρετήριο του πίνακα συχνοτήτων που χρησιμοποιεί ο διακόπτης SCR ή το SCR LNB για να περάσει τον επιλεγμένο αναμεταδότη στο tuner."
+msgstr "Επιλέξτε την μπάντα χρήστη για αυτό το tuner. Πρόκειται για ένα ευρετήριο του πίνακα συχνοτήτων που χρησιμοποιεί ο διακόπτης SCR ή το SCR LNB για να περάσει τον επιλεγμένο αναμεταδότη στο tuner."
 
 msgid "Select the character or action under the keyboard cursor"
 msgstr "Επιλογή του χαρακτήρα ή της εντολής κάτω από τον κέρσορα του πληκτρολογίου"
@@ -9967,6 +9967,14 @@ msgstr "Επιλεγμένος τύπος ανίχνευσης υπηρεσιώ�
 
 msgid "User - bouquets"
 msgstr "Μπουκέτα χρήστη"
+
+#, python-format
+msgid "User Band %d"
+msgstr "Μπάντα χρήστη %d"
+
+#, python-format
+msgid "User Band %d (%s)"
+msgstr "Μπάντα χρήστη %d (%s)"
 
 msgid "User ID"
 msgstr "ID χρήστη"
