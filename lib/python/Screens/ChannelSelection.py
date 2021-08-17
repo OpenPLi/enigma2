@@ -1103,11 +1103,11 @@ class ChannelSelectionEdit:
 			messageText = _("Are you sure to remove all terrestrial services?")
 		else:
 			if unsigned_orbpos > 1800:
-				unsigned_orbpos = 3600 - unsigned_orbpos
-				direction = _("W")
+				orbpos = _("%.1f° W") % ((3600 - unsigned_orbpos) / 10.0)
 			else:
-				direction = _("E")
-			messageText = _("Are you sure to remove all %d.%d%s%s services?") % (unsigned_orbpos / 10, unsigned_orbpos % 10, "\xc2\xb0", direction)
+				orbpos = _("%.1f° E") % (unsigned_orbpos / 10.0)
+			# TRANSLATORS: The user is asked to delete all satellite services from a specific orbital position after a configuration change
+			messageText = _("Are you sure to remove all %s services?") % orbpos
 		self.session.openWithCallback(self.removeSatelliteServicesCallback, MessageBox, messageText)
 
 	def removeSatelliteServicesCallback(self, answer):
