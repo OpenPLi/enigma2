@@ -6,7 +6,7 @@ from Components.ConfigList import ConfigListScreen
 from Components.NimManager import nimmanager
 from Components.Button import Button
 from Components.Label import Label
-from Components.UsageConfig import showrotorpositionChoicesUpdate
+from Components.UsageConfig import showrotorpositionChoicesUpdate, preferredTunerChoicesUpdate
 from Components.SelectionList import SelectionList, SelectionEntryComponent
 from Components.config import getConfigListEntry, config, ConfigNothing, ConfigYesNo, configfile, ConfigBoolean, ConfigSelection
 from Components.Sources.List import List
@@ -207,7 +207,10 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 				self.configModeDVBC = getConfigListEntry(_("Configure DVB-C"), self.nimConfig.configModeDVBC, _("Select 'Yes' when you want to configure this tuner for DVB-C"))
 				self.list.append(self.configModeDVBC)
 			elif not self.nim.isMultiType():
-				self.configMode = getConfigListEntry(self.indent % _("Configuration mode"), self.nimConfig.configMode, _("Select 'enabled' if this tuner has a signal cable connected, otherwise select 'nothing connected'."))
+				warning_text = ""
+				if "Vuplus DVB-C NIM(BCM3148)" in self.nim.description and self.nim.isFBCRoot() and self.nim.is_fbc[2] != 1:
+					warning_text = _("Warning: FBC-C V1 tuner should be connected to the first slot to work correctly. Otherwise, only 2 out of 8 demodulators will be available when connected in the second slot. ")
+				self.configMode = getConfigListEntry(self.indent % _("Configuration mode"), self.nimConfig.configMode, warning_text + _("Select 'enabled' if this tuner has a signal cable connected, otherwise select 'nothing connected'."))
 				self.list.append(self.configMode)
 			if self.nimConfig.configModeDVBC.value if self.nim.isCombined() else self.nimConfig.configMode.value != "nothing":
 				self.list.append(getConfigListEntry(self.indent % _("Network ID"), self.nimConfig.cable.scan_networkid, _("This setting depends on your cable provider and location. If you don't know the correct setting refer to the menu in the official cable receiver, or get it from your cable provider, or seek help via internet forum.")))
@@ -362,7 +365,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 				x[1].value = int(mktime(dt.timetuple()))
 			x[1].save()
 		nimmanager.sec.update()
-		self.saveAll()
+		self.saveAll(reopen=True)
 		return True
 
 	def autoDiseqcRun(self, ports):
@@ -670,7 +673,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 			is_changed |= x[1].isChanged()
 		return is_changed
 
-	def saveAll(self):
+	def saveAll(self, reopen=False):
 		if self.nim.isCompatible("DVB-S"):
 			# reset connectedTo to all choices to properly store the default value
 			choices = []
@@ -681,11 +684,35 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 			# sanity check for empty sat list
 			if not (self.nimConfig.configMode.value == "satposdepends" or self.nimConfig.configMode.value == "advanced" and int(self.nimConfig.advanced.sat[3607].lnb.value) != 0) and len(nimmanager.getSatListForNim(self.slotid)) < 1:
 				self.nimConfig.configMode.value = "nothing"
+		elif self.nim.isCompatible("DVB-C") and self.nim.isFBCRoot():
+			value = "nothing"
+			if self.nimConfig.configMode.value == "enabled":
+				value = "enabled"
+			for slot in nimmanager.nim_slots:
+				if slot.isFBCLink() and slot.is_fbc[2] == self.nim.is_fbc[2] and slot.config.configMode.value != value:
+					slot.config.configMode.value = value
+					slot.config.configMode.save()
+		if reopen and self.oldref and self.slot_number == self.slotid:
+			type_service = self.oldAlternativeref.getUnsignedData(4) >> 16
+			force_reopen = False
+			if type_service == 0xEEEE and (self.nim.isCompatible("DVB-T") and self.nimConfig.configMode.value == "nothing") or (self.nim.isCombined() and self.nim.canBeCompatible("DVB-T") and not self.nimConfig.configModeDVBT.value):
+				force_reopen = True
+			elif type_service == 0xFFFF and ((self.nim.isCompatible("DVB-C") and self.nimConfig.configMode.value == "nothing") or (self.nim.isCombined() and self.nim.canBeCompatible("DVB-C") and not self.nimConfig.configModeDVBC.value)) or ((self.nim.isCompatible("ATSC") and self.nimConfig.configMode.value == "nothing") or (self.nim.isCombined() and self.nim.canBeCompatible("ATSC") and not self.nimConfig.configModeATSC.value)):
+				force_reopen = True
+			if force_reopen:
+				raw_channel = eDVBResourceManager.getInstance().allocateRawChannel(self.slotid)
+				if raw_channel:
+					frontend = raw_channel.getFrontend()
+					if frontend:
+						frontend.closeFrontend()
+						frontend.reopenFrontend()
+				del raw_channel
 		if self.isChanged():
 			for x in self["config"].list:
 				x[1].save()
 			configfile.save()
 		showrotorpositionChoicesUpdate(update=True)
+		preferredTunerChoicesUpdate(update=True)
 
 	def cancelConfirm(self, result):
 		if not result:
