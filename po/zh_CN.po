@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-06 08:40+0200\n"
+"POT-Creation-Date: 2021-08-17 23:01+0300\n"
 "PO-Revision-Date: 2021-07-31 17:00+0800\n"
 "Last-Translator: 孤独之剑 <haotzyy1970@yahoo.com>\n"
 "Language-Team: 孤独之剑 <haotzyy1970@yahoo.com>\n"
@@ -120,6 +120,20 @@ msgid " updates available."
 msgstr " 更新可用."
 
 #, python-format
+msgid "%(freespace)s %(percent)s free disk space"
+msgstr "%(freespace)s %(percent)s 空闲空间"
+
+#. TRANSLATORS: short time representation hour:minute
+#, python-format
+msgid "%(hour)2d:%(min)02d"
+msgstr ""
+
+#. TRANSLATORS: full time representation hour:minute:seconds
+#, python-format
+msgid "%(hour)2d:%(min)02d:%(sec)02d"
+msgstr ""
+
+#, python-format
 msgid "%.0f GB"
 msgstr "%.0f GB"
 
@@ -154,16 +168,6 @@ msgstr "%03d MB"
 #, python-format
 msgid "%2.1f sec"
 msgstr "%2.1f 秒"
-
-#. TRANSLATORS: short time representation hour:minute
-#, python-format
-msgid "%2d:%02d"
-msgstr "%2d:%02d"
-
-#. TRANSLATORS: full time representation hour:minute:seconds
-#, python-format
-msgid "%2d:%02d:%02d"
-msgstr "%2d:%02d:%02d"
 
 #, python-format
 msgid "%3.01f dB"
@@ -355,10 +359,6 @@ msgstr ""
 #, python-format
 msgid "%s %d.%d"
 msgstr "%s %d.%d"
-
-#, python-format
-msgid "%(freespace)s %(percent)s free disk space"
-msgstr "%(freespace)s %(percent)s 空闲空间"
 
 #, python-format
 msgid "%s (%s)\n"
@@ -9966,6 +9966,14 @@ msgstr "按频道类型搜索"
 
 msgid "User - bouquets"
 msgstr "自定义组"
+
+#, python-format
+msgid "User Band %d"
+msgstr ""
+
+#, python-format
+msgid "User Band %d (%s)"
+msgstr ""
 
 msgid "User ID"
 msgstr "用户ID"

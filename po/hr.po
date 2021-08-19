@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-06 08:40+0200\n"
+"POT-Creation-Date: 2021-08-17 23:01+0300\n"
 "PO-Revision-Date: 2021-01-17 18:31+0100\n"
 "Last-Translator: Željko <zeljko2@hi.ht.hr>\n"
 "Language-Team: Željko\n"
@@ -121,6 +121,20 @@ msgid " updates available."
 msgstr " dostupna ažuriranja."
 
 #, python-format
+msgid "%(freespace)s %(percent)s free disk space"
+msgstr "%(freespace)s %(percent)s slobodnog prostora na disku"
+
+#. TRANSLATORS: short time representation hour:minute
+#, python-format
+msgid "%(hour)2d:%(min)02d"
+msgstr ""
+
+#. TRANSLATORS: full time representation hour:minute:seconds
+#, python-format
+msgid "%(hour)2d:%(min)02d:%(sec)02d"
+msgstr ""
+
+#, python-format
 msgid "%.0f GB"
 msgstr "%.0f GB"
 
@@ -155,16 +169,6 @@ msgstr "%03d MB"
 #, python-format
 msgid "%2.1f sec"
 msgstr "%2.1f sek"
-
-#. TRANSLATORS: short time representation hour:minute
-#, python-format
-msgid "%2d:%02d"
-msgstr "%2d:%02d"
-
-#. TRANSLATORS: full time representation hour:minute:seconds
-#, python-format
-msgid "%2d:%02d:%02d"
-msgstr "%2d:%02d:%02d"
 
 #, python-format
 msgid "%3.01f dB"
@@ -367,10 +371,6 @@ msgstr ""
 #, python-format
 msgid "%s %d.%d"
 msgstr "%s %d.%d"
-
-#, python-format
-msgid "%(freespace)s %(percent)s free disk space"
-msgstr "%(freespace)s %(percent)s slobodnog prostora na disku"
 
 #, python-format
 msgid "%s (%s)\n"
@@ -9998,6 +9998,14 @@ msgstr "Vrsta skenirane usluge koja se koristi"
 
 msgid "User - bouquets"
 msgstr "Korisnik - paketi"
+
+#, python-format
+msgid "User Band %d"
+msgstr ""
+
+#, python-format
+msgid "User Band %d (%s)"
+msgstr ""
 
 msgid "User ID"
 msgstr "Korisnički ID"

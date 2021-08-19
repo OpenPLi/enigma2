@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OBH enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-06 08:40+0200\n"
+"POT-Creation-Date: 2021-08-17 23:01+0300\n"
 "PO-Revision-Date: 2019-04-12 12:36+0300\n"
 "Last-Translator: mosad - مساعد الجعيد <abo-mishal@hotmail.com>\n"
 "Language-Team: mosad - مساعد الجعيد\n"
@@ -126,6 +126,20 @@ msgid " updates available."
 msgstr "التحديثات المتوفرة."
 
 #, fuzzy, python-format
+msgid "%(freespace)s %(percent)s free disk space"
+msgstr "المساحه المتبقيه فى القرص"
+
+#. TRANSLATORS: short time representation hour:minute
+#, python-format
+msgid "%(hour)2d:%(min)02d"
+msgstr ""
+
+#. TRANSLATORS: full time representation hour:minute:seconds
+#, python-format
+msgid "%(hour)2d:%(min)02d:%(sec)02d"
+msgstr ""
+
+#, fuzzy, python-format
 msgid "%.0f GB"
 msgstr "%.من جيجابايت"
 
@@ -160,16 +174,6 @@ msgstr "%03d ميجابايت"
 #, python-format
 msgid "%2.1f sec"
 msgstr "%2.1f ثانية"
-
-#. TRANSLATORS: short time representation hour:minute
-#, python-format
-msgid "%2d:%02d"
-msgstr ""
-
-#. TRANSLATORS: full time representation hour:minute:seconds
-#, python-format
-msgid "%2d:%02d:%02d"
-msgstr ""
 
 #, python-format
 msgid "%3.01f dB"
@@ -406,10 +410,6 @@ msgstr ""
 #, python-format
 msgid "%s %d.%d"
 msgstr ""
-
-#, fuzzy, python-format
-msgid "%(freespace)s %(percent)s free disk space"
-msgstr "المساحه المتبقيه فى القرص"
 
 #, python-format
 msgid "%s (%s)\n"
@@ -10708,6 +10708,14 @@ msgstr "نوع البحث عن القنوات المستخدمة"
 
 msgid "User - bouquets"
 msgstr "باقات - المستخدم"
+
+#, python-format
+msgid "User Band %d"
+msgstr ""
+
+#, python-format
+msgid "User Band %d (%s)"
+msgstr ""
 
 msgid "User ID"
 msgstr ""

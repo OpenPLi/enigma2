@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-06 08:40+0200\n"
+"POT-Creation-Date: 2021-08-17 23:01+0300\n"
 "PO-Revision-Date: 2013-10-23 19:15+0100\n"
 "Last-Translator: andy1 <dmmm8000pvr@gmail.com>\n"
 "Language-Team: none\n"
@@ -123,6 +123,20 @@ msgid " updates available."
 msgstr " oppdateringer er tilgjengelig."
 
 #, python-format
+msgid "%(freespace)s %(percent)s free disk space"
+msgstr "%(freespace)s %(percent)s ledig diskplass"
+
+#. TRANSLATORS: short time representation hour:minute
+#, python-format
+msgid "%(hour)2d:%(min)02d"
+msgstr ""
+
+#. TRANSLATORS: full time representation hour:minute:seconds
+#, python-format
+msgid "%(hour)2d:%(min)02d:%(sec)02d"
+msgstr ""
+
+#, python-format
 msgid "%.0f GB"
 msgstr ""
 
@@ -156,16 +170,6 @@ msgstr ""
 
 #, python-format
 msgid "%2.1f sec"
-msgstr ""
-
-#. TRANSLATORS: short time representation hour:minute
-#, python-format
-msgid "%2d:%02d"
-msgstr ""
-
-#. TRANSLATORS: full time representation hour:minute:seconds
-#, python-format
-msgid "%2d:%02d:%02d"
 msgstr ""
 
 #, python-format
@@ -355,10 +359,6 @@ msgstr ""
 #, python-format
 msgid "%s %d.%d"
 msgstr ""
-
-#, python-format
-msgid "%(freespace)s %(percent)s free disk space"
-msgstr "%(freespace)s %(percent)s ledig diskplass"
 
 #, python-format
 msgid "%s (%s)\n"
@@ -11064,6 +11064,14 @@ msgstr "Kanalsøksvalg"
 
 msgid "User - bouquets"
 msgstr "Kanallister"
+
+#, python-format
+msgid "User Band %d"
+msgstr ""
+
+#, python-format
+msgid "User Band %d (%s)"
+msgstr ""
 
 #
 #, fuzzy
