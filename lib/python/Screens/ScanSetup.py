@@ -241,7 +241,7 @@ class CableTransponderSearchSupport:
 					parm.modulation = qam[data[4]]
 					parm.inversion = inv[data[5]]
 					self.__tlist.append(parm)
-				tmpstr = _("Try to find used transponders in cable network.. please wait...")
+				tmpstr = _("Looking for active transponders in the cable network. Please wait...")
 				tmpstr += "\n\n"
 				tmpstr += data[1].isdigit() and "%s MHz " % (int(data[1]) / 1000.) or data[1]
 				tmpstr += data[0]
@@ -367,7 +367,7 @@ class CableTransponderSearchSupport:
 		print bin_name, " CMD is", cmd
 
 		self.cable_search_container.execute(cmd)
-		tmpstr = _("Try to find used transponders in cable network.. please wait...")
+		tmpstr = _("Looking for active transponders in the cable network. Please wait...")
 		tmpstr += "\n\n..."
 		self.cable_search_session = self.session.openWithCallback(self.cableTransponderSearchSessionClosed, MessageBox, tmpstr, MessageBox.TYPE_INFO)
 
@@ -429,7 +429,7 @@ class TerrestrialTransponderSearchSupport:
 						parm.system = 'DVB-T2' in data[1] and parm.System_DVB_T_T2 or parm.System_DVB_T
 						parm.plp_id = 0
 						self.__tlist.append(parm)
-					tmpstr = _("Try to find used transponders in terrestrial network... please wait...") + "\n\n"
+					tmpstr = _("Looking for active transponders in the terrestrial network. Please wait...") + "\n\n"
 					if 'MODE' in line:
 						tmpstr += data[3] + " kHz"
 					else:
@@ -485,7 +485,7 @@ class TerrestrialTransponderSearchSupport:
 							parm.system = parm.System_DVB_T2
 							parm.plp_id = int(plp_id)
 							self.__tlist.append(parm)
-			tmpstr = _("Try to find used transponders in terrestrial network... please wait...")
+			tmpstr = _("Looking for active transponders in the terrestrial network. Please wait...")
 			tmpstr += "\n\n"
 			tmpstr += data[1][:-3]
 			tmpstr += " kHz "
@@ -580,7 +580,7 @@ class TerrestrialTransponderSearchSupport:
 			else:
 				(freq, bandWidth) = opt
 			self.terrestrialTransponderSearch(freq, bandWidth)
-		tmpstr = _("Try to find used transponders in terrestrial network... please wait...")
+		tmpstr = _("Looking for active transponders in the terrestrial network. Please wait...")
 		tmpstr += "\n\n..."
 		self.terrestrial_search_session = self.session.openWithCallback(self.terrestrialTransponderSearchSessionClosed, MessageBox, tmpstr, MessageBox.TYPE_INFO)
 
