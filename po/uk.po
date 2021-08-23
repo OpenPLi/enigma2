@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-17 23:01+0300\n"
+"POT-Creation-Date: 2021-08-24 01:52+0300\n"
 "PO-Revision-Date: 2021-03-11 01:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: kvinto\n"
@@ -121,16 +121,6 @@ msgstr " доступно оновлень."
 #, python-format
 msgid "%(freespace)s %(percent)s free disk space"
 msgstr "%(freespace)s %(percent)s вільне місце на диску"
-
-#. TRANSLATORS: short time representation hour:minute
-#, python-format
-msgid "%(hour)2d:%(min)02d"
-msgstr "%(год)2d:%(хв)02d"
-
-#. TRANSLATORS: full time representation hour:minute:seconds
-#, python-format
-msgid "%(hour)2d:%(min)02d:%(sec)02d"
-msgstr "%(год)2d:%(хв)02d:%(сек)02d"
 
 #, python-format
 msgid "%.0f GB"
@@ -1071,6 +1061,7 @@ msgstr "Дійсно хочете остаточно видалити ці фа�
 msgid "Are you sure to reboot to"
 msgstr "Перезавантажити до"
 
+#. TRANSLATORS: The user is asked to delete all satellite services from a specific orbital position after a configuration change
 #, python-format
 msgid "Are you sure to remove all %s services?"
 msgstr "Ви впевнені, що хочете видалити усі %s канали?"
@@ -3955,6 +3946,10 @@ msgstr "Додаткові опції"
 msgid "G"
 msgstr "G"
 
+#, fuzzy
+msgid "GB"
+msgstr "RGB"
+
 msgid "GUI Settings"
 msgstr "Налаштування GUI"
 
@@ -4958,6 +4953,12 @@ msgstr "Довге натиснення"
 msgid "Longitude"
 msgstr "Довгота"
 
+msgid "Looking for active transponders in the cable network. Please wait..."
+msgstr "Намагаємося знайти транспондери, використовувані в кабельній мережі. Будь ласка, зачекайте..."
+
+msgid "Looking for active transponders in the terrestrial network. Please wait..."
+msgstr "Намагаємося знайти транспондери в наземній мережі. Будь ласка, зачекайте..."
+
 msgid "Loop through from"
 msgstr "Налаштувати петлю від"
 
@@ -4969,6 +4970,10 @@ msgstr "Люксембург"
 
 msgid "Luxembourgish"
 msgstr "Люксембурзька"
+
+#, fuzzy
+msgid "MB"
+msgstr "B"
 
 msgid "MMC card"
 msgstr "MMC карта"
@@ -7521,6 +7526,10 @@ msgstr "Виберіть спосіб налаштування супутник�
 msgid "Select how you want your receiver to keep the correct time, either from the DVB transponder, or from the internet using NTP. Or use Auto, which will favour using NTP, but will fall back to transponder time when no internet connection is available."
 msgstr "Виберіть варіант синхронізації часу для Вашого приймача, або з транспондера DVB, або з Інтернету за допомогою NTP. Або скористайтеся функцією Auto, яка надасть перевагу використанню NTP, але повернеться до часу транспондера, коли немає підключення до Інтернету."
 
+#, fuzzy
+msgid "Select image"
+msgstr "Видалення іміджу"
+
 msgid "Select input device"
 msgstr "Виберіть пристрій введення"
 
@@ -9610,12 +9619,6 @@ msgstr "Усунення несправностей"
 
 msgid "True"
 msgstr "Вірно"
-
-msgid "Looking for active transponders in the cable network. Please wait..."
-msgstr "Намагаємося знайти транспондери, використовувані в кабельній мережі. Будь ласка, зачекайте..."
-
-msgid "Looking for active transponders in the terrestrial network. Please wait..."
-msgstr "Намагаємося знайти транспондери в наземній мережі. Будь ласка, зачекайте..."
 
 msgid "Trying to download a new packetlist. Please wait..."
 msgstr "Спроба завантажити новий список пакетів. Зачекайте..."

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-17 23:01+0300\n"
+"POT-Creation-Date: 2021-08-24 01:52+0300\n"
 "PO-Revision-Date: 2021-04-30 16:06+0200\n"
 "Last-Translator: kueken\n"
 "Language-Team: OpenPLi\n"
@@ -123,16 +123,6 @@ msgstr " Aktualisierungen verfügbar."
 #, python-format
 msgid "%(freespace)s %(percent)s free disk space"
 msgstr "%(freespace)s %(percent)s freier Festplattenspeicher"
-
-#. TRANSLATORS: short time representation hour:minute
-#, python-format
-msgid "%(hour)2d:%(min)02d"
-msgstr ""
-
-#. TRANSLATORS: full time representation hour:minute:seconds
-#, python-format
-msgid "%(hour)2d:%(min)02d:%(sec)02d"
-msgstr ""
 
 #, python-format
 msgid "%.0f GB"
@@ -1061,6 +1051,7 @@ msgstr "Sind Sie sicher, alle gelöschten Userbouquets zu entfernen?"
 msgid "Are you sure to reboot to"
 msgstr "Sind Sie sicher neuzustarten zu"
 
+#. TRANSLATORS: The user is asked to delete all satellite services from a specific orbital position after a configuration change
 #, python-format
 msgid "Are you sure to remove all %s services?"
 msgstr "Sind Sie sicher, dass %s entfernt werden soll?"
@@ -3946,6 +3937,10 @@ msgstr "Weitere Optionen"
 msgid "G"
 msgstr "G"
 
+#, fuzzy
+msgid "GB"
+msgstr "RGB"
+
 msgid "GUI Settings"
 msgstr "GUI-Einstellungen"
 
@@ -4949,6 +4944,12 @@ msgstr "langer Tastendruck"
 msgid "Longitude"
 msgstr "Längengrad"
 
+msgid "Looking for active transponders in the cable network. Please wait..."
+msgstr "Suche benutzte Transponder im Kabel Netzwerk. Bitte warten…"
+
+msgid "Looking for active transponders in the terrestrial network. Please wait..."
+msgstr "Suche benutzte Transponder im terrestrischen Netzwerk. Bitte warten…"
+
 msgid "Loop through from"
 msgstr "Verbunden mit"
 
@@ -4960,6 +4961,10 @@ msgstr "Luxemburg"
 
 msgid "Luxembourgish"
 msgstr "Luxemburgisch"
+
+#, fuzzy
+msgid "MB"
+msgstr "B"
 
 msgid "MMC card"
 msgstr "MMC-Karte"
@@ -7515,6 +7520,10 @@ msgstr "Wählen Sie, wie die Satellitenschüssel eingerichtet wird. d.h. feste S
 msgid "Select how you want your receiver to keep the correct time, either from the DVB transponder, or from the internet using NTP. Or use Auto, which will favour using NTP, but will fall back to transponder time when no internet connection is available."
 msgstr "Wähle die bevorzugte Zeitsynchronisation. Transponder ->DVB, Internet->NTP oder \"Auto\". Auswahl \"Auto\" favorisiert NTP und nutzt automatisch den Transponder falls kein Internet vorhanden ist."
 
+#, fuzzy
+msgid "Select image"
+msgstr "Lösche Image"
+
 msgid "Select input device"
 msgstr "Eingabegerät auswählen."
 
@@ -9611,12 +9620,6 @@ msgstr "Fehlersuche"
 
 msgid "True"
 msgstr "Richtig"
-
-msgid "Looking for active transponders in the cable network. Please wait..."
-msgstr "Suche benutzte Transponder im Kabel Netzwerk. Bitte warten…"
-
-msgid "Looking for active transponders in the terrestrial network. Please wait..."
-msgstr "Suche benutzte Transponder im terrestrischen Netzwerk. Bitte warten…"
 
 msgid "Trying to download a new packetlist. Please wait..."
 msgstr "Versuche eine neue Aktualisierungsliste herunterzuladen. Bitte warten Sie…"
