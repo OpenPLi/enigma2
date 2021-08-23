@@ -362,7 +362,7 @@ class MultiFileSelectList(FileList):
 						try:
 							self.selectedFiles.remove(os.path.normpath(realPathname))
 						except (IOError, OSError) as err:
-							print "[FileList] Error: Can't remove '%s'!  (%s)" % (err.errno, realPathname, err.strerror)
+							print "[FileList] Error %d: Can't remove '%s'!  (%s)" % (err.errno, realPathname, err.strerror)
 				else:
 					SelectState = True
 					if (realPathname not in self.selectedFiles) and (os.path.normpath(realPathname) not in self.selectedFiles):
