@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-17 23:01+0300\n"
+"POT-Creation-Date: 2021-08-24 01:52+0300\n"
 "PO-Revision-Date: 2021-02-20 16:11+0100\n"
 "Last-Translator: Luis A. Martínez <luis.a.martinez@gmail.com>\n"
 "Language-Team: LAMS\n"
@@ -135,16 +135,6 @@ msgstr " actualizacións dispoñibles."
 #, python-format
 msgid "%(freespace)s %(percent)s free disk space"
 msgstr "%(freespace)s %(percent)s espazo libre en disco"
-
-#. TRANSLATORS: short time representation hour:minute
-#, python-format
-msgid "%(hour)2d:%(min)02d"
-msgstr ""
-
-#. TRANSLATORS: full time representation hour:minute:seconds
-#, python-format
-msgid "%(hour)2d:%(min)02d:%(sec)02d"
-msgstr ""
 
 #, python-format
 msgid "%.0f GB"
@@ -1186,6 +1176,7 @@ msgstr "Seguro que queres borrar definitivamente os buqués de usuario?"
 msgid "Are you sure to reboot to"
 msgstr "Seguro que queres reiniciar a"
 
+#. TRANSLATORS: The user is asked to delete all satellite services from a specific orbital position after a configuration change
 #, python-format
 msgid "Are you sure to remove all %s services?"
 msgstr "Seguro que queres eliminar todos os servizos %s?"
@@ -4396,6 +4387,11 @@ msgid "G"
 msgstr "G"
 
 #
+#, fuzzy
+msgid "GB"
+msgstr "RGB"
+
+#
 msgid "GUI Settings"
 msgstr "Configuración da GUI"
 
@@ -5507,6 +5503,13 @@ msgstr "Pulsación longa de tecla"
 msgid "Longitude"
 msgstr "Lonxitude"
 
+#
+msgid "Looking for active transponders in the cable network. Please wait..."
+msgstr "Intenta atopar transpondedores en uso na rede de cable. Por favor, espera…"
+
+msgid "Looking for active transponders in the terrestrial network. Please wait..."
+msgstr "Intenta atopar transpondedores en uso na rede de terrestre. Por favor, espera…"
+
 msgid "Loop through from"
 msgstr "Pór en bucle desde"
 
@@ -5518,6 +5521,11 @@ msgstr "Luxemburgo"
 
 msgid "Luxembourgish"
 msgstr "Luxemburgués"
+
+#
+#, fuzzy
+msgid "MB"
+msgstr "B"
 
 #
 msgid "MMC card"
@@ -8417,6 +8425,10 @@ msgstr "Seleccionar como se configura a antena parabólica, é dicir, plato fixo
 msgid "Select how you want your receiver to keep the correct time, either from the DVB transponder, or from the internet using NTP. Or use Auto, which will favour using NTP, but will fall back to transponder time when no internet connection is available."
 msgstr "Selecciona como queres que o teu receptor manteña a hora correcta, ben desde o transpondedor DVB, ben desde un servidor NTP en internet. Ou usa Auto, que favorece o uso de NTP pero usa a hora do transpondedor cando non haxa conexión a internet."
 
+#, fuzzy
+msgid "Select image"
+msgstr "Borrar imaxe"
+
 msgid "Select input device"
 msgstr "Seleccionar dispositivo de entrada"
 
@@ -10732,13 +10744,6 @@ msgstr "Solucionar problemas"
 
 msgid "True"
 msgstr "Verdadeiro"
-
-#
-msgid "Looking for active transponders in the cable network. Please wait..."
-msgstr "Intenta atopar transpondedores en uso na rede de cable. Por favor, espera…"
-
-msgid "Looking for active transponders in the terrestrial network. Please wait..."
-msgstr "Intenta atopar transpondedores en uso na rede de terrestre. Por favor, espera…"
 
 #
 msgid "Trying to download a new packetlist. Please wait..."
