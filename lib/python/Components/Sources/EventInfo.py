@@ -18,7 +18,7 @@ class pServiceEvent(object):
 		self.m_ShortDescriptionNext = ""
 		self.m_ExtendedDescriptionNow = ""
 		self.m_ExtendedDescriptionNext = ""
-		
+
 		sTagTitle = info.getInfoString(iServiceInformation.sTagTitle)
 		if sTagTitle:
 			sTagTitleList = sTagTitle.split(" - ")
@@ -99,7 +99,7 @@ class pServiceEvent(object):
 		return 0
 
 
-class EventInfo(PerServiceBase, Source, object):
+class EventInfo(PerServiceBase, Source):
 	NOW = 0
 	NEXT = 1
 

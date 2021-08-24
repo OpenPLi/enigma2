@@ -3,7 +3,7 @@ from Components.Element import cached, ElementError
 from enigma import iServiceInformation
 
 
-class ServiceTime(Converter, object):
+class ServiceTime(Converter):
 	STARTTIME = 0
 	ENDTIME = 1
 	DURATION = 2

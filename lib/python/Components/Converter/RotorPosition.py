@@ -8,7 +8,7 @@ from Components.SystemInfo import SystemInfo
 from enigma import eDVBSatelliteEquipmentControl
 
 
-class RotorPosition(Converter, object):
+class RotorPosition(Converter):
 	DEFAULT = 0
 	WITH_TEXT = 1
 	TUNER_NAME = 2

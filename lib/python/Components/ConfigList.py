@@ -7,7 +7,7 @@ from Screens.ChoiceBox import ChoiceBox
 from skin import applySkinFactor, parameters
 
 
-class ConfigList(GUIComponent, object):
+class ConfigList(GUIComponent):
 	def __init__(self, list, session=None):
 		GUIComponent.__init__(self)
 		self.l = eListboxPythonConfigContent()
