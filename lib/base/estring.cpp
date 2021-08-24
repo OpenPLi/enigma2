@@ -779,14 +779,14 @@ std::string convertDVBUTF8(const unsigned char *data, int len, int table, int ts
 	if (pconvertedLen)
 		*pconvertedLen = convertedLen;
 
-	if (convertedLen < len)
-		eTrace("[convertDVBUTF8] %d chars converted, and %d chars left..", convertedLen, len-convertedLen);
-	eTrace("[convertDVBUTF8] table=0x%02X twochar=%d output:%s\n", table, useTwoCharMapping, output.c_str());
+	//if (convertedLen < len)
+	//	eTrace("[convertDVBUTF8] %d chars converted, and %d chars left..", convertedLen, len-convertedLen);
+	//eTrace("[convertDVBUTF8] table=0x%02X twochar=%d output:%s\n", table, useTwoCharMapping, output.c_str());
 
-	eTrace("[convertDVBUTF8] table=0x%02X tsid:onid=0x%X:0x%X data[0..14]=%s   output:%s\n",
-		table, (unsigned int)tsidonid >> 16, tsidonid & 0xFFFFU,
-		string_to_hex(std::string((char*)data, len < 15 ? len : 15)).c_str(),
-		output.c_str());
+	//eTrace("[convertDVBUTF8] table=0x%02X tsid:onid=0x%X:0x%X data[0..14]=%s   output:%s\n",
+	//	table, (unsigned int)tsidonid >> 16, tsidonid & 0xFFFFU,
+	//	string_to_hex(std::string((char*)data, len < 15 ? len : 15)).c_str(),
+	//	output.c_str());
 	// replace EIT CR/LF with standard newline:
 	output = replace_all(replace_all(output, "\xC2\x8A", "\n"), "\xEE\x82\x8A", "\n");
 	return output;
