@@ -49,6 +49,7 @@ class picshow(Screen):
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
+		self.setTitle(_("Picture player"))
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "MenuActions"],
 		{
@@ -124,7 +125,6 @@ class picshow(Screen):
 			self.session.openWithCallback(self.callbackView, Pic_Full_View, self.filelist.getFileList(), self.filelist.getSelectionIndex(), self.filelist.getCurrentDirectory())
 
 	def setConf(self, retval=None):
-		self.setTitle(_("Picture player"))
 		sc = getScale()
 		#0=Width 1=Height 2=Aspect 3=use_cache 4=resize_type 5=Background(#AARRGGBB)
 		self.picload.setPara((self["thn"].instance.size().width(), self["thn"].instance.size().height(), sc[0], sc[1], config.pic.cache.value, int(config.pic.resize.value), "#00000000", config.pic.autoOrientation.value))
@@ -153,7 +153,7 @@ class Pic_Setup(Screen, ConfigListScreen):
 		Screen.__init__(self, session)
 		# for the skin: first try MediaPlayerSettings, then Setup, this allows individual skinning
 		self.skinName = ["PicturePlayerSetup", "Setup"]
-		self.setup_title = _("Settings")
+		self.setTitle(_("Settings"))
 		self.onChangedEntry = []
 		ConfigListScreen.__init__(self, [], session=session, on_change=self.changedEntry)
 		self["actions"] = ActionMap(["SetupActions", "MenuActions"],
@@ -166,10 +166,6 @@ class Pic_Setup(Screen, ConfigListScreen):
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
 		self.createSetup()
-		self.onLayoutFinish.append(self.layoutFinished)
-
-	def layoutFinished(self):
-		self.setTitle(self.setup_title)
 
 	def createSetup(self):
 		setup_list = [
@@ -230,6 +226,7 @@ class Pic_Exif(Screen):
 
 	def __init__(self, session, exiflist):
 		Screen.__init__(self, session)
+		self.setTitle(_("Info"))
 
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
@@ -248,10 +245,6 @@ class Pic_Exif(Screen):
 				name = exiflist[x].split('/')[-1]
 				list.append((exifdesc[x], name))
 		self["menu"] = List(list)
-		self.onLayoutFinish.append(self.layoutFinished)
-
-	def layoutFinished(self):
-		self.setTitle(_("Info"))
 
 #----------------------------------------------------------------------------------------
 

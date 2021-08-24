@@ -31,8 +31,7 @@ class SoftcamSetup(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 
-		self.setup_title = _("Softcam setup")
-		self.setTitle(self.setup_title)
+		self.setTitle(_("Softcam setup"))
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "CiSelectionActions"],
 			{

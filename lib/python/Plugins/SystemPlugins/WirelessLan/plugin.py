@@ -58,6 +58,7 @@ class WlanStatus(Screen):
 
 	def __init__(self, session, iface):
 		Screen.__init__(self, session)
+		self.setTitle(_("Wireless network state"))
 		self.iface = iface
 
 		self["LabelBSSID"] = StaticText(_('Accesspoint:'))
@@ -93,14 +94,10 @@ class WlanStatus(Screen):
 		self.timer = eTimer()
 		self.timer.timeout.get().append(self.resetList)
 		self.onShown.append(lambda: self.timer.start(8000))
-		self.onLayoutFinish.append(self.layoutFinished)
 		self.onClose.append(self.cleanup)
 
 	def cleanup(self):
 		iStatus.stopWlanConsole()
-
-	def layoutFinished(self):
-		self.setTitle(_("Wireless network state"))
 
 	def resetList(self):
 		iStatus.getDataForInterface(self.iface, self.getInfoCB)
@@ -204,6 +201,7 @@ class WlanScan(Screen):
 
 	def __init__(self, session, iface):
 		Screen.__init__(self, session)
+		self.setTitle(_("Select a wireless network"))
 		self.iface = iface
 		self.skin_path = plugin_path
 		self.oldInterfaceState = iNetwork.getAdapterAttribute(self.iface, "up")
@@ -240,11 +238,7 @@ class WlanScan(Screen):
 		})
 		iWlan.setInterface(self.iface)
 		self.w = iWlan.getInterface()
-		self.onLayoutFinish.append(self.layoutFinished)
 		self.getAccessPoints(refresh=False)
-
-	def layoutFinished(self):
-		self.setTitle(_("Select a wireless network"))
 
 	def select(self):
 		cur = self["list"].getCurrent()
