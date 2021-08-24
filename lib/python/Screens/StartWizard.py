@@ -130,7 +130,7 @@ class AutoInstallWizard(Screen):
 		except IOError:
 			pass
 		self.package = self.packages.pop(0)
-		self["header"].setText(_("%s%% Autoinstalling %s") % (self["progress"].value, self.package))
+		self["header"].setText(_("Autoinstalling %s") % self.package + " - %s%%" % self["progress"].value)
 		try:
 			if self.container.execute('opkg install "%s"' % self.package):
 				raise Exception, "failed to execute command!"
