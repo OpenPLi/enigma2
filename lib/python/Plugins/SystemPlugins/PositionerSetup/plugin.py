@@ -72,7 +72,6 @@ class PositionerSetup(Screen):
 	LOG_SIZE = 16 * 1024					# log buffer size
 
 	def __init__(self, session, feid):
-		self.session = session
 		Screen.__init__(self, session)
 		self.setTitle(_("Positioner setup"))
 		self.feid = feid
@@ -1302,7 +1301,6 @@ class PositionerSetupLog(Screen):
 		</screen>"""
 
 	def __init__(self, session):
-		self.session = session
 		Screen.__init__(self, session)
 		self.setTitle(_("Positioner setup log"))
 		self["key_red"] = Button(_("Exit"))

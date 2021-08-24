@@ -29,7 +29,6 @@ class VideoEnhancementSetup(Screen, ConfigListScreen):
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self.session = session
 		self.onChangedEntry = []
 		self.skinName = ["VideoEnhancementSetup"]
 		self.setup_title = _("Video enhancement setup")

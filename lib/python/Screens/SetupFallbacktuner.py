@@ -17,7 +17,6 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 		Screen.setTitle(self, _("Fallback tuner setup"))
 		self.skinName = ["FallbackTunerSetup", "Setup"]
 		self.onChangedEntry = []
-		self.session = session
 		ConfigListScreen.__init__(self, [], session=session, on_change=self.changedEntry)
 
 		self["actions2"] = ActionMap(["SetupActions"],

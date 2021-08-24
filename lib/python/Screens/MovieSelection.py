@@ -261,7 +261,6 @@ def buildMovieLocationList(bookmarks):
 
 class MovieBrowserConfiguration(ConfigListScreen, Screen):
 	def __init__(self, session, args=0):
-		self.session = session
 		self.setup_title = _("Movie list configuration")
 		Screen.__init__(self, session)
 		self.skinName = ['MovieBrowserConfiguration', 'Setup']
