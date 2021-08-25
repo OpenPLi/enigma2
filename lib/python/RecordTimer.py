@@ -64,15 +64,20 @@ def findSafeRecordPath(dirname):
 	from Components import Harddisk
 	dirname = os.path.realpath(dirname)
 	mountpoint = Harddisk.findMountPoint(dirname)
-	if mountpoint in ('/', '/media'):
-		print '[RecordTimer] media is not mounted:', dirname
+	if mountpoint in ("/", "/media"):
+		print "[RecordTimer] media is not mounted:", dirname
 		return None
 	if not os.path.isdir(dirname):
 		try:
 			os.makedirs(dirname)
 		except Exception, ex:
-			print '[RecordTimer] Failed to create dir "%s":' % dirname, ex
+			print "[RecordTimer] Failed to create dir "%s":" % dirname, ex
 			return None
+	if "/media/hdd" in mountpoint and not os.path.isdir("/media/hdd/movie"):
+		try:
+			os.mkdir("/media/hdd/movie", 0o755)
+		except Exception, ex:
+			print "[RecordTimer] Failed to create dir /media/hdd/movie:", ex
 	return dirname
 
 
