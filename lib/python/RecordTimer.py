@@ -71,13 +71,13 @@ def findSafeRecordPath(dirname):
 		try:
 			os.makedirs(dirname)
 		except Exception, ex:
-			print "[RecordTimer] Failed to create dir "%s":" % dirname, ex
+			print "[RecordTimer] Failed to create dir '%s':" % dirname, ex
 			return None
 	if "/media/hdd" in mountpoint and not os.path.isdir("/media/hdd/movie"):
 		try:
 			os.mkdir("/media/hdd/movie", 0o755)
 		except Exception, ex:
-			print "[RecordTimer] Failed to create dir /media/hdd/movie:", ex
+			print "[RecordTimer] Failed to create dir '/media/hdd/movie':", ex
 	return dirname
 
 
