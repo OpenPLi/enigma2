@@ -2,10 +2,10 @@ from Screens.Screen import Screen
 from Screens.LocationBox import MovieLocationBox, TimeshiftLocationBox
 from Screens.MessageBox import MessageBox
 from Components.Label import Label
-from Components.config import config, ConfigSelection, getConfigListEntry
+from Components.config import config, ConfigSelection, getConfigListEntry,  ConfigNothing
 from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import ActionMap
-from Tools.Directories import fileExists
+from Tools.Directories import fileExists, createDir
 from Components.UsageConfig import preferredPath
 
 
@@ -39,7 +39,7 @@ class RecordPathsSettings(Screen, ConfigListScreen):
 
 	def checkReadWriteDir(self, configele):
 		value = configele.value
-		print "checkReadWrite: ", value
+		print "[RecordPaths] checkReadWrite: ", value
 		if not value or value in [x[0] for x in self.styles] or fileExists(value, "w"):
 			configele.last_value = value
 			return True
@@ -60,38 +60,45 @@ class RecordPathsSettings(Screen, ConfigListScreen):
 		if default and default not in tmp:
 			tmp = tmp[:]
 			tmp.append(default)
-		print "DefaultPath: ", default, tmp
+		print "[RecordPaths] DefaultPath: ", default, tmp
 		self.default_dirname = ConfigSelection(default=default, choices=[("", _("<Default movie location>"))] + tmp)
 		tmp = config.movielist.videodirs.value
 		default = config.usage.timer_path.value
 		if default not in tmp and default not in styles_keys:
 			tmp = tmp[:]
 			tmp.append(default)
-		print "TimerPath: ", default, tmp
+		print "[RecordPaths] TimerPath: ", default, tmp
 		self.timer_dirname = ConfigSelection(default=default, choices=self.styles + tmp)
 		tmp = config.movielist.videodirs.value
 		default = config.usage.instantrec_path.value
 		if default not in tmp and default not in styles_keys:
 			tmp = tmp[:]
 			tmp.append(default)
-		print "InstantrecPath: ", default, tmp
+		print "[RecordPaths] InstantrecPath: ", default, tmp
 		self.instantrec_dirname = ConfigSelection(default=default, choices=self.styles + tmp)
 		default = config.usage.timeshift_path.value
 		tmp = config.usage.allowed_timeshift_paths.value
 		if default not in tmp:
 			tmp = tmp[:]
 			tmp.append(default)
-		print "TimeshiftPath: ", default, tmp
+		print "[RecordPaths] TimeshiftPath: ", default, tmp
 		self.timeshift_dirname = ConfigSelection(default=default, choices=tmp)
 		self.default_dirname.addNotifier(self.checkReadWriteDir, initial_call=False, immediate_feedback=False)
 		self.timer_dirname.addNotifier(self.checkReadWriteDir, initial_call=False, immediate_feedback=False)
 		self.instantrec_dirname.addNotifier(self.checkReadWriteDir, initial_call=False, immediate_feedback=False)
 		self.timeshift_dirname.addNotifier(self.checkReadWriteDir, initial_call=False, immediate_feedback=False)
+		self.updateConfigList()
 
+	def updateConfigList(self):
 		self.list = []
+		if self.default_dirname.value in ("/media/hdd/", "/media/usb/") and fileExists(self.default_dirname.value) and not fileExists("%smovie" % self.default_dirname.value):
+			self.subdir_movie = getConfigListEntry(_("Create directory") + " %smovie" % self.default_dirname.value, ConfigNothing())
+		else:
+			self.subdir_movie = None
 		if config.usage.setup_level.index >= 2:
 			self.default_entry = getConfigListEntry(_("Default movie location"), self.default_dirname)
 			self.list.append(self.default_entry)
+			self.subdir_movie and self.list.append(self.subdir_movie)
 			self.timer_entry = getConfigListEntry(_("Timer recording location"), self.timer_dirname)
 			self.list.append(self.timer_entry)
 			self.instantrec_entry = getConfigListEntry(_("Instant recording location"), self.instantrec_dirname)
@@ -99,12 +106,31 @@ class RecordPathsSettings(Screen, ConfigListScreen):
 		else:
 			self.default_entry = getConfigListEntry(_("Movie location"), self.default_dirname)
 			self.list.append(self.default_entry)
+			self.subdir_movie and self.list.append(self.subdir_movie)
 		self.timeshift_entry = getConfigListEntry(_("Timeshift location"), self.timeshift_dirname)
 		self.list.append(self.timeshift_entry)
 		self["config"].setList(self.list)
 
+	def keyLeft(self):
+		ConfigListScreen.keyLeft(self)
+		cur = self["config"].getCurrent()
+		if cur == self.default_entry:
+			self.updateConfigList()
+
+	def keyRight(self):
+		ConfigListScreen.keyRight(self)
+		cur = self["config"].getCurrent()
+		if cur == self.default_entry:
+			self.updateConfigList()
+
 	def ok(self):
 		currentry = self["config"].getCurrent()
+		if currentry == self.subdir_movie:
+			dir = "%smovie" % self.default_dirname.value
+			if not createDir(dir, makeParents=True):
+				self.session.open(MessageBox, _("Creating directory %s failed.") % dir, type=MessageBox.TYPE_ERROR)
+			self.updateConfigList()
+			return
 		self.lastvideodirs = config.movielist.videodirs.value
 		self.lasttimeshiftdirs = config.usage.allowed_timeshift_paths.value
 		if config.usage.setup_level.index >= 2:
