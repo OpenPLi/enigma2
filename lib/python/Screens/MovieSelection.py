@@ -1967,7 +1967,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 					else:
 						files += 1
 			if files or subdirs:
-				msg = _("Directory contains %s and %s.") % (ngettext("%d file", "%d files", files) % files, ngettext("%d subdirectory", "%d subdirectories", subdirs) % subdirs) + '\n' + are_you_sure
+				msg = _("Directory contains %(file)s and %(subdir)s.") % {"file": ngettext("%d file", "%d files", files) % files, "subdir": ngettext("%d subdirectory", "%d subdirectories", subdirs) % subdirs} + '\n' + are_you_sure
 				if isInTrashFolder(current):
 					# Red button to empty trashcan item or subdir
 					msg = _("Deleted items") + "\n" + msg
