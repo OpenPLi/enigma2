@@ -429,7 +429,7 @@ def InitUsageConfig():
 	config.epg.histminutes.addNotifier(EpgHistorySecondsChanged)
 
 	choicelist = [("newline", _("new line")), ("2newlines", _("2 new lines")), ("space", _("space")), ("dot", " . "), ("dash", " - "), ("asterisk", " * "), ("nothing", _("nothing"))]
-	config.epg.fulldescription_separator = ConfigSelection(default="newline", choices=choicelist)
+	config.epg.fulldescription_separator = ConfigSelection(default="2newlines", choices=choicelist)
 	choicelist = [("no", _("no")), ("nothing", _("omit")), ("space", _("space")), ("dot", ". "), ("dash", " - "), ("asterisk", " * "), ("hashtag", " # ")]
 	config.epg.replace_newlines = ConfigSelection(default="no", choices=choicelist)
 
