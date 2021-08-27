@@ -2,6 +2,8 @@ from Components.Converter.Converter import Converter
 from Components.Element import cached, ElementError
 from enigma import iServiceInformation, eServiceReference
 from ServiceReference import ServiceReference
+from Components.UsageConfig import dropEPGNewLines, replaceEPGSeparator
+from Components.config import config
 
 
 class MovieInfo(Converter):
@@ -40,21 +42,21 @@ class MovieInfo(Converter):
 					# Short description for Directory is the full path
 					return service.getPath()
 				return (info.getInfoString(service, iServiceInformation.sDescription)
-					or (event and event.getShortDescription())
+					or (event and dropEPGNewLines(event.getShortDescription()))
 					or service.getPath())
 			elif self.type == self.MOVIE_FULL_DESCRIPTION:
 				if (service.flags & eServiceReference.flagDirectory) == eServiceReference.flagDirectory:
 					return ""
-				description = (event and event.getShortDescription()
+				description = (event and dropEPGNewLines(event.getShortDescription())
 						or info.getInfoString(service, iServiceInformation.sDescription))
-				extended = event and event.getExtendedDescription()
+				extended = event and dropEPGNewLines(event.getExtendedDescription().rstrip())
 				if description and extended:
 					if description.replace('\n', '') == extended.replace('\n', ''):
 						return extended
-					description += "\n"
+					description += replaceEPGSeparator(config.epg.fulldescription_separator.value)
 				return description + (extended if extended else "")
 			elif self.type == self.MOVIE_META_DESCRIPTION:
-				return ((event and (event.getExtendedDescription() or event.getShortDescription()))
+				return ((event and (dropEPGNewLines(event.getExtendedDescription()) or dropEPGNewLines(event.getShortDescription())))
 					or info.getInfoString(service, iServiceInformation.sDescription)
 					or service.getPath())
 			elif self.type == self.MOVIE_NAME:

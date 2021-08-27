@@ -1,6 +1,8 @@
 from Components.Converter.Converter import Converter
 from Components.Element import cached
 from Components.Converter.genre import getGenreStringSub
+from Components.config import config
+from Components.UsageConfig import dropEPGNewLines, replaceEPGSeparator
 
 
 class EventName(Converter, object):
@@ -109,16 +111,16 @@ class EventName(Converter, object):
 		elif self.type == self.NAME_NEXT:
 			return pgettext("now/next: 'next' event label", "Next") + ": " + event.getEventName()
 		elif self.type == self.SHORT_DESCRIPTION:
-			return event.getShortDescription()
+			return dropEPGNewLines(event.getShortDescription())
 		elif self.type == self.EXTENDED_DESCRIPTION:
-			return event.getExtendedDescription() or event.getShortDescription()
+			return dropEPGNewLines(event.getExtendedDescription()) or dropEPGNewLines(event.getShortDescription())
 		elif self.type == self.FULL_DESCRIPTION:
-			description = event.getShortDescription()
-			extended = event.getExtendedDescription()
+			description = dropEPGNewLines(event.getShortDescription())
+			extended = dropEPGNewLines(event.getExtendedDescription().rstrip())
 			if description and extended:
 				if description.replace('\n', '') == extended.replace('\n', ''):
 					return extended
-				description += '\n'
+				description += replaceEPGSeparator(config.epg.fulldescription_separator.value)
 			return description + extended
 		elif self.type == self.ID:
 			return str(event.getEventId())

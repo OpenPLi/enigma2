@@ -5,7 +5,7 @@ from Components.config import config
 from Components.Sources.ServiceEvent import ServiceEvent
 from Components.TimerList import TimerList
 from Components.TimerSanityCheck import TimerSanityCheck
-from Components.UsageConfig import preferredTimerPath
+from Components.UsageConfig import preferredTimerPath, dropEPGNewLines, replaceEPGSeparator
 from RecordTimer import RecordTimerEntry, parseEvent, AFTEREVENT, createRecordTimerEntry
 from Screen import Screen
 from Screens.ChoiceBox import ChoiceBox
@@ -167,11 +167,11 @@ class TimerEditList(Screen):
 				self["key_info"].setText("")
 			else:
 				self["key_info"].setText(_("Info"))
-			text = cur.description
+			text = dropEPGNewLines(cur.description)
 			event = eEPGCache.getInstance().lookupEventId(cur.service_ref.ref, cur.eit) if cur.eit is not None else None
 			if event:
-				ext_description = event.getExtendedDescription()
-				short_description = event.getShortDescription()
+				ext_description = dropEPGNewLines(event.getExtendedDescription())
+				short_description = dropEPGNewLines(event.getShortDescription())
 				if text != short_description:
 					if text and short_description:
 						text = _("Timer:") + " " + text + "\n\n" + _("EPG:") + " " + short_description
@@ -180,7 +180,7 @@ class TimerEditList(Screen):
 						cur.description = short_description
 				if ext_description and ext_description != text:
 					if text:
-						text += "\n\n" + ext_description
+						text += replaceEPGSeparator(config.epg.fulldescription_separator.value) + ext_description
 					else:
 						text = ext_description
 			if not cur.conflict_detection:
