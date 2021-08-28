@@ -55,7 +55,7 @@ int eDVBCIDateTimeSession::doAction()
 void eDVBCIDateTimeSession::sendDateTime()
 {
 	unsigned char tag[3]={0x9f, 0x84, 0x41}; // date_time_response
-	unsigned char msg[6];
+	unsigned char msg[5];
 	time_t tv = time(NULL); // TODO maybe move unixtime to dvbtime in lib/dvb/dvbtime
 	uint16_t mjd = tv / 86400 + 40587; // mjd 01.01.1970 is 40587
 	tv %= 86400;
@@ -65,14 +65,13 @@ void eDVBCIDateTimeSession::sendDateTime()
 	tv %= 60;
 	uint8_t ss = tv;
 
-	msg[0] = 5; // not using offset
-	msg[1] = (mjd >> 8) & 0xff;
-	msg[2] = mjd & 0xff;
-	msg[3] = ((hh / 10) << 4) | (hh % 10);
-	msg[4] = ((mm / 10) << 4) | (mm % 10);
-	msg[5] = ((ss / 10) << 4) | (ss % 10);
+	msg[0] = (mjd >> 8) & 0xff;
+	msg[1] = mjd & 0xff;
+	msg[2] = ((hh / 10) << 4) | (hh % 10);
+	msg[3] = ((mm / 10) << 4) | (mm % 10);
+	msg[4] = ((ss / 10) << 4) | (ss % 10);
 
-	sendAPDU(tag, msg, 6);
+	sendAPDU(tag, msg, 5);
 
 	if (m_interval > 0)
 	{
