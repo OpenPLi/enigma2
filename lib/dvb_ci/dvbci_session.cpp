@@ -12,6 +12,7 @@
 #include <lib/dvb_ci/dvbci_host_ctrl.h>
 #include <lib/dvb_ci/dvbci_cam_upgrade.h>
 #include <lib/dvb_ci/dvbci_app_mmi.h>
+#include <lib/dvb_ci/dvbci_operatorprofile.h>
 
 DEFINE_REF(eDVBCISession);
 
@@ -149,7 +150,6 @@ void eDVBCISession::createSession(eDVBCISlot *slot, const unsigned char *resourc
 	switch (tag)
 	{
 	case 0x00010041:
-	case 0x00010042:
 		session=new eDVBCIResourceManagerSession(slot->getVersion());
 		eDebug("[CI SESS] RESOURCE MANAGER");
 		break;
@@ -163,6 +163,7 @@ void eDVBCISession::createSession(eDVBCISlot *slot, const unsigned char *resourc
 		eDebug("[CI SESS] CA MANAGER");
 		break;
 	case 0x00200041:
+	case 0x00200042:
 		session = new eDVBCIHostControlSession;
 		eDebug("[CI SESS] Host Control");
 		break;
@@ -175,13 +176,19 @@ void eDVBCISession::createSession(eDVBCISlot *slot, const unsigned char *resourc
 		eDebug("[CI SESS] MMI - create session");
 		break;
 	case 0x00410041:
+	case 0x00410042:
 		session = new eDVBCIApplicationMMISession;
 		eDebug("[CI SESS] Application MMI");
 		break;
 	case 0x008C1001:
 		eDVBCIInterfaces::getInstance()->setCIPlusRouting(slot->getSlotID());
-		session = new eDVBCICcSession(slot);
-		eDebug("[CI SESS] Content Control");
+		session = new eDVBCICcSession(slot, 1);
+		eDebug("[CI SESS] Content Control v1");
+		break;
+	case 0x008C1002:
+		eDVBCIInterfaces::getInstance()->setCIPlusRouting(slot->getSlotID());
+		session = new eDVBCICcSession(slot, 2);
+		eDebug("[CI SESS] Content Control v2");
 		break;
 	case 0x008D1001:
 		session = new eDVBCIHostLanguageAndCountrySession;
@@ -190,6 +197,10 @@ void eDVBCISession::createSession(eDVBCISlot *slot, const unsigned char *resourc
 	case 0x008E1001:
 		session = new eDVBCICAMUpgradeSession;
 		eDebug("[CI SESS] CAM Upgrade");
+		break;
+	case 0x008F1001:
+		session = new eDVBCIOperatorProfileSession;
+		eDebug("[CI SESS] Operator Profile");
 		break;
 	case 0x00100041:
 //		session=new eDVBCIAuthSession;

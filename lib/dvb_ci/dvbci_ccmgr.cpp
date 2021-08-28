@@ -9,7 +9,7 @@
 #include <openssl/aes.h>
 
 
-eDVBCICcSession::eDVBCICcSession(eDVBCISlot *slot):
+eDVBCICcSession::eDVBCICcSession(eDVBCISlot *slot, int version):
 	m_slot(slot), m_akh_index(0),
 	m_root_ca_store(nullptr), m_cust_cert(nullptr), m_device_cert(nullptr),
 	m_ci_cust_cert(nullptr), m_ci_device_cert(nullptr),
@@ -29,7 +29,7 @@ eDVBCICcSession::eDVBCICcSession(eDVBCISlot *slot):
 
 	memset(buf, 0, 32);
 	buf[31] = 0x01; // URI_PROTOCOL_V1
-	if (m_slot->getVersion() == 2)
+	if (version == 2)
 		buf[31] |= 0x02; // URI_PROTOCOL_V2
 
 	if (!m_ci_elements.set(URI_VERSIONS, buf, 32))

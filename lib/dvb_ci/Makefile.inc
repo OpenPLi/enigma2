@@ -15,6 +15,7 @@ dvb_ci_libenigma_dvb_ci_a_SOURCES = \
 	dvb_ci/dvbci_host_ctrl.cpp \
 	dvb_ci/dvbci_cam_upgrade.cpp \
 	dvb_ci/dvbci_app_mmi.cpp \
+	dvb_ci/dvbci_operatorprofile.cpp \
 	dvb_ci/aes_xcbc_mac.cpp \
 	dvb_ci/descrambler.cpp
 
@@ -35,5 +36,6 @@ dvbciinclude_HEADERS = \
 	dvb_ci/dvbci_host_ctrl.h \
 	dvb_ci/dvbci_cam_upgrade.h \
 	dvb_ci/dvbci_app_mmi.h \
+	dvb_ci/dvbci_operatorprofile.h \
 	dvb_ci/aes_xcbc_mac.h \
 	dvb_ci/descrambler.h
