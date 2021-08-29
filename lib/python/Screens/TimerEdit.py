@@ -184,7 +184,7 @@ class TimerEditList(Screen):
 					else:
 						text = ext_description
 			if not cur.conflict_detection:
-				text = _("\nConflict detection disabled!") + "\n\n" + text
+				text = _("Conflict detection disabled!") + "\n\n" + text
 			self["description"].setText(text)
 			stateRunning = cur.state in (1, 2)
 			if cur.state == 2 and self.key_red_choice != self.STOP:
