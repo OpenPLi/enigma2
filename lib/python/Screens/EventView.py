@@ -6,7 +6,7 @@ from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
 from Components.PluginComponent import plugins
 from Components.TimerList import TimerList
-from Components.UsageConfig import preferredTimerPath
+from Components.UsageConfig import preferredTimerPath, dropEPGNewLines, replaceEPGSeparator
 from Components.Sources.ServiceEvent import ServiceEvent
 from Components.Sources.StaticText import StaticText
 from Components.Sources.Event import Event
@@ -235,17 +235,17 @@ class EventViewBase:
 		if event is None:
 			return
 		text = event.getEventName()
-		short = event.getShortDescription()
-		ext = event.getExtendedDescription()
+		short = dropEPGNewLines(event.getShortDescription())
+		ext = dropEPGNewLines(event.getExtendedDescription().rstrip())
 		if short == text:
 			short = ""
 		if short and ext:
-			ext = short + "\n\n" + ext
+			ext = short + replaceEPGSeparator(config.epg.fulldescription_separator.value) + ext
 		elif short:
 			ext = short
 
 		if text and ext:
-			text += "\n\n"
+			text += replaceEPGSeparator(config.epg.fulldescription_separator.value)
 		text += ext
 
 		self.setTitle(event.getEventName())
