@@ -945,7 +945,7 @@ class NimManager:
 			if "has_outputs" not in entry:
 				entry["has_outputs"] = entry["name"] in SystemInfo["HasPhysicalLoopthrough"] # "Has_Outputs: yes" not in /proc/bus/nim_sockets NIM, but the physical loopthrough exist
 			if "frontend_device" in entry: # check if internally connectable
-				if os.path.exists("/proc/stb/frontend/%d/rf_switch" % entry["frontend_device"]) and (not id or entries[id]["name"] == entries[id - 1]["name"]):
+				if os.path.exists("/proc/stb/frontend/%d/rf_switch" % entry["frontend_device"]) and id > 0 and entries[id]["name"] == entries[id - 1]["name"]:
 					entry["internally_connectable"] = entry["frontend_device"] - 1
 				else:
 					entry["internally_connectable"] = None
