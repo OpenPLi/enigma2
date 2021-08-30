@@ -306,7 +306,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 						self.descramble = False
 					if start_zap:
 						self.log(1, "zapping in CI+ use")
-						NavigationInstance.instance.playService(rec_ref)
+						NavigationInstance.instance.playService(rec_ref, adjust=1)
 						Notifications.AddNotification(MessageBox, _("In order to record a timer, the TV was switched to the recording service!\n"), type=MessageBox.TYPE_INFO, timeout=20)
 			self.log(1, "'record ref' %s" % rec_ref and rec_ref.toString())
 			self.setRecordingPreferredTuner()
@@ -531,7 +531,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 								MediaPlayerinstance.exitCallback(True)
 								force = True
 						if not force:
-							NavigationInstance.instance.playService(self.service_ref.ref)
+							NavigationInstance.instance.playService(self.service_ref.ref, adjust=1)
 						if notify or force:
 							Notifications.AddPopup(text=_("Zapped to timer service %s!") % self.service_ref.getServiceName(), type=MessageBox.TYPE_INFO, timeout=5)
 				return True
@@ -693,7 +693,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 						self.failureCB(True)
 					else:
 						self.log(8, "zapping")
-						NavigationInstance.instance.playService(self.service_ref.ref)
+						NavigationInstance.instance.playService(self.service_ref.ref, adjust=1)
 			self.ts_dialog = self.InfoBarInstance.session.openWithCallback(zapAction, MessageBox, message, simple=True, list=choice, timeout=20)
 
 	def sendStandbyNotification(self, answer):
@@ -725,7 +725,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 				if hasattr(self.InfoBarInstance.session, 'pip'):
 					del self.InfoBarInstance.session.pip
 					self.InfoBarInstance.session.pipshown = False
-			NavigationInstance.instance.playService(self.service_ref.ref)
+			NavigationInstance.instance.playService(self.service_ref.ref, adjust=1)
 		else:
 			self.log(14, "user didn't want to zap away, record will probably fail")
 
