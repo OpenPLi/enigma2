@@ -166,7 +166,7 @@ def getHotkeyFunctions():
 	hotkey.functions.append((_("Switch to radio mode"), "Infobar/showRadio", "InfoBar"))
 	hotkey.functions.append((_("Switch to TV mode"), "Infobar/showTv", "InfoBar"))
 	hotkey.functions.append((_("Toggle TV/RADIO mode"), "Infobar/toggleTvRadio", "InfoBar"))
-	hotkey.functions.append((_("Instant record"), "Infobar/instantRecord", "InfoBar"))
+	hotkey.functions.append((_("Instant recording"), "Infobar/instantRecord", "InfoBar"))
 	hotkey.functions.append((_("Start instant recording"), "Infobar/startInstantRecording", "InfoBar"))
 	hotkey.functions.append((_("Activate timeshift End"), "Infobar/activateTimeshiftEnd", "InfoBar"))
 	hotkey.functions.append((_("Activate timeshift end and pause"), "Infobar/activateTimeshiftEndAndPause", "InfoBar"))

@@ -111,9 +111,7 @@ class PinInput(InputBox):
 		if self.getTries() == 0:
 			if (self.triesEntry.time.value + (self.waitTime * 60)) > time():
 				remaining = (self.triesEntry.time.value + (self.waitTime * 60)) - time()
-				remainingMinutes = int(remaining / 60)
-				remainingSeconds = int(remaining % 60)
-				messageText = _("You have to wait %s!") % (str(remainingMinutes) + " " + _("minutes") + ", " + str(remainingSeconds) + " " + _("seconds"))
+				messageText = _("You have to wait %(min)d minutes, %(sec)d seconds!") % {"min": int(remaining / 60), "sec": int(remaining % 60)}
 				if service and simple:
 					AddPopup(messageText, type=MessageBox.TYPE_ERROR, timeout=5)
 					self.closePinCancel()
