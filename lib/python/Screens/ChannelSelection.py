@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 from Tools.Profile import profile
 
 from Screen import Screen
