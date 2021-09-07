@@ -1009,7 +1009,7 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 
 			modes = [x[:5] for x in n.getTunerTypesEnabled()]
 			self.nim_type_dict[n.slot] = {"modes": modes,
-				"selection": ConfigSelection(choices=[(x, {"DVB-S": _("Satellite"), "DVB-T": _("Terrestrial"), "DVB-C": _("Cable"), "ATSC": _("ATSC")}.get(x, "")) for x in modes])}
+				"selection": ConfigSelection(choices=[(x, {"DVB-S": _("Satellite"), "DVB-T": _("Terrestrial"), "DVB-C": _("Cable"), "ATSC": "ATSC"}.get(x, "")) for x in modes])}
 			if ttype in modes:
 				self.nim_type_dict[n.slot]["selection"].value = ttype
 
@@ -1033,8 +1033,8 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 
 		# sat
 		self.scan_sat.system = ConfigSelection(default=defaultSat["system"], choices=[
-			(eDVBFrontendParametersSatellite.System_DVB_S, _("DVB-S")),
-			(eDVBFrontendParametersSatellite.System_DVB_S2, _("DVB-S2"))])
+			(eDVBFrontendParametersSatellite.System_DVB_S, "DVB-S"),
+			(eDVBFrontendParametersSatellite.System_DVB_S2, "DVB-S2")])
 		self.scan_sat.frequency = ConfigInteger(default=defaultSat["frequency"], limits=(1, 99999))
 		self.scan_sat.inversion = ConfigSelection(default=defaultSat["inversion"], choices=[
 			(eDVBFrontendParametersSatellite.Inversion_Off, _("Off")),
@@ -1124,8 +1124,8 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 			(eDVBFrontendParametersCable.FEC_None, _("None"))])
 		self.scan_cab.symbolrate = ConfigInteger(default=defaultCab["symbolrate"], limits=(1, 99999))
 		self.scan_cab.system = ConfigSelection(default=defaultCab["system"], choices=[
-			(eDVBFrontendParametersCable.System_DVB_C_ANNEX_A, _("DVB-C")),
-			(eDVBFrontendParametersCable.System_DVB_C_ANNEX_C, _("DVB-C ANNEX C"))])
+			(eDVBFrontendParametersCable.System_DVB_C_ANNEX_A, "DVB-C"),
+			(eDVBFrontendParametersCable.System_DVB_C_ANNEX_C, "DVB-C ANNEX C")])
 
 		# terrestial
 		self.scan_ter.frequency = ConfigFloat(default=[defaultTer["frequency"] / 1000, defaultTer["frequency"] % 1000], limits=[(50, 999), (0, 999)])
@@ -1197,8 +1197,8 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 			(eDVBFrontendParametersTerrestrial.Hierarchy_Auto, _("Auto"))])
 		self.scan_ter.system = ConfigSelection(default=defaultTer["system"], choices=[
 			(eDVBFrontendParametersTerrestrial.System_DVB_T_T2, _("Auto")),
-			(eDVBFrontendParametersTerrestrial.System_DVB_T, _("DVB-T")),
-			(eDVBFrontendParametersTerrestrial.System_DVB_T2, _("DVB-T2"))])
+			(eDVBFrontendParametersTerrestrial.System_DVB_T, "DVB-T"),
+			(eDVBFrontendParametersTerrestrial.System_DVB_T2, "DVB-T2")])
 		self.scan_ter.plp_id = ConfigInteger(default=defaultTer["plp_id"], limits=(0, 255))
 
 		# ATSC
@@ -1217,8 +1217,8 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 			(eDVBFrontendParametersATSC.Modulation_VSB_8, "8VSB"),
 			(eDVBFrontendParametersATSC.Modulation_VSB_16, "16VSB")])
 		self.scan_ats.system = ConfigSelection(default=defaultATSC["system"], choices=[
-			(eDVBFrontendParametersATSC.System_ATSC, _("ATSC")),
-			(eDVBFrontendParametersATSC.System_DVB_C_ANNEX_B, _("DVB-C ANNEX B"))])
+			(eDVBFrontendParametersATSC.System_ATSC, "ATSC"),
+			(eDVBFrontendParametersATSC.System_DVB_C_ANNEX_B, "DVB-C ANNEX B")])
 
 		self.scan_scansat = {}
 		for sat in nimmanager.satList:

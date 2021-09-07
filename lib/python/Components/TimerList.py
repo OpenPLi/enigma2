@@ -205,9 +205,9 @@ class TimerList(GUIComponent, object):
 			return "%s" % _("Stream") + alternative
 		op = int(refstr.split(':', 10)[6][:-4] or "0", 16)
 		if op == 0xeeee:
-			return "%s" % _("DVB-T") + alternative
+			return "%s" % "DVB-T" + alternative
 		if op == 0xffff:
-			return "%s" % _("DVB-C") + alternative
+			return "%s" % "DVB-C" + alternative
 		direction = 'E'
 		if op > 1800:
 			op = 3600 - op
