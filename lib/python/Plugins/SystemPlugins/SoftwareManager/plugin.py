@@ -692,7 +692,7 @@ class PluginManager(Screen, PackageInfoHandler):
 				self["key_yellow"].setText(_("View details"))
 				self["key_blue"].setText("")
 				if len(self.selectedFiles) == 0 and iSoftwareTools.available_updates is not 0:
-					self["status"].setText(_("There are at least ") + str(iSoftwareTools.available_updates) + _(" updates available."))
+					self["status"].setText(_("There are at least %d updates available.") % iSoftwareTools.available_updates)
 				elif len(self.selectedFiles) is not 0:
 					self["status"].setText(str(len(self.selectedFiles)) + _(" packages selected."))
 				else:
@@ -703,7 +703,7 @@ class PluginManager(Screen, PackageInfoHandler):
 				self["key_yellow"].setText("")
 				self["key_blue"].setText("")
 				if len(self.selectedFiles) == 0 and iSoftwareTools.available_updates is not 0:
-					self["status"].setText(_("There are at least ") + str(iSoftwareTools.available_updates) + _(" updates available."))
+					self["status"].setText(_("There are at least %d updates available.") % iSoftwareTools.available_updates)
 					self["key_yellow"].setText(_("Update"))
 				elif len(self.selectedFiles) is not 0:
 					self["status"].setText(str(len(self.selectedFiles)) + _(" packages selected."))
