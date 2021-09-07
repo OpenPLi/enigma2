@@ -1482,8 +1482,8 @@ class TunerScreen(ConfigListScreen, Screen):
 
 		self.scan_sat = ConfigSubsection()
 		self.scan_sat.system = ConfigSelection(default=defaultSat["system"], choices=[
-			(eDVBFrontendParametersSatellite.System_DVB_S, _("DVB-S")),
-			(eDVBFrontendParametersSatellite.System_DVB_S2, _("DVB-S2"))])
+			(eDVBFrontendParametersSatellite.System_DVB_S, "DVB-S"),
+			(eDVBFrontendParametersSatellite.System_DVB_S2, "DVB-S2")])
 		self.scan_sat.frequency = ConfigInteger(default=defaultSat["frequency"], limits=(1, 99999))
 		self.scan_sat.inversion = ConfigSelection(default=defaultSat["inversion"], choices=[
 			(eDVBFrontendParametersSatellite.Inversion_Off, _("Off")),
