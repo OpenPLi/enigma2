@@ -130,7 +130,7 @@ class FastScanStatus(Screen):
 		if result < 0:
 			self["scan_state"].setText(_('Scanning failed!'))
 		else:
-			self["scan_state"].setText(ngettext('List version %d, found %d channel', 'List version %d, found %d channels', result) % (self.scan.getVersion(), result))
+			self["scan_state"].setText(ngettext('List version %(ver)d, found %(num)d channel', 'List version %(ver)d, found %(num)d channels', result) % {"ver": self.scan.getVersion(), "num": result})
 
 	def restoreService(self):
 		if self.prevservice:
