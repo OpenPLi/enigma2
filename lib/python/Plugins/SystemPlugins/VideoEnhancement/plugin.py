@@ -29,10 +29,9 @@ class VideoEnhancementSetup(Screen, ConfigListScreen):
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self.session = session
 		self.onChangedEntry = []
 		self.skinName = ["VideoEnhancementSetup"]
-		self.setup_title = _("Video enhancement setup")
+		self.setTitle(_("Video enhancement setup"))
 		self["introduction"] = StaticText()
 
 		self.list = []
@@ -59,10 +58,6 @@ class VideoEnhancementSetup(Screen, ConfigListScreen):
 			self["config"].onSelectionChanged.append(self.SelectionChanged)
 		self.rememberOldSettings()
 		self.changedEntry()
-		self.onLayoutFinish.append(self.layoutFinished)
-
-	def layoutFinished(self):
-		self.setTitle(self.setup_title)
 
 	def rememberOldSettings(self):
 		self.oldContrast = config.pep.contrast.value
@@ -282,7 +277,7 @@ class VideoEnhancementPreview(Screen, ConfigListScreen):
 		Screen.__init__(self, session)
 
 		self.onChangedEntry = []
-		self.setup_title = _("Video enhancement preview")
+		self.setTitle(_("Video enhancement preview"))
 		self.oldSplitMode = oldSplitMode
 		self.maxValue = maxValue
 		self.configStepsEntry = None
@@ -304,10 +299,6 @@ class VideoEnhancementPreview(Screen, ConfigListScreen):
 		self["introduction"] = StaticText()
 
 		self.createSetup()
-		self.onLayoutFinish.append(self.layoutFinished)
-
-	def layoutFinished(self):
-		self.setTitle(self.setup_title)
 
 	def createSetup(self):
 		self.list = []

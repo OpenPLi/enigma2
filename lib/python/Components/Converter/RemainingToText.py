@@ -2,7 +2,7 @@ from Components.Converter.Converter import Converter
 from Components.Element import cached
 
 
-class RemainingToText(Converter, object):
+class RemainingToText(Converter):
 	DEFAULT = 0
 	WITH_SECONDS = 1
 	NO_SECONDS = 2

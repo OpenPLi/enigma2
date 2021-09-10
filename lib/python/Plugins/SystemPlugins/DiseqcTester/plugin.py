@@ -157,7 +157,7 @@ class DiseqcTester(Screen, TuneTest, ResultParser):
 
 	def __init__(self, session, feid, test_type=TEST_TYPE_QUICK, loopsfailed=3, loopssuccessful=1, log=False):
 		Screen.__init__(self, session)
-		self.setup_title = _("DiSEqC Tester")
+		self.setTitle(_("DiSEqC Tester"))
 		self.feid = feid
 		self.test_type = test_type
 		self.loopsfailed = loopsfailed
@@ -465,7 +465,6 @@ class DiseqcTester(Screen, TuneTest, ResultParser):
 					pass
 
 	def go(self):
-		self.setTitle(self.setup_title)
 		self.running = True
 		self["failed_counter"].setText("0")
 		self["succeeded_counter"].setText("0")
@@ -509,7 +508,7 @@ class DiseqcTesterTestTypeSelection(Screen, ConfigListScreen):
 		Screen.__init__(self, session)
 		# for the skin: first try 'DiseqcTesterTestTypeSelection', then 'Setup', this allows individual skinning
 		self.skinName = ["DiseqcTesterTestTypeSelection", "Setup"]
-		self.setup_title = _("DiSEqC-tester settings")
+		self.setTitle(_("DiSEqC-tester settings"))
 		self.onChangedEntry = []
 		self.feid = feid
 		self.list = []
@@ -527,10 +526,6 @@ class DiseqcTesterTestTypeSelection(Screen, ConfigListScreen):
 		self["key_green"] = StaticText(_("OK"))
 
 		self.createSetup()
-		self.onLayoutFinish.append(self.__layoutFinished)
-
-	def __layoutFinished(self):
-		self.setTitle(self.setup_title)
 
 	def createSetup(self):
 		self.testtype = ConfigSelection(choices={"quick": _("Quick"), "random": _("Random"), "complete": _("Complete")}, default="quick")

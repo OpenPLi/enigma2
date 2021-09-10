@@ -11,7 +11,7 @@ from timer import TimerEntry
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
 
 
-class TimerList(GUIComponent, object):
+class TimerList(GUIComponent):
 #
 #  | <Name of the Timer>     <Service>  |
 #  | <state>  <orb.pos.>  <start, end>  |

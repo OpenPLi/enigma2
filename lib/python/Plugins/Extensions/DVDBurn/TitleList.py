@@ -63,6 +63,8 @@ class TitleList(Screen, HelpableScreen):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 
+		self.setTitle(_("DVD titlelist"))
+
 		self["titleactions"] = HelpableActionMap(self, "DVDTitleList",
 			{
 				"addTitle": (self.addTitle, _("Add a new title"), _("Add title")),
@@ -102,10 +104,6 @@ class TitleList(Screen, HelpableScreen):
 			self.project = project
 		else:
 			self.newProject()
-		self.onLayoutFinish.append(self.layoutFinished)
-
-	def layoutFinished(self):
-		self.setTitle(_("DVD titlelist"))
 
 	def checkBackgroundJobs(self):
 		for job in job_manager.getPendingJobs():

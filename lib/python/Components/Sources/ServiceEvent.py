@@ -3,7 +3,7 @@ from enigma import eServiceCenter
 from Source import Source
 
 
-class ServiceEvent(Source, object):
+class ServiceEvent(Source):
 	def __init__(self):
 		Source.__init__(self)
 		self.service = None

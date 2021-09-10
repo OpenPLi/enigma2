@@ -3,7 +3,7 @@ from time import localtime, strftime
 from Components.Element import cached
 
 
-class ClockToText(Converter, object):
+class ClockToText(Converter):
 	DEFAULT = 0
 	WITH_SECONDS = 1
 	IN_MINUTES = 2

@@ -1,7 +1,7 @@
 from Source import Source
 
 
-class Event(Source, object):
+class Event(Source):
 	def __init__(self):
 		Source.__init__(self)
 		self.evt = None

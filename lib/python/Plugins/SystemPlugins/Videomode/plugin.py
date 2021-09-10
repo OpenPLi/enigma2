@@ -17,8 +17,7 @@ class VideoSetup(Screen, ConfigListScreen):
 		Screen.__init__(self, session)
 		# for the skin: first try VideoSetup, then Setup, this allows individual skinning
 		self.skinName = ["VideoSetup", "Setup"]
-		self.setup_title = _("A/V settings")
-		self.setTitle(self.setup_title)
+		self.setTitle(_("A/V settings"))
 		self.hw = hw
 		self.onChangedEntry = []
 
@@ -43,10 +42,6 @@ class VideoSetup(Screen, ConfigListScreen):
 
 		self.createSetup()
 		self.grabLastGoodMode()
-		self.onLayoutFinish.append(self.layoutFinished)
-
-	def layoutFinished(self):
-		self.setTitle(self.setup_title)
 
 	def startHotplug(self):
 		self.hw.on_hotplug.append(self.createSetup)

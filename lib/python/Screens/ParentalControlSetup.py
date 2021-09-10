@@ -33,8 +33,7 @@ class ParentalControlSetup(Screen, ConfigListScreen, ProtectedScreen):
 		ProtectedScreen.__init__(self)
 		# for the skin: first try ParentalControlSetup, then Setup, this allows individual skinning
 		self.skinName = ["ParentalControlSetup", "Setup"]
-		self.setup_title = _("Parental control setup")
-		self.setTitle(self.setup_title)
+		self.setTitle(_("Parental control setup"))
 		self.onChangedEntry = []
 
 		self.list = []
@@ -50,10 +49,6 @@ class ParentalControlSetup(Screen, ConfigListScreen, ProtectedScreen):
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
 		self.recursive = False
-		self.onLayoutFinish.append(self.layoutFinished)
-
-	def layoutFinished(self):
-		self.setTitle(self.setup_title)
 
 	def isProtected(self):
 		return (not config.ParentalControl.setuppinactive.value and config.ParentalControl.servicepinactive.value) or\

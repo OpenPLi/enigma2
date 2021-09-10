@@ -297,7 +297,6 @@ class AdapterSetup(Screen, ConfigListScreen, HelpableScreen):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 		self.setTitle(_("Network setup"))
-		self.session = session
 		if isinstance(networkinfo, (list, tuple)):
 			self.iface = networkinfo[0]
 			self.essid = networkinfo[1]
@@ -656,7 +655,6 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 		self.setTitle(_("Network configuration"))
-		self.session = session
 		self.iface = iface
 		self.restartLanRef = None
 		self.LinkState = None

@@ -261,9 +261,8 @@ def buildMovieLocationList(bookmarks):
 
 class MovieBrowserConfiguration(ConfigListScreen, Screen):
 	def __init__(self, session, args=0):
-		self.session = session
-		self.setup_title = _("Movie list configuration")
 		Screen.__init__(self, session)
+		self.setTitle(_("Movie list configuration"))
 		self.skinName = ['MovieBrowserConfiguration', 'Setup']
 		cfg = ConfigSubsection()
 		self.cfg = cfg
@@ -310,14 +309,10 @@ class MovieBrowserConfiguration(ConfigListScreen, Screen):
 		self["VKeyIcon"] = Boolean(False)
 
 		self.onChangedEntry = []
-		self.onLayoutFinish.append(self.layoutFinished)
 		self["config"].onSelectionChanged.append(self.descriptions)
 
 	def descriptions(self):
 		self["description"].setText(self["config"].getCurrent() and len(self["config"].getCurrent()) > 2 and self["config"].getCurrent()[2] or "")
-
-	def layoutFinished(self):
-		self.setTitle(self.setup_title)
 
 	# for summary:
 	def changedEntry(self):
@@ -533,6 +528,8 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		if not timeshiftEnabled:
 			InfoBarBase.__init__(self) # For ServiceEventTracker
 		ProtectedScreen.__init__(self)
+
+		self.setTitle(_("Movie selection"))
 		self.protectContextMenu = True
 		self.initialRun = True
 
@@ -582,9 +579,6 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		self.selectedmovie = selectedmovie
 
 		self.playGoTo = None #1 - preview next item / -1 - preview previous
-
-		title = _("Movie selection")
-		self.setTitle(title)
 
 		# Need list for init
 		SelectionEventInfo.__init__(self)

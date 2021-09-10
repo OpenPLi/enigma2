@@ -39,9 +39,8 @@ class GraphMultiEpgSetup(Screen, ConfigListScreen):
 		}, -1)
 
 		self.onChangedEntry = []
-		self.session = session
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session=self.session)
+		ConfigListScreen.__init__(self, self.list, session=session)
 		self.createSetup()
 
 	def createSetup(self):

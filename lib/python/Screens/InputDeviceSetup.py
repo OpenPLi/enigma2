@@ -70,11 +70,7 @@ class InputDeviceSelection(Screen, HelpableScreen):
 		self.list = []
 		self["list"] = List(self.list)
 		self.updateList()
-		self.onLayoutFinish.append(self.layoutFinished)
 		self.onClose.append(self.cleanup)
-
-	def layoutFinished(self):
-		self.setTitle(_("Select input device"))
 
 	def cleanup(self):
 		self.currentIndex = 0
@@ -159,7 +155,6 @@ class InputDeviceSetup(Screen, ConfigListScreen):
 		self.inputDevice = device
 		iInputDevices.currentDevice = self.inputDevice
 		self.onChangedEntry = []
-		self.setup_title = _("Input device setup")
 		self.isStepSlider = None
 		self.enableEntry = None
 		self.repeatEntry = None
@@ -188,7 +183,6 @@ class InputDeviceSetup(Screen, ConfigListScreen):
 		self.onClose.append(self.cleanup)
 
 	def layoutFinished(self):
-		self.setTitle(self.setup_title)
 		listWidth = self["config"].l.getItemSize().width()
 		# use 20% of list width for sliders
 		self["config"].l.setSeperation(int(listWidth * .8))
