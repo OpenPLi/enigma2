@@ -70,7 +70,7 @@ class ParentalControlSetup(Screen, ConfigListScreen, ProtectedScreen):
 				self.list.append(getConfigListEntry(_("Remember service PIN"), config.ParentalControl.storeservicepin))
 				if config.ParentalControl.storeservicepin.value != "never":
 					self.list.append(getConfigListEntry(_("Hide parentel locked services"), config.ParentalControl.hideBlacklist))
-				self.list.append(getConfigListEntry(_("Protect on epg age"), config.ParentalControl.age))
+				self.list.append(getConfigListEntry(_("Protect on EPG age"), config.ParentalControl.age))
 				self.reloadLists = getConfigListEntry(_("Reload blacklists"), NoSave(ConfigNothing()))
 				self.list.append(self.reloadLists)
 			self.list.append(getConfigListEntry(_("Protect Screens"), config.ParentalControl.setuppinactive))
