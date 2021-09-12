@@ -879,7 +879,7 @@ class PluginManager(Screen, PackageInfoHandler):
 			elif tag == 'Communication':
 				return((_("Communication"), _("View list of available communication extensions."), tag, divpng))
 			else: # dynamically generate non existent tags
-				return((str(tag), _("View list of available ") + str(tag) + _(" extensions."), tag, divpng))
+				return((str(tag), _("View list of available %s extensions.") % str(tag), tag, divpng))
 
 	def prepareInstall(self):
 		self.cmdList = []
