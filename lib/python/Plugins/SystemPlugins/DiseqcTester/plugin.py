@@ -186,7 +186,7 @@ class DiseqcTester(Screen, TuneTest, ResultParser):
 		self.list = []
 		self["progress_list"] = List(self.list)
 		self["progress_list"].onSelectionChanged.append(self.selectionChanged)
-		self["CmdText"] = StaticText(_("Please wait while scanning is in progress..."))
+		self["CmdText"] = StaticText(_("Please wait while scanning..."))
 		self.indexlist = {}
 		self.readTransponderList()
 		self.running = False
