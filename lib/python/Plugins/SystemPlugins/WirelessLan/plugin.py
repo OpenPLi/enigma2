@@ -61,7 +61,7 @@ class WlanStatus(Screen):
 		self.setTitle(_("Wireless network state"))
 		self.iface = iface
 
-		self["LabelBSSID"] = StaticText(_('Accesspoint:'))
+		self["LabelBSSID"] = StaticText(_('Access point:'))
 		self["LabelESSID"] = StaticText(_('SSID:'))
 		self["LabelQuality"] = StaticText(_('Link quality:'))
 		self["LabelSignal"] = StaticText(_('Signal strength:'))
