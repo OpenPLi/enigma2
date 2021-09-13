@@ -12,7 +12,7 @@ class ServiceScan:
 	DonePartially = 5
 
 	Errors = {
-		0: _("error starting scanning"),
+		0: _("error starting scan"),
 		1: _("error while scanning"),
 		2: _("no resource manager"),
 		3: _("no channel list")

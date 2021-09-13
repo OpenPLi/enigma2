@@ -201,7 +201,7 @@ class InputDeviceSetup(Screen, ConfigListScreen):
 		label = _("Delay before key repeat starts:")
 		cmd = "self.delayEntry = getConfigListEntry(label, config.inputDevices." + self.inputDevice + ".delay)"
 		exec cmd
-		label = _("Devicename:")
+		label = _("Device name:")
 		cmd = "self.nameEntry = getConfigListEntry(label, config.inputDevices." + self.inputDevice + ".name)"
 		exec cmd
 		if self.enableEntry:
