@@ -574,7 +574,7 @@ class PositionerSetup(Screen):
 				self.printMsg(_("Move west"))
 				self.diseqccommand("moveWest", 0)
 				self.isMoving = True
-				self.statusMsg(_("Moving west ..."), blinking=True)
+				self.statusMsg(_("Moving west..."), blinking=True)
 			self.updateColors("move")
 		elif entry == "limits":
 			self.printMsg(_("Limits off"))
@@ -607,7 +607,7 @@ class PositionerSetup(Screen):
 				self.isMoving = True
 				self.stopOnLock = True
 				self.diseqccommand("moveWest", 0)
-				self.statusMsg(_("Searching west ..."), blinking=True)
+				self.statusMsg(_("Searching west..."), blinking=True)
 			self.updateColors("move")
 		elif entry == "finemove":
 			self.printMsg(_("Step west"))
@@ -661,7 +661,7 @@ class PositionerSetup(Screen):
 				self.isMoving = True
 				self.stopOnLock = True
 				self.diseqccommand("moveEast", 0)
-				self.statusMsg(_("Searching east ..."), blinking=True)
+				self.statusMsg(_("Searching east..."), blinking=True)
 			self.updateColors("move")
 		elif entry == "finemove":
 			self.printMsg(_("Step east"))
@@ -703,7 +703,7 @@ class PositionerSetup(Screen):
 				self.printMsg(_("Move east"))
 				self.diseqccommand("moveEast", 0)
 				self.isMoving = True
-				self.statusMsg(_("Moving east ..."), blinking=True)
+				self.statusMsg(_("Moving east..."), blinking=True)
 			self.updateColors("move")
 		elif entry == "limits":
 			self.printMsg(_("Limits on"))
@@ -1171,7 +1171,7 @@ class PositionerSetup(Screen):
 			else:
 				return _("east")
 
-		self.logMsg(_("Auto focus commencing ..."))
+		self.logMsg(_("Auto focus commencing..."))
 		turningspeed = self.getTurningspeed()
 		measurements = {}
 		maxsteps = max(min(round(self.MAX_FOCUS_ANGLE / self.tuningstepsize), 0x1F), 3)
