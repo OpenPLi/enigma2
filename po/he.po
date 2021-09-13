@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-10 01:42+0300\n"
+"POT-Creation-Date: 2021-09-13 23:45+0300\n"
 "PO-Revision-Date: 2012-03-08 10:40+0330\n"
 "Last-Translator: \n"
 "Language-Team: Arabic <moustafagamal@hotmail.com>\n"
@@ -99,19 +99,12 @@ msgid " Warning: the selected tuner should not use SCR Unicable type for LNBs be
 msgstr ""
 
 #
-msgid " extensions."
-msgstr "תוספות"
-
-#
 #, fuzzy
 msgid " min"
 msgstr "דקות %d"
 
 msgid " ms"
 msgstr "ms"
-
-msgid " packages selected."
-msgstr "חבילות נבחרו"
 
 msgid " unicable LNB input of rotor"
 msgstr ""
@@ -400,6 +393,12 @@ msgstr "0"
 msgid "1"
 msgstr "1"
 
+#, fuzzy, python-format
+msgid "1 package selected."
+msgid_plural "%d packages selected."
+msgstr[0] "חבילות נבחרו"
+msgstr[1] "חבילות נבחרו"
+
 msgid "10 MB/s"
 msgstr ""
 
@@ -597,6 +596,10 @@ msgid "A recording is currently running. Please stop the recording before trying
 msgstr ""
 
 msgid "A recording is currently running. Please stop the recording before trying to start a testing DiSEqC."
+msgstr ""
+
+#
+msgid "A repeating event is currently recording. What would you like to do?"
 msgstr ""
 
 #, python-format
@@ -3498,6 +3501,9 @@ msgstr "IP כתובת"
 msgid "Enter PIN"
 msgstr ""
 
+msgid "Enter PIN code"
+msgstr ":הכנס קוד אבטחה"
+
 msgid "Enter URL"
 msgstr ""
 
@@ -3515,9 +3521,6 @@ msgstr "...כנס לתפריט ראשי"
 
 msgid "Enter persistent PIN code"
 msgstr ""
-
-msgid "Enter PIN code"
-msgstr ":הכנס קוד אבטחה"
 
 msgid "Enter the frequency at which you LNB switches between low band and high band. For more information consult the spec sheet of your LNB."
 msgstr ""
@@ -7353,15 +7356,6 @@ msgstr "Repeat playlist"
 msgid "Repeat type"
 msgstr "Repeat Type"
 
-msgid ""
-"Repeating event currently recording.\n"
-"What do you want to do?"
-msgstr ""
-
-#
-msgid "A repeating event is currently recording. What would you like to do?"
-msgstr ""
-
 msgid "Repeats"
 msgstr "Repeats"
 
@@ -9727,6 +9721,10 @@ msgstr ""
 msgid "The PIN code has been saved successfully."
 msgstr ""
 
+#
+msgid "The PIN code you entered is wrong."
+msgstr ".הקוד שהכנסת שגוי"
+
 msgid "The PIN codes you entered are different."
 msgstr ""
 
@@ -9789,10 +9787,6 @@ msgstr ""
 #, python-format
 msgid "The path %s already exists."
 msgstr "The path %s already exists."
-
-#
-msgid "The PIN code you entered is wrong."
-msgstr ".הקוד שהכנסת שגוי"
 
 #, python-format
 msgid "The results have been written to %s"
@@ -9881,6 +9875,9 @@ msgstr ""
 
 #
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
+msgstr ""
+
+msgid "This bouquet is protected by a parental control PIN"
 msgstr ""
 
 msgid "This can be useful when using the CI(+) module. After the end of the recording, the service will be automatically stopped."
@@ -9992,10 +9989,10 @@ msgstr ""
 msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr ""
 
-msgid "This option sets the picture contrast."
+msgid "This option sets the picture brightness."
 msgstr ""
 
-msgid "This option sets the picture brightness."
+msgid "This option sets the picture contrast."
 msgstr ""
 
 msgid "This option sets the picture flesh tones."
@@ -10031,6 +10028,9 @@ msgstr ".הפלאגין הזה יוסר"
 #, python-format
 msgid "This receiver cannot decode %s streams!"
 msgstr ""
+
+msgid "This service is protected by a parental control PIN"
+msgstr "שירות זה מוגן על ידי בקרת הורים"
 
 msgid "This setting allows the tuner configuration to be a duplication of how another tuner is already configured."
 msgstr ""
@@ -10927,9 +10927,9 @@ msgstr ""
 msgid "View details"
 msgstr "הצג פרטים"
 
-#
-msgid "View list of available "
-msgstr ""
+#, fuzzy, python-format
+msgid "View list of available %s extensions."
+msgstr "View list of available system extensions"
 
 #
 msgid "View list of available CommonInterface extensions"
@@ -11522,9 +11522,6 @@ msgstr "שחזור גיבויים"
 msgid "Yesterday"
 msgstr ""
 
-msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
-msgstr ""
-
 #, python-format
 msgid ""
 "You already have a channel list installed,\n"
@@ -11601,6 +11598,9 @@ msgid "You must switch to the service %s (%s - '%s')!\n"
 msgstr ""
 
 msgid "You seem to be in timeshift!"
+msgstr ""
+
+msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
 msgstr ""
 
 msgid "Your collection exceeds the size of a single layer medium, you will need a blank dual layer DVD!"
@@ -11866,6 +11866,9 @@ msgstr "אחורנית"
 msgid "background image"
 msgstr "תמונת רקע"
 
+msgid "backup EPG cache"
+msgstr ""
+
 msgid "ballet"
 msgstr ""
 
@@ -12029,9 +12032,6 @@ msgid "entertainment (10-16 year old)"
 msgstr ""
 
 msgid "entertainment (6-14 year old)"
-msgstr ""
-
-msgid "backup EPG cache"
 msgstr ""
 
 msgid "equestrian"
@@ -12702,14 +12702,8 @@ msgstr ""
 msgid "testing"
 msgstr "עובד"
 
-msgid "This bouquet is protected by a parental control PIN"
-msgstr ""
-
 msgid "this recording"
 msgstr "ההקלטה הזו"
-
-msgid "This service is protected by a parental control PIN"
-msgstr "שירות זה מוגן על ידי בקרת הורים"
 
 #
 msgid "toggle time, chapter, audio, subtitle info"
