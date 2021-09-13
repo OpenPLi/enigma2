@@ -131,7 +131,7 @@ class TimerEditList(Screen):
 								(_("Stop current event and disable coming events"), "stopall"),
 								(_("Don't stop current event but disable coming events"), "stoponlycoming")
 							)
-							self.session.openWithCallback(boundFunction(self.runningEventCallback, t), ChoiceBox, title=_("Repeating event currently recording... What do you want to do?"), list=list)
+							self.session.openWithCallback(boundFunction(self.runningEventCallback, t), ChoiceBox, title=_("A repeating event is currently recording. What would you like to do?"), list=list)
 							timer_changed = False
 					else:
 						t.disable()
