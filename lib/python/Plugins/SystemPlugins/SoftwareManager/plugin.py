@@ -1595,7 +1595,7 @@ class PacketManager(Screen, NumericalTextInput):
 			divpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "div-h.png"))
 			if status == 'update':
 				statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, "SystemPlugins/SoftwareManager/upgrade.png"))
-				self.statuslist.append((_("Package list update"), '', _("Trying to download a new packetlist. Please wait..."), '', statuspng, divpng))
+				self.statuslist.append((_("Package list update"), '', _("Downloading a new packet list. Please wait..."), '', statuspng, divpng))
 				self['list'].setList(self.statuslist)
 			elif status == 'error':
 				statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, "SystemPlugins/SoftwareManager/remove.png"))
