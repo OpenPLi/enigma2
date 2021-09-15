@@ -677,7 +677,7 @@ class PluginManager(Screen, PackageInfoHandler):
 				if len(self.selectedFiles) == 0 and iSoftwareTools.available_updates is not 0:
 					self["status"].setText(_("There are at least %d updates available.") % iSoftwareTools.available_updates)
 				elif len(self.selectedFiles) is not 0:
-					self["status"].setText(ngettext("1 package selected.", "%d packages selected.", len(self.selectedFiles)) % len(self.selectedFiles))
+					self["status"].setText(ngettext("%d package selected.", "%d packages selected.", len(self.selectedFiles)) % len(self.selectedFiles))
 				else:
 					self["status"].setText(_("There are currently no outstanding actions."))
 			elif self.currList == "category":
@@ -689,7 +689,7 @@ class PluginManager(Screen, PackageInfoHandler):
 					self["status"].setText(_("There are at least %d updates available.") % iSoftwareTools.available_updates)
 					self["key_yellow"].setText(_("Update"))
 				elif len(self.selectedFiles) is not 0:
-					self["status"].setText(ngettext("1 package selected.", "%d packages selected.", len(self.selectedFiles)) % len(self.selectedFiles))
+					self["status"].setText(ngettext("%d package selected.", "%d packages selected.", len(self.selectedFiles)) % len(self.selectedFiles))
 					self["key_yellow"].setText(_("Process"))
 				else:
 					self["status"].setText(_("There are currently no outstanding actions."))
