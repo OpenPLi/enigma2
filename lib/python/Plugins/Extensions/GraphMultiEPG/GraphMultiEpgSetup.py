@@ -4,7 +4,7 @@ from Components.Pixmap import Pixmap
 from Components.Label import Label
 from Components.PluginComponent import plugins
 from Components.config import config, getConfigListEntry
-from Components.ConfigList import ConfigList, ConfigListScreen
+from Components.ConfigList import ConfigListScreen
 
 addnotifier = None
 
@@ -14,19 +14,18 @@ class GraphMultiEpgSetup(Screen, ConfigListScreen):
 		<screen name="GraphMultiEPGSetup" position="center,center" size="560,490" title="Electronic Program Guide Setup">
 			<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="buttons/green.png" position="140,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
-			<widget name="canceltext" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
-			<widget name="oktext" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+			<widget name="key_red" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
+			<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 			<widget name="config" position="10,50" size="550,430" />
 		</screen>"""
 
 	def __init__(self, session, args=None):
 		Screen.__init__(self, session)
 		self.setTitle(_("GraphMultiEpg Settings"))
+		self.skinName = ["GraphMultiEpgSetup", "Setup"]
 
-		self["key_green"] = self["oktext"] = Label(_("OK"))
-		self["key_red"] = self["canceltext"] = Label(_("Cancel"))
+		self["key_red"] = Label(_("Cancel"))
+		self["key_green"] = Label(_("Save"))
 
 		self["actions"] = ActionMap(["SetupActions", "MenuActions", "ColorActions"],
 		{
@@ -38,12 +37,6 @@ class GraphMultiEpgSetup(Screen, ConfigListScreen):
 			"menu": self.closeRecursive,
 		}, -1)
 
-		self.onChangedEntry = []
-		self.list = []
-		ConfigListScreen.__init__(self, self.list, session=session)
-		self.createSetup()
-
-	def createSetup(self):
 		global addnotifier
 		self.list = []
 		self.list.append(getConfigListEntry(_("Event font size (relative to skin size)"), config.misc.graph_mepg.ev_fontsize))
@@ -66,5 +59,4 @@ class GraphMultiEpgSetup(Screen, ConfigListScreen):
 		if addnotifier is None:
 			addnotifier = config.misc.graph_mepg.extension_menu.addNotifier(plugins.reloadPlugins, initial_call=False)
 
-		self["config"].list = self.list
-		self["config"].l.setList(self.list)
+		ConfigListScreen.__init__(self, self.list, session)
