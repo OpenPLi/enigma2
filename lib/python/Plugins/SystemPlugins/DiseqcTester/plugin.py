@@ -586,7 +586,7 @@ def DiseqcTesterMain(session, **kwargs):
 		session.open(MessageBox, _("No satellite frontend found!"), MessageBox.TYPE_ERROR)
 	else:
 		if session.nav.RecordTimer.isRecording():
-			session.open(MessageBox, _("A recording is currently running. Please stop the recording before trying to start a testing DiSEqC."), MessageBox.TYPE_ERROR)
+			session.open(MessageBox, _("A recording is currently running. Please stop the recording before starting a DiSEqC test."), MessageBox.TYPE_ERROR)
 		else:
 			session.open(DiseqcTesterNimSelection)
 
