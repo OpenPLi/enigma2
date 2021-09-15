@@ -41,8 +41,7 @@ class OverscanWizard(Screen, ConfigListScreen):
 
 		self.step = 1
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
-		self.onChangedEntry = []
+		ConfigListScreen.__init__(self, self.list, session)
 		self.setScreen()
 
 		self.Timer = eTimer()
@@ -130,7 +129,6 @@ class OverscanWizard(Screen, ConfigListScreen):
 			self["introduction"].setText(_("The user interface of the receiver will now restart to select the selected skin"))
 			quitMainloop(3)
 		self["config"].list = self.list
-		self["config"].l.setList(self.list)
 		if self["config"].instance:
 			self.__layoutFinished()
 
@@ -139,20 +137,6 @@ class OverscanWizard(Screen, ConfigListScreen):
 		self.setTitle(_("Overscan wizard") + " (%s)" % self.countdown)
 		if not(self.countdown):
 			self.keyCancel()
-
-	def changedEntry(self):
-		for x in self.onChangedEntry:
-			x()
-
-	def getCurrentEntry(self):
-		return self["config"].getCurrent() and self["config"].getCurrent()[0] or ""
-
-	def getCurrentValue(self):
-		return self["config"].getCurrent() and len(self["config"].getCurrent()) > 1 and str(self["config"].getCurrent()[1].getText()) or ""
-
-	def createSummary(self):
-		from Screens.Setup import SetupSummary
-		return SetupSummary
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -200,7 +184,7 @@ class OverscanWizard(Screen, ConfigListScreen):
 			self.dst_left.value = self.dst_right.value
 		if self.dst_top.value > self.dst_bottom.value:
 			self.dst_top.value = self.dst_bottom.value
-		self["config"].l.setList(self.list)
+		self["config"].list(self.list)
 		setPosition(int(self.dst_left.value), int(self.dst_right.value) - int(self.dst_left.value), int(self.dst_top.value), int(self.dst_bottom.value) - int(self.dst_top.value))
 
 	def keyCancel(self):
