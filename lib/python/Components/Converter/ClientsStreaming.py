@@ -105,7 +105,7 @@ class ClientsStreaming(Converter, Poll):
 		elif self.type == self.NUMBER:
 			return str(len(clients))
 		elif self.type == self.SHORT_ALL:
-			return _("Total clients streaming: %d (%s)") % (len(clients), ' '.join(names))
+			return _("Total clients streaming: ") + "%d (%s)" % (len(clients), ' '.join(names))
 		elif self.type == self.ALL:
 			return '\n'.join(' '.join(elems) for elems in clients)
 		elif self.type == self.INFO or self.type == self.INFO_RESOLVE or self.type == self.INFO_RESOLVE_SHORT:
