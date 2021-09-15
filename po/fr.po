@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-10 01:42+0300\n"
+"POT-Creation-Date: 2021-09-15 22:30+0300\n"
 "PO-Revision-Date: 2021-09-12 10:10+0200\n"
 "Last-Translator: Pr2\n"
 "Language-Team: french\n"
@@ -93,17 +93,11 @@ msgstr " - Unicable/JESS LNBs non trouvé"
 msgid " Warning: the selected tuner should not use SCR Unicable type for LNBs because each tuner need a own SCR number."
 msgstr " Attention : le tuner sélectionné ne doit pas utiliser le type SCR Unicable pour les LNB car chaque tuner nécessite son propre numéro SCR."
 
-msgid " extensions."
-msgstr " Extensions."
-
 msgid " min"
 msgstr " min"
 
 msgid " ms"
 msgstr " ms"
-
-msgid " packages selected."
-msgstr " Paquets sélectionnés."
 
 msgid " unicable LNB input of rotor"
 msgstr " entrée LNB unicable du rotor"
@@ -111,18 +105,6 @@ msgstr " entrée LNB unicable du rotor"
 #, python-format
 msgid "%(freespace)s %(percent)s free disk space"
 msgstr "%(freespace)s %(percent)s espace disque libre"
-
-#, python-format
-msgid "%.0f GB"
-msgstr "%.0f GB"
-
-#, python-format
-msgid "%.0f MB"
-msgstr "%.0f MB"
-
-#, python-format
-msgid "%.0f kB"
-msgstr "%.0f kB"
 
 #, python-format
 msgid "%.1f° E"
@@ -173,10 +155,6 @@ msgstr "%a %e/%m"
 #. TRANSLATORS: long date representation short dayname daynum short monthname hour:minute in strftime() format! See 'man strftime'
 msgid "%a %e/%m  %-H:%M"
 msgstr "%a %e/%m  %-H:%M"
-
-#, python-format
-msgid "%d B"
-msgstr "%d B"
 
 #, python-format
 msgid "%d GB"
@@ -252,6 +230,12 @@ msgstr "%d minutes"
 #, python-format
 msgid "%d ms"
 msgstr "%d ms"
+
+#, fuzzy, python-format
+msgid "%d package selected."
+msgid_plural "%d packages selected."
+msgstr[0] " Paquets sélectionnés."
+msgstr[1] " Paquets sélectionnés."
 
 #, python-format
 msgid "%d pixel wide"
@@ -575,6 +559,9 @@ msgstr "Un enregistrement est en cours. Veuillez arrêter l'enregistrement avant
 
 msgid "A recording is currently running. Please stop the recording before trying to start a testing DiSEqC."
 msgstr "Un enregistrement est en cours. Veuillez arrêter l'enregistrement avant d'essayer de tester le DiSEqC."
+
+msgid "A repeating event is currently recording. What would you like to do?"
+msgstr "Répétition de l'événement en enregistrement. Que voulez-vous faire?"
 
 #, python-format
 msgid "A required tool (%s) was not found."
@@ -2644,11 +2631,11 @@ msgstr "Détails sur le plugin: "
 msgid "Detect next boxes before standby"
 msgstr "Détecter les autres équipements avant de se mettre en veille"
 
-msgid "Detected storage devices:"
-msgstr "Disque(s) dur(s) détecté(s):"
-
 msgid "Detected NIMs:"
 msgstr "Tuners détectés:"
+
+msgid "Detected storage devices:"
+msgstr "Disque(s) dur(s) détecté(s):"
 
 msgid "Device name:"
 msgstr "Nom du périphérique:"
@@ -3232,6 +3219,9 @@ msgstr "Entrer l’adresse IP"
 msgid "Enter PIN"
 msgstr "Saisir le code PIN"
 
+msgid "Enter PIN code"
+msgstr "Saisir code PIN"
+
 msgid "Enter URL"
 msgstr "Entrer l’URL"
 
@@ -3249,9 +3239,6 @@ msgstr "Entrer dans le menu principal..."
 
 msgid "Enter persistent PIN code"
 msgstr "Saisir le code PIN persistant"
-
-msgid "Enter PIN code"
-msgstr "Saisir code PIN"
 
 msgid "Enter the frequency at which you LNB switches between low band and high band. For more information consult the spec sheet of your LNB."
 msgstr "Entrez la fréquence à la quelle votre LNB bascule entre la bande basse et haute. Pour plus d’information consultez la fiche technique de votre LNB."
@@ -6733,16 +6720,6 @@ msgstr "Répéter liste lecture"
 msgid "Repeat type"
 msgstr "Type de répétition"
 
-msgid ""
-"Repeating event currently recording.\n"
-"What do you want to do?"
-msgstr ""
-"Une programmation récurrente enregistre.\n"
-"Que voulez-vous faire?"
-
-msgid "A repeating event is currently recording. What would you like to do?"
-msgstr "Répétition de l'événement en enregistrement. Que voulez-vous faire?"
-
 msgid "Repeats"
 msgstr "Répétitions"
 
@@ -8851,6 +8828,9 @@ msgstr "Le code PIN a été changé avec succès."
 msgid "The PIN code has been saved successfully."
 msgstr "Le code PIN a été enregistré avec succès."
 
+msgid "The PIN code you entered is wrong."
+msgstr "Le code PIN saisi est mauvais."
+
 msgid "The PIN codes you entered are different."
 msgstr "Les codes PIN saisis sont différents."
 
@@ -8930,9 +8910,6 @@ msgstr ""
 msgid "The path %s already exists."
 msgstr "Le chemin %s existe déjà."
 
-msgid "The PIN code you entered is wrong."
-msgstr "Le code PIN saisi est mauvais."
-
 #, python-format
 msgid "The results have been written to %s"
 msgstr "Les résultats ont été écrit sur %s."
@@ -9011,6 +8988,9 @@ msgstr ""
 
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "Ce support DVD RW est déjà formaté - le reformater effacera tout le contenu sur le disque."
+
+msgid "This bouquet is protected by a parental control PIN"
+msgstr "Ce bouquet est protégé par un PIN contrôle parental"
 
 msgid "This can be useful when using the CI(+) module. After the end of the recording, the service will be automatically stopped."
 msgstr "Cela peut être utile lors de l’utilisation du module CI(+). Après la fin de l’enregistrement, le service sera automatiquement arrêté."
@@ -9124,11 +9104,11 @@ msgstr "Cette option est utile pour les câbles HDMI longs."
 msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr "Cette option permet de régler le niveau de suppression de bruit de moustique (le bruit de moustique est un aliasing aléatoire en raison de la forte compression). Evidemment, cela va au détriment des détails de l'image."
 
-msgid "This option sets the picture contrast."
-msgstr "Cette option définit le contraste de l'image."
-
 msgid "This option sets the picture brightness."
 msgstr "Cette option définit la luminosité de l'image."
+
+msgid "This option sets the picture contrast."
+msgstr "Cette option définit le contraste de l'image."
 
 msgid "This option sets the picture flesh tones."
 msgstr "Cette option définit dans l’image les tons de la peau."
@@ -9163,6 +9143,9 @@ msgstr "Ce plugin sera supprimé."
 #, python-format
 msgid "This receiver cannot decode %s streams!"
 msgstr "Ce récepteur ne peut pas décoder des flux %s!"
+
+msgid "This service is protected by a parental control PIN"
+msgstr "Ce service est protégé par un PIN contrôle parental"
 
 msgid "This setting allows the tuner configuration to be a duplication of how another tuner is already configured."
 msgstr "Ce paramètre autorise que la configuration du tuner soit une copie d’un autre tuner déjà configuré."
@@ -9414,7 +9397,6 @@ msgstr "Tonga"
 msgid "Top and bottom"
 msgstr "Haut et Bas"
 
-#, python-format
 msgid "Total clients streaming: "
 msgstr "Nombre total de clients de flux (stream): "
 
@@ -9966,8 +9948,9 @@ msgstr "Afficher Rass interactif..."
 msgid "View details"
 msgstr "Voir les détails"
 
-msgid "View list of available "
-msgstr "Voir la liste des disponibles "
+#, fuzzy, python-format
+msgid "View list of available %s extensions."
+msgstr "Voir liste extensions EPG disponibles."
 
 msgid "View list of available CommonInterface extensions"
 msgstr "Voir liste extensions Interface Commune disponibles."
@@ -10538,9 +10521,6 @@ msgstr "Oui, sans sauvegarde"
 msgid "Yesterday"
 msgstr "Hier"
 
-msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
-msgstr "Votre code PIN est 0000. Il s'agit du code PIN par défaut et il désactive donc le contrôle parental!\n"
-
 #, python-format
 msgid ""
 "You already have a channel list installed,\n"
@@ -10633,6 +10613,9 @@ msgstr "Vous devez basculer vers le service %s (%s - '%s')!\n"
 
 msgid "You seem to be in timeshift!"
 msgstr "Vous semblez être en PauseDirect!"
+
+msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
+msgstr "Votre code PIN est 0000. Il s'agit du code PIN par défaut et il désactive donc le contrôle parental!\n"
 
 msgid "Your collection exceeds the size of a single layer medium, you will need a blank dual layer DVD!"
 msgstr "Votre collection dépasse la taille d'un support simple couche, vous aurez besoin d'un DVD double couche vierge!"
@@ -10898,6 +10881,9 @@ msgstr "Retour"
 msgid "background image"
 msgstr "Image d'arrière-plan"
 
+msgid "backup EPG cache"
+msgstr "sauvegarde du cache de l'EPG"
+
 msgid "ballet"
 msgstr "Ballet"
 
@@ -11054,9 +11040,6 @@ msgstr "Divertissement (10-16 ans)"
 
 msgid "entertainment (6-14 year old)"
 msgstr "Divertissement (6-14 ans)"
-
-msgid "backup EPG cache"
-msgstr "sauvegarde du cache de l'EPG"
 
 msgid "equestrian"
 msgstr "Équestre"
@@ -11222,6 +11205,10 @@ msgstr "Se rendre vers le titre suivant"
 
 msgid "jump to chapter by number"
 msgstr "Aller au chapitre par numéro"
+
+#, fuzzy
+msgid "kB"
+msgstr "B"
 
 msgid "languages"
 msgstr "Langues"
@@ -11683,14 +11670,8 @@ msgstr "Tennis/Squash"
 msgid "testing"
 msgstr "Travail en cours..."
 
-msgid "This bouquet is protected by a parental control PIN"
-msgstr "Ce bouquet est protégé par un PIN contrôle parental"
-
 msgid "this recording"
 msgstr "Cet enregistrement"
-
-msgid "This service is protected by a parental control PIN"
-msgstr "Ce service est protégé par un PIN contrôle parental"
 
 msgid "toggle time, chapter, audio, subtitle info"
 msgstr "Commuter temps, chapitre, audio, info sous-titres"

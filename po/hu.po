@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-10 01:42+0300\n"
+"POT-Creation-Date: 2021-09-15 22:30+0300\n"
 "PO-Revision-Date: 2020-12-05 15:11+0100\n"
 "Last-Translator: mcfly82\n"
 "Language-Team: mcfly82 & wysless\n"
@@ -95,17 +95,11 @@ msgstr ""
 msgid " Warning: the selected tuner should not use SCR Unicable type for LNBs because each tuner need a own SCR number."
 msgstr ""
 
-msgid " extensions."
-msgstr " bővítmények."
-
 msgid " min"
 msgstr " perc"
 
 msgid " ms"
 msgstr " ms"
-
-msgid " packages selected."
-msgstr " szoftvercsomag kiválasztva."
 
 msgid " unicable LNB input of rotor"
 msgstr ""
@@ -113,18 +107,6 @@ msgstr ""
 #, python-format
 msgid "%(freespace)s %(percent)s free disk space"
 msgstr "%(freespace)s %(percent)s szabad tárterület"
-
-#, python-format
-msgid "%.0f GB"
-msgstr "%.0f GB"
-
-#, python-format
-msgid "%.0f MB"
-msgstr "%.0f MB"
-
-#, python-format
-msgid "%.0f kB"
-msgstr "%.0f kB"
 
 #, python-format
 msgid "%.1f° E"
@@ -175,10 +157,6 @@ msgstr "%m. %e %a"
 #. TRANSLATORS: long date representation short dayname daynum short monthname hour:minute in strftime() format! See 'man strftime'
 msgid "%a %e/%m  %-H:%M"
 msgstr "%m. %e %a  %-H:%M"
-
-#, python-format
-msgid "%d B"
-msgstr "%d B"
 
 #, python-format
 msgid "%d GB"
@@ -254,6 +232,12 @@ msgstr "%d perc"
 #, python-format
 msgid "%d ms"
 msgstr "%d ms"
+
+#, fuzzy, python-format
+msgid "%d package selected."
+msgid_plural "%d packages selected."
+msgstr[0] " szoftvercsomag kiválasztva."
+msgstr[1] " szoftvercsomag kiválasztva."
 
 #, python-format
 msgid "%d pixel wide"
@@ -577,6 +561,9 @@ msgstr "Egy felvétel folyamatban van. A keresés elindítása előtt állítsa 
 
 msgid "A recording is currently running. Please stop the recording before trying to start a testing DiSEqC."
 msgstr "Egy felvétel folyamatban van. A DiSEqC tesztelés elindítása előtt állítsa meg a felvételt."
+
+msgid "A repeating event is currently recording. What would you like to do?"
+msgstr "Ismétlődő felvétel megy. Mit csináljak?"
 
 #, python-format
 msgid "A required tool (%s) was not found."
@@ -2644,11 +2631,11 @@ msgstr "Bővítmény részletei: "
 msgid "Detect next boxes before standby"
 msgstr "Következő vevőkészülékek azonosítása készenlét előtt"
 
-msgid "Detected storage devices:"
-msgstr "Csatlakoztatott háttértárolók:"
-
 msgid "Detected NIMs:"
 msgstr "Csatlakoztatott tunerek:"
+
+msgid "Detected storage devices:"
+msgstr "Csatlakoztatott háttértárolók:"
 
 msgid "Device name:"
 msgstr "Eszköznév:"
@@ -3233,6 +3220,9 @@ msgstr "Adja meg az IP címet"
 msgid "Enter PIN"
 msgstr "Adja meg a PIN kódot"
 
+msgid "Enter PIN code"
+msgstr "Adja meg a PIN-kódot"
+
 msgid "Enter URL"
 msgstr "Adja meg az URL címet"
 
@@ -3250,9 +3240,6 @@ msgstr "Belépés a főmenübe..."
 
 msgid "Enter persistent PIN code"
 msgstr "Adja meg a tartós PIN-kódot"
-
-msgid "Enter PIN code"
-msgstr "Adja meg a PIN-kódot"
 
 msgid "Enter the frequency at which you LNB switches between low band and high band. For more information consult the spec sheet of your LNB."
 msgstr "Adja meg a frekvenciát, ahol a fej vált az alsó és a felső sáv között. További információért nézze meg a fej technikai adatlapját."
@@ -6740,14 +6727,6 @@ msgstr "Lejátszási lista ismétlése"
 msgid "Repeat type"
 msgstr "Ismétlés típusa"
 
-msgid ""
-"Repeating event currently recording.\n"
-"What do you want to do?"
-msgstr "Ismétlődő felvétel megy. Mit csináljak?"
-
-msgid "A repeating event is currently recording. What would you like to do?"
-msgstr "Ismétlődő felvétel megy. Mit csináljak?"
-
 msgid "Repeats"
 msgstr "Ismétlések"
 
@@ -8857,6 +8836,9 @@ msgstr "A PIN-kódot sikeresen megváltoztatta."
 msgid "The PIN code has been saved successfully."
 msgstr "A PIN-kód sikeresen tárolva."
 
+msgid "The PIN code you entered is wrong."
+msgstr "A megadott PIN kód helytelen."
+
 msgid "The PIN codes you entered are different."
 msgstr "A megadott PIN-kódok eltérnek egymástól."
 
@@ -8936,9 +8918,6 @@ msgstr ""
 msgid "The path %s already exists."
 msgstr "A %s útvonal már létezik."
 
-msgid "The PIN code you entered is wrong."
-msgstr "A megadott PIN kód helytelen."
-
 #, python-format
 msgid "The results have been written to %s"
 msgstr "Az eredmények ide lettek mentve %s"
@@ -9017,6 +8996,9 @@ msgstr ""
 
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "Ez a DVD RW medium már meg van formázva - a lemez újraformázásával minden adat el fog veszni."
+
+msgid "This bouquet is protected by a parental control PIN"
+msgstr "Ez a lista gyermekzár PIN-kóddal védett"
 
 msgid "This can be useful when using the CI(+) module. After the end of the recording, the service will be automatically stopped."
 msgstr ""
@@ -9130,11 +9112,11 @@ msgstr "Ez a lehetőség hosszú HDMI kábel használata esetén javasolt."
 msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr "Ezzel beállítja a hangya-zajcsökkentés elfojtását (ez az erősen tömörített adások során jelentkezhet). Így viszont a kép élességét is rontja."
 
-msgid "This option sets the picture contrast."
-msgstr "Ezzel beállítja a képernyő kontrasztját."
-
 msgid "This option sets the picture brightness."
 msgstr "Ezzel beállítja a képernyő fényerejét."
+
+msgid "This option sets the picture contrast."
+msgstr "Ezzel beállítja a képernyő kontrasztját."
 
 msgid "This option sets the picture flesh tones."
 msgstr "Ezzel beállítja a képen megjelenő bőrszínt."
@@ -9169,6 +9151,9 @@ msgstr "A bővítmény el lesz távolítva."
 #, python-format
 msgid "This receiver cannot decode %s streams!"
 msgstr "Ez a készülék nem képes %s folyamokat dekódolni!"
+
+msgid "This service is protected by a parental control PIN"
+msgstr "Ez a csatorna gyermekzárral védett"
 
 msgid "This setting allows the tuner configuration to be a duplication of how another tuner is already configured."
 msgstr "Ezzel átmásolhatja egy már beállított tuner beállításait."
@@ -9420,7 +9405,6 @@ msgstr "Tonga"
 msgid "Top and bottom"
 msgstr "Teteje és Alja"
 
-#, python-format
 msgid "Total clients streaming: "
 msgstr "Streamelő kliensek száma: "
 
@@ -9968,8 +9952,9 @@ msgstr "Rass interaktív szolgáltatás használata..."
 msgid "View details"
 msgstr "Részletek megtekintése"
 
-msgid "View list of available "
-msgstr "Az elérhetők listázása: "
+#, fuzzy, python-format
+msgid "View list of available %s extensions."
+msgstr "Az elérhető EPG-bővítmények listázása."
 
 msgid "View list of available CommonInterface extensions"
 msgstr "Az elérhető CI-Bővítmények listázása"
@@ -10537,9 +10522,6 @@ msgstr "Igen, a mentések visszaállítása nélkül"
 msgid "Yesterday"
 msgstr "Tegnap"
 
-msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
-msgstr "Az ön PIN-kódja 0000. Ez az alapértelmezett PIN-kód, így a gyermekzár nincs bekapcsolva!\n"
-
 #, python-format
 msgid ""
 "You already have a channel list installed,\n"
@@ -10635,6 +10617,9 @@ msgstr "Váltson át a csatornára %s (%s - '%s')!\n"
 
 msgid "You seem to be in timeshift!"
 msgstr "Úgy tűnik, folyamatban van időcsúsztatás!"
+
+msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
+msgstr "Az ön PIN-kódja 0000. Ez az alapértelmezett PIN-kód, így a gyermekzár nincs bekapcsolva!\n"
 
 msgid "Your collection exceeds the size of a single layer medium, you will need a blank dual layer DVD!"
 msgstr "A gyüjteményének mérete meghaladja egy sima rétegű DVD kapacitását, egy dupla-rétegű üres DVD lemezre lesz szüksége!"
@@ -10901,6 +10886,9 @@ msgstr "vissza"
 msgid "background image"
 msgstr "háttérkép"
 
+msgid "backup EPG cache"
+msgstr "EPG cache biztonsági mentése"
+
 msgid "ballet"
 msgstr "balett"
 
@@ -11057,9 +11045,6 @@ msgstr "szórakoztató (10-16 éves korosztály"
 
 msgid "entertainment (6-14 year old)"
 msgstr "szórakoztató (6-14 éves korosztály"
-
-msgid "backup EPG cache"
-msgstr "EPG cache biztonsági mentése"
 
 msgid "equestrian"
 msgstr "lovaglás"
@@ -11225,6 +11210,10 @@ msgstr "előreugrás a következő címhez"
 
 msgid "jump to chapter by number"
 msgstr "ugrás fejezethez szám alapján"
+
+#, fuzzy
+msgid "kB"
+msgstr "B"
 
 msgid "languages"
 msgstr "nyelvek"
@@ -11690,14 +11679,8 @@ msgstr "tenisz/fallabda"
 msgid "testing"
 msgstr "működőképes"
 
-msgid "This bouquet is protected by a parental control PIN"
-msgstr "Ez a lista gyermekzár PIN-kóddal védett"
-
 msgid "this recording"
 msgstr "ez a felvétel"
-
-msgid "This service is protected by a parental control PIN"
-msgstr "Ez a csatorna gyermekzárral védett"
 
 msgid "toggle time, chapter, audio, subtitle info"
 msgstr "idő, chapter, hangsáv, feliratsáv választás"

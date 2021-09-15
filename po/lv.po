@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-10 01:42+0300\n"
+"POT-Creation-Date: 2021-09-15 22:30+0300\n"
 "PO-Revision-Date: 2014-11-12 00:49+0200\n"
 "Last-Translator: Taapat <taapat@gmail.com>\n"
 "Language-Team: Taapat <taapat@gmail.com>\n"
@@ -97,17 +97,11 @@ msgstr ""
 msgid " Warning: the selected tuner should not use SCR Unicable type for LNBs because each tuner need a own SCR number."
 msgstr ""
 
-msgid " extensions."
-msgstr " paplašinājumiem."
-
 msgid " min"
 msgstr " min"
 
 msgid " ms"
 msgstr " ms"
-
-msgid " packages selected."
-msgstr " pakotnes izvēlētas."
 
 msgid " unicable LNB input of rotor"
 msgstr ""
@@ -115,18 +109,6 @@ msgstr ""
 #, python-format
 msgid "%(freespace)s %(percent)s free disk space"
 msgstr "%(freespace)s %(percent)s brīva vieta uz diska"
-
-#, python-format
-msgid "%.0f GB"
-msgstr "%.0f GB"
-
-#, python-format
-msgid "%.0f MB"
-msgstr "%.0f MB"
-
-#, python-format
-msgid "%.0f kB"
-msgstr "%.0f kB"
 
 #, python-format
 msgid "%.1f° E"
@@ -177,10 +159,6 @@ msgstr "%a %e.%m"
 #. TRANSLATORS: long date representation short dayname daynum short monthname hour:minute in strftime() format! See 'man strftime'
 msgid "%a %e/%m  %-H:%M"
 msgstr "%a %e.%m  %-H:%M"
-
-#, python-format
-msgid "%d B"
-msgstr "%d B"
 
 #, python-format
 msgid "%d GB"
@@ -263,6 +241,13 @@ msgstr "%d minūtes"
 #, python-format
 msgid "%d ms"
 msgstr "%d ms"
+
+#, fuzzy, python-format
+msgid "%d package selected."
+msgid_plural "%d packages selected."
+msgstr[0] " pakotnes izvēlētas."
+msgstr[1] " pakotnes izvēlētas."
+msgstr[2] " pakotnes izvēlētas."
 
 #, python-format
 msgid "%d pixel wide"
@@ -592,6 +577,9 @@ msgstr "Pašreiz notiek ieraksts. Pirms mēģināt meklēt lūdzu apturiet ierak
 
 msgid "A recording is currently running. Please stop the recording before trying to start a testing DiSEqC."
 msgstr "Pašreiz notiek ieraksts. Lūdzu apturiet ierakstu pirms mēģiniet testēt DiSEqC."
+
+msgid "A repeating event is currently recording. What would you like to do?"
+msgstr "Pārraide pašreiz ierakstās. Ko vēlaties darīt?"
 
 #, python-format
 msgid "A required tool (%s) was not found."
@@ -2661,11 +2649,11 @@ msgstr "Spraudņu papildinformācija: "
 msgid "Detect next boxes before standby"
 msgstr "Noteikt citas iekārtas pirms gaidstāves"
 
-msgid "Detected storage devices:"
-msgstr "Atmiņas iekārtas:"
-
 msgid "Detected NIMs:"
 msgstr "Uztvērēji:"
+
+msgid "Detected storage devices:"
+msgstr "Atmiņas iekārtas:"
 
 msgid "Device name:"
 msgstr "Iekārtas nosaukums:"
@@ -3250,6 +3238,9 @@ msgstr "IP adrese"
 msgid "Enter PIN"
 msgstr "Ievadiet PIN"
 
+msgid "Enter PIN code"
+msgstr "Ievadiet PIN kodu"
+
 msgid "Enter URL"
 msgstr "Adrese (URL)"
 
@@ -3267,9 +3258,6 @@ msgstr "Atvērt galveno izvēlni..."
 
 msgid "Enter persistent PIN code"
 msgstr "Ievadiet patstāvīgo PIN kodu"
-
-msgid "Enter PIN code"
-msgstr "Ievadiet PIN kodu"
 
 msgid "Enter the frequency at which you LNB switches between low band and high band. For more information consult the spec sheet of your LNB."
 msgstr "Ievadiet frekvenci, kurā jūs LNB pārslēdzas no zemas joslas uz augstu joslu. Plašāku informāciju skatiet LNB specifikācijā."
@@ -6755,16 +6743,6 @@ msgstr "Atkārtot repertuāru"
 msgid "Repeat type"
 msgstr "Atkārtošanas veids"
 
-msgid ""
-"Repeating event currently recording.\n"
-"What do you want to do?"
-msgstr ""
-"Pārraide pašreiz tiek ierakstīta.\n"
-"Ko vēlaties darīt?"
-
-msgid "A repeating event is currently recording. What would you like to do?"
-msgstr "Pārraide pašreiz ierakstās. Ko vēlaties darīt?"
-
 msgid "Repeats"
 msgstr "Atkārtojumi"
 
@@ -8870,6 +8848,9 @@ msgstr "PIN kods nomainīts veiksmīgi."
 msgid "The PIN code has been saved successfully."
 msgstr "PIN kods nomainīts veiksmīgi."
 
+msgid "The PIN code you entered is wrong."
+msgstr "Jūsu ievadītais PIN kods ir nepareizs."
+
 msgid "The PIN codes you entered are different."
 msgstr "Ievadītie PIN kodi atšķiras."
 
@@ -8946,9 +8927,6 @@ msgstr ""
 #, python-format
 msgid "The path %s already exists."
 msgstr "Ceļš %s jau eksistē."
-
-msgid "The PIN code you entered is wrong."
-msgstr "Jūsu ievadītais PIN kods ir nepareizs."
 
 #, python-format
 msgid "The results have been written to %s"
@@ -9028,6 +9006,9 @@ msgstr ""
 
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "Šis DVD RW disks jau ir formatēts - atkārtota formatēšana dzēsīs visu diska saturu."
+
+msgid "This bouquet is protected by a parental control PIN"
+msgstr "Šī buķete ir aizsargāta ar vecāku aizsardzību"
 
 msgid "This can be useful when using the CI(+) module. After the end of the recording, the service will be automatically stopped."
 msgstr ""
@@ -9141,11 +9122,11 @@ msgstr "Šī opcija var būt noderīga gariem HDMI kabeļiem."
 msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr "Iestata musquito trokšņa slāpēšanas līmeni (musquito troksnis ir traucējumi spēcīgas saspiešanas rezultātā). Diemžēl tas samazina attēla detalizāciju."
 
-msgid "This option sets the picture contrast."
-msgstr "Iestata attēla kontrastu."
-
 msgid "This option sets the picture brightness."
 msgstr "Iestata attēla spilgtumu."
+
+msgid "This option sets the picture contrast."
+msgstr "Iestata attēla kontrastu."
 
 msgid "This option sets the picture flesh tones."
 msgstr "Iestata attēla toņus."
@@ -9180,6 +9161,9 @@ msgstr "Šis spraudnis tiks noņemts."
 #, python-format
 msgid "This receiver cannot decode %s streams!"
 msgstr "Uztvērējs nevar dekodēt %s plūsmas!"
+
+msgid "This service is protected by a parental control PIN"
+msgstr "Šis kanāls ir aizsargāts ar vecāku kontroles PIN kodu"
 
 msgid "This setting allows the tuner configuration to be a duplication of how another tuner is already configured."
 msgstr "Atļauj dublēt uztvērēja konfigurāciju no cita uztvērēja."
@@ -9431,7 +9415,6 @@ msgstr "Tonga"
 msgid "Top and bottom"
 msgstr "Vertikāli"
 
-#, python-format
 msgid "Total clients streaming: "
 msgstr "Straumē klienti: "
 
@@ -9980,8 +9963,9 @@ msgstr "Skatīt Rass interaktīvi..."
 msgid "View details"
 msgstr "Papildus info"
 
-msgid "View list of available "
-msgstr "Skatīt sarakstu ar pieejamiem "
+#, fuzzy, python-format
+msgid "View list of available %s extensions."
+msgstr "Skatīt sarakstu ar pieejamiem EPG paplašinājumiem."
 
 msgid "View list of available CommonInterface extensions"
 msgstr "Skatīt sarakstu ar pieejamiem CommonInterfeisa paplašinājumiem"
@@ -10552,9 +10536,6 @@ msgstr "Jā, bez dublējumkopijas"
 msgid "Yesterday"
 msgstr "Vakar"
 
-msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
-msgstr "Jūsu PIN kods ir 0000. Tas ir kods pēc noklusējuma un izslēdz vecāku kontroli!\n"
-
 #, python-format
 msgid ""
 "You already have a channel list installed,\n"
@@ -10647,6 +10628,9 @@ msgstr "Pārslēgsies uz kanālu %s (%s - '%s')!\n"
 
 msgid "You seem to be in timeshift!"
 msgstr "Jūs izmantojat laika aizturi!"
+
+msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
+msgstr "Jūsu PIN kods ir 0000. Tas ir kods pēc noklusējuma un izslēdz vecāku kontroli!\n"
 
 msgid "Your collection exceeds the size of a single layer medium, you will need a blank dual layer DVD!"
 msgstr "Jūsu kolekcija pārsniedz diska lielumu, jums ir nepieciešams tukšs dubultslāņa DVD!"
@@ -10913,6 +10897,9 @@ msgstr "atpakaļ"
 msgid "background image"
 msgstr "fona attēls"
 
+msgid "backup EPG cache"
+msgstr "EPG kešatmiņas dublējumkopija"
+
 msgid "ballet"
 msgstr "balets"
 
@@ -11069,9 +11056,6 @@ msgstr "izklaide (10-16 gadu veciem)"
 
 msgid "entertainment (6-14 year old)"
 msgstr "izklaide (6-14 gadu veciem)"
-
-msgid "backup EPG cache"
-msgstr "EPG kešatmiņas dublējumkopija"
 
 msgid "equestrian"
 msgstr "jātnieka"
@@ -11237,6 +11221,10 @@ msgstr "pārlēkt uz nākamo nosaukumu"
 
 msgid "jump to chapter by number"
 msgstr "pārlākt uz nodaļu izmantojot ciparus"
+
+#, fuzzy
+msgid "kB"
+msgstr "B"
 
 msgid "languages"
 msgstr "valodas"
@@ -11702,14 +11690,8 @@ msgstr "teniss/skvošs"
 msgid "testing"
 msgstr "darbojas"
 
-msgid "This bouquet is protected by a parental control PIN"
-msgstr "Šī buķete ir aizsargāta ar vecāku aizsardzību"
-
 msgid "this recording"
 msgstr "šim ierakstam"
-
-msgid "This service is protected by a parental control PIN"
-msgstr "Šis kanāls ir aizsargāts ar vecāku kontroles PIN kodu"
 
 msgid "toggle time, chapter, audio, subtitle info"
 msgstr "Ie/izslēgt laiku, nodaļu, skaņu, subtitru informāciju"

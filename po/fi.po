@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-10 01:42+0300\n"
+"POT-Creation-Date: 2021-09-15 22:30+0300\n"
 "PO-Revision-Date: 2020-05-16 18:41+0200\n"
 "Last-Translator: jamu\n"
 "Language-Team: BoxFreak/jamu\n"
@@ -102,9 +102,6 @@ msgstr ""
 msgid " Warning: the selected tuner should not use SCR Unicable type for LNBs because each tuner need a own SCR number."
 msgstr ""
 
-msgid " extensions."
-msgstr " lisäosaa."
-
 #
 #, fuzzy
 msgid " min"
@@ -113,9 +110,6 @@ msgstr "%d min"
 msgid " ms"
 msgstr " ms"
 
-msgid " packages selected."
-msgstr " pakettia valittu."
-
 msgid " unicable LNB input of rotor"
 msgstr ""
 
@@ -123,18 +117,6 @@ msgstr ""
 #, python-format
 msgid "%(freespace)s %(percent)s free disk space"
 msgstr "%(freespace)s %(percent)s vapaata levytilaa"
-
-#, python-format
-msgid "%.0f GB"
-msgstr "%.0f GB"
-
-#, python-format
-msgid "%.0f MB"
-msgstr "%.0f MB"
-
-#, python-format
-msgid "%.0f kB"
-msgstr "%.0f kB"
 
 #, python-format
 msgid "%.1f° E"
@@ -185,10 +167,6 @@ msgstr "%a %e.%-m"
 #. TRANSLATORS: long date representation short dayname daynum short monthname hour:minute in strftime() format! See 'man strftime'
 msgid "%a %e/%m  %-H:%M"
 msgstr "%a %e.%-m  %-H:%M"
-
-#, python-format
-msgid "%d B"
-msgstr "%d B"
 
 #, python-format
 msgid "%d GB"
@@ -268,6 +246,12 @@ msgstr "%d minuuttia"
 #, python-format
 msgid "%d ms"
 msgstr "%d ms"
+
+#, fuzzy, python-format
+msgid "%d package selected."
+msgid_plural "%d packages selected."
+msgstr[0] " pakettia valittu."
+msgstr[1] " pakettia valittu."
 
 #, python-format
 msgid "%d pixel wide"
@@ -618,6 +602,10 @@ msgstr "Tallennus on käynnissä. Sammuta se ennen kanavanhakua."
 
 msgid "A recording is currently running. Please stop the recording before trying to start a testing DiSEqC."
 msgstr ""
+
+#
+msgid "A repeating event is currently recording. What would you like to do?"
+msgstr "Toistuvaa ajastusta tallennetaan. Mitä haluat tehdä?"
 
 #
 #, python-format
@@ -2924,12 +2912,12 @@ msgid "Detect next boxes before standby"
 msgstr ""
 
 #
-msgid "Detected storage devices:"
-msgstr "Kiintolevy:"
-
-#
 msgid "Detected NIMs:"
 msgstr "Virittimet:"
+
+#
+msgid "Detected storage devices:"
+msgstr "Kiintolevy:"
 
 msgid "Device name:"
 msgstr "Laitenimi:"
@@ -3612,6 +3600,9 @@ msgstr "Syötä IP-osoite"
 msgid "Enter PIN"
 msgstr "Syötä PIN-koodi"
 
+msgid "Enter PIN code"
+msgstr "Syötä PIN-koodi"
+
 msgid "Enter URL"
 msgstr "Syötä URL"
 
@@ -3630,9 +3621,6 @@ msgstr "Mene päävalikkoon..."
 
 msgid "Enter persistent PIN code"
 msgstr "Syötä katselun PIN-koodi"
-
-msgid "Enter PIN code"
-msgstr "Syötä PIN-koodi"
 
 msgid "Enter the frequency at which you LNB switches between low band and high band. For more information consult the spec sheet of your LNB."
 msgstr ""
@@ -7609,17 +7597,6 @@ msgstr "Toista soittolista"
 msgid "Repeat type"
 msgstr "Ajastus toistetaan"
 
-msgid ""
-"Repeating event currently recording.\n"
-"What do you want to do?"
-msgstr ""
-"Toistuvaa ajastusta tallennetaan.\n"
-"Mitä haluat tehdä?"
-
-#
-msgid "A repeating event is currently recording. What would you like to do?"
-msgstr "Toistuvaa ajastusta tallennetaan. Mitä haluat tehdä?"
-
 #
 msgid "Repeats"
 msgstr "Toistokerrat"
@@ -10012,6 +9989,10 @@ msgstr "PIN-koodin vaihto onnistui."
 msgid "The PIN code has been saved successfully."
 msgstr "PIN-koodin tallennus onnistui."
 
+#
+msgid "The PIN code you entered is wrong."
+msgstr "Syötit virheellisen tunnusluvun."
+
 msgid "The PIN codes you entered are different."
 msgstr "Syöttämäsi PIN-koodit olivat erilaiset."
 
@@ -10092,10 +10073,6 @@ msgstr ""
 #, python-format
 msgid "The path %s already exists."
 msgstr "Hakemisto %s on jo olemassa."
-
-#
-msgid "The PIN code you entered is wrong."
-msgstr "Syötit virheellisen tunnusluvun."
 
 #, python-format
 msgid "The results have been written to %s"
@@ -10182,6 +10159,10 @@ msgstr ""
 #
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "Tämä DVD-RW levy on jo alustettu - uudelleenalustus tuhoaa levyn kaiken sisällön."
+
+#
+msgid "This bouquet is protected by a parental control PIN"
+msgstr "Tämä kanava on suojattu lapsilukolla"
 
 msgid "This can be useful when using the CI(+) module. After the end of the recording, the service will be automatically stopped."
 msgstr ""
@@ -10294,11 +10275,11 @@ msgstr ""
 msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr "Tämä asetus määrittää mosquito-kohinan vaimennuksen määrän (mosquito-kohina on suuren pakkauksen aiheuttama kuvavirhe). Tämä säätö pehmentää kuvan yksityiskohtia."
 
-msgid "This option sets the picture contrast."
-msgstr ""
-
 msgid "This option sets the picture brightness."
 msgstr "Tämä asetus määrittää kuvan kirkkauden."
+
+msgid "This option sets the picture contrast."
+msgstr ""
 
 msgid "This option sets the picture flesh tones."
 msgstr "Tämä asetus määrittää ihonvärin sävyn."
@@ -10337,6 +10318,10 @@ msgstr "Tämä lisäosa poistetaan."
 #, python-format
 msgid "This receiver cannot decode %s streams!"
 msgstr "Tämä vastaanotin ei osaa purkaa %s striimejä!"
+
+#
+msgid "This service is protected by a parental control PIN"
+msgstr "Tämä kanava on suojattu lapsilukolla"
 
 msgid "This setting allows the tuner configuration to be a duplication of how another tuner is already configured."
 msgstr "Tämä asetus sallii viritinasetusten kopioinnin jo valmiiksi säädetystä virittimestä."
@@ -10627,7 +10612,6 @@ msgstr "Tonga"
 msgid "Top and bottom"
 msgstr "Ylä ja ala"
 
-#, python-format
 msgid "Total clients streaming: "
 msgstr "Etäasiakkaita: "
 
@@ -11250,8 +11234,9 @@ msgid "View details"
 msgstr "Lisätiedot"
 
 #
-msgid "View list of available "
-msgstr "Näytä saatavilla olevat"
+#, fuzzy, python-format
+msgid "View list of available %s extensions."
+msgstr "Näytä saatavilla olevat EPG-laajennukset"
 
 #
 msgid "View list of available CommonInterface extensions"
@@ -11870,9 +11855,6 @@ msgstr "Kyllä, ilman varmuuskopita"
 msgid "Yesterday"
 msgstr "Eilen"
 
-msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
-msgstr ""
-
 #, python-format
 msgid ""
 "You already have a channel list installed,\n"
@@ -11963,6 +11945,9 @@ msgid "You must switch to the service %s (%s - '%s')!\n"
 msgstr "Sinun täytyy vaihtaa kanavalle %s (%s - '%s')!\n"
 
 msgid "You seem to be in timeshift!"
+msgstr ""
+
+msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
 msgstr ""
 
 msgid "Your collection exceeds the size of a single layer medium, you will need a blank dual layer DVD!"
@@ -12249,6 +12234,9 @@ msgstr "Takaisin"
 msgid "background image"
 msgstr "Taustakuva"
 
+msgid "backup EPG cache"
+msgstr "Ohjelmaoppaan välimuistin varmuuskopio"
+
 msgid "ballet"
 msgstr "baletti"
 
@@ -12429,9 +12417,6 @@ msgstr "viihde (10-16 vuotiaat)"
 
 msgid "entertainment (6-14 year old)"
 msgstr "viihde (6-14 vuotiaat)"
-
-msgid "backup EPG cache"
-msgstr "Ohjelmaoppaan välimuistin varmuuskopio"
 
 msgid "equestrian"
 msgstr "ratsastus"
@@ -12617,6 +12602,11 @@ msgstr "Hyppää eteenpäin seuraavaan kappaleeseen"
 
 msgid "jump to chapter by number"
 msgstr ""
+
+#
+#, fuzzy
+msgid "kB"
+msgstr "B"
 
 msgid "languages"
 msgstr "kielet"
@@ -13154,16 +13144,8 @@ msgid "testing"
 msgstr "Työskentelee"
 
 #
-msgid "This bouquet is protected by a parental control PIN"
-msgstr "Tämä kanava on suojattu lapsilukolla"
-
-#
 msgid "this recording"
 msgstr "Tämä tallennus"
-
-#
-msgid "This service is protected by a parental control PIN"
-msgstr "Tämä kanava on suojattu lapsilukolla"
 
 #
 msgid "toggle time, chapter, audio, subtitle info"

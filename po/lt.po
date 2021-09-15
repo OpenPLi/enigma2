@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-12 09:42+0200\n"
+"POT-Creation-Date: 2021-09-15 22:30+0300\n"
 "PO-Revision-Date: 2021-09-09 21:28+0300\n"
 "Last-Translator: Audronis <adga45@gmail.com>\n"
 "Language-Team: Adga (C) <adga45@gmail.com>\n"
@@ -94,17 +94,11 @@ msgstr " - Unicable / JESS LNBs nerastas"
 msgid " Warning: the selected tuner should not use SCR Unicable type for LNBs because each tuner need a own SCR number."
 msgstr " Įspėjimas: pasirinktas imtuvas neturėtų naudoti SCR unicable tipo LNB, nes kiekvienam imtuvui reikia savo SCR numerio."
 
-msgid " extensions."
-msgstr " plėtiniai."
-
 msgid " min"
 msgstr " min"
 
 msgid " ms"
 msgstr " msek"
-
-msgid " packages selected."
-msgstr " išsirinkti paketai."
 
 msgid " unicable LNB input of rotor"
 msgstr " unicable LNB rotoriaus įvestis"
@@ -112,18 +106,6 @@ msgstr " unicable LNB rotoriaus įvestis"
 #, python-format
 msgid "%(freespace)s %(percent)s free disk space"
 msgstr "laisvos vietos diske %(freespace)s %(percent)s"
-
-#, python-format
-msgid "%.0f GB"
-msgstr "%.0f GB"
-
-#, python-format
-msgid "%.0f MB"
-msgstr "%.0f MB"
-
-#, python-format
-msgid "%.0f kB"
-msgstr "%.0f kB"
 
 #, python-format
 msgid "%.1f° E"
@@ -174,10 +156,6 @@ msgstr "%m/%e %a"
 #. TRANSLATORS: long date representation short dayname daynum short monthname hour:minute in strftime() format! See 'man strftime'
 msgid "%a %e/%m  %-H:%M"
 msgstr "%m/%e %a  %-H:%M"
-
-#, python-format
-msgid "%d B"
-msgstr "%d B"
 
 #, python-format
 msgid "%d GB"
@@ -260,6 +238,13 @@ msgstr "%d minutės"
 #, python-format
 msgid "%d ms"
 msgstr "%d msek"
+
+#, fuzzy, python-format
+msgid "%d package selected."
+msgid_plural "%d packages selected."
+msgstr[0] " išsirinkti paketai."
+msgstr[1] " išsirinkti paketai."
+msgstr[2] " išsirinkti paketai."
 
 #, python-format
 msgid "%d pixel wide"
@@ -588,6 +573,9 @@ msgstr "Dabar vyksta įrašymas. Prieš paiešką, išjunkite įrašymą."
 
 msgid "A recording is currently running. Please stop the recording before trying to start a testing DiSEqC."
 msgstr "Dabar vyksta įrašymas. Prieš tikrindami DiSEqC, nutraukite įrašymą."
+
+msgid "A repeating event is currently recording. What would you like to do?"
+msgstr "Kartojamas įvykis dabar įrašinėjamas. Ką jūs norite daryti?"
 
 #, python-format
 msgid "A required tool (%s) was not found."
@@ -2657,11 +2645,11 @@ msgstr "Išsamiau apie priedą: "
 msgid "Detect next boxes before standby"
 msgstr "Aptikti kitą imtuvą prieš budėjimą"
 
-msgid "Detected storage devices:"
-msgstr "Aptiktas HDD:"
-
 msgid "Detected NIMs:"
 msgstr "Aptikti imtuvai:"
+
+msgid "Detected storage devices:"
+msgstr "Aptiktas HDD:"
 
 msgid "Device name:"
 msgstr "Įrenginio pavadinimas:"
@@ -3248,6 +3236,9 @@ msgstr "Įrašykite IP adresą"
 msgid "Enter PIN"
 msgstr "Įrašykite PIN"
 
+msgid "Enter PIN code"
+msgstr "Įrašykite PIN kodą"
+
 msgid "Enter URL"
 msgstr "Įrašykite internetinį adresą"
 
@@ -3265,9 +3256,6 @@ msgstr "Eiti į pagrindinį meniu..."
 
 msgid "Enter persistent PIN code"
 msgstr "Įrašykite pastovų PIN kodą"
-
-msgid "Enter PIN code"
-msgstr "Įrašykite PIN kodą"
 
 msgid "Enter the frequency at which you LNB switches between low band and high band. For more information consult the spec sheet of your LNB."
 msgstr "Įveskite dažnį, kuriuo jūs LNB perjungiate tarp žemos ir aukščiausios juostos. Daugiau informacijos rasite LNB specifikacijų lape."
@@ -6749,16 +6737,6 @@ msgstr "Pakartoti grojaraštį"
 msgid "Repeat type"
 msgstr "Kartojimo tipas"
 
-msgid ""
-"Repeating event currently recording.\n"
-"What do you want to do?"
-msgstr ""
-"Kartojamas įvykis dabar įrašinėjamas.\n"
-"Ką jūs norite daryti?"
-
-msgid "A repeating event is currently recording. What would you like to do?"
-msgstr "Kartojamas įvykis dabar įrašinėjamas. Ką jūs norite daryti?"
-
 msgid "Repeats"
 msgstr "Pakartojimai"
 
@@ -8865,6 +8843,9 @@ msgstr "PIN kodas pakeistas sėkmingai."
 msgid "The PIN code has been saved successfully."
 msgstr "PIN kodas sėkmingai išsaugotas."
 
+msgid "The PIN code you entered is wrong."
+msgstr "Įrašėte neteisingą PIN kodą."
+
 msgid "The PIN codes you entered are different."
 msgstr "Jūsų įrašyti PIN kodai yra skirtingi."
 
@@ -8944,9 +8925,6 @@ msgstr ""
 msgid "The path %s already exists."
 msgstr "Kelias %s jau yra."
 
-msgid "The PIN code you entered is wrong."
-msgstr "Įrašėte neteisingą PIN kodą."
-
 #, python-format
 msgid "The results have been written to %s"
 msgstr "Rezultatai įrašyti į %s"
@@ -9025,6 +9003,9 @@ msgstr ""
 
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "Šis DVD RW diskas jau yra suformatuotas - formatavimas iš naujo, ištrins visą disko turinį."
+
+msgid "This bouquet is protected by a parental control PIN"
+msgstr "Šis paketas apsaugotas tėvų kontrolės PIN kodu"
 
 msgid "This can be useful when using the CI(+) module. After the end of the recording, the service will be automatically stopped."
 msgstr "Tai gali būti naudinga naudojant CI(+) modulį. Pasibaigus įrašymui, paslauga bus automatiškai sustabdyta."
@@ -9138,11 +9119,11 @@ msgstr "Ši parinktis gali būti naudinga ilgiems HDMI laidams."
 msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr "Ši parinktis nustato \"moskitų\" triukšmų šalinimą (lyg uodų spiečiai apie kontūrus - suspaudimo metu atsiradę atsitiktinės nereikalingos detalės). Žinoma, tai pasiekiama bendro vaizdo ryškumo sumažėjimo kaina."
 
-msgid "This option sets the picture contrast."
-msgstr "Ši parinktis nustato vaizdo kontrastą."
-
 msgid "This option sets the picture brightness."
 msgstr "Ši parinktis nustato vaizdo šviesumą."
+
+msgid "This option sets the picture contrast."
+msgstr "Ši parinktis nustato vaizdo kontrastą."
 
 msgid "This option sets the picture flesh tones."
 msgstr "Ši parinktis nustato vaizdo atspalvius."
@@ -9177,6 +9158,9 @@ msgstr "Šis priedas bus pašalintas."
 #, python-format
 msgid "This receiver cannot decode %s streams!"
 msgstr "Šis imtuvas negali iššifruoti %s srautų!"
+
+msgid "This service is protected by a parental control PIN"
+msgstr "Šis kanalas apsaugotas tėvų kontrolės PIN kodu"
 
 msgid "This setting allows the tuner configuration to be a duplication of how another tuner is already configured."
 msgstr "Šis nustatymas leidžia nustatyti imtuvo konfigūraciją, kad dubliuoti kito imtuvo nustatymus."
@@ -9428,7 +9412,6 @@ msgstr "Tongų"
 msgid "Top and bottom"
 msgstr "Viršuje ir apačioje"
 
-#, python-format
 msgid "Total clients streaming: "
 msgstr "Iš viso srautu besinaudojančių klientų: "
 
@@ -9977,8 +9960,9 @@ msgstr "Interaktyvi Rass peržiūra..."
 msgid "View details"
 msgstr "Išsami informacija"
 
-msgid "View list of available "
-msgstr "Peržiūrėti galimą sąrašą "
+#, fuzzy, python-format
+msgid "View list of available %s extensions."
+msgstr "Peržiūrėti sąrašą galimam EPG papildymui."
 
 msgid "View list of available CommonInterface extensions"
 msgstr "Peržiūrėti sąrašą galimam Įstatomų modulių papildymui"
@@ -10549,9 +10533,6 @@ msgstr "Taip, be atsarginės kopijos"
 msgid "Yesterday"
 msgstr "Vakar"
 
-msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
-msgstr "Jūsų PIN kodas yra 0000. Tai yra numatytasis PIN kodas ir jis išjungia tėvų kontrolę!\n"
-
 #, python-format
 msgid ""
 "You already have a channel list installed,\n"
@@ -10646,6 +10627,9 @@ msgstr "Jūs turite perjungti į %s (%s - '%s') kanalą!\n"
 
 msgid "You seem to be in timeshift!"
 msgstr "Panašu, kad naudojamas laiko poslinkis!"
+
+msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
+msgstr "Jūsų PIN kodas yra 0000. Tai yra numatytasis PIN kodas ir jis išjungia tėvų kontrolę!\n"
 
 msgid "Your collection exceeds the size of a single layer medium, you will need a blank dual layer DVD!"
 msgstr "Jūsų kolekcija viršyja vieno sluoksnio DVD disko dydį, jums reikės tuščio dvigubo sluoksnio DVD!"
@@ -10911,6 +10895,9 @@ msgstr "atgal"
 msgid "background image"
 msgstr "fono paveikslėlis"
 
+msgid "backup EPG cache"
+msgstr "EPG talpyklos atsarginė kopija"
+
 msgid "ballet"
 msgstr "baletas"
 
@@ -11067,9 +11054,6 @@ msgstr "pramogos (10-16 metų vaikams)"
 
 msgid "entertainment (6-14 year old)"
 msgstr "pramogos (6-14 metų vaikams)"
-
-msgid "backup EPG cache"
-msgstr "EPG talpyklos atsarginė kopija"
 
 msgid "equestrian"
 msgstr "jojimas"
@@ -11235,6 +11219,10 @@ msgstr "peršokti į sekantį pavadinimą"
 
 msgid "jump to chapter by number"
 msgstr "peršokti į skyrių pagal numerį"
+
+#, fuzzy
+msgid "kB"
+msgstr "B"
 
 msgid "languages"
 msgstr "kalbos"
@@ -11696,14 +11684,8 @@ msgstr "tenisas, skvošas"
 msgid "testing"
 msgstr "testuojama"
 
-msgid "This bouquet is protected by a parental control PIN"
-msgstr "Šis paketas apsaugotas tėvų kontrolės PIN kodu"
-
 msgid "this recording"
 msgstr "šis įrašas"
-
-msgid "This service is protected by a parental control PIN"
-msgstr "Šis kanalas apsaugotas tėvų kontrolės PIN kodu"
 
 msgid "toggle time, chapter, audio, subtitle info"
 msgstr "perjungti laiką, skyrių, garsą, subtitrų informaciją"

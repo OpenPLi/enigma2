@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-10 01:42+0300\n"
+"POT-Creation-Date: 2021-09-15 22:30+0300\n"
 "PO-Revision-Date: 2021-03-06\n"
 "Last-Translator: LinuxSTV\n"
 "Language-Team: \n"
@@ -96,9 +96,6 @@ msgstr ""
 msgid " Warning: the selected tuner should not use SCR Unicable type for LNBs because each tuner need a own SCR number."
 msgstr ""
 
-msgid " extensions."
-msgstr " ekstensi."
-
 #, fuzzy
 msgid " min"
 msgstr "%d mnt"
@@ -106,27 +103,12 @@ msgstr "%d mnt"
 msgid " ms"
 msgstr " md"
 
-msgid " packages selected."
-msgstr " paket yang dipilih."
-
 msgid " unicable LNB input of rotor"
 msgstr ""
 
 #, python-format
 msgid "%(freespace)s %(percent)s free disk space"
 msgstr "%(freespace)s %(percent)s sisa penyimpanan disk"
-
-#, python-format
-msgid "%.0f GB"
-msgstr "%.0f GB"
-
-#, python-format
-msgid "%.0f MB"
-msgstr "%.0f MB"
-
-#, python-format
-msgid "%.0f kB"
-msgstr "%.0f kB"
 
 #, python-format
 msgid "%.1f° E"
@@ -178,10 +160,6 @@ msgstr "%a %e/%m"
 #. TRANSLATORS: long date representation short dayname daynum short monthname hour:minute in strftime() format! See 'man strftime'
 msgid "%a %e/%m  %-H:%M"
 msgstr "%a %e/%m  %-H:%M"
-
-#, python-format
-msgid "%d B"
-msgstr ""
 
 #, python-format
 msgid "%d GB"
@@ -257,6 +235,12 @@ msgstr "%d menit"
 #, python-format
 msgid "%d ms"
 msgstr "%d md"
+
+#, fuzzy, python-format
+msgid "%d package selected."
+msgid_plural "%d packages selected."
+msgstr[0] " paket yang dipilih."
+msgstr[1] " paket yang dipilih."
 
 #, python-format
 msgid "%d pixel wide"
@@ -587,6 +571,9 @@ msgstr "Perekaman sedang berjalan saat ini. Mohon hentikan rekaman sebelum menco
 
 msgid "A recording is currently running. Please stop the recording before trying to start a testing DiSEqC."
 msgstr "Perekaman sedang berjalan saat ini. Mohon hentikan rekaman sebelum mencoba memulai test DiSEqC."
+
+msgid "A repeating event is currently recording. What would you like to do?"
+msgstr "Mengulang acara yg saat ini merekam. Apa yang ingin anda lakukan?"
 
 #, python-format
 msgid "A required tool (%s) was not found."
@@ -2727,11 +2714,11 @@ msgstr "Rincian plugin: "
 msgid "Detect next boxes before standby"
 msgstr "Temukan Rx berikutnya sebelum standby"
 
-msgid "Detected storage devices:"
-msgstr "HDD terdeteksi:"
-
 msgid "Detected NIMs:"
 msgstr "NIMs terdeteksi:"
+
+msgid "Detected storage devices:"
+msgstr "HDD terdeteksi:"
 
 msgid "Device name:"
 msgstr "Nama perangkat:"
@@ -3334,6 +3321,9 @@ msgstr "IP address"
 msgid "Enter PIN"
 msgstr "Masukkan PIN"
 
+msgid "Enter PIN code"
+msgstr "Masukkan kode PIN"
+
 #, fuzzy
 msgid "Enter URL"
 msgstr "Masukkan PIN"
@@ -3352,9 +3342,6 @@ msgstr "Masuk ke menu utama"
 
 msgid "Enter persistent PIN code"
 msgstr "Masukkan kode PIN yg sesuai"
-
-msgid "Enter PIN code"
-msgstr "Masukkan kode PIN"
 
 msgid "Enter the frequency at which you LNB switches between low band and high band. For more information consult the spec sheet of your LNB."
 msgstr "Masukkan frekuensi dimana LNB anda bergantian antara pita rendah dan pita tinggi. Untuk informasi lanjut, periksa lembar spek LNB anda."
@@ -6955,16 +6942,6 @@ msgstr "Ulang daftar putar"
 msgid "Repeat type"
 msgstr "Tipe ulang"
 
-msgid ""
-"Repeating event currently recording.\n"
-"What do you want to do?"
-msgstr ""
-"Mengulang acara yg saat ini merekam.\n"
-"Apa yang ingin anda lakukan?"
-
-msgid "A repeating event is currently recording. What would you like to do?"
-msgstr "Mengulang acara yg saat ini merekam. Apa yang ingin anda lakukan?"
-
 msgid "Repeats"
 msgstr "Ulang"
 
@@ -9136,6 +9113,9 @@ msgstr "Kode PIN telah berhasil diganti."
 msgid "The PIN code has been saved successfully."
 msgstr "Kode PIN telah berhasil disimpan"
 
+msgid "The PIN code you entered is wrong."
+msgstr "Kode PIN yg anda masukkan salah."
+
 msgid "The PIN codes you entered are different."
 msgstr "Kode PIN yg anda masukkan berbeda."
 
@@ -9214,9 +9194,6 @@ msgstr ""
 #, python-format
 msgid "The path %s already exists."
 msgstr "Arahtuju %s telah ada."
-
-msgid "The PIN code you entered is wrong."
-msgstr "Kode PIN yg anda masukkan salah."
 
 #, python-format
 msgid "The results have been written to %s"
@@ -9299,6 +9276,9 @@ msgstr ""
 
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "Media DVD RW ini sudah diformat - memformat ulang akan menghapus semua isi disk."
+
+msgid "This bouquet is protected by a parental control PIN"
+msgstr "Buket ini dilindungi dgn PIN pengawasan orangtua"
 
 msgid "This can be useful when using the CI(+) module. After the end of the recording, the service will be automatically stopped."
 msgstr ""
@@ -9414,11 +9394,11 @@ msgstr "Pilihan ini bisa bermanfaat untuk kabel HDMI panjang."
 msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr "Pilihan ini mengatur tingkat tekanan kebisingan nyamuk (Kebisingan Nyamuk adalah salah identifikasi random akibat tekanan kuat). Lebih jelasnya, ini mengorbankan detil gambar."
 
-msgid "This option sets the picture contrast."
-msgstr "Pilihan ini mengatur kontras gambar."
-
 msgid "This option sets the picture brightness."
 msgstr "Pilihan ini mengatur kecerahan gambar."
+
+msgid "This option sets the picture contrast."
+msgstr "Pilihan ini mengatur kontras gambar."
 
 msgid "This option sets the picture flesh tones."
 msgstr "Pilihan ini mengatur corak dalam gambar."
@@ -9453,6 +9433,9 @@ msgstr "Plugin ini akan dihapus."
 #, python-format
 msgid "This receiver cannot decode %s streams!"
 msgstr "Rx ini tidak bisa mendekode stream %s!"
+
+msgid "This service is protected by a parental control PIN"
+msgstr "Layanan ini dilindungi dgn PIN pengawasan orangtua"
 
 msgid "This setting allows the tuner configuration to be a duplication of how another tuner is already configured."
 msgstr "Pengaturan ini memungkinkan setelan penala untuk jadi duplikasi bagi penala lain yg telah disetel."
@@ -9710,7 +9693,6 @@ msgstr "Tonga"
 msgid "Top and bottom"
 msgstr "Atas dan bawah"
 
-#, python-format
 msgid "Total clients streaming: "
 msgstr "Total klien streaming: "
 
@@ -10282,8 +10264,9 @@ msgstr "View Rass interactive..."
 msgid "View details"
 msgstr "Tinjau rincian"
 
-msgid "View list of available "
-msgstr "Tinjau daftar ketersedaan "
+#, fuzzy, python-format
+msgid "View list of available %s extensions."
+msgstr "Tinjau daftar ketersedaan ekstensi EPG."
 
 msgid "View list of available CommonInterface extensions"
 msgstr "Tinjau daftar ketersedaan ekstensi CommonInterface"
@@ -10871,10 +10854,6 @@ msgstr "Ya, tanpa cadangan"
 msgid "Yesterday"
 msgstr "Kemarin"
 
-#, fuzzy
-msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
-msgstr "Kode PIN anda adalah 0000. Ini adalah kode PIN bawaan pabrik dan ia mematikan kontrol orang tua!\n"
-
 #, python-format
 msgid ""
 "You already have a channel list installed,\n"
@@ -10969,6 +10948,10 @@ msgstr "Anda harus beralih ke layanan %s (%s - '%s')!\n"
 
 msgid "You seem to be in timeshift!"
 msgstr ""
+
+#, fuzzy
+msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
+msgstr "Kode PIN anda adalah 0000. Ini adalah kode PIN bawaan pabrik dan ia mematikan kontrol orang tua!\n"
 
 msgid "Your collection exceeds the size of a single layer medium, you will need a blank dual layer DVD!"
 msgstr "Koleksi anda melebihi ukuran media satu lapis, anda memerlukan sebuah DVD dua lapis!"
@@ -11238,6 +11221,9 @@ msgstr "kembali"
 msgid "background image"
 msgstr "gambar latar"
 
+msgid "backup EPG cache"
+msgstr "cadangan cache EPG"
+
 msgid "ballet"
 msgstr "ballet"
 
@@ -11394,9 +11380,6 @@ msgstr "hiburan (umur 10-16 tahun)"
 
 msgid "entertainment (6-14 year old)"
 msgstr "hiburan (umur 6-14 tahun)"
-
-msgid "backup EPG cache"
-msgstr "cadangan cache EPG"
 
 msgid "equestrian"
 msgstr "equestrian"
@@ -11567,6 +11550,10 @@ msgstr "lanjut ke judul berikutnya"
 
 msgid "jump to chapter by number"
 msgstr "lompat ke bab berdasarkan nomor"
+
+#, fuzzy
+msgid "kB"
+msgstr "B"
 
 msgid "languages"
 msgstr "bahasa"
@@ -12038,14 +12025,8 @@ msgstr "tennis/squash"
 msgid "testing"
 msgstr "berfungsi"
 
-msgid "This bouquet is protected by a parental control PIN"
-msgstr "Buket ini dilindungi dgn PIN pengawasan orangtua"
-
 msgid "this recording"
 msgstr "rekaman ini"
-
-msgid "This service is protected by a parental control PIN"
-msgstr "Layanan ini dilindungi dgn PIN pengawasan orangtua"
 
 msgid "toggle time, chapter, audio, subtitle info"
 msgstr "alihkan waktu, bab, audio, info terjemahan"

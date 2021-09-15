@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Project Slovenia\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-10 01:42+0300\n"
+"POT-Creation-Date: 2021-09-15 22:30+0300\n"
 "PO-Revision-Date: 2020-05-16 18:48+0200\n"
 "Last-Translator: Taykun345 <support@satnigmo.com>\n"
 "Language-Team: Satnigmo <support@satnigmo.com>\n"
@@ -100,9 +100,6 @@ msgstr ""
 msgid " Warning: the selected tuner should not use SCR Unicable type for LNBs because each tuner need a own SCR number."
 msgstr ""
 
-msgid " extensions."
-msgstr "razširitve."
-
 #
 #, fuzzy
 msgid " min"
@@ -111,9 +108,6 @@ msgstr "%d min"
 msgid " ms"
 msgstr " ms"
 
-msgid " packages selected."
-msgstr " izbranih paketov."
-
 msgid " unicable LNB input of rotor"
 msgstr ""
 
@@ -121,18 +115,6 @@ msgstr ""
 #, python-format
 msgid "%(freespace)s %(percent)s free disk space"
 msgstr "%(freespace)s %(percent)s praznega prostora na disku"
-
-#, python-format
-msgid "%.0f GB"
-msgstr ""
-
-#, python-format
-msgid "%.0f MB"
-msgstr ""
-
-#, python-format
-msgid "%.0f kB"
-msgstr ""
 
 #, python-format
 msgid "%.1f° E"
@@ -185,10 +167,6 @@ msgstr "%a %e/%m"
 #. TRANSLATORS: long date representation short dayname daynum short monthname hour:minute in strftime() format! See 'man strftime'
 msgid "%a %e/%m  %-H:%M"
 msgstr "%a %e/%m  %-H:%M"
-
-#, python-format
-msgid "%d B"
-msgstr ""
 
 #, python-format
 msgid "%d GB"
@@ -284,6 +262,14 @@ msgstr "%d minut"
 #, python-format
 msgid "%d ms"
 msgstr ""
+
+#, fuzzy, python-format
+msgid "%d package selected."
+msgid_plural "%d packages selected."
+msgstr[0] " izbranih paketov."
+msgstr[1] " izbranih paketov."
+msgstr[2] " izbranih paketov."
+msgstr[3] " izbranih paketov."
 
 #, python-format
 msgid "%d pixel wide"
@@ -662,6 +648,10 @@ msgstr "Trenutno v ozadju poteka snemanje. Če želite pričeti s pregledovanjem
 
 msgid "A recording is currently running. Please stop the recording before trying to start a testing DiSEqC."
 msgstr ""
+
+#
+msgid "A repeating event is currently recording. What would you like to do?"
+msgstr "Snemanje ponavljajočega dogodka v teku. Kaj želite storiti?"
 
 #
 #, python-format
@@ -3065,12 +3055,12 @@ msgid "Detect next boxes before standby"
 msgstr ""
 
 #
-msgid "Detected storage devices:"
-msgstr "Zaznane shranjevalne naprave:"
-
-#
 msgid "Detected NIMs:"
 msgstr "Zaznani kanalniki:"
+
+#
+msgid "Detected storage devices:"
+msgstr "Zaznane shranjevalne naprave:"
 
 msgid "Device name:"
 msgstr "Ime naprave:"
@@ -3790,6 +3780,10 @@ msgstr "IP naslov"
 msgid "Enter PIN"
 msgstr ""
 
+#
+msgid "Enter PIN code"
+msgstr "Vnesite PIN kodo"
+
 msgid "Enter URL"
 msgstr ""
 
@@ -3808,10 +3802,6 @@ msgstr "Vstop v glavni meni"
 
 msgid "Enter persistent PIN code"
 msgstr ""
-
-#
-msgid "Enter PIN code"
-msgstr "Vnesite PIN kodo"
 
 msgid "Enter the frequency at which you LNB switches between low band and high band. For more information consult the spec sheet of your LNB."
 msgstr ""
@@ -7894,17 +7884,6 @@ msgstr "Ponovitev seznama predvjanja"
 msgid "Repeat type"
 msgstr "Vrsta ponavljanja"
 
-msgid ""
-"Repeating event currently recording.\n"
-"What do you want to do?"
-msgstr ""
-"Snemanje ponavljajočega dogodka je v teku ... \n"
-"Kaj želite storiti?"
-
-#
-msgid "A repeating event is currently recording. What would you like to do?"
-msgstr "Snemanje ponavljajočega dogodka v teku. Kaj želite storiti?"
-
 #
 msgid "Repeats"
 msgstr "Ponovitve"
@@ -10409,6 +10388,10 @@ msgstr "PIN koda je spremenjena."
 msgid "The PIN code has been saved successfully."
 msgstr ""
 
+#
+msgid "The PIN code you entered is wrong."
+msgstr "Napačna PIN koda."
+
 msgid "The PIN codes you entered are different."
 msgstr "Napačna PIN koda."
 
@@ -10472,10 +10455,6 @@ msgstr ""
 #, python-format
 msgid "The path %s already exists."
 msgstr "Pot %s že obstaja."
-
-#
-msgid "The PIN code you entered is wrong."
-msgstr "Napačna PIN koda."
 
 #, python-format
 msgid "The results have been written to %s"
@@ -10569,6 +10548,9 @@ msgstr ""
 #
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "DVD RW medij je že formatiran-ponovno formatiranje bo izbrisalo vso vsebino na mediju!"
+
+msgid "This bouquet is protected by a parental control PIN"
+msgstr "Ta seznam kanalov je zaščiten s PIN kodo"
 
 msgid "This can be useful when using the CI(+) module. After the end of the recording, the service will be automatically stopped."
 msgstr ""
@@ -10679,10 +10661,10 @@ msgstr ""
 msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr ""
 
-msgid "This option sets the picture contrast."
+msgid "This option sets the picture brightness."
 msgstr ""
 
-msgid "This option sets the picture brightness."
+msgid "This option sets the picture contrast."
 msgstr ""
 
 msgid "This option sets the picture flesh tones."
@@ -10723,6 +10705,10 @@ msgstr "Ta vtičnik bo odstranjen."
 #, python-format
 msgid "This receiver cannot decode %s streams!"
 msgstr "Sprejemnik ne more odkleniti %s tokov!"
+
+#
+msgid "This service is protected by a parental control PIN"
+msgstr "Kanal je zaščiten s PIN kodo"
 
 msgid "This setting allows the tuner configuration to be a duplication of how another tuner is already configured."
 msgstr ""
@@ -11019,7 +11005,6 @@ msgstr ""
 msgid "Top and bottom"
 msgstr "Zgoraj in spodaj"
 
-#, python-format
 msgid "Total clients streaming: "
 msgstr ""
 
@@ -11667,8 +11652,9 @@ msgid "View details"
 msgstr "Ogled podrobnosti"
 
 #
-msgid "View list of available "
-msgstr "Ogled seznama razpoložljivih"
+#, fuzzy, python-format
+msgid "View list of available %s extensions."
+msgstr "Ogled seznama obstoječih EPG vtičnikov."
 
 #
 msgid "View list of available CommonInterface extensions"
@@ -12307,9 +12293,6 @@ msgstr "Povrnitev varnostne kopije"
 msgid "Yesterday"
 msgstr "Včeraj"
 
-msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
-msgstr ""
-
 #, python-format
 msgid ""
 "You already have a channel list installed,\n"
@@ -12393,6 +12376,9 @@ msgid "You must switch to the service %s (%s - '%s')!\n"
 msgstr "Morate preklopiti na kanal %s (%s - '%s')!\n"
 
 msgid "You seem to be in timeshift!"
+msgstr ""
+
+msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
 msgstr ""
 
 #
@@ -12688,6 +12674,9 @@ msgstr "Nazaj"
 msgid "background image"
 msgstr "slika ozadja"
 
+msgid "backup EPG cache"
+msgstr "varnostno kopiranje EPG podatkov"
+
 msgid "ballet"
 msgstr ""
 
@@ -12870,9 +12859,6 @@ msgstr ""
 
 msgid "entertainment (6-14 year old)"
 msgstr ""
-
-msgid "backup EPG cache"
-msgstr "varnostno kopiranje EPG podatkov"
 
 msgid "equestrian"
 msgstr ""
@@ -13069,6 +13055,11 @@ msgstr "preskoči na naslednji naslov"
 
 msgid "jump to chapter by number"
 msgstr ""
+
+#
+#, fuzzy
+msgid "kB"
+msgstr "B"
 
 msgid "languages"
 msgstr "jeziki"
@@ -13606,16 +13597,9 @@ msgstr ""
 msgid "testing"
 msgstr "deluje"
 
-msgid "This bouquet is protected by a parental control PIN"
-msgstr "Ta seznam kanalov je zaščiten s PIN kodo"
-
 #
 msgid "this recording"
 msgstr "to snemanje"
-
-#
-msgid "This service is protected by a parental control PIN"
-msgstr "Kanal je zaščiten s PIN kodo"
 
 #
 msgid "toggle time, chapter, audio, subtitle info"

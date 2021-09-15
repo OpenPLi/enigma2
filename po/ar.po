@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OBH enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-10 01:42+0300\n"
+"POT-Creation-Date: 2021-09-15 22:30+0300\n"
 "PO-Revision-Date: 2019-04-12 12:36+0300\n"
 "Last-Translator: mosad - مساعد الجعيد <abo-mishal@hotmail.com>\n"
 "Language-Team: mosad - مساعد الجعيد\n"
@@ -97,10 +97,6 @@ msgid " Warning: the selected tuner should not use SCR Unicable type for LNBs be
 msgstr ""
 
 #, fuzzy
-msgid " extensions."
-msgstr "الملحقات."
-
-#, fuzzy
 msgid " min"
 msgstr "%d دقيقة"
 
@@ -108,28 +104,12 @@ msgstr "%d دقيقة"
 msgid " ms"
 msgstr "مث"
 
-#, fuzzy
-msgid " packages selected."
-msgstr "الحزم المختارة."
-
 msgid " unicable LNB input of rotor"
 msgstr ""
 
 #, fuzzy, python-format
 msgid "%(freespace)s %(percent)s free disk space"
 msgstr "المساحه المتبقيه فى القرص"
-
-#, fuzzy, python-format
-msgid "%.0f GB"
-msgstr "%.من جيجابايت"
-
-#, python-format
-msgid "%.0f MB"
-msgstr "%.0f ميجابايت"
-
-#, fuzzy, python-format
-msgid "%.0f kB"
-msgstr "%.من كيلوبايت"
 
 #, python-format
 msgid "%.1f° E"
@@ -185,10 +165,6 @@ msgstr "%a %d/%m"
 #, fuzzy
 msgid "%a %e/%m  %-H:%M"
 msgstr "%a %e %b  %-H:%M"
-
-#, python-format
-msgid "%d B"
-msgstr "%d بايت"
 
 #, python-format
 msgid "%d GB"
@@ -292,6 +268,16 @@ msgstr "%d دقائق"
 #, python-format
 msgid "%d ms"
 msgstr "%d جزء من الثانية"
+
+#, fuzzy, python-format
+msgid "%d package selected."
+msgid_plural "%d packages selected."
+msgstr[0] "الحزم المختارة."
+msgstr[1] "الحزم المختارة."
+msgstr[2] "الحزم المختارة."
+msgstr[3] "الحزم المختارة."
+msgstr[4] "الحزم المختارة."
+msgstr[5] "الحزم المختارة."
 
 #, python-format
 msgid "%d pixel wide"
@@ -647,6 +633,9 @@ msgstr "للتذكير التسجيل قيد التشغيل حاليا. يرجى
 #, fuzzy
 msgid "A recording is currently running. Please stop the recording before trying to start a testing DiSEqC."
 msgstr "للتذكير التسجيل قيد التشغيل حاليا. يرجى إيقاف التسجيل قبل محاولة البحث."
+
+msgid "A repeating event is currently recording. What would you like to do?"
+msgstr "تكرار الحدث حاليا تسجيل. ماذا تريد أن تفعل؟"
 
 #, python-format
 msgid "A required tool (%s) was not found."
@@ -2854,11 +2843,11 @@ msgid "Detect next boxes before standby"
 msgstr ""
 
 #, fuzzy
-msgid "Detected storage devices:"
+msgid "Detected NIMs:"
 msgstr "الكشف عن التيونرات:"
 
 #, fuzzy
-msgid "Detected NIMs:"
+msgid "Detected storage devices:"
 msgstr "الكشف عن التيونرات:"
 
 msgid "Device name:"
@@ -3500,6 +3489,9 @@ msgstr "عنوان الأيبي"
 msgid "Enter PIN"
 msgstr "أعاده إدخال الرقم السري"
 
+msgid "Enter PIN code"
+msgstr "أدخل الرقم السري"
+
 #, fuzzy
 msgid "Enter URL"
 msgstr "أعاده إدخال الرقم السري"
@@ -3518,9 +3510,6 @@ msgstr "دخول القائمه الرئيسية..."
 
 msgid "Enter persistent PIN code"
 msgstr "أدخل الرمز السري"
-
-msgid "Enter PIN code"
-msgstr "أدخل الرقم السري"
 
 msgid "Enter the frequency at which you LNB switches between low band and high band. For more information consult the spec sheet of your LNB."
 msgstr "ادخل التردد الذي تنتقل فيه اللاقط بين النطاق المنخفض والنطاق العالي. لمزيد من المعلومات أطلع على ورقة المواصفات في اللاقط الخاص بك."
@@ -7223,15 +7212,6 @@ msgstr "إعادة قائمة الاغاني"
 msgid "Repeat type"
 msgstr "نوع الإعاده"
 
-#, fuzzy
-msgid ""
-"Repeating event currently recording.\n"
-"What do you want to do?"
-msgstr "تكرار الحدث حاليا تسجيل... ماذا تريد أن تفعل؟"
-
-msgid "A repeating event is currently recording. What would you like to do?"
-msgstr "تكرار الحدث حاليا تسجيل. ماذا تريد أن تفعل؟"
-
 msgid "Repeats"
 msgstr "إعادات"
 
@@ -9519,6 +9499,9 @@ msgstr "تم تغيير الرقم السري بنجاح."
 msgid "The PIN code has been saved successfully."
 msgstr "تم تغيير الرقم السري بنجاح."
 
+msgid "The PIN code you entered is wrong."
+msgstr "الرقم السري الذي قمت بإدخاله غير صحيح."
+
 msgid "The PIN codes you entered are different."
 msgstr "الرقم السري الذي قمت بإدخاله مختلف."
 
@@ -9578,9 +9561,6 @@ msgstr ""
 #, python-format
 msgid "The path %s already exists."
 msgstr "المسار %s موجود مسبقا."
-
-msgid "The PIN code you entered is wrong."
-msgstr "الرقم السري الذي قمت بإدخاله غير صحيح."
 
 #, fuzzy, python-format
 msgid "The results have been written to %s"
@@ -9666,6 +9646,9 @@ msgstr ""
 
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "تنسيق مشغل سواقة الديفيدي جاهزة للإستخدام- سوف يعمل تهئية لكل محتوى القرص."
+
+msgid "This bouquet is protected by a parental control PIN"
+msgstr "هذه القناه محميه برقم سري بواسطه الرقابة الأبوية"
 
 msgid "This can be useful when using the CI(+) module. After the end of the recording, the service will be automatically stopped."
 msgstr ""
@@ -9795,12 +9778,12 @@ msgstr ""
 msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr "هذا الخيار تعيين مستوي الذبذبة من الضوضاء البعوض (البعوض الضوضاء هو التعرج عشوائي نتيجة لضغط قوي). ومن الواضح ان هذا ينطبق علي تكلفه تفاصيل الصورة."
 
+msgid "This option sets the picture brightness."
+msgstr "هذا الخيار على ضبط سطوع الصورة."
+
 #, fuzzy
 msgid "This option sets the picture contrast."
 msgstr "هذا الخيار يحدد تباين الصورة."
-
-msgid "This option sets the picture brightness."
-msgstr "هذا الخيار على ضبط سطوع الصورة."
 
 msgid "This option sets the picture flesh tones."
 msgstr "هذا الخيار على ضبط أداء الصورة الحية."
@@ -9835,6 +9818,9 @@ msgstr "سيتم حذف هذا البلج إنز."
 #, fuzzy, python-format
 msgid "This receiver cannot decode %s streams!"
 msgstr "لا %s %s يمكن لهذا فتح ترميز %s التدفقات!"
+
+msgid "This service is protected by a parental control PIN"
+msgstr "هذه القناه محميه برقم سري بواسطه التحكم الأبوي"
 
 msgid "This setting allows the tuner configuration to be a duplication of how another tuner is already configured."
 msgstr "يسمح هذا الاعداد بان يكون تكوين الموالف تكرارا لكيفيه تكوين موالف آخر بالفعل."
@@ -10108,7 +10094,6 @@ msgstr "تونغا"
 msgid "Top and bottom"
 msgstr "فوق وأسفل"
 
-#, python-format
 msgid "Total clients streaming: "
 msgstr "إجمالي أسطر التدفق: "
 
@@ -10696,8 +10681,9 @@ msgstr "مشاهدة شريط الاخبار التفاعلي..."
 msgid "View details"
 msgstr "مشاهدة التفاصيل"
 
-msgid "View list of available "
-msgstr "معاينة القائمة متاحة "
+#, fuzzy, python-format
+msgid "View list of available %s extensions."
+msgstr "مشاهدة قائمة ملحقات دليل البرامج الإلكترونية المتوفرة."
 
 msgid "View list of available CommonInterface extensions"
 msgstr "مشاهدة قائمة بإضافات وحدة التحكم المشترك"
@@ -11312,9 +11298,6 @@ msgstr "إستعادة النسخة الإحتياطية"
 msgid "Yesterday"
 msgstr "أمس"
 
-msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
-msgstr ""
-
 #, fuzzy, python-format
 msgid ""
 "You already have a channel list installed,\n"
@@ -11394,6 +11377,9 @@ msgstr "يجب التبديل إلى القناة %s (%s - '%s')!\n"
 
 msgid "You seem to be in timeshift!"
 msgstr "يبدو أنك في التحكم الزمني في البث المباشر!"
+
+msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
+msgstr ""
 
 msgid "Your collection exceeds the size of a single layer medium, you will need a blank dual layer DVD!"
 msgstr "هذه المجموعه تزيد عن حجم وسيط ذو طبقه واحده. أنت تحتاج الى دى فى دى ثنائى فارغ!"
@@ -11678,6 +11664,9 @@ msgstr "للخلف"
 msgid "background image"
 msgstr "صورة الخلفية"
 
+msgid "backup EPG cache"
+msgstr "نسخة احتياطية مخزنة لدليل البرامج الإلكترونية"
+
 msgid "ballet"
 msgstr "رقصة الباليه"
 
@@ -11839,9 +11828,6 @@ msgstr "الترفيه (من عمر 10-16 سنة)"
 
 msgid "entertainment (6-14 year old)"
 msgstr "الترفيه (من عمر 6-14 سنة)"
-
-msgid "backup EPG cache"
-msgstr "نسخة احتياطية مخزنة لدليل البرامج الإلكترونية"
 
 msgid "equestrian"
 msgstr "الفروسية"
@@ -12018,6 +12004,10 @@ msgstr "الانتقال أماما للعنوان التالى"
 
 msgid "jump to chapter by number"
 msgstr ""
+
+#, fuzzy
+msgid "kB"
+msgstr "B"
 
 msgid "languages"
 msgstr "اللغات"
@@ -12510,14 +12500,8 @@ msgstr "التنس/الاسكواش"
 msgid "testing"
 msgstr "سؤال"
 
-msgid "This bouquet is protected by a parental control PIN"
-msgstr "هذه القناه محميه برقم سري بواسطه الرقابة الأبوية"
-
 msgid "this recording"
 msgstr "هذا التسجيل"
-
-msgid "This service is protected by a parental control PIN"
-msgstr "هذه القناه محميه برقم سري بواسطه التحكم الأبوي"
 
 msgid "toggle time, chapter, audio, subtitle info"
 msgstr "الوقت تبديل، والفصل، والصوت، معلومات الترجمة"

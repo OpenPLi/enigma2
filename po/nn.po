@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-10 01:42+0300\n"
+"POT-Creation-Date: 2021-09-15 22:30+0300\n"
 "PO-Revision-Date: 2013-10-23 19:15+0100\n"
 "Last-Translator: andy1 <dmmm8000pvr@gmail.com>\n"
 "Language-Team: none\n"
@@ -97,10 +97,6 @@ msgstr ""
 msgid " Warning: the selected tuner should not use SCR Unicable type for LNBs because each tuner need a own SCR number."
 msgstr ""
 
-#
-msgid " extensions."
-msgstr " utvidelser."
-
 #, fuzzy
 msgid " min"
 msgstr "%d minutt"
@@ -108,27 +104,12 @@ msgstr "%d minutt"
 msgid " ms"
 msgstr ""
 
-msgid " packages selected."
-msgstr " valgte pakker."
-
 msgid " unicable LNB input of rotor"
 msgstr ""
 
 #, python-format
 msgid "%(freespace)s %(percent)s free disk space"
 msgstr "%(freespace)s %(percent)s ledig diskplass"
-
-#, python-format
-msgid "%.0f GB"
-msgstr ""
-
-#, python-format
-msgid "%.0f MB"
-msgstr ""
-
-#, python-format
-msgid "%.0f kB"
-msgstr ""
 
 #, python-format
 msgid "%.1f° E"
@@ -178,10 +159,6 @@ msgstr ""
 
 #. TRANSLATORS: long date representation short dayname daynum short monthname hour:minute in strftime() format! See 'man strftime'
 msgid "%a %e/%m  %-H:%M"
-msgstr ""
-
-#, python-format
-msgid "%d B"
 msgstr ""
 
 #, python-format
@@ -260,6 +237,12 @@ msgstr "%d minutter"
 #, python-format
 msgid "%d ms"
 msgstr ""
+
+#, fuzzy, python-format
+msgid "%d package selected."
+msgid_plural "%d packages selected."
+msgstr[0] " valgte pakker."
+msgstr[1] " valgte pakker."
 
 #, python-format
 msgid "%d pixel wide"
@@ -611,6 +594,10 @@ msgstr "Et opptak er igang. Vennligst stopp opptaket før du starter et søk."
 
 msgid "A recording is currently running. Please stop the recording before trying to start a testing DiSEqC."
 msgstr ""
+
+#
+msgid "A repeating event is currently recording. What would you like to do?"
+msgstr "Gjentakende program spiller inn. Hva vil du gjøre?"
 
 #
 #, python-format
@@ -2912,12 +2899,12 @@ msgid "Detect next boxes before standby"
 msgstr ""
 
 #
-msgid "Detected storage devices:"
-msgstr "Gjenkjent lagring:"
-
-#
 msgid "Detected NIMs:"
 msgstr "Gjenkjent modul:"
+
+#
+msgid "Detected storage devices:"
+msgstr "Gjenkjent lagring:"
 
 msgid "Device name:"
 msgstr "Enhetsnavn:"
@@ -3587,6 +3574,10 @@ msgstr "IP adresse"
 msgid "Enter PIN"
 msgstr ""
 
+#
+msgid "Enter PIN code"
+msgstr "Tast inn PIN kode"
+
 msgid "Enter URL"
 msgstr ""
 
@@ -3605,10 +3596,6 @@ msgstr "Åpne hovedmenyen"
 
 msgid "Enter persistent PIN code"
 msgstr ""
-
-#
-msgid "Enter PIN code"
-msgstr "Tast inn PIN kode"
 
 msgid "Enter the frequency at which you LNB switches between low band and high band. For more information consult the spec sheet of your LNB."
 msgstr ""
@@ -7495,15 +7482,6 @@ msgstr "Gjenta spilliste"
 msgid "Repeat type"
 msgstr "Gjentagelsestype"
 
-msgid ""
-"Repeating event currently recording.\n"
-"What do you want to do?"
-msgstr ""
-
-#
-msgid "A repeating event is currently recording. What would you like to do?"
-msgstr "Gjentakende program spiller inn. Hva vil du gjøre?"
-
 #
 msgid "Repeats"
 msgstr "Gjentakelser"
@@ -9836,6 +9814,10 @@ msgstr "PIN-koden har blitt endret."
 msgid "The PIN code has been saved successfully."
 msgstr ""
 
+#
+msgid "The PIN code you entered is wrong."
+msgstr "PIN koden er feil."
+
 msgid "The PIN codes you entered are different."
 msgstr "Du har tastet inn feil PIN kode"
 
@@ -9899,10 +9881,6 @@ msgstr ""
 #, python-format
 msgid "The path %s already exists."
 msgstr "Banen %s finnes allerede."
-
-#
-msgid "The PIN code you entered is wrong."
-msgstr "PIN koden er feil."
 
 #, python-format
 msgid "The results have been written to %s"
@@ -9995,6 +9973,9 @@ msgstr ""
 #
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "Denne DVD RW er allerede formatert - reformatering sletter alt innhold på platen."
+
+msgid "This bouquet is protected by a parental control PIN"
+msgstr ""
 
 msgid "This can be useful when using the CI(+) module. After the end of the recording, the service will be automatically stopped."
 msgstr ""
@@ -10105,10 +10086,10 @@ msgstr ""
 msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr ""
 
-msgid "This option sets the picture contrast."
+msgid "This option sets the picture brightness."
 msgstr ""
 
-msgid "This option sets the picture brightness."
+msgid "This option sets the picture contrast."
 msgstr ""
 
 msgid "This option sets the picture flesh tones."
@@ -10148,6 +10129,10 @@ msgstr "Dette programtillegget vil bli fjernet."
 #, python-format
 msgid "This receiver cannot decode %s streams!"
 msgstr "Denne mottakeren kan ikke dekode %s datastrømmer!"
+
+#
+msgid "This service is protected by a parental control PIN"
+msgstr "Denne kanalen er beskyttet av en foreldrekontroll kode"
 
 msgid "This setting allows the tuner configuration to be a duplication of how another tuner is already configured."
 msgstr ""
@@ -10439,7 +10424,6 @@ msgstr ""
 msgid "Top and bottom"
 msgstr "Topp og bunn"
 
-#, python-format
 msgid "Total clients streaming: "
 msgstr ""
 
@@ -11063,8 +11047,9 @@ msgstr "Vis Rass interaktiv..."
 msgid "View details"
 msgstr "Se detaljer"
 
-msgid "View list of available "
-msgstr "Vis tilgjengelighet"
+#, fuzzy, python-format
+msgid "View list of available %s extensions."
+msgstr "Vis en liste over alle EPG valg."
 
 msgid "View list of available CommonInterface extensions"
 msgstr "Vis en liste over alle Common Interface-valg"
@@ -11671,9 +11656,6 @@ msgstr "Gjenopprette sikkerhetskopier"
 msgid "Yesterday"
 msgstr "I går"
 
-msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
-msgstr ""
-
 #, python-format
 msgid ""
 "You already have a channel list installed,\n"
@@ -11756,6 +11738,9 @@ msgid "You must switch to the service %s (%s - '%s')!\n"
 msgstr ""
 
 msgid "You seem to be in timeshift!"
+msgstr ""
+
+msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
 msgstr ""
 
 msgid "Your collection exceeds the size of a single layer medium, you will need a blank dual layer DVD!"
@@ -12046,6 +12031,9 @@ msgstr "tilbake"
 msgid "background image"
 msgstr "bakgrunns bilde"
 
+msgid "backup EPG cache"
+msgstr ""
+
 msgid "ballet"
 msgstr "ballett"
 
@@ -12225,9 +12213,6 @@ msgstr "underholdning (10-16 år)"
 
 msgid "entertainment (6-14 year old)"
 msgstr "underholdning (6-14 år)"
-
-msgid "backup EPG cache"
-msgstr ""
 
 msgid "equestrian"
 msgstr "hestesport"
@@ -12419,6 +12404,9 @@ msgid "jump forward to the next title"
 msgstr "gå framover til neste tittel"
 
 msgid "jump to chapter by number"
+msgstr ""
+
+msgid "kB"
 msgstr ""
 
 msgid "languages"
@@ -12944,15 +12932,8 @@ msgstr "tennis/squash"
 msgid "testing"
 msgstr "fungerer"
 
-msgid "This bouquet is protected by a parental control PIN"
-msgstr ""
-
 msgid "this recording"
 msgstr "dette opptaket"
-
-#
-msgid "This service is protected by a parental control PIN"
-msgstr "Denne kanalen er beskyttet av en foreldrekontroll kode"
 
 msgid "toggle time, chapter, audio, subtitle info"
 msgstr "juster tid, kapittel, lyd, undertekst info"

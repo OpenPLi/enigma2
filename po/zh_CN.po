@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-10 01:42+0300\n"
+"POT-Creation-Date: 2021-09-15 22:30+0300\n"
 "PO-Revision-Date: 2021-07-31 17:00+0800\n"
 "Last-Translator: 孤独之剑 <haotzyy1970@yahoo.com>\n"
 "Language-Team: 孤独之剑 <haotzyy1970@yahoo.com>\n"
@@ -94,17 +94,11 @@ msgstr " - 未找到Unicable/JESS 高频头"
 msgid " Warning: the selected tuner should not use SCR Unicable type for LNBs because each tuner need a own SCR number."
 msgstr " 警告:所选调谐器不应为高频头使用SCR Unicable类型,因为每个调谐器都需要自己的SCR编号."
 
-msgid " extensions."
-msgstr " 扩展."
-
 msgid " min"
 msgstr " 分钟"
 
 msgid " ms"
 msgstr " 毫秒"
-
-msgid " packages selected."
-msgstr " 选定的软件包."
 
 msgid " unicable LNB input of rotor"
 msgstr " 极轴的唯一高频头输入"
@@ -112,18 +106,6 @@ msgstr " 极轴的唯一高频头输入"
 #, python-format
 msgid "%(freespace)s %(percent)s free disk space"
 msgstr "%(freespace)s %(percent)s 空闲空间"
-
-#, python-format
-msgid "%.0f GB"
-msgstr "%.0f GB"
-
-#, python-format
-msgid "%.0f MB"
-msgstr "%.0f MB"
-
-#, python-format
-msgid "%.0f kB"
-msgstr "%.0f kB"
 
 #, python-format
 msgid "%.1f° E"
@@ -174,10 +156,6 @@ msgstr "%a %e/%m"
 #. TRANSLATORS: long date representation short dayname daynum short monthname hour:minute in strftime() format! See 'man strftime'
 msgid "%a %e/%m  %-H:%M"
 msgstr "%a %e/%m  %-H:%M"
-
-#, python-format
-msgid "%d B"
-msgstr "%d B"
 
 #, python-format
 msgid "%d GB"
@@ -253,6 +231,12 @@ msgstr "%d 分钟"
 #, python-format
 msgid "%d ms"
 msgstr "%d 毫秒"
+
+#, fuzzy, python-format
+msgid "%d package selected."
+msgid_plural "%d packages selected."
+msgstr[0] " 选定的软件包."
+msgstr[1] " 选定的软件包."
 
 #, python-format
 msgid "%d pixel wide"
@@ -577,6 +561,9 @@ msgstr "录制正在进行中. 扫描前请停止录制."
 
 msgid "A recording is currently running. Please stop the recording before trying to start a testing DiSEqC."
 msgstr "当前有录制正在进行.要测试DisEqc请先停止录制."
+
+msgid "A repeating event is currently recording. What would you like to do?"
+msgstr "正在重复当前录制的事件.你要做什么?"
 
 #, python-format
 msgid "A required tool (%s) was not found."
@@ -2647,11 +2634,11 @@ msgstr "插件信息: "
 msgid "Detect next boxes before standby"
 msgstr "在待机状态下检测机顶盒"
 
-msgid "Detected storage devices:"
-msgstr "检测到的硬盘:"
-
 msgid "Detected NIMs:"
 msgstr "检测到的调谐器:"
+
+msgid "Detected storage devices:"
+msgstr "检测到的硬盘:"
 
 msgid "Device name:"
 msgstr "设备名:"
@@ -3231,6 +3218,9 @@ msgstr "输入IP地址"
 msgid "Enter PIN"
 msgstr "输入PIN码"
 
+msgid "Enter PIN code"
+msgstr "输入密码"
+
 msgid "Enter URL"
 msgstr "输入URL地址"
 
@@ -3248,9 +3238,6 @@ msgstr "进入主菜单..."
 
 msgid "Enter persistent PIN code"
 msgstr "输入持久性的PIN码"
-
-msgid "Enter PIN code"
-msgstr "输入密码"
 
 msgid "Enter the frequency at which you LNB switches between low band and high band. For more information consult the spec sheet of your LNB."
 msgstr "输入LNB在低频和高频之间切换的频率有关更多信息,请参阅LNB的规格表."
@@ -6733,16 +6720,6 @@ msgstr "重复播放列表"
 msgid "Repeat type"
 msgstr "重复类型"
 
-msgid ""
-"Repeating event currently recording.\n"
-"What do you want to do?"
-msgstr ""
-"重复的定时录制事件\n"
-"您准备怎么办?"
-
-msgid "A repeating event is currently recording. What would you like to do?"
-msgstr "正在重复当前录制的事件.你要做什么?"
-
 msgid "Repeats"
 msgstr "重复"
 
@@ -8844,6 +8821,9 @@ msgstr "服务密码 已被成功修改."
 msgid "The PIN code has been saved successfully."
 msgstr "已成功保存PIN码."
 
+msgid "The PIN code you entered is wrong."
+msgstr "密码输入有误."
+
 msgid "The PIN codes you entered are different."
 msgstr "密码输入不相同."
 
@@ -8923,9 +8903,6 @@ msgstr ""
 msgid "The path %s already exists."
 msgstr "路径 %s 已经存在."
 
-msgid "The PIN code you entered is wrong."
-msgstr "密码输入有误."
-
 #, python-format
 msgid "The results have been written to %s"
 msgstr "结果已经保存到 %s 中"
@@ -9004,6 +8981,9 @@ msgstr ""
 
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "这张DVD RW已经格式化过,再次格式化将删除所有文件."
+
+msgid "This bouquet is protected by a parental control PIN"
+msgstr "此频道受家长控制"
 
 msgid "This can be useful when using the CI(+) module. After the end of the recording, the service will be automatically stopped."
 msgstr "这在使用CI(+)模块时非常有用.录制结束后,服务将自动停止."
@@ -9117,11 +9097,11 @@ msgstr "此选项可用于长HDMI电缆."
 msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr "此选项设置蚊子噪声的意外压缩级别（蚊子噪声是强压缩导致的随机混叠）.显然,这是 以图片细节为代价的."
 
-msgid "This option sets the picture contrast."
-msgstr "此选项设置图片对比度."
-
 msgid "This option sets the picture brightness."
 msgstr "此选项设置图片亮度."
+
+msgid "This option sets the picture contrast."
+msgstr "此选项设置图片对比度."
 
 msgid "This option sets the picture flesh tones."
 msgstr "此选项设置图片闪烁色调."
@@ -9156,6 +9136,9 @@ msgstr "插件被移除."
 #, python-format
 msgid "This receiver cannot decode %s streams!"
 msgstr "本机顶盒不能解码 %s 视频流!"
+
+msgid "This service is protected by a parental control PIN"
+msgstr "此频道受家长控制"
 
 msgid "This setting allows the tuner configuration to be a duplication of how another tuner is already configured."
 msgstr "此设置允许调谐器配置与已配置另一个调谐器."
@@ -9407,7 +9390,6 @@ msgstr "汤加"
 msgid "Top and bottom"
 msgstr "顶部和底部"
 
-#, python-format
 msgid "Total clients streaming: "
 msgstr "媒体流总客户端数量: "
 
@@ -9957,8 +9939,9 @@ msgstr "互动视图..."
 msgid "View details"
 msgstr "显示事件详细内容"
 
-msgid "View list of available "
-msgstr "查看可用列表 "
+#, fuzzy, python-format
+msgid "View list of available %s extensions."
+msgstr "可用的EPG扩展列表."
 
 msgid "View list of available CommonInterface extensions"
 msgstr "可用的通用接口扩展列表"
@@ -10529,9 +10512,6 @@ msgstr "是,没有备份"
 msgid "Yesterday"
 msgstr "昨天"
 
-msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
-msgstr "密码是0000.这是默认的PIN码且不能用于家长保护.\n"
-
 #, python-format
 msgid ""
 "You already have a channel list installed,\n"
@@ -10622,6 +10602,9 @@ msgstr "必须切换频道到 %s（%s - '%s'）!\n"
 
 msgid "You seem to be in timeshift!"
 msgstr "您似乎在时移中!"
+
+msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
+msgstr "密码是0000.这是默认的PIN码且不能用于家长保护.\n"
 
 msgid "Your collection exceeds the size of a single layer medium, you will need a blank dual layer DVD!"
 msgstr "您的收藏超过单层介质的大小,您将需要一个空白的双层DVD!"
@@ -10887,6 +10870,9 @@ msgstr "后退"
 msgid "background image"
 msgstr "背景图片"
 
+msgid "backup EPG cache"
+msgstr "epg缓存备份"
+
 msgid "ballet"
 msgstr "芭蕾舞"
 
@@ -11043,9 +11029,6 @@ msgstr "娱乐（10-16年龄段）"
 
 msgid "entertainment (6-14 year old)"
 msgstr "娱乐（6-14年龄段）"
-
-msgid "backup EPG cache"
-msgstr "epg缓存备份"
 
 msgid "equestrian"
 msgstr "马术"
@@ -11211,6 +11194,10 @@ msgstr "跳转到下一个标题"
 
 msgid "jump to chapter by number"
 msgstr "跳转到数字所标识的章节"
+
+#, fuzzy
+msgid "kB"
+msgstr "B"
 
 msgid "languages"
 msgstr "语言"
@@ -11674,14 +11661,8 @@ msgstr "网球/壁球"
 msgid "testing"
 msgstr "测试"
 
-msgid "This bouquet is protected by a parental control PIN"
-msgstr "此频道受家长控制"
-
 msgid "this recording"
 msgstr "此录制"
-
-msgid "This service is protected by a parental control PIN"
-msgstr "此频道受家长控制"
 
 msgid "toggle time, chapter, audio, subtitle info"
 msgstr "切换时间,章节,音频,字幕信息"
