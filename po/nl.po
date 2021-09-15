@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-10 01:42+0300\n"
+"POT-Creation-Date: 2021-09-15 22:30+0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Frenske <voorzitter@openpli.org>\n"
 "Language-Team: PLiteam <translators@openpli.org>\n"
@@ -93,17 +93,11 @@ msgstr " - Unicable / Jess LNB niet gevonden"
 msgid " Warning: the selected tuner should not use SCR Unicable type for LNBs because each tuner need a own SCR number."
 msgstr "Waarschuwing: de geselecteerde tuner mag geen SCR Unicable type voor LNB's gebruiken, omdat elke tuner een eigen SCR-nummer nodig heeft."
 
-msgid " extensions."
-msgstr " applicaties."
-
 msgid " min"
 msgstr " min"
 
 msgid " ms"
 msgstr " ms"
-
-msgid " packages selected."
-msgstr " geselecteerde pakketten."
 
 msgid " unicable LNB input of rotor"
 msgstr " Unicable LNB rotor ingang"
@@ -111,18 +105,6 @@ msgstr " Unicable LNB rotor ingang"
 #, python-format
 msgid "%(freespace)s %(percent)s free disk space"
 msgstr "%(freespace)s %(percent)s beschikbare schijfruimte"
-
-#, python-format
-msgid "%.0f GB"
-msgstr "%.0f GB"
-
-#, python-format
-msgid "%.0f MB"
-msgstr "%.0f MB"
-
-#, python-format
-msgid "%.0f kB"
-msgstr "%.0f kB"
 
 #, python-format
 msgid "%.1f° E"
@@ -173,10 +155,6 @@ msgstr "%a %e/%m"
 #. TRANSLATORS: long date representation short dayname daynum short monthname hour:minute in strftime() format! See 'man strftime'
 msgid "%a %e/%m  %-H:%M"
 msgstr "%a %e/%m  %-H:%M"
-
-#, python-format
-msgid "%d B"
-msgstr "%d B"
 
 #, python-format
 msgid "%d GB"
@@ -252,6 +230,12 @@ msgstr "%d minuten"
 #, python-format
 msgid "%d ms"
 msgstr "%d ms"
+
+#, fuzzy, python-format
+msgid "%d package selected."
+msgid_plural "%d packages selected."
+msgstr[0] " geselecteerde pakketten."
+msgstr[1] " geselecteerde pakketten."
 
 #, python-format
 msgid "%d pixel wide"
@@ -576,6 +560,9 @@ msgstr "Een opname is nu bezig. Stop de opname voor u gaat scannen."
 
 msgid "A recording is currently running. Please stop the recording before trying to start a testing DiSEqC."
 msgstr "Er is momenteel een opname actief. Stop de opname alvorens een DiSEqC test te starten."
+
+msgid "A repeating event is currently recording. What would you like to do?"
+msgstr "Een herhaalde timer maakt nu een opname. Wat wilt u doen?"
 
 #, python-format
 msgid "A required tool (%s) was not found."
@@ -2821,11 +2808,11 @@ msgstr "Plugin details:"
 msgid "Detect next boxes before standby"
 msgstr "Detecteer andere hardware voordat de box naar stand-by gaat"
 
-msgid "Detected storage devices:"
-msgstr "Gedetecteerde harde schijf:"
-
 msgid "Detected NIMs:"
 msgstr "Gedetecteerde tuners:"
+
+msgid "Detected storage devices:"
+msgstr "Gedetecteerde harde schijf:"
 
 msgid "Device name:"
 msgstr "Apparaatnaam:"
@@ -3426,6 +3413,9 @@ msgstr "Voer een IPadres in"
 msgid "Enter PIN"
 msgstr "Voer PIN in"
 
+msgid "Enter PIN code"
+msgstr "Voer pincode in"
+
 msgid "Enter URL"
 msgstr "Voer een URL in"
 
@@ -3443,9 +3433,6 @@ msgstr "Ga naar hoofdmenu..."
 
 msgid "Enter persistent PIN code"
 msgstr "Voer een vaste code in"
-
-msgid "Enter PIN code"
-msgstr "Voer pincode in"
 
 msgid "Enter the frequency at which you LNB switches between low band and high band. For more information consult the spec sheet of your LNB."
 msgstr "Voer de frequentie in waarmee uw LNB tussen de lage band en hoge band schakelt. Raadpleeg het specificatieblad van uw LNB voor meer informatie."
@@ -6976,16 +6963,6 @@ msgstr "Herhaal afspeellijst"
 msgid "Repeat type"
 msgstr "Herhaal type"
 
-msgid ""
-"Repeating event currently recording.\n"
-"What do you want to do?"
-msgstr ""
-"Herhaalde gebeurtenis zoals deze momenteel opgenomen wordt.\n"
-"Wat wilt u hiermee doen?"
-
-msgid "A repeating event is currently recording. What would you like to do?"
-msgstr "Een herhaalde timer maakt nu een opname. Wat wilt u doen?"
-
 msgid "Repeats"
 msgstr "Herhalingen"
 
@@ -9112,6 +9089,9 @@ msgstr "De pincode is gewijzigd."
 msgid "The PIN code has been saved successfully."
 msgstr "Pincode met succes opgeslagen."
 
+msgid "The PIN code you entered is wrong."
+msgstr "De ingevoerde pincode is onjuist."
+
 msgid "The PIN codes you entered are different."
 msgstr "De ingevoerde pincodes zijn niet gelijk."
 
@@ -9195,9 +9175,6 @@ msgstr ""
 msgid "The path %s already exists."
 msgstr "Het pad %s bestaat al."
 
-msgid "The PIN code you entered is wrong."
-msgstr "De ingevoerde pincode is onjuist."
-
 #, python-format
 msgid "The results have been written to %s"
 msgstr "De resultaten zijn naar %s geschreven"
@@ -9274,6 +9251,9 @@ msgstr ""
 
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "Dit DVD-RW medium is reeds geformatteerd - herformatteren zal alles wissen op deze disk."
+
+msgid "This bouquet is protected by a parental control PIN"
+msgstr "Dit bouquet is beschermd met een pincode t.b.v. het kinderslot."
 
 msgid "This can be useful when using the CI(+) module. After the end of the recording, the service will be automatically stopped."
 msgstr "Dit kan praktisch zijn bij het gebruik van de CI(+) module. Na het einde van de opname stopt de zender automatisch."
@@ -9399,11 +9379,11 @@ msgstr "Deze optie is vooral praktisch voor lange HDMI kabels omdat door het geb
 msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr "Met deze optie stelt u het niveau van de overdruk van musquito noise. (Musquito Noise is random aliasing as a result of strong compression). Uiteraard gaat e.e.a. ten koste van de beelddetails."
 
-msgid "This option sets the picture contrast."
-msgstr "Met deze optie stelt u het contrast in."
-
 msgid "This option sets the picture brightness."
 msgstr "Met deze optie stelt u de helderheid in."
+
+msgid "This option sets the picture contrast."
+msgstr "Met deze optie stelt u het contrast in."
 
 msgid "This option sets the picture flesh tones."
 msgstr "Met deze optie calibreert u de tint van de huidskleur."
@@ -9438,6 +9418,9 @@ msgstr "Deze plugin wordt verwijderd."
 #, python-format
 msgid "This receiver cannot decode %s streams!"
 msgstr "Deze ontvanger kan geen %s streams decoderen!"
+
+msgid "This service is protected by a parental control PIN"
+msgstr "Dit kanaal is beveiligd met een kinderslot"
 
 msgid "This setting allows the tuner configuration to be a duplication of how another tuner is already configured."
 msgstr "Deze optie staat toe dat een tunerconfiguratie gedupliceerd wordt zoals een andere tuner eerder geconfigureerd is."
@@ -9689,7 +9672,6 @@ msgstr "Tonga"
 msgid "Top and bottom"
 msgstr "Boven en onderzijde"
 
-#, python-format
 msgid "Total clients streaming: "
 msgstr "Totaal aantal streamende clients: "
 
@@ -10248,8 +10230,9 @@ msgstr "Rass Interactive weergeven"
 msgid "View details"
 msgstr "Bekijk details"
 
-msgid "View list of available "
-msgstr "Bekijk de lijst met beschikbare "
+#, fuzzy, python-format
+msgid "View list of available %s extensions."
+msgstr "Bekijk de lijst met beschikbare EPG applicaties."
 
 msgid "View list of available CommonInterface extensions"
 msgstr "Bekijk de lijst met beschikbare Common-Interface applicaties"
@@ -10859,9 +10842,6 @@ msgstr "Flashen maar zonder een backup te maken"
 msgid "Yesterday"
 msgstr "Gisteren"
 
-msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
-msgstr "De pincode is 0000, dit is de standaard pincode en het schakelt het kinderslot uit!.\n"
-
 #, python-format
 msgid ""
 "You already have a channel list installed,\n"
@@ -10955,6 +10935,9 @@ msgstr "U moet naar %s (%s-'%s') omschakelen!\n"
 
 msgid "You seem to be in timeshift!"
 msgstr "Timeshift lijkt actief te zijn!"
+
+msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
+msgstr "De pincode is 0000, dit is de standaard pincode en het schakelt het kinderslot uit!.\n"
 
 msgid "Your collection exceeds the size of a single layer medium, you will need a blank dual layer DVD!"
 msgstr "Uw verzameling is groter dan wat erop een single layer medium past, u heeft een lege dual layer DVD nodig!"
@@ -11220,6 +11203,9 @@ msgstr "terug"
 msgid "background image"
 msgstr "achtergrondafbeelding"
 
+msgid "backup EPG cache"
+msgstr "EPG cache backup"
+
 msgid "ballet"
 msgstr "Ballet"
 
@@ -11380,9 +11366,6 @@ msgstr "Amusement (10-16 jaar)"
 
 msgid "entertainment (6-14 year old)"
 msgstr "Amusement (6-14 jaar)"
-
-msgid "backup EPG cache"
-msgstr "EPG cache backup"
 
 msgid "equestrian"
 msgstr "Ruitersport"
@@ -11548,6 +11531,10 @@ msgstr "vooruit naar volgende titel"
 
 msgid "jump to chapter by number"
 msgstr "Spring via nummer naar hoofdstuk"
+
+#, fuzzy
+msgid "kB"
+msgstr "B"
 
 msgid "languages"
 msgstr "talen"
@@ -12012,14 +11999,8 @@ msgstr "Tennis/Squash"
 msgid "testing"
 msgstr "bezig"
 
-msgid "This bouquet is protected by a parental control PIN"
-msgstr "Dit bouquet is beschermd met een pincode t.b.v. het kinderslot."
-
 msgid "this recording"
 msgstr "deze opname"
-
-msgid "This service is protected by a parental control PIN"
-msgstr "Dit kanaal is beveiligd met een kinderslot"
 
 msgid "toggle time, chapter, audio, subtitle info"
 msgstr "Tijd, hoofdstuk, audio en ondertitels instellen"

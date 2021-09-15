@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Openpli\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-10 01:42+0300\n"
+"POT-Creation-Date: 2021-09-15 22:30+0300\n"
 "PO-Revision-Date: 2019-04-03 06:49+0300\n"
 "Last-Translator: \n"
 "Language-Team: Raivo, Henkka, eesatfan, rimas, zeros\\n faas, sateks, valgekotkas, tigekala, rootsikunn\\n kain, i70, mustkass, pelmeen, Scott\\n <digi-tv.ee>\n"
@@ -95,9 +95,6 @@ msgstr ""
 msgid " Warning: the selected tuner should not use SCR Unicable type for LNBs because each tuner need a own SCR number."
 msgstr ""
 
-msgid " extensions."
-msgstr " laiendused."
-
 #, fuzzy
 msgid " min"
 msgstr "%d min"
@@ -105,27 +102,12 @@ msgstr "%d min"
 msgid " ms"
 msgstr " ms"
 
-msgid " packages selected."
-msgstr " paketti valitud."
-
 msgid " unicable LNB input of rotor"
 msgstr ""
 
 #, python-format
 msgid "%(freespace)s %(percent)s free disk space"
 msgstr "%(freespace)s %(percent)s vaba kettaruumi"
-
-#, python-format
-msgid "%.0f GB"
-msgstr "%.0f GB"
-
-#, python-format
-msgid "%.0f MB"
-msgstr "%.0f MB"
-
-#, python-format
-msgid "%.0f kB"
-msgstr "%.0f kB"
 
 #, python-format
 msgid "%.1f° E"
@@ -176,10 +158,6 @@ msgstr "%a %e/%m"
 #. TRANSLATORS: long date representation short dayname daynum short monthname hour:minute in strftime() format! See 'man strftime'
 msgid "%a %e/%m  %-H:%M"
 msgstr "%a %e/%m  %-H:%M"
-
-#, python-format
-msgid "%d B"
-msgstr "%d B"
 
 #, python-format
 msgid "%d GB"
@@ -255,6 +233,12 @@ msgstr "%d minutit"
 #, python-format
 msgid "%d ms"
 msgstr "%d ms"
+
+#, fuzzy, python-format
+msgid "%d package selected."
+msgid_plural "%d packages selected."
+msgstr[0] " paketti valitud."
+msgstr[1] " paketti valitud."
 
 #, python-format
 msgid "%d pixel wide"
@@ -577,6 +561,9 @@ msgstr "Hetkel salvestatakse. Peata salvestamine enne kanaliotsingu alustamist."
 
 msgid "A recording is currently running. Please stop the recording before trying to start a testing DiSEqC."
 msgstr "Hetkel salvestatakse. Peata salvestamine enne DiSEqC testimist."
+
+msgid "A repeating event is currently recording. What would you like to do?"
+msgstr "Kordab sündmust mis just salvestub. Mida soovid teha?"
 
 #, python-format
 msgid "A required tool (%s) was not found."
@@ -2664,11 +2651,11 @@ msgstr "Laienduse üksikasjad: "
 msgid "Detect next boxes before standby"
 msgstr "Leia järgnevad seadmed enne ooteseisundit"
 
-msgid "Detected storage devices:"
-msgstr "Andmekandjad:"
-
 msgid "Detected NIMs:"
 msgstr "Leitud tuunerid:"
+
+msgid "Detected storage devices:"
+msgstr "Andmekandjad:"
 
 msgid "Device name:"
 msgstr "Seadme nimi:"
@@ -3260,6 +3247,9 @@ msgstr "Sisesta IP-aadress"
 msgid "Enter PIN"
 msgstr "Sisesta PIN"
 
+msgid "Enter PIN code"
+msgstr "Sisesta PIN kood"
+
 msgid "Enter URL"
 msgstr "Sisesta URL"
 
@@ -3277,9 +3267,6 @@ msgstr "Mine peamenüüsse"
 
 msgid "Enter persistent PIN code"
 msgstr "Sisesta püsiv PIN kood"
-
-msgid "Enter PIN code"
-msgstr "Sisesta PIN kood"
 
 msgid "Enter the frequency at which you LNB switches between low band and high band. For more information consult the spec sheet of your LNB."
 msgstr "Sisesta sagedus, millel LNB lülitub kõrgsagedusriba ja madalsagedusriba vahel. Enamat infot vaata LNB spetsifikatsioonist."
@@ -6800,16 +6787,6 @@ msgstr "korda esitusloendit"
 msgid "Repeat type"
 msgstr "Kordamise liik"
 
-msgid ""
-"Repeating event currently recording.\n"
-"What do you want to do?"
-msgstr ""
-"Kordab sündmust mis just salvestub.\n"
-"Mida soovid teha?"
-
-msgid "A repeating event is currently recording. What would you like to do?"
-msgstr "Kordab sündmust mis just salvestub. Mida soovid teha?"
-
 msgid "Repeats"
 msgstr "Kordused"
 
@@ -8954,6 +8931,9 @@ msgstr "PIN kood on muudetud."
 msgid "The PIN code has been saved successfully."
 msgstr "PIN kood on edukalt salvestatud"
 
+msgid "The PIN code you entered is wrong."
+msgstr "Vale kood."
+
 msgid "The PIN codes you entered are different."
 msgstr "Sisestatud PIN koodid on erinevad."
 
@@ -9030,9 +9010,6 @@ msgstr ""
 #, python-format
 msgid "The path %s already exists."
 msgstr "Kaust %s on juba olemas."
-
-msgid "The PIN code you entered is wrong."
-msgstr "Vale kood."
 
 #, python-format
 msgid "The results have been written to %s"
@@ -9115,6 +9092,9 @@ msgstr ""
 
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "DVD RW ketas on formaaditud.Uuesti formaatimisel kustutatakse kõik, mis plaadile kirjutatud."
+
+msgid "This bouquet is protected by a parental control PIN"
+msgstr "See kanalivalik on kaitstud lapseluku PIN koodiga"
 
 msgid "This can be useful when using the CI(+) module. After the end of the recording, the service will be automatically stopped."
 msgstr ""
@@ -9242,11 +9222,11 @@ msgstr "See valikuvõimalus võib olla kasulik pikkade HDMI kaablite puhul."
 msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr "See valik määrab moskiitomüra summutamise taseme. Seda tehakse pildi üksikasjade arvelt."
 
-msgid "This option sets the picture contrast."
-msgstr ""
-
 msgid "This option sets the picture brightness."
 msgstr "See valik määrab pildi heleduse."
+
+msgid "This option sets the picture contrast."
+msgstr ""
 
 msgid "This option sets the picture flesh tones."
 msgstr "Siin valikus saab muuta pildi nahatoone."
@@ -9281,6 +9261,9 @@ msgstr "See laiendus eemaldatakse."
 #, python-format
 msgid "This receiver cannot decode %s streams!"
 msgstr "See vastuvõtja ei dekodeeri %s vooge!"
+
+msgid "This service is protected by a parental control PIN"
+msgstr "See kanal on kaitstud lapselukuga"
 
 msgid "This setting allows the tuner configuration to be a duplication of how another tuner is already configured."
 msgstr "See säte võimaldab kasutada juba seadistatud teise tuuneri seadistusi."
@@ -9537,7 +9520,6 @@ msgstr "Tonga"
 msgid "Top and bottom"
 msgstr "Üleval ja all"
 
-#, python-format
 msgid "Total clients streaming: "
 msgstr "Kliente kokku striimimas: "
 
@@ -10098,8 +10080,9 @@ msgstr "Vaata Rass interactive"
 msgid "View details"
 msgstr "Vaata detaile"
 
-msgid "View list of available "
-msgstr "Vaata saadaval olevat nimekirja "
+#, fuzzy, python-format
+msgid "View list of available %s extensions."
+msgstr "Vaata EPG laienduste nimekirja."
 
 msgid "View list of available CommonInterface extensions"
 msgstr "Vaata CI laienduste nimekirja"
@@ -10685,9 +10668,6 @@ msgstr "Jah, ilma varukoopiata"
 msgid "Yesterday"
 msgstr "Eile"
 
-msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
-msgstr "Sinu PIN kood on 0000. See on vaikimisi PIN kood ja eemaldab lapseluku.\n"
-
 #, python-format
 msgid ""
 "You already have a channel list installed,\n"
@@ -10780,6 +10760,9 @@ msgstr "Pead lülitama teenusele %s (%s - '%s')!\n"
 
 msgid "You seem to be in timeshift!"
 msgstr ""
+
+msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
+msgstr "Sinu PIN kood on 0000. See on vaikimisi PIN kood ja eemaldab lapseluku.\n"
 
 msgid "Your collection exceeds the size of a single layer medium, you will need a blank dual layer DVD!"
 msgstr "Kogu valik ei mahu ühekihilisele plaadile, vaja on tühja kahekihilist DVD plaati!"
@@ -11048,6 +11031,9 @@ msgstr "tagasi"
 msgid "background image"
 msgstr "taustapilt"
 
+msgid "backup EPG cache"
+msgstr "EPG vahemälu varukoopia"
+
 msgid "ballet"
 msgstr "ballett"
 
@@ -11204,9 +11190,6 @@ msgstr "meelelahutus (10-16 aastastele)"
 
 msgid "entertainment (6-14 year old)"
 msgstr "meelelahutus (6-14 aastastele)"
-
-msgid "backup EPG cache"
-msgstr "EPG vahemälu varukoopia"
 
 msgid "equestrian"
 msgstr "ratsutamine"
@@ -11377,6 +11360,10 @@ msgstr "hüppa järgmisele salvestisele"
 
 msgid "jump to chapter by number"
 msgstr "hüppa peatükile numbri järgi"
+
+#, fuzzy
+msgid "kB"
+msgstr "B"
 
 msgid "languages"
 msgstr "keeled"
@@ -11844,14 +11831,8 @@ msgstr "tennis/squash"
 msgid "testing"
 msgstr "töös"
 
-msgid "This bouquet is protected by a parental control PIN"
-msgstr "See kanalivalik on kaitstud lapseluku PIN koodiga"
-
 msgid "this recording"
 msgstr "see salvestis"
-
-msgid "This service is protected by a parental control PIN"
-msgstr "See kanal on kaitstud lapselukuga"
 
 msgid "toggle time, chapter, audio, subtitle info"
 msgstr "vaheta aja, salvestuse, heli, subtiitri info"

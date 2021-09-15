@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-10 01:42+0300\n"
+"POT-Creation-Date: 2021-09-15 22:30+0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi <ims@openpli.org>\n"
@@ -101,19 +101,11 @@ msgid " Warning: the selected tuner should not use SCR Unicable type for LNBs be
 msgstr " Varování: vybraný tuner by neměl používat SCR Unicable typ pro LNB, protože každý tuner potřebuje vlastní SCR číslo SCR."
 
 #
-msgid " extensions."
-msgstr " rozšíření."
-
-#
 msgid " min"
 msgstr " min"
 
 msgid " ms"
 msgstr " ms"
-
-#
-msgid " packages selected."
-msgstr " balíčků vybráno."
 
 msgid " unicable LNB input of rotor"
 msgstr " unicable LNB vstup rotoru"
@@ -122,18 +114,6 @@ msgstr " unicable LNB vstup rotoru"
 #, python-format
 msgid "%(freespace)s %(percent)s free disk space"
 msgstr "%(freespace)s %(percent)s volného místa"
-
-#, python-format
-msgid "%.0f GB"
-msgstr "%.0f GB"
-
-#, python-format
-msgid "%.0f MB"
-msgstr "%.0f MB"
-
-#, python-format
-msgid "%.0f kB"
-msgstr "%.0f kB"
 
 #, python-format
 msgid "%.1f° E"
@@ -185,10 +165,6 @@ msgstr "%a %e/%m"
 #. TRANSLATORS: long date representation short dayname daynum short monthname hour:minute in strftime() format! See 'man strftime'
 msgid "%a %e/%m  %-H:%M"
 msgstr "%a %e/%m  %-H:%M"
-
-#, python-format
-msgid "%d B"
-msgstr "%d B"
 
 #, python-format
 msgid "%d GB"
@@ -273,6 +249,14 @@ msgstr "%d minut"
 #, python-format
 msgid "%d ms"
 msgstr "%d ms"
+
+#
+#, fuzzy, python-format
+msgid "%d package selected."
+msgid_plural "%d packages selected."
+msgstr[0] " balíčků vybráno."
+msgstr[1] " balíčků vybráno."
+msgstr[2] " balíčků vybráno."
 
 #
 #, python-format
@@ -649,6 +633,10 @@ msgstr "Probíhá nahrávání. Zrušte nahrávání před prohledáváním."
 #
 msgid "A recording is currently running. Please stop the recording before trying to start a testing DiSEqC."
 msgstr "Probíhá nahrávání. Zrušte nahrávání před začátkem testování DiSEqC.."
+
+#
+msgid "A repeating event is currently recording. What would you like to do?"
+msgstr "Opakovaná událost je právě nahrávána. Co chcete dělat?"
 
 #
 #, python-format
@@ -3025,12 +3013,12 @@ msgid "Detect next boxes before standby"
 msgstr "Detekovat ostatní boxy před standby"
 
 #
-msgid "Detected storage devices:"
-msgstr "Detekované HDD:"
-
-#
 msgid "Detected NIMs:"
 msgstr "Detekované tunery:"
+
+#
+msgid "Detected storage devices:"
+msgstr "Detekované HDD:"
 
 #
 msgid "Device name:"
@@ -3732,6 +3720,10 @@ msgstr "Zadejte IP adresu"
 msgid "Enter PIN"
 msgstr "Zadejte PIN"
 
+#
+msgid "Enter PIN code"
+msgstr "Zadejte PIN kód"
+
 msgid "Enter URL"
 msgstr "Zadejte URL"
 
@@ -3751,10 +3743,6 @@ msgstr "Hlavní menu..."
 #
 msgid "Enter persistent PIN code"
 msgstr "Zadejte trvalý PIN kód"
-
-#
-msgid "Enter PIN code"
-msgstr "Zadejte PIN kód"
 
 msgid "Enter the frequency at which you LNB switches between low band and high band. For more information consult the spec sheet of your LNB."
 msgstr "Zadejte frekvenci kterou přepíná Váš LNB mezi nízkým a vysokým pásmem. Další informace naleznete v technické dokumentaci Vašeho LNB."
@@ -7785,17 +7773,6 @@ msgstr "Opakovat playlist"
 msgid "Repeat type"
 msgstr "Druh opakování"
 
-msgid ""
-"Repeating event currently recording.\n"
-"What do you want to do?"
-msgstr ""
-"Opakovaná událost je právě nahrávána.\n"
-"Co chcete dělat?"
-
-#
-msgid "A repeating event is currently recording. What would you like to do?"
-msgstr "Opakovaná událost je právě nahrávána. Co chcete dělat?"
-
 #
 msgid "Repeats"
 msgstr "Opakování"
@@ -10209,6 +10186,9 @@ msgstr "PIN kód byl úspěšně změněn."
 msgid "The PIN code has been saved successfully."
 msgstr "PIN kód byl úspěšně uložen."
 
+msgid "The PIN code you entered is wrong."
+msgstr "Zadaný PIN kód je chybný."
+
 msgid "The PIN codes you entered are different."
 msgstr "PIN kód, který jste zadali, je odlišný."
 
@@ -10291,9 +10271,6 @@ msgstr ""
 #, python-format
 msgid "The path %s already exists."
 msgstr "Cesta %s již existuje."
-
-msgid "The PIN code you entered is wrong."
-msgstr "Zadaný PIN kód je chybný."
 
 #, python-format
 msgid "The results have been written to %s"
@@ -10382,6 +10359,9 @@ msgstr ""
 #
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "DVD RW médium je již naformátováno - nové formátování smaže veškerý obsah na tomto DVD."
+
+msgid "This bouquet is protected by a parental control PIN"
+msgstr "Tento přehled je chráněn rodičovským PINem"
 
 msgid "This can be useful when using the CI(+) module. After the end of the recording, the service will be automatically stopped."
 msgstr "To může být užitečné při použití modulu CI (+). Po ukončení záznamu bude služba automaticky zastavena."
@@ -10495,11 +10475,11 @@ msgstr "Nastavení může být užitečné pro dlouhé HDMI kabely."
 msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr "Nastavuje úroveň potlačení Mosquito Noise (Mosquito Noise je náhodný aliasing v důsledku silné komprese). Obvykle na úkor detailů obrazu."
 
-msgid "This option sets the picture contrast."
-msgstr "Nastavuje kontrast obrazu."
-
 msgid "This option sets the picture brightness."
 msgstr "Nastavuje jas obrazu."
+
+msgid "This option sets the picture contrast."
+msgstr "Nastavuje kontrast obrazu."
 
 msgid "This option sets the picture flesh tones."
 msgstr "Nastavuje odstíny tělové barvy."
@@ -10538,6 +10518,10 @@ msgstr "Plugin bude odstraněn."
 #, python-format
 msgid "This receiver cannot decode %s streams!"
 msgstr "Tento přijímač nemůže dekódovat %s streamů!"
+
+#
+msgid "This service is protected by a parental control PIN"
+msgstr "Tento program je chráněný rodičovským zámkem"
 
 msgid "This setting allows the tuner configuration to be a duplication of how another tuner is already configured."
 msgstr "Toto nastavení umožňuje, aby konfigurace tuneru byla stejná s tou, která je již nastavena pro jiný tuner."
@@ -10831,7 +10815,6 @@ msgstr "Tonga"
 msgid "Top and bottom"
 msgstr "Nahoru a dolů"
 
-#, python-format
 msgid "Total clients streaming: "
 msgstr "Celkový počet klientů ve streamu: "
 
@@ -11461,8 +11444,9 @@ msgid "View details"
 msgstr "Detaily"
 
 #
-msgid "View list of available "
-msgstr "Prohlédnout seznam dostupných "
+#, fuzzy, python-format
+msgid "View list of available %s extensions."
+msgstr "Prohlédnout seznam dostupných rozšíření pro EPG."
 
 #
 msgid "View list of available CommonInterface extensions"
@@ -12084,9 +12068,6 @@ msgstr "Ano, bez zálohy"
 msgid "Yesterday"
 msgstr "Včera"
 
-msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
-msgstr "PIN kód je 0000. Toto je výchozí PIN kód, při kterém je rodičovský zámek vypnutý!\n"
-
 #, python-format
 msgid ""
 "You already have a channel list installed,\n"
@@ -12188,6 +12169,9 @@ msgstr "Z důvodu časovače (%s) je potřeba přejít na %s ( '%s')!\n"
 
 msgid "You seem to be in timeshift!"
 msgstr "Zdá se, že jste v timeshiftu!"
+
+msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
+msgstr "PIN kód je 0000. Toto je výchozí PIN kód, při kterém je rodičovský zámek vypnutý!\n"
 
 #
 msgid "Your collection exceeds the size of a single layer medium, you will need a blank dual layer DVD!"
@@ -12481,6 +12465,9 @@ msgstr "zpět"
 msgid "background image"
 msgstr "Obrázek pozadí"
 
+msgid "backup EPG cache"
+msgstr "Zálohovat EPG cache"
+
 msgid "ballet"
 msgstr "balet"
 
@@ -12664,9 +12651,6 @@ msgstr "zábavný (10-16 let)"
 
 msgid "entertainment (6-14 year old)"
 msgstr "zábavný (6-14 let)"
-
-msgid "backup EPG cache"
-msgstr "Zálohovat EPG cache"
 
 msgid "equestrian"
 msgstr "jezdectví"
@@ -12857,6 +12841,11 @@ msgstr "přejít na další titul"
 
 msgid "jump to chapter by number"
 msgstr "přeskočit na kapitolu podle čísla"
+
+#
+#, fuzzy
+msgid "kB"
+msgstr "B"
 
 msgid "languages"
 msgstr "jazyky"
@@ -13393,16 +13382,9 @@ msgstr "tenis/squash"
 msgid "testing"
 msgstr "pracuji"
 
-msgid "This bouquet is protected by a parental control PIN"
-msgstr "Tento přehled je chráněn rodičovským PINem"
-
 #
 msgid "this recording"
 msgstr "toto nahrávání"
-
-#
-msgid "This service is protected by a parental control PIN"
-msgstr "Tento program je chráněný rodičovským zámkem"
 
 #
 msgid "toggle time, chapter, audio, subtitle info"

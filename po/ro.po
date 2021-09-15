@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-10 01:42+0300\n"
+"POT-Creation-Date: 2021-09-15 22:30+0300\n"
 "PO-Revision-Date: 2010-03-09 21:03+0100\n"
 "Last-Translator: \n"
 "Language-Team: HDTV ROMANIA(superonic,costel_mbc,neutrin,otheitis,cipy_1982,neutrin,runcanion)\n"
@@ -93,16 +93,10 @@ msgstr ""
 msgid " Warning: the selected tuner should not use SCR Unicable type for LNBs because each tuner need a own SCR number."
 msgstr ""
 
-msgid " extensions."
-msgstr ""
-
 msgid " min"
 msgstr ""
 
 msgid " ms"
-msgstr ""
-
-msgid " packages selected."
 msgstr ""
 
 msgid " unicable LNB input of rotor"
@@ -111,18 +105,6 @@ msgstr ""
 #, fuzzy, python-format
 msgid "%(freespace)s %(percent)s free disk space"
 msgstr "spatiu liber pe disk"
-
-#, python-format
-msgid "%.0f GB"
-msgstr ""
-
-#, python-format
-msgid "%.0f MB"
-msgstr ""
-
-#, python-format
-msgid "%.0f kB"
-msgstr ""
 
 #, python-format
 msgid "%.1f° E"
@@ -172,10 +154,6 @@ msgstr ""
 
 #. TRANSLATORS: long date representation short dayname daynum short monthname hour:minute in strftime() format! See 'man strftime'
 msgid "%a %e/%m  %-H:%M"
-msgstr ""
-
-#, python-format
-msgid "%d B"
 msgstr ""
 
 #, python-format
@@ -252,6 +230,12 @@ msgstr ""
 #, python-format
 msgid "%d ms"
 msgstr ""
+
+#, python-format
+msgid "%d package selected."
+msgid_plural "%d packages selected."
+msgstr[0] ""
+msgstr[1] ""
 
 #, python-format
 msgid "%d pixel wide"
@@ -569,6 +553,9 @@ msgstr ""
 
 msgid "A recording is currently running. Please stop the recording before trying to start a testing DiSEqC."
 msgstr ""
+
+msgid "A repeating event is currently recording. What would you like to do?"
+msgstr "Repetare eveniment care se inregistreaza. Ce doriti a faceti?"
 
 #, python-format
 msgid "A required tool (%s) was not found."
@@ -2720,11 +2707,11 @@ msgstr ""
 msgid "Detect next boxes before standby"
 msgstr ""
 
-msgid "Detected storage devices:"
-msgstr "HDD detectat:"
-
 msgid "Detected NIMs:"
 msgstr "NIMuri detectate:"
+
+msgid "Detected storage devices:"
+msgstr "HDD detectat:"
 
 msgid "Device name:"
 msgstr ""
@@ -3331,6 +3318,9 @@ msgstr "IP Address"
 msgid "Enter PIN"
 msgstr ""
 
+msgid "Enter PIN code"
+msgstr ""
+
 msgid "Enter URL"
 msgstr ""
 
@@ -3347,9 +3337,6 @@ msgid "Enter main menu..."
 msgstr "Intrati in meniul principal..."
 
 msgid "Enter persistent PIN code"
-msgstr ""
-
-msgid "Enter PIN code"
 msgstr ""
 
 msgid "Enter the frequency at which you LNB switches between low band and high band. For more information consult the spec sheet of your LNB."
@@ -6972,14 +6959,6 @@ msgstr "Repeta playlist"
 msgid "Repeat type"
 msgstr "Tip repetare"
 
-msgid ""
-"Repeating event currently recording.\n"
-"What do you want to do?"
-msgstr ""
-
-msgid "A repeating event is currently recording. What would you like to do?"
-msgstr "Repetare eveniment care se inregistreaza. Ce doriti a faceti?"
-
 msgid "Repeats"
 msgstr "Repeta"
 
@@ -9199,6 +9178,9 @@ msgstr ""
 msgid "The PIN code has been saved successfully."
 msgstr ""
 
+msgid "The PIN code you entered is wrong."
+msgstr "Codul PIN introdus este gresit."
+
 msgid "The PIN codes you entered are different."
 msgstr ""
 
@@ -9257,9 +9239,6 @@ msgstr ""
 #, python-format
 msgid "The path %s already exists."
 msgstr "Directia %s exista deja."
-
-msgid "The PIN code you entered is wrong."
-msgstr "Codul PIN introdus este gresit."
 
 #, python-format
 msgid "The results have been written to %s"
@@ -9342,6 +9321,9 @@ msgstr ""
 
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "Acest DVD RW este deja formatat - reformatarea presupune stergerea tuturorfisierelor de pe disc."
+
+msgid "This bouquet is protected by a parental control PIN"
+msgstr ""
 
 msgid "This can be useful when using the CI(+) module. After the end of the recording, the service will be automatically stopped."
 msgstr ""
@@ -9452,10 +9434,10 @@ msgstr ""
 msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr ""
 
-msgid "This option sets the picture contrast."
+msgid "This option sets the picture brightness."
 msgstr ""
 
-msgid "This option sets the picture brightness."
+msgid "This option sets the picture contrast."
 msgstr ""
 
 msgid "This option sets the picture flesh tones."
@@ -9491,6 +9473,9 @@ msgstr ""
 #, python-format
 msgid "This receiver cannot decode %s streams!"
 msgstr ""
+
+msgid "This service is protected by a parental control PIN"
+msgstr "Acest serviciu este protejat de PIN pentru control parental"
 
 msgid "This setting allows the tuner configuration to be a duplication of how another tuner is already configured."
 msgstr ""
@@ -9754,7 +9739,6 @@ msgstr ""
 msgid "Top and bottom"
 msgstr ""
 
-#, python-format
 msgid "Total clients streaming: "
 msgstr ""
 
@@ -10331,8 +10315,9 @@ msgstr "Vezi Rass interactive..."
 msgid "View details"
 msgstr ""
 
-msgid "View list of available "
-msgstr ""
+#, fuzzy, python-format
+msgid "View list of available %s extensions."
+msgstr "Vezi lista extensiilor EPG disponible"
 
 msgid "View list of available CommonInterface extensions"
 msgstr "Vezi lista cu estensiile CommonInterface disponibile"
@@ -10907,9 +10892,6 @@ msgstr ""
 msgid "Yesterday"
 msgstr ""
 
-msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
-msgstr ""
-
 #, python-format
 msgid ""
 "You already have a channel list installed,\n"
@@ -10984,6 +10966,9 @@ msgid "You must switch to the service %s (%s - '%s')!\n"
 msgstr ""
 
 msgid "You seem to be in timeshift!"
+msgstr ""
+
+msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
 msgstr ""
 
 msgid "Your collection exceeds the size of a single layer medium, you will need a blank dual layer DVD!"
@@ -11234,6 +11219,9 @@ msgstr "inapoi"
 msgid "background image"
 msgstr "imagine fundal"
 
+msgid "backup EPG cache"
+msgstr ""
+
 msgid "ballet"
 msgstr ""
 
@@ -11390,9 +11378,6 @@ msgid "entertainment (10-16 year old)"
 msgstr ""
 
 msgid "entertainment (6-14 year old)"
-msgstr ""
-
-msgid "backup EPG cache"
 msgstr ""
 
 msgid "equestrian"
@@ -11565,6 +11550,10 @@ msgstr "inainte la urmatorul titlu "
 
 msgid "jump to chapter by number"
 msgstr ""
+
+#, fuzzy
+msgid "kB"
+msgstr "B"
 
 msgid "languages"
 msgstr ""
@@ -12031,14 +12020,8 @@ msgstr ""
 msgid "testing"
 msgstr "lucreaza"
 
-msgid "This bouquet is protected by a parental control PIN"
-msgstr ""
-
 msgid "this recording"
 msgstr "aceasta inregistrare"
-
-msgid "This service is protected by a parental control PIN"
-msgstr "Acest serviciu este protejat de PIN pentru control parental"
 
 msgid "toggle time, chapter, audio, subtitle info"
 msgstr "schimba ceas, capitol, audio, info sutitrari"

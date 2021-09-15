@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-10 01:42+0300\n"
+"POT-Creation-Date: 2021-09-15 22:30+0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: 王彪 <satfan@163.com>\n"
 "Language-Team: 中國\n"
@@ -88,9 +88,6 @@ msgstr ""
 msgid " Warning: the selected tuner should not use SCR Unicable type for LNBs because each tuner need a own SCR number."
 msgstr ""
 
-msgid " extensions."
-msgstr " 擴展."
-
 #, fuzzy
 msgid " min"
 msgstr "%d 分鐘"
@@ -98,26 +95,11 @@ msgstr "%d 分鐘"
 msgid " ms"
 msgstr ""
 
-msgid " packages selected."
-msgstr "節目包選擇."
-
 msgid " unicable LNB input of rotor"
 msgstr ""
 
 #, python-format
 msgid "%(freespace)s %(percent)s free disk space"
-msgstr ""
-
-#, python-format
-msgid "%.0f GB"
-msgstr ""
-
-#, python-format
-msgid "%.0f MB"
-msgstr ""
-
-#, python-format
-msgid "%.0f kB"
 msgstr ""
 
 #, python-format
@@ -169,10 +151,6 @@ msgstr ""
 
 #. TRANSLATORS: long date representation short dayname daynum short monthname hour:minute in strftime() format! See 'man strftime'
 msgid "%a %e/%m  %-H:%M"
-msgstr ""
-
-#, python-format
-msgid "%d B"
 msgstr ""
 
 #, python-format
@@ -249,6 +227,12 @@ msgstr ""
 #, python-format
 msgid "%d ms"
 msgstr ""
+
+#, fuzzy, python-format
+msgid "%d package selected."
+msgid_plural "%d packages selected."
+msgstr[0] "節目包選擇."
+msgstr[1] "節目包選擇."
 
 #, python-format
 msgid "%d pixel wide"
@@ -565,6 +549,11 @@ msgstr ""
 
 msgid "A recording is currently running. Please stop the recording before trying to start a testing DiSEqC."
 msgstr ""
+
+msgid "A repeating event is currently recording. What would you like to do?"
+msgstr ""
+"重複的定時錄製事件.\n"
+"您準備怎麼辦?"
 
 #, python-format
 msgid "A required tool (%s) was not found."
@@ -2648,11 +2637,11 @@ msgstr ""
 msgid "Detect next boxes before standby"
 msgstr ""
 
-msgid "Detected storage devices:"
-msgstr "測驗到的硬碟:"
-
 msgid "Detected NIMs:"
 msgstr "測驗到的調諧器:"
+
+msgid "Detected storage devices:"
+msgstr "測驗到的硬碟:"
 
 msgid "Device name:"
 msgstr ""
@@ -3241,6 +3230,9 @@ msgstr ""
 msgid "Enter PIN"
 msgstr ""
 
+msgid "Enter PIN code"
+msgstr ""
+
 msgid "Enter URL"
 msgstr ""
 
@@ -3257,9 +3249,6 @@ msgid "Enter main menu..."
 msgstr "進入主功能表..."
 
 msgid "Enter persistent PIN code"
-msgstr ""
-
-msgid "Enter PIN code"
 msgstr ""
 
 msgid "Enter the frequency at which you LNB switches between low band and high band. For more information consult the spec sheet of your LNB."
@@ -6792,16 +6781,6 @@ msgstr "重複播放列表"
 msgid "Repeat type"
 msgstr ""
 
-msgid ""
-"Repeating event currently recording.\n"
-"What do you want to do?"
-msgstr ""
-
-msgid "A repeating event is currently recording. What would you like to do?"
-msgstr ""
-"重複的定時錄製事件.\n"
-"您準備怎麼辦?"
-
 msgid "Repeats"
 msgstr "重複"
 
@@ -8945,6 +8924,9 @@ msgstr ""
 msgid "The PIN code has been saved successfully."
 msgstr ""
 
+msgid "The PIN code you entered is wrong."
+msgstr "密碼輸入有誤."
+
 msgid "The PIN codes you entered are different."
 msgstr ""
 
@@ -9002,9 +8984,6 @@ msgstr ""
 #, python-format
 msgid "The path %s already exists."
 msgstr "路徑 %s 已經存在."
-
-msgid "The PIN code you entered is wrong."
-msgstr "密碼輸入有誤."
 
 #, python-format
 msgid "The results have been written to %s"
@@ -9084,6 +9063,9 @@ msgstr ""
 
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "這張DVD RW已經格式化過，再次格式化將刪除所有檔"
+
+msgid "This bouquet is protected by a parental control PIN"
+msgstr ""
 
 msgid "This can be useful when using the CI(+) module. After the end of the recording, the service will be automatically stopped."
 msgstr ""
@@ -9194,10 +9176,10 @@ msgstr ""
 msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr ""
 
-msgid "This option sets the picture contrast."
+msgid "This option sets the picture brightness."
 msgstr ""
 
-msgid "This option sets the picture brightness."
+msgid "This option sets the picture contrast."
 msgstr ""
 
 msgid "This option sets the picture flesh tones."
@@ -9233,6 +9215,9 @@ msgstr "這個插件將要被移除."
 #, python-format
 msgid "This receiver cannot decode %s streams!"
 msgstr ""
+
+msgid "This service is protected by a parental control PIN"
+msgstr "此頻道受家長控制."
 
 msgid "This setting allows the tuner configuration to be a duplication of how another tuner is already configured."
 msgstr ""
@@ -9475,7 +9460,6 @@ msgstr ""
 msgid "Top and bottom"
 msgstr ""
 
-#, python-format
 msgid "Total clients streaming: "
 msgstr ""
 
@@ -10033,8 +10017,9 @@ msgstr "View Rass interactive..."
 msgid "View details"
 msgstr "檢視明細"
 
-msgid "View list of available "
-msgstr "檢視可用列表 "
+#, fuzzy, python-format
+msgid "View list of available %s extensions."
+msgstr "檢視可用的EPG列表."
 
 msgid "View list of available CommonInterface extensions"
 msgstr "檢視可用的CI通用介面列表."
@@ -10591,9 +10576,6 @@ msgstr "恢復備份"
 msgid "Yesterday"
 msgstr ""
 
-msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
-msgstr ""
-
 #, python-format
 msgid ""
 "You already have a channel list installed,\n"
@@ -10667,6 +10649,9 @@ msgid "You must switch to the service %s (%s - '%s')!\n"
 msgstr ""
 
 msgid "You seem to be in timeshift!"
+msgstr ""
+
+msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
 msgstr ""
 
 msgid "Your collection exceeds the size of a single layer medium, you will need a blank dual layer DVD!"
@@ -10921,6 +10906,9 @@ msgstr "後退"
 msgid "background image"
 msgstr "背景圖片"
 
+msgid "backup EPG cache"
+msgstr ""
+
 msgid "ballet"
 msgstr ""
 
@@ -11076,9 +11064,6 @@ msgid "entertainment (10-16 year old)"
 msgstr ""
 
 msgid "entertainment (6-14 year old)"
-msgstr ""
-
-msgid "backup EPG cache"
 msgstr ""
 
 msgid "equestrian"
@@ -11251,6 +11236,10 @@ msgstr "跳轉到下一個標題"
 
 msgid "jump to chapter by number"
 msgstr ""
+
+#, fuzzy
+msgid "kB"
+msgstr "B"
 
 msgid "languages"
 msgstr ""
@@ -11719,14 +11708,8 @@ msgstr ""
 msgid "testing"
 msgstr ""
 
-msgid "This bouquet is protected by a parental control PIN"
-msgstr ""
-
 msgid "this recording"
 msgstr "這個錄影"
-
-msgid "This service is protected by a parental control PIN"
-msgstr "此頻道受家長控制."
 
 msgid "toggle time, chapter, audio, subtitle info"
 msgstr "切換時間, 章節, 音頻,字幕資訊"

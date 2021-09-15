@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPLI Enigma2 Official Greek Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-10 01:42+0300\n"
+"POT-Creation-Date: 2021-09-15 22:30+0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: MCelliotG <mcelliotg@gmail.com>\n"
 "Language-Team: MCelliotG <mcelliotg@gmail.com>\n"
@@ -94,17 +94,11 @@ msgstr " - δεν βρέθηκαν Unicable/JESS LNBs"
 msgid " Warning: the selected tuner should not use SCR Unicable type for LNBs because each tuner need a own SCR number."
 msgstr " Προειδοποίηση: Το επιλεγμένο tuner δεν πρέπει να χρησιμοποιεί τον τύπο SCR Unicable για LNBs, επειδή κάθε tuner χρειάζεται έναν δικό του αριθμό SCR."
 
-msgid " extensions."
-msgstr " επεκτάσεις."
-
 msgid " min"
 msgstr " λεπτά"
 
 msgid " ms"
 msgstr " ms"
-
-msgid " packages selected."
-msgstr " επιλεγμένα πακέτα."
 
 msgid " unicable LNB input of rotor"
 msgstr " είσοδος Unicable LNB για μοτέρ"
@@ -112,18 +106,6 @@ msgstr " είσοδος Unicable LNB για μοτέρ"
 #, python-format
 msgid "%(freespace)s %(percent)s free disk space"
 msgstr "%(freespace)s ελεύθερος χώρος δίσκου %(percent)s"
-
-#, python-format
-msgid "%.0f GB"
-msgstr "%.0f GB"
-
-#, python-format
-msgid "%.0f MB"
-msgstr "%.0f MB"
-
-#, python-format
-msgid "%.0f kB"
-msgstr "%.0f kB"
 
 #, python-format
 msgid "%.1f° E"
@@ -174,10 +156,6 @@ msgstr "%a %e/%m"
 #. TRANSLATORS: long date representation short dayname daynum short monthname hour:minute in strftime() format! See 'man strftime'
 msgid "%a %e/%m  %-H:%M"
 msgstr "%a %e/%m  %-H:%M"
-
-#, python-format
-msgid "%d B"
-msgstr "%d B"
 
 #, python-format
 msgid "%d GB"
@@ -253,6 +231,12 @@ msgstr "%d λεπτά"
 #, python-format
 msgid "%d ms"
 msgstr "%d ms"
+
+#, python-format
+msgid "%d package selected."
+msgid_plural "%d packages selected."
+msgstr[0] "Επιλέχθηκε %d πακέτο."
+msgstr[1] "Επιλέχθηκαν %d πακέτα."
 
 #, python-format
 msgid "%d pixel wide"
@@ -576,6 +560,9 @@ msgstr "Μια εγγραφή είναι σε εξέλιξη. Πρέπει να 
 
 msgid "A recording is currently running. Please stop the recording before trying to start a testing DiSEqC."
 msgstr "Μία εγγραφή βρίσκεται σε εξέλιξη. Σταματήστε την εγγραφή πριν ξεκινήσετε τον έλεγχο ενός DiSEqC."
+
+msgid "A repeating event is currently recording. What would you like to do?"
+msgstr "Γίνεται εγγραφή ενός επαναλαμβανόμενου προγράμματος. Τι θα θέλετε να κάνετε;"
 
 #, python-format
 msgid "A required tool (%s) was not found."
@@ -2638,11 +2625,11 @@ msgstr "Λεπτομέρειες για το πρόσθετο: "
 msgid "Detect next boxes before standby"
 msgstr "Εντοπισμός επόμενων δεκτών πριν την αναμονή"
 
-msgid "Detected storage devices:"
-msgstr "Εντοπισμένοι HDD:"
-
 msgid "Detected NIMs:"
 msgstr "Εντοπισμένα NIMs:"
+
+msgid "Detected storage devices:"
+msgstr "Εντοπισμένες συσκευές αποθήκευσης:"
 
 msgid "Device name:"
 msgstr "Όνομα συσκευής:"
@@ -3222,6 +3209,9 @@ msgstr "Εισαγωγή διεύθυνσης IP"
 msgid "Enter PIN"
 msgstr "Εισαγωγή PIN"
 
+msgid "Enter PIN code"
+msgstr "Εισαγωγή κωδικού PIN"
+
 msgid "Enter URL"
 msgstr "Εισαγωγή URL"
 
@@ -3239,9 +3229,6 @@ msgstr "Είσοδος στο κύριο μενού..."
 
 msgid "Enter persistent PIN code"
 msgstr "Εισαγωγή μόνιμου κωδικού PIN"
-
-msgid "Enter PIN code"
-msgstr "Εισαγωγή κωδικού PIN"
 
 msgid "Enter the frequency at which you LNB switches between low band and high band. For more information consult the spec sheet of your LNB."
 msgstr "Εισάγετε τη συχνότητα αλλαγής μεταξύ της χαμηλής και της υψηλής μπάντας του LNB. Για περισσότερες πληροφορίες ανατρέξτε στον πίνακα χαρακτηριστικών του LNB σας."
@@ -6725,16 +6712,6 @@ msgstr "Επανάληψη λίστας αναπαραγωγής"
 msgid "Repeat type"
 msgstr "Τύπος επανάληψης"
 
-msgid ""
-"Repeating event currently recording.\n"
-"What do you want to do?"
-msgstr ""
-"Το επαναλαμβανόμενο πρόγραμμα βρίσκεται σε εγγραφή.\n"
-"Τι θέλετε να γίνει;"
-
-msgid "A repeating event is currently recording. What would you like to do?"
-msgstr "Γίνεται εγγραφή ενός επαναλαμβανόμενου προγράμματος. Τι θα θέλετε να κάνετε;"
-
 msgid "Repeats"
 msgstr "Επαναλήψεις"
 
@@ -8836,6 +8813,9 @@ msgstr "Ο κωδικός PIN άλλαξε με επιτυχία."
 msgid "The PIN code has been saved successfully."
 msgstr "Ο κωδικός PIN αποθηκεύτηκε με επιτυχία."
 
+msgid "The PIN code you entered is wrong."
+msgstr "Ο κωδικός PIN που εισάγατε είναι λάθος."
+
 msgid "The PIN codes you entered are different."
 msgstr "Οι κωδικοί PIN που εισάγατε είναι διαφορετικοί."
 
@@ -8915,9 +8895,6 @@ msgstr ""
 msgid "The path %s already exists."
 msgstr "Η διαδρομή %s υπάρχει ήδη."
 
-msgid "The PIN code you entered is wrong."
-msgstr "Ο κωδικός PIN που εισάγατε είναι λάθος."
-
 #, python-format
 msgid "The results have been written to %s"
 msgstr "Τα αποτελέσματα καταγράφτηκαν στο %s"
@@ -8996,6 +8973,9 @@ msgstr ""
 
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "Αυτό το DVD RW είναι ήδη φορμαρισμένο - η επαναμορφοποίηση θα σβήσει όλα τα περιεχόμενα του δίσκου."
+
+msgid "This bouquet is protected by a parental control PIN"
+msgstr "Αυτό το μπουκέτο προστατεύεται με γονικό κωδικό PIN"
 
 msgid "This can be useful when using the CI(+) module. After the end of the recording, the service will be automatically stopped."
 msgstr "Αυτό μπορεί να είναι χρήσιμο κατά τη λειτουργία του αρθρώματος CI(+). Μετά την ολοκλήρωση της εγγραφής, το κανάλι θα σταματήσει αυτόματα."
@@ -9109,11 +9089,11 @@ msgstr "Αυτή η επιλογή μπορεί να είναι χρήσιμη �
 msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr "Αυτή η επιλογή ορίζει το επίπεδο μείωσης του θορύβου κουνουπιού (ο Θόρυβος Κουνουπιού είναι η τυχαία παραποίηση της εικόνας ως αποτέλεσμα της έντονης συμπίεσης). Προφανώς αυτό μειώνει τις λεπτομέρειες της εικόνας."
 
-msgid "This option sets the picture contrast."
-msgstr "Αυτή η επιλογή ρυθμίζει την αντίθεση της εικόνας."
-
 msgid "This option sets the picture brightness."
 msgstr "Αυτή η επιλογή ρυθμίζει τη φωτεινότητα της εικόνας."
+
+msgid "This option sets the picture contrast."
+msgstr "Αυτή η επιλογή ρυθμίζει την αντίθεση της εικόνας."
 
 msgid "This option sets the picture flesh tones."
 msgstr "Αυτή η επιλογή ρυθμίζει τους τόνους δέρματος σε μια εικόνα."
@@ -9148,6 +9128,9 @@ msgstr "Αυτό το πρόσθετο θα διαγραφεί."
 #, python-format
 msgid "This receiver cannot decode %s streams!"
 msgstr "Αυτός ο δέκτης δεν μπορεί να αποκωδικοποιήσει ροές %s!"
+
+msgid "This service is protected by a parental control PIN"
+msgstr "Αυτή η υπηρεσία προστατεύεται με γονικό κωδικό PIN"
 
 msgid "This setting allows the tuner configuration to be a duplication of how another tuner is already configured."
 msgstr "Αυτή η ρύθμιση επιτρέπει στην παραμετροποίηση του tuner να είναι διπλότυπη με αυτή ενός ήδη ρυθμισμένου tuner."
@@ -9399,7 +9382,6 @@ msgstr "Τόγκα"
 msgid "Top and bottom"
 msgstr "Πάνω και Κάτω"
 
-#, python-format
 msgid "Total clients streaming: "
 msgstr "Συνολικοί πελάτες σε ροή: "
 
@@ -9947,8 +9929,9 @@ msgstr "Εμφάνιση διαδραστικού Rass..."
 msgid "View details"
 msgstr "Εμφάνιση λεπτομερειών"
 
-msgid "View list of available "
-msgstr "Εμφάνιση λίστας διαθέσιμων "
+#, python-format
+msgid "View list of available %s extensions."
+msgstr "Εμφάνιση λίστας διαθέσιμων επεκτάσεων %s."
 
 msgid "View list of available CommonInterface extensions"
 msgstr "Εμφάνιση λίστας διαθέσιμων επεκτάσεων Κοινής Διεπαφής"
@@ -10519,9 +10502,6 @@ msgstr "Ναι, χωρίς εφεδρεία"
 msgid "Yesterday"
 msgstr "Χθες"
 
-msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
-msgstr "Ο κωδικός PIN είναι 0000. Αυτός είναι ο προεπιλεγμένος κωδικός PIN και απενεργοποιεί το γονικό έλεγχο!\n"
-
 #, python-format
 msgid ""
 "You already have a channel list installed,\n"
@@ -10614,6 +10594,9 @@ msgstr "Πρέπει να γίνει αλλαγή στην υπηρεσία %s (
 
 msgid "You seem to be in timeshift!"
 msgstr "Φαίνεται ότι εκτελείται χρονομετατόπιση!"
+
+msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
+msgstr "Ο κωδικός PIN είναι 0000. Αυτός είναι ο προεπιλεγμένος κωδικός PIN και απενεργοποιεί το γονικό έλεγχο!\n"
 
 msgid "Your collection exceeds the size of a single layer medium, you will need a blank dual layer DVD!"
 msgstr "Η συλλογή σας υπερβαίνει το μέγεθος ενός DVD μονής στρώσης. Θα χρειαστείτε ένα κενό DVD διπλής στρώσης!"
@@ -10877,6 +10860,9 @@ msgstr "πίσω"
 msgid "background image"
 msgstr "εικόνα φόντου"
 
+msgid "backup EPG cache"
+msgstr "Εφεδρεία των πληροφοριών EPG"
+
 msgid "ballet"
 msgstr "μπαλέτο"
 
@@ -11033,9 +11019,6 @@ msgstr "ψυχαγωγία (10-16 ετών)"
 
 msgid "entertainment (6-14 year old)"
 msgstr "ψυχαγωγία (6-14 ετών)"
-
-msgid "backup EPG cache"
-msgstr "αντίγραφο ασφαλείας των πληροφοριών EPG"
 
 msgid "equestrian"
 msgstr "ιπποδρομίες"
@@ -11201,6 +11184,9 @@ msgstr "μετάβαση στον επόμενο τίτλο"
 
 msgid "jump to chapter by number"
 msgstr "μετάβαση στο κεφάλαιο με αριθμό"
+
+msgid "kB"
+msgstr "kB"
 
 msgid "languages"
 msgstr "γλώσσες"
@@ -11662,14 +11648,8 @@ msgstr "τένις/σκουώς"
 msgid "testing"
 msgstr "υπό έλεγχο"
 
-msgid "This bouquet is protected by a parental control PIN"
-msgstr "Αυτό το μπουκέτο προστατεύεται με γονικό κωδικό PIN"
-
 msgid "this recording"
 msgstr "αυτή η εγγραφή"
-
-msgid "This service is protected by a parental control PIN"
-msgstr "Αυτή η υπηρεσία προστατεύεται με γονικό κωδικό PIN"
 
 msgid "toggle time, chapter, audio, subtitle info"
 msgstr "εναλλαγή πληροφοριών χρόνου, κεφαλαίου, ήχου, υποτίτλων"

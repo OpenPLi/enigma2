@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-10 01:42+0300\n"
+"POT-Creation-Date: 2021-09-15 22:30+0300\n"
 "PO-Revision-Date: 2021-08-02 09:19+0700\n"
 "Last-Translator: krong\n"
 "Language-Team: none\n"
@@ -93,17 +93,11 @@ msgstr " - Unicable / JESS LNBs không tìm thấy"
 msgid " Warning: the selected tuner should not use SCR Unicable type for LNBs because each tuner need a own SCR number."
 msgstr " Cảnh báo: bộ chỉnh đã chọn không nên sử dụng loại SCR Unicable cho LNBs vì mỗi bộ chỉnh cần một số SCR riêng."
 
-msgid " extensions."
-msgstr " phần mở rộng."
-
 msgid " min"
 msgstr " min"
 
 msgid " ms"
 msgstr " ms"
-
-msgid " packages selected."
-msgstr " các gói được chọn."
 
 msgid " unicable LNB input of rotor"
 msgstr " đầu vào LNB không thể tách rời của rôto"
@@ -111,18 +105,6 @@ msgstr " đầu vào LNB không thể tách rời của rôto"
 #, python-format
 msgid "%(freespace)s %(percent)s free disk space"
 msgstr "%(freespace)s %(percent)s dung lượng đĩa trống"
-
-#, python-format
-msgid "%.0f GB"
-msgstr "%.0f GB"
-
-#, python-format
-msgid "%.0f MB"
-msgstr "%.0f MB"
-
-#, python-format
-msgid "%.0f kB"
-msgstr "%.0f kB"
 
 #, python-format
 msgid "%.1f° E"
@@ -173,10 +155,6 @@ msgstr "%a %e/%m"
 #. TRANSLATORS: long date representation short dayname daynum short monthname hour:minute in strftime() format! See 'man strftime'
 msgid "%a %e/%m  %-H:%M"
 msgstr "%a %e/%m  %-H:%M"
-
-#, python-format
-msgid "%d B"
-msgstr "%d B"
 
 #, python-format
 msgid "%d GB"
@@ -245,6 +223,11 @@ msgstr "%d phút"
 #, python-format
 msgid "%d ms"
 msgstr "%d ms"
+
+#, fuzzy, python-format
+msgid "%d package selected."
+msgid_plural "%d packages selected."
+msgstr[0] " các gói được chọn."
 
 #, python-format
 msgid "%d pixel wide"
@@ -564,6 +547,9 @@ msgstr "Một bản ghi hiện đang chạy. Hãy dừng ghi âm trước khi th
 
 msgid "A recording is currently running. Please stop the recording before trying to start a testing DiSEqC."
 msgstr "Một bản ghi hiện đang chạy. Vui lòng dừng ghi âm trước khi thử bắt đầu thử nghiệm DiSEqC."
+
+msgid "A repeating event is currently recording. What would you like to do?"
+msgstr "Lặp lại sự kiện hiện đang ghi. Bạn muốn làm gì?"
 
 #, python-format
 msgid "A required tool (%s) was not found."
@@ -2629,11 +2615,11 @@ msgstr "Chi tiết cho plugin: "
 msgid "Detect next boxes before standby"
 msgstr "Phát hiện các hộp tiếp theo trước khi chờ"
 
-msgid "Detected storage devices:"
-msgstr "Đã phát hiện ổ cứng:"
-
 msgid "Detected NIMs:"
 msgstr "Đã phát hiện NIM:"
+
+msgid "Detected storage devices:"
+msgstr "Đã phát hiện ổ cứng:"
 
 msgid "Device name:"
 msgstr "Tên thiết bị:"
@@ -3216,6 +3202,9 @@ msgstr "Nhập địa chỉ IP"
 msgid "Enter PIN"
 msgstr "Nhập PIN"
 
+msgid "Enter PIN code"
+msgstr "Nhập mã PIN"
+
 msgid "Enter URL"
 msgstr "Nhập URL"
 
@@ -3233,9 +3222,6 @@ msgstr "Vào menu chính ..."
 
 msgid "Enter persistent PIN code"
 msgstr "Nhập mã PIN liên tục"
-
-msgid "Enter PIN code"
-msgstr "Nhập mã PIN"
 
 msgid "Enter the frequency at which you LNB switches between low band and high band. For more information consult the spec sheet of your LNB."
 msgstr "Nhập tần số mà LNB của bạn chuyển đổi giữa băng tần thấp và băng tần cao. Để biết thêm thông tin tham khảo bảng thông số kỹ thuật của LNB của bạn."
@@ -6720,16 +6706,6 @@ msgstr "Phát lại danh sách"
 msgid "Repeat type"
 msgstr "Lặp lại kiểu"
 
-msgid ""
-"Repeating event currently recording.\n"
-"What do you want to do?"
-msgstr ""
-"Sự kiện lặp lại hiện đang ghi.\n"
-"Bạn muốn làm gì?"
-
-msgid "A repeating event is currently recording. What would you like to do?"
-msgstr "Lặp lại sự kiện hiện đang ghi. Bạn muốn làm gì?"
-
 msgid "Repeats"
 msgstr "Lặp lại"
 
@@ -8827,6 +8803,9 @@ msgstr "Mã PIN đã được thay đổi thành công."
 msgid "The PIN code has been saved successfully."
 msgstr "Mã PIN đã được lưu thành công."
 
+msgid "The PIN code you entered is wrong."
+msgstr "Mã PIN bạn nhập là sai."
+
 msgid "The PIN codes you entered are different."
 msgstr "Mã PIN bạn đã nhập là khác nhau."
 
@@ -8906,9 +8885,6 @@ msgstr ""
 msgid "The path %s already exists."
 msgstr "Đường dẫn%s đã tồn tại."
 
-msgid "The PIN code you entered is wrong."
-msgstr "Mã PIN bạn nhập là sai."
-
 #, python-format
 msgid "The results have been written to %s"
 msgstr "Kết quả đã được ghi vào%s"
@@ -8987,6 +8963,9 @@ msgstr ""
 
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "Phương tiện DVD RW này đã được định dạng - định dạng lại sẽ xóa tất cả nội dung trên đĩa."
+
+msgid "This bouquet is protected by a parental control PIN"
+msgstr "Gói kênh này được bảo vệ bởi một chốt kiểm soát của cha mẹ"
 
 msgid "This can be useful when using the CI(+) module. After the end of the recording, the service will be automatically stopped."
 msgstr "Điều này có thể hữu ích khi sử dụng mô-đun CI (+). Sau khi kết thúc ghi, dịch vụ sẽ tự động dừng."
@@ -9100,11 +9079,11 @@ msgstr "Tùy chọn này có thể hữu ích cho cáp HDMI dài."
 msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr "Tùy chọn này đặt mức độ triệt tiêu tiếng ồn của muỗi (Tiếng ồn của muỗi là răng cưa ngẫu nhiên do nén mạnh). Rõ ràng điều này đi với chi phí hình ảnh chi tiết."
 
-msgid "This option sets the picture contrast."
-msgstr "Tùy chọn này đặt độ tương phản hình ảnh."
-
 msgid "This option sets the picture brightness."
 msgstr "Tùy chọn này đặt độ sáng của hình ảnh."
+
+msgid "This option sets the picture contrast."
+msgstr "Tùy chọn này đặt độ tương phản hình ảnh."
 
 msgid "This option sets the picture flesh tones."
 msgstr "Tùy chọn này đặt tông màu hình ảnh."
@@ -9139,6 +9118,9 @@ msgstr "Plugin này sẽ bị xóa."
 #, python-format
 msgid "This receiver cannot decode %s streams!"
 msgstr "Bộ thu này không thể giải mã luồng%s!"
+
+msgid "This service is protected by a parental control PIN"
+msgstr "Dịch vụ này được bảo vệ bởi PIN kiểm soát của phụ huynh"
 
 msgid "This setting allows the tuner configuration to be a duplication of how another tuner is already configured."
 msgstr "Cài đặt này cho phép cấu hình bộ chỉnh tần trùng lặp với cách cấu hình bộ chỉnh khác."
@@ -9390,7 +9372,6 @@ msgstr "Lưỡi"
 msgid "Top and bottom"
 msgstr "Trên và dưới"
 
-#, python-format
 msgid "Total clients streaming: "
 msgstr "Tổng số khách hàng phát trực tuyến: "
 
@@ -9937,8 +9918,9 @@ msgstr "Xem Rass tương tác ..."
 msgid "View details"
 msgstr "Xem chi tiết"
 
-msgid "View list of available "
-msgstr "Xem danh sách có sẵn "
+#, fuzzy, python-format
+msgid "View list of available %s extensions."
+msgstr "Xem danh sách các phần mở rộng EPG có sẵn."
 
 msgid "View list of available CommonInterface extensions"
 msgstr "Xem danh sách các tiện ích mở rộng CommonInterface có sẵn"
@@ -10509,9 +10491,6 @@ msgstr "Có, không cần sao lưu"
 msgid "Yesterday"
 msgstr "Hôm qua"
 
-msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
-msgstr "Mã PIN của bạn là 0000. Đây là mã PIN mặc định và nó vô hiệu hóa quyền kiểm soát của phụ huynh!\n"
-
 #, python-format
 msgid ""
 "You already have a channel list installed,\n"
@@ -10603,6 +10582,9 @@ msgstr "Bạn phải chuyển sang dịch vụ%s (%s - '%s')!\n"
 
 msgid "You seem to be in timeshift!"
 msgstr "Bạn dường như đang ở trong thời gian thay đổi!"
+
+msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
+msgstr "Mã PIN của bạn là 0000. Đây là mã PIN mặc định và nó vô hiệu hóa quyền kiểm soát của phụ huynh!\n"
 
 msgid "Your collection exceeds the size of a single layer medium, you will need a blank dual layer DVD!"
 msgstr "Bộ sưu tập của bạn vượt quá kích thước của một phương tiện một lớp, bạn sẽ cần một đĩa DVD hai lớp trống!"
@@ -10867,6 +10849,9 @@ msgstr "trở lại"
 msgid "background image"
 msgstr "hình nền"
 
+msgid "backup EPG cache"
+msgstr "sao lưu bộ nhớ cache EPG"
+
 msgid "ballet"
 msgstr "vở ballet"
 
@@ -11023,9 +11008,6 @@ msgstr "giải trí (10-16 tuổi)"
 
 msgid "entertainment (6-14 year old)"
 msgstr "giải trí (6-14 tuổi)"
-
-msgid "backup EPG cache"
-msgstr "sao lưu bộ nhớ cache EPG"
 
 msgid "equestrian"
 msgstr "cưỡi ngựa"
@@ -11191,6 +11173,10 @@ msgstr "nhảy tới tiêu đề tiếp theo"
 
 msgid "jump to chapter by number"
 msgstr "nhảy đến chương theo số"
+
+#, fuzzy
+msgid "kB"
+msgstr "B"
 
 msgid "languages"
 msgstr "ngôn ngữ"
@@ -11654,14 +11640,8 @@ msgstr "quần vợt / bóng quần"
 msgid "testing"
 msgstr "đang làm việc"
 
-msgid "This bouquet is protected by a parental control PIN"
-msgstr "Gói kênh này được bảo vệ bởi một chốt kiểm soát của cha mẹ"
-
 msgid "this recording"
 msgstr "bản ghi âm này"
-
-msgid "This service is protected by a parental control PIN"
-msgstr "Dịch vụ này được bảo vệ bởi PIN kiểm soát của phụ huynh"
 
 msgid "toggle time, chapter, audio, subtitle info"
 msgstr "chuyển thời gian, chương, âm thanh, thông tin phụ đề"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-10 01:42+0300\n"
+"POT-Creation-Date: 2021-09-15 22:30+0300\n"
 "PO-Revision-Date: 2021-08-26 20:26+0200\n"
 "Last-Translator: Željko <zeljko2@hi.ht.hr>\n"
 "Language-Team: Željko\n"
@@ -93,17 +93,11 @@ msgstr "- Unicable/JESS LNB -ovi nisu pronađeni "
 msgid " Warning: the selected tuner should not use SCR Unicable type for LNBs because each tuner need a own SCR number."
 msgstr "Upozorenje: odabrani tuner ne smije koristiti SCR unicable tip za LNB -ove jer svaki tuner treba vlastiti SCR broj. "
 
-msgid " extensions."
-msgstr " proširenja."
-
 msgid " min"
 msgstr " min"
 
 msgid " ms"
 msgstr " ms"
-
-msgid " packages selected."
-msgstr " izabrano paketa."
 
 msgid " unicable LNB input of rotor"
 msgstr "unicable LNB ulaz rotora "
@@ -111,18 +105,6 @@ msgstr "unicable LNB ulaz rotora "
 #, python-format
 msgid "%(freespace)s %(percent)s free disk space"
 msgstr "%(freespace)s %(percent)s slobodnog prostora na disku"
-
-#, python-format
-msgid "%.0f GB"
-msgstr "%.0f GB"
-
-#, python-format
-msgid "%.0f MB"
-msgstr "%.0f MB"
-
-#, python-format
-msgid "%.0f kB"
-msgstr "%.0f kB"
 
 #, python-format
 msgid "%.1f° E"
@@ -173,10 +155,6 @@ msgstr "%a %e/%m"
 #. TRANSLATORS: long date representation short dayname daynum short monthname hour:minute in strftime() format! See 'man strftime'
 msgid "%a %e/%m  %-H:%M"
 msgstr "%a %e/%m  %-H:%M"
-
-#, python-format
-msgid "%d B"
-msgstr "%d B"
 
 #, python-format
 msgid "%d GB"
@@ -259,6 +237,13 @@ msgstr "%d minute"
 #, python-format
 msgid "%d ms"
 msgstr "%d ms"
+
+#, fuzzy, python-format
+msgid "%d package selected."
+msgid_plural "%d packages selected."
+msgstr[0] " izabrano paketa."
+msgstr[1] " izabrano paketa."
+msgstr[2] " izabrano paketa."
 
 #, python-format
 msgid "%d pixel wide"
@@ -588,6 +573,9 @@ msgstr "Snimanje je trenutno u tijeku. Molimo zaustavite snimanje prije nego št
 
 msgid "A recording is currently running. Please stop the recording before trying to start a testing DiSEqC."
 msgstr "Snimanje je trenutno u tijeku. Molimo zaustavite snimanje prije nego što pokrenete testiranje DiSEqC."
+
+msgid "A repeating event is currently recording. What would you like to do?"
+msgstr "Ponavljajući događaj trenutno se snima. Što želite učiniti?"
 
 #, python-format
 msgid "A required tool (%s) was not found."
@@ -2659,11 +2647,11 @@ msgstr "Detalji dodatka: "
 msgid "Detect next boxes before standby"
 msgstr "Otkrivanje sljedećih prijemnika prije stanja čekanja"
 
-msgid "Detected storage devices:"
-msgstr "Otkriven HDD:"
-
 msgid "Detected NIMs:"
 msgstr "Otkriven NIMs:"
+
+msgid "Detected storage devices:"
+msgstr "Otkriven HDD:"
 
 msgid "Device name:"
 msgstr "Naziv uređaja:"
@@ -3250,6 +3238,9 @@ msgstr "Unesite IP adresu"
 msgid "Enter PIN"
 msgstr "Unesite PIN"
 
+msgid "Enter PIN code"
+msgstr "Unesite PIN kod"
+
 msgid "Enter URL"
 msgstr "Unesite URL"
 
@@ -3267,9 +3258,6 @@ msgstr "Uđite u glavni izbornik..."
 
 msgid "Enter persistent PIN code"
 msgstr "Unesite trajni PIN kod"
-
-msgid "Enter PIN code"
-msgstr "Unesite PIN kod"
 
 msgid "Enter the frequency at which you LNB switches between low band and high band. For more information consult the spec sheet of your LNB."
 msgstr "Unesite frekvenciju na kojoj LNB prebacuje između niske i visoke frekvencije. Za više informacija pogledajte specifikacije vašeg LNB-a."
@@ -6755,16 +6743,6 @@ msgstr "Ponovite popis pjesama"
 msgid "Repeat type"
 msgstr "Vrsta ponavljanja"
 
-msgid ""
-"Repeating event currently recording.\n"
-"What do you want to do?"
-msgstr ""
-"Trenutno se snima ponavljajući događaj.\n"
-"Što želite učiniti?"
-
-msgid "A repeating event is currently recording. What would you like to do?"
-msgstr "Ponavljajući događaj trenutno se snima. Što želite učiniti?"
-
 msgid "Repeats"
 msgstr "Ponavljanja"
 
@@ -8867,6 +8845,9 @@ msgstr "PIN kod je uspješno promijenjen."
 msgid "The PIN code has been saved successfully."
 msgstr "PIN kod je uspješno spremljen."
 
+msgid "The PIN code you entered is wrong."
+msgstr "Uneseni PIN je pogrešan."
+
 msgid "The PIN codes you entered are different."
 msgstr "PIN kodovi koje ste unijeli su različiti."
 
@@ -8946,9 +8927,6 @@ msgstr ""
 msgid "The path %s already exists."
 msgstr "Putanja %s već postoji."
 
-msgid "The PIN code you entered is wrong."
-msgstr "Uneseni PIN je pogrešan."
-
 #, python-format
 msgid "The results have been written to %s"
 msgstr "Rezultati su zapisani u %s"
@@ -9027,6 +9005,9 @@ msgstr ""
 
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "Ovaj DVD RW medij je već formatiran - ponovno formatiranje će izbrisati sav sadržaj na disku."
+
+msgid "This bouquet is protected by a parental control PIN"
+msgstr "Ovaj paket je zaštićen pinom roditeljske kontrole"
 
 msgid "This can be useful when using the CI(+) module. After the end of the recording, the service will be automatically stopped."
 msgstr "To može biti korisno kada se koristi CI(+) modul. Nakon završetka snimanja usluga će se automatski zaustaviti. "
@@ -9140,11 +9121,11 @@ msgstr "Ova opcija može biti korisna za dugačke HDMI kabele."
 msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr "Ova opcija omogućuje podešavanje razine smanjenja buke šuma (šum je slučajno preklapanje zbog jake kompresije). Očito je to zbog detalja slike."
 
-msgid "This option sets the picture contrast."
-msgstr "Ova opcija omogućuje podešavanje kontrasta slike."
-
 msgid "This option sets the picture brightness."
 msgstr "Ova opcija omogućuje podešavanje svjetline slike."
+
+msgid "This option sets the picture contrast."
+msgstr "Ova opcija omogućuje podešavanje kontrasta slike."
 
 msgid "This option sets the picture flesh tones."
 msgstr "Ova opcija omogućuje podešavanje tonova slike."
@@ -9179,6 +9160,9 @@ msgstr "Ovaj dodatak bit će uklonjen."
 #, python-format
 msgid "This receiver cannot decode %s streams!"
 msgstr "Ovaj prijemnik ne može dekodirati %s web prijenos!"
+
+msgid "This service is protected by a parental control PIN"
+msgstr "Ova usluga je zaštićena pinom roditeljske kontrole"
 
 msgid "This setting allows the tuner configuration to be a duplication of how another tuner is already configured."
 msgstr "Ova postavka omogućuje konfiguraciji tjunera da duplicira postavke sa drugog tjunera koji je već konfiguriran."
@@ -9430,7 +9414,6 @@ msgstr "Tonga"
 msgid "Top and bottom"
 msgstr "Iznad i ispod"
 
-#, python-format
 msgid "Total clients streaming: "
 msgstr "Ukupno klijenata web prijenosa: "
 
@@ -9979,8 +9962,9 @@ msgstr "Pogledajte interaktivni Rass..."
 msgid "View details"
 msgstr "Prikaži detalje"
 
-msgid "View list of available "
-msgstr "Prikaz dostupnog popisa "
+#, fuzzy, python-format
+msgid "View list of available %s extensions."
+msgstr "Pogledajte popis dostupnih EPG proširenja."
 
 msgid "View list of available CommonInterface extensions"
 msgstr "Pogledajte popis dostupnih dodataka za CI (Zajedničko sućelje)"
@@ -10551,9 +10535,6 @@ msgstr "Da, bez rezervne kopije"
 msgid "Yesterday"
 msgstr "Jučer"
 
-msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
-msgstr "Vaš PIN kod je 0000. Ovo je zadani PIN kod i onemogućuje roditeljsku kontrolu!\n"
-
 #, python-format
 msgid ""
 "You already have a channel list installed,\n"
@@ -10646,6 +10627,9 @@ msgstr "Morate se prebaciti na uslugu %s (%s - '%s')!\n"
 
 msgid "You seem to be in timeshift!"
 msgstr "Čini se da ste u pomicanju vremena!"
+
+msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
+msgstr "Vaš PIN kod je 0000. Ovo je zadani PIN kod i onemogućuje roditeljsku kontrolu!\n"
 
 msgid "Your collection exceeds the size of a single layer medium, you will need a blank dual layer DVD!"
 msgstr "Vaša zbirka premašuje veličinu jednog sloja medija, trebat će vam prazan dvoslojni DVD!"
@@ -10910,6 +10894,9 @@ msgstr "nazad"
 msgid "background image"
 msgstr "pozadinska slika"
 
+msgid "backup EPG cache"
+msgstr "sigurnosna kopija EPG-a"
+
 msgid "ballet"
 msgstr "balet"
 
@@ -11066,9 +11053,6 @@ msgstr "zabava (10-16 godina starosti)"
 
 msgid "entertainment (6-14 year old)"
 msgstr "zabava (6-14 godina starosti)"
-
-msgid "backup EPG cache"
-msgstr "sigurnosna kopija EPG-a"
 
 msgid "equestrian"
 msgstr "jahanje"
@@ -11234,6 +11218,10 @@ msgstr "skok naprijed na prethodni titl"
 
 msgid "jump to chapter by number"
 msgstr "skočite na poglavlje po broju"
+
+#, fuzzy
+msgid "kB"
+msgstr "B"
 
 msgid "languages"
 msgstr "jezici"
@@ -11697,14 +11685,8 @@ msgstr "tenis/squash"
 msgid "testing"
 msgstr "testiranje"
 
-msgid "This bouquet is protected by a parental control PIN"
-msgstr "Ovaj paket je zaštićen pinom roditeljske kontrole"
-
 msgid "this recording"
 msgstr "ovu snimku"
-
-msgid "This service is protected by a parental control PIN"
-msgstr "Ova usluga je zaštićena pinom roditeljske kontrole"
 
 msgid "toggle time, chapter, audio, subtitle info"
 msgstr "prebacivanje vremena, poglavlja, zvuka i informacija o titlovima"
