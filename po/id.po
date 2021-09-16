@@ -511,12 +511,8 @@ msgid "A"
 msgstr "A"
 
 #, python-format
-msgid ""
-"A configuration file (%s) has been modified since it was installed.\n"
-"Do you want to keep your modifications?"
-msgstr ""
-"Berkas pengaturan (%s) telah diubah sejak ia diinstall.\n"
-"Anda ingin lanjut dgn perubahan anda?"
+msgid "A configuration file (%s) has been modified since it was installed. Would you like to keep the modified version?"
+msgstr "Berkas pengaturan (%s) telah diubah sejak ia diinstall. Anda ingin lanjut dgn perubahan anda?"
 
 #, python-format
 msgid ""
@@ -529,19 +525,11 @@ msgstr ""
 msgid "A file from media is in use!"
 msgstr ""
 
-msgid ""
-"A finished record timer wants to set your\n"
-"receiver to standby. Do that now?"
-msgstr ""
-"Pewaktu rekam yang telah selesai ingin memproses\n"
-"Rx pada mode standby. Lakukan sekarang?"
+msgid "A completed recording timer is about to put your receiver in standby mode. Would you like to proceed?"
+msgstr "Pewaktu rekam yang telah selesai ingin memproses Rx pada mode standby. Lakukan sekarang?"
 
-msgid ""
-"A finished record timer wants to shut down\n"
-"your receiver. Shutdown now?"
-msgstr ""
-"Pewaktu rekam yang telah selesai ingin mematikan\n"
-"Rx anda. Matikan sekarang?"
+msgid "A completed recording timer is about to shut down your receiver. Would you like to proceed?"
+msgstr "Pewaktu rekam yang telah selesai ingin mematikan Rx anda. Matikan sekarang?"
 
 #, fuzzy
 msgid "A graphical EPG for all services of a specific bouquet"
@@ -566,10 +554,10 @@ msgstr ""
 "Rekaman sedang berjalan saat ini.\n"
 "Apa yg ingin anda lakukan?"
 
-msgid "A recording is currently running. Please stop the recording before trying to scan."
+msgid "A recording is currently running. Please stop the recording before starting a service scan."
 msgstr "Perekaman sedang berjalan saat ini. Mohon hentikan rekaman sebelum mencoba pelacakan."
 
-msgid "A recording is currently running. Please stop the recording before trying to start a testing DiSEqC."
+msgid "A recording is currently running. Please stop the recording before starting a DiSEqC test."
 msgstr "Perekaman sedang berjalan saat ini. Mohon hentikan rekaman sebelum mencoba memulai test DiSEqC."
 
 msgid "A repeating event is currently recording. What would you like to do?"
@@ -591,19 +579,11 @@ msgstr ""
 "\n"
 "Anda ingin mematikan antarmuka jaringan kedua?"
 
-msgid ""
-"A sleep timer wants to set your\n"
-"receiver to standby. Do that now?"
-msgstr ""
-"Pewaktu tidur ingin menyetel\n"
-"Rx anda ke standby. Lakukan sekarang?"
+msgid "A sleep timer is about to put your receiver in standby mode. Would you like to proceed?"
+msgstr "Pewaktu tidur ingin menyetel Rx anda ke standby. Lakukan sekarang?"
 
-msgid ""
-"A sleep timer wants to shut down\n"
-"your receiver. Shutdown now?"
-msgstr ""
-"Pewaktu tidur ingin mematikan\n"
-"Rx anda. Matikan sekarang?"
+msgid "A sleep timer is about to shut down your receiver. Would you like to proceed?"
+msgstr "Pewaktu tidur ingin mematikan Rx anda. Matikan sekarang?"
 
 msgid "A small overview of the available icon states and actions."
 msgstr "Peninjauan atas ketersediaan ikon keadaan dan tindakan."
@@ -873,7 +853,7 @@ msgid "Allow quit movieplayer with exit"
 msgstr "Izinkan keluar pemutar film dgn tombol exit"
 
 #, fuzzy
-msgid "Allow quitting movieplayer with exit"
+msgid "Allow quitting movie player with exit"
 msgstr "Izinkan keluar pemutar film dgn tombol exit"
 
 msgid "Allow subtitle language to equal audio language"
@@ -1161,7 +1141,7 @@ msgstr "Mode penulisan"
 msgid "Auto"
 msgstr "Auto"
 
-msgid "Auto Diseqc"
+msgid "Auto DiSEqC"
 msgstr "DiSEqC otomatis"
 
 msgid "Auto EXIF Orientation rotation/flipping"
@@ -9740,7 +9720,7 @@ msgstr "Pecahkan masalah"
 msgid "True"
 msgstr "Benar"
 
-msgid "Trying to download a new packetlist. Please wait..."
+msgid "Downloading a new packet list. Please wait..."
 msgstr "Mencoba unduh daftar paket yg baru. Mohon tunggu..."
 
 msgid "Tue"
@@ -10124,8 +10104,8 @@ msgstr "Gunakan tong sampah di daftar film"
 msgid "Used service scan type"
 msgstr "Jenis pelacakan layanan yg digunakan"
 
-msgid "User - bouquets"
-msgstr "Pengguna - buket"
+msgid "User bouquets"
+msgstr "Pengguna buket"
 
 #, python-format
 msgid "User Band %d"
@@ -10618,7 +10598,7 @@ msgstr "Ketika diaktifkan, terjemahan DVB grafis akan ditampilkan berwarna kunin
 msgid "When enabled, http streams are descrambled on the server side. The (remote) client receiver does not have to do descrambling. Default on."
 msgstr "Ketika diaktifkan, streaming http melakukan descramble pada sisi server. rx klien tidak perlu melakukan descramble. Bawaan diaktifkan."
 
-msgid "When enabled, it is possible to leave the movieplayer with exit."
+msgid "When enabled, it is possible to leave the movie player with exit."
 msgstr "Ketika diaktifkan, memungkinkan untuk keluar dari pemutar film dengan tombol keluar (exit)."
 
 #, fuzzy
@@ -10976,8 +10956,8 @@ msgstr ""
 "Silakan pilih apa yang akan anda lakukan selanjutnya."
 
 #, python-format
-msgid "Your internet connection is working (ip: %s)"
-msgstr "Koneksi internet anda berfungsi (ip: %s)"
+msgid "Your internet connection is working (IP address: %s)"
+msgstr "Koneksi internet anda berfungsi (IP: %s)"
 
 msgid "Your network configuration has been activated."
 msgstr "Konfigurasi jaringan anda telah diaktifkan."
@@ -11288,8 +11268,8 @@ msgstr "lawak"
 msgid "config menu"
 msgstr "menu setelan"
 
-msgid "configure in which resolution pictures are displayed with the picture viewer and movieplayer"
-msgstr "Atur resolusi gambar yang ditampilkan menggunakan Penampil Gambar dan Pemutar Film"
+msgid "Select in which resolution pictures are displayed with picture viewer or movie player."
+msgstr "Atur resolusi gambar yang ditampilkan menggunakan Penampil Gambar dan Pemutar Film."
 
 msgid "confirmed"
 msgstr "dikonfirmasi"

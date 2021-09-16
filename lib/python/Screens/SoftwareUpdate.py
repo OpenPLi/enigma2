@@ -206,7 +206,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 				self.session.openWithCallback(
 					self.modificationCallback,
 					MessageBox,
-					_("A configuration file (%s) has been modified since it was installed.\nDo you want to keep your modifications?") % (param)
+					_("A configuration file (%s) has been modified since it was installed. Would you like to keep the modified version?") % (param)
 				)
 		elif event == OpkgComponent.EVENT_ERROR:
 			self.error += 1

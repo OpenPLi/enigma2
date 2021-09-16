@@ -84,7 +84,7 @@ class InstallWizard(Screen, ConfigListScreen):
 		if self.index == self.STATE_UPDATE:
 			if config.misc.installwizard.hasnetwork.value:
 				ip = ".".join([str(x) for x in iNetwork.getAdapterAttribute(self.adapter, "ip")])
-				self.list.append(getConfigListEntry(_("Your internet connection is working (ip: %s)") % ip, self.enabled))
+				self.list.append(getConfigListEntry(_("Your internet connection is working (IP address: %s)") % ip, self.enabled))
 			else:
 				self.list.append(getConfigListEntry(_("Your receiver does not have an internet connection"), self.enabled))
 		elif self.index == self.STATE_CHOISE_CHANNELLIST:
