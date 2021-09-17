@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-15 22:30+0300\n"
+"POT-Creation-Date: 2021-09-17 22:15+0300\n"
 "PO-Revision-Date: 2020-05-16 18:41+0200\n"
 "Last-Translator: jamu\n"
 "Language-Team: BoxFreak/jamu\n"
@@ -169,10 +169,6 @@ msgid "%a %e/%m  %-H:%M"
 msgstr "%a %e.%-m  %-H:%M"
 
 #, python-format
-msgid "%d GB"
-msgstr "%d GB"
-
-#, python-format
 msgid "%d MB"
 msgstr "%d MB"
 
@@ -218,10 +214,6 @@ msgid "%d job is running in the background!"
 msgid_plural "%d jobs are running in the background!"
 msgstr[0] "%d työ on taustalla käynnissä!"
 msgstr[1] "%d työtä on taustalla käynnissä!"
-
-#, python-format
-msgid "%d kB"
-msgstr "%d kB"
 
 #, python-format
 msgid "%d kB/s"
@@ -539,27 +531,18 @@ msgstr "??"
 msgid "A"
 msgstr "A"
 
-#, python-format
-msgid "A configuration file (%s) has been modified since it was installed. Would you like to keep the modified version?"
-msgstr "Asetustiedostoa (%s) on muokattu asennuksen jälkeen. Haluatko säilyttää oman versiosi?"
-
-#
-#, python-format
-msgid ""
-"A configuration file (%s) was modified since Installation.\n"
-"Do you want to keep your version?"
-msgstr ""
-"Asetustiedostoa (%s) on muokattu asennuksen jälkeen.\n"
-"Haluatko säilyttää oman versiosi?"
-
-msgid "A file from media is in use!"
-msgstr ""
-
 msgid "A completed recording timer is about to put your receiver in standby mode. Would you like to proceed?"
 msgstr "Päättynyt ajastus haluaa asettaa vastaanottimesi valmiustilaan. Tehdäänkö niin nyt?"
 
 msgid "A completed recording timer is about to shut down your receiver. Would you like to proceed?"
 msgstr "Päättynyt ajastus haluaa sammuttaa vastaanottimesi. Sammutetaanko nyt?"
+
+#, python-format
+msgid "A configuration file (%s) has been modified since it was installed. Would you like to keep the modified version?"
+msgstr "Asetustiedostoa (%s) on muokattu asennuksen jälkeen. Haluatko säilyttää oman versiosi?"
+
+msgid "A file from media is in use!"
+msgstr ""
 
 #
 msgid "A graphical EPG for all services of a specific bouquet"
@@ -585,11 +568,11 @@ msgstr ""
 "Tallennus on parhaillaan käynnissä.\n"
 "Mitä haluat tehdä?"
 
-msgid "A recording is currently running. Please stop the recording before starting a service scan."
-msgstr "Tallennus on käynnissä. Sammuta se ennen kanavanhakua."
-
 msgid "A recording is currently running. Please stop the recording before starting a DiSEqC test."
 msgstr ""
+
+msgid "A recording is currently running. Please stop the recording before starting a service scan."
+msgstr "Tallennus on käynnissä. Sammuta se ennen kanavanhakua."
 
 #
 msgid "A repeating event is currently recording. What would you like to do?"
@@ -932,9 +915,6 @@ msgstr ""
 
 msgid "Allow 12bit"
 msgstr ""
-
-msgid "Allow quit movieplayer with exit"
-msgstr "Salli tallenteista poistuminen exit-napilla"
 
 msgid "Allow quitting movie player with exit"
 msgstr "Salli tallenteista poistuminen exit-napilla"
@@ -3259,6 +3239,10 @@ msgstr "Ladataan"
 #
 msgid "Downloading Image"
 msgstr "Ladataan ohjelmistokuvaa"
+
+#
+msgid "Downloading a new packet list. Please wait..."
+msgstr "Ladataan uusinta IPKG-ohjelmapakettiluetteloa. Odota..."
 
 #
 msgid "Downloading plugin information. Please wait..."
@@ -8287,6 +8271,9 @@ msgstr ""
 msgid "Select image"
 msgstr "Poista ohjelmistokuva"
 
+msgid "Select in which resolution pictures are displayed with picture viewer or movie player."
+msgstr "Määritä missä resoluutiossa kuvat näytetään, kun käytetään kuvien katselua tai katsotaan tallenteita."
+
 msgid "Select input device"
 msgstr "Valitse syöttölaite"
 
@@ -10647,10 +10634,6 @@ msgid "True"
 msgstr ""
 
 #
-msgid "Downloading a new packet list. Please wait..."
-msgstr "Ladataan uusinta IPKG-ohjelmapakettiluetteloa. Odota..."
-
-#
 msgid "Tue"
 msgstr "Ti"
 
@@ -11065,9 +11048,6 @@ msgstr "Käytä roskakoria tallenneluettelossa"
 msgid "Used service scan type"
 msgstr "Käytetty kanavahakutyyppi"
 
-msgid "User bouquets"
-msgstr "Käyttäjä suosikit"
-
 #, python-format
 msgid "User Band %d"
 msgstr ""
@@ -11083,6 +11063,9 @@ msgstr "Käyttäjä"
 #
 msgid "User Mode"
 msgstr "Asetustila"
+
+msgid "User bouquets"
+msgstr "Käyttäjä suosikit"
 
 #
 msgid "User defined"
@@ -11870,9 +11853,6 @@ msgstr "Sinä voit polttaa ainoastaan vastaanottimesi nauhoituksia!"
 msgid "You can remove this plugin."
 msgstr "Voit poistaa tämän lisäosan."
 
-msgid "You can set how will be finished movieplayer with 'Exit' button."
-msgstr "Voit asettaa poistutaanko (ja miten) tallenteen toistosta 'Exit' näppäimellä"
-
 msgid "You can set selected directory as 'root' directory for movie player."
 msgstr "Asettaa määritetyn hakemiston tallenteiden päähakemistoksi."
 
@@ -12288,9 +12268,6 @@ msgstr "komedia"
 #
 msgid "config menu"
 msgstr "asetusvalikko"
-
-msgid "Select in which resolution pictures are displayed with picture viewer or movie player."
-msgstr "Määritä missä resoluutiossa kuvat näytetään, kun käytetään kuvien katselua tai katsotaan tallenteita."
 
 #
 msgid "confirmed"

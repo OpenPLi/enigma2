@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-15 22:30+0300\n"
+"POT-Creation-Date: 2021-09-17 22:15+0300\n"
 "PO-Revision-Date: 2021-03-06\n"
 "Last-Translator: LinuxSTV\n"
 "Language-Team: \n"
@@ -162,10 +162,6 @@ msgid "%a %e/%m  %-H:%M"
 msgstr "%a %e/%m  %-H:%M"
 
 #, python-format
-msgid "%d GB"
-msgstr "%d B"
-
-#, python-format
 msgid "%d MB"
 msgstr "%d MB"
 
@@ -209,10 +205,6 @@ msgid "%d job is running in the background!"
 msgid_plural "%d jobs are running in the background!"
 msgstr[0] "%d tugas dijalankan di belakang"
 msgstr[1] "%d tugas dijalankan di belakang"
-
-#, python-format
-msgid "%d kB"
-msgstr "%d kB"
 
 #, python-format
 msgid "%d kB/s"
@@ -510,26 +502,18 @@ msgstr "??"
 msgid "A"
 msgstr "A"
 
-#, python-format
-msgid "A configuration file (%s) has been modified since it was installed. Would you like to keep the modified version?"
-msgstr "Berkas pengaturan (%s) telah diubah sejak ia diinstall. Anda ingin lanjut dgn perubahan anda?"
-
-#, python-format
-msgid ""
-"A configuration file (%s) was modified since Installation.\n"
-"Do you want to keep your version?"
-msgstr ""
-"Berkas pengaturan (%s) telah diubah sejak proses install.\n"
-"Anda ingin mempertahankan versi anda?"
-
-msgid "A file from media is in use!"
-msgstr ""
-
 msgid "A completed recording timer is about to put your receiver in standby mode. Would you like to proceed?"
 msgstr "Pewaktu rekam yang telah selesai ingin memproses Rx pada mode standby. Lakukan sekarang?"
 
 msgid "A completed recording timer is about to shut down your receiver. Would you like to proceed?"
 msgstr "Pewaktu rekam yang telah selesai ingin mematikan Rx anda. Matikan sekarang?"
+
+#, python-format
+msgid "A configuration file (%s) has been modified since it was installed. Would you like to keep the modified version?"
+msgstr "Berkas pengaturan (%s) telah diubah sejak ia diinstall. Anda ingin lanjut dgn perubahan anda?"
+
+msgid "A file from media is in use!"
+msgstr ""
 
 #, fuzzy
 msgid "A graphical EPG for all services of a specific bouquet"
@@ -554,11 +538,11 @@ msgstr ""
 "Rekaman sedang berjalan saat ini.\n"
 "Apa yg ingin anda lakukan?"
 
-msgid "A recording is currently running. Please stop the recording before starting a service scan."
-msgstr "Perekaman sedang berjalan saat ini. Mohon hentikan rekaman sebelum mencoba pelacakan."
-
 msgid "A recording is currently running. Please stop the recording before starting a DiSEqC test."
 msgstr "Perekaman sedang berjalan saat ini. Mohon hentikan rekaman sebelum mencoba memulai test DiSEqC."
+
+msgid "A recording is currently running. Please stop the recording before starting a service scan."
+msgstr "Perekaman sedang berjalan saat ini. Mohon hentikan rekaman sebelum mencoba pelacakan."
 
 msgid "A repeating event is currently recording. What would you like to do?"
 msgstr "Mengulang acara yg saat ini merekam. Apa yang ingin anda lakukan?"
@@ -848,9 +832,6 @@ msgstr "Izinkan 10bit"
 #, fuzzy
 msgid "Allow 12bit"
 msgstr "Izinkan 12bit"
-
-msgid "Allow quit movieplayer with exit"
-msgstr "Izinkan keluar pemutar film dgn tombol exit"
 
 #, fuzzy
 msgid "Allow quitting movie player with exit"
@@ -3010,6 +2991,9 @@ msgstr "Mengunduh"
 #, fuzzy
 msgid "Downloading Image"
 msgstr "Mengunduh Image"
+
+msgid "Downloading a new packet list. Please wait..."
+msgstr "Mencoba unduh daftar paket yg baru. Mohon tunggu..."
 
 msgid "Downloading plugin information. Please wait..."
 msgstr "Mengunduh informasi plugin. Mohon menunggu..."
@@ -7568,6 +7552,9 @@ msgstr ""
 msgid "Select image"
 msgstr "Hapus pewaktu"
 
+msgid "Select in which resolution pictures are displayed with picture viewer or movie player."
+msgstr "Atur resolusi gambar yang ditampilkan menggunakan Penampil Gambar dan Pemutar Film."
+
 msgid "Select input device"
 msgstr "Pilih perangkat input"
 
@@ -9720,9 +9707,6 @@ msgstr "Pecahkan masalah"
 msgid "True"
 msgstr "Benar"
 
-msgid "Downloading a new packet list. Please wait..."
-msgstr "Mencoba unduh daftar paket yg baru. Mohon tunggu..."
-
 msgid "Tue"
 msgstr "Sel"
 
@@ -10104,9 +10088,6 @@ msgstr "Gunakan tong sampah di daftar film"
 msgid "Used service scan type"
 msgstr "Jenis pelacakan layanan yg digunakan"
 
-msgid "User bouquets"
-msgstr "Pengguna buket"
-
 #, python-format
 msgid "User Band %d"
 msgstr ""
@@ -10122,6 +10103,9 @@ msgstr "ID Pengguna"
 #, fuzzy
 msgid "User Mode"
 msgstr "Mode Pengguna"
+
+msgid "User bouquets"
+msgstr "Pengguna buket"
 
 msgid "User defined"
 msgstr "Ditentukan pengguna"
@@ -10865,9 +10849,6 @@ msgstr "Anda hanya bisa membakar rekaman Rx!"
 msgid "You can remove this plugin."
 msgstr "Anda bisa menghapus plugin ini."
 
-msgid "You can set how will be finished movieplayer with 'Exit' button."
-msgstr "Anda bisa mengatur bagaimana pemutar film akan diakhiri dengan tombol 'Exit'."
-
 msgid "You can set selected directory as 'root' directory for movie player."
 msgstr "Anda bisa mengatur direktori terpilih sebagai direktori 'root' untuk pemutar film."
 
@@ -11267,9 +11248,6 @@ msgstr "lawak"
 
 msgid "config menu"
 msgstr "menu setelan"
-
-msgid "Select in which resolution pictures are displayed with picture viewer or movie player."
-msgstr "Atur resolusi gambar yang ditampilkan menggunakan Penampil Gambar dan Pemutar Film."
 
 msgid "confirmed"
 msgstr "dikonfirmasi"

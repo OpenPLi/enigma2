@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-15 22:30+0300\n"
+"POT-Creation-Date: 2021-09-17 22:15+0300\n"
 "PO-Revision-Date: 2021-09-09 21:28+0300\n"
 "Last-Translator: Audronis <adga45@gmail.com>\n"
 "Language-Team: Adga (C) <adga45@gmail.com>\n"
@@ -158,10 +158,6 @@ msgid "%a %e/%m  %-H:%M"
 msgstr "%m/%e %a  %-H:%M"
 
 #, python-format
-msgid "%d GB"
-msgstr "%d Gb"
-
-#, python-format
 msgid "%d MB"
 msgstr "%d MB"
 
@@ -211,10 +207,6 @@ msgid_plural "%d jobs are running in the background!"
 msgstr[0] "%d užduotys, veikiančios fone!"
 msgstr[1] "%d užduotys veikia fone!"
 msgstr[2] "%d užduočių veikia fone!"
-
-#, python-format
-msgid "%d kB"
-msgstr "%d kB"
 
 #, python-format
 msgid "%d kB/s"
@@ -514,26 +506,18 @@ msgstr "??"
 msgid "A"
 msgstr "A"
 
-#, python-format
-msgid "A configuration file (%s) has been modified since it was installed. Would you like to keep the modified version?"
-msgstr "Konfigūracijos failas (%s) po įdiegimo buvo pakeistas. Ar norite išsaugoti šiuos savo pakeitimus?"
-
-#, python-format
-msgid ""
-"A configuration file (%s) was modified since Installation.\n"
-"Do you want to keep your version?"
-msgstr ""
-"Konfigūracijos failas (%s) diegiant buvo pakeistas.\n"
-"Ar norite išsaugoti savą (buvusią) versiją?"
-
-msgid "A file from media is in use!"
-msgstr "Medijos failas yra naudojamas!"
-
 msgid "A completed recording timer is about to put your receiver in standby mode. Would you like to proceed?"
 msgstr "Baigęs įrašymą, laikmatis nori įjungti Jūsų imtuvą į budėjimo būseną. Atlikti tai jau dabar?"
 
 msgid "A completed recording timer is about to shut down your receiver. Would you like to proceed?"
 msgstr "Baigęs įrašymą, laikmatis nori išjungti Jūsų imtuvą. Išjungti dabar?"
+
+#, python-format
+msgid "A configuration file (%s) has been modified since it was installed. Would you like to keep the modified version?"
+msgstr "Konfigūracijos failas (%s) po įdiegimo buvo pakeistas. Ar norite išsaugoti šiuos savo pakeitimus?"
+
+msgid "A file from media is in use!"
+msgstr "Medijos failas yra naudojamas!"
 
 msgid "A graphical EPG for all services of a specific bouquet"
 msgstr "Konkretaus paketo visų kanalų grafinis EPG"
@@ -556,11 +540,11 @@ msgstr ""
 "Dabar vyksta įrašymas.\n"
 "Ką norite padaryti?"
 
-msgid "A recording is currently running. Please stop the recording before starting a service scan."
-msgstr "Dabar vyksta įrašymas. Prieš paiešką, išjunkite įrašymą."
-
 msgid "A recording is currently running. Please stop the recording before starting a DiSEqC test."
 msgstr "Dabar vyksta įrašymas. Prieš tikrindami DiSEqC, nutraukite įrašymą."
+
+msgid "A recording is currently running. Please stop the recording before starting a service scan."
+msgstr "Dabar vyksta įrašymas. Prieš paiešką, išjunkite įrašymą."
 
 msgid "A repeating event is currently recording. What would you like to do?"
 msgstr "Kartojamas įvykis dabar įrašinėjamas. Ką jūs norite daryti?"
@@ -845,9 +829,6 @@ msgstr "Leisti 10 bitų"
 
 msgid "Allow 12bit"
 msgstr "Leisti 12 bitų"
-
-msgid "Allow quit movieplayer with exit"
-msgstr "Leisti užverti filmų grotuvą su exit"
 
 msgid "Allow quitting movie player with exit"
 msgstr "Leisti užverti filmų grotuvą su exit"
@@ -2937,6 +2918,9 @@ msgstr "Parsisiunčiama"
 
 msgid "Downloading Image"
 msgstr "Parsiunčiamas atvaizdas"
+
+msgid "Downloading a new packet list. Please wait..."
+msgstr "Bandome parsisiųsti naują paketų sąrašą. Laukite..."
 
 msgid "Downloading plugin information. Please wait..."
 msgstr "Parsiunčiama informacija apie priedus. Prašome laukti..."
@@ -7344,6 +7328,9 @@ msgstr "Pasirinkite, kaip norite, kad imtuvas išsaugotų tinkamą laiką iš DV
 msgid "Select image"
 msgstr "Pasirinkite atvaizdą"
 
+msgid "Select in which resolution pictures are displayed with picture viewer or movie player."
+msgstr "Konfigūruokite, kokia rezoliucija rodomos nuotraukos nuotraukų naršyklėje ir grotuve."
+
 msgid "Select input device"
 msgstr "Pasirinkite įvesties įrenginį"
 
@@ -9437,9 +9424,6 @@ msgstr "Trikčių šalinimas"
 msgid "True"
 msgstr "Teisingas"
 
-msgid "Downloading a new packet list. Please wait..."
-msgstr "Bandome parsisiųsti naują paketų sąrašą. Laukite..."
-
 msgid "Tue"
 msgstr "Ant"
 
@@ -9805,9 +9789,6 @@ msgstr "Naudoti šiukšlinę filmų sąraše"
 msgid "Used service scan type"
 msgstr "Naudojamas kanalų paieškos būdas"
 
-msgid "User bouquets"
-msgstr "Vartotojas paketai"
-
 #, python-format
 msgid "User Band %d"
 msgstr "Vartotojo juostos %d"
@@ -9821,6 +9802,9 @@ msgstr "Vartotojo ID"
 
 msgid "User Mode"
 msgstr "Vartotojo režimas"
+
+msgid "User bouquets"
+msgstr "Vartotojas paketai"
 
 msgid "User defined"
 msgstr "Vartotojo nustatytas"
@@ -10546,10 +10530,6 @@ msgid "You can remove this plugin."
 msgstr "Jūs galite pašalinti šį priedą."
 
 #
-msgid "You can set how will be finished movieplayer with 'Exit' button."
-msgstr "Jūs galite nustatyti, kaip bus baigtas filmų grotuvas su mygtuku \"Exit\"."
-
-#
 msgid "You can set selected directory as 'root' directory for movie player."
 msgstr "Jūs galite nustatyti pasirinktą katalogą, kaip filmo grotuvo pagrindinį katalogą."
 
@@ -10941,9 +10921,6 @@ msgstr "komedija"
 
 msgid "config menu"
 msgstr "konfigūracijos meniu"
-
-msgid "Select in which resolution pictures are displayed with picture viewer or movie player."
-msgstr "Konfigūruokite, kokia rezoliucija rodomos nuotraukos nuotraukų naršyklėje ir grotuve."
 
 msgid "confirmed"
 msgstr "patvirtinta"

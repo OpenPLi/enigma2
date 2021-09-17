@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-15 22:30+0300\n"
+"POT-Creation-Date: 2021-09-17 22:15+0300\n"
 "PO-Revision-Date: 2021-03-11 01:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: kvinto\n"
@@ -157,10 +157,6 @@ msgid "%a %e/%m  %-H:%M"
 msgstr "%a %e/%m  %-H:%M"
 
 #, python-format
-msgid "%d GB"
-msgstr "%d ГБ"
-
-#, python-format
 msgid "%d MB"
 msgstr "%d МБ"
 
@@ -210,10 +206,6 @@ msgid_plural "%d jobs are running in the background!"
 msgstr[0] "%d процес запущено у фоновому режимі!"
 msgstr[1] "%d процеси запущено у фоновому режимі!"
 msgstr[2] "%d процесів запущено у фоновому режимі!"
-
-#, python-format
-msgid "%d kB"
-msgstr "%d кБ"
 
 #, python-format
 msgid "%d kB/s"
@@ -513,26 +505,18 @@ msgstr "??"
 msgid "A"
 msgstr "A"
 
-#, python-format
-msgid "A configuration file (%s) has been modified since it was installed. Would you like to keep the modified version?"
-msgstr "Файл конфігурації (%s) був змінений після його встановлення. Бажаєте зберегти вашу версію?"
-
-#, python-format
-msgid ""
-"A configuration file (%s) was modified since Installation.\n"
-"Do you want to keep your version?"
-msgstr ""
-"Файл конфігурації (%s) був змінений під час інсталяції.\n"
-"Бажаєте зберегти вашу версію?"
-
-msgid "A file from media is in use!"
-msgstr "Файл з носія використовується!"
-
 msgid "A completed recording timer is about to put your receiver in standby mode. Would you like to proceed?"
 msgstr "Запис по таймеру завершено, тюнер буде переведено в режим очікування. Зробити це зараз?"
 
 msgid "A completed recording timer is about to shut down your receiver. Would you like to proceed?"
 msgstr "Запис по таймеру закінчено і Ваш тюнер буде вимкнено Зробити це зараз?"
+
+#, python-format
+msgid "A configuration file (%s) has been modified since it was installed. Would you like to keep the modified version?"
+msgstr "Файл конфігурації (%s) був змінений після його встановлення. Бажаєте зберегти вашу версію?"
+
+msgid "A file from media is in use!"
+msgstr "Файл з носія використовується!"
 
 msgid "A graphical EPG for all services of a specific bouquet"
 msgstr "Графічний ЕПГ для всіх каналів певного фавориту"
@@ -555,11 +539,11 @@ msgstr ""
 "Триває запис.\n"
 "Що Ви хочете зробити?"
 
-msgid "A recording is currently running. Please stop the recording before starting a service scan."
-msgstr "В даний час триває запис. Зупиніть запис, щоб виконати пошук."
-
 msgid "A recording is currently running. Please stop the recording before starting a DiSEqC test."
 msgstr "В даний час триває запис. Будь ласка, зупиніть запис перед тестуванням DiSEqC."
+
+msgid "A recording is currently running. Please stop the recording before starting a service scan."
+msgstr "В даний час триває запис. Зупиніть запис, щоб виконати пошук."
 
 msgid "A repeating event is currently recording. What would you like to do?"
 msgstr "Повторення завдання, яке вже записується. Що хочете зробити?"
@@ -844,9 +828,6 @@ msgstr "Вихід 10біт"
 
 msgid "Allow 12bit"
 msgstr "Вихід 12біт"
-
-msgid "Allow quit movieplayer with exit"
-msgstr "Вихід по кнопці exit в програвачі"
 
 msgid "Allow quitting movie player with exit"
 msgstr "Дозволити вийти з програвача при виході"
@@ -2934,6 +2915,9 @@ msgstr "Завантажується"
 
 msgid "Downloading Image"
 msgstr "Завантаження Іміджа"
+
+msgid "Downloading a new packet list. Please wait..."
+msgstr "Спроба завантажити новий список пакетів. Зачекайте..."
 
 msgid "Downloading plugin information. Please wait..."
 msgstr "Завантаження інформації про додатки. Зачекайте..."
@@ -7344,6 +7328,9 @@ msgstr "Виберіть варіант синхронізації часу дл
 msgid "Select image"
 msgstr "Вибір іміджу"
 
+msgid "Select in which resolution pictures are displayed with picture viewer or movie player."
+msgstr "Налаштувати, в якій роздільній здатності відображатимуться зображення за допомогою програми перегляду зображень та програвача фільмів."
+
 msgid "Select input device"
 msgstr "Виберіть пристрій введення"
 
@@ -9436,9 +9423,6 @@ msgstr "Усунення несправностей"
 msgid "True"
 msgstr "Вірно"
 
-msgid "Downloading a new packet list. Please wait..."
-msgstr "Спроба завантажити новий список пакетів. Зачекайте..."
-
 msgid "Tue"
 msgstr "Вів"
 
@@ -9804,9 +9788,6 @@ msgstr "Використання кошика в списку фільмів"
 msgid "Used service scan type"
 msgstr "Тип пошуку каналів"
 
-msgid "User bouquets"
-msgstr "Фаворити користувача"
-
 #, python-format
 msgid "User Band %d"
 msgstr "Діапазон користувача %d"
@@ -9820,6 +9801,9 @@ msgstr "ID користувача"
 
 msgid "User Mode"
 msgstr "Режим користувача"
+
+msgid "User bouquets"
+msgstr "Фаворити користувача"
 
 msgid "User defined"
 msgstr "Визначені користувачем"
@@ -10543,9 +10527,6 @@ msgstr "Ви можете записати лише з приймача!"
 msgid "You can remove this plugin."
 msgstr "Ви можете видалити цей додаток."
 
-msgid "You can set how will be finished movieplayer with 'Exit' button."
-msgstr "Ви можете встановити, що буде робити програвач при закінченні відтворення, натиснувши кнопку 'Exit'."
-
 msgid "You can set selected directory as 'root' directory for movie player."
 msgstr "Ви можете встановити вибраний каталог, як кореневий каталог для медіаплеєра."
 
@@ -10938,9 +10919,6 @@ msgstr "комедія"
 
 msgid "config menu"
 msgstr "меню конфігурації"
-
-msgid "Select in which resolution pictures are displayed with picture viewer or movie player."
-msgstr "Налаштувати, в якій роздільній здатності відображатимуться зображення за допомогою програми перегляду зображень та програвача фільмів."
 
 msgid "confirmed"
 msgstr "підтверджений"

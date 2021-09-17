@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-15 22:30+0300\n"
+"POT-Creation-Date: 2021-09-17 22:15+0300\n"
 "PO-Revision-Date: 2021-08-26 20:26+0200\n"
 "Last-Translator: Željko <zeljko2@hi.ht.hr>\n"
 "Language-Team: Željko\n"
@@ -157,10 +157,6 @@ msgid "%a %e/%m  %-H:%M"
 msgstr "%a %e/%m  %-H:%M"
 
 #, python-format
-msgid "%d GB"
-msgstr "%d GB"
-
-#, python-format
 msgid "%d MB"
 msgstr "%d MB"
 
@@ -210,10 +206,6 @@ msgid_plural "%d jobs are running in the background!"
 msgstr[0] "%d proces se izvodi u pozadini!"
 msgstr[1] "%d procesa se izvode u pozadini!"
 msgstr[2] "%d procesa se izvode u pozadini!"
-
-#, python-format
-msgid "%d kB"
-msgstr "%d kB"
 
 #, python-format
 msgid "%d kB/s"
@@ -514,26 +506,18 @@ msgstr "??"
 msgid "A"
 msgstr "A"
 
-#, python-format
-msgid "A configuration file (%s) has been modified since it was installed. Would you like to keep the modified version?"
-msgstr "Konfiguracijski fajl (%s) je promjenjen poslije instalacije. Želite li zadržati svoju verziju?"
-
-#, python-format
-msgid ""
-"A configuration file (%s) was modified since Installation.\n"
-"Do you want to keep your version?"
-msgstr ""
-"Konfiguracijski fajl (%s) je promjenjen poslije instalacije.\n"
-"Želite li zadržati svoju verziju?"
-
-msgid "A file from media is in use!"
-msgstr "Koristi se datoteka iz medija!"
-
 msgid "A completed recording timer is about to put your receiver in standby mode. Would you like to proceed?"
 msgstr "Po završetku snimanja tajmer želi staviti prijemnik u stanje čekanja? Da li to želite učiniti sada?"
 
 msgid "A completed recording timer is about to shut down your receiver. Would you like to proceed?"
 msgstr "Po završetku snimanja tajmer želi ugasiti prijemnik. Ugasiti sada?"
+
+#, python-format
+msgid "A configuration file (%s) has been modified since it was installed. Would you like to keep the modified version?"
+msgstr "Konfiguracijski fajl (%s) je promjenjen poslije instalacije. Želite li zadržati svoju verziju?"
+
+msgid "A file from media is in use!"
+msgstr "Koristi se datoteka iz medija!"
 
 msgid "A graphical EPG for all services of a specific bouquet"
 msgstr "Grafički EPG za sve kanale iz specifičnog paketa"
@@ -556,11 +540,11 @@ msgstr ""
 "Snimanje je trenutno u tijeku.\n"
 "Što želite napraviti?"
 
-msgid "A recording is currently running. Please stop the recording before starting a service scan."
-msgstr "Snimanje je trenutno u tijeku. Molimo zaustavite snimanje prije nego što pokrenete pretragu."
-
 msgid "A recording is currently running. Please stop the recording before starting a DiSEqC test."
 msgstr "Snimanje je trenutno u tijeku. Molimo zaustavite snimanje prije nego što pokrenete testiranje DiSEqC."
+
+msgid "A recording is currently running. Please stop the recording before starting a service scan."
+msgstr "Snimanje je trenutno u tijeku. Molimo zaustavite snimanje prije nego što pokrenete pretragu."
 
 msgid "A repeating event is currently recording. What would you like to do?"
 msgstr "Ponavljajući događaj trenutno se snima. Što želite učiniti?"
@@ -845,9 +829,6 @@ msgstr "Dopustite 10bit"
 
 msgid "Allow 12bit"
 msgstr "Dopustite 12bit"
-
-msgid "Allow quit movieplayer with exit"
-msgstr "Dopustite zaustavljanje playera sa izlazom iz filma"
 
 msgid "Allow quitting movie player with exit"
 msgstr "Dopustite zaustavljanje playera sa izlazom iz filma"
@@ -2939,6 +2920,9 @@ msgstr "Preuzimanje"
 
 msgid "Downloading Image"
 msgstr "Preuzimanje imagea"
+
+msgid "Downloading a new packet list. Please wait..."
+msgstr "Pokušavate preuzeti novi popis paketa. Molim pričekajte..."
 
 msgid "Downloading plugin information. Please wait..."
 msgstr "Preuzimanje informacija o dodacima. Molim pričekajte..."
@@ -7350,6 +7334,9 @@ msgstr "Odaberite kako želite da vaš prijemnik održi točno vrijeme, putem DV
 msgid "Select image"
 msgstr "Odaberite image"
 
+msgid "Select in which resolution pictures are displayed with picture viewer or movie player."
+msgstr "Prilagodite razlučivost slike na zaslonu za prikaz fotografija i video playera."
+
 msgid "Select input device"
 msgstr "Odaberite ulazni uređaj"
 
@@ -9439,9 +9426,6 @@ msgstr "Rješavanje problema"
 msgid "True"
 msgstr "Pravi"
 
-msgid "Downloading a new packet list. Please wait..."
-msgstr "Pokušavate preuzeti novi popis paketa. Molim pričekajte..."
-
 msgid "Tue"
 msgstr "Uto"
 
@@ -9807,9 +9791,6 @@ msgstr "Korištenje kante za smeće u popisu"
 msgid "Used service scan type"
 msgstr "Vrsta skenirane usluge koja se koristi"
 
-msgid "User bouquets"
-msgstr "Korisnik paketi"
-
 #, python-format
 msgid "User Band %d"
 msgstr "Korisnički opseg %d"
@@ -9823,6 +9804,9 @@ msgstr "Korisnički ID"
 
 msgid "User Mode"
 msgstr "Korisnički način rada"
+
+msgid "User bouquets"
+msgstr "Korisnik paketi"
 
 msgid "User defined"
 msgstr "Korisnički definirano"
@@ -10546,9 +10530,6 @@ msgstr "Možete snimiti samo zapise o prijemniku!"
 msgid "You can remove this plugin."
 msgstr "Možete ukloniti ovaj dodatak."
 
-msgid "You can set how will be finished movieplayer with 'Exit' button."
-msgstr "Možete podesiti način završetka filma pomoću tipke 'Exit'."
-
 msgid "You can set selected directory as 'root' directory for movie player."
 msgstr "Možete postaviti odabrani direktorij kao 'root' direktorij za filmski player."
 
@@ -10940,9 +10921,6 @@ msgstr "komedija"
 
 msgid "config menu"
 msgstr "konfiguracijski izbornik"
-
-msgid "Select in which resolution pictures are displayed with picture viewer or movie player."
-msgstr "Prilagodite razlučivost slike na zaslonu za prikaz fotografija i video playera."
 
 msgid "confirmed"
 msgstr "potvrđeno"

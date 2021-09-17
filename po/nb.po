@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-15 22:30+0300\n"
+"POT-Creation-Date: 2021-09-17 22:15+0300\n"
 "PO-Revision-Date: 2021-06-19 13:08+0200\n"
 "Last-Translator: GeirJ <dummy@dummy.com>\n"
 "Language-Team: GeirJ\n"
@@ -168,10 +168,6 @@ msgid "%a %e/%m  %-H:%M"
 msgstr "%a %e/%m  %-H:%M"
 
 #, python-format
-msgid "%d GB"
-msgstr "%d GB"
-
-#, python-format
 msgid "%d MB"
 msgstr "%d MB"
 
@@ -216,10 +212,6 @@ msgid "%d job is running in the background!"
 msgid_plural "%d jobs are running in the background!"
 msgstr[0] "%d prosess kjører i bakgrunnen!"
 msgstr[1] "%d prosesser kjører i bakgrunnen!"
-
-#, python-format
-msgid "%d kB"
-msgstr "%d kB"
 
 #, python-format
 msgid "%d kB/s"
@@ -547,28 +539,19 @@ msgstr "??"
 msgid "A"
 msgstr "A"
 
-#
-#, python-format
-msgid "A configuration file (%s) has been modified since it was installed. Would you like to keep the modified version?"
-msgstr "En konfigurasjonsfil (%s) har blitt endret siden den ble installert. Skal siste endring beholdes?"
-
-#
-#, python-format
-msgid ""
-"A configuration file (%s) was modified since Installation.\n"
-"Do you want to keep your version?"
-msgstr ""
-"En konfigurasjonsfil (%s) ble endret etter siste installasjon.\n"
-"Skal siste versjon beholdes?"
-
-msgid "A file from media is in use!"
-msgstr "En media fil er i bruk!"
-
 msgid "A completed recording timer is about to put your receiver in standby mode. Would you like to proceed?"
 msgstr "Et timer opptak er ferdig og vil slå av din mottaker til standby. Slå av nå?"
 
 msgid "A completed recording timer is about to shut down your receiver. Would you like to proceed?"
 msgstr "Et timer opptak er ferdig og vil slå av din mottaker. Slå av nå?"
+
+#
+#, python-format
+msgid "A configuration file (%s) has been modified since it was installed. Would you like to keep the modified version?"
+msgstr "En konfigurasjonsfil (%s) har blitt endret siden den ble installert. Skal siste endring beholdes?"
+
+msgid "A file from media is in use!"
+msgstr "En media fil er i bruk!"
 
 #
 msgid "A graphical EPG for all services of a specific bouquet"
@@ -592,11 +575,11 @@ msgstr ""
 "Et opptak pågår.\n"
 "Hva vil du gjøre?"
 
-msgid "A recording is currently running. Please stop the recording before starting a service scan."
-msgstr "Et opptak pågår. Vennligst stopp opptaket før kanalsøk kan utføres."
-
 msgid "A recording is currently running. Please stop the recording before starting a DiSEqC test."
 msgstr "Et opptak pågår. Vennligst stopp opptaket før DiSEqC testing kan utføres."
+
+msgid "A recording is currently running. Please stop the recording before starting a service scan."
+msgstr "Et opptak pågår. Vennligst stopp opptaket før kanalsøk kan utføres."
 
 #
 msgid "A repeating event is currently recording. What would you like to do?"
@@ -920,9 +903,6 @@ msgstr "Tillat 10bit"
 
 msgid "Allow 12bit"
 msgstr "Tillat 12bit"
-
-msgid "Allow quit movieplayer with exit"
-msgstr "Tillat stopp avspiller med exit tast"
 
 msgid "Allow quitting movie player with exit"
 msgstr "Tillat stopp avspiller med exit tast"
@@ -3244,6 +3224,10 @@ msgstr "Laster ned"
 #
 msgid "Downloading Image"
 msgstr "Laster ned operativsystem"
+
+#
+msgid "Downloading a new packet list. Please wait..."
+msgstr "Forsøker å laste ned en ny pakkeliste. Vent litt..."
 
 #
 msgid "Downloading plugin information. Please wait..."
@@ -8184,6 +8168,9 @@ msgstr "Velg hvordan du vil at mottakeren skal beholde riktig tid, enten fra DVB
 msgid "Select image"
 msgstr "Slett programvare"
 
+msgid "Select in which resolution pictures are displayed with picture viewer or movie player."
+msgstr "Still inn bildeoppløsningen som skal vises med bildeviseren og filmspilleren."
+
 msgid "Select input device"
 msgstr "Velg enhet"
 
@@ -10501,10 +10488,6 @@ msgid "True"
 msgstr "Sann"
 
 #
-msgid "Downloading a new packet list. Please wait..."
-msgstr "Forsøker å laste ned en ny pakkeliste. Vent litt..."
-
-#
 msgid "Tue"
 msgstr "Tir"
 
@@ -10906,9 +10889,6 @@ msgstr "Bruk papirkurven i opptaksliste"
 msgid "Used service scan type"
 msgstr "Kanalsøkevalg"
 
-msgid "User bouquets"
-msgstr "Kanallister"
-
 #, python-format
 msgid "User Band %d"
 msgstr ""
@@ -10924,6 +10904,9 @@ msgstr "Bruker ID"
 #
 msgid "User Mode"
 msgstr "Brukermodus"
+
+msgid "User bouquets"
+msgstr "Kanallister"
 
 #
 msgid "User defined"
@@ -11692,9 +11675,6 @@ msgstr "Du kan kun kopiere til DVD, mottakerens innspillinger!"
 msgid "You can remove this plugin."
 msgstr "Du kan slette denne utvidelse."
 
-msgid "You can set how will be finished movieplayer with 'Exit' button."
-msgstr "Her kan du kan angi avslutningsvalg for filmavspiller med 'exit' knappen."
-
 msgid "You can set selected directory as 'root' directory for movie player."
 msgstr "Her kan du angi den valgte mappen som hovedkatalog for filmavspiller."
 
@@ -12120,9 +12100,6 @@ msgstr "komedie"
 #
 msgid "config menu"
 msgstr "config meny"
-
-msgid "Select in which resolution pictures are displayed with picture viewer or movie player."
-msgstr "Still inn bildeoppløsningen som skal vises med bildeviseren og filmspilleren."
 
 #
 msgid "confirmed"

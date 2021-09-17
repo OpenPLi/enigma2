@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-15 22:30+0300\n"
+"POT-Creation-Date: 2021-09-17 22:15+0300\n"
 "PO-Revision-Date: 2021-08-02 08:54+0200\n"
 "Last-Translator: Andrej Tobola <andrej.tobola@gmail.com>\n"
 "Language-Team: \n"
@@ -158,10 +158,6 @@ msgid "%a %e/%m  %-H:%M"
 msgstr "%a %e/%m  %-H:%M"
 
 #, python-format
-msgid "%d GB"
-msgstr "%d GB"
-
-#, python-format
 msgid "%d MB"
 msgstr "%d MB"
 
@@ -211,10 +207,6 @@ msgid_plural "%d jobs are running in the background!"
 msgstr[0] "%d úloha beží na pozadí!"
 msgstr[1] "%d úlohy bežia na pozadí!"
 msgstr[2] "%d úloh beží na pozadí!"
-
-#, python-format
-msgid "%d kB"
-msgstr "%d kB"
 
 #, python-format
 msgid "%d kB/s"
@@ -515,26 +507,18 @@ msgstr "??"
 msgid "A"
 msgstr "A"
 
-#, python-format
-msgid "A configuration file (%s) has been modified since it was installed. Would you like to keep the modified version?"
-msgstr "Konfiguračný súbor (%s) bol od inštalácie zmenený. Chcete zachovať Vaše zmeny?"
-
-#, python-format
-msgid ""
-"A configuration file (%s) was modified since Installation.\n"
-"Do you want to keep your version?"
-msgstr ""
-"Konfiguračný súbor (%s) bol od inštalácie zmenený.\n"
-"Chcete zachovať Vašu verziu?"
-
-msgid "A file from media is in use!"
-msgstr "Súbor sa na disku používa!"
-
 msgid "A completed recording timer is about to put your receiver in standby mode. Would you like to proceed?"
 msgstr "Ukončený časovač nahrávania chce prepnúť Váš prijímač do pohotovostného režimu. Prepnúť teraz?"
 
 msgid "A completed recording timer is about to shut down your receiver. Would you like to proceed?"
 msgstr "Ukončený časovač nahrávania chce vypnúť Váš prijímač. Vypnúť teraz?"
+
+#, python-format
+msgid "A configuration file (%s) has been modified since it was installed. Would you like to keep the modified version?"
+msgstr "Konfiguračný súbor (%s) bol od inštalácie zmenený. Chcete zachovať Vaše zmeny?"
+
+msgid "A file from media is in use!"
+msgstr "Súbor sa na disku používa!"
 
 msgid "A graphical EPG for all services of a specific bouquet"
 msgstr "Grafické EPG pre všetky stanice zvoleného prehľadu staníc"
@@ -557,11 +541,11 @@ msgstr ""
 "Práve sa nahráva.\n"
 "Čo chcete urobiť?"
 
-msgid "A recording is currently running. Please stop the recording before starting a service scan."
-msgstr "Práve sa nahráva. Zastavte nahrávanie pred spustením vyhľadávača satelitov."
-
 msgid "A recording is currently running. Please stop the recording before starting a DiSEqC test."
 msgstr "Záznam je práve spustený. Prosím, zastavte nahrávanie pred pokusom o spustenie testovania DiSEqC."
+
+msgid "A recording is currently running. Please stop the recording before starting a service scan."
+msgstr "Práve sa nahráva. Zastavte nahrávanie pred spustením vyhľadávača satelitov."
 
 msgid "A repeating event is currently recording. What would you like to do?"
 msgstr "Práve sa nahráva opakovaná udalosť. Čo chcete urobiť?"
@@ -845,9 +829,6 @@ msgstr "Povoliť 10bit"
 
 msgid "Allow 12bit"
 msgstr "Povoliť 12bit"
-
-msgid "Allow quit movieplayer with exit"
-msgstr "Povoliť ukončenie prehrávača filmov stlačením tlačidla Exit"
 
 msgid "Allow quitting movie player with exit"
 msgstr "Povoliť ukončenie prehrávača filmov tlačidlom Exit"
@@ -2935,6 +2916,9 @@ msgstr "Sťahovanie"
 
 msgid "Downloading Image"
 msgstr "Sťahuje sa image"
+
+msgid "Downloading a new packet list. Please wait..."
+msgstr "Pokúšam sa stiahnuť nový zoznam balíčkov. Prosím čakajte..."
 
 msgid "Downloading plugin information. Please wait..."
 msgstr "Sťahujem informácie o doplnkoch. Prosím čakajte..."
@@ -7349,6 +7333,9 @@ msgstr "Vyberte možnosť, ako má prijímač udržiavať správny čas. Buď z 
 msgid "Select image"
 msgstr "Vymazať image"
 
+msgid "Select in which resolution pictures are displayed with picture viewer or movie player."
+msgstr "Nastavenie, v akom rozlíšení sú obrázky zobrazené v prehliadači obrázkov a prehrávači filmov."
+
 msgid "Select input device"
 msgstr "Zvoľte vstupné zariadenie"
 
@@ -9441,9 +9428,6 @@ msgstr "Riešenie problémov"
 msgid "True"
 msgstr "Platné"
 
-msgid "Downloading a new packet list. Please wait..."
-msgstr "Pokúšam sa stiahnuť nový zoznam balíčkov. Prosím čakajte..."
-
 msgid "Tue"
 msgstr "Ut"
 
@@ -9809,9 +9793,6 @@ msgstr "Používanie koša v zozname filmov"
 msgid "Used service scan type"
 msgstr "Typ vyhľadávania staníc"
 
-msgid "User bouquets"
-msgstr "Užívateľ prehľady"
-
 #, python-format
 msgid "User Band %d"
 msgstr ""
@@ -9825,6 +9806,9 @@ msgstr "Užívateľské ID"
 
 msgid "User Mode"
 msgstr "Užívateľský režim"
+
+msgid "User bouquets"
+msgstr "Užívateľ prehľady"
 
 msgid "User defined"
 msgstr "Užívateľsky definované"
@@ -10546,9 +10530,6 @@ msgstr "Môžete napáliť iba nahrávky z prijímača!"
 msgid "You can remove this plugin."
 msgstr "Tento doplnok môžete odstrániť."
 
-msgid "You can set how will be finished movieplayer with 'Exit' button."
-msgstr "Môžete nastaviť, ako bude ukončený prehrávač filmov stlačením tlačidla 'Exit'."
-
 msgid "You can set selected directory as 'root' directory for movie player."
 msgstr "Môžete nastaviť zvolený adresár ako 'Koreňový adresár' pre prehrávač filmov."
 
@@ -10941,9 +10922,6 @@ msgstr "komédia"
 
 msgid "config menu"
 msgstr "menu nastavení"
-
-msgid "Select in which resolution pictures are displayed with picture viewer or movie player."
-msgstr "Nastavenie, v akom rozlíšení sú obrázky zobrazené v prehliadači obrázkov a prehrávači filmov."
 
 msgid "confirmed"
 msgstr "potvrdené"
