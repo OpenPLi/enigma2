@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-15 22:30+0300\n"
+"POT-Creation-Date: 2021-09-17 22:15+0300\n"
 "PO-Revision-Date: 2020-12-05 15:11+0100\n"
 "Last-Translator: mcfly82\n"
 "Language-Team: mcfly82 & wysless\n"
@@ -159,10 +159,6 @@ msgid "%a %e/%m  %-H:%M"
 msgstr "%m. %e %a  %-H:%M"
 
 #, python-format
-msgid "%d GB"
-msgstr "%d GB"
-
-#, python-format
 msgid "%d MB"
 msgstr "%d MB"
 
@@ -206,10 +202,6 @@ msgid "%d job is running in the background!"
 msgid_plural "%d jobs are running in the background!"
 msgstr[0] "%d feladat fut a háttérben!"
 msgstr[1] "%d feladat fut a háttérben!"
-
-#, python-format
-msgid "%d kB"
-msgstr "%d kB"
 
 #, python-format
 msgid "%d kB/s"
@@ -502,26 +494,18 @@ msgstr "??"
 msgid "A"
 msgstr "A"
 
-#, python-format
-msgid "A configuration file (%s) has been modified since it was installed. Would you like to keep the modified version?"
-msgstr "A telepítés óta a (%s) konfigurációs fájl módosítva lett. Meg akarja tartani az Ön verzióját?"
-
-#, python-format
-msgid ""
-"A configuration file (%s) was modified since Installation.\n"
-"Do you want to keep your version?"
-msgstr ""
-"A telepítés óta a (%s) konfigurációs fájl módosítva lett.\n"
-"Meg akarja tartani az Ön verzióját?"
-
-msgid "A file from media is in use!"
-msgstr "A médián lévő egyik fájl használatban van!"
-
 msgid "A completed recording timer is about to put your receiver in standby mode. Would you like to proceed?"
 msgstr "Egy befejezett időzítés le akarja kapcsolni a készüléket készenléti módba. Engedélyezi?"
 
 msgid "A completed recording timer is about to shut down your receiver. Would you like to proceed?"
 msgstr "Egy befejezett időzítés ki akarja kapcsolni a készüléket. Engedélyezi?"
+
+#, python-format
+msgid "A configuration file (%s) has been modified since it was installed. Would you like to keep the modified version?"
+msgstr "A telepítés óta a (%s) konfigurációs fájl módosítva lett. Meg akarja tartani az Ön verzióját?"
+
+msgid "A file from media is in use!"
+msgstr "A médián lévő egyik fájl használatban van!"
 
 msgid "A graphical EPG for all services of a specific bouquet"
 msgstr "Grafikus EPG egy adott lista összes csatornájához"
@@ -544,11 +528,11 @@ msgstr ""
 "Egy felvétel folyamatban van. \n"
 "Mit szeretne tenni?"
 
-msgid "A recording is currently running. Please stop the recording before starting a service scan."
-msgstr "Egy felvétel folyamatban van. A keresés elindítása előtt állítsa meg a felvételt."
-
 msgid "A recording is currently running. Please stop the recording before starting a DiSEqC test."
 msgstr "Egy felvétel folyamatban van. A DiSEqC tesztelés elindítása előtt állítsa meg a felvételt."
+
+msgid "A recording is currently running. Please stop the recording before starting a service scan."
+msgstr "Egy felvétel folyamatban van. A keresés elindítása előtt állítsa meg a felvételt."
 
 msgid "A repeating event is currently recording. What would you like to do?"
 msgstr "Ismétlődő felvétel megy. Mit csináljak?"
@@ -833,9 +817,6 @@ msgstr "10bit engedélyezése"
 
 msgid "Allow 12bit"
 msgstr "12bit engedélyezése"
-
-msgid "Allow quit movieplayer with exit"
-msgstr "Médialejátszó bezárása kilépés gombbal"
 
 msgid "Allow quitting movie player with exit"
 msgstr "Médialejátszó bezárása kilépés gombbal"
@@ -2920,6 +2901,9 @@ msgstr "Letöltés"
 
 msgid "Downloading Image"
 msgstr "Image letöltése"
+
+msgid "Downloading a new packet list. Please wait..."
+msgstr "Az új csomaglitsa letöltése folyamatban. Kérem, várjon..."
 
 msgid "Downloading plugin information. Please wait..."
 msgstr "Bővítmények betöltése folyamatban. Kérem, várjon..."
@@ -7332,6 +7316,9 @@ msgstr ""
 msgid "Select image"
 msgstr "Image törlése"
 
+msgid "Select in which resolution pictures are displayed with picture viewer or movie player."
+msgstr "A képnézegető és médialejátszó felbontásának megadása."
+
 msgid "Select input device"
 msgstr "Válasszon beviteli eszközt"
 
@@ -9431,9 +9418,6 @@ msgstr "Hibakeresés"
 msgid "True"
 msgstr "Igaz"
 
-msgid "Downloading a new packet list. Please wait..."
-msgstr "Az új csomaglitsa letöltése folyamatban. Kérem, várjon..."
-
 msgid "Tue"
 msgstr "Ked"
 
@@ -9798,9 +9782,6 @@ msgstr "Kuka használata a filmlistában"
 msgid "Used service scan type"
 msgstr "Csatornakeresés típusa"
 
-msgid "User bouquets"
-msgstr "Felhasználói listák"
-
 #, python-format
 msgid "User Band %d"
 msgstr ""
@@ -9814,6 +9795,9 @@ msgstr "Felhasználói azonosító"
 
 msgid "User Mode"
 msgstr "Felhasználói mód"
+
+msgid "User bouquets"
+msgstr "Felhasználói listák"
 
 msgid "User defined"
 msgstr "Felhasználó által megadva"
@@ -10535,10 +10519,6 @@ msgid "You can remove this plugin."
 msgstr "A bővítmény eltávolítható."
 
 #
-msgid "You can set how will be finished movieplayer with 'Exit' button."
-msgstr "Megadhatja, hogy a médialejátszó mit tegyen az 'Exit' gomb megnyomásakor."
-
-#
 msgid "You can set selected directory as 'root' directory for movie player."
 msgstr "Megadhatja a kiválasztott könyvtárat 'gyökérkönyvtárként' a médialejátszóban."
 
@@ -10932,9 +10912,6 @@ msgstr "vígjáték"
 
 msgid "config menu"
 msgstr "konfig. menü"
-
-msgid "Select in which resolution pictures are displayed with picture viewer or movie player."
-msgstr "A képnézegető és médialejátszó felbontásának megadása."
 
 msgid "confirmed"
 msgstr "visszaigazolt"

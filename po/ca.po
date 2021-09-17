@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-15 22:30+0300\n"
+"POT-Creation-Date: 2021-09-17 22:15+0300\n"
 "PO-Revision-Date: 2021-06-02 18:22+0200\n"
 "Last-Translator: Oriol Pellicer <oriol@elsud.org>\n"
 "Language-Team: angelodos angelo2807@hotmail.com\n"
@@ -170,10 +170,6 @@ msgid "%a %e/%m  %-H:%M"
 msgstr "%a %e/%m  %-H:%M"
 
 #, python-format
-msgid "%d GB"
-msgstr "%d GB"
-
-#, python-format
 msgid "%d MB"
 msgstr "%d MB"
 
@@ -218,10 +214,6 @@ msgid "%d job is running in the background!"
 msgid_plural "%d jobs are running in the background!"
 msgstr[0] "%d job is running in the background!"
 msgstr[1] "%d treballs s’estan executant en segon pla!"
-
-#, python-format
-msgid "%d kB"
-msgstr "%d kB"
 
 #, python-format
 msgid "%d kB/s"
@@ -553,27 +545,18 @@ msgstr "??"
 msgid "A"
 msgstr "A"
 
-#, python-format
-msgid "A configuration file (%s) has been modified since it was installed. Would you like to keep the modified version?"
-msgstr "S’ha modificat un fitxer de configuració (%s) des que es va instal·lar. Voleu mantenir les vostres modificacions?"
-
-#
-#, python-format
-msgid ""
-"A configuration file (%s) was modified since Installation.\n"
-"Do you want to keep your version?"
-msgstr ""
-"Un fitxer de configuració (%s) es va modificar des de la instal·lació.\n"
-"Voleu conservar la vostra versió?"
-
-msgid "A file from media is in use!"
-msgstr "S’utilitza un fitxer de suports."
-
 msgid "A completed recording timer is about to put your receiver in standby mode. Would you like to proceed?"
 msgstr "Un temporitzador de registres acabat vol configurar la vostra receptor en espera. Ara, això?"
 
 msgid "A completed recording timer is about to shut down your receiver. Would you like to proceed?"
 msgstr "Un temporitzador de registres acabat vol apagar-se el receptor. Apagat ara?"
+
+#, python-format
+msgid "A configuration file (%s) has been modified since it was installed. Would you like to keep the modified version?"
+msgstr "S’ha modificat un fitxer de configuració (%s) des que es va instal·lar. Voleu mantenir les vostres modificacions?"
+
+msgid "A file from media is in use!"
+msgstr "S’utilitza un fitxer de suports."
 
 msgid "A graphical EPG for all services of a specific bouquet"
 msgstr "Un EPG gràfic per a tots els serveis d’un ram específic"
@@ -599,11 +582,11 @@ msgstr ""
 "En aquests moments s'està realitzant una gravació.\n"
 "Què vols fer?"
 
-msgid "A recording is currently running. Please stop the recording before starting a service scan."
-msgstr "Actualment s’està executant una gravació. Atureu la gravació abans d’intentar escanejar."
-
 msgid "A recording is currently running. Please stop the recording before starting a DiSEqC test."
 msgstr "Actualment s’està executant una gravació. Atureu la gravació abans de començar a provar DiSEqC."
+
+msgid "A recording is currently running. Please stop the recording before starting a service scan."
+msgstr "Actualment s’està executant una gravació. Atureu la gravació abans d’intentar escanejar."
 
 #
 msgid "A repeating event is currently recording. What would you like to do?"
@@ -937,9 +920,6 @@ msgstr "Deixeu 10 bits"
 
 msgid "Allow 12bit"
 msgstr "Deixeu 12 bits"
-
-msgid "Allow quit movieplayer with exit"
-msgstr "Permet sortir del cinema amb sortida"
 
 msgid "Allow quitting movie player with exit"
 msgstr "Permet deixar de sortir el cinema amb sortida"
@@ -3261,6 +3241,10 @@ msgstr "Descarregant"
 #
 msgid "Downloading Image"
 msgstr "Descarregant imatge"
+
+#
+msgid "Downloading a new packet list. Please wait..."
+msgstr "Intenteu descarregar una nova llista de paquets. Espereu …"
 
 #
 msgid "Downloading plugin information. Please wait..."
@@ -8241,6 +8225,9 @@ msgstr "Seleccioneu com voleu que el receptor mantingui l’hora correcta, ja si
 msgid "Select image"
 msgstr "Ha fallat l'eliminació"
 
+msgid "Select in which resolution pictures are displayed with picture viewer or movie player."
+msgstr "Configureu en quina resolució es mostren les imatges amb el visualitzador d’imatges i el reproductor de pel·lícules."
+
 msgid "Select input device"
 msgstr "Seleccioneu el dispositiu d’entrada"
 
@@ -10546,10 +10533,6 @@ msgid "True"
 msgstr "És cert"
 
 #
-msgid "Downloading a new packet list. Please wait..."
-msgstr "Intenteu descarregar una nova llista de paquets. Espereu …"
-
-#
 msgid "Tue"
 msgstr "Dim"
 
@@ -10957,9 +10940,6 @@ msgstr "Utilitzeu les papareres a la llista de moviments"
 msgid "Used service scan type"
 msgstr "Tipus d'escaneig de canals usat"
 
-msgid "User bouquets"
-msgstr "Usuari bouquets"
-
 #, python-format
 msgid "User Band %d"
 msgstr ""
@@ -10975,6 +10955,9 @@ msgstr "ID d’usuari"
 #
 msgid "User Mode"
 msgstr "Mode Usuari"
+
+msgid "User bouquets"
+msgstr "Usuari bouquets"
 
 #
 msgid "User defined"
@@ -11759,9 +11742,6 @@ msgstr "Només podeu gravar enregistraments del receptor."
 msgid "You can remove this plugin."
 msgstr "Podeu eliminar aquest complement"
 
-msgid "You can set how will be finished movieplayer with 'Exit' button."
-msgstr "Podeu definir com acabarà el cinema amb el botó “Surt”."
-
 msgid "You can set selected directory as 'root' directory for movie player."
 msgstr "Podeu definir el directori seleccionat com a directori “root” per al reproductor de pel·lícules."
 
@@ -12181,9 +12161,6 @@ msgstr "comèdia"
 #
 msgid "config menu"
 msgstr "menú configuració"
-
-msgid "Select in which resolution pictures are displayed with picture viewer or movie player."
-msgstr "Configureu en quina resolució es mostren les imatges amb el visualitzador d’imatges i el reproductor de pel·lícules."
 
 #
 msgid "confirmed"

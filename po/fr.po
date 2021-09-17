@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-15 22:30+0300\n"
+"POT-Creation-Date: 2021-09-17 22:15+0300\n"
 "PO-Revision-Date: 2021-09-12 10:10+0200\n"
 "Last-Translator: Pr2\n"
 "Language-Team: french\n"
@@ -157,10 +157,6 @@ msgid "%a %e/%m  %-H:%M"
 msgstr "%a %e/%m  %-H:%M"
 
 #, python-format
-msgid "%d GB"
-msgstr "%d GB"
-
-#, python-format
 msgid "%d MB"
 msgstr "%d MB"
 
@@ -204,10 +200,6 @@ msgid "%d job is running in the background!"
 msgid_plural "%d jobs are running in the background!"
 msgstr[0] "%d tâche fonctionne en arrière-plan!"
 msgstr[1] "%d taches fonctionnent en arrière-plan!"
-
-#, python-format
-msgid "%d kB"
-msgstr "%d kB"
 
 #, python-format
 msgid "%d kB/s"
@@ -500,26 +492,18 @@ msgstr "??"
 msgid "A"
 msgstr "A"
 
-#, python-format
-msgid "A configuration file (%s) has been modified since it was installed. Would you like to keep the modified version?"
-msgstr "Un fichier de configuration (%s) a été modifié depuis qu'il a été installé. Voulez-vous conserver vos modifications?"
-
-#, python-format
-msgid ""
-"A configuration file (%s) was modified since Installation.\n"
-"Do you want to keep your version?"
-msgstr ""
-"Un fichier de configuration (%s) a été modifié depuis l'installation.\n"
-"Voulez-vous garder votre version?"
-
-msgid "A file from media is in use!"
-msgstr "Un fichier de média est en cours d'utilisation!"
-
 msgid "A completed recording timer is about to put your receiver in standby mode. Would you like to proceed?"
 msgstr "Un enregistrement terminé souhaite mettre votre récepteur en mode veille. Êtes-vous d’accord?"
 
 msgid "A completed recording timer is about to shut down your receiver. Would you like to proceed?"
 msgstr "Un enregistrement terminé souhaite éteindre votre récepteur. Êtes-vous d’accord?"
+
+#, python-format
+msgid "A configuration file (%s) has been modified since it was installed. Would you like to keep the modified version?"
+msgstr "Un fichier de configuration (%s) a été modifié depuis qu'il a été installé. Voulez-vous conserver vos modifications?"
+
+msgid "A file from media is in use!"
+msgstr "Un fichier de média est en cours d'utilisation!"
 
 msgid "A graphical EPG for all services of a specific bouquet"
 msgstr "Un EPG graphique pour tous les services d'un bouquet spécifique"
@@ -542,11 +526,11 @@ msgstr ""
 "Un enregistrement est en cours.\n"
 "Que voulez-vous faire?"
 
-msgid "A recording is currently running. Please stop the recording before starting a service scan."
-msgstr "Un enregistrement est en cours. Veuillez arrêter l'enregistrement avant de lancer une recherche."
-
 msgid "A recording is currently running. Please stop the recording before starting a DiSEqC test."
 msgstr "Un enregistrement est en cours. Veuillez arrêter l'enregistrement avant d'essayer de tester le DiSEqC."
+
+msgid "A recording is currently running. Please stop the recording before starting a service scan."
+msgstr "Un enregistrement est en cours. Veuillez arrêter l'enregistrement avant de lancer une recherche."
 
 msgid "A repeating event is currently recording. What would you like to do?"
 msgstr "Répétition de l'événement en enregistrement. Que voulez-vous faire?"
@@ -831,9 +815,6 @@ msgstr "Autoriser 10bit"
 
 msgid "Allow 12bit"
 msgstr "Autoriser 12bit"
-
-msgid "Allow quit movieplayer with exit"
-msgstr "Autoriser de quitter Movieplayer avec la touche EXIT"
 
 msgid "Allow quitting movie player with exit"
 msgstr "Autoriser de quitter Movieplayer avec la touche EXIT"
@@ -2920,6 +2901,9 @@ msgstr "Téléchargement en cours"
 
 msgid "Downloading Image"
 msgstr "Téléchargement de l'image en cours"
+
+msgid "Downloading a new packet list. Please wait..."
+msgstr "Essai téléchargement nouvelle liste paquet. Veuillez patienter..."
 
 msgid "Downloading plugin information. Please wait..."
 msgstr "Téléchargement des informations sur les extensions en cours. Patientez SVP..."
@@ -7324,6 +7308,9 @@ msgstr "Sélectionnez comment vous souhaitez que votre récepteur conserve le te
 msgid "Select image"
 msgstr "Sélectionner une image"
 
+msgid "Select in which resolution pictures are displayed with picture viewer or movie player."
+msgstr "Configure dans quelle résolution les images sont affichées avec la visionneuse d'image et le lecteur de film."
+
 msgid "Select input device"
 msgstr "Sélectionner le périphérique entrée"
 
@@ -9422,9 +9409,6 @@ msgstr "Diagnostiquer"
 msgid "True"
 msgstr "Vrai"
 
-msgid "Downloading a new packet list. Please wait..."
-msgstr "Essai téléchargement nouvelle liste paquet. Veuillez patienter..."
-
 msgid "Tue"
 msgstr "Mar"
 
@@ -9793,9 +9777,6 @@ msgstr "Utiliser la corbeille dans liste de films"
 msgid "Used service scan type"
 msgstr "Type de recherche de service utilisé"
 
-msgid "User bouquets"
-msgstr "Perso bouquets"
-
 #, python-format
 msgid "User Band %d"
 msgstr "Bande utilisateur %d"
@@ -9809,6 +9790,9 @@ msgstr "ID de l’utilisateur"
 
 msgid "User Mode"
 msgstr "Mode utilisateur"
+
+msgid "User bouquets"
+msgstr "Perso bouquets"
 
 msgid "User defined"
 msgstr "Défini par l'utilisateur"
@@ -10532,9 +10516,6 @@ msgstr "Vous pouvez uniquement graver les enregistrements du récepteur!"
 msgid "You can remove this plugin."
 msgstr "Vous pouvez supprimer ce plugin."
 
-msgid "You can set how will be finished movieplayer with 'Exit' button."
-msgstr "Vous pouvez définir comment le lecteur de films terminera avec le bouton ‘Exit’."
-
 msgid "You can set selected directory as 'root' directory for movie player."
 msgstr "Vous pouvez choisir le répertoire ‘racine’ pour le lecteur de films."
 
@@ -10927,9 +10908,6 @@ msgstr "Comédie"
 
 msgid "config menu"
 msgstr "Menu de configuration"
-
-msgid "Select in which resolution pictures are displayed with picture viewer or movie player."
-msgstr "Configure dans quelle résolution les images sont affichées avec la visionneuse d'image et le lecteur de film."
 
 msgid "confirmed"
 msgstr "Confirmé"

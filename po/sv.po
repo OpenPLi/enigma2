@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-15 22:30+0300\n"
+"POT-Creation-Date: 2021-09-17 22:15+0300\n"
 "PO-Revision-Date: 2017-03-05 13:24+0100\n"
 "Last-Translator: Magnus Nilsson <mag_nilsson@hotmail.com>\n"
 "Language-Team: \n"
@@ -168,10 +168,6 @@ msgid "%a %e/%m  %-H:%M"
 msgstr "%a %e/%m  %-H:%M"
 
 #, python-format
-msgid "%d GB"
-msgstr ""
-
-#, python-format
 msgid "%d MB"
 msgstr ""
 
@@ -216,10 +212,6 @@ msgid "%d job is running in the background!"
 msgid_plural "%d jobs are running in the background!"
 msgstr[0] "%d jobb körs i bakgrunden!"
 msgstr[1] "%d jobb körs i bakgrunden!"
-
-#, python-format
-msgid "%d kB"
-msgstr ""
 
 #, python-format
 msgid "%d kB/s"
@@ -543,28 +535,19 @@ msgstr "??"
 msgid "A"
 msgstr "A"
 
-#
-#, python-format
-msgid "A configuration file (%s) has been modified since it was installed. Would you like to keep the modified version?"
-msgstr "En konfigurationsfil (%s) har ändrats sedan installationen. Vill du behålla din ändring?"
-
-#
-#, python-format
-msgid ""
-"A configuration file (%s) was modified since Installation.\n"
-"Do you want to keep your version?"
-msgstr ""
-"En konfigurationsfil (%s) har ändrats sedan installationen.\n"
-"Vill du behålla din version?"
-
-msgid "A file from media is in use!"
-msgstr ""
-
 msgid "A completed recording timer is about to put your receiver in standby mode. Would you like to proceed?"
 msgstr "En avslutad inspelningstimer vill försätta din mottagare i viloläge. Utföra det nu?"
 
 msgid "A completed recording timer is about to shut down your receiver. Would you like to proceed?"
 msgstr "En avslutad inspelningstimer vill stänga av din mottagare. Stänga av nu?"
+
+#
+#, python-format
+msgid "A configuration file (%s) has been modified since it was installed. Would you like to keep the modified version?"
+msgstr "En konfigurationsfil (%s) har ändrats sedan installationen. Vill du behålla din ändring?"
+
+msgid "A file from media is in use!"
+msgstr ""
 
 #
 #, fuzzy
@@ -592,11 +575,11 @@ msgstr ""
 "En inspelning pågår redan.\n"
 "Vad vill du göra?"
 
-msgid "A recording is currently running. Please stop the recording before starting a service scan."
-msgstr "En inspelning pågår för närvarande. Avsluta inspelning innan du försöker skanna."
-
 msgid "A recording is currently running. Please stop the recording before starting a DiSEqC test."
 msgstr "En inspelning pågår för närvarande. Avsluta inspelning innan du försöker starta DiSEqC test."
+
+msgid "A recording is currently running. Please stop the recording before starting a service scan."
+msgstr "En inspelning pågår för närvarande. Avsluta inspelning innan du försöker skanna."
 
 #
 msgid "A repeating event is currently recording. What would you like to do?"
@@ -937,9 +920,6 @@ msgstr ""
 
 msgid "Allow 12bit"
 msgstr ""
-
-msgid "Allow quit movieplayer with exit"
-msgstr "Avsluta movieplayer med exitknappen"
 
 #, fuzzy
 msgid "Allow quitting movie player with exit"
@@ -3332,6 +3312,10 @@ msgstr "Laddar ner"
 #, fuzzy
 msgid "Downloading Image"
 msgstr "Laddar ner"
+
+#
+msgid "Downloading a new packet list. Please wait..."
+msgstr "Försöker att ladda ner ny paketlista. Vänligen vänta..."
 
 #
 msgid "Downloading plugin information. Please wait..."
@@ -8419,6 +8403,9 @@ msgstr ""
 msgid "Select image"
 msgstr "Radera timer"
 
+msgid "Select in which resolution pictures are displayed with picture viewer or movie player."
+msgstr "Konfigurera i vilken upplösning bilderna skall visas med bildvisaren och movie player."
+
 msgid "Select input device"
 msgstr "Välj inmatningsenhet"
 
@@ -10823,10 +10810,6 @@ msgid "True"
 msgstr ""
 
 #
-msgid "Downloading a new packet list. Please wait..."
-msgstr "Försöker att ladda ner ny paketlista. Vänligen vänta..."
-
-#
 msgid "Tue"
 msgstr "Tis"
 
@@ -11249,9 +11232,6 @@ msgstr "Använd papperskorgen i filmlistan"
 msgid "Used service scan type"
 msgstr "Använd kanalsökningstyp"
 
-msgid "User bouquets"
-msgstr "Användare favoritlistor"
-
 #, python-format
 msgid "User Band %d"
 msgstr ""
@@ -11269,6 +11249,9 @@ msgstr "Användardefinierat"
 #, fuzzy
 msgid "User Mode"
 msgstr "Användardefinierat"
+
+msgid "User bouquets"
+msgstr "Användare favoritlistor"
 
 #
 msgid "User defined"
@@ -12079,9 +12062,6 @@ msgstr "Du kan bara bränna mottagarens inspelningar!"
 msgid "You can remove this plugin."
 msgstr "Du kan ta bort detta plugin."
 
-msgid "You can set how will be finished movieplayer with 'Exit' button."
-msgstr ""
-
 msgid "You can set selected directory as 'root' directory for movie player."
 msgstr ""
 
@@ -12514,9 +12494,6 @@ msgstr "komedi"
 #
 msgid "config menu"
 msgstr "konfigurationsmeny"
-
-msgid "Select in which resolution pictures are displayed with picture viewer or movie player."
-msgstr "Konfigurera i vilken upplösning bilderna skall visas med bildvisaren och movie player."
 
 #
 msgid "confirmed"

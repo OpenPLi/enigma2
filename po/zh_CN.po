@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-15 22:30+0300\n"
+"POT-Creation-Date: 2021-09-17 22:15+0300\n"
 "PO-Revision-Date: 2021-07-31 17:00+0800\n"
 "Last-Translator: 孤独之剑 <haotzyy1970@yahoo.com>\n"
 "Language-Team: 孤独之剑 <haotzyy1970@yahoo.com>\n"
@@ -158,10 +158,6 @@ msgid "%a %e/%m  %-H:%M"
 msgstr "%a %e/%m  %-H:%M"
 
 #, python-format
-msgid "%d GB"
-msgstr "%d GB"
-
-#, python-format
 msgid "%d MB"
 msgstr "%d MB"
 
@@ -205,10 +201,6 @@ msgid "%d job is running in the background!"
 msgid_plural "%d jobs are running in the background!"
 msgstr[0] "有 %d 个进程在后台运行!"
 msgstr[1] "有 %d 个进程在后台运行!"
-
-#, python-format
-msgid "%d kB"
-msgstr "%d kB"
 
 #, python-format
 msgid "%d kB/s"
@@ -502,26 +494,18 @@ msgstr "??"
 msgid "A"
 msgstr "A"
 
-#, python-format
-msgid "A configuration file (%s) has been modified since it was installed. Would you like to keep the modified version?"
-msgstr "配置文件(%s)已经变更. 是否要保留所做更改?"
-
-#, python-format
-msgid ""
-"A configuration file (%s) was modified since Installation.\n"
-"Do you want to keep your version?"
-msgstr ""
-"配置文件(%s)在安装后被修改了.\n"
-"是否想要保留您的版本？"
-
-msgid "A file from media is in use!"
-msgstr "正在使用媒体中的文件!"
-
 msgid "A completed recording timer is about to put your receiver in standby mode. Would you like to proceed?"
 msgstr "机顶盒待机定时器命令触发了是否确定现在进入待机?"
 
 msgid "A completed recording timer is about to shut down your receiver. Would you like to proceed?"
 msgstr "机顶盒关机定时器命令触发了是否确定现在关机?"
+
+#, python-format
+msgid "A configuration file (%s) has been modified since it was installed. Would you like to keep the modified version?"
+msgstr "配置文件(%s)已经变更. 是否要保留所做更改?"
+
+msgid "A file from media is in use!"
+msgstr "正在使用媒体中的文件!"
 
 msgid "A graphical EPG for all services of a specific bouquet"
 msgstr "用于特定分组所有频道的图形化EPG"
@@ -544,11 +528,11 @@ msgstr ""
 "录制正在进行中.\n"
 "您想做什么?"
 
-msgid "A recording is currently running. Please stop the recording before starting a service scan."
-msgstr "录制正在进行中. 扫描前请停止录制."
-
 msgid "A recording is currently running. Please stop the recording before starting a DiSEqC test."
 msgstr "当前有录制正在进行.要测试DisEqc请先停止录制."
+
+msgid "A recording is currently running. Please stop the recording before starting a service scan."
+msgstr "录制正在进行中. 扫描前请停止录制."
 
 msgid "A repeating event is currently recording. What would you like to do?"
 msgstr "正在重复当前录制的事件.你要做什么?"
@@ -834,9 +818,6 @@ msgstr "允许10位"
 
 msgid "Allow 12bit"
 msgstr "允许12位"
-
-msgid "Allow quit movieplayer with exit"
-msgstr "允许使用ext推出电影播放器"
 
 msgid "Allow quitting movie player with exit"
 msgstr "允许退出电影播放器"
@@ -2919,6 +2900,9 @@ msgstr "下载"
 
 msgid "Downloading Image"
 msgstr "正在解压镜像文"
+
+msgid "Downloading a new packet list. Please wait..."
+msgstr "尝试下载新的软件包列表.请稍候..."
 
 msgid "Downloading plugin information. Please wait..."
 msgstr "正在下载插件列表,请稍候..."
@@ -7325,6 +7309,9 @@ msgstr "从DVB收发器或使用NTP从internet选择您希望接收机保持正�
 msgid "Select image"
 msgstr "删除镜像"
 
+msgid "Select in which resolution pictures are displayed with picture viewer or movie player."
+msgstr "配置使用何种解决方案来显示图片浏览器和电影播放器."
+
 msgid "Select input device"
 msgstr "输入设备"
 
@@ -9415,9 +9402,6 @@ msgstr "疑难解答"
 msgid "True"
 msgstr "正确"
 
-msgid "Downloading a new packet list. Please wait..."
-msgstr "尝试下载新的软件包列表.请稍候..."
-
 msgid "Tue"
 msgstr "周二"
 
@@ -9784,9 +9768,6 @@ msgstr "在电影列表是启用回收站"
 msgid "Used service scan type"
 msgstr "按频道类型搜索"
 
-msgid "User bouquets"
-msgstr "自定义组"
-
 #, python-format
 msgid "User Band %d"
 msgstr ""
@@ -9800,6 +9781,9 @@ msgstr "用户ID"
 
 msgid "User Mode"
 msgstr "用户模式"
+
+msgid "User bouquets"
+msgstr "自定义组"
 
 msgid "User defined"
 msgstr "用户定义"
@@ -10523,9 +10507,6 @@ msgstr "您仅仅能烧录机顶盒录像!"
 msgid "You can remove this plugin."
 msgstr "你可以删除这个插件."
 
-msgid "You can set how will be finished movieplayer with 'Exit' button."
-msgstr "您可以使用'Exit'键设置电影播放器的完成方式."
-
 msgid "You can set selected directory as 'root' directory for movie player."
 msgstr "您可以将所选目录设置为电影播放器的'根'目录."
 
@@ -10916,9 +10897,6 @@ msgstr "喜剧"
 
 msgid "config menu"
 msgstr "配置菜单"
-
-msgid "Select in which resolution pictures are displayed with picture viewer or movie player."
-msgstr "配置使用何种解决方案来显示图片浏览器和电影播放器."
 
 msgid "confirmed"
 msgstr "检测通过"

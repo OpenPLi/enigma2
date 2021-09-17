@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-15 22:30+0300\n"
+"POT-Creation-Date: 2021-09-17 22:15+0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Frenske <voorzitter@openpli.org>\n"
 "Language-Team: PLiteam <translators@openpli.org>\n"
@@ -157,10 +157,6 @@ msgid "%a %e/%m  %-H:%M"
 msgstr "%a %e/%m  %-H:%M"
 
 #, python-format
-msgid "%d GB"
-msgstr "%d GB"
-
-#, python-format
 msgid "%d MB"
 msgstr "%d MB"
 
@@ -204,10 +200,6 @@ msgid "%d job is running in the background!"
 msgid_plural "%d jobs are running in the background!"
 msgstr[0] "%d opdracht draait op de achtergrond!"
 msgstr[1] "%d opdrachten draaien op de achtergrond!"
-
-#, python-format
-msgid "%d kB"
-msgstr "%d kB"
 
 #, python-format
 msgid "%d kB/s"
@@ -501,26 +493,18 @@ msgstr "??"
 msgid "A"
 msgstr "A"
 
-#, python-format
-msgid "A configuration file (%s) has been modified since it was installed. Would you like to keep the modified version?"
-msgstr "Een configuratiebestand (%s) is sinds de installatie gewijzigd. Wilt u de aanpassingen behouden?"
-
-#, python-format
-msgid ""
-"A configuration file (%s) was modified since Installation.\n"
-"Do you want to keep your version?"
-msgstr ""
-"Een configuratiebestand (%s) is sinds de installatie gewijzigd.\n"
-"Wilt u uw versie behouden?"
-
-msgid "A file from media is in use!"
-msgstr "Een bestand op uw (opslag)medium is in gebruik!"
-
 msgid "A completed recording timer is about to put your receiver in standby mode. Would you like to proceed?"
 msgstr "Een opname die gereed is wil de ontvanger in stand-by zetten. Akkoord?"
 
 msgid "A completed recording timer is about to shut down your receiver. Would you like to proceed?"
 msgstr "Een opname die gereed is wil de ontvanger uitschakelen. Nu afsluiten?"
+
+#, python-format
+msgid "A configuration file (%s) has been modified since it was installed. Would you like to keep the modified version?"
+msgstr "Een configuratiebestand (%s) is sinds de installatie gewijzigd. Wilt u de aanpassingen behouden?"
+
+msgid "A file from media is in use!"
+msgstr "Een bestand op uw (opslag)medium is in gebruik!"
 
 msgid "A graphical EPG for all services of a specific bouquet"
 msgstr "Grafische EPG voor alle zenders uit een specifiek bouquet"
@@ -543,11 +527,11 @@ msgstr ""
 "Bezig met opnemen.\n"
 "Wat wilt u doen?"
 
-msgid "A recording is currently running. Please stop the recording before starting a service scan."
-msgstr "Een opname is nu bezig. Stop de opname voor u gaat scannen."
-
 msgid "A recording is currently running. Please stop the recording before starting a DiSEqC test."
 msgstr "Er is momenteel een opname actief. Stop de opname alvorens een DiSEqC test te starten."
+
+msgid "A recording is currently running. Please stop the recording before starting a service scan."
+msgstr "Een opname is nu bezig. Stop de opname voor u gaat scannen."
 
 msgid "A repeating event is currently recording. What would you like to do?"
 msgstr "Een herhaalde timer maakt nu een opname. Wat wilt u doen?"
@@ -832,9 +816,6 @@ msgstr "Sta 10bit toe"
 
 msgid "Allow 12bit"
 msgstr "Sta 12bit toe"
-
-msgid "Allow quit movieplayer with exit"
-msgstr "Verlaat de movieplayer d.m.v. de 'exit' toets"
 
 msgid "Allow quitting movie player with exit"
 msgstr "Verlaat de movieplayer d.m.v. de 'exit' toets"
@@ -3107,6 +3088,9 @@ msgstr "Bezig met downloaden"
 
 msgid "Downloading Image"
 msgstr "Het image wordt gedownload"
+
+msgid "Downloading a new packet list. Please wait..."
+msgstr "Er wordt geprobeerd een nieuwe pakketlijst te downloaden... Een ogenblik aub..."
 
 msgid "Downloading plugin information. Please wait..."
 msgstr "Applicatie informatie ophalen. Een ogenblik aub..."
@@ -7572,6 +7556,13 @@ msgstr "Kies hoe de ontvanger correct op tijd moet blijven, via de DVB transpond
 msgid "Select image"
 msgstr "Image verwijderen"
 
+msgid "Select in which resolution pictures are displayed with picture viewer or movie player."
+msgstr ""
+"Met deze optie stelt u de resolutie van de afbeeldingen in zoals deze weergegeven worden met de pictureviewer en movieplayer. \n"
+"\n"
+"U kunt kiezen uit de volgende opties.\n"
+"Identiek aan de skin, 720x576, 1280x720 of 1920x1080."
+
 msgid "Select input device"
 msgstr "Kies invoerapparaat"
 
@@ -9697,9 +9688,6 @@ msgstr "Foutzoeken"
 msgid "True"
 msgstr "Waar"
 
-msgid "Downloading a new packet list. Please wait..."
-msgstr "Er wordt geprobeerd een nieuwe pakketlijst te downloaden... Een ogenblik aub..."
-
 msgid "Tue"
 msgstr "Di"
 
@@ -10070,9 +10058,6 @@ msgstr "Gebruik de prullenbak in de opnamelijst"
 msgid "Used service scan type"
 msgstr "Gebruikte zoekmethode"
 
-msgid "User bouquets"
-msgstr "Gebruiker bouquets"
-
 #, python-format
 msgid "User Band %d"
 msgstr ""
@@ -10086,6 +10071,9 @@ msgstr "Gebruikers ID"
 
 msgid "User Mode"
 msgstr "Gebruikersinstellingen"
+
+msgid "User bouquets"
+msgstr "Gebruiker bouquets"
 
 msgid "User defined"
 msgstr "Door u ingesteld"
@@ -10853,9 +10841,6 @@ msgstr "U kunt enkel opnames branden die door uw ontvanger gemaakt zijn!"
 msgid "You can remove this plugin."
 msgstr "U kunt deze applicatie verwijderen."
 
-msgid "You can set how will be finished movieplayer with 'Exit' button."
-msgstr "U kunt instellen hoe de movieplayer zal eindigen bij gebruik van de 'Exit' knop."
-
 msgid "You can set selected directory as 'root' directory for movie player."
 msgstr "U kunt de gekozen directory instellen als 'root' directory voor de movieplayer."
 
@@ -11249,13 +11234,6 @@ msgstr "Komedie"
 
 msgid "config menu"
 msgstr "configuratiemenu"
-
-msgid "Select in which resolution pictures are displayed with picture viewer or movie player."
-msgstr ""
-"Met deze optie stelt u de resolutie van de afbeeldingen in zoals deze weergegeven worden met de pictureviewer en movieplayer. \n"
-"\n"
-"U kunt kiezen uit de volgende opties.\n"
-"Identiek aan de skin, 720x576, 1280x720 of 1920x1080."
 
 msgid "confirmed"
 msgstr "bevestigd"

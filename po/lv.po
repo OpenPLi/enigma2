@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-15 22:30+0300\n"
+"POT-Creation-Date: 2021-09-17 22:15+0300\n"
 "PO-Revision-Date: 2014-11-12 00:49+0200\n"
 "Last-Translator: Taapat <taapat@gmail.com>\n"
 "Language-Team: Taapat <taapat@gmail.com>\n"
@@ -161,10 +161,6 @@ msgid "%a %e/%m  %-H:%M"
 msgstr "%a %e.%m  %-H:%M"
 
 #, python-format
-msgid "%d GB"
-msgstr "%d GB"
-
-#, python-format
 msgid "%d MB"
 msgstr "%d MB"
 
@@ -214,10 +210,6 @@ msgid_plural "%d jobs are running in the background!"
 msgstr[0] "%d darbs tiek veikts fonā!"
 msgstr[1] "%d darbi tiek veikti fonā!"
 msgstr[2] "%d darbi tiek veikti fonā!"
-
-#, python-format
-msgid "%d kB"
-msgstr "%d kB"
 
 #, python-format
 msgid "%d kB/s"
@@ -518,26 +510,18 @@ msgstr "??"
 msgid "A"
 msgstr "A"
 
-#, python-format
-msgid "A configuration file (%s) has been modified since it was installed. Would you like to keep the modified version?"
-msgstr "Konfigurācijas fails (%s) kopš uzstādīšanas ir izmainīts. Vai vēlaties paturēt izmainīto versiju?"
-
-#, python-format
-msgid ""
-"A configuration file (%s) was modified since Installation.\n"
-"Do you want to keep your version?"
-msgstr ""
-"Konfigurācijas fails (%s) kopš uzstādīšanas ir izmainīts.\n"
-"Vai vēlaties paturēt izmainīto versiju?"
-
-msgid "A file from media is in use!"
-msgstr "Tiek izmantoti faili no datu nesēja!"
-
 msgid "A completed recording timer is about to put your receiver in standby mode. Would you like to proceed?"
 msgstr "Taimeris ir beidzis ierakstu un vēlas izslēgt uztvērēju gaidstāvē. Vai to darīt?"
 
 msgid "A completed recording timer is about to shut down your receiver. Would you like to proceed?"
 msgstr "Taimeris ir beidzis ierakstu un vēlas izslēgt uztvērēju. Vai izslēgt?"
+
+#, python-format
+msgid "A configuration file (%s) has been modified since it was installed. Would you like to keep the modified version?"
+msgstr "Konfigurācijas fails (%s) kopš uzstādīšanas ir izmainīts. Vai vēlaties paturēt izmainīto versiju?"
+
+msgid "A file from media is in use!"
+msgstr "Tiek izmantoti faili no datu nesēja!"
 
 msgid "A graphical EPG for all services of a specific bouquet"
 msgstr "Grafiskais EPG visiem kanāliem izvēlētajā buķetē"
@@ -560,11 +544,11 @@ msgstr ""
 "Pašreiz notiek ieraksts.\n"
 "Ko vēlaties darīt?"
 
-msgid "A recording is currently running. Please stop the recording before starting a service scan."
-msgstr "Pašreiz notiek ieraksts. Pirms mēģināt meklēt lūdzu apturiet ierakstu."
-
 msgid "A recording is currently running. Please stop the recording before starting a DiSEqC test."
 msgstr "Pašreiz notiek ieraksts. Lūdzu apturiet ierakstu pirms mēģiniet testēt DiSEqC."
+
+msgid "A recording is currently running. Please stop the recording before starting a service scan."
+msgstr "Pašreiz notiek ieraksts. Pirms mēģināt meklēt lūdzu apturiet ierakstu."
 
 msgid "A repeating event is currently recording. What would you like to do?"
 msgstr "Pārraide pašreiz ierakstās. Ko vēlaties darīt?"
@@ -849,9 +833,6 @@ msgstr "Atļaut 10bit"
 
 msgid "Allow 12bit"
 msgstr "Atļaut 12bit"
-
-msgid "Allow quit movieplayer with exit"
-msgstr "Iziet no mediju atskaņotāja ar exit taustiņu"
 
 msgid "Allow quitting movie player with exit"
 msgstr "Iziet no mediju atskaņotāja ar exit taustiņu"
@@ -2939,6 +2920,9 @@ msgstr "Lejuplādē"
 
 msgid "Downloading Image"
 msgstr "Lejuplādē imidžu"
+
+msgid "Downloading a new packet list. Please wait..."
+msgstr "Mēģina lejuplādēt jaunu pakotņu sarakstu. Lūdzu gaidiet..."
 
 msgid "Downloading plugin information. Please wait..."
 msgstr "Lejuplādē spraudņu informāciju. Lūdzu uzgaidiet..."
@@ -7351,6 +7335,9 @@ msgstr "Izvēlieties kā uztvērējā sinhronizēt pareizu laiku. No satelīta, 
 msgid "Select image"
 msgstr "Izdzēst imidžu"
 
+msgid "Select in which resolution pictures are displayed with picture viewer or movie player."
+msgstr "Konfigurē kādā izšķirtspējā attēli tiks attēloti attēlu un mediju atskaņotājos."
+
 msgid "Select input device"
 msgstr "Izvēlieties ievades ierīci"
 
@@ -9440,9 +9427,6 @@ msgstr "Informācija"
 msgid "True"
 msgstr "Jā"
 
-msgid "Downloading a new packet list. Please wait..."
-msgstr "Mēģina lejuplādēt jaunu pakotņu sarakstu. Lūdzu gaidiet..."
-
 msgid "Tue"
 msgstr "Ot"
 
@@ -9808,9 +9792,6 @@ msgstr "Lietot miskasti mediju sarakstā"
 msgid "Used service scan type"
 msgstr "Lietotais kanālu meklēšanas veids"
 
-msgid "User bouquets"
-msgstr "Lietotāja buķetes"
-
 #, python-format
 msgid "User Band %d"
 msgstr ""
@@ -9824,6 +9805,9 @@ msgstr "Lietotāja ID"
 
 msgid "User Mode"
 msgstr "Lietotāja režīms"
+
+msgid "User bouquets"
+msgstr "Lietotāja buķetes"
 
 msgid "User defined"
 msgstr "Lietotāja definēts"
@@ -10547,9 +10531,6 @@ msgstr "Jūs varat ierakstīt tikai uztvērēja ierakstus!"
 msgid "You can remove this plugin."
 msgstr "Jūs varat izdzēst šo spraudni."
 
-msgid "You can set how will be finished movieplayer with 'Exit' button."
-msgstr "Iestatiet vai atļaut iziet no mediju atskaņotāja ar 'Iziet' pogu."
-
 msgid "You can set selected directory as 'root' directory for movie player."
 msgstr "Iestatiet noklusēto (root) mapi mediju atskaņotājam."
 
@@ -10943,9 +10924,6 @@ msgstr "komēdija"
 
 msgid "config menu"
 msgstr "konfigurācijas izvēlne"
-
-msgid "Select in which resolution pictures are displayed with picture viewer or movie player."
-msgstr "Konfigurē kādā izšķirtspējā attēli tiks attēloti attēlu un mediju atskaņotājos."
 
 msgid "confirmed"
 msgstr "apstiprināts"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-15 22:30+0300\n"
+"POT-Creation-Date: 2021-09-17 22:15+0300\n"
 "PO-Revision-Date: 2020-11-29 22:07+0200\n"
 "Last-Translator: Мартин Петков <marto74bg@yahoo.co.uk>\n"
 "Language-Team: Bulgarian\n"
@@ -159,10 +159,6 @@ msgid "%a %e/%m  %-H:%M"
 msgstr "%a %e/%m  %-Ч:%М"
 
 #, python-format
-msgid "%d GB"
-msgstr "%d GB"
-
-#, python-format
 msgid "%d MB"
 msgstr "%d MB"
 
@@ -206,10 +202,6 @@ msgid "%d job is running in the background!"
 msgid_plural "%d jobs are running in the background!"
 msgstr[0] "%d процес се изпълнява във фонов режим!"
 msgstr[1] "%d процеси се изпълняват във фонов режим!"
-
-#, python-format
-msgid "%d kB"
-msgstr ""
 
 #, python-format
 msgid "%d kB/s"
@@ -503,26 +495,18 @@ msgstr "??"
 msgid "A"
 msgstr "А"
 
-#, python-format
-msgid "A configuration file (%s) has been modified since it was installed. Would you like to keep the modified version?"
-msgstr "Конфигурационният файл (%s) беше променен след инсталирането. Искате ли да запазите промяната?"
-
-#, python-format
-msgid ""
-"A configuration file (%s) was modified since Installation.\n"
-"Do you want to keep your version?"
-msgstr ""
-"Конфиг файла (%s) беше променен след инсталацията.\n"
-"Искате ли да запазите вашата версия?"
-
-msgid "A file from media is in use!"
-msgstr "Използва се файл от устройството!"
-
 msgid "A completed recording timer is about to put your receiver in standby mode. Would you like to proceed?"
 msgstr "Таймера при завършване на запис желае да постави приемника в режим готовност. Да го направи ли сега?"
 
 msgid "A completed recording timer is about to shut down your receiver. Would you like to proceed?"
 msgstr "Таймера при завършване на запис желае да изключи вашия приемник. Изключване сега?"
+
+#, python-format
+msgid "A configuration file (%s) has been modified since it was installed. Would you like to keep the modified version?"
+msgstr "Конфигурационният файл (%s) беше променен след инсталирането. Искате ли да запазите промяната?"
+
+msgid "A file from media is in use!"
+msgstr "Използва се файл от устройството!"
 
 msgid "A graphical EPG for all services of a specific bouquet"
 msgstr "Графичен режим на EPG за всички програми от определен букет"
@@ -545,11 +529,11 @@ msgstr ""
 "Има запис в момента.\n"
 "Какво да направя?"
 
-msgid "A recording is currently running. Please stop the recording before starting a service scan."
-msgstr "В момента тече запис. Моля спрете записа преди сканиране."
-
 msgid "A recording is currently running. Please stop the recording before starting a DiSEqC test."
 msgstr "В момента тече запис. Моля спрете записа преди да започнете DiSEqC теста."
+
+msgid "A recording is currently running. Please stop the recording before starting a service scan."
+msgstr "В момента тече запис. Моля спрете записа преди сканиране."
 
 msgid "A repeating event is currently recording. What would you like to do?"
 msgstr "Повтарящо се предаване се записва. Какво искате да направите?"
@@ -834,9 +818,6 @@ msgstr "Позволи 10bit"
 
 msgid "Allow 12bit"
 msgstr "Позволи 12bit"
-
-msgid "Allow quit movieplayer with exit"
-msgstr "Позволи изход от видеоплейъра с exit"
 
 msgid "Allow quitting movie player with exit"
 msgstr "Позволи изход от видеоплейъра с exit"
@@ -2923,6 +2904,9 @@ msgstr "Изтегляне"
 
 msgid "Downloading Image"
 msgstr "Изтегляне на Имиджа"
+
+msgid "Downloading a new packet list. Please wait..."
+msgstr "Опит за изтегляне на нов списък с пакети. Моля изчакайте..."
 
 msgid "Downloading plugin information. Please wait..."
 msgstr "Изтеглям информация за плъгина. Моля изчакайте..."
@@ -7334,6 +7318,9 @@ msgstr ""
 msgid "Select image"
 msgstr "Изтриване на имидж"
 
+msgid "Select in which resolution pictures are displayed with picture viewer or movie player."
+msgstr "Настройте с каква резолюция да се показват снимките в 'Преглед на снимки' и 'Видеоплейър'."
+
 msgid "Select input device"
 msgstr "Изберете устройство за въвеждане"
 
@@ -9418,9 +9405,6 @@ msgstr "Решение на проблем"
 msgid "True"
 msgstr ""
 
-msgid "Downloading a new packet list. Please wait..."
-msgstr "Опит за изтегляне на нов списък с пакети. Моля изчакайте..."
-
 msgid "Tue"
 msgstr "Вто"
 
@@ -9785,9 +9769,6 @@ msgstr "Използвай кошче в списъка с филми"
 msgid "Used service scan type"
 msgstr "Тип сканиране на канали"
 
-msgid "User bouquets"
-msgstr "Потребителски букети"
-
 #, python-format
 msgid "User Band %d"
 msgstr ""
@@ -9801,6 +9782,9 @@ msgstr "Потребителско Име"
 
 msgid "User Mode"
 msgstr "Потребителски Режим"
+
+msgid "User bouquets"
+msgstr "Потребителски букети"
 
 msgid "User defined"
 msgstr "Потребителски"
@@ -10524,9 +10508,6 @@ msgstr "Можете да записвате(на диск) само запис�
 msgid "You can remove this plugin."
 msgstr "Можете да премахнете този плъгин."
 
-msgid "You can set how will be finished movieplayer with 'Exit' button."
-msgstr "Можете да зададете действието на бутона „Изход“ при видеоплейъра."
-
 msgid "You can set selected directory as 'root' directory for movie player."
 msgstr "Можете да зададете избраната директория като „root“ директория за филмовия плейър."
 
@@ -10919,9 +10900,6 @@ msgstr "комедия"
 
 msgid "config menu"
 msgstr "конфиг меню"
-
-msgid "Select in which resolution pictures are displayed with picture viewer or movie player."
-msgstr "Настройте с каква резолюция да се показват снимките в 'Преглед на снимки' и 'Видеоплейър'."
 
 msgid "confirmed"
 msgstr "потвърден"
