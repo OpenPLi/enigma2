@@ -3,7 +3,6 @@ from Components.Element import cached
 from Components.config import config
 from Components.NimManager import nimmanager
 from skin import parameters
-from Tools.Hex2strColor import Hex2strColor
 
 
 class FrontendInfo(Converter):
@@ -68,13 +67,13 @@ class FrontendInfo(Converter):
 		elif self.type == self.STRING:
 			string = ""
 			for n in nimmanager.nim_slots:
-				if n.enabled:
+				if n.type and n.enabled:
 					if n.slot == self.source.slot_number:
-						color = Hex2strColor(colors[0])
+						color = "\c%08x" % colors[0]
 					elif self.source.tuner_mask & 1 << n.slot:
-						color = Hex2strColor(colors[1])
+						color = "\c%08x" % colors[1]
 					elif len(nimmanager.nim_slots) <= self.space_for_tuners or n.isFBCRoot() or self.show_all_non_link_tuners and not (n.isFBCLink() or n.config_mode == "loopthrough"):
-						color = Hex2strColor(colors[2])
+						color = "\c%08x" % colors[2]
 					else:
 						continue
 					if string and len(nimmanager.nim_slots) <= self.space_for_tuners_with_spaces:
@@ -84,11 +83,11 @@ class FrontendInfo(Converter):
 		if self.type == self.USE_TUNERS_STRING:
 			string = ""
 			for n in nimmanager.nim_slots:
-				if n.enabled:
+				if n.type and n.enabled:
 					if n.slot == self.source.slot_number:
-						color = Hex2strColor(colors[0])
+						color = "\c%08x" % colors[0]
 					elif self.source.tuner_mask & 1 << n.slot:
-						color = Hex2strColor(colors[1])
+						color = "\c%08x" % colors[1]
 					else:
 						continue
 					if string:

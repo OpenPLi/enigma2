@@ -20,7 +20,6 @@ from Components.config import config, ConfigSatlist, ConfigNothing, ConfigSelect
 from Components.TuneTest import Tuner
 from Components.Pixmap import Pixmap
 from Tools.Transponder import ConvertToHumanReadable
-from Tools.Hex2strColor import Hex2strColor
 from skin import parameters
 
 from time import sleep
@@ -823,9 +822,9 @@ class PositionerSetup(Screen):
 	def gotTsidOnid(self, tsid, onid):
 		colors = parameters.get("PositionerOnidTsidcolors", (0x0000FF00, 0x00FF0000)) # "valid", "not valid"
 		if tsid == self.tsid and onid == self.onid:
-			msg = Hex2strColor(colors[0]) + _("This valid ONID/TSID")
+			msg = "\c%08x" % colors[0] + _("This valid ONID/TSID")
 		else:
-			msg = Hex2strColor(colors[1]) + _("This not valid ONID/TSID")
+			msg = "\c%08x" % colors[1] + _("This not valid ONID/TSID")
 		self.statusMsg(msg, blinking=True, timeout=10)
 		if self.raw_channel:
 			self.raw_channel.receivedTsidOnid.get().remove(self.gotTsidOnid)
