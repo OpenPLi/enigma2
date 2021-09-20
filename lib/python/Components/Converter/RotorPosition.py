@@ -36,7 +36,7 @@ class RotorPosition(Converter):
 						return ""
 					saved_text = frontendRotorPosition(int(value))
 					if saved_text:
-						nim_text = saved_textt
+						nim_text = saved_text
 				return "%s:%s" % ("\c0000f0f0" + chr(ord("A") + int(value)), "\c00f0f0f0" + nim_text)
 			elif value == "all":
 				all_text = ""
