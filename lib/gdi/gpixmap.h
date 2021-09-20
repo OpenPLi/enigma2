@@ -49,6 +49,8 @@ struct gRGB
 					val |= c - 'a' + 10;
 				else if(c >= 'A' && c <= 'F')
 					val |= c - 'A' + 10;
+				else if(c >= ':' && c <= '?') // Backwards compatibility for old style color strings
+					val |= c & 0x0f;
 			}
 		}
 		value = val;
