@@ -81,6 +81,7 @@ class PositionerSetup(Screen):
 		self.rotor_pos = config.usage.showdish.value and config.misc.lastrotorposition.value != 9999
 		self.tsid = self.onid = self.orb_pos = 0
 		self.checkingTsidOnid = False
+		self.finesteps = 0
 		getCurrentTuner = None
 		getCurrentSat = None
 		self.availablesats = []
@@ -469,7 +470,11 @@ class PositionerSetup(Screen):
 		self["list"].l.setList(self.list)
 
 	def keyOK(self):
-		pass
+		entry = self.getCurrentConfigPath()
+		if entry == "tune":
+			self.redKey()
+		elif entry == "finemove":
+			self.statusMsg(_("Steps") + self.stepCourse(self.finesteps), timeout=self.STATUS_MSG_TIMEOUT)
 
 	def getCurrentConfigPath(self):
 		return self["list"].getCurrent()[2]
@@ -562,10 +567,24 @@ class PositionerSetup(Screen):
 		self.stopOnLock = False
 		self.statusMsg(_("Stopped"), timeout=self.STATUS_MSG_TIMEOUT)
 
+	def stepCourse(self, steps):
+		def dots(s):
+			s = abs(s)
+			return (s / 10) * '.' if s < 100 else 10 * '.'
+
+		if steps > 0:
+			return 4 * " " + ">| %s %d" % (dots(steps), steps) # west
+		elif steps < 0:
+			return 4 * " " + "%d %s |<" % (abs(steps), dots(steps)) # east
+		else:
+			return 4 * " " + ">|<"
+
 	def redKey(self):
 		if self.frontend is None:
 			return
 		entry = self.getCurrentConfigPath()
+		if entry != "finemove":
+			self.finesteps = 0
 		if entry == "move":
 			if self.isMoving:
 				self.stopMoving()
@@ -592,6 +611,8 @@ class PositionerSetup(Screen):
 		if self.frontend is None:
 			return
 		entry = self.getCurrentConfigPath()
+		if entry != "finemove":
+			self.finesteps = 0
 		if entry == "tune":
 			# Auto focus
 			self.printMsg(_("Auto focus"))
@@ -609,9 +630,10 @@ class PositionerSetup(Screen):
 				self.statusMsg(_("Searching west..."), blinking=True)
 			self.updateColors("move")
 		elif entry == "finemove":
+			self.finesteps += 1
 			self.printMsg(_("Step west"))
 			self.diseqccommand("moveWest", 0xFF) # one step
-			self.statusMsg(_("Stepped west"), timeout=self.STATUS_MSG_TIMEOUT)
+			self.statusMsg(_("Stepped west") + self.stepCourse(self.finesteps), timeout=self.STATUS_MSG_TIMEOUT)
 		elif entry == "storage":
 			if self.getUsals() is False:
 				menu = [(_("yes"), "yes"), (_("no"), "no")]
@@ -652,6 +674,8 @@ class PositionerSetup(Screen):
 		if self.frontend is None:
 			return
 		entry = self.getCurrentConfigPath()
+		if entry != "finemove":
+			self.finesteps = 0
 		if entry == "move":
 			if self.isMoving:
 				self.stopMoving()
@@ -663,9 +687,10 @@ class PositionerSetup(Screen):
 				self.statusMsg(_("Searching east..."), blinking=True)
 			self.updateColors("move")
 		elif entry == "finemove":
+			self.finesteps -= 1
 			self.printMsg(_("Step east"))
 			self.diseqccommand("moveEast", 0xFF) # one step
-			self.statusMsg(_("Stepped east"), timeout=self.STATUS_MSG_TIMEOUT)
+			self.statusMsg(_("Stepped east") + self.stepCourse(self.finesteps), timeout=self.STATUS_MSG_TIMEOUT)
 		elif entry == "storage":
 			if self.getUsals() is False:
 				self.printMsg(_("Goto index position"))
@@ -695,6 +720,8 @@ class PositionerSetup(Screen):
 		if self.frontend is None:
 			return
 		entry = self.getCurrentConfigPath()
+		if entry != "finemove":
+			self.finesteps = 0
 		if entry == "move":
 			if self.isMoving:
 				self.stopMoving()
