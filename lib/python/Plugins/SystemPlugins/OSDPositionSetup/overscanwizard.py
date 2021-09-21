@@ -184,7 +184,7 @@ class OverscanWizard(Screen, ConfigListScreen):
 			self.dst_left.value = self.dst_right.value
 		if self.dst_top.value > self.dst_bottom.value:
 			self.dst_top.value = self.dst_bottom.value
-		self["config"].list(self.list)
+		self["config"].list = self.list
 		setPosition(int(self.dst_left.value), int(self.dst_right.value) - int(self.dst_left.value), int(self.dst_top.value), int(self.dst_bottom.value) - int(self.dst_top.value))
 
 	def keyCancel(self):
