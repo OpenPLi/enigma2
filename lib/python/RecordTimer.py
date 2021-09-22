@@ -306,7 +306,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 						self.descramble = False
 					if start_zap:
 						self.log(1, "zapping in CI+ use")
-						NavigationInstance.instance.playService(rec_ref)
+						self.failureCB(answer=True, ref=rec_ref)
 						Notifications.AddNotification(MessageBox, _("In order to record a timer, the TV was switched to the recording service!\n"), type=MessageBox.TYPE_INFO, timeout=20)
 			self.log(1, "'record ref' %s" % rec_ref and rec_ref.toString())
 			self.setRecordingPreferredTuner()
@@ -407,7 +407,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 						else:
 							Notifications.AddNotification(MessageBox, _("In order to record a timer, the TV was switched to the recording service!\n"), type=MessageBox.TYPE_INFO, timeout=20)
 							self.setRecordingPreferredTuner()
-							self.failureCB(True)
+							self.failureCB(answer=True)
 							self.log(5, "zap to recording service")
 
 			if self.tryPrepare():
@@ -440,7 +440,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 						return False
 					if Screens.Standby.inStandby:
 						self.setRecordingPreferredTuner()
-						self.failureCB(True)
+						self.failureCB(answer=True)
 					elif self.checkingTimeshiftRunning():
 						if self.ts_dialog is None:
 							self.openChoiceActionBeforeZap()
@@ -451,7 +451,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 						self.log(9, "zap without asking")
 						Notifications.AddNotification(MessageBox, _("In order to record a timer, the TV was switched to the recording service!\n"), type=MessageBox.TYPE_INFO, timeout=20)
 						self.setRecordingPreferredTuner()
-						self.failureCB(True)
+						self.failureCB(answer=True)
 				elif cur_ref:
 					self.log(8, "currently running service is not a live service.. so stop it makes no sense")
 				else:
@@ -531,7 +531,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 								MediaPlayerinstance.exitCallback(True)
 								force = True
 						if not force:
-							NavigationInstance.instance.playService(self.service_ref.ref)
+							self.failureCB(answer=True, close_pip=False)
 						if notify or force:
 							Notifications.AddPopup(text=_("Zapped to timer service %s!") % self.service_ref.getServiceName(), type=MessageBox.TYPE_INFO, timeout=5)
 				return True
@@ -692,10 +692,10 @@ class RecordTimerEntry(timer.TimerEntry, object):
 				if start_zap:
 					if not self.justplay:
 						self.setRecordingPreferredTuner()
-						self.failureCB(True)
+						self.failureCB(answer=True)
 					else:
 						self.log(8, "zapping")
-						NavigationInstance.instance.playService(self.service_ref.ref)
+						self.failureCB(answer=True, close_pip=False)
 			self.ts_dialog = self.InfoBarInstance.session.openWithCallback(zapAction, MessageBox, message, simple=True, list=choice, timeout=20)
 
 	def sendStandbyNotification(self, answer):
@@ -718,16 +718,28 @@ class RecordTimerEntry(timer.TimerEntry, object):
 				self.StateRunning: self.begin,
 				self.StateEnded: self.end}[next_state]
 
-	def failureCB(self, answer):
+	def failureCB(self, answer=False, close_pip=True, ref=None):
 		self.ts_dialog = None
 		if answer:
 			self.log(13, "ok, zapped away")
-			if not self.first_try_prepare and self.InfoBarInstance and hasattr(self.InfoBarInstance.session, 'pipshown') and self.InfoBarInstance.session.pipshown:
+			if close_pip and not self.first_try_prepare and self.InfoBarInstance and hasattr(self.InfoBarInstance.session, 'pipshown') and self.InfoBarInstance.session.pipshown:
 				hasattr(self.InfoBarInstance, "showPiP") and self.InfoBarInstance.showPiP()
 				if hasattr(self.InfoBarInstance.session, 'pip'):
 					del self.InfoBarInstance.session.pip
 					self.InfoBarInstance.session.pipshown = False
-			NavigationInstance.instance.playService(self.service_ref.ref)
+			addService = False
+			old_ref_group = NavigationInstance.instance.getCurrentlyPlayingServiceOrGroup()
+			if self.service_ref.ref and (not old_ref_group or old_ref_group != self.service_ref.ref):
+				addService = True
+			NavigationInstance.instance.playService(ref or self.service_ref.ref, adjust=False)
+			if addService and hasattr(self.InfoBarInstance, "servicelist"):
+				next_ref_group = NavigationInstance.instance.getCurrentlyPlayingServiceOrGroup()
+				if next_ref_group and next_ref_group == (ref or self.service_ref.ref):
+					self.InfoBarInstance.servicelist.servicelist.setCurrent(self.service_ref.ref, adjust=True)
+					selectedService = self.InfoBarInstance.servicelist.getCurrentSelection()
+					if selectedService and selectedService == self.service_ref.ref:
+						self.InfoBarInstance.servicelist.addToHistory(self.service_ref.ref)
+						self.InfoBarInstance.servicelist.saveChannel(self.service_ref.ref)
 		else:
 			self.log(14, "user didn't want to zap away, record will probably fail")
 
