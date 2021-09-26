@@ -1,3 +1,4 @@
+from __future__ import print_function
 from xml.etree.cElementTree import parse
 from enigma import eDVBCIInterfaces, eDVBCI_UI, eEnv, eServiceCenter, eServiceReference, getBestPlayableServiceReference, iRecordableService
 from Components.SystemInfo import SystemInfo
@@ -64,18 +65,18 @@ class CIHelper:
 						if read_slot is not False:
 							self.CI_ASSIGNMENT_LIST.append((int(read_slot), (read_services, read_providers, usingcaid)))
 				except:
-					print "[CI_ASSIGNMENT %d] ERROR parsing xml..." % ci
+					print("[CI_ASSIGNMENT %d] ERROR parsing xml..." % ci)
 					try:
 						os.remove(filename)
 					except:
-						print "[CI_ASSIGNMENT %d] ERROR remove damaged xml..." % ci
+						print("[CI_ASSIGNMENT %d] ERROR remove damaged xml..." % ci)
 			if self.CI_ASSIGNMENT_LIST:
 				for item in self.CI_ASSIGNMENT_LIST:
 					try:
 						eDVBCIInterfaces.getInstance().setDescrambleRules(item[0], item[1])
-						print "[CI_ASSIGNMENT %d] activate with following settings" % item[0]
+						print("[CI_ASSIGNMENT %d] activate with following settings" % item[0])
 					except:
-						print "[CI_ASSIGNMENT %d] ERROR setting DescrambleRules" % item[0]
+						print("[CI_ASSIGNMENT %d] ERROR setting DescrambleRules" % item[0])
 
 	def ciRecordEvent(self, service, event):
 		if event in (iRecordableService.evEnd, iRecordableService.evStart, None):

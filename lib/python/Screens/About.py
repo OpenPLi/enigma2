@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Screen import Screen
 from Screens.MessageBox import MessageBox
 from Components.config import config
@@ -163,7 +164,7 @@ class TranslationInfo(Screen):
 				continue
 			(type, value) = l
 			infomap[type] = value
-		print infomap
+		print(infomap)
 
 		self["key_red"] = Button(_("Cancel"))
 		self["TranslationInfo"] = StaticText(info)
@@ -333,7 +334,7 @@ class MemoryInfo(Screen):
 			self['pfree'].setText("%.1f %s" % (100. * free / mem, '%'))
 			self['pused'].setText("%.1f %s" % (100. * (mem - free) / mem, '%'))
 		except Exception as e:
-			print "[About] getMemoryInfo FAIL:", e
+			print("[About] getMemoryInfo FAIL:", e)
 
 	def clearMemory(self):
 		eConsoleAppContainer().execute("sync")

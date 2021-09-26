@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Screens.Screen import Screen
 from Screens.Dish import Dishpip
 from enigma import ePoint, eSize, eRect, eServiceCenter, getBestPlayableServiceReference, eServiceReference, eTimer
@@ -197,7 +198,7 @@ class PictureInPicture(Screen):
 					Notifications.AddPopup(text="PiP...\n" + _("Connected transcoding, limit - no PiP!"), type=MessageBox.TYPE_ERROR, timeout=5, id="ZapPipError")
 				return False
 			if self.isPlayableForPipService(ref):
-				print "playing pip service", ref and ref.toString()
+				print("playing pip service", ref and ref.toString())
 			else:
 				if not config.usage.hide_zap_errors.value:
 					Notifications.AddPopup(text="PiP...\n" + _("No free tuner!"), type=MessageBox.TYPE_ERROR, timeout=5, id="ZapPipError")

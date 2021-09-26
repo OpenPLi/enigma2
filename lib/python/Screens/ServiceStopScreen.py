@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Screens.MessageBox import MessageBox
 
 
@@ -6,7 +7,7 @@ class ServiceStopScreen:
 		try:
 			self.session
 		except:
-			print "[ServiceStopScreen] ERROR: no self.session set"
+			print("[ServiceStopScreen] ERROR: no self.session set")
 		self.oldref = self.oldAlternativeref = None
 		self.slot_number = -1
 		self.onClose.append(self.__onClose)

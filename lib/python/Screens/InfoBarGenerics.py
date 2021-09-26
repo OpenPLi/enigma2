@@ -1,3 +1,4 @@
+from __future__ import print_function
 from ChannelSelection import ChannelSelection, BouquetSelector, SilentBouquetSelector
 
 from Components.ActionMap import ActionMap, HelpableActionMap
@@ -115,7 +116,7 @@ def saveResumePoints():
 		f = open('/home/root/resumepoints.pkl', 'wb')
 		cPickle.dump(resumePointCache, f, cPickle.HIGHEST_PROTOCOL)
 	except Exception as ex:
-		print "[InfoBar] Failed to write resumepoints:", ex
+		print("[InfoBar] Failed to write resumepoints:", ex)
 	resumePointCacheLast = int(time())
 
 
@@ -124,7 +125,7 @@ def loadResumePoints():
 	try:
 		return cPickle.load(open('/home/root/resumepoints.pkl', 'rb'))
 	except Exception as ex:
-		print "[InfoBar] Failed to load resumepoints:", ex
+		print("[InfoBar] Failed to load resumepoints:", ex)
 		return {}
 
 
@@ -444,7 +445,7 @@ class InfoBarShowHide(InfoBarScreenSaver):
 					service = info and info.getInfoString(service, iServiceInformation.sServiceref)
 					service = service and eServiceReference(service)
 					if service:
-						print service, service and service.toString()
+						print(service, service and service.toString())
 					return service and ":".join(service.toString().split(":")[:11]) in whitelist.vbi
 				else:
 					return ".hidevbi." in servicepath.lower()
@@ -929,7 +930,7 @@ class InfoBarMenu:
 		self.session.infobar = None
 
 	def mainMenu(self):
-		print "loading mainmenu XML..."
+		print("loading mainmenu XML...")
 		menu = mdom.getroot()
 		assert menu.tag == "menu", "root element in menu must be 'menu'!"
 
@@ -1281,7 +1282,7 @@ class InfoBarEPG:
 				self.eventView = self.session.openWithCallback(self.closed, EventViewEPGSelect, epglist[0], ServiceReference(ref), self.eventViewCallback, self.openSingleServiceEPG, self.openMultiServiceEPG, self.openSimilarList)
 				self.dlg_stack.append(self.eventView)
 		if not epglist:
-			print "no epg for the service avail.. so we show multiepg instead of eventinfo"
+			print("no epg for the service avail.. so we show multiepg instead of eventinfo")
 			self.openMultiServiceEPG(False)
 
 	def eventViewCallback(self, setEvent, setService, val): #used for now/next displaying
@@ -1365,7 +1366,7 @@ class InfoBarSeek:
 				self.screen = screen
 
 			def action(self, contexts, action):
-				print "action:", action
+				print("action:", action)
 				if action[:5] == "seek:":
 					time = int(action[5:])
 					self.screen.doSeekRelative(time * 90000)
@@ -1497,7 +1498,7 @@ class InfoBarSeek:
 		pauseable = service.pause()
 
 		if pauseable is None:
-			print "not pauseable."
+			print("not pauseable.")
 			state = self.SEEK_STATE_PLAY
 
 		self.seekstate = state
@@ -1505,22 +1506,22 @@ class InfoBarSeek:
 		if pauseable is not None:
 			if self.seekstate[0]:
 				if self.seekstate[3] == "||":
-					print "resolved to PAUSE"
+					print("resolved to PAUSE")
 					pauseable.pause()
 			elif self.seekstate[1]:
 				if not pauseable.setFastForward(self.seekstate[1]):
-					print "resolved to FAST FORWARD"
+					print("resolved to FAST FORWARD")
 				else:
 					self.seekstate = self.SEEK_STATE_PLAY
-					print "FAST FORWARD not possible: resolved to PLAY"
+					print("FAST FORWARD not possible: resolved to PLAY")
 			elif self.seekstate[2]:
 				if not pauseable.setSlowMotion(self.seekstate[2]):
-					print "resolved to SLOW MOTION"
+					print("resolved to SLOW MOTION")
 				else:
 					self.seekstate = self.SEEK_STATE_PAUSE
-					print "SLOW MOTION not possible: resolved to PAUSE"
+					print("SLOW MOTION not possible: resolved to PAUSE")
 			else:
-				print "resolved to PLAY"
+				print("resolved to PLAY")
 				pauseable.unpause()
 
 		for c in self.onPlayStateChanged:
@@ -1562,7 +1563,7 @@ class InfoBarSeek:
 			self.setSeekState(self.SEEK_STATE_PAUSE)
 
 	def unPauseService(self):
-		print "unpause"
+		print("unpause")
 		if self.seekstate == self.SEEK_STATE_PLAY:
 			return 0
 		self.setSeekState(self.SEEK_STATE_PLAY)
@@ -1666,14 +1667,14 @@ class InfoBarSeek:
 		self.session.openWithCallback(self.fwdSeekTo, MinuteInput)
 
 	def fwdSeekTo(self, minutes):
-		print "Seek", minutes, "minutes forward"
+		print("Seek", minutes, "minutes forward")
 		self.doSeekRelative(minutes * 60 * 90000)
 
 	def seekBackManual(self):
 		self.session.openWithCallback(self.rwdSeekTo, MinuteInput)
 
 	def rwdSeekTo(self, minutes):
-		print "rwdSeekTo"
+		print("rwdSeekTo")
 		self.doSeekRelative(-minutes * 60 * 90000)
 
 	def checkSkipShowHideLock(self):
@@ -1934,19 +1935,19 @@ class InfoBarTimeshift():
 		return 0
 
 	def startTimeshift(self, pauseService=True):
-		print "enable timeshift"
+		print("enable timeshift")
 		ts = self.getTimeshift()
 		if ts is None:
 			if not pauseService and not int(config.usage.timeshift_start_delay.value):
 				self.session.open(MessageBox, _("Timeshift not possible!"), MessageBox.TYPE_ERROR, simple=True)
-			print "no ts interface"
+			print("no ts interface")
 			if pauseService:
 				return self.playpauseStreamService()
 			else:
 				return 0
 
 		if ts.isTimeshiftEnabled():
-			print "hu, timeshift already enabled?"
+			print("hu, timeshift already enabled?")
 		else:
 			if not ts.startTimeshift():
 				# we remove the "relative time" for now.
@@ -1972,7 +1973,7 @@ class InfoBarTimeshift():
 				self.new_timeshift_filename = self.generateNewTimeshiftFileName()
 				self.setLCDsymbolTimeshift()
 			else:
-				print "timeshift failed"
+				print("timeshift failed")
 
 	def startTimeshiftWithoutPause(self):
 		self.startTimeshift(False)
@@ -2001,16 +2002,16 @@ class InfoBarTimeshift():
 	def activateTimeshiftEnd(self, back=True):
 		self.showTimeshiftState = True
 		ts = self.getTimeshift()
-		print "activateTimeshiftEnd"
+		print("activateTimeshiftEnd")
 
 		if ts is None:
 			return
 
 		if ts.isTimeshiftActive():
-			print "!! activate timeshift called - but shouldn't this be a normal pause?"
+			print("!! activate timeshift called - but shouldn't this be a normal pause?")
 			self.pauseService()
 		else:
-			print "play, ..."
+			print("play, ...")
 			ts.activateTimeshift() # activate timeshift will automatically pause
 			self.setSeekState(self.SEEK_STATE_PAUSE)
 			seekable = self.getSeek()
@@ -2049,12 +2050,12 @@ class InfoBarTimeshift():
 		if config.recording.ascii_filenames.value:
 			filename = ASCIItranslit.legacyEncode(filename)
 
-		print "New timeshift filename: ", filename
+		print("New timeshift filename: ", filename)
 		return filename
 
 	# same as activateTimeshiftEnd, but pauses afterwards.
 	def activateTimeshiftEndAndPause(self):
-		print "activateTimeshiftEndAndPause"
+		print("activateTimeshiftEndAndPause")
 		#state = self.seekstate
 		self.activateTimeshiftEnd(False)
 
@@ -2481,7 +2482,7 @@ class InfoBarInstantRecord:
 				self.recording = InfoBarInstance.recording
 
 	def moveToTrash(self, entry):
-		print "instantRecord stop and delete recording: ", entry.name
+		print("instantRecord stop and delete recording: ", entry.name)
 		import Tools.Trashcan
 		trash = Tools.Trashcan.createTrashFolder(entry.Filename)
 		from MovieSelection import moveServiceFiles
@@ -2584,7 +2585,7 @@ class InfoBarInstantRecord:
 			if len(simulTimerList) > 1: # with other recording
 				name = simulTimerList[1].name
 				name_date = ' '.join((name, strftime('%F %T', localtime(simulTimerList[1].begin))))
-				print "[TIMER] conflicts with", name_date
+				print("[TIMER] conflicts with", name_date)
 				recording.autoincrease = True	# start with max available length, then increment
 				if recording.setAutoincreaseEnd():
 					self.session.nav.RecordTimer.record(recording)
@@ -2597,7 +2598,7 @@ class InfoBarInstantRecord:
 			recording.autoincrease = False
 
 	def isInstantRecordRunning(self):
-		print "self.recording:", self.recording
+		print("self.recording:", self.recording)
 		if self.recording:
 			for x in self.recording:
 				if x.isRunning():
@@ -2605,7 +2606,7 @@ class InfoBarInstantRecord:
 		return False
 
 	def recordQuestionCallback(self, answer):
-		print "pre:\n", self.recording
+		print("pre:\n", self.recording)
 
 		if answer is None or answer[1] == "no":
 			return
@@ -2669,7 +2670,7 @@ class InfoBarInstantRecord:
 					remaining = self.currentEventTime()
 					if remaining > 0:
 						self.setCurrentEventTimer(remaining - 15)
-		print "after:\n", self.recording
+		print("after:\n", self.recording)
 
 	def setEndtime(self, entry):
 		if entry is not None and entry >= 0:
@@ -2681,7 +2682,7 @@ class InfoBarInstantRecord:
 	def TimeDateInputClosed(self, ret):
 		if len(ret) > 1:
 			if ret[0]:
-				print "stopping recording at", strftime("%F %T", localtime(ret[1]))
+				print("stopping recording at", strftime("%F %T", localtime(ret[1])))
 				if self.recording[self.selectedEntry].end != ret[1]:
 					self.recording[self.selectedEntry].autoincrease = False
 				self.recording[self.selectedEntry].end = ret[1]
@@ -2699,7 +2700,7 @@ class InfoBarInstantRecord:
 
 	def inputAddRecordingTime(self, value):
 		if value:
-			print "added", int(value), "minutes for recording."
+			print("added", int(value), "minutes for recording.")
 			entry = self.recording[self.selectedEntry]
 			if int(value) != 0:
 				entry.autoincrease = False
@@ -2708,7 +2709,7 @@ class InfoBarInstantRecord:
 
 	def inputCallback(self, value):
 		if value:
-			print "stopping recording after", int(value), "minutes."
+			print("stopping recording after", int(value), "minutes.")
 			entry = self.recording[self.selectedEntry]
 			if int(value) != 0:
 				entry.autoincrease = False
@@ -2789,7 +2790,7 @@ class InfoBarAudioSelection:
 		self.session.openWithCallback(self.audioSelected, AudioSelection, infobar=self)
 
 	def audioSelected(self, ret=None):
-		print "[infobar::audioSelected]", ret
+		print("[infobar::audioSelected]", ret)
 
 
 class InfoBarSubserviceSelection:
@@ -3075,7 +3076,7 @@ class InfoBarServiceNotifications:
 			})
 
 	def serviceHasEnded(self):
-		print "service end!"
+		print("service end!")
 
 		try:
 			self.setSeekState(self.SEEK_STATE_PLAY)
@@ -3109,7 +3110,7 @@ class InfoBarCueSheetSupport:
 	def __serviceStarted(self):
 		if self.is_closing:
 			return
-		print "new service started! trying to download cuts!"
+		print("new service started! trying to download cuts!")
 		self.downloadCuesheet()
 
 		if self.ENABLE_RESUME_SUPPORT:
@@ -3128,7 +3129,7 @@ class InfoBarCueSheetSupport:
 			length = seekable.getLength()
 			if length[0]:
 				length = (-1, 0) #  Set length 0 if error in getLength()
-			print "seekable.getLength() returns:", length
+			print("seekable.getLength() returns:", length)
 			if (last > 900000) and (not length[1] or last < length[1] - 900000):
 				self.resume_point = last
 				l = last / 90000
@@ -3237,7 +3238,7 @@ class InfoBarCueSheetSupport:
 	def toggleMark(self, onlyremove=False, onlyadd=False, tolerance=5 * 90000, onlyreturn=False):
 		current_pos = self.cueGetCurrentPosition()
 		if current_pos is None:
-			print "not seekable"
+			print("not seekable")
 			return
 
 		nearest_cutpoint = self.getNearestCutPoint(current_pos)
@@ -3277,7 +3278,7 @@ class InfoBarCueSheetSupport:
 		cue = self.__getCuesheet()
 
 		if cue is None:
-			print "upload failed, no cuesheet interface"
+			print("upload failed, no cuesheet interface")
 			return
 		cue.setCutList(self.cut_list)
 
@@ -3285,7 +3286,7 @@ class InfoBarCueSheetSupport:
 		cue = self.__getCuesheet()
 
 		if cue is None:
-			print "download failed, no cuesheet interface"
+			print("download failed, no cuesheet interface")
 			self.cut_list = []
 		else:
 			self.cut_list = cue.getCutList()
@@ -3363,7 +3364,7 @@ class InfoBarTeletextPlugin:
 					"startTeletext": (self.startTeletext, _("View teletext..."))
 				})
 		else:
-			print "no teletext plugin found!"
+			print("no teletext plugin found!")
 
 	def startTeletext(self):
 		self.teletext_plugin and self.teletext_plugin(session=self.session, service=self.session.nav.getCurrentService())
@@ -3569,7 +3570,7 @@ class InfoBarPowersaver:
 		if answer:
 			self.goStandby()
 		else:
-			print "[InfoBarPowersaver] abort"
+			print("[InfoBarPowersaver] abort")
 
 	def sleepTimerState(self):
 		if self.sleepTimer.isActive():
@@ -3577,7 +3578,7 @@ class InfoBarPowersaver:
 		return 0
 
 	def setSleepTimer(self, sleepTime):
-		print "[InfoBarPowersaver] set sleeptimer", sleepTime
+		print("[InfoBarPowersaver] set sleeptimer", sleepTime)
 		if sleepTime:
 			m = abs(sleepTime / 60)
 			message = _("The sleep timer has been activated.") + "\n" + _("And will put your receiver in standby over ") + ngettext("%d minute", "%d minutes", m) % m
@@ -3597,17 +3598,17 @@ class InfoBarPowersaver:
 
 	def sleepTimerTimeoutCallback(self, answer):
 		if answer == "extend":
-			print "[InfoBarPowersaver] extend sleeptimer"
+			print("[InfoBarPowersaver] extend sleeptimer")
 			self.setSleepTimer(900)
 		elif answer:
 			self.goStandby()
 		else:
-			print "[InfoBarPowersaver] abort"
+			print("[InfoBarPowersaver] abort")
 			self.setSleepTimer(0)
 
 	def goStandby(self):
 		if not Screens.Standby.inStandby:
-			print "[InfoBarPowersaver] goto standby"
+			print("[InfoBarPowersaver] goto standby")
 			self.session.open(Screens.Standby.Standby)
 
 
