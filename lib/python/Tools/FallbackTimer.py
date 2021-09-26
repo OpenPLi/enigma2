@@ -51,7 +51,7 @@ class FallbackTimerList():
 	def gotFallbackTimerList(self, data):
 		try:
 			root = xml.etree.cElementTree.fromstring(data)
-		except Exception, e:
+		except Exception as e:
 			self.fallback(e)
 		self.list = [
 				FallbackTimerClass(

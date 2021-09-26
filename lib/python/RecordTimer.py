@@ -70,7 +70,7 @@ def findSafeRecordPath(dirname):
 	if not os.path.isdir(dirname):
 		try:
 			os.makedirs(dirname)
-		except Exception, ex:
+		except Exception as ex:
 			print '[RecordTimer] Failed to create dir "%s":' % dirname, ex
 			return None
 	return dirname
@@ -421,7 +421,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 					# Give the Trashcan a chance to clean up
 					try:
 						Trashcan.instance.cleanIfIdle(self.Filename)
-					except Exception, e:
+					except Exception as e:
 						print "[TIMER] Failed to call Trashcan.instance.cleanIfIdle()"
 						print "[TIMER] Error:", e
 				# fine. it worked, resources are allocated.

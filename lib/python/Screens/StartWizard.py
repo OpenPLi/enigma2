@@ -135,7 +135,7 @@ class AutoInstallWizard(Screen):
 			if self.container.execute('opkg install "%s"' % self.package):
 				raise Exception("failed to execute command!")
 				self.appClosed(True)
-		except Exception, e:
+		except Exception as e:
 			self.appClosed(True)
 
 	def dataAvail(self, data):

@@ -332,7 +332,7 @@ class MemoryInfo(Screen):
 			self["slide"].setValue(int(100.0 * (mem - free) / mem + 0.25))
 			self['pfree'].setText("%.1f %s" % (100. * free / mem, '%'))
 			self['pused'].setText("%.1f %s" % (100. * (mem - free) / mem, '%'))
-		except Exception, e:
+		except Exception as e:
 			print "[About] getMemoryInfo FAIL:", e
 
 	def clearMemory(self):
@@ -441,7 +441,7 @@ class Troubleshoot(Screen):
 			try:
 				if self.container.execute(command):
 					raise Exception, "failed to execute: ", command
-			except Exception, e:
+			except Exception as e:
 				self["AboutScrollLabel"].setText("%s\n%s" % (_("An error occurred - Please try again later"), e))
 
 	def cancel(self):

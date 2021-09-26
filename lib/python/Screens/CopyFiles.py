@@ -112,7 +112,7 @@ class MoveFileTask(CopyFileTask):
 		for s, d in self.fileList:
 			try:
 				os.unlink(s)
-			except Exception, e:
+			except Exception as e:
 				errors.append(e)
 		if errors:
 			raise errors[0]

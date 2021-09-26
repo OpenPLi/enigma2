@@ -95,7 +95,7 @@ def listsDirPath():
 				line = line.split(' ', 2)
 				if len(line) > 2 and line[1] == ('lists_dir'):
 					return line[2].strip()
-	except Exception, ex:
+	except Exception as ex:
 		print "[opkg]", ex
 	return '/var/lib/opkg/lists'
 
@@ -225,7 +225,7 @@ class OpkgComponent:
 				# if we get multiple config file update questions, the next ones
 				# don't necessarily start at the beginning of a line
 				self.callCallbacks(self.EVENT_MODIFIED, data.split(' \'', 3)[1][:-1])
-		except Exception, ex:
+		except Exception as ex:
 			print "[Opkg] Failed to parse: '%s'" % data
 			print "[Opkg]", ex
 
