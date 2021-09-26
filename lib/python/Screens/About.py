@@ -441,7 +441,7 @@ class Troubleshoot(Screen):
 		else:
 			try:
 				if self.container.execute(command):
-					raise Exception, "failed to execute: ", command
+					raise Exception("failed to execute: " + command)
 			except Exception as e:
 				self["AboutScrollLabel"].setText("%s\n%s" % (_("An error occurred - Please try again later"), e))
 
