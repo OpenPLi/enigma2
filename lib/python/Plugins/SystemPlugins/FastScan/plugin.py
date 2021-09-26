@@ -226,7 +226,7 @@ class FastScanScreen(ConfigListScreen, Screen):
 
 	def saveConfiguration(self):
 		if self.scan_provider.value:
-			config.misc.fastscan.last_configuration.value = `(self.scan_nims.value, self.scan_provider.value, self.scan_hd.value, self.scan_keepnumbering.value, self.scan_keepsettings.value, self.scan_create_radio_bouquet.value)`
+			config.misc.fastscan.last_configuration.value = repr((self.scan_nims.value, self.scan_provider.value, self.scan_hd.value, self.scan_keepnumbering.value, self.scan_keepsettings.value, self.scan_create_radio_bouquet.value))
 			auto_providers = []
 			for provider in providers:
 				if self.config_autoproviders[provider[0]].value:
