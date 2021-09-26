@@ -116,7 +116,11 @@ static unsigned char *bmp_load(const char *file,  int *x, int *y)
 
 	int fd = open(file, O_RDONLY);
 	if (fd == -1) return NULL;
-	if (lseek(fd, BMP_SIZE_OFFSET, SEEK_SET) == -1) return NULL;
+	if (lseek(fd, BMP_SIZE_OFFSET, SEEK_SET) == -1)
+	{
+		close(fd);
+		return NULL;
+	}
 	if (read(fd, buff, 4) != 4) // failed to read x
 	{
 		close(fd);
@@ -164,7 +168,10 @@ static unsigned char *bmp_load(const char *file,  int *x, int *y)
 			lseek(fd, raster, SEEK_SET);
 			unsigned char * tbuffer = new unsigned char[*x / 2 + 1];
 			if (tbuffer == NULL)
+			{
+				close(fd);
 				return NULL;
+			}
 			for (int i = 0; i < *y; i++)
 			{
 				if (read(fd, tbuffer, (*x) / 2 + *x % 2) != ((*x) / 2 + *x % 2))
@@ -209,7 +216,10 @@ static unsigned char *bmp_load(const char *file,  int *x, int *y)
 			lseek(fd, raster, SEEK_SET);
 			unsigned char * tbuffer = new unsigned char[*x];
 			if (tbuffer == NULL)
+			{
+				close(fd);
 				return NULL;
+			}
 			for (int i = 0; i < *y; i++)
 			{
 				if (read(fd, tbuffer, *x) != *x)
@@ -1077,16 +1087,17 @@ bool ePicLoad::getExif(const char *filename, int fileType, int Thumb)
 
 int ePicLoad::getData(ePtr<gPixmap> &result)
 {
-	result = 0;
 	if (m_filepara == NULL)
 	{
 		eDebug("[ePicLoad] Weird situation, was not decoding anything!");
+		result = 0;
 		return 1;
 	}
 	if(m_filepara->pic_buffer == NULL)
 	{
 		delete m_filepara;
 		m_filepara = NULL;
+		result = 0;
 		if (m_exif != NULL) {
 			m_exif->ClearExif();
 			delete m_exif;
@@ -1439,9 +1450,7 @@ int ePicLoad::getFileType(const char * file)
 SWIG_VOID(int) loadPic(ePtr<gPixmap> &result, std::string filename, int x, int y, int aspect, int resize_mode, int rotate, int background, std::string cachefile)
 {
 	long asp1, asp2;
-	result = 0;
 	eDebug("[loadPic] deprecated loadPic function used!!! please use the non blocking version! you can see demo code in Pictureplayer plugin... this function is removed in the near future!");
-	ePicLoad mPL;
 
 	switch(aspect)
 	{
@@ -1463,10 +1472,13 @@ SWIG_VOID(int) loadPic(ePtr<gPixmap> &result, std::string filename, int x, int y
 	else
 		PyTuple_SET_ITEM(tuple, 6,  PyString_FromString("#00000000"));
 
+	ePicLoad mPL;
 	mPL.setPara(tuple);
 
 	if(!mPL.startDecode(filename.c_str(), 0, 0, false))
 		mPL.getData(result);
+	else
+		result = 0;
 
 	return 0;
 }
