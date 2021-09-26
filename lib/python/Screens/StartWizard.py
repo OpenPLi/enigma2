@@ -133,7 +133,7 @@ class AutoInstallWizard(Screen):
 		self["header"].setText(_("Autoinstalling %s") % self.package + " - %s%%" % self["progress"].value)
 		try:
 			if self.container.execute('opkg install "%s"' % self.package):
-				raise Exception, "failed to execute command!"
+				raise Exception("failed to execute command!")
 				self.appClosed(True)
 		except Exception, e:
 			self.appClosed(True)

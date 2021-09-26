@@ -61,7 +61,7 @@ class CopyFileTask(Components.Task.PythonTask):
 					while 1:
 						if self.aborted:
 							print "[CopyFileTask] aborting"
-							raise Exception, "Aborted"
+							raise Exception("Aborted")
 						try:
 							l = sendfile(fdd, fds, offset, bs)
 						except OSError as ex:
@@ -78,7 +78,7 @@ class CopyFileTask(Components.Task.PythonTask):
 					while 1:
 						if self.aborted:
 							print "[CopyFileTask] aborting"
-							raise Exception, "Aborted"
+							raise Exception("Aborted")
 						l = src.readinto(d)
 						if l < bs:
 							if not l:
