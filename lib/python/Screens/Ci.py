@@ -347,7 +347,10 @@ class CiMessageHandler:
 								show_ui = False
 								self.auto_close = False
 					if show_ui and not forceNotShowCiMessages and not Screens.Standby.inStandby:
-						self.dlgs[slot] = self.session.openWithCallback(self.dlgClosed, MMIDialog, slot, 3, screen_data=screen_data)
+						try:
+							self.dlgs[slot] = self.session.openWithCallback(self.dlgClosed, MMIDialog, slot, 3, screen_data=screen_data)
+						except:
+							pass
 
 	def dlgClosed(self, slot):
 		if slot in self.dlgs:
