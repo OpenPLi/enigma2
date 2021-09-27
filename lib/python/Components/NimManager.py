@@ -16,10 +16,6 @@ import xml.etree.cElementTree
 config.unicable = ConfigSubsection()
 
 
-def orbStr(pos):
-	return pos > 3600 and "N/A" or "%d.%d\xc2\xb0%s" % (pos > 1800 and ((3600 - pos) / 10, (3600 - pos) % 10, "W") or (pos / 10, pos % 10, "E"))
-
-
 def getConfigSatlist(orbpos, satlist):
 	default_orbpos = None
 	for x in satlist:
@@ -1203,7 +1199,8 @@ class NimManager:
 				if lastrotorposition == -1:
 					return number and -1 or _("undefined")
 				else:
-					return number and lastrotorposition or orbStr(lastrotorposition)
+					from Tools.Transponder import orbpos as orbStr # imported here so doesn't cause a circular import
+ 					return number and lastrotorposition or orbStr(lastrotorposition)
 		else:
 			return number and 9999 or _("not valid frontend")
 		return number and 9998 or _("rotor is not used")
