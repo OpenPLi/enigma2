@@ -4,6 +4,6 @@ SUBDIRS = meta
 
 install_PYTHON =	\
 	__init__.py \
-	plugin.py log.py rotor_calc.py
+	plugin.py log.py rotor_calc.py ui.py
 
 
