@@ -125,6 +125,7 @@ SystemInfo["HasOfflineDecoding"] = model not in ("osmini", "osminiplus", "et7000
 SystemInfo["MultibootStartupDevice"] = getMultibootStartupDevice()
 SystemInfo["canMode12"] = "%s_4.boxmode" % model in cmdline and cmdline["%s_4.boxmode" % model] in ("1", "12") and "192M"
 SystemInfo["canMultiBoot"] = getMultibootslots()
+SystemInfo["canDualBoot"] = fileExists("/dev/block/by-name/flag")
 SystemInfo["canFlashWithOfgwrite"] = not(model.startswith("dm"))
 SystemInfo["HDRSupport"] = fileExists("/proc/stb/hdmi/hlg_support_choices") and fileCheck("/proc/stb/hdmi/hlg_support")
 SystemInfo["CanDownmixAC3"] = fileHas("/proc/stb/audio/ac3_choices", "downmix")

@@ -1,4 +1,5 @@
 import os
+import struct
 import RecordTimer
 import Components.ParentalControl
 from Screens.Screen import Screen
@@ -364,3 +365,27 @@ class TryQuitMainloop(MessageBox):
 	def __onHide(self):
 		global inTryQuitMainloop
 		inTryQuitMainloop = False
+
+class SwitchToAndroid(Screen):
+	def __init__(self, session):
+		self.session = session
+		Screen.__init__(self, session)
+		self["myActionMap"] = ActionMap(["SetupActions", "ColorActions"],
+		{
+			"ok": self.goAndroid,
+			"cancel": self.close,
+		}, -1)
+		self.onShown.append(self.switchAndroid)
+
+	def goAndroid(self, answer):
+		from Screens.Standby import TryQuitMainloop
+		if answer is True:
+			with open('/dev/block/by-name/flag', 'wb') as f:
+				f.write(struct.pack("B", 0))
+			self.session.open(TryQuitMainloop, 2)
+		else:
+			self.close()
+
+	def switchAndroid(self):
+		self.onShown.remove(self.switchAndroid)
+		self.session.openWithCallback(self.goAndroid, MessageBox, _("\n Do you want to switch to Android ?"))
