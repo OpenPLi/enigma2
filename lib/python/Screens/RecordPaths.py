@@ -91,7 +91,7 @@ class RecordPathsSettings(Screen, ConfigListScreen):
 
 	def updateConfigList(self):
 		self.list = []
-		if self.default_dirname.value in ("/media/hdd/", "/media/usb/") and fileExists(self.default_dirname.value) and not fileExists("%smovie" % self.default_dirname.value):
+		if "/movie/" not in self.default_dirname.value and fileExists(self.default_dirname.value) and not fileExists("%smovie" % self.default_dirname.value):
 			self.subdir_movie = getConfigListEntry(_("Create directory") + " %smovie" % self.default_dirname.value, ConfigNothing())
 		else:
 			self.subdir_movie = None
