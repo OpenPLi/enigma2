@@ -6,7 +6,7 @@ from Components.ActionMap import HelpableActionMap
 from Components.GUIComponent import GUIComponent
 from Components.EpgList import Rect
 from Components.Sources.Event import Event
-from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaBlend
+from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
 from Components.TimerList import TimerList
 from Components.Renderer.Picon import getPiconName
 from Components.Sources.ServiceEvent import ServiceEvent
@@ -491,7 +491,7 @@ class EPGList(GUIComponent):
 
 		res = [None]
 		if bgpng is not None:    # bacground for service rect
-			res.append(MultiContentEntryPixmapAlphaBlend(
+			res.append(MultiContentEntryPixmapAlphaTest(
 					pos=(r1.x + self.serviceBorderVerWidth, r1.y + self.serviceBorderHorWidth),
 					size=(r1.w - 2 * self.serviceBorderVerWidth, r1.h - 2 * self.serviceBorderHorWidth),
 					png=bgpng,
@@ -524,7 +524,7 @@ class EPGList(GUIComponent):
 			if picon != "":
 				displayPicon = LoadPixmap(picon)
 			if displayPicon is not None:
-				res.append(MultiContentEntryPixmapAlphaBlend(
+				res.append(MultiContentEntryPixmapAlphaTest(
 					pos=(r1.x + self.serviceBorderVerWidth + self.number_width, r1.y + self.serviceBorderHorWidth),
 					size=(piconWidth, piconHeight),
 					png=displayPicon,
@@ -599,7 +599,7 @@ class EPGList(GUIComponent):
 					bgpng = self.othEvPix
 
 				if bgpng is not None:
-					res.append(MultiContentEntryPixmapAlphaBlend(
+					res.append(MultiContentEntryPixmapAlphaTest(
 						pos=(left + xpos + self.eventBorderVerWidth, top + self.eventBorderHorWidth),
 						size=(ewidth - 2 * self.eventBorderVerWidth, height - 2 * self.eventBorderHorWidth),
 						png=bgpng,
@@ -632,14 +632,14 @@ class EPGList(GUIComponent):
 					for i in range(len(rec[1])):
 						if ewidth < (i + 1) * (self.recIconSize + self.iconXPadding):
 							break
-						res.append(MultiContentEntryPixmapAlphaBlend(
+						res.append(MultiContentEntryPixmapAlphaTest(
 							pos=(left + xpos + ewidth - (i + 1) * (self.recIconSize + self.iconXPadding), top + height - (self.recIconSize + self.iconYPadding)),
 							size=(self.recIconSize, self.recIconSize),
 							png=self.clocks[rec[1][len(rec[1]) - 1 - i]]))
 
 		else:
 			if selected and self.selEvPix:
-				res.append(MultiContentEntryPixmapAlphaBlend(
+				res.append(MultiContentEntryPixmapAlphaTest(
 					pos=(r2.x + self.eventBorderVerWidth, r2.y + self.eventBorderHorWidth),
 					size=(r2.w - 2 * self.eventBorderVerWidth, r2.h - 2 * self.eventBorderHorWidth),
 					png=self.selEvPix,
