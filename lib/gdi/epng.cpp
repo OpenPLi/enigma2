@@ -366,8 +366,17 @@ static int savePNGto(FILE *fp, gPixmap *pixmap)
 int loadSVG(ePtr<gPixmap> &result, const char *filename, int cached, int width, int height, float scale)
 {
 	result = nullptr;
+	int size = 0;
 
-	if (cached && (result = PixmapCache::Get(filename)))
+	if (height > 0)
+		size = height;
+	else if (scale > 0)
+		size = (int)(scale * 10);
+
+	char cachefile[strlen(filename) + 10];
+	sprintf(cachefile, "%s%d", filename, size);
+
+	if (cached && (result = PixmapCache::Get(cachefile)))
 		return 0;
 
 	NSVGimage *image = nullptr;
@@ -429,7 +438,7 @@ int loadSVG(ePtr<gPixmap> &result, const char *filename, int cached, int width, 
 	nsvgRasterizeFull(rast, image, 0, 0, xscale, yscale, (unsigned char*)result->surface->data, width, height, width * 4, 1);
 
 	if (cached)
-		PixmapCache::Set(filename, result);
+		PixmapCache::Set(cachefile, result);
 
 	nsvgDeleteRasterizer(rast);
 	nsvgDelete(image);

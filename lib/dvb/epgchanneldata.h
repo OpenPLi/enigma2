@@ -5,6 +5,7 @@
 #include <lib/dvb/epgcache.h>
 #include <lib/dvb/lowlevel/eit.h>
 #include <lib/base/ebase.h>
+#include <lib/base/estring.h>
 
 #ifdef ENABLE_MHW_EPG
 #include <lib/dvb/lowlevel/mhw.h>

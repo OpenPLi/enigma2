@@ -2,13 +2,13 @@ from copy import copy, deepcopy
 
 from enigma import BT_SCALE, RT_HALIGN_CENTER, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_BOTTOM, RT_VALIGN_CENTER, RT_VALIGN_TOP, eListboxPythonMultiContent, getPrevAsciiCode, gFont
 
-from skin import fonts, parameters
+from skin import applySkinFactor, fonts, parameters
 from Components.ActionMap import HelpableNumberActionMap
 from Components.Input import Input
 from Components.Label import Label
 from Components.Language import language
 from Components.MenuList import MenuList
-from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
+from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaBlend
 from Components.Sources.StaticText import StaticText
 from Screens.ChoiceBox import ChoiceBox
 from Screens.HelpMenu import HelpableScreen
@@ -16,6 +16,7 @@ from Screens.Screen import Screen
 from Tools.Directories import SCOPE_CURRENT_SKIN, resolveFilename
 from Tools.LoadPixmap import LoadPixmap
 from Tools.NumericalTextInput import NumericalTextInput
+
 
 VKB_DONE_ICON = 0
 VKB_ENTER_ICON = 1
@@ -34,7 +35,7 @@ SPACE = u"SPACEICON"  # Symbol to be used for a SPACE on the keyboard.  Must be 
 class VirtualKeyBoardList(MenuList):
 	def __init__(self, list, enableWrapAround=False):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
-		font = fonts.get("VirtualKeyBoard", ("Regular", 28, 45))
+		font = fonts.get("VirtualKeyBoard", applySkinFactor("Regular", 28, 45))
 		self.l.setFont(0, gFont(font[0], font[1]))
 		self.l.setFont(1, gFont(font[0], font[1] * 5 // 9))  # Smaller font is 56% the height of bigger font
 		self.l.setItemHeight(font[2])
@@ -526,7 +527,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		self["key_blue"] = StaticText(self.shiftMsgs[1])
 		self["key_text"] = StaticText(_("TEXT"))
 		self["key_help"] = StaticText(_("HELP"))
-		width, height = parameters.get("VirtualKeyBoard", (45, 45))
+		width, height = parameters.get("VirtualKeyBoard", applySkinFactor(45, 45))
 		if self.bg_l is None or self.bg_m is None or self.bg_r is None:
 			self.width = width
 			self.height = height
@@ -538,7 +539,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		# 	Vertical alignment: 0=Auto, 1=Top, 2=Center, 3=Bottom (Auto=Center).
 		self.alignment = parameters.get("VirtualKeyBoardAlignment", (0, 0))
 		# Padding -> (Left/Right, Top/Botton) in pixels
-		self.padding = parameters.get("VirtualKeyBoardPadding", (4, 4))
+		self.padding = parameters.get("VirtualKeyBoardPadding", applySkinFactor(4, 4))
 		# Text color for each shift level.  (Ensure there is a color for each shift level!)
 		self.shiftColors = parameters.get("VirtualKeyBoardShiftColors", (0x00ffffff, 0x00ffffff, 0x0000ffff, 0x00ff00ff))
 		self.language = None
@@ -918,26 +919,26 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 					x += self.width * width
 				else:
 					w = self.bg_l.size().width()
-					res.append(MultiContentEntryPixmapAlphaTest(pos=(x, 0), size=(w, self.height), png=self.bg_l))
+					res.append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(w, self.height), png=self.bg_l))
 					x += w
 					w = self.bg_m.size().width() + (self.width * (width - 1))
-					res.append(MultiContentEntryPixmapAlphaTest(pos=(x, 0), size=(w, self.height), png=self.bg_m, flags=BT_SCALE))
+					res.append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(w, self.height), png=self.bg_m, flags=BT_SCALE))
 					x += w
 					w = self.bg_r.size().width()
-					res.append(MultiContentEntryPixmapAlphaTest(pos=(x, 0), size=(w, self.height), png=self.bg_r))
+					res.append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(w, self.height), png=self.bg_r))
 					x += w
 				highlight = self.keyHighlights.get(key.upper(), (None, None, None))  # Check if the cell needs to be highlighted.
 				if highlight[0] is None or highlight[1] is None or highlight[2] is None:  # If available display the cell highlight.
 					xHighlight += self.width * width
 				else:
 					w = highlight[0].size().width()
-					res.append(MultiContentEntryPixmapAlphaTest(pos=(xHighlight, 0), size=(w, self.height), png=highlight[0]))
+					res.append(MultiContentEntryPixmapAlphaBlend(pos=(xHighlight, 0), size=(w, self.height), png=highlight[0]))
 					xHighlight += w
 					w = highlight[1].size().width() + (self.width * (width - 1))
-					res.append(MultiContentEntryPixmapAlphaTest(pos=(xHighlight, 0), size=(w, self.height), png=highlight[1], flags=BT_SCALE))
+					res.append(MultiContentEntryPixmapAlphaBlend(pos=(xHighlight, 0), size=(w, self.height), png=highlight[1], flags=BT_SCALE))
 					xHighlight += w
 					w = highlight[2].size().width()
-					res.append(MultiContentEntryPixmapAlphaTest(pos=(xHighlight, 0), size=(w, self.height), png=highlight[2]))
+					res.append(MultiContentEntryPixmapAlphaBlend(pos=(xHighlight, 0), size=(w, self.height), png=highlight[2]))
 					xHighlight += w
 				if self.alignment[0] == 1:  # Determine the cell alignment.
 					alignH = RT_HALIGN_LEFT
@@ -974,7 +975,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 						top += (h - hImage) // 2
 					elif alignV == RT_VALIGN_BOTTOM:
 						top += h - hImage
-					res.append(MultiContentEntryPixmapAlphaTest(pos=(left, top), size=(wImage, hImage), png=image))
+					res.append(MultiContentEntryPixmapAlphaBlend(pos=(left, top), size=(wImage, hImage), png=image))
 					# print("[VirtualKeyBoard] DEBUG: Left=%d, Top=%d, Width=%d, Height=%d, Image Width=%d, Image Height=%d" % (left, top, w, h, wImage, hImage))
 				else:  # Display the cell text.
 					if len(key) > 1:  # NOTE: UTF8 / Unicode glyphs only count as one character here.
@@ -995,13 +996,13 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		start, width = self.findStartAndWidth(self.selectedKey)
 		x = start * self.width
 		w = self.sel_l.size().width()
-		self.list[self.selectedKey // self.keyboardWidth].append(MultiContentEntryPixmapAlphaTest(pos=(x, 0), size=(w, self.height), png=self.sel_l))
+		self.list[self.selectedKey // self.keyboardWidth].append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(w, self.height), png=self.sel_l))
 		x += w
 		w = self.sel_m.size().width() + (self.width * (width - 1))
-		self.list[self.selectedKey // self.keyboardWidth].append(MultiContentEntryPixmapAlphaTest(pos=(x, 0), size=(w, self.height), png=self.sel_m, flags=BT_SCALE))
+		self.list[self.selectedKey // self.keyboardWidth].append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(w, self.height), png=self.sel_m, flags=BT_SCALE))
 		x += w
 		w = self.sel_r.size().width()
-		self.list[self.selectedKey // self.keyboardWidth].append(MultiContentEntryPixmapAlphaTest(pos=(x, 0), size=(w, self.height), png=self.sel_r))
+		self.list[self.selectedKey // self.keyboardWidth].append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(w, self.height), png=self.sel_r))
 		self.previousSelectedKey = self.selectedKey
 		self["list"].setList(self.list)
 

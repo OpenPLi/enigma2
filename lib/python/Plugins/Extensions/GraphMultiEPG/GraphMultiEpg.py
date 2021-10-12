@@ -1,4 +1,4 @@
-from skin import parseColor, parseFont
+from skin import applySkinFactor, parseColor, parseFont, parseScale
 from Components.config import config, ConfigClock, ConfigInteger, ConfigSubsection, ConfigYesNo, ConfigSelection, ConfigSelectionNumber
 from Components.Pixmap import Pixmap
 from Components.Button import Button
@@ -6,7 +6,7 @@ from Components.ActionMap import HelpableActionMap
 from Components.GUIComponent import GUIComponent
 from Components.EpgList import Rect
 from Components.Sources.Event import Event
-from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest, MultiContentEntryPixmapAlphaBlend
+from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaBlend
 from Components.TimerList import TimerList
 from Components.Renderer.Picon import getPiconName
 from Components.Sources.ServiceEvent import ServiceEvent
@@ -29,7 +29,7 @@ from Tools.LoadPixmap import LoadPixmap
 from Tools.Alternatives import CompareWithAlternatives
 from Tools.FallbackTimer import FallbackTimerList
 from Tools.TextBoundary import getTextBoundarySize
-from enigma import eEPGCache, eListbox, gFont, eListboxPythonMultiContent, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, RT_VALIGN_CENTER, RT_WRAP, BT_SCALE, BT_KEEP_ASPECT_RATIO, BT_ALIGN_CENTER, eSize, eRect, eTimer, loadPNG, eServiceReference
+from enigma import eEPGCache, eListbox, gFont, eListboxPythonMultiContent, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, RT_VALIGN_CENTER, RT_WRAP, BT_SCALE, BT_KEEP_ASPECT_RATIO, BT_ALIGN_CENTER, eSize, eRect, eTimer, eServiceReference
 from GraphMultiEpgSetup import GraphMultiEpgSetup
 from time import localtime, time, strftime, mktime
 from Components.PluginComponent import plugins
@@ -166,9 +166,9 @@ class EPGList(GUIComponent):
 		self.backColorNow = 0x505080
 		self.foreColorRec = 0xffffff
 		self.backColorRec = 0x805050
-		self.serviceFont = gFont("Regular", 20)
+		self.serviceFont = gFont("Regular", applySkinFactor(20))
 		self.entryFontName = "Regular"
-		self.entryFontSize = 18
+		self.entryFontSize = applySkinFactor(18)
 
 		self.listHeight = None
 		self.listWidth = None
@@ -180,7 +180,7 @@ class EPGList(GUIComponent):
 		self.eventBorderVerWidth = 1 # for png backgrounds only
 		self.eventBorderHorWidth = 1 # for png backgrounds only
 		self.eventNamePadding = 0
-		self.recIconSize = 21
+		self.recIconSize = applySkinFactor(21)
 		self.iconXPadding = 1
 		self.iconYPadding = 1
 
@@ -215,16 +215,16 @@ class EPGList(GUIComponent):
 			self.borderColor = parseColor(value).argb()
 
 		def EventBorderWidth(value): # for solid backgrounds only (we are limited to the same horizontal and vertical border width)
-			self.eventBorderWidth = int(value)
+			self.eventBorderWidth = parseScale(value)
 
 		def EventBorderHorWidth(value): # for png backgrounds only
-			self.eventBorderHorWidth = int(value)
+			self.eventBorderHorWidth = parseScale(value)
 
 		def EventBorderVerWidth(value): # for png backgrounds only
-			self.eventBorderVerWidth = int(value)
+			self.eventBorderVerWidth = parseScale(value)
 
 		def EventNamePadding(value):
-			self.eventNamePadding = int(value)
+			self.eventNamePadding = parseScale(value)
 
 		def ServiceFont(value):
 			self.serviceFont = parseFont(value, ((1, 1), (1, 1)))
@@ -251,25 +251,25 @@ class EPGList(GUIComponent):
 			self.borderColorService = parseColor(value).argb()
 
 		def ServiceBorderWidth(value): # for solid backgrounds only (we are limited to the same horizontal and vertical border width)
-			self.serviceBorderWidth = int(value)
+			self.serviceBorderWidth = parseScale(value)
 
 		def ServiceBorderHorWidth(value): # for png backgrounds only
-			self.serviceBorderHorWidth = int(value)
+			self.serviceBorderHorWidth = parseScale(value)
 
 		def ServiceBorderVerWidth(value): # for png backgrounds only
-			self.serviceBorderVerWidth = int(value)
+			self.serviceBorderVerWidth = parseScale(value)
 
 		def ServiceNamePadding(value):
-			self.serviceNamePadding = int(value)
+			self.serviceNamePadding = parseScale(value)
 
 		def RecIconSize(value):
-			self.recIconSize = int(value)
+			self.recIconSize = parseScale(value)
 
 		def IconXPadding(value):
-			self.iconXPadding = int(value)
+			self.iconXPadding = parseScale(value)
 
 		def IconYPadding(value):
-			self.iconYPadding = int(value)
+			self.iconYPadding = parseScale(value)
 		for (attrib, value) in list(self.skinAttributes):
 			try:
 				locals().get(attrib)(value)
@@ -413,11 +413,11 @@ class EPGList(GUIComponent):
 			self.instance.resize(eSize(self.listWidth, itemHeight * config.misc.graph_mepg.items_per_page.getValue()))
 		self.l.setItemHeight(itemHeight)
 
-		self.nowEvPix = loadPNG(resolveFilename(SCOPE_CURRENT_SKIN, 'epg/CurrentEvent.png'))
-		self.othEvPix = loadPNG(resolveFilename(SCOPE_CURRENT_SKIN, 'epg/OtherEvent.png'))
-		self.selEvPix = loadPNG(resolveFilename(SCOPE_CURRENT_SKIN, 'epg/SelectedEvent.png'))
-		self.recEvPix = loadPNG(resolveFilename(SCOPE_CURRENT_SKIN, 'epg/RecordingEvent.png'))
-		self.curSerPix = loadPNG(resolveFilename(SCOPE_CURRENT_SKIN, 'epg/CurrentService.png'))
+		self.nowEvPix = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, 'epg/CurrentEvent.png'))
+		self.othEvPix = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, 'epg/OtherEvent.png'))
+		self.selEvPix = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, 'epg/SelectedEvent.png'))
+		self.recEvPix = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, 'epg/RecordingEvent.png'))
+		self.curSerPix = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, 'epg/CurrentService.png'))
 
 		# if no background png's are present at all, use the solid background borders for further calculations
 		if (self.nowEvPix, self.othEvPix, self.selEvPix, self.recEvPix, self.curSerPix) == (None, None, None, None, None):
@@ -491,7 +491,7 @@ class EPGList(GUIComponent):
 
 		res = [None]
 		if bgpng is not None:    # bacground for service rect
-			res.append(MultiContentEntryPixmapAlphaTest(
+			res.append(MultiContentEntryPixmapAlphaBlend(
 					pos=(r1.x + self.serviceBorderVerWidth, r1.y + self.serviceBorderHorWidth),
 					size=(r1.w - 2 * self.serviceBorderVerWidth, r1.h - 2 * self.serviceBorderHorWidth),
 					png=bgpng,
@@ -522,9 +522,9 @@ class EPGList(GUIComponent):
 			piconWidth = self.picon_size.width()
 			piconHeight = self.picon_size.height()
 			if picon != "":
-				displayPicon = loadPNG(picon)
+				displayPicon = LoadPixmap(picon)
 			if displayPicon is not None:
-				res.append(MultiContentEntryPixmapAlphaTest(
+				res.append(MultiContentEntryPixmapAlphaBlend(
 					pos=(r1.x + self.serviceBorderVerWidth + self.number_width, r1.y + self.serviceBorderHorWidth),
 					size=(piconWidth, piconHeight),
 					png=displayPicon,
@@ -599,7 +599,7 @@ class EPGList(GUIComponent):
 					bgpng = self.othEvPix
 
 				if bgpng is not None:
-					res.append(MultiContentEntryPixmapAlphaTest(
+					res.append(MultiContentEntryPixmapAlphaBlend(
 						pos=(left + xpos + self.eventBorderVerWidth, top + self.eventBorderHorWidth),
 						size=(ewidth - 2 * self.eventBorderVerWidth, height - 2 * self.eventBorderHorWidth),
 						png=bgpng,
@@ -639,7 +639,7 @@ class EPGList(GUIComponent):
 
 		else:
 			if selected and self.selEvPix:
-				res.append(MultiContentEntryPixmapAlphaTest(
+				res.append(MultiContentEntryPixmapAlphaBlend(
 					pos=(r2.x + self.eventBorderVerWidth, r2.y + self.eventBorderHorWidth),
 					size=(r2.w - 2 * self.eventBorderVerWidth, r2.h - 2 * self.eventBorderHorWidth),
 					png=self.selEvPix,
@@ -840,10 +840,10 @@ class TimelineText(GUIComponent):
 			xpos = 0 # eventLeft
 			for x in range(0, num_lines):
 				res.append(MultiContentEntryText(
-					pos =(service_rect.width() + xpos - tlMove, 0),
+					pos=(service_rect.width() + xpos - tlMove, 0),
 					size=(incWidth, itemHeight),
 					font=0, flags=tlFlags,
-					text =strftime("%H:%M", localtime(time_base + x * timeStepsCalc)),
+					text=strftime("%H:%M", localtime(time_base + x * timeStepsCalc)),
 					color=self.foreColor, color_sel=self.foreColor,
 					backcolor=self.backColor, backcolor_sel=self.backColor))
 				line = time_lines[x]
@@ -1134,7 +1134,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 	def showSetup(self):
 		self.showhideWindow(True)
 		if self.protectContextMenu and config.ParentalControl.setuppinactive.value and config.ParentalControl.config_sections.context_menus.value:
-			self.session.openWithCallback(self.protectResult, PinInput, pinList=[x.value for x in config.ParentalControl.servicepin], triesEntry=config.ParentalControl.retries.servicepin, title=_("Please enter the correct pin code"), windowTitle=_("Enter pin code"))
+			self.session.openWithCallback(self.protectResult, PinInput, pinList=[x.value for x in config.ParentalControl.servicepin], triesEntry=config.ParentalControl.retries.servicepin, title=_("Please enter the correct PIN code"), windowTitle=_("Enter PIN code"))
 		else:
 			self.protectResult(True)
 
@@ -1143,7 +1143,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 			self.session.openWithCallback(self.onSetupClose, GraphMultiEpgSetup)
 			self.protectContextMenu = False
 		elif answer is not None:
-			self.session.openWithCallback(self.close, MessageBox, _("The pin code you entered is wrong."), MessageBox.TYPE_ERROR)
+			self.session.openWithCallback(self.close, MessageBox, _("The PIN code you entered is wrong."), MessageBox.TYPE_ERROR)
 
 	def onSetupClose(self, ignore=-1):
 		l = self["list"]
@@ -1293,7 +1293,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 	def disableTimer(self, timer, state, repeat=False, record=False):
 		if repeat:
 			if record:
-				title_text = _("Repeating event currently recording.\nWhat do you want to do?")
+				title_text = _("A repeating event is currently recording. What would you like to do?")
 				menu = [(_("Stop current event but not coming events"), "stoponlycurrent"), (_("Stop current event and disable coming events"), "stopall")]
 				if not timer.disabled:
 					menu.append((_("Don't stop current event but disable coming events"), "stoponlycoming"))

@@ -79,6 +79,7 @@ void eCableScan::stateChanged(iDVBChannel *ch)
 	}
 
 	channelState = state;
+	eDebug("[eCableScan] state %d", state);
 
 	if (state == iDVBChannel::state_ok)
 	{
@@ -92,6 +93,10 @@ void eCableScan::stateChanged(iDVBChannel *ch)
 			m_NIT->start(m_demux, eDVBNITSpec(networkId));
 		}
 	}
+	else if (state == iDVBChannel::state_failed)
+	{
+		nextChannel();
+ 	}
 }
 
 void eCableScan::NITReady(int error)

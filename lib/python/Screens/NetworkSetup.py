@@ -297,7 +297,6 @@ class AdapterSetup(Screen, ConfigListScreen, HelpableScreen):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 		self.setTitle(_("Network setup"))
-		self.session = session
 		if isinstance(networkinfo, (list, tuple)):
 			self.iface = networkinfo[0]
 			self.essid = networkinfo[1]
@@ -410,11 +409,11 @@ class AdapterSetup(Screen, ConfigListScreen, HelpableScreen):
 			self.ws = wpaSupplicant()
 			self.encryptionlist = []
 			self.encryptionlist.append(("Unencrypted", _("Unencrypted")))
-			self.encryptionlist.append(("WEP", _("WEP")))
-			self.encryptionlist.append(("WPA", _("WPA")))
+			self.encryptionlist.append(("WEP", "WEP"))
+			self.encryptionlist.append(("WPA", "WPA"))
 			if not os.path.exists("/tmp/bcm/" + self.iface):
-				self.encryptionlist.append(("WPA/WPA2", _("WPA or WPA2")))
-			self.encryptionlist.append(("WPA2", _("WPA2")))
+				self.encryptionlist.append(("WPA/WPA2", "WPA/WPA2"))
+			self.encryptionlist.append(("WPA2", "WPA2"))
 			self.weplist = []
 			self.weplist.append("ASCII")
 			self.weplist.append("HEX")
@@ -656,7 +655,6 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 		self.setTitle(_("Network configuration"))
-		self.session = session
 		self.iface = iface
 		self.restartLanRef = None
 		self.LinkState = None
@@ -1221,7 +1219,7 @@ class NetworkAdapterTest(Screen):
 			self["InfoText"].show()
 			self["key_red"].setText(_("Back"))
 		if self.activebutton == 3: #DHCP Check
-			self["InfoText"].setText(_("This test checks whether your LAN adapter is set up for automatic IP address configuration with DHCP.\nIf you get a \"disabled\" message:\n - then your LAN adapter is configured for manual IP setup\n- verify thay you have entered the correct IP information in the adapter setup dialog.\nIf you get an \"enabeld\" message:\n-verify that you have a configured and working DHCP server in your network."))
+			self["InfoText"].setText(_("This test checks whether your LAN adapter is set up for automatic IP address configuration with DHCP.\nIf you get a \"disabled\" message:\n- then your LAN adapter is configured for manual IP setup\n- verify thay you have entered the correct IP information in the adapter setup dialog.\nIf you get an \"enabeld\" message:\n- verify that you have a configured and working DHCP server in your network."))
 			self["InfoTextBorder"].show()
 			self["InfoText"].show()
 			self["key_red"].setText(_("Back"))

@@ -27,6 +27,96 @@ std::string buildShortName( const std::string &str )
 	return tmp.length() ? tmp : str;
 }
 
+void undoAbbreviation(std::string &str1, std::string &str2)
+{
+	std::string s1 = str1;
+	std::string s2 = str2;
+
+	// minimum length of ellipsis and emphasis brackets
+	if (s1.length() <= 5 || s2.length() <= 5)
+		return;
+
+	// check if string2 prefix has ellipsis abbreviation
+	if (s2.substr(0, 3) != "...")
+		return;
+
+	// check if string1 suffix has detected abbreviation
+	std::string suffix3 = s1.substr(s1.length() - 3);
+	std::string suffix5 = s1.substr(s1.length() - 5);
+
+	if (suffix3 == "...")
+	{
+		// found ellipsis abbreviation
+	}
+	else if (suffix3 == ":..")
+	{
+		// found colon ellipsis abbreviation
+		s1 = replace_all(s1, ":..", ": ...");
+	}
+	else if (suffix5 == "...\xc2\x87")
+	{
+		// ensure ellipsis occur after close emphasis brackets
+		// "Some <EM>string1 text...</EM>"
+		// "Some <EM>string1 text</EM>..."
+		s1 = replace_all(s1, "...\xc2\x87", "\xc2\x87...");
+	}
+	else if (suffix5 == ":..\xc2\x87")
+	{
+		// ensure colon ellipsis occur after close emphasis brackets
+		// "Some <EM>string1 text:..</EM>"
+		// "Some <EM>string1 text</EM>:..."
+		s1 = replace_all(s1, ":..\xc2\x87", "\xc2\x87: ...");
+	}
+	else
+		return;
+
+	// find the end of string1 punctuation in string2
+	size_t found = s2.find_first_of(".:!?", 4);
+	if (found == std::string::npos)
+		return;
+
+	// strip off the ellipsis and any leading/trailing space
+	if (s1.substr(s1.length() - 4, 1) == " ")
+	{
+		s1 = s1.substr(0, s1.length() - 4);
+	}
+	else
+	{
+		s1 = s1.substr(0, s1.length() - 3);
+	}
+
+	if (s2.substr(3, 1) == " ")
+	{
+		s2 = s2.substr(4);
+	}
+	else
+	{
+		s2 = s2.substr(3);
+	}
+
+	found = s2.find_first_of(".:!?");
+	// check if punctuation too complex
+	if (found <= 2)
+		return;
+
+	// construct the new string1 and string2
+	if ((s2.length() - found) > 2)
+	{
+		s1 = s1 + " " + s2.substr(0, found);
+		s2 = s2.erase(0, s2.find_first_not_of(" ", found + 1));
+
+	}
+	else
+		return;
+
+	// don't undo sanity check
+	if (s1 == "" || s2 == "")
+		return;
+
+	str1 = s1;
+	str2 = s2;
+}
+
 std::string getNum(int val, int sys)
 {
 //	Returns a string that contain the value val as string
@@ -689,14 +779,14 @@ std::string convertDVBUTF8(const unsigned char *data, int len, int table, int ts
 	if (pconvertedLen)
 		*pconvertedLen = convertedLen;
 
-	if (convertedLen < len)
-		eTrace("[convertDVBUTF8] %d chars converted, and %d chars left..", convertedLen, len-convertedLen);
-	eTrace("[convertDVBUTF8] table=0x%02X twochar=%d output:%s\n", table, useTwoCharMapping, output.c_str());
+	//if (convertedLen < len)
+	//	eTrace("[convertDVBUTF8] %d chars converted, and %d chars left..", convertedLen, len-convertedLen);
+	//eTrace("[convertDVBUTF8] table=0x%02X twochar=%d output:%s\n", table, useTwoCharMapping, output.c_str());
 
-	eTrace("[convertDVBUTF8] table=0x%02X tsid:onid=0x%X:0x%X data[0..14]=%s   output:%s\n",
-		table, (unsigned int)tsidonid >> 16, tsidonid & 0xFFFFU,
-		string_to_hex(std::string((char*)data, len < 15 ? len : 15)).c_str(),
-		output.c_str());
+	//eTrace("[convertDVBUTF8] table=0x%02X tsid:onid=0x%X:0x%X data[0..14]=%s   output:%s\n",
+	//	table, (unsigned int)tsidonid >> 16, tsidonid & 0xFFFFU,
+	//	string_to_hex(std::string((char*)data, len < 15 ? len : 15)).c_str(),
+	//	output.c_str());
 	// replace EIT CR/LF with standard newline:
 	output = replace_all(replace_all(output, "\xC2\x8A", "\n"), "\xEE\x82\x8A", "\n");
 	return output;

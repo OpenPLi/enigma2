@@ -137,7 +137,7 @@ class PluginBrowser(Screen, ProtectedScreen):
 		if len(plugins.warnings):
 			text = _("Some plugins are not available:\n")
 			for (pluginname, error) in plugins.warnings:
-				text += _("%s (%s)\n") % (pluginname, error)
+				text += "%s (%s)\n" % (pluginname, error)
 			plugins.resetWarnings()
 			self.session.open(MessageBox, text=text, type=MessageBox.TYPE_WARNING)
 

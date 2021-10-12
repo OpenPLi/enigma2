@@ -29,10 +29,9 @@ class VideoEnhancementSetup(Screen, ConfigListScreen):
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self.session = session
 		self.onChangedEntry = []
 		self.skinName = ["VideoEnhancementSetup"]
-		self.setup_title = _("Video enhancement setup")
+		self.setTitle(_("Video enhancement setup"))
 		self["introduction"] = StaticText()
 
 		self.list = []
@@ -59,10 +58,6 @@ class VideoEnhancementSetup(Screen, ConfigListScreen):
 			self["config"].onSelectionChanged.append(self.SelectionChanged)
 		self.rememberOldSettings()
 		self.changedEntry()
-		self.onLayoutFinish.append(self.layoutFinished)
-
-	def layoutFinished(self):
-		self.setTitle(self.setup_title)
 
 	def rememberOldSettings(self):
 		self.oldContrast = config.pep.contrast.value
@@ -102,7 +97,7 @@ class VideoEnhancementSetup(Screen, ConfigListScreen):
 		self.brightnessEntry = addToConfigList(_("Brightness"), config.pep.brightness, _("This option sets the picture brightness."))
 		self.blue_boostEntry = addToConfigList(_("Boost blue"), config.pep.blue_boost, _("This option allows you to boost the blue tones in the picture."), add_to_xtdlist)
 		self.green_boostEntry = addToConfigList(_("Boost green"), config.pep.green_boost, _("This option allows you to boost the green tones in the picture."), add_to_xtdlist)
-		self.contrastEntry = addToConfigList(_("Contrast"), config.pep.contrast, _("This option sets  the picture contrast."))
+		self.contrastEntry = addToConfigList(_("Contrast"), config.pep.contrast, _("This option sets the picture contrast."))
 		self.digital_contour_removalEntry = addToConfigList(_("Digital contour removal"), config.pep.digital_contour_removal, _("This option sets the surpression of false digital contours, that are the result of a limited number of discrete values."), add_to_xtdlist)
 		self.dynamic_contrastEntry = addToConfigList(_("Dynamic contrast"), config.pep.dynamic_contrast, _("This option allows to set the level of dynamic contrast of the picture."), add_to_xtdlist)
 		self.hueEntry = addToConfigList(_("Hue"), config.pep.hue, _("This option sets the picture hue."))
@@ -282,7 +277,7 @@ class VideoEnhancementPreview(Screen, ConfigListScreen):
 		Screen.__init__(self, session)
 
 		self.onChangedEntry = []
-		self.setup_title = _("Video enhancement preview")
+		self.setTitle(_("Video enhancement preview"))
 		self.oldSplitMode = oldSplitMode
 		self.maxValue = maxValue
 		self.configStepsEntry = None
@@ -304,10 +299,6 @@ class VideoEnhancementPreview(Screen, ConfigListScreen):
 		self["introduction"] = StaticText()
 
 		self.createSetup()
-		self.onLayoutFinish.append(self.layoutFinished)
-
-	def layoutFinished(self):
-		self.setTitle(self.setup_title)
 
 	def createSetup(self):
 		self.list = []

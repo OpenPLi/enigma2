@@ -28,6 +28,12 @@ else
 	fi
 fi
 
+which python
+if [ $? -eq 1 ]; then
+	printf "python not found on this system, please install it first or ensure that it is in the PATH variable.\n"
+	exit 1
+fi
+
 #
 # On Mac OSX find option are specific
 #
@@ -74,7 +80,7 @@ for lang in "${languages[@]}" ; do
 		msgfmt -o $lang.mo $lang.po; \
 	fi
 done
-rm enigma2-py.pot enigma2-xml.pot enigma2.pot
+rm enigma2-py.pot enigma2-xml.pot
 IFS=$OLDIFS
 printf "Po files update/creation from script finished!\n"
 rm -rf *.mo

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--  skin_display_vuuno4kse - LCD from Magic by MiLo -->
 <skin>
 	<windowstyle id="1" type="skinned">
 		<color color="#000000" name="Background"/>
@@ -58,44 +59,44 @@
 		<widget source="SetupValue" render="Label" position="0,200" size="400,70" font="Medium" halign="center" valign="center" />
 	</screen>
 	<screen name="InfoBarSummary" position="fill">
-			<widget source="session.CurrentService" render="Label" position="10,5" size="354,45" font="Medium" halign="left" valign="center" foregroundColor="yellow" >
+			<widget source="session.CurrentService" render="Label" position="0,5" size="400,45" font="Medium" halign="center" valign="center" foregroundColor="yellow" >
 				<convert type="ServiceName">Name</convert>
 			</widget>
-			<widget source="session.Event_Now" render="Label" position="10,70" size="400,100" font="Medium" halign="center" valign="center" >
+			<widget source="session.Event_Now" render="Label" position="0,150" size="400,40" font="Small" halign="center" valign="center" >
 				<convert type="EventName">Name</convert>
 			</widget>
-			<widget source="session.Event_Now" render="Progress" position="20,170" size="400,20" borderWidth="1" foregroundColor="lightcyan" >
+			<widget source="session.Event_Now" render="Progress" position="20,190" size="350,10" borderWidth="1" foregroundColor="lightcyan" >
 				<convert type="EventTime">Progress</convert>
 			</widget>
-			<widget source="session.Event_Now" render="Label" position="20,200" size="130,40" font="Medium" halign="center" valign="center" >
+			<widget source="session.Event_Now" render="Label" position="80,200" size="130,40" font="Small" halign="center" valign="center" >
 					<convert type="EventTime">StartTime</convert>
 					<convert type="ClockToText">Format:%H:%M</convert>
 				</widget>
-				<widget source="session.Event_Now" render="Label" position="150,200" size="130,40" font="Medium" halign="center" valign="center" >
+				<widget source="session.Event_Now" render="Label" position="190,200" size="130,40" font="Small" halign="center" valign="center" >
 					<convert type="EventTime">EndTime</convert>
 					<convert type="ClockToText">Format:- %H:%M</convert>
 				</widget>
-				<widget source="session.Event_Now" render="Label" position="350,200" size="100,40" font="Medium" halign="right" valign="center" >
+				<widget source="session.Event_Now" render="---Label" position="300,200" size="100,40" font="Small" halign="right" valign="center" >
 					<convert type="EventTime">Remaining</convert>
 					<convert type="RemainingToText">FOLLOW</convert>
 				</widget>
-			<widget source="session.CurrentService" render="Picon" isFrontDisplayPicon="1" position="355,5" size="92,55" transparent="1" halign="center" valign="center" alphatest="blend" >
+			<widget source="session.CurrentService" render="Picon" isFrontDisplayPicon="1" position="1210,50" size="160,100" transparent="1" halign="center" valign="center" alphatest="blend" >
 				<convert type="ServiceName">Reference</convert>
 			</widget>
-			<widget source="session.FrontendInfo" render="Label" position="10,240" size="130,82" borderWidth="1" borderColor="black" zPosition="1" backgroundColor="transpBlack" transparent="1" font="FdLcD;28">
+			<widget source="session.FrontendInfo" render="Label" position="10,50" size="130,82" borderWidth="1" borderColor="black" zPosition="1" backgroundColor="transpBlack" transparent="1" font="FdLcD;28">
 			<convert type="FrontendInfo">USE_TUNERS_STRING</convert>
 		</widget>
-		<widget source="session.CurrentService" render="Pixmap" pixmap="skin_default/icons/stream.png" foregroundColor="#ff0000" size="60,50" position="140,250" zPosition="1" alphatest="blend" >
+		<widget source="session.CurrentService" render="Pixmap" pixmap="skin_default/icons/stream.png" foregroundColor="#ff0000" size="60,50" position="1140,150" zPosition="1" alphatest="blend" >
 			<convert type="ClientsStreaming"/>
 			<convert type="ConditionalShowHide"/>
 		</widget>
-		<widget source="session.HddSleepingState" render="Pixmap" pixmap="skin_default/icons/hdd.png" foregroundColor="#ff0000" size="50,60" position="210,250" zPosition="1" alphatest="blend" >
+		<widget source="session.HddSleepingState" render="Pixmap" pixmap="skin_default/icons/hdd.png" foregroundColor="#ff0000" size="50,60" position="1210,150" zPosition="1" alphatest="blend" >
 			<convert type="ConditionalShowHide"/>
 		</widget>
-		<widget source="session.RecordState" render="FixedLabel" text="&#174;" position="265,250" foregroundColor="#ff0000" size="40,46" font="FdLcD;50" halign="left" valign="center" zPosition="22">
+		<widget source="session.RecordState" render="FixedLabel" text="&#174;" position="8,185" foregroundColor="#ff0000" size="36,42" font="FdLcD;46" halign="left" valign="center" zPosition="22">
 			<convert type="ConditionalShowHide"></convert>
 		</widget>
-		<widget source="global.CurrentTime" render="Label" position="320,250" size="130,52" halign="right" font="FdLcD;42" foregroundColor="lightcyan" >
+		<widget source="global.CurrentTime" render="Label" position="115,75" size="160,72"  halign="center" valign="center"  font="FdLcD;50" foregroundColor="lightcyan" >
 			<convert type="ClockToText">Default</convert>
 		</widget>
 	</screen>
@@ -118,7 +119,7 @@
 			<convert type="EventTime">EndTime</convert>
 			<convert type="ClockToText">Format:- %H:%M</convert>
 		</widget>
-		<widget source="parent.ServiceEvent" render="Label" position="350,200" size="100,40" font="Medium" halign="right" valign="center" >
+		<widget source="parent.ServiceEvent" render="Label" position="290,200" size="100,40" font="Medium" halign="right" valign="center" >
 			<convert type="EventTime">Remaining</convert>
 			<convert type="RemainingToText">FOLLOW</convert>
 		</widget>
@@ -126,7 +127,7 @@
 	</screen>
 	<!-- EPG Screens -->
 	<screen name="EPGSelection_summary" position="fill">
-		<widget source="parent.Service" render="Label" position="0,5" size="400,70" font="Medium" halign="center" valign="center" foregroundColor="yellow" >
+		<widget source="parent.Service" render="Label" position="0,5" size="400,50" font="Medium" halign="center" valign="center" foregroundColor="yellow" >
 			<convert type="ServiceName">Name</convert>
 		</widget>
 		<widget source="parent.Event" render="Label" position="0,70" size="400,90" font="Medium" halign="center" valign="center" >
@@ -135,15 +136,15 @@
 		<widget source="parent.Event" render="Progress" position="20,170" size="400,20" borderWidth="1" >
 			<convert type="EventTime">Progress</convert>
 		</widget>
-		<widget source="parent.Event" render="Label" position="20,200" size="130,40" font="Medium" halign="center" valign="center" >
+		<widget source="parent.Event" render="Label" position="20,190" size="130,40" font="Medium" halign="center" valign="center" >
 			<convert type="EventTime">StartTime</convert>
 			<convert type="ClockToText">Format:%H:%M</convert>
 		</widget>
-		<widget source="parent.Event" render="Label" position="150,200" size="130,40" font="Medium" halign="center" valign="center" >
+		<widget source="parent.Event" render="Label" position="150,190" size="130,40" font="Medium" halign="center" valign="center" >
 			<convert type="EventTime">EndTime</convert>
 			<convert type="ClockToText">Format:- %H:%M</convert>
 		</widget>
-		<widget source="parent.Event" render="Label" position="350,200" size="100,40" font="Medium" halign="right" valign="center" >
+		<widget source="parent.Event" render="Label" position="280,190" size="100,40" font="Medium" halign="right" valign="center" >
 			<convert type="EventTime">Remaining</convert>
 			<convert type="RemainingToText">FOLLOW</convert>
 		</widget>
@@ -228,23 +229,23 @@
 	</screen>
 	<!-- standby -->
 	<screen name="StandbySummary" position="fill">
-		<widget source="global.CurrentTime" render="Label" position="10,40" size="400,170" font="FdLcD;150" noWrap="1" foregroundColor="lightcyan" halign="center">
+		<widget source="global.CurrentTime" render="Label" position="7,45" size="400,170" font="FdLcD;125" noWrap="1" foregroundColor="lightcyan" halign="center">
 			<convert type="ClockToText">Default</convert>
 		</widget>
-		<widget source="global.CurrentTime" render="Label" position="10,5" size="400,30" font="FdLcD;25" noWrap="1" foregroundColor="yellow" halign="center">
+		<widget source="global.CurrentTime" render="Label" position="7,5" size="400,30" font="FdLcD;28" noWrap="1" foregroundColor="yellow" halign="center">
 			<convert type="ClockToText">Date</convert>
 		</widget>
 		<widget source="session.FrontendInfo" render="Label" position="10,240" size="130,82" borderWidth="1" borderColor="black" zPosition="1" backgroundColor="transpBlack" transparent="1" font="FdLcD;28">
 			<convert type="FrontendInfo">USE_TUNERS_STRING</convert>
 		</widget>
-		<widget source="session.CurrentService" render="Pixmap" pixmap="skin_default/icons/stream.png" foregroundColor="#ff0000" size="60,50" position="200,250" zPosition="1" alphatest="blend" >
+		<widget source="session.CurrentService" render="Pixmap" pixmap="skin_default/icons/stream.png" foregroundColor="#ff0000" size="60,50" position="1200,250" zPosition="1" alphatest="blend" >
 			<convert type="ClientsStreaming"/>
 			<convert type="ConditionalShowHide"/>
 		</widget>
-		<widget source="session.HddSleepingState" render="Pixmap" pixmap="skin_default/icons/hdd.png" foregroundColor="#ff0000" size="50,60" position="280,250" zPosition="1" alphatest="blend" >
+		<widget source="session.HddSleepingState" render="Pixmap" pixmap="skin_default/icons/hdd.png" foregroundColor="#ff0000" size="50,60" position="1280,250" zPosition="1" alphatest="blend" >
 			<convert type="ConditionalShowHide"/>
 		</widget>
-		<widget source="session.RecordState" render="FixedLabel" text="&#174;" position="360,250" foregroundColor="#ff0000" size="40,46" font="FdLcD;50" halign="left" valign="center" zPosition="22">
+		<widget source="session.RecordState" render="FixedLabel" text="&#174;" position="8,185" foregroundColor="#ff0000" size="36,42" font="FdLcD;46" halign="left" valign="center" zPosition="22">
 			<convert type="ConditionalShowHide"></convert>
 		</widget>
 	</screen>

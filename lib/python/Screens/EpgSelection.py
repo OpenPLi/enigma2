@@ -44,7 +44,6 @@ class EPGSelection(Screen):
 		self.saved_title = None
 		self["Service"] = ServiceEvent()
 		self["Event"] = Event()
-		self.session = session
 		if isinstance(service, str) and eventid is not None:
 			self.type = EPG_TYPE_SIMILAR
 			self.setTitle(_("Similar EPG"))
@@ -306,7 +305,7 @@ class EPGSelection(Screen):
 	def disableTimer(self, timer, state, repeat=False, record=False):
 		if repeat:
 			if record:
-				title_text = _("Repeating event currently recording.\nWhat do you want to do?")
+				title_text = _("A repeating event is currently recording. What would you like to do?")
 				menu = [(_("Stop current event but not coming events"), "stoponlycurrent"), (_("Stop current event and disable coming events"), "stopall")]
 				if not timer.disabled:
 					menu.append((_("Don't stop current event but disable coming events"), "stoponlycoming"))

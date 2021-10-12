@@ -2,11 +2,11 @@ from MenuList import MenuList
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
 from enigma import eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT
 from Tools.LoadPixmap import LoadPixmap
-import skin
+from skin import applySkinFactor, fonts, parameters
 
 
 def SelectionEntryComponent(description, value, index, selected):
-	dx, dy, dw, dh = skin.parameters.get("SelectionListDescr", (25, 3, 650, 30))
+	dx, dy, dw, dh = parameters.get("SelectionListDescr", applySkinFactor(25, 3, 650, 30))
 	res = [
 		(description, value, index, selected),
 		(eListboxPythonMultiContent.TYPE_TEXT, dx, dy, dw, dh, 0, RT_HALIGN_LEFT, description)
@@ -15,7 +15,7 @@ def SelectionEntryComponent(description, value, index, selected):
 		selectionpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "icons/lock_on.png"))
 	else:
 		selectionpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "icons/lock_off.png"))
-	ix, iy, iw, ih = skin.parameters.get("SelectionListLock", (0, 2, 25, 24))
+	ix, iy, iw, ih = parameters.get("SelectionListLock", applySkinFactor(0, 2, 25, 24))
 	res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, ix, iy, iw, ih, selectionpng))
 	return res
 
@@ -23,7 +23,7 @@ def SelectionEntryComponent(description, value, index, selected):
 class SelectionList(MenuList):
 	def __init__(self, list=None, enableWrapAround=False):
 		MenuList.__init__(self, list or [], enableWrapAround, content=eListboxPythonMultiContent)
-		font = skin.fonts.get("SelectionList", ("Regular", 20, 30))
+		font = fonts.get("SelectionList", applySkinFactor("Regular", 20, 30))
 		self.l.setFont(0, gFont(font[0], font[1]))
 		self.l.setItemHeight(font[2])
 

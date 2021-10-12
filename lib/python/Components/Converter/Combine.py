@@ -2,7 +2,7 @@ from Converter import Converter
 from Components.Element import cached
 
 
-class Combine(Converter, object):
+class Combine(Converter):
 	SINGLE_SOURCE = False
 
 	def __init__(self, arg=None, func=None):

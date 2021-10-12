@@ -66,6 +66,8 @@ public:
 		NEW_ROTOR_POS,               // new rotor position (not validated)
 		ROTOR_CMD,                   // completed rotor cmd (finalized)
 		ROTOR_POS,                   // current rotor position
+		SAT_POSITION,                // current frontend satellite position
+		ADVANCED_LINKED_ROOT,        // number slot connected frontend
 		LINKED_PREV_PTR,             // prev double linked list (for linked FEs)
 		LINKED_NEXT_PTR,             // next double linked list (for linked FEs)
 		SATPOS_DEPENDS_PTR,          // pointer to FE with configured rotor (with twin/quattro lnb)

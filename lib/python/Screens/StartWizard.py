@@ -9,7 +9,6 @@ try:
 except:
 	OverscanWizard = None
 
-from Components.About import about
 from Components.Pixmap import Pixmap
 from Components.ProgressBar import ProgressBar
 from Components.Label import Label
@@ -23,7 +22,6 @@ import os
 config.misc.firstrun = ConfigBoolean(default=True)
 config.misc.languageselected = ConfigBoolean(default=True)
 config.misc.do_overscanwizard = ConfigBoolean(default=OverscanWizard and config.skin.primary_skin.value == "PLi-FullNightHD/skin.xml")
-config.misc.check_developimage = ConfigBoolean(default=True)
 
 
 class StartWizard(WizardLanguage, Rc):
@@ -82,25 +80,6 @@ class AutoRestoreWizard(MessageBox):
 			MessageBox.close(self)
 
 
-def checkForDevelopImage():
-	if about.getImageTypeString() == 'Openpli develop':
-		return config.misc.check_developimage.value
-	elif not config.misc.check_developimage.value:
-		config.misc.check_developimage.value = True
-		config.misc.check_developimage.save()
-
-
-class DevelopWizard(MessageBox):
-	def __init__(self, session):
-		MessageBox.__init__(self, session, _("This image is intended for developers and testers.\nNo support will be provided!\nDo you understand this?"), type=MessageBox.TYPE_YESNO, timeout=20, default=False, simple=True)
-
-	def close(self, value):
-		if value:
-			config.misc.check_developimage.value = False
-			config.misc.check_developimage.save()
-		MessageBox.close(self)
-
-
 class AutoInstallWizard(Screen):
 	skin = """<screen name="AutoInstall" position="fill" flags="wfNoBorder">
 		<panel position="left" size="5%,*"/>
@@ -151,7 +130,7 @@ class AutoInstallWizard(Screen):
 		except IOError:
 			pass
 		self.package = self.packages.pop(0)
-		self["header"].setText(_("%s%% Autoinstalling %s") % (self["progress"].value, self.package))
+		self["header"].setText(_("Autoinstalling %s") % self.package + " - %s%%" % self["progress"].value)
 		try:
 			if self.container.execute('opkg install "%s"' % self.package):
 				raise Exception, "failed to execute command!"
@@ -199,7 +178,6 @@ if not os.path.isfile("/etc/installed"):
 
 wizardManager.registerWizard(AutoInstallWizard, os.path.isfile("/etc/.doAutoinstall"), priority=0)
 wizardManager.registerWizard(AutoRestoreWizard, config.misc.languageselected.value and config.misc.firstrun.value and checkForAvailableAutoBackup(), priority=0)
-wizardManager.registerWizard(DevelopWizard, checkForDevelopImage(), priority=0)
 wizardManager.registerWizard(LanguageWizard, config.misc.languageselected.value, priority=10)
 if OverscanWizard:
 	wizardManager.registerWizard(OverscanWizard, config.misc.do_overscanwizard.value, priority=30)

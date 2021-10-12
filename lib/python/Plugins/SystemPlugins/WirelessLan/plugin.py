@@ -58,10 +58,10 @@ class WlanStatus(Screen):
 
 	def __init__(self, session, iface):
 		Screen.__init__(self, session)
-		self.session = session
+		self.setTitle(_("Wireless network state"))
 		self.iface = iface
 
-		self["LabelBSSID"] = StaticText(_('Accesspoint:'))
+		self["LabelBSSID"] = StaticText(_('Access point:'))
 		self["LabelESSID"] = StaticText(_('SSID:'))
 		self["LabelQuality"] = StaticText(_('Link quality:'))
 		self["LabelSignal"] = StaticText(_('Signal strength:'))
@@ -94,14 +94,10 @@ class WlanStatus(Screen):
 		self.timer = eTimer()
 		self.timer.timeout.get().append(self.resetList)
 		self.onShown.append(lambda: self.timer.start(8000))
-		self.onLayoutFinish.append(self.layoutFinished)
 		self.onClose.append(self.cleanup)
 
 	def cleanup(self):
 		iStatus.stopWlanConsole()
-
-	def layoutFinished(self):
-		self.setTitle(_("Wireless network state"))
 
 	def resetList(self):
 		iStatus.getDataForInterface(self.iface, self.getInfoCB)
@@ -192,7 +188,7 @@ class WlanScan(Screen):
 							MultiContentEntryText(pos = (175, 30), size = (175, 20), font=1, flags = RT_HALIGN_LEFT, text = 4), # index 0 is the encryption
 							MultiContentEntryText(pos = (350, 0), size = (200, 20), font=1, flags = RT_HALIGN_LEFT, text = 2), # index 0 is the signal
 							MultiContentEntryText(pos = (350, 30), size = (200, 20), font=1, flags = RT_HALIGN_LEFT, text = 3), # index 0 is the maxrate
-							MultiContentEntryPixmapAlphaTest(pos = (0, 52), size = (550, 2), png = 6), # index 6 is the div pixmap
+							MultiContentEntryPixmapAlphaBlend(pos = (0, 52), size = (550, 2), png = 6), # index 6 is the div pixmap
 						],
 					"fonts": [gFont("Regular", 28),gFont("Regular", 18)],
 					"itemHeight": 54
@@ -205,7 +201,7 @@ class WlanScan(Screen):
 
 	def __init__(self, session, iface):
 		Screen.__init__(self, session)
-		self.session = session
+		self.setTitle(_("Select a wireless network"))
 		self.iface = iface
 		self.skin_path = plugin_path
 		self.oldInterfaceState = iNetwork.getAdapterAttribute(self.iface, "up")
@@ -242,11 +238,7 @@ class WlanScan(Screen):
 		})
 		iWlan.setInterface(self.iface)
 		self.w = iWlan.getInterface()
-		self.onLayoutFinish.append(self.layoutFinished)
 		self.getAccessPoints(refresh=False)
-
-	def layoutFinished(self):
-		self.setTitle(_("Select a wireless network"))
 
 	def select(self):
 		cur = self["list"].getCurrent()

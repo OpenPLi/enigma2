@@ -3,7 +3,6 @@ from Components.Element import cached
 from Components.config import config
 from Components.NimManager import nimmanager
 from skin import parameters
-from Tools.Hex2strColor import Hex2strColor
 
 
 class FrontendInfo(Converter):
@@ -68,13 +67,13 @@ class FrontendInfo(Converter):
 		elif self.type == self.STRING:
 			string = ""
 			for n in nimmanager.nim_slots:
-				if n.enabled:
+				if n.type and n.enabled:
 					if n.slot == self.source.slot_number:
-						color = Hex2strColor(colors[0])
+						color = "\c%08x" % colors[0]
 					elif self.source.tuner_mask & 1 << n.slot:
-						color = Hex2strColor(colors[1])
-					elif len(nimmanager.nim_slots) <= self.space_for_tuners or n.isFBCRoot() or self.show_all_non_link_tuners and not(n.isFBCLink() or n.internally_connectable):
-						color = Hex2strColor(colors[2])
+						color = "\c%08x" % colors[1]
+					elif len(nimmanager.nim_slots) <= self.space_for_tuners or n.isFBCRoot() or self.show_all_non_link_tuners and not (n.isFBCLink() or n.config_mode == "loopthrough"):
+						color = "\c%08x" % colors[2]
 					else:
 						continue
 					if string and len(nimmanager.nim_slots) <= self.space_for_tuners_with_spaces:
@@ -84,11 +83,11 @@ class FrontendInfo(Converter):
 		if self.type == self.USE_TUNERS_STRING:
 			string = ""
 			for n in nimmanager.nim_slots:
-				if n.enabled:
+				if n.type and n.enabled:
 					if n.slot == self.source.slot_number:
-						color = Hex2strColor(colors[0])
+						color = "\c%08x" % colors[0]
 					elif self.source.tuner_mask & 1 << n.slot:
-						color = Hex2strColor(colors[1])
+						color = "\c%08x" % colors[1]
 					else:
 						continue
 					if string:
@@ -102,6 +101,7 @@ class FrontendInfo(Converter):
 	@cached
 	def getBool(self):
 		assert self.type in (self.LOCK, self.BER, self.SNR, self.SNRdB, self.AGC, self.STRING, self.USE_TUNERS_STRING), "the boolean output of FrontendInfo can only be used for lock, BER, SNR, SNRdB, AGC, STRING, or  USE_TUNERS_STRING"
+		swapsnr = config.usage.swap_snr_on_osd.value
 		if self.type == self.LOCK:
 			lock = self.source.lock
 			if lock is None:
@@ -109,10 +109,10 @@ class FrontendInfo(Converter):
 			return lock
 		elif self.type == self.BER:
 			return self.source.ber is not None
-		elif self.type == self.SNR:
+		elif (self.type == self.SNR and not swapsnr) or (self.type == self.SNRdB and swapsnr):
 			return self.source.snr is not None
-		elif self.type == self.SNRdB:
-			return self.source.snr_db is not None
+		elif self.type == self.SNR or self.type == self.SNRdB:
+			return (self.source.snr_db is not None or self.source.snr is not None)
 		elif self.type == self.AGC:
 			return self.source.agc is not None
 		elif self.type in (self.STRING, self.USE_TUNERS_STRING):
@@ -130,10 +130,8 @@ class FrontendInfo(Converter):
 		elif self.type == self.SNR:
 			return self.source.snr or 0
 		elif self.type == self.BER:
-			if self.BER < self.range:
-				return self.BER or 0
-			else:
-				return self.range
+			ber = self.source.ber or 0
+			return ber if ber < self.range else self.range
 		elif self.type == self.TUNER_TYPE:
 			type = self.source.frontend_type
 			if type == 'DVB-S':

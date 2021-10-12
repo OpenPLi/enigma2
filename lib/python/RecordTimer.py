@@ -189,6 +189,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 		self.conflict_detection = conflict_detection
 		self.external = self.external_prev = False
 		self.setAdvancedPriorityFrontend = None
+		self.background_zap = None
 		if SystemInfo["DVB-T_priority_tuner_available"] or SystemInfo["DVB-C_priority_tuner_available"] or SystemInfo["DVB-S_priority_tuner_available"] or SystemInfo["ATSC_priority_tuner_available"]:
 			rec_ref = self.service_ref and self.service_ref.ref
 			str_service = rec_ref and rec_ref.toString()
@@ -305,7 +306,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 						self.descramble = False
 					if start_zap:
 						self.log(1, "zapping in CI+ use")
-						NavigationInstance.instance.playService(rec_ref)
+						self.failureCB(answer=True, ref=rec_ref)
 						Notifications.AddNotification(MessageBox, _("In order to record a timer, the TV was switched to the recording service!\n"), type=MessageBox.TYPE_INFO, timeout=20)
 			self.log(1, "'record ref' %s" % rec_ref and rec_ref.toString())
 			self.setRecordingPreferredTuner()
@@ -406,7 +407,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 						else:
 							Notifications.AddNotification(MessageBox, _("In order to record a timer, the TV was switched to the recording service!\n"), type=MessageBox.TYPE_INFO, timeout=20)
 							self.setRecordingPreferredTuner()
-							self.failureCB(True)
+							self.failureCB(answer=True)
 							self.log(5, "zap to recording service")
 
 			if self.tryPrepare():
@@ -439,7 +440,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 						return False
 					if Screens.Standby.inStandby:
 						self.setRecordingPreferredTuner()
-						self.failureCB(True)
+						self.failureCB(answer=True)
 					elif self.checkingTimeshiftRunning():
 						if self.ts_dialog is None:
 							self.openChoiceActionBeforeZap()
@@ -450,7 +451,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 						self.log(9, "zap without asking")
 						Notifications.AddNotification(MessageBox, _("In order to record a timer, the TV was switched to the recording service!\n"), type=MessageBox.TYPE_INFO, timeout=20)
 						self.setRecordingPreferredTuner()
-						self.failureCB(True)
+						self.failureCB(answer=True)
 				elif cur_ref:
 					self.log(8, "currently running service is not a live service.. so stop it makes no sense")
 				else:
@@ -477,7 +478,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 						RecordTimerEntry.setWasInStandby()
 					notify = config.usage.show_message_when_recording_starts.value and self.InfoBarInstance and self.InfoBarInstance.execing
 					cur_ref = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
-					pip_zap = self.pipzap or (cur_ref and cur_ref.getPath() and SystemInfo["PIPAvailable"])
+					pip_zap = self.pipzap or (cur_ref and cur_ref.getPath() and '%3a//' not in cur_ref.toString() and SystemInfo["PIPAvailable"])
 					if pip_zap:
 						cur_ref_group = NavigationInstance.instance.getCurrentlyPlayingServiceOrGroup()
 						if cur_ref_group and cur_ref_group != self.service_ref.ref and self.InfoBarInstance and hasattr(self.InfoBarInstance.session, 'pipshown') and not Components.ParentalControl.parentalControl.isProtected(self.service_ref.ref):
@@ -530,7 +531,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 								MediaPlayerinstance.exitCallback(True)
 								force = True
 						if not force:
-							NavigationInstance.instance.playService(self.service_ref.ref)
+							self.failureCB(answer=True, close_pip=False)
 						if notify or force:
 							Notifications.AddPopup(text=_("Zapped to timer service %s!") % self.service_ref.getServiceName(), type=MessageBox.TYPE_INFO, timeout=5)
 				return True
@@ -541,6 +542,15 @@ class RecordTimerEntry(timer.TimerEntry, object):
 						config.misc.standbyCounter.value = 0
 					else:
 						Notifications.AddNotification(Screens.Standby.Standby, StandbyCounterIncrease=False)
+
+				if config.recording.zap_record_service_in_standby.value and Screens.Standby.inStandby:
+					cur_ref = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
+					if self.rec_ref and (not cur_ref or cur_ref != self.rec_ref):
+						NavigationInstance.instance.playService(self.rec_ref, checkParentalControl=False, adjust=False)
+						cur_ref = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
+						if cur_ref and self.rec_ref == cur_ref:
+							self.background_zap = cur_ref
+
 				record_res = self.record_service.start()
 				self.setRecordingPreferredTuner(setdefault=True)
 				if record_res:
@@ -566,18 +576,25 @@ class RecordTimerEntry(timer.TimerEntry, object):
 			self.log_tuner(12, "stop")
 			if not self.justplay:
 				NavigationInstance.instance.stopRecordService(self.record_service)
+				if self.background_zap is not None and Screens.Standby.inStandby:
+					cur_ref = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
+					if cur_ref and self.background_zap == cur_ref:
+						NavigationInstance.instance.stopService()
 				self.record_service = None
 				self.rec_ref = None
+				self.background_zap = None
 			if not checkForRecordings():
 				if self.afterEvent == AFTEREVENT.DEEPSTANDBY or self.afterEvent == AFTEREVENT.AUTO and (Screens.Standby.inStandby or RecordTimerEntry.wasInStandby) and not config.misc.standbyCounter.value:
 					if not Screens.Standby.inTryQuitMainloop:
 						if Screens.Standby.inStandby:
 							RecordTimerEntry.TryQuitMainloop()
 						else:
-							Notifications.AddNotificationWithCallback(self.sendTryQuitMainloopNotification, MessageBox, _("A finished record timer wants to shut down\nyour receiver. Shutdown now?"), timeout=20, default=True)
+							msg = _("A completed recording timer is about to shut down your receiver. Would you like to proceed?")
+							Notifications.AddNotificationWithCallback(self.sendTryQuitMainloopNotification, MessageBox, msg, timeout=20, default=True)
 				elif self.afterEvent == AFTEREVENT.STANDBY or self.afterEvent == AFTEREVENT.AUTO and RecordTimerEntry.wasInStandby:
 					if not Screens.Standby.inStandby:
-						Notifications.AddNotificationWithCallback(self.sendStandbyNotification, MessageBox, _("A finished record timer wants to set your\nreceiver to standby. Do that now?"), timeout=20, default=True)
+						msg = _("A completed recording timer is about to put your receiver in standby mode. Would you like to proceed?")
+						Notifications.AddNotificationWithCallback(self.sendStandbyNotification, MessageBox, msg, timeout=20, default=True)
 				else:
 					RecordTimerEntry.keypress()
 			return True
@@ -675,10 +692,10 @@ class RecordTimerEntry(timer.TimerEntry, object):
 				if start_zap:
 					if not self.justplay:
 						self.setRecordingPreferredTuner()
-						self.failureCB(True)
+						self.failureCB(answer=True)
 					else:
 						self.log(8, "zapping")
-						NavigationInstance.instance.playService(self.service_ref.ref)
+						self.failureCB(answer=True, close_pip=False)
 			self.ts_dialog = self.InfoBarInstance.session.openWithCallback(zapAction, MessageBox, message, simple=True, list=choice, timeout=20)
 
 	def sendStandbyNotification(self, answer):
@@ -701,16 +718,28 @@ class RecordTimerEntry(timer.TimerEntry, object):
 				self.StateRunning: self.begin,
 				self.StateEnded: self.end}[next_state]
 
-	def failureCB(self, answer):
+	def failureCB(self, answer=False, close_pip=True, ref=None):
 		self.ts_dialog = None
 		if answer:
 			self.log(13, "ok, zapped away")
-			if not self.first_try_prepare and self.InfoBarInstance and hasattr(self.InfoBarInstance.session, 'pipshown') and self.InfoBarInstance.session.pipshown:
+			if close_pip and not self.first_try_prepare and self.InfoBarInstance and hasattr(self.InfoBarInstance.session, 'pipshown') and self.InfoBarInstance.session.pipshown:
 				hasattr(self.InfoBarInstance, "showPiP") and self.InfoBarInstance.showPiP()
 				if hasattr(self.InfoBarInstance.session, 'pip'):
 					del self.InfoBarInstance.session.pip
 					self.InfoBarInstance.session.pipshown = False
-			NavigationInstance.instance.playService(self.service_ref.ref)
+			addService = False
+			old_ref_group = NavigationInstance.instance.getCurrentlyPlayingServiceOrGroup()
+			if self.service_ref.ref and (not old_ref_group or old_ref_group != self.service_ref.ref):
+				addService = True
+			NavigationInstance.instance.playService(ref or self.service_ref.ref, adjust=False)
+			if addService and hasattr(self.InfoBarInstance, "servicelist"):
+				next_ref_group = NavigationInstance.instance.getCurrentlyPlayingServiceOrGroup()
+				if next_ref_group and next_ref_group == (ref or self.service_ref.ref):
+					self.InfoBarInstance.servicelist.servicelist.setCurrent(self.service_ref.ref, adjust=True)
+					selectedService = self.InfoBarInstance.servicelist.getCurrentSelection()
+					if selectedService and selectedService == self.service_ref.ref:
+						self.InfoBarInstance.servicelist.addToHistory(self.service_ref.ref)
+						self.InfoBarInstance.servicelist.saveChannel(self.service_ref.ref)
 		else:
 			self.log(14, "user didn't want to zap away, record will probably fail")
 
@@ -744,7 +773,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 			# that in our state, with also keeping the possibility to re-try.
 			# TODO: this has to be done.
 		elif event == iRecordableService.evStart:
-			text = _("A record has been started:\n%s") % self.name
+			text = _("A recording has started:\n%s") % self.name
 			notify = config.usage.show_message_when_recording_starts.value and not Screens.Standby.inStandby and self.InfoBarInstance and self.InfoBarInstance.execing
 			if self.dirnameHadToFallback:
 				text = '\n'.join((text, _("Please note that the previously selected media could not be accessed and therefore the default directory is being used instead.")))

@@ -128,9 +128,9 @@ class FastScanStatus(Screen):
 	def scanCompleted(self, result):
 		self.isDone = True
 		if result < 0:
-			self["scan_state"].setText(_('Scanning failed!'))
+			self["scan_state"].setText(_('Scan failed!'))
 		else:
-			self["scan_state"].setText(ngettext('List version %d, found %d channel', 'List version %d, found %d channels', result) % (self.scan.getVersion(), result))
+			self["scan_state"].setText(ngettext('List version %(ver)d, found %(num)d channel', 'List version %(ver)d, found %(num)d channels', result) % {"ver": self.scan.getVersion(), "num": result})
 
 	def restoreService(self):
 		if self.prevservice:
@@ -197,7 +197,7 @@ class FastScanScreen(ConfigListScreen, Screen):
 		for provider in providers:
 			self.config_autoproviders[provider[0]] = ConfigYesNo(default=provider[0] in auto_providers)
 		self.list = []
-		ConfigListScreen.__init__(self, self.list)
+		ConfigListScreen.__init__(self, self.list, session, self.createSetup)
 		self.createSetup()
 		self.finished_cb = None
 		self["introduction"] = Label(_("Select your provider, and press OK to start the scan"))
@@ -223,15 +223,6 @@ class FastScanScreen(ConfigListScreen, Screen):
 					if nimmanager.getNimListForSat(transponders[provider[1][0]][3]):
 						self.list.append(getConfigListEntry(_("Enable auto fastscan for %s") % provider[0], self.config_autoproviders[provider[0]]))
 		self["config"].list = self.list
-		self["config"].l.setList(self.list)
-
-	def keyLeft(self):
-		ConfigListScreen.keyLeft(self)
-		self.createSetup()
-
-	def keyRight(self):
-		ConfigListScreen.keyRight(self)
-		self.createSetup()
 
 	def saveConfiguration(self):
 		if self.scan_provider.value:
@@ -337,7 +328,7 @@ class FastScanAutoScreen(FastScanScreen):
 
 def FastScanMain(session, **kwargs):
 	if session.nav.RecordTimer.isRecording():
-		session.open(MessageBox, _("A recording is currently running. Please stop the recording before trying to scan."), MessageBox.TYPE_ERROR)
+		session.open(MessageBox, _("A recording is currently running. Please stop the recording before starting a service scan."), MessageBox.TYPE_ERROR)
 	else:
 		session.open(FastScanScreen)
 

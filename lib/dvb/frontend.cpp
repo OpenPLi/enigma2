@@ -747,7 +747,7 @@ int eDVBFrontend::closeFrontend(bool force, bool no_delayed)
 		while (tmp != -1)
 		{
 			eDVBRegisteredFrontend *linked_fe = (eDVBRegisteredFrontend*)tmp;
-			if (linked_fe->m_inuse)
+			if (linked_fe->m_inuse || (m_fbc && m_sec && m_sec->tunerLinkedInUse(m_slotid)))
 			{
 				eDebugNoSimulate("[eDVBFrontend%d] dont close frontend while the linked frontend %d in slot %d is still in use",
 					m_dvbid, linked_fe->m_frontend->getDVBID(), linked_fe->m_frontend->getSlotID());
@@ -805,6 +805,7 @@ int eDVBFrontend::closeFrontend(bool force, bool no_delayed)
 			m_fd=-1;
 		else
 			eWarning("[eDVBFrontend %d] couldnt close frontend", m_dvbid);
+		m_data[SAT_POSITION] = -1;
 	}
 	else if (m_simulate)
 	{
@@ -1139,10 +1140,6 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 	{
 		ret = (int)((((double(snr) / (65535.0 / 100.0)) * 0.1880) + 0.1959) * 100);
 	}
-	else if (!strcmp(m_description, "BCM7356 DVB-S2 NIM (internal)")) // VU+ Solo2
-	{
-		ret = (int)((((double(snr) / (65535.0 / 100.0)) * 0.1800) - 1.0000) * 100);
-	}
 	else if (!strcmp(m_description, "Vuplus DVB-S NIM(7376 FBC)")) // VU+ Solo4k
 	{
 		ret = (int)((((double(snr) / (65535.0 / 100.0)) * 0.1480) + 0.9560) * 100);
@@ -1208,7 +1205,7 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 		ret = (int)(snr / 75);
 		ter_max = 1700;
 	}
-	else if (strstr(m_description, "Sundtek DVB-S/S2 (IV)"))
+	else if (strstr(m_description, "Sundtek DVB-S/S2")) // All version Sundtek DVB-S/S2
 	{
 		ret = (int)(snr / 40.5);
 		sat_max = 1900;
@@ -1220,6 +1217,44 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 	else if (strstr(m_description, "Vuplus DVB-T NIM(BCM3466)")) // VU+ 4K dual DVB-C/T2
 	{
 		ret = (int)(snr / 43.5);
+	}
+	else if (!strcmp(m_description, "GIGA DVB-S2 NIM (TS3L10)")
+		|| !strcmp(m_description, "GIGA DVB-S2 NIM (TS2L08)")) //GB IP 4K
+	{
+		ret = snr;
+	}
+	else if (!strcmp(m_description, "GIGA DVB-C/T NIM (SP8221L)")
+		|| !strcmp(m_description, "GIGA DVB-C/T NIM (SI4765)")
+		|| !strcmp(m_description, "GIGA DVB-C/T NIM (SI41652)")
+		|| !strcmp(m_description, "GIGA DVB-C/T2 NIM (SI4768)")
+		|| !strcmp(m_description, "GIGA DVB-C/T2 NIM (SI41682)")
+		|| !strcmp(m_description, "GIGA DVB-T2/C NIM (TT2L10)")
+		|| !strcmp(m_description, "GIGA DVB-T2/C NIM (TT3L10)")
+		)
+	{
+		int type = -1;
+		oparm.getSystem(type);
+		switch (type)
+		{
+			case feCable:
+				ret = (int)(snr / 15);
+				cab_max = 4200;
+				break;
+			case feTerrestrial:
+				ret = (int)(snr / 30);
+				ter_max = 4200;
+				break;
+		}
+	}
+	else if (!strcmp(m_description, "BCM7356 DVB-S2 NIM (internal)") // VU+ Solo2
+		|| !strcmp(m_description, "BCM7346 DVB-S2 NIM (internal)")
+		|| !strcmp(m_description, "BCM7358 DVB-S2 NIM (internal)")
+		|| !strcmp(m_description, "BCM7362 DVB-S2 NIM (internal)")
+		|| !strcmp(m_description, "GIGA DVB-S2 NIM (Internal)")
+		|| !strcmp(m_description, "GIGA DVB-S2 NIM (SP2246T)")
+		|| !strcmp(m_description, "GIGA DVB-S2 NIM (TS2M08)"))
+	{
+		ret = (int)((((double(snr) / (65535.0 / 100.0)) * 0.1710) - 1.0000) * 100);
 	}
 	else if(!strcmp(m_description, "TBS-5925") || !strcmp(m_description, "DVBS2BOX") || !strcmp(m_description, "TechniSat USB device"))
 	{
@@ -1948,13 +1983,14 @@ int eDVBFrontend::tuneLoopInt()  // called by m_tuneTimer
 				break;
 			case eSecCommand::INVALIDATE_CURRENT_ROTORPARMS:
 				eDebugNoSimulate("[eDVBFrontend%d] invalidate current rotorparams", m_dvbid);
-				sec_fe_data[ROTOR_CMD] = -1;
-				sec_fe_data[ROTOR_POS] = -1;
+				sec_fe_data[ROTOR_CMD] = sec_fe_data[ROTOR_POS] = sec_fe_data[SAT_POSITION] = -1;
 				++m_sec_sequence.current();
 				break;
 			case eSecCommand::UPDATE_CURRENT_ROTORPARAMS:
 				sec_fe_data[ROTOR_CMD] = sec_fe_data[NEW_ROTOR_CMD];
-				sec_fe_data[ROTOR_POS] = sec_fe_data[NEW_ROTOR_POS];
+				sec_fe_data[ROTOR_POS] = sec_fe_data[SAT_POSITION] = sec_fe_data[NEW_ROTOR_POS];
+				if (!m_simulate)
+					m_sec->forceUpdateRotorPos(m_slotid, sec_fe_data[ROTOR_POS]);
 				eDebugNoSimulate("[eDVBFrontend%d] update current rotorparams %d %04lx %ld", m_dvbid, m_timeoutCount, sec_fe_data[ROTOR_CMD], sec_fe_data[ROTOR_POS]);
 				++m_sec_sequence.current();
 				break;

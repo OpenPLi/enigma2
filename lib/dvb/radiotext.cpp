@@ -7,11 +7,14 @@
 DEFINE_REF(eDVBRdsDecoder);
 
 eDVBRdsDecoder::eDVBRdsDecoder(iDVBDemux *demux, int type)
-	:msgPtr(0), bsflag(0), qdar_pos(0), t_ptr(0), qdarmvi_show(0), state(0)
+	:msgPtr(0), bsflag(0), qdar_pos(0), t_ptr(0), qdarmvi_show(0), state(0), m_rtp_togglebit(0), m_rtp_runningbit(0)
 	,m_type(type), m_pid(-1), m_abortTimer(eTimer::create(eApp))
 {
 	setStreamID(0xC0, 0xC0);
 
+	memset(m_message_buffer, 0, sizeof(m_message_buffer));
+	memset(lastmessage, 0, sizeof(lastmessage));
+	memset(datamessage, 0, sizeof(datamessage));
 	memset(rass_picture_mask, 0, sizeof(rass_picture_mask));
 	memset(rtp_item, 0, sizeof(rtp_item));
 
@@ -94,6 +97,36 @@ static int frequency[3][4] = {
 	// MPEG2.5 - 11.025, 12, 8khz
 	{ 11025,12000,8000,0 }
 };
+
+static const std::array<std::string, 256> rds_charset({
+	" ",      " ",      " ",      " ",      " ",      " ",      " ",      " ",      " ",      " ",      "\n",     " ",      " ",      "\r",     " ",      " ",
+	" ",      " ",      " ",      " ",      " ",      " ",      " ",      " ",      " ",      " ",      " ",      " ",      " ",      " ",      " ",      "\u00ad",
+	" ",      "!",      "\"",     "#",      "\u00a4", "%",      "&",      "'",      "(",      ")",      "*",      "+",      ",",      "-",      ".",      "/",
+	"0",      "1",      "2",      "3",      "4",      "5",      "6",      "7",      "8",      "9",      ":",      ";",      "<",      "=",      ">",      "?",
+	"@",      "A",      "B",      "C",      "D",      "E",      "F",      "G",      "H",      "I",      "J",      "K",      "L",      "M",      "N",      "O",
+	"P",      "Q",      "R",      "S",      "T",      "U",      "V",      "W",      "X",      "Y",      "Z",      "[",      "\\",     "]",      "\u2015", "_",
+	"\u2016", "a",      "b",      "c",      "d",      "e",      "f",      "g",      "h",      "i",      "j",      "k",      "l",      "m",      "n",      "o",
+	"p",      "q",      "r",      "s",      "t",      "u",      "v",      "w",      "x",      "y",      "z",      "{",      "|",      "}",      "\u00af", " ",
+	"\u00e1", "\u00e0", "\u00e9", "\u00e8", "\u00ed", "\u00ec", "\u00f3", "\u00f2", "\u00fa", "\u00f9", "\u00d1", "\u00c7", "\u015e", "\u00df", "\u00a1", "\u0132",
+	"\u00e2", "\u00e4", "\u00ea", "\u00eb", "\u00ee", "\u00ef", "\u00f4", "\u00f6", "\u00fb", "\u00fc", "\u00f1", "\u00e7", "\u015f", "\u011f", "\u0131", "\u0133",
+	"\u00aa", "\u03b1", "\u00a9", "\u2030", "\u01e6", "\u011b", "\u0148", "\u0151", "\u03c0", "\u20ac", "\u00a3", "$",      "\u2190", "\u2191", "\u2192", "\u2193",
+	"\u00ba", "\u00b9", "\u00b2", "\u00b3", "\u00b1", "\u0130", "\u0144", "\u0171", "\u00b5", "\u00bf", "\u00f7", "\u00b0", "\u00bc", "\u00bd", "\u00be", "\u00a7",
+	"\u00c1", "\u00c0", "\u00c9", "\u00c8", "\u00cd", "\u00cc", "\u00d3", "\u00d2", "\u00da", "\u00d9", "\u0158", "\u010c", "\u0160", "\u017d", "\u0110", "\u013f",
+	"\u00c2", "\u00c4", "\u00ca", "\u00cb", "\u00ce", "\u00cf", "\u00d4", "\u00d6", "\u00db", "\u00dc", "\u0159", "\u010d", "\u0161", "\u017e", "\u0111", "\u0140",
+	"\u00c3", "\u00c5", "\u00c6", "\u0152", "\u0177", "\u00dd", "\u00d5", "\u00d8", "\u00de", "\u014a", "\u0154", "\u0106", "\u015a", "\u0179", "\u0166", "\u00f0",
+	"\u00e3", "\u00e5", "\u00e6", "\u0153", "\u0175", "\u00fd", "\u00f5", "\u00f8", "\u00fe", "\u014b", "\u0155", "\u0107", "\u015b", "\u017a", "\u0167", " "
+});
+
+void eDVBRdsDecoder::convertRdsMessageToUTF8(unsigned char* buffer, std::string& message)
+{
+	int i = 0;
+	message = "";
+	while (buffer[i] != 0 && i < 66)
+	{
+		message.append(rds_charset[buffer[i]]);
+		i++;
+	}
+}
 
 void eDVBRdsDecoder::connectEvent(const sigc::slot1<void, int> &slot, ePtr<eConnection> &connection)
 {
@@ -320,18 +353,35 @@ void eDVBRdsDecoder::gotAncillaryData(const uint8_t *buf, int len)
 {
 	if (len <= 0)
 		return;
+
 	int pos = m_type ? 0 : len-1;
+	int dir = m_type ? 1 : -1;
+
+	//eTraceNoNewLineStart("[RDS] data: ");
+	//for (int j = pos; j < len && j >= 0; j += dir)
+	//	eTraceNoNewLine("%02x ", buf[j]);
+	//eTrace("\n");
+
 	while ( len )
 	{
 		unsigned char c = buf[pos];
 
-		pos += m_type ? 1 : -1;
+		pos += dir;
 
 		--len;
 
-		if (bsflag == 1) // byte stuffing
+		if (c == 0xFF) // stop byte: force reset state
+			state = 0;
+
+		// recognize byte stuffing
+		if (c == 0xFD && bsflag == 0 && state > 0)
 		{
-			bsflag=2;
+			bsflag = 1; // replace next character
+			continue;
+		}
+		else if (bsflag == 1) // byte stuffing
+		{
+			bsflag = 0;
 			switch (c)
 			{
 				case 0x00: c=0xFD; break;
@@ -339,23 +389,20 @@ void eDVBRdsDecoder::gotAncillaryData(const uint8_t *buf, int len)
 				case 0x02: c=0xFF; break;
 			}
 		}
-
-		if (c == 0xFD && bsflag ==0)
-			bsflag=1;
 		else
-			bsflag=0;
+			bsflag = 0;
 
 		if (bsflag == 0)
 		{
 			if ( state == 1 )
 				crc=0xFFFF;
-			if (( state >= 1 && state < 11 ) || ( state >=26 && state < 36 ))
+			if (( state >= 1 && state < 11 ) || ( state >=26 && state < 36 ) || ( state >=38 && state < 47 ))
 				crc = crc_ccitt_byte(crc, c);
 
 			switch (state)
 			{
 				case 0:
-					if ( c==0xFE )  // Startkennung
+					if ( c==0xFE )  // start byte
 						state=1;
 					break;
 				case 1: // 10bit Site Address + 6bit Encoder Address
@@ -398,6 +445,7 @@ void eDVBRdsDecoder::gotAncillaryData(const uint8_t *buf, int len)
 						++state;
 						text_len-=2;
 						msgPtr=0;
+						memset(m_message_buffer, 0, sizeof(m_message_buffer));
 					}
 					break;
 				case 9: // Radio Text Status bit:
@@ -407,20 +455,7 @@ void eDVBRdsDecoder::gotAncillaryData(const uint8_t *buf, int len)
 					++state; // ignore ...
 					break;
 				case 10:
-					// TODO build a complete radiotext charcode to UTF8 conversion table for all character > 0x80
-					switch (c)
-					{
-						case 0 ... 0x7f: break;
-						case 0x8d: c='ß'; break;
-						case 0x91: c='ä'; break;
-						case 0xd1: c='Ä'; break;
-						case 0x97: c='ö'; break;
-						case 0xd7: c='Ö'; break;
-						case 0x99: c='ü'; break;
-						case 0xd9: c='Ü'; break;
-						default: c=' '; break;  // convert all unknown to space
-					}
-					message[msgPtr++]=c;
+					m_message_buffer[msgPtr++]=c;
 					if(text_len)
 						--text_len;
 					else
@@ -432,17 +467,21 @@ void eDVBRdsDecoder::gotAncillaryData(const uint8_t *buf, int len)
 					break;
 				case 12:
 					crc16|=c;
-					message[msgPtr--]=0;
-					while(message[msgPtr] == ' ' && msgPtr > 0)
-						message[msgPtr--] = 0;
+					m_message_buffer[msgPtr--]=0;
+					while(m_message_buffer[msgPtr] == ' ' && msgPtr > 0)
+						m_message_buffer[msgPtr--] = 0;
 					if ( crc16 == (crc^0xFFFF) )
 					{
-						eDebug("radiotext: (%s)", message);
+						memcpy(lastmessage, m_message_buffer, 66);
+						convertRdsMessageToUTF8(m_message_buffer, m_rt_message);
+						eDebug("[RDS] radiotext str: (%s)", m_rt_message.c_str());
 						/*emit*/ m_event(RadioTextChanged);
-						memcpy(lastmessage,message,66);
 					}
 					else
-						eDebug("invalid radiotext crc (%s)", message);
+					{
+						eDebug("[RDS] invalid radiotext crc (%s)", m_message_buffer);
+						lastmessage[0] = 0; // don't use message for next radiotext plus messages as it's the old/wrong message
+					}
 					state=0;
 					break;
 
@@ -537,9 +576,19 @@ void eDVBRdsDecoder::gotAncillaryData(const uint8_t *buf, int len)
 					text_len=c;
 					++state;
 					break;
-				case 39: // Application ID
-				case 40: // always 0x4BD7 so we ignore it ;)
-				case 41: // Applicationgroup Typecode/PTY ... ignore
+				case 39: // Application ID (2 bytes); RT+ uses 0x4BD7; ignore all other ids
+					if (c != 0x4B)
+						state = 0;
+					else
+						++state;
+					break;
+				case 40:
+					if (c != 0xD7)
+						state = 0;
+					else
+						++state;
+					break;
+				case 41: // configuration ... ignore
 					++state;
 					break;
 				case 42:
@@ -558,64 +607,96 @@ void eDVBRdsDecoder::gotAncillaryData(const uint8_t *buf, int len)
 					rtp_buf[3]=c;
 					++state;
 					break;
-				case 46: // bit 10#4 = Item Togglebit
-					// bit 10#3 = Item Runningbit
-					// Tag1: bit 10#2..11#5 = Contenttype, 11#4..12#7 = Startmarker, 12#6..12#1 = Length
+				case 46:
 					rtp_buf[4]=c;
-					if (lastmessage[0] == 0) // no rds message till now ? quit ...
-						break;
-					int rtp_typ[2],rtp_start[2],rtp_len[2];
-					rtp_typ[0]   = (0x38 & rtp_buf[0]<<3) | rtp_buf[1]>>5;
-					rtp_start[0] = (0x3e & rtp_buf[1]<<1) | rtp_buf[2]>>7;
-					rtp_len[0]   = 0x3f & rtp_buf[2]>>1;
-					// Tag2: bit 12#0..13#3 = Contenttype, 13#2..14#5 = Startmarker, 14#4..14#0 = Length(5bit)
-					rtp_typ[1]   = (0x20 & rtp_buf[2]<<5) | rtp_buf[3]>>3;
-					rtp_start[1] = (0x38 & rtp_buf[3]<<3) | rtp_buf[4]>>5;
-					rtp_len[1]   = 0x1f & rtp_buf[4];
-
-					unsigned char rtplus_osd_tmp[64];
-
-					if (rtp_start[0] < 66 && (rtp_len[0]+rtp_start[0]) < 66)
+					++state;
+					break;
+				case 47:
+					crc16=c<<8;
+					++state;
+					break;
+				case 48:
+					crc16 |= c;
+					if ( crc16 == (crc^0xFFFF) )
 					{
-						memcpy(rtp_item[rtp_typ[0]],lastmessage+rtp_start[0],rtp_len[0]+1);
-						rtp_item[rtp_typ[0]][rtp_len[0]+1]=0;
-					}
-
-					if (rtp_typ[0] != rtp_typ[1])
-					{
-						if (rtp_start[1] < 66 && (rtp_len[1]+rtp_start[1]) < 66)
+						// bit 10#4 = Item Togglebit
+						// bit 10#3 = Item Runningbit
+						// Tag1: bit 10#2..11#5 = Contenttype, 11#4..12#7 = Startmarker, 12#6..12#1 = Length
+						if (lastmessage[0] == 0) // radiotext message is needed as radiotext plus uses this data to extract strings from it
 						{
-							memcpy(rtp_item[rtp_typ[1]],lastmessage+rtp_start[1],rtp_len[1]+1);
-							rtp_item[rtp_typ[1]][rtp_len[1]+1]=0;
+							state = 0;
+							break;
+						}
+						short current_tooglebit = rtp_buf[0]>>4;
+						short current_runningbit = (rtp_buf[0]>>3) & 0x1;
+						if ( current_tooglebit != m_rtp_togglebit  // current togglebit different than last stored togglebit -> item/song has changed
+							|| (m_rtp_runningbit == 1 && current_runningbit == 0)) // item/song has ended
+						{
+							memset(rtp_item, 0, sizeof(rtp_item));
+							m_rtplus_message = "";
+							/*emit*/ m_event(RtpTextChanged);
+						}
+						m_rtp_togglebit = current_tooglebit;
+						m_rtp_runningbit = current_runningbit;
+
+						int rtp_typ[2],rtp_start[2],rtp_len[2];
+						rtp_typ[0]   = (0x38 & rtp_buf[0]<<3) | rtp_buf[1]>>5;
+						rtp_start[0] = (0x3e & rtp_buf[1]<<1) | rtp_buf[2]>>7;
+						rtp_len[0]   = 0x3f & rtp_buf[2]>>1;
+						// Tag2: bit 12#0..13#3 = Contenttype, 13#2..14#5 = Startmarker, 14#4..14#0 = Length(5bit)
+						rtp_typ[1]   = (0x20 & rtp_buf[2]<<5) | rtp_buf[3]>>3;
+						rtp_start[1] = (0x38 & rtp_buf[3]<<3) | rtp_buf[4]>>5;
+						rtp_len[1]   = 0x1f & rtp_buf[4];
+
+						unsigned char rtplus_osd_tmp[64];
+						memset(rtplus_osd_tmp, 0, sizeof(rtplus_osd_tmp));
+
+						if (rtp_start[0] < 66 && (rtp_len[0]+rtp_start[0]) < 66)
+						{
+							memcpy(rtp_item[rtp_typ[0]],lastmessage+rtp_start[0],rtp_len[0]+1);
+							rtp_item[rtp_typ[0]][rtp_len[0]+1]=0;
+						}
+
+						if (rtp_typ[0] != rtp_typ[1])
+						{
+							if (rtp_start[1] < 66 && (rtp_len[1]+rtp_start[1]) < 66)
+							{
+								memcpy(rtp_item[rtp_typ[1]],lastmessage+rtp_start[1],rtp_len[1]+1);
+								rtp_item[rtp_typ[1]][rtp_len[1]+1]=0;
+							}
+						}
+
+						// main RTPlus item_types used by the radio stations:
+						// 1 title
+						// 4 artist
+						// 24 info.date_time
+						// 31 stationname
+						// 32 program.now
+						// 39 homepage
+						// 41 phone.hotline
+						// 46 email.hotline
+						// todo: make a window to display all saved items ...
+
+						//create RTPlus OSD for title/artist
+						memset(rtplus_osd, 0, sizeof(rtplus_osd));
+
+						if ( rtp_item[4][0] != 0 && (rtp_item[4][1] != 0 || rtp_item[4][0] != 0x20))//artist
+							sprintf((char*)rtplus_osd_tmp," (%.60s)",rtp_item[4]);
+
+						if ( rtp_item[1][0] != 0 )//title
+							sprintf((char*)rtplus_osd,"%s%s",rtp_item[1],rtplus_osd_tmp);
+
+						if ( rtplus_osd[0] != 0 )
+						{
+							convertRdsMessageToUTF8(rtplus_osd, m_rtplus_message);
+							/*emit*/ m_event(RtpTextChanged);
+							eDebug("[RDS] RTPlus: %s",m_rtplus_message.c_str());
 						}
 					}
-
-					// main RTPlus item_types used by the radio stations:
-					// 1 title
-					// 4 artist
-					// 24 info.date_time
-					// 31 stationname
-					// 32 program.now
-					// 39 homepage
-					// 41 phone.hotline
-					// 46 email.hotline
-					// todo: make a window to display all saved items ...
-
-					//create RTPlus OSD for title/artist
-					rtplus_osd[0]=0;
-
-					if ( rtp_item[4][0] != 0 )//artist
-						sprintf((char*)rtplus_osd_tmp," (%.58s)",rtp_item[4]);
-
-					if ( rtp_item[1][0] != 0 )//title
-						sprintf((char*)rtplus_osd,"%.31s%.31s",rtp_item[1],rtplus_osd_tmp);
-
-					if ( rtplus_osd[0] != 0 )
+					else
 					{
-						/*emit*/ m_event(RtpTextChanged);
-						eDebug("RTPlus: %s",rtplus_osd);
+						eDebug("[RDS] RT+ invalid CRC read: %04X CRC calculated: %04X", crc16, crc^0xFFFF);
 					}
-
 					state=0;
 					break;
 			}
@@ -658,7 +739,7 @@ int eDVBRdsDecoder::start(int pid)
 
 void eDVBRdsDecoder::abortNonAvail()
 {
-	eDebug("no ancillary data in audio stream... abort radiotext pes parser");
+	eDebug("[RDS] no ancillary data in audio stream... abort radiotext pes parser");
 	if (m_pes_reader)
 		m_pes_reader->stop();
 }

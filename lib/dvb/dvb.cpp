@@ -961,7 +961,7 @@ RESULT eDVBResourceManager::allocateFrontendByIndex(ePtr<eDVBAllocatedFrontend> 
 				while ( tmp != -1 )
 				{
 					eDVBRegisteredFrontend *next = (eDVBRegisteredFrontend *) tmp;
-					if (next->m_inuse)
+					if (next->m_inuse || (i->m_frontend->is_FBCTuner() && m_sec && m_sec->tunerLinkedInUse(slot_index)))
 					{
 						eDebug("[eDVBResourceManager] another linked frontend is in use.. so allocateFrontendByIndex not possible!");
 						err = errAllSourcesBusy;

@@ -91,7 +91,6 @@ def applySettings(mode=config.plugins.OSD3DSetup.mode.value, znorm=int(config.pl
 class auto3D(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self.session = session
 		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evStart: self.__evStart
 			})

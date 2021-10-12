@@ -8,6 +8,7 @@ eDVBCIApplicationManagerSession::eDVBCIApplicationManagerSession(eDVBCISlot *tsl
 {
 	slot = tslot;
 	slot->setAppManager(this);
+	m_app_name = "";
 }
 
 eDVBCIApplicationManagerSession::~eDVBCIApplicationManagerSession()
@@ -17,10 +18,10 @@ eDVBCIApplicationManagerSession::~eDVBCIApplicationManagerSession()
 
 int eDVBCIApplicationManagerSession::receivedAPDU(const unsigned char *tag,const void *data, int len)
 {
-	eDebugNoNewLine("[CI AM] SESSION(%d)/APP %02x %02x %02x: ", session_nb, tag[0], tag[1], tag[2]);
+	eTraceNoNewLine("[CI AM] SESSION(%d)/APP %02x %02x %02x: ", session_nb, tag[0], tag[1], tag[2]);
 	for (int i=0; i<len; i++)
-		eDebugNoNewLine("%02x ", ((const unsigned char*)data)[i]);
-	eDebugNoNewLine("\n");
+		eTraceNoNewLine("%02x ", ((const unsigned char*)data)[i]);
+	eTraceNoNewLine("\n");
 
 	if ((tag[0]==0x9f) && (tag[1]==0x80))
 	{
@@ -48,13 +49,14 @@ int eDVBCIApplicationManagerSession::receivedAPDU(const unsigned char *tag,const
 				eDebugNoNewLine("%c", ((unsigned char*)data)[i+6]);
 			eDebugNoNewLine("\n");
 
-			eDVBCI_UI::getInstance()->setAppName(slot->getSlotID(), str);
+			m_app_name = str;
+			/* emit */ eDVBCI_UI::getInstance()->m_messagepump.send(eDVBCIInterfaces::Message(eDVBCIInterfaces::Message::appNameChanged, slot->getSlotID(), str));
 
-			eDVBCI_UI::getInstance()->setState(slot->getSlotID(), 2);
+			/* emit */ eDVBCI_UI::getInstance()->m_messagepump.send(eDVBCIInterfaces::Message(eDVBCIInterfaces::Message::slotStateChanged, slot->getSlotID(), 2));
 			break;
 		}
 		default:
-			eDebug("[CI AM] unknown APDU tag 9F 80 %02x", tag[2]);
+			eWarning("[CI AM] unknown APDU tag 9F 80 %02x", tag[2]);
 			break;
 		}
 	}

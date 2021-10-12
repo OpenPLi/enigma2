@@ -8,4 +8,3 @@ install_PYTHON = \
 	Downloader.py Trashcan.py GetEcmInfo.py Alternatives.py TextBoundary.py \
 	camcontrol.py CountryCodes.py Multiboot.py FallbackTimer.py Hex2strColor.py \
 	Geolocation.py
-

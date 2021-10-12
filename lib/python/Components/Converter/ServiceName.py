@@ -5,7 +5,7 @@ from ServiceReference import resolveAlternate
 from Components.Element import cached
 
 
-class ServiceName(Converter, object):
+class ServiceName(Converter):
 	NAME = 0
 	PROVIDER = 1
 	REFERENCE = 2

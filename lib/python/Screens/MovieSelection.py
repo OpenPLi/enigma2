@@ -261,9 +261,8 @@ def buildMovieLocationList(bookmarks):
 
 class MovieBrowserConfiguration(ConfigListScreen, Screen):
 	def __init__(self, session, args=0):
-		self.session = session
-		self.setup_title = _("Movie list configuration")
 		Screen.__init__(self, session)
+		self.setTitle(_("Movie list configuration"))
 		self.skinName = ['MovieBrowserConfiguration', 'Setup']
 		cfg = ConfigSubsection()
 		self.cfg = cfg
@@ -275,7 +274,7 @@ class MovieBrowserConfiguration(ConfigListScreen, Screen):
 			getConfigListEntry(_("Show extended description"), cfg.description, _("You can enable if will be displayed extended EPG description for item.")),
 			getConfigListEntry(_("Type"), cfg.listtype, _("Set movielist type.")),
 			getConfigListEntry(_("Use individual settings for each directory"), config.movielist.settings_per_directory, _("Settings can be different for each directory separately (for non removeable devices only).")),
-			getConfigListEntry(_("Allow quitting movieplayer with exit"), config.usage.leave_movieplayer_onExit, _("You can set how will be finished movieplayer with 'Exit' button.")),
+			getConfigListEntry(_("Allow quitting movie player with exit"), config.usage.leave_movieplayer_onExit, _("When enabled, it is possible to leave the movie player with exit.")),
 			getConfigListEntry(_("Behavior when a movie reaches the end"), config.usage.on_movie_eof, _("Set action when movie playback is finished.")),
 			getConfigListEntry(_("Stop service on return to movie list"), config.movielist.stop_service, _("If is enabled and movie playback is finished, then after return to movielist will not be automaticaly start service playback.")),
 			getConfigListEntry(_("Load length of movies in movie list"), config.usage.load_length_of_movies_in_moviellist, _("Display movie length in movielist (except single line style).")),
@@ -310,14 +309,10 @@ class MovieBrowserConfiguration(ConfigListScreen, Screen):
 		self["VKeyIcon"] = Boolean(False)
 
 		self.onChangedEntry = []
-		self.onLayoutFinish.append(self.layoutFinished)
 		self["config"].onSelectionChanged.append(self.descriptions)
 
 	def descriptions(self):
 		self["description"].setText(self["config"].getCurrent() and len(self["config"].getCurrent()) > 2 and self["config"].getCurrent()[2] or "")
-
-	def layoutFinished(self):
-		self.setTitle(self.setup_title)
 
 	# for summary:
 	def changedEntry(self):
@@ -533,6 +528,8 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		if not timeshiftEnabled:
 			InfoBarBase.__init__(self) # For ServiceEventTracker
 		ProtectedScreen.__init__(self)
+
+		self.setTitle(_("Movie selection"))
 		self.protectContextMenu = True
 		self.initialRun = True
 
@@ -582,9 +579,6 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		self.selectedmovie = selectedmovie
 
 		self.playGoTo = None #1 - preview next item / -1 - preview previous
-
-		title = _("Movie selection")
-		self.setTitle(title)
 
 		# Need list for init
 		SelectionEventInfo.__init__(self)
@@ -708,7 +702,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 
 	def unhideParentalServices(self):
 		if self.protectContextMenu:
-			self.session.openWithCallback(self.unhideParentalServicesCallback, PinInput, pinList=[config.ParentalControl.servicepin[0].value], triesEntry=config.ParentalControl.retries.servicepin, title=_("Enter the service pin"), windowTitle=_("Enter pin code"))
+			self.session.openWithCallback(self.unhideParentalServicesCallback, PinInput, pinList=[config.ParentalControl.servicepin[0].value], triesEntry=config.ParentalControl.retries.servicepin, title=_("Enter the service PIN"), windowTitle=_("Enter PIN code"))
 		else:
 			self.unhideParentalServicesCallback(True)
 
@@ -719,7 +713,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			parentalControl.hideBlacklist()
 			self.reloadList()
 		elif answer is not None:
-			self.session.openWithCallback(self.close, MessageBox, _("The pin code you entered is wrong."), MessageBox.TYPE_ERROR)
+			self.session.openWithCallback(self.close, MessageBox, _("The PIN code you entered is wrong."), MessageBox.TYPE_ERROR)
 
 	def asciiOn(self):
 		rcinput = eRCInput.getInstance()
@@ -1452,7 +1446,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				parentalControl.hideBlacklist()
 				self.gotFilename(res, selItem, checkParentControl=False)
 			elif result == False:
-				self.session.open(MessageBox, _("The pin code you entered is wrong."), MessageBox.TYPE_INFO, timeout=5)
+				self.session.open(MessageBox, _("The PIN code you entered is wrong."), MessageBox.TYPE_INFO, timeout=5)
 		if not res:
 			return
 		# serviceref must end with /
@@ -1465,7 +1459,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				if checkParentControl and config.ParentalControl.servicepinactive.value and baseName.startswith(".") and not baseName.startswith(".Trash"):
 					from Components.ParentalControl import parentalControl
 					if not parentalControl.sessionPinCached:
-						self.session.openWithCallback(boundFunction(servicePinEntered, res, selItem), PinInput, pinList=[x.value for x in config.ParentalControl.servicepin], triesEntry=config.ParentalControl.retries.servicepin, title=_("Please enter the correct pin code"), windowTitle=_("Enter pin code"))
+						self.session.openWithCallback(boundFunction(servicePinEntered, res, selItem), PinInput, pinList=[x.value for x in config.ParentalControl.servicepin], triesEntry=config.ParentalControl.retries.servicepin, title=_("Please enter the correct PIN code"), windowTitle=_("Enter PIN code"))
 						return
 				config.movielist.last_videodir.value = res
 				config.movielist.last_videodir.save()
@@ -1967,7 +1961,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 					else:
 						files += 1
 			if files or subdirs:
-				msg = _("Directory contains %s and %s.") % (ngettext("%d file", "%d files", files) % files, ngettext("%d subdirectory", "%d subdirectories", subdirs) % subdirs) + '\n' + are_you_sure
+				msg = _("Directory contains %(file)s and %(subdir)s.") % {"file": ngettext("%d file", "%d files", files) % files, "subdir": ngettext("%d subdirectory", "%d subdirectories", subdirs) % subdirs} + '\n' + are_you_sure
 				if isInTrashFolder(current):
 					# Red button to empty trashcan item or subdir
 					msg = _("Deleted items") + "\n" + msg
