@@ -14,7 +14,7 @@ class CiModuleControl(Renderer, VariableText):
 		self.text = ""
 		self.allVisible = False
 		self.no_visible_state1 = "ciplushelper" in popen("top -n 1").read()
-		self.colors = parameters.get("CiModuleControlColors", (0x007F7F7F, 0x00FFFF00, 0x00FFFF00, 0x00FF2525)) # "state 0 (no module) gray", "state 1 (init module) yellow", "state 2 (module ready) green", "state -1 (error) red"
+		self.colors = parameters.get("CiModuleControlColors", (0x007F7F7F, 0x00FFFF00, 0x0000FF00, 0x00FF2525)) # "state 0 (no module) gray", "state 1 (init module) yellow", "state 2 (module ready) green", "state -1 (error) red"
 
 	GUI_WIDGET = eLabel
 
