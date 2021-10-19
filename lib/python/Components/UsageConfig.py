@@ -444,7 +444,10 @@ def InitUsageConfig():
 		config.usage.output_12V.addNotifier(set12VOutput, immediate_feedback=False)
 
 	config.usage.keymap = ConfigText(default=eEnv.resolve("${datadir}/enigma2/keymap.xml"))
-	config.usage.keytrans = ConfigText(default=eEnv.resolve("${datadir}/enigma2/keytranslation.xml"))
+	keytranslation = eEnv.resolve("${sysconfdir}/enigma2/keytranslation.xml")
+	if not os.path.exists(keytranslation):
+		keytranslation = eEnv.resolve("${datadir}/enigma2/keytranslation.xml")
+	config.usage.keytrans = ConfigText(default=keytranslation)
 	config.usage.alternative_imagefeed = ConfigText(default="", fixed_size=False)
 
 	config.seek = ConfigSubsection()
