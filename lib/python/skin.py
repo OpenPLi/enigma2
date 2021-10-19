@@ -260,10 +260,10 @@ def parseCoordinate(s, e, size=0, font=None):
 				c = e / 2.0
 			if "w" in s:
 				s = s.replace("w", "*w")
-				w = float(fonts[font][3])
+				w = float(font in fonts and fonts[font][3] or 0)
 			if "h" in s:
 				s = s.replace("h", "*h")
-				h = float(fonts[font][2])
+				h = float(font in fonts and fonts[font][2] or 0)
 			if "%" in s:
 				s = s.replace("%", "*e / 100.0")
 			if "f" in s:
