@@ -242,40 +242,41 @@ class SkinError(Exception):
 
 def parseCoordinate(s, e, size=0, font=None):
 	orig = s = s.strip()
-	if s == "center":  # For speed as this can be common case.
+	if s.isdigit():  # For speed try a simple number first as these are the most common.
+		val = int(s)
+	elif s == "center":  # For speed as this can be common case.
 		val = 0 if not size else (e - size) // 2
+	elif s == "e":
+		val = e
 	elif s == "*":
 		return None
 	else:
-		try:
-			val = int(s)  # For speed try a simple number first.
-		except ValueError:
-			if font is None and ("w" in s or "h" in s):
-				print("[Skin] Error: 'w' or 'h' is being used in a field where neither is valid. Input string: '%s'" % orig)
-				return 0
-			# No test on "e" because it's already a variable
-			if "center" in s:
-				center = (e - size) / 2.0
-			if "c" in s:
-				c = e / 2.0
-			if "w" in s:
-				s = s.replace("w", "*w")
-				w = float(font in fonts and fonts[font][3] or 0)
-			if "h" in s:
-				s = s.replace("h", "*h")
-				h = float(font in fonts and fonts[font][2] or 0)
-			if "%" in s:
-				s = s.replace("%", "*e / 100.0")
-			if "f" in s:
-				f = getSkinFactor()
-			# Don't bother trying an int() conversion,
-			# because at this point that's almost certainly
-			# going to throw an exception.
-			try:
-				val = int(eval(s))
-			except Exception as err:
-				print("[Skin] %s '%s': Coordinate '%s', processed to '%s', cannot be evaluated!" % (type(err).__name__, err, orig, s))
-				val = 0
+		if font is None and ("w" in s or "h" in s):
+			print("[Skin] Error: 'w' or 'h' is being used in a field where neither is valid. Input string: '%s'" % orig)
+			return 0
+		# No test on "e" because it's already a variable
+		if "center" in s:
+			center = (e - size) / 2.0
+		if "c" in s:
+			c = e / 2.0
+		if "w" in s:
+			s = s.replace("w", "*w")
+			w = float(font in fonts and fonts[font][3] or 0)
+		if "h" in s:
+			s = s.replace("h", "*h")
+			h = float(font in fonts and fonts[font][2] or 0)
+		if "%" in s:
+			s = s.replace("%", "*e / 100.0")
+		if "f" in s:
+			f = getSkinFactor()
+		# Don't bother trying an int() conversion,
+		# because at this point that's almost certainly
+		# going to throw an exception.
+		try: # protects against junk in the input
+			val = int(eval(s))
+		except Exception as err:
+			print("[Skin] %s '%s': Coordinate '%s', processed to '%s', cannot be evaluated!" % (type(err).__name__, err, orig, s))
+			val = 0
 	# print("[Skin] DEBUG: parseCoordinate s='%s', e='%s', size=%s, font='%s', val='%s'." % (s, e, size, font, val))
 	return val
 
