@@ -672,7 +672,7 @@ def InitUsageConfig():
 		("ces cze", _("Czech")),
 		("dan", _("Danish")),
 		("dut ndl nld", _("Dutch")),
-		("eng qaa", _("English")),
+		("eng", _("English")),
 		("est", _("Estonian")),
 		("fin", _("Finnish")),
 		("fra fre", _("French")),
