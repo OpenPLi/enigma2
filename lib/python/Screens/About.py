@@ -8,6 +8,7 @@ from Components.NimManager import nimmanager
 from Components.About import about
 from Components.ScrollLabel import ScrollLabel
 from Components.Button import Button
+from Components.SystemInfo import SystemInfo
 
 from Components.Label import Label
 from Components.ProgressBar import ProgressBar
@@ -111,7 +112,7 @@ class About(Screen):
 		AboutText += hddinfo + "\n\n" + _("Network Info:")
 		for x in about.GetIPsFromNetworkInterfaces():
 			AboutText += "\n" + x[0] + ": " + x[1]
-		if config.hdmicec.enabled.value:
+		if SystemInfo["HasHDMI-CEC"] and config.hdmicec.enabled.value:
 			AboutText += "\n\n" + _("HDMI-CEC address") + ": " + config.hdmicec.fixed_physical_address.value
 
 		self["AboutScrollLabel"] = ScrollLabel(AboutText)
