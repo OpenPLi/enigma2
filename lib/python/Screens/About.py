@@ -113,7 +113,8 @@ class About(Screen):
 		for x in about.GetIPsFromNetworkInterfaces():
 			AboutText += "\n" + x[0] + ": " + x[1]
 		if SystemInfo["HasHDMI-CEC"] and config.hdmicec.enabled.value:
-			AboutText += "\n\n" + _("HDMI-CEC address") + ": " + config.hdmicec.fixed_physical_address.value
+			address = config.hdmicec.fixed_physical_address.value if config.hdmicec.fixed_physical_address.value != "0.0.0.0" else _("not set")
+			AboutText += "\n\n" + _("HDMI-CEC address") + ": " + address
 
 		self["AboutScrollLabel"] = ScrollLabel(AboutText)
 		self["key_green"] = Button(_("Translations"))
