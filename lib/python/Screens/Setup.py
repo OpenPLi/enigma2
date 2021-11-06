@@ -62,8 +62,6 @@ class SetupSummary(Screen):
 	def selectionChanged(self):
 		self["SetupEntry"].text = self.parent.getCurrentEntry()
 		self["SetupValue"].text = self.parent.getCurrentValue()
-		if hasattr(self.parent, "getCurrentDescription") and "description" in self.parent:
-			self.parent["description"].text = self.parent.getCurrentDescription()
 
 
 class Setup(ConfigListScreen, Screen):
@@ -103,9 +101,12 @@ class Setup(ConfigListScreen, Screen):
 
 		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
 		self.createSetupList()
-		self["config"].onSelectionChanged.append(self.__onSelectionChanged)
-
+		if self.selectionChanged not in self["config"].onSelectionChanged:
+			self["config"].onSelectionChanged.append(self.selectionChanged)
 		self.setTitle(_(self.setup_title))
+
+	def selectionChanged(self):
+		self["description"].text = self.getCurrentDescription() if len(self["config"].getList()) else ""
 
 	def createSetupList(self):
 		currentItem = self["config"].getCurrent()
