@@ -128,9 +128,9 @@ class AudioSelection(Screen, ConfigListScreen):
 						if lang in LanguageCodes:
 							language += _(LanguageCodes[lang][0])
 						elif lang in "orj dos ory org esl qaa und mis mul ORY ORJ Audio_ORJ oth":
-							language += _("Original")
+							language += "%s  (%s)" % (_("Original"), lang)
 						elif lang in "NAR qad":
-							language +=  _("Visual impaired commentary")
+							language += "%s  (%s)" % ( _("Visual impaired commentary"), lang)
 						else:
 							language += lang
 						cnt += 1
