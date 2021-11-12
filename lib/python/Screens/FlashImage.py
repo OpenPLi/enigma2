@@ -22,6 +22,7 @@ import time
 import zipfile
 import shutil
 import tempfile
+import struct
 
 from enigma import eEPGCache
 
@@ -500,7 +501,13 @@ class MultibootSelection(SelectImage):
 					startupfile = os.path.join(self.tmp_dir, "%s_%s" % (SystemInfo["canMultiBoot"][slot[0]]['startupfile'].rsplit('_', 1)[0], slot[1]))
 				else:
 					startupfile = os.path.join(self.tmp_dir, "%s" % SystemInfo["canMultiBoot"][slot[0]]['startupfile'])
-				shutil.copyfile(startupfile, os.path.join(self.tmp_dir, "STARTUP"))
+				if SystemInfo["canDualBoot"]:
+					with open('/dev/block/by-name/flag', 'wb') as f:
+						f.write(struct.pack("B", int(slot[0])))
+					startupfile = os.path.join("/boot", "%s" % SystemInfo["canMultiBoot"][slot[0]]['startupfile'])
+					shutil.copyfile(startupfile, os.path.join("/boot", "STARTUP"))
+				else:
+					shutil.copyfile(startupfile, os.path.join(self.tmp_dir, "STARTUP"))
 			else:
 				model = HardwareInfo().get_machine_name()
 				if slot[1] == 1:
