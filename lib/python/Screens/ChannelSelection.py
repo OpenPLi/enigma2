@@ -1644,7 +1644,10 @@ class ChannelSelectionBase(Screen):
 							refstr = cur_ref.toString()
 							op = "".join(refstr.split(':', 10)[6:7])
 							if len(op) >= 4:
-								hop = int(op[:-4], 16)
+								try:
+									hop = int(op[:-4], 16)
+								except:
+									return
 								if len(op) >= 7 and not op.endswith('0000'):
 									op = op[:-4] + '0000'
 								refstr = '1:7:0:0:0:0:%s:0:0:0:(satellitePosition == %s) && %s ORDER BY name' % (op, hop, self.service_types[self.service_types.rfind(':') + 1:])
