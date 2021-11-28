@@ -635,11 +635,19 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 
 		self.list = []
 		ConfigListScreen.__init__(self, self.list)
-		if not self.scan_nims.value == "":
-			self.createSetup()
-			self["introduction"] = Label(_("Press OK to scan"))
-		else:
-			self["introduction"] = Label(_("Nothing to scan! Setup your tuner and try again."))
+		self["introduction"] = Label("")
+		self["description"] = Label("")
+		if self.scan_nims.value == "":
+			self["introduction"].text = _("Nothing to scan! Setup your tuner and try again.")
+			return
+		self.createSetup()
+		if not self.selectionChanged in self["config"].onSelectionChanged:
+			self["config"].onSelectionChanged.append(self.selectionChanged)
+		self.selectionChanged()
+
+	def selectionChanged(self):
+		print("selectionChanged")
+		self["description"].setText(self["config"].getCurrent() and len(self["config"].getCurrent()) > 2 and self["config"].getCurrent()[2] or "")
 
 	def runAsync(self, finished_cb):
 		self.finished_cb = finished_cb
