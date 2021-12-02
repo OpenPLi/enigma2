@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-10 07:52+0100\n"
+"POT-Creation-Date: 2021-11-29 15:09+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi <ims@openpli.org>\n"
@@ -1940,6 +1940,12 @@ msgstr "Zvolte tuner"
 
 msgid "Choose bouquet"
 msgstr "Zvolte přehled"
+
+msgid "Choose whether to scan a single transponder, one satellite or multiple satellites."
+msgstr "Vyberte, zda chcete prohledat jeden transpondér, jeden satelit nebo více satelitů."
+
+msgid "Choose whether to scan for free services only or whether to include paid/encrypted services too."
+msgstr "Budou se vyhledávat pouze volné programy (FTA) nebo též placené/šifrované programy."
 
 msgid "Choose which tuner to configure."
 msgstr "Vyberte si, který tuner chcete nastavovat."
@@ -4615,7 +4621,7 @@ msgid "HDx1/HD1xxx/HD5x0C/VS1x00/et7x00/et8500/et7000mini"
 msgstr "Gold"
 
 msgid "HELP"
-msgstr ""
+msgstr "HELP"
 
 msgid "HLG support"
 msgstr "Podpora HLG"
@@ -5529,6 +5535,9 @@ msgstr "Lucembursky"
 #
 msgid "MB"
 msgstr "MB"
+
+msgid "MHz"
+msgstr "MHz"
 
 #
 msgid "MMC card"
@@ -7726,6 +7735,9 @@ msgstr "Odstranit vybraný satelit"
 msgid "Remove terrestrial services"
 msgstr "Odstranit programy pozemního vysílání"
 
+msgid "Remove the services on scanned transponders before re-adding services?"
+msgstr "Mají se před novým vyhledáváním programů odstranit programy na prohledávaných transpondérech?"
+
 msgid "Remove this logfile"
 msgstr "Odstranit tento protokol"
 
@@ -8226,6 +8238,9 @@ msgstr "Možnosti prohledávání"
 msgid "Scan state"
 msgstr "stav prohledávání"
 
+msgid "Scan using transponders on NIT table? 'No' will use transponders in xml file."
+msgstr "Je-li povoleno, prohledává se pomocí transpondérů v NIT tabulce. V opačném případě se použijí transpondéry z xml souboru."
+
 #
 msgid "Scan wireless networks"
 msgstr "Vyhledat bezdrátové sítě"
@@ -8488,7 +8503,7 @@ msgid "Select how quickly the dish should move between satellites."
 msgstr "Nastavte jak rychle by se měla parabola natáčet mezi družicemi."
 
 msgid "Select how the satellite dish is set up. i.e. fixed dish, single LNB, DiSEqC switch, positioner, etc."
-msgstr "Vyberte jak je nastavena parabola. Např. jeden LNB, přepínač DiSEqC, pozicioner atd."
+msgstr "Vyberte nastavení paraboly. Například jeden LNB, přepínač DiSEqC, pozicioner atd."
 
 msgid "Select how you want your receiver to keep the correct time, either from the DVB transponder, or from the internet using NTP. Or use Auto, which will favour using NTP, but will fall back to transponder time when no internet connection is available."
 msgstr "Vyberte způsob udržování správného času přijímače. Můžete použít čas z DVB transpondéru nebo čas z internetu (NTP server). Při použití 'Automaticky' bude upřednostněno používání NTP serveru, ale v případě neexistujícího připojení k internetu se použije čas transpondéru."
@@ -8638,6 +8653,17 @@ msgstr "Zvolte video mód"
 
 msgid "Select whether your SCR device is externally powered."
 msgstr "Vyberte, zda je Vaše SCR zařízení externě napájeno."
+
+#
+msgid "Select which satellite to scan."
+msgstr "Vyberte satelit pro vyhledání programů."
+
+#
+msgid "Select which transponder to scan."
+msgstr "Vyberte transpondér pro vyhledání programů."
+
+msgid "Select which tuner to use for the scan."
+msgstr "Zvolte tuner pro vyhledání programů."
 
 #
 msgid "Select wireless network"
@@ -10080,7 +10106,7 @@ msgstr ""
 "Pro případné korekce můžete kontaktovat autora\n"
 "na výše uvedené adrese.\n"
 "\n"
-"®10. 11. 2021"
+"®30. 11. 2021"
 
 #
 msgid "TS file is too large for ISO9660 level 1!"
