@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-11-07 10:36+0100\n"
-"PO-Revision-Date: 2021-08-02 08:54+0200\n"
+"PO-Revision-Date: 2021-11-30 16:51+0100\n"
 "Last-Translator: Andrej Tobola <andrej.tobola@gmail.com>\n"
 "Language-Team: \n"
 "Language: sk\n"
@@ -13,12 +13,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.4.2\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Poedit-Bookmarks: 50,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
-#, fuzzy
 msgid ""
 "\n"
 " Do you want to switch to Android ?"
-msgstr "Chcete prehrať DVD v mechanike?"
+msgstr ""
+"\n"
+"Chcete prejsť na Android?"
 
 msgid ""
 "\n"
@@ -237,12 +239,12 @@ msgstr "%d minút"
 msgid "%d ms"
 msgstr "%d ms"
 
-#, fuzzy, python-format
+#, python-format
 msgid "%d package selected."
 msgid_plural "%d packages selected."
-msgstr[0] " balíčkov zvolených."
-msgstr[1] " balíčkov zvolených."
-msgstr[2] " balíčkov zvolených."
+msgstr[0] "%d balíček vybratý."
+msgstr[1] "%d vybraté balíčky."
+msgstr[2] "%d vybratých balíčkov."
 
 #, python-format
 msgid "%d pixel wide"
@@ -419,9 +421,8 @@ msgstr "18 V"
 msgid "2"
 msgstr "2"
 
-#, fuzzy
 msgid "2 new lines"
-msgstr "Dva riadky"
+msgstr "2 nové riadky"
 
 msgid "20 MB/s"
 msgstr "20 MB/s"
@@ -1906,7 +1907,7 @@ msgid "Configure remote control type"
 msgstr "Typ ďiaľkového ovládača"
 
 msgid "Configure separator type used in full description for separate short and extended descriptions."
-msgstr ""
+msgstr "Konfigurácia typu oddeľovača použitého v úplnom popise pre samostatné krátke a rozšírené popisy."
 
 msgid "Configure the DiSEqC mode for this LNB."
 msgstr "Nastavenie DiSEqC módu pre toto LNB."
@@ -3773,7 +3774,7 @@ msgid "Frontprocessor version: %s"
 msgstr "Verzia Frontprocesora: %s"
 
 msgid "Full description separator"
-msgstr ""
+msgstr "Oddeľovač úplných popisov"
 
 #. TRANSLATORS: (aspect ratio policy: display as fullscreen, even if the content aspect ratio does not match the screen ratio)
 msgid "Full screen"
@@ -3797,9 +3798,8 @@ msgstr "Ďalšie možnosti"
 msgid "G"
 msgstr "G"
 
-#, fuzzy
 msgid "GB"
-msgstr "RGB"
+msgstr "GB"
 
 msgid "GUI Settings"
 msgstr "Nastavenie užívateľského rozhrania"
@@ -4006,9 +4006,8 @@ msgstr "Zdroj HDMI-CEC aktívny"
 msgid "HDMI-CEC Source Inactive"
 msgstr "Zdroj HDMI-CEC neaktívny"
 
-#, fuzzy
 msgid "HDMI-CEC address"
-msgstr "Adresa IP"
+msgstr "Adresa HDMI-CEC"
 
 msgid "HDMI-CEC setup"
 msgstr "Nastavenie HDMI-CEC"
@@ -4814,9 +4813,8 @@ msgstr "Luxembursko"
 msgid "Luxembourgish"
 msgstr "Luxembursky"
 
-#, fuzzy
 msgid "MB"
-msgstr "B"
+msgstr "MB"
 
 msgid "MMC card"
 msgstr "Karta MMC"
@@ -5730,9 +5728,8 @@ msgstr "PMT PID"
 msgid "PPanel"
 msgstr "PPanel"
 
-#, fuzzy
 msgid "PULSe 4K(mini)"
-msgstr "PULSe 4K"
+msgstr "PULSe 4K(mini)"
 
 msgid "Package list update"
 msgstr "Aktualizácia zoznamu balíčkov"
@@ -6336,7 +6333,7 @@ msgid "Press or select button and then press 'OK' for attach next function or ed
 msgstr "Stlačte alebo zvolte tlačidlo a potom stlačte 'OK' pre pripojenie ďalšej funkcie alebo úpravu pripojených."
 
 msgid "Press yellow button to set CEC address again"
-msgstr ""
+msgstr "Stlačením žltého tlačidla nastavíte znovu CEC adresu"
 
 msgid "Press yellow to set this interface as default interface."
 msgstr "Stlačením žltého tlačidla nastavíte toto rozhranie ako predvolené."
@@ -6725,7 +6722,7 @@ msgid "Replace `- ` in dialogs with colored text per speaker (like teletext subt
 msgstr "Vymeniť `-` v dialógoch s farebne odlíšeným textom rečníka (podobne ako teletextové titulky pre sluchovo hendikepovaných)"
 
 msgid "Replace newlines in EPG"
-msgstr ""
+msgstr "Nahradiť nové riadky v EPG"
 
 msgid "Request for physical address report"
 msgstr "Žiadosť o hlásenie fyzickej adresy"
@@ -7307,7 +7304,7 @@ msgid "Select channel to record from"
 msgstr "Vyberte stanicu, z ktorej chcete nahrávať"
 
 msgid "Select char for replacing newlines in EPG."
-msgstr ""
+msgstr "Vybrať znak pre nahradenie nových riadkov v EPG."
 
 msgid "Select copy destination for:"
 msgstr "Vyberte umiestnenie pre kópiu:"
@@ -7342,9 +7339,8 @@ msgstr "Vyberte ako je nastavená parabola, t.j. pevná parabola, jednoduché LN
 msgid "Select how you want your receiver to keep the correct time, either from the DVB transponder, or from the internet using NTP. Or use Auto, which will favour using NTP, but will fall back to transponder time when no internet connection is available."
 msgstr "Vyberte možnosť, ako má prijímač udržiavať správny čas. Buď z DVB transpondéru, alebo z internetu použitím NTP protokolu. Prípadne použite režim Automaticky, ktorý uprednostní použitie z NTP, no prepne na transpondér v prípade, že nebude dostupné internetové pripojenie."
 
-#, fuzzy
 msgid "Select image"
-msgstr "Vymazať image"
+msgstr "Vybrať obrázok"
 
 msgid "Select in which resolution pictures are displayed with picture viewer or movie player."
 msgstr "Nastavenie, v akom rozlíšení sú obrázky zobrazené v prehliadači obrázkov a prehrávači filmov."
@@ -8402,9 +8398,8 @@ msgstr "Krok východne"
 msgid "Stepped west"
 msgstr "Kroz západne"
 
-#, fuzzy
 msgid "Steps"
-msgstr "Krok východne"
+msgstr "Kroky"
 
 msgid "Stop"
 msgstr "Zastaviť"
@@ -8644,9 +8639,8 @@ msgstr "Zapnúť displej v pozastavenom režime"
 msgid "Switch on the display during operation."
 msgstr "Zapnúť displej počas prevádzky."
 
-#, fuzzy
 msgid "Switch to Android"
-msgstr "Prepnúť na mód TV"
+msgstr "Prepnúť na Android"
 
 msgid "Switch to TV mode"
 msgstr "Prepnúť na mód TV"
@@ -9816,11 +9810,11 @@ msgstr "Typ vyhľadávania staníc"
 
 #, python-format
 msgid "User Band %d"
-msgstr ""
+msgstr "Užívateľské pásmo %d"
 
 #, python-format
 msgid "User Band %d (%s)"
-msgstr ""
+msgstr "Užívateľské pásmo %d (%s)"
 
 msgid "User ID"
 msgstr "Užívateľské ID"
@@ -9947,9 +9941,9 @@ msgstr "Zobraziť RASS interaktívne..."
 msgid "View details"
 msgstr "Zobraziť podrobnosti"
 
-#, fuzzy, python-format
+#, python-format
 msgid "View list of available %s extensions."
-msgstr "Zobraziť zoznam dostupných rozšírení EPG."
+msgstr "Zobraziť zoznam dostupných %s rozšírení."
 
 msgid "View list of available CommonInterface extensions"
 msgstr "Zobraziť zoznam dostupných rozšírení CommonInterface"
@@ -10015,7 +10009,7 @@ msgid "Virtual keyboard"
 msgstr "Virtuálna klávesnica"
 
 msgid "Visually impaired commentary"
-msgstr ""
+msgstr "Komentár pre zrakovo postihnutých"
 
 msgid "Voltage mode"
 msgstr "Napäťový režim"
@@ -10099,7 +10093,7 @@ msgstr ""
 "Naozaj vypnúť zisťovanie konfliktov časovačov?"
 
 msgid "Warning: FBC-C V1 tuner should be connected to the first slot to work correctly. Otherwise, only 2 out of 8 demodulators will be available when connected in the second slot. "
-msgstr ""
+msgstr "Upozornenie: FBC-C V1 tuner by mal byť pre správnu funkčnosť pripojený do prvého slotu. Inak budú dostupné iba 2 z 8 demodulátorov po pripojení do druhého slotu."
 
 msgid "Warning: no LNB; using factory defaults."
 msgstr "Upozornenie: žiadne LNB; použije sa výrobné nastavenie."
@@ -10604,7 +10598,7 @@ msgstr "Nezvolili ste stanicu, z ktorej sa má nahrávať."
 
 #, python-format
 msgid "You have to wait %(min)d minutes, %(sec)d seconds!"
-msgstr ""
+msgstr "Musíte čakať %(min)d minút, %(sec)d sekúnd!"
 
 #, python-format
 msgid "You must switch to the service %s (%s - '%s')!\n"
@@ -11202,9 +11196,8 @@ msgstr "skok vpred na nasledujúci titul"
 msgid "jump to chapter by number"
 msgstr "skok na kapitolu podľa čísla"
 
-#, fuzzy
 msgid "kB"
-msgstr "B"
+msgstr "kB"
 
 msgid "languages"
 msgstr "jazyky"
@@ -11311,9 +11304,8 @@ msgstr "príroda/zvieratá/životné prostredie"
 msgid "never"
 msgstr "nikdy"
 
-#, fuzzy
 msgid "new line"
-msgstr "Dva riadky"
+msgstr "nový riadok"
 
 msgid "new media"
 msgstr "nové médiá"
@@ -11363,9 +11355,8 @@ msgstr "nie je signál"
 msgid "not running"
 msgstr "nebeží"
 
-#, fuzzy
 msgid "not set"
-msgstr "netestované"
+msgstr "nenastavené"
 
 msgid "not supported"
 msgstr "nepodporované"
@@ -11379,9 +11370,8 @@ msgstr "neplatný frontend"
 msgid "not_tested"
 msgstr "netestované"
 
-#, fuzzy
 msgid "nothing"
-msgstr "Žiadna akcia"
+msgstr "nič"
 
 msgid "nothing connected"
 msgstr "nič nie je pripojené"
@@ -11402,7 +11392,7 @@ msgid "offset is"
 msgstr "rezerva je"
 
 msgid "omit"
-msgstr ""
+msgstr "vynechať"
 
 msgid "on"
 msgstr "zap."
@@ -11613,7 +11603,7 @@ msgid "social/spiritual science"
 msgstr "sociálne/duchovnej vedy"
 
 msgid "space"
-msgstr ""
+msgstr "medzera"
 
 msgid "special events"
 msgstr "špeciálne podujatia"
