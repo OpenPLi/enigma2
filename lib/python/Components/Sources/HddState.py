@@ -4,6 +4,7 @@ from Components.Harddisk import harddiskmanager
 from Components.config import config
 from enigma import eTimer
 from Components.SystemInfo import SystemInfo
+from skin import parameters
 
 
 class HddState(Source):
@@ -36,6 +37,7 @@ class HddState(Source):
 		self.timer.callback.append(self.updateHddState)
 		self.idle_time = int(config.usage.hdd_standby.value)
 		config.usage.hdd_standby.addNotifier(self.setStandbyTime, initial_call=False)
+		self.colors = parameters.get("HddStateColors", (0x00FFFF00, 0x0000FF00)) # standby - yellow, active - green
 		if self.hdd_list:
 			self.updateHddState(force=True)
 		if self.onPartitionAddRemove not in harddiskmanager.on_partition_list_change:
@@ -57,8 +59,7 @@ class HddState(Source):
 				if (hdd[1].max_idle_time or force) and not hdd[1].isSleeping():
 					state = True
 				if self.diskName:
-					color = state and "\c0000ff00" or "\c00ffff00"
-					string += color
+					string += "\c%08x" % (state and self.colors[1] or self.colors[0])
 					name = "I"
 					if not hdd[1].internal:
 						name = "E"
@@ -68,13 +69,13 @@ class HddState(Source):
 			if not state:
 				if self.allVisible:
 					if not string:
-						string = "\c0000ff00"
+						string = "\c%08x" % self.colors[0]
 						string += "standby"
 				self.isSleeping = False
 				idle = self.standby_time
 			else:
 				if not string:
-					string = "\c0000ff00"
+					string = "\c%08x" % self.colors[1]
 					string += "active"
 				self.isSleeping = True
 				idle = self.idle_time
