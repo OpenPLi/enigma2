@@ -1030,7 +1030,7 @@ class NimManager:
 					slots.append(slot)
 		for testnim in slots[:]:
 			nimConfig = self.getNimConfig(testnim)
-			if "configMode" in nimConfig.content.items and ((nimConfig.configMode.value == "loopthrough" and ((isFBCTuner and self.nim_slots[testnim].isFBCTuner()) or int(nimConfig.connectedTo.value) == slotid)) or nimConfig.configMode.value == "nothing" or (isFBCTuner and self.nim_slots[slot].isFBCRoot() and self.nim_slots[slot].is_fbc[2] == self.nim_slots[slotid].is_fbc[2])):
+			if "configMode" in nimConfig.content.items and ((nimConfig.configMode.value == "loopthrough" and ((isFBCTuner and self.nim_slots[testnim].isFBCTuner()) or int(nimConfig.connectedTo.value) == slotid)) or nimConfig.configMode.value == "nothing" or (isFBCTuner and self.nim_slots[testnim].isFBCRoot() and self.nim_slots[testnim].is_fbc[2] != self.nim_slots[slotid].is_fbc[2])):
 				slots.remove(testnim)
 		return slots
 
