@@ -7,7 +7,6 @@ from Components.Sources.Source import Source
 from Components.Sources.TunerInfo import TunerInfo
 from Components.Sources.Boolean import Boolean
 from Components.Sources.RecordState import RecordState
-from Components.Sources.HddState import HddState
 from Components.Converter.Combine import Combine
 from Components.Renderer.FrontpanelLed import FrontpanelLed
 
@@ -24,7 +23,6 @@ class SessionGlobals(Screen):
 		self["TunerInfo"] = TunerInfo()
 		self["RecordState"] = RecordState(session)
 		self["Standby"] = Boolean(fixed=False)
-		self["HddSleepingState"] = HddState(session)
 
 		from Components.SystemInfo import SystemInfo
 

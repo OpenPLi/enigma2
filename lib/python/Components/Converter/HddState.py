@@ -1,38 +1,50 @@
-from Source import Source
+from Components.Converter.Converter import Converter
 from Components.Element import cached
 from Components.Harddisk import harddiskmanager
 from Components.config import config
-from enigma import eTimer
 from Components.SystemInfo import SystemInfo
 from skin import parameters
+from enigma import eTimer
 
 
-class HddState(Source):
+#***************************************************************
+#	internalAll/internalHDD/internalSSD/external - disk type
+#	Example : <convert type="HddState">internalAll</convert>
+#	or all type - internal and external
+#	Example : <convert type="HddState"></convert>
+#	noLetterName - do not print a letter "I"(internal)/"S"(SSD)/"E"(external)
+#	Example : <convert type="HddState">noLetterName</convert>
+#	allVisible - show "Disk state: standby " when use noLetterName
+#	Example : <convert type="HddState">noLetterName,allVisible</convert>
+#***************************************************************
+
+
+class HddState(Converter):
 	ALL = 0
-	INTERNAL = 1
+	INTERNAL_ALL = 1
 	INTERNAL_HDD = 2
 	INTERNAL_SSD = 3
 	EXTERNAL = 4
 
-	def __init__(self, session, poll=600, type=0, diskName=True, allVisible=False):
-		Source.__init__(self)
-		self.session = session
-		if type == 1:
-			self.type = self.INTERNAL
-		elif type == 2:
+	def __init__(self, type):
+		Converter.__init__(self, type)
+		args = type.lower().split(",")
+		self.notDiskLetterName = "nolettername" in args
+		self.allVisible = "allvisible" in args
+		if "internalall" in args:
+			self.type = self.INTERNAL_ALL
+		elif "internalhdd" in args:
 			self.type = self.INTERNAL_HDD
-		elif type == 3:
+		elif "internalssd" in args:
 			self.type = self.INTERNAL_SSD
-		elif type == 4:
+		elif "external" in args:
 			self.type = self.EXTERNAL
 		else:
 			self.type = self.ALL
-		self.isSleeping = False
+		self.standby_time = 150
+		self.isActive = False
 		self.state_text = ""
 		self.isHDD()
-		self.diskName = diskName
-		self.allVisible = allVisible
-		self.standby_time = poll
 		self.timer = eTimer()
 		self.timer.callback.append(self.updateHddState)
 		self.idle_time = int(config.usage.hdd_standby.value)
@@ -49,16 +61,16 @@ class HddState(Source):
 		self.updateHddState(force=True)
 
 	def updateHddState(self, force=False):
-		prev_state = self.isSleeping
+		prev_state = self.isActive
 		string = ""
 		state = False
 		if self.hdd_list:
 			for hdd in self.hdd_list:
-				if string and self.diskName:
+				if string and not self.notDiskLetterName:
 					string += " "
 				if (hdd[1].max_idle_time or force) and not hdd[1].isSleeping():
 					state = True
-				if self.diskName:
+				if not self.notDiskLetterName:
 					string += "\c%08x" % (state and self.colors[1] or self.colors[0])
 					name = "I"
 					if not hdd[1].internal:
@@ -68,28 +80,28 @@ class HddState(Source):
 					string += name
 			if not state:
 				if self.allVisible:
-					if not string:
+					if self.notDiskLetterName:
 						string = "\c%08x" % self.colors[0]
-						string += "standby"
-				self.isSleeping = False
+						string += _("standby ")
+				self.isActive = False
 				idle = self.standby_time
 			else:
-				if not string:
+				if self.notDiskLetterName:
 					string = "\c%08x" % self.colors[1]
-					string += "active"
-				self.isSleeping = True
+					string += _("active ")
+				self.isActive = True
 				idle = self.idle_time
 			if self.idle_time:
 				timeout = len(self.hdd_list) > 1 and self.standby_time or idle
 				self.timer.start(timeout * 100, True)
 		else:
-			self.isSleeping = False
+			self.isActive = False
 		if string:
-			string = "Disk state: " + string
+			string = _("Disk state: ") + string
 		self.state_text = string
-		if prev_state != self.isSleeping or force:
+		if prev_state != self.isActive or force:
 			if SystemInfo["LCDsymbol_hdd"]:
-				open(SystemInfo["LCDsymbol_hdd"], "w").write(self.isSleeping and "1" or "0")
+				open(SystemInfo["LCDsymbol_hdd"], "w").write(self.isActive and "1" or "0")
 			self.changed((self.CHANGED_ALL,))
 
 	def setStandbyTime(self, cfgElem):
@@ -104,7 +116,7 @@ class HddState(Source):
 				if hdd[1].idle_running and not hdd[1].card:
 					if self.type == self.ALL:
 						self.hdd_list.append(hdd)
-					elif self.type == self.INTERNAL:
+					elif self.type == self.INTERNAL_ALL:
 						if hdd[1].internal:
 							self.hdd_list.append(hdd)
 					elif self.type == self.INTERNAL_HDD:
@@ -127,10 +139,10 @@ class HddState(Source):
 
 	@cached
 	def getBoolean(self):
-		return self.isSleeping and True or False
+		return self.isActive and True or False
 	boolean = property(getBoolean)
 
 	@cached
 	def getValue(self):
-		return self.isSleeping
+		return self.isActive and 1 or 0
 	value = property(getValue)
