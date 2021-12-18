@@ -829,7 +829,7 @@ class NimSelection(Screen):
 			if self.showNim(x):
 				fbc_text = ""
 				if x.isFBCTuner():
-					fbc_text = (x.isFBCRoot() and _("FBC socket %s") % x.is_fbc[1] or _("FBC virtual"))
+					fbc_text = (x.isFBCRoot() and _("Slot %s / FBC in %s") % (x.is_fbc[2], x.is_fbc[1])) or _("Slot %s / FBC virtual %s") % (x.is_fbc[2], x.is_fbc[1] - (x.isCompatible("DVB-S") and 2 or 1))
 				if x.isCompatible("DVB-S"):
 					if nimConfig.configMode.value in ("loopthrough", "equal", "satposdepends"):
 						if x.isFBCLink():
@@ -849,8 +849,8 @@ class NimSelection(Screen):
 								text = _("FBC automatic\nconnected to %s") % link
 						else:
 							text = _("Disabled")
-							if fbc_text:
-								text += "\n" + fbc_text
+						if fbc_text:
+							text += "\n" + fbc_text
 					elif nimConfig.configMode.value == "simple":
 						if nimConfig.diseqcMode.value in ("single", "toneburst_a_b", "diseqc_a_b", "diseqc_a_b_c_d"):
 							text = "%s\n%s: " % ({"single": _("Single"), "toneburst_a_b": _("Toneburst A/B"), "diseqc_a_b": _("DiSEqC A/B"), "diseqc_a_b_c_d": _("DiSEqC A/B/C/D")}[nimConfig.diseqcMode.value],
