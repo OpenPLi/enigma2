@@ -70,11 +70,6 @@
 			<convert type="ConditionalShowHide"/>
 		</widget>
 	</screen>
-	<screen name="LcdHdd">
-		<widget source="session.HddSleepingState" render="Pixmap" pixmap="icons/hdd24.png" position="92,129" size="24,24" zPosition="1" alphatest="blend" >
-			<convert type="ConditionalShowHide"/>
-		</widget>
-	</screen>
 	<screen name="LcdBottomPanel">
 		<panel name="LcdOrbitalPositionPanel"/>
 		<panel name="LcdRecordPanel"/>
@@ -96,7 +91,6 @@
 			<convert type="RemainingToText">FOLLOW</convert>
 		</widget>
 		<panel name="LcdStream"/>
-		<panel name="LcdHdd"/>
 		<panel name="LcdTuners"/>
 		<panel name="LcdBottomPanel"/>
 	</screen>
