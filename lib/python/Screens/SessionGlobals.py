@@ -29,7 +29,6 @@ class SessionGlobals(Screen):
 		combine = Combine(func=lambda s: {(False, False): 0, (False, True): 1, (True, False): 2, (True, True): 3}[(s[0].boolean, s[1].boolean)])
 		combine.connect(self["Standby"])
 		combine.connect(self["RecordState"])
-		combine.connect(self["HddSleepingState"])
 
 		#                      |  two leds  | single led |
 		# recordstate  standby   red green

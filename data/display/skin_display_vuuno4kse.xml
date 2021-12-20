@@ -90,9 +90,6 @@
 			<convert type="ClientsStreaming"/>
 			<convert type="ConditionalShowHide"/>
 		</widget>
-		<widget source="session.HddSleepingState" render="Pixmap" pixmap="skin_default/icons/hdd.png" foregroundColor="#ff0000" size="50,60" position="1210,150" zPosition="1" alphatest="blend" >
-			<convert type="ConditionalShowHide"/>
-		</widget>
 		<widget source="session.RecordState" render="FixedLabel" text="&#174;" position="8,185" foregroundColor="#ff0000" size="36,42" font="FdLcD;46" halign="left" valign="center" zPosition="22">
 			<convert type="ConditionalShowHide"></convert>
 		</widget>
@@ -240,9 +237,6 @@
 		</widget>
 		<widget source="session.CurrentService" render="Pixmap" pixmap="skin_default/icons/stream.png" foregroundColor="#ff0000" size="60,50" position="1200,250" zPosition="1" alphatest="blend" >
 			<convert type="ClientsStreaming"/>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget source="session.HddSleepingState" render="Pixmap" pixmap="skin_default/icons/hdd.png" foregroundColor="#ff0000" size="50,60" position="1280,250" zPosition="1" alphatest="blend" >
 			<convert type="ConditionalShowHide"/>
 		</widget>
 		<widget source="session.RecordState" render="FixedLabel" text="&#174;" position="8,185" foregroundColor="#ff0000" size="36,42" font="FdLcD;46" halign="left" valign="center" zPosition="22">
