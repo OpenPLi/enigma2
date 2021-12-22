@@ -1,5 +1,5 @@
 import skin
-from GUIComponent import GUIComponent
+from Components.GUIComponent import GUIComponent
 from enigma import eLabel, eWidget, eSlider, fontRenderClass, ePoint, eSize
 
 
