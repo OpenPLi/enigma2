@@ -3,7 +3,7 @@ from Tools.Profile import profile
 from Screens.Volume import Volume
 from Screens.Mute import Mute
 from GlobalActions import globalActionMap
-from config import config, ConfigSubsection, ConfigInteger
+from Components.config import config, ConfigSubsection, ConfigInteger
 
 profile("VolumeControl")
 #TODO .. move this to a own .py file
