@@ -1,6 +1,7 @@
 from __future__ import print_function
 from json import loads
-from urllib2 import URLError, urlopen
+from urllib.request import urlopen
+from urllib.error import URLError
 
 from Components.config import ConfigYesNo, config
 
@@ -60,7 +61,7 @@ def InitGeolocation():
 					config.misc.enableGeolocation.save()
 				else:
 					print("[Geolocation] Error: Geolocation lookup returned a '%s' status!  Message '%s' returned." % (status, geolocation.get("message", None)))
-			except URLError as err:
+			except urllib.error.URLError as err:
 				if hasattr(err, 'code'):
 					print("[Geolocation] Error: Geolocation data not available! (Code: %s)" % err.code)
 				if hasattr(err, 'reason'):

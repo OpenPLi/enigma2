@@ -2,9 +2,9 @@ from __future__ import print_function
 import os
 import time
 from Tools.CList import CList
-from SystemInfo import SystemInfo
+from Components.SystemInfo import SystemInfo
 from Components.Console import Console
-import Task
+from Components import Task
 
 
 def readFile(filename):
