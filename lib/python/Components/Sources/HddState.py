@@ -1,4 +1,4 @@
-from Source import Source
+from Components.Sources.Source import Source
 from Components.Element import cached
 from Components.Harddisk import harddiskmanager
 from Components.config import config
