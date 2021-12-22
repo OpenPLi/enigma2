@@ -2,7 +2,7 @@ from __future__ import print_function
 import os
 import re
 import unicodedata
-from Renderer import Renderer
+from Components.Renderer.Renderer import Renderer
 from enigma import ePixmap, eServiceCenter, eServiceReference, iServiceInformation
 from Tools.Alternatives import GetWithAlternative
 from Tools.Directories import pathExists, SCOPE_SKIN_IMAGE, SCOPE_CURRENT_SKIN, resolveFilename

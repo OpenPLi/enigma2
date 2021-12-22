@@ -7,7 +7,7 @@ import tempfile
 from json import loads
 from enigma import eDVBDB, eEPGCache
 from Screens.MessageBox import MessageBox
-from config import config, ConfigText
+from Components.config import config, ConfigText
 from Tools import Notifications
 from base64 import encodestring
 from urllib import quote
