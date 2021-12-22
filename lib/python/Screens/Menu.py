@@ -1,4 +1,4 @@
-from Screen import Screen
+from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.ParentalControlSetup import ProtectedScreen
 from Components.Sources.List import List
@@ -62,7 +62,7 @@ class Menu(Screen, ProtectedScreen):
 			selection[1]()
 
 	def execText(self, text):
-		exec text
+		exec(text)
 
 	def runScreen(self, arg):
 		# arg[0] is the module (as string)
@@ -71,7 +71,7 @@ class Menu(Screen, ProtectedScreen):
 		#	string (as we want to reference
 		#	stuff which is just imported)
 		if arg[0] != "":
-			exec "from %s import %s" % (arg[0], arg[1].split(",")[0])
+			exec("from %s import %s" % (arg[0], arg[1].split(",")[0]))
 			self.openDialog(*eval(arg[1]))
 
 	def nothing(self): #dummy
