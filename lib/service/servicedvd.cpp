@@ -1189,7 +1189,7 @@ PyMODINIT_FUNC
 initservicedvd(void)
 {
 #if PY_MAJOR_VERSION >= 3
-	PyModule_Create(&servicedvd_moduledef);
+	return PyModule_Create(&servicedvd_moduledef);
 #else
 	Py_InitModule("servicedvd", NULL);
 #endif
