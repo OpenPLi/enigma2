@@ -1,6 +1,6 @@
 from Components.Element import cached
 from enigma import eServiceCenter
-from Source import Source
+from Components.Sources.Source import Source
 
 
 class ServiceEvent(Source):
