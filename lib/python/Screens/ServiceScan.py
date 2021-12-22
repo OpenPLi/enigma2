@@ -1,5 +1,5 @@
 from __future__ import print_function
-from Screen import Screen
+from Screens.Screen import Screen
 import Screens.InfoBar
 from Components.ServiceScan import ServiceScan as CScan
 from Components.ProgressBar import ProgressBar
