@@ -8,12 +8,12 @@ from Components.TimerList import TimerList
 from Components.TimerSanityCheck import TimerSanityCheck
 from Components.UsageConfig import preferredTimerPath, dropEPGNewLines, replaceEPGSeparator
 from RecordTimer import RecordTimerEntry, parseEvent, AFTEREVENT, createRecordTimerEntry
-from Screen import Screen
+from Screens.Screen import Screen
 from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
 from Screens.InputBox import PinInput
 from ServiceReference import ServiceReference
-from TimerEntry import TimerEntry, TimerLog
+from Screens.TimerEntry import TimerEntry, TimerLog
 from Tools.BoundFunction import boundFunction
 from Tools.FallbackTimer import FallbackTimerList
 from time import time
