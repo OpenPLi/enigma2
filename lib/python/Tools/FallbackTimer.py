@@ -5,7 +5,7 @@ from Screens.MessageBox import MessageBox
 from timer import TimerEntry as TimerObject
 from urllib.parse import quote
 import xml
-from base64 import encodestring
+from base64 import encodebytes
 
 
 class FallbackTimerList():
@@ -20,7 +20,7 @@ class FallbackTimerList():
 			if config.usage.remote_fallback_openwebif_customize.value:
 				self.url = "%s:%s" % (self.url, config.usage.remote_fallback_openwebif_port.value)
 				if config.usage.remote_fallback_openwebif_userid.value and config.usage.remote_fallback_openwebif_password.value:
-					self.headers = {"Authorization": "Basic %s" % encodestring("%s:%s" % (config.usage.remote_fallback_openwebif_userid.value, config.usage.remote_fallback_openwebif_password.value)).strip()}
+					self.headers = {"Authorization": "Basic %s" % encodebytes("%s:%s" % (config.usage.remote_fallback_openwebif_userid.value, config.usage.remote_fallback_openwebif_password.value)).strip()}
 			self.getFallbackTimerList()
 		else:
 			self.url = None
