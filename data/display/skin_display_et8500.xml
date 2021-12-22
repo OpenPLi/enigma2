@@ -62,6 +62,10 @@
 			<convert type="ClientsStreaming"/>
 			<convert type="ConditionalShowHide"/>
 		</widget>
+		<widget source="session.CurrentService" render="Pixmap" pixmap="icons/hdd.png" position="600,400" foregroundColor="#ff0000" size="50,60" zPosition="1" alphatest="blend" >
+			<convert type="HddState"></convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
 	</screen>
 <!-- normal radiomodus-->
 	<screen name="ChannelSelectionRadio_summary" position="0,0" size="720,576">
@@ -294,6 +298,10 @@
 		</widget>
 		<widget source="session.CurrentService" render="Pixmap" pixmap="icons/stream.png" foregroundColor="#ff0000" size="60,50"  position="60,400" zPosition="1" alphatest="blend" >
 			<convert type="ClientsStreaming"/>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget source="session.CurrentService" render="Pixmap" pixmap="icons/hdd.png" position="600,400" foregroundColor="#ff0000" size="50,60" zPosition="1" alphatest="blend" >
+			<convert type="HddState"></convert>
 			<convert type="ConditionalShowHide"/>
 		</widget>
 	</screen>
