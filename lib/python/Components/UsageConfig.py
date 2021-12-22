@@ -839,7 +839,7 @@ def updateChoices(sel, choices):
 				if x < val:
 					defval = str(x)
 					break
-		sel.setChoices(map(str, choices), defval)
+		sel.setChoices(list(map(str, choices)), defval)
 
 
 def preferredPath(path):
