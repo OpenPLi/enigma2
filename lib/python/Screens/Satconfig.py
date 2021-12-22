@@ -1,5 +1,5 @@
 from enigma import eDVBDB, getLinkedSlotID, eDVBResourceManager
-from Screen import Screen
+from Screens.Screen import Screen
 from Components.SystemInfo import SystemInfo
 from Components.ActionMap import ActionMap
 from Components.ConfigList import ConfigListScreen
