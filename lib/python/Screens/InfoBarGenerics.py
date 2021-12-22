@@ -16,10 +16,10 @@ from Components.SystemInfo import SystemInfo
 from Components.UsageConfig import preferredInstantRecordPath, defaultMoviePath
 from Components.VolumeControl import VolumeControl
 from Components.Sources.StaticText import StaticText
-from EpgSelection import EPGSelection
+from Screens.EpgSelection import EPGSelection
 from Plugins.Plugin import PluginDescriptor
 
-from Screen import Screen
+from Screens.Screen import Screen
 from Screens.ScreenSaver import InfoBarScreenSaver
 from Screens import Standby
 from Screens.ChoiceBox import ChoiceBox
@@ -52,7 +52,7 @@ import datetime
 from RecordTimer import RecordTimerEntry, RecordTimer, findSafeRecordPath
 
 # hack alert!
-from Menu import MainMenu, mdom
+from Screens.Menu import MainMenu, mdom
 
 
 def isStandardInfoBar(self):
