@@ -1,6 +1,6 @@
 from __future__ import print_function
-from config import config, ConfigSlider, ConfigSubsection, ConfigYesNo, ConfigText, ConfigInteger
-from SystemInfo import SystemInfo
+from Components.config import config, ConfigSlider, ConfigSubsection, ConfigYesNo, ConfigText, ConfigInteger
+from Components.SystemInfo import SystemInfo
 from fcntl import ioctl
 import os
 import struct
