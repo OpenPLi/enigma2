@@ -1,5 +1,5 @@
 from __future__ import print_function
-from Screen import Screen
+from Screens.Screen import Screen
 from Components.Label import Label
 from Components.ActionMap import ActionMap
 from Components.HelpMenuList import HelpMenuList
