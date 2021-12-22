@@ -22,4 +22,4 @@ dist_pkgdata_DATA = \
 	unicable.xml
 
 iso-639-3.pck: $(srcdir)/iso-639-3.tab
-	python $(srcdir)/convert-iso-639-3.py $< $@
+	python3 $(srcdir)/convert-iso-639-3.py $< $@
