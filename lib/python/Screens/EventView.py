@@ -1,5 +1,5 @@
 from __future__ import print_function
-from Screen import Screen
+from Screens.Screen import Screen
 from Screens.TimerEdit import TimerSanityConflict
 from Screens.ChoiceBox import ChoiceBox
 from Components.ActionMap import ActionMap
@@ -13,7 +13,7 @@ from Components.Sources.StaticText import StaticText
 from Components.Sources.Event import Event
 from enigma import eEPGCache, eTimer, eServiceReference
 from RecordTimer import RecordTimerEntry, parseEvent, AFTEREVENT, createRecordTimerEntry
-from TimerEntry import TimerEntry
+from Screens.TimerEntry import TimerEntry
 from Plugins.Plugin import PluginDescriptor
 from Tools.BoundFunction import boundFunction
 from Tools.FallbackTimer import FallbackTimerList
