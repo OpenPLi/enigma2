@@ -165,11 +165,11 @@ def InitUsageConfig():
 		choicelist.append((str(i), _("Standby in ") + h))
 	config.usage.inactivity_timer = ConfigSelection(default="0", choices=choicelist)
 	config.usage.inactivity_timer_blocktime = ConfigYesNo(default=True)
-	config.usage.inactivity_timer_blocktime_begin = ConfigClock(default=time.mktime((0, 0, 0, 18, 0, 0, 0, 0, 0)))
-	config.usage.inactivity_timer_blocktime_end = ConfigClock(default=time.mktime((0, 0, 0, 23, 0, 0, 0, 0, 0)))
+	config.usage.inactivity_timer_blocktime_begin = ConfigClock(default=time.mktime((1970, 1, 1, 18, 0, 0, 0, 0, 0)))
+	config.usage.inactivity_timer_blocktime_end = ConfigClock(default=time.mktime((1970, 1, 1, 23, 0, 0, 0, 0, 0)))
 	config.usage.inactivity_timer_blocktime_extra = ConfigYesNo(default=False)
-	config.usage.inactivity_timer_blocktime_extra_begin = ConfigClock(default=time.mktime((0, 0, 0, 6, 0, 0, 0, 0, 0)))
-	config.usage.inactivity_timer_blocktime_extra_end = ConfigClock(default=time.mktime((0, 0, 0, 9, 0, 0, 0, 0, 0)))
+	config.usage.inactivity_timer_blocktime_extra_begin = ConfigClock(default=time.mktime((1970, 1, 1, 6, 0, 0, 0, 0, 0)))
+	config.usage.inactivity_timer_blocktime_extra_end = ConfigClock(default=time.mktime((1970, 1, 1, 9, 0, 0, 0, 0, 0)))
 	config.usage.inactivity_timer_blocktime_by_weekdays = ConfigYesNo(default=False)
 	config.usage.inactivity_timer_blocktime_day = ConfigSubDict()
 	config.usage.inactivity_timer_blocktime_begin_day = ConfigSubDict()
@@ -179,11 +179,11 @@ def InitUsageConfig():
 	config.usage.inactivity_timer_blocktime_extra_end_day = ConfigSubDict()
 	for i in range(7):
 		config.usage.inactivity_timer_blocktime_day[i] = ConfigYesNo(default=False)
-		config.usage.inactivity_timer_blocktime_begin_day[i] = ConfigClock(default=time.mktime((0, 0, 0, 18, 0, 0, 0, 0, 0)))
-		config.usage.inactivity_timer_blocktime_end_day[i] = ConfigClock(default=time.mktime((0, 0, 0, 23, 0, 0, 0, 0, 0)))
+		config.usage.inactivity_timer_blocktime_begin_day[i] = ConfigClock(default=time.mktime((1970, 1, 1, 18, 0, 0, 0, 0, 0)))
+		config.usage.inactivity_timer_blocktime_end_day[i] = ConfigClock(default=time.mktime((1970, 1, 1, 23, 0, 0, 0, 0, 0)))
 		config.usage.inactivity_timer_blocktime_extra_day[i] = ConfigYesNo(default=False)
-		config.usage.inactivity_timer_blocktime_extra_begin_day[i] = ConfigClock(default=time.mktime((0, 0, 0, 6, 0, 0, 0, 0, 0)))
-		config.usage.inactivity_timer_blocktime_extra_end_day[i] = ConfigClock(default=time.mktime((0, 0, 0, 9, 0, 0, 0, 0, 0)))
+		config.usage.inactivity_timer_blocktime_extra_begin_day[i] = ConfigClock(default=time.mktime((1970, 1, 1, 6, 0, 0, 0, 0, 0)))
+		config.usage.inactivity_timer_blocktime_extra_end_day[i] = ConfigClock(default=time.mktime((1970, 1, 1, 9, 0, 0, 0, 0, 0)))
 
 	choicelist = [("0", _("Disabled")), ("event_standby", _("Standby after current event"))]
 	for i in range(900, 7201, 900):
