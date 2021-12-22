@@ -5,7 +5,7 @@ from enigma import eServiceReference
 # workaround for required config entry dependencies.
 import Screens.MovieSelection
 
-from Screen import Screen
+from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 
 profile("LOAD:enigma")
