@@ -70,7 +70,7 @@ class SelectImage(Screen):
 		def getImages(path, files, folder=None):
 			for file in [x for x in files if os.path.splitext(x)[1] == ".zip" and model in x]:
 				try:
-					folder = "Image backups" if folder = "imagebackups" else "Downloaded Images"
+					folder = "Image backups" if folder == "imagebackups" else "Downloaded Images"
 					if checkimagefiles([x.split(os.sep)[-1] for x in zipfile.ZipFile(file).namelist()]):
 						if folder not in self.imagesList:
 							self.imagesList[folder] = {}
