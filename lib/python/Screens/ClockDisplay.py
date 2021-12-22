@@ -1,4 +1,4 @@
-from Screen import Screen
+from Screens.Screen import Screen
 
 # a clock display dialog
 
