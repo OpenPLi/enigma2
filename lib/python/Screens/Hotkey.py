@@ -248,7 +248,7 @@ def getHotkeyFunctions():
 config.misc.hotkey = ConfigSubsection()
 config.misc.hotkey.additional_keys = ConfigYesNo(default=False)
 for x in hotkey.hotkeys:
-	exec "config.misc.hotkey.%s = ConfigText(default='%s')" % x[1:]
+	exec("config.misc.hotkey.%s = ConfigText(default='%s')" % x[1:])
 
 
 class HotkeySetup(Screen):
@@ -648,13 +648,13 @@ class InfoBarHotkey():
 						return
 			elif selected[0] == "Infobar":
 				if hasattr(self, selected[1]):
-					exec "self." + ".".join(selected[1:]) + "()"
+					exec("self." + ".".join(selected[1:]) + "()")
 				else:
 					return 0
 			elif selected[0] == "Module":
 				try:
-					exec "from %s import %s" % (selected[1], selected[2])
-					exec "self.session.open(%s)" % ",".join(selected[2:])
+					exec("from %s import %s" % (selected[1], selected[2]))
+					exec("self.session.open(%s)" % ",".join(selected[2:]))
 				except Exception as e:
 					print("[Hotkey] error during executing module %s, screen %s, %s" % (selected[1], selected[2], e))
 					import traceback
@@ -664,7 +664,7 @@ class InfoBarHotkey():
 				self.session.open(SoftcamSetup)
 			elif selected[0] == "Setup":
 				from Screens.Setup import Setup
-				exec "self.session.open(Setup, \"%s\")" % selected[1]
+				exec("self.session.open(Setup, \"%s\")" % selected[1])
 			elif selected[0].startswith("Zap"):
 				if selected[0] == "ZapPanic":
 					self.servicelist.history = []
