@@ -1,4 +1,4 @@
-from Screen import Screen
+from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Components.MenuList import MenuList
 from Components.ActionMap import ActionMap
