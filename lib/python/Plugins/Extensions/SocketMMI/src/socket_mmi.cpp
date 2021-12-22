@@ -489,7 +489,7 @@ PyMODINIT_FUNC
 initsocketmmi(void)
 {
 #if PY_MAJOR_VERSION >= 3
-	PyModule_Create(&moduledef);
+	return PyModule_Create(&moduledef);
 #else
 	Py_InitModule3("socketmmi", module_methods,
 		"Module that implements mmi via unix domain socket.");
