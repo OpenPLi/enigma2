@@ -11,6 +11,7 @@ from enigma import eDVBFrontendParametersSatellite, eDVBSatelliteEquipmentContro
 
 from time import localtime, mktime
 from datetime import datetime
+from itertools import chain
 
 import xml.etree.cElementTree
 
@@ -1331,7 +1332,7 @@ def InitNimManager(nimmgr, update_slots=[]):
 	lnb_choices_default = "universal_lnb"
 
 	prio_list = [("-1", _("Auto"))]
-	for prio in range(65) + range(14000, 14065) + range(19000, 19065):
+	for prio in chain(range(65), range(14000, 14065), (19000, 19065)):
 		description = ""
 		if prio == 0:
 			description = _(" (disabled)")
