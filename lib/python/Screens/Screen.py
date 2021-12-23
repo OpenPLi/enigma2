@@ -71,7 +71,7 @@ class Screen(dict):
 					return
 			# assert self.session is None, "a screen can only exec once per time"
 			# self.session = session
-			for val in self.values() + self.renderer:
+			for val in list(self.values()) + self.renderer:
 				val.execBegin()
 				# DEBUG: if not self.standAlone and self.session.current_dialog != self:
 				if not self.stand_alone and self.session.current_dialog != self:
@@ -127,7 +127,7 @@ class Screen(dict):
 		self.instance.show()
 		for x in self.onShow:
 			x()
-		for val in self.values() + self.renderer:
+		for val in list(self.values()) + self.renderer:
 			if isinstance(val, GUIComponent) or isinstance(val, Source):
 				val.onShow()
 
