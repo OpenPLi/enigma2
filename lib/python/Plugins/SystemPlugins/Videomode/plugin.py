@@ -7,7 +7,7 @@ from Components.config import getConfigListEntry, config, ConfigBoolean, ConfigN
 from Components.Label import Label
 from Components.Sources.StaticText import StaticText
 
-from VideoHardware import video_hw
+from Plugins.SystemPlugins.Videomode.VideoHardware import video_hw
 
 config.misc.videowizardenabled = ConfigBoolean(default=True)
 
