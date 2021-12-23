@@ -429,7 +429,7 @@ class MovieContextMenu(Screen, ProtectedScreen):
 				# Plugins expect a valid selection, so only include them if we selected a non-dir
 				if not(service.flags & eServiceReference.mustDescent):
 					for p in plugins.getPlugins(PluginDescriptor.WHERE_MOVIELIST):
-						append_to_menu(menu, (p.description, boundFunction(p, session, service)), key="bullet")
+						append_to_menu(menu, (p.description, boundFunction(p.__call__, session, service)), key="bullet")
 		if csel.exist_bookmark():
 			append_to_menu(menu, (_("Remove bookmark"), csel.do_addbookmark))
 		else:
@@ -785,7 +785,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				name = name[1:]
 				for p in plugins.getPlugins(PluginDescriptor.WHERE_MOVIELIST):
 					if name == p.name:
-						p(self.session, item[0])
+						p.__call__(self.session, item[0])
 		elif name.startswith('/'):
 			self.gotFilename(name)
 		else:

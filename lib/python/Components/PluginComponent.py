@@ -28,7 +28,7 @@ class PluginComponent:
 			for x in plugin.where:
 				insort(self.plugins.setdefault(x, []), plugin)
 				if x == PluginDescriptor.WHERE_AUTOSTART:
-					plugin(reason=0)
+					plugin.__call__(reason=0)
 		else:
 			self.restartRequired = True
 
@@ -132,7 +132,7 @@ class PluginComponent:
 	def getPluginsForMenu(self, menuid):
 		res = []
 		for p in self.getPlugins(PluginDescriptor.WHERE_MENU):
-			res += p(menuid)
+			res += p.__call__(menuid)
 		return res
 
 	def clearPluginList(self):
