@@ -24,6 +24,7 @@ from ServiceReference import ServiceReference, isPlayableForCur
 
 from time import localtime, strftime, ctime, time
 from bisect import insort
+from os import sys
 from sys import maxsize
 
 # ok, for descriptions etc we have:
