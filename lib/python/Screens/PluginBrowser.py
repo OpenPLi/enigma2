@@ -147,7 +147,7 @@ class PluginBrowser(Screen, ProtectedScreen):
 
 	def run(self):
 		plugin = self["list"].l.getCurrentSelection()[0]
-		plugin(session=self.session)
+		plugin.__call__(session=self.session)
 		self.help = False
 
 	def setDefaultList(self, answer):

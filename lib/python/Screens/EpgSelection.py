@@ -160,7 +160,7 @@ class EPGSelection(Screen):
 
 	def runPlugin(self, plugin):
 		event = self["list"].getCurrent()
-		plugin(session=self.session, selectedevent=event)
+		plugin.__call__(session=self.session, selectedevent=event)
 
 	def openTimerOverview(self):
 		self.session.open(TimerEditList)
