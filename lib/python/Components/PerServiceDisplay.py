@@ -31,7 +31,7 @@ class PerServiceBase(object):
 			self.navcore.event.append(PerServiceBase.event)
 
 		EventMap = EventMap.setdefault
-		for x in eventmap.iteritems():
+		for x in iter(eventmap.items()):
 			EventMap(x[0], []).append((with_event, x[1]))
 
 		# start with stopped state, so simulate that
@@ -44,7 +44,7 @@ class PerServiceBase(object):
 
 	def destroy(self):
 		EventMap = PerServiceBase.EventMap.setdefault
-		for x in self.eventmap.iteritems():
+		for x in iter(self.eventmap.items()):
 			EventMap(x[0], []).remove((self.with_event, x[1]))
 
 	def enablePolling(self, interval=60000):
