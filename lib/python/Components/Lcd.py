@@ -21,7 +21,7 @@ class LCD:
 
 	def setBright(self, value):
 		value *= 255
-		value /= 10
+		value //= 10
 		if value > 255:
 			value = 255
 		eDBoxLCD.getInstance().setLCDBrightness(value)
