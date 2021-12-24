@@ -100,7 +100,8 @@ class HdmiCec:
 	def __init__(self):
 		try:
 			if HdmiCec.instance:
-				raise AssertionError("only one HdmiCec instance is allowed!")
+				print("only one HdmiCec instance is allowed!")
+				del HdmiCec.instance
 		except:
 			pass
 		HdmiCec.instance = self
