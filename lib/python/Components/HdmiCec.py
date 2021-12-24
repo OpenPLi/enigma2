@@ -98,7 +98,11 @@ config.hdmicec.sourceactive_zaptimers = ConfigYesNo(default=False)
 class HdmiCec:
 
 	def __init__(self):
-		assert not HdmiCec.instance, "only one HdmiCec instance is allowed!"
+		try:
+			if HdmiCec.instance:
+				raise AssertionError("only one HdmiCec instance is allowed!")
+		except:
+			pass
 		HdmiCec.instance = self
 
 		self.wait = eTimer()
