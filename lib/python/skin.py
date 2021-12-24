@@ -423,7 +423,7 @@ def collectAttributes(skinAttributes, node, context, skinPath=None, ignore=(), f
 				font = value
 				skinAttributes.append((attrib, font))
 			else:
-				skinAttributes.append((attrib, value.encode("utf-8")))
+				skinAttributes.append((attrib, value))
 	if pos is not None:
 		pos, size = context.parse(pos, size, font)
 		skinAttributes.append(("position", pos))
