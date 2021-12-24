@@ -12,7 +12,7 @@ from Components.Console import Console
 from Plugins.Plugin import PluginDescriptor
 from Tools.Directories import resolveFilename, SCOPE_SKIN_IMAGE
 from Tools.LoadPixmap import LoadPixmap
-from Wlan import iWlan, iStatus, getWlanConfigName, existBcmWifi
+from Plugins.SystemPlugins.WirelessLan.Wlan import iWlan, iStatus, getWlanConfigName, existBcmWifi
 from time import time
 import re
 
