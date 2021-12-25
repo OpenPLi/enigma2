@@ -31,7 +31,7 @@ from Tools.Alternatives import CompareWithAlternatives
 from Tools.FallbackTimer import FallbackTimerList
 from Tools.TextBoundary import getTextBoundarySize
 from enigma import eEPGCache, eListbox, gFont, eListboxPythonMultiContent, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, RT_VALIGN_CENTER, RT_WRAP, BT_SCALE, BT_KEEP_ASPECT_RATIO, BT_ALIGN_CENTER, eSize, eRect, eTimer, eServiceReference
-from GraphMultiEpgSetup import GraphMultiEpgSetup
+from Plugins.Extensions.GraphMultiEPG.GraphMultiEpgSetup import GraphMultiEpgSetup
 from time import localtime, time, strftime, mktime
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor

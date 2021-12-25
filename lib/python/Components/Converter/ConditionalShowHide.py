@@ -1,5 +1,5 @@
 from enigma import eTimer
-from Converter import Converter
+from Components.Converter.Converter import Converter
 
 
 class ConditionalShowHide(Converter):

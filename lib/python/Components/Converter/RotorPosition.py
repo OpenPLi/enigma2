@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
-from Converter import Converter
+from Components.Converter.Converter import Converter
 from Components.Element import cached
 from Components.config import config
 from Tools.Transponder import orbpos
