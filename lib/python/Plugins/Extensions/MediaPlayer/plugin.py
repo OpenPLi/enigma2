@@ -24,7 +24,7 @@ from Components.config import config
 from Components.SystemInfo import SystemInfo
 from Tools.Directories import fileExists, resolveFilename, SCOPE_CONFIG, SCOPE_PLAYLIST, SCOPE_CURRENT_SKIN
 from Tools.BoundFunction import boundFunction
-from settings import MediaPlayerSettings
+from Plugins.Extensions.MediaPlayer.settings import MediaPlayerSettings
 import random
 
 
