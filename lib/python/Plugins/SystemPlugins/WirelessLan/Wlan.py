@@ -7,7 +7,7 @@ import enigma
 
 import os
 
-from wifi.scan import Cel
+from wifi.scan import Cell
 
 list = []
 list.append("Unencrypted")
