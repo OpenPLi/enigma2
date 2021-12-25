@@ -1,4 +1,4 @@
-from Renderer import Renderer
+from Components.Renderer.Renderer import Renderer
 from enigma import eDVBCI_UI, eLabel, iPlayableService
 from skin import parameters
 from Components.SystemInfo import SystemInfo
