@@ -1411,7 +1411,7 @@ def InitNimManager(nimmgr, update_slots=[]):
 					section.powerinserter.save_forced = True
 					section.powerinserter.addNotifier(setPowerInserter)
 					srcfrequencylist = productparameters.get("scrs").split(",")
-					section.scrList = ConfigSelection([("%d" % (x + 1), _("User Band %d (%s)") % ((x + 1), srcfrequencylist[x])) for x in range(len(srcfrequencylist))])
+					section.scrList = ConfigSelection([("%d" % (x + 1), _("User Band %d (%s)") % ((x + 1), srcfrequencylist[x])) for x in range(len(srcfrequencylist)) if srcfrequencylist[x] != '0'])
 					section.scrList.save_forced = True
 					section.scrList.addNotifier(boundFunction(scrListChanged, productparameters, srcfrequencylist))
 
