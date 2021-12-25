@@ -6,8 +6,8 @@ from Components.Network import iNetwork
 import enigma
 
 import os
-from pythonwifi.iwlibs import Wireless, getWNICnames
-from pythonwifi import flags as wififlags
+
+from wifi.scan import Cel
 
 list = []
 list.append("Unencrypted")
