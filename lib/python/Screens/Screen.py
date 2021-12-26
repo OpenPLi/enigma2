@@ -104,7 +104,7 @@ class Screen(dict):
 		for val in self.renderer:
 			val.disconnectAll()  # Disconnect converter/sources and probably destroy them. Sources will not be destroyed.
 		del self.session
-		for (name, val) in self.items():
+		for (name, val) in list( self.items()):
 			val.destroy()
 			del self[name]
 		self.renderer = []
