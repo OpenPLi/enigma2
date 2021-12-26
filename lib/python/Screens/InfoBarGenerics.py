@@ -45,6 +45,7 @@ from enigma import eTimer, eServiceCenter, eDVBServicePMTHandler, iServiceInform
 from time import time, localtime, strftime
 import os
 from bisect import insort
+from os import sys
 from sys import maxsize
 import itertools
 import datetime
