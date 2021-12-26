@@ -205,7 +205,7 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 		desktopSize = getDesktop(0).size()
 		self["Video"] = VideoWindow(decoder=0, fb_width=desktopSize.width(), fb_height=desktopSize.height())
 
-		self["actions"] = HelpableActionMap(self, "CutListEditorActions",
+		self["actions"] = HelpableActionMap(self, ["CutListEditorActions"],
 			{
 				"setIn": (self.setIn, _("Make this mark an 'in' point")),
 				"setOut": (self.setOut, _("Make this mark an 'out' point")),

@@ -610,7 +610,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				"9": self.keyNumberGlobal
 			})
 
-		self["playbackActions"] = HelpableActionMap(self, "MoviePlayerActions",
+		self["playbackActions"] = HelpableActionMap(self, ["MoviePlayerActions"],
 			{
 				"leavePlayer": (self.playbackStop, _("Stop")),
 				"moveNext": (self.playNext, _("Play next")),
@@ -618,18 +618,18 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				"channelUp": (self.moveToFirstOrFirstFile, _("Go to first movie or top of list")),
 				"channelDown": (self.moveToLastOrFirstFile, _("Go to first movie or last item")),
 			})
-		self["MovieSelectionActions"] = HelpableActionMap(self, "MovieSelectionActions",
+		self["MovieSelectionActions"] = HelpableActionMap(self, ["MovieSelectionActions"],
 			{
 				"contextMenu": (self.doContext, _("Menu")),
 				"showEventInfo": (self.showEventInformation, _("Show event details")),
 			})
 
-		self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions",
+		self["OkCancelActions"] = HelpableActionMap(self, ["OkCancelActions"],
 			{
 				"cancel": (self.abort, _("Exit movie list")),
 				"ok": (self.itemSelected, _("Select movie")),
 			})
-		self["DirectionActions"] = HelpableActionMap(self, "DirectionActions",
+		self["DirectionActions"] = HelpableActionMap(self, ["DirectionActions"],
 			{
 				"up": (self.keyUp, _("Go up the list")),
 				"down": (self.keyDown, _("Go down the list"))
@@ -638,7 +638,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		def getinitUserDefinedActionsDescription(key):
 			return _(userDefinedActions.get(eval("config.movielist.%s.value" % key), _("Not defined")))
 
-		self["InfobarActions"] = HelpableActionMap(self, "InfobarActions",
+		self["InfobarActions"] = HelpableActionMap(self, ["InfobarActions"],
 			{
 				"showMovies": (self.doPathSelect, _("Select the movie path")),
 				"showRadio": (self.btn_radio, boundFunction(getinitUserDefinedActionsDescription, "btn_radio")),
@@ -646,14 +646,14 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				"toggleTvRadio": (self.btn_tv, boundFunction(getinitUserDefinedActionsDescription, "btn_tv")),
 				"showText": (self.btn_text, boundFunction(getinitUserDefinedActionsDescription, "btn_text")),
 			})
-		self["ColorActions"] = HelpableActionMap(self, "ColorActions",
+		self["ColorActions"] = HelpableActionMap(self, ["ColorActions"],
 			{
 				"red": (self.btn_red, boundFunction(getinitUserDefinedActionsDescription, "btn_red")),
 				"green": (self.btn_green, boundFunction(getinitUserDefinedActionsDescription, "btn_green")),
 				"yellow": (self.btn_yellow, boundFunction(getinitUserDefinedActionsDescription, "btn_yellow")),
 				"blue": (self.btn_blue, boundFunction(getinitUserDefinedActionsDescription, "btn_blue")),
 			})
-		self["FunctionKeyActions"] = HelpableActionMap(self, "FunctionKeyActions",
+		self["FunctionKeyActions"] = HelpableActionMap(self, ["FunctionKeyActions"],
 			{
 				"f1": (self.btn_F1, boundFunction(getinitUserDefinedActionsDescription, "btn_F1")),
 				"f2": (self.btn_F2, boundFunction(getinitUserDefinedActionsDescription, "btn_F2")),
@@ -667,7 +667,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		ssfwd = lambda: self.seekRelative(1, config.seek.selfdefined_79.value * 90000)
 		sback = lambda: self.seekRelative(-1, config.seek.selfdefined_46.value * 90000)
 		ssback = lambda: self.seekRelative(-1, config.seek.selfdefined_79.value * 90000)
-		self["SeekActions"] = HelpableActionMap(self, "InfobarSeekActions",
+		self["SeekActions"] = HelpableActionMap(self, ["InfobarSeekActions"],
 			{
 				"playpauseService": (self.preview, _("Preview")),
 				"unPauseService": (self.preview, _("Preview")),
