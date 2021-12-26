@@ -2,7 +2,7 @@ from Components.Sources.Source import Source
 from Components.Element import cached
 
 
-class List(Source):
+class List(Source, object):
 	"""The datasource of a listbox. Currently, the format depends on the used converter. So
 if you put a simple string list in here, you need to use a StringList converter, if you are
 using a "multi content list styled"-list, you need to use the StaticMultiList converter, and
@@ -11,9 +11,9 @@ setup the "fonts".
 This has been done so another converter could convert the list to a different format, for example
 to generate HTML."""
 
-	def __init__(self, list=[], enableWrapAround=False, item_height=25, fonts=[]):
+	def __init__(self, list_=[], enableWrapAround=False, item_height=25, fonts=[]):
 		Source.__init__(self)
-		self.__list = list
+		self.__list = list_
 		self.onSelectionChanged = []
 		self.item_height = item_height
 		self.fonts = fonts
@@ -21,8 +21,8 @@ to generate HTML."""
 		self.enableWrapAround = enableWrapAround
 		self.__style = "default" # style might be an optional string which can be used to define different visualisations in the skin
 
-	def setList(self, list):
-		self.__list = list
+	def setList(self, list_):
+		self.__list = list_
 		self.changed((self.CHANGED_ALL,))
 
 	list = property(lambda self: self.__list, setList)
@@ -73,13 +73,12 @@ to generate HTML."""
 	index = property(getIndex, setIndex)
 
 	def selectNext(self):
-		if self.getIndex() is not None:
-			if self.getIndex() + 1 >= self.count():
-				if self.enableWrapAround:
-					self.index = 0
-			else:
-				self.index += 1
-			self.setIndex(self.index)
+		if self.getIndex() + 1 >= self.count():
+			if self.enableWrapAround:
+				self.index = 0
+		else:
+			self.index += 1
+		self.setIndex(self.index)
 
 	def selectPrevious(self):
 		if self.getIndex() - 1 < 0:
@@ -100,12 +99,12 @@ to generate HTML."""
 
 	style = property(getStyle, setStyle)
 
-	def updateList(self, list):
+	def updateList(self, list_):
 		"""Changes the list without changing the selection or emitting changed Events"""
-		assert len(list) == len(self.__list)
+		# FIXME assert len(list_) == len(self.__list)
 		old_index = self.index
 		self.disable_callbacks = True
-		self.list = list
+		self.list = list_
 		self.index = old_index
 		self.disable_callbacks = False
 
