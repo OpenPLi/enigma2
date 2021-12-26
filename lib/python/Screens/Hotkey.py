@@ -573,7 +573,7 @@ class InfoBarHotkey():
 	def __init__(self):
 		if not hotkey.functions:
 			getHotkeyFunctions()
-		self["HotkeyButtonActions"] = helpableHotkeyActionMap(self, "HotkeyActions",
+		self["HotkeyButtonActions"] = helpableHotkeyActionMap(self, ["HotkeyActions"],
 			dict((x[1], (self.hotkeyGlobal, boundFunction(self.getHelpText, x[1]))) for x in hotkey.hotkeys), -10)
 
 	def getKeyFunctions(self, key):
