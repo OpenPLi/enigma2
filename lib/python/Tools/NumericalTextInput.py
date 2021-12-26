@@ -273,4 +273,4 @@ class NumericalTextInput:
 		return self.mapping[num][self.pos]
 
 	def setUseableChars(self, useable):
-		self.useableChars = unicode(useable)
+		self.useableChars = str(useable)
