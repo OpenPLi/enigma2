@@ -232,7 +232,6 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 	def keyDown(self):
 		self["config"].instance.moveSelection(self["config"].instance.moveDown)
 
-
 	def run(self):
 		if self.avahiselect.value == "ip":
 			config.usage.remote_fallback.value = "http://%d.%d.%d.%d:%d" % (tuple(self.ip.value) + (self.port.value,))
