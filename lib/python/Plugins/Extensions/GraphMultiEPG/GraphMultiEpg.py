@@ -923,13 +923,13 @@ class GraphMultiEPG(Screen, HelpableScreen):
 					epg_bouquet=epg_bouquet)
 
 		HelpableScreen.__init__(self)
-		self["okactions"] = HelpableActionMap(self, "OkCancelActions",
+		self["okactions"] = HelpableActionMap(self, ["OkCancelActions"],
 			{
 				"cancel": (self.closeScreen, _("Exit EPG")),
 				"ok": (self.eventSelected, _("Zap to selected channel, or show detailed event info (depends on configuration)"))
 			}, -1)
 		self["okactions"].csel = self
-		self["gmepgactions"] = HelpableActionMap(self, "GMEPGSelectActions",
+		self["gmepgactions"] = HelpableActionMap(self, ["GMEPGSelectActions"],
 			{
 				"timerAdd": (self.timerAdd, _("Add/remove change timer for current event")),
 				"info": (self.infoKeyPressed, _("Show detailed event info")),
@@ -951,7 +951,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 			}, -1)
 		self["gmepgactions"].csel = self
 
-		self["inputactions"] = HelpableActionMap(self, "InputActions",
+		self["inputactions"] = HelpableActionMap(self, ["InputActions"],
 			{
 				"left": (self.leftPressed, _("Go to previous event")),
 				"right": (self.rightPressed, _("Go to next event")),
