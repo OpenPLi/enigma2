@@ -21,4 +21,4 @@ class VariableText(object):
 	text = property(getText, setText)
 
 	def postWidgetCreate(self, instance):
-		instance.setText(self.message or "")
+		instance.setText(str(self.message) or "")
