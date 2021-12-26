@@ -1368,6 +1368,8 @@ class ChannelSelectionBase(Screen):
 				"gotAsciiCode": self.keyAsciiCode,
 				"keyLeft": self.keyLeft,
 				"keyRight": self.keyRight,
+				"keyUp": self.keyUp,
+				"keyDown": self.keyDown,
 				"keyRecord": self.keyRecord,
 				"toggleTwoLines": self.toggleTwoLines,
 				"1": self.keyNumberGlobal,
@@ -1696,6 +1698,12 @@ class ChannelSelectionBase(Screen):
 		if self.servicePath and self.servicePath[0] == self.bouquet_root:
 			return True
 		return False
+
+	def keyUp(self):
+		self.servicelist.moveUp()
+
+	def keyDown(self):
+		self.servicelist.moveDown()
 
 	def atBegin(self):
 		return self.servicelist.atBegin()
