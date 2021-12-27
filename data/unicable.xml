@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<unicable version="20211225">
+<!-- 
+This XML providers a tree-view of Unicable LNB's and Matrix switches, per Manufacturer and Model name.
+
+OpenPLi supports the following attributes:
+name: string, model name of the device (required, must be unique per manufacturer)
+srcs: string, a comma delimited list of SCR frequencies, in MHz. (required)
+format: string, defines the command format to be used (optional, default is "unicable")
+    unicable: use the EN50494 (Unicable I) commandset
+    jess: use the EN50607 (Unicable II / JESS) commandset
+    dSCR,#:  for the first # SCR's, use the unicable commandset, and use the jess commandset for the remainder. if # is not given, it defaults to 4.
+positions: integer, number of orbital positions the device supports (optional, default = "1")
+bootuptime: integer, delay to allow the device to boot up, in milliseconds (optional)
+    this is relevant for devices that are powered by the STB, and don't accept commands until they've booted
+lofl: integer, alternative LOF/L value (optional, default value is 9750)
+lofh: integer, alternative LOF/H value (optional, defaultvalue is 10600)
+-->
+<unicable version="20211227">
 	<lnb>
 		<manufacturer name="Dura-Sat(DUR-line)">
 			<product name="UK101" scrs="1210,1420,1680,2040" bootuptime="2500"/>
@@ -184,7 +200,7 @@
 			<product name="IDLP-UST111-CUO1O-8PP" scrs="1076,1178,1280,1382,1484,1586,1688,1790"/>
 			<product name="IDLP-UST112-CUO1O-8PP" scrs="1076,1178,1280,1382,1484,1586,1688,1790"/>
 			<product name="IDLP-USS200-CUO10-8PP" positions="2" scrs="1076,1178,1280,1382,1484,1586,1688,1790"/>
-			<product name="ISKY-UST110-CUO4O-16P" format="jess" scrs="1210,1420,1680,2040,985,1050,1115,1275,1340,1485,1550,1615,1745,1810,1875,1940"/>
+			<product name="ISKY-UST110-CUO4O-16P" format="dSCR,4" scrs="1210,1420,1680,2040,985,1050,1115,1275,1340,1485,1550,1615,1745,1810,1875,1940"/>
 			<product name="IDLU-UST110-CUO1O-32P" format="jess" bootuptime="2500" scrs="1210,1420,1680,2040,984,1020,1056,1092,1128,1164,1256,1292,1328,1364,1458,1494,1530,1566,1602,1638,1716,1752,1788,1824,1860,1896,1932,1968,2004,2076,2112,2148"/>
 			<product name="IDLU-UST110-CUO4O-32P" format="jess" positions="2" bootuptime="2500" scrs="1210,1420,1680,2040,985,1050,1115,1275,1340,1485,1550,1615,1745,1810,1875,1940"/>
 			<product name="IDLU-UWT110-CUO10-32P" format="jess" positions="4" bootuptime="2500" scrs="1210,1420,1680,2040,984,1020,1056,1092,1128,1164,1256,1292,1328,1364,1458,1494,1530,1566,1602,1638,1716,1752,1788,1824,1860,1896,1932,1968,2004,2076,2112,2148"/>
@@ -295,20 +311,20 @@
 			<product name="SUS 21 F" positions="2" scrs="1076,1178"/>
 			<product name="SUS 21 FI" positions="2" scrs="1210,1420"/>
 			<product name="SUS 4441 F" scrs="1210,1420,1680,2040"/>
-			<product name="SUS 5541 F-NFA" format="EN 50494" scrs="0974,1076,1178,1280"/>
-			<product name="SUS 5581 F-NFA" format="UniSEqC" scrs="0974,1076,1178,1280,1382,1484,1586,1688"/>
-			<product name="SUS 5581 NF 1x8" format="UniSEqC" scrs="1068,1284,1400,1516,1632,1748,1864,1980"/>
-			<product name="SUS 5581 NF 3x3 1" format="UniSEqC" scrs="1068,1284,1400"/>
-			<product name="SUS 5581 NF 3x3 2" format="UniSEqC" scrs="1516,1632,1748"/>
-			<product name="SUS 5581 NF 3x3 3" format="UniSEqC" scrs="1864,1980,2096"/>
-			<product name="SUS 5581 NF Leg 1x8" format="UniSEqC" scrs="0974,1076,1178,1280,1382,1484,1586,1688"/>
-			<product name="SUS 5581 NF Leg 3x3 1" format="UniSEqC" scrs="0974,1076,1178"/>
-			<product name="SUS 5581 NF Leg 3x3 2" format="UniSEqC" scrs="1280,1382,1484"/>
-			<product name="SUS 5581 NF Leg 3x3 3" format="UniSEqC" scrs="1586,1688,1790"/>
-			<product name="SUS 5581 NFA Leg 1x8" format="UniSEqC" scrs="0974,1076,1178,1280,1382,1484,1586,1688"/>
-			<product name="SUS 5581 NFA Leg 3x3 1" format="UniSEqC" scrs="0974,1076,1178"/>
-			<product name="SUS 5581 NFA Leg 3x3 2" format="UniSEqC" scrs="1280,1382,1484"/>
-			<product name="SUS 5581 NFA Leg 3x3 3" format="UniSEqC" scrs="1586,1688,1790"/>
+			<product name="SUS 5541 F-NFA" scrs="0974,1076,1178,1280"/>
+			<product name="SUS 5581 F-NFA" scrs="0974,1076,1178,1280,1382,1484,1586,1688"/>
+			<product name="SUS 5581 NF 1x8" scrs="1068,1284,1400,1516,1632,1748,1864,1980"/>
+			<product name="SUS 5581 NF 3x3 1" scrs="1068,1284,1400"/>
+			<product name="SUS 5581 NF 3x3 2" scrs="1516,1632,1748"/>
+			<product name="SUS 5581 NF 3x3 3" scrs="1864,1980,2096"/>
+			<product name="SUS 5581 NF Leg 1x8" scrs="0974,1076,1178,1280,1382,1484,1586,1688"/>
+			<product name="SUS 5581 NF Leg 3x3 1" scrs="0974,1076,1178"/>
+			<product name="SUS 5581 NF Leg 3x3 2" scrs="1280,1382,1484"/>
+			<product name="SUS 5581 NF Leg 3x3 3" scrs="1586,1688,1790"/>
+			<product name="SUS 5581 NFA Leg 1x8" scrs="0974,1076,1178,1280,1382,1484,1586,1688"/>
+			<product name="SUS 5581 NFA Leg 3x3 1" scrs="0974,1076,1178"/>
+			<product name="SUS 5581 NFA Leg 3x3 2" scrs="1280,1382,1484"/>
+			<product name="SUS 5581 NFA Leg 3x3 3" scrs="1586,1688,1790"/>
 			<product name="SUS 41 F" positions="4" format="jess" scrs="1076,1178,1280,1382"/>
 			<product name="SUS 41 F2" positions="4" scrs="1076,1178,1280,1382"/>
 			<product name="SUS 41 F3" positions="4" format="jess" scrs="1076,1178,1280,1382"/>
@@ -343,7 +359,7 @@
 			<product name="TUM 1783C" format="jess" positions="4" scrs="1280,1382,1484"/>
 		</manufacturer>
 		<manufacturer name="Unitron-Johansson">
-			<product name="9732" format="dSCR" scrs="1210,1420,1680,2040,985,1050,1115,1275,1340,1485,1550,1615,1745,1810,1875,1940"/>
+			<product name="9732" format="dSCR,4" scrs="1210,1420,1680,2040,985,1050,1115,1275,1340,1485,1550,1615,1745,1810,1875,1940"/>
 		</manufacturer>
 		<manufacturer name="Wisi">
 			<product name="DY 64 1800" scrs="1178,1280,1382,1484,1586,1688,1790,1892"/>
