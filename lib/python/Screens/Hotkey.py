@@ -601,6 +601,8 @@ class InfoBarHotkey():
 			return _("Hotkey") + " " + tuple(x[0] for x in hotkey.hotkeys if x[1] == key)[0]
 
 	def hotkeyGlobal(self, key):
+		if not hasattr(self.session, "infobar") or self.session.infobar is not None:
+			self.session.infobar = None
 		selected = self.getKeyFunctions(key)
 		if not selected:
 			return 0
@@ -612,6 +614,8 @@ class InfoBarHotkey():
 
 	def execHotkey(self, selected):
 		if selected:
+			if not hasattr(self.session, "infobar") or self.session.infobar is None:
+				self.session.infobar = self
 			selected = selected[1].split("/")
 			if selected[0] == "Plugins":
 				twinPlugins = []
