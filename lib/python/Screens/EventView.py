@@ -222,14 +222,6 @@ class EventViewBase:
 			else:
 				self["channel"].setText(_("unknown service"))
 
-	def sort_func(self, x, y):
-		if x[1] < y[1]:
-			return -1
-		elif x[1] == y[1]:
-			return 0
-		else:
-			return 1
-
 	def setEvent(self, event):
 		self.event = event
 		self["Event"].newEvent(event)
@@ -299,8 +291,7 @@ class EventViewBase:
 		ret = epgcache.search(('NB', 100, eEPGCache.SIMILAR_BROADCASTINGS_SEARCH, refstr, id))
 		if ret is not None:
 			text = '\n\n' + _('Similar broadcasts:')
-			ret.sort(self.sort_func)
-			for x in ret:
+			for x in sorted(ret, key=lambda x: x[1]):
 				t = localtime(x[1])
 				text += '\n%02d.%02d.%d, %02d:%02d  -  %s' % (t[2], t[1], t[0], t[3], t[4], x[0])
 
