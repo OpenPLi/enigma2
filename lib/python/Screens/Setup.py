@@ -99,6 +99,8 @@ class Setup(ConfigListScreen, Screen):
 				"cancel": self.keyCancel,
 				"save": self.keySave,
 				"menu": self.closeRecursive,
+				"moveUp": self.keyUp,
+				"moveDown": self.keyDown,
 			}, -2)
 
 		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
@@ -106,6 +108,12 @@ class Setup(ConfigListScreen, Screen):
 		self["config"].onSelectionChanged.append(self.__onSelectionChanged)
 
 		self.setTitle(_(self.setup_title))
+
+	def keyUp(self):
+		self["config"].instance.moveSelection(self["config"].instance.moveUp)
+
+	def keyDown(self):
+		self["config"].instance.moveSelection(self["config"].instance.moveDown)
 
 	def createSetupList(self):
 		currentItem = self["config"].getCurrent()
