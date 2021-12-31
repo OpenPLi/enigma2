@@ -2,7 +2,7 @@ import os
 import re
 import unicodedata
 from Renderer import Renderer
-from enigma import ePixmap, eServiceCenter, eServiceReference, iServiceInformation
+from enigma import ePixmap, ePicLoad, eServiceCenter, eServiceReference, iServiceInformation
 from Tools.Alternatives import GetWithAlternative
 from Tools.Directories import pathExists, SCOPE_SKIN_IMAGE, SCOPE_CURRENT_SKIN, resolveFilename
 from Components.Harddisk import harddiskmanager
@@ -111,6 +111,10 @@ def getPiconName(serviceRef):
 class Picon(Renderer):
 	def __init__(self):
 		Renderer.__init__(self)
+		self.usePicLoad = False
+		self.PicLoad = ePicLoad()
+		self.PicLoad.PictureData.get().append(self.updatePicon)
+		self.piconsize = (0,0)
 		self.pngname = ""
 		self.lastPath = None
 		pngname = findPicon("picon_default")
@@ -142,11 +146,22 @@ class Picon(Renderer):
 			elif attrib == "isFrontDisplayPicon":
 				self.showPicon = value == "0"
 				attribs.remove((attrib, value))
+			elif attrib == "usePicLoad":
+				self.usePicLoad = value == "1"
+				attribs.remove((attrib, value))
+			elif attrib == "size":
+				self.piconsize = value
 		self.skinAttributes = attribs
 		self.changed((self.CHANGED_ALL,))
 		return Renderer.applySkin(self, desktop, parent)
 
 	GUI_WIDGET = ePixmap
+
+	def updatePicon(self, picInfo=None):
+		ptr = self.PicLoad.getData()
+		if ptr is not None and self.instance:
+			self.instance.setPixmap(ptr.__deref__())
+			self.instance.show()
 
 	def changed(self, what):
 		if self.instance:
@@ -158,9 +173,13 @@ class Picon(Renderer):
 					pngname = self.defaultpngname
 				if self.pngname != pngname:
 					if pngname:
-						self.instance.setScale(1)
-						self.instance.setPixmapFromFile(pngname)
-						self.instance.show()
+						if self.usePicLoad:
+							self.PicLoad.setPara((self.piconsize[0], self.piconsize[1], 0, 0, 1, 1, "#FF000000"))
+							self.PicLoad.startDecode(pngname)
+						else:
+							self.instance.setScale(1)
+							self.instance.setPixmapFromFile(pngname)
+							self.instance.show()
 					else:
 						self.instance.hide()
 					self.pngname = pngname
