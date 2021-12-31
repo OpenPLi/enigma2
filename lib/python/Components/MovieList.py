@@ -273,22 +273,22 @@ class MovieList(GUIComponent):
 			self.fontName = value
 
 		def fontSizesOriginal(value):
-			self.fontSizesOriginal = map(parseScale, value.split(","))
+			self.fontSizesOriginal = list(map(parseScale, value.split(",")))
 			if len(self.fontSizesOriginal) != 3:
 				warningWrongSkinParameter(attrib)
 
 		def fontSizesCompact(value):
-			self.fontSizesCompact = map(parseScale, value.split(","))
+			self.fontSizesCompact = list(map(parseScale, value.split(",")))
 			if len(self.fontSizesCompact) != 2:
 				warningWrongSkinParameter(attrib)
 
 		def fontSizesMinimal(value):
-			self.fontSizesMinimal = map(parseScale, value.split(","))
+			self.fontSizesMinimal = list(map(parseScale, value.split(",")))
 			if len(self.fontSizesMinimal) != 2:
 				warningWrongSkinParameter(attrib)
 
 		def itemHeights(value):
-			self.itemHeights = map(parseScale, value.split(","))
+			self.itemHeights = list(map(parseScale, value.split(",")))
 			if len(self.itemHeights) != 3:
 				warningWrongSkinParameter(attrib)
 
@@ -326,12 +326,12 @@ class MovieList(GUIComponent):
 			self.spaceRight = parseScale(value)
 
 		def columnsOriginal(value):
-			self.columnsOriginal = map(parseScale, value.split(","))
+			self.columnsOriginal = list(map(parseScale, value.split(",")))
 			if len(self.columnsOriginal) != 2:
 				warningWrongSkinParameter(attrib)
 
 		def columnsCompactDescription(value):
-			self.columnsCompactDescription = map(parseScale, value.split(","))
+			self.columnsCompactDescription = list(map(parseScale, value.split(",")))
 			if len(self.columnsCompactDescription) != 3:
 				warningWrongSkinParameter(attrib)
 
