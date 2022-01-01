@@ -108,7 +108,7 @@ class Wlan:
 
 				extra = []
 				for element in result.custom:
-					element = element.encode()
+					element = element.decode()
 					extra.append(strip(self.asciify(element)))
 				for element in extra:
 					if 'SignalStrength' in element:
