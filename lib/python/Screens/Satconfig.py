@@ -769,12 +769,20 @@ class NimSelection(Screen):
 		self["actions"] = ActionMap(["OkCancelActions", "MenuActions", "ChannelSelectEPGActions"],
 		{
 			"ok": self.okbuttonClick,
+			"moveUp": self.keyUp,
+			"moveDown": self.keyDown,
 			"info": self.extraInfo,
 			"epg": self.extraInfo,
 			"cancel": self.close,
 			"menu": self.exit,
 		}, -2)
 		self.setTitle(_("Choose Tuner"))
+
+	def keyUp(self):
+		self["nimlist"].up()
+
+	def keyDown(self):
+		self["nimlist"].down()
 
 	def exit(self):
 		self.close(True)
