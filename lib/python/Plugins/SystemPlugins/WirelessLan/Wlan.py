@@ -127,7 +127,7 @@ class Wlan:
 					'bssid': result.bssid,
 					'channel': channel,
 					'encrypted': encryption,
-					'essid': strip(self.asciify(result.essid)),
+					'essid': str.strip(self.asciify(result.essid)),
 					'iface': self.iface,
 					'maxrate': ifobj._formatBitrate(result.rate[-1][-1]),
 					'noise': '',#result.quality.nlevel-0x100,
