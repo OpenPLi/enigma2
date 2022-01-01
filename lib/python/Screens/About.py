@@ -220,7 +220,7 @@ class CommitInfo(Screen):
 			("https://api.github.com/repos/openpli/enigma2-plugin-skins-magic/commits", "Skin Magic SD"),
 			("https://api.github.com/repos/littlesat/skin-PLiHD/commits", "Skin PLi HD"),
 			("https://api.github.com/repos/E2OpenPlugins/e2openplugin-OpenWebif/commits", "OpenWebif"),
-			("https://api.github.com/repos/haroo/HansSettings/commits", "Hans settings")
+			("https://api.github.com/repos/technl/HansSettings/commits", "Hans settings")
 		]
 		self.cachedProjects = {}
 		self.Timer = eTimer()
