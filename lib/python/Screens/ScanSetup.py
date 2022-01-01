@@ -624,6 +624,8 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 		self["actions"] = NumberActionMap(["SetupActions", "MenuActions", "ColorActions"],
 		{
 			"ok": self.keyGo,
+			"keyup": self.keyUp,
+			"keydown": self.keyDown,
 			"save": self.keyGo,
 			"cancel": self.keyCancel,
 			"red": self.keyCancel,
@@ -1275,6 +1277,12 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 		ConfigListScreen.keyRight(self)
 		self.newConfig()
 
+	def keyUp(self):
+		self["config"].instance.moveSelection(self["config"].instance.moveUp)
+
+	def keyDown(self):
+		self["config"].instance.moveSelection(self["config"].instance.moveDown)
+
 	def handleKeyFileCallback(self, answer):
 		ConfigListScreen.handleKeyFileCallback(self, answer)
 		self.newConfig()
@@ -1708,6 +1716,8 @@ class ScanSimple(ConfigListScreen, Screen, CableTransponderSearchSupport, Terres
 		self["actions"] = ActionMap(["SetupActions", "MenuActions", "ColorActions"],
 		{
 			"ok": self.keyGo,
+			"keyup": self.keyUp,
+			"keydown": self.keyDown,
 			"save": self.keyGo,
 			"cancel": self.keyCancel,
 			"menu": self.doCloseRecursive,
@@ -1904,6 +1914,12 @@ class ScanSimple(ConfigListScreen, Screen, CableTransponderSearchSupport, Terres
 
 	def terrestrialTransponderSearchFinished(self):
 		self.buildTransponderList()
+
+	def keyUp(self):
+		self["config"].instance.moveSelection(self["config"].instance.moveUp)
+
+	def keyDown(self):
+		self["config"].instance.moveSelection(self["config"].instance.moveDown)
 
 	def keyCancel(self):
 		self.session.nav.playService(self.session.postScanService)
