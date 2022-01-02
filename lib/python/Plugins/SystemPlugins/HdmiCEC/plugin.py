@@ -23,8 +23,6 @@ class HdmiCECSetupScreen(Screen, ConfigListScreen):
 		self["actions"] = ActionMap(["SetupActions", "ColorActions", "MenuActions"],
 		{
 			"ok": self.keyOk,
-			"keyup": self.keyUp,
-			"keydown": self.keyDown,
 			"save": self.keyGo,
 			"cancel": self.keyCancel,
 			"green": self.keyGo,
@@ -139,11 +137,6 @@ class HdmiCECSetupScreen(Screen, ConfigListScreen):
 				inhibitDirs=inhibitDirs, minFree=1
 				)
 
-	def keyUp(self):
-		self["config"].instance.moveSelection(self["config"].instance.moveUp)
-
-	def keyDown(self):
-		self["config"].instance.moveSelection(self["config"].instance.moveDown)
 
 def main(session, **kwargs):
 	session.open(HdmiCECSetupScreen)
