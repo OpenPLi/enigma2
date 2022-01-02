@@ -27,7 +27,7 @@ def setConfiguredPosition():
 
 
 def main(session, **kwargs):
-	from overscanwizard import OverscanWizard
+	from Plugins.SystemPlugins.OSDPositionSetup.overscanwizard import OverscanWizard
 	session.open(OverscanWizard, timeOut=False)
 
 
