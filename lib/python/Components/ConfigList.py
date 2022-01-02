@@ -144,6 +144,8 @@ class ConfigListScreen:
 			"deleteForward": self.keyDelete,
 			"deleteBackward": self.keyBackspace,
 			"toggleOverwrite": self.keyToggleOW,
+			"keyup": self.keyUp,
+			"keydown": self.keyDown,
 			"pageUp": self.keyPageUp,
 			"pageDown": self.keyPageDown,
 			"1": self.keyNumberGlobal,
@@ -257,6 +259,12 @@ class ConfigListScreen:
 	def keyNumberGlobal(self, number):
 		self["config"].handleKey(KEY_0 + number)
 		self.__changed()
+
+	def keyUp(self):
+		self["config"].instance.moveSelection(self["config"].instance.moveUp)
+
+	def keyDown(self):
+		self["config"].instance.moveSelection(self["config"].instance.moveDown)
 
 	def keyPageDown(self):
 		self["config"].pageDown()
