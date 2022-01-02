@@ -32,8 +32,6 @@ class VideoSetup(Screen, ConfigListScreen):
 		from Components.ActionMap import ActionMap
 		self["actions"] = ActionMap(["SetupActions", "MenuActions"],
 			{
-				"keyup": self.keyUp,
-				"keydown": self.keyDown,
 				"cancel": self.keyCancel,
 				"save": self.apply,
 				"menu": self.closeRecursive,
@@ -201,12 +199,6 @@ class VideoSetup(Screen, ConfigListScreen):
 	def createSummary(self):
 		from Screens.Setup import SetupSummary
 		return SetupSummary
-
-	def keyUp(self):
-		self["config"].instance.moveSelection(self["config"].instance.moveUp)
-
-	def keyDown(self):
-		self["config"].instance.moveSelection(self["config"].instance.moveDown)
 
 
 class VideomodeHotplug:
