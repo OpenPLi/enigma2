@@ -229,7 +229,7 @@ class CommitInfo(Screen):
 		commitlog = ""
 		from datetime import datetime
 		from json import loads
-		from urllib2 import urlopen
+		from urllib.request import urlopen
 		try:
 			commitlog += 80 * '-' + '\n'
 			commitlog += url.split('/')[-2] + '\n'
