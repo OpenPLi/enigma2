@@ -152,7 +152,6 @@ class Picon(Renderer):
 			elif attrib == "size":
 				self.piconsize = value
 		self.skinAttributes = attribs
-		self.changed((self.CHANGED_ALL,))
 		return Renderer.applySkin(self, desktop, parent)
 
 	GUI_WIDGET = ePixmap
