@@ -61,7 +61,7 @@ def InitGeolocation():
 					config.misc.enableGeolocation.save()
 				else:
 					print("[Geolocation] Error: Geolocation lookup returned a '%s' status!  Message '%s' returned." % (status, geolocation.get("message", None)))
-			except urllib.error.URLError as err:
+			except URLError as err:
 				if hasattr(err, 'code'):
 					print("[Geolocation] Error: Geolocation data not available! (Code: %s)" % err.code)
 				if hasattr(err, 'reason'):
