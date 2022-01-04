@@ -169,10 +169,11 @@ class Picon(Renderer):
 				pngname = ""
 				if what[0] in (self.CHANGED_ALL, self.CHANGED_SPECIFIC):
 					pngname = getPiconName(self.source.text)
-				elif what[0] == self.CHANGED_CLEAR:
-					self.pngname = ""
-					if self.visible:
-					       self.instance.hide()
+				else:
+					if what[0] == self.CHANGED_CLEAR:
+						self.pngname = ""
+						if self.visible:
+					     		self.instance.hide()
 					return
 				if not pngname: # no picon for service found
 					pngname = self.defaultpngname
