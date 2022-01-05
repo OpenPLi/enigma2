@@ -484,7 +484,7 @@ class PluginDownloadBrowser(Screen):
 
 	def dataAvail(self, str):
 		#prepend any remaining data from the previous call
-		str = self.remainingdata + str
+		str = self.remainingdata + str.decode()
 		#split in lines
 		lines = str.split('\n')
 		#'str' should end with '\n', so when splitting, the last line should be empty. If this is not the case, we received an incomplete line
