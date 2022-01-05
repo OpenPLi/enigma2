@@ -33,6 +33,13 @@
 		<widget source="parent.ServiceEvent" render="Label" position="5,0" size="210,60" font="GBLcd;26" valign="center">
 			<convert type="ServiceName">Name</convert>
 		</widget>
+		<widget source="parent.ServiceEvent" render="Label" position="5,0" size="210,60">
+			<convert type="ConfigEntryTest">config.usage.show_picon_in_display,True</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget source="parent.ServiceEvent" render="Picon" position="60,0" size="100,60" alphatest="blend" isFrontDisplayPicon="1">
+			<convert type="ServiceName">Reference</convert>
+		</widget>
 		<widget source="parent.ServiceEvent" render="Label" position="5,60" size="215,49" font="GBLcd;20" valign="bottom" foregroundColor="GBLcdGrey">
 			<convert type="EventName">Name</convert>
 		</widget>
@@ -64,7 +71,14 @@
 		<widget source="session.CurrentService" render="Label" position="5,0" size="210,60" font="GBLcd;26" valign="center">
 			<convert type="ServiceName">Name</convert>
 		</widget>
-		<widget source="session.Event_Now" render="Label" position="5,60" size="215,49" font="GBLcd;20" valign="bottom" foregroundColor="GBLcdGrey">
+		<widget source="session.CurrentService" render="Label" position="5,0" size="210,60">
+			<convert type="ConfigEntryTest">config.usage.show_picon_in_display,True</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget source="session.CurrentService" render="Picon" position="60,0" size="100,60" alphatest="blend" isFrontDisplayPicon="1">
+			<convert type="ServiceName">Reference</convert>
+		</widget>
+		<widget source="session.Event_Now" render="Label" position="5,60" size="210,49" font="GBLcd;20" valign="bottom" foregroundColor="GBLcdGrey">
 			<convert type="EventName">Name</convert>
 		</widget>
 		<widget source="session.Event_Now" render="Progress" position="5,109" size="210,6" borderWidth="1">
