@@ -99,7 +99,7 @@ class HelpableActionMap(ActionMap):
 					return True
 			return False
 
-		if not hasattr(contexts, '__iter__'):
+		if isinstance(contexts, str):
 			contexts = [contexts]
 		actions = actions or {}
 		self.description = description
