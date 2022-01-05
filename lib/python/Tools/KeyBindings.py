@@ -392,4 +392,4 @@ def getKeyBindingKeys(filterfn=lambda key: True):
 
 def removeKeyBindings(domain):
 	for x in keyBindings:
-		keyBindings[x] = filter(lambda e: e[1] != domain, keyBindings[x])
+		keyBindings[x] = list(filter(lambda e: e[1] != domain, keyBindings[x]))
