@@ -14,7 +14,7 @@ class ActionMap:
 		self.exec_active = False
 		self.enabled = True
 		unknown = list(self.actions.keys())
-		for action in unknown:
+		for action in unknown[:]:
 			for context in self.contexts:
 				if queryKeyBinding(context, action):
 					unknown.remove(action)
