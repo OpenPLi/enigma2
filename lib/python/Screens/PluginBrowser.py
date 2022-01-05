@@ -282,6 +282,10 @@ class PluginDownloadBrowser(Screen):
 		self["actions"] = ActionMap(["WizardActions"],
 		{
 			"ok": self.go,
+			"up": self.keyUp,
+			"down": self.keyDown,
+			"left": self.pageUp,
+			"right": self.pageDown,
 			"back": self.requestClose,
 		})
 		if os.path.isfile('/usr/bin/opkg'):
@@ -292,6 +296,18 @@ class PluginDownloadBrowser(Screen):
 			self.opkg = 'opkg'
 			self.opkg_install = 'opkg install -force-defaults'
 			self.opkg_remove = self.opkg + ' remove'
+
+	def keyUp(self):
+		self["list"].instance.moveSelection(self["list"].instance.moveUp)
+
+	def keyDown(self):
+		self["list"].instance.moveSelection(self["list"].instance.moveDown)
+
+	def pageUp(self):
+		self["list"].instance.moveSelection(self["list"].instance.pageUp)
+
+	def pageDown(self):
+		self["list"].instance.moveSelection(self["list"].instance.pageDown)
 
 	def go(self):
 		sel = self["list"].l.getCurrentSelection()
