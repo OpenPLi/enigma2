@@ -185,6 +185,7 @@ class OpkgComponent:
 		self.cmd.dataAvail.remove(self.cmdData)
 
 	def cmdData(self, data):
+		data = data.decode()
 		print("data:", data)
 		if self.cache is None:
 			self.cache = data
