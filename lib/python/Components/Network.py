@@ -291,7 +291,11 @@ class Network:
 		return self.ifaces.keys()
 
 	def getAdapterAttribute(self, iface, attribute):
-		return self.ifaces.get(iface, {}).get(attribute)
+		result = self.ifaces.get(iface, {}).get(attribute)
+		if not result:
+			self.getAddrInet(iface)
+			result = self.ifaces.get(iface, {}).get(attribute)
+		return result
 
 	def setAdapterAttribute(self, iface, attribute, value):
 		print "setting for adapter", iface, "attribute", attribute, " to value", value
