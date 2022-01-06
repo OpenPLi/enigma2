@@ -7,6 +7,7 @@ from Components.About import GetIPsFromNetworkInterfaces
 from Components.NimManager import nimmanager
 from Components.ServiceList import refreshServiceList
 from SystemInfo import SystemInfo
+from keyids import KEYIDS
 import os
 import time
 
@@ -204,6 +205,21 @@ def InitUsageConfig():
 	config.usage.standby_to_shutdown_timer_blocktime = ConfigYesNo(default=False)
 	config.usage.standby_to_shutdown_timer_blocktime_begin = ConfigClock(default=time.mktime((0, 0, 0, 6, 0, 0, 0, 0, 0)))
 	config.usage.standby_to_shutdown_timer_blocktime_end = ConfigClock(default=time.mktime((0, 0, 0, 23, 0, 0, 0, 0, 0)))
+
+
+	config.usage.long_press_emulation_key = ConfigSelection(default="0", choices=[
+		("0", _("None")),
+		(str(KEYIDS["KEY_TV"]), _("TV")),
+		(str(KEYIDS["KEY_RADIO"]), _("Radio")),
+		(str(KEYIDS["KEY_AUDIO"]), _("Audio")),
+		(str(KEYIDS["KEY_VIDEO"]), _("List/Fav")),
+		(str(KEYIDS["KEY_HOME"]), _("Home")),
+		(str(KEYIDS["KEY_END"]), _("End")),
+		(str(KEYIDS["KEY_HELP"]), _("Help")),
+		(str(KEYIDS["KEY_INFO"]), _("Info (EPG)")),
+		(str(KEYIDS["KEY_TEXT"]), _("Teletext")),
+		(str(KEYIDS["KEY_SUBTITLE"]), _("Subtitle")),
+		(str(KEYIDS["KEY_FAVORITES"]), _("Favorites"))])
 
 	choicelist = [("0", _("Disabled"))]
 	for m in (1, 5, 10, 15, 30, 60):
