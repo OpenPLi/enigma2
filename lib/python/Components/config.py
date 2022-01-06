@@ -11,7 +11,7 @@ from time import localtime, strftime
 # ConfigElement, the base class of all ConfigElements.
 
 # it stores:
-#   value    the current value, usefully encoded.
+#   value    the current value.
 #            usually a property which retrieves _value,
 #            and maybe does some reformatting
 #   _value   the value as it's going to be saved in the configfile,
@@ -1049,7 +1049,7 @@ class ConfigText(ConfigElement, NumericalTextInput):
 	_value = property(getValue, setValue)
 
 	def getText(self):
-		return self.text.encode("utf-8")
+		return self.text
 
 	def getMulti(self, selected):
 		if self.visible_width:
@@ -1057,13 +1057,13 @@ class ConfigText(ConfigElement, NumericalTextInput):
 				mark = range(0, min(self.visible_width, len(self.text)))
 			else:
 				mark = [self.marked_pos - self.offset]
-			return ("mtext"[1 - selected:], self.text[self.offset:self.offset + self.visible_width].encode("utf-8") + " ", mark)
+			return ("mtext"[1 - selected:], self.text[self.offset:self.offset + self.visible_width] + " ", mark)
 		else:
 			if self.allmarked:
 				mark = range(0, len(self.text))
 			else:
 				mark = [self.marked_pos]
-			return ("mtext"[1 - selected:], self.text.encode("utf-8") + " ", mark)
+			return ("mtext"[1 - selected:], self.text + " ", mark)
 
 	def onSelect(self, session):
 		self.allmarked = (self.value != "")
