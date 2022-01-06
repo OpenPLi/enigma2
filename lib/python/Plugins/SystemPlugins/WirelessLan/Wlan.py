@@ -373,7 +373,7 @@ class Status:
 		iface = extra_args
 		data = {'essid': False, 'frequency': False, 'accesspoint': False, 'bitrate': False, 'encryption': False, 'quality': False, 'signal': False}
 		for line in result.splitlines():
-			line = line.strip()
+			line = line.strip().decode()
 			if "ESSID" in line:
 				if "off/any" in line:
 					ssid = "off"
