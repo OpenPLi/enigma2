@@ -48,28 +48,25 @@ class Input(VariableText, GUIComponent, NumericalTextInput):
 				for x in self.Text[self.offset:self.offset + self.visible_width]:
 					self.text += (x == " " and " " or "*")
 			else:
-				self.text = self.Text[self.offset:self.offset + self.visible_width].encode("utf-8") + " "
+				self.text = self.Text[self.offset:self.offset + self.visible_width] + " "
 		else:
 			if self.type == self.PIN:
 				self.text = ""
 				for x in self.Text:
 					self.text += (x == " " and " " or "*")
 			else:
-				self.text = self.Text.encode("utf-8") + " "
+				self.text = self.Text + " "
 
 	def setText(self, text):
 		if not len(text):
 			self.currPos = 0
 			self.Text = u""
 		else:
-			if isinstance(text, str):
-				self.Text = text.decode("utf-8", "ignore")
-			else:
-				self.Text = text
+			self.Text = text
 		self.update()
 
 	def getText(self):
-		return self.Text.encode('utf-8')
+		return self.Text
 
 	def createWidget(self, parent):
 		if self.allmarked:
