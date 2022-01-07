@@ -67,23 +67,11 @@ class InputDeviceSelection(Screen, HelpableScreen):
 			"green": (self.okbuttonClick, _("Select input device.")),
 			}, -2)
 
-		self["DirectionActions"] = ActionMap(["DirectionActions"],
-			{
-			"up": self.keyUp,
-			"down": self.keyDown,
-			})
-
 		self.currentIndex = 0
 		self.list = []
 		self["list"] = List(self.list)
 		self.updateList()
 		self.onClose.append(self.cleanup)
-
-	def keyUp(self):
-		self["list"].setIndex(self.currentIndex - 1)
-
-	def keyDown(self):
-		self["list"].setIndex(self.currentIndex + 1)
 
 	def cleanup(self):
 		self.currentIndex = 0
