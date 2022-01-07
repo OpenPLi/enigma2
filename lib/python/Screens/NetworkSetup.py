@@ -238,10 +238,8 @@ class NameserverSetup(Screen, ConfigListScreen, HelpableScreen):
 			"yellow": (self.remove, _("Remove a nameserver entry")),
 			})
 
-		self["actions"] = HelpableActionMap(self, ["SetupActions"],
+		self["actions"] = NumberActionMap(["SetupActions"],
 		{
-			"keyup": self.keyUp,
-			"keydown": self.keyDown,
 			"ok": self.ok,
 		}, -2)
 
@@ -293,12 +291,6 @@ class NameserverSetup(Screen, ConfigListScreen, HelpableScreen):
 			iNetwork.removeNameserver(self.nameservers[index])
 			self.createConfig()
 			self.createSetup()
-
-	def keyUp(self):
-		self["config"].instance.moveSelection(self["config"].instance.moveUp)
-
-	def keyDown(self):
-		self["config"].instance.moveSelection(self["config"].instance.moveDown)
 
 
 class AdapterSetup(Screen, ConfigListScreen, HelpableScreen):
