@@ -42,18 +42,6 @@ class LanguageSelection(Screen):
 			"cancel": self.cancel,
 		}, -1)
 
-		self["DirectionActions"] = ActionMap(["DirectionActions"],
-		{
-			"up": self.keyUp,
-			"down": self.keyDown,
-		})
-
-	def keyUp(self):
-		self["languages"].up()
-
-	def keyDown(self):
-		self["languages"].down()
-
 	def selectActiveLanguage(self):
 		pos = 0
 		for pos, x in enumerate(self.list):
