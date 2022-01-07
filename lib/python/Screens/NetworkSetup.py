@@ -44,12 +44,6 @@ class NetworkAdapterSelection(Screen, HelpableScreen):
 			"ok": (self.okbuttonClick, _("Select interface")),
 			})
 
-		self["updown_actions"] = HelpableActionMap(self, ["WizardActions"],
-			{
-			"up": self.up,
-			"down": self.down,
-			})
-
 		self["ColorActions"] = HelpableActionMap(self, ["ColorActions"],
 			{
 			"red": (self.close, _("Exit network interface list")),
@@ -214,12 +208,6 @@ class NetworkAdapterSelection(Screen, HelpableScreen):
 				selection = self["list"].getCurrent()
 				if selection is not None:
 					self.session.openWithCallback(self.AdapterSetupClosed, NetworkWizard, selection[0])
-
-	def up(self):
-		self["list"].up()
-
-	def down(self):
-		self["list"].down()
 
 
 class NameserverSetup(Screen, ConfigListScreen, HelpableScreen):
