@@ -23,8 +23,6 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 		{
 			"ok": self.run,
 			"menu": self.keyCancel,
-			"keyup": self.keyUp,
-			"keydown": self.keyDown,
 			"cancel": self.keyCancel,
 			"save": self.run,
 		}, -2)
@@ -225,12 +223,6 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 	def changedEntry(self):
 		if isinstance(self["config"].getCurrent()[1], ConfigBoolean) or isinstance(self["config"].getCurrent()[1], ConfigSelection):
 			self.createSetup()
-
-	def keyUp(self):
-		self["config"].instance.moveSelection(self["config"].instance.moveUp)
-
-	def keyDown(self):
-		self["config"].instance.moveSelection(self["config"].instance.moveDown)
 
 	def run(self):
 		if self.avahiselect.value == "ip":
