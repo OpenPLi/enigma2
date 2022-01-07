@@ -7,6 +7,7 @@ import Screens.Standby
 from enigma import ePoint, eTimer, iPlayableService, eActionMap
 import os
 import random
+from os import sys
 from sys import maxsize
 
 
