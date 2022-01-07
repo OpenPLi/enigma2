@@ -293,7 +293,7 @@ class Network:
 	def getAdapterAttribute(self, iface, attribute):
 		result = self.ifaces.get(iface, {}).get(attribute)
 		if not result:
-			self.getAddrInet(iface)
+			self.getAddrInet(iface, callback=None)
 			result = self.ifaces.get(iface, {}).get(attribute)
 		return result
 
