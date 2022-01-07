@@ -1409,7 +1409,7 @@ def InitNimManager(nimmgr, update_slots=[]):
 				def unicableProductChanged(manufacturer, lnb_or_matrix, configEntry):
 					config.unicable.unicableProduct.value = configEntry.value
 					config.unicable.unicableProduct.save()
-					productparameters = [p for p in [m.getchildren() for m in unicable_xml.find(lnb_or_matrix) if m.get("name") == manufacturer][0] if p.get("name") == configEntry.value][0]
+					productparameters = [p for p in [m for m in unicable_xml.find(lnb_or_matrix) if m.get("name") == manufacturer][0] if p.get("name") == configEntry.value][0]
 					section.bootuptime = ConfigInteger(default=int(productparameters.get("bootuptime", 1000)), limits=(0, 9999))
 					section.bootuptime.save_forced = True
 					section.powerinserter = ConfigYesNo(default=SystemInfo["FbcTunerPowerAlwaysOn"])
@@ -1423,7 +1423,7 @@ def InitNimManager(nimmgr, update_slots=[]):
 				def unicableManufacturerChanged(lnb_or_matrix, configEntry):
 					config.unicable.unicableManufacturer.value = configEntry.value
 					config.unicable.unicableManufacturer.save()
-					productslist = [p.get("name") for p in [m.getchildren() for m in unicable_xml.find(lnb_or_matrix) if m.get("name") == configEntry.value][0]]
+					productslist = [p.get("name") for p in [m for m in unicable_xml.find(lnb_or_matrix) if m.get("name") == configEntry.value][0]]
 					if not config.unicable.content.items.get("unicableProduct", False) or config.unicable.unicableProduct.value not in productslist:
 						config.unicable.unicableProduct = ConfigSelection(productslist)
 					config.unicable.unicableProduct.save_forced = True
