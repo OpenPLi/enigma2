@@ -329,8 +329,6 @@ class AdapterSetup(Screen, ConfigListScreen, HelpableScreen):
 		self["actions"] = NumberActionMap(["SetupActions"],
 		{
 			"ok": self.keySave,
-			"keyup": self.keyUp,
-			"keydown": self.keyDown,
 		}, -2)
 
 		self.list = []
@@ -615,12 +613,6 @@ class AdapterSetup(Screen, ConfigListScreen, HelpableScreen):
 			iNetwork.deactivateInterface(self.iface, self.keyCancelCB)
 		else:
 			self.close('cancel')
-
-	def keyUp(self):
-		self["config"].instance.moveSelection(self["config"].instance.moveUp)
-
-	def keyDown(self):
-		self["config"].instance.moveSelection(self["config"].instance.moveDown)
 
 	def keyCancel(self):
 		self.hideInputHelp()
