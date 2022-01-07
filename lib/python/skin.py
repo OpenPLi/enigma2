@@ -149,7 +149,7 @@ def loadSkin(filename, scope=SCOPE_SKIN, desktop=getDesktop(GUI_SKIN_ID), screen
 							# print("[Skin] DEBUG: Processing a windowstyle ID='%s'." % scrnID)
 							domStyle = xml.etree.cElementTree.ElementTree(xml.etree.cElementTree.Element("skin"))
 							domStyle.getroot().append(element)
-							windowStyles[scrnID] = (desktop, screenID, domStyle, filename, scope)
+							windowStyles[scrnID] = (desktop, screenID, domStyle.getroot(), filename, scope)
 					# Element is not a screen or windowstyle element so no need for it any longer.
 				reloadWindowStyles()  # Reload the window style to ensure all skin changes are taken into account.
 				print("[Skin] Loading skin file '%s' complete." % filename)
@@ -843,7 +843,7 @@ def loadSingleSkinData(desktop, screenID, domSkin, pathSkin, scope=SCOPE_CURRENT
 			try:
 				name = parameter.attrib.get("name")
 				value = parameter.attrib.get("value")
-				parameters[name] = list(map(parseParameter, [x.strip() for x in value.split(",")]) if "," in value else parseParameter(value))
+				parameters[name] = list(map(parseParameter, [x.strip() for x in value.split(",")])) if "," in value else parseParameter(value)
 			except Exception as err:
 				raise SkinError("Bad parameter: '%s'" % str(err))
 	for tag in domSkin.findall("menus"):
