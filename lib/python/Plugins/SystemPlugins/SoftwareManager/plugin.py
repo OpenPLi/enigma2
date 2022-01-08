@@ -709,7 +709,7 @@ class PluginManager(Screen, PackageInfoHandler):
 				selectedTag = current[2]
 				self.buildPacketList(selectedTag)
 			elif self.currList == "packages":
-				if current[7] is not '':
+				if current[7] != '':
 					idx = self["list"].getIndex()
 					detailsFile = self.list[idx][1]
 					if self.list[idx][7] == True:
@@ -751,7 +751,7 @@ class PluginManager(Screen, PackageInfoHandler):
 		current = self["list"].getCurrent()
 		if current:
 			if self.currList == "packages":
-				if current[7] is not '':
+				if current[7] != '':
 					detailsfile = iSoftwareTools.directory[0] + "/" + current[1]
 					if (os.path.exists(detailsfile) == True):
 						self.saved_currentSelectedPackage = self.currentSelectedPackage
