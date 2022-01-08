@@ -644,7 +644,7 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		if current == self.wlanSSID:
 			if current[1].help_window.instance is not None:
 				current[1].help_window.instance.hide()
-		elif current == self.encryptionKey and config.plugins.wlan.encryption.value is not "Unencrypted":
+		elif current == self.encryptionKey and config.plugins.wlan.encryption.value != "Unencrypted":
 			if current[1].help_window.instance is not None:
 				current[1].help_window.instance.hide()
 
