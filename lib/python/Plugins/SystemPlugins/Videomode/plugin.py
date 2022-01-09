@@ -194,9 +194,6 @@ class VideoSetup(Screen, ConfigListScreen):
 	def updateDescription(self):
 		self["description"].setText("%s" % self.getCurrentDescription())
 
-	def getCurrentDescription(self):
-		return self["config"].getCurrent() and len(self["config"].getCurrent()) > 2 and self["config"].getCurrent()[2] or ""
-
 
 class VideomodeHotplug:
 	def __init__(self, hw):
