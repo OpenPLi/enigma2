@@ -69,7 +69,7 @@ class HardwareInfo:
 			self.machine_name = "et1x000"
 		elif self.device_brandname == "Zgemma":
 			if self.device_model and self.device_name and "H9Twin" in self.device_model and "combo" in self.device_name:
-				self.device_model = self.device_model.lower()
+				self.device_model = self.device_model.lower().replace(" ", "")
 			else:
 				self.device_model = self.device_name
 			self.machine_name = self.device_name
