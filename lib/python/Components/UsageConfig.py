@@ -10,8 +10,21 @@ from SystemInfo import SystemInfo
 import os
 import time
 
+
 originalAudioTracks = "orj dos ory org esl qaa und mis mul ORY ORJ Audio_ORJ oth"
 visuallyImpairedCommentary = "NAR qad"
+
+
+def leaveStandby():
+	if not config.usage.powerLED.value:
+		open(SystemInfo["PowerLED"], "w").write("0")
+
+
+def standbyCounterChanged(dummy):
+	from Screens.Standby import inStandby
+	inStandby.onClose.append(leaveStandby)
+	if not config.usage.standbyLED.value:
+		open(SystemInfo["StandbyLED"], "w").write("0")
 
 
 def InitUsageConfig():
@@ -331,7 +344,10 @@ def InitUsageConfig():
 
 	if SystemInfo["PowerLED"]:
 		def powerLEDChanged(configElement):
-			open(SystemInfo["PowerLED"], "w").write(configElement.value and "on" or "off")
+			if "fp" in SystemInfo["PowerLED"]:
+				open(SystemInfo["PowerLED"], "w").write(configElement.value and "1" or "0")
+			else:
+				open(SystemInfo["PowerLED"], "w").write(configElement.value and "on" or "off")
 		config.usage.powerLED = ConfigYesNo(default=True)
 		config.usage.powerLED.addNotifier(powerLEDChanged)
 
@@ -339,11 +355,18 @@ def InitUsageConfig():
 		def standbyLEDChanged(configElement):
 			open(SystemInfo["StandbyLED"], "w").write(configElement.value and "on" or "off")
 		config.usage.standbyLED = ConfigYesNo(default=True)
-		config.usage.standbyLED.addNotifier(standbyLEDChanged)
+		if not "fp" in SystemInfo["StandbyLED"]:
+			config.usage.standbyLED.addNotifier(standbyLEDChanged)
+
+	if SystemInfo["PowerLED"] and "fp" in SystemInfo["PowerLED"] and not config.usage.powerLED.value or (SystemInfo["StandbyLED"] and "fp" in SystemInfo["StandbyLED"] and not config.usage.standbyLED.value):
+		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call=False)
 
 	if SystemInfo["SuspendLED"]:
 		def suspendLEDChanged(configElement):
-			open(SystemInfo["SuspendLED"], "w").write(configElement.value and "on" or "off")
+			if "fp" in SystemInfo["SuspendLED"]:
+				open(SystemInfo["SuspendLED"], "w").write(configElement.value and "1" or "0")
+			else:
+				open(SystemInfo["SuspendLED"], "w").write(configElement.value and "on" or "off")
 		config.usage.suspendLED = ConfigYesNo(default=True)
 		config.usage.suspendLED.addNotifier(suspendLEDChanged)
 
