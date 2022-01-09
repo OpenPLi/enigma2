@@ -1218,8 +1218,11 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 	{
 		ret = (int)(snr / 43.5);
 	}
-	else if (!strcmp(m_description, "GIGA DVB-S2 NIM (TS3L10)")
-		|| !strcmp(m_description, "GIGA DVB-S2 NIM (TS2L08)")) //GB IP 4K
+	else if (!strcmp(m_description, "GIGA DVB-S2X NIM (TS3L10)") // dual/single plug&play tuners GB UE/Quad UHD 4K
+		|| !strcmp(m_description, "GIGA DVB-S2X NIM (TS2L08)")
+		|| !strcmp(m_description, "GIGA DVB-S2 NIM (TS3L10)")
+		|| !strcmp(m_description, "GIGA DVB-S2 NIM (TS2L08)")
+		)
 	{
 		ret = snr;
 	}
