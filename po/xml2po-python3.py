@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 import sys
 import os
 import string
@@ -67,7 +68,7 @@ for arg in sys.argv[1:]:
 		k.replace("\\n", "\"\n\"")
 		if c:
 			for l in c.split('\n'):
-				print("#. ", l)
+				print(("#. ", l))
 		print('msgid "' + k + '"')
 		print('msgstr ""')
 

@@ -1,3 +1,4 @@
+from __future__ import print_function
 from ServiceReference import ServiceReference
 from Components.config import config
 from Screens.MessageBox import MessageBox
@@ -34,7 +35,7 @@ class FallbackTimerList():
 		return service_ref
 
 	def getUrl(self, url):
-		print "[FallbackTimer] getURL", url
+		print("[FallbackTimer] getURL", url)
 		from twisted.web.client import getPage
 		return getPage("%s/%s" % (self.url, url), headers=self.headers)
 
@@ -71,7 +72,7 @@ class FallbackTimerList():
 					description=str(timer.findtext("e2description", '').encode("utf-8", 'ignore')))
 			for timer in root.findall("e2timer")
 		]
-		print "[FallbackTimer] read %s timers from fallback tuner" % len(self.list)
+		print("[FallbackTimer] read %s timers from fallback tuner" % len(self.list))
 		self.parent.session.nav.RecordTimer.setFallbackTimerList(self.list)
 		self.fallback()
 

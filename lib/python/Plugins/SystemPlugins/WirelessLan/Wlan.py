@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Components.config import config, ConfigYesNo, NoSave, ConfigSubsection, ConfigText, ConfigSelection, ConfigPassword
 from Components.Console import Console
 from Components.Network import iNetwork
@@ -84,7 +85,7 @@ class Wlan:
 			scanresults = ifobj.scan()
 		except:
 			scanresults = None
-			print "[Wlan.py] No wireless networks could be found"
+			print("[Wlan.py] No wireless networks could be found")
 		aps = {}
 		if scanresults is not None:
 			(num_channels, frequencies) = ifobj.getChannelInfo()
@@ -162,7 +163,7 @@ class wpaSupplicant:
 		contents += "ssid=" + essid + "\n"
 		contents += "method=" + encryption + "\n"
 		contents += "key=" + psk + "\n"
-		print "content = \n" + contents
+		print("content = \n" + contents)
 
 		fd = open(getWlConfName(iface), "w")
 		fd.write(contents)
@@ -198,7 +199,7 @@ class wpaSupplicant:
 				else:
 					continue
 		except:
-			print "[Wlan.py] Error parsing ", configfile
+			print("[Wlan.py] Error parsing ", configfile)
 			wsconfig = {
 					'hiddenessid': False,
 					'ssid': "",
@@ -208,7 +209,7 @@ class wpaSupplicant:
 				}
 
 		for (k, v) in wsconf.items():
-			print "[wsconf][%s] %s" % (k, v)
+			print("[wsconf][%s] %s" % (k, v))
 
 		return wsconf
 
@@ -272,7 +273,7 @@ class wpaSupplicant:
 			configfile = '/etc/wpa_supplicant.conf'
 		try:
 			#parse the wpasupplicant configfile
-			print "[Wlan.py] parsing configfile: ", configfile
+			print("[Wlan.py] parsing configfile: ", configfile)
 			fp = file(configfile, 'r')
 			supplicant = fp.readlines()
 			fp.close()
@@ -337,7 +338,7 @@ class wpaSupplicant:
 					if key == 'key':
 						wsconfig['key'] = ""
 		except:
-			print "[Wlan.py] Error parsing ", configfile
+			print("[Wlan.py] Error parsing ", configfile)
 			wsconfig = {
 					'hiddenessid': False,
 					'ssid': "",
@@ -358,7 +359,7 @@ class Status:
 
 	def stopWlanConsole(self):
 		if self.WlanConsole is not None:
-			print "[iStatus] killing self.WlanConsole"
+			print("[iStatus] killing self.WlanConsole")
 			self.WlanConsole.killAll()
 			self.WlanConsole = None
 
@@ -445,7 +446,7 @@ class Status:
 
 		if self.WlanConsole is not None:
 			if not self.WlanConsole.appContainers:
-				print "[Wlan.py] self.wlaniface after loading:", self.wlaniface
+				print("[Wlan.py] self.wlaniface after loading:", self.wlaniface)
 				if self.statusCallback is not None:
 						self.statusCallback(True, self.wlaniface)
 						self.statusCallback = None

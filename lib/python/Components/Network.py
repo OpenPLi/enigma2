@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os
 import re
 import netifaces as ni
@@ -98,7 +99,7 @@ class Network:
 			if not iface['dhcp']:
 				fp.write("iface " + ifacename + " inet static\n")
 				if 'ip' in iface:
-					print tuple(iface['ip'])
+					print(tuple(iface['ip']))
 					fp.write("	address %d.%d.%d.%d\n" % tuple(iface['ip']))
 					fp.write("	netmask %d.%d.%d.%d\n" % tuple(iface['netmask']))
 					if 'gateway' in iface:
@@ -128,7 +129,7 @@ class Network:
 			interfaces = fp.readlines()
 			fp.close()
 		except:
-			print "[Network.py] interfaces - opening failed"
+			print("[Network.py] interfaces - opening failed")
 
 		ifaces = {}
 		currif = ""
@@ -172,13 +173,13 @@ class Network:
 			self.configuredNetworkAdapters = self.configuredInterfaces
 			# load ns only once
 			self.loadNameserverConfig()
-			print "read configured interface:", ifaces
+			print("read configured interface:", ifaces)
 			# remove any password before info is printed to the debug log
 			safe_ifaces = self.ifaces.copy()
 			for intf in safe_ifaces:
 				if 'preup' in safe_ifaces[intf] and safe_ifaces[intf]['preup'] is not False:
 					safe_ifaces[intf]['preup'] = re.sub(' -k "\S*" ', ' -k ********* ', safe_ifaces[intf]['preup'])
-			print "self.ifaces after loading:", safe_ifaces
+			print("self.ifaces after loading:", safe_ifaces)
 			self.config_ready = True
 			self.msgPlugins()
 			if callback is not None:
@@ -196,7 +197,7 @@ class Network:
 			fp.close()
 			self.nameservers = []
 		except:
-			print "[Network.py] resolv.conf - opening failed"
+			print("[Network.py] resolv.conf - opening failed")
 
 		for line in resolv:
 			if self.regExpMatch(nameserverPattern, line) is not None:
@@ -204,7 +205,7 @@ class Network:
 				if ip:
 					self.nameservers.append(self.convertIP(ip))
 
-		print "nameservers:", self.nameservers
+		print("nameservers:", self.nameservers)
 
 	def getInstalledAdapters(self):
 		return [x for x in os.listdir('/sys/class/net') if not self.isBlacklisted(x)]
@@ -296,7 +297,7 @@ class Network:
 		return self.ifaces.get(iface, {}).get(attribute)
 
 	def setAdapterAttribute(self, iface, attribute, value):
-		print "setting for adapter", iface, "attribute", attribute, " to value", value
+		print("setting for adapter", iface, "attribute", attribute, " to value", value)
 		if iface in self.ifaces:
 			self.ifaces[iface][attribute] = value
 
@@ -594,7 +595,7 @@ class Network:
 		cidr_range = range(0, 32)
 		cidr = long(nmask)
 		if cidr not in cidr_range:
-			print 'cidr invalid: %d' % cidr
+			print('cidr invalid: %d' % cidr)
 			return None
 		else:
 			nm = ((1L << cidr) - 1) << (32 - cidr)
@@ -612,10 +613,10 @@ class Network:
 			return
 		action = event['ACTION']
 		if action == "add":
-			print "[Network] Add new interface:", interface
+			print("[Network] Add new interface:", interface)
 			self.getAddrInet(interface, None)
 		elif action == "remove":
-			print "[Network] Removed interface:", interface
+			print("[Network] Removed interface:", interface)
 			try:
 				del self.ifaces[interface]
 			except KeyError:

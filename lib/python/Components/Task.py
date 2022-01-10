@@ -1,3 +1,4 @@
+from __future__ import print_function
 # A Job consists of many "Tasks".
 # A task is the run of an external tool, with proper methods for failure handling
 
@@ -70,7 +71,7 @@ class Job(object):
 				self.callback(self, None, [])
 				self.callback = None
 			else:
-				print "still waiting for %d resident task(s) %s to finish" % (len(self.resident_tasks), str(self.resident_tasks))
+				print("still waiting for %d resident task(s) %s to finish" % (len(self.resident_tasks), str(self.resident_tasks)))
 		else:
 			self.tasks[self.current_task].run(self.taskCallback)
 			self.state_changed()
@@ -80,18 +81,18 @@ class Job(object):
 		if stay_resident:
 			if cb_idx not in self.resident_tasks:
 				self.resident_tasks.append(self.current_task)
-				print "task going resident:", task
+				print("task going resident:", task)
 			else:
-				print "task keeps staying resident:", task
+				print("task keeps staying resident:", task)
 				return
 		if len(res):
-			print ">>> Error:", res
+			print(">>> Error:", res)
 			self.status = self.FAILED
 			self.state_changed()
 			self.callback(self, task, res)
 		if cb_idx != self.current_task:
 			if cb_idx in self.resident_tasks:
-				print "resident task finished:", task
+				print("resident task finished:", task)
 				self.resident_tasks.remove(cb_idx)
 		if not res:
 			self.state_changed()
@@ -172,18 +173,18 @@ class Task(object):
 		if self.cwd is not None:
 			self.container.setCWD(self.cwd)
 		if not self.cmd and self.cmdline:
-			print "execute:", self.container.execute(self.cmdline), self.cmdline
+			print("execute:", self.container.execute(self.cmdline), self.cmdline)
 		else:
 			assert self.cmd is not None
 			assert len(self.args) >= 1
-			print "execute:", self.container.execute(self.cmd, *self.args), ' '.join(self.args)
+			print("execute:", self.container.execute(self.cmd, *self.args), ' '.join(self.args))
 		if self.initial_input:
 			self.writeInput(self.initial_input)
 
 	def run(self, callback):
 		failed_preconditions = self.checkPreconditions(True) + self.checkPreconditions(False)
 		if failed_preconditions:
-			print "[Task] preconditions failed"
+			print("[Task] preconditions failed")
 			callback(self, failed_preconditions)
 			return
 		self.callback = callback
@@ -191,7 +192,7 @@ class Task(object):
 			self.prepare()
 			self._run()
 		except Exception as ex:
-			print "[Task] exception:", ex
+			print("[Task] exception:", ex)
 			self.postconditions = [FailedPostcondition(ex)]
 			self.finish()
 
@@ -217,7 +218,7 @@ class Task(object):
 			self.output_line = self.output_line[i + 1:]
 
 	def processOutputLine(self, line):
-		print "[Task %s]" % self.name, line[:-1]
+		print("[Task %s]" % self.name, line[:-1])
 		pass
 
 	def processFinished(self, returncode):
@@ -271,7 +272,7 @@ class LoggingTask(Task):
 		self.log = []
 
 	def processOutput(self, data):
-		print "[%s]" % self.name, data,
+		print("[%s]" % self.name, data, end=' ')
 		self.log.append(data)
 
 
@@ -390,7 +391,7 @@ class JobManager:
 			return False
 
 	def jobDone(self, job, task, problems):
-		print "job", job, "completed with", problems, "in", task
+		print("job", job, "completed with", problems, "in", task)
 		if problems:
 			if not job.onFail(job, task, problems):
 				self.errorCB(False)
@@ -410,10 +411,10 @@ class JobManager:
 
 	def errorCB(self, answer):
 		if answer:
-			print "retrying job"
+			print("retrying job")
 			self.active_job.retry()
 		else:
-			print "not retrying job."
+			print("not retrying job.")
 			self.failed_jobs.append(self.active_job)
 			self.active_job = None
 			self.kick()
@@ -496,7 +497,7 @@ class ToolExistsPrecondition(Condition):
 		import os
 		if task.cmd[0] == '/':
 			self.realpath = task.cmd
-			print "[Task.py][ToolExistsPrecondition] WARNING: usage of absolute paths for tasks should be avoided!"
+			print("[Task.py][ToolExistsPrecondition] WARNING: usage of absolute paths for tasks should be avoided!")
 			return os.access(self.realpath, os.X_OK)
 		else:
 			self.realpath = task.cmd

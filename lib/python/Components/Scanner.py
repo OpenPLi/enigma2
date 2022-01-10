@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Plugins.Plugin import PluginDescriptor
 from Components.PluginComponent import plugins
 
@@ -140,7 +141,7 @@ class ScanFile:
 
 
 def execute(option):
-	print "execute", option
+	print("execute", option)
 	if option is None:
 		return
 
@@ -157,7 +158,7 @@ def scanDevice(mountpoint):
 			l = [l]
 		scanner += l
 
-	print "scanner:", scanner
+	print("scanner:", scanner)
 
 	res = {}
 
@@ -215,7 +216,7 @@ def openList(session, files):
 		else:
 			scanner += l
 
-	print "scanner:", scanner
+	print("scanner:", scanner)
 
 	res = {}
 

@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
 from Components.FileList import FileList
@@ -81,7 +82,7 @@ class MediaPlayerSettings(Screen, ConfigListScreen):
 		}, -2)
 
 	def initConfigList(self, element=None):
-		print "[initConfigList]", element
+		print("[initConfigList]", element)
 		try:
 			self.list = []
 			self.list.append(getConfigListEntry(_("Repeat playlist"), config.mediaplayer.repeat))
@@ -94,7 +95,7 @@ class MediaPlayerSettings(Screen, ConfigListScreen):
 			self.list.append(getConfigListEntry(_("Show media player on main menu"), config.mediaplayer.onMainMenu))
 			self["config"].setList(self.list)
 		except KeyError:
-			print "keyError"
+			print("keyError")
 
 	def ok(self):
 		if self["config"].getCurrent()[1] == config.mediaplayer.defaultDir:
@@ -103,6 +104,6 @@ class MediaPlayerSettings(Screen, ConfigListScreen):
 			self.keySave()
 
 	def DirectoryBrowserClosed(self, path):
-		print "PathBrowserClosed:" + str(path)
+		print("PathBrowserClosed:" + str(path))
 		if path != False:
 			config.mediaplayer.defaultDir.setValue(path)
