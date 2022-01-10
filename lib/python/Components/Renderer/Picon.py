@@ -116,6 +116,7 @@ class Picon(Renderer):
 		self.PicLoad.PictureData.get().append(self.updatePicon)
 		self.piconsize = (0,0)
 		self.pngname = ""
+		self.service_text = ""
 		self.lastPath = None
 		pngname = findPicon("picon_default")
 		self.defaultpngname = None
@@ -167,12 +168,15 @@ class Picon(Renderer):
 			if self.showPicon or config.usage.show_picon_in_display.value:
 				pngname = ""
 				if what[0] in (self.CHANGED_ALL, self.CHANGED_SPECIFIC):
+					if self.usePicLoad and self.source.text and self.service_text and self.source.text == self.service_text:
+						return
+					self.service_text = self.source.text
 					pngname = getPiconName(self.source.text)
 				else:
 					if what[0] == self.CHANGED_CLEAR:
-						self.pngname = ""
+						self.service_text = self.pngname = ""
 						if self.visible:
-					     		self.instance.hide()
+							self.instance.hide()
 					return
 				if not pngname: # no picon for service found
 					pngname = self.defaultpngname
