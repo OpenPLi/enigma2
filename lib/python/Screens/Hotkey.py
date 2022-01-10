@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Components.ActionMap import ActionMap, HelpableActionMap, NumberActionMap
 from Components.Sources.StaticText import StaticText
 from Components.ChoiceList import ChoiceList, ChoiceEntryComponent
@@ -659,7 +660,7 @@ class InfoBarHotkey():
 					exec "from %s import %s" % (selected[1], selected[2])
 					exec "self.session.open(%s)" % ",".join(selected[2:])
 				except Exception as e:
-					print "[Hotkey] error during executing module %s, screen %s, %s" % (selected[1], selected[2], e)
+					print("[Hotkey] error during executing module %s, screen %s, %s" % (selected[1], selected[2], e))
 					import traceback
 					traceback.print_exc()
 			elif selected[0] == "SoftcamSetup" and SystemInfo["HasSoftcamInstalled"]:

@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.Language import language
@@ -66,7 +67,7 @@ class LanguageSelection(Screen):
 		self.close()
 
 	def run(self):
-		print "updating language..."
+		print("updating language...")
 		lang = self["languages"].getCurrent()[0]
 		if lang != config.osd.language.value:
 			config.osd.language.value = lang
@@ -74,7 +75,7 @@ class LanguageSelection(Screen):
 		return lang
 
 	def commit(self, lang):
-		print "commit language"
+		print("commit language")
 		language.activateLanguage(lang)
 		config.misc.languageselected.value = 0
 		config.misc.languageselected.save()

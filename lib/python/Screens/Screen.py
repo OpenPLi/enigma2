@@ -1,3 +1,4 @@
+from __future__ import print_function
 from enigma import eRCInput, eTimer, eWindow  # , getDesktop
 
 from skin import GUI_SKIN_ID, applyAllAttributes

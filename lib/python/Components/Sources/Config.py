@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Source import Source
 
 
@@ -12,9 +13,9 @@ class Config(Source):
 	config = property(getConfig)
 
 	def getHTML(self, id):
-		print "getHTML", self, id
+		print("getHTML", self, id)
 		return self.__config.getHTML(id)
 
 	def handleCommand(self, cmd):
-		print "ASSIGN:", cmd
+		print("ASSIGN:", cmd)
 		self.__config.unsafeAssign(cmd)

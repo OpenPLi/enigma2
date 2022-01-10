@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Plugins.Plugin import PluginDescriptor
 from Components.ConfigList import ConfigListScreen
 from Components.config import getConfigListEntry, config, ConfigNothing
@@ -311,7 +312,7 @@ class VideoEnhancementPreview(ConfigListScreen, Screen):
 			else:
 				self.isStepSlider = False
 		except AttributeError:
-			print "[VideoEnhancement] no max value"
+			print("[VideoEnhancement] no max value")
 
 	def keyLeft(self):
 		if self.isStepSlider is True:
