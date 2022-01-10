@@ -102,7 +102,7 @@ class ImportChannels():
 					print "[Import Channels] Downloading %s" % file
 					try:
 						open(os.path.join(self.tmp_dir, os.path.basename(file)), "wb").write(self.getUrl("%s/file?file=%s" % (self.url, quote(file))).read())
-					except Exception, e:
+					except Exception as e:
 						print "[Import Channels] Exception: %s" % str(e)
 						self.ImportChannelsDone(False, _("ERROR downloading file %s") % file)
 						return

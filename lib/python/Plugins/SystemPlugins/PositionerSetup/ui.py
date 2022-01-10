@@ -1354,7 +1354,7 @@ class PositionerSetupLog(Screen):
 			f.write(log.getvalue())
 			f.close()
 			self.session.open(MessageBox, _("Write to /tmp/positionersetup.log"), MessageBox.TYPE_INFO, timeout=5)
-		except Exception, e:
+		except Exception as e:
 			self["list"].setText(_("Failed to write /tmp/positionersetup.log: ") + str(e))
 		self.close(True)
 

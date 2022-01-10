@@ -122,7 +122,7 @@ def purge(cleanset, ctimeLimit, reserveBytes):
 					else:
 						candidates.append((st.st_ctime, fn, st.st_size))
 						size += st.st_size
-				except Exception, e:
+				except Exception as e:
 					print "[Trashcan] Failed to stat %s:" % name, e
 			# Remove empty directories if possible
 			for name in dirs:
@@ -151,7 +151,7 @@ def cleanAll(trash):
 			fn = os.path.join(root, name)
 			try:
 				enigma.eBackgroundFileEraser.getInstance().erase(fn)
-			except Exception, e:
+			except Exception as e:
 				print "[Trashcan] Failed to erase %s:" % name, e
 		# Remove empty directories if possible
 		for name in dirs:
