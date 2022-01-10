@@ -129,7 +129,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 					else:
 						message = _("The current image might not be stable.\nFor more information see %s.") % ("https://forums.openpli.org")
 
-			except Exception, e:
+			except Exception as e:
 				print "[SoftwareUpdate] status error: ", str(e)
 				message = _("The current image might not be stable.\nFor more information see %s.") % ("https://forums.openpli.org")
 
