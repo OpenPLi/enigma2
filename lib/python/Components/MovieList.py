@@ -1,3 +1,4 @@
+from __future__ import print_function
 from GUIComponent import GUIComponent
 from Tools.FuzzyDate import FuzzyTime
 from ServiceReference import ServiceReference
@@ -266,7 +267,7 @@ class MovieList(GUIComponent):
 
 	def applySkin(self, desktop, parent):
 		def warningWrongSkinParameter(string):
-			print "[MovieList] wrong '%s' skin parameters" % string
+			print("[MovieList] wrong '%s' skin parameters" % string)
 
 		def fontName(value):
 			self.fontName = value
@@ -639,7 +640,7 @@ class MovieList(GUIComponent):
 
 		reflist = root and serviceHandler.list(root)
 		if reflist is None:
-			print "listing of movies failed"
+			print("listing of movies failed")
 			return
 		realtags = set()
 		autotags = {}
@@ -693,7 +694,7 @@ class MovieList(GUIComponent):
 			if filter_tags is not None:
 				this_tags = set(this_tags)
 				if not this_tags.issuperset(filter_tags):
-					print "Skipping", name, "tags=", this_tags, " filter=", filter_tags
+					print("Skipping", name, "tags=", this_tags, " filter=", filter_tags)
 					continue
 
 			self.list.append((serviceref, info, begin, -1))
