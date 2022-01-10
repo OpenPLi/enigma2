@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 from Converter import Converter
 from Components.Element import cached
 from Components.config import config
@@ -41,7 +42,7 @@ class RotorPosition(Converter):
 			elif value == "all":
 				all_text = ""
 				for x in nimmanager.nim_slots:
-					print x.slot
+					print(x.slot)
 					nim_text = nimmanager.rotorLastPositionForNim(x.slot, number=False)
 					if nim_text != _("rotor is not used"):
 						if nim_text == _("undefined"):

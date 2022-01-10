@@ -1,3 +1,4 @@
+from __future__ import print_function
 from config import config, ConfigSlider, ConfigSelection, ConfigYesNo, ConfigEnableDisable, ConfigSubsection, ConfigBoolean, ConfigSelectionNumber, ConfigNothing, NoSave
 from enigma import eAVSwitch, eDVBVolumecontrol, getDesktop
 from SystemInfo import SystemInfo
@@ -205,11 +206,11 @@ def InitAVSwitch():
 		def setScaler_sharpness(config):
 			myval = int(config.value)
 			try:
-				print "--> setting scaler_sharpness to: %0.8X" % myval
+				print("--> setting scaler_sharpness to: %0.8X" % myval)
 				open("/proc/stb/vmpeg/0/pep_scaler_sharpness", "w").write("%0.8X" % myval)
 				open("/proc/stb/vmpeg/0/pep_apply", "w").write("1")
 			except IOError:
-				print "couldn't write pep_scaler_sharpness"
+				print("couldn't write pep_scaler_sharpness")
 
 		config.av.scaler_sharpness = ConfigSlider(default=13, limits=(0, 26))
 		config.av.scaler_sharpness.addNotifier(setScaler_sharpness)

@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Components.ServicePosition import ServicePositionGauge
@@ -197,7 +198,7 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 		cue = service and service.cueSheet()
 		if cue is not None:
 			# disable cutlists. we want to freely browse around in the movie
-			print "[CutListEditor] cut lists disabled!"
+			print("[CutListEditor] cut lists disabled!")
 			cue.setCutListEnable(0)
 
 		self.downloadCuesheet()
@@ -291,17 +292,17 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 		if not self.inhibit_seek:
 			where = self["cutlist"].getCurrent()
 			if where is None:
-				print "[CutListEditor] no selection"
+				print("[CutListEditor] no selection")
 				return
 			pts = where[0][0]
 			seek = self.getSeek()
 			if seek is None:
-				print "[CutListEditor] no seek"
+				print("[CutListEditor] no seek")
 				return
 			seek.seekTo(pts)
 
 	def refillList(self):
-		print "[CutListEditor] cue sheet changed, refilling"
+		print("[CutListEditor] cue sheet changed, refilling")
 		self.downloadCuesheet()
 
 		# get the first changed entry, counted from the end, and select it
@@ -343,13 +344,13 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 
 		cur_state = self.getStateForPosition(curpos)
 		if cur_state == 0:
-			print "[CutListEditor] currently in 'IN'"
+			print("[CutListEditor] currently in 'IN'")
 			if self.cut_start is None or self.context_position < self.cut_start:
 				state = CutListContextMenu.SHOW_STARTCUT
 			else:
 				state = CutListContextMenu.SHOW_ENDCUT
 		else:
-			print "[CutListEditor] currently in 'OUT'"
+			print("[CutListEditor] currently in 'OUT'")
 			state = CutListContextMenu.SHOW_DELETECUT
 
 		if self.context_nearest_mark is None:
@@ -440,7 +441,7 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 				try:
 					MovieCut(session=self.session, service=self.cut_service)
 				except:
-					print "[CutListEditor] calling MovieCut failed"
+					print("[CutListEditor] calling MovieCut failed")
 			self.exit()
 
 	# we modify the "play" behavior a bit:

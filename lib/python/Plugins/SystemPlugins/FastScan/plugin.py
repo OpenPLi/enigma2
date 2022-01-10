@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 from Plugins.Plugin import PluginDescriptor
 
 from Screens.Screen import Screen
@@ -280,7 +281,7 @@ class FastScanScreen(ConfigListScreen, Screen):
 class FastScanAutoScreen(FastScanScreen):
 
 	def __init__(self, session, lastConfiguration):
-		print "[AutoFastScan] start %s" % lastConfiguration[1]
+		print("[AutoFastScan] start %s" % lastConfiguration[1])
 		Screen.__init__(self, session)
 		self.skinName = "Standby"
 
@@ -311,14 +312,14 @@ class FastScanAutoScreen(FastScanScreen):
 			del self.scan
 
 	def scanCompleted(self, result):
-		print "[AutoFastScan] completed result = ", result
+		print("[AutoFastScan] completed result = ", result)
 		refreshServiceList()
 		self.close(result)
 
 	def Power(self):
 		from Screens.Standby import inStandby
 		inStandby.Power()
-		print "[AutoFastScan] aborted due to power button pressed"
+		print("[AutoFastScan] aborted due to power button pressed")
 		self.close(True)
 
 	def createSummary(self):
@@ -340,7 +341,7 @@ autoproviders = []
 
 def restartScanAutoStartTimer(reply=False):
 	if not reply:
-		print "[AutoFastScan] Scan was not succesfully retry in one hour"
+		print("[AutoFastScan] Scan was not succesfully retry in one hour")
 		FastScanAutoStartTimer.startLongTimer(3600)
 	elif reply is not True:
 		global autoproviders
