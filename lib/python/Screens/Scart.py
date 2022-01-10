@@ -1,6 +1,6 @@
 from __future__ import print_function
 from Screens.Screen import Screen
-from MessageBox import MessageBox
+from Screens.MessageBox import MessageBox
 from Components.AVSwitch import AVSwitch
 from Tools import Notifications
 
