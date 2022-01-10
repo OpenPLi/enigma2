@@ -1,5 +1,5 @@
 from __future__ import print_function
-from GUIComponent import GUIComponent
+from Components.GUIComponent import GUIComponent
 from skin import parseColor, parseFont, parseScale
 
 from enigma import eListboxServiceContent, eListbox, eServiceCenter, eServiceReference, gFont, eRect
