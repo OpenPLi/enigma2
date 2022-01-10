@@ -1,4 +1,4 @@
-from Wizard import wizardManager
+from Screens.Wizard import wizardManager
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.WizardLanguage import WizardLanguage
@@ -14,7 +14,7 @@ from Components.ProgressBar import ProgressBar
 from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
 from Components.config import config, ConfigBoolean, configfile
-from LanguageSelection import LanguageWizard
+from Screens.LanguageSelection import LanguageWizard
 from enigma import eConsoleAppContainer, eTimer, eActionMap
 
 import os
