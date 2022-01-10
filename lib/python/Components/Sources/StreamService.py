@@ -1,5 +1,5 @@
 from __future__ import print_function
-from Source import Source
+from Components.Sources.Source import Source
 from Components.Element import cached
 from Components.SystemInfo import SystemInfo
 from enigma import eServiceReference
