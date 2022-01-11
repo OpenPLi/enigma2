@@ -45,7 +45,7 @@ class ConsoleItem:
 		callback = self.callback
 		if callback is not None:
 			data = b''.join(self.appResults)
-			callback(data, retval, self.extra_args)
+			callback(data.decode(), retval, self.extra_args)
 
 
 class Console(object):
