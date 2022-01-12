@@ -344,7 +344,7 @@ class ConfigSelection(ConfigElement):
 			self.value = default
 
 	def setValue(self, value):
-		if str(value) in map(str, self.choices):
+		if str(value) in list(map(str, self.choices)):
 			self._value = self.choices[self.choices.index(value)]
 		else:
 			self._value = self.default
