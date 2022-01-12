@@ -808,8 +808,8 @@ def createTimer(xml):
 	begin = int(xml.get("begin"))
 	end = int(xml.get("end"))
 	serviceref = ServiceReference(xml.get("serviceref"))
-	description = xml.get("description").encode("utf-8")
-	repeated = xml.get("repeated").encode("utf-8")
+	description = xml.get("description")
+	repeated = xml.get("repeated")
 	rename_repeat = int(xml.get("rename_repeat") or "1")
 	disabled = int(xml.get("disabled") or "0")
 	justplay = int(xml.get("justplay") or "0")
@@ -830,25 +830,23 @@ def createTimer(xml):
 	else:
 		eit = None
 	location = xml.get("location")
-	if location and location != "None":
-		location = location.encode("utf-8")
-	else:
+	if location == "None":
 		location = None
 	tags = xml.get("tags")
 	if tags and tags != "None":
-		tags = tags.encode("utf-8").split(' ')
+		tags = tags.split(' ')
 	else:
 		tags = None
 	descramble = int(xml.get("descramble") or "1")
 	record_ecm = int(xml.get("record_ecm") or "0")
 
-	name = xml.get("name").encode("utf-8")
-	#filename = xml.get("filename").encode("utf-8")
+	name = xml.get("name")
+	#filename = xml.get("filename")
 	entry = RecordTimerEntry(serviceref, begin, end, name, description, eit, disabled, justplay, afterevent, dirname=location, tags=tags, descramble=descramble, record_ecm=record_ecm, always_zap=always_zap, zap_wakeup=zap_wakeup, rename_repeat=rename_repeat, conflict_detection=conflict_detection, pipzap=pipzap)
 	entry.repeated = int(repeated)
 	flags = xml.get("flags")
 	if flags:
-		entry.flags = set(flags.encode("utf-8").split(' '))
+		entry.flags = set(flags.split(' '))
 
 	for l in xml.findall("log"):
 		time = int(l.get("time"))
