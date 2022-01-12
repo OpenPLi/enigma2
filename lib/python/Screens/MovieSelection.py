@@ -2072,7 +2072,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		Tools.Trashcan.cleanAll(cur_path)
 
 	def showNetworkSetup(self):
-		import NetworkSetup
+		from Screens import NetworkSetup
 		self.session.open(NetworkSetup.NetworkAdapterSelection)
 
 	def showActionFeedback(self, text):
