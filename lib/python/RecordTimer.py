@@ -807,7 +807,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 def createTimer(xml):
 	begin = int(xml.get("begin"))
 	end = int(xml.get("end"))
-	serviceref = ServiceReference(xml.get("serviceref").encode("utf-8"))
+	serviceref = ServiceReference(xml.get("serviceref"))
 	description = xml.get("description").encode("utf-8")
 	repeated = xml.get("repeated").encode("utf-8")
 	rename_repeat = long(xml.get("rename_repeat") or "1")
