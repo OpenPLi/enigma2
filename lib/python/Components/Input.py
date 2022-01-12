@@ -237,7 +237,7 @@ class Input(VariableText, GUIComponent, NumericalTextInput):
 		if self.allmarked:
 			self.deleteAllChars()
 			self.allmarked = False
-		self.insertChar(unichr(code), self.currPos, False, False)
+		self.insertChar(chr(code), self.currPos, False, False)
 		self.innerright()
 		self.update()
 

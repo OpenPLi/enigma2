@@ -1154,7 +1154,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 
 	def keyGotAscii(self):
 		self.smsChar = None
-		if self.selectAsciiKey(str(unichr(getPrevAsciiCode()))):
+		if self.selectAsciiKey(str(chr(getPrevAsciiCode()))):
 			self.processSelect()
 
 	def selectAsciiKey(self, char):
