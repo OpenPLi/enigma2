@@ -91,7 +91,7 @@ class PositionerSetup(Screen):
 			self.advancedsats = self.advancedconfig.sat
 		else:
 			self.advanced = False
-		self.availablesats = map(lambda x: x[0], nimmanager.getRotorSatListForNim(self.feid))
+		self.availablesats = list(map(lambda x: x[0], nimmanager.getRotorSatListForNim(self.feid)))
 
 		cur = {}
 		if not self.openFrontend():
@@ -1051,8 +1051,8 @@ class PositionerSetup(Screen):
 
 		def optimise(readings):
 			xi = readings.keys()
-			yi = map(lambda (x, y): x, readings.values())
-			x0 = sum(map(mul, xi, yi)) / sum(yi)
+			yi = list(map(lambda (x, y): x, readings.values()))
+			x0 = sum(list(map(mul, xi, yi))) / sum(yi)
 			xm = xi[yi.index(max(yi))]
 			return (x0, xm)
 
@@ -1186,8 +1186,8 @@ class PositionerSetup(Screen):
 
 		def optimise(readings):
 			xi = readings.keys()
-			yi = map(lambda (x, y): x, readings.values())
-			x0 = int(round(sum(map(mul, xi, yi)) / sum(yi)))
+			yi = list(map(lambda (x, y): x, readings.values()))
+			x0 = int(round(sum(list(map(mul, xi, yi))) / sum(yi)))
 			xm = xi[yi.index(max(yi))]
 			return (x0, xm)
 
