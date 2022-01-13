@@ -144,20 +144,20 @@ class Network:
 					ifaces[currif]["dhcp"] = False
 			if currif == iface: #read information only for available interfaces
 				if split[0] == "address":
-					ifaces[currif]["address"] = map(int, split[1].split('.'))
+					ifaces[currif]["address"] = list(map(int, split[1].split('.')))
 					if "ip" in self.ifaces[currif]:
 						if self.ifaces[currif]["ip"] != ifaces[currif]["address"] and ifaces[currif]["dhcp"] == False:
-							self.ifaces[currif]["ip"] = map(int, split[1].split('.'))
+							self.ifaces[currif]["ip"] = list(map(int, split[1].split('.')))
 				if split[0] == "netmask":
-					ifaces[currif]["netmask"] = map(int, split[1].split('.'))
+					ifaces[currif]["netmask"] = list(map(int, split[1].split('.')))
 					if "netmask" in self.ifaces[currif]:
 						if self.ifaces[currif]["netmask"] != ifaces[currif]["netmask"] and ifaces[currif]["dhcp"] == False:
-							self.ifaces[currif]["netmask"] = map(int, split[1].split('.'))
+							self.ifaces[currif]["netmask"] = list(map(int, split[1].split('.')))
 				if split[0] == "gateway":
-					ifaces[currif]["gateway"] = map(int, split[1].split('.'))
+					ifaces[currif]["gateway"] = list(map(int, split[1].split('.')))
 					if "gateway" in self.ifaces[currif]:
 						if self.ifaces[currif]["gateway"] != ifaces[currif]["gateway"] and ifaces[currif]["dhcp"] == False:
-							self.ifaces[currif]["gateway"] = map(int, split[1].split('.'))
+							self.ifaces[currif]["gateway"] = list(map(int, split[1].split('.')))
 				if split[0] == "pre-up":
 					if "preup" in self.ifaces[currif]:
 						self.ifaces[currif]["preup"] = i

@@ -423,7 +423,7 @@ class EPGList(GUIComponent):
 			self.tw = parseScale(value)
 
 		def setColWidths(value):
-			self.col = map(int, value.split(','))
+			self.col = list(map(int, value.split(',')))
 			if len(self.col) == 2:
 				self.skinColumns = True
 			else:
