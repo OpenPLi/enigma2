@@ -59,14 +59,14 @@ class SoftwareTools(PackageInfoHandler):
 		if self.lastDownloadDate is None:
 				if self.NetworkConnectionAvailable == True:
 					self.lastDownloadDate = time()
-					if self.list_updating is False and callback is None:
+					if not self.list_updating and callback is None:
 						self.list_updating = True
 						self.opkg.startCmd(OpkgComponent.CMD_UPDATE)
-					elif self.list_updating is False and callback is not None:
+					elif not self.list_updating and callback is not None:
 						self.list_updating = True
 						self.NotifierCallback = callback
 						self.opkg.startCmd(OpkgComponent.CMD_UPDATE)
-					elif self.list_updating is True and callback is not None:
+					elif self.list_updating and callback is not None:
 						self.NotifierCallback = callback
 				else:
 					self.list_updating = False
@@ -77,14 +77,14 @@ class SoftwareTools(PackageInfoHandler):
 		else:
 			if self.NetworkConnectionAvailable == True:
 				self.lastDownloadDate = time()
-				if self.list_updating is False and callback is None:
+				if not self.list_updating and callback is None:
 					self.list_updating = True
 					self.opkg.startCmd(OpkgComponent.CMD_UPDATE)
-				elif self.list_updating is False and callback is not None:
+				elif not self.list_updating and callback is not None:
 					self.list_updating = True
 					self.NotifierCallback = callback
 					self.opkg.startCmd(OpkgComponent.CMD_UPDATE)
-				elif self.list_updating is True and callback is not None:
+				elif self.list_updating and callback is not None:
 					self.NotifierCallback = callback
 			else:
 				if self.list_updating and callback is not None:

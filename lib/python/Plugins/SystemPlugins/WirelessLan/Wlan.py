@@ -71,8 +71,8 @@ class Wlan:
 	def getNetworkList(self):
 		if self.oldInterfaceState is None:
 			self.oldInterfaceState = iNetwork.getAdapterAttribute(self.iface, "up")
-		if self.oldInterfaceState is False:
-			if iNetwork.getAdapterAttribute(self.iface, "up") is False:
+		if not self.oldInterfaceState:
+			if not iNetwork.getAdapterAttribute(self.iface, "up"):
 				iNetwork.setAdapterAttribute(self.iface, "up", True)
 				enigma.eConsoleAppContainer().execute("ifconfig %s up" % self.iface)
 				if existBcmWifi(self.iface):
@@ -141,7 +141,7 @@ class Wlan:
 
 	def stopGetNetworkList(self):
 		if self.oldInterfaceState is not None:
-			if self.oldInterfaceState is False:
+			if not self.oldInterfaceState:
 				iNetwork.setAdapterAttribute(self.iface, "up", False)
 				enigma.eConsoleAppContainer().execute("ifconfig %s down" % self.iface)
 				if existBcmWifi(self.iface):
