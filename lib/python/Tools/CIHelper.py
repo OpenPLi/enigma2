@@ -38,7 +38,7 @@ class CIHelper:
 					usingcaid = []
 					for slot in tree.findall("slot"):
 						read_slot = getValue(slot.findall("id"), False).encode("UTF-8")
-						if read_slot is not False and self.CI_ASSIGNMENT_SERVICES_LIST is None:
+						if read_slot and self.CI_ASSIGNMENT_SERVICES_LIST is None:
 							self.CI_ASSIGNMENT_SERVICES_LIST = {}
 
 						for caid in slot.findall("caid"):
@@ -48,21 +48,21 @@ class CIHelper:
 						for service in slot.findall("service"):
 							read_service_ref = service.get("ref").encode("UTF-8")
 							read_services.append(read_service_ref)
-							if read_slot is not False and not self.CI_ASSIGNMENT_SERVICES_LIST.get(read_service_ref, False):
+							if read_slot and not self.CI_ASSIGNMENT_SERVICES_LIST.get(read_service_ref, False):
 								self.CI_ASSIGNMENT_SERVICES_LIST[read_service_ref] = read_slot
 
 						for provider in slot.findall("provider"):
 							read_provider_name = provider.get("name").encode("UTF-8")
 							read_provider_dvbname = provider.get("dvbnamespace").encode("UTF-8")
 							read_providers.append((read_provider_name, int(read_provider_dvbname, 16)))
-							if read_slot is not False:
+							if read_slot:
 								provider_services_refs = self.getProivderServices([read_provider_name])
 								if provider_services_refs:
 									for ref in provider_services_refs:
 										if not self.CI_ASSIGNMENT_SERVICES_LIST.get(ref, False):
 											self.CI_ASSIGNMENT_SERVICES_LIST[ref] = read_slot
 
-						if read_slot is not False:
+						if read_slot:
 							self.CI_ASSIGNMENT_LIST.append((int(read_slot), (read_services, read_providers, usingcaid)))
 				except:
 					print("[CI_ASSIGNMENT %d] ERROR parsing xml..." % ci)

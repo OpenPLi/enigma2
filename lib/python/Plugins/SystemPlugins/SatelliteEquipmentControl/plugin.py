@@ -64,7 +64,7 @@ class SecParameterSetup(ConfigListScreen, Screen):
 
 def SecSetupMain(session, **kwargs):
 	def confirmed(answer):
-		if answer is True:
+		if answer:
 			session.open(SecParameterSetup)
 	session.openWithCallback(confirmed, MessageBox, _("Please do not change any values unless you know what you are doing!"), MessageBox.TYPE_INFO)
 
