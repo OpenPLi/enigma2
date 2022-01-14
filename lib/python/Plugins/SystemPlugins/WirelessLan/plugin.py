@@ -105,7 +105,7 @@ class WlanStatus(Screen):
 
 	def getInfoCB(self, data, status):
 		if data is not None:
-			if data is True:
+			if data:
 				if status is not None:
 					if status[self.iface]["essid"] == "off":
 						essid = _("No Connection")
@@ -165,7 +165,7 @@ class WlanStatus(Screen):
 
 	def updateStatusLink(self, status):
 		if status is not None:
-			if status[self.iface]["essid"] == "off" or status[self.iface]["accesspoint"] == "Not-Associated" or status[self.iface]["accesspoint"] == False:
+			if status[self.iface]["essid"] == "off" or status[self.iface]["accesspoint"] == "Not-Associated" or not status[self.iface]["accesspoint"]:
 				self["statuspic"].setPixmapNum(1)
 			else:
 				self["statuspic"].setPixmapNum(0)
@@ -333,7 +333,7 @@ class WlanScan(Screen):
 		for entry in self.cleanList:
 			self.APList.append(self.buildEntryComponent(entry[0], entry[1], entry[2], entry[3], entry[4], entry[5]))
 
-		if refresh is False:
+		if not refresh:
 			self['list'].setList(self.APList)
 		self.listLength = len(self.APList)
 		self.setInfo()

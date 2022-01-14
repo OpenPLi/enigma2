@@ -850,7 +850,7 @@ class TimelineText(GUIComponent):
 				line = time_lines[x]
 				old_pos = line.position
 				line.setPosition(xpos + eventLeft, old_pos[1])
-				line.visible = config.misc.graph_mepg.show_timelines.value is "all"
+				line.visible = config.misc.graph_mepg.show_timelines.value == "all"
 				xpos += incWidth
 			for x in range(num_lines, MAX_TIMELINES):
 				time_lines[x].visible = False
