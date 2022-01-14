@@ -104,7 +104,7 @@ class PluginComponent:
 			self.removePlugin(p)
 
 		for p in plugins_added:
-			if self.firstRun or p.needsRestart is False:
+			if self.firstRun or not p.needsRestart:
 				self.addPlugin(p)
 			else:
 				for installed_plugin in self.installedPluginList:

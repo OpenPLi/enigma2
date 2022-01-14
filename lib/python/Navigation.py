@@ -88,7 +88,7 @@ class Navigation:
 		session = None
 		startPlayingServiceOrGroup = None
 		count = isinstance(adjust, list) and len(adjust) or 0
-		if count > 1 and adjust[0] is 0:
+		if count > 1 and adjust[0] == 0:
 			session = adjust[1]
 			if count == 3:
 				startPlayingServiceOrGroup = adjust[2]

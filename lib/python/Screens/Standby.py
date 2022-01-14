@@ -114,7 +114,7 @@ class StandbyScreen(Screen):
 		if gotoShutdownTime:
 			self.standbyTimeoutTimer.startLongTimer(gotoShutdownTime)
 
-		if self.StandbyCounterIncrease is not 1:
+		if self.StandbyCounterIncrease != 1:
 			gotoWakeupTime = isNextWakeupTime(True)
 			if gotoWakeupTime != -1:
 				curtime = localtime(time())
@@ -380,7 +380,7 @@ class SwitchToAndroid(Screen):
 
 	def goAndroid(self, answer):
 		from Screens.Standby import TryQuitMainloop
-		if answer is True:
+		if answer:
 			with open('/dev/block/by-name/flag', 'wb') as f:
 				f.write(struct.pack("B", 0))
 			self.session.open(TryQuitMainloop, 2)

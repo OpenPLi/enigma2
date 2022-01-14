@@ -106,9 +106,9 @@ class Network:
 						fp.write("	gateway %d.%d.%d.%d\n" % tuple(iface['gateway']))
 			if "configStrings" in iface:
 				fp.write(iface["configStrings"])
-			if iface["preup"] is not False and "configStrings" not in iface:
+			if iface["preup"] and "configStrings" not in iface:
 				fp.write(iface["preup"])
-			if iface["predown"] is not False and "configStrings" not in iface:
+			if iface["predown"] and "configStrings" not in iface:
 				fp.write(iface["predown"])
 			fp.write("\n")
 		fp.close()
@@ -177,7 +177,7 @@ class Network:
 			# remove any password before info is printed to the debug log
 			safe_ifaces = self.ifaces.copy()
 			for intf in safe_ifaces:
-				if 'preup' in safe_ifaces[intf] and safe_ifaces[intf]['preup'] is not False:
+				if 'preup' in safe_ifaces[intf] and safe_ifaces[intf]['preup']:
 					safe_ifaces[intf]['preup'] = re.sub(' -k "\S*" ', ' -k ********* ', safe_ifaces[intf]['preup'])
 			print("self.ifaces after loading:", safe_ifaces)
 			self.config_ready = True

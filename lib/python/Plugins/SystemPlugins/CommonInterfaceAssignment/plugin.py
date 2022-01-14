@@ -209,7 +209,7 @@ class CIconfigMenu(Screen):
 	def finishedChannelSelection(self, *args):
 		item = len(args)
 		if item > 0:
-			if item > 2 and args[2] is True:
+			if item > 2 and args[2]:
 				for ref in args[0]:
 					service_ref = ServiceReference(ref)
 					service_name = service_ref.getServiceName()
@@ -236,7 +236,7 @@ class CIconfigMenu(Screen):
 	def finishedProviderSelection(self, *args):
 		item = len(args)
 		if item > 1:
-			if item > 2 and args[2] is True:
+			if item > 2 and args[2]:
 				for ref in args[0]:
 					service_ref = ServiceReference(ref)
 					service_name = service_ref.getServiceName()

@@ -389,7 +389,7 @@ class Dishpip(Dish, Screen):
 	def getCurrentTuner(self):
 		if hasattr(self.session, 'pipshown') and self.session.pipshown:
 			service = self.session.pip.pipservice
-			if service is False or service is None:
+			if not service:
 				return None
 			self.frontend = service
 			feinfo = service and service.frontendInfo()

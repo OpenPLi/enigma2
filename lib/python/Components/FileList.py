@@ -147,7 +147,7 @@ class FileList(MenuList):
 
 	def getCurrentEvent(self):
 		l = self.l.getCurrentSelection()
-		if not l or l[0][1] == True:
+		if not l or l[0][1]:
 			return None
 		else:
 			return self.serviceHandler.info(l[0][0]).getEvent(l[0][0])
@@ -351,7 +351,7 @@ class MultiFileSelectList(FileList):
 			newList = self.list[:]
 			x = self.list[idx]
 			if x and len(x[0]) > 2 and not x[0][3].startswith('<'):
-				if x[0][1] is True:
+				if x[0][1]:
 					realPathname = x[0][0]
 				else:
 					realPathname = self.current_directory + x[0][0]

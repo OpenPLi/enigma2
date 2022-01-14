@@ -196,7 +196,7 @@ class SkinSelector(Screen, HelpableScreen):
 			restartBox.setTitle(_("SkinSelector: Restart GUI"))
 
 	def restartGUI(self, answer):
-		if answer is True:
+		if answer:
 			self.config.value = self.currentSelectedSkin[4]
 			self.config.save()
 			self.session.open(TryQuitMainloop, QUIT_RESTART)

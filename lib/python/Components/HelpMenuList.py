@@ -61,7 +61,7 @@ class HelpMenuList(GUIComponent):
 					l.append(entry)
 
 		self.l.setList(l)
-		if self.extendedHelp is True:
+		if self.extendedHelp:
 			font = fonts.get("HelpMenuListExt0", applySkinFactor("Regular", 24, 50))
 			self.l.setFont(0, gFont(font[0], font[1]))
 			self.l.setItemHeight(font[2])

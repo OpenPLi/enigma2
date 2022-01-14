@@ -211,7 +211,7 @@ class InputDeviceSetup(Screen, ConfigListScreen):
 
 		self.list.append(self.enableEntry)
 		if self.enableConfigEntry:
-			if self.enableConfigEntry.value is True:
+			if self.enableConfigEntry.value:
 				self.list.append(self.repeatEntry)
 				self.list.append(self.delayEntry)
 			else:
@@ -409,7 +409,7 @@ class RemoteControlType(Screen, ConfigListScreen):
 			self.session.openWithCallback(self.keySaveCallback, MessageBox, _("Is this setting ok?"), MessageBox.TYPE_YESNO, timeout=20, default=True, timeout_default=False)
 
 	def keySaveCallback(self, answer):
-		if answer is False:
+		if not answer:
 			self.restoreOldSetting()
 		else:
 			config.plugins.remotecontroltype.rctype.value = int(self.rctype.value)

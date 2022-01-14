@@ -534,13 +534,13 @@ class PositionerSetup(Screen):
 			self.blue.setText(_("Limits on"))
 		elif entry == "storage":
 			self.red.setText("")
-			if self.getUsals() is False:
+			if not self.getUsals():
 				self.green.setText(_("Store position"))
 				self.yellow.setText(_("Goto position"))
 			else:
 				self.green.setText("")
 				self.yellow.setText("")
-			if self.advanced and self.getUsals() is False:
+			if self.advanced and not self.getUsals():
 				self.blue.setText(_("Allocate"))
 			else:
 				self.blue.setText("")
@@ -635,7 +635,7 @@ class PositionerSetup(Screen):
 			self.diseqccommand("moveWest", 0xFF) # one step
 			self.statusMsg(_("Stepped west") + self.stepCourse(self.finesteps), timeout=self.STATUS_MSG_TIMEOUT)
 		elif entry == "storage":
-			if self.getUsals() is False:
+			if not self.getUsals():
 				menu = [(_("yes"), "yes"), (_("no"), "no")]
 				available_orbos = False
 				orbos = None
@@ -692,7 +692,7 @@ class PositionerSetup(Screen):
 			self.diseqccommand("moveEast", 0xFF) # one step
 			self.statusMsg(_("Stepped east") + self.stepCourse(self.finesteps), timeout=self.STATUS_MSG_TIMEOUT)
 		elif entry == "storage":
-			if self.getUsals() is False:
+			if not self.getUsals():
 				self.printMsg(_("Goto index position"))
 				index = int(self.positioner_storage.value)
 				self.diseqccommand("moveTo", index)
@@ -739,7 +739,7 @@ class PositionerSetup(Screen):
 			# Start (re-)calculate
 			self.session.openWithCallback(self.recalcConfirmed, MessageBox, _("This will (re-)calculate all positions of your rotor and may remove previously memorised positions and fine-tuning!\nAre you sure?"), MessageBox.TYPE_YESNO, default=False, timeout=10)
 		elif entry == "storage":
-			if self.advanced and self.getUsals() is False:
+			if self.advanced and not self.getUsals():
 				self.printMsg(_("Allocate unused memory index"))
 				while True:
 					if not len(self.allocatedIndices):

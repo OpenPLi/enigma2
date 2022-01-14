@@ -60,7 +60,7 @@ def InitTimeZones():
 	if config.misc.firstrun.value:
 		proxy = geolocation.get("proxy", False)
 		tz = geolocation.get("timezone", None)
-		if proxy is True or tz is None:
+		if proxy or tz is None:
 			msg = " - proxy in use" if proxy else ""
 			print("[Timezones] Warning: Geolocation not available%s!  (area='%s', zone='%s')" % (msg, config.timezone.area.value, config.timezone.val.value))
 		else:

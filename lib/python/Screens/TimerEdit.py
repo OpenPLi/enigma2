@@ -458,7 +458,7 @@ class TimerSanityConflict(Screen):
 			return 0
 
 	def editTimerCallBack(self, answer=None):
-		if answer and len(answer) > 1 and answer[0] is True:
+		if answer and len(answer) > 1 and answer[0] == True:
 			self.session.nav.RecordTimer.timeChanged(answer[1])
 			if not answer[1].disabled:
 				if not self.isResolvedConflict(answer[1]):
