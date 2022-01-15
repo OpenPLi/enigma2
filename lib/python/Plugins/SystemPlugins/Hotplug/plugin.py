@@ -74,7 +74,7 @@ class Hotplug(Protocol):
 		self.received = ""
 
 	def dataReceived(self, data):
-		self.received += data
+		self.received += data.decode()
 		print("[Hotplug.plugin.py] complete", self.received)
 
 	def connectionLost(self, reason):
