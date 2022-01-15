@@ -1,7 +1,7 @@
 from __future__ import print_function
 from Tools.Directories import fileExists
 from Components.config import config, ConfigSubsection, ConfigInteger, ConfigText, ConfigSelection, ConfigSequence, ConfigSubList
-import DVDTitle
+from . import DVDTitle
 import xml.dom.minidom
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_FONTS
 
@@ -237,7 +237,7 @@ class MenuTemplate(DVDProject):
 		self.settings.thumb_size = ConfigSequence(seperator=',', default=[200, 158], limits=[(0, 576), (-1, 720)])
 		self.settings.thumb_border = ConfigInteger(default=2, limits=(0, 20))
 		self.filekeys = ["menubg", "menuaudio", "fontface_headline", "fontface_title", "fontface_subtitle"]
-		from TitleProperties import languageChoices
+		from .TitleProperties import languageChoices
 		self.settings.menulang = ConfigSelection(choices=languageChoices.choices, default=languageChoices.choices[1][0])
 		self.error = ""
 

@@ -27,7 +27,7 @@ from Screens.HelpMenu import HelpableScreen
 from Screens.InputBox import PinInput
 import Screens.InfoBar
 
-from Tools import NumericalTextInput
+from Tools.NumericalTextInput import NumericalTextInput
 from Tools.Directories import resolveFilename, SCOPE_HDD
 from Tools.BoundFunction import boundFunction
 import Tools.Trashcan
@@ -83,8 +83,8 @@ except Exception as e:
 
 
 def defaultMoviePath():
-	from Tools import Directories
-	return Directories.defaultRecordingLocation(config.usage.default_path.value)
+	from Tools.Directories import defaultRecordingLocation
+	return defaultRecordingLocation(config.usage.default_path.value)
 
 
 def setPreferredTagEditor(te):
@@ -190,12 +190,12 @@ def moveServiceFiles(serviceref, dest, name=None, allowCopy=True):
 		except OSError as e:
 			if e.errno == 18 and allowCopy:
 				print("[MovieSelection] cannot rename across devices, trying slow move")
-				import CopyFiles
+				from Screens.CopyFiles import moveFiles
 				# start with the smaller files, do the big one later.
 				moveList.reverse()
 				if name is None:
 					name = os.path.split(moveList[-1][0])[1]
-				CopyFiles.moveFiles(moveList, name)
+				moveFiles(moveList, name)
 				print("[MovieSelection] Moving in background...")
 			else:
 				raise
@@ -229,12 +229,12 @@ def copyServiceFiles(serviceref, dest, name=None):
 			except:
 				print("[MovieSelection] Failed to undo copy:", item)
 	#Link failed, really copy.
-	import CopyFiles
+	from Screens.CopyFiles import copyFiles
 	# start with the smaller files, do the big one later.
 	moveList.reverse()
 	if name is None:
 		name = os.path.split(moveList[-1][0])[1]
-	CopyFiles.copyFiles(moveList, name)
+	copyFiles(moveList, name)
 	print("[MovieSelection] Copying in background...")
 
 # Appends possible destinations to the bookmarks object. Appends tuples

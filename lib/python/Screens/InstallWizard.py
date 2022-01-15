@@ -129,7 +129,7 @@ class InstallWizard(Screen, ConfigListScreen):
 			self.doNextStep = True
 		elif self.index == self.INSTALL_PLUGINS:
 			if self["config"].getCurrent()[1] == self.doplugins:
-				from PluginBrowser import PluginDownloadBrowser
+				from Screens.PluginBrowser import PluginDownloadBrowser
 				self.session.open(PluginDownloadBrowser, 0)
 			self.doNextStep = True
 		elif self.index == self.SCAN:
