@@ -27,7 +27,7 @@ class NetlinkReader():
 						print("Removed input device:", devname)
 						enigma.removeInputDevice(os.path.join('/dev', devname))
 				elif subsystem == 'net':
-					from Network import iNetwork
+					from Components.Network import iNetwork
 					iNetwork.hotplug(event)
 			except KeyError:
 				# Ignore "not found"

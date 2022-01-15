@@ -2,7 +2,7 @@ from Components.Sensors import sensors
 
 from enigma import eTimer
 
-from Source import Source
+from Components.Sources.Source import Source
 
 
 class SensorSource(Source):

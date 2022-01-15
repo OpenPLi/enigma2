@@ -8,7 +8,7 @@ from enigma import ePicLoad
 from Components.config import config, getConfigListEntry, ConfigInteger
 from Components.ConfigList import ConfigListScreen
 from Components.AVSwitch import AVSwitch
-import DVDTitle
+from . import DVDTitle
 
 
 class TitleProperties(Screen, ConfigListScreen):

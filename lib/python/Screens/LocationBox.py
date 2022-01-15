@@ -11,7 +11,7 @@ from Screens.ChoiceBox import ChoiceBox
 
 # Generic
 from Tools.BoundFunction import boundFunction
-from Tools import Directories
+from Tools.Directories import createDir as directories_createDir, removeDir as directories_removeDir
 from Components.config import config
 import os
 
@@ -266,7 +266,7 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 		if res:
 			path = os.path.join(self["filelist"].current_directory, res)
 			if not os.path.exists(path):
-				if not Directories.createDir(path):
+				if not directories_createDir(path):
 					self.session.open(
 						MessageBox,
 						_("Creating directory %s failed.") % (path),
@@ -301,7 +301,7 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 
 	def removeDirCallback(self, name, res):
 		if res:
-			if not Directories.removeDir(name):
+			if not directories_removeDir(name):
 				self.session.open(
 					MessageBox,
 					_("Removing directory %s failed. (Maybe not empty.)") % (name),
@@ -371,7 +371,7 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 					def dirAction(choice):
 						if choice:
 							if choice[1] == "folder":
-								if not Directories.createDir(ret):
+								if not directories_createDir(ret):
 									self.session.open(MessageBox, _("Creating directory %s failed.") % (ret), type=MessageBox.TYPE_ERROR)
 									return
 							self.close(ret)
