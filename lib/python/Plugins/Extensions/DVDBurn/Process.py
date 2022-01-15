@@ -450,8 +450,8 @@ class PreviewTask(Task):
 			if Screens.Standby.inStandby:
 				self.previewCB(False)
 			else:
-				from Tools import Notifications
-				Notifications.AddNotificationWithCallback(self.previewCB, MessageBox, _("Do you want to preview this DVD before burning?"), timeout=60, default=False)
+				from Tools.Notifications import AddNotificationWithCallback
+				AddNotificationWithCallback(self.previewCB, MessageBox, _("Do you want to preview this DVD before burning?"), timeout=60, default=False)
 
 	def abort(self):
 		self.finish(aborted=True)
@@ -466,8 +466,8 @@ class PreviewTask(Task):
 		if self.job.menupreview:
 			self.closedCB(True)
 		else:
-			from Tools import Notifications
-			Notifications.AddNotificationWithCallback(self.closedCB, MessageBox, _("Do you want to burn this collection to DVD medium?"))
+			from Tools.Notifications import AddNotificationWithCallback
+			AddNotificationWithCallback(self.closedCB, MessageBox, _("Do you want to burn this collection to DVD medium?"))
 
 	def closedCB(self, answer):
 		if answer == True:
