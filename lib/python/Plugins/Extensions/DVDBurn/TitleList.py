@@ -1,11 +1,11 @@
 from __future__ import print_function
-import DVDProject
-import TitleList
-import TitleCutter
-import TitleProperties
-import ProjectSettings
-import DVDToolbox
-import Process
+from . import DVDProject
+from . import TitleList
+from . import TitleCutter
+from . import TitleProperties
+from . import ProjectSettings
+from . import DVDToolbox
+from . import Process
 from Screens.Screen import Screen
 from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox

@@ -7,7 +7,7 @@ from Components.config import config, configfile
 from Tools.BoundFunction import boundFunction
 from Tools.StbHardware import getFPWasTimerWakeup
 from Tools.Alternatives import ResolveCiAlternative
-from Tools import Notifications
+from Tools.Notifications import AddNotification
 from time import time
 import RecordTimer
 import Screens.Standby
@@ -59,7 +59,7 @@ class Navigation:
 				ImportChannels()
 			if startup_to_standby == "yes" or self.__wasTimerWakeup and config.misc.prev_wakeup_time.value and (wakeup_time_type == 0 or wakeup_time_type == 1 or (wakeup_time_type == 3 and startup_to_standby == "except")):
 				if not Screens.Standby.inTryQuitMainloop:
-					Notifications.AddNotification(Screens.Standby.Standby, wakeup_timer_enabled and 1 or True)
+					AddNotification(Screens.Standby.Standby, wakeup_timer_enabled and 1 or True)
 		if config.misc.prev_wakeup_time.value:
 			config.misc.prev_wakeup_time.value = 0
 			config.misc.prev_wakeup_time.save()
