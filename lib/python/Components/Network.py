@@ -62,7 +62,7 @@ class Network:
 	def convertIP(self, ip):
 		return [int(n) for n in ip.split('.')]
 
-	def getAddrInet(self, iface, callback, loadConfig = True):
+	def getAddrInet(self, iface, callback):
 		data = {'up': False, 'dhcp': False, 'preup': False, 'predown': False}
 		try:
 			data['up'] = int(open('/sys/class/net/%s/flags' % iface).read().strip(), 16) & 1 == 1
@@ -79,8 +79,10 @@ class Network:
 			data['ip'] = [0, 0, 0, 0]
 			data['netmask'] = [0, 0, 0, 0]
 			data['gateway'] = [0, 0, 0, 0]
-		self.ifaces[iface] = data
-		if loadConfig:
+		if iface in self.ifaces:
+			self.ifaces[iface].update(data)
+		else:
+			self.ifaces[iface] = data
 			self.loadNetworkConfig(iface, callback)
 
 	def writeNetworkConfig(self):
@@ -293,7 +295,7 @@ class Network:
 
 	def getAdapterAttribute(self, iface, attribute):
 		if self.ifaces.get(iface, {}).get('ip') == [0, 0, 0, 0]:
-			self.getAddrInet(iface, None, False)
+			self.getAddrInet(iface, None)
 		return self.ifaces.get(iface, {}).get(attribute)
 
 	def setAdapterAttribute(self, iface, attribute, value):
