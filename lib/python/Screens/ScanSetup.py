@@ -199,6 +199,7 @@ class CableTransponderSearchSupport:
 		self.cable_search_session.close(True)
 
 	def getCableTransponderData(self, str):
+		str = str.decode()
 		print("[getCableTransponderData] ", str)
 		#prepend any remaining data from the previous call
 		str = self.remainingdata + str
