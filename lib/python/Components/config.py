@@ -1855,7 +1855,7 @@ class Config(ConfigSubsection):
 		text = self.pickle()
 		try:
 			import os
-			f = open(filename + ".writing", "w")
+			f = open(filename + ".writing", "w", encoding="UTF-8")
 			f.write(text)
 			f.flush()
 			os.fsync(f.fileno())
