@@ -14,7 +14,7 @@ def getUsableRotorNims(only_first=False):
 
 
 def PositionerMain(session, **kwargs):
-	from ui import PositionerSetup, RotorNimSelection
+	from .ui import PositionerSetup, RotorNimSelection
 	usableRotorNims = getUsableRotorNims()
 	if len(usableRotorNims) == 1:
 		session.open(PositionerSetup, usableRotorNims[0])

@@ -12,10 +12,13 @@ from Screens.PictureInPicture import PictureInPicture
 import Screens.Standby
 import Screens.InfoBar
 import Components.ParentalControl
-from Tools import Directories, Notifications, ASCIItranslit, Trashcan
-from Tools.XMLTools import stringToXML
 from Tools.Alternatives import ResolveCiAlternative
+from Tools.ASCIItranslit import legacyEncode
 from Tools.CIHelper import cihelper
+from Tools.Directories import SCOPE_CONFIG, getRecordingFilename, resolveFilename
+from Tools.Notifications import AddNotification, AddNotificationWithCallback, AddPopup
+from Tools.XMLTools import stringToXML
+from Tools.Trashcan import instance as trashcan_instance
 
 import timer
 import xml.etree.cElementTree
@@ -246,7 +249,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 				filename += " - " + name # standard
 
 		if config.recording.ascii_filenames.value:
-			filename = ASCIItranslit.legacyEncode(filename)
+			filename = legacyEncode(filename)
 		if not self.dirname:
 			dirname = findSafeRecordPath(defaultMoviePath())
 		else:
@@ -256,7 +259,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 				self.dirnameHadToFallback = True
 		if not dirname:
 			return None
-		self.Filename = Directories.getRecordingFilename(filename, dirname)
+		self.Filename = getRecordingFilename(filename, dirname)
 		self.log(0, "Filename calculated as: '%s'" % self.Filename)
 		return self.Filename
 
@@ -309,7 +312,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 					if start_zap:
 						self.log(1, "zapping in CI+ use")
 						self.failureCB(answer=True, ref=rec_ref)
-						Notifications.AddNotification(MessageBox, _("In order to record a timer, the TV was switched to the recording service!\n"), type=MessageBox.TYPE_INFO, timeout=20)
+						AddNotification(MessageBox, _("In order to record a timer, the TV was switched to the recording service!\n"), type=MessageBox.TYPE_INFO, timeout=20)
 			self.log(1, "'record ref' %s" % rec_ref and rec_ref.toString())
 			self.setRecordingPreferredTuner()
 			self.record_service = rec_ref and NavigationInstance.instance.recordService(rec_ref)
@@ -407,7 +410,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 							if self.ts_dialog is None:
 								self.openChoiceActionBeforeZap()
 						else:
-							Notifications.AddNotification(MessageBox, _("In order to record a timer, the TV was switched to the recording service!\n"), type=MessageBox.TYPE_INFO, timeout=20)
+							AddNotification(MessageBox, _("In order to record a timer, the TV was switched to the recording service!\n"), type=MessageBox.TYPE_INFO, timeout=20)
 							self.setRecordingPreferredTuner()
 							self.failureCB(answer=True)
 							self.log(5, "zap to recording service")
@@ -422,7 +425,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 					open(self.Filename + self.record_service.getFilenameExtension(), "w").close()
 					# Give the Trashcan a chance to clean up
 					try:
-						Trashcan.instance.cleanIfIdle(self.Filename)
+						trashcan_instance.cleanIfIdle(self.Filename)
 					except Exception as e:
 						print("[TIMER] Failed to call Trashcan.instance.cleanIfIdle()")
 						print("[TIMER] Error:", e)
@@ -448,10 +451,10 @@ class RecordTimerEntry(timer.TimerEntry, object):
 							self.openChoiceActionBeforeZap()
 					elif not config.recording.asktozap.value:
 						self.log(8, "asking user to zap away")
-						Notifications.AddNotificationWithCallback(self.failureCB, MessageBox, _("A timer failed to record!\nDisable TV and try again?\n"), timeout=20, default=True)
+						AddNotificationWithCallback(self.failureCB, MessageBox, _("A timer failed to record!\nDisable TV and try again?\n"), timeout=20, default=True)
 					else: # zap without asking
 						self.log(9, "zap without asking")
-						Notifications.AddNotification(MessageBox, _("In order to record a timer, the TV was switched to the recording service!\n"), type=MessageBox.TYPE_INFO, timeout=20)
+						AddNotification(MessageBox, _("In order to record a timer, the TV was switched to the recording service!\n"), type=MessageBox.TYPE_INFO, timeout=20)
 						self.setRecordingPreferredTuner()
 						self.failureCB(answer=True)
 				elif cur_ref:
@@ -496,7 +499,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 								self.InfoBarInstance.session.pip.servicePath = self.InfoBarInstance.servicelist and self.InfoBarInstance.servicelist.getCurrentServicePath()
 								self.log(11, "zapping as PiP")
 								if notify:
-									Notifications.AddPopup(text=_("Zapped to timer service %s as Picture in Picture!") % self.service_ref.getServiceName(), type=MessageBox.TYPE_INFO, timeout=5)
+									AddPopup(text=_("Zapped to timer service %s as Picture in Picture!") % self.service_ref.getServiceName(), type=MessageBox.TYPE_INFO, timeout=5)
 								return True
 							else:
 								del self.InfoBarInstance.session.pip
@@ -535,7 +538,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 						if not force:
 							self.failureCB(answer=True, close_pip=False)
 						if notify or force:
-							Notifications.AddPopup(text=_("Zapped to timer service %s!") % self.service_ref.getServiceName(), type=MessageBox.TYPE_INFO, timeout=5)
+							AddPopup(text=_("Zapped to timer service %s!") % self.service_ref.getServiceName(), type=MessageBox.TYPE_INFO, timeout=5)
 				return True
 			else:
 				if RecordTimerEntry.wasInDeepStandby:
@@ -543,7 +546,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 					if Screens.Standby.inStandby: #In case some plugin did put the receiver already in standby
 						config.misc.standbyCounter.value = 0
 					else:
-						Notifications.AddNotification(Screens.Standby.Standby, StandbyCounterIncrease=False)
+						AddNotification(Screens.Standby.Standby, StandbyCounterIncrease=False)
 
 				if config.recording.zap_record_service_in_standby.value and Screens.Standby.inStandby:
 					cur_ref = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
@@ -564,7 +567,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 
 				# Tell the trashcan we started recording. The trashcan gets events,
 				# but cannot tell what the associated path is.
-				Trashcan.instance.markDirty(self.Filename)
+				trashcan_instance.markDirty(self.Filename)
 				self.log_tuner(11, "start")
 				return True
 
@@ -592,11 +595,11 @@ class RecordTimerEntry(timer.TimerEntry, object):
 							RecordTimerEntry.TryQuitMainloop()
 						else:
 							msg = _("A completed recording timer is about to shut down your receiver. Would you like to proceed?")
-							Notifications.AddNotificationWithCallback(self.sendTryQuitMainloopNotification, MessageBox, msg, timeout=20, default=True)
+							AddNotificationWithCallback(self.sendTryQuitMainloopNotification, MessageBox, msg, timeout=20, default=True)
 				elif self.afterEvent == AFTEREVENT.STANDBY or self.afterEvent == AFTEREVENT.AUTO and RecordTimerEntry.wasInStandby:
 					if not Screens.Standby.inStandby:
 						msg = _("A completed recording timer is about to put your receiver in standby mode. Would you like to proceed?")
-						Notifications.AddNotificationWithCallback(self.sendStandbyNotification, MessageBox, msg, timeout=20, default=True)
+						AddNotificationWithCallback(self.sendStandbyNotification, MessageBox, msg, timeout=20, default=True)
 				else:
 					RecordTimerEntry.keypress()
 			return True
@@ -703,12 +706,12 @@ class RecordTimerEntry(timer.TimerEntry, object):
 	def sendStandbyNotification(self, answer):
 		RecordTimerEntry.keypress()
 		if answer:
-			Notifications.AddNotification(Screens.Standby.Standby)
+			AddNotification(Screens.Standby.Standby)
 
 	def sendTryQuitMainloopNotification(self, answer):
 		RecordTimerEntry.keypress()
 		if answer:
-			Notifications.AddNotification(Screens.Standby.TryQuitMainloop, 1)
+			AddNotification(Screens.Standby.TryQuitMainloop, 1)
 
 	def getNextActivation(self):
 		if self.state == self.StateEnded:
@@ -770,7 +773,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 			# show notification. the 'id' will make sure that it will be
 			# displayed only once, even if more timers are failing at the
 			# same time. (which is very likely in case of disk fullness)
-			Notifications.AddPopup(text=_("Write error while recording. Disk full?\n"), type=MessageBox.TYPE_ERROR, timeout=0, id="DiskFullMessage")
+			AddPopup(text=_("Write error while recording. Disk full?\n"), type=MessageBox.TYPE_ERROR, timeout=0, id="DiskFullMessage")
 			# ok, the recording has been stopped. we need to properly note
 			# that in our state, with also keeping the possibility to re-try.
 			# TODO: this has to be done.
@@ -781,7 +784,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 				text = '\n'.join((text, _("Please note that the previously selected media could not be accessed and therefore the default directory is being used instead.")))
 				notify = True
 			if notify:
-				Notifications.AddPopup(text=text, type=MessageBox.TYPE_INFO, timeout=3)
+				AddPopup(text=text, type=MessageBox.TYPE_INFO, timeout=3)
 		elif event == iRecordableService.evRecordAborted:
 			NavigationInstance.instance.RecordTimer.removeEntry(self)
 		elif event == iRecordableService.evGstRecordEnded:
@@ -861,7 +864,7 @@ class RecordTimer(timer.Timer):
 	def __init__(self):
 		timer.Timer.__init__(self)
 
-		self.Filename = Directories.resolveFilename(Directories.SCOPE_CONFIG, "timers.xml")
+		self.Filename = resolveFilename(SCOPE_CONFIG, "timers.xml")
 		self.fallback_timer_list = []
 
 		try:
@@ -926,9 +929,6 @@ class RecordTimer(timer.Timer):
 		try:
 			doc = xml.etree.cElementTree.parse(self.Filename)
 		except SyntaxError:
-			from Tools.Notifications import AddPopup
-			from Screens.MessageBox import MessageBox
-
 			AddPopup(_("The timer file (timers.xml) is corrupt and could not be loaded."), type=MessageBox.TYPE_ERROR, timeout=0, id="TimerLoadFailed")
 
 			print("timers.xml failed to load!")
@@ -954,8 +954,6 @@ class RecordTimer(timer.Timer):
 				if newTimer in conflict_list:
 					timer_text += _("\nTimer '%s' disabled!") % newTimer.name
 		if checkit:
-			from Tools.Notifications import AddPopup
-			from Screens.MessageBox import MessageBox
 			AddPopup(_("Timer overlap in timers.xml detected!\nPlease recheck it!") + timer_text, type=MessageBox.TYPE_ERROR, timeout=0, id="TimerLoadFailed")
 
 	def saveTimer(self):

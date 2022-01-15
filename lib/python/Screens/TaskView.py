@@ -6,7 +6,7 @@ from Components.Sources.StaticText import StaticText
 from Components.SystemInfo import SystemInfo
 from Components.Task import job_manager
 from Screens.InfoBarGenerics import InfoBarNotifications
-from Tools import Notifications
+from Tools.Notifications import AddNotification, AddNotificationWithCallback, notifications
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 import Screens.Standby
@@ -145,22 +145,22 @@ class JobView(InfoBarNotifications, Screen, ConfigListScreen):
 		if self.settings.afterEvent.getValue() == "deepstandby":
 			if not Screens.Standby.inTryQuitMainloop:
 				msg = _("A sleep timer is about to shut down your receiver. Would you like to proceed?")
-				Notifications.AddNotificationWithCallback(self.sendTryQuitMainloopNotification, MessageBox, msg, timeout=20)
+				AddNotificationWithCallback(self.sendTryQuitMainloopNotification, MessageBox, msg, timeout=20)
 		elif self.settings.afterEvent.getValue() == "standby":
 			if not Screens.Standby.inStandby:
 				msg = _("A sleep timer is about to put your receiver in standby mode. Would you like to proceed?")
-				Notifications.AddNotificationWithCallback(self.sendStandbyNotification, MessageBox, msg, timeout=20)
+				AddNotificationWithCallback(self.sendStandbyNotification, MessageBox, msg, timeout=20)
 
 	def checkNotifications(self):
 		InfoBarNotifications.checkNotifications(self)
-		if not Notifications.notifications:
+		if not notifications:
 			if self.settings.afterEvent.getValue() == "close" and self.job.status == self.job.FAILED:
 				self.close(False)
 
 	def sendStandbyNotification(self, answer):
 		if answer:
-			Notifications.AddNotification(Screens.Standby.Standby)
+			AddNotification(Screens.Standby.Standby)
 
 	def sendTryQuitMainloopNotification(self, answer):
 		if answer:
-			Notifications.AddNotification(Screens.Standby.TryQuitMainloop, 1)
+			AddNotification(Screens.Standby.TryQuitMainloop, 1)
