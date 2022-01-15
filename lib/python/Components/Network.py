@@ -62,11 +62,11 @@ class Network:
 	def convertIP(self, ip):
 		return [int(n) for n in ip.split('.')]
 
-	def getAddrInet(self, iface, callback):
+	def getAddrInet(self, iface, callback, loadConfig = True):
 		data = {'up': False, 'dhcp': False, 'preup': False, 'predown': False}
 		try:
 			data['up'] = int(open('/sys/class/net/%s/flags' % iface).read().strip(), 16) & 1 == 1
-			if data['up']:
+			if data['up'] and iface not in self.configuredInterfaces:
 				self.configuredInterfaces.append(iface)
 			nit = ni.ifaddresses(iface)
 			data['ip'] = self.convertIP(nit[ni.AF_INET][0]['addr']) # ipv4
@@ -80,7 +80,8 @@ class Network:
 			data['netmask'] = [0, 0, 0, 0]
 			data['gateway'] = [0, 0, 0, 0]
 		self.ifaces[iface] = data
-		self.loadNetworkConfig(iface, callback)
+		if loadConfig:
+			self.loadNetworkConfig(iface, callback)
 
 	def writeNetworkConfig(self):
 		self.configuredInterfaces = []
@@ -291,8 +292,8 @@ class Network:
 		return self.ifaces.keys()
 
 	def getAdapterAttribute(self, iface, attribute):
-		if not self.ifaces[iface]['up']:
-			self.getAddrInet(iface, callback=None)
+		if self.ifaces.get(iface, {}).get('ip') == [0, 0, 0, 0]:
+			self.getAddrInet(iface, None, False)
 		return self.ifaces.get(iface, {}).get(attribute)
 
 	def setAdapterAttribute(self, iface, attribute, value):
