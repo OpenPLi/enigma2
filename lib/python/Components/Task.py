@@ -203,10 +203,10 @@ class Task(object):
 		pass
 
 	def processStdout(self, data):
-		self.processOutput(data)
+		self.processOutput(data.decode())
 
 	def processStderr(self, data):
-		self.processOutput(data)
+		self.processOutput(data.decode())
 
 	def processOutput(self, data):
 		self.output_line += data
