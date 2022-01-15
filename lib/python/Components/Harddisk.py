@@ -297,7 +297,7 @@ class Harddisk:
 
 	def killPartitionTable(self):
 		zero = 512 * '\0'
-		h = open(self.dev_path, 'wb')
+		h = open(self.dev_path, 'w')
 		# delete first 9 sectors, which will likely kill the first partition too
 		for i in range(9):
 			h.write(zero)
