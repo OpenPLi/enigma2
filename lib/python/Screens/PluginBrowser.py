@@ -457,12 +457,14 @@ class PluginDownloadBrowser(Screen):
 				pluginlist.sort()
 				self.updateList()
 				self["list"].instance.show()
+				self["text"].setText("")
 			else:
 				self["text"].setText(_("No new plugins found"))
 		else:
 			if self.pluginlist:
 				self.updateList()
 				self["list"].instance.show()
+				self["text"].setText("")
 			else:
 				self["text"].setText(_("No new plugins found"))
 
