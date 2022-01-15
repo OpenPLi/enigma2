@@ -27,7 +27,7 @@ from Screens.HelpMenu import HelpableScreen
 from Screens.InputBox import PinInput
 import Screens.InfoBar
 
-from Tools.NumericalTextInput import NumericalTextInput
+from Tools.NumericalTextInput import NumericalTextInput, MAP_SEARCH_UPCASE
 from Tools.Directories import resolveFilename, SCOPE_HDD
 from Tools.BoundFunction import boundFunction
 import Tools.Trashcan
@@ -548,7 +548,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		self.feedbackTimer = None
 		self.pathselectEnabled = False
 
-		self.numericalTextInput = NumericalTextInput.NumericalTextInput(mapping=NumericalTextInput.MAP_SEARCH_UPCASE)
+		self.numericalTextInput = NumericalTextInput(mapping=MAP_SEARCH_UPCASE)
 		self["chosenletter"] = Label("")
 		self["chosenletter"].visible = False
 
