@@ -27,7 +27,6 @@ from ServiceReference import ServiceReference, isPlayableForCur
 
 from time import localtime, strftime, ctime, time
 from bisect import insort
-from os import sys
 from sys import maxsize
 
 # ok, for descriptions etc we have:
@@ -112,13 +111,13 @@ class RecordTimerEntry(timer.TimerEntry, object):
 	@staticmethod
 	def setWasInDeepStandby():
 		RecordTimerEntry.wasInDeepStandby = True
-		eActionMap.getInstance().bindAction('', -sys.maxsize - 1, RecordTimerEntry.keypress)
+		eActionMap.getInstance().bindAction('', -maxsize - 1, RecordTimerEntry.keypress)
 
 	@staticmethod
 	def setWasInStandby():
 		if not RecordTimerEntry.wasInStandby:
 			if not RecordTimerEntry.wasInDeepStandby:
-				eActionMap.getInstance().bindAction('', -sys.maxsize - 1, RecordTimerEntry.keypress)
+				eActionMap.getInstance().bindAction('', -maxsize - 1, RecordTimerEntry.keypress)
 			RecordTimerEntry.wasInDeepStandby = False
 			RecordTimerEntry.wasInStandby = True
 
