@@ -10,6 +10,7 @@ from config import config, ConfigText
 from Tools import Notifications
 from base64 import encodestring
 from urllib import quote
+from time import sleep
 import xml.etree.ElementTree as et
 
 settingfiles = ('lamedb', 'bouquets.', 'userbouquet.', 'blacklist', 'whitelist', 'alternatives.')
@@ -36,7 +37,17 @@ class ImportChannels():
 		request = urllib2.Request(url)
 		if self.header:
 			request.add_header("Authorization", self.header)
-		return urllib2.urlopen(request, timeout=timeout)
+		try:
+			result = urllib2.urlopen(request, timeout=timeout)
+		except urllib2.URLError, e:
+			if "[Errno -3]" in str(e.reason):
+				print "[Import Channels] Network is not up yet, delay 5 seconds"
+				# network not up yet
+				sleep(5)
+				return self.getUrl(url, timeout)
+			print "[Import Channels] URLError ", e
+			raise e
+		return result
 
 	def getTerrestrialUrl(self):
 		url = config.usage.remote_fallback_dvb_t.value
@@ -66,7 +77,7 @@ class ImportChannels():
 		self.getTerrestrialRegion(settings)
 		self.tmp_dir = tempfile.mkdtemp(prefix="ImportChannels")
 		if "epg" in self.remote_fallback_import:
-			print "Writing epg.dat file on sever box"
+			print "[Import Channels] Writing epg.dat file on sever box"
 			try:
 				self.getUrl("%s/web/saveepg" % self.url, timeout=30).read()
 			except:
