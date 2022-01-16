@@ -7,7 +7,6 @@ import Screens.Standby
 from enigma import ePoint, eTimer, iPlayableService, eActionMap
 import os
 import random
-from os import sys
 from sys import maxsize
 
 
@@ -52,7 +51,7 @@ class InfoBarScreenSaver:
 			if hasattr(self, "pvrStateDialog"):
 				self.pvrStateDialog.hide()
 			self.screensaver.show()
-			eActionMap.getInstance().bindAction('', -sys.maxsize - 1, self.keypressScreenSaver)
+			eActionMap.getInstance().bindAction('', -maxsize - 1, self.keypressScreenSaver)
 
 	def keypressScreenSaver(self, key, flag):
 		if flag:

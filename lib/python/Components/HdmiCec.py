@@ -7,7 +7,6 @@ from enigma import eHdmiCEC, eActionMap
 from Tools.StbHardware import getFPWasTimerWakeup
 import NavigationInstance
 from enigma import eTimer
-from os import sys
 from sys import maxsize
 
 LOGPATH = "/hdd/"
@@ -127,7 +126,7 @@ class HdmiCec:
 		self.volumeForwardingEnabled = False
 		self.volumeForwardingDestination = 0
 		self.wakeup_from_tv = False
-		eActionMap.getInstance().bindAction('', -sys.maxsize - 1, self.keyEvent)
+		eActionMap.getInstance().bindAction('', -maxsize - 1, self.keyEvent)
 		config.hdmicec.volume_forwarding.addNotifier(self.configVolumeForwarding)
 		config.hdmicec.enabled.addNotifier(self.configVolumeForwarding)
 		if config.hdmicec.enabled.value:
