@@ -16,6 +16,11 @@ else
 	DEBUG_LVL=$ENIGMA_DEBUG_LVL
 fi
 
+# LC_ALL available?
+if [ -z $LC_ALL ]; then
+	export LC_ALL=en_GB.utf8
+fi
+
 LIBS=@libdir@/libopen.so.0.0.0
 
 # enigma main loop
