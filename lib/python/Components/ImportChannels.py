@@ -1,6 +1,5 @@
 from __future__ import print_function
 import threading
-import urllib
 import os
 import shutil
 import tempfile
@@ -11,6 +10,7 @@ from Components.config import config, ConfigText
 from Tools.Notifications import AddNotificationWithID
 from base64 import encodebytes
 from urllib.parse import quote
+from urllib.request import Request, urlopen
 import xml.etree.ElementTree as et
 
 settingfiles = ('lamedb', 'bouquets.', 'userbouquet.', 'blacklist', 'whitelist', 'alternatives.')
@@ -34,10 +34,10 @@ class ImportChannels():
 			self.thread.start()
 
 	def getUrl(self, url, timeout=5):
-		request = urllib.request.Request(url)
+		request = Request(url)
 		if self.header:
 			request.add_header("Authorization", self.header)
-		return urllib.request.urlopen(request, timeout=timeout)
+		return urlopen(request, timeout=timeout)
 
 	def getTerrestrialUrl(self):
 		url = config.usage.remote_fallback_dvb_t.value
