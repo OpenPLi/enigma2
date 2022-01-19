@@ -1,6 +1,5 @@
 from __future__ import print_function
 import threading
-import urllib
 import os
 import re
 import shutil
@@ -13,6 +12,7 @@ from time import sleep
 from Tools.Notifications import AddNotificationWithID
 from base64 import encodebytes
 from urllib.parse import quote
+from urllib.request import Request, urlopen
 import xml.etree.ElementTree as et
 
 settingfiles = ('lamedb', 'bouquets.', 'userbouquet.', 'blacklist', 'whitelist', 'alternatives.')
@@ -36,7 +36,7 @@ class ImportChannels():
 			self.thread.start()
 
 	def getUrl(self, url, timeout=5):
-		request = urllib.request.Request(url)
+		request = Request(url)
 		if self.header:
 			request.add_header("Authorization", self.header)
 		try:
