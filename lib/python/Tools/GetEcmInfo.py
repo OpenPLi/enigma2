@@ -79,7 +79,7 @@ class GetEcmInfo:
 					if info['decode'] == 'Network':
 						cardid = 'id:' + info.get('prov', '')
 						try:
-							share = open('/tmp/share.info', 'rb').readlines()
+							share = open('/tmp/share.info', 'r').readlines()
 							for line in share:
 								if cardid in line:
 									self.textvalue = line.strip()
