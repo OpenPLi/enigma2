@@ -1,6 +1,6 @@
 from __future__ import print_function
 import errno
-import xml.etree.cElementTree
+import xml.etree.ElementTree
 
 from os import environ, path, symlink, unlink, walk
 from time import gmtime, localtime, strftime, time
@@ -194,8 +194,8 @@ class Timezones:
 		try:
 			with open(filename, "r") as fd:  # This open gets around a possible file handle leak in Python's XML parser.
 				try:
-					root = xml.etree.cElementTree.parse(fd).getroot()
-				except xml.etree.cElementTree.ParseError as err:
+					root = xml.etree.ElementTree.parse(fd).getroot()
+				except xml.etree.ElementTree.ParseError as err:
 					root = None
 					fd.seek(0)
 					content = fd.readlines()
