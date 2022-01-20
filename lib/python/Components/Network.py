@@ -83,6 +83,7 @@ class Network:
 			self.ifaces[iface].update(data)
 		else:
 			self.ifaces[iface] = data
+		if callback is not None:
 			self.loadNetworkConfig(iface, callback)
 
 	def writeNetworkConfig(self):
