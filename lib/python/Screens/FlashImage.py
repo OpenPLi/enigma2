@@ -320,7 +320,7 @@ class FlashImage(Screen):
 		if retval == 0:
 			self.startDownload()
 		else:
-			self.session.openWithCallback(self.abort, MessageBox, _("Error during backup settings\n%s") % reval, type=MessageBox.TYPE_ERROR, simple=True)
+			self.session.openWithCallback(self.abort, MessageBox, _("Error during backup settings\n%s") % retval, type=MessageBox.TYPE_ERROR, simple=True)
 
 	def startDownload(self, reply=True):
 		self.show()
