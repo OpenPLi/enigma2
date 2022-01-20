@@ -1,6 +1,6 @@
 from __future__ import print_function
 import enigma
-import xml.etree.cElementTree
+import xml.etree.ElementTree
 
 from keyids import KEYIDS
 
@@ -88,7 +88,7 @@ def readKeymap(filename):
 		return
 
 	try:
-		dom = xml.etree.cElementTree.parse(source)
+		dom = xml.etree.ElementTree.parse(source)
 	except:
 		raise KeymapError("[keymapparser] keymap %s not well-formed." % filename)
 

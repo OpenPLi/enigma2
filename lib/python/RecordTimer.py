@@ -21,7 +21,7 @@ from Tools.XMLTools import stringToXML
 from Tools.Trashcan import instance as trashcan_instance
 
 import timer
-import xml.etree.cElementTree
+import xml.etree.ElementTree
 import NavigationInstance
 from ServiceReference import ServiceReference, isPlayableForCur
 
@@ -926,7 +926,7 @@ class RecordTimer(timer.Timer):
 
 	def loadTimer(self):
 		try:
-			doc = xml.etree.cElementTree.parse(self.Filename)
+			doc = xml.etree.ElementTree.parse(self.Filename)
 		except SyntaxError:
 			AddPopup(_("The timer file (timers.xml) is corrupt and could not be loaded."), type=MessageBox.TYPE_ERROR, timeout=0, id="TimerLoadFailed")
 
@@ -956,7 +956,7 @@ class RecordTimer(timer.Timer):
 			AddPopup(_("Timer overlap in timers.xml detected!\nPlease recheck it!") + timer_text, type=MessageBox.TYPE_ERROR, timeout=0, id="TimerLoadFailed")
 
 	def saveTimer(self):
-		#root_element = xml.etree.cElementTree.Element('timers')
+		#root_element = xml.etree.ElementTree.Element('timers')
 		#root_element.text = "\n"
 
 		#for timer in self.timer_list + self.processed_timers:
@@ -964,7 +964,7 @@ class RecordTimer(timer.Timer):
 			# skip them
 			#if timer.dontSave:
 				#continue
-			#t = xml.etree.cElementTree.SubElement(root_element, 'timers')
+			#t = xml.etree.ElementTree.SubElement(root_element, 'timers')
 			#t.set("begin", str(int(timer.begin)))
 			#t.set("end", str(int(timer.end)))
 			#t.set("serviceref", str(timer.service_ref))
@@ -986,13 +986,13 @@ class RecordTimer(timer.Timer):
 			#t.tail = "\n"
 
 			#for time, code, msg in timer.log_entries:
-				#l = xml.etree.cElementTree.SubElement(t, 'log')
+				#l = xml.etree.ElementTree.SubElement(t, 'log')
 				#l.set("time", str(time))
 				#l.set("code", str(code))
 				#l.text = str(msg)
 				#l.tail = "\n"
 
-		#doc = xml.etree.cElementTree.ElementTree(root_element)
+		#doc = xml.etree.ElementTree.ElementTree(root_element)
 		#doc.write(self.Filename)
 
 		list = []
