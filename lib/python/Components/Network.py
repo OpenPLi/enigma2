@@ -2,7 +2,6 @@ from __future__ import print_function
 import os
 import re
 import netifaces as ni
-from socket import *
 from Components.Console import Console
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
