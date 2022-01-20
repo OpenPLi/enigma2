@@ -15,7 +15,7 @@ from Components.MenuList import MenuList
 from Components.SystemInfo import SystemInfo
 from ServiceReference import ServiceReference
 from Plugins.Plugin import PluginDescriptor
-from xml.etree.cElementTree import parse
+from xml.etree.ElementTree import parse
 from enigma import eDVBCI_UI, eDVBCIInterfaces, eEnv, eServiceCenter
 from Tools.BoundFunction import boundFunction
 from Tools.CIHelper import cihelper

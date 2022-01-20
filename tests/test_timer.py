@@ -25,10 +25,10 @@ def test_timer(repeat=0, timer_start=3600, timer_length=1000, sim_length=86400 *
 	t.timer_list = []
 
 	# generate a timer to test
-	import xml.etree.cElementTree
+	import xml.etree.ElementTree
 	import RecordTimer
 
-	timer = RecordTimer.createTimer(xml.etree.cElementTree.fromstring(
+	timer = RecordTimer.createTimer(xml.etree.ElementTree.fromstring(
 	"""
 		<timer
 			begin="%d"

@@ -9,7 +9,7 @@ from Components.Sources.StaticText import StaticText
 from Components.Sources.Boolean import Boolean
 from enigma import eEnv
 
-import xml.etree.cElementTree
+import xml.etree.ElementTree
 
 # FIXME: use resolveFile!
 # read the setupmenu
@@ -19,7 +19,7 @@ try:
 except:
 	# if not found in the current path, we use the global datadir-path
 	setupfile = open(eEnv.resolve('${datadir}/enigma2/setup.xml'), 'r')
-setupdom = xml.etree.cElementTree.parse(setupfile)
+setupdom = xml.etree.ElementTree.parse(setupfile)
 setupfile.close()
 
 
