@@ -163,10 +163,10 @@ class PliExtraInfo(Poll, Converter):
 			return ""
 		yres = info.getInfo(iServiceInformation.sVideoHeight)
 		mode = ("i", "p", " ")[info.getInfo(iServiceInformation.sProgressive)]
-		fps = (info.getInfo(iServiceInformation.sFrameRate) + 500) / 1000
+		fps = (info.getInfo(iServiceInformation.sFrameRate) + 500) // 1000
 		if not fps or fps == -1:
 			try:
-				fps = (int(open("/proc/stb/vmpeg/0/framerate", "r").read()) + 500) / 1000
+				fps = (int(open("/proc/stb/vmpeg/0/framerate", "r").read()) + 500) // 1000
 			except:
 				pass
 		return "%sx%s%s%s" % (xres, yres, mode, fps)
@@ -215,9 +215,9 @@ class PliExtraInfo(Poll, Converter):
 		frequency = feraw.get("frequency")
 		if frequency:
 			if "DVB-T" in feraw.get("tuner_type"):
-				return "%d %s" % (int(frequency / 1000000. + 0.5), _("MHz"))
+				return "%d %s" % (int(frequency // 1000000. + 0.5), _("MHz"))
 			else:
-				return str(int(frequency / 1000 + 0.5))
+				return str(int(frequency // 1000 + 0.5))
 		return ""
 
 	def createChannelNumber(self, fedata, feraw):
@@ -231,7 +231,7 @@ class PliExtraInfo(Poll, Converter):
 		else:
 			symbolrate = fedata.get("symbol_rate")
 			if symbolrate:
-				return str(symbolrate / 1000)
+				return str(symbolrate // 1000)
 		return ""
 
 	def createPolarization(self, fedata):
@@ -271,9 +271,9 @@ class PliExtraInfo(Poll, Converter):
 		orbpos = feraw.get("orbital_position")
 		if orbpos:
 			if orbpos > 1800:
-				return _("%.1f° W") % ((3600 - orbpos) / 10.0)
+				return _("%.1f° W") % ((3600 - orbpos) // 10.0)
 			elif orbpos > 0:
-				return _("%.1f° E") % (orbpos / 10.0)
+				return _("%.1f° E") % (orbpos // 10.0)
 		return ""
 
 	def createOrbPosOrTunerSystem(self, fedata, feraw):
