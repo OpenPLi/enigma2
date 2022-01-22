@@ -216,7 +216,7 @@ class ServiceInfo(Screen):
 			if posi > 1800:
 				posi = 3600 - posi
 				EW = "W"
-		return "%s - %s\xc2\xb0 %s" % (namespace, (float(posi) / 10.0), EW)
+		return "%s - %s\xb0 %s" % (namespace, (float(posi) / 10.0), EW)
 
 	def getTrackList(self):
 		trackList = []
