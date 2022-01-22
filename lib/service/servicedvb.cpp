@@ -798,9 +798,9 @@ PyObject *eDVBServiceList::getContent(const char* format, bool sorted)
 
 							// filter short name brakets
 							size_t pos;
-							while((pos = name.find("\xc2\x86")) != std::string::npos)
+							while((pos = name.find("\x86")) != std::string::npos)
 								name.erase(pos,2);
-							while((pos = name.find("\xc2\x87")) != std::string::npos)
+							while((pos = name.find("\x87")) != std::string::npos)
 								name.erase(pos,2);
 
 							if (name.length())
