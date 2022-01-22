@@ -66,7 +66,7 @@ class Network:
 		data = {'up': False, 'dhcp': False, 'preup': False, 'predown': False}
 		try:
 			data['up'] = int(open('/sys/class/net/%s/flags' % iface).read().strip(), 16) & 1 == 1
-			if data['up'] and iface not in self.configuredInterfaces:
+			if data['up']:
 				self.configuredInterfaces.append(iface)
 			nit = ni.ifaddresses(iface)
 			data['ip'] = self.convertIP(nit[ni.AF_INET][0]['addr']) # ipv4
@@ -83,8 +83,7 @@ class Network:
 			self.ifaces[iface].update(data)
 		else:
 			self.ifaces[iface] = data
-		if callback is not None:
-			self.loadNetworkConfig(iface, callback)
+		self.loadNetworkConfig(iface, callback)
 
 	def writeNetworkConfig(self):
 		self.configuredInterfaces = []
