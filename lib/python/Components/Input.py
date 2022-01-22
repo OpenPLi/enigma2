@@ -60,7 +60,7 @@ class Input(VariableText, GUIComponent, NumericalTextInput):
 	def setText(self, text):
 		if not len(text):
 			self.currPos = 0
-			self.Text = u""
+			self.Text = ""
 		else:
 			self.Text = text
 		self.update()
@@ -167,15 +167,15 @@ class Input(VariableText, GUIComponent, NumericalTextInput):
 		if not self.maxSize:
 			self.Text = self.Text[0:pos] + self.Text[pos + 1:]
 		elif self.overwrite:
-			self.Text = self.Text[0:pos] + u" " + self.Text[pos + 1:]
+			self.Text = self.Text[0:pos] + " " + self.Text[pos + 1:]
 		else:
-			self.Text = self.Text[0:pos] + self.Text[pos + 1:] + u" "
+			self.Text = self.Text[0:pos] + self.Text[pos + 1:] + " "
 
 	def deleteAllChars(self):
 		if self.maxSize:
-			self.Text = u" " * len(self.Text)
+			self.Text = " " * len(self.Text)
 		else:
-			self.Text = u""
+			self.Text = ""
 		self.currPos = 0
 
 	def tab(self):
