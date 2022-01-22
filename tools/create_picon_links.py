@@ -17,7 +17,7 @@ while len(f):
 	ref = [int(x, 0x10) for x in f[0][:-1].split(':')]
 	name = f[1][:-1]
 
-	name = name.replace('\xc2\x87', '').replace('\xc2\x86', '')
+	name = name.replace('\x87', '').replace('\x86', '')
 
 #	SID:NS:TSID:ONID:STYPE:UNUSED(channelnumber in enigma1)
 #	X   X  X    X    D     D

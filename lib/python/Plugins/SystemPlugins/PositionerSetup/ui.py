@@ -286,8 +286,8 @@ class PositionerSetup(Screen):
 	def OrbToStr(self, orbpos):
 		if orbpos > 1800:
 			orbpos = 3600 - orbpos
-			return "%d.%d\xc2\xb0 W" % (orbpos / 10, orbpos % 10)
-		return "%d.%d\xc2\xb0 E" % (orbpos / 10, orbpos % 10)
+			return "%d.%d\xb0 W" % (orbpos / 10, orbpos % 10)
+		return "%d.%d\xb0 E" % (orbpos / 10, orbpos % 10)
 
 	def setDishOrbosValue(self):
 		if self.getRotorMovingState():
