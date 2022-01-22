@@ -41,7 +41,7 @@ class ServiceName(Converter):
 			name = ref and info.getName(ref)
 			if name is None:
 				name = info.getName()
-			return name.replace('\xc2\x86', '').replace('\xc2\x87', '').replace('_', ' ')
+			return name.replace('\x86', '').replace('\x87', '').replace('_', ' ')
 		elif self.type == self.PROVIDER:
 			return info.getInfoString(iServiceInformation.sProvider)
 		elif self.type == self.REFERENCE or self.type == self.EDITREFERENCE and hasattr(self.source, "editmode") and self.source.editmode:
