@@ -218,11 +218,7 @@ class Timezones:
 		if root is not None:
 			for zone in root.findall("zone"):
 				name = zone.get("name", "")
-				if isinstance(name, str):
-					name = name.encode(encoding="UTF-8", errors="ignore")
 				zonePath = zone.get("zone", "")
-				if isinstance(zonePath, str):
-					zonePath = zonePath.encode(encoding="UTF-8", errors="ignore")
 				if path.exists(path.join(TIMEZONE_DATA, zonePath)):
 					zones.append((zonePath, name))
 				else:
