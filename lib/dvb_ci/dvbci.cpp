@@ -956,7 +956,7 @@ RESULT eDVBCIInterfaces::setDescrambleRules(int slotid, SWIG_PYOBJECT(ePyObject)
 		{
 			char buf[255];
 			snprintf(buf, 255, "eDVBCIInterfaces::setDescrambleRules provider tuple has %zd instead of 2 entries!!", PyTuple_Size(tuple));
-			PyErr_SetString(PyExc_Exceptionr, buf);
+			PyErr_SetString(PyExc_Exception, buf);
 			return -1;
 		}
 		if (!PyString_Check(PyTuple_GET_ITEM(tuple, 0)))
