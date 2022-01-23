@@ -328,11 +328,6 @@ inline ePyObject Impl_PyDict_New()
 	return PyDict_New();
 }
 
-inline ePyObject Impl_PyUnicode_FromString(const char *str)
-{
-	return PyUnicode_FromString(str);
-}
-
 inline ePyObject Impl_PyString_FromFormat(const char *fmt, ...)
 {
 	va_list ap;
