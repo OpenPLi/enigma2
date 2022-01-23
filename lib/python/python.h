@@ -12,7 +12,6 @@
 
 #if PY_MAJOR_VERSION >= 3
 #define PyStringObject PyUnicodeObject
-#define PyString_FromStringAndSize PyUnicode_FromStringAndSize
 #endif
 
 class ePyObject
