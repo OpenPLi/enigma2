@@ -273,13 +273,13 @@ eSocketNotifierPy_stop(eSocketNotifierPy* self)
 static PyObject *
 eSocketNotifierPy_get_fd(eSocketNotifierPy* self)
 {
-	return PyInt_FromLong(self->sn->getFD());
+	return PyLong_FromLong(self->sn->getFD());
 }
 
 static PyObject *
 eSocketNotifierPy_get_requested(eSocketNotifierPy* self)
 {
-	return PyInt_FromLong(self->sn->getRequested());
+	return PyLong_FromLong(self->sn->getRequested());
 }
 
 static PyObject *
