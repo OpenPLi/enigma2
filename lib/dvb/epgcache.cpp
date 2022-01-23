@@ -1647,7 +1647,7 @@ PyObject *eEPGCache::lookupEvent(ePyObject list, ePyObject convertFunc)
 		ePyObject argv=PyList_GET_ITEM(list, 0); // borrowed reference!
 		if (PyUnicode_Check(argv))
 		{
-			argstring = PyString_AS_STRING(argv);
+			argstring = PyUnicode_AsUTF8(argv);
 			++listIt;
 		}
 		else
@@ -1731,7 +1731,7 @@ PyObject *eEPGCache::lookupEvent(ePyObject list, ePyObject convertFunc)
 			if (minutes && stime == -1)
 				stime = ::time(0);
 
-			eServiceReference ref(handleGroup(eServiceReference(PyString_AS_STRING(service))));
+			eServiceReference ref(handleGroup(eServiceReference(PyUnicode_AsUTF8(service))));
 			// redirect subservice querys to parent service
 			eServiceReferenceDVB &dvb_ref = (eServiceReferenceDVB&)ref;
 			if (dvb_ref.getParentTransportStreamID().get()) // linkage subservice
@@ -2051,7 +2051,7 @@ static const char* getStringFromPython(ePyObject obj)
 	const char *result = 0;
 	if (PyUnicode_Check(obj))
 	{
-		result = PyString_AS_STRING(obj);
+		result = PyUnicode_AsUTF8(obj);
 	}
 	return result;
 }
@@ -2076,7 +2076,7 @@ void eEPGCache::importEvents(ePyObject serviceReferences, ePyObject list)
 	if (PyUnicode_Check(serviceReferences))
 	{
 		const char *refstr;
-		refstr = PyString_AS_STRING(serviceReferences);
+		refstr = PyUnicode_AsUTF8(serviceReferences);
 		if (!refstr)
 		{
 			eDebug("[eEPGCache:import] serviceReference string is 0, aborting");
@@ -2091,7 +2091,7 @@ void eEPGCache::importEvents(ePyObject serviceReferences, ePyObject list)
 		{
 			PyObject* item = PyList_GET_ITEM(serviceReferences, i);
 			const char *refstr;
-			refstr = PyString_AS_STRING(item);
+			refstr = PyUnicode_AsUTF8(item);
 			if (!refstr)
 			{
 				eDebug("[eEPGCache:import] a serviceref item is not a string");
@@ -2247,7 +2247,7 @@ PyObject *eEPGCache::search(ePyObject arg)
 				ePyObject obj = PyTuple_GET_ITEM(arg, 3);
 				if (PyUnicode_Check(obj))
 				{
-					const char* refstr = PyString_AS_STRING(obj);
+					const char* refstr = PyUnicode_AsUTF8(obj);
 					eServiceReferenceDVB ref(refstr);
 					if (ref.valid())
 					{
