@@ -10,7 +10,7 @@ PyObject *list = PyList_New(len);
 for (i=0; i<len; ++i) {
 	PyObject *tuple = PyTuple_New(3); // 3 eintrge im tuple
 	PyTuple_SetItem(tuple, 0, PyString_FromString("eintrag 1"))
-	PyTuple_SetItem(tuple, 1, PyInt_FromLong(31337));
+	PyTuple_SetItem(tuple, 1, PyLong_FromLong(31337));
 	PyTuple_SetItem(tuple, 2, PyString_FromString("eintrag 3"))
 	PyList_SetItem(list, i, tuple);
 }

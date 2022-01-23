@@ -415,7 +415,7 @@ void eListboxPythonConfigContent::paint(gPainter &painter, eWindowStyle &style, 
 			if (value)
 			{
 				ePyObject args = PyTuple_New(1);
-				PyTuple_SET_ITEM(args, 0, PyInt_FromLong(selected));
+				PyTuple_SET_ITEM(args, 0, PyLong_FromLong(selected));
 
 					/* CallObject will call __call__ which should return the value tuple */
 				value = PyObject_CallObject(value, args);
