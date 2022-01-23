@@ -327,7 +327,7 @@ PyObject *eServiceEvent::getParentalData() const
 	for (std::list<eParentalData>::const_iterator it(m_ratings.begin()); it != m_ratings.end(); ++it)
 	{
 		ePyObject tuple = PyTuple_New(2);
-		PyTuple_SET_ITEM(tuple, 0, PyString_FromString(it->getCountryCode().c_str()));
+		PyTuple_SET_ITEM(tuple, 0, PyUnicode_FromString(it->getCountryCode().c_str()));
 		PyTuple_SET_ITEM(tuple, 1, PyLong_FromLong(it->getRating()));
 		PyList_SET_ITEM(ret, cnt++, tuple);
 	}
@@ -360,8 +360,8 @@ PyObject *eServiceEvent::getComponentData() const
 		PyTuple_SET_ITEM(tuple, 0, PyLong_FromLong(it->m_componentTag));
 		PyTuple_SET_ITEM(tuple, 1, PyLong_FromLong(it->m_componentType));
 		PyTuple_SET_ITEM(tuple, 2, PyLong_FromLong(it->m_streamContent));
-		PyTuple_SET_ITEM(tuple, 3, PyString_FromString(it->m_iso639LanguageCode.c_str()));
-		PyTuple_SET_ITEM(tuple, 4, PyString_FromString(it->m_text.c_str()));
+		PyTuple_SET_ITEM(tuple, 3, PyUnicode_FromString(it->m_iso639LanguageCode.c_str()));
+		PyTuple_SET_ITEM(tuple, 4, PyUnicode_FromString(it->m_text.c_str()));
 		PyList_SET_ITEM(ret, cnt++, tuple);
 	}
 	return ret;

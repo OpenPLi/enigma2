@@ -424,7 +424,7 @@ socketmmi_get_name(PyObject *self, PyObject *args)
 	int slot;
 	if (PyTuple_Size(args) != 1 || !PyArg_ParseTuple(args, "i", &slot))
 		return NULL;
-	return PyString_FromString(eSocket_UI::getInstance()->getName(slot));
+	return PyUnicode_FromString(eSocket_UI::getInstance()->getName(slot));
 }
 
 static PyMethodDef module_methods[] = {

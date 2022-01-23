@@ -27,7 +27,7 @@ inline PyObject *PyFrom(int v)
 
 inline PyObject *PyFrom(const char *c)
 {
-	return PyString_FromString(c);
+	return PyUnicode_FromString(c);
 }
 
 inline PyObject *PyFrom(std::pair<const char*, int>& p)
