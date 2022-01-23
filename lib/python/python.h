@@ -20,8 +20,6 @@
 #define PyInt_AsLong PyLong_AsLong
 #define PyInt_Check PyLong_Check
 #define PyInt_AsUnsignedLongMask PyLong_AsUnsignedLongMask
-
-#define PyExc_StandardError PyExc_Exception
 #endif
 
 class ePyObject
