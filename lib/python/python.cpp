@@ -209,7 +209,7 @@ int ePython::call(ePyObject pFunc, ePyObject pArgs)
 		pValue = PyObject_CallObject(pFunc, pArgs);
  		if (pValue)
 		{
-			if (PyInt_Check(pValue))
+			if (PyLong_Check(pValue))
 				res = PyInt_AsLong(pValue);
 			else
 				res = 0;
