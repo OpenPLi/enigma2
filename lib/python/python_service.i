@@ -337,7 +337,7 @@ RESULT enableSubtitles(eWidget *parent, PyObject *tuple)
 		}
 		if (tuplesize==5){
 			entry = PyTuple_GET_ITEM(tuple, 4);
-			if (PyString_Check(entry))
+			if (PyUnicode_Check(entry))
 			{
 				track.language_code = PyString_AsString(entry);
 			}
