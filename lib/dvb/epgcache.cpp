@@ -1839,29 +1839,29 @@ skip_entry:
 
 static void fill_eit_start(eit_event_struct *evt, time_t t)
 {
-    tm *time = gmtime(&t);
+	tm *time = gmtime(&t);
 
-    int l = 0;
-    int month = time->tm_mon + 1;
-    if (month == 1 || month == 2)
-        l = 1;
-    int mjd = 14956 + time->tm_mday + (int)((time->tm_year - l) * 365.25) + (int)((month + 1 + l*12) * 30.6001);
-    evt->start_time_1 = mjd >> 8;
-    evt->start_time_2 = mjd & 0xFF;
+	int l = 0;
+	int month = time->tm_mon + 1;
+	if (month == 1 || month == 2)
+		l = 1;
+	int mjd = 14956 + time->tm_mday + (int)((time->tm_year - l) * 365.25) + (int)((month + 1 + l*12) * 30.6001);
+	evt->start_time_1 = mjd >> 8;
+	evt->start_time_2 = mjd & 0xFF;
 
-    evt->start_time_3 = toBCD(time->tm_hour);
-    evt->start_time_4 = toBCD(time->tm_min);
-    evt->start_time_5 = toBCD(time->tm_sec);
+	evt->start_time_3 = toBCD(time->tm_hour);
+	evt->start_time_4 = toBCD(time->tm_min);
+	evt->start_time_5 = toBCD(time->tm_sec);
 
 }
 
 static void fill_eit_duration(eit_event_struct *evt, int time)
 {
-    //time is given in second
-    //convert to hour, minutes, seconds
-    evt->duration_1 = toBCD(time / 3600);
-    evt->duration_2 = toBCD((time % 3600) / 60);
-    evt->duration_3 = toBCD((time % 3600) % 60);
+	//time is given in second
+	//convert to hour, minutes, seconds
+	evt->duration_1 = toBCD(time / 3600);
+	evt->duration_2 = toBCD((time % 3600) / 60);
+	evt->duration_3 = toBCD((time % 3600) % 60);
 }
 
 static inline uint8_t HI(int x) { return (uint8_t) ((x >> 8) & 0xFF); }
@@ -2077,11 +2077,11 @@ void eEPGCache::importEvents(ePyObject serviceReferences, ePyObject list)
 	{
 		const char *refstr;
 		refstr = PyString_AS_STRING(serviceReferences);
-	        if (!refstr)
-	        {
+		if (!refstr)
+		{
 			eDebug("[eEPGCache:import] serviceReference string is 0, aborting");
-                	return;
-	        }
+			return;
+		}
 		refs.push_back(eServiceReferenceDVB(refstr));
 	}
 	else if (PyList_Check(serviceReferences))
@@ -2091,14 +2091,14 @@ void eEPGCache::importEvents(ePyObject serviceReferences, ePyObject list)
 		{
 			PyObject* item = PyList_GET_ITEM(serviceReferences, i);
 			const char *refstr;
-	                refstr = PyString_AS_STRING(item);
-	                if (!refstr)
-        	        {
+			refstr = PyString_AS_STRING(item);
+			if (!refstr)
+			{
 				eDebug("[eEPGCache:import] a serviceref item is not a string");
-                        }
+			}
 			else
-		        {
-		                refs.push_back(eServiceReferenceDVB(refstr));
+			{
+				refs.push_back(eServiceReferenceDVB(refstr));
 			}
 		}
 	}
