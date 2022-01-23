@@ -356,15 +356,6 @@ inline ePyObject Impl_PyString_FromFormat(const char *fmt, ...)
 
 inline ePyObject Impl_PyLong_FromLong(long val)
 {
-#if PY_MAJOR_VERSION >= 3
-	return PyLong_FromLong(val);
-#else
-	return PyLong_FromLong(val);
-#endif
-}
-
-inline ePyObject Impl_PyLong_FromLong(long val)
-{
 	return PyLong_FromLong(val);
 }
 
