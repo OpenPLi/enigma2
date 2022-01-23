@@ -853,7 +853,7 @@ def createTimer(xml):
 	for l in xml.findall("log"):
 		time = int(l.get("time"))
 		code = int(l.get("code"))
-		msg = l.text.strip().encode("utf-8")
+		msg = l.text.strip()
 		entry.log_entries.append((time, code, msg))
 
 	return entry
