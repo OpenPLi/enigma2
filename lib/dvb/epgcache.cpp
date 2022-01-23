@@ -1645,7 +1645,7 @@ PyObject *eEPGCache::lookupEvent(ePyObject list, ePyObject convertFunc)
 	else
 	{
 		ePyObject argv=PyList_GET_ITEM(list, 0); // borrowed reference!
-		if (PyString_Check(argv))
+		if (PyUnicode_Check(argv))
 		{
 			argstring = PyString_AS_STRING(argv);
 			++listIt;
@@ -1700,7 +1700,7 @@ PyObject *eEPGCache::lookupEvent(ePyObject list, ePyObject convertFunc)
 				{
 					case 0:
 					{
-						if (!PyString_Check(entry))
+						if (!PyUnicode_Check(entry))
 						{
 							eDebug("[eEPGCache] tuple entry 0 is no a string");
 							goto skip_entry;
@@ -2049,7 +2049,7 @@ unsigned int eEPGCache::getEpgSources()
 static const char* getStringFromPython(ePyObject obj)
 {
 	const char *result = 0;
-	if (PyString_Check(obj))
+	if (PyUnicode_Check(obj))
 	{
 		result = PyString_AS_STRING(obj);
 	}
@@ -2073,7 +2073,7 @@ void eEPGCache::importEvents(ePyObject serviceReferences, ePyObject list)
 {
 	std::vector<eServiceReferenceDVB> refs;
 
-	if (PyString_Check(serviceReferences))
+	if (PyUnicode_Check(serviceReferences))
 	{
 		const char *refstr;
 		refstr = PyString_AS_STRING(serviceReferences);
@@ -2203,7 +2203,7 @@ PyObject *eEPGCache::search(ePyObject arg)
 		if (tuplesize > 0)
 		{
 			ePyObject obj = PyTuple_GET_ITEM(arg,0);
-			if (PyString_Check(obj))
+			if (PyUnicode_Check(obj))
 			{
 				argstring = PyUnicode_AsUTF8AndSize(obj, &argcount);
 				for (int i=0; i < argcount; ++i)
@@ -2245,7 +2245,7 @@ PyObject *eEPGCache::search(ePyObject arg)
 			if (tuplesize > 4 && querytype == 0)
 			{
 				ePyObject obj = PyTuple_GET_ITEM(arg, 3);
-				if (PyString_Check(obj))
+				if (PyUnicode_Check(obj))
 				{
 					const char* refstr = PyString_AS_STRING(obj);
 					eServiceReferenceDVB ref(refstr);
@@ -2297,7 +2297,7 @@ PyObject *eEPGCache::search(ePyObject arg)
 			else if (tuplesize > 4 && (querytype > 0) )
 			{
 				ePyObject obj = PyTuple_GET_ITEM(arg, 3);
-				if (PyString_Check(obj))
+				if (PyUnicode_Check(obj))
 				{
 					int casetype = PyLong_AsLong(PyTuple_GET_ITEM(arg, 4));
 					ssize_t strlen;
