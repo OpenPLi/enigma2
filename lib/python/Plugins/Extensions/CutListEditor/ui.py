@@ -26,6 +26,7 @@ except:
 
 config.plugins.CutListEditor = ConfigSubsection()
 config.plugins.CutListEditor.showIntro = ConfigYesNo(default=True)
+config.plugins.CutListEditor.keep_bookmarks = ConfigYesNo(default=False)
 
 
 def CutListEntry(where, what):
@@ -60,6 +61,7 @@ class CutListContextMenu(FixedMenu):
 	RET_GRABFRAME = 7
 	RET_TOGGLEINTRO = 8
 	RET_MOVIECUT = 9
+	RET_KEEPBOOKMARKS = 10
 
 	SHOW_STARTCUT = 0
 	SHOW_ENDCUT = 1
@@ -86,7 +88,10 @@ class CutListContextMenu(FixedMenu):
 		menu.append((_("remove before this position"), self.removeBefore))
 		menu.append((_("remove after this position"), self.removeAfter))
 
-#		menu.append((None, ))
+		if config.plugins.CutListEditor.keep_bookmarks.value:
+			menu.append((_("remove bookmarks in cuts"), self.keepBookmarks))
+		else:
+			menu.append((_("preserve bookmarks in cuts"), self.keepBookmarks))
 
 		if not nearmark:
 			menu.append((_("insert mark here"), self.insertMark))
@@ -114,6 +119,9 @@ class CutListContextMenu(FixedMenu):
 
 	def deleteCut(self):
 		self.close(self.RET_DELETECUT)
+
+	def keepBookmarks(self):
+		self.close(self.RET_KEEPBOOKMARKS)
 
 	def insertMark(self):
 		self.close(self.RET_MARK)
@@ -189,7 +197,7 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 		cue = service and service.cueSheet()
 		if cue is not None:
 			# disable cutlists. we want to freely browse around in the movie
-			print "cut lists disabled!"
+			print "[CutListEditor] cut lists disabled!"
 			cue.setCutListEnable(0)
 
 		self.downloadCuesheet()
@@ -283,17 +291,17 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 		if not self.inhibit_seek:
 			where = self["cutlist"].getCurrent()
 			if where is None:
-				print "no selection"
+				print "[CutListEditor] no selection"
 				return
 			pts = where[0][0]
 			seek = self.getSeek()
 			if seek is None:
-				print "no seek"
+				print "[CutListEditor] no seek"
 				return
 			seek.seekTo(pts)
 
 	def refillList(self):
-		print "cue sheet changed, refilling"
+		print "[CutListEditor] cue sheet changed, refilling"
 		self.downloadCuesheet()
 
 		# get the first changed entry, counted from the end, and select it
@@ -335,13 +343,13 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 
 		cur_state = self.getStateForPosition(curpos)
 		if cur_state == 0:
-			print "currently in 'IN'"
+			print "[CutListEditor] currently in 'IN'"
 			if self.cut_start is None or self.context_position < self.cut_start:
 				state = CutListContextMenu.SHOW_STARTCUT
 			else:
 				state = CutListContextMenu.SHOW_ENDCUT
 		else:
-			print "currently in 'OUT'"
+			print "[CutListEditor] currently in 'OUT'"
 			state = CutListContextMenu.SHOW_DELETECUT
 
 		if self.context_nearest_mark is None:
@@ -361,7 +369,7 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 		elif result == CutListContextMenu.RET_ENDCUT:
 			# remove in/out marks between the new cut
 			for (where, what) in self.cut_list[:]:
-				if self.cut_start <= where <= self.context_position and what in (0, 1):
+				if self.cut_start <= where <= self.context_position and (not config.plugins.CutListEditor.keep_bookmarks.value or what in (0, 1)):
 					self.cut_list.remove((where, what))
 
 			bisect.insort(self.cut_list, (self.cut_start, 1))
@@ -398,7 +406,7 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 		elif result == CutListContextMenu.RET_REMOVEBEFORE:
 			# remove in/out marks before current position
 			for (where, what) in self.cut_list[:]:
-				if where <= self.context_position and what in (0, 1):
+				if where <= self.context_position and (not config.plugins.CutListEditor.keep_bookmarks.value or what in (0, 1)):
 					self.cut_list.remove((where, what))
 			# add 'in' point
 			bisect.insort(self.cut_list, (self.context_position, 0))
@@ -408,17 +416,21 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 		elif result == CutListContextMenu.RET_REMOVEAFTER:
 			# remove in/out marks after current position
 			for (where, what) in self.cut_list[:]:
-				if where >= self.context_position and what in (0, 1):
+				if where >= self.context_position and (not config.plugins.CutListEditor.keep_bookmarks.value or what in (0, 1)):
 					self.cut_list.remove((where, what))
 			# add 'out' point
 			bisect.insort(self.cut_list, (self.context_position, 1))
 			self.inhibit_seek = True
 			self.uploadCuesheet()
 			self.inhibit_seek = False
+		elif result == CutListContextMenu.RET_KEEPBOOKMARKS:
+			config.plugins.CutListEditor.keep_bookmarks.value = not config.plugins.CutListEditor.keep_bookmarks.value
+			config.plugins.CutListEditor.keep_bookmarks.save()
 		elif result == CutListContextMenu.RET_GRABFRAME:
 			self.grabFrame()
 		elif result == CutListContextMenu.RET_TOGGLEINTRO:
-			self.toggleIntro()
+			config.plugins.CutListEditor.showIntro.value = not config.plugins.CutListEditor.showIntro.value
+			config.plugins.CutListEditor.showIntro.save()
 		elif result == CutListContextMenu.RET_MOVIECUT:
 			self.inhibit_seek = True
 			self.uploadCuesheet()
@@ -456,7 +468,3 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 			buttons = ["1", "2", "3", "4"]
 			text = _("Select horizontal resolution:")
 			self.session.openWithCallback(grabCallback, ChoiceBox, title=text, list=menu, keys=buttons)
-
-	def toggleIntro(self):
-		config.plugins.CutListEditor.showIntro.value = not config.plugins.CutListEditor.showIntro.value
-		config.plugins.CutListEditor.showIntro.save()
