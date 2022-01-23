@@ -249,11 +249,10 @@ class CommitInfo(Screen):
 				title = c['commit']['message']
 				date = datetime.strptime(c['commit']['committer']['date'], '%Y-%m-%dT%H:%M:%SZ').strftime('%x %X')
 				commitlog += date + ' ' + creator + '\n' + title + 2 * '\n'
-			commitlog = commitlog.encode('utf-8')
 			self.cachedProjects[self.projects[self.project][1]] = commitlog
 		except:
 			commitlog += _("Currently the commit log cannot be retrieved - please try later again")
-		self["AboutScrollLabel"].setText(commitlog.decode())
+		self["AboutScrollLabel"].setText(commitlog)
 
 	def updateCommitLogs(self):
 		if self.projects[self.project][1] in self.cachedProjects:
