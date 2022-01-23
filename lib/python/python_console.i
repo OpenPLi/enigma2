@@ -170,13 +170,13 @@ eConsolePy_execute(eConsolePy* self, PyObject *argt)
 			argv[argpos++] = PyUnicode_AsUTF8(arg);
 		}
 		argv[argpos] = 0;
-		return PyInt_FromLong(self->cont->execute(argv[0], argv+1));
+		return PyLong_FromLong(self->cont->execute(argv[0], argv+1));
 	}
 	else
 	{
 		const char *str;
 		if (PyArg_ParseTuple(argt, "s", &str))
-			return PyInt_FromLong(self->cont->execute(str));
+			return PyLong_FromLong(self->cont->execute(str));
 		PyErr_SetString(PyExc_TypeError,
 			"cmd is not a string!");
 	}
@@ -204,7 +204,7 @@ eConsolePy_write(eConsolePy* self, PyObject *args)
 static PyObject *
 eConsolePy_getPID(eConsolePy* self)
 {
-	return PyInt_FromLong(self->cont->getPID());
+	return PyLong_FromLong(self->cont->getPID());
 }
 
 static PyObject *

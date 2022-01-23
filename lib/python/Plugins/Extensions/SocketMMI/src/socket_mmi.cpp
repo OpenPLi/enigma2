@@ -342,7 +342,7 @@ socketmmi_available_mmi(PyObject *self, PyObject *args)
 	int slot;
 	if (PyTuple_Size(args) != 1 || !PyArg_ParseTuple(args, "i", &slot))
 		return NULL;
-	return PyInt_FromLong(eSocket_UI::getInstance()->availableMMI(slot));
+	return PyLong_FromLong(eSocket_UI::getInstance()->availableMMI(slot));
 }
 
 static PyObject *
@@ -360,7 +360,7 @@ socketmmi_start_mmi(PyObject *self, PyObject *args)
 	int slot;
 	if (PyTuple_Size(args) != 1 || !PyArg_ParseTuple(args, "i", &slot))
 		return NULL;
-	return PyInt_FromLong(eSocket_UI::getInstance()->startMMI(slot));
+	return PyLong_FromLong(eSocket_UI::getInstance()->startMMI(slot));
 }
 
 static PyObject *
@@ -369,7 +369,7 @@ socketmmi_stop_mmi(PyObject *self, PyObject *args)
 	int slot;
 	if (PyTuple_Size(args) != 1 || !PyArg_ParseTuple(args, "i", &slot))
 		return NULL;
-	return PyInt_FromLong(eSocket_UI::getInstance()->stopMMI(slot));
+	return PyLong_FromLong(eSocket_UI::getInstance()->stopMMI(slot));
 }
 
 static PyObject *
@@ -378,7 +378,7 @@ socketmmi_answer_menu(PyObject *self, PyObject *args)
 	int slot, answer;
 	if (PyTuple_Size(args) != 2 || !PyArg_ParseTuple(args, "ii", &slot, &answer))
 		return NULL;
-	return PyInt_FromLong(eSocket_UI::getInstance()->answerMenu(slot, answer));
+	return PyLong_FromLong(eSocket_UI::getInstance()->answerMenu(slot, answer));
 }
 
 static PyObject *
@@ -388,7 +388,7 @@ socketmmi_answer_enq(PyObject *self, PyObject *args)
 	char *answer;
 	if (PyTuple_Size(args) != 2 || !PyArg_ParseTuple(args, "is", &slot, &answer))
 		return NULL;
-	return PyInt_FromLong(eSocket_UI::getInstance()->answerEnq(slot, answer));
+	return PyLong_FromLong(eSocket_UI::getInstance()->answerEnq(slot, answer));
 }
 
 static PyObject *
@@ -397,7 +397,7 @@ socketmmi_cancel_enq(PyObject *self, PyObject *args)
 	int slot;
 	if (PyTuple_Size(args) != 1 || !PyArg_ParseTuple(args, "i", &slot))
 		return NULL;
-	return PyInt_FromLong(eSocket_UI::getInstance()->cancelEnq(slot));
+	return PyLong_FromLong(eSocket_UI::getInstance()->cancelEnq(slot));
 }
 
 static PyObject *
@@ -406,7 +406,7 @@ socketmmi_get_state(PyObject *self, PyObject *args)
 	int slot;
 	if (PyTuple_Size(args) != 1 || !PyArg_ParseTuple(args, "i", &slot))
 		return NULL;
-	return PyInt_FromLong(eSocket_UI::getInstance()->getState(slot));
+	return PyLong_FromLong(eSocket_UI::getInstance()->getState(slot));
 }
 
 static PyObject *
@@ -415,7 +415,7 @@ socketmmi_get_mmi_state(PyObject *self, PyObject *args)
 	int slot;
 	if (PyTuple_Size(args) != 1 || !PyArg_ParseTuple(args, "i", &slot))
 		return NULL;
-	return PyInt_FromLong(eSocket_UI::getInstance()->getMMIState(slot));
+	return PyLong_FromLong(eSocket_UI::getInstance()->getMMIState(slot));
 }
 
 static PyObject *
