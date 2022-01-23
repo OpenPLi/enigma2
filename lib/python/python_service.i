@@ -317,23 +317,23 @@ RESULT enableSubtitles(eWidget *parent, PyObject *tuple)
 		if (!PyLong_Check(entry))
 			goto error_out;
 
-		track.type = PyInt_AsLong(entry);
+		track.type = PyLong_AsLong(entry);
 
 		entry = PyTuple_GET_ITEM(tuple, 1);
 		if (!PyLong_Check(entry))
 			goto error_out;
-		track.pid = PyInt_AsLong(entry);
+		track.pid = PyLong_AsLong(entry);
 
 		entry = PyTuple_GET_ITEM(tuple, 2);
 		if (PyLong_Check(entry))
 		{
-			track.page_number = PyInt_AsLong(entry);
+			track.page_number = PyLong_AsLong(entry);
 		}
 
 		entry = PyTuple_GET_ITEM(tuple, 3);
 		if (PyLong_Check(entry))
 		{
-			track.magazine_number = PyInt_AsLong(entry);
+			track.magazine_number = PyLong_AsLong(entry);
 		}
 		if (tuplesize==5){
 			entry = PyTuple_GET_ITEM(tuple, 4);

@@ -87,7 +87,7 @@ void ePositionGauge::setInOutList(ePyObject list)
 			continue;
 
 		pts_t pts = PyLong_AsLongLong(ppts);
-		int type = PyInt_AsLong(ptype);
+		int type = PyLong_AsLong(ptype);
 		m_cue_entries.insert(cueEntry(pts, type));
 	}
 	invalidate();

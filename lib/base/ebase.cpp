@@ -246,7 +246,7 @@ int eMainloop::processOneEvent(long user_timeout, PyObject **res, ePyObject addi
 		Py_ssize_t pos=0;
 		while (PyDict_Next(additional, &pos, &key, &val)) {
 			pfd[i].fd = PyObject_AsFileDescriptor(key);
-			pfd[i++].events = PyInt_AsLong(val);
+			pfd[i++].events = PyLong_AsLong(val);
 		}
 	}
 
@@ -374,7 +374,7 @@ PyObject *eMainloop::poll(ePyObject timeout, ePyObject dict)
 	if (app_quit_now)
 		Py_RETURN_NONE;
 
-	int twisted_timeout = (timeout == Py_None) ? 0 : PyInt_AsLong(timeout);
+	int twisted_timeout = (timeout == Py_None) ? 0 : PyLong_AsLong(timeout);
 
 	iterate(twisted_timeout, &res, dict);
 	if (res)
