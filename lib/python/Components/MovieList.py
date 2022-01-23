@@ -128,7 +128,7 @@ def resetMoviePlayState(cutsFileName, ref=None):
 				cutlist.append(data)
 		f.close()
 		f = open(cutsFileName, 'wb')
-		f.write(''.join(cutlist))
+		f.write(b''.join(cutlist))
 		f.close()
 	except:
 		pass
