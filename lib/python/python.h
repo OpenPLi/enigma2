@@ -235,13 +235,9 @@ inline ePyObject Impl_PyDict_New(const char* file, int line)
 	return ePyObject(PyDict_New(), file, line);
 }
 
-inline ePyObject Impl_PyString_FromString(const char* file, int line, const char *str)
+inline ePyObject Impl_PyUnicode_FromString(const char* file, int line, const char *str)
 {
-#if PY_MAJOR_VERSION >= 3
 	return ePyObject(PyUnicode_FromString(str), file, line);
-#else
-	return ePyObject(PyString_FromString(str), file, line);
-#endif
 }
 
 inline ePyObject Impl_PyString_FromFormat(const char* file, int line, const char *fmt, ...)
@@ -332,13 +328,9 @@ inline ePyObject Impl_PyDict_New()
 	return PyDict_New();
 }
 
-inline ePyObject Impl_PyString_FromString(const char *str)
+inline ePyObject Impl_PyUnicode_FromString(const char *str)
 {
-#if PY_MAJOR_VERSION >= 3
 	return PyUnicode_FromString(str);
-#else
-	return PyString_FromString(str);
-#endif
 }
 
 inline ePyObject Impl_PyString_FromFormat(const char *fmt, ...)
