@@ -19,7 +19,7 @@ class ConfigFilename(ConfigText):
 		if self.text == "":
 			return ("mtext"[1 - selected:], "", 0)
 		cut_len = min(len(self.text), 40)
-		filename = (self.text.rstrip("/").rsplit("/", 1))[1].encode("utf-8")[:cut_len] + " "
+		filename = (self.text.rstrip("/").rsplit("/", 1))[1][:cut_len] + " "
 		if self.allmarked:
 			mark = range(0, len(filename))
 		else:
@@ -117,7 +117,7 @@ class DVDProject:
 				self.error = "xml file not found!"
 				#raise AttributeError
 			file = open(filename, "r")
-			data = file.read().decode("utf-8").replace('&', "&amp;").encode("ascii", 'xmlcharrefreplace')
+			data = file.read().replace('&', "&amp;").encode("ascii", 'xmlcharrefreplace').decode("utf-8")
 			file.close()
 			projectfiledom = xml.dom.minidom.parseString(data)
 			for node in projectfiledom.childNodes[0].childNodes:
@@ -154,11 +154,11 @@ class DVDProject:
 				#raise AttributeError
 			while i < node.attributes.length:
 				item = node.attributes.item(i)
-				key = item.name.encode("utf-8")
+				key = item.name
 				try:
 					val = eval(item.nodeValue)
 				except (NameError, SyntaxError):
-					val = item.nodeValue.encode("utf-8")
+					val = item.nodeValue
 				try:
 					print("config[%s].setValue(%s)" % (key, val))
 					config.dict()[key].setValue(val)
@@ -185,7 +185,7 @@ class DVDProject:
 				if subnode.tagName == 'path':
 					print("path:", subnode.firstChild.data)
 					filename = subnode.firstChild.data
-					self.titles[title_idx].addFile(filename.encode("utf-8"))
+					self.titles[title_idx].addFile(filename)
 				if subnode.tagName == 'properties':
 					self.xmlAttributesToConfig(node, self.titles[title_idx].properties)
 				if subnode.tagName == 'audiotracks':
