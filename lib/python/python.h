@@ -18,7 +18,6 @@
 #define PyString_Check PyUnicode_Check
 
 #define PyInt_AsLong PyLong_AsLong
-#define PyInt_Check PyLong_Check
 #endif
 
 class ePyObject
