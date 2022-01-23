@@ -339,7 +339,7 @@ RESULT enableSubtitles(eWidget *parent, PyObject *tuple)
 			entry = PyTuple_GET_ITEM(tuple, 4);
 			if (PyUnicode_Check(entry))
 			{
-				track.language_code = PyString_AsString(entry);
+				track.language_code = PyUnicode_AsUTF8(entry);
 			}
 		}
 	}
