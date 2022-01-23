@@ -1112,7 +1112,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 			elif type == "prime_time":
 				now = [x for x in localtime(date)]
 				prime = config.misc.graph_mepg.prime_time.value
-				date = mktime([now[0], now[1], now[2], prime[0], prime[1], 0, 0, 0, now[8]])
+				date = mktime((now[0], now[1], now[2], prime[0], prime[1], 0, 0, 0, now[8]))
 				if now[3] > prime[0] or (now[3] == prime[0] and now[4] > prime[1]):
 					date = date + 60 * 60 * 24
 				self.time_mode = self.TIME_PRIME
