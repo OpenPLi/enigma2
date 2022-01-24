@@ -2072,10 +2072,10 @@ void eEPGCache::importEvent(ePyObject serviceReference, ePyObject list)
 void eEPGCache::importEvents(ePyObject serviceReferences, ePyObject list)
 {
 	std::vector<eServiceReferenceDVB> refs;
+	const char *refstr;
 
 	if (PyUnicode_Check(serviceReferences))
 	{
-		const char *refstr;
 		refstr = PyUnicode_AsUTF8(serviceReferences);
 		if (!refstr)
 		{
@@ -2090,7 +2090,6 @@ void eEPGCache::importEvents(ePyObject serviceReferences, ePyObject list)
 		for (int i = 0; i < nRefs; ++i)
 		{
 			PyObject* item = PyList_GET_ITEM(serviceReferences, i);
-			const char *refstr;
 			refstr = PyUnicode_AsUTF8(item);
 			if (!refstr)
 			{
@@ -2247,7 +2246,7 @@ PyObject *eEPGCache::search(ePyObject arg)
 				ePyObject obj = PyTuple_GET_ITEM(arg, 3);
 				if (PyUnicode_Check(obj))
 				{
-					const char *refstr = PyUnicode_AsUTF8(obj);
+					*refstr = PyUnicode_AsUTF8(obj);
 					eServiceReferenceDVB ref(refstr);
 					if (ref.valid())
 					{
