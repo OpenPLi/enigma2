@@ -1,4 +1,3 @@
-from __future__ import print_function
 from Screens.Screen import Screen
 from Screens.ChannelSelection import *
 from Screens.ChoiceBox import ChoiceBox

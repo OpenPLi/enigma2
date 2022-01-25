@@ -1,4 +1,3 @@
-from __future__ import print_function
 from Screens.Screen import Screen
 import Screens.InfoBar
 from Components.ServiceScan import ServiceScan as CScan

@@ -1,4 +1,3 @@
-from __future__ import print_function
 from Components.Label import Label
 from Components.VolumeBar import VolumeBar
 from Screens.Screen import Screen

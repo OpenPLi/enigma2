@@ -1,4 +1,3 @@
-from __future__ import print_function
 from Plugins.Plugin import PluginDescriptor
 from Components.ConfigList import ConfigListScreen
 from Components.config import getConfigListEntry, config, ConfigNothing

@@ -1,4 +1,3 @@
-from __future__ import print_function
 import os
 import time
 from Tools.CList import CList

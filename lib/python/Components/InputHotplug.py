@@ -1,4 +1,3 @@
-from __future__ import print_function
 from Components import Netlink
 import enigma
 import os
