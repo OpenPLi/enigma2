@@ -1,4 +1,3 @@
-from __future__ import print_function
 from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
 from Screens.ParentalControlSetup import ProtectedScreen

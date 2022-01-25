@@ -1,4 +1,3 @@
-from __future__ import print_function
 from Components.config import config, ConfigSlider, ConfigSelection, ConfigYesNo, ConfigEnableDisable, ConfigSubsection, ConfigBoolean, ConfigSelectionNumber, ConfigNothing, NoSave
 from enigma import eAVSwitch, eDVBVolumecontrol, getDesktop
 from Components.SystemInfo import SystemInfo

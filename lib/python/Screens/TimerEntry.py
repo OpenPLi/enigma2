@@ -1,4 +1,3 @@
-from __future__ import print_function
 from Screens.Screen import Screen
 from Screens import ChannelSelection
 from ServiceReference import ServiceReference

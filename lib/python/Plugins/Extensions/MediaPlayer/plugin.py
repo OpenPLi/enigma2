@@ -1,4 +1,3 @@
-from __future__ import print_function
 import os
 import time
 from enigma import iPlayableService, eTimer, eServiceCenter, iServiceInformation, ePicLoad
