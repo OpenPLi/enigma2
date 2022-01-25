@@ -1,4 +1,3 @@
-from __future__ import print_function
 from Components.config import config, ConfigSubsection, ConfigSlider, ConfigSelection, ConfigBoolean, ConfigNothing, NoSave
 import os
 

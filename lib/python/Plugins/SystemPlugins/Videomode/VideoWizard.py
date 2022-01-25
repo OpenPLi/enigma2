@@ -1,4 +1,3 @@
-from __future__ import print_function
 from Screens.Wizard import WizardSummary
 from Screens.WizardLanguage import WizardLanguage
 from Screens.Rc import Rc

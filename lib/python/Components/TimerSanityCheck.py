@@ -1,4 +1,3 @@
-from __future__ import print_function
 import NavigationInstance
 from time import localtime, mktime, gmtime, time
 from enigma import iServiceInformation, eServiceCenter, eServiceReference, getBestPlayableServiceReference
