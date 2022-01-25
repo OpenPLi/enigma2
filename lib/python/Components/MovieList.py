@@ -1,4 +1,3 @@
-from __future__ import print_function
 from Components.GUIComponent import GUIComponent
 from Tools.FuzzyDate import FuzzyTime
 from ServiceReference import ServiceReference

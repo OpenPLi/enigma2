@@ -1,4 +1,3 @@
-from __future__ import print_function
 from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
 from Components.Label import Label

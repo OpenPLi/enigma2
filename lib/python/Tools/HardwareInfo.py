@@ -1,4 +1,3 @@
-from __future__ import print_function
 from Tools.Directories import SCOPE_SKIN, resolveFilename
 
 hw_info = None

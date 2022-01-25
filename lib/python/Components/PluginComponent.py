@@ -1,4 +1,3 @@
-from __future__ import print_function
 import os
 from bisect import insort
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS

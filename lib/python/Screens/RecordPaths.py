@@ -1,4 +1,3 @@
-from __future__ import print_function
 from Screens.Screen import Screen
 from Screens.LocationBox import MovieLocationBox, TimeshiftLocationBox
 from Screens.MessageBox import MessageBox

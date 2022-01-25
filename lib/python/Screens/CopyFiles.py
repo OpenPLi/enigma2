@@ -1,4 +1,3 @@
-from __future__ import print_function
 import os
 import Components.Task
 from twisted.internet import task

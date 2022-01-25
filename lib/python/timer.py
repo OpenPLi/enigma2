@@ -1,4 +1,3 @@
-from __future__ import print_function
 from bisect import insort
 from time import time, localtime, mktime
 from enigma import eTimer

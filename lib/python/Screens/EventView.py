@@ -1,4 +1,3 @@
-from __future__ import print_function
 from Screens.Screen import Screen
 from Screens.TimerEdit import TimerSanityConflict
 from Screens.ChoiceBox import ChoiceBox
