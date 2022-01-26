@@ -67,7 +67,7 @@ class FallbackTimerList():
 					justplay=int(timer.findtext("e2justplay", 0)),
 					eit=int(timer.findtext("e2eit", -1)),
 					afterevent=int(timer.findtext("e2afterevent", 0)),
-					dirname=str(timer.findtext("e2dirname", '').encode("utf-8", 'ignore')),
+					dirname=str(timer.findtext("e2location", '').encode("utf-8", 'ignore')),
 					description=str(timer.findtext("e2description", '').encode("utf-8", 'ignore')))
 			for timer in root.findall("e2timer")
 		]
