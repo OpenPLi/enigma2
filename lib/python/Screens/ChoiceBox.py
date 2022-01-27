@@ -152,6 +152,7 @@ class ChoiceBox(Screen):
 	def updateDescription(self):
 		if len(self["list"].list) > 0:
 			self.displayDescription(self["list"].l.getCurrentSelectionIndex())
+			self.updateSummary(self["list"].l.getCurrentSelectionIndex())
 
 	def up(self):
 		if len(self["list"].list) > 0:
