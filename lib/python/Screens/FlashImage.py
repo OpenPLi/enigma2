@@ -97,10 +97,10 @@ class SelectImage(Screen):
 					getImages(media, [os.path.join(media, x) for x in os.listdir(media) if os.path.splitext(x)[1] == ".zip" and model in x])
 					for folder in ["images", "downloaded_images", "imagebackups"]:
 						if folder in os.listdir(media):
-							medias = os.path.join(media, folder)
-							if os.path.isdir(medias) and not os.path.islink(medias) and not os.path.ismount(medias):
-								getImages(medias, [os.path.join(medias, x) for x in os.listdir(medias) if os.path.splitext(x)[1] == ".zip" and model in x])
-								for dir in [dir for dir in [os.path.join(medias, dir) for dir in os.listdir(medias)] if os.path.isdir(dir) and os.path.splitext(dir)[1] == ".unzipped"]:
+							subfolder = os.path.join(media, folder)
+							if os.path.isdir(subfolder) and not os.path.islink(subfolder) and not os.path.ismount(subfolder):
+								getImages(medias, [os.path.join(subfolder, x) for x in os.listdir(subfolder) if os.path.splitext(x)[1] == ".zip" and model in x])
+								for dir in [dir for dir in [os.path.join(subfolder, dir) for dir in os.listdir(subfolder)] if os.path.isdir(dir) and os.path.splitext(dir)[1] == ".unzipped"]:
 									shutil.rmtree(dir)
 				except:
 					pass
