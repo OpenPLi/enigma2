@@ -1347,7 +1347,7 @@ class OPKGMenu(Screen):
 	def fill_list(self):
 		flist = []
 		self.path = '/etc/opkg/'
-		if os.path.exists(self.path):
+		if not os.path.exists(self.path):
 			self.entry = False
 			return
 		for file in os.listdir(self.path):
