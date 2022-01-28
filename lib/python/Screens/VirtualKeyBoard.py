@@ -234,13 +234,13 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		self.czech = [
 			[
 				[";", "+", "\u011B", "\u0161", "\u010D", "\u0159", "\u017E", "\u00FD", "\u00E1", "\u00ED", "\u00E9", "=", "", "BACKSPACEICON"],
-				["FIRSTICON", "q", "w", "e", "r", "t", "z", "", "i", "o", "p", "\u00FA", "(", ")"],
+				["FIRSTICON", "q", "w", "e", "r", "t", "z", "u", "i", "o", "p", "\u00FA", "(", ")"],
 				["LASTICON", "a", "s", "d", "f", "g", "h", "j", "k", "l", "\u016F", "\u00A7", self.green, self.green],
 				["CAPSLOCKICON", "\\", "y", "x", "c", "v", "b", "n", "m", ",", ".", "-", "CAPSLOCKICON", "CAPSLOCKICON"],
 				self.footer
 			], [
 				[".", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "%", "'", "BACKSPACEICON"],
-				["FIRSTICON", "Q", "W", "E", "R", "T", "Z", "", "I", "O", "P", "/", "(", ")"],
+				["FIRSTICON", "Q", "W", "E", "R", "T", "Z", "U", "I", "O", "P", "/", "(", ")"],
 				["LASTICON", "A", "S", "D", "F", "G", "H", "J", "K", "L", "\"", "!", self.green, self.green],
 				["CAPSLOCKICON", "|", "Y", "X", "C", "V", "B", "N", "M", "?", ":", "_", "CAPSLOCKICON", "CAPSLOCKICON"],
 				self.footer
@@ -255,13 +255,13 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		self.english = [
 			[
 				["`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "BACKSPACEICON"],
-				["FIRSTICON", "q", "w", "e", "r", "t", "y", "", "i", "o", "p", "[", "]", "\\"],
+				["FIRSTICON", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "\\"],
 				["LASTICON", "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'", self.green, self.green],
 				["CAPSLOCKICON", "CAPSLOCKICON", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/", "CAPSLOCKICON", "CAPSLOCKICON"],
 				self.footer
 			], [
 				["~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+", "BACKSPACEICON"],
-				["FIRSTICON", "Q", "W", "E", "R", "T", "Y", "", "I", "O", "P", "{", "}", "|"],
+				["FIRSTICON", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "{", "}", "|"],
 				["LASTICON", "A", "S", "D", "F", "G", "H", "J", "K", "L", ":", "\"", self.green, self.green],
 				["CAPSLOCKICON", "CAPSLOCKICON", "Z", "X", "C", "V", "B", "N", "M", "<", ">", "?", "CAPSLOCKICON", "CAPSLOCKICON"],
 				self.footer
@@ -270,13 +270,13 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		self.french = [
 			[
 				["\u00B2", "&", "\u00E9", "\"", "'", "(", "-", "\u00E8", "_", "\u00E7", "\u00E0", ")", "=", "BACKSPACEICON"],
-				["FIRSTICON", "a", "z", "e", "r", "t", "y", "", "i", "o", "p", "^", "$", "*"],
+				["FIRSTICON", "a", "z", "e", "r", "t", "y", "u", "i", "o", "p", "^", "$", "*"],
 				["LASTICON", "q", "s", "d", "f", "g", "h", "j", "k", "l", "m", "\u00F9", self.green, self.green],
 				["CAPSLOCKICON", "<", "w", "x", "c", "v", "b", "n", ",", ";", ":", "!", "CAPSLOCKICON", "CAPSLOCKICON"],
 				self.footer
 			], [
 				["", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "\u00B0", "+", "BACKSPACEICON"],
-				["FIRSTICON", "A", "Z", "E", "R", "T", "Y", "", "I", "O", "P", "\u00A8", "\u00A3", "\u00B5"],
+				["FIRSTICON", "A", "Z", "E", "R", "T", "Y", "U", "I", "O", "P", "\u00A8", "\u00A3", "\u00B5"],
 				["LASTICON", "Q", "S", "D", "F", "G", "H", "J", "K", "L", "M", "%", self.green, self.green],
 				["CAPSLOCKICON", ">", "W", "X", "C", "V", "B", "N", "?", ".", "/", "\u00A7", "CAPSLOCKICON", "CAPSLOCKICON"],
 				self.footer
@@ -297,13 +297,13 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		self.german = [
 			[
 				["^", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "\u00DF", "'", "BACKSPACEICON"],
-				["FIRSTICON", "q", "w", "e", "r", "t", "z", "", "i", "o", "p", "\u00FC", "+", "#"],
+				["FIRSTICON", "q", "w", "e", "r", "t", "z", "u", "i", "o", "p", "\u00FC", "+", "#"],
 				["LASTICON", "a", "s", "d", "f", "g", "h", "j", "k", "l", "\u00F6", "\u00E4", self.green, self.green],
 				["CAPSLOCKICON", "<", "y", "x", "c", "v", "b", "n", "m", ",", ".", "-", "CAPSLOCKICON", "CAPSLOCKICON"],
 				self.footer
 			], [
 				["\u00B0", "!", "\"", "\u00A7", "$", "%", "&", "/", "(", ")", "=", "?", "`", "BACKSPACEICON"],
-				["FIRSTICON", "Q", "W", "E", "R", "T", "Z", "", "I", "O", "P", "\u00DC", "*", "'"],
+				["FIRSTICON", "Q", "W", "E", "R", "T", "Z", "U", "I", "O", "P", "\u00DC", "*", "'"],
 				["LASTICON", "A", "S", "D", "F", "G", "H", "J", "K", "L", "\u00D6", "\u00C4", self.green, self.green],
 				["CAPSLOCKICON", ">", "Y", "X", "C", "V", "B", "N", "M", ";", ":", "_", "CAPSLOCKICON", "CAPSLOCKICON"],
 				self.footer
@@ -339,13 +339,13 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		self.latvian = [
 			[
 				["`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "BACKSPACEICON"],
-				["FIRSTICON", "q", "w", "e", "r", "t", "y", "", "i", "o", "p", "[", "]", "\\"],
+				["FIRSTICON", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "\\"],
 				["LASTICON", "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'", self.green, self.green],
 				["CAPSLOCKICON", "CAPSLOCKICON", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/", "CAPSLOCKICON", "CAPSLOCKICON"],
 				self.footer
 			], [
 				["~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+", "BACKSPACEICON"],
-				["FIRSTICON", "Q", "W", "E", "R", "T", "Y", "", "I", "O", "P", "{", "}", "|"],
+				["FIRSTICON", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "{", "}", "|"],
 				["LASTICON", "A", "S", "D", "F", "G", "H", "J", "K", "L", ":", "\"", self.green, self.green],
 				["CAPSLOCKICON", "CAPSLOCKICON", "Z", "X", "C", "V", "B", "N", "M", "<", ">", "?", "CAPSLOCKICON", "CAPSLOCKICON"],
 				self.footer
@@ -381,13 +381,13 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		self.scandinavian = [
 			[
 				["\u00A7", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "+", "\u00B4", "BACKSPACEICON"],
-				["FIRSTICON", "q", "w", "e", "r", "t", "y", "", "i", "o", "p", "\u00E5", "\u00A8", "'"],
+				["FIRSTICON", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "\u00E5", "\u00A8", "'"],
 				["LASTICON", "a", "s", "d", "f", "g", "h", "j", "k", "l", "\u00F6", "\u00E4", self.green, self.green],
 				["CAPSLOCKICON", "<", "z", "x", "c", "v", "b", "n", "m", ",", ".", "-", "CAPSLOCKICON", "CAPSLOCKICON"],
 				self.footer
 			], [
 				["\u00BD", "!", "\"", "#", "\u00A4", "%", "&", "/", "(", ")", "=", "?", "`", "BACKSPACEICON"],
-				["FIRSTICON", "Q", "W", "E", "R", "T", "Y", "", "I", "O", "P", "\u00C5", "^", "*"],
+				["FIRSTICON", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "\u00C5", "^", "*"],
 				["LASTICON", "A", "S", "D", "F", "G", "H", "J", "K", "L", "\u00D6", "\u00C4", self.green, self.green],
 				["CAPSLOCKICON", ">", "Z", "X", "C", "V", "B", "N", "M", ";", ":", "_", "CAPSLOCKICON", "CAPSLOCKICON"],
 				self.footer
@@ -408,13 +408,13 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		self.spanish = [
 			[
 				["\u00BA", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "'", "\u00A1", "BACKSPACEICON"],
-				["FIRSTICON", "q", "w", "e", "r", "t", "y", "", "i", "o", "p", "`", "+", "\u00E7"],
+				["FIRSTICON", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "`", "+", "\u00E7"],
 				["LASTICON", "a", "s", "d", "f", "g", "h", "j", "k", "l", "\u00F1", "\u00B4", self.green, self.green],  # [, ]
 				["CAPSLOCKICON", "<", "z", "x", "c", "v", "b", "n", "m", ",", ".", "-", "CAPSLOCKICON", "CAPSLOCKICON"],
 				self.footer
 			], [
 				["\u00AA", "!", "\"", "\u00B7", "$", "%", "&", "/", "(", ")", "=", "?", "\u00BF", "BACKSPACEICON"],
-				["FIRSTICON", "Q", "W", "E", "R", "T", "Y", "", "I", "O", "P", "^", "*", "\u00C7"],
+				["FIRSTICON", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "^", "*", "\u00C7"],
 				["LASTICON", "A", "S", "D", "F", "G", "H", "J", "K", "L", "\u00D1", "\u00A8", self.green, self.green],  # {, }
 				["CAPSLOCKICON", ">", "Z", "X", "C", "V", "B", "N", "M", ";", ":", "_", "CAPSLOCKICON", "CAPSLOCKICON"],
 				self.footer
