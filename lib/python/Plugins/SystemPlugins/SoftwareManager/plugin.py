@@ -2,7 +2,6 @@ import os
 import time
 import pickle
 from Plugins.Plugin import PluginDescriptor
-from Screens.Console import Console
 from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
@@ -23,14 +22,13 @@ from Components.ConfigList import ConfigListScreen
 from Components.Console import Console
 from Components.SelectionList import SelectionList
 from Components.PluginComponent import plugins
-from Components.About import about
 from Components.PackageInfo import PackageInfoHandler
 from Components.Language import language
 from Components.AVSwitch import AVSwitch
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_PLUGIN, SCOPE_CURRENT_SKIN, SCOPE_METADIR
 from Tools.LoadPixmap import LoadPixmap
 from Tools.NumericalTextInput import NumericalTextInput
-from enigma import RT_HALIGN_LEFT, RT_VALIGN_CENTER, eListbox, gFont, getDesktop, ePicLoad, eRCInput, getPrevAsciiCode, eEnv
+from enigma import ePicLoad, eRCInput, getPrevAsciiCode, eEnv
 from twisted.web import client
 from Plugins.SystemPlugins.SoftwareManager.BackupRestore import BackupSelection, RestoreMenu, BackupScreen, RestoreScreen, getBackupPath, getBackupFilename
 from Plugins.SystemPlugins.SoftwareManager.SoftwareTools import iSoftwareTools
@@ -1317,12 +1315,12 @@ class OPKGMenu(Screen):
 		self["actions"] = NumberActionMap(["SetupActions"],
 		{
 			"ok": self.KeyOk,
-			"cancel": self.keyCancel
+			"cancel": self.close
 		}, -1)
 
 		self["shortcuts"] = ActionMap(["ShortcutActions"],
 		{
-			"red": self.keyCancel,
+			"red": self.close,
 			"green": self.KeyOk,
 		})
 		self["filelist"] = MenuList([])
@@ -1346,12 +1344,6 @@ class OPKGMenu(Screen):
 			self.sel = self["filelist"].getCurrent()
 			self.val = self.path + self.sel
 			self.session.open(OPKGSource, self.val)
-
-	def keyCancel(self):
-		self.close()
-
-	def Exit(self):
-		self.close()
 
 
 class OPKGSource(Screen):
@@ -1379,17 +1371,10 @@ class OPKGSource(Screen):
 			except IOError:
 				pass
 
-		desk = getDesktop(0)
-		x = int(desk.size().width())
-		y = int(desk.size().height())
-
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
 
-		if (y >= 720):
-			self["text"] = Input(text, maxSize=False, type=Input.TEXT)
-		else:
-			self["text"] = Input(text, maxSize=False, visible_width=55, type=Input.TEXT)
+		self["text"] = Input(text, maxSize=False, type=Input.TEXT)
 
 		self["actions"] = NumberActionMap(["WizardActions", "InputActions", "TextEntryActions", "KeyboardInputActions", "ShortcutActions"],
 		{
