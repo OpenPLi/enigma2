@@ -1495,7 +1495,7 @@ class PacketManager(Screen, NumericalTextInput):
 		self.setTitle(_("Packet manager"))
 		self.skin_path = plugin_path
 
-		self.setUseableChars(u'1234567890abcdefghijklmnopqrstuvwxyz')
+		self.setUseableChars('1234567890abcdefghijklmnopqrstuvwxyz')
 
 		self["shortcuts"] = NumberActionMap(["ShortcutActions", "WizardActions", "NumberActions", "InputActions", "InputAsciiActions", "KeyboardInputActions"],
 		{
