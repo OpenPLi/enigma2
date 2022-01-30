@@ -144,10 +144,12 @@ class ChoiceBox(Screen):
 		pass
 
 	def rightUp(self):
-		self.updateDescription()
+		if len(self["list"].list) > 0:
+			self.updateSummary(self["list"].l.getCurrentSelectionIndex())
 
 	def leftUp(self):
-		self.updateDescription()
+		if len(self["list"].list) > 0:
+			self.updateSummary(self["list"].l.getCurrentSelectionIndex())
 
 	def updateDescription(self):
 		if len(self["list"].list) > 0:
