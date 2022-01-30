@@ -660,7 +660,7 @@ class ChannelContextMenu(Screen):
 			return 0
 
 	def runPlugin(self, plugin):
-		plugin(session=self.session, service=self.csel.getCurrentSelection())
+		plugin.__call__(session=self.session, service=self.csel.getCurrentSelection())
 		self.close()
 
 
