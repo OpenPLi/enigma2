@@ -332,7 +332,7 @@ void handleFatalSignal(int signum, siginfo_t *si, void *ctx)
 #ifdef __GLIBC__
 	print_backtrace();
 #endif
-	eLog(lvlFatal, "-------FATAL SIGNAL");
+	eLog(lvlFatal, "-------FATAL SIGNAL %d", signum);
 	bsodFatal("enigma2, signal");
 }
 
