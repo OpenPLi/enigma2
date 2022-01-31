@@ -303,9 +303,9 @@ void oops(const mcontext_t &context)
  * it's not async-signal-safe and so must not be used in signal
  * handlers.
  */
-#ifdef __GLIBC__
 void print_backtrace()
 {
+#ifdef __GLIBC__
 	void *array[15];
 	size_t size;
 	size_t cnt;
@@ -322,16 +322,14 @@ void print_backtrace()
 			eLog(lvlFatal, "%s(%s) [0x%lX]", info.dli_fname, info.dli_sname != NULL ? info.dli_sname : "n/a", (unsigned long int) array[cnt]);
 		}
 	}
-}
 #endif
+}
 
 void handleFatalSignal(int signum, siginfo_t *si, void *ctx)
 {
 	ucontext_t *uc = (ucontext_t*)ctx;
 	oops(uc->uc_mcontext);
-#ifdef __GLIBC__
 	print_backtrace();
-#endif
 	eLog(lvlFatal, "-------FATAL SIGNAL %d", signum);
 	bsodFatal("enigma2, signal");
 }
