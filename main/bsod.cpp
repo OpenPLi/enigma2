@@ -23,7 +23,7 @@ static const char *crash_emailaddr =
 	CRASH_EMAILADDR;
 #endif
 
-/* Defined in bsod.cpp */
+/* Defined in eerror.cpp */
 void retrieveLogBuffer(const char **p1, unsigned int *s1, const char **p2, unsigned int *s2);
 
 static const std::string getConfigString(const std::string &key, const std::string &defaultValue)
