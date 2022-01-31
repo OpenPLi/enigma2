@@ -234,13 +234,13 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		self.czech = [
 			[
 				[";", "+", "\u011B", "\u0161", "\u010D", "\u0159", "\u017E", "\u00FD", "\u00E1", "\u00ED", "\u00E9", "=", "", "BACKSPACEICON"],
-				["FIRSTICON", "q", "w", "e", "r", "t", "z", "", "i", "o", "p", "\u00FA", "(", ")"],
+				["FIRSTICON", "q", "w", "e", "r", "t", "z", "u", "i", "o", "p", "\u00FA", "(", ")"],
 				["LASTICON", "a", "s", "d", "f", "g", "h", "j", "k", "l", "\u016F", "\u00A7", self.green, self.green],
 				["CAPSLOCKICON", "\\", "y", "x", "c", "v", "b", "n", "m", ",", ".", "-", "CAPSLOCKICON", "CAPSLOCKICON"],
 				self.footer
 			], [
 				[".", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "%", "'", "BACKSPACEICON"],
-				["FIRSTICON", "Q", "W", "E", "R", "T", "Z", "", "I", "O", "P", "/", "(", ")"],
+				["FIRSTICON", "Q", "W", "E", "R", "T", "Z", "U", "I", "O", "P", "/", "(", ")"],
 				["LASTICON", "A", "S", "D", "F", "G", "H", "J", "K", "L", "\"", "!", self.green, self.green],
 				["CAPSLOCKICON", "|", "Y", "X", "C", "V", "B", "N", "M", "?", ":", "_", "CAPSLOCKICON", "CAPSLOCKICON"],
 				self.footer
@@ -255,13 +255,13 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		self.english = [
 			[
 				["`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "BACKSPACEICON"],
-				["FIRSTICON", "q", "w", "e", "r", "t", "y", "", "i", "o", "p", "[", "]", "\\"],
+				["FIRSTICON", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "\\"],
 				["LASTICON", "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'", self.green, self.green],
 				["CAPSLOCKICON", "CAPSLOCKICON", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/", "CAPSLOCKICON", "CAPSLOCKICON"],
 				self.footer
 			], [
 				["~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+", "BACKSPACEICON"],
-				["FIRSTICON", "Q", "W", "E", "R", "T", "Y", "", "I", "O", "P", "{", "}", "|"],
+				["FIRSTICON", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "{", "}", "|"],
 				["LASTICON", "A", "S", "D", "F", "G", "H", "J", "K", "L", ":", "\"", self.green, self.green],
 				["CAPSLOCKICON", "CAPSLOCKICON", "Z", "X", "C", "V", "B", "N", "M", "<", ">", "?", "CAPSLOCKICON", "CAPSLOCKICON"],
 				self.footer
