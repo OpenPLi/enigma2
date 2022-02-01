@@ -34,7 +34,8 @@ class HdmiCECSetupScreen(Screen, ConfigListScreen):
 
 		self.list = []
 		self.logpath_entry = None
-		ConfigListScreen.__init__(self, self.list, session=self.session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.createSetup)
+		self["config"].onSelectionChanged.append(self.updateDescription)
 		self.createSetup()
 		self.updateAddress()
 
@@ -66,19 +67,6 @@ class HdmiCECSetupScreen(Screen, ConfigListScreen):
 				self.list.append(self.logpath_entry)
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
-
-	def changedEntry(self):
-		self.createSetup()
-
-	# for summary:
-	def getCurrentEntry(self):
-		self.updateDescription()
-		return ConfigListScreen.getCurrentEntry(self)
-
-	def createSummary(self):
-		from Screens.Setup import SetupSummary
-		return SetupSummary
-	###
 
 	def updateDescription(self):
 		text = "%s\n%s\n\n%s" % (self.current_address, self.fixed_address, self.getCurrentDescription()) if config.hdmicec.enabled.value else self.getCurrentDescription()
