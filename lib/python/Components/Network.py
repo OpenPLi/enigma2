@@ -65,7 +65,7 @@ class Network:
 	def getAddrInet(self, iface, callback):
 		data = {'up': False, 'dhcp': False, 'preup': False, 'predown': False}
 		try:
-			data['up'] = int(open('/sys/class/net/%s/flags' % iface).read().strip(), 16) & 1 == 1
+			data['up'] = open('/sys/class/net/%s/carrier' % iface).read()
 			if data['up']:
 				self.configuredInterfaces.append(iface)
 			nit = ni.ifaddresses(iface)
@@ -139,12 +139,13 @@ class Network:
 			split = i.strip().split(' ')
 			if split[0] == "iface":
 				currif = split[1]
-				ifaces[currif] = {}
-				if len(split) == 4 and split[3] == "dhcp":
-					ifaces[currif]["dhcp"] = True
-				else:
-					ifaces[currif]["dhcp"] = False
 			if currif == iface: #read information only for available interfaces
+				if currif not in ifaces:
+					ifaces[currif] = {}
+					if len(split) == 4 and split[3] == "dhcp":
+						ifaces[currif]["dhcp"] = True
+					else:
+						ifaces[currif]["dhcp"] = False
 				if split[0] == "address":
 					ifaces[currif]["address"] = map(int, split[1].split('.'))
 					if "ip" in self.ifaces[currif]:
@@ -294,7 +295,8 @@ class Network:
 		return self.ifaces.keys()
 
 	def getAdapterAttribute(self, iface, attribute):
-		if self.ifaces.get(iface, {}).get('ip') == [0, 0, 0, 0]:
+		print "Getting attribute ", attribute, " for adapter", iface
+		if self.ifaces.get(iface, {}).get('up', False):
 			self.getAddrInet(iface, None)
 		return self.ifaces.get(iface, {}).get(attribute)
 
