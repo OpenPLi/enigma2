@@ -18,7 +18,7 @@ int Select(int maxfd, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, stru
 {
 	int retval;
 	fd_set rset, wset, xset;
-	timeval interval;
+	timeval interval = {};
 
 	/* make a backup of all fd_set's and timeval struct */
 	if (readfds) rset = *readfds;
@@ -73,7 +73,7 @@ ssize_t singleRead(int fd, void *buf, size_t count)
 ssize_t timedRead(int fd, void *buf, size_t count, int initialtimeout, int interbytetimeout)
 {
 	fd_set rset;
-	struct timeval timeout;
+	struct timeval timeout = {};
 	int result;
 	size_t totalread = 0;
 
@@ -189,7 +189,7 @@ int Connect(const char *hostname, int port, int timeoutsec)
 				{
 					int error;
 					socklen_t len = sizeof(error);
-					timeval timeout;
+					timeval timeout = {};
 					fd_set wset;
 					FD_ZERO(&wset);
 					FD_SET(sd, &wset);

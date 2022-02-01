@@ -211,7 +211,7 @@ int eSocket::writeBlock(const char *data, unsigned int len)
 		if ((tw < 0) && (errno != EWOULDBLOCK)) {
 	// don't use eDebug here because of a adaptive mutex in the eDebug call..
 	// and eDebug self can cause a call of writeBlock !!
-			struct timespec tp;
+			struct timespec tp = {};
 			clock_gettime(CLOCK_MONOTONIC, &tp);
 			fprintf(stderr, "<%6lu.%06lu> [eSocket] write: %m\n", tp.tv_sec, tp.tv_nsec/1000);
 		}
@@ -269,8 +269,8 @@ int eSocket::connectToHost(std::string hostname, int port)
 {
 	int res;
 	struct addrinfo *addr = NULL;
-	struct addrinfo hints;
-	char portnumber[16];
+	struct addrinfo hints = {};
+	char portnumber[16] = {};
 
 	memset(&hints, 0, sizeof(hints));
 	hints.ai_family = AF_UNSPEC; /* both ipv4 and ipv6 */
@@ -334,8 +334,8 @@ eUnixDomainSocket::~eUnixDomainSocket()
 int eUnixDomainSocket::connectToPath(std::string path)
 {
 	int res;
-	struct sockaddr_un serv_addr_un;
-	struct addrinfo addr;
+	struct sockaddr_un serv_addr_un = {};
+	struct addrinfo addr = {};
 
 	memset(&serv_addr_un, 0, sizeof(serv_addr_un));
 	serv_addr_un.sun_family = AF_LOCAL;

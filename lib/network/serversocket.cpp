@@ -74,8 +74,8 @@ eServerSocket::eServerSocket(int port, eMainloop *ml): eSocket(ml)
 {
 	int res;
 	struct addrinfo *addr = NULL;
-	struct addrinfo hints;
-	char portnumber[16];
+	struct addrinfo hints = {};
+	char portnumber[16] = {};
 
 	okflag = 0;
 	strRemoteHost = "";
@@ -107,8 +107,8 @@ eServerSocket::eServerSocket(int port, eMainloop *ml): eSocket(ml)
 
 eServerSocket::eServerSocket(std::string path, eMainloop *ml) : eSocket(ml)
 {
-	struct sockaddr_un serv_addr_un;
-	struct addrinfo addr;
+	struct sockaddr_un serv_addr_un = {};
+	struct addrinfo addr = {};
 
 	okflag = 0;
 	strRemoteHost = "";

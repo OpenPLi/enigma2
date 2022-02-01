@@ -150,7 +150,7 @@ void eDebugImpl(int flags, const char* fmt, ...)
 {
 	char * buf = new char[eDEBUG_BUFLEN];
 	int pos = 0;
-	struct timespec tp;
+	struct timespec tp = {};
 
 	if (debugTime && !(flags & _DBGFLG_NOTIME)) {
 		clock_gettime(CLOCK_MONOTONIC, &tp);

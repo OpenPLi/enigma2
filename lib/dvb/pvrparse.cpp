@@ -870,7 +870,7 @@ int eMPEGStreamParserTS::processPacket(const unsigned char *pkt, off_t offset)
 		/* scrambled stream, we cannot parse pts, extrapolate with measured stream time instead */
 		if (pusi && m_enable_accesspoints)
 		{
-			timespec now, diff;
+			timespec now = {}, diff = {};
 			clock_gettime(CLOCK_MONOTONIC, &now);
 			diff = now - m_last_access_point;
 			/* limit the number of extrapolated access points to one per second */
@@ -1188,7 +1188,7 @@ void eMPEGStreamParserTS::parseData(off_t offset, const void *data, unsigned int
 
 void eMPEGStreamParserTS::addAccessPoint(off_t offset, pts_t pts, bool streamtime)
 {
-	timespec now;
+	timespec now = {};
 	clock_gettime(CLOCK_MONOTONIC, &now);
 	addAccessPoint(offset, pts, now, streamtime);
 	m_has_accesspoints = true;

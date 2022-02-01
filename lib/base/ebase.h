@@ -50,7 +50,7 @@ static inline timespec &operator+=( timespec &t1, const timespec &t2 )
 
 static inline timespec operator+( const timespec &t1, const timespec &t2 )
 {
-	timespec tmp;
+	timespec tmp = {};
 	tmp.tv_sec = t1.tv_sec + t2.tv_sec;
 	if ( (tmp.tv_nsec = t1.tv_nsec + t2.tv_nsec) >= 1000000000 )
 	{
@@ -62,7 +62,7 @@ static inline timespec operator+( const timespec &t1, const timespec &t2 )
 
 static inline timespec operator-( const timespec &t1, const timespec &t2 )
 {
-	timespec tmp;
+	timespec tmp = {};
 	tmp.tv_sec = t1.tv_sec - t2.tv_sec;
 	if ( (tmp.tv_nsec = t1.tv_nsec - t2.tv_nsec) < 0 )
 	{
@@ -96,7 +96,7 @@ static inline timespec &operator+=( timespec &t1, const long msek )
 
 static inline timespec operator+( const timespec &t1, const long msek )
 {
-	timespec tmp;
+	timespec tmp = {};
 	tmp.tv_sec = t1.tv_sec + msek / 1000;
 	if ( (tmp.tv_nsec = t1.tv_nsec + (msek % 1000) * 1000000) >= 1000000000 )
 	{
@@ -108,7 +108,7 @@ static inline timespec operator+( const timespec &t1, const long msek )
 
 static inline timespec operator-( const timespec &t1, const long msek )
 {
-	timespec tmp;
+	timespec tmp = {};
 	tmp.tv_sec = t1.tv_sec - msek / 1000;
 	if ( (tmp.tv_nsec = t1.tv_nsec - (msek % 1000)*1000000) < 0 )
 	{
@@ -131,7 +131,7 @@ static inline timespec operator-=( timespec &t1, const long msek )
 
 static inline long timeout_usec ( const timespec & orig )
 {
-	timespec now, diff;
+	timespec now = {}, diff = {};
 	clock_gettime(CLOCK_MONOTONIC, &now);
 	diff = orig - now;
 	if (diff.tv_sec > 2000)
@@ -198,7 +198,7 @@ class eMainloop
 	int retval;
 	eSocketNotifier *m_inActivate;
 	int m_interrupt_requested;
-	timespec m_twisted_timer;
+	timespec m_twisted_timer = {};
 
 	/* user_timeout < 0 - forever
 	 * user_timeout = 0 - immediately
@@ -283,7 +283,7 @@ class eTimer: iObject
 	friend class eMainloop;
 
 	eMainloop &context;
-	timespec nextActivation;
+	timespec nextActivation = {};
 	long interval;
 	bool bSingleShot;
 	bool bActive;

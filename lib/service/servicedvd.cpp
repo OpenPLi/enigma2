@@ -111,14 +111,14 @@ int eStaticServiceDVDInfo::getInfo(const eServiceReference &ref, int w)
 	{
 	case iServiceInformation::sTimeCreate:
 		{
-			struct stat s;
+			struct stat s = {};
 			if (stat(ref.path.c_str(), &s) == 0)
 				return s.st_mtime;
 		}
 		break;
 	case iServiceInformation::sFileSize:
 		{
-			struct stat s;
+			struct stat s = {};
 			if (stat(ref.path.c_str(), &s) == 0)
 				return s.st_size;
 		}
@@ -129,7 +129,7 @@ int eStaticServiceDVDInfo::getInfo(const eServiceReference &ref, int w)
 
 long long eStaticServiceDVDInfo::getFileSize(const eServiceReference &ref)
 {
-	struct stat s;
+	struct stat s = {};
 	if (stat(ref.path.c_str(), &s) == 0)
 		return s.st_size;
 	return 0;
@@ -356,8 +356,8 @@ void eServiceDVD::gotMessage(int /*what*/)
 		}
 		case DDVD_SHOWOSD_TIME:
 		{
-			static struct ddvd_time last_info;
-			struct ddvd_time info;
+			static struct ddvd_time last_info = {};
+			struct ddvd_time info = {};
 			// eDebug("[eServiceDVD] DVD_SHOWOSD_TIME");
 			ddvd_get_last_time(m_ddvdconfig, &info);
 			if ( info.pos_chapter != last_info.pos_chapter )
@@ -629,28 +629,28 @@ int eServiceDVD::getInfo(int w)
 	{
 		case sCurrentChapter:
 		{
-			struct ddvd_time info;
+			struct ddvd_time info = {};
 			ddvd_get_last_time(m_ddvdconfig, &info);
 			eDebugNoNewLine(" current chapter=%d\n", info.pos_chapter);
 			return info.pos_chapter;
 		}
 		case sTotalChapters:
 		{
-			struct ddvd_time info;
+			struct ddvd_time info = {};
 			ddvd_get_last_time(m_ddvdconfig, &info);
 			eDebugNoNewLine(" total chapters=%d\n", info.end_chapter);
 			return info.end_chapter;
 		}
 		case sCurrentTitle:
 		{
-			struct ddvd_time info;
+			struct ddvd_time info = {};
 			ddvd_get_last_time(m_ddvdconfig, &info);
 			eDebugNoNewLine(" current titlepos=%d\n", info.pos_title);
 			return info.pos_title;
 		}
 		case sTotalTitles:
 		{
-			struct ddvd_time info;
+			struct ddvd_time info = {};
 			ddvd_get_last_time(m_ddvdconfig, &info);
 			eDebugNoNewLine(" total titles=%d\n", info.end_title);
 			return info.end_title;
@@ -820,7 +820,7 @@ RESULT eServiceDVD::getSubtitleList(std::vector<struct SubtitleTrack> &subtitlel
 
 	for ( unsigned int spu_id = 0; spu_id < spu_count; spu_id++ )
 	{
-		struct SubtitleTrack track;
+		struct SubtitleTrack track = {};
 		uint16_t spu_lang;
 		ddvd_get_spu_byid(m_ddvdconfig, spu_id, &spu_lang);
 		char spu_string[3]={(char) ((spu_lang >> 8) & 0xff), (char)(spu_lang & 0xff), 0};
@@ -845,7 +845,7 @@ RESULT eServiceDVD::getCachedSubtitle(struct SubtitleTrack &track)
 RESULT eServiceDVD::getLength(pts_t &len)
 {
 	// eDebug("eServiceDVD::getLength");
-	struct ddvd_time info;
+	struct ddvd_time info = {};
 	ddvd_get_last_time(m_ddvdconfig, &info);
 	len = info.end_hours * 3600;
 	len += info.end_minutes * 60;
@@ -879,7 +879,7 @@ RESULT eServiceDVD::seekRelative(int direction, pts_t to)
 
 RESULT eServiceDVD::getPlayPosition(pts_t &pos)
 {
-	struct ddvd_time info;
+	struct ddvd_time info = {};
 	ddvd_get_last_time(m_ddvdconfig, &info);
 	pos = info.pos_hours * 3600;
 	pos += info.pos_minutes * 60;
@@ -1004,7 +1004,7 @@ void eServiceDVD::setCutListEnable(int /*enable*/)
 
 void eServiceDVD::loadCuesheet()
 {
-	struct stat st;
+	struct stat st = {};
 	FILE* f;
 	std::string filename = m_ref.path;
 
@@ -1070,12 +1070,12 @@ void eServiceDVD::saveCuesheet()
 {
 	eDebug("[eServiceDVD] saveCuesheet");
 
-	struct ddvd_resume resume_info;
+	struct ddvd_resume resume_info = {};
 	ddvd_get_resume_pos(m_ddvdconfig, &resume_info);
 
 	if (resume_info.title)
 	{
-		struct ddvd_time info;
+		struct ddvd_time info = {};
 		ddvd_get_last_time(m_ddvdconfig, &info);
 		pts_t pos;
 		pos = info.pos_hours * 3600;
@@ -1092,7 +1092,7 @@ void eServiceDVD::saveCuesheet()
 		m_cue_pts = 0;
 	}
 
-	struct stat st;
+	struct stat st = {};
 	FILE* f = NULL;
 	std::string filename = m_ref.path;
 

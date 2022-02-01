@@ -177,7 +177,7 @@ static void sigterm_handler(int num)
 
 void catchTermSignal()
 {
-	struct sigaction act;
+	struct sigaction act = {};
 
 	act.sa_handler = sigterm_handler;
 	act.sa_flags = SA_RESTART;
@@ -264,7 +264,7 @@ int main(int argc, char **argv)
 		ePtr<gPixmap> wait[MAX_SPINNER];
 		for (i=0; i<MAX_SPINNER; ++i)
 		{
-			char filename[64];
+			char filename[64] = {};
 			std::string rfilename;
 			snprintf(filename, sizeof(filename), "${datadir}/enigma2/skin_default/spinner/wait%d.png", i + 1);
 			rfilename = eEnv::resolve(filename);

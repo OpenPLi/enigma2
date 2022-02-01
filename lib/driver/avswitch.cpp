@@ -102,7 +102,7 @@ eAVSwitch *eAVSwitch::getInstance()
 
 bool eAVSwitch::haveScartSwitch()
 {
-	char tmp[255];
+	char tmp[255] = {};
 	int fd = open("/proc/stb/avs/0/input_choices", O_RDONLY);
 	if(fd < 0) {
 		eDebug("[eAVSwitch] cannot open /proc/stb/avs/0/input_choices: %m");

@@ -160,7 +160,7 @@ off_t eRawFile::length()
 	}
 	else
 	{
-		struct stat st;
+		struct stat st = {};
 		if (::fstat(m_fd, &st) < 0)
 			return -1;
 		return st.st_size;
