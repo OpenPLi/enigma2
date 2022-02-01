@@ -206,6 +206,8 @@ class ConfigListScreen:
 		elif "VKeyIcon" in self:
 			self["VirtualKB"].setEnabled(False)
 			self["VKeyIcon"].boolean = False
+		if "description" in self:
+			self["description"].text = self.getCurrentDescription()
 
 	def KeyText(self):
 		self["config"].hideHelp()

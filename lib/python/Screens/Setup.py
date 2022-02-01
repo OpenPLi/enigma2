@@ -101,12 +101,7 @@ class Setup(ConfigListScreen, Screen):
 
 		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
 		self.createSetupList()
-		if self.selectionChanged not in self["config"].onSelectionChanged:
-			self["config"].onSelectionChanged.append(self.selectionChanged)
-		self.setTitle(_(self.setup_title))
-
-	def selectionChanged(self):
-		self["description"].text = self.getCurrentDescription() if len(self["config"].getList()) else ""
+		self.title = _(self.setup_title)
 
 	def createSetupList(self):
 		currentItem = self["config"].getCurrent()
