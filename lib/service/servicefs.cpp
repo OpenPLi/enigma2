@@ -178,7 +178,7 @@ RESULT eServiceFS::getContent(std::list<eServiceReference> &list, bool sorted)
 		filename = path;
 		filename += e->d_name;
 
-		struct stat s;
+		struct stat s = {};
 		if (::stat(filename.c_str(), &s) < 0)
 			continue;
 

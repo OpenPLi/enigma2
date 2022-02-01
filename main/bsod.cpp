@@ -143,8 +143,8 @@ void bsodFatal(const char *component)
 	if (f)
 	{
 		time_t t = time(0);
-		struct tm tm;
-		char tm_str[32];
+		struct tm tm = {};
+		char tm_str[32] = {};
 
 		localtime_r(&t, &tm);
 		strftime(tm_str, sizeof(tm_str), "%a %b %_d %T %Y", &tm);
@@ -336,7 +336,7 @@ void handleFatalSignal(int signum, siginfo_t *si, void *ctx)
 
 void bsodCatchSignals()
 {
-	struct sigaction act;
+	struct sigaction act = {};
 	act.sa_sigaction = handleFatalSignal;
 	act.sa_flags = SA_RESTART | SA_SIGINFO;
 	if (sigemptyset(&act.sa_mask) == -1)

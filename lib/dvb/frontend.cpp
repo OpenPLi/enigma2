@@ -612,8 +612,8 @@ int eDVBFrontend::openFrontend()
 		{
 			m_dvbversion = DVB_VERSION(3, 0);
 #if defined DTV_API_VERSION
-			struct dtv_property p;
-			struct dtv_properties cmdseq;
+			struct dtv_property p = {};
+			struct dtv_properties cmdseq = {};
 			cmdseq.props = &p;
 			cmdseq.num = 1;
 			p.cmd = DTV_API_VERSION;
@@ -635,9 +635,9 @@ int eDVBFrontend::openFrontend()
 			}
 			strncpy(m_description, fe_info.name, sizeof(m_description) - 1);
 #if defined DTV_ENUM_DELSYS
-			struct dtv_property p[1];
+			struct dtv_property p[1] = {};
 			p[0].cmd = DTV_ENUM_DELSYS;
-			struct dtv_properties cmdseq;
+			struct dtv_properties cmdseq = {};
 			cmdseq.num = 1;
 			cmdseq.props = p;
 			if (::ioctl(m_fd, FE_GET_PROPERTY, &cmdseq) >= 0)
@@ -838,7 +838,7 @@ void eDVBFrontend::feEvent(int w)
 	}
 	while (1)
 	{
-		dvb_frontend_event event;
+		dvb_frontend_event event = {};
 		int res;
 		int state;
 		res = ::ioctl(m_fd, FE_GET_EVENT, &event);
@@ -1374,7 +1374,7 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 
 int eDVBFrontend::readFrontendData(int type)
 {
-	char force_legacy_signal_stats[64];
+	char force_legacy_signal_stats[64] = {};
 	sprintf(force_legacy_signal_stats, "config.Nims.%d.force_legacy_signal_stats", m_slotid);
 
 	switch(type)
@@ -1412,7 +1412,7 @@ int eDVBFrontend::readFrontendData(int type)
 #if DVB_API_VERSION > 5 || DVB_API_VERSION == 5 && DVB_API_VERSION_MINOR >= 10
 				if (m_dvbversion >= DVB_VERSION(5, 10) && !eConfigManager::getConfigBoolValue(force_legacy_signal_stats, false))
 				{
-					dtv_property prop[1];
+					dtv_property prop[1] = {};
 					prop[0].cmd = DTV_STAT_CNR;
 					dtv_properties props;
 					props.props = prop;
@@ -1474,7 +1474,7 @@ int eDVBFrontend::readFrontendData(int type)
 #if DVB_API_VERSION > 5 || DVB_API_VERSION == 5 && DVB_API_VERSION_MINOR >= 10
 					if (m_dvbversion >= DVB_VERSION(5, 10) && !eConfigManager::getConfigBoolValue(force_legacy_signal_stats, false))
 					{
-						dtv_property prop[1];
+						dtv_property prop[1] = {};
 						prop[0].cmd = DTV_STAT_SIGNAL_STRENGTH;
 						dtv_properties props;
 						props.props = prop;
@@ -1520,8 +1520,8 @@ int eDVBFrontend::readFrontendData(int type)
 		}
 		case iFrontendInformation_ENUMS::frequency:
 		{
-			struct dtv_property p;
-			struct dtv_properties cmdseq;
+			struct dtv_property p = {};
+			struct dtv_properties cmdseq = {};
 			oparm.getSystem(type);
 			cmdseq.props = &p;
 			cmdseq.num = 1;
@@ -1545,8 +1545,8 @@ void eDVBFrontend::getFrontendStatus(ePtr<iDVBFrontendStatus> &dest)
 void eDVBFrontend::getTransponderData(ePtr<iDVBTransponderData> &dest, bool original)
 {
 	int type = -1;
-	struct dtv_property p[18];
-	struct dtv_properties cmdseq;
+	struct dtv_property p[18] = {};
+	struct dtv_properties cmdseq = {};
 	oparm.getSystem(type);
 	cmdseq.props = p;
 	cmdseq.num = 0;
@@ -1645,7 +1645,7 @@ int eDVBFrontend::readInputpower()
 	if (m_simulate)
 		return 0;
 	int power=m_slotid;  // this is needed for read inputpower from the correct tuner !
-	char proc_name[64];
+	char proc_name[64] = {};
 	sprintf(proc_name, "/proc/stb/frontend/%d/lnb_sense", m_slotid);
 
 	if (CFile::parseInt(&power, proc_name) == 0)
@@ -1915,7 +1915,7 @@ int eDVBFrontend::tuneLoopInt()  // called by m_tuneTimer
 					bool timeout = false;
 					while (1)
 					{
-						dvb_frontend_event event;
+						dvb_frontend_event event = {};
 						int res;
 						res = ::ioctl(m_fd, FE_GET_EVENT, &event);
 
@@ -2038,7 +2038,7 @@ int eDVBFrontend::tuneLoopInt()  // called by m_tuneTimer
 			{
 				if (!m_simulate)
 				{
-					char proc_name[64];
+					char proc_name[64] = {};
 					sprintf(proc_name, "/proc/stb/frontend/%d/static_current_limiting", sec_fe->m_dvbid);
 					CFile f(proc_name, "w");
 					if (f) // new interface exist?
@@ -2051,7 +2051,7 @@ int eDVBFrontend::tuneLoopInt()  // called by m_tuneTimer
 					}
 					else if (sec_fe->m_need_rotor_workaround)
 					{
-						char dev[32];
+						char dev[32] = {};
 						int slotid = sec_fe->m_slotid;
 						// FIXMEEEEEE hardcoded i2c devices for dm7025 and dm8000
 						if (slotid < 2)
@@ -2119,8 +2119,8 @@ void eDVBFrontend::setFrontend(bool recvEvents)
 		if (recvEvents)
 			m_sn->start();
 		feEvent(-1); // flush events
-		struct dtv_property p[18];
-		struct dtv_properties cmdseq;
+		struct dtv_property p[18] = {};
+		struct dtv_properties cmdseq = {};
 		cmdseq.props = p;
 		cmdseq.num = 0;
 		p[cmdseq.num].cmd = DTV_CLEAR, cmdseq.num++;
@@ -2796,7 +2796,7 @@ RESULT eDVBFrontend::setTone(int t)
 
 RESULT eDVBFrontend::sendDiseqc(const eDVBDiseqcCommand &diseqc)
 {
-	struct dvb_diseqc_master_cmd cmd;
+	struct dvb_diseqc_master_cmd cmd = {};
 	if (m_simulate)
 		return 0;
 	if (m_type != feSatellite)
@@ -3040,8 +3040,8 @@ void eDVBFrontend::setDeliverySystemWhitelist(const std::vector<fe_delivery_syst
 
 bool eDVBFrontend::setDeliverySystem(const char *type)
 {
-	struct dtv_property p[1];
-	struct dtv_properties cmdseq;
+	struct dtv_property p[1] = {};
+	struct dtv_properties cmdseq = {};
 	int fetype;
 
 	if (m_fd < 0)

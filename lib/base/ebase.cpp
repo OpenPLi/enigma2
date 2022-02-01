@@ -188,7 +188,7 @@ int eMainloop::processOneEvent(long user_timeout, PyObject **res, ePyObject addi
 		{
 			eTimer *tmr = *it;
 			/* get current time */
-			timespec now;
+			timespec now = {};
 			clock_gettime(CLOCK_MONOTONIC, &now);
 			/* process all timers which are ready. first remove them out of the list. */
 			while (tmr->needsActivation(now))
@@ -224,7 +224,7 @@ int eMainloop::processOneEvent(long user_timeout, PyObject **res, ePyObject addi
 		fdcount += PyDict_Size(additional);
 
 		// build the poll aray
-	pollfd pfd[fdcount];  // make new pollfd array
+	pollfd pfd[fdcount] = {};  // make new pollfd array
 	std::map<int,eSocketNotifier*>::iterator it = notifiers.begin();
 
 	int i=0;
@@ -342,7 +342,7 @@ int eMainloop::iterate(unsigned int twisted_timeout, PyObject **res, ePyObject d
 		int to = -1;
 		if (twisted_timeout)
 		{
-			timespec now, timeout;
+			timespec now = {}, timeout = {};
 			clock_gettime(CLOCK_MONOTONIC, &now);
 			if (m_twisted_timer<=now) // timeout
 				return 0;
