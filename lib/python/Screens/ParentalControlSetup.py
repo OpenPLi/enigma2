@@ -27,7 +27,7 @@ class ProtectedScreen:
 		self.close(None)
 
 
-class ParentalControlSetup(Screen, ConfigListScreen, ProtectedScreen):
+class ParentalControlSetup(ConfigListScreen, ProtectedScreen, Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		ProtectedScreen.__init__(self)
@@ -90,7 +90,6 @@ class ParentalControlSetup(Screen, ConfigListScreen, ProtectedScreen):
 			self.changePin = getConfigListEntry(_("Enable parental protection"), NoSave(ConfigNothing()))
 			self.list.append(self.changePin)
 		self["config"].list = self.list
-		self["config"].setList(self.list)
 
 	def keyOK(self):
 		if self["config"].l.getCurrentSelection() == self.changePin:
@@ -144,21 +143,6 @@ class ParentalControlSetup(Screen, ConfigListScreen, ProtectedScreen):
 
 	def keyNumberGlobal(self, number):
 		pass
-
-	# for summary:
-	def changedEntry(self):
-		for x in self.onChangedEntry:
-			x()
-
-	def getCurrentEntry(self):
-		return self["config"].getCurrent()[0]
-
-	def getCurrentValue(self):
-		return str(self["config"].getCurrent()[1].getText())
-
-	def createSummary(self):
-		from Screens.Setup import SetupSummary
-		return SetupSummary
 
 	def oldPinEntered(self, answer):
 		if answer:

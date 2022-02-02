@@ -12,7 +12,7 @@ from Components.FanControl import fancontrol
 import skin
 
 
-class TempFanControl(Screen, ConfigListScreen):
+class TempFanControl(ConfigListScreen, Screen):
 	skin = """
 		<screen position="center,center" size="570,420" title="Temperature and fan control" >
 			<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />

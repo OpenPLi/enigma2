@@ -19,7 +19,7 @@ FOCUS_CONFIG, FOCUS_STREAMS = range(2)
 [PAGE_AUDIO, PAGE_SUBTITLES] = ["audio", "subtitles"]
 
 
-class AudioSelection(Screen, ConfigListScreen):
+class AudioSelection(ConfigListScreen, Screen):
 	def __init__(self, session, infobar=None, page=PAGE_AUDIO):
 		Screen.__init__(self, session)
 
@@ -229,7 +229,6 @@ class AudioSelection(Screen, ConfigListScreen):
 				conflist.append(getConfigListEntry(_("Subtitle Quickmenu"), ConfigNothing()))
 
 		self["config"].list = conflist
-		self["config"].l.setList(conflist)
 
 		self["streams"].list = streams
 		self["streams"].setIndex(selectedidx)

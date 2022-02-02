@@ -145,7 +145,7 @@ class picshow(Screen):
 		self.close()
 
 
-class Pic_Setup(Screen, ConfigListScreen):
+class Pic_Setup(ConfigListScreen, Screen):
 
 	def __init__(self, session):
 		Screen.__init__(self, session)

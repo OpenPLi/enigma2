@@ -13,7 +13,7 @@ config.misc.installwizard.opkgloaded = ConfigBoolean(default=False)
 config.misc.installwizard.channellistdownloaded = ConfigBoolean(default=False)
 
 
-class InstallWizard(Screen, ConfigListScreen):
+class InstallWizard(ConfigListScreen, Screen):
 
 	STATE_UPDATE = 0
 	STATE_CHOISE_CHANNELLIST = 1
@@ -105,7 +105,6 @@ class InstallWizard(Screen, ConfigListScreen):
 			if nimmanager.getEnabledNimListOfType("DVB-C"):
 				self.list.append(getConfigListEntry(_("Do a cable service scan now"), self.cablescan))
 		self["config"].list = self.list
-		self["config"].l.setList(self.list)
 
 	def keyLeft(self):
 		if self.index == 0:

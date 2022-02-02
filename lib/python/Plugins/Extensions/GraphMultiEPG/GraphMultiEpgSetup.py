@@ -9,7 +9,7 @@ from Components.ConfigList import ConfigListScreen
 addnotifier = None
 
 
-class GraphMultiEpgSetup(Screen, ConfigListScreen):
+class GraphMultiEpgSetup(ConfigListScreen, Screen):
 	skin = """
 		<screen name="GraphMultiEPGSetup" position="center,center" size="560,490" title="Electronic Program Guide Setup">
 			<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />

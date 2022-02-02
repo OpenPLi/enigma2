@@ -22,7 +22,7 @@ from time import mktime, localtime, time
 from datetime import datetime
 
 
-class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
+class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
 	def createSimpleSetup(self, list, mode):
 		nim = self.nimConfig
 
