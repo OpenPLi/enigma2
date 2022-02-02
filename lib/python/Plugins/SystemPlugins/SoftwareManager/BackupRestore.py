@@ -31,7 +31,7 @@ def getBackupFilename():
 	return "enigma2settingsbackup.tar.gz"
 
 
-class BackupScreen(Screen, ConfigListScreen):
+class BackupScreen(ConfigListScreen, Screen):
 	skin = """
 		<screen position="135,144" size="350,310" title="Backup is running" >
 		<widget name="config" position="10,10" size="330,250" transparent="1" scrollbarMode="showOnDemand" />

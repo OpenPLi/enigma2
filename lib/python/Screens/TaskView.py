@@ -12,7 +12,7 @@ from Screens.MessageBox import MessageBox
 import Screens.Standby
 
 
-class JobView(InfoBarNotifications, Screen, ConfigListScreen):
+class JobView(InfoBarNotifications, ConfigListScreen, Screen):
 	def __init__(self, session, job, parent=None, cancelable=True, backgroundable=True, afterEventChangeable=True):
 		Screen.__init__(self, session, parent)
 		InfoBarNotifications.__init__(self)

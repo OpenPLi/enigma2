@@ -10,7 +10,7 @@ import os
 import skin
 
 
-class VideoEnhancementSetup(Screen, ConfigListScreen):
+class VideoEnhancementSetup(ConfigListScreen, Screen):
 
 	skin = """
 		<screen name="VideoEnhancementSetup" position="center,center" size="560,440" title="VideoEnhancementSetup">
@@ -245,23 +245,8 @@ class VideoEnhancementSetup(Screen, ConfigListScreen):
 	def keyBlue(self):
 		self.session.openWithCallback(self.keyBlueConfirm, MessageBox, _("Reset video enhancement settings to system defaults?"), MessageBox.TYPE_YESNO, timeout=20, default=False)
 
-	# for summary:
-	def changedEntry(self):
-		for x in self.onChangedEntry:
-			x()
 
-	def getCurrentEntry(self):
-		return self["config"].getCurrent()[0]
-
-	def getCurrentValue(self):
-		return str(self["config"].getCurrent()[1].getText())
-
-	def createSummary(self):
-		from Screens.Setup import SetupSummary
-		return SetupSummary
-
-
-class VideoEnhancementPreview(Screen, ConfigListScreen):
+class VideoEnhancementPreview(ConfigListScreen, Screen):
 	skin = """
 		<screen name="VideoEnhancementPreview" position="center,e-170" size="560,170" title="VideoEnhancementPreview">
 			<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
@@ -357,22 +342,6 @@ class VideoEnhancementPreview(Screen, ConfigListScreen):
 			else:
 				pass
 		self.close()
-
-	# for summary:
-	def changedEntry(self):
-		for x in self.onChangedEntry:
-			x()
-		self.selectionChanged()
-
-	def getCurrentEntry(self):
-		return self["config"].getCurrent()[0]
-
-	def getCurrentValue(self):
-		return str(self["config"].getCurrent()[1].getText())
-
-	def createSummary(self):
-		from Screens.Setup import SetupSummary
-		return SetupSummary
 
 
 def videoEnhancementSetupMain(session, **kwargs):

@@ -9,7 +9,7 @@ config.plugins.VideoClippingSetup.clip_top = ConfigInteger(default=0)
 config.plugins.VideoClippingSetup.clip_height = ConfigInteger(default=576)
 
 
-class VideoClippingCoordinates(Screen, ConfigListScreen):
+class VideoClippingCoordinates(ConfigListScreen, Screen):
 	skin = """
 	<screen position="0,0" size="e,e" title="Video clipping setup" backgroundColor="transparent">
 		<widget name="config" position="c-175,c-75" size="350,150" foregroundColor="black" backgroundColor="transparent" />
@@ -60,7 +60,6 @@ class VideoClippingCoordinates(Screen, ConfigListScreen):
 		self.list.append(getConfigListEntry(_("top"), self.clip_top))
 		self.list.append(getConfigListEntry(_("height"), self.clip_height))
 		self["config"].list = self.list
-		self["config"].l.setList(self.list)
 
 	def adjustStep(self):
 		self.clip_left.increment = self.clip_step.value

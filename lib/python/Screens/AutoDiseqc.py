@@ -8,7 +8,7 @@ from Components.TuneTest import Tuner
 from enigma import eDVBFrontendParametersSatellite, eDVBResourceManager, eTimer
 
 
-class AutoDiseqc(Screen, ConfigListScreen):
+class AutoDiseqc(ConfigListScreen, Screen):
 	skin = """
 		<screen position="c-250,c-100" size="500,250" title=" ">
 			<widget source="statusbar" render="Label" position="10,5" zPosition="10" size="e-10,60" halign="center" valign="center" font="Regular;22" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
@@ -266,7 +266,6 @@ class AutoDiseqc(Screen, ConfigListScreen):
 		ConfigListScreen.__init__(self, self.list, session=self.session)
 
 		self["config"].list = self.list
-		self["config"].l.setList(self.list)
 
 		self["key_red"] = StaticText(_("Abort"))
 

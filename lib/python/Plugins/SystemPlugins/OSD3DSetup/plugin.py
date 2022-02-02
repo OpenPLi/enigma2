@@ -14,7 +14,7 @@ config.plugins.OSD3DSetup.mode = ConfigSelection(choices=modelist, default="auto
 config.plugins.OSD3DSetup.znorm = ConfigInteger(default=0)
 
 
-class OSD3DSetupScreen(Screen, ConfigListScreen):
+class OSD3DSetupScreen(ConfigListScreen, Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 
@@ -47,7 +47,6 @@ class OSD3DSetupScreen(Screen, ConfigListScreen):
 		self.list.append(getConfigListEntry(_("3d mode"), self.mode))
 		self.list.append(getConfigListEntry(_("Depth"), self.znorm))
 		self["config"].list = self.list
-		self["config"].l.setList(self.list)
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)

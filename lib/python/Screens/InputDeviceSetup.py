@@ -11,7 +11,7 @@ from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
 from Tools.LoadPixmap import LoadPixmap
 
 
-class InputDeviceSelection(Screen, HelpableScreen):
+class InputDeviceSelection(HelpableScreen, Screen):
 	skin = """
 	<screen name="InputDeviceSelection" position="center,center" size="560,400">
 		<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on"/>
@@ -132,7 +132,7 @@ class InputDeviceSelection(Screen, HelpableScreen):
 		self.updateList()
 
 
-class InputDeviceSetup(Screen, ConfigListScreen):
+class InputDeviceSetup(ConfigListScreen, Screen):
 
 	skin = """
 		<screen name="InputDeviceSetup" position="center,center" size="560,440">
@@ -272,25 +272,14 @@ class InputDeviceSetup(Screen, ConfigListScreen):
 			self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Really close without saving settings?"), MessageBox.TYPE_YESNO, timeout=20, default=True)
 		else:
 			self.close()
-	# for summary:
 
 	def changedEntry(self):
 		for x in self.onChangedEntry:
 			x()
 		self.selectionChanged()
 
-	def getCurrentEntry(self):
-		return self["config"].getCurrent()[0]
 
-	def getCurrentValue(self):
-		return str(self["config"].getCurrent()[1].value)
-
-	def createSummary(self):
-		from Screens.Setup import SetupSummary
-		return SetupSummary
-
-
-class RemoteControlType(Screen, ConfigListScreen):
+class RemoteControlType(ConfigListScreen, Screen):
 	rcList = [
 			("0", _("Default")),
 			("4", _("DMM normal")),
