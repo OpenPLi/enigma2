@@ -295,7 +295,7 @@ class Network:
 
 	def getAdapterAttribute(self, iface, attribute):
 		print("Getting attribute ", attribute, " for adapter", iface)
-		if self.ifaces.get(iface, {}).get('up', False):
+		if self.ifaces.get(iface, {}).get('ip') == [0, 0, 0, 0]:
 			self.getAddrInet(iface, None)
 		return self.ifaces.get(iface, {}).get(attribute)
 
