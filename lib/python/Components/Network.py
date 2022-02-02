@@ -294,7 +294,7 @@ class Network:
 		return self.ifaces.keys()
 
 	def getAdapterAttribute(self, iface, attribute):
-		print "Getting attribute ", attribute, " for adapter", iface
+		print("Getting attribute ", attribute, " for adapter", iface)
 		if self.ifaces.get(iface, {}).get('up', False):
 			self.getAddrInet(iface, None)
 		return self.ifaces.get(iface, {}).get(attribute)
