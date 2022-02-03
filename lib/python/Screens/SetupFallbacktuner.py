@@ -218,7 +218,6 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 			self.force_update_list = False
 		if not (isinstance(self["config"].getCurrent()[1], ConfigBoolean) or isinstance(self["config"].getCurrent()[1], ConfigSelection)):
 			self.force_update_list = True
-		self["description"].setText(self.getCurrentDescription())
 
 	def changedEntry(self):
 		if isinstance(self["config"].getCurrent()[1], ConfigBoolean) or isinstance(self["config"].getCurrent()[1], ConfigSelection):
