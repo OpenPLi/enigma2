@@ -1403,7 +1403,6 @@ class ONIDTSIDScreen(ConfigListScreen, Screen):
 		self.list.append(getConfigListEntry(_("ONID"), self.transponderOnid))
 		self.list.append(getConfigListEntry(_("TSID"), self.transponderTsid))
 		self["config"].list = self.list
-		self["config"].l.setList(self.list)
 
 	def keyGo(self):
 		onid = int(self.transponderOnid.value)
@@ -1603,7 +1602,6 @@ class TunerScreen(ConfigListScreen, Screen):
 			currtp = self.transponderToString([None, self.scan_sat.frequency.value, self.scan_sat.symbolrate.value, self.scan_sat.polarization.value])
 			self.tuning.transponder.setValue(currtp)
 		self["config"].list = self.list
-		self["config"].l.setList(self.list)
 
 	def tuningSatChanged(self, *parm):
 		self.updateTransponders()
