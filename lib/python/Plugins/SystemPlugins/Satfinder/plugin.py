@@ -292,7 +292,6 @@ class Satfinder(ScanSetup, ServiceScan):
 				self.preDefTransponderAtscEntry = getConfigListEntry(_('Transponder'), self.ATSCTransponders)
 				self.list.append(self.preDefTransponderAtscEntry)
 		self["config"].list = self.list
-		self["config"].l.setList(self.list)
 
 	def createConfig(self, foo):
 		self.tuning_type = ConfigSelection(default="predefined_transponder", choices=[("single_transponder", _("User defined transponder")), ("predefined_transponder", _("Predefined transponder"))])

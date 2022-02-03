@@ -318,7 +318,6 @@ class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
 			self.list.append(getConfigListEntry(_("Force legacy signal stats"), self.nimConfig.force_legacy_signal_stats, _("If set to 'yes' signal values (SNR, etc) will be calculated from API V3. This is an old API version that has now been superseded.")))
 
 		self["config"].list = self.list
-		self["config"].l.setList(self.list)
 		self.setTextKeyYellow()
 
 	def newConfig(self):
