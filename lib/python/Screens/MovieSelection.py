@@ -309,10 +309,6 @@ class MovieBrowserConfiguration(ConfigListScreen, Screen):
 		self["VKeyIcon"] = Boolean(False)
 
 		self.onChangedEntry = []
-		self["config"].onSelectionChanged.append(self.descriptions)
-
-	def descriptions(self):
-		self["description"].setText(self["config"].getCurrent() and len(self["config"].getCurrent()) > 2 and self["config"].getCurrent()[2] or "")
 
 	def save(self):
 		self.saveAll()
