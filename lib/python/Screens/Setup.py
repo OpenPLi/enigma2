@@ -42,7 +42,7 @@ class SetupSummary(Screen):
 
 	def __init__(self, session, parent):
 		Screen.__init__(self, session, parent=parent)
-		self["SetupTitle"] = StaticText(parent.getTitle())
+		self["SetupTitle"] = StaticText(parent.title)
 		self["SetupEntry"] = StaticText("")
 		self["SetupValue"] = StaticText("")
 		self.onShow.append(self.addWatcher)
@@ -81,7 +81,6 @@ class Setup(ConfigListScreen, Screen):
 				self.setup = x
 				break
 
-		self.setup_title = self.setup.get("title", "").encode("UTF-8")
 		self.seperation = int(self.setup.get('separation', '0'))
 
 		#check for list.entries > 0 else self.close
@@ -101,7 +100,7 @@ class Setup(ConfigListScreen, Screen):
 
 		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
 		self.createSetupList()
-		self.title = _(self.setup_title)
+		self.title = _(self.setup.get("title", "").encode("UTF-8"))
 
 	def createSetupList(self):
 		currentItem = self["config"].getCurrent()
