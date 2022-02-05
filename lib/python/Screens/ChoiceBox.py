@@ -36,14 +36,14 @@ class ChoiceBox(Screen):
 		if self.reorderConfig:
 			self.config_type = eval("config.misc.pluginlist." + self.reorderConfig)
 			if self.config_type.value:
-				prev_list = zip(list, self.__keys)
+				prev_list = [x for x in zip(list, self.__keys)]  # list() can not be used as it is also a parameter name!
 				new_list = []
 				for x in self.config_type.value.split(","):
 					for entry in prev_list:
 						if entry[0][0] == x:
 							new_list.append(entry)
 							prev_list.remove(entry)
-				list = zip(*(new_list + prev_list))
+				list = [x for x in zip(*(new_list + prev_list))]  # list() can not be used as it is also a parameter name!
 				list, self.__keys = list[0], list[1]
 				number = 1
 				new_keys = []
