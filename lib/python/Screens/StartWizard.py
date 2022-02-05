@@ -51,6 +51,7 @@ def setLanguageFromBackup(backupfile):
 		for member in tar.getmembers():
 			if member.name == 'etc/enigma2/settings':
 				for line in tar.extractfile(member):
+					line = line.decode()
 					if line.startswith('config.osd.language'):
 						languageToSelect = line.strip().split('=')[1]
 						if languageToSelect:
