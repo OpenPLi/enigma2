@@ -204,8 +204,7 @@ class Dish(Screen):
 					return nim.turningspeedH.float
 			elif nimConfig.configMode.value == "advanced":
 				if self.cur_orbpos != INVALID_POSITION:
-					satlist = nimConfig.advanced.sat.keys()
-					if self.cur_orbpos in satlist:
+					if self.cur_orbpos in nimConfig.advanced.sat.keys():
 						currSat = nimConfig.advanced.sat[self.cur_orbpos]
 						lnbnum = int(currSat.lnb.value)
 						currLnb = lnbnum and nimConfig.advanced.lnb[lnbnum]

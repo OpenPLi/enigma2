@@ -186,10 +186,9 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 						self.fillListWithAdvancedSatEntrys(self.nimConfig.advanced.sat[int(current_config_sats)])
 					else:
 						cur_orb_pos = self.nimConfig.advanced.sats.orbital_position
-						satlist = self.nimConfig.advanced.sat.keys()
 						if cur_orb_pos is not None:
-							if cur_orb_pos not in satlist:
-								cur_orb_pos = satlist[0]
+							if cur_orb_pos not in self.nimConfig.advanced.sat.keys():
+								cur_orb_pos = next(iter(self.nimConfig.advanced.sat)) # get first key
 							self.fillListWithAdvancedSatEntrys(self.nimConfig.advanced.sat[cur_orb_pos])
 					self.have_advanced = True
 				if self.nimConfig.configMode.value != "nothing" and config.usage.setup_level.index >= 2:
