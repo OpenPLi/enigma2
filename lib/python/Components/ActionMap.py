@@ -19,7 +19,7 @@ class ActionMap:
 					unknown.remove(action)
 					break
 		if unknown:
-			print("[ActionMap] Keymap(s) '%s' -> Undefined action(s) '%s'." % (", ".join(contexts), ", ".join(unknown)))
+			print("[ActionMap] Keymap(s) '%s' -> Undefined action(s) '%s'." % (", ".join(self.contexts), ", ".join(unknown)))
 
 	def setEnabled(self, enabled):
 		self.enabled = enabled
