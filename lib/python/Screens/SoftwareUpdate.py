@@ -120,7 +120,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 							message = status[version]['message']
 
 				# check if we have per-language messages
-				if type(message) is dict:
+				if isinstance(message, dict):
 					lang = language.getLanguage()
 					if lang in message:
 						message = message[lang]

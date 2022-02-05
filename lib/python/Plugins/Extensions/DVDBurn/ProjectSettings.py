@@ -197,7 +197,7 @@ class ProjectSettings(ConfigListScreen, Screen):
 	def ok(self):
 		key = self.keydict[self["config"].getCurrent()[1]]
 		from .DVDProject import ConfigFilename
-		if type(self["config"].getCurrent()[1]) == ConfigFilename:
+		if isinstance(self["config"].getCurrent()[1], ConfigFilename):
 			self.session.openWithCallback(self.FileBrowserClosed, FileBrowser, key, self["config"].getCurrent()[1])
 
 	def cancel(self):
