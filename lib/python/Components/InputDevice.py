@@ -65,7 +65,7 @@ class inputDevices:
 			return "Unknown device name"
 
 	def getDeviceList(self):
-		return sorted(iter(self.Devices.keys()))
+		return sorted(self.Devices.keys())
 
 	def setDeviceAttribute(self, device, attribute, value):
 		#print "[InputDevice] setting for device", device, "attribute", attribute, " to value", value
@@ -131,7 +131,7 @@ class InitInputDevices:
 
 	def createConfig(self, *args):
 		config.inputDevices = ConfigSubsection()
-		for device in sorted(iter(iInputDevices.Devices.keys())):
+		for device in sorted(iInputDevices.Devices.keys()):
 			self.currentDevice = device
 			#print "[InputDevice] creating config entry for device: %s -> %s  " % (self.currentDevice, iInputDevices.Devices[device]["name"])
 			self.setupConfigEntries(self.currentDevice)

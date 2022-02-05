@@ -292,7 +292,7 @@ class Network:
 		return iface
 
 	def getAdapterList(self):
-		return self.ifaces.keys()
+		return list(self.ifaces.keys())
 
 	def getAdapterAttribute(self, iface, attribute):
 		print("Getting attribute ", attribute, " for adapter", iface)
