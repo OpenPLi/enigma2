@@ -57,11 +57,9 @@ class satxml(datasource):
 		satxml = Document()
 		satellites = satxml.createElement("satellites")
 		satxml.appendChild(satellites)
-		satlist = self.transponderlist.keys()
 		print(self.transponderlist)
-		satlist.sort()
 
-		for sat in satlist:
+		for sat in sorted(self.transponderlist.keys()):
 			xmlsat = satxml.createElement("sat")
 			xmlsat.setAttribute("name", self.satnames[sat])
 			xmlsat.setAttribute("flags", "1")

@@ -135,7 +135,7 @@ class PollReactor(posixbase.PosixReactorBase):
 
 		if self.waker is not None:
 			self.addReader(self.waker)
-		return result
+		return list(result)
 
 	def doPoll(self, timeout,
 			reads=reads,

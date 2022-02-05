@@ -260,7 +260,7 @@ class descriptionList(choicesList):  # XXX: we might want a better name for this
 		if self.type == choicesList.LIST_TYPE_LIST:
 			ret = [not isinstance(x, tuple) and x or x[1] for x in self.choices]
 		else:
-			ret = self.choices.values()
+			ret = list(self.choices.values())
 		return ret or [""]
 
 	def __iter__(self):
