@@ -523,7 +523,7 @@ class MultibootSelection(SelectImage):
 
 	def selectionChanged(self):
 		self.currentSelected = self["list"].l.getCurrentSelection()
-		if type(self.currentSelected[0][1]) is tuple and self.currentimageslot != self.currentSelected[0][1][0]:
+		if isinstance(self.currentSelected[0][1], tuple) and self.currentimageslot != self.currentSelected[0][1][0]:
 			self["key_yellow"].setText(_("Delete Image"))
 		elif self.deletedImagesExists:
 			self["key_yellow"].setText(_("Restore deleted images"))
