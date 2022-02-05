@@ -1185,7 +1185,7 @@ class PositionerSetup(Screen):
 
 		def optimise(readings):
 			xi = [*readings]
-			yi = list(map(lambda x[0]: x, readings.values()))
+			yi = list(map(lambda x: x[0], readings.values()))
 			x0 = int(round(sum(map(mul, xi, yi)) / sum(yi)))
 			xm = xi[yi.index(max(yi))]
 			return (x0, xm)
