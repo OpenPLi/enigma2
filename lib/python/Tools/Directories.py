@@ -70,32 +70,32 @@ defaultPaths = {
 	SCOPE_LIBDIR: (eEnv.resolve("${libdir}/"), PATH_DONTCREATE)
 }
 
+scopeConfig = defaultPaths[SCOPE_CONFIG][0]
+scopeGUISkin = defaultPaths[SCOPE_GUISKIN][0]
+scopeLCDSkin = defaultPaths[SCOPE_LCDSKIN][0]
+scopeFonts = defaultPaths[SCOPE_FONTS][0]
+scopePlugins = defaultPaths[SCOPE_PLUGINS][0]
+
 
 def resolveFilename(scope, base="", path_prefix=None):
-	# You can only use the ~/ if we have a prefix directory.
-	if base.startswith("~/"):
-		assert path_prefix is not None  # Assert only works in debug mode!
+	if str(base).startswith("~%s" % os.sep):  # You can only use the ~/ if we have a prefix directory.
 		if path_prefix:
 			base = os.path.join(path_prefix, base[2:])
 		else:
-			print("[Directories] Warning: resolveFilename called with base starting with '~/' but 'path_prefix' is None!")
-	# Don't further resolve absolute paths.
-	if base.startswith("/"):
+			print("[Directories] Warning: resolveFilename called with base starting with '~%s' but 'path_prefix' is None!" % os.sep)
+	if str(base).startswith(os.sep):  # Don't further resolve absolute paths.
 		return os.path.normpath(base)
-	# If an invalid scope is specified log an error and return None.
-	if scope not in defaultPaths:
-		print("[Directories] Error: Invalid scope=%d provided to resolveFilename!" % scope)
+	if scope not in defaultPaths:  # If an invalid scope is specified log an error and return None.
+		print("[Directories] Error: Invalid scope=%s provided to resolveFilename!" % scope)
 		return None
-	# Ensure that the defaultPaths directories that should exist do exist.
-	path, flag = defaultPaths.get(scope)
+	path, flag = defaultPaths[scope]  # Ensure that the defaultPath directory that should exist for this scope does exist.
 	if flag == PATH_CREATE and not pathExists(path):
 		try:
 			os.makedirs(path)
 		except (IOError, OSError) as err:
-			print("[Directories] Error %d: Couldn't create directory '%s' (%s)" % (err.errno, path, err.strerror))
+			print("[Directories] Error %d: Couldn't create directory '%s'!  (%s)" % (err.errno, path, err.strerror))
 			return None
-	# Remove any suffix data and restore it at the end.
-	suffix = None
+	suffix = None  # Remove any suffix data and restore it at the end.
 	data = base.split(":", 1)
 	if len(data) > 1:
 		base = data[0]
@@ -113,114 +113,100 @@ def resolveFilename(scope, base="", path_prefix=None):
 				file = os.path.join(item, base)
 				if pathExists(file):
 					return file
+		return base
 
-	# If base is "" then set path to the scope.  Otherwise use the scope to resolve the base filename.
-	if base == "":
-		path, flags = defaultPaths.get(scope)
-		# If the scope is SCOPE_CURRENT_SKIN or SCOPE_ACTIVE_SKIN append the current skin to the scope path.
-		if scope == SCOPE_GUISKIN:
-			# This import must be here as this module finds the config file as part of the config initialisation.
-			from Components.config import config
+	if base == "":  # If base is "" then set path to the scope.  Otherwise use the scope to resolve the base filename.
+		path, flags = defaultPaths[scope]
+		if scope == SCOPE_GUISKIN:  # If the scope is SCOPE_GUISKIN append the current skin to the scope path.
+			from Components.config import config  # This import must be here as this module finds the config file as part of the config initialisation.
 			skin = os.path.dirname(config.skin.primary_skin.value)
 			path = os.path.join(path, skin)
 		elif scope in (SCOPE_PLUGIN_ABSOLUTE, SCOPE_PLUGIN_RELATIVE):
 			callingCode = os.path.normpath(inspect.stack()[1][1])
-			plugins = os.path.normpath(defaultPaths[SCOPE_PLUGINS][0])
+			plugins = os.path.normpath(scopePlugins)
 			path = None
-			if comparePath(plugins, callingCode):
+			if comparePaths(plugins, callingCode):
 				pluginCode = callingCode[len(plugins) + 1:].split(os.sep)
 				if len(pluginCode) > 2:
 					relative = "%s%s%s" % (pluginCode[0], os.sep, pluginCode[1])
 					path = os.path.join(plugins, relative)
 	elif scope == SCOPE_GUISKIN:
-		# This import must be here as this module finds the config file as part of the config initialisation.
-		from Components.config import config
+		from Components.config import config  # This import must be here as this module finds the config file as part of the config initialisation.
 		skin = os.path.dirname(config.skin.primary_skin.value)
 		resolveList = [
-			os.path.join(defaultPaths[SCOPE_CONFIG][0], skin),
-			os.path.join(defaultPaths[SCOPE_CONFIG][0], "skin_common"),
-			defaultPaths[SCOPE_CONFIG][0],
-			os.path.join(defaultPaths[SCOPE_SKIN][0], skin),
-			os.path.join(defaultPaths[SCOPE_SKIN][0], "skin_default"),
-			defaultPaths[SCOPE_SKIN][0]
+			os.path.join(scopeConfig, skin),
+			os.path.join(scopeConfig, "skin_common"),
+			scopeConfig,
+			os.path.join(scopeGUISkin, skin),
+			os.path.join(scopeGUISkin, "skin_default"),
+			scopeGUISkin
 		]
-		file = itemExists(resolveList, base)
-		if file:
-			path = file
+		path = itemExists(resolveList, base)
 	elif scope == SCOPE_LCDSKIN:
-		# This import must be here as this module finds the config file as part of the config initialisation.
-		from Components.config import config
-		if hasattr(config.skin, "display_skin"):
-			skin = os.path.dirname(config.skin.display_skin.value)
-		else:
-			skin = ""
+		from Components.config import config  # This import must be here as this module finds the config file as part of the config initialisation.
+		skin = os.path.dirname(config.skin.display_skin.value) if hasattr(config.skin, "display_skin") else ""
 		resolveList = [
-			os.path.join(defaultPaths[SCOPE_CONFIG][0], "display", skin),
-			os.path.join(defaultPaths[SCOPE_CONFIG][0], "display", "skin_common"),
-			defaultPaths[SCOPE_CONFIG][0],
-			os.path.join(defaultPaths[SCOPE_LCDSKIN][0], skin),
-			os.path.join(defaultPaths[SCOPE_LCDSKIN][0], "skin_default"),
-			defaultPaths[SCOPE_LCDSKIN][0]
+			os.path.join(scopeConfig, "display", skin),
+			os.path.join(scopeConfig, "display", "skin_common"),
+			scopeConfig,
+			os.path.join(scopeLCDSkin, skin),
+			os.path.join(scopeLCDSkin, "skin_default"),
+			scopeLCDSkin
 		]
-		file = itemExists(resolveList, base)
-		if file:
-			path = file
+		path = itemExists(resolveList, base)
 	elif scope == SCOPE_FONTS:
-		# This import must be here as this module finds the config file as part of the config initialisation.
-		from Components.config import config
+		from Components.config import config  # This import must be here as this module finds the config file as part of the config initialisation.
 		skin = os.path.dirname(config.skin.primary_skin.value)
 		display = os.path.dirname(config.skin.display_skin.value) if hasattr(config.skin, "display_skin") else None
 		resolveList = [
-			os.path.join(defaultPaths[SCOPE_CONFIG][0], "fonts"),
-			os.path.join(defaultPaths[SCOPE_CONFIG][0], skin, "fonts"),
-			os.path.join(defaultPaths[SCOPE_CONFIG][0], skin)
+			os.path.join(scopeConfig, "fonts"),
+			os.path.join(scopeConfig, skin, "fonts"),
+			os.path.join(scopeConfig, skin)
 		]
 		if display:
-			resolveList.append(os.path.join(defaultPaths[SCOPE_CONFIG][0], "display", display))
-		resolveList.append(os.path.join(defaultPaths[SCOPE_CONFIG][0], "skin_common"))
-		resolveList.append(defaultPaths[SCOPE_CONFIG][0])
-		resolveList.append(os.path.join(defaultPaths[SCOPE_SKIN][0], skin, "fonts"))
-		resolveList.append(os.path.join(defaultPaths[SCOPE_SKIN][0], skin))
-		resolveList.append(os.path.join(defaultPaths[SCOPE_SKIN][0], "skin_default", "fonts"))
-		resolveList.append(os.path.join(defaultPaths[SCOPE_SKIN][0], "skin_default"))
+			resolveList.append(os.path.join(scopeConfig, "display", display, "fonts"))
+			resolveList.append(os.path.join(scopeConfig, "display", display))
+		resolveList.append(os.path.join(scopeConfig, "skin_common", "fonts"))
+		resolveList.append(os.path.join(scopeConfig, "skin_common"))
+		resolveList.append(scopeConfig)
+		resolveList.append(os.path.join(scopeGUISkin, skin, "fonts"))
+		resolveList.append(os.path.join(scopeGUISkin, skin))
+		resolveList.append(os.path.join(scopeGUISkin, "skin_default", "fonts"))
+		resolveList.append(os.path.join(scopeGUISkin, "skin_default"))
 		if display:
-			resolveList.append(os.path.join(defaultPaths[SCOPE_LCDSKIN][0], display))
-		resolveList.append(os.path.join(defaultPaths[SCOPE_LCDSKIN][0], "skin_default"))
-		resolveList.append(defaultPaths[SCOPE_FONTS][0])
-		for item in resolveList:
-			file = os.path.join(item, base)
-			if pathExists(file):
-				path = file
-				break
+			resolveList.append(os.path.join(scopeLCDSkin, display, "fonts"))
+			resolveList.append(os.path.join(scopeLCDSkin, display))
+		resolveList.append(os.path.join(scopeLCDSkin, "skin_default", "fonts"))
+		resolveList.append(os.path.join(scopeLCDSkin, "skin_default"))
+		resolveList.append(scopeFonts)
+		path = itemExists(resolveList, base)
 	elif scope == SCOPE_PLUGIN:
-		file = os.path.join(defaultPaths[SCOPE_PLUGINS][0], base)
+		file = os.path.join(scopePlugins, base)
 		if pathExists(file):
 			path = file
 	elif scope in (SCOPE_PLUGIN_ABSOLUTE, SCOPE_PLUGIN_RELATIVE):
 		callingCode = os.path.normpath(inspect.stack()[1][1])
-		plugins = os.path.normpath(defaultPaths[SCOPE_PLUGINS][0])
+		plugins = os.path.normpath(scopePlugins)
 		path = None
-		if comparePath(plugins, callingCode):
+		if comparePaths(plugins, callingCode):
 			pluginCode = callingCode[len(plugins) + 1:].split(os.sep)
 			if len(pluginCode) > 2:
 				relative = os.path.join("%s%s%s" % (pluginCode[0], os.sep, pluginCode[1]), base)
 				path = os.path.join(plugins, relative)
 	else:
-		path, flags = defaultPaths.get(scope)
+		path, flags = defaultPaths[scope]
 		path = os.path.join(path, base)
 	path = os.path.normpath(path)
-	# If the path is a directory then ensure that it ends with a "/".
-	if os.path.isdir(path) and not path.endswith("/"):
-		path += "/"
+	if os.path.isdir(path) and not path.endswith(os.sep):  # If the path is a directory then ensure that it ends with a "/".
+		path = "%s%s" % (path, os.sep)
 	if scope == SCOPE_PLUGIN_RELATIVE:
 		path = path[len(plugins) + 1:]
-	# If a suffix was supplier restore it.
-	if suffix is not None:
+	if suffix is not None:  # If a suffix was supplied restore it.
 		path = "%s:%s" % (path, suffix)
 	return path
 
 
-def comparePath(leftPath, rightPath):
+def comparePaths(leftPath, rightPath):
 	if leftPath.endswith(os.sep):
 		leftPath = leftPath[:-1]
 	if rightPath.endswith(os.sep):
