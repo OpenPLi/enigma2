@@ -517,6 +517,16 @@ def shellquote(s):
 	return "'%s'" % s.replace("'", "'\\''")
 
 
+def isPluginInstalled(pluginName, pluginFile="plugin", pluginType=None):
+	for type in [x for x in os.listdir(scopePlugins) if x != "__pychache__" and os.path.isdir(os.path.join(scopePlugins, x))]:
+		for extension in ["", "o", "c"]:
+			if os.path.isfile(os.path.join(scopePlugins, type, pluginName, "%s.py%s" % (pluginFile, extension))):
+				if pluginType and type != pluginType:
+					continue
+				return True
+	return False
+
+
 def sanitizeFilename(filename):
 	"""Return a fairly safe version of the filename.
 
