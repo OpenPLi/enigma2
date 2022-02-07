@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-22 15:03+0100\n"
+"POT-Creation-Date: 2022-02-07 15:38+0100\n"
 "PO-Revision-Date: 2021-12-10 00:18+0200\n"
 "Last-Translator: Audronis <adga45@gmail.com>\n"
 "Language-Team: Adga (C) <adga45@gmail.com>\n"
@@ -1023,8 +1023,9 @@ msgstr "Armėnija"
 msgid "Artist"
 msgstr "Atlikėjas"
 
-msgid "Arts/Culture"
-msgstr "Menas/Kultūra"
+#, fuzzy
+msgid "Arts/Culture (without music)"
+msgstr "menas/kultūra (be muzikos, bendras)"
 
 msgid "Aruba"
 msgstr "Aruba"
@@ -1450,6 +1451,10 @@ msgstr "Kabelinė"
 msgid "Cable Scan"
 msgstr "Kabelinės TV kanalų paieška"
 
+#, python-format
+msgid "Cable scan executable utility not found '%s'!"
+msgstr ""
+
 msgid "Cabo Verde"
 msgstr "Žaliasis Kyšulys"
 
@@ -1683,8 +1688,9 @@ msgstr ""
 "Tikrinama imtuvo %s\n"
 "DiSEqC jungtis %s dėl %s"
 
-msgid "Children/Youth"
-msgstr "Vaikams, jaunimui"
+#, fuzzy
+msgid "Children/Youth/Education/Science"
+msgstr "Švietimas, mokslas, ..."
 
 msgid "Chile"
 msgstr "Čilė"
@@ -2945,6 +2951,10 @@ msgstr "Galimi parsisiųsti nauji priedai"
 msgid "Downloadable plugins"
 msgstr "Galimi parsisiųsti priedai"
 
+#, fuzzy
+msgid "Downloaded Images"
+msgstr "Parsiunčiamas atvaizdas"
+
 msgid "Downloading"
 msgstr "Parsisiunčiama"
 
@@ -2956,6 +2966,9 @@ msgstr "Atsisiunčiamas naujas paketų sąrašas. Prašome laukti..."
 
 msgid "Downloading plugin information. Please wait..."
 msgstr "Parsiunčiama informacija apie priedus. Prašome laukti..."
+
+msgid "Drama and Films"
+msgstr ""
 
 msgid "Drop unconfigured satellites"
 msgstr "Pašalinti nesukonfigūruotus palydovus"
@@ -3048,9 +3061,6 @@ msgstr "Redaguoti pavadinimą"
 
 msgid "Edit update source url"
 msgstr "Redaguoti naujinimo šaltinio url"
-
-msgid "Education/Science/..."
-msgstr "Švietimas, mokslas, ..."
 
 msgid "Egypt"
 msgstr "Egiptas"
@@ -3801,6 +3811,10 @@ msgstr "Visiškai permatomas"
 
 msgid "Full view resolution"
 msgstr "Pilno vaizdo rezoliucija"
+
+#, fuzzy
+msgid "Fullbackup Images"
+msgstr "Atsarginis laikmatis"
 
 msgid "Function of OK button"
 msgstr "'OK' mygtuko funkcija"
@@ -4675,9 +4689,6 @@ msgstr "Kairėn"
 msgid "Left from servicename"
 msgstr "Kanalo pavadinimo kairėje"
 
-msgid "Leisure hobbies"
-msgstr "Laisvalaikio pomėgiai"
-
 msgid "Lesotho"
 msgstr "Lesotas"
 
@@ -5150,9 +5161,6 @@ msgstr "Filmo vieta"
 msgid "Movie selection"
 msgstr "Filmo pasirinkimas"
 
-msgid "Movie/Drama"
-msgstr "Filmas/drama"
-
 msgid "Movielist menu"
 msgstr "Filmų sąrašo meniu"
 
@@ -5329,7 +5337,8 @@ msgstr "Naujoji Kaledonija"
 msgid "New Zealand"
 msgstr "Naujoji Zelandija"
 
-msgid "News Current Affairs"
+#, fuzzy
+msgid "News/Current Affairs/Social"
 msgstr "Naujienos, aktualijos"
 
 msgctxt "button label, 'next screen'"
@@ -7797,9 +7806,6 @@ msgstr "Rodyti šio kanalo EPG..."
 msgid "Show EPG..."
 msgstr "Rodyti EPG..."
 
-msgid "Show Games show"
-msgstr "Rodyti žaidimų šou"
-
 msgid "Show InfoBar"
 msgstr "Rodyti info juostą"
 
@@ -8028,6 +8034,10 @@ msgstr "Prieš nustatant 'Ignoruoti konfliktą' rodyti perspėjimą"
 msgid "Show warning when timeshift is stopped"
 msgstr "Prieš sustabdant laiko poslinkį, rodyti perspėjimą"
 
+#, fuzzy
+msgid "Show/Game Show/Leisure hobbies"
+msgstr "Laisvalaikio pomėgiai"
+
 msgid "Show/hide window"
 msgstr "Rodyti/slėpti langą"
 
@@ -8187,9 +8197,6 @@ msgstr "Intelektualiosios kortelės PIN"
 
 msgid "Smooth"
 msgstr "Tolygumas"
-
-msgid "Social/Political/Economics"
-msgstr "Socialiniai klausimai, politika, ekonomika"
 
 msgid "SocketMMI"
 msgstr "Lizdas MMI"
@@ -10377,7 +10384,8 @@ msgstr "Kai čia įjungta, teleteksto subtitrai bus rodomi jų numatytojoje viet
 msgid "When enabled, the VCR scart option will be shown on the main menu"
 msgstr "Kai čia įjungta, pagrindiniame meniu bus rodomos VCR skarto parinktys"
 
-msgid "When enabled, the channel selection list will be hidden while listening to a radio channel"
+#, fuzzy
+msgid "When enabled, the channel selection list will be hidden while listening to a radio channel. When disabled, the option 'Auto play last service in radio mode' is available."
 msgstr "Kai čia įjungta, klausantis radijo, kanalų pasirinkimo sąrašas bus paslėptas"
 
 msgid "When enabled, the infobar will be displayed when a new event starts."
@@ -10805,7 +10813,8 @@ msgstr "Perjungta į laikmačio kanalą %s!"
 msgid "Zgemma H.S/H.2S/H.2H/H5/H7(old model)"
 msgstr "Zgemma H.S/H.2S/H.2H/H5/H7(senas modelis)"
 
-msgid "Zgemma H9(old model)/I55Plus"
+#, fuzzy
+msgid "Zgemma H9(old model)/I55Plus/H8"
 msgstr "Zgemma H9 (senas modelis)/I55Plus"
 
 msgid "Zgemma Star S/2S/H1/H2"
@@ -10854,7 +10863,8 @@ msgstr "tik realus laikas"
 msgid "additional cable of rotor"
 msgstr "papildomas rotoriaus kabelis"
 
-msgid "adult movie/drama"
+#, fuzzy
+msgid "adult movie"
 msgstr "filmas suaugusiems, drama"
 
 msgid "advanced"
@@ -10945,9 +10955,6 @@ msgstr "geriau"
 msgid "black"
 msgstr "juoda"
 
-msgid "black & white"
-msgstr "juodai balta"
-
 msgid "blacklist"
 msgstr "juodasis sąrašas"
 
@@ -10978,7 +10985,8 @@ msgstr "centruotas, apsiaustas"
 msgid "chapters"
 msgstr "skyriai"
 
-msgid "childrens's/youth program (general)"
+#, fuzzy
+msgid "childrens's youth program (general)"
 msgstr "vaikų, jaunimo programa (bendra)"
 
 msgid "circular left"
@@ -10992,9 +11000,6 @@ msgstr "kirpti netelpančias sritis / juostos kraštuose"
 
 msgid "comedy"
 msgstr "komedija"
-
-msgid "config menu"
-msgstr "konfigūracijos meniu"
 
 msgid "confirmed"
 msgstr "patvirtinta"
@@ -11059,7 +11064,8 @@ msgstr "rytai"
 msgid "economics/social advisory"
 msgstr "ekonomika, socialiniai mokslai"
 
-msgid "education/science/factual topics (general)"
+#, fuzzy
+msgid "educational/science/factual topics (general)"
 msgstr "švietimas, mokslas, faktai (bendra)"
 
 msgid "embedded"
@@ -11149,7 +11155,8 @@ msgstr "filmas, kinas"
 msgid "fine arts"
 msgstr "vaizduojamasis menas"
 
-msgid "fitness & health"
+#, fuzzy
+msgid "fitness and health"
 msgstr "fitnesas ir sveikata"
 
 msgid "flat alphabetic"
@@ -11187,9 +11194,6 @@ msgstr "aukštasis mokslas"
 
 msgid "game show/quiz/contest"
 msgstr "žaidimų šou/testai/konkursai"
-
-msgid "gardening"
-msgstr "sodininkystė"
 
 msgid "go to deep standby"
 msgstr "eiti į visišką išjungimą"
@@ -11293,8 +11297,9 @@ msgstr "klauso greito įjungimo įvykių"
 msgid "literature"
 msgstr "literatūra"
 
-msgid "live broadcast"
-msgstr "tiesioginė transliacija"
+#, fuzzy
+msgid "local sports"
+msgstr "komandinis sportas"
 
 msgid "locked"
 msgstr "fiksuota"
@@ -11341,7 +11346,8 @@ msgstr "perkelti aukštyn prie pirmo įrašo"
 msgid "move up to previous entry"
 msgstr "perkelti aukštyn prie ankstesnio įrašo"
 
-msgid "movie/drama (general)"
+#, fuzzy
+msgid "movie (general)"
 msgstr "filmas/drama (bendras)"
 
 msgid "multi"
@@ -11470,9 +11476,6 @@ msgstr "atverti DNS serverio konfigūraciją"
 msgid "original"
 msgstr "originalus"
 
-msgid "original language"
-msgstr "originalo kalba"
-
 msgid "pass"
 msgstr "praeina"
 
@@ -11493,6 +11496,9 @@ msgstr "populiarioji kultūra/tradiciniai menai"
 
 msgid "pre-school children's program"
 msgstr "ikimokyklinė vaikų programa"
+
+msgid "preserve bookmarks in cuts"
+msgstr ""
 
 msgid "receiver software because updates are available."
 msgstr "imtuvo programinė įranga, nes galimi atnaujinimai."
@@ -11517,6 +11523,10 @@ msgstr "pašalinti po šios pozicijos"
 
 msgid "remove before this position"
 msgstr "pašalinti iki šios pozicijos"
+
+#, fuzzy
+msgid "remove bookmarks in cuts"
+msgstr "Pašalinti žymę"
 
 msgid "remove this mark"
 msgstr "pašalinti šią žymę"
@@ -11569,7 +11579,8 @@ msgstr "pasirinkite meniu įrašą"
 msgid "serious music/classic music"
 msgstr "rimta muzika/klasikinė muzika"
 
-msgid "serious/classical/religious/historical movie/drama"
+#, fuzzy
+msgid "serious/classical/religious/historical drama"
 msgstr "rimtas/klasikinis/religinis/istorinis filmas/drama"
 
 msgid "service off-air"
@@ -11648,13 +11659,15 @@ msgstr "lizdas%s -%s, su atsargine kopija"
 msgid "slot%s - %s, without backup"
 msgstr "lizdas%s - %s, be atsarginės kopijos"
 
-msgid "soap/melodram/folkloric"
+#, fuzzy
+msgid "soap/melodrama/folkloric"
 msgstr "muilo opera/melodrama/folkloras"
 
 msgid "social/political issues/economics (general)"
 msgstr "socialiniai/politiniai klausimai/ekonomika (bendra)"
 
-msgid "social/spiritual science"
+#, fuzzy
+msgid "social/spiritual sciences"
 msgstr "socialinis/dvasinis mokslas"
 
 msgid "space"
@@ -11706,10 +11719,11 @@ msgstr "perjungti į sekančią subtitrų kalbą"
 msgid "talk show"
 msgstr "pokalbių šou"
 
-msgid "team sports"
-msgstr "komandinis sportas"
+msgid "team sports/excluding football"
+msgstr ""
 
-msgid "technology/natural science"
+#, fuzzy
+msgid "technology/natural sciences"
 msgstr "technologijos, gamtos mokslai"
 
 msgid "template file"
@@ -11756,9 +11770,6 @@ msgstr "nežinoma klaida"
 
 msgid "unknown service"
 msgstr "nežinomas kanalas"
-
-msgid "unpublished"
-msgstr "nepublikuotas"
 
 msgid "untestable"
 msgstr "netikrintinas"
