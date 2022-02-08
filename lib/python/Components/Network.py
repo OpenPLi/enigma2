@@ -609,7 +609,7 @@ class Network:
 	def msgPlugins(self):
 		if self.config_ready is not None:
 			for p in plugins.getPlugins(PluginDescriptor.WHERE_NETWORKCONFIG_READ):
-				p.__call__(reason=self.config_ready)
+				p(reason=self.config_ready)
 
 	def hotplug(self, event):
 		interface = event['INTERFACE']
