@@ -185,13 +185,8 @@ def scanDevice(mountpoint):
 	error, blacklisted, removable, is_cdrom, partitions, medium_found = harddiskmanager.getBlockDevInfo(blockdev)
 
 	# now scan the paths
-	paths_to_scan_tmp = []
 	for p in paths_to_scan:
 		path = os.path.join(mountpoint, p.path)
-		if path not in paths_to_scan_tmp:
-			paths_to_scan_tmp.append(path)
-		else:
-			continue # Skip duplicate paths
 
 		for root, dirs, files in os.walk(path):
 			for f in files:
