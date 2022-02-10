@@ -49,7 +49,7 @@ class ConsoleItem:
 			callback(data, retval, self.extra_args)
 
 
-class Console(object):
+class Console:
 	"""
 		Console by default will work with strings on callback.
 		If binary data required class shoud be initialized with Console(binary=True)
