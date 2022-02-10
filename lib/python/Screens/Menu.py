@@ -268,7 +268,7 @@ class Menu(Screen, ProtectedScreen):
 				l.id = (l.name.lower()).replace(' ', '_')
 				if l.id not in id_list:
 					id_list.append(l.id)
-					plugin_list.append((l.name, boundFunction(l.__call__, self.session), l.id, 200))
+					plugin_list.append((l.name, boundFunction(l.fnc, self.session), l.id, 200))
 
 		if self.menuID is not None and "user" in config.usage.menu_sort_mode.value:
 			self.sub_menu_sort = NoSave(ConfigDictionarySet())

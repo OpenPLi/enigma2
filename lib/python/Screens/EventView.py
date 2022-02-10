@@ -311,8 +311,8 @@ class EventViewBase:
 		if self.event:
 			text = _("Select action")
 			menu = [(p.name, boundFunction(self.runPlugin, p)) for p in plugins.getPlugins(where=PluginDescriptor.WHERE_EVENTINFO)
-				if 'servicelist' not in p.__call__.__code__.co_varnames
-					if 'selectedevent' not in p.__call__.__code__.co_varnames]
+				if 'servicelist' not in p.fnc.__code__.co_varnames
+					if 'selectedevent' not in p.fnc.__code__.co_varnames]
 			if len(menu) == 1:
 				menu and menu[0][1]()
 			elif len(menu) > 1:
@@ -323,7 +323,7 @@ class EventViewBase:
 				self.session.openWithCallback(boxAction, ChoiceBox, title=text, list=menu, windowTitle=_("Event view context menu"))
 
 	def runPlugin(self, plugin):
-		plugin.__call__(session=self.session, service=self.currentService, event=self.event, eventName=self.event.getEventName())
+		plugin(session=self.session, service=self.currentService, event=self.event, eventName=self.event.getEventName())
 
 
 class EventViewSimple(Screen, EventViewBase):

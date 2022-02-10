@@ -1052,7 +1052,7 @@ class InfoBarEPG:
 
 	def getEPGPluginList(self, getAll=False):
 		pluginlist = [(p.name, boundFunction(self.runPlugin, p), p.description or p.name) for p in plugins.getPlugins(where=PluginDescriptor.WHERE_EVENTINFO)
-				if 'selectedevent' not in p.__call__.__code__.co_varnames] or []
+				if 'selectedevent' not in p.fnc.__code__.co_varnames] or []
 		from Components.ServiceEventTracker import InfoBarCount
 		if getAll or InfoBarCount == 1:
 			pluginlist.append((_("Show EPG for current channel..."), self.openSingleServiceEPG, _("Display EPG list for current channel")))
@@ -1204,7 +1204,7 @@ class InfoBarEPG:
 				self.session.open(EPGSelection, ref)
 
 	def runPlugin(self, plugin):
-		plugin.__call__(session=self.session, servicelist=self.servicelist)
+		plugin(session=self.session, servicelist=self.servicelist)
 
 	def showEventInfoPlugins(self):
 		pluginlist = self.getEPGPluginList()
@@ -2274,7 +2274,7 @@ class InfoBarPlugins:
 	def getPluginList(self):
 		l = []
 		for p in plugins.getPlugins(where=PluginDescriptor.WHERE_EXTENSIONSMENU):
-			args = inspect.getargspec(p.__call__)[0]
+			args = inspect.getfullargspec(p.fnc)[0]
 			if len(args) == 1 or len(args) == 2 and isinstance(self, InfoBarChannelSelection):
 				l.append(((boundFunction(self.getPluginName, p.name), boundFunction(self.runPlugin, p), lambda: True), None, p.name))
 		l.sort(key=lambda e: e[2]) # sort by name
@@ -2282,9 +2282,9 @@ class InfoBarPlugins:
 
 	def runPlugin(self, plugin):
 		if isinstance(self, InfoBarChannelSelection):
-			plugin.__call__(session=self.session, servicelist=self.servicelist)
+			plugin(session=self.session, servicelist=self.servicelist)
 		else:
-			plugin.__call__(session=self.session)
+			plugin(session=self.session)
 
 
 from Components.Task import job_manager
@@ -3356,7 +3356,7 @@ class InfoBarTeletextPlugin:
 		self.teletext_plugin = None
 
 		for p in plugins.getPlugins(PluginDescriptor.WHERE_TELETEXT):
-			self.teletext_plugin = p.__call__
+			self.teletext_plugin = p
 
 		if self.teletext_plugin is not None:
 			self["TeletextActions"] = HelpableActionMap(self, ["InfobarTeletextActions"],
