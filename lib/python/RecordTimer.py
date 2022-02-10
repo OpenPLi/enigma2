@@ -94,7 +94,7 @@ def createRecordTimerEntry(timer):
 		pipzap=timer.pipzap)
 
 # please do not translate log messages
-class RecordTimerEntry(timer.TimerEntry, object):
+class RecordTimerEntry(timer.TimerEntry):
 ######### the following static methods and members are only in use when the box is in (soft) standby
 	wasInStandby = False
 	wasInDeepStandby = False
