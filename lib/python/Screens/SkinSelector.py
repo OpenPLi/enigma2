@@ -87,7 +87,7 @@ class SkinSelector(Screen, HelpableScreen):
 			self["preview"].instance.setPixmap(ptr.__deref__())
 
 	def layoutFinished(self):
-		self.picload.setPara((self["preview"].instance.size().width(), self["preview"].instance.size().height(), 1.0, 1, 1, 1, "#ff000000"))
+		self.picload.setPara((self["preview"].instance.size().width(), self["preview"].instance.size().height(), 1, 1, 1, 1, "#ff000000"))
 		self.refreshList()
 
 	def refreshList(self):
