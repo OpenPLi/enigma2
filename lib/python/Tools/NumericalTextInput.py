@@ -149,7 +149,7 @@ LOCALES = {
 		(None, None, None),
 		("wxyz\u017A\u017C9WXYZ\u0179\u017B", "WXYZ\u0179\u017B9", "wxyz\u017A\u017C9")
 	),
-	"ru_R": (
+	"ru_RU": (
 		(None, None, None),
 		(None, None, None),
 		("\u0430\u0431\u0432\u0433abc2\u0410\u0411\u0412\u0413ABC", "\u0410\u0411\u0412\u0413ABC2", "\u0430\u0431\u0432\u0433abc2"),
