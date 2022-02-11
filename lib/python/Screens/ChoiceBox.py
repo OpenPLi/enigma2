@@ -157,7 +157,7 @@ class ChoiceBox(Screen):
 
 	def up(self):
 		if len(self["list"].list) > 0:
-			while 1:
+			while True:
 				self["list"].instance.moveSelection(self["list"].instance.moveUp)
 				self.updateSummary(self["list"].l.getCurrentSelectionIndex())
 				if self["list"].l.getCurrentSelection()[0][0] != "--" or self["list"].l.getCurrentSelectionIndex() == 0:
@@ -165,7 +165,7 @@ class ChoiceBox(Screen):
 
 	def down(self):
 		if len(self["list"].list) > 0:
-			while 1:
+			while True:
 				self["list"].instance.moveSelection(self["list"].instance.moveDown)
 				self.updateSummary(self["list"].l.getCurrentSelectionIndex())
 				if self["list"].l.getCurrentSelection()[0][0] != "--" or self["list"].l.getCurrentSelectionIndex() == len(self["list"].list) - 1:
