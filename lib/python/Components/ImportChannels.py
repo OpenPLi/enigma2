@@ -1,17 +1,17 @@
-import threading
 import os
 import shutil
 import tempfile
-from json import loads
-from enigma import eDVBDB, eEPGCache
-from Screens.MessageBox import MessageBox
-from Components.config import config, ConfigText
-from time import sleep
-from Tools.Notifications import AddNotificationWithID
+import threading
 from base64 import encodebytes
+from json import loads
+from time import sleep
+from urllib.error import URLError
 from urllib.parse import quote
 from urllib.request import Request, urlopen
-import xml.etree.ElementTree as et
+from xml.etree.ElementTree import fromstring
+from Components.config import config
+from Screens.MessageBox import MessageBox
+from Tools.Notifications import AddNotificationWithID
 
 settingfiles = ('lamedb', 'bouquets.', 'userbouquet.', 'blacklist', 'whitelist', 'alternatives.')
 
@@ -38,8 +38,8 @@ class ImportChannels:
 		if self.header:
 			request.add_header("Authorization", self.header)
 		try:
-			result = urllib.request.urlopen(request, timeout=timeout)
-		except urllib2.URLError as e:
+			result = urlopen(request, timeout=timeout)
+		except URLError as e:
 			if "[Errno -3]" in str(e.reason):
 				print("[Import Channels] Network is not up yet, delay 5 seconds")
 				# network not up yet
@@ -57,7 +57,7 @@ class ImportChannels:
 		return self.getUrl("%s/web/settings" % self.getTerrestrialUrl()).read()
 
 	def getFallbackSettingsValue(self, settings, e2settingname):
-		root = et.fromstring(settings)
+		root = fromstring(settings)
 		for e2setting in root:
 			if e2settingname in e2setting[0].text:
 				return e2setting[1].text
