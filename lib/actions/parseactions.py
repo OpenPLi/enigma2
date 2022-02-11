@@ -5,7 +5,7 @@ import sys
 
 
 def filter(g):
-	while 1:
+	while True:
 		t = next(g)
 		if t[1] == "/*":
 			while next(g)[1] != "*/":
@@ -32,7 +32,7 @@ def do_file(f, mode):
 
 	firsthit = 1
 
-	while 1:
+	while True:
 		try:
 			t = next(tokens)
 		except:
@@ -72,7 +72,7 @@ def do_file(f, mode):
 
 				counter = 0
 
-				while 1:
+				while True:
 
 					t = next(tokens)
 
