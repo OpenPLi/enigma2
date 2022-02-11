@@ -3,7 +3,7 @@ import enigma
 import os
 
 
-class NetlinkReader():
+class NetlinkReader:
 	def __init__(self):
 		from twisted.internet import reactor
 		self.nls = Netlink.NetlinkSocket()
