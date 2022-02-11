@@ -489,8 +489,8 @@ class MovieList(GUIComponent):
 		ih = self.itemHeight
 		if self.list_type == MovieList.LISTTYPE_ORIGINAL:
 			fc, sc = self.columnsOriginal[0], self.columnsOriginal[1]
-			ih1 = (ih * 2) / 5 # 75 -> 30
-			ih2 = (ih * 2) / 3 # 75 -> 50
+			ih1 = (ih * 2) // 5 # 75 -> 30
+			ih2 = (ih * 2) // 3 # 75 -> 50
 			res.append(MultiContentEntryText(pos=(iconSize + space, 0), size=(width - fc - r, ih1), font=0, flags=RT_HALIGN_LEFT, text=data.txt))
 			if self.tags:
 				res.append(MultiContentEntryText(pos=(width - fc - r, 0), size=(fc, ih1), font=2, flags=RT_HALIGN_RIGHT, text=info.getInfoString(serviceref, iServiceInformation.sTags)))
@@ -504,9 +504,9 @@ class MovieList(GUIComponent):
 			if len:
 				res.append(MultiContentEntryText(pos=(width - sc - r, ih2), size=(sc, ih - ih2), font=1, flags=RT_HALIGN_RIGHT, text=len))
 		elif self.list_type == MovieList.LISTTYPE_COMPACT_DESCRIPTION:
-			ih1 = ((ih * 8) + 14) / 15 # 37 -> 20, round up
+			ih1 = ((ih * 8) + 14) // 15 # 37 -> 20, round up
 			if len:
-				lenSize = 58 * ih / 37
+				lenSize = 58 * ih // 37
 			else:
 				lenSize = 0
 			fc, sc, tc = self.columnsCompactDescription[0], self.columnsCompactDescription[1], self.columnsCompactDescription[2]
@@ -519,7 +519,7 @@ class MovieList(GUIComponent):
 				res.append(MultiContentEntryText(pos=(width - lenSize - r, ih1), size=(lenSize, ih - ih1), font=1, flags=RT_HALIGN_RIGHT, text=len))
 		elif self.list_type == MovieList.LISTTYPE_COMPACT:
 			col = self.compactColumn
-			ih1 = ((ih * 8) + 14) / 15 # 37 -> 20, round up
+			ih1 = ((ih * 8) + 14) // 15 # 37 -> 20, round up
 			if len:
 				lenSize = 2 * ih
 			else:
@@ -537,7 +537,7 @@ class MovieList(GUIComponent):
 				res.append(MultiContentEntryText(pos=(width - lenSize - r, 0), size=(lenSize, ih1), font=0, flags=RT_HALIGN_RIGHT, text=len))
 		else:
 			if (self.descr_state == MovieList.SHOW_DESCRIPTION) or not len:
-				dateSize = ih * 145 / 25   # 25 -> 145
+				dateSize = ih * 145 // 25   # 25 -> 145
 				res.append(MultiContentEntryText(pos=(iconSize + space, 0), size=(width - iconSize - space - dateSize - r, ih), font=0, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=data.txt))
 				res.append(MultiContentEntryText(pos=(width - dateSize - r, 2), size=(dateSize, ih), font=1, flags=RT_HALIGN_RIGHT | RT_VALIGN_CENTER, text=begin_string))
 			else:
