@@ -74,11 +74,7 @@ defaultPaths = {
 
 
 def addInList(*paths):
-	resolve_list = []
-	for path in paths:
-		if os.path.isdir(path):
-			resolve_list.append(path)
-	return resolve_list
+	return [path for path in paths if os.path.isdir(path)]
 
 
 skinResolveList = []
