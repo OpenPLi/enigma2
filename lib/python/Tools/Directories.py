@@ -73,6 +73,15 @@ defaultPaths = {
 }
 
 
+def addInList(*paths):
+	return [path for path in paths if os.path.isdir(path)]
+
+
+skinResolveList = []
+lcdskinResolveList = []
+fontsResolveList = []
+
+
 def resolveFilename(scope, base="", path_prefix=None):
 	# You can only use the ~/ if we have a prefix directory.
 	if base.startswith("~/"):
@@ -135,61 +144,71 @@ def resolveFilename(scope, base="", path_prefix=None):
 					relative = "%s%s%s" % (pluginCode[0], os.sep, pluginCode[1])
 					path = os.path.join(plugins, relative)
 	elif scope in (SCOPE_CURRENT_SKIN, SCOPE_ACTIVE_SKIN):
-		# This import must be here as this module finds the config file as part of the config initialisation.
-		from Components.config import config
-		skin = os.path.dirname(config.skin.primary_skin.value)
-		resolveList = [
-			os.path.join(defaultPaths[SCOPE_CONFIG][0], skin),
-			os.path.join(defaultPaths[SCOPE_CONFIG][0], "skin_common"),
-			defaultPaths[SCOPE_CONFIG][0],
-			os.path.join(defaultPaths[SCOPE_SKIN][0], skin),
-			os.path.join(defaultPaths[SCOPE_SKIN][0], "skin_default"),
-			defaultPaths[SCOPE_SKIN][0]
-		]
-		file = itemExists(resolveList, base)
+		global skinResolveList
+		if not skinResolveList:
+			# This import must be here as this module finds the config file as part of the config initialisation.
+			from Components.config import config
+			skin = os.path.dirname(config.skin.primary_skin.value)
+			skinResolveList = addInList(
+					os.path.join(defaultPaths[SCOPE_CONFIG][0], skin),
+					os.path.join(defaultPaths[SCOPE_CONFIG][0], "skin_common"),
+					defaultPaths[SCOPE_CONFIG][0],
+					os.path.join(defaultPaths[SCOPE_SKIN][0], skin),
+					os.path.join(defaultPaths[SCOPE_SKIN][0], "skin_default"),
+					defaultPaths[SCOPE_SKIN][0]
+				)
+		file = itemExists(skinResolveList, base)
 		if file:
 			path = file
 	elif scope == SCOPE_CURRENT_LCDSKIN:
-		# This import must be here as this module finds the config file as part of the config initialisation.
-		from Components.config import config
-		if hasattr(config.skin, "display_skin"):
-			skin = os.path.dirname(config.skin.display_skin.value)
-		else:
-			skin = ""
-		resolveList = [
-			os.path.join(defaultPaths[SCOPE_CONFIG][0], "display", skin),
-			os.path.join(defaultPaths[SCOPE_CONFIG][0], "display", "skin_common"),
-			defaultPaths[SCOPE_CONFIG][0],
-			os.path.join(defaultPaths[SCOPE_LCDSKIN][0], skin),
-			os.path.join(defaultPaths[SCOPE_LCDSKIN][0], "skin_default"),
-			defaultPaths[SCOPE_LCDSKIN][0]
-		]
-		file = itemExists(resolveList, base)
+		global lcdskinResolveList
+		if not lcdskinResolveList:
+			# This import must be here as this module finds the config file as part of the config initialisation.
+			from Components.config import config
+			if hasattr(config.skin, "display_skin"):
+				skin = os.path.dirname(config.skin.display_skin.value)
+			else:
+				skin = ""
+			lcdskinResolveList = addInList(
+					os.path.join(defaultPaths[SCOPE_CONFIG][0], "display", skin),
+					os.path.join(defaultPaths[SCOPE_CONFIG][0], "display", "skin_common"),
+					defaultPaths[SCOPE_CONFIG][0],
+					os.path.join(defaultPaths[SCOPE_LCDSKIN][0], skin),
+					os.path.join(defaultPaths[SCOPE_LCDSKIN][0], "skin_default"),
+					defaultPaths[SCOPE_LCDSKIN][0]
+				)
+		file = itemExists(lcdskinResolveList, base)
 		if file:
 			path = file
 	elif scope == SCOPE_FONTS:
-		# This import must be here as this module finds the config file as part of the config initialisation.
-		from Components.config import config
-		skin = os.path.dirname(config.skin.primary_skin.value)
-		display = os.path.dirname(config.skin.display_skin.value) if hasattr(config.skin, "display_skin") else None
-		resolveList = [
-			os.path.join(defaultPaths[SCOPE_CONFIG][0], "fonts"),
-			os.path.join(defaultPaths[SCOPE_CONFIG][0], skin, "fonts"),
-			os.path.join(defaultPaths[SCOPE_CONFIG][0], skin)
-		]
-		if display:
-			resolveList.append(os.path.join(defaultPaths[SCOPE_CONFIG][0], "display", display))
-		resolveList.append(os.path.join(defaultPaths[SCOPE_CONFIG][0], "skin_common"))
-		resolveList.append(defaultPaths[SCOPE_CONFIG][0])
-		resolveList.append(os.path.join(defaultPaths[SCOPE_SKIN][0], skin, "fonts"))
-		resolveList.append(os.path.join(defaultPaths[SCOPE_SKIN][0], skin))
-		resolveList.append(os.path.join(defaultPaths[SCOPE_SKIN][0], "skin_default", "fonts"))
-		resolveList.append(os.path.join(defaultPaths[SCOPE_SKIN][0], "skin_default"))
-		if display:
-			resolveList.append(os.path.join(defaultPaths[SCOPE_LCDSKIN][0], display))
-		resolveList.append(os.path.join(defaultPaths[SCOPE_LCDSKIN][0], "skin_default"))
-		resolveList.append(defaultPaths[SCOPE_FONTS][0])
-		for item in resolveList:
+		global fontsResolveList
+		if not fontsResolveList:
+			# This import must be here as this module finds the config file as part of the config initialisation.
+			from Components.config import config
+			skin = os.path.dirname(config.skin.primary_skin.value)
+			display = os.path.dirname(config.skin.display_skin.value) if hasattr(config.skin, "display_skin") else None
+			fontsResolveList = addInList(
+					os.path.join(defaultPaths[SCOPE_CONFIG][0], "fonts"),
+					os.path.join(defaultPaths[SCOPE_CONFIG][0], skin, "fonts"),
+					os.path.join(defaultPaths[SCOPE_CONFIG][0], skin)
+				)
+			if display:
+				fontsResolveList += addInList(os.path.join(defaultPaths[SCOPE_CONFIG][0], "display", display))
+			fontsResolveList += addInList(
+					os.path.join(defaultPaths[SCOPE_CONFIG][0], "skin_common"),
+					defaultPaths[SCOPE_CONFIG][0],
+					os.path.join(defaultPaths[SCOPE_SKIN][0], skin, "fonts"),
+					os.path.join(defaultPaths[SCOPE_SKIN][0], skin),
+					os.path.join(defaultPaths[SCOPE_SKIN][0], "skin_default", "fonts"),
+					os.path.join(defaultPaths[SCOPE_SKIN][0], "skin_default")
+				)
+			if display:
+				fontsResolveList += addInList(os.path.join(defaultPaths[SCOPE_LCDSKIN][0], display))
+			fontsResolveList += addInList(
+					os.path.join(defaultPaths[SCOPE_LCDSKIN][0], "skin_default"),
+					defaultPaths[SCOPE_FONTS][0]
+				)
+		for item in fontsResolveList:
 			file = os.path.join(item, base)
 			if pathExists(file):
 				path = file
