@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-import sys
 import os
 import time
 import re
 from Tools.HardwareInfo import HardwareInfo
+from sys import maxsize, modules, version_info
 
 
 def getVersionString():
@@ -164,21 +164,14 @@ def getDriverInstalledDate():
 
 
 def getPythonVersionString():
-	try:
-		import subprocess
-		status, output = subprocess.getstatusoutput("python3 -V")
-		return output.split(' ')[1]
-	except:
-		return _("unknown")
-
+	return "%s.%s.%s" % (version_info.major, version_info.minor, version_info.micro)
 
 def GetIPsFromNetworkInterfaces():
 	import socket
 	import fcntl
 	import struct
 	import array
-	import sys
-	is_64bits = sys.maxsize > 2**32
+	is_64bits = maxsize > 2**32
 	struct_size = 40 if is_64bits else 32
 	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 	max_possible = 8 # initial value
@@ -226,4 +219,4 @@ def getBoxUptime():
 
 
 # For modules that do "from About import about"
-about = sys.modules[__name__]
+about = modules[__name__]
