@@ -1690,6 +1690,28 @@ class ChannelSelectionBase(Screen):
 	def changeBouquetParentalControlCallback(self, ref):
 		self.enterPath(ref)
 		self.revertMode = None
+		if config.usage.changebouquet_set_history.value and self.shown:
+			live_ref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
+			pip_ref = hasattr(self.session, "pip") and self.session.pip.getCurrentService()
+			dopipzap = hasattr(self, "dopipzap") and self.dopipzap
+			if live_ref and not pip_ref and not dopipzap:
+				if live_ref and self.servicelist.setCurrent(live_ref, adjust=False) is None:
+					return
+			elif live_ref and pip_ref and not dopipzap:
+				if live_ref and self.servicelist.setCurrent(live_ref, adjust=False) is None:
+					return
+			elif dopipzap:
+				if pip_ref and self.servicelist.setCurrent(pip_ref, adjust=False) is None:
+					return
+				elif live_ref and self.servicelist.setCurrent(live_ref, adjust=False) is None:
+					return
+			root = self.getRoot()
+			prev = None
+			for path in self.history:
+				if len(path) > 2 and path[1] == root:
+					prev = path[2]
+			if prev is not None:
+				self.setCurrentSelection(prev)
 
 	def inBouquet(self):
 		if self.servicePath and self.servicePath[0] == self.bouquet_root:
