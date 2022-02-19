@@ -85,6 +85,7 @@ def InitUsageConfig():
 	config.usage.oldstyle_channel_select_controls = ConfigYesNo(default=False)
 	config.usage.zap_with_ch_buttons = ConfigYesNo(default=False)
 	config.usage.ok_is_channelselection = ConfigYesNo(default=False)
+	config.usage.changebouquet_set_history = ConfigYesNo(default=False)
 	config.usage.volume_instead_of_channelselection = ConfigYesNo(default=False)
 	config.usage.channelselection_preview = ConfigYesNo(default=False)
 	config.usage.show_spinner = ConfigYesNo(default=True)
