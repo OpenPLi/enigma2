@@ -156,8 +156,8 @@ class PositionerSetup(Screen):
 		# True means we dont like that the normal sec stuff sends commands to the rotor!
 		self.tuner = Tuner(self.frontend, ignore_rotor=True)
 
-		tp = (cur.get("frequency", 0) / 1000,
-			cur.get("symbol_rate", 0) / 1000,
+		tp = (cur.get("frequency", 0) // 1000,
+			cur.get("symbol_rate", 0) // 1000,
 			cur.get("polarization", eDVBFrontendParametersSatellite.Polarisation_Horizontal),
 			cur.get("fec_inner", eDVBFrontendParametersSatellite.FEC_Auto),
 			cur.get("inversion", eDVBFrontendParametersSatellite.Inversion_Unknown),
