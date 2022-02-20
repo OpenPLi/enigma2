@@ -97,6 +97,7 @@ jobs:
         python3 -m compileall .
     - name: patch enigma py files
       run: |
+        sed -i 's/mallinfo2/mallinfo/g' main/enigma.cpp
         sed -i 's/reloadWindowStyles()  #/# reloadWindowStyles()  #/g' lib/python/skin.py
         sed -i 's/setResolution(xres, yres/setResolution(xres, yres, 8/g' lib/python/skin.py
         sed -i '1 i\globals()["__builtins__"]["ngettext"] = ngettext' lib/python/Tools/Profile.py
