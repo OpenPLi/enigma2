@@ -85,13 +85,13 @@ jobs:
     - name: patch enigma cpp files
       run: |
         sed -i 's/eFatal/eDebug/g' lib/gdi/gfbdc.cpp
+        sed -i 's/mallinfo2/mallinfo/g' main/enigma.cpp
     - name: build enigma2
       env: 
         CC: "gcc-${{ matrix.gcc }}"
         CXX: "g++-${{ matrix.gcc }}"
       run: |
         echo compiling enigma2
-        sed -i 's/mallinfo2/mallinfo/g' main/enigma.cpp
         autoreconf -i
         ./configure --with-libsdl=no --with-boxtype=nobox --enable-dependency-tracking ac_cv_prog_c_openmp=-fopenmp --with-textlcd
         make
