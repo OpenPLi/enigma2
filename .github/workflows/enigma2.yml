@@ -91,13 +91,13 @@ jobs:
         CXX: "g++-${{ matrix.gcc }}"
       run: |
         echo compiling enigma2
+        sed -i 's/mallinfo2/mallinfo/g' main/enigma.cpp
         autoreconf -i
         ./configure --with-libsdl=no --with-boxtype=nobox --enable-dependency-tracking ac_cv_prog_c_openmp=-fopenmp --with-textlcd
         make
         python3 -m compileall .
     - name: patch enigma py files
       run: |
-        sed -i 's/mallinfo2/mallinfo/g' main/enigma.cpp
         sed -i 's/reloadWindowStyles()  #/# reloadWindowStyles()  #/g' lib/python/skin.py
         sed -i 's/setResolution(xres, yres/setResolution(xres, yres, 8/g' lib/python/skin.py
         sed -i '1 i\globals()["__builtins__"]["ngettext"] = ngettext' lib/python/Tools/Profile.py
