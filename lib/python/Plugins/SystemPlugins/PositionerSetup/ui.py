@@ -568,7 +568,7 @@ class PositionerSetup(Screen):
 	def stepCourse(self, steps):
 		def dots(s):
 			s = abs(s)
-			return (s / 10) * '.' if s < 100 else 10 * '.'
+			return int(s / 10) * '.' if s < 100 else 10 * '.'
 
 		dx = 4 * " "
 		if steps > 0:
