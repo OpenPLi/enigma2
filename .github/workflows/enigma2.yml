@@ -2,16 +2,16 @@ name: Enigma2 CI
 
 on:
   push:
-    branches: [ develop ]
+    branches: [ python3 ]
   pull_request:
-    branches: [ develop ]
+    branches: [ python3 ]
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     strategy:
       matrix:
-        gcc: [8, 10]
+        gcc: [10]
     steps:
     - uses: actions/checkout@v2
     - name: install gcc ${{ matrix.gcc }}
@@ -21,7 +21,7 @@ jobs:
         sudo apt install g++-${{ matrix.gcc }}
     - name: install python packages
       run: |
-        pip install netifaces pyopenssl python-wifi service_identity twisted
+        pip3 install netifaces pyopenssl python-wifi service_identity twisted
     - name: install dev packages
       run: |
         sudo apt-get -q update
@@ -30,19 +30,19 @@ jobs:
         sudo apt-get install build-essential
         sudo apt-get install automake
         sudo apt-get install libtool
-        sudo apt-get install python-dev
+        sudo apt-get install python3-dev
         sudo apt-get install zlib1g-dev
         sudo apt-get install gettext
         sudo apt-get install swig
         sudo apt-get install libgstreamer1.0-dev
         sudo apt-get install libgstreamer-plugins-base1.0-dev
         sudo apt-get install libfreetype6-dev
-        sudo apt-get install libsigc++-2.0-dev
         sudo apt-get install libfribidi-dev
         sudo apt-get install libssl-dev
         sudo apt-get install libavahi-client-dev
         sudo apt-get install libjpeg-turbo8-dev
         sudo apt-get install libgif-dev
+        sudo apt-get install mm-common
     - name: build enigma2 dependencies
       env: 
         CC: "gcc-${{ matrix.gcc }}"
@@ -73,6 +73,15 @@ jobs:
         make
         sudo make install
         popd
+        echo installing libsigc++3
+        pushd .
+        cd /tmp
+        git clone --depth 1 https://github.com/libsigcplusplus/libsigcplusplus.git
+        cd libsigcplusplus
+        ./autogen.sh
+        make
+        sudo make install
+        popd
     - name: patch enigma cpp files
       run: |
         sed -i 's/eFatal/eDebug/g' lib/gdi/gfbdc.cpp
@@ -85,7 +94,7 @@ jobs:
         autoreconf -i
         ./configure --with-libsdl=no --with-boxtype=nobox --enable-dependency-tracking ac_cv_prog_c_openmp=-fopenmp --with-textlcd
         make
-        python -m compileall .
+        python3 -m compileall .
     - name: patch enigma py files
       run: |
         sed -i 's/reloadWindowStyles()  #/# reloadWindowStyles()  #/g' lib/python/skin.py
