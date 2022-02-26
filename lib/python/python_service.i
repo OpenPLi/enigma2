@@ -351,9 +351,10 @@ error_out:
 	return -1;
 }
 
-RESULT disableSubtitles([[maybe_unused]] eWidget *parent)
+RESULT disableSubtitles(eWidget *parent)
 {
-	return self->disableSubtitles();
+	(void)parent;
+        return self->disableSubtitles();
 }
 
 PyObject *getSubtitleList()
