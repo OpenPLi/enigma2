@@ -392,8 +392,9 @@ static const unsigned short gb18030uni_ranges[206] = {
 
 
 static int
-ascii_mbtowc (ucs4_t *pwc, const unsigned char *s, [[maybe_unused]] int n)
+ascii_mbtowc (ucs4_t *pwc, const unsigned char *s, int n)
 {
+  (void)n;
   unsigned char c = *s;
   if (c < 0x80) {
     *pwc = (ucs4_t) c;

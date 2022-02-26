@@ -38,7 +38,7 @@ public:
 	eSize size() { return eSize(m_xRes, m_yRes); }
 	void setPalette(gUnmanagedSurface);
 	int waitVSync();
-	int setLCDContrast([[maybe_unused]] int contrast) { return 0; };
+	int setLCDContrast(int contrast) { (void)contrast; return 0; };
 	int setLCDBrightness(int brightness);
 	void setInverted( unsigned char ) {};
 	void setFlipped(bool) {};

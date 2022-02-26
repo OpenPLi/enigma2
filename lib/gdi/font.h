@@ -188,7 +188,7 @@ public:
 		return boundBox;
 	}
 
-	const int size() const
+	int size() const
 	{
 		return glyphs.size();
 	}

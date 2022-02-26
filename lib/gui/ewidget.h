@@ -129,7 +129,7 @@ public:
 	void setFocus(eWidget *focus);
 
 		/* enable this if you need the absolute position of the widget */
-	void setPositionNotifyChild([[maybe_unused]] int n) { m_notify_child_on_position_change = 1; }
+	void setPositionNotifyChild(int n) { (void)n; m_notify_child_on_position_change = 1; }
 
 	void notifyShowHide();
 };
