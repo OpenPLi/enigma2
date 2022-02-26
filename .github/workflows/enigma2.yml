@@ -85,7 +85,6 @@ jobs:
     - name: patch enigma cpp files
       run: |
         sed -i 's/eFatal/eDebug/g' lib/gdi/gfbdc.cpp
-        sed -i 's/mallinfo2/mallinfo/g' main/enigma.cpp
     - name: build enigma2
       env: 
         CC: "gcc-${{ matrix.gcc }}"
