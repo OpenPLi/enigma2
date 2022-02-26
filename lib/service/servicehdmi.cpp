@@ -206,7 +206,7 @@ RESULT eServiceHDMIRecord::prepare(const char *filename, time_t begTime, time_t 
 	(void)endTime;
 	(void)eit_event_id;
 	(void)name;
-	(void)desc;
+	(void)descr;
 	(void)tags;
 	(void)descramble;
 	(void)recordecm;
