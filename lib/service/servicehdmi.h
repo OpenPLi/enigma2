@@ -33,7 +33,7 @@ public:
 	RESULT getName(const eServiceReference &ref, std::string &name);
 	int getLength(const eServiceReference &ref);
 	int getInfo(const eServiceReference &ref, int w);
-	int isPlayable(const eServiceReference &ref, const eServiceReference &ignore, bool simulate) { (void)ref; (void)ingore; (void)simulate; return 1; }
+	int isPlayable(const eServiceReference &ref, const eServiceReference &ignore, bool simulate) { (void)ref; (void)ignore; (void)simulate; return 1; }
 	long long getFileSize(const eServiceReference &ref);
 };
 
