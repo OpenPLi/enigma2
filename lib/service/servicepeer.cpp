@@ -27,10 +27,10 @@ static void peer_remove(const char *name)
 }
 
 static void e2avahi_resolve_callback(
-    void* userdata,
+	[[maybe_unused]] void* userdata,
 	int event, /* One of E2AVAHI_EVENT_... */
 	const char *name, /* name+type combination is unique on the network */
-	const char *type,
+	[[maybe_unused]] const char *type,
 	const char *host_name, /* hostname and port are only valid in ADD */
 	uint16_t port)
 {

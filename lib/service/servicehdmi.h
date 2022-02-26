@@ -33,7 +33,7 @@ public:
 	RESULT getName(const eServiceReference &ref, std::string &name);
 	int getLength(const eServiceReference &ref);
 	int getInfo(const eServiceReference &ref, int w);
-	int isPlayable(const eServiceReference &ref, const eServiceReference &ignore, bool simulate) { return 1; }
+	int isPlayable([[maybe_unused]] const eServiceReference &ref, [[maybe_unused]] const eServiceReference &ignore, [[maybe_unused]] bool simulate) { return 1; }
 	long long getFileSize(const eServiceReference &ref);
 };
 
@@ -72,7 +72,7 @@ public:
 	int getInfo(int w);
 	std::string getInfoString(int w);
 	ePtr<iServiceInfoContainer> getInfoObject(int w);
-	void setQpipMode(bool value, bool audio) { }
+	void setQpipMode([[maybe_unused]] bool value, [[maybe_unused]] bool audio) { }
 
 private:
 	friend class eServiceFactoryHDMI;

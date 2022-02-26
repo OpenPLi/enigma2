@@ -457,7 +457,7 @@ void eEPGCache::timeUpdated()
 		eDebug("[eEPGCache] time updated.. but cache file not set yet.. dont start epg!!");
 }
 
-bool eEPGCache::FixOverlapping(EventCacheItem &servicemap, time_t TM, int duration, const timeMap::iterator &tm_it, const uniqueEPGKey &service)
+bool eEPGCache::FixOverlapping(EventCacheItem &servicemap, time_t TM, int duration, const timeMap::iterator &tm_it, [[maybe_unused]] const uniqueEPGKey &service)
 {
 	bool ret = false;
 	timeMap::iterator tmp = tm_it;

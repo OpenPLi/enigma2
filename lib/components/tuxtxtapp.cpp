@@ -34,7 +34,7 @@ eTuxtxtApp::~eTuxtxtApp()
 	pthread_mutex_destroy( &cacheChangeLock );
 }
 
-void eTuxtxtApp::recvEvent(const int &evt)
+void eTuxtxtApp::recvEvent([[maybe_unused]] const int &evt)
 {
 	uiRunning = false;
 	eDBoxLCD::getInstance()->unlock();

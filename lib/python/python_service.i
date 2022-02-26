@@ -351,7 +351,7 @@ error_out:
 	return -1;
 }
 
-RESULT disableSubtitles(eWidget *parent)
+RESULT disableSubtitles([[maybe_unused]] eWidget *parent)
 {
 	return self->disableSubtitles();
 }

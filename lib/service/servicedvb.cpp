@@ -83,12 +83,12 @@ RESULT eStaticServiceDVBInformation::getName(const eServiceReference &ref, std::
 		return -1;
 }
 
-int eStaticServiceDVBInformation::getLength(const eServiceReference &ref)
+int eStaticServiceDVBInformation::getLength([[maybe_unused]] const eServiceReference &ref)
 {
 	return -1;
 }
 
-int eStaticServiceDVBInformation::isPlayable(const eServiceReference &ref, const eServiceReference &ignore, bool simulate)
+int eStaticServiceDVBInformation::isPlayable(const eServiceReference &ref, const eServiceReference &ignore, [[maybe_unused]] bool simulate)
 {
 	ePtr<eDVBResourceManager> res_mgr;
 	if ( eDVBResourceManager::getInstance( res_mgr ) )
@@ -298,7 +298,7 @@ int eStaticServiceDVBBouquetInformation::isPlayable(const eServiceReference &ref
 	return 0;
 }
 
-int eStaticServiceDVBBouquetInformation::getLength(const eServiceReference &ref)
+int eStaticServiceDVBBouquetInformation::getLength([[maybe_unused]] const eServiceReference &ref)
 {
 	return -1;
 }
@@ -320,7 +320,7 @@ public:
 	RESULT getName(const eServiceReference &ref, std::string &name);
 	int getLength(const eServiceReference &ref);
 	RESULT getEvent(const eServiceReference &ref, ePtr<eServiceEvent> &SWIG_OUTPUT, time_t start_time);
-	int isPlayable(const eServiceReference &ref, const eServiceReference &ignore, bool simulate) { return 1; }
+	int isPlayable([[maybe_unused]] const eServiceReference &ref, [[maybe_unused]] const eServiceReference &ignore, [[maybe_unused]] bool simulate) { return 1; }
 	int getInfo(const eServiceReference &ref, int w);
 	std::string getInfoString(const eServiceReference &ref,int w);
 	ePtr<iDVBTransponderData> getTransponderData(const eServiceReference &r);
@@ -419,7 +419,7 @@ int eStaticServiceDVBPVRInformation::getLength(const eServiceReference &ref)
 	return m_parser.m_length / 90000;
 }
 
-int eStaticServiceDVBPVRInformation::getInfo(const eServiceReference &ref, int w)
+int eStaticServiceDVBPVRInformation::getInfo([[maybe_unused]] const eServiceReference &ref, int w)
 {
 	switch (w)
 	{
@@ -441,7 +441,7 @@ int eStaticServiceDVBPVRInformation::getInfo(const eServiceReference &ref, int w
 	}
 }
 
-std::string eStaticServiceDVBPVRInformation::getInfoString(const eServiceReference &ref,int w)
+std::string eStaticServiceDVBPVRInformation::getInfoString([[maybe_unused]] const eServiceReference &ref,int w)
 {
 	switch (w)
 	{
@@ -456,13 +456,13 @@ std::string eStaticServiceDVBPVRInformation::getInfoString(const eServiceReferen
 	}
 }
 
-ePtr<iDVBTransponderData> eStaticServiceDVBPVRInformation::getTransponderData(const eServiceReference &r)
+ePtr<iDVBTransponderData> eStaticServiceDVBPVRInformation::getTransponderData([[maybe_unused]] const eServiceReference &r)
 {
 	ePtr<iDVBTransponderData> retval;
 	return retval;
 }
 
-long long eStaticServiceDVBPVRInformation::getFileSize(const eServiceReference &ref)
+long long eStaticServiceDVBPVRInformation::getFileSize([[maybe_unused]] const eServiceReference &ref)
 {
 	return m_parser.m_filesize;
 }
@@ -1673,7 +1673,7 @@ RESULT eDVBServicePlay::getPlayPosition(pts_t &pos)
 	return pvr_channel->getCurrentPosition(m_decode_demux, pos, m_decoder);
 }
 
-RESULT eDVBServicePlay::setTrickmode(int trick)
+RESULT eDVBServicePlay::setTrickmode([[maybe_unused]] int trick)
 {
 		/* currently unimplemented */
 	return -1;
@@ -1802,7 +1802,7 @@ ePtr<iStreamBufferInfo> eDVBServicePlay::getBufferCharge()
 	return 0;
 }
 
-int eDVBServicePlay::setBufferSize(int size)
+int eDVBServicePlay::setBufferSize([[maybe_unused]] int size)
 {
 	/** FIXME **/
 	return 0;

@@ -38,7 +38,7 @@ void ePositionGauge::setPosition(const pts_t &pos)
 	updatePosition();
 }
 
-void ePositionGauge::setInColor(const gRGB &color)
+void ePositionGauge::setInColor([[maybe_unused]] const gRGB &color)
 {
 	invalidate();
 }

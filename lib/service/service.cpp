@@ -264,7 +264,7 @@ RESULT eServiceCenter::addFactoryExtension(int id, const char *extension)
 	return 0;
 }
 
-RESULT eServiceCenter::removeFactoryExtension(int id, const char *extension)
+RESULT eServiceCenter::removeFactoryExtension([[maybe_unused]] int id, const char *extension)
 {
 	std::map<std::string,int>::iterator what = extensions_r.find(extension);
 	if (what == extensions_r.end())
@@ -295,51 +295,51 @@ RESULT iServiceHandler::info(const eServiceReference &, ePtr<iStaticServiceInfor
 
 #include <lib/service/event.h>
 
-RESULT iStaticServiceInformation::getEvent(const eServiceReference &ref, ePtr<eServiceEvent> &evt, time_t start_time)
+RESULT iStaticServiceInformation::getEvent([[maybe_unused]] const eServiceReference &ref, ePtr<eServiceEvent> &evt, [[maybe_unused]] time_t start_time)
 {
 	evt = 0;
 	return -1;
 }
 
-int iStaticServiceInformation::getLength(const eServiceReference &ref)
+int iStaticServiceInformation::getLength([[maybe_unused]] const eServiceReference &ref)
 {
 	return -1;
 }
 
-int iStaticServiceInformation::isPlayable(const eServiceReference &ref, const eServiceReference &ignore, bool simulate)
+int iStaticServiceInformation::isPlayable([[maybe_unused]] const eServiceReference &ref, [[maybe_unused]] const eServiceReference &ignore, [[maybe_unused]] bool simulate)
 {
 	return 0;
 }
 
-RESULT iServiceInformation::getEvent(ePtr<eServiceEvent> &evt, int m_nownext)
+RESULT iServiceInformation::getEvent(ePtr<eServiceEvent> &evt, [[maybe_unused]] int m_nownext)
 {
 	evt = 0;
 	return -1;
 }
 
-int iStaticServiceInformation::getInfo(const eServiceReference &ref, int w)
+int iStaticServiceInformation::getInfo([[maybe_unused]] const eServiceReference &ref, [[maybe_unused]] int w)
 {
 	return -1;
 }
 
-std::string iStaticServiceInformation::getInfoString(const eServiceReference &ref, int w)
+std::string iStaticServiceInformation::getInfoString([[maybe_unused]] const eServiceReference &ref, [[maybe_unused]] int w)
 {
 	return "";
 }
 
-ePtr<iServiceInfoContainer> iStaticServiceInformation::getInfoObject(int w)
+ePtr<iServiceInfoContainer> iStaticServiceInformation::getInfoObject([[maybe_unused]] int w)
 {
 	ePtr<iServiceInfoContainer> retval;
 	return retval;
 }
 
-ePtr<iDVBTransponderData> iStaticServiceInformation::getTransponderData(const eServiceReference &ref)
+ePtr<iDVBTransponderData> iStaticServiceInformation::getTransponderData([[maybe_unused]] const eServiceReference &ref)
 {
 	ePtr<iDVBTransponderData> retval;
 	return retval;
 }
 
-long long iStaticServiceInformation::getFileSize(const eServiceReference &ref)
+long long iStaticServiceInformation::getFileSize([[maybe_unused]] const eServiceReference &ref)
 {
 	return 0;
 }
@@ -349,27 +349,27 @@ bool iStaticServiceInformation::isCrypted()
 	return false;
 }
 
-int iStaticServiceInformation::setInfo(const eServiceReference &ref, int w, int v)
+int iStaticServiceInformation::setInfo([[maybe_unused]] const eServiceReference &ref, [[maybe_unused]] int w, [[maybe_unused]] int v)
 {
 	return -1;
 }
 
-int iStaticServiceInformation::setInfoString(const eServiceReference &ref, int w, const char *v)
+int iStaticServiceInformation::setInfoString([[maybe_unused]] const eServiceReference &ref, [[maybe_unused]] int w, [[maybe_unused]] const char *v)
 {
 	return -1;
 }
 
-int iServiceInformation::getInfo(int w)
+int iServiceInformation::getInfo([[maybe_unused]] int w)
 {
 	return -1;
 }
 
-std::string iServiceInformation::getInfoString(int w)
+std::string iServiceInformation::getInfoString([[maybe_unused]] int w)
 {
 	return "";
 }
 
-ePtr<iServiceInfoContainer> iServiceInformation::getInfoObject(int w)
+ePtr<iServiceInfoContainer> iServiceInformation::getInfoObject([[maybe_unused]] int w)
 {
 	ePtr<iServiceInfoContainer> retval;
 	return retval;
@@ -381,7 +381,7 @@ ePtr<iDVBTransponderData> iServiceInformation::getTransponderData()
 	return retval;
 }
 
-void iServiceInformation::getCaIds(std::vector<int> &caids, std::vector<int> &ecmpids, std::vector<std::string> &ecmdatabytes)
+void iServiceInformation::getCaIds([[maybe_unused]] std::vector<int> &caids, [[maybe_unused]] std::vector<int> &ecmpids, [[maybe_unused]] std::vector<std::string> &ecmdatabytes)
 {
 }
 
@@ -390,12 +390,12 @@ long long iServiceInformation::getFileSize()
 	return 0;
 }
 
-int iServiceInformation::setInfo(int w, int v)
+int iServiceInformation::setInfo([[maybe_unused]] int w, [[maybe_unused]] int v)
 {
 	return -1;
 }
 
-int iServiceInformation::setInfoString(int w, const char *v)
+int iServiceInformation::setInfoString([[maybe_unused]] int w, [[maybe_unused]] const char *v)
 {
 	return -1;
 }

@@ -108,7 +108,7 @@ void eDVBServicePMTHandler::channelStateChanged(iDVBChannel *channel)
 	}
 }
 
-void eDVBServicePMTHandler::channelEvent(iDVBChannel *channel, int event)
+void eDVBServicePMTHandler::channelEvent([[maybe_unused]] iDVBChannel *channel, int event)
 {
 	switch (event)
 	{
@@ -240,7 +240,7 @@ void eDVBServicePMTHandler::PATready(int)
 		serviceEvent(eventNoPAT);
 }
 
-void eDVBServicePMTHandler::AITready(int error)
+void eDVBServicePMTHandler::AITready([[maybe_unused]] int error)
 {
 	eDebug("[eDVBServicePMTHandler] AITready");
 	ePtr<eTable<ApplicationInformationSection> > ptr;
@@ -329,7 +329,7 @@ void eDVBServicePMTHandler::AITready(int error)
 	m_AIT.stop();
 }
 
-void eDVBServicePMTHandler::OCready(int error)
+void eDVBServicePMTHandler::OCready([[maybe_unused]] int error)
 {
 	eDebug("[eDVBServicePMTHandler] OCready");
 	ePtr<eTable<OCSection> > ptr;
@@ -869,7 +869,7 @@ void eDVBServicePMTHandler::SDTScanEvent(int event)
 	}
 }
 
-int eDVBServicePMTHandler::tune(eServiceReferenceDVB &ref, int use_decode_demux, eCueSheet *cue, bool simulate, eDVBService *service, serviceType type, bool descramble)
+int eDVBServicePMTHandler::tune(eServiceReferenceDVB &ref, [[maybe_unused]] int use_decode_demux, eCueSheet *cue, bool simulate, eDVBService *service, serviceType type, bool descramble)
 {
 	ePtr<iTsSource> s;
 	return tuneExt(ref, s, NULL, cue, simulate, service, type, descramble);

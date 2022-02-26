@@ -56,7 +56,7 @@ RESULT eServiceFactoryHDMI::list(const eServiceReference &, ePtr<iListableServic
 	return -1;
 }
 
-RESULT eServiceFactoryHDMI::info(const eServiceReference &ref, ePtr<iStaticServiceInformation> &ptr)
+RESULT eServiceFactoryHDMI::info([[maybe_unused]] const eServiceReference &ref, ePtr<iStaticServiceInformation> &ptr)
 {
 	ptr = m_service_info;
 	return 0;
@@ -87,17 +87,17 @@ RESULT eStaticServiceHDMIInfo::getName(const eServiceReference &ref, std::string
 	return 0;
 }
 
-int eStaticServiceHDMIInfo::getLength(const eServiceReference &ref)
+int eStaticServiceHDMIInfo::getLength([[maybe_unused]] const eServiceReference &ref)
 {
 	return -1;
 }
 
-int eStaticServiceHDMIInfo::getInfo(const eServiceReference &ref, int w)
+int eStaticServiceHDMIInfo::getInfo([[maybe_unused]] const eServiceReference &ref, [[maybe_unused]] int w)
 {
 	return iServiceInformation::resNA;
 }
 
-long long eStaticServiceHDMIInfo::getFileSize(const eServiceReference &ref)
+long long eStaticServiceHDMIInfo::getFileSize([[maybe_unused]] const eServiceReference &ref)
 {
 	return 0;
 }
@@ -164,17 +164,17 @@ RESULT eServiceHDMI::getName(std::string &name)
 	return 0;
 }
 
-int eServiceHDMI::getInfo(int w)
+int eServiceHDMI::getInfo([[maybe_unused]] int w)
 {
 	return resNA;
 }
 
-std::string eServiceHDMI::getInfoString(int w)
+std::string eServiceHDMI::getInfoString([[maybe_unused]] int w)
 {
 	return "";
 }
 
-ePtr<iServiceInfoContainer> eServiceHDMI::getInfoObject(int w)
+ePtr<iServiceInfoContainer> eServiceHDMI::getInfoObject([[maybe_unused]] int w)
 {
 	return NULL;
 }
@@ -192,7 +192,7 @@ eServiceHDMIRecord::eServiceHDMIRecord(const eServiceReference &ref)
 	m_thread = NULL;
 }
 
-RESULT eServiceHDMIRecord::prepare(const char *filename, time_t begTime, time_t endTime, int eit_event_id, const char *name, const char *descr, const char *tags, bool descramble, bool recordecm, int packetsize)
+RESULT eServiceHDMIRecord::prepare(const char *filename, [[maybe_unused]] time_t begTime, [[maybe_unused]] time_t endTime, [[maybe_unused]] int eit_event_id, [[maybe_unused]] const char *name, [[maybe_unused]] const char *descr, [[maybe_unused]] const char *tags, [[maybe_unused]] bool descramble, [[maybe_unused]] bool recordecm, [[maybe_unused]] int packetsize)
 {
 	m_filename = filename;
 
@@ -203,7 +203,7 @@ RESULT eServiceHDMIRecord::prepare(const char *filename, time_t begTime, time_t 
 	return -1;
 }
 
-RESULT eServiceHDMIRecord::prepareStreaming(bool descramble, bool includeecm)
+RESULT eServiceHDMIRecord::prepareStreaming([[maybe_unused]] bool descramble, [[maybe_unused]] bool includeecm)
 {
 	return -1;
 }

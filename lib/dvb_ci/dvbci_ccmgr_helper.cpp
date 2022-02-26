@@ -336,7 +336,7 @@ void DH_set_flags(DH *dh, int flags)
 }
 #endif
 
-int verify_cb(int ok, X509_STORE_CTX *ctx)
+int verify_cb([[maybe_unused]] int ok, X509_STORE_CTX *ctx)
 {
 	if (X509_STORE_CTX_get_error(ctx) == X509_V_ERR_CERT_NOT_YET_VALID)
 	{

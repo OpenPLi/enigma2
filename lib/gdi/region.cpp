@@ -126,7 +126,7 @@ void gRegion::subtractO(
 		std::vector<eRect>::const_iterator r2,
 		std::vector<eRect>::const_iterator r2End,
 		int y1, int y2,
-		int &overlap)
+		[[maybe_unused]] int &overlap)
 {
 	int x1;
 	x1 = r1->x1;
@@ -195,7 +195,7 @@ void gRegion::mergeO(
 		std::vector<eRect>::const_iterator r2,
 		std::vector<eRect>::const_iterator r2End,
 		int y1, int y2,
-		int &overlap)
+		[[maybe_unused]] int &overlap)
 {
 	int x1, x2;
 

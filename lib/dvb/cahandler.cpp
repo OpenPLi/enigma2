@@ -313,7 +313,7 @@ int eDVBCAHandler::registerService(const eServiceReferenceDVB &ref, int adapter,
 	return 0;
 }
 
-int eDVBCAHandler::unregisterService(const eServiceReferenceDVB &ref, int adapter, int demux_nums[2], int servicetype, eTable<ProgramMapSection> *ptr)
+int eDVBCAHandler::unregisterService(const eServiceReferenceDVB &ref, [[maybe_unused]] int adapter, int demux_nums[2], int servicetype, eTable<ProgramMapSection> *ptr)
 {
 	CAServiceMap::iterator it = services.find(ref);
 	if (it == services.end())

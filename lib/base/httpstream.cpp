@@ -370,7 +370,7 @@ ssize_t eHttpStream::httpChunkedRead(void *buf, size_t count)
 	return ret;
 }
 
-ssize_t eHttpStream::read(off_t offset, void *buf, size_t count)
+ssize_t eHttpStream::read([[maybe_unused]] off_t offset, void *buf, size_t count)
 {
 	if (connectionStatus == BUSY)
 		return 0;

@@ -158,7 +158,7 @@ TDT::TDT(eDVBChannel *chan, int update_count)
 {
 }
 
-int TDT::createTable(unsigned int nr, const uint8_t *data, unsigned int max)
+int TDT::createTable([[maybe_unused]] unsigned int nr, const uint8_t *data, [[maybe_unused]] unsigned int max)
 {
 	if ( data && (data[0] == 0x70 || data[0] == 0x73 ))
 	{
@@ -199,7 +199,7 @@ void STT::start()
 	TimeTable::startTable(eDVBSTTSpec());
 }
 
-int STT::createTable(unsigned int nr, const uint8_t *data, unsigned int max)
+int STT::createTable([[maybe_unused]] unsigned int nr, const uint8_t *data, [[maybe_unused]] unsigned int max)
 {
 	SystemTimeTableSection section(data);
 	time_t tptime = section.getSystemTime() - (time_t)section.getGPSOffset() + (time_t)315964800; /* ATSC GPS system time epoch is 00:00 Jan 6th 1980 */

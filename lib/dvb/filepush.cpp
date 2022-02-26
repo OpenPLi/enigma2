@@ -32,7 +32,7 @@ eFilePushThread::~eFilePushThread()
 	free(m_buffer);
 }
 
-static void signal_handler(int x)
+static void signal_handler([[maybe_unused]] int x)
 {
 	eDebug("[eFilePush] SIGUSR1 received");
 }
@@ -342,7 +342,7 @@ void eFilePushThread::recvEvent(const int &evt)
 	Release();
 }
 
-void eFilePushThread::filterRecordData(const unsigned char *data, int len)
+void eFilePushThread::filterRecordData([[maybe_unused]] const unsigned char *data, [[maybe_unused]] int len)
 {
 }
 

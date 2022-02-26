@@ -188,7 +188,7 @@ void eDVBCICcSession::cc_data_req(const uint8_t *data, unsigned int len)
 	send(cc_data_cnf_tag, dest, answ_len);
 }
 
-void eDVBCICcSession::cc_sync_req(const uint8_t *data, unsigned int len)
+void eDVBCICcSession::cc_sync_req([[maybe_unused]] const uint8_t *data, [[maybe_unused]] unsigned int len)
 {
 	const uint8_t tag[3] = { 0x9f, 0x90, 0x06 };
 	const uint8_t status = 0x00;    /* OK */

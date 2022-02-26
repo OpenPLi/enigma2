@@ -893,7 +893,7 @@ RESULT eDVBTSRecorder::enableAccessPoints(bool enable)
 	return 0;
 }
 
-RESULT eDVBTSRecorder::setBoundary(off_t max)
+RESULT eDVBTSRecorder::setBoundary([[maybe_unused]] off_t max)
 {
 	return -1; // not yet implemented
 }

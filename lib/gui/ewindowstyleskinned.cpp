@@ -45,7 +45,7 @@ void eWindowStyleSkinned::paintWindowDecoration(eWindow *wnd, gPainter &painter,
 	}
 }
 
-void eWindowStyleSkinned::paintBackground(gPainter &painter, const ePoint &offset, const eSize &size)
+void eWindowStyleSkinned::paintBackground(gPainter &painter, [[maybe_unused]] const ePoint &offset, [[maybe_unused]] const eSize &size)
 {
 	painter.setBackgroundColor(m_color[colBackground]);
 	painter.clear();
@@ -95,7 +95,7 @@ void eWindowStyleSkinned::drawFrame(gPainter &painter, const eRect &frame, int w
 	drawBorder(painter, frame, m_border[bs], bpAll);
 }
 
-void eWindowStyleSkinned::drawBorder(gPainter &painter, const eRect &pos, struct borderSet &border, int what)
+void eWindowStyleSkinned::drawBorder(gPainter &painter, const eRect &pos, struct borderSet &border, [[maybe_unused]] int what)
 {
 	int x = pos.left(), xm = pos.right();
 

@@ -81,7 +81,7 @@ fontRenderClass *fontRenderClass::getInstance()
 }
 
 FT_Error myFTC_Face_Requester(	FTC_FaceID	face_id,
-				FT_Library	library,
+				[[maybe_unused]] FT_Library	library,
 				FT_Pointer	request_data,
 				FT_Face*	aface)
 {
@@ -544,7 +544,7 @@ void eTextPara::calc_bbox()
 //	eDebug("[eTextPara] boundBox left = %i, top = %i, right = %i, bottom = %i", boundBox.left(), boundBox.top(), boundBox.right(), boundBox.bottom() );
 }
 
-void eTextPara::newLine(int flags)
+void eTextPara::newLine([[maybe_unused]] int flags)
 {
 	if (maximum.width()<cursor.x())
 		maximum.setWidth(cursor.x());

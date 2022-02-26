@@ -17,7 +17,7 @@ class eStaticServiceFSInformation: public iStaticServiceInformation
 	DECLARE_REF(eStaticServiceFSInformation);
 public:
 	RESULT getName(const eServiceReference &ref, std::string &name);
-	int getLength(const eServiceReference &ref) { return -1; }
+	int getLength([[maybe_unused]] const eServiceReference &ref) { return -1; }
 };
 
 DEFINE_REF(eStaticServiceFSInformation);
@@ -56,13 +56,13 @@ eServiceFactoryFS::~eServiceFactoryFS()
 DEFINE_REF(eServiceFactoryFS)
 
 	// iServiceHandler
-RESULT eServiceFactoryFS::play(const eServiceReference &ref, ePtr<iPlayableService> &ptr)
+RESULT eServiceFactoryFS::play([[maybe_unused]] const eServiceReference &ref, ePtr<iPlayableService> &ptr)
 {
 	ptr=0;
 	return -1;
 }
 
-RESULT eServiceFactoryFS::record(const eServiceReference &ref, ePtr<iRecordableService> &ptr)
+RESULT eServiceFactoryFS::record([[maybe_unused]] const eServiceReference &ref, ePtr<iRecordableService> &ptr)
 {
 	ptr=0;
 	return -1;
@@ -74,7 +74,7 @@ RESULT eServiceFactoryFS::list(const eServiceReference &ref, ePtr<iListableServi
 	return 0;
 }
 
-RESULT eServiceFactoryFS::info(const eServiceReference &ref, ePtr<iStaticServiceInformation> &ptr)
+RESULT eServiceFactoryFS::info([[maybe_unused]] const eServiceReference &ref, ePtr<iStaticServiceInformation> &ptr)
 {
 	ptr = m_service_information;
 	return 0;

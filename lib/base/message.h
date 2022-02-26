@@ -105,7 +105,7 @@ public:
 		}
 		trigger_event();
 	}
-	eFixedMessagePump(eMainloop *context, int mt):
+	eFixedMessagePump(eMainloop *context, [[maybe_unused]] int mt):
 		FD(eventfd(0, EFD_CLOEXEC)),
 		sn(eSocketNotifier::create(context, m_fd, eSocketNotifier::Read, false))
 	{

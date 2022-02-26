@@ -352,7 +352,7 @@ eDVBRegisteredFrontend *eFBCTunerManager::GetSimulFE(eDVBRegisteredFrontend *fe)
 	return((eDVBRegisteredFrontend *)0);
 }
 
-void eFBCTunerManager::ConnectLink(eDVBRegisteredFrontend *link_fe, eDVBRegisteredFrontend *prev_fe, eDVBRegisteredFrontend *next_fe, bool simulate) const
+void eFBCTunerManager::ConnectLink(eDVBRegisteredFrontend *link_fe, eDVBRegisteredFrontend *prev_fe, eDVBRegisteredFrontend *next_fe, [[maybe_unused]] bool simulate) const
 {
 	//if (next_fe)
 		//fprintf(stderr, "**** [*][eFBCTunerManager::connectLink] connect %d->%d->%d %s\n", FESlotID(prev_fe), FESlotID(link_fe), FESlotID(next_fe), simulate?"(simulate)":"");
@@ -367,7 +367,7 @@ void eFBCTunerManager::ConnectLink(eDVBRegisteredFrontend *link_fe, eDVBRegister
 		FrontendSetLinkPtr(next_fe, link_prev, link_fe);
 }
 
-void eFBCTunerManager::DisconnectLink(eDVBRegisteredFrontend *link_fe, eDVBRegisteredFrontend *prev_fe, eDVBRegisteredFrontend *next_fe, bool simulate) const
+void eFBCTunerManager::DisconnectLink(eDVBRegisteredFrontend *link_fe, eDVBRegisteredFrontend *prev_fe, eDVBRegisteredFrontend *next_fe, [[maybe_unused]] bool simulate) const
 {
 	//if (next_fe)
 		//fprintf(stderr, "**** [*][eFBCTunerManager::disconnectLink] disconnect %d->%d->%d %s\n", FESlotID(prev_fe), FESlotID(link_fe), FESlotID(next_fe), simulate?"(simulate)":"");

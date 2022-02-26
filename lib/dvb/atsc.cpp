@@ -204,7 +204,7 @@ const StringValueList *MultipleStringStructure::getStrings(void) const
 	return &strings;
 }
 
-VirtualChannel::VirtualChannel(const uint8_t * const buffer, bool terrestrial)
+VirtualChannel::VirtualChannel(const uint8_t * const buffer, [[maybe_unused]] bool terrestrial)
 {
 	int i;
 	iconv_t cd = iconv_open("UTF-8", "UCS-2BE");

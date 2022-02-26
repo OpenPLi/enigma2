@@ -58,7 +58,7 @@ eWindowStyleSimple::eWindowStyleSimple()
 	m_background_color = gColor(0x19);
 }
 
-void eWindowStyleSimple::handleNewSize(eWindow *wnd, eSize &size, eSize &offset)
+void eWindowStyleSimple::handleNewSize(eWindow *wnd, eSize &size, [[maybe_unused]] eSize &offset)
 {
 //	eDebug("[eWindowStyleSimple] handle new size: %d x %d", size.width(), size.height());
 
@@ -95,7 +95,7 @@ void eWindowStyleSimple::paintWindowDecoration(eWindow *wnd, gPainter &painter, 
 	painter.line(frame.topRight1()+eSize(-0,1), frame.bottomRight1()+eSize(-0, 0));
 }
 
-void eWindowStyleSimple::paintBackground(gPainter &painter, const ePoint &offset, const eSize &size)
+void eWindowStyleSimple::paintBackground(gPainter &painter, [[maybe_unused]] const ePoint &offset, [[maybe_unused]] const eSize &size)
 {
 	painter.setBackgroundColor(m_background_color);
 	painter.clear();

@@ -300,7 +300,7 @@ void eDBoxLCD::update()
 #endif
 }
 
-void eDBoxLCD::dumpLCD(bool png)
+void eDBoxLCD::dumpLCD([[maybe_unused]] bool png)
 {
 	return;
 }

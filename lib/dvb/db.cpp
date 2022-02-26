@@ -447,7 +447,7 @@ void eDVBDB::parseServiceData(ePtr<eDVBService> s, std::string str)
 	}
 }
 
-static ePtr<eDVBFrontendParameters> parseFrontendData(char* line, int version)
+static ePtr<eDVBFrontendParameters> parseFrontendData(char* line, [[maybe_unused]] int version)
 {
 	char * options = strchr(line, ',');
 	if (options)

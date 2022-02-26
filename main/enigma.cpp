@@ -188,7 +188,7 @@ void catchTermSignal()
 		perror("SIGTERM");
 }
 
-int main(int argc, char **argv)
+int main([[maybe_unused]] int argc, [[maybe_unused]] char **argv)
 {
 #ifdef MEMLEAK_CHECK
 	atexit(DumpUnfreed);

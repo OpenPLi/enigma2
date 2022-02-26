@@ -1109,7 +1109,7 @@ RESULT eTSMPEGDecoder::setTextPID(int textpid)
 	return 0;
 }
 
-RESULT eTSMPEGDecoder::setSyncMaster(int who)
+RESULT eTSMPEGDecoder::setSyncMaster([[maybe_unused]] int who)
 {
 	return -1;
 }

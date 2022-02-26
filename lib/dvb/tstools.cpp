@@ -11,7 +11,7 @@ static const int m_maxrange = 256*1024;
 
 DEFINE_REF(eTSFileSectionReader);
 
-eTSFileSectionReader::eTSFileSectionReader(eMainloop *context)
+eTSFileSectionReader::eTSFileSectionReader([[maybe_unused]] eMainloop *context)
 {
 	sectionSize = 0;
 }
@@ -34,7 +34,7 @@ void eTSFileSectionReader::data(unsigned char *packet, unsigned int size)
 	}
 }
 
-RESULT eTSFileSectionReader::start(const eDVBSectionFilterMask &mask)
+RESULT eTSFileSectionReader::start([[maybe_unused]] const eDVBSectionFilterMask &mask)
 {
 	sectionSize = 0;
 	return 0;
@@ -787,7 +787,7 @@ int eDVBTSTools::findPMT(eDVBPMTParser::program &program)
 	return -1;
 }
 
-int eDVBTSTools::findFrame(off_t &_offset, size_t &len, int &direction, int frame_types)
+int eDVBTSTools::findFrame(off_t &_offset, size_t &len, int &direction, [[maybe_unused]] int frame_types)
 {
 //	eDebug("[eDVBTSTools] findFrame trying to find iFrame at %llu", offset);
 	if (!m_streaminfo.hasStructure())

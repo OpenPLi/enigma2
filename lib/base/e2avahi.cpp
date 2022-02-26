@@ -115,8 +115,8 @@ inline bool operator!=(const AvahiBrowserEntry& lhs, const AvahiBrowserEntry& rh
 typedef std::list<AvahiBrowserEntry> AvahiBrowserEntryList;
 static AvahiBrowserEntryList avahi_browsers;
 
-static void avahi_group_callback(AvahiEntryGroup *group,
-		AvahiEntryGroupState state, void *d)
+static void avahi_group_callback([[maybe_unused]] AvahiEntryGroup *group,
+		[[maybe_unused]] AvahiEntryGroupState state, [[maybe_unused]] void *d)
 {
 }
 
@@ -169,11 +169,11 @@ static void avahi_service_try_register(AvahiServiceEntry *entry)
 /* Browser part */
 
 static void avahi_resolver_callback(AvahiServiceResolver *resolver,
-		AvahiIfIndex iface, AvahiProtocol proto,
+		[[maybe_unused]] AvahiIfIndex iface, [[maybe_unused]] AvahiProtocol proto,
 		AvahiResolverEvent event, const char *name,
-		const char *type, const char *domain,
-		const char *host_name, const AvahiAddress *address,
-		uint16_t port, AvahiStringList *txt,
+		const char *type, [[maybe_unused]] const char *domain,
+		const char *host_name, [[maybe_unused]] const AvahiAddress *address,
+		uint16_t port, [[maybe_unused]] AvahiStringList *txt,
 		AvahiLookupResultFlags flags, void *d)
 {
 	AvahiBrowserEntry *entry = (AvahiBrowserEntry*)d;
@@ -198,7 +198,7 @@ static void avahi_browser_callback(AvahiServiceBrowser *browser,
 		AvahiIfIndex iface, AvahiProtocol proto,
 		AvahiBrowserEvent event, const char *name,
 		const char *type, const char *domain,
-		AvahiLookupResultFlags flags, void *d)
+		[[maybe_unused]] AvahiLookupResultFlags flags, void *d)
 {
 	AvahiBrowserEntry *entry = (AvahiBrowserEntry*)d;
 	struct AvahiClient *client = avahi_service_browser_get_client(browser);
@@ -286,7 +286,7 @@ static void avahi_client_reset_all()
 	}
 }
 
-static void avahi_client_callback(AvahiClient *client, AvahiClientState state, void *d)
+static void avahi_client_callback(AvahiClient *client, AvahiClientState state, [[maybe_unused]] void *d)
 {
 	eDebug("[Avahi] client state: %d", state);
 	switch(state)

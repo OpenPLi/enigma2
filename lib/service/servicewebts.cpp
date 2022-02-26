@@ -57,7 +57,7 @@ RESULT eServiceFactoryWebTS::play(const eServiceReference &ref, ePtr<iPlayableSe
 	return 0;
 }
 
-RESULT eServiceFactoryWebTS::record(const eServiceReference &ref, ePtr<iRecordableService> &ptr)
+RESULT eServiceFactoryWebTS::record([[maybe_unused]] const eServiceReference &ref, ePtr<iRecordableService> &ptr)
 {
 	ptr=0;
 	return -1;
@@ -69,7 +69,7 @@ RESULT eServiceFactoryWebTS::list(const eServiceReference &, ePtr<iListableServi
 	return -1;
 }
 
-RESULT eServiceFactoryWebTS::info(const eServiceReference &ref, ePtr<iStaticServiceInformation> &ptr)
+RESULT eServiceFactoryWebTS::info([[maybe_unused]] const eServiceReference &ref, ePtr<iStaticServiceInformation> &ptr)
 {
 	ptr = m_service_info;
 	return -1;
@@ -104,7 +104,7 @@ RESULT eStaticServiceWebTSInfo::getName(const eServiceReference &ref, std::strin
 	return 0;
 }
 
-int eStaticServiceWebTSInfo::getLength(const eServiceReference &ref)
+int eStaticServiceWebTSInfo::getLength([[maybe_unused]] const eServiceReference &ref)
 {
 	return -1;
 }
@@ -139,7 +139,7 @@ long long eStaticServiceWebTSInfo::getFileSize(const eServiceReference &ref)
 	return 0;
 }
 
-RESULT eStaticServiceWebTSInfo::getEvent(const eServiceReference &ref, ePtr<eServiceEvent> &evt, time_t start_time)
+RESULT eStaticServiceWebTSInfo::getEvent([[maybe_unused]] const eServiceReference &ref, ePtr<eServiceEvent> &evt, [[maybe_unused]] time_t start_time)
 {
 	evt = 0;
 	return -1;
@@ -445,27 +445,27 @@ RESULT eServiceWebTS::seek(ePtr<iSeekableService> &ptr)
 	return 0;
 }
 
-RESULT eServiceWebTS::getLength(pts_t &pts)
+RESULT eServiceWebTS::getLength([[maybe_unused]] pts_t &pts)
 {
 	return 0;
 }
 
-RESULT eServiceWebTS::seekTo(pts_t to)
+RESULT eServiceWebTS::seekTo([[maybe_unused]] pts_t to)
 {
 	return 0;
 }
 
-RESULT eServiceWebTS::seekRelative(int direction, pts_t to)
+RESULT eServiceWebTS::seekRelative([[maybe_unused]] int direction, [[maybe_unused]] pts_t to)
 {
 	return 0;
 }
 
-RESULT eServiceWebTS::getPlayPosition(pts_t &pts)
+RESULT eServiceWebTS::getPlayPosition([[maybe_unused]] pts_t &pts)
 {
 	return 0;
 }
 
-RESULT eServiceWebTS::setTrickmode(int trick)
+RESULT eServiceWebTS::setTrickmode([[maybe_unused]] int trick)
 {
 	return -1;
 }
@@ -494,7 +494,7 @@ RESULT eServiceWebTS::getName(std::string &name)
 	return 0;
 }
 
-int eServiceWebTS::getInfo(int w)
+int eServiceWebTS::getInfo([[maybe_unused]] int w)
 {
 	return resNA;
 }

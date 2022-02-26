@@ -188,8 +188,8 @@ static void removed_pixmap(int size)
 	eDebug("[gSurface] Removed %dk, total %u pixmaps, %uk", size>>10, pixmap_total_count, pixmap_total_size>>10);
 }
 #else
-static inline void added_pixmap(int size) {}
-static inline void removed_pixmap(int size) {}
+static inline void added_pixmap([[maybe_unused]] int size) {}
+static inline void removed_pixmap([[maybe_unused]] int size) {}
 #endif
 
 static bool is_a_candidate_for_accel(const gUnmanagedSurface* surface)

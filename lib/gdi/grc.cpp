@@ -200,7 +200,7 @@ void *gRC::thread()
 	return 0;
 }
 
-void gRC::recv_notify(const int &i)
+void gRC::recv_notify([[maybe_unused]] const int &i)
 {
 	notify();
 }
@@ -251,7 +251,7 @@ void gRC::disableSpinner()
 
 static int gPainter_instances;
 
-gPainter::gPainter(gDC *dc, eRect rect): m_dc(dc), m_rc(gRC::getInstance())
+gPainter::gPainter(gDC *dc, [[maybe_unused]] eRect rect): m_dc(dc), m_rc(gRC::getInstance())
 {
 //	ASSERT(!gPainter_instances);
 	gPainter_instances++;

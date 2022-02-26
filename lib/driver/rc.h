@@ -55,7 +55,7 @@ public:
 	 * \param key The key to get the description for.
 	 * \result User readable description of given key.
 	 */
-	virtual void setExclusive(bool b) { };
+	virtual void setExclusive([[maybe_unused]] bool b) { };
 };
 
 /**

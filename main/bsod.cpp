@@ -278,7 +278,7 @@ void bsodFatal(const char *component)
 	if (component) raise(SIGKILL);
 }
 
-void oops(const mcontext_t &context)
+void oops([[maybe_unused]] const mcontext_t &context)
 {
 #if defined(__MIPSEL__)
 	eLog(lvlFatal, "PC: %08lx", (unsigned long)context.pc);
@@ -325,7 +325,7 @@ void print_backtrace()
 #endif
 }
 
-void handleFatalSignal(int signum, siginfo_t *si, void *ctx)
+void handleFatalSignal(int signum, [[maybe_unused]] siginfo_t *si, void *ctx)
 {
 	ucontext_t *uc = (ucontext_t*)ctx;
 	oops(uc->uc_mcontext);

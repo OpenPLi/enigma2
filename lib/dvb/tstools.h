@@ -26,7 +26,7 @@ public:
 	eTSFileSectionReader(eMainloop *context);
 	virtual ~eTSFileSectionReader();
 	void data(unsigned char *packet, unsigned int size);
-	RESULT setBufferSize(int size) { return 0; }
+	RESULT setBufferSize([[maybe_unused]] int size) { return 0; }
 	RESULT start(const eDVBSectionFilterMask &mask);
 	RESULT stop();
 	RESULT connectRead(const sigc::slot<void(const uint8_t*)> &read, ePtr<eConnection> &conn);

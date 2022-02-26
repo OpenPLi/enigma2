@@ -48,7 +48,7 @@ public:
 	RESULT getName(const eServiceReference &ref, std::string &name);
 	int getLength(const eServiceReference &ref);
 	RESULT getEvent(const eServiceReference &ref, ePtr<eServiceEvent> &SWIG_OUTPUT, time_t start_time);
-	int isPlayable(const eServiceReference &ref, const eServiceReference &ignore, bool simulate) { return 1; }
+	int isPlayable([[maybe_unused]] const eServiceReference &ref, [[maybe_unused]] const eServiceReference &ignore, [[maybe_unused]] bool simulate) { return 1; }
 	int getInfo(const eServiceReference &ref, int w);
 	std::string getInfoString(const eServiceReference &ref,int w);
 	long long getFileSize(const eServiceReference &ref);
@@ -112,7 +112,7 @@ int eStaticServiceM2TSInformation::getLength(const eServiceReference &ref)
 	return m_parser.m_length / 90000;
 }
 
-int eStaticServiceM2TSInformation::getInfo(const eServiceReference &ref, int w)
+int eStaticServiceM2TSInformation::getInfo([[maybe_unused]] const eServiceReference &ref, int w)
 {
 	switch (w)
 	{
@@ -132,7 +132,7 @@ int eStaticServiceM2TSInformation::getInfo(const eServiceReference &ref, int w)
 	}
 }
 
-std::string eStaticServiceM2TSInformation::getInfoString(const eServiceReference &ref,int w)
+std::string eStaticServiceM2TSInformation::getInfoString([[maybe_unused]] const eServiceReference &ref, int w)
 {
 	switch (w)
 	{
@@ -147,12 +147,12 @@ std::string eStaticServiceM2TSInformation::getInfoString(const eServiceReference
 	}
 }
 
-long long eStaticServiceM2TSInformation::getFileSize(const eServiceReference &ref)
+long long eStaticServiceM2TSInformation::getFileSize([[maybe_unused]] const eServiceReference &ref)
 {
 	return m_parser.m_filesize;
 }
 
-RESULT eStaticServiceM2TSInformation::getEvent(const eServiceReference &ref, ePtr<eServiceEvent> &evt, time_t start_time)
+RESULT eStaticServiceM2TSInformation::getEvent(const eServiceReference &ref, ePtr<eServiceEvent> &evt, [[maybe_unused]] time_t start_time)
 {
 	if (!ref.path.empty())
 	{
@@ -365,13 +365,13 @@ RESULT eServiceFactoryM2TS::play(const eServiceReference &ref, ePtr<iPlayableSer
 	return 0;
 }
 
-RESULT eServiceFactoryM2TS::record(const eServiceReference &ref, ePtr<iRecordableService> &ptr)
+RESULT eServiceFactoryM2TS::record([[maybe_unused]] const eServiceReference &ref, ePtr<iRecordableService> &ptr)
 {
 	ptr=0;
 	return -1;
 }
 
-RESULT eServiceFactoryM2TS::list(const eServiceReference &ref, ePtr<iListableService> &ptr)
+RESULT eServiceFactoryM2TS::list([[maybe_unused]] const eServiceReference &ref, ePtr<iListableService> &ptr)
 {
 	ptr=0;
 	return -1;
@@ -383,7 +383,7 @@ RESULT eServiceFactoryM2TS::info(const eServiceReference &ref, ePtr<iStaticServi
 	return 0;
 }
 
-RESULT eServiceFactoryM2TS::offlineOperations(const eServiceReference &ref, ePtr<iServiceOfflineOperations> &ptr)
+RESULT eServiceFactoryM2TS::offlineOperations([[maybe_unused]] const eServiceReference &ref, ePtr<iServiceOfflineOperations> &ptr)
 {
 	ptr = nullptr;
 	return -1;
@@ -394,7 +394,7 @@ eServiceM2TS::eServiceM2TS(const eServiceReference &ref)
 {
 }
 
-ePtr<iTsSource> eServiceM2TS::createTsSource(eServiceReferenceDVB &ref, int packetsize)
+ePtr<iTsSource> eServiceM2TS::createTsSource(eServiceReferenceDVB &ref, [[maybe_unused]] int packetsize)
 {
 	ePtr<iTsSource> source = new eM2TSFile(ref.path.c_str());
 	return source;

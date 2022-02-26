@@ -43,7 +43,7 @@ eTimerPy_dealloc(eTimerPy* self)
 }
 
 static PyObject *
-eTimerPy_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
+eTimerPy_new(PyTypeObject *type, [[maybe_unused]] PyObject *args, [[maybe_unused]] PyObject *kwds)
 {
 	eTimerPy *self = (eTimerPy *)type->tp_alloc(type, 0);
 	self->tm = eTimer::create(eApp);
@@ -144,13 +144,13 @@ static PyMethodDef eTimerPy_methods[] = {
 };
 
 static PyObject *
-eTimerPy_get_cb_list(eTimerPy *self, void *closure)
+eTimerPy_get_cb_list(eTimerPy *self, [[maybe_unused]] void *closure)
 {
 	return self->tm->timeout.get();
 }
 
 static PyObject *
-eTimerPy_timeout(eTimerPy *self, void *closure) 
+eTimerPy_timeout(eTimerPy *self, [[maybe_unused]] void *closure) 
 { //used for compatibilty with the old eTimer
 	Org_Py_INCREF((PyObject*)self);
 	return (PyObject*)self;
@@ -223,7 +223,7 @@ eSocketNotifierPy_dealloc(eSocketNotifierPy* self)
 }
 
 static PyObject *
-eSocketNotifierPy_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
+eSocketNotifierPy_new(PyTypeObject *type, PyObject *args, [[maybe_unused]] PyObject *kwds)
 {
 	eSocketNotifierPy *self = (eSocketNotifierPy *)type->tp_alloc(type, 0);
 	int fd, req, immediate_start = 1, size = PyTuple_Size(args);
@@ -315,7 +315,7 @@ static PyMethodDef eSocketNotifierPy_methods[] = {
 };
 
 static PyObject *
-eSocketNotifierPy_get_cb_list(eSocketNotifierPy *self, void *closure)
+eSocketNotifierPy_get_cb_list(eSocketNotifierPy *self, [[maybe_unused]] void *closure)
 {
 	return self->sn->activated.get();
 }

@@ -1737,7 +1737,7 @@ static size_t diff_upto(off_t high, off_t low, size_t max)
 }
 
 	/* remember, this gets called from another thread. */
-void eDVBChannel::getNextSourceSpan(off_t current_offset, size_t bytes_read, off_t &start, size_t &size, int blocksize, int &sof)
+void eDVBChannel::getNextSourceSpan(off_t current_offset, [[maybe_unused]] size_t bytes_read, off_t &start, size_t &size, int blocksize, int &sof)
 {
 	unsigned int max = align(1024*1024*1024, blocksize);
 	current_offset = align(current_offset, blocksize);
@@ -2038,7 +2038,7 @@ RESULT eDVBChannel::getState(int &state)
 	return 0;
 }
 
-RESULT eDVBChannel::setCIRouting(const eDVBCIRouting &routing)
+RESULT eDVBChannel::setCIRouting([[maybe_unused]] const eDVBCIRouting &routing)
 {
 	return -1;
 }

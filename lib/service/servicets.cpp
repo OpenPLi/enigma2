@@ -49,7 +49,7 @@ RESULT eServiceFactoryTS::play(const eServiceReference &ref, ePtr<iPlayableServi
 	return 0;
 }
 
-RESULT eServiceFactoryTS::record(const eServiceReference &ref, ePtr<iRecordableService> &ptr)
+RESULT eServiceFactoryTS::record([[maybe_unused]] const eServiceReference &ref, ePtr<iRecordableService> &ptr)
 {
 	ptr=0;
 	return -1;
@@ -61,7 +61,7 @@ RESULT eServiceFactoryTS::list(const eServiceReference &, ePtr<iListableService>
 	return -1;
 }
 
-RESULT eServiceFactoryTS::info(const eServiceReference &ref, ePtr<iStaticServiceInformation> &ptr)
+RESULT eServiceFactoryTS::info([[maybe_unused]] const eServiceReference &ref, ePtr<iStaticServiceInformation> &ptr)
 {
 	ptr = nullptr;
 	return -1;
@@ -355,27 +355,27 @@ RESULT eServiceTS::seek(ePtr<iSeekableService> &ptr)
 	return 0;
 }
 
-RESULT eServiceTS::getLength(pts_t &pts)
+RESULT eServiceTS::getLength([[maybe_unused]] pts_t &pts)
 {
 	return 0;
 }
 
-RESULT eServiceTS::seekTo(pts_t to)
+RESULT eServiceTS::seekTo([[maybe_unused]] pts_t to)
 {
 	return 0;
 }
 
-RESULT eServiceTS::seekRelative(int direction, pts_t to)
+RESULT eServiceTS::seekRelative([[maybe_unused]] int direction, [[maybe_unused]] pts_t to)
 {
 	return 0;
 }
 
-RESULT eServiceTS::getPlayPosition(pts_t &pts)
+RESULT eServiceTS::getPlayPosition([[maybe_unused]] pts_t &pts)
 {
 	return 0;
 }
 
-RESULT eServiceTS::setTrickmode(int trick)
+RESULT eServiceTS::setTrickmode([[maybe_unused]] int trick)
 {
 	return -1;
 }
@@ -400,12 +400,12 @@ RESULT eServiceTS::getName(std::string &name)
 	return 0;
 }
 
-int eServiceTS::getInfo(int w)
+int eServiceTS::getInfo([[maybe_unused]] int w)
 {
 	return resNA;
 }
 
-std::string eServiceTS::getInfoString(int w)
+std::string eServiceTS::getInfoString([[maybe_unused]] int w)
 {
 	return "";
 }

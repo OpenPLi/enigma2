@@ -76,7 +76,7 @@ void eActionMap::unbindAction(eWidget *widget, int id)
 		}
 }
 
-void eActionMap::unbindAction(const std::string &context, ePyObject function)
+void eActionMap::unbindAction([[maybe_unused]] const std::string &context, ePyObject function)
 {
 	//eDebug("[eActionMap] unbind function from %s", context.c_str());
 	for (std::multimap<int64_t, eActionBinding>::iterator i(m_bindings.begin()); i != m_bindings.end(); ++i)
@@ -90,7 +90,7 @@ void eActionMap::unbindAction(const std::string &context, ePyObject function)
 }
 
 
-void eActionMap::bindKey(const std::string &domain, const std::string &device, int key, int flags, const std::string &context, const std::string &action)
+void eActionMap::bindKey([[maybe_unused]] const std::string &domain, const std::string &device, int key, int flags, const std::string &context, const std::string &action)
 {
 	// start searching the actionlist table
 	//eDebug("[eActionMap] bind key from %s to %s: domain=%s action=%s key=%d flags=%d", device.c_str(), context.c_str(), domain.c_str(), action.c_str(), key, flags);
@@ -147,7 +147,7 @@ void eActionMap::bindTranslation(const std::string &domain, const std::string &d
 }
 
 
-void eActionMap::bindToggle(const std::string &domain, const std::string &device, int togglekey)
+void eActionMap::bindToggle([[maybe_unused]] const std::string &domain, [[maybe_unused]] const std::string &device, int togglekey)
 {
 	//eDebug("[eActionMap] bind togglekey for %s togglekey=%d in %s", device.c_str(), togglekey, domain.c_str());
 	std::map<std::string, eDeviceBinding>::iterator r = m_rcDevices.find(device);

@@ -110,7 +110,7 @@ void eDVBCISession::recvCreateSessionResponse(const unsigned char *data)
 	eDebug("[CI SESS] create Session Response, status %x", status);
 }
 
-void eDVBCISession::recvCloseSessionRequest(const unsigned char *data)
+void eDVBCISession::recvCloseSessionRequest([[maybe_unused]] const unsigned char *data)
 {
 	state = stateInDeletion;
 	action = 1;

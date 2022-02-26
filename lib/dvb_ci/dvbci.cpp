@@ -143,13 +143,13 @@ void eDVBCIInterfaces::thread()
 }
 
 // runs in the thread
-void eDVBCIInterfaces::gotMessageThread(const int &message)
+void eDVBCIInterfaces::gotMessageThread([[maybe_unused]] const int &message)
 {
 	quit(0); // quit thread
 }
 
 // runs in the e2 mainloop
-void eDVBCIInterfaces::gotMessageMain(const int &message)
+void eDVBCIInterfaces::gotMessageMain([[maybe_unused]] const int &message)
 {
 	recheckPMTHandlers();
 }

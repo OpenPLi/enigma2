@@ -56,16 +56,16 @@ public:
 	RESULT info(ePtr<iServiceInformation>&);
 
 	// not implemented
-	RESULT setTarget(int target, bool noaudio = false) { return -1; };
-	RESULT setSlowMotion(int ratio) { return -1; };
-	RESULT setFastForward(int ratio) { return -1; };
+	RESULT setTarget([[maybe_unused]] int target, [[maybe_unused]] bool noaudio = false) { return -1; };
+	RESULT setSlowMotion([[maybe_unused]] int ratio) { return -1; };
+	RESULT setFastForward([[maybe_unused]] int ratio) { return -1; };
 	RESULT audioChannel(ePtr<iAudioChannelSelection> &ptr) { ptr = this; return 0; };
 	RESULT audioTracks(ePtr<iAudioTrackSelection> &ptr) { ptr = this; return 0; };
 	RESULT frontendInfo(ePtr<iFrontendInformation> &ptr) { ptr = nullptr; return -1; };
 	RESULT subServices(ePtr<iSubserviceList> &ptr) { ptr = nullptr; return -1; };
 	RESULT timeshift(ePtr<iTimeshiftService> &ptr) { ptr = nullptr; return -1; };
 	RESULT cueSheet(ePtr<iCueSheet> &ptr) { ptr = nullptr; return -1; };
-	void setQpipMode(bool value, bool audio) { }
+	void setQpipMode([[maybe_unused]] bool value, [[maybe_unused]] bool audio) { }
 	RESULT subtitle(ePtr<iSubtitleOutput> &ptr) { ptr = nullptr; return -1; };
 	RESULT audioDelay(ePtr<iAudioDelay> &ptr) { ptr = nullptr; return -1; };
 	RESULT rdsDecoder(ePtr<iRdsDecoder> &ptr) { ptr = nullptr; return -1; };
@@ -99,7 +99,7 @@ public:
 
 	// iAudioChannelSelection
 	int getCurrentChannel() { return iAudioChannelSelection_ENUMS::STEREO; };
-	RESULT selectChannel(int i) { return 0; };
+	RESULT selectChannel([[maybe_unused]] int i) { return 0; };
 
 private:
 	friend class eServiceFactoryTS;

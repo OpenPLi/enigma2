@@ -524,7 +524,7 @@ static int jpeg_save(const char * filename, int ox, int oy, unsigned char *pic_b
 
 //-------------------------------------------------------------------
 
-inline void m_rend_gif_decodecolormap(unsigned char *cmb, unsigned char *rgbb, ColorMapObject *cm, int s, int l)
+inline void m_rend_gif_decodecolormap(unsigned char *cmb, unsigned char *rgbb, ColorMapObject *cm, [[maybe_unused]] int s, int l)
 {
 	GifColorType *cmentry;
 	int i;
@@ -1447,7 +1447,7 @@ int ePicLoad::getFileType(const char * file)
 //------------------------------------------------------------------------------------
 
 //for old plugins
-SWIG_VOID(int) loadPic(ePtr<gPixmap> &result, std::string filename, int x, int y, int aspect, int resize_mode, int rotate, int background, std::string cachefile)
+SWIG_VOID(int) loadPic(ePtr<gPixmap> &result, std::string filename, int x, int y, int aspect, int resize_mode, [[maybe_unused]] int rotate, int background, [[maybe_unused]] std::string cachefile)
 {
 	long asp1, asp2;
 	eDebug("[loadPic] deprecated loadPic function used!!! please use the non blocking version! you can see demo code in Pictureplayer plugin... this function is removed in the near future!");
