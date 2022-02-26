@@ -100,7 +100,7 @@ void gRegion::intersectO(
 		std::vector<eRect>::const_iterator r2,
 		std::vector<eRect>::const_iterator r2End,
 		int y1, int y2,
-		int &overlap)
+		[[maybe_unused]] int &overlap)
 {
 	int x1, x2;
 
