@@ -783,9 +783,9 @@ class NimSelection(Screen):
 		return "%d.%dE" % (orbpos / 10, orbpos % 10)
 
 	def extraInfo(self):
-		nim = self["nimlist"].getCurrent()
-		nim = nim and nim[3]
-		if config.usage.setup_level.index >= 2 and nim is not None:
+		current = self["nimlist"].getCurrent()
+		nim = current and len(current) > 2 and hasattr(current[3], "slot") and current[3]
+		if config.usage.setup_level.index >= 2 and nim:
 			text = _("Capabilities: ") + eDVBResourceManager.getInstance().getFrontendCapabilities(nim.slot)
 			self.session.open(MessageBox, text, MessageBox.TYPE_INFO, simple=True)
 
@@ -795,9 +795,9 @@ class NimSelection(Screen):
 		if recordings or (next_rec_time and next_rec_time > 0 and (next_rec_time - time()) < 360):
 			self.session.open(MessageBox, _("Recording(s) are in progress or coming up in few seconds!"), MessageBox.TYPE_INFO, timeout=5, enable_input=False)
 		else:
-			nim = self["nimlist"].getCurrent()
-			nim = nim and nim[3]
-			if nim is not None:
+			current = self["nimlist"].getCurrent()
+			nim = current and len(current) > 2 and hasattr(current[3], "slot") and current[3]
+			if nim:
 				nimConfig = nimmanager.getNimConfig(nim.slot)
 				if nim.isFBCLink() and nimConfig.configMode.value == "nothing" and not getLinkedSlotID(nim.slot) == -1:
 					return
