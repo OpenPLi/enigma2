@@ -5,7 +5,7 @@ class VariableValue(object):
 		self.__value = 0
 
 	def setValue(self, value):
-		self.__value = value.isdigit() and int(value) or 0
+		self.__value = (isinstance(value, int) and value) or (isinstance(value, str) and value.isdigit() and int(value)) or 0
 		if self.instance:
 			try:
 				self.instance.setValue(self.__value)
