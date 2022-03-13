@@ -310,7 +310,7 @@ class CableTransponderSearchSupport:
 			cmd = "%s --blindscan %d" % (exe_path, nim_idx)
 		else:
 			bin_name = GetCommand(nim_idx)
-			exe_path = "/usr/bin/%s" % bin_name
+			exe_path = "/usr/bin/%s" % bin_name.split()[0]
 			cmd = "%s --init --scan --verbose --wakeup --inv 2 --bus %d" % (bin_name, bus)
 
 		if not fileExists(exe_path):
