@@ -391,7 +391,7 @@ class EPGList(GUIComponent):
 			index += 1
 
 	def fillSimilarList(self, refstr, event_id):
-		t = time()
+		t = int(time())
 		# search similar broadcastings
 		if event_id is None:
 			return
