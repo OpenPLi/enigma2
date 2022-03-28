@@ -14,8 +14,9 @@ from urllib import quote
 from time import sleep
 import xml.etree.ElementTree as et
 
-settingfiles = ('lamedb', 'bouquets.', 'userbouquet.', 'blacklist', 'whitelist', 'alternatives.')
+supportfiles = ('lamedb', 'blacklist', 'whitelist', 'alternatives.')
 
+e2path = "/etc/enigma2"
 
 class ImportChannels():
 
@@ -76,7 +77,7 @@ class ImportChannels():
 	"""
 	Enumerate all the files that make up the bouquet system, either local or on a remote machine
 	"""
-	def ImportGetFilelist(self, remote=False, radio=False, *files):
+	def ImportGetFilelist(self, remote=False, *files):
 		result = []
 		for file in files:
 			# determine the type of bouquet file
@@ -85,13 +86,13 @@ class ImportChannels():
 			try:
 				if remote:
 					try:
-						content = self.getUrl("%s/file?file=/etc/enigma2/%s" % (self.url, quote(file))).readlines()
+						content = self.getUrl("%s/file?file=%s/%s" % (self.url, e2path, quote(file))).readlines()
 					except Exception as e:
 						print "[Import Channels] Exception: %s" % str(e)
-						self.ImportChannelsDone(False, _("ERROR downloading file /etc/enigma2/%s") % file)
+						self.ImportChannelsDone(False, _("ERROR downloading file %s/%s") % (e2path, file))
 						return
 				else:
-					with open('/etc/enigma2/%s' % file, 'r') as f:
+					with open('%s/%s' % (e2path, file), 'r') as f:
 						content = f.readlines()
 			except Exception as e:
 				# for the moment just log and ignore
@@ -147,30 +148,35 @@ class ImportChannels():
 				self.ImportChannelsDone(False, _("No epg.dat file found server"))
 
 		if "channels" in self.remote_fallback_import:
-			print "[Import Channels] enumerate remote files"
+			print "[Import Channels] Enumerate remote files"
 			files = self.ImportGetFilelist(True, 'bouquets.tv', 'bouquets.radio');
 
-			print "[Import Channels] fetch remote files"
+			print("[Import Channels] Enumerate remote support files")
+			for file in loads(self.getUrl("%s/file?dir=%s" % (self.url, e2path)).read())["files"]:
+				if os.path.basename(file).startswith(supportfiles):
+					files.append(file.replace(e2path, ''))
+
+			print "[Import Channels] Fetch remote files"
 			for file in files:
 				print "[Import Channels] Downloading %s..." % file
 				try:
-					open(os.path.join(self.tmp_dir, os.path.basename(file)), "wb").write(self.getUrl("%s/file?file=/etc/enigma2/%s" % (self.url, quote(file))).read())
+					open(os.path.join(self.tmp_dir, os.path.basename(file)), "wb").write(self.getUrl("%s/file?file=%s/%s" % (self.url, e2path, quote(file))).read())
 				except Exception as e:
 					print "[Import Channels] Exception: %s" % str(e)
 
-			print "[Import Channels] enumerate local files"
+			print "[Import Channels] Enumerate local files"
 			files = self.ImportGetFilelist(False, 'bouquets.tv', 'bouquets.radio');
 
 			print "[Import Channels] Removing old local files..."
 			for file in files:
-				print "[Import Channels] Removing %s..." % file
-				os.remove(os.path.join("/etc/enigma2", file))
+				print "- Removing %s..." % file
+				os.remove(os.path.join(e2path, file))
 
-			print "[Import Channels] copying files..."
+			print "[Import Channels] Updating files..."
 			files = [x for x in os.listdir(self.tmp_dir)]
 			for file in files:
-				print "[Import Channels] Moving %s..." % file
-				shutil.move(os.path.join(self.tmp_dir, file), os.path.join("/etc/enigma2", file))
+				print "- Moving %s..." % file
+				shutil.move(os.path.join(self.tmp_dir, file), os.path.join(e2path, file))
 
 		self.ImportChannelsDone(True, {"channels": _("Channels"), "epg": _("EPG"), "channels_epg": _("Channels and EPG")}[self.remote_fallback_import])
 
