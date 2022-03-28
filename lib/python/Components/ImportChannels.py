@@ -76,9 +76,11 @@ class ImportChannels():
 	"""
 	Enumerate all the files that make up the bouquet system, either local or on a remote machine
 	"""
-	def ImportGetFilelist(self, remote=False, *files):
+	def ImportGetFilelist(self, remote=False, radio=False, *files):
 		result = []
 		for file in files:
+			# determine the type of bouquet file
+			type = 1 if file.endswith('.tv') else 2
 			# read the contents of the file
 			try:
 				if remote:
@@ -99,7 +101,7 @@ class ImportChannels():
 			# check the contents for more bouquet files
 			for line in content:
 				# check if it contains another bouquet reference
-				r = re.match('#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "(.*)" ORDER BY bouquet', line)
+				r = re.match('#SERVICE 1:7:%d:0:0:0:0:0:0:0:FROM BOUQUET "(.*)" ORDER BY bouquet' % type, line)
 				if r:
 					# recurse
 					result.extend(self.ImportGetFilelist(remote, r.group(1)))
