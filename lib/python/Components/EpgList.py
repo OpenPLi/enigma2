@@ -184,9 +184,9 @@ class EPGList(GUIComponent):
 				x += self.col[1]
 				self.descr_rect = Rect(x, 0, width - x, height)
 			else:
-				self.weekday_rect = Rect(0, 0, width / 20 * 2 - 10, height)
-				self.datetime_rect = Rect(width / 20 * 2, 0, width / 20 * 5 - 15, height)
-				self.descr_rect = Rect(width / 20 * 7, 0, width / 20 * 13, height)
+				self.weekday_rect = Rect(0, 0, width // 20 * 2 - 10, height)
+				self.datetime_rect = Rect(width // 20 * 2, 0, width // 20 * 5 - 15, height)
+				self.descr_rect = Rect(width // 20 * 7, 0, width // 20 * 13, height)
 		elif self.type == EPG_TYPE_MULTI:
 			if self.skinColumns:
 				x = 0
@@ -198,14 +198,14 @@ class EPGList(GUIComponent):
 				self.descr_rect = Rect(x, 0, width - x, height)
 			else:
 				xpos = 0
-				w = width / 10 * 3
+				w = width // 10 * 3
 				self.service_rect = Rect(xpos, 0, w - 10, height)
 				xpos += w
-				w = width / 10 * 2
+				w = width // 10 * 2
 				self.start_end_rect = Rect(xpos, 0, w - 10, height)
 				self.progress_rect = Rect(xpos, 4, w - 10, height - 8)
 				xpos += w
-				w = width / 10 * 5
+				w = width // 10 * 5
 				self.descr_rect = Rect(xpos, 0, width, height)
 		else: # EPG_TYPE_SIMILAR
 			if self.skinColumns:
@@ -216,9 +216,9 @@ class EPGList(GUIComponent):
 				x += self.col[1]
 				self.service_rect = Rect(x, 0, width - x, height)
 			else:
-				self.weekday_rect = Rect(0, 0, width / 20 * 2 - 10, height)
-				self.datetime_rect = Rect(width / 20 * 2, 0, width / 20 * 5 - 15, height)
-				self.service_rect = Rect(width / 20 * 7, 0, width / 20 * 13, height)
+				self.weekday_rect = Rect(0, 0, width // 20 * 2 - 10, height)
+				self.datetime_rect = Rect(width // 20 * 2, 0, width // 20 * 5 - 15, height)
+				self.service_rect = Rect(width // 20 * 7, 0, width // 20 * 13, height)
 
 	def gap(self, width):
 		return width - self.colGap
@@ -314,16 +314,16 @@ class EPGList(GUIComponent):
 		return []
 
 	def fillMultiEPG(self, services, stime=-1):
-		#t = time()
+		#t = int(time())
 		test = [(service.ref.toString(), 0, stime) for service in services]
 		test.insert(0, 'X0RIBDTCn')
 		self.list = self.queryEPG(test)
 		self.l.setList(self.list)
-		#print time() - t
+		#print(int(time()) - t)
 		self.selectionChanged()
 
 	def updateMultiEPG(self, direction):
-		#t = time()
+		#t = int(time())
 		test = [x[3] and (x[1], direction, x[3]) or (x[1], direction, 0) for x in self.list]
 		test.insert(0, 'XRIBDTCn')
 		tmp = self.queryEPG(test)
@@ -335,7 +335,7 @@ class EPGList(GUIComponent):
 					self.list[cnt] = (changecount, x[0], x[1], x[2], x[3], x[4], x[5], x[6])
 			cnt += 1
 		self.l.setList(self.list)
-		#print time() - t
+		#print((int(time()) - t)
 		self.selectionChanged()
 
 	def fillSingleEPG(self, service):
@@ -400,7 +400,7 @@ class EPGList(GUIComponent):
 			l.sort(key=lambda x: x[2])
 		self.l.setList(l)
 		self.selectionChanged()
-		print(time() - t)
+		print(int(time() - t)
 
 	def applySkin(self, desktop, parent):
 		def warningWrongSkinParameter(string):
