@@ -1340,6 +1340,10 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 				break;
 		}
 	}
+	else if (!strcmp(m_description, "rs6060")) // DVB-S2X Zgemma 4K
+	{
+		ret = (int)(snr / 32.5);
+	}
 
 	signalqualitydb = ret;
 	if (ret == 0x12345678) // no snr db calculation avail.. return untouched snr value..
@@ -1710,7 +1714,7 @@ int eDVBFrontend::tuneLoopInt()  // called by m_tuneTimer
 		if (tmp == -1 && sec_fe != this && !prev->m_inuse) {
 			int state = sec_fe->m_state;
 			// workaround to put the kernel frontend thread into idle state!
-			if (state != eDVBFrontend::stateIdle && state != stateClosed)
+			if (!m_fbc && state != eDVBFrontend::stateIdle && state != stateClosed)
 			{
 				sec_fe->closeFrontend(true);
 				state = sec_fe->m_state;
