@@ -400,7 +400,7 @@ class EPGList(GUIComponent):
 			l.sort(key=lambda x: x[2])
 		self.l.setList(l)
 		self.selectionChanged()
-		print(int(time() - t)
+		print(int(time() - t))
 
 	def applySkin(self, desktop, parent):
 		def warningWrongSkinParameter(string):
