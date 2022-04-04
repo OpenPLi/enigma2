@@ -121,12 +121,26 @@ class VideoSetup(ConfigListScreen, Screen):
 				self.list.append(getConfigListEntry(_("DTS downmix"), config.av.downmix_dts, _("Configure whether multi channel sound tracks should be downmixed to stereo.")))
 			if SystemInfo["CanDownmixAAC"]:
 				self.list.append(getConfigListEntry(_("AAC downmix"), config.av.downmix_aac, _("Configure whether multi channel sound tracks should be downmixed to stereo.")))
+			if SystemInfo["CanDownmixAACPlus"]:
+				self.list.append(getConfigListEntry(_("AAC+ downmix"), config.av.downmix_aacplus, _("Choose whether multi channel aac+ sound tracks should be downmixed to stereo.")))
+			if SystemInfo["CanAC3Transcode"]:
+				self.list.append(getConfigListEntry(_("AC3 transcoding"), config.av.transcodeac3plus, _("Choose whether AC3 sound tracks should be transcoded.")))
+			if SystemInfo["CanAACTranscode"]:
+				self.list.append(getConfigListEntry(_("AAC transcoding"), config.av.transcodeaac, _("Choose whether AAC sound tracks should be transcoded.")))
+			if SystemInfo["CanDTSHD"]:
+				self.list.append(getConfigListEntry(_("DTS-HD HR/DTS-HD MA/DTS"), config.av.dtshd, ("Choose whether multi channel DTSHD sound tracks should be downmixed or transcoded.")))
+			if SystemInfo["CanWMAPRO"]:
+				self.list.append(getConfigListEntry(_("WMA Pro downmix"), config.av.wmapro, _("Choose whether WMA Pro sound tracks should be downmixed.")))
+			if SystemInfo["HasMultichannelPCM"]:
+				self.list.append(getConfigListEntry(_("Multichannel PCM"), config.av.multichannel_pcm, _("Configure whether multi channel PCM sound should be enabled.")))
 			self.list.extend((
 				getConfigListEntry(_("General AC3 delay"), config.av.generalAC3delay, _("Configure the general audio delay of Dolby Digital sound tracks.")),
 				getConfigListEntry(_("General PCM delay"), config.av.generalPCMdelay, _("Configure the general audio delay of stereo sound tracks."))
 			))
-			if SystemInfo["HasMultichannelPCM"]:
-				self.list.append(getConfigListEntry(_("Multichannel PCM"), config.av.multichannel_pcm, _("Configure whether multi channel PCM sound should be enabled.")))
+			if SystemInfo["CanBTAudio"]:
+				self.list.append(getConfigListEntry(_("Enable bluetooth audio"), config.av.btaudio, _("This option allows you to switch audio to bluetooth speakers.")))
+			if SystemInfo["CanBTAudioDelay"]:
+				self.list.append(getConfigListEntry(_("General bluetooth audio delay"), config.av.btaudiodelay, _("This option configures the general audio delay for bluetooth speakers.")))
 			if SystemInfo["HasAutoVolume"] or SystemInfo["HasAutoVolumeLevel"]:
 				self.list.append(getConfigListEntry(_("Audio auto volume level"), SystemInfo["HasAutoVolume"] and config.av.autovolume or config.av.autovolumelevel, _("This option allows you can to set the auto volume level.")))
 			if SystemInfo["Has3DSurround"]:
