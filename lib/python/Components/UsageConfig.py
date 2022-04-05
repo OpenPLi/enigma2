@@ -561,68 +561,6 @@ def InitUsageConfig():
 		config.usage.vfd_final_scroll_delay = ConfigSelection(default="1000", choices=choicelist)
 		config.usage.vfd_final_scroll_delay.addNotifier(final_scroll_delay, immediate_feedback=False)
 
-	if SystemInfo["HasBypassEdidChecking"]:
-		def setHasBypassEdidChecking(configElement):
-			open(SystemInfo["HasBypassEdidChecking"], "w").write("00000001" if configElement.value else "00000000")
-		config.av.bypassEdidChecking = ConfigYesNo(default=False)
-		config.av.bypassEdidChecking.addNotifier(setHasBypassEdidChecking)
-
-	if SystemInfo["HasColorspace"]:
-		def setHaveColorspace(configElement):
-			open(SystemInfo["HasColorspace"], "w").write(configElement.value)
-		if SystemInfo["HasColorspaceSimple"]:
-			config.av.hdmicolorspace = ConfigSelection(default="Edid(Auto)", choices={"Edid(Auto)": _("auto"), "Hdmi_Rgb": "RGB", "444": "YCbCr 4:4:4", "422": "YCbCr 4:2:2", "420": "YCbCr 4:2:0"})
-		else:
-			config.av.hdmicolorspace = ConfigSelection(default="auto", choices={"auto": _("auto"), "rgb": "RGB", "420": "4:2:0", "422": "4:2:2", "444": "4:4:4"})
-		config.av.hdmicolorspace.addNotifier(setHaveColorspace)
-
-	if SystemInfo["HasColordepth"]:
-		def setHaveColordepth(configElement):
-			open(SystemInfo["HasColordepth"], "w").write(configElement.value)
-		config.av.hdmicolordepth = ConfigSelection(default="auto", choices={"auto": _("auto"), "8bit": "8bit", "10bit": "10bit", "12bit": "12bit"})
-		config.av.hdmicolordepth.addNotifier(setHaveColordepth)
-
-	if SystemInfo["HasHDMIpreemphasis"]:
-		def setHDMIpreemphasis(configElement):
-			open(SystemInfo["HasHDMIpreemphasis"], "w").write("on" if configElement.value else "off")
-		config.av.hdmipreemphasis = ConfigYesNo(default=False)
-		config.av.hdmipreemphasis.addNotifier(setHDMIpreemphasis)
-
-	if SystemInfo["HasColorimetry"]:
-		def setColorimetry(configElement):
-			open(SystemInfo["HasColorimetry"], "w").write(configElement.value)
-		config.av.hdmicolorimetry = ConfigSelection(default="auto", choices=[("auto", _("auto")), ("bt2020ncl", "BT 2020 NCL"), ("bt2020cl", "BT 2020 CL"), ("bt709", "BT 709")])
-		config.av.hdmicolorimetry.addNotifier(setColorimetry)
-
-	if SystemInfo["HasHdrType"]:
-		def setHdmiHdrType(configElement):
-			open(SystemInfo["HasHdrType"], "w").write(configElement.value)
-		config.av.hdmihdrtype = ConfigSelection(default="auto", choices={"auto": _("auto"), "none": "SDR", "hdr10": "HDR10", "hlg": "HLG", "dolby": "Dolby Vision"})
-		config.av.hdmihdrtype.addNotifier(setHdmiHdrType)
-
-	if SystemInfo["HDRSupport"]:
-		def setHlgSupport(configElement):
-			open("/proc/stb/hdmi/hlg_support", "w").write(configElement.value)
-		config.av.hlg_support = ConfigSelection(default="auto(EDID)",
-			choices=[("auto(EDID)", _("controlled by HDMI")), ("yes", _("force enabled")), ("no", _("force disabled"))])
-		config.av.hlg_support.addNotifier(setHlgSupport)
-
-		def setHdr10Support(configElement):
-			open("/proc/stb/hdmi/hdr10_support", "w").write(configElement.value)
-		config.av.hdr10_support = ConfigSelection(default="auto(EDID)",
-			choices=[("auto(EDID)", _("controlled by HDMI")), ("yes", _("force enabled")), ("no", _("force disabled"))])
-		config.av.hdr10_support.addNotifier(setHdr10Support)
-
-		def setDisable12Bit(configElement):
-			open("/proc/stb/video/disable_12bit", "w").write("on" if configElement.value else "off")
-		config.av.allow_12bit = ConfigYesNo(default=False)
-		config.av.allow_12bit.addNotifier(setDisable12Bit)
-
-		def setDisable10Bit(configElement):
-			open("/proc/stb/video/disable_10bit", "w").write("on" if configElement.value else "off")
-		config.av.allow_10bit = ConfigYesNo(default=False)
-		config.av.allow_10bit.addNotifier(setDisable10Bit)
-
 	config.subtitles = ConfigSubsection()
 	config.subtitles.show = ConfigYesNo(default=True)
 	config.subtitles.ttx_subtitle_colors = ConfigSelection(default="1", choices=[

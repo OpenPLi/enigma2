@@ -93,10 +93,17 @@ class AudioSelection(ConfigListScreen, Screen):
 			self.audioTracks = audio = service and service.audioTracks()
 			n = audio and audio.getNumberOfTracks() or 0
 			if SystemInfo["CanDownmixAC3"]:
-				self.settings.downmix = ConfigOnOff(default=config.av.downmix_ac3.value)
-				self.settings.downmix.addNotifier(self.changeAC3Downmix, initial_call=False)
-				conflist.append(getConfigListEntry(_("Multi channel downmix"), self.settings.downmix))
-				self["key_red"].setBoolean(True)
+				downmix_ac3_value = config.av.downmix_ac3.value
+				if downmix_ac3_value in ("downmix", "passthrough"):
+					self.settings.downmix = ConfigSelection(choices=[("downmix", _("Downmix")), ("passthrough", _("Passthrough"))], default=downmix_ac3_value)
+					self.settings.downmix.addNotifier(self.changeAC3Downmix, initial_call=False)
+					extra_text = " - AC3"
+					if SystemInfo["CanDownmixDTS"]:
+						extra_text += ",DTS"
+					if SystemInfo["CanDownmixAAC"]:
+						extra_text += ",AAC"
+					conflist.append(getConfigListEntry(_("Multi channel downmix") + extra_text, self.settings.downmix))
+					self["key_red"].setBoolean(True)
 
 			if n > 0:
 				self.audioChannel = service.audioChannel()
@@ -247,14 +254,14 @@ class AudioSelection(ConfigListScreen, Screen):
 			subtitlelist.append(self.selectedSubtitle)
 		return subtitlelist
 
-	def changeAC3Downmix(self, downmix):
-		config.av.downmix_ac3.value = downmix.getValue() == True
+	def changeAC3Downmix(self, configElement):
+		config.av.downmix_ac3.value = configElement.value
 		config.av.downmix_ac3.save()
 		if SystemInfo["CanDownmixDTS"]:
-			config.av.downmix_dts.value = config.av.downmix_ac3.value
+			config.av.downmix_dts.value = configElement.value
 			config.av.downmix_dts.save()
 		if SystemInfo["CanDownmixAAC"]:
-			config.av.downmix_aac.value = config.av.downmix_ac3.value
+			config.av.downmix_aac.value = configElement.value
 			config.av.downmix_aac.save()
 
 	def changeMode(self, mode):
