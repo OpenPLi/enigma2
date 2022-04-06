@@ -193,10 +193,7 @@ def InitAVSwitch():
 	if SystemInfo["CanDownmixAC3"]:
 		def setAC3Downmix(configElement):
 			open("/proc/stb/audio/ac3", "w").write(configElement.value)
-		choices = [
-			("downmix", _("Downmix")),
-			("passthrough", _("Passthrough"))
-		]
+		choices = [("downmix", _("Downmix")), ("passthrough", _("Passthrough"))]
 		default = "downmix"
 		if SystemInfo["CanProc"]:
 			f = "/proc/stb/audio/ac3_choices"
@@ -207,10 +204,7 @@ def InitAVSwitch():
 	if SystemInfo["CanAC3Transcode"]:
 		def setAC3plusTranscode(configElement):
 			open("/proc/stb/audio/ac3plus", "w").write(configElement.value)
-		choices = [
-			("use_hdmi_caps", _("controlled by HDMI")),
-			("force_ac3", _("convert to AC3"))
-		]
+		choices = [("use_hdmi_caps", _("controlled by HDMI")), ("force_ac3", _("convert to AC3"))]
 		default = "force_ac3"
 		if SystemInfo["CanProc"]:
 			f = "/proc/stb/audio/ac3plus_choices"
@@ -221,10 +215,7 @@ def InitAVSwitch():
 	if SystemInfo["CanDownmixDTS"]:
 		def setDTSDownmix(configElement):
 			open("/proc/stb/audio/dts", "w").write(configElement.value)
-		choices = [
-			("downmix", _("Downmix")),
-			("passthrough", _("Passthrough"))
-		]
+		choices = [("downmix", _("Downmix")), ("passthrough", _("Passthrough"))]
 		default = "downmix"
 		if SystemInfo["CanProc"]:
 			f = "/proc/stb/audio/dts_choices"
@@ -235,13 +226,7 @@ def InitAVSwitch():
 	if SystemInfo["CanDTSHD"]:
 		def setDTSHD(configElement):
 			open("/proc/stb/audio/dtshd", "w").write(configElement.value)
-		choices = [
-			("downmix", _("Downmix")),
-			("force_dts", _("convert to DTS")),
-			("use_hdmi_caps", _("controlled by HDMI")),
-			("multichannel", _("convert to multi-channel PCM")),
-			("hdmi_best", _("use best / controlled by HDMI"))
-		]
+		choices = [("downmix", _("Downmix")), ("force_dts", _("convert to DTS")), ("use_hdmi_caps", _("controlled by HDMI")), ("multichannel", _("convert to multi-channel PCM")), ("hdmi_best", _("use best / controlled by HDMI"))]
 		default = "downmix"
 		if SystemInfo["CanProc"]:
 			f = "/proc/stb/audio/dtshd_choices"
@@ -286,11 +271,7 @@ def InitAVSwitch():
 	if SystemInfo["CanAACTranscode"]:
 		def setAACTranscode(configElement):
 			open("/proc/stb/audio/aac_transcode", "w").write(configElement.value)
-		choices = [
-			("off", _("off")),
-			("ac3", _("AC3")),
-			("dts", _("DTS"))
-		]
+		choices = [("off", _("off")), ("ac3", _("AC3")), ("dts", _("DTS"))]
 		default = "off"
 		if SystemInfo["CanProc"]:
 			f = "/proc/stb/audio/aac_transcode_choices"
@@ -301,12 +282,7 @@ def InitAVSwitch():
 	if SystemInfo["CanWMAPRO"]:
 		def setWMAPRO(configElement):
 			open("/proc/stb/audio/wmapro", "w").write(configElement.value)
-		choices = [
-			("downmix", _("Downmix")),
-			("passthrough", _("Passthrough")),
-			("multichannel", _("convert to multi-channel PCM")),
-			("hdmi_best", _("use best / controlled by HDMI"))
-		]
+		choices = [("downmix", _("Downmix")), ("passthrough", _("Passthrough")), ("multichannel", _("convert to multi-channel PCM")), ("hdmi_best", _("use best / controlled by HDMI"))]
 		default = "downmix"
 		if SystemInfo["CanProc"]:
 			f = "/proc/stb/audio/wmapro_choices"
@@ -317,10 +293,7 @@ def InitAVSwitch():
 	if SystemInfo["CanBTAudio"]:
 		def setBTAudio(configElement):
 			open("/proc/stb/audio/btaudio", "w").write(configElement.value)
-		choices = [
-			("off", _("Off")), 
-			("on", _("On"))
-		]
+		choices = [("off", _("Off")), ("on", _("On"))]
 		default = "off"
 		if SystemInfo["CanProc"]:
 			f = "/proc/stb/audio/btaudio_choices"
@@ -367,7 +340,12 @@ def InitAVSwitch():
 	if SystemInfo["HasAutoVolume"]:
 		def setAutoVolume(configElement):
 			open(SystemInfo["HasAutoVolume"], "w").write(configElement.value)
-		config.av.autovolume = ConfigSelection(default="none", choices=[("none", _("off")), ("hdmi", "HDMI"), ("spdif", "SPDIF"), ("dac", "DAC")])
+		choices = [("none", _("off")), ("hdmi", "HDMI"), ("spdif", "SPDIF"), ("dac", "DAC")]
+		default = "none"
+		if SystemInfo["CanProc"]:
+			f = "/proc/stb/audio/avl_choices"
+			(choices, default) = readChoices(f, choices, default)
+		config.av.autovolume = ConfigSelection(choices=choices, default=default)
 		config.av.autovolume.addNotifier(setAutoVolume)
 
 	if SystemInfo["HasAutoVolumeLevel"]:
@@ -379,12 +357,7 @@ def InitAVSwitch():
 	if SystemInfo["Has3DSurround"]:
 		def set3DSurround(configElement):
 			open(SystemInfo["Has3DSurround"], "w").write(configElement.value)
-		choices = [
-			("none", _("off")),
-			("hdmi", _("HDMI")),
-			("spdif", _("SPDIF")),
-			("dac", _("DAC"))
-		]
+		choices = [("none", _("off")), ("hdmi", _("HDMI")), ("spdif", _("SPDIF")), ("dac", _("DAC"))]
 		default = "none"
 		if SystemInfo["CanProc"]:
 			f = "/proc/stb/audio/3d_surround_choices"
@@ -401,7 +374,7 @@ def InitAVSwitch():
 	if SystemInfo["Has3DSurroundSpeaker"]:
 		def set3DSurroundSpeaker(configElement):
 			open(SystemInfo["Has3DSurroundSpeaker"], "w").write(configElement.value)
-		config.av.surround_3d_speaker = ConfigSelection(default="disabled", choices=[("disabled", _("off")), ("center", _("center")), ("wide", _("wide")), ("extrawide", _("extra wide"))])
+		config.av.surround_3d_speaker = ConfigSelection(default="center", choices=[("center", _("center")), ("wide", _("wide")), ("extrawide", _("extra wide"))])
 		config.av.surround_3d_speaker.addNotifier(set3DSurroundSpeaker)
 
 	if SystemInfo["Has3DSurroundSoftLimiter"]:
@@ -420,3 +393,79 @@ def InitAVSwitch():
 		eDVBVolumecontrol.getInstance().setVolumeSteps(int(configElement.value))
 	config.av.volume_stepsize = ConfigSelectionNumber(1, 10, 1, default=5)
 	config.av.volume_stepsize.addNotifier(setVolumeStepsize)
+
+	if SystemInfo["HasBypassEdidChecking"]:
+		def setHasBypassEdidChecking(configElement):
+			open(SystemInfo["HasBypassEdidChecking"], "w").write("00000001" if configElement.value else "00000000")
+		config.av.bypassEdidChecking = ConfigYesNo(default=False)
+		config.av.bypassEdidChecking.addNotifier(setHasBypassEdidChecking)
+
+	if SystemInfo["HasColorspace"]:
+		def setHaveColorspace(configElement):
+			open(SystemInfo["HasColorspace"], "w").write(configElement.value)
+		if SystemInfo["HasColorspaceSimple"]:
+			choices = [("Edid(Auto)", "auto"), ("Hdmi_Rgb", "RGB"), ("444", "YCbCr 4:4:4"), ("422", "YCbCr 4:2:2"), ("420", "YCbCr 4:2:0")]
+			default = "Edid(Auto)"
+		else:
+			choices = [("auto", "auto"), ("rgb", "RGB"), ("420", "4:2:0"), ("422", "4:2:2"), ("444", "4:4:4")]
+			default = "auto"
+		if os.path.exists("/proc/stb/video/hdmi_colorspace_choices") and SystemInfo["CanProc"]:
+			f = "/proc/stb/video/hdmi_colorspace_choices"
+			(choices, default) = readChoices(f, choices, default)
+		config.av.hdmicolorspace = ConfigSelection(choices=choices, default=default)
+		config.av.hdmicolorspace.addNotifier(setHaveColorspace)
+
+	if SystemInfo["HasColordepth"]:
+		def setHaveColordepth(configElement):
+			open(SystemInfo["HasColordepth"], "w").write(configElement.value)
+		choices = [("auto", "auto"), ("8bit", "8bit"), ("10bit", "10bit"), ("12bit", "12bit")]
+		default = "auto"
+		if os.path.exists("/proc/stb/video/hdmi_colordepth_choices") and SystemInfo["CanProc"]:
+			f = "/proc/stb/video/hdmi_colordepth_choices"
+			(choices, default) = readChoices(f, choices, default)
+		config.av.hdmicolordepth = ConfigSelection(choices=choices, default=default)
+		config.av.hdmicolordepth.addNotifier(setHaveColordepth)
+
+	if SystemInfo["HasHDMIpreemphasis"]:
+		def setHDMIpreemphasis(configElement):
+			open(SystemInfo["HasHDMIpreemphasis"], "w").write("on" if configElement.value else "off")
+		config.av.hdmipreemphasis = ConfigYesNo(default=False)
+		config.av.hdmipreemphasis.addNotifier(setHDMIpreemphasis)
+
+	if SystemInfo["HasColorimetry"]:
+		def setColorimetry(configElement):
+			open(SystemInfo["HasColorimetry"], "w").write(configElement.value)
+		choices=[("auto", "auto"), ("bt2020ncl", "BT 2020 NCL"), ("bt2020cl", "BT 2020 CL"), ("bt709", "BT 709")]
+		default = "auto"
+		if os.path.exists("/proc/stb/video/hdmi_colorimetry_choices") and SystemInfo["CanProc"]:
+			f = "/proc/stb/video/hdmi_colorimetry_choices"
+			(choices, default) = readChoices(f, choices, default)
+		config.av.hdmicolorimetry = ConfigSelection(choices=choices, default=default)
+		config.av.hdmicolorimetry.addNotifier(setColorimetry)
+
+	if SystemInfo["HasHdrType"]:
+		def setHdmiHdrType(configElement):
+			open(SystemInfo["HasHdrType"], "w").write(configElement.value)
+		config.av.hdmihdrtype = ConfigSelection(default="auto", choices={"auto": _("auto"), "none": "SDR", "hdr10": "HDR10", "hlg": "HLG", "dolby": "Dolby Vision"})
+		config.av.hdmihdrtype.addNotifier(setHdmiHdrType)
+
+	if SystemInfo["HDRSupport"]:
+		def setHlgSupport(configElement):
+			open("/proc/stb/hdmi/hlg_support", "w").write(configElement.value)
+		config.av.hlg_support = ConfigSelection(default="auto(EDID)", choices=[("auto(EDID)", _("controlled by HDMI")), ("yes", _("force enabled")), ("no", _("force disabled"))])
+		config.av.hlg_support.addNotifier(setHlgSupport)
+
+		def setHdr10Support(configElement):
+			open("/proc/stb/hdmi/hdr10_support", "w").write(configElement.value)
+		config.av.hdr10_support = ConfigSelection(default="auto(EDID)", choices=[("auto(EDID)", _("controlled by HDMI")), ("yes", _("force enabled")), ("no", _("force disabled"))])
+		config.av.hdr10_support.addNotifier(setHdr10Support)
+
+		def setDisable12Bit(configElement):
+			open("/proc/stb/video/disable_12bit", "w").write("1" if configElement.value else "0")
+		config.av.allow_12bit = ConfigYesNo(default=False)
+		config.av.allow_12bit.addNotifier(setDisable12Bit)
+
+		def setDisable10Bit(configElement):
+			open("/proc/stb/video/disable_10bit", "w").write("1" if configElement.value else "0")
+		config.av.allow_10bit = ConfigYesNo(default=False)
+		config.av.allow_10bit.addNotifier(setDisable10Bit)
