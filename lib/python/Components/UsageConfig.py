@@ -819,7 +819,7 @@ def preferredTunerChoicesUpdate(update=False):
 
 	nims = [("-1", _("auto"))]
 	for slot in nimmanager.nim_slots:
-		if hasattr(slot.config, "configMode") and slot.config.configMode.value == "nothing":
+		if (hasattr(slot.config, "configMode") and slot.config.configMode.value in ("nothing", "loopthrough")) or slot.isFBCLink():
 			continue
 		if slot.isCompatible("DVB-S"):
 			dvbs_nims.append((str(slot.slot), slot.getSlotName()))
