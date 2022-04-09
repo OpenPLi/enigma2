@@ -548,7 +548,7 @@ def FCCStart(session, **kwargs):
 
 def main(menuid, **kwargs):
 	if menuid == "scan":
-		return [(_("Fast Channel Change"), FCCStart, "FCCSetup", 5)]
+		return [(_("Fast Channel Change"), FCCStart, "FCCSetup", 0)]
 	else:
 		return []
 
