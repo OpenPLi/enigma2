@@ -223,14 +223,14 @@ class TimerSanityCheck:
 					if hasattr(fakeRecService, 'frontendInfo'):
 						feinfo = fakeRecService.frontendInfo()
 						if feinfo and hasattr(feinfo, 'getFrontendData'):
-							tunerType.append(feinfo.getFrontendData().get("tuner_type", -1))
+							tunerType.append(feinfo.getFrontendData().get("tuner_type", "UNKNOWN"))
 						feinfo = None
 				else: # tune failed.. so we must go another way to get service type (DVB-S, DVB-T, DVB-C)
 
 					def getServiceType(ref): # helper function to get a service type of a service reference
 						serviceInfo = serviceHandler.info(ref)
 						serviceInfo = serviceInfo and serviceInfo.getInfoObject(ref, iServiceInformation.sTransponderData)
-						return -1 if serviceInfo is None else serviceInfo.get("tuner_type", -1)
+						return serviceInfo and serviceInfo.get("tuner_type", "UNKNOWN") or "UNKNOWN"
 
 					if ref and ref.flags & eServiceReference.isGroup: # service group ?
 						serviceList = serviceHandler.list(ref) # get all alternative services
