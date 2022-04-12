@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Openpli\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-27 12:31+0200\n"
+"POT-Creation-Date: 2022-04-12 12:11+0200\n"
 "PO-Revision-Date: 2019-04-03 06:49+0300\n"
 "Last-Translator: \n"
 "Language-Team: Raivo, Henkka, eesatfan, rimas, zeros\\n faas, sateks, valgekotkas, tigekala, rootsikunn\\n kain, i70, mustkass, pelmeen, Scott\\n <digi-tv.ee>\n"
@@ -593,8 +593,23 @@ msgstr "Heli ja pildi seaded"
 msgid "AAC downmix"
 msgstr "AAC > stereo"
 
+#, fuzzy
+msgid "AAC transcoding"
+msgstr "Transkodeerimine: "
+
+#, fuzzy
+msgid "AAC+ downmix"
+msgstr "AAC > stereo"
+
+msgid "AC3"
+msgstr ""
+
 msgid "AC3 downmix"
 msgstr "AC3 > stereo"
+
+#, fuzzy
+msgid "AC3 transcoding"
+msgstr "Transkodeerimine: "
 
 msgid "ACQUIRING TSID/ONID"
 msgstr "TSID/ONID OTSING"
@@ -1701,6 +1716,22 @@ msgstr "Vali tuuner"
 msgid "Choose bouquet"
 msgstr "Vali lemmiknimekiri"
 
+#, fuzzy
+msgid "Choose whether AAC sound tracks should be transcoded."
+msgstr "Määra, kas mitmekanaline heli tuleks taandada stereoks."
+
+#, fuzzy
+msgid "Choose whether AC3 sound tracks should be transcoded."
+msgstr "Määra, kas mitmekanaline heli tuleks taandada stereoks."
+
+#, fuzzy
+msgid "Choose whether WMA Pro sound tracks should be downmixed."
+msgstr "Määra, kas mitmekanaline heli tuleks taandada stereoks."
+
+#, fuzzy
+msgid "Choose whether multi channel aac+ sound tracks should be downmixed to stereo."
+msgstr "Määra, kas mitmekanaline heli tuleks taandada stereoks."
+
 msgid "Choose whether to scan a single transponder, one satellite or multiple satellites."
 msgstr ""
 
@@ -2398,6 +2429,10 @@ msgstr "Tšehhi Vabariik"
 msgid "D"
 msgstr "D"
 
+#, fuzzy
+msgid "DAC"
+msgstr "PDC"
+
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -2407,8 +2442,14 @@ msgstr "DMM edasijõudnutele"
 msgid "DMM normal"
 msgstr "DMM tavaline"
 
+msgid "DTS"
+msgstr ""
+
 msgid "DTS downmix"
 msgstr "DTS > stereo"
+
+msgid "DTS-HD HR/DTS-HD MA/DTS"
+msgstr ""
 
 msgid "DUAL LAYER DVD"
 msgstr "Kahekihiline DVD"
@@ -2714,6 +2755,10 @@ msgstr "Kataloog sisaldab %(file)s ja %(subdir)s."
 msgid "Disable"
 msgstr "Keela"
 
+#, fuzzy
+msgid "Disable FCC during recordings"
+msgstr "Salvestised sisaldavad ka ECM sõnumeid"
+
 msgid "Disable Picture in Picture"
 msgstr "Sulge pilt-pildis"
 
@@ -2975,6 +3020,10 @@ msgstr "Üritan laadida alla uut nimekirja. Oota."
 msgid "Downloading plugin information. Please wait..."
 msgstr "Laeme alla laienduste infot. Palun oota."
 
+#, fuzzy
+msgid "Downmix"
+msgstr "DTS > stereo"
+
 msgid "Drama and Films"
 msgstr ""
 
@@ -3018,9 +3067,12 @@ msgstr ""
 msgid "ERROR - failed to scan (%s)!"
 msgstr "VIGA - (%s) otsing nurjus!"
 
-#, python-format
-msgid "ERROR downloading file /etc/enigma2/%s"
+#, fuzzy, python-format
+msgid "ERROR downloading file %s/%s"
 msgstr ""
+"Viga tarkvara allalaadimisel\n"
+"%s\n"
+"%s"
 
 msgid "East"
 msgstr "Ida"
@@ -3139,6 +3191,10 @@ msgstr "Luba automaatne kiirotsing"
 #, fuzzy, python-format
 msgid "Enable auto fastscan for %s"
 msgstr "Luba kiire automaatotsing %s jaoks"
+
+#, fuzzy
+msgid "Enable bluetooth audio"
+msgstr "Luba nimekirjade muutmine"
 
 msgid "Enable bouquet edit"
 msgstr "Luba nimekirjade muutmine"
@@ -3566,6 +3622,14 @@ msgstr ""
 "FBC automaatika\n"
 "mitteaktiivne"
 
+#, fuzzy
+msgid "FCC enabled"
+msgstr "lubatud"
+
+#, fuzzy
+msgid "FCCSetup"
+msgstr "Seadistamine"
+
 msgid "FEC"
 msgstr "FEC"
 
@@ -3659,6 +3723,15 @@ msgstr "Fääri saared"
 
 msgid "Fast"
 msgstr "Kiire"
+
+msgid "Fast Channel Change"
+msgstr ""
+
+msgid "Fast Channel Change Setup"
+msgstr ""
+
+msgid "Fast Channel Change setup"
+msgstr ""
 
 msgid "Fast DiSEqC"
 msgstr "Kiire DiSEqC"
@@ -3878,6 +3951,10 @@ msgstr "Üldine AC3 viide"
 msgid "General PCM delay"
 msgstr "Üldine PCM viide"
 
+#, fuzzy
+msgid "General bluetooth audio delay"
+msgstr "Üldine AC3 viide"
+
 msgid "Genre"
 msgstr "Žanr"
 
@@ -4040,6 +4117,9 @@ msgstr "HD2400"
 msgid "HD60/HD66SE/Multibox/Multibox SE"
 msgstr ""
 
+msgid "HDMI"
+msgstr ""
+
 msgid "HDMI Colordepth"
 msgstr "HDMI värvisügavus"
 
@@ -4146,6 +4226,10 @@ msgstr "Hierarhia teave"
 
 msgid "High bitrate support"
 msgstr "Kõrge bitikiiruse tugi"
+
+#, fuzzy
+msgid "History Prev/Next"
+msgstr "Ajaloo edasivaade"
 
 msgid "History back"
 msgstr "Ajaloo tagasivaade"
@@ -4971,6 +5055,10 @@ msgstr "Mauritaania"
 
 msgid "Mauritius"
 msgstr "Mauritius"
+
+#, fuzzy
+msgid "Max channels"
+msgstr "Kanal"
 
 msgid "Max memory positions"
 msgstr "Max. mälu asendid"
@@ -5851,6 +5939,9 @@ msgstr "Lapseluku kanali muutmine"
 msgid "Parental control setup"
 msgstr "Lapseluku seaded"
 
+msgid "Passthrough"
+msgstr ""
+
 msgid "Password"
 msgstr ""
 
@@ -6603,6 +6694,9 @@ msgstr "Salvesta"
 msgid "Recall to previous service"
 msgstr "Tagasi eelmise teenuse juurde"
 
+msgid "Receiver or driver does not support FCC"
+msgstr ""
+
 msgid "Reception settings"
 msgstr "Vastuvõtu seaded"
 
@@ -7018,6 +7112,9 @@ msgstr "SNR"
 
 msgid "SNR:"
 msgstr "SNR:"
+
+msgid "SPDIF"
+msgstr ""
 
 msgid "SRT file"
 msgstr "SRT fail"
@@ -9262,11 +9359,19 @@ msgid "This option allows you to show the full screen path leading to the curren
 msgstr "See valik lubab näidiku välja lülitada."
 
 #, fuzzy
+msgid "This option allows you to switch audio to bluetooth speakers."
+msgstr "See valikuvõimalus seadistab, et saad sättida automaatse helitugevuse."
+
+#, fuzzy
 msgid "This option allows you to view the old and new settings side by side."
 msgstr "See valik lubab lisada softcam seadmise laienduste menüüsse."
 
 msgid "This option can be useful for long HDMI cables."
 msgstr "See valikuvõimalus võib olla kasulik pikkade HDMI kaablite puhul."
+
+#, fuzzy
+msgid "This option configures the general audio delay for bluetooth speakers."
+msgstr "Määra üldine heli viiteaeg stereoheliga heliribadele."
 
 msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr "See valik määrab moskiitomüra summutamise taseme. Seda tehakse pildi üksikasjade arvelt."
@@ -10218,6 +10323,10 @@ msgstr "W"
 msgid "WLAN connection"
 msgstr "WiFi ühendus"
 
+#, fuzzy
+msgid "WMA Pro downmix"
+msgstr "AAC > stereo"
+
 msgid "WSS on 4:3"
 msgstr "WSS 4:3 -ga"
 
@@ -10912,6 +11021,10 @@ msgstr "Sambia"
 msgid "Zap"
 msgstr "Mine kanalile"
 
+#, fuzzy
+msgid "Zap Up/Down"
+msgstr "Kanalivahetus +"
+
 msgid "Zap back to previously tuned service?"
 msgstr "Tagasi vaadatud kanalile?"
 
@@ -11158,6 +11271,16 @@ msgstr "ühendatud"
 msgid "controlled by HDMI"
 msgstr ""
 
+msgid "convert to AC3"
+msgstr ""
+
+msgid "convert to DTS"
+msgstr ""
+
+#, fuzzy
+msgid "convert to multi-channel PCM"
+msgstr "Mitme kanali PCM"
+
 msgid "cooking"
 msgstr "kokasaade"
 
@@ -11282,6 +11405,10 @@ msgid "experimental film/video"
 msgstr "eksperimentaalne film/video"
 
 msgid "extra wide"
+msgstr "eriti lai"
+
+#, fuzzy
+msgid "extrawide"
 msgstr "eriti lai"
 
 msgid "failed"
@@ -11659,6 +11786,10 @@ msgstr "koolieelikute saade"
 msgid "preserve bookmarks in cuts"
 msgstr ""
 
+#, fuzzy
+msgid "priority"
+msgstr "Prioriteet"
+
 msgid "receiver software because updates are available."
 msgstr "vastuvõtja tarkvara, sest uuendused on saadaval."
 
@@ -11937,6 +12068,12 @@ msgstr "ebastabiilne"
 
 msgid "until standby/restart"
 msgstr "kuni ooterežiimini/taaskäivitamiseni"
+
+msgid "use best / controlled by HDMI"
+msgstr ""
+
+msgid "use_hdmi_cacenter"
+msgstr ""
 
 msgid "user defined"
 msgstr "kasutaja määratud"

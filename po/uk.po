@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-27 12:31+0200\n"
+"POT-Creation-Date: 2022-04-12 12:11+0200\n"
 "PO-Revision-Date: 2021-03-11 01:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: kvinto\n"
@@ -605,8 +605,23 @@ msgstr "Аудіо/Відео налаштування"
 msgid "AAC downmix"
 msgstr "AAC мікшування"
 
+#, fuzzy
+msgid "AAC transcoding"
+msgstr "Перекодування: "
+
+#, fuzzy
+msgid "AAC+ downmix"
+msgstr "AAC мікшування"
+
+msgid "AC3"
+msgstr ""
+
 msgid "AC3 downmix"
 msgstr "AC3 мікшування"
+
+#, fuzzy
+msgid "AC3 transcoding"
+msgstr "Перекодування: "
 
 msgid "ACQUIRING TSID/ONID"
 msgstr ""
@@ -1710,6 +1725,22 @@ msgstr "Вибір Тюнера"
 msgid "Choose bouquet"
 msgstr "Виберіть фаворитний список"
 
+#, fuzzy
+msgid "Choose whether AAC sound tracks should be transcoded."
+msgstr "Налаштуйте, чи слід змішувати багатоканальну звукову доріжку в стерео звук."
+
+#, fuzzy
+msgid "Choose whether AC3 sound tracks should be transcoded."
+msgstr "Налаштуйте, чи слід змішувати багатоканальну звукову доріжку в стерео звук."
+
+#, fuzzy
+msgid "Choose whether WMA Pro sound tracks should be downmixed."
+msgstr "Налаштуйте, чи слід змішувати багатоканальну звукову доріжку в стерео звук."
+
+#, fuzzy
+msgid "Choose whether multi channel aac+ sound tracks should be downmixed to stereo."
+msgstr "Налаштуйте, чи слід змішувати багатоканальну звукову доріжку в стерео звук."
+
 msgid "Choose whether to scan a single transponder, one satellite or multiple satellites."
 msgstr "Виберіть, чи потрібно сканувати один транспондер, один супутник чи декілька супутників."
 
@@ -2400,6 +2431,10 @@ msgstr "Чехія"
 msgid "D"
 msgstr "D"
 
+#, fuzzy
+msgid "DAC"
+msgstr "PDC"
+
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -2409,8 +2444,14 @@ msgstr "DMM розширено"
 msgid "DMM normal"
 msgstr "DMM нормально"
 
+msgid "DTS"
+msgstr ""
+
 msgid "DTS downmix"
 msgstr "DTS мікшування"
+
+msgid "DTS-HD HR/DTS-HD MA/DTS"
+msgstr ""
 
 msgid "DUAL LAYER DVD"
 msgstr "Двошаровий DVD"
@@ -2706,6 +2747,10 @@ msgstr "Директорія містить %(file)s і %(subdir)s."
 msgid "Disable"
 msgstr "Вимкнуто"
 
+#, fuzzy
+msgid "Disable FCC during recordings"
+msgstr "Завжди включати ECM у записи"
+
 msgid "Disable Picture in Picture"
 msgstr "Вимкнути РіР"
 
@@ -2963,6 +3008,10 @@ msgstr "Спроба завантажити новий список пакеті
 msgid "Downloading plugin information. Please wait..."
 msgstr "Завантаження інформації про додатки. Зачекайте..."
 
+#, fuzzy
+msgid "Downmix"
+msgstr "DTS мікшування"
+
 msgid "Drama and Films"
 msgstr "Драма і Фільми"
 
@@ -3006,8 +3055,8 @@ msgstr "ЕПГ:"
 msgid "ERROR - failed to scan (%s)!"
 msgstr "ПОМИЛКА - сканування невдале (%s)!"
 
-#, python-format
-msgid "ERROR downloading file /etc/enigma2/%s"
+#, fuzzy, python-format
+msgid "ERROR downloading file %s/%s"
 msgstr "ПОМИЛКА завантаження файлу /etc/enigma2/%s"
 
 msgid "East"
@@ -3124,6 +3173,10 @@ msgstr "Включити швидке автосканування"
 #, python-format
 msgid "Enable auto fastscan for %s"
 msgstr "Включити швидке автосканування для %s"
+
+#, fuzzy
+msgid "Enable bluetooth audio"
+msgstr "Включити редагування фавориту"
 
 msgid "Enable bouquet edit"
 msgstr "Включити редагування фавориту"
@@ -3549,6 +3602,14 @@ msgstr ""
 "FBC автоматичний\n"
 "неактивний"
 
+#, fuzzy
+msgid "FCC enabled"
+msgstr "ввімкнуто"
+
+#, fuzzy
+msgid "FCCSetup"
+msgstr "Налаштування"
+
 msgid "FEC"
 msgstr "ФЕК"
 
@@ -3641,6 +3702,15 @@ msgstr "Фарерські острови"
 
 msgid "Fast"
 msgstr "Швидко"
+
+msgid "Fast Channel Change"
+msgstr ""
+
+msgid "Fast Channel Change Setup"
+msgstr ""
+
+msgid "Fast Channel Change setup"
+msgstr ""
 
 msgid "Fast DiSEqC"
 msgstr "Швидкий DiSEqC"
@@ -3854,6 +3924,10 @@ msgstr "Загальна AC3 затримка"
 msgid "General PCM delay"
 msgstr "Загальна PCM затримка"
 
+#, fuzzy
+msgid "General bluetooth audio delay"
+msgstr "Загальна AC3 затримка"
+
 msgid "Genre"
 msgstr "Жанр"
 
@@ -4013,6 +4087,9 @@ msgstr "HD2400"
 msgid "HD60/HD66SE/Multibox/Multibox SE"
 msgstr "HD60/HD66SE/Multibox/Multibox SE"
 
+msgid "HDMI"
+msgstr ""
+
 msgid "HDMI Colordepth"
 msgstr "Глибина кольору HDMI"
 
@@ -4117,6 +4194,10 @@ msgstr "Інфо ієрархії"
 
 msgid "High bitrate support"
 msgstr "Підтримка високого бітрейту"
+
+#, fuzzy
+msgid "History Prev/Next"
+msgstr "Вперед в історії"
 
 msgid "History back"
 msgstr "Назад в історії"
@@ -4943,6 +5024,10 @@ msgstr "Мауританія"
 
 msgid "Mauritius"
 msgstr "Мауританська"
+
+#, fuzzy
+msgid "Max channels"
+msgstr "Канали"
 
 msgid "Max memory positions"
 msgstr "Макс. кількість позицій в пам'яті"
@@ -5805,6 +5890,9 @@ msgstr "Редактор каналів батьківського контро�
 msgid "Parental control setup"
 msgstr "Налаштування батьківського контролю"
 
+msgid "Passthrough"
+msgstr ""
+
 msgid "Password"
 msgstr "Пароль"
 
@@ -6546,6 +6634,9 @@ msgstr "Запис"
 msgid "Recall to previous service"
 msgstr "Повернутися на Попередній канал"
 
+msgid "Receiver or driver does not support FCC"
+msgstr ""
+
 msgid "Reception settings"
 msgstr "Параметри прийому"
 
@@ -6957,6 +7048,9 @@ msgstr "SNR"
 
 msgid "SNR:"
 msgstr "SNR:"
+
+msgid "SPDIF"
+msgstr ""
 
 msgid "SRT file"
 msgstr "SRT файл"
@@ -9143,11 +9237,19 @@ msgstr "Цей параметр дозволяє показати швидкі �
 msgid "This option allows you to show the full screen path leading to the current screen."
 msgstr "Цей параметр дозволяє відобразити шлях на весь екран, що веде до поточного екрана."
 
+#, fuzzy
+msgid "This option allows you to switch audio to bluetooth speakers."
+msgstr "Цей параметр дозволяє Вам налаштувати рівень автозвуку."
+
 msgid "This option allows you to view the old and new settings side by side."
 msgstr "Цей параметр дозволяє Вам показати старі і нові настройки у двох розділених вікнах вертикально."
 
 msgid "This option can be useful for long HDMI cables."
 msgstr "Цей параметр може бути корисним для довгих кабелів HDMI."
+
+#, fuzzy
+msgid "This option configures the general audio delay for bluetooth speakers."
+msgstr "Налаштування загальної затримки звукових доріжок із стереозвуком."
 
 msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr "Цей параметр встановлює рівень придушення москітного шуму (Mosquito Noise є випадковим псевдонімом в результаті сильного стиснення). Очевидно, що це відбувається за рахунок деталей зображення."
@@ -10081,6 +10183,10 @@ msgstr "W"
 msgid "WLAN connection"
 msgstr "Безпровідне з'єднання WLAN"
 
+#, fuzzy
+msgid "WMA Pro downmix"
+msgstr "AAC мікшування"
+
 msgid "WSS on 4:3"
 msgstr "WSS on 4:3"
 
@@ -10759,6 +10865,10 @@ msgstr "Замбія"
 msgid "Zap"
 msgstr "Переключити"
 
+#, fuzzy
+msgid "Zap Up/Down"
+msgstr "Переключити вниз"
+
 msgid "Zap back to previously tuned service?"
 msgstr "Переключити на попередній канал?"
 
@@ -10999,6 +11109,16 @@ msgstr "під'єднаний"
 msgid "controlled by HDMI"
 msgstr "управляється HDMI"
 
+msgid "convert to AC3"
+msgstr ""
+
+msgid "convert to DTS"
+msgstr ""
+
+#, fuzzy
+msgid "convert to multi-channel PCM"
+msgstr "Багатоканальне PCM"
+
 msgid "cooking"
 msgstr "приготування їжі"
 
@@ -11120,6 +11240,10 @@ msgid "experimental film/video"
 msgstr "експериментальний фільм/відео"
 
 msgid "extra wide"
+msgstr "надширокий"
+
+#, fuzzy
+msgid "extrawide"
 msgstr "надширокий"
 
 msgid "failed"
@@ -11485,6 +11609,10 @@ msgstr "дитяча програма дошкільного віку"
 msgid "preserve bookmarks in cuts"
 msgstr "зберегти закладки в розрізах"
 
+#, fuzzy
+msgid "priority"
+msgstr "Пріоритет"
+
 msgid "receiver software because updates are available."
 msgstr "доступні оновлення ПЗ для приймача."
 
@@ -11755,6 +11883,13 @@ msgstr "нестабільний"
 
 msgid "until standby/restart"
 msgstr "до режиму очікування/перезавантаження"
+
+#, fuzzy
+msgid "use best / controlled by HDMI"
+msgstr "управляється HDMI"
+
+msgid "use_hdmi_cacenter"
+msgstr ""
 
 msgid "user defined"
 msgstr "на вибір користувача"

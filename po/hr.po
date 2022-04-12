@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-27 12:31+0200\n"
-"PO-Revision-Date: 2022-02-27 19:03+0100\n"
+"POT-Creation-Date: 2022-04-12 12:11+0200\n"
+"PO-Revision-Date: 2022-03-28 16:33+0200\n"
 "Last-Translator: Željko <zdezmar2@gmail.com>\n"
 "Language-Team: Željko\n"
 "Language: hr_HR\n"
@@ -605,8 +605,23 @@ msgstr "A/V postavke"
 msgid "AAC downmix"
 msgstr "AAC mikser"
 
+#, fuzzy
+msgid "AAC transcoding"
+msgstr "Transkodiranje: "
+
+#, fuzzy
+msgid "AAC+ downmix"
+msgstr "AAC mikser"
+
+msgid "AC3"
+msgstr ""
+
 msgid "AC3 downmix"
 msgstr "AC3 mikser"
+
+#, fuzzy
+msgid "AC3 transcoding"
+msgstr "Transkodiranje: "
 
 msgid "ACQUIRING TSID/ONID"
 msgstr "STJECANJE TSID/ONID"
@@ -1025,7 +1040,7 @@ msgid "Artist"
 msgstr "Umjetnik"
 
 msgid "Arts/Culture (without music)"
-msgstr "umjetnost/kultura (bez glazbe, općenito)"
+msgstr "umjetnost/kultura (bez glazbe)"
 
 msgid "Aruba"
 msgstr "Aruba"
@@ -1711,6 +1726,22 @@ msgstr "Odaberite tjuner"
 
 msgid "Choose bouquet"
 msgstr "Odaberite paket"
+
+#, fuzzy
+msgid "Choose whether AAC sound tracks should be transcoded."
+msgstr "Konfigurirajte da li se višekanalni zvučni zapisi trebaju miješati u stereo."
+
+#, fuzzy
+msgid "Choose whether AC3 sound tracks should be transcoded."
+msgstr "Konfigurirajte da li se višekanalni zvučni zapisi trebaju miješati u stereo."
+
+#, fuzzy
+msgid "Choose whether WMA Pro sound tracks should be downmixed."
+msgstr "Konfigurirajte da li se višekanalni zvučni zapisi trebaju miješati u stereo."
+
+#, fuzzy
+msgid "Choose whether multi channel aac+ sound tracks should be downmixed to stereo."
+msgstr "Konfigurirajte da li se višekanalni zvučni zapisi trebaju miješati u stereo."
 
 msgid "Choose whether to scan a single transponder, one satellite or multiple satellites."
 msgstr "Odaberite hoćete li skenirati jedan transponder, jedan satelit ili više satelita."
@@ -2402,6 +2433,10 @@ msgstr "Češka"
 msgid "D"
 msgstr "D"
 
+#, fuzzy
+msgid "DAC"
+msgstr "PDC"
+
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -2411,8 +2446,14 @@ msgstr "DMM napredna"
 msgid "DMM normal"
 msgstr "DMM normalna"
 
+msgid "DTS"
+msgstr ""
+
 msgid "DTS downmix"
 msgstr "DTS miješanje"
+
+msgid "DTS-HD HR/DTS-HD MA/DTS"
+msgstr ""
 
 msgid "DUAL LAYER DVD"
 msgstr "DUAL LAYER (dvoslojni) DVD"
@@ -2708,6 +2749,10 @@ msgstr "Direktorij sadrži %(file)s i %(subdir)s."
 msgid "Disable"
 msgstr "Onemogućite"
 
+#, fuzzy
+msgid "Disable FCC during recordings"
+msgstr "Uključivanje ECM-a u snimanjima"
+
 msgid "Disable Picture in Picture"
 msgstr "Onemogućite sliku u slici"
 
@@ -2967,6 +3012,10 @@ msgstr "Pokušavate preuzeti novi popis paketa. Molim pričekajte..."
 msgid "Downloading plugin information. Please wait..."
 msgstr "Preuzimanje informacija o dodacima. Molim pričekajte..."
 
+#, fuzzy
+msgid "Downmix"
+msgstr "DTS miješanje"
+
 msgid "Drama and Films"
 msgstr "Drama i Film"
 
@@ -3011,8 +3060,8 @@ msgid "ERROR - failed to scan (%s)!"
 msgstr "GREŠKA - nije uspjelo skeniranje (%s)!"
 
 #, fuzzy, python-format
-msgid "ERROR downloading file /etc/enigma2/%s"
-msgstr "GREŠKA u preuzimanju datoteke %s"
+msgid "ERROR downloading file %s/%s"
+msgstr "GREŠKA u preuzimanju datoteke /etc/enigma2/%s"
 
 msgid "East"
 msgstr "Istok"
@@ -3128,6 +3177,10 @@ msgstr "Omogućite automatsko brzo skeniranje"
 #, python-format
 msgid "Enable auto fastscan for %s"
 msgstr "Omogućite automatsko brzo skeniranje za %s"
+
+#, fuzzy
+msgid "Enable bluetooth audio"
+msgstr "Omogući uređivanje paketa"
 
 msgid "Enable bouquet edit"
 msgstr "Omogući uređivanje paketa"
@@ -3553,6 +3606,14 @@ msgstr ""
 "FBC - automatski\n"
 "neaktivan"
 
+#, fuzzy
+msgid "FCC enabled"
+msgstr "omogućeno"
+
+#, fuzzy
+msgid "FCCSetup"
+msgstr "Postavljanje"
+
 msgid "FEC"
 msgstr "FEC"
 
@@ -3645,6 +3706,15 @@ msgstr "Farski otoci"
 
 msgid "Fast"
 msgstr "Brzo"
+
+msgid "Fast Channel Change"
+msgstr ""
+
+msgid "Fast Channel Change Setup"
+msgstr ""
+
+msgid "Fast Channel Change setup"
+msgstr ""
 
 msgid "Fast DiSEqC"
 msgstr "Brzi DiSEqC (bez odgode naredbe)"
@@ -3858,6 +3928,10 @@ msgstr "Ukupno AC3 kašnjenje"
 msgid "General PCM delay"
 msgstr "Ukupno PCM kašnjenje"
 
+#, fuzzy
+msgid "General bluetooth audio delay"
+msgstr "Ukupno AC3 kašnjenje"
+
 msgid "Genre"
 msgstr "Žanr"
 
@@ -4017,6 +4091,9 @@ msgstr "HD2400"
 msgid "HD60/HD66SE/Multibox/Multibox SE"
 msgstr "HD60/HD66SE/Multibox/Multibox SE"
 
+msgid "HDMI"
+msgstr ""
+
 msgid "HDMI Colordepth"
 msgstr "HDMI dubina boje"
 
@@ -4121,6 +4198,10 @@ msgstr "Informacije o hijerarhiji"
 
 msgid "High bitrate support"
 msgstr "Podrška za velike brzine prijenosa"
+
+#, fuzzy
+msgid "History Prev/Next"
+msgstr "Povijest kanala - sljedeći"
 
 msgid "History back"
 msgstr "Povijest kanala - unatrag"
@@ -4947,6 +5028,10 @@ msgstr "Mauritanija"
 
 msgid "Mauritius"
 msgstr "Mauricijus"
+
+#, fuzzy
+msgid "Max channels"
+msgstr "Kanali"
 
 msgid "Max memory positions"
 msgstr "Maksimalna pozicija memorije"
@@ -5809,6 +5894,9 @@ msgstr "Uređivač usluga za roditeljski nadzor"
 msgid "Parental control setup"
 msgstr "Postavljanje roditeljske kontrole"
 
+msgid "Passthrough"
+msgstr ""
+
 msgid "Password"
 msgstr "Lozinka"
 
@@ -6550,6 +6638,9 @@ msgstr "Rec"
 msgid "Recall to previous service"
 msgstr "Povratak na prethodnu uslugu"
 
+msgid "Receiver or driver does not support FCC"
+msgstr ""
+
 msgid "Reception settings"
 msgstr "Postavke prijema"
 
@@ -6961,6 +7052,9 @@ msgstr "SNR"
 
 msgid "SNR:"
 msgstr "SNR:"
+
+msgid "SPDIF"
+msgstr ""
 
 msgid "SRT file"
 msgstr "SRT datoteka"
@@ -9145,11 +9239,19 @@ msgstr "Ova opcija vam omogućuje prikaz brzih veza izbornika i/ili dodatka."
 msgid "This option allows you to show the full screen path leading to the current screen."
 msgstr "Ova vam opcija omogućuje prikaz preko cijelog zaslona putem koji vodi do trenutnog zaslona."
 
+#, fuzzy
+msgid "This option allows you to switch audio to bluetooth speakers."
+msgstr "Ova opcija omogućuje da postavite razinu automatske glasnoće."
+
 msgid "This option allows you to view the old and new settings side by side."
 msgstr "Ova opcija omogućuje vam pregled starih i novih postavki usporedno."
 
 msgid "This option can be useful for long HDMI cables."
 msgstr "Ova opcija može biti korisna za dugačke HDMI kabele."
+
+#, fuzzy
+msgid "This option configures the general audio delay for bluetooth speakers."
+msgstr "Konfigurirajte kašnjenje zvuka stereo zvučnih zapisa."
 
 msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr "Ova opcija omogućuje podešavanje razine smanjenja buke šuma (šum je slučajno preklapanje zbog jake kompresije). Očito je to zbog detalja slike."
@@ -10083,6 +10185,10 @@ msgstr "W"
 msgid "WLAN connection"
 msgstr "WLAN veza"
 
+#, fuzzy
+msgid "WMA Pro downmix"
+msgstr "AAC mikser"
+
 msgid "WSS on 4:3"
 msgstr "WSS na 4:3"
 
@@ -10760,6 +10866,10 @@ msgstr "Zambija"
 msgid "Zap"
 msgstr "Prebacivanje"
 
+#, fuzzy
+msgid "Zap Up/Down"
+msgstr "Prebacivanje kanala prema dolje"
+
 msgid "Zap back to previously tuned service?"
 msgstr "Prebacivanje vratiti na prethodno podešenu uslugu?"
 
@@ -11000,6 +11110,16 @@ msgstr "povezano"
 msgid "controlled by HDMI"
 msgstr "upravljano po HDMI"
 
+msgid "convert to AC3"
+msgstr ""
+
+msgid "convert to DTS"
+msgstr ""
+
+#, fuzzy
+msgid "convert to multi-channel PCM"
+msgstr "Višekanalni PCM"
+
 msgid "cooking"
 msgstr "kuhanje"
 
@@ -11121,6 +11241,10 @@ msgid "experimental film/video"
 msgstr "eksperimentalni film/video"
 
 msgid "extra wide"
+msgstr "izuzetno širok"
+
+#, fuzzy
+msgid "extrawide"
 msgstr "izuzetno širok"
 
 msgid "failed"
@@ -11486,6 +11610,10 @@ msgstr "predškolski program za djecu"
 msgid "preserve bookmarks in cuts"
 msgstr "sačuvati oznake u rezovima"
 
+#, fuzzy
+msgid "priority"
+msgstr "Prioritet"
+
 msgid "receiver software because updates are available."
 msgstr "dostupno je ažuriranje za vaš prijemnik."
 
@@ -11756,6 +11884,13 @@ msgstr "nestabilan"
 
 msgid "until standby/restart"
 msgstr "do stanja čekanja/restarta"
+
+#, fuzzy
+msgid "use best / controlled by HDMI"
+msgstr "upravljano po HDMI"
+
+msgid "use_hdmi_cacenter"
+msgstr ""
 
 msgid "user defined"
 msgstr "korisnički definirano"

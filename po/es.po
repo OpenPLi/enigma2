@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-27 12:31+0200\n"
+"POT-Creation-Date: 2022-04-12 12:11+0200\n"
 "PO-Revision-Date: 2021-05-25 18:08+0200\n"
 "Last-Translator: Jose Juan <jzapater@gmail.com>\n"
 "Language-Team: ANGELODOS  angelo2807@hotmail.com\n"
@@ -655,8 +655,23 @@ msgstr "Configurar A/V"
 msgid "AAC downmix"
 msgstr "AAC downmix"
 
+#, fuzzy
+msgid "AAC transcoding"
+msgstr "Transcodificación:"
+
+#, fuzzy
+msgid "AAC+ downmix"
+msgstr "AAC downmix"
+
+msgid "AC3"
+msgstr ""
+
 msgid "AC3 downmix"
 msgstr "AC3 downmix"
+
+#, fuzzy
+msgid "AC3 transcoding"
+msgstr "Transcodificación:"
 
 msgid "ACQUIRING TSID/ONID"
 msgstr "ADQUISICIÓN DE TSID / ONID"
@@ -1890,6 +1905,22 @@ msgstr "Elige sintonizador"
 msgid "Choose bouquet"
 msgstr "Elige Favorito"
 
+#, fuzzy
+msgid "Choose whether AAC sound tracks should be transcoded."
+msgstr "Configure si las pistas de sonido multicanal deben mezclarse a estéreo."
+
+#, fuzzy
+msgid "Choose whether AC3 sound tracks should be transcoded."
+msgstr "Configure si las pistas de sonido multicanal deben mezclarse a estéreo."
+
+#, fuzzy
+msgid "Choose whether WMA Pro sound tracks should be downmixed."
+msgstr "Configure si las pistas de sonido multicanal deben mezclarse a estéreo."
+
+#, fuzzy
+msgid "Choose whether multi channel aac+ sound tracks should be downmixed to stereo."
+msgstr "Configure si las pistas de sonido multicanal deben mezclarse a estéreo."
+
 msgid "Choose whether to scan a single transponder, one satellite or multiple satellites."
 msgstr ""
 
@@ -2656,6 +2687,10 @@ msgstr "Czechia"
 msgid "D"
 msgstr "D"
 
+#, fuzzy
+msgid "DAC"
+msgstr "PDC"
+
 #
 msgid "DHCP"
 msgstr "DHCP"
@@ -2667,8 +2702,14 @@ msgstr "avanzado"
 msgid "DMM normal"
 msgstr "avanzado"
 
+msgid "DTS"
+msgstr ""
+
 msgid "DTS downmix"
 msgstr "AAC downmix"
+
+msgid "DTS-HD HR/DTS-HD MA/DTS"
+msgstr ""
 
 msgid "DUAL LAYER DVD"
 msgstr "DVD DOBLE CAPA"
@@ -3001,6 +3042,10 @@ msgstr "El directorio contiene %(file)s y %(subdir)s."
 msgid "Disable"
 msgstr "Desabilitar"
 
+#, fuzzy
+msgid "Disable FCC during recordings"
+msgstr "Incluya siempre ECM en grabaciones"
+
 #
 msgid "Disable Picture in Picture"
 msgstr "Desactivar PiP"
@@ -3298,6 +3343,10 @@ msgstr "Intentando descargar una nueva lista de paquetes. Espere..."
 msgid "Downloading plugin information. Please wait..."
 msgstr "Descargando información del plugin. Espere..."
 
+#, fuzzy
+msgid "Downmix"
+msgstr "AAC downmix"
+
 msgid "Drama and Films"
 msgstr ""
 
@@ -3347,7 +3396,7 @@ msgid "ERROR - failed to scan (%s)!"
 msgstr "ERROR - ¡falló la búsqueda (%s)!"
 
 #, fuzzy, python-format
-msgid "ERROR downloading file /etc/enigma2/%s"
+msgid "ERROR downloading file %s/%s"
 msgstr "ERROR descargando archivo %s"
 
 #
@@ -3477,6 +3526,11 @@ msgstr "Habilitar exploración rápida automática"
 #, python-format
 msgid "Enable auto fastscan for %s"
 msgstr "Habilitar exploración rápida automática para %s"
+
+#
+#, fuzzy
+msgid "Enable bluetooth audio"
+msgstr "Habilitar edición de lista"
 
 #
 msgid "Enable bouquet edit"
@@ -3946,6 +4000,16 @@ msgstr ""
 "inactivo"
 
 #
+#, fuzzy
+msgid "FCC enabled"
+msgstr "activado"
+
+#
+#, fuzzy
+msgid "FCCSetup"
+msgstr "Configuración"
+
+#
 msgid "FEC"
 msgstr "FEC"
 
@@ -4044,6 +4108,15 @@ msgstr "Islas Faroe"
 #
 msgid "Fast"
 msgstr "Rápido"
+
+msgid "Fast Channel Change"
+msgstr ""
+
+msgid "Fast Channel Change Setup"
+msgstr ""
+
+msgid "Fast Channel Change setup"
+msgstr ""
 
 #
 msgid "Fast DiSEqC"
@@ -4285,6 +4358,11 @@ msgid "General PCM delay"
 msgstr "Retraso general del PCM"
 
 #
+#, fuzzy
+msgid "General bluetooth audio delay"
+msgstr "Retraso General AC3"
+
+#
 msgid "Genre"
 msgstr "Género"
 
@@ -4460,6 +4538,9 @@ msgstr "HD2400"
 msgid "HD60/HD66SE/Multibox/Multibox SE"
 msgstr "HD60/Multibox/Multibox SE"
 
+msgid "HDMI"
+msgstr ""
+
 msgid "HDMI Colordepth"
 msgstr "HDMI Colordepth"
 
@@ -4572,6 +4653,10 @@ msgstr "Información de jerarquía"
 #
 msgid "High bitrate support"
 msgstr "Soporte de bitrate alto"
+
+#, fuzzy
+msgid "History Prev/Next"
+msgstr "Historia siguiente"
 
 msgid "History back"
 msgstr "Historia atrás"
@@ -5496,6 +5581,11 @@ msgstr "Mauritania"
 
 msgid "Mauritius"
 msgstr "Mauricio"
+
+#
+#, fuzzy
+msgid "Max channels"
+msgstr "Canales"
 
 msgid "Max memory positions"
 msgstr "Máximas posiciones de memoria"
@@ -6471,6 +6561,9 @@ msgstr "Editor de servicios de control parental"
 msgid "Parental control setup"
 msgstr "Configuración del control de adultos"
 
+msgid "Passthrough"
+msgstr ""
+
 msgid "Password"
 msgstr "Contraseña"
 
@@ -7325,6 +7418,9 @@ msgstr "Rec"
 msgid "Recall to previous service"
 msgstr "Recordar el servicio anterior"
 
+msgid "Receiver or driver does not support FCC"
+msgstr ""
+
 #
 msgid "Reception settings"
 msgstr "Configuración de recepción"
@@ -7795,6 +7891,9 @@ msgstr "SNR"
 #
 msgid "SNR:"
 msgstr "SNR:"
+
+msgid "SPDIF"
+msgstr ""
 
 msgid "SRT file"
 msgstr "Archivo SRT"
@@ -10216,11 +10315,19 @@ msgstr "Esta opción le permite mostrar enlaces rápidos de menú y / o número 
 msgid "This option allows you to show the full screen path leading to the current screen."
 msgstr "Esta opción le permite mostrar la ruta de pantalla completa que conduce a la pantalla actual."
 
+#, fuzzy
+msgid "This option allows you to switch audio to bluetooth speakers."
+msgstr "Esta opción le permite configurar el nivel de volumen automático."
+
 msgid "This option allows you to view the old and new settings side by side."
 msgstr "Esta opción te permite ver los ajustes nuevos y antiguos, lado a lado."
 
 msgid "This option can be useful for long HDMI cables."
 msgstr "Esta opción puede ser útil para cables HDMI largos."
+
+#, fuzzy
+msgid "This option configures the general audio delay for bluetooth speakers."
+msgstr "Configure el retardo de audio general de las pistas de sonido Dolby Digital."
 
 msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr "Esta opción establece el nivel de supresión del ruido del mosquito (Mosquito Noise es un alias aleatorio como resultado de una fuerte compresión). Obviamente, esto va a costa de los detalles de la imagen."
@@ -11281,6 +11388,10 @@ msgstr "W"
 msgid "WLAN connection"
 msgstr "Conexión WLAN"
 
+#, fuzzy
+msgid "WMA Pro downmix"
+msgstr "AAC downmix"
+
 #
 msgid "WSS on 4:3"
 msgstr "WSS en 4:3"
@@ -11992,6 +12103,10 @@ msgstr "Zambia"
 msgid "Zap"
 msgstr "zapear"
 
+#, fuzzy
+msgid "Zap Up/Down"
+msgstr "Zap hacia abajo"
+
 msgid "Zap back to previously tuned service?"
 msgstr "¿Volver al último canal sintonizado?"
 
@@ -12262,6 +12377,16 @@ msgstr "conectado"
 msgid "controlled by HDMI"
 msgstr "controlado por HDMI"
 
+msgid "convert to AC3"
+msgstr ""
+
+msgid "convert to DTS"
+msgstr ""
+
+#, fuzzy
+msgid "convert to multi-channel PCM"
+msgstr "PCM multicanal"
+
 msgid "cooking"
 msgstr "cocina"
 
@@ -12400,6 +12525,10 @@ msgid "experimental film/video"
 msgstr "Película experimental / video"
 
 msgid "extra wide"
+msgstr "extra ancho"
+
+#, fuzzy
+msgid "extrawide"
 msgstr "extra ancho"
 
 msgid "failed"
@@ -12830,6 +12959,11 @@ msgstr "Programa infantil de preescolar"
 msgid "preserve bookmarks in cuts"
 msgstr ""
 
+#
+#, fuzzy
+msgid "priority"
+msgstr "Prioridad"
+
 msgid "receiver software because updates are available."
 msgstr "Receptor porque las actualizaciones están disponibles."
 
@@ -13139,6 +13273,13 @@ msgstr "Intachable"
 
 msgid "until standby/restart"
 msgstr "hasta reposo/reinicio"
+
+#, fuzzy
+msgid "use best / controlled by HDMI"
+msgstr "controlado por HDMI"
+
+msgid "use_hdmi_cacenter"
+msgstr ""
 
 #
 msgid "user defined"

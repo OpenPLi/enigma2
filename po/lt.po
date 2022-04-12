@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-27 12:31+0200\n"
+"POT-Creation-Date: 2022-04-12 12:11+0200\n"
 "PO-Revision-Date: 2021-12-10 00:18+0200\n"
 "Last-Translator: Audronis <adga45@gmail.com>\n"
 "Language-Team: Adga (C) <adga45@gmail.com>\n"
@@ -606,8 +606,23 @@ msgstr "Garso ir vaizdo nustatymai"
 msgid "AAC downmix"
 msgstr "AAC suliejimas"
 
+#, fuzzy
+msgid "AAC transcoding"
+msgstr "Perkodavimas: "
+
+#, fuzzy
+msgid "AAC+ downmix"
+msgstr "AAC suliejimas"
+
+msgid "AC3"
+msgstr ""
+
 msgid "AC3 downmix"
 msgstr "AC3 suliejimas"
+
+#, fuzzy
+msgid "AC3 transcoding"
+msgstr "Perkodavimas: "
 
 msgid "ACQUIRING TSID/ONID"
 msgstr "GAUNAMAS TSID/ONID"
@@ -1713,6 +1728,22 @@ msgstr "Pasirinkite imtuvą"
 msgid "Choose bouquet"
 msgstr "Pasirinkite paketą"
 
+#, fuzzy
+msgid "Choose whether AAC sound tracks should be transcoded."
+msgstr "Pasirinkite, ar sulieti daugiakanalio garso takelius į stereo garsą."
+
+#, fuzzy
+msgid "Choose whether AC3 sound tracks should be transcoded."
+msgstr "Pasirinkite, ar sulieti daugiakanalio garso takelius į stereo garsą."
+
+#, fuzzy
+msgid "Choose whether WMA Pro sound tracks should be downmixed."
+msgstr "Pasirinkite, ar sulieti daugiakanalio garso takelius į stereo garsą."
+
+#, fuzzy
+msgid "Choose whether multi channel aac+ sound tracks should be downmixed to stereo."
+msgstr "Pasirinkite, ar sulieti daugiakanalio garso takelius į stereo garsą."
+
 msgid "Choose whether to scan a single transponder, one satellite or multiple satellites."
 msgstr "Pasirinkite, ar skenuoti vieną transponderį, vieną palydovą ar kelis palydovus."
 
@@ -2403,6 +2434,10 @@ msgstr "Čekija"
 msgid "D"
 msgstr "D"
 
+#, fuzzy
+msgid "DAC"
+msgstr "PDC"
+
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -2412,8 +2447,14 @@ msgstr "DMM išplėstinis"
 msgid "DMM normal"
 msgstr "DMM normalus"
 
+msgid "DTS"
+msgstr ""
+
 msgid "DTS downmix"
 msgstr "DTS suliejimas"
+
+msgid "DTS-HD HR/DTS-HD MA/DTS"
+msgstr ""
 
 msgid "DUAL LAYER DVD"
 msgstr "DVISLUOKSNIS DVD"
@@ -2709,6 +2750,10 @@ msgstr "Kataloge yra %(file)s ir %(subdir)s."
 msgid "Disable"
 msgstr "Išjungti"
 
+#, fuzzy
+msgid "Disable FCC during recordings"
+msgstr "Į įrašus visada įtraukti ECM"
+
 msgid "Disable Picture in Picture"
 msgstr "Išjungti vaizdą vaizde"
 
@@ -2970,6 +3015,10 @@ msgstr "Atsisiunčiamas naujas paketų sąrašas. Prašome laukti..."
 msgid "Downloading plugin information. Please wait..."
 msgstr "Parsiunčiama informacija apie priedus. Prašome laukti..."
 
+#, fuzzy
+msgid "Downmix"
+msgstr "DTS suliejimas"
+
 msgid "Drama and Films"
 msgstr ""
 
@@ -3014,7 +3063,7 @@ msgid "ERROR - failed to scan (%s)!"
 msgstr "KLAIDA - paieška nepavyko (%s)!"
 
 #, fuzzy, python-format
-msgid "ERROR downloading file /etc/enigma2/%s"
+msgid "ERROR downloading file %s/%s"
 msgstr "KLAIDA, parsiunčiant failą %s"
 
 msgid "East"
@@ -3131,6 +3180,10 @@ msgstr "Įjungti automatinę greitą paiešką"
 #, python-format
 msgid "Enable auto fastscan for %s"
 msgstr "Įjungti automatinę greitą paiešką %s"
+
+#, fuzzy
+msgid "Enable bluetooth audio"
+msgstr "Įjungti paketų redagavimą"
 
 msgid "Enable bouquet edit"
 msgstr "Įjungti paketų redagavimą"
@@ -3552,6 +3605,14 @@ msgstr ""
 "FBC automatinis\n"
 "neaktyvus"
 
+#, fuzzy
+msgid "FCC enabled"
+msgstr "įjungtas"
+
+#, fuzzy
+msgid "FCCSetup"
+msgstr "Valdymas"
+
 msgid "FEC"
 msgstr "FEC"
 
@@ -3644,6 +3705,15 @@ msgstr "Farerų salos"
 
 msgid "Fast"
 msgstr "Greitas"
+
+msgid "Fast Channel Change"
+msgstr ""
+
+msgid "Fast Channel Change Setup"
+msgstr ""
+
+msgid "Fast Channel Change setup"
+msgstr ""
 
 msgid "Fast DiSEqC"
 msgstr "Greitas DiSEqC"
@@ -3858,6 +3928,10 @@ msgstr "Bendra AC3 delsa"
 msgid "General PCM delay"
 msgstr "Bendra PCM delsa"
 
+#, fuzzy
+msgid "General bluetooth audio delay"
+msgstr "Bendra AC3 delsa"
+
 msgid "Genre"
 msgstr "Žanras"
 
@@ -4018,6 +4092,9 @@ msgstr "HD2400"
 msgid "HD60/HD66SE/Multibox/Multibox SE"
 msgstr "HD60/Multibox/Multibox SE"
 
+msgid "HDMI"
+msgstr ""
+
 msgid "HDMI Colordepth"
 msgstr "HDMI spalvų erdvė"
 
@@ -4122,6 +4199,10 @@ msgstr "Informacijos lygis"
 
 msgid "High bitrate support"
 msgstr "Aukštos bitų spartos palaikymas"
+
+#, fuzzy
+msgid "History Prev/Next"
+msgstr "Istorija pirmyn"
 
 msgid "History back"
 msgstr "Istorija atgal"
@@ -4949,6 +5030,10 @@ msgstr "Mauritanija"
 
 msgid "Mauritius"
 msgstr "Mauricijus"
+
+#, fuzzy
+msgid "Max channels"
+msgstr "Kanalai"
 
 msgid "Max memory positions"
 msgstr "Maksimalios atminties pozicijos"
@@ -5812,6 +5897,9 @@ msgstr "Tėvų kontrolės kanalų redaktorius"
 msgid "Parental control setup"
 msgstr "Tėvų kontrolės sąranka"
 
+msgid "Passthrough"
+msgstr ""
+
 msgid "Password"
 msgstr "Slaptažodis"
 
@@ -6553,6 +6641,9 @@ msgstr "Rec"
 msgid "Recall to previous service"
 msgstr "Grįžti į ankstesnį kanalą"
 
+msgid "Receiver or driver does not support FCC"
+msgstr ""
+
 msgid "Reception settings"
 msgstr "Priėmimo nustatymai"
 
@@ -6964,6 +7055,9 @@ msgstr "SNR"
 
 msgid "SNR:"
 msgstr "SNR:"
+
+msgid "SPDIF"
+msgstr ""
 
 msgid "SRT file"
 msgstr "SRT failas"
@@ -9155,11 +9249,19 @@ msgstr "Ši parinktis leidžia rodyti greitosios nuorodos meniu ir/arba priedo n
 msgid "This option allows you to show the full screen path leading to the current screen."
 msgstr "Ši parinktis leidžia rodyti viso ekrano kelią, vedantį į dabartinį ekraną."
 
+#, fuzzy
+msgid "This option allows you to switch audio to bluetooth speakers."
+msgstr "Ši parinktis leidžia jums nustatyti automatinį garsumo lygį."
+
 msgid "This option allows you to view the old and new settings side by side."
 msgstr "Ši parinktis leidžia jums peržiūrėti senus ir naujus nustatymus vienu metu."
 
 msgid "This option can be useful for long HDMI cables."
 msgstr "Ši parinktis gali būti naudinga ilgiems HDMI laidams."
+
+#, fuzzy
+msgid "This option configures the general audio delay for bluetooth speakers."
+msgstr "Nustatykite bendrą stereo garso takelių delsą."
 
 msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr "Ši parinktis nustato \"moskitų\" triukšmų šalinimą (lyg uodų spiečiai apie kontūrus - suspaudimo metu atsiradę atsitiktinės nereikalingos detalės). Žinoma, tai pasiekiama bendro vaizdo ryškumo sumažėjimo kaina."
@@ -10093,6 +10195,10 @@ msgstr "V"
 msgid "WLAN connection"
 msgstr "Belaidis ryšys"
 
+#, fuzzy
+msgid "WMA Pro downmix"
+msgstr "AAC suliejimas"
+
 msgid "WSS on 4:3"
 msgstr "WSS 4:3 režime"
 
@@ -10774,6 +10880,10 @@ msgstr "Zambija"
 msgid "Zap"
 msgstr "Perjungti"
 
+#, fuzzy
+msgid "Zap Up/Down"
+msgstr "Perjungti žemyn"
+
 msgid "Zap back to previously tuned service?"
 msgstr "Perjungti į ankstesnį suderintą kanalą?"
 
@@ -11018,6 +11128,16 @@ msgstr "prijungtas"
 msgid "controlled by HDMI"
 msgstr "kontroliuojama HDMI"
 
+msgid "convert to AC3"
+msgstr ""
+
+msgid "convert to DTS"
+msgstr ""
+
+#, fuzzy
+msgid "convert to multi-channel PCM"
+msgstr "Daugiakanalis PCM"
+
 msgid "cooking"
 msgstr "valgio gaminimas"
 
@@ -11140,6 +11260,10 @@ msgid "experimental film/video"
 msgstr "eksperimentinis filmas/video"
 
 msgid "extra wide"
+msgstr "ypač platus"
+
+#, fuzzy
+msgid "extrawide"
 msgstr "ypač platus"
 
 msgid "failed"
@@ -11508,6 +11632,10 @@ msgstr "ikimokyklinė vaikų programa"
 msgid "preserve bookmarks in cuts"
 msgstr ""
 
+#, fuzzy
+msgid "priority"
+msgstr "Pirmenybė"
+
 msgid "receiver software because updates are available."
 msgstr "imtuvo programinė įranga, nes galimi atnaujinimai."
 
@@ -11784,6 +11912,13 @@ msgstr "netikrintinas"
 
 msgid "until standby/restart"
 msgstr "iki budėjimo/paleidimo iš naujo"
+
+#, fuzzy
+msgid "use best / controlled by HDMI"
+msgstr "kontroliuojama HDMI"
+
+msgid "use_hdmi_cacenter"
+msgstr ""
 
 msgid "user defined"
 msgstr "naudotojo nustatytas"
