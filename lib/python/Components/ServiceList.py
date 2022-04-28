@@ -90,7 +90,7 @@ class ServiceList(GUIComponent):
 			self.l.setColor(eListboxServiceContent.eventForegroundSelected, parseColor(value))
 
 		def foregroundColorEventNextSelected(value):
-			self.l.setColor(eListboxServiceContent.eventForegroundNextSelected, parseColor(value))
+			self.l.setColor(eListboxServiceContent.eventNextForegroundSelected, parseColor(value))
 
 		def colorServiceDescriptionSelected(value):
 			self.l.setColor(eListboxServiceContent.eventForegroundSelected, parseColor(value))
