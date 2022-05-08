@@ -164,6 +164,15 @@ def InitUsageConfig():
 		config.usage.wakeup_day[i] = ConfigEnableDisable(default=False)
 		config.usage.wakeup_time[i] = ConfigClock(default=((6 * 60 + 0) * 60))
 
+	config.usage.poweroff_enabled = ConfigYesNo(default=False)
+	config.usage.poweroff_force = ConfigYesNo(default=False)
+	config.usage.poweroff_nextday = ConfigClock(default = ((6 * 60 + 0) * 60))
+	config.usage.poweroff_day = ConfigSubDict()
+	config.usage.poweroff_time = ConfigSubDict()
+	for i in range(7):
+		config.usage.poweroff_day[i] = ConfigEnableDisable(default=False)
+		config.usage.poweroff_time[i] = ConfigClock(default = ((1 * 60 + 0) * 60))
+
 	choicelist = [("0", _("Do nothing"))]
 	for i in range(3600, 21601, 3600):
 		h = abs(i / 3600)
