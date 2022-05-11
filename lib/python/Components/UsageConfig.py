@@ -342,7 +342,7 @@ def InitUsageConfig():
 		def powerLEDChanged(configElement):
 			if "fp" in SystemInfo["PowerLED"]:
 				open(SystemInfo["PowerLED"], "w").write(configElement.value and "1" or "0")
-				patterns = [PATTERN_ON, PATTERN_ON, PATTERN_OFF, PATTERN_OFF] if configElement.value else [PATTERN_OFF, PATTERN_OFF, PATTERN_OFF, PATTERN_OFF]
+				patterns = [PATTERN_ON, PATTERN_ON, PATTERN_OFF, PATTERN_ON] if configElement.value else [PATTERN_OFF, PATTERN_OFF, PATTERN_OFF, PATTERN_OFF]
 				ledPatterns.setLedPatterns(1, patterns)
 			else:
 				open(SystemInfo["PowerLED"], "w").write(configElement.value and "on" or "off")
