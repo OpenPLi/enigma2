@@ -1216,7 +1216,7 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 	}
 	else if (strstr(m_description, "Vuplus DVB-T NIM(BCM3466)")) // VU+ 4K dual DVB-C/T2
 	{
-		ret = (int)(snr / 43.5);
+		ret = (int)(snr / 22.8);
 	}
 	else if (!strcmp(m_description, "GIGA DVB-S2X NIM (TS3L10)") // dual/single plug & play tuners GB UE/Quad UHD 4K
 		|| !strcmp(m_description, "GIGA DVB-S2X NIM (TS2L08)"))
