@@ -15,7 +15,7 @@ bootuptime: integer, delay to allow the device to boot up, in milliseconds (opti
 lofl: integer, alternative LOF/L value (optional, default value is 9750)
 lofh: integer, alternative LOF/H value (optional, defaultvalue is 10600)
 -->
-<unicable version="20211227">
+<unicable version="20220518">
 	<lnb>
 		<manufacturer name="Dura-Sat(DUR-line)">
 			<product name="UK101" scrs="1210,1420,1680,2040" bootuptime="2500"/>
@@ -63,6 +63,7 @@ lofh: integer, alternative LOF/H value (optional, defaultvalue is 10600)
 			<product name="IDLU-24UL40-UNMOO-OPP" positions="4" bootuptime="800" format="jess" scrs="1210,1420,1680,2040,1005,1050,1095,1140,1260,1305,1350,1475,1520,1565,1610,1725,1770,1815,1860,1905,1950,1995,2085,2130"/>
 			<product name="IDLU-24UL40-PLSTM-BPP" bootuptime="2500" format="jess" scrs="1210,1420,1680,2040,0984,1020,1056,1092,1128,1164,1256,1292,1328,1364,1458,1494,1530,1566,1602,1638,1716,1752,1788,1824"/> <!-- Item 5404 -->
 			<product name="IDLU-32UL40-UNBOO-OPP" positions="4" bootuptime="800" format="jess" scrs="1210,1420,1680,2040,984,1020,1056,1092,1128,1164,1256,1292,1328,1364,1458,1494,1530,1566,1602,1638,1716,1752,1788,1824,1860,1896,1932,1968,2004,2076,2112,2148"/>
+			<product name="IDLU-32UL42-UNBOO-OPP" positions="4" bootuptime="800" format="jess" scrs="1210,1420,1680,2040,984,1020,1056,1092,1128,1164,1256,1292,1328,1364,1458,1494,1530,1566,1602,1638,1716,1752,1788,1824,1860,1896,1932,1968,2004,2076,2112,2148"/> <!-- Item 5679 -->
 	    </manufacturer>
 		<manufacturer name="Kathrein">
 			<product name="UAS481" lofl="10200" lofh="10200" scrs="1400,1516,1632,1748"/>
