@@ -8,7 +8,7 @@ from Components.Input import Input
 from Components.Label import Label
 from Components.Language import language
 from Components.MenuList import MenuList
-from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaBlend
+from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaBlend, MultiContentEntryPixmap
 from Components.Sources.StaticText import StaticText
 from Screens.ChoiceBox import ChoiceBox
 from Screens.HelpMenu import HelpableScreen
@@ -919,13 +919,13 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 					x += self.width * width
 				else:
 					w = self.bg_l.size().width()
-					res.append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(w, self.height), png=self.bg_l))
+					res.append(MultiContentEntryPixmap(pos=(x, 0), size=(w, self.height), png=self.bg_l))
 					x += w
 					w = self.bg_m.size().width() + (self.width * (width - 1))
-					res.append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(w, self.height), png=self.bg_m, flags=BT_SCALE))
+					res.append(MultiContentEntryPixmap(pos=(x, 0), size=(w, self.height), png=self.bg_m, flags=BT_SCALE))
 					x += w
 					w = self.bg_r.size().width()
-					res.append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(w, self.height), png=self.bg_r))
+					res.append(MultiContentEntryPixmap(pos=(x, 0), size=(w, self.height), png=self.bg_r))
 					x += w
 				highlight = self.keyHighlights.get(key.upper(), (None, None, None))  # Check if the cell needs to be highlighted.
 				if highlight[0] is None or highlight[1] is None or highlight[2] is None:  # If available display the cell highlight.

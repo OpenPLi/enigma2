@@ -90,7 +90,7 @@ class ServiceList(GUIComponent):
 			self.l.setColor(eListboxServiceContent.eventForegroundSelected, parseColor(value))
 
 		def foregroundColorEventNextSelected(value):
-			self.l.setColor(eListboxServiceContent.eventForegroundNextSelected, parseColor(value))
+			self.l.setColor(eListboxServiceContent.eventNextForegroundSelected, parseColor(value))
 
 		def colorServiceDescriptionSelected(value):
 			self.l.setColor(eListboxServiceContent.eventForegroundSelected, parseColor(value))
@@ -244,6 +244,9 @@ class ServiceList(GUIComponent):
 		r = eServiceReference()
 		self.l.getNext(r)
 		return r
+
+	def getList(self):
+		return self.l.getList()
 
 	def atBegin(self):
 		return self.instance.atBegin()

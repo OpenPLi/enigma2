@@ -5,7 +5,10 @@ class VariableValue:
 		self.__value = 0
 
 	def setValue(self, value):
-		self.__value = int(value)
+		try:
+			self.__value = int(value)
+		except:
+			self.__value = 0
 		if self.instance:
 			self.instance.setValue(self.__value)
 

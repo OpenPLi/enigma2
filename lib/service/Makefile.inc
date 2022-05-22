@@ -9,6 +9,7 @@ service_libenigma_service_a_SOURCES = \
 	service/service.cpp \
 	service/servicedvb.cpp \
 	service/servicedvbrecord.cpp \
+	service/servicedvbfcc.cpp \
 	service/servicefs.cpp \
 	service/servicem2ts.cpp \
 	service/servicedvbstream.cpp \
@@ -25,6 +26,7 @@ serviceinclude_HEADERS = \
 	service/service.h \
 	service/servicedvb.h \
 	service/servicedvbrecord.h \
+	service/servicedvbfcc.h \
 	service/servicefs.h \
 	service/servicem2ts.h \
 	service/servicedvbstream.h \

@@ -19,7 +19,10 @@ eHttpStream::eHttpStream()
 	if (eConfigManager::getConfigBoolValue("config.usage.remote_fallback_enabled", false))
 		startDelay = 500000;
 	else
-		startDelay = 0;
+	{
+		int delay = eConfigManager::getConfigIntValue("config.usage.http_startdelay");
+		startDelay = delay * 1000;
+	}
 }
 
 eHttpStream::~eHttpStream()

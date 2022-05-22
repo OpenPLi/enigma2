@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-26 15:37+0100\n"
+"POT-Creation-Date: 2022-05-08 10:54+0200\n"
 "PO-Revision-Date: 2014-11-12 00:49+0200\n"
 "Last-Translator: Taapat <taapat@gmail.com>\n"
 "Language-Team: Taapat <taapat@gmail.com>\n"
@@ -607,8 +607,20 @@ msgstr "Audio un video iestatījumi"
 msgid "AAC downmix"
 msgstr "AAC dekodēšana"
 
+msgid "AAC transcoding"
+msgstr "AAC pārkodēšana"
+
+msgid "AAC+ downmix"
+msgstr "AAC+ dekodēšana"
+
+msgid "AC3"
+msgstr "AC3"
+
 msgid "AC3 downmix"
 msgstr "AC3 dekodēšana"
+
+msgid "AC3 transcoding"
+msgstr "AC3 pārkodēšana"
 
 msgid "ACQUIRING TSID/ONID"
 msgstr "ACQUIRING TSID/ONID"
@@ -1712,6 +1724,18 @@ msgstr "Izvēlieties uztvērēju"
 msgid "Choose bouquet"
 msgstr "Izvēlieties buķeti"
 
+msgid "Choose whether AAC sound tracks should be transcoded."
+msgstr "Izvēlieties, vai AAC skaņas celiņi tiks pārkodēti."
+
+msgid "Choose whether AC3 sound tracks should be transcoded."
+msgstr "Izvēlieties, vai AC3 skaņas celiņi tiks pārkodēti."
+
+msgid "Choose whether WMA Pro sound tracks should be downmixed."
+msgstr "Izvēlieties, vai WMA Pro skaņas celiņi tiks dekodēti."
+
+msgid "Choose whether multi channel aac+ sound tracks should be downmixed to stereo."
+msgstr "Izvēlieties kā daudzkanālu skaņu celiņi tiks dekodēti uz stereo."
+
 msgid "Choose whether to scan a single transponder, one satellite or multiple satellites."
 msgstr "Izvēlieties, vai skenēt vienu transponderi, vienu satelītu vai vairākus satelītus."
 
@@ -2402,6 +2426,9 @@ msgstr "Čehija"
 msgid "D"
 msgstr "D"
 
+msgid "DAC"
+msgstr "DAC"
+
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -2411,8 +2438,14 @@ msgstr "DMM paplašināts"
 msgid "DMM normal"
 msgstr "DMM normāls"
 
+msgid "DTS"
+msgstr "DTS"
+
 msgid "DTS downmix"
 msgstr "DTS dekodēšana"
+
+msgid "DTS-HD HR/DTS-HD MA/DTS"
+msgstr "DTS-HD HR/DTS-HD MA/DTS"
 
 msgid "DUAL LAYER DVD"
 msgstr "Dubultslāņu DVD"
@@ -2491,6 +2524,9 @@ msgstr "Noklusētais taimera tips"
 
 msgid "Default+Picon"
 msgstr "Noklusējuma un pikona"
+
+msgid "Define additional delay in milliseconds before start of http(s) streams, e.g. to connect a remote tuner, you use a complex system of DiSEqC."
+msgstr "Norādiet papildu aizkavi milisekundēs pirms http(s) straumes sākuma, piemēram, lai pievienotu attālināto uztvērēju ar sarežģītu DiSEqC sistēmu."
 
 msgid "Define the location of the EPG Cache file."
 msgstr "Norādiet EPG kešatmiņas faila atrašanās vietu."
@@ -2707,6 +2743,9 @@ msgstr "Mape satur %(file)s un %(subdir)s."
 
 msgid "Disable"
 msgstr "Izslēgt"
+
+msgid "Disable FCC during recordings"
+msgstr "Izslēgt FCC ieraksta laikā"
 
 msgid "Disable Picture in Picture"
 msgstr "Izslēgt attēls attēlā"
@@ -2965,6 +3004,9 @@ msgstr "Mēģina lejuplādēt jaunu pakotņu sarakstu. Lūdzu gaidiet..."
 msgid "Downloading plugin information. Please wait..."
 msgstr "Lejuplādē spraudņu informāciju. Lūdzu uzgaidiet..."
 
+msgid "Downmix"
+msgstr "Dekodēt"
+
 msgid "Drama and Films"
 msgstr "Drāma un filmas"
 
@@ -3009,8 +3051,8 @@ msgid "ERROR - failed to scan (%s)!"
 msgstr "KĻŪDA - meklēšana neizdevās (%s)!"
 
 #, python-format
-msgid "ERROR downloading file %s"
-msgstr "Kļūda lejupielādējot failu %s"
+msgid "ERROR downloading file %s/%s"
+msgstr "Kļūda lejupielādējot failu %s/%s"
 
 msgid "East"
 msgstr "Austrumi"
@@ -3126,6 +3168,9 @@ msgstr "Lietot ātro auto skenēšanu"
 #, python-format
 msgid "Enable auto fastscan for %s"
 msgstr "Lietot ātro auto skenēšanu priekš %s"
+
+msgid "Enable bluetooth audio"
+msgstr "Aktivizēt bluetooth audio"
 
 msgid "Enable bouquet edit"
 msgstr "Aktivizēt buķešu rediģēšanu"
@@ -3299,10 +3344,6 @@ msgstr "Eritreja"
 
 msgid "Error"
 msgstr "Kļūda"
-
-#, python-format
-msgid "Error %s"
-msgstr "Kļūda %s"
 
 msgid "Error code"
 msgstr "Kļūdas kods"
@@ -3555,6 +3596,12 @@ msgstr ""
 "FBC automātiski\n"
 "neaktīvs"
 
+msgid "FCC enabled"
+msgstr "FCC aktivizēts"
+
+msgid "FCCSetup"
+msgstr "FCC Iestatījumi"
+
 msgid "FEC"
 msgstr "FEC"
 
@@ -3647,6 +3694,15 @@ msgstr "Farēru salas"
 
 msgid "Fast"
 msgstr "Ātrs"
+
+msgid "Fast Channel Change"
+msgstr "Atrā kanālu pārslēgšana"
+
+msgid "Fast Channel Change Setup"
+msgstr "Atrās kanālu pārslēgšanas iestatījumi"
+
+msgid "Fast Channel Change setup"
+msgstr "Atrās kanālu pārslēgšanas iestatījumi"
 
 msgid "Fast DiSEqC"
 msgstr "Ātrais DiSEqC"
@@ -3855,10 +3911,13 @@ msgid "Gateway"
 msgstr "Vārteja"
 
 msgid "General AC3 delay"
-msgstr "Vispārējā AC3 aizture"
+msgstr "AC3 aizture"
 
 msgid "General PCM delay"
-msgstr "Vispārējā PCM aizture"
+msgstr "PCM aizture"
+
+msgid "General bluetooth audio delay"
+msgstr "Bluetooth audio aizture"
 
 msgid "Genre"
 msgstr "Žanrs"
@@ -4019,6 +4078,9 @@ msgstr "HD2400"
 msgid "HD60/HD66SE/Multibox/Multibox SE"
 msgstr "HD60/HD66SE/Multibox/Multibox SE"
 
+msgid "HDMI"
+msgstr "HDMI"
+
 msgid "HDMI Colordepth"
 msgstr "HDMI krāsu dziļums"
 
@@ -4124,6 +4186,9 @@ msgstr "Hierarhijas info"
 msgid "High bitrate support"
 msgstr "Augsta bitreita atbalsts"
 
+msgid "History Prev/Next"
+msgstr "Vēsture"
+
 msgid "History back"
 msgstr "Vēsture atpakaļ"
 
@@ -4177,6 +4242,9 @@ msgstr "Cik minūšu vēlaties pievienot ierakstam?"
 
 msgid "How many minutes do you want to record?"
 msgstr "Cik minūšu vēlaties ierakstīt?"
+
+msgid "Http(s) stream start delay"
+msgstr "Http(s) straumes aizkave"
 
 msgid "Hue"
 msgstr "Tonis"
@@ -4947,6 +5015,9 @@ msgstr "Mauritānija"
 
 msgid "Mauritius"
 msgstr "Maurīcija"
+
+msgid "Max channels"
+msgstr "Kanālu skaits"
 
 msgid "Max memory positions"
 msgstr "Maksimālā pozīcija atmiņā"
@@ -5809,6 +5880,9 @@ msgstr "Vecāku kontroles kanālu redaktors"
 msgid "Parental control setup"
 msgstr "Vecāku kontroles iestatījumi"
 
+msgid "Passthrough"
+msgstr "Nemainīt"
+
 msgid "Password"
 msgstr "Parole"
 
@@ -6550,6 +6624,9 @@ msgstr "Ier"
 msgid "Recall to previous service"
 msgstr "Atgriezties uz iepriekšējo kanālu"
 
+msgid "Receiver or driver does not support FCC"
+msgstr "Uztvērējs vai draiveris neatbalsta FCC"
+
 msgid "Reception settings"
 msgstr "Uztveršanas iestatījumi"
 
@@ -6961,6 +7038,9 @@ msgstr "SNR"
 
 msgid "SNR:"
 msgstr "SNR:"
+
+msgid "SPDIF"
+msgstr "SPDIF"
 
 msgid "SRT file"
 msgstr "SRT fails"
@@ -7678,9 +7758,8 @@ msgstr "Iestatīt kā starta kanālu"
 msgid "Set blocktimes by weekday"
 msgstr "Iestatīt bloķēšanas laikus pa dienām"
 
-#, fuzzy
 msgid "Set cursor on service from channel history"
-msgstr "Pārslēgt uz iepriekšējo kanālu vēsturē"
+msgstr "Pārvietot kursoru uz iepriekšējo kanālu"
 
 msgid "Set default"
 msgstr "Pēc noklusējuma"
@@ -9144,11 +9223,17 @@ msgstr "Attēlo ciparus pie iestatījumiem vai spraudņiem lai tos izmantotu āt
 msgid "This option allows you to show the full screen path leading to the current screen."
 msgstr "Atļauj parādīt pilnu ceļu uz esošo ekrānu."
 
+msgid "This option allows you to switch audio to bluetooth speakers."
+msgstr "Atļauj iestatīt audio uz bluetooth skaļruņiem."
+
 msgid "This option allows you to view the old and new settings side by side."
 msgstr "Attēlo vecos un jaunos iestatījumus blakus."
 
 msgid "This option can be useful for long HDMI cables."
 msgstr "Šī opcija var būt noderīga gariem HDMI kabeļiem."
+
+msgid "This option configures the general audio delay for bluetooth speakers."
+msgstr "Uzstāda aizturi bluetooth skaļruņiem."
 
 msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr "Iestata musquito trokšņa slāpēšanas līmeni (musquito troksnis ir traucējumi spēcīgas saspiešanas rezultātā). Diemžēl tas samazina attēla detalizāciju."
@@ -10082,6 +10167,9 @@ msgstr "W"
 msgid "WLAN connection"
 msgstr "Bezvadu savienojums"
 
+msgid "WMA Pro downmix"
+msgstr "WMA Pro dekodēšana"
+
 msgid "WSS on 4:3"
 msgstr "WSS uz 4:3"
 
@@ -10407,9 +10495,8 @@ msgstr "Ja ieslēgts, uztvērējs izvēlēsies AC3 celiņu (ja pieejams)."
 msgid "When enabled, the receiver will select an AC3+ track (when available)."
 msgstr "Ja ieslēgts, uztvērējs izvēlēsies AC3+ celiņu (ja pieejams)."
 
-#, fuzzy
 msgid "When enabled, then when changing bouquets, set the cursor on the service from the channel history in the channel selection list."
-msgstr "Ja ieslēgts, ar virziena pogām ap OK jūs varat regulēt skaļumu, nevis atvērt kanālu sarakstu"
+msgstr "Ja ieslēgts, tad mainot buķetes kursors tiks pārvietots uz iepriekšējo kanālu no izmantošanas vēstures."
 
 msgid "When enabled, this setting has more weight than 'Preferred tuner for recordings'."
 msgstr "Ja ieslēgts, šis iestatījums tiks lietots 'Ieteicamais uztvērējs ierakstam' vietā."
@@ -10761,6 +10848,9 @@ msgstr "Zambija"
 msgid "Zap"
 msgstr "Pārslēgt"
 
+msgid "Zap Up/Down"
+msgstr "Pārslēgt uz augšu/leju"
+
 msgid "Zap back to previously tuned service?"
 msgstr "Atgriezties uz iepriekš uztverto kanālu?"
 
@@ -11001,6 +11091,15 @@ msgstr "savienots"
 msgid "controlled by HDMI"
 msgstr "kontrolē HDMI"
 
+msgid "convert to AC3"
+msgstr "konvertē uz AC3"
+
+msgid "convert to DTS"
+msgstr "konvertē uz DTS"
+
+msgid "convert to multi-channel PCM"
+msgstr "konvertē uz daudzkanālu PCM"
+
 msgid "cooking"
 msgstr "cepšana"
 
@@ -11122,6 +11221,9 @@ msgid "experimental film/video"
 msgstr "eksperimentālās filmas/video"
 
 msgid "extra wide"
+msgstr "ļoti plašs"
+
+msgid "extrawide"
 msgstr "ļoti plašs"
 
 msgid "failed"
@@ -11487,6 +11589,9 @@ msgstr "pirmsskolas bērnu programma"
 msgid "preserve bookmarks in cuts"
 msgstr "saglabāt grāmatzīmes izgriestajos"
 
+msgid "priority"
+msgstr "prioritāte"
+
 msgid "receiver software because updates are available."
 msgstr "uztvērēja programmatūru jo atjauninājumi pieejami."
 
@@ -11757,6 +11862,12 @@ msgstr "netestēts"
 
 msgid "until standby/restart"
 msgstr "līdz gaidstāvei/pārstartēšanai"
+
+msgid "use best / controlled by HDMI"
+msgstr "izmantot labāko no HDMI"
+
+msgid "use_hdmi_cacenter"
+msgstr "izmantot hdmi cacenter"
 
 msgid "user defined"
 msgstr "lietotāja definēts"

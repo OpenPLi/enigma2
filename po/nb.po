@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-26 15:37+0100\n"
-"PO-Revision-Date: 2021-11-27 11:53+0100\n"
+"POT-Creation-Date: 2022-05-08 10:54+0200\n"
+"PO-Revision-Date: 2022-04-29 18:05+0200\n"
 "Last-Translator: GeirJ <dummy@dummy.com>\n"
 "Language-Team: GeirJ\n"
 "Language: nb\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 3.0.1\n"
 "X-Poedit-Bookmarks: -1,-1,-1,-1,-1,31,1959,-1,-1,-1\n"
 
 #
@@ -643,8 +643,22 @@ msgstr "A/V innstilling"
 msgid "AAC downmix"
 msgstr "AAC nedskalering"
 
+#
+msgid "AAC transcoding"
+msgstr "AAC omkoding"
+
+msgid "AAC+ downmix"
+msgstr "AAC+ nedskalering"
+
+msgid "AC3"
+msgstr "AC3"
+
 msgid "AC3 downmix"
 msgstr "AC3 nedskalering"
+
+#
+msgid "AC3 transcoding"
+msgstr "AC3 transkoding"
 
 msgid "ACQUIRING TSID/ONID"
 msgstr "ANSKAFFE TSID/ONID"
@@ -1115,9 +1129,8 @@ msgstr "Armenia"
 msgid "Artist"
 msgstr "Artist"
 
-#, fuzzy
 msgid "Arts/Culture (without music)"
-msgstr "kunst/kultur (uten musikk, generelt)"
+msgstr "Kunst/Kultur (uten musikk)"
 
 msgid "Aruba"
 msgstr "Aruba"
@@ -1305,7 +1318,7 @@ msgid "Available locales are:"
 msgstr "Tilgjengelige nasjoner er:"
 
 msgid "Axas E4HD Ultra"
-msgstr ""
+msgstr "Axas E4HD Ultra"
 
 msgid "Azerbaijan"
 msgstr "Aserbajdsjan"
@@ -1598,7 +1611,7 @@ msgstr "Kabel-TV søk"
 
 #, python-format
 msgid "Cable scan executable utility not found '%s'!"
-msgstr ""
+msgstr "Det kjørbare verktøyet for kabel TV søk ble ikke funnet '%s'!"
 
 msgid "Cabo Verde"
 msgstr "Kapp Verde"
@@ -1862,9 +1875,8 @@ msgstr ""
 "Kontrollerer tuner %s\n"
 "DiSEqC port %s for %s"
 
-#, fuzzy
 msgid "Children/Youth/Education/Science"
-msgstr "Utdanning/Vitenskap/..."
+msgstr "Barn/Ungdom/Utdanning/Vitenskap"
 
 msgid "Chile"
 msgstr "Chile"
@@ -1884,11 +1896,23 @@ msgstr "Velg tuner"
 msgid "Choose bouquet"
 msgstr "Velg kanalliste"
 
+msgid "Choose whether AAC sound tracks should be transcoded."
+msgstr "Velg om AAC lydspor skal transkodes."
+
+msgid "Choose whether AC3 sound tracks should be transcoded."
+msgstr "Velg om AC3 lydspor skal transkodes."
+
+msgid "Choose whether WMA Pro sound tracks should be downmixed."
+msgstr "Velg om WMA Pro lydspor skal nedmikses."
+
+msgid "Choose whether multi channel aac+ sound tracks should be downmixed to stereo."
+msgstr "Velg om flerkanals aac+-lydspor skal nedmikses til stereo."
+
 msgid "Choose whether to scan a single transponder, one satellite or multiple satellites."
-msgstr ""
+msgstr "Velg om du vil søke en enkelt transponder, en satellitt eller flere satellitter."
 
 msgid "Choose whether to scan for free services only or whether to include paid/encrypted services too."
-msgstr ""
+msgstr "Velg om du kun vil søke etter gratis kanaler eller om du også vil inkludere betalte/krypterte tjenester."
 
 msgid "Choose which tuner to configure."
 msgstr "Velg hvilken tuner du vil konfigurere."
@@ -2635,6 +2659,9 @@ msgstr "Tsjekkia"
 msgid "D"
 msgstr "HD"
 
+msgid "DAC"
+msgstr "DAC"
+
 #
 msgid "DHCP"
 msgstr "DHCP"
@@ -2646,8 +2673,14 @@ msgstr "DMM avansert"
 msgid "DMM normal"
 msgstr "DMM normal"
 
+msgid "DTS"
+msgstr "DTS"
+
 msgid "DTS downmix"
 msgstr "DTS nedskalering"
+
+msgid "DTS-HD HR/DTS-HD MA/DTS"
+msgstr "DTS-HD HR/DTS-HD MA/DTS"
 
 #
 msgid "DUAL LAYER DVD"
@@ -2739,6 +2772,9 @@ msgstr "Standard timer type"
 #
 msgid "Default+Picon"
 msgstr "Standard+Kanallogo"
+
+msgid "Define additional delay in milliseconds before start of http(s) streams, e.g. to connect a remote tuner, you use a complex system of DiSEqC."
+msgstr "Definer ytterligere forsinkelse i millisekunder før start av http(s)-strømmer, f.eks. å koble til en fjernmottaker bruker du et avansert DiSEqC oppsett."
 
 msgid "Define the location of the EPG Cache file."
 msgstr "Velg plassering for EPG hurtigbuffer fil."
@@ -2974,6 +3010,9 @@ msgstr "Mappen inneholder %(file)s og %(subdir)s."
 msgid "Disable"
 msgstr "Deaktiver"
 
+msgid "Disable FCC during recordings"
+msgstr "Deaktiver FCC under opptak"
+
 msgid "Disable Picture in Picture"
 msgstr "Stopp bilde i bilde funksjon"
 
@@ -2998,9 +3037,8 @@ msgstr "Deaktivert"
 msgid "Disk space to reserve for recordings (in GB)"
 msgstr "Lagringsplass avsatt til opptak (i GB)"
 
-#, fuzzy
 msgid "Disk state: "
-msgstr "søkestatus"
+msgstr "Disk status: "
 
 #
 msgid "Display 16:9 content as"
@@ -3259,9 +3297,8 @@ msgid "Downloadable plugins"
 msgstr "Nedlastbare tillegg"
 
 #
-#, fuzzy
 msgid "Downloaded Images"
-msgstr "Laster ned operativsystem"
+msgstr "Nedlastede Images"
 
 #
 msgid "Downloading"
@@ -3279,8 +3316,11 @@ msgstr "Laster ned en ny pakkeliste. Vennligst vent..."
 msgid "Downloading plugin information. Please wait..."
 msgstr "Laster ned informasjon om utvidelser. Vennligst vent litt..."
 
+msgid "Downmix"
+msgstr "Nedskalering"
+
 msgid "Drama and Films"
-msgstr ""
+msgstr "Drama og filmer"
 
 msgid "Drop unconfigured satellites"
 msgstr "Fjern satellitter som ikke brukes"
@@ -3327,8 +3367,8 @@ msgid "ERROR - failed to scan (%s)!"
 msgstr "FEIL - kunne ikke søke (%s)!"
 
 #, python-format
-msgid "ERROR downloading file %s"
-msgstr "FEIL under nedlasting av fil %s"
+msgid "ERROR downloading file %s/%s"
+msgstr "FEIL under nedlasting av filen %s/%s"
 
 #
 msgid "East"
@@ -3452,6 +3492,10 @@ msgstr "Aktiver auto fastscan"
 #, python-format
 msgid "Enable auto fastscan for %s"
 msgstr "Aktiver auto fastscan for %s"
+
+#
+msgid "Enable bluetooth audio"
+msgstr "Aktiver Bluetooth lyd"
 
 #
 msgid "Enable bouquet edit"
@@ -3650,11 +3694,6 @@ msgstr "Eritrea"
 #
 msgid "Error"
 msgstr "Feil"
-
-#
-#, python-format
-msgid "Error %s"
-msgstr "Feil %s"
 
 msgid "Error code"
 msgstr "Feil kode"
@@ -3940,6 +3979,14 @@ msgstr ""
 "ubrukt"
 
 #
+msgid "FCC enabled"
+msgstr "FCC aktivert"
+
+#
+msgid "FCCSetup"
+msgstr "FCC oppsett"
+
+#
 msgid "FEC"
 msgstr "Feilkorreksjon FEC"
 
@@ -4041,6 +4088,15 @@ msgstr "Færøyene"
 #
 msgid "Fast"
 msgstr "Hurtig"
+
+msgid "Fast Channel Change"
+msgstr "Hurtig kanal bytte"
+
+msgid "Fast Channel Change Setup"
+msgstr "Oppsett for hurtig kanal bytte"
+
+msgid "Fast Channel Change setup"
+msgstr "Oppsett for hurtig kanal bytte"
 
 msgid "Fast DiSEqC"
 msgstr "Hurtig DiSEqC"
@@ -4225,9 +4281,8 @@ msgstr "Transparent"
 msgid "Full view resolution"
 msgstr "Fullskjerms oppløsning"
 
-#, fuzzy
 msgid "Fullbackup Images"
-msgstr "Reserve timer"
+msgstr "Sikkerhetskopier Images"
 
 msgid "Function of OK button"
 msgstr "Funksjon for OK knapp"
@@ -4273,6 +4328,9 @@ msgstr "AC3 forsinkelse"
 
 msgid "General PCM delay"
 msgstr "PCM forsinkelse"
+
+msgid "General bluetooth audio delay"
+msgstr "Generell Bluetooth lyd forsinkelse"
 
 #
 msgid "Genre"
@@ -4449,9 +4507,11 @@ msgstr "HD liste"
 msgid "HD2400"
 msgstr "HD2400"
 
-#, fuzzy
 msgid "HD60/HD66SE/Multibox/Multibox SE"
-msgstr "HD60/Multibox/Multibox SE"
+msgstr "HD60/HD66SE/Multibox/Multibox SE"
+
+msgid "HDMI"
+msgstr "HDMI"
 
 msgid "HDMI Colordepth"
 msgstr "HDMI fargedybde"
@@ -4563,6 +4623,9 @@ msgstr "Hierarki info"
 msgid "High bitrate support"
 msgstr "Høy bitrate støtte"
 
+msgid "History Prev/Next"
+msgstr "Historie Forrige/Neste"
+
 #
 msgid "History back"
 msgstr "Historikk"
@@ -4623,6 +4686,9 @@ msgstr "Hvor mange minutter vil du legge til opptaket?"
 #
 msgid "How many minutes do you want to record?"
 msgstr "Hvor mange minutter vil du ta opp?"
+
+msgid "Http(s) stream start delay"
+msgstr "Http(s) strøm startforsinkelse"
 
 #
 msgid "Hue"
@@ -5499,6 +5565,10 @@ msgid "Mauritius"
 msgstr "Mauritius"
 
 #
+msgid "Max channels"
+msgstr "Maks kanaler"
+
+#
 msgid "Max memory positions"
 msgstr "Maks antall minne-posisjoner"
 
@@ -5936,9 +6006,8 @@ msgstr "Ny Caledonia"
 msgid "New Zealand"
 msgstr "New Zealand"
 
-#, fuzzy
 msgid "News/Current Affairs/Social"
-msgstr "Nyheter aktuelle saker"
+msgstr "Nyheter/Aktuelt/Samfunn"
 
 msgctxt "button label, 'next screen'"
 msgid "Next"
@@ -6461,6 +6530,9 @@ msgstr "Foreldrekontroll og kanalinnstillinger"
 #
 msgid "Parental control setup"
 msgstr "Foreldrekontroll oppsett"
+
+msgid "Passthrough"
+msgstr "Gjennomgang"
 
 msgid "Password"
 msgstr "Passord"
@@ -7306,6 +7378,9 @@ msgstr "Opptak"
 msgid "Recall to previous service"
 msgstr "Husk tilbake til forrige kanal"
 
+msgid "Receiver or driver does not support FCC"
+msgstr "Mottaker eller driver støtter ikke FCC"
+
 #
 msgid "Reception settings"
 msgstr "Innstilling mottaksforhold"
@@ -7479,7 +7554,7 @@ msgid "Remove terrestrial services"
 msgstr "Fjern bakkenett kanaler"
 
 msgid "Remove the services on scanned transponders before re-adding services?"
-msgstr ""
+msgstr "Vil du fjerne transponder kanalene før du legger til kanaler på nytt?"
 
 #
 msgid "Remove this logfile"
@@ -7766,6 +7841,9 @@ msgstr "SNR"
 msgid "SNR:"
 msgstr "SNR:"
 
+msgid "SPDIF"
+msgstr "SPDIF"
+
 msgid "SRT file"
 msgstr "SRT fil"
 
@@ -7959,7 +8037,7 @@ msgid "Scan state"
 msgstr "Søkestatus"
 
 msgid "Scan using transponders on NIT table? 'No' will use transponders in xml file."
-msgstr ""
+msgstr "Søke med transpondere på NIT-tabellen? 'Nei' vil bruke transpondere i xml-filformat."
 
 msgid "Scan wireless networks"
 msgstr "Søk etter trådløse nettverk"
@@ -8356,17 +8434,15 @@ msgstr "Velg video modus"
 msgid "Select whether your SCR device is externally powered."
 msgstr "Velg om SCR-enheten er eksternt drevet."
 
-#, fuzzy
 msgid "Select which satellite to scan."
-msgstr "Velg satellitter"
+msgstr "Velg hvilken satellitt du vil søke."
 
 #
-#, fuzzy
 msgid "Select which transponder to scan."
-msgstr "Velg distributør som skal legges til..."
+msgstr "Velg hvilken transponder som skal søkes."
 
 msgid "Select which tuner to use for the scan."
-msgstr ""
+msgstr "Velg hvilken tuner som skal brukes til søket."
 
 #
 msgid "Select wireless network"
@@ -8549,9 +8625,8 @@ msgid "Set blocktimes by weekday"
 msgstr "Still inn blokkeringstid med ukedager"
 
 #
-#, fuzzy
 msgid "Set cursor on service from channel history"
-msgstr "Gå til sist sette kanal"
+msgstr "Sett markør på tjeneste fra kanal historikk"
 
 #
 msgid "Set default"
@@ -8947,9 +9022,8 @@ msgstr "Vis varsling før valget 'Ignorer konflikt'"
 msgid "Show warning when timeshift is stopped"
 msgstr "Vis varsling når timeskift stoppes"
 
-#, fuzzy
 msgid "Show/Game Show/Leisure hobbies"
-msgstr "Fritid hobby"
+msgstr "Show/Game Show/Fritidshobbyer"
 
 #
 msgid "Show/hide window"
@@ -9093,11 +9167,11 @@ msgstr "Spor %d"
 
 #, python-format
 msgid "Slot %s / FBC in %s"
-msgstr ""
+msgstr "Spor %s / FBC i %s"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Slot %s / FBC virtual %s"
-msgstr "FBC virtuell"
+msgstr "Spor %s / FBC virtuell %s"
 
 msgid "Slovak"
 msgstr "Slovakisk"
@@ -9321,7 +9395,6 @@ msgid "Standard"
 msgstr "Standard"
 
 #
-#, fuzzy
 msgid "Standard list"
 msgstr "Standard liste"
 
@@ -9779,7 +9852,7 @@ msgstr "TEKST"
 
 #. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
 msgid "TRANSLATOR_INFO"
-msgstr "Oversettelse til norsk bokmål oppdatert den 27.11.2021"
+msgstr "Oversettelse til norsk bokmål oppdatert den 29.04.2022"
 
 #
 msgid "TS file is too large for ISO9660 level 1!"
@@ -10173,11 +10246,17 @@ msgstr "Dette alternativet lar deg vise meny med eller uten snarveis nummer."
 msgid "This option allows you to show the full screen path leading to the current screen."
 msgstr "Med dette alternativet kan du vise fullskjermbanen som fører til gjeldende visning."
 
+msgid "This option allows you to switch audio to bluetooth speakers."
+msgstr "Dette alternativet lar deg bytte lyd til Bluetooth høyttalere."
+
 msgid "This option allows you to view the old and new settings side by side."
 msgstr "Med dette alternativet kan du vise de gamle og nye innstillingene side ved side."
 
 msgid "This option can be useful for long HDMI cables."
 msgstr "Dette alternativet kan være nyttig for lange HDMI-kabler."
+
+msgid "This option configures the general audio delay for bluetooth speakers."
+msgstr "Dette alternativet konfigurerer den generelle lydforsinkelsen for Bluetooth høyttalere."
 
 msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr "Med dette alternativet kan du finjustere mosquito støy (Mosquito støy er tilfeldig aliasing som følge av kraftig komprimering). Tydeligvis går dette på bekostning av bildedetaljer."
@@ -11091,7 +11170,7 @@ msgstr ""
 
 #
 msgid "Video mode selection."
-msgstr "Innstilling for bilde."
+msgstr "Valg av video modus."
 
 #
 msgid "Video output"
@@ -11223,6 +11302,9 @@ msgstr "W"
 
 msgid "WLAN connection"
 msgstr "WLAN tilkoblet"
+
+msgid "WMA Pro downmix"
+msgstr "WMA Pro downmix"
 
 #
 msgid "WSS on 4:3"
@@ -11525,9 +11607,8 @@ msgstr "Hvis aktivert, vil tekst-TV-teksting vises på den opprinnelige plasseri
 msgid "When enabled, the VCR scart option will be shown on the main menu"
 msgstr "Hvis aktivert, vil VCR scart innstilling vises på hovedmenyen"
 
-#, fuzzy
 msgid "When enabled, the channel selection list will be hidden while listening to a radio channel. When disabled, the option 'Auto play last service in radio mode' is available."
-msgstr "Hvis aktivert, vil kanallisten være skjult mens du lytter til en radiokanal"
+msgstr "Når aktivert, vil kanallisten skjules mens du lytter til en radiokanal. Ved deaktivert, er alternativet 'Autoplay av siste kanal i radiomodus' tilgjengelig."
 
 msgid "When enabled, the infobar will be displayed when a new event starts."
 msgstr "Hvis aktivert, vil informasjonslinjen vises når neste program starter."
@@ -11556,9 +11637,8 @@ msgstr "Hvis aktivert, vil mottakeren bruke AC3 spor (når tilgjengelig)."
 msgid "When enabled, the receiver will select an AC3+ track (when available)."
 msgstr "Hvis aktivert, vil mottakeren bruke AC3+ spor (når tilgjengelig)."
 
-#, fuzzy
 msgid "When enabled, then when changing bouquets, set the cursor on the service from the channel history in the channel selection list."
-msgstr "Hvis aktivert, kan du kontrollere volumet med pilknappene i stedet for å få kanallisten"
+msgstr "Når aktivert, og under bytte av favoritter, setter du markøren på kanalen fra kanalhistorikken i kanallisten."
 
 msgid "When enabled, this setting has more weight than 'Preferred tuner for recordings'."
 msgstr "Hvis aktivert, vil valget ha høyere prioritet enn 'Foretrukket tuner for opptak'."
@@ -11930,6 +12010,9 @@ msgstr "Zambia"
 msgid "Zap"
 msgstr "Gå til"
 
+msgid "Zap Up/Down"
+msgstr "Zap opp/ned"
+
 #
 msgid "Zap back to previously tuned service?"
 msgstr "Gå tilbake til forrige kanal?"
@@ -11980,9 +12063,8 @@ msgstr "Timer skiftet til valgt kanal %s!"
 msgid "Zgemma H.S/H.2S/H.2H/H5/H7(old model)"
 msgstr "Zgemma H.S/H.2S/H.2H/H5/H7(gammel modell)"
 
-#, fuzzy
 msgid "Zgemma H9(old model)/I55Plus/H8"
-msgstr "Zgemma H9(gammel modell)/I55Plus"
+msgstr "Zgemma H9(gammel modell)/I55Plus/H8"
 
 msgid "Zgemma Star S/2S/H1/H2"
 msgstr "Zgemma Star S/2S/H1/H2"
@@ -12026,9 +12108,8 @@ msgstr "aktiver nettverksinnstilling"
 msgid "active"
 msgstr "aktiv"
 
-#, fuzzy
 msgid "active "
-msgstr "aktiv"
+msgstr "aktiv "
 
 #
 msgid "actual time only"
@@ -12037,9 +12118,8 @@ msgstr "aktuell tid"
 msgid "additional cable of rotor"
 msgstr "ekstra kabel for rotor"
 
-#, fuzzy
 msgid "adult movie"
-msgstr "voksenfilm/drama"
+msgstr "voksen film"
 
 #
 msgid "advanced"
@@ -12176,9 +12256,8 @@ msgstr "sentrert, brytning"
 msgid "chapters"
 msgstr "kapitler"
 
-#, fuzzy
 msgid "childrens's youth program (general)"
-msgstr "barne/ungdomsprogram (generelt)"
+msgstr "barn og ungdomsprogram (generelt)"
 
 #
 msgid "circular left"
@@ -12204,6 +12283,15 @@ msgstr "tilkoblet"
 
 msgid "controlled by HDMI"
 msgstr "kontrollert av HDMI"
+
+msgid "convert to AC3"
+msgstr "konverter til AC3"
+
+msgid "convert to DTS"
+msgstr "konverter til DTS"
+
+msgid "convert to multi-channel PCM"
+msgstr "konverter til flerkanals PCM"
 
 msgid "cooking"
 msgstr "matlaging"
@@ -12268,7 +12356,6 @@ msgstr "øst"
 msgid "economics/social advisory"
 msgstr "økonomi/sosial rådgivende"
 
-#, fuzzy
 msgid "educational/science/factual topics (general)"
 msgstr "utdanning/vitenskap/faktaprogram (generelt)"
 
@@ -12345,6 +12432,9 @@ msgstr "eksperimentell film/video"
 msgid "extra wide"
 msgstr "ekstra wide"
 
+msgid "extrawide"
+msgstr "ekstra bred"
+
 #
 msgid "failed"
 msgstr "feilet"
@@ -12369,9 +12459,8 @@ msgstr "film/kino"
 msgid "fine arts"
 msgstr "kunst"
 
-#, fuzzy
 msgid "fitness and health"
-msgstr "trening & helse"
+msgstr "kondisjon og helse"
 
 #
 msgid "flat alphabetic"
@@ -12535,9 +12624,8 @@ msgstr "lytter til hotplug program"
 msgid "literature"
 msgstr "litteratur"
 
-#, fuzzy
 msgid "local sports"
-msgstr "lagidrett"
+msgstr "lokal idrett"
 
 #
 msgid "locked"
@@ -12594,9 +12682,8 @@ msgstr "gå til til første oppføring"
 msgid "move up to previous entry"
 msgstr "gå til til forrige oppføring"
 
-#, fuzzy
 msgid "movie (general)"
-msgstr "film/drama (generelt)"
+msgstr "film (generelt)"
 
 #
 msgid "multi"
@@ -12772,7 +12859,11 @@ msgid "pre-school children's program"
 msgstr "førskole barneprogram"
 
 msgid "preserve bookmarks in cuts"
-msgstr ""
+msgstr "bevare bokmerker i kutt"
+
+#
+msgid "priority"
+msgstr "prioritet"
 
 msgid "receiver software because updates are available."
 msgstr "mottaker programvare fordi oppdateringer er tilgjengelige."
@@ -12801,10 +12892,8 @@ msgstr "slett etter denne posisjon"
 msgid "remove before this position"
 msgstr "slett før denne posisjonen"
 
-#
-#, fuzzy
 msgid "remove bookmarks in cuts"
-msgstr "Fjern bokmerke"
+msgstr "fjerne bokmerker i kutt"
 
 msgid "remove this mark"
 msgstr "fjern dette merket"
@@ -12864,9 +12953,8 @@ msgstr "velg meny"
 msgid "serious music/classic music"
 msgstr "seriøs musikk/klassisk musikk"
 
-#, fuzzy
 msgid "serious/classical/religious/historical drama"
-msgstr "seriøs/klassisk/religiøs/historisk film/drama"
+msgstr "seriøst/klassisk/religiøst/historisk drama"
 
 msgid "service off-air"
 msgstr "kanalen sender ikke"
@@ -12949,16 +13037,14 @@ msgstr "plass%s - %s, med sikkerhetskopi"
 msgid "slot%s - %s, without backup"
 msgstr "plass%s - %s, uten sikkerhetskopi"
 
-#, fuzzy
 msgid "soap/melodrama/folkloric"
-msgstr "såpe/melodrama/folklore"
+msgstr "såpe/melodrama/folkloristisk"
 
 msgid "social/political issues/economics (general)"
 msgstr "sosialt/politiske spørsmål/økonomi (generelt)"
 
-#, fuzzy
 msgid "social/spiritual sciences"
-msgstr "sosialt/åndsvitenskap"
+msgstr "samfunn/åndsvitenskap"
 
 msgid "space"
 msgstr "plass"
@@ -12979,9 +13065,8 @@ msgstr "sports magasin"
 msgid "standard"
 msgstr "standard"
 
-#, fuzzy
 msgid "standby "
-msgstr "Slå av"
+msgstr "avslått "
 
 #
 msgid "start cut here"
@@ -13013,9 +13098,8 @@ msgid "talk show"
 msgstr "talkshow"
 
 msgid "team sports/excluding football"
-msgstr ""
+msgstr "lagidrett/unntatt fotball"
 
-#, fuzzy
 msgid "technology/natural sciences"
 msgstr "teknologi/naturvitenskap"
 
@@ -13076,6 +13160,12 @@ msgstr "lar seg ikke teste"
 
 msgid "until standby/restart"
 msgstr "til slår av/starter på nytt"
+
+msgid "use best / controlled by HDMI"
+msgstr "bruk best / kontrollert av HDMI"
+
+msgid "use_hdmi_cacenter"
+msgstr "bruk HDMI forhåndsvalg"
 
 #
 msgid "user defined"

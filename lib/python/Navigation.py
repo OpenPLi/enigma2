@@ -37,6 +37,7 @@ class Navigation:
 		self.currentlyPlayingServiceReference = None
 		self.currentlyPlayingServiceOrGroup = None
 		self.currentlyPlayingService = None
+		self.skipServiceReferenceReset = False
 		self.RecordTimer = RecordTimer.RecordTimer()
 		self.__wasTimerWakeup = getFPWasTimerWakeup()
 		self.__isRestartUI = config.misc.RestartUI.value
@@ -74,8 +75,9 @@ class Navigation:
 		for x in self.event:
 			x(i)
 		if i == iPlayableService.evEnd:
-			self.currentlyPlayingServiceReference = None
-			self.currentlyPlayingServiceOrGroup = None
+			if not self.skipServiceReferenceReset:
+				self.currentlyPlayingServiceReference = None
+				self.currentlyPlayingServiceOrGroup = None
 			self.currentlyPlayingService = None
 
 	def dispatchRecordEvent(self, rec_service, event):
@@ -134,7 +136,6 @@ class Navigation:
 			else:
 				playref = ref
 			if self.pnav:
-				self.pnav.stopService()
 				self.currentlyPlayingServiceReference = playref
 				self.currentlyPlayingServiceOrGroup = ref
 				if startPlayingServiceOrGroup and startPlayingServiceOrGroup.flags & eServiceReference.isGroup and not ref.flags & eServiceReference.isGroup:
@@ -169,10 +170,12 @@ class Navigation:
 								if config.usage.frontend_priority_dvbs.value != config.usage.frontend_priority.value:
 									setPreferredTuner(int(config.usage.frontend_priority_dvbs.value))
 									setPriorityFrontend = True
+				self.skipServiceReferenceReset = True
 				if self.pnav.playService(playref):
 					print("[Navigation] Failed to start: ", playref.toString())
 					self.currentlyPlayingServiceReference = None
 					self.currentlyPlayingServiceOrGroup = None
+				self.skipServiceReferenceReset = False
 				if setPriorityFrontend:
 					setPreferredTuner(int(config.usage.frontend_priority.value))
 				return 0

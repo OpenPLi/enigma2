@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-26 15:37+0100\n"
+"POT-Creation-Date: 2022-05-08 10:47+0200\n"
 "PO-Revision-Date: 2021-05-24 17:48+0300\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: openPLi Dimitrij\n"
@@ -605,10 +605,22 @@ msgid "A/V settings"
 msgstr "Аудио/видео настройки"
 
 msgid "AAC downmix"
-msgstr "AAC микширование"
+msgstr "Микширование AAC"
+
+msgid "AAC transcoding"
+msgstr "Транскодирование AAC"
+
+msgid "AAC+ downmix"
+msgstr "Микширование AAC+"
+
+msgid "AC3"
+msgstr "AC3"
 
 msgid "AC3 downmix"
-msgstr "AC3 микширование"
+msgstr "Микширование AC3"
+
+msgid "AC3 transcoding"
+msgstr "Транскодирование AC3"
 
 msgid "ACQUIRING TSID/ONID"
 msgstr "ПОЛУЧЕНИЕ TSID/ONID"
@@ -1711,6 +1723,18 @@ msgstr "Выбор тюнера"
 msgid "Choose bouquet"
 msgstr "Выбор букета"
 
+msgid "Choose whether AAC sound tracks should be transcoded."
+msgstr "Выберите, следует ли перекодировать звуковые дорожки AAC."
+
+msgid "Choose whether AC3 sound tracks should be transcoded."
+msgstr "Выберите, следует ли перекодировать звуковые дорожки AC3."
+
+msgid "Choose whether WMA Pro sound tracks should be downmixed."
+msgstr "Выберите, следует ли микшировать звуковые дорожки WMA Pro."
+
+msgid "Choose whether multi channel aac+ sound tracks should be downmixed to stereo."
+msgstr "Выберите, следует ли микшировать многоканальные звуковые дорожки AAC+ в стерео."
+
 msgid "Choose whether to scan a single transponder, one satellite or multiple satellites."
 msgstr "Выберите, сканировать ли один транспондер, один спутник или несколько спутников."
 
@@ -2401,6 +2425,9 @@ msgstr "Czechia"
 msgid "D"
 msgstr "D"
 
+msgid "DAC"
+msgstr "DAC"
+
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -2410,8 +2437,14 @@ msgstr "DMM расширенный"
 msgid "DMM normal"
 msgstr "DMM нормальный"
 
+msgid "DTS"
+msgstr "DTS"
+
 msgid "DTS downmix"
-msgstr "DTS микширование"
+msgstr "Микширование DTS"
+
+msgid "DTS-HD HR/DTS-HD MA/DTS"
+msgstr "DTS-HD HR/DTS-HD MA/DTS"
 
 msgid "DUAL LAYER DVD"
 msgstr "DUAL LAYER (двойной слой) DVD"
@@ -2490,6 +2523,9 @@ msgstr "Тип таймера по дефолту"
 
 msgid "Default+Picon"
 msgstr "Дефолт+пикон"
+
+msgid "Define additional delay in milliseconds before start of http(s) streams, e.g. to connect a remote tuner, you use a complex system of DiSEqC."
+msgstr "Определите дополнительную задержку в миллисекундах перед стартом стрима http(s), например в подключенном удаленнoм тюнере используется сложная система DiSEqC."
 
 msgid "Define the location of the EPG Cache file."
 msgstr "Выбор расположения кеша EPG файла."
@@ -2706,6 +2742,9 @@ msgstr " Директория содержит %(file)s и %(subdir)s."
 
 msgid "Disable"
 msgstr "Отключить"
+
+msgid "Disable FCC during recordings"
+msgstr "Отключать FCC во время записи"
 
 msgid "Disable Picture in Picture"
 msgstr "Отключить PiP (картинку в картинке)"
@@ -2964,6 +3003,9 @@ msgstr "Пытаемся загрузить новый список пакето
 msgid "Downloading plugin information. Please wait..."
 msgstr "Загрузка информации о плагинах. Пожалуйста, подождите..."
 
+msgid "Downmix"
+msgstr "Микширование"
+
 msgid "Drama and Films"
 msgstr "Драма и фильмы"
 
@@ -3008,8 +3050,8 @@ msgid "ERROR - failed to scan (%s)!"
 msgstr "ОШИБКА - сканирование не удалось (%s)!"
 
 #, python-format
-msgid "ERROR downloading file %s"
-msgstr "ОШИБКА при загрузке файла %s"
+msgid "ERROR downloading file %s/%s"
+msgstr "ОШИБКА при загрузке файла %s/%s"
 
 msgid "East"
 msgstr "Восток"
@@ -3125,6 +3167,9 @@ msgstr "Включить автосканирование"
 #, python-format
 msgid "Enable auto fastscan for %s"
 msgstr "Вкл. автосканирование для %s"
+
+msgid "Enable bluetooth audio"
+msgstr "Включить блютуз аудио"
 
 msgid "Enable bouquet edit"
 msgstr "Включить редактирование букета"
@@ -3298,10 +3343,6 @@ msgstr "Eritrea"
 
 msgid "Error"
 msgstr "Ошибка"
-
-#, python-format
-msgid "Error %s"
-msgstr "Ошибка %s"
 
 msgid "Error code"
 msgstr "Код ошибки"
@@ -3554,6 +3595,12 @@ msgstr ""
 "FBC - автоматически\n"
 "неактивен"
 
+msgid "FCC enabled"
+msgstr "FCC включено"
+
+msgid "FCCSetup"
+msgstr "Настройки FCC"
+
 msgid "FEC"
 msgstr "FEC"
 
@@ -3646,6 +3693,15 @@ msgstr "Faroe Islands"
 
 msgid "Fast"
 msgstr "Быстро"
+
+msgid "Fast Channel Change"
+msgstr "FCC - быстрая смена канала"
+
+msgid "Fast Channel Change Setup"
+msgstr "FCC - настройки"
+
+msgid "Fast Channel Change setup"
+msgstr "FCC - настройки"
 
 msgid "Fast DiSEqC"
 msgstr "Быстрый DiSEqC (без задержки команд)"
@@ -3859,6 +3915,9 @@ msgstr "Общая задержка AC3"
 msgid "General PCM delay"
 msgstr "Общая задержка PCM"
 
+msgid "General bluetooth audio delay"
+msgstr "Общая задержка блютуз аудио"
+
 msgid "Genre"
 msgstr "Жанр"
 
@@ -4018,6 +4077,9 @@ msgstr "HD2400"
 msgid "HD60/HD66SE/Multibox/Multibox SE"
 msgstr "HD60/HD66SE/Multibox/Multibox SE"
 
+msgid "HDMI"
+msgstr "HDMI"
+
 msgid "HDMI Colordepth"
 msgstr "Глубина цвета HDMI"
 
@@ -4123,6 +4185,9 @@ msgstr "Иерархия инфо"
 msgid "High bitrate support"
 msgstr "Поддержка высокого битрейта"
 
+msgid "History Prev/Next"
+msgstr "История каналов - сейчас/далее"
+
 msgid "History back"
 msgstr "история каналов - назад"
 
@@ -4176,6 +4241,9 @@ msgstr "Сколько минут Вы хотите добавить к запи
 
 msgid "How many minutes do you want to record?"
 msgstr "Сколько минут Вы хотите записать?"
+
+msgid "Http(s) stream start delay"
+msgstr "Задержка старта стрима Http(s)"
 
 msgid "Hue"
 msgstr "Оттенок"
@@ -4948,6 +5016,9 @@ msgstr "Mauritania"
 
 msgid "Mauritius"
 msgstr "Mauritius"
+
+msgid "Max channels"
+msgstr "Максимальное количество каналов"
 
 msgid "Max memory positions"
 msgstr "Максимальная позиция памяти"
@@ -5812,6 +5883,9 @@ msgstr "Редактор сервисов родительского контр�
 msgid "Parental control setup"
 msgstr "Установки родительского контроля"
 
+msgid "Passthrough"
+msgstr "прямой звук"
+
 msgid "Password"
 msgstr "Password"
 
@@ -6553,6 +6627,9 @@ msgstr "Rec"
 msgid "Recall to previous service"
 msgstr "Возврат на предыдущий сервис"
 
+msgid "Receiver or driver does not support FCC"
+msgstr "Ресивер или драйвер не поддерживает FCC!"
+
 msgid "Reception settings"
 msgstr "Параметры приема"
 
@@ -6964,6 +7041,9 @@ msgstr "SNR"
 
 msgid "SNR:"
 msgstr "SNR:"
+
+msgid "SPDIF"
+msgstr "SPDIF"
 
 msgid "SRT file"
 msgstr "SRT файл"
@@ -9146,11 +9226,17 @@ msgstr "Эта опция позволяет показать номер мен�
 msgid "This option allows you to show the full screen path leading to the current screen."
 msgstr "Эта опция позволяет вам показать полный путь, ведущий к текущему меню."
 
+msgid "This option allows you to switch audio to bluetooth speakers."
+msgstr "Эта опция позволяет переключать звук на блютуз динамики."
+
 msgid "This option allows you to view the old and new settings side by side."
 msgstr "Эта опция позволяет вам просматривать старые и новые настройки рядом друг с другом."
 
 msgid "This option can be useful for long HDMI cables."
 msgstr "Эта опция может быть полезна для длинных кабелей HDMI (более 5 метров)."
+
+msgid "This option configures the general audio delay for bluetooth speakers."
+msgstr "Этот параметр настраивает общую задержку звука для динамиков блютуз."
 
 msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr "Эта опция устанавливает уровень подавления шума от mosquito noise (Mosquito Noise - случайное алиасирование в результате сильного сжатия). Очевидно, это происходит за счет деталей изображения."
@@ -10084,6 +10170,9 @@ msgstr "W"
 msgid "WLAN connection"
 msgstr "WLAN соединение"
 
+msgid "WMA Pro downmix"
+msgstr "Микширование WMA Pro"
+
 msgid "WSS on 4:3"
 msgstr "WSS на 4:3"
 
@@ -10761,6 +10850,9 @@ msgstr "Zambia"
 msgid "Zap"
 msgstr "Переключение"
 
+msgid "Zap Up/Down"
+msgstr "Переключать вверх/вниз"
+
 msgid "Zap back to previously tuned service?"
 msgstr "Вернутся на предыдущий сервис?"
 
@@ -11001,6 +11093,15 @@ msgstr "подключено"
 msgid "controlled by HDMI"
 msgstr "управляемый по HDMI"
 
+msgid "convert to AC3"
+msgstr "конвертировать в AC3"
+
+msgid "convert to DTS"
+msgstr "конвертировать в DTS"
+
+msgid "convert to multi-channel PCM"
+msgstr "конвертировать PCM мульти-канал"
+
 msgid "cooking"
 msgstr "приготовление"
 
@@ -11122,6 +11223,9 @@ msgid "experimental film/video"
 msgstr "экспериментальный фильм/видео"
 
 msgid "extra wide"
+msgstr "экстра широкий"
+
+msgid "extrawide"
 msgstr "экстра широкий"
 
 msgid "failed"
@@ -11487,6 +11591,9 @@ msgstr "дошкольные детские программы"
 msgid "preserve bookmarks in cuts"
 msgstr "сохранять закладки при вырезании"
 
+msgid "priority"
+msgstr "приоритет"
+
 msgid "receiver software because updates are available."
 msgstr "доступно обновление для вашего ресивера."
 
@@ -11757,6 +11864,12 @@ msgstr "непроверяема"
 
 msgid "until standby/restart"
 msgstr "до режима ожидания/перезагрузки"
+
+msgid "use best / controlled by HDMI"
+msgstr "использовать контроль по HDMI"
+
+msgid "use_hdmi_cacenter"
+msgstr "использовать HDMI cacenter"
 
 msgid "user defined"
 msgstr "пользовательский вариант"

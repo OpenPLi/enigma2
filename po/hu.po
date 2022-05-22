@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-26 15:37+0100\n"
+"POT-Creation-Date: 2022-05-08 10:54+0200\n"
 "PO-Revision-Date: 2021-11-03 15:10+0100\n"
 "Last-Translator: mcfly82\n"
 "Language-Team: mcfly82 & wysless\n"
@@ -590,8 +590,23 @@ msgstr "A/V beállítások"
 msgid "AAC downmix"
 msgstr "AAC lekeverése"
 
+#, fuzzy
+msgid "AAC transcoding"
+msgstr "Átkódolás: "
+
+#, fuzzy
+msgid "AAC+ downmix"
+msgstr "AAC lekeverése"
+
+msgid "AC3"
+msgstr ""
+
 msgid "AC3 downmix"
 msgstr "AC3 lekeverése"
+
+#, fuzzy
+msgid "AC3 transcoding"
+msgstr "Átkódolás: "
 
 msgid "ACQUIRING TSID/ONID"
 msgstr "TSID/ONID BESZERZÉSE"
@@ -1697,6 +1712,22 @@ msgstr "Tuner kiválasztása"
 msgid "Choose bouquet"
 msgstr "Lista kiválasztása"
 
+#, fuzzy
+msgid "Choose whether AAC sound tracks should be transcoded."
+msgstr "A többcsatornás hangsávok (pl. 5.1-es) lekeverése sztereóra."
+
+#, fuzzy
+msgid "Choose whether AC3 sound tracks should be transcoded."
+msgstr "A többcsatornás hangsávok (pl. 5.1-es) lekeverése sztereóra."
+
+#, fuzzy
+msgid "Choose whether WMA Pro sound tracks should be downmixed."
+msgstr "A többcsatornás hangsávok (pl. 5.1-es) lekeverése sztereóra."
+
+#, fuzzy
+msgid "Choose whether multi channel aac+ sound tracks should be downmixed to stereo."
+msgstr "A többcsatornás hangsávok (pl. 5.1-es) lekeverése sztereóra."
+
 msgid "Choose whether to scan a single transponder, one satellite or multiple satellites."
 msgstr ""
 
@@ -2385,6 +2416,10 @@ msgstr "Csehország"
 msgid "D"
 msgstr "D"
 
+#, fuzzy
+msgid "DAC"
+msgstr "PDC"
+
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -2394,8 +2429,14 @@ msgstr "DMM haladó"
 msgid "DMM normal"
 msgstr "DMM hagyományos"
 
+msgid "DTS"
+msgstr ""
+
 msgid "DTS downmix"
 msgstr "DTS lekeverése"
+
+msgid "DTS-HD HR/DTS-HD MA/DTS"
+msgstr ""
 
 msgid "DUAL LAYER DVD"
 msgstr "Kétréteges DVD"
@@ -2474,6 +2515,9 @@ msgstr "Alapértelmezett időzítő típusa"
 
 msgid "Default+Picon"
 msgstr "Alapértelmezett + Picon"
+
+msgid "Define additional delay in milliseconds before start of http(s) streams, e.g. to connect a remote tuner, you use a complex system of DiSEqC."
+msgstr ""
 
 msgid "Define the location of the EPG Cache file."
 msgstr "Az EPG cache fájl helyének megadása."
@@ -2690,6 +2734,10 @@ msgstr "A mappa tartalma %(file)s és %(subdir)s."
 
 msgid "Disable"
 msgstr "Letiltás"
+
+#, fuzzy
+msgid "Disable FCC during recordings"
+msgstr "A felvételek mindig tartalmazzák az ECM-et"
 
 msgid "Disable Picture in Picture"
 msgstr "Kép-a-Képben kikapcsolása"
@@ -2949,6 +2997,10 @@ msgstr "Az új csomaglitsa letöltése folyamatban. Kérem, várjon..."
 msgid "Downloading plugin information. Please wait..."
 msgstr "Bővítmények betöltése folyamatban. Kérem, várjon..."
 
+#, fuzzy
+msgid "Downmix"
+msgstr "DTS lekeverése"
+
 msgid "Drama and Films"
 msgstr ""
 
@@ -2992,8 +3044,8 @@ msgstr "EPG:"
 msgid "ERROR - failed to scan (%s)!"
 msgstr "HIBA - nem sikerült a keresés (%s)!"
 
-#, python-format
-msgid "ERROR downloading file %s"
+#, fuzzy, python-format
+msgid "ERROR downloading file %s/%s"
 msgstr "HIBA a %s fájl letöltése során"
 
 msgid "East"
@@ -3110,6 +3162,10 @@ msgstr "Automatikus gyorskeresés engedélyezése"
 #, python-format
 msgid "Enable auto fastscan for %s"
 msgstr "Automatikus gyorskeresés engedélyezése ehhez: %s"
+
+#, fuzzy
+msgid "Enable bluetooth audio"
+msgstr "Lista szerkesztés engedélyezése"
 
 msgid "Enable bouquet edit"
 msgstr "Lista szerkesztés engedélyezése"
@@ -3283,10 +3339,6 @@ msgstr "Eritrea"
 
 msgid "Error"
 msgstr "Hiba"
-
-#, python-format
-msgid "Error %s"
-msgstr "Hiba %s"
 
 msgid "Error code"
 msgstr "Hibakód"
@@ -3535,6 +3587,14 @@ msgstr ""
 "FBC automatikus\n"
 "inaktív"
 
+#, fuzzy
+msgid "FCC enabled"
+msgstr "engedélyezve"
+
+#, fuzzy
+msgid "FCCSetup"
+msgstr "Beállítások"
+
 msgid "FEC"
 msgstr "FEC"
 
@@ -3627,6 +3687,15 @@ msgstr "Feröer-szigetek"
 
 msgid "Fast"
 msgstr "Gyors"
+
+msgid "Fast Channel Change"
+msgstr ""
+
+msgid "Fast Channel Change Setup"
+msgstr ""
+
+msgid "Fast Channel Change setup"
+msgstr ""
 
 msgid "Fast DiSEqC"
 msgstr "Gyors DiSEqC"
@@ -3841,6 +3910,10 @@ msgstr "Általános AC3 késleltetés"
 msgid "General PCM delay"
 msgstr "Általános PCM késleltetés"
 
+#, fuzzy
+msgid "General bluetooth audio delay"
+msgstr "Általános AC3 késleltetés"
+
 msgid "Genre"
 msgstr "Műfaj"
 
@@ -4001,6 +4074,9 @@ msgstr "HD2400"
 msgid "HD60/HD66SE/Multibox/Multibox SE"
 msgstr "HD60/Multibox/Multibox SE"
 
+msgid "HDMI"
+msgstr ""
+
 msgid "HDMI Colordepth"
 msgstr "HDMI színmélység"
 
@@ -4107,6 +4183,10 @@ msgstr "Hierarchikus mód"
 msgid "High bitrate support"
 msgstr "Magas bitráta támogatása"
 
+#, fuzzy
+msgid "History Prev/Next"
+msgstr "Előzmények következő"
+
 msgid "History back"
 msgstr "Előzmények előző"
 
@@ -4160,6 +4240,9 @@ msgstr "Hány percet szeretne felvenni?"
 
 msgid "How many minutes do you want to record?"
 msgstr "Hány percet szeretne felvenni?"
+
+msgid "Http(s) stream start delay"
+msgstr ""
 
 msgid "Hue"
 msgstr "Színárnyalat"
@@ -4933,6 +5016,10 @@ msgstr "Mauritánia"
 
 msgid "Mauritius"
 msgstr "Mauritius"
+
+#, fuzzy
+msgid "Max channels"
+msgstr "Csatornák"
 
 msgid "Max memory positions"
 msgstr "Maximális memória pozíció"
@@ -5799,6 +5886,9 @@ msgstr "Gyermekzárral védett csatornák szerkesztése"
 msgid "Parental control setup"
 msgstr "Gyermekzár beállítások"
 
+msgid "Passthrough"
+msgstr ""
+
 msgid "Password"
 msgstr "Jelszó"
 
@@ -6540,6 +6630,9 @@ msgstr "Felvétel"
 msgid "Recall to previous service"
 msgstr "Előző csatornára váltás"
 
+msgid "Receiver or driver does not support FCC"
+msgstr ""
+
 msgid "Reception settings"
 msgstr "Vételi beállítások"
 
@@ -6951,6 +7044,9 @@ msgstr "SNR"
 
 msgid "SNR:"
 msgstr "SNR:"
+
+msgid "SPDIF"
+msgstr ""
 
 msgid "SRT file"
 msgstr "SRT fájl"
@@ -9146,11 +9242,19 @@ msgstr "Ezzel megjelenítheti a menü és/vagy bővítmények gyors hivatkozás�
 msgid "This option allows you to show the full screen path leading to the current screen."
 msgstr "Ezzel engedélyezheti a teljes útvonal mutatását, ami ehhez a képernyőhöz vezet."
 
+#, fuzzy
+msgid "This option allows you to switch audio to bluetooth speakers."
+msgstr "Ezzel beállíthatja az automatikus hangerő szintjét."
+
 msgid "This option allows you to view the old and new settings side by side."
 msgstr "A régi és az új beállításokat egyszerre láthatja két oldalt."
 
 msgid "This option can be useful for long HDMI cables."
 msgstr "Ez a lehetőség hosszú HDMI kábel használata esetén javasolt."
+
+#, fuzzy
+msgid "This option configures the general audio delay for bluetooth speakers."
+msgstr "A sztereó hangsávok általános késleltetése."
 
 msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr "Ezzel beállítja a hangya-zajcsökkentés elfojtását (ez az erősen tömörített adások során jelentkezhet). Így viszont a kép élességét is rontja."
@@ -10082,6 +10186,10 @@ msgstr "Ny"
 msgid "WLAN connection"
 msgstr "Vezeték nélküli kapcsolat"
 
+#, fuzzy
+msgid "WMA Pro downmix"
+msgstr "AAC lekeverése"
+
 msgid "WSS on 4:3"
 msgstr "WSS 4:3-on"
 
@@ -10761,6 +10869,10 @@ msgstr "Zambia"
 msgid "Zap"
 msgstr "Ugrás"
 
+#, fuzzy
+msgid "Zap Up/Down"
+msgstr "Ugrás lefelé"
+
 msgid "Zap back to previously tuned service?"
 msgstr "Ugorjunk vissza az elöbb nézett csatornára?"
 
@@ -11005,6 +11117,16 @@ msgstr "csatlakoztatva"
 msgid "controlled by HDMI"
 msgstr "HDMI által vezérelve"
 
+msgid "convert to AC3"
+msgstr ""
+
+msgid "convert to DTS"
+msgstr ""
+
+#, fuzzy
+msgid "convert to multi-channel PCM"
+msgstr "Többcsatornás PCM"
+
 msgid "cooking"
 msgstr "főzés"
 
@@ -11127,6 +11249,10 @@ msgid "experimental film/video"
 msgstr "kísérleti filmezés"
 
 msgid "extra wide"
+msgstr "extra széles"
+
+#, fuzzy
+msgid "extrawide"
 msgstr "extra széles"
 
 msgid "failed"
@@ -11496,6 +11622,10 @@ msgstr "óvodásoknak"
 msgid "preserve bookmarks in cuts"
 msgstr ""
 
+#, fuzzy
+msgid "priority"
+msgstr "Prioritás"
+
 msgid "receiver software because updates are available."
 msgstr "készülék szoftvere, mert frissítések elérhetők."
 
@@ -11772,6 +11902,13 @@ msgstr "nem tesztelhető"
 
 msgid "until standby/restart"
 msgstr "kikapcsolásig/újraindításig"
+
+#, fuzzy
+msgid "use best / controlled by HDMI"
+msgstr "HDMI által vezérelve"
+
+msgid "use_hdmi_cacenter"
+msgstr ""
 
 msgid "user defined"
 msgstr "felhasználó által megadva"
