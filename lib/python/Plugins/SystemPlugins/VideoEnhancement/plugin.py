@@ -343,6 +343,21 @@ class VideoEnhancementPreview(ConfigListScreen, Screen):
 				pass
 		self.close()
 
+	# for summary:
+	def changedEntry(self):
+		for x in self.onChangedEntry:
+			x()
+		self.selectionChanged()
+
+	def getCurrentEntry(self):
+		return self["config"].getCurrent()[0]
+
+	def getCurrentValue(self):
+		return str(self["config"].getCurrent()[1].getText())
+
+	def createSummary(self):
+		from Screens.Setup import SetupSummary
+		return SetupSummary
 
 def videoEnhancementSetupMain(session, **kwargs):
 	session.open(VideoEnhancementSetup)
