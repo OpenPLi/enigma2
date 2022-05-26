@@ -29,7 +29,7 @@ RESULT eNavigation::playService(const eServiceReference &service)
 {
 	RESULT res = -1;
 
-	if (m_fccmgr->tryFCCService(service, m_runningService) == -1)
+	if (! m_fccmgr || m_fccmgr->tryFCCService(service, m_runningService) == -1)
 	{
 		stopService();
 		ASSERT(m_servicehandler);
@@ -79,7 +79,7 @@ RESULT eNavigation::stopService(void)
 		/* kill service. */
 	m_service_event_conn = 0;
 
-	m_fccmgr->cleanupFCCService();
+	m_fccmgr && m_fccmgr->cleanupFCCService();
 	return 0;
 }
 
