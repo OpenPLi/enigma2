@@ -1,8 +1,10 @@
 import os
 import time
+import re
 from Tools.CList import CList
 from SystemInfo import SystemInfo
 from Components.Console import Console
+from Tools.HardwareInfo import HardwareInfo
 import Task
 
 
@@ -42,6 +44,9 @@ def findMountPoint(path):
 	while not os.path.ismount(path):
 		path = os.path.dirname(path)
 	return path
+
+
+armHardwareType = "arm" in os.popen("uname -m").read()
 
 
 DEVTYPE_UDEV = 0
@@ -642,6 +647,15 @@ class HarddiskManager:
 				is_mmc = True
 				if (SystemInfo['BootDevice'] and blockdev.startswith(SystemInfo['BootDevice'])) or subdev:
 					blacklisted = True
+				if armHardwareType:
+					blacklisted = False
+					BLACKLIST = ["mmcblk0"]
+					if HardwareInfo().get_device_name() in ("osmio4k", "osmio4kplus", "osmini4k"):
+						BLACKLIST = ["mmcblk1"]
+					if blockdev[:7] in BLACKLIST:
+						blacklisted = True
+				if blockdev.startswith("mmcblk") and (re.search(r"mmcblk\dboot", blockdev) or re.search(r"mmcblk\drpmb", blockdev)):
+					blacklisted = True
 			if blockdev[0:2] == 'sr':
 				is_cdrom = True
 			if blockdev[0:2] == 'hd':
@@ -655,6 +669,8 @@ class HarddiskManager:
 			if not is_cdrom and not is_mmc and os.path.exists(devpath):
 				for partition in os.listdir(devpath):
 					if partition[0:len(blockdev)] != blockdev:
+						continue
+					if dev == 179 and not re.search(r"mmcblk\dp\d+", partition):
 						continue
 					partitions.append(partition)
 			else:
@@ -784,13 +800,20 @@ class HarddiskManager:
 		return [x for x in parts if not x.device or x.device in devs]
 
 	def splitDeviceName(self, devname):
-		# this works for: sdaX, hdaX, sr0 (which is in fact dev="sr0", part=""). It doesn't work for other names like mtdblock3, but they are blacklisted anyway.
-		dev = devname[:3]
-		part = devname[3:]
-		for p in part:
-			if not p.isdigit():
+		if re.search(r"^mmcblk\d(?:p\d+$|$)", devname):
+			m = re.search(r"(?P<dev>mmcblk\d)p(?P<part>\d+)$", devname)
+			if m:
+				return m.group('dev'), m.group('part') and int(m.group('part')) or 0
+			else:
 				return devname, 0
-		return dev, part and int(part) or 0
+		else:
+			# this works for: sdaX, hdaX, sr0 (which is in fact dev="sr0", part=""). It doesn't work for other names like mtdblock3, but they are blacklisted anyway.
+			dev = devname[:3]
+			part = devname[3:]
+			for p in part:
+				if not p.isdigit():
+					return devname, 0
+			return dev, part and int(part) or 0
 
 	def getUserfriendlyDeviceName(self, dev, phys):
 		dev, part = self.splitDeviceName(dev)
