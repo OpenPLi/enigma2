@@ -324,7 +324,9 @@ class HdmiCec:
 			cmd = message.getCommand()
 			data = 16 * '\x00'
 			length = message.getData(data, len(data))
-
+			ctrl0 = message.getControl0()
+			ctrl1 = message.getControl1()
+			ctrl2 = message.getControl2()
 			if config.hdmicec.debug.value != "0":
 				self.debugRx(length, cmd, data)
 			if cmd == 0x00:
