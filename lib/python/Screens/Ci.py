@@ -461,6 +461,8 @@ class CiSelection(Screen):
 		while len(self.list[slotidx]) < 3 or self.list[slotidx][3] != slot:
 			slotidx += 1
 
+		if slot > 0:
+			slotidx += 1 #do not change separator
 		slotidx += 1 #do not change Reset
 		slotidx += 1 #do not change Init
 
