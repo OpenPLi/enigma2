@@ -134,6 +134,16 @@ while : ; do
 			/etc/init.d/dbus-1 reload
 			/etc/init.d/networking start
 			/etc/init.d/avahi-daemon start
+			# wait until we have a network again
+			echo "**** Waiting for network ****"
+			for i in {1..30}; do
+				gw=`netstat -rn | grep UG | awk '{print $2}'`
+				if [ ! -z "$gw" ]; then
+					echo "> Online !"
+					break
+				fi
+				sleep 1
+			done
 			if [ ! -f /etc/.doNotAutoinstall ]; then
 				touch /etc/.doAutoinstall
 			else
