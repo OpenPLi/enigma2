@@ -374,7 +374,7 @@ def InitAVSwitch():
 	if SystemInfo["Has3DSurroundSpeaker"]:
 		def set3DSurroundSpeaker(configElement):
 			open(SystemInfo["Has3DSurroundSpeaker"], "w").write(configElement.value)
-		config.av.surround_3d_speaker = ConfigSelection(default="center", choices=[("center", _("center")), ("wide", _("wide")), ("extrawide", _("extra wide"))])
+		config.av.surround_3d_speaker = ConfigSelection(default="disabled", choices=[("disabled", _("off")), ("center", _("center")), ("wide", _("wide")), ("extrawide", _("extra wide"))])
 		config.av.surround_3d_speaker.addNotifier(set3DSurroundSpeaker)
 
 	if SystemInfo["Has3DSurroundSoftLimiter"]:
