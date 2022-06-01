@@ -172,6 +172,31 @@ def InitAVSwitch():
 	iAVSwitch.setInput("ENCODER") # init on startup
 	SystemInfo["ScartSwitch"] = eAVSwitch.getInstance().haveScartSwitch()
 
+	def ch(node):
+		return node, pnD.get(node) if pnD.get(node) else node
+
+	# dictionary ... "proc_node_name" : _("human translatable texts"),
+	pnD = {
+		"ac3" : _("AC3"),
+		"dac" : _("DAC"),
+		"dts" : _("DTS"),
+		"downmix" : _("Downmix"),
+		"extrawide" : _("extrawide"),
+		"force_ac3" : _("convert to AC3"),
+		"force_dts" : _("convert to DTS"),
+		"hdmi" : _("HDMI"),
+		"hdmi_best" : _("use best / controlled by HDMI"),
+		"multichannel" : _("convert to multi-channel PCM"),
+		"none" : _("off"),
+		"off" : _("Off"),
+		"on" : _("On"),
+		"passthrough" : _("Passthrough"),
+		"spdif" : _("SPDIF"),
+		"use_hdmi_cacenter" : _("use HDMI cacenter"),
+		"use_hdmi_caps" : _("controlled by HDMI"),
+		"wide" : _("wide"),
+	}
+
 	def readChoices(procx, choices, default):
 		try:
 			with open(procx, "r") as myfile:
@@ -180,7 +205,7 @@ def InitAVSwitch():
 			procChoices = ""
 		if procChoices:
 			choiceslist = procChoices.split(" ")
-			choices = [(item, _(item)) for item in choiceslist]
+			choices = [(ch(item)) for item in choiceslist]
 			default = choiceslist[0]
 		return (choices, default)
 
@@ -193,7 +218,7 @@ def InitAVSwitch():
 	if SystemInfo["CanDownmixAC3"]:
 		def setAC3Downmix(configElement):
 			open("/proc/stb/audio/ac3", "w").write(configElement.value)
-		choices = [("downmix", _("Downmix")), ("passthrough", _("Passthrough"))]
+		choices = [(ch("downmix")), (ch("passthrough"))]
 		default = "downmix"
 		if SystemInfo["CanProc"]:
 			f = "/proc/stb/audio/ac3_choices"
@@ -204,7 +229,7 @@ def InitAVSwitch():
 	if SystemInfo["CanAC3Transcode"]:
 		def setAC3plusTranscode(configElement):
 			open("/proc/stb/audio/ac3plus", "w").write(configElement.value)
-		choices = [("use_hdmi_caps", _("controlled by HDMI")), ("force_ac3", _("convert to AC3"))]
+		choices = [(ch("use_hdmi_caps")), (ch("force_ac3"))]
 		default = "force_ac3"
 		if SystemInfo["CanProc"]:
 			f = "/proc/stb/audio/ac3plus_choices"
@@ -215,7 +240,7 @@ def InitAVSwitch():
 	if SystemInfo["CanDownmixDTS"]:
 		def setDTSDownmix(configElement):
 			open("/proc/stb/audio/dts", "w").write(configElement.value)
-		choices = [("downmix", _("Downmix")), ("passthrough", _("Passthrough"))]
+		choices = [(ch("downmix")), (ch("passthrough"))]
 		default = "downmix"
 		if SystemInfo["CanProc"]:
 			f = "/proc/stb/audio/dts_choices"
@@ -226,7 +251,7 @@ def InitAVSwitch():
 	if SystemInfo["CanDTSHD"]:
 		def setDTSHD(configElement):
 			open("/proc/stb/audio/dtshd", "w").write(configElement.value)
-		choices = [("downmix", _("Downmix")), ("force_dts", _("convert to DTS")), ("use_hdmi_caps", _("controlled by HDMI")), ("multichannel", _("convert to multi-channel PCM")), ("hdmi_best", _("use best / controlled by HDMI"))]
+		choices = [(ch("downmix")), (ch("force_dts")), (ch("use_hdmi_caps")), (ch("multichannel")), (ch("hdmi_best"))]
 		default = "downmix"
 		if SystemInfo["CanProc"]:
 			f = "/proc/stb/audio/dtshd_choices"
@@ -238,8 +263,8 @@ def InitAVSwitch():
 		def setAACDownmix(configElement):
 			open("/proc/stb/audio/aac", "w").write(configElement.value)
 		choices = [
-			("downmix", _("Downmix")),
-			("passthrough", _("Passthrough"))
+			(ch("downmix")),
+			(ch("passthrough"))
 		]
 		default = "downmix"
 		if SystemInfo["CanProc"]:
@@ -252,14 +277,14 @@ def InitAVSwitch():
 		def setAACDownmixPlus(configElement):
 			open("/proc/stb/audio/aacplus", "w").write(configElement.value)
 		choices = [
-			("downmix", _("Downmix")),
-			("passthrough", _("Passthrough")),
-			("multichannel", _("convert to multi-channel PCM")),
-			("force_ac3", _("convert to AC3")),
-			("force_dts", _("convert to DTS")),
-			("use_hdmi_cacenter", _("use_hdmi_cacenter")),
-			("wide", _("wide")),
-			("extrawide", _("extrawide"))
+			(ch("downmix")),
+			(ch("passthrough")),
+			(ch("multichannel")),
+			(ch("force_ac3")),
+			(ch("force_dts")),
+			(ch("use_hdmi_cacenter")),
+			(ch("wide")),
+			(ch("extrawide"))
 		]
 		default = "downmix"
 		if SystemInfo["CanProc"]:
@@ -271,7 +296,7 @@ def InitAVSwitch():
 	if SystemInfo["CanAACTranscode"]:
 		def setAACTranscode(configElement):
 			open("/proc/stb/audio/aac_transcode", "w").write(configElement.value)
-		choices = [("off", _("off")), ("ac3", _("AC3")), ("dts", _("DTS"))]
+		choices = [(ch("off")), (ch("ac3")), (ch("dts"))]
 		default = "off"
 		if SystemInfo["CanProc"]:
 			f = "/proc/stb/audio/aac_transcode_choices"
@@ -282,7 +307,7 @@ def InitAVSwitch():
 	if SystemInfo["CanWMAPRO"]:
 		def setWMAPRO(configElement):
 			open("/proc/stb/audio/wmapro", "w").write(configElement.value)
-		choices = [("downmix", _("Downmix")), ("passthrough", _("Passthrough")), ("multichannel", _("convert to multi-channel PCM")), ("hdmi_best", _("use best / controlled by HDMI"))]
+		choices = [(ch("downmix")), (ch("passthrough")), (ch("multichannel")), (ch("hdmi_best"))]
 		default = "downmix"
 		if SystemInfo["CanProc"]:
 			f = "/proc/stb/audio/wmapro_choices"
@@ -293,7 +318,7 @@ def InitAVSwitch():
 	if SystemInfo["CanBTAudio"]:
 		def setBTAudio(configElement):
 			open("/proc/stb/audio/btaudio", "w").write(configElement.value)
-		choices = [("off", _("Off")), ("on", _("On"))]
+		choices = [(ch("off")), (ch("on"))]
 		default = "off"
 		if SystemInfo["CanProc"]:
 			f = "/proc/stb/audio/btaudio_choices"
@@ -340,7 +365,7 @@ def InitAVSwitch():
 	if SystemInfo["HasAutoVolume"]:
 		def setAutoVolume(configElement):
 			open(SystemInfo["HasAutoVolume"], "w").write(configElement.value)
-		choices = [("none", _("off")), ("hdmi", "HDMI"), ("spdif", "SPDIF"), ("dac", "DAC")]
+		choices = [(ch("none")), (ch("hdmi")), (ch("spdif")), (ch("dac"))]
 		default = "none"
 		if SystemInfo["CanProc"]:
 			f = "/proc/stb/audio/avl_choices"
@@ -357,7 +382,7 @@ def InitAVSwitch():
 	if SystemInfo["Has3DSurround"]:
 		def set3DSurround(configElement):
 			open(SystemInfo["Has3DSurround"], "w").write(configElement.value)
-		choices = [("none", _("off")), ("hdmi", _("HDMI")), ("spdif", _("SPDIF")), ("dac", _("DAC"))]
+		choices = [(ch("none")), (ch("hdmi")), (ch("spdif")), (ch("dac"))]
 		default = "none"
 		if SystemInfo["CanProc"]:
 			f = "/proc/stb/audio/3d_surround_choices"
