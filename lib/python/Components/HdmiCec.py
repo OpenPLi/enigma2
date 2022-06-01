@@ -150,7 +150,7 @@ class HdmiCec:
 
 	def sendMessage(self, address, message):
 		cmd = 0
-		data = ''
+		data = b''
 		if message == "wakeup":
 			if config.hdmicec.tv_wakeup_command.value == 'textview':
 				cmd = 0x0d
@@ -194,7 +194,7 @@ class HdmiCec:
 			data = self.setData(True)
 		elif message == "vendorid":
 			cmd = 0x87
-			data = '\x00\x00\x00'
+			data = b'\x00\x00\x00'
 		elif message == "keypoweron":
 			cmd = 0x44
 			data = struct.pack('B', 0x6d)
@@ -425,7 +425,7 @@ class HdmiCec:
 		if not self.volumeForwardingEnabled:
 			return
 		cmd = 0
-		data = ''
+		data = b''
 		if keyEvent == 0:
 			if keyCode == 115:
 				cmd = 0x44
