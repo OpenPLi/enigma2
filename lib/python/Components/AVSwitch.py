@@ -179,8 +179,14 @@ def InitAVSwitch():
 		except:
 			procChoices = ""
 		if procChoices:
+			def set_text(node):
+				for choice in input_choices:
+					if node == choice[0]:
+						return choice[1]
+				return node
+			input_choices = choices[:]
 			choiceslist = procChoices.split(" ")
-			choices = [(item, _(item)) for item in choiceslist]
+			choices = [(item, set_text(item)) for item in choiceslist]
 			default = choiceslist[0]
 		return (choices, default)
 
