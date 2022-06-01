@@ -128,7 +128,7 @@ class VideoSetup(ConfigListScreen, Screen):
 			if SystemInfo["CanAACTranscode"]:
 				self.list.append(getConfigListEntry(_("AAC transcoding"), config.av.transcodeaac, _("Choose whether AAC sound tracks should be transcoded.")))
 			if SystemInfo["CanDTSHD"]:
-				self.list.append(getConfigListEntry(_("DTS-HD HR/DTS-HD MA/DTS"), config.av.dtshd, ("Choose whether multi channel DTSHD sound tracks should be downmixed or transcoded.")))
+				self.list.append(getConfigListEntry(_("DTS-HD(HR/MA) downmix"), config.av.dtshd, _("Choose whether multi channel DTS-HD(HR/MA) sound tracks should be downmixed or transcoded.")))
 			if SystemInfo["CanWMAPRO"]:
 				self.list.append(getConfigListEntry(_("WMA Pro downmix"), config.av.wmapro, _("Choose whether WMA Pro sound tracks should be downmixed.")))
 			if SystemInfo["HasMultichannelPCM"]:
