@@ -327,6 +327,7 @@ class HdmiCec:
 			ctrl0 = message.getControl0()
 			ctrl1 = message.getControl1()
 			ctrl2 = message.getControl2()
+
 			if config.hdmicec.debug.value != "0":
 				self.debugRx(length, cmd, data)
 			if cmd == 0x00:
@@ -334,13 +335,13 @@ class HdmiCec:
 					print("eHdmiCec: received polling message")
 				else:
 					# feature abort
-					if data[0] == '\x44':
+					if ctrl0 == 0x44:
 						print('eHdmiCec: volume forwarding not supported by device %02x' % (message.getAddress()))
 						self.volumeForwardingEnabled = False
 			elif cmd == 0x46: # request name
 				self.sendMessage(message.getAddress(), 'osdname')
 			elif cmd == 0x7e or cmd == 0x72: # system audio mode status
-				if data[0] == '\x01':
+				if ctrl0 == 0x01:
 					self.volumeForwardingDestination = 5 # on: send volume keys to receiver
 				else:
 					self.volumeForwardingDestination = 0 # off: send volume keys to tv
@@ -355,7 +356,7 @@ class HdmiCec:
 			elif cmd == 0x83: # request address
 				self.sendMessage(message.getAddress(), 'reportaddress')
 			elif cmd == 0x86: # request streaming path
-				physicaladdress = ord(data[0]) * 256 + ord(data[1])
+				physicaladdress = ctrl0 * 256 + ctrl1
 				ouraddress = eHdmiCEC.getInstance().getPhysicalAddress()
 				if physicaladdress == ouraddress:
 					if not inStandby:
@@ -368,14 +369,13 @@ class HdmiCec:
 			elif cmd == 0x8c: # request vendor id
 				self.sendMessage(message.getAddress(), 'vendorid')
 			elif cmd == 0x8d: # menu request
-				requesttype = ord(data[0])
-				if requesttype == 2: # query
+				if ctrl0 == 1: # query
 					if inStandby:
 						self.sendMessage(message.getAddress(), 'menuinactive')
 					else:
 						self.sendMessage(message.getAddress(), 'menuactive')
 			elif cmd == 0x90: # receive powerstatus report
-				if ord(data[0]) == 0: # some box is powered
+				if ctrl0 == 0: # some box is powered
 					if config.hdmicec.next_boxes_detect.value:
 						self.useStandby = False
 					print("[HDMI-CEC] powered box found")
@@ -398,12 +398,12 @@ class HdmiCec:
 				elif cmd == 0x83 and config.hdmicec.tv_wakeup_detection.value == "requestphysicaladdress":
 						self.wakeup()
 				elif cmd == 0x84 and config.hdmicec.tv_wakeup_detection.value == "tvreportphysicaladdress":
-					if (ord(data[0]) * 256 + ord(data[1])) == 0 and ord(data[2]) == 0:
+					if (ctrl0 * 256 + ctrl1) == 0 and ctrl2 == 0:
 						self.wakeup()
 				elif cmd == 0x85 and config.hdmicec.tv_wakeup_detection.value == "sourcerequest":
 					self.wakeup()
 				elif cmd == 0x86 and config.hdmicec.tv_wakeup_detection.value == "streamrequest":
-					physicaladdress = ord(data[0]) * 256 + ord(data[1])
+					physicaladdress = ctrl0 * 256 + ctrl1
 					ouraddress = eHdmiCEC.getInstance().getPhysicalAddress()
 					if physicaladdress == ouraddress:
 						self.wakeup()
