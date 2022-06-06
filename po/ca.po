@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-08 10:54+0200\n"
+"POT-Creation-Date: 2022-06-06 17:18+0200\n"
 "PO-Revision-Date: 2021-09-22 23:58+0200\n"
 "Last-Translator: Oriol Pellicer <oriol@elsud.org>\n"
 "Language-Team: angelodos angelo2807@hotmail.com\n"
@@ -1316,6 +1316,9 @@ msgstr "Favorits automàtics"
 msgid "Automatic scan"
 msgstr "Escaneig automàtic"
 
+msgid "Automatically power off box to deep standby mode."
+msgstr ""
+
 msgid "Automatically put the TV in standby whenever the receiver goes into standby or deep standby."
 msgstr "Col·loqueu el televisor automàticament en espera quan el receptor passi en espera o en espera profunda."
 
@@ -1918,6 +1921,10 @@ msgstr "Configureu si les pistes de so multicanal s’han de barrejar en estère
 
 #, fuzzy
 msgid "Choose whether WMA Pro sound tracks should be downmixed."
+msgstr "Configureu si les pistes de so multicanal s’han de barrejar en estèreo."
+
+#, fuzzy
+msgid "Choose whether multi channel DTS-HD(HR/MA) sound tracks should be downmixed or transcoded."
 msgstr "Configureu si les pistes de so multicanal s’han de barrejar en estèreo."
 
 #, fuzzy
@@ -2696,8 +2703,9 @@ msgstr ""
 msgid "DTS downmix"
 msgstr "DTS downmix"
 
-msgid "DTS-HD HR/DTS-HD MA/DTS"
-msgstr ""
+#, fuzzy
+msgid "DTS-HD(HR/MA) downmix"
+msgstr "DTS downmix"
 
 #
 msgid "DUAL LAYER DVD"
@@ -3572,6 +3580,10 @@ msgstr "Activa HDMI-CEC."
 msgid "Enable parental protection"
 msgstr "Habilita la protecció dels pares"
 
+#, fuzzy
+msgid "Enable power off timer"
+msgstr "Activa el temporitzador de despertar"
+
 msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
 msgstr "Habiliteu el receptor enigma2 remot per intentar sintonitzar serveis que no es poden ajustar localment (per exemple, el sintonitzador està ocupat o el tipus de servei no està disponible al sintonitzador local. Especifiqueu l’URL complet inclòs el número http: // i el port (normalment …: 8001 ), per exemple, http: // second_box: 8001."
 
@@ -4227,8 +4239,15 @@ msgstr "Les següents tasques es faran després de prémer OK."
 msgid "Force legacy signal stats"
 msgstr "Força les estadístiques de senyal heretades"
 
+#, fuzzy
+msgid "Force power off (even when not in standby)"
+msgstr "Força el zap al servei de gravació en espera"
+
 msgid "Force zap to recording service in standby"
 msgstr "Força el zap al servei de gravació en espera"
+
+msgid "Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected."
+msgstr ""
 
 #
 msgid "Format"
@@ -4802,6 +4821,9 @@ msgstr "Si es defineix a “sí”, els valors de senyal (SNR, etc.) es calcular
 
 msgid "If set to 'yes' the same commands will be sent to the TV for deep standby events, as are sent during regular standby events."
 msgstr "Si s’estableix a “sí”, s’enviaran les mateixes ordres al televisor per als esdeveniments d’espera profunda, com s’envien durant els esdeveniments d’espera habituals."
+
+msgid "If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here."
+msgstr ""
 
 msgid "If using multiple uncommitted switches the DiSEqC commands must be sent multiple times. Set to the number of uncommitted switches in the chain minus one."
 msgstr "Si utilitzeu diversos interruptors no compromes, les ordres DiSEqC s’han d’enviar diverses vegades. Estableix el nombre de commutadors no comesos a la cadena menys un."
@@ -6052,6 +6074,9 @@ msgctxt "now/next: 'next' event label"
 msgid "Next"
 msgstr "Seguent"
 
+msgid "Next day starts at"
+msgstr ""
+
 msgid "Nicaragua"
 msgstr "Nicaragua"
 
@@ -7057,6 +7082,14 @@ msgstr "Alimentació LED"
 
 msgid "Power management. Consult your receiver's manual for more information."
 msgstr "Gestió d’energia. Consulteu el manual del vostre receptor per obtenir més informació."
+
+#
+#, fuzzy
+msgid "Power off time"
+msgstr "Sense timeout"
+
+msgid "Power off timer"
+msgstr ""
 
 msgid "Power on display"
 msgstr "Potència en pantalla"
@@ -13281,12 +13314,12 @@ msgstr "indestable"
 msgid "until standby/restart"
 msgstr "fins que s’iniciï el mode d’espera / reinici"
 
+msgid "use HDMI cacenter"
+msgstr ""
+
 #, fuzzy
 msgid "use best / controlled by HDMI"
 msgstr "controlat per HDMI"
-
-msgid "use_hdmi_cacenter"
-msgstr ""
 
 #
 msgid "user defined"

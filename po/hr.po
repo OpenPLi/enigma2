@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-08 10:54+0200\n"
+"POT-Creation-Date: 2022-06-06 17:18+0200\n"
 "PO-Revision-Date: 2022-03-28 16:33+0200\n"
 "Last-Translator: Željko <zdezmar2@gmail.com>\n"
 "Language-Team: Željko\n"
@@ -1195,6 +1195,9 @@ msgstr "Automatsko stvaranje oznaka"
 msgid "Automatic scan"
 msgstr "Automatska pretraga"
 
+msgid "Automatically power off box to deep standby mode."
+msgstr ""
+
 msgid "Automatically put the TV in standby whenever the receiver goes into standby or deep standby."
 msgstr "Automatski stavite TV u stanje čekanja kada resiver pređe u stanje čekanja ili u duboko stanje čekanja."
 
@@ -1737,6 +1740,10 @@ msgstr "Konfigurirajte da li se višekanalni zvučni zapisi trebaju miješati u 
 
 #, fuzzy
 msgid "Choose whether WMA Pro sound tracks should be downmixed."
+msgstr "Konfigurirajte da li se višekanalni zvučni zapisi trebaju miješati u stereo."
+
+#, fuzzy
+msgid "Choose whether multi channel DTS-HD(HR/MA) sound tracks should be downmixed or transcoded."
 msgstr "Konfigurirajte da li se višekanalni zvučni zapisi trebaju miješati u stereo."
 
 #, fuzzy
@@ -2452,8 +2459,9 @@ msgstr ""
 msgid "DTS downmix"
 msgstr "DTS miješanje"
 
-msgid "DTS-HD HR/DTS-HD MA/DTS"
-msgstr ""
+#, fuzzy
+msgid "DTS-HD(HR/MA) downmix"
+msgstr "DTS miješanje"
 
 msgid "DUAL LAYER DVD"
 msgstr "DUAL LAYER (dvoslojni) DVD"
@@ -3215,6 +3223,10 @@ msgstr "Omogućite ili onemogućite korištenje HDMI-CEC-a."
 msgid "Enable parental protection"
 msgstr "Omogućite roditeljsku zaštitu"
 
+#, fuzzy
+msgid "Enable power off timer"
+msgstr "Omogućite odbrojavanje vremena"
+
 msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
 msgstr "Omogućavanje pokušaja podešavanja udaljenog enigma2 prijamnika u usluge koje se ne mogu lokalno ugađati (npr. tjuner je zauzet ili vrsta usluge nije dostupna na lokalnom tjuneru. Navedite potpuni URL uključujući http:// i broj porta (normalno ...:8001), primjer: http://ip_udaljeni_resiver:8001."
 
@@ -3811,8 +3823,15 @@ msgstr "Sljedeći zadaci bit će izvršeni nakon što pritisnete OK!"
 msgid "Force legacy signal stats"
 msgstr "Forsiraj statistiku naslijeđenih signala"
 
+#, fuzzy
+msgid "Force power off (even when not in standby)"
+msgstr "Prisilno zaustavite uslugu snimanja u stanju pripravnosti"
+
 msgid "Force zap to recording service in standby"
 msgstr "Prisilno zaustavite uslugu snimanja u stanju pripravnosti"
+
+msgid "Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected."
+msgstr ""
 
 msgid "Format"
 msgstr "Format"
@@ -4334,6 +4353,9 @@ msgstr "Ako je postavljeno na \"da\" vrijednosti signala (SNR, itd.) Izračunat 
 
 msgid "If set to 'yes' the same commands will be sent to the TV for deep standby events, as are sent during regular standby events."
 msgstr "Ako je postavljeno na \"da\", iste će se naredbe slati na televizor za događaje u dubokom stanju čekanja, kao i tijekom redovnih događaja u stanju čekanja."
+
+msgid "If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here."
+msgstr ""
 
 msgid "If using multiple uncommitted switches the DiSEqC commands must be sent multiple times. Set to the number of uncommitted switches in the chain minus one."
 msgstr "Ako koristite višestruke neopredijeljene prekidače, naredbe se moraju poslati više puta. Postavite broj neopredijeljenih prekidača na minus jedan."
@@ -5437,6 +5459,9 @@ msgctxt "now/next: 'next' event label"
 msgid "Next"
 msgstr "Sljedeći"
 
+msgid "Next day starts at"
+msgstr ""
+
 msgid "Nicaragua"
 msgstr "Nikaragva"
 
@@ -6310,6 +6335,13 @@ msgstr "Napajanje LED-a"
 
 msgid "Power management. Consult your receiver's manual for more information."
 msgstr "Upravljanje napajanjem. Dodatne informacije potražite u priručniku prijemnika."
+
+#, fuzzy
+msgid "Power off time"
+msgstr "Sortiranje po vremenu"
+
+msgid "Power off timer"
+msgstr ""
 
 msgid "Power on display"
 msgstr "Prikaz na zaslonu"
@@ -11891,12 +11923,12 @@ msgstr "nestabilan"
 msgid "until standby/restart"
 msgstr "do stanja čekanja/restarta"
 
+msgid "use HDMI cacenter"
+msgstr ""
+
 #, fuzzy
 msgid "use best / controlled by HDMI"
 msgstr "upravljano po HDMI"
-
-msgid "use_hdmi_cacenter"
-msgstr ""
 
 msgid "user defined"
 msgstr "korisnički definirano"

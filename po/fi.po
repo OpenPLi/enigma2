@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-08 10:54+0200\n"
+"POT-Creation-Date: 2022-06-06 17:18+0200\n"
 "PO-Revision-Date: 2020-05-16 18:41+0200\n"
 "Last-Translator: jamu\n"
 "Language-Team: BoxFreak/jamu\n"
@@ -1314,6 +1314,9 @@ msgstr "Automaattiset kirjanmerkit"
 msgid "Automatic scan"
 msgstr "Automaattihaku"
 
+msgid "Automatically power off box to deep standby mode."
+msgstr ""
+
 msgid "Automatically put the TV in standby whenever the receiver goes into standby or deep standby."
 msgstr ""
 
@@ -1903,6 +1906,10 @@ msgstr "Määritä haluatko että monikanavaääni miksataan stereoääneksi."
 
 #, fuzzy
 msgid "Choose whether WMA Pro sound tracks should be downmixed."
+msgstr "Määritä haluatko että monikanavaääni miksataan stereoääneksi."
+
+#, fuzzy
+msgid "Choose whether multi channel DTS-HD(HR/MA) sound tracks should be downmixed or transcoded."
 msgstr "Määritä haluatko että monikanavaääni miksataan stereoääneksi."
 
 #, fuzzy
@@ -2683,8 +2690,9 @@ msgstr ""
 msgid "DTS downmix"
 msgstr "DTS muunnos stereoksi"
 
-msgid "DTS-HD HR/DTS-HD MA/DTS"
-msgstr ""
+#, fuzzy
+msgid "DTS-HD(HR/MA) downmix"
+msgstr "DTS muunnos stereoksi"
 
 msgid "DUAL LAYER DVD"
 msgstr "DUAL LAYER DVD"
@@ -3573,6 +3581,10 @@ msgstr "Ota käyttöön HDMI-CEC"
 msgid "Enable parental protection"
 msgstr "Ota käyttöön lapsilukko"
 
+#, fuzzy
+msgid "Enable power off timer"
+msgstr "Herätysajastin"
+
 msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
 msgstr "Ota käyttöön etävastaanotin. Etävastaanotinta kokeillaan kun paikallisia virittimiä ei voida käyttään - esimerkiksi kun virittimet ovat varattu, tai soveltuvia virittimiä ei ole. Määrittele koko URL mukaanlukien http:// ja portti (yleensä :8001), esimerkiksi http://toinen_laite:8001."
 
@@ -4214,7 +4226,13 @@ msgstr "Seuraavat tehtävät suoritetaan kun painat OK!"
 msgid "Force legacy signal stats"
 msgstr "Pakota vanhat signaalitiedot"
 
+msgid "Force power off (even when not in standby)"
+msgstr ""
+
 msgid "Force zap to recording service in standby"
+msgstr ""
+
+msgid "Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected."
 msgstr ""
 
 #
@@ -4793,6 +4811,9 @@ msgid "If set to 'yes' signal values (SNR, etc) will be calculated from API V3. 
 msgstr "Jos päällä, signaalitiedot (SNR, jne) lasketaan API V3:lla. Tämä on vanhentunut API versio."
 
 msgid "If set to 'yes' the same commands will be sent to the TV for deep standby events, as are sent during regular standby events."
+msgstr ""
+
+msgid "If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here."
 msgstr ""
 
 msgid "If using multiple uncommitted switches the DiSEqC commands must be sent multiple times. Set to the number of uncommitted switches in the chain minus one."
@@ -6076,6 +6097,9 @@ msgctxt "now/next: 'next' event label"
 msgid "Next"
 msgstr "Seuraava"
 
+msgid "Next day starts at"
+msgstr ""
+
 msgid "Nicaragua"
 msgstr "Nicaragua"
 
@@ -7091,6 +7115,14 @@ msgid "Power LED"
 msgstr ""
 
 msgid "Power management. Consult your receiver's manual for more information."
+msgstr ""
+
+#
+#, fuzzy
+msgid "Power off time"
+msgstr "Aikajärj."
+
+msgid "Power off timer"
 msgstr ""
 
 msgid "Power on display"
@@ -13404,12 +13436,12 @@ msgstr ""
 msgid "until standby/restart"
 msgstr "valmiustilaan/uudelleenkäynnistykseen asti"
 
+msgid "use HDMI cacenter"
+msgstr ""
+
 #, fuzzy
 msgid "use best / controlled by HDMI"
 msgstr "HDMI:n määrittelemä"
-
-msgid "use_hdmi_cacenter"
-msgstr ""
 
 #
 msgid "user defined"

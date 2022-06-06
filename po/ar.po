@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OBH enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-08 10:54+0200\n"
+"POT-Creation-Date: 2022-06-06 17:18+0200\n"
 "PO-Revision-Date: 2019-04-12 12:36+0300\n"
 "Last-Translator: mosad - مساعد الجعيد <abo-mishal@hotmail.com>\n"
 "Language-Team: mosad - مساعد الجعيد\n"
@@ -1288,6 +1288,9 @@ msgstr "بحث آلـى"
 msgid "Automatic scan"
 msgstr "بحث آلـى"
 
+msgid "Automatically power off box to deep standby mode."
+msgstr ""
+
 msgid "Automatically put the TV in standby whenever the receiver goes into standby or deep standby."
 msgstr ""
 
@@ -1847,6 +1850,10 @@ msgstr "اختار ما إذا كانت المسارات الصوتية متعد
 
 #, fuzzy
 msgid "Choose whether WMA Pro sound tracks should be downmixed."
+msgstr "اختار ما إذا كانت المسارات الصوتية متعددة القنوات يجب أن تكون مختلطة إلى ستريو."
+
+#, fuzzy
+msgid "Choose whether multi channel DTS-HD(HR/MA) sound tracks should be downmixed or transcoded."
 msgstr "اختار ما إذا كانت المسارات الصوتية متعددة القنوات يجب أن تكون مختلطة إلى ستريو."
 
 #, fuzzy
@@ -2626,8 +2633,9 @@ msgstr ""
 msgid "DTS downmix"
 msgstr "الصوت الدولبي / نظام المسرح الرقمي المزدوج"
 
-msgid "DTS-HD HR/DTS-HD MA/DTS"
-msgstr ""
+#, fuzzy
+msgid "DTS-HD(HR/MA) downmix"
+msgstr "الصوت الدولبي / نظام المسرح الرقمي المزدوج"
 
 msgid "DUAL LAYER DVD"
 msgstr "ديفيدي ثنائي الشاشة"
@@ -3458,6 +3466,10 @@ msgstr "تمكين جدول معلومات الحدث في دليل البرام
 msgid "Enable parental protection"
 msgstr "تمكين الحماية الأبوية"
 
+#, fuzzy
+msgid "Enable power off timer"
+msgstr "تمكين وضع التحريك للقنوات"
+
 msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
 msgstr ""
 
@@ -4078,7 +4090,13 @@ msgstr "سيتم تنفيذ المهام التالية بعد الضغط على
 msgid "Force legacy signal stats"
 msgstr "فرض إحصاءات الإشارات القديمة"
 
+msgid "Force power off (even when not in standby)"
+msgstr ""
+
 msgid "Force zap to recording service in standby"
+msgstr ""
+
+msgid "Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected."
 msgstr ""
 
 msgid "Format"
@@ -4648,6 +4666,9 @@ msgid "If set to 'yes' signal values (SNR, etc) will be calculated from API V3. 
 msgstr "إذا تم تعيينها على قيم إشارة 'نعم' (معدل الإشارة ، الخ) فسيتم حسابها من API V3. هذا إصدار API قديم تم استبداله الآن."
 
 msgid "If set to 'yes' the same commands will be sent to the TV for deep standby events, as are sent during regular standby events."
+msgstr ""
+
+msgid "If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here."
 msgstr ""
 
 msgid "If using multiple uncommitted switches the DiSEqC commands must be sent multiple times. Set to the number of uncommitted switches in the chain minus one."
@@ -5814,6 +5835,9 @@ msgctxt "now/next: 'next' event label"
 msgid "Next"
 msgstr "التالي"
 
+msgid "Next day starts at"
+msgstr ""
+
 msgid "Nicaragua"
 msgstr "نيكاراغوا"
 
@@ -6743,6 +6767,13 @@ msgstr "الأغلاق"
 
 msgid "Power management. Consult your receiver's manual for more information."
 msgstr "إدارة الإغلاق. راجع دليل المتلقي الخاص بك للحصول على المعلومات."
+
+#, fuzzy
+msgid "Power off time"
+msgstr "وقت البدء"
+
+msgid "Power off timer"
+msgstr ""
 
 #, fuzzy
 msgid "Power on display"
@@ -12732,10 +12763,10 @@ msgstr "تفعيل"
 msgid "until standby/restart"
 msgstr "حتى وضع الانتظار/إعادة التشغيل"
 
-msgid "use best / controlled by HDMI"
+msgid "use HDMI cacenter"
 msgstr ""
 
-msgid "use_hdmi_cacenter"
+msgid "use best / controlled by HDMI"
 msgstr ""
 
 msgid "user defined"

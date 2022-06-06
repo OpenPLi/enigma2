@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-08 10:54+0200\n"
+"POT-Creation-Date: 2022-06-06 17:18+0200\n"
 "PO-Revision-Date: 2021-04-30 16:06+0200\n"
 "Last-Translator: kueken\n"
 "Language-Team: OpenPLi\n"
@@ -1184,6 +1184,9 @@ msgstr "Automatische Lesezeichen"
 msgid "Automatic scan"
 msgstr "Automatische Suche"
 
+msgid "Automatically power off box to deep standby mode."
+msgstr ""
+
 msgid "Automatically put the TV in standby whenever the receiver goes into standby or deep standby."
 msgstr "Fernseher wird automatisch mit dem Receiver ausgeschaltet (Standby / Deep Standby)"
 
@@ -1727,6 +1730,10 @@ msgstr "Heruntermischen von Multi-Kanal-Sound in Stereo."
 
 #, fuzzy
 msgid "Choose whether WMA Pro sound tracks should be downmixed."
+msgstr "Heruntermischen von Multi-Kanal-Sound in Stereo."
+
+#, fuzzy
+msgid "Choose whether multi channel DTS-HD(HR/MA) sound tracks should be downmixed or transcoded."
 msgstr "Heruntermischen von Multi-Kanal-Sound in Stereo."
 
 #, fuzzy
@@ -2446,8 +2453,9 @@ msgstr ""
 msgid "DTS downmix"
 msgstr "DTS downmix"
 
-msgid "DTS-HD HR/DTS-HD MA/DTS"
-msgstr ""
+#, fuzzy
+msgid "DTS-HD(HR/MA) downmix"
+msgstr "DTS downmix"
 
 msgid "DUAL LAYER DVD"
 msgstr "Doppelschicht DVD (DUAL LAYER)"
@@ -3204,6 +3212,10 @@ msgstr "Aktiviere oder deaktiviere HDMI-CEC"
 msgid "Enable parental protection"
 msgstr "Jugendschutz aktivieren"
 
+#, fuzzy
+msgid "Enable power off timer"
+msgstr "Aktiviere Aufwach-Timer"
+
 msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
 msgstr "Aktiviert einen Reserve-Receiver, der versucht wird wenn ein Sender lokal nicht empfangen werden kann. (z.B. wenn Tuner belegt oder Sender lokal nicht verfügbar ist). Angabe der kompletten URL inklusive http:// und Port-Nummer (normal ...:8001), z.B. http://zweite_box:8001 notwendig."
 
@@ -3803,7 +3815,13 @@ msgstr "Folgendes wird ausgeführt, nachdem Sie OK gedrückt haben!"
 msgid "Force legacy signal stats"
 msgstr "Erzwinge Legacy-Signal-Statistiken"
 
+msgid "Force power off (even when not in standby)"
+msgstr ""
+
 msgid "Force zap to recording service in standby"
+msgstr ""
+
+msgid "Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected."
 msgstr ""
 
 msgid "Format"
@@ -4331,6 +4349,9 @@ msgstr "Bei “Ja” werden die Signalwerte (SNR usw.) aus API V3 berechnet. Die
 
 msgid "If set to 'yes' the same commands will be sent to the TV for deep standby events, as are sent during regular standby events."
 msgstr "Wenn hier \"ja\" gewählt wird, dann wird Standby und Deep-Standby am TV HDMI gleich behandelt."
+
+msgid "If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here."
+msgstr ""
 
 msgid "If using multiple uncommitted switches the DiSEqC commands must be sent multiple times. Set to the number of uncommitted switches in the chain minus one."
 msgstr "Wenn mehrere nicht festgeschriebene Switches verwendet werden, müssen die DiSEqC-Befehle mehrmals gesendet werden. Legen Sie die Anzahl der nicht festgeschriebenen Switches in der Kette minus eins fest."
@@ -5435,6 +5456,9 @@ msgctxt "now/next: 'next' event label"
 msgid "Next"
 msgstr "Danach"
 
+msgid "Next day starts at"
+msgstr ""
+
 msgid "Nicaragua"
 msgstr "Nicaragua"
 
@@ -6312,6 +6336,13 @@ msgstr "Power-LED"
 
 msgid "Power management. Consult your receiver's manual for more information."
 msgstr "Energieverwaltung. Weitere Informationen finden Sie in der Bedienungsanleitung Ihres Receivers."
+
+#, fuzzy
+msgid "Power off time"
+msgstr "Sortiere nach Zeit"
+
+msgid "Power off timer"
+msgstr ""
 
 msgid "Power on display"
 msgstr "Display einschalten"
@@ -11935,12 +11966,12 @@ msgstr "untestbar"
 msgid "until standby/restart"
 msgstr "Bis zum Standby/Neustart"
 
+msgid "use HDMI cacenter"
+msgstr ""
+
 #, fuzzy
 msgid "use best / controlled by HDMI"
 msgstr "gesteuert von HDMI"
-
-msgid "use_hdmi_cacenter"
-msgstr ""
 
 msgid "user defined"
 msgstr "Benutzerdefiniert"

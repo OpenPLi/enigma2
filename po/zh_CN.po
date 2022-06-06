@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-08 10:54+0200\n"
+"POT-Creation-Date: 2022-06-06 17:18+0200\n"
 "PO-Revision-Date: 2021-07-31 17:00+0800\n"
 "Last-Translator: 孤独之剑 <haotzyy1970@yahoo.com>\n"
 "Language-Team: 孤独之剑 <haotzyy1970@yahoo.com>\n"
@@ -1183,6 +1183,9 @@ msgstr "自动书签"
 msgid "Automatic scan"
 msgstr "自动扫描"
 
+msgid "Automatically power off box to deep standby mode."
+msgstr ""
+
 msgid "Automatically put the TV in standby whenever the receiver goes into standby or deep standby."
 msgstr "当接收器进入待机或深度待机时,自动将电视置于待机状态."
 
@@ -1726,6 +1729,10 @@ msgstr "配置多音轨频道是否缩混音频为立体声."
 
 #, fuzzy
 msgid "Choose whether WMA Pro sound tracks should be downmixed."
+msgstr "配置多音轨频道是否缩混音频为立体声."
+
+#, fuzzy
+msgid "Choose whether multi channel DTS-HD(HR/MA) sound tracks should be downmixed or transcoded."
 msgstr "配置多音轨频道是否缩混音频为立体声."
 
 #, fuzzy
@@ -2441,8 +2448,9 @@ msgstr ""
 msgid "DTS downmix"
 msgstr "DTS缩减混音"
 
-msgid "DTS-HD HR/DTS-HD MA/DTS"
-msgstr ""
+#, fuzzy
+msgid "DTS-HD(HR/MA) downmix"
+msgstr "DTS缩减混音"
 
 msgid "DUAL LAYER DVD"
 msgstr "双层DVD"
@@ -3199,6 +3207,10 @@ msgstr "使用HDMI-CEC启用或禁用."
 msgid "Enable parental protection"
 msgstr "启用家长保护"
 
+#, fuzzy
+msgid "Enable power off timer"
+msgstr "启用唤醒定时器"
+
 msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
 msgstr "启用远程enigma2接收机来尝试介入本地服务器 (如：当本地调谐器被占用或者频道类型不可用时. 指定完整的URL 包括 http:// 和端口数字 (一般为...:8001),如： http://second_box:8001."
 
@@ -3795,8 +3807,15 @@ msgstr "按OK键后,以下任务将被执行!"
 msgid "Force legacy signal stats"
 msgstr "强制旧类型信号状态"
 
+#, fuzzy
+msgid "Force power off (even when not in standby)"
+msgstr "在待机状态下强制切换到录制频道"
+
 msgid "Force zap to recording service in standby"
 msgstr "在待机状态下强制切换到录制频道"
+
+msgid "Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected."
+msgstr ""
 
 msgid "Format"
 msgstr "格式化"
@@ -4322,6 +4341,9 @@ msgstr "如果设置为“是”,信号值（信噪比等）将根据API v3计�
 
 msgid "If set to 'yes' the same commands will be sent to the TV for deep standby events, as are sent during regular standby events."
 msgstr "如果设置为'是',则与常规待机事件中发送的命令相同,深度待机事件中也会发送相同的命令."
+
+msgid "If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here."
+msgstr ""
 
 msgid "If using multiple uncommitted switches the DiSEqC commands must be sent multiple times. Set to the number of uncommitted switches in the chain minus one."
 msgstr "如果使用多个未提交的开关,则必须发送DISEQC命令 多次.设置为链中未提交的开关数减去一个."
@@ -5422,6 +5444,9 @@ msgctxt "now/next: 'next' event label"
 msgid "Next"
 msgstr "稍候播出"
 
+msgid "Next day starts at"
+msgstr ""
+
 msgid "Nicaragua"
 msgstr "尼加拉瓜"
 
@@ -6297,6 +6322,13 @@ msgstr "电源LED"
 
 msgid "Power management. Consult your receiver's manual for more information."
 msgstr "电源管理.有关更多信息,请查阅接收器手册."
+
+#, fuzzy
+msgid "Power off time"
+msgstr "按时间排序"
+
+msgid "Power off timer"
+msgstr ""
 
 msgid "Power on display"
 msgstr "接通电源显示"
@@ -11904,12 +11936,12 @@ msgstr "不可以测试"
 msgid "until standby/restart"
 msgstr "直到待机/重启"
 
+msgid "use HDMI cacenter"
+msgstr ""
+
 #, fuzzy
 msgid "use best / controlled by HDMI"
 msgstr "由HDMI控制"
-
-msgid "use_hdmi_cacenter"
-msgstr ""
 
 msgid "user defined"
 msgstr "用户定义"
