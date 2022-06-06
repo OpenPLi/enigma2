@@ -65,8 +65,8 @@ class Network:
 	def getAddrInet(self, iface, callback):
 		data = {'up': False, 'dhcp': False, 'preup': False, 'predown': False}
 		try:
-			if os.path.exists('/sys/class/net/%s/carrier' % iface):
-				data['up'] = open('/sys/class/net/%s/carrier' % iface).read().strip() == '1'
+			if os.path.exists('/sys/class/net/%s/operstate' % iface):
+				data['up'] = open('/sys/class/net/%s/operstate' % iface).read().strip() == 'up'
 			if data['up']:
 				self.configuredInterfaces.append(iface)
 			nit = ni.ifaddresses(iface)
