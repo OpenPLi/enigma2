@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-08 10:54+0200\n"
+"POT-Creation-Date: 2022-06-06 17:18+0200\n"
 "PO-Revision-Date: 2021-02-19 14:49+0100\n"
 "Last-Translator: \n"
 "Language-Team: Muzoss-VELEBRDO\n"
@@ -1183,6 +1183,9 @@ msgstr "Автоматски обележувачи"
 msgid "Automatic scan"
 msgstr "Автоматско пребарување"
 
+msgid "Automatically power off box to deep standby mode."
+msgstr ""
+
 msgid "Automatically put the TV in standby whenever the receiver goes into standby or deep standby."
 msgstr ""
 
@@ -1726,6 +1729,10 @@ msgstr "Мешање на повеќеканален звук во стерео.
 
 #, fuzzy
 msgid "Choose whether WMA Pro sound tracks should be downmixed."
+msgstr "Мешање на повеќеканален звук во стерео."
+
+#, fuzzy
+msgid "Choose whether multi channel DTS-HD(HR/MA) sound tracks should be downmixed or transcoded."
 msgstr "Мешање на повеќеканален звук во стерео."
 
 #, fuzzy
@@ -2441,8 +2448,9 @@ msgstr ""
 msgid "DTS downmix"
 msgstr "DTS downmix"
 
-msgid "DTS-HD HR/DTS-HD MA/DTS"
-msgstr ""
+#, fuzzy
+msgid "DTS-HD(HR/MA) downmix"
+msgstr "DTS downmix"
 
 msgid "DUAL LAYER DVD"
 msgstr "DUAL LAYER DVD"
@@ -3204,6 +3212,10 @@ msgstr "Активирај или деактивирај користење на
 msgid "Enable parental protection"
 msgstr "Активирај родителска заштита"
 
+#, fuzzy
+msgid "Enable power off timer"
+msgstr "Активирајте тајмер за будење"
+
 msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
 msgstr "Дозволете да пробате да пренесувате канал од дополнителен приемник енигма2 ако локалниот тјунер е зафатен. Наведете го целиот URL, вклучително и http:// и бројот на портата (обично ...:8001), пример: http://IP_addition.Приемник:8001."
 
@@ -3800,7 +3812,13 @@ msgstr "Следниве задачи ќе бидат направени отк�
 msgid "Force legacy signal stats"
 msgstr "Принудени статистики за наследниот сигнал"
 
+msgid "Force power off (even when not in standby)"
+msgstr ""
+
 msgid "Force zap to recording service in standby"
+msgstr ""
+
+msgid "Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected."
 msgstr ""
 
 msgid "Format"
@@ -4327,6 +4345,9 @@ msgstr "Ако е избрано „Да“, вредноста на сигна�
 
 msgid "If set to 'yes' the same commands will be sent to the TV for deep standby events, as are sent during regular standby events."
 msgstr "Ако е поставено на „да“, истите команди ќе бидат испратени до телевизорот за настани во дееп стендбај, како што се испраќаат за време на редовни настани во стендбај."
+
+msgid "If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here."
+msgstr ""
 
 msgid "If using multiple uncommitted switches the DiSEqC commands must be sent multiple times. Set to the number of uncommitted switches in the chain minus one."
 msgstr "Ако се користат неколку неконтригирани switches - прекинувачи, командите DiSEqC мора да се испраќаат неколку пати. Поставете го бројот на неповрзани switches - прекинувачи на ланецот минус еден."
@@ -5431,6 +5452,9 @@ msgctxt "now/next: 'next' event label"
 msgid "Next"
 msgstr "Следно"
 
+msgid "Next day starts at"
+msgstr ""
+
 msgid "Nicaragua"
 msgstr "Никарагва"
 
@@ -6305,6 +6329,13 @@ msgstr "ЛЕД-напојување"
 
 msgid "Power management. Consult your receiver's manual for more information."
 msgstr "Моќен менаџмент. За повеќе информации, видете ги упатствата за работа на вашиот приемник."
+
+#, fuzzy
+msgid "Power off time"
+msgstr "Сортирај според времето"
+
+msgid "Power off timer"
+msgstr ""
 
 msgid "Power on display"
 msgstr "Вклучете го екранот"
@@ -11902,12 +11933,12 @@ msgstr "неиспитано"
 msgid "until standby/restart"
 msgstr "до стендбај / рестартирање"
 
+msgid "use HDMI cacenter"
+msgstr ""
+
 #, fuzzy
 msgid "use best / controlled by HDMI"
 msgstr "контролирана од HDMI"
-
-msgid "use_hdmi_cacenter"
-msgstr ""
 
 msgid "user defined"
 msgstr "корисник дефиниран"

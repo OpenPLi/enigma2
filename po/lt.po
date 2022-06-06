@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-08 10:54+0200\n"
+"POT-Creation-Date: 2022-06-06 17:18+0200\n"
 "PO-Revision-Date: 2022-04-12 21:59+0300\n"
 "Last-Translator: Audronis <adga45@gmail.com>\n"
 "Language-Team: Adga (C) <adga45@gmail.com>\n"
@@ -1191,6 +1191,9 @@ msgstr "Automatinės žymos"
 msgid "Automatic scan"
 msgstr "Automatinė paieška"
 
+msgid "Automatically power off box to deep standby mode."
+msgstr ""
+
 msgid "Automatically put the TV in standby whenever the receiver goes into standby or deep standby."
 msgstr "Automatiškai nustatykite televizorių į budėjimo režimą, kai imtuvas pereina į budėjimo režimą arba gilų budėjimo režimą."
 
@@ -1731,6 +1734,10 @@ msgstr "Pasirinkite, ar AC3 garso takeliai turi būti perkoduoti."
 
 msgid "Choose whether WMA Pro sound tracks should be downmixed."
 msgstr "Pasirinkite, ar WMA Pro garso takeliai turėtų būti sulieti."
+
+#, fuzzy
+msgid "Choose whether multi channel DTS-HD(HR/MA) sound tracks should be downmixed or transcoded."
+msgstr "Pasirinkite, ar kelių kanalų aac+ garso takeliai turi būti sulieti su stereofoniniu ryšiu."
 
 msgid "Choose whether multi channel aac+ sound tracks should be downmixed to stereo."
 msgstr "Pasirinkite, ar kelių kanalų aac+ garso takeliai turi būti sulieti su stereofoniniu ryšiu."
@@ -2443,8 +2450,9 @@ msgstr "DTS"
 msgid "DTS downmix"
 msgstr "DTS suliejimas"
 
-msgid "DTS-HD HR/DTS-HD MA/DTS"
-msgstr "DTS-HD HR/DTS-HD MA/DTS"
+#, fuzzy
+msgid "DTS-HD(HR/MA) downmix"
+msgstr "DTS suliejimas"
 
 msgid "DUAL LAYER DVD"
 msgstr "DVISLUOKSNIS DVD"
@@ -3203,6 +3211,10 @@ msgstr "Įjungti arba išjungti HDMI-CEC."
 msgid "Enable parental protection"
 msgstr "Įjungti tėvų kontrolę"
 
+#, fuzzy
+msgid "Enable power off timer"
+msgstr "Įjungti pažadinimo laikmatį"
+
 msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
 msgstr "Įjungti nuotolinį enigma2 imtuvą, kad būtų galima žiūrėti kanalus, kurie negali būti priimti lokaliai (pvz., imtuvas užimtas, arba kanalas nepasiekiamas vietiniam imtuvui. Nurodykite pilną internetinį adresą, įskaitant http://ir prievado numerį (paprastai ...:8001), pvz., http://antrasis_aparatas:8001."
 
@@ -3793,8 +3805,15 @@ msgstr "Šios užduotys bus atliktos, kai paspausite 'OK'!"
 msgid "Force legacy signal stats"
 msgstr "Priverstinė pasenusių signalų statistika"
 
+#, fuzzy
+msgid "Force power off (even when not in standby)"
+msgstr "Priversti jungti įrašymo paslaugą budėjimo režime"
+
 msgid "Force zap to recording service in standby"
 msgstr "Priversti jungti įrašymo paslaugą budėjimo režime"
+
+msgid "Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected."
+msgstr ""
 
 msgid "Format"
 msgstr "Formatas"
@@ -4316,6 +4335,9 @@ msgstr "Jei nustatyta \"taip\", signalo reikšmės (SNR ir t.t.) bus apskaičiuo
 
 msgid "If set to 'yes' the same commands will be sent to the TV for deep standby events, as are sent during regular standby events."
 msgstr "Jei nustatyta į 'taip', į televizorių bus siunčiamos tos pačios komandos gilaus budėjimo režimo įvykiams, kaip ir įprastų laukimo režimo įvykių metu."
+
+msgid "If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here."
+msgstr ""
 
 msgid "If using multiple uncommitted switches the DiSEqC commands must be sent multiple times. Set to the number of uncommitted switches in the chain minus one."
 msgstr "Jei naudojate kelis neprijungtus jungiklius, DiSEqC komandos turi būti siunčiamos kelis kartus. Nustatykite nenaudojamų jungiklių skaičių grandinėje, atėmus vieną."
@@ -5417,6 +5439,9 @@ msgctxt "now/next: 'next' event label"
 msgid "Next"
 msgstr "Toliau programoje"
 
+msgid "Next day starts at"
+msgstr ""
+
 msgid "Nicaragua"
 msgstr "Nikaragva"
 
@@ -6290,6 +6315,13 @@ msgstr "Maitinimo LED"
 
 msgid "Power management. Consult your receiver's manual for more information."
 msgstr "Maitinimo valdymas. Daugiau informacijos ieškokite savo imtuvo naudojimo instrukcijoje."
+
+#, fuzzy
+msgid "Power off time"
+msgstr "Rūšiuoti pagal laiką"
+
+msgid "Power off timer"
+msgstr ""
 
 msgid "Power on display"
 msgstr "Maitinimas ekrane"
@@ -11870,11 +11902,12 @@ msgstr "netikrintinas"
 msgid "until standby/restart"
 msgstr "iki budėjimo/paleidimo iš naujo"
 
+#, fuzzy
+msgid "use HDMI cacenter"
+msgstr "naudoti_hdmi_cacenter"
+
 msgid "use best / controlled by HDMI"
 msgstr "naudoti geriausią / valdoma HDMI"
-
-msgid "use_hdmi_cacenter"
-msgstr "naudoti_hdmi_cacenter"
 
 msgid "user defined"
 msgstr "naudotojo nustatytas"

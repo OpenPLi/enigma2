@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OPENPLi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-08 10:54+0200\n"
+"POT-Creation-Date: 2022-06-06 17:18+0200\n"
 "PO-Revision-Date: 2015-12-18 21:05+0200\n"
 "Last-Translator: Yetkin AYDIN <yetkina@gmail.com>\n"
 "Language-Team: http://www.hurforum.com <yetkina@gmail.com>\n"
@@ -1190,6 +1190,9 @@ msgstr "Otomatik Tarama"
 msgid "Automatic scan"
 msgstr "Otomatik Tarama"
 
+msgid "Automatically power off box to deep standby mode."
+msgstr ""
+
 msgid "Automatically put the TV in standby whenever the receiver goes into standby or deep standby."
 msgstr ""
 
@@ -1730,6 +1733,10 @@ msgstr "Çok kanallı ses parçalarını stereo downmix olup olmayacağını yap
 
 #, fuzzy
 msgid "Choose whether WMA Pro sound tracks should be downmixed."
+msgstr "Çok kanallı ses parçalarını stereo downmix olup olmayacağını yapılandırın."
+
+#, fuzzy
+msgid "Choose whether multi channel DTS-HD(HR/MA) sound tracks should be downmixed or transcoded."
 msgstr "Çok kanallı ses parçalarını stereo downmix olup olmayacağını yapılandırın."
 
 #, fuzzy
@@ -2465,8 +2472,9 @@ msgstr ""
 msgid "DTS downmix"
 msgstr "DTS downmix"
 
-msgid "DTS-HD HR/DTS-HD MA/DTS"
-msgstr ""
+#, fuzzy
+msgid "DTS-HD(HR/MA) downmix"
+msgstr "DTS downmix"
 
 msgid "DUAL LAYER DVD"
 msgstr "ÇİFT KATMAN DVD"
@@ -3257,6 +3265,10 @@ msgstr "EIT EPG Aktif"
 msgid "Enable parental protection"
 msgstr "Aile koruması etkin"
 
+#, fuzzy
+msgid "Enable power off timer"
+msgstr "Açılış saati aktif"
+
 msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
 msgstr "İkinci uydu alıcısı kontrolünü aktifleştir. Sadece yerel. http://ikinci_cihaz:8001"
 
@@ -3855,7 +3867,13 @@ msgstr "Belirtilen görevler OK'a basmanızın ardından işleme alınacak!"
 msgid "Force legacy signal stats"
 msgstr ""
 
+msgid "Force power off (even when not in standby)"
+msgstr ""
+
 msgid "Force zap to recording service in standby"
+msgstr ""
+
+msgid "Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected."
 msgstr ""
 
 msgid "Format"
@@ -4399,6 +4417,9 @@ msgid "If set to 'yes' signal values (SNR, etc) will be calculated from API V3. 
 msgstr ""
 
 msgid "If set to 'yes' the same commands will be sent to the TV for deep standby events, as are sent during regular standby events."
+msgstr ""
+
+msgid "If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here."
 msgstr ""
 
 msgid "If using multiple uncommitted switches the DiSEqC commands must be sent multiple times. Set to the number of uncommitted switches in the chain minus one."
@@ -5526,6 +5547,9 @@ msgctxt "now/next: 'next' event label"
 msgid "Next"
 msgstr "Sonraki"
 
+msgid "Next day starts at"
+msgstr ""
+
 msgid "Nicaragua"
 msgstr ""
 
@@ -6425,6 +6449,13 @@ msgid "Power LED"
 msgstr ""
 
 msgid "Power management. Consult your receiver's manual for more information."
+msgstr ""
+
+#, fuzzy
+msgid "Power off time"
+msgstr "Sıralama zamanı"
+
+msgid "Power off timer"
 msgstr ""
 
 msgid "Power on display"
@@ -12151,10 +12182,10 @@ msgstr ""
 msgid "until standby/restart"
 msgstr "H.Bekle/Y.Başlatana Kadar"
 
-msgid "use best / controlled by HDMI"
+msgid "use HDMI cacenter"
 msgstr ""
 
-msgid "use_hdmi_cacenter"
+msgid "use best / controlled by HDMI"
 msgstr ""
 
 msgid "user defined"

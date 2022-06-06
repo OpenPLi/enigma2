@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-15 17:58+0200\n"
+"POT-Creation-Date: 2022-06-06 17:18+0200\n"
 "PO-Revision-Date: 2022-05-29 15:28+0300\n"
 "Last-Translator: Мартин Петков <marto74bg@yahoo.co.uk>\n"
 "Language-Team: Bulgarian\n"
@@ -1177,6 +1177,9 @@ msgstr "Автоматични отметки"
 msgid "Automatic scan"
 msgstr "Автоматично Търсене"
 
+msgid "Automatically power off box to deep standby mode."
+msgstr ""
+
 msgid "Automatically put the TV in standby whenever the receiver goes into standby or deep standby."
 msgstr "Автоматично постави ТВ в режим готовност независимо дали приемника се изключва или преминава в режим готовност."
 
@@ -1717,6 +1720,10 @@ msgstr "Изберете дали АА3 звукови пътечки да се 
 
 msgid "Choose whether WMA Pro sound tracks should be downmixed."
 msgstr "Изберете дали WMA Pro звук да се сведе до стерео."
+
+#, fuzzy
+msgid "Choose whether multi channel DTS-HD(HR/MA) sound tracks should be downmixed or transcoded."
+msgstr "Настройка дали многоканален aac+ звук да се сведе до стерео."
 
 msgid "Choose whether multi channel aac+ sound tracks should be downmixed to stereo."
 msgstr "Настройка дали многоканален aac+ звук да се сведе до стерео."
@@ -2429,8 +2436,9 @@ msgstr "DTS"
 msgid "DTS downmix"
 msgstr "DTS downmix"
 
-msgid "DTS-HD HR/DTS-HD MA/DTS"
-msgstr "DTS-HD HR/DTS-HD MA/DTS"
+#, fuzzy
+msgid "DTS-HD(HR/MA) downmix"
+msgstr "DTS downmix"
 
 msgid "DUAL LAYER DVD"
 msgstr "DUAL LAYER DVD"
@@ -3186,6 +3194,10 @@ msgstr "Активиране или деактивиране на HDMI-CEC."
 msgid "Enable parental protection"
 msgstr "Активиране на родителски контрол"
 
+#, fuzzy
+msgid "Enable power off timer"
+msgstr "Активиране на таймер за включване"
+
 msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
 msgstr "Разрешете да се опита пускането на стрийм на канал от допълнителен enigma2 приемник, ако локалния тунер е зает.Укажете пълния URL, включително http:// и номер на порта (обикновено ...:8001), пример: http://IP_допълн.приемник:8001."
 
@@ -3780,8 +3792,15 @@ msgstr "Следните задачи ще бъдат изпълнени, сле
 msgid "Force legacy signal stats"
 msgstr "Избиране на старите стат.данни за сигнала"
 
+#, fuzzy
+msgid "Force power off (even when not in standby)"
+msgstr "Принудително превключване на запис канал в режим на готовност"
+
 msgid "Force zap to recording service in standby"
 msgstr "Принудително превключване на запис канал в режим на готовност"
+
+msgid "Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected."
+msgstr ""
 
 msgid "Format"
 msgstr "Форматиране"
@@ -4301,6 +4320,9 @@ msgstr "При ‘Да’, данните за сигнала (SNR,и т.н.) щ
 
 msgid "If set to 'yes' the same commands will be sent to the TV for deep standby events, as are sent during regular standby events."
 msgstr "Ако е поставено на 'да', същите команди ще бъдат изпратени до ТВ независимо дали приемника е изключен, или в режим готовност."
+
+msgid "If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here."
+msgstr ""
 
 msgid "If using multiple uncommitted switches the DiSEqC commands must be sent multiple times. Set to the number of uncommitted switches in the chain minus one."
 msgstr "При използване на няколко несвързани ключа, DiSEqC командите трябва да се изпратят няколко пъти. Въведете броя на несвързани ключове във веригата минус един."
@@ -5400,6 +5422,9 @@ msgctxt "now/next: 'next' event label"
 msgid "Next"
 msgstr "Следва"
 
+msgid "Next day starts at"
+msgstr ""
+
 msgid "Nicaragua"
 msgstr "Никарагуа"
 
@@ -6273,6 +6298,13 @@ msgstr "LED на бутон Включване"
 
 msgid "Power management. Consult your receiver's manual for more information."
 msgstr "Управление на захранването. За повече информация се консултирайте с инструкцията за вашия приемник."
+
+#, fuzzy
+msgid "Power off time"
+msgstr "По време"
+
+msgid "Power off timer"
+msgstr ""
 
 msgid "Power on display"
 msgstr "Включване на дисплея"
@@ -11832,11 +11864,11 @@ msgstr "непроверено"
 msgid "until standby/restart"
 msgstr "до режим готовност/рестарт"
 
+msgid "use HDMI cacenter"
+msgstr ""
+
 msgid "use best / controlled by HDMI"
 msgstr "най-добре / контролиран от HDMI"
-
-msgid "use_hdmi_cacenter"
-msgstr ""
 
 msgid "user defined"
 msgstr "потребителски"

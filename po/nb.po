@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-08 10:54+0200\n"
+"POT-Creation-Date: 2022-06-06 17:18+0200\n"
 "PO-Revision-Date: 2022-04-29 18:05+0200\n"
 "Last-Translator: GeirJ <dummy@dummy.com>\n"
 "Language-Team: GeirJ\n"
@@ -1300,6 +1300,9 @@ msgstr "Huskeliste"
 msgid "Automatic scan"
 msgstr "Automatisk søk"
 
+msgid "Automatically power off box to deep standby mode."
+msgstr ""
+
 msgid "Automatically put the TV in standby whenever the receiver goes into standby or deep standby."
 msgstr "Sett TV-en automatisk i standby når mottakeren går i standby eller dyp standby."
 
@@ -1904,6 +1907,10 @@ msgstr "Velg om AC3 lydspor skal transkodes."
 
 msgid "Choose whether WMA Pro sound tracks should be downmixed."
 msgstr "Velg om WMA Pro lydspor skal nedmikses."
+
+#, fuzzy
+msgid "Choose whether multi channel DTS-HD(HR/MA) sound tracks should be downmixed or transcoded."
+msgstr "Velg om flerkanals aac+-lydspor skal nedmikses til stereo."
 
 msgid "Choose whether multi channel aac+ sound tracks should be downmixed to stereo."
 msgstr "Velg om flerkanals aac+-lydspor skal nedmikses til stereo."
@@ -2679,8 +2686,9 @@ msgstr "DTS"
 msgid "DTS downmix"
 msgstr "DTS nedskalering"
 
-msgid "DTS-HD HR/DTS-HD MA/DTS"
-msgstr "DTS-HD HR/DTS-HD MA/DTS"
+#, fuzzy
+msgid "DTS-HD(HR/MA) downmix"
+msgstr "DTS nedskalering"
 
 #
 msgid "DUAL LAYER DVD"
@@ -3533,6 +3541,10 @@ msgstr "Aktiver eller deaktiver ved hjelp av HDMI-CEC."
 msgid "Enable parental protection"
 msgstr "Aktiver foreldrekontroll"
 
+#, fuzzy
+msgid "Enable power off timer"
+msgstr "Bruk våkne timer"
+
 msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
 msgstr "Aktiver ekstern enigma2 mottaker som kan brukes til å søke opp kanaler/tjenester som ikke kan nåes lokalt (eks.tuner er opptatt eller kanal/tjeneste er utenfor rekkevidde for lokal tuner). Tast inn komplett URL inkludert http:// og port nummer (normalt ...:8001), eks. http://andre_boks:8001."
 
@@ -4195,8 +4207,15 @@ msgstr "Følgende oppgaver vil bli utført etter at du trykker OK!"
 msgid "Force legacy signal stats"
 msgstr "Bruk eldre type signalstatistikk"
 
+#, fuzzy
+msgid "Force power off (even when not in standby)"
+msgstr "Tving zap til opptakstjeneste i standby"
+
 msgid "Force zap to recording service in standby"
 msgstr "Tving zap til opptakstjeneste i standby"
+
+msgid "Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected."
+msgstr ""
 
 #
 msgid "Format"
@@ -4767,6 +4786,9 @@ msgstr "Hvis satt til 'Ja' signal verdier (SNR, etc) vil bli beregnet fra API v3
 
 msgid "If set to 'yes' the same commands will be sent to the TV for deep standby events, as are sent during regular standby events."
 msgstr "Hvis satt til 'ja' blir de samme kommandoene sendt til TV-en for dyp standby og vanlig standby."
+
+msgid "If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here."
+msgstr ""
 
 msgid "If using multiple uncommitted switches the DiSEqC commands must be sent multiple times. Set to the number of uncommitted switches in the chain minus one."
 msgstr "Hvis du bruker flere ubegrensede switcher, må DiSEqC-kommandoene sendes flere ganger. Angi antall ubegrensede switcher i kjeden minus en."
@@ -6017,6 +6039,9 @@ msgctxt "now/next: 'next' event label"
 msgid "Next"
 msgstr "Neste"
 
+msgid "Next day starts at"
+msgstr ""
+
 msgid "Nicaragua"
 msgstr "Nicaragua"
 
@@ -7011,6 +7036,14 @@ msgstr "Strøm-LED"
 
 msgid "Power management. Consult your receiver's manual for more information."
 msgstr "Strømstyring. Se i din mottakers bruksanvisning for mer informasjon."
+
+#
+#, fuzzy
+msgid "Power off time"
+msgstr "Sorter tid"
+
+msgid "Power off timer"
+msgstr ""
 
 msgid "Power on display"
 msgstr "Slå på display"
@@ -13161,11 +13194,12 @@ msgstr "lar seg ikke teste"
 msgid "until standby/restart"
 msgstr "til slår av/starter på nytt"
 
+#, fuzzy
+msgid "use HDMI cacenter"
+msgstr "bruk HDMI forhåndsvalg"
+
 msgid "use best / controlled by HDMI"
 msgstr "bruk best / kontrollert av HDMI"
-
-msgid "use_hdmi_cacenter"
-msgstr "bruk HDMI forhåndsvalg"
 
 #
 msgid "user defined"

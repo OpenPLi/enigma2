@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Project Slovenia\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-08 10:54+0200\n"
+"POT-Creation-Date: 2022-06-06 17:18+0200\n"
 "PO-Revision-Date: 2020-05-16 18:48+0200\n"
 "Last-Translator: Taykun345 <support@satnigmo.com>\n"
 "Language-Team: Satnigmo <support@satnigmo.com>\n"
@@ -1385,6 +1385,9 @@ msgstr "Samodejno iskanje "
 msgid "Automatic scan"
 msgstr "Samodejno iskanje "
 
+msgid "Automatically power off box to deep standby mode."
+msgstr ""
+
 msgid "Automatically put the TV in standby whenever the receiver goes into standby or deep standby."
 msgstr ""
 
@@ -1993,6 +1996,10 @@ msgstr "Nastavitev omogoča pretvorbo večkanalnega zvoka v stereo zvok. Priporo
 
 #, fuzzy
 msgid "Choose whether WMA Pro sound tracks should be downmixed."
+msgstr "Nastavitev omogoča pretvorbo večkanalnega zvoka v stereo zvok. Priporočena nastavitev je \"Da\", sicer se lahko zgodi, da pri nekaterih TV kanalih zvok ne bo deloval."
+
+#, fuzzy
+msgid "Choose whether multi channel DTS-HD(HR/MA) sound tracks should be downmixed or transcoded."
 msgstr "Nastavitev omogoča pretvorbo večkanalnega zvoka v stereo zvok. Priporočena nastavitev je \"Da\", sicer se lahko zgodi, da pri nekaterih TV kanalih zvok ne bo deloval."
 
 #, fuzzy
@@ -2809,8 +2816,9 @@ msgstr ""
 msgid "DTS downmix"
 msgstr "Pretvorba DTS zvoka v stereo"
 
-msgid "DTS-HD HR/DTS-HD MA/DTS"
-msgstr ""
+#, fuzzy
+msgid "DTS-HD(HR/MA) downmix"
+msgstr "Pretvorba DTS zvoka v stereo"
 
 #
 msgid "DUAL LAYER DVD"
@@ -3744,6 +3752,11 @@ msgstr "EIT EPG sistem"
 msgid "Enable parental protection"
 msgstr "Vklop starševskega nadzora"
 
+#
+#, fuzzy
+msgid "Enable power off timer"
+msgstr "Premik kanalov znotraj paketa"
+
 msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
 msgstr "Omogoči možnost, da se oddaljeni/rezervni enigma2 sprejemnik uporabi za gledanje kanalov, ki niso na voljo na primarnem sprejemniku ali pa je kanalnik zaseden s sprejemom nekega drugega kanala. Določite celoten naslov - EUR, vključno s \"http: //\". in številko vrat (običajno ...:8001 ), na primer http: // rezervni_sprejemnik:8001."
 
@@ -4413,7 +4426,13 @@ msgstr "Sledeče naloge bodo opravljene, ko pritisnete OK!"
 msgid "Force legacy signal stats"
 msgstr ""
 
+msgid "Force power off (even when not in standby)"
+msgstr ""
+
 msgid "Force zap to recording service in standby"
+msgstr ""
+
+msgid "Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected."
 msgstr ""
 
 #
@@ -5015,6 +5034,9 @@ msgid "If set to 'yes' signal values (SNR, etc) will be calculated from API V3. 
 msgstr ""
 
 msgid "If set to 'yes' the same commands will be sent to the TV for deep standby events, as are sent during regular standby events."
+msgstr ""
+
+msgid "If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here."
 msgstr ""
 
 msgid "If using multiple uncommitted switches the DiSEqC commands must be sent multiple times. Set to the number of uncommitted switches in the chain minus one."
@@ -6317,6 +6339,9 @@ msgctxt "now/next: 'next' event label"
 msgid "Next"
 msgstr "Potem"
 
+msgid "Next day starts at"
+msgstr ""
+
 msgid "Nicaragua"
 msgstr ""
 
@@ -7360,6 +7385,14 @@ msgid "Power LED"
 msgstr ""
 
 msgid "Power management. Consult your receiver's manual for more information."
+msgstr ""
+
+#
+#, fuzzy
+msgid "Power off time"
+msgstr "Čas urejanja"
+
+msgid "Power off timer"
 msgstr ""
 
 msgid "Power on display"
@@ -13843,10 +13876,10 @@ msgstr ""
 msgid "until standby/restart"
 msgstr "do stanja pripravljenosti/resetiranja"
 
-msgid "use best / controlled by HDMI"
+msgid "use HDMI cacenter"
 msgstr ""
 
-msgid "use_hdmi_cacenter"
+msgid "use best / controlled by HDMI"
 msgstr ""
 
 #

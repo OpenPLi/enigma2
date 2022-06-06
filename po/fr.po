@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-08 10:54+0200\n"
-"PO-Revision-Date: 2022-05-08 10:55+0200\n"
+"POT-Creation-Date: 2022-06-06 17:18+0200\n"
+"PO-Revision-Date: 2022-06-06 17:24+0200\n"
 "Last-Translator: Pr2\n"
 "Language-Team: french\n"
 "Language: fr\n"
@@ -1177,6 +1177,9 @@ msgstr "Signets automatiques"
 msgid "Automatic scan"
 msgstr "Recherche automatique"
 
+msgid "Automatically power off box to deep standby mode."
+msgstr "Éteindre automatiquement le récepteur en mode veille profonde."
+
 msgid "Automatically put the TV in standby whenever the receiver goes into standby or deep standby."
 msgstr "Mettre automatiquement le téléviseur en veille chaque fois que le récepteur est en veille ou en veille profonde."
 
@@ -1717,6 +1720,9 @@ msgstr "Défini si la piste son AC3 doit être transcodée."
 
 msgid "Choose whether WMA Pro sound tracks should be downmixed."
 msgstr "Défini si la piste audio WMA Pro  doit être remixées en stéréo."
+
+msgid "Choose whether multi channel DTS-HD(HR/MA) sound tracks should be downmixed or transcoded."
+msgstr "Choisissez si les pistes sonores multicanaux DTS-HD(HR/MA) doivent être downmixées ou transcodées."
 
 msgid "Choose whether multi channel aac+ sound tracks should be downmixed to stereo."
 msgstr "Défini si la piste audio multi canaux AAC+ doit être remixées en stéréo."
@@ -2429,8 +2435,8 @@ msgstr "DTS"
 msgid "DTS downmix"
 msgstr "Downmix DTS"
 
-msgid "DTS-HD HR/DTS-HD MA/DTS"
-msgstr "DTS-HD HR/DTS-HD MA/DTS"
+msgid "DTS-HD(HR/MA) downmix"
+msgstr "Downmix DTS-HD(HR/MA)"
 
 msgid "DUAL LAYER DVD"
 msgstr "DVD DOUBLE COUCHE"
@@ -3186,6 +3192,9 @@ msgstr "Activer ou désactiver à l’aide de HDMI-CEC."
 msgid "Enable parental protection"
 msgstr "Activer la protection parentale"
 
+msgid "Enable power off timer"
+msgstr "Activation de la minuterie de mise hors tension"
+
 msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
 msgstr "Activer un récepteur enigma2 distant pour essayer de syntoniser les services qui ne peuvent pas l'être localement (p.e. tuners occupés ou le type de service n'est pas disponible sur les tuners locaux. Spécifier l'URL complète http:// et le numéro de port (normalement ...: 8001), p.e. http://second_demo:8001."
 
@@ -3781,8 +3790,14 @@ msgstr "Les tâches suivantes seront réalisées après avoir appuyé sur OK!"
 msgid "Force legacy signal stats"
 msgstr "Forcer les statistiques de signal hérité"
 
+msgid "Force power off (even when not in standby)"
+msgstr "Forcer la mise hors tension (même si il n'est pas en veille)"
+
 msgid "Force zap to recording service in standby"
 msgstr "Forcer le zap vers le service à enregistrer en veille"
+
+msgid "Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected."
+msgstr "Forcer la veille profonde, même lorsqu'il n'est pas en veille. Les enregistrements programmés ne sont pas impactés."
 
 msgid "Format"
 msgstr "Format"
@@ -4302,6 +4317,9 @@ msgstr "Si défini à ‘oui’ les valeurs du signal (SNR,etc) seront calculés
 
 msgid "If set to 'yes' the same commands will be sent to the TV for deep standby events, as are sent during regular standby events."
 msgstr "Si elles sont définies comme « oui », les mêmes commandes seront envoyées à la télévision pour des événements de veille profonde, comme cela est envoyé lors d’événements de veille réguliers."
+
+msgid "If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here."
+msgstr "Si le récepteur est censé entrer en veille profonde, par exemple le lundi soir à 1 heure du matin, il est en fait déjà mardi. Pour l'activer de toute façon, il est possible de spécifier ici une heure de démarrage différente du jour suivant."
 
 msgid "If using multiple uncommitted switches the DiSEqC commands must be sent multiple times. Set to the number of uncommitted switches in the chain minus one."
 msgstr "Si vous utilisez plusieurs commutateurs DiSEqC non-commité les commandes doivent être envoyées plusieurs fois. Définir le nombre de commutateur non commité dans la chaîne moins un."
@@ -5400,6 +5418,9 @@ msgctxt "now/next: 'next' event label"
 msgid "Next"
 msgstr "Suivant"
 
+msgid "Next day starts at"
+msgstr "Le jour suivant commence à"
+
 msgid "Nicaragua"
 msgstr "Nicaragua"
 
@@ -6273,6 +6294,12 @@ msgstr "LED d'alimentation"
 
 msgid "Power management. Consult your receiver's manual for more information."
 msgstr "Gestion de l’alimentation. Consultez le manuel de votre récepteur pour plus d’information."
+
+msgid "Power off time"
+msgstr "Heure de mise hors tension"
+
+msgid "Power off timer"
+msgstr "Minuterie de mise hors tension"
 
 msgid "Power on display"
 msgstr "Allumage de l’affichage"
@@ -8839,7 +8866,7 @@ msgstr ""
 "\n"
 "Support: https://www.openpli.org/\n"
 "Traducteur: Pr2\n"
-"Dernière MÀJ: 08-05-2022"
+"Dernière MÀJ: 06-06-2022"
 
 msgid "TS file is too large for ISO9660 level 1!"
 msgstr "Fichier TS trop grand pour le niveau 1 ISO9660!"
@@ -11853,11 +11880,11 @@ msgstr "non testable"
 msgid "until standby/restart"
 msgstr "Jusqu'à veille/redémarrage"
 
+msgid "use HDMI cacenter"
+msgstr "utiliser HDMI cacenter"
+
 msgid "use best / controlled by HDMI"
 msgstr "utilise le meilleur / contrôlé par HDMI"
-
-msgid "use_hdmi_cacenter"
-msgstr "utiliser_hdmi_cacenter"
 
 msgid "user defined"
 msgstr "Défini par l'utilisateur"

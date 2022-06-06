@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-08 10:54+0200\n"
+"POT-Creation-Date: 2022-06-06 17:18+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: IMS <ims@openpli.org>\n"
 "Language-Team: PLi <ims@openpli.org>\n"
@@ -1363,6 +1363,9 @@ msgstr "Automatické záložky"
 msgid "Automatic scan"
 msgstr "Automatické prohledávání"
 
+msgid "Automatically power off box to deep standby mode."
+msgstr ""
+
 msgid "Automatically put the TV in standby whenever the receiver goes into standby or deep standby."
 msgstr "Při přepnutí přijímače do pohotovostního režimu nebo hlubokého spánku se bude vypínat i televizní přijímač."
 
@@ -1970,6 +1973,10 @@ msgstr "Zvolte, zda by měly být zvukové stopy AC3 překódovány."
 
 msgid "Choose whether WMA Pro sound tracks should be downmixed."
 msgstr "Zvolte, zda mají být zvukové stopy WMA přepočítávány."
+
+#, fuzzy
+msgid "Choose whether multi channel DTS-HD(HR/MA) sound tracks should be downmixed or transcoded."
+msgstr "Zvolte, zda by měly být vícekanálové zvukové stopy acc+ přepočítávány na stereo."
 
 msgid "Choose whether multi channel aac+ sound tracks should be downmixed to stereo."
 msgstr "Zvolte, zda by měly být vícekanálové zvukové stopy acc+ přepočítávány na stereo."
@@ -2775,8 +2782,9 @@ msgstr "DTS"
 msgid "DTS downmix"
 msgstr "DTS přepočet"
 
-msgid "DTS-HD HR/DTS-HD MA/DTS"
-msgstr "DTS-HD HR/DTS-HD MA/DTS"
+#, fuzzy
+msgid "DTS-HD(HR/MA) downmix"
+msgstr "DTS přepočet"
 
 #
 msgid "DUAL LAYER DVD"
@@ -3676,6 +3684,11 @@ msgstr "Povoluje nebo zakazuje používání HDMI-CEC."
 msgid "Enable parental protection"
 msgstr "Povolit rodičovskou ochranu"
 
+#
+#, fuzzy
+msgid "Enable power off timer"
+msgstr "Časovač probouzení"
+
 msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
 msgstr "Na vzdáleném přijímači se budou zkoušet naladit služby, které nelze naladit lokálně (např. tuner je obsazený nebo typ služby není k dispozici na místním tuneru). Zadejte úplnou URL adresu včetně http:// a číslo portu (normálně ...:8001), například http://druhy_box:8001."
 
@@ -4346,8 +4359,15 @@ msgstr "Následující úlohy budou provedeny po stisknutí OK!"
 msgid "Force legacy signal stats"
 msgstr "Vynutit starší signálové statistiky"
 
+#, fuzzy
+msgid "Force power off (even when not in standby)"
+msgstr "V pohotovostním režimu vynutit přepnutí na nahrávaný program"
+
 msgid "Force zap to recording service in standby"
 msgstr "V pohotovostním režimu vynutit přepnutí na nahrávaný program"
+
+msgid "Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected."
+msgstr ""
 
 #
 msgid "Format"
@@ -4926,6 +4946,9 @@ msgstr "Pokud je nastaveno 'Ano', hodnoty signálu (SNR, atd.) budou počítány
 
 msgid "If set to 'yes' the same commands will be sent to the TV for deep standby events, as are sent during regular standby events."
 msgstr "Při přechodu do hlubokého spánku se budou posílat stejné příkazy jako při přechodu přijímače do pohotovostního režimu."
+
+msgid "If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here."
+msgstr ""
 
 msgid "If using multiple uncommitted switches the DiSEqC commands must be sent multiple times. Set to the number of uncommitted switches in the chain minus one."
 msgstr "Pokud používáte více uncommited přepínačů, musí být příkazy DiSEqC odesílány několikrát. Nastavte počet uncommited přepínačů v řetězci zmenšený o jeden."
@@ -6210,6 +6233,9 @@ msgctxt "now/next: 'next' event label"
 msgid "Next"
 msgstr "Další"
 
+msgid "Next day starts at"
+msgstr ""
+
 msgid "Nicaragua"
 msgstr "Nikaragua"
 
@@ -7240,6 +7266,14 @@ msgstr ""
 
 msgid "Power management. Consult your receiver's manual for more information."
 msgstr "Řízení spotřeby. Další informace získáte v návodu k přijímači."
+
+#
+#, fuzzy
+msgid "Power off time"
+msgstr "Setřídit dle času"
+
+msgid "Power off timer"
+msgstr ""
 
 msgid "Power on display"
 msgstr "Zapnout displej"
@@ -13593,11 +13627,11 @@ msgstr "netestovatelné"
 msgid "until standby/restart"
 msgstr "do standby/restartu"
 
+msgid "use HDMI cacenter"
+msgstr ""
+
 msgid "use best / controlled by HDMI"
 msgstr "použít nejlepší / řízeno pomocí HDMI"
-
-msgid "use_hdmi_cacenter"
-msgstr ""
 
 #
 msgid "user defined"
