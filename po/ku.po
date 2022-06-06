@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 Kurdish translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-08 10:54+0200\n"
+"POT-Creation-Date: 2022-06-06 17:18+0200\n"
 "PO-Revision-Date: 2013-04-22 04:29+0330\n"
 "Last-Translator: dimili21\n"
 "Language-Team: \n"
@@ -1197,6 +1197,9 @@ msgstr "Automatic Légerin"
 msgid "Automatic scan"
 msgstr "Automatic Légerin"
 
+msgid "Automatically power off box to deep standby mode."
+msgstr ""
+
 msgid "Automatically put the TV in standby whenever the receiver goes into standby or deep standby."
 msgstr ""
 
@@ -1737,6 +1740,10 @@ msgstr "Configure whether multi channel sound tracks should be downmixed to ster
 
 #, fuzzy
 msgid "Choose whether WMA Pro sound tracks should be downmixed."
+msgstr "Configure whether multi channel sound tracks should be downmixed to stereo."
+
+#, fuzzy
+msgid "Choose whether multi channel DTS-HD(HR/MA) sound tracks should be downmixed or transcoded."
 msgstr "Configure whether multi channel sound tracks should be downmixed to stereo."
 
 #, fuzzy
@@ -2466,8 +2473,9 @@ msgstr ""
 msgid "DTS downmix"
 msgstr "DTS downmix"
 
-msgid "DTS-HD HR/DTS-HD MA/DTS"
-msgstr ""
+#, fuzzy
+msgid "DTS-HD(HR/MA) downmix"
+msgstr "DTS downmix"
 
 msgid "DUAL LAYER DVD"
 msgstr "DUAL LAYER DVD"
@@ -3251,6 +3259,10 @@ msgstr "Enable EIT EPG"
 msgid "Enable parental protection"
 msgstr ""
 
+#, fuzzy
+msgid "Enable power off timer"
+msgstr "Enable move mode"
+
 msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
 msgstr ""
 
@@ -3839,7 +3851,13 @@ msgstr "Following tasks will be done after you press OK!"
 msgid "Force legacy signal stats"
 msgstr ""
 
+msgid "Force power off (even when not in standby)"
+msgstr ""
+
 msgid "Force zap to recording service in standby"
+msgstr ""
+
+msgid "Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected."
 msgstr ""
 
 msgid "Format"
@@ -4379,6 +4397,9 @@ msgid "If set to 'yes' signal values (SNR, etc) will be calculated from API V3. 
 msgstr ""
 
 msgid "If set to 'yes' the same commands will be sent to the TV for deep standby events, as are sent during regular standby events."
+msgstr ""
+
+msgid "If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here."
 msgstr ""
 
 msgid "If using multiple uncommitted switches the DiSEqC commands must be sent multiple times. Set to the number of uncommitted switches in the chain minus one."
@@ -5505,6 +5526,9 @@ msgctxt "now/next: 'next' event label"
 msgid "Next"
 msgstr "Next"
 
+msgid "Next day starts at"
+msgstr ""
+
 msgid "Nicaragua"
 msgstr ""
 
@@ -6401,6 +6425,13 @@ msgid "Power LED"
 msgstr ""
 
 msgid "Power management. Consult your receiver's manual for more information."
+msgstr ""
+
+#, fuzzy
+msgid "Power off time"
+msgstr "Sort time"
+
+msgid "Power off timer"
 msgstr ""
 
 msgid "Power on display"
@@ -12087,10 +12118,10 @@ msgstr ""
 msgid "until standby/restart"
 msgstr "until standby/restart"
 
-msgid "use best / controlled by HDMI"
+msgid "use HDMI cacenter"
 msgstr ""
 
-msgid "use_hdmi_cacenter"
+msgid "use best / controlled by HDMI"
 msgstr ""
 
 msgid "user defined"

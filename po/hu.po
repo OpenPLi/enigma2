@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-08 10:54+0200\n"
+"POT-Creation-Date: 2022-06-06 17:18+0200\n"
 "PO-Revision-Date: 2021-11-03 15:10+0100\n"
 "Last-Translator: mcfly82\n"
 "Language-Team: mcfly82 & wysless\n"
@@ -1179,6 +1179,9 @@ msgstr "Automatikus könyvjelzők"
 msgid "Automatic scan"
 msgstr "Automatikus keresés"
 
+msgid "Automatically power off box to deep standby mode."
+msgstr ""
+
 msgid "Automatically put the TV in standby whenever the receiver goes into standby or deep standby."
 msgstr "Automatikusan készenléti módba helyezi a TV-készüléket, amikor a beltéri egységet készenlétbe vagy mély-készenlétbe kapcsolja."
 
@@ -1722,6 +1725,10 @@ msgstr "A többcsatornás hangsávok (pl. 5.1-es) lekeverése sztereóra."
 
 #, fuzzy
 msgid "Choose whether WMA Pro sound tracks should be downmixed."
+msgstr "A többcsatornás hangsávok (pl. 5.1-es) lekeverése sztereóra."
+
+#, fuzzy
+msgid "Choose whether multi channel DTS-HD(HR/MA) sound tracks should be downmixed or transcoded."
 msgstr "A többcsatornás hangsávok (pl. 5.1-es) lekeverése sztereóra."
 
 #, fuzzy
@@ -2435,8 +2442,9 @@ msgstr ""
 msgid "DTS downmix"
 msgstr "DTS lekeverése"
 
-msgid "DTS-HD HR/DTS-HD MA/DTS"
-msgstr ""
+#, fuzzy
+msgid "DTS-HD(HR/MA) downmix"
+msgstr "DTS lekeverése"
 
 msgid "DUAL LAYER DVD"
 msgstr "Kétréteges DVD"
@@ -3197,6 +3205,10 @@ msgstr "HDMI-CEC engedélyezése vagy letiltása"
 msgid "Enable parental protection"
 msgstr "Gyermekzár védelem engedélyezése"
 
+#, fuzzy
+msgid "Enable power off timer"
+msgstr "Felébresztés időzítő engedélyezése"
+
 msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
 msgstr "Lehetővé teszi, hogy egy távoli enigma2 készülékről próbálja meg a csatorna megjelenítését, ha a helyi tuner erre nem képes (pl. a tuner foglalt, mert egy másik csatornán felvétel van folyamatban). Adja meg a tljes URL-t, beleértve a 'http://' részt és a port számát is. Pl: http://second_box:8001."
 
@@ -3789,8 +3801,15 @@ msgstr "A műveletek az OK gomb lenyomása után lesznek végrehajtva!"
 msgid "Force legacy signal stats"
 msgstr "Hagyományos jel-statisztikák kényszerítése"
 
+#, fuzzy
+msgid "Force power off (even when not in standby)"
+msgstr "Készenléti módban a felvétel esetén az adott csatornára ugrás kényszerítése"
+
 msgid "Force zap to recording service in standby"
 msgstr "Készenléti módban a felvétel esetén az adott csatornára ugrás kényszerítése"
+
+msgid "Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected."
+msgstr ""
 
 msgid "Format"
 msgstr "Formázás"
@@ -4317,6 +4336,9 @@ msgstr "'Igen' beállítás esetén a jelszint értékek (SNR, stb.) az API V3-b
 
 msgid "If set to 'yes' the same commands will be sent to the TV for deep standby events, as are sent during regular standby events."
 msgstr "Ha 'igen'-re állítja, ugyanazokat a parancsokat küldi a TV-készüléknek mély-készenlét eseményeknél, mint a hagyományos készenlét eseményeknél."
+
+msgid "If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here."
+msgstr ""
 
 msgid "If using multiple uncommitted switches the DiSEqC commands must be sent multiple times. Set to the number of uncommitted switches in the chain minus one."
 msgstr "Ha több nem elkötelezett DiSEqC kapcsolót használ, a parancsokat többször kell elküldeni. Adja meg a rendszerében lévő kapcsolók számát eggyel csökkentve."
@@ -5420,6 +5442,9 @@ msgctxt "now/next: 'next' event label"
 msgid "Next"
 msgstr "Következik"
 
+msgid "Next day starts at"
+msgstr ""
+
 msgid "Nicaragua"
 msgstr "Nicaragua"
 
@@ -6296,6 +6321,13 @@ msgstr "LED jelző fény"
 
 msgid "Power management. Consult your receiver's manual for more information."
 msgstr "Energiagazdálkodás. További információkért olvassa el készüléke használati útmutatóját."
+
+#, fuzzy
+msgid "Power off time"
+msgstr "Rendez: Idő"
+
+msgid "Power off timer"
+msgstr ""
 
 msgid "Power on display"
 msgstr "Előlapi kijelző"
@@ -11903,12 +11935,12 @@ msgstr "nem tesztelhető"
 msgid "until standby/restart"
 msgstr "kikapcsolásig/újraindításig"
 
+msgid "use HDMI cacenter"
+msgstr ""
+
 #, fuzzy
 msgid "use best / controlled by HDMI"
 msgstr "HDMI által vezérelve"
-
-msgid "use_hdmi_cacenter"
-msgstr ""
 
 msgid "user defined"
 msgstr "felhasználó által megadva"

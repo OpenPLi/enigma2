@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-08 10:54+0200\n"
+"POT-Creation-Date: 2022-06-06 17:18+0200\n"
 "PO-Revision-Date: 2014-11-12 00:49+0200\n"
 "Last-Translator: Taapat <taapat@gmail.com>\n"
 "Language-Team: Taapat <taapat@gmail.com>\n"
@@ -1192,6 +1192,9 @@ msgstr "Veidot grāmatzīmes automātiski"
 msgid "Automatic scan"
 msgstr "Automātiskā meklēšana"
 
+msgid "Automatically power off box to deep standby mode."
+msgstr ""
+
 msgid "Automatically put the TV in standby whenever the receiver goes into standby or deep standby."
 msgstr "Pārslēgt TV gaidīšanas režīmā neatkarīgi no tā vai uztvērējs izslēdzas vai pārslēdzas gaidīšanas režīmā."
 
@@ -1732,6 +1735,10 @@ msgstr "Izvēlieties, vai AC3 skaņas celiņi tiks pārkodēti."
 
 msgid "Choose whether WMA Pro sound tracks should be downmixed."
 msgstr "Izvēlieties, vai WMA Pro skaņas celiņi tiks dekodēti."
+
+#, fuzzy
+msgid "Choose whether multi channel DTS-HD(HR/MA) sound tracks should be downmixed or transcoded."
+msgstr "Izvēlieties kā daudzkanālu skaņu celiņi tiks dekodēti uz stereo."
 
 msgid "Choose whether multi channel aac+ sound tracks should be downmixed to stereo."
 msgstr "Izvēlieties kā daudzkanālu skaņu celiņi tiks dekodēti uz stereo."
@@ -2444,8 +2451,9 @@ msgstr "DTS"
 msgid "DTS downmix"
 msgstr "DTS dekodēšana"
 
-msgid "DTS-HD HR/DTS-HD MA/DTS"
-msgstr "DTS-HD HR/DTS-HD MA/DTS"
+#, fuzzy
+msgid "DTS-HD(HR/MA) downmix"
+msgstr "DTS dekodēšana"
 
 msgid "DUAL LAYER DVD"
 msgstr "Dubultslāņu DVD"
@@ -3202,6 +3210,10 @@ msgstr "Ieslēgt vai izslēgt HDMI-CEC."
 msgid "Enable parental protection"
 msgstr "Aktivizēt vecāku kontroli"
 
+#, fuzzy
+msgid "Enable power off timer"
+msgstr "Aktivizēt pamodināšanas taimeri"
+
 msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
 msgstr "Izmantot citu Enigma2 uztvērēju, kuru lietot lai mēģinātu uztvert kanālu kurš nav uztverams lokāli (piem. uztvērējs ir aizņemts vai kanāla veids nav pieejams lokālajā uztvērējā). Norādiet pilnu adresi ieskaitot http:// un porta numuru (pēc noklusējuma ...:8001), piem. http://second_box:8001."
 
@@ -3796,8 +3808,15 @@ msgstr "Šādi uzdevumi tiks veikti pēc tam, kad nospiedīsiet OK!"
 msgid "Force legacy signal stats"
 msgstr "Piespiedu mantoto signālu statistika"
 
+#, fuzzy
+msgid "Force power off (even when not in standby)"
+msgstr "Gaidstāvē pārslēgt uz ierakstāmo kanālu"
+
 msgid "Force zap to recording service in standby"
 msgstr "Gaidstāvē pārslēgt uz ierakstāmo kanālu"
+
+msgid "Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected."
+msgstr ""
 
 msgid "Format"
 msgstr "Formatēt"
@@ -4317,6 +4336,9 @@ msgstr "Ja iestatīts 'jā', signāla vērtības (SNR utt.) tiks aprēķinātas 
 
 msgid "If set to 'yes' the same commands will be sent to the TV for deep standby events, as are sent during regular standby events."
 msgstr "Ja iestatīts 'jā', uz TV tieks sūtītas vienādas komandas gan izslēdzoties, gan pārslēdzoties gaidstāvē."
+
+msgid "If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here."
+msgstr ""
 
 msgid "If using multiple uncommitted switches the DiSEqC commands must be sent multiple times. Set to the number of uncommitted switches in the chain minus one."
 msgstr "Ja izmanto vairākus nesaistītus slēdžus (uncommitted switches), DiSEqC komandas ir jānosūta vairākas reizes. Iestatiet nesaistīto slēdžu skaitu, atskaitot vienu."
@@ -5417,6 +5439,9 @@ msgctxt "now/next: 'next' event label"
 msgid "Next"
 msgstr "Nākamais"
 
+msgid "Next day starts at"
+msgstr ""
+
 msgid "Nicaragua"
 msgstr "Nikaragva"
 
@@ -6290,6 +6315,13 @@ msgstr "Ieslēgt LED"
 
 msgid "Power management. Consult your receiver's manual for more information."
 msgstr "Barošanas pārvaldīšana. Lai iegūtu papildinformāciju, skatiet uztvērēja rokasgrāmatu."
+
+#, fuzzy
+msgid "Power off time"
+msgstr "Kārt. laiks"
+
+msgid "Power off timer"
+msgstr ""
 
 msgid "Power on display"
 msgstr "Ieslēgt displeju"
@@ -11863,11 +11895,12 @@ msgstr "netestēts"
 msgid "until standby/restart"
 msgstr "līdz gaidstāvei/pārstartēšanai"
 
+#, fuzzy
+msgid "use HDMI cacenter"
+msgstr "izmantot hdmi cacenter"
+
 msgid "use best / controlled by HDMI"
 msgstr "izmantot labāko no HDMI"
-
-msgid "use_hdmi_cacenter"
-msgstr "izmantot hdmi cacenter"
 
 msgid "user defined"
 msgstr "lietotāja definēts"

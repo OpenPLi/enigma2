@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Openpli\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-08 10:54+0200\n"
+"POT-Creation-Date: 2022-06-06 17:18+0200\n"
 "PO-Revision-Date: 2019-04-03 06:49+0300\n"
 "Last-Translator: \n"
 "Language-Team: Raivo, Henkka, eesatfan, rimas, zeros\\n faas, sateks, valgekotkas, tigekala, rootsikunn\\n kain, i70, mustkass, pelmeen, Scott\\n <digi-tv.ee>\n"
@@ -1192,6 +1192,9 @@ msgstr "Automaatne järjehoidjad"
 msgid "Automatic scan"
 msgstr "Automaatotsing"
 
+msgid "Automatically power off box to deep standby mode."
+msgstr ""
+
 msgid "Automatically put the TV in standby whenever the receiver goes into standby or deep standby."
 msgstr ""
 
@@ -1726,6 +1729,10 @@ msgstr "Määra, kas mitmekanaline heli tuleks taandada stereoks."
 
 #, fuzzy
 msgid "Choose whether WMA Pro sound tracks should be downmixed."
+msgstr "Määra, kas mitmekanaline heli tuleks taandada stereoks."
+
+#, fuzzy
+msgid "Choose whether multi channel DTS-HD(HR/MA) sound tracks should be downmixed or transcoded."
 msgstr "Määra, kas mitmekanaline heli tuleks taandada stereoks."
 
 #, fuzzy
@@ -2448,8 +2455,9 @@ msgstr ""
 msgid "DTS downmix"
 msgstr "DTS > stereo"
 
-msgid "DTS-HD HR/DTS-HD MA/DTS"
-msgstr ""
+#, fuzzy
+msgid "DTS-HD(HR/MA) downmix"
+msgstr "DTS > stereo"
 
 msgid "DUAL LAYER DVD"
 msgstr "Kahekihiline DVD"
@@ -3230,6 +3238,10 @@ msgstr "Luba HDMI-CEC"
 msgid "Enable parental protection"
 msgstr "Luba vanemate poolne kontroll"
 
+#, fuzzy
+msgid "Enable power off timer"
+msgstr "Luba äratustaimer"
+
 msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
 msgstr "Luba E2 kaugvastuvõtjal proovida häälestuda teenustele, mida ei saa kohapeal kasutada (näiteks kohaliku vastuvõtja tuuner on hõivatud või teenuse tüüp on kohalikule tuunerile sobimatu. Määra terviklik URL mis sisaldab http:// ja pordi numbrit (tavaliselt ...:8001), näiteks http://second_box:8001"
 
@@ -3831,7 +3843,13 @@ msgstr "Järgmised toimingud tehakse pärast OK vajutamist!"
 msgid "Force legacy signal stats"
 msgstr "Kasuta aegunud signaalistatistikat"
 
+msgid "Force power off (even when not in standby)"
+msgstr ""
+
 msgid "Force zap to recording service in standby"
+msgstr ""
+
+msgid "Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected."
 msgstr ""
 
 msgid "Format"
@@ -4361,6 +4379,9 @@ msgid "If set to 'yes' signal values (SNR, etc) will be calculated from API V3. 
 msgstr "Määrates 'jah', arvutatakse signaali väärused (SNR, jms.) API V3 põhjal. See on vana API versioon, mis on nüüd asendatud uuega."
 
 msgid "If set to 'yes' the same commands will be sent to the TV for deep standby events, as are sent during regular standby events."
+msgstr ""
+
+msgid "If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here."
 msgstr ""
 
 msgid "If using multiple uncommitted switches the DiSEqC commands must be sent multiple times. Set to the number of uncommitted switches in the chain minus one."
@@ -5476,6 +5497,9 @@ msgctxt "now/next: 'next' event label"
 msgid "Next"
 msgstr "Järgmine"
 
+msgid "Next day starts at"
+msgstr ""
+
 msgid "Nicaragua"
 msgstr "Nicaragua"
 
@@ -6360,6 +6384,13 @@ msgstr ""
 
 msgid "Power management. Consult your receiver's manual for more information."
 msgstr "Toitehaldus. Uuri lähemalt vastuvõtja käsiraamatust."
+
+#, fuzzy
+msgid "Power off time"
+msgstr "Aja järgi"
+
+msgid "Power off timer"
+msgstr ""
 
 msgid "Power on display"
 msgstr "Sisselülitus näidikul"
@@ -12075,10 +12106,10 @@ msgstr "ebastabiilne"
 msgid "until standby/restart"
 msgstr "kuni ooterežiimini/taaskäivitamiseni"
 
-msgid "use best / controlled by HDMI"
+msgid "use HDMI cacenter"
 msgstr ""
 
-msgid "use_hdmi_cacenter"
+msgid "use best / controlled by HDMI"
 msgstr ""
 
 msgid "user defined"
