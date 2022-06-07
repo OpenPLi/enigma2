@@ -1192,7 +1192,7 @@ msgid "Automatic scan"
 msgstr "Автоматическое сканирование"
 
 msgid "Automatically power off box to deep standby mode."
-msgstr ""
+msgstr "Автоматическое выключение ресивера в глубокий режим ожидания."
 
 msgid "Automatically put the TV in standby whenever the receiver goes into standby or deep standby."
 msgstr "Автоматически переводите ТВ в режим ожидания, когда ресивер переходит в режим ожидания или глубокий режим ожидания."
@@ -1735,9 +1735,8 @@ msgstr "Выберите, следует ли перекодировать зв�
 msgid "Choose whether WMA Pro sound tracks should be downmixed."
 msgstr "Выберите, следует ли микшировать звуковые дорожки WMA Pro."
 
-#, fuzzy
 msgid "Choose whether multi channel DTS-HD(HR/MA) sound tracks should be downmixed or transcoded."
-msgstr "Выберите, следует ли микшировать многоканальные звуковые дорожки AAC+ в стерео."
+msgstr "Выберите, следует ли микшировать или транскодировать многоканальные звуковые дорожки DTS-HD(HR/MA)."
 
 msgid "Choose whether multi channel aac+ sound tracks should be downmixed to stereo."
 msgstr "Выберите, следует ли микшировать многоканальные звуковые дорожки AAC+ в стерео."
@@ -2450,9 +2449,8 @@ msgstr "DTS"
 msgid "DTS downmix"
 msgstr "Микширование DTS"
 
-#, fuzzy
 msgid "DTS-HD(HR/MA) downmix"
-msgstr "Микширование DTS"
+msgstr "Микширование DTS-HD(HR/MA)"
 
 msgid "DUAL LAYER DVD"
 msgstr "DUAL LAYER (двойной слой) DVD"
@@ -3209,9 +3207,8 @@ msgstr "Включение или отключение использовани�
 msgid "Enable parental protection"
 msgstr "Включить родительский контроль"
 
-#, fuzzy
 msgid "Enable power off timer"
-msgstr "Активировать таймер включения"
+msgstr "Активировать таймер выключения"
 
 msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
 msgstr "Разрешить удаленный ресивер на enigma2, который попытается запустить стрим этого сервиса, если локальный тюнер занят.Укажите полный URL, включая http:// и номер порта (обычно ...:8001), пример: http://айпи_удаленного_ресивера:8001."
@@ -3807,15 +3804,14 @@ msgstr "Выполнение процесса начнется после тог
 msgid "Force legacy signal stats"
 msgstr "Статистика уровня snr/db из E2(если поддерживается)"
 
-#, fuzzy
 msgid "Force power off (even when not in standby)"
-msgstr "Принудительно переключать на канал записи в режиме ожидания"
+msgstr "Принудительное выключение (даже если не в режиме ожидания)"
 
 msgid "Force zap to recording service in standby"
 msgstr "Принудительно переключать на канал записи в режиме ожидания"
 
 msgid "Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected."
-msgstr ""
+msgstr "Принудительно переходить в глубокий режим ожидания, даже если ресивер не находится в режиме ожидания (просмотр ТВ). Запланированные записи остаются в силе."
 
 msgid "Format"
 msgstr "Формат"
@@ -4337,7 +4333,7 @@ msgid "If set to 'yes' the same commands will be sent to the TV for deep standby
 msgstr "Если установлено 'да', то для событий режима глубокого ожидания на ТВ будут отправляться те же команды, что и во время обычных событий для режима ожидания."
 
 msgid "If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here."
-msgstr ""
+msgstr "Если ресивер должен перейти в глубокий режим ожидания, например в понедельник вечером в час ночи, а на самом деле уже вторник. Чтобы сделать это в любом случае, здесь можно указать другое время начала следующего дня."
 
 msgid "If using multiple uncommitted switches the DiSEqC commands must be sent multiple times. Set to the number of uncommitted switches in the chain minus one."
 msgstr "При использовании нескольких uncommitted переключателей, команды DiSEqC необходимо отправлять несколько раз. Установите количество uncommitted переключателей в цепочке, минус один."
@@ -5441,7 +5437,7 @@ msgid "Next"
 msgstr "Далее"
 
 msgid "Next day starts at"
-msgstr ""
+msgstr "Следующий день начинается в"
 
 msgid "Nicaragua"
 msgstr "Nicaragua"
@@ -6319,12 +6315,11 @@ msgstr "LED питания"
 msgid "Power management. Consult your receiver's manual for more information."
 msgstr "Управление питанием. Для получения дополнительной информации обратитесь к инструкции."
 
-#, fuzzy
 msgid "Power off time"
-msgstr "По времени"
+msgstr "Время таймера выключения"
 
 msgid "Power off timer"
-msgstr ""
+msgstr "Таймер выключения"
 
 msgid "Power on display"
 msgstr "Питание на дисплее"
@@ -8889,7 +8884,7 @@ msgstr "TEXT"
 
 #. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
 msgid "TRANSLATOR_INFO"
-msgstr "Dmitrij - 27.2.2022"
+msgstr "Dmitrij - 07.06.2022"
 
 msgid "TS file is too large for ISO9660 level 1!"
 msgstr "TS файл слишком большой для ISO9660 level 1!"
@@ -11897,7 +11892,6 @@ msgstr "непроверяема"
 msgid "until standby/restart"
 msgstr "до режима ожидания/перезагрузки"
 
-#, fuzzy
 msgid "use HDMI cacenter"
 msgstr "использовать HDMI cacenter"
 
