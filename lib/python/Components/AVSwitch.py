@@ -173,7 +173,7 @@ def InitAVSwitch():
 	SystemInfo["ScartSwitch"] = eAVSwitch.getInstance().haveScartSwitch()
 
 	def ch(node):
-		return node, pnD.get(node) if pnD.get(node) else node
+		return node, pnD.get(node, node)
 
 	# dictionary ... "proc_node_name" : _("human translatable texts"),
 	pnD = {
