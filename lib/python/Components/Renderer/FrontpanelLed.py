@@ -16,7 +16,7 @@ PATTERN_BLINK = (20, 0x55555555, 0xa7fccf7a)
 class LedPatterns():
 	def __init__(self):
 		self.__led0_patterns = [PATTERN_OFF, PATTERN_BLINK, PATTERN_ON, PATTERN_BLINK]
-		self.__led1_patterns = [PATTERN_ON, PATTERN_ON, PATTERN_OFF, PATTERN_OFF]
+		self.__led1_patterns = [PATTERN_ON, PATTERN_ON, PATTERN_OFF, PATTERN_ON]
 
 	def setLedPatterns(self, which, patterns):
 		if which == 0:
