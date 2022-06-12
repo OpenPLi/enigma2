@@ -66,7 +66,7 @@ class Network:
 		data = {'up': False, 'dhcp': False, 'preup': False, 'predown': False}
 		try:
 			if os.path.exists('/sys/class/net/%s/operstate' % iface):
-				data['up'] = open('/sys/class/net/%s/operstate' % iface).read().strip() == 'up'
+				data['up'] = open('/sys/class/net/%s/operstate' % iface).read().strip() == 'up' or open('/sys/class/net/%s/flags' % iface).read().strip() == '0x1003'
 			if data['up']:
 				self.configuredInterfaces.append(iface)
 			nit = ni.ifaddresses(iface)
