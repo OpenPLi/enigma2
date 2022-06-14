@@ -42,7 +42,7 @@ class Network:
 		return self.remoteRootFS
 
 	def isBlacklisted(self, iface):
-		return iface in ('lo', 'wifi0', 'wmaster0', 'sit0', 'tun0', 'sys0', 'p2p0')
+		return iface in ('lo', 'wifi0', 'wmaster0', 'sit0', 'tun0', 'sys0', 'p2p0', 'wg0')
 
 	def getInterfaces(self, callback=None):
 		self.configuredInterfaces = []
@@ -67,7 +67,7 @@ class Network:
 		try:
 			if os.path.exists('/sys/class/net/%s/operstate' % iface):
 				data['up'] = open('/sys/class/net/%s/operstate' % iface).read().strip() == 'up' or open('/sys/class/net/%s/flags' % iface).read().strip() == '0x1003'
-			if data['up']:
+			if data['up'] and iface not in self.configuredInterfaces:
 				self.configuredInterfaces.append(iface)
 			nit = ni.ifaddresses(iface)
 			data['ip'] = self.convertIP(nit[ni.AF_INET][0]['addr']) # ipv4
