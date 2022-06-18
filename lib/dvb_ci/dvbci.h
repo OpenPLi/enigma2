@@ -66,6 +66,7 @@ class eDVBCISlot: public iObject, public sigc::trackable
 	bool user_mapped;
 	void data(int);
 	bool plugged;
+	eMainloop *m_context;
 
 	eDVBCIApplicationManagerSession *getAppManager() { return application_manager; }
 	eDVBCIMMISession *getMMIManager() { return mmi_session; }
@@ -85,12 +86,15 @@ class eDVBCISlot: public iObject, public sigc::trackable
 	int setSource(const std::string &source);
 	int setClockRate(int);
 	void determineCIVersion();
+	int setEnabled(bool);
 	static std::string getTunerLetter(int tuner_no) { return std::string(1, char(65 + tuner_no)); }
 public:
-	enum {stateRemoved, stateInserted, stateInvalid, stateResetted};
+	enum {stateRemoved, stateInserted, stateInvalid, stateResetted, stateDisabled};
 	enum {versionUnknown = -1, versionCI = 0, versionCIPlus1 = 1, versionCIPlus2 = 2};
 	eDVBCISlot(eMainloop *context, int nr);
 	~eDVBCISlot();
+	void closeDevice();
+	void openDevice();
 
 	int send(const unsigned char *data, size_t len);
 
@@ -183,6 +187,7 @@ public:
 	void ciRemoved(eDVBCISlot *slot);
 	int getSlotState(int slot);
 
+	int setCIEnabled(int slot, bool enabled);
 	int reset(int slot);
 	int initialize(int slot);
 	int startMMI(int slot);
