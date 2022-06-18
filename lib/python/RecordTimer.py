@@ -385,6 +385,14 @@ class RecordTimerEntry(timer.TimerEntry):
 			print("[TIMER] sourceactive was send")
 
 	def activate(self):
+		if not self.InfoBarInstance:
+			try:
+				import Screens.InfoBar
+			except:
+				print "[RecordTimer] import'Screens.InfoBar' failed"
+			else:
+				self.InfoBarInstance = Screens.InfoBar.InfoBar.instance
+
 		next_state = self.state + 1
 		self.log(5, "activating state %d" % next_state)
 
