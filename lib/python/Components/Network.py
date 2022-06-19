@@ -2,6 +2,7 @@ import os
 import re
 import netifaces as ni
 from socket import *
+from enigma import eTimer
 from Components.Console import Console
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
@@ -66,7 +67,7 @@ class Network:
 		data = {'up': False, 'dhcp': False, 'preup': False, 'predown': False}
 		try:
 			if os.path.exists('/sys/class/net/%s/operstate' % iface):
-				data['up'] = open('/sys/class/net/%s/operstate' % iface).read().strip() == 'up' or open('/sys/class/net/%s/flags' % iface).read().strip() == '0x1003'
+				data['up'] = int(open('/sys/class/net/%s/flags' % iface).read().strip(), 16) & 1 == 1
 			if data['up'] and iface not in self.configuredInterfaces:
 				self.configuredInterfaces.append(iface)
 			nit = ni.ifaddresses(iface)
@@ -631,5 +632,31 @@ class Network:
 iNetwork = Network()
 
 
+class NetworkCheck:
+	def __init__(self):
+		self.Timer = eTimer()
+		self.Timer.callback.append(self.startCheckNetwork)
+
+	def startCheckNetwork(self):
+		self.Timer.stop()
+		if self.Retry > 0:
+			try:
+				gws = ni.gateways()
+				if 'default' in gws and len(gws['default']) > 0:
+					print("[NetworkCheck] CheckNetwork - Done - Reload interface data")
+					iNetwork.getInterfaces()
+					return
+				self.Retry = self.Retry - 1
+				self.Timer.start(1000, True)
+			except Exception as e:
+				print("[NetworkCheck] CheckNetwork - Error: %s" % str(e))
+
+	def Start(self):
+		self.Retry = 30
+		self.Timer.start(1000, True)
+
+
 def InitNetwork():
-	pass
+	global networkCheck
+	networkCheck = NetworkCheck()
+	networkCheck.Start()
