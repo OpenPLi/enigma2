@@ -44,7 +44,7 @@ class CiModuleControl(Renderer, VariableText):
 						add_num = True
 						if string:
 							string += " "
-						if state != -1:
+						if state not in (-1, 3):
 							if state == 0:
 								if not self.allVisible:
 									string += ""
