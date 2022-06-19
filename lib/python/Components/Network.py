@@ -2,6 +2,7 @@ import os
 import re
 import netifaces as ni
 from socket import *
+from enigma import eTimer
 from Components.Console import Console
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
@@ -42,7 +43,7 @@ class Network:
 		return self.remoteRootFS
 
 	def isBlacklisted(self, iface):
-		return iface in ('lo', 'wifi0', 'wmaster0', 'sit0', 'tun0', 'sys0', 'p2p0')
+		return iface in ('lo', 'wifi0', 'wmaster0', 'sit0', 'tun0', 'sys0', 'p2p0', 'wg0')
 
 	def getInterfaces(self, callback=None):
 		self.configuredInterfaces = []
@@ -66,8 +67,8 @@ class Network:
 		data = {'up': False, 'dhcp': False, 'preup': False, 'predown': False}
 		try:
 			if os.path.exists('/sys/class/net/%s/operstate' % iface):
-				data['up'] = open('/sys/class/net/%s/operstate' % iface).read().strip() == 'up'
-			if data['up']:
+				data['up'] = int(open('/sys/class/net/%s/flags' % iface).read().strip(), 16) & 1 == 1
+			if data['up'] and iface not in self.configuredInterfaces:
 				self.configuredInterfaces.append(iface)
 			nit = ni.ifaddresses(iface)
 			data['ip'] = self.convertIP(nit[ni.AF_INET][0]['addr']) # ipv4
@@ -631,5 +632,31 @@ class Network:
 iNetwork = Network()
 
 
+class NetworkCheck:
+	def __init__(self):
+		self.Timer = eTimer()
+		self.Timer.callback.append(self.startCheckNetwork)
+
+	def startCheckNetwork(self):
+		self.Timer.stop()
+		if self.Retry > 0:
+			try:
+				gws = ni.gateways()
+				if 'default' in gws and len(gws['default']) > 0:
+					print("[NetworkCheck] CheckNetwork - Done - Reload interface data")
+					iNetwork.getInterfaces()
+					return
+				self.Retry = self.Retry - 1
+				self.Timer.start(1000, True)
+			except Exception as e:
+				print("[NetworkCheck] CheckNetwork - Error: %s" % str(e))
+
+	def Start(self):
+		self.Retry = 30
+		self.Timer.start(1000, True)
+
+
 def InitNetwork():
-	pass
+	global networkCheck
+	networkCheck = NetworkCheck()
+	networkCheck.Start()
