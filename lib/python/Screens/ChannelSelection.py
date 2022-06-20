@@ -1928,6 +1928,8 @@ config.servicelist.startupmode = ConfigText(default="tv")
 
 
 class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelectionEPG, SelectionEventInfo):
+	ALLOW_SUSPEND = True
+
 	def __init__(self, session):
 		ChannelSelectionBase.__init__(self, session)
 		ChannelSelectionEdit.__init__(self)
