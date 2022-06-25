@@ -116,7 +116,12 @@ class SleepTimerEdit(ConfigListScreen, Screen):
 		self.list.append(getConfigListEntry(_("Enable power off timer"),
 			config.usage.poweroff_enabled,
 			_("Automatically power off box to deep standby mode.")))
-		if config.usage.poweroff_enabled.value:
+		active = False
+		for i in range(7):
+			if config.usage.poweroff_day[i].value:
+				active = True
+				break
+		if config.usage.poweroff_enabled.value and active:
 			for i in range(7):
 				self.list.append(getConfigListEntry([_("Monday"), _("Tuesday"), _("Wednesday"), _("Thursday"), _("Friday"), _("Saturday"), _("Sunday")][i],
 					config.usage.poweroff_day[i]))
@@ -144,7 +149,7 @@ class SleepTimerEdit(ConfigListScreen, Screen):
 			else:
 				sleepTimer = int(sleepTimer)
 			if sleepTimer or not self.getCurrentEntry().endswith(_("(not activated)")):
-				InfoBar.instance.setSleepTimer(sleepTimer)
+				InfoBar.instance and InfoBar.instance.setSleepTimer(sleepTimer)
 			self.close(True)
 		self.close()
 
@@ -171,8 +176,8 @@ class SleepTimerEdit(ConfigListScreen, Screen):
 		remaining = 0
 		ref = self.session.nav.getCurrentlyPlayingServiceReference()
 		if ref:
-			path = ref.getPath()
-			if path: # Movie
+			refstr = ref.toString()
+			if "%3a//" not in refstr and refstr.rsplit(":", 1)[1].startswith("/"): # Movie
 				service = self.session.nav.getCurrentService()
 				seek = service and service.seek()
 				if seek:
