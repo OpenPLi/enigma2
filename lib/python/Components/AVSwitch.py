@@ -178,10 +178,12 @@ def InitAVSwitch():
 	# dictionary ... "proc_node_name" : _("human translatable texts"),
 	pnD = {
 		"ac3" : _("AC3"),
+		"center" : _("center"),
 		"dac" : _("DAC"),
 		"dts" : _("DTS"),
 		"downmix" : _("Downmix"),
-		"extrawide" : _("extrawide"),
+		"disabled" : _("off"),
+		"extrawide" : _("extra wide"),
 		"force_ac3" : _("convert to AC3"),
 		"force_dts" : _("convert to DTS"),
 		"hdmi" : _("HDMI"),
@@ -399,7 +401,12 @@ def InitAVSwitch():
 	if SystemInfo["Has3DSurroundSpeaker"]:
 		def set3DSurroundSpeaker(configElement):
 			open(SystemInfo["Has3DSurroundSpeaker"], "w").write(configElement.value)
-		config.av.surround_3d_speaker = ConfigSelection(default="disabled", choices=[("disabled", _("off")), ("center", _("center")), ("wide", _("wide")), ("extrawide", _("extra wide"))])
+		choices = [(ch("center")), (ch("wide")), (ch("extrawide"))]
+		default = "center"
+		if SystemInfo["CanProc"]:
+			f = "/proc/stb/audio/3dsurround_choices"
+			(choices, default) = readChoices(f, choices, default)
+		config.av.surround_3d_speaker = ConfigSelection(choices=choices, default=default)
 		config.av.surround_3d_speaker.addNotifier(set3DSurroundSpeaker)
 
 	if SystemInfo["Has3DSurroundSoftLimiter"]:
