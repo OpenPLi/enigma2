@@ -78,7 +78,7 @@ config.hdmicec.fixed_physical_address = ConfigText(default="0.0.0.0")
 config.hdmicec.volume_forwarding = ConfigYesNo(default=False)
 config.hdmicec.control_receiver_wakeup = ConfigYesNo(default=False)
 config.hdmicec.control_receiver_standby = ConfigYesNo(default=False)
-config.hdmicec.handle_deepstandby_events = ConfigYesNo(default=False)
+config.hdmicec.handle_deepstandby_events = ConfigSelection(default="no", choices=[("no", _("No")), ("yes", _("Yes")), ("poweroff", _("Only power off"))])
 choicelist = []
 for i in (10, 50, 100, 150, 250, 500, 750, 1000):
 	choicelist.append(("%d" % i, _("%d ms") % i))
@@ -131,7 +131,7 @@ class HdmiCec:
 				if config.hdmicec.report_active_source.value and NavigationInstance.instance and not NavigationInstance.instance.isRestartUI():
 					self.sendMessage(0, "sourceinactive")
 				self.sendMessage(0, "menuactive")
-			if config.hdmicec.handle_deepstandby_events.value and (not getFPWasTimerWakeup() or (config.usage.startup_to_standby.value == "no" and config.misc.prev_wakeup_time_type.value == 3)):
+			if config.hdmicec.handle_deepstandby_events.value == "yes" and (not getFPWasTimerWakeup() or (config.usage.startup_to_standby.value == "no" and config.misc.prev_wakeup_time_type.value == 3)):
 				self.onLeaveStandby()
 
 	def getPhysicalAddress(self):
@@ -298,7 +298,7 @@ class HdmiCec:
 		self.standbyMessages()
 
 	def onEnterDeepStandby(self, configElement):
-		if config.hdmicec.enabled.value and config.hdmicec.handle_deepstandby_events.value:
+		if config.hdmicec.enabled.value and config.hdmicec.handle_deepstandby_events.value != "no":
 			if config.hdmicec.next_boxes_detect.value:
 				self.delay.start(750, True)
 			else:
