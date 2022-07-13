@@ -326,7 +326,7 @@ class RecordTimerEntry(timer.TimerEntry):
 			description = self.description
 			if self.repeated:
 				epgcache = eEPGCache.getInstance()
-				queryTime = self.begin + (self.end - self.begin) / 2
+				queryTime = self.begin + (self.end - self.begin) // 2
 				evt = epgcache.lookupEventTime(rec_ref, queryTime)
 				if evt:
 					if self.rename_repeat:
