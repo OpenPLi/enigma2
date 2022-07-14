@@ -20,6 +20,7 @@ from Components.GUIComponent import GUIComponent
 from skin import applySkinFactor, parameters, parseScale
 
 import os
+import glob
 
 
 class About(Screen):
@@ -52,16 +53,26 @@ class About(Screen):
 
 		AboutText += _("DVB driver version: ") + about.getDriverInstalledDate() + "\n"
 
-		GStreamerVersion = _("Media player: GStreamer, version ") + about.getGStreamerVersionString().replace("GStreamer", "")
+		GStreamerVersion = about.getGStreamerVersionString().replace("GStreamer", "")
 		self["GStreamerVersion"] = StaticText(GStreamerVersion)
 
-		ffmpegVersion = _("Media player: ffmpeg, version ") + about.getffmpegVersionString()
+		ffmpegVersion = about.getffmpegVersionString()
 		self["ffmpegVersion"] = StaticText(ffmpegVersion)
 
+		player = None
 		if cpu.upper().startswith('HI') or os.path.isdir('/proc/hisi'):
-			AboutText += ffmpegVersion + "\n"
-		else:
-			AboutText += GStreamerVersion + "\n"
+			if os.path.isdir("/usr/lib/hisilicon") and glob.glob("/usr/lib/hisilicon/libavcodec.so.*"):
+				player = _("Media player") + ": ffmpeg, " + _("Hardware Accelerated")
+			elif ffmpegVersion[0].isdigit():
+				player = _("Media player") + ": ffmpeg, " + _("version") + " " + ffmpegVersion
+
+		if player is None:
+			if GStreamerVersion:
+				player = _("Media player") + ": Gstreamer, " + _("version") + " " + GStreamerVersion
+			else:
+				player = _("Media player") + ": " + _("Not Installed")
+
+		AboutText += player + "\n"
 
 		AboutText += _("Python version: ") + about.getPythonVersionString() + "\n"
 
@@ -454,11 +465,9 @@ class Troubleshoot(Screen):
 		self.close()
 
 	def getDebugFilesList(self):
-		import glob
 		return [x for x in sorted(glob.glob("/home/root/enigma.*.debuglog"), key=lambda x: os.path.isfile(x) and os.path.getmtime(x))]
 
 	def getLogFilesList(self):
-		import glob
 		home_root = "/home/root/enigma2_crash.log"
 		tmp = "/tmp/enigma2_crash.log"
 		return [x for x in sorted(glob.glob("/mnt/hdd/*.log"), key=lambda x: os.path.isfile(x) and os.path.getmtime(x))] + (os.path.isfile(home_root) and [home_root] or []) + (os.path.isfile(tmp) and [tmp] or [])
