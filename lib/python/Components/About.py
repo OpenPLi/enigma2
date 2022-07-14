@@ -63,7 +63,7 @@ def getGStreamerVersionString():
 		gst = [x.split("Version: ") for x in open(glob("/var/lib/opkg/info/gstreamer[0-9].[0-9].control")[0], "r") if x.startswith("Version:")][0]
 		return "%s" % gst[1].split("+")[0].replace("\n", "")
 	except:
-		return _("Not Installed")
+		return ""
 
 
 def getffmpegVersionString():
@@ -72,7 +72,7 @@ def getffmpegVersionString():
 		ffmpeg = [x.split("Version: ") for x in open(glob("/var/lib/opkg/info/ffmpeg.control")[0], "r") if x.startswith("Version:")][0]
 		return "%s" % ffmpeg[1].split("-")[0].replace("\n", "")
 	except:
-		return _("Not Installed")
+		return ""
 
 
 def getKernelVersionString():
