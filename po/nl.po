@@ -1444,9 +1444,8 @@ msgstr "Instellen CI (Common Interface)"
 msgid "CI assignment"
 msgstr "CI toewijzing"
 
-#, fuzzy
 msgid "CI enabled"
-msgstr "FCC geactiveerd"
+msgstr "CI geactiveerd"
 
 msgid "CI slot: "
 msgstr "CI slot: "
@@ -1735,9 +1734,8 @@ msgstr "Indien geactiveerd, dan stelt u hiermee in of AC3 geluid omgezet moet wo
 msgid "Choose whether WMA Pro sound tracks should be downmixed."
 msgstr "Indien geactiveerd, dan stelt u hiermee in of WMA Pro geluid omgezet moet worden naar stereo."
 
-#, fuzzy
 msgid "Choose whether multi channel DTS-HD(HR/MA) sound tracks should be downmixed or transcoded."
-msgstr "Indien geactiveerd, dan stelt u hiermee in of Multi channel AAC geluid omgezet moet worden naar stereo."
+msgstr "Indien geactiveerd, dan stelt u hiermee in of Multi channel DTS-HD(HR/MA) geluid omgezet moet worden naar stereo of moet worden getranscodeerd."
 
 msgid "Choose whether multi channel aac+ sound tracks should be downmixed to stereo."
 msgstr "Indien geactiveerd, dan stelt u hiermee in of Multi channel AAC geluid omgezet moet worden naar stereo."
@@ -2616,9 +2614,8 @@ msgstr "DTS"
 msgid "DTS downmix"
 msgstr "DTS downmix"
 
-#, fuzzy
 msgid "DTS-HD(HR/MA) downmix"
-msgstr "DTS downmix"
+msgstr "DTS-HD(HR/MA) downmix"
 
 msgid "DUAL LAYER DVD"
 msgstr "DUAL LAYER DVD"
@@ -2699,7 +2696,7 @@ msgid "Default+Picon"
 msgstr "Standaard + Picon"
 
 msgid "Define additional delay in milliseconds before start of http(s) streams, e.g. to connect a remote tuner, you use a complex system of DiSEqC."
-msgstr ""
+msgstr "Definieer de startvertraging in milliseconden, voordat de http(s) stream start. Bijvoorbeeld voor verbindingen met andere tuners of bij complexe DiSEqC installaties."
 
 msgid "Define the location of the EPG Cache file."
 msgstr "Geef de plaats van het EPG cache bestand aan."
@@ -3388,9 +3385,8 @@ msgstr "Indien geactiveerd, dan wordt HDMI-CEC ingeschakeld."
 msgid "Enable parental protection"
 msgstr "Kinderslot inschakelen"
 
-#, fuzzy
 msgid "Enable power off timer"
-msgstr "Activeer de 'wake up timer'"
+msgstr "Activeer de uitschakel timer"
 
 msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
 msgstr "Indien geactiveerd, dan wordt er een link naar een externe enigma2 receiver actief waarmee er, naast de huidige locale tuners, een extra tuner beschikbaar komt. Hiermee wordt de flexibiliteit om meer kanalen simultaan vanaf één ontvanger te kunnen opnemen aanzienlijk vergroot. De opties worden hierna uitgelegd."
@@ -3987,17 +3983,16 @@ msgid "Following tasks will be done after you press OK!"
 msgstr "Nadat u op Ok drukt worden de volgende taken uitgevoerd!"
 
 msgid "Force legacy signal stats"
-msgstr "Force Legacy Signal Stats"
+msgstr "Forceer oude signaal Statistieken"
 
-#, fuzzy
 msgid "Force power off (even when not in standby)"
-msgstr "Zap naar de op te nemen zender in stand-by"
+msgstr "Schakel ook uit indien niet in stand-by"
 
 msgid "Force zap to recording service in standby"
 msgstr "Zap naar de op te nemen zender in stand-by"
 
 msgid "Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected."
-msgstr ""
+msgstr "Forceert het uitschakelen van de ontvanger, zelfs als deze niet in stand-by modes staat. Dit heeft geen impact op ingeplande opnames."
 
 msgid "Format"
 msgstr "Formaat"
@@ -4444,7 +4439,7 @@ msgid "How many minutes do you want to record?"
 msgstr "Hoeveel minuten wilt u opnemen?"
 
 msgid "Http(s) stream start delay"
-msgstr ""
+msgstr "Opstart vertraging voor streams"
 
 msgid "Hue"
 msgstr "Tint"
@@ -4522,7 +4517,7 @@ msgid "If set to 'yes' the same commands will be sent to the TV for deep standby
 msgstr "Indien geactiveerd, dan zal een identiek signaal verstuurd worden by 'deep stand-by' als bij 'gewoon stand-by'."
 
 msgid "If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here."
-msgstr ""
+msgstr "Hiermee kan de start van een nieuwe dag verschoven worden naar een later tijdstip. Hiermee kan een periode na mindernacht nog gezien worden als de avond van de vorige dag."
 
 msgid "If using multiple uncommitted switches the DiSEqC commands must be sent multiple times. Set to the number of uncommitted switches in the chain minus one."
 msgstr "Indien je meerdere uncommitted switches gebruikt dienen de DiSEqC commando's meerdere malen gegeven te worden. Stel de betreffende waarde in op het aantal switches min 1."
@@ -5630,7 +5625,7 @@ msgid "Next"
 msgstr "Straks"
 
 msgid "Next day starts at"
-msgstr ""
+msgstr "Dag start om"
 
 msgid "Nicaragua"
 msgstr "Nicaragua"
@@ -5949,9 +5944,8 @@ msgstr "Verplaats de schotel alléén met hoge snelheid voor dit tijdstip."
 msgid "Only on startup"
 msgstr "Enkel na het opstarten"
 
-#, fuzzy
 msgid "Only power off"
-msgstr "Activeer de 'wake up timer'"
+msgstr "Enkel bij uitschakelen"
 
 msgid "Only select 'yes' if you are using a multiswich that requires a DiSEqC Port-A command signal. For all other setups select 'no'."
 msgstr "Kies enkel 'ja' indien u een multiswitch gebruikt die een DiSEqC poort-A signaal commando vereist. Voor elke andere opstelling kiest u voor 'nee'."
@@ -6540,12 +6534,11 @@ msgstr "Power LED"
 msgid "Power management. Consult your receiver's manual for more information."
 msgstr "Power management. Raadpleeg de handleiding van uw ontvanger voor meer details."
 
-#, fuzzy
 msgid "Power off time"
-msgstr "Sorteertijd"
+msgstr "Uitschakeltijd"
 
 msgid "Power off timer"
-msgstr ""
+msgstr "Uitschakel timer"
 
 msgid "Power on display"
 msgstr "Schakel het display in"
@@ -11764,9 +11757,8 @@ msgstr "menu"
 msgid "mins"
 msgstr "min"
 
-#, fuzzy
 msgid "module disabled"
-msgstr "geforceerd uitgeschakeld"
+msgstr "module uitgeschakeld"
 
 msgid "month"
 msgstr "maand"
@@ -12217,9 +12209,8 @@ msgstr "niet te testen"
 msgid "until standby/restart"
 msgstr "tot stand-by / herstart"
 
-#, fuzzy
 msgid "use HDMI cacenter"
-msgstr "gebruik hdmi_cacenter"
+msgstr "gebruik HDMI cacenter"
 
 msgid "use best / controlled by HDMI"
 msgstr "gebruik de beste / gecontroleerd door HDMI"
