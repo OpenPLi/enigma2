@@ -18,10 +18,10 @@ def isExternalToolsRunning():
 		try:
 			running = func[1]()
 			if running:
-				print "[PowerOffTimer] Found exception time for %s !!!" % func[0]
+				print("[PowerOffTimer] Found exception time for %s !!!" % func[0])
 				return True
 		except Exception as e:
-			print "[PowerOffTimer] external tool status running error: ", e
+			print("[PowerOffTimer] external tool status running error: ", e)
 	return False
 
 class PowerOffTimerPoller:
@@ -65,14 +65,14 @@ class PowerOffTimerPoller:
 				self.poweroff_time, self.nextday_time = self.isNextPoweroffTime()
 				time_wait = math.trunc(self.poweroff_time - time())
 				if self.poweroff_time != -1 and time_wait >= 0:
-					print "[PowerOffTimer] Start power off timer (poweroff_time=%s, nextday_time=%s, time_wait=%s sec)" % (self.poweroff_time, self.nextday_time, time_wait)
+					print("[PowerOffTimer] Start power off timer (poweroff_time=%s, nextday_time=%s, time_wait=%s sec)" % (self.poweroff_time, self.nextday_time, time_wait))
 					self.doPowerOffTimer.start(time_wait * 1000, True)
 
 	def doPowerOffRun(self):
 		if self.session:
 			if self.wait_nextday:
 				if time() >= self.nextday_time:
-					print "[PowerOffTimer] Cancel waiting shutdown, over limit, set next day."
+					print("[PowerOffTimer] Cancel waiting shutdown, over limit, set next day.")
 					self.powerStateTimerChanged()
 					return
 			try_poweroff = True
@@ -110,7 +110,7 @@ class PowerOffTimerPoller:
 				else:
 					self.doPowerOffAnswer(True)
 			else:
-				print "[PowerOffTimer] Don't shutdown, box in use. Wait 5 min..."
+				print("[PowerOffTimer] Don't shutdown, box in use. Wait 5 min...")
 				self.doPowerOffTimer.start(self.wait_nextday_time * 1000, True)
 				self.wait_nextday = True
 
@@ -118,14 +118,14 @@ class PowerOffTimerPoller:
 		dont_currentday = time() > self.poweroff_time
 		if answer:
 			if not Standby.inTryQuitMainloop:
-				print "[PowerOffTimer] Goto auto shutdown box."
+				print("[PowerOffTimer] Goto auto shutdown box.")
 				if Standby.inStandby:
 					RecordTimerEntry.TryQuitMainloop()
 				else:
 					Notifications.AddNotificationWithID("Shutdown", Standby.TryQuitMainloop, 1)
 					self.powerStateTimerChanged(dont_currentday=dont_currentday)
 		else:
-			print "[PowerOffTimer] Shutdown canceled by the user (dont_currentday=%s)" % dont_currentday
+			print("[PowerOffTimer] Shutdown canceled by the user (dont_currentday=%s)" % dont_currentday)
 			self.powerStateTimerChanged(dont_currentday=dont_currentday)
 
 	def isNextPoweroffTime(self):
