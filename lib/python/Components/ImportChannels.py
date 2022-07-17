@@ -102,7 +102,7 @@ class ImportChannels:
 			# check the contents for more bouquet files
 			for line in content:
 				# check if it contains another bouquet reference
-				r = re.match('#SERVICE 1:7:%d:0:0:0:0:0:0:0:FROM BOUQUET "(.*)" ORDER BY bouquet' % type, line)
+				r = re.match('#SERVICE 1:7:%d:0:0:0:0:0:0:0:FROM BOUQUET "(.*)" ORDER BY bouquet' % type, line.decode())
 				if r:
 					# recurse
 					result.extend(self.ImportGetFilelist(remote, r.group(1)))
