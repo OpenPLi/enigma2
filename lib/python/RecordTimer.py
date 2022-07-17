@@ -389,7 +389,7 @@ class RecordTimerEntry(timer.TimerEntry):
 			try:
 				self.InfoBarInstance = Screens.InfoBar.InfoBar.instance
 			except:
-				print "[RecordTimer] import 'Screens.InfoBar' failed"
+				print("[RecordTimer] import 'Screens.InfoBar' failed")
 
 		next_state = self.state + 1
 		self.log(5, "activating state %d" % next_state)
