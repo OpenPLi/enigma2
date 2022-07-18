@@ -36,7 +36,7 @@ class FallbackTimerList():
 	def getUrl(self, url):
 		print("[FallbackTimer] getURL", url)
 		from twisted.web.client import getPage
-		return getPage("%s/%s" % (self.url, url), headers=self.headers)
+		return getPage(("%s/%s" % (self.url, url)).encode('utf-8'), headers=self.headers)
 
 	def getFallbackTimerList(self):
 		self.list = []
@@ -50,13 +50,13 @@ class FallbackTimerList():
 
 	def gotFallbackTimerList(self, data):
 		try:
-			root = fromstring(data)
+			root = fromstring(data.decode('utf-8'))
 		except Exception as e:
 			self.fallback(e)
 		self.list = [
 				FallbackTimerClass(
-					service_ref=str(timer.findtext("e2servicereference", '').encode("utf-8", 'ignore')),
-					name=str(timer.findtext("e2name", '').encode("utf-8", 'ignore')),
+					service_ref=str(timer.findtext("e2servicereference", '')),
+					name=str(timer.findtext("e2name", '')),
 					disabled=int(timer.findtext("e2disabled", 0)),
 					timebegin=int(timer.findtext("e2timebegin", 0)),
 					timeend=int(timer.findtext("e2timeend", 0)),
@@ -67,8 +67,8 @@ class FallbackTimerList():
 					justplay=int(timer.findtext("e2justplay", 0)),
 					eit=int(timer.findtext("e2eit", -1)),
 					afterevent=int(timer.findtext("e2afterevent", 0)),
-					dirname=str(timer.findtext("e2location", '').encode("utf-8", 'ignore')),
-					description=str(timer.findtext("e2description", '').encode("utf-8", 'ignore')))
+					dirname=str(timer.findtext("e2location", '')),
+					description=str(timer.findtext("e2description", '')))
 			for timer in root.findall("e2timer")
 		]
 		print("[FallbackTimer] read %s timers from fallback tuner" % len(self.list))
