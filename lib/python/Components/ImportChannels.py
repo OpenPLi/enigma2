@@ -102,7 +102,7 @@ class ImportChannels:
 
 			# check the contents for more bouquet files
 			for line in content:
-				print ("[Import Channels] %s" % line)
+#				print ("[Import Channels] %s" % line)
 				# check if it contains another bouquet reference
 				r = re.match('#SERVICE 1:7:%d:0:0:0:0:0:0:0:FROM BOUQUET "(.*)" ORDER BY bouquet' % type, line)
 				if r:
@@ -160,7 +160,7 @@ class ImportChannels:
 
 			print("[Import Channels] Fetch remote files")
 			for file in files:
-				print("[Import Channels] Downloading %s..." % file)
+#				print("[Import Channels] Downloading %s..." % file)
 				try:
 					open(os.path.join(self.tmp_dir, os.path.basename(file)), "wb").write(self.getUrl("%s/file?file=%s/%s" % (self.url, e2path, quote(file))).read())
 				except Exception as e:
@@ -171,13 +171,13 @@ class ImportChannels:
 
 			print("[Import Channels] Removing old local files...")
 			for file in files:
-				print("- Removing %s..." % file)
+#				print("- Removing %s..." % file)
 				os.remove(os.path.join(e2path, file))
 
 			print("[Import Channels] Updating files...")
 			files = [x for x in os.listdir(self.tmp_dir)]
 			for file in files:
-				print("- Moving %s..." % file)
+#				print("- Moving %s..." % file)
 				shutil.move(os.path.join(self.tmp_dir, file), os.path.join(e2path, file))
 
 		self.ImportChannelsDone(True, {"channels": _("Channels"), "epg": _("EPG"), "channels_epg": _("Channels and EPG")}[self.remote_fallback_import])
