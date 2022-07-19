@@ -76,9 +76,10 @@ class PluginComponent:
 							plugins = [plugins]
 
 						for p in plugins:
-							p.path = path
-							p.updateIcon(path)
-							new_plugins.append(p)
+							if p:
+								p.path = path
+								p.updateIcon(path)
+								new_plugins.append(p)
 
 						keymap = os.path.join(path, "keymap.xml")
 						if fileExists(keymap):
