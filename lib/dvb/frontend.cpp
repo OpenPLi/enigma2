@@ -902,20 +902,27 @@ static inline uint32_t fe_udiv(uint32_t a, uint32_t b)
 }
 
 int eDVBFrontend::calculateSignalPercentage(int signalqualitydb)
+/*
+		When using new API, signalqualitydb is Carrier-to-Noise-Ratio (CNR) - i.e. SNR at a specific point in the receiver chain
+		Minimum CNR for lock is ~20 dB, not 0 dB as previously assumed
+		Maximum expected CNR is an estimate of typical value of CNR at which limiting could occur in the absence of interference etc
+		Percentage is now of maximum expected CNR to approximately match the figures provided by any drivers that supply this data, not 2/3 of maximum expected signal as previously assumed.
+		Using 2/3 for DVB-T gives 100% at ~33 dB, which less than half way up the scale from just acheiving lock at 20 dB and expected maximum at 50 dB
+*/
 {
-	int maxdb; // assume 100% as 2/3 of maximum dB
+	int maxdb; // Maximum expected CNR in units of 0.01 dB
 	int type = -1;
 	oparm.getSystem(type);
 	switch (type)
 	{
 		case feSatellite:
-			maxdb = 1500;
+			maxdb = 4200;
 			break;
 		case feCable:
-			maxdb = 2800;
+			maxdb = 6200;
 			break;
 		case feTerrestrial:
-			maxdb = 1900;
+			maxdb = 5000;
 			break;
 		case feATSC:
 		{
@@ -924,10 +931,10 @@ int eDVBFrontend::calculateSignalPercentage(int signalqualitydb)
 			switch (parm.modulation)
 			{
 				case eDVBFrontendParametersATSC::Modulation_VSB_8:
-					maxdb = 1900;
+					maxdb = 5000;
 					break;
 				default:
-					maxdb = 2800;
+					maxdb = 6200;
 					break;
 			}
 			break;
