@@ -99,6 +99,8 @@ class hotkey:
 		("Power" + " " + _("long"), "power_long", "Menu/shutdown"),
 		("HDMIin", "HDMIin", "Infobar/HDMIIn"),
 		("HDMIin" + " " + _("long"), "HDMIin_long", ""),
+		("Magic", "magic", ""),
+		("Magic" + " " + _("long"), "magic_long", ""),
 		("Media", "media", ""),
 		("Media" + " " + _("long"), "media_long", ""),
 		("Favorites", "favorites", "Infobar/openFavouritesList"),
