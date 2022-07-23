@@ -36,7 +36,7 @@ class FallbackTimerList():
 	def getUrl(self, url):
 		print("[FallbackTimer] getURL", url)
 		from twisted.web.client import getPage
-		return getPage(("%s/%s" % (self.url, url)).encode('utf-8'), headers=self.headers)
+		return getPage(str("%s/%s" % (self.url, url)).encode('utf-8'), headers=self.headers)
 
 	def getFallbackTimerList(self):
 		self.list = []
