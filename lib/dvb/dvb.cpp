@@ -409,6 +409,16 @@ eDVBUsbAdapter::eDVBUsbAdapter(int nr)
 		goto error;
 	}
 
+#if _IOC_NONE == 0
+#define VTUNER_GET_MESSAGE  11
+#define VTUNER_SET_RESPONSE 12
+#define VTUNER_SET_NAME     13
+#define VTUNER_SET_TYPE     14
+#define VTUNER_SET_HAS_OUTPUTS 15
+#define VTUNER_SET_FE_INFO  16
+#define VTUNER_SET_NUM_MODES 17
+#define VTUNER_SET_MODES 18
+#else
 #define VTUNER_GET_MESSAGE  1
 #define VTUNER_SET_RESPONSE 2
 #define VTUNER_SET_NAME     3
