@@ -15,6 +15,7 @@ class Network:
 		self.NetworkState = 0
 		self.DnsState = 0
 		self.nameservers = []
+		self.dhcpnameservers = []
 		self.ethtool_bin = "/usr/sbin/ethtool"
 		self.console = Console()
 		self.linkConsole = Console()
@@ -115,6 +116,8 @@ class Network:
 			if iface["predown"] and "configStrings" not in iface:
 				fp.write(iface["predown"])
 			fp.write("\n")
+			for nameserver in self.nameservers:
+				fp.write("dns-nameserver %d.%d.%d.%d\n" % tuple(nameserver))
 		fp.close()
 		self.configuredNetworkAdapters = self.configuredInterfaces
 		self.writeNameserverConfig()
@@ -122,7 +125,11 @@ class Network:
 	def writeNameserverConfig(self):
 		fp = open('/etc/resolv.conf', 'w')
 		for nameserver in self.nameservers:
-			fp.write("nameserver %d.%d.%d.%d\n" % tuple(nameserver))
+			if  nameserver != [0, 0, 0, 0]:
+				fp.write("nameserver %d.%d.%d.%d\n" % tuple(nameserver))
+		for nameserver in self.dhcpnameservers:
+			if  nameserver != [0, 0, 0, 0]:
+				fp.write("nameserver %d.%d.%d.%d\n" % tuple(nameserver))
 		fp.close()
 
 	def loadNetworkConfig(self, iface, callback=None):
@@ -135,6 +142,7 @@ class Network:
 		except:
 			print("[Network.py] interfaces - opening failed")
 
+		self.nameservers = []
 		ifaces = {}
 		currif = ""
 		for i in interfaces:
@@ -169,6 +177,8 @@ class Network:
 				if split[0] in ("pre-down", "post-down"):
 					if "predown" in self.ifaces[currif]:
 						self.ifaces[currif]["predown"] = i
+				if split[0] == "dns-nameserver":
+					self.nameservers.append(self.convertIP(split[1]))
 
 		for ifacename, iface in ifaces.items():
 			if ifacename in self.ifaces:
@@ -195,22 +205,23 @@ class Network:
 		nameserverPattern = re.compile("nameserver +" + ipRegexp)
 		ipPattern = re.compile(ipRegexp)
 
+		self.dhcpnameservers = []
 		resolv = []
 		try:
 			fp = open('/etc/resolv.conf', 'r')
 			resolv = fp.readlines()
 			fp.close()
-			self.nameservers = []
 		except:
 			print("[Network.py] resolv.conf - opening failed")
 
 		for line in resolv:
 			if self.regExpMatch(nameserverPattern, line) is not None:
 				ip = self.regExpMatch(ipPattern, line)
-				if ip:
-					self.nameservers.append(self.convertIP(ip))
+				if ip and ip not in self.nameservers:
+					self.dhcpnameservers.append(self.convertIP(ip))
 
-		print("nameservers:", self.nameservers)
+		print("static nameservers:", self.nameservers)
+		print("dhcp nameservers:", self.dhcpnameservers)
 
 	def getInstalledAdapters(self):
 		return [x for x in os.listdir('/sys/class/net') if not self.isBlacklisted(x)]
@@ -311,17 +322,22 @@ class Network:
 		if iface in self.ifaces and attribute in self.ifaces[iface]:
 			del self.ifaces[iface][attribute]
 
-	def getNameserverList(self):
-		if len(self.nameservers) == 0:
-			return [[0, 0, 0, 0], [0, 0, 0, 0]]
-		else:
-			return self.nameservers
+	def getNameserverList(self, dhcp=False):
+		servers = self.nameservers[:]
+		if dhcp:
+			print("Requesting DHCP assigned nameservers")
+			servers.extend(self.dhcpnameservers)
+		if len(servers) < 2:
+			servers.extend([[0, 0, 0, 0], [0, 0, 0, 0]])
+		print ("Get nameserver list: ", servers)
+		return servers[0:2]
 
 	def clearNameservers(self):
 		self.nameservers = []
 
 	def addNameserver(self, nameserver):
-		if nameserver not in self.nameservers:
+		if nameserver != [0, 0, 0, 0] and nameserver not in self.nameservers and nameserver not in self.dhcpnameservers:
+			print("Adding nameserver: ", nameserver)
 			self.nameservers.append(nameserver)
 
 	def removeNameserver(self, nameserver):

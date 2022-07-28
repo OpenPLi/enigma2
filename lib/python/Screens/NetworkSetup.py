@@ -252,7 +252,7 @@ class NameserverSetup(ConfigListScreen, HelpableScreen, Screen):
 		iNetwork.clearNameservers()
 		for nameserver in self.nameserverEntries:
 			iNetwork.addNameserver(nameserver.value)
-		iNetwork.writeNameserverConfig()
+		iNetwork.writeNetworkConfig()
 		self.close()
 
 	def run(self):
@@ -260,7 +260,7 @@ class NameserverSetup(ConfigListScreen, HelpableScreen, Screen):
 
 	def cancel(self):
 		iNetwork.clearNameservers()
-		print("backup-list:", self.backupNameserverList)
+		print("restore backup-list:", self.backupNameserverList)
 		for nameserver in self.backupNameserverList:
 			iNetwork.addNameserver(nameserver)
 		self.close()
@@ -425,7 +425,7 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 			self.dhcpdefault = False
 		self.hasGatewayConfigEntry = NoSave(ConfigYesNo(default=self.dhcpdefault or False))
 		self.gatewayConfigEntry = NoSave(ConfigIP(default=iNetwork.getAdapterAttribute(self.iface, "gateway") or [0, 0, 0, 0]))
-		nameserver = (iNetwork.getNameserverList() + [[0, 0, 0, 0]] * 2)[0:2]
+		nameserver = (iNetwork.getNameserverList(dhcp=True) + [[0, 0, 0, 0]] * 2)[0:2]
 		self.primaryDNS = NoSave(ConfigIP(default=nameserver[0]))
 		self.secondaryDNS = NoSave(ConfigIP(default=nameserver[1]))
 
