@@ -966,10 +966,10 @@ class SkinContext:
 				self.x, self.y = pos
 				self.w, self.h = size
 			else:
-				self.x = None
-				self.y = None
-				self.w = None
-				self.h = None
+				self.x = 0
+				self.y = 0
+				self.w = 0
+				self.h = 0
 
 	def __str__(self):
 		return "Context (%s,%s)+(%s,%s) " % (self.x, self.y, self.w, self.h)
