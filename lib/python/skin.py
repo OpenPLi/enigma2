@@ -335,13 +335,13 @@ def parseFont(s, scale=((1, 1), (1, 1))):
 	try:
 		f = fonts[name]
 		name = f[0]
-		size = f[1] if size is 0 else size
+		size = f[1] if size == 0 else size
 	except KeyError:
 		if name not in getFontFaces():
 			f = fonts["Body"]
 			print("[Skin] Error: Font '%s' (in '%s') is not defined!  Using 'Body' font ('%s') instead." % (name, s, f[0]))
 			name = f[0]
-			size = f[1] if size is 0 else size
+			size = f[1] if size == 0 else size
 	return gFont(name, size * scale[0][0] // scale[0][1])
 
 
