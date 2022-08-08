@@ -245,7 +245,7 @@ def parseCoordinate(s, e, size=0, font=None):
 	if s == "center":  # For speed as this can be common case.
 		val = 0 if not size else (e - size) // 2
 	elif s == "*":
-		return 0
+		return None
 	else:
 		try:
 			val = int(s)  # For speed try a simple number first.
