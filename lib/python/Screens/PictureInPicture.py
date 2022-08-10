@@ -215,13 +215,13 @@ class PictureInPicture(Screen):
 				self.pipservice.start()
 				self.currentService = service
 				self.currentServiceReference = ref
-				print "[PictureInPicture] playing pip service", ref and ref.toString()
+				print("[PictureInPicture] playing pip service", ref and ref.toString())
 				return True
 			else:
 				self.pipservice = None
 				self.currentService = None
 				self.currentServiceReference = None
-				print "[PictureInPicture] error play pip service", ref and ref.toString()
+				print("[PictureInPicture] error play pip service", ref and ref.toString())
 				if not config.usage.hide_zap_errors.value:
 					AddPopup(text=_("Incorrect service type for Picture in Picture!"), type=MessageBox.TYPE_ERROR, timeout=5, id="ZapPipError")
 		return False
