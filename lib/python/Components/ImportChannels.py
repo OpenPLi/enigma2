@@ -87,7 +87,7 @@ class ImportChannels:
 				if remote:
 					try:
 						content = self.getUrl("%s/file?file=%s/%s" % (self.url, e2path, quote(file))).readlines()
-						content = map(bytes.decode, content)
+						content = map(lambda l: l.decode('utf-8', 'replace'), content)
 					except Exception as e:
 						print("[Import Channels] Exception: %s" % str(e))
 						self.ImportChannelsDone(False, _("ERROR downloading file %s/%s") % (e2path, file))
@@ -121,7 +121,7 @@ class ImportChannels:
 		self.tmp_dir = tempfile.mkdtemp(prefix="ImportChannels_")
 
 		if "epg" in self.remote_fallback_import:
-			print("[Import Channels] Writing epg.dat file on sever box")
+			print("[Import Channels] Writing epg.dat file on sevrer box")
 			try:
 				self.getUrl("%s/web/saveepg" % self.url, timeout=30).read()
 			except:
