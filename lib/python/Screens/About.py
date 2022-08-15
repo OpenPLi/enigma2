@@ -220,7 +220,6 @@ class CommitInfo(Screen):
 			branch = "?sha=" + "-".join(about.getEnigmaVersionString().split("-")[3:])
 		except:
 			branch = ""
-		print("branch is:", branch)
 		branch_oe = "?sha=hardknott-py3"
 
 		self.project = 0
