@@ -121,7 +121,7 @@ class ImportChannels:
 		self.tmp_dir = tempfile.mkdtemp(prefix="ImportChannels_")
 
 		if "epg" in self.remote_fallback_import:
-			print("[Import Channels] Writing epg.dat file on sevrer box")
+			print("[Import Channels] Writing epg.dat file on server box")
 			try:
 				self.getUrl("%s/web/saveepg" % self.url, timeout=30).read()
 			except:
