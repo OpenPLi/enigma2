@@ -1,7 +1,7 @@
 from RecordTimer import RecordTimerEntry
 from Screens.MessageBox import MessageBox
 from Screens import Standby
-from Tools import Notifications
+from Tools.Notifications import AddNotificationWithID
 from Components.config import config
 from Components.Harddisk import internalHDDNotSleeping
 from Components.Task import job_manager
@@ -122,7 +122,7 @@ class PowerOffTimerPoller:
 				if Standby.inStandby:
 					RecordTimerEntry.TryQuitMainloop()
 				else:
-					Notifications.AddNotificationWithID("Shutdown", Standby.TryQuitMainloop, 1)
+					AddNotificationWithID("Shutdown", Standby.TryQuitMainloop, 1)
 					self.powerStateTimerChanged(dont_currentday=dont_currentday)
 		else:
 			print("[PowerOffTimer] Shutdown canceled by the user (dont_currentday=%s)" % dont_currentday)

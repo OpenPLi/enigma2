@@ -202,7 +202,7 @@ class PictureInPicture(Screen):
 				self.currentService = None
 				self.currentServiceReference = None
 				if not config.usage.hide_zap_errors.value:
-					Notifications.AddPopup(text=_("Service type 4097 incorrect for PiP!"), type=MessageBox.TYPE_ERROR, timeout=5, id="ZapPipError")
+					AddPopup(text=_("Service type 4097 incorrect for PiP!"), type=MessageBox.TYPE_ERROR, timeout=5, id="ZapPipError")
 				return False
 			if not self.isPlayableForPipService(ref):
 				if not config.usage.hide_zap_errors.value:
