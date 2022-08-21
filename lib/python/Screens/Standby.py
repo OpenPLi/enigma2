@@ -347,7 +347,7 @@ class TryQuitMainloop(MessageBox):
 							Components.HdmiCec.hdmi_cec.secondBoxActive()
 						self.delay = eTimer()
 						self.delay.timeout.callback.append(self.quitMainloop)
-						self.delay.start(1500, True)
+						self.delay.start(3000, True)
 						return
 			elif not inStandby:
 				config.misc.RestartUI.value = True
