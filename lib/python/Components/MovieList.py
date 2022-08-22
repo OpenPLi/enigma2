@@ -815,7 +815,7 @@ class MovieList(GUIComponent):
 	def buildGroupwiseSortkey(self, x):
 		# Sort recordings by date, sort MP3 and stuff by name
 		ref = x[0]
-		if ref.type >= eServiceReference.idUser:
+		if ref.type >= eServiceReference.idUser or ref.flags & eServiceReference.mustDescent:
 			return self.buildAlphaNumericSortKey(x)
 		else:
 			return self.buildBeginTimeSortKey(x)
