@@ -257,8 +257,10 @@ ASCIItranslit = {
 
 
 def legacyEncode(string):
+	if isinstance(string, bytes):
+		string = string.decode("utf-8")
 	string2 = ""
-	for z, char in enumerate(string.decode("utf-8")):
+	for z, char in enumerate(string):
 		i = ord(char)
 		if i < 33:
 			string2 += "_"
