@@ -2376,7 +2376,7 @@ PyObject *eEPGCache::search(ePyObject arg)
 								{
 									// UK broadcasters set the two top bits of crid_type, i.e. 0x31 and 0x32 rather than 
 									// the specification's 1 and 2 for episode and series respectively
-									if (((*crit)->getType() & 0xf) == casetype)
+									if (((*crit)->getType() & 0xf) == casetype && (*crit)->getBytes()->data() != NULL)
 									{
 										// Exact match required for CRID data
 										if ((*crit)->getLength() == strlen && memcmp((*crit)->getBytes()->data(), str, strlen) == 0)
