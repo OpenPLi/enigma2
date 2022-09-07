@@ -133,7 +133,7 @@ class Navigation:
 							self.currentlyPlayingServiceReference = None
 							self.currentlyPlayingServiceOrGroup = None
 							if oldref and "://" in oldref.getPath():
-								print "[Navigation] Streaming was active -> try again" # use timer to give the streamserver the time to deallocate the tuner
+								print("[Navigation] Streaming was active -> try again" # use timer to give the streamserver the time to deallocate the tuner)
 								self.retryServicePlayTimer = eTimer()
 								self.retryServicePlayTimer.callback.append(boundFunction(self.playService, ref, checkParentalControl, forceRestart, adjust))
 								self.retryServicePlayTimer.start(500, True)
