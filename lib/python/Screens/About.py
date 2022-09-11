@@ -220,12 +220,13 @@ class CommitInfo(Screen):
 			branch = "?sha=" + "-".join(about.getEnigmaVersionString().split("-")[3:])
 		except:
 			branch = ""
+		branch_e2plugins = "?sha=python3"
 
 		self.project = 0
 		self.projects = [
 			("https://api.github.com/repos/openpli/enigma2/commits" + branch, "Enigma2"),
 			("https://api.github.com/repos/openpli/openpli-oe-core/commits" + branch, "Openpli Oe Core"),
-			("https://api.github.com/repos/openpli/enigma2-plugins/commits" + branch, "Enigma2 Plugins"),
+			("https://api.github.com/repos/openpli/enigma2-plugins/commits" + branch_e2plugins, "Enigma2 Plugins"),
 			("https://api.github.com/repos/openpli/aio-grab/commits", "Aio Grab"),
 			("https://api.github.com/repos/openpli/enigma2-plugin-extensions-epgimport/commits", "Plugin EPGImport"),
 			("https://api.github.com/repos/littlesat/skin-PLiHD/commits", "Skin PLi HD"),
