@@ -152,18 +152,18 @@ class TuneTest:
 		self.timer.start(100, True)
 
 	def updateStatus(self):
-		dict = {}
-		self.frontend.getFrontendStatus(dict)
+		tunerdict = {}
+		self.frontend.getFrontendStatus(tunerdict)
 		stop = False
 
-		print("[TuneTest] status:", dict)
-		if dict["tuner_state"] == "TUNING":
+		print("[TuneTest] status:", tunerdict)
+		if tunerdict["tuner_state"] == "TUNING":
 			print("[TuneTest] TUNING")
 			self.timer.start(100, True)
 			self.progressCallback((self.getProgressLength(), self.tuningtransponder, self.STATUS_TUNING, self.currTuned))
 		elif self.checkPIDs and self.pidStatus == self.INTERNAL_PID_STATUS_NOOP:
 			print("[TuneTest] 2nd choice")
-			if dict["tuner_state"] == "LOCKED":
+			if tunerdict["tuner_state"] == "LOCKED":
 				print("[TuneTest] acquiring TSID/ONID")
 				self.raw_channel.receivedTsidOnid.get().append(self.gotTsidOnid)
 				self.raw_channel.requestTsidOnid()
@@ -173,29 +173,27 @@ class TuneTest:
 		elif self.checkPIDs and self.pidStatus == self.INTERNAL_PID_STATUS_WAITING:
 			print("[TuneTest] waiting for pids")
 		else:
-			if dict["tuner_state"] == "LOSTLOCK" or dict["tuner_state"] == "FAILED":
+			if tunerdict["tuner_state"] == "LOSTLOCK" or tunerdict["tuner_state"] == "FAILED":
 				self.tuningtransponder = self.nextTransponder()
-				self.failedTune.append([self.currTuned, self.oldTuned, "tune_failed", dict])  # last parameter is the frontend status)
+				self.failedTune.append([self.currTuned, self.oldTuned, "tune_failed", tunerdict])  # last parameter is the frontend status)
 				if self.stopOnError != -1 and self.stopOnError <= len(self.failedTune):
 					stop = True
-			elif dict["tuner_state"] == "LOCKED":
-				pidsFailed = False
+			elif tunerdict["tuner_state"] == "LOCKED":
 				if self.checkPIDs:
 					if self.currTuned is not None:
 						if self.tsid != self.currTuned[15] or self.onid != self.currTuned[16]:
-							self.failedTune.append([self.currTuned, self.oldTuned, "pids_failed", {"real": (self.tsid, self.onid), "expected": (self.currTuned[15], self.currTuned[16])}, dict])  # last parameter is the frontend status
-							pidsFailed = True
+							self.failedTune.append([self.currTuned, self.oldTuned, "pids_failed", {"real": (self.tsid, self.onid), "expected": (self.currTuned[15], self.currTuned[16])}, tunerdict])  # last parameter is the frontend status
 						else:
-							self.successfullyTune.append([self.currTuned, self.oldTuned, dict])  # 3rd parameter is the frontend status
+							self.successfullyTune.append([self.currTuned, self.oldTuned, tunerdict])  # 3rd parameter is the frontend status
 							if self.stopOnSuccess != -1 and self.stopOnSuccess <= len(self.successfullyTune):
 								stop = True
-				elif not self.checkPIDs or (self.checkPids and not pidsFailed):
-					self.successfullyTune.append([self.currTuned, self.oldTuned, dict]) # 3rd parameter is the frontend status
+				else:
+					self.successfullyTune.append([self.currTuned, self.oldTuned, tunerdict]) # 3rd parameter is the frontend status
 					if self.stopOnSuccess != -1 and self.stopOnSuccess <= len(self.successfullyTune):
-								stop = True
+						stop = True
 				self.tuningtransponder = self.nextTransponder()
 			else:
-				print("[TuneTest] ************* tuner_state:", dict["tuner_state"])
+				print("[TuneTest] ************* tuner_state:", tunerdict["tuner_state"])
 
 			self.progressCallback((self.getProgressLength(), self.tuningtransponder, self.STATUS_NOOP, self.currTuned))
 
