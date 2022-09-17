@@ -69,7 +69,7 @@ class Navigation:
 
 	def gotostandby(self):
 		if not Screens.Standby.inStandby and not Screens.Standby.inTryQuitMainloop:
-			Notifications.AddNotification(Screens.Standby.Standby, self.wakeup_timer_enabled and 1 or True)
+			AddNotification(Screens.Standby.Standby, self.wakeup_timer_enabled and 1 or True)
 
 	def wasTimerWakeup(self):
 		return self.__wasTimerWakeup
