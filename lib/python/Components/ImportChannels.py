@@ -9,7 +9,7 @@ from time import sleep
 from urllib.error import URLError
 from urllib.parse import quote
 from urllib.request import Request, urlopen
-from xml.etree.ElementTree import fromstring
+from json import loads
 from Components.config import config
 from Screens.MessageBox import MessageBox
 from Tools.Notifications import AddNotificationWithID
@@ -56,13 +56,21 @@ class ImportChannels:
 		return url[:url.rfind(":")] if url else self.url
 
 	def getFallbackSettings(self):
-		return self.getUrl("%s/web/settings" % self.getTerrestrialUrl()).read()
+		result = self.getUrl("%s/api/settings" % self.getTerrestrialUrl()).read()
+		if result:
+			result = loads(result.decode('utf-8'))
+			if 'result' in result and result['result'] == True:
+				return {result['settings'][i][0]: result['settings'][i][1] for i in range(0, len(result['settings']))}
+		return {}
 
 	def getFallbackSettingsValue(self, settings, e2settingname):
-		root = fromstring(settings)
-		for e2setting in root:
-			if e2settingname in e2setting[0].text:
-				return e2setting[1].text
+		# complete key lookup
+		if e2settingname in settings:
+			return settings[e2settingname]
+		# partial key lookup
+		for e2setting in settings:
+			if e2settingname in e2setting:
+				return settings[e2setting]
 		return ""
 
 	def getTerrestrialRegion(self, settings):
@@ -123,9 +131,12 @@ class ImportChannels:
 		if "epg" in self.remote_fallback_import:
 			print("[Import Channels] Writing epg.dat file on server box")
 			try:
-				self.getUrl("%s/web/saveepg" % self.url, timeout=30).read()
-			except:
-				self.ImportChannelsDone(False, _("Error when writing epg.dat on server"))
+				result = loads(self.getUrl("%s/api/saveepg" % self.url, timeout=30).read().decode('utf-8'))
+				if 'result' not in result and result['result'] == False:
+					self.ImportChannelsDone(False, _("Error when writing epg.dat on the fallback receiver"))
+			except Exception as e:
+				print("[Import Channels] Exception: %s" % str(e))
+				self.ImportChannelsDone(False, _("Error when writing epg.dat on the fallback receiver"))
 				return
 			print("[Import Channels] Get EPG Location")
 			try:
@@ -135,19 +146,21 @@ class ImportChannels:
 				except:
 					files = [file for file in loads(self.getUrl("%s/file?dir=/" % self.url).read())["files"] if os.path.basename(file).startswith("epg.dat")]
 				epg_location = files[0] if files else None
-			except:
-				self.ImportChannelsDone(False, _("Error while retreiving location of epg.dat on server"))
+			except Exception as e:
+				print("[Import Channels] Exception: %s" % str(e))
+				self.ImportChannelsDone(False, _("Error while retreiving location of epg.dat on the fallback receiver"))
 				return
 			if epg_location:
 				print("[Import Channels] Copy EPG file...")
 				try:
 					open(os.path.join(self.tmp_dir, "epg.dat"), "wb").write(self.getUrl("%s/file?file=%s" % (self.url, epg_location)).read())
 					shutil.move(os.path.join(self.tmp_dir, "epg.dat"), config.misc.epgcache_filename.value)
-				except:
-					self.ImportChannelsDone(False, _("Error while retreiving epg.dat from server"))
+				except Exception as e:
+					print("[Import Channels] Exception: %s" % str(e))
+					self.ImportChannelsDone(False, _("Error while retreiving epg.dat from the fallback receiver"))
 					return
 			else:
-				self.ImportChannelsDone(False, _("No epg.dat file found server"))
+				self.ImportChannelsDone(False, _("No epg.dat file found on the fallback receiver"))
 
 		if "channels" in self.remote_fallback_import:
 			print("[Import Channels] Enumerate remote files")

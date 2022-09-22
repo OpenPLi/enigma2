@@ -3,7 +3,7 @@ from Components.config import config
 from Screens.MessageBox import MessageBox
 from timer import TimerEntry as TimerObject
 from urllib.parse import quote
-from xml.etree.ElementTree import fromstring
+from json import loads
 from base64 import encodebytes
 
 
@@ -42,38 +42,44 @@ class FallbackTimerList():
 		self.list = []
 		if self.url:
 			try:
-				self.getUrl("web/timerlist").addCallback(self.gotFallbackTimerList).addErrback(self.fallback)
+				self.getUrl("api/timerlist").addCallback(self.gotFallbackTimerList).addErrback(self.fallback)
 			except:
 				self.fallback(_("Unexpected error while retreiving fallback tuner's timer information"))
 		else:
 			self.fallback()
 
 	def gotFallbackTimerList(self, data):
+		self.list = []
 		try:
-			root = fromstring(data.decode('utf-8'))
+			timers = loads(data.decode('utf-8'))
+			if 'result' in timers and timers['result'] == False:
+				self.fallback(_("Fallback API did not return a valid result."))
+			else:
+				self.list = [
+						FallbackTimerClass(
+							service_ref=timer["serviceref"],
+							name=timer["name"],
+							disabled=timer["disabled"],
+							timebegin=timer["begin"],
+							timeend=timer["end"],
+							duration=timer["duration"],
+							startprepare=timer["startprepare"],
+							state=timer["state"],
+							repeated=timer["repeated"],
+							justplay=timer["justplay"],
+							eit=timer["eit"],
+							afterevent=timer["afterevent"],
+							dirname=timer["dirname"],
+							description=timer["description"])
+					for timer in timers['timers']
+				]
+				self.fallback()
+
 		except Exception as e:
 			self.fallback(e)
-		self.list = [
-				FallbackTimerClass(
-					service_ref=str(timer.findtext("e2servicereference", '')),
-					name=str(timer.findtext("e2name", '')),
-					disabled=int(timer.findtext("e2disabled", 0)),
-					timebegin=int(timer.findtext("e2timebegin", 0)),
-					timeend=int(timer.findtext("e2timeend", 0)),
-					duration=int(timer.findtext("e2duration", 0)),
-					startprepare=int(timer.findtext("e2startprepare", 0)),
-					state=int(timer.findtext("e2state", 0)),
-					repeated=int(timer.findtext("e2repeated", 0)),
-					justplay=int(timer.findtext("e2justplay", 0)),
-					eit=int(timer.findtext("e2eit", -1)),
-					afterevent=int(timer.findtext("e2afterevent", 0)),
-					dirname=str(timer.findtext("e2location", '')),
-					description=str(timer.findtext("e2description", '')))
-			for timer in root.findall("e2timer")
-		]
+
 		print("[FallbackTimer] read %s timers from fallback tuner" % len(self.list))
 		self.parent.session.nav.RecordTimer.setFallbackTimerList(self.list)
-		self.fallback()
 
 	def removeTimer(self, timer, fallbackFunction, fallbackFunctionNOK=None):
 		self.fallbackFunction = fallbackFunction
