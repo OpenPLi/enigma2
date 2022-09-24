@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-30 14:55+0200\n"
+"POT-Creation-Date: 2022-09-24 20:36+0200\n"
 "PO-Revision-Date: 2021-11-03 15:10+0100\n"
 "Last-Translator: mcfly82\n"
 "Language-Team: mcfly82 & wysless\n"
@@ -2385,7 +2385,8 @@ msgstr "Aktuális transzponder"
 msgid "Current value: "
 msgstr "Aktuális érték: "
 
-msgid "Currently the commit log cannot be retrieved - please try later again"
+#, fuzzy
+msgid "Currently the commit log cannot be retrieved - please try later again."
 msgstr "Jelenleg a kiadási jegyzék nem elérhető - próbálja újra később"
 
 msgid "Custom skip time for '1'/'3' buttons"
@@ -3384,10 +3385,12 @@ msgstr "Hiba az image kicsomagolása során %s"
 msgid "Error stop stream!"
 msgstr "A stream leállítása sikertelen!"
 
-msgid "Error when writing epg.dat on server"
+#, fuzzy
+msgid "Error when writing epg.dat on the fallback receiver"
 msgstr "Hiba az epg.dat fájl szerverre írása során"
 
-msgid "Error while retreiving epg.dat from server"
+#, fuzzy
+msgid "Error while retreiving epg.dat from the fallback receiver"
 msgstr "Hiba történt az epg.dat fájl letöltésekor a szerverről"
 
 #, python-format
@@ -3398,7 +3401,8 @@ msgstr ""
 "Hiba történt a tartalék tuner időzítők letöltésekor\n"
 "%s"
 
-msgid "Error while retreiving location of epg.dat on server"
+#, fuzzy
+msgid "Error while retreiving location of epg.dat on the fallback receiver"
 msgstr "Hiba történt az epg.dat fájl helyének meghatározásakor a szerveren"
 
 #, python-format
@@ -3646,6 +3650,9 @@ msgstr "Sikertelen:"
 
 msgid "Falkland Islands (Malvinas)"
 msgstr "Falkland-szigetek"
+
+msgid "Fallback API did not return a valid result."
+msgstr ""
 
 msgid "Fallback Timer"
 msgstr "Tartalék távoli időzítő"
@@ -5499,7 +5506,8 @@ msgstr "Nincs elérhető leírás."
 msgid "No displayable files on this medium found!"
 msgstr "A hordozón nem található lejátszható fájl!"
 
-msgid "No epg.dat file found server"
+#, fuzzy
+msgid "No epg.dat file found on the fallback receiver"
 msgstr "Nem található az epg.dat fájl a szerveren"
 
 msgid "No event info found, recording indefinitely."
@@ -7767,9 +7775,6 @@ msgstr "Csatornakeresés"
 
 msgid "Service title mode"
 msgstr "Csatornanév mód"
-
-msgid "Service type 4097 incorrect for PiP!"
-msgstr ""
 
 msgid ""
 "Service unavailable!\n"

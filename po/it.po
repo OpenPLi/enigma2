@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPLi-enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-30 14:55+0200\n"
+"POT-Creation-Date: 2022-09-24 20:36+0200\n"
 "PO-Revision-Date: 2020-05-16 18:46+0200\n"
 "Last-Translator: Gringo <openpli@tiscali.it>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -2395,7 +2395,8 @@ msgstr "Transponder attuale"
 msgid "Current value: "
 msgstr "Valore attuale: "
 
-msgid "Currently the commit log cannot be retrieved - please try later again"
+#, fuzzy
+msgid "Currently the commit log cannot be retrieved - please try later again."
 msgstr "Attualmente l'elenco delle modifiche non può essere recuperato. Riprovare più tardi"
 
 msgid "Custom skip time for '1'/'3' buttons"
@@ -3410,11 +3411,14 @@ msgstr ""
 msgid "Error stop stream!"
 msgstr "Errore di interruzione nel flusso!"
 
-msgid "Error when writing epg.dat on server"
+#, fuzzy
+msgid "Error when writing epg.dat on the fallback receiver"
 msgstr ""
+"Errore durante il recupero delle informazioni del timer di fallback\n"
+"%s"
 
 #, fuzzy
-msgid "Error while retreiving epg.dat from server"
+msgid "Error while retreiving epg.dat from the fallback receiver"
 msgstr ""
 "Errore durante il recupero delle informazioni del timer di fallback\n"
 "%s"
@@ -3428,7 +3432,7 @@ msgstr ""
 "%s"
 
 #, fuzzy
-msgid "Error while retreiving location of epg.dat on server"
+msgid "Error while retreiving location of epg.dat on the fallback receiver"
 msgstr ""
 "Errore durante il recupero delle informazioni del timer di fallback\n"
 "%s"
@@ -3678,6 +3682,9 @@ msgstr "Non riuscito:"
 
 msgid "Falkland Islands (Malvinas)"
 msgstr "Isole Falkland (Malvinas)"
+
+msgid "Fallback API did not return a valid result."
+msgstr ""
 
 msgid "Fallback Timer"
 msgstr "Timer del ricevitore remoto di fallback"
@@ -5548,8 +5555,9 @@ msgstr "Nessuna descrizione disponibile."
 msgid "No displayable files on this medium found!"
 msgstr "Questo supporto non contiene file riproducibili!"
 
-msgid "No epg.dat file found server"
-msgstr ""
+#, fuzzy
+msgid "No epg.dat file found on the fallback receiver"
+msgstr "Specificare l'indirizzo (URL) del ricevitore remoto di fallback."
 
 msgid "No event info found, recording indefinitely."
 msgstr "Nessuna informazione disponibile sull'evento, registrazione illimitata in corso."
@@ -7826,9 +7834,6 @@ msgstr "Ricerca canali"
 
 msgid "Service title mode"
 msgstr "Modalità titolo canale"
-
-msgid "Service type 4097 incorrect for PiP!"
-msgstr ""
 
 msgid ""
 "Service unavailable!\n"
