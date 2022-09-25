@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Openpli\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-30 14:55+0200\n"
+"POT-Creation-Date: 2022-09-24 20:36+0200\n"
 "PO-Revision-Date: 2019-04-03 06:49+0300\n"
 "Last-Translator: \n"
 "Language-Team: Raivo, Henkka, eesatfan, rimas, zeros\\n faas, sateks, valgekotkas, tigekala, rootsikunn\\n kain, i70, mustkass, pelmeen, Scott\\n <digi-tv.ee>\n"
@@ -2398,7 +2398,8 @@ msgstr "Hetke transponder"
 msgid "Current value: "
 msgstr "Praegune väärtus: "
 
-msgid "Currently the commit log cannot be retrieved - please try later again"
+#, fuzzy
+msgid "Currently the commit log cannot be retrieved - please try later again."
 msgstr "Tehtud toimingute logi ei saa hetkel kätte - proovi hiljem uuesti"
 
 msgid "Custom skip time for '1'/'3' buttons"
@@ -3422,10 +3423,11 @@ msgstr ""
 msgid "Error stop stream!"
 msgstr "Viga, peata voog!"
 
-msgid "Error when writing epg.dat on server"
-msgstr ""
+#, fuzzy
+msgid "Error when writing epg.dat on the fallback receiver"
+msgstr "Kaugvastuvõtja sihtkoht"
 
-msgid "Error while retreiving epg.dat from server"
+msgid "Error while retreiving epg.dat from the fallback receiver"
 msgstr ""
 
 #, python-format
@@ -3434,7 +3436,7 @@ msgid ""
 "%s"
 msgstr ""
 
-msgid "Error while retreiving location of epg.dat on server"
+msgid "Error while retreiving location of epg.dat on the fallback receiver"
 msgstr ""
 
 #, python-format
@@ -3681,6 +3683,9 @@ msgstr "Nurjus:"
 
 msgid "Falkland Islands (Malvinas)"
 msgstr "Falklandi saared"
+
+msgid "Fallback API did not return a valid result."
+msgstr ""
 
 msgid "Fallback Timer"
 msgstr ""
@@ -5554,8 +5559,9 @@ msgstr "Saatetutvustust ei ole."
 msgid "No displayable files on this medium found!"
 msgstr "Sellel andmekandjal pole kuvatavaid faile!"
 
-msgid "No epg.dat file found server"
-msgstr ""
+#, fuzzy
+msgid "No epg.dat file found on the fallback receiver"
+msgstr "Kaugvastuvõtja sihtkoht"
 
 msgid "No event info found, recording indefinitely."
 msgstr "Saatel pole teada lõppaeg. Salvestatakse pidevalt."
@@ -7855,9 +7861,6 @@ msgstr "Kanaliotsing"
 
 msgid "Service title mode"
 msgstr "Kanalinime kuju"
-
-msgid "Service type 4097 incorrect for PiP!"
-msgstr ""
 
 msgid ""
 "Service unavailable!\n"

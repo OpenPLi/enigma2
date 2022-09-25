@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-30 14:55+0200\n"
+"POT-Creation-Date: 2022-09-24 20:36+0200\n"
 "PO-Revision-Date: 2021-08-02 09:19+0700\n"
 "Last-Translator: krong\n"
 "Language-Team: none\n"
@@ -2372,7 +2372,8 @@ msgstr "Transponder hiện tại"
 msgid "Current value: "
 msgstr "Giá trị hiện tại: "
 
-msgid "Currently the commit log cannot be retrieved - please try later again"
+#, fuzzy
+msgid "Currently the commit log cannot be retrieved - please try later again."
 msgstr "Hiện tại không thể truy xuất nhật ký cam kết - vui lòng thử lại sau"
 
 msgid "Custom skip time for '1'/'3' buttons"
@@ -3374,10 +3375,12 @@ msgstr ""
 msgid "Error stop stream!"
 msgstr "Lỗi dừng luồng!"
 
-msgid "Error when writing epg.dat on server"
+#, fuzzy
+msgid "Error when writing epg.dat on the fallback receiver"
 msgstr "Lỗi khi ghi epg.dat trên máy chủ"
 
-msgid "Error while retreiving epg.dat from server"
+#, fuzzy
+msgid "Error while retreiving epg.dat from the fallback receiver"
 msgstr "Lỗi khi truy xuất epg.data từ máy chủ"
 
 #, python-format
@@ -3388,7 +3391,8 @@ msgstr ""
 "Lỗi trong khi truy xuất thông tin hẹn giờ dự phòng\n"
 "%s"
 
-msgid "Error while retreiving location of epg.dat on server"
+#, fuzzy
+msgid "Error while retreiving location of epg.dat on the fallback receiver"
 msgstr "Lỗi khi truy xuất vị trí của epg.data trên máy chủ"
 
 #, python-format
@@ -3636,6 +3640,9 @@ msgstr "Thất bại:"
 
 msgid "Falkland Islands (Malvinas)"
 msgstr "Quần đảo Falkland (Malvinas)"
+
+msgid "Fallback API did not return a valid result."
+msgstr ""
 
 msgid "Fallback Timer"
 msgstr "Hẹn giờ dự phòng"
@@ -5487,7 +5494,8 @@ msgstr "Không có mô tả."
 msgid "No displayable files on this medium found!"
 msgstr "Không tìm thấy tập tin nào trên phương tiện này!"
 
-msgid "No epg.dat file found server"
+#, fuzzy
+msgid "No epg.dat file found on the fallback receiver"
 msgstr "Không tìm thấy máy chủ tập tin epg.dat"
 
 msgid "No event info found, recording indefinitely."
@@ -7752,9 +7760,6 @@ msgstr "Quét dịch vụ"
 
 msgid "Service title mode"
 msgstr "Chế độ tiêu đề dịch vụ"
-
-msgid "Service type 4097 incorrect for PiP!"
-msgstr ""
 
 msgid ""
 "Service unavailable!\n"

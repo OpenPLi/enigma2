@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-30 14:55+0200\n"
+"POT-Creation-Date: 2022-09-24 20:36+0200\n"
 "PO-Revision-Date: 2021-03-06\n"
 "Last-Translator: LinuxSTV\n"
 "Language-Team: \n"
@@ -2453,7 +2453,8 @@ msgstr "Transponder saat ini"
 msgid "Current value: "
 msgstr "Nilai saat ini: "
 
-msgid "Currently the commit log cannot be retrieved - please try later again"
+#, fuzzy
+msgid "Currently the commit log cannot be retrieved - please try later again."
 msgstr "Saat ini log pengerjaan tidak bisa didapatkan - coba lagi nanti"
 
 msgid "Custom skip time for '1'/'3' buttons"
@@ -3494,11 +3495,14 @@ msgstr ""
 msgid "Error stop stream!"
 msgstr "Kesalahan, hentikan stream!"
 
-msgid "Error when writing epg.dat on server"
+#, fuzzy
+msgid "Error when writing epg.dat on the fallback receiver"
 msgstr ""
+"Kesalahan ketika mengambil informasi pewaktu mundur\n"
+"%s"
 
 #, fuzzy
-msgid "Error while retreiving epg.dat from server"
+msgid "Error while retreiving epg.dat from the fallback receiver"
 msgstr ""
 "Kesalahan ketika mengambil informasi pewaktu mundur\n"
 "%s"
@@ -3512,7 +3516,7 @@ msgstr ""
 "%s"
 
 #, fuzzy
-msgid "Error while retreiving location of epg.dat on server"
+msgid "Error while retreiving location of epg.dat on the fallback receiver"
 msgstr ""
 "Kesalahan ketika mengambil informasi pewaktu mundur\n"
 "%s"
@@ -3766,6 +3770,9 @@ msgstr "Gagal:"
 
 msgid "Falkland Islands (Malvinas)"
 msgstr "Kepulauan Falkland (Malvinas)"
+
+msgid "Fallback API did not return a valid result."
+msgstr ""
 
 msgid "Fallback Timer"
 msgstr "Pewaktu Mundur"
@@ -5689,8 +5696,9 @@ msgstr "Deskripsi tidak tersedia."
 msgid "No displayable files on this medium found!"
 msgstr "Tidak ditemukan file yang bisa dilihat pada medium ini!"
 
-msgid "No epg.dat file found server"
-msgstr ""
+#, fuzzy
+msgid "No epg.dat file found on the fallback receiver"
+msgstr "Alamat URL penggunaan rx dari jauh"
 
 msgid "No event info found, recording indefinitely."
 msgstr "Info acara tidak ditemukan, merekam tanpa batas waktu."
@@ -8021,9 +8029,6 @@ msgstr "Pelacakan layanan"
 
 msgid "Service title mode"
 msgstr "Mode judul layanan"
-
-msgid "Service type 4097 incorrect for PiP!"
-msgstr ""
 
 msgid ""
 "Service unavailable!\n"

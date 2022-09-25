@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OBH enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-30 14:55+0200\n"
+"POT-Creation-Date: 2022-09-24 20:36+0200\n"
 "PO-Revision-Date: 2019-04-12 12:36+0300\n"
 "Last-Translator: mosad - مساعد الجعيد <abo-mishal@hotmail.com>\n"
 "Language-Team: mosad - مساعد الجعيد\n"
@@ -2572,7 +2572,7 @@ msgid "Current value: "
 msgstr "القيمه الحاليه: "
 
 #, fuzzy
-msgid "Currently the commit log cannot be retrieved - please try later again"
+msgid "Currently the commit log cannot be retrieved - please try later again."
 msgstr "لا يمكن استرجاع سجل الالتزام في الوقت الحالي - يرجى المحاولة مرة أخرى في وقت لاحق."
 
 #, fuzzy
@@ -3650,10 +3650,11 @@ msgstr ""
 msgid "Error stop stream!"
 msgstr "إيقاف التدفق"
 
-msgid "Error when writing epg.dat on server"
-msgstr ""
+#, fuzzy
+msgid "Error when writing epg.dat on the fallback receiver"
+msgstr "تمكين الريموت الإحتياطي في الرسيفر"
 
-msgid "Error while retreiving epg.dat from server"
+msgid "Error while retreiving epg.dat from the fallback receiver"
 msgstr ""
 
 #, python-format
@@ -3662,7 +3663,7 @@ msgid ""
 "%s"
 msgstr ""
 
-msgid "Error while retreiving location of epg.dat on server"
+msgid "Error while retreiving location of epg.dat on the fallback receiver"
 msgstr ""
 
 #, python-format
@@ -3919,6 +3920,9 @@ msgstr "فشل"
 
 msgid "Falkland Islands (Malvinas)"
 msgstr "جزر فوكلاند (مالفيناس)"
+
+msgid "Fallback API did not return a valid result."
+msgstr ""
 
 #, fuzzy
 msgid "Fallback Timer"
@@ -5892,8 +5896,9 @@ msgstr "لايوجد وصف متوفر."
 msgid "No displayable files on this medium found!"
 msgstr "لا يوجد ملفات للعرض على هذا الوسيط !"
 
-msgid "No epg.dat file found server"
-msgstr ""
+#, fuzzy
+msgid "No epg.dat file found on the fallback receiver"
+msgstr "تمكين الريموت الإحتياطي في الرسيفر"
 
 msgid "No event info found, recording indefinitely."
 msgstr "لا يوجد معلومات عن الحدث, تسجيل إلى أجل غير مسمى."
@@ -8341,9 +8346,6 @@ msgstr "بحث عـن القنـوات"
 #, fuzzy
 msgid "Service title mode"
 msgstr "وضع عنوان الخدمة"
-
-msgid "Service type 4097 incorrect for PiP!"
-msgstr ""
 
 msgid ""
 "Service unavailable!\n"

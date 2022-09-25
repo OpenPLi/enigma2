@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-30 14:55+0200\n"
+"POT-Creation-Date: 2022-09-24 20:36+0200\n"
 "PO-Revision-Date: 2020-05-16 18:41+0200\n"
 "Last-Translator: jamu\n"
 "Language-Team: BoxFreak/jamu\n"
@@ -2625,7 +2625,7 @@ msgstr "Valittu lähetin"
 msgid "Current value: "
 msgstr "Arvo: "
 
-msgid "Currently the commit log cannot be retrieved - please try later again"
+msgid "Currently the commit log cannot be retrieved - please try later again."
 msgstr ""
 
 #
@@ -3774,10 +3774,11 @@ msgstr ""
 msgid "Error stop stream!"
 msgstr ""
 
-msgid "Error when writing epg.dat on server"
-msgstr ""
+#, fuzzy
+msgid "Error when writing epg.dat on the fallback receiver"
+msgstr "Etävastaanottimen kohde"
 
-msgid "Error while retreiving epg.dat from server"
+msgid "Error while retreiving epg.dat from the fallback receiver"
 msgstr ""
 
 #, python-format
@@ -3786,7 +3787,7 @@ msgid ""
 "%s"
 msgstr ""
 
-msgid "Error while retreiving location of epg.dat on server"
+msgid "Error while retreiving location of epg.dat on the fallback receiver"
 msgstr ""
 
 #
@@ -4055,6 +4056,9 @@ msgstr ""
 
 msgid "Falkland Islands (Malvinas)"
 msgstr "Falkland Islands (Malvinas)"
+
+msgid "Fallback API did not return a valid result."
+msgstr ""
 
 msgid "Fallback Timer"
 msgstr ""
@@ -6163,8 +6167,9 @@ msgstr "Kuvausta ei ole saatavilla."
 msgid "No displayable files on this medium found!"
 msgstr "Tiedostoja ei löytynyt!"
 
-msgid "No epg.dat file found server"
-msgstr ""
+#, fuzzy
+msgid "No epg.dat file found on the fallback receiver"
+msgstr "Etävastaanottimen kohde"
 
 #
 msgid "No event info found, recording indefinitely."
@@ -8779,9 +8784,6 @@ msgstr "Kanavahaku"
 
 msgid "Service title mode"
 msgstr "Kanavan otsikko"
-
-msgid "Service type 4097 incorrect for PiP!"
-msgstr ""
 
 #
 msgid ""
