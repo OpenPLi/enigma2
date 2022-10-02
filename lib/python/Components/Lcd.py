@@ -28,7 +28,7 @@ class LCD:
 
 	def setContrast(self, value):
 		value *= 63
-		value /= 20
+		value //= 20
 		if value > 63:
 			value = 63
 		eDBoxLCD.getInstance().setLCDContrast(value)
