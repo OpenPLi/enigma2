@@ -292,11 +292,11 @@ class VideoHardware:
 			for (mode, rates) in modes:
 				ratelist = []
 				for rate in rates:
-					if rate in ("auto"):
+					if rate == "auto":
 						if SystemInfo["Has24hz"]:
-							ratelist.append((rate, rate))
+							ratelist.append((rate, rate + "(50hz/60hz/24hz)"))
 					else:
-						ratelist.append((rate, rate))
+						ratelist.append((rate, rate == "multi" and rate + "(50hz/60hz)" or rate))
 				config.av.videorate[mode] = ConfigSelection(choices=ratelist)
 		config.av.videoport = ConfigSelection(choices=lst)
 
