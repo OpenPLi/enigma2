@@ -297,9 +297,9 @@ class VideoHardware:
 				for rate in rates:
 					if rate == "auto":
 						if SystemInfo["Has24hz"]:
-							ratelist.append((rate, mode == "2160p30" and "auto(25hz/30hz/24hz)" or "auto(50hz/60hz/24hz)"))
+							ratelist.append((rate, mode == "2160p30" and "auto (25Hz/30Hz/24Hz)" or "auto (50Hz/60Hz/24Hz)"))
 					else:
-						ratelist.append((rate, rate == "multi" and (mode == "2160p30" and "auto(25hz/30hz)" or "multi(50hz/60hz)") or rate))
+						ratelist.append((rate, rate == "multi" and (mode == "2160p30" and "multi (25Hz/30Hz)" or "multi (50Hz/60Hz)") or rate))
 				config.av.videorate[mode] = ConfigSelection(choices=ratelist)
 		config.av.videoport = ConfigSelection(choices=lst)
 
