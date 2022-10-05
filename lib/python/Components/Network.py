@@ -65,7 +65,7 @@ class Network:
 		return [int(n) for n in ip.split('.')]
 
 	def getAddrInet(self, iface, callback):
-		data = {'up': False, 'dhcp': False, 'preup': False, 'predown': False}
+		data = {'up': False, 'dhcp': False, 'preup': False, 'predown': False, 'dns-nameserver': []}
 		try:
 			if os.path.exists('/sys/class/net/%s/operstate' % iface):
 				data['up'] = int(open('/sys/class/net/%s/flags' % iface).read().strip(), 16) & 1 == 1
@@ -115,9 +115,10 @@ class Network:
 				fp.write(iface["preup"])
 			if iface["predown"] and "configStrings" not in iface:
 				fp.write(iface["predown"])
+			if iface["dns-nameserver"]:
+				for nameserver in iface["dns-nameserver"]:
+					fp.write("	dns-nameserver %d.%d.%d.%d\n" % tuple(nameserver))
 			fp.write("\n")
-			for nameserver in self.nameservers:
-				fp.write("dns-nameserver %d.%d.%d.%d\n" % tuple(nameserver))
 		fp.close()
 		self.configuredNetworkAdapters = self.configuredInterfaces
 		self.writeNameserverConfig()
@@ -142,7 +143,6 @@ class Network:
 		except:
 			print("[Network.py] interfaces - opening failed")
 
-		self.nameservers = []
 		ifaces = {}
 		currif = ""
 		for i in interfaces:
@@ -178,7 +178,12 @@ class Network:
 					if "predown" in self.ifaces[currif]:
 						self.ifaces[currif]["predown"] = i
 				if split[0] == "dns-nameserver":
-					self.nameservers.append(self.convertIP(split[1]))
+					if "dns-nameserver" not in self.ifaces[currif]:
+						self.ifaces[currif]["dns-nameserver"] = []
+					dns_ip = self.convertIP(split[1])
+					self.ifaces[currif]["dns-nameserver"].append(dns_ip)
+					if dns_ip not in self.nameservers:
+						self.nameservers.append(dns_ip)
 
 		for ifacename, iface in ifaces.items():
 			if ifacename in self.ifaces:

@@ -45,7 +45,7 @@ class FallbackTimerList():
 			try:
 				self.getUrl("api/timerlist").addCallback(self.gotFallbackTimerList).addErrback(self.fallback)
 			except:
-				self.fallback(_("Unexpected error while retreiving fallback tuner's timer information"))
+				self.fallback(_("Unexpected error while retrieving fallback tuner's timer information"))
 		else:
 			self.fallback()
 
@@ -151,7 +151,7 @@ class FallbackTimerList():
 
 	def fallback(self, message=None):
 		if message:
-			self.parent.session.openWithCallback(self.fallbackNOK, MessageBox, _("Error while retreiving fallback timer information\n%s") % message, MessageBox.TYPE_ERROR)
+			self.parent.session.openWithCallback(self.fallbackNOK, MessageBox, _("Error while retrieving fallback timer information\n%s") % message, MessageBox.TYPE_ERROR)
 		else:
 			self.fallbackFunction()
 

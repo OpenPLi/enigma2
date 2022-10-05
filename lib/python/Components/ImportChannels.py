@@ -148,7 +148,7 @@ class ImportChannels:
 				epg_location = files[0] if files else None
 			except Exception as e:
 				print("[Import Channels] Exception: %s" % str(e))
-				self.ImportChannelsDone(False, _("Error while retreiving location of epg.dat on the fallback receiver"))
+				self.ImportChannelsDone(False, _("Error while retrieving location of epg.dat on the fallback receiver"))
 				return
 			if epg_location:
 				print("[Import Channels] Copy EPG file...")
@@ -157,7 +157,7 @@ class ImportChannels:
 					shutil.move(os.path.join(self.tmp_dir, "epg.dat"), config.misc.epgcache_filename.value)
 				except Exception as e:
 					print("[Import Channels] Exception: %s" % str(e))
-					self.ImportChannelsDone(False, _("Error while retreiving epg.dat from the fallback receiver"))
+					self.ImportChannelsDone(False, _("Error while retrieving epg.dat from the fallback receiver"))
 					return
 			else:
 				self.ImportChannelsDone(False, _("No epg.dat file found on the fallback receiver"))
