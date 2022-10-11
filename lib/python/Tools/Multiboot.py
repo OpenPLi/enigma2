@@ -11,7 +11,7 @@ class tmp:
 
 def getMultibootStartupDevice():
 	tmp.dir = tempfile.mkdtemp(prefix="Multiboot")
-	for device in ('/dev/block/by-name/bootoptions', '/dev/mmcblk0p1', '/dev/mmcblk1p1', '/dev/mmcblk0p3', '/dev/mmcblk0p4'):
+	for device in ('/dev/block/by-name/bootoptions', '/dev/mmcblk0p1', '/dev/mmcblk1p1', '/dev/mmcblk0p3', '/dev/mmcblk0p4', '/dev/mtdblock2'):
 		if os.path.exists(device):
 			if os.path.exists("/dev/block/by-name/flag"):
 				Console().ePopen('mount --bind %s %s' % (device, tmp.dir))
@@ -44,7 +44,7 @@ def getMultibootslots():
 				for line in open(file).readlines():
 					if 'root=' in line:
 						device = getparam(line, 'root')
-						if os.path.exists(device):
+						if os.path.exists(device) or device == 'ubi0:ubifs':
 							slot['device'] = device
 							slot['startupfile'] = os.path.basename(file)
 							if 'rootsubdir' in line:
@@ -107,7 +107,10 @@ def getImagelist():
 	if SystemInfo["canMultiBoot"]:
 		tmp.dir = tempfile.mkdtemp(prefix="Multiboot")
 		for slot in sorted(SystemInfo["canMultiBoot"].keys()):
-			Console().ePopen('mount %s %s' % (SystemInfo["canMultiBoot"][slot]['device'], tmp.dir))
+			if SystemInfo["canMultiBoot"][slot]['device'] == 'ubi0:ubifs':
+				Console().ePopen('mount -t ubifs %s %s' % (SystemInfo["canMultiBoot"][slot]['device'], tmp.dir))
+			else:
+				Console().ePopen('mount %s %s' % (SystemInfo["canMultiBoot"][slot]['device'], tmp.dir))
 			imagedir = os.sep.join(filter(None, [tmp.dir, SystemInfo["canMultiBoot"][slot].get('rootsubdir', '')]))
 			if os.path.isfile(os.path.join(imagedir, 'usr/bin/enigma2')):
 				try:
