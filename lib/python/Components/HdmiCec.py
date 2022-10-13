@@ -131,7 +131,7 @@ class HdmiCec:
 		self.volumeForwardingDestination = 0
 		self.wakeup_from_tv = False
 		eActionMap.getInstance().bindAction('', -maxsize - 1, self.keyEvent)
-		config.hdmicec.volume_forwarding.addNotifier(self.configVolumeForwarding)
+		config.hdmicec.volume_forwarding.addNotifier(self.configVolumeForwarding, initial_call=False)
 		config.hdmicec.enabled.addNotifier(self.configVolumeForwarding)
 		if config.hdmicec.enabled.value:
 			if config.hdmicec.report_active_menu.value:
