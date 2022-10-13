@@ -79,10 +79,6 @@ class HdmiCECSetupScreen(ConfigListScreen, Screen):
 			x[1].save()
 		self.close()
 
-	def keyCancel(self):
-		for x in self["config"].list:
-			x[1].cancel()
-		self.close()
 
 	def keyOk(self):
 		currentry = self["config"].getCurrent()
