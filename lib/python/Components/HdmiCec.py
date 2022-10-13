@@ -1,7 +1,7 @@
 import struct
 import os
 import time
-from Components.config import config, ConfigSelection, ConfigYesNo, ConfigSubsection, ConfigText, ConfigCECAddress, ConfigLocations, ConfigDirectory
+from Components.config import config, ConfigSelection, ConfigYesNo, ConfigSubsection, ConfigText, ConfigCECAddress, ConfigLocations, ConfigDirectory, ConfigNothing
 from enigma import eHdmiCEC, eActionMap
 from Tools.StbHardware import getFPWasTimerWakeup
 import NavigationInstance
@@ -76,6 +76,11 @@ config.hdmicec.tv_wakeup_command = ConfigSelection(
 	default="imageview")
 config.hdmicec.fixed_physical_address = ConfigText(default="0.0.0.0")
 config.hdmicec.volume_forwarding = ConfigYesNo(default=False)
+choicelist = []
+for i in range(1, 31):
+	choicelist.append((str(i), str(i)))
+config.hdmicec.volume_forwarding_repeat = ConfigSelection(default="0", choices=[("0", _("Disabled"))] + choicelist)
+config.hdmicec.volume_forwarding_repeat_empty = ConfigNothing()
 config.hdmicec.control_receiver_wakeup = ConfigYesNo(default=False)
 config.hdmicec.control_receiver_standby = ConfigYesNo(default=False)
 config.hdmicec.handle_deepstandby_events = ConfigSelection(default="no", choices=[("no", _("No")), ("yes", _("Yes")), ("poweroff", _("Only power off"))])
@@ -126,7 +131,7 @@ class HdmiCec:
 		self.volumeForwardingDestination = 0
 		self.wakeup_from_tv = False
 		eActionMap.getInstance().bindAction('', -maxsize - 1, self.keyEvent)
-		config.hdmicec.volume_forwarding.addNotifier(self.configVolumeForwarding)
+		config.hdmicec.volume_forwarding.addNotifier(self.configVolumeForwarding, initial_call=False)
 		config.hdmicec.enabled.addNotifier(self.configVolumeForwarding)
 		if config.hdmicec.enabled.value:
 			if config.hdmicec.report_active_menu.value:
@@ -454,6 +459,10 @@ class HdmiCec:
 			data =data.decode()
 			if config.hdmicec.minimum_send_interval.value != "0":
 				self.queueKeyEvent.append((self.volumeForwardingDestination, cmd, data))
+				repeat = int(config.hdmicec.volume_forwarding_repeat.value)
+				if repeat and self.volumeForwardingDestination:
+					for i in range(repeat):
+						self.queueKeyEvent.append((self.volumeForwardingDestination, cmd, data))
 				if not self.waitKeyEvent.isActive():
 					self.waitKeyEvent.start(int(config.hdmicec.minimum_send_interval.value), True)
 			else:

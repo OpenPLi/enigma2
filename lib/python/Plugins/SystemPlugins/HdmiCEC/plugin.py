@@ -54,6 +54,11 @@ class HdmiCECSetupScreen(ConfigListScreen, Screen):
 			if config.hdmicec.handle_tv_wakeup.value:
 				self.list.append(getConfigListEntry(_("Wakeup signal from TV"), config.hdmicec.tv_wakeup_detection, _("Wake the receiver from standby when selected wake command is sent from the TV.")))
 			self.list.append(getConfigListEntry(_("Forward volume keys"), config.hdmicec.volume_forwarding, _("Volume keys on the receiver remote will control the TV volume.")))
+			if config.hdmicec.volume_forwarding.value:
+				if config.hdmicec.minimum_send_interval.value != "0":
+					self.list.append(getConfigListEntry(_("Forwarded volume step size"), config.hdmicec.volume_forwarding_repeat, _("The number of steps to change the volume on the device the keys are forwarded to.")))
+				else:
+					self.list.append(getConfigListEntry(_("Forwarded volume step size") + _(" - information"), config.hdmicec.volume_forwarding_repeat_empty, _("'Minimum send interval' needs to be enabled to use this option.")))
 			self.list.append(getConfigListEntry(_("Put receiver in standby"), config.hdmicec.control_receiver_standby, _("Put A/V receiver to standby too.")))
 			self.list.append(getConfigListEntry(_("Wakeup receiver from standby"), config.hdmicec.control_receiver_wakeup, _("Wakeup A/V receiver from standby too.")))
 			self.list.append(getConfigListEntry(_("Minimum send interval"), config.hdmicec.minimum_send_interval, _("Delay between CEC commands when sending a series of commands. Some devices require this delay for correct functioning, usually between 50-150ms.")))
@@ -74,10 +79,6 @@ class HdmiCECSetupScreen(ConfigListScreen, Screen):
 			x[1].save()
 		self.close()
 
-	def keyCancel(self):
-		for x in self["config"].list:
-			x[1].cancel()
-		self.close()
 
 	def keyOk(self):
 		currentry = self["config"].getCurrent()
