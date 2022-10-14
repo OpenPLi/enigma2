@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-24 20:36+0200\n"
+"POT-Creation-Date: 2022-10-14 09:11+0200\n"
 "PO-Revision-Date: 2022-08-03 13:01+0200\n"
 "Last-Translator: Andrej Tobola <andrej.tobola@gmail.com>\n"
 "Language-Team: \n"
@@ -98,6 +98,10 @@ msgstr " (nižšia než akékoľvek auto)"
 
 msgid " - Unicable/JESS LNBs not found"
 msgstr " - Unicable/JESS LNB nenájdené"
+
+#, fuzzy
+msgid " - information"
+msgstr "Informácie"
 
 msgid " Warning: the selected tuner should not use SCR Unicable type for LNBs because each tuner need a own SCR number."
 msgstr " Upozornenie: zvolený tuner by nemal používať typ LNB - SCR Unicable, pretože každý tuner potrebuje vlastné SCR číslo."
@@ -355,6 +359,9 @@ msgid_plural "%s updated packages available"
 msgstr[0] "%s aktualizovaný balíček k dispozícii"
 msgstr[1] "%s aktualizované balíčky k dispozícii"
 msgstr[2] "%s aktualizovaných balíčkov k dispozícii"
+
+msgid "'Minimum send interval' needs to be enabled to use this option."
+msgstr ""
 
 msgid "(VU+ type)"
 msgstr "(Typ VU+)"
@@ -3394,19 +3401,19 @@ msgid "Error when writing epg.dat on the fallback receiver"
 msgstr "Chyba pri zapisovaní epg.dat na server"
 
 #, fuzzy
-msgid "Error while retreiving epg.dat from the fallback receiver"
+msgid "Error while retrieving epg.dat from the fallback receiver"
 msgstr "Chyba pri načítaní epg.dat zo servera"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"Error while retreiving fallback timer information\n"
+"Error while retrieving fallback timer information\n"
 "%s"
 msgstr ""
 "Chyba počas načítania informácie záložného časovača\n"
 "%s"
 
 #, fuzzy
-msgid "Error while retreiving location of epg.dat on the fallback receiver"
+msgid "Error while retrieving location of epg.dat on the fallback receiver"
 msgstr "Chyba pri načítaní pozície epg.dat na serveri"
 
 #, python-format
@@ -3827,6 +3834,10 @@ msgid "Format"
 msgstr "Formát"
 
 msgid "Forward volume keys"
+msgstr "Preposielať tlačidlá hlasitosti"
+
+#, fuzzy
+msgid "Forwarded volume step size"
 msgstr "Preposielať tlačidlá hlasitosti"
 
 msgid "Frame size in full view"
@@ -9038,6 +9049,9 @@ msgstr ""
 "Rozšírenie sprievodca sieťou nie je nainštalované.\n"
 "Nainštalujte si ho."
 
+msgid "The number of steps to change the volume on the device the keys are forwarded to."
+msgstr ""
+
 msgid ""
 "The overscan wizard has been completed.\n"
 "\n"
@@ -9773,7 +9787,8 @@ msgstr "Ponechať"
 msgid "Unencrypted"
 msgstr "Nešifrované"
 
-msgid "Unexpected error while retreiving fallback tuner's timer information"
+#, fuzzy
+msgid "Unexpected error while retrieving fallback tuner's timer information"
 msgstr "Neočakávaná chyba počas načítavania informácie časovača záložného tuneru"
 
 msgid "UnhandledKey"

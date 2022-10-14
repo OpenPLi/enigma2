@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPLI Enigma2 Official Greek Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-24 20:36+0200\n"
+"POT-Creation-Date: 2022-10-14 09:11+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: MCelliotG <mcelliotg@gmail.com>\n"
 "Language-Team: MCelliotG <mcelliotg@gmail.com>\n"
@@ -97,6 +97,10 @@ msgstr " (χαμηλότερα όλων των αυτόματων)"
 
 msgid " - Unicable/JESS LNBs not found"
 msgstr " - δεν βρέθηκαν Unicable/JESS LNBs"
+
+#, fuzzy
+msgid " - information"
+msgstr "Πληροφορίες"
 
 msgid " Warning: the selected tuner should not use SCR Unicable type for LNBs because each tuner need a own SCR number."
 msgstr " Προειδοποίηση: Το επιλεγμένο tuner δεν πρέπει να χρησιμοποιεί τον τύπο SCR Unicable για LNBs, επειδή κάθε tuner χρειάζεται έναν δικό του αριθμό SCR."
@@ -341,6 +345,9 @@ msgid "%s updated package available"
 msgid_plural "%s updated packages available"
 msgstr[0] "%s διαθέσιμο πακέτο ενημέρωσης"
 msgstr[1] "%s διαθέσιμα πακέτα ενημέρωσης"
+
+msgid "'Minimum send interval' needs to be enabled to use this option."
+msgstr ""
 
 msgid "(VU+ type)"
 msgstr "(VU+ τύπος)"
@@ -3369,19 +3376,19 @@ msgid "Error when writing epg.dat on the fallback receiver"
 msgstr "Σφάλμα κατά την εγγραφή του epg.dat στον διακομιστή"
 
 #, fuzzy
-msgid "Error while retreiving epg.dat from the fallback receiver"
+msgid "Error while retrieving epg.dat from the fallback receiver"
 msgstr "Σφάλμα ανάκτησης του epg.dat από τον διακομιστή"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"Error while retreiving fallback timer information\n"
+"Error while retrieving fallback timer information\n"
 "%s"
 msgstr ""
 "Σφάλμα ανάκτησης πληροφοριών χρονοδιακόπτη από το εφεδρικό tuner\n"
 "%s"
 
 #, fuzzy
-msgid "Error while retreiving location of epg.dat on the fallback receiver"
+msgid "Error while retrieving location of epg.dat on the fallback receiver"
 msgstr "Σφάλμα ανάκτησης τοποθεσίας του epg.dat στον διακομιστή"
 
 #, python-format
@@ -3802,6 +3809,10 @@ msgid "Format"
 msgstr "Φορμά"
 
 msgid "Forward volume keys"
+msgstr "Πλήκτρα προώθησης ήχου"
+
+#, fuzzy
+msgid "Forwarded volume step size"
 msgstr "Πλήκτρα προώθησης ήχου"
 
 msgid "Frame size in full view"
@@ -9008,6 +9019,9 @@ msgstr ""
 "Το πρόσθετο οδηγού δικτύου δεν είναι εγκατεστημένο!\n"
 "Παρακαλώ εγκαταστήστε το."
 
+msgid "The number of steps to change the volume on the device the keys are forwarded to."
+msgstr ""
+
 msgid ""
 "The overscan wizard has been completed.\n"
 "\n"
@@ -9743,7 +9757,8 @@ msgstr "Αναίρεση απεγκατάστασης"
 msgid "Unencrypted"
 msgstr "Χωρίς κωδικοποίηση"
 
-msgid "Unexpected error while retreiving fallback tuner's timer information"
+#, fuzzy
+msgid "Unexpected error while retrieving fallback tuner's timer information"
 msgstr "Μη αναμενόμενο σφάλμα κατά την ανάκτηση των πληροφοριών χρονοδιακόπτη του εφεδρικού tuner"
 
 msgid "UnhandledKey"

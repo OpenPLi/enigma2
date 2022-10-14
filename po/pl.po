@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-24 20:36+0200\n"
+"POT-Creation-Date: 2022-10-14 09:11+0200\n"
 "PO-Revision-Date: 2022-04-02 17:25+0200\n"
 "Last-Translator: blzr <blzr@o2.pl>\n"
 "Language-Team: \n"
@@ -96,6 +96,10 @@ msgstr " (niższy niż każdy auto)"
 
 msgid " - Unicable/JESS LNBs not found"
 msgstr " - nie zanaleziono konwerterów Unicable/JESS "
+
+#, fuzzy
+msgid " - information"
+msgstr "Informacje"
 
 msgid " Warning: the selected tuner should not use SCR Unicable type for LNBs because each tuner need a own SCR number."
 msgstr " Uwaga: wybrany tuner nie powinien używać typu SCR Unicable dla konwerterów, ponieważ każdy tuner potrzebuje własnego numeru SCR."
@@ -353,6 +357,9 @@ msgid_plural "%s updated packages available"
 msgstr[0] "%s zaktualizowany pakiet dostępny"
 msgstr[1] "%s zaktualizowane pakiety dostępne"
 msgstr[2] "%s zaktualizowanych pakietów dostępnych"
+
+msgid "'Minimum send interval' needs to be enabled to use this option."
+msgstr ""
 
 msgid "(VU+ type)"
 msgstr "(Typ VU+)"
@@ -3404,19 +3411,19 @@ msgid "Error when writing epg.dat on the fallback receiver"
 msgstr "Błąd przy zapisywaniu epg.dat na serwer"
 
 #, fuzzy
-msgid "Error while retreiving epg.dat from the fallback receiver"
+msgid "Error while retrieving epg.dat from the fallback receiver"
 msgstr "Błąd podczas pobierania epg.dat z serwera"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"Error while retreiving fallback timer information\n"
+"Error while retrieving fallback timer information\n"
 "%s"
 msgstr ""
 "Błąd podczas pobierania informacji o timerze z tunera zapasowego\n"
 "% s"
 
 #, fuzzy
-msgid "Error while retreiving location of epg.dat on the fallback receiver"
+msgid "Error while retrieving location of epg.dat on the fallback receiver"
 msgstr "Błąd podczas pobierania lokalizacji epg.dat na serwerze"
 
 #, python-format
@@ -3840,6 +3847,10 @@ msgid "Format"
 msgstr "Format"
 
 msgid "Forward volume keys"
+msgstr "Przekazuj klawisze głośności"
+
+#, fuzzy
+msgid "Forwarded volume step size"
 msgstr "Przekazuj klawisze głośności"
 
 msgid "Frame size in full view"
@@ -9059,6 +9070,9 @@ msgstr ""
 "Kreator sieci nie jest zainstalowany!\n"
 "Zainstaluj go najpierw."
 
+msgid "The number of steps to change the volume on the device the keys are forwarded to."
+msgstr ""
+
 msgid ""
 "The overscan wizard has been completed.\n"
 "\n"
@@ -9796,7 +9810,8 @@ msgstr "Anuluj odinstalowanie"
 msgid "Unencrypted"
 msgstr "Nieszyfrowane"
 
-msgid "Unexpected error while retreiving fallback tuner's timer information"
+#, fuzzy
+msgid "Unexpected error while retrieving fallback tuner's timer information"
 msgstr "Niespodziewany błąd podczas pobierania informacji o timerze ze zdalnego odbiornika"
 
 msgid "UnhandledKey"
