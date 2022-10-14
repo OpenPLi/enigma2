@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-24 20:36+0200\n"
+"POT-Creation-Date: 2022-10-14 09:11+0200\n"
 "PO-Revision-Date: 2014-11-12 00:49+0200\n"
 "Last-Translator: Taapat <taapat@gmail.com>\n"
 "Language-Team: Taapat <taapat@gmail.com>\n"
@@ -98,6 +98,10 @@ msgstr " (mazāks kā jebkurš auto)"
 
 msgid " - Unicable/JESS LNBs not found"
 msgstr " - Unicable/JESS LNBs nav atrasts"
+
+#, fuzzy
+msgid " - information"
+msgstr "Informācija"
 
 msgid " Warning: the selected tuner should not use SCR Unicable type for LNBs because each tuner need a own SCR number."
 msgstr " Brīdinājums! Norādītajam uztvērējam nevajadzētu izmantot SCR Unicable tipu, jo katram uztvērējam ir nepieciešams savs SCR numurs."
@@ -355,6 +359,9 @@ msgid_plural "%s updated packages available"
 msgstr[0] "%s pakotnes atjauninājums pieejams"
 msgstr[1] "%s pakotņu atjauninājumi pieejami"
 msgstr[2] "%s pakotņu atjauninājumi pieejami"
+
+msgid "'Minimum send interval' needs to be enabled to use this option."
+msgstr ""
 
 msgid "(VU+ type)"
 msgstr "(VU+ tips)"
@@ -3399,19 +3406,19 @@ msgid "Error when writing epg.dat on the fallback receiver"
 msgstr "Kļūda rakstot uz attālinātā uztvērēja epg.dat"
 
 #, fuzzy
-msgid "Error while retreiving epg.dat from the fallback receiver"
+msgid "Error while retrieving epg.dat from the fallback receiver"
 msgstr "Kļūda iegūstot epg.dat no attālinātā uztvērēja"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"Error while retreiving fallback timer information\n"
+"Error while retrieving fallback timer information\n"
 "%s"
 msgstr ""
 "Kļūda iegūstot taimerus no attālinātā uztvērēja\n"
 "%s"
 
 #, fuzzy
-msgid "Error while retreiving location of epg.dat on the fallback receiver"
+msgid "Error while retrieving location of epg.dat on the fallback receiver"
 msgstr "Kļūda iegūstot epg.dat atrašanās vietu no attālinātā uztvērēja"
 
 #, python-format
@@ -3833,6 +3840,10 @@ msgid "Format"
 msgstr "Formatēt"
 
 msgid "Forward volume keys"
+msgstr "Pāradresēt skaļuma taustiņus"
+
+#, fuzzy
+msgid "Forwarded volume step size"
 msgstr "Pāradresēt skaļuma taustiņus"
 
 msgid "Frame size in full view"
@@ -9044,6 +9055,9 @@ msgstr ""
 "Bezvadu tīkla spraudnis nav instalēts!\n"
 "Lūdzu uzstādiet to."
 
+msgid "The number of steps to change the volume on the device the keys are forwarded to."
+msgstr ""
+
 msgid ""
 "The overscan wizard has been completed.\n"
 "\n"
@@ -9777,7 +9791,8 @@ msgstr "Atsaukt atinstalēšanu"
 msgid "Unencrypted"
 msgstr "Nešifrēts"
 
-msgid "Unexpected error while retreiving fallback tuner's timer information"
+#, fuzzy
+msgid "Unexpected error while retrieving fallback tuner's timer information"
 msgstr "Negaidīta kļūda iegūstot taimeru informāciju no attālinātā uztvērēja"
 
 msgid "UnhandledKey"

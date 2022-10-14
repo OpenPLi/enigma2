@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-24 20:36+0200\n"
+"POT-Creation-Date: 2022-10-14 09:11+0200\n"
 "PO-Revision-Date: 2021-04-30 16:06+0200\n"
 "Last-Translator: kueken\n"
 "Language-Team: OpenPLi\n"
@@ -97,6 +97,10 @@ msgstr " (geringer als in jedem auto)"
 
 msgid " - Unicable/JESS LNBs not found"
 msgstr ""
+
+#, fuzzy
+msgid " - information"
+msgstr "Informationen"
 
 msgid " Warning: the selected tuner should not use SCR Unicable type for LNBs because each tuner need a own SCR number."
 msgstr ""
@@ -341,6 +345,9 @@ msgid "%s updated package available"
 msgid_plural "%s updated packages available"
 msgstr[0] "%s Aktualisierung verfügbar"
 msgstr[1] "%s Aktualisierungen verfügbar"
+
+msgid "'Minimum send interval' needs to be enabled to use this option."
+msgstr ""
 
 msgid "(VU+ type)"
 msgstr "(VU + Typ)"
@@ -3404,19 +3411,19 @@ msgid "Error when writing epg.dat on the fallback receiver"
 msgstr "Fehler beim Schreiben der epg.dat auf dem Server"
 
 #, fuzzy
-msgid "Error while retreiving epg.dat from the fallback receiver"
+msgid "Error while retrieving epg.dat from the fallback receiver"
 msgstr "Fehler beim Empfangen der epg.dat vom Server"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"Error while retreiving fallback timer information\n"
+"Error while retrieving fallback timer information\n"
 "%s"
 msgstr ""
 "Fehler beim Wiederherstellen der Reserve-Timer-Informationen\n"
 "%s"
 
 #, fuzzy
-msgid "Error while retreiving location of epg.dat on the fallback receiver"
+msgid "Error while retrieving location of epg.dat on the fallback receiver"
 msgstr "Fehler beim Empfangen des epg.dat Speicherorts"
 
 #, python-format
@@ -3839,6 +3846,10 @@ msgid "Format"
 msgstr "Formatieren"
 
 msgid "Forward volume keys"
+msgstr "Lautstärketasten weiterleiten"
+
+#, fuzzy
+msgid "Forwarded volume step size"
 msgstr "Lautstärketasten weiterleiten"
 
 msgid "Frame size in full view"
@@ -9078,6 +9089,9 @@ msgstr ""
 "Das Netzwerk-Assistent-Plugin ist nicht installiert!\n"
 "Bitte installieren Sie es."
 
+msgid "The number of steps to change the volume on the device the keys are forwarded to."
+msgstr ""
+
 msgid ""
 "The overscan wizard has been completed.\n"
 "\n"
@@ -9818,7 +9832,8 @@ msgstr "Deinstallation zurücksetzen."
 msgid "Unencrypted"
 msgstr "Unverschlüsselt"
 
-msgid "Unexpected error while retreiving fallback tuner's timer information"
+#, fuzzy
+msgid "Unexpected error while retrieving fallback tuner's timer information"
 msgstr "Unerwarteter Fehler beim Abrufen der Timer-Informationen des Reserve-Tuners"
 
 msgid "UnhandledKey"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-24 20:36+0200\n"
+"POT-Creation-Date: 2022-10-14 09:11+0200\n"
 "PO-Revision-Date: 2021-08-02 09:19+0700\n"
 "Last-Translator: krong\n"
 "Language-Team: none\n"
@@ -95,6 +95,10 @@ msgstr " (thấp hơn bất kỳ ô tô nào)"
 
 msgid " - Unicable/JESS LNBs not found"
 msgstr " - Unicable / JESS LNBs không tìm thấy"
+
+#, fuzzy
+msgid " - information"
+msgstr "Thông tin"
 
 msgid " Warning: the selected tuner should not use SCR Unicable type for LNBs because each tuner need a own SCR number."
 msgstr " Cảnh báo: bộ chỉnh đã chọn không nên sử dụng loại SCR Unicable cho LNBs vì mỗi bộ chỉnh cần một số SCR riêng."
@@ -326,6 +330,9 @@ msgstr "%s không còn được sử dụng. Có nên xóa nó không?"
 msgid "%s updated package available"
 msgid_plural "%s updated packages available"
 msgstr[0] "%s gói cập nhật có sẵn"
+
+msgid "'Minimum send interval' needs to be enabled to use this option."
+msgstr ""
 
 msgid "(VU+ type)"
 msgstr "(VU + loại)"
@@ -3380,19 +3387,19 @@ msgid "Error when writing epg.dat on the fallback receiver"
 msgstr "Lỗi khi ghi epg.dat trên máy chủ"
 
 #, fuzzy
-msgid "Error while retreiving epg.dat from the fallback receiver"
+msgid "Error while retrieving epg.dat from the fallback receiver"
 msgstr "Lỗi khi truy xuất epg.data từ máy chủ"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"Error while retreiving fallback timer information\n"
+"Error while retrieving fallback timer information\n"
 "%s"
 msgstr ""
 "Lỗi trong khi truy xuất thông tin hẹn giờ dự phòng\n"
 "%s"
 
 #, fuzzy
-msgid "Error while retreiving location of epg.dat on the fallback receiver"
+msgid "Error while retrieving location of epg.dat on the fallback receiver"
 msgstr "Lỗi khi truy xuất vị trí của epg.data trên máy chủ"
 
 #, python-format
@@ -3816,6 +3823,10 @@ msgid "Format"
 msgstr "Định dạng"
 
 msgid "Forward volume keys"
+msgstr "Phím âm lượng chuyển tiếp"
+
+#, fuzzy
+msgid "Forwarded volume step size"
 msgstr "Phím âm lượng chuyển tiếp"
 
 msgid "Frame size in full view"
@@ -9039,6 +9050,9 @@ msgstr ""
 "Phần mở rộng thuật sĩ mạng không được cài đặt!\n"
 "Vui lòng cài đặt nó."
 
+msgid "The number of steps to change the volume on the device the keys are forwarded to."
+msgstr ""
+
 msgid ""
 "The overscan wizard has been completed.\n"
 "\n"
@@ -9776,7 +9790,8 @@ msgstr "Hoàn tác gỡ cài đặt"
 msgid "Unencrypted"
 msgstr "Không được mã hóa"
 
-msgid "Unexpected error while retreiving fallback tuner's timer information"
+#, fuzzy
+msgid "Unexpected error while retrieving fallback tuner's timer information"
 msgstr "Lỗi không mong muốn trong khi truy xuất thông tin hẹn giờ của người dự phòng"
 
 msgid "UnhandledKey"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-24 20:36+0200\n"
+"POT-Creation-Date: 2022-10-14 09:11+0200\n"
 "PO-Revision-Date: 2022-09-27 16:12+0200\n"
 "Last-Translator: kueken\n"
 "Language-Team: kvinto\n"
@@ -96,6 +96,10 @@ msgstr " (нижче будь-якого авто)"
 
 msgid " - Unicable/JESS LNBs not found"
 msgstr " - Unicable/JESS LNB не знайдено"
+
+#, fuzzy
+msgid " - information"
+msgstr "Інформація"
 
 msgid " Warning: the selected tuner should not use SCR Unicable type for LNBs because each tuner need a own SCR number."
 msgstr " Попередження: вибраний тюнер не повинен використовувати тип SCR Unicable для LNB, оскільки кожен тюнер потребує власного номера SCR."
@@ -353,6 +357,9 @@ msgid_plural "%s updated packages available"
 msgstr[0] "%s оновлення пакету доступно"
 msgstr[1] "%s оновлення пакетів доступно"
 msgstr[2] "%s оновлень пакетів доступно"
+
+msgid "'Minimum send interval' needs to be enabled to use this option."
+msgstr ""
 
 msgid "(VU+ type)"
 msgstr "(тип VU+)"
@@ -3390,18 +3397,20 @@ msgstr "Помилка зупинки потоку!"
 msgid "Error when writing epg.dat on the fallback receiver"
 msgstr "Помилка під час запису epg.dat на резервний приймач"
 
-msgid "Error while retreiving epg.dat from the fallback receiver"
+#, fuzzy
+msgid "Error while retrieving epg.dat from the fallback receiver"
 msgstr "Помилка під час отримання epg.data із резервного приймача"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"Error while retreiving fallback timer information\n"
+"Error while retrieving fallback timer information\n"
 "%s"
 msgstr ""
 "Помилка під час отримання інформації про резервний таймер\n"
 "%s"
 
-msgid "Error while retreiving location of epg.dat on the fallback receiver"
+#, fuzzy
+msgid "Error while retrieving location of epg.dat on the fallback receiver"
 msgstr "Помилка під час отримання розташування epg.dat на резервному приймачі"
 
 #, python-format
@@ -3822,6 +3831,10 @@ msgid "Format"
 msgstr "Форматування"
 
 msgid "Forward volume keys"
+msgstr "Кнопки збільшення звуку"
+
+#, fuzzy
+msgid "Forwarded volume step size"
 msgstr "Кнопки збільшення звуку"
 
 msgid "Frame size in full view"
@@ -9031,6 +9044,9 @@ msgstr ""
 "Майстер налаштування мережі не встановлено!\n"
 "Будь ласка, встановіть його."
 
+msgid "The number of steps to change the volume on the device the keys are forwarded to."
+msgstr ""
+
 msgid ""
 "The overscan wizard has been completed.\n"
 "\n"
@@ -9766,7 +9782,8 @@ msgstr "Скасувати видалення"
 msgid "Unencrypted"
 msgstr "Декодований"
 
-msgid "Unexpected error while retreiving fallback tuner's timer information"
+#, fuzzy
+msgid "Unexpected error while retrieving fallback tuner's timer information"
 msgstr "Несподівана помилка під час отримання інформації про таймер резервного тюнера"
 
 msgid "UnhandledKey"

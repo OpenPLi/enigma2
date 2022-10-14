@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-24 20:36+0200\n"
+"POT-Creation-Date: 2022-10-14 09:11+0200\n"
 "PO-Revision-Date: 2021-11-03 15:10+0100\n"
 "Last-Translator: mcfly82\n"
 "Language-Team: mcfly82 & wysless\n"
@@ -95,6 +95,10 @@ msgstr " (alacsonyabb mint bármelyik automatikus)"
 
 msgid " - Unicable/JESS LNBs not found"
 msgstr " - Unicable/JESS LNBs nem található"
+
+#, fuzzy
+msgid " - information"
+msgstr "Információk"
 
 msgid " Warning: the selected tuner should not use SCR Unicable type for LNBs because each tuner need a own SCR number."
 msgstr "Figyelmeztetés: a kiválasztott tuner nem használhat SCR Unicable típust az LNB-hez, mivel minden tunernek saját SCR száma kell legyen."
@@ -338,6 +342,9 @@ msgid "%s updated package available"
 msgid_plural "%s updated packages available"
 msgstr[0] "%s frissítés elérhető"
 msgstr[1] "%s frissítés elérhető"
+
+msgid "'Minimum send interval' needs to be enabled to use this option."
+msgstr ""
 
 msgid "(VU+ type)"
 msgstr "(VU+ típus)"
@@ -3390,19 +3397,19 @@ msgid "Error when writing epg.dat on the fallback receiver"
 msgstr "Hiba az epg.dat fájl szerverre írása során"
 
 #, fuzzy
-msgid "Error while retreiving epg.dat from the fallback receiver"
+msgid "Error while retrieving epg.dat from the fallback receiver"
 msgstr "Hiba történt az epg.dat fájl letöltésekor a szerverről"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"Error while retreiving fallback timer information\n"
+"Error while retrieving fallback timer information\n"
 "%s"
 msgstr ""
 "Hiba történt a tartalék tuner időzítők letöltésekor\n"
 "%s"
 
 #, fuzzy
-msgid "Error while retreiving location of epg.dat on the fallback receiver"
+msgid "Error while retrieving location of epg.dat on the fallback receiver"
 msgstr "Hiba történt az epg.dat fájl helyének meghatározásakor a szerveren"
 
 #, python-format
@@ -3826,6 +3833,10 @@ msgid "Format"
 msgstr "Formázás"
 
 msgid "Forward volume keys"
+msgstr "Hangerőszabályzás továbbítása"
+
+#, fuzzy
+msgid "Forwarded volume step size"
 msgstr "Hangerőszabályzás továbbítása"
 
 msgid "Frame size in full view"
@@ -9061,6 +9072,9 @@ msgstr ""
 "A NetworkWizard bővítmémy nincs feltelepítve!\n"
 "Kérem, telepítse fel."
 
+msgid "The number of steps to change the volume on the device the keys are forwarded to."
+msgstr ""
+
 msgid ""
 "The overscan wizard has been completed.\n"
 "\n"
@@ -9798,7 +9812,8 @@ msgstr "Eltávolítás visszavonása"
 msgid "Unencrypted"
 msgstr "Kódolatlan"
 
-msgid "Unexpected error while retreiving fallback tuner's timer information"
+#, fuzzy
+msgid "Unexpected error while retrieving fallback tuner's timer information"
 msgstr "Váratlan hiba történt a tartalék tuner időzítők letöltésekor"
 
 msgid "UnhandledKey"
