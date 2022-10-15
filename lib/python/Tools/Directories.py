@@ -8,6 +8,8 @@ from stat import S_IMODE
 from sys import _getframe as getframe
 from unicodedata import normalize
 
+from Components.config import config
+
 pathExists = os.path.exists
 
 SCOPE_HOME = 0  # DEBUG: Not currently used in Enigma2.
@@ -543,6 +545,22 @@ def mediafilesInUse(session):
 
 def shellquote(s):
 	return "'%s'" % s.replace("'", "'\\''")
+
+def isPluginInstalled(pluginname, pluginfile="plugin", pluginType=None, pluginconfig==None):
+	pluginspath = resolveFilename(SCOPE_PLUGINS)
+	pluginfolders = [name for name in os.listdir(pluginspath) if os.isdir(os.path.join(pluginspath, name)) and name not in ["__pycache__"]]
+	if pluginType is None or pluginType in pluginfolders:
+		plugintypes = pluginType and [pluginType] or pluginfolders
+		for fileext in [".pyc", ".py"]:
+			for plugintype in plugintypes:
+				if os.path.isfile(os.path.join(pluginspath, plugintype, pluginname, pluginfile + fileext)):
+					if pluginconfig:
+						try:
+							exec(pluginconfig)
+						except:
+							continue
+					return True
+	return False
 
 
 def sanitizeFilename(filename):
