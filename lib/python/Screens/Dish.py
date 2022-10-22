@@ -156,7 +156,7 @@ class Dish(Screen):
 		if self.pmt_timeout >= 0:
 			service = self.session.nav.getCurrentService()
 			info = service and service.info()
-			pmt = info and info.getInfo(iServiceInformation.sPMTPID)
+			pmt = info and info.getInfo(iServiceInformation.sPMTPID) or -1
 			if pmt >= 0:
 				print("[Dish] tuned, closing...")
 				self.__toHide()
