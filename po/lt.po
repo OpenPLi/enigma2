@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-14 09:11+0200\n"
-"PO-Revision-Date: 2022-07-06 01:01+0300\n"
+"POT-Creation-Date: 2022-11-01 12:32+0100\n"
+"PO-Revision-Date: 2022-10-23 15:37+0300\n"
 "Last-Translator: Audronis <adga45@gmail.com>\n"
 "Language-Team: Adga (C) <adga45@gmail.com>\n"
 "Language: lt_LT\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 3.1\n"
+"X-Generator: Poedit 3.2\n"
 
 msgid ""
 "\n"
@@ -98,9 +98,8 @@ msgstr " (žemiau, nei bet koks auto)"
 msgid " - Unicable/JESS LNBs not found"
 msgstr " - Unicable / JESS LNBs nerastas"
 
-#, fuzzy
 msgid " - information"
-msgstr "Informacija"
+msgstr " -informacija"
 
 msgid " Warning: the selected tuner should not use SCR Unicable type for LNBs because each tuner need a own SCR number."
 msgstr " Įspėjimas: pasirinktas imtuvas neturėtų naudoti SCR unicable tipo LNB, nes kiekvienam imtuvui reikia savo SCR numerio."
@@ -360,7 +359,7 @@ msgstr[1] "galimas %s paketų atnaujinimas"
 msgstr[2] "galimas %s paketų atnaujinimas"
 
 msgid "'Minimum send interval' needs to be enabled to use this option."
-msgstr ""
+msgstr "Norint naudoti šią parinktį, reikia įjungti \"Minimalų siuntimo intervalą\"."
 
 msgid "(VU+ type)"
 msgstr "(VU+ tipas)"
@@ -2399,9 +2398,8 @@ msgstr "Dabartinis transponderis"
 msgid "Current value: "
 msgstr "Dabartinė reikšmė: "
 
-#, fuzzy
 msgid "Currently the commit log cannot be retrieved - please try later again."
-msgstr "Šiuo metu žurnalo parsiųsti nepavyko. Pamėginkite dar kartą vėliau"
+msgstr "Šiuo metu įsipareigojimų žurnalo negalima gauti - bandykite vėliau dar kartą."
 
 msgid "Custom skip time for '1'/'3' buttons"
 msgstr "Pasirinktinai praleisti laiką dėl '1'/\"3\" mygtukų"
@@ -3398,15 +3396,17 @@ msgstr ""
 msgid "Error stop stream!"
 msgstr "Srauto stabdymo klaida!"
 
-#, fuzzy
 msgid "Error when writing epg.dat on the fallback receiver"
-msgstr "Klaida, įrašant epg.dat serveryje"
+msgstr "Klaida rašant epg.dat vietą atsarginiame imtuve"
 
 #, fuzzy
-msgid "Error while retrieving epg.dat from the fallback receiver"
-msgstr "Klaida, ieškant epg.data iš serverio"
+msgid "Error while moving epg.dat to its destination"
+msgstr "Klaida gaunant epg.dat iš atsarginio imtuvo"
 
-#, fuzzy, python-format
+msgid "Error while retrieving epg.dat from the fallback receiver"
+msgstr "Klaida gaunant epg.dat iš atsarginio imtuvo"
+
+#, python-format
 msgid ""
 "Error while retrieving fallback timer information\n"
 "%s"
@@ -3414,9 +3414,8 @@ msgstr ""
 "Klaida atsisiunčiant atsarginio imtuvo laikmačio informaciją\n"
 "%s"
 
-#, fuzzy
 msgid "Error while retrieving location of epg.dat on the fallback receiver"
-msgstr "Klaida atkūrus epg.dat vietą serveryje"
+msgstr "Klaida gaunant epg.dat vietą atsarginiame imtuve"
 
 #, python-format
 msgid ""
@@ -3659,7 +3658,7 @@ msgid "Falkland Islands (Malvinas)"
 msgstr "Folklando (Malvinų) Salos"
 
 msgid "Fallback API did not return a valid result."
-msgstr ""
+msgstr "Atsarginė API nepateikė galiojančio rezultato."
 
 msgid "Fallback Timer"
 msgstr "Atsarginis laikmatis"
@@ -3834,9 +3833,8 @@ msgstr "Formatas"
 msgid "Forward volume keys"
 msgstr "Reguliuoti TV garsumą imtuvo pulteliu"
 
-#, fuzzy
 msgid "Forwarded volume step size"
-msgstr "Reguliuoti TV garsumą imtuvo pulteliu"
+msgstr "Garso stiprumo žingsnio dydis"
 
 msgid "Frame size in full view"
 msgstr "Kadro dydis viso ekrano režimu"
@@ -4174,9 +4172,8 @@ msgstr "Kietas diskas"
 msgid "Harddisk Setup"
 msgstr "HDD valdymas"
 
-#, fuzzy
 msgid "Hardware Accelerated"
-msgstr "Techninė įranga: "
+msgstr "Techninė įranga"
 
 msgid "Hardware: "
 msgstr "Techninė įranga: "
@@ -5509,9 +5506,8 @@ msgstr "Joks aprašymas nepasiekiamas."
 msgid "No displayable files on this medium found!"
 msgstr "Jokių failų čia nerasta!"
 
-#, fuzzy
 msgid "No epg.dat file found on the fallback receiver"
-msgstr "Failo epg.dat serveryje nerasta"
+msgstr "Atsarginiame imtuve epg.dat failo nerasta"
 
 msgid "No event info found, recording indefinitely."
 msgstr "Informacija apie įvykius nerasta, tęsiamas įrašymas."
@@ -5770,9 +5766,8 @@ msgstr "Tik greitai perkelti anteną iki šios valandos."
 msgid "Only on startup"
 msgstr "Tik paleidimo metu"
 
-#, fuzzy
 msgid "Only power off"
-msgstr "Įjunkite maitinimo išjungimo laikmatį"
+msgstr "Išjungtas tik maitinimas"
 
 msgid "Only select 'yes' if you are using a multiswich that requires a DiSEqC Port-A command signal. For all other setups select 'no'."
 msgstr "Pasirinkite tik \"taip\", jei naudojate \"multiswich\", kurio komandinis signalas \"DiSEqC Port-A\" reikalingas. Visoms kitoms sąrankoms pasirinkite \"ne\"."
@@ -5798,9 +5793,8 @@ msgstr "LED būsenos veikimas gilaus laukimo režimu"
 msgid "Operating LED status in standby mode"
 msgstr "LED būsenos veikimas laukimo režimu"
 
-#, fuzzy
 msgid "Operating LED status while running"
-msgstr "LED būsena veikimo metu."
+msgstr "LED būsena veikimo metu"
 
 msgid "Opkg"
 msgstr "Opkg"
@@ -8822,9 +8816,8 @@ msgstr "Įjungti ekraną budėjimo režime"
 msgid "Switch on the display during Suspend Mode"
 msgstr "Įjungti ekraną laukimo režime"
 
-#, fuzzy
 msgid "Switch on the display during operation"
-msgstr "Veikimo metu išjunkite ekraną."
+msgstr "Įjunkite ekraną veikimo metu"
 
 msgid "Switch to Android"
 msgstr "Persijungimas į Android"
@@ -8911,7 +8904,7 @@ msgstr "TEKSTAS"
 msgid "TRANSLATOR_INFO"
 msgstr ""
 "P&C Adga, adga45@gmail.com\n"
-"Pasvalys, 2022-07-06 versija"
+"Pasvalys, 2022-10-23 versija"
 
 msgid "TS file is too large for ISO9660 level 1!"
 msgstr "TS failas per didelis 1 lygio ISO9660!"
@@ -9054,7 +9047,7 @@ msgstr ""
 "Prašome įdiegti."
 
 msgid "The number of steps to change the volume on the device the keys are forwarded to."
-msgstr ""
+msgstr "Veiksmų, kaip pakeisti garsumą įrenginyje, į kurį persiunčiami klavišai, skaičius."
 
 msgid ""
 "The overscan wizard has been completed.\n"
@@ -9791,9 +9784,8 @@ msgstr "Anuliuoti išdiegimą"
 msgid "Unencrypted"
 msgstr "Nekoduotas"
 
-#, fuzzy
 msgid "Unexpected error while retrieving fallback tuner's timer information"
-msgstr "Netikėta klaida, nuskaitant atsarginio imtuvo laikmačio informaciją"
+msgstr "Netikėta klaida gaunant atsarginio imtuvo laikmačio informaciją"
 
 msgid "UnhandledKey"
 msgstr "Nepalaikomas mygtukas"
