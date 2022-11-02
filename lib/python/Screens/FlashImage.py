@@ -268,10 +268,13 @@ class FlashImage(Screen):
 				mounts = []
 				devices = []
 				for path in ['/media/%s' % x for x in os.listdir('/media')] + (['/media/net/%s' % x for x in os.listdir('/media/net')] if os.path.isdir('/media/net') else []):
-					if checkIfDevice(path, diskstats):
-						devices.append((path, avail(path)))
-					else:
-						mounts.append((path, avail(path)))
+					try:
+						if checkIfDevice(path, diskstats):
+							devices.append((path, avail(path)))
+						else:
+							mounts.append((path, avail(path)))
+					except OSError:
+						pass
 				devices.sort(key=lambda x: x[1], reverse=True)
 				mounts.sort(key=lambda x: x[1], reverse=True)
 				return ((devices[0][1] > 500 and (devices[0][0], True)) if devices else mounts and mounts[0][1] > 500 and (mounts[0][0], False)) or (None, None)
