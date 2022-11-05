@@ -121,13 +121,8 @@ class ScanPath:
 	def __hash__(self):
 		return self.path.__hash__() ^ self.with_subdirs.__hash__()
 
-	def __cmp__(self, other):
-		if self.path < other.path:
-			return -1
-		elif self.path > other.path:
-			return +1
-		else:
-			return self.with_subdirs.__cmp__(other.with_subdirs)
+	def __eq__(self, other):
+		return self.path == other.path
 
 
 class ScanFile:
