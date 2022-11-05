@@ -117,7 +117,7 @@ class ScanPath:
 	def __repr__(self):
 		return self.path + "(" + str(self.with_subdirs) + ")"
 
-	# we will use this in a set(), so we need to implement __hash__ and __cmp__
+	# we will use this in a set(), so we need to implement __hash__ and __eq__
 	def __hash__(self):
 		return self.path.__hash__() ^ self.with_subdirs.__hash__()
 
