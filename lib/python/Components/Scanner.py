@@ -176,7 +176,7 @@ def scanDevice(mountpoint):
 
 	# ...then remove with_subdir=False when same path exists
 	# with with_subdirs=True
-	for p in paths_to_scan:
+	for p in paths_to_scan.copy():
 		if p.with_subdirs == True and ScanPath(path=p.path) in paths_to_scan:
 			paths_to_scan.remove(ScanPath(path=p.path))
 
