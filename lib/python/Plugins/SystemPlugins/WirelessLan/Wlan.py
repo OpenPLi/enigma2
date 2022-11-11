@@ -446,8 +446,8 @@ class Status:
 			if not self.WlanConsole.appContainers:
 				print("[Wlan.py] self.wlaniface after loading:", self.wlaniface)
 				if self.statusCallback is not None:
-						self.statusCallback(True, self.wlaniface)
-						self.statusCallback = None
+					self.statusCallback(True, self.wlaniface)
+					self.statusCallback = None
 
 	def getAdapterAttribute(self, iface, attribute):
 		self.iface = iface
