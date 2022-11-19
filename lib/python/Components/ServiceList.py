@@ -199,29 +199,32 @@ class ServiceList(GUIComponent):
 		from Components.ServiceEventTracker import InfoBarCount
 		if adjust and config.usage.multibouquet.value and InfoBarCount == 1 and ref and ref.type != 8192:
 			print("[servicelist] search for service in userbouquets")
+			isRadio = ref.toString().startswith("1:0:2:") or ref.toString().startswith("1:0:A:")
 			if self.serviceList:
 				revert_mode = config.servicelist.lastmode.value
 				revert_root = self.getRoot()
-				self.serviceList.setModeTv()
-				revert_tv_root = self.getRoot()
-				bouquets = self.serviceList.getBouquetList()
-				for bouquet in bouquets:
-					self.serviceList.enterUserbouquet(bouquet[1])
-					if self.l.setCurrent(ref):
-						config.servicelist.lastmode.save()
-						self.serviceList.saveChannel(ref)
-						return True
-				self.serviceList.enterUserbouquet(revert_tv_root)
-				self.serviceList.setModeRadio()
-				revert_radio_root = self.getRoot()
-				bouquets = self.serviceList.getBouquetList()
-				for bouquet in bouquets:
-					self.serviceList.enterUserbouquet(bouquet[1])
-					if self.l.setCurrent(ref):
-						config.servicelist.lastmode.save()
-						self.serviceList.saveChannel(ref)
-						return True
-				self.serviceList.enterUserbouquet(revert_radio_root)
+				if not isRadio:
+					self.serviceList.setModeTv()
+					revert_tv_root = self.getRoot()
+					bouquets = self.serviceList.getBouquetList()
+					for bouquet in bouquets:
+						self.serviceList.enterUserbouquet(bouquet[1])
+						if self.l.setCurrent(ref):
+							config.servicelist.lastmode.save()
+							self.serviceList.saveChannel(ref)
+							return True
+					self.serviceList.enterUserbouquet(revert_tv_root)
+				else:
+					self.serviceList.setModeRadio()
+					revert_radio_root = self.getRoot()
+					bouquets = self.serviceList.getBouquetList()
+					for bouquet in bouquets:
+						self.serviceList.enterUserbouquet(bouquet[1])
+						if self.l.setCurrent(ref):
+							config.servicelist.lastmode.save()
+							self.serviceList.saveChannel(ref)
+							return True
+					self.serviceList.enterUserbouquet(revert_radio_root)
 				print("[servicelist] service not found in any userbouquets")
 				if revert_mode == "tv":
 					self.serviceList.setModeTv()
