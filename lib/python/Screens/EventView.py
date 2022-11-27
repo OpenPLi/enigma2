@@ -28,7 +28,7 @@ class EventViewBase:
 		self.similarEPGCB = similarEPGCB
 		self.cbFunc = callback
 		self.currentService = Ref
-		self.isRecording = (not Ref.ref.flags & eServiceReference.isGroup) and Ref.ref.getPath()
+		self.isRecording = (not Ref.ref.flags & eServiceReference.isGroup and Ref.ref.getPath()) and "%3a//" not in Ref.ref.toString()
 		self.event = event
 		self["Service"] = ServiceEvent()
 		self["Event"] = Event()
