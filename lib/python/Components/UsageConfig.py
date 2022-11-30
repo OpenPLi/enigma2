@@ -33,6 +33,12 @@ def InitUsageConfig():
 		refreshServiceList()
 	config.usage.alternative_number_mode.addNotifier(alternativeNumberModeChange)
 
+	def correctInvalidEPGDataChange(configElement):
+		eServiceEvent.setUTF8Fix(int(configElement.value))
+
+	config.usage.correct_invalid_epgdata = ConfigSelection(default="0", choices=[("0", _("Disabled")), ("1", _("Enabled")), ("2", _("Debug"))])
+	config.usage.correct_invalid_epgdata.addNotifier(correctInvalidEPGDataChange)
+
 	config.usage.servicelist_twolines = ConfigSelection(default="0", choices=[("0", _("Single line mode")), ("1", _("Two lines")), ("2", _("Two lines and next event"))])
 	config.usage.servicelist_twolines.addNotifier(refreshServiceList)
 

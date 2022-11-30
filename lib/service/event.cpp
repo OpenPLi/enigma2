@@ -28,6 +28,22 @@ DEFINE_REF(eComponentData);
 DEFINE_REF(eGenreData);
 DEFINE_REF(eParentalData);
 
+int eServiceEvent::m_fixUTF8 = 0;
+
+std::string eServiceEvent::getShortDescription() const
+{ 
+	if(eServiceEvent::m_fixUTF8 == 0)
+		return m_short_description;
+	return fixUTF8(m_short_description, m_fixUTF8==2);
+}
+
+std::string eServiceEvent::getExtendedDescription() const
+{
+	if(eServiceEvent::m_fixUTF8 == 0)
+		return m_extended_description;
+	return fixUTF8(m_extended_description, m_fixUTF8==2);
+}
+
 /* search for the presence of language from given EIT event descriptors*/
 bool eServiceEvent::loadLanguage(Event *evt, const std::string &lang, int tsidonid)
 {
