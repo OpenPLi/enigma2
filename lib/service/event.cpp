@@ -28,6 +28,8 @@ DEFINE_REF(eComponentData);
 DEFINE_REF(eGenreData);
 DEFINE_REF(eParentalData);
 
+int eServiceEvent::m_UTF8CorrectMode = 0;
+
 /* search for the presence of language from given EIT event descriptors*/
 bool eServiceEvent::loadLanguage(Event *evt, const std::string &lang, int tsidonid)
 {
@@ -207,6 +209,22 @@ bool eServiceEvent::loadLanguage(Event *evt, const std::string &lang, int tsidon
 
 	// hack to fix split titles
 	undoAbbreviation(m_event_name, m_short_description);
+
+	if(eServiceEvent::m_UTF8CorrectMode > 0)
+	{
+		if(m_short_description.size() > 0 && !isUTF8(m_short_description))
+		{
+			if(eServiceEvent::m_UTF8CorrectMode == 2)
+				eDebug("[eServiceEvent] short description is not UTF8\nhex output:%s\nstr output:%s\n",string_to_hex(m_short_description).c_str(),m_short_description.c_str());
+			m_short_description = repairUTF8(m_short_description.c_str(), m_short_description.size());
+		}
+		if(m_extended_description.size() > 0 && !isUTF8(m_extended_description))
+		{
+			if(eServiceEvent::m_UTF8CorrectMode == 2)
+				eDebug("[eServiceEvent] extended description is not UTF8\nhex output:%s\nstr output:%s\n",string_to_hex(m_extended_description).c_str(),m_extended_description.c_str());
+			m_extended_description = repairUTF8(m_extended_description.c_str(), m_extended_description.size());
+		}
+	}
 
 	return retval;
 }
