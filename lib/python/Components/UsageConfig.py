@@ -470,6 +470,7 @@ def InitUsageConfig():
 	def correctInvalidEPGDataChange(configElement):
 		eServiceEvent.setUTF8CorrectMode(int(configElement.value))
 	config.epg.correct_invalid_epgdata = ConfigSelection(default="1", choices=[("0", _("Disabled")), ("1", _("Enabled")), ("2", _("Debug"))])
+	config.epg.correct_invalid_epgdata.addNotifier(correctInvalidEPGDataChange)
 
 	def setHDDStandby(configElement):
 		for hdd in harddiskmanager.HDDList():
