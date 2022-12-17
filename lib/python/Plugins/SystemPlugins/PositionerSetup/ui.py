@@ -1484,9 +1484,9 @@ class TunerScreen(ConfigListScreen, Screen):
 		if frontendData is not None:
 			ttype = frontendData.get("tuner_type", "UNKNOWN")
 			defaultSat["system"] = frontendData.get("system", eDVBFrontendParametersSatellite.System_DVB_S)
-			defaultSat["frequency"] = frontendData.get("frequency", 0) / 1000
+			defaultSat["frequency"] = frontendData.get("frequency", 0) // 1000
 			defaultSat["inversion"] = frontendData.get("inversion", eDVBFrontendParametersSatellite.Inversion_Unknown)
-			defaultSat["symbolrate"] = frontendData.get("symbol_rate", 0) / 1000
+			defaultSat["symbolrate"] = frontendData.get("symbol_rate", 0) // 1000
 			defaultSat["polarization"] = frontendData.get("polarization", eDVBFrontendParametersSatellite.Polarisation_Horizontal)
 			if defaultSat["system"] == eDVBFrontendParametersSatellite.System_DVB_S2:
 				defaultSat["fec_s2"] = frontendData.get("fec_inner", eDVBFrontendParametersSatellite.FEC_Auto)
@@ -1666,7 +1666,7 @@ class TunerScreen(ConfigListScreen, Screen):
 				self.scan_sat.t2mi_pid.value)
 		elif self.tuning.type.value == "predefined_transponder":
 			transponder = nimmanager.getTransponders(satpos)[self.tuning.transponder.index]
-			returnvalue = (transponder[1] / 1000, transponder[2] / 1000,
+			returnvalue = (transponder[1] // 1000, transponder[2] // 1000,
 				transponder[3], transponder[4], 2, satpos, transponder[5], transponder[6], transponder[8], transponder[9], transponder[10], transponder[11], transponder[12], transponder[13], transponder[14])
 		self.close(returnvalue)
 
