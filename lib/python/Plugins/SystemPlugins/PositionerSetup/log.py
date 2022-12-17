@@ -43,7 +43,7 @@ def getvalue():
 	try:
 		pos = logfile.tell()
 		head = logfile.read()
-		logfile.reset()
+		logfile.seek(0)
 		tail = logfile.read(pos)
 	finally:
 		mutex.release()
