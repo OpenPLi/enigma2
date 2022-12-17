@@ -946,12 +946,12 @@ class PositionerSetup(Screen):
 		frequency_text = ""
 		frequency = transponderdata.get("frequency")
 		if frequency:
-			frequency_text = str(frequency / 1000) + polarization_text
+			frequency_text = str(frequency // 1000) + polarization_text
 		self["frequency_value"].setText(frequency_text)
 		symbolrate_text = ""
 		symbolrate = transponderdata.get("symbol_rate")
 		if symbolrate:
-			symbolrate_text = str(symbolrate / 1000)
+			symbolrate_text = str(symbolrate // 1000)
 		self["symbolrate_value"].setText(symbolrate_text)
 		fec_text = ""
 		fec_inner = transponderdata.get("fec_inner")
@@ -969,7 +969,7 @@ class PositionerSetup(Screen):
 		def azimuth2Rotorcode(angle):
 			gotoXtable = (0x00, 0x02, 0x03, 0x05, 0x06, 0x08, 0x0A, 0x0B, 0x0D, 0x0E)
 			a = int(round(abs(angle) * 10.0))
-			return ((a / 10) << 4) + gotoXtable[a % 10]
+			return ((a // 10) << 4) + gotoXtable[a % 10]
 
 		satHourAngle = rotor_calc.calcSatHourangle(satlon, sitelat, sitelon)
 		if sitelat >= 0: # Northern Hemisphere
@@ -1624,7 +1624,7 @@ class TunerScreen(ConfigListScreen, Screen):
 			pol = "CR"
 		else:
 			pol = "??"
-		return str(tr[1] / scale) + "," + pol + "," + str(tr[2] / scale)
+		return str(tr[1] // scale) + "," + pol + "," + str(tr[2] // scale)
 
 	def updateTransponders(self):
 		if len(self.tuning.sat.choices):
