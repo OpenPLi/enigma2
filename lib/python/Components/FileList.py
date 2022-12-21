@@ -66,7 +66,7 @@ EXTENSIONS = {
 
 def FileEntryComponent(name, absolute=None, isDir=False):
 	res = [(absolute, isDir)]
-	x, y, w, h = parameters.get("FileListName", applySkinFactor(35, 1, 600, 20))
+	x, y, w, h = parameters.get("FileListName", applySkinFactor(35, 1, 600, 22))
 	res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, RT_HALIGN_LEFT, name))
 	if isDir:
 		png = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "extensions/directory.png"))
