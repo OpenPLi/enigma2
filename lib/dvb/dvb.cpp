@@ -2050,7 +2050,7 @@ void eDVBChannel::getNextSourceSpan(off_t current_offset, size_t bytes_read, off
 			{
 					/* in normal playback, just start at the next zone. */
 				start = i->first;
-				size = diff_upto(i->second, start, max);
+				size = align(diff_upto(i->second, start, max), blocksize);
 				eDebug("[eDVBChannel] skip");
 				if (m_skipmode_m < 0)
 				{
@@ -2058,10 +2058,11 @@ void eDVBChannel::getNextSourceSpan(off_t current_offset, size_t bytes_read, off
 					m_skipmode_m = 0;
 					sof = 1;
 				}
-			} else
+			}
+			else
 			{
-					/* when skipping reverse, however, choose the zone before. */
-					/* This returns a size 0 block, in case you noticed... */
+				/* when skipping reverse, however, choose the zone before. */
+				/* This returns a size 0 block, in case you noticed... */
 				--i;
 				eDebug("[eDVBChannel] skip to previous block, which is %ju..%ju", i->first, i->second);
 				size_t len = diff_upto(i->second, i->first, max);
