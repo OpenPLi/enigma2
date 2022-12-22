@@ -2050,7 +2050,7 @@ void eDVBChannel::getNextSourceSpan(off_t current_offset, size_t bytes_read, off
 			{
 					/* in normal playback, just start at the next zone. */
 				start = i->first;
-				size = diff_upto(i->second, start, max);
+				size = align(diff_upto(i->second, start, max), blocksize);
 				eDebug("[eDVBChannel] skip");
 				if (m_skipmode_m < 0)
 				{
