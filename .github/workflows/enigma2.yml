@@ -76,9 +76,10 @@ jobs:
         echo installing libsigc++3
         pushd .
         cd /tmp
-        git clone --depth 1 https://github.com/libsigcplusplus/libsigcplusplus.git
-        cd libsigcplusplus
-        ./autogen.sh
+        git clone --depth 1 https://github.com/dbus-cxx/libsigc--3.0.git
+        cd libsigc--3.0
+        autoreconf -i
+        ./configure
         make
         sudo make install
         popd
