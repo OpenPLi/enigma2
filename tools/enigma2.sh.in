@@ -149,11 +149,6 @@ while : ; do
 				fi
 				sleep 1
 			done
-			if [ ! -f /etc/.doNotAutoinstall ]; then
-				touch /etc/.doAutoinstall
-			else
-				rm -f /etc/.doNotAutoInstall
-			fi
 			break
 			;;
 		*)
