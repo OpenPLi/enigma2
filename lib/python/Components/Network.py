@@ -672,8 +672,8 @@ class NetworkCheck:
 			except Exception as e:
 				print("[NetworkCheck] CheckNetwork - Error: %s" % str(e))
 
-	def Start(self):
-		self.Retry = 30
+	def Start(self, seconds=30):
+		self.Retry = seconds
 		self.Timer.start(1000, True)
 
 
