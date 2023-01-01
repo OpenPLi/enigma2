@@ -12,6 +12,8 @@ from Components.Sources.List import List
 from Components.Sources.Boolean import Boolean
 from Components.SystemInfo import SystemInfo
 from Components.VolumeControl import VolumeControl
+from  Components.UsageConfig import originalAudioTracks, visuallyImpairedCommentary
+from Tools.ISO639 import LanguageCodes
 
 from enigma import iPlayableService, eTimer, eSize, eDVBDB, eServiceReference, eServiceCenter, iServiceInformation
 
@@ -77,8 +79,6 @@ class AudioSelection(ConfigListScreen, Screen):
 		self.settings.menupage.addNotifier(self.fillList)
 
 	def fillList(self, arg=None):
-		from Tools.ISO639 import LanguageCodes
-		from  Components.UsageConfig import originalAudioTracks, visuallyImpairedCommentary
 		streams = []
 		conflist = []
 		selectedidx = 0
@@ -342,7 +342,12 @@ class AudioSelection(ConfigListScreen, Screen):
 
 	def keyDown(self):
 		if self.focus == FOCUS_CONFIG:
-			if self["config"].getCurrentIndex() < len(self["config"].getList()) - 1:
+			configList = self["config"].getList()
+			count = len(configList)
+			for x in configList:
+				if x[0] == "":
+					count -= 1
+			if self["config"].getCurrentIndex() < count - 1:
 				self["config"].instance.moveSelection(self["config"].instance.moveDown)
 			else:
 				self["config"].instance.setSelectionEnable(False)
