@@ -1,39 +1,5 @@
 #!/bin/sh
 
-function restartNetwork 
-{
-	# stop network services
-	/etc/init.d/avahi-daemon stop
-	/etc/init.d/networking stop
-	killall -9 udhcpc
-	rm /var/run/udhcpc*
-
-	# enumerate network interfaces
-	local ifaces=`ip link | awk -F: '$0 !~ "lo|vir|^[^0-9]"{print $2;getline}'`
-
-	# force the interfaces down and flush them
-	for iface in $ifaces; do
-		ifdown $iface
-		ip addr flush dev $iface scope global
-	done
-
-	# restart the services
-	/etc/init.d/dbus-1 reload
-	/etc/init.d/networking start
-	/etc/init.d/avahi-daemon start
-
-	# wait until we have a network again
-	echo "**** Waiting for network ****"
-	for i in {1..60}; do
-		gw=`netstat -rn | grep UG | awk '{print $2}'`
-		if [ ! -z "$gw" ]; then
-			echo "> Online !"
-			break
-		fi
-		sleep 1
-	done
-}
-
 prefix=@prefix@
 exec_prefix=@exec_prefix@
 datarootdir=@datarootdir@
@@ -162,7 +128,6 @@ while : ; do
 			# restore a full autobackup
 			[ -f /sys/class/vtconsole/vtcon1/bind ] && echo 1 > /sys/class/vtconsole/vtcon1/bind
 			/etc/init.d/settings-restore.sh
-			restartNetwork
 			[ -f /etc/init.d/softcam ] && /etc/init.d/softcam restart
 			break
 			;;
