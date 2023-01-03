@@ -650,34 +650,14 @@ class Network:
 				pass
 
 
+def waitForNetwork(self, timeout=15):
+	while timeout > 0:
+		gws = ni.gateways()
+		if 'default' in gws and len(gws['default']) > 0:
+			print("[waitForNetwork] Online, reload interface data")
+			iNetwork.getInterfaces()
+			return
+		print("[waitForNetwork] Not online yet (%d)" % (timeout))
+
+
 iNetwork = Network()
-
-
-class NetworkCheck:
-	def __init__(self):
-		self.Timer = eTimer()
-		self.Timer.callback.append(self.startCheckNetwork)
-
-	def startCheckNetwork(self):
-		self.Timer.stop()
-		if self.Retry > 0:
-			try:
-				gws = ni.gateways()
-				if 'default' in gws and len(gws['default']) > 0:
-					print("[NetworkCheck] CheckNetwork - Done - Reload interface data")
-					iNetwork.getInterfaces()
-					return
-				self.Retry = self.Retry - 1
-				self.Timer.start(1000, True)
-			except Exception as e:
-				print("[NetworkCheck] CheckNetwork - Error: %s" % str(e))
-
-	def Start(self, seconds=30):
-		self.Retry = seconds
-		self.Timer.start(1000, True)
-
-
-def InitNetwork():
-	global networkCheck
-	networkCheck = NetworkCheck()
-	networkCheck.Start()

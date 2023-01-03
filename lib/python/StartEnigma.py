@@ -582,7 +582,7 @@ keymapparser.readKeymap(config.usage.keytrans.value)
 
 profile("Network")
 import Components.Network
-Components.Network.InitNetwork()
+Components.Network.waitForNetwork()
 
 profile("LCD")
 import Components.Lcd
