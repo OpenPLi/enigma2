@@ -657,6 +657,7 @@ def waitForNetwork(self, timeout=15):
 			print("[waitForNetwork] Online, reload interface data")
 			iNetwork.getInterfaces()
 			return
+		timeout -= 1
 		print("[waitForNetwork] Not online yet (%d)" % (timeout))
 
 
