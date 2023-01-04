@@ -227,7 +227,7 @@ class TimerEntry(ConfigListScreen, Screen):
 		self.list.append(self.channelEntry)
 
 		self.dirname = getConfigListEntry(_("Location"), self.timerentry_fallbackdirname) if self.timerentry_fallback.value and self.timerentry_fallbackdirname.value else getConfigListEntry(_("Location"), self.timerentry_dirname)
-		if config.usage.setup_level.index >= 2 and (self.timerentry_fallback.value and self.timerentry_fallbackdirname.value or self.timerentry_dirname.value): # expert+
+		if config.usage.setup_level.index >= 2 and ((self.timerentry_fallback.value and self.timerentry_fallbackdirname.value) or (self.timerentry_justplay.value != "zap" and self.timerentry_dirname.value)): # expert+
 			self.list.append(self.dirname)
 
 		self.conflictDetectionEntry = getConfigListEntry(_("Enable timer conflict detection"), self.timerentry_conflictdetection)
