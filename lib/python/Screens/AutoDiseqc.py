@@ -511,7 +511,7 @@ class AutoDiseqc(ConfigListScreen, Screen):
 		if len(self.found_sats) > 0:
 			self.list = []
 			for x in self.found_sats:
-				self.list.append(getConfigListEntry((_("DiSEqC port %s: %s") % (x[0], x[2]))))
+				self.list.append((_("DiSEqC port %s: %s") % (x[0], x[2])))
 			self["config"].l.setList(self.list)
 
 		if self.nr_of_ports == self.port_index:
