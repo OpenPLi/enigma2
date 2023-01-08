@@ -478,6 +478,7 @@ int eDVBServicePMTHandler::getProgramInfo(program &program)
 				break;
 			}
 		}
+		int narration = -1;
 		for (i = 0; i < program.audioStreams.size(); i++)
 		{
 			if (program.audioStreams[i].pid == cached_apid_ac3
@@ -505,6 +506,22 @@ int eDVBServicePMTHandler::getProgramInfo(program &program)
 			if (!program.audioStreams[i].language_code.empty())
 			{
 				int x = 1;
+				if (autoaudio_languages.empty() && narration != -2)
+				{
+					std::string audioCurrentLanguage = program.audioStreams[i].language_code;
+					if ((audioCurrentLanguage.find("NAR") != std::string::npos) || (audioCurrentLanguage.find("qad") != std::string::npos))
+						narration = i;
+					else
+					{
+						if (i == 0)
+							narration = -2;
+						else if (narration != -1 && i > (unsigned)narration)
+						{
+							program.defaultAudioStream = i;
+							narration = -1;
+						}
+					}
+				}
 				for (std::vector<std::string>::iterator it = autoaudio_languages.begin();x <= autoaudio_level && it != autoaudio_languages.end();x++,it++)
 				{
 					bool languageFound = false;
