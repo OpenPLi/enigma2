@@ -82,7 +82,6 @@ class AutoRestoreWizard(MessageBox):
 				MessageBox.close(self, 43)
 			else:
 				# restore network config first, we need it to autoinstall
-				self.console = eConsoleAppContainer()
 				Console().ePopen('/etc/init.d/settings-restore.sh network')
 				self.session.open(AutoInstall)
 		MessageBox.close(self)
