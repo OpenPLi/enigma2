@@ -15,7 +15,7 @@ from Tools.Transponder import getChannelNumber, channel2frequency
 from Tools.BoundFunction import boundFunction
 
 
-class Satfinder(ScanSetup, ServiceScan):
+class Satfinder(ScanSetup):
 	"""Inherits StaticText [key_red] and [key_green] properties from ScanSetup"""
 
 	def __init__(self, session):
