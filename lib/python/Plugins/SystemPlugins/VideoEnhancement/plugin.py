@@ -1,6 +1,6 @@
 from Plugins.Plugin import PluginDescriptor
 from Components.ConfigList import ConfigListScreen
-from Components.config import , config, ConfigNothing
+from Components.config import config, ConfigNothing
 from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
 from Screens.Screen import Screen

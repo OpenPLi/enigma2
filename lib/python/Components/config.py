@@ -1915,6 +1915,11 @@ configfile = ConfigFile()
 configfile.load()
 
 
+-def getConfigListEntry(*args):
+	assert len(args) > 0, "getConfigListEntry needs a minimum of one argument (descr, configElement)"
+	return args
+
+
 def updateConfigElement(element, newelement):
 	newelement.value = element.value
 	return newelement

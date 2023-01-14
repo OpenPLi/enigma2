@@ -1,7 +1,7 @@
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.ConfigList import ConfigListScreen
-from Components.config import config, ConfigSlider, , ConfigYesNo
+from Components.config import config, ConfigSlider, ConfigYesNo
 from Components.Label import Label
 from Plugins.SystemPlugins.OSDPositionSetup.plugin import setPosition, setConfiguredPosition
 from enigma import quitMainloop, eTimer, getDesktop
