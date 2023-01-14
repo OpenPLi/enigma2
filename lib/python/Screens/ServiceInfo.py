@@ -167,7 +167,18 @@ class ServiceInfo(Screen):
 					(_("Videocodec, size & format"), resolution, TYPE_TEXT),
 					(_("Service reference"), ":".join(refstr.split(":")[:9]), TYPE_TEXT),
 					(_("URL"), refstr.split(":")[10].replace("%3a", ":"), TYPE_TEXT)]
-				subList = self.getSubtitleList()
+				self.audio = self.service and hasattr(self.service, "audioTracks") and self.service.audioTracks()
+				if self.audio:
+					self.numberofTracks = hasattr(self.audio, "getNumberOfTracks") and self.audio.getNumberOfTracks() or 0
+					if self.numberofTracks:
+						currentTrack = self.audio.getCurrentTrack()
+						for i in range(0, self.numberofTracks):
+							audioDesc = self.audio.getTrackInfo(i).getDescription()
+							audioLang = self.audio.getTrackInfo(i).getLanguage()
+							if audioLang == "":
+								audioLang = _("Not defined")
+							if currentTrack == i:
+								fillList += [(_("Codec & lang"), "%s - %s" % (audioDesc, audioLang), TYPE_TEXT)]
 			else:
 				if ":/" in refstr:
 				# mp4 videos, dvb-s-t recording
