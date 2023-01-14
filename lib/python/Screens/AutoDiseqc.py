@@ -2,7 +2,7 @@ from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
-from Components.config import config, configfile, getConfigListEntry
+from Components.config import config, configfile
 from Components.NimManager import nimmanager, InitNimManager
 from Components.TuneTest import Tuner
 from enigma import eDVBFrontendParametersSatellite, eDVBResourceManager, eTimer
@@ -511,7 +511,7 @@ class AutoDiseqc(ConfigListScreen, Screen):
 		if len(self.found_sats) > 0:
 			self.list = []
 			for x in self.found_sats:
-				self.list.append(getConfigListEntry((_("DiSEqC port %s: %s") % (x[0], x[2]))))
+				self.list.append(_("DiSEqC port %s: %s") % (x[0], x[2]))
 			self["config"].l.setList(self.list)
 
 		if self.nr_of_ports == self.port_index:

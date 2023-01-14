@@ -1,7 +1,7 @@
 from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import NumberActionMap
-from Components.config import config, getConfigListEntry, ConfigNothing, NoSave, configfile
+from Components.config import config, ConfigNothing, NoSave, configfile
 
 from Components.Sources.StaticText import StaticText
 from Screens.MessageBox import MessageBox
@@ -63,31 +63,31 @@ class ParentalControlSetup(ConfigListScreen, ProtectedScreen, Screen):
 				pin_entry_text = _("Change PIN") + _(": 0000 - default (disabled)")
 			else:
 				pin_entry_text = _("Set PIN")
-			self.changePin = getConfigListEntry(pin_entry_text, NoSave(ConfigNothing()))
+			self.changePin = (pin_entry_text, NoSave(ConfigNothing()))
 			self.list.append(self.changePin)
-			self.list.append(getConfigListEntry(_("Protect services"), config.ParentalControl.servicepinactive))
+			self.list.append((_("Protect services"), config.ParentalControl.servicepinactive))
 			if config.ParentalControl.servicepinactive.value:
-				self.list.append(getConfigListEntry(_("Remember service PIN"), config.ParentalControl.storeservicepin))
+				self.list.append((_("Remember service PIN"), config.ParentalControl.storeservicepin))
 				if config.ParentalControl.storeservicepin.value != "never":
-					self.list.append(getConfigListEntry(_("Hide parentel locked services"), config.ParentalControl.hideBlacklist))
-				self.list.append(getConfigListEntry(_("Protect on EPG age"), config.ParentalControl.age))
-				self.reloadLists = getConfigListEntry(_("Reload blacklists"), NoSave(ConfigNothing()))
+					self.list.append((_("Hide parentel locked services"), config.ParentalControl.hideBlacklist))
+				self.list.append((_("Protect on EPG age"), config.ParentalControl.age))
+				self.reloadLists = (_("Reload blacklists"), NoSave(ConfigNothing()))
 				self.list.append(self.reloadLists)
-			self.list.append(getConfigListEntry(_("Protect Screens"), config.ParentalControl.setuppinactive))
+			self.list.append((_("Protect Screens"), config.ParentalControl.setuppinactive))
 			if config.ParentalControl.setuppinactive.value:
-				self.list.append(getConfigListEntry(_("Protect main menu"), config.ParentalControl.config_sections.main_menu))
-				self.list.append(getConfigListEntry(_("Protect timer menu"), config.ParentalControl.config_sections.timer_menu))
-				self.list.append(getConfigListEntry(_("Protect plugin browser"), config.ParentalControl.config_sections.plugin_browser))
-				self.list.append(getConfigListEntry(_("Protect configuration"), config.ParentalControl.config_sections.configuration))
-				self.list.append(getConfigListEntry(_("Protect standby menu"), config.ParentalControl.config_sections.standby_menu))
-				self.list.append(getConfigListEntry(_("Protect software update screen"), config.ParentalControl.config_sections.software_update))
-				self.list.append(getConfigListEntry(_("Protect manufacturer reset screen"), config.ParentalControl.config_sections.manufacturer_reset))
-				self.list.append(getConfigListEntry(_("Protect movie list"), config.ParentalControl.config_sections.movie_list))
-				self.list.append(getConfigListEntry(_("Protect context menus"), config.ParentalControl.config_sections.context_menus))
+				self.list.append((_("Protect main menu"), config.ParentalControl.config_sections.main_menu))
+				self.list.append((_("Protect timer menu"), config.ParentalControl.config_sections.timer_menu))
+				self.list.append((_("Protect plugin browser"), config.ParentalControl.config_sections.plugin_browser))
+				self.list.append((_("Protect configuration"), config.ParentalControl.config_sections.configuration))
+				self.list.append((_("Protect standby menu"), config.ParentalControl.config_sections.standby_menu))
+				self.list.append((_("Protect software update screen"), config.ParentalControl.config_sections.software_update))
+				self.list.append((_("Protect manufacturer reset screen"), config.ParentalControl.config_sections.manufacturer_reset))
+				self.list.append((_("Protect movie list"), config.ParentalControl.config_sections.movie_list))
+				self.list.append((_("Protect context menus"), config.ParentalControl.config_sections.context_menus))
 				if config.usage.menu_sort_mode.value.startswith("user"):
-					self.list.append(getConfigListEntry(_("Protect menu sort"), config.ParentalControl.config_sections.menu_sort))
+					self.list.append((_("Protect menu sort"), config.ParentalControl.config_sections.menu_sort))
 		else:
-			self.changePin = getConfigListEntry(_("Enable parental protection"), NoSave(ConfigNothing()))
+			self.changePin = (_("Enable parental protection"), NoSave(ConfigNothing()))
 			self.list.append(self.changePin)
 		self["config"].list = self.list
 

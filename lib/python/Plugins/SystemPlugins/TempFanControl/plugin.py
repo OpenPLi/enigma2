@@ -3,7 +3,6 @@ from Components.Sensors import sensors
 from Components.Sources.Sensor import SensorSource
 from Components.Sources.StaticText import StaticText
 from Components.ConfigList import ConfigListScreen
-from Components.config import getConfigListEntry
 
 from Screens.Screen import Screen
 
@@ -127,10 +126,10 @@ class TempFanControl(ConfigListScreen, Screen):
 
 		self.list = []
 		for count in range(fancontrol.getFanCount()):
-			self.list.append(getConfigListEntry(_("Fan %d voltage") % (count + 1), fancontrol.getConfig(count).vlt))
-			self.list.append(getConfigListEntry(_("Fan %d PWM") % (count + 1), fancontrol.getConfig(count).pwm))
-			self.list.append(getConfigListEntry(_("Standby fan %d voltage") % (count + 1), fancontrol.getConfig(count).vlt_standby))
-			self.list.append(getConfigListEntry(_("Standby fan %d PWM") % (count + 1), fancontrol.getConfig(count).pwm_standby))
+			self.list.append((_("Fan %d voltage") % (count + 1), fancontrol.getConfig(count).vlt))
+			self.list.append((_("Fan %d PWM") % (count + 1), fancontrol.getConfig(count).pwm))
+			self.list.append((_("Standby fan %d voltage") % (count + 1), fancontrol.getConfig(count).vlt_standby))
+			self.list.append((_("Standby fan %d PWM") % (count + 1), fancontrol.getConfig(count).pwm_standby))
 
 		ConfigListScreen.__init__(self, self.list, session=self.session)
 		#self["config"].list = self.list

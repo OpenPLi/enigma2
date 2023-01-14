@@ -2,7 +2,7 @@ from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import ActionMap
-from Components.config import ConfigSelection, getConfigListEntry, ConfigAction
+from Components.config import ConfigSelection, ConfigAction
 from Components.ScrollLabel import ScrollLabel
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from Tools.GetEcmInfo import GetEcmInfo
@@ -61,16 +61,16 @@ class SoftcamSetup(Screen, ConfigListScreen):
 		self.softcams.value = self.softcam.current()
 
 		self.softcams_text = _("Select Softcam")
-		self.list.append(getConfigListEntry(self.softcams_text, self.softcams))
+		self.list.append((self.softcams_text, self.softcams))
 		if cardservers:
 			self.cardservers = ConfigSelection(choices=cardservers)
 			self.cardservers.value = self.cardserver.current()
-			self.list.append(getConfigListEntry(_("Select Card Server"), self.cardservers))
+			self.list.append((_("Select Card Server"), self.cardservers))
 
-		self.list.append(getConfigListEntry(_("Restart softcam"), ConfigAction(self.restart, "s")))
+		self.list.append((_("Restart softcam"), ConfigAction(self.restart, "s")))
 		if cardservers:
-			self.list.append(getConfigListEntry(_("Restart cardserver"), ConfigAction(self.restart, "c")))
-			self.list.append(getConfigListEntry(_("Restart both"), ConfigAction(self.restart, "sc")))
+			self.list.append((_("Restart cardserver"), ConfigAction(self.restart, "c")))
+			self.list.append((_("Restart both"), ConfigAction(self.restart, "sc")))
 
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))

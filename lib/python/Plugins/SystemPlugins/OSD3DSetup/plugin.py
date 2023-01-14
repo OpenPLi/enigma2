@@ -4,7 +4,7 @@ from Components.Label import Label
 from Components.ConfigList import ConfigListScreen
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.SystemInfo import SystemInfo
-from Components.config import config, ConfigSubsection, ConfigInteger, ConfigSelection, ConfigSlider, getConfigListEntry
+from Components.config import config, ConfigSubsection, ConfigInteger, ConfigSelection, ConfigSlider
 from enigma import iPlayableService, iServiceInformation, eServiceCenter, eServiceReference, eDVBDB
 
 modelist = {"off": _("Off"), "auto": _("Auto"), "sidebyside": _("Side by side"), "topandbottom": _("Top and bottom")}
@@ -44,8 +44,8 @@ class OSD3DSetupScreen(ConfigListScreen, Screen):
 
 		self.mode = ConfigSelection(choices=modelist, default=mode)
 		self.znorm = ConfigSlider(default=znorm + 50, increment=1, limits=(0, 100))
-		self.list.append(getConfigListEntry(_("3d mode"), self.mode))
-		self.list.append(getConfigListEntry(_("Depth"), self.znorm))
+		self.list.append((_("3d mode"), self.mode))
+		self.list.append((_("Depth"), self.znorm))
 		self["config"].list = self.list
 
 	def keyLeft(self):

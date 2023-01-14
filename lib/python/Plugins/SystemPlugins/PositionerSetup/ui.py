@@ -14,7 +14,7 @@ from Components.ActionMap import NumberActionMap, ActionMap
 from Components.NimManager import nimmanager
 from Components.MenuList import MenuList
 from Components.ScrollLabel import ScrollLabel
-from Components.config import config, ConfigSatlist, ConfigNothing, ConfigSelection, ConfigSubsection, ConfigInteger, ConfigFloat, KEY_LEFT, KEY_RIGHT, KEY_0, getConfigListEntry, NoSave
+from Components.config import config, ConfigSatlist, ConfigNothing, ConfigSelection, ConfigSubsection, ConfigInteger, ConfigFloat, KEY_LEFT, KEY_RIGHT, KEY_0, NoSave
 from Components.TuneTest import Tuner
 from Components.Pixmap import Pixmap
 from Tools.Transponder import ConvertToHumanReadable
@@ -1400,8 +1400,8 @@ class ONIDTSIDScreen(ConfigListScreen, Screen):
 
 	def createSetup(self):
 		self.list = []
-		self.list.append(getConfigListEntry(_("ONID"), self.transponderOnid))
-		self.list.append(getConfigListEntry(_("TSID"), self.transponderTsid))
+		self.list.append((_("ONID"), self.transponderOnid))
+		self.list.append((_("TSID"), self.transponderTsid))
 		self["config"].list = self.list
 
 	def keyGo(self):
@@ -1567,38 +1567,38 @@ class TunerScreen(ConfigListScreen, Screen):
 
 	def createSetup(self):
 		self.list = []
-		self.list.append(getConfigListEntry(_('Tune'), self.tuning.type))
-		self.list.append(getConfigListEntry(_('Satellite'), self.tuning.sat))
+		self.list.append((_('Tune'), self.tuning.type))
+		self.list.append((_('Satellite'), self.tuning.sat))
 		nim = nimmanager.nim_slots[self.feid]
 
 		if self.tuning.type.value == "manual_transponder":
 			if nim.isCompatible("DVB-S2"):
-				self.list.append(getConfigListEntry(_('System'), self.scan_sat.system))
+				self.list.append((_('System'), self.scan_sat.system))
 			else:
 				# downgrade to dvb-s, in case a -s2 config was active
 				self.scan_sat.system.value = eDVBFrontendParametersSatellite.System_DVB_S
-			self.list.append(getConfigListEntry(_('Frequency'), self.scan_sat.frequency))
-			self.list.append(getConfigListEntry(_("Polarisation"), self.scan_sat.polarization))
-			self.list.append(getConfigListEntry(_('Symbol rate'), self.scan_sat.symbolrate))
+			self.list.append((_('Frequency'), self.scan_sat.frequency))
+			self.list.append((_("Polarisation"), self.scan_sat.polarization))
+			self.list.append((_('Symbol rate'), self.scan_sat.symbolrate))
 			if self.scan_sat.system.value == eDVBFrontendParametersSatellite.System_DVB_S:
-				self.list.append(getConfigListEntry(_("FEC"), self.scan_sat.fec))
-				self.list.append(getConfigListEntry(_('Inversion'), self.scan_sat.inversion))
+				self.list.append((_("FEC"), self.scan_sat.fec))
+				self.list.append((_('Inversion'), self.scan_sat.inversion))
 			elif self.scan_sat.system.value == eDVBFrontendParametersSatellite.System_DVB_S2:
-				self.list.append(getConfigListEntry(_("FEC"), self.scan_sat.fec_s2))
-				self.list.append(getConfigListEntry(_('Inversion'), self.scan_sat.inversion))
-				self.modulationEntry = getConfigListEntry(_('Modulation'), self.scan_sat.modulation)
+				self.list.append((_("FEC"), self.scan_sat.fec_s2))
+				self.list.append((_('Inversion'), self.scan_sat.inversion))
+				self.modulationEntry = (_('Modulation'), self.scan_sat.modulation)
 				self.list.append(self.modulationEntry)
-				self.list.append(getConfigListEntry(_('Roll-off'), self.scan_sat.rolloff))
-				self.list.append(getConfigListEntry(_('Pilot'), self.scan_sat.pilot))
+				self.list.append((_('Roll-off'), self.scan_sat.rolloff))
+				self.list.append((_('Pilot'), self.scan_sat.pilot))
 				if nim.isMultistream():
-					self.list.append(getConfigListEntry(_('Input Stream ID'), self.scan_sat.is_id))
-					self.list.append(getConfigListEntry(_('PLS Mode'), self.scan_sat.pls_mode))
-					self.list.append(getConfigListEntry(_('PLS Code'), self.scan_sat.pls_code))
+					self.list.append((_('Input Stream ID'), self.scan_sat.is_id))
+					self.list.append((_('PLS Mode'), self.scan_sat.pls_mode))
+					self.list.append((_('PLS Code'), self.scan_sat.pls_code))
 				if nim.isT2MI():
-					self.list.append(getConfigListEntry(_('T2MI PLP ID'), self.scan_sat.t2mi_plp_id))
-					self.list.append(getConfigListEntry(_('T2MI PID'), self.scan_sat.t2mi_pid))
+					self.list.append((_('T2MI PLP ID'), self.scan_sat.t2mi_plp_id))
+					self.list.append((_('T2MI PID'), self.scan_sat.t2mi_pid))
 		else: # "predefined_transponder"
-			self.list.append(getConfigListEntry(_("Transponder"), self.tuning.transponder))
+			self.list.append((_("Transponder"), self.tuning.transponder))
 			currtp = self.transponderToString([None, self.scan_sat.frequency.value, self.scan_sat.symbolrate.value, self.scan_sat.polarization.value])
 			self.tuning.transponder.setValue(currtp)
 		self["config"].list = self.list

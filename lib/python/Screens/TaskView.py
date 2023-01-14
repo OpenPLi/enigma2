@@ -1,5 +1,5 @@
 from Components.ActionMap import ActionMap
-from Components.config import config, ConfigSubsection, ConfigSelection, getConfigListEntry
+from Components.config import config, ConfigSubsection, ConfigSelection
 from Components.ConfigList import ConfigListScreen
 from Components.Sources.Progress import Progress
 from Components.Sources.StaticText import StaticText
@@ -69,7 +69,7 @@ class JobView(InfoBarNotifications, ConfigListScreen, Screen):
 
 	def setupList(self):
 		if self.afterEventChangeable:
-			self["config"].setList([getConfigListEntry(_("After event"), self.settings.afterEvent)])
+			self["config"].setList([(_("After event"), self.settings.afterEvent)])
 		else:
 			self["config"].hide()
 		self.job.afterEvent = self.settings.afterEvent.getValue()
