@@ -96,7 +96,7 @@ class ServiceInfo(Screen):
 		self["key_red"] = self["red"] = Label(_("Exit"))
 		self["key_green"] = self["green"] = Label(_("ECM Info"))
 
-		self.transponder_info = self.info = self.feinfo = None
+		self.transponder_info = self.info = self.feinfo = self.IPTV = None
 		play_service = session.nav.getCurrentlyPlayingServiceReference()
 		if serviceref and not (play_service and play_service == serviceref):
 			self.type = TYPE_TRANSPONDER_INFO
@@ -167,14 +167,18 @@ class ServiceInfo(Screen):
 					(_("Videocodec, size & format"), resolution, TYPE_TEXT),
 					(_("Service reference"), ":".join(refstr.split(":")[:9]), TYPE_TEXT),
 					(_("URL"), refstr.split(":")[10].replace("%3a", ":"), TYPE_TEXT)]
-				self.audio = self.service and hasattr(self.service, "audioTracks") and self.service.audioTracks()
-				if self.audio:
-					self.numberofTracks = hasattr(self.audio, "getNumberOfTracks") and self.audio.getNumberOfTracks() or 0
-					if self.numberofTracks:
-						currentTrack = self.audio.getCurrentTrack()
-						for i in range(0, self.numberofTracks):
-							audioDesc = self.audio.getTrackInfo(i).getDescription()
-							audioLang = self.audio.getTrackInfo(i).getLanguage()
+				self.IPTV = True
+				self["key_blue"] = self["blue"] = Label("")
+				self["key_yellow"] = self["yellow"] = Label("")
+				self["key_green"] = self["green"]= Label("")
+				audio = self.service and hasattr(self.service, "audioTracks") and self.service.audioTracks()
+				if audio:
+					numberofTracks = hasattr(audio, "getNumberOfTracks") and audio.getNumberOfTracks() or 0
+					if numberofTracks:
+						currentTrack = audio.getCurrentTrack()
+						for i in range(0, numberofTracks):
+							audioDesc = audio.getTrackInfo(i).getDescription()
+							audioLang = audio.getTrackInfo(i).getLanguage()
 							if audioLang == "":
 								audioLang = _("Not defined")
 							if currentTrack == i:
@@ -295,7 +299,7 @@ class ServiceInfo(Screen):
 		return subList
 
 	def ShowTransponderInformation(self):
-		if self.type == TYPE_SERVICE_INFO:
+		if self.type == TYPE_SERVICE_INFO and not self.IPTV:
 			self["key_yellow"].text = self["yellow"].text = _("Service & PIDs")
 			frontendData = self.feinfo and self.feinfo.getAll(True)
 			if frontendData:
@@ -375,7 +379,7 @@ class ServiceInfo(Screen):
 		return ""
 
 	def ShowECMInformation(self):
-		if self.info:
+		if self.info and not self.IPTV:
 			from Components.Converter.PliExtraInfo import caid_data
 			self["Title"].text = _("Service info - ECM Info")
 			self["key_yellow"].text = self["yellow"].text = _("Service & PIDs")
