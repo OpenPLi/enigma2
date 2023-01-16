@@ -9,7 +9,7 @@ from Components.Sources.List import List
 from Components.Label import Label, MultiColorLabel
 from Components.Pixmap import Pixmap, MultiPixmap
 from Components.MenuList import MenuList
-from Components.config import config, ConfigYesNo, ConfigIP, NoSave, ConfigText, ConfigPassword, ConfigSelection, getConfigListEntry
+from Components.config import config, ConfigYesNo, ConfigIP, NoSave, ConfigText, ConfigPassword, ConfigSelection
 from Components.ConfigList import ConfigListScreen
 from Components.PluginComponent import plugins
 from Components.ActionMap import ActionMap, NumberActionMap, HelpableActionMap
@@ -243,7 +243,7 @@ class NameserverSetup(ConfigListScreen, HelpableScreen, Screen):
 
 		i = 1
 		for x in self.nameserverEntries:
-			self.list.append(getConfigListEntry(_("Nameserver %d") % (i), x))
+			self.list.append((_("Nameserver %d") % (i), x))
 			i += 1
 
 		self["config"].list = self.list
@@ -431,19 +431,19 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 
 	def createSetup(self):
 		self.list = []
-		self.InterfaceEntry = getConfigListEntry(_("Use interface"), self.activateInterfaceEntry)
+		self.InterfaceEntry = (_("Use interface"), self.activateInterfaceEntry)
 
 		self.list.append(self.InterfaceEntry)
 		if self.activateInterfaceEntry.value:
-			self.dhcpEntry = getConfigListEntry(_("Use DHCP"), self.dhcpConfigEntry)
+			self.dhcpEntry = (_("Use DHCP"), self.dhcpConfigEntry)
 			self.list.append(self.dhcpEntry)
 			if not self.dhcpConfigEntry.value:
-				self.list.append(getConfigListEntry(_('IP address'), self.ipConfigEntry))
-				self.list.append(getConfigListEntry(_('Netmask'), self.netmaskConfigEntry))
-				self.gatewayEntry = getConfigListEntry(_('Use a gateway'), self.hasGatewayConfigEntry)
+				self.list.append((_('IP address'), self.ipConfigEntry))
+				self.list.append((_('Netmask'), self.netmaskConfigEntry))
+				self.gatewayEntry = (_('Use a gateway'), self.hasGatewayConfigEntry)
 				self.list.append(self.gatewayEntry)
 				if self.hasGatewayConfigEntry.value:
-					self.list.append(getConfigListEntry(_('Gateway'), self.gatewayConfigEntry))
+					self.list.append((_('Gateway'), self.gatewayConfigEntry))
 
 			self.extended = None
 			self.configStrings = None
@@ -456,15 +456,15 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 							self.configStrings = p.fnc["configStrings"]
 						isExistBcmWifi = os.path.exists("/tmp/bcm/" + self.iface)
 						if not isExistBcmWifi:
-							self.hiddenSSID = getConfigListEntry(_("Hidden network"), config.plugins.wlan.hiddenessid)
+							self.hiddenSSID = (_("Hidden network"), config.plugins.wlan.hiddenessid)
 							self.list.append(self.hiddenSSID)
-						self.wlanSSID = getConfigListEntry(_("Network name (SSID)"), config.plugins.wlan.essid)
+						self.wlanSSID = (_("Network name (SSID)"), config.plugins.wlan.essid)
 						self.list.append(self.wlanSSID)
-						self.encryption = getConfigListEntry(_("Encryption"), config.plugins.wlan.encryption)
+						self.encryption = (_("Encryption"), config.plugins.wlan.encryption)
 						self.list.append(self.encryption)
 						if not isExistBcmWifi:
-							self.encryptionType = getConfigListEntry(_("Encryption key type"), config.plugins.wlan.wepkeytype)
-						self.encryptionKey = getConfigListEntry(_("Encryption key"), config.plugins.wlan.psk)
+							self.encryptionType = (_("Encryption key type"), config.plugins.wlan.wepkeytype)
+						self.encryptionKey = (_("Encryption key"), config.plugins.wlan.psk)
 
 						if config.plugins.wlan.encryption.value != "Unencrypted":
 							if config.plugins.wlan.encryption.value == 'WEP':

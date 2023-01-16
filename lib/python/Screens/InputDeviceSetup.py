@@ -4,7 +4,7 @@ from Screens.MessageBox import MessageBox
 from Components.InputDevice import iInputDevices, iRcTypeControl
 from Components.Sources.StaticText import StaticText
 from Components.Sources.List import List
-from Components.config import config, ConfigYesNo, getConfigListEntry, ConfigSelection
+from Components.config import config, ConfigYesNo, ConfigSelection
 from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import ActionMap, HelpableActionMap
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
@@ -193,16 +193,16 @@ class InputDeviceSetup(ConfigListScreen, Screen):
 	def createSetup(self):
 		self.list = []
 		label = _("Change repeat and delay settings?")
-		cmd = "self.enableEntry = getConfigListEntry(label, config.inputDevices." + self.inputDevice + ".enabled)"
+		cmd = "self.enableEntry = (label, config.inputDevices." + self.inputDevice + ".enabled)"
 		exec(cmd)
 		label = _("Interval between keys when repeating:")
-		cmd = "self.repeatEntry = getConfigListEntry(label, config.inputDevices." + self.inputDevice + ".repeat)"
+		cmd = "self.repeatEntry = (label, config.inputDevices." + self.inputDevice + ".repeat)"
 		exec(cmd)
 		label = _("Delay before key repeat starts:")
-		cmd = "self.delayEntry = getConfigListEntry(label, config.inputDevices." + self.inputDevice + ".delay)"
+		cmd = "self.delayEntry = (label, config.inputDevices." + self.inputDevice + ".delay)"
 		exec(cmd)
 		label = _("Device name:")
-		cmd = "self.nameEntry = getConfigListEntry(label, config.inputDevices." + self.inputDevice + ".name)"
+		cmd = "self.nameEntry = (label, config.inputDevices." + self.inputDevice + ".name)"
 		exec(cmd)
 		if self.enableEntry:
 			if isinstance(self.enableEntry[1], ConfigYesNo):
@@ -374,7 +374,7 @@ class RemoteControlType(ConfigListScreen, Screen):
 
 		rctype = config.plugins.remotecontroltype.rctype.value
 		self.rctype = ConfigSelection(choices=self.rcList, default=str(rctype))
-		self.list.append(getConfigListEntry(_("Remote control type"), self.rctype))
+		self.list.append((_("Remote control type"), self.rctype))
 		self["config"].list = self.list
 
 		self.defaultRcType = 0

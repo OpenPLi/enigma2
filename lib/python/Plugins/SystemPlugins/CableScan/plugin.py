@@ -5,7 +5,7 @@ from Plugins.Plugin import PluginDescriptor
 from Components.Label import Label
 from Components.ActionMap import ActionMap
 from Components.NimManager import nimmanager
-from Components.config import config, ConfigSubsection, ConfigSelection, ConfigYesNo, ConfigInteger, getConfigListEntry, ConfigFloat
+from Components.config import config, ConfigSubsection, ConfigSelection, ConfigYesNo, ConfigInteger, ConfigFloat
 from Components.ConfigList import ConfigListScreen
 from Components.Sources.StaticText import StaticText
 from Components.ProgressBar import ProgressBar
@@ -146,13 +146,13 @@ class CableScanScreen(ConfigListScreen, Screen):
 		self.prevservice = None
 
 		self.list = []
-		self.list.append(getConfigListEntry(_('Frequency'), config.plugins.CableScan.frequency))
-		self.list.append(getConfigListEntry(_('Symbol rate'), config.plugins.CableScan.symbolrate))
-		self.list.append(getConfigListEntry(_('Modulation'), config.plugins.CableScan.modulation))
-		self.list.append(getConfigListEntry(_('Network ID') + _(' (0 - all networks)'), config.plugins.CableScan.networkid))
-		self.list.append(getConfigListEntry(_("Use official channel numbering"), config.plugins.CableScan.keepnumbering))
-		self.list.append(getConfigListEntry(_("HD list"), config.plugins.CableScan.hdlist))
-		self.list.append(getConfigListEntry(_("Enable auto cable scan"), config.plugins.CableScan.auto))
+		self.list.append((_('Frequency'), config.plugins.CableScan.frequency))
+		self.list.append((_('Symbol rate'), config.plugins.CableScan.symbolrate))
+		self.list.append((_('Modulation'), config.plugins.CableScan.modulation))
+		self.list.append((_('Network ID') + _(' (0 - all networks)'), config.plugins.CableScan.networkid))
+		self.list.append((_("Use official channel numbering"), config.plugins.CableScan.keepnumbering))
+		self.list.append((_("HD list"), config.plugins.CableScan.hdlist))
+		self.list.append((_("Enable auto cable scan"), config.plugins.CableScan.auto))
 
 		ConfigListScreen.__init__(self, self.list, session)
 		self["introduction"] = Label(_("Configure your network settings and press OK to scan"))

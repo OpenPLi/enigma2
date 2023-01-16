@@ -4,7 +4,7 @@ from __future__ import print_function
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.InfoBar import InfoBar
-from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigYesNo, ConfigSelection
+from Components.config import config, ConfigSubsection, ConfigYesNo, ConfigSelection
 from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
@@ -479,13 +479,13 @@ class FCCSetup(Screen, ConfigListScreen):
 			self["description"] = StaticText(_("Receiver or driver does not support FCC"))
 
 	def createConfig(self):
-		self.enableEntry = getConfigListEntry(_("FCC enabled"), config.plugins.fccsetup.activate)
-		self.fccmaxEntry = getConfigListEntry(_("Max channels"), config.plugins.fccsetup.maxfcc)
-		self.zapupdownEntry = getConfigListEntry(_("Zap Up/Down"), config.plugins.fccsetup.zapupdown)
-		self.historyEntry = getConfigListEntry(_("History Prev/Next"), config.plugins.fccsetup.history)
-		self.priorityEntry = getConfigListEntry(_("priority"), config.plugins.fccsetup.priority)
-		self.recEntry = getConfigListEntry(_("Disable FCC during recordings"), config.plugins.fccsetup.disableforrec)
-		self.extEntry = getConfigListEntry(_("Show in extensions menu"), config.plugins.fccsetup.extensions)
+		self.enableEntry = (_("FCC enabled"), config.plugins.fccsetup.activate)
+		self.fccmaxEntry = (_("Max channels"), config.plugins.fccsetup.maxfcc)
+		self.zapupdownEntry = (_("Zap Up/Down"), config.plugins.fccsetup.zapupdown)
+		self.historyEntry = (_("History Prev/Next"), config.plugins.fccsetup.history)
+		self.priorityEntry = (_("priority"), config.plugins.fccsetup.priority)
+		self.recEntry = (_("Disable FCC during recordings"), config.plugins.fccsetup.disableforrec)
+		self.extEntry = (_("Show in extensions menu"), config.plugins.fccsetup.extensions)
 
 	def createSetup(self):
 		self.list = []

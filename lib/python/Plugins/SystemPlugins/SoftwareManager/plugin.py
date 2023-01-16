@@ -17,7 +17,7 @@ from Components.Pixmap import Pixmap
 from Components.MenuList import MenuList
 from Components.Sources.List import List
 from Components.Harddisk import harddiskmanager
-from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigText, ConfigLocations, ConfigYesNo, ConfigSelection
+from Components.config import config, ConfigSubsection, ConfigText, ConfigLocations, ConfigYesNo, ConfigSelection
 from Components.ConfigList import ConfigListScreen
 from Components.Console import Console
 from Components.SelectionList import SelectionList
@@ -365,11 +365,11 @@ class SoftwareManagerSetup(ConfigListScreen, Screen):
 
 	def createSetup(self):
 		self.list = []
-		self.overwriteConfigfilesEntry = getConfigListEntry(_("Overwrite configuration files?"), config.plugins.softwaremanager.overwriteConfigFiles)
+		self.overwriteConfigfilesEntry = (_("Overwrite configuration files?"), config.plugins.softwaremanager.overwriteConfigFiles)
 		self.list.append(self.overwriteConfigfilesEntry)
-		self.list.append(getConfigListEntry(_("show softwaremanager in setup menu"), config.plugins.softwaremanager.onSetupMenu))
-		self.list.append(getConfigListEntry(_("show softwaremanager on blue button"), config.plugins.softwaremanager.onBlueButton))
-		self.list.append(getConfigListEntry(_("backup EPG cache"), config.plugins.softwaremanager.epgcache))
+		self.list.append((_("show softwaremanager in setup menu"), config.plugins.softwaremanager.onSetupMenu))
+		self.list.append((_("show softwaremanager on blue button"), config.plugins.softwaremanager.onBlueButton))
+		self.list.append((_("backup EPG cache"), config.plugins.softwaremanager.epgcache))
 
 		self["config"].list = self.list
 		self["config"].l.setSeperation(400)

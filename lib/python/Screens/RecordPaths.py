@@ -2,7 +2,7 @@ from Screens.Screen import Screen
 from Screens.LocationBox import MovieLocationBox, TimeshiftLocationBox
 from Screens.MessageBox import MessageBox
 from Components.Label import Label
-from Components.config import config, ConfigSelection, getConfigListEntry
+from Components.config import config, ConfigSelection
 from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import ActionMap
 from Tools.Directories import fileExists
@@ -90,16 +90,16 @@ class RecordPathsSettings(ConfigListScreen, Screen):
 
 		self.list = []
 		if config.usage.setup_level.index >= 2:
-			self.default_entry = getConfigListEntry(_("Default movie location"), self.default_dirname)
+			self.default_entry = (_("Default movie location"), self.default_dirname)
 			self.list.append(self.default_entry)
-			self.timer_entry = getConfigListEntry(_("Timer recording location"), self.timer_dirname)
+			self.timer_entry = (_("Timer recording location"), self.timer_dirname)
 			self.list.append(self.timer_entry)
-			self.instantrec_entry = getConfigListEntry(_("Instant recording location"), self.instantrec_dirname)
+			self.instantrec_entry = (_("Instant recording location"), self.instantrec_dirname)
 			self.list.append(self.instantrec_entry)
 		else:
-			self.default_entry = getConfigListEntry(_("Movie location"), self.default_dirname)
+			self.default_entry = (_("Movie location"), self.default_dirname)
 			self.list.append(self.default_entry)
-		self.timeshift_entry = getConfigListEntry(_("Timeshift location"), self.timeshift_dirname)
+		self.timeshift_entry = (_("Timeshift location"), self.timeshift_dirname)
 		self.list.append(self.timeshift_entry)
 		self["config"].setList(self.list)
 

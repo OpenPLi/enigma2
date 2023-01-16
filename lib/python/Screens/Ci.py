@@ -5,7 +5,7 @@ from Components.Sources.StaticText import StaticText
 from Components.ActionMap import ActionMap
 from Components.ActionMap import NumberActionMap
 from Components.Label import Label
-from Components.config import config, ConfigSubsection, ConfigSelection, ConfigSubList, getConfigListEntry, KEY_LEFT, KEY_RIGHT, KEY_0, ConfigNothing, ConfigPIN, ConfigYesNo, NoSave
+from Components.config import config, ConfigSubsection, ConfigSelection, ConfigSubList, KEY_LEFT, KEY_RIGHT, KEY_0, ConfigNothing, ConfigPIN, ConfigYesNo, NoSave
 from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.SystemInfo import SystemInfo
 from enigma import eTimer, eDVBCI_UI, eDVBCIInterfaces
@@ -122,7 +122,7 @@ class MMIDialog(Screen):
 				x = ConfigPIN(0, len=pinlength)
 			x.addEndNotifier(self.pinEntered)
 			self["subtitle"].setText(entry[2])
-			list.append(getConfigListEntry("", x))
+			list.append(("", x))
 			self["bottom"].setText(_("please press OK when ready"))
 
 	def pinEntered(self, value):
@@ -448,17 +448,17 @@ class CiSelection(Screen):
 			appname = eDVBCI_UI.getInstance().getAppName(slot)
 			self.list.append((appname, ConfigNothing(), 2, slot))
 
-		self.list.append(getConfigListEntry(_("Set persistent PIN code"), config.ci[slot].use_static_pin, 3, slot))
+		self.list.append((_("Set persistent PIN code"), config.ci[slot].use_static_pin, 3, slot))
 		self.list.append((_("Enter persistent PIN code"), ConfigNothing(), 5, slot))
 		self.list.append((_("Reset persistent PIN code"), ConfigNothing(), 6, slot))
-		self.list.append(getConfigListEntry(_("Show CI messages"), config.ci[slot].show_ci_messages, 3, slot))
-		self.list.append(getConfigListEntry(_("Multiple service support"), config.ci[slot].canDescrambleMultipleServices, 3, slot))
+		self.list.append((_("Show CI messages"), config.ci[slot].show_ci_messages, 3, slot))
+		self.list.append((_("Multiple service support"), config.ci[slot].canDescrambleMultipleServices, 3, slot))
 		if SystemInfo["CI%dSupportsHighBitrates" % slot]:
-			self.list.append(getConfigListEntry(_("High bitrate support"), config.ci[slot].canHandleHighBitrates, 3, slot))
+			self.list.append((_("High bitrate support"), config.ci[slot].canHandleHighBitrates, 3, slot))
 		if SystemInfo["CI%dRelevantPidsRoutingSupport" % slot]:
-			self.list.append(getConfigListEntry(_("PID Filtering"), config.ci[slot].relevantPidsRouting, 3, slot))
+			self.list.append((_("PID Filtering"), config.ci[slot].relevantPidsRouting, 3, slot))
 		if SystemInfo["CommonInterfaceCIDelay"]:
-			self.list.append(getConfigListEntry(_("DVB CI Delay"), config.cimisc.dvbCiDelay, 3, slot))
+			self.list.append((_("DVB CI Delay"), config.cimisc.dvbCiDelay, 3, slot))
 
 	def updateState(self, slot):
 		self.list = []
@@ -529,8 +529,8 @@ class PermanentPinEntry(ConfigListScreen, Screen):
 		self.pin2 = ConfigPIN(default=0, censor="*")
 		self.pin1.addEndNotifier(boundFunction(self.valueChanged, 1))
 		self.pin2.addEndNotifier(boundFunction(self.valueChanged, 2))
-		self.list.append(getConfigListEntry(_("Enter PIN"), NoSave(self.pin1)))
-		self.list.append(getConfigListEntry(_("Reenter PIN"), NoSave(self.pin2)))
+		self.list.append((_("Enter PIN"), NoSave(self.pin1)))
+		self.list.append((_("Reenter PIN"), NoSave(self.pin2)))
 		ConfigListScreen.__init__(self, self.list)
 
 		self["actions"] = NumberActionMap(["DirectionActions", "ColorActions", "OkCancelActions"],

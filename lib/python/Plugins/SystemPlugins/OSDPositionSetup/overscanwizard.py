@@ -1,7 +1,7 @@
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.ConfigList import ConfigListScreen
-from Components.config import config, ConfigSlider, getConfigListEntry, ConfigYesNo
+from Components.config import config, ConfigSlider, ConfigYesNo
 from Components.Label import Label
 from Plugins.SystemPlugins.OSDPositionSetup.plugin import setPosition, setConfiguredPosition
 from enigma import quitMainloop, eTimer, getDesktop
@@ -77,7 +77,7 @@ class OverscanWizard(Screen, ConfigListScreen):
 				"If you see the tips of all eight arrowheads, then your TV has overscan disabled.\n\n"
 				"Test Pattern by TigerDave - www.tigerdave.com/ht_menu.htm"))
 			self.yes_no = ConfigYesNo(default=True, graphic=False)
-			self.list.append(getConfigListEntry(_("Did you see all eight arrow heads?"), self.yes_no))
+			self.list.append((_("Did you see all eight arrow heads?"), self.yes_no))
 			self.save_new_position = False
 			setPosition(0, 720, 0, 576)
 		elif self.step == 2:
@@ -87,7 +87,7 @@ class OverscanWizard(Screen, ConfigListScreen):
 				"has overscan enabled, and is not configured properly.\n\n"
 				"Please refer to your TV's manual to find how you can disable overscan on your TV. Look for terms like 'Just fit', 'Full width', etc. "
 				"If you can't find it, ask other users at http://forums.openpli.org.\n\n"))
-			self.list.append(getConfigListEntry(_("Did you see all eight arrow heads?"), self.yes_no))
+			self.list.append((_("Did you see all eight arrow heads?"), self.yes_no))
 			self.yes_no.value = True
 			self.save_new_position = False
 			setPosition(0, 720, 0, 576)
@@ -101,10 +101,10 @@ class OverscanWizard(Screen, ConfigListScreen):
 			self.dst_right = ConfigSlider(default=config.plugins.OSDPositionSetup.dst_left.value + config.plugins.OSDPositionSetup.dst_width.value, increment=1, limits=(0, 720))
 			self.dst_top = ConfigSlider(default=config.plugins.OSDPositionSetup.dst_top.value, increment=1, limits=(0, 576))
 			self.dst_bottom = ConfigSlider(default=config.plugins.OSDPositionSetup.dst_top.value + config.plugins.OSDPositionSetup.dst_height.value, increment=1, limits=(0, 576))
-			self.list.append(getConfigListEntry(_("left"), self.dst_left))
-			self.list.append(getConfigListEntry(_("right"), self.dst_right))
-			self.list.append(getConfigListEntry(_("top"), self.dst_top))
-			self.list.append(getConfigListEntry(_("bottom"), self.dst_bottom))
+			self.list.append((_("left"), self.dst_left))
+			self.list.append((_("right"), self.dst_right))
+			self.list.append((_("top"), self.dst_top))
+			self.list.append((_("bottom"), self.dst_bottom))
 			setConfiguredPosition()
 		elif self.step == 4:
 			self["introduction"].setText(_("You did not see all eight arrow heads. This means your TV has overscan enabled "
@@ -115,14 +115,14 @@ class OverscanWizard(Screen, ConfigListScreen):
 				"When you select a different skin, the user interface of your receiver will restart.\n\n"
 				"Note: you can always start the Overscan wizard later, via\n\nmenu->installation->system->Overscan wizard"))
 			self.yes_no.value = False
-			self.list.append(getConfigListEntry(_("Do you want to select a different skin?"), self.yes_no))
+			self.list.append((_("Do you want to select a different skin?"), self.yes_no))
 		elif self.step == 5:
 			self.Timer.stop()
 			self.setTitle(_("Overscan wizard"))
 			self["introduction"].setText(_("The overscan wizard has been completed.\n\n"
 				"Note: you can always start the Overscan wizard later, via\n\nMenu->Installation->System->Audio/Video->Overscan wizard"))
 			self.yes_no.value = True
-			self.list.append(getConfigListEntry(_("Do you want to quit the overscan wizard?"), self.yes_no))
+			self.list.append((_("Do you want to quit the overscan wizard?"), self.yes_no))
 		elif self.step == 6:
 			config.skin.primary_skin.value = "PLi-HD/skin.xml"
 			config.save()

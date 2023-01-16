@@ -11,7 +11,7 @@ from Components.Sources.List import List
 from Components.Sources.Progress import Progress
 from Components.Sources.StaticText import StaticText
 from Components.ConfigList import ConfigListScreen
-from Components.config import getConfigListEntry, ConfigSelection, ConfigYesNo
+from Components.config import ConfigSelection, ConfigYesNo
 import random
 
 
@@ -523,19 +523,19 @@ class DiseqcTesterTestTypeSelection(ConfigListScreen, Screen):
 		self.list = []
 
 		self.testtype = ConfigSelection(choices={"quick": _("Quick"), "random": _("Random"), "complete": _("Complete")}, default="quick")
-		self.testtypeEntry = getConfigListEntry(_("Test type"), self.testtype)
+		self.testtypeEntry = (_("Test type"), self.testtype)
 		self.list.append(self.testtypeEntry)
 
 		self.loopsfailed = ConfigSelection(choices={"-1": _("Every known"), "1": "1", "2": "2", "3": "3", "4": "4", "5": "5", "6": "6", "7": "7", "8": "8"}, default="3")
-		self.loopsfailedEntry = getConfigListEntry(_("Stop testing plane after # failed transponders"), self.loopsfailed)
+		self.loopsfailedEntry = (_("Stop testing plane after # failed transponders"), self.loopsfailed)
 		self.list.append(self.loopsfailedEntry)
 
 		self.loopssuccessful = ConfigSelection(choices={"-1": _("Every known"), "1": "1", "2": "2", "3": "3", "4": "4", "5": "5", "6": "6", "7": "7", "8": "8"}, default="1")
-		self.loopssuccessfulEntry = getConfigListEntry(_("Stop testing plane after # successful transponders"), self.loopssuccessful)
+		self.loopssuccessfulEntry = (_("Stop testing plane after # successful transponders"), self.loopssuccessful)
 		self.list.append(self.loopssuccessfulEntry)
 
 		self.log = ConfigYesNo(False)
-		self.logEntry = getConfigListEntry(_("Log results to /tmp"), self.log)
+		self.logEntry = (_("Log results to /tmp"), self.log)
 		self.list.append(self.logEntry)
 
 		ConfigListScreen.__init__(self, self.list, session)
