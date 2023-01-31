@@ -392,7 +392,7 @@ def InitUsageConfig():
 
 	if SystemInfo["WakeOnLAN"]:
 		def wakeOnLANChanged(configElement):
-			if "fp" in SystemInfo["WakeOnLAN"]:
+			if "fp" in SystemInfo["WakeOnLAN"] or SystemInfo["WakeOnLAN_power_as_enable"]:
 				open(SystemInfo["WakeOnLAN"], "w").write(configElement.value and "enable" or "disable")
 			else:
 				open(SystemInfo["WakeOnLAN"], "w").write(configElement.value and "on" or "off")
