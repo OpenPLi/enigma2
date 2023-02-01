@@ -9,14 +9,48 @@ from Components.PluginComponent import plugins
 from Components.NimManager import nimmanager
 from Components.config import config, ConfigDictionarySet, NoSave
 from Components.SystemInfo import SystemInfo
+from Components.Pixmap import Pixmap
 from Tools.BoundFunction import boundFunction
 from Plugins.Plugin import PluginDescriptor
-from Tools.Directories import resolveFilename, SCOPE_SKIN
+from Tools.Directories import resolveFilename,  fileExists, SCOPE_SKIN, SCOPE_CURRENT_SKIN
+from Tools.LoadPixmap import LoadPixmap
 from enigma import eTimer
 
 import xml.etree.ElementTree
 
 from Screens.Setup import Setup, getSetupTitle
+
+def MenuEntryPixmap(entryID, png_cache, parentMenuEntryID):
+ # imported here to avoid circular import
+	from skin import parameters
+	icoSize = int(parameters.get("MenuIconsSize", 192))
+	width = icoSize
+	height = icoSize
+	#pixmapSize = eSize(width, height)
+	png = png_cache.get(entryID, None)
+	if png is None: # no cached entry
+		pngPath = resolveFilename(SCOPE_CURRENT_SKIN, "menu/" + entryID + ".svg")
+		pos = config.skin.primary_skin.value.rfind('/')
+		if pos > -1:
+			current_skin = config.skin.primary_skin.value[:pos+1]
+		else:
+			current_skin = ""
+		if not fileExists(pngPath) or not (( current_skin in pngPath and current_skin ) or not current_skin ):
+			pngPath = resolveFilename(SCOPE_CURRENT_SKIN, "menu/" + entryID + ".png")
+		if ( current_skin in pngPath and current_skin ) or not current_skin:
+			png = LoadPixmap(pngPath, cached=True, width=width, height=0 if pngPath.endswith(".svg") else height) #lets look for a dedicated icon
+		if png is None: # no dedicated icon found
+			if parentMenuEntryID is not None:
+				png = png_cache.get(parentMenuEntryID, None)
+		png_cache[entryID] = png
+	if png is None:
+		png = png_cache.get("missing", None)
+		if png is None:
+			png = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "menu/missing.svg"), cached=True, width=width, height=0)
+			if not png:
+				png = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "menu/missing.png"), cached=True, width=width, height=height)
+			png_cache["missing"] = png
+	return png
 
 # read the menu
 mdom = xml.etree.ElementTree.parse(resolveFilename(SCOPE_SKIN, 'menu.xml'))
@@ -52,6 +86,7 @@ class MenuSummary(Screen):
 
 class Menu(Screen, ProtectedScreen):
 	ALLOW_SUSPEND = True
+	png_cache = {}
 
 	def okbuttonClick(self):
 		if self.number:
@@ -83,7 +118,7 @@ class Menu(Screen, ProtectedScreen):
 	def openSetup(self, dialog):
 		self.session.openWithCallback(self.menuClosed, Setup, dialog)
 
-	def addMenu(self, destList, node):
+	def addMenu(self, destList, node, parent=None):
 		requires = node.get("requires")
 		if requires:
 			if requires[0] == '!':
@@ -94,13 +129,16 @@ class Menu(Screen, ProtectedScreen):
 		MenuTitle = _(node.get("text", "??"))
 		entryID = node.get("entryID", "undefined")
 		weight = node.get("weight", 50)
+		description = node.get("description", "").encode("UTF-8") or None
+		description = description and _(description)
+		menupng = MenuEntryPixmap(entryID, self.png_cache, parent)
 		x = node.get("flushConfigOnClose")
 		if x:
 			a = boundFunction(self.session.openWithCallback, self.menuClosedWithConfigFlush, Menu, node)
 		else:
 			a = boundFunction(self.session.openWithCallback, self.menuClosed, Menu, node)
 		#TODO add check if !empty(node.childNodes)
-		destList.append((MenuTitle, a, entryID, weight))
+		destList.append((MenuTitle, a, entryID, weight, description, menupng))
 
 	def menuClosedWithConfigFlush(self, *res):
 		configfile.save()
@@ -114,7 +152,7 @@ class Menu(Screen, ProtectedScreen):
 		else:
 			self.createMenuList()
 
-	def addItem(self, destList, node):
+	def addItem(self, destList, node, parent=None):
 		requires = node.get("requires")
 		if requires:
 			if requires[0] == '!':
@@ -128,6 +166,9 @@ class Menu(Screen, ProtectedScreen):
 		item_text = node.get("text", "")
 		entryID = node.get("entryID", "undefined")
 		weight = node.get("weight", 50)
+		description = node.get("description", "").encode("UTF-8") or None
+		description = description and _(description)
+		menupng = MenuEntryPixmap(entryID, self.png_cache, parent)
 		for x in node:
 			if x.tag == 'screen':
 				module = x.get("module")
@@ -147,10 +188,10 @@ class Menu(Screen, ProtectedScreen):
 				args = x.text or ""
 				screen += ", " + args
 
-				destList.append((_(item_text or "??"), boundFunction(self.runScreen, (module, screen)), entryID, weight))
+				destList.append((_(item_text or "??"), boundFunction(self.runScreen, (module, screen)), entryID, weight, description, menupng))
 				return
 			elif x.tag == 'code':
-				destList.append((_(item_text or "??"), boundFunction(self.execText, x.text), entryID, weight))
+				destList.append((_(item_text or "??"), boundFunction(self.execText, x.text), entryID, weight, description, menupng))
 				return
 			elif x.tag == 'setup':
 				id = x.get("id")
@@ -158,9 +199,9 @@ class Menu(Screen, ProtectedScreen):
 					item_text = _(getSetupTitle(id))
 				else:
 					item_text = _(item_text)
-				destList.append((item_text, boundFunction(self.openSetup, id), entryID, weight))
+				destList.append((item_text, boundFunction(self.openSetup, id), entryID, weight, description, menupng))
 				return
-		destList.append((item_text, self.nothing, entryID, weight))
+		destList.append((item_text, self.nothing, entryID, weight, description, menupng))
 
 	def sortByName(self, listentry):
 		return listentry[0].lower()
@@ -172,6 +213,9 @@ class Menu(Screen, ProtectedScreen):
 		self["key_blue"] = StaticText("")
 		self["menu"] = List([])
 		self["menu"].enableWrapAround = True
+		#self["pixmap"] = Pixmap()
+		#self["description"] = StaticText()
+		
 		self.showNumericHelp = False
 		self.createMenuList()
 
@@ -226,18 +270,20 @@ class Menu(Screen, ProtectedScreen):
 		self["key_blue"].text = _("Edit menu") if config.usage.menu_sort_mode.value == "user" else ""
 		self.list = []
 		self.menuID = None
+		parentEntryID = None
 		for x in self.parentmenu: #walk through the actual nodelist
 			if not x.tag:
 				continue
+			parentEntryID = self.parentmenu.get("entryID", None)
 			if x.tag == 'item':
 				item_level = int(x.get("level", 0))
 				if item_level <= config.usage.setup_level.index:
-					self.addItem(self.list, x)
+					self.addItem(self.list, x, parentEntryID)
 					count += 1
 			elif x.tag == 'menu':
 				item_level = int(x.get("level", 0))
 				if item_level <= config.usage.setup_level.index:
-					self.addMenu(self.list, x)
+					self.addMenu(self.list, x, parentEntryID)
 					count += 1
 			elif x.tag == "id":
 				self.menuID = x.get("val")
@@ -248,7 +294,10 @@ class Menu(Screen, ProtectedScreen):
 				if menuupdater.updatedMenuAvailable(self.menuID):
 					for x in menuupdater.getUpdatedMenu(self.menuID):
 						if x[1] == count:
-							self.list.append((x[0], boundFunction(self.runScreen, (x[2], x[3] + ", ")), x[4]))
+							description = x.get("description", "").encode("UTF-8") or None
+							description = description and _(description)
+							menupng = MenuEntryPixmap(self.menuID, self.png_cache, parentEntryID)
+							self.list.append((x[0], boundFunction(self.runScreen, (x[2], x[3] + ", ")), x[4], description, menupng))
 							count += 1
 		if self.menuID:
 			# plugins
@@ -259,7 +308,9 @@ class Menu(Screen, ProtectedScreen):
 					if x[2] == plugin_menuid:
 						self.list.remove(x)
 						break
-				self.list.append((l[0], boundFunction(l[1], self.session, close=self.close), l[2], l[3] or 50))
+				description = l[4] if len(l) == 5 else plugins.getDescriptionForMenuEntryID(self.menuID, plugin_menuid)
+				menupng = MenuEntryPixmap(l[2], self.png_cache, parentEntryID)
+				self.list.append((l[0], boundFunction(l[1], self.session, close=self.close), l[2], l[3] or 50, description, menupng))
 
 		if "user" in config.usage.menu_sort_mode.value and self.menuID == "mainmenu":
 			plugin_list = []
@@ -300,6 +351,17 @@ class Menu(Screen, ProtectedScreen):
 			self.menulength = len(self.list)
 
 		self["menu"].updateList(self.list)
+		#self["menu"].onSelectionChanged.append(self._onSelectionChanged)
+		
+		
+	def _onSelectionChanged(self):
+		current = self["menu"].current
+		description, pixmap = "", None
+		if current:
+			description, pixmap = current[4:]
+		self["description"].setText(_(description))
+		if pixmap:
+			self["pixmap"].setPixmap(pixmap)
 
 	def keyNumberGlobal(self, number):
 		self.number = self.number * 10 + number
