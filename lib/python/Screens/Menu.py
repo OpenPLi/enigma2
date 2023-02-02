@@ -12,7 +12,7 @@ from Components.SystemInfo import SystemInfo
 from Components.Pixmap import Pixmap
 from Tools.BoundFunction import boundFunction
 from Plugins.Plugin import PluginDescriptor
-from Tools.Directories import resolveFilename,  fileExists, SCOPE_SKIN, SCOPE_CURRENT_SKIN
+from Tools.Directories import resolveFilename, SCOPE_SKINS, SCOPE_GUISKIN
 from Tools.LoadPixmap import LoadPixmap
 from enigma import eTimer
 
@@ -21,39 +21,35 @@ import xml.etree.ElementTree
 from Screens.Setup import Setup, getSetupTitle
 
 def MenuEntryPixmap(entryID, png_cache, parentMenuEntryID):
- # imported here to avoid circular import
+ 	# imported here to avoid circular import
 	from skin import parameters
 	icoSize = int(parameters.get("MenuIconsSize", 192))
 	width = icoSize
 	height = icoSize
-	#pixmapSize = eSize(width, height)
 	png = png_cache.get(entryID, None)
 	if png is None: # no cached entry
-		pngPath = resolveFilename(SCOPE_CURRENT_SKIN, "menu/" + entryID + ".svg")
+		pngPath = resolveFilename(SCOPE_GUISKIN, "menu/" + entryID + ".svg")
 		pos = config.skin.primary_skin.value.rfind('/')
 		if pos > -1:
 			current_skin = config.skin.primary_skin.value[:pos+1]
 		else:
 			current_skin = ""
-		if not fileExists(pngPath) or not (( current_skin in pngPath and current_skin ) or not current_skin ):
-			pngPath = resolveFilename(SCOPE_CURRENT_SKIN, "menu/" + entryID + ".png")
 		if ( current_skin in pngPath and current_skin ) or not current_skin:
-			png = LoadPixmap(pngPath, cached=True, width=width, height=0 if pngPath.endswith(".svg") else height) #lets look for a dedicated icon
+			png = LoadPixmap(pngPath, cached=True, width=width, height=0 if pngPath.endswith(".svg") else height) #looking for a dedicated icon
 		if png is None: # no dedicated icon found
-			if parentMenuEntryID is not None:
+			if parentMenuEntryID is not None: # check do we have parent menu item that can use for icon
 				png = png_cache.get(parentMenuEntryID, None)
 		png_cache[entryID] = png
 	if png is None:
 		png = png_cache.get("missing", None)
 		if png is None:
-			png = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "menu/missing.svg"), cached=True, width=width, height=0)
-			if not png:
-				png = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "menu/missing.png"), cached=True, width=width, height=height)
+			pngPath = resolveFilename(SCOPE_GUISKIN, "menu/missing.svg")
+			png = LoadPixmap(pngPath, cached=True, width=width, height=0 if pngPath.endswith(".svg") else height)
 			png_cache["missing"] = png
 	return png
 
 # read the menu
-mdom = xml.etree.ElementTree.parse(resolveFilename(SCOPE_SKIN, 'menu.xml'))
+mdom = xml.etree.ElementTree.parse(resolveFilename(SCOPE_SKINS, 'menu.xml'))
 
 
 class MenuUpdater:
