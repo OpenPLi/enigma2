@@ -1394,7 +1394,11 @@ def InitNimManager(nimmgr, update_slots=[]):
 
 				def scrListChanged(productparameters, srcfrequencylist, configEntry):
 					section.format = ConfigSelection(["unicable", "jess"], default=getformat(productparameters.get("format", "unicable"), configEntry.index))
-					section.scrfrequency = ConfigInteger(default=int(srcfrequencylist[configEntry.index]))
+					default_value = int(srcfrequencylist[configEntry.index])
+					section.scrfrequency = ConfigInteger(default=default_value)
+					section.scrfrequency.value = default_value
+					section.scrfrequency.save()
+					section.scrfrequency.save_forced = True
 					section.positions = ConfigInteger(default=int(productparameters.get("positions", 1)))
 					section.positions.addNotifier(positionsChanged)
 					section.positionsOffset = ConfigInteger(default=int(productparameters.get("positionsoffset", 0)))
@@ -1429,6 +1433,7 @@ def InitNimManager(nimmgr, update_slots=[]):
 
 				def userScrListChanged(srcfrequencyList, configEntry):
 					section.scrfrequency = ConfigInteger(default=int(srcfrequencyList[configEntry.index]), limits=(0, 99999))
+					section.scrfrequency.save_forced = True
 					section.lofl = ConfigInteger(default=9750, limits=(0, 99999))
 					section.lofh = ConfigInteger(default=10600, limits=(0, 99999))
 					section.threshold = ConfigInteger(default=11700, limits=(0, 99999))
