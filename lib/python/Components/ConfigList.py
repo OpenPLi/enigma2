@@ -127,6 +127,14 @@ class ConfigList(GUIComponent):
 		if self.instance is not None:
 			self.instance.moveSelection(self.instance.pageDown)
 
+	def moveDown(self):
+		if self.instance is not None:
+			self.instance.moveSelection(self.instance.moveDown)
+
+	def moveUp(self):
+		if self.instance is not None:
+			self.instance.moveSelection(self.instance.moveUp)
+
 	def selectionEnabled(self, enabled):
 		if self.instance is not None:
 			self.instance.setSelectionEnable(enabled)
@@ -139,6 +147,8 @@ class ConfigListScreen:
 			"ok": self.keyOK,
 			"left": self.keyLeft,
 			"right": self.keyRight,
+			"up": self.keyUp,
+			"down": self.keyDown,
 			"home": self.keyHome,
 			"end": self.keyEnd,
 			"deleteForward": self.keyDelete,
@@ -258,6 +268,12 @@ class ConfigListScreen:
 	def keyNumberGlobal(self, number):
 		self["config"].handleKey(KEY_0 + number)
 		self.__changed()
+
+	def keyUp(self):
+		self["config"].moveUp()
+
+	def keyDown(self):
+		self["config"].moveDown()
 
 	def keyPageDown(self):
 		self["config"].pageDown()
