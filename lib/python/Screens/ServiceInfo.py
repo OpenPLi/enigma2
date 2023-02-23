@@ -168,7 +168,7 @@ class ServiceInfo(Screen):
 					(_("Service reference"), ":".join(refstr.split(":")[:9]), TYPE_TEXT),
 					(_("URL"), refstr.split(":")[10].replace("%3a", ":"), TYPE_TEXT)]
 				self.IPTV = True
-				self["key_blue"].text = self["blue"].text = ""
+				self["key_blue"] = self["blue"] = Label("")
 				self["key_yellow"] = self["yellow"] = Label("")
 				self["key_green"] = self["green"]= Label("")
 				audio = self.service and hasattr(self.service, "audioTracks") and self.service.audioTracks()
