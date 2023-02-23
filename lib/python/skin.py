@@ -1108,8 +1108,10 @@ def readSkin(screen, skin, names, desktop):
 		# widgets (source->renderer).
 		wname = widget.attrib.get("name")
 		wsource = widget.attrib.get("source")
-		if wname is None and wsource is None:
-			raise SkinError("The widget has no name and no source")
+		wconnection = widget.attrib.get("connection")
+		source = None
+		if wname is None and wsource is None and wconnection is None:
+			raise SkinError("The widget has no name, no source and no connection")
 			return
 		if wname:
 			# print("[Skin] DEBUG: Widget name='%s'." % wname)
@@ -1120,34 +1122,39 @@ def readSkin(screen, skin, names, desktop):
 				raise SkinError("Component with name '%s' was not found in skin of screen '%s'" % (wname, name))
 			# assert screen[wname] is not Source
 			collectAttributes(attributes, widget, context, skinPath, ignore=("name",))
-		elif wsource:
-			# print("[Skin] DEBUG: Widget source='%s'." % wsource)
-			while True:  # Get corresponding source until we found a non-obsolete source.
-				# Parse our current "wsource", which might specify a "related screen" before the dot,
-				# for example to reference a parent, global or session-global screen.
-				scr = screen
-				path = wsource.split(".")  # Resolve all path components.
-				while len(path) > 1:
-					scr = screen.getRelatedScreen(path[0])
-					if scr is None:
-						# print("[Skin] DEBUG: wsource='%s', name='%s'." % (wsource, name))
-						raise SkinError("Specified related screen '%s' was not found in screen '%s'" % (wsource, name))
-					path = path[1:]
-				source = scr.get(path[0])  # Resolve the source.
-				if isinstance(source, ObsoleteSource):
-					# If we found an "obsolete source", issue warning, and resolve the real source.
-					print("[Skin] WARNING: SKIN '%s' USES OBSOLETE SOURCE '%s', USE '%s' INSTEAD!" % (name, wsource, source.newSource))
-					print("[Skin] OBSOLETE SOURCE WILL BE REMOVED %s, PLEASE UPDATE!" % source.removalDate)
-					if source.description:
-						print("[Skin] Source description: '%s'." % source.description)
-					wsource = source.new_source
-				else:
-					break  # Otherwise, use the source.
-			if source is None:
-				raise SkinError("The source '%s' was not found in screen '%s'" % (wsource, name))
+		elif wsource or wconnection:
+			if wsource:
+				# print("[Skin] DEBUG: Widget source='%s'." % wsource)
+				while True:  # Get corresponding source until we found a non-obsolete source.
+					# Parse our current "wsource", which might specify a "related screen" before the dot,
+					# for example to reference a parent, global or session-global screen.
+					scr = screen
+					path = wsource.split(".")  # Resolve all path components.
+					while len(path) > 1:
+						scr = screen.getRelatedScreen(path[0])
+						if scr is None:
+							# print("[Skin] DEBUG: wsource='%s', name='%s'." % (wsource, name))
+							raise SkinError("Specified related screen '%s' was not found in screen '%s'" % (wsource, name))
+						path = path[1:]
+					source = scr.get(path[0])  # Resolve the source.
+					if isinstance(source, ObsoleteSource):
+						# If we found an "obsolete source", issue warning, and resolve the real source.
+						print("[Skin] WARNING: SKIN '%s' USES OBSOLETE SOURCE '%s', USE '%s' INSTEAD!" % (name, wsource, source.newSource))
+						print("[Skin] OBSOLETE SOURCE WILL BE REMOVED %s, PLEASE UPDATE!" % source.removalDate)
+						if source.description:
+							print("[Skin] Source description: '%s'." % source.description)
+						wsource = source.new_source
+					else:
+						break  # Otherwise, use the source.
+				if source is None:
+					raise SkinError("The source '%s' was not found in screen '%s'" % (wsource, name))
+
 			wrender = widget.attrib.get("render")
 			if not wrender:
-				raise SkinError("For source '%s' a renderer must be defined with a 'render=' attribute" % wsource)
+				if wsource:
+					raise SkinError("For source '%s' a renderer must be defined with a 'render=' attribute" % wsource)
+				elif wconnection:
+					raise SkinError("For connection '%s' a renderer must be defined with a 'render=' attribute" % wconnection)
 			for converter in widget.findall("convert"):
 				ctype = converter.get("type")
 				assert ctype, "[Skin] The 'convert' tag needs a 'type' attribute!"
@@ -1174,9 +1181,12 @@ def readSkin(screen, skin, names, desktop):
 			except ImportError:
 				raise SkinError("Renderer '%s' not found" % wrender)
 			renderer = rendererClass()  # Instantiate renderer.
-			renderer.connect(source)  # Connect to source.
+			if source:
+				renderer.connect(source)  # Connect to source.
+			elif wconnection:
+				renderer.connectRelatedElement(wconnection, screen)
 			attributes = renderer.skinAttributes = []
-			collectAttributes(attributes, widget, context, skinPath, ignore=("render", "source"))
+			collectAttributes(attributes, widget, context, skinPath, ignore=("render", "source", "connection"))
 			screen.renderer.append(renderer)
 
 	def processApplet(widget, context):
