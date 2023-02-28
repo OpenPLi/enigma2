@@ -5,6 +5,8 @@ from Tools.KeyBindings import queryKeyBinding
 
 class ActionMap:
 	def __init__(self, contexts=None, actions=None, prio=0):
+		if isinstance(contexts, str):
+			contexts = [contexts]
 		self.contexts = contexts or []
 		self.actions = actions or {}
 		self.prio = prio
