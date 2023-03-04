@@ -1,8 +1,8 @@
 import os
-import re
 import netifaces as ni
-from socket import *
-from enigma import eTimer
+from re import sub, compile
+from struct import pack
+from socket import inet_ntoa
 from Components.Console import Console
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
@@ -15,7 +15,7 @@ class Network:
 		self.NetworkState = 0
 		self.DnsState = 0
 		self.nameservers = []
-		self.dhcpnameservers = []
+		self.openresolv = os.path.exists("/sbin/resolvconf")
 		self.ethtool_bin = "/usr/sbin/ethtool"
 		self.console = Console()
 		self.linkConsole = Console()
@@ -44,7 +44,7 @@ class Network:
 		return self.remoteRootFS
 
 	def isBlacklisted(self, iface):
-		return iface in ('lo', 'wifi0', 'wmaster0', 'sit0', 'tun0', 'sys0', 'p2p0', 'wg0')
+		return iface in ('lo', 'wifi0', 'wmaster0', 'sit0', 'tun0', 'tap0', 'sys0', 'p2p0', 'wg0', 'tunl0')
 
 	def getInterfaces(self, callback=None):
 		self.configuredInterfaces = []
@@ -62,10 +62,13 @@ class Network:
 
 	# helper function to convert ips from a sring to a list of ints
 	def convertIP(self, ip):
-		return [int(n) for n in ip.split('.')]
+		try:
+			return [int(n) for n in ip.split('.')]
+		except:
+			return [0, 0, 0, 0]
 
 	def getAddrInet(self, iface, callback):
-		data = {'up': False, 'dhcp': False, 'preup': False, 'predown': False, 'dns-nameserver': []}
+		data = {'up': False, 'dhcp': False, 'preup': False, 'predown': False, "dns-nameservers": []}
 		try:
 			if os.path.exists('/sys/class/net/%s/operstate' % iface):
 				data['up'] = int(open('/sys/class/net/%s/flags' % iface).read().strip(), 16) & 1 == 1
@@ -104,7 +107,7 @@ class Network:
 			if not iface['dhcp']:
 				fp.write("iface " + ifacename + " inet static\n")
 				if 'ip' in iface:
-					print(tuple(iface['ip']))
+					print("[Network.py] ip: ", tuple(iface['ip']))
 					fp.write("	address %d.%d.%d.%d\n" % tuple(iface['ip']))
 					fp.write("	netmask %d.%d.%d.%d\n" % tuple(iface['netmask']))
 					if 'gateway' in iface:
@@ -115,23 +118,31 @@ class Network:
 				fp.write(iface["preup"])
 			if iface["predown"] and "configStrings" not in iface:
 				fp.write(iface["predown"])
-			if iface["dns-nameserver"]:
-				for nameserver in iface["dns-nameserver"]:
-					fp.write("	dns-nameserver %d.%d.%d.%d\n" % tuple(nameserver))
+			if "dns-nameservers" in iface and iface["dns-nameservers"]:
+				fp.write("	dns-nameservers ")
+				len_dns = len(iface["dns-nameservers"])
+				count = 0
+				for dns in iface["dns-nameservers"]:
+					count += 1
+					end = len_dns == count and "\n" or " "
+					fp.write(("%d.%d.%d.%d" % tuple(dns)) + end)
 			fp.write("\n")
 		fp.close()
 		self.configuredNetworkAdapters = self.configuredInterfaces
 		self.writeNameserverConfig()
 
 	def writeNameserverConfig(self):
-		fp = open('/etc/resolv.conf', 'w')
-		for nameserver in self.nameservers:
-			if  nameserver != [0, 0, 0, 0]:
-				fp.write("nameserver %d.%d.%d.%d\n" % tuple(nameserver))
-		for nameserver in self.dhcpnameservers:
-			if  nameserver != [0, 0, 0, 0]:
-				fp.write("nameserver %d.%d.%d.%d\n" % tuple(nameserver))
-		fp.close()
+		if not self.openresolv:
+			try:
+				if os.path.islink('/etc/resolv.conf'):
+					self.console.ePopen('rm -rf /etc/resolv.conf')
+			except:
+				pass
+			fp = open('/etc/resolv.conf', 'w')
+			for nameserver in self.nameservers:
+				if nameserver != [0, 0, 0, 0]:
+					fp.write("nameserver %d.%d.%d.%d\n" % tuple(nameserver))
+			fp.close()
 
 	def loadNetworkConfig(self, iface, callback=None):
 		interfaces = []
@@ -149,7 +160,7 @@ class Network:
 			split = i.strip().split(' ')
 			if split[0] == "iface":
 				currif = split[1]
-			if currif == iface: #read information only for available interfaces
+			if currif == iface: # read information only for available interfaces
 				if currif not in ifaces:
 					ifaces[currif] = {}
 					if len(split) == 4 and split[3] == "dhcp":
@@ -177,13 +188,12 @@ class Network:
 				if split[0] in ("pre-down", "post-down"):
 					if "predown" in self.ifaces[currif]:
 						self.ifaces[currif]["predown"] = i
-				if split[0] == "dns-nameserver":
-					if "dns-nameserver" not in self.ifaces[currif]:
-						self.ifaces[currif]["dns-nameserver"] = []
-					dns_ip = self.convertIP(split[1])
-					self.ifaces[currif]["dns-nameserver"].append(dns_ip)
-					if dns_ip not in self.nameservers:
-						self.nameservers.append(dns_ip)
+				if split[0] == "dns-nameservers":
+					for dnsip in split[1:]:
+						if dnsip:
+							convertIP = self.convertIP(dnsip)
+							if convertIP != [0, 0, 0, 0] and convertIP not in self.ifaces[currif]["dns-nameservers"]:
+								self.ifaces[currif]["dns-nameservers"].append(convertIP)
 
 		for ifacename, iface in ifaces.items():
 			if ifacename in self.ifaces:
@@ -193,40 +203,41 @@ class Network:
 			self.configuredNetworkAdapters = self.configuredInterfaces
 			# load ns only once
 			self.loadNameserverConfig()
-			print("read configured interface:", ifaces)
+			#print("[Network] read configured interface: ", ifaces)
 			# remove any password before info is printed to the debug log
 			safe_ifaces = self.ifaces.copy()
 			for intf in safe_ifaces:
 				if 'preup' in safe_ifaces[intf] and safe_ifaces[intf]['preup']:
-					safe_ifaces[intf]['preup'] = re.sub(' -k "\S*" ', ' -k ********* ', safe_ifaces[intf]['preup'])
-			print("self.ifaces after loading:", safe_ifaces)
+					safe_ifaces[intf]['preup'] = sub(' -k "\S*" ', ' -k ********* ', safe_ifaces[intf]['preup'])
+			print("[Network] self.ifaces after loading: ", safe_ifaces)
 			self.config_ready = True
 			self.msgPlugins()
 			if callback is not None:
 				callback(True)
 
 	def loadNameserverConfig(self):
-		ipRegexp = "[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}"
-		nameserverPattern = re.compile("nameserver +" + ipRegexp)
-		ipPattern = re.compile(ipRegexp)
+		if not self.openresolv:
+			self.nameservers = []
+			try:
+				fp = open('/etc/resolv.conf', 'r')
+				resolv = fp.readlines()
+				fp.close()
+			except:
+				print("[Network.py] resolv.conf - opening failed")
+				return
 
-		self.dhcpnameservers = []
-		resolv = []
-		try:
-			fp = open('/etc/resolv.conf', 'r')
-			resolv = fp.readlines()
-			fp.close()
-		except:
-			print("[Network.py] resolv.conf - opening failed")
+			ipRegexp = "[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}"
+			nameserverPattern = compile("nameserver +" + ipRegexp)
+			ipPattern = compile(ipRegexp)
+			for line in resolv:
+				if self.regExpMatch(nameserverPattern, line) is not None:
+					ip = self.regExpMatch(ipPattern, line)
+					if ip:
+						convertIP = self.convertIP(ip)
+						if convertIP != [0, 0, 0, 0] and convertIP not in self.nameservers:
+							self.nameservers.append(convertIP)
 
-		for line in resolv:
-			if self.regExpMatch(nameserverPattern, line) is not None:
-				ip = self.regExpMatch(ipPattern, line)
-				if ip and ip not in self.nameservers:
-					self.dhcpnameservers.append(self.convertIP(ip))
-
-		print("static nameservers:", self.nameservers)
-		print("dhcp nameservers:", self.dhcpnameservers)
+			print("[Network.py] '/etc/resolv.conf': ", self.nameservers)
 
 	def getInstalledAdapters(self):
 		return [x for x in os.listdir('/sys/class/net') if not self.isBlacklisted(x)]
@@ -313,13 +324,13 @@ class Network:
 		return list(self.ifaces.keys())
 
 	def getAdapterAttribute(self, iface, attribute):
-		print("Getting attribute ", attribute, " for adapter", iface)
+		print("[Network] Getting attribute: ", attribute, " for adapter: ", iface)
 		if self.ifaces.get(iface, {}).get('up', False) and self.ifaces.get(iface, {}).get('ip', [0, 0, 0, 0]) == [0, 0, 0, 0]:
 			self.getAddrInet(iface, None)
 		return self.ifaces.get(iface, {}).get(attribute)
 
 	def setAdapterAttribute(self, iface, attribute, value):
-		print("setting for adapter", iface, "attribute", attribute, " to value", value)
+		print("[Network] setting for adapter: ", iface, " attribute: ", attribute, " to value: ", value)
 		if iface in self.ifaces:
 			self.ifaces[iface][attribute] = value
 
@@ -327,22 +338,28 @@ class Network:
 		if iface in self.ifaces and attribute in self.ifaces[iface]:
 			del self.ifaces[iface][attribute]
 
-	def getNameserverList(self, dhcp=False):
-		servers = self.nameservers[:]
-		if dhcp:
-			print("Requesting DHCP assigned nameservers")
-			servers.extend(self.dhcpnameservers)
-		if len(servers) < 2:
-			servers.extend([[0, 0, 0, 0], [0, 0, 0, 0]])
-		print ("Get nameserver list: ", servers)
-		return servers[0:2]
+	def getNameserverList(self, iface=None):
+		if iface:
+			servers = self.getAdapterAttribute(iface, "dns-nameservers")
+			if not isinstance(servers, list):
+				servers = []
+			else:
+				servers = servers[:]
+		else:
+			servers = self.nameservers[:]
+		count = len(servers)
+		if count == 0:
+			servers = [[0, 0, 0, 0], [0, 0, 0, 0]]
+		elif count == 1:
+			servers += [[0, 0, 0, 0]]
+		print ("[Network] get %snameserver list: " % (iface and "dns-" or ""), servers)
+		return servers
 
 	def clearNameservers(self):
 		self.nameservers = []
 
 	def addNameserver(self, nameserver):
-		if nameserver != [0, 0, 0, 0] and nameserver not in self.nameservers and nameserver not in self.dhcpnameservers:
-			print("Adding nameserver: ", nameserver)
+		if nameserver not in self.nameservers:
 			self.nameservers.append(nameserver)
 
 	def removeNameserver(self, nameserver):
@@ -558,7 +575,7 @@ class Network:
 			return True
 
 		# r871x_usb_drv on kernel 2.6.12 is not identifiable over /sys/class/net/'ifacename'/wireless so look also inside /proc/net/wireless
-		device = re.compile('[a-z]{2,}[0-9]*:')
+		device = compile('[a-z]{2,}[0-9]*:')
 		ifnames = []
 		fp = open('/proc/net/wireless', 'r')
 		for line in fp:
@@ -615,14 +632,12 @@ class Network:
 		return 'wext'
 
 	def calc_netmask(self, nmask):
-		from struct import pack
-		from socket import inet_ntoa
 		mask = 1 << 31
 		xnet = (1 << 32) - 1
 		cidr_range = range(0, 32)
 		cidr = int(nmask)
 		if cidr not in cidr_range:
-			print('cidr invalid: %d' % cidr)
+			print("[Network] cidr invalid: %d" % cidr)
 			return None
 		else:
 			nm = ((1 << cidr) - 1) << (32 - cidr)
@@ -640,14 +655,17 @@ class Network:
 			return
 		action = event['ACTION']
 		if action == "add":
-			print("[Network] Add new interface:", interface)
+			print("[Network] Add new interface: ", interface)
 			self.getAddrInet(interface, None)
 		elif action == "remove":
-			print("[Network] Removed interface:", interface)
+			print("[Network] Removed interface: ", interface)
 			try:
 				del self.ifaces[interface]
 			except KeyError:
 				pass
+
+
+iNetwork = Network()
 
 
 def waitForNetwork(timeout=10):
@@ -656,9 +674,7 @@ def waitForNetwork(timeout=10):
 		if 'default' in gws and len(gws['default']) > 0:
 			print("[waitForNetwork] Online, reload interface data")
 			iNetwork.getInterfaces()
-			return
-		timeout -= 1
-		print("[waitForNetwork] Not online yet (%d)" % (timeout))
-
-
-iNetwork = Network()
+			break
+		else:
+			timeout -= 1
+			print("[waitForNetwork] Not online yet (%d)" % (timeout))

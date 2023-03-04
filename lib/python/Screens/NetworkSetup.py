@@ -198,12 +198,17 @@ class NetworkAdapterSelection(Screen, HelpableScreen):
 
 
 class NameserverSetup(ConfigListScreen, HelpableScreen, Screen):
-	def __init__(self, session):
+	def __init__(self, session, iface=None):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 		self.setTitle(_("Configure nameservers"))
-		self.backupNameserverList = iNetwork.getNameserverList()[:]
-		print("backup-list:", self.backupNameserverList)
+		self.iface = iface
+		if iface:
+			dns_nameservers = iNetwork.getAdapterAttribute(iface, "dns-nameservers")
+			if not isinstance(dns_nameservers, list):
+				iNetwork.setAdapterAttribute(iface, "dns-nameservers", [])
+		self.backupNameserverList = iNetwork.getNameserverList(iface=self.iface)
+		print("[NameserverSetup] backup-list:", self.backupNameserverList)
 
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Add"))
@@ -234,48 +239,72 @@ class NameserverSetup(ConfigListScreen, HelpableScreen, Screen):
 		ConfigListScreen.__init__(self, self.list)
 		self.createSetup()
 
-	def createConfig(self):
-		self.nameservers = iNetwork.getNameserverList()
+	def createConfig(self, update=False):
+		if not update or not self.iface:
+			self.nameservers = iNetwork.getNameserverList(iface=self.iface)[0:4]
 		self.nameserverEntries = [NoSave(ConfigIP(default=nameserver)) for nameserver in self.nameservers]
 
 	def createSetup(self):
 		self.list = []
-
 		i = 1
 		for x in self.nameserverEntries:
 			self.list.append((_("Nameserver %d") % (i), x))
 			i += 1
-
 		self["config"].list = self.list
+		self["key_green"].setText(len(self.list) < 4 and _("Add") or "")
 
 	def ok(self):
-		iNetwork.clearNameservers()
-		for nameserver in self.nameserverEntries:
-			iNetwork.addNameserver(nameserver.value)
-		iNetwork.writeNetworkConfig()
+		if self.iface:
+			dns = []
+			for nameserver in self.nameserverEntries:
+				if nameserver.value != [0, 0, 0, 0]:
+					dns.append(nameserver.value)
+			iNetwork.setAdapterAttribute(self.iface, "dns-nameservers", dns)
+			iNetwork.writeNetworkConfig()
+		else:
+			iNetwork.clearNameservers()
+			for nameserver in self.nameserverEntries:
+				if nameserver.value != [0, 0, 0, 0]:
+					iNetwork.addNameserver(nameserver.value)
+			iNetwork.writeNameserverConfig()
 		self.close()
 
 	def run(self):
 		self.ok()
 
 	def cancel(self):
-		iNetwork.clearNameservers()
-		print("restore backup-list:", self.backupNameserverList)
-		for nameserver in self.backupNameserverList:
-			iNetwork.addNameserver(nameserver)
+		if self.iface:
+			iNetwork.setAdapterAttribute(self.iface, "dns-nameservers", self.backupNameserverList)
+		else:
+			iNetwork.clearNameservers()
+			for nameserver in self.backupNameserverList:
+				if nameserver != [0, 0, 0, 0]:
+					iNetwork.addNameserver(nameserver)
+		print("NameserverSetup] restore backup-list:", self.backupNameserverList)
 		self.close()
 
 	def add(self):
-		iNetwork.addNameserver([0, 0, 0, 0])
-		self.createConfig()
-		self.createSetup()
+		index = len(self["config"].getList())
+		if index < 4:
+			if self.iface:
+				self.nameservers = []
+				for nameserver in self.nameserverEntries:
+					self.nameservers.append(nameserver.value)
+				self.nameservers.append([0, 0, 0, 0])
+			else:
+				iNetwork.addNameserver([0, 0, 0, 0])
+			self.createConfig(update=True)
+			self.createSetup()
 
 	def remove(self):
-		print("currentIndex:", self["config"].getCurrentIndex())
 		index = self["config"].getCurrentIndex()
 		if index < len(self.nameservers):
-			iNetwork.removeNameserver(self.nameservers[index])
-			self.createConfig()
+			if self.iface:
+				if self.nameservers[index] in self.nameservers:
+					self.nameservers.remove(self.nameservers[index])
+			else:
+				iNetwork.removeNameserver(self.nameservers[index])
+			self.createConfig(update=True)
 			self.createSetup()
 
 
@@ -425,7 +454,7 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 			self.dhcpdefault = False
 		self.hasGatewayConfigEntry = NoSave(ConfigYesNo(default=self.dhcpdefault or False))
 		self.gatewayConfigEntry = NoSave(ConfigIP(default=iNetwork.getAdapterAttribute(self.iface, "gateway") or [0, 0, 0, 0]))
-		nameserver = (iNetwork.getNameserverList(dhcp=True) + [[0, 0, 0, 0]] * 2)[0:2]
+		nameserver = (iNetwork.getNameserverList(iface=iNetwork.openresolv and self.iface or None) + [[0, 0, 0, 0]] * 2)[0:2]
 		self.primaryDNS = NoSave(ConfigIP(default=nameserver[0]))
 		self.secondaryDNS = NoSave(ConfigIP(default=nameserver[1]))
 
@@ -474,7 +503,7 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		self["config"].list = self.list
 
 	def KeyBlue(self):
-		self.session.openWithCallback(self.NameserverSetupClosed, NameserverSetup)
+		self.session.openWithCallback(self.NameserverSetupClosed, NameserverSetup, iface=iNetwork.openresolv and self.iface or None)
 
 	def newConfig(self):
 		if self["config"].getCurrent() == self.InterfaceEntry:
@@ -616,7 +645,7 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 
 	def NameserverSetupClosed(self, *ret):
 		iNetwork.loadNameserverConfig()
-		nameserver = (iNetwork.getNameserverList() + [[0, 0, 0, 0]] * 2)[0:2]
+		nameserver = (iNetwork.getNameserverList(iface=iNetwork.openresolv and self.iface or None) + [[0, 0, 0, 0]] * 2)[0:2]
 		self.primaryDNS = NoSave(ConfigIP(default=nameserver[0]))
 		self.secondaryDNS = NoSave(ConfigIP(default=nameserver[1]))
 		self.createSetup()
@@ -730,7 +759,7 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 		if self["menulist"].getCurrent()[1] == 'test':
 			self.session.open(NetworkAdapterTest, self.iface)
 		if self["menulist"].getCurrent()[1] == 'dns':
-			self.session.open(NameserverSetup)
+			self.session.open(NameserverSetup, iface=iNetwork.openresolv and self.iface or None)
 		if self["menulist"].getCurrent()[1] == 'scanwlan':
 			try:
 				from Plugins.SystemPlugins.WirelessLan.plugin import WlanScan
@@ -756,9 +785,20 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 		if self["menulist"].getCurrent()[1] == 'openwizard':
 			from Plugins.SystemPlugins.NetworkWizard.NetworkWizard import NetworkWizard
 			self.session.openWithCallback(self.AdapterSetupClosed, NetworkWizard, self.iface)
+		if self["menulist"].getCurrent()[1] in ('remove_openresolv', 'install_openresolv'):
+			text = self["menulist"].getCurrent()[1] == 'remove_openresolv' and _("Remove utility 'openresolv'") or _("Install utility 'openresolv'")
+			self.session.openWithCallback(self.InstallRemovePackage, MessageBox, text  + "?\n", MessageBox.TYPE_YESNO)
 		if self["menulist"].getCurrent()[1][0] == 'extendedSetup':
 			self.extended = self["menulist"].getCurrent()[1][2]
 			self.extended(self.session, self.iface)
+
+	def InstallRemovePackage(self, val):
+		if val:
+			cmd = self["menulist"].getCurrent()[1] == "remove_openresolv" and "opkg remove openresolv --force-remove --autoremove" or "opkg install openresolv"
+			ret = os.system(cmd)
+			if ret == 0:
+				iNetwork.openresolv = os.path.exists("/sbin/resolvconf")
+			self.close()
 
 	def up(self):
 		self["menulist"].up()
@@ -796,6 +836,8 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 			self["description"].setText(_("Restart your network connection and interfaces.\n") + self.oktext)
 		if self["menulist"].getCurrent()[1] == 'openwizard':
 			self["description"].setText(_("Use the network wizard to configure your network\n") + self.oktext)
+		if self["menulist"].getCurrent()[1] in ('remove_openresolv', 'install_openresolv'):
+			self["description"].setText(_("Utility 'openresolv' - dynamic control DNS settings '/etc/resolv.conf'.\n") + self.oktext)
 		if self["menulist"].getCurrent()[1][0] == 'extendedSetup':
 			self["description"].setText(_(self["menulist"].getCurrent()[1][1]) + self.oktext)
 
@@ -824,6 +866,10 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 		menu = []
 		menu.append((_("Adapter settings"), "edit"))
 		menu.append((_("Nameserver settings"), "dns"))
+		if iNetwork.openresolv:
+			menu.append((_("Remove utility 'openresolv'"), "remove_openresolv"))
+		else:
+			menu.append((_("Install utility 'openresolv'"), "install_openresolv"))
 		menu.append((_("Network test"), "test"))
 		menu.append((_("Restart network"), "lanrestart"))
 
