@@ -157,7 +157,7 @@ class ServiceInfo(Screen):
 					resolution = "%s - %dx%d - %s" % (videocodec, width, height, fps)
 					resolution += (" i", " p", "")[self.info.getInfo(iServiceInformation.sProgressive)]
 					aspect = self.getServiceInfoValue(iServiceInformation.sAspect)
-					resolution += " - [%s]" % aspect in (1, 2, 5, 6, 9, 0xA, 0xD, 0xE) and "4:3" or "16:9"
+					resolution += " - [%s]" % (aspect in (1, 2, 5, 6, 9, 0xA, 0xD, 0xE) and "4:3" or "16:9")
 				gamma = ("SDR", "HDR", "HDR10", "HLG", "")[self.info.getInfo(iServiceInformation.sGamma)]
 				if gamma:
 					resolution += " - %s" % gamma
