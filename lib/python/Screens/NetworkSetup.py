@@ -200,29 +200,28 @@ class NameserverSetup(ConfigListScreen, HelpableScreen, Screen):
 	def __init__(self, session, iface=None):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
-		self.setTitle(_("Configure nameservers"))
+		self.title = _("Configure nameservers")
+		self.session = session
 		self.iface = iface
-		self.backupNameserverList = iNetwork.getNameserverList(iface=self.iface)
-		print("[NameserverSetup] backup-list:", self.backupNameserverList)
 
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Add"))
 		self["key_yellow"] = StaticText(_("Delete"))
-
-		self["introduction"] = StaticText(_("Press OK to activate the settings."))
-		self.createConfig()
+		self["key_blue"] = StaticText(_("Run-time"))
+		self["introduction"] = StaticText("")
 
 		self["OkCancelActions"] = HelpableActionMap(self, ["OkCancelActions"],
 		{
-			"cancel": (self.cancel, _("Exit nameserver configuration")),
+			"cancel": (self.close, _("Exit nameserver configuration")),
 			"ok": (self.ok, _("Activate current configuration")),
 		})
 
 		self["ColorActions"] = HelpableActionMap(self, ["ColorActions"],
 		{
-			"red": (self.cancel, _("Exit nameserver configuration")),
+			"red": (self.close, _("Exit nameserver configuration")),
 			"green": (self.add, _("Add a nameserver entry")),
 			"yellow": (self.remove, _("Remove a nameserver entry")),
+			"blue": (self.run_time, _("Check run-time nameservers")),
 		})
 
 		self["actions"] = NumberActionMap(["SetupActions"],
@@ -230,70 +229,95 @@ class NameserverSetup(ConfigListScreen, HelpableScreen, Screen):
 			"ok": self.ok,
 		}, -2)
 
-		self.list = []
-		ConfigListScreen.__init__(self, self.list)
-		self.createSetup()
+		ConfigListScreen.__init__(self, [])
+		self.nameservers = iNetwork.getIfaceNameservers(self.iface)
+		self.create_setup()
 
-	def createConfig(self, update=False):
-		if not update or not self.iface:
-			self.nameservers = iNetwork.getNameserverList(iface=self.iface)[0:4]
-		self.nameserverEntries = [NoSave(ConfigIP(default=nameserver)) for nameserver in self.nameservers]
-
-	def createSetup(self):
-		self.list = []
-		for i, x in enumerate(self.nameserverEntries):
-			self.list.append((_("Nameserver %d") % (i + 1), x))
+	def create_setup(self):
+		self.nameserver_entries = [NoSave(ConfigIP(default=nameserver)) for nameserver in self.nameservers]
+		if self.nameserver_entries:
+			self.list = [(_("Nameserver %d") % (i + 1), x) for i, x in enumerate(self.nameserver_entries)]
+			self["introduction"].text = _("Press OK to activate the settings.")
+		else:
+			self.list = []
+			self["introduction"].text = _("No nameservers are set for the adapter. You can check run-time nameservers, or add a static nameserver to the adapter.")
 		self["config"].list = self.list
 
 	def ok(self):
 		if self.iface:
 			dns = []
-			for nameserver in self.nameserverEntries:
+			for nameserver in self.nameserver_entries:
 				if nameserver.value != [0, 0, 0, 0]:
 					dns.append(nameserver.value)
 			iNetwork.setAdapterAttribute(self.iface, "dns-nameservers", dns)
 			iNetwork.writeNetworkConfig()
-		else:
-			iNetwork.clearNameservers()
-			for nameserver in self.nameserverEntries:
-				if nameserver.value != [0, 0, 0, 0]:
-					iNetwork.addNameserver(nameserver.value)
 		self.close()
 
 	def run(self):
 		self.ok()
 
-	def cancel(self):
-		if self.iface:
-			iNetwork.setAdapterAttribute(self.iface, "dns-nameservers", self.backupNameserverList)
-		else:
-			iNetwork.clearNameservers()
-			for nameserver in self.backupNameserverList:
-				if nameserver != [0, 0, 0, 0]:
-					iNetwork.addNameserver(nameserver)
-		print("NameserverSetup] restore backup-list:", self.backupNameserverList)
-		self.close()
-
 	def add(self):
 		if self.iface:
 			self.nameservers = []
-			for nameserver in self.nameserverEntries:
+			for nameserver in self.nameserver_entries:
 				self.nameservers.append(nameserver.value)
 			self.nameservers.append([0, 0, 0, 0])
-		else:
-			iNetwork.addNameserver([0, 0, 0, 0])
-		self.createConfig(update=True)
-		self.createSetup()
+		self.create_setup()
 
 	def remove(self):
 		index = self["config"].getCurrentIndex()
+		if index < len(self.nameservers) and self.iface:
+			self.nameservers.pop(index)
+			self.create_setup()
+
+	def run_time(self):
+		self.session.openWithCallback(self.run_time_closed, RunTimeNameservers)
+
+	def run_time_closed(self, nameserver=None):
+		if nameserver:
+			if nameserver not in self.nameservers:
+				self.nameservers.append(nameserver)
+			self.create_setup()
+
+
+class RunTimeNameservers(ConfigListScreen, HelpableScreen, Screen):
+	def __init__(self, session, iface=None):
+		Screen.__init__(self, session)
+		HelpableScreen.__init__(self)
+		self.skinName = ["RunTimeNameservers", "NameserverSetup"]
+		self.title = _("Run-time nameservers")
+
+		self["key_red"] = StaticText(_("Cancel"))
+		self["key_green"] = StaticText(_("Add"))
+		self["introduction"] = StaticText(_("You can add run-time nameservers to the adapter static nameservers."))
+
+		self["OkCancelActions"] = HelpableActionMap(self, ["OkCancelActions"],
+		{
+			"cancel": (self.close, _("Exit nameserver configuration")),
+			"ok": (self.close, _("Exit nameserver configuration")),
+		})
+
+		self["ColorActions"] = HelpableActionMap(self, ["ColorActions"],
+		{
+			"red": (self.close, _("Exit nameserver configuration")),
+			"green": (self.add, _("Add a nameserver entry")),
+		})
+
+		self["actions"] = NumberActionMap(["SetupActions"],
+		{
+			"ok": self.close,
+		}, -2)
+
+		self.nameservers = iNetwork.getNameservers()
+		self.list = [(_("Nameserver %d") % (i + 1), NoSave(ConfigIP(default=x))) for i, x in enumerate(self.nameservers)]
+		ConfigListScreen.__init__(self, self.list)
+
+	def add(self):
+		nameserver = None
+		index = self["config"].getCurrentIndex()
 		if index < len(self.nameservers):
-			if self.iface:
-				self.nameservers.pop(index)
-			else:
-				iNetwork.removeNameserverIndex(index)
-			self.createConfig(update=True)
-			self.createSetup()
+			nameserver = self.nameservers[index]
+		self.close(nameserver)
 
 
 class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
@@ -442,7 +466,7 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 			self.dhcpdefault = False
 		self.hasGatewayConfigEntry = NoSave(ConfigYesNo(default=self.dhcpdefault or False))
 		self.gatewayConfigEntry = NoSave(ConfigIP(default=iNetwork.getAdapterAttribute(self.iface, "gateway") or [0, 0, 0, 0]))
-		nameserver = (iNetwork.getNameserverList(iface=self.iface))[0:2]
+		nameserver = (iNetwork.getNameservers() + [[0, 0, 0, 0]] * 2)[:2]
 		self.primaryDNS = NoSave(ConfigIP(default=nameserver[0]))
 		self.secondaryDNS = NoSave(ConfigIP(default=nameserver[1]))
 
@@ -633,7 +657,7 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 
 	def NameserverSetupClosed(self, *ret):
 		iNetwork.loadNameserverConfig()
-		nameserver = (iNetwork.getNameserverList(iface=self.iface))[0:2]
+		nameserver = (iNetwork.getNameservers() + [[0, 0, 0, 0]] * 2)[:2]
 		self.primaryDNS = NoSave(ConfigIP(default=nameserver[0]))
 		self.secondaryDNS = NoSave(ConfigIP(default=nameserver[1]))
 		self.createSetup()
