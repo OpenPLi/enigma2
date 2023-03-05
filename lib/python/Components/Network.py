@@ -337,6 +337,9 @@ class Network:
 		if nameserver in self.nameservers:
 			self.nameservers.remove(nameserver)
 
+	def removeNameserverIndex(self, index):
+		self.nameservers.pop(index)
+
 	def changeNameserver(self, oldnameserver, newnameserver):
 		if oldnameserver in self.nameservers:
 			self.nameservers[self.nameservers.index(oldnameserver)] = newnameserver
