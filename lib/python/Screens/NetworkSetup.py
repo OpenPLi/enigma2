@@ -207,7 +207,7 @@ class NameserverSetup(ConfigListScreen, HelpableScreen, Screen):
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Add"))
 		self["key_yellow"] = StaticText(_("Delete"))
-		self["key_blue"] = StaticText(_("Run-time"))
+		self["key_blue"] = StaticText(_("Active DNS"))
 		self["introduction"] = StaticText("")
 
 		self["OkCancelActions"] = HelpableActionMap(self, ["OkCancelActions"],
@@ -221,7 +221,7 @@ class NameserverSetup(ConfigListScreen, HelpableScreen, Screen):
 			"red": (self.close, _("Exit nameserver configuration")),
 			"green": (self.add, _("Add a nameserver entry")),
 			"yellow": (self.remove, _("Remove a nameserver entry")),
-			"blue": (self.run_time, _("Check run-time nameservers")),
+			"blue": (self.active, _("Check active nameservers")),
 		})
 
 		self["actions"] = NumberActionMap(["SetupActions"],
@@ -240,7 +240,7 @@ class NameserverSetup(ConfigListScreen, HelpableScreen, Screen):
 			self["introduction"].text = _("Press OK to activate the settings.")
 		else:
 			self.list = []
-			self["introduction"].text = _("No nameservers are set for the adapter. You can check run-time nameservers, or add a static nameserver to the adapter.")
+			self["introduction"].text = _("No nameservers are set for the adapter. You can check active nameservers, or add a static nameserver to the adapter.")
 		self["config"].list = self.list
 
 	def ok(self):
@@ -270,26 +270,26 @@ class NameserverSetup(ConfigListScreen, HelpableScreen, Screen):
 			self.nameservers.pop(index)
 			self.create_setup()
 
-	def run_time(self):
-		self.session.openWithCallback(self.run_time_closed, RunTimeNameservers)
+	def active(self):
+		self.session.openWithCallback(self.active_closed, ActiveNameservers)
 
-	def run_time_closed(self, nameserver=None):
+	def active_closed(self, nameserver=None):
 		if nameserver:
 			if nameserver not in self.nameservers:
 				self.nameservers.append(nameserver)
 			self.create_setup()
 
 
-class RunTimeNameservers(ConfigListScreen, HelpableScreen, Screen):
+class ActiveNameservers(ConfigListScreen, HelpableScreen, Screen):
 	def __init__(self, session, iface=None):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
-		self.skinName = ["RunTimeNameservers", "NameserverSetup"]
-		self.title = _("Run-time nameservers")
+		self.skinName = ["ActiveNameservers", "NameserverSetup"]
+		self.title = _("Active nameservers")
 
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Add"))
-		self["introduction"] = StaticText(_("You can add run-time nameservers to the adapter static nameservers."))
+		self["introduction"] = StaticText(_("You can add active nameservers to the adapter static nameservers."))
 
 		self["OkCancelActions"] = HelpableActionMap(self, ["OkCancelActions"],
 		{
