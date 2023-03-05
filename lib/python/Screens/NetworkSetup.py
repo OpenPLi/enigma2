@@ -289,10 +289,9 @@ class NameserverSetup(ConfigListScreen, HelpableScreen, Screen):
 		index = self["config"].getCurrentIndex()
 		if index < len(self.nameservers):
 			if self.iface:
-				if self.nameservers[index] in self.nameservers:
-					self.nameservers.remove(self.nameservers[index])
+				self.nameservers.pop(index)
 			else:
-				iNetwork.removeNameserver(self.nameservers[index])
+				iNetwork.removeNameserverIndex(index)
 			self.createConfig(update=True)
 			self.createSetup()
 
