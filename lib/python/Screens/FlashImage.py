@@ -443,6 +443,7 @@ class MultibootSelection(SelectImage):
 			"menu": boundFunction(self.cancel, True),
 		}, -1)
 
+		self.blue = False
 		self.currentimageslot = getCurrentImage()
 		self.tmp_dir = tempfile.mkdtemp(prefix="MultibootSelection")
 		Console().ePopen('mount %s %s' % (SystemInfo["MultibootStartupDevice"], self.tmp_dir))
@@ -474,8 +475,12 @@ class MultibootSelection(SelectImage):
 						list12.insert(index, ChoiceEntryComponent('', ((_("slot%s - %s mode 12 (current image)") if x == self.currentimageslot and mode == 12 else _("slot%s - %s mode 12")) % (x, imagesList[x]['imagename']), (x, 12))))
 					else:
 						list.append(ChoiceEntryComponent('', ((_("slot%s - %s (current image)") if x == self.currentimageslot and mode != 12 else _("slot%s - %s")) % (x, imagesList[x]['imagename']), (x, 1))))
-		list += list12
-		list = sorted(list) if config.usage.multiboot_order.value else list
+		if list12:
+			self.blue = True
+			self["key_blue"].setText(_("Order"))
+			list += list12
+			list = sorted(list) if config.usage.multiboot_order.value else list
+
 		if os.path.isfile(os.path.join(self.tmp_dir, "STARTUP_RECOVERY")):
 			list.append(ChoiceEntryComponent('', ((_("Boot to Recovery menu")), "Recovery")))
 		if os.path.isfile(os.path.join(self.tmp_dir, "STARTUP_ANDROID")):
@@ -500,10 +505,11 @@ class MultibootSelection(SelectImage):
 			self.getImagesList()
 
 	def order(self):
-		self["list"].setList([])
-		config.usage.multiboot_order.value = not config.usage.multiboot_order.value
-		config.usage.multiboot_order.save()
-		self.getImagesList()
+		if self.blue:
+			self["list"].setList([])
+			config.usage.multiboot_order.value = not config.usage.multiboot_order.value
+			config.usage.multiboot_order.save()
+			self.getImagesList()
 
 	def keyOk(self):
 		self.session.openWithCallback(self.doReboot, MessageBox, "%s:\n%s" % (_("Are you sure to reboot to"), self.currentSelected[0][0]), simple=True)
