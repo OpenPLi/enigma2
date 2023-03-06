@@ -478,7 +478,7 @@ class MultibootSelection(SelectImage):
 
 		if list12:
 			self.blue = True
-			self["key_blue"].setText(_("Order"))
+			self["key_blue"].setText(_("Order by modes") if config.usage.multiboot_order.value else _("Order by slots"))
 			list += list12
 			list = sorted(list) if config.usage.multiboot_order.value else list
 
