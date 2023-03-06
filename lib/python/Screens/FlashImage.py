@@ -420,7 +420,7 @@ class MultibootSelection(SelectImage):
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Reboot"))
 		self["key_yellow"] = StaticText()
-		self["key_blue"] = StaticText(_("Order"))
+		self["key_blue"] = StaticText()
 
 		self["list"] = ChoiceList([])
 
@@ -475,6 +475,7 @@ class MultibootSelection(SelectImage):
 						list12.insert(index, ChoiceEntryComponent('', ((_("slot%s - %s mode 12 (current image)") if x == self.currentimageslot and mode == 12 else _("slot%s - %s mode 12")) % (x, imagesList[x]['imagename']), (x, 12))))
 					else:
 						list.append(ChoiceEntryComponent('', ((_("slot%s - %s (current image)") if x == self.currentimageslot and mode != 12 else _("slot%s - %s")) % (x, imagesList[x]['imagename']), (x, 1))))
+
 		if list12:
 			self.blue = True
 			self["key_blue"].setText(_("Order"))
