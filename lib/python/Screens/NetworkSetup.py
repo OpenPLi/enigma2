@@ -427,8 +427,7 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 				dns.append(self.primaryDNS.value)
 			if self.secondaryDNS.value != [0, 0, 0, 0]:
 				dns.append(self.secondaryDNS.value)
-			if dns:
-				iNetwork.setAdapterAttribute(self.iface, "dns-nameservers", dns)
+			iNetwork.setAdapterAttribute(self.iface, "dns-nameservers", dns)
 			if self.extended is not None and self.configStrings is not None:
 				iNetwork.setAdapterAttribute(self.iface, "configStrings", self.configStrings(self.iface))
 				self.ws.writeConfig(self.iface)
