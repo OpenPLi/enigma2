@@ -270,8 +270,8 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 
 	def layoutFinished(self):
 		nameserver = (iNetwork.getNameservers() + [[0, 0, 0, 0]] * 2)[:2]
-		self["DNS1"].setText(".".join(str(i) for i in nameserver[0]))
-		self["DNS2"].setText(".".join(str(i) for i in nameserver[1]))
+		self["DNS1"].setText(self.set_text(".".join(str(i) for i in nameserver[0])))
+		self["DNS2"].setText(self.set_text(".".join(str(i) for i in nameserver[1])))
 		self["IP"].setText(self.set_text(self.ipConfigEntry.getText()))
 		self["Mask"].setText(self.set_text(self.netmaskConfigEntry.getText()))
 
@@ -335,9 +335,9 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 			if not self.dhcpConfigEntry.value:
 				self.list.extend((
 					(_('IP address'), self.ipConfigEntry),
-					(_('Netmask'), self.netmaskConfigEntry)
+					(_('Netmask'), self.netmaskConfigEntry),
+					(_('Use a gateway'), self.hasGatewayConfigEntry)
 				))
-				self.list.append((_('Use a gateway'), self.hasGatewayConfigEntry))
 				if self.hasGatewayConfigEntry.value:
 					self.list.append((_('Gateway'), self.gatewayConfigEntry))
 
