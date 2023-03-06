@@ -420,6 +420,8 @@ class MultibootSelection(SelectImage):
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Reboot"))
 		self["key_yellow"] = StaticText()
+		self["key_blue"] = StaticText(_("Order"))
+
 		self["list"] = ChoiceList([])
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "KeyboardInputActions", "MenuActions"],
@@ -429,6 +431,7 @@ class MultibootSelection(SelectImage):
 			"red": self.cancel,
 			"green": self.keyOk,
 			"yellow": self.deleteImage,
+			"blue": self.order,
 			"up": self.keyUp,
 			"down": self.keyDown,
 			"left": self.keyLeft,
@@ -457,6 +460,7 @@ class MultibootSelection(SelectImage):
 
 	def getImagesList(self):
 		list = []
+		list12 = []
 		imagesList = getImagelist()
 		mode = getCurrentImageMode() or 0
 		self.deletedImagesExists = False
@@ -467,10 +471,11 @@ class MultibootSelection(SelectImage):
 				elif imagesList[x]["imagename"] != _("Empty slot"):
 					if SystemInfo["canMode12"]:
 						list.insert(index, ChoiceEntryComponent('', ((_("slot%s - %s mode 1 (current image)") if x == self.currentimageslot and mode != 12 else _("slot%s - %s mode 1")) % (x, imagesList[x]['imagename']), (x, 1))))
-						list.append(ChoiceEntryComponent('', ((_("slot%s - %s mode 12 (current image)") if x == self.currentimageslot and mode == 12 else _("slot%s - %s mode 12")) % (x, imagesList[x]['imagename']), (x, 12))))
+						list12.insert(index, ChoiceEntryComponent('', ((_("slot%s - %s mode 12 (current image)") if x == self.currentimageslot and mode == 12 else _("slot%s - %s mode 12")) % (x, imagesList[x]['imagename']), (x, 12))))
 					else:
 						list.append(ChoiceEntryComponent('', ((_("slot%s - %s (current image)") if x == self.currentimageslot and mode != 12 else _("slot%s - %s")) % (x, imagesList[x]['imagename']), (x, 1))))
-		list = sorted(list)
+		list += list12
+		list = sorted(list) if config.usage.multiboot_order.value else list
 		if os.path.isfile(os.path.join(self.tmp_dir, "STARTUP_RECOVERY")):
 			list.append(ChoiceEntryComponent('', ((_("Boot to Recovery menu")), "Recovery")))
 		if os.path.isfile(os.path.join(self.tmp_dir, "STARTUP_ANDROID")):
@@ -493,6 +498,12 @@ class MultibootSelection(SelectImage):
 			else:
 				deleteImage(self.currentSelected[0][1][0])
 			self.getImagesList()
+
+	def order(self):
+		self["list"].setList([])
+		config.usage.multiboot_order.value = not config.usage.multiboot_order.value
+		config.usage.multiboot_order.save()
+		self.getImagesList()
 
 	def keyOk(self):
 		self.session.openWithCallback(self.doReboot, MessageBox, "%s:\n%s" % (_("Are you sure to reboot to"), self.currentSelected[0][0]), simple=True)
