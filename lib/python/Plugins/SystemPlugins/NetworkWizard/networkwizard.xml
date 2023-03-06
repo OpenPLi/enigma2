@@ -41,18 +41,6 @@ self.selectKey("RIGHT")
 self.AdapterSetupEnd(self.selectedInterface)
                 </code>
         </step>
-        <step id="confdns" nextstep="checklanstatusend">
-                <text value="Please configure or verify your Nameservers by filling out the required values.\nWhen you are ready press OK to continue." />
-                <displaytext value="Configure nameservers" />
-                <config screen="NameserverSetup" module="NetworkSetup" type="ConfigList" />
-                <code>
-self.clearSelectedKeys()
-self.selectKey("OK")
-                </code>
-                <code pos="after" async="yes">
-self.checkNetwork()
-                </code>
-        </step>
         <step id="checklanstatusend" nextstep="end">
 		<condition>
 self.condition = (self.InterfaceState == True )

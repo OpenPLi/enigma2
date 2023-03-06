@@ -202,8 +202,7 @@ class NetworkWizard(WizardLanguage, Rc):
 			iNetwork.checkNetworkState(self.AdapterSetupEndFinished)
 			self.AdapterRef = self.session.openWithCallback(self.AdapterSetupEndCB, MessageBox, _("Please wait while we test your network..."), type=MessageBox.TYPE_INFO, enable_input=False)
 		else:
-			self.currStep = self.getStepWithID("confdns")
-			self.afterAsyncCode()
+			self.checkNetwork()
 
 	def AdapterSetupEndCB(self, data):
 		if data:
