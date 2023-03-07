@@ -200,7 +200,7 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 	def __init__(self, session, networkinfo, essid=None):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
-		self.setTitle(_("Network setup"))
+		self.title = _("Network setup")
 		if isinstance(networkinfo, (list, tuple)):
 			self.iface = networkinfo[0]
 			self.essid = networkinfo[1]
@@ -317,11 +317,7 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		self.dhcpConfigEntry.addNotifier(self.createSetup, initial_call=False)
 		self.ipConfigEntry = NoSave(ConfigIP(default=iNetwork.getAdapterAttribute(self.iface, "ip")) or [0, 0, 0, 0])
 		self.netmaskConfigEntry = NoSave(ConfigIP(default=iNetwork.getAdapterAttribute(self.iface, "netmask") or [255, 0, 0, 0]))
-		if iNetwork.getAdapterAttribute(self.iface, "gateway"):
-			self.dhcpdefault = True
-		else:
-			self.dhcpdefault = False
-		self.hasGatewayConfigEntry = NoSave(ConfigYesNo(default=self.dhcpdefault or False))
+		self.hasGatewayConfigEntry = NoSave(ConfigYesNo(default=iNetwork.getAdapterAttribute(self.iface, "gateway") and True or False))
 		self.hasGatewayConfigEntry.addNotifier(self.createSetup, initial_call=False)
 		self.gatewayConfigEntry = NoSave(ConfigIP(default=iNetwork.getAdapterAttribute(self.iface, "gateway") or [0, 0, 0, 0]))
 		nameserver = (iNetwork.getIfaceNameservers(self.iface) + [[0, 0, 0, 0]] * 2)[:2]
@@ -343,6 +339,7 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 
 			self.extended = None
 			self.configStrings = None
+			isExistBcmWifi = os.path.exists("/tmp/bcm/" + self.iface)
 			for p in plugins.getPlugins(PluginDescriptor.WHERE_NETWORKSETUP):
 				call_fnc = p.fnc["ifaceSupported"](self.iface)
 				if call_fnc is not None:
@@ -350,7 +347,6 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 						self.extended = call_fnc
 						if "configStrings" in p.fnc:
 							self.configStrings = p.fnc["configStrings"]
-						isExistBcmWifi = os.path.exists("/tmp/bcm/" + self.iface)
 						if not isExistBcmWifi:
 							self.list.append((_("Hidden network"), config.plugins.wlan.hiddenessid))
 						self.wlanSSID = (_("Network name (SSID)"), config.plugins.wlan.essid)
@@ -425,7 +421,7 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 			dns = []
 			if self.primaryDNS.value != [0, 0, 0, 0]:
 				dns.append(self.primaryDNS.value)
-			if self.secondaryDNS.value != [0, 0, 0, 0]:
+			if self.secondaryDNS.value != [0, 0, 0, 0] and self.secondaryDNS.value not in dns:
 				dns.append(self.secondaryDNS.value)
 			iNetwork.setAdapterAttribute(self.iface, "dns-nameservers", dns)
 			if self.extended is not None and self.configStrings is not None:
@@ -496,6 +492,10 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 
 	def cleanup(self):
 		iNetwork.stopLinkStateConsole()
+		config.plugins.wlan.encryption.removeNotifier(self.createSetup)
+		self.activateInterfaceEntry.removeNotifier(self.createSetup)
+		self.dhcpConfigEntry.removeNotifier(self.createSetup)
+		self.hasGatewayConfigEntry.removeNotifier(self.createSetup)
 
 	def hideInputHelp(self):
 		current = self["config"].getCurrent()
