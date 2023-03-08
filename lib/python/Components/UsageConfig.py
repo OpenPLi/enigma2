@@ -422,6 +422,8 @@ def InitUsageConfig():
 
 	config.usage.boolean_graphic = ConfigSelection(default="true", choices={"false": _("no"), "true": _("yes"), "only_bool": _("yes, but not in multi selections")})
 
+	config.usage.multiboot_order = ConfigYesNo(default=True)
+
 	config.epg = ConfigSubsection()
 	config.epg.eit = ConfigYesNo(default=True)
 	config.epg.mhw = ConfigYesNo(default=False)

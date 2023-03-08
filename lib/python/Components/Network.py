@@ -326,6 +326,15 @@ class Network:
 		print("[Network] get %s nameserver list: %s" % (iface, servers))
 		return servers
 
+	def getIfaceNameservers(self, iface):
+		dns_servers = self.getAdapterAttribute(iface, "dns-nameservers") or []
+		servers = dns_servers[:]
+		return servers
+
+	def getNameservers(self):
+		servers = self.nameservers[:]
+		return servers
+
 	def clearNameservers(self):
 		self.nameservers = []
 
