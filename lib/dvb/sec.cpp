@@ -74,6 +74,7 @@ int eDVBSatelliteEquipmentControl::canTune(const eDVBFrontendParametersSatellite
 			linked_in_use = true;
 		fe = linked_fe->m_frontend;
 		linked_fe->m_frontend->getData(eDVBFrontend::LINKED_PREV_PTR, (long&)linked_prev_ptr);
+		eSecDebugNoSimulate("[eDVBSatelliteEquipmentControl] LINKED_PREV_PTR: %ld %s", linked_prev_ptr, linked_in_use ? "(linked_in_use)" : "");
 	}
 
 	fe->getData(eDVBFrontend::ROTOR_POS, fe_rotor_pos);
@@ -85,6 +86,7 @@ int eDVBSatelliteEquipmentControl::canTune(const eDVBFrontendParametersSatellite
 		if (linked_fe->m_inuse || (direct_connected && ((eDVBFrontend*)fe)->is_FBCTuner() && tunerLinkedInUse(((eDVBFrontend*)fe)->getSlotID())))
 			linked_in_use = true;
 		linked_fe->m_frontend->getData(eDVBFrontend::LINKED_NEXT_PTR, (long&)linked_next_ptr);
+		eSecDebugNoSimulate("[eDVBSatelliteEquipmentControl] LINKED_NEXT_PTR: %ld %s", linked_next_ptr, linked_in_use ? "(linked_in_use)" : "");
 	}
 
 	// when a linked in use tuner is found we get the tuner data...
