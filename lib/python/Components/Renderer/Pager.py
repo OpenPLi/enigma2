@@ -22,11 +22,6 @@ class Pager(Renderer):
 		self.pagerForeground = 15774720
 		self.pagerBackground = 624318628
 		self.l.setItemHeight(self.itemHeight)
-		self.l.setFont(1, gFont('Regular', 18))
-		self.l.setFont(2, gFont('Regular', 22))
-		self.l.setFont(3, gFont('Regular', 22))
-		self.l.setFont(4, gFont('Regular', 22))
-		self.l.setFont(5, gFont('Regular', 22))
 		self.picDotPage = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/dot.png"))
 		self.picDotCurPage = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/dotfull.png"))
 
@@ -108,15 +103,11 @@ class Pager(Renderer):
 	
 	def initPager(self):
 		listH = self.getSourceHeight()
-		print("srcH: " + str(listH))
 		if listH > 0:
 			current_index = self.getCurrentIndex()
-			print("current_index: " + str(current_index))
 			listCount = self.getListCount()
-			print("listCount: " + str(listCount))
 			itemHeight = self.getListItemHeight()
-			print("itemHeight: " + str(itemHeight))
-			items_per_page = math.ceil(listH/itemHeight) - 1
+			items_per_page = listH//itemHeight
 			if items_per_page > 0:
 				currentPageIndex = math.floor(current_index/items_per_page)
 				pagesCount = math.ceil(listCount/items_per_page) - 1
