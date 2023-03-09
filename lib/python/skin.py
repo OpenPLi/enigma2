@@ -1109,45 +1109,49 @@ def readSkin(screen, skin, names, desktop):
 		wname = widget.attrib.get("name")
 		wsource = widget.attrib.get("source")
 		wconnection = widget.attrib.get("connection")
+		wclass = widget.attrib.get("addon")
 		source = None
-		if wname is None and wsource is None and wconnection is None:
-			raise SkinError("The widget has no name, no source and no connection")
-			return
+		if wname is None and wsource is None and wclass is None:
+			raise SkinError("The widget has no name, no source and no addon type specified")
+
 		if wname:
 			# print("[Skin] DEBUG: Widget name='%s'." % wname)
 			usedComponents.add(wname)
 			try:  # Get corresponding "gui" object.
+				# if wclass:
+				# 	relClass = my_import(".".join(("Components", wclass))).__dict__.get(wclass)
+				# 	screen[wname] = relClass()
+				# 	screen[wname].connectRelatedElement(wconnection, screen)
 				attributes = screen[wname].skinAttributes = []
 			except Exception:
 				raise SkinError("Component with name '%s' was not found in skin of screen '%s'" % (wname, name))
 			# assert screen[wname] is not Source
 			collectAttributes(attributes, widget, context, skinPath, ignore=("name",))
-		elif wsource or wconnection:
-			if wsource:
-				# print("[Skin] DEBUG: Widget source='%s'." % wsource)
-				while True:  # Get corresponding source until we found a non-obsolete source.
-					# Parse our current "wsource", which might specify a "related screen" before the dot,
-					# for example to reference a parent, global or session-global screen.
-					scr = screen
-					path = wsource.split(".")  # Resolve all path components.
-					while len(path) > 1:
-						scr = screen.getRelatedScreen(path[0])
-						if scr is None:
-							# print("[Skin] DEBUG: wsource='%s', name='%s'." % (wsource, name))
-							raise SkinError("Specified related screen '%s' was not found in screen '%s'" % (wsource, name))
-						path = path[1:]
-					source = scr.get(path[0])  # Resolve the source.
-					if isinstance(source, ObsoleteSource):
-						# If we found an "obsolete source", issue warning, and resolve the real source.
-						print("[Skin] WARNING: SKIN '%s' USES OBSOLETE SOURCE '%s', USE '%s' INSTEAD!" % (name, wsource, source.newSource))
-						print("[Skin] OBSOLETE SOURCE WILL BE REMOVED %s, PLEASE UPDATE!" % source.removalDate)
-						if source.description:
-							print("[Skin] Source description: '%s'." % source.description)
-						wsource = source.new_source
-					else:
-						break  # Otherwise, use the source.
-				if source is None:
-					raise SkinError("The source '%s' was not found in screen '%s'" % (wsource, name))
+		elif wsource:
+			# print("[Skin] DEBUG: Widget source='%s'." % wsource)
+			while True:  # Get corresponding source until we found a non-obsolete source.
+				# Parse our current "wsource", which might specify a "related screen" before the dot,
+				# for example to reference a parent, global or session-global screen.
+				scr = screen
+				path = wsource.split(".")  # Resolve all path components.
+				while len(path) > 1:
+					scr = screen.getRelatedScreen(path[0])
+					if scr is None:
+						# print("[Skin] DEBUG: wsource='%s', name='%s'." % (wsource, name))
+						raise SkinError("Specified related screen '%s' was not found in screen '%s'" % (wsource, name))
+					path = path[1:]
+				source = scr.get(path[0])  # Resolve the source.
+				if isinstance(source, ObsoleteSource):
+					# If we found an "obsolete source", issue warning, and resolve the real source.
+					print("[Skin] WARNING: SKIN '%s' USES OBSOLETE SOURCE '%s', USE '%s' INSTEAD!" % (name, wsource, source.newSource))
+					print("[Skin] OBSOLETE SOURCE WILL BE REMOVED %s, PLEASE UPDATE!" % source.removalDate)
+					if source.description:
+						print("[Skin] Source description: '%s'." % source.description)
+					wsource = source.new_source
+				else:
+					break  # Otherwise, use the source.
+			if source is None:
+				raise SkinError("The source '%s' was not found in screen '%s'" % (wsource, name))
 
 			wrender = widget.attrib.get("render")
 			if not wrender:
@@ -1183,11 +1187,26 @@ def readSkin(screen, skin, names, desktop):
 			renderer = rendererClass()  # Instantiate renderer.
 			if source:
 				renderer.connect(source)  # Connect to source.
-			elif wconnection:
-				renderer.connectRelatedElement(wconnection, screen)
 			attributes = renderer.skinAttributes = []
-			collectAttributes(attributes, widget, context, skinPath, ignore=("render", "source", "connection"))
+			collectAttributes(attributes, widget, context, skinPath, ignore=("render", "source"))
 			screen.renderer.append(renderer)
+		elif wclass:
+			try:
+				addonClass = my_import(".".join(("Components", "Addons", wclass))).__dict__.get(wclass)
+			except ImportError:
+				raise SkinError("GUI Addon '%s' not found" % wclass)
+			
+			if not wconnection:
+				raise SkinError("The widget is from addon type: %s , but no connection is specified." % wclass)
+			
+			wclassname = wclass + "_" + wconnection
+
+			usedComponents.add(wclassname)
+
+			screen[wclassname] = addonClass()
+			screen[wclassname].connectRelatedElement(wconnection, screen)
+			attributes = screen[wclassname].skinAttributes = []
+			collectAttributes(attributes, widget, context, skinPath, ignore=("addon",))
 
 	def processApplet(widget, context):
 		try:
