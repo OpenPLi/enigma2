@@ -65,6 +65,7 @@ class Pager(GUIAddon):
 	def postWidgetCreate(self, instance):
 		instance.setSelectionEnable(False)
 		instance.setContent(self.l)
+		instance.allowNativeKeys(False)
 
 	def getCurrentIndex(self):
 		if hasattr(self.source, "index"):
