@@ -11,9 +11,6 @@ class Pager(GUIAddon):
 	def __init__(self):
 		GUIAddon.__init__(self)
 		self.itemHeight = 25
-		self.sourceHeight = 25
-		self.current_index = 0
-		self.l_list = []
 		self.l = eListboxPythonMultiContent()
 		self.l.setBuildFunc(self.buildEntry)
 		self.l.setItemHeight(self.itemHeight)
@@ -54,9 +51,9 @@ class Pager(GUIAddon):
 		return res
 
 	def selChange(self, currentPage, pagesCount):
-		self.l_list = []
-		self.l_list.append((currentPage, pagesCount))
-		self.l.setList(self.l_list)
+		l_list = []
+		l_list.append((currentPage, pagesCount))
+		self.l.setList(l_list)
 
 	def postWidgetCreate(self, instance):
 		instance.setSelectionEnable(False)
