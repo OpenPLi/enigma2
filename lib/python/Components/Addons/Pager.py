@@ -1,18 +1,17 @@
-from Components.Renderer.Renderer import Renderer
-from Components.ActionMap import ActionMap
-from skin import parseColor, parseFont, parseScale
+from Components.Addons.GUIAddon import GUIAddon
+from skin import parseColor
 import math
 
-from enigma import eListbox, gFont, eListboxPythonMultiContent, RT_WRAP, RT_VALIGN_TOP, RT_VALIGN_CENTER, RT_HALIGN_LEFT, RT_HALIGN_CENTER, RT_HALIGN_RIGHT, BT_SCALE, BT_ALPHABLEND, BT_KEEP_ASPECT_RATIO, BT_ALIGN_CENTER
+from enigma import eListbox, eListboxPythonMultiContent, BT_ALIGN_CENTER
 from Tools.LoadPixmap import LoadPixmap
 
 from Tools.Directories import resolveFilename, SCOPE_GUISKIN
-from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaBlend
+from Components.MultiContent import MultiContentEntryPixmapAlphaBlend
 
 
-class Pager(Renderer):
+class Pager(GUIAddon):
 	def __init__(self):
-		Renderer.__init__(self)
+		GUIAddon.__init__(self)
 		self.l = eListboxPythonMultiContent()
 		self.l_list = []
 		self.l.setBuildFunc(self.buildEntry)
@@ -22,11 +21,6 @@ class Pager(Renderer):
 		self.pagerForeground = 15774720
 		self.pagerBackground = 624318628
 		self.l.setItemHeight(self.itemHeight)
-		self.l.setFont(1, gFont('Regular', 18))
-		self.l.setFont(2, gFont('Regular', 22))
-		self.l.setFont(3, gFont('Regular', 22))
-		self.l.setFont(4, gFont('Regular', 22))
-		self.l.setFont(5, gFont('Regular', 22))
 		self.picDotPage = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/dot.png"))
 		self.picDotCurPage = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/dotfull.png"))
 
@@ -39,24 +33,11 @@ class Pager(Renderer):
 			self.source.onSelectionChanged.append(self.initPager)
 		self.initPager()
 
-	def bindKeys(self, container):
-		container["pager_actions"] = ActionMap(["DirectionActions"], {
-			"left": self.keyPageUp,
-			"right": self.keyPageDown,
-			"up": self.keyUp,
-			"down": self.keyDown,
-			"upRepeated": self.keyUp,
-		 	"downRepeated": self.keyDown,
-		 	"leftRepeated": self.keyPageUp,
-		 	"rightRepeated": self.keyPageDown
-		}, -1)
-		
 	GUI_WIDGET = eListbox
 
 	def buildEntry(self, currentPage, pageCount):
 		width = self.l.getItemSize().width()
 		xPos = width
-		height = self.l.getItemSize().height()
 
 		if self.picDotPage:
 			pixd_size = self.picDotPage.size()
@@ -99,7 +80,7 @@ class Pager(Renderer):
 		elif hasattr(self.source, 'list'):
 			return len(self.source.list)
 		else:
-			return len(self.source.list)
+			return 0
 
 	def getListItemHeight(self):
 		if hasattr(self.source, 'content'):
@@ -108,36 +89,16 @@ class Pager(Renderer):
 	
 	def initPager(self):
 		listH = self.getSourceHeight()
-		print("srcH: " + str(listH))
 		if listH > 0:
 			current_index = self.getCurrentIndex()
-			print("current_index: " + str(current_index))
 			listCount = self.getListCount()
-			print("listCount: " + str(listCount))
 			itemHeight = self.getListItemHeight()
-			print("itemHeight: " + str(itemHeight))
-			items_per_page = math.ceil(listH/itemHeight) - 1
+			items_per_page = listH//itemHeight
 			if items_per_page > 0:
 				currentPageIndex = math.floor(current_index/items_per_page)
 				pagesCount = math.ceil(listCount/items_per_page) - 1
 				self.selChange(currentPageIndex,pagesCount)
 
-	def keyUp(self):
-		if self.source.instance is not None:
-			self.source.instance.moveSelection(self.source.instance.moveUp)
-
-	def keyDown(self):
-		if self.source.instance is not None:
-			self.source.instance.moveSelection(self.source.instance.moveDown)
-
-	def keyPageDown(self):
-		if self.source.instance is not None:
-			self.source.instance.moveSelection(self.source.instance.pageDown)
-
-	def keyPageUp(self):
-		if self.source.instance is not None:
-			self.source.instance.moveSelection(self.source.instance.pageUp)
-		
 	def applySkin(self, desktop, parent):
 		attribs = [ ]
 		for (attrib, value) in self.skinAttributes:
@@ -153,12 +114,9 @@ class Pager(Renderer):
 				pic = LoadPixmap(resolveFilename(SCOPE_GUISKIN, value))
 				if pic:
 					self.picDotCurPage = pic
-			# elif attrib == "connection":
-			# 	self.source = parent[value]
-			# 	self.initializeKeyBindings(parent)
 			else:
 				attribs.append((attrib, value))
 		self.skinAttributes = attribs
-		return Renderer.applySkin(self, desktop, parent)
+		return GUIAddon.applySkin(self, desktop, parent)
 
 	
