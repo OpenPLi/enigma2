@@ -1,5 +1,4 @@
 from Components.Addons.GUIAddon import GUIAddon
-import math
 
 from enigma import eListbox, eListboxPythonMultiContent, BT_ALIGN_CENTER
 from Tools.LoadPixmap import LoadPixmap
@@ -93,8 +92,8 @@ class Pager(GUIAddon):
 			itemHeight = self.getListItemHeight()
 			items_per_page = listH//itemHeight
 			if items_per_page > 0:
-				currentPageIndex = math.floor(current_index/items_per_page)
-				pagesCount = math.ceil(listCount/items_per_page) - 1
+				currentPageIndex = current_index//items_per_page
+				pagesCount = listCount//items_per_page
 				self.selChange(currentPageIndex,pagesCount)
 
 	def applySkin(self, desktop, parent):
