@@ -1,5 +1,4 @@
 from Components.Addons.GUIAddon import GUIAddon
-from skin import parseColor
 import math
 
 from enigma import eListbox, eListboxPythonMultiContent, BT_ALIGN_CENTER
@@ -12,14 +11,12 @@ from Components.MultiContent import MultiContentEntryPixmapAlphaBlend
 class Pager(GUIAddon):
 	def __init__(self):
 		GUIAddon.__init__(self)
-		self.l = eListboxPythonMultiContent()
-		self.l_list = []
-		self.l.setBuildFunc(self.buildEntry)
-		self.current_index = 0
 		self.itemHeight = 25
 		self.sourceHeight = 25
-		self.pagerForeground = 15774720
-		self.pagerBackground = 624318628
+		self.current_index = 0
+		self.l_list = []
+		self.l = eListboxPythonMultiContent()
+		self.l.setBuildFunc(self.buildEntry)
 		self.l.setItemHeight(self.itemHeight)
 		self.picDotPage = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/dot.png"))
 		self.picDotCurPage = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/dotfull.png"))
@@ -103,11 +100,7 @@ class Pager(GUIAddon):
 	def applySkin(self, desktop, parent):
 		attribs = [ ]
 		for (attrib, value) in self.skinAttributes:
-			if attrib == "pagerForeground":
-				self.pagerForeground = parseColor(value).argb()
-			elif attrib == "pagerBackground":
-				self.pagerBackground = parseColor(value).argb()
-			elif attrib == "picPage":
+			if attrib == "picPage":
 				pic = LoadPixmap(resolveFilename(SCOPE_GUISKIN, value))
 				if pic:
 					self.picDotPage = pic
