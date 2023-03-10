@@ -1,13 +1,12 @@
 from Components.Addons.GUIAddon import GUIAddon
-from Components.ActionMap import ActionMap
-from skin import parseColor, parseFont, parseScale
+from skin import parseColor
 import math
 
-from enigma import eListbox, gFont, eListboxPythonMultiContent, RT_WRAP, RT_VALIGN_TOP, RT_VALIGN_CENTER, RT_HALIGN_LEFT, RT_HALIGN_CENTER, RT_HALIGN_RIGHT, BT_SCALE, BT_ALPHABLEND, BT_KEEP_ASPECT_RATIO, BT_ALIGN_CENTER
+from enigma import eListbox, eListboxPythonMultiContent, BT_ALIGN_CENTER
 from Tools.LoadPixmap import LoadPixmap
 
 from Tools.Directories import resolveFilename, SCOPE_GUISKIN
-from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaBlend
+from Components.MultiContent import MultiContentEntryPixmapAlphaBlend
 
 
 class Pager(GUIAddon):

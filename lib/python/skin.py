@@ -1118,10 +1118,6 @@ def readSkin(screen, skin, names, desktop):
 			# print("[Skin] DEBUG: Widget name='%s'." % wname)
 			usedComponents.add(wname)
 			try:  # Get corresponding "gui" object.
-				# if wclass:
-				# 	relClass = my_import(".".join(("Components", wclass))).__dict__.get(wclass)
-				# 	screen[wname] = relClass()
-				# 	screen[wname].connectRelatedElement(wconnection, screen)
 				attributes = screen[wname].skinAttributes = []
 			except Exception:
 				raise SkinError("Component with name '%s' was not found in skin of screen '%s'" % (wname, name))
@@ -1199,12 +1195,12 @@ def readSkin(screen, skin, names, desktop):
 			if not wconnection:
 				raise SkinError("The widget is from addon type: %s , but no connection is specified." % wclass)
 			
-			wclassname = wclass + "_" + wconnection
+			wclassname = name + "_" + wclass + "_" + wconnection #form a name for the GUI Addon so to be possible to be inited in screen
 
 			usedComponents.add(wclassname)
 
-			screen[wclassname] = addonClass()
-			screen[wclassname].connectRelatedElement(wconnection, screen)
+			screen[wclassname] = addonClass() #init the addon
+			screen[wclassname].connectRelatedElement(wconnection, screen) #connect it to related ellement
 			attributes = screen[wclassname].skinAttributes = []
 			collectAttributes(attributes, widget, context, skinPath, ignore=("addon",))
 
