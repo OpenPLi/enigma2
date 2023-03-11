@@ -1,11 +1,10 @@
 from Components.MenuList import MenuList
 from Screens.Screen import Screen
-from Screens.AudioSelection import AudioSelection
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from ServiceReference import ServiceReference
-from enigma import eListboxPythonMultiContent, eListbox, gFont, iServiceInformation, eServiceCenter, eDVBFrontendParametersSatellite, RT_HALIGN_LEFT, RT_VALIGN_CENTER
-from Tools.Transponder import ConvertToHumanReadable, getChannelNumber
+from enigma import eListboxPythonMultiContent, gFont, iServiceInformation, eServiceCenter, eDVBFrontendParametersSatellite, RT_HALIGN_LEFT, RT_VALIGN_CENTER
+from Tools.Transponder import ConvertToHumanReadable
 from skin import applySkinFactor, fonts, parameters
 
 
@@ -47,13 +46,13 @@ def ServiceInfoListEntry(a, b="", valueType=TYPE_TEXT, param=4, altColor=False):
 			b = str(b)
 	xa, ya, wa, ha = parameters.get("ServiceInfoLeft", applySkinFactor(0, 0, 300, 25))
 	xb, yb, wb, hb = parameters.get("ServiceInfoRight", applySkinFactor(300, 0, 600, 25))
-	color = parameters.get("ServiceInfoAltColor", (0x00FFBF00)) # alternative foreground color
+	color = parameters.get("ServiceInfoAltColor", (0x00FFBF00))  # alternative foreground color
 	res = [True]
 	if b:
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, xa, ya, wa, ha, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, a))
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, xb, yb, wb, hb, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, b))
 	else:
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, xa, ya, wa + wb, ha, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, a, color if altColor else None)) # spread horizontally
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, xa, ya, wa + wb, ha, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, a, color if altColor else None))  # spread horizontally
 	return res
 
 
@@ -133,11 +132,9 @@ class ServiceInfo(Screen):
 			if self.session.nav.getCurrentlyPlayingServiceOrGroup():
 				name = ServiceReference(self.play_service).getServiceName()
 				refstr = self.play_service.toString()
-				reftype = self.play_service.type
 			else:
 				name = _("N/A")
 				refstr = _("N/A")
-				reftype = 0
 			resolution = "-"
 			if self.info:
 				from Components.Converter.PliExtraInfo import codec_data
@@ -239,7 +236,7 @@ class ServiceInfo(Screen):
 
 	def toggle_pid_button(self):
 		if self.number_of_tracks > 1 or self.sub_list:
-			if self.show_all == True:
+			if self.show_all is True:
 				self.show_all = False
 				self["key_yellow"].text = self["yellow"].text = _("Extended PID info")
 				self["Title"].text = _("Service info - service & Basic PID Info")
@@ -265,11 +262,11 @@ class ServiceInfo(Screen):
 					subNumber = "%04X" % (x[1])
 					subList += [(_("DVB Subtitles PID & lang"), "%04X (%d) - %s" % (to_unsigned(subPID), subPID, subLang), TYPE_TEXT)]
 
-				elif x[0] == 1: # Teletext
+				elif x[0] == 1:  # Teletext
 					subNumber = "%x%02x" % (x[3] and x[3] or 8, x[2])
 					subList += [(_("TXT Subtitles page & lang"), "%s - %s" % (subNumber, subLang), TYPE_TEXT)]
 
-				elif x[0] == 2: # File
+				elif x[0] == 2:  # File
 					types = (_("unknown"), _("embedded"), _("SSA file"), _("ASS file"),
 							_("SRT file"), _("VOB file"), _("PGS file"))
 					try:
@@ -308,8 +305,13 @@ class ServiceInfo(Screen):
 			else:
 				tuner = (_("NIM & Type"), chr(ord('A') + frontendData["tuner_number"]) + " - " + frontendData["tuner_type"], TYPE_TEXT)
 			if frontendDataOrg["tuner_type"] == "DVB-S":
-				issy = lambda x: 0 if x == -1 else x
-				t2mi = lambda x: None if x == -1 else str(x)
+
+				def issy(x):
+					return 0 if x == -1 else x
+
+				def t2mi(x):
+					return None if x == -1 else str(x)
+
 				return (tuner,
 					(_("System & Modulation"), frontendData["system"] + " " + frontendData["modulation"], TYPE_TEXT),
 					(_("Orbital position"), frontendData["orbital_position"], TYPE_VALUE_DEC),
