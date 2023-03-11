@@ -1,26 +1,22 @@
 from Components.Addons.GUIAddon import GUIAddon
-from skin import parseColor
-import math
 
 from enigma import eListbox, eListboxPythonMultiContent, BT_ALIGN_CENTER
-from Tools.LoadPixmap import LoadPixmap
+
+from skin import parseScale
+
+from Components.MultiContent import MultiContentEntryPixmapAlphaBlend
 
 from Tools.Directories import resolveFilename, SCOPE_GUISKIN
-from Components.MultiContent import MultiContentEntryPixmapAlphaBlend
+from Tools.LoadPixmap import LoadPixmap
 
 
 class Pager(GUIAddon):
 	def __init__(self):
 		GUIAddon.__init__(self)
 		self.l = eListboxPythonMultiContent()
-		self.l_list = []
 		self.l.setBuildFunc(self.buildEntry)
-		self.current_index = 0
-		self.itemHeight = 25
-		self.sourceHeight = 25
-		self.pagerForeground = 15774720
-		self.pagerBackground = 624318628
-		self.l.setItemHeight(self.itemHeight)
+		self.l.setItemHeight(25)
+		self.spacing = 5
 		self.picDotPage = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/dot.png"))
 		self.picDotCurPage = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/dotfull.png"))
 
@@ -54,17 +50,18 @@ class Pager(GUIAddon):
 								size=(pixd_width, pixd_height),
 								png=self.picDotCurPage if x == currentPage else self.picDotPage,
 								backcolor=None, backcolor_sel=None, flags=BT_ALIGN_CENTER))
-					xPos += pixd_width + 5
+					xPos += pixd_width + self.spacing
 		return res
 
 	def selChange(self, currentPage, pagesCount):
-		self.l_list = []
-		self.l_list.append((currentPage, pagesCount))
-		self.l.setList(self.l_list)
+		l_list = []
+		l_list.append((currentPage, pagesCount))
+		self.l.setList(l_list)
 
 	def postWidgetCreate(self, instance):
 		instance.setSelectionEnable(False)
 		instance.setContent(self.l)
+		instance.allowNativeKeys(False)
 
 	def getCurrentIndex(self):
 		if hasattr(self.source, "index"):
@@ -95,18 +92,14 @@ class Pager(GUIAddon):
 			itemHeight = self.getListItemHeight()
 			items_per_page = listH//itemHeight
 			if items_per_page > 0:
-				currentPageIndex = math.floor(current_index/items_per_page)
-				pagesCount = math.ceil(listCount/items_per_page) - 1
+				currentPageIndex = current_index//items_per_page
+				pagesCount = listCount//items_per_page
 				self.selChange(currentPageIndex,pagesCount)
 
 	def applySkin(self, desktop, parent):
 		attribs = [ ]
-		for (attrib, value) in self.skinAttributes:
-			if attrib == "pagerForeground":
-				self.pagerForeground = parseColor(value).argb()
-			elif attrib == "pagerBackground":
-				self.pagerBackground = parseColor(value).argb()
-			elif attrib == "picPage":
+		for (attrib, value) in self.skinAttributes[:]:
+			if attrib == "picPage":
 				pic = LoadPixmap(resolveFilename(SCOPE_GUISKIN, value))
 				if pic:
 					self.picDotPage = pic
@@ -114,9 +107,11 @@ class Pager(GUIAddon):
 				pic = LoadPixmap(resolveFilename(SCOPE_GUISKIN, value))
 				if pic:
 					self.picDotCurPage = pic
+			elif attrib == "itemHeight":
+				self.l.setItemHeight(parseScale(value))
+			elif attrib == "spacing":
+				self.spacing = parseScale(value)
 			else:
 				attribs.append((attrib, value))
 		self.skinAttributes = attribs
 		return GUIAddon.applySkin(self, desktop, parent)
-
-	

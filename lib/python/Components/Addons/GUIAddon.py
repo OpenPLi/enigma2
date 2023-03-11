@@ -6,11 +6,7 @@ class GUIAddon(GUIComponent):
 
 	def connectRelatedElement(self, relatedElementName, container):
 		self.source = container[relatedElementName]
-		self.bindKeys(container)
 		container.onShow.append(self.onContainerShown)
 
 	def onContainerShown(self):
-		pass
-	
-	def bindKeys(self, container):
 		pass
