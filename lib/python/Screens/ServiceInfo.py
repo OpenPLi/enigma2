@@ -48,7 +48,7 @@ def ServiceInfoListEntry(a, b="", valueType=TYPE_TEXT, param=4, altColor=False):
 	xa, ya, wa, ha = parameters.get("ServiceInfoLeft", applySkinFactor(0, 0, 300, 25))
 	xb, yb, wb, hb = parameters.get("ServiceInfoRight", applySkinFactor(300, 0, 600, 25))
 	color = parameters.get("ServiceInfoAltColor", (0x00FFBF00)) # alternative foreground color
-	res = [None]
+	res = [True]
 	if b:
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, xa, ya, wa, ha, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, a))
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, xb, yb, wb, hb, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, b))
