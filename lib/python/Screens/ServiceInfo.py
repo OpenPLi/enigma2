@@ -108,6 +108,7 @@ class ServiceInfo(Screen):
 		self["key_red"] = self["red"] = Label(_("Exit"))
 
 		self.transponder_info = self.info = self.service = self.feinfo = self.IPTV = None
+		self.show_all = True
 		self.play_service = session.nav.getCurrentlyPlayingServiceReference()
 		if serviceref and not (self.play_service and self.play_service == serviceref):
 			self.type = TYPE_TRANSPONDER_INFO
@@ -174,7 +175,7 @@ class ServiceInfo(Screen):
 				if gamma:
 					resolution += " - %s" % gamma
 			self.audio = self.service and self.service.audioTracks()
-			self.numberofTracks = self.audio and self.audio.getNumberOfTracks() or 0
+			self.number_of_tracks = self.audio and self.audio.getNumberOfTracks() or 0
 			fillList = [
 				(_("Service name"), name, TYPE_TEXT),
 				(_("Videocodec, size & format"), resolution, TYPE_TEXT),
@@ -182,11 +183,11 @@ class ServiceInfo(Screen):
 			]
 			if self.IPTV:  # IPTV 4097 5001, no PIDs shown
 				fillList.append((_("URL"), refstr.split(":")[10].replace("%3a", ":"), TYPE_TEXT))
-				if self.numberofTracks:
+				if self.number_of_tracks:
 					t = self.audio.getCurrentTrack()
-					audioDesc = self.audio.getTrackInfo(t).getDescription()
-					audioLang = self.audio.getTrackInfo(t).getLanguage() or _("Not defined")
-					fillList.append((_("Codec & lang"), "%s - %s" % (audioDesc, audioLang), TYPE_TEXT))
+					audio_desc = self.audio.getTrackInfo(t).getDescription()
+					audio_lang = self.audio.getTrackInfo(t).getLanguage() or _("Not defined")
+					fillList.append((_("Codec & lang"), "%s - %s" % (audio_desc, audio_lang), TYPE_TEXT))
 			else:
 				if ":/" in refstr:  # mp4 videos, dvb-s-t recording
 					fillList.append((_("Filename"), refstr.split(":")[10], TYPE_TEXT))
@@ -194,8 +195,9 @@ class ServiceInfo(Screen):
 					fillList.append((_("Provider"), self.getServiceInfoValue(iServiceInformation.sProvider), TYPE_TEXT))
 					if "%3a//" in refstr:  # live dvb-s-t
 						fillList.append((_("URL"), refstr.split(":")[10].replace("%3a", ":"), TYPE_TEXT))
-				self.subList = self.getSubtitleList()
-				self.togglePIDButton()
+				self.sub_list = self.getSubtitleList()
+				self.track_list, self.cur_track = self.get_track_list()
+				self.toggle_pid_button()
 				nmspc = self.getServiceInfoValue(iServiceInformation.sNamespace)
 				if nmspc != 0 and not isinstance(nmspc, str):
 					fillList.append((_("Namespace & Orbital pos."), self.namespace(nmspc), TYPE_TEXT))
@@ -205,14 +207,17 @@ class ServiceInfo(Screen):
 					(_("Service ID"), self.getServiceInfoValue(iServiceInformation.sSID), TYPE_VALUE_HEX_DEC, 4),
 					(_("Video PID"), self.getServiceInfoValue(iServiceInformation.sVideoPID), TYPE_VALUE_HEX_DEC, 4)
 				])
-				fillList += self.getTrackList()
+				if self.show_all is False:
+					fillList.extend(self.cur_track)
+				else:
+					fillList.extend(self.track_list)
 				fillList.extend([
 					(_("PCR PID"), self.getServiceInfoValue(iServiceInformation.sPCRPID), TYPE_VALUE_HEX_DEC, 4),
 					(_("PMT PID"), self.getServiceInfoValue(iServiceInformation.sPMTPID), TYPE_VALUE_HEX_DEC, 4),
 					(_("TXT PID"), self.getServiceInfoValue(iServiceInformation.sTXTPID), TYPE_VALUE_HEX_DEC, 4)
 				])
-				if self.showAll == True:
-					fillList += self.subList
+				if self.show_all is True:
+					fillList.extend(self.sub_list)
 
 			self.fillList(fillList)
 		elif self.transponder_info:
@@ -232,35 +237,34 @@ class ServiceInfo(Screen):
 				EW = "W"
 		return "%s - %s\xb0 %s" % (namespace, (float(posi) / 10.0), EW)
 
-	def getTrackList(self):
-		trackList = []
-		if self.numberofTracks:
-			currentTrack = self.audio.getCurrentTrack()
-			for i in range(0, self.numberofTracks):
-				audioDesc = self.audio.getTrackInfo(i).getDescription()
-				audioPID = self.audio.getTrackInfo(i).getPID()
-				audioLang = self.audio.getTrackInfo(i).getLanguage()
-				if audioLang == "":
-					audioLang = _("Not defined")
-				if self.showAll or currentTrack == i:
-					trackList += [(_("Audio PID%s, codec & lang") % ((" %s") % (i + 1) if self.numberofTracks > 1 and self.showAll else ""), "%04X (%d) - %s - %s" % (to_unsigned(audioPID), audioPID, audioDesc, audioLang), TYPE_TEXT)]
-				if self.getServiceInfoValue(iServiceInformation.sAudioPID) == "N/A":
-					trackList = [(_("Audio PID, codec & lang"), "N/A - %s - %s" % (audioDesc, audioLang), TYPE_TEXT)]
+	def get_track_list(self):
+		track_list = []
+		cur_track = []
+		if self.number_of_tracks:
+			current_track = self.audio.getCurrentTrack()
+			for i in range(self.number_of_tracks):
+				audio_desc = self.audio.getTrackInfo(i).getDescription()
+				audio_pid = self.audio.getTrackInfo(i).getPID()
+				audio_lang = self.audio.getTrackInfo(i).getLanguage() or _("Not defined")
+				track_list += [(_("Audio PID%s, codec & lang") % ((" %s") % (i + 1) if self.number_of_tracks > 1 else ""), "%04X (%d) - %s - %s" % (to_unsigned(audio_pid), audio_pid, audio_desc, audio_lang), TYPE_TEXT)]
+				if current_track == i:
+					cur_track = [(_("Audio PID, codec & lang"), "%04X (%d) - %s - %s" % (to_unsigned(audio_pid), audio_pid, audio_desc, audio_lang), TYPE_TEXT)]
 		else:
-			trackList = [(_("Audio PID"), "N/A", TYPE_TEXT)]
-		return trackList
+			track_list = cur_track = [(_("Audio PID"), "N/A", TYPE_TEXT)]
+		return track_list, cur_track
 
-	def togglePIDButton(self):
-		if (self["key_yellow"].text == _("Service & PIDs") or self["key_yellow"].text == _("Basic PID info")) and (self.numberofTracks > 1 or self.subList):
-			self.showAll = False
-			self["key_yellow"].text = self["yellow"].text = _("Extended PID info")
-			self["Title"].text = _("Service info - service & Basic PID Info")
-		elif (self.numberofTracks < 2) and not self.subList:
-			self.showAll = False
+	def toggle_pid_button(self):
+		if self.number_of_tracks > 1 or self.sub_list:
+			if self.show_all == True:
+				self.show_all = False
+				self["key_yellow"].text = self["yellow"].text = _("Extended PID info")
+				self["Title"].text = _("Service info - service & Basic PID Info")
+			else:
+				self.show_all = True
+				self["key_yellow"].text = self["yellow"].text = _("Basic PID info")
+				self["Title"].text = _("Service info - service & Extended PID Info")
 		else:
-			self.showAll = True
-			self["key_yellow"].text = self["yellow"].text = _("Basic PID info")
-			self["Title"].text = _("Service info - service & Extended PID Info")
+			self.show_all = False
 
 	def getSubtitleList(self):
 		subtitle = self.service and self.service.subtitle()
@@ -286,7 +290,8 @@ class ServiceInfo(Screen):
 							_("SRT file"), _("VOB file"), _("PGS file"))
 					try:
 						description = types[x[2]]
-					except:
+					except (IndexError, TypeError) as er:
+						print("[ServiceInfo] Error in getSubtitleList:", er)
 						description = _("unknown") + ": %s" % x[2]
 					subNumber = str(int(subNumber) + 1)
 					subList += [(_("Other Subtitles & lang"), "%s - %s - %s" % (subNumber, description, subLang), TYPE_TEXT)]
@@ -294,6 +299,7 @@ class ServiceInfo(Screen):
 
 	def ShowTransponderInformation(self):
 		if self.type == TYPE_SERVICE_INFO and not self.IPTV:
+			self.show_all = True
 			self["key_yellow"].text = self["yellow"].text = _("Service & PIDs")
 			frontendData = self.feinfo and self.feinfo.getAll(True)
 			if frontendData:
@@ -374,6 +380,7 @@ class ServiceInfo(Screen):
 
 	def ShowECMInformation(self):
 		if self.info and not self.IPTV:
+			self.show_all = True
 			from Components.Converter.PliExtraInfo import caid_data
 			self["Title"].text = _("Service info - ECM Info")
 			self["key_yellow"].text = self["yellow"].text = _("Service & PIDs")
