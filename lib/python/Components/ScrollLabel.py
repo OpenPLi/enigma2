@@ -28,7 +28,13 @@ class ScrollLabel(GUIComponent):
 			scrollbar_attribs = []
 			scrollbarAttrib = ["borderColor", "borderWidth", "scrollbarSliderForegroundColor", "scrollbarSliderBorderColor"]
 			for (attrib, value) in self.skinAttributes[:]:
-				if attrib in scrollbarAttrib:
+				if attrib == "scrollbarMode":
+					if value == "showNever":
+						self.showscrollbar = False
+					else:
+						self.showscrollbar = True
+					self.skinAttributes.remove((attrib, value))
+				elif attrib in scrollbarAttrib:
 					scrollbar_attribs.append((attrib, value))
 					self.skinAttributes.remove((attrib, value))
 				elif attrib in ("scrollbarSliderPicture", "sliderPixmap"):
