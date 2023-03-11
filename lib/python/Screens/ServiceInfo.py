@@ -196,8 +196,10 @@ class ServiceInfo(Screen):
 						fillList.append((_("URL"), refstr.split(":")[10].replace("%3a", ":"), TYPE_TEXT))
 				self.subList = self.getSubtitleList()
 				self.togglePIDButton()
+				nmspc = self.getServiceInfoValue(iServiceInformation.sNamespace)
+				if nmspc != 0 and not isinstance(nmspc, str):
+					fillList.append((_("Namespace & Orbital pos."), self.namespace(nmspc), TYPE_TEXT))
 				fillList.extend([
-					(_("Namespace & Orbital pos."), self.namespace(self.getServiceInfoValue(iServiceInformation.sNamespace)), TYPE_TEXT),
 					(_("TSID"), self.getServiceInfoValue(iServiceInformation.sTSID), TYPE_VALUE_HEX_DEC, 4),
 					(_("ONID"), self.getServiceInfoValue(iServiceInformation.sONID), TYPE_VALUE_HEX_DEC, 4),
 					(_("Service ID"), self.getServiceInfoValue(iServiceInformation.sSID), TYPE_VALUE_HEX_DEC, 4),
@@ -217,8 +219,6 @@ class ServiceInfo(Screen):
 			self.fillList(self.getFEData(self.transponder_info))
 
 	def namespace(self, nmspc):
-		if isinstance(nmspc, str):
-			return "N/A - N/A"
 		namespace = "%08X" % (to_unsigned(nmspc))
 		if namespace[:4] == "EEEE":
 			return "%s - DVB-T" % (namespace)
