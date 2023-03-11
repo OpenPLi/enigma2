@@ -72,6 +72,14 @@ class ServiceInfoList(GUIComponent):
 	def postWidgetCreate(self, instance):
 		self.instance.setContent(self.l)
 
+	def pageUp(self):
+		if self.instance is not None:
+			self.instance.moveSelection(self.instance.pageUp)
+
+	def pageDown(self):
+		if self.instance is not None:
+			self.instance.moveSelection(self.instance.pageDown)
+
 
 TYPE_SERVICE_INFO = 1
 TYPE_TRANSPONDER_INFO = 2
@@ -81,17 +89,21 @@ class ServiceInfo(Screen):
 	def __init__(self, session, serviceref=None):
 		Screen.__init__(self, session)
 
-		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
+		self["infolist"] = ServiceInfoList([])
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions"],
 		{
 			"ok": self.close,
 			"cancel": self.close,
 			"red": self.close,
 			"green": self.ShowECMInformation,
 			"yellow": self.ShowServiceInformation,
-			"blue": self.ShowTransponderInformation
+			"blue": self.ShowTransponderInformation,
+			"up": self["infolist"].pageUp,
+			"down": self["infolist"].pageDown,
+			"left": self["infolist"].pageUp,
+			"right": self["infolist"].pageDown
 		}, -1)
 
-		self["infolist"] = ServiceInfoList([])
 		self.setTitle(_("Service info"))
 		self["key_red"] = self["red"] = Label(_("Exit"))
 
