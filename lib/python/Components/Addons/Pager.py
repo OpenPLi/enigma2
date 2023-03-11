@@ -22,7 +22,7 @@ class Pager(GUIAddon):
 
 	def onContainerShown(self):
 		# disable listboxes default scrollbars
-		if self.source.instance:
+		if hasattr(self.source, "instance") and hasattr(self.source.instance, "setScrollbarMode"):
 			self.source.instance.setScrollbarMode(2)
 
 		if self.initPager not in self.source.onSelectionChanged:
@@ -85,16 +85,23 @@ class Pager(GUIAddon):
 		return self.source.l.getItemSize().height()
 	
 	def initPager(self):
-		listH = self.getSourceHeight()
-		if listH > 0:
-			current_index = self.getCurrentIndex()
-			listCount = self.getListCount()
-			itemHeight = self.getListItemHeight()
-			items_per_page = listH//itemHeight
-			if items_per_page > 0:
-				currentPageIndex = current_index//items_per_page
-				pagesCount = listCount//items_per_page
-				self.selChange(currentPageIndex,pagesCount)
+		if self.source.__class__.__name__ == "ScrollLabel":
+			currentPageIndex = self.source.curPos//self.source.pageHeight
+			if not ((self.source.TotalTextHeight - self.source.curPos) % self.source.pageHeight):
+				currentPageIndex += 1
+			pagesCount = -(-self.source.TotalTextHeight//self.source.pageHeight) - 1
+			self.selChange(currentPageIndex,pagesCount)
+		else:
+			listH = self.getSourceHeight()
+			if listH > 0:
+				current_index = self.getCurrentIndex()
+				listCount = self.getListCount()
+				itemHeight = self.getListItemHeight()
+				items_per_page = listH//itemHeight
+				if items_per_page > 0:
+					currentPageIndex = current_index//items_per_page
+					pagesCount = listCount//items_per_page
+					self.selChange(currentPageIndex,pagesCount)
 
 	def applySkin(self, desktop, parent):
 		attribs = [ ]
