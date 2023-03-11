@@ -1,4 +1,4 @@
-from Components.GUIComponent import GUIComponent
+from Components.MenuList import MenuList
 from Screens.Screen import Screen
 from Screens.AudioSelection import AudioSelection
 from Components.ActionMap import ActionMap
@@ -57,28 +57,12 @@ def ServiceInfoListEntry(a, b="", valueType=TYPE_TEXT, param=4, altColor=False):
 	return res
 
 
-class ServiceInfoList(GUIComponent):
-	def __init__(self, source):
-		GUIComponent.__init__(self)
-		self.l = eListboxPythonMultiContent()
-		self.list = source
-		self.l.setList(self.list)
+class ServiceInfoList(MenuList):
+	def __init__(self, list):
+		MenuList.__init__(self, list, content=eListboxPythonMultiContent)
 		font = fonts.get("ServiceInfo", applySkinFactor("Regular", 21, 25))
 		self.l.setFont(0, gFont(font[0], font[1]))
 		self.l.setItemHeight(font[2])
-
-	GUI_WIDGET = eListbox
-
-	def postWidgetCreate(self, instance):
-		self.instance.setContent(self.l)
-
-	def pageUp(self):
-		if self.instance is not None:
-			self.instance.moveSelection(self.instance.pageUp)
-
-	def pageDown(self):
-		if self.instance is not None:
-			self.instance.moveSelection(self.instance.pageDown)
 
 
 TYPE_SERVICE_INFO = 1
@@ -366,7 +350,7 @@ class ServiceInfo(Screen):
 					tlist.append(ServiceInfoListEntry(item[0] + ":", value, item[2]))
 				else:
 					tlist.append(ServiceInfoListEntry(item[0] + ":", value, item[2], item[3]))
-		self["infolist"].l.setList(tlist)
+		self["infolist"].setList(tlist)
 
 	def getServiceInfoValue(self, what):
 		if self.info:
@@ -414,4 +398,4 @@ class ServiceInfo(Screen):
 				tlist.append(ServiceInfoListEntry(formatstring % (caid[1], caid[1], caid[0], CaIdDescription, extra_info), altColor=altColor))
 			if not tlist:
 				tlist.append(ServiceInfoListEntry(_("No ECMPids available (FTA Service)")))
-			self["infolist"].l.setList(tlist)
+			self["infolist"].setList(tlist)
