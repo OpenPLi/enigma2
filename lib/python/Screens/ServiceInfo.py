@@ -157,6 +157,9 @@ class ServiceInfo(Screen):
 					resolution += " - %s" % gamma
 			self.audio = self.service and self.service.audioTracks()
 			self.number_of_tracks = self.audio and self.audio.getNumberOfTracks() or 0
+			self.sub_list = self.getSubtitleList()
+			self.toggle_pid_button()
+			track_list = self.get_track_list()
 			fillList = [
 				(_("Service name"), name, TYPE_TEXT),
 				(_("Videocodec, size & format"), resolution, TYPE_TEXT),
@@ -164,11 +167,7 @@ class ServiceInfo(Screen):
 			]
 			if self.IPTV:  # IPTV 4097 5001, no PIDs shown
 				fillList.append((_("URL"), refstr.split(":")[10].replace("%3a", ":"), TYPE_TEXT))
-				if self.number_of_tracks:
-					t = self.audio.getCurrentTrack()
-					audio_desc = self.audio.getTrackInfo(t).getDescription()
-					audio_lang = self.audio.getTrackInfo(t).getLanguage() or _("Not defined")
-					fillList.append((_("Codec & lang"), "%s - %s" % (audio_desc, audio_lang), TYPE_TEXT))
+				fillList.extend(track_list)
 			else:
 				if ":/" in refstr:  # mp4 videos, dvb-s-t recording
 					fillList.append((_("Filename"), refstr.split(":")[10], TYPE_TEXT))
@@ -176,9 +175,6 @@ class ServiceInfo(Screen):
 					fillList.append((_("Provider"), self.getServiceInfoValue(iServiceInformation.sProvider), TYPE_TEXT))
 					if "%3a//" in refstr:  # live dvb-s-t
 						fillList.append((_("URL"), refstr.split(":")[10].replace("%3a", ":"), TYPE_TEXT))
-				self.sub_list = self.getSubtitleList()
-				self.track_list, self.cur_track = self.get_track_list()
-				self.toggle_pid_button()
 				fillList.extend([
 					(_("Namespace & Orbital pos."), self.namespace(self.getServiceInfoValue(iServiceInformation.sNamespace)), TYPE_TEXT),
 					(_("TSID"), self.getServiceInfoValue(iServiceInformation.sTSID), TYPE_VALUE_HEX_DEC, 4),
@@ -186,10 +182,7 @@ class ServiceInfo(Screen):
 					(_("Service ID"), self.getServiceInfoValue(iServiceInformation.sSID), TYPE_VALUE_HEX_DEC, 4),
 					(_("Video PID"), self.getServiceInfoValue(iServiceInformation.sVideoPID), TYPE_VALUE_HEX_DEC, 4)
 				])
-				if self.show_all is False:
-					fillList.extend(self.cur_track)
-				else:
-					fillList.extend(self.track_list)
+				fillList.extend(track_list)
 				fillList.extend([
 					(_("PCR PID"), self.getServiceInfoValue(iServiceInformation.sPCRPID), TYPE_VALUE_HEX_DEC, 4),
 					(_("PMT PID"), self.getServiceInfoValue(iServiceInformation.sPMTPID), TYPE_VALUE_HEX_DEC, 4),
@@ -219,20 +212,25 @@ class ServiceInfo(Screen):
 		return "%s - %s\xb0 %s" % (namespace, (float(posi) / 10.0), EW)
 
 	def get_track_list(self):
-		track_list = []
-		cur_track = []
 		if self.number_of_tracks:
-			current_track = self.audio.getCurrentTrack()
-			for i in range(self.number_of_tracks):
+
+			def create_list(i):
 				audio_desc = self.audio.getTrackInfo(i).getDescription()
 				audio_pid = self.audio.getTrackInfo(i).getPID()
 				audio_lang = self.audio.getTrackInfo(i).getLanguage() or _("Not defined")
-				track_list += [(_("Audio PID%s, codec & lang") % ((" %s") % (i + 1) if self.number_of_tracks > 1 else ""), "%04X (%d) - %s - %s" % (to_unsigned(audio_pid), audio_pid, audio_desc, audio_lang), TYPE_TEXT)]
-				if current_track == i:
-					cur_track = [(_("Audio PID, codec & lang"), "%04X (%d) - %s - %s" % (to_unsigned(audio_pid), audio_pid, audio_desc, audio_lang), TYPE_TEXT)]
-		else:
-			track_list = cur_track = [(_("Audio PID"), "N/A", TYPE_TEXT)]
-		return track_list, cur_track
+				if self.IPTV:
+					return (_("Codec & lang"), "%s - %s" % (audio_desc, audio_lang), TYPE_TEXT)
+				else:
+					return (_("Audio PID%s, codec & lang") % ((" %s") % (i + 1) if self.number_of_tracks > 1 and self.show_all else ""), "%04X (%d) - %s - %s" % (to_unsigned(audio_pid), audio_pid, audio_desc, audio_lang), TYPE_TEXT)
+
+			if self.IPTV or not self.show_all:
+				return [create_list(self.audio.getCurrentTrack())]
+			else:
+				track_list = []
+				for i in range(self.number_of_tracks):
+					track_list.append(create_list(i))
+				return track_list
+		return [(_("Audio PID"), None if self.IPTV else "N/A", TYPE_TEXT)]
 
 	def toggle_pid_button(self):
 		if self.number_of_tracks > 1 or self.sub_list:
