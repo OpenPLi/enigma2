@@ -423,7 +423,10 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 				dns.append(self.primaryDNS.value)
 			if self.secondaryDNS.value != [0, 0, 0, 0] and self.secondaryDNS.value not in dns:
 				dns.append(self.secondaryDNS.value)
-			iNetwork.setAdapterAttribute(self.iface, "dns-nameservers", dns)
+			if dns and not self.dhcpConfigEntry.value:
+				iNetwork.setAdapterAttribute(self.iface, "dns-nameservers", dns)
+			else:
+				iNetwork.removeAdapterAttribute(self.iface, "dns-nameservers")
 			if self.extended is not None and self.configStrings is not None:
 				iNetwork.setAdapterAttribute(self.iface, "configStrings", self.configStrings(self.iface))
 				self.ws.writeConfig(self.iface)
