@@ -12,6 +12,7 @@ public:
 	~eListboxPythonStringContent();
 
 	void setList(SWIG_PYOBJECT(ePyObject) list);
+	void setOrientation(int orientation);
 	void setItemHeight(int height);
 	void setItemWidth(int width);
 	PyObject *getCurrentSelection();
@@ -43,12 +44,14 @@ protected:
 
 	int getItemHeight() { return m_itemheight; }
 	int getItemWidth() { return m_itemwidth; }
+	int getOrientation() { return m_orientation; }
 
 protected:
 	ePyObject m_list;
 	int m_cursor, m_saved_cursor;
 	eSize m_itemsize;
 	ePtr<gFont> m_font;
+	int m_orientation;
 	int m_itemheight;
 	int m_itemwidth;
 #endif
@@ -82,6 +85,7 @@ public:
 	void setFont(int fnt, gFont *font);
 	void setBuildFunc(SWIG_PYOBJECT(ePyObject) func);
 	void setSelectableFunc(SWIG_PYOBJECT(ePyObject) func);
+	void setOrientation(int orientation);
 	void setItemHeight(int height);
 	void setItemWidth(int width);
 	void setSelectionClip(eRect &rect, bool update=false);

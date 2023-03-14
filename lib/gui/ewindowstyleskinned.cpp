@@ -111,21 +111,21 @@ void eWindowStyleSkinned::drawBorder(gPainter &painter, const eRect &pos, struct
 
 	if (tl)
 	{
-		painter.blit(tl, ePoint(x, pos.top()));
+		painter.blit(tl, ePoint(x, pos.top()), eRect(), gPainter::BT_ALPHABLEND);
 		x += tl->size().width();
 	}
 
 	if (tr)
 	{
 		xm -= tr->size().width();
-		painter.blit(tr, ePoint(xm, pos.top()), pos);
+		painter.blit(tr, ePoint(xm, pos.top()), pos, gPainter::BT_ALPHABLEND);
 	}
 
 	if (t)
 	{
 		while (x < xm)
 		{
-			painter.blit(t, ePoint(x, pos.top()), eRect(x, pos.top(), xm - x, pos.height()));
+			painter.blit(t, ePoint(x, pos.top()), eRect(x, pos.top(), xm - x, pos.height()), gPainter::BT_ALPHABLEND);
 			x += t->size().width();
 		}
 	}
@@ -135,21 +135,21 @@ void eWindowStyleSkinned::drawBorder(gPainter &painter, const eRect &pos, struct
 
 	if (bl)
 	{
-		painter.blit(bl, ePoint(pos.left(), pos.bottom()-bl->size().height()));
+		painter.blit(bl, ePoint(pos.left(), pos.bottom()-bl->size().height()), eRect(), gPainter::BT_ALPHABLEND);
 		x += bl->size().width();
 	}
 
 	if (br)
 	{
 		xm -= br->size().width();
-		painter.blit(br, ePoint(xm, pos.bottom()-br->size().height()), eRect(x, pos.bottom()-br->size().height(), pos.width() - x, bl->size().height()));
+		painter.blit(br, ePoint(xm, pos.bottom()-br->size().height()), eRect(x, pos.bottom()-br->size().height(), pos.width() - x, bl->size().height()), gPainter::BT_ALPHABLEND);
 	}
 
 	if (b)
 	{
 		while (x < xm)
 		{
-			painter.blit(b, ePoint(x, pos.bottom()-b->size().height()), eRect(x, pos.bottom()-b->size().height(), xm - x, pos.height()));
+			painter.blit(b, ePoint(x, pos.bottom()-b->size().height()), eRect(x, pos.bottom()-b->size().height(), xm - x, pos.height()), gPainter::BT_ALPHABLEND);
 			x += b->size().width();
 		}
 	}
@@ -168,7 +168,7 @@ void eWindowStyleSkinned::drawBorder(gPainter &painter, const eRect &pos, struct
 	{
 		while (y < ym)
 		{
-			painter.blit(l, ePoint(pos.left(), y), eRect(pos.left(), y, pos.width(), ym - y));
+			painter.blit(l, ePoint(pos.left(), y), eRect(pos.left(), y, pos.width(), ym - y), gPainter::BT_ALPHABLEND);
 			y += l->size().height();
 		}
 	}
@@ -188,7 +188,7 @@ void eWindowStyleSkinned::drawBorder(gPainter &painter, const eRect &pos, struct
 	{
 		while (y < ym)
 		{
-			painter.blit(r, ePoint(pos.right() - r->size().width(), y), eRect(pos.right()-r->size().width(), y, r->size().width(), ym - y));
+			painter.blit(r, ePoint(pos.right() - r->size().width(), y), eRect(pos.right()-r->size().width(), y, r->size().width(), ym - y), gPainter::BT_ALPHABLEND);
 			y += r->size().height();
 		}
 	}

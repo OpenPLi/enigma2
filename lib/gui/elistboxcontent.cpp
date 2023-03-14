@@ -37,9 +37,9 @@ iListboxContent::iListboxContent(): m_listbox(0)
 void iListboxContent::setListbox(eListbox *lb)
 {
 	m_listbox = lb;
-	eDebug("[eListBox] setListbox + getItemWidth +  getItemHeight");
 	m_listbox->setItemHeight(getItemHeight());
 	m_listbox->setItemWidth(getItemWidth());
+	m_listbox->setOrientation(getOrientation());
 }
 
 int iListboxContent::currentCursorSelectable()
@@ -52,7 +52,7 @@ int iListboxContent::currentCursorSelectable()
 DEFINE_REF(eListboxPythonStringContent);
 
 eListboxPythonStringContent::eListboxPythonStringContent()
-	:m_cursor(0), m_saved_cursor(0), m_itemheight(25), m_itemwidth(25)
+	:m_cursor(0), m_saved_cursor(0), m_itemheight(25), m_itemwidth(25), m_orientation(1)
 {
 }
 
@@ -275,7 +275,7 @@ void eListboxPythonStringContent::paint(gPainter &painter, eWindowStyle &style, 
 			 string, flags, border_color, border_size);
 		}
 
-		if (selected && (!local_style || !local_style->m_selection))
+		if (selected && (!local_style || !local_style->m_selection) && (!local_style || !local_style->m_border_set))
 			style.drawFrame(painter, eRect(offset, m_itemsize), eWindowStyle::frameListboxEntry);
 	}
 
@@ -298,10 +298,17 @@ void eListboxPythonStringContent::setList(ePyObject list)
 		m_listbox->entryReset(false);
 }
 
+void eListboxPythonStringContent::setOrientation(int orientation)
+{
+	m_orientation = orientation;
+	if (m_listbox){
+		m_listbox->setOrientation(orientation);
+	}
+}
+
 void eListboxPythonStringContent::setItemHeight(int height)
 {
 	m_itemheight = height;
-	eDebug("[eListboxPythonStringContent] setItemHeight %d", height);
 	if (m_listbox)
 		m_listbox->setItemHeight(height);
 }
@@ -309,7 +316,6 @@ void eListboxPythonStringContent::setItemHeight(int height)
 void eListboxPythonStringContent::setItemWidth(int width)
 {
 	m_itemwidth = width;
-	eDebug("[eListboxPythonStringContent] setItemWidth %d", width);
 	if (m_listbox)
 		m_listbox->setItemWidth(width);
 }
@@ -636,7 +642,7 @@ void eListboxPythonConfigContent::paint(gPainter &painter, eWindowStyle &style, 
 				Py_DECREF(value);
 		}
 
-		if (selected && (!local_style || !local_style->m_selection))
+		if (selected && (!local_style || !local_style->m_selection) && (!local_style || !local_style->m_border_set))
 			style.drawFrame(painter, eRect(offset, m_itemsize), eWindowStyle::frameListboxEntry);
 	}
 
@@ -1251,7 +1257,7 @@ void eListboxPythonMultiContent::paint(gPainter &painter, eWindowStyle &style, c
 		}
 	}
 
-	if (selected && !sel_clip.valid() && (!local_style || !local_style->m_selection))
+	if (selected && !sel_clip.valid() && (!local_style || !local_style->m_selection) && (!local_style || !local_style->m_border_set))
 		style.drawFrame(painter, eRect(offset, m_itemsize), eWindowStyle::frameListboxEntry);
 
 error_out:
@@ -1326,12 +1332,18 @@ void eListboxPythonMultiContent::setFont(int fnt, gFont *font)
 		m_font.erase(fnt);
 }
 
+void eListboxPythonMultiContent::setOrientation(int orientation)
+{
+	m_orientation = orientation;
+	if (m_listbox){
+		m_listbox->setOrientation(orientation);
+	}
+}
+
 void eListboxPythonMultiContent::setItemHeight(int height)
 {
 	m_itemheight = height;
-	eDebug("[eListboxPythonMultiContent] setItemHeight %d", height);
 	if (m_listbox){
-		eDebug("[eListboxPythonMultiContent] Send height to eListBox!!!");
 		m_listbox->setItemHeight(height);
 	}
 }
@@ -1339,9 +1351,7 @@ void eListboxPythonMultiContent::setItemHeight(int height)
 void eListboxPythonMultiContent::setItemWidth(int width)
 {
 	m_itemwidth = width;
-	eDebug("[eListboxPythonMultiContent] setItemWidth %d", width);
 	if (m_listbox){
-		eDebug("[eListboxPythonMultiContent] Send width to eListBox!!!");
 		m_listbox->setItemWidth(width);
 	}
 }
