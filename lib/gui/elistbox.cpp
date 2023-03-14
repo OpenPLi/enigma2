@@ -4,14 +4,13 @@
 #include <lib/actions/action.h>
 
 eListbox::eListbox(eWidget *parent) :
-	eWidget(parent), m_scrollbar_mode(showNever), m_orientation(orVertical), m_prev_scrollbar_page(-1),
-	m_content_changed(false), m_enabled_wrap_around(false), m_scrollbar_width(10),
-	m_top(0), m_left(0), m_selected(0), m_itemheight(25), m_itemwidth(25),
+	eWidget(parent), m_scrollbar_mode(showNever), m_prev_scrollbar_page(-1),
+	m_content_changed(false), m_enabled_wrap_around(false), m_scrollbar_width(10), m_scrollbar_height(10),
+	m_top(0), m_left(0), m_selected(0), m_itemheight(25), m_itemwidth(25), m_orientation(orVertical),
 	m_items_per_page(0), m_selection_enabled(1), m_native_keys_bound(false), m_scrollbar(nullptr)
 {
 	memset(static_cast<void*>(&m_style), 0, sizeof(m_style));
 	m_style.m_text_offset = ePoint(1,1);
-//	setContent(new eListboxStringContent());
 
 	allowNativeKeys(true);
 }
@@ -45,7 +44,11 @@ void eListbox::setScrollbarMode(int mode)
 		m_scrollbar = new eSlider(this);
 		m_scrollbar->hide();
 		m_scrollbar->setBorderWidth(1);
-		m_scrollbar->setOrientation(eSlider::orVertical);
+		if (m_orientation == orVertical) {
+			m_scrollbar->setOrientation(eSlider::orVertical);
+		} else {
+			m_scrollbar->setOrientation(eSlider::orHorizontal);
+		}
 		m_scrollbar->setRange(0,100);
 		if (m_scrollbarbackgroundpixmap) m_scrollbar->setBackgroundPixmap(m_scrollbarbackgroundpixmap);
 		if (m_scrollbarpixmap) m_scrollbar->setPixmap(m_scrollbarpixmap);
@@ -372,19 +375,36 @@ int eListbox::getOrientation()
 
 void eListbox::updateScrollBar()
 {
-	if (!m_content || m_scrollbar_mode == showNever || m_orientation == orHorizontal )
+	if (!m_content)
 		return;
+
+	int width = size().width();
+	int height = size().height();
+
+	if (m_scrollbar_mode == showNever) {
+		if (m_orientation == orVertical){
+			m_content->setSize(eSize(width, m_itemheight));
+		} else {
+			m_content->setSize(eSize(m_itemwidth, height));
+		}
+		return;
+	}
+	
 	int entries = m_content->size();
 	if (m_content_changed)
 	{
-		int width = size().width();
-		int height = size().height();
 		m_content_changed = false;
-		if (m_scrollbar_mode == showLeft)
+		if (m_scrollbar_mode == showLeft || m_scrollbar_mode == showTop)
 		{
-			m_content->setSize(eSize(width-m_scrollbar_width-5, m_itemheight));
-			m_scrollbar->move(ePoint(0, 0));
-			m_scrollbar->resize(eSize(m_scrollbar_width, height));
+			if (m_orientation == orVertical) {
+				m_content->setSize(eSize(width-m_scrollbar_width-5, m_itemheight));
+				m_scrollbar->move(ePoint(0, 0));
+				m_scrollbar->resize(eSize(m_scrollbar_width, height));
+			} else {
+				m_content->setSize(eSize(m_itemwidth, height-m_scrollbar_height-5));
+				m_scrollbar->move(ePoint(0, 0));
+				m_scrollbar->resize(eSize(width, m_scrollbar_height));
+			}
 			if (entries > m_items_per_page)
 			{
 				m_scrollbar->show();
@@ -396,27 +416,51 @@ void eListbox::updateScrollBar()
 		}
 		else if (entries > m_items_per_page || m_scrollbar_mode == showAlways)
 		{
-			m_scrollbar->move(ePoint(width-m_scrollbar_width, 0));
-			m_scrollbar->resize(eSize(m_scrollbar_width, height));
-			m_content->setSize(eSize(width-m_scrollbar_width-5, m_itemheight));
-			m_scrollbar->show();
+			if (m_orientation == orVertical) {
+				if (m_scrollbar_mode != showNever) {
+					m_scrollbar->move(ePoint(width-m_scrollbar_width, 0));
+					m_scrollbar->resize(eSize(m_scrollbar_width, height));
+					m_content->setSize(eSize(width-m_scrollbar_width-5, m_itemheight));
+				} else {
+					m_content->setSize(eSize(width, m_itemheight));
+				}
+			} else {
+				if (m_scrollbar_mode != showNever) {
+					m_scrollbar->move(ePoint(0, height-m_scrollbar_height));
+					m_scrollbar->resize(eSize(width, m_scrollbar_height));
+					m_content->setSize(eSize(m_itemwidth, height-m_scrollbar_height-5));
+				} else {
+					m_content->setSize(eSize(m_itemwidth, height));
+				}
+			}
+			if (m_scrollbar_mode != showNever) {
+				m_scrollbar->show();
+			} else {
+				m_scrollbar->hide();
+			}
 		}
 		else
 		{
-			m_content->setSize(eSize(width, m_itemheight));
+			if (m_orientation == orVertical)
+				m_content->setSize(eSize(width, m_itemheight));
+			else
+				m_content->setSize(eSize(m_itemwidth, height));
+
 			m_scrollbar->hide();
 		}
 	}
 	if (m_items_per_page && entries)
 	{
-		int curVisiblePage = m_top / m_items_per_page;
+		int topleft = m_orientation == orVertical ? m_top : m_left;
+
+		int curVisiblePage = topleft / m_items_per_page;
 		if (m_prev_scrollbar_page != curVisiblePage)
 		{
 			m_prev_scrollbar_page = curVisiblePage;
 			int pages = entries / m_items_per_page;
 			if ((pages*m_items_per_page) < entries)
 				++pages;
-			int start=(m_top*100)/(pages*m_items_per_page);
+			int start=(topleft*100)/(pages*m_items_per_page);
 			int vis=(m_items_per_page*100+pages*m_items_per_page-1)/(pages*m_items_per_page);
 			if (vis < 3)
 				vis=3;
@@ -441,125 +485,149 @@ int eListbox::event(int event, void *data, void *data2)
 {
 	switch (event)
 	{
-	case evtPaint:
-	{
-		ePtr<eWindowStyle> style;
+		case evtPaint:
+		{
+			ePtr<eWindowStyle> style;
 
-		if (!m_content)
-			return eWidget::event(event, data, data2);
-		ASSERT(m_content);
+			if (!m_content)
+				return eWidget::event(event, data, data2);
+			ASSERT(m_content);
 
-		getStyle(style);
+			getStyle(style);
 
-		if (!m_content)
+			if (!m_content)
+				return 0;
+
+			gPainter &painter = *(gPainter*)data2;
+
+			m_content->cursorSave();
+			if (m_orientation == orVertical)
+			{
+				m_content->cursorMove(m_top - m_selected);
+			}
+			else
+			{
+				m_content->cursorMove(m_left - m_selected);
+			}
+
+			gRegion entryrect = m_orientation == orVertical ? eRect(0, 0, size().width(), m_itemheight) : eRect(0, 0, m_itemwidth, size().height());
+			const gRegion &paint_region = *(gRegion*)data;
+
+			int xoffset = 0;
+			int yoffset = 0;
+			if (m_scrollbar && m_scrollbar_mode == showLeft)
+			{
+				xoffset = m_scrollbar->size().width() + 5;
+			}
+
+			if (m_scrollbar && m_scrollbar_mode == showTop)
+			{
+				yoffset = m_scrollbar->size().height() + 5;
+			}
+			
+			if (m_orientation == orVertical)
+			{
+				for (int y = 0, i = 0; i <= m_items_per_page; y += m_itemheight, ++i)
+				{
+					gRegion entry_clip_rect = paint_region & entryrect;
+
+					if (!entry_clip_rect.empty())
+						m_content->paint(painter, *style, ePoint(xoffset, y), m_selected == m_content->cursorGet() && m_content->size() && m_selection_enabled);
+
+						/* (we could clip with entry_clip_rect, but
+						this shouldn't change the behavior of any
+						well behaving content, so it would just
+						degrade performance without any gain.) */
+
+					m_content->cursorMove(+1);
+					entryrect.moveBy(ePoint(0, m_itemheight));
+				}
+			}
+			else
+			{
+				for (int x = 0, i = 0; i <= m_items_per_page; x += m_itemwidth, ++i)
+				{
+					gRegion entry_clip_rect = paint_region & entryrect;
+
+					if (!entry_clip_rect.empty())
+						m_content->paint(painter, *style, ePoint(x, yoffset), m_selected == m_content->cursorGet() && m_content->size() && m_selection_enabled);
+
+						/* (we could clip with entry_clip_rect, but
+						this shouldn't change the behavior of any
+						well behaving content, so it would just
+						degrade performance without any gain.) */
+
+					m_content->cursorMove(+1);
+					entryrect.moveBy(ePoint(m_itemwidth, 0));
+				}
+			}
+
+			// clear/repaint empty/unused space between scrollbar and listboxentrys
+			if (m_scrollbar_mode == showLeft)
+			{
+				if (m_scrollbar)
+				{
+					style->setStyle(painter, eWindowStyle::styleListboxNormal);
+					if (m_scrollbar->isVisible())
+					{
+						painter.clip(eRect(m_scrollbar->position() + ePoint(m_scrollbar->size().width(), 0), eSize(5,m_scrollbar->size().height())));
+					}
+					else
+					{
+						painter.clip(eRect(m_scrollbar->position(), eSize(m_scrollbar->size().width() + 5, m_scrollbar->size().height())));
+					}
+					painter.clear();
+					painter.clippop();
+				}
+			} else if (m_scrollbar_mode == showTop) {
+				if (m_scrollbar)
+				{
+					style->setStyle(painter, eWindowStyle::styleListboxNormal);
+					if (m_scrollbar->isVisible())
+					{
+						painter.clip(eRect(m_scrollbar->position() + ePoint(0, m_scrollbar->size().height()), eSize(m_scrollbar->size().width(), 5)));
+					}
+					else
+					{
+						painter.clip(eRect(m_scrollbar->position(), eSize(m_scrollbar->size().width(), m_scrollbar->size().height() + 5)));
+					}
+					painter.clear();
+					painter.clippop();
+				}
+			}
+			else
+			{
+				if (m_scrollbar && m_scrollbar->isVisible())
+				{
+					style->setStyle(painter, eWindowStyle::styleListboxNormal);
+					if (m_orientation == orVertical) {
+						painter.clip(eRect(m_scrollbar->position() - ePoint(5,0), eSize(5,m_scrollbar->size().height())));
+					} else {
+						painter.clip(eRect(m_scrollbar->position() - ePoint(0,5), eSize(m_scrollbar->size().width(), 5)));
+					}
+					painter.clear();
+					painter.clippop();
+				}
+			}
+
+			m_content->cursorRestore();
+
 			return 0;
-
-		gPainter &painter = *(gPainter*)data2;
-
-		m_content->cursorSave();
-		if (m_orientation == orVertical)
-		{
-			m_content->cursorMove(m_top - m_selected);
-		}
-		else
-		{
-			m_content->cursorMove(m_left - m_selected);
 		}
 
-		gRegion entryrect = m_orientation == orVertical ? eRect(0, 0, size().width(), m_itemheight) : eRect(0, 0, m_itemwidth, size().height());
-		const gRegion &paint_region = *(gRegion*)data;
+		case evtChangedSize:
+			recalcSize();
+			return eWidget::event(event, data, data2);
 
-		int xoffset = 0;
-		int yoffset = 0;
-		if (m_scrollbar && m_scrollbar_mode == showLeft)
-		{
-			xoffset = m_scrollbar->size().width() + 5;
-		}
-		
-		if (m_orientation == orVertical)
-		{
-			for (int y = 0, i = 0; i <= m_items_per_page; y += m_itemheight, ++i)
+		case evtAction:
+			if (isVisible() && !isLowered())
 			{
-				gRegion entry_clip_rect = paint_region & entryrect;
-
-				if (!entry_clip_rect.empty())
-					m_content->paint(painter, *style, ePoint(xoffset, y), m_selected == m_content->cursorGet() && m_content->size() && m_selection_enabled);
-
-					/* (we could clip with entry_clip_rect, but
-					   this shouldn't change the behavior of any
-					   well behaving content, so it would just
-					   degrade performance without any gain.) */
-
-				m_content->cursorMove(+1);
-				entryrect.moveBy(ePoint(0, m_itemheight));
+				moveSelection((long)data2);
+				return 1;
 			}
-		}
-		else
-		{
-			for (int x = 0, i = 0; i <= m_items_per_page; x += m_itemwidth, ++i)
-			{
-				gRegion entry_clip_rect = paint_region & entryrect;
-
-				if (!entry_clip_rect.empty())
-					m_content->paint(painter, *style, ePoint(x, yoffset), m_selected == m_content->cursorGet() && m_content->size() && m_selection_enabled);
-
-					/* (we could clip with entry_clip_rect, but
-					   this shouldn't change the behavior of any
-					   well behaving content, so it would just
-					   degrade performance without any gain.) */
-
-				m_content->cursorMove(+1);
-				entryrect.moveBy(ePoint(m_itemwidth, 0));
-			}
-		}
-
-		// clear/repaint empty/unused space between scrollbar and listboxentrys
-		if (m_scrollbar_mode == showLeft)
-		{
-			if (m_scrollbar)
-			{
-				style->setStyle(painter, eWindowStyle::styleListboxNormal);
-				if (m_scrollbar->isVisible())
-				{
-					painter.clip(eRect(m_scrollbar->position() + ePoint(m_scrollbar->size().width(), 0), eSize(5,m_scrollbar->size().height())));
-				}
-				else
-				{
-					painter.clip(eRect(m_scrollbar->position(), eSize(m_scrollbar->size().width() + 5, m_scrollbar->size().height())));
-				}
-				painter.clear();
-				painter.clippop();
-			}
-		}
-		else
-		{
-			if (m_scrollbar && m_scrollbar->isVisible())
-			{
-				style->setStyle(painter, eWindowStyle::styleListboxNormal);
-				painter.clip(eRect(m_scrollbar->position() - ePoint(5,0), eSize(5,m_scrollbar->size().height())));
-				painter.clear();
-				painter.clippop();
-			}
-		}
-
-		m_content->cursorRestore();
-
-		return 0;
-	}
-
-	case evtChangedSize:
-		recalcSize();
-		return eWidget::event(event, data, data2);
-
-	case evtAction:
-		if (isVisible() && !isLowered())
-		{
-			moveSelection((long)data2);
-			return 1;
-		}
-		return 0;
-	default:
-		return eWidget::event(event, data, data2);
+			return 0;
+		default:
+			return eWidget::event(event, data, data2);
 	}
 }
 
@@ -809,6 +877,11 @@ void eListbox::setScrollbarSliderBorderWidth(int size)
 void eListbox::setScrollbarWidth(int size)
 {
 	m_scrollbar_width = size;
+}
+
+void eListbox::setScrollbarHeight(int size)
+{
+	m_scrollbar_height = size;
 }
 
 void eListbox::setBackgroundPicture(ePtr<gPixmap> &pm)

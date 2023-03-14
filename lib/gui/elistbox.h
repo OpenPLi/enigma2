@@ -104,7 +104,8 @@ public:
 		showOnDemand,
 		showAlways,
 		showNever,
-		showLeft
+		showLeft,
+		showTop
 	};
 	void setScrollbarMode(int mode);
 	void setWrapAround(bool);
@@ -159,6 +160,7 @@ public:
 	void setScrollbarBackgroundPicture(ePtr<gPixmap> &pm);
 	void setScrollbarSliderBorderWidth(int size);
 	void setScrollbarWidth(int size);
+	void setScrollbarHeight(int size);
 
 	void setFont(gFont *font);
 	void setSecondFont(gFont *font);
@@ -171,6 +173,7 @@ public:
 	void setSliderForegroundColor(gRGB &col);
 
 	int getScrollbarWidth() { return m_scrollbar_width; }
+	int getScrollbarHeight() { return m_scrollbar_height; }
 
 #ifndef SWIG
 	struct eListboxStyle *getLocalStyle(void);
@@ -196,12 +199,13 @@ private:
 	bool m_enabled_wrap_around;
 
 	int m_scrollbar_width;
+	int m_scrollbar_height;
 	int m_top, m_left, m_selected;
 	int m_itemheight;
 	int m_itemwidth;
+	int m_orientation;
 	int m_items_per_page;
 	int m_selection_enabled;
-	int m_orientation;
 
 	bool m_native_keys_bound;
 

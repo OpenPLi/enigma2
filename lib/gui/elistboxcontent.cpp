@@ -207,6 +207,10 @@ void eListboxPythonStringContent::paint(gPainter &painter, eWindowStyle &style, 
 			painter.clear();
 	}
 
+	// Draw frame here so to be under the content
+	if (selected && (!local_style || !local_style->m_selection) && (!local_style || !local_style->m_border_set))
+		style.drawFrame(painter, eRect(offset, m_itemsize), eWindowStyle::frameListboxEntry);
+
 	if (validitem)
 	{
 		int gray = 0;
@@ -274,9 +278,6 @@ void eListboxPythonStringContent::paint(gPainter &painter, eWindowStyle &style, 
 			painter.renderText(eRect(text_offset, m_itemsize),
 			 string, flags, border_color, border_size);
 		}
-
-		if (selected && (!local_style || !local_style->m_selection) && (!local_style || !local_style->m_border_set))
-			style.drawFrame(painter, eRect(offset, m_itemsize), eWindowStyle::frameListboxEntry);
 	}
 
 	painter.clippop();
@@ -422,6 +423,10 @@ void eListboxPythonConfigContent::paint(gPainter &painter, eWindowStyle &style, 
 			painter.clear();
 	}
 
+	// Draw frame here so to be drawn under icons
+	if (selected && (!local_style || !local_style->m_selection) && (!local_style || !local_style->m_border_set))
+			style.drawFrame(painter, eRect(offset, m_itemsize), eWindowStyle::frameListboxEntry);
+
 	if (m_list && cursorValid)
 	{
 			/* get current list item */
@@ -429,12 +434,12 @@ void eListboxPythonConfigContent::paint(gPainter &painter, eWindowStyle &style, 
 		ePyObject text, value;
 		painter.setFont(fnt);
 
-		if (selected && local_style && local_style->m_selection)
+		if (selected && local_style && local_style->m_selection){
 			if (m_listbox && m_listbox->getOrientation() == 1)
 				painter.blit(local_style->m_selection, ePoint(offset.x(), offset.y() + (m_itemsize.height() - local_style->m_selection->size().height()) / 2), eRect(), gPainter::BT_ALPHATEST);
 			else
 				painter.blit(local_style->m_selection, ePoint(offset.x() + (m_itemsize.width() - local_style->m_selection->size().width()) / 2, offset.y()), eRect(), gPainter::BT_ALPHATEST);
-
+		}
 			/* the first tuple element is a string for the left side.
 			   the second one will be called, and the result shall be an tuple.
 
@@ -580,11 +585,12 @@ void eListboxPythonConfigContent::paint(gPainter &painter, eWindowStyle &style, 
 								}
 								para->setGlyphFlag(num, GS_INVERT);
 								bbox = para->getGlyphBBox(num);
-								if (last+1 != num || last == -1)
+								if (last+1 != num || last == -1){
 									if (isVertLB)
 										left = bbox.left();
 									else
 										top = bbox.top();
+								}
 								if (isVertLB)
 									right = bbox.left() + bbox.width();
 								else
@@ -642,8 +648,6 @@ void eListboxPythonConfigContent::paint(gPainter &painter, eWindowStyle &style, 
 				Py_DECREF(value);
 		}
 
-		if (selected && (!local_style || !local_style->m_selection) && (!local_style || !local_style->m_border_set))
-			style.drawFrame(painter, eRect(offset, m_itemsize), eWindowStyle::frameListboxEntry);
 	}
 
 	painter.clippop();
@@ -781,11 +785,12 @@ static void clearRegion(gPainter &painter, eWindowStyle &style, eListboxStyle *l
 	{
 		style.setStyle(painter, eWindowStyle::styleListboxSelected);
 		clearRegionSelectedHelper(painter, local_style, offset, size, pbackColorSelected, cursorValid, clear, isverticallb);
-		if (local_style && local_style->m_selection)
+		if (local_style && local_style->m_selection) {
 			if (isverticallb)
 				painter.blit(local_style->m_selection, ePoint(offset.x(), offset.y() + (size.height() - local_style->m_selection->size().height()) / 2), eRect(), gPainter::BT_ALPHATEST);
 			else
 				painter.blit(local_style->m_selection, ePoint(offset.x() + (size.width() - local_style->m_selection->size().width()) / 2, offset.y()), eRect(), gPainter::BT_ALPHATEST);
+		}
 	}
 	else
 	{
@@ -866,6 +871,10 @@ void eListboxPythonMultiContent::paint(gPainter &painter, eWindowStyle &style, c
 	
 	painter.clip(itemregion);
 	clearRegion(painter, style, local_style, ePyObject(), ePyObject(), ePyObject(), ePyObject(), selected, itemregion, sel_clip, offset, m_itemsize, cursorValid, true, isverticallb);
+	
+	// Draw frame here so to be under the content
+	if (selected && !sel_clip.valid() && (!local_style || !local_style->m_selection) && (!local_style || !local_style->m_border_set))
+			style.drawFrame(painter, eRect(offset, m_itemsize), eWindowStyle::frameListboxEntry);
 
 	ePyObject items, buildfunc_ret;
 
@@ -1257,8 +1266,7 @@ void eListboxPythonMultiContent::paint(gPainter &painter, eWindowStyle &style, c
 		}
 	}
 
-	if (selected && !sel_clip.valid() && (!local_style || !local_style->m_selection) && (!local_style || !local_style->m_border_set))
-		style.drawFrame(painter, eRect(offset, m_itemsize), eWindowStyle::frameListboxEntry);
+	
 
 error_out:
 	if (buildfunc_ret)
