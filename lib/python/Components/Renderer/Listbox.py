@@ -38,6 +38,7 @@ class Listbox(Renderer):
 		if self.__content is not None:
 			instance.setContent(self.__content)
 		instance.selectionChanged.get().append(self.selectionChanged)
+		instance.setOrientation(0)
 		self.wrap_around = self.wrap_around # trigger
 		self.selection_enabled = self.selection_enabled # trigger
 		self.scrollbarMode = self.scrollbarMode # trigger
@@ -105,3 +106,14 @@ class Listbox(Renderer):
 	def entry_changed(self, index):
 		if self.instance is not None:
 			self.instance.entryChanged(index)
+			
+	def applySkin(self, desktop, parent):
+		attribs = [ ]
+		for (attrib, value) in self.skinAttributes[:]:
+			if attrib == "selectionFrame":
+				if value == "none":
+					self.instance.setSelectionBorderHidden()
+			else:
+				attribs.append((attrib, value))
+		self.skinAttributes = attribs
+		return Renderer.applySkin(self, desktop, parent)
