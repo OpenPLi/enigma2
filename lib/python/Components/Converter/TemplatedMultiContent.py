@@ -1,5 +1,7 @@
 from Components.Converter.StringList import StringList
 
+from enigma import eListbox
+
 
 class TemplatedMultiContent(StringList):
 	"""Turns a python tuple list into a multi-content list which can be used in a listbox renderer."""
@@ -15,6 +17,7 @@ class TemplatedMultiContent(StringList):
 		del loc["args"]
 		self.active_style = None
 		self.template = eval(args, {}, loc)
+		self.orientations = {"orHorizontal": eListbox.orHorizontal, "orVertical": eListbox.orVertical}
 		assert "fonts" in self.template
 		assert "itemHeight" in self.template
 		assert "template" in self.template or "templates" in self.template
@@ -67,7 +70,7 @@ class TemplatedMultiContent(StringList):
 				
 			self.content.setTemplate(template)
 			if orientation is not None and itemwidth is not None:
-				self.content.setOrientation(int(orientation))
+				self.content.setOrientation(self.orientations.get(orientation, self.orientations["orVertical"]))
 				self.content.setItemWidth(int(itemwidth))
 			self.content.setItemHeight(int(itemheight))
 			self.selectionEnabled = selectionEnabled
