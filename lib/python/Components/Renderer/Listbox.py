@@ -40,6 +40,9 @@ class Listbox(Renderer):
 		instance.selectionChanged.get().append(self.selectionChanged)
 		self.wrap_around = self.wrap_around # trigger
 		self.selection_enabled = self.selection_enabled # trigger
+		for (attrib, value) in self.skinAttributes:
+			if attrib == "scrollbarMode":
+				self.__scrollbarMode = value
 		self.scrollbarMode = self.scrollbarMode # trigger
 
 	def preWidgetRemove(self, instance):
@@ -95,7 +98,9 @@ class Listbox(Renderer):
 		if hasattr(self.source, "selectionEnabled"):
 			self.selection_enabled = self.source.selectionEnabled
 		if hasattr(self.source, "scrollbarMode"):
-			self.scrollbarMode = self.source.scrollbarMode
+			for (attrib, value) in self.skinAttributes:
+				if attrib == "scrollbarMode":
+					self.scrollbarMode = value
 		if len(what) > 1 and isinstance(what[1], str) and what[1] == "style":
 			return
 		if self.content:
