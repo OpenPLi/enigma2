@@ -100,7 +100,7 @@ class Pager(GUIAddon):
 				items_per_page = listH//itemHeight
 				if items_per_page > 0:
 					currentPageIndex = current_index//items_per_page
-					pagesCount = listCount//items_per_page
+					pagesCount = -(listCount//-items_per_page) - 1
 					self.selChange(currentPageIndex,pagesCount)
 
 	def applySkin(self, desktop, parent):
