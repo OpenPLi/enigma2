@@ -27,11 +27,11 @@ def mountpoint_choosen(option):
 	files = [(r.description, r, res[r], session) for r in res]
 	if not files:
 		if os.access(mountpoint, os.F_OK | os.R_OK):
-			session.open(MessageBox, _("%s connected successfully.") % description + _("No displayable files on this medium found!") % description, MessageBox.TYPE_INFO, simple=True, timeout=5)
+			session.open(MessageBox, (_("%s connected successfully.") % description) + _("No displayable files on this medium found!"), MessageBox.TYPE_INFO, simple=True, timeout=5)
 		else:
 			session.open(MessageBox, _("Storage device not available or not initialized."), MessageBox.TYPE_ERROR, simple=True, timeout=10)
 		return
-	session.openWithCallback(execute, ChoiceBox, title= _("%s connected successfully.") % description + "\n" + _("The following files were found..."), list=files)
+	session.openWithCallback(execute, ChoiceBox, title= (_("%s connected successfully.") % description) + "\n" + _("The following files were found..."), list=files)
 
 
 def scan(session):
