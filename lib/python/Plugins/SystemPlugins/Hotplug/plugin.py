@@ -91,12 +91,13 @@ def autostart(reason, **kwargs):
 	if reason == 0:
 		from twisted.internet import reactor
 		try:
-			os.remove("/tmp/hotplug.socket")
-		except OSError:
-			pass
-		factory = Factory()
-		factory.protocol = Hotplug
-		reactor.listenUNIX("/tmp/hotplug.socket", factory)
+			if os.path.exists("/tmp/hotplug.socket"):
+				os.remove("/tmp/hotplug.socket")
+			factory = Factory()
+			factory.protocol = Hotplug
+			reactor.listenUNIX("/tmp/hotplug.socket", factory)
+		except (OSError, CannotListenError) as err:
+			print("[Hotplug]", err)
 
 
 def Plugins(**kwargs):
