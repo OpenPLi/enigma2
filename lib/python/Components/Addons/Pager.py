@@ -69,6 +69,8 @@ class Pager(GUIAddon):
 		return self.source.l.getCurrentSelectionIndex()
 
 	def getSourceHeight(self):
+		if self.source.__class__.__name__ == "List": # Components.Sources.List, used by MainMenu
+			return self.source.master.master.instance.size().height()
 		return self.source.instance.size().height()
 
 	def getListCount(self):
@@ -82,6 +84,8 @@ class Pager(GUIAddon):
 	def getListItemHeight(self):
 		if hasattr(self.source, 'content'):
 			return self.source.content.getItemSize().height()
+		if hasattr(self.source, 'item_height'): # Components.Sources.List, used by MainMenu
+			return self.source.item_height
 		return self.source.l.getItemSize().height()
 	
 	def initPager(self):
