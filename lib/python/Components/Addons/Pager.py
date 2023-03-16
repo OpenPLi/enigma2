@@ -39,7 +39,7 @@ class Pager(GUIAddon):
 			pixd_size = self.picDotPage.size()
 			pixd_width = pixd_size.width()
 			pixd_height = pixd_size.height()
-			width_dots = pixd_width + (pixd_width + 5)*pageCount
+			width_dots = pixd_width + (pixd_width + self.spacing)*pageCount
 			xPos = (width - width_dots)/2 - pixd_width/2
 		res = [ None ]
 		if pageCount > 0:
