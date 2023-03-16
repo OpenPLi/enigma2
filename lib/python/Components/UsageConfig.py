@@ -768,7 +768,7 @@ def InitUsageConfig():
 
 	config.ntp = ConfigSubsection()
 
-		def timesyncChanged(configElement):
+	def timesyncChanged(configElement):
 		if configElement.value == "dvb" or not GetIPsFromNetworkInterfaces():
 			eDVBLocalTimeHandler.getInstance().setUseDVBTime(True)
 			eEPGCache.getInstance().timeUpdated()
