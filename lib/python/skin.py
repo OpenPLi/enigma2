@@ -1202,7 +1202,11 @@ def readSkin(screen, skin, names, desktop):
 			if not windex:
 				windex = "0"
 			
-			wclassname = name + "_" + wclass + "_" + wconnection + "_" + windex
+			wclassname_base = name + "_" + wclass + "_" + wconnection + "_"
+			wclassname = wclassname_base + windex
+			while wclassname in usedComponents:
+				next_index = int(wclassname.replace(wclassname_base, "")) + 1
+				wclassname = wclassname_base + str(next_index)
 
 			usedComponents.add(wclassname)
 
