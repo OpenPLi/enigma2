@@ -19,6 +19,7 @@ class Pager(GUIAddon):
 		self.spacing = 5
 		self.picDotPage = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/dot.png"))
 		self.picDotCurPage = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/dotfull.png"))
+		self.showIcons = "showAll" # can be "showAll", "onlyFirst", "onlyLast"
 
 	def onContainerShown(self):
 		# disable listboxes default scrollbars
@@ -40,10 +41,16 @@ class Pager(GUIAddon):
 			pixd_width = pixd_size.width()
 			pixd_height = pixd_size.height()
 			width_dots = pixd_width + (pixd_width + self.spacing)*pageCount
-			xPos = (width - width_dots)/2 - pixd_width/2
+			xPos = (width - width_dots)/2 - pixd_width/2 if self.showIcons == "showAll" else 0
 		res = [ None ]
-		if pageCount > 0:
-			for x in range(pageCount + 1):
+		if pageCount > (0 if self.showIcons == "showAll" else -1):
+			pages = list(range(pageCount + 1))
+			# add option to show just first or last icon
+			if self.showIcons == "onlyFirst":
+				pages = [pages[0]]
+			elif self.showIcons == "onlyLast":
+				pages = [pages[-1]]
+			for x in pages:
 				if self.picDotPage and self.picDotCurPage:
 					res.append(MultiContentEntryPixmapAlphaBlend(
 								pos=(xPos, 0),
@@ -141,6 +148,8 @@ class Pager(GUIAddon):
 				self.l.setItemHeight(parseScale(value))
 			elif attrib == "spacing":
 				self.spacing = parseScale(value)
+			elif attrib == "showIcons":
+				self.showIcons = value
 			else:
 				attribs.append((attrib, value))
 		self.skinAttributes = attribs
