@@ -1113,7 +1113,6 @@ def readSkin(screen, skin, names, desktop):
 		wsource = widget.attrib.get("source")
 		wconnection = widget.attrib.get("connection")
 		wclass = widget.attrib.get("addon")
-		windex = widget.attrib.get("index")
 		source = None
 		if wname is None and wsource is None and wclass is None:
 			raise SkinError("The widget has no name, no source and no addon type specified")
