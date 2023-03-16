@@ -1199,14 +1199,11 @@ def readSkin(screen, skin, names, desktop):
 			if not wconnection:
 				raise SkinError("The widget is from addon type: %s , but no connection is specified." % wclass)
 			
-			if not windex:
-				windex = "0"
-			
+			i = 0
 			wclassname_base = name + "_" + wclass + "_" + wconnection + "_"
-			wclassname = wclassname_base + windex
-			while wclassname in usedComponents:
-				next_index = int(wclassname.replace(wclassname_base, "")) + 1
-				wclassname = wclassname_base + str(next_index)
+			while wclassname_base + str(i) in usedComponents:
+				i += 1
+			wclassname = wclassname_base + str(i)
 
 			usedComponents.add(wclassname)
 
