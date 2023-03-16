@@ -1113,6 +1113,7 @@ def readSkin(screen, skin, names, desktop):
 		wsource = widget.attrib.get("source")
 		wconnection = widget.attrib.get("connection")
 		wclass = widget.attrib.get("addon")
+		windex = widget.attrib.get("index")
 		source = None
 		if wname is None and wsource is None and wclass is None:
 			raise SkinError("The widget has no name, no source and no addon type specified")
@@ -1198,7 +1199,10 @@ def readSkin(screen, skin, names, desktop):
 			if not wconnection:
 				raise SkinError("The widget is from addon type: %s , but no connection is specified." % wclass)
 			
-			wclassname = name + "_" + wclass + "_" + wconnection #form a name for the GUI Addon so to be possible to be inited in screen
+			if not windex:
+				windex = "0"
+			
+			wclassname = name + "_" + wclass + "_" + wconnection + "_" + windex
 
 			usedComponents.add(wclassname)
 
