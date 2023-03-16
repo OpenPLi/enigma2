@@ -1,6 +1,6 @@
 from Components.Addons.GUIAddon import GUIAddon
 
-from enigma import eListbox, eListboxPythonMultiContent, BT_ALIGN_CENTER
+from enigma import eListbox, eListboxPythonMultiContent, BT_ALIGN_CENTER, eSize
 
 from skin import parseScale
 
@@ -63,15 +63,24 @@ class Pager(GUIAddon):
 		instance.setContent(self.l)
 		instance.allowNativeKeys(False)
 
+	def getSourceOrientation(self):
+		if self.source.__class__.__name__ == "List": # Components.Sources.List, used by MainMenu
+			orig_source = self.source.master.master
+		else:
+			orig_source = self.source
+		if hasattr(orig_source, "instance") and hasattr(orig_source.instance, "getOrientation"):
+			return orig_source.instance.getOrientation()
+		return eListbox.orVertical
+
 	def getCurrentIndex(self):
 		if hasattr(self.source, "index"):
 			return self.source.index
 		return self.source.l.getCurrentSelectionIndex()
 
-	def getSourceHeight(self):
+	def getSourceSize(self):
 		if self.source.__class__.__name__ == "List": # Components.Sources.List, used by MainMenu
-			return self.source.master.master.instance.size().height()
-		return self.source.instance.size().height()
+			return self.source.master.master.instance.size()
+		return self.source.instance.size()
 
 	def getListCount(self):
 		if hasattr(self.source, 'listCount'):
@@ -81,12 +90,15 @@ class Pager(GUIAddon):
 		else:
 			return 0
 
-	def getListItemHeight(self):
-		if hasattr(self.source, 'content'):
-			return self.source.content.getItemSize().height()
-		if hasattr(self.source, 'item_height'): # Components.Sources.List, used by MainMenu
-			return self.source.item_height
-		return self.source.l.getItemSize().height()
+	def getListItemSize(self):
+		if self.source.__class__.__name__ == "List": # Components.Sources.List, used by MainMenu
+			orig_source = self.source.master.master
+		else:
+			orig_source = self.source
+		if hasattr(orig_source, 'content'):
+			return orig_source.content.getItemSize()
+
+		return orig_source.l.getItemSize()
 	
 	def initPager(self):
 		if self.source.__class__.__name__ == "ScrollLabel":
@@ -96,12 +108,20 @@ class Pager(GUIAddon):
 			pagesCount = -(-self.source.TotalTextHeight//self.source.pageHeight) - 1
 			self.selChange(currentPageIndex,pagesCount)
 		else:
-			listH = self.getSourceHeight()
-			if listH > 0:
+			l_orientation = self.getSourceOrientation()
+			if l_orientation == eListbox.orVertical:
+				listControledlSize = self.getSourceSize().height()
+			else:
+				listControledlSize = self.getSourceSize().width()
+
+			if listControledlSize > 0:
 				current_index = self.getCurrentIndex()
 				listCount = self.getListCount()
-				itemHeight = self.getListItemHeight()
-				items_per_page = listH//itemHeight
+				if l_orientation == eListbox.orVertical:
+					itemControlledSizeParam = self.getListItemSize().height()
+				else:
+					itemControlledSizeParam = self.getListItemSize().width()
+				items_per_page = listControledlSize//itemControlledSizeParam
 				if items_per_page > 0:
 					currentPageIndex = current_index//items_per_page
 					pagesCount = -(listCount//-items_per_page) - 1
