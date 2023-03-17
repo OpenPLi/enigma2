@@ -23,13 +23,16 @@ class TemplatedMultiContent(StringList):
 		assert "template" in self.template or "templates" in self.template
 		assert "template" in self.template or "default" in self.template["templates"]  # We need to have a default template.
 		if "template" not in self.template:  # Default template can be ["template"] or ["templates"]["default"].
-			self.template["template"] = self.template["templates"]["default"][1] # mandatory
-			self.template["itemHeight"] = self.template["template"][0] # mandatory
-			self.template["selectionEnabled"] = self.template["template"][2] if len(self.template["template"]) > 2 and self.template["template"][2] is not None else True  # optional. To skip use None padding.
-			self.template["scrollbarMode"] = self.template["template"][3] if len(self.template["template"]) > 3 and self.template["template"][3] is not None  else "showOnDemand"  # optional. To skip use None padding.
-			# if present self.template["template"][4] is a dict which should have "orientation" and "itemWidth"
-			self.template["itemWidth"] =  self.template["template"][4].get("itemWidth") if len(self.template["template"]) > 4 else None # optional
-			self.template["orientation"] = self.template["template"][4].get("orientation") if len(self.template["template"]) > 4 else None # optional
+			templateDefault = self.template["templates"]["default"]
+			self.template["template"] = templateDefault[1]  # mandatory
+			self.template["itemHeight"] = templateDefault[0]  # mandatory
+			if len(templateDefault) > 2:  # optional
+				self.template["selectionEnabled"] = templateDefault[2]
+			if len(templateDefault) > 3:  # optional
+				self.template["scrollbarMode"] = templateDefault[3]
+			if len(templateDefault) > 5:  # optional, but, must be present together
+				self.template["itemWidth"] =  templateDefault[4]
+				self.template["orientation"] = templateDefault[5]
 
 	def changed(self, what):
 		if not self.content:
@@ -64,9 +67,9 @@ class TemplatedMultiContent(StringList):
 					selectionEnabled = templates[style][2]
 				if len(templates[style]) > 3 and templates[style][3] is not None:
 					scrollbarMode = templates[style][3]
-				if len(templates[style]) > 4 and templates[style][4] is not None and templates[style][4].get("itemWidth") is not None and templates[style][4].get("orientation") is not None:
-					itemwidth = templates[style][4]["itemWidth"]
-					orientation = templates[style][4]["orientation"]
+				if len(templates[style]) > 5:  # optional, but, must be present together
+					itemwidth = templates[style][4]
+					orientation = templates[style][5]
 				
 			self.content.setTemplate(template)
 			if orientation is not None and itemwidth is not None:
