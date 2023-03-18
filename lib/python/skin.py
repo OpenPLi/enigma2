@@ -502,6 +502,9 @@ class AttributeParser:
 
 	def itemHeight(self, value):
 		self.guiObject.setItemHeight(parseScale(value))
+	
+	def itemWidth(self, value):
+		self.guiObject.setItemWidth(parseScale(value))
 
 	def pixmap(self, value):
 		if value.endswith(".svg"): # if graphic is svg force alphatest to "blend"
@@ -540,7 +543,7 @@ class AttributeParser:
 		value = 1 if value.lower() in ("1", "enabled", "on", "scale", "true", "yes") else 0
 		self.guiObject.setScale(value)
 
-	def orientation(self, value):  # Used by eSlider.
+	def orientation(self, value):  # Used by eSlider and eListBox.
 		try:
 			self.guiObject.setOrientation(*{
 				"orVertical": (self.guiObject.orVertical, False),
