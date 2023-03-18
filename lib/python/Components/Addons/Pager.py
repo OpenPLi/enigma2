@@ -87,8 +87,7 @@ class Pager(GUIAddon):
 			return self.source.listCount
 		elif hasattr(self.source, 'list'):
 			return len(self.source.list)
-		else:
-			return 0
+		return 0
 
 	def getListItemSize(self):
 		if self.source.__class__.__name__ == "List": # Components.Sources.List, used by MainMenu
