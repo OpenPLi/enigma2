@@ -437,8 +437,8 @@ class EPGList(GUIComponent):
 		for (attrib, value) in self.skinAttributes[:]:
 			try:
 				locals().get(attrib)(value)
-			except (TypeError, ValueError, NameError):
-				pass
+			except (TypeError, ValueError, NameError) as er:
+				print("[EPGList] error in set skin parameters", er)
 			else:
 				self.skinAttributes.remove((attrib, value))
 
