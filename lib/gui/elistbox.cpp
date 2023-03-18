@@ -4,9 +4,9 @@
 #include <lib/actions/action.h>
 
 eListbox::eListbox(eWidget *parent) :
-	eWidget(parent), m_scrollbar_mode(showNever), m_prev_scrollbar_page(-1),
-	m_content_changed(false), m_enabled_wrap_around(false), m_scrollbar_width(20),
-	m_top(0), m_selected(0), m_itemheight(25),
+	eWidget(parent), m_scrollbar_mode(showNever), m_orientation(orVertical), m_prev_scrollbar_page(-1),
+	m_content_changed(false), m_enabled_wrap_around(false), m_scrollbar_width(10),
+	m_top(0), m_left(0), m_selected(0), m_itemheight(25), m_itemwidth(25),
 	m_items_per_page(0), m_selection_enabled(1), m_native_keys_bound(false), m_scrollbar(nullptr)
 {
 	memset(static_cast<void*>(&m_style), 0, sizeof(m_style));
@@ -22,6 +22,11 @@ eListbox::~eListbox()
 		delete m_scrollbar;
 
 	allowNativeKeys(false);
+}
+
+void eListbox::setOrientation(int orientation)
+{
+	m_orientation = orientation;
 }
 
 void eListbox::setScrollbarMode(int mode)
@@ -96,20 +101,60 @@ void eListbox::moveToEnd()
 	/* move to last existing one ("end" is already invalid) */
 	m_content->cursorEnd(); m_content->cursorMove(-1);
 	/* current selection invisible? */
-	if (m_top + m_items_per_page <= m_content->cursorGet())
+	if (m_orientation == orVertical)
 	{
-		int rest = m_content->size() % m_items_per_page;
-		if (rest)
-			m_top = m_content->cursorGet() - rest + 1;
-		else
-			m_top = m_content->cursorGet() - m_items_per_page + 1;
-		if (m_top < 0)
-			m_top = 0;
+		if (m_top + m_items_per_page <= m_content->cursorGet())
+		{
+			int rest = m_content->size() % m_items_per_page;
+			if (rest)
+				m_top = m_content->cursorGet() - rest + 1;
+			else
+				m_top = m_content->cursorGet() - m_items_per_page + 1;
+			if (m_top < 0)
+				m_top = 0;
+		}
+	}
+	else
+	{
+		if (m_left + m_items_per_page <= m_content->cursorGet())
+		{
+			int rest = m_content->size() % m_items_per_page;
+			if (rest)
+				m_left = m_content->cursorGet() - rest + 1;
+			else
+				m_left = m_content->cursorGet() - m_items_per_page + 1;
+			if (m_left < 0)
+				m_left = 0;
+		}
 	}
 }
 
 void eListbox::moveSelection(long dir)
 {
+	long r_dir = dir;
+	switch (dir)
+	{
+	case moveUp:
+		if (m_orientation == orHorizontal){
+			r_dir = pageUp;
+		}
+		break;
+	case moveDown:
+		if (m_orientation == orHorizontal){
+			r_dir = pageDown;
+		}
+		break;
+	case pageUp:
+		if (m_orientation == orHorizontal){
+			r_dir = moveUp;
+		}
+		break;
+	case pageDown:
+		if (m_orientation == orHorizontal){
+			r_dir = moveDown;
+		}
+		break;
+	}
 	/* refuse to do anything without a valid list. */
 	if (!m_content)
 		return;
@@ -118,11 +163,12 @@ void eListbox::moveSelection(long dir)
 		return;
 	/* we need the old top/sel to see what we have to redraw */
 	int oldtop = m_top;
+	int oldleft = m_left;
 	int oldsel = m_selected;
 	int prevsel = oldsel;
 	int newsel;
 
-	switch (dir)
+	switch (r_dir)
 	{
 	case moveEnd:
 		m_content->cursorEnd();
@@ -260,25 +306,50 @@ void eListbox::moveSelection(long dir)
 
 	/* now, look wether the current selection is out of screen */
 	m_selected = m_content->cursorGet();
-	m_top = m_selected - (m_selected % m_items_per_page);
+	m_top = m_left = m_selected - (m_selected % m_items_per_page);
 
 	// if it is, then the old selection clip is irrelevant, clear it or we'll get artifacts
-	if (m_top != oldtop && m_content)
-		m_content->resetClip();
+	if (m_orientation == orVertical)
+	{
+		if (m_top != oldtop && m_content)
+			m_content->resetClip();
+	}
+	else
+	{
+		if (m_left != oldleft && m_content)
+			m_content->resetClip();
+	}
 
 	if (oldsel != m_selected)
 		/* emit */ selectionChanged();
 
 	updateScrollBar();
 
-	if (m_top != oldtop)
-		invalidate();
-	else if (m_selected != oldsel)
+	if (m_orientation == orVertical)
 	{
-		/* redraw the old and newly selected */
-		gRegion inv = eRect(0, m_itemheight * (m_selected-m_top), size().width(), m_itemheight);
-		inv |= eRect(0, m_itemheight * (oldsel-m_top), size().width(), m_itemheight);
-		invalidate(inv);
+		if (m_top != oldtop){
+			invalidate();
+		}
+		else if (m_selected != oldsel)
+		{
+			/* redraw the old and newly selected */
+			gRegion inv = eRect(0, m_itemheight * (m_selected-m_top), size().width(), m_itemheight);
+			inv |= eRect(0, m_itemheight * (oldsel-m_top), size().width(), m_itemheight);
+			invalidate(inv);
+		}
+	}
+	else
+	{
+		if (m_left != oldleft){
+			invalidate();
+		}
+		else if (m_selected != oldsel)
+		{
+			/* redraw the old and newly selected */
+			gRegion inv = eRect(m_itemwidth * (m_selected-m_left), 0, m_itemwidth, size().height());
+			inv |= eRect(m_itemwidth * (oldsel-m_left), 0, m_itemwidth, size().height());
+			invalidate(inv);
+		}
 	}
 }
 
@@ -298,9 +369,14 @@ int eListbox::getCurrentIndex()
 	return 0;
 }
 
+int eListbox::getOrientation()
+{
+	return m_orientation;
+}
+
 void eListbox::updateScrollBar()
 {
-	if (!m_content || m_scrollbar_mode == showNever )
+	if (!m_content || m_scrollbar_mode == showNever || m_orientation == orHorizontal )
 		return;
 	int entries = m_content->size();
 	if (m_content_changed)
@@ -355,7 +431,14 @@ void eListbox::updateScrollBar()
 
 int eListbox::getEntryTop()
 {
-	return (m_selected - m_top) * m_itemheight;
+	if (m_orientation == orVertical)
+	{
+		return (m_selected - m_top) * m_itemheight;
+	}
+	else
+	{
+		return (m_selected - m_left) * m_itemwidth;
+	}
 }
 
 int eListbox::event(int event, void *data, void *data2)
@@ -378,31 +461,60 @@ int eListbox::event(int event, void *data, void *data2)
 		gPainter &painter = *(gPainter*)data2;
 
 		m_content->cursorSave();
-		m_content->cursorMove(m_top - m_selected);
+		if (m_orientation == orVertical)
+		{
+			m_content->cursorMove(m_top - m_selected);
+		}
+		else
+		{
+			m_content->cursorMove(m_left - m_selected);
+		}
 
-		gRegion entryrect = eRect(0, 0, size().width(), m_itemheight);
+		gRegion entryrect = m_orientation == orVertical ? eRect(0, 0, size().width(), m_itemheight) : eRect(0, 0, m_itemwidth, size().height());
 		const gRegion &paint_region = *(gRegion*)data;
 
 		int xoffset = 0;
+		int yoffset = 0;
 		if (m_scrollbar && m_scrollbar_mode == showLeft)
 		{
 			xoffset = m_scrollbar->size().width() + 5;
 		}
-
-		for (int y = 0, i = 0; i <= m_items_per_page; y += m_itemheight, ++i)
+		
+		if (m_orientation == orVertical)
 		{
-			gRegion entry_clip_rect = paint_region & entryrect;
+			for (int y = 0, i = 0; i <= m_items_per_page; y += m_itemheight, ++i)
+			{
+				gRegion entry_clip_rect = paint_region & entryrect;
 
-			if (!entry_clip_rect.empty())
-				m_content->paint(painter, *style, ePoint(xoffset, y), m_selected == m_content->cursorGet() && m_content->size() && m_selection_enabled);
+				if (!entry_clip_rect.empty())
+					m_content->paint(painter, *style, ePoint(xoffset, y), m_selected == m_content->cursorGet() && m_content->size() && m_selection_enabled);
 
-				/* (we could clip with entry_clip_rect, but
-				   this shouldn't change the behavior of any
-				   well behaving content, so it would just
-				   degrade performance without any gain.) */
+					/* (we could clip with entry_clip_rect, but
+					   this shouldn't change the behavior of any
+					   well behaving content, so it would just
+					   degrade performance without any gain.) */
 
-			m_content->cursorMove(+1);
-			entryrect.moveBy(ePoint(0, m_itemheight));
+				m_content->cursorMove(+1);
+				entryrect.moveBy(ePoint(0, m_itemheight));
+			}
+		}
+		else
+		{
+			for (int x = 0, i = 0; i <= m_items_per_page; x += m_itemwidth, ++i)
+			{
+				gRegion entry_clip_rect = paint_region & entryrect;
+
+				if (!entry_clip_rect.empty())
+					m_content->paint(painter, *style, ePoint(x, yoffset), m_selected == m_content->cursorGet() && m_content->size() && m_selection_enabled);
+
+					/* (we could clip with entry_clip_rect, but
+					   this shouldn't change the behavior of any
+					   well behaving content, so it would just
+					   degrade performance without any gain.) */
+
+				m_content->cursorMove(+1);
+				entryrect.moveBy(ePoint(m_itemwidth, 0));
+			}
 		}
 
 		// clear/repaint empty/unused space between scrollbar and listboxentrys
@@ -459,9 +571,18 @@ void eListbox::recalcSize()
 {
 	m_content_changed=true;
 	m_prev_scrollbar_page=-1;
-	if (m_content)
-		m_content->setSize(eSize(size().width(), m_itemheight));
-	m_items_per_page = size().height() / m_itemheight;
+	if (m_orientation == orVertical)
+	{
+		if (m_content)
+			m_content->setSize(eSize(size().width(), m_itemheight));
+		m_items_per_page = size().height() / m_itemheight;
+	}
+	else
+	{
+		if (m_content)
+			m_content->setSize(eSize(m_itemwidth, size().height()));
+		m_items_per_page = size().width() / m_itemwidth;
+	}
 
 	if (m_items_per_page < 0) /* TODO: whyever - our size could be invalid, or itemheigh could be wrongly specified. */
  		m_items_per_page = 0;
@@ -471,10 +592,20 @@ void eListbox::recalcSize()
 
 void eListbox::setItemHeight(int h)
 {
+	eDebug("[eListBox] setItemHeight %d", h);
 	if (h)
 		m_itemheight = h;
 	else
 		m_itemheight = 20;
+	recalcSize();
+}
+void eListbox::setItemWidth(int w)
+{
+	eDebug("[eListBox] setItemWidth %d", w);
+	if (w)
+		m_itemwidth = w;
+	else
+		m_itemwidth = 20;
 	recalcSize();
 }
 
@@ -495,18 +626,37 @@ void eListbox::entryAdded(int index)
 		/* we need to check <= - when the new entry has the (old) index of the cursor, the cursor was just moved down. */
 	if (index <= m_selected)
 		++m_selected;
-	if (index <= m_top)
-		++m_top;
+	if (m_orientation == orVertical)
+	{
+		if (index <= m_top)
+			++m_top;
+	}
+	else
+	{
+		if (index <= m_left)
+			++m_left;
+	}
 
 		/* we have to check wether our current cursor is gone out of the screen. */
 		/* moveSelection will check for this case */
 	moveSelection(justCheck);
 
 		/* now, check if the new index is visible. */
-	if ((m_top <= index) && (index < (m_top + m_items_per_page)))
+	if (m_orientation == orVertical)
 	{
-			/* todo, calc exact invalidation... */
-		invalidate();
+		if ((m_top <= index) && (index < (m_top + m_items_per_page)))
+		{
+				/* todo, calc exact invalidation... */
+			invalidate();
+		}
+	}
+	else
+	{
+		if ((m_left <= index) && (index < (m_left + m_items_per_page)))
+		{
+				/* todo, calc exact invalidation... */
+			invalidate();
+		}
 	}
 }
 
@@ -522,20 +672,42 @@ void eListbox::entryRemoved(int index)
 		moveSelection(moveUp);
 	else
 		moveSelection(justCheck);
-
-	if ((m_top <= index) && (index < (m_top + m_items_per_page)))
+	
+	if (m_orientation == orVertical) 
 	{
-			/* todo, calc exact invalidation... */
-		invalidate();
+		if ((m_top <= index) && (index < (m_top + m_items_per_page)))
+		{
+				/* todo, calc exact invalidation... */
+			invalidate();
+		}
+	}
+	else
+	{
+		if ((m_left <= index) && (index < (m_left + m_items_per_page)))
+		{
+				/* todo, calc exact invalidation... */
+			invalidate();
+		}
 	}
 }
 
 void eListbox::entryChanged(int index)
 {
-	if ((m_top <= index) && (index < (m_top + m_items_per_page)))
+	if (m_orientation == orVertical) 
 	{
-		gRegion inv = eRect(0, m_itemheight * (index-m_top), size().width(), m_itemheight);
-		invalidate(inv);
+		if ((m_top <= index) && (index < (m_top + m_items_per_page)))
+		{
+			gRegion inv = eRect(0, m_itemheight * (index-m_top), size().width(), m_itemheight);
+			invalidate(inv);
+		}
+	}
+	else
+	{
+		if ((m_left <= index) && (index < (m_left + m_items_per_page)))
+		{
+			gRegion inv = eRect(m_itemwidth * (index-m_left), 0, m_itemwidth, size().height());
+			invalidate(inv);
+		}
 	}
 }
 
@@ -550,6 +722,7 @@ void eListbox::entryReset(bool selectionHome)
 		if (m_content)
 			m_content->cursorHome();
 		m_top = 0;
+		m_left = 0;
 		m_selected = 0;
 	}
 

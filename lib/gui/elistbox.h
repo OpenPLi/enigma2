@@ -51,6 +51,7 @@ protected:
 	virtual void paint(gPainter &painter, eWindowStyle &style, const ePoint &offset, int selected)=0;
 
 	virtual int getItemHeight()=0;
+	virtual int getItemWidth() { return -1; }
 
 	eListbox *m_listbox;
 #endif
@@ -105,6 +106,8 @@ public:
 	};
 	void setScrollbarMode(int mode);
 	void setWrapAround(bool);
+	enum { orHorizontal, orVertical };
+	void setOrientation(int orientation);
 
 	void setContent(iListboxContent *content);
 
@@ -119,6 +122,7 @@ public:
 	}; */
 
 	int getCurrentIndex();
+	int getOrientation();
 	void moveSelection(long how);
 	void moveSelectionTo(int index);
 	void moveToEnd();
@@ -136,6 +140,7 @@ public:
 	};
 
 	void setItemHeight(int h);
+	void setItemWidth(int w);
 	void setSelectionEnable(int en);
 
 	void setBackgroundColor(gRGB &col);
@@ -188,10 +193,12 @@ private:
 	bool m_enabled_wrap_around;
 
 	int m_scrollbar_width;
-	int m_top, m_selected;
+	int m_top, m_left, m_selected;
 	int m_itemheight;
+	int m_itemwidth;
 	int m_items_per_page;
 	int m_selection_enabled;
+	int m_orientation;
 
 	bool m_native_keys_bound;
 

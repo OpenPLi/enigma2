@@ -13,6 +13,7 @@ public:
 
 	void setList(SWIG_PYOBJECT(ePyObject) list);
 	void setItemHeight(int height);
+	void setItemWidth(int width);
 	PyObject *getCurrentSelection();
 	int getCurrentSelectionIndex() { return m_cursor; }
 	void invalidateEntry(int index);
@@ -41,6 +42,7 @@ protected:
 	virtual void paint(gPainter &painter, eWindowStyle &style, const ePoint &offset, int selected);
 
 	int getItemHeight() { return m_itemheight; }
+	int getItemWidth() { return m_itemwidth; }
 
 protected:
 	ePyObject m_list;
@@ -48,6 +50,7 @@ protected:
 	eSize m_itemsize;
 	ePtr<gFont> m_font;
 	int m_itemheight;
+	int m_itemwidth;
 #endif
 };
 
@@ -80,6 +83,7 @@ public:
 	void setBuildFunc(SWIG_PYOBJECT(ePyObject) func);
 	void setSelectableFunc(SWIG_PYOBJECT(ePyObject) func);
 	void setItemHeight(int height);
+	void setItemWidth(int width);
 	void setSelectionClip(eRect &rect, bool update=false);
 	void updateClip(gRegion &);
 	void resetClip();
