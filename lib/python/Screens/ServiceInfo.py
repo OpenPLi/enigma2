@@ -220,7 +220,7 @@ class ServiceInfo(Screen):
 				audio_pid = self.audio.getTrackInfo(i).getPID()
 				audio_lang = self.audio.getTrackInfo(i).getLanguage() or _("Not defined")
 				if self.IPTV:
-					return (_("Codec & lang %s") % ((i + 1) if self.number_of_tracks > 1 and self.show_all else ""), "%s - %s" % (audio_desc, audio_lang), TYPE_TEXT)
+					return (_("Codec & lang%s") % ((" %s") % (i + 1) if self.number_of_tracks > 1 and self.show_all else ""), "%s - %s" % (audio_desc, audio_lang), TYPE_TEXT)
 				else:
 					return (_("Audio PID%s, codec & lang") % ((" %s") % (i + 1) if self.number_of_tracks > 1 and self.show_all else ""), "%04X (%d) - %s - %s" % (to_unsigned(audio_pid), audio_pid, audio_desc, audio_lang), TYPE_TEXT)
 
