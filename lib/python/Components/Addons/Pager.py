@@ -1,6 +1,6 @@
 from Components.Addons.GUIAddon import GUIAddon
 
-from enigma import eListbox, eListboxPythonMultiContent, BT_ALIGN_CENTER
+from enigma import eListbox, eListboxPythonMultiContent, BT_ALIGN_CENTER, eSize
 
 from skin import parseScale
 
@@ -19,6 +19,7 @@ class Pager(GUIAddon):
 		self.spacing = 5
 		self.picDotPage = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/dot.png"))
 		self.picDotCurPage = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/dotfull.png"))
+		self.showIcons = "showAll" # can be "showAll", "onlyFirst", "onlyLast"
 
 	def onContainerShown(self):
 		# disable listboxes default scrollbars
@@ -39,11 +40,17 @@ class Pager(GUIAddon):
 			pixd_size = self.picDotPage.size()
 			pixd_width = pixd_size.width()
 			pixd_height = pixd_size.height()
-			width_dots = pixd_width + (pixd_width + 5)*pageCount
-			xPos = (width - width_dots)/2 - pixd_width/2
+			width_dots = pixd_width + (pixd_width + self.spacing)*pageCount
+			xPos = (width - width_dots)/2 - pixd_width/2 if self.showIcons == "showAll" else 0
 		res = [ None ]
-		if pageCount > 0:
-			for x in range(pageCount + 1):
+		if pageCount > (0 if self.showIcons == "showAll" else -1):
+			pages = list(range(pageCount + 1))
+			# add option to show just first or last icon
+			if self.showIcons == "onlyFirst":
+				pages = [pages[0]]
+			elif self.showIcons == "onlyLast":
+				pages = [pages[-1]]
+			for x in pages:
 				if self.picDotPage and self.picDotCurPage:
 					res.append(MultiContentEntryPixmapAlphaBlend(
 								pos=(xPos, 0),
@@ -63,26 +70,41 @@ class Pager(GUIAddon):
 		instance.setContent(self.l)
 		instance.allowNativeKeys(False)
 
+	def getSourceOrientation(self):
+		if self.source.__class__.__name__ == "List": # Components.Sources.List, used by MainMenu
+			orig_source = self.source.master.master
+		else:
+			orig_source = self.source
+		if hasattr(orig_source, "instance") and hasattr(orig_source.instance, "getOrientation"):
+			return orig_source.instance.getOrientation()
+		return eListbox.orVertical
+
 	def getCurrentIndex(self):
 		if hasattr(self.source, "index"):
 			return self.source.index
 		return self.source.l.getCurrentSelectionIndex()
 
-	def getSourceHeight(self):
-		return self.source.instance.size().height()
+	def getSourceSize(self):
+		if self.source.__class__.__name__ == "List": # Components.Sources.List, used by MainMenu
+			return self.source.master.master.instance.size()
+		return self.source.instance.size()
 
 	def getListCount(self):
 		if hasattr(self.source, 'listCount'):
 			return self.source.listCount
 		elif hasattr(self.source, 'list'):
 			return len(self.source.list)
-		else:
-			return 0
+		return 0
 
-	def getListItemHeight(self):
-		if hasattr(self.source, 'content'):
-			return self.source.content.getItemSize().height()
-		return self.source.l.getItemSize().height()
+	def getListItemSize(self):
+		if self.source.__class__.__name__ == "List": # Components.Sources.List, used by MainMenu
+			orig_source = self.source.master.master
+		else:
+			orig_source = self.source
+		if hasattr(orig_source, 'content'):
+			return orig_source.content.getItemSize()
+
+		return orig_source.l.getItemSize()
 	
 	def initPager(self):
 		if self.source.__class__.__name__ == "ScrollLabel":
@@ -92,15 +114,23 @@ class Pager(GUIAddon):
 			pagesCount = -(-self.source.TotalTextHeight//self.source.pageHeight) - 1
 			self.selChange(currentPageIndex,pagesCount)
 		else:
-			listH = self.getSourceHeight()
-			if listH > 0:
+			l_orientation = self.getSourceOrientation()
+			if l_orientation == eListbox.orVertical:
+				listControledlSize = self.getSourceSize().height()
+			else:
+				listControledlSize = self.getSourceSize().width()
+
+			if listControledlSize > 0:
 				current_index = self.getCurrentIndex()
 				listCount = self.getListCount()
-				itemHeight = self.getListItemHeight()
-				items_per_page = listH//itemHeight
+				if l_orientation == eListbox.orVertical:
+					itemControlledSizeParam = self.getListItemSize().height()
+				else:
+					itemControlledSizeParam = self.getListItemSize().width()
+				items_per_page = listControledlSize//itemControlledSizeParam
 				if items_per_page > 0:
 					currentPageIndex = current_index//items_per_page
-					pagesCount = listCount//items_per_page
+					pagesCount = -(listCount//-items_per_page) - 1
 					self.selChange(currentPageIndex,pagesCount)
 
 	def applySkin(self, desktop, parent):
@@ -118,6 +148,8 @@ class Pager(GUIAddon):
 				self.l.setItemHeight(parseScale(value))
 			elif attrib == "spacing":
 				self.spacing = parseScale(value)
+			elif attrib == "showIcons":
+				self.showIcons = value
 			else:
 				attribs.append((attrib, value))
 		self.skinAttributes = attribs
