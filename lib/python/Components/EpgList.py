@@ -9,7 +9,7 @@ from time import localtime, time
 from Components.config import config
 from ServiceReference import ServiceReference
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
-from skin import applySkinFactor, parseFont, parseScale, getSkinFactor
+from skin import applySkinFactor, parseFont, parseScale
 
 
 EPG_TYPE_SINGLE = 0
@@ -403,8 +403,6 @@ class EPGList(GUIComponent):
 		print(int(time() - t))
 
 	def applySkin(self, desktop, parent):
-		global f
-		f = getSkinFactor()
 
 		def warningWrongSkinParameter(string):
 			print("[EPGList] wrong '%s' skin parameters" % string)
@@ -425,7 +423,7 @@ class EPGList(GUIComponent):
 			self.tw = parseScale(value)
 
 		def setColWidths(value):
-			self.col = [int(eval(x) if "*f" in x else x) for x in value.split(",")]
+			self.col = [parseScale(x) for x in value.split(",")]
 			if len(self.col) == 2:
 				self.skinColumns = True
 			else:
