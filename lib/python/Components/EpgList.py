@@ -15,6 +15,7 @@ from skin import applySkinFactor, parseFont, parseScale
 EPG_TYPE_SINGLE = 0
 EPG_TYPE_MULTI = 1
 EPG_TYPE_SIMILAR = 2
+EPG_TYPE_PARTIAL = 3
 
 
 class Rect:
@@ -368,16 +369,21 @@ class EPGList(GUIComponent):
 			index += 1
 
 	def fillSimilarList(self, refstr, event_id):
-		t = int(time())
+		# t = int(time())
 		# search similar broadcastings
-		if event_id is None:
-			return
-		l = self.epgcache.search(('RIBND', 1024, eEPGCache.SIMILAR_BROADCASTINGS_SEARCH, refstr, event_id))
-		if l and len(l):
-			l.sort(key=lambda x: x[2])
-		self.l.setList(l)
+		if event_id:
+			self.fill_list(self.epgcache.search(('RIBND', 1024, eEPGCache.SIMILAR_BROADCASTINGS_SEARCH, refstr, event_id)))
+		# print(int(time() - t))
+
+	def fill_partial_list(self, event):
+		if event:
+			self.fill_list(self.epgcache.search(('RIBND', 1024, eEPGCache.PARTIAL_TITLE_SEARCH, event, eEPGCache.NO_CASE_CHECK)))
+
+	def fill_list(self, event_list):
+		if event_list and len(event_list):
+			event_list.sort(key=lambda x: x[2])
+		self.l.setList(event_list)
 		self.selectionChanged()
-		print(int(time() - t))
 
 	def applySkin(self, desktop, parent):
 
