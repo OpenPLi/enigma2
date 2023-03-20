@@ -9,11 +9,11 @@ dist_install_DATA = \
 	dish.png \
 	dish_scan.png \
 	dmm_logo.png \
-	epgclock_add.png \
-	epgclock.png \
-	epgclock_post.png \
-	epgclock_pre.png \
-	epgclock_prepost.png \
+	epgclock_add.svg \
+	epgclock.svg \
+	epgclock_post.svg \
+	epgclock_pre.svg \
+	epgclock_prepost.svg \
 	expandable.png \
 	expandable-plugins.png \
 	expanded.png \
@@ -65,23 +65,23 @@ dist_install_DATA = \
 	movielist.png \
 	newtop.png \
 	oldtop.png \
-	part_0_4.png \
-	part_1_4.png \
-	part_2_4.png \
-	part_3_4.png \
-	part_4_4.png \
-	part_new.png \
-	part_unwatched.png \
+	part_0_4.svg \
+	part_1_4.svg \
+	part_2_4.svg \
+	part_3_4.svg \
+	part_4_4.svg \
+	part_new.svg \
+	part_unwatched.svg \
 	pause.png \
 	pic_frame.png \
 	playlist.png \
 	playlistquit.png \
 	plilogo-fs8.png \
-	pipclock_add.png \
-	pipclock.png \
-	pipclock_post.png \
-	pipclock_pre.png \
-	pipclock_prepost.png \
+	pipclock_add.svg \
+	pipclock.svg \
+	pipclock_post.svg \
+	pipclock_pre.svg \
+	pipclock_prepost.svg \
 	quit.png \
 	network_wired.png \
 	network_wired-active.png \
@@ -100,21 +100,21 @@ dist_install_DATA = \
 	rep.png \
 	repeat_off.png \
 	repeat_on.png \
-	repepgclock_add.png \
-	repepgclock.png \
-	repepgclock_post.png \
-	repepgclock_pre.png \
-	repepgclock_prepost.png \
-	repzapclock.png \
-	repzapclock_add.png \
-	repzapclock_post.png \
-	repzapclock_pre.png \
-	repzapclock_prepost.png \
-	repzaprecclock.png \
-	repzaprecclock_add.png \
-	repzaprecclock_post.png \
-	repzaprecclock_pre.png \
-	repzaprecclock_prepost.png \
+	repepgclock_add.svg \
+	repepgclock.svg \
+	repepgclock_post.svg \
+	repepgclock_pre.svg \
+	repepgclock_prepost.svg \
+	repzapclock.svg \
+	repzapclock_add.svg \
+	repzapclock_post.svg \
+	repzapclock_pre.svg \
+	repzapclock_prepost.svg \
+	repzaprecclock.svg \
+	repzaprecclock_add.svg \
+	repzaprecclock_post.svg \
+	repzaprecclock_pre.svg \
+	repzaprecclock_prepost.svg \
 	stream.png \
 	stream24.png \
 	scan-c.png \
@@ -122,24 +122,24 @@ dist_install_DATA = \
 	scan-t.png \
 	selectioncross.png \
 	shuffle.png \
-	timer_done.png  timer_prep.png  timer_rep.png   timer_zap.png \
-	timer_off.png   timer_rec.png   timer_wait.png   timer_autotimer.png \
+	timer_done.svg  timer_prep.svg  timer_rep.svg   timer_zap.svg \
+	timer_off.svg   timer_rec.svg   timer_wait.svg   timer_autotimer.svg \
 	trashcan.png \
 	unlock.png \
 	unlockBouquet.png \
 	verticalline.png \
 	verticalline-plugins.png \
 	za.png \
-	zapclock.png \
-	zapclock_add.png \
-	zapclock_post.png \
-	zapclock_pre.png \
-	zapclock_prepost.png \
-	zaprecclock.png \
-	zaprecclock_add.png \
-	zaprecclock_post.png \
-	zaprecclock_pre.png \
-	zaprecclock_prepost.png \
+	zapclock.svg \
+	zapclock_add.svg \
+	zapclock_post.svg \
+	zapclock_pre.svg \
+	zapclock_prepost.svg \
+	zaprecclock.svg \
+	zaprecclock_add.svg \
+	zaprecclock_post.svg \
+	zaprecclock_pre.svg \
+	zaprecclock_prepost.svg \
 	cutting.svg \
 	input_error.svg \
 	input_info.svg \
