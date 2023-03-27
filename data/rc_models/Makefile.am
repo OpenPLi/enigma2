@@ -13,4 +13,4 @@ dist_install_DATA = \
 	vs1x00.xml xsarius.xml xsarius.png osmini.xml zgemma.xml miraclebox.xml miraclebox2.xml \
 	spycat.xml xpeedlx.xml et7000mini.png et7000mini.xml revo4k.xml sab.xml sh1.xml i55.xml qviart.xml \
 	gb7252.xml e4hd.xml edision2.xml edision3.xml edision4.xml hd60.xml lunix4k.xml multibox.xml viperslim.xml \
-	octagon.xml octagon3.xml uclan.xml uclan3.png pulse.xml dual.xml hd66se.xml
+	octagon.xml octagon3.xml uclan.xml uclan3.xml pulse.xml dual.xml hd66se.xml
