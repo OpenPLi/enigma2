@@ -12,7 +12,7 @@ class tmp:
 
 def getMultibootStartupDevice():
 	tmp.dir = tempfile.mkdtemp(prefix="Multiboot")
-	if fileHas("/proc/cmdline", "kexec=1"): # kexec kernel multiboot
+	if SystemInfo["hasKexec"]: # kexec kernel multiboot
 		bootList = ("/dev/mmcblk0p4", "/dev/mmcblk0p7", "/dev/mmcblk0p9")
 	else: #legacy multiboot
 		bootList = ("/dev/mmcblk0p1", "/dev/mmcblk1p1", "/dev/mmcblk0p3", "/dev/mmcblk0p4", "/dev/mtdblock2", "/dev/block/by-name/bootoptions")
@@ -74,7 +74,7 @@ def getMultibootslots():
 
 def getCurrentImage():
 	if SystemInfo["canMultiBoot"]:
-		if fileHas("/proc/cmdline", "kexec=1"):	# kexec kernel multiboot
+		if SystemInfo["hasKexec"]:	# kexec kernel multiboot
 			rootsubdir = [x for x in open('/sys/firmware/devicetree/base/chosen/bootargs', 'r').read().split() if x.startswith("rootsubdir")]
 			char = "/" if "/" in rootsubdir[0] else "="
 			return int(rootsubdir[0].rsplit(char, 1)[1][11:])
