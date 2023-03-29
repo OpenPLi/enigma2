@@ -34,7 +34,7 @@ void eWindowStyleSkinned::handleNewSize(eWindow *wnd, eSize &size, eSize &offset
 
 void eWindowStyleSkinned::paintWindowDecoration(eWindow *wnd, gPainter &painter, const std::string &title)
 {
-	drawBorder(painter, eRect(ePoint(0, 0), wnd->size()), m_border[bsWindow], bpAll);
+	drawBorder(painter, eRect(ePoint(0, 0), wnd->size()), m_border[bsWindow], bpAll, 0);
 
 	if (m_fnt)
 	{
@@ -92,10 +92,10 @@ void eWindowStyleSkinned::drawFrame(gPainter &painter, const eRect &frame, int w
 		eWarning("[eWindowStyleSkinned] invalid frame style %d", what);
 		return;
 	}
-	drawBorder(painter, frame, m_border[bs], bpAll);
+	drawBorder(painter, frame, m_border[bs], bpAll, gPainter::BT_ALPHABLEND);
 }
 
-void eWindowStyleSkinned::drawBorder(gPainter &painter, const eRect &pos, struct borderSet &border, int what)
+void eWindowStyleSkinned::drawBorder(gPainter &painter, const eRect &pos, struct borderSet &border, int what, int flags)
 {
 	int x = pos.left(), xm = pos.right();
 
@@ -111,21 +111,21 @@ void eWindowStyleSkinned::drawBorder(gPainter &painter, const eRect &pos, struct
 
 	if (tl)
 	{
-		painter.blit(tl, ePoint(x, pos.top()), eRect(), gPainter::BT_ALPHABLEND);
+		painter.blit(tl, ePoint(x, pos.top()), eRect(), flags);
 		x += tl->size().width();
 	}
 
 	if (tr)
 	{
 		xm -= tr->size().width();
-		painter.blit(tr, ePoint(xm, pos.top()), pos, gPainter::BT_ALPHABLEND);
+		painter.blit(tr, ePoint(xm, pos.top()), pos, flags);
 	}
 
 	if (t)
 	{
 		while (x < xm)
 		{
-			painter.blit(t, ePoint(x, pos.top()), eRect(x, pos.top(), xm - x, pos.height()), gPainter::BT_ALPHABLEND);
+			painter.blit(t, ePoint(x, pos.top()), eRect(x, pos.top(), xm - x, pos.height()), flags);
 			x += t->size().width();
 		}
 	}
@@ -135,21 +135,21 @@ void eWindowStyleSkinned::drawBorder(gPainter &painter, const eRect &pos, struct
 
 	if (bl)
 	{
-		painter.blit(bl, ePoint(pos.left(), pos.bottom()-bl->size().height()), eRect(), gPainter::BT_ALPHABLEND);
+		painter.blit(bl, ePoint(pos.left(), pos.bottom()-bl->size().height()), eRect(), flags);
 		x += bl->size().width();
 	}
 
 	if (br)
 	{
 		xm -= br->size().width();
-		painter.blit(br, ePoint(xm, pos.bottom()-br->size().height()), eRect(x, pos.bottom()-br->size().height(), pos.width() - x, bl->size().height()), gPainter::BT_ALPHABLEND);
+		painter.blit(br, ePoint(xm, pos.bottom()-br->size().height()), eRect(x, pos.bottom()-br->size().height(), pos.width() - x, bl->size().height()), flags);
 	}
 
 	if (b)
 	{
 		while (x < xm)
 		{
-			painter.blit(b, ePoint(x, pos.bottom()-b->size().height()), eRect(x, pos.bottom()-b->size().height(), xm - x, pos.height()), gPainter::BT_ALPHABLEND);
+			painter.blit(b, ePoint(x, pos.bottom()-b->size().height()), eRect(x, pos.bottom()-b->size().height(), xm - x, pos.height()), flags);
 			x += b->size().width();
 		}
 	}
@@ -168,7 +168,7 @@ void eWindowStyleSkinned::drawBorder(gPainter &painter, const eRect &pos, struct
 	{
 		while (y < ym)
 		{
-			painter.blit(l, ePoint(pos.left(), y), eRect(pos.left(), y, pos.width(), ym - y), gPainter::BT_ALPHABLEND);
+			painter.blit(l, ePoint(pos.left(), y), eRect(pos.left(), y, pos.width(), ym - y), flags);
 			y += l->size().height();
 		}
 	}
@@ -188,7 +188,7 @@ void eWindowStyleSkinned::drawBorder(gPainter &painter, const eRect &pos, struct
 	{
 		while (y < ym)
 		{
-			painter.blit(r, ePoint(pos.right() - r->size().width(), y), eRect(pos.right()-r->size().width(), y, r->size().width(), ym - y), gPainter::BT_ALPHABLEND);
+			painter.blit(r, ePoint(pos.right() - r->size().width(), y), eRect(pos.right()-r->size().width(), y, r->size().width(), ym - y), flags);
 			y += r->size().height();
 		}
 	}

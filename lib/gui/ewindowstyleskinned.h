@@ -92,7 +92,7 @@ private:
 	eSize m_title_offset;
 	ePtr<gFont> m_fnt;
 
-	void drawBorder(gPainter &painter, const eRect &size, struct borderSet &border, int where);
+	void drawBorder(gPainter &painter, const eRect &size, struct borderSet &border, int where, int flags);
 };
 
 #endif
