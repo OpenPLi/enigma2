@@ -2495,7 +2495,7 @@ class InfoBarInstantRecord:
 				self.recording = InfoBarInstance.recording
 
 	def moveToTrash(self, entry):
-		print("instantRecord stop and delete recording: ", entry.name)
+		print("[instantRecord] stop and delete recording: %s", entry.name)
 		from Tools.Trashcan import createTrashFolder
 		trash = createTrashFolder(entry.Filename)
 		from Screens.MovieSelection import moveServiceFiles
@@ -2562,24 +2562,30 @@ class InfoBarInstantRecord:
 			info["eventid"] = curEvent[4]
 			info["end"] = curEvent[1]
 
-	def startInstantRecording(self, limitEvent=False):
+	def startInstantRecording(self, limitEvent=""):
 		begin = int(time())
-		end = begin + 3600      # dummy
+		end = begin + 3600 # 1h
 		name = _("Instant record")
 		info = {}
+		message = ""
+		warning_message = "\n" + _("Default time - 24 hours!") + "\n"
+		timeout = 5
 
 		self.getProgramInfoAndEvent(info, name)
 		serviceref = info["serviceref"]
 		event = info["event"]
 
-		if event is not None:
-			if limitEvent:
+		if limitEvent in ("event", "manualendtime", "manualduration"):
+			if event: 
 				end = info["end"]
-		else:
-			message = _("No event info found, recording indefinitely.")
-			if limitEvent:
-				message = _("Recording time has been set.")
-			self.session.open(MessageBox, message, MessageBox.TYPE_INFO, timeout=5)
+			else:
+				message = _("No event info found, recording indefinitely.")
+				if limitEvent in ("event", "manualendtime"):
+					message += warning_message
+		if limitEvent in ("", "indefinitely"):
+			end = begin + (60 * 60 * 24) # 24h
+			message = _("Recording time has been set.")
+			message += warning_message
 
 		if isinstance(serviceref, eServiceReference):
 			serviceref = ServiceReference(serviceref)
@@ -2587,33 +2593,43 @@ class InfoBarInstantRecord:
 		recording = RecordTimerEntry(serviceref, begin, end, info["name"], info["description"], info["eventid"], dirname=preferredInstantRecordPath())
 		recording.dontSave = True
 
-		if event is None or limitEvent == False:
+		if not event or limitEvent in ("", "indefinitely"):
 			recording.autoincrease = True
 			recording.setAutoincreaseEnd()
 
 		simulTimerList = self.session.nav.RecordTimer.record(recording)
 
-		if simulTimerList is None:	# no conflict
+		if simulTimerList is None: # no conflict
 			recording.autoincrease = False
 			self.recording.append(recording)
 		else:
-			if len(simulTimerList) > 1: # with other recording
-				name = simulTimerList[1].name
+			count = len(simulTimerList)
+			if count > 1: # with other recording
+				timeout = 10
+				name = "'%s'" % simulTimerList[1].name
 				name_date = ' '.join((name, strftime('%F %T', localtime(simulTimerList[1].begin))))
-				print("[TIMER] conflicts with", name_date)
-				recording.autoincrease = True	# start with max available length, then increment
+				print("[InfoBarInstantRecord] conflicts with", name_date, count)
+				recording.autoincrease = True # start with max available length, then increment
 				if recording.setAutoincreaseEnd():
 					self.session.nav.RecordTimer.record(recording)
 					self.recording.append(recording)
-					self.session.open(MessageBox, _("Record time limited due to conflicting timer %s") % name_date, MessageBox.TYPE_INFO)
+					message += _("Record time limited due to conflicting timer %s") % name_date
 				else:
-					self.session.open(MessageBox, _("Could not record due to conflicting timer %s") % name, MessageBox.TYPE_INFO)
+					message += _("Could not record due to conflicting timer %s") % name
+					if count > 2:
+						message +=  "\n" +_("total conflict (%d)") % (count - 1)
 			else:
-				self.session.open(MessageBox, _("Could not record due to invalid service %s") % serviceref, MessageBox.TYPE_INFO)
+				ref = "\n'%s'" % serviceref
+				message = _("Could not record due to invalid service %s") % ref
 			recording.autoincrease = False
+		if message:
+			self.session.open(MessageBox, text=message, type=MessageBox.TYPE_INFO, timeout=timeout)
+
+	def startRecordingCurrentEvent(self):
+		self.startInstantRecording(limitEvent="event")
 
 	def isInstantRecordRunning(self):
-		print("self.recording:", self.recording)
+		#print("[InfoBarInstantRecord] self.recording:", self.recording)
 		if self.recording:
 			for x in self.recording:
 				if x.isRunning():
@@ -2621,7 +2637,7 @@ class InfoBarInstantRecord:
 		return False
 
 	def recordQuestionCallback(self, answer):
-		print("pre:\n", self.recording)
+		#print("[InfoBarInstantRecord] pre:\n", self.recording)
 
 		if answer is None or answer[1] == "no":
 			return
@@ -2669,7 +2685,7 @@ class InfoBarInstantRecord:
 			self.deleteRecording = True
 			self.stopAllCurrentRecordings(list)
 		elif answer[1] in ("indefinitely", "manualduration", "manualendtime", "event"):
-			self.startInstantRecording(limitEvent=answer[1] in ("event", "manualendtime", "manualduration") or False)
+			self.startInstantRecording(limitEvent=answer[1])
 			if answer[1] == "manualduration":
 				self.changeDuration(len(self.recording) - 1)
 			elif answer[1] == "manualendtime":
@@ -2685,7 +2701,7 @@ class InfoBarInstantRecord:
 					remaining = self.currentEventTime()
 					if remaining > 0:
 						self.setCurrentEventTimer(remaining - 15)
-		print("after:\n", self.recording)
+		#print("[InfoBarInstantRecord] after:\n", self.recording)
 
 	def setEndtime(self, entry):
 		if entry is not None and entry >= 0:
@@ -2695,13 +2711,13 @@ class InfoBarInstantRecord:
 			dlg.setTitle(_("Please change recording endtime"))
 
 	def TimeDateInputClosed(self, ret):
-		if len(ret) > 1:
-			if ret[0]:
-				print("stopping recording at", strftime("%F %T", localtime(ret[1])))
-				if self.recording[self.selectedEntry].end != ret[1]:
-					self.recording[self.selectedEntry].autoincrease = False
-				self.recording[self.selectedEntry].end = ret[1]
-				self.session.nav.RecordTimer.timeChanged(self.recording[self.selectedEntry])
+		if len(ret) > 1 and ret[0]:
+			print("[InfoBarInstantRecord] stop recording at %s " % strftime("%F %T", localtime(ret[1])))
+			entry = self.recording[self.selectedEntry]
+			if entry.end != ret[1]:
+				entry.autoincrease = False
+			entry.end = ret[1]
+			self.session.nav.RecordTimer.timeChanged(entry)
 
 	def changeDuration(self, entry):
 		if entry is not None and entry >= 0:
@@ -2714,8 +2730,8 @@ class InfoBarInstantRecord:
 			self.session.openWithCallback(self.inputAddRecordingTime, InputBox, title=_("How many minutes do you want add to the recording?"), text="5  ", maxSize=True, type=Input.NUMBER)
 
 	def inputAddRecordingTime(self, value):
-		if value:
-			print("added", int(value), "minutes for recording.")
+		if value and value.isdigit():
+			print("[InfoBarInstantRecord] added %d minutes for recording.", int(value))
 			entry = self.recording[self.selectedEntry]
 			if int(value) != 0:
 				entry.autoincrease = False
@@ -2723,13 +2739,16 @@ class InfoBarInstantRecord:
 			self.session.nav.RecordTimer.timeChanged(entry)
 
 	def inputCallback(self, value):
-		if value:
-			print("stopping recording after", int(value), "minutes.")
+		if value and value.isdigit():
+			print("[InfoBarInstantRecord] stopping recording after %d minutes.",int(value))
 			entry = self.recording[self.selectedEntry]
 			if int(value) != 0:
 				entry.autoincrease = False
 			entry.end = int(time()) + 60 * int(value)
 			self.session.nav.RecordTimer.timeChanged(entry)
+		else:
+			if self.recording[self.selectedEntry].eit == None:
+				self.session.open(MessageBox, text=_("Default time - 24 hours!"), type=MessageBox.TYPE_INFO, timeout=5)
 
 	def isTimerRecordRunning(self):
 		identical = timers = 0
@@ -2748,8 +2767,7 @@ class InfoBarInstantRecord:
 		if not findSafeRecordPath(pirr) and not findSafeRecordPath(defaultMoviePath()):
 			if not pirr:
 				pirr = ""
-			self.session.open(MessageBox, _("Missing ") + "\n" + pirr +
-						"\n" + _("No HDD found or HDD not initialized!"), MessageBox.TYPE_ERROR)
+			self.session.open(MessageBox, _("Missing ") + "\n" + pirr + "\n" + _("No HDD found or HDD not initialized!"), MessageBox.TYPE_ERROR)
 			return
 
 		if isStandardInfoBar(self):
