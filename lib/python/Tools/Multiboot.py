@@ -68,7 +68,7 @@ def getMultibootslots():
 			#the boot device has ancient content and does not contain the correct STARTUP files
 			for slot in range(1, 5):
 				bootslots[slot] = {'device': '/dev/mmcblk0p%s' % (slot * 2 + 1), 'startupfile': None}
-	print('[Multiboot] Bootslots found:', bootslots)
+	print '[Multiboot] Bootslots found:', bootslots
 	return bootslots
 
 
