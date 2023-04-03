@@ -553,7 +553,7 @@ class MultibootSelection(SelectImage):
 			self["key_yellow"].setText("")
 
 
-class VuplusKexec(Screen):
+class KexecInit(Screen):
 
 	model = HardwareInfo().get_device_model()
 	modelMtdRootKernel = model in ("vuduo4k", "vuduo4kse") and ["mmcblk0p9", "mmcblk0p6"] or model in ("vusolo4k", "vuultimo4k", "vuuno4k", "vuuno4kse") and ["mmcblk0p4", "mmcblk0p1"] or model == "vuzero4k" and ["mmcblk0p7", "mmcblk0p4"] or ["", ""]
@@ -566,8 +566,8 @@ class VuplusKexec(Screen):
 
 	def __init__(self, session, *args):
 		Screen.__init__(self, session)
-		self.skinName = ["VuplusKexec", "Setup"]
-		self.setTitle(_("Vu+ MultiBoot Manager"))
+		self.skinName = ["KexecInit", "Setup"]
+		self.setTitle(_("Kexec MultiBoot Manager"))
 		self["description"] = Label(_("Press Green key to enable MultiBoot!\n\nWill reboot within 10 seconds,\nunless you have eMMC slots to restore.\nRestoring eMMC slots can take from 1 -> 5 minutes per slot."))
 		self["key_green"] = StaticText(_("Init Vu+ MultiBoot"))
 		self["actions"] = ActionMap(["SetupActions"],
@@ -581,8 +581,8 @@ class VuplusKexec(Screen):
 	def RootInit(self):
 		self["actions"].setEnabled(False)  # This function takes time so disable the ActionMap to avoid responding to multiple button presses
 		if fileExists("/usr/bin/kernel_auto.bin") and fileExists("/usr/bin/STARTUP.cpio.gz"):
-			self.setTitle(_("Vu+ MultiBoot Initialisation - will reboot after 10 seconds."))
-			self["description"].setText(_("Vu+ MultiBoot Initialisation in progress!\n\nWill reboot after restoring any eMMC slots.\nThis can take from 1 -> 5 minutes per slot."))
+			self.setTitle(_("Kexec MultiBoot Initialisation - will reboot after 10 seconds."))
+			self["description"].setText(_("Kexec MultiBoot Initialisation in progress!\n\nWill reboot after restoring any eMMC slots.\nThis can take from 1 -> 5 minutes per slot."))
 			with open("/STARTUP", 'w') as f:
 				f.write(self.STARTUP)
 			with open("/STARTUP_RECOVERY", 'w') as f:
@@ -599,7 +599,7 @@ class VuplusKexec(Screen):
 			cmdlist.append("mv /usr/bin/STARTUP.cpio.gz /STARTUP.cpio.gz")  # copy userroot routine
 			Console().eBatch(cmdlist, self.RootInitEnd, debug=True)
 		else:
-			self.session.open(MessageBox, _("Unable to complete - Vu+ Multiboot files missing!"), MessageBox.TYPE_INFO, timeout=10)
+			self.session.open(MessageBox, _("Unable to complete - Kexec Multiboot files missing!"), MessageBox.TYPE_INFO, timeout=10)
 			self.close()
 
 	def RootInitEnd(self, *args, **kwargs):
