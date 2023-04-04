@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-14 14:37+0100\n"
+"POT-Creation-Date: 2023-04-04 12:00+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: IMS <ims@openpli.org>\n"
 "Language-Team: PLi <ims@openpli.org>\n"
@@ -355,12 +355,20 @@ msgid "%s %d.%d"
 msgstr "%s %d.%d"
 
 #, python-format
+msgid "%s (files)"
+msgstr "%s (soubory)"
+
+#, python-format
 msgid "%s KSymb/s"
 msgstr "%s KSymb/s"
 
 #, python-format
 msgid "%s MHz"
 msgstr "%s MHz"
+
+#, python-format
+msgid "%s connected successfully."
+msgstr "%s úspěšně připojen."
 
 #, python-format
 msgid "%s imported from fallback tuner"
@@ -741,10 +749,6 @@ msgid "Activate Picture in Picture"
 msgstr "Aktivovat obraz v obraze"
 
 #
-msgid "Activate current configuration"
-msgstr "Aktivovat současnou konfiguraci"
-
-#
 msgid "Activate network settings"
 msgstr "Aktivovat nastavení sítě"
 
@@ -769,10 +773,6 @@ msgstr "Přidat"
 #
 msgid "Add a mark"
 msgstr "Přidat značku"
-
-#
-msgid "Add a nameserver entry"
-msgstr "Přidat nameserver"
 
 #
 msgid "Add a new title"
@@ -1243,9 +1243,6 @@ msgstr "Audio PID"
 msgid "Audio PID%s, codec & lang"
 msgstr "Audio PID%s, kodek & jazyk"
 
-msgid "Audio PID, codec & lang"
-msgstr "Audio PID, kodek & jazyk"
-
 msgid "Audio auto volume level"
 msgstr "Automatická úroveň hlasitosti"
 
@@ -1476,6 +1473,9 @@ msgstr "Barbados"
 
 msgid "Basic PID info"
 msgstr "Základní PID info"
+
+msgid "Basic info"
+msgstr "Základní informace"
 
 #
 msgid "Basque"
@@ -2071,6 +2071,10 @@ msgstr "Code rate HP"
 msgid "Code rate LP"
 msgstr "Code rate LP"
 
+#, python-format
+msgid "Codec & lang%s"
+msgstr "Kodek &jazyk%s"
+
 #
 msgid "Collection name"
 msgstr "Název kompilace"
@@ -2242,10 +2246,6 @@ msgstr "Nastavuje, zda se mají titulky přepínat mezi normálními, kurzívou,
 #
 msgid "Configure interface"
 msgstr "Nastavuje interface"
-
-#
-msgid "Configure nameservers"
-msgstr "Nastavuje DNS servery"
 
 msgid "Configure on which devices the background delete option should be used."
 msgstr "Nastavuje, na kterých zařízeních může být nastaveno mazání na pozadí."
@@ -2884,6 +2884,10 @@ msgstr "Standardní"
 #
 msgid "Default Services Scanner"
 msgstr "Výchozí prohledání programů"
+
+#, python-format
+msgid "Default duration: %d mins"
+msgstr "Výchozí délka: %d minut"
 
 #
 msgid "Default movie location"
@@ -3543,10 +3547,6 @@ msgid "Edit"
 msgstr "Upravit"
 
 #
-msgid "Edit DNS"
-msgstr "Upravit DNS"
-
-#
 msgid "Edit alternatives"
 msgstr "Upravit alternativy"
 
@@ -3627,6 +3627,9 @@ msgstr "Povolit EIT EPG"
 #
 msgid "Enable HDMI-CEC"
 msgstr "Povolit HDMI-CEC"
+
+msgid "Enable Kexec MultiBoot"
+msgstr "Povolit Kexec MultiBoot"
 
 #
 msgid "Enable MHW EPG"
@@ -3942,9 +3945,8 @@ msgid "Estonian"
 msgstr "Estonsky"
 
 #
-#, fuzzy
 msgid "EtPortal"
-msgstr "Portugalsko"
+msgstr ""
 
 msgid "Ethernet network interface"
 msgstr "Ethernet síťové rozhraní"
@@ -4026,10 +4028,6 @@ msgid "Exit movie player?"
 msgstr "Zavřít přehrávač?"
 
 #
-msgid "Exit nameserver configuration"
-msgstr "Zavřít konfiguraci DNS"
-
-#
 msgid "Exit network interface list"
 msgstr "Zavřít seznam síťových rozhraní"
 
@@ -4066,6 +4064,9 @@ msgstr "Rozšířené programy"
 #
 msgid "Extended Software Plugin"
 msgstr "Plugin rozšíření programů"
+
+msgid "Extended info"
+msgstr "Rozšířené info"
 
 #
 msgid "Extended network setup plugin..."
@@ -4493,9 +4494,8 @@ msgid "Further options"
 msgstr "Další možnosti"
 
 #
-#, fuzzy
 msgid "G"
-msgstr "GB"
+msgstr ""
 
 #
 msgid "GB"
@@ -4695,9 +4695,8 @@ msgstr "Guinea-Bissau"
 msgid "Guyana"
 msgstr "Guyana"
 
-#, fuzzy
 msgid "H"
-msgstr "K"
+msgstr ""
 
 #
 msgid "HD"
@@ -5136,6 +5135,9 @@ msgstr "Informace"
 msgid "Init"
 msgstr "Init"
 
+msgid "Init Vu+ MultiBoot"
+msgstr "Inicializovat Vu+ MultiBoot"
+
 #
 msgid "Initial fast forward speed"
 msgstr "Počáteční rychlost pro přetáčení dopředu"
@@ -5390,6 +5392,23 @@ msgstr "Keňa"
 
 msgid "Kernel version: "
 msgstr "Verze jádra: "
+
+msgid "Kexec MultiBoot Initialisation - will reboot after 10 seconds."
+msgstr "Kexec MultiBoot Inicializace - bude restartováno za 10  sekund"
+
+msgid ""
+"Kexec MultiBoot Initialisation in progress!\n"
+"\n"
+"Will reboot after restoring any eMMC slots.\n"
+"This can take from 1 -> 5 minutes per slot."
+msgstr ""
+"Probíhá Kexec MultiBoot Inicializace!\n"
+"\n"
+"Restart bude proveden po obnovení eMMC slotů.\n"
+"Obnovení může trvat od 1 do 5 minut na slot."
+
+msgid "Kexec MultiBoot Manager"
+msgstr "Kexec MultiBoot Manažer"
 
 msgid "Key Events"
 msgstr "Klíčové události"
@@ -6148,19 +6167,6 @@ msgstr "Jméno"
 msgid "Nameserver"
 msgstr "DNS server"
 
-#
-#, python-format
-msgid "Nameserver %d"
-msgstr "DNS server %d"
-
-#
-msgid "Nameserver settings"
-msgstr "Nastavení DNS"
-
-#
-msgid "Nameserver setup"
-msgstr "Nastavení DNS"
-
 msgid "Namespace & Orbital pos."
 msgstr "Namespace & orbitální pozice"
 
@@ -6676,6 +6682,13 @@ msgstr "Možnosti zakázání časovače"
 msgid "Orbital position"
 msgstr "Orbitální pozice"
 
+#
+msgid "Order by modes"
+msgstr "Pořadí podlé módů"
+
+msgid "Order by slots"
+msgstr "Pořadí podle slotů"
+
 msgid "Ordinary"
 msgstr "Obvyklý"
 
@@ -6804,6 +6817,13 @@ msgstr "Nastavení rodičovského zámku"
 #
 msgid "Parental control setup"
 msgstr "Nastavení rodičovského zámku"
+
+msgid "Partial"
+msgstr "Podobné vysílání"
+
+#
+msgid "Partial EPG"
+msgstr "Hledat EPG"
 
 msgid "Passthrough"
 msgstr "Průchozí"
@@ -6954,14 +6974,6 @@ msgstr "Změňte dobu ukončení nahrávání"
 #
 msgid "Please choose an extension..."
 msgstr "Vyberte si z nabídky rozšíření..."
-
-#
-msgid ""
-"Please configure or verify your Nameservers by filling out the required values.\n"
-"When you are ready press OK to continue."
-msgstr ""
-"Nakonfigurujte nebo zkontrolujte DNS servery vyplněním požadovaných hodnot.\n"
-"Pro pokračování stiskněte OK."
 
 msgid "Please configure the fallback tuner setup"
 msgstr "Nastavit záložní tuner"
@@ -7405,6 +7417,19 @@ msgstr "Stiskněte OK pro odstranění položky nebo CH+/- k přepnutí do sezna
 msgid "Press 'OK' for remove item or < > for change order or 'CH+/-' for toggle to list of features."
 msgstr "OK pro odstranění nebo < > pro změnu pořadí nebo CH+/- pro přepnutí do seznamu funkcí."
 
+msgid ""
+"Press Green key to enable MultiBoot!\n"
+"\n"
+"Will reboot within 10 seconds,\n"
+"unless you have eMMC slots to restore.\n"
+"Restoring eMMC slots can take from 1 -> 5 minutes per slot."
+msgstr ""
+"Stiskněte zelené tlačítko pro povolení MultiBoot!\n"
+"\n"
+"Během 10 sekund dojde k restartu,\n"
+"pokud nebude potřeba obnovit eMMC sloty.\n"
+"Obnovení eMMC slotů může trvat od 1 do pěti minut na slot."
+
 msgid "Press INFO on your remote control for additional information."
 msgstr "Stiskněte INFO na dálkovém ovladači pro další informace."
 
@@ -7840,10 +7865,6 @@ msgstr "Smazat"
 #
 msgid "Remove a mark"
 msgstr "Odstranit značku"
-
-#
-msgid "Remove a nameserver entry"
-msgstr "Odstranit DNS položku"
 
 #
 msgid "Remove all alternatives"
@@ -9860,6 +9881,9 @@ msgstr "Spustit okamžité nahrávání"
 msgid "Start offline decode"
 msgstr "Spustit offline dekódování"
 
+msgid "Start recording current event"
+msgstr "Spustit nahrávání aktuální události"
+
 #
 msgid "Start recording?"
 msgstr "Spustit nahrávání?"
@@ -10016,6 +10040,9 @@ msgstr "Zrušit nastavení po spuštění"
 
 msgid "Stopped"
 msgstr "Zastaveno"
+
+msgid "Storage device not available or not initialized."
+msgstr "Zařízení pro ukládání chybí nebo není inicializováno!"
 
 msgid "Store at index"
 msgstr "Uložit na pozici"
@@ -10289,7 +10316,7 @@ msgstr ""
 "Pro případné korekce můžete kontaktovat autora\n"
 "na výše uvedené adrese.\n"
 "\n"
-"®23.10.2022"
+"®4.4.2023"
 
 #
 msgid "TS file is too large for ISO9660 level 1!"
@@ -11237,6 +11264,9 @@ msgstr "Ukrajinsky"
 
 msgid "Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"
 msgstr "Není možné zazálohovat nastavení, protože chybí plugin AutoBackup. Chcete pokračovat?"
+
+msgid "Unable to complete - Kexec Multiboot files missing!"
+msgstr "Nelze dokončit - chybí soubory pro Kexec Multiboot!"
 
 msgid "Unable to create the required directories on the media (e.g. USB stick or Harddisk) - Please verify media and try again!"
 msgstr "Nelze nastavit požadované adresáře na médiu (např. na USB nebo HDD) - Ověřte médium a zkuste to znovu!"
@@ -13329,10 +13359,6 @@ msgstr "Pouze z hlubokého spánku"
 msgid "only from standby"
 msgstr "Pouze ze standby"
 
-#
-msgid "open nameserver configuration"
-msgstr "otevřít konfiguraci DNS"
-
 msgid "original"
 msgstr "Původní"
 
@@ -13640,6 +13666,10 @@ msgstr "přepnout informace mezi časem, kapitolou, audiostopou, titulky"
 #
 msgid "top"
 msgstr "Nahoře"
+
+#, python-format
+msgid "total conflict (%d)"
+msgstr "celkový konflikt (%d)"
 
 msgid "tourism/travel"
 msgstr "turistika/cestování"
