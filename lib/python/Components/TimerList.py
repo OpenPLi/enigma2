@@ -3,7 +3,7 @@ from skin import parseFont, parseScale
 
 from Tools.FuzzyDate import FuzzyTime
 
-from enigma import eListboxPythonMultiContent, eListbox, gFont, getBestPlayableServiceReference, eServiceReference, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_TOP, RT_VALIGN_BOTTOM
+from enigma import eListboxPythonMultiContent, eListbox, gFont, getBestPlayableServiceReference, eServiceReference, iRecordableServicePtr, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_TOP, RT_VALIGN_BOTTOM
 from Tools.Alternatives import GetWithAlternative
 from Tools.LoadPixmap import LoadPixmap
 from Tools.TextBoundary import getTextBoundarySize
@@ -84,7 +84,7 @@ class TimerList(GUIComponent):
 			icon = self.iconDone
 
 		icon and res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, self.iconMargin // 2, (self.rowSplit - self.iconHeight) // 2, self.iconWidth, self.iconHeight, icon))
-		orbpos = self.getOrbitalPos(timer.service_ref, timer.state)
+		orbpos = self.getOrbitalPos(timer.service_ref, timer.state, timer.record_service)
 		orbposWidth = getTextBoundarySize(self.instance, self.font, self.l.getItemSize(), orbpos).width()
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, self.satPosLeft, self.rowSplit, orbposWidth, self.itemHeight - self.rowSplit, 1, RT_HALIGN_LEFT | RT_VALIGN_TOP, orbpos))
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, self.iconWidth + self.iconMargin, self.rowSplit, self.satPosLeft - self.iconWidth - self.iconMargin, self.itemHeight - self.rowSplit, 1, RT_HALIGN_LEFT | RT_VALIGN_TOP, state))
@@ -184,16 +184,15 @@ class TimerList(GUIComponent):
 	def entryRemoved(self, idx):
 		self.l.entryRemoved(idx)
 
-	def getOrbitalPos(self, ref, state):
-		refstr = ''
-		alternative = ''
-		if hasattr(ref, 'sref'):
+	def getOrbitalPos(self, ref, state, record_service=None):
+		tuner_name = refstr = alternative = ""
+		if hasattr(ref, "sref"):
 			refstr = str(ref.sref)
 		else:
 			refstr = str(ref)
-		if refstr and refstr.startswith('1:134:'):
+		if refstr and refstr.startswith("1:134:"):
 			alternative = " (A)"
-			if state in (1, 2) and not hasattr(ref, 'sref'):
+			if state in (1, 2) and not hasattr(ref, "sref"):
 				current_ref = getBestPlayableServiceReference(ref.ref, eServiceReference())
 				if not current_ref:
 					return _("N/A") + alternative
@@ -201,15 +200,23 @@ class TimerList(GUIComponent):
 					refstr = current_ref.toString()
 			else:
 				refstr = GetWithAlternative(refstr)
-		if '%3a//' in refstr:
+		if "%3a//" in refstr:
 			return "%s" % _("Stream") + alternative
-		op = int(refstr.split(':', 10)[6][:-4] or "0", 16)
+		if record_service and state in (1, 2) and not hasattr(ref, "sref"):
+			if isinstance(record_service, iRecordableServicePtr):
+				feinfo = hasattr(record_service, "frontendInfo") and record_service.frontendInfo()
+				data = feinfo and hasattr(feinfo, "getFrontendData") and feinfo.getFrontendData()
+				if data:
+					number = data.get("tuner_number", None)
+					if number != None and isinstance(number, int):
+						tuner_name = "%s: " % chr(number + 65)
+		op = int(refstr.split(":", 10)[6][:-4] or "0", 16)
 		if op == 0xeeee:
-			return "%s" % "DVB-T" + alternative
+			return tuner_name + ("%s" % "DVB-T") + alternative
 		if op == 0xffff:
-			return "%s" % "DVB-C" + alternative
-		direction = 'E'
+			return tuner_name + ("%s" % "DVB-C") + alternative
+		direction = "E"
 		if op > 1800:
 			op = 3600 - op
-			direction = 'W'
-		return ("%d.%d\xb0%s") % (op // 10, op % 10, direction) + alternative
+			direction = "W"
+		return tuner_name + ("%d.%d\xb0%s" % (op // 10, op % 10, direction)) + alternative
