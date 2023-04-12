@@ -30,6 +30,12 @@ void eSlider::setBackgroundPixmap(gPixmap *pixmap)
 	invalidate();
 }
 
+void eSlider::setAlphatest(int alphatest)
+{
+	m_alphatest = alphatest;
+	setTransparent(alphatest);
+}
+
 void eSlider::setBorderWidth(int pixel)
 {
 	m_border_width=pixel;
