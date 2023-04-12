@@ -32,7 +32,6 @@ void eSlider::setBackgroundPixmap(gPixmap *pixmap)
 
 void eSlider::setAlphatest(int alphatest)
 {
-	m_alphatest = alphatest;
 	setTransparent(alphatest);
 }
 

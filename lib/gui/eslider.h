@@ -5,7 +5,6 @@
 
 class eSlider: public eWidget
 {
-	int m_alphatest;
 public:
 	eSlider(eWidget *parent);
 	void setValue(int val);
