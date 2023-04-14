@@ -949,6 +949,8 @@ class NimManager:
 							entry["internally_connectable"] = 1
 					elif id:
 						entry["internally_connectable"] = entry["frontend_device"] - 1
+						if HardwareInfo().get_device_model() == "vuduo2" and entry["i2c"] != entries[id - 1]["i2c"]:
+							entry["internally_connectable"] = None
 			else:
 				entry["frontend_device"] = None
 			if "multi_type" not in entry:
