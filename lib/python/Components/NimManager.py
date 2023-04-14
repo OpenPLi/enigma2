@@ -1,7 +1,6 @@
 import os
 
 from Components.SystemInfo import SystemInfo
-from Tools.HardwareInfo import HardwareInfo
 from Tools.BoundFunction import boundFunction
 
 from Components.config import config, ConfigSubsection, ConfigSelection, ConfigFloat, ConfigSatlist, ConfigYesNo, ConfigInteger, ConfigSubList, ConfigNothing, ConfigSubDict, ConfigOnOff, ConfigDateTime, ConfigText
@@ -117,7 +116,7 @@ class SecConfigure:
 
 	def linkNIMs(self, sec, nim1, nim2):
 		print("[SecConfigure] link tuner", nim1, "to tuner", nim2)
-		if (nim2 == nim1 - 1) or HardwareInfo().get_device_model() == "vusolo2":
+		if (nim2 == nim1 - 1) or SystemInfo["NimExceptionVuSolo2"]:
 			self.linkInternally(nim1)
 		sec.setTunerLinked(nim1, nim2)
 
@@ -944,12 +943,12 @@ class NimManager:
 			entry["internally_connectable"] = None
 			if "frontend_device" in entry: # check if internally connectable
 				if os.path.exists("/proc/stb/frontend/%d/rf_switch" % entry["frontend_device"]) and (not id or entries[id]["name"] == entries[id - 1]["name"]):
-					if HardwareInfo().get_device_model() == "vusolo2":
+					if SystemInfo["NimExceptionVuSolo2"]:
 						if not id:
 							entry["internally_connectable"] = 1
 					elif id:
 						entry["internally_connectable"] = entry["frontend_device"] - 1
-						if HardwareInfo().get_device_model() == "vuduo2" and entry["i2c"] != entries[id - 1]["i2c"]:
+						if SystemInfo["NimExceptionVuDuo2"] and entry["i2c"] != entries[id - 1]["i2c"]:
 							entry["internally_connectable"] = None
 			else:
 				entry["frontend_device"] = None
@@ -1311,8 +1310,6 @@ def InitSecParams():
 
 
 def InitNimManager(nimmgr, update_slots=[]):
-	hw = HardwareInfo()
-
 	if not hasattr(config, "Nims"):
 		InitSecParams()
 		config.Nims = ConfigSubList()
@@ -1598,7 +1595,7 @@ def InitNimManager(nimmgr, update_slots=[]):
 		nim.turningspeedH = ConfigFloat(default=[2, 3], limits=[(0, 9), (0, 9)])
 		nim.turningspeedV = ConfigFloat(default=[1, 7], limits=[(0, 9), (0, 9)])
 		nim.powerMeasurement = ConfigYesNo(True)
-		nim.powerThreshold = ConfigInteger(default=hw.get_device_name() == "dm8000" and 15 or 50, limits=(0, 100))
+		nim.powerThreshold = ConfigInteger(default=15 if SystemInfo["NimExceptionDMM8000"] else 50, limits=(0, 100))
 		nim.turningSpeed = ConfigSelection(turning_speed_choices, "fast")
 		btime = datetime(1970, 1, 1, 7, 0)
 		nim.fastTurningBegin = ConfigDateTime(default=mktime(btime.timetuple()), formatstring=_("%H:%M"), increment=900)
