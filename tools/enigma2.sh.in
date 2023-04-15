@@ -125,7 +125,12 @@ while : ; do
 			/sbin/reboot
 			;;
 		43)
-			# restore a full autobackup
+			# restore only network from autobackup
+			[ -f /sys/class/vtconsole/vtcon1/bind ] && echo 1 > /sys/class/vtconsole/vtcon1/bind
+			/etc/init.d/settings-restore.sh network
+			;;
+		44)
+			# restore autobackup
 			[ -f /sys/class/vtconsole/vtcon1/bind ] && echo 1 > /sys/class/vtconsole/vtcon1/bind
 			/etc/init.d/settings-restore.sh
 			[ -f /etc/init.d/softcam ] && /etc/init.d/softcam restart
