@@ -130,7 +130,7 @@ class TimerSanityCheck:
 			interval_begin = min(self.nrep_eventlist)[0]
 			interval_end = max(self.nrep_eventlist)[0]
 			offset_0 = interval_begin - (interval_begin % 604800)
-			weeks = (interval_end - offset_0) / 604800
+			weeks = (interval_end - offset_0) // 604800
 			if (interval_end - offset_0) % 604800:
 				weeks += 1
 			for cnt in range(int(weeks)):
@@ -217,7 +217,7 @@ class TimerSanityCheck:
 					fakeRecResult = -1
 				# TODO
 				#if fakeRecResult == -6 and len(NavigationInstance.instance.getRecordings(True)) < 2:
-				#	print "[TimerSanityCheck] less than two timers in the simulated recording list - timer conflict is not plausible - ignored !"
+				#	print("[TimerSanityCheck] less than two timers in the simulated recording list - timer conflict is not plausible - ignored!")
 				#	fakeRecResult = 0
 				if not fakeRecResult: # tune okay
 					if hasattr(fakeRecService, 'frontendInfo'):
@@ -293,7 +293,6 @@ class TimerSanityCheck:
 
 			self.nrep_eventlist[idx] = (event[0], event[1], event[2], cnt, overlaplist[:]) # insert a duplicate into current overlaplist
 			fakeRecService = None
-			fakeRecResult = None
 			idx += 1
 
 		if ConflictTimer is None:
