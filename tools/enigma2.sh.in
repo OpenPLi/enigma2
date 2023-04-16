@@ -65,7 +65,8 @@ while : ; do
 	#  6 - restart enigma in debug mode
 	#  7 - manufacturer reset
 	# 42 - restart for unattended update
-	# 43 - restart for autobackup restore
+	# 43 - restart for network restore
+	# 44 - restart for autobackup restore
 	#
 	# >128 signal
 
@@ -128,6 +129,7 @@ while : ; do
 			# restore only network from autobackup
 			[ -f /sys/class/vtconsole/vtcon1/bind ] && echo 1 > /sys/class/vtconsole/vtcon1/bind
 			/etc/init.d/settings-restore.sh network
+			break
 			;;
 		44)
 			# restore autobackup

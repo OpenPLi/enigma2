@@ -77,9 +77,14 @@ class AutoRestoreWizard(MessageBox):
 
 	def close(self, value):
 		if value:
-			MessageBox.close(self, 43)
-		else:
-			MessageBox.close(self)
+			if os.path.isfile("/etc/.doNotAutoinstall"):
+				os.unlink("/etc/.doNotAutoinstall")
+				MessageBox.close(self, 44)
+			else:
+				# restore network config first, we need it to autoinstall
+				open('/etc/.doAutoinstall', 'w')
+				MessageBox.close(self, 43)
+		MessageBox.close(self)
 
 
 class AutoInstallWizard(Screen):
@@ -173,7 +178,7 @@ class AutoInstallWizard(Screen):
 			self.container.dataAvail.remove(self.dataAvail)
 		self.container = None
 		self.logfile.close()
-		os.remove("/etc/.doAutoinstall")
+		os.unlink("/etc/.doAutoinstall")
 		self.close(44)
 
 if not os.path.isfile("/etc/installed"):
