@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-14 14:37+0100\n"
+"POT-Creation-Date: 2023-04-16 18:05+0200\n"
 "PO-Revision-Date: 2013-10-20 19:13-0300\n"
 "Last-Translator: Diogo <pingflood@gmail.com>\n"
 "Language-Team: Traduzido por Frank Viana <franksrviana@gmail.com>\n"
@@ -318,6 +318,10 @@ msgstr ""
 msgid "%s %d.%d"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "%s (files)"
+msgstr "%d arquivo"
+
 #, python-format
 msgid "%s KSymb/s"
 msgstr ""
@@ -325,6 +329,10 @@ msgstr ""
 #, python-format
 msgid "%s MHz"
 msgstr ""
+
+#, fuzzy, python-format
+msgid "%s connected successfully."
+msgstr "Senha alterada com sucesso."
 
 #, python-format
 msgid "%s imported from fallback tuner"
@@ -356,6 +364,10 @@ msgstr "(Assistir)"
 #, python-format
 msgid "(activated +%d min)"
 msgstr ""
+
+#, fuzzy
+msgid "(current)"
+msgstr "Valor atual: "
 
 msgid "(empty)"
 msgstr "(vazio)"
@@ -651,9 +663,6 @@ msgstr ""
 msgid "Activate Picture in Picture"
 msgstr "Ativar PiP"
 
-msgid "Activate current configuration"
-msgstr "Ativar configuração atual"
-
 msgid "Activate network settings"
 msgstr "Ativar configurações de rede"
 
@@ -674,9 +683,6 @@ msgstr "Adicionar"
 
 msgid "Add a mark"
 msgstr "Adicionar marcador"
-
-msgid "Add a nameserver entry"
-msgstr "Adicionar servidor DNS"
 
 msgid "Add a new title"
 msgstr "Adicionar novo título"
@@ -1062,6 +1068,11 @@ msgstr "No início"
 msgid "At end"
 msgstr "No fim"
 
+msgid ""
+"Attention - forced loading recovery image!\n"
+"Create an empty STARTUP_RECOVERY file at the root of your HDD/USB drive and hold the Power button for more than 12 seconds for reboot receiver!"
+msgstr ""
+
 msgid "Attention, this is repeated timer!\n"
 msgstr ""
 
@@ -1081,9 +1092,6 @@ msgstr "Áudio PID"
 
 #, python-format
 msgid "Audio PID%s, codec & lang"
-msgstr ""
-
-msgid "Audio PID, codec & lang"
 msgstr ""
 
 msgid "Audio auto volume level"
@@ -1288,6 +1296,10 @@ msgstr ""
 msgid "Basic PID info"
 msgstr ""
 
+#, fuzzy
+msgid "Basic info"
+msgstr "Informações do canal"
+
 msgid "Basque"
 msgstr "Basco"
 
@@ -1375,6 +1387,10 @@ msgid "Boost green"
 msgstr "Verde"
 
 msgid "Boot to Android image"
+msgstr ""
+
+#, python-format
+msgid "Boot to Recovery image - slot0 %s"
 msgstr ""
 
 msgid "Boot to Recovery menu"
@@ -1823,6 +1839,10 @@ msgstr ""
 msgid "Code rate LP"
 msgstr ""
 
+#, python-format
+msgid "Codec & lang%s"
+msgstr ""
+
 msgid "Collection name"
 msgstr "Nome da coleção"
 
@@ -1976,9 +1996,6 @@ msgstr ""
 
 msgid "Configure interface"
 msgstr "Configurar interface"
-
-msgid "Configure nameservers"
-msgstr "Configurar servidor DNS"
 
 msgid "Configure on which devices the background delete option should be used."
 msgstr "Configurar em quais dispositivos a opção de remoção em segundo plano deve ser utilizada."
@@ -2557,6 +2574,10 @@ msgstr "Padrão"
 msgid "Default Services Scanner"
 msgstr ""
 
+#, python-format
+msgid "Default duration: %d mins"
+msgstr ""
+
 msgid "Default movie location"
 msgstr "Diretório padrão das gravações"
 
@@ -3129,9 +3150,6 @@ msgstr ""
 msgid "Edit"
 msgstr "Editar"
 
-msgid "Edit DNS"
-msgstr "Configurar DNS"
-
 msgid "Edit alternatives"
 msgstr "Editar alternativas"
 
@@ -3203,6 +3221,9 @@ msgstr "Ativar EPG EIT"
 #, fuzzy
 msgid "Enable HDMI-CEC"
 msgstr "Ativar EPG EIT"
+
+msgid "Enable Kexec MultiBoot"
+msgstr ""
 
 msgid "Enable MHW EPG"
 msgstr "Ativar EPG MHW"
@@ -3367,7 +3388,7 @@ msgstr "Informe a senha"
 msgid "Enter URL"
 msgstr ""
 
-msgid "Enter an URL where alternative images could be listed for FlashImage"
+msgid "Enter an URL where alternative images could be listed for FlashImage. Enter text 'all' for automatic access of many images."
 msgstr ""
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -3548,9 +3569,6 @@ msgstr "Sair da lista de vídeos"
 msgid "Exit movie player?"
 msgstr "Sair do reprodutor de mídia?"
 
-msgid "Exit nameserver configuration"
-msgstr "Sair da configuração do servidor DNS"
-
 msgid "Exit network interface list"
 msgstr "Sair da lista de interface de rede"
 
@@ -3584,6 +3602,10 @@ msgstr "Software avançado"
 
 msgid "Extended Software Plugin"
 msgstr "Plugin de software avançado"
+
+#, fuzzy
+msgid "Extended info"
+msgstr "Software avançado"
 
 msgid "Extended network setup plugin..."
 msgstr "Plugin de configuração de rede avançado"
@@ -4779,6 +4801,19 @@ msgstr ""
 msgid "Kernel version: "
 msgstr "Versão do Kernel:"
 
+msgid "Kexec MultiBoot Initialisation - will reboot after 10 seconds."
+msgstr ""
+
+msgid ""
+"Kexec MultiBoot Initialisation in progress!\n"
+"\n"
+"Will reboot after restoring any eMMC slots.\n"
+"This can take from 1 -> 5 minutes per slot."
+msgstr ""
+
+msgid "Kexec MultiBoot Manager"
+msgstr ""
+
 msgid "Key Events"
 msgstr ""
 
@@ -5445,16 +5480,6 @@ msgstr "Nome"
 msgid "Nameserver"
 msgstr "Servidor DNS"
 
-#, python-format
-msgid "Nameserver %d"
-msgstr "Servidor DNS %d"
-
-msgid "Nameserver settings"
-msgstr "Configurar DNS"
-
-msgid "Nameserver setup"
-msgstr "Configurar DNS"
-
 msgid "Namespace & Orbital pos."
 msgstr ""
 
@@ -5911,6 +5936,13 @@ msgstr ""
 msgid "Orbital position"
 msgstr "Posição orbital"
 
+#, fuzzy
+msgid "Order by modes"
+msgstr "Invertido por data"
+
+msgid "Order by slots"
+msgstr ""
+
 msgid "Ordinary"
 msgstr ""
 
@@ -6027,6 +6059,12 @@ msgstr "Editor de canais do controle de acesso"
 
 msgid "Parental control setup"
 msgstr "Controle de acesso"
+
+msgid "Partial"
+msgstr ""
+
+msgid "Partial EPG"
+msgstr ""
 
 msgid "Passthrough"
 msgstr ""
@@ -6158,13 +6196,6 @@ msgstr "Altere o tempo final da gravação"
 
 msgid "Please choose an extension..."
 msgstr "Escolha uma extensão"
-
-msgid ""
-"Please configure or verify your Nameservers by filling out the required values.\n"
-"When you are ready press OK to continue."
-msgstr ""
-"Configure ou verifique o servidor DNS preenchendo os valores necessários.\n"
-"Quando estiver pronto pressione OK."
 
 msgid "Please configure the fallback tuner setup"
 msgstr ""
@@ -6542,6 +6573,14 @@ msgstr ""
 msgid "Press 'OK' for remove item or < > for change order or 'CH+/-' for toggle to list of features."
 msgstr ""
 
+msgid ""
+"Press Green key to enable MultiBoot!\n"
+"\n"
+"Will reboot within 10 seconds,\n"
+"unless you have eMMC slots to restore.\n"
+"Restoring eMMC slots can take from 1 -> 5 minutes per slot."
+msgstr ""
+
 msgid "Press INFO on your remote control for additional information."
 msgstr "Pressione Info para informações adicionais."
 
@@ -6766,6 +6805,12 @@ msgstr "Deseja realmente sair?"
 msgid "Really perform a manufacturer reset now?"
 msgstr ""
 
+#, python-format
+msgid ""
+"Really permanently delete MultiBoot files?\n"
+"%s"
+msgstr ""
+
 msgid "Really reboot now?"
 msgstr "Reiniciar agora?"
 
@@ -6918,9 +6963,6 @@ msgstr "Remover"
 msgid "Remove a mark"
 msgstr "Remover marca"
 
-msgid "Remove a nameserver entry"
-msgstr "Remover entrada de servidor DNS"
-
 msgid "Remove all alternatives"
 msgstr "Remover todas as alternativas"
 
@@ -6949,6 +6991,10 @@ msgid "Remove directory"
 msgstr "Remover diretório"
 
 msgid "Remove entry"
+msgstr "Remover item"
+
+#, fuzzy
+msgid "Remove forever"
 msgstr "Remover item"
 
 msgid "Remove from parental protection"
@@ -8724,6 +8770,10 @@ msgstr ""
 msgid "Start offline decode"
 msgstr "Iniciar decodificação offline"
 
+#, fuzzy
+msgid "Start recording current event"
+msgstr "Em espera após o evento atual"
+
 msgid "Start recording?"
 msgstr "Iniciar gravação?"
 
@@ -8859,6 +8909,9 @@ msgstr "Não usar como canal inicial"
 
 msgid "Stopped"
 msgstr "Parado"
+
+msgid "Storage device not available or not initialized."
+msgstr ""
 
 msgid "Store at index"
 msgstr "Salvar no índice"
@@ -9954,6 +10007,9 @@ msgid "Ukrainian"
 msgstr ""
 
 msgid "Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"
+msgstr ""
+
+msgid "Unable to complete - Kexec Multiboot files missing!"
 msgstr ""
 
 msgid "Unable to create the required directories on the media (e.g. USB stick or Harddisk) - Please verify media and try again!"
@@ -11848,9 +11904,6 @@ msgstr ""
 msgid "only from standby"
 msgstr ""
 
-msgid "open nameserver configuration"
-msgstr "Abrir a configuração do servidor DNS"
-
 msgid "original"
 msgstr "Original"
 
@@ -12130,6 +12183,10 @@ msgstr "Alterna tempo, capítulo, áudio, informações da legenda"
 
 msgid "top"
 msgstr "Topo"
+
+#, python-format
+msgid "total conflict (%d)"
+msgstr ""
 
 msgid "tourism/travel"
 msgstr "Turismo/Viagens"

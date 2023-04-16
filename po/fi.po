@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-14 14:37+0100\n"
+"POT-Creation-Date: 2023-04-16 18:05+0200\n"
 "PO-Revision-Date: 2020-05-16 18:41+0200\n"
 "Last-Translator: jamu\n"
 "Language-Team: BoxFreak/jamu\n"
@@ -340,6 +340,10 @@ msgstr ""
 msgid "%s %d.%d"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "%s (files)"
+msgstr "%d tiedosto"
+
 #, python-format
 msgid "%s KSymb/s"
 msgstr ""
@@ -347,6 +351,10 @@ msgstr ""
 #, python-format
 msgid "%s MHz"
 msgstr ""
+
+#, fuzzy, python-format
+msgid "%s connected successfully."
+msgstr "PIN-koodin vaihto onnistui."
 
 #, fuzzy, python-format
 msgid "%s imported from fallback tuner"
@@ -379,6 +387,11 @@ msgstr "(Kanavanvaihto)"
 #, python-format
 msgid "(activated +%d min)"
 msgstr "(aktiivinen +%d min)"
+
+#
+#, fuzzy
+msgid "(current)"
+msgstr "Arvo: "
 
 #
 msgid "(empty)"
@@ -712,10 +725,6 @@ msgid "Activate Picture in Picture"
 msgstr "Avaa PiP-kuva"
 
 #
-msgid "Activate current configuration"
-msgstr "Aktivoi nykyiset asetukset"
-
-#
 msgid "Activate network settings"
 msgstr "Ota verkkoasetukset käyttöön"
 
@@ -739,10 +748,6 @@ msgstr "Lisää"
 #
 msgid "Add a mark"
 msgstr "Lisää merkki"
-
-#
-msgid "Add a nameserver entry"
-msgstr "lisää nimipalvelin"
 
 #
 msgid "Add a new title"
@@ -1176,6 +1181,11 @@ msgstr "Alussa"
 msgid "At end"
 msgstr "Lopussa"
 
+msgid ""
+"Attention - forced loading recovery image!\n"
+"Create an empty STARTUP_RECOVERY file at the root of your HDD/USB drive and hold the Power button for more than 12 seconds for reboot receiver!"
+msgstr ""
+
 msgid "Attention, this is repeated timer!\n"
 msgstr "Huomaa, että tämä on toistuva ajastus!\n"
 
@@ -1197,9 +1207,6 @@ msgstr "Ääni-PID"
 
 #, python-format
 msgid "Audio PID%s, codec & lang"
-msgstr ""
-
-msgid "Audio PID, codec & lang"
 msgstr ""
 
 msgid "Audio auto volume level"
@@ -1425,6 +1432,11 @@ msgstr "Barbados"
 msgid "Basic PID info"
 msgstr ""
 
+#
+#, fuzzy
+msgid "Basic info"
+msgstr "Kanavatiedot"
+
 msgid "Basque"
 msgstr "Baski"
 
@@ -1519,6 +1531,10 @@ msgid "Boost green"
 msgstr "Korosta vihreää"
 
 msgid "Boot to Android image"
+msgstr ""
+
+#, python-format
+msgid "Boot to Recovery image - slot0 %s"
 msgstr ""
 
 msgid "Boot to Recovery menu"
@@ -2015,6 +2031,10 @@ msgstr "Koodinopeus HP"
 msgid "Code rate LP"
 msgstr "Koodinopeus LP"
 
+#, python-format
+msgid "Codec & lang%s"
+msgstr ""
+
 #
 msgid "Collection name"
 msgstr "Kokoelman nimi"
@@ -2174,10 +2194,6 @@ msgstr "Määritä vaihteleeko ulkoisen tekstityksen fontti tekstityksen määri
 #
 msgid "Configure interface"
 msgstr "Määritä verkkosovitin"
-
-#
-msgid "Configure nameservers"
-msgstr "Määritä nimipalvelimet"
 
 msgid "Configure on which devices the background delete option should be used."
 msgstr "Määritä millä laitteilla tallenteiden taustalla poistoa käytetään."
@@ -2792,6 +2808,10 @@ msgid "Default"
 msgstr "Oletus"
 
 msgid "Default Services Scanner"
+msgstr ""
+
+#, python-format
+msgid "Default duration: %d mins"
 msgstr ""
 
 msgid "Default movie location"
@@ -3445,10 +3465,6 @@ msgid "Edit"
 msgstr "Muokkaa"
 
 #
-msgid "Edit DNS"
-msgstr "Muuta DNS"
-
-#
 msgid "Edit alternatives"
 msgstr "Vaihtoehtoisten kanavien lisäys ja poisto"
 
@@ -3529,6 +3545,9 @@ msgstr "Ota käyttöön EIT EPG"
 
 msgid "Enable HDMI-CEC"
 msgstr "Ota käyttöön HDMI-CEC"
+
+msgid "Enable Kexec MultiBoot"
+msgstr ""
 
 msgid "Enable MHW EPG"
 msgstr "Ota käyttöön MHW EPG"
@@ -3709,7 +3728,7 @@ msgstr "Syötä PIN-koodi"
 msgid "Enter URL"
 msgstr "Syötä URL"
 
-msgid "Enter an URL where alternative images could be listed for FlashImage"
+msgid "Enter an URL where alternative images could be listed for FlashImage. Enter text 'all' for automatic access of many images."
 msgstr ""
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -3906,10 +3925,6 @@ msgid "Exit movie player?"
 msgstr "Poistu soittimesta?"
 
 #
-msgid "Exit nameserver configuration"
-msgstr "Lopeta nimipalvelimen määritys"
-
-#
 msgid "Exit network interface list"
 msgstr "Poistu verkkosovitinluettelosta"
 
@@ -3947,6 +3962,10 @@ msgstr "Laajat ohjelmavalinnat"
 
 msgid "Extended Software Plugin"
 msgstr "Laajat lisäosavalinnat"
+
+#, fuzzy
+msgid "Extended info"
+msgstr "Laaja"
 
 #
 msgid "Extended network setup plugin..."
@@ -5257,6 +5276,19 @@ msgstr "Kenia"
 msgid "Kernel version: "
 msgstr "Kernelin versio:"
 
+msgid "Kexec MultiBoot Initialisation - will reboot after 10 seconds."
+msgstr ""
+
+msgid ""
+"Kexec MultiBoot Initialisation in progress!\n"
+"\n"
+"Will reboot after restoring any eMMC slots.\n"
+"This can take from 1 -> 5 minutes per slot."
+msgstr ""
+
+msgid "Kexec MultiBoot Manager"
+msgstr ""
+
 msgid "Key Events"
 msgstr ""
 
@@ -6022,19 +6054,6 @@ msgstr "Nimi"
 msgid "Nameserver"
 msgstr "Nimipalvelin"
 
-#
-#, python-format
-msgid "Nameserver %d"
-msgstr "Nimipalvelin %d"
-
-#
-msgid "Nameserver settings"
-msgstr "Nimipalvelimen asetukset"
-
-#
-msgid "Nameserver setup"
-msgstr "Nimipalvelimen asetukset"
-
 msgid "Namespace & Orbital pos."
 msgstr ""
 
@@ -6546,6 +6565,13 @@ msgstr "Keskeytä ajastus"
 msgid "Orbital position"
 msgstr "Sijainti"
 
+#, fuzzy
+msgid "Order by modes"
+msgstr "Käänteinen aikajärjestys"
+
+msgid "Order by slots"
+msgstr ""
+
 msgid "Ordinary"
 msgstr "Tavallinen"
 
@@ -6670,6 +6696,14 @@ msgstr "Lapsilukon kanavaeditori"
 #
 msgid "Parental control setup"
 msgstr "Lapsilukon asetukset"
+
+msgid "Partial"
+msgstr ""
+
+#
+#, fuzzy
+msgid "Partial EPG"
+msgstr "Kanavaopas"
 
 msgid "Passthrough"
 msgstr ""
@@ -6817,14 +6851,6 @@ msgstr "Aseta tallennuksen päättymisaika"
 #
 msgid "Please choose an extension..."
 msgstr "Valitse laajennus..."
-
-#
-msgid ""
-"Please configure or verify your Nameservers by filling out the required values.\n"
-"When you are ready press OK to continue."
-msgstr ""
-"Määritä ja tarkista nimipalvelimien tiedot.\n"
-"Paina OK-näppäintä kun olet valmis."
 
 msgid "Please configure the fallback tuner setup"
 msgstr ""
@@ -7257,6 +7283,14 @@ msgstr ""
 msgid "Press 'OK' for remove item or < > for change order or 'CH+/-' for toggle to list of features."
 msgstr ""
 
+msgid ""
+"Press Green key to enable MultiBoot!\n"
+"\n"
+"Will reboot within 10 seconds,\n"
+"unless you have eMMC slots to restore.\n"
+"Restoring eMMC slots can take from 1 -> 5 minutes per slot."
+msgstr ""
+
 msgid "Press INFO on your remote control for additional information."
 msgstr "Katso lisätietoja painamalla INFO-näppäintä."
 
@@ -7520,6 +7554,12 @@ msgstr "Poistu alipalveluiden pikavaihdosta?"
 msgid "Really perform a manufacturer reset now?"
 msgstr "Suojaa tehdasasetusvalikko"
 
+#, python-format
+msgid ""
+"Really permanently delete MultiBoot files?\n"
+"%s"
+msgstr ""
+
 #
 msgid "Really reboot now?"
 msgstr "Haluatko silti käynnistää uudelleen?"
@@ -7692,10 +7732,6 @@ msgid "Remove a mark"
 msgstr "Poista merkki"
 
 #
-msgid "Remove a nameserver entry"
-msgstr "Poista nimipalvelin"
-
-#
 msgid "Remove all alternatives"
 msgstr "Poista kaikki vaihtoehtoiset kanavat"
 
@@ -7729,6 +7765,11 @@ msgstr "Poista hakemisto"
 
 #
 msgid "Remove entry"
+msgstr "Poista valittu"
+
+#
+#, fuzzy
+msgid "Remove forever"
 msgstr "Poista valittu"
 
 #
@@ -9693,6 +9734,11 @@ msgid "Start offline decode"
 msgstr "Aloita offline-purkaminen"
 
 #
+#, fuzzy
+msgid "Start recording current event"
+msgstr "Aseta valmiustilaan menossa olevan ohjelman jälkeen"
+
+#
 msgid "Start recording?"
 msgstr "Aloita tallennus?"
 
@@ -9852,6 +9898,9 @@ msgstr "Lopeta käyttämästä käynnistyskanavana"
 
 msgid "Stopped"
 msgstr "Pysäytetty"
+
+msgid "Storage device not available or not initialized."
+msgstr ""
 
 #
 msgid "Store at index"
@@ -11074,6 +11123,9 @@ msgid "Ukrainian"
 msgstr "Ukraina"
 
 msgid "Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"
+msgstr ""
+
+msgid "Unable to complete - Kexec Multiboot files missing!"
 msgstr ""
 
 msgid "Unable to create the required directories on the media (e.g. USB stick or Harddisk) - Please verify media and try again!"
@@ -13141,10 +13193,6 @@ msgstr "Vain virransäästötilasta"
 msgid "only from standby"
 msgstr "Vain valmiustilasta"
 
-#
-msgid "open nameserver configuration"
-msgstr "avaan nimipalvelimen asetus"
-
 msgid "original"
 msgstr "Alkuperäinen"
 
@@ -13459,6 +13507,10 @@ msgstr "Valitse aika, kappale, ääni, tekstitys"
 
 msgid "top"
 msgstr "Ylhäällä"
+
+#, python-format
+msgid "total conflict (%d)"
+msgstr ""
 
 msgid "tourism/travel"
 msgstr "turismi/matkailu"

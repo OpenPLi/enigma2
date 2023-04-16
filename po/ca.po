@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-14 14:37+0100\n"
+"POT-Creation-Date: 2023-04-16 18:05+0200\n"
 "PO-Revision-Date: 2022-10-13 18:38+0200\n"
 "Last-Translator: Oriol Pellicer <oriol@elsud.org>\n"
 "Language-Team: angelodos angelo2807@hotmail.com\n"
@@ -344,6 +344,10 @@ msgstr ""
 msgid "%s %d.%d"
 msgstr "%s %d.%d"
 
+#, fuzzy, python-format
+msgid "%s (files)"
+msgstr "%d file"
+
 #, python-format
 msgid "%s KSymb/s"
 msgstr "%s KSymb/s"
@@ -351,6 +355,10 @@ msgstr "%s KSymb/s"
 #, python-format
 msgid "%s MHz"
 msgstr "%s MHz"
+
+#, fuzzy, python-format
+msgid "%s connected successfully."
+msgstr "El codi PIN s’ha canviat correctament"
 
 #, python-format
 msgid "%s imported from fallback tuner"
@@ -383,6 +391,10 @@ msgstr "(ZAPPEJAR)"
 #, python-format
 msgid "(activated +%d min)"
 msgstr "(activaT +%d min)"
+
+#, fuzzy
+msgid "(current)"
+msgstr "Actual"
 
 #
 msgid "(empty)"
@@ -720,10 +732,6 @@ msgid "Activate Picture in Picture"
 msgstr "Activar PiP"
 
 #
-msgid "Activate current configuration"
-msgstr "Activar configuració del sintonitzador"
-
-#
 msgid "Activate network settings"
 msgstr "Activar la configuració de la xarxa"
 
@@ -748,10 +756,6 @@ msgstr "Afegir"
 #
 msgid "Add a mark"
 msgstr "Afegir una marca"
-
-#
-msgid "Add a nameserver entry"
-msgstr "Afegiu una entrada del servidor"
 
 #
 msgid "Add a new title"
@@ -1173,6 +1177,11 @@ msgstr "Al principi"
 msgid "At end"
 msgstr "Al final"
 
+msgid ""
+"Attention - forced loading recovery image!\n"
+"Create an empty STARTUP_RECOVERY file at the root of your HDD/USB drive and hold the Power button for more than 12 seconds for reboot receiver!"
+msgstr ""
+
 msgid "Attention, this is repeated timer!\n"
 msgstr "Atenció, aquest és temporitzador repetit!\n"
 
@@ -1196,9 +1205,6 @@ msgstr "Audio PID"
 #, python-format
 msgid "Audio PID%s, codec & lang"
 msgstr "Audio PID%s, codec i lang"
-
-msgid "Audio PID, codec & lang"
-msgstr "Audio PID, codec & lang"
 
 msgid "Audio auto volume level"
 msgstr "Nivell de volum automàtic d’àudio"
@@ -1420,6 +1426,10 @@ msgstr "Barbados"
 msgid "Basic PID info"
 msgstr "Informació bàsica PID"
 
+#, fuzzy
+msgid "Basic info"
+msgstr "Informació bàsica PID"
+
 msgid "Basque"
 msgstr "Basc"
 
@@ -1515,6 +1525,10 @@ msgstr "Boost verd"
 
 msgid "Boot to Android image"
 msgstr "Arrenca a la imatge d’Android"
+
+#, fuzzy, python-format
+msgid "Boot to Recovery image - slot0 %s"
+msgstr "Menú Arrenca a recuperació"
 
 msgid "Boot to Recovery menu"
 msgstr "Menú Arrenca a recuperació"
@@ -2009,6 +2023,10 @@ msgstr "Taxa de codi HP"
 msgid "Code rate LP"
 msgstr "Taxa de codi lP"
 
+#, python-format
+msgid "Codec & lang%s"
+msgstr ""
+
 #
 msgid "Collection name"
 msgstr "Nom de la col·lecció"
@@ -2177,10 +2195,6 @@ msgstr "Configureu si el subtítol ha de canviar entre normal, cursiva, negreta 
 #
 msgid "Configure interface"
 msgstr "Configura la interface"
-
-#
-msgid "Configure nameservers"
-msgstr "Configura nom servidors"
 
 msgid "Configure on which devices the background delete option should be used."
 msgstr "Configura en quins dispositius s’ha d’utilitzar l’opció d’eliminació de fons."
@@ -2792,6 +2806,10 @@ msgstr "Per defecte"
 
 msgid "Default Services Scanner"
 msgstr "Escàner de serveis per defecte"
+
+#, python-format
+msgid "Default duration: %d mins"
+msgstr ""
 
 #
 msgid "Default movie location"
@@ -3427,10 +3445,6 @@ msgid "Edit"
 msgstr "Edita"
 
 #
-msgid "Edit DNS"
-msgstr "Edita DNS"
-
-#
 msgid "Edit alternatives"
 msgstr "Editar alternatives"
 
@@ -3509,6 +3523,9 @@ msgstr "Activa EIT EPG"
 
 msgid "Enable HDMI-CEC"
 msgstr "Activa HDMI-CEC"
+
+msgid "Enable Kexec MultiBoot"
+msgstr ""
 
 msgid "Enable MHW EPG"
 msgstr "Activa MHW EPG"
@@ -3684,7 +3701,8 @@ msgstr "Introduïu codi PIN "
 msgid "Enter URL"
 msgstr "Introduïu ADREÇA"
 
-msgid "Enter an URL where alternative images could be listed for FlashImage"
+#, fuzzy
+msgid "Enter an URL where alternative images could be listed for FlashImage. Enter text 'all' for automatic access of many images."
 msgstr "Introduïu un URL on es puguin mostrar les imatges alternatives per a FlashImage"
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -3893,10 +3911,6 @@ msgid "Exit movie player?"
 msgstr "Sortir del reproductor"
 
 #
-msgid "Exit nameserver configuration"
-msgstr "Surt de configuració del servidors"
-
-#
 msgid "Exit network interface list"
 msgstr "Surt de la llista de la interfície de xarxa"
 
@@ -3935,6 +3949,10 @@ msgstr "Programari estès"
 #
 msgid "Extended Software Plugin"
 msgstr "Extensió de programari"
+
+#, fuzzy
+msgid "Extended info"
+msgstr "Informació PID ampliada"
 
 #
 msgid "Extended network setup plugin..."
@@ -5224,6 +5242,19 @@ msgstr "Kenya"
 msgid "Kernel version: "
 msgstr "Nova versió"
 
+msgid "Kexec MultiBoot Initialisation - will reboot after 10 seconds."
+msgstr ""
+
+msgid ""
+"Kexec MultiBoot Initialisation in progress!\n"
+"\n"
+"Will reboot after restoring any eMMC slots.\n"
+"This can take from 1 -> 5 minutes per slot."
+msgstr ""
+
+msgid "Kexec MultiBoot Manager"
+msgstr ""
+
 msgid "Key Events"
 msgstr "Esdeveniments clau"
 
@@ -5965,19 +5996,6 @@ msgstr "Nom"
 msgid "Nameserver"
 msgstr "Servidor de noms"
 
-#
-#, python-format
-msgid "Nameserver %d"
-msgstr "Servidor de noms %d"
-
-#
-msgid "Nameserver settings"
-msgstr "Configuració del servidor de noms"
-
-#
-msgid "Nameserver setup"
-msgstr "Configuració DNS"
-
 msgid "Namespace & Orbital pos."
 msgstr "Espais de noms i posicionament orbital."
 
@@ -6477,6 +6495,13 @@ msgstr "Opcions desactiva el temporitzador"
 msgid "Orbital position"
 msgstr "Posició orbital"
 
+#, fuzzy
+msgid "Order by modes"
+msgstr "revertir per data"
+
+msgid "Order by slots"
+msgstr ""
+
 msgid "Ordinary"
 msgstr "Ordinària"
 
@@ -6602,6 +6627,14 @@ msgstr "Editor de serveis de control parental"
 #
 msgid "Parental control setup"
 msgstr "Configuració control parental"
+
+msgid "Partial"
+msgstr ""
+
+#
+#, fuzzy
+msgid "Partial EPG"
+msgstr "Multi EPG"
 
 msgid "Passthrough"
 msgstr "Passar per"
@@ -6744,14 +6777,6 @@ msgstr "Sisplau canvia l'hora d'aturar la gravació"
 #
 msgid "Please choose an extension..."
 msgstr "Sisplau escull una extensió..."
-
-#
-msgid ""
-"Please configure or verify your Nameservers by filling out the required values.\n"
-"When you are ready press OK to continue."
-msgstr ""
-"Configureu o verifiqueu els servidors de noms omplint els valors requerits.\n"
-"Quan estiguis preparat, premeu OK per continuar."
 
 msgid "Please configure the fallback tuner setup"
 msgstr ""
@@ -7183,6 +7208,14 @@ msgstr "Premeu “D’acord” per eliminar l’element o “CH +/-“ per canvi
 msgid "Press 'OK' for remove item or < > for change order or 'CH+/-' for toggle to list of features."
 msgstr "Premeu “D’acord” per eliminar l’element o <> per canviar l’ordre o “CH +/-“ per canviar a la llista de funcions."
 
+msgid ""
+"Press Green key to enable MultiBoot!\n"
+"\n"
+"Will reboot within 10 seconds,\n"
+"unless you have eMMC slots to restore.\n"
+"Restoring eMMC slots can take from 1 -> 5 minutes per slot."
+msgstr ""
+
 msgid "Press INFO on your remote control for additional information."
 msgstr "Per obtenir més informació, premeu INFO al comandament remot."
 
@@ -7436,6 +7469,12 @@ msgstr "Sortir del zappeig ràpid dels subserveis?"
 msgid "Really perform a manufacturer reset now?"
 msgstr "Realment heu de restablir a fabrica ara?"
 
+#, python-format
+msgid ""
+"Really permanently delete MultiBoot files?\n"
+"%s"
+msgstr ""
+
 #
 msgid "Really reboot now?"
 msgstr "Torna a reiniciar ara?"
@@ -7604,9 +7643,6 @@ msgstr "Esborrar"
 msgid "Remove a mark"
 msgstr "Esborrar una marca"
 
-msgid "Remove a nameserver entry"
-msgstr "Esborrar nom de server d’entrada"
-
 #
 msgid "Remove all alternatives"
 msgstr "Esborrar totes les alternatives"
@@ -7641,6 +7677,11 @@ msgstr "Elimina el directori"
 
 #
 msgid "Remove entry"
+msgstr "Eliminar entrada"
+
+#
+#, fuzzy
+msgid "Remove forever"
 msgstr "Eliminar entrada"
 
 #
@@ -9563,6 +9604,10 @@ msgstr "Inicia la gravació instantània"
 msgid "Start offline decode"
 msgstr "Comença la descodificació fora de línia"
 
+#, fuzzy
+msgid "Start recording current event"
+msgstr "Espera després de l’esdeveniment actual"
+
 #
 msgid "Start recording?"
 msgstr "Iniciar gravació?"
@@ -9715,6 +9760,9 @@ msgstr "Deixeu d’utilitzar com a servei d’inici"
 
 msgid "Stopped"
 msgstr "Aturat"
+
+msgid "Storage device not available or not initialized."
+msgstr ""
 
 msgid "Store at index"
 msgstr "Emmagatzemar-los a l’índex"
@@ -10919,6 +10967,9 @@ msgstr "Ukrainian"
 
 msgid "Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"
 msgstr "No es pot configurar la configuració de còpia de seguretat, ja que falta el complement automàtic, voleu continuar?"
+
+msgid "Unable to complete - Kexec Multiboot files missing!"
+msgstr ""
 
 msgid "Unable to create the required directories on the media (e.g. USB stick or Harddisk) - Please verify media and try again!"
 msgstr "No es poden crear els directoris obligatoris al suport (per exemple, stick USB o Harddisk). Verifiqueu el material i proveu-ho de nou."
@@ -12962,10 +13013,6 @@ msgstr "només des del mode d’espera profunda"
 msgid "only from standby"
 msgstr "només des del mode d’espera"
 
-#
-msgid "open nameserver configuration"
-msgstr "configuració del servidor obert"
-
 msgid "original"
 msgstr "original"
 
@@ -13268,6 +13315,10 @@ msgstr "commuta el temps, el capítol, l’àudio, la informació dels subtítol
 
 msgid "top"
 msgstr "top"
+
+#, python-format
+msgid "total conflict (%d)"
+msgstr ""
 
 msgid "tourism/travel"
 msgstr "turisme / viatges"

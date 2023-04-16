@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-14 14:37+0100\n"
+"POT-Creation-Date: 2023-04-16 18:05+0200\n"
 "PO-Revision-Date: 2021-03-06\n"
 "Last-Translator: LinuxSTV\n"
 "Language-Team: \n"
@@ -326,6 +326,10 @@ msgstr ""
 msgid "%s %d.%d"
 msgstr "%s %d.%d"
 
+#, fuzzy, python-format
+msgid "%s (files)"
+msgstr "%d berkas"
+
 #, python-format
 msgid "%s KSymb/s"
 msgstr ""
@@ -333,6 +337,10 @@ msgstr ""
 #, python-format
 msgid "%s MHz"
 msgstr ""
+
+#, fuzzy, python-format
+msgid "%s connected successfully."
+msgstr "Kode PIN telah berhasil diganti."
 
 #, fuzzy, python-format
 msgid "%s imported from fallback tuner"
@@ -365,6 +373,10 @@ msgstr "(ZAP)"
 #, python-format
 msgid "(activated +%d min)"
 msgstr "(diaktifkan +%d mnt)"
+
+#, fuzzy
+msgid "(current)"
+msgstr "Nilai saat ini: "
 
 msgid "(empty)"
 msgstr "(kosong)"
@@ -664,9 +676,6 @@ msgstr "Aktifkan HbbTV (Tombol merah)"
 msgid "Activate Picture in Picture"
 msgstr "Aktifkan PiP"
 
-msgid "Activate current configuration"
-msgstr "Aktifkan setelan saat ini"
-
 msgid "Activate network settings"
 msgstr "Aktifkan penyetelan jaringan"
 
@@ -687,9 +696,6 @@ msgstr "Tambah"
 
 msgid "Add a mark"
 msgstr "Tambah penanda"
-
-msgid "Add a nameserver entry"
-msgstr "Tambah entri namaserver"
 
 msgid "Add a new title"
 msgstr "Tambah judul baru"
@@ -1083,6 +1089,11 @@ msgstr "Di awal"
 msgid "At end"
 msgstr "Di akhir"
 
+msgid ""
+"Attention - forced loading recovery image!\n"
+"Create an empty STARTUP_RECOVERY file at the root of your HDD/USB drive and hold the Power button for more than 12 seconds for reboot receiver!"
+msgstr ""
+
 msgid "Attention, this is repeated timer!\n"
 msgstr "Perhatian, ini pewaktu berulang!\n"
 
@@ -1105,9 +1116,6 @@ msgstr "PID Audio"
 #, python-format
 msgid "Audio PID%s, codec & lang"
 msgstr "PID Audio%s, codec & bhs"
-
-msgid "Audio PID, codec & lang"
-msgstr "PID Audio, codec & bhs"
 
 msgid "Audio auto volume level"
 msgstr "level suara audio otomatis"
@@ -1311,6 +1319,10 @@ msgstr "Barbados"
 msgid "Basic PID info"
 msgstr "Info PID dasar"
 
+#, fuzzy
+msgid "Basic info"
+msgstr "Info PID dasar"
+
 msgid "Basque"
 msgstr "Lapisan"
 
@@ -1399,6 +1411,10 @@ msgstr "Tingkatkan hijau"
 
 msgid "Boot to Android image"
 msgstr "Boot ke Android"
+
+#, fuzzy, python-format
+msgid "Boot to Recovery image - slot0 %s"
+msgstr "Boot ke menu recovery"
 
 msgid "Boot to Recovery menu"
 msgstr "Boot ke menu recovery"
@@ -1866,6 +1882,10 @@ msgstr "Code rate HP"
 msgid "Code rate LP"
 msgstr "Code rate LP"
 
+#, python-format
+msgid "Codec & lang%s"
+msgstr ""
+
 msgid "Collection name"
 msgstr "Nama koleksi"
 
@@ -2019,9 +2039,6 @@ msgstr "Atur apakah terjemahan bisa bertukar jenis huruf antara normal, miring, 
 
 msgid "Configure interface"
 msgstr "Atur antarmuka"
-
-msgid "Configure nameservers"
-msgstr "Atur nameserver"
 
 msgid "Configure on which devices the background delete option should be used."
 msgstr "Atur di perangkat mana pilihan hapus latar seharusnya digunakan."
@@ -2607,6 +2624,10 @@ msgstr "Bawaan"
 msgid "Default Services Scanner"
 msgstr "Pelacak Layanan Bawaan"
 
+#, python-format
+msgid "Default duration: %d mins"
+msgstr ""
+
 msgid "Default movie location"
 msgstr "Lokasi film bawaan"
 
@@ -3185,9 +3206,6 @@ msgstr "Ekuador"
 msgid "Edit"
 msgstr "Ubah"
 
-msgid "Edit DNS"
-msgstr "Ubah DNS"
-
 msgid "Edit alternatives"
 msgstr "Ubah alternatif"
 
@@ -3260,6 +3278,9 @@ msgstr "Aktifkan EPG EIT"
 #, fuzzy
 msgid "Enable HDMI-CEC"
 msgstr "Aktifkan EPG EIT"
+
+msgid "Enable Kexec MultiBoot"
+msgstr ""
 
 msgid "Enable MHW EPG"
 msgstr "Aktifkan EPG MHW"
@@ -3426,7 +3447,8 @@ msgstr "Masukkan kode PIN"
 msgid "Enter URL"
 msgstr "Masukkan PIN"
 
-msgid "Enter an URL where alternative images could be listed for FlashImage"
+#, fuzzy
+msgid "Enter an URL where alternative images could be listed for FlashImage. Enter text 'all' for automatic access of many images."
 msgstr "Masukkan URL dimana image alternatif bisa didaftar untuk FlashImage"
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -3628,9 +3650,6 @@ msgstr "Keluar dari daftar film"
 msgid "Exit movie player?"
 msgstr "Matikan pemutar film?"
 
-msgid "Exit nameserver configuration"
-msgstr "Keluar dari konfigurasi nameserver"
-
 msgid "Exit network interface list"
 msgstr "Keluar dari daftar antarmuka jaringan"
 
@@ -3665,6 +3684,10 @@ msgstr "Perangkat Lunak Lebihluas"
 
 msgid "Extended Software Plugin"
 msgstr "Plugin Perangkat Lunak Lebihluas"
+
+#, fuzzy
+msgid "Extended info"
+msgstr "Info PID lebih luas"
 
 msgid "Extended network setup plugin..."
 msgstr "Plugin pengaturan jaringan lebih luas..."
@@ -4897,6 +4920,19 @@ msgstr "Kenya"
 msgid "Kernel version: "
 msgstr "Versi kernel: "
 
+msgid "Kexec MultiBoot Initialisation - will reboot after 10 seconds."
+msgstr ""
+
+msgid ""
+"Kexec MultiBoot Initialisation in progress!\n"
+"\n"
+"Will reboot after restoring any eMMC slots.\n"
+"This can take from 1 -> 5 minutes per slot."
+msgstr ""
+
+msgid "Kexec MultiBoot Manager"
+msgstr ""
+
 msgid "Key Events"
 msgstr "Acara Kunci"
 
@@ -5573,16 +5609,6 @@ msgstr "Nama"
 msgid "Nameserver"
 msgstr "Nameserver"
 
-#, python-format
-msgid "Nameserver %d"
-msgstr "Nameserver %d"
-
-msgid "Nameserver settings"
-msgstr "Pengaturan nameserver"
-
-msgid "Nameserver setup"
-msgstr "Atur nameserver"
-
 msgid "Namespace & Orbital pos."
 msgstr "Namespace & Pos. orbit"
 
@@ -6041,6 +6067,13 @@ msgstr "Pilihan mematikan pewaktu"
 msgid "Orbital position"
 msgstr "Posisi orbit"
 
+#, fuzzy
+msgid "Order by modes"
+msgstr "putarbalik berdasarkan tanggal"
+
+msgid "Order by slots"
+msgstr ""
+
 msgid "Ordinary"
 msgstr "Biasa"
 
@@ -6157,6 +6190,13 @@ msgstr "Perobah kanal dalam pengawasan orangtua"
 
 msgid "Parental control setup"
 msgstr "Atur pengawasan orangtua"
+
+msgid "Partial"
+msgstr ""
+
+#, fuzzy
+msgid "Partial EPG"
+msgstr "EPG Multi"
 
 msgid "Passthrough"
 msgstr ""
@@ -6288,13 +6328,6 @@ msgstr "Mohon ubah waktu akhir perekaman"
 
 msgid "Please choose an extension..."
 msgstr "Silakan pilih ekstensi..."
-
-msgid ""
-"Please configure or verify your Nameservers by filling out the required values.\n"
-"When you are ready press OK to continue."
-msgstr ""
-"Mohon atur atau periksa Namaserver anda dengan mengisi nilai y diminta.\n"
-"Jika anda sudah siap tekan OK untuk lanjut."
 
 #, fuzzy
 msgid "Please configure the fallback tuner setup"
@@ -6672,6 +6705,14 @@ msgstr "Tekan 'OK' untuk menghapus item atau 'CH+/-' untuk memilih fitur ke daft
 msgid "Press 'OK' for remove item or < > for change order or 'CH+/-' for toggle to list of features."
 msgstr "Tekan 'OK' untuk menghapus item atau < > untuk mengubah urutan atau 'CH+/-' untuk memilih fitur ke daftar"
 
+msgid ""
+"Press Green key to enable MultiBoot!\n"
+"\n"
+"Will reboot within 10 seconds,\n"
+"unless you have eMMC slots to restore.\n"
+"Restoring eMMC slots can take from 1 -> 5 minutes per slot."
+msgstr ""
+
 msgid "Press INFO on your remote control for additional information."
 msgstr "Tekan INFO pada remote kontrol anda untuk info tambahan."
 
@@ -6897,6 +6938,12 @@ msgstr "Yakit keluar zapcepat sub layanan?"
 msgid "Really perform a manufacturer reset now?"
 msgstr "Lindungi layar parameter pabrik"
 
+#, python-format
+msgid ""
+"Really permanently delete MultiBoot files?\n"
+"%s"
+msgstr ""
+
 msgid "Really reboot now?"
 msgstr "Yakin ingin reboot sekarang?"
 
@@ -7049,9 +7096,6 @@ msgstr "Hapus"
 msgid "Remove a mark"
 msgstr "Hapus penanda"
 
-msgid "Remove a nameserver entry"
-msgstr "Hapus entri namaserver"
-
 msgid "Remove all alternatives"
 msgstr "Hapus semua alternatif"
 
@@ -7080,6 +7124,10 @@ msgid "Remove directory"
 msgstr "Hapus directori"
 
 msgid "Remove entry"
+msgstr "Hapus entri"
+
+#, fuzzy
+msgid "Remove forever"
 msgstr "Hapus entri"
 
 msgid "Remove from parental protection"
@@ -8861,6 +8909,10 @@ msgstr "Mulai merekam segera"
 msgid "Start offline decode"
 msgstr "Mulai dekode luring"
 
+#, fuzzy
+msgid "Start recording current event"
+msgstr "Standby setelah acara saat ini"
+
 msgid "Start recording?"
 msgstr "Mulai merekam?"
 
@@ -8996,6 +9048,9 @@ msgstr "Berhenti gunakan sbg layanan mulai"
 
 msgid "Stopped"
 msgstr "Terhenti"
+
+msgid "Storage device not available or not initialized."
+msgstr ""
 
 msgid "Store at index"
 msgstr "Simpan di indeks"
@@ -10124,6 +10179,9 @@ msgstr "Ukraina"
 
 msgid "Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"
 msgstr "Tidak bisa mencadangkan setelan karna plugin AutoBackup tidak ada, anda ingin melanjutkan?"
+
+msgid "Unable to complete - Kexec Multiboot files missing!"
+msgstr ""
 
 #, fuzzy
 msgid "Unable to create the required directories on the media (e.g. USB stick or Harddisk) - Please verify media and try again!"
@@ -12046,9 +12104,6 @@ msgstr "hanya dari deep standby"
 msgid "only from standby"
 msgstr "hanya dari standby"
 
-msgid "open nameserver configuration"
-msgstr "buka setelan namaserver"
-
 msgid "original"
 msgstr "asli"
 
@@ -12328,6 +12383,10 @@ msgstr "alihkan waktu, bab, audio, info terjemahan"
 
 msgid "top"
 msgstr "top"
+
+#, python-format
+msgid "total conflict (%d)"
+msgstr ""
 
 msgid "tourism/travel"
 msgstr "tourism/travel"

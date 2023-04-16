@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-14 14:37+0100\n"
+"POT-Creation-Date: 2023-04-16 18:05+0200\n"
 "PO-Revision-Date: 2013-10-23 19:15+0100\n"
 "Last-Translator: andy1 <dmmm8000pvr@gmail.com>\n"
 "Language-Team: none\n"
@@ -325,6 +325,10 @@ msgstr ""
 msgid "%s %d.%d"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "%s (files)"
+msgstr "%d mappe"
+
 #, python-format
 msgid "%s KSymb/s"
 msgstr ""
@@ -332,6 +336,10 @@ msgstr ""
 #, python-format
 msgid "%s MHz"
 msgstr ""
+
+#, fuzzy, python-format
+msgid "%s connected successfully."
+msgstr "PIN-koden har blitt endret."
 
 #, python-format
 msgid "%s imported from fallback tuner"
@@ -363,6 +371,11 @@ msgstr "(GÅ TIL)"
 #, python-format
 msgid "(activated +%d min)"
 msgstr ""
+
+#
+#, fuzzy
+msgid "(current)"
+msgstr "Gjeldende verdi:"
 
 #
 msgid "(empty)"
@@ -694,10 +707,6 @@ msgid "Activate Picture in Picture"
 msgstr "Aktivere bilde i bilde"
 
 #
-msgid "Activate current configuration"
-msgstr "Aktivere gjeldende konfigurasjon"
-
-#
 msgid "Activate network settings"
 msgstr "Aktivere nettverksinnstillinger"
 
@@ -721,10 +730,6 @@ msgstr "Legge til"
 #
 msgid "Add a mark"
 msgstr "Legge til markør"
-
-#
-msgid "Add a nameserver entry"
-msgstr "Legge til navneserver inngang"
 
 #
 msgid "Add a new title"
@@ -1146,6 +1151,11 @@ msgstr "Ved begynnelsen"
 msgid "At end"
 msgstr "Ved slutten"
 
+msgid ""
+"Attention - forced loading recovery image!\n"
+"Create an empty STARTUP_RECOVERY file at the root of your HDD/USB drive and hold the Power button for more than 12 seconds for reboot receiver!"
+msgstr ""
+
 msgid "Attention, this is repeated timer!\n"
 msgstr ""
 
@@ -1166,9 +1176,6 @@ msgstr "Lyd PID"
 
 #, python-format
 msgid "Audio PID%s, codec & lang"
-msgstr ""
-
-msgid "Audio PID, codec & lang"
 msgstr ""
 
 msgid "Audio auto volume level"
@@ -1396,6 +1403,10 @@ msgstr ""
 msgid "Basic PID info"
 msgstr ""
 
+#, fuzzy
+msgid "Basic info"
+msgstr "Kanalinfo"
+
 msgid "Basque"
 msgstr "Baskisk"
 
@@ -1490,6 +1501,10 @@ msgid "Boost green"
 msgstr "grønn"
 
 msgid "Boot to Android image"
+msgstr ""
+
+#, python-format
+msgid "Boot to Recovery image - slot0 %s"
 msgstr ""
 
 msgid "Boot to Recovery menu"
@@ -1982,6 +1997,10 @@ msgstr "Kode hastighet HP"
 msgid "Code rate LP"
 msgstr "Kode hastighet LP"
 
+#, python-format
+msgid "Codec & lang%s"
+msgstr ""
+
 #
 msgid "Collection name"
 msgstr "Navnesamling"
@@ -2156,10 +2175,6 @@ msgstr ""
 #
 msgid "Configure interface"
 msgstr "Still inn grensesnitt"
-
-#
-msgid "Configure nameservers"
-msgstr "Still inn navnetjenerne"
 
 msgid "Configure on which devices the background delete option should be used."
 msgstr "Still inn på hvilke enheter bakgrunnssletting skal benyttes."
@@ -2776,6 +2791,10 @@ msgid "Default"
 msgstr "Standard"
 
 msgid "Default Services Scanner"
+msgstr ""
+
+#, python-format
+msgid "Default duration: %d mins"
 msgstr ""
 
 msgid "Default movie location"
@@ -3413,10 +3432,6 @@ msgstr ""
 msgid "Edit"
 msgstr "Endre"
 
-#
-msgid "Edit DNS"
-msgstr "Endre DNS"
-
 msgid "Edit alternatives"
 msgstr "Alternativer"
 
@@ -3493,6 +3508,9 @@ msgstr "Aktivere EIT EPG"
 #, fuzzy
 msgid "Enable HDMI-CEC"
 msgstr "Aktivere EIT EPG"
+
+msgid "Enable Kexec MultiBoot"
+msgstr ""
 
 msgid "Enable MHW EPG"
 msgstr "Aktivere MHW EPG"
@@ -3678,7 +3696,7 @@ msgstr "Tast inn PIN kode"
 msgid "Enter URL"
 msgstr ""
 
-msgid "Enter an URL where alternative images could be listed for FlashImage"
+msgid "Enter an URL where alternative images could be listed for FlashImage. Enter text 'all' for automatic access of many images."
 msgstr ""
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -3877,10 +3895,6 @@ msgid "Exit movie player?"
 msgstr "Avslutte mediespiller?"
 
 #
-msgid "Exit nameserver configuration"
-msgstr "Avslutte innstilling for navnetjener"
-
-#
 msgid "Exit network interface list"
 msgstr "Avslutte nettverksgrensesnitt"
 
@@ -3919,6 +3933,11 @@ msgstr "Utvidet programvare"
 #
 msgid "Extended Software Plugin"
 msgstr "Utvidet programvaretillegg"
+
+#
+#, fuzzy
+msgid "Extended info"
+msgstr "Utvidet programvare"
 
 #
 msgid "Extended network setup plugin..."
@@ -5211,6 +5230,19 @@ msgstr ""
 msgid "Kernel version: "
 msgstr "Linuxkjerne versjon: "
 
+msgid "Kexec MultiBoot Initialisation - will reboot after 10 seconds."
+msgstr ""
+
+msgid ""
+"Kexec MultiBoot Initialisation in progress!\n"
+"\n"
+"Will reboot after restoring any eMMC slots.\n"
+"This can take from 1 -> 5 minutes per slot."
+msgstr ""
+
+msgid "Kexec MultiBoot Manager"
+msgstr ""
+
 msgid "Key Events"
 msgstr ""
 
@@ -5964,19 +5996,6 @@ msgstr "Navn"
 msgid "Nameserver"
 msgstr "Navneserver"
 
-#
-#, python-format
-msgid "Nameserver %d"
-msgstr "Navneserver %d"
-
-#
-msgid "Nameserver settings"
-msgstr "Navneserver innstillinger"
-
-#
-msgid "Nameserver setup"
-msgstr "Oppsett for navneserver"
-
 msgid "Namespace & Orbital pos."
 msgstr ""
 
@@ -6480,6 +6499,13 @@ msgstr ""
 msgid "Orbital position"
 msgstr "Baneposisjon"
 
+#, fuzzy
+msgid "Order by modes"
+msgstr "bakover etter dato"
+
+msgid "Order by slots"
+msgstr ""
+
 msgid "Ordinary"
 msgstr ""
 
@@ -6604,6 +6630,14 @@ msgstr "Foreldrekontroll og kanalinnstillinger"
 #
 msgid "Parental control setup"
 msgstr "Foreldrekontroll oppsett"
+
+msgid "Partial"
+msgstr ""
+
+#
+#, fuzzy
+msgid "Partial EPG"
+msgstr "Fullstendig EPG"
 
 msgid "Passthrough"
 msgstr ""
@@ -6751,13 +6785,6 @@ msgstr "Vennligst endre sluttid for opptak"
 #
 msgid "Please choose an extension..."
 msgstr "Vennligst velg en utvidelse"
-
-msgid ""
-"Please configure or verify your Nameservers by filling out the required values.\n"
-"When you are ready press OK to continue."
-msgstr ""
-"Vennligst skriv inn nødvendig informasjon for dine navnetjenere.\n"
-"Når du er klar, trykk OK for å fortsette."
 
 msgid "Please configure the fallback tuner setup"
 msgstr ""
@@ -7173,6 +7200,14 @@ msgstr ""
 msgid "Press 'OK' for remove item or < > for change order or 'CH+/-' for toggle to list of features."
 msgstr ""
 
+msgid ""
+"Press Green key to enable MultiBoot!\n"
+"\n"
+"Will reboot within 10 seconds,\n"
+"unless you have eMMC slots to restore.\n"
+"Restoring eMMC slots can take from 1 -> 5 minutes per slot."
+msgstr ""
+
 msgid "Press INFO on your remote control for additional information."
 msgstr "Trykk INFO på fjernkontrollen for ytterligere informasjon."
 
@@ -7415,6 +7450,12 @@ msgstr "Vil du avslutte hurtigbytte i underkanaler"
 msgid "Really perform a manufacturer reset now?"
 msgstr ""
 
+#, python-format
+msgid ""
+"Really permanently delete MultiBoot files?\n"
+"%s"
+msgstr ""
+
 #
 msgid "Really reboot now?"
 msgstr "Starte på nytt nå?"
@@ -7577,9 +7618,6 @@ msgstr "Slette"
 msgid "Remove a mark"
 msgstr "Slette en markør"
 
-msgid "Remove a nameserver entry"
-msgstr "Slette en navnetjener"
-
 msgid "Remove all alternatives"
 msgstr "Slette alle alternativer"
 
@@ -7610,6 +7648,10 @@ msgid "Remove directory"
 msgstr "Slette katalog"
 
 msgid "Remove entry"
+msgstr "Fjerne denne"
+
+#, fuzzy
+msgid "Remove forever"
 msgstr "Fjerne denne"
 
 msgid "Remove from parental protection"
@@ -9525,6 +9567,11 @@ msgstr ""
 msgid "Start offline decode"
 msgstr "Starte offline dekoding"
 
+#
+#, fuzzy
+msgid "Start recording current event"
+msgstr "Slå av etter nåværende program"
+
 msgid "Start recording?"
 msgstr "Start opptak?"
 
@@ -9678,6 +9725,9 @@ msgstr "Slutt og bruke som oppstarttjeneste"
 
 msgid "Stopped"
 msgstr "Stoppet"
+
+msgid "Storage device not available or not initialized."
+msgstr ""
 
 msgid "Store at index"
 msgstr "Lagre i meny"
@@ -10877,6 +10927,9 @@ msgid "Ukrainian"
 msgstr ""
 
 msgid "Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"
+msgstr ""
+
+msgid "Unable to complete - Kexec Multiboot files missing!"
 msgstr ""
 
 msgid "Unable to create the required directories on the media (e.g. USB stick or Harddisk) - Please verify media and try again!"
@@ -12929,10 +12982,6 @@ msgstr ""
 msgid "only from standby"
 msgstr ""
 
-#
-msgid "open nameserver configuration"
-msgstr "åpne innstilling for navneserver "
-
 msgid "original"
 msgstr "original"
 
@@ -13234,6 +13283,10 @@ msgstr "juster tid, kapittel, lyd, undertekst info"
 
 msgid "top"
 msgstr "topp"
+
+#, python-format
+msgid "total conflict (%d)"
+msgstr ""
 
 msgid "tourism/travel"
 msgstr "turisme/reise"

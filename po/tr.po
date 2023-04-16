@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OPENPLi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-14 14:37+0100\n"
+"POT-Creation-Date: 2023-04-16 18:05+0200\n"
 "PO-Revision-Date: 2015-12-18 21:05+0200\n"
 "Last-Translator: Yetkin AYDIN <yetkina@gmail.com>\n"
 "Language-Team: http://www.hurforum.com <yetkina@gmail.com>\n"
@@ -312,6 +312,10 @@ msgstr ""
 msgid "%s %d.%d"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "%s (files)"
+msgstr "%d dosya"
+
 #, python-format
 msgid "%s KSymb/s"
 msgstr ""
@@ -319,6 +323,10 @@ msgstr ""
 #, python-format
 msgid "%s MHz"
 msgstr ""
+
+#, fuzzy, python-format
+msgid "%s connected successfully."
+msgstr "PIN kodu başarıyla değiştirildi."
 
 #, python-format
 msgid "%s imported from fallback tuner"
@@ -349,6 +357,10 @@ msgstr "(ZAP)"
 #, python-format
 msgid "(activated +%d min)"
 msgstr "(aktif +%d dakika)"
+
+#, fuzzy
+msgid "(current)"
+msgstr "Mevcut değer: "
 
 msgid "(empty)"
 msgstr "(boş)"
@@ -646,9 +658,6 @@ msgstr "HbbTV (Kırmızı Tuş) Etkin."
 msgid "Activate Picture in Picture"
 msgstr "Resim içinde resim (RiR) 'i etkinleştir"
 
-msgid "Activate current configuration"
-msgstr "Geçerli yapılandırmayı etkinleştirin"
-
 msgid "Activate network settings"
 msgstr "Ağ ayarlarını etkinleştir"
 
@@ -669,9 +678,6 @@ msgstr "Ekle"
 
 msgid "Add a mark"
 msgstr "İşaret ekle"
-
-msgid "Add a nameserver entry"
-msgstr "İsim sunucusu ekleyin"
 
 msgid "Add a new title"
 msgstr "Yeni başlık ekle"
@@ -1063,6 +1069,11 @@ msgstr "Başlangıçta"
 msgid "At end"
 msgstr "Sonunda"
 
+msgid ""
+"Attention - forced loading recovery image!\n"
+"Create an empty STARTUP_RECOVERY file at the root of your HDD/USB drive and hold the Power button for more than 12 seconds for reboot receiver!"
+msgstr ""
+
 msgid "Attention, this is repeated timer!\n"
 msgstr "Dikkat, bu zamanlayıcı tekrarlanacak!\n"
 
@@ -1082,9 +1093,6 @@ msgstr "Ses PID"
 
 #, python-format
 msgid "Audio PID%s, codec & lang"
-msgstr ""
-
-msgid "Audio PID, codec & lang"
 msgstr ""
 
 msgid "Audio auto volume level"
@@ -1290,6 +1298,10 @@ msgstr ""
 msgid "Basic PID info"
 msgstr ""
 
+#, fuzzy
+msgid "Basic info"
+msgstr "Kanal bilgisi"
+
 msgid "Basque"
 msgstr "Basque"
 
@@ -1377,6 +1389,10 @@ msgid "Boost green"
 msgstr "Yeşil"
 
 msgid "Boot to Android image"
+msgstr ""
+
+#, python-format
+msgid "Boot to Recovery image - slot0 %s"
 msgstr ""
 
 msgid "Boot to Recovery menu"
@@ -1827,6 +1843,10 @@ msgstr "HP Kod oranı"
 msgid "Code rate LP"
 msgstr "LP Kod oranı"
 
+#, python-format
+msgid "Codec & lang%s"
+msgstr ""
+
 msgid "Collection name"
 msgstr "Koleksiyon adı"
 
@@ -1980,9 +2000,6 @@ msgstr "Altyazıların normal italik, kalın ve kalın italik arasında geçiş 
 
 msgid "Configure interface"
 msgstr "Arabirim yapılandırması"
-
-msgid "Configure nameservers"
-msgstr "İsim sunucularını yapılandır"
 
 msgid "Configure on which devices the background delete option should be used."
 msgstr "Arka plan silme seçeneği kullanılması gereken aygıtları yapılandırın."
@@ -2567,6 +2584,10 @@ msgstr "Varsayılan"
 msgid "Default Services Scanner"
 msgstr ""
 
+#, python-format
+msgid "Default duration: %d mins"
+msgstr ""
+
 msgid "Default movie location"
 msgstr "Varsayılan film konumu"
 
@@ -3143,9 +3164,6 @@ msgstr ""
 msgid "Edit"
 msgstr "Düzenle"
 
-msgid "Edit DNS"
-msgstr "DNS Düzenle"
-
 msgid "Edit alternatives"
 msgstr "Alternatifleri Düzenle"
 
@@ -3217,6 +3235,9 @@ msgstr "EIT EPG Aktif"
 #, fuzzy
 msgid "Enable HDMI-CEC"
 msgstr "EIT EPG Aktif"
+
+msgid "Enable Kexec MultiBoot"
+msgstr ""
 
 msgid "Enable MHW EPG"
 msgstr "MHW EPG Aktif"
@@ -3382,7 +3403,7 @@ msgstr "Şİfre"
 msgid "Enter URL"
 msgstr ""
 
-msgid "Enter an URL where alternative images could be listed for FlashImage"
+msgid "Enter an URL where alternative images could be listed for FlashImage. Enter text 'all' for automatic access of many images."
 msgstr ""
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -3568,9 +3589,6 @@ msgstr "Film Listesinden çık"
 msgid "Exit movie player?"
 msgstr "Film Oynatıcıdan Çık?"
 
-msgid "Exit nameserver configuration"
-msgstr "İsim sunucusu ayarlarından Çık"
-
 msgid "Exit network interface list"
 msgstr "Ağ arabirimi listesinden Çık"
 
@@ -3605,6 +3623,10 @@ msgstr "Geliştirilmiş Yazılım"
 
 msgid "Extended Software Plugin"
 msgstr "Geliştirilmiş Yazılım Eklentisi"
+
+#, fuzzy
+msgid "Extended info"
+msgstr "Genişletmeler"
 
 msgid "Extended network setup plugin..."
 msgstr "Gelişmiş ağ kurulum eklentisi..."
@@ -4819,6 +4841,19 @@ msgstr ""
 msgid "Kernel version: "
 msgstr "Çekirdek sürümü:"
 
+msgid "Kexec MultiBoot Initialisation - will reboot after 10 seconds."
+msgstr ""
+
+msgid ""
+"Kexec MultiBoot Initialisation in progress!\n"
+"\n"
+"Will reboot after restoring any eMMC slots.\n"
+"This can take from 1 -> 5 minutes per slot."
+msgstr ""
+
+msgid "Kexec MultiBoot Manager"
+msgstr ""
+
 msgid "Key Events"
 msgstr ""
 
@@ -5485,16 +5520,6 @@ msgstr "İsim"
 msgid "Nameserver"
 msgstr "İsim sunucusu (DNS)"
 
-#, python-format
-msgid "Nameserver %d"
-msgstr "İsim sunucusu (DNS) %d"
-
-msgid "Nameserver settings"
-msgstr "İsim sunucusu (DNS) ayarları"
-
-msgid "Nameserver setup"
-msgstr "İsim sunucusu (DNS) kurulumu"
-
 msgid "Namespace & Orbital pos."
 msgstr ""
 
@@ -5952,6 +5977,13 @@ msgstr "Zamanlayıcı Devredışı"
 msgid "Orbital position"
 msgstr "Uydu"
 
+#, fuzzy
+msgid "Order by modes"
+msgstr "Tarihe Göre, Tersine"
+
+msgid "Order by slots"
+msgstr ""
+
 msgid "Ordinary"
 msgstr ""
 
@@ -6069,6 +6101,13 @@ msgstr "Aile koruma servislerini düzenle"
 
 msgid "Parental control setup"
 msgstr "Aile Koruması Kurulumu"
+
+msgid "Partial"
+msgstr ""
+
+#, fuzzy
+msgid "Partial EPG"
+msgstr "Çoklu EPG"
 
 msgid "Passthrough"
 msgstr ""
@@ -6200,13 +6239,6 @@ msgstr "Lütfen kayıt bitiş saatini değiştirin"
 
 msgid "Please choose an extension..."
 msgstr "Lütfen kullanmak istediğiniz eklentiyi seçin..."
-
-msgid ""
-"Please configure or verify your Nameservers by filling out the required values.\n"
-"When you are ready press OK to continue."
-msgstr ""
-"Yapılandırın veya gerekli değerleri yazarak isim sunucusunu kontrol edin.\n"
-"Devam etmek için OK tuşuna basın."
 
 #, fuzzy
 msgid "Please configure the fallback tuner setup"
@@ -6584,6 +6616,14 @@ msgstr ""
 msgid "Press 'OK' for remove item or < > for change order or 'CH+/-' for toggle to list of features."
 msgstr ""
 
+msgid ""
+"Press Green key to enable MultiBoot!\n"
+"\n"
+"Will reboot within 10 seconds,\n"
+"unless you have eMMC slots to restore.\n"
+"Restoring eMMC slots can take from 1 -> 5 minutes per slot."
+msgstr ""
+
 msgid "Press INFO on your remote control for additional information."
 msgstr "Ek bilgi için uzaktan kumanda üzerindeki INFO (EPG) tuşuna basın."
 
@@ -6810,6 +6850,12 @@ msgstr "Alt servislerde hızlı kanal değiştirme iptal olsun mu?"
 msgid "Really perform a manufacturer reset now?"
 msgstr "Fabrika ayarları koruması"
 
+#, python-format
+msgid ""
+"Really permanently delete MultiBoot files?\n"
+"%s"
+msgstr ""
+
 msgid "Really reboot now?"
 msgstr "Yeniden başlatmak istiyor musunuz?"
 
@@ -6962,9 +7008,6 @@ msgstr "Sil"
 msgid "Remove a mark"
 msgstr "İşaret Kaldır"
 
-msgid "Remove a nameserver entry"
-msgstr "İsim sunucusu girişini sil"
-
 msgid "Remove all alternatives"
 msgstr "Alternatiflerin tümünü kaldır"
 
@@ -6993,6 +7036,10 @@ msgid "Remove directory"
 msgstr "Klasörü sil"
 
 msgid "Remove entry"
+msgstr "Seçili Kanalı/Buketi Sil"
+
+#, fuzzy
+msgid "Remove forever"
 msgstr "Seçili Kanalı/Buketi Sil"
 
 msgid "Remove from parental protection"
@@ -8768,6 +8815,10 @@ msgstr "Anlık Kayıt etme işlemini başlat"
 msgid "Start offline decode"
 msgstr "Çevrimdışı kod çözmeyi başlat"
 
+#, fuzzy
+msgid "Start recording current event"
+msgstr "Geçerli olaydan sonra Uyku Moduna Geç"
+
 msgid "Start recording?"
 msgstr "Kayıt başlatılsın mı?"
 
@@ -8903,6 +8954,9 @@ msgstr "Başlangıç servislerini durdurun"
 
 msgid "Stopped"
 msgstr "Durduruldu"
+
+msgid "Storage device not available or not initialized."
+msgstr ""
 
 msgid "Store at index"
 msgstr "İndeksteki depo"
@@ -10024,6 +10078,9 @@ msgid "Ukrainian"
 msgstr "Ukraynalı"
 
 msgid "Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"
+msgstr ""
+
+msgid "Unable to complete - Kexec Multiboot files missing!"
 msgstr ""
 
 msgid "Unable to create the required directories on the media (e.g. USB stick or Harddisk) - Please verify media and try again!"
@@ -11925,9 +11982,6 @@ msgstr "Yalnız Derin Uyku"
 msgid "only from standby"
 msgstr "Yanlız Hazırda Beklet"
 
-msgid "open nameserver configuration"
-msgstr "isim sunucu yapılandırmasını aç"
-
 msgid "original"
 msgstr "Orjinal"
 
@@ -12207,6 +12261,10 @@ msgstr "Geçiş süresi, Bölüm, Ses, Altyazı bilgileri"
 
 msgid "top"
 msgstr "Üst"
+
+#, python-format
+msgid "total conflict (%d)"
+msgstr ""
 
 msgid "tourism/travel"
 msgstr "Turizm/Seyahat"

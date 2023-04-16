@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-14 14:37+0100\n"
+"POT-Creation-Date: 2023-04-16 18:05+0200\n"
 "PO-Revision-Date: 2021-05-24 17:48+0300\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: openPLi Dimitrij\n"
@@ -333,6 +333,10 @@ msgstr ""
 msgid "%s %d.%d"
 msgstr "%s %d.%d"
 
+#, fuzzy, python-format
+msgid "%s (files)"
+msgstr "%d файл"
+
 #, python-format
 msgid "%s KSymb/s"
 msgstr "%s KSymb/s"
@@ -340,6 +344,10 @@ msgstr "%s KSymb/s"
 #, python-format
 msgid "%s MHz"
 msgstr "%s MHz"
+
+#, fuzzy, python-format
+msgid "%s connected successfully."
+msgstr "PIN-код был успешно изменен."
 
 #, python-format
 msgid "%s imported from fallback tuner"
@@ -372,6 +380,9 @@ msgstr "(Переключить)"
 #, python-format
 msgid "(activated +%d min)"
 msgstr "(активирован +%d мин)"
+
+msgid "(current)"
+msgstr "(текущий)"
 
 msgid "(empty)"
 msgstr "(пусто)"
@@ -664,9 +675,6 @@ msgstr "Активировать HbbTV (функция 'красная кноп�
 msgid "Activate Picture in Picture"
 msgstr "Активировать PiP (картинку в картинке)"
 
-msgid "Activate current configuration"
-msgstr "Активировать текущие настройки"
-
 msgid "Activate network settings"
 msgstr "Активировать сетевые установки"
 
@@ -687,9 +695,6 @@ msgstr "Добавить"
 
 msgid "Add a mark"
 msgstr "Добавить метку"
-
-msgid "Add a nameserver entry"
-msgstr "Добавить сервер имен (DNS)"
 
 msgid "Add a new title"
 msgstr "Добавить новое название"
@@ -1068,6 +1073,13 @@ msgstr "В начале"
 msgid "At end"
 msgstr "В конце"
 
+msgid ""
+"Attention - forced loading recovery image!\n"
+"Create an empty STARTUP_RECOVERY file at the root of your HDD/USB drive and hold the Power button for more than 12 seconds for reboot receiver!"
+msgstr ""
+"Внимание - принудительная загрузка образа восстановления!\n"
+"Создайте пустой файл STARTUP RECOVERY в корне жесткого диска/флешки и удерживайте кнопку питания более 12 секунд для перезагрузки ресивера!"
+
 msgid "Attention, this is repeated timer!\n"
 msgstr "Внимание, это повторный таймер!\n"
 
@@ -1090,27 +1102,6 @@ msgstr "Аудио PID"
 #, python-format
 msgid "Audio PID%s, codec & lang"
 msgstr "Аудио PID%s, кодек & язык"
-
-msgid "Codec & lang%s"
-msgstr "Информация аудио%s"
-
-msgid "Basic info"
-msgstr "Базовые данные"
-
-msgid "Extended info"
-msgstr "Расширенные данные"
-
-msgid "Partial"
-msgstr "Поиск EPG"
-
-msgid "Partial EPG"
-msgstr "Частично похожие события EPG"
-
-msgid "Order by modes"
-msgstr "Сортировка - режим"
-
-msgid "Order by slots"
-msgstr "Сортировка - слот"
 
 msgid "Audio auto volume level"
 msgstr "Уровень авто громкости звука"
@@ -1306,6 +1297,9 @@ msgstr "Barbados"
 msgid "Basic PID info"
 msgstr "Базовая информация PID"
 
+msgid "Basic info"
+msgstr "Базовые данные"
+
 msgid "Basque"
 msgstr "Баскский"
 
@@ -1392,6 +1386,10 @@ msgstr "Увеличение зеленого"
 
 msgid "Boot to Android image"
 msgstr "Загрузить имидж Android"
+
+#, python-format
+msgid "Boot to Recovery image - slot0 %s"
+msgstr "Загрузить имидж Recovery - слот0 %s"
 
 msgid "Boot to Recovery menu"
 msgstr "Загрузить меню Recovery"
@@ -1840,6 +1838,10 @@ msgstr "Скорость кодирования HP"
 msgid "Code rate LP"
 msgstr "Скорость кодирования LP"
 
+#, python-format
+msgid "Codec & lang%s"
+msgstr "Информация аудио%s"
+
 msgid "Collection name"
 msgstr "Название коллекции"
 
@@ -1984,9 +1986,6 @@ msgstr "Настройка для переключения субтитров м
 
 msgid "Configure interface"
 msgstr "Настройка интерфейса"
-
-msgid "Configure nameservers"
-msgstr "Настройка серверов имен (DNS)"
 
 msgid "Configure on which devices the background delete option should be used."
 msgstr "Настройка для каких устройств следует использовать опцию фонового удаления."
@@ -2554,6 +2553,10 @@ msgstr "Дефолт"
 msgid "Default Services Scanner"
 msgstr "Дефолтный сервисный сканер"
 
+#, python-format
+msgid "Default duration: %d mins"
+msgstr "Продолжительность по умолчанию: %d мин."
+
 msgid "Default movie location"
 msgstr "Дефолтное место записей"
 
@@ -3107,9 +3110,6 @@ msgstr "Ecuador"
 msgid "Edit"
 msgstr "Редактировать"
 
-msgid "Edit DNS"
-msgstr "Редактировать DNS"
-
 msgid "Edit alternatives"
 msgstr "Изменить альтернативу"
 
@@ -3178,6 +3178,9 @@ msgstr "Включить EIT EPG"
 
 msgid "Enable HDMI-CEC"
 msgstr "Включить HDMI-CEC"
+
+msgid "Enable Kexec MultiBoot"
+msgstr "Активировать Vu+ мультибут"
 
 msgid "Enable MHW EPG"
 msgstr "Включить MHW EPG"
@@ -3524,9 +3527,6 @@ msgstr "Выйти из списока фильмов"
 msgid "Exit movie player?"
 msgstr "Выйти из видео плеера?"
 
-msgid "Exit nameserver configuration"
-msgstr "Выйти из настройки сервера имен"
-
 msgid "Exit network interface list"
 msgstr "Выход из списка сетевых интерфейсов"
 
@@ -3559,6 +3559,9 @@ msgstr "Расширенное программное обеспечение"
 
 msgid "Extended Software Plugin"
 msgstr "Расширенный плагин программного обеспечения"
+
+msgid "Extended info"
+msgstr "Расширенные данные"
 
 msgid "Extended network setup plugin..."
 msgstr "Плагин расширенных настроек сети..."
@@ -4738,6 +4741,23 @@ msgstr "Kenya"
 msgid "Kernel version: "
 msgstr "Версия ядра: "
 
+msgid "Kexec MultiBoot Initialisation - will reboot after 10 seconds."
+msgstr "Инициализация Vu+ мультибута — перезагрузка через 10 секунд."
+
+msgid ""
+"Kexec MultiBoot Initialisation in progress!\n"
+"\n"
+"Will reboot after restoring any eMMC slots.\n"
+"This can take from 1 -> 5 minutes per slot."
+msgstr ""
+"Выполняется инициализация Vu+ мультибута!\n"
+"\n"
+"Перезагрузка начнется после восстановления любых слотов eMMC.\n"
+"Это может занять от 1 до 5 минут на каждый слот."
+
+msgid "Kexec MultiBoot Manager"
+msgstr "Vu+ мультибут менеджер"
+
 msgid "Key Events"
 msgstr "Ключ событий"
 
@@ -5384,16 +5404,6 @@ msgstr "Имя"
 msgid "Nameserver"
 msgstr "Сервер имен (DNS)"
 
-#, python-format
-msgid "Nameserver %d"
-msgstr "Сервер имен (DNS) %d"
-
-msgid "Nameserver settings"
-msgstr "Настройки сервера имен (DNS)"
-
-msgid "Nameserver setup"
-msgstr "Настройка сервера имен (DNS)"
-
 msgid "Namespace & Orbital pos."
 msgstr "Namespace & Орбит. позиция"
 
@@ -5840,6 +5850,12 @@ msgstr "Варианты отключения таймера"
 msgid "Orbital position"
 msgstr "Орбититальная позиция"
 
+msgid "Order by modes"
+msgstr "Сортировка - режим"
+
+msgid "Order by slots"
+msgstr "Сортировка - слот"
+
 msgid "Ordinary"
 msgstr "Обычный"
 
@@ -5954,6 +5970,12 @@ msgstr "Редактор сервисов родительского контр�
 
 msgid "Parental control setup"
 msgstr "Установки родительского контроля"
+
+msgid "Partial"
+msgstr "Поиск EPG"
+
+msgid "Partial EPG"
+msgstr "Частично похожие события EPG"
 
 msgid "Passthrough"
 msgstr "прямой звук"
@@ -6081,13 +6103,6 @@ msgstr "Пожалуйста, измените время окончания з�
 
 msgid "Please choose an extension..."
 msgstr "Пожалуйста, выберите дополнение..."
-
-msgid ""
-"Please configure or verify your Nameservers by filling out the required values.\n"
-"When you are ready press OK to continue."
-msgstr ""
-"Пожалуйста, настройте или проверьте конфигурацию сервера имен (DNS),заполнив нужные данные.\n"
-"Когда будете готовы - нажмите ОК для продолжения."
 
 msgid "Please configure the fallback tuner setup"
 msgstr "Хотите сконфигурировать настройки запасного удаленного ресивера"
@@ -6453,6 +6468,19 @@ msgstr "Нажмите 'OK' для удаления записи или 'CH+/-' 
 msgid "Press 'OK' for remove item or < > for change order or 'CH+/-' for toggle to list of features."
 msgstr "Нажмите 'OK' для удаления записи или < > для изменения порядка или 'CH+/-' для переключения к списку функций."
 
+#, fuzzy
+msgid ""
+"Press Green key to enable MultiBoot!\n"
+"\n"
+"Will reboot within 10 seconds,\n"
+"unless you have eMMC slots to restore.\n"
+"Restoring eMMC slots can take from 1 -> 5 minutes per slot."
+msgstr ""
+"Выполняется инициализация Vu+ мультибута!\n"
+"\n"
+"Перезагрузка начнется после восстановления любых слотов eMMC.\n"
+"Это может занять от 1 до 5 минут на каждый слот."
+
 msgid "Press INFO on your remote control for additional information."
 msgstr "Нажмите кнопку INFO на Вашем пульте Д/У для дополнительной информации."
 
@@ -6674,6 +6702,14 @@ msgstr "Действительно выйти из меню субсервисо
 msgid "Really perform a manufacturer reset now?"
 msgstr "Действительно выполнить сброс на настройки производителя сейчас?"
 
+#, python-format
+msgid ""
+"Really permanently delete MultiBoot files?\n"
+"%s"
+msgstr ""
+"Действительно безвозвратно удалить файлы мультибута?\n"
+"%s"
+
 msgid "Really reboot now?"
 msgstr "Действительно выполнить перезагрузку сейчас?"
 
@@ -6824,9 +6860,6 @@ msgstr "Удаление"
 msgid "Remove a mark"
 msgstr "Удалить метку"
 
-msgid "Remove a nameserver entry"
-msgstr "Удалить запись сервера имен"
-
 msgid "Remove all alternatives"
 msgstr "Удалить эту альтернативу"
 
@@ -6855,6 +6888,10 @@ msgid "Remove directory"
 msgstr "Удалить директорию"
 
 msgid "Remove entry"
+msgstr "Удалить выбранное"
+
+#, fuzzy
+msgid "Remove forever"
 msgstr "Удалить выбранное"
 
 msgid "Remove from parental protection"
@@ -8579,6 +8616,9 @@ msgstr "Старт немедленной записи"
 msgid "Start offline decode"
 msgstr "Старт отложенного декодирования"
 
+msgid "Start recording current event"
+msgstr "Начать запись текущего события"
+
 msgid "Start recording?"
 msgstr "Начать запись?"
 
@@ -8710,6 +8750,9 @@ msgstr "Отмена сервиса как стартового при загр�
 
 msgid "Stopped"
 msgstr "Остановлено"
+
+msgid "Storage device not available or not initialized."
+msgstr ""
 
 msgid "Store at index"
 msgstr "Сохранить номер"
@@ -9798,6 +9841,9 @@ msgstr "Украинский"
 
 msgid "Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"
 msgstr "Не удалось выполнить бекап настроек, так как не найден плагин 'AutoBackup', Вы хотите продолжить?"
+
+msgid "Unable to complete - Kexec Multiboot files missing!"
+msgstr "Невозможно выполнить - отсутствуют файлы Vu+ мультибута!"
 
 msgid "Unable to create the required directories on the media (e.g. USB stick or Harddisk) - Please verify media and try again!"
 msgstr "Невозможно создать необходимые каталоги на носителе (например, USB-накопитель или жесткий диск). Пожалуйста, проверьте носитель и попробуйте снова!"
@@ -11655,9 +11701,6 @@ msgstr "только из режима глубокого ожидания"
 msgid "only from standby"
 msgstr "только из режима ожидания"
 
-msgid "open nameserver configuration"
-msgstr "открыть конфигурацию сервера имен (DNS)"
-
 msgid "original"
 msgstr "оригинал"
 
@@ -11926,6 +11969,10 @@ msgstr "переключение времени, главы, аудио, ифо�
 msgid "top"
 msgstr "вверх"
 
+#, python-format
+msgid "total conflict (%d)"
+msgstr "всего конфликтов (%d)"
+
 msgid "tourism/travel"
 msgstr "туризм/путешествия"
 
@@ -12067,39 +12114,3 @@ msgstr "переключено"
 
 msgid "®"
 msgstr "®"
-
-msgid "Start recording current event"
-msgstr "Начать запись текущего события"
-
-msgid "Default duration: %d mins"
-msgstr "Продолжительность по умолчанию: %d мин."
-
-msgid "total conflict (%d)"
-msgstr "всего конфликтов (%d)"
-
-msgid "Boot to Recovery image - slot0 %s"
-msgstr "Загрузить имидж Recovery - слот0 %s"
-
-msgid "(current)"
-msgstr "(текущий)"
-
-msgid "Really permanently delete MultiBoot files?\n%s"
-msgstr "Действительно безвозвратно удалить файлы мультибута?\n%s"
-
-msgid "Attention - forced loading recovery image!\nCreate an empty STARTUP_RECOVERY file at the root of your HDD/USB drive and hold the Power button for more than 12 seconds for reboot receiver!"
-msgstr "Внимание - принудительная загрузка образа восстановления!\nСоздайте пустой файл STARTUP RECOVERY в корне жесткого диска/флешки и удерживайте кнопку питания более 12 секунд для перезагрузки ресивера!"
-
-msgid "Enable Kexec MultiBoot"
-msgstr "Активировать Vu+ мультибут"
-
-msgid "Kexec MultiBoot Manager"
-msgstr "Vu+ мультибут менеджер"
-
-msgid "Kexec MultiBoot Initialisation - will reboot after 10 seconds."
-msgstr "Инициализация Vu+ мультибута — перезагрузка через 10 секунд."
-
-msgid "Kexec MultiBoot Initialisation in progress!\n\nWill reboot after restoring any eMMC slots.\nThis can take from 1 -> 5 minutes per slot."
-msgstr "Выполняется инициализация Vu+ мультибута!\n\nПерезагрузка начнется после восстановления любых слотов eMMC.\nЭто может занять от 1 до 5 минут на каждый слот."
-
-msgid "Unable to complete - Kexec Multiboot files missing!"
-msgstr "Невозможно выполнить - отсутствуют файлы Vu+ мультибута!"

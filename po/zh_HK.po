@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-14 14:37+0100\n"
+"POT-Creation-Date: 2023-04-16 18:05+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: 王彪 <satfan@163.com>\n"
 "Language-Team: 中國\n"
@@ -312,12 +312,20 @@ msgstr ""
 msgid "%s %d.%d"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "%s (files)"
+msgstr "%d file"
+
 #, python-format
 msgid "%s KSymb/s"
 msgstr ""
 
 #, python-format
 msgid "%s MHz"
+msgstr ""
+
+#, python-format
+msgid "%s connected successfully."
 msgstr ""
 
 #, python-format
@@ -350,6 +358,10 @@ msgstr "(ZAP)"
 #, python-format
 msgid "(activated +%d min)"
 msgstr ""
+
+#, fuzzy
+msgid "(current)"
+msgstr "當前值: "
 
 msgid "(empty)"
 msgstr "(空的)"
@@ -648,9 +660,6 @@ msgstr ""
 msgid "Activate Picture in Picture"
 msgstr "啟用畫中畫"
 
-msgid "Activate current configuration"
-msgstr ""
-
 msgid "Activate network settings"
 msgstr "啟用網路設定"
 
@@ -671,9 +680,6 @@ msgstr "添加"
 
 msgid "Add a mark"
 msgstr "增加標記"
-
-msgid "Add a nameserver entry"
-msgstr ""
 
 msgid "Add a new title"
 msgstr "增加一個新標題"
@@ -1048,6 +1054,11 @@ msgstr ""
 msgid "At end"
 msgstr ""
 
+msgid ""
+"Attention - forced loading recovery image!\n"
+"Create an empty STARTUP_RECOVERY file at the root of your HDD/USB drive and hold the Power button for more than 12 seconds for reboot receiver!"
+msgstr ""
+
 msgid "Attention, this is repeated timer!\n"
 msgstr ""
 
@@ -1067,9 +1078,6 @@ msgstr ""
 
 #, python-format
 msgid "Audio PID%s, codec & lang"
-msgstr ""
-
-msgid "Audio PID, codec & lang"
 msgstr ""
 
 msgid "Audio auto volume level"
@@ -1273,6 +1281,9 @@ msgstr ""
 msgid "Basic PID info"
 msgstr ""
 
+msgid "Basic info"
+msgstr ""
+
 msgid "Basque"
 msgstr ""
 
@@ -1360,6 +1371,10 @@ msgid "Boost green"
 msgstr "最新"
 
 msgid "Boot to Android image"
+msgstr ""
+
+#, python-format
+msgid "Boot to Recovery image - slot0 %s"
 msgstr ""
 
 msgid "Boot to Recovery menu"
@@ -1804,6 +1819,10 @@ msgstr ""
 msgid "Code rate LP"
 msgstr ""
 
+#, python-format
+msgid "Codec & lang%s"
+msgstr ""
+
 msgid "Collection name"
 msgstr "收藏名稱"
 
@@ -1956,9 +1975,6 @@ msgstr ""
 
 msgid "Configure interface"
 msgstr "配置網卡"
-
-msgid "Configure nameservers"
-msgstr "配置功能變數名稱伺服器"
 
 msgid "Configure on which devices the background delete option should be used."
 msgstr ""
@@ -2533,6 +2549,10 @@ msgstr "預設"
 msgid "Default Services Scanner"
 msgstr ""
 
+#, python-format
+msgid "Default duration: %d mins"
+msgstr ""
+
 msgid "Default movie location"
 msgstr "預設錄影位置"
 
@@ -3097,9 +3117,6 @@ msgstr ""
 msgid "Edit"
 msgstr "修改"
 
-msgid "Edit DNS"
-msgstr "編輯 DNS"
-
 msgid "Edit alternatives"
 msgstr "編輯選項"
 
@@ -3169,6 +3186,9 @@ msgid "Enable EIT EPG"
 msgstr ""
 
 msgid "Enable HDMI-CEC"
+msgstr ""
+
+msgid "Enable Kexec MultiBoot"
 msgstr ""
 
 msgid "Enable MHW EPG"
@@ -3330,7 +3350,7 @@ msgstr ""
 msgid "Enter URL"
 msgstr ""
 
-msgid "Enter an URL where alternative images could be listed for FlashImage"
+msgid "Enter an URL where alternative images could be listed for FlashImage. Enter text 'all' for automatic access of many images."
 msgstr ""
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -3512,9 +3532,6 @@ msgstr ""
 msgid "Exit movie player?"
 msgstr ""
 
-msgid "Exit nameserver configuration"
-msgstr ""
-
 msgid "Exit network interface list"
 msgstr ""
 
@@ -3548,6 +3565,10 @@ msgstr "擴展軟體"
 
 msgid "Extended Software Plugin"
 msgstr "擴展插件"
+
+#, fuzzy
+msgid "Extended info"
+msgstr "擴展軟體"
 
 msgid "Extended network setup plugin..."
 msgstr ""
@@ -4738,6 +4759,19 @@ msgstr ""
 msgid "Kernel version: "
 msgstr ""
 
+msgid "Kexec MultiBoot Initialisation - will reboot after 10 seconds."
+msgstr ""
+
+msgid ""
+"Kexec MultiBoot Initialisation in progress!\n"
+"\n"
+"Will reboot after restoring any eMMC slots.\n"
+"This can take from 1 -> 5 minutes per slot."
+msgstr ""
+
+msgid "Kexec MultiBoot Manager"
+msgstr ""
+
 #, fuzzy
 msgid "Key Events"
 msgstr "事件"
@@ -5404,16 +5438,6 @@ msgstr "名稱"
 msgid "Nameserver"
 msgstr "DNS伺服器"
 
-#, python-format
-msgid "Nameserver %d"
-msgstr "DNS %d"
-
-msgid "Nameserver settings"
-msgstr "DNS設定"
-
-msgid "Nameserver setup"
-msgstr ""
-
 msgid "Namespace & Orbital pos."
 msgstr ""
 
@@ -5870,6 +5894,12 @@ msgstr ""
 msgid "Orbital position"
 msgstr ""
 
+msgid "Order by modes"
+msgstr ""
+
+msgid "Order by slots"
+msgstr ""
+
 msgid "Ordinary"
 msgstr ""
 
@@ -5985,6 +6015,13 @@ msgstr ""
 
 msgid "Parental control setup"
 msgstr "家長控制設定"
+
+msgid "Partial"
+msgstr ""
+
+#, fuzzy
+msgid "Partial EPG"
+msgstr "多路 EPG"
 
 msgid "Passthrough"
 msgstr ""
@@ -6114,13 +6151,6 @@ msgstr "請更改錄製結束時間"
 
 msgid "Please choose an extension..."
 msgstr "請選擇增加部分..."
-
-msgid ""
-"Please configure or verify your Nameservers by filling out the required values.\n"
-"When you are ready press OK to continue."
-msgstr ""
-"請設定或核實填寫您的功能變數名稱伺服器.\n"
-"準備好後按OK繼續."
 
 msgid "Please configure the fallback tuner setup"
 msgstr ""
@@ -6494,6 +6524,14 @@ msgstr ""
 msgid "Press 'OK' for remove item or < > for change order or 'CH+/-' for toggle to list of features."
 msgstr ""
 
+msgid ""
+"Press Green key to enable MultiBoot!\n"
+"\n"
+"Will reboot within 10 seconds,\n"
+"unless you have eMMC slots to restore.\n"
+"Restoring eMMC slots can take from 1 -> 5 minutes per slot."
+msgstr ""
+
 msgid "Press INFO on your remote control for additional information."
 msgstr ""
 
@@ -6717,6 +6755,12 @@ msgstr "退出字幕快速切換?"
 msgid "Really perform a manufacturer reset now?"
 msgstr ""
 
+#, python-format
+msgid ""
+"Really permanently delete MultiBoot files?\n"
+"%s"
+msgstr ""
+
 msgid "Really reboot now?"
 msgstr "立即重啟(Reboot)?"
 
@@ -6869,9 +6913,6 @@ msgstr "移除"
 msgid "Remove a mark"
 msgstr "移除標記"
 
-msgid "Remove a nameserver entry"
-msgstr ""
-
 msgid "Remove all alternatives"
 msgstr "移除所有項目"
 
@@ -6900,6 +6941,10 @@ msgid "Remove directory"
 msgstr "移除目錄"
 
 msgid "Remove entry"
+msgstr "移除項目"
+
+#, fuzzy
+msgid "Remove forever"
 msgstr "移除項目"
 
 msgid "Remove from parental protection"
@@ -8663,6 +8708,10 @@ msgstr ""
 msgid "Start offline decode"
 msgstr ""
 
+#, fuzzy
+msgid "Start recording current event"
+msgstr "開始錄製？"
+
 msgid "Start recording?"
 msgstr "開始錄製？"
 
@@ -8798,6 +8847,9 @@ msgstr ""
 
 msgid "Stopped"
 msgstr "停止"
+
+msgid "Storage device not available or not initialized."
+msgstr ""
 
 msgid "Store at index"
 msgstr ""
@@ -9864,6 +9916,9 @@ msgid "Ukrainian"
 msgstr "烏克蘭"
 
 msgid "Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"
+msgstr ""
+
+msgid "Unable to complete - Kexec Multiboot files missing!"
 msgstr ""
 
 msgid "Unable to create the required directories on the media (e.g. USB stick or Harddisk) - Please verify media and try again!"
@@ -11694,9 +11749,6 @@ msgstr ""
 msgid "only from standby"
 msgstr ""
 
-msgid "open nameserver configuration"
-msgstr "打開DNS設定"
-
 msgid "original"
 msgstr ""
 
@@ -11970,6 +12022,10 @@ msgid "toggle time, chapter, audio, subtitle info"
 msgstr "切換時間, 章節, 音頻,字幕資訊"
 
 msgid "top"
+msgstr ""
+
+#, python-format
+msgid "total conflict (%d)"
 msgstr ""
 
 msgid "tourism/travel"

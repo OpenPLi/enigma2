@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-14 14:37+0100\n"
+"POT-Creation-Date: 2023-04-16 18:05+0200\n"
 "PO-Revision-Date: 2011-04-14 00:02+0200\n"
 "Last-Translator: majevica <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -350,12 +350,20 @@ msgid "%s %d.%d"
 msgstr ""
 
 #, python-format
+msgid "%s (files)"
+msgstr ""
+
+#, python-format
 msgid "%s KSymb/s"
 msgstr ""
 
 #, python-format
 msgid "%s MHz"
 msgstr ""
+
+#, fuzzy, python-format
+msgid "%s connected successfully."
+msgstr "PIN kod je uspešno promenjen."
 
 #, python-format
 msgid "%s imported from fallback tuner"
@@ -390,6 +398,11 @@ msgstr "(ZAP)"
 #, python-format
 msgid "(activated +%d min)"
 msgstr ""
+
+#
+#, fuzzy
+msgid "(current)"
+msgstr "Trenutna vrednost:"
 
 #
 msgid "(empty)"
@@ -737,11 +750,6 @@ msgid "Activate Picture in Picture"
 msgstr "Aktiviraj Sliku u Slici"
 
 #
-#, fuzzy
-msgid "Activate current configuration"
-msgstr "Aktivirajte aktuelnu konfiguraciju"
-
-#
 msgid "Activate network settings"
 msgstr "Aktiviraj mrežne postavke"
 
@@ -767,11 +775,6 @@ msgstr "Dodaj"
 #
 msgid "Add a mark"
 msgstr "Dodaj oznaku"
-
-#
-#, fuzzy
-msgid "Add a nameserver entry"
-msgstr "Dodaj nejmserver"
 
 #
 msgid "Add a new title"
@@ -1234,6 +1237,11 @@ msgstr "na početku"
 msgid "At end"
 msgstr "na kraju"
 
+msgid ""
+"Attention - forced loading recovery image!\n"
+"Create an empty STARTUP_RECOVERY file at the root of your HDD/USB drive and hold the Power button for more than 12 seconds for reboot receiver!"
+msgstr ""
+
 msgid "Attention, this is repeated timer!\n"
 msgstr ""
 
@@ -1254,9 +1262,6 @@ msgstr "Zvučni PID"
 
 #, python-format
 msgid "Audio PID%s, codec & lang"
-msgstr ""
-
-msgid "Audio PID, codec & lang"
 msgstr ""
 
 msgid "Audio auto volume level"
@@ -1495,6 +1500,11 @@ msgstr ""
 msgid "Basic PID info"
 msgstr ""
 
+#
+#, fuzzy
+msgid "Basic info"
+msgstr "Info kanala"
+
 msgid "Basque"
 msgstr ""
 
@@ -1592,6 +1602,10 @@ msgid "Boost green"
 msgstr "zeleno"
 
 msgid "Boot to Android image"
+msgstr ""
+
+#, python-format
+msgid "Boot to Recovery image - slot0 %s"
 msgstr ""
 
 msgid "Boot to Recovery menu"
@@ -2089,6 +2103,10 @@ msgstr "Kod rata HP"
 msgid "Code rate LP"
 msgstr "Kod rata LP"
 
+#, python-format
+msgid "Codec & lang%s"
+msgstr ""
+
 #
 msgid "Collection name"
 msgstr "Ime kolekcije"
@@ -2271,10 +2289,6 @@ msgstr ""
 #
 msgid "Configure interface"
 msgstr "Konfiguriši interfejs"
-
-#
-msgid "Configure nameservers"
-msgstr "Konfiguriši nejmservere"
 
 msgid "Configure on which devices the background delete option should be used."
 msgstr ""
@@ -2938,6 +2952,10 @@ msgid "Default"
 msgstr "Standardno"
 
 msgid "Default Services Scanner"
+msgstr ""
+
+#, python-format
+msgid "Default duration: %d mins"
 msgstr ""
 
 #
@@ -3608,10 +3626,6 @@ msgid "Edit"
 msgstr "Urediti"
 
 #
-msgid "Edit DNS"
-msgstr "Urediti DNS"
-
-#
 msgid "Edit alternatives"
 msgstr "Uredi alternative"
 
@@ -3693,6 +3707,9 @@ msgid "Enable EIT EPG"
 msgstr ""
 
 msgid "Enable HDMI-CEC"
+msgstr ""
+
+msgid "Enable Kexec MultiBoot"
 msgstr ""
 
 msgid "Enable MHW EPG"
@@ -3879,7 +3896,7 @@ msgstr "Unesi PIN kod"
 msgid "Enter URL"
 msgstr ""
 
-msgid "Enter an URL where alternative images could be listed for FlashImage"
+msgid "Enter an URL where alternative images could be listed for FlashImage. Enter text 'all' for automatic access of many images."
 msgstr ""
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -4085,11 +4102,6 @@ msgstr "Izađi iz medija plejera"
 
 #
 #, fuzzy
-msgid "Exit nameserver configuration"
-msgstr "Napustite konfiguraciju nejmservera"
-
-#
-#, fuzzy
 msgid "Exit network interface list"
 msgstr "Napustite listu mrežnih interfejsa"
 
@@ -4129,6 +4141,11 @@ msgstr "Prošireni softver"
 #
 msgid "Extended Software Plugin"
 msgstr "Prošireni softver dodatak "
+
+#
+#, fuzzy
+msgid "Extended info"
+msgstr "Prošireni softver"
 
 #
 #, fuzzy
@@ -5487,6 +5504,19 @@ msgstr ""
 msgid "Kernel version: "
 msgstr "Nova verzija:"
 
+msgid "Kexec MultiBoot Initialisation - will reboot after 10 seconds."
+msgstr ""
+
+msgid ""
+"Kexec MultiBoot Initialisation in progress!\n"
+"\n"
+"Will reboot after restoring any eMMC slots.\n"
+"This can take from 1 -> 5 minutes per slot."
+msgstr ""
+
+msgid "Kexec MultiBoot Manager"
+msgstr ""
+
 msgid "Key Events"
 msgstr ""
 
@@ -6285,20 +6315,6 @@ msgstr "Ime"
 msgid "Nameserver"
 msgstr "Nejmserver"
 
-#
-#, python-format
-msgid "Nameserver %d"
-msgstr "Nejmserver %d"
-
-#
-msgid "Nameserver settings"
-msgstr "Postavke nejmservera"
-
-#
-#, fuzzy
-msgid "Nameserver setup"
-msgstr "Postavke nejmservera"
-
 msgid "Namespace & Orbital pos."
 msgstr ""
 
@@ -6828,6 +6844,12 @@ msgstr ""
 msgid "Orbital position"
 msgstr "Orbitalna pozicija"
 
+msgid "Order by modes"
+msgstr ""
+
+msgid "Order by slots"
+msgstr ""
+
 msgid "Ordinary"
 msgstr ""
 
@@ -6959,6 +6981,14 @@ msgstr "Urednik za roditeljsku zaštitu kanala"
 #
 msgid "Parental control setup"
 msgstr "Postavke roditeljske zaštite"
+
+msgid "Partial"
+msgstr ""
+
+#
+#, fuzzy
+msgid "Partial EPG"
+msgstr "Multi EPG"
 
 msgid "Passthrough"
 msgstr ""
@@ -7121,14 +7151,6 @@ msgstr "Molim promenite završno vreme snimanja"
 #
 msgid "Please choose an extension..."
 msgstr "Molim odaberite proširenje..."
-
-#
-msgid ""
-"Please configure or verify your Nameservers by filling out the required values.\n"
-"When you are ready press OK to continue."
-msgstr ""
-"Molim konfiguriši ili verifikuj svoje nejmservere popunjavajući tražene vrednosti.\n"
-"Kad si spreman pritisni OK da nastaviš."
 
 msgid "Please configure the fallback tuner setup"
 msgstr ""
@@ -7574,6 +7596,14 @@ msgstr ""
 msgid "Press 'OK' for remove item or < > for change order or 'CH+/-' for toggle to list of features."
 msgstr ""
 
+msgid ""
+"Press Green key to enable MultiBoot!\n"
+"\n"
+"Will reboot within 10 seconds,\n"
+"unless you have eMMC slots to restore.\n"
+"Restoring eMMC slots can take from 1 -> 5 minutes per slot."
+msgstr ""
+
 msgid "Press INFO on your remote control for additional information."
 msgstr "Pritisni INFO na svom daljinskom za dodatne informacije."
 
@@ -7832,6 +7862,12 @@ msgstr "Želite li stvarno izaći iz brzog zapa podkanala?"
 msgid "Really perform a manufacturer reset now?"
 msgstr ""
 
+#, python-format
+msgid ""
+"Really permanently delete MultiBoot files?\n"
+"%s"
+msgstr ""
+
 #
 msgid "Really reboot now?"
 msgstr "Stvarno ponovo podići sada?"
@@ -8012,11 +8048,6 @@ msgid "Remove a mark"
 msgstr "Obriši oznaku"
 
 #
-#, fuzzy
-msgid "Remove a nameserver entry"
-msgstr "Uklonite unos nejmservera"
-
-#
 msgid "Remove all alternatives"
 msgstr "Obriši sve alternative"
 
@@ -8051,6 +8082,11 @@ msgstr "Uklonite direktorijum"
 
 #
 msgid "Remove entry"
+msgstr "Obriši unos"
+
+#
+#, fuzzy
+msgid "Remove forever"
 msgstr "Obriši unos"
 
 #
@@ -10115,6 +10151,11 @@ msgid "Start offline decode"
 msgstr ""
 
 #
+#, fuzzy
+msgid "Start recording current event"
+msgstr "dodaj snimanje (zaustavi posle trenutnog događaja)"
+
+#
 msgid "Start recording?"
 msgstr "Započeti snimanje?"
 
@@ -10276,6 +10317,9 @@ msgid "Stop using as startup service"
 msgstr ""
 
 msgid "Stopped"
+msgstr ""
+
+msgid "Storage device not available or not initialized."
 msgstr ""
 
 msgid "Store at index"
@@ -11538,6 +11582,9 @@ msgid "Ukrainian"
 msgstr ""
 
 msgid "Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"
+msgstr ""
+
+msgid "Unable to complete - Kexec Multiboot files missing!"
 msgstr ""
 
 msgid "Unable to create the required directories on the media (e.g. USB stick or Harddisk) - Please verify media and try again!"
@@ -13624,10 +13671,6 @@ msgstr ""
 msgid "only from standby"
 msgstr ""
 
-#
-msgid "open nameserver configuration"
-msgstr "Otvori konfiguraciju nejmservera "
-
 msgid "original"
 msgstr ""
 
@@ -13934,6 +13977,10 @@ msgid "toggle time, chapter, audio, subtitle info"
 msgstr "Prebacuj vreme,poglavlje,audio,subtitl informacije"
 
 msgid "top"
+msgstr ""
+
+#, python-format
+msgid "total conflict (%d)"
 msgstr ""
 
 msgid "tourism/travel"
