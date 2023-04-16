@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-14 14:37+0100\n"
+"POT-Creation-Date: 2023-04-16 18:05+0200\n"
 "PO-Revision-Date: 2018-02-14 16:51+0330\n"
 "Last-Translator: Persian Prince <persianprince@pe4k.com>\n"
 "Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
@@ -303,6 +303,10 @@ msgstr ""
 msgid "%s %d.%d"
 msgstr "%s %d.%d"
 
+#, fuzzy, python-format
+msgid "%s (files)"
+msgstr "%d فایل"
+
 #, python-format
 msgid "%s KSymb/s"
 msgstr ""
@@ -310,6 +314,10 @@ msgstr ""
 #, python-format
 msgid "%s MHz"
 msgstr ""
+
+#, fuzzy, python-format
+msgid "%s connected successfully."
+msgstr "رمز با موفقیت تغییر کرد"
 
 #, python-format
 msgid "%s imported from fallback tuner"
@@ -341,6 +349,10 @@ msgstr "(حذف)"
 #, python-format
 msgid "(activated +%d min)"
 msgstr ""
+
+#, fuzzy
+msgid "(current)"
+msgstr "مقدار فعلی:"
 
 msgid "(empty)"
 msgstr "(خالی)"
@@ -638,10 +650,6 @@ msgstr ""
 msgid "Activate Picture in Picture"
 msgstr "فعال کردن تصویر در تصویر"
 
-#, fuzzy
-msgid "Activate current configuration"
-msgstr "اضافه کردن پیکربندی شبکه؟"
-
 msgid "Activate network settings"
 msgstr "فعال کردن تنظیمات شبکه"
 
@@ -662,10 +670,6 @@ msgstr "اضافه کردن"
 
 msgid "Add a mark"
 msgstr "اضافه کردن علامت"
-
-#, fuzzy
-msgid "Add a nameserver entry"
-msgstr "Nameserver تنظیمات"
 
 msgid "Add a new title"
 msgstr "اضافه کردن عنوان جدید"
@@ -1074,6 +1078,11 @@ msgstr "شروع از ابتدای کار"
 msgid "At end"
 msgstr ""
 
+msgid ""
+"Attention - forced loading recovery image!\n"
+"Create an empty STARTUP_RECOVERY file at the root of your HDD/USB drive and hold the Power button for more than 12 seconds for reboot receiver!"
+msgstr ""
+
 msgid "Attention, this is repeated timer!\n"
 msgstr ""
 
@@ -1093,9 +1102,6 @@ msgstr "PID صدا"
 
 #, python-format
 msgid "Audio PID%s, codec & lang"
-msgstr ""
-
-msgid "Audio PID, codec & lang"
 msgstr ""
 
 msgid "Audio auto volume level"
@@ -1305,6 +1311,10 @@ msgstr ""
 msgid "Basic PID info"
 msgstr ""
 
+#, fuzzy
+msgid "Basic info"
+msgstr "اطلاعات کانال"
+
 msgid "Basque"
 msgstr ""
 
@@ -1392,6 +1402,10 @@ msgid "Boost green"
 msgstr ""
 
 msgid "Boot to Android image"
+msgstr ""
+
+#, python-format
+msgid "Boot to Recovery image - slot0 %s"
 msgstr ""
 
 msgid "Boot to Recovery menu"
@@ -1845,6 +1859,10 @@ msgstr "نرخ کد HP"
 msgid "Code rate LP"
 msgstr "نرخ کد LP"
 
+#, python-format
+msgid "Codec & lang%s"
+msgstr ""
+
 msgid "Collection name"
 msgstr "نام مجموعه"
 
@@ -2002,10 +2020,6 @@ msgstr ""
 
 msgid "Configure interface"
 msgstr "رابط مشترک"
-
-#
-msgid "Configure nameservers"
-msgstr "پیکربندی nameservers"
 
 msgid "Configure on which devices the background delete option should be used."
 msgstr ""
@@ -2598,6 +2612,10 @@ msgstr "پیش فرض"
 msgid "Default Services Scanner"
 msgstr ""
 
+#, python-format
+msgid "Default duration: %d mins"
+msgstr ""
+
 msgid "Default movie location"
 msgstr "محل پیش فرض فیلم"
 
@@ -3172,9 +3190,6 @@ msgstr ""
 msgid "Edit"
 msgstr "ویرایش"
 
-msgid "Edit DNS"
-msgstr "ویرایش DNS"
-
 msgid "Edit alternatives"
 msgstr ""
 
@@ -3248,6 +3263,9 @@ msgstr "فعال کردن EIT EPG"
 #, fuzzy
 msgid "Enable HDMI-CEC"
 msgstr "فعال کردن EIT EPG"
+
+msgid "Enable Kexec MultiBoot"
+msgstr ""
 
 msgid "Enable MHW EPG"
 msgstr "فعال کردن MHW EPG"
@@ -3410,7 +3428,7 @@ msgstr "رمز را وارد کنید"
 msgid "Enter URL"
 msgstr ""
 
-msgid "Enter an URL where alternative images could be listed for FlashImage"
+msgid "Enter an URL where alternative images could be listed for FlashImage. Enter text 'all' for automatic access of many images."
 msgstr ""
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -3597,10 +3615,6 @@ msgid "Exit movie player?"
 msgstr ""
 
 #, fuzzy
-msgid "Exit nameserver configuration"
-msgstr "اضافه کردن پیکربندی شبکه؟"
-
-#, fuzzy
 msgid "Exit network interface list"
 msgstr "رابط شبکه Ethernet"
 
@@ -3634,6 +3648,10 @@ msgstr "نرم افزار تعمیم یافته"
 #
 msgid "Extended Software Plugin"
 msgstr "پلاگین نرم افزاری قابل تمدید شده"
+
+#, fuzzy
+msgid "Extended info"
+msgstr "نرم افزار تعمیم یافته"
 
 #, fuzzy
 msgid "Extended network setup plugin..."
@@ -4862,6 +4880,19 @@ msgstr ""
 msgid "Kernel version: "
 msgstr "نسخه کرنل: "
 
+msgid "Kexec MultiBoot Initialisation - will reboot after 10 seconds."
+msgstr ""
+
+msgid ""
+"Kexec MultiBoot Initialisation in progress!\n"
+"\n"
+"Will reboot after restoring any eMMC slots.\n"
+"This can take from 1 -> 5 minutes per slot."
+msgstr ""
+
+msgid "Kexec MultiBoot Manager"
+msgstr ""
+
 msgid "Key Events"
 msgstr ""
 
@@ -5538,16 +5569,6 @@ msgstr "نام"
 msgid "Nameserver"
 msgstr "Nameserver"
 
-#, python-format
-msgid "Nameserver %d"
-msgstr "Nameserver %d"
-
-msgid "Nameserver settings"
-msgstr "Nameserver تنظیمات"
-
-msgid "Nameserver setup"
-msgstr "Nameserver تنظیمات"
-
 msgid "Namespace & Orbital pos."
 msgstr ""
 
@@ -6010,6 +6031,13 @@ msgstr ""
 msgid "Orbital position"
 msgstr "موقعیت مداری"
 
+#, fuzzy
+msgid "Order by modes"
+msgstr "پهلو به پهلو"
+
+msgid "Order by slots"
+msgstr ""
+
 msgid "Ordinary"
 msgstr ""
 
@@ -6129,6 +6157,13 @@ msgstr "ویرایشگر کانال های کنترل والدین"
 
 msgid "Parental control setup"
 msgstr "تنظیمات کنترل والدین"
+
+msgid "Partial"
+msgstr ""
+
+#, fuzzy
+msgid "Partial EPG"
+msgstr "EPG چندگانه"
 
 msgid "Passthrough"
 msgstr ""
@@ -6267,12 +6302,6 @@ msgstr "لطفا زمان پایان ضبط کردن را تغییر دهید"
 
 msgid "Please choose an extension..."
 msgstr "لطفا یک بسته انتخاب کنید"
-
-#
-msgid ""
-"Please configure or verify your Nameservers by filling out the required values.\n"
-"When you are ready press OK to continue."
-msgstr ""
 
 msgid "Please configure the fallback tuner setup"
 msgstr ""
@@ -6645,6 +6674,14 @@ msgstr ""
 msgid "Press 'OK' for remove item or < > for change order or 'CH+/-' for toggle to list of features."
 msgstr ""
 
+msgid ""
+"Press Green key to enable MultiBoot!\n"
+"\n"
+"Will reboot within 10 seconds,\n"
+"unless you have eMMC slots to restore.\n"
+"Restoring eMMC slots can take from 1 -> 5 minutes per slot."
+msgstr ""
+
 msgid "Press INFO on your remote control for additional information."
 msgstr "دکمه INFO روی ریموت کنترل را برای مشاهده اطلاعات اضافی فشار دهید"
 
@@ -6876,6 +6913,12 @@ msgstr ""
 msgid "Really perform a manufacturer reset now?"
 msgstr ""
 
+#, python-format
+msgid ""
+"Really permanently delete MultiBoot files?\n"
+"%s"
+msgstr ""
+
 msgid "Really reboot now?"
 msgstr "راه اندازی مجدد هم اکنون؟"
 
@@ -7032,9 +7075,6 @@ msgstr "حذف"
 msgid "Remove a mark"
 msgstr "حذف علامت"
 
-msgid "Remove a nameserver entry"
-msgstr ""
-
 msgid "Remove all alternatives"
 msgstr ""
 
@@ -7065,6 +7105,10 @@ msgstr ""
 
 msgid "Remove entry"
 msgstr ""
+
+#, fuzzy
+msgid "Remove forever"
+msgstr "حذف علامت"
 
 msgid "Remove from parental protection"
 msgstr ""
@@ -8891,6 +8935,10 @@ msgstr ""
 msgid "Start offline decode"
 msgstr "شروع رمز گشایی آفلاین"
 
+#, fuzzy
+msgid "Start recording current event"
+msgstr "اضافه/حذف زمان از رخداد فعلی"
+
 msgid "Start recording?"
 msgstr "شروع ضبط کردن؟"
 
@@ -9034,6 +9082,9 @@ msgstr ""
 
 msgid "Stopped"
 msgstr "متوقف شده"
+
+msgid "Storage device not available or not initialized."
+msgstr ""
 
 msgid "Store at index"
 msgstr ""
@@ -10106,6 +10157,9 @@ msgid "Ukrainian"
 msgstr ""
 
 msgid "Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"
+msgstr ""
+
+msgid "Unable to complete - Kexec Multiboot files missing!"
 msgstr ""
 
 msgid "Unable to create the required directories on the media (e.g. USB stick or Harddisk) - Please verify media and try again!"
@@ -11924,9 +11978,6 @@ msgstr ""
 msgid "only from standby"
 msgstr ""
 
-msgid "open nameserver configuration"
-msgstr ""
-
 msgid "original"
 msgstr ""
 
@@ -12197,6 +12248,10 @@ msgid "toggle time, chapter, audio, subtitle info"
 msgstr ""
 
 msgid "top"
+msgstr ""
+
+#, python-format
+msgid "total conflict (%d)"
 msgstr ""
 
 msgid "tourism/travel"

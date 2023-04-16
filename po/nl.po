@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-14 14:37+0100\n"
+"POT-Creation-Date: 2023-04-16 18:05+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Frenske <voorzitter@openpli.org>\n"
 "Language-Team: PLiteam <translators@openpli.org>\n"
@@ -322,6 +322,10 @@ msgstr ""
 msgid "%s %d.%d"
 msgstr "%s %d.%d"
 
+#, fuzzy, python-format
+msgid "%s (files)"
+msgstr "%d bestand"
+
 #, python-format
 msgid "%s KSymb/s"
 msgstr "%s KSymb/s"
@@ -329,6 +333,10 @@ msgstr "%s KSymb/s"
 #, python-format
 msgid "%s MHz"
 msgstr "%s MHz"
+
+#, fuzzy, python-format
+msgid "%s connected successfully."
+msgstr "De pincode is gewijzigd."
 
 #, python-format
 msgid "%s imported from fallback tuner"
@@ -360,6 +368,10 @@ msgstr "(ZAP)"
 #, python-format
 msgid "(activated +%d min)"
 msgstr "(geactiveerd +%d min)"
+
+#, fuzzy
+msgid "(current)"
+msgstr "Huidige"
 
 msgid "(empty)"
 msgstr "(leeg)"
@@ -650,9 +662,6 @@ msgstr "Activeer HBBTV (Rode toets)"
 msgid "Activate Picture in Picture"
 msgstr "Activeer Picture In Picture"
 
-msgid "Activate current configuration"
-msgstr "Activeer de huidige configuratie"
-
 msgid "Activate network settings"
 msgstr "Activeer de netwerkinstellingen"
 
@@ -673,9 +682,6 @@ msgstr "Voeg toe"
 
 msgid "Add a mark"
 msgstr "Plaats een markering"
-
-msgid "Add a nameserver entry"
-msgstr "Voeg een nameserver toe"
 
 msgid "Add a new title"
 msgstr "Voeg een nieuwe titel toe"
@@ -1054,6 +1060,11 @@ msgstr "Bovenaan de lijst"
 msgid "At end"
 msgstr "Onderaan de lijst"
 
+msgid ""
+"Attention - forced loading recovery image!\n"
+"Create an empty STARTUP_RECOVERY file at the root of your HDD/USB drive and hold the Power button for more than 12 seconds for reboot receiver!"
+msgstr ""
+
 msgid "Attention, this is repeated timer!\n"
 msgstr "Let op, dit is een herhalende timer!\n"
 
@@ -1076,9 +1087,6 @@ msgstr "Audio PID"
 #, python-format
 msgid "Audio PID%s, codec & lang"
 msgstr "Audio PID%s, codec & lang"
-
-msgid "Audio PID, codec & lang"
-msgstr "Audio PID, codec & lang"
 
 msgid "Audio auto volume level"
 msgstr "Automatisch volume"
@@ -1274,6 +1282,10 @@ msgstr "Barbados"
 msgid "Basic PID info"
 msgstr "Basis PID informatie"
 
+#, fuzzy
+msgid "Basic info"
+msgstr "Basis PID informatie"
+
 msgid "Basque"
 msgstr "Baskisch"
 
@@ -1360,6 +1372,10 @@ msgstr "Groen"
 
 msgid "Boot to Android image"
 msgstr "Start op met Android"
+
+#, fuzzy, python-format
+msgid "Boot to Recovery image - slot0 %s"
+msgstr "Start op met het recovery menu"
 
 msgid "Boot to Recovery menu"
 msgstr "Start op met het recovery menu"
@@ -1819,6 +1835,10 @@ msgstr "Code rate HP"
 msgid "Code rate LP"
 msgstr "Code rate LP"
 
+#, python-format
+msgid "Codec & lang%s"
+msgstr ""
+
 msgid "Collection name"
 msgstr "DVD naam"
 
@@ -2005,9 +2025,6 @@ msgstr "Configureer of de ondertitels moeten schakelen tussen normaal, schuin, v
 
 msgid "Configure interface"
 msgstr "Configureer interface"
-
-msgid "Configure nameservers"
-msgstr "Configureer nameservers"
 
 msgid "Configure on which devices the background delete option should be used."
 msgstr ""
@@ -2701,6 +2718,10 @@ msgstr "Standaard"
 msgid "Default Services Scanner"
 msgstr "Standaard kanalen scanner"
 
+#, python-format
+msgid "Default duration: %d mins"
+msgstr ""
+
 msgid "Default movie location"
 msgstr "Standaard opnamelocatie."
 
@@ -3263,9 +3284,6 @@ msgstr "Ecuador"
 msgid "Edit"
 msgstr "Bewerk"
 
-msgid "Edit DNS"
-msgstr "DNS wijzigen"
-
 msgid "Edit alternatives"
 msgstr "Alternatieven bewerken"
 
@@ -3338,6 +3356,9 @@ msgstr "EIT EPG inschakelen"
 
 msgid "Enable HDMI-CEC"
 msgstr "HDMI-CEC inschakelen"
+
+msgid "Enable Kexec MultiBoot"
+msgstr ""
 
 msgid "Enable MHW EPG"
 msgstr "MHW EPG inschakelen"
@@ -3498,7 +3519,8 @@ msgstr "Voer pincode in"
 msgid "Enter URL"
 msgstr "Voer een URL in"
 
-msgid "Enter an URL where alternative images could be listed for FlashImage"
+#, fuzzy
+msgid "Enter an URL where alternative images could be listed for FlashImage. Enter text 'all' for automatic access of many images."
 msgstr "Hier kunt u een URL opgeven waar alternatieve images t.b.v. Flashimage te vinden zijn. "
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -3691,9 +3713,6 @@ msgstr "Verlaten van de opnamelijst"
 msgid "Exit movie player?"
 msgstr "Movieplayer beëindigen?"
 
-msgid "Exit nameserver configuration"
-msgstr "Verlaat de nameserver-configuratie"
-
 msgid "Exit network interface list"
 msgstr "Verlaat het netwerkinterfaceoverzicht"
 
@@ -3726,6 +3745,10 @@ msgstr "Uitgebreide software"
 
 msgid "Extended Software Plugin"
 msgstr "Uitgebreide software plugin"
+
+#, fuzzy
+msgid "Extended info"
+msgstr "Uitgebreide PID informatie"
 
 msgid "Extended network setup plugin..."
 msgstr "Uitgebreide netwerkinstellingen plugin..."
@@ -4917,6 +4940,19 @@ msgstr "Kenia"
 msgid "Kernel version: "
 msgstr "Kernel versie: "
 
+msgid "Kexec MultiBoot Initialisation - will reboot after 10 seconds."
+msgstr ""
+
+msgid ""
+"Kexec MultiBoot Initialisation in progress!\n"
+"\n"
+"Will reboot after restoring any eMMC slots.\n"
+"This can take from 1 -> 5 minutes per slot."
+msgstr ""
+
+msgid "Kexec MultiBoot Manager"
+msgstr ""
+
 msgid "Key Events"
 msgstr "Toetsaanslagen"
 
@@ -5562,16 +5598,6 @@ msgstr "Naam"
 msgid "Nameserver"
 msgstr "Nameserver"
 
-#, python-format
-msgid "Nameserver %d"
-msgstr "Nameserver %d"
-
-msgid "Nameserver settings"
-msgstr "Nameserver-instellingen"
-
-msgid "Nameserver setup"
-msgstr "Instellingen van de nameserver"
-
 msgid "Namespace & Orbital pos."
 msgstr "Namespace & Orbital pos."
 
@@ -6025,6 +6051,13 @@ msgstr "Opties m.b.t. déactiveren timer"
 msgid "Orbital position"
 msgstr "Orbit positie"
 
+#, fuzzy
+msgid "Order by modes"
+msgstr "Terug op datum"
+
+msgid "Order by slots"
+msgstr ""
+
 msgid "Ordinary"
 msgstr "Gewone"
 
@@ -6139,6 +6172,13 @@ msgstr "Kinderslot zendereditor"
 
 msgid "Parental control setup"
 msgstr "Kinderslotinstellingen"
+
+msgid "Partial"
+msgstr ""
+
+#, fuzzy
+msgid "Partial EPG"
+msgstr "Multi EPG"
 
 msgid "Passthrough"
 msgstr "Passthrough"
@@ -6266,13 +6306,6 @@ msgstr "Wijzig de opname-eindtijd aub."
 
 msgid "Please choose an extension..."
 msgstr "Kies een plugin aub..."
-
-msgid ""
-"Please configure or verify your Nameservers by filling out the required values.\n"
-"When you are ready press OK to continue."
-msgstr ""
-"Configureer of controleer uw nameservers door de verplichte velden in te vullen.\n"
-"Druk op Ok om verder te gaan."
 
 msgid "Please configure the fallback tuner setup"
 msgstr "Configureer aub de installatie van de Fallback tuner"
@@ -6663,6 +6696,14 @@ msgstr "Druk 'Ok' om een item te verwijderen of CH+/- om te schakelen naar een f
 msgid "Press 'OK' for remove item or < > for change order or 'CH+/-' for toggle to list of features."
 msgstr "Druk 'Ok' om een item te verwijderen of <> om de volgorde te wijzigen of CH+/- om te schakelen naar een overzicht van de mogelijkheden."
 
+msgid ""
+"Press Green key to enable MultiBoot!\n"
+"\n"
+"Will reboot within 10 seconds,\n"
+"unless you have eMMC slots to restore.\n"
+"Restoring eMMC slots can take from 1 -> 5 minutes per slot."
+msgstr ""
+
 msgid "Press INFO on your remote control for additional information."
 msgstr "Druk INFO op uw afstandsbediening voor meer informatie."
 
@@ -6887,6 +6928,12 @@ msgstr "Subzenders snelzap verlaten?"
 msgid "Really perform a manufacturer reset now?"
 msgstr "Wilt u echt resetten naar fabriekinstellingen?"
 
+#, python-format
+msgid ""
+"Really permanently delete MultiBoot files?\n"
+"%s"
+msgstr ""
+
 msgid "Really reboot now?"
 msgstr "Nu herstarten?"
 
@@ -7036,9 +7083,6 @@ msgstr "Verwijderen"
 msgid "Remove a mark"
 msgstr "Wis markeerpunt"
 
-msgid "Remove a nameserver entry"
-msgstr "Verwijder een nameserver ingave"
-
 msgid "Remove all alternatives"
 msgstr "Verwijder alle alternatieven"
 
@@ -7067,6 +7111,10 @@ msgid "Remove directory"
 msgstr "Map verwijderen"
 
 msgid "Remove entry"
+msgstr "Verwijder het huidige item"
+
+#, fuzzy
+msgid "Remove forever"
 msgstr "Verwijder het huidige item"
 
 msgid "Remove from parental protection"
@@ -8808,6 +8856,10 @@ msgstr "Start een directe opname"
 msgid "Start offline decode"
 msgstr "Start achteraf decoderen"
 
+#, fuzzy
+msgid "Start recording current event"
+msgstr "Stand-by na de huidige actie"
+
 msgid "Start recording?"
 msgstr "Start opname?"
 
@@ -8942,6 +8994,9 @@ msgstr "Stop met het gebruiken als opstartzender"
 
 msgid "Stopped"
 msgstr "Gestopt"
+
+msgid "Storage device not available or not initialized."
+msgstr ""
 
 msgid "Store at index"
 msgstr "Opslaan op index"
@@ -10054,6 +10109,9 @@ msgstr "Oekraïens"
 
 msgid "Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"
 msgstr "Onmogelijk om de instellingen te backuppen a.g.v. het ontbreken van de AutoBackup plugin. Wilt u doorgaan?"
+
+msgid "Unable to complete - Kexec Multiboot files missing!"
+msgstr ""
 
 msgid "Unable to create the required directories on the media (e.g. USB stick or Harddisk) - Please verify media and try again!"
 msgstr "Niet mogelijk om de benodigde map(pen) op het medium (b.v. USB stick of harde schijf) aan te maken. Controleer het medium en probeer het nogmaals."
@@ -11963,9 +12021,6 @@ msgstr "enkel vanuit 'deep stand-by '"
 msgid "only from standby"
 msgstr "alléén vanuit stand-by"
 
-msgid "open nameserver configuration"
-msgstr "Open nameserver-configuratie"
-
 msgid "original"
 msgstr "Origineel"
 
@@ -12234,6 +12289,10 @@ msgstr "Tijd, hoofdstuk, audio en ondertitels instellen"
 
 msgid "top"
 msgstr "top"
+
+#, python-format
+msgid "total conflict (%d)"
+msgstr ""
 
 msgid "tourism/travel"
 msgstr "Toerisme/Reizen"

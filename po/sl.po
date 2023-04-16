@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Project Slovenia\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-14 14:37+0100\n"
+"POT-Creation-Date: 2023-04-16 18:05+0200\n"
 "PO-Revision-Date: 2020-05-16 18:48+0200\n"
 "Last-Translator: Taykun345 <support@satnigmo.com>\n"
 "Language-Team: Satnigmo <support@satnigmo.com>\n"
@@ -364,6 +364,10 @@ msgstr ""
 msgid "%s %d.%d"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "%s (files)"
+msgstr "%d datoteka"
+
 #, python-format
 msgid "%s KSymb/s"
 msgstr ""
@@ -371,6 +375,10 @@ msgstr ""
 #, python-format
 msgid "%s MHz"
 msgstr ""
+
+#, fuzzy, python-format
+msgid "%s connected successfully."
+msgstr "PIN koda je spremenjena."
 
 #, python-format
 msgid "%s imported from fallback tuner"
@@ -405,6 +413,11 @@ msgstr "(preklop)"
 #, python-format
 msgid "(activated +%d min)"
 msgstr "(aktivirano + %d min)"
+
+#
+#, fuzzy
+msgid "(current)"
+msgstr "Trenutna vrednost:"
 
 #
 msgid "(empty)"
@@ -754,10 +767,6 @@ msgid "Activate Picture in Picture"
 msgstr "Aktivacija Slike v Sliki"
 
 #
-msgid "Activate current configuration"
-msgstr "Aktiviranje trenutnih nastavitev"
-
-#
 msgid "Activate network settings"
 msgstr "Aktiviranje omrežnih nastavitev"
 
@@ -782,10 +791,6 @@ msgstr "Dodajanje"
 #
 msgid "Add a mark"
 msgstr "Nov zaznamek"
-
-#
-msgid "Add a nameserver entry"
-msgstr "Nov imenski strežnik"
 
 #
 msgid "Add a new title"
@@ -1240,6 +1245,11 @@ msgstr "Na začetku"
 msgid "At end"
 msgstr "Na koncu"
 
+msgid ""
+"Attention - forced loading recovery image!\n"
+"Create an empty STARTUP_RECOVERY file at the root of your HDD/USB drive and hold the Power button for more than 12 seconds for reboot receiver!"
+msgstr ""
+
 msgid "Attention, this is repeated timer!\n"
 msgstr "Pozor, omenjen časovnik je že vnešen!\n"
 
@@ -1262,9 +1272,6 @@ msgstr "Avdio PID"
 
 #, python-format
 msgid "Audio PID%s, codec & lang"
-msgstr ""
-
-msgid "Audio PID, codec & lang"
 msgstr ""
 
 msgid "Audio auto volume level"
@@ -1502,6 +1509,11 @@ msgstr ""
 msgid "Basic PID info"
 msgstr ""
 
+#
+#, fuzzy
+msgid "Basic info"
+msgstr "Info. o kanalu"
+
 msgid "Basque"
 msgstr ""
 
@@ -1601,6 +1613,10 @@ msgid "Boost green"
 msgstr "Zelena"
 
 msgid "Boot to Android image"
+msgstr ""
+
+#, python-format
+msgid "Boot to Recovery image - slot0 %s"
 msgstr ""
 
 msgid "Boot to Recovery menu"
@@ -2101,6 +2117,10 @@ msgstr ""
 msgid "Code rate LP"
 msgstr ""
 
+#, python-format
+msgid "Codec & lang%s"
+msgstr ""
+
 #
 msgid "Collection name"
 msgstr "Ime zbirke"
@@ -2277,10 +2297,6 @@ msgstr "Določitev možnosti preklapljanja podnapisov med navadnimi, poševnimi,
 #
 msgid "Configure interface"
 msgstr "Nastavite vmesnik"
-
-#
-msgid "Configure nameservers"
-msgstr "Nastavite imenske strežnike"
 
 msgid "Configure on which devices the background delete option should be used."
 msgstr "Nastavitev omogoča, da določite, na katerih napravah naj bo uporabljena možnost \"izbrisa v ozadju\"."
@@ -2925,6 +2941,10 @@ msgid "Default"
 msgstr "Privzeto"
 
 msgid "Default Services Scanner"
+msgstr ""
+
+#, python-format
+msgid "Default duration: %d mins"
 msgstr ""
 
 #
@@ -3602,10 +3622,6 @@ msgid "Edit"
 msgstr "Spremeni"
 
 #
-msgid "Edit DNS"
-msgstr "Urejanje DNS"
-
-#
 msgid "Edit alternatives"
 msgstr "Urejanje alternativ"
 
@@ -3693,6 +3709,9 @@ msgstr "EIT EPG sistem"
 #, fuzzy
 msgid "Enable HDMI-CEC"
 msgstr "EIT EPG sistem"
+
+msgid "Enable Kexec MultiBoot"
+msgstr ""
 
 #
 msgid "Enable MHW EPG"
@@ -3886,7 +3905,7 @@ msgstr "Vnesite PIN kodo"
 msgid "Enter URL"
 msgstr ""
 
-msgid "Enter an URL where alternative images could be listed for FlashImage"
+msgid "Enter an URL where alternative images could be listed for FlashImage. Enter text 'all' for automatic access of many images."
 msgstr ""
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -4092,10 +4111,6 @@ msgid "Exit movie player?"
 msgstr "Izhod iz predvajalnika vsebin"
 
 #
-msgid "Exit nameserver configuration"
-msgstr "Izhod iz nastavitev imenskega strežnika"
-
-#
 msgid "Exit network interface list"
 msgstr "Izhod iz seznama omrežnih vmesnikov"
 
@@ -4135,6 +4150,11 @@ msgstr "Razširjena programska oprema"
 #
 msgid "Extended Software Plugin"
 msgstr "Vtičnik Extended Software"
+
+#
+#, fuzzy
+msgid "Extended info"
+msgstr "Razširjena programska oprema"
 
 #
 msgid "Extended network setup plugin..."
@@ -5487,6 +5507,19 @@ msgstr ""
 msgid "Kernel version: "
 msgstr "Verzija jedra: "
 
+msgid "Kexec MultiBoot Initialisation - will reboot after 10 seconds."
+msgstr ""
+
+msgid ""
+"Kexec MultiBoot Initialisation in progress!\n"
+"\n"
+"Will reboot after restoring any eMMC slots.\n"
+"This can take from 1 -> 5 minutes per slot."
+msgstr ""
+
+msgid "Kexec MultiBoot Manager"
+msgstr ""
+
 msgid "Key Events"
 msgstr ""
 
@@ -6266,19 +6299,6 @@ msgstr "Ime"
 msgid "Nameserver"
 msgstr "Imenski strežnik"
 
-#
-#, python-format
-msgid "Nameserver %d"
-msgstr "Imenski strežnik %d"
-
-#
-msgid "Nameserver settings"
-msgstr "Nastavitve imenskega strežnika"
-
-#
-msgid "Nameserver setup"
-msgstr "Nastavitve imenskega strežnika"
-
 msgid "Namespace & Orbital pos."
 msgstr ""
 
@@ -6797,6 +6817,13 @@ msgstr ""
 msgid "Orbital position"
 msgstr "Položaj satelita"
 
+#, fuzzy
+msgid "Order by modes"
+msgstr "razvrščanje po datumu (obratno)"
+
+msgid "Order by slots"
+msgstr ""
+
 msgid "Ordinary"
 msgstr ""
 
@@ -6925,6 +6952,14 @@ msgstr "Urejanje storitve starševske zaščite"
 #
 msgid "Parental control setup"
 msgstr "Nastavitve starševske zaščite"
+
+msgid "Partial"
+msgstr ""
+
+#
+#, fuzzy
+msgid "Partial EPG"
+msgstr "Multi-EPG"
 
 msgid "Passthrough"
 msgstr ""
@@ -7079,14 +7114,6 @@ msgstr "Spremenite čas konca snemanja"
 #
 msgid "Please choose an extension..."
 msgstr "Izbor razširitve"
-
-#
-msgid ""
-"Please configure or verify your Nameservers by filling out the required values.\n"
-"When you are ready press OK to continue."
-msgstr ""
-"Preverite vaše imenske strežnike.\n"
-"Ko boste pripravljeni, pritisnite tipko OK."
 
 #, fuzzy
 msgid "Please configure the fallback tuner setup"
@@ -7537,6 +7564,14 @@ msgstr ""
 msgid "Press 'OK' for remove item or < > for change order or 'CH+/-' for toggle to list of features."
 msgstr ""
 
+msgid ""
+"Press Green key to enable MultiBoot!\n"
+"\n"
+"Will reboot within 10 seconds,\n"
+"unless you have eMMC slots to restore.\n"
+"Restoring eMMC slots can take from 1 -> 5 minutes per slot."
+msgstr ""
+
 msgid "Press INFO on your remote control for additional information."
 msgstr "Za več informacij pritisnite tipko INFO."
 
@@ -7800,6 +7835,12 @@ msgstr "Res želite zapustiti hitri preklop pod-storitve?"
 msgid "Really perform a manufacturer reset now?"
 msgstr ""
 
+#, python-format
+msgid ""
+"Really permanently delete MultiBoot files?\n"
+"%s"
+msgstr ""
+
 #
 msgid "Really reboot now?"
 msgstr "Res želite ponovno zagnati sprejemnik?"
@@ -7977,10 +8018,6 @@ msgid "Remove a mark"
 msgstr "Odstrani oznako"
 
 #
-msgid "Remove a nameserver entry"
-msgstr "Odstranitev imenskega strežnika"
-
-#
 msgid "Remove all alternatives"
 msgstr "Izbris vseh alternativ"
 
@@ -8015,6 +8052,11 @@ msgstr "Odstranitev mape"
 
 #
 msgid "Remove entry"
+msgstr "Izbris vnosa"
+
+#
+#, fuzzy
+msgid "Remove forever"
 msgstr "Izbris vnosa"
 
 #
@@ -10075,6 +10117,11 @@ msgid "Start offline decode"
 msgstr "Prični z offline dekodiranjem"
 
 #
+#, fuzzy
+msgid "Start recording current event"
+msgstr "Stanje pripravljenosti po trenutnem dogodku"
+
+#
 msgid "Start recording?"
 msgstr "Začnem snemanje?"
 
@@ -10234,6 +10281,9 @@ msgstr "Sprememba nastavitve začetnega kanala"
 #
 msgid "Stopped"
 msgstr "Ustavljeno"
+
+msgid "Storage device not available or not initialized."
+msgstr ""
 
 msgid "Store at index"
 msgstr ""
@@ -11472,6 +11522,9 @@ msgid "Ukrainian"
 msgstr ""
 
 msgid "Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"
+msgstr ""
+
+msgid "Unable to complete - Kexec Multiboot files missing!"
 msgstr ""
 
 msgid "Unable to create the required directories on the media (e.g. USB stick or Harddisk) - Please verify media and try again!"
@@ -13590,10 +13643,6 @@ msgstr "samo iz globokega spanja"
 msgid "only from standby"
 msgstr "samo iz stanja pripravljenosti"
 
-#
-msgid "open nameserver configuration"
-msgstr "Odprtje nastavitev imenskega strežnika"
-
 msgid "original"
 msgstr "originalno"
 
@@ -13903,6 +13952,10 @@ msgstr "izbira med prikazom časa, poglavja, zvoka in podnapisi"
 
 msgid "top"
 msgstr "na vrh"
+
+#, python-format
+msgid "total conflict (%d)"
+msgstr ""
 
 msgid "tourism/travel"
 msgstr ""

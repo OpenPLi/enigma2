@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-14 14:37+0100\n"
+"POT-Creation-Date: 2023-04-16 18:05+0200\n"
 "PO-Revision-Date: 2023-01-04 10:12+0100\n"
 "Last-Translator: Andrej Tobola <andrej.tobola@gmail.com>\n"
 "Language-Team: \n"
@@ -335,6 +335,10 @@ msgstr ""
 msgid "%s %d.%d"
 msgstr "%s %d.%d"
 
+#, fuzzy, python-format
+msgid "%s (files)"
+msgstr "%d súbor"
+
 #, python-format
 msgid "%s KSymb/s"
 msgstr "%s KSymb/s"
@@ -342,6 +346,10 @@ msgstr "%s KSymb/s"
 #, python-format
 msgid "%s MHz"
 msgstr "%s MHz"
+
+#, fuzzy, python-format
+msgid "%s connected successfully."
+msgstr "PIN kód bol úspešne zmenený."
 
 #, python-format
 msgid "%s imported from fallback tuner"
@@ -374,6 +382,10 @@ msgstr "(Prepnúť)"
 #, python-format
 msgid "(activated +%d min)"
 msgstr "(aktivovaný +%d min)"
+
+#, fuzzy
+msgid "(current)"
+msgstr "< Aktuálne >"
 
 msgid "(empty)"
 msgstr "(prázdne)"
@@ -663,9 +675,6 @@ msgstr "Aktivovať HbbTV (červené tlačidlo)"
 msgid "Activate Picture in Picture"
 msgstr "Zapnúť obraz v obraze"
 
-msgid "Activate current configuration"
-msgstr "Aktivovať aktuálnu konfiguráciu"
-
 msgid "Activate network settings"
 msgstr "Aktivovať nastavenia siete"
 
@@ -686,9 +695,6 @@ msgstr "Pridať"
 
 msgid "Add a mark"
 msgstr "Pridať značku"
-
-msgid "Add a nameserver entry"
-msgstr "Pridať nameserver"
 
 msgid "Add a new title"
 msgstr "Pridať nový titul"
@@ -1068,6 +1074,11 @@ msgstr "Na začiatku"
 msgid "At end"
 msgstr "Na konci"
 
+msgid ""
+"Attention - forced loading recovery image!\n"
+"Create an empty STARTUP_RECOVERY file at the root of your HDD/USB drive and hold the Power button for more than 12 seconds for reboot receiver!"
+msgstr ""
+
 msgid "Attention, this is repeated timer!\n"
 msgstr "Pozor, toto je opakovaný časovač!!\n"
 
@@ -1090,9 +1101,6 @@ msgstr "Zvukový PID"
 #, python-format
 msgid "Audio PID%s, codec & lang"
 msgstr "Audio PID%s, kodek a jazyk"
-
-msgid "Audio PID, codec & lang"
-msgstr "Audio PID, kodek a jazyk"
 
 msgid "Audio auto volume level"
 msgstr "Automatická úroveň hlasitosti zvuku"
@@ -1288,6 +1296,10 @@ msgstr "Barbados"
 msgid "Basic PID info"
 msgstr "Základné PID info"
 
+#, fuzzy
+msgid "Basic info"
+msgstr "Základné PID info"
+
 msgid "Basque"
 msgstr "Baskicky"
 
@@ -1374,6 +1386,10 @@ msgstr "Zosilniť zelenú"
 
 msgid "Boot to Android image"
 msgstr "Štart do Android image"
+
+#, fuzzy, python-format
+msgid "Boot to Recovery image - slot0 %s"
+msgstr "Štart do Recovery menu"
 
 msgid "Boot to Recovery menu"
 msgstr "Štart do Recovery menu"
@@ -1822,6 +1838,10 @@ msgstr "Rýchlosť HP"
 msgid "Code rate LP"
 msgstr "Rýchlosť LP"
 
+#, python-format
+msgid "Codec & lang%s"
+msgstr ""
+
 msgid "Collection name"
 msgstr "Názov zostavy"
 
@@ -1966,9 +1986,6 @@ msgstr "Nastaviť či sa majú titulky automaticky prepínať medzi normálnym f
 
 msgid "Configure interface"
 msgstr "Nakonfigurujte rozhranie"
-
-msgid "Configure nameservers"
-msgstr "Nastavenie DNS serverov"
 
 msgid "Configure on which devices the background delete option should be used."
 msgstr "Nastaviť, na ktorých zariadeniach má byť použité mazanie na pozadí."
@@ -2537,6 +2554,10 @@ msgstr "Predvolené"
 msgid "Default Services Scanner"
 msgstr "Vyhľadávanie predvolených služieb"
 
+#, python-format
+msgid "Default duration: %d mins"
+msgstr ""
+
 msgid "Default movie location"
 msgstr "Predvolené umiestnenie filmov"
 
@@ -3090,9 +3111,6 @@ msgstr "Equádor"
 msgid "Edit"
 msgstr "Upraviť"
 
-msgid "Edit DNS"
-msgstr "Upraviť DNS"
-
 msgid "Edit alternatives"
 msgstr "Upraviť alternatívy"
 
@@ -3161,6 +3179,9 @@ msgstr "Povoliť EIT EPG"
 
 msgid "Enable HDMI-CEC"
 msgstr "Povoliť HDMI-CEC"
+
+msgid "Enable Kexec MultiBoot"
+msgstr ""
 
 msgid "Enable MHW EPG"
 msgstr "Povoliť MHW EPG"
@@ -3318,7 +3339,8 @@ msgstr "Zadajte kód PIN"
 msgid "Enter URL"
 msgstr "Vložte URL"
 
-msgid "Enter an URL where alternative images could be listed for FlashImage"
+#, fuzzy
+msgid "Enter an URL where alternative images could be listed for FlashImage. Enter text 'all' for automatic access of many images."
 msgstr "Vložte adresu URL, kde sú zobrazené alternatívne image pre FlashImage"
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -3507,9 +3529,6 @@ msgstr "Zatvoriť zoznam filmov"
 msgid "Exit movie player?"
 msgstr "Ukončiť prehrávač filmov?"
 
-msgid "Exit nameserver configuration"
-msgstr "Ukončiť konfiguráciu DNS"
-
 msgid "Exit network interface list"
 msgstr "Zatvoriť zoznam sieťových adaptérov"
 
@@ -3542,6 +3561,10 @@ msgstr "Rozšírený softvér"
 
 msgid "Extended Software Plugin"
 msgstr "Doplnok rozšíreného softvéru"
+
+#, fuzzy
+msgid "Extended info"
+msgstr "Rozšírené PID info"
 
 msgid "Extended network setup plugin..."
 msgstr "Doplnok pre rozšírené nastavenie siete..."
@@ -4722,6 +4745,19 @@ msgstr "Keňa"
 msgid "Kernel version: "
 msgstr "Verzia jadra: "
 
+msgid "Kexec MultiBoot Initialisation - will reboot after 10 seconds."
+msgstr ""
+
+msgid ""
+"Kexec MultiBoot Initialisation in progress!\n"
+"\n"
+"Will reboot after restoring any eMMC slots.\n"
+"This can take from 1 -> 5 minutes per slot."
+msgstr ""
+
+msgid "Kexec MultiBoot Manager"
+msgstr ""
+
 msgid "Key Events"
 msgstr "Kľúčové udalosti"
 
@@ -5368,16 +5404,6 @@ msgstr "Názov"
 msgid "Nameserver"
 msgstr "Nameserver"
 
-#, python-format
-msgid "Nameserver %d"
-msgstr "DNS (nameserver) %d"
-
-msgid "Nameserver settings"
-msgstr "Nastavenie DNS"
-
-msgid "Nameserver setup"
-msgstr "Nastavenie DNS"
-
 msgid "Namespace & Orbital pos."
 msgstr "Namespace a orbitálna poz."
 
@@ -5822,6 +5848,13 @@ msgstr "Možnosti zakázať časovač"
 msgid "Orbital position"
 msgstr "Orbitálna pozícia"
 
+#, fuzzy
+msgid "Order by modes"
+msgstr "prehodiť podľa dátumu"
+
+msgid "Order by slots"
+msgstr ""
+
 msgid "Ordinary"
 msgstr "Bežné"
 
@@ -5936,6 +5969,13 @@ msgstr "Editor staníc rodičovskej zámky"
 
 msgid "Parental control setup"
 msgstr "Nastavenie rodičovskej kontroly"
+
+msgid "Partial"
+msgstr ""
+
+#, fuzzy
+msgid "Partial EPG"
+msgstr "Multi EPG"
 
 msgid "Passthrough"
 msgstr "Bez zmeny"
@@ -6063,13 +6103,6 @@ msgstr "Prosím, zmeňte koniec nahrávania"
 
 msgid "Please choose an extension..."
 msgstr "Prosím, zvoľte rozšírenie..."
-
-msgid ""
-"Please configure or verify your Nameservers by filling out the required values.\n"
-"When you are ready press OK to continue."
-msgstr ""
-"Nakonfigurujte alebo skontrolujte názvy serverov vyplnením požadovaných hodnôt.\n"
-"Po skončení stlačte OK a pokračujte."
 
 msgid "Please configure the fallback tuner setup"
 msgstr "Nakonfigurovať nastavenie záložného tuneru"
@@ -6435,6 +6468,14 @@ msgstr "Stlačte 'OK' pre odstránenie položky alebo 'CH+/-' pre prepnutie do z
 msgid "Press 'OK' for remove item or < > for change order or 'CH+/-' for toggle to list of features."
 msgstr "Stlačte 'OK' pre odstránenie položky alebo < > pre zmenu poradia, alebo 'CH+/-' pre prepnutie do zoznamu funkcií."
 
+msgid ""
+"Press Green key to enable MultiBoot!\n"
+"\n"
+"Will reboot within 10 seconds,\n"
+"unless you have eMMC slots to restore.\n"
+"Restoring eMMC slots can take from 1 -> 5 minutes per slot."
+msgstr ""
+
 msgid "Press INFO on your remote control for additional information."
 msgstr "Stlačením INFO na DO si zobrazíte ďalšie informácie."
 
@@ -6656,6 +6697,12 @@ msgstr "Naozaj ukončiť rýchle prepínanie podkanálov?"
 msgid "Really perform a manufacturer reset now?"
 msgstr "Naozaj teraz vykonať reset výrobných nastavení?"
 
+#, python-format
+msgid ""
+"Really permanently delete MultiBoot files?\n"
+"%s"
+msgstr ""
+
 msgid "Really reboot now?"
 msgstr "Naozaj reštartovať?"
 
@@ -6805,9 +6852,6 @@ msgstr "Odstrániť"
 msgid "Remove a mark"
 msgstr "Odstrániť značku"
 
-msgid "Remove a nameserver entry"
-msgstr "Odstrániť DNS"
-
 msgid "Remove all alternatives"
 msgstr "Odstrániť všetky alternatívy"
 
@@ -6836,6 +6880,10 @@ msgid "Remove directory"
 msgstr "Odstrániť adresár"
 
 msgid "Remove entry"
+msgstr "Odstrániť položku"
+
+#, fuzzy
+msgid "Remove forever"
 msgstr "Odstrániť položku"
 
 msgid "Remove from parental protection"
@@ -8560,6 +8608,10 @@ msgstr "Spustiť okamžité nahrávanie"
 msgid "Start offline decode"
 msgstr "Spustiť offline dekódovanie"
 
+#, fuzzy
+msgid "Start recording current event"
+msgstr "Pohotovostný režim po aktuálnej udalosti"
+
 msgid "Start recording?"
 msgstr "Spustiť nahrávanie?"
 
@@ -8691,6 +8743,9 @@ msgstr "Nepoužívať ako stanicu po spustení"
 
 msgid "Stopped"
 msgstr "Zastavené"
+
+msgid "Storage device not available or not initialized."
+msgstr ""
 
 msgid "Store at index"
 msgstr "Uložiť na indexe"
@@ -9784,6 +9839,9 @@ msgstr "Ukrajinčina"
 
 msgid "Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"
 msgstr "Nie je možné zálohovať nastavenia z dôvodu chýbajúceho doplnku AutoBackup. Chcete pokračovať?"
+
+msgid "Unable to complete - Kexec Multiboot files missing!"
+msgstr ""
 
 msgid "Unable to create the required directories on the media (e.g. USB stick or Harddisk) - Please verify media and try again!"
 msgstr "Nebolo možné vytvoriť požadované zložky na disku (napr. USB kľúč alebo pevný disk) - skontrolujte prosím médium a skúste to znovu!"
@@ -11640,9 +11698,6 @@ msgstr "iba z hlbokého spánku"
 msgid "only from standby"
 msgstr "iba z pohotovostného režimu"
 
-msgid "open nameserver configuration"
-msgstr "Otvoriť nastavenia DNS"
-
 msgid "original"
 msgstr "pôvodná"
 
@@ -11910,6 +11965,10 @@ msgstr "prepnúť informácie medzi časom, kapitolou, zvukovou stopou a titulka
 
 msgid "top"
 msgstr "hore"
+
+#, python-format
+msgid "total conflict (%d)"
+msgstr ""
 
 msgid "tourism/travel"
 msgstr "turistika/cestovanie"

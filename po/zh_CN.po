@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-14 14:37+0100\n"
+"POT-Creation-Date: 2023-04-16 18:05+0200\n"
 "PO-Revision-Date: 2021-07-31 17:00+0800\n"
 "Last-Translator: 孤独之剑 <haotzyy1970@yahoo.com>\n"
 "Language-Team: 孤独之剑 <haotzyy1970@yahoo.com>\n"
@@ -322,6 +322,10 @@ msgstr ""
 msgid "%s %d.%d"
 msgstr "%s %d.%d"
 
+#, fuzzy, python-format
+msgid "%s (files)"
+msgstr "%d 个文件"
+
 #, python-format
 msgid "%s KSymb/s"
 msgstr ""
@@ -329,6 +333,10 @@ msgstr ""
 #, python-format
 msgid "%s MHz"
 msgstr ""
+
+#, fuzzy, python-format
+msgid "%s connected successfully."
+msgstr "服务密码 已被成功修改."
 
 #, python-format
 msgid "%s imported from fallback tuner"
@@ -360,6 +368,10 @@ msgstr "(调谐)"
 #, python-format
 msgid "(activated +%d min)"
 msgstr "(激活 +%d 分钟)"
+
+#, fuzzy
+msgid "(current)"
+msgstr "当前"
 
 msgid "(empty)"
 msgstr "(空的)"
@@ -655,9 +667,6 @@ msgstr "激活HbbTV（红色按钮）"
 msgid "Activate Picture in Picture"
 msgstr "启用画中画"
 
-msgid "Activate current configuration"
-msgstr "启用当前设置"
-
 msgid "Activate network settings"
 msgstr "激活网络设置"
 
@@ -678,9 +687,6 @@ msgstr "添加"
 
 msgid "Add a mark"
 msgstr "增加标记"
-
-msgid "Add a nameserver entry"
-msgstr "添加DNS"
 
 msgid "Add a new title"
 msgstr "增加一个新标题"
@@ -1061,6 +1067,11 @@ msgstr "在开始"
 msgid "At end"
 msgstr "在结束"
 
+msgid ""
+"Attention - forced loading recovery image!\n"
+"Create an empty STARTUP_RECOVERY file at the root of your HDD/USB drive and hold the Power button for more than 12 seconds for reboot receiver!"
+msgstr ""
+
 msgid "Attention, this is repeated timer!\n"
 msgstr "注意,这是重复的定时器！\n"
 
@@ -1083,9 +1094,6 @@ msgstr "音频PID"
 #, python-format
 msgid "Audio PID%s, codec & lang"
 msgstr "音频PID%s,编解码器和语言"
-
-msgid "Audio PID, codec & lang"
-msgstr "音频PID、编解码器和语言"
 
 msgid "Audio auto volume level"
 msgstr "音频自动音量"
@@ -1281,6 +1289,10 @@ msgstr "巴巴多斯"
 msgid "Basic PID info"
 msgstr "基本PID信息"
 
+#, fuzzy
+msgid "Basic info"
+msgstr "基本PID信息"
+
 msgid "Basque"
 msgstr "巴斯克语"
 
@@ -1367,6 +1379,10 @@ msgstr "加强绿色"
 
 msgid "Boot to Android image"
 msgstr "引导到Android镜像"
+
+#, fuzzy, python-format
+msgid "Boot to Recovery image - slot0 %s"
+msgstr "启动到恢复菜单"
 
 msgid "Boot to Recovery menu"
 msgstr "启动到恢复菜单"
@@ -1822,6 +1838,10 @@ msgstr "HP编码率"
 msgid "Code rate LP"
 msgstr "LP编码率"
 
+#, python-format
+msgid "Codec & lang%s"
+msgstr ""
+
 msgid "Collection name"
 msgstr "收藏名称"
 
@@ -1966,9 +1986,6 @@ msgstr "配置字幕字体(标准／斜体,粗体／粗斜)"
 
 msgid "Configure interface"
 msgstr "配置网卡"
-
-msgid "Configure nameservers"
-msgstr "配置DNS"
 
 msgid "Configure on which devices the background delete option should be used."
 msgstr "配置哪些设备后台删除选项可以使用."
@@ -2540,6 +2557,10 @@ msgstr "缺省值"
 msgid "Default Services Scanner"
 msgstr "默认频道扫描器"
 
+#, python-format
+msgid "Default duration: %d mins"
+msgstr ""
+
 msgid "Default movie location"
 msgstr "影片默认位置"
 
@@ -3092,9 +3113,6 @@ msgstr "厄瓜多尔"
 msgid "Edit"
 msgstr "修改"
 
-msgid "Edit DNS"
-msgstr "编辑DNS"
-
 msgid "Edit alternatives"
 msgstr "编辑备选方案"
 
@@ -3163,6 +3181,9 @@ msgstr "启用EIT EPG"
 
 msgid "Enable HDMI-CEC"
 msgstr "启用HDMI-CEC"
+
+msgid "Enable Kexec MultiBoot"
+msgstr ""
 
 msgid "Enable MHW EPG"
 msgstr "启用MHW EPG"
@@ -3322,7 +3343,8 @@ msgstr "输入密码"
 msgid "Enter URL"
 msgstr "输入URL地址"
 
-msgid "Enter an URL where alternative images could be listed for FlashImage"
+#, fuzzy
+msgid "Enter an URL where alternative images could be listed for FlashImage. Enter text 'all' for automatic access of many images."
 msgstr "输入一个URL,其中可以列出Flash镜像的可选镜像"
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -3515,9 +3537,6 @@ msgstr "退出电影列表"
 msgid "Exit movie player?"
 msgstr "是否退出电影播放?"
 
-msgid "Exit nameserver configuration"
-msgstr "退出DNS配置"
-
 msgid "Exit network interface list"
 msgstr "退出网卡列表"
 
@@ -3550,6 +3569,10 @@ msgstr "扩展软件"
 
 msgid "Extended Software Plugin"
 msgstr "扩展插件"
+
+#, fuzzy
+msgid "Extended info"
+msgstr "扩展PID信息"
 
 msgid "Extended network setup plugin..."
 msgstr "扩展网络安装插件..."
@@ -4737,6 +4760,19 @@ msgstr "肯尼亚"
 msgid "Kernel version: "
 msgstr "内核版本: "
 
+msgid "Kexec MultiBoot Initialisation - will reboot after 10 seconds."
+msgstr ""
+
+msgid ""
+"Kexec MultiBoot Initialisation in progress!\n"
+"\n"
+"Will reboot after restoring any eMMC slots.\n"
+"This can take from 1 -> 5 minutes per slot."
+msgstr ""
+
+msgid "Kexec MultiBoot Manager"
+msgstr ""
+
 msgid "Key Events"
 msgstr "按键事件"
 
@@ -5384,16 +5420,6 @@ msgstr "名称"
 msgid "Nameserver"
 msgstr "DNS服务器"
 
-#, python-format
-msgid "Nameserver %d"
-msgstr "DNS %d"
-
-msgid "Nameserver settings"
-msgstr "DNS设置"
-
-msgid "Nameserver setup"
-msgstr "DNS服务器设置"
-
 msgid "Namespace & Orbital pos."
 msgstr "名称空间和轨道位置."
 
@@ -5842,6 +5868,13 @@ msgstr "禁用定时器选项"
 msgid "Orbital position"
 msgstr "轨道位置"
 
+#, fuzzy
+msgid "Order by modes"
+msgstr "按日期排序"
+
+msgid "Order by slots"
+msgstr ""
+
 msgid "Ordinary"
 msgstr "普通"
 
@@ -5958,6 +5991,13 @@ msgstr "家长控制服务编辑"
 
 msgid "Parental control setup"
 msgstr "家长控制设置"
+
+msgid "Partial"
+msgstr ""
+
+#, fuzzy
+msgid "Partial EPG"
+msgstr "多EPG"
 
 msgid "Passthrough"
 msgstr ""
@@ -6085,13 +6125,6 @@ msgstr "请更改录制结束时间"
 
 msgid "Please choose an extension..."
 msgstr "请选择增加部分..."
-
-msgid ""
-"Please configure or verify your Nameservers by filling out the required values.\n"
-"When you are ready press OK to continue."
-msgstr ""
-"请配置或确认DNS地址.\n"
-"当您准备好后按OK键继续."
 
 msgid "Please configure the fallback tuner setup"
 msgstr "请配置备份调谐器设置"
@@ -6458,6 +6491,14 @@ msgstr "按'OK'键删除项目,或按“ch+/-”键切换到功能列表."
 msgid "Press 'OK' for remove item or < > for change order or 'CH+/-' for toggle to list of features."
 msgstr "按'OK'键删除项目,或按<>键更改订单,或按“CH+/-”键切换到功能列表."
 
+msgid ""
+"Press Green key to enable MultiBoot!\n"
+"\n"
+"Will reboot within 10 seconds,\n"
+"unless you have eMMC slots to restore.\n"
+"Restoring eMMC slots can take from 1 -> 5 minutes per slot."
+msgstr ""
+
 msgid "Press INFO on your remote control for additional information."
 msgstr "按INFO键查看更多信息."
 
@@ -6679,6 +6720,12 @@ msgstr "退出字幕快速切换?"
 msgid "Really perform a manufacturer reset now?"
 msgstr "是否现在真的要执行制造商重置?"
 
+#, python-format
+msgid ""
+"Really permanently delete MultiBoot files?\n"
+"%s"
+msgstr ""
+
 msgid "Really reboot now?"
 msgstr "立即重启(Reboot)?"
 
@@ -6828,9 +6875,6 @@ msgstr "删除"
 msgid "Remove a mark"
 msgstr "删除标记"
 
-msgid "Remove a nameserver entry"
-msgstr "删除名称服务器条目"
-
 msgid "Remove all alternatives"
 msgstr "删除所有备选方案"
 
@@ -6859,6 +6903,10 @@ msgid "Remove directory"
 msgstr "删除目录"
 
 msgid "Remove entry"
+msgstr "删除条目"
+
+#, fuzzy
+msgid "Remove forever"
 msgstr "删除条目"
 
 msgid "Remove from parental protection"
@@ -8587,6 +8635,10 @@ msgstr "启动即时录制"
 msgid "Start offline decode"
 msgstr "启用离线"
 
+#, fuzzy
+msgid "Start recording current event"
+msgstr "当前时间之后待机"
+
 msgid "Start recording?"
 msgstr "开始录制?"
 
@@ -8719,6 +8771,9 @@ msgstr "停止用作启动频道"
 
 msgid "Stopped"
 msgstr "停止"
+
+msgid "Storage device not available or not initialized."
+msgstr ""
 
 msgid "Store at index"
 msgstr "存储到索引"
@@ -9813,6 +9868,9 @@ msgstr "乌克兰语"
 
 msgid "Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"
 msgstr "无法备份设置,因为缺少自动备份插件,是否继续?"
+
+msgid "Unable to complete - Kexec Multiboot files missing!"
+msgstr ""
 
 msgid "Unable to create the required directories on the media (e.g. USB stick or Harddisk) - Please verify media and try again!"
 msgstr "无法在媒体(如U盘或硬盘)上创建所需的目录-请验证媒体并重试!"
@@ -11689,9 +11747,6 @@ msgstr "仅仅从深度睡眠"
 msgid "only from standby"
 msgstr "唤醒电视"
 
-msgid "open nameserver configuration"
-msgstr "打开DNS设置"
-
 msgid "original"
 msgstr "原始"
 
@@ -11966,6 +12021,10 @@ msgstr "切换时间,章节,音频,字幕信息"
 
 msgid "top"
 msgstr "顶部"
+
+#, python-format
+msgid "total conflict (%d)"
+msgstr ""
 
 msgid "tourism/travel"
 msgstr "旅游/旅行"
