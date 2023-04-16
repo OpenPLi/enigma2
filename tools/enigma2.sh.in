@@ -128,12 +128,6 @@ while : ; do
 			# restore only network from autobackup
 			[ -f /sys/class/vtconsole/vtcon1/bind ] && echo 1 > /sys/class/vtconsole/vtcon1/bind
 			/etc/init.d/settings-restore.sh network
-			if [ ! -f /etc/.doNotAutoinstall ]; then
-				touch /etc/.doAutoinstall
-			else
-				rm -f /etc/.doNotAutoInstall
-			fi
-			break
 			;;
 		44)
 			# restore autobackup
