@@ -1,5 +1,11 @@
 from Plugins.Plugin import PluginDescriptor
 from Components.Harddisk import harddiskmanager
+from Screens.Screen import Screen
+from Screens.Opkg import Opkg
+from Components.Opkg import OpkgComponent
+from Components.ActionMap import ActionMap
+from Components.Sources.StaticText import StaticText
+from Components.SelectionList import SelectionList
 from twisted.internet.protocol import Protocol, Factory
 import os
 
@@ -86,6 +92,63 @@ class Hotplug(Protocol):
 			v[var] = val
 		processHotplugData(self, v)
 
+class OpkgInstaller(Screen):
+	skin = """
+		<screen name="OpkgInstaller" position="center,center" size="550,450" title="Install extensions" >
+			<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
+			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
+			<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+			<widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
+			<widget source="key_blue" render="Label" position="420,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" transparent="1" />
+			<widget name="list" position="5,50" size="540,360" />
+			<ePixmap pixmap="div-h.png" position="0,410" zPosition="10" size="560,2" transparent="1" alphatest="on" />
+			<widget source="introduction" render="Label" position="5,420" zPosition="10" size="550,30" halign="center" valign="center" font="Regular;22" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
+		</screen>"""
+
+	def __init__(self, session, list):
+		Screen.__init__(self, session)
+
+		self.list = SelectionList()
+		self["list"] = self.list
+
+		p = 0
+		if len(list):
+			p = list[0].rfind("/")
+			title = list[0][:p]
+			self.title = ("%s %s %s") % (_("Install extensions"), _("from"), title)
+
+		for listindex in range(len(list)):
+			self.list.addSelection(list[listindex][p + 1:], list[listindex], listindex, False)
+		self.list.sort()
+
+		self["key_red"] = StaticText(_("Close"))
+		self["key_green"] = StaticText(_("Install"))
+		self["key_yellow"] = StaticText()
+		self["key_blue"] = StaticText(_("Invert"))
+		self["introduction"] = StaticText(_("Press OK to toggle the selection."))
+
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
+		{
+			"ok": self.list.toggleSelection,
+			"cancel": self.close,
+			"red": self.close,
+			"green": self.install,
+			"blue": self.list.toggleAllSelection
+		}, -1)
+
+	def install(self):
+		list = self.list.getSelectionsList()
+		cmdList = []
+		for item in list:
+			cmdList.append((OpkgComponent.CMD_INSTALL, {"package": item[1]}))
+		self.session.open(Opkg, cmdList=cmdList)
+
+def filescan_open(list, session, **kwargs):
+	filelist = [x.path for x in list]
+	session.open(OpkgInstaller, filelist) # list
 
 def autostart(reason, **kwargs):
 	if reason == 0:
@@ -99,6 +162,19 @@ def autostart(reason, **kwargs):
 		except (OSError, error.CannotListenError) as err:
 			print("[Hotplug]", err)
 
+def filescan(**kwargs):
+	from Components.Scanner import Scanner, ScanPath
+	return \
+		Scanner(mimetypes=["application/x-debian-package"],
+			paths_to_scan=[
+					ScanPath(path="ipk", with_subdirs=True),
+					ScanPath(path="", with_subdirs=False),
+				],
+			name="Opkg",
+			description=_("Install extensions"),
+			openfnc=filescan_open, )
 
 def Plugins(**kwargs):
-	return PluginDescriptor(name=_("Hotplug"), description=_("listens to hotplug events"), where=PluginDescriptor.WHERE_AUTOSTART, needsRestart=True, fnc=autostart)
+	return [PluginDescriptor(name=_("Hotplug"), description=_("listens to hotplug events"), where=PluginDescriptor.WHERE_AUTOSTART, needsRestart=True, fnc=autostart),
+		PluginDescriptor(name=_("Opkg"), where=PluginDescriptor.WHERE_FILESCAN, needsRestart=False, fnc=filescan)]
+
