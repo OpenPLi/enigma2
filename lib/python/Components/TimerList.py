@@ -84,7 +84,7 @@ class TimerList(GUIComponent):
 			icon = self.iconDone
 
 		icon and res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, self.iconMargin // 2, (self.rowSplit - self.iconHeight) // 2, self.iconWidth, self.iconHeight, icon))
-		orbpos = self.getOrbitalPos(timer.service_ref, timer.state, timer.record_service)
+		orbpos = self.getOrbitalPos(timer.service_ref, timer.state, hasattr(timer, "record_service") and timer.record_service or None)
 		orbposWidth = getTextBoundarySize(self.instance, self.font, self.l.getItemSize(), orbpos).width()
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, self.satPosLeft, self.rowSplit, orbposWidth, self.itemHeight - self.rowSplit, 1, RT_HALIGN_LEFT | RT_VALIGN_TOP, orbpos))
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, self.iconWidth + self.iconMargin, self.rowSplit, self.satPosLeft - self.iconWidth - self.iconMargin, self.itemHeight - self.rowSplit, 1, RT_HALIGN_LEFT | RT_VALIGN_TOP, state))
