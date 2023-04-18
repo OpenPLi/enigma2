@@ -287,9 +287,10 @@ class FlashImage(Screen):
 					if not path.startswith('/mmc') and os.path.isdir(path) and os.access(path, os.W_OK):
 						try:
 							statvfs = os.statvfs(path)
-							return (statvfs.f_bavail * statvfs.f_frsize) / (1 << 20)
-						except:
-							pass
+							return (statvfs.f_bavail * statvfs.f_frsize) // (1 << 20)
+						except OSError as err:
+							print("[FlashImage] checkMedia Error %d: Unable to get status for '%s'! (%s)" % (err.errno, path, err.strerror))
+					return 0
 
 				def checkIfDevice(path, diskstats):
 					st_dev = os.stat(path).st_dev
