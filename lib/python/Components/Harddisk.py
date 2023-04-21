@@ -153,14 +153,14 @@ class Harddisk:
 		try:
 			line = readFile(self.sysfsPath('size'))
 			cap = int(line)
-			return cap / 1000 * 512 / 1000
+			return cap // 1000 * 512 // 1000
 		except:
 			dev = self.findMount()
 			if dev:
 				try:
 					stat = os.statvfs(dev)
 					cap = int(stat.f_blocks * stat.f_bsize)
-					return cap / 1000 / 1000
+					return cap // 1000 // 1000
 				except:
 					pass
 		return cap
@@ -171,7 +171,7 @@ class Harddisk:
 			return ""
 		if cap < 1000:
 			return _("%d MB") % cap
-		return _("%.2f GB") % (cap / 1000.0)
+		return _("%.2f GB") % (cap // 1000.0)
 
 	def model(self):
 		try:
@@ -194,7 +194,7 @@ class Harddisk:
 		if dev:
 			try:
 				stat = os.statvfs(dev)
-				return (stat.f_bfree / 1000) * (stat.f_bsize / 1024)
+				return (stat.f_bfree // 1000) * (stat.f_bsize // 1024)
 			except:
 				pass
 		return -1
