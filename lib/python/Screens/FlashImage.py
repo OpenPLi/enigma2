@@ -103,7 +103,7 @@ class SelectImage(Screen):
 			if not self.jsonlist:
 				url = "%s%s" % (FEED_URLS[self.selectedImage], model)
 				try:
-					self.jsonlist = dict(json.load(urlopen(url, timeout=15)))
+					self.jsonlist = dict(json.load(urlopen(url, timeout=1)))
 				except:
 					print("[FlashImage] getImagesList Error: Unable to load json data from URL '%s'!" % url)
 				alternative_imagefeed = config.usage.alternative_imagefeed.value
@@ -111,7 +111,7 @@ class SelectImage(Screen):
 					if "http" in alternative_imagefeed:
 						url = "%s%s" % (config.usage.alternative_imagefeed.value, model)
 						try:
-							self.jsonlist.update(dict(json.load(urlopen(url, timeout=15))))
+							self.jsonlist.update(dict(json.load(urlopen(url, timeout=1))))
 						except:
 							print("[FlashImage] getImagesList Error: Unable to load json data from alternative URL '%s'!" % url)
 
