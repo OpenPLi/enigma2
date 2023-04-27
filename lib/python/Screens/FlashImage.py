@@ -1,3 +1,4 @@
+from Screens.ChoiceBox import ChoiceBox
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.Standby import getReasons
@@ -26,17 +27,18 @@ import struct
 
 from enigma import eEPGCache
 
-FEED_URLS = [
-	("openATV", "https://images.mynonpublic.com/openatv/json/"),
-	("OpenBH", "https://images.openbh.net/json/"),
-	("Open Vision", "https://images.openvision.dedyn.io/json/"),
-	("OpenViX", "https://www.openvix.co.uk/json/"),
-	("OpenHDF", "https://flash.hdfreaks.cc/openhdf/json/"),
-	("TeamBlue", "https://images.teamblue.tech/json/"),
-	("Open8eIGHT", "http://openeight.de/json/"),
-	("OpenDROID", "https://opendroid.org/json/"),
-	("EGAMI", "https://image.egami-image.com/json/")
-]
+FEED_URLS = {
+	"OpenPLi": "http://downloads.openpli.org/json/",
+	"openATV": "https://images.mynonpublic.com/openatv/json/",
+	"OpenBH": "https://images.openbh.net/json/",
+	"Open Vision": "https://images.openvision.dedyn.io/json/",
+	"OpenViX": "https://www.openvix.co.uk/json/",
+	"OpenHDF": "https://flash.hdfreaks.cc/openhdf/json/",
+	"TeamBlue": "https://images.teamblue.tech/json/",
+	"Open8eIGHT": "http://openeight.de/json/",
+	"OpenDROID": "https://opendroid.org/json/",
+	"EGAMI": "https://image.egami-image.com/json/"
+}
 
 
 def checkimagefiles(files):
@@ -50,10 +52,12 @@ class SelectImage(Screen):
 		self.imagesList = {}
 		self.setIndex = 0
 		self.expanded = []
+		self.selectedImage = "OpenPLi"
 		self.setTitle(_("Select image"))
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText()
 		self["key_yellow"] = StaticText()
+		self["key_blue"] = StaticText(_("Other Images"))
 		self["description"] = Label()
 		self["list"] = ChoiceList(list=[ChoiceEntryComponent('', ((_("Retrieving image list - Please wait...")), "Waiter"))])
 
@@ -64,6 +68,7 @@ class SelectImage(Screen):
 			"red": boundFunction(self.close, None),
 			"green": self.keyOk,
 			"yellow": self.keyDelete,
+			"blue": self.otherImages,
 			"up": self.keyUp,
 			"down": self.keyDown,
 			"left": self.keyLeft,
@@ -96,7 +101,7 @@ class SelectImage(Screen):
 
 		if not self.imagesList:
 			if not self.jsonlist:
-				url = "http://downloads.openpli.org/json/%s" % model
+				url = "%s%s" % (FEED_URLS[self.selectedImage], model)
 				try:
 					self.jsonlist = dict(json.load(urlopen(url, timeout=15)))
 				except:
@@ -109,14 +114,6 @@ class SelectImage(Screen):
 							self.jsonlist.update(dict(json.load(urlopen(url, timeout=15))))
 						except:
 							print("[FlashImage] getImagesList Error: Unable to load json data from alternative URL '%s'!" % url)
-					elif alternative_imagefeed == "all":
-							for link in FEED_URLS:
-								url = "%s%s" % (link[1], model)
-								try:
-									req = Request(url, None, {"User-agent": "Mozilla/5.0 (Windows; U; Windows NT 5.1; en; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5"})
-									self.jsonlist.update(dict(json.load(urlopen(req, timeout=10))))
-								except:
-									print("[FlashImage] getImagesList Error: Unable to load json data from %s URL '%s'!" % (link[0], url))
 
 			self.imagesList = dict(self.jsonlist)
 
@@ -185,6 +182,18 @@ class SelectImage(Screen):
 				self.getImagesList()
 			except:
 				self.session.open(MessageBox, _("Cannot delete downloaded image"), MessageBox.TYPE_ERROR, timeout=3)
+
+	def otherImages(self):
+		self.session.openWithCallback(self.otherImagesCallback, ChoiceBox, "test", list(FEED_URLS.items()))
+
+
+	def otherImagesCallback(self, image):
+		if image:
+			self.selectedImage = image[0]
+			self["list"].setList([ChoiceEntryComponent('', ((_("Retrieving image list - Please wait...")), "Waiter"))])
+			self["list"].moveToIndex(0)
+			self.selectionChanged()
+			self.callLater(self.reloadImagesList)
 
 	def selectionChanged(self):
 		currentSelected = self["list"].l.getCurrentSelection()
