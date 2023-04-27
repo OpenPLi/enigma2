@@ -184,8 +184,7 @@ class SelectImage(Screen):
 				self.session.open(MessageBox, _("Cannot delete downloaded image"), MessageBox.TYPE_ERROR, timeout=3)
 
 	def otherImages(self):
-		self.session.openWithCallback(self.otherImagesCallback, ChoiceBox, "test", list(FEED_URLS.items()))
-
+		self.session.openWithCallback(self.otherImagesCallback, ChoiceBox, list=list(FEED_URLS.items()), windowTitle=_("Select an image brand"))
 
 	def otherImagesCallback(self, image):
 		if image:
