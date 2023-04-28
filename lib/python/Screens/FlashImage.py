@@ -18,6 +18,7 @@ from Tools.HardwareInfo import HardwareInfo
 from Tools.Multiboot import getImagelist, getCurrentImage, getCurrentImageMode, deleteImage, restoreImages
 import os
 from urllib.request import urlopen, Request
+import xml.etree.ElementTree
 import json
 import time
 import zipfile
@@ -25,21 +26,7 @@ import shutil
 import tempfile
 import struct
 
-from enigma import eEPGCache
-
-FEED_URLS = {
-	"OpenPLi": "http://downloads.openpli.org/json/",
-	"openATV": "https://images.mynonpublic.com/openatv/json/",
-	"OpenBH": "https://images.openbh.net/json/",
-	"Open Vision": "https://images.openvision.dedyn.io/json/",
-	"OpenViX": "https://www.openvix.co.uk/json/",
-	"OpenHDF": "https://flash.hdfreaks.cc/openhdf/json/",
-	"TeamBlue": "https://images.teamblue.tech/json/",
-	"Open8eIGHT": "http://openeight.de/json/",
-	"OpenDROID": "https://opendroid.org/json/",
-	"EGAMI": "https://image.egami-image.com/json/"
-}
-
+from enigma import eEPGCache, eEnv
 
 def checkimagefiles(files):
 	return len([x for x in files if 'kernel' in x and '.bin' in x or x in ('uImage', 'rootfs.bin', 'root_cfe_auto.bin', 'root_cfe_auto.jffs2', 'oe_rootfs.bin', 'e2jffs2.img', 'rootfs.tar.bz2', 'rootfs.ubi')]) == 2
@@ -52,7 +39,8 @@ class SelectImage(Screen):
 		self.imagesList = {}
 		self.setIndex = 0
 		self.expanded = []
-		self.selectedImage = "OpenPLi"
+		self.url_feeds = xml.etree.ElementTree.parse(eEnv.resolve("${datadir}/enigma2/imagefeeds.xml")).getroot()
+		self.selectedImage = self.getSelectedImageFeed("OpenPLi")
 		self.setTitle(_("Select image"))
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText()
@@ -82,6 +70,11 @@ class SelectImage(Screen):
 
 		self.callLater(self.getImagesList)
 
+	def getSelectedImageFeed(self, selectedImage):
+		for feed_info in self.url_feeds:
+				if feed_info.attrib["name"] == selectedImage:
+					return feed_info.attrib
+
 	def getImagesList(self):
 
 		def getImages(path, files):
@@ -101,7 +94,7 @@ class SelectImage(Screen):
 
 		if not self.imagesList:
 			if not self.jsonlist:
-				url = "%s%s" % (FEED_URLS[self.selectedImage], model)
+				url = "%s%s" % (self.selectedImage["url"], self.selectedImage.get(model, model))
 				try:
 					self.jsonlist = dict(json.load(urlopen(url, timeout=1)))
 				except:
@@ -184,11 +177,11 @@ class SelectImage(Screen):
 				self.session.open(MessageBox, _("Cannot delete downloaded image"), MessageBox.TYPE_ERROR, timeout=3)
 
 	def otherImages(self):
-		self.session.openWithCallback(self.otherImagesCallback, ChoiceBox, list=list(FEED_URLS.items()), windowTitle=_("Select an image brand"))
+		self.session.openWithCallback(self.otherImagesCallback, ChoiceBox, list=[(feedinfo.attrib["name"], feedinfo.attrib) for feedinfo in self.url_feeds], windowTitle=_("Select an image brand"))
 
 	def otherImagesCallback(self, image):
 		if image:
-			self.selectedImage = image[0]
+			self.selectedImage = image[1]
 			self["list"].setList([ChoiceEntryComponent('', ((_("Retrieving image list - Please wait...")), "Waiter"))])
 			self["list"].moveToIndex(0)
 			self.selectionChanged()

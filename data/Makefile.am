@@ -8,6 +8,7 @@ dist_pkgdata_DATA = \
 	freesat.t2 \
 	groupedservices \
 	iso-639-3.pck \
+	imagefeeds.xml \
 	keymap.xml \
 	menu.xml \
 	otv_00820000_fbff_16a8.dict \
