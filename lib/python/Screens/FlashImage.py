@@ -144,7 +144,7 @@ class SelectImage(Screen):
 				self.setIndex = 0
 			self.selectionChanged()
 		else:
-			self.session.openWithCallback(self.close, MessageBox, _("Cannot find images - please try later"), type=MessageBox.TYPE_ERROR, timeout=3)
+			self["list"].setList([ChoiceEntryComponent('', ((_("Cannot find images - please try later or select an alternate image")), "Waiter"))])
 
 	def keyOk(self):
 		currentSelected = self["list"].l.getCurrentSelection()
