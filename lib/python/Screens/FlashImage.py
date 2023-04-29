@@ -17,6 +17,7 @@ from Tools.Downloader import downloadWithProgress
 from Tools.HardwareInfo import HardwareInfo
 from Tools.Multiboot import getImagelist, getCurrentImage, getCurrentImageMode, deleteImage, restoreImages
 import os
+import re
 from urllib.request import urlopen, Request
 import xml.etree.ElementTree
 import json
@@ -72,8 +73,8 @@ class SelectImage(Screen):
 
 	def getSelectedImageFeed(self, selectedImage):
 		for feed_info in self.url_feeds:
-				if feed_info.attrib["name"] == selectedImage:
-					return feed_info.attrib
+			if feed_info.tag == "ImageFeed" and feed_info.attrib["name"] == selectedImage:
+				return feed_info.attrib
 
 	def getImagesList(self):
 
@@ -94,6 +95,9 @@ class SelectImage(Screen):
 
 		if not self.imagesList:
 			if not self.jsonlist:
+				if "model" in self.selectedImage:
+					for expression in eval(self.url_feeds.find(self.selectedImage["model"]).text):
+						model = re.sub(expression[0], expression[1], model)
 				url = "%s%s" % (self.selectedImage["url"], self.selectedImage.get(model, model))
 				try:
 					self.jsonlist = dict(json.load(urlopen(url, timeout=1)))
@@ -177,7 +181,7 @@ class SelectImage(Screen):
 				self.session.open(MessageBox, _("Cannot delete downloaded image"), MessageBox.TYPE_ERROR, timeout=3)
 
 	def otherImages(self):
-		self.session.openWithCallback(self.otherImagesCallback, ChoiceBox, list=[(feedinfo.attrib["name"], feedinfo.attrib) for feedinfo in self.url_feeds], windowTitle=_("Select an image brand"))
+		self.session.openWithCallback(self.otherImagesCallback, ChoiceBox, list=[(feedinfo.attrib["name"], feedinfo.attrib) for feedinfo in self.url_feeds if feedinfo.tag == "ImageFeed"], windowTitle=_("Select an image brand"))
 
 	def otherImagesCallback(self, image):
 		if image:
