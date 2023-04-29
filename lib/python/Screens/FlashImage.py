@@ -45,7 +45,7 @@ class SelectImage(Screen):
 		self.setTitle(_("Select image"))
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText()
-		self["key_yellow"] = StaticText()
+		self["key_yellow"] = StaticText(_("Initialize Multiboot")) if SystemInfo["canKexec"] else StaticText()
 		self["key_blue"] = StaticText(_("Other Images"))
 		self["description"] = Label()
 		self["list"] = ChoiceList(list=[ChoiceEntryComponent('', ((_("Retrieving image list - Please wait...")), "Waiter"))])
@@ -56,7 +56,7 @@ class SelectImage(Screen):
 			"cancel": boundFunction(self.close, None),
 			"red": boundFunction(self.close, None),
 			"green": self.keyOk,
-			"yellow": self.keyDelete,
+			"yellow": self.keyYellow,
 			"blue": self.otherImages,
 			"up": self.keyUp,
 			"down": self.keyDown,
@@ -78,19 +78,19 @@ class SelectImage(Screen):
 
 	def getImagesList(self):
 
-				def getImages(path, files):
-						for file in files:
-								if os.path.splitext(file)[1] == ".zip" and model in file and file.split(os.sep)[-1].startswith(self.selectedImage["name"].lower()):
-										try:
-												if checkimagefiles([x.split(os.sep)[-1] for x in zipfile.ZipFile(file).namelist()]):
-														imagetyp = _("Downloaded Images")
-														if 'backup' in file.split(os.sep)[-1]:
-																imagetyp = _("Fullbackup Images")
-														if imagetyp not in self.imagesList:
-																self.imagesList[imagetyp] = {}
-														self.imagesList[imagetyp][file] = {'link': file, 'name': file.split(os.sep)[-1]}
-										except:
-												pass
+		def getImages(path, files):
+			for file in files:
+				if os.path.splitext(file)[1] == ".zip" and model in file and file.split(os.sep)[-1].startswith(self.selectedImage["name"].lower()):
+					try:
+						if checkimagefiles([x.split(os.sep)[-1] for x in zipfile.ZipFile(file).namelist()]):
+							imagetyp = _("Downloaded Images")
+							if 'backup' in file.split(os.sep)[-1]:
+								imagetyp = _("Fullbackup Images")
+							if imagetyp not in self.imagesList:
+								self.imagesList[imagetyp] = {}
+							self.imagesList[imagetyp][file] = {'link': file, 'name': file.split(os.sep)[-1]}
+					except:
+						pass
 
 		model = HardwareInfo().get_machine_name()
 
@@ -168,7 +168,7 @@ class SelectImage(Screen):
 		self.expanded = []
 		self.getImagesList()
 
-	def keyDelete(self):
+	def keyYellow(self):
 		currentSelected = self["list"].l.getCurrentSelection()[0][1]
 		if not("://" in currentSelected or currentSelected in ["Expander", "Waiter"]):
 			try:
@@ -181,6 +181,8 @@ class SelectImage(Screen):
 				self.getImagesList()
 			except:
 				self.session.open(MessageBox, _("Cannot delete downloaded image"), MessageBox.TYPE_ERROR, timeout=3)
+		elif SystemInfo["canKexec"]:
+			self.session.open(KexecInit)
 
 	def otherImages(self):
 		self.session.openWithCallback(self.otherImagesCallback, ChoiceBox, list=[(feedinfo.attrib["name"], feedinfo.attrib) for feedinfo in self.url_feeds if feedinfo.tag == "ImageFeed"], windowTitle=_("Select an image brand"))
@@ -196,7 +198,7 @@ class SelectImage(Screen):
 	def selectionChanged(self):
 		currentSelected = self["list"].l.getCurrentSelection()
 		if "://" in currentSelected[0][1] or currentSelected[0][1] in ["Expander", "Waiter"]:
-			self["key_yellow"].setText("")
+			self["key_yellow"].setText(_("Initialize Multiboot") if SystemInfo["canKexec"] else "")
 		else:
 			self["key_yellow"].setText(_("Delete image"))
 		if currentSelected[0][1] == "Waiter":
@@ -600,14 +602,7 @@ class MultibootSelection(SelectImage):
 
 class KexecInit(Screen):
 
-	model = HardwareInfo().get_device_model()
-	modelMtdRootKernel = model in ("vuduo4k", "vuduo4kse") and ["mmcblk0p9", "mmcblk0p6"] or model in ("vusolo4k", "vuultimo4k", "vuuno4k", "vuuno4kse") and ["mmcblk0p4", "mmcblk0p1"] or model == "vuzero4k" and ["mmcblk0p7", "mmcblk0p4"] or ["", ""]
-
-	STARTUP = "kernel=/zImage root=/dev/%s rootsubdir=linuxrootfs0" % modelMtdRootKernel[0]                 # /STARTUP
-	STARTUP_RECOVERY = "kernel=/zImage root=/dev/%s rootsubdir=linuxrootfs0" % modelMtdRootKernel[0]        # /STARTUP_RECOVERY
-	STARTUP_1 = "kernel=/linuxrootfs1/zImage root=/dev/%s rootsubdir=linuxrootfs1" % modelMtdRootKernel[0]  # /STARTUP_1
-	STARTUP_2 = "kernel=/linuxrootfs2/zImage root=/dev/%s rootsubdir=linuxrootfs2" % modelMtdRootKernel[0]  # /STARTUP_2
-	STARTUP_3 = "kernel=/linuxrootfs3/zImage root=/dev/%s rootsubdir=linuxrootfs3" % modelMtdRootKernel[0]  # /STARTUP_3
+	modelMtdRootKernel = SystemInfo["canKexec"]
 
 	def __init__(self, session, *args):
 		Screen.__init__(self, session)
@@ -630,16 +625,11 @@ class KexecInit(Screen):
 		if self.kexec_files:
 			self.setTitle(_("Kexec MultiBoot Initialisation - will reboot after 10 seconds."))
 			self["description"].setText(_("Kexec MultiBoot Initialisation in progress!\n\nWill reboot after restoring any eMMC slots.\nThis can take from 1 -> 5 minutes per slot."))
-			with open("/STARTUP", 'w') as f:
-				f.write(self.STARTUP)
-			with open("/STARTUP_RECOVERY", 'w') as f:
-				f.write(self.STARTUP_RECOVERY)
-			with open("/STARTUP_1", 'w') as f:
-				f.write(self.STARTUP_1)
-			with open("/STARTUP_2", 'w') as f:
-				f.write(self.STARTUP_2)
-			with open("/STARTUP_3", 'w') as f:
-				f.write(self.STARTUP_3)
+			open("/STARTUP", 'w').write("kernel=/zImage root=/dev/%s rootsubdir=linuxrootfs0" % modelMtdRootKernel[0])
+			open("/STARTUP_RECOVERY", 'w').write("kernel=/zImage root=/dev/%s rootsubdir=linuxrootfs0" % modelMtdRootKernel[0])
+			open("/STARTUP_1", 'w').write("kernel=/linuxrootfs1/zImage root=/dev/%s rootsubdir=linuxrootfs1" % modelMtdRootKernel[0])
+			open("/STARTUP_2", 'w').write("kernel=/linuxrootfs2/zImage root=/dev/%s rootsubdir=linuxrootfs2" % modelMtdRootKernel[0])
+			open("/STARTUP_3", 'w').write("kernel=/linuxrootfs3/zImage root=/dev/%s rootsubdir=linuxrootfs3" % modelMtdRootKernel[0])
 			cmdlist = []
 			cmdlist.append("dd if=/dev/%s of=/zImage" % self.modelMtdRootKernel[1])  # backup old kernel
 			cmdlist.append("dd if=/usr/bin/kernel_auto.bin of=/dev/%s" % self.modelMtdRootKernel[1])  # create new kernel
