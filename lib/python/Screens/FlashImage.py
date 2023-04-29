@@ -78,18 +78,19 @@ class SelectImage(Screen):
 
 	def getImagesList(self):
 
-		def getImages(path, files):
-			for file in [x for x in files if os.path.splitext(x)[1] == ".zip" and model in x]:
-				try:
-					if checkimagefiles([x.split(os.sep)[-1] for x in zipfile.ZipFile(file).namelist()]):
-						imagetyp = _("Downloaded Images")
-						if 'backup' in file.split(os.sep)[-1]:
-							imagetyp = _("Fullbackup Images")
-						if imagetyp not in self.imagesList:
-							self.imagesList[imagetyp] = {}
-						self.imagesList[imagetyp][file] = {'link': file, 'name': file.split(os.sep)[-1]}
-				except:
-					pass
+				def getImages(path, files):
+						for file in files:
+								if os.path.splitext(file)[1] == ".zip" and model in file and file.split(os.sep)[-1].startswith(self.selectedImage["name"].lower()):
+										try:
+												if checkimagefiles([x.split(os.sep)[-1] for x in zipfile.ZipFile(file).namelist()]):
+														imagetyp = _("Downloaded Images")
+														if 'backup' in file.split(os.sep)[-1]:
+																imagetyp = _("Fullbackup Images")
+														if imagetyp not in self.imagesList:
+																self.imagesList[imagetyp] = {}
+														self.imagesList[imagetyp][file] = {'link': file, 'name': file.split(os.sep)[-1]}
+										except:
+												pass
 
 		model = HardwareInfo().get_machine_name()
 
@@ -98,7 +99,7 @@ class SelectImage(Screen):
 				if "model" in self.selectedImage:
 					for expression in eval(self.url_feeds.find(self.selectedImage["model"]).text):
 						model = re.sub(expression[0], expression[1], model)
-				url = "%s%s" % (self.selectedImage["url"], self.selectedImage.get(model, model))
+				url = "%s%s" % (self.selectedImage["url"], model)
 				try:
 					self.jsonlist = dict(json.load(urlopen(url, timeout=1)))
 				except:
