@@ -165,6 +165,7 @@ class SelectImage(Screen):
 	def reloadImagesList(self):
 		self.imagesList = {}
 		self.jsonlist = {}
+		self.expanded = []
 		self.getImagesList()
 
 	def keyDelete(self):
