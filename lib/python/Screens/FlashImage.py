@@ -80,7 +80,7 @@ class SelectImage(Screen):
 
 		def getImages(path, files):
 			for file in files:
-				if os.path.splitext(file)[1] == ".zip" and model in file and file.split(os.sep)[-1].startswith(self.selectedImage["name"].lower()):
+				if os.path.splitext(file)[1] == ".zip" and model in file and file.split(os.sep)[-1].startswith(self.selectedImage["name"].replace(" ","").lower()):
 					try:
 						if checkimagefiles([x.split(os.sep)[-1] for x in zipfile.ZipFile(file).namelist()]):
 							imagetyp = _("Downloaded Images")
