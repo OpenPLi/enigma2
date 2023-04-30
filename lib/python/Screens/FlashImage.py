@@ -601,9 +601,6 @@ class MultibootSelection(SelectImage):
 
 
 class KexecInit(Screen):
-
-	modelMtdRootKernel = SystemInfo["canKexec"]
-
 	def __init__(self, session, *args):
 		Screen.__init__(self, session)
 		self.skinName = ["KexecInit", "Setup"]
@@ -623,6 +620,7 @@ class KexecInit(Screen):
 	def RootInit(self):
 		self["actions"].setEnabled(False)  # This function takes time so disable the ActionMap to avoid responding to multiple button presses
 		if self.kexec_files:
+			modelMtdRootKernel = SystemInfo["canKexec"]
 			self.setTitle(_("Kexec MultiBoot Initialisation - will reboot after 10 seconds."))
 			self["description"].setText(_("Kexec MultiBoot Initialisation in progress!\n\nWill reboot after restoring any eMMC slots.\nThis can take from 1 -> 5 minutes per slot."))
 			open("/STARTUP", 'w').write("kernel=/zImage root=/dev/%s rootsubdir=linuxrootfs0" % modelMtdRootKernel[0])
