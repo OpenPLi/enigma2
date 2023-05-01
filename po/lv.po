@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-16 18:05+0200\n"
+"POT-Creation-Date: 2023-05-01 18:19+0300\n"
 "PO-Revision-Date: 2014-11-12 00:49+0200\n"
 "Last-Translator: Taapat <taapat@gmail.com>\n"
 "Language-Team: Taapat <taapat@gmail.com>\n"
@@ -335,9 +335,9 @@ msgstr ""
 msgid "%s %d.%d"
 msgstr "%s %d.%d"
 
-#, fuzzy, python-format
+#, python-format
 msgid "%s (files)"
-msgstr "%d fails"
+msgstr "%s (faili)"
 
 #, python-format
 msgid "%s KSymb/s"
@@ -347,9 +347,9 @@ msgstr "%s KSymb/s"
 msgid "%s MHz"
 msgstr "%s MHz"
 
-#, fuzzy, python-format
+#, python-format
 msgid "%s connected successfully."
-msgstr "PIN kods nomainīts veiksmīgi."
+msgstr "%s pievienots."
 
 #, python-format
 msgid "%s imported from fallback tuner"
@@ -383,9 +383,8 @@ msgstr "(PĀRSLĒGT)"
 msgid "(activated +%d min)"
 msgstr "(aktivizēts +%d min)"
 
-#, fuzzy
 msgid "(current)"
-msgstr "Pašreizējais"
+msgstr "(pašreizējais)"
 
 msgid "(empty)"
 msgstr "(tukšs)"
@@ -1079,6 +1078,8 @@ msgid ""
 "Attention - forced loading recovery image!\n"
 "Create an empty STARTUP_RECOVERY file at the root of your HDD/USB drive and hold the Power button for more than 12 seconds for reboot receiver!"
 msgstr ""
+"Uzmanību — uzstāda atkopšanas imidžu!\n"
+"Izveidojiet tukšu STARTUP_RECOVERY failu HDD/USB diska saknē un turiet nospiestu barošanas pogu ilgāk par 12 sekundēm, lai pārstartētu uztvērēju!"
 
 msgid "Attention, this is repeated timer!\n"
 msgstr "Uzmanību, šis taimeris atkārtojas!\n"
@@ -1387,9 +1388,9 @@ msgstr "Zaļā piesātinājums"
 msgid "Boot to Android image"
 msgstr "Pārstartēt uz Android imidžu"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Boot to Recovery image - slot0 %s"
-msgstr "Pārstartēt atkopšanas izvēlnē"
+msgstr "Pārstartēt uz atkopšanas imidžu - slot0 %s"
 
 msgid "Boot to Recovery menu"
 msgstr "Pārstartēt atkopšanas izvēlnē"
@@ -1590,8 +1591,8 @@ msgstr "Nevar noteikt"
 msgid "Cannot find any signal ..., aborting !"
 msgstr "Nevar atrast nevienu signālu ..., pārtraukts!"
 
-msgid "Cannot find images - please try later"
-msgstr "Nevar atrast imidžus - lūdzu mēģiniet vēlāk"
+msgid "Cannot find images - please try later or select an alternate image"
+msgstr "Nevar atrast imidžus - lūdzu mēģiniet vēlāk vai izvēlēties citu"
 
 msgid "Cannot move files on a different disk or system to the trash can"
 msgstr "Nevar pārvietot failus uz citu disku vai uz sistēmas miskasti"
@@ -1900,7 +1901,7 @@ msgid "Composition of the recording filenames"
 msgstr "Ieraksta faila nosaukuma veidošana"
 
 msgid "Compress"
-msgstr "Saspiest"
+msgstr "Sakļaut"
 
 msgid "Config Scan Details"
 msgstr "Detalizēta informācija"
@@ -2555,7 +2556,7 @@ msgstr "Kanālu meklētājs pēc noklusējuma"
 
 #, python-format
 msgid "Default duration: %d mins"
-msgstr ""
+msgstr "Pēc noklusējuma ilgums %d min."
 
 msgid "Default movie location"
 msgstr "Mediju failu atrašanās vieta pēc noklusējuma"
@@ -2645,7 +2646,7 @@ msgid "Delete"
 msgstr "Dzēst"
 
 msgid "Delete Image"
-msgstr "Dzēst imidžu"
+msgstr "Dzēst"
 
 msgid "Delete all the text"
 msgstr "Dzēst visu tekstu"
@@ -2660,7 +2661,7 @@ msgid "Delete file"
 msgstr "Dzēst failu"
 
 msgid "Delete image"
-msgstr "Izdzēst imidžu"
+msgstr "Dzēst"
 
 msgid "Delete playlist entry"
 msgstr "Dzēst repertuāra ierakstu"
@@ -3179,9 +3180,6 @@ msgstr "Lietot EIT EPG"
 msgid "Enable HDMI-CEC"
 msgstr "Izmantot HDMI-CEC iestatījumus"
 
-msgid "Enable Kexec MultiBoot"
-msgstr ""
-
 msgid "Enable MHW EPG"
 msgstr "Lietot MHW EPG"
 
@@ -3338,7 +3336,6 @@ msgstr "Ievadiet PIN kodu"
 msgid "Enter URL"
 msgstr "Adrese (URL)"
 
-#, fuzzy
 msgid "Enter an URL where alternative images could be listed for FlashImage. Enter text 'all' for automatic access of many images."
 msgstr "Ievadiet adresi (URL), kur atrodas alternatīvie imidži kurus izmantot uzstādīšanai."
 
@@ -3538,7 +3535,7 @@ msgid "Exit the wizard"
 msgstr "Iziet no vedņa"
 
 msgid "Expand"
-msgstr "Atspiest"
+msgstr "Izvērst"
 
 msgid "Expert"
 msgstr "Lietpratēja"
@@ -4552,6 +4549,10 @@ msgstr "Inicializācija"
 msgid "Initialize"
 msgstr "Inicializēt"
 
+
+msgid "Initialize Multiboot"
+msgstr "Multiboot"
+
 msgid "Initializing storage device..."
 msgstr "Inicializēt ieraksta ierīci..."
 
@@ -4741,7 +4742,7 @@ msgid "Kernel version: "
 msgstr "Kerneļa versija: "
 
 msgid "Kexec MultiBoot Initialisation - will reboot after 10 seconds."
-msgstr ""
+msgstr "Multiboot inicializācija — tiks pārstartēts pēc 10 sekundēm."
 
 msgid ""
 "Kexec MultiBoot Initialisation in progress!\n"
@@ -4749,9 +4750,13 @@ msgid ""
 "Will reboot after restoring any eMMC slots.\n"
 "This can take from 1 -> 5 minutes per slot."
 msgstr ""
+"Notiek multiboot inicializācija!\n"
+"\n"
+"Tiks restartēts pēc eMMC slotu atjaunošanas.\n"
+"Tas var ilgt no 1 līdz 5 minūtēm katram slotam."
 
 msgid "Kexec MultiBoot Manager"
-msgstr ""
+msgstr "Multiboot pārvaldnieks"
 
 msgid "Key Events"
 msgstr "Notikumus"
@@ -5861,6 +5866,9 @@ msgstr "Oriģinālais"
 msgid "Other"
 msgstr "Cits"
 
+msgid "Other Images"
+msgstr "Citi imidži"
+
 msgid "Other Subtitles & lang"
 msgstr "Citi subtitri un valodas"
 
@@ -6468,6 +6476,11 @@ msgid ""
 "unless you have eMMC slots to restore.\n"
 "Restoring eMMC slots can take from 1 -> 5 minutes per slot."
 msgstr ""
+"Nospiediet zaļo taustiņu, lai iespējotu multiboot!\n"
+"\n"
+"Tiks pārstartēts 10 sekunžu laikā,\n"
+"ja vien jums nav eMMC slotu, kurus atjaunot.\n"
+"eMMC slotu atjaunošana var ilgt no 1 līdz 5 minūtēm katram slotam."
 
 msgid "Press INFO on your remote control for additional information."
 msgstr "Papildus informācijai spiediet INFO uz tālvadības pults."
@@ -6695,6 +6708,8 @@ msgid ""
 "Really permanently delete MultiBoot files?\n"
 "%s"
 msgstr ""
+"Vai tiešām neatgriezeniski izdzēst multiboot failus??\n"
+"%s"
 
 msgid "Really reboot now?"
 msgstr "Vai tiešām pārstartēt?"
@@ -6876,9 +6891,8 @@ msgstr "Dzēst mapi"
 msgid "Remove entry"
 msgstr "Dzēst ierakstu"
 
-#, fuzzy
 msgid "Remove forever"
-msgstr "Dzēst ierakstu"
+msgstr "Dzēst"
 
 msgid "Remove from parental protection"
 msgstr "Dzēst no vecāku kontroles"
@@ -7516,6 +7530,9 @@ msgstr "Izvēlieties darbību taimerim '%s'."
 
 msgid "Select all"
 msgstr "Izvēlēties visu"
+
+msgid "Select an image brand"
+msgstr "Izvēlieties imidža izstrādātāju"
 
 msgid "Select audio track"
 msgstr "Izvēlieties skaņas celiņu"
@@ -8602,9 +8619,8 @@ msgstr "Sākt ierakstu"
 msgid "Start offline decode"
 msgstr "Sākt bezsaistes dekodēšanu"
 
-#, fuzzy
 msgid "Start recording current event"
-msgstr "Gaidstāve pēc pašreizējās pārraides"
+msgstr "Sākt ierakstīt pašreizējo notikumu"
 
 msgid "Start recording?"
 msgstr "Sākt ierakstu?"
@@ -8739,7 +8755,7 @@ msgid "Stopped"
 msgstr "Apturēt"
 
 msgid "Storage device not available or not initialized."
-msgstr ""
+msgstr "Krātuves ierīce nav pieejama vai nav inicializēta."
 
 msgid "Store at index"
 msgstr "Saglabāt indeksā"
@@ -9830,7 +9846,7 @@ msgid "Unable to backup settings as the AutoBackup plugin is missing, do you wan
 msgstr "Nav iespējams izveidot iestatījumu dublējumkopiju jo spraudnis dublējumkopijas izveidošanai nav pieejams, vai vēlaties turpināt?"
 
 msgid "Unable to complete - Kexec Multiboot files missing!"
-msgstr ""
+msgstr "Nav iespējams pabeigt — trūkst kexec multiboot failu!"
 
 msgid "Unable to create the required directories on the media (e.g. USB stick or Harddisk) - Please verify media and try again!"
 msgstr "Nevarēja izveidot nepieciešamās direktorijas datu nesējā (USB zibatmiņā vai HDD). Pārbaudiet datu nesēju un mēģiniet vēlreiz!"
@@ -11959,7 +11975,7 @@ msgstr "augša"
 
 #, python-format
 msgid "total conflict (%d)"
-msgstr ""
+msgstr "%d konflikti"
 
 msgid "tourism/travel"
 msgstr "tūrisma/ceļošana"
