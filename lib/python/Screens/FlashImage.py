@@ -629,8 +629,8 @@ class KexecInit(Screen):
 			open("/STARTUP_2", 'w').write("kernel=/linuxrootfs2/zImage root=/dev/%s rootsubdir=linuxrootfs2" % modelMtdRootKernel[0])
 			open("/STARTUP_3", 'w').write("kernel=/linuxrootfs3/zImage root=/dev/%s rootsubdir=linuxrootfs3" % modelMtdRootKernel[0])
 			cmdlist = []
-			cmdlist.append("dd if=/dev/%s of=/zImage" % self.modelMtdRootKernel[1])  # backup old kernel
-			cmdlist.append("dd if=/usr/bin/kernel_auto.bin of=/dev/%s" % self.modelMtdRootKernel[1])  # create new kernel
+			cmdlist.append("dd if=/dev/%s of=/zImage" % modelMtdRootKernel[1])  # backup old kernel
+			cmdlist.append("dd if=/usr/bin/kernel_auto.bin of=/dev/%s" % modelMtdRootKernel[1])  # create new kernel
 			cmdlist.append("mv /usr/bin/STARTUP.cpio.gz /STARTUP.cpio.gz")  # copy userroot routine
 			Console().eBatch(cmdlist, self.RootInitEnd, debug=True)
 		else:
