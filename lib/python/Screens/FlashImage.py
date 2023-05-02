@@ -639,9 +639,10 @@ class KexecInit(Screen):
 
 	def RootInitEnd(self, *args, **kwargs):
 		from Screens.Standby import TryQuitMainloop
+		model = HardwareInfo().get_machine_name()
 		for usbslot in range(1, 4):
-			if pathExists("/media/hdd/%s/linuxrootfs%s" % (self.model, usbslot)):
-				Console().ePopen("cp -R /media/hdd/%s/linuxrootfs%s . /" % (self.model, usbslot))
+			if pathExists("/media/hdd/%s/linuxrootfs%s" % (model, usbslot)):
+				Console().ePopen("cp -R /media/hdd/%s/linuxrootfs%s . /" % (model, usbslot))
 		self.session.open(TryQuitMainloop, 2)
 
 	def removeFiles(self):
