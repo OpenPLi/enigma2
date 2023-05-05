@@ -36,17 +36,19 @@ def checkimagefiles(files):
 class SelectImage(Screen):
 	def __init__(self, session, *args):
 		Screen.__init__(self, session)
+		self.imageBrandList = {}
 		self.jsonlist = {}
 		self.imagesList = {}
 		self.setIndex = 0
 		self.expanded = []
-		self.url_feeds = xml.etree.ElementTree.parse(eEnv.resolve("${datadir}/enigma2/imagefeeds.xml")).getroot()
-		self.selectedImage = self.getSelectedImageFeed("OpenPLi")
+		self.model = HardwareInfo().get_machine_name()
+		self.selectedImage = ["OpenPli", {"url": "https://downloads.openpli.org/json/%s" % self.model, "model": self.model}]
+		self.models = [self.model]
 		self.setTitle(_("Select image"))
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText()
 		self["key_yellow"] = StaticText(_("Initialize Multiboot")) if SystemInfo["canKexec"] else StaticText()
-		self["key_blue"] = StaticText(_("Other Images"))
+		self["key_blue"] = StaticText()
 		self["description"] = Label()
 		self["list"] = ChoiceList(list=[ChoiceEntryComponent('', ((_("Retrieving image list - Please wait...")), "Waiter"))])
 
@@ -71,16 +73,11 @@ class SelectImage(Screen):
 
 		self.callLater(self.getImagesList)
 
-	def getSelectedImageFeed(self, selectedImage):
-		for feed_info in self.url_feeds:
-			if feed_info.tag == "ImageFeed" and feed_info.attrib["name"] == selectedImage:
-				return feed_info.attrib
-
 	def getImagesList(self):
 
 		def getImages(path, files):
 			for file in files:
-				if os.path.splitext(file)[1] == ".zip" and model in file and (file.split(os.sep)[-1].startswith(self.selectedImage["name"].replace(" ","").lower()) or 'backup' in file.split(os.sep)[-1]):
+				if True:
 					try:
 						if checkimagefiles([x.split(os.sep)[-1] for x in zipfile.ZipFile(file).namelist()]):
 							imagetyp = _("Downloaded Images")
@@ -92,22 +89,35 @@ class SelectImage(Screen):
 					except:
 						pass
 
-		model = HardwareInfo().get_machine_name()
+		def checkModels(file):
+			for model in self.models:
+				if '-%s-' % model in file:
+					return True
+			return False
 
+		def conditional_sort(ls, f):
+			y = iter(sorted(w for w in ls if f(w)))
+			return [w if not f(w) else next(y) for w in ls]
+
+		if not self.imageBrandList:
+				url = "%s%s" % ("https://raw.githubusercontent.com/OpenPLi/FlashImage/main/", self.model)
+				try:
+					self.imageBrandList = dict(json.load(urlopen(url, timeout=3)))
+				except:
+					print("[FlashImage] getImageBrandList Error: Unable to load json data from URL '%s'!" % url)
+				if self.imageBrandList:
+					self.models = set([self.imageBrandList[image]['model'] for image in self.imageBrandList.keys()])
+					self["key_blue"].setText(_("Other Images"))
 		if not self.imagesList:
 			if not self.jsonlist:
-				if "model" in self.selectedImage:
-					for expression in eval(self.url_feeds.find(self.selectedImage["model"]).text):
-						model = re.sub(expression[0], expression[1], model)
-				url = "%s%s" % (self.selectedImage["url"], model)
 				try:
-					self.jsonlist = dict(json.load(urlopen(url, timeout=3)))
+					self.jsonlist = dict(json.load(urlopen(self.selectedImage[1]["url"], timeout=3)))
 				except:
-					print("[FlashImage] getImagesList Error: Unable to load json data from URL '%s'!" % url)
+					print("[FlashImage] getImagesList Error: Unable to load json data from URL '%s'!" % self.selectedImage["url"])
 				alternative_imagefeed = config.usage.alternative_imagefeed.value
 				if alternative_imagefeed:
 					if "http" in alternative_imagefeed:
-						url = "%s%s" % (config.usage.alternative_imagefeed.value, model)
+						url = "%s%s" % (config.usage.alternative_imagefeed.value, self.model)
 						try:
 							self.jsonlist.update(dict(json.load(urlopen(url, timeout=3))))
 						except:
@@ -117,19 +127,19 @@ class SelectImage(Screen):
 
 			for media in ['/media/%s' % x for x in os.listdir('/media')] + (['/media/net/%s' % x for x in os.listdir('/media/net')] if os.path.isdir('/media/net') else []):
 				try:
-					getImages(media, [os.path.join(media, x) for x in os.listdir(media) if os.path.splitext(x)[1] == ".zip" and model in x])
+					getImages(media, [os.path.join(media, x) for x in os.listdir(media) if os.path.splitext(x)[1] == ".zip" and checkModels(x)])
 					for folder in ["images", "downloaded_images", "imagebackups"]:
 						if folder in os.listdir(media):
 							subfolder = os.path.join(media, folder)
 							if os.path.isdir(subfolder) and not os.path.islink(subfolder) and not os.path.ismount(subfolder):
-								getImages(subfolder, [os.path.join(subfolder, x) for x in os.listdir(subfolder) if os.path.splitext(x)[1] == ".zip" and model in x])
+								getImages(subfolder, [os.path.join(subfolder, x) for x in os.listdir(subfolder) if os.path.splitext(x)[1] == ".zip" and checkModels(x)])
 								for dir in [dir for dir in [os.path.join(subfolder, dir) for dir in os.listdir(subfolder)] if os.path.isdir(dir) and os.path.splitext(dir)[1] == ".unzipped"]:
 									shutil.rmtree(dir)
 				except:
 					pass
 
 		list = []
-		for catagorie in reversed(sorted(self.imagesList.keys())):
+		for catagorie in conditional_sort(self.imagesList.keys(), lambda w: _("Downloaded Images") not in w and _("Fullbackup Images") not in w):
 			if catagorie in self.expanded:
 				list.append(ChoiceEntryComponent('expanded', ((str(catagorie)), "Expander")))
 				for image in reversed(sorted(self.imagesList[catagorie].keys())):
@@ -185,11 +195,12 @@ class SelectImage(Screen):
 			self.session.open(KexecInit)
 
 	def otherImages(self):
-		self.session.openWithCallback(self.otherImagesCallback, ChoiceBox, list=[(feedinfo.attrib["name"], feedinfo.attrib) for feedinfo in self.url_feeds if feedinfo.tag == "ImageFeed"], windowTitle=_("Select an image brand"))
+		if self.imageBrandList:
+			self.session.openWithCallback(self.otherImagesCallback, ChoiceBox, list=[(key, self.imageBrandList[key]) for key in self.imageBrandList.keys()] , windowTitle=_("Select an image brand"))
 
 	def otherImagesCallback(self, image):
 		if image:
-			self.selectedImage = image[1]
+			self.selectedImage = image
 			self["list"].setList([ChoiceEntryComponent('', ((_("Retrieving image list - Please wait...")), "Waiter"))])
 			self["list"].moveToIndex(0)
 			self.selectionChanged()
