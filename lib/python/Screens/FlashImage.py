@@ -77,17 +77,16 @@ class SelectImage(Screen):
 
 		def getImages(path, files):
 			for file in files:
-				if True:
-					try:
-						if checkimagefiles([x.split(os.sep)[-1] for x in zipfile.ZipFile(file).namelist()]):
-							imagetyp = _("Downloaded Images")
-							if 'backup' in file.split(os.sep)[-1]:
-								imagetyp = _("Fullbackup Images")
-							if imagetyp not in self.imagesList:
-								self.imagesList[imagetyp] = {}
-							self.imagesList[imagetyp][file] = {'link': file, 'name': file.split(os.sep)[-1]}
-					except:
-						pass
+				try:
+					if checkimagefiles([x.split(os.sep)[-1] for x in zipfile.ZipFile(file).namelist()]):
+						imagetyp = _("Downloaded Images")
+						if 'backup' in file.split(os.sep)[-1]:
+							imagetyp = _("Fullbackup Images")
+						if imagetyp not in self.imagesList:
+							self.imagesList[imagetyp] = {}
+						self.imagesList[imagetyp][file] = {'link': file, 'name': file.split(os.sep)[-1]}
+				except:
+					pass
 
 		def checkModels(file):
 			for model in self.models:
