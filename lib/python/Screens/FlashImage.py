@@ -95,7 +95,7 @@ class SelectImage(Screen):
 			return False
 
 		def conditional_sort(ls, f):
-			y = iter(sorted(w for w in ls if f(w)))
+			y = iter(reversed(sorted(w for w in ls if f(w))))
 			return [w if not f(w) else next(y) for w in ls]
 
 		if not self.imageBrandList:
