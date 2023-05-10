@@ -241,7 +241,7 @@ class SelectImage(Screen):
 
 
 class FlashImage(Screen):
-	skin = """<screen position="center,center" size="640,150" flags="wfNoBorder" backgroundColor="#54242424">
+	skin = """<screen position="center,center" size="640,180" flags="wfNoBorder" backgroundColor="#54242424">
 		<widget name="header" position="5,10" size="e-10,50" font="Regular;40" backgroundColor="#54242424"/>
 		<widget name="info" position="5,60" size="e-10,130" font="Regular;24" backgroundColor="#54242424"/>
 		<widget name="progress" position="5,e-39" size="e-10,24" backgroundColor="#54242424"/>
