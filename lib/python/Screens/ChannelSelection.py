@@ -1146,19 +1146,16 @@ class ChannelSelectionEdit:
 		self.mutableList = self.getMutableList()
 		# add all services from the current list to internal marked set in listboxservicecontent
 		self.clearMarks() # this clears the internal marked set in the listboxservicecontent
-		self.saved_title = self.getTitle()
-		pos = self.saved_title.find(')')
-		new_title = self.saved_title[:pos + 1]
 		if type == EDIT_ALTERNATIVES:
 			self.bouquet_mark_edit = EDIT_ALTERNATIVES
-			new_title += ' ' + _("[alternative edit]")
+			self.functiontitle = ' ' + _("[alternative edit]")
 		else:
 			self.bouquet_mark_edit = EDIT_BOUQUET
 			if config.usage.multibouquet.value:
-				new_title += ' ' + _("[bouquet edit]")
+				self.functiontitle = ' ' + _("[bouquet edit]")
 			else:
-				new_title += ' ' + _("[favourite edit]")
-		self.setTitle(new_title)
+				self.functiontitle = ' ' + _("[favourite edit]")
+		self.compileTitle()
 		self.__marked = self.servicelist.getRootServices()
 		for x in self.__marked:
 			self.servicelist.addMarked(eServiceReference(x))
@@ -1185,8 +1182,8 @@ class ChannelSelectionEdit:
 		self.clearMarks()
 		self.bouquet_mark_edit = OFF
 		self.mutableList = None
-		self.setTitle(self.saved_title)
-		self.saved_title = None
+		self.functiontitle = ""
+		self.compileTitle()
 		# self.servicePath is just a reference to servicePathTv or Radio...
 		# so we never ever do use the asignment operator in self.servicePath
 		del self.servicePath[:] # remove all elements
@@ -1263,7 +1260,8 @@ class ChannelSelectionEdit:
 			self.movemode = False
 			self.mutableList.flushChanges() # FIXME add check if changes was made
 			self.mutableList = None
-			self.setTitle(self.saved_title)
+			self.functiontitle = ""
+			self.compileTitle()
 			self.saved_title = None
 			self.servicelist.resetRoot()
 			self.servicelist.l.setHideNumberMarker(config.usage.hide_number_markers.value)
@@ -1273,8 +1271,8 @@ class ChannelSelectionEdit:
 			self.movemode = True
 			select and self.toggleMoveMarked()
 			self.saved_title = self.getTitle()
-			pos = self.saved_title.find(')')
-			self.setTitle(self.saved_title[:pos + 1] + ' ' + _("[move mode]") + self.saved_title[pos + 1:])
+			self.functiontitle = ' ' + _("[move mode]")
+			self.compileTitle()
 			self.servicelist.l.setHideNumberMarker(False)
 			self.setCurrentSelection(self.servicelist.getCurrent())
 		self["Service"].editmode = True
@@ -1380,7 +1378,13 @@ class ChannelSelectionBase(Screen):
 				"0": self.keyNumber0
 			}, -2)
 		self.maintitle = _("Channel selection")
+		self.modetitle = ""
+		self.servicetitle = ""
+		self.functiontitle = ""
 		self.recallBouquetMode()
+
+	def compileTitle(self):
+		self.setTitle("%s%s%s%s" % (self.maintitle, self.modetitle, self.functiontitle, self.servicetitle))
 
 	def getBouquetNumOffset(self, bouquet):
 		if not config.usage.multibouquet.value:
@@ -1420,23 +1424,15 @@ class ChannelSelectionBase(Screen):
 		self.mode = MODE_TV
 		self.servicePath = self.servicePathTV
 		self.recallBouquetMode()
-		title = self.maintitle
-		pos = title.find(" (")
-		if pos != -1:
-			title = title[:pos]
-		title += _(" (TV)")
-		self.setTitle(title)
+		self.modetitle = _(" (TV)")
+		self.compileTitle()
 
 	def setRadioMode(self):
 		self.mode = MODE_RADIO
 		self.servicePath = self.servicePathRadio
 		self.recallBouquetMode()
-		title = self.maintitle
-		pos = title.find(" (")
-		if pos != -1:
-			title = title[:pos]
-		title += _(" (Radio)")
-		self.setTitle(title)
+		self.modetitle = _(" (Radio)")
+		self.compileTitle()
 
 	def setRoot(self, root, justSet=False):
 		if self.startRoot is None:
@@ -1476,29 +1472,16 @@ class ChannelSelectionBase(Screen):
 		return str
 
 	def buildTitleString(self):
-		titleStr = self.getTitle()
-		pos = titleStr.find(']')
-		if pos == -1:
-			pos = titleStr.find(')')
-		if pos != -1:
-			titleStr = titleStr[:pos + 1]
-			Len = len(self.servicePath)
-			if Len > 0:
-				base_ref = self.servicePath[0]
-				if Len > 1:
-					end_ref = self.servicePath[Len - 1]
-				else:
-					end_ref = None
-				nameStr = self.getServiceName(base_ref)
-				titleStr += ' - ' + nameStr
-				if end_ref is not None:
-					if Len > 2:
-						titleStr += '/../'
-					else:
-						titleStr += '/'
-					nameStr = self.getServiceName(end_ref)
-					titleStr += nameStr
-				self.setTitle(titleStr)
+		self.servicetitle = ""
+		pathlen = len(self.servicePath)
+		if pathlen > 0:
+			self.servicetitle = " - %s" % self.getServiceName(self.servicePath[0])
+			if pathlen > 1:
+				self.servicetitle += '/'
+				if pathlen > 2:
+					self.servicetitle += '../'
+				self.servicetitle += self.getServiceName(self.servicePath[pathlen - 1])
+		self.compileTitle()
 
 	def moveUp(self):
 		self.servicelist.moveUp()
@@ -2099,10 +2082,6 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 
 	def togglePipzap(self):
 		assert(self.session.pip)
-		title = self.instance.getTitle()
-		pos = title.find(" (")
-		if pos != -1:
-			title = title[:pos]
 		if self.dopipzap:
 			# Mark PiP as inactive and effectively deactivate pipzap
 			self.hidePipzapMessage()
@@ -2123,7 +2102,7 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 				if self.getCurrentSelection() != lastservice:
 					self.servicelist.setCurrent(lastservice)
 
-			title += _(" (TV)")
+			self.modetitle = _(" (TV)")
 		else:
 			# Mark PiP as active and effectively active pipzap
 			self.showPipzapMessage()
@@ -2131,9 +2110,7 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 			self.__evServiceStart()
 			# Move to service playing in pip (will not work with subservices)
 			self.setCurrentSelection(self.session.pip.getCurrentService())
-
-			title += _(" (PiP)")
-		self.setTitle(title)
+			self.modetitle = _(" (PiP)")
 		self.buildTitleString()
 
 	def showPipzapMessage(self):
@@ -2433,13 +2410,8 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 			elif tmp_mode == "radio":
 				self.setModeRadio()
 			self.enterUserbouquet(tmp_root)
-			title = self.instance.getTitle()
-			pos = title.find(" (")
-			if pos != -1:
-				title = title[:pos]
-				title += _(" (PiP)")
-				self.setTitle(title)
-				self.buildTitleString()
+			self.modetitle = _(" (PiP)")
+			self.buildTitleString()
 			if tmp_ref and pip_ref and tmp_ref.getChannelNum() != pip_ref.getChannelNum():
 				self.session.pip.currentService = tmp_ref
 			self.setCurrentSelection(tmp_ref)
