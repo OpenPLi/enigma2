@@ -1477,7 +1477,9 @@ class ChannelSelectionBase(Screen):
 
 	def buildTitleString(self):
 		titleStr = self.getTitle()
-		pos = titleStr.find(')')
+		pos = titleStr.find(']')
+		if pos == -1:
+			pos = titleStr.find(')')
 		if pos != -1:
 			titleStr = titleStr[:pos + 1]
 			Len = len(self.servicePath)
