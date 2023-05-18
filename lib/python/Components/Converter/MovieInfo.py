@@ -38,7 +38,7 @@ class MovieInfo(Converter):
 		info = self.source.info
 		event = self.source.event
 		if info and service:
-			isDirectory = (service.flags & eServiceReference.flagDirectory) == eServiceReference.flagDirectory
+			isDirectory = bool(service.flags & eServiceReference.flagDirectory)
 			if self.type == self.MOVIE_SHORT_DESCRIPTION:
 				if isDirectory:
 					# Short description for Directory is the full path
