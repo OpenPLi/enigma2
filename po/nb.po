@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-16 18:05+0200\n"
+"POT-Creation-Date: 2023-05-24 16:50+0200\n"
 "PO-Revision-Date: 2023-01-01 16:49+0100\n"
 "Last-Translator: GeirJ <dummy@dummy.com>\n"
 "Language-Team: GeirJ\n"
@@ -1736,7 +1736,8 @@ msgstr "Kan ikke fastslå"
 msgid "Cannot find any signal ..., aborting !"
 msgstr "Finner ikke signal..., avbryter!"
 
-msgid "Cannot find images - please try later"
+#, fuzzy
+msgid "Cannot find images - please try later or select an alternate image"
 msgstr "Finner ikke images - vennligst forsøk senere"
 
 msgid "Cannot move files on a different disk or system to the trash can"
@@ -3327,6 +3328,12 @@ msgid_plural "Done - Installed, updated or removed %d packages (%s)"
 msgstr[0] "Ferdig - Installert, oppdatert eller slettet %d pakke (%s)"
 msgstr[1] "Ferdig - Installert, oppdatert eller slettet %d pakker (%s)"
 
+#, python-format
+msgid ""
+"Download Successsful\n"
+"%s"
+msgstr ""
+
 #
 msgid "Download plugins"
 msgstr "Last ned utvidelser"
@@ -3500,9 +3507,6 @@ msgstr "Aktiver EIT EPG"
 
 msgid "Enable HDMI-CEC"
 msgstr "Aktiver HDMI-CEC"
-
-msgid "Enable Kexec MultiBoot"
-msgstr ""
 
 msgid "Enable MHW EPG"
 msgstr "Aktiver MHW EPG"
@@ -5016,6 +5020,11 @@ msgstr "Oppstart"
 msgid "Initialize"
 msgstr "Igangsetting"
 
+#
+#, fuzzy
+msgid "Initialize Multiboot"
+msgstr "Oppstart"
+
 msgid "Initializing storage device..."
 msgstr "Igangsetter lagringsenhet ..."
 
@@ -6274,6 +6283,9 @@ msgstr "Nei, unntatt vekke timer"
 msgid "No, never"
 msgstr "Nei, aldri"
 
+msgid "No, only download"
+msgstr ""
+
 #
 msgid "None"
 msgstr "Ingen"
@@ -6496,6 +6508,11 @@ msgstr "Original lyd"
 
 msgid "Other"
 msgstr "Annen"
+
+#
+#, fuzzy
+msgid "Other Images"
+msgstr "Slett operativsystemet"
 
 msgid "Other Subtitles & lang"
 msgstr "Andre undertekster & språk"
@@ -7580,6 +7597,10 @@ msgstr "Restart"
 msgid "Reload blacklists"
 msgstr "Last om svartelister"
 
+#, fuzzy
+msgid "Reload services/bouquets list"
+msgstr "Legg til denne kanal i kanalliste"
+
 msgid "Reloading bouquets and services..."
 msgstr "Restarter kanallister..."
 
@@ -8353,6 +8374,10 @@ msgstr "Velg handling for timer'%s'."
 #
 msgid "Select all"
 msgstr "Velg alt"
+
+#, fuzzy
+msgid "Select an image brand"
+msgstr "Velg operativsystem"
 
 #
 msgid "Select audio track"
@@ -10185,6 +10210,9 @@ msgstr "Resultatene har blitt skrevet til %s"
 
 msgid "The saved PIN was cleared."
 msgstr "Den lagrede PIN koden ble godkjent."
+
+msgid "The services/bouquets list is reloaded!"
+msgstr ""
 
 #
 msgid "The sleep timer has been activated."

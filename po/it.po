@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPLi-enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-16 18:05+0200\n"
+"POT-Creation-Date: 2023-05-24 16:50+0200\n"
 "PO-Revision-Date: 2020-05-16 18:46+0200\n"
 "Last-Translator: Gringo <openpli@tiscali.it>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -1585,7 +1585,8 @@ msgstr "Impossibile determinare"
 msgid "Cannot find any signal ..., aborting !"
 msgstr "Nessun segnale rilevato, operazione annullata!"
 
-msgid "Cannot find images - please try later"
+#, fuzzy
+msgid "Cannot find images - please try later or select an alternate image"
 msgstr "Immagini non trovate. Riprovare più tardi"
 
 msgid "Cannot move files on a different disk or system to the trash can"
@@ -3039,6 +3040,12 @@ msgid_plural "Done - Installed, updated or removed %d packages (%s)"
 msgstr[0] "Completato. Installato, aggiornato o rimosso %d pacchetto (%s)"
 msgstr[1] "Completato. Installati, aggiornati o rimossi %d pacchetti (%s)"
 
+#, python-format
+msgid ""
+"Download Successsful\n"
+"%s"
+msgstr ""
+
 msgid "Download plugins"
 msgstr "Scaricare plugin"
 
@@ -3199,9 +3206,6 @@ msgstr "Abilitare l'EPG EIT"
 
 msgid "Enable HDMI-CEC"
 msgstr "Abilitare HDMI-CEC"
-
-msgid "Enable Kexec MultiBoot"
-msgstr ""
 
 msgid "Enable MHW EPG"
 msgstr "Abilitare l'EPG MHW"
@@ -4607,6 +4611,10 @@ msgstr "Inizializzazione"
 msgid "Initialize"
 msgstr "Inizializzare"
 
+#, fuzzy
+msgid "Initialize Multiboot"
+msgstr "Inizializzazione"
+
 msgid "Initializing storage device..."
 msgstr "Inizializzazione del dispositivo di archiviazione in corso..."
 
@@ -5728,6 +5736,9 @@ msgstr "No, eccetto per il timer di riattivazione"
 msgid "No, never"
 msgstr "No, mai"
 
+msgid "No, only download"
+msgstr ""
+
 msgid "None"
 msgstr "Nessuno"
 
@@ -5935,6 +5946,10 @@ msgstr "Originale"
 
 msgid "Other"
 msgstr "Altro"
+
+#, fuzzy
+msgid "Other Images"
+msgstr "Eliminare l'immagine"
 
 msgid "Other Subtitles & lang"
 msgstr "Altri sottotitoli e lingua"
@@ -6899,6 +6914,10 @@ msgstr "Ricaricare"
 msgid "Reload blacklists"
 msgstr "Ricaricare la lista vietati"
 
+#, fuzzy
+msgid "Reload services/bouquets list"
+msgstr "Aggiungere il canale al bouquet"
+
 msgid "Reloading bouquets and services..."
 msgstr "Ricarica dei bouquet e canali in corso..."
 
@@ -7596,6 +7615,10 @@ msgstr "Selezionare un'attività per il timer '%s'."
 
 msgid "Select all"
 msgstr "Selezionare tutto"
+
+#, fuzzy
+msgid "Select an image brand"
+msgstr "Eliminare l'immagine"
 
 msgid "Select audio track"
 msgstr "Selezionare una traccia audio"
@@ -9278,6 +9301,9 @@ msgstr "I risultati sono stati salvati su %s"
 
 msgid "The saved PIN was cleared."
 msgstr "Il PIN memorizzato è stato eliminato."
+
+msgid "The services/bouquets list is reloaded!"
+msgstr ""
 
 msgid "The sleep timer has been activated."
 msgstr "Il timer di spegnimento è attivo."
