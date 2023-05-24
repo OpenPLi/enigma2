@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-16 18:05+0200\n"
+"POT-Creation-Date: 2023-05-24 16:50+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: IMS <ims@openpli.org>\n"
 "Language-Team: PLi <ims@openpli.org>\n"
@@ -1805,7 +1805,8 @@ msgstr "Nelze určit"
 msgid "Cannot find any signal ..., aborting !"
 msgstr "Nelze najít žádný signál..., ukončuje se!"
 
-msgid "Cannot find images - please try later"
+#, fuzzy
+msgid "Cannot find images - please try later or select an alternate image"
 msgstr "Nelze najít image - zkuste to později"
 
 msgid "Cannot move files on a different disk or system to the trash can"
@@ -3458,6 +3459,12 @@ msgstr[0] "Dokončeno - instalován, aktualizován nebo odstraněn %d balíček 
 msgstr[1] "Dokončeno - instalovány, aktualizovány nebo odstraněny %d balíčky (%s)"
 msgstr[2] "Dokončeno - instalováno, aktualizováno nebo odstraněno %d balíčků (%s)"
 
+#, python-format
+msgid ""
+"Download Successsful\n"
+"%s"
+msgstr ""
+
 #
 msgid "Download plugins"
 msgstr "Stáhnout pluginy"
@@ -3642,9 +3649,6 @@ msgstr "Povolit EIT EPG"
 #
 msgid "Enable HDMI-CEC"
 msgstr "Povolit HDMI-CEC"
-
-msgid "Enable Kexec MultiBoot"
-msgstr "Povolit Kexec MultiBoot"
 
 #
 msgid "Enable MHW EPG"
@@ -5183,6 +5187,11 @@ msgid "Initialize"
 msgstr "Inicializovat"
 
 #
+#, fuzzy
+msgid "Initialize Multiboot"
+msgstr "Inicializace"
+
+#
 msgid "Initializing storage device..."
 msgstr "Inicializuje se zařízení pro ukládání..."
 
@@ -6478,11 +6487,11 @@ msgstr "Nenahrávat image"
 msgid "No, except Wakeup timer"
 msgstr "Ne, kromě časovače probouzení"
 
-msgid "No, only download"
-msgstr "Ne, pouze stáhnout"
-
 msgid "No, never"
 msgstr "Ne, nikdy"
+
+msgid "No, only download"
+msgstr "Ne, pouze stáhnout"
 
 #
 msgid "None"
@@ -6715,6 +6724,10 @@ msgstr "původní zvuk"
 
 msgid "Other"
 msgstr "Další"
+
+#, fuzzy
+msgid "Other Images"
+msgstr "Odstranit image"
 
 msgid "Other Subtitles & lang"
 msgstr "Ostatní titulky a jazyky"
@@ -7857,6 +7870,11 @@ msgstr "Znovu načíst"
 msgid "Reload blacklists"
 msgstr "  Znovu načíst blacklisty"
 
+#
+#, fuzzy
+msgid "Reload services/bouquets list"
+msgstr "Přidat program do přehledu"
+
 msgid "Reloading bouquets and services..."
 msgstr "Obnovuji přehledy a programy..."
 
@@ -8666,6 +8684,10 @@ msgstr "Zvolte akci pro časovač '%s'."
 #
 msgid "Select all"
 msgstr "Vybrat vše"
+
+#, fuzzy
+msgid "Select an image brand"
+msgstr "Výběr image"
 
 #
 msgid "Select audio track"
@@ -10551,6 +10573,9 @@ msgstr "Výsledky byly zapsány do %s"
 
 msgid "The saved PIN was cleared."
 msgstr "Uložený PIN byl vymazán."
+
+msgid "The services/bouquets list is reloaded!"
+msgstr ""
 
 msgid "The sleep timer has been activated."
 msgstr "Časovač vypnutí byl aktivován."

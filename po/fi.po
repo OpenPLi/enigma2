@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-16 18:05+0200\n"
+"POT-Creation-Date: 2023-05-24 16:50+0200\n"
 "PO-Revision-Date: 2020-05-16 18:41+0200\n"
 "Last-Translator: jamu\n"
 "Language-Team: BoxFreak/jamu\n"
@@ -1739,7 +1739,8 @@ msgstr "Ei voida määrittää"
 msgid "Cannot find any signal ..., aborting !"
 msgstr "Signaalia ei löydy... keskeytetään!"
 
-msgid "Cannot find images - please try later"
+#, fuzzy
+msgid "Cannot find images - please try later or select an alternate image"
 msgstr "Ohjelmistokuvia ei löytynyt - yritä myöhemmin uudestaan"
 
 msgid "Cannot move files on a different disk or system to the trash can"
@@ -3362,6 +3363,12 @@ msgid_plural "Done - Installed, updated or removed %d packages (%s)"
 msgstr[0] "Valmis - asennettu, päivitetty tai poistettu %d ohjelmapaketti (%s)"
 msgstr[1] "Valmis - asennettu, päivitetty tai poistettu %d ohjelmapakettia (%s)"
 
+#, python-format
+msgid ""
+"Download Successsful\n"
+"%s"
+msgstr ""
+
 msgid "Download plugins"
 msgstr "Lataa lisäosia"
 
@@ -3545,9 +3552,6 @@ msgstr "Ota käyttöön EIT EPG"
 
 msgid "Enable HDMI-CEC"
 msgstr "Ota käyttöön HDMI-CEC"
-
-msgid "Enable Kexec MultiBoot"
-msgstr ""
 
 msgid "Enable MHW EPG"
 msgstr "Ota käyttöön MHW EPG"
@@ -5061,6 +5065,10 @@ msgstr "Alustus"
 msgid "Initialize"
 msgstr "Alusta"
 
+#, fuzzy
+msgid "Initialize Multiboot"
+msgstr "Alustus"
+
 msgid "Initializing storage device..."
 msgstr "Alustetaan tallennuslaitetta..."
 
@@ -6356,6 +6364,9 @@ msgstr "Ei, paitsi ajastetusta herätyksestä"
 msgid "No, never"
 msgstr "Ei koskaan"
 
+msgid "No, only download"
+msgstr ""
+
 #
 msgid "None"
 msgstr "Ei valintaa"
@@ -6584,6 +6595,11 @@ msgstr "Alkuperäinen"
 
 msgid "Other"
 msgstr "Muu"
+
+#
+#, fuzzy
+msgid "Other Images"
+msgstr "Poista ohjelmistokuva"
 
 msgid "Other Subtitles & lang"
 msgstr ""
@@ -7700,6 +7716,11 @@ msgstr "Päivitä"
 msgid "Reload blacklists"
 msgstr "Lataa estolistat uudestaan"
 
+#
+#, fuzzy
+msgid "Reload services/bouquets list"
+msgstr "Lisää kanava suosikkilistalle"
+
 msgid "Reloading bouquets and services..."
 msgstr "Päivitetään suosikkilistoja ja kanavia..."
 
@@ -8495,6 +8516,11 @@ msgstr ""
 #
 msgid "Select all"
 msgstr "Valitse kaikki"
+
+#
+#, fuzzy
+msgid "Select an image brand"
+msgstr "Poista ohjelmistokuva"
 
 #
 msgid "Select audio track"
@@ -10384,6 +10410,9 @@ msgstr ""
 
 msgid "The saved PIN was cleared."
 msgstr "PIN-koodi poistettu"
+
+msgid "The services/bouquets list is reloaded!"
+msgstr ""
 
 #
 msgid "The sleep timer has been activated."

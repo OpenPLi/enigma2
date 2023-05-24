@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-16 18:05+0200\n"
+"POT-Creation-Date: 2023-05-24 16:50+0200\n"
 "PO-Revision-Date: 2022-10-13 18:38+0200\n"
 "Last-Translator: Oriol Pellicer <oriol@elsud.org>\n"
 "Language-Team: angelodos angelo2807@hotmail.com\n"
@@ -1746,7 +1746,8 @@ msgstr "No es pot determinar"
 msgid "Cannot find any signal ..., aborting !"
 msgstr "No trobem cap senyal … avortant!"
 
-msgid "Cannot find images - please try later"
+#, fuzzy
+msgid "Cannot find images - please try later or select an alternate image"
 msgstr "No es poden trobar imatges. Proveu més endavant"
 
 msgid "Cannot move files on a different disk or system to the trash can"
@@ -3343,6 +3344,12 @@ msgid_plural "Done - Installed, updated or removed %d packages (%s)"
 msgstr[0] "Fet: s’ha instal·lat, actualitzat o eliminat %d paquet (%s)"
 msgstr[1] "Fet: s’ha instal·lat, actualitzat o eliminat %d paquets (%s)"
 
+#, python-format
+msgid ""
+"Download Successsful\n"
+"%s"
+msgstr ""
+
 #
 msgid "Download plugins"
 msgstr "Descarrega plugins"
@@ -3523,9 +3530,6 @@ msgstr "Activa EIT EPG"
 
 msgid "Enable HDMI-CEC"
 msgstr "Activa HDMI-CEC"
-
-msgid "Enable Kexec MultiBoot"
-msgstr ""
 
 msgid "Enable MHW EPG"
 msgstr "Activa MHW EPG"
@@ -5031,6 +5035,11 @@ msgstr "Inicialització"
 msgid "Initialize"
 msgstr "Inicialitzar"
 
+#
+#, fuzzy
+msgid "Initialize Multiboot"
+msgstr "Inicialització"
+
 msgid "Initializing storage device..."
 msgstr "Inicialitzant el dispositiu d’emmagatzematge …"
 
@@ -6289,6 +6298,9 @@ msgstr "No, excepte el temporitzador de despertador"
 msgid "No, never"
 msgstr "No, mai"
 
+msgid "No, only download"
+msgstr ""
+
 #
 msgid "None"
 msgstr "Cap"
@@ -6513,6 +6525,11 @@ msgstr "Àudio original"
 
 msgid "Other"
 msgstr "Altres"
+
+#
+#, fuzzy
+msgid "Other Images"
+msgstr "Ha fallat l’eliminació"
 
 msgid "Other Subtitles & lang"
 msgstr "Altres subtítols & lang"
@@ -7612,6 +7629,11 @@ msgstr "Recarrega"
 msgid "Reload blacklists"
 msgstr "Recarregar llistes negres"
 
+#
+#, fuzzy
+msgid "Reload services/bouquets list"
+msgstr "Afegir el canal a la llista"
+
 msgid "Reloading bouquets and services..."
 msgstr "Recarregar Bouquets i serveis..."
 
@@ -8410,6 +8432,11 @@ msgstr "Seleccioneu l’acció per al temporitzador “%s”."
 
 msgid "Select all"
 msgstr "Selecciona-ho tot"
+
+#
+#, fuzzy
+msgid "Select an image brand"
+msgstr "Selecciona una imatge"
 
 #
 msgid "Select audio track"
@@ -10236,6 +10263,9 @@ msgstr "Els resultats s’han escrit a %s"
 
 msgid "The saved PIN was cleared."
 msgstr "S’ha esborrat el PIN desat."
+
+msgid "The services/bouquets list is reloaded!"
+msgstr ""
 
 #
 msgid "The sleep timer has been activated."
