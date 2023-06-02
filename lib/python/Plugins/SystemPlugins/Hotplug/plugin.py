@@ -92,6 +92,7 @@ class Hotplug(Protocol):
 			v[var] = val
 		processHotplugData(self, v)
 
+
 class OpkgInstaller(Screen):
 	skin = """
 		<screen name="OpkgInstaller" position="center,center" size="550,450" title="Install extensions" >
@@ -146,9 +147,11 @@ class OpkgInstaller(Screen):
 			cmdList.append((OpkgComponent.CMD_INSTALL, {"package": item[1]}))
 		self.session.open(Opkg, cmdList=cmdList)
 
+
 def filescan_open(list, session, **kwargs):
 	filelist = [x.path for x in list]
 	session.open(OpkgInstaller, filelist) # list
+
 
 def autostart(reason, **kwargs):
 	if reason == 0:
@@ -162,6 +165,7 @@ def autostart(reason, **kwargs):
 		except (OSError, error.CannotListenError) as err:
 			print("[Hotplug]", err)
 
+
 def filescan(**kwargs):
 	from Components.Scanner import Scanner, ScanPath
 	return \
@@ -173,6 +177,7 @@ def filescan(**kwargs):
 			name="Opkg",
 			description=_("Install extensions"),
 			openfnc=filescan_open, )
+
 
 def Plugins(**kwargs):
 	return [PluginDescriptor(name=_("Hotplug"), description=_("listens to hotplug events"), where=PluginDescriptor.WHERE_AUTOSTART, needsRestart=True, fnc=autostart),

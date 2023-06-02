@@ -1754,6 +1754,7 @@ class PacketManager(Screen, NumericalTextInput):
 	def reloadPluginlist(self):
 		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 
+
 def UpgradeMain(session, **kwargs):
 	session.open(UpdatePluginMenu)
 

@@ -12,7 +12,6 @@ class VariableValue:
 		if self.instance:
 			self.instance.setValue(self.__value)
 
-
 	def getValue(self):
 		return self.__value
 

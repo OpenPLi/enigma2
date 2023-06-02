@@ -18,6 +18,7 @@ supportfiles = ('lamedb', 'blacklist', 'whitelist', 'alternatives.')
 
 e2path = "/etc/enigma2"
 
+
 class ImportChannels:
 
 	def __init__(self):
@@ -85,6 +86,7 @@ class ImportChannels:
 	"""
 	Enumerate all the files that make up the bouquet system, either local or on a remote machine
 	"""
+
 	def ImportGetFilelist(self, remote=False, *files):
 		result = []
 		for file in files:
