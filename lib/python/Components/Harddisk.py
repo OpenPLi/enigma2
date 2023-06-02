@@ -629,7 +629,7 @@ class HarddiskManager:
 			if os.path.exists(devpath + "/removable"):
 				removable = bool(int(readFile(devpath + "/removable")))
 			if os.path.exists(devpath + "/uevent"):
-				uevent = {k.lower():v.strip() for k, v in (l.split('=') for l in open(devpath + "/uevent"))}
+				uevent = {k.lower(): v.strip() for k, v in (l.split('=') for l in open(devpath + "/uevent"))}
 				dev = int(uevent['major'])
 				subdev = False if uevent['devtype'] == "disk" else True
 			else:

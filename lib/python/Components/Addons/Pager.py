@@ -112,7 +112,7 @@ class Pager(GUIAddon):
 			if not ((self.source.TotalTextHeight - self.source.curPos) % self.source.pageHeight):
 				currentPageIndex += 1
 			pagesCount = -(-self.source.TotalTextHeight // self.source.pageHeight) - 1
-			self.selChange(currentPageIndex,pagesCount)
+			self.selChange(currentPageIndex, pagesCount)
 		else:
 			l_orientation = self.getSourceOrientation()
 			if l_orientation == eListbox.orVertical:
@@ -131,7 +131,7 @@ class Pager(GUIAddon):
 				if items_per_page > 0:
 					currentPageIndex = current_index // items_per_page
 					pagesCount = -(listCount // -items_per_page) - 1
-					self.selChange(currentPageIndex,pagesCount)
+					self.selChange(currentPageIndex, pagesCount)
 
 	def applySkin(self, desktop, parent):
 		attribs = []

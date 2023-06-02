@@ -149,7 +149,7 @@ class PowerOffTimerPoller:
 				poweroff_time = int(mktime((now.tm_year, now.tm_mon, now.tm_mday, config.usage.poweroff_time[current_day].value[0], config.usage.poweroff_time[current_day].value[1], 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
 				if poweroff_time > time() and nextday_time > poweroff_time:
 					return 0, poweroff_time, nextday_time
-			for i in range(1,8):
+			for i in range(1, 8):
 				if config.usage.poweroff_day[(current_day + i) % 7].value:
 					nextday_time = (int(mktime((now.tm_year, now.tm_mon, now.tm_mday, config.usage.poweroff_nextday.value[0], config.usage.poweroff_nextday.value[1], 0, now.tm_wday, now.tm_yday, now.tm_isdst)))) + 86400 + (86400 * i)
 					poweroff_time = int(mktime((now.tm_year, now.tm_mon, now.tm_mday, config.usage.poweroff_time[(current_day + i) % 7].value[0], config.usage.poweroff_time[(current_day + i) % 7].value[1], 0, now.tm_wday, now.tm_yday, now.tm_isdst)))

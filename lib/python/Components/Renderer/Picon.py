@@ -112,7 +112,7 @@ class Picon(Renderer):
 		self.usePicLoad = False
 		self.PicLoad = ePicLoad()
 		self.PicLoad.PictureData.get().append(self.updatePicon)
-		self.piconsize = (0,0)
+		self.piconsize = (0, 0)
 		self.pngname = ""
 		self.service_text = ""
 		self.lastPath = None
