@@ -198,7 +198,7 @@ class SelectImage(Screen):
 
 	def otherImages(self):
 		if len(self.imageBrandList) > 1:
-			self.session.openWithCallback(self.otherImagesCallback, ChoiceBox, list=[(key, self.imageBrandList[key]) for key in self.imageBrandList.keys()] , windowTitle=_("Select an image brand"))
+			self.session.openWithCallback(self.otherImagesCallback, ChoiceBox, list=[(key, self.imageBrandList[key]) for key in self.imageBrandList.keys()], windowTitle=_("Select an image brand"))
 
 	def otherImagesCallback(self, image):
 		if image:

@@ -42,7 +42,7 @@ class Pager(GUIAddon):
 			pixd_height = pixd_size.height()
 			width_dots = pixd_width + (pixd_width + self.spacing)*pageCount
 			xPos = (width - width_dots)/2 - pixd_width/2 if self.showIcons == "showAll" else 0
-		res = [ None ]
+		res = [None]
 		if pageCount > (0 if self.showIcons == "showAll" else -1):
 			pages = list(range(pageCount + 1))
 			# add option to show just first or last icon
@@ -134,7 +134,7 @@ class Pager(GUIAddon):
 					self.selChange(currentPageIndex,pagesCount)
 
 	def applySkin(self, desktop, parent):
-		attribs = [ ]
+		attribs = []
 		for (attrib, value) in self.skinAttributes[:]:
 			if attrib == "picPage":
 				pic = LoadPixmap(resolveFilename(SCOPE_GUISKIN, value))

@@ -4,7 +4,7 @@
 # some broadcaster do define other types so this list
 # may grow or be replaced..
 #
-maintype = [	_("Reserved"),
+maintype = [_("Reserved"),
 		_("Drama and Films"),
 		_("News/Current Affairs/Social"),
 		_("Show/Game Show/Leisure hobbies"),

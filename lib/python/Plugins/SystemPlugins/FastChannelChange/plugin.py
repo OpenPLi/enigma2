@@ -23,7 +23,7 @@ config.plugins.fccsetup.activate = ConfigYesNo(default=False)
 config.plugins.fccsetup.maxfcc = ConfigSelection(default=str(g_default_fcc), choices=list((str(n), str(n)) for n in range(2, g_max_fcc+1)))
 config.plugins.fccsetup.zapupdown = ConfigYesNo(default=True)
 config.plugins.fccsetup.history = ConfigYesNo(default=False)
-config.plugins.fccsetup.priority = ConfigSelection(default="zapupdown", choices={ "zapupdown" : _("Zap Up/Down"), "historynextback" : _("History Prev/Next") })
+config.plugins.fccsetup.priority = ConfigSelection(default="zapupdown", choices={"zapupdown": _("Zap Up/Down"), "historynextback": _("History Prev/Next")})
 config.plugins.fccsetup.disableforrec = ConfigYesNo(default=True)
 config.plugins.fccsetup.extensions = ConfigYesNo(default=False)
 
@@ -259,7 +259,7 @@ class FCCSupport:
 		serviceRefList = []
 		for idx in range(len(serviceList)):
 			sref = serviceList[idx].toString()
-			if (sref.split(':')[1] == '0') and self.isPlayableFCC(sref) : # remove marker
+			if (sref.split(':')[1] == '0') and self.isPlayableFCC(sref): # remove marker
 				serviceRefList.append(sref)
 
 		if curServiceRef in serviceRefList:
@@ -408,7 +408,7 @@ class FCCSupport:
 		fccServiceList = self.fccmgr.getFCCServiceList()
 		for (sref, value) in fccServiceList.items():
 			state = value[0]
-			if state != 1 : # 1  : fcc_state_decoding
+			if state != 1: # 1  : fcc_state_decoding
 				self.fccmgr.stopFCCService(eServiceReference(sref))
 
 	def FCCDisableServices(self):
@@ -456,7 +456,7 @@ class FCCSetup(Screen, ConfigListScreen):
 		self.title = _("Fast Channel Change Setup")
 		self.skinName = ["FCCSetup", "Setup"]
 		self.session = session
-		self["shortcuts"] = ActionMap(["ShortcutActions", "SetupActions" ],
+		self["shortcuts"] = ActionMap(["ShortcutActions", "SetupActions"],
 		{
 			"ok": self.keySave,
 			"cancel": self.keyCancel,
@@ -488,15 +488,15 @@ class FCCSetup(Screen, ConfigListScreen):
 
 	def createSetup(self):
 		self.list = []
-		self.list.append( self.enableEntry )
+		self.list.append(self.enableEntry)
 		if self.enableEntry[1].value:
-			self.list.append( self.fccmaxEntry )
-			self.list.append( self.zapupdownEntry )
-			self.list.append( self.historyEntry )
+			self.list.append(self.fccmaxEntry)
+			self.list.append(self.zapupdownEntry)
+			self.list.append(self.historyEntry)
 			if self.zapupdownEntry[1].value and self.historyEntry[1].value:
-				self.list.append( self.priorityEntry )
+				self.list.append(self.priorityEntry)
 			self.list.append(self.recEntry)
-		self.list.append( self.extEntry )
+		self.list.append(self.extEntry)
 
 		self["config"].list = self.list
 

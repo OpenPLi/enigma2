@@ -111,7 +111,7 @@ class Listbox(Renderer):
 			self.instance.entryChanged(index)
 			
 	def applySkin(self, desktop, parent):
-		attribs = [ ]
+		attribs = []
 		for (attrib, value) in self.skinAttributes[:]:
 			if attrib == "selectionFrame":
 				if value == "none":
