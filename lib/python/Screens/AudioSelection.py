@@ -12,7 +12,7 @@ from Components.Sources.List import List
 from Components.Sources.Boolean import Boolean
 from Components.SystemInfo import SystemInfo
 from Components.VolumeControl import VolumeControl
-from  Components.UsageConfig import originalAudioTracks, visuallyImpairedCommentary
+from Components.UsageConfig import originalAudioTracks, visuallyImpairedCommentary
 from Tools.ISO639 import LanguageCodes
 
 from enigma import iPlayableService, eTimer, eSize, eDVBDB, eServiceReference, eServiceCenter, iServiceInformation

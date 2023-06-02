@@ -453,7 +453,7 @@ def InitAVSwitch():
 	if SystemInfo["HasColorimetry"]:
 		def setColorimetry(configElement):
 			open(SystemInfo["HasColorimetry"], "w").write(configElement.value)
-		choices=[("auto", "auto"), ("bt2020ncl", "BT 2020 NCL"), ("bt2020cl", "BT 2020 CL"), ("bt709", "BT 709")]
+		choices = [("auto", "auto"), ("bt2020ncl", "BT 2020 NCL"), ("bt2020cl", "BT 2020 CL"), ("bt709", "BT 709")]
 		default = "auto"
 		f = "/proc/stb/video/hdmi_colorimetry_choices"
 		if os.path.exists(f):

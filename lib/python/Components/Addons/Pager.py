@@ -40,8 +40,8 @@ class Pager(GUIAddon):
 			pixd_size = self.picDotPage.size()
 			pixd_width = pixd_size.width()
 			pixd_height = pixd_size.height()
-			width_dots = pixd_width + (pixd_width + self.spacing)*pageCount
-			xPos = (width - width_dots)/2 - pixd_width/2 if self.showIcons == "showAll" else 0
+			width_dots = pixd_width + (pixd_width + self.spacing) * pageCount
+			xPos = (width - width_dots) / 2 - pixd_width / 2 if self.showIcons == "showAll" else 0
 		res = [None]
 		if pageCount > (0 if self.showIcons == "showAll" else -1):
 			pages = list(range(pageCount + 1))
@@ -108,10 +108,10 @@ class Pager(GUIAddon):
 	
 	def initPager(self):
 		if self.source.__class__.__name__ == "ScrollLabel":
-			currentPageIndex = self.source.curPos//self.source.pageHeight
+			currentPageIndex = self.source.curPos // self.source.pageHeight
 			if not ((self.source.TotalTextHeight - self.source.curPos) % self.source.pageHeight):
 				currentPageIndex += 1
-			pagesCount = -(-self.source.TotalTextHeight//self.source.pageHeight) - 1
+			pagesCount = -(-self.source.TotalTextHeight // self.source.pageHeight) - 1
 			self.selChange(currentPageIndex,pagesCount)
 		else:
 			l_orientation = self.getSourceOrientation()
@@ -127,10 +127,10 @@ class Pager(GUIAddon):
 					itemControlledSizeParam = self.getListItemSize().height()
 				else:
 					itemControlledSizeParam = self.getListItemSize().width()
-				items_per_page = listControledlSize//itemControlledSizeParam
+				items_per_page = listControledlSize // itemControlledSizeParam
 				if items_per_page > 0:
-					currentPageIndex = current_index//items_per_page
-					pagesCount = -(listCount//-items_per_page) - 1
+					currentPageIndex = current_index // items_per_page
+					pagesCount = -(listCount // -items_per_page) - 1
 					self.selChange(currentPageIndex,pagesCount)
 
 	def applySkin(self, desktop, parent):

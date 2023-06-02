@@ -408,7 +408,7 @@ class MovieContextMenu(Screen, ProtectedScreen):
 					if not parentalControl.sessionPinCached:
 						append_to_menu(menu, (_("Unhide parental control services"), csel.unhideParentalServices), key="1")
 				# Plugins expect a valid selection, so only include them if we selected a non-dir
-				if not(service.flags & eServiceReference.mustDescent):
+				if not (service.flags & eServiceReference.mustDescent):
 					for p in plugins.getPlugins(PluginDescriptor.WHERE_MOVIELIST):
 						append_to_menu(menu, (p.description, boundFunction(p, session, service)), key="bullet")
 		if csel.exist_bookmark():
@@ -428,7 +428,7 @@ class MovieContextMenu(Screen, ProtectedScreen):
 
 	def isResetable(self):
 		item = self.csel.getCurrentSelection()
-		return not(item[1] and moviePlayState(item[0].getPath() + ".cuts", item[0], item[1].getLength(item[0])) is None)
+		return not (item[1] and moviePlayState(item[0].getPath() + ".cuts", item[0], item[1].getLength(item[0])) is None)
 
 	def pinEntered(self, answer):
 		if answer:
@@ -1750,7 +1750,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			resetMoviePlayState(current.getPath() + ".cuts", current)
 			self["list"].invalidateCurrentItem()
 			idx = self["list"].getCurrentIndex()
-			self["list"].moveToIndex(idx-1)
+			self["list"].moveToIndex(idx - 1)
 			self["list"].moveToIndex(idx)
 
 	def do_move(self):

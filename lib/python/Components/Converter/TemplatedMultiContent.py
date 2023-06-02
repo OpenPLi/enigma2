@@ -31,7 +31,7 @@ class TemplatedMultiContent(StringList):
 			if len(templateDefault) > 3:  # optional
 				self.template["scrollbarMode"] = templateDefault[3]
 			if len(templateDefault) > 5:  # optional, but, must be present together
-				self.template["itemWidth"] =  templateDefault[4]
+				self.template["itemWidth"] = templateDefault[4]
 				self.template["orientation"] = templateDefault[5]
 
 	def changed(self, what):

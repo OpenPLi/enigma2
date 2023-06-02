@@ -493,7 +493,7 @@ class Satfinder(ScanSetup):
 	def keyGoScan(self):
 		self.frontend = None
 		if self.raw_channel:
-			del(self.raw_channel)
+			del (self.raw_channel)
 		tlist = []
 		if self.DVB_type.value == "DVB-S":
 			self.addSatTransponder(tlist,

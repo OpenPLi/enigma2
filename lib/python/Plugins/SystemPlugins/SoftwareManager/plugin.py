@@ -758,13 +758,13 @@ class PluginManager(Screen, PackageInfoHandler):
 		removepng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, "SystemPlugins/SoftwareManager/remove.png"))
 		installpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, "SystemPlugins/SoftwareManager/install.png"))
 		if state == 'installed':
-			return((name, details, description, packagename, state, installedpng, divpng, selected))
+			return ((name, details, description, packagename, state, installedpng, divpng, selected))
 		elif state == 'installable':
-			return((name, details, description, packagename, state, installablepng, divpng, selected))
+			return ((name, details, description, packagename, state, installablepng, divpng, selected))
 		elif state == 'remove':
-			return((name, details, description, packagename, state, removepng, divpng, selected))
+			return ((name, details, description, packagename, state, removepng, divpng, selected))
 		elif state == 'install':
-			return((name, details, description, packagename, state, installpng, divpng, selected))
+			return ((name, details, description, packagename, state, installpng, divpng, selected))
 
 	def buildPacketList(self, categorytag=None):
 		if categorytag is not None:
@@ -828,31 +828,31 @@ class PluginManager(Screen, PackageInfoHandler):
 		divpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "div-h.png"))
 		if tag is not None:
 			if tag == 'System':
-				return((_("System"), _("View list of available system extensions"), tag, divpng))
+				return ((_("System"), _("View list of available system extensions"), tag, divpng))
 			elif tag == 'Skin':
-				return((_("Skins"), _("View list of available skins"), tag, divpng))
+				return ((_("Skins"), _("View list of available skins"), tag, divpng))
 			elif tag == 'Recording':
-				return((_("Recordings"), _("View list of available recording extensions"), tag, divpng))
+				return ((_("Recordings"), _("View list of available recording extensions"), tag, divpng))
 			elif tag == 'Network':
-				return((_("Network"), _("View list of available networking extensions"), tag, divpng))
+				return ((_("Network"), _("View list of available networking extensions"), tag, divpng))
 			elif tag == 'CI':
-				return((_("Common Interface"), _("View list of available CommonInterface extensions"), tag, divpng))
+				return ((_("Common Interface"), _("View list of available CommonInterface extensions"), tag, divpng))
 			elif tag == 'Default':
-				return((_("Default settings"), _("View list of available default settings"), tag, divpng))
+				return ((_("Default settings"), _("View list of available default settings"), tag, divpng))
 			elif tag == 'SAT':
-				return((_("Satellite equipment"), _("View list of available Satellite equipment extensions."), tag, divpng))
+				return ((_("Satellite equipment"), _("View list of available Satellite equipment extensions."), tag, divpng))
 			elif tag == 'Software':
-				return((_("Software"), _("View list of available software extensions"), tag, divpng))
+				return ((_("Software"), _("View list of available software extensions"), tag, divpng))
 			elif tag == 'Multimedia':
-				return((_("Multimedia"), _("View list of available multimedia extensions."), tag, divpng))
+				return ((_("Multimedia"), _("View list of available multimedia extensions."), tag, divpng))
 			elif tag == 'Display':
-				return((_("Display and userinterface"), _("View list of available display and userinterface extensions."), tag, divpng))
+				return ((_("Display and userinterface"), _("View list of available display and userinterface extensions."), tag, divpng))
 			elif tag == 'EPG':
-				return((_("Electronic Program Guide"), _("View list of available EPG extensions."), tag, divpng))
+				return ((_("Electronic Program Guide"), _("View list of available EPG extensions."), tag, divpng))
 			elif tag == 'Communication':
-				return((_("Communication"), _("View list of available communication extensions."), tag, divpng))
+				return ((_("Communication"), _("View list of available communication extensions."), tag, divpng))
 			else: # dynamically generate non existent tags
-				return((str(tag), _("View list of available %s extensions.") % str(tag), tag, divpng))
+				return ((str(tag), _("View list of available %s extensions.") % str(tag), tag, divpng))
 
 	def prepareInstall(self):
 		self.cmdList = []
@@ -996,11 +996,11 @@ class PluginManagerInfo(Screen):
 		installpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, "SystemPlugins/SoftwareManager/install.png"))
 		removepng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, "SystemPlugins/SoftwareManager/remove.png"))
 		if action == 'install':
-			return((_('Installing'), info, installpng, divpng))
+			return ((_('Installing'), info, installpng, divpng))
 		elif action == 'remove':
-			return((_('Removing'), info, removepng, divpng))
+			return ((_('Removing'), info, removepng, divpng))
 		else:
-			return((_('Updating'), info, upgradepng, divpng))
+			return ((_('Updating'), info, upgradepng, divpng))
 
 	def exit(self):
 		self.close()
@@ -1075,13 +1075,13 @@ class PluginManagerHelp(Screen):
 		installpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, "SystemPlugins/SoftwareManager/install.png"))
 
 		if state == 'installed':
-			return((_('This plugin is installed.'), _('You can remove this plugin.'), installedpng, divpng))
+			return ((_('This plugin is installed.'), _('You can remove this plugin.'), installedpng, divpng))
 		elif state == 'installable':
-			return((_('This plugin is not installed.'), _('You can install this plugin.'), installablepng, divpng))
+			return ((_('This plugin is not installed.'), _('You can install this plugin.'), installablepng, divpng))
 		elif state == 'install':
-			return((_('This plugin will be installed.'), _('You can cancel the installation.'), installpng, divpng))
+			return ((_('This plugin will be installed.'), _('You can cancel the installation.'), installpng, divpng))
 		elif state == 'remove':
-			return((_('This plugin will be removed.'), _('You can cancel the removal.'), removepng, divpng))
+			return ((_('This plugin will be removed.'), _('You can cancel the removal.'), removepng, divpng))
 
 	def exit(self):
 		self.close()
@@ -1713,13 +1713,13 @@ class PacketManager(Screen, NumericalTextInput):
 			description = "No description available."
 		if state == 'installed':
 			installedpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, "SystemPlugins/SoftwareManager/installed.png"))
-			return((name, version, _(description), state, installedpng, divpng))
+			return ((name, version, _(description), state, installedpng, divpng))
 		elif state == 'upgradeable':
 			upgradeablepng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, "SystemPlugins/SoftwareManager/upgradeable.png"))
-			return((name, version, _(description), state, upgradeablepng, divpng))
+			return ((name, version, _(description), state, upgradeablepng, divpng))
 		else:
 			installablepng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, "SystemPlugins/SoftwareManager/installable.png"))
-			return((name, version, _(description), state, installablepng, divpng))
+			return ((name, version, _(description), state, installablepng, divpng))
 
 	def buildPacketList(self):
 		self.list = []

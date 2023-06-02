@@ -29,7 +29,7 @@ class TimerList(GUIComponent):
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, width - serviceNameWidth - self.iconMargin, 0, serviceNameWidth, self.rowSplit, 0, RT_HALIGN_RIGHT | RT_VALIGN_BOTTOM, serviceName, self.backupColor, self.backupColorSel, None, None, None, None))
 		else:
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, width - serviceNameWidth - self.iconMargin, 0, serviceNameWidth, self.rowSplit, 0, RT_HALIGN_RIGHT | RT_VALIGN_BOTTOM, serviceName))
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, self.iconWidth + self.iconMargin, 0, width - serviceNameWidth - self.iconWidth - self.iconMargin*2, self.rowSplit, 2, RT_HALIGN_LEFT | RT_VALIGN_BOTTOM, timer.name))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, self.iconWidth + self.iconMargin, 0, width - serviceNameWidth - self.iconWidth - self.iconMargin * 2, self.rowSplit, 2, RT_HALIGN_LEFT | RT_VALIGN_BOTTOM, timer.name))
 
 		begin = FuzzyTime(timer.begin)
 		if timer.repeated:
