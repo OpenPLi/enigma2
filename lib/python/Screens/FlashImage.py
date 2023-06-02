@@ -29,6 +29,7 @@ import struct
 
 from enigma import eEPGCache, eEnv
 
+
 def checkimagefiles(files):
 	return len([x for x in files if 'kernel' in x and '.bin' in x or x in ('uImage', 'rootfs.bin', 'root_cfe_auto.bin', 'root_cfe_auto.jffs2', 'oe_rootfs.bin', 'e2jffs2.img', 'rootfs.tar.bz2', 'rootfs.ubi')]) == 2
 
@@ -182,7 +183,7 @@ class SelectImage(Screen):
 
 	def keyYellow(self):
 		currentSelected = self["list"].l.getCurrentSelection()[0][1]
-		if not("://" in currentSelected or currentSelected in ["Expander", "Waiter"]):
+		if not ("://" in currentSelected or currentSelected in ["Expander", "Waiter"]):
 			try:
 				os.remove(currentSelected)
 				currentSelected = ".".join([currentSelected[:-4], "unzipped"])
@@ -198,7 +199,7 @@ class SelectImage(Screen):
 
 	def otherImages(self):
 		if len(self.imageBrandList) > 1:
-			self.session.openWithCallback(self.otherImagesCallback, ChoiceBox, list=[(key, self.imageBrandList[key]) for key in self.imageBrandList.keys()] , windowTitle=_("Select an image brand"))
+			self.session.openWithCallback(self.otherImagesCallback, ChoiceBox, list=[(key, self.imageBrandList[key]) for key in self.imageBrandList.keys()], windowTitle=_("Select an image brand"))
 
 	def otherImagesCallback(self, image):
 		if image:

@@ -177,26 +177,26 @@ def InitAVSwitch():
 
 	# dictionary ... "proc_node_name" : _("human translatable texts"),
 	pnD = {
-		"ac3" : _("AC3"),
-		"center" : _("center"),
-		"dac" : _("DAC"),
-		"dts" : _("DTS"),
-		"downmix" : _("Downmix"),
-		"disabled" : _("off"),
-		"extrawide" : _("extra wide"),
-		"force_ac3" : _("convert to AC3"),
-		"force_dts" : _("convert to DTS"),
-		"hdmi" : _("HDMI"),
-		"hdmi_best" : _("use best / controlled by HDMI"),
-		"multichannel" : _("convert to multi-channel PCM"),
-		"none" : _("off"),
-		"off" : _("Off"),
-		"on" : _("On"),
-		"passthrough" : _("Passthrough"),
-		"spdif" : _("SPDIF"),
-		"use_hdmi_cacenter" : _("use HDMI cacenter"),
-		"use_hdmi_caps" : _("controlled by HDMI"),
-		"wide" : _("wide"),
+		"ac3": _("AC3"),
+		"center": _("center"),
+		"dac": _("DAC"),
+		"dts": _("DTS"),
+		"downmix": _("Downmix"),
+		"disabled": _("off"),
+		"extrawide": _("extra wide"),
+		"force_ac3": _("convert to AC3"),
+		"force_dts": _("convert to DTS"),
+		"hdmi": _("HDMI"),
+		"hdmi_best": _("use best / controlled by HDMI"),
+		"multichannel": _("convert to multi-channel PCM"),
+		"none": _("off"),
+		"off": _("Off"),
+		"on": _("On"),
+		"passthrough": _("Passthrough"),
+		"spdif": _("SPDIF"),
+		"use_hdmi_cacenter": _("use HDMI cacenter"),
+		"use_hdmi_caps": _("controlled by HDMI"),
+		"wide": _("wide"),
 	}
 
 	def readChoices(procx, choices, default):
@@ -453,7 +453,7 @@ def InitAVSwitch():
 	if SystemInfo["HasColorimetry"]:
 		def setColorimetry(configElement):
 			open(SystemInfo["HasColorimetry"], "w").write(configElement.value)
-		choices=[("auto", "auto"), ("bt2020ncl", "BT 2020 NCL"), ("bt2020cl", "BT 2020 CL"), ("bt709", "BT 709")]
+		choices = [("auto", "auto"), ("bt2020ncl", "BT 2020 NCL"), ("bt2020cl", "BT 2020 CL"), ("bt709", "BT 709")]
 		default = "auto"
 		f = "/proc/stb/video/hdmi_colorimetry_choices"
 		if os.path.exists(f):

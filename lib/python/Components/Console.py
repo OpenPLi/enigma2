@@ -54,6 +54,7 @@ class Console:
 		Console by default will work with strings on callback.
 		If binary data required class shoud be initialized with Console(binary=True)
 	"""
+
 	def __init__(self, binary=False):
 		# Still called appContainers because Network.py accesses it to
 		# know if there's still stuff running

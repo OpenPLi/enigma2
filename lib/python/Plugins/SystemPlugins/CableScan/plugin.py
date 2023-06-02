@@ -178,7 +178,7 @@ class CableScanScreen(ConfigListScreen, Screen):
 			if service:
 				tunedTunerMask = 2**service.frontendInfo().getAll(True)["tuner_number"]
 				recordingMask = sum([2**int(x) for x in [recording.frontendInfo().getAll(True)["tuner_number"] for recording in self.session.nav.getRecordings()]])
-				if not(tunedTunerMask & recordingMask):
+				if not (tunedTunerMask & recordingMask):
 					self.prevservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 					self.session.nav.stopService()
 					freeTunerMask = tunedTunerMask

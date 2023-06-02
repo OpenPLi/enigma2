@@ -564,7 +564,7 @@ class ConfigSequence(ConfigElement):
 		for i in self._value:
 			max_pos += len(str(self.limits[num][1]))
 
-			self._value[num]= int(self._value[num])
+			self._value[num] = int(self._value[num])
 			if self._value[num] < self.limits[num][0]:
 				self._value[num] = self.limits[num][0]
 

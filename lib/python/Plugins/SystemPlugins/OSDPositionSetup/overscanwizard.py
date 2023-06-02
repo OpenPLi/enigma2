@@ -135,7 +135,7 @@ class OverscanWizard(Screen, ConfigListScreen):
 	def TimerTimeout(self):
 		self.countdown -= 1
 		self.setTitle(_("Overscan wizard") + " (%s)" % self.countdown)
-		if not(self.countdown):
+		if not (self.countdown):
 			self.keyCancel()
 
 	def keyLeft(self):

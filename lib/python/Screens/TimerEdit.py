@@ -21,6 +21,7 @@ from ServiceReference import ServiceReference
 from enigma import eServiceReference, eEPGCache
 import functools
 
+
 class TimerEditList(Screen):
 	EMPTY = 0
 	ENABLE = 1

@@ -167,12 +167,12 @@ def InitUsageConfig():
 
 	config.usage.poweroff_enabled = ConfigYesNo(default=False)
 	config.usage.poweroff_force = ConfigYesNo(default=False)
-	config.usage.poweroff_nextday = ConfigClock(default = ((6 * 60 + 0) * 60))
+	config.usage.poweroff_nextday = ConfigClock(default=((6 * 60 + 0) * 60))
 	config.usage.poweroff_day = ConfigSubDict()
 	config.usage.poweroff_time = ConfigSubDict()
 	for i in range(7):
 		config.usage.poweroff_day[i] = ConfigEnableDisable(default=False)
-		config.usage.poweroff_time[i] = ConfigClock(default = ((1 * 60 + 0) * 60))
+		config.usage.poweroff_time[i] = ConfigClock(default=((1 * 60 + 0) * 60))
 
 	choicelist = [("0", _("Do nothing"))]
 	for i in range(3600, 21601, 3600):
@@ -394,6 +394,7 @@ def InitUsageConfig():
 		f = open(SystemInfo["WakeOnLAN"], "r")
 		status = f.read().strip()
 		f.close()
+
 		def wakeOnLANChanged(configElement):
 			if status in ("enable", "disable"):
 				open(SystemInfo["WakeOnLAN"], "w").write(configElement.value and "enable" or "disable")
@@ -732,7 +733,7 @@ def InitUsageConfig():
 		config.autolanguage.subtitle_autoselect3.setChoices([x for x in subtitle_language_choices if x[0] and x[0] not in getselectedsublanguages((1, 2, 4)) or not x[0] and not config.autolanguage.subtitle_autoselect4.value])
 		config.autolanguage.subtitle_autoselect4.setChoices([x for x in subtitle_language_choices if x[0] and x[0] not in getselectedsublanguages((1, 2, 3)) or not x[0]])
 		choicelist = [('0', _("None"))]
-		for y in range(1, 15 if config.autolanguage.subtitle_autoselect4.value else (7 if config.autolanguage.subtitle_autoselect3.value else(4 if config.autolanguage.subtitle_autoselect2.value else (2 if config.autolanguage.subtitle_autoselect1.value else 0)))):
+		for y in range(1, 15 if config.autolanguage.subtitle_autoselect4.value else (7 if config.autolanguage.subtitle_autoselect3.value else (4 if config.autolanguage.subtitle_autoselect2.value else (2 if config.autolanguage.subtitle_autoselect1.value else 0)))):
 			choicelist.append((str(y), ", ".join([eval("config.autolanguage.subtitle_autoselect%x.getText()" % x) for x in (y & 1, y & 2, y & 4 and 3, y & 8 and 4) if x])))
 		if config.autolanguage.subtitle_autoselect3.value:
 			choicelist.append((str(y + 1), "All"))
@@ -841,6 +842,7 @@ def showrotorpositionChoicesUpdate(update=False):
 		config.misc.showrotorposition.setChoices(choiceslist, "no")
 	SystemInfo["isRotorTuner"] = count > 0
 
+
 def preferredTunerChoicesUpdate(update=False):
 	dvbs_nims = [("-2", _("disabled"))]
 	dvbt_nims = [("-2", _("disabled"))]
@@ -912,10 +914,12 @@ def preferredTunerChoicesUpdate(update=False):
 	SystemInfo["DVB-C_priority_tuner_available"] = len(dvbc_nims) > 3 and any(len(i) > 2 for i in (dvbs_nims, dvbt_nims, atsc_nims))
 	SystemInfo["ATSC_priority_tuner_available"] = len(atsc_nims) > 3 and any(len(i) > 2 for i in (dvbs_nims, dvbc_nims, dvbt_nims))
 
+
 def dropEPGNewLines(text):
 	if config.epg.replace_newlines.value != "no":
 		text = text.replace('\x0a', replaceEPGSeparator(config.epg.replace_newlines.value))
 	return text
+
 
 def replaceEPGSeparator(code):
 	return {"newline": "\n", "2newlines": "\n\n", "space": " ", "dash": " - ", "dot": " . ", "asterisk": " * ", "hashtag": " # ", "nothing": ""}.get(code)

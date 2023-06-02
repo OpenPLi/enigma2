@@ -359,6 +359,7 @@ class VideoEnhancementPreview(ConfigListScreen, Screen):
 		from Screens.Setup import SetupSummary
 		return SetupSummary
 
+
 def videoEnhancementSetupMain(session, **kwargs):
 	session.open(VideoEnhancementSetup)
 

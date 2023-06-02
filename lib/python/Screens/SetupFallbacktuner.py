@@ -233,7 +233,7 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 			config.usage.remote_fallback_import_url.value = ""
 		elif self.avahiselect_seperate.value != "url":
 			config.usage.remote_fallback_import_url.value = self.avahiselect_seperate.value
-		if config.usage.remote_fallback_alternative.value and not(self.avahi_dvb_t.value == self.avahi_dvb_c.value == self.avahi_atsc.value == "same"):
+		if config.usage.remote_fallback_alternative.value and not (self.avahi_dvb_t.value == self.avahi_dvb_c.value == self.avahi_atsc.value == "same"):
 			if self.avahi_dvb_t.value == "ip":
 				config.usage.remote_fallback_dvb_t.value = "http://%d.%d.%d.%d:%d" % (tuple(self.ip_dvb_t.value) + (self.port_dvb_t.value,))
 			elif self.avahi_dvb_t.value == "same":

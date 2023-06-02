@@ -225,7 +225,7 @@ class HdmiCec:
 					self.wait.start(int(config.hdmicec.minimum_send_interval.value), True)
 			else:
 				eHdmiCEC.getInstance().sendMessage(address, cmd, data, len(data))
-			if config.hdmicec.debug.value in["1", "3"]:
+			if config.hdmicec.debug.value in ["1", "3"]:
 				self.debugTx(address, cmd, data)
 
 	def sendCmd(self):
@@ -456,7 +456,7 @@ class HdmiCec:
 			if keyCode == 115 or keyCode == 114 or keyCode == 113:
 				cmd = 0x45
 		if cmd:
-			data =data.decode()
+			data = data.decode()
 			if config.hdmicec.minimum_send_interval.value != "0":
 				self.queueKeyEvent.append((self.volumeForwardingDestination, cmd, data))
 				repeat = int(config.hdmicec.volume_forwarding_repeat.value)
@@ -467,7 +467,7 @@ class HdmiCec:
 					self.waitKeyEvent.start(int(config.hdmicec.minimum_send_interval.value), True)
 			else:
 				eHdmiCEC.getInstance().sendMessage(self.volumeForwardingDestination, cmd, data, len(data))
-			if config.hdmicec.debug.value in["2", "3"]:
+			if config.hdmicec.debug.value in ["2", "3"]:
 				self.debugTx(self.volumeForwardingDestination, cmd, data)
 			return 1
 		else:
@@ -483,7 +483,7 @@ class HdmiCec:
 		txt = self.now(True) + self.opCode(cmd, True) + " " + "%02X" % (cmd) + " "
 		tmp = ""
 		if len(data):
-			if cmd in[0x32, 0x47]:
+			if cmd in [0x32, 0x47]:
 				for i in range(len(data)):
 					tmp += "%s" % data[i]
 			else:
@@ -502,7 +502,7 @@ class HdmiCec:
 			else:
 				txt += self.opCode(cmd) + " " + "%02X" % (cmd) + " "
 			for i in range(length - 1):
-				if cmd in[0x32, 0x47]:
+				if cmd in [0x32, 0x47]:
 					txt += "%s" % data[i]
 				elif cmd == 0x9e:
 					txt += "%02X" % ord(data[i]) + 3 * " " + "[version: %s]" % CEC[ord(data[i])]

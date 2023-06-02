@@ -25,6 +25,7 @@ import glob
 API_GITHUB = 0
 API_GITLAB = 1
 
+
 class About(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)

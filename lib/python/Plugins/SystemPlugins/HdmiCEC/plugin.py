@@ -80,7 +80,6 @@ class HdmiCECSetupScreen(ConfigListScreen, Screen):
 			x[1].save()
 		self.close()
 
-
 	def keyOk(self):
 		currentry = self["config"].getCurrent()
 		if currentry == self.logpath_entry:

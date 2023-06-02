@@ -1742,7 +1742,7 @@ class ChannelSelectionBase(Screen):
 
 	def keyRecord(self):
 		ref = self.getCurrentSelection()
-		if ref and not(ref.flags & (eServiceReference.isMarker | eServiceReference.isDirectory)):
+		if ref and not (ref.flags & (eServiceReference.isMarker | eServiceReference.isDirectory)):
 			Screens.InfoBar.InfoBar.instance.instantRecord(serviceRef=ref)
 
 	def toggleTwoLines(self):
@@ -1798,7 +1798,7 @@ class ChannelSelectionBase(Screen):
 					self.servicelist.moveToChar(unichar[0])
 
 	def numberSelectionActions(self, number):
-		if not(hasattr(self, "movemode") and self.movemode):
+		if not (hasattr(self, "movemode") and self.movemode):
 			if len(self.selectionNumber) > 4:
 				self.clearNumberSelectionNumber()
 			self.selectionNumber = self.selectionNumber + str(number)
@@ -2087,7 +2087,7 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 		self.revertMode = None
 
 	def togglePipzap(self):
-		assert(self.session.pip)
+		assert (self.session.pip)
 		if self.dopipzap:
 			# Mark PiP as inactive and effectively deactivate pipzap
 			self.hidePipzapMessage()

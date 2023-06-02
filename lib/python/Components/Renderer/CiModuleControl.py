@@ -5,6 +5,7 @@ from Components.SystemInfo import SystemInfo
 from Components.VariableText import VariableText
 from os import popen
 
+
 class CiModuleControl(Renderer, VariableText):
 	def __init__(self):
 		Renderer.__init__(self)
