@@ -109,7 +109,7 @@ class Listbox(Renderer):
 	def entry_changed(self, index):
 		if self.instance is not None:
 			self.instance.entryChanged(index)
-			
+
 	def applySkin(self, desktop, parent):
 		attribs = []
 		for (attrib, value) in self.skinAttributes[:]:

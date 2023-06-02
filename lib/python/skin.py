@@ -502,7 +502,7 @@ class AttributeParser:
 
 	def itemHeight(self, value):
 		self.guiObject.setItemHeight(parseScale(value))
-	
+
 	def itemWidth(self, value):
 		self.guiObject.setItemWidth(parseScale(value))
 
@@ -1194,10 +1194,10 @@ def readSkin(screen, skin, names, desktop):
 				addonClass = my_import(".".join(("Components", "Addons", wclass))).__dict__.get(wclass)
 			except ImportError:
 				raise SkinError("GUI Addon '%s' not found" % wclass)
-			
+
 			if not wconnection:
 				raise SkinError("The widget is from addon type: %s , but no connection is specified." % wclass)
-			
+
 			i = 0
 			wclassname_base = name + "_" + wclass + "_" + wconnection + "_"
 			while wclassname_base + str(i) in usedComponents:

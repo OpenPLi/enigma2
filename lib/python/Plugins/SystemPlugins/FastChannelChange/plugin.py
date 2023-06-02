@@ -575,7 +575,7 @@ def Plugins(**kwargs):
 				PluginDescriptor(name="Fast Channel Change",
 				description="Fast Channel Change Setup",
 				where=[PluginDescriptor.WHERE_EXTENSIONSMENU],
-				fnc=addExtentions, 
+				fnc=addExtentions,
 				needsRestart=True))
 
 		list.append(

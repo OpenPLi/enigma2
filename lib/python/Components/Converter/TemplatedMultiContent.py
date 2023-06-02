@@ -70,7 +70,7 @@ class TemplatedMultiContent(StringList):
 				if len(templates[style]) > 5:  # optional, but, must be present together
 					itemwidth = templates[style][4]
 					orientation = templates[style][5]
-				
+
 			self.content.setTemplate(template)
 			if orientation is not None and itemwidth is not None:
 				self.content.setOrientation(self.orientations.get(orientation, self.orientations["orVertical"]))
