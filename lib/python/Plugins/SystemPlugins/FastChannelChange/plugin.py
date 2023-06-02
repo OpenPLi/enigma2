@@ -41,7 +41,7 @@ class FCCSupport:
 	def __init__(self, session):
 		self.session = session
 
-		self.fccmgr = eFCCServiceManager.getInstance();
+		self.fccmgr = eFCCServiceManager.getInstance()
 
 		self.fccList = []
 
