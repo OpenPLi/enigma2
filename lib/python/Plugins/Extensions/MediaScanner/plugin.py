@@ -31,7 +31,7 @@ def mountpoint_choosen(option):
 		else:
 			session.open(MessageBox, _("Storage device not available or not initialized."), MessageBox.TYPE_ERROR, simple=True, timeout=10)
 		return
-	session.openWithCallback(execute, ChoiceBox, title= (_("%s connected successfully.") % description) + "\n" + _("The following files were found..."), list=files)
+	session.openWithCallback(execute, ChoiceBox, title=(_("%s connected successfully.") % description) + "\n" + _("The following files were found..."), list=files)
 
 
 def scan(session):

@@ -108,7 +108,7 @@ class PowerOffTimerPoller:
 						reason += clients.getText() + '\n'
 					if mediafilesInUse(self.session):
 						reason += _("A file from media is in use!") + '\n'
-					self.session.openWithCallback(self.doPowerOffAnswer, MessageBox, reason + _("Really shutdown now?"), type = MessageBox.TYPE_YESNO, timeout = 180)
+					self.session.openWithCallback(self.doPowerOffAnswer, MessageBox, reason + _("Really shutdown now?"), type=MessageBox.TYPE_YESNO, timeout=180)
 				else:
 					self.doPowerOffAnswer(True)
 			else:

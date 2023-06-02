@@ -19,13 +19,13 @@ g_max_fcc = len(glob.glob('/dev/fcc?'))
 g_default_fcc = (g_max_fcc) > 5 and 5 or g_max_fcc
 
 config.plugins.fccsetup = ConfigSubsection()
-config.plugins.fccsetup.activate = ConfigYesNo(default = False)
-config.plugins.fccsetup.maxfcc = ConfigSelection(default = str(g_default_fcc), choices = list((str(n), str(n)) for n in range(2, g_max_fcc+1)))
-config.plugins.fccsetup.zapupdown = ConfigYesNo(default = True)
-config.plugins.fccsetup.history = ConfigYesNo(default = False)
-config.plugins.fccsetup.priority = ConfigSelection(default = "zapupdown", choices = { "zapupdown" : _("Zap Up/Down"), "historynextback" : _("History Prev/Next") })
-config.plugins.fccsetup.disableforrec = ConfigYesNo(default = True)
-config.plugins.fccsetup.extensions = ConfigYesNo(default = False)
+config.plugins.fccsetup.activate = ConfigYesNo(default=False)
+config.plugins.fccsetup.maxfcc = ConfigSelection(default=str(g_default_fcc), choices=list((str(n), str(n)) for n in range(2, g_max_fcc+1)))
+config.plugins.fccsetup.zapupdown = ConfigYesNo(default=True)
+config.plugins.fccsetup.history = ConfigYesNo(default=False)
+config.plugins.fccsetup.priority = ConfigSelection(default="zapupdown", choices={ "zapupdown" : _("Zap Up/Down"), "historynextback" : _("History Prev/Next") })
+config.plugins.fccsetup.disableforrec = ConfigYesNo(default=True)
+config.plugins.fccsetup.extensions = ConfigYesNo(default=False)
 
 FccInstance = None
 
@@ -208,8 +208,7 @@ class FCCSupport:
 	def enableEventTracker(self, activate):
 		if activate:
 			if not self.__event_tracker:
-				self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
-				{
+				self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 					iPlayableService.evStart: self.getEvStart,
 					iPlayableService.evEnd: self.getEvEnd,
 					iPlayableService.evTunedIn: self.getEvTunedIn,
@@ -465,7 +464,7 @@ class FCCSetup(Screen, ConfigListScreen):
 			"green": self.keySave,
 		}, -2)
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = self.session)
+		ConfigListScreen.__init__(self, self.list, session=self.session)
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
 
@@ -560,22 +559,22 @@ def Plugins(**kwargs):
 		list.append(
 			PluginDescriptor(name="FCCSupport",
 			description="Fast Channel Change support",
-			where = [PluginDescriptor.WHERE_SESSIONSTART],
-			fnc = FCCSupportInit))
+			where=[PluginDescriptor.WHERE_SESSIONSTART],
+			fnc=FCCSupportInit))
 
 		if config.plugins.fccsetup.extensions.value:
 			list.append(
 				PluginDescriptor(name="Fast Channel Change",
 				description="Fast Channel Change Setup",
-				where = [PluginDescriptor.WHERE_EXTENSIONSMENU],
-				fnc = addExtentions, 
+				where=[PluginDescriptor.WHERE_EXTENSIONSMENU],
+				fnc=addExtentions, 
 				needsRestart=True))
 
 		list.append(
 			PluginDescriptor(name=_("FCCSetup"),
 			description=_("Fast Channel Change setup"),
-			where = [PluginDescriptor.WHERE_MENU],
-			needsRestart = False,
-			fnc = main))
+			where=[PluginDescriptor.WHERE_MENU],
+			needsRestart=False,
+			fnc=main))
 
 	return list
