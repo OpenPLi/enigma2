@@ -118,22 +118,26 @@ class EPGSelection(Screen):
 
 	def nextBouquet(self):
 		if self.type == EPG_TYPE_SINGLE:
+			self.resetSortStatus()
 			self.session.openWithCallback(self.channelSelectionCallback, ChannelSelection.SimpleChannelSelection, _("Select channel"), True, True, self.currentService.ref, self.parent and self.parent.epg_bouquet)
 		if self.bouquetChangeCB:
 			self.bouquetChangeCB(1, self)
 
 	def prevBouquet(self):
 		if self.type == EPG_TYPE_SINGLE:
+			self.resetSortStatus()
 			self.session.openWithCallback(self.channelSelectionCallback, ChannelSelection.SimpleChannelSelection, _("Select channel"), True, True, self.currentService.ref, self.parent and self.parent.epg_bouquet)
 		if self.bouquetChangeCB:
 			self.bouquetChangeCB(-1, self)
 
 	def nextService(self):
 		if self.serviceChangeCB:
+			self.resetSortStatus()
 			self.serviceChangeCB(1, self)
 
 	def prevService(self):
 		if self.serviceChangeCB:
+			self.resetSortStatus()
 			self.serviceChangeCB(-1, self)
 
 	def enterDateTime(self):
@@ -294,6 +298,10 @@ class EPGSelection(Screen):
 		else:
 			# TRANSLATORS: This must fit into the header button in the EPG-List
 			self["key_yellow"].setText(_("Sort A-Z"))
+
+	def resetSortStatus(self):
+		self.sort_type = 0
+		self.setSortDescription()
 
 	def blueButtonPressed(self):
 		if self.type == EPG_TYPE_MULTI:
