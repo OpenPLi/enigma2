@@ -43,6 +43,8 @@ def getMultibootslots():
 			if 'MODE_' in file:
 				mode12found = True
 				slotnumber = file.rsplit('_', 3)[1]
+			elif SystemInfo["hasKexec"] and "STARTUP_RECOVERY" in file:
+				slotnumber = "0"
 			else:
 				slotnumber = file.rsplit('_', 1)[1]
 			if slotnumber.isdigit() and slotnumber not in bootslots:
@@ -128,11 +130,15 @@ def getUUIDtoSD(UUID): # returns None on failure
 		return None
 
 
-def getImagelist():
+def getImagelist(recovery=True):
 	imagelist = {}
 	if SystemInfo["canMultiBoot"]:
 		tmp.dir = tempfile.mkdtemp(prefix="Multiboot")
 		for slot in sorted(SystemInfo["canMultiBoot"].keys()):
+			if SystemInfo["hasKexec"] and slot == 0:
+				if recovery:
+					imagelist[0] = {"imagename": _("Recovery Mode")}
+				continue
 			if SystemInfo["canMultiBoot"][slot]['device'] == 'ubi0:ubifs':
 				Console().ePopen('mount -t ubifs %s %s' % (SystemInfo["canMultiBoot"][slot]['device'], tmp.dir))
 			else:

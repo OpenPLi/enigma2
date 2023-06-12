@@ -286,9 +286,10 @@ class FlashImage(Screen):
 			currentimageslot = getCurrentImage()
 			choices = []
 			slotdict = {k: v for k, v in SystemInfo["canMultiBoot"].items() if not v['device'].startswith('/dev/sda')}
-			for x in range(1, len(slotdict) + 1):
+			count = int(not SystemInfo["hasKexec"])
+			for x in range(count, len(slotdict) + count):
 				choices.append(((_("slot%s - %s (current image) with, backup") if x == currentimageslot else _("slot%s - %s, with backup")) % (x, imagesList[x]['imagename']), (x, "with backup")))
-			for x in range(1, len(slotdict) + 1):
+			for x in range(count, len(slotdict) + count):
 				choices.append(((_("slot%s - %s (current image), without backup") if x == currentimageslot else _("slot%s - %s, without backup")) % (x, imagesList[x]['imagename']), (x, "without backup")))
 			if "://" in self.source:
 				choices.append((_("No, only download"), (1, "only download")))
@@ -371,7 +372,7 @@ class FlashImage(Screen):
 
 	def startBackupsettings(self, retval):
 		if retval:
-			if os.path.isfile(self.BACKUP_SCRIPT):
+			if os.path.isfile(self.BACKUP_SCRIPT) and hasattr(config.plugins, "autobackup"):
 				self["info"].setText(_("Backing up to: %s") % self.destination)
 				configfile.save()
 				if config.plugins.autobackup.epgcache.value:
@@ -445,6 +446,8 @@ class FlashImage(Screen):
 		if imagefiles:
 			if SystemInfo["canMultiBoot"]:
 				command = "/usr/bin/ofgwrite -k -r -m%s '%s'" % (self.multibootslot, imagefiles)
+				if SystemInfo["hasKexec"] and self.multibootslot == 0:
+					command = "/usr/bin/ofgwrite -k -r -f '%s'" % imagefiles
 			else:
 				command = "/usr/bin/ofgwrite -k -r '%s'" % imagefiles
 			self.containerofgwrite = Console()
@@ -528,7 +531,7 @@ class MultibootSelection(SelectImage):
 	def getImagesList(self):
 		list = []
 		list12 = []
-		imagesList = getImagelist()
+		imagesList = getImagelist(recovery=False)
 		mode = getCurrentImageMode() or 0
 		self.deletedImagesExists = False
 		if imagesList:
