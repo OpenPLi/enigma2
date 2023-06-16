@@ -442,7 +442,7 @@ class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
 					if self.nim.isFBCLink():
 						if not self.nimConfig.advanced.unicableconnected.value:
 							self.nimConfig.advanced.unicableconnected.value = True
-					self.advancedConnected = (self.indent % _("Connected"), self.nimConfig.advanced.unicableconnected, _("Select 'yes' if this tuner is connected to the SCR device through another tuner, otherwise select 'no'."))
+					self.advancedConnected = (self.indent % _("Connected through another tuner"), self.nimConfig.advanced.unicableconnected, _("Select 'yes' if this tuner is connected to the SCR device through another tuner, otherwise select 'no'."))
 					self.list.append(self.advancedConnected)
 					if self.nimConfig.advanced.unicableconnected.value:
 						self.nimConfig.advanced.unicableconnectedTo.setChoices(choices)
