@@ -201,7 +201,7 @@ int eDVBSatelliteEquipmentControl::canTune(const eDVBFrontendParametersSatellite
 					// compare tuner data
 					bool no_compare_satpos = linked_sat_pos == -1 || (linked_sat_pos != sat.orbital_position);
 
-					if (((linked_unicable != 1 || is_unicable) && no_compare_satpos) ||
+					if (((linked_unicable != -1 || is_unicable) && diseqc && !rotor && no_compare_satpos) ||
 						(!is_unicable && ((csw != linked_csw) || (diseqc && (ucsw != linked_ucsw || toneburst != linked_toneburst)) ||
 						(rotor && ((linked_satpos_depends == -1 && rotor_pos != sat.orbital_position) || (!direct_connected && linked_satpos_depends != -1 && no_compare_satpos))))))
 					
