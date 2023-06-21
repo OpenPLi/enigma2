@@ -1004,9 +1004,9 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 		self.nim_type_dict = {}
 		# collect all nims which are *not* set to "nothing"
 		for n in nimmanager.nim_slots:
-			modes = [x[:5] for x in n.getTunerTypesEnabled()]
-			if n.config_mode == "nothing":
+			if n.empty or n.config_mode == "nothing":
 				continue
+			modes = [x[:5] for x in n.getTunerTypesEnabled()]
 			if "DVB-S" in modes: # Only do the DVB-S tests below when DVB-S is present in modes. This avoids problems with combined tuners such as Availink AVL6862.
 				if n.config_mode in ("simple", "equal", "advanced") and len(nimmanager.getSatListForNim(n.slot)) < 1:
 					continue
