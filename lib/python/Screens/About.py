@@ -63,16 +63,17 @@ class About(Screen):
 		self["ffmpegVersion"] = StaticText(ffmpegVersion)
 
 		player = None
-		if cpu.upper().startswith('HI') or os.path.isdir('/proc/hisi'):
+
+		if os.path.isfile('/var/lib/opkg/info/enigma2-plugin-systemplugins-servicemp3.list'):
+			if GStreamerVersion:
+				player = _("Media player") + ": Gstreamer, " + _("version") + " " + GStreamerVersion
+		if os.path.isfile('/var/lib/opkg/info/enigma2-plugin-systemplugins-servicehisilicon.list'):
 			if os.path.isdir("/usr/lib/hisilicon") and glob.glob("/usr/lib/hisilicon/libavcodec.so.*"):
 				player = _("Media player") + ": ffmpeg, " + _("Hardware Accelerated")
 			elif ffmpegVersion and ffmpegVersion[0].isdigit():
 				player = _("Media player") + ": ffmpeg, " + _("version") + " " + ffmpegVersion
 
 		if player is None:
-			if GStreamerVersion:
-				player = _("Media player") + ": Gstreamer, " + _("version") + " " + GStreamerVersion
-			else:
 				player = _("Media player") + ": " + _("Not Installed")
 
 		AboutText += player + "\n"
