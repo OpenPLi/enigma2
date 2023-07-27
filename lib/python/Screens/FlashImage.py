@@ -420,7 +420,7 @@ class FlashImage(Screen):
 
 	def unzip(self):
 		if self.onlyDownload:
-			self.session.openWithCallback(self.abort, MessageBox, _("Download Successsful\n%s") % self.imagename, type=MessageBox.TYPE_INFO, simple=True)
+			self.session.openWithCallback(self.abort, MessageBox, _("Download Successful\n%s") % self.imagename, type=MessageBox.TYPE_INFO, simple=True)
 		else:
 			self["header"].setText(_("Unzipping Image"))
 			self["info"].setText("%s\n%s" % (self.imagename, _("Please wait")))
