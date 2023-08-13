@@ -47,10 +47,11 @@ def InitCiConfig():
 			config.ci[slot].show_ci_messages = ConfigYesNo(default=True)
 			if SystemInfo["CI%dSupportsHighBitrates" % slot]:
 				highBitrateChoices = [("normal", _("normal")), ("high", _("high"))]
-				with open("/proc/stb/tsmux/ci%d_tsclk_choices" % slot) as fd:
-					choices = fd.read()
-					if "extra_high" in choices:
-						highBitrateChoices.append(("extra_high", _("extra high")))
+				if exists("/proc/stb/tsmux/ci%d_tsclk_choices" % slot):
+					with open("/proc/stb/tsmux/ci%d_tsclk_choices" % slot) as fd:
+						choices = fd.read()
+						if "extra_high" in choices:
+							highBitrateChoices.append(("extra_high", _("extra high")))
 				config.ci[slot].highBitrate = ConfigSelection(default="high", choices=highBitrateChoices)
 				config.ci[slot].highBitrate.slotid = slot
 				config.ci[slot].highBitrate.addNotifier(setCIBitrate)
