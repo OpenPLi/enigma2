@@ -2576,9 +2576,11 @@ class InfoBarInstantRecord:
 		event = info["event"]
 
 		if limitEvent in ("event", "manualendtime", "manualduration"):
+			if limitEvent in ("manualendtime", "manualduration"):
+				message = _("Recording time has been set.")
 			if event:
 				end = info["end"]
-			else:
+			elif limitEvent == "event":
 				message = _("No event info found, recording indefinitely.")
 		if limitEvent in ("", "indefinitely"):
 			message = _("Recording time has been set.")
@@ -2625,9 +2627,9 @@ class InfoBarInstantRecord:
 				message = _("Could not record due to invalid service %s") % ref
 			recording.autoincrease = False
 		if message:
-			if added_timer and duration_message:
+			if added_timer and duration_message and limitEvent not in ("manualendtime", "manualduration"):
 				message += duration_message
-			self.session.open(MessageBox, text=message, type=MessageBox.TYPE_INFO, timeout=timeout)
+			self.session.open(MessageBox, text=message, type=MessageBox.TYPE_INFO, timeout=timeout, simple=True)
 		return added_timer
 
 	def startRecordingCurrentEvent(self):
