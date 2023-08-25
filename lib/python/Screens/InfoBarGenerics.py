@@ -2729,12 +2729,12 @@ class InfoBarInstantRecord:
 	def changeDuration(self, entry):
 		if entry is not None and entry >= 0:
 			self.selectedEntry = entry
-			self.session.openWithCallback(self.inputCallback, InputBox, title=_("How many minutes do you want to record?"), text="5", maxSize=False, type=Input.NUMBER)
+			self.session.openWithCallback(self.inputCallback, InputBox, title=_("How many minutes do you want to record?"), text="5", maxSize=False, maxValue=1440, type=Input.NUMBER)
 
 	def addRecordingTime(self, entry):
 		if entry is not None and entry >= 0:
 			self.selectedEntry = entry
-			self.session.openWithCallback(self.inputAddRecordingTime, InputBox, title=_("How many minutes do you want add to the recording?"), text="5", maxSize=False, type=Input.NUMBER)
+			self.session.openWithCallback(self.inputAddRecordingTime, InputBox, title=_("How many minutes do you want add to the recording?"), text="5", maxSize=False, maxValue=1440, type=Input.NUMBER)
 
 	def inputAddRecordingTime(self, value):
 		if value:
