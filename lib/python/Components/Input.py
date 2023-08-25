@@ -11,7 +11,7 @@ class Input(VariableText, GUIComponent, NumericalTextInput):
 	PIN = 1
 	NUMBER = 2
 
-	def __init__(self, text="", maxSize=False, visible_width=False, type=TEXT, currPos=0, allMarked=True):
+	def __init__(self, text="", maxSize=False, visible_width=False, type=TEXT, currPos=0, allMarked=True, maxValue=False):
 		NumericalTextInput.__init__(self, self.right)
 		GUIComponent.__init__(self)
 		VariableText.__init__(self)
@@ -19,9 +19,10 @@ class Input(VariableText, GUIComponent, NumericalTextInput):
 		self.allmarked = allMarked and (text != "") and (type != self.PIN)
 		self.maxSize = maxSize
 		self.currPos = currPos
+		self.maxValue= maxValue
 		self.visible_width = visible_width
 		self.offset = 0
-		self.overwrite = maxSize
+		self.overwrite = maxSize or self.type == self.NUMBER
 		self.setText(text)
 
 	def __len__(self):
@@ -151,6 +152,17 @@ class Input(VariableText, GUIComponent, NumericalTextInput):
 			self.currPos = len(self.Text)
 		self.update()
 
+	def checkNumber(self):
+		if self.type == self.NUMBER:
+			if self.maxValue and self.Text and int(self.Text) > self.maxValue:
+				self.Text = self.Text[:self.currPos]
+			elif not self.Text:
+				self.Text = "0"
+				self.currPos = 0
+			elif len(self.Text) > 1 and self.Text.startswith('0'):
+				self.Text = self.Text[1:]
+				self.currPos = self.currPos - 1
+
 	def insertChar(self, ch, pos=False, owr=False, ins=False):
 		if not pos:
 			pos = self.currPos
@@ -162,6 +174,7 @@ class Input(VariableText, GUIComponent, NumericalTextInput):
 			self.Text = self.Text[0:pos] + ch + self.Text[pos:-1]
 		else:
 			self.Text = self.Text[0:pos] + ch + self.Text[pos:]
+		self.checkNumber()
 
 	def deleteChar(self, pos):
 		if not self.maxSize:
@@ -170,10 +183,13 @@ class Input(VariableText, GUIComponent, NumericalTextInput):
 			self.Text = self.Text[0:pos] + " " + self.Text[pos + 1:]
 		else:
 			self.Text = self.Text[0:pos] + self.Text[pos + 1:] + " "
+		self.checkNumber()
 
 	def deleteAllChars(self):
 		if self.maxSize:
 			self.Text = " " * len(self.Text)
+		elif self.type == self.NUMBER:
+			self.Text = "0"
 		else:
 			self.Text = ""
 		self.currPos = 0
