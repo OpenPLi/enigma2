@@ -1676,14 +1676,14 @@ class InfoBarSeek:
 				self.setSeekState(self.SEEK_STATE_PAUSE)
 
 	def seekFwdManual(self):
-		self.session.openWithCallback(self.fwdSeekTo, MinuteInput)
+		self.session.openWithCallback(self.fwdSeekTo, MinuteInput, maxValue=1440)
 
 	def fwdSeekTo(self, minutes):
 		print("Seek", minutes, "minutes forward")
 		self.doSeekRelative(minutes * 60 * 90000)
 
 	def seekBackManual(self):
-		self.session.openWithCallback(self.rwdSeekTo, MinuteInput)
+		self.session.openWithCallback(self.rwdSeekTo, MinuteInput, maxValue=1440)
 
 	def rwdSeekTo(self, minutes):
 		print("rwdSeekTo")
