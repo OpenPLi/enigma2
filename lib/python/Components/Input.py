@@ -153,15 +153,15 @@ class Input(VariableText, GUIComponent, NumericalTextInput):
 		self.update()
 
 	def checkNumber(self):
-		if self.type == self.NUMBER:
-			if self.maxValue and self.Text and int(self.Text) > self.maxValue:
+		if self.type == self.NUMBER and self.maxValue:
+			if self.Text and int(self.Text) > self.maxValue:
 				self.Text = self.Text[:self.currPos]
-			elif not self.Text:
+			elif len(self.Text) > 1 and self.Text.startswith("0"):
+				self.Text = self.Text.lstrip("0")
+				self.currPos = len(self.Text)
+			if not self.Text:
 				self.Text = "0"
-				self.currPos = 0
-			elif len(self.Text) > 1 and self.Text.startswith('0'):
-				self.Text = self.Text[1:]
-				self.currPos = self.currPos - 1
+				self.currPos = 1
 
 	def insertChar(self, ch, pos=False, owr=False, ins=False):
 		if not pos:
