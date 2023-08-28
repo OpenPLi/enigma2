@@ -226,7 +226,7 @@ class Input(VariableText, GUIComponent, NumericalTextInput):
 		else:
 			if self.currPos > 0:
 				self.deleteChar(self.currPos - 1)
-				if not self.maxSize and self.offset > 0 and not self.maxValue:
+				if not self.maxSize and self.offset > 0:
 					self.offset -= 1
 				self.currPos -= 1
 		self.update()
