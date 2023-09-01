@@ -115,5 +115,7 @@ class Console(Screen):
 		else:
 			self.show()
 
-	def dataAvail(self, str):
-		self["text"].appendText(str.decode())
+	def dataAvail(self, data):
+		if isinstance(data, bytes):
+			data = data.decode()
+		self["text"].appendText(data)
