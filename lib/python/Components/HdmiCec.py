@@ -13,6 +13,7 @@ LOGFILE = "hdmicec.log"
 
 # CEC Version's table
 CEC = ["1.1", "1.2", "1.2a", "1.3", "1.3a", "1.4", "2.0?", "unknown"]
+
 cmdList = {
 	0x00: "<Polling Message>",
 	0x04: "<Image View On>",
@@ -46,6 +47,10 @@ cmdList = {
 	0x9d: "<Inactive Source>",
 	0x9e: "<CEC Version>",
 	0x9f: "<Get CEC Version>",
+	0xa0: "<Vendor Command With ID>",
+	0xa1: "<Clear External Timer>",
+	0xa2: "<Set External Timer>",
+	0xff: "<Abort>"
 	}
 
 config.hdmicec = ConfigSubsection()
@@ -218,7 +223,10 @@ class HdmiCec:
 			cmd = 0x8f
 
 		if cmd:
-			data = data.decode()
+			try:
+				data = data.decode("UTF-8")
+			except:
+				data = data.decode("ISO-8859-1")
 			if config.hdmicec.minimum_send_interval.value != "0":
 				self.queue.append((address, cmd, data))
 				if not self.wait.isActive():
@@ -456,7 +464,10 @@ class HdmiCec:
 			if keyCode == 115 or keyCode == 114 or keyCode == 113:
 				cmd = 0x45
 		if cmd:
-			data = data.decode()
+			try:
+				data = data.decode("UTF-8")
+			except:
+				data = data.decode("ISO-8859-1")
 			if config.hdmicec.minimum_send_interval.value != "0":
 				self.queueKeyEvent.append((self.volumeForwardingDestination, cmd, data))
 				repeat = int(config.hdmicec.volume_forwarding_repeat.value)
