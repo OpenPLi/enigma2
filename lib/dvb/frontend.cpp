@@ -1335,7 +1335,7 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 	}
 	else if (!strcmp(m_description, "M1502A(external)")) // DVB-S2X Dual 4K
 	{
-		ret = (int)(snr / 23.2);
+		ret = (int)(snr / 41.4);
 	}
 	else if (!strcmp(m_description, "AVL6762 (external)")) // DVB-C/T2 Dual 4K
 	{
