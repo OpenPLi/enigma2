@@ -139,8 +139,8 @@ class VideoSetup(ConfigListScreen, Screen):
 			))
 			if SystemInfo["CanBTAudio"]:
 				self.list.append((_("Enable bluetooth audio"), config.av.btaudio, _("This option allows you to switch audio to bluetooth speakers.")))
-			if SystemInfo["CanBTAudioDelay"]:
-				self.list.append((_("General bluetooth audio delay"), config.av.btaudiodelay, _("This option configures the general audio delay for bluetooth speakers.")))
+				if SystemInfo["CanBTAudioDelay"] and config.av.btaudio.value != "off":
+					self.list.append((_("General bluetooth audio delay"), config.av.btaudiodelay, _("This option configures the general audio delay for bluetooth speakers.")))
 			if SystemInfo["HasAutoVolume"] or SystemInfo["HasAutoVolumeLevel"]:
 				self.list.append((_("Audio auto volume level"), SystemInfo["HasAutoVolume"] and config.av.autovolume or config.av.autovolumelevel, _("This option allows you can to set the auto volume level.")))
 			if SystemInfo["Has3DSurround"]:
