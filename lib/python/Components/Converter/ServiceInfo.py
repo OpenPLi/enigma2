@@ -5,6 +5,39 @@ from Components.Element import cached
 
 WIDESCREEN = [3, 4, 7, 8, 0xB, 0xC, 0xF, 0x10]
 
+_acedits = (
+	("A_", ""),
+	("AC-3", "AC3"),
+	("(ATSC A/52)", ""),
+	("(ATSC A/52B)", ""),
+	(" Layer 2 (MP2)", ""),
+	(" Layer 3 (MP3)", "MP3"),
+	("-1", ""),
+	("-2", ""),
+	("2-", ""),
+	("-4 AAC", "AAC"),
+	("4-AAC", "HE-AAC"),
+	("audio", ""),
+	("/L3", ""),
+	("/mpeg", "AAC"),
+	("/x-", ""),
+	("raw", "Dolby TrueHD"),
+	("E-AC3", "AC3+"),
+	("EAC3", "AC3+"),
+	("IPCM", "AC3"),
+	("LPCM", "AC3+"),
+	("AAC_PLUS", "AAC+"),
+	("AAC_LATM", "AAC"),
+	("WMA/PRO", "WMA Pro"),
+	("MPEG", "MPEG1 Layer II"),
+	("MPEG1 Layer II AAC", "AAC"),
+	("MPEG1 Layer IIAAC", "AAC"),
+	("MPEG1 Layer IIMP3", "MP3"),
+)
+def StdAudioDesc(description):
+	for orig, repl in _acedits:
+		description = description.replace(orig, repl)
+	return description
 
 class ServiceInfo(Converter):
 	HAS_TELETEXT = 0
@@ -121,8 +154,9 @@ class ServiceInfo(Converter):
 					idx = 0
 					while idx < n:
 						i = audio.getTrackInfo(idx)
-						description = i.getDescription()
+						description = StdAudioDesc(i.getDescription())
 						if description in ("AC3", "AC3+", "DTS", "DTS-HD", "AC-3"):
+						if description and description.split()[0] in ("AC4", "AAC+", "AC3", "AC3+", "Dolby", "DTS", "DTS-HD", "HE-AAC", "WMA Pro"):
 							if self.type == self.IS_MULTICHANNEL:
 								return True
 							elif self.type == self.IS_STEREO:

@@ -2,6 +2,7 @@ from Components.MenuList import MenuList
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.Label import Label
+from Components.Converter.ServiceInfo import StdAudioDesc
 from ServiceReference import ServiceReference
 from enigma import eListboxPythonMultiContent, gFont, iServiceInformation, eServiceCenter, eDVBFrontendParametersSatellite, RT_HALIGN_LEFT, RT_VALIGN_CENTER
 from Tools.Transponder import ConvertToHumanReadable
@@ -216,7 +217,7 @@ class ServiceInfo(Screen):
 		if self.number_of_tracks:
 
 			def create_list(i):
-				audio_desc = self.audio.getTrackInfo(i).getDescription()
+				audio_desc = StdAudioDesc(self.audio.getTrackInfo(i).getDescription())
 				audio_pid = self.audio.getTrackInfo(i).getPID()
 				audio_lang = self.audio.getTrackInfo(i).getLanguage() or _("Not defined")
 				if self.IPTV:
