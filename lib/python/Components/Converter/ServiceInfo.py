@@ -157,7 +157,7 @@ class ServiceInfo(Converter):
 					while idx < n:
 						i = audio.getTrackInfo(idx)
 						description = StdAudioDesc(i.getDescription())
-						if description and description.split()[0] in ("AC4", "AAC+", "AC3", "AC3+", "Dolby", "DTS", "DTS-HD", "HE-AAC", "WMA Pro"):
+						if description and description.split()[0] in ("AC4", "AAC+", "AC3", "AC3+", "Dolby", "DTS", "DTS-HD", "HE-AAC", "WMA"):
 							if self.type == self.IS_MULTICHANNEL:
 								return True
 							elif self.type == self.IS_STEREO:
