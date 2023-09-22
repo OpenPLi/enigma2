@@ -214,9 +214,10 @@ class ServiceInfo(Screen):
 
 	def get_track_list(self):
 		if self.number_of_tracks:
+			from Components.Converter.ServiceInfo import StdAudioDesc
 
 			def create_list(i):
-				audio_desc = self.audio.getTrackInfo(i).getDescription()
+				audio_desc = StdAudioDesc(self.audio.getTrackInfo(i).getDescription())
 				audio_pid = self.audio.getTrackInfo(i).getPID()
 				audio_lang = self.audio.getTrackInfo(i).getLanguage() or _("Not defined")
 				if self.IPTV:
