@@ -2196,6 +2196,37 @@ class InfoBarTimeshift:
 from Screens.PiPSetup import PiPSetup
 
 
+class ExtensionsList(ChoiceBox):
+	def __init__(self, session, clist, keys, refresh_list):
+		ChoiceBox.__init__(self, session, title=_("Please choose an extension..."), list=clist, keys=keys, skin_name="ExtensionsList", reorderConfig="extension_order", windowTitle=_("Extensions menu"))
+		if refresh_list:
+			self.refresh_timer = eTimer()
+			self.refresh_timer.callback.append(self.update_list)
+			self.refresh_timer.start(1000)
+
+	def update_list(self):
+		updated = False
+		removed = []
+		for idx, x in enumerate(self.list):
+			text = x[0][1][0]()
+			if x[0][0] != text:  # Update text if changed
+				x[0] = (text, *x[0][1:])
+				x[1] = x[1][:7] + (text,)
+				updated = True
+			elif not x[0][1][2]():  # Remove job if not active
+				updated = True
+				removed.append(idx)
+		if updated:
+			for idx, x in enumerate(removed):
+				del self.list[x - idx]
+				del self.summarylist[x - idx]
+			self["list"].setList(self.list)
+			self.updateSummary(self["list"].getSelectionIndex())
+			if removed:
+				for f in self.onLayoutFinish:  # For screen resize
+					exec(f)
+
+
 class InfoBarExtensions:
 	EXTENSION_SINGLE = 0
 	EXTENSION_LIST = 1
@@ -2222,7 +2253,7 @@ class InfoBarExtensions:
 
 	def updateExtension(self, extension, key=None):
 		self.extensionsList.append(extension)
-		if key is not None and key in self.extensionKeys:
+		if key not in (None, "refresh") and key in self.extensionKeys:
 			key = None
 
 		if key is None:
@@ -2263,7 +2294,8 @@ class InfoBarExtensions:
 				else:
 					extensionsList.remove(extension)
 		list.extend([(x[0](), x) for x in extensionsList])
-		list and self.session.openWithCallback(self.extensionCallback, ChoiceBox, title=_("Please choose an extension..."), list=list, keys=keys, skin_name="ExtensionsList", reorderConfig="extension_order", windowTitle=_("Extensions menu"))
+		list and self.session.openWithCallback(self.extensionCallback, ExtensionsList, clist=list, keys=keys, refresh_list="refresh" in self.extensionKeys)
+
 
 	def extensionCallback(self, answer):
 		if answer is not None:
@@ -2307,7 +2339,7 @@ class InfoBarJobman:
 		self.addExtension(extension=self.getJobList, type=InfoBarExtensions.EXTENSION_LIST)
 
 	def getJobList(self):
-		return [((boundFunction(self.getJobName, job), boundFunction(self.showJobView, job), lambda: True), None) for job in job_manager.getPendingJobs()]
+		return [((boundFunction(self.getJobName, job), boundFunction(self.showJobView, job), boundFunction(self.isActiveJob, job)), "refresh") for job in job_manager.getPendingJobs()]
 
 	def getJobName(self, job):
 		if job.status == job.IN_PROGRESS:
@@ -2318,6 +2350,9 @@ class InfoBarJobman:
 		from Screens.TaskView import JobView
 		job_manager.in_background = False
 		self.session.openWithCallback(self.JobViewCB, JobView, job)
+
+	def isActiveJob(self, job):
+		return job.status in (job.IN_PROGRESS, job.NOT_STARTED)
 
 	def JobViewCB(self, in_background):
 		job_manager.in_background = in_background
