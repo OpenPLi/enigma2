@@ -58,7 +58,7 @@ class ChoiceBox(Screen):
 			if x:
 				strpos = str(self.__keys[pos])
 				self.list.append(ChoiceEntryComponent(key=strpos, text=x))
-				if self.__keys[pos] != "":
+				if self.__keys[pos] != "dummy":
 					self.keymap[self.__keys[pos]] = list[pos]
 				self.summarylist.append((self.__keys[pos], x[0]))
 				pos += 1
@@ -220,7 +220,7 @@ class ChoiceBox(Screen):
 				if pos == curpos:
 					summarytext += ">"
 					self["summary_selection"].setText(entry[1])
-				else:
+				elif entry[0] != "dummy":
 					summarytext += entry[0]
 				summarytext += ' ' + entry[1] + '\n'
 			pos += 1
