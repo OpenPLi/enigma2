@@ -262,7 +262,7 @@ class ChoiceBox(Screen):
 				self.list = [self.list[-1]] + self.list[:-1]
 			else:
 				self.list[currentIndex], self.list[swapIndex] = self.list[swapIndex], self.list[currentIndex]
-			self["list"].list = self.list
+			self["list"].setList(self.list)
 			if direction == 1:
 				self["list"].down()
 			else:
