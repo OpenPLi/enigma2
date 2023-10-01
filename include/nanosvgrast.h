@@ -51,7 +51,7 @@ typedef struct NSVGrasterizer NSVGrasterizer;
 */
 
 // Allocated rasterizer context.
-NSVGrasterizer* nsvgCreateRasterizer();
+NSVGrasterizer* nsvgCreateRasterizer(void);
 
 // Rasterizes SVG image, returns RGBA image (non-premultiplied alpha)
 //   r - pointer to rasterizer context
@@ -63,8 +63,8 @@ NSVGrasterizer* nsvgCreateRasterizer();
 //   h - height of the image to render
 //   stride - number of bytes per scaleline in the destination buffer
 void nsvgRasterize(NSVGrasterizer* r,
-				   NSVGimage* image, double tx, double ty, double scale,
-				   unsigned char* dst, int w, int h, int stride);
+				NSVGimage* image, double tx, double ty, double scale,
+				unsigned char* dst, int w, int h, int stride);
 
 void nsvgRasterizeFull(NSVGrasterizer* r, NSVGimage* image,
 						double tx, double ty, double scalex, double scaley,
@@ -120,7 +120,7 @@ typedef struct NSVGmemPage {
 } NSVGmemPage;
 
 typedef struct NSVGcachedPaint {
-	char type;
+	signed char type;
 	char spread;
 	double xform[6];
 	unsigned int colors[256];
@@ -156,7 +156,7 @@ struct NSVGrasterizer
 	int width, height, stride;
 };
 
-NSVGrasterizer* nsvgCreateRasterizer()
+NSVGrasterizer* nsvgCreateRasterizer(void)
 {
 	NSVGrasterizer* r = static_cast<NSVGrasterizer*>(malloc(sizeof(NSVGrasterizer)));
 	if (r == nullptr) goto error;
@@ -342,9 +342,9 @@ static double nsvg__normalize(double *x, double* y)
 static double nsvg__absf(double x) { return x < 0 ? -x : x; }
 
 static void nsvg__flattenCubicBez(NSVGrasterizer* r,
-								  double x1, double y1, double x2, double y2,
-								  double x3, double y3, double x4, double y4,
-								  int level, int type)
+								double x1, double y1, double x2, double y2,
+								double x3, double y3, double x4, double y4,
+								int level, int type)
 {
 	double x12,y12,x23,y23,x34,y34,x123,y123,x234,y234,x1234,y1234;
 	double dx,dy,d2,d3;
@@ -858,7 +858,7 @@ static int nsvg__cmpEdge(const void *p, const void *q)
 	const NSVGedge* b = static_cast<const NSVGedge*>(q);
 
 	if (a->y0 < b->y0) return -1;
-	if (a->y0 > b->y0) return  1;
+	if (a->y0 > b->y0) return 1;
 	return 0;
 }
 
@@ -967,7 +967,7 @@ static double nsvg__clampf(double a, double mn, double mx) { return a < mn ? mn 
 
 static unsigned int nsvg__RGBA(unsigned char r, unsigned char g, unsigned char b, unsigned char a)
 {
-	return (r) | (g << 8) | (b << 16) | (a << 24);
+	return ((unsigned int)r) | ((unsigned int)g << 8) | ((unsigned int)b << 16) | ((unsigned int)a << 24);
 }
 
 static unsigned int nsvg__lerpRGBA(unsigned int c0, unsigned int c1, double u)
@@ -992,7 +992,7 @@ static unsigned int nsvg__applyOpacity(unsigned int c, double u)
 
 static inline int nsvg__div255(int x)
 {
-    return ((x+1) * 257) >> 16;
+	return ((x+1) * 257) >> 16;
 }
 
 static void nsvg__scanlineSolid(unsigned char* dst, int count, unsigned char* cover, int x, int y,
@@ -1393,8 +1393,8 @@ static void nsvg__initPaint(NSVGcachedPaint* cache, NSVGpaint* paint, double opa
 
 
 void nsvgRasterizeFull(NSVGrasterizer* r,
-				   NSVGimage* image, double tx, double ty, double scalex, double scaley,
-				   unsigned char* dst, int w, int h, int stride, int bgr)
+				NSVGimage* image, double tx, double ty, double scalex, double scaley,
+				unsigned char* dst, int w, int h, int stride, int bgr)
 {
 	NSVGshape *shape = nullptr;
 	NSVGedge *e = nullptr;
@@ -1436,7 +1436,8 @@ void nsvgRasterizeFull(NSVGrasterizer* r,
 			}
 
 			// Rasterize edges
-			qsort(r->edges, r->nedges, sizeof(NSVGedge), nsvg__cmpEdge);
+			if (r->nedges != 0)
+				qsort(r->edges, r->nedges, sizeof(NSVGedge), nsvg__cmpEdge);
 
 			// now, traverse the scanlines and find the intersections on each scanline, use non-zero rule
 			nsvg__initPaint(&cache, &shape->fill, shape->opacity);
@@ -1462,7 +1463,8 @@ void nsvgRasterizeFull(NSVGrasterizer* r,
 			}
 
 			// Rasterize edges
-			qsort(r->edges, r->nedges, sizeof(NSVGedge), nsvg__cmpEdge);
+			if (r->nedges != 0)
+				qsort(r->edges, r->nedges, sizeof(NSVGedge), nsvg__cmpEdge);
 
 			// now, traverse the scanlines and find the intersections on each scanline, use non-zero rule
 			nsvg__initPaint(&cache, &shape->stroke, shape->opacity);
