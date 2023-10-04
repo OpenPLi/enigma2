@@ -3,6 +3,8 @@ from Components.Converter.Converter import Converter
 from enigma import iServiceInformation, iPlayableService, iPlayableServicePtr, eServiceReference
 from ServiceReference import resolveAlternate
 from Components.Element import cached
+from API import session
+from Tools.General import GetServiceNameAndProvider, getServiceInfoValue, cleanServiceRefFull, getRealServiceRefForIPTV, getServiceNum, isIPTV
 
 
 class ServiceName(Converter):
@@ -11,6 +13,8 @@ class ServiceName(Converter):
 	REFERENCE = 2
 	EDITREFERENCE = 3
 	NUMBER = 4
+	NUMBER_NAME_PROVIDER = 5
+	NUMBER_NAME = 6
 
 	def __init__(self, type):
 		Converter.__init__(self, type)
@@ -23,6 +27,10 @@ class ServiceName(Converter):
 			self.type = self.EDITREFERENCE
 		elif type == "Number":
 			self.type = self.NUMBER
+		elif type == "ServiceNumberAndNameAndProvider":
+			self.type = self.NUMBER_NAME_PROVIDER
+		elif type == "ServiceNumberAndName":
+			self.type = self.NUMBER_NAME
 		else:
 			self.type = self.NAME
 
@@ -32,34 +40,72 @@ class ServiceName(Converter):
 		if isinstance(service, iPlayableServicePtr):
 			info = service and service.info()
 			ref = None
+			refps = session and session.nav.getCurrentlyPlayingServiceReference() or None
 		else: # reference
 			info = service and self.source.info
-			ref = service
+			ref = getRealServiceRefForIPTV(service)
+			refps = None
 		if not info:
+			#print("No Info::")
 			return ""
+			
+		nametext, provider = GetServiceNameAndProvider(1, ref, refps, info)
+		#print("NameProv::" + nametext)
 		if self.type == self.NAME:
-			name = ref and info.getName(ref)
-			if name is None:
-				name = info.getName()
-			return name.replace('\xc2\x86', '').replace('\xc2\x87', '').replace('_', ' ')
+			return nametext
 		elif self.type == self.PROVIDER:
-			return info.getInfoString(iServiceInformation.sProvider)
+			return provider
 		elif self.type == self.REFERENCE or self.type == self.EDITREFERENCE and hasattr(self.source, "editmode") and self.source.editmode:
-			if not ref:
-				return info.getInfoString(iServiceInformation.sServiceref)
-			nref = resolveAlternate(ref)
-			if nref:
-				ref = nref
-			return ref.toString()
-		elif self.type == self.NUMBER:
-			if not ref:
-				ref = eServiceReference(info.getInfoString(iServiceInformation.sServiceref))
-			num = ref and ref.getChannelNum() or None
-			if num is None:
-				num = '---'
+			if isIPTV(ref):
+				return ref.toString()
 			else:
-				num = str(num)
-			return num
+				return getServiceInfoValue(self.type, info, iServiceInformation.sServiceref, ref, refps)
+		#elif self.type == self.NUMBER:
+		#	if not ref:
+		#		ref = eServiceReference(info.getInfoString(iServiceInformation.sServiceref))
+		#	num = ref and ref.getChannelNum() or None
+		#	if num is None:
+		#		num = '---'
+		#	else:
+		#		num = str(num)
+		#	return num
+		elif self.type == self.NUMBER_NAME_PROVIDER or self.type == self.NUMBER or self.type == self.NUMBER_NAME:
+			from Screens.InfoBar import InfoBar
+			channelSelectionServicelist = InfoBar.instance and InfoBar.instance.servicelist
+			channelnum = ''
+			orbitalpos = ''
+			ref = ref or eServiceReference(getServiceInfoValue(self.type,info,iServiceInformation.sServiceref,ref,refps))
+			if channelSelectionServicelist and channelSelectionServicelist.inBouquet():
+				myRoot = channelSelectionServicelist.getRoot()
+				channelnum = getServiceNum(ref, myRoot)
+
+			if self.type == self.NUMBER_NAME_PROVIDER or self.type == self.NUMBER_NAME:
+				if channelnum != '':
+					resulttext = "%s  •  %s" % (channelnum, nametext)
+				else:
+					resulttext = nametext
+			elif self.type == self.NUMBER:
+				if channelnum != '':
+					resulttext = "%s" % (channelnum)
+				else:
+					resulttext = "---"
+			if self.type == self.NUMBER_NAME_PROVIDER:
+				tp_data = info.getInfoObject(iServiceInformation.sTransponderData)
+				if tp_data is not None:
+					try:
+						position = tp_data["orbital_position"]
+						if position > 1800: # west
+							orbitalpos = "%.1f " %(float(3600 - position)/10) + _("W")
+						else:
+							orbitalpos = "%.1f " %(float(position)/10) + _("E")
+					except:
+						pass
+				if orbitalpos != "":
+					resulttext = "%s  •  %s" % (resulttext, orbitalpos) 
+				if provider != "":
+					resulttext = "%s  •  %s" % (resulttext, provider) 
+				print("ResText: " + resulttext) 
+			return resulttext
 
 	text = property(getText)
 

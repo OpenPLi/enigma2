@@ -1,12 +1,14 @@
 from Components.Element import cached
 from enigma import eServiceCenter
 from Components.Sources.Source import Source
+from Tools.General import getRealServiceRefForIPTV
 
 
 class ServiceEvent(Source):
 	def __init__(self):
 		Source.__init__(self)
 		self.service = None
+		self.service_orig = None
 
 	@cached
 	def getCurrentService(self):
@@ -24,6 +26,8 @@ class ServiceEvent(Source):
 	info = property(getInfo)
 
 	def newService(self, ref):
+		self.service_orig = ref
+		ref = getRealServiceRefForIPTV(ref)
 		self.service = ref
 		if not ref:
 			self.changed((self.CHANGED_CLEAR,))

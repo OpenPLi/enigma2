@@ -20,7 +20,8 @@ class Listbox(Renderer):
 		self.__content = None
 		self.__wrap_around = True
 		self.__selection_enabled = True
-		self.__scrollbarMode = "showOnDemand"
+		self.__scrollbarMode = "showNever"
+		self.scrollbarMode = "showNever"
 
 	GUI_WIDGET = eListbox
 
@@ -84,11 +85,13 @@ class Listbox(Renderer):
 
 	def setScrollbarMode(self, mode):
 		self.__scrollbarMode = mode
+		#print("[ListBox] scrollbarmode set = " + mode)
 		if self.instance is not None:
 			self.instance.setScrollbarMode(int(
-				{"showOnDemand": eListbox.showOnDemand,
-				  "showAlways": eListbox.showAlways,
-				  "showNever": eListbox.showNever,
+				{
+					"showOnDemand": 0,
+					"showAlways": 1,
+					"showNever": 2,
 				}[mode]))
 
 	scrollbarMode = property(lambda self: self.__scrollbarMode, setScrollbarMode)

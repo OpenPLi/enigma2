@@ -54,6 +54,7 @@ def PluginDownloadComponent(plugin, name, version=None, width=440):
 class PluginList(MenuList):
 	def __init__(self, list, enableWrapAround=True):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
+		self.listSize = 0
 		font = fonts.get("PluginBrowser0", applySkinFactor("Regular", 20, 50))
 		self.l.setFont(0, gFont(font[0], font[1]))
 		self.l.setItemHeight(font[2])

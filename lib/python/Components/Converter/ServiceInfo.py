@@ -278,7 +278,11 @@ class ServiceInfo(Converter):
 			if self.type == self.XRES:
 				return info.getInfo(iServiceInformation.sVideoWidth)
 			if self.type == self.YRES:
-				return info.getInfo(iServiceInformation.sVideoHeight)
+				info = info.getInfo(iServiceInformation.sVideoHeight)
+				if info and info > 0:
+					return info
+				else:
+					return -1
 			if self.type == self.FRAMERATE:
 				return info.getInfo(iServiceInformation.sFrameRate)
 		return -1

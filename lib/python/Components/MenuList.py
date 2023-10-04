@@ -22,6 +22,7 @@ class MenuList(GUIComponent):
 		instance.selectionChanged.get().append(self.selectionChanged)
 		if self.enableWrapAround:
 			self.instance.setWrapAround(True)
+			self.instance.setScrollbarMode(2)
 
 	def preWidgetRemove(self, instance):
 		instance.setContent(None)
@@ -64,3 +65,7 @@ class MenuList(GUIComponent):
 	def selectionEnabled(self, enabled):
 		if self.instance is not None:
 			self.instance.setSelectionEnable(enabled)
+	
+	def setScrollbarMode(self, mode):
+		if self.instance is not None:
+			self.instance.setScrollbarMode(mode)

@@ -1,6 +1,7 @@
 import sys
 import os
 from Tools.Profile import profile, profile_final
+from API import API
 profile("PYTHON_START")
 
 # Don't remove this line. It may seem to do nothing, but if removed,
@@ -456,6 +457,8 @@ def runScreenTest():
 	profile("Init:Session")
 	nav = Navigation()
 	session = Session(desktop=enigma.getDesktop(0), summary_desktop=enigma.getDesktop(1), navigation=nav)
+	api = API()
+	api.setSession(session)
 
 	CiHandler.setSession(session)
 	powerOffTimer.setSession(session)

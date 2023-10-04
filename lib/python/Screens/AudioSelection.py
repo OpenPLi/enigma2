@@ -6,20 +6,35 @@ from Screens.ChoiceBox import ChoiceBox
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.ActionMap import NumberActionMap
 from Components.ConfigList import ConfigListScreen
-from Components.config import config, ConfigSubsection, ConfigNothing, ConfigSelection, ConfigOnOff, ConfigYesNo
+from Components.config import config, ConfigSubsection, getConfigListEntry, ConfigNothing, ConfigSelection, ConfigOnOff, ConfigYesNo
 from Components.Label import Label
 from Components.Sources.List import List
 from Components.Sources.Boolean import Boolean
 from Components.SystemInfo import SystemInfo
 from Components.VolumeControl import VolumeControl
-from Components.UsageConfig import originalAudioTracks, visuallyImpairedCommentary
-from Components.Converter.ServiceInfo import StdAudioDesc
-from Tools.ISO639 import LanguageCodes
+from os import path as os_path, open as os_open, close as os_close, O_RDWR as os_O_RDWR, O_CREAT  as os_O_CREAT 
+from Tools.General import isIPTV
+from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
+from Tools.LoadPixmap import LoadPixmap
+from pickle import load as pickle_load, dump as pickle_dump, dumps as pickle_dumps
 
 from enigma import iPlayableService, eTimer, eSize, eDVBDB, eServiceReference, eServiceCenter, iServiceInformation
 
 FOCUS_CONFIG, FOCUS_STREAMS = range(2)
 [PAGE_AUDIO, PAGE_SUBTITLES] = ["audio", "subtitles"]
+
+CONFIG_FILE_AV = '/etc/enigma2/config_av'
+
+selectionpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "selections/selectioncross.png"))
+
+def getAVDict():
+	if os_path.exists(CONFIG_FILE_AV):
+		pkl_file = open(CONFIG_FILE_AV, 'rb')
+		if pkl_file:
+			avdict = pickle_load(pkl_file)
+			pkl_file.close()
+			return avdict
+	return {}
 
 
 class AudioSelection(ConfigListScreen, Screen):
@@ -78,8 +93,33 @@ class AudioSelection(ConfigListScreen, Screen):
 		self["config"].instance.setSelectionEnable(False)
 		self.focus = FOCUS_STREAMS
 		self.settings.menupage.addNotifier(self.fillList)
+		
+	def saveAVDict(self, dict):
+		pkl_file = open(CONFIG_FILE_AV, 'wb')
+		if pkl_file:
+			pickle_dump(dict, pkl_file)
+			pkl_file.close()
+			
+	def setAVInfo(self, service):
+		playinga_idx = service and service.audioTracks().getCurrentTrack() or -1
+		ref = self.session.nav.getCurrentlyPlayingServiceReference()
+		x = ref.toString().split(":")
+		ref_str = ":".join(x[:10])
+		
+		#if self.infobar.selected_subtitle:
+		playing_idx = self.infobar.selected_subtitle
+		#else:
+		#	playing_idx = -1
+
+		if playing_idx:
+			self.infobar.av_config[ref_str] = pickle_dumps(playinga_idx, 0).decode() + "|" + pickle_dumps(playing_idx, 0).decode()
+		else:
+			self.infobar.av_config[ref_str] = pickle_dumps(playinga_idx, 0).decode()
+		self.saveAVDict(self.infobar.av_config)
 
 	def fillList(self, arg=None):
+		from Tools.ISO639 import LanguageCodes
+		from  Components.UsageConfig import originalAudioTracks, visuallyImpairedCommentary
 		streams = []
 		conflist = []
 		selectedidx = 0
@@ -103,7 +143,7 @@ class AudioSelection(ConfigListScreen, Screen):
 						extra_text += ",DTS"
 					if SystemInfo["CanDownmixAAC"]:
 						extra_text += ",AAC"
-					conflist.append((_("Multi channel downmix") + extra_text, self.settings.downmix))
+					conflist.append(getConfigListEntry(_("Multi channel downmix") + extra_text, self.settings.downmix))
 					self["key_red"].setBoolean(True)
 
 			if n > 0:
@@ -112,7 +152,7 @@ class AudioSelection(ConfigListScreen, Screen):
 					choicelist = [("0", _("left")), ("1", _("stereo")), ("2", _("right"))]
 					self.settings.channelmode = ConfigSelection(choices=choicelist, default=str(self.audioChannel.getCurrentChannel()))
 					self.settings.channelmode.addNotifier(self.changeMode, initial_call=False)
-					conflist.append((_("Channel"), self.settings.channelmode))
+					conflist.append(getConfigListEntry(_("Channel"), self.settings.channelmode))
 					self["key_green"].setBoolean(True)
 				else:
 					conflist.append(('',))
@@ -122,7 +162,7 @@ class AudioSelection(ConfigListScreen, Screen):
 					number = str(x + 1)
 					i = audio.getTrackInfo(x)
 					languages = i.getLanguage().split('/')
-					description = StdAudioDesc(i.getDescription())
+					description = i.getDescription() or ""
 					selected = ""
 					language = ""
 
@@ -134,19 +174,17 @@ class AudioSelection(ConfigListScreen, Screen):
 					for lang in languages:
 						if cnt:
 							language += ' / '
-						if lang == "":
-							language += _("Not defined")
+						if lang in LanguageCodes:
+							language += _(LanguageCodes[lang][0])
 						elif lang in originalAudioTracks:
 							language += "%s  (%s)" % (_("Original audio"), lang)
-						elif lang in LanguageCodes:
-							language += _(LanguageCodes[lang][0])
 						elif lang in visuallyImpairedCommentary:
 							language += "%s  (%s)" % (_("Visually impaired commentary"), lang)
 						else:
 							language += lang
 						cnt += 1
 
-					streams.append((x, "", number, description, language, selected))
+					streams.append((x, "", number, description, language, selected, selectionpng if selected == "X" else None))
 
 			else:
 				streams = []
@@ -155,7 +193,7 @@ class AudioSelection(ConfigListScreen, Screen):
 
 			if subtitlelist:
 				self["key_yellow"].setBoolean(True)
-				conflist.append((_("To subtitle selection"), self.settings.menupage))
+				conflist.append(getConfigListEntry(_("To subtitle selection"), self.settings.menupage))
 			else:
 				self["key_yellow"].setBoolean(False)
 				conflist.append(('',))
@@ -177,10 +215,10 @@ class AudioSelection(ConfigListScreen, Screen):
 				if self.Plugins:
 					self["key_blue"].setBoolean(True)
 					if len(self.Plugins) > 1:
-						conflist.append((_("Audio plugins"), ConfigNothing()))
+						conflist.append(getConfigListEntry(_("Audio plugins"), ConfigNothing()))
 						self.plugincallfunc = [(x[0], x[1]) for x in self.Plugins]
 					else:
-						conflist.append((self.Plugins[0][0], ConfigNothing()))
+						conflist.append(getConfigListEntry(self.Plugins[0][0], ConfigNothing()))
 						self.plugincallfunc = self.Plugins[0][1]
 
 		elif self.settings.menupage.getValue() == PAGE_SUBTITLES:
@@ -229,14 +267,14 @@ class AudioSelection(ConfigListScreen, Screen):
 						description = _("unknown") + ": %s" % x[2]
 					number = str(int(number) + 1)
 
-				streams.append((x, "", number, description, language, selected))
+				streams.append((x, "", number, description, language, selected, selectionpng if selected == "X" else None))
 				idx += 1
 
-			conflist.append((_("To audio selection"), self.settings.menupage))
+			conflist.append(getConfigListEntry(_("To audio selection"), self.settings.menupage))
 
 			if self.infobar.selected_subtitle and self.infobar.selected_subtitle != (0, 0, 0, 0) and not ".DVDPlayer'>" in repr(self.infobar):
 				self["key_blue"].setBoolean(True)
-				conflist.append((_("Subtitle Quickmenu"), ConfigNothing()))
+				conflist.append(getConfigListEntry(_("Subtitle Quickmenu"), ConfigNothing()))
 
 		self["config"].list = conflist
 
@@ -274,8 +312,12 @@ class AudioSelection(ConfigListScreen, Screen):
 	def changeAudio(self, audio):
 		track = int(audio)
 		if isinstance(track, int):
-			if self.session.nav.getCurrentService().audioTracks().getNumberOfTracks() > track:
+			service = self.session.nav.getCurrentService()
+			ref = self.session.nav.getCurrentlyPlayingServiceReference()
+			if service.audioTracks().getNumberOfTracks() > track:
 				self.audioTracks.selectTrack(track)
+				if isIPTV(ref):
+					self.setAVInfo(service)
 
 	def keyLeft(self):
 		if self.focus == FOCUS_CONFIG:
@@ -343,12 +385,7 @@ class AudioSelection(ConfigListScreen, Screen):
 
 	def keyDown(self):
 		if self.focus == FOCUS_CONFIG:
-			configList = self["config"].getList()
-			count = len(configList)
-			for x in configList:
-				if x[0] == "":
-					count -= 1
-			if self["config"].getCurrentIndex() < count - 1:
+			if self["config"].getCurrentIndex() < len(self["config"].getList()) - 1:
 				self["config"].instance.moveSelection(self["config"].instance.moveDown)
 			else:
 				self["config"].instance.setSelectionEnable(False)
@@ -374,6 +411,8 @@ class AudioSelection(ConfigListScreen, Screen):
 	def keyOk(self):
 		if self.focus == FOCUS_STREAMS and self["streams"].list:
 			cur = self["streams"].getCurrent()
+			ref = self.session.nav.getCurrentlyPlayingServiceReference()
+			service = self.session.nav.getCurrentService()
 			if self.settings.menupage.getValue() == PAGE_AUDIO and cur[0] is not None:
 				self.changeAudio(cur[0])
 				self.__updatedInfo()
@@ -387,6 +426,8 @@ class AudioSelection(ConfigListScreen, Screen):
 					config.subtitles.show.value = True
 					self.infobar.enableSubtitle(cur[0][:5])
 					self.__updatedInfo()
+				if isIPTV(ref):
+					self.setAVInfo(service)
 			self.close(0)
 		elif self.focus == FOCUS_CONFIG:
 			self.keyRight()

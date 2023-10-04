@@ -6,6 +6,8 @@ from Tools.Alternatives import GetWithAlternative
 from Tools.Directories import pathExists, SCOPE_SKIN_IMAGE, SCOPE_CURRENT_SKIN, resolveFilename, sanitizeFilename
 from Components.Harddisk import harddiskmanager
 from ServiceReference import ServiceReference
+from Tools.General import getRealServiceRefForIPTV
+from Tools.LoadPixmap import LoadPixmap
 from Components.config import config
 
 searchPaths = []
@@ -71,30 +73,37 @@ def findPicon(serviceName):
 
 
 def getPiconName(serviceRef):
+	ref_orig = serviceRef
+	print(ref_orig)
 	service = eServiceReference(serviceRef)
+	service = getRealServiceRefForIPTV(service)
 	if service.getPath().startswith("/") and serviceRef.startswith("1:"):
 		info = eServiceCenter.getInstance().info(eServiceReference(serviceRef))
 		refstr = info and info.getInfoString(service, iServiceInformation.sServiceref)
 		serviceRef = refstr and eServiceReference(refstr).toCompareString()
-	#remove the path and name fields, and replace ':' by '_'
-	fields = GetWithAlternative(serviceRef).split(':', 10)[:10]
-	if not fields or len(fields) < 10:
-		return ""
-	pngname = findPicon('_'.join(fields))
-	if not pngname and not fields[6].endswith("0000"):
-		#remove "sub-network" from namespace
-		fields[6] = fields[6][:-4] + "0000"
-		pngname = findPicon('_'.join(fields))
-	if not pngname and fields[0] != '1':
-		#fallback to 1 for IPTV streams
-		fields[0] = '1'
-		pngname = findPicon('_'.join(fields))
-	if not pngname and fields[2] != '2':
-		#fallback to 1 for TV services with non-standard service types
-		fields[2] = '1'
-		pngname = findPicon('_'.join(fields))
-	if not pngname: # picon by channel name
-		name = sanitizeFilename(ServiceReference(serviceRef).getServiceName())
+	##remove the path and name fields, and replace ':' by '_'
+	#fields = GetWithAlternative(serviceRef).split(':', 10)[:10]
+	#if not fields or len(fields) < 10:
+	#	return ""
+	#pngname = findPicon('_'.join(fields))
+	#print("png: " + pngname)
+	#if not pngname and not fields[6].endswith("0000"):
+	#	#remove "sub-network" from namespace
+	#	fields[6] = fields[6][:-4] + "0000"
+	#	pngname = findPicon('_'.join(fields))
+	#if not pngname and fields[0] != '1':
+	#	#fallback to 1 for IPTV streams
+	#	fields[0] = '1'
+	#	pngname = findPicon('_'.join(fields))
+	#if not pngname and fields[2] != '2':
+	#	#fallback to 1 for TV services with non-standard service types
+	#	fields[2] = '1'
+	#	pngname = findPicon('_'.join(fields))
+	pngname = findPicon( "1_" + '_'.join(ref_orig.split(":")[1:10]))
+	#print("PNGNAME: " + pngname)
+	if not pngname or pngname == "": # picon by channel name
+		name = ServiceReference(serviceRef).getServiceName()
+		name = name.split("|")[0]
 		name = re.sub('[^a-z0-9]', '', name.replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower())
 		if name:
 			pngname = findPicon(name)
@@ -184,6 +193,7 @@ class Picon(Renderer):
 							self.PicLoad.setPara((self.piconsize[0], self.piconsize[1], 0, 0, 1, 1, "#FF000000"))
 							self.PicLoad.startDecode(pngname)
 						else:
+							#pix = LoadPixmap(path=pngname, width=self.piconsize[0])
 							self.instance.setScale(1)
 							self.instance.setPixmapFromFile(pngname)
 							self.instance.show()

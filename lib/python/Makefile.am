@@ -12,5 +12,6 @@ install_PYTHON = \
 	RecordTimer.py \
 	ServiceReference.py \
 	skin.py \
+	API.py \
 	StartEnigma.py \
 	timer.py

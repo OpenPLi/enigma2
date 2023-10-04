@@ -17,4 +17,4 @@ install_PYTHON = \
 	TextBox.py FactoryReset.py RecordPaths.py UnhandledKey.py ServiceStopScreen.py \
 	InputDeviceSetup.py DVD.py SoftwareUpdate.py AutoDiseqc.py InstallWizard.py ScreenSaver.py \
 	Hotkey.py StreamingClientsInfo.py SoftcamSetup.py FlashImage.py SetupFallbacktuner.py \
-	SkinSelector.py
+	SkinSelector.py ClockScreen.py

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from Screens.Screen import Screen
 from Components.Button import Button
 from Components.ActionMap import HelpableActionMap, ActionMap, NumberActionMap
@@ -7,7 +8,7 @@ from Components.DiskInfo import DiskInfo
 from Components.Pixmap import Pixmap, MultiPixmap
 from Components.Label import Label
 from Components.PluginComponent import plugins
-from Components.config import config, ConfigSubsection, ConfigText, ConfigInteger, ConfigLocations, ConfigSet, ConfigYesNo, ConfigSelection
+from Components.config import config, ConfigSubsection, ConfigText, ConfigInteger, ConfigLocations, ConfigSet, ConfigYesNo, ConfigSelection, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
 from Components.ServiceEventTracker import ServiceEventTracker, InfoBarBase
 from Components.Sources.Boolean import Boolean
@@ -36,6 +37,7 @@ import RecordTimer
 from enigma import eServiceReference, eServiceCenter, eTimer, eSize, iPlayableService, iServiceInformation, getPrevAsciiCode, eRCInput
 import os
 import time
+from time import localtime, strftime
 import pickle
 
 config.movielist = ConfigSubsection()
@@ -460,6 +462,13 @@ class SelectionEventInfo:
 	def updateEventInfo(self):
 		serviceref = self.getCurrent()
 		self["Service"].newService(serviceref)
+		info = serviceref and eServiceCenter.getInstance().info(serviceref)
+		if info:
+			timeCreate =  strftime("%A %d %b %Y", localtime(info.getInfo(serviceref, iServiceInformation.sTimeCreate)))
+			duration = "%d min" % (info.getLength(serviceref) / 60) 
+			filesize = "%d MB" % (info.getInfoObject(serviceref, iServiceInformation.sFileSize) / (1024*1024))
+			moviedetails = "%s  •  %s  •  %s" % (timeCreate, duration, filesize)
+			self["moviedetails"].setText(moviedetails)
 
 
 class MovieSelectionSummary(Screen):
@@ -534,6 +543,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		self["chosenletter"].visible = False
 
 		self["waitingtext"] = Label(_("Please wait... Loading list..."))
+		self["moviedetails"] = Label()
 
 		# create optional description border and hide immediately
 		self["DescriptionBorder"] = Pixmap()
@@ -1380,16 +1390,18 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		self.updateTags()
 		title = _("Recorded files...")
 		if config.usage.setup_level.index >= 2: # expert+
-			title += "  " + config.movielist.last_videodir.value
+			title += "  •  " + config.movielist.last_videodir.value
 		if self.selected_tags:
 			title += " - " + ','.join(self.selected_tags)
-		self.setTitle(title)
+		
 		self.displayMovieOffStatus()
 		self.displaySortStatus()
 		if not (self.reload_sel and self["list"].moveTo(self.reload_sel)):
 			if self.reload_home:
 				self["list"].moveToFirstMovie()
 		self["freeDiskSpace"].update()
+		title += "  •  " + self.diskinfo.getText()
+		self.setTitle(title)
 		self["waitingtext"].visible = False
 		self.createPlaylist()
 		if self.playGoTo:

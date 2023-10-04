@@ -78,6 +78,7 @@ class PluginBrowser(Screen, ProtectedScreen):
 			"moveUp": self.moveUp,
 			"moveDown": self.moveDown
 		})
+
 		self["NumberActions"] = NumberActionMap(["NumberActions"],
 		{
 			"1": self.keyNumberGlobal,
@@ -220,6 +221,7 @@ class PluginBrowser(Screen, ProtectedScreen):
 				tmp[7] = "%s %s" % (x[0] + 1, tmp[7])
 				x[1][1] = tuple(tmp)
 		self["list"].l.setList(self.list)
+		self["list"].listCount = len(self.list)
 
 	def showHelp(self):
 		if config.usage.menu_show_numbers.value not in ("menu&plugins", "plugins"):

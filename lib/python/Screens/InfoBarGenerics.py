@@ -19,9 +19,11 @@ from Screens.EpgSelection import EPGSelection
 from Plugins.Plugin import PluginDescriptor
 
 from Screens.Screen import Screen
+from Screens.AudioSelection import CONFIG_FILE_AV, getAVDict
 from Screens.ScreenSaver import InfoBarScreenSaver
 from Screens import Standby
 from Screens.ChoiceBox import ChoiceBox
+from Screens.ClockScreen import ClockScreen
 from Screens.Dish import Dish
 from Screens.EventView import EventViewEPGSelect, EventViewSimple
 from Screens.InputBox import InputBox
@@ -35,6 +37,8 @@ from Screens.RdsDisplay import RdsInfoDisplay, RassInteractive
 from Screens.TimeDateInput import TimeDateInput
 from Screens.UnhandledKey import UnhandledKey
 from ServiceReference import ServiceReference, isPlayableForCur
+from Tools.General import getRealServiceRefForIPTV, isIPTV
+from pickle import loads as pickle_loads
 
 from Tools.ASCIItranslit import legacyEncode
 from Tools.Directories import fileExists, getRecordingFilename, moveFiles
@@ -202,6 +206,11 @@ def hasActiveSubservicesForCurrentChannel(service):
 class InfoBarDish:
 	def __init__(self):
 		self.dishDialog = self.session.instantiateDialog(Dish)
+		
+		
+class InfoBarClock:
+	def __init__(self):
+		self.clockScreen = self.session.instantiateDialog(ClockScreen)
 
 
 class InfoBarUnhandledKey:
@@ -271,15 +280,22 @@ class InfoBarShowHide(InfoBarScreenSaver):
 
 		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evStart: self.serviceStarted,
+				iPlayableService.evEnd: self.serviceEnded,
+				iPlayableService.evUpdatedInfo: self.queueChange,
+				#iPlayableService.evSubtitleListChanged: self.queueSubsChange,
 			})
 
 		InfoBarScreenSaver.__init__(self)
 		self.__state = self.STATE_SHOWN
 		self.__locked = 0
+		
+		self._waitForEventInfoTimer = eTimer()
+		self._waitForEventInfoTimer.callback.append(self.avChange)
 
 		self.hideTimer = eTimer()
 		self.hideTimer.callback.append(self.doTimerHide)
 		self.hideTimer.start(5000, True)
+		self.av_config = getAVDict()
 
 		self.onShow.append(self.__onShow)
 		self.onHide.append(self.__onHide)
@@ -364,12 +380,50 @@ class InfoBarShowHide(InfoBarScreenSaver):
 	def disconnectShowHideNotifier(self, fnc):
 		if fnc in self.onShowHideNotifiers:
 			self.onShowHideNotifiers.remove(fnc)
+			
+	def queueChange(self):
+		self._waitForEventInfoTimer.stop()
+		self._waitForEventInfoTimer.start(50, True)
+		
+		
+	def avChange(self):
+		service = self.session.nav.getCurrentService()
+		ref_p = self.session.nav.getCurrentlyPlayingServiceReference()
+		isStream = isIPTV(ref_p)
+		x = ref_p and ref_p.toString().split(":")
+		x_play = x and ":".join(x[:10]) or ""
+		if isStream:
+			try:
+				if x_play in self.av_config:
+					av_val = self.av_config[x_play]
+					subs_pid = None
+					audio_pid = None
+					if av_val.find("|") > -1:
+						split = av_val.split("|")
+						audio_pid = pickle_loads(split[0].encode())
+						subs_pid = pickle_loads(split[1].encode())
+					elif av_val and av_val != "":
+						audio_pid = pickle_loads(av_val.encode())
+					audio = service and service.audioTracks()
+					playinga_idx = audio and audio.getCurrentTrack()
+					n = audio and audio.getNumberOfTracks() or 0
+					if audio_pid and audio_pid != -1 and playinga_idx != audio_pid:
+						audio.selectTrack(audio_pid)
+					
+					self.enableSubtitle(subs_pid)
+					
+				self._waitForEventInfoTimer.stop()
+			except Exception as e:
+				self._waitForEventInfoTimer.stop()
 
 	def serviceStarted(self):
 		if self.execing:
 			if config.usage.show_infobar_on_zap.value:
 				self.doShow()
 		self.showHideVBI()
+		
+	def serviceEnded(self):
+		self._waitForEventInfoTimer.stop()
 
 	def startHideTimer(self):
 		if self.__state == self.STATE_SHOWN and not self.__locked:
@@ -878,13 +932,16 @@ class InfoBarChannelSelection:
 					if config.usage.quickzap_bouquet_change.value:
 						if self.servicelist.atBegin():
 							self.servicelist.prevBouquet()
+					#print("[move up]")
 					self.servicelist.moveUp()
-					cur = self.servicelist.getCurrentSelection()
+					cur = getRealServiceRefForIPTV(self.servicelist.getCurrentSelection())
 					if cur:
 						if self.servicelist.dopipzap:
 							isPlayable = self.session.pip.isPlayableForPipService(cur)
 						else:
 							isPlayable = isPlayableForCur(cur)
+					#if isPlayable:
+						#print("[move up] playable - " + cur.toString())
 					if cur and (cur.toString() == prev or isPlayable):
 							break
 		else:
@@ -900,8 +957,9 @@ class InfoBarChannelSelection:
 					if config.usage.quickzap_bouquet_change.value and self.servicelist.atEnd():
 						self.servicelist.nextBouquet()
 					else:
+						#print("[Move down]")
 						self.servicelist.moveDown()
-					cur = self.servicelist.getCurrentSelection()
+					cur = getRealServiceRefForIPTV(self.servicelist.getCurrentSelection())
 					if cur:
 						if self.servicelist.dopipzap:
 							isPlayable = self.session.pip.isPlayableForPipService(cur)
@@ -1757,22 +1815,61 @@ class InfoBarSeek:
 
 
 from Screens.PVRState import PVRState, TimeshiftState
+from Components.Pixmap import Pixmap
+from Tools.Directories import resolveFilename, SCOPE_GUISKIN
+from Tools.LoadPixmap import LoadPixmap
+from skin import applySkinFactor, parameters
 
 
 class InfoBarPVRState:
 	def __init__(self, screen=PVRState, force_show=False):
+		self["statetext"] = Label(text="")
+		self["statetexticon"] = Label(text="")
+		self["stateicon"] = Pixmap()
+
+		self.seekstate = self.SEEK_STATE_PLAY
+
+		w, h = parameters.get("PVRStateIconsSize", (90,90))
+
 		self.onPlayStateChanged.append(self.__playStateChanged)
 		self.pvrStateDialog = self.session.instantiateDialog(screen)
 		self.onShow.append(self._mayShow)
 		self.onHide.append(self.pvrStateDialog.hide)
 		self.force_show = force_show
+		self.picFF = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/pvr/ff.svg"), width=w)
+		self.picRew = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/pvr/rew.svg"), width=w)
+		self.picPlay = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/pvr/play.svg"), width=w)
+		self.picPause = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/pvr/pause.svg"), width=w)
 
 	def _mayShow(self):
+		if self.seekstate == self.SEEK_STATE_PLAY and self.picPlay is not None and not isinstance(self, InfoBarTimeshift):
+			self["stateicon"].setPixmap(self.picPlay)
+
 		if self.shown and self.seekstate != self.SEEK_STATE_PLAY:
 			self.pvrStateDialog.show()
 
 	def __playStateChanged(self, state):
 		playstateString = state[3]
+
+		self["statetexticon"].setText(playstateString)
+		if state[1] > 1:
+			self["statetext"].setText("x%d" % state[1])
+		elif state[1] < 0:
+			self["statetext"].setText("x%d" % -state[1])
+		elif state[1] == 0 and state[2] > 1:
+			self["statetext"].setText("x%d" % state[2])
+		else:
+			self["statetext"].setText("")
+			
+		if state[1] > 1 and self.picFF is not None:
+			self["stateicon"].setPixmap(self.picFF)
+		elif state[1] < 0 and self.picRew is not None:
+			self["stateicon"].setPixmap(self.picRew)
+		elif state == self.SEEK_STATE_PLAY and self.picPlay is not None and not isinstance(self, InfoBarTimeshift):
+			self["stateicon"].setPixmap(self.picPlay)
+		elif state == self.SEEK_STATE_PAUSE and self.picPause is not None:
+			self["stateicon"].setPixmap(self.picPause)
+
 		self.pvrStateDialog["state"].setText(playstateString)
 
 		# if we return into "PLAY" state, ensure that the dialog gets hidden if there will be no infobar displayed
@@ -2193,6 +2290,9 @@ class InfoBarTimeshift:
 			self.ts_current_event_timer.startLongTimer(duration)
 
 
+from Screens.PiPSetup import PiPSetup
+
+
 class ExtensionsList(ChoiceBox):
 	def __init__(self, session, clist, keys, refresh_list):
 		ChoiceBox.__init__(self, session, title=_("Please choose an extension..."), list=clist, keys=keys, skin_name="ExtensionsList", reorderConfig="extension_order", windowTitle=_("Extensions menu"))
@@ -2352,9 +2452,6 @@ class InfoBarJobman:
 
 	def JobViewCB(self, in_background):
 		job_manager.in_background = in_background
-
-
-from Screens.PiPSetup import PiPSetup
 
 # depends on InfoBarExtensions
 

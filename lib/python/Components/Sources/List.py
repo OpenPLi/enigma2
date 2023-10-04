@@ -56,6 +56,18 @@ to generate HTML."""
 
 	current = property(getCurrent)
 
+	@cached
+	def getInstance(self):
+		return self.master is not None and self.master.master.instance
+
+	instance = property(getInstance)
+
+	@cached
+	def getContent(self):
+		return self.master is not None and self.master.master.content
+
+	content = property(getContent)
+
 	def setIndex(self, index):
 		if self.master is not None:
 			self.master.index = index
@@ -99,6 +111,12 @@ to generate HTML."""
 
 	style = property(getStyle, setStyle)
 
+	def getHeight(self):
+		return self.master.master.instance.size().height()
+	
+	def getItemHeight(self):
+		return self.master.master.content.getItemSize().height()
+
 	def updateList(self, list):
 		"""Changes the list without changing the selection or emitting changed Events"""
 		assert len(list) == len(self.__list)
@@ -130,3 +148,9 @@ to generate HTML."""
 
 	def getSelectedIndex(self):
 		return self.getIndex()
+
+	def getCurrentIndex(self):
+		return self.getIndex()
+
+	def getListCount(self):
+		return len(self.list)

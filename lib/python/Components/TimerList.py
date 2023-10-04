@@ -116,6 +116,8 @@ class TimerList(GUIComponent):
 		self.iconDisabled = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/timer_off.png"))
 		self.iconAutoTimer = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/timer_autotimer.png"))
 
+		self.onSelectionChanged = []
+
 	def applySkin(self, desktop, parent):
 		def itemHeight(value):
 			self.itemHeight = parseScale(value)
@@ -163,8 +165,13 @@ class TimerList(GUIComponent):
 
 	def postWidgetCreate(self, instance):
 		instance.setContent(self.l)
+		instance.selectionChanged.get().append(self.selectionChanged)
 		self.instance = instance
 		instance.setWrapAround(True)
+
+	def selectionChanged(self):
+		for x in self.onSelectionChanged:
+			x()
 
 	def moveToIndex(self, index):
 		self.instance.moveSelectionTo(index)

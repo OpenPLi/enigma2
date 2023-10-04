@@ -2,6 +2,7 @@ from skin import applySkinFactor, parseColor, parseFont, parseScale
 from Components.config import config, ConfigClock, ConfigInteger, ConfigSubsection, ConfigYesNo, ConfigSelection, ConfigSelectionNumber
 from Components.Pixmap import Pixmap
 from Components.Button import Button
+from Components.Label import Label
 from Components.ActionMap import HelpableActionMap
 from Components.GUIComponent import GUIComponent
 from Components.EpgList import Rect
@@ -35,6 +36,7 @@ from time import localtime, time, strftime, mktime
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
 from Tools.BoundFunction import boundFunction
+from Tools.General import getRealServiceRefForIPTV
 
 MAX_TIMELINES = 6
 
@@ -295,7 +297,12 @@ class EPGList(GUIComponent):
 	def getIndexFromService(self, serviceref):
 		if serviceref is not None:
 			for x in range(len(self.list)):
-				if CompareWithAlternatives(self.list[x][0], serviceref.toString()):
+				#if CompareWithAlternatives(self.list[x][0], serviceref.toString()):
+				#	
+				#	return x
+				list_ref = getRealServiceRefForIPTV(":".join(self.list[x][0].split(":")[:10]), True)
+				cur_ref = ":".join(getRealServiceRefForIPTV(serviceref).toString().split(":")[:10])
+				if list_ref == cur_ref:
 					return x
 		return None
 
@@ -325,18 +332,18 @@ class EPGList(GUIComponent):
 		events = self.cur_service[2]
 		refstr = self.cur_service[0]
 		if self.cur_event is None or not events or not len(events):
-			return (None, ServiceReference(refstr))
+			return (None, ServiceReference(getRealServiceRefForIPTV(refstr, True)))
 		event = events[self.cur_event] #(event_id, event_title, begin_time, duration)
 		eventid = event[0]
-		service = ServiceReference(refstr)
+		service = ServiceReference(getRealServiceRefForIPTV(refstr, True))
 		event = self.getEventFromId(service, eventid) # get full event info
 		return (event, service)
 
-	def connectSelectionChanged(func):
+	def connectSelectionChanged(self, func):
 		if not self.onSelChanged.count(func):
 			self.onSelChanged.append(func)
 
-	def disconnectSelectionChanged(func):
+	def disconnectSelectionChanged(self, func):
 		self.onSelChanged.remove(func)
 
 	def serviceChanged(self):
@@ -344,28 +351,41 @@ class EPGList(GUIComponent):
 		if cur_sel:
 			self.findBestEvent()
 
-	def findBestEvent(self):
+	def findBestEvent(self, last_time=0):
 		old_service = self.cur_service  #(service, service_name, events, picon)
 		cur_service = self.cur_service = self.l.getCurrentSelection()
+		if cur_service:
+			print("[EPG] CurService: " + cur_service[0])
 		time_base = self.getTimeBase()
-		now = time()
+
+
 		if old_service and self.cur_event is not None:
 			events = old_service[2]
 			cur_event = events[self.cur_event] #(event_id, event_title, begin_time, duration)
-			if self.last_time < cur_event[2] or cur_event[2] + cur_event[3] < self.last_time:
-				self.last_time = cur_event[2]
-		if now > self.last_time:
-			self.last_time = now
+			last_time = cur_event[2]
+			if last_time < time_base:
+				last_time = time_base
 		if cur_service:
-			self.cur_event = None
+			self.cur_event = 0
 			events = cur_service[2]
 			if events and len(events):
-				self.cur_event = idx = 0
-				for event in events: #iterate all events
-					if event[2] <= self.last_time and event[2] + event[3] > self.last_time:
-						self.cur_event = idx
-						break
-					idx += 1
+				if last_time:
+					best_diff = 0
+					best = len(events) #set invalid
+					idx = 0
+					for event in events: #iterate all events
+						ev_time = event[2]
+						#if ev_time < time_base:
+						#	ev_time = time_base
+						diff = abs(ev_time-last_time)
+						if (best == len(events)) or (diff < best_diff):
+							best = idx
+							best_diff = diff
+						idx += 1
+					if best != len(events):
+						self.cur_event = best
+			else:
+				self.cur_event = None
 		self.selEntry(0)
 
 	def selectionChanged(self):
@@ -450,6 +470,7 @@ class EPGList(GUIComponent):
 		return xpos + event_rect.left(), width
 
 	def buildEntry(self, service, service_name, events, picon, serviceref):
+		service = getRealServiceRefForIPTV(service, True)
 		r1 = self.service_rect
 		r2 = self.event_rect
 		selected = self.cur_service[0] == service
@@ -642,7 +663,7 @@ class EPGList(GUIComponent):
 			elif dir == -1: #prev
 				if valid_event and self.cur_event - 1 >= 0:
 					self.cur_event -= 1
-				elif self.offs > 0:
+				else:
 					self.offs -= 1
 					self.fillMultiEPG(None) # refill
 					return True
@@ -651,20 +672,18 @@ class EPGList(GUIComponent):
 				self.fillMultiEPG(None) # refill
 				return True
 			elif dir == -2: #prev
-				if self.offs > 0:
-					self.offs -= 1
-					self.fillMultiEPG(None) # refill
-					return True
+				self.offs -= 1
+				self.fillMultiEPG(None) # refill
+				return True
 			elif dir == +3: #next day
 				self.offs += 60 * 24 // self.time_epoch
 				self.fillMultiEPG(None) # refill
 				return True
 			elif dir == -3: #prev day
 				self.offs -= 60 * 24 // self.time_epoch
-				if self.offs < 0:
-					self.offs = 0
 				self.fillMultiEPG(None) # refill
 				return True
+		
 		if cur_service and valid_event:
 			entry = entries[self.cur_event] #(event_id, event_title, begin_time, duration)
 			time_base = self.time_base + self.offs * self.time_epoch * 60
@@ -718,6 +737,7 @@ class EPGList(GUIComponent):
 			serviceIdx += 1
 
 		self.l.setList(self.list)
+
 		self.findBestEvent()
 
 	def getEventRect(self):
@@ -861,10 +881,15 @@ class GraphMultiEPG(Screen, HelpableScreen):
 		self.selectBouquet = selectBouquet
 		self.epg_bouquet = epg_bouquet
 		self.serviceref = None
-		now = time() - config.epg.histminutes.getValue() * 60
-		self.ask_time = now - now % int(config.misc.graph_mepg.roundTo.getValue())
+		# now = time() - config.epg.histminutes.getValue() * 60 * 60
+		# self.ask_time = now - now % int(config.misc.graph_mepg.roundTo.getValue())
+		now = time() #- 96*60*60
+		tmp = now % 900
+		self.ask_time = now - tmp
+		self["epgentrydetails"] = Label()
 		self["key_red"] = Button("")
 		self["key_green"] = Button("")
+		
 
 		global listscreen
 		if listscreen:
@@ -1106,6 +1131,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 		self.ask_time = event.getBeginTime()
 		l.resetOffset()
 		l.fillMultiEPG(None, self.ask_time)
+		self.setEventInfoLabel(event)
 		self.moveTimeLines(True)
 
 	def showSetup(self):
@@ -1209,9 +1235,12 @@ class GraphMultiEPG(Screen, HelpableScreen):
 		l.setShowServiceMode(config.misc.graph_mepg.servicetitle_mode.value)
 		self["timeline_text"].setDateFormat(config.misc.graph_mepg.servicetitle_mode.value)
 		l.fillMultiEPG(self.services, self.ask_time)
-		l.moveToService(self.serviceref)
+		# l.moveToService(self.serviceref)
+		# l.setCurrentlyPlaying(self.previousref)
+		l.moveToService(self.previousref)
 		l.setCurrentlyPlaying(self.previousref)
 		self.moveTimeLines()
+		
 
 	def eventViewCallback(self, setEvent, setService, val):
 		l = self["list"]
@@ -1453,11 +1482,30 @@ class GraphMultiEPG(Screen, HelpableScreen):
 
 	def finishSanityCorrection(self, answer):
 		self.finishedTimerAdd(answer)
+		
+	def setEventInfoLabel(self, event):
+		if not event:
+			return
+		begin = event.getBeginTime()
+		end = begin + event.getDuration()
+		now = int(time())
+		t_start = localtime(begin)
+		t_end = localtime(end)
+		if begin <= now <= end:
+			duration = end - now
+			duration_str = "+%d min" % (duration / 60)
+		else:
+			duration = event.getDuration()
+			duration_str = "%d min" % (duration / 60)
+		start_time_str = "%2d:%02d" % (t_start.tm_hour, t_start.tm_min)
+		end_time_str = "%2d:%02d" % (t_end.tm_hour, t_end.tm_min) 
+		self["epgentrydetails"].setText("%s - %s  •  %s" % (start_time_str, end_time_str, duration_str))
 
 	def onSelectionChanged(self):
 		cur = self["list"].getCurrent()
 		event = cur[0]
 		self["Event"].newEvent(event)
+		self.setEventInfoLabel(event)
 
 		if cur[1] is None or cur[1].getServiceName() == "":
 			if self.key_green_choice != self.EMPTY:
@@ -1480,11 +1528,13 @@ class GraphMultiEPG(Screen, HelpableScreen):
 				self["key_green"].setText("")
 				self.key_green_choice = self.EMPTY
 			return
-
+		
+		
 		eventid = event.getEventId()
 		begin = event.getBeginTime()
 		end = begin + event.getDuration()
 		refstr = ':'.join(servicerefref.toString().split(':')[:11])
+		
 		isRecordEvent = False
 		for timer in self.session.nav.RecordTimer.getAllTimersList():
 			needed_ref = ':'.join(timer.service_ref.ref.toString().split(':')[:11]) == refstr
