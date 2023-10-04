@@ -17,9 +17,6 @@ from Tools.General import isIPTV
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
 from Tools.LoadPixmap import LoadPixmap
 from pickle import load as pickle_load, dump as pickle_dump, dumps as pickle_dumps
-from Components.UsageConfig import originalAudioTracks, visuallyImpairedCommentary
-from Components.Converter.ServiceInfo import StdAudioDesc
-from Tools.ISO639 import LanguageCodes
 
 from enigma import iPlayableService, eTimer, eSize, eDVBDB, eServiceReference, eServiceCenter, iServiceInformation
 
@@ -119,6 +116,10 @@ class AudioSelection(ConfigListScreen, Screen):
 		self.saveAVDict(self.infobar.av_config)
 
 	def fillList(self, arg=None):
+		from Components.UsageConfig import originalAudioTracks, visuallyImpairedCommentary
+		from Components.Converter.ServiceInfo import StdAudioDesc
+		from Tools.ISO639 import LanguageCodes
+		
 		streams = []
 		conflist = []
 		selectedidx = 0
