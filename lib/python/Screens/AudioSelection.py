@@ -6,16 +6,16 @@ from Screens.ChoiceBox import ChoiceBox
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.ActionMap import NumberActionMap
 from Components.ConfigList import ConfigListScreen
-from Components.config import config, ConfigSubsection, getConfigListEntry, ConfigNothing, ConfigSelection, ConfigOnOff, ConfigYesNo
+from Components.config import config, ConfigSubsection, ConfigNothing, ConfigSelection, ConfigYesNo
 from Components.Label import Label
 from Components.Sources.List import List
 from Components.Sources.Boolean import Boolean
 from Components.SystemInfo import SystemInfo
 from Components.VolumeControl import VolumeControl
-from os import path as os_path, open as os_open, close as os_close, O_RDWR as os_O_RDWR, O_CREAT  as os_O_CREAT 
+from os import path as os_path
 from Tools.General import isIPTV
-from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
-from Tools.LoadPixmap import LoadPixmap
+#from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
+#from Tools.LoadPixmap import LoadPixmap
 from pickle import load as pickle_load, dump as pickle_dump, dumps as pickle_dumps
 
 from enigma import iPlayableService, eTimer, eSize, eDVBDB, eServiceReference, eServiceCenter, iServiceInformation
@@ -25,7 +25,7 @@ FOCUS_CONFIG, FOCUS_STREAMS = range(2)
 
 CONFIG_FILE_AV = '/etc/enigma2/config_av'
 
-selectionpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "selections/selectioncross.png"))
+#selectionpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "selections/selectioncross.png"))
 
 def getAVDict():
 	if os_path.exists(CONFIG_FILE_AV):
@@ -119,7 +119,7 @@ class AudioSelection(ConfigListScreen, Screen):
 		from Components.UsageConfig import originalAudioTracks, visuallyImpairedCommentary
 		from Components.Converter.ServiceInfo import StdAudioDesc
 		from Tools.ISO639 import LanguageCodes
-		
+
 		streams = []
 		conflist = []
 		selectedidx = 0

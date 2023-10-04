@@ -19,7 +19,7 @@ from Screens.EpgSelection import EPGSelection
 from Plugins.Plugin import PluginDescriptor
 
 from Screens.Screen import Screen
-from Screens.AudioSelection import CONFIG_FILE_AV, getAVDict
+from Screens.AudioSelection import getAVDict
 from Screens.ScreenSaver import InfoBarScreenSaver
 from Screens import Standby
 from Screens.ChoiceBox import ChoiceBox
