@@ -6,12 +6,17 @@ from Screens.ChoiceBox import ChoiceBox
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.ActionMap import NumberActionMap
 from Components.ConfigList import ConfigListScreen
-from Components.config import config, ConfigSubsection, ConfigNothing, ConfigSelection, ConfigOnOff, ConfigYesNo
+from Components.config import config, ConfigSubsection, getConfigListEntry, ConfigNothing, ConfigSelection, ConfigOnOff, ConfigYesNo
 from Components.Label import Label
 from Components.Sources.List import List
 from Components.Sources.Boolean import Boolean
 from Components.SystemInfo import SystemInfo
 from Components.VolumeControl import VolumeControl
+from os import path as os_path, open as os_open, close as os_close, O_RDWR as os_O_RDWR, O_CREAT  as os_O_CREAT 
+from Tools.General import isIPTV
+from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
+from Tools.LoadPixmap import LoadPixmap
+from pickle import load as pickle_load, dump as pickle_dump, dumps as pickle_dumps
 from Components.UsageConfig import originalAudioTracks, visuallyImpairedCommentary
 from Components.Converter.ServiceInfo import StdAudioDesc
 from Tools.ISO639 import LanguageCodes
@@ -20,6 +25,19 @@ from enigma import iPlayableService, eTimer, eSize, eDVBDB, eServiceReference, e
 
 FOCUS_CONFIG, FOCUS_STREAMS = range(2)
 [PAGE_AUDIO, PAGE_SUBTITLES] = ["audio", "subtitles"]
+
+CONFIG_FILE_AV = '/etc/enigma2/config_av'
+
+selectionpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "selections/selectioncross.png"))
+
+def getAVDict():
+	if os_path.exists(CONFIG_FILE_AV):
+		pkl_file = open(CONFIG_FILE_AV, 'rb')
+		if pkl_file:
+			avdict = pickle_load(pkl_file)
+			pkl_file.close()
+			return avdict
+	return {}
 
 
 class AudioSelection(ConfigListScreen, Screen):
@@ -78,6 +96,27 @@ class AudioSelection(ConfigListScreen, Screen):
 		self["config"].instance.setSelectionEnable(False)
 		self.focus = FOCUS_STREAMS
 		self.settings.menupage.addNotifier(self.fillList)
+		
+	def saveAVDict(self, dict):
+		pkl_file = open(CONFIG_FILE_AV, 'wb')
+		if pkl_file:
+			pickle_dump(dict, pkl_file)
+			pkl_file.close()
+			
+	def setAVInfo(self, service):
+		playinga_idx = service and service.audioTracks().getCurrentTrack() or -1
+		ref = self.session.nav.getCurrentlyPlayingServiceReference()
+		x = ref.toString().split(":")
+		ref_str = ":".join(x[:10])
+
+		playing_idx = self.infobar.selected_subtitle
+
+		if playing_idx:
+			self.infobar.av_config[ref_str] = pickle_dumps(playinga_idx, 0).decode() + "|" + pickle_dumps(playing_idx, 0).decode()
+		else:
+			self.infobar.av_config[ref_str] = pickle_dumps(playinga_idx, 0).decode()
+
+		self.saveAVDict(self.infobar.av_config)
 
 	def fillList(self, arg=None):
 		streams = []
@@ -274,8 +313,12 @@ class AudioSelection(ConfigListScreen, Screen):
 	def changeAudio(self, audio):
 		track = int(audio)
 		if isinstance(track, int):
-			if self.session.nav.getCurrentService().audioTracks().getNumberOfTracks() > track:
+			service = self.session.nav.getCurrentService()
+			ref = self.session.nav.getCurrentlyPlayingServiceReference()
+			if service.audioTracks().getNumberOfTracks() > track:
 				self.audioTracks.selectTrack(track)
+				if isIPTV(ref):
+					self.setAVInfo(service)
 
 	def keyLeft(self):
 		if self.focus == FOCUS_CONFIG:
@@ -374,6 +417,8 @@ class AudioSelection(ConfigListScreen, Screen):
 	def keyOk(self):
 		if self.focus == FOCUS_STREAMS and self["streams"].list:
 			cur = self["streams"].getCurrent()
+			ref = self.session.nav.getCurrentlyPlayingServiceReference()
+			service = self.session.nav.getCurrentService()
 			if self.settings.menupage.getValue() == PAGE_AUDIO and cur[0] is not None:
 				self.changeAudio(cur[0])
 				self.__updatedInfo()
@@ -387,6 +432,8 @@ class AudioSelection(ConfigListScreen, Screen):
 					config.subtitles.show.value = True
 					self.infobar.enableSubtitle(cur[0][:5])
 					self.__updatedInfo()
+				if isIPTV(ref):
+					self.setAVInfo(service)
 			self.close(0)
 		elif self.focus == FOCUS_CONFIG:
 			self.keyRight()
