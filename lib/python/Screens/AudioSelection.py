@@ -15,11 +15,16 @@ from Components.VolumeControl import VolumeControl
 from Components.UsageConfig import originalAudioTracks, visuallyImpairedCommentary
 from Components.Converter.ServiceInfo import StdAudioDesc
 from Tools.ISO639 import LanguageCodes
+from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
+from Tools.LoadPixmap import LoadPixmap
 
 from enigma import iPlayableService, eTimer, eSize, eDVBDB, eServiceReference, eServiceCenter, iServiceInformation
 
 FOCUS_CONFIG, FOCUS_STREAMS = range(2)
 [PAGE_AUDIO, PAGE_SUBTITLES] = ["audio", "subtitles"]
+
+
+selectionpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "selections/selectioncross.png"))
 
 
 class AudioSelection(ConfigListScreen, Screen):
@@ -146,7 +151,7 @@ class AudioSelection(ConfigListScreen, Screen):
 							language += lang
 						cnt += 1
 
-					streams.append((x, "", number, description, language, selected))
+					streams.append((x, "", number, description, language, selected, selectionpng if selected == "X" else None))
 
 			else:
 				streams = []
@@ -229,7 +234,7 @@ class AudioSelection(ConfigListScreen, Screen):
 						description = _("unknown") + ": %s" % x[2]
 					number = str(int(number) + 1)
 
-				streams.append((x, "", number, description, language, selected))
+				streams.append((x, "", number, description, language, selected, selectionpng if selected == "X" else None))
 				idx += 1
 
 			conflist.append((_("To audio selection"), self.settings.menupage))
