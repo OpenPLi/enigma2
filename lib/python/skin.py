@@ -851,9 +851,9 @@ def loadSingleSkinData(desktop, screenID, domSkin, pathSkin, scope=SCOPE_CURRENT
 			except Exception as err:
 				raise SkinError("Bad parameter: '%s'" % str(err))
 	for tag in domSkin.findall("menus"):
-		for setup in tag.findall("menu"):
-			key = setup.attrib.get("key")
-			image = setup.attrib.get("image")
+		for menu in tag.findall("menu"):
+			key = menu.attrib.get("key")
+			image = menu.attrib.get("image")
 			if key and image:
 				menus[key] = image
 				# print("[Skin] DEBUG: Menu key='%s', image='%s'." % (key, image))
