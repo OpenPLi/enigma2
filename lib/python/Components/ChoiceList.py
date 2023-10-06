@@ -10,7 +10,7 @@ def ChoiceEntryComponent(key=None, text=["--"]):
 	res = [text]
 	if text[0] == "--":
 		# Get are we want graphical separator (solid line with color) or dashed line
-		isUseGraphicalSeparator = parameters.get("UseGraphicalSeparator", 0)
+		isUseGraphicalSeparator = parameters.get("ChoicelistUseGraphicalSeparator", 0)
 		x, y, w, h = parameters.get("ChoicelistDash", applySkinFactor(0, 0, 800, 25))
 		if isUseGraphicalSeparator:
 			bk_color = parameters.get("ChoicelistSeparatorColor", "0x00555556")

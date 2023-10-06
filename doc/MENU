@@ -1,0 +1,93 @@
+Adding a menu image that identifies the current menu screen based on menuID
+===========================================================================
+
+In skin.xml add the list of images to the "menus" section based on menuID.
+
+	Syntax:
+	
+		<menus>
+			<menu key="default" image="path/myNameForDefault.png" />
+			<menu key="<menuID>" image="path/myNameFor<menuID>.png" />
+		</menus>
+	
+	This element is optional but if defined allows a skin designer to associate 
+	a graphical image with any "Screens/Menu.py" based screen.  The "menus" 
+	tag element has no attributes and contains a list of "menu" tag elements.
+	
+	Each "menu" tag element must contain two attributes:
+	
+		key	This attribute is the value of the "key" attribute from a 
+			menu.xml file.  If the keys match then this entry defines 
+			a graphical image that is to be used when the nominated 
+			Setup screen is displayed.
+	
+		image	This attribute is the pathname of the graphical image that 
+			is to be associated with the Menu screen identified by the 
+			"key" attribute.
+	
+	There is a special "key" attribute with the name "default".  This entry, 
+	if defined, assigns a default graphical image to be used in ALL 
+	"Screens/Menu.py" screens that do not have a specifically assigned 
+	image.
+
+
+In skin.xml add the widget to MainMenu and Menu screens:
+	<screen name="MainMenu" ... >
+		...
+		<widget name="menuimage" position="0,50" size="200,400" alphatest="blend" conditional="menuimage" transparent="1" />
+		...
+	</screen>
+	<screen name="Menu" ... >
+		...
+		<widget name="menuimage" position="0,50" size="200,400" alphatest="blend" conditional="menuimage" transparent="1" />
+		...
+	</screen>
+
+
+Adding icons to the menu list entries
+=====================================
+
+In skin.xml add the icon size parameter (width x height):
+	<parameter name="MenuIconSize" value="48,48" />
+
+
+In skin.xml add the list of icons to the "menuicons" section based on "key" from menu.xml.
+
+	Syntax:
+	
+		<menuicons>
+			<menuicon key="default" image="path/myNameForDefault.png" />
+			<menuicon key="scan" image="path/myNameForScan.png" />
+		</menuicons>
+	
+	This element is optional but if defined allows a skin designer to associate 
+	a graphical icons with menu list items.  The "menuicons" tag element has no 
+	attributes and contains a list of "menuicon" tag elements.
+	
+	Each "menuicon" tag element must contain two attributes:
+	
+		key	This attribute is the value of the "key" attribute from a 
+			menu.xml file. If the keys match then this entry defines 
+			a graphical icon that is to be used in the list item 
+			associated with that key.
+	
+		image	This attribute is the pathname of the graphical image that 
+			is to be associated with the Menu item identified by the 
+			"key" attribute.
+	
+	There is a special "key" attribute with the name "default".  This entry, 
+	if defined, assigns a default graphical icon to be used in any list item
+	that do not have a specifically assigned icon.
+
+
+In skin.xml the skin widget for the Menu screen with icons looks like this:
+
+<widget source="menu" render="Listbox" position="72,274" size="564,545" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1">
+	<convert type="TemplatedMultiContent">
+		{"template": [ MultiContentEntryText(pos = (97,5), size = (435,45), flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 0),
+					   MultiContentEntryPixmapAlphaBlend(pos = (32,5), size = (48,48), png = 5)],
+		"fonts": [gFont("Regular",34)],
+		"itemHeight": 60
+		}
+	</convert>
+</widget>

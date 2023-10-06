@@ -3,12 +3,14 @@ from Screens.MessageBox import MessageBox
 from Screens.ParentalControlSetup import ProtectedScreen
 from Components.Sources.List import List
 from Components.ActionMap import NumberActionMap, ActionMap
+from Components.Pixmap import Pixmap
 from Components.Sources.StaticText import StaticText
 from Components.config import configfile
 from Components.PluginComponent import plugins
 from Components.config import config, ConfigDictionarySet, NoSave
 from Components.SystemInfo import SystemInfo
 from Tools.BoundFunction import boundFunction
+from skin import parameters, menus, menuicons
 from Plugins.Plugin import PluginDescriptor
 from Tools.Directories import resolveFilename, SCOPE_SKINS, SCOPE_GUISKIN
 from Tools.LoadPixmap import LoadPixmap
@@ -18,32 +20,15 @@ import xml.etree.ElementTree
 
 from Screens.Setup import Setup, getSetupTitle
 
-def MenuEntryPixmap(entryID, png_cache, parentMenuEntryID):
- 	# imported here to avoid circular import
-	from skin import parameters
-	icoSize = int(parameters.get("MenuIconsSize", 192))
-	width = icoSize
-	height = icoSize
-	png = png_cache.get(entryID, None)
-	if png is None: # no cached entry
-		pngPath = resolveFilename(SCOPE_GUISKIN, "menu/" + entryID + ".svg")
-		pos = config.skin.primary_skin.value.rfind('/')
-		if pos > -1:
-			current_skin = config.skin.primary_skin.value[:pos+1]
-		else:
-			current_skin = ""
-		if ( current_skin in pngPath and current_skin ) or not current_skin:
-			png = LoadPixmap(pngPath, cached=True, width=width, height=0 if pngPath.endswith(".svg") else height) #looking for a dedicated icon
-		if png is None: # no dedicated icon found
-			if parentMenuEntryID is not None: # check do we have parent menu item that can use for icon
-				png = png_cache.get(parentMenuEntryID, None)
-		png_cache[entryID] = png
-	if png is None:
-		png = png_cache.get("missing", None)
-		if png is None:
-			pngPath = resolveFilename(SCOPE_GUISKIN, "menu/missing.svg")
-			png = LoadPixmap(pngPath, cached=True, width=width, height=0 if pngPath.endswith(".svg") else height)
-			png_cache["missing"] = png
+def MenuEntryPixmap(key, png_cache):
+	if not menuicons:
+		return None
+	w, h = parameters.get("MenuIconSize", (50, 50))
+	png = png_cache.get(key)
+	if png is None:  # no cached entry
+		pngPath = menuicons.get(key, menuicons.get("default", ""))
+		if pngPath:
+			png = LoadPixmap(resolveFilename(SCOPE_GUISKIN, pngPath), cached=True, width=w, height=0 if pngPath.endswith(".svg") else h)
 	return png
 
 # read the menu
@@ -103,7 +88,7 @@ class Menu(Screen, ProtectedScreen):
 		weight = node.get("weight", 50)
 		description = node.get("description", "").encode("UTF-8") or None
 		description = description and _(description)
-		menupng = MenuEntryPixmap(entryID, self.png_cache, parent)
+		menupng = MenuEntryPixmap(entryID, self.png_cache)
 		x = node.get("flushConfigOnClose")
 		if x:
 			a = boundFunction(self.session.openWithCallback, self.menuClosedWithConfigFlush, Menu, node)
@@ -140,7 +125,7 @@ class Menu(Screen, ProtectedScreen):
 		weight = node.get("weight", 50)
 		description = node.get("description", "").encode("UTF-8") or None
 		description = description and _(description)
-		menupng = MenuEntryPixmap(entryID, self.png_cache, parent)
+		menupng = MenuEntryPixmap(entryID, self.png_cache)
 		for x in node:
 			if x.tag == 'screen':
 				module = x.get("module")
@@ -219,16 +204,32 @@ class Menu(Screen, ProtectedScreen):
 		title = self.__class__.__name__ == "MenuSort" and _("Menusort (%s)") % title or title
 		self["title"] = StaticText(title)
 		self.setTitle(title)
+		self.loadMenuImage()
 
 		self.number = 0
 		self.nextNumberTimer = eTimer()
 		self.nextNumberTimer.callback.append(self.okbuttonClick)
 		if len(self.list) == 1:
 			self.onExecBegin.append(self.__onExecBegin)
+		if self.layoutFinished not in self.onLayoutFinish:
+			self.onLayoutFinish.append(self.layoutFinished)
 
 	def __onExecBegin(self):
 		self.onExecBegin.remove(self.__onExecBegin)
 		self.okbuttonClick()
+
+	def layoutFinished(self):
+		if self.menuImage:
+			self["menuimage"].instance.setPixmap(self.menuImage)
+
+	def loadMenuImage(self):
+		self.menuImage = None
+		if menus and self.menuID:
+			menuImage = menus.get(self.menuID, menus.get("default", ""))
+			if menuImage:
+				self.menuImage = LoadPixmap(resolveFilename(SCOPE_GUISKIN, menuImage))
+				if self.menuImage:
+					self["menuimage"] = Pixmap()
 
 	def showHelp(self):
 		if config.usage.menu_show_numbers.value not in ("menu&plugins", "menu"):
@@ -267,7 +268,7 @@ class Menu(Screen, ProtectedScreen):
 					if x[2] == plugin_menuid:
 						self.list.remove(x)
 						break
-				menupng = MenuEntryPixmap(l[2], self.png_cache, parentEntryID)
+				menupng = MenuEntryPixmap(l[2], self.png_cache)
 				self.list.append((l[0], boundFunction(l[1], self.session, close=self.close), l[2], l[3] or 50, description, menupng))
 
 		if "user" in config.usage.menu_sort_mode.value and self.menuID == "mainmenu":
@@ -373,8 +374,8 @@ class Menu(Screen, ProtectedScreen):
 			if not self.sub_menu_sort.getConfigValue(entry[2], "hidden"):
 				self.list.append(entry)
 		if not self.list:
-			self.list.append(('', None, 'dummy', '10', 10))
-		self.list.sort(key=lambda listweight: int(listweight[4]))
+			self.list.append(('', None, 'dummy', '10', None, None, 10))
+		self.list.sort(key=lambda listweight: int(listweight[-1]))
 
 
 class MenuSort(Menu):
@@ -414,8 +415,8 @@ class MenuSort(Menu):
 	def hide_show_entries(self):
 		self.list = list(self.full_list)
 		if not self.list:
-			self.list.append(('', None, 'dummy', '10', 10))
-		self.list.sort(key=lambda listweight: int(listweight[4]))
+			self.list.append(('', None, 'dummy', '10', None, None, 10))
+		self.list.sort(key=lambda listweight: int(listweight[-1]))
 
 	def selectionChanged(self):
 		selection = self["menu"].getCurrent() and len(self["menu"].getCurrent()) > 2 and self["menu"].getCurrent()[2] or ""
