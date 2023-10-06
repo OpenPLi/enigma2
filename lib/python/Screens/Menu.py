@@ -10,6 +10,7 @@ from Components.PluginComponent import plugins
 from Components.config import config, ConfigDictionarySet, NoSave
 from Components.SystemInfo import SystemInfo
 from Tools.BoundFunction import boundFunction
+from skin import parameters, menus, menuicons
 from Plugins.Plugin import PluginDescriptor
 from Tools.Directories import resolveFilename, SCOPE_SKINS, SCOPE_GUISKIN
 from Tools.LoadPixmap import LoadPixmap
@@ -19,32 +20,15 @@ import xml.etree.ElementTree
 
 from Screens.Setup import Setup, getSetupTitle
 
-def MenuEntryPixmap(entryID, png_cache, parentMenuEntryID):
- 	# imported here to avoid circular import
-	from skin import parameters
-	icoSize = int(parameters.get("MenuIconsSize", 192))
-	width = icoSize
-	height = icoSize
-	png = png_cache.get(entryID, None)
-	if png is None: # no cached entry
-		pngPath = resolveFilename(SCOPE_GUISKIN, "menu/" + entryID + ".svg")
-		pos = config.skin.primary_skin.value.rfind('/')
-		if pos > -1:
-			current_skin = config.skin.primary_skin.value[:pos+1]
-		else:
-			current_skin = ""
-		if ( current_skin in pngPath and current_skin ) or not current_skin:
-			png = LoadPixmap(pngPath, cached=True, width=width, height=0 if pngPath.endswith(".svg") else height) #looking for a dedicated icon
-		if png is None: # no dedicated icon found
-			if parentMenuEntryID is not None: # check do we have parent menu item that can use for icon
-				png = png_cache.get(parentMenuEntryID, None)
-		png_cache[entryID] = png
-	if png is None:
-		png = png_cache.get("missing", None)
-		if png is None:
-			pngPath = resolveFilename(SCOPE_GUISKIN, "menu/missing.svg")
-			png = LoadPixmap(pngPath, cached=True, width=width, height=0 if pngPath.endswith(".svg") else height)
-			png_cache["missing"] = png
+def MenuEntryPixmap(key, png_cache):
+	if not menuicons:
+		return None
+	w, h = parameters.get("MenuIconSize", (50, 50))
+	png = png_cache.get(key)
+	if png is None:  # no cached entry
+		pngPath = menuicons.get(key, menuicons.get("default", ""))
+		if pngPath:
+			png = LoadPixmap(resolveFilename(SCOPE_GUISKIN, pngPath), cached=True, width=w, height=0 if pngPath.endswith(".svg") else h)
 	return png
 
 # read the menu
@@ -104,7 +88,7 @@ class Menu(Screen, ProtectedScreen):
 		weight = node.get("weight", 50)
 		description = node.get("description", "").encode("UTF-8") or None
 		description = description and _(description)
-		menupng = MenuEntryPixmap(entryID, self.png_cache, parent)
+		menupng = MenuEntryPixmap(entryID, self.png_cache)
 		x = node.get("flushConfigOnClose")
 		if x:
 			a = boundFunction(self.session.openWithCallback, self.menuClosedWithConfigFlush, Menu, node)
@@ -141,7 +125,7 @@ class Menu(Screen, ProtectedScreen):
 		weight = node.get("weight", 50)
 		description = node.get("description", "").encode("UTF-8") or None
 		description = description and _(description)
-		menupng = MenuEntryPixmap(entryID, self.png_cache, parent)
+		menupng = MenuEntryPixmap(entryID, self.png_cache)
 		for x in node:
 			if x.tag == 'screen':
 				module = x.get("module")
@@ -284,7 +268,7 @@ class Menu(Screen, ProtectedScreen):
 					if x[2] == plugin_menuid:
 						self.list.remove(x)
 						break
-				menupng = MenuEntryPixmap(l[2], self.png_cache, parentEntryID)
+				menupng = MenuEntryPixmap(l[2], self.png_cache)
 				self.list.append((l[0], boundFunction(l[1], self.session, close=self.close), l[2], l[3] or 50, description, menupng))
 
 		if "user" in config.usage.menu_sort_mode.value and self.menuID == "mainmenu":
