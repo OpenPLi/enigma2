@@ -6,7 +6,7 @@ from Screens.ChoiceBox import ChoiceBox
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.ActionMap import NumberActionMap
 from Components.ConfigList import ConfigListScreen
-from Components.config import config, ConfigSubsection, ConfigNothing, ConfigSelection, ConfigOnOff, ConfigYesNo
+from Components.config import config, ConfigSubsection, ConfigNothing, ConfigSelection, ConfigYesNo
 from Components.Label import Label
 from Components.Sources.List import List
 from Components.Sources.Boolean import Boolean
@@ -15,7 +15,7 @@ from Components.VolumeControl import VolumeControl
 from Components.UsageConfig import originalAudioTracks, visuallyImpairedCommentary
 from Components.Converter.ServiceInfo import StdAudioDesc
 from Tools.ISO639 import LanguageCodes
-from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
+from Tools.Directories import resolveFilename, SCOPE_GUISKIN
 from Tools.LoadPixmap import LoadPixmap
 
 from enigma import iPlayableService, eTimer, eSize, eDVBDB, eServiceReference, eServiceCenter, iServiceInformation
@@ -24,7 +24,7 @@ FOCUS_CONFIG, FOCUS_STREAMS = range(2)
 [PAGE_AUDIO, PAGE_SUBTITLES] = ["audio", "subtitles"]
 
 
-selectionpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "selections/audioselectionmark.png"))
+selectionpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_GUISKIN, "icons/audioselectionmark.png"))
 
 
 class AudioSelection(ConfigListScreen, Screen):
@@ -239,7 +239,7 @@ class AudioSelection(ConfigListScreen, Screen):
 
 			conflist.append((_("To audio selection"), self.settings.menupage))
 
-			if self.infobar.selected_subtitle and self.infobar.selected_subtitle != (0, 0, 0, 0) and not ".DVDPlayer'>" in repr(self.infobar):
+			if self.infobar.selected_subtitle and self.infobar.selected_subtitle != (0, 0, 0, 0) and ".DVDPlayer'>" not in repr(self.infobar):
 				self["key_blue"].setBoolean(True)
 				conflist.append((_("Subtitle Quickmenu"), ConfigNothing()))
 
@@ -303,7 +303,7 @@ class AudioSelection(ConfigListScreen, Screen):
 						self.plugincallfunc()
 				elif self.settings.menupage.getValue() == PAGE_SUBTITLES and self.infobar.selected_subtitle and self.infobar.selected_subtitle != (0, 0, 0, 0):
 					self.session.open(QuickSubtitlesConfigMenu, self.infobar)
-		if self.focus == FOCUS_STREAMS and self["streams"].count() and config == False:
+		if self.focus == FOCUS_STREAMS and self["streams"].count() and config is False:
 			self["streams"].setIndex(self["streams"].count() - 1)
 
 	def keyRed(self):
@@ -456,7 +456,7 @@ class QuickSubtitlesConfigMenu(ConfigListScreen, Screen):
 				getConfigMenuItem("config.subtitles.subtitle_bad_timing_delay"),
 				getConfigMenuItem("config.subtitles.subtitle_noPTSrecordingdelay"),
 			]
-		elif sub[0] == 1: # teletext
+		elif sub[0] == 1:  # teletext
 			menu = [
 				getConfigMenuItem("config.subtitles.ttx_subtitle_colors"),
 				getConfigMenuItem("config.subtitles.ttx_subtitle_original_position"),
