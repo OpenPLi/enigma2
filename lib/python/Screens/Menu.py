@@ -3,6 +3,7 @@ from Screens.MessageBox import MessageBox
 from Screens.ParentalControlSetup import ProtectedScreen
 from Components.Sources.List import List
 from Components.ActionMap import NumberActionMap, ActionMap
+from Components.Pixmap import Pixmap
 from Components.Sources.StaticText import StaticText
 from Components.config import configfile
 from Components.PluginComponent import plugins
@@ -219,16 +220,32 @@ class Menu(Screen, ProtectedScreen):
 		title = self.__class__.__name__ == "MenuSort" and _("Menusort (%s)") % title or title
 		self["title"] = StaticText(title)
 		self.setTitle(title)
+		self.loadMenuImage()
 
 		self.number = 0
 		self.nextNumberTimer = eTimer()
 		self.nextNumberTimer.callback.append(self.okbuttonClick)
 		if len(self.list) == 1:
 			self.onExecBegin.append(self.__onExecBegin)
+		if self.layoutFinished not in self.onLayoutFinish:
+			self.onLayoutFinish.append(self.layoutFinished)
 
 	def __onExecBegin(self):
 		self.onExecBegin.remove(self.__onExecBegin)
 		self.okbuttonClick()
+
+	def layoutFinished(self):
+		if self.menuImage:
+			self["menuimage"].instance.setPixmap(self.menuImage)
+
+	def loadMenuImage(self):
+		self.menuImage = None
+		if menus and self.menuID:
+			menuImage = menus.get(self.menuID, menus.get("default", ""))
+			if menuImage:
+				self.menuImage = LoadPixmap(resolveFilename(SCOPE_GUISKIN, menuImage))
+				if self.menuImage:
+					self["menuimage"] = Pixmap()
 
 	def showHelp(self):
 		if config.usage.menu_show_numbers.value not in ("menu&plugins", "menu"):
