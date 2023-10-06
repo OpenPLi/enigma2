@@ -374,8 +374,8 @@ class Menu(Screen, ProtectedScreen):
 			if not self.sub_menu_sort.getConfigValue(entry[2], "hidden"):
 				self.list.append(entry)
 		if not self.list:
-			self.list.append(('', None, 'dummy', '10', 10))
-		self.list.sort(key=lambda listweight: int(listweight[4]))
+			self.list.append(('', None, 'dummy', '10', None, None, 10))
+		self.list.sort(key=lambda listweight: int(listweight[-1]))
 
 
 class MenuSort(Menu):
@@ -415,8 +415,8 @@ class MenuSort(Menu):
 	def hide_show_entries(self):
 		self.list = list(self.full_list)
 		if not self.list:
-			self.list.append(('', None, 'dummy', '10', 10))
-		self.list.sort(key=lambda listweight: int(listweight[4]))
+			self.list.append(('', None, 'dummy', '10', None, None, 10))
+		self.list.sort(key=lambda listweight: int(listweight[-1]))
 
 	def selectionChanged(self):
 		selection = self["menu"].getCurrent() and len(self["menu"].getCurrent()) > 2 and self["menu"].getCurrent()[2] or ""
