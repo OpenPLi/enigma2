@@ -19,6 +19,8 @@ from enigma import eTimer
 import xml.etree.ElementTree
 
 from Screens.Setup import Setup, getSetupTitle
+from Components.NimManager import nimmanager  # nimmanager is used in eval(conditional), do not remove this import
+
 
 def MenuEntryPixmap(key, png_cache):
 	if not menuicons:
