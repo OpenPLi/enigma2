@@ -38,6 +38,7 @@ from enigma import eServiceReference, eServiceCenter, eTimer, eSize, iPlayableSe
 import os
 import time
 from time import localtime, strftime
+from skin import stringparameters
 import pickle
 
 config.movielist = ConfigSubsection()
@@ -462,13 +463,6 @@ class SelectionEventInfo:
 	def updateEventInfo(self):
 		serviceref = self.getCurrent()
 		self["Service"].newService(serviceref)
-		info = serviceref and eServiceCenter.getInstance().info(serviceref)
-		if info:
-			timeCreate =  strftime("%A %d %b %Y", localtime(info.getInfo(serviceref, iServiceInformation.sTimeCreate)))
-			duration = "%d min" % (info.getLength(serviceref) / 60) 
-			filesize = "%d MB" % (info.getInfoObject(serviceref, iServiceInformation.sFileSize) / (1024*1024))
-			moviedetails = "%s  •  %s  •  %s" % (timeCreate, duration, filesize)
-			self["moviedetails"].setText(moviedetails)
 
 
 class MovieSelectionSummary(Screen):
@@ -543,7 +537,6 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		self["chosenletter"].visible = False
 
 		self["waitingtext"] = Label(_("Please wait... Loading list..."))
-		self["moviedetails"] = Label()
 
 		# create optional description border and hide immediately
 		self["DescriptionBorder"] = Pixmap()
@@ -1388,9 +1381,10 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			self.reload_sel = self.getCurrent()
 		self["list"].reload(self.current_ref, self.selected_tags)
 		self.updateTags()
+		separatorChar = stringparameters.get("ScreenParamSeparatorChar", "  .  ")
 		title = _("Recorded files...")
 		if config.usage.setup_level.index >= 2: # expert+
-			title += "  •  " + config.movielist.last_videodir.value
+			title += separatorChar + config.movielist.last_videodir.value
 		if self.selected_tags:
 			title += " - " + ','.join(self.selected_tags)
 		
@@ -1400,7 +1394,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			if self.reload_home:
 				self["list"].moveToFirstMovie()
 		self["freeDiskSpace"].update()
-		title += "  •  " + self.diskinfo.getText()
+		title += separatorChar + self.diskinfo.getText()
 		self.setTitle(title)
 		self["waitingtext"].visible = False
 		self.createPlaylist()

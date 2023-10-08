@@ -1106,6 +1106,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 		self.ask_time = event.getBeginTime()
 		l.resetOffset()
 		l.fillMultiEPG(None, self.ask_time)
+		self["Event"].newEvent(event)
 		self.moveTimeLines(True)
 
 	def showSetup(self):
