@@ -39,6 +39,7 @@ fonts = {  # Dictionary of predefined and skin defined font aliases.
 menus = {}  # Dictionary of images associated with menu entries.
 menuicons = {}  # Dictionary of icons associated with menu items.
 parameters = {}  # Dictionary of skin parameters used to modify code behavior.
+stringparameters = {} # Dictionary that contains string type parameters for use in screens
 setups = {}  # Dictionary of images associated with setup menus.
 switchPixmap = {}  # Dictionary of switch images.
 windowStyles = {}  # Dictionary of window styles for each screen ID.
@@ -196,6 +197,7 @@ def reloadSkins():
 	menus.clear()
 	menuicons.clear()
 	parameters.clear()
+	stringparameters.clear()
 	setups.clear()
 	switchPixmap.clear()
 	InitSkins()
@@ -870,6 +872,15 @@ def loadSingleSkinData(desktop, screenID, domSkin, pathSkin, scope=SCOPE_CURRENT
 				# print("[Skin] DEBUG: Menu key='%s', image='%s'." % (key, image))
 			else:
 				raise SkinError("Tag 'menuicon' needs key and image, got key='%s' and image='%s'" % (key, image))
+	for tag in domSkin.findall("stringparameters"):
+		for stringparam in tag.findall("stringparam"):
+			key = stringparam.attrib.get("key")
+			value = stringparam.attrib.get("value")
+			if key and value:
+				stringparameters[key] = value
+				# print("[Skin] DEBUG: Menu key='%s', image='%s'." % (key, image))
+			else:
+				raise SkinError("Tag 'stringparameters' needs key and value, got key='%s' and value='%s'" % (key, value))
 	for tag in domSkin.findall("setups"):
 		for setup in tag.findall("setup"):
 			key = setup.attrib.get("key")
