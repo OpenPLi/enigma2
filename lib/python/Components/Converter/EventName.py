@@ -3,6 +3,7 @@ from Components.Element import cached
 from Components.Converter.genre import getGenreStringSub
 from Components.config import config
 from Components.UsageConfig import dropEPGNewLines, replaceEPGSeparator
+from time import time, localtime
 
 
 class EventName(Converter):
@@ -20,37 +21,43 @@ class EventName(Converter):
 	PDCTIME = 11
 	PDCTIMESHORT = 12
 	ISRUNNINGSTATUS = 13
+	FORMAT_STRING = 14
 
 	def __init__(self, type):
 		Converter.__init__(self, type)
-		if type == "Description":
-			self.type = self.SHORT_DESCRIPTION
-		elif type == "ExtendedDescription":
-			self.type = self.EXTENDED_DESCRIPTION
-		elif type == "FullDescription":
-			self.type = self.FULL_DESCRIPTION
-		elif type == "ID":
-			self.type = self.ID
-		elif type == "NameNow":
-			self.type = self.NAME_NOW
-		elif type == "NameNext":
-			self.type = self.NAME_NEXT
-		elif type == "Genre":
-			self.type = self.GENRE
-		elif type == "Rating":
-			self.type = self.RATING
-		elif type == "SmallRating":
-			self.type = self.SRATING
-		elif type == "Pdc":
-			self.type = self.PDC
-		elif type == "PdcTime":
-			self.type = self.PDCTIME
-		elif type == "PdcTimeShort":
-			self.type = self.PDCTIMESHORT
-		elif type == "IsRunningStatus":
-			self.type = self.ISRUNNINGSTATUS
+		self.parts = type.split(",")
+		if len(self.parts) > 1:
+			self.type = self.FORMAT_STRING
+			self.separator = self.parts[0]
 		else:
-			self.type = self.NAME
+			if type == "Description":
+				self.type = self.SHORT_DESCRIPTION
+			elif type == "ExtendedDescription":
+				self.type = self.EXTENDED_DESCRIPTION
+			elif type == "FullDescription":
+				self.type = self.FULL_DESCRIPTION
+			elif type == "ID":
+				self.type = self.ID
+			elif type == "NameNow":
+				self.type = self.NAME_NOW
+			elif type == "NameNext":
+				self.type = self.NAME_NEXT
+			elif type == "Genre":
+				self.type = self.GENRE
+			elif type == "Rating":
+				self.type = self.RATING
+			elif type == "SmallRating":
+				self.type = self.SRATING
+			elif type == "Pdc":
+				self.type = self.PDC
+			elif type == "PdcTime":
+				self.type = self.PDCTIME
+			elif type == "PdcTimeShort":
+				self.type = self.PDCTIMESHORT
+			elif type == "IsRunningStatus":
+				self.type = self.ISRUNNINGSTATUS
+			else:
+				self.type = self.NAME
 
 	@cached
 	def getBoolean(self):
@@ -152,5 +159,21 @@ class EventName(Converter):
 					return _("reserved for future use")
 				return _("undefined")
 			return ""
+		elif self.type == self.FORMAT_STRING:
+			begin = event.getBeginTime()
+			end = begin + event.getDuration()
+			now = int(time())
+			t_start = localtime(begin)
+			t_end = localtime(end)
+			if begin <= now <= end:
+				duration = end - now
+				duration_str = "+%d min" % (duration / 60)
+			else:
+				duration = event.getDuration()
+				duration_str = "%d min" % (duration / 60)
+			start_time_str = "%2d:%02d" % (t_start.tm_hour, t_start.tm_min)
+			end_time_str = "%2d:%02d" % (t_end.tm_hour, t_end.tm_min) 
+			res_str = "%s - %s  %s  %s" % (start_time_str, end_time_str, self.separator, duration_str)
+			return res_str
 
 	text = property(getText)
