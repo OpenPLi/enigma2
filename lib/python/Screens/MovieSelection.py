@@ -38,7 +38,7 @@ from enigma import eServiceReference, eServiceCenter, eTimer, eSize, iPlayableSe
 import os
 import time
 from time import localtime, strftime
-from skin import stringparameters
+from skin import parameters
 import pickle
 
 config.movielist = ConfigSubsection()
@@ -1381,7 +1381,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			self.reload_sel = self.getCurrent()
 		self["list"].reload(self.current_ref, self.selected_tags)
 		self.updateTags()
-		separatorChar = stringparameters.get("ScreenParamSeparatorChar", "  .  ")
+		separatorChar = parameters.get("ScreenParamSeparatorChar", "  .  ")
 		title = _("Recorded files...")
 		if config.usage.setup_level.index >= 2: # expert+
 			title += separatorChar + config.movielist.last_videodir.value
