@@ -69,7 +69,7 @@ class ServiceName(Converter):
 					res_str = self.appendToStringWithSeparator(res_str, name)
 				if x == "ORBPOS" and orbpos != '':
 					res_str = self.appendToStringWithSeparator(res_str, orbpos)
-				if x == "PROVIDER" and provider is not None:
+				if x == "PROVIDER" and provider is not None and provider != '':
 					res_str = self.appendToStringWithSeparator(res_str, provider)
 			return res_str
 
