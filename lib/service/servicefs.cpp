@@ -11,7 +11,6 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include <enforceutf8.h>
 
 class eStaticServiceFSInformation: public iStaticServiceInformation
 {
@@ -178,8 +177,6 @@ RESULT eServiceFS::getContent(std::list<eServiceReference> &list, bool sorted)
 
 		filename = path;
 		filename += e->d_name;
-		
-		filename = enforceutf8(&filename);
 
 		struct stat s = {};
 		if (::stat(filename.c_str(), &s) < 0)
