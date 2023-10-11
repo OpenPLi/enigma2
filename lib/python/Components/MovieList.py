@@ -31,7 +31,8 @@ class MovieListData:
 
 class StubInfo:
 	def getName(self, serviceref):
-		return os.path.split(serviceref.getPath())[1]
+		path = serviceref.getPath().encode(errors="replace").decode('utf8')
+		return os.path.split(path)[1]
 
 	def getLength(self, serviceref):
 		return -1
