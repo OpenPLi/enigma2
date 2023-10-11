@@ -111,6 +111,7 @@ class AudioSelection(ConfigListScreen, Screen):
 						extra_text += ",AAC"
 					conflist.append((_("Multi channel downmix") + extra_text, self.settings.downmix))
 					self["key_red"].setBoolean(True)
+					is_downmix = True
 			if not is_downmix:
 				conflist.append(('',))
 				self["key_red"].setBoolean(False)
