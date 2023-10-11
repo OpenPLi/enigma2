@@ -53,6 +53,7 @@ protected:
 	virtual int getItemHeight()=0;
 	virtual int getItemWidth() { return -1; }
 	virtual int getOrientation() { return 1; }
+	virtual int getMaxItemTextWidth() { return 1; }
 
 	eListbox *m_listbox;
 #endif
@@ -174,6 +175,7 @@ public:
 
 	int getScrollbarWidth() { return m_scrollbar_width; }
 	int getScrollbarHeight() { return m_scrollbar_height; }
+	int getMaxItemTextWidth() { return m_content->getMaxItemTextWidth(); }
 
 #ifndef SWIG
 	struct eListboxStyle *getLocalStyle(void);
