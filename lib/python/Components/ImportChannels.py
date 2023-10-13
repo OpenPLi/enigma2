@@ -14,7 +14,7 @@ from Components.config import config
 from Screens.MessageBox import MessageBox
 from Tools.Notifications import AddNotificationWithID
 
-supportfiles = ('lamedb', 'blacklist', 'whitelist', 'alternatives.')
+supportfiles = ('lamedb', 'blacklist', 'whitelist', 'alternatives.', 'whitelist')
 
 e2path = "/etc/enigma2"
 
