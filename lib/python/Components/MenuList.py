@@ -7,8 +7,8 @@ class MenuList(GUIComponent):
 	def __init__(self, list, enableWrapAround=True, content=eListboxPythonStringContent):
 		GUIComponent.__init__(self)
 		self.l = content()
-		self.list = list
 		self.onSelectionChanged = []
+		self.list = list
 		self.enableWrapAround = enableWrapAround
 
 	def getCurrent(self):
