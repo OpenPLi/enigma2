@@ -154,6 +154,15 @@ class subservice:
 	groupslist = None
 
 
+def streamrelayChecker(playref):
+	playrefstring = playref.toString()
+	if '%3a//' not in playrefstring and playrefstring in whitelist.streamrelay:
+		url = "http://%s:%s/" % (config.misc.softcam_streamrelay_url.getHTML(), config.misc.softcam_streamrelay_port.value)
+		playref = eServiceReference("%s%s%s:%s" % (playrefstring, url.replace(":", "%3a"), playrefstring.replace(":", "%3a"), ServiceReference(playref).getServiceName()))
+		print("[Navigation] Play or record service via streamrelay as it is whitelisted as such", playref.toString())
+	return playref
+
+
 def reload_subservice_groupslist(force=False):
 	if subservice.groupslist is None or force:
 		try:
@@ -480,11 +489,13 @@ class InfoBarShowHide(InfoBarScreenSaver):
 	def ToggleStreamrelay(self, service=None):
 		service = service or self.session.nav.getCurrentlyPlayingServiceReference()
 		if service:
-			service = service.toString()
-			if service in whitelist.streamrelay:
-				whitelist.streamrelay.remove(service)
+			servicestring = service.toString()
+			if servicestring in whitelist.streamrelay:
+				whitelist.streamrelay.remove(servicestring)
 			else:
-				whitelist.streamrelay.append(service)
+				whitelist.streamrelay.append(servicestring)
+				if self.session.nav.getCurrentlyPlayingServiceReference() == service:
+					self.session.nav.restartService()
 			open('/etc/enigma2/whitelist_streamrelay', 'w').write('\n'.join(whitelist.streamrelay))
 
 class BufferIndicator(Screen):
