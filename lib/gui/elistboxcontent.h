@@ -93,6 +93,7 @@ public:
 	void resetClip();
 	void entryRemoved(int idx);
 	void setTemplate(SWIG_PYOBJECT(ePyObject) tmplate);
+	int getMaxItemTextWidth();
 private:
 	std::map<int, ePtr<gFont> > m_font;
 };
