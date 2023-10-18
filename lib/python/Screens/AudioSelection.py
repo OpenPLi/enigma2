@@ -88,6 +88,7 @@ class AudioSelection(ConfigListScreen, Screen):
 		streams = []
 		conflist = []
 		selectedidx = 0
+		is_downmix = False
 
 		self["key_blue"].setBoolean(False)
 
@@ -97,8 +98,8 @@ class AudioSelection(ConfigListScreen, Screen):
 			self.setTitle(_("Select audio track"))
 			service = self.session.nav.getCurrentService()
 			self.audioTracks = audio = service and service.audioTracks()
-			n = audio and audio.getNumberOfTracks() or 0
-			if SystemInfo["CanDownmixAC3"]:
+			track_num = audio and audio.getNumberOfTracks() or 0
+			if SystemInfo["CanDownmixAC3"] and track_num > 0 and config.usage.setup_level.index >= 1:
 				downmix_ac3_value = config.av.downmix_ac3.value
 				if downmix_ac3_value in ("downmix", "passthrough"):
 					self.settings.downmix = ConfigSelection(choices=[("downmix", _("Downmix")), ("passthrough", _("Passthrough"))], default=downmix_ac3_value)
@@ -110,8 +111,12 @@ class AudioSelection(ConfigListScreen, Screen):
 						extra_text += ",AAC"
 					conflist.append((_("Multi channel downmix") + extra_text, self.settings.downmix))
 					self["key_red"].setBoolean(True)
+					is_downmix = True
+			if not is_downmix:
+				conflist.append(('',))
+				self["key_red"].setBoolean(False)
 
-			if n > 0:
+			if track_num > 0:
 				self.audioChannel = service.audioChannel()
 				if self.audioChannel:
 					choicelist = [("0", _("left")), ("1", _("stereo")), ("2", _("right"))]
@@ -123,7 +128,7 @@ class AudioSelection(ConfigListScreen, Screen):
 					conflist.append(('',))
 					self["key_green"].setBoolean(False)
 				selectedAudio = self.audioTracks.getCurrentTrack()
-				for x in range(n):
+				for x in range(track_num):
 					number = str(x + 1)
 					i = audio.getTrackInfo(x)
 					languages = i.getLanguage().split('/')
