@@ -11,3 +11,10 @@ class Converter(Element):
 
 	def handleCommand(self, cmd):
 		self.source.handleCommand(cmd)
+
+	def appendToStringWithSeparator(self, str, part):
+		if str == "":
+			str = part
+		else:
+			str = str + "  " + self.separator + "  " + part
+		return str

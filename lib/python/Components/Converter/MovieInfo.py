@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from os.path import basename, normpath
 from Components.Converter.Converter import Converter
 from Components.Element import cached, ElementError
@@ -5,6 +6,7 @@ from enigma import iServiceInformation, eServiceReference
 from ServiceReference import ServiceReference
 from Components.UsageConfig import dropEPGNewLines, replaceEPGSeparator
 from Components.config import config
+from time import localtime, strftime
 
 
 class MovieInfo(Converter):
@@ -14,23 +16,29 @@ class MovieInfo(Converter):
 	MOVIE_REC_FILESIZE = 3 # filesize of recording
 	MOVIE_FULL_DESCRIPTION = 4 # short and exended description
 	MOVIE_NAME = 5 # recording name
+	FORMAT_STRING = 6 # it is formatted string based on parameter and with defined separator
 
 	def __init__(self, type):
-		if type == "ShortDescription":
-			self.type = self.MOVIE_SHORT_DESCRIPTION
-		elif type == "MetaDescription":
-			self.type = self.MOVIE_META_DESCRIPTION
-		elif type == "RecordServiceName":
-			self.type = self.MOVIE_REC_SERVICE_NAME
-		elif type == "FileSize":
-			self.type = self.MOVIE_REC_FILESIZE
-		elif type == "FullDescription":
-			self.type = self.MOVIE_FULL_DESCRIPTION
-		elif type == "Name":
-			self.type = self.MOVIE_NAME
-		else:
-			raise ElementError("'%s' is not <ShortDescription|MetaDescription|RecordServiceName|FileSize|FullDescription|Name> for MovieInfo converter" % type)
 		Converter.__init__(self, type)
+		self.parts = type.split(",")
+		if len(self.parts) > 1:
+			self.type = self.FORMAT_STRING
+			self.separator = self.parts[0]
+		else:
+			if type == "ShortDescription":
+				self.type = self.MOVIE_SHORT_DESCRIPTION
+			elif type == "MetaDescription":
+				self.type = self.MOVIE_META_DESCRIPTION
+			elif type == "RecordServiceName":
+				self.type = self.MOVIE_REC_SERVICE_NAME
+			elif type == "FileSize":
+				self.type = self.MOVIE_REC_FILESIZE
+			elif type == "FullDescription":
+				self.type = self.MOVIE_FULL_DESCRIPTION
+			elif type == "Name":
+				self.type = self.MOVIE_NAME
+			else:
+				raise ElementError("'%s' is not <ShortDescription|MetaDescription|RecordServiceName|FileSize|FullDescription|Name> for MovieInfo converter" % type)
 
 	@cached
 	def getText(self):
@@ -82,6 +90,19 @@ class MovieInfo(Converter):
 					elif filesize >= 1024:
 						return "%.0f %s" % (filesize / 1024.0, _("kB"))
 					return "%d %s" % (filesize, _("B"))
+			elif self.type == self.FORMAT_STRING:
+				timeCreate =  strftime("%A %d %b %Y", localtime(info.getInfo(service, iServiceInformation.sTimeCreate)))
+				duration = "%d min" % (info.getLength(service) / 60) 
+				filesize = "%d MB" % (info.getInfoObject(service, iServiceInformation.sFileSize) / (1024*1024))
+				res_str = ""
+				for x in self.parts[1:]:
+					if x == "TIMECREATED" and timeCreate:
+						res_str = self.appendToStringWithSeparator(res_str, timeCreate)
+					if x == "DURATION" and duration:
+						res_str = self.appendToStringWithSeparator(res_str, duration)
+					if x == "FILESIZE" and filesize:
+						res_str = self.appendToStringWithSeparator(res_str, filesize)
+				return res_str
 		return ""
 
 	text = property(getText)
