@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from Screens.Screen import Screen
 from Components.Button import Button
 from Components.ActionMap import HelpableActionMap, ActionMap, NumberActionMap
@@ -1390,9 +1389,10 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		self.updateTags()
 		title = _("Recorded files...")
 		if config.usage.setup_level.index >= 2: # expert+
-			title += "  •  " + config.movielist.last_videodir.value
+			title += "  " + config.movielist.last_videodir.value
 		if self.selected_tags:
 			title += " - " + ','.join(self.selected_tags)
+		self.setTitle(title)
 		
 		self.displayMovieOffStatus()
 		self.displaySortStatus()
@@ -1400,8 +1400,6 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			if self.reload_home:
 				self["list"].moveToFirstMovie()
 		self["freeDiskSpace"].update()
-		title += "  •  " + self.diskinfo.getText()
-		self.setTitle(title)
 		self["waitingtext"].visible = False
 		self.createPlaylist()
 		if self.playGoTo:
