@@ -5,6 +5,7 @@ class Converter(Element):
 	def __init__(self, arguments):
 		Element.__init__(self)
 		self.converter_arguments = arguments
+		self.separator = ""
 
 	def __repr__(self):
 		return str(type(self)) + "(" + self.converter_arguments + ")"
@@ -16,5 +17,5 @@ class Converter(Element):
 		if str == "":
 			str = part
 		else:
-			str = str + "  " + self.separator + "  " + part
+			str = str + self.separator + part
 		return str
