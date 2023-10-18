@@ -3,7 +3,6 @@ from Components.Converter.Converter import Converter
 from enigma import iServiceInformation, iPlayableService, iPlayableServicePtr, eServiceReference
 from ServiceReference import resolveAlternate
 from Components.Element import cached
-from Tools.General import getServiceNum
 
 
 class ServiceName(Converter):
@@ -89,14 +88,14 @@ class ServiceName(Converter):
 		return name.replace('\xc2\x86', '').replace('\xc2\x87', '').replace('_', ' ')
 	
 	def getNumber(self, ref, info):
-		from Screens.InfoBar import InfoBar
-		channelSelectionServicelist = InfoBar.instance and InfoBar.instance.servicelist
-		channelnum = ''
-		ref = ref or eServiceReference(info.getInfoString(iServiceInformation.sServiceref))
-		if channelSelectionServicelist and channelSelectionServicelist.inBouquet():
-			myRoot = channelSelectionServicelist.getRoot()
-			channelnum = getServiceNum(ref, myRoot)
-		return channelnum
+		if not ref:
+			ref = eServiceReference(info.getInfoString(iServiceInformation.sServiceref))
+		num = ref and ref.getChannelNum() or None
+		if num is None:
+			num = '---'
+		else:
+			num = str(num)
+		return num
 	
 	def getProvider(self, ref, info):
 		if ref:
