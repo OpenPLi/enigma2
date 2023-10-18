@@ -23,7 +23,6 @@ class MessageBox(Screen):
 
 		self.msgBoxID = msgBoxID
 
-		self["autoresize"] = Label("") #do not remove, used for autoResize()
 		self["text"] = Label(text)
 		self["Text"] = StaticText(text)
 		self["selectedChoice"] = StaticText()
@@ -165,7 +164,4 @@ class MessageBox(Screen):
 		return str(type(self)) + "(" + self.text + ")"
 
 	def getListWidth(self):
-		def getListLineTextWidth(text):
-			self["autoresize"].setText(text)
-			return self["autoresize"].getSize()[0]
-		return max([getListLineTextWidth(line[0]) for line in self.list]) if self.list else 0
+		return self["list"].instance.getMaxItemTextWidth()
