@@ -96,6 +96,7 @@ class MovieInfo(Converter):
 				filesize = "%d MB" % (info.getInfoObject(service, iServiceInformation.sFileSize) / (1024*1024))
 				res_str = ""
 				for x in self.parts[1:]:
+					x = x.upper()
 					if x == "TIMECREATED" and timeCreate:
 						res_str = self.appendToStringWithSeparator(res_str, timeCreate)
 					if x == "DURATION" and duration:

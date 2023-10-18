@@ -63,6 +63,7 @@ class ServiceName(Converter):
 			orbpos = self.getOrbitalPos(ref, info)
 			res_str = ""
 			for x in self.parts[1:]:
+				x = x.upper()
 				if x == "NUMBER" and num:
 					res_str = self.appendToStringWithSeparator(res_str, num)
 				if x == "NAME" and name:
