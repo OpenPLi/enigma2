@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-02 14:05+0100\n"
-"PO-Revision-Date: 2023-06-27 15:19+0200\n"
+"PO-Revision-Date: 2023-10-18 14:52+0200\n"
 "Last-Translator: Andrej Tobola <andrej.tobola@gmail.com>\n"
 "Language-Team: \n"
 "Language: sk\n"
@@ -88,13 +88,13 @@ msgid " (disabled)"
 msgstr " (zakázané)"
 
 msgid " (higher than any auto)"
-msgstr " (vyššia, než akékoľvek auto)"
+msgstr " (vyššia, než akákoľvek autom.)"
 
 msgid " (higher than rotor any auto)"
-msgstr " (vyššia ako rotor akékoľvek auto)"
+msgstr " (vyššia než rotor akákoľvek autom.)"
 
 msgid " (lower than any auto)"
-msgstr " (nižšia než akékoľvek auto)"
+msgstr " (nižšia než akákoľvek autom.)"
 
 msgid " - Unicable/JESS LNBs not found"
 msgstr " - Unicable/JESS LNB nenájdené"
@@ -353,7 +353,7 @@ msgstr "%s úspešne pripojený."
 
 #, python-format
 msgid "%s imported from fallback tuner"
-msgstr "%s importovaných zo záložného tuneru"
+msgstr "%s importované zo záložného tunera"
 
 #. TRANSLATORS: The satellite with name '%s' is no longer used after a configuration change. The user is asked whether or not the satellite should be deleted.
 #, python-format
@@ -1475,9 +1475,8 @@ msgstr "CH%s"
 msgid "CI (Common Interface) Setup"
 msgstr "Nastavenie CI (Common Interface) modulu"
 
-#, fuzzy
 msgid "CI Boot Delay"
-msgstr "DVB CI oneskorenie"
+msgstr "CI oneskorenie"
 
 msgid "CI assignment"
 msgstr "Priradenie CI"
@@ -2441,7 +2440,7 @@ msgid "Customize"
 msgstr "Prispôsobenie"
 
 msgid "Customize OpenWebIF settings for fallback tuner"
-msgstr "Prispôsobiť OpenWebIF nastavenia pre záložný turen"
+msgstr "Prispôsobiť OpenWebIF nastavenia pre záložný tuner"
 
 msgid "Customize channel list cursor behavior"
 msgstr "Prispôsobenie správania kurzoru v zozname staníc"
@@ -2709,7 +2708,7 @@ msgid "Deselect"
 msgstr "Zrušiť výber"
 
 msgid "Destination of fallback remote receiver"
-msgstr "URL záložného vzdialeného prijímača"
+msgstr "Cieľ záložného vzdialeného prijímača"
 
 msgid "Destination of fallback remote receiver for ATSC"
 msgstr "Cieľ záložného vzdialeného prijímača pre ATSC"
@@ -3447,7 +3446,7 @@ msgid ""
 "Error while retrieving fallback timer information\n"
 "%s"
 msgstr ""
-"Chyba pri načítavaní informácií o záložnom časovači\n"
+"Chyba pri načítaní informácií o záložnom časovači\n"
 "%s"
 
 msgid "Error while retrieving location of epg.dat on the fallback receiver"
@@ -4468,10 +4467,10 @@ msgid "Import from fallback tuner failed, %s"
 msgstr "Import zo záložného tuneru zlyhal, %s"
 
 msgid "Import from remote receiver URL"
-msgstr "Importovať stanice z URL adresy vzdialeného prijímača"
+msgstr "Importovať z URL adresy vzdialeného prijímača"
 
 msgid "Import remote receiver URL"
-msgstr "Importovať stanice z URL adresy vzdialeného prijímača"
+msgstr "Importovať URL adresu vzdialeného prijímača"
 
 msgid "In order to record a timer, the TV was switched to the recording service!\n"
 msgstr "Aby sa mohol nahrať načasovaný program, preplo sa na nahrávanú stanicu!\n"
@@ -6121,7 +6120,7 @@ msgid "Please choose an extension..."
 msgstr "Prosím, zvoľte rozšírenie..."
 
 msgid "Please configure the fallback tuner setup"
-msgstr "Nakonfigurovať nastavenie záložného tuneru"
+msgstr "Nakonfigurujte nastavenie záložného tuneru"
 
 msgid ""
 "Please configure your internet connection by filling out the required values.\n"
@@ -7477,7 +7476,7 @@ msgid "Select 'band' if using a 'universal' LNB, otherwise consult your LNB spec
 msgstr "Vyberte 'Pásmo' ak sa používa 'Univerzálne LNB', v opačnom prípade si preštudujte špecifikáciu LNB."
 
 msgid "Select 'enabled' if this tuner has a signal cable connected, otherwise select 'nothing connected'."
-msgstr "Vyberte 'zapnuté' ak má tento tuner pripojený signálny kábel, inak vyberte 'nič nie je pripojené'."
+msgstr "Vyberte 'zapnuté' ak má tento tuner pripojený signálny kábel, inak vyberte 'nepripojené'."
 
 msgid "Select 'polarisation' if using a 'universal' LNB, otherwise consult your LNB spec sheet."
 msgstr "Vyberte 'Polarizácia' ak používate 'Univerzálne LNB', v opačnom prípade si preštudujte špecifikáciu LNB."
@@ -7676,16 +7675,16 @@ msgid "Select the protocol used by your SCR device. Choices are 'SCR Unicable' (
 msgstr "Vyberte protokol vášho SCR zariadenia. Voľby sú 'SCR Unicable' (Unicable), alebo 'SCR JESS' (JESS je tiež známe ako Unicable II)."
 
 msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
-msgstr "Vyberte satelit, ktorý je pripojený na Port-A vášho prepínača. Ak si nie ste istý, vyberte 'Automatické', prijímač sa to pokúsi zistiť za vás. Ak nie je k tomuto portu nič pripojené, vyberte 'Nič nie je pripojené'."
+msgstr "Vyberte satelit, ktorý je pripojený na Port-A vášho prepínača. Ak si nie ste istý, vyberte 'Automatické', prijímač sa to pokúsi zistiť za vás. Ak nie je k tomuto portu nič pripojené, vyberte 'nepripojené'."
 
 msgid "Select the satellite which is connected to Port-B of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
-msgstr "Vyberte satelit, ktorý je pripojený na Port-B vášho prepínača. Ak si nie ste istý, vyberte 'Automatické', prijímač sa to pokúsi zistiť za vás. Ak nie je k tomuto portu nič pripojené, vyberte 'Nič nie je pripojené'."
+msgstr "Vyberte satelit, ktorý je pripojený na Port-B vášho prepínača. Ak si nie ste istý, vyberte 'Automatické', prijímač sa to pokúsi zistiť za vás. Ak nie je k tomuto portu nič pripojené, vyberte 'nepripojené'."
 
 msgid "Select the satellite which is connected to Port-C of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
-msgstr "Vyberte satelit, ktorý je pripojený na Port-C vášho prepínača. Ak si nie ste istý, vyberte 'Automatické', prijímač sa to pokúsi zistiť za vás. Ak nie je k tomuto portu nič pripojené, vyberte 'Nič nie je pripojené'."
+msgstr "Vyberte satelit, ktorý je pripojený na Port-C vášho prepínača. Ak si nie ste istý, vyberte 'Automatické', prijímač sa to pokúsi zistiť za vás. Ak nie je k tomuto portu nič pripojené, vyberte 'nepripojené'."
 
 msgid "Select the satellite which is connected to Port-D of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
-msgstr "Vyberte satelit, ktorý je pripojený na Port-D vášho prepínača. Ak si nie ste istý, vyberte 'Automatické', prijímač sa to pokúsi zistiť za vás. Ak nie je k tomuto portu nič pripojené, vyberte 'Nič nie je pripojené'."
+msgstr "Vyberte satelit, ktorý je pripojený na Port-D vášho prepínača. Ak si nie ste istý, vyberte 'Automatické', prijímač sa to pokúsi zistiť za vás. Ak nie je k tomuto portu nič pripojené, vyberte 'nepripojené'."
 
 msgid "Select the satellite you want to configure. Once that satellite is configured you can select and configure other satellites that will be accessed using this same tuner."
 msgstr "Vyberte satelit, ktorý chcete nastaviť. Po tom, čo bude tento satelit nastavený, budete môcť vybrať a nastaviť ďalšie satelity, ktoré budú môcť pristupovať k tomuto tuneru."
@@ -7944,13 +7943,13 @@ msgid "Set startup service"
 msgstr "Nastaviť stanicu po spustení"
 
 msgid "Set the User ID of the OpenWebif from your fallback tuner"
-msgstr "Nastaviť User ID rozhrania OpenWeb záložného tuneru"
+msgstr "Nastavenie ID používateľa OpenWebif zo záložného tunera"
 
 msgid "Set the password of the OpenWebif from your fallback tuner"
-msgstr "Nastaviť heslo rozhrania OpenWeb záložného tuneru"
+msgstr "Nastavenie hesla OpenWebif zo záložného tunera"
 
 msgid "Set the port of the OpenWebif from your fallback tuner"
-msgstr "Nastaviť port rozhrania OpenWeb záložného tuneru"
+msgstr "Nastavenie portu OpenWebif z vášho záložného tunera"
 
 msgid "Set the type of the progress indication in the channel selection screen."
 msgstr "Zvoliť typ zobrazenia priebehu programu v zozname staníc."
@@ -11390,9 +11389,8 @@ msgstr "zatvoriť menu nastavení sieťových rozhraní"
 msgid "experimental film/video"
 msgstr "experimentálny film/video"
 
-#, fuzzy
 msgid "extra high"
-msgstr "extra široký"
+msgstr "extra vysoké"
 
 msgid "extra wide"
 msgstr "extra široký"
@@ -11479,7 +11477,7 @@ msgid "help..."
 msgstr "Pomoc..."
 
 msgid "high"
-msgstr ""
+msgstr "vysoké"
 
 msgid "horizontal"
 msgstr "horizontálna"
@@ -11701,7 +11699,7 @@ msgid "nothing"
 msgstr "nič"
 
 msgid "nothing connected"
-msgstr "nič nie je pripojené"
+msgstr "nepripojené"
 
 msgid "of a DUAL layer medium used."
 msgstr "dvojvrstvového média využitých."
