@@ -958,10 +958,15 @@ int eListboxPythonMultiContent::getMaxItemTextWidth()
 				{
 				case TYPE_TEXT: // text
 				{
-					ePyObject px = PyTuple_GET_ITEM(item, 1), pstring = PyTuple_GET_ITEM(item, 7);
+					ePyObject px = PyTuple_GET_ITEM(item, 1), pfnt = PyTuple_GET_ITEM(item, 5), pstring = PyTuple_GET_ITEM(item, 7);
 
 					if (PyLong_Check(pstring) && data) /* if the string is in fact a number, it refers to the 'data' list. */
 						pstring = PyTuple_GetItem(data, PyLong_AsLong(pstring));
+
+					if (pfnt) {
+						int fnt_i = PyLong_AsLong(pfnt);
+						fnt = m_font[fnt_i];
+					}
 
 								/* don't do anything if we have 'None' as string */
 					if (pstring == Py_None)
