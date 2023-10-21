@@ -2251,7 +2251,7 @@ class ExtensionsList(ChoiceBox):
 			for idx, x in enumerate(removed):
 				del self.list[x - idx]
 				del self.summarylist[x - idx]
-			self["list"].list = self.list
+			self["list"].setList(self.list)
 			self.updateSummary(self["list"].getSelectionIndex())
 			if removed:
 				for f in self.onLayoutFinish:  # For screen resize
