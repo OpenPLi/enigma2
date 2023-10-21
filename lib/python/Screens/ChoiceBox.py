@@ -21,7 +21,6 @@ class ChoiceBox(Screen):
 		self.skinName = skin_name + ["ChoiceBox"]
 
 		self.reorder_config = reorderConfig
-		self["autoresize"] = Label("")  # do not remove, used for autoResize()
 		self["description"] = Label()
 		self["text"] = Label(title)
 		self.list = []
@@ -99,12 +98,6 @@ class ChoiceBox(Screen):
 		def x_offset():
 			return max([line[1][1] for line in self.list])
 
-		def x_width(textsize):
-			def getListLineTextWidth(text):
-				self["autoresize"].text = text
-				return self["autoresize"].instance.calculateSize().width()
-			return max(max([getListLineTextWidth(line[0][0]) for line in self.list]), textsize)
-
 		def getMaxDescriptionHeight():
 			def getDescrLineHeight(text):
 				if len(text) > 2 and isinstance(text[2], str):
@@ -117,7 +110,7 @@ class ChoiceBox(Screen):
 		count = len(self.list)
 		count, scrollbar = (10, self["list"].instance.getScrollbarWidth() + 5) if count > 10 else (count, 0)
 		offset = self["list"].l.getItemSize().height() * count
-		wsizex = x_width(textsize[0]) + x_offset() + 10 + scrollbar
+		wsizex = max(textsize[0], self["list"].instance.getMaxItemTextWidth()) + x_offset() + 10 + scrollbar
 		# precount description size
 		descry = self["description"].instance.calculateSize().width()
 		self["description"].resize(wsizex - 20, descry if descry > 0 else 0)
