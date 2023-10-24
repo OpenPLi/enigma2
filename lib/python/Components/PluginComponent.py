@@ -35,8 +35,8 @@ class PluginComponent:
 		if plugin in self.pluginList:
 			self.pluginList.remove(plugin)
 		for x in plugin.where:
-		    if x in self.plugins:
-			    self.plugins[x].remove(plugin)
+			if x in self.plugins:
+				self.plugins[x].remove(plugin)
 			if x == PluginDescriptor.WHERE_AUTOSTART:
 				plugin(reason=1)
 
