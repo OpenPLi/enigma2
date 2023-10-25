@@ -4,14 +4,14 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-02 14:05+0100\n"
-"PO-Revision-Date: 2023-10-24 18:42+0200\n"
+"PO-Revision-Date: 2023-10-25 15:31+0200\n"
 "Last-Translator: Andrej Tobola <andrej.tobola@gmail.com>\n"
 "Language-Team: \n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 2.2\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Poedit-Bookmarks: 50,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
@@ -103,7 +103,7 @@ msgid " - information"
 msgstr " - informácia"
 
 msgid " Warning: the selected tuner should not use SCR Unicable type for LNBs because each tuner need a own SCR number."
-msgstr " Upozornenie: zvolený tuner by nemal používať typ LNB - SCR Unicable, pretože každý tuner potrebuje vlastné SCR číslo."
+msgstr " Upozornenie: vybraný tuner by nemal používať typ SCR Unicable pre LNB, pretože každý tuner potrebuje vlastné číslo SCR."
 
 msgid " min"
 msgstr " min"
@@ -544,14 +544,14 @@ msgid "A"
 msgstr "A"
 
 msgid "A completed recording timer is about to put your receiver in standby mode. Would you like to proceed?"
-msgstr "Ukončený časovač nahrávania chce prepnúť Váš prijímač do pohotovostného režimu. Prepnúť teraz?"
+msgstr "Ukončený časovač nahrávania sa chystá prepnúť prijímač do pohotovostného režimu. Chcete pokračovať?"
 
 msgid "A completed recording timer is about to shut down your receiver. Would you like to proceed?"
-msgstr "Ukončený časovač nahrávania chce vypnúť Váš prijímač. Vypnúť teraz?"
+msgstr "Ukončený časovač nahrávania sa chystá vypnúť váš prijímač. Chcete pokračovať?"
 
 #, python-format
 msgid "A configuration file (%s) has been modified since it was installed. Would you like to keep the modified version?"
-msgstr "Konfiguračný súbor (%s) bol od inštalácie zmenený. Chcete zachovať Vaše zmeny?"
+msgstr "Konfiguračný súbor (%s) bol od inštalácie zmenený. Chcete si ponechať upravenú verziu?"
 
 msgid "A file from media is in use!"
 msgstr "Súbor sa na disku používa!"
@@ -564,27 +564,27 @@ msgid ""
 "A recording has started:\n"
 "%s"
 msgstr ""
-"Nahrávanie začalo:\n"
+"Nahrávanie sa začalo:\n"
 "%s"
 
 msgid "A recording is currently running on the selected tuner. Please select a different tuner or stop the recording and try again."
-msgstr "Na zvolenom tuneri práve prebieha nahrávanie. Vyberte prosím iný tuner alebo zastavte nahrávanie a skúste to znovu."
+msgstr "Na vybranom tuneri práve prebieha nahrávanie. Vyberte iný tuner alebo zastavte nahrávanie a skúste to znova."
 
 msgid ""
 "A recording is currently running.\n"
 "What do you want to do?"
 msgstr ""
-"Práve sa nahráva.\n"
+"Práve prebieha nahrávanie.\n"
 "Čo chcete urobiť?"
 
 msgid "A recording is currently running. Please stop the recording before starting a DiSEqC test."
-msgstr "Záznam je práve spustený. Prosím, zastavte nahrávanie pred pokusom o spustenie testovania DiSEqC."
+msgstr "Práve prebieha nahrávanie. Pred spustením testu DiSEqC zastavte nahrávanie."
 
 msgid "A recording is currently running. Please stop the recording before starting a service scan."
-msgstr "Práve sa nahráva. Zastavte nahrávanie pred spustením vyhľadávača satelitov."
+msgstr "Práve prebieha nahrávanie. Pred spustením vyhľadávania zastavte nahrávanie."
 
 msgid "A repeating event is currently recording. What would you like to do?"
-msgstr "Práve sa nahráva opakovaná udalosť. Čo chcete urobiť?"
+msgstr "Práve sa zaznamenáva opakujúca sa udalosť. Čo by ste chceli urobiť?"
 
 #, python-format
 msgid "A required tool (%s) was not found."
@@ -602,13 +602,13 @@ msgstr ""
 "Chcete vypnúť druhé sieťové rozhranie?"
 
 msgid "A sleep timer is about to put your receiver in standby mode. Would you like to proceed?"
-msgstr "Zaspávací časovač chce prepnúť prijímač do pohotovostného režimu. Prepnúť teraz?"
+msgstr "Časovač spánku sa chystá prepnúť prijímač do pohotovostného režimu. Chcete pokračovať?"
 
 msgid "A sleep timer is about to shut down your receiver. Would you like to proceed?"
-msgstr "Zaspávací časovač chce vypnúť Váš prijímač. Vypnúť teraz?"
+msgstr "Časovač spánku sa chystá vypnúť prijímač. Chcete pokračovať?"
 
 msgid "A small overview of the available icon states and actions."
-msgstr "Tu je malý prehľad dostupných ikon štátov a činností."
+msgstr "Malý prehľad dostupných stavov ikon a akcií."
 
 msgid ""
 "A timer failed to record!\n"
@@ -618,7 +618,7 @@ msgstr ""
 "Vypnúť TV a skúsiť znova?\n"
 
 msgid "A/V settings"
-msgstr "Nastavenie A/V"
+msgstr "A/V nastavenia"
 
 msgid "AAC downmix"
 msgstr "AAC downmix"
@@ -672,7 +672,7 @@ msgid "Activate HbbTV (Redbutton)"
 msgstr "Aktivovať HbbTV (červené tlačidlo)"
 
 msgid "Activate Picture in Picture"
-msgstr "Zapnúť obraz v obraze"
+msgstr "Aktivovať Obraz v obraze"
 
 msgid "Activate network settings"
 msgstr "Aktivovať nastavenia siete"
@@ -681,10 +681,10 @@ msgid "Activate the configured network settings."
 msgstr "Aktivovať nastavenia siete."
 
 msgid "Activate timeshift End"
-msgstr "Aktivovať koniec timeshiftu"
+msgstr "Aktivovať koniec časového posunu"
 
 msgid "Activate timeshift end and pause"
-msgstr "Aktivovať koniec timeshiftu a pauzu"
+msgstr "Aktivovať koniec časového posunu a pauzu"
 
 msgid "Adapter settings"
 msgstr "Nastavenie adaptéra"
@@ -696,7 +696,7 @@ msgid "Add a mark"
 msgstr "Pridať značku"
 
 msgid "Add a new title"
-msgstr "Pridať nový titul"
+msgstr "Pridať nový názov"
 
 msgid "Add alternatives"
 msgstr "Pridať alternatívy"
@@ -711,13 +711,13 @@ msgid "Add bouquet to parental protection"
 msgstr "Pridať zoznam staníc do rodičovskej kontroly"
 
 msgid "Add directory to playlist"
-msgstr "Pridať adresár do zoznamu prehrávok"
+msgstr "Pridať adresár do zoznamu skladieb"
 
 msgid "Add file to playlist"
-msgstr "Pridať súbor do zoznamu prehrávok"
+msgstr "Pridať súbor do zoznamu skladieb"
 
 msgid "Add files to playlist"
-msgstr "Pridať súbory do zoznamu prehrávok"
+msgstr "Pridať súbory do zoznamu skladieb"
 
 msgid "Add marker"
 msgstr "Pridať značku"
@@ -726,13 +726,13 @@ msgid "Add provider"
 msgstr "Pridať poskytovateľa"
 
 msgid "Add recording (enter recording duration)"
-msgstr "Pridať nahrávanie (zadajte dobu záznamu)"
+msgstr "Pridať nahrávanie (zadajte dĺžku nahrávania)"
 
 msgid "Add recording (enter recording endtime)"
-msgstr "Pridať nahrávanie (zadajte čas ukončenia)"
+msgstr "Pridať nahrávanie (zadajte čas ukončenia nahrávania)"
 
 msgid "Add recording (indefinitely)"
-msgstr "Pridať nahrávanie (nekonečné)"
+msgstr "Pridať nahrávanie (na dobu neurčitú)"
 
 msgid "Add recording (stop after current event)"
 msgstr "Pridať nahrávanie (zastaviť po aktuálnom programe)"
@@ -753,7 +753,7 @@ msgid "Add timer"
 msgstr "Pridať časovač"
 
 msgid "Add title"
-msgstr "Pridať titul"
+msgstr "Pridať názov"
 
 msgid "Add to bouquet"
 msgstr "Pridať do prehľadu"
@@ -762,52 +762,52 @@ msgid "Add to favourites"
 msgstr "Pridať do obľúbených"
 
 msgid "Add to parental protection"
-msgstr "Pridať k rodičovskej zámke"
+msgstr "Pridať do rodičovskej ochrany"
 
 msgid "Add/remove change timer for current event"
-msgstr "Pridať / odstrániť časovač pre aktuálnu udalosť"
+msgstr "Pridať/odstrániť časovač pre aktuálnu udalosť"
 
 msgid "Additional cable of motorized LNB"
 msgstr "Dodatočný kábel motorizovaného LNB"
 
 msgid "Additional motor options allow you to enter details from your motor's spec sheet so enigma can work out how long it will take to move the dish from one satellite to another satellite."
-msgstr "Dodatočné možnosti motoru vám umožnia vložiť detaily z dokumentácie o motore, ktoré pomôžu prijímaču zistiť, ako dlho potrvá presunúť parabolu z jedného satelitu na iný."
+msgstr "Ďalšie možnosti motora umožňujú zadať údaje z technického listu motora, aby mohol prijímač vypočítať, ako dlho bude trvať presun paraboly z jednej družice na druhú."
 
 msgid "Additional motor options allow you to enter details from your motor's spec sheet so enigma can work out how long it will take to move to another satellite."
-msgstr "Dodatočné možnosti motoru vám umožnia vložiť detaily z dokumentácie o motore, ktoré pomôžu prijímaču zistiť, ako dlho potrvá presun na iný satelit."
+msgstr "Ďalšie možnosti motora umožňujú zadať údaje z dokumentácie motora, aby mohol prijímač zistiť, ako dlho bude trvať presun na inú družicu."
 
 msgid "Adjust 3D settings"
 msgstr "Úprava 3D nastavenia"
 
 msgid "Adjust the color settings so that all the color shades are distinguishable, but appear as saturated as possible. If you are happy with the result, press OK to close the video fine-tuning, or use the number keys to select other test screens."
-msgstr "Nastavte farby tak, aby boli jednotlivé odtiene dobre rozlíšiteľné, ale zároveň čo najsýtejšie. Ak ste s výsledkom spokojní, stlačením tlačidla OK ukončite jemné ladenie obrazu alebo číslicovými tlačidlami zvoľte iný testovací obrazec."
+msgstr "Upravte nastavenia farieb tak, aby boli všetky farebné odtiene rozlíšiteľné, ale aby vyzerali čo najsýtejšie. Ak ste s výsledkom spokojní, stlačením tlačidla OK ukončite jemné doladenie videa alebo pomocou číselných tlačidiel vyberte ďalšie testovacie obrazovky."
 
 msgid "Advanced"
 msgstr "Pokročilé"
 
 msgid "Advanced options"
-msgstr "Rozšírené voľby"
+msgstr "Pokročilé možnosti"
 
 msgid "Advanced options and settings."
-msgstr "Rozšírené možnosti a nastavenia."
+msgstr "Pokročilé možnosti a nastavenia."
 
 msgid "Advanced restore"
-msgstr "Rozšírené obnovenie"
+msgstr "Pokročilé obnovenie"
 
 msgid "Advanced software"
-msgstr "Pokročilé možnosti softvéru"
+msgstr "Pokročilý softvér"
 
 msgid "Advanced software plugin"
-msgstr "Plugin pokročilých možností softvéru"
+msgstr "Pokročilý softvérový doplnok"
 
 msgid "Advanced video enhancement setup"
-msgstr "Pokročilé nastavenie obrazu"
+msgstr "Pokročilé nastavenie vylepšenia videa"
 
 msgid "Advanced video setup"
-msgstr "Pokročilé nastavenie obrazu"
+msgstr "Pokročilé nastavenie videa"
 
 msgid "Afghanistan"
-msgstr "Afghanistan"
+msgstr "Afganistan"
 
 msgid "After event"
 msgstr "Po udalosti"
@@ -825,7 +825,7 @@ msgid "Algeria"
 msgstr "Alžírsko"
 
 msgid "Alignment of events"
-msgstr "Zoradenie relácií"
+msgstr "Zoradenie udalostí"
 
 msgid "Alignment of service names"
 msgstr "Zoradenie náźvov staníc"
@@ -861,7 +861,7 @@ msgid "Allocate"
 msgstr "Prideliť"
 
 msgid "Allocate a number to the physical LNB you are configuring. You will be able to select this LNB again for other satellites (e.g. motorised dishes) to save setting up the same LNB multiple times."
-msgstr "Pridelte číslo k fyzickému LNB ktorý konfigurujete. Budete tak môcť zvoliť tento LNB aj pre iné satelity (napr. motorizované paraboly) pre uloženie nastavenia pre rovnaký LNB viac krát."
+msgstr "Prideľte číslo fyzickému LNB, ktorý konfigurujete. Tento LNB budete môcť vybrať znova pre iné družice (napr. motorizované antény), aby ste nemuseli ten istý LNB nastavovať viackrát."
 
 msgid "Allocate unused memory index"
 msgstr "Prideliť nepoužívanú pamät"
@@ -876,7 +876,7 @@ msgid "Allow quitting movie player with exit"
 msgstr "Povoliť ukončenie prehrávača filmov tlačidlom Exit"
 
 msgid "Allow subtitle language to equal audio language"
-msgstr "Titulky zhodné zo zvukom"
+msgstr "Povoliť titulky zhodné s jazykom zvuku"
 
 msgid "Allow subtitles for hearing impaired"
 msgstr "Povoliť titulky pre sluchovo postihnutých"
@@ -891,13 +891,13 @@ msgid "Alpha"
 msgstr "Alfa"
 
 msgid "Also import at reboot/restart enigma2"
-msgstr "Tiež importovať pri reštarte pr./reštarte OS"
+msgstr "Tiež importovať pri reštarte prjiímača / OS"
 
 msgid "Also import from the extension menu"
-msgstr "Zobraziť v ponuke rozšírení"
+msgstr "Importovať aj z ponuky rozšírenia"
 
 msgid "Also import when box is leaving standby"
-msgstr "Tiež importovať ak je prijímač v pohot.režime"
+msgstr "Import aj pri opustení pohotovostného režimu"
 
 msgid "Also on standby"
 msgstr "Tiež v pohotovostnom režime"
@@ -906,7 +906,7 @@ msgid "Alternative"
 msgstr "Alternatívne"
 
 msgid "Alternative URL for images listed on FlashImage"
-msgstr "Alternatívna adresa URL pre image uvedené vo FlashImage"
+msgstr "Alternatívna adresa URL pre softvér uvedený vo FlashImage"
 
 msgid "Alternative URLs for DVB-T/C or ATSC"
 msgstr "Alternatívne URL pre DVB-T/C alebo ATSC"
@@ -927,7 +927,7 @@ msgid "Always include ECM in recordings"
 msgstr "Vždy zahrnúť ECM do nahrávok"
 
 msgid "Always include ECM messages in recordings. This overrides the individual timer settings globally. It allows recordings to be always decrypted afterwards (sometimes called offline decoding), if supported by your receiver. Default: off."
-msgstr "Vždy zahrnúť ECM do nahrávok. Globálne sa prepíšu nastavenia jednotlivých časovačov. Nahrávky je možné kedykoľvek dekódovať (offline dekódovanie), ak túto funkciu Váš prijímač podporuje. Predvolené: vypnuté."
+msgstr "Do nahrávok vždy zahrnie správy ECM. Toto nastavenie je globálne nadradené individuálnym nastaveniam časovača. Umožňuje, aby sa nahrávky vždy následne dešifrovali (niekedy sa to nazýva offline dekódovanie), ak to prijímač podporuje. Predvolené nastavenie: vypnuté."
 
 msgid "American Samoa"
 msgstr "Americká Samoa"
