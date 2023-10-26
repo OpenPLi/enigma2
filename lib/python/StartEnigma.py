@@ -92,7 +92,7 @@ def useTransponderTimeChanged(configElement):
 	enigma.eDVBLocalTimeHandler.getInstance().setUseDVBTime(configElement.value)
 
 
-config.misc.useTransponderTime.addNotifier(useTransponderTimeChanged, initial_call=False)
+config.misc.useTransponderTime.addNotifier(useTransponderTimeChanged)
 
 profile("Twisted")
 try:
