@@ -772,7 +772,7 @@ def InitUsageConfig():
 	config.ntp = ConfigSubsection()
 
 	def timesyncChanged(configElement):
-		if configElement.value == "dvb" or not GetIPsFromNetworkInterfaces():
+		if configElement.value == "dvb" or (configElement.value == "auto" and not GetIPsFromNetworkInterfaces()):
 			eDVBLocalTimeHandler.getInstance().setUseDVBTime(True)
 			eEPGCache.getInstance().timeUpdated()
 			if os.path.isfile('/var/spool/cron/crontabs/root'):
