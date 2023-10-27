@@ -51,10 +51,13 @@ class PlaylistIOInternal(PlaylistIO):
 		except IOError:
 			return None
 		while True:
-			entry = file.readline().strip()
-			if entry == "":
-				break
-			self.addService(ServiceReference(entry))
+			try:
+				entry = file.readline().strip()
+				if entry == "":
+					break
+				self.addService(ServiceReference(entry))
+			except UnicodeDecodeError:
+				pass
 		file.close()
 		return self.list
 
