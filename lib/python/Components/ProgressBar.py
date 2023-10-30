@@ -19,9 +19,9 @@ class ProgressBar(VariableValue, GUIComponent):
 		instance.setRange(self.__start, self.__end)
 
 	def setRange(self, range):
-		(__start, __end) = range
 		if self.instance is not None:
-			self.instance.setRange(__start, __end)
+			self.__start, self.__end = range
+			self.instance.setRange(self.__start, self.__end)
 
 	def getRange(self):
 		return (self.__start, self.__end)
