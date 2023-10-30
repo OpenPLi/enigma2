@@ -285,14 +285,7 @@ void eDVBLocalTimeHandler::setUseDVBTime(bool b)
 	if (m_use_dvb_time != b) {
 		if (!b)
 		{
-			time_t now = time(0);
-			if (now < 1072224000) /* 01.01.2004 */
-			{
-				eDebug("[eDVBLocalTimeHandler] invalid system time, refuse to disable transponder time sync");
-				return;
-			}
-			else
-				m_time_ready = true;
+			m_time_ready = true;
 		}
 		if (m_use_dvb_time) {
 			eDebug("[eDVBLocalTimeHandler] disable sync local time with transponder time!");
