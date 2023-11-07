@@ -1332,6 +1332,10 @@ def findWidgets(name):
 				source = widget.get("source", None)
 				if source is not None:
 					widgetSet.add(source)
+				addonConnection = widget.get("connection", None)
+				if addonConnection is not None:
+					for x in addonConnection.split(","):
+						widgetSet.add(x)
 		panels = element.findall("panel")
 		if panels is not None:
 			for panel in panels:
