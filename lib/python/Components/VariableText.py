@@ -7,9 +7,12 @@ class VariableText:
 		self.instance = None
 
 	def setText(self, text):
-		self.message = text
+		try:
+			self.message = str(text)
+		except:
+			self.message = ""
 		if self.instance:
-			self.instance.setText(self.message or "")
+			self.instance.setText(self.message)
 
 	def setMarkedPos(self, pos):
 		if self.instance:
@@ -21,4 +24,8 @@ class VariableText:
 	text = property(getText, setText)
 
 	def postWidgetCreate(self, instance):
-		instance.setText(str(self.message) or "")
+		try:
+			self.message = str(self.message)
+		except:
+			self.message = ""
+		instance.setText(self.message)
