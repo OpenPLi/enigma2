@@ -300,7 +300,7 @@ class VideoHardware:
 							ratelist.append((rate, mode == "2160p30" and "auto (25Hz/30Hz/24Hz)" or "auto (50Hz/60Hz/24Hz)"))
 					else:
 						ratelist.append((rate, rate == "multi" and (mode == "2160p30" and "multi (25Hz/30Hz)" or "multi (50Hz/60Hz)") or rate))
-				config.av.videorate[mode] = ConfigSelection(choices=ratelist)
+				config.av.videorate[mode] = ConfigSelection((default=("720p", "720p"), choices=ratelist)
 		config.av.videoport = ConfigSelection(choices=lst)
 
 	def setConfiguredMode(self):
