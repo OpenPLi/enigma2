@@ -1,6 +1,7 @@
 from Components.GUIComponent import GUIComponent
-from Components.config import KEY_LEFT, KEY_RIGHT, KEY_HOME, KEY_END, KEY_0, KEY_DELETE, KEY_BACKSPACE, KEY_OK, KEY_TOGGLEOW, KEY_ASCII, KEY_TIMEOUT, KEY_NUMBERS, ConfigElement
+from Components.config import KEY_LEFT, KEY_RIGHT, KEY_HOME, KEY_END, KEY_0, KEY_DELETE, KEY_BACKSPACE, KEY_OK, KEY_TOGGLEOW, KEY_ASCII, KEY_TIMEOUT, KEY_NUMBERS, ConfigElement, ConfigSelection, ConfigNothing
 from Components.ActionMap import NumberActionMap, ActionMap
+from Components.Sources.StaticText import StaticText
 from enigma import eListbox, eListboxPythonConfigContent, eRCInput, eTimer
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
@@ -168,6 +169,9 @@ class ConfigListScreen:
 
 		self["config"] = ConfigList(list, session=session)
 
+		if "key_pvr" not in self:
+			self["key_pvr"] = StaticText(_("PVR"))
+
 		if on_change is not None:
 			self.__changed = on_change
 		else:
@@ -194,17 +198,22 @@ class ConfigListScreen:
 			x()
 
 	def handleInputHelpers(self):
-		if self["config"].getCurrent() is not None and self["config"].getCurrent()[1].__class__.__name__ in ('ConfigText', 'ConfigPassword'):
+		currConfig = self["config"].getCurrent()
+		if currConfig is not None and currConfig[1].__class__.__name__ in ('ConfigText', 'ConfigPassword'):
 			if "VKeyIcon" in self:
 				self["VirtualKB"].setEnabled(True)
 				self["VKeyIcon"].boolean = True
-			if "HelpWindow" in self and self["config"].getCurrent()[1].help_window and self["config"].getCurrent()[1].help_window.instance is not None:
+			if "HelpWindow" in self and currConfig[1].help_window and currConfig[1].help_window.instance is not None:
 				helpwindowpos = self["HelpWindow"].getPosition()
 				from enigma import ePoint
-				self["config"].getCurrent()[1].help_window.instance.move(ePoint(helpwindowpos[0], helpwindowpos[1]))
+				currConfig[1].help_window.instance.move(ePoint(helpwindowpos[0], helpwindowpos[1]))
 		elif "VKeyIcon" in self:
 			self["VirtualKB"].setEnabled(False)
 			self["VKeyIcon"].boolean = False
+		if currConfig is not None and isinstance(currConfig[1], ConfigSelection) and not isinstance(currConfig[1], ConfigNothing):
+			self["key_pvr"].setText(_("PVR"))
+		else:
+			self["key_pvr"].setText("")
 		if "description" in self:
 			self["description"].text = self.getCurrentDescription()
 

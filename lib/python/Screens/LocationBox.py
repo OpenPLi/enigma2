@@ -96,6 +96,7 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 		self["key_red"] = Button(_("Cancel"))
 		self["key_yellow"] = StaticText(_("Rename"))
 		self["key_blue"] = StaticText(_("Remove bookmark") if self.realBookmarks else '')
+		self["key_menu"] = StaticText(_("MENU"))
 
 		# Background for Buttons
 		self["green"] = Pixmap()

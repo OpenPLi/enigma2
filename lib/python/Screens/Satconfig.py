@@ -751,6 +751,8 @@ class NimSelection(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 
+		self["key_info"] = StaticText(_("INFO"))
+
 		self.list = [None] * nimmanager.getSlotCount()
 		self["nimlist"] = List(self.list)
 		self.updateList()

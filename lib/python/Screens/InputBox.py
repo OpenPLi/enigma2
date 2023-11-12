@@ -5,6 +5,7 @@ from Components.config import config
 from Components.ActionMap import NumberActionMap, ActionMap
 from Components.Label import Label
 from Components.Input import Input
+from Components.Sources.StaticText import StaticText
 from Tools.BoundFunction import boundFunction
 from Tools.Notifications import AddPopup
 from time import time
@@ -20,6 +21,8 @@ class InputBox(Screen):
 		self.setTitle(windowTitle, showPath=False)
 		if useableChars is not None:
 			self["input"].setUseableChars(useableChars)
+
+		self["key_text"] = StaticText(_("TEXT"))
 
 		self["actions"] = NumberActionMap(["WizardActions", "InputBoxActions", "InputAsciiActions", "KeyboardInputActions"],
 		{
