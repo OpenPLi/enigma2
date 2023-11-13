@@ -35,6 +35,7 @@ class NetworkAdapterSelection(Screen, HelpableScreen):
 		self["key_green"] = StaticText(_("Select"))
 		self["key_yellow"] = StaticText("")
 		self["key_blue"] = StaticText("")
+		self["key_menu"] = StaticText(_("MENU"))
 		self["introduction"] = StaticText(self.edittext)
 
 		self["OkCancelActions"] = HelpableActionMap(self, ["OkCancelActions"],

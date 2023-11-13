@@ -170,6 +170,8 @@ class Menu(Screen, ProtectedScreen):
 		Screen.__init__(self, session)
 		self.menulength = 0
 		self["key_blue"] = StaticText("")
+		self["key_previous"] = StaticText(_("PREVIOUS"))
+		self["key_next"] = StaticText(_("NEXT"))
 		self["menu"] = List([])
 		self["menu"].enableWrapAround = True
 		self.showNumericHelp = False

@@ -54,6 +54,9 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		HelpableScreen.__init__(self)
 		self.setTitle(_("Virtual keyboard"))
 		prompt = title  # Title should only be used for screen titles!
+		self["key_info"] = StaticText(_("INFO"))
+		self["key_text"] = StaticText(_("TEXT"))
+		self["key_help"] = StaticText(_("HELP"))
 		greenLabel, self.green = {
 			VKB_DONE_ICON: ("Done", "ENTERICON"),
 			VKB_ENTER_ICON: ("Enter", "ENTERICON"),

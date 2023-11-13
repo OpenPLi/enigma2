@@ -40,6 +40,8 @@ class EPGSelection(Screen):
 		self.serviceChangeCB = serviceChangeCB
 		self.ask_time = -1 #now
 		self["key_red"] = StaticText("")
+		self["key_menu"] = StaticText(_("MENU"))
+		self["key_info"] = StaticText(_("INFO"))
 		self.closeRecursive = False
 		self.saved_title = None
 		self["Service"] = ServiceEvent()

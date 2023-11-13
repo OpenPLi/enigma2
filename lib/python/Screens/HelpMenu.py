@@ -2,6 +2,7 @@ from Screens.Screen import Screen
 from Components.Label import Label
 from Components.ActionMap import ActionMap
 from Components.HelpMenuList import HelpMenuList
+from Components.Sources.StaticText import StaticText
 from Screens.Rc import Rc
 
 
@@ -10,6 +11,7 @@ class HelpMenu(Screen, Rc):
 		Screen.__init__(self, session)
 		self.setTitle(_("help..."))
 		self.onSelChanged = []
+		self["key_help"] = StaticText(_("HELP"))
 		self["list"] = HelpMenuList(list, self.close)
 		self["list"].onSelChanged.append(self.SelectionChanged)
 		Rc.__init__(self)
@@ -49,6 +51,7 @@ class HelpMenu(Screen, Rc):
 
 class HelpableScreen:
 	def __init__(self):
+		self["key_help"] = StaticText(_("HELP"))
 		self["helpActions"] = ActionMap(["HelpActions"],
 			{
 				"displayHelp": self.showHelp,
