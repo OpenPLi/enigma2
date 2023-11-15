@@ -26,10 +26,10 @@ class TimerList(GUIComponent):
 			serviceNameWidth = width - 200 - self.iconWidth - self.iconMargin
 
 		if timer.external:
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, width - serviceNameWidth - self.iconMargin, 0, serviceNameWidth, self.rowSplit, 0, RT_HALIGN_RIGHT | RT_VALIGN_BOTTOM, serviceName, self.backupColor, self.backupColorSel, None, None, None, None))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, width - serviceNameWidth - self.iconMargin - self.sidesMargin, 0, serviceNameWidth, self.rowSplit, 0, RT_HALIGN_RIGHT | RT_VALIGN_BOTTOM, serviceName, self.backupColor, self.backupColorSel, None, None, None, None))
 		else:
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, width - serviceNameWidth - self.iconMargin, 0, serviceNameWidth, self.rowSplit, 0, RT_HALIGN_RIGHT | RT_VALIGN_BOTTOM, serviceName))
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, self.iconWidth + self.iconMargin, 0, width - serviceNameWidth - self.iconWidth - self.iconMargin * 2, self.rowSplit, 2, RT_HALIGN_LEFT | RT_VALIGN_BOTTOM, timer.name))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, width - serviceNameWidth - self.iconMargin - self.sidesMargin, 0, serviceNameWidth, self.rowSplit, 0, RT_HALIGN_RIGHT | RT_VALIGN_BOTTOM, serviceName))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, self.iconWidth + self.iconMargin + self.sidesMargin, 0, width - serviceNameWidth - self.iconWidth - self.iconMargin * 2 - self.sidesMargin * 2, self.rowSplit, 2, RT_HALIGN_LEFT | RT_VALIGN_BOTTOM, timer.name))
 
 		begin = FuzzyTime(timer.begin)
 		if timer.repeated:
@@ -42,11 +42,11 @@ class TimerList(GUIComponent):
 				flags >>= 1
 			repeatedtext = ", ".join(repeatedtext)
 			if self.iconRepeat:
-				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, self.iconMargin // 2, self.rowSplit + (self.itemHeight - self.rowSplit - self.iconHeight) // 2, self.iconWidth, self.iconHeight, self.iconRepeat))
+				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, (self.iconMargin // 2) + self.sidesMargin, self.rowSplit + (self.itemHeight - self.rowSplit - self.iconHeight) // 2, self.iconWidth, self.iconHeight, self.iconRepeat))
 		else:
 			repeatedtext = begin[0] # date
 			if "autotimer" in timer.flags:
-				self.iconAutoTimer and res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, self.iconMargin // 2, self.rowSplit + (self.itemHeight - self.rowSplit - self.iconHeight) // 2, self.iconWidth, self.iconHeight, self.iconAutoTimer))
+				self.iconAutoTimer and res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, (self.iconMargin // 2) + self.sidesMargin, self.rowSplit + (self.itemHeight - self.rowSplit - self.iconHeight) // 2, self.iconWidth, self.iconHeight, self.iconAutoTimer))
 		if timer.justplay:
 			if timer.pipzap:
 				extra_text = _("(ZAP as PiP)")
@@ -83,26 +83,29 @@ class TimerList(GUIComponent):
 			state = _("done!")
 			icon = self.iconDone
 
-		icon and res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, self.iconMargin // 2, (self.rowSplit - self.iconHeight) // 2, self.iconWidth, self.iconHeight, icon))
+		icon and res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, (self.iconMargin // 2) + self.sidesMargin, (self.rowSplit - self.iconHeight) // 2, self.iconWidth, self.iconHeight, icon))
 		orbpos = self.getOrbitalPos(timer.service_ref, timer.state, hasattr(timer, "record_service") and timer.record_service or None)
 		orbposWidth = getTextBoundarySize(self.instance, self.font, self.l.getItemSize(), orbpos).width()
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, self.satPosLeft, self.rowSplit, orbposWidth, self.itemHeight - self.rowSplit, 1, RT_HALIGN_LEFT | RT_VALIGN_TOP, orbpos))
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, self.iconWidth + self.iconMargin, self.rowSplit, self.satPosLeft - self.iconWidth - self.iconMargin, self.itemHeight - self.rowSplit, 1, RT_HALIGN_LEFT | RT_VALIGN_TOP, state))
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, self.satPosLeft + orbposWidth, self.rowSplit, width - self.satPosLeft - orbposWidth - self.iconMargin, self.itemHeight - self.rowSplit, 1, RT_HALIGN_RIGHT | RT_VALIGN_TOP, text))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, self.satPosLeft + self.sidesMargin, self.rowSplit, orbposWidth, self.itemHeight - self.rowSplit, 1, RT_HALIGN_LEFT | RT_VALIGN_TOP, orbpos))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, self.iconWidth + self.iconMargin + self.sidesMargin, self.rowSplit, self.satPosLeft - self.iconWidth - self.iconMargin - self.sidesMargin * 2, self.itemHeight - self.rowSplit, 1, RT_HALIGN_LEFT | RT_VALIGN_TOP, state))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, self.satPosLeft + orbposWidth + self.sidesMargin, self.rowSplit, width - self.satPosLeft - orbposWidth - self.iconMargin - self.sidesMargin * 2, self.itemHeight - self.rowSplit, 1, RT_HALIGN_RIGHT | RT_VALIGN_TOP, text))
 		return res
 
 	def __init__(self, list):
 		GUIComponent.__init__(self)
+		self.onSelectionChanged = []
 		self.l = eListboxPythonMultiContent()
 		self.l.setBuildFunc(self.buildTimerEntry)
 		self.serviceNameFont = gFont("Regular", 20)
 		self.font = gFont("Regular", 18)
 		self.eventNameFont = gFont("Regular", 18)
 		self.l.setList(list)
+		self.listCount = len(list)  # used by pager
 		self.itemHeight = 50
 		self.rowSplit = 25
 		self.iconMargin = 4
 		self.satPosLeft = 160
+		self.sidesMargin = 0
 		self.backupColor = self.backupColorSel = 0x00CCAC68
 		self.iconWait = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/timer_wait.png"))
 		#currently intended that all icons have the same size
@@ -143,6 +146,10 @@ class TimerList(GUIComponent):
 
 		def backupColorSel(value):
 			self.backupColorSel = int(value)
+
+		def sidesMargin(value):
+			self.sidesMargin = parseScale(value)
+
 		for (attrib, value) in list(self.skinAttributes):
 			try:
 				locals().get(attrib)(value)
@@ -161,10 +168,24 @@ class TimerList(GUIComponent):
 
 	GUI_WIDGET = eListbox
 
+	def setList(self, list):
+		self.l.setList(list)
+		self.listCount = len(list)  # used by pager
+		self.selectionChanged()
+
 	def postWidgetCreate(self, instance):
+		instance.selectionChanged.get().append(self.selectionChanged)
 		instance.setContent(self.l)
 		self.instance = instance
 		instance.setWrapAround(True)
+
+	def preWidgetRemove(self, instance):
+		instance.selectionChanged.get().remove(self.selectionChanged)
+		instance.setContent(None)
+
+	def selectionChanged(self):
+		for x in self.onSelectionChanged:
+			x()
 
 	def moveToIndex(self, index):
 		self.instance.moveSelectionTo(index)
