@@ -21,9 +21,14 @@ class Pager(GUIAddon):
 		self.spacing = applySkinFactor(5)
 		self.picDotPage = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/dot.png"))
 		self.picDotCurPage = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/dotfull.png"))
+		self.picShevronLeft = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/shevronleft.png"))
+		self.picShevronRight = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/shevronright.png"))
+		self.picShevronUp = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/shevronup.png"))
+		self.picShevronDown = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/shevrondown.png"))
 		self.showIcons = "showAll"  # can be "showAll", "onlyFirst", "onlyLast"
 		self.orientations = {"orHorizontal": eListbox.orHorizontal, "orVertical": eListbox.orVertical}
 		self.orientation = eListbox.orHorizontal
+		self.max_pages = 10
 
 	def onContainerShown(self):
 		# disable listboxes default scrollbars
@@ -51,7 +56,51 @@ class Pager(GUIAddon):
 			xPos = (width - width_dots) / 2 - pixd_width / 2 if self.showIcons == "showAll" else 0
 			yPos = (height - height_dots) / 2 - pixd_height / 2 if self.showIcons == "showAll" else 0
 		res = [None]
-		if pageCount > (0 if self.showIcons == "showAll" else -1):
+		if self.max_pages > 0 and pageCount > self.max_pages and pageCount > 0:
+			width_dots = pixd_width + (pixd_width + self.spacing) * (2 if currentPage > 0 and currentPage < pageCount else 1)
+			xPos = (width - width_dots) / 2 - pixd_width / 2
+			yPos = (height - height_dots) / 2 - pixd_height / 2
+			if self.orientation == eListbox.orHorizontal:
+				if currentPage > 0:
+					res.append(MultiContentEntryPixmapAlphaBlend(
+						pos=(xPos, 0),
+						size=(pixd_width, pixd_height),
+						png=self.picShevronLeft,
+						backcolor=None, backcolor_sel=None, flags=BT_ALIGN_CENTER))
+					xPos += pixd_width + self.spacing
+				res.append(MultiContentEntryPixmapAlphaBlend(
+					pos=(xPos, 0),
+					size=(pixd_width, pixd_height),
+					png=self.picDotCurPage,
+					backcolor=None, backcolor_sel=None, flags=BT_ALIGN_CENTER))
+				xPos += pixd_width + self.spacing
+				if currentPage < pageCount:
+					res.append(MultiContentEntryPixmapAlphaBlend(
+						pos=(xPos, 0),
+						size=(pixd_width, pixd_height),
+						png=self.picShevronRight,
+						backcolor=None, backcolor_sel=None, flags=BT_ALIGN_CENTER))
+			else:
+				if currentPage > 0:
+					res.append(MultiContentEntryPixmapAlphaBlend(
+						pos=(0, yPos),
+						size=(pixd_width, pixd_height),
+						png=self.picShevronLeft,
+						backcolor=None, backcolor_sel=None, flags=BT_ALIGN_CENTER))
+					yPos += pixd_height + self.spacing
+				res.append(MultiContentEntryPixmapAlphaBlend(
+					pos=(0, yPos),
+					size=(pixd_width, pixd_height),
+					png=self.picDotCurPage,
+					backcolor=None, backcolor_sel=None, flags=BT_ALIGN_CENTER))
+				yPos += pixd_height + self.spacing
+				if currentPage < pageCount:
+					res.append(MultiContentEntryPixmapAlphaBlend(
+						pos=(0, yPos),
+						size=(pixd_width, pixd_height),
+						png=self.picShevronRight,
+						backcolor=None, backcolor_sel=None, flags=BT_ALIGN_CENTER))
+		elif pageCount > (0 if self.showIcons == "showAll" else -1):
 			pages = list(range(pageCount + 1))
 			# add option to show just first or last icon
 			if self.showIcons == "onlyFirst":
@@ -163,6 +212,22 @@ class Pager(GUIAddon):
 				pic = LoadPixmap(resolveFilename(SCOPE_GUISKIN, value))
 				if pic:
 					self.picDotCurPage = pic
+			elif attrib == "picL":
+				pic = LoadPixmap(resolveFilename(SCOPE_GUISKIN, value))
+				if pic:
+					self.picShevronLeft = pic
+			elif attrib == "picR":
+				pic = LoadPixmap(resolveFilename(SCOPE_GUISKIN, value))
+				if pic:
+					self.picShevronRight = pic
+			elif attrib == "picU":
+				pic = LoadPixmap(resolveFilename(SCOPE_GUISKIN, value))
+				if pic:
+					self.picShevronUp = pic
+			elif attrib == "picD":
+				pic = LoadPixmap(resolveFilename(SCOPE_GUISKIN, value))
+				if pic:
+					self.picShevronDown = pic
 			elif attrib == "itemHeight":
 				self.l.setItemHeight(parseScale(value))
 			elif attrib == "itemWidth":
@@ -171,6 +236,8 @@ class Pager(GUIAddon):
 				self.spacing = parseScale(value)
 			elif attrib == "showIcons":
 				self.showIcons = value
+			elif attrib == "maxPages":
+				self.max_pages = value
 			elif attrib == "orientation":
 				self.orientation = self.orientations.get(value, self.orientations["orHorizontal"])
 				if self.orientation == eListbox.orHorizontal:
