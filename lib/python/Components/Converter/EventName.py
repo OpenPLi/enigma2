@@ -64,6 +64,8 @@ class EventName(Converter):
 		event = self.source.event
 		if event is None:
 			return False
+		if self.type == self.NAME:
+			return bool(self.getText())
 		if self.type == self.PDC:
 			if event.getPdcPil():
 				return True
@@ -173,7 +175,19 @@ class EventName(Converter):
 				duration_str = "%d min" % (duration / 60)
 			start_time_str = "%2d:%02d" % (t_start.tm_hour, t_start.tm_min)
 			end_time_str = "%2d:%02d" % (t_end.tm_hour, t_end.tm_min) 
-			res_str = "%s - %s  %s  %s" % (start_time_str, end_time_str, self.separator, duration_str)
+			name = event.getEventName()
+			res_str = ""
+			for x in self.parts[1:]:
+				if x == "NAME" and name:
+					res_str = self.appendToStringWithSeparator(res_str, name)
+				if x == "STARTTIME" and start_time_str:
+					res_str = self.appendToStringWithSeparator(res_str, start_time_str)
+				if x == "ENDTIME" and end_time_str:
+					res_str = self.appendToStringWithSeparator(res_str, end_time_str)
+				if x == "TIMERANGE" and start_time_str and end_time_str:
+					res_str = self.appendToStringWithSeparator(res_str, "%s - %s" % (start_time_str, end_time_str))
+				if x == "DURATION" and duration_str:
+					res_str = self.appendToStringWithSeparator(res_str, duration_str)
 			return res_str
 
 	text = property(getText)

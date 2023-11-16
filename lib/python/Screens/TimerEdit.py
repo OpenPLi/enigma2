@@ -260,7 +260,7 @@ class TimerEditList(Screen):
 			self.list.sort(key=functools.cmp_to_key(eol_compare))
 		else:
 			self.list.sort(key=lambda x: x[0].begin)
-		self["timerlist"].l.setList(self.list)
+		self["timerlist"].setList(self.list)
 		self.updateState()
 
 	def showLog(self):

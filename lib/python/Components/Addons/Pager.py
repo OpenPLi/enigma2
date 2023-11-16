@@ -1,10 +1,11 @@
 from Components.Addons.GUIAddon import GUIAddon
 
-from enigma import eListbox, eListboxPythonMultiContent, BT_ALIGN_CENTER, eSize
+from enigma import eListbox, eListboxPythonMultiContent, BT_ALIGN_CENTER, BT_VALIGN_CENTER
 
-from skin import parseScale
+from skin import parseScale, applySkinFactor
 
 from Components.MultiContent import MultiContentEntryPixmapAlphaBlend
+from Components.Sources.List import List
 
 from Tools.Directories import resolveFilename, SCOPE_GUISKIN
 from Tools.LoadPixmap import LoadPixmap
@@ -13,13 +14,21 @@ from Tools.LoadPixmap import LoadPixmap
 class Pager(GUIAddon):
 	def __init__(self):
 		GUIAddon.__init__(self)
-		self.l = eListboxPythonMultiContent()
+		self.l = eListboxPythonMultiContent()  # noqa: E741
 		self.l.setBuildFunc(self.buildEntry)
-		self.l.setItemHeight(25)
-		self.spacing = 5
+		self.l.setItemHeight(25)  # 25 is the height of the default images. For other images set the height in the skin.
+		self.l.setItemWidth(25)  # 25 is the width of the default images. For other images set the width in the skin.
+		self.spacing = applySkinFactor(5)
 		self.picDotPage = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/dot.png"))
 		self.picDotCurPage = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/dotfull.png"))
-		self.showIcons = "showAll" # can be "showAll", "onlyFirst", "onlyLast"
+		self.picShevronLeft = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/shevronleft.png"))
+		self.picShevronRight = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/shevronright.png"))
+		self.picShevronUp = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/shevronup.png"))
+		self.picShevronDown = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/shevrondown.png"))
+		self.showIcons = "showAll"  # can be "showAll", "onlyFirst", "onlyLast"
+		self.orientations = {"orHorizontal": eListbox.orHorizontal, "orVertical": eListbox.orVertical}
+		self.orientation = eListbox.orHorizontal
+		self.max_pages = 10
 
 	def onContainerShown(self):
 		# disable listboxes default scrollbars
@@ -34,16 +43,64 @@ class Pager(GUIAddon):
 
 	def buildEntry(self, currentPage, pageCount):
 		width = self.l.getItemSize().width()
+		height = self.l.getItemSize().height()
 		xPos = width
+		yPos = height
 
 		if self.picDotPage:
 			pixd_size = self.picDotPage.size()
 			pixd_width = pixd_size.width()
 			pixd_height = pixd_size.height()
 			width_dots = pixd_width + (pixd_width + self.spacing) * pageCount
+			height_dots = pixd_height + (pixd_height + self.spacing) * pageCount
 			xPos = (width - width_dots) / 2 - pixd_width / 2 if self.showIcons == "showAll" else 0
+			yPos = (height - height_dots) / 2 - pixd_height / 2 if self.showIcons == "showAll" else 0
 		res = [None]
-		if pageCount > (0 if self.showIcons == "showAll" else -1):
+		if self.max_pages > 0 and pageCount > self.max_pages and pageCount > 0:
+			width_dots = pixd_width + (pixd_width + self.spacing) * (2 if currentPage > 0 and currentPage < pageCount else 1)
+			xPos = (width - width_dots) / 2 - pixd_width / 2
+			yPos = (height - height_dots) / 2 - pixd_height / 2
+			if self.orientation == eListbox.orHorizontal:
+				if currentPage > 0:
+					res.append(MultiContentEntryPixmapAlphaBlend(
+						pos=(xPos, 0),
+						size=(pixd_width, pixd_height),
+						png=self.picShevronLeft,
+						backcolor=None, backcolor_sel=None, flags=BT_ALIGN_CENTER))
+					xPos += pixd_width + self.spacing
+				res.append(MultiContentEntryPixmapAlphaBlend(
+					pos=(xPos, 0),
+					size=(pixd_width, pixd_height),
+					png=self.picDotCurPage,
+					backcolor=None, backcolor_sel=None, flags=BT_ALIGN_CENTER))
+				xPos += pixd_width + self.spacing
+				if currentPage < pageCount:
+					res.append(MultiContentEntryPixmapAlphaBlend(
+						pos=(xPos, 0),
+						size=(pixd_width, pixd_height),
+						png=self.picShevronRight,
+						backcolor=None, backcolor_sel=None, flags=BT_ALIGN_CENTER))
+			else:
+				if currentPage > 0:
+					res.append(MultiContentEntryPixmapAlphaBlend(
+						pos=(0, yPos),
+						size=(pixd_width, pixd_height),
+						png=self.picShevronLeft,
+						backcolor=None, backcolor_sel=None, flags=BT_ALIGN_CENTER))
+					yPos += pixd_height + self.spacing
+				res.append(MultiContentEntryPixmapAlphaBlend(
+					pos=(0, yPos),
+					size=(pixd_width, pixd_height),
+					png=self.picDotCurPage,
+					backcolor=None, backcolor_sel=None, flags=BT_ALIGN_CENTER))
+				yPos += pixd_height + self.spacing
+				if currentPage < pageCount:
+					res.append(MultiContentEntryPixmapAlphaBlend(
+						pos=(0, yPos),
+						size=(pixd_width, pixd_height),
+						png=self.picShevronRight,
+						backcolor=None, backcolor_sel=None, flags=BT_ALIGN_CENTER))
+		elif pageCount > (0 if self.showIcons == "showAll" else -1):
 			pages = list(range(pageCount + 1))
 			# add option to show just first or last icon
 			if self.showIcons == "onlyFirst":
@@ -52,12 +109,23 @@ class Pager(GUIAddon):
 				pages = [pages[-1]]
 			for x in pages:
 				if self.picDotPage and self.picDotCurPage:
-					res.append(MultiContentEntryPixmapAlphaBlend(
+					if self.orientation == eListbox.orHorizontal:
+						res.append(
+							MultiContentEntryPixmapAlphaBlend(
 								pos=(xPos, 0),
 								size=(pixd_width, pixd_height),
 								png=self.picDotCurPage if x == currentPage else self.picDotPage,
 								backcolor=None, backcolor_sel=None, flags=BT_ALIGN_CENTER))
-					xPos += pixd_width + self.spacing
+						xPos += pixd_width + self.spacing
+					else:
+						res.append(
+							MultiContentEntryPixmapAlphaBlend(
+								pos=(0, yPos),
+								size=(pixd_width, pixd_height),
+								png=self.picDotCurPage if x == currentPage else self.picDotPage,
+								backcolor=None, backcolor_sel=None, flags=BT_ALIGN_CENTER | BT_VALIGN_CENTER))
+						yPos += pixd_height + self.spacing
+
 		return res
 
 	def selChange(self, currentPage, pagesCount):
@@ -71,7 +139,7 @@ class Pager(GUIAddon):
 		instance.allowNativeKeys(False)
 
 	def getSourceOrientation(self):
-		if self.source.__class__.__name__ == "List": # Components.Sources.List, used by MainMenu
+		if isinstance(self.source, List):  # Components.Sources.List
 			orig_source = self.source.master.master
 		else:
 			orig_source = self.source
@@ -85,7 +153,7 @@ class Pager(GUIAddon):
 		return self.source.l.getCurrentSelectionIndex()
 
 	def getSourceSize(self):
-		if self.source.__class__.__name__ == "List": # Components.Sources.List, used by MainMenu
+		if isinstance(self.source, List):  # Components.Sources.List
 			return self.source.master.master.instance.size()
 		return self.source.instance.size()
 
@@ -97,7 +165,7 @@ class Pager(GUIAddon):
 		return 0
 
 	def getListItemSize(self):
-		if self.source.__class__.__name__ == "List": # Components.Sources.List, used by MainMenu
+		if isinstance(self.source, List):  # Components.Sources.List
 			orig_source = self.source.master.master
 		else:
 			orig_source = self.source
@@ -144,12 +212,40 @@ class Pager(GUIAddon):
 				pic = LoadPixmap(resolveFilename(SCOPE_GUISKIN, value))
 				if pic:
 					self.picDotCurPage = pic
+			elif attrib == "picL":
+				pic = LoadPixmap(resolveFilename(SCOPE_GUISKIN, value))
+				if pic:
+					self.picShevronLeft = pic
+			elif attrib == "picR":
+				pic = LoadPixmap(resolveFilename(SCOPE_GUISKIN, value))
+				if pic:
+					self.picShevronRight = pic
+			elif attrib == "picU":
+				pic = LoadPixmap(resolveFilename(SCOPE_GUISKIN, value))
+				if pic:
+					self.picShevronUp = pic
+			elif attrib == "picD":
+				pic = LoadPixmap(resolveFilename(SCOPE_GUISKIN, value))
+				if pic:
+					self.picShevronDown = pic
 			elif attrib == "itemHeight":
 				self.l.setItemHeight(parseScale(value))
+			elif attrib == "itemWidth":
+				self.l.setItemWidth(parseScale(value))
 			elif attrib == "spacing":
 				self.spacing = parseScale(value)
 			elif attrib == "showIcons":
 				self.showIcons = value
+			elif attrib == "maxPages":
+				self.max_pages = value
+			elif attrib == "orientation":
+				self.orientation = self.orientations.get(value, self.orientations["orHorizontal"])
+				if self.orientation == eListbox.orHorizontal:
+					self.instance.setOrientation(eListbox.orVertical)
+					self.l.setOrientation(eListbox.orVertical)
+				else:
+					self.instance.setOrientation(eListbox.orHorizontal)
+					self.l.setOrientation(eListbox.orHorizontal)
 			else:
 				attribs.append((attrib, value))
 		self.skinAttributes = attribs

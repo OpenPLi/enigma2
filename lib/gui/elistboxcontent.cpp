@@ -287,13 +287,15 @@ void eListboxPythonStringContent::paint(gPainter &painter, eWindowStyle &style, 
 		{
 			const char *string = PyUnicode_Check(item) ? PyUnicode_AsUTF8(item) : "<not-a-string>";
 			ePoint text_offset = offset;
+			ePoint style_text_offset = ePoint(0, 0);
 			if (gray)
 				painter.setForegroundColor(gRGB(0x808080));
 
 			int flags = 0;
 			if (local_style)
 			{
-				text_offset += local_style->m_text_offset;
+				style_text_offset = local_style->m_text_offset;
+				text_offset += style_text_offset;
 
 				if (local_style->m_valign == eListboxStyle::alignTop)
 					flags |= gPainter::RT_VALIGN_TOP;
@@ -312,7 +314,8 @@ void eListboxPythonStringContent::paint(gPainter &painter, eWindowStyle &style, 
 					flags |= gPainter::RT_HALIGN_BLOCK;
 			}
 
-			painter.renderText(eRect(text_offset, m_itemsize), string, flags, border_color, border_size);
+			// Here we have to compensate the local style text offset from both sides
+			painter.renderText(eRect(text_offset.x(), text_offset.y(), m_itemsize.width() - style_text_offset.x()*2, m_itemsize.height() - style_text_offset.y()*2), string, flags, border_color, border_size);
 		}
 	}
 
