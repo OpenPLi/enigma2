@@ -11,6 +11,7 @@ class eDVBCICcSession: public eDVBCISession
 {
 	eDVBCISlot *m_slot;
 	int m_descrambler_fd;
+	uint8_t m_current_ca_demux_id;
 
 	// CI+ credentials
 	enum
@@ -235,6 +236,11 @@ class eDVBCICcSession: public eDVBCISession
 	uint8_t m_key_data[16];
 	uint8_t m_iv[16];
 
+	/* descrambler key */
+	bool m_descrambler_new_key;
+	uint8_t m_descrambler_key_iv[32];
+	uint8_t m_descrambler_odd_even;
+
 	int receivedAPDU(const unsigned char *tag, const void *data, int len);
 	int doAction();
 
@@ -272,6 +278,8 @@ class eDVBCICcSession: public eDVBCISession
 
 	bool ci_element_set_certificate(unsigned int id, X509 *cert);
 	bool ci_element_set_hostid_from_certificate(unsigned int id, X509 *cert);
+
+	void set_descrambler_key();
 
 public:
 	eDVBCICcSession(eDVBCISlot *tslot, int version);
