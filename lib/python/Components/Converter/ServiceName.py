@@ -55,10 +55,12 @@ class ServiceName(Converter):
 				ref = nref
 			return ref.toString()
 		elif self.type == self.NUMBER:
-			return self.getNumber(ref, info)
+			numservice = self.source.serviceref
+			return self.getNumber(numservice, info)
 		elif self.type == self.FORMAT_STRING:
 			name = self.getName(ref, info)
-			num = self.getNumber(ref, info)
+			numservice = self.source.serviceref
+			num = self.getNumber(numservice, info)
 			provider = self.getProvider(ref, info)
 			orbpos = self.getOrbitalPos(ref, info)
 			res_str = ""
