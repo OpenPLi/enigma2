@@ -96,7 +96,7 @@ def getPiconName(serviceRef):
 	if not pngname: # picon by channel name
 		name = sanitizeFilename(ServiceReference(serviceRef).getServiceName())
 		name = re.sub('[^a-z0-9]', '', name.replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower())
-		if len(name) > 0:
+		if name:
 			pngname = findPicon(name)
 			if not pngname and len(name) > 3 and (name.endswith("fhd") or name.endswith("uhd")):
 				pngname = findPicon(name[:-3])
