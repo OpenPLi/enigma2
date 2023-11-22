@@ -101,7 +101,7 @@ def getPiconName(serviceRef):
 			if not pngname:
 				name = re.sub("(fhd|uhd|hd|sd|4k)$", "", name)
 				if name:
-					pngname = findLcdPicon(name)
+					pngname = findPicon(name)
 			if not pngname and len(name) > 6:
 				series = re.sub(r's[0-9]*e[0-9]*$', '', name)
 				pngname = findPicon(series)
