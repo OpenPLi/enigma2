@@ -1251,7 +1251,10 @@ class RecordTimer(timer.Timer):
 	def getAllTimersList(self):
 		return self.timer_list + self.fallback_timer_list
 
-	def isInTimer(self, eventid, begin, duration, service):
+	def getDisabledTimers(self):
+		return self.processed_timers # TODO add  fallback processed timers too
+
+	def isInTimer(self, eventid, begin, duration, service, disabledTimers=False):
 		returnValue = None
 		type = 0
 		time_match = 0
@@ -1259,7 +1262,10 @@ class RecordTimer(timer.Timer):
 		check_offset_time = not config.recording.margin_before.value and not config.recording.margin_after.value
 		end = begin + duration
 		refstr = ':'.join(service.split(':')[:11])
-		for x in self.getAllTimersList():
+		timersList = self.getAllTimersList() if not disabledTimers else self.getDisabledTimers()
+		for x in timersList:
+			if disabledTimers and not x.disabled:
+				continue
 			check = ':'.join(x.service_ref.ref.toString().split(':')[:11]) == refstr
 			if check:
 				timer_end = x.end

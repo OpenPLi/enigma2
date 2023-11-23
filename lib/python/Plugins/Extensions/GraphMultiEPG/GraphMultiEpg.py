@@ -72,6 +72,7 @@ config.misc.graph_mepg.show_timelines = ConfigSelection(default="all", choices=[
 config.misc.graph_mepg.servicename_alignment = ConfigSelection(default=possibleAlignmentChoices[0][0], choices=possibleAlignmentChoices)
 config.misc.graph_mepg.extension_menu = ConfigYesNo(default=False)
 config.misc.graph_mepg.show_record_clocks = ConfigYesNo(default=True)
+config.misc.graph_mepg.show_disabled_timers= ConfigYesNo(default=False)
 config.misc.graph_mepg.zap_blind_bouquets = ConfigYesNo(default=False)
 
 listscreen = config.misc.graph_mepg.default_mode.value
@@ -127,6 +128,7 @@ class EPGList(GUIComponent):
 		self.selEvPix = None
 		self.recEvPix = None
 		self.curSerPix = None
+		self.disEvPix = None
 
 		self.foreColor = 0xffffff
 		self.foreColorSelected = 0xffc000
@@ -143,6 +145,8 @@ class EPGList(GUIComponent):
 		self.backColorNow = 0x505080
 		self.foreColorRec = 0xffffff
 		self.backColorRec = 0x805050
+		self.foreColorDis = 0xffffff
+		self.backColorDis = 0x777700
 		self.serviceFont = gFont("Regular", applySkinFactor(20))
 		self.entryFontName = "Regular"
 		self.entryFontSize = applySkinFactor(18)
@@ -215,6 +219,9 @@ class EPGList(GUIComponent):
 		def ServiceForegroundColorRecording(value):
 			self.foreColorRec = parseColor(value).argb()
 
+		def ServiceForegroundColorDisabled(value):
+			self.foreColorDis = parseColor(value).argb()
+
 		def ServiceBackgroundColor(value):
 			self.backColorService = parseColor(value).argb()
 
@@ -223,6 +230,9 @@ class EPGList(GUIComponent):
 
 		def ServiceBackgroundColorRecording(value):
 			self.backColorRec = parseColor(value).argb()
+
+		def ServiceBackgroundColorDisabled(value):
+			self.backColorDis = parseColor(value).argb()
 
 		def ServiceBorderColor(value):
 			self.borderColorService = parseColor(value).argb()
@@ -395,9 +405,10 @@ class EPGList(GUIComponent):
 		self.selEvPix = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, 'epg/SelectedEvent.png'))
 		self.recEvPix = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, 'epg/RecordingEvent.png'))
 		self.curSerPix = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, 'epg/CurrentService.png'))
+		self.disEvPix = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, 'epg/DisabledEvent.png'))
 
 		# if no background png's are present at all, use the solid background borders for further calculations
-		if (self.nowEvPix, self.othEvPix, self.selEvPix, self.recEvPix, self.curSerPix) == (None, None, None, None, None):
+		if (self.nowEvPix, self.othEvPix, self.selEvPix, self.recEvPix, self.curSerPix, self.disEvPix) == (None, None, None, None, None, None):
 			self.eventBorderHorWidth = self.eventBorderWidth
 			self.eventBorderVerWidth = self.eventBorderWidth
 			self.serviceBorderHorWidth = self.serviceBorderWidth
@@ -547,6 +558,7 @@ class EPGList(GUIComponent):
 				duration = ev[3]
 				xpos, ewidth = self.calcEntryPosAndWidthHelper(stime, duration, start, end, width)
 				rec = self.timer.isInTimer(ev[0], stime, duration, service)
+				dis = self.timer.isInTimer(ev[0], stime, duration, service, disabledTimers=True) if config.misc.graph_mepg.show_disabled_timers.value else None
 
 				# event box background
 				foreColorSelected = foreColor = self.foreColor
@@ -561,12 +573,19 @@ class EPGList(GUIComponent):
 				if selected and self.select_rect.x == xpos + left and self.selEvPix:
 					if rec is not None and rec[1][-1] in (2, 12, 17, 27):
 						foreColorSelected = self.foreColorSelectedRec
+					elif dis is not None and dis[1][-1] in (2, 12, 17, 27):
+						foreColorSelected = self.foreColorSelected
 					bgpng = self.selEvPix
 					backColorSel = None
 				elif rec is not None and rec[1][-1] in (2, 12, 17, 27):
 					bgpng = self.recEvPix
 					foreColor = self.foreColorRec
 					backColor = self.backColorRec
+				elif dis is not None and dis[1][-1] in (2, 12, 17, 27):
+					bgpng = self.disEvPix
+					foreColor = self.foreColorDis
+					backColor = self.backColorDis
+
 				elif stime <= now and now < stime + duration:
 					bgpng = self.nowEvPix
 				elif currentservice:
