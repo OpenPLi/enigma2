@@ -850,7 +850,7 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 		}
 
 		int xoffset=0, xoffs=0;  // used as offset when painting the folder/marker symbol or the serviceevent progress
-		int nameLeft=0, nameWidth=0, nameYoffs=0, nextYoffs=0; // used as temporary values for 'show two lines' option
+		int nameLeft=0, nameYoffs=0, nextYoffs=0; // used as temporary values for 'show two lines' option
 
 		if (m_separator == "") m_separator = "  ";
 
@@ -1366,7 +1366,6 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 						if (!next_event_name.empty())
 							m_element_position[celServiceNextInfo].setHeight(area.height());
 						nameLeft = area.left();
-						nameWidth = area.width();
 
 						if (isPlayable)
 						{
