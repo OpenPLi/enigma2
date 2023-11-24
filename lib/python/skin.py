@@ -1197,6 +1197,7 @@ def readSkin(screen, skin, names, desktop):
 			renderer = rendererClass()  # Instantiate renderer.
 			if source:
 				renderer.connect(source)  # Connect to source.
+				renderer.label_name = wsource or wname #allows that it can be checked a label exists in the skin
 			attributes = renderer.skinAttributes = []
 			collectAttributes(attributes, widget, context, skinPath, ignore=("render", "source"))
 			screen.renderer.append(renderer)
