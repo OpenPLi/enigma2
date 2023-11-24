@@ -61,8 +61,12 @@ def InitUsageConfig():
 		("keep", _("Keep service")),
 		("reverseB", _("Reverse bouquet buttons")),
 		("keep reverseB", _("Keep service") + " + " + _("Reverse bouquet buttons"))])
+	
+	config.usage.servicenum_fontsize = ConfigSelectionNumber(default=0, stepwidth=1, min=-8, max=10, wraparound=True)
+	config.usage.servicename_fontsize = ConfigSelectionNumber(default=0, stepwidth=1, min=-8, max=10, wraparound=True)
+	config.usage.serviceinfo_fontsize = ConfigSelectionNumber(default=0, stepwidth=1, min=-8, max=10, wraparound=True)
 
-	choices = [(0, _("Use skin default"))] + [(i, _("%d") % i) for i in range(5, 41)]
+	choicelist = [(0, _("Use skin default"))] + [(i, _("%d") % i) for i in range(5, 41)]
 	config.usage.servicelist_number_of_services = ConfigSelection(default=0, choices=choicelist)
 	config.usage.servicelist_number_of_services.addNotifier(refreshServiceList)
 
