@@ -128,6 +128,7 @@ class Screen(dict):
 		self.instance.show()
 		if self["ScreenPath"].text and "ScreenPath" not in self.availableLabels:
 			self["Title"].text = "%s %s" % (self["ScreenPath"].text, self["Title"].text) if self["ScreenPath"].text else self["Title"].text
+			self["ScreenPath"].text = ""
 		for x in self.onShow:
 			x()
 		for val in list(self.values()) + self.renderer:
