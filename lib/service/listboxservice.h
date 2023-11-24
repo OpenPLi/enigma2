@@ -28,6 +28,9 @@ public:
 	int getNextBeginningWithChar(char c);
 	int getPrevMarkerPos();
 	int getNextMarkerPos();
+	int getCurrentSelectionIndex() { return m_cursor_number; }
+	eSize getItemSize() { return m_itemsize; }
+	int getListSize() { return m_size; }
 
 		/* support for marked services */
 	void initMarked();
@@ -44,7 +47,8 @@ public:
 
 	enum {
 		visModeSimple,
-		visModeComplex
+		visModeComplex,
+		visSkinDefined
 	};
 
 	void setVisualMode(int mode);
@@ -73,6 +77,11 @@ public:
 		picServiceEventProgressbar,
 		picCrypto,
 		picRecord,
+		pic4K,
+		picHD,
+		picSD,
+		picBackup,
+		picCatchup,
 		picElements
 	};
 
@@ -87,7 +96,6 @@ public:
 	int getItemHeight() { return m_itemheight; }
 	void setItemHeight(int height);
 	void setHideNumberMarker(bool doHide) { m_hide_number_marker = doHide; }
-	void setShowTwoLines(int mode) { m_show_two_lines = mode; }
 	void setServiceTypeIconMode(int mode) { m_servicetype_icon_mode = mode; }
 	void setCryptoIconMode(int mode) { m_crypto_icon_mode = mode; }
 	void setRecordIndicatorMode(int mode) { m_record_indicator_mode = mode; }
@@ -96,8 +104,15 @@ public:
 	void setProgressbarBorderWidth(int value) { m_progressbar_border_width = value; }
 	void setNonplayableMargins(int value) { m_nonplayable_margins = value; }
 	void setItemsDistances(int value) { m_items_distances = value; }
+	void setSidesMargin(int value) { m_sides_margin = value; }
+	void setMarkerAsLine(int value) { m_marker_as_line = value; }
 
-	void setNextTitle(const std::string &string) { m_next_title = string; }
+	void setTextSeparator(const std::string &string) { m_separator = string; }
+	void setMarkerTextAlignment(const std::string &string) { m_marker_alignment = string; } // currently supports left and center
+	void setMarkerLineColor(const gRGB &col) {
+		m_markerline_color = col;
+		m_markerline_color_set = 1;
+	}
 
 	static void setGetPiconNameFunc(SWIG_PYOBJECT(ePyObject) func);
 
@@ -183,7 +198,6 @@ private:
 
 	int m_itemheight;
 	bool m_hide_number_marker;
-	int m_show_two_lines;
 	int m_servicetype_icon_mode;
 	int m_crypto_icon_mode;
 	int m_record_indicator_mode;
@@ -192,8 +206,14 @@ private:
 	int m_progressbar_border_width;
 	int m_nonplayable_margins;
 	int m_items_distances;
+	int m_sides_margin;
+	int m_marker_as_line;
+	gRGB m_markerline_color;
+	int m_markerline_color_set;
 
 	std::string m_next_title;
+	std::string m_separator;
+	std::string m_marker_alignment;
 };
 
 #endif

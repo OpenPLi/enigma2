@@ -33,7 +33,9 @@ def InitUsageConfig():
 		refreshServiceList()
 	config.usage.alternative_number_mode.addNotifier(alternativeNumberModeChange)
 
-	config.usage.servicelist_twolines = ConfigSelection(default="0", choices=[("0", _("Single line mode")), ("1", _("Two lines")), ("2", _("Two lines and next event"))])
+	config.usage.servicelist_twolines = ConfigSelection(default="0", choices=[("0", _("None")), ("1", _("two lines"))])
+	if config.usage.servicelist_twolines.value not in ("0", "1"):
+		config.usage.servicelist_twolines.value = "1"
 	config.usage.servicelist_twolines.addNotifier(refreshServiceList)
 
 	config.usage.hide_number_markers = ConfigYesNo(default=True)
@@ -60,10 +62,8 @@ def InitUsageConfig():
 		("reverseB", _("Reverse bouquet buttons")),
 		("keep reverseB", _("Keep service") + " + " + _("Reverse bouquet buttons"))])
 
-	choicelist = [("by skin", _("As defined by the skin"))]
-	for i in range(5, 41):
-		choicelist.append((str(i)))
-	config.usage.servicelist_number_of_services = ConfigSelection(default="by skin", choices=choicelist)
+	choices = [(0, _("Use skin default"))] + [(i, _("%d") % i) for i in range(5, 41)]
+	config.usage.servicelist_number_of_services = ConfigSelection(default=0, choices=choicelist)
 	config.usage.servicelist_number_of_services.addNotifier(refreshServiceList)
 
 	config.usage.multiepg_ask_bouquet = ConfigYesNo(default=False)
