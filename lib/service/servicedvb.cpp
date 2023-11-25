@@ -2038,12 +2038,12 @@ std::string eDVBServicePlay::getInfoString(int w)
 		if (!m_dvb_service) return "";
 		std::string prov = m_dvb_service->m_provider_name;
 		if (prov.empty()) {
-			eServiceReferenceDVB orig;
-			bool res = ((const eServiceReferenceDVB&)m_reference).getSROriginal(orig);
+			eServiceReferenceDVB sRelayOrigSref;
+			bool res = ((const eServiceReferenceDVB&)m_reference).getSROriginal(sRelayOrigSref);
 			if (res) {
-				ePtr<eDVBService> serviceOrig;
-				eDVBDB::getInstance()->getService(orig, serviceOrig);
-				return serviceOrig->m_provider_name;
+				ePtr<eDVBService> sRelayServiceOrigSref;
+				eDVBDB::getInstance()->getService(sRelayOrigSref, sRelayServiceOrigSref);
+				return sRelayServiceOrigSref->m_provider_name;
 			}
 		}
 		return prov;
