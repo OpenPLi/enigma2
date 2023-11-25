@@ -222,7 +222,7 @@ bool eDVBService::isCrypted()
 
 int eDVBService::isPlayable(const eServiceReference &ref, const eServiceReference &ignore, bool simulate)
 {
-	ServiceReferenceDVB sRelayOrigSref;
+	eServiceReferenceDVB sRelayOrigSref;
 	ePtr<iPlayableService> refCur;
 	eNavigation::getInstance()->getCurrentService(refCur);
 	ePtr<iServiceInformation> tmp_info;
