@@ -222,23 +222,14 @@ bool eDVBService::isCrypted()
 
 int eDVBService::isPlayable(const eServiceReference &ref, const eServiceReference &ignore, bool simulate)
 {
-	std::string sr_url = eConfigManager::getConfigValue("config.misc.softcam_streamrelay_url");
-	sr_url = replace_all(replace_all(replace_all(sr_url, "[", ""), "]", ""), ", ", ".");
-	std::string sr_port = eConfigManager::getConfigValue("config.misc.softcam_streamrelay_port");
-	eServiceReferenceDVB newRef;
+	ServiceReferenceDVB newRef;
 	ePtr<iPlayableService> refCur;
 	eNavigation::getInstance()->getCurrentService(refCur);
 	ePtr<iServiceInformation> tmp_info;
 	refCur->info(tmp_info);
 	std::string ref_s = tmp_info->getInfoString(iServiceInformation::sServiceref);
-	if (ref_s.find(sr_url + "%3a" + sr_port) != std::string::npos) {
-		std::vector<std::string> s_split = split(ref_s, ":");
-		std::string url_sr = s_split[s_split.size() - 2];
-		std::vector<std::string> sr_split = split(url_sr, "/");
-		std::string ref_orig = sr_split.back();
-		ref_orig = replace_all(ref_orig, "%3a", ":");
-		newRef = eServiceReferenceDVB(ref_orig);
-	}
+	eServiceReferenceDVB currentlyPlaying = eServiceReferenceDVB(ref_s);
+	bool res = currentlyPlaying.getSROriginal(newRef);
 
 	ePtr<eDVBResourceManager> res_mgr;
 	bool remote_fallback_enabled = eConfigManager::getConfigBoolValue("config.usage.remote_fallback_enabled", false);
@@ -253,7 +244,7 @@ int eDVBService::isPlayable(const eServiceReference &ref, const eServiceReferenc
 		((const eServiceReferenceDVB&)ref).getChannelID(chid);
 		((const eServiceReferenceDVB&)ignore).getChannelID(chid_ignore);
 
-		if (newRef) {
+		if (res) {
 			newRef.getChannelID(chid_ignore_sr);
 		} else {
 			chid_ignore_sr = eDVBChannelID();

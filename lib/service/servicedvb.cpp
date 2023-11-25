@@ -2034,8 +2034,20 @@ std::string eDVBServicePlay::getInfoString(int w)
 	switch (w)
 	{
 	case sProvider:
+	{
 		if (!m_dvb_service) return "";
-		return m_dvb_service->m_provider_name;
+		std::string prov = m_dvb_service->m_provider_name;
+		if (prov.empty()) {
+			eServiceReferenceDVB orig;
+			bool res = ((const eServiceReferenceDVB&)m_reference).getSROriginal(orig);
+			if (res) {
+				ePtr<eDVBService> serviceOrig;
+				eDVBDB::getInstance()->getService(orig, serviceOrig);
+				return serviceOrig->m_provider_name;
+			}
+		}
+		return prov;
+	}
 	case sServiceref:
 		return m_reference.toString();
 	case sHBBTVUrl:

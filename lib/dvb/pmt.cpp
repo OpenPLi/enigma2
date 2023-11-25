@@ -969,22 +969,14 @@ int eDVBServicePMTHandler::tuneExt(eServiceReferenceDVB &ref, ePtr<iTsSource> &s
 	if (!simulate)
 	{
 		// If is stream relay service then allocate the real channel so to provide correct frontend info
-		std::string s_ref = ref.toString();
 		eDVBChannelID chid;
-		std::string sr_url = eConfigManager::getConfigValue("config.misc.softcam_streamrelay_url");
-		sr_url = replace_all(replace_all(replace_all(sr_url, "[", ""), "]", ""), ", ", ".");
-		std::string sr_port = eConfigManager::getConfigValue("config.misc.softcam_streamrelay_port");
-		if (s_ref.find(sr_url + "%3a" + sr_port) != std::string::npos) {
-			std::vector<std::string> s_split = split(s_ref, ":");
-			std::string url_sr = s_split[s_split.size() - 2];
-			std::vector<std::string> sr_split = split(url_sr, "/");
-			std::string ref_orig = sr_split.back();
-			ref_orig = replace_all(ref_orig, "%3a", ":");
-			eServiceReferenceDVB newRef = eServiceReferenceDVB(ref_orig);
-			newRef.getChannelID(chid);
-			// Allocate the channel in different ptr so to not mess up original pvr channel info
+		eServiceReferenceDVB sRelayOrigSref;
+		bool res = ref.getSROriginal(sRelayOrigSref);
+
+		if (res) {
+			sRelayOrigSref.getChannelID(chid);
 			res = m_resourceManager->allocateChannel(chid, m_sr_channel, simulate);
-		} 
+		}
 
 
 		if (m_sr_channel) {
