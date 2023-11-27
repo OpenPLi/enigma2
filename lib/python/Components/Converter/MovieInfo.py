@@ -91,18 +91,18 @@ class MovieInfo(Converter):
 						return "%.0f %s" % (filesize / 1024.0, _("kB"))
 					return "%d %s" % (filesize, _("B"))
 			elif self.type == self.FORMAT_STRING:
-				timeCreate =  strftime("%A %d %b %Y", localtime(info.getInfo(service, iServiceInformation.sTimeCreate)))
-				duration = "%d min" % (info.getLength(service) / 60) 
-				filesize = "%d MB" % (info.getInfoObject(service, iServiceInformation.sFileSize) / (1024*1024))
+				timeCreate = localtime(info.getInfo(service, iServiceInformation.sTimeCreate))
+				duration = info.getLength(service)
+				filesize = info.getInfoObject(service, iServiceInformation.sFileSize)
 				res_str = ""
 				for x in self.parts[1:]:
 					x = x.upper()
-					if x == "TIMECREATED" and timeCreate:
-						res_str = self.appendToStringWithSeparator(res_str, timeCreate)
-					if x == "DURATION" and duration:
-						res_str = self.appendToStringWithSeparator(res_str, duration)
+					if x == "TIMECREATED" and timeCreate and timeCreate.tm_year > 1970:
+						res_str = self.appendToStringWithSeparator(res_str, strftime("%A %d %b %Y", timeCreate))
+					if x == "DURATION" and duration and duration > 0:
+						res_str = self.appendToStringWithSeparator(res_str, "%d min" % (duration / 60))
 					if x == "FILESIZE" and filesize:
-						res_str = self.appendToStringWithSeparator(res_str, filesize)
+						res_str = self.appendToStringWithSeparator(res_str, "%d MB" % (filesize / (1024*1024)))
 				return res_str
 		return ""
 
