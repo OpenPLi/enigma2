@@ -51,6 +51,7 @@ class Screen(dict):
 		self.screenTitle = ""  # This is the current screen title without the path.
 		self.handledWidgets = []
 		self.availableLabels = []
+		self.noScreenPathSource = False
 
 	def __repr__(self):
 		return str(type(self))
@@ -129,6 +130,7 @@ class Screen(dict):
 		if self["ScreenPath"].text and "ScreenPath" not in self.availableLabels:
 			self["Title"].text = "%s %s" % (self["ScreenPath"].text, self["Title"].text) if self["ScreenPath"].text else self["Title"].text
 			self["ScreenPath"].text = ""
+			self.noScreenPathSource = True
 		for x in self.onShow:
 			x()
 		for val in list(self.values()) + self.renderer:
@@ -164,7 +166,7 @@ class Screen(dict):
 		except AttributeError:
 			pass
 		self.screenTitle = title
-		if showPath and config.usage.showScreenPath.value == "large" and title:
+		if showPath and (config.usage.showScreenPath.value == "large" or self.noScreenPathSource) and title:
 			screenPath = ""
 			screenTitle = "%s > %s" % (self.screenPath, title) if self.screenPath else title
 		elif showPath and config.usage.showScreenPath.value == "small":
