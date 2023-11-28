@@ -162,6 +162,8 @@ class Pager(GUIAddon):
 			return self.source.listCount
 		elif hasattr(self.source, 'list'):
 			return len(self.source.list)
+		elif hasattr(self.source, 'l') and hasattr(self.source.l, 'getListSize'):
+			return self.source.l.getListSize()
 		return 0
 
 	def getListItemSize(self):
