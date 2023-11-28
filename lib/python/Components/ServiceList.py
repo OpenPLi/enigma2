@@ -515,15 +515,7 @@ class ServiceList(GUIComponent):
 		if "perc" in config.usage.show_event_progress_in_servicelist.value:
 			progressWidth = self.progressPercentWidth or self.progressBarWidth
 
-		if "left" in config.usage.show_event_progress_in_servicelist.value:
-			self.l.setElementPosition(self.l.celServiceEventProgressbar, eRect(channelNumberWidth + channelNumberSpace + self.sidesMargin, 0, progressWidth, self.ItemHeight))
-			self.l.setElementPosition(self.l.celServiceName, eRect(channelNumberWidth + channelNumberSpace + progressWidth + self.fieldMargins + self.sidesMargin, 0, rowWidth - (channelNumberWidth + channelNumberSpace + progressWidth + self.fieldMargins), self.ItemHeight))
-		elif "right" in config.usage.show_event_progress_in_servicelist.value:
-			self.l.setElementPosition(self.l.celServiceEventProgressbar, eRect(rowWidth - progressWidth, 0, progressWidth, self.ItemHeight))
-			self.l.setElementPosition(self.l.celServiceName, eRect(channelNumberWidth + channelNumberSpace + self.sidesMargin, 0, rowWidth - (channelNumberWidth + channelNumberSpace + progressWidth + self.fieldMargins), self.ItemHeight))
-		else:
-			self.l.setElementPosition(self.l.celServiceEventProgressbar, eRect(0, 0, 0, 0))
-			self.l.setElementPosition(self.l.celServiceName, eRect(channelNumberWidth + channelNumberSpace + self.sidesMargin, 0, rowWidth - (channelNumberWidth + channelNumberSpace + self.sidesMargin), self.ItemHeight))
+		self.l.setElementPosition(self.l.celServiceEventProgressbar, eRect(0, 0, progressWidth, self.ItemHeight))
 
 		self.l.setElementFont(self.l.celServiceName, self.ServiceNameFont)
 		self.l.setElementFont(self.l.celServiceNumber, self.ServiceNumberFont)
@@ -535,6 +527,9 @@ class ServiceList(GUIComponent):
 		self.l.setCryptoIconMode(int(config.usage.crypto_icon_mode.value))
 		self.l.setRecordIndicatorMode(int(config.usage.record_indicator_mode.value))
 		self.l.setColumnWidth(-1 if two_lines_val > 0 else int(config.usage.servicelist_column.value))
+		self.l.setProgressBarMode(config.usage.show_event_progress_in_servicelist.value)
+		self.l.setChannelNumbersVisible(config.usage.show_channel_numbers_in_servicelist.value)
+		self.l.setAlternativeNumberingMode(config.usage.alternative_number_mode.value)
 
 	def selectionEnabled(self, enabled):
 		if self.instance is not None:

@@ -106,10 +106,13 @@ public:
 	void setItemsDistances(int value) { m_items_distances = value; }
 	void setSidesMargin(int value) { m_sides_margin = value; }
 	void setMarkerAsLine(int value) { m_marker_as_line = value; }
+	void setChannelNumbersVisible(bool visible) { m_chanel_number_visible = visible; }
+	void setAlternativeNumberingMode(bool b) { m_alternative_numbering = b; }
+	void setProgressBarMode(std::string s) { m_progress_mode = s; }
 
 	void setTextSeparator(const std::string &string) { m_separator = string; }
 	void setMarkerTextAlignment(const std::string &string) { m_marker_alignment = string; } // currently supports left and center
-	void setMarkerLineColor(const gRGB &col) {
+	void setMarkerLineColor(const gRGB &col) { 
 		m_markerline_color = col;
 		m_markerline_color_set = 1;
 	}
@@ -198,6 +201,8 @@ private:
 
 	int m_itemheight;
 	bool m_hide_number_marker;
+	bool m_chanel_number_visible;
+	bool m_alternative_numbering;
 	int m_servicetype_icon_mode;
 	int m_crypto_icon_mode;
 	int m_record_indicator_mode;
@@ -214,6 +219,7 @@ private:
 	std::string m_next_title;
 	std::string m_separator;
 	std::string m_marker_alignment;
+	std::string m_progress_mode;
 };
 
 #endif

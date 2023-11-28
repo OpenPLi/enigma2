@@ -810,18 +810,7 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 
 		if (!marked && isPlayable && service_info && m_is_playable_ignore.valid())
 		{
-			
-			eNavigation::getInstance()->getCurrentService(refCur);
-			ePtr<iServiceInformation> tmp_info;
-			refCur->info(tmp_info);
-			std::string ref =  tmp_info->getInfoString(iServiceInformation::sServiceref);
-			std::map<ePtr<iRecordableService>, eServiceReference, std::less<iRecordableService*> > recordedServices;
-			recordedServices = eNavigation::getInstance()->getRecordingsServices();
-			if (ref.find("127.0.0.1") != std::string::npos && recordedServices.size() == 0) {
-				isplayable_value = 1;
-			} else {
-				isplayable_value = service_info->isPlayable(*m_cursor, m_is_playable_ignore);
-			}
+			isplayable_value = service_info->isPlayable(*m_cursor, m_is_playable_ignore);
 
 			if (isplayable_value == 0) // service unavailable
 			{
@@ -850,10 +839,12 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 		}
 
 		int xoffset=0, xoffs=0;  // used as offset when painting the folder/marker symbol or the serviceevent progress
-
+		
 		if (m_separator == "") m_separator = "  ";
 
 		std::string text = "<N/A>";
+
+		bool hasChannelNumbers = m_chanel_number_visible;
 
 		time_t now = time(0);
 
@@ -1016,8 +1007,7 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 
 			if (!isMarker && !isDirectory) {
 				std::string chNum = "";
-				eRect serviceNumberRect = m_element_position[celServiceNumber];
-				if (serviceNumberRect.width() > 0 && m_cursor->getChannelNum() != 0) {
+				if (hasChannelNumbers && m_cursor->getChannelNum() != 0) {
 					char buffer[15];
 					snprintf(buffer, sizeof(buffer), "%d", m_cursor->getChannelNum() );
 					chNum = buffer;
@@ -1063,6 +1053,7 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 				eRect secondLineRect = eRect(secondLineOffset, offset.y() + (m_itemheight - m_marker_as_line) / 2, m_itemsize.width() - secondLineOffset - 16 - 8, m_marker_as_line);
 				painter.fill(secondLineRect);
 			}
+			
 
 			// event name
 			if (is_event)
@@ -1179,6 +1170,10 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 		} else {
 			
 			// Single line mode goes here
+			if (service_info)
+				service_info->getName(ref, text);
+
+			xoffs += m_sides_margin;
 			if (is_event)
 			{
 				event_name = evt->getEventName();
@@ -1186,462 +1181,355 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 				event_duration = evt->getDuration();
 			}
 			bool hasPicons = PyCallable_Check(m_GetPiconNameFunc);
+			bool isAlternativeNumberingMode = m_alternative_numbering;
+			std::string eventProgressConfig = m_progress_mode;
 
-			eRect p_area = m_element_position[celServiceInfo];
-			int iconWidth =	p_area.height() * 9 / 5;
-			int xoffeset_marker = 0;
-			int marker_text_width = 0;
-			for (int e = 0; e != celServiceTypePixmap; ++e)
-			{
-				if (m_element_font[e])
-				{
-					int flags=gPainter::RT_VALIGN_CENTER;
-					int yoffs = 0;
-					eRect area = m_element_position[e];
-					std::string text = "<N/A>";
-					switch (e)
-					{
-					case celServiceNumber:
-					{
-						if (area.width() <= 0)
-							continue; // no point in going on if we won't paint anything
+			ePtr<eTextPara> paraServiceName = new eTextPara(eRect(0, 0, m_itemsize.width(), m_itemheight));
+			paraServiceName->setFont(m_element_font[celServiceName]);
+			paraServiceName->renderString(text.c_str());
+			eRect bboxServiceName = paraServiceName->getBoundBox();
 
-						if( m_cursor->getChannelNum() == 0 )
-							continue;
-
-						char buffer[15];
-						snprintf(buffer, sizeof(buffer), "%d", m_cursor->getChannelNum() );
-						text = buffer;
-						flags|=gPainter::RT_HALIGN_RIGHT;
-						if (isPlayable && serviceFallback && selected && m_color_set[serviceSelectedFallback])
-							painter.setForegroundColor(m_color[serviceSelectedFallback]);
-						break;
-					}
-					case celServiceName:
-					{
-						if (service_info)
-							service_info->getName(*m_cursor, text);
-						if (!isPlayable)
-						{
-							area.setWidth(area.width() + m_element_position[celServiceEventProgressbar].width() +  m_nonplayable_margins);
-							if (m_element_position[celServiceEventProgressbar].left() == 0)
-								area.setLeft(0);
-							if (m_element_position[celServiceNumber].width() && m_element_position[celServiceEventProgressbar].left() == m_element_position[celServiceNumber].width() +  m_nonplayable_margins)
-								area.setLeft(m_element_position[celServiceNumber].width() +  m_nonplayable_margins);
-						}
-						if (!(m_record_indicator_mode == 3 && isRecorded) && isPlayable && serviceFallback && selected && m_color_set[serviceSelectedFallback])
-							painter.setForegroundColor(m_color[serviceSelectedFallback]);
-						if (!m_marker_alignment.empty() && m_marker_alignment == "center" && isMarker) {
-							ePtr<eTextPara> paraName = new eTextPara(eRect(0, 0, m_itemsize.width(), m_itemheight/2));
-							paraName->setFont(m_element_font[celServiceName]);
-							paraName->renderString(text.c_str());
-							eRect bboxName = paraName->getBoundBox();
-							xoffeset_marker = (m_itemsize.width() - bboxName.width()) / 2;
-							marker_text_width = bboxName.width();
-							area.setLeft(xoffeset_marker);
-							area.setWidth(marker_text_width);
-						}
-						break;
-					}
-					case celServiceInfo:
-					{
-						if (!event_name.empty())
-						{
-							text = event_name;
-							std::replace(text.begin(), text.end(), '\n', ' ');
-							if (serviceAvail)
-							{
-								if (!selected && m_color_set[eventForeground])
-								{
-									painter.setForegroundColor(m_color[eventForeground]);
-									EventProgressbarColor = m_color[eventForeground];
-								}
-								else if (selected && m_color_set[eventForegroundSelected])
-								{
-									painter.setForegroundColor(m_color[eventForegroundSelected]);
-									EventProgressbarColor = m_color[eventForegroundSelected];
-								}
-								else
-									painter.setForegroundColor(gRGB(0xe7b53f));
-
-								if (serviceFallback && !selected && m_color_set[eventForegroundFallback]) // fallback receiver
-								{
-									painter.setForegroundColor(m_color[eventForegroundFallback]);
-									EventProgressbarColor = m_color[eventForegroundFallback];
-								}
-								else if (serviceFallback && selected && m_color_set[eventForegroundSelectedFallback])
-								{
-									painter.setForegroundColor(m_color[eventForegroundSelectedFallback]);
-									EventProgressbarColor = m_color[eventForegroundSelectedFallback];
-								}
-							}
-							break;
-						}
-						continue;
-					}
-					case celServiceNextInfo:
-					{
-						if (!next_event_name.empty())
-						{
-							text = m_next_title + next_event_name;
-							std::replace(text.begin(), text.end(), '\n', ' ');
-							if (serviceAvail)
-							{
-								if (!selected && m_color_set[eventNextForeground])
-									painter.setForegroundColor(m_color[eventNextForeground]);
-								else if (selected && m_color_set[eventNextForegroundSelected])
-									painter.setForegroundColor(m_color[eventNextForegroundSelected]);
-								else
-									painter.setForegroundColor(gRGB(0x787878));
-
-								if (serviceFallback && !selected && m_color_set[eventNextForegroundFallback]) // fallback receiver
-									painter.setForegroundColor(m_color[eventNextForegroundFallback]);
-								else if (serviceFallback && selected && m_color_set[eventNextForegroundSelectedFallback])
-									painter.setForegroundColor(m_color[eventNextForegroundSelectedFallback]);
-							}
-							break;
-						}
-						continue;
-					}
-					case celServiceEventProgressbar:
-					{
-						if (area.width() > 0 && is_event)
-						{
-							char buffer[15];
-							snprintf(buffer, sizeof(buffer), "%d %%", (int)(100 * (now - event_begin) / event_duration));
-							text = buffer;
-							flags|=gPainter::RT_HALIGN_RIGHT;
-							break;
-						}
-						continue;
-					}
-					}
-
-					eRect tmp = area;
-					int xoffs = 0;
-					ePtr<gPixmap> piconPixmap;
-					bool isPIconSVG = false;
-					if (e == celServiceName)
-					{
-						//picon stuff
-						if (isPlayable && hasPicons)
-						{
-							ePyObject pArgs = PyTuple_New(1);
-							PyTuple_SET_ITEM(pArgs, 0, PyUnicode_FromString(ref.toString().c_str()));
-							ePyObject pRet = PyObject_CallObject(m_GetPiconNameFunc, pArgs);
-							Py_DECREF(pArgs);
-							if (pRet)
-							{
-								if (PyUnicode_Check(pRet))
-								{
-									std::string piconFilename = PyUnicode_AsUTF8(pRet);
-									if (endsWith(toLower(piconFilename), ".svg")) {
-										isPIconSVG = true;
-									}
-									if (!piconFilename.empty()) {
-										loadImage(piconPixmap, piconFilename.c_str(), 0, isPIconSVG ? iconWidth : 0);
-									}
-								}
-								Py_DECREF(pRet);
-							}
-						}
-						xoffs = xoffset;
-						tmp.setWidth(((!isPlayable || m_column_width == -1 || (!piconPixmap && !m_column_width)) ? tmp.width() : m_column_width) - xoffs);
-					}
-
-					ePtr<eTextPara> para = new eTextPara(tmp);
-					para->setFont(m_element_font[e]);
-					para->renderString(text.c_str());
-
-					if (e == celServiceName)
-					{
-						eRect bbox = para->getBoundBox();
-
-						int servicenameWidth = ((!isPlayable || m_column_width == -1 || (!piconPixmap && !m_column_width)) ? bbox.width() : m_column_width);
-						m_element_position[celServiceInfo].setLeft(area.left() + servicenameWidth + m_items_distances + xoffs);
-						m_element_position[celServiceInfo].setTop(area.top());
-						m_element_position[celServiceInfo].setWidth(area.width() - (servicenameWidth + m_items_distances + xoffs));
-						m_element_position[celServiceInfo].setHeight(area.height());
-						if (!next_event_name.empty())
-							m_element_position[celServiceNextInfo].setHeight(area.height());
-
-						if (isPlayable)
-						{
-							//picon stuff
-							if (hasPicons || isDirectory || (isMarker && !m_marker_as_line)) {
-								eRect area = m_element_position[celServiceInfo];
-
-								iconWidth = area.height() * 9 / 5;
-
-								m_element_position[celServiceInfo].setLeft(area.left() + iconWidth + m_items_distances);
-								m_element_position[celServiceInfo].setWidth(area.width() - iconWidth - m_items_distances);
-
-								xoffs += iconWidth + m_items_distances;
-							}
-
-							if (hasPicons && (m_column_width || piconPixmap))
-							{
-								area = m_element_position[celServiceName];
-								
-								if (piconPixmap)
-								{
-
-									area.moveBy(offset);
-									painter.clip(area);
-									/* PIcons are usually about 100:60. Make it a
-									* bit wider in case the icons are diffently
-									* shaped, and to add a bit of margin between
-									* icon and text. */
-									int pflags = gPainter::BT_ALPHABLEND | gPainter::BT_HALIGN_CENTER | gPainter::BT_VALIGN_CENTER;
-									if (!isPIconSVG) {
-										pflags = gPainter::BT_ALPHABLEND | gPainter::BT_KEEP_ASPECT_RATIO | gPainter::BT_HALIGN_CENTER | gPainter::BT_VALIGN_CENTER;
-									}
-									if (piconPixmap)
-									{
-										if (isPIconSVG) {
-											painter.blit(piconPixmap,
-											eRect(area.left(), area.top(), iconWidth, area.height()),
-											eRect(),
-											pflags
-											);
-										} else {
-											painter.blitScale(piconPixmap,
-												eRect(area.left(), area.top(), iconWidth, area.height()),
-												area,
-												pflags);
-										}
-									}
-									painter.clippop();
-								}
-							}
-
-							//record icon stuff part1
-							int rec_pixmap_xoffs = m_items_distances;
-							if (isRecorded && m_record_indicator_mode == 1 && m_pixmaps[picRecord])
-								rec_pixmap_xoffs = m_pixmaps[picRecord]->size().width() + m_items_distances;
-							int serviceNameWidthCorr = 0;
-							//service type marker stuff
-							if (m_servicetype_icon_mode)
-							{
-								int orbpos = m_cursor->getUnsignedData(4) >> 16;
-								const char *filename = ref.path.c_str();
-								ePtr<gPixmap> &pixmap =
-									(m_cursor->flags & eServiceReference::isGroup) ? m_pixmaps[picServiceGroup] :
-									(strstr(filename, "://")) ? m_pixmaps[picStream] :
-									(orbpos == 0xFFFF) ? m_pixmaps[picDVB_C] :
-									(orbpos == 0xEEEE) ? m_pixmaps[picDVB_T] : m_pixmaps[picDVB_S];
-								if (pixmap)
-								{
-									eSize pixmap_size = pixmap->size();
-									eRect area = m_element_position[celServiceInfo];
-									int offs = rec_pixmap_xoffs;
-									if (m_servicetype_icon_mode == 1)
-									{
-										m_element_position[celServiceInfo].setLeft(area.left() + offs + pixmap_size.width() + m_items_distances);
-										m_element_position[celServiceInfo].setWidth(area.width() - pixmap_size.width() - offs - m_items_distances * 2);
-										area = m_element_position[celServiceName];
-										offs = xoffs;
-										xoffs += pixmap_size.width() + m_items_distances;
-										serviceNameWidthCorr = servicenameWidth + m_items_distances;
-									}
-									else if (m_crypto_icon_mode == 1 && m_pixmaps[picCrypto]) {
-										offs = offs + m_pixmaps[picCrypto]->size().width() + m_items_distances;
-										m_element_position[celServiceInfo].setLeft(area.left() + offs + pixmap_size.width() + m_items_distances);
-										m_element_position[celServiceInfo].setWidth(area.width() - pixmap_size.width() - offs - m_items_distances * 2);
-										serviceNameWidthCorr = servicenameWidth + m_items_distances;
-									}
-									if (m_servicetype_icon_mode == 2) {
-										m_element_position[celServiceInfo].setLeft(area.left() + offs + pixmap_size.width() + m_items_distances);
-										m_element_position[celServiceInfo].setWidth(area.width() - pixmap_size.width() - offs - m_items_distances * 2);
-									}
-									
-									int correction = (area.height() - pixmap_size.height()) / 2;
-									area.moveBy(offset);
-									painter.clip(area);
-									painter.blit(pixmap, ePoint(area.left() + offs, offset.y() + correction), area, gPainter::BT_ALPHABLEND);
-									painter.clippop();
-								}
-							}
-
-							//crypto icon stuff
-							if (m_crypto_icon_mode && m_pixmaps[picCrypto])
-							{
-								eSize pixmap_size = m_pixmaps[picCrypto]->size();
-								eRect area = m_element_position[celServiceInfo];
-								int offs = rec_pixmap_xoffs;
-								if (m_crypto_icon_mode == 1)
-								{
-									area = m_element_position[celServiceName];
-									offs = xoffs;
-									xoffs += pixmap_size.width() + m_items_distances;
-									m_element_position[celServiceInfo].setLeft(area.left() + offs + pixmap_size.width() + m_items_distances);
-									m_element_position[celServiceInfo].setWidth(area.width() - offs - pixmap_size.width() - m_items_distances * 2);
-									serviceNameWidthCorr = servicenameWidth + m_items_distances;
-								}
-								int correction =  (area.height() - pixmap_size.height()) / 2;
-								area.moveBy(offset);
-								if (service_info && service_info->isCrypted())
-								{
-									if (m_crypto_icon_mode == 2)
-									{
-										m_element_position[celServiceInfo].setLeft(area.left() + offs + pixmap_size.width() + m_items_distances);
-										m_element_position[celServiceInfo].setWidth(area.width() - pixmap_size.width() - offs - m_items_distances * 2);
-									}
-									painter.clip(area);
-									painter.blit(m_pixmaps[picCrypto], ePoint(area.left() + offs, offset.y() + correction), area, gPainter::BT_ALPHABLEND);
-									painter.clippop();
-								}
-							}
-
-							//record icon stuff part2
-							if (isRecorded && m_record_indicator_mode < 3 && m_pixmaps[picRecord])
-							{
-								eSize pixmap_size = m_pixmaps[picRecord]->size();
-								eRect area = m_element_position[celServiceInfo];
-								int offs = m_items_distances;
-								if (m_record_indicator_mode == 1)
-								{
-									area = m_element_position[celServiceName];
-									offs = xoffs;
-									xoffs += pixmap_size.width() + m_items_distances;
-									m_element_position[celServiceInfo].setLeft(area.left() + offs + pixmap_size.width() + m_items_distances);
-									m_element_position[celServiceInfo].setWidth(area.width() - offs - pixmap_size.width() - m_items_distances * 2);
-									serviceNameWidthCorr = servicenameWidth + m_items_distances;
-								}
-								int correction = (area.height() - pixmap_size.height()) / 2;
-								area.moveBy(offset);
-								if (m_record_indicator_mode == 2)
-								{
-									m_element_position[celServiceInfo].setLeft(area.left() + offs + pixmap_size.width() + m_items_distances);
-									m_element_position[celServiceInfo].setWidth(area.width() - pixmap_size.width() - offs - m_items_distances * 2);
-								}
-								painter.clip(area);
-								painter.blit(m_pixmaps[picRecord], ePoint(area.left() + offs, offset.y() + correction), area, gPainter::BT_ALPHABLEND);
-								painter.clippop();
-							}
-							m_element_position[celServiceInfo].setLeft(m_element_position[celServiceInfo].left() + serviceNameWidthCorr);
-							m_element_position[celServiceInfo].setWidth(m_element_position[celServiceInfo].width() - m_items_distances * (serviceNameWidthCorr > 0 ? 2 : 1) - m_sides_margin * 2);
-						}
-					}
-
-					if (flags & gPainter::RT_HALIGN_RIGHT)
-						para->realign(eTextPara::dirRight);
-					else if (flags & gPainter::RT_HALIGN_CENTER)
-						para->realign(eTextPara::dirCenter);
-					else if (flags & gPainter::RT_HALIGN_BLOCK)
-						para->realign(eTextPara::dirBlock);
-
-					if (flags & gPainter::RT_VALIGN_CENTER)
-					{
-						eRect bbox = para->getBoundBox();
-						
-						if (!next_event_name.empty() && e == celServiceNextInfo)
-							yoffs = (e == celServiceNextInfo ? 0 : (area.height()/2) + (((area.height()/2) - bbox.height()) / 2) - (bbox.top()));
-						else
-							yoffs = (area.height() - bbox.height())/2 - bbox.top();
-					}
-
-					painter.renderPara(para, offset+ePoint(xoffs, yoffs));
+			if (isDirectory || (isMarker && !m_marker_as_line)) {
+				ePtr<gPixmap> &pixmap_mDir = isMarker ? m_pixmaps[picMarker] : isDirectory ? m_pixmaps[picFolder] : m_pixmaps[picElements];;
+				eSize pixmap_size = pixmap_mDir->size();
+				if (pixmap_size.height() < m_itemheight){
+					eRect area = eRect(xoffs, offset.y() + (ctrlHeight - pixmap_size.height())/2, pixmap_size.width(), pixmap_size.height());
+					painter.clip(area);
+					painter.blit(pixmap_mDir, ePoint(area.left(), area.top()), area, gPainter::BT_ALPHABLEND);
+				} else {
+					int pflags = gPainter::BT_ALPHABLEND | gPainter::BT_KEEP_ASPECT_RATIO | gPainter::BT_HALIGN_CENTER | gPainter::BT_VALIGN_CENTER;
+					eRect area = eRect(xoffs, offset.y(), m_itemheight, m_itemheight);
+					painter.clip(area);
+					painter.blitScale(pixmap_mDir, eRect(xoffs, offset.y(), m_itemheight, m_itemheight), area, pflags);
 				}
-				else if ((e == celFolderPixmap && m_cursor->flags & eServiceReference::isDirectory) ||
-					(e == celMarkerPixmap && m_cursor->flags & eServiceReference::isMarker &&
-					!(m_cursor->flags & eServiceReference::isNumberedMarker)))
-				{
-					ePtr<gPixmap> &pixmap =
-						(e == celFolderPixmap) ? m_pixmaps[picFolder] : m_pixmaps[picMarker];
-					if (pixmap && (isDirectory || (isMarker && !m_marker_as_line)))
-					{
-						eSize pixmap_size = pixmap->size();
-						bool notScale = (e == celMarkerPixmap) && (pixmap_size.width() < 125 || pixmap_size.height() < m_itemheight);
-						eRect area;
-						if (e == celFolderPixmap || m_element_position[celServiceNumber].width() < m_itemheight)
-						{
-							area = m_element_position[celServiceName];
-							if (m_element_position[celServiceEventProgressbar].left() == 0)
-								area.setLeft(0);
-							if (notScale) 
-								xoffset = pixmap_size.width() + m_items_distances;
-							else
-								xoffset = m_itemheight + m_items_distances;
-						}
-						else
-							area = m_element_position[celServiceNumber];
-						area.moveBy(offset);
-						painter.clip(area);
-						if (notScale) {
-							int correction = (area.height() - pixmap_size.height()) / 2;
-							painter.blit(pixmap, ePoint(area.left(), offset.y() + correction), area, gPainter::BT_ALPHABLEND);
-						} else {
-							painter.blitScale(pixmap,
-											eRect(area.left(), offset.y(), m_itemheight, area.height()),
-											area,
-											gPainter::BT_ALPHABLEND | gPainter::BT_KEEP_ASPECT_RATIO | gPainter::BT_HALIGN_CENTER | gPainter::BT_VALIGN_CENTER);
-						}
-						painter.clippop();
-					}
+				painter.clippop();
 
+				painter.renderPara(paraServiceName, ePoint(xoffs + pixmap_size.width() + m_items_distances, offset.y() + ((ctrlHeight - bboxServiceName.height())/2)));
+
+			} else if (isMarker && m_marker_as_line) {
+				int mTextLeft = (m_itemsize.width() - bboxServiceName.width())/2;
+				if (m_marker_alignment != "center") {
+					mTextLeft = 125 + m_items_distances;
 				}
+				painter.renderPara(paraServiceName, ePoint(mTextLeft, offset.y() + ((ctrlHeight - bboxServiceName.height())/2)));
+
+				if (m_markerline_color_set) painter.setForegroundColor(m_markerline_color);
+				eRect firstLineRect = eRect(xoffs + m_items_distances, offset.y() + (m_itemheight - m_marker_as_line) / 2, mTextLeft - m_items_distances*2 - xoffs - 16, m_marker_as_line);
+				painter.fill(firstLineRect);
+				int secondLineOffset = mTextLeft + bboxServiceName.width() + m_items_distances + 16;
+				eRect secondLineRect = eRect(secondLineOffset, offset.y() + (m_itemheight - m_marker_as_line) / 2, m_itemsize.width() - secondLineOffset - m_items_distances - m_sides_margin, m_marker_as_line);
+				painter.fill(secondLineRect);
 			}
 
-			eRect area = m_element_position[celServiceEventProgressbar];
-			if (area.width() > 0 && evt && !m_element_font[celServiceEventProgressbar])
-			{
-				int pb_xpos = area.left();
-				int pb_ypos = offset.y() + (m_itemsize.height() - m_progressbar_height - 2 * m_progressbar_border_width) / 2;
-				int pb_width = area.width()- 2 * m_progressbar_border_width;
+			if (!isDirectory && !isMarker) {
+
+				ePtr<eTextPara> paraCtrlText = new eTextPara(eRect(0, 0, m_itemsize.width(), m_itemheight));
+				paraCtrlText->setFont(m_element_font[celServiceNumber]);
+				paraCtrlText->renderString((isAlternativeNumberingMode ? "0000" : "00000"));
+				eRect bboxCtrlText = paraCtrlText->getBoundBox();
+
+				if (hasChannelNumbers && m_cursor->getChannelNum() > 0) {
+					char buffer[15];
+					snprintf(buffer, sizeof(buffer), "%d", m_cursor->getChannelNum() );
+					std::string num = buffer;
+					ePtr<eTextPara> para = new eTextPara(eRect(xoffs, 0, bboxCtrlText.width(), m_itemheight));
+					para->setFont(m_element_font[celServiceNumber]);
+					para->renderString(num.c_str());
+					eRect bbox = para->getBoundBox();
+					painter.renderPara(para, ePoint(xoffs + (bboxCtrlText.width() - bbox.width()), offset.y() + (ctrlHeight - bbox.height())/2));
+					xoffs += bboxCtrlText.width() + m_items_distances;
+				}
+
+				eRect progressBarRect = m_element_position[celServiceEventProgressbar];
+
+				int pb_xpos = xoffs;
+				int pb_ypos = offset.y() + (m_itemheight - m_progressbar_height - 2 * m_progressbar_border_width) / 2;
+				int pb_width = progressBarRect.width() - 2 * m_progressbar_border_width;
 				gRGB ProgressbarBorderColor = 0xdfdfdf;
 				int evt_done = pb_width * (now - event_begin) / event_duration;
 
-				// the progress data...
-				eRect tmp = eRect(pb_xpos + m_progressbar_border_width, pb_ypos + m_progressbar_border_width, evt_done, m_progressbar_height);
-				ePtr<gPixmap> &pixmap = m_pixmaps[picServiceEventProgressbar];
-				if (pixmap) {
-					painter.clip(tmp);
-					painter.blit(pixmap, ePoint(pb_xpos + m_progressbar_border_width, pb_ypos + m_progressbar_border_width), tmp, gPainter::BT_ALPHATEST);
+				if (eventProgressConfig == "barleft" || eventProgressConfig == "percleft") {
+					xoffs += progressBarRect.width() + m_items_distances;
+				}
+
+				ePtr<gPixmap> piconPixmap;
+				bool isPIconSVG = false;
+				int piconWidth = m_itemheight*1.67;
+				if (isPlayable && hasPicons)
+				{
+					ePyObject pArgs = PyTuple_New(1);
+					PyTuple_SET_ITEM(pArgs, 0, PyUnicode_FromString(ref.toString().c_str()));
+					ePyObject pRet = PyObject_CallObject(m_GetPiconNameFunc, pArgs);
+					Py_DECREF(pArgs);
+					if (pRet)
+					{
+						if (PyUnicode_Check(pRet))
+						{
+							std::string piconFilename = PyUnicode_AsUTF8(pRet);
+							if (endsWith(piconFilename, ".svg")) {
+								isPIconSVG = true;
+							}
+							if (!piconFilename.empty())
+								loadImage(piconPixmap, piconFilename.c_str(), 0, isPIconSVG ? piconWidth : 0);
+						}
+						Py_DECREF(pRet);
+					}
+				}
+
+				if (hasPicons) {
+					eRect piconArea =  eRect(xoffs, offset.y(), piconWidth, m_itemheight);
+					/* PIcons are usually about 100:60. Make it a
+					* bit wider in case the icons are diffently
+					* shaped, and to add a bit of margin between
+					* icon and text. */
+					int pflags = gPainter::BT_ALPHABLEND | gPainter::BT_HALIGN_CENTER | gPainter::BT_VALIGN_CENTER;
+					if (!isPIconSVG) {
+						pflags = gPainter::BT_ALPHABLEND | gPainter::BT_KEEP_ASPECT_RATIO | gPainter::BT_HALIGN_CENTER | gPainter::BT_VALIGN_CENTER;
+					}
+					if (piconPixmap)
+					{
+						painter.clip(piconArea);
+						if (isPIconSVG) {
+							painter.blit(piconPixmap,
+							eRect(xoffs, offset.y(), piconWidth, m_itemheight),
+							eRect(),
+							pflags
+							);
+						} else {
+							painter.blitScale(piconPixmap,
+								eRect(xoffs, offset.y(), piconWidth, m_itemheight),
+								piconArea,
+								pflags);
+						}
+						painter.clippop();
+					}
+					xoffs += piconWidth + m_items_distances;
+				}
+
+				int orbpos = m_cursor->getUnsignedData(4) >> 16;
+				int iconSystemPosX = xoffs + m_items_distances;
+				int iconCryptoPosX = iconSystemPosX;
+				int iconRecordPosX = iconSystemPosX;
+				int iconOffsX = iconSystemPosX;
+				const char *filename = ref.path.c_str();
+				ePtr<gPixmap> &pixmap_system  =
+						(m_cursor->flags & eServiceReference::isGroup) ? m_pixmaps[picServiceGroup] :
+						(strstr(filename, "://")) ? m_pixmaps[picStream] :
+						(orbpos == 0xFFFF) ? m_pixmaps[picDVB_C] :
+						(orbpos == 0xEEEE) ? m_pixmaps[picDVB_T] : m_pixmaps[picDVB_S];
+
+				
+				eSize pixmap_system_size = eSize();
+				eSize pixmap_crypto_size = eSize();
+				eSize pixmap_rec_size = eSize();
+				if (m_servicetype_icon_mode == 1 && pixmap_system) {
+					pixmap_system_size = pixmap_system->size();
+					iconCryptoPosX += pixmap_system_size.width() + m_items_distances;
+					iconRecordPosX = iconCryptoPosX;	
+					iconOffsX += pixmap_system_size.width() + m_items_distances;
+				}
+
+				
+				if (m_crypto_icon_mode == 1 && m_pixmaps[picCrypto]) {
+					pixmap_crypto_size = m_pixmaps[picCrypto]->size();
+					iconRecordPosX += pixmap_crypto_size.width() + m_items_distances;	
+					iconOffsX += pixmap_crypto_size.width() + m_items_distances;
+				}
+
+				
+				if (isRecorded && m_record_indicator_mode == 1 && m_pixmaps[picRecord]) {
+					pixmap_rec_size = m_pixmaps[picRecord]->size();
+					iconOffsX += pixmap_rec_size.width() + m_items_distances;	
+				}
+
+				if (m_servicetype_icon_mode == 1 && pixmap_system) {
+					eRect area = eRect(iconSystemPosX, offset.y() + (ctrlHeight - pixmap_system_size.height())/2, pixmap_system_size.width(), pixmap_system_size.height());
+					painter.clip(area);
+					painter.blit(pixmap_system, ePoint(area.left(), area.top()), area, gPainter::BT_ALPHABLEND);
 					painter.clippop();
 				}
-				else {
-					if (!selected && m_color_set[serviceEventProgressbarColor])
-						painter.setForegroundColor(m_color[serviceEventProgressbarColor]);
-					else if (selected && m_color_set[serviceEventProgressbarColorSelected])
-						painter.setForegroundColor(m_color[serviceEventProgressbarColorSelected]);
-					painter.fill(tmp);
+
+
+				if (m_crypto_icon_mode == 1 && m_pixmaps[picCrypto] && service_info && service_info->isCrypted()) {
+					eRect area = eRect(iconCryptoPosX, offset.y() + (ctrlHeight - pixmap_crypto_size.height())/2, pixmap_crypto_size.width(), pixmap_crypto_size.height());
+					painter.clip(area);
+					painter.blit(m_pixmaps[picCrypto], ePoint(area.left(), area.top()), area, gPainter::BT_ALPHABLEND);
+					painter.clippop();
 				}
 
-				// the progressbar border
-				if (!selected)  {
-					if (m_color_set[serviceEventProgressbarBorderColor])
-						ProgressbarBorderColor = m_color[serviceEventProgressbarBorderColor];
-					else if (m_color_set[eventborderForeground])
-						ProgressbarBorderColor = m_color[eventborderForeground];
-				}
-				else { /* !selected */
-					if (m_color_set[serviceEventProgressbarBorderColorSelected])
-						ProgressbarBorderColor = m_color[serviceEventProgressbarBorderColorSelected];
-					else if (m_color_set[eventborderForegroundSelected])
-						ProgressbarBorderColor = m_color[eventborderForegroundSelected];
-				}
-				painter.setForegroundColor(ProgressbarBorderColor);
 
-				if (m_progressbar_border_width)
-				{
-					painter.fill(eRect(pb_xpos, pb_ypos, pb_width + 2 * m_progressbar_border_width,  m_progressbar_border_width));
-					painter.fill(eRect(pb_xpos, pb_ypos + m_progressbar_border_width + m_progressbar_height, pb_width + 2 * m_progressbar_border_width,  m_progressbar_border_width));
-					painter.fill(eRect(pb_xpos, pb_ypos + m_progressbar_border_width, m_progressbar_border_width, m_progressbar_height));
-					painter.fill(eRect(pb_xpos + m_progressbar_border_width + pb_width, pb_ypos + m_progressbar_border_width, m_progressbar_border_width, m_progressbar_height));
+				if (isRecorded && m_pixmaps[picRecord] && m_record_indicator_mode == 1) {
+					eRect area = eRect(iconRecordPosX, offset.y() + (ctrlHeight - pixmap_rec_size.height())/2, pixmap_rec_size.width(), pixmap_rec_size.height());
+					painter.clip(area);
+					painter.blit(m_pixmaps[picRecord], ePoint(area.left(), area.top()), area, gPainter::BT_ALPHABLEND);
+					painter.clippop();
 				}
-				else
-					painter.fill(eRect(pb_xpos + evt_done, pb_ypos, pb_width - evt_done,  m_progressbar_height));
 
-			}
+				xoffs = iconOffsX;
 
-			if (isMarker && m_marker_as_line) {
-				if (m_markerline_color_set) painter.setForegroundColor(m_markerline_color);
-				eRect firstLineRect = eRect(m_sides_margin + xoffset + 16, offset.y() + (m_itemheight - m_marker_as_line) / 2, xoffeset_marker - 16 - 16 - m_sides_margin - xoffset, m_marker_as_line);
-				painter.fill(firstLineRect);
-				int secondLineOffset = xoffeset_marker + marker_text_width + 16;
-				eRect secondLineRect = eRect(secondLineOffset, offset.y() + (m_itemheight - m_marker_as_line) / 2, m_itemsize.width() - secondLineOffset - m_sides_margin - 16, m_marker_as_line);
-				painter.fill(secondLineRect);
+				painter.renderPara(paraServiceName, ePoint(xoffs, offset.y() + (ctrlHeight - bboxServiceName.height())/2));
+
+				xoffs += bboxServiceName.width() + m_items_distances;
+
+				iconSystemPosX = xoffs + m_items_distances;
+				iconCryptoPosX = iconSystemPosX;
+				iconRecordPosX = iconSystemPosX;
+				iconOffsX = iconSystemPosX;
+
+				if (m_servicetype_icon_mode == 2 && pixmap_system) {
+					pixmap_system_size = pixmap_system->size();
+					iconCryptoPosX += pixmap_system_size.width() + m_items_distances;
+					iconRecordPosX = iconCryptoPosX;	
+					iconOffsX += pixmap_system_size.width() + m_items_distances;
+					xoffs = iconOffsX;
+				}
+
+				
+				if (m_crypto_icon_mode == 2 && m_pixmaps[picCrypto] && service_info && service_info->isCrypted()) {
+					pixmap_crypto_size = m_pixmaps[picCrypto]->size();
+					iconRecordPosX += pixmap_crypto_size.width() + m_items_distances;	
+					iconOffsX += pixmap_crypto_size.width() + m_items_distances;
+					xoffs = iconOffsX;
+				}
+
+				
+				if (isRecorded && m_record_indicator_mode == 2 && m_pixmaps[picRecord]) {
+					pixmap_rec_size = m_pixmaps[picRecord]->size();
+					iconOffsX += pixmap_rec_size.width() + m_items_distances;
+					xoffs = iconOffsX;	
+				}
+
+
+				if (m_servicetype_icon_mode == 2 && pixmap_system) {
+					eRect area = eRect(iconSystemPosX, offset.y() + (ctrlHeight - pixmap_system_size.height())/2, pixmap_system_size.width(), pixmap_system_size.height());
+					painter.clip(area);
+					painter.blit(pixmap_system, ePoint(area.left(), area.top()), area, gPainter::BT_ALPHABLEND);
+					painter.clippop();
+				}
+
+
+				if (m_crypto_icon_mode == 2 && m_pixmaps[picCrypto] && service_info && service_info->isCrypted()) {
+					eRect area = eRect(iconCryptoPosX, offset.y() + (ctrlHeight - pixmap_crypto_size.height())/2, pixmap_crypto_size.width(), pixmap_crypto_size.height());
+					painter.clip(area);
+					painter.blit(m_pixmaps[picCrypto], ePoint(area.left(), area.top()), area, gPainter::BT_ALPHABLEND);
+					painter.clippop();
+				}
+
+
+				if (isRecorded && m_pixmaps[picRecord] && m_record_indicator_mode == 2) {
+					eRect area = eRect(iconRecordPosX, offset.y() + (ctrlHeight - pixmap_rec_size.height())/2, pixmap_rec_size.width(), pixmap_rec_size.height());
+					painter.clip(area);
+					painter.blit(m_pixmaps[picRecord], ePoint(area.left(), area.top()), area, gPainter::BT_ALPHABLEND);
+					painter.clippop();
+				}
+
+				if (eventProgressConfig == "barright" || eventProgressConfig == "percright") {
+					pb_xpos = m_itemsize.width() - progressBarRect.width() - m_items_distances*2 - m_sides_margin*2 - m_progressbar_border_width*2;
+				}
+
+				if (is_event && !event_name.empty()) {
+					text = event_name;
+					std::replace(text.begin(), text.end(), '\n', ' ');
+					if (serviceAvail)
+					{
+						if (!selected && m_color_set[eventForeground])
+						{
+							painter.setForegroundColor(m_color[eventForeground]);
+							EventProgressbarColor = m_color[eventForeground];
+						}
+						else if (selected && m_color_set[eventForegroundSelected])
+						{
+							painter.setForegroundColor(m_color[eventForegroundSelected]);
+							EventProgressbarColor = m_color[eventForegroundSelected];
+						}
+						else
+							painter.setForegroundColor(gRGB(0xe7b53f));
+
+						if (serviceFallback && !selected && m_color_set[eventForegroundFallback]) // fallback receiver
+						{
+							painter.setForegroundColor(m_color[eventForegroundFallback]);
+							EventProgressbarColor = m_color[eventForegroundFallback];
+						}
+						else if (serviceFallback && selected && m_color_set[eventForegroundSelectedFallback])
+						{
+							painter.setForegroundColor(m_color[eventForegroundSelectedFallback]);
+							EventProgressbarColor = m_color[eventForegroundSelectedFallback];
+						}
+					}
+
+					int eventTextWidth = (eventProgressConfig == "barright" || eventProgressConfig == "percright") ? 
+							(pb_xpos - xoffs - m_items_distances*2 ) : (m_itemsize.width() - m_sides_margin*2 - xoffs - m_items_distances*2);
+
+					ePtr<eTextPara> para = new eTextPara(eRect(0, 0, eventTextWidth, m_itemheight));
+					para->setFont(m_element_font[celServiceInfo]);
+					para->renderString(text.c_str());
+					eRect bbox = para->getBoundBox();
+					painter.renderPara(para, ePoint(xoffs, offset.y() + (m_itemheight - bbox.height())/2));
+
+					if (eventProgressConfig != "no" && !startsWith(eventProgressConfig, "perc")) {
+						// the progress data...
+						eRect tmp = eRect(pb_xpos + m_progressbar_border_width, pb_ypos + m_progressbar_border_width, evt_done, m_progressbar_height);
+						ePtr<gPixmap> &pixmap = m_pixmaps[picServiceEventProgressbar];
+						if (pixmap) {
+							painter.clip(tmp);
+							painter.blit(pixmap, ePoint(pb_xpos + m_progressbar_border_width, pb_ypos + m_progressbar_border_width), tmp, gPainter::BT_ALPHABLEND);
+							painter.clippop();
+						}
+						else {
+							if (!selected && m_color_set[serviceEventProgressbarColor])
+								painter.setForegroundColor(m_color[serviceEventProgressbarColor]);
+							else if (selected && m_color_set[serviceEventProgressbarColorSelected])
+								painter.setForegroundColor(m_color[serviceEventProgressbarColorSelected]);
+							painter.fill(tmp);
+						}
+
+						// the progressbar border
+						if (!selected)  {
+							if (m_color_set[serviceEventProgressbarBorderColor])
+								ProgressbarBorderColor = m_color[serviceEventProgressbarBorderColor];
+							else if (m_color_set[eventborderForeground])
+								ProgressbarBorderColor = m_color[eventborderForeground];
+						}
+						else { /* !selected */
+							if (m_color_set[serviceEventProgressbarBorderColorSelected])
+								ProgressbarBorderColor = m_color[serviceEventProgressbarBorderColorSelected];
+							else if (m_color_set[eventborderForegroundSelected])
+								ProgressbarBorderColor = m_color[eventborderForegroundSelected];
+						}
+						painter.setForegroundColor(ProgressbarBorderColor);
+
+						if (m_progressbar_border_width)
+						{
+							painter.fill(eRect(pb_xpos, pb_ypos, pb_width + 2 * m_progressbar_border_width,  m_progressbar_border_width));
+							painter.fill(eRect(pb_xpos, pb_ypos + m_progressbar_border_width + m_progressbar_height, pb_width + 2 * m_progressbar_border_width,  m_progressbar_border_width));
+							painter.fill(eRect(pb_xpos, pb_ypos + m_progressbar_border_width, m_progressbar_border_width, m_progressbar_height));
+							painter.fill(eRect(pb_xpos + m_progressbar_border_width + pb_width, pb_ypos + m_progressbar_border_width, m_progressbar_border_width, m_progressbar_height));
+						}
+						else
+							painter.fill(eRect(pb_xpos + evt_done, pb_ypos, pb_width - evt_done,  m_progressbar_height));
+					}
+					if (startsWith(eventProgressConfig, "perc") && is_event) {
+						if (!selected && m_color_set[eventForeground])
+							painter.setForegroundColor(m_color[eventForeground]);
+						else if (selected && m_color_set[eventForegroundSelected])
+							painter.setForegroundColor(m_color[eventForegroundSelected]);
+						else
+							painter.setForegroundColor(gRGB(0x787878));
+						
+						if (isRecorded && m_record_indicator_mode == 3) {
+							painter.setForegroundColor(m_color[serviceRecorded]);
+						}
+						
+						char buffer[15];
+						snprintf(buffer, sizeof(buffer), "%d %%", (int)(100 * (now - event_begin) / event_duration));
+						std::string percent = buffer;
+						ePtr<eTextPara> paraPerc = new eTextPara(eRect(pb_xpos, 0, progressBarRect.width(), m_itemheight));
+						paraPerc->setFont(m_element_font[celServiceInfo]);
+						paraPerc->renderString(percent.c_str());
+						eRect bboxPerc = paraPerc->getBoundBox();
+						painter.renderPara(paraPerc, ePoint((progressBarRect.width() - bboxPerc.width())/(eventProgressConfig == "percright" ? 1 : 2), offset.y() + (ctrlHeight - bboxPerc.height())/2));
+					}
+				}
 			}
 		} 
 	}
