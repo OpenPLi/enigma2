@@ -95,9 +95,11 @@ class MovingPixmap(Pixmap):
 class MultiPixmap(Pixmap):
 	def __init__(self):
 		Pixmap.__init__(self)
-		self.pixmaps = []
+		self.pixmapfiles = []
+		self.pixmaps = {}
 
 	def applySkin(self, desktop, screen):
+		self.desktop = desktop
 		if self.skinAttributes is not None:
 			skin_path_prefix = getattr(screen, "skin_path", path)
 			pixmap = None
@@ -106,7 +108,8 @@ class MultiPixmap(Pixmap):
 				if attrib == "pixmaps":
 					pixmaps = value.split(',')
 					for p in pixmaps:
-						self.pixmaps.append(loadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, p, path_prefix=skin_path_prefix), desktop))
+						self.pixmapfiles.append(resolveFilename(SCOPE_CURRENT_SKIN, p, path_prefix=skin_path_prefix))
+						#self.pixmaps.append(loadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, p, path_prefix=skin_path_prefix), desktop))
 					if not pixmap:
 						pixmap = resolveFilename(SCOPE_CURRENT_SKIN, pixmaps[0], path_prefix=skin_path_prefix)
 				elif attrib == "pixmap":
@@ -120,7 +123,11 @@ class MultiPixmap(Pixmap):
 
 	def setPixmapNum(self, x):
 		if self.instance:
-			if len(self.pixmaps) > x:
+			if len(self.pixmapfiles) > x:
+				if not self.pixmaps:
+					(self.width, self.height) = self.getSize()
+				if x not in self.pixmaps:
+					self.pixmaps[x] = loadPixmap(self.pixmapfiles[x], self.desktop, self.width, self.height)
 				self.instance.setPixmap(self.pixmaps[x])
 			else:
 				print("setPixmapNum(%d) failed! defined pixmaps:" % (x), self.pixmaps)
