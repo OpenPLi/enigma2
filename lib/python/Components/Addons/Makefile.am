@@ -4,4 +4,5 @@ install_PYTHON = \
 	GUIAddon.py \
 	Pager.py \
 	ButtonSequence.py \
-	ColorButtonsSequence.py
+	ColorButtonsSequence.py \
+	ScreenHeader.py

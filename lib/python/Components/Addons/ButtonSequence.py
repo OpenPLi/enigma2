@@ -5,7 +5,6 @@ from enigma import eListbox, eListboxPythonMultiContent, BT_ALIGN_CENTER
 from skin import parseScale, applySkinFactor
 
 from Components.MultiContent import MultiContentEntryPixmapAlphaBlend
-from Components.Sources.List import List
 from Components.Sources.Boolean import Boolean
 from Components.Sources.StaticText import StaticText
 
