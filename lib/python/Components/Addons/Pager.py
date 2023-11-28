@@ -56,7 +56,7 @@ class Pager(GUIAddon):
 			xPos = (width - width_dots) / 2 - pixd_width / 2 if self.showIcons == "showAll" else 0
 			yPos = (height - height_dots) / 2 - pixd_height / 2 if self.showIcons == "showAll" else 0
 		res = [None]
-		if self.max_pages > 0 and pageCount > self.max_pages and pageCount > 0:
+		if self.showIcons == "showAll" and pageCount > 0 and self.max_pages > 0 and pageCount > self.max_pages:
 			width_dots = pixd_width + (pixd_width + self.spacing) * (2 if currentPage > 0 and currentPage < pageCount else 1)
 			xPos = (width - width_dots) / 2 - pixd_width / 2
 			yPos = (height - height_dots) / 2 - pixd_height / 2
