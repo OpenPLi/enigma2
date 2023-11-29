@@ -17,6 +17,7 @@
 #include <dvbsi++/satellite_delivery_system_descriptor.h>
 #include <dvbsi++/s2_satellite_delivery_system_descriptor.h>
 #include <dirent.h>
+#include <lib/nav/core.h>
 
 /*
  * Copyright (C) 2017 Marcus Metzler <mocm@metzlerbros.de>
@@ -221,6 +222,24 @@ bool eDVBService::isCrypted()
 
 int eDVBService::isPlayable(const eServiceReference &ref, const eServiceReference &ignore, bool simulate)
 {
+	std::string sr_url = eConfigManager::getConfigValue("config.misc.softcam_streamrelay_url");
+	sr_url = replace_all(replace_all(replace_all(sr_url, "[", ""), "]", ""), ", ", ".");
+	std::string sr_port = eConfigManager::getConfigValue("config.misc.softcam_streamrelay_port");
+	eServiceReferenceDVB newRef;
+	ePtr<iPlayableService> refCur;
+	eNavigation::getInstance()->getCurrentService(refCur);
+	ePtr<iServiceInformation> tmp_info;
+	refCur->info(tmp_info);
+	std::string ref_s = tmp_info->getInfoString(iServiceInformation::sServiceref);
+	if (ref_s.find(sr_url + "%3a" + sr_port) != std::string::npos) {
+		std::vector<std::string> s_split = split(ref_s, ":");
+		std::string url_sr = s_split[s_split.size() - 2];
+		std::vector<std::string> sr_split = split(url_sr, "/");
+		std::string ref_orig = sr_split.back();
+		ref_orig = replace_all(ref_orig, "%3a", ":");
+		newRef = eServiceReferenceDVB(ref_orig);
+	}
+
 	ePtr<eDVBResourceManager> res_mgr;
 	bool remote_fallback_enabled = eConfigManager::getConfigBoolValue("config.usage.remote_fallback_enabled", false);
 
@@ -228,13 +247,19 @@ int eDVBService::isPlayable(const eServiceReference &ref, const eServiceReferenc
 		eDebug("[eDVBService] isPlayble... no res manager!!");
 	else
 	{
-		eDVBChannelID chid, chid_ignore;
+		eDVBChannelID chid, chid_ignore, chid_ignore_sr;
 		int system;
 
 		((const eServiceReferenceDVB&)ref).getChannelID(chid);
 		((const eServiceReferenceDVB&)ignore).getChannelID(chid_ignore);
 
-		if (res_mgr->canAllocateChannel(chid, chid_ignore, system, simulate))
+		if (newRef) {
+			newRef.getChannelID(chid_ignore_sr);
+		} else {
+			chid_ignore_sr = eDVBChannelID();
+		}
+
+		if (res_mgr->canAllocateChannel(chid, chid_ignore, chid_ignore_sr, system, simulate))
 		{
 			bool use_ci_assignment = eConfigManager::getConfigBoolValue("config.misc.use_ci_assignment", false);
 			if (use_ci_assignment)

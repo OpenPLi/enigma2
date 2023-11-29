@@ -811,7 +811,6 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 		if (!marked && isPlayable && service_info && m_is_playable_ignore.valid())
 		{
 			isplayable_value = service_info->isPlayable(*m_cursor, m_is_playable_ignore);
-
 			if (isplayable_value == 0) // service unavailable
 			{
 				if (m_color_set[serviceNotAvail])
