@@ -804,7 +804,11 @@ int eDVBServicePMTHandler::compareAudioSubtitleCode(const std::string &subtitleT
 
 int eDVBServicePMTHandler::getChannel(eUsePtr<iDVBChannel> &channel)
 {
-	channel = m_channel;
+	if (m_sr_channel) {
+		channel = m_sr_channel;
+	} else {
+		channel = m_channel;
+	}
 	if (channel)
 		return 0;
 	else
@@ -964,6 +968,29 @@ int eDVBServicePMTHandler::tuneExt(eServiceReferenceDVB &ref, ePtr<iTsSource> &s
 
 	if (!simulate)
 	{
+		// If is stream relay service then allocate the real channel so to provide correct frontend info
+		eDVBChannelID chid;
+		eServiceReferenceDVB sRelayOrigSref;
+		bool isStreamRelay = ref.getSROriginal(sRelayOrigSref);
+
+		if (isStreamRelay) {
+			sRelayOrigSref.getChannelID(chid);
+			res = m_resourceManager->allocateChannel(chid, m_sr_channel, simulate);
+		}
+
+
+		if (m_sr_channel) {
+			m_sr_channel->connectStateChange(
+				sigc::mem_fun(*this, &eDVBServicePMTHandler::channelStateChanged),
+				m_channelStateChanged_connection);
+			m_last_channel_state = -1;
+			channelStateChanged(m_sr_channel);
+
+			m_sr_channel->connectEvent(
+				sigc::mem_fun(*this, &eDVBServicePMTHandler::channelEvent),
+				m_channelEvent_connection);
+		}
+
 		if (m_channel)
 		{
 			m_channel->connectStateChange(
