@@ -125,9 +125,9 @@ class MultiPixmap(Pixmap):
 		if self.instance:
 			if len(self.pixmapfiles) > x:
 				if not self.pixmaps:
-					(self.width, self.height) = self.getSize()
+					self.width = self.getSize()[0]
 				if x not in self.pixmaps:
-					self.pixmaps[x] = loadPixmap(self.pixmapfiles[x], self.desktop, self.width, self.height)
+					self.pixmaps[x] = loadPixmap(self.pixmapfiles[x], self.desktop, self.width)
 				self.instance.setPixmap(self.pixmaps[x])
 			else:
 				print("setPixmapNum(%d) failed! defined pixmaps:" % (x), self.pixmaps)
