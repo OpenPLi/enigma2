@@ -14,7 +14,7 @@ import NavigationInstance
 from ServiceReference import ServiceReference, isPlayableForCur
 from Screens.InfoBar import InfoBar
 from Components.Sources.StreamService import StreamServiceList
-from Screens.InfoBarGenerics import streamrelayChecker
+from Screens.InfoBarGenerics import streamrelayChecker, whitelist
 
 # TODO: remove pNavgation, eNavigation and rewrite this stuff in python.
 
@@ -38,6 +38,7 @@ class Navigation:
 		self.currentlyPlayingServiceReference = None
 		self.currentlyPlayingServiceOrGroup = None
 		self.currentlyPlayingService = None
+		self.currentServiceIsStreamRelay = False
 		self.skipServiceReferenceReset = False
 		self.RecordTimer = RecordTimer.RecordTimer()
 		self.__wasTimerWakeup = getFPWasTimerWakeup()
@@ -194,8 +195,16 @@ class Navigation:
 								if config.usage.frontend_priority_dvbs.value != config.usage.frontend_priority.value:
 									setPreferredTuner(int(config.usage.frontend_priority_dvbs.value))
 									setPriorityFrontend = True
-				if self.pnav.playService(playref):
-					print("[Navigation] Failed to start: ", playref.toString())
+				if config.misc.softcam_streamrelay_delay.value and self.currentServiceIsStreamRelay:
+					self.currentServiceIsStreamRelay = False
+					self.currentlyPlayingServiceReference = None
+					self.currentlyPlayingServiceOrGroup = None
+					print("[Navigation] Streamrelay was active -> delay the zap till tuner is freed")
+					self.retryServicePlayTimer = eTimer()
+					self.retryServicePlayTimer.callback.append(boundFunction(self.playService, ref, checkParentalControl, forceRestart, adjust))
+					self.retryServicePlayTimer.start(config.misc.softcam_streamrelay_delay.value, True)
+				elif self.pnav.playService(playref):
+					# print("[Navigation] Failed to start", playref)
 					self.currentlyPlayingServiceReference = None
 					self.currentlyPlayingServiceOrGroup = None
 					if oldref and "://" in oldref.getPath():
@@ -206,6 +215,8 @@ class Navigation:
 				self.skipServiceReferenceReset = False
 				if setPriorityFrontend:
 					setPreferredTuner(int(config.usage.frontend_priority.value))
+				if self.currentlyPlayingServiceReference and self.currentlyPlayingServiceReference.toString() in whitelist.streamrelay:
+					self.currentServiceIsStreamRelay = True
 				return 0
 		elif oldref and InfoBarInstance and InfoBarInstance.servicelist.servicelist.setCurrent(oldref, adjust):
 			self.currentlyPlayingServiceOrGroup = InfoBarInstance.servicelist.servicelist.getCurrent()
