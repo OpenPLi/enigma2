@@ -158,7 +158,10 @@ def streamrelayChecker(playref):
 	playrefstring = playref.toString()
 	if '%3a//' not in playrefstring and playrefstring in whitelist.streamrelay:
 		url = "http://%s:%s/" % (config.misc.softcam_streamrelay_url.getHTML(), config.misc.softcam_streamrelay_port.value)
-		playrefmod = ":".join([("%x" % (int(x[1], 16) + 1)).upper() if x[0] == 6 else x[1] for x in enumerate(playrefstring.split(':'))])
+		if "127.0.0.1" in url:
+				playrefmod = ":".join([("%x" % (int(x[1], 16) + 1)).upper() if x[0] == 6 else x[1] for x in enumerate(playrefstring.split(':'))])
+		else:
+				playrefmod = playrefstring
 		playref = eServiceReference("%s%s%s:%s" % (playrefmod, url.replace(":", "%3a"), playrefstring.replace(":", "%3a"), ServiceReference(playref).getServiceName()))
 		print("[Whitelist_StreamRelay] Play service via streamrelay as it is whitelisted as such", playref.toString())
 	return playref
