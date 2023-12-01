@@ -6,6 +6,8 @@ import Screens.MovieSelection
 
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
+from Components.Label import Label
+from Components.Pixmap import MultiPixmap
 
 profile("LOAD:enigma")
 import enigma
@@ -174,6 +176,10 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 				"left": self.left,
 				"right": self.right
 			}, prio=-2)
+
+		self["state"] = Label()
+		self["speed"] = Label()
+		self["statusicon"] = MultiPixmap()
 
 		self.allowPiP = True
 
