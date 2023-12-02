@@ -722,7 +722,7 @@ class EPGList(GUIComponent):
 							break
 						clockIconXPos -= pix_width + self.iconXPadding
 						res.append(MultiContentEntryPixmapAlphaBlend(
-							pos=(clockIconXPos, top + (height - (pix_height + self.iconYPadding)) // 2),
+							pos=(clockIconXPos, top + height - (pix_height + self.iconYPadding)),
 							size=(pix_width, pix_height),
 							png=clockpng))
 
