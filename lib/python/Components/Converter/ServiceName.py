@@ -65,7 +65,7 @@ class ServiceName(Converter):
 			num = numservice and self.getNumber(numservice, info) or ""
 			orbpos, tp_data = self.getOrbitalPos(service, info)
 			provider = self.getProvider(service, info, tp_data)
-			tuner_system = self.getServiceSystem(service, info, tp_data)
+			tuner_system = service and info and self.getServiceSystem(service, info, tp_data)
 			res_str = ""
 			for x in self.parts[1:]:
 				if x == "NUMBER" and num:
