@@ -519,9 +519,9 @@ class MovieList(GUIComponent):
 			res.append(MultiContentEntryText(pos=(self.spaceLeft, ih1), size=(width - tc - lenSize - r - self.spaceLeft, ih - ih1), font=1, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=data.description))
 			res.append(MultiContentEntryText(pos=(width - fc - r - self.spaceLeft, 6), size=(fc, ih1), font=1, flags=RT_HALIGN_RIGHT | RT_VALIGN_CENTER, text=begin_string))
 			if data.serviceName:
-				res.append(MultiContentEntryText(pos=(width - tc - lenSize - r - self.spaceLeft, ih1), size=(tc - self.spaceLeft, ih - ih1), font=1, flags=RT_HALIGN_RIGHT | RT_VALIGN_CENTER, text=data.serviceName))
+				res.append(MultiContentEntryText(pos=(width - tc - lenSize - r, ih1), size=(tc - self.spaceLeft, ih - ih1), font=1, flags=RT_HALIGN_RIGHT | RT_VALIGN_CENTER, text=data.serviceName))
 			if lenSize:
-				res.append(MultiContentEntryText(pos=(width - lenSize - r - self.spaceLeft, ih1), size=(lenSize - self.spaceLeft, ih - ih1), font=1, flags=RT_HALIGN_RIGHT | RT_VALIGN_CENTER, text=len))
+				res.append(MultiContentEntryText(pos=(width - lenSize - r, ih1), size=(lenSize - self.spaceLeft, ih - ih1), font=1, flags=RT_HALIGN_RIGHT | RT_VALIGN_CENTER, text=len))
 		elif self.list_type == MovieList.LISTTYPE_COMPACT:
 			col = self.compactColumn
 			ih1 = ((ih * 8) + 14) // 15 # 37 -> 20, round up
