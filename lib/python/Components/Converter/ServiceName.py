@@ -60,12 +60,12 @@ class ServiceName(Converter):
 			numservice = self.source.serviceref
 			return self.getNumber(numservice, info)
 		elif self.type == self.FORMAT_STRING:
-			name = self.getName(service, info)
+			name = self.getName(ref, info)
 			numservice = hasattr(self.source, "serviceref") and self.source.serviceref
 			num = numservice and self.getNumber(numservice, info) or ""
-			orbpos, tp_data = self.getOrbitalPos(service, info)
-			provider = self.getProvider(service, info, tp_data)
-			tuner_system = service and info and self.getServiceSystem(service, info, tp_data)
+			orbpos, tp_data = self.getOrbitalPos(ref, info)
+			provider = self.getProvider(ref, info, tp_data)
+			tuner_system = ref and info and self.getServiceSystem(ref, info, tp_data)
 			res_str = ""
 			for x in self.parts[1:]:
 				if x == "NUMBER" and num:
