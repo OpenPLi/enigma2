@@ -109,6 +109,7 @@ public:
 	void setChannelNumbersVisible(bool visible) { m_chanel_number_visible = visible; }
 	void setAlternativeNumberingMode(bool b) { m_alternative_numbering = b; }
 	void setProgressBarMode(std::string s) { m_progress_mode = s; }
+	void setAlternativeRecordMatching(bool b) { m_alternative_record_match = b; }
 
 	void setTextSeparator(const std::string &string) { m_separator = string; }
 	void setMarkerTextAlignment(const std::string &string) { m_marker_alignment = string; } // currently supports left and center
@@ -215,6 +216,7 @@ private:
 	int m_marker_as_line;
 	gRGB m_markerline_color;
 	int m_markerline_color_set;
+	bool m_alternative_record_match;
 
 	std::string m_next_title;
 	std::string m_separator;
