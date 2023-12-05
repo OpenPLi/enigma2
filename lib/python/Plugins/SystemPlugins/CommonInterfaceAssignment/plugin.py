@@ -293,7 +293,7 @@ class CIconfigMenu(Screen):
 					if item[2] == 1:
 						fp.write("\t\t<provider name=\"%s\" dvbnamespace=\"%s\" />\n" % (stringToXML(name), item[3]))
 					else:
-						fp.write("\t\t<service name=\"%s\" ref=\"%s\" />\n" % (stringToXML(name), item[3]))
+						fp.write("\t\t<service name=\"%s\" ref=\"%s\" />\n" % (stringToXML(name), ':'.join(item[3].split(':')[:11])))
 			fp.write("\t</slot>\n")
 			fp.write("</ci>\n")
 			fp.close()
