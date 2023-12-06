@@ -785,6 +785,7 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 		// Draw the frame for selected item here so to be under the content
 		if (selected && (!local_style || (!local_style->m_selection && !local_style->m_selection_large)))
 			style.drawFrame(painter, eRect(offset, m_itemsize), eWindowStyle::frameListboxEntry);
+
 		eServiceReference ref = *m_cursor;
 		std::string orig_ref_str = ref.toString();
 		std::string service_res_str =  toLower(split(orig_ref_str, ":")[2]);
@@ -842,7 +843,8 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 				painter.setForegroundColor(gRGB(0xb40431));
 		}
 
-		int xoffset=0, xoffs=0;  // used as offset when painting the folder/marker symbol or the serviceevent progress
+		int xoffset=0, xoffs=0, xoffs_col=0;  // used as offset when painting the folder/marker symbol or the serviceevent progress
+		int nameLeft=0, nameWidth=0, nameYoffs=0, nextYoffs=0; // used as temporary values for 'show two lines' option
 
 		if (m_separator == "") m_separator = "  ";
 
@@ -1184,11 +1186,46 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 				event_begin = evt->getBeginTime();
 				event_duration = evt->getDuration();
 			}
+			int orbpos = m_cursor->getUnsignedData(4) >> 16;
+			const char *filename = ref.path.c_str();
+
+			ePtr<gPixmap> &pixmap_system  =
+						(m_cursor->flags & eServiceReference::isGroup) ? m_pixmaps[picServiceGroup] :
+						(strstr(filename, "://")) ? m_pixmaps[picStream] :
+						(orbpos == 0xFFFF) ? m_pixmaps[picDVB_C] :
+						(orbpos == 0xEEEE) ? m_pixmaps[picDVB_T] : m_pixmaps[picDVB_S];
+
+			eSize pixmap_system_size = eSize();
+			eSize pixmap_crypto_size = eSize();
+			eSize pixmap_rec_size = eSize();
+
+			if (pixmap_system) {
+				pixmap_system_size = pixmap_system->size();
+			}
+
+
+			if (m_pixmaps[picCrypto]) {
+				pixmap_crypto_size = m_pixmaps[picCrypto]->size();
+			}
+
+
+			if (m_pixmaps[picRecord]) {
+				pixmap_rec_size = m_pixmaps[picRecord]->size();
+			}
+
 			bool hasPicons = PyCallable_Check(m_GetPiconNameFunc);
 			bool isAlternativeNumberingMode = m_alternative_numbering;
 			std::string eventProgressConfig = m_progress_mode;
+			int serviceNameWidth = m_column_width > 0 && !isDirectory && !isMarker ? m_column_width : m_itemsize.width();
+			bool shouldCorrect = serviceNameWidth >= m_column_width - pixmap_system_size.width()*3;
 
-			ePtr<eTextPara> paraServiceName = new eTextPara(eRect(0, 0, m_itemsize.width(), m_itemheight));
+			if (m_servicetype_icon_mode == 2 && m_column_width > 0 && shouldCorrect) serviceNameWidth -= pixmap_system_size.width() + m_items_distances;
+			if (m_crypto_icon_mode == 2 && m_column_width > 0 && shouldCorrect) serviceNameWidth -= pixmap_crypto_size.width() + m_items_distances;
+			if (isRecorded && m_record_indicator_mode == 2 && m_column_width > 0 && shouldCorrect) serviceNameWidth -= pixmap_rec_size.width() + m_items_distances;
+			if ((m_servicetype_icon_mode == 2 || m_crypto_icon_mode == 2 || (isRecorded && m_record_indicator_mode == 2)) && m_column_width > 0)
+				serviceNameWidth -= m_items_distances;
+
+			ePtr<eTextPara> paraServiceName = new eTextPara(eRect(0, 0, serviceNameWidth, m_itemheight));
 			paraServiceName->setFont(m_element_font[celServiceName]);
 			paraServiceName->renderString(text.c_str());
 			eRect bboxServiceName = paraServiceName->getBoundBox();
@@ -1310,24 +1347,13 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 					xoffs += piconWidth + m_items_distances;
 				}
 
-				int orbpos = m_cursor->getUnsignedData(4) >> 16;
 				int iconSystemPosX = xoffs + m_items_distances;
 				int iconCryptoPosX = iconSystemPosX;
 				int iconRecordPosX = iconSystemPosX;
 				int iconOffsX = iconSystemPosX;
-				const char *filename = ref.path.c_str();
-				ePtr<gPixmap> &pixmap_system  =
-						(m_cursor->flags & eServiceReference::isGroup) ? m_pixmaps[picServiceGroup] :
-						(strstr(filename, "://")) ? m_pixmaps[picStream] :
-						(orbpos == 0xFFFF) ? m_pixmaps[picDVB_C] :
-						(orbpos == 0xEEEE) ? m_pixmaps[picDVB_T] : m_pixmaps[picDVB_S];
 
 
-				eSize pixmap_system_size = eSize();
-				eSize pixmap_crypto_size = eSize();
-				eSize pixmap_rec_size = eSize();
 				if (m_servicetype_icon_mode == 1 && pixmap_system) {
-					pixmap_system_size = pixmap_system->size();
 					iconCryptoPosX += pixmap_system_size.width() + m_items_distances;
 					iconRecordPosX = iconCryptoPosX;
 					iconOffsX += pixmap_system_size.width() + m_items_distances;
@@ -1335,14 +1361,12 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 
 
 				if (m_crypto_icon_mode == 1 && m_pixmaps[picCrypto]) {
-					pixmap_crypto_size = m_pixmaps[picCrypto]->size();
 					iconRecordPosX += pixmap_crypto_size.width() + m_items_distances;
 					iconOffsX += pixmap_crypto_size.width() + m_items_distances;
 				}
 
 
 				if (isRecorded && m_record_indicator_mode == 1 && m_pixmaps[picRecord]) {
-					pixmap_rec_size = m_pixmaps[picRecord]->size();
 					iconOffsX += pixmap_rec_size.width() + m_items_distances;
 				}
 
@@ -1370,18 +1394,18 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 				}
 
 				xoffs = iconOffsX;
+				xoffs_col = xoffs + m_column_width;
 
 				painter.renderPara(paraServiceName, ePoint(xoffs, offset.y() + (ctrlHeight - bboxServiceName.height())/2));
 
-				xoffs += bboxServiceName.width() + m_items_distances;
+				xoffs += std::min(serviceNameWidth, bboxServiceName.width()) + m_items_distances;
 
-				iconSystemPosX = xoffs + m_items_distances;
+				iconSystemPosX = xoffs;
 				iconCryptoPosX = iconSystemPosX;
 				iconRecordPosX = iconSystemPosX;
 				iconOffsX = iconSystemPosX;
 
 				if (m_servicetype_icon_mode == 2 && pixmap_system) {
-					pixmap_system_size = pixmap_system->size();
 					iconCryptoPosX += pixmap_system_size.width() + m_items_distances;
 					iconRecordPosX = iconCryptoPosX;
 					iconOffsX += pixmap_system_size.width() + m_items_distances;
@@ -1390,7 +1414,6 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 
 
 				if (m_crypto_icon_mode == 2 && m_pixmaps[picCrypto] && service_info && service_info->isCrypted()) {
-					pixmap_crypto_size = m_pixmaps[picCrypto]->size();
 					iconRecordPosX += pixmap_crypto_size.width() + m_items_distances;
 					iconOffsX += pixmap_crypto_size.width() + m_items_distances;
 					xoffs = iconOffsX;
@@ -1398,7 +1421,6 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 
 
 				if (isRecorded && m_record_indicator_mode == 2 && m_pixmaps[picRecord]) {
-					pixmap_rec_size = m_pixmaps[picRecord]->size();
 					iconOffsX += pixmap_rec_size.width() + m_items_distances;
 					xoffs = iconOffsX;
 				}
@@ -1462,13 +1484,13 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 					}
 
 					int eventTextWidth = (eventProgressConfig == "barright" || eventProgressConfig == "percright") ?
-							(pb_xpos - xoffs - m_items_distances*2 ) : (m_itemsize.width() - m_sides_margin*2 - xoffs - m_items_distances*2);
+							(pb_xpos - (m_column_width > 0 ? xoffs_col : xoffs) - m_items_distances*2 ) : (m_itemsize.width() - m_sides_margin*2 - (m_column_width > 0 ? xoffs_col : xoffs) - m_items_distances*2);
 
 					ePtr<eTextPara> para = new eTextPara(eRect(0, 0, eventTextWidth, m_itemheight));
 					para->setFont(m_element_font[celServiceInfo]);
 					para->renderString(text.c_str());
 					eRect bbox = para->getBoundBox();
-					painter.renderPara(para, ePoint(xoffs, offset.y() + (m_itemheight - bbox.height())/2));
+					painter.renderPara(para, ePoint(m_column_width > 0 ? xoffs_col : xoffs, offset.y() + (m_itemheight - bbox.height())/2));
 
 					if (eventProgressConfig != "no" && !startsWith(eventProgressConfig, "perc")) {
 						// the progress data...
