@@ -655,8 +655,8 @@ class EPGList(GUIComponent):
 
 				if bgpng is not None:
 					res.append(MultiContentEntryPixmap(
-						pos=(left + xpos + self.eventBorderVerWidth, top + self.eventBorderHorWidth),
-						size=(ewidth - 2 * self.eventBorderVerWidth, height - 2 * self.eventBorderHorWidth),
+						pos=(left + xpos, top + self.eventBorderHorWidth),
+						size=(ewidth, height - self.eventBorderHorWidth),
 						png=bgpng,
 						flags=BT_SCALE))
 				else:
