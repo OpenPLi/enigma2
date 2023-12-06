@@ -894,6 +894,11 @@ void eListbox::setSelectionPicture(ePtr<gPixmap> &pm)
 	m_style.m_selection = pm;
 }
 
+void eListbox::setSelectionPictureLarge(ePtr<gPixmap> &pm)
+{
+	m_style.m_selection_large = pm;
+}
+
 void eListbox::setSelectionBorderHidden()
 {
 	m_style.m_border_set = 1;
