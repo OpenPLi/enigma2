@@ -36,8 +36,7 @@ void join(const std::vector<std::string>& v, char c, std::string& s) {
 }
 
 bool compareServices(const eServiceReference &ref1, const eServiceReference &ref2, bool alternativeMatching) {
-	eServiceReference r_i = ref1;
-	std::vector<std::string> ref_split = split(r_i.toString(), ":");
+	std::vector<std::string> ref_split = split(ref1.toString(), ":");
 	std::vector<std::string> s_split = split(ref2.toString(), ":");
 
 	if (ref_split[1] == "7" || s_split[1] == "7") {
@@ -64,7 +63,7 @@ bool compareServices(const eServiceReference &ref1, const eServiceReference &ref
 		std::vector<std::string> sr_split = split(url_sr, "/");
 		std::string ref_orig = sr_split.back();
 		ref_orig = replace_all(ref_orig, "%3a", ":");
-		return r_i.toString() == ref_orig;
+		return ref1.toString() == ref_orig;
 	}
 
 	return false;
@@ -770,19 +769,22 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 	{
 		if (local_style->m_background)
 			painter.blit(local_style->m_background, offset, eRect(), gPainter::BT_ALPHABLEND);
-		else if (selected && !local_style->m_selection)
+		else if (selected && !local_style->m_selection && !local_style->m_selection_large)
 			painter.clear();
 	}
 
 	if (cursorValid())
 	{
-		if (selected && local_style && local_style->m_selection)
+		if (selected && local_style && local_style->m_selection && m_visual_mode != visSkinDefined){
 			painter.blit(local_style->m_selection, offset, eRect(), gPainter::BT_ALPHABLEND);
+		}
+		if (selected && local_style && local_style->m_selection_large && m_visual_mode == visSkinDefined){
+			painter.blit(local_style->m_selection_large, offset, eRect(), gPainter::BT_ALPHABLEND);
+		}
 
 		// Draw the frame for selected item here so to be under the content
-		if (selected && (!local_style || !local_style->m_selection))
+		if (selected && (!local_style || (!local_style->m_selection && !local_style->m_selection_large)))
 			style.drawFrame(painter, eRect(offset, m_itemsize), eWindowStyle::frameListboxEntry);
-
 		eServiceReference ref = *m_cursor;
 		std::string orig_ref_str = ref.toString();
 		std::string service_res_str =  toLower(split(orig_ref_str, ":")[2]);
