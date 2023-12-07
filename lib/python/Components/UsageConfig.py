@@ -778,20 +778,39 @@ def InitUsageConfig():
 	config.ntp = ConfigSubsection()
 
 	def timesyncChanged(configElement):
-		if configElement.value == "dvb" or (configElement.value == "auto" and not GetIPsFromNetworkInterfaces()):
-			eDVBLocalTimeHandler.getInstance().setUseDVBTime(True)
-			eEPGCache.getInstance().timeUpdated()
-			if os.path.isfile('/var/spool/cron/crontabs/root'):
-				Console().ePopen("sed -i '/ntpdate-sync/d' /var/spool/cron/crontabs/root;")
-			if configElement.value == "dvb" and os.path.islink('/etc/network/if-up.d/ntpdate-sync'):
-				Console().ePopen("unlink /etc/network/if-up.d/ntpdate-sync")
-		else:
-			eDVBLocalTimeHandler.getInstance().setUseDVBTime(False)
-			eEPGCache.getInstance().timeUpdated()
+		if configElement.value == "ntp" or configElement.value == "auto":
 			if not os.path.isfile('/var/spool/cron/crontabs/root') or not 'ntpdate-sync' in open('/var/spool/cron/crontabs/root').read():
 				Console().ePopen("echo '30 * * * *    /usr/bin/ntpdate-sync silent' >> /var/spool/cron/crontabs/root")
 			if not os.path.islink('/etc/network/if-up.d/ntpdate-sync'):
 				Console().ePopen("ln -s /usr/bin/ntpdate-sync /etc/network/if-up.d/ntpdate-sync")
+		else:
+			if os.path.isfile('/var/spool/cron/crontabs/root'):
+				Console().ePopen("sed -i '/ntpdate-sync/d' /var/spool/cron/crontabs/root;")
+			if os.path.islink('/etc/network/if-up.d/ntpdate-sync'):
+				Console().ePopen("unlink /etc/network/if-up.d/ntpdate-sync")
+
+		if configElement.value == "ntp":
+			print("[UsageConfig] NTP enabled, DVB time disabled")
+			eDVBLocalTimeHandler.getInstance().setUseDVBTime(False)
+		elif configElement.value == "auto":
+			res = os.system('grep ntpdate /var/log/messages | tail -n 1 | grep -q "adjust time server"')
+			if res >> 8 == 0:
+				print("[UsageConfig] NTP auto and active, DVB time disabled")
+				eDVBLocalTimeHandler.getInstance().setUseDVBTime(False)
+			else:
+				res = os.system('/usr/bin/ntpdate-sync && sleep 5 && grep ntpdate /var/log/messages | tail -n 1 | grep -q "adjust time server"')
+				if res >> 8 == 0:
+					print("[UsageConfig] NTP auto and active, DVB time disabled")
+					eDVBLocalTimeHandler.getInstance().setUseDVBTime(False)
+				else:
+					print("[UsageConfig] NTP auto but not active, DVB time enabled")
+					eDVBLocalTimeHandler.getInstance().setUseDVBTime(True)
+		else:
+			print("[UsageConfig] NTP disabled, DVB time enabled")
+			eDVBLocalTimeHandler.getInstance().setUseDVBTime(True)
+
+		eEPGCache.getInstance().timeUpdated()
+
 	config.ntp.timesync = ConfigSelection(default="auto", choices=[("auto", _("auto")), ("dvb", _("Transponder Time")), ("ntp", _("Internet (ntp)"))])
 	config.ntp.timesync.addNotifier(timesyncChanged)
 	config.ntp.server = ConfigText("pool.ntp.org", fixed_size=False)
