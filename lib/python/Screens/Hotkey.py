@@ -248,9 +248,13 @@ def getHotkeyFunctions():
 			x = x[:-4]
 			hotkey.functions.append((_("PPanel") + " " + x, "PPanel/" + x, "PPanels"))
 	if os.path.isdir("/usr/script"):
-		for x in [x for x in os.listdir("/usr/script") if x.endswith(".sh")]:
-			x = x[:-3]
-			hotkey.functions.append((_("Shellscript") + " " + x, "Shellscript/" + x, "Shellscripts"))
+		for x in os.listdir("/usr/script"):
+			if x.endswith(".sh"):
+				x = x[:-3]
+				hotkey.functions.append((_("Shellscript") + " " + x, "Shellscript/" + x, "Shellscripts"))
+			if x.endswith(".py"):
+				x = x[:-3]
+				hotkey.functions.append((_("Pythonscript") + " " + x, "Pythonscript/" + x, "Pythonscripts"))
 
 
 config.misc.hotkey = ConfigSubsection()
@@ -706,6 +710,15 @@ class InfoBarHotkey:
 					else:
 						from Screens.Console import Console
 						self.session.open(Console, selected[1] + " shellscript", command, closeOnSuccess=selected[1].startswith('!'), showStartStopText=False)
+			elif selected[0] == "Pythonscript":
+				command = '/usr/script/' + selected[1] + ".py"
+				if os.path.isfile(command):
+					if ".hidden." in command:
+						from enigma import eConsoleAppContainer
+						eConsoleAppContainer().execute("python %s" % command)
+					else:
+						from Screens.Console import Console
+						self.session.open(Console, selected[1] + " pythonscript", "python %s" % command, closeOnSuccess=selected[1].startswith('!'), showStartStopText=False)
 			elif selected[0] == "Menu":
 				from Screens.Menu import MainMenu, mdom
 				root = mdom.getroot()
