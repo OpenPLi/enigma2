@@ -844,7 +844,6 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 		}
 
 		int xoffset=0, xoffs=0, xoffs_col=0;  // used as offset when painting the folder/marker symbol or the serviceevent progress
-		int nameLeft=0, nameWidth=0, nameYoffs=0, nextYoffs=0; // used as temporary values for 'show two lines' option
 
 		if (m_separator == "") m_separator = "  ";
 
