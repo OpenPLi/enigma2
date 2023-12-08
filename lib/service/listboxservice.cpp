@@ -35,9 +35,8 @@ void join(const std::vector<std::string>& v, char c, std::string& s) {
    }
 }
 
-bool compareServices(const eServiceReference &ref1, const eServiceReference &ref2) {
-	eServiceReference r_i = ref1;
-	std::vector<std::string> ref_split = split(r_i.toString(), ":");
+bool compareServices(const eServiceReference &ref1, const eServiceReference &ref2, bool alternativeMatching) {
+	std::vector<std::string> ref_split = split(ref1.toString(), ":");
 	std::vector<std::string> s_split = split(ref2.toString(), ":");
 
 	if (ref_split[1] == "7" || s_split[1] == "7") {
@@ -52,19 +51,22 @@ bool compareServices(const eServiceReference &ref1, const eServiceReference &ref
 	std::string s_s;
 	join(s_split_r, ':', s_s);
 
-	if (ref_s == s_s) return true;
-	// Check is it having a localhost in the service reference. If it do probably a stream relay
-	// so use different logic
+	if (!alternativeMatching) {
+		if (ref1 == ref2) return true;
+	} else {
+		if (ref_s == s_s) return true;
+	}
+	// If "127.0.0.1" is in the service reference this is probably a stream relay
+	// so use partial matching logic
 	if (ref2.toString().find("127.0.0.1") != std::string::npos) {
 		std::string url_sr = s_split[s_split.size() - 2];
 		std::vector<std::string> sr_split = split(url_sr, "/");
 		std::string ref_orig = sr_split.back();
 		ref_orig = replace_all(ref_orig, "%3a", ":");
-		//eDebug("Ref1: %s || Ref2: %s", ref_s.c_str(), ref_orig.c_str());
-		return ref_s + ":" == ref_orig;
+		return ref1.toString() == ref_orig;
 	}
 
-	return ref_s == s_s;
+	return false;
 }
 
 void eListboxServiceContent::addService(const eServiceReference &service, bool beforeCurrent)
@@ -680,13 +682,13 @@ bool eListboxServiceContent::checkServiceIsRecorded(eServiceReference ref)
 			if (!db->getBouquet(ref, bouquet))
 			{
 				for (std::list<eServiceReference>::iterator i(bouquet->m_services.begin()); i != bouquet->m_services.end(); ++i){
-					if (compareServices(*i, it->second))
+					if (compareServices(*i, it->second, m_alternative_record_match))
 						return true;
 				}
 			}
 		}
 		else {
-			if (compareServices(ref, it->second))
+			if (compareServices(ref, it->second, m_alternative_record_match))
 				return true;
 		}
 	}
@@ -767,17 +769,21 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 	{
 		if (local_style->m_background)
 			painter.blit(local_style->m_background, offset, eRect(), gPainter::BT_ALPHABLEND);
-		else if (selected && !local_style->m_selection)
+		else if (selected && !local_style->m_selection && !local_style->m_selection_large)
 			painter.clear();
 	}
 
 	if (cursorValid())
 	{
-		if (selected && local_style && local_style->m_selection)
+		if (selected && local_style && local_style->m_selection && m_visual_mode != visSkinDefined){
 			painter.blit(local_style->m_selection, offset, eRect(), gPainter::BT_ALPHABLEND);
+		}
+		if (selected && local_style && local_style->m_selection_large && m_visual_mode == visSkinDefined){
+			painter.blit(local_style->m_selection_large, offset, eRect(), gPainter::BT_ALPHABLEND);
+		}
 
 		// Draw the frame for selected item here so to be under the content
-		if (selected && (!local_style || !local_style->m_selection))
+		if (selected && (!local_style || (!local_style->m_selection && !local_style->m_selection_large)))
 			style.drawFrame(painter, eRect(offset, m_itemsize), eWindowStyle::frameListboxEntry);
 
 		eServiceReference ref = *m_cursor;
@@ -837,7 +843,7 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 				painter.setForegroundColor(gRGB(0xb40431));
 		}
 
-		int xoffset=0, xoffs=0;  // used as offset when painting the folder/marker symbol or the serviceevent progress
+		int xoffset=0, xoffs=0, xoffs_col=0;  // used as offset when painting the folder/marker symbol or the serviceevent progress
 
 		if (m_separator == "") m_separator = "  ";
 
@@ -1179,11 +1185,46 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 				event_begin = evt->getBeginTime();
 				event_duration = evt->getDuration();
 			}
+			int orbpos = m_cursor->getUnsignedData(4) >> 16;
+			const char *filename = ref.path.c_str();
+
+			ePtr<gPixmap> &pixmap_system  =
+						(m_cursor->flags & eServiceReference::isGroup) ? m_pixmaps[picServiceGroup] :
+						(strstr(filename, "://")) ? m_pixmaps[picStream] :
+						(orbpos == 0xFFFF) ? m_pixmaps[picDVB_C] :
+						(orbpos == 0xEEEE) ? m_pixmaps[picDVB_T] : m_pixmaps[picDVB_S];
+
+			eSize pixmap_system_size = eSize();
+			eSize pixmap_crypto_size = eSize();
+			eSize pixmap_rec_size = eSize();
+
+			if (pixmap_system) {
+				pixmap_system_size = pixmap_system->size();
+			}
+
+
+			if (m_pixmaps[picCrypto]) {
+				pixmap_crypto_size = m_pixmaps[picCrypto]->size();
+			}
+
+
+			if (m_pixmaps[picRecord]) {
+				pixmap_rec_size = m_pixmaps[picRecord]->size();
+			}
+
 			bool hasPicons = PyCallable_Check(m_GetPiconNameFunc);
 			bool isAlternativeNumberingMode = m_alternative_numbering;
 			std::string eventProgressConfig = m_progress_mode;
+			int serviceNameWidth = m_column_width > 0 && !isDirectory && !isMarker ? m_column_width : m_itemsize.width();
+			bool shouldCorrect = serviceNameWidth >= m_column_width - pixmap_system_size.width()*3;
 
-			ePtr<eTextPara> paraServiceName = new eTextPara(eRect(0, 0, m_itemsize.width(), m_itemheight));
+			if (m_servicetype_icon_mode == 2 && m_column_width > 0 && shouldCorrect) serviceNameWidth -= pixmap_system_size.width() + m_items_distances;
+			if (m_crypto_icon_mode == 2 && m_column_width > 0 && shouldCorrect) serviceNameWidth -= pixmap_crypto_size.width() + m_items_distances;
+			if (isRecorded && m_record_indicator_mode == 2 && m_column_width > 0 && shouldCorrect) serviceNameWidth -= pixmap_rec_size.width() + m_items_distances;
+			if ((m_servicetype_icon_mode == 2 || m_crypto_icon_mode == 2 || (isRecorded && m_record_indicator_mode == 2)) && m_column_width > 0)
+				serviceNameWidth -= m_items_distances;
+
+			ePtr<eTextPara> paraServiceName = new eTextPara(eRect(0, 0, serviceNameWidth, m_itemheight));
 			paraServiceName->setFont(m_element_font[celServiceName]);
 			paraServiceName->renderString(text.c_str());
 			eRect bboxServiceName = paraServiceName->getBoundBox();
@@ -1305,24 +1346,13 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 					xoffs += piconWidth + m_items_distances;
 				}
 
-				int orbpos = m_cursor->getUnsignedData(4) >> 16;
 				int iconSystemPosX = xoffs + m_items_distances;
 				int iconCryptoPosX = iconSystemPosX;
 				int iconRecordPosX = iconSystemPosX;
 				int iconOffsX = iconSystemPosX;
-				const char *filename = ref.path.c_str();
-				ePtr<gPixmap> &pixmap_system  =
-						(m_cursor->flags & eServiceReference::isGroup) ? m_pixmaps[picServiceGroup] :
-						(strstr(filename, "://")) ? m_pixmaps[picStream] :
-						(orbpos == 0xFFFF) ? m_pixmaps[picDVB_C] :
-						(orbpos == 0xEEEE) ? m_pixmaps[picDVB_T] : m_pixmaps[picDVB_S];
 
 
-				eSize pixmap_system_size = eSize();
-				eSize pixmap_crypto_size = eSize();
-				eSize pixmap_rec_size = eSize();
 				if (m_servicetype_icon_mode == 1 && pixmap_system) {
-					pixmap_system_size = pixmap_system->size();
 					iconCryptoPosX += pixmap_system_size.width() + m_items_distances;
 					iconRecordPosX = iconCryptoPosX;
 					iconOffsX += pixmap_system_size.width() + m_items_distances;
@@ -1330,14 +1360,12 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 
 
 				if (m_crypto_icon_mode == 1 && m_pixmaps[picCrypto]) {
-					pixmap_crypto_size = m_pixmaps[picCrypto]->size();
 					iconRecordPosX += pixmap_crypto_size.width() + m_items_distances;
 					iconOffsX += pixmap_crypto_size.width() + m_items_distances;
 				}
 
 
 				if (isRecorded && m_record_indicator_mode == 1 && m_pixmaps[picRecord]) {
-					pixmap_rec_size = m_pixmaps[picRecord]->size();
 					iconOffsX += pixmap_rec_size.width() + m_items_distances;
 				}
 
@@ -1365,18 +1393,18 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 				}
 
 				xoffs = iconOffsX;
+				xoffs_col = xoffs + m_column_width;
 
 				painter.renderPara(paraServiceName, ePoint(xoffs, offset.y() + (ctrlHeight - bboxServiceName.height())/2));
 
-				xoffs += bboxServiceName.width() + m_items_distances;
+				xoffs += std::min(serviceNameWidth, bboxServiceName.width()) + m_items_distances;
 
-				iconSystemPosX = xoffs + m_items_distances;
+				iconSystemPosX = xoffs;
 				iconCryptoPosX = iconSystemPosX;
 				iconRecordPosX = iconSystemPosX;
 				iconOffsX = iconSystemPosX;
 
 				if (m_servicetype_icon_mode == 2 && pixmap_system) {
-					pixmap_system_size = pixmap_system->size();
 					iconCryptoPosX += pixmap_system_size.width() + m_items_distances;
 					iconRecordPosX = iconCryptoPosX;
 					iconOffsX += pixmap_system_size.width() + m_items_distances;
@@ -1385,7 +1413,6 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 
 
 				if (m_crypto_icon_mode == 2 && m_pixmaps[picCrypto] && service_info && service_info->isCrypted()) {
-					pixmap_crypto_size = m_pixmaps[picCrypto]->size();
 					iconRecordPosX += pixmap_crypto_size.width() + m_items_distances;
 					iconOffsX += pixmap_crypto_size.width() + m_items_distances;
 					xoffs = iconOffsX;
@@ -1393,7 +1420,6 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 
 
 				if (isRecorded && m_record_indicator_mode == 2 && m_pixmaps[picRecord]) {
-					pixmap_rec_size = m_pixmaps[picRecord]->size();
 					iconOffsX += pixmap_rec_size.width() + m_items_distances;
 					xoffs = iconOffsX;
 				}
@@ -1457,13 +1483,13 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 					}
 
 					int eventTextWidth = (eventProgressConfig == "barright" || eventProgressConfig == "percright") ?
-							(pb_xpos - xoffs - m_items_distances*2 ) : (m_itemsize.width() - m_sides_margin*2 - xoffs - m_items_distances*2);
+							(pb_xpos - (m_column_width > 0 ? xoffs_col : xoffs) - m_items_distances*2 ) : (m_itemsize.width() - m_sides_margin*2 - (m_column_width > 0 ? xoffs_col : xoffs) - m_items_distances*2);
 
 					ePtr<eTextPara> para = new eTextPara(eRect(0, 0, eventTextWidth, m_itemheight));
 					para->setFont(m_element_font[celServiceInfo]);
 					para->renderString(text.c_str());
 					eRect bbox = para->getBoundBox();
-					painter.renderPara(para, ePoint(xoffs, offset.y() + (m_itemheight - bbox.height())/2));
+					painter.renderPara(para, ePoint(m_column_width > 0 ? xoffs_col : xoffs, offset.y() + (m_itemheight - bbox.height())/2));
 
 					if (eventProgressConfig != "no" && !startsWith(eventProgressConfig, "perc")) {
 						// the progress data...
