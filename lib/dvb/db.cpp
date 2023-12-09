@@ -265,7 +265,7 @@ int eDVBService::isPlayable(const eServiceReference &ref, const eServiceReferenc
 				if (pModule != NULL)
 				{
 					pFunc = PyObject_GetAttrString(pModule, "isPlayable");
-					if (pFunc) 
+					if (pFunc)
 					{
 						pArgs = PyTuple_New(1);
 						pArg = PyUnicode_FromString(ref.toString().c_str());
