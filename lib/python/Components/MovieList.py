@@ -293,6 +293,9 @@ class MovieList(GUIComponent):
 			if len(self.itemHeights) != 3:
 				warningWrongSkinParameter(attrib)
 
+		def itemHeight(value):
+			pass
+
 		def pbarShift(value):
 			self.pbarShift = parseScale(value)
 
