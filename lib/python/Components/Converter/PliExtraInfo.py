@@ -8,25 +8,25 @@ from Components.config import config
 from Tools.Transponder import ConvertToHumanReadable
 from Tools.GetEcmInfo import GetEcmInfo
 from Components.Converter.Poll import Poll
+from Tools.Directories import pathExists
 from skin import parameters
 
 caid_data = (
-	("0x0100", "0x01ff", "Seca", "S", True),
-	("0x0500", "0x05ff", "Via", "V", True),
-	("0x0600", "0x06ff", "Irdeto", "I", True),
-	("0x0900", "0x09ff", "NDS", "Nd", True),
-	("0x0b00", "0x0bff", "Conax", "Co", True),
-	("0x0d00", "0x0dff", "CryptoW", "Cw", True),
-	("0x0e00", "0x0eff", "PowerVU", "P", False),
-	("0x1000", "0x10FF", "Tandberg", "TB", False),
-	("0x1700", "0x17ff", "Beta", "B", True),
-	("0x1800", "0x18ff", "Nagra", "N", True),
-	("0x2600", "0x2600", "Biss", "Bi", False),
-	("0x2700", "0x2710", "Dre3", "D3", False),
-	("0x4ae0", "0x4ae1", "Dre", "D", False),
-	("0x4aee", "0x4aee", "BulCrypt", "B1", False),
-	("0x5581", "0x5581", "BulCrypt", "B2", False),
-	("0x5601", "0x5604", "Verimatrix", "Vm", False)
+	("0x100", "0x1ff", "Seca", "S", "SECA", True),
+	("0x500", "0x5ff", "Via", "V", "VIA", True),
+	("0x600", "0x6ff", "Irdeto", "I", "IRD", True),
+	("0x900", "0x9ff", "NDS", "Nd", "NDS", True),
+	("0xb00", "0xbff", "Conax", "Co", "CONAX", True),
+	("0xd00", "0xdff", "CryptoW", "Cw", "CRW", True),
+	("0xe00", "0xeff", "PowerVU", "P", "PV", False),
+	("0x1000", "0x10FF", "Tandberg", "TB", "TAND", False),
+	("0x1700", "0x17ff", "Beta", "B", "BETA", True),
+	("0x1800", "0x18ff", "Nagra", "N", "NAGRA", True),
+	("0x2600", "0x2600", "Biss", "Bi", "BiSS", False),
+	("0x2700", "0x2710", "Dre3", "D3", "DRE3", False),
+	("0x4ae0", "0x4ae1", "Dre", "D", "DRE", False),
+	("0x4aee", "0x4aee", "BulCrypt", "B1", "BUL", False),
+	("0x5581", "0x5581", "BulCrypt", "B2", "BUL", False)
 )
 
 # stream type to codec map
@@ -138,12 +138,22 @@ class PliExtraInfo(Poll, Converter):
 				except:
 					pass
 
-			if color != "\c%08x" % colors[2] or caid_entry[4]:
+			if color != "\c%08x" % colors[2] or caid_entry[5]:
 				if res:
 					res += " "
 				res += color + caid_entry[3]
 
 		res += "\c%08x" % colors[3] # white (this acts like a color "reset" for following strings
+		return res
+	
+	def createCurrentCaidLabel(self):
+		res = ""
+		if not pathExists("/tmp/ecm.info"):
+			return "FTA"
+		for caid_entry in caid_data:
+			if int(caid_entry[0], 16) <= int(self.current_caid, 16) <= int(caid_entry[1], 16):
+				res = caid_entry[4]
+
 		return res
 
 	def createCryptoSpecial(self, info):
@@ -315,6 +325,10 @@ class PliExtraInfo(Poll, Converter):
 				return addspace(self.createCryptoBar(info)) + self.createCryptoSpecial(info)
 			else:
 				return addspace(self.createCryptoBar(info)) + addspace(self.current_source) + self.createCryptoSpecial(info)
+			
+		if self.type == "CurrentCrypto":
+			self.getCryptoInfo(info)
+			return self.createCurrentCaidLabel()
 
 		if self.type == "CryptoBar":
 			self.getCryptoInfo(info)

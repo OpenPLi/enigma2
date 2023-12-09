@@ -85,7 +85,7 @@ class ServiceName(Converter):
 	text = property(getText)
 
 	def changed(self, what):
-		if what[0] != self.CHANGED_SPECIFIC or what[1] in (iPlayableService.evStart, iPlayableService.evNewProgramInfo):
+		if what[0] != self.CHANGED_SPECIFIC or what[1] in (iPlayableService.evStart, ):
 			Converter.changed(self, what)
 
 	def getName(self, ref, info):
@@ -115,12 +115,6 @@ class ServiceName(Converter):
 			tp_data = info.getInfoObject(ref, iServiceInformation.sTransponderData)
 		else:
 			tp_data = info.getInfoObject(iServiceInformation.sTransponderData)
-
-		if not tp_data and not ref:
-			service = self.source.service
-			if service:
-				feraw = service.frontendInfo()
-				tp_data = feraw and feraw.getAll(config.usage.infobar_frontend_source.value == "settings")
 
 		if tp_data is not None:
 			try:

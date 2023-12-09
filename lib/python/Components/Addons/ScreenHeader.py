@@ -58,7 +58,7 @@ class ScreenHeader(GUIAddon):
 					pos=(0, yPos),
 					size=(self.instance.size().width(), itemHeight),
 					font=2 if isOneItem and idx == 0 else idx, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER,
-					text=x.text,
+					text=x.text.rstrip(">"),
 					color=foreColor, color_sel=foreColor,
 					backcolor=self.backgroundColor, backcolor_sel=self.backgroundColor))
 		return res
