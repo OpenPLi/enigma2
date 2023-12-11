@@ -204,7 +204,7 @@ int eDVBSatelliteEquipmentControl::canTune(const eDVBFrontendParametersSatellite
 					if (((linked_unicable != -1 || is_unicable) && diseqc && !rotor && no_compare_satpos) ||
 						(!is_unicable && ((csw != linked_csw) || (diseqc && (ucsw != linked_ucsw || toneburst != linked_toneburst)) ||
 						(rotor && ((linked_satpos_depends == -1 && rotor_pos != sat.orbital_position) || (!direct_connected && linked_satpos_depends != -1 && no_compare_satpos))))))
-					
+
 					{
 						ret = 0;
 						satcount = old_satcount;
@@ -399,7 +399,7 @@ RESULT eDVBSatelliteEquipmentControl::prepare(iDVBFrontend &frontend, const eDVB
 					diseqc_mode = eDVBSatelliteDiseqcParameters::V1_0;
 				else
 				{
-					if (!((eDVBFrontend*)&frontend)->is_FBCTuner()) 
+					if (!((eDVBFrontend*)&frontend)->is_FBCTuner())
 					{
 						// in eDVBFrontend::tuneLoop we call closeFrontend and ->inc_use() in this this condition (to put the kernel frontend thread into idle state)
 						// so we must resend all diseqc stuff (voltage is disabled when the frontend is closed)

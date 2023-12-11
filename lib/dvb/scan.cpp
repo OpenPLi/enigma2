@@ -1468,7 +1468,7 @@ RESULT eDVBScan::processSDT(eDVBNamespace dvbnamespace, const ServiceDescription
 					{
 					/* DISH/BEV servicetypes: */
 					case 128:
-					case 131: /*Sky UK OpenTV EPG channel */ 
+					case 131: /*Sky UK OpenTV EPG channel */
 					case 133:
 					case 137:
 					case 144:
