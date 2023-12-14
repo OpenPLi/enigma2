@@ -679,7 +679,7 @@ def InitUsageConfig():
 		("por dub Dub DUB ud1", _("Portuguese")),
 		("ron rum", _("Romanian")),
 		("rus", _("Russian")),
-		("srp", _("Serbian")),
+		("srp scc", _("Serbian")),
 		("slk slo", _("Slovak")),
 		("slv", _("Slovenian")),
 		("spa", _("Spanish")),
