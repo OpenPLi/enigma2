@@ -305,12 +305,13 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 			if self.essid is None:
 				self.essid = wsconfig['ssid']
 
-			config.plugins.wlan.hiddenessid = NoSave(ConfigYesNo(default=wsconfig['hiddenessid']))
-			config.plugins.wlan.essid = NoSave(ConfigText(default=self.essid, visible_width=50, fixed_size=False))
-			config.plugins.wlan.encryption = NoSave(ConfigSelection(encryptionlist, default=wsconfig['encryption']))
-			config.plugins.wlan.encryption.addNotifier(self.createSetup, initial_call=False)
-			config.plugins.wlan.wepkeytype = NoSave(ConfigSelection(weplist, default=wsconfig['wepkeytype']))
-			config.plugins.wlan.psk = NoSave(ConfigPassword(default=wsconfig['key'], visible_width=50, fixed_size=False))
+			if hasattr(config.plugins, "wlan"):
+				config.plugins.wlan.hiddenessid = NoSave(ConfigYesNo(default=wsconfig['hiddenessid']))
+				config.plugins.wlan.essid = NoSave(ConfigText(default=self.essid, visible_width=50, fixed_size=False))
+				config.plugins.wlan.encryption = NoSave(ConfigSelection(encryptionlist, default=wsconfig['encryption']))
+				config.plugins.wlan.encryption.addNotifier(self.createSetup, initial_call=False)
+				config.plugins.wlan.wepkeytype = NoSave(ConfigSelection(weplist, default=wsconfig['wepkeytype']))
+				config.plugins.wlan.psk = NoSave(ConfigPassword(default=wsconfig['key'], visible_width=50, fixed_size=False))
 
 		self.activateInterfaceEntry = NoSave(ConfigYesNo(default=iNetwork.getAdapterAttribute(self.iface, "up") or False))
 		self.activateInterfaceEntry.addNotifier(self.createSetup, initial_call=False)
@@ -496,14 +497,15 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 
 	def cleanup(self):
 		iNetwork.stopLinkStateConsole()
-		config.plugins.wlan.encryption.removeNotifier(self.createSetup)
+		if hasattr(config.plugins, "wlan"):
+			config.plugins.wlan.encryption.removeNotifier(self.createSetup)
 		self.activateInterfaceEntry.removeNotifier(self.createSetup)
 		self.dhcpConfigEntry.removeNotifier(self.createSetup)
 		self.hasGatewayConfigEntry.removeNotifier(self.createSetup)
 
 	def hideInputHelp(self):
 		current = self["config"].getCurrent()
-		if current == self.wlanSSID or (current == self.encryptionKey and config.plugins.wlan.encryption.value != "Unencrypted"):
+		if current == self.wlanSSID or (current and current == self.encryptionKey and config.plugins.wlan.encryption.value != "Unencrypted"):
 			if current[1].help_window.instance is not None:
 				current[1].help_window.instance.hide()
 
