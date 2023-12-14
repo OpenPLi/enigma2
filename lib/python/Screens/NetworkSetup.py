@@ -287,8 +287,9 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 	def createConfig(self):
 		self.wlanSSID = None
 		self.encryptionKey = None
+		self.ws = None
 
-		if iNetwork.isWirelessInterface(self.iface):
+		if iNetwork.isWirelessInterface(self.iface) and hasattr(config.plugins, "wlan"):
 			from Plugins.SystemPlugins.WirelessLan.Wlan import wpaSupplicant
 			self.ws = wpaSupplicant()
 			encryptionlist = [
@@ -305,13 +306,12 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 			if self.essid is None:
 				self.essid = wsconfig['ssid']
 
-			if hasattr(config.plugins, "wlan"):
-				config.plugins.wlan.hiddenessid = NoSave(ConfigYesNo(default=wsconfig['hiddenessid']))
-				config.plugins.wlan.essid = NoSave(ConfigText(default=self.essid, visible_width=50, fixed_size=False))
-				config.plugins.wlan.encryption = NoSave(ConfigSelection(encryptionlist, default=wsconfig['encryption']))
-				config.plugins.wlan.encryption.addNotifier(self.createSetup, initial_call=False)
-				config.plugins.wlan.wepkeytype = NoSave(ConfigSelection(weplist, default=wsconfig['wepkeytype']))
-				config.plugins.wlan.psk = NoSave(ConfigPassword(default=wsconfig['key'], visible_width=50, fixed_size=False))
+			config.plugins.wlan.hiddenessid = NoSave(ConfigYesNo(default=wsconfig['hiddenessid']))
+			config.plugins.wlan.essid = NoSave(ConfigText(default=self.essid, visible_width=50, fixed_size=False))
+			config.plugins.wlan.encryption = NoSave(ConfigSelection(encryptionlist, default=wsconfig['encryption']))
+			config.plugins.wlan.encryption.addNotifier(self.createSetup, initial_call=False)
+			config.plugins.wlan.wepkeytype = NoSave(ConfigSelection(weplist, default=wsconfig['wepkeytype']))
+			config.plugins.wlan.psk = NoSave(ConfigPassword(default=wsconfig['key'], visible_width=50, fixed_size=False))
 
 		self.activateInterfaceEntry = NoSave(ConfigYesNo(default=iNetwork.getAdapterAttribute(self.iface, "up") or False))
 		self.activateInterfaceEntry.addNotifier(self.createSetup, initial_call=False)
@@ -431,7 +431,8 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 				iNetwork.removeAdapterAttribute(self.iface, "dns-nameservers")
 			if self.extended is not None and self.configStrings is not None:
 				iNetwork.setAdapterAttribute(self.iface, "configStrings", self.configStrings(self.iface))
-				self.ws.writeConfig(self.iface)
+				if self.ws:
+					self.ws.writeConfig(self.iface)
 
 			if not self.activateInterfaceEntry.value:
 				iNetwork.deactivateInterface(self.iface, self.deactivateInterfaceCB)
