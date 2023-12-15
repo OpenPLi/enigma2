@@ -483,8 +483,8 @@ class ServiceList(GUIComponent):
 		self.l.setVisualMode(eListboxServiceContent.visModeComplex if two_lines_val == 0 else eListboxServiceContent.visSkinDefined)
 
 		if two_lines_val:
-			timeText = _("%d min")
-			self.l.setTextTime(timeText.replace("%d ", ""))
+			timeText = _("min")
+			self.l.setTextTime(timeText)
 			
 		if two_lines_val > 1:
 			nextTitle = _("NEXT") + ":  "
