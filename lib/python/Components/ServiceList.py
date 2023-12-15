@@ -484,7 +484,7 @@ class ServiceList(GUIComponent):
 
 		if two_lines_val:
 			timeText = _("%d min")
-			self.l.setTextTime(timeText)
+			self.l.setTextTime(timeText.replace("%d ", ""))
 			
 		if two_lines_val > 1:
 			nextTitle = _("NEXT") + ":  "
