@@ -394,6 +394,7 @@ class ServiceList(GUIComponent):
 		self.l.setElementFont(self.l.celServiceName, self.ServiceNameFont)
 		self.l.setElementFont(self.l.celServiceNumber, self.ServiceNumberFont)
 		self.l.setElementFont(self.l.celServiceInfo, self.ServiceInfoFont)
+		self.l.setElementFont(self.l.celServiceNextInfo, self.ServiceNextInfoFont)
 
 	def postWidgetCreate(self, instance):
 		instance.setWrapAround(True)
@@ -481,6 +482,16 @@ class ServiceList(GUIComponent):
 		self.l.setItemHeight(self.ItemHeight if two_lines_val == 0 else self.ItemHeightTwoLine)
 		self.l.setVisualMode(eListboxServiceContent.visModeComplex if two_lines_val == 0 else eListboxServiceContent.visSkinDefined)
 
+		if two_lines_val:
+			timeText = _("%d min")
+			self.l.setTextTime(timeText)
+			
+		if two_lines_val > 1:
+			nextTitle = _("NEXT") + ":  "
+			self.l.setNextTitle(nextTitle)
+			
+		self.l.setHasNextEvent(two_lines_val > 1)
+
 		if config.usage.service_icon_enable.value:
 			self.l.setGetPiconNameFunc(getPiconName)
 		else:
@@ -506,8 +517,11 @@ class ServiceList(GUIComponent):
 		self.l.setElementFont(self.l.celServiceName, self.ServiceNameFont)
 		self.l.setElementFont(self.l.celServiceNumber, self.ServiceNumberFont)
 		self.l.setElementFont(self.l.celServiceInfo, self.ServiceInfoFont)
+		self.l.setElementFont(self.l.celServiceNextInfo, self.ServiceNextInfoFont)
+
 		if "perc" in config.usage.show_event_progress_in_servicelist.value:
 			self.l.setElementFont(self.l.celServiceEventProgressbar, self.ServiceInfoFont)
+
 		self.l.setHideNumberMarker(config.usage.hide_number_markers.value)
 		self.l.setServiceTypeIconMode(int(config.usage.servicetype_icon_mode.value))
 		self.l.setCryptoIconMode(int(config.usage.crypto_icon_mode.value))
