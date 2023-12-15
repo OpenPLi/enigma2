@@ -33,9 +33,7 @@ def InitUsageConfig():
 		refreshServiceList()
 	config.usage.alternative_number_mode.addNotifier(alternativeNumberModeChange)
 
-	config.usage.servicelist_twolines = ConfigSelection(default="0", choices=[("0", _("None")), ("1", _("two lines"))])
-	if config.usage.servicelist_twolines.value not in ("0", "1"):
-		config.usage.servicelist_twolines.value = "1"
+	config.usage.servicelist_twolines = ConfigSelection(default="0", choices=[("0", _("None")), ("1", _("two lines")), ("2", _("two lines+next event"))])
 	config.usage.servicelist_twolines.addNotifier(refreshServiceList)
 
 	config.usage.hide_number_markers = ConfigYesNo(default=True)
@@ -46,6 +44,7 @@ def InitUsageConfig():
 	config.usage.crypto_icon_mode = ConfigSelection(default="0", choices=[("0", _("None")), ("1", _("Left from servicename")), ("2", _("Right from servicename"))])
 	config.usage.crypto_icon_mode.addNotifier(refreshServiceList)
 	config.usage.record_indicator_mode = ConfigSelection(default="0", choices=[("0", _("None")), ("1", _("Left from servicename")), ("2", _("Right from servicename")), ("3", _("Red colored"))])
+	config.usage.record_indicator_mode = ConfigSelection(default="3", choices=[("0", _("None")), ("1", _("Left from servicename")), ("2", _("Right from servicename")), ("3", _("Red colored"))])
 	config.usage.record_indicator_mode.addNotifier(refreshServiceList)
 
 	choicelist = [("-1", _("Disable"))]
@@ -293,7 +292,7 @@ def InitUsageConfig():
 		('barright', _("Progress bar right")),
 		('percleft', _("Percentage left")),
 		('percright', _("Percentage right")),
-		('no', _("no"))])
+		('no', _("No"))])
 	config.usage.show_channel_numbers_in_servicelist = ConfigYesNo(default=True)
 	config.usage.show_event_progress_in_servicelist.addNotifier(refreshServiceList)
 	config.usage.show_channel_numbers_in_servicelist.addNotifier(refreshServiceList)
