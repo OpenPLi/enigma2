@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-08 16:10+0100\n"
+"POT-Creation-Date: 2023-12-16 09:57+0100\n"
 "PO-Revision-Date: 2023-11-10 14:18+0100\n"
 "Last-Translator: Andrej Tobola <andrej.tobola@gmail.com>\n"
 "Language-Team: \n"
@@ -171,6 +171,10 @@ msgstr "%a %e/%m"
 #. TRANSLATORS: long date representation short dayname daynum short monthname hour:minute in strftime() format! See 'man strftime'
 msgid "%a %e/%m  %-H:%M"
 msgstr "%a %e/%m  %-H:%M"
+
+#, python-format
+msgid "%d"
+msgstr ""
 
 #, python-format
 msgid "%d MB"
@@ -1051,9 +1055,6 @@ msgstr "Umenie/kultúra (bez hudby)"
 
 msgid "Aruba"
 msgstr "Aruba"
-
-msgid "As defined by the skin"
-msgstr "Definované vzhľadom"
 
 msgid "Ask user"
 msgstr "Opýtať sa"
@@ -1959,16 +1960,19 @@ msgstr "Konfigurácia spôsobu vytvárania názvov súborov nahrávok."
 msgid "Configure how the fan should operate"
 msgstr "Konfigurácia činnosti ventilátora"
 
-msgid "Configure if and how crypto icons will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how crypto icons will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Konfigurácia toho, či a ako sa budú zobrazovať ikony kódovania v zozname staníc."
 
 msgid "Configure if and how long the latest service in Picture in Picture mode will be remembered."
 msgstr "Nastavenie, či a ako dlho sa bude pamätať posledná stanica v režime Obraz v obraze (PiP)."
 
-msgid "Configure if and how service type icons will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how service type icons will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Konfigurácia, či a ako sa budú zobrazovať ikony druhu stanice v zozname staníc."
 
-msgid "Configure if and how the record indicator will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how the record indicator will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Nastavenie, či a ako sa bude zobrazovať indikátor nahrávania v zozname staníc."
 
 msgid "Configure if and how wide columns will be shown in the channel selection list."
@@ -2646,6 +2650,9 @@ msgstr "Oneskorenie v milisekundách pred začiatkom rolovania textu na displeji
 msgid "Delay in miliseconds between scrolling characters on display."
 msgstr "Oneskorenie v milisekundách medzi posúvajúcimi sa znakmi na displeji."
 
+msgid "Delay when closing a stream relay service before reallocating the tuner for another service. Using '0' is only recommended for boxes with multiple satellite tuners."
+msgstr ""
+
 msgid "Delete"
 msgstr "Vymazať"
 
@@ -3228,6 +3235,13 @@ msgstr "Povoliť automatický FastScan"
 #, python-format
 msgid "Enable auto fastscan for %s"
 msgstr "Povoliť automatický FastScan pre %s"
+
+msgid "Enable blink functionality for some areas like record icon."
+msgstr ""
+
+#, fuzzy
+msgid "Enable blinking"
+msgstr "Povoliť Virgin EPG"
 
 msgid "Enable bluetooth audio"
 msgstr "Povoliť zvuk bluetooth"
@@ -5022,6 +5036,9 @@ msgstr "Luxembursky"
 msgid "MB"
 msgstr "MB"
 
+msgid "MENU"
+msgstr ""
+
 msgid "MHz"
 msgstr "MHz"
 
@@ -5942,8 +5959,15 @@ msgstr "PMT PID"
 msgid "PPanel"
 msgstr "PPanel"
 
+msgid "PREVIOUS"
+msgstr ""
+
 msgid "PULSe 4K(mini)"
 msgstr "PULSe 4K(mini)"
+
+#, fuzzy
+msgid "PVR"
+msgstr "OVR"
 
 msgid "Package list update"
 msgstr "Aktualizácia zoznamu balíčkov"
@@ -6684,6 +6708,10 @@ msgstr "Python frontend pre /tmp/mmi.socket"
 
 msgid "Python version: "
 msgstr "Verzia Python: "
+
+#, fuzzy
+msgid "Pythonscript"
+msgstr "Konzolový skript"
 
 msgid "Qatar"
 msgstr "Katar"
@@ -7860,6 +7888,10 @@ msgstr "Info služby - okamžité hodnoty tuneru"
 msgid "Service info - tuner setting values"
 msgstr "Info služby - hodnoty nastavenia tuneru"
 
+#, fuzzy
+msgid "Service info font size"
+msgstr "Informácie o stanici"
+
 msgid ""
 "Service invalid!\n"
 "(Timeout reading PMT)"
@@ -7870,12 +7902,20 @@ msgstr ""
 msgid "Service name"
 msgstr "Názov stanice"
 
+#, fuzzy
+msgid "Service name font size"
+msgstr "Názov stanice"
+
 msgid ""
 "Service not found!\n"
 "(SID not found in PAT)"
 msgstr ""
 "Stanica nebola nájdená!\n"
 "(SID nenájdený v PAT)"
+
+#, fuzzy
+msgid "Service number font size"
+msgstr "Veľkosť písma titulkov"
 
 msgid "Service reference"
 msgstr "Referencia služby"
@@ -7965,7 +8005,8 @@ msgstr "Nastavenie hesla OpenWebif zo záložného tunera"
 msgid "Set the port of the OpenWebif from your fallback tuner"
 msgstr "Nastavenie portu OpenWebif z vášho záložného tunera"
 
-msgid "Set the type of the progress indication in the channel selection screen."
+#, fuzzy
+msgid "Set the type of the progress indication in the channel selection screen (right alignment only available in single line mode)."
 msgstr "Zvoliť typ zobrazenia priebehu programu v zozname staníc."
 
 msgid "Set time window to 1 hour"
@@ -8096,6 +8137,9 @@ msgstr "Zobraziť info o kódovaní v infopaneli"
 
 msgid "Show detailed event info"
 msgstr "Zobraziť podrobné informácie o programe"
+
+msgid "Show disabled timers (local only)"
+msgstr ""
 
 msgid "Show event details"
 msgstr "Zobraziť detaily o programe"
@@ -8339,9 +8383,6 @@ msgstr "Jeden"
 
 msgid "Single EPG"
 msgstr "Jeden EPG"
-
-msgid "Single line mode"
-msgstr "Režim jedného riadku"
 
 msgid "Single satellite"
 msgstr "Jeden satelit"
@@ -8799,6 +8840,10 @@ msgstr "Uložená pozícia"
 
 msgid "Stream"
 msgstr "Stream"
+
+#, fuzzy
+msgid "Stream Relay delay"
+msgstr "Oneskorenie rolovania"
 
 msgid "Stream request"
 msgstr "Žiadosť o stream"
@@ -9304,6 +9349,9 @@ msgstr ""
 
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "Toto médium DVD RW je už naformátované - opätovným formátovaním sa vymaže celý obsah disku."
+
+msgid "This allows you to change the font size relative to skin size, so 1 increases by 1 point size, and -1 decreases by 1 point size"
+msgstr ""
 
 msgid "This bouquet is protected by a parental control PIN"
 msgstr "Tento zoznam je chránený rodičovskou kontrolou"
@@ -9845,12 +9893,6 @@ msgstr "Tuvalu"
 msgid "Two"
 msgstr "Dva"
 
-msgid "Two lines"
-msgstr "Dva riadky"
-
-msgid "Two lines and next event"
-msgstr "Dva riadky a nasledujúci program"
-
 msgid "Type"
 msgstr "Typ"
 
@@ -10104,6 +10146,10 @@ msgstr "Použiť pôvodnú pozíciu teletextu"
 
 msgid "Use power measurement"
 msgstr "Použiť meranie spotreby"
+
+#, fuzzy
+msgid "Use skin default"
+msgstr "Nastaviť predvolené"
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "Použiť Sprievodcu nastavením siete na nastavenie zvoleného sieťového adaptéra"
@@ -11604,6 +11650,10 @@ msgstr "medicína/fyziológia/psychológia"
 msgid "menu"
 msgstr "menu"
 
+#, fuzzy
+msgid "min"
+msgstr " min"
+
 msgid "mins"
 msgstr "min"
 
@@ -12032,6 +12082,14 @@ msgstr "turistika/cestovanie"
 msgid "true"
 msgstr "áno"
 
+#, fuzzy
+msgid "two lines"
+msgstr "Dva riadky"
+
+#, fuzzy
+msgid "two lines+next event"
+msgstr "Dva riadky a nasledujúci program"
+
 msgid "type"
 msgstr "typ"
 
@@ -12167,3 +12225,9 @@ msgstr "prepnuté"
 
 msgid "®"
 msgstr "®"
+
+msgid "°E"
+msgstr ""
+
+msgid "°W"
+msgstr ""

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OBH enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-08 16:10+0100\n"
+"POT-Creation-Date: 2023-12-16 09:57+0100\n"
 "PO-Revision-Date: 2019-04-12 12:36+0300\n"
 "Last-Translator: mosad - مساعد الجعيد <abo-mishal@hotmail.com>\n"
 "Language-Team: mosad - مساعد الجعيد\n"
@@ -179,6 +179,10 @@ msgstr "%a %d/%m"
 #, fuzzy
 msgid "%a %e/%m  %-H:%M"
 msgstr "%a %e %b  %-H:%M"
+
+#, python-format
+msgid "%d"
+msgstr ""
 
 #, python-format
 msgid "%d MB"
@@ -1141,9 +1145,6 @@ msgstr "الفنون/الثقافة (بدون موسيقي ، عام)"
 msgid "Aruba"
 msgstr "أروبا"
 
-msgid "As defined by the skin"
-msgstr ""
-
 msgid "Ask user"
 msgstr "أسال المستخدم"
 
@@ -2095,7 +2096,8 @@ msgstr "إعدادات كيف يتم ترتيب أسماء ملفات التسج
 msgid "Configure how the fan should operate"
 msgstr "تكوين الاختفاء التدريجي لشريط المعلومات"
 
-msgid "Configure if and how crypto icons will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how crypto icons will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "إعدادات كيف سيتم عرض أيقونة التشفير في صفحة قائمة إختيار القنوات."
 
 #, fuzzy
@@ -2103,10 +2105,11 @@ msgid "Configure if and how long the latest service in Picture in Picture mode w
 msgstr "إعدادات عرض أيقونات نوع الخدمة."
 
 #, fuzzy
-msgid "Configure if and how service type icons will be shown in the channel selection list."
+msgid "Configure if and how service type icons will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "إعدادات كيف سيتم عرض أيقونة التشفير في صفحة قائمة إختيار القنوات."
 
-msgid "Configure if and how the record indicator will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how the record indicator will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "إعدادات كيف سيتم عرض أيقونة التسجيل في صفحة قائمة إختيار القنوات."
 
 #, fuzzy
@@ -2842,6 +2845,9 @@ msgstr ""
 msgid "Delay in miliseconds between scrolling characters on display."
 msgstr ""
 
+msgid "Delay when closing a stream relay service before reallocating the tuner for another service. Using '0' is only recommended for boxes with multiple satellite tuners."
+msgstr ""
+
 msgid "Delete"
 msgstr "حذف"
 
@@ -3483,6 +3489,13 @@ msgstr "تمكين البحث السريع الآلي"
 #, fuzzy, python-format
 msgid "Enable auto fastscan for %s"
 msgstr "تفعيل البحث التلقائي السريع %s"
+
+msgid "Enable blink functionality for some areas like record icon."
+msgstr ""
+
+#, fuzzy
+msgid "Enable blinking"
+msgstr "تمكين دليل البرامج الإلكترونية لقنوات شركة فيرجن"
 
 #, fuzzy
 msgid "Enable bluetooth audio"
@@ -5395,6 +5408,9 @@ msgstr "لوكسونبورج"
 msgid "MB"
 msgstr "B"
 
+msgid "MENU"
+msgstr ""
+
 msgid "MHz"
 msgstr ""
 
@@ -6383,7 +6399,13 @@ msgstr "المعلومات الخاصة بالبرامج ومعرف مزودين
 msgid "PPanel"
 msgstr "لوحة تحكم البرامج"
 
+msgid "PREVIOUS"
+msgstr ""
+
 msgid "PULSe 4K(mini)"
+msgstr ""
+
+msgid "PVR"
 msgstr ""
 
 msgid "Package list update"
@@ -7158,6 +7180,10 @@ msgstr "نهاية واجهة ملفات البايثون /tmp/mmi.socket"
 #, fuzzy
 msgid "Python version: "
 msgstr "الإصدار:\t%s"
+
+#, fuzzy
+msgid "Pythonscript"
+msgstr "سكربتات"
 
 msgid "Qatar"
 msgstr "قطر"
@@ -8448,6 +8474,10 @@ msgstr "قيم المؤالف المباشرة"
 msgid "Service info - tuner setting values"
 msgstr "إعدادات قيم المؤالف"
 
+#, fuzzy
+msgid "Service info font size"
+msgstr "قائمة القنوات"
+
 msgid ""
 "Service invalid!\n"
 "(Timeout reading PMT)"
@@ -8458,12 +8488,20 @@ msgstr ""
 msgid "Service name"
 msgstr "أسم القناة"
 
+#, fuzzy
+msgid "Service name font size"
+msgstr "أسم القناة"
+
 msgid ""
 "Service not found!\n"
 "(SID not found in PAT)"
 msgstr ""
 "الخدمة غير متوفرة!\n"
 "(لم يتم العثور على معرف الحماية)"
+
+#, fuzzy
+msgid "Service number font size"
+msgstr "حجم خط الترجمة"
 
 msgid "Service reference"
 msgstr "مرجع القناة"
@@ -8564,7 +8602,8 @@ msgstr "ادخل عنوان الايبي الخاص بالرسيفر لاستخ�
 msgid "Set the port of the OpenWebif from your fallback tuner"
 msgstr "ادخل عنوان الايبي الخاص بالرسيفر لاستخدامه للمؤالفات الاحتياطية."
 
-msgid "Set the type of the progress indication in the channel selection screen."
+#, fuzzy
+msgid "Set the type of the progress indication in the channel selection screen (right alignment only available in single line mode)."
 msgstr "تعيين نوع من دلالة التقدم في شاشة اختيار القناة."
 
 msgid "Set time window to 1 hour"
@@ -8703,6 +8742,9 @@ msgstr "عرض معلومات التشفير في شريط المعومات"
 
 msgid "Show detailed event info"
 msgstr "عرض معلومات الحدث التفصيلية"
+
+msgid "Show disabled timers (local only)"
+msgstr ""
 
 msgid "Show event details"
 msgstr "عرض تفاصيل الحدث"
@@ -8972,10 +9014,6 @@ msgstr "مفرد"
 
 msgid "Single EPG"
 msgstr "دليل برنامج يومي واحد"
-
-#, fuzzy
-msgid "Single line mode"
-msgstr "تمكين وضع العميل"
 
 msgid "Single satellite"
 msgstr "قمر واحد"
@@ -9462,6 +9500,10 @@ msgstr "تخزين الموقع"
 
 msgid "Stream"
 msgstr "التدفق"
+
+#, fuzzy
+msgid "Stream Relay delay"
+msgstr "تأخير الدوران النهائي"
 
 msgid "Stream request"
 msgstr "طلب البث"
@@ -9977,6 +10019,9 @@ msgstr ""
 
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "تنسيق مشغل سواقة الديفيدي جاهزة للإستخدام- سوف يعمل تهئية لكل محتوى القرص."
+
+msgid "This allows you to change the font size relative to skin size, so 1 increases by 1 point size, and -1 decreases by 1 point size"
+msgstr ""
 
 msgid "This bouquet is protected by a parental control PIN"
 msgstr "هذه القناه محميه برقم سري بواسطه الرقابة الأبوية"
@@ -10568,13 +10613,6 @@ msgstr "توفالو"
 msgid "Two"
 msgstr "اثنين"
 
-msgid "Two lines"
-msgstr "سطرين"
-
-#, fuzzy
-msgid "Two lines and next event"
-msgstr "الانتقال إلى الحدث التالي"
-
 msgid "Type"
 msgstr "النوع"
 
@@ -10850,6 +10888,10 @@ msgstr "أستخدام مكان ترجمة النصوص الأصلية"
 
 msgid "Use power measurement"
 msgstr "استخدم قـياس الطاقة"
+
+#, fuzzy
+msgid "Use skin default"
+msgstr "تعيين افتراضي"
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "استخدام معالج شبكه الاتصال لتكوين محول شبكه الاتصال المحدد"
@@ -12438,6 +12480,10 @@ msgstr "الطب/علم الوظائف/علم النفس"
 msgid "menu"
 msgstr "القائمة"
 
+#, fuzzy
+msgid "min"
+msgstr "%d دقيقة"
+
 msgid "mins"
 msgstr "دقائق"
 
@@ -12902,6 +12948,14 @@ msgstr "السياحة/السفر"
 msgid "true"
 msgstr "صحيح"
 
+#, fuzzy
+msgid "two lines"
+msgstr "سطرين"
+
+#, fuzzy
+msgid "two lines+next event"
+msgstr "الانتقال إلى الحدث التالي"
+
 msgid "type"
 msgstr "نوع"
 
@@ -13046,4 +13100,10 @@ msgid "zapped"
 msgstr "تم الانتقال"
 
 msgid "®"
+msgstr ""
+
+msgid "°E"
+msgstr ""
+
+msgid "°W"
 msgstr ""

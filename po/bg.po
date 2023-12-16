@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-08 16:10+0100\n"
+"POT-Creation-Date: 2023-12-16 09:57+0100\n"
 "PO-Revision-Date: 2023-11-11 09:42+0200\n"
 "Last-Translator: Мартин Петков <marto74bg@yahoo.co.uk>\n"
 "Language-Team: Bulgarian\n"
@@ -169,6 +169,10 @@ msgstr "%a %e/%m"
 #. TRANSLATORS: long date representation short dayname daynum short monthname hour:minute in strftime() format! See 'man strftime'
 msgid "%a %e/%m  %-H:%M"
 msgstr "%a %e/%m  %-Ч:%М"
+
+#, python-format
+msgid "%d"
+msgstr ""
 
 #, python-format
 msgid "%d MB"
@@ -1037,9 +1041,6 @@ msgstr "Изкуство/Култура (без музика)"
 
 msgid "Aruba"
 msgstr "Аруба"
-
-msgid "As defined by the skin"
-msgstr "Както е зададено в скина"
 
 msgid "Ask user"
 msgstr "Питай потребител"
@@ -1943,16 +1944,19 @@ msgstr "Настройка какво да показват имената на 
 msgid "Configure how the fan should operate"
 msgstr "Настройка режим на работа на вентилатора"
 
-msgid "Configure if and how crypto icons will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how crypto icons will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Настройка за показване на иконите за кодираните услуги в списъка за избор на канали."
 
 msgid "Configure if and how long the latest service in Picture in Picture mode will be remembered."
 msgstr "Настройка - запомняне и за какъв период от време на последния канал PiP."
 
-msgid "Configure if and how service type icons will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how service type icons will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Настройка за показване на иконите за типа услуги в списъка за избор на канали."
 
-msgid "Configure if and how the record indicator will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how the record indicator will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Настройка за показването на индикатора за текущи записи в списъка за избор на канали."
 
 msgid "Configure if and how wide columns will be shown in the channel selection list."
@@ -2630,6 +2634,9 @@ msgstr "Закъснение в милисекунди преди започва
 msgid "Delay in miliseconds between scrolling characters on display."
 msgstr "Закъснение в милисекунди между превъртащите се символи на дисплея."
 
+msgid "Delay when closing a stream relay service before reallocating the tuner for another service. Using '0' is only recommended for boxes with multiple satellite tuners."
+msgstr ""
+
 msgid "Delete"
 msgstr "Изтриване"
 
@@ -3209,6 +3216,13 @@ msgstr "Активиране на бързо автосканиране"
 #, python-format
 msgid "Enable auto fastscan for %s"
 msgstr "Вкл. на бързо автосканиране за %s"
+
+msgid "Enable blink functionality for some areas like record icon."
+msgstr ""
+
+#, fuzzy
+msgid "Enable blinking"
+msgstr "Активиране на Virgin EPG"
 
 msgid "Enable bluetooth audio"
 msgstr "Включване на bluetooth аудио"
@@ -4996,6 +5010,9 @@ msgstr "Люксембургски"
 msgid "MB"
 msgstr "MB"
 
+msgid "MENU"
+msgstr ""
+
 msgid "MHz"
 msgstr "MHz"
 
@@ -5916,8 +5933,15 @@ msgstr "РМТ PID"
 msgid "PPanel"
 msgstr "PPanel (shell скриптове)"
 
+msgid "PREVIOUS"
+msgstr ""
+
 msgid "PULSe 4K(mini)"
 msgstr ""
+
+#, fuzzy
+msgid "PVR"
+msgstr "OVR"
 
 msgid "Package list update"
 msgstr "Обновяване на списъка с пакети"
@@ -6653,6 +6677,10 @@ msgstr "Питон интерфейс за /tmp/mmi.socket"
 
 msgid "Python version: "
 msgstr "Питон версия: "
+
+#, fuzzy
+msgid "Pythonscript"
+msgstr "Shell-скрипт"
 
 msgid "Qatar"
 msgstr "Катар"
@@ -7822,6 +7850,10 @@ msgstr "Информация за канала - Live данни от тунер
 msgid "Service info - tuner setting values"
 msgstr "Информация за канала - данни от настройките на тунера"
 
+#, fuzzy
+msgid "Service info font size"
+msgstr "Информация за канала"
+
 msgid ""
 "Service invalid!\n"
 "(Timeout reading PMT)"
@@ -7832,12 +7864,20 @@ msgstr ""
 msgid "Service name"
 msgstr "Име на канала"
 
+#, fuzzy
+msgid "Service name font size"
+msgstr "Име на канала"
+
 msgid ""
 "Service not found!\n"
 "(SID not found in PAT)"
 msgstr ""
 "Не е открит канал!\n"
 "(SID не е открит в PAT)"
+
+#, fuzzy
+msgid "Service number font size"
+msgstr "Размер на шрифта на субтитрите"
 
 msgid "Service reference"
 msgstr "Референс на канала"
@@ -7927,7 +7967,8 @@ msgstr "Задайте паролата на OpenWebif от вашия резе�
 msgid "Set the port of the OpenWebif from your fallback tuner"
 msgstr "Задайте порта на OpenWebif от вашия резервен тунер"
 
-msgid "Set the type of the progress indication in the channel selection screen."
+#, fuzzy
+msgid "Set the type of the progress indication in the channel selection screen (right alignment only available in single line mode)."
 msgstr "Задайте типа индикация на прогреса на текущото предаване в списъка с избор на канали."
 
 msgid "Set time window to 1 hour"
@@ -8058,6 +8099,9 @@ msgstr "Покажи крипто данни от емулатора в инфо
 
 msgid "Show detailed event info"
 msgstr "Покажи детално инфо за предаването"
+
+msgid "Show disabled timers (local only)"
+msgstr ""
 
 msgid "Show event details"
 msgstr "Покажи инфо за предаването"
@@ -8301,9 +8345,6 @@ msgstr "Единичен"
 
 msgid "Single EPG"
 msgstr "ЕПГ на канал"
-
-msgid "Single line mode"
-msgstr "Едноредов режим"
 
 msgid "Single satellite"
 msgstr "Един Сателит"
@@ -8761,6 +8802,10 @@ msgstr "Запазена позиция"
 
 msgid "Stream"
 msgstr "Стрийм"
+
+#, fuzzy
+msgid "Stream Relay delay"
+msgstr "Задръжка на превъртането"
 
 msgid "Stream request"
 msgstr "Искане за стрийм"
@@ -9259,6 +9304,9 @@ msgstr ""
 
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "Този DVD RW диск е вече форматиран - преформатирането му ще изтрие цялото съдържание на диска."
+
+msgid "This allows you to change the font size relative to skin size, so 1 increases by 1 point size, and -1 decreases by 1 point size"
+msgstr ""
 
 msgid "This bouquet is protected by a parental control PIN"
 msgstr "Този букет е защитен с ПИН кода на родителски контрол"
@@ -9794,12 +9842,6 @@ msgstr "Тувалу"
 msgid "Two"
 msgstr "Два"
 
-msgid "Two lines"
-msgstr "Два реда"
-
-msgid "Two lines and next event"
-msgstr "Два реда и следващото събитие"
-
 msgid "Type"
 msgstr "Тип"
 
@@ -10052,6 +10094,10 @@ msgstr "Използвай оригиналната позиция на теле
 
 msgid "Use power measurement"
 msgstr "Използвай мерител на напрежение"
+
+#, fuzzy
+msgid "Use skin default"
+msgstr "Задаване по подразбиране"
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "Използвайте помощника за настройка на мрежа за конфигурация на избрания мрежов адаптер"
@@ -11552,6 +11598,10 @@ msgstr "медицина/физиология/психология"
 msgid "menu"
 msgstr "меню"
 
+#, fuzzy
+msgid "min"
+msgstr " мин"
+
 msgid "mins"
 msgstr "мин"
 
@@ -11980,6 +12030,14 @@ msgstr "туризъм/пътешествия"
 msgid "true"
 msgstr "да"
 
+#, fuzzy
+msgid "two lines"
+msgstr "Два реда"
+
+#, fuzzy
+msgid "two lines+next event"
+msgstr "Два реда и следващото събитие"
+
 msgid "type"
 msgstr "тип"
 
@@ -12114,3 +12172,9 @@ msgstr "превключен"
 
 msgid "®"
 msgstr "®"
+
+msgid "°E"
+msgstr ""
+
+msgid "°W"
+msgstr ""
