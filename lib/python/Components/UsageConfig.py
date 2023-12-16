@@ -33,28 +33,28 @@ def InitUsageConfig():
 		refreshServiceList()
 	config.usage.alternative_number_mode.addNotifier(alternativeNumberModeChange)
 
-	config.usage.servicelist_twolines = ConfigSelection(default="0", choices=[("0", _("None")), ("1", _("two lines")), ("2", _("two lines+next event"))])
-	config.usage.servicelist_twolines.addNotifier(refreshServiceList)
+	config.usage.servicelist_twolines = ConfigSelection(default="0", choices=[("0", _("None")), ("1", _("Two lines")), ("2", _("Two lines and next event"))])
+	config.usage.servicelist_twolines.addNotifier(refreshServiceList, initial_call=False)
 
 	config.usage.hide_number_markers = ConfigYesNo(default=True)
-	config.usage.hide_number_markers.addNotifier(refreshServiceList)
+	config.usage.hide_number_markers.addNotifier(refreshServiceList, initial_call=False)
 
 	config.usage.servicetype_icon_mode = ConfigSelection(default="0", choices=[("0", _("None")), ("1", _("Left from servicename")), ("2", _("Right from servicename"))])
-	config.usage.servicetype_icon_mode.addNotifier(refreshServiceList)
+	config.usage.servicetype_icon_mode.addNotifier(refreshServiceList, initial_call=False)
 	config.usage.crypto_icon_mode = ConfigSelection(default="0", choices=[("0", _("None")), ("1", _("Left from servicename")), ("2", _("Right from servicename"))])
-	config.usage.crypto_icon_mode.addNotifier(refreshServiceList)
+	config.usage.crypto_icon_mode.addNotifier(refreshServiceList, initial_call=False)
 	config.usage.record_indicator_mode = ConfigSelection(default="0", choices=[("0", _("None")), ("1", _("Left from servicename")), ("2", _("Right from servicename")), ("3", _("Red colored"))])
 	config.usage.record_indicator_mode = ConfigSelection(default="3", choices=[("0", _("None")), ("1", _("Left from servicename")), ("2", _("Right from servicename")), ("3", _("Red colored"))])
-	config.usage.record_indicator_mode.addNotifier(refreshServiceList)
+	config.usage.record_indicator_mode.addNotifier(refreshServiceList, initial_call=False)
 
 	choicelist = [("-1", _("Disable"))]
 	for i in range(0, 1300, 100):
 		choicelist.append((str(i), ngettext("%d pixel wide", "%d pixels wide", i) % i))
 	config.usage.servicelist_column = ConfigSelection(default="-1", choices=choicelist)
-	config.usage.servicelist_column.addNotifier(refreshServiceList)
+	config.usage.servicelist_column.addNotifier(refreshServiceList, initial_call=False)
 
 	config.usage.service_icon_enable = ConfigYesNo(default=False)
-	config.usage.service_icon_enable.addNotifier(refreshServiceList)
+	config.usage.service_icon_enable.addNotifier(refreshServiceList, initial_call=False)
 	config.usage.servicelist_cursor_behavior = ConfigSelection(default="keep", choices=[
 		("standard", _("Standard")),
 		("keep", _("Keep service")),
@@ -62,12 +62,15 @@ def InitUsageConfig():
 		("keep reverseB", _("Keep service") + " + " + _("Reverse bouquet buttons"))])
 	
 	config.usage.servicenum_fontsize = ConfigSelectionNumber(default=0, stepwidth=1, min=-8, max=10, wraparound=True)
+	config.usage.servicenum_fontsize.addNotifier(refreshServiceList, initial_call=False)
 	config.usage.servicename_fontsize = ConfigSelectionNumber(default=0, stepwidth=1, min=-8, max=10, wraparound=True)
+	config.usage.servicename_fontsize.addNotifier(refreshServiceList, initial_call=False)
 	config.usage.serviceinfo_fontsize = ConfigSelectionNumber(default=0, stepwidth=1, min=-8, max=10, wraparound=True)
+	config.usage.serviceinfo_fontsize.addNotifier(refreshServiceList, initial_call=False)
 
 	choicelist = [(0, _("Use skin default"))] + [(i, _("%d") % i) for i in range(5, 41)]
 	config.usage.servicelist_number_of_services = ConfigSelection(default=0, choices=choicelist)
-	config.usage.servicelist_number_of_services.addNotifier(refreshServiceList)
+	config.usage.servicelist_number_of_services.addNotifier(refreshServiceList, initial_call=False)
 
 	config.usage.multiepg_ask_bouquet = ConfigYesNo(default=False)
 
@@ -294,8 +297,8 @@ def InitUsageConfig():
 		('percright', _("Percentage right")),
 		('no', _("No"))])
 	config.usage.show_channel_numbers_in_servicelist = ConfigYesNo(default=True)
-	config.usage.show_event_progress_in_servicelist.addNotifier(refreshServiceList)
-	config.usage.show_channel_numbers_in_servicelist.addNotifier(refreshServiceList)
+	config.usage.show_event_progress_in_servicelist.addNotifier(refreshServiceList, initial_call=False)
+	config.usage.show_channel_numbers_in_servicelist.addNotifier(refreshServiceList, initial_call=False)
 
 	config.usage.blinking_display_clock_during_recording = ConfigYesNo(default=False)
 
