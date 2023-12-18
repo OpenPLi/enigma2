@@ -1146,7 +1146,7 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 							EventProgressbarColor = m_color[eventForegroundSelected];
 						}
 						else
-							painter.setForegroundColor(gRGB(0xe7b53f));
+							painter.setForegroundColor(gRGB(0x787878));
 
 						if (serviceFallback && !selected && m_color_set[eventForegroundFallback]) // fallback receiver
 						{
@@ -1183,7 +1183,7 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 
 					//------------------------------------------------- Event name ------------------------------------------------------------------------------
 					if (m_has_next_event) {
-						ePtr<eTextPara> para = new eTextPara(eRect(0, 0, m_itemsize.width() - xoffs - m_items_distances - 15, m_itemheight/2));
+						ePtr<eTextPara> para = new eTextPara(eRect(0, 0, m_itemsize.width() - xoffs - m_items_distances - progressBarRect.width() - 15, m_itemheight/2));
 						para->setFont(m_element_font[celServiceInfo]);
 						para->renderString(text.c_str());
 						eRect bbox = para->getBoundBox();
@@ -1211,7 +1211,7 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 									EventProgressbarColor = m_color[eventNextForegroundSelected];
 								}
 								else
-									painter.setForegroundColor(gRGB(0xe7b53f));
+									painter.setForegroundColor(gRGB(0x787878));
 
 								if (serviceFallback && !selected && m_color_set[eventNextForegroundFallback]) // fallback receiver
 								{
@@ -1224,7 +1224,7 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 									EventProgressbarColor = m_color[eventNextForegroundSelectedFallback];
 								}
 							}
-							ePtr<eTextPara> paraNext = new eTextPara(eRect(0, 0, xlpos - service_name_end - m_items_distances, m_itemheight/2));
+							ePtr<eTextPara> paraNext = new eTextPara(eRect(0, 0, xlpos - xoffs - m_items_distances, m_itemheight/2));
 							paraNext->setFont(m_element_font[celServiceNextInfo]);
 							paraNext->renderString((m_next_title + next_event_name).c_str());
 							eRect bboxNext = paraNext->getBoundBox();
