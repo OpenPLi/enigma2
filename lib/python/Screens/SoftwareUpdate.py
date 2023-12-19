@@ -142,6 +142,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 	def getLatestImageTimestamp(self):
 		def gettime(url):
 			try:
+				print('[UpdatePlugin] Trying to fetch time from %s' % url)
 				return strftime("%Y-%m-%d %H:%M:%S", gmtime(timegm(urlopen("%s/Packages.gz" % url).info().getdate('Last-Modified')) - altzone))
 			except Exception as er:
 				print('[UpdatePlugin] Error in get timestamp', er)
