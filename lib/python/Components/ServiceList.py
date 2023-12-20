@@ -19,6 +19,15 @@ def refreshServiceList(configElement=None):
 		if servicelist:
 			servicelist.setMode()
 
+def redrawServiceList(configElement=None):
+	from Screens.InfoBar import InfoBar
+	InfoBarInstance = InfoBar.instance
+	if InfoBarInstance is not None:
+		servicelist = InfoBarInstance.servicelist
+		if servicelist:
+			servicelist.servicelist.setMode(servicelist.servicelist.mode)
+			servicelist.servicelist.resetRoot()
+
 
 class ServiceList(GUIComponent):
 	MODE_NORMAL = 0
