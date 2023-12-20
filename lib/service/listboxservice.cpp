@@ -1075,11 +1075,14 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 
 				if (!event_name.empty())
 				{
+					int pb_xpos = xoffs;
 					//--------------------------------------------------- Event Progressbar -----------------------------------------------------------------
 					if (progressBarRect.width() > 0) {
 						int pb_yoffs_corr = m_itemheight/2;
 						if (m_has_next_event) pb_yoffs_corr = 5;
-						int pb_xpos = m_has_next_event ? (m_itemsize.width() - 15 - progressBarRect.width()) : xoffs;
+						if (m_has_next_event) {
+							pb_xpos = m_itemsize.width() - 15 - progressBarRect.width();
+						}
 						int pb_ypos = offset.y() + pb_yoffs_corr + (m_itemheight/2 - m_progressbar_height - 2 * m_progressbar_border_width) / 2;
 						int pb_width = progressBarRect.width() - 2 * m_progressbar_border_width;
 						gRGB ProgressbarBorderColor = 0xdfdfdf;
@@ -1165,7 +1168,7 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 
 					//------------------------------------------------- Event name ------------------------------------------------------------------------------
 					if (m_has_next_event) {
-						ePtr<eTextPara> para = new eTextPara(eRect(0, 0, m_itemsize.width() - xoffs - m_items_distances - progressBarRect.width() - 15, m_itemheight/2));
+						ePtr<eTextPara> para = new eTextPara(eRect(0, 0, m_itemsize.width() - pb_xpos - m_items_distances - progressBarRect.width() - 15, m_itemheight/2));
 						para->setFont(m_element_font[celServiceInfo]);
 						para->renderString(text.c_str());
 						eRect bbox = para->getBoundBox();
