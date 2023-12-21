@@ -1168,7 +1168,7 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 
 					//------------------------------------------------- Event name ------------------------------------------------------------------------------
 					if (m_has_next_event) {
-						ePtr<eTextPara> para = new eTextPara(eRect(0, 0, m_itemsize.width() - pb_xpos - m_items_distances - progressBarRect.width() - 15, m_itemheight/2));
+						ePtr<eTextPara> para = new eTextPara(eRect(0, 0, pb_xpos - service_name_end - m_items_distances - 15, m_itemheight/2));
 						para->setFont(m_element_font[celServiceInfo]);
 						para->renderString(text.c_str());
 						eRect bbox = para->getBoundBox();
