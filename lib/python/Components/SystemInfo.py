@@ -13,6 +13,7 @@ class BoxInformation:
 	def __init__(self, root=""):
 		self.immutableList = []
 		self.boxInfo = {}
+		self.boxInfo["checksum"] = None
 		checksumcollectionstring = ""
 		file = root + "/usr/lib/enigma.info"
 		if fileExists(file):
@@ -27,7 +28,7 @@ class BoxInformation:
 					item, value = [x.strip() for x in line.split('=')]
 					self.immutableList.append(item)
 					self.boxInfo[item] = self.processValue(value)
-			if "checksum" in self.boxInfo and self.boxInfo["checksum"]:
+			if self.boxInfo["checksum"]:
 				print("[SystemInfo] Enigma information file data loaded into BoxInfo.")
 			else:
 				print("[SystemInfo] Enigma information file data loaded, but checksum failed.")
