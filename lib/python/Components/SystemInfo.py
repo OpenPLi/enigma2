@@ -18,7 +18,7 @@ class BoxInformation:
 		file = root + "/usr/lib/enigma.info"
 		if fileExists(file):
 			for line in open(file, 'r').readlines():
-				if line.strip().lower().startswith("checksum"):
+				if line.startswith("checksum="):
 					self.boxInfo["checksum"] = md5(bytearray(checksumcollectionstring, "UTF-8", errors="ignore")).hexdigest() == line.strip().split('=')[1]
 					break
 				checksumcollectionstring += line
