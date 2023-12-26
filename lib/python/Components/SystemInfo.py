@@ -123,8 +123,6 @@ def getBootdevice():
 
 
 model = BoxInfo.getItem("machine")
-print(model)
-device_name = open("/proc/stb/info/model").read().strip()
 
 SystemInfo["InDebugMode"] = eGetEnigmaDebugLvl() >= 4
 SystemInfo["CommonInterface"] = model in ("h9combo", "h9combose", "h10", "pulse4kmini") and 1 or eDVBCIInterfaces.getInstance().getNumOfSlots()
@@ -145,7 +143,7 @@ SystemInfo["LCDsymbol_timeshift"] = fileCheck("/proc/stb/lcd/symbol_timeshift")
 SystemInfo["LCDshow_symbols"] = (model.startswith("et9") or model in ("hd51", "vs1500")) and fileCheck("/proc/stb/lcd/show_symbols")
 SystemInfo["LCDsymbol_hdd"] = model in ("hd51", "vs1500") and fileCheck("/proc/stb/lcd/symbol_hdd")
 SystemInfo["FrontpanelDisplayGrayscale"] = fileExists("/dev/dbox/oled0")
-SystemInfo["DeepstandbySupport"] = device_name != "dm800"
+SystemInfo["DeepstandbySupport"] = model != "dm800"
 SystemInfo["Fan"] = fileCheck("/proc/stb/fp/fan")
 SystemInfo["FanPWM"] = SystemInfo["Fan"] and fileCheck("/proc/stb/fp/fan_pwm")
 SystemInfo["PowerLED"] = fileCheck("/proc/stb/power/powerled") or model in ("gbue4k", "gbquad4k") and fileCheck("/proc/stb/fp/led1_pattern")
@@ -230,7 +228,7 @@ SystemInfo["CanBTAudioDelay"] = fileCheck("/proc/stb/audio/btaudio_delay") or fi
 SystemInfo["BootDevice"] = getBootdevice()
 SystemInfo["NimExceptionVuSolo2"] = model == "vusolo2"
 SystemInfo["NimExceptionVuDuo2"] = model == "vuduo2"
-SystemInfo["NimExceptionDMM8000"] = device_name == "dm8000"
+SystemInfo["NimExceptionDMM8000"] = model == "dm8000"
 SystemInfo["FbcTunerPowerAlwaysOn"] = model in ("vusolo4k", "vuduo4k", "vuduo4kse", "vuultimo4k", "vuuno4k", "vuuno4kse")
 SystemInfo["HasPhysicalLoopthrough"] = ["Vuplus DVB-S NIM(AVL2108)", "GIGA DVB-S2 NIM (Internal)"]
 if model in ("et7500", "et8500"):
