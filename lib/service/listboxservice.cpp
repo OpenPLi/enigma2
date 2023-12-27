@@ -1295,14 +1295,16 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 			bool hasPicons = PyCallable_Check(m_GetPiconNameFunc);
 			bool isAlternativeNumberingMode = m_alternative_numbering;
 			std::string eventProgressConfig = m_progress_mode;
-			int serviceNameWidth = m_column_width > 0 && !isDirectory && !isMarker ? m_column_width : m_itemsize.width();
+			int serviceNameWidth = m_column_width > -1 && !isDirectory && !isMarker ? m_column_width : m_itemsize.width();
 			bool shouldCorrect = serviceNameWidth >= m_column_width - pixmap_system_size.width()*3;
 
-			if (m_servicetype_icon_mode == 2 && m_column_width > 0 && shouldCorrect) serviceNameWidth -= pixmap_system_size.width() + m_items_distances;
-			if (m_crypto_icon_mode == 2 && m_column_width > 0 && shouldCorrect) serviceNameWidth -= pixmap_crypto_size.width() + m_items_distances;
-			if (isRecorded && m_record_indicator_mode == 2 && m_column_width > 0 && shouldCorrect) serviceNameWidth -= pixmap_rec_size.width() + m_items_distances;
-			if ((m_servicetype_icon_mode == 2 || m_crypto_icon_mode == 2 || (isRecorded && m_record_indicator_mode == 2)) && m_column_width > 0)
+			if (m_servicetype_icon_mode == 2 && m_column_width > -1 && shouldCorrect) serviceNameWidth -= pixmap_system_size.width() + m_items_distances;
+			if (m_crypto_icon_mode == 2 && m_column_width > -1 && shouldCorrect) serviceNameWidth -= pixmap_crypto_size.width() + m_items_distances;
+			if (isRecorded && m_record_indicator_mode == 2 && m_column_width > -1 && shouldCorrect) serviceNameWidth -= pixmap_rec_size.width() + m_items_distances;
+			if ((m_servicetype_icon_mode == 2 || m_crypto_icon_mode == 2 || (isRecorded && m_record_indicator_mode == 2)) && m_column_width > -1)
 				serviceNameWidth -= m_items_distances;
+
+			if (serviceNameWidth < 0) serviceNameWidth = 0;
 
 			ePtr<eTextPara> paraServiceName = new eTextPara(eRect(0, 0, serviceNameWidth, m_itemheight));
 			paraServiceName->setFont(m_element_font[celServiceName]);
