@@ -131,7 +131,7 @@ def getBootdevice():
 	return dev
 
 
-model = BoxInfo.getItem("machine")
+model = BoxInfo.getItem("machine", default="unknown")
 
 SystemInfo["InDebugMode"] = eGetEnigmaDebugLvl() >= 4
 SystemInfo["CommonInterface"] = model in ("h9combo", "h9combose", "h10", "pulse4kmini") and 1 or eDVBCIInterfaces.getInstance().getNumOfSlots()
