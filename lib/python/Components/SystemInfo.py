@@ -35,20 +35,19 @@ class BoxInformation:
 			print("[SystemInfo] ERROR: %s is not available!  The system is unlikely to boot or operate correctly." % file)
 
 	def processValue(self, value):
-		if value is not None:
-			if value and value[0] in ("\"", "'") and value[-1] == value[0]:
-				return value[1:-1]
-			elif value.upper() == "NONE":
-				return None
-			elif value.upper() in ("FALSE", "NO", "OFF", "DISABLED"):
-				return False
-			elif value.upper() in ("TRUE", "YES", "ON", "ENABLED"):
-				return True
-			else:
-				try:
-					return eval(value)
-				except:
-					return value
+		if value and value[0] in ("\"", "'") and value[-1] == value[0]:
+			return value[1:-1]
+		elif value.upper() == "NONE":
+			return None
+		elif value.upper() in ("FALSE", "NO", "OFF", "DISABLED"):
+			return False
+		elif value.upper() in ("TRUE", "YES", "ON", "ENABLED"):
+			return True
+		else:
+			try:
+				return eval(value)
+			except:
+				return value
 
 	def getEnigmaInfoList(self):
 		return sorted(self.immutableList)
@@ -64,8 +63,7 @@ class BoxInformation:
 			return self.boxInfo[item]
 		elif item in SystemInfo:
 			return SystemInfo[item]
-		else:
-			return default
+		return default
 
 	def setItem(self, item, value, immutable=False, forceOverride=False):
 		if item in self.immutableList and not forceOverride:
