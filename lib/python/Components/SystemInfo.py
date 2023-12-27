@@ -36,20 +36,19 @@ class BoxInformation:
 		self.boxInfo = MappingProxyType(boxInfoCollector)
 
 	def processValue(self, value):
-		if value is not None:
-			if value and value[0] in ("\"", "'") and value[-1] == value[0]:
-				return value[1:-1]
-			elif value.upper() == "NONE":
-				return None
-			elif value.upper() in ("FALSE", "NO", "OFF", "DISABLED"):
-				return False
-			elif value.upper() in ("TRUE", "YES", "ON", "ENABLED"):
-				return True
-			else:
-				try:
-					return eval(value)
-				except:
-					return value
+		if value and value[0] in ("\"", "'") and value[-1] == value[0]:
+			return value[1:-1]
+		elif value.upper() == "NONE":
+			return None
+		elif value.upper() in ("FALSE", "NO", "OFF", "DISABLED"):
+			return False
+		elif value.upper() in ("TRUE", "YES", "ON", "ENABLED"):
+			return True
+		else:
+			try:
+				return eval(value)
+			except:
+				return value
 
 	def getEnigmaInfoList(self):
 		return sorted(self.boxInfo.keys())
@@ -67,8 +66,7 @@ class BoxInformation:
 			return self.boxInfoMutable[item]
 		elif item in SystemInfo:
 			return SystemInfo[item]
-		else:
-			return default
+		return default
 
 	def setItem(self, item, value, immutable=False, forceOverride=False):
 		print('*', item, value, immutable, forceOverride)
@@ -86,13 +84,13 @@ class BoxInformation:
 
 	def deleteItem(self, item, forceOverride=False):
 		if item in self.boxInfo:
-			if not forceOverride:
-				print("[BoxInfo] Error: Item '%s' is immutable and can not be deleted!" % item)
-			else:
+			if forceOverride:
 				boxInfoCollector = dict(self.boxInfo)
 				del boxInfoCollector[item]
 				self.boxInfo = MappingProxyType(boxInfoCollector)
 				return True
+			else:
+				print("[BoxInfo] Error: Item '%s' is immutable and can not be deleted!" % item)
 		if item in self.boxInfoMutable:
 			del self.boxInfoMutable[item]
 			return True
