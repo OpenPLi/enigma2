@@ -91,7 +91,7 @@ class SelectImage(Screen):
 
 		def checkModels(file):
 			for model in self.models:
-				if '-%s-' % model in file:
+				if any(x in file for x in ('-%s-' % model, '-%s_' % model, '-%s.' % model, '_%s-' % model, '_%s_' % model, '_%s.' % model)):
 					return True
 			return False
 
