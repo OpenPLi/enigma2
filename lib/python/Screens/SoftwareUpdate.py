@@ -4,7 +4,7 @@ from json import load
 from os import listdir
 from time import altzone, gmtime, strftime
 from urllib.request import urlopen
-import locale
+from email.utils import parsedate_to_datetime
 
 from enigma import eTimer, eDVBDB
 from Screens.ChoiceBox import ChoiceBox
@@ -144,12 +144,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 		def gettime(url):
 			try:
 				print('[UpdatePlugin] Trying to fetch time from %s' % url)
-				last_modified = urlopen("%s/Packages.gz" % url, timeout=1).headers['last-modified']
-				current_locale = locale.getlocale(locale.LC_MESSAGES)[0]
-				locale.setlocale(locale.LC_TIME, "en_EN.utf8")
-				last_modified = int(datetime.strptime(last_modified, '%a, %d %b %Y %H:%M:%S GMT').timestamp())
-				locale.setlocale(locale.LC_TIME, "%s.%s" % (current_locale, 'utf8'))
-				return strftime("%Y-%m-%d %H:%M:%S", gmtime(last_modified - altzone))
+				return strftime("%Y-%m-%d %H:%M:%S", gmtime(int(parsedate_to_datetime(urlopen("%s/Packages.gz" % url, timeout=1).headers['last-modified']).timestamp()) - altzone))
 			except Exception as er:
 				print('[UpdatePlugin] Error in get timestamp', er)
 				return ""
