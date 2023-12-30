@@ -428,7 +428,7 @@ int eMPEGStreamInformation::getStructureEntryFirst(off_t &offset, unsigned long 
 				// Move start of range to *be* the last test (+1 more may be too high!!)
 				i += step;
 				count -= step;
-			} 
+			}
 			else
 				// Keep start of range but change range to that below test
 				count = step;
