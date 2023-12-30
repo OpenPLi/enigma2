@@ -39,12 +39,6 @@ class BoxInformation:
 	def processValue(self, value):
 		if value and value[0] in ("\"", "'") and value[-1] == value[0]:
 			return value[1:-1]
-		elif value.upper() == "NONE":
-			return None
-		elif value.upper() in ("FALSE", "NO", "OFF", "DISABLED"):
-			return False
-		elif value.upper() in ("TRUE", "YES", "ON", "ENABLED"):
-			return True
 		else:
 			try:
 				return eval(value, {"__builtins__": {}}, {})
