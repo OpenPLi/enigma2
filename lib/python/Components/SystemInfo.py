@@ -6,6 +6,7 @@ from Tools.Directories import SCOPE_PLUGINS, fileCheck, fileExists, fileHas, pat
 
 SystemInfo = {}
 
+
 from Tools.Multiboot import getMultibootStartupDevice, getMultibootslots  # This import needs to be here to avoid a SystemInfo load loop!
 
 
@@ -46,7 +47,7 @@ class BoxInformation:
 			return True
 		else:
 			try:
-				return eval(value)
+				return eval(value, {"__builtins__": {}}, {})
 			except:
 				return value
 
