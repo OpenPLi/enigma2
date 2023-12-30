@@ -28,9 +28,9 @@ public:
 	int getNextBeginningWithChar(char c);
 	int getPrevMarkerPos();
 	int getNextMarkerPos();
-	int getCurrentSelectionIndex() { return m_cursor_number; }
+	int getCurrentSelectionIndex() { return cursorResolve(m_cursor_number); }
 	eSize getItemSize() { return m_itemsize; }
-	int getListSize() { return m_size; }
+	int getListSize() { return m_size_visible; }
 
 		/* support for marked services */
 	void initMarked();
@@ -63,6 +63,7 @@ public:
 		celServiceInfo, // "now" event
 		celServiceNextInfo, // "next" event
 		celServiceTypePixmap,
+		celServiceInfoRemainingTime,
 		celElements
 	};
 
@@ -110,10 +111,13 @@ public:
 	void setAlternativeNumberingMode(bool b) { m_alternative_numbering = b; }
 	void setProgressBarMode(std::string s) { m_progress_mode = s; }
 	void setAlternativeRecordMatching(bool b) { m_alternative_record_match = b; }
+	void setHasNextEvent(bool b) { m_has_next_event = b; }
 
+	void setNextTitle(const std::string &string) { m_next_title = string; }
+	void setTextTime(const std::string &string) { m_text_time = string; }
 	void setTextSeparator(const std::string &string) { m_separator = string; }
 	void setMarkerTextAlignment(const std::string &string) { m_marker_alignment = string; } // currently supports left and center
-	void setMarkerLineColor(const gRGB &col) {
+	void setMarkerLineColor(const gRGB &col) { 
 		m_markerline_color = col;
 		m_markerline_color_set = 1;
 	}
@@ -143,6 +147,10 @@ public:
 		serviceEventProgressbarBorderColor,
 		serviceEventProgressbarBorderColorSelected,
 		serviceRecorded,
+		eventRemainingForeground,
+		eventRemainingForegroundSelected,
+		eventRemainingForegroundFallback,
+		eventRemainingForegroundSelectedFallback,
 		colorElements
 	};
 
@@ -182,7 +190,7 @@ private:
 	list::iterator m_cursor, m_saved_cursor;
 
 	int m_cursor_number, m_saved_cursor_number;
-	int m_size;
+	int m_size, m_size_visible;
 
 	eSize m_itemsize;
 	ePtr<iServiceHandler> m_service_center;
@@ -217,7 +225,9 @@ private:
 	gRGB m_markerline_color;
 	int m_markerline_color_set;
 	bool m_alternative_record_match;
+	bool m_has_next_event;
 
+	std::string m_text_time;
 	std::string m_next_title;
 	std::string m_separator;
 	std::string m_marker_alignment;

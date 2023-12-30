@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-08 16:10+0100\n"
+"POT-Creation-Date: 2023-12-17 11:25+0100\n"
 "PO-Revision-Date: 2022-10-13 18:38+0200\n"
 "Last-Translator: Oriol Pellicer <oriol@elsud.org>\n"
 "Language-Team: angelodos angelo2807@hotmail.com\n"
@@ -1154,9 +1154,6 @@ msgstr "Arts / cultura (sense música, general)"
 msgid "Aruba"
 msgstr "Aruba"
 
-msgid "As defined by the skin"
-msgstr "Tal i com defineix la pell"
-
 #
 msgid "Ask user"
 msgstr "Pregunteu a l’usuari"
@@ -2167,16 +2164,19 @@ msgstr "Configureu com es construeixen els noms de fitxers."
 msgid "Configure how the fan should operate"
 msgstr "Configureu el funcionament del ventilador"
 
-msgid "Configure if and how crypto icons will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how crypto icons will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Configureu si i com es mostraran les icones crypto a la llista de selecció de canals."
 
 msgid "Configure if and how long the latest service in Picture in Picture mode will be remembered."
 msgstr "Configureu si i durant quant temps es recordarà l’últim servei en mode Picture."
 
-msgid "Configure if and how service type icons will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how service type icons will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Configureu si i com es mostraran les icones del tipus de servei a la llista de selecció de canals."
 
-msgid "Configure if and how the record indicator will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how the record indicator will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Configureu si i com es mostrarà l’indicador de registre a la llista de selecció de canals."
 
 msgid "Configure if and how wide columns will be shown in the channel selection list."
@@ -2903,6 +2903,9 @@ msgstr "Retardar mil·lisegons abans de començar el desplaçament del text a la
 msgid "Delay in miliseconds between scrolling characters on display."
 msgstr "Retardar mil·lisegons entre desplaçar els caràcters a la pantalla."
 
+msgid "Delay when closing a stream relay service before reallocating the tuner for another service. Using '0' is only recommended for boxes with multiple satellite tuners."
+msgstr ""
+
 #
 msgid "Delete"
 msgstr "Esborrar"
@@ -3572,6 +3575,13 @@ msgstr "Activa l’exploració ràpida automàtica"
 #, python-format
 msgid "Enable auto fastscan for %s"
 msgstr "Activa l’exploració ràpida automàtica per a %s"
+
+msgid "Enable blink functionality for some areas like record icon."
+msgstr ""
+
+#, fuzzy
+msgid "Enable blinking"
+msgstr "Habilita Virgin EPG"
 
 #
 msgid "Enable bluetooth audio"
@@ -5554,6 +5564,9 @@ msgstr "Luxemburguès"
 msgid "MB"
 msgstr "MB"
 
+msgid "MENU"
+msgstr ""
+
 msgid "MHz"
 msgstr "MHz"
 
@@ -6597,8 +6610,15 @@ msgstr "PMT PID"
 msgid "PPanel"
 msgstr "PPanel"
 
+msgid "PREVIOUS"
+msgstr ""
+
 msgid "PULSe 4K(mini)"
 msgstr "PULSe 4K(mini)"
+
+#, fuzzy
+msgid "PVR"
+msgstr "OVR"
 
 #
 msgid "Package list update"
@@ -7447,6 +7467,10 @@ msgstr "Front de Python per a /tmp/mmi.socket"
 
 msgid "Python version: "
 msgstr "Python versio:"
+
+#, fuzzy
+msgid "Pythonscript"
+msgstr "Shellscript"
 
 msgid "Qatar"
 msgstr "Qatar"
@@ -8787,6 +8811,11 @@ msgid "Service info - tuner setting values"
 msgstr "Informació de servei: valors de configuració del sintonitzador"
 
 #
+#, fuzzy
+msgid "Service info font size"
+msgstr "Informació del servei"
+
+#
 msgid ""
 "Service invalid!\n"
 "(Timeout reading PMT)"
@@ -8799,12 +8828,22 @@ msgid "Service name"
 msgstr "Nom del servei"
 
 #
+#, fuzzy
+msgid "Service name font size"
+msgstr "Nom del servei"
+
+#
 msgid ""
 "Service not found!\n"
 "(SID not found in PAT)"
 msgstr ""
 "Servei no trobat\n"
 "(SID no trobat a PAT)"
+
+#
+#, fuzzy
+msgid "Service number font size"
+msgstr "Mida de tipus de subtítol"
 
 msgid "Service reference"
 msgstr "Referència del servei"
@@ -8902,7 +8941,8 @@ msgstr "Definiu la contrasenya de l’OpenWebif des del vostre sintonitzador aut
 msgid "Set the port of the OpenWebif from your fallback tuner"
 msgstr "Definiu el port de l’OpenWebif des del vostre sintonitzador de reserva"
 
-msgid "Set the type of the progress indication in the channel selection screen."
+#, fuzzy
+msgid "Set the type of the progress indication in the channel selection screen (right alignment only available in single line mode)."
 msgstr "Definiu el tipus d’indicació de progrés a la pantalla de selecció del canal."
 
 msgid "Set time window to 1 hour"
@@ -9042,6 +9082,9 @@ msgstr "Mostra informació sobre cripto a infobar"
 
 msgid "Show detailed event info"
 msgstr "Mostra informació detallada sobre esdeveniments"
+
+msgid "Show disabled timers (local only)"
+msgstr ""
 
 #
 msgid "Show event details"
@@ -9307,10 +9350,6 @@ msgstr "Senzill"
 #
 msgid "Single EPG"
 msgstr "EPG senzill"
-
-#
-msgid "Single line mode"
-msgstr "Mode de línia única"
 
 #
 msgid "Single satellite"
@@ -9821,6 +9860,10 @@ msgstr "Posició guardada"
 
 msgid "Stream"
 msgstr "Stream"
+
+#, fuzzy
+msgid "Stream Relay delay"
+msgstr "Retard de desplaçament"
 
 msgid "Stream request"
 msgstr "Sol·licitud de stream"
@@ -10372,6 +10415,9 @@ msgstr ""
 #
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "Aquest suport DVD RW ja està formatat: la reforma del format esborrarà tot el contingut del disc."
+
+msgid "This allows you to change the font size relative to skin size, so 1 increases by 1 point size, and -1 decreases by 1 point size"
+msgstr ""
 
 msgid "This bouquet is protected by a parental control PIN"
 msgstr "Aquest ram està protegit per un passador de control parental"
@@ -10972,9 +11018,11 @@ msgstr "Tuvalu"
 msgid "Two"
 msgstr "Dos"
 
+#, fuzzy
 msgid "Two lines"
 msgstr "Dues línies"
 
+#, fuzzy
 msgid "Two lines and next event"
 msgstr "Dues línies i proper esdeveniment"
 
@@ -11255,6 +11303,10 @@ msgstr "Utilitzeu la numeració oficial de canals"
 #
 msgid "Use power measurement"
 msgstr "Utilitza les mesures de corrent"
+
+#, fuzzy
+msgid "Use skin default"
+msgstr "Instal · lat per defecte"
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "Utilitzeu l’assistent de xarxa per configurar l’adaptador de xarxa seleccionat"
@@ -12901,6 +12953,11 @@ msgid "menu"
 msgstr "menú"
 
 #
+#, fuzzy
+msgid "min"
+msgstr " min"
+
+#
 msgid "mins"
 msgstr "minuts"
 
@@ -13537,3 +13594,9 @@ msgstr "zappejat"
 
 msgid "®"
 msgstr "®"
+
+msgid "°E"
+msgstr ""
+
+msgid "°W"
+msgstr ""

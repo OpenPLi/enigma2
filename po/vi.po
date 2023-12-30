@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-08 16:10+0100\n"
+"POT-Creation-Date: 2023-12-17 11:25+0100\n"
 "PO-Revision-Date: 2021-08-02 09:19+0700\n"
 "Last-Translator: krong\n"
 "Language-Team: none\n"
@@ -1027,9 +1027,6 @@ msgstr "nghệ thuật / văn hóa (không có âm nhạc, nói chung)"
 msgid "Aruba"
 msgstr "Argentina"
 
-msgid "As defined by the skin"
-msgstr "Theo định nghĩa của da"
-
 msgid "Ask user"
 msgstr "Hỏi người dùng"
 
@@ -1940,16 +1937,19 @@ msgstr "Cấu hình cách ghi tên tập tin được xây dựng."
 msgid "Configure how the fan should operate"
 msgstr "Cấu hình cách quạt hoạt động"
 
-msgid "Configure if and how crypto icons will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how crypto icons will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Định cấu hình nếu và cách các biểu tượng tiền điện tử sẽ được hiển thị trong danh sách chọn kênh."
 
 msgid "Configure if and how long the latest service in Picture in Picture mode will be remembered."
 msgstr "Định cấu hình nếu và bao lâu dịch vụ mới nhất trong PiP sẽ được ghi nhớ."
 
-msgid "Configure if and how service type icons will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how service type icons will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Định cấu hình nếu và cách biểu tượng loại dịch vụ sẽ được hiển thị trong danh sách chọn kênh."
 
-msgid "Configure if and how the record indicator will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how the record indicator will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Định cấu hình nếu và cách chỉ báo bản ghi sẽ được hiển thị trong danh sách chọn kênh."
 
 msgid "Configure if and how wide columns will be shown in the channel selection list."
@@ -2631,6 +2631,9 @@ msgstr "Trì hoãn tính bằng mili giây trước khi bắt đầu cuộn văn
 msgid "Delay in miliseconds between scrolling characters on display."
 msgstr "Độ trễ tính bằng mili giây giữa các ký tự cuộn trên màn hình."
 
+msgid "Delay when closing a stream relay service before reallocating the tuner for another service. Using '0' is only recommended for boxes with multiple satellite tuners."
+msgstr ""
+
 msgid "Delete"
 msgstr "Xóa bỏ"
 
@@ -3215,6 +3218,13 @@ msgstr "Bật quét nhanh tự động"
 #, python-format
 msgid "Enable auto fastscan for %s"
 msgstr "Bật quét nhanh tự động cho%s"
+
+msgid "Enable blink functionality for some areas like record icon."
+msgstr ""
+
+#, fuzzy
+msgid "Enable blinking"
+msgstr "Kích hoạt Virgin EPG"
 
 #, fuzzy
 msgid "Enable bluetooth audio"
@@ -5024,6 +5034,9 @@ msgstr "Tiếng Luxembourg"
 msgid "MB"
 msgstr "B"
 
+msgid "MENU"
+msgstr ""
+
 msgid "MHz"
 msgstr ""
 
@@ -5952,9 +5965,16 @@ msgstr "PMT PID"
 msgid "PPanel"
 msgstr "Bảng điều khiển"
 
+msgid "PREVIOUS"
+msgstr ""
+
 #, fuzzy
 msgid "PULSe 4K(mini)"
 msgstr "PULSe 4K"
+
+#, fuzzy
+msgid "PVR"
+msgstr "OVR"
 
 msgid "Package list update"
 msgstr "Cập nhật danh sách gói"
@@ -6692,6 +6712,10 @@ msgstr "Giao diện trăn cho /tmp/mmi.socket"
 
 msgid "Python version: "
 msgstr "Phiên bản Python: "
+
+#, fuzzy
+msgid "Pythonscript"
+msgstr "Tập lệnh Shell"
 
 msgid "Qatar"
 msgstr "Qatar"
@@ -7865,6 +7889,10 @@ msgstr "Thông tin dịch vụ - bộ chỉnh giá trị trực tiếp"
 msgid "Service info - tuner setting values"
 msgstr "Thông tin dịch vụ - giá trị cài đặt bộ chỉnh"
 
+#, fuzzy
+msgid "Service info font size"
+msgstr "Thông tin dịch vụ"
+
 msgid ""
 "Service invalid!\n"
 "(Timeout reading PMT)"
@@ -7875,12 +7903,20 @@ msgstr ""
 msgid "Service name"
 msgstr "Tên dịch vụ"
 
+#, fuzzy
+msgid "Service name font size"
+msgstr "Tên dịch vụ"
+
 msgid ""
 "Service not found!\n"
 "(SID not found in PAT)"
 msgstr ""
 "Không tìm thấy dịch vụ!\n"
 "(Không tìm thấy SID trong PAT)"
+
+#, fuzzy
+msgid "Service number font size"
+msgstr "Cỡ chữ phụ đề"
 
 msgid "Service reference"
 msgstr "Tham khảo dịch vụ"
@@ -7971,7 +8007,8 @@ msgstr "Đặt mật khẩu của OpenWebif từ bộ điều chỉnh dự phòn
 msgid "Set the port of the OpenWebif from your fallback tuner"
 msgstr "Đặt cổng của OpenWebif từ bộ điều chỉnh dự phòng của bạn"
 
-msgid "Set the type of the progress indication in the channel selection screen."
+#, fuzzy
+msgid "Set the type of the progress indication in the channel selection screen (right alignment only available in single line mode)."
 msgstr "Đặt loại chỉ báo tiến trình trong màn hình chọn kênh."
 
 msgid "Set time window to 1 hour"
@@ -8102,6 +8139,9 @@ msgstr "Hiển thị thông tin về t điện tử trong infobar"
 
 msgid "Show detailed event info"
 msgstr "Hiển thị thông tin chi tiết sự kiện"
+
+msgid "Show disabled timers (local only)"
+msgstr ""
 
 msgid "Show event details"
 msgstr "Hiển thị chi tiết sự kiện"
@@ -8346,9 +8386,6 @@ msgstr "Đơn"
 
 msgid "Single EPG"
 msgstr "EPG đơn"
-
-msgid "Single line mode"
-msgstr "Chế độ dòng đơn"
 
 msgid "Single satellite"
 msgstr "Vệ tinh đơn"
@@ -8809,6 +8846,10 @@ msgstr "Vị trí lưu trữ"
 
 msgid "Stream"
 msgstr "Suối"
+
+#, fuzzy
+msgid "Stream Relay delay"
+msgstr "Độ trễ cuộn"
 
 msgid "Stream request"
 msgstr "Yêu cầu truyền phát"
@@ -9313,6 +9354,9 @@ msgstr ""
 
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "Phương tiện DVD RW này đã được định dạng - định dạng lại sẽ xóa tất cả nội dung trên đĩa."
+
+msgid "This allows you to change the font size relative to skin size, so 1 increases by 1 point size, and -1 decreases by 1 point size"
+msgstr ""
 
 msgid "This bouquet is protected by a parental control PIN"
 msgstr "Gói kênh này được bảo vệ bởi một chốt kiểm soát của cha mẹ"
@@ -9856,9 +9900,11 @@ msgstr "Tuvalu"
 msgid "Two"
 msgstr "Hai"
 
+#, fuzzy
 msgid "Two lines"
 msgstr "Hai dòng"
 
+#, fuzzy
 msgid "Two lines and next event"
 msgstr "Hai dòng và sự kiện tiếp theo"
 
@@ -10114,6 +10160,10 @@ msgstr "Sử dụng vị trí teletext gốc"
 
 msgid "Use power measurement"
 msgstr "Sử dụng đo năng lượng"
+
+#, fuzzy
+msgid "Use skin default"
+msgstr "Đặt mặc định"
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "Sử dụng trình hướng dẫn mạng để định cấu hình bộ điều hợp mạng đã chọn"
@@ -11628,6 +11678,10 @@ msgstr "y học / sinh lý / tâm lý"
 msgid "menu"
 msgstr "menu chính"
 
+#, fuzzy
+msgid "min"
+msgstr " min"
+
 msgid "mins"
 msgstr "phút"
 
@@ -12202,3 +12256,9 @@ msgstr "hạ gục"
 
 msgid "®"
 msgstr "®"
+
+msgid "°E"
+msgstr ""
+
+msgid "°W"
+msgstr ""

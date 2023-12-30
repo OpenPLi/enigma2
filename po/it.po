@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPLi-enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-08 16:10+0100\n"
+"POT-Creation-Date: 2023-12-17 11:25+0100\n"
 "PO-Revision-Date: 2020-05-16 18:46+0200\n"
 "Last-Translator: Gringo <openpli@tiscali.it>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -1059,9 +1059,6 @@ msgstr "Arte/Cultura (generiche, no musica)"
 msgid "Aruba"
 msgstr "Aruba"
 
-msgid "As defined by the skin"
-msgstr "Come definito nella skin"
-
 msgid "Ask user"
 msgstr "Chiedere"
 
@@ -1962,16 +1959,19 @@ msgstr "Impostare la composizione dei nomi dei file delle registrazioni."
 msgid "Configure how the fan should operate"
 msgstr "Impostare il funzionamento della ventola"
 
-msgid "Configure if and how crypto icons will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how crypto icons will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Impostare se e come visualizzare le icone di trasmissione codificata nella lista di selezione dei canali."
 
 msgid "Configure if and how long the latest service in Picture in Picture mode will be remembered."
 msgstr "Impostare se e per quanto tempo deve essere ricordato l'ultimo canale del PIP."
 
-msgid "Configure if and how service type icons will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how service type icons will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Impostare se e come visualizzare le icone del tipo di canale nella lista di selezione dei canali."
 
-msgid "Configure if and how the record indicator will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how the record indicator will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Impostare se e come visualizzare l'indicatore di registrazione in corso nella lista di selezione dei canali."
 
 msgid "Configure if and how wide columns will be shown in the channel selection list."
@@ -2656,6 +2656,9 @@ msgstr "Ritardo (ms) prima dell'inizio dello scorrimento del testo sullo schermo
 msgid "Delay in miliseconds between scrolling characters on display."
 msgstr "Ritardo (ms) tra i caratteri scorrevoli sullo schermo."
 
+msgid "Delay when closing a stream relay service before reallocating the tuner for another service. Using '0' is only recommended for boxes with multiple satellite tuners."
+msgstr ""
+
 msgid "Delete"
 msgstr "Eliminare"
 
@@ -3250,6 +3253,13 @@ msgstr "Abilitare la ricerca veloce automatica"
 #, fuzzy, python-format
 msgid "Enable auto fastscan for %s"
 msgstr "Abilitare la scansione veloce per %s"
+
+msgid "Enable blink functionality for some areas like record icon."
+msgstr ""
+
+#, fuzzy
+msgid "Enable blinking"
+msgstr "Abilitare l'EPG Virgin"
 
 #, fuzzy
 msgid "Enable bluetooth audio"
@@ -5076,6 +5086,9 @@ msgstr "Lussemburghese"
 msgid "MB"
 msgstr "B"
 
+msgid "MENU"
+msgstr ""
+
 msgid "MHz"
 msgstr ""
 
@@ -6014,7 +6027,13 @@ msgstr "PID PMT"
 msgid "PPanel"
 msgstr "PPanel"
 
+msgid "PREVIOUS"
+msgstr ""
+
 msgid "PULSe 4K(mini)"
+msgstr ""
+
+msgid "PVR"
 msgstr ""
 
 msgid "Package list update"
@@ -6756,6 +6775,10 @@ msgstr "Interfaccia Python per /tmp/mmi.socket"
 
 msgid "Python version: "
 msgstr "Versione Python: "
+
+#, fuzzy
+msgid "Pythonscript"
+msgstr "Script di shell"
 
 msgid "Qatar"
 msgstr "Qatar"
@@ -7941,6 +7964,10 @@ msgstr "Informazioni canale - Valori attuali del sintonizzatore"
 msgid "Service info - tuner setting values"
 msgstr "Informazioni canale - Valori configurazione del sintonizzatore"
 
+#, fuzzy
+msgid "Service info font size"
+msgstr "Informazioni canale"
+
 msgid ""
 "Service invalid!\n"
 "(Timeout reading PMT)"
@@ -7951,12 +7978,20 @@ msgstr ""
 msgid "Service name"
 msgstr "Nome del canale"
 
+#, fuzzy
+msgid "Service name font size"
+msgstr "Nome del canale"
+
 msgid ""
 "Service not found!\n"
 "(SID not found in PAT)"
 msgstr ""
 "Canale non trovato!\n"
 "(SID non trovato nel Program Association Table PAT)"
+
+#, fuzzy
+msgid "Service number font size"
+msgstr "Dimensione del carattere dei sottotitoli"
 
 msgid "Service reference"
 msgstr "Dati del canale"
@@ -8047,7 +8082,8 @@ msgstr "Impostare la password dal tuo OpenWebif per il sintonizzatore di fallbac
 msgid "Set the port of the OpenWebif from your fallback tuner"
 msgstr "Impostare la porta dal tuo OpenWebif per il sintonizzatore di fallback"
 
-msgid "Set the type of the progress indication in the channel selection screen."
+#, fuzzy
+msgid "Set the type of the progress indication in the channel selection screen (right alignment only available in single line mode)."
 msgstr "Selezionare il tipo di indicatore di avanzamento da visualizzare nella schermata di selezione dei canali."
 
 msgid "Set time window to 1 hour"
@@ -8178,6 +8214,9 @@ msgstr "Mostrare le informazioni sulla codifica nell'infobar"
 
 msgid "Show detailed event info"
 msgstr "Mostrare le informazioni dettagliate sull'evento"
+
+msgid "Show disabled timers (local only)"
+msgstr ""
 
 msgid "Show event details"
 msgstr "Mostrare i dettagli dell'evento"
@@ -8425,10 +8464,6 @@ msgstr "Singolo"
 
 msgid "Single EPG"
 msgstr "EPG singolo"
-
-#, fuzzy
-msgid "Single line mode"
-msgstr "Selezionare la modalità video"
 
 msgid "Single satellite"
 msgstr "Satellite singolo"
@@ -8891,6 +8926,10 @@ msgstr "Posizione memorizzata"
 
 msgid "Stream"
 msgstr "Trasmettere"
+
+#, fuzzy
+msgid "Stream Relay delay"
+msgstr "Ritardo di scorrimento"
 
 msgid "Stream request"
 msgstr "Richiesta di trasmissione"
@@ -9400,6 +9439,9 @@ msgstr ""
 
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "Il DVD-RW è già formattato - una nuova formattazione cancellerà tutto il contenuto del disco."
+
+msgid "This allows you to change the font size relative to skin size, so 1 increases by 1 point size, and -1 decreases by 1 point size"
+msgstr ""
 
 msgid "This bouquet is protected by a parental control PIN"
 msgstr "Questo bouquet è protetto con il PIN del Controllo genitori"
@@ -10217,6 +10259,10 @@ msgstr "Utilizzare la posizione originale del televideo"
 
 msgid "Use power measurement"
 msgstr "Utilizzare la misurazione della potenza"
+
+#, fuzzy
+msgid "Use skin default"
+msgstr "Ripristinare i valori"
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "Utilizzare la procedura guidata per configurare la scheda di rete selezionata"
@@ -11744,6 +11790,10 @@ msgstr "Medicina/Fisiologia/Psicologia"
 msgid "menu"
 msgstr "Menu"
 
+#, fuzzy
+msgid "min"
+msgstr " min"
+
 msgid "mins"
 msgstr "min"
 
@@ -12321,3 +12371,9 @@ msgstr "Cambiato!"
 
 msgid "®"
 msgstr "®"
+
+msgid "°E"
+msgstr ""
+
+msgid "°W"
+msgstr ""

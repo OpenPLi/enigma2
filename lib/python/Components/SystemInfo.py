@@ -1,12 +1,102 @@
 import re
-
+from hashlib import md5
+from types import MappingProxyType
 from enigma import Misc_Options, eDVBCIInterfaces, eDVBResourceManager, eGetEnigmaDebugLvl
 from Tools.Directories import SCOPE_PLUGINS, fileCheck, fileExists, fileHas, pathExists, resolveFilename
-from Tools.HardwareInfo import HardwareInfo
 
 SystemInfo = {}
 
 from Tools.Multiboot import getMultibootStartupDevice, getMultibootslots  # This import needs to be here to avoid a SystemInfo load loop!
+
+
+class BoxInformation:
+	def __init__(self, root=""):
+		boxInfoCollector = {}
+		self.boxInfoMutable = {}
+		boxInfoCollector["checksum"] = None
+		checksumcollectionstring = ""
+		file = root + "/usr/lib/enigma.info"
+		if fileExists(file):
+			for line in open(file, 'r').readlines():
+				if line.startswith("checksum="):
+					boxInfoCollector["checksum"] = md5(bytearray(checksumcollectionstring, "UTF-8", errors="ignore")).hexdigest() == line.strip().split('=')[1]
+					break
+				checksumcollectionstring += line
+				if line.startswith("#") or line.strip() == "":
+					continue
+				if '=' in line:
+					item, value = [x.strip() for x in line.split('=')]
+					boxInfoCollector[item] = self.processValue(value)
+			if boxInfoCollector["checksum"]:
+				print("[SystemInfo] Enigma information file data loaded into BoxInfo.")
+			else:
+				print("[SystemInfo] Enigma information file data loaded, but checksum failed.")
+		else:
+			print("[SystemInfo] ERROR: %s is not available!  The system is unlikely to boot or operate correctly." % file)
+		self.boxInfo = MappingProxyType(boxInfoCollector)
+
+	def processValue(self, value):
+		if value and value[0] in ("\"", "'") and value[-1] == value[0]:
+			return value[1:-1]
+		elif value.upper() == "NONE":
+			return None
+		elif value.upper() in ("FALSE", "NO", "OFF", "DISABLED"):
+			return False
+		elif value.upper() in ("TRUE", "YES", "ON", "ENABLED"):
+			return True
+		else:
+			try:
+				return eval(value)
+			except:
+				return value
+
+	def getEnigmaInfoList(self):
+		return sorted(self.boxInfo.keys())
+
+	def getEnigmaConfList(self):  # not used by us
+		return []
+
+	def getItemsList(self):
+		return sorted({**self.boxInfo, **self.boxInfoMutable}.keys())
+
+	def getItem(self, item, default=None):
+		if item in self.boxInfo:
+			return self.boxInfo[item]
+		elif item in self.boxInfoMutable:
+			return self.boxInfoMutable[item]
+		elif item in SystemInfo:
+			return SystemInfo[item]
+		return default
+
+	def setItem(self, item, value, immutable=False, forceOverride=False):
+		print('*', item, value, immutable, forceOverride)
+		if item in self.boxInfo and not forceOverride:
+			print("[BoxInfo] Error: Item '%s' is immutable and can not be %s!" % (item, "changed" if item in self.boxInfo else "added"))
+			return False
+		if immutable:
+			boxInfoCollector = dict(self.boxInfo)
+			boxInfoCollector[item] = value
+			self.boxInfo = MappingProxyType(boxInfoCollector)
+		else:
+			self.boxInfoMutable[item] = value
+		return True
+
+	def deleteItem(self, item, forceOverride=False):
+		if item in self.boxInfo:
+			if forceOverride:
+				boxInfoCollector = dict(self.boxInfo)
+				del boxInfoCollector[item]
+				self.boxInfo = MappingProxyType(boxInfoCollector)
+				return True
+			else:
+				print("[BoxInfo] Error: Item '%s' is immutable and can not be deleted!" % item)
+		if item in self.boxInfoMutable:
+			del self.boxInfoMutable[item]
+			return True
+
+
+BoxInfo = BoxInformation()
+
 
 # Parse the boot commandline.
 #
@@ -41,7 +131,8 @@ def getBootdevice():
 	return dev
 
 
-model = HardwareInfo().get_device_model()
+model = BoxInfo.getItem("machine", default="unknown")
+
 SystemInfo["InDebugMode"] = eGetEnigmaDebugLvl() >= 4
 SystemInfo["CommonInterface"] = model in ("h9combo", "h9combose", "h10", "pulse4kmini") and 1 or eDVBCIInterfaces.getInstance().getNumOfSlots()
 SystemInfo["CommonInterfaceCIDelay"] = fileCheck("/proc/stb/tsmux/rmx_delay")
@@ -61,7 +152,7 @@ SystemInfo["LCDsymbol_timeshift"] = fileCheck("/proc/stb/lcd/symbol_timeshift")
 SystemInfo["LCDshow_symbols"] = (model.startswith("et9") or model in ("hd51", "vs1500")) and fileCheck("/proc/stb/lcd/show_symbols")
 SystemInfo["LCDsymbol_hdd"] = model in ("hd51", "vs1500") and fileCheck("/proc/stb/lcd/symbol_hdd")
 SystemInfo["FrontpanelDisplayGrayscale"] = fileExists("/dev/dbox/oled0")
-SystemInfo["DeepstandbySupport"] = HardwareInfo().get_device_name() != "dm800"
+SystemInfo["DeepstandbySupport"] = model != "dm800"
 SystemInfo["Fan"] = fileCheck("/proc/stb/fp/fan")
 SystemInfo["FanPWM"] = SystemInfo["Fan"] and fileCheck("/proc/stb/fp/fan_pwm")
 SystemInfo["PowerLED"] = fileCheck("/proc/stb/power/powerled") or model in ("gbue4k", "gbquad4k") and fileCheck("/proc/stb/fp/led1_pattern")
@@ -108,8 +199,8 @@ SystemInfo["HasHDMIpreemphasis"] = fileCheck("/proc/stb/hdmi/preemphasis")
 SystemInfo["HasColorimetry"] = fileCheck("/proc/stb/video/hdmi_colorimetry")
 SystemInfo["HasHdrType"] = fileCheck("/proc/stb/video/hdmi_hdrtype")
 SystemInfo["HasScaler_sharpness"] = pathExists("/proc/stb/vmpeg/0/pep_scaler_sharpness")
-SystemInfo["HasHDMIin"] = model in ("vuduo4k", "vuduo4kse", "vuultimo4k", "vuuno4kse", "gbquad4k", "hd2400", "et10000")
-SystemInfo["HasHDMI-CEC"] = HardwareInfo().has_hdmi() and fileExists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/HdmiCEC/plugin.pyc")) and (fileExists("/dev/cec0") or fileExists("/dev/hdmi_cec") or fileExists("/dev/misc/hdmi_cec0"))
+SystemInfo["HasHDMIin"] = BoxInfo.getItem("dmifhdin") or BoxInfo.getItem("hdmihdin")
+SystemInfo["HasHDMI-CEC"] = BoxInfo.getItem("hdmi") and fileExists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/HdmiCEC/plugin.pyc")) and (fileExists("/dev/cec0") or fileExists("/dev/hdmi_cec") or fileExists("/dev/misc/hdmi_cec0"))
 SystemInfo["HasYPbPr"] = model in ("dm8000", "et5000", "et6000", "et6500", "et9000", "et9200", "et9500", "et10000", "formuler1", "mbtwinplus", "spycat", "vusolo", "vuduo", "vuduo2", "vuultimo")
 SystemInfo["HasScart"] = model in ("dm8000", "et4000", "et6500", "et8000", "et9000", "et9200", "et9500", "et10000", "formuler1", "hd1100", "hd1200", "hd1265", "hd2400", "vusolo", "vusolo2", "vuduo", "vuduo2", "vuultimo", "vuuno", "xp1000")
 SystemInfo["HasSVideo"] = model in ("dm8000")
@@ -146,7 +237,7 @@ SystemInfo["CanBTAudioDelay"] = fileCheck("/proc/stb/audio/btaudio_delay") or fi
 SystemInfo["BootDevice"] = getBootdevice()
 SystemInfo["NimExceptionVuSolo2"] = model == "vusolo2"
 SystemInfo["NimExceptionVuDuo2"] = model == "vuduo2"
-SystemInfo["NimExceptionDMM8000"] = HardwareInfo().get_device_name() == "dm8000"
+SystemInfo["NimExceptionDMM8000"] = model == "dm8000"
 SystemInfo["FbcTunerPowerAlwaysOn"] = model in ("vusolo4k", "vuduo4k", "vuduo4kse", "vuultimo4k", "vuuno4k", "vuuno4kse")
 SystemInfo["HasPhysicalLoopthrough"] = ["Vuplus DVB-S NIM(AVL2108)", "GIGA DVB-S2 NIM (Internal)"]
 if model in ("et7500", "et8500"):

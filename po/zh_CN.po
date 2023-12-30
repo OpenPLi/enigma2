@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-08 16:10+0100\n"
+"POT-Creation-Date: 2023-12-17 11:25+0100\n"
 "PO-Revision-Date: 2021-07-31 17:00+0800\n"
 "Last-Translator: 孤独之剑 <haotzyy1970@yahoo.com>\n"
 "Language-Team: 孤独之剑 <haotzyy1970@yahoo.com>\n"
@@ -1046,9 +1046,6 @@ msgstr "艺术/文化（不包括音乐,传统的）"
 msgid "Aruba"
 msgstr "阿鲁巴"
 
-msgid "As defined by the skin"
-msgstr "作为皮肤默认值"
-
 msgid "Ask user"
 msgstr "询问用户"
 
@@ -1959,16 +1956,19 @@ msgstr "配置录制文件名的命名规则."
 msgid "Configure how the fan should operate"
 msgstr "配置散热风扇如何执行动作"
 
-msgid "Configure if and how crypto icons will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how crypto icons will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "配置频道选择列表内是否显示加密图标以及显示时长."
 
 msgid "Configure if and how long the latest service in Picture in Picture mode will be remembered."
 msgstr "配置是否记住画中画模式下的频道以及记住的时长."
 
-msgid "Configure if and how service type icons will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how service type icons will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "配置频道选择列表内是否显示频道类型图标."
 
-msgid "Configure if and how the record indicator will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how the record indicator will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "配置频道选项列表里是否以及怎样显示录制指示器."
 
 msgid "Configure if and how wide columns will be shown in the channel selection list."
@@ -2650,6 +2650,9 @@ msgstr "开始文字滚动显示前的延迟时间（毫秒）"
 msgid "Delay in miliseconds between scrolling characters on display."
 msgstr "字符滚动显示时字符间的延迟时间."
 
+msgid "Delay when closing a stream relay service before reallocating the tuner for another service. Using '0' is only recommended for boxes with multiple satellite tuners."
+msgstr ""
+
 msgid "Delete"
 msgstr "删除"
 
@@ -3231,6 +3234,13 @@ msgstr "启用自动快速扫描"
 #, python-format
 msgid "Enable auto fastscan for %s"
 msgstr "为 %s 启用自动快速扫描"
+
+msgid "Enable blink functionality for some areas like record icon."
+msgstr ""
+
+#, fuzzy
+msgid "Enable blinking"
+msgstr "启用原始EPG"
 
 #, fuzzy
 msgid "Enable bluetooth audio"
@@ -5038,6 +5048,9 @@ msgstr "卢森堡语"
 msgid "MB"
 msgstr "B"
 
+msgid "MENU"
+msgstr ""
+
 msgid "MHz"
 msgstr ""
 
@@ -5966,9 +5979,16 @@ msgstr "节目映射表PID"
 msgid "PPanel"
 msgstr "ppanel面板"
 
+msgid "PREVIOUS"
+msgstr ""
+
 #, fuzzy
 msgid "PULSe 4K(mini)"
 msgstr "脉冲4K"
+
+#, fuzzy
+msgid "PVR"
+msgstr "OVR"
 
 msgid "Package list update"
 msgstr "更新软件列表"
@@ -6706,6 +6726,10 @@ msgstr "Python的前端/tmp/mmi.socket"
 
 msgid "Python version: "
 msgstr "Python版本: "
+
+#, fuzzy
+msgid "Pythonscript"
+msgstr "外壳脚本"
 
 msgid "Qatar"
 msgstr "卡塔尔"
@@ -7882,6 +7906,10 @@ msgstr "频道信息-调谐器当前值"
 msgid "Service info - tuner setting values"
 msgstr "频道信息-调谐器设定值"
 
+#, fuzzy
+msgid "Service info font size"
+msgstr "频道信息"
+
 msgid ""
 "Service invalid!\n"
 "(Timeout reading PMT)"
@@ -7892,12 +7920,20 @@ msgstr ""
 msgid "Service name"
 msgstr "频道名称"
 
+#, fuzzy
+msgid "Service name font size"
+msgstr "频道名称"
+
 msgid ""
 "Service not found!\n"
 "(SID not found in PAT)"
 msgstr ""
 "频道未找到!\n"
 "(在PAT中找不以SID)"
+
+#, fuzzy
+msgid "Service number font size"
+msgstr "字幕字体大小"
 
 msgid "Service reference"
 msgstr "频道参考"
@@ -7988,7 +8024,8 @@ msgstr "从备用调谐器设置OpenWebif的密码"
 msgid "Set the port of the OpenWebif from your fallback tuner"
 msgstr "从备用调谐器设置OpenWebif的端口"
 
-msgid "Set the type of the progress indication in the channel selection screen."
+#, fuzzy
+msgid "Set the type of the progress indication in the channel selection screen (right alignment only available in single line mode)."
 msgstr "设置频道选项窗内进度指示器的类型."
 
 msgid "Set time window to 1 hour"
@@ -8119,6 +8156,9 @@ msgstr "在信息栏显示加密信息"
 
 msgid "Show detailed event info"
 msgstr "显示事件详细信息"
+
+msgid "Show disabled timers (local only)"
+msgstr ""
 
 msgid "Show event details"
 msgstr "显示事件详细内容"
@@ -8363,9 +8403,6 @@ msgstr "单个"
 
 msgid "Single EPG"
 msgstr "单个EPG"
-
-msgid "Single line mode"
-msgstr "单行模式"
 
 msgid "Single satellite"
 msgstr "单颗卫星"
@@ -8827,6 +8864,10 @@ msgstr "存贮位置"
 
 msgid "Stream"
 msgstr "流媒体"
+
+#, fuzzy
+msgid "Stream Relay delay"
+msgstr "滚动延迟"
 
 msgid "Stream request"
 msgstr "流请求"
@@ -9331,6 +9372,9 @@ msgstr ""
 
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "这张DVD RW已经格式化过,再次格式化将删除所有文件."
+
+msgid "This allows you to change the font size relative to skin size, so 1 increases by 1 point size, and -1 decreases by 1 point size"
+msgstr ""
 
 msgid "This bouquet is protected by a parental control PIN"
 msgstr "此频道受家长控制"
@@ -9874,9 +9918,11 @@ msgstr "图瓦卢"
 msgid "Two"
 msgstr "二"
 
+#, fuzzy
 msgid "Two lines"
 msgstr "双行模式"
 
+#, fuzzy
 msgid "Two lines and next event"
 msgstr "两行和下一个事件"
 
@@ -10135,6 +10181,10 @@ msgstr "使用原始图文位置"
 
 msgid "Use power measurement"
 msgstr "使用功率测量"
+
+#, fuzzy
+msgid "Use skin default"
+msgstr "设为默认"
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "使用网络向导配置所选网络适配器"
@@ -11649,6 +11699,10 @@ msgstr "医学/生理学/心理学"
 msgid "menu"
 msgstr "菜单"
 
+#, fuzzy
+msgid "min"
+msgstr " 分钟"
+
 msgid "mins"
 msgstr "分钟"
 
@@ -12224,3 +12278,9 @@ msgstr "转自"
 
 msgid "®"
 msgstr "®"
+
+msgid "°E"
+msgstr ""
+
+msgid "°W"
+msgstr ""

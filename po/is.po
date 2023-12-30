@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-08 16:10+0100\n"
+"POT-Creation-Date: 2023-12-17 11:25+0100\n"
 "PO-Revision-Date: 2020-05-16 18:44+0200\n"
 "Last-Translator: Baldur <bsveinsson@gmail.com>\n"
 "Language-Team: Polar Team/LT Team <baddi@oreind.is>\n"
@@ -1151,9 +1151,6 @@ msgstr ""
 msgid "Aruba"
 msgstr ""
 
-msgid "As defined by the skin"
-msgstr ""
-
 msgid "Ask user"
 msgstr "Spyrja notanda"
 
@@ -2109,16 +2106,16 @@ msgstr ""
 msgid "Configure how the fan should operate"
 msgstr ""
 
-msgid "Configure if and how crypto icons will be shown in the channel selection list."
+msgid "Configure if and how crypto icons will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr ""
 
 msgid "Configure if and how long the latest service in Picture in Picture mode will be remembered."
 msgstr ""
 
-msgid "Configure if and how service type icons will be shown in the channel selection list."
+msgid "Configure if and how service type icons will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr ""
 
-msgid "Configure if and how the record indicator will be shown in the channel selection list."
+msgid "Configure if and how the record indicator will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr ""
 
 msgid "Configure if and how wide columns will be shown in the channel selection list."
@@ -2856,6 +2853,9 @@ msgstr ""
 msgid "Delay in miliseconds between scrolling characters on display."
 msgstr ""
 
+msgid "Delay when closing a stream relay service before reallocating the tuner for another service. Using '0' is only recommended for boxes with multiple satellite tuners."
+msgstr ""
+
 #
 msgid "Delete"
 msgstr "Eyða"
@@ -3541,6 +3541,12 @@ msgstr ""
 
 #, python-format
 msgid "Enable auto fastscan for %s"
+msgstr ""
+
+msgid "Enable blink functionality for some areas like record icon."
+msgstr ""
+
+msgid "Enable blinking"
 msgstr ""
 
 #
@@ -5587,6 +5593,9 @@ msgstr ""
 msgid "MB"
 msgstr "B"
 
+msgid "MENU"
+msgstr ""
+
 msgid "MHz"
 msgstr ""
 
@@ -6680,7 +6689,13 @@ msgstr "PMT PID"
 msgid "PPanel"
 msgstr ""
 
+msgid "PREVIOUS"
+msgstr ""
+
 msgid "PULSe 4K(mini)"
+msgstr ""
+
+msgid "PVR"
 msgstr ""
 
 #
@@ -7551,6 +7566,9 @@ msgid "Python frontend for /tmp/mmi.socket"
 msgstr "Python framendi fyrir /tmp/mmi.socket"
 
 msgid "Python version: "
+msgstr ""
+
+msgid "Pythonscript"
 msgstr ""
 
 msgid "Qatar"
@@ -8947,6 +8965,11 @@ msgid "Service info - tuner setting values"
 msgstr ""
 
 #
+#, fuzzy
+msgid "Service info font size"
+msgstr "Upplýsingar"
+
+#
 msgid ""
 "Service invalid!\n"
 "(Timeout reading PMT)"
@@ -8960,12 +8983,22 @@ msgid "Service name"
 msgstr "Leita að rásum"
 
 #
+#, fuzzy
+msgid "Service name font size"
+msgstr "Leita að rásum"
+
+#
 msgid ""
 "Service not found!\n"
 "(SID not found in PAT)"
 msgstr ""
 "Rás fannst ekki!\n"
 "(SID fannst ekki í PAT)"
+
+#
+#, fuzzy
+msgid "Service number font size"
+msgstr "Undirtextar"
 
 msgid "Service reference"
 msgstr "Rása upplýsingar"
@@ -9068,7 +9101,7 @@ msgid "Set the port of the OpenWebif from your fallback tuner"
 msgstr ""
 
 #, fuzzy
-msgid "Set the type of the progress indication in the channel selection screen."
+msgid "Set the type of the progress indication in the channel selection screen (right alignment only available in single line mode)."
 msgstr "Sýna framvindu atriðis við rásaval"
 
 msgid "Set time window to 1 hour"
@@ -9219,6 +9252,9 @@ msgid "Show crypto info in infobar"
 msgstr ""
 
 msgid "Show detailed event info"
+msgstr ""
+
+msgid "Show disabled timers (local only)"
 msgstr ""
 
 #
@@ -9501,11 +9537,6 @@ msgstr "Einn"
 #
 msgid "Single EPG"
 msgstr "Eitt EPG"
-
-#
-#, fuzzy
-msgid "Single line mode"
-msgstr "Veldu mynd stillingu"
 
 #
 msgid "Single satellite"
@@ -10057,6 +10088,9 @@ msgid "Stored position"
 msgstr "Vistuð staða"
 
 msgid "Stream"
+msgstr ""
+
+msgid "Stream Relay delay"
 msgstr ""
 
 msgid "Stream request"
@@ -10629,6 +10663,9 @@ msgstr ""
 #
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "Þessi DVD RW diskur er þegar formaður - endurformun mun eyða öllum gögnum af honum."
+
+msgid "This allows you to change the font size relative to skin size, so 1 increases by 1 point size, and -1 decreases by 1 point size"
+msgstr ""
 
 msgid "This bouquet is protected by a parental control PIN"
 msgstr ""
@@ -11529,6 +11566,11 @@ msgstr ""
 #
 msgid "Use power measurement"
 msgstr "Nota aflmælingu"
+
+#
+#, fuzzy
+msgid "Use skin default"
+msgstr "stíll lista venjulegur"
 
 #, fuzzy
 msgid "Use the network wizard to configure selected network adapter"
@@ -13189,6 +13231,11 @@ msgid "menu"
 msgstr "valmynd"
 
 #
+#, fuzzy
+msgid "min"
+msgstr "%d min"
+
+#
 msgid "mins"
 msgstr "mín"
 
@@ -13835,4 +13882,10 @@ msgid "zapped"
 msgstr "stokkið"
 
 msgid "®"
+msgstr ""
+
+msgid "°E"
+msgstr ""
+
+msgid "°W"
 msgstr ""

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-08 16:10+0100\n"
+"POT-Creation-Date: 2023-12-17 11:25+0100\n"
 "PO-Revision-Date: 2021-11-03 15:10+0100\n"
 "Last-Translator: mcfly82\n"
 "Language-Team: mcfly82 & wysless\n"
@@ -1042,9 +1042,6 @@ msgstr "művészet/kultúra (prózai, általános)"
 msgid "Aruba"
 msgstr "Aruba"
 
-msgid "As defined by the skin"
-msgstr "Kinézettől függő"
-
 msgid "Ask user"
 msgstr "Felhasználó kérdezése"
 
@@ -1955,16 +1952,19 @@ msgstr "A felvételek fájlneveinek összetétele."
 msgid "Configure how the fan should operate"
 msgstr "A ventilátor működési módjának beállítása"
 
-msgid "Configure if and how crypto icons will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how crypto icons will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "A kódolási ikonok megjelenítése a csatornalistában."
 
 msgid "Configure if and how long the latest service in Picture in Picture mode will be remembered."
 msgstr "Beállíthatja, hogy a legutolsó Kép-a-Képben csatorna mennyi ideig maradjon meg."
 
-msgid "Configure if and how service type icons will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how service type icons will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "A csatornák típusának (földi, műholdas, stb.) megjelenítése, és annak módja és csatornalistában."
 
-msgid "Configure if and how the record indicator will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how the record indicator will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "A felvételi jelző megjelenítése a csatornalistában."
 
 msgid "Configure if and how wide columns will be shown in the channel selection list."
@@ -2644,6 +2644,9 @@ msgstr "A kijelzőn a görgetett szöveg indítása előtti késleltetés (ms)."
 msgid "Delay in miliseconds between scrolling characters on display."
 msgstr "A kijelzőn az egyes karakterek görgetése közötti késleltetés (ms)."
 
+msgid "Delay when closing a stream relay service before reallocating the tuner for another service. Using '0' is only recommended for boxes with multiple satellite tuners."
+msgstr ""
+
 msgid "Delete"
 msgstr "Törlés"
 
@@ -3229,6 +3232,13 @@ msgstr "Automatikus gyorskeresés engedélyezése"
 #, python-format
 msgid "Enable auto fastscan for %s"
 msgstr "Automatikus gyorskeresés engedélyezése ehhez: %s"
+
+msgid "Enable blink functionality for some areas like record icon."
+msgstr ""
+
+#, fuzzy
+msgid "Enable blinking"
+msgstr "Virgin EPG engedélyezése"
 
 #, fuzzy
 msgid "Enable bluetooth audio"
@@ -5036,6 +5046,9 @@ msgstr "Luxemburgi"
 msgid "MB"
 msgstr "MB"
 
+msgid "MENU"
+msgstr ""
+
 msgid "MHz"
 msgstr ""
 
@@ -5966,8 +5979,15 @@ msgstr "PMT PID"
 msgid "PPanel"
 msgstr "PPanel"
 
+msgid "PREVIOUS"
+msgstr ""
+
 msgid "PULSe 4K(mini)"
 msgstr "PULSe 4K(mini)"
+
+#, fuzzy
+msgid "PVR"
+msgstr "OVR"
 
 msgid "Package list update"
 msgstr "Csomaglista frissítés"
@@ -6705,6 +6725,10 @@ msgstr "Python felület a /tmp/mmi.socket-hez"
 
 msgid "Python version: "
 msgstr "Python verzió: "
+
+#, fuzzy
+msgid "Pythonscript"
+msgstr "Shellscript (parancssor)"
 
 msgid "Qatar"
 msgstr "Katar"
@@ -7880,6 +7904,10 @@ msgstr "Szolgáltatás információ - tuner (élő) beállításai"
 msgid "Service info - tuner setting values"
 msgstr "Szolgáltatás információ - tuner beállításai"
 
+#, fuzzy
+msgid "Service info font size"
+msgstr "Csatorna"
+
 msgid ""
 "Service invalid!\n"
 "(Timeout reading PMT)"
@@ -7890,12 +7918,20 @@ msgstr ""
 msgid "Service name"
 msgstr "Csatornanév"
 
+#, fuzzy
+msgid "Service name font size"
+msgstr "Csatornanév"
+
 msgid ""
 "Service not found!\n"
 "(SID not found in PAT)"
 msgstr ""
 "A csatorna nem található!\n"
 "(Nincs SID a PAT-ban)"
+
+#, fuzzy
+msgid "Service number font size"
+msgstr "Felirat betűmérete"
 
 msgid "Service reference"
 msgstr "Referencia szám"
@@ -7986,7 +8022,8 @@ msgstr "Állítsa be az OpenWebIf jelszót a tartalék tunerből"
 msgid "Set the port of the OpenWebif from your fallback tuner"
 msgstr "Állítsa be az OpenWebIf portot a tartalék tunerből"
 
-msgid "Set the type of the progress indication in the channel selection screen."
+#, fuzzy
+msgid "Set the type of the progress indication in the channel selection screen (right alignment only available in single line mode)."
 msgstr "Folyamatjelző típusa csatornalistában."
 
 msgid "Set time window to 1 hour"
@@ -8118,6 +8155,9 @@ msgstr "Kódolási információ megjelenítése az információs sávon"
 
 msgid "Show detailed event info"
 msgstr "Részletes esemény információ"
+
+msgid "Show disabled timers (local only)"
+msgstr ""
 
 msgid "Show event details"
 msgstr "Esemény részleteinek megjelenítése"
@@ -8362,9 +8402,6 @@ msgstr "Egyetlen"
 
 msgid "Single EPG"
 msgstr "Műsorújság"
-
-msgid "Single line mode"
-msgstr "Egy soros mód"
 
 msgid "Single satellite"
 msgstr "Egyetlen műhold"
@@ -8825,6 +8862,10 @@ msgstr "Tárolt pozíció"
 
 msgid "Stream"
 msgstr "Adatfolyam"
+
+#, fuzzy
+msgid "Stream Relay delay"
+msgstr "Görgetés késleltetése"
 
 msgid "Stream request"
 msgstr "Adatfolyam kérés"
@@ -9335,6 +9376,9 @@ msgstr ""
 
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "Ez a DVD RW medium már meg van formázva - a lemez újraformázásával minden adat el fog veszni."
+
+msgid "This allows you to change the font size relative to skin size, so 1 increases by 1 point size, and -1 decreases by 1 point size"
+msgstr ""
 
 msgid "This bouquet is protected by a parental control PIN"
 msgstr "Ez a lista gyermekzár PIN-kóddal védett"
@@ -9878,9 +9922,11 @@ msgstr "Tuvalu"
 msgid "Two"
 msgstr "Kettő"
 
+#, fuzzy
 msgid "Two lines"
 msgstr "Két sor"
 
+#, fuzzy
 msgid "Two lines and next event"
 msgstr "Két sor és a következő esemény"
 
@@ -10137,6 +10183,10 @@ msgstr "Eredeti teletext-elhelyezés megtartása"
 
 msgid "Use power measurement"
 msgstr "Teljesítmény-felvétel mérése"
+
+#, fuzzy
+msgid "Use skin default"
+msgstr "Alapértelmezett"
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "A hálózati Varázsló használata a kijelölt hálózati interfész konfigurálásához"
@@ -11650,6 +11700,10 @@ msgstr "egészség"
 msgid "menu"
 msgstr "menü"
 
+#, fuzzy
+msgid "min"
+msgstr " perc"
+
 msgid "mins"
 msgstr "perc"
 
@@ -12223,3 +12277,9 @@ msgstr "ugrott"
 
 msgid "®"
 msgstr "®"
+
+msgid "°E"
+msgstr ""
+
+msgid "°W"
+msgstr ""

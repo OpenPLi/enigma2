@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-08 16:10+0100\n"
+"POT-Creation-Date: 2023-12-17 11:25+0100\n"
 "PO-Revision-Date: 2021-03-06\n"
 "Last-Translator: LinuxSTV\n"
 "Language-Team: \n"
@@ -1068,9 +1068,6 @@ msgstr "seni/budaya (tanpa musik, umum)"
 msgid "Aruba"
 msgstr "Aruba"
 
-msgid "As defined by the skin"
-msgstr "Sesuai yg ditetapkan tampilan"
-
 msgid "Ask user"
 msgstr "Tanya pengguna"
 
@@ -2012,16 +2009,19 @@ msgstr "Atur bagaimana nama berkas rekaman dibuat."
 msgid "Configure how the fan should operate"
 msgstr "Atur bagaimana kipas seharusnya berfungsi"
 
-msgid "Configure if and how crypto icons will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how crypto icons will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Atur jika dan bagaimana ikon kripto akan ditampilkan pada daftar pemilihan kanal."
 
 msgid "Configure if and how long the latest service in Picture in Picture mode will be remembered."
 msgstr "Atur jika dan berapa lama layanan terakhir pada PiP akan diingat."
 
-msgid "Configure if and how service type icons will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how service type icons will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Atur jika dan bagaimana ikon tipe layanan akan ditampilkan pada daftar pemilihan kanal."
 
-msgid "Configure if and how the record indicator will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how the record indicator will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Atur jika dan bagaimana penunjuk rekaman akan ditampilkan pada daftar pemilihan kanal."
 
 msgid "Configure if and how wide columns will be shown in the channel selection list."
@@ -2719,6 +2719,9 @@ msgstr "Tunda dalam milidetik sebelum mulai menggulung teks pada display"
 msgid "Delay in miliseconds between scrolling characters on display."
 msgstr "Tunda dalam mili detik antara menggulung karakter pada display"
 
+msgid "Delay when closing a stream relay service before reallocating the tuner for another service. Using '0' is only recommended for boxes with multiple satellite tuners."
+msgstr ""
+
 msgid "Delete"
 msgstr "Hapus"
 
@@ -3329,6 +3332,13 @@ msgstr "Aktifkan pelacakan cepat otomatis"
 #, fuzzy, python-format
 msgid "Enable auto fastscan for %s"
 msgstr "Aktifkan pelacakan cepat otomatis pada %s"
+
+msgid "Enable blink functionality for some areas like record icon."
+msgstr ""
+
+#, fuzzy
+msgid "Enable blinking"
+msgstr "Aktifkan EPG Virgin"
 
 #, fuzzy
 msgid "Enable bluetooth audio"
@@ -5204,6 +5214,9 @@ msgstr "Luxemburg"
 msgid "MB"
 msgstr "B"
 
+msgid "MENU"
+msgstr ""
+
 msgid "MHz"
 msgstr ""
 
@@ -6165,8 +6178,15 @@ msgstr "PID PMT"
 msgid "PPanel"
 msgstr "PPanel"
 
+msgid "PREVIOUS"
+msgstr ""
+
 msgid "PULSe 4K(mini)"
 msgstr ""
+
+#, fuzzy
+msgid "PVR"
+msgstr "OVR"
 
 msgid "Package list update"
 msgstr "Pembaruan daftar paket"
@@ -6922,6 +6942,10 @@ msgstr "Frontend Python pada /tmp/mmi.socket"
 
 msgid "Python version: "
 msgstr "Versi Python:"
+
+#, fuzzy
+msgid "Pythonscript"
+msgstr "Skrip shell"
 
 msgid "Qatar"
 msgstr "Qatar"
@@ -8135,6 +8159,10 @@ msgstr "Info layanan - nilai live penala"
 msgid "Service info - tuner setting values"
 msgstr "Info layanan - nilai setelan penala"
 
+#, fuzzy
+msgid "Service info font size"
+msgstr "Informasi layanan"
+
 msgid ""
 "Service invalid!\n"
 "(Timeout reading PMT)"
@@ -8145,12 +8173,20 @@ msgstr ""
 msgid "Service name"
 msgstr "Nama layanan"
 
+#, fuzzy
+msgid "Service name font size"
+msgstr "Nama layanan"
+
 msgid ""
 "Service not found!\n"
 "(SID not found in PAT)"
 msgstr ""
 "Kanal tidak ditemukan\n"
 "(SID tidak ditemukan di PAT)"
+
+#, fuzzy
+msgid "Service number font size"
+msgstr "Ukuran huruf terjemahan"
 
 msgid "Service reference"
 msgstr "Referensi layanan"
@@ -8243,7 +8279,8 @@ msgstr "Atur katakunci OpenWebif dari penala terpakai anda"
 msgid "Set the port of the OpenWebif from your fallback tuner"
 msgstr "Atur port OpenWebif dari penala terpakai anda"
 
-msgid "Set the type of the progress indication in the channel selection screen."
+#, fuzzy
+msgid "Set the type of the progress indication in the channel selection screen (right alignment only available in single line mode)."
 msgstr "Atur tipe penunjuk progres acara pada layar pemilihan kanal."
 
 msgid "Set time window to 1 hour"
@@ -8376,6 +8413,9 @@ msgstr "Tampilkan info kripto di infobar"
 
 msgid "Show detailed event info"
 msgstr "Tampilkan info acara terperinci"
+
+msgid "Show disabled timers (local only)"
+msgstr ""
 
 msgid "Show event details"
 msgstr "Tampilkan acara terperinci"
@@ -8627,10 +8667,6 @@ msgstr "Tunggal"
 
 msgid "Single EPG"
 msgstr "EPG Tunggal"
-
-#, fuzzy
-msgid "Single line mode"
-msgstr "Pilih mode video"
 
 msgid "Single satellite"
 msgstr "Satu Satelit"
@@ -9103,6 +9139,10 @@ msgstr "Posisi tersimpan"
 
 msgid "Stream"
 msgstr "Stream"
+
+#, fuzzy
+msgid "Stream Relay delay"
+msgstr "Tunda gulir"
 
 msgid "Stream request"
 msgstr "Permintaan stream"
@@ -9623,6 +9663,9 @@ msgstr ""
 
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "Media DVD RW ini sudah diformat - memformat ulang akan menghapus semua isi disk."
+
+msgid "This allows you to change the font size relative to skin size, so 1 increases by 1 point size, and -1 decreases by 1 point size"
+msgstr ""
 
 msgid "This bouquet is protected by a parental control PIN"
 msgstr "Buket ini dilindungi dgn PIN pengawasan orangtua"
@@ -10452,6 +10495,10 @@ msgstr "Gunakan posisi teleteks asli"
 
 msgid "Use power measurement"
 msgstr "Gunakan perhitungan daya"
+
+#, fuzzy
+msgid "Use skin default"
+msgstr "Atur bawaan"
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "Gunakan wizard jaringan untuk menyetel adapter jaringan yg dipilih"
@@ -12003,6 +12050,10 @@ msgstr "pengobatan/fisiologi/psikologi"
 msgid "menu"
 msgstr "menu"
 
+#, fuzzy
+msgid "min"
+msgstr "%d mnt"
+
 msgid "mins"
 msgstr "mnt"
 
@@ -12587,3 +12638,9 @@ msgstr "zapped"
 
 msgid "®"
 msgstr "®"
+
+msgid "°E"
+msgstr ""
+
+msgid "°W"
+msgstr ""

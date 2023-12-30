@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-08 16:10+0100\n"
+"POT-Creation-Date: 2023-12-17 11:25+0100\n"
 "PO-Revision-Date: 2017-03-05 13:24+0100\n"
 "Last-Translator: Magnus Nilsson <mag_nilsson@hotmail.com>\n"
 "Language-Team: \n"
@@ -1172,9 +1172,6 @@ msgstr "konst / kultur (utan musik, allmänt)"
 msgid "Aruba"
 msgstr ""
 
-msgid "As defined by the skin"
-msgstr "Som definierats av utseendet (Skin)"
-
 #
 msgid "Ask user"
 msgstr "Fråga användare"
@@ -2210,16 +2207,19 @@ msgstr "Konfigurera hur inspelningens filnamn är sammansatt."
 msgid "Configure how the fan should operate"
 msgstr "Konfigurera hur fläkten skall fungera."
 
-msgid "Configure if and how crypto icons will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how crypto icons will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Konfigurera om och hur krypteringsikoner skall visas i kanallistan."
 
 msgid "Configure if and how long the latest service in Picture in Picture mode will be remembered."
 msgstr "Konfigurera om och hur länge den senaste kanalen i BiB skall kommas ihåg."
 
-msgid "Configure if and how service type icons will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how service type icons will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Konfigurera om och hur kanalikoner skall visas i kanallistan."
 
-msgid "Configure if and how the record indicator will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how the record indicator will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Konfigurera om och hur inspelningsikonen skall visas i kanallistan."
 
 msgid "Configure if and how wide columns will be shown in the channel selection list."
@@ -2976,6 +2976,9 @@ msgstr "Fördröjning i millisekunder före start av rullande text på display."
 msgid "Delay in miliseconds between scrolling characters on display."
 msgstr "Fördröjning i millisekunder mellan rullande tecken på display."
 
+msgid "Delay when closing a stream relay service before reallocating the tuner for another service. Using '0' is only recommended for boxes with multiple satellite tuners."
+msgstr ""
+
 #
 msgid "Delete"
 msgstr "Ta bort"
@@ -3667,6 +3670,13 @@ msgstr "Aktivera auto snabbskanning"
 #, fuzzy, python-format
 msgid "Enable auto fastscan for %s"
 msgstr "Aktivera auto snabbskanning för %s"
+
+msgid "Enable blink functionality for some areas like record icon."
+msgstr ""
+
+#, fuzzy
+msgid "Enable blinking"
+msgstr "Aktivera Virgin EPG"
 
 #
 #, fuzzy
@@ -5708,6 +5718,9 @@ msgstr "Luxemburgiska"
 msgid "MB"
 msgstr "B"
 
+msgid "MENU"
+msgstr ""
+
 msgid "MHz"
 msgstr ""
 
@@ -6773,7 +6786,13 @@ msgstr "PMT PID"
 msgid "PPanel"
 msgstr ""
 
+msgid "PREVIOUS"
+msgstr ""
+
 msgid "PULSe 4K(mini)"
+msgstr ""
+
+msgid "PVR"
 msgstr ""
 
 #
@@ -7643,6 +7662,10 @@ msgstr "Python frontend för /tmp/mmi.socket"
 
 msgid "Python version: "
 msgstr "Pythonversion :"
+
+#, fuzzy
+msgid "Pythonscript"
+msgstr "Shellskript"
 
 msgid "Qatar"
 msgstr ""
@@ -9016,6 +9039,11 @@ msgid "Service info - tuner setting values"
 msgstr "Kanalinfo - tuner inställningsvärden"
 
 #
+#, fuzzy
+msgid "Service info font size"
+msgstr "Kanalinfo"
+
+#
 msgid ""
 "Service invalid!\n"
 "(Timeout reading PMT)"
@@ -9026,6 +9054,10 @@ msgstr ""
 msgid "Service name"
 msgstr "Kanalnamn"
 
+#, fuzzy
+msgid "Service name font size"
+msgstr "Kanalnamn"
+
 #
 msgid ""
 "Service not found!\n"
@@ -9033,6 +9065,10 @@ msgid ""
 msgstr ""
 "Kanal inte funnen!\n"
 "(SID inte funnen i PAT)"
+
+#, fuzzy
+msgid "Service number font size"
+msgstr "Undertextens fontstorlek"
 
 msgid "Service reference"
 msgstr "Kanalreferens"
@@ -9132,7 +9168,8 @@ msgid "Set the port of the OpenWebif from your fallback tuner"
 msgstr ""
 
 #
-msgid "Set the type of the progress indication in the channel selection screen."
+#, fuzzy
+msgid "Set the type of the progress indication in the channel selection screen (right alignment only available in single line mode)."
 msgstr "Ange vilken typ av förloppsindikator som ska användas i kanallistan."
 
 msgid "Set time window to 1 hour"
@@ -9276,6 +9313,9 @@ msgstr "Visa krypteringsinfo i infobalken"
 
 msgid "Show detailed event info"
 msgstr "Visa detaljerad programinfo"
+
+msgid "Show disabled timers (local only)"
+msgstr ""
 
 #
 msgid "Show event details"
@@ -9555,11 +9595,6 @@ msgstr "Singel"
 #
 msgid "Single EPG"
 msgstr "Singel EPG"
-
-#
-#, fuzzy
-msgid "Single line mode"
-msgstr "Välj videoläge"
 
 #
 msgid "Single satellite"
@@ -10092,6 +10127,10 @@ msgstr "Lagrad position"
 
 msgid "Stream"
 msgstr "Strömning"
+
+#, fuzzy
+msgid "Stream Relay delay"
+msgstr "Skrollfördröjning"
 
 msgid "Stream request"
 msgstr "Strömningsförfrågan"
@@ -10660,6 +10699,9 @@ msgstr ""
 #
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "Detta DVD RW media är redan formaterat - om formatering kommer ta bort all data på skivan."
+
+msgid "This allows you to change the font size relative to skin size, so 1 increases by 1 point size, and -1 decreases by 1 point size"
+msgstr ""
 
 msgid "This bouquet is protected by a parental control PIN"
 msgstr "Denna favoritlista är skyddad av föräldraskyddskod"
@@ -11595,6 +11637,10 @@ msgstr "Använd teletextens originalposition"
 #
 msgid "Use power measurement"
 msgstr "Använd strömmätning"
+
+#, fuzzy
+msgid "Use skin default"
+msgstr "Ange standard"
 
 #
 msgid "Use the network wizard to configure selected network adapter"
@@ -13300,6 +13346,10 @@ msgstr "medicin / fysiologi / psykologi"
 msgid "menu"
 msgstr "meny"
 
+#, fuzzy
+msgid "min"
+msgstr "%d min"
+
 #
 msgid "mins"
 msgstr "min"
@@ -13958,4 +14008,10 @@ msgid "zapped"
 msgstr "zappad"
 
 msgid "®"
+msgstr ""
+
+msgid "°E"
+msgstr ""
+
+msgid "°W"
 msgstr ""

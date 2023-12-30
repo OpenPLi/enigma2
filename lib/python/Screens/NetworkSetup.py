@@ -287,8 +287,9 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 	def createConfig(self):
 		self.wlanSSID = None
 		self.encryptionKey = None
+		self.ws = None
 
-		if iNetwork.isWirelessInterface(self.iface):
+		if iNetwork.isWirelessInterface(self.iface) and hasattr(config.plugins, "wlan"):
 			from Plugins.SystemPlugins.WirelessLan.Wlan import wpaSupplicant
 			self.ws = wpaSupplicant()
 			encryptionlist = [
@@ -430,7 +431,8 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 				iNetwork.removeAdapterAttribute(self.iface, "dns-nameservers")
 			if self.extended is not None and self.configStrings is not None:
 				iNetwork.setAdapterAttribute(self.iface, "configStrings", self.configStrings(self.iface))
-				self.ws.writeConfig(self.iface)
+				if self.ws:
+					self.ws.writeConfig(self.iface)
 
 			if not self.activateInterfaceEntry.value:
 				iNetwork.deactivateInterface(self.iface, self.deactivateInterfaceCB)
@@ -496,14 +498,15 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 
 	def cleanup(self):
 		iNetwork.stopLinkStateConsole()
-		config.plugins.wlan.encryption.removeNotifier(self.createSetup)
+		if hasattr(config.plugins, "wlan"):
+			config.plugins.wlan.encryption.removeNotifier(self.createSetup)
 		self.activateInterfaceEntry.removeNotifier(self.createSetup)
 		self.dhcpConfigEntry.removeNotifier(self.createSetup)
 		self.hasGatewayConfigEntry.removeNotifier(self.createSetup)
 
 	def hideInputHelp(self):
 		current = self["config"].getCurrent()
-		if current == self.wlanSSID or (current == self.encryptionKey and config.plugins.wlan.encryption.value != "Unencrypted"):
+		if current == self.wlanSSID or (current and current == self.encryptionKey and config.plugins.wlan.encryption.value != "Unencrypted"):
 			if current[1].help_window.instance is not None:
 				current[1].help_window.instance.hide()
 

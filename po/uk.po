@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-08 16:10+0100\n"
+"POT-Creation-Date: 2023-12-17 11:25+0100\n"
 "PO-Revision-Date: 2022-09-27 16:12+0200\n"
 "Last-Translator: kvinto\n"
 "Language-Team: kvinto\n"
@@ -1051,9 +1051,6 @@ msgstr "Мистецтво/Культура (без музики, загальн
 msgid "Aruba"
 msgstr "Аруба"
 
-msgid "As defined by the skin"
-msgstr "Як визначено скіном"
-
 msgid "Ask user"
 msgstr "Запитати користувача"
 
@@ -1956,16 +1953,19 @@ msgstr "Налаштування способу створення імен за
 msgid "Configure how the fan should operate"
 msgstr "Налаштування роботи вентилятора"
 
-msgid "Configure if and how crypto icons will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how crypto icons will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Вкажіть, чи потрібно показати іконку кодування в списку каналів перед назвою каналу чи після."
 
 msgid "Configure if and how long the latest service in Picture in Picture mode will be remembered."
 msgstr "Налаштуйте, чи запам’ятовувати і як довго останній канал в режимі Картинка в картинці."
 
-msgid "Configure if and how service type icons will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how service type icons will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Налаштування показу іконок типів каналу і місце їх розташування у списку каналів."
 
-msgid "Configure if and how the record indicator will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how the record indicator will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Вкажіть, чи потрібно в селекторі каналів показувати індикатор запису і виберіть варіант показу іконки."
 
 msgid "Configure if and how wide columns will be shown in the channel selection list."
@@ -2643,6 +2643,9 @@ msgstr "Затримка в мілісекундах перед початком
 msgid "Delay in miliseconds between scrolling characters on display."
 msgstr "Затримка в мілісекундах між прокруткою символів на дисплеї."
 
+msgid "Delay when closing a stream relay service before reallocating the tuner for another service. Using '0' is only recommended for boxes with multiple satellite tuners."
+msgstr ""
+
 msgid "Delete"
 msgstr "Видалити"
 
@@ -3227,6 +3230,13 @@ msgstr "Включити швидке автосканування"
 #, python-format
 msgid "Enable auto fastscan for %s"
 msgstr "Включити швидке автосканування для %s"
+
+msgid "Enable blink functionality for some areas like record icon."
+msgstr ""
+
+#, fuzzy
+msgid "Enable blinking"
+msgstr "Включити Virgin ЕПГ"
 
 msgid "Enable bluetooth audio"
 msgstr "Включити аудіо Bluetooth"
@@ -5021,6 +5031,9 @@ msgstr "Люксембурзька"
 msgid "MB"
 msgstr "МБ"
 
+msgid "MENU"
+msgstr ""
+
 msgid "MHz"
 msgstr "МГц"
 
@@ -5941,8 +5954,14 @@ msgstr "ПІД РМТ"
 msgid "PPanel"
 msgstr "ПіП Панель"
 
+msgid "PREVIOUS"
+msgstr ""
+
 msgid "PULSe 4K(mini)"
 msgstr "PULSe 4K(mini)"
+
+msgid "PVR"
+msgstr ""
 
 msgid "Package list update"
 msgstr "Оновлення списку пакетів"
@@ -6683,6 +6702,10 @@ msgstr "Python інтерфейс для /tmp/mmi.socket"
 
 msgid "Python version: "
 msgstr "Версія Python: "
+
+#, fuzzy
+msgid "Pythonscript"
+msgstr "Наступний скрипт"
 
 msgid "Qatar"
 msgstr "Катар"
@@ -7859,6 +7882,10 @@ msgstr "Інформація про канал - текучі значення �
 msgid "Service info - tuner setting values"
 msgstr "Інформація про канал - текучі налаштування тюнера"
 
+#, fuzzy
+msgid "Service info font size"
+msgstr "Інформація каналу"
+
 msgid ""
 "Service invalid!\n"
 "(Timeout reading PMT)"
@@ -7869,12 +7896,20 @@ msgstr ""
 msgid "Service name"
 msgstr "Назва каналу"
 
+#, fuzzy
+msgid "Service name font size"
+msgstr "Назва каналу"
+
 msgid ""
 "Service not found!\n"
 "(SID not found in PAT)"
 msgstr ""
 "Канал не знайдено!\n"
 "(SID не знайдено в PAT)"
+
+#, fuzzy
+msgid "Service number font size"
+msgstr "Розмір шрифту субтитрів"
 
 msgid "Service reference"
 msgstr "Референс Каналу"
@@ -7964,7 +7999,8 @@ msgstr "Встановіть пароль OpenWebif від резервного 
 msgid "Set the port of the OpenWebif from your fallback tuner"
 msgstr "Встановіть порт OpenWebif із резервного тюнера"
 
-msgid "Set the type of the progress indication in the channel selection screen."
+#, fuzzy
+msgid "Set the type of the progress indication in the channel selection screen (right alignment only available in single line mode)."
 msgstr "Встановіть тип відображення прогресу в меню вибору каналів."
 
 msgid "Set time window to 1 hour"
@@ -8095,6 +8131,9 @@ msgstr "Показати інфо кодування в Інфобарі"
 
 msgid "Show detailed event info"
 msgstr "Показати докладну інформацію події"
+
+msgid "Show disabled timers (local only)"
+msgstr ""
 
 msgid "Show event details"
 msgstr "Показати деталі події"
@@ -8338,9 +8377,6 @@ msgstr "Простий"
 
 msgid "Single EPG"
 msgstr "Простий ЕПГ"
-
-msgid "Single line mode"
-msgstr "Режим одного рядка"
 
 msgid "Single satellite"
 msgstr "Один супутник"
@@ -8798,6 +8834,10 @@ msgstr "Збережена позиція"
 
 msgid "Stream"
 msgstr "Потік"
+
+#, fuzzy
+msgid "Stream Relay delay"
+msgstr "Затримка прокрутки"
 
 msgid "Stream request"
 msgstr "Запит потоку"
@@ -9302,6 +9342,9 @@ msgstr ""
 
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "Цей DVD-RW диск вже відформатований - переформатування знищить всі дані на диску."
+
+msgid "This allows you to change the font size relative to skin size, so 1 increases by 1 point size, and -1 decreases by 1 point size"
+msgstr ""
 
 msgid "This bouquet is protected by a parental control PIN"
 msgstr "Цей фаворит захищений батьківським контролем"
@@ -9843,9 +9886,11 @@ msgstr "Тувалу"
 msgid "Two"
 msgstr "Два"
 
+#, fuzzy
 msgid "Two lines"
 msgstr "Два рядки"
 
+#, fuzzy
 msgid "Two lines and next event"
 msgstr "Два рядки і наступна передача"
 
@@ -10102,6 +10147,10 @@ msgstr "Використовувати оригінальну позицію т�
 
 msgid "Use power measurement"
 msgstr "Використовувати вимірювання потужності"
+
+#, fuzzy
+msgid "Use skin default"
+msgstr "Встановити за замовчуванням"
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "Використати Майстер мережі для налаштування вибраного мережевого адаптера"
@@ -11604,6 +11653,10 @@ msgstr "медицина/фізіологія/психологія"
 msgid "menu"
 msgstr "меню"
 
+#, fuzzy
+msgid "min"
+msgstr " хв"
+
 msgid "mins"
 msgstr "хв"
 
@@ -12167,3 +12220,9 @@ msgstr "переключений"
 
 msgid "®"
 msgstr "®"
+
+msgid "°E"
+msgstr ""
+
+msgid "°W"
+msgstr ""

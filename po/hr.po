@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-08 16:10+0100\n"
+"POT-Creation-Date: 2023-12-17 11:25+0100\n"
 "PO-Revision-Date: 2022-03-28 16:33+0200\n"
 "Last-Translator: Željko <zdezmar2@gmail.com>\n"
 "Language-Team: Željko\n"
@@ -1058,9 +1058,6 @@ msgstr "umjetnost/kultura (bez glazbe)"
 msgid "Aruba"
 msgstr "Aruba"
 
-msgid "As defined by the skin"
-msgstr "Kao što je definirano u skinu"
-
 msgid "Ask user"
 msgstr "Pitaj korisnika"
 
@@ -1970,16 +1967,19 @@ msgstr "Konfigurirajte koliko kanala želite prikazati na popisu za odabir kanal
 msgid "Configure how the fan should operate"
 msgstr "Postavljanje načina rada ventilatora"
 
-msgid "Configure if and how crypto icons will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how crypto icons will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Prilagodite ikone za kodirane usluge na popisu za odabir kanala."
 
 msgid "Configure if and how long the latest service in Picture in Picture mode will be remembered."
 msgstr "Konfigurirajte koliko dugo će najnovija usluga u PiP biti zapamćena."
 
-msgid "Configure if and how service type icons will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how service type icons will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Postavka za prikaz ikona vrste usluga na popisu za odabir kanala."
 
-msgid "Configure if and how the record indicator will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how the record indicator will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Postavka za prikaz trenutnog indikatora usluga snimanja na popisu odabira kanala."
 
 msgid "Configure if and how wide columns will be shown in the channel selection list."
@@ -2661,6 +2661,9 @@ msgstr "Odgoda u milisekundama prije početka pomicanja teksta na zaslonu."
 msgid "Delay in miliseconds between scrolling characters on display."
 msgstr "Odgoda u milisekundama između pomicanja znakova na zaslonu."
 
+msgid "Delay when closing a stream relay service before reallocating the tuner for another service. Using '0' is only recommended for boxes with multiple satellite tuners."
+msgstr ""
+
 msgid "Delete"
 msgstr "Izbrisati"
 
@@ -3247,6 +3250,13 @@ msgstr "Omogućite automatsko brzo skeniranje"
 #, python-format
 msgid "Enable auto fastscan for %s"
 msgstr "Omogućite automatsko brzo skeniranje za %s"
+
+msgid "Enable blink functionality for some areas like record icon."
+msgstr ""
+
+#, fuzzy
+msgid "Enable blinking"
+msgstr "Omogućite Virgin EPG"
 
 #, fuzzy
 msgid "Enable bluetooth audio"
@@ -5054,6 +5064,9 @@ msgstr "Luxemburški"
 msgid "MB"
 msgstr "MB"
 
+msgid "MENU"
+msgstr ""
+
 msgid "MHz"
 msgstr "MHz"
 
@@ -5980,8 +5993,15 @@ msgstr "РМТ PID"
 msgid "PPanel"
 msgstr "PPanel"
 
+msgid "PREVIOUS"
+msgstr ""
+
 msgid "PULSe 4K(mini)"
 msgstr "PULSe 4K(mini)"
+
+#, fuzzy
+msgid "PVR"
+msgstr "OVR"
 
 msgid "Package list update"
 msgstr "Ažuriranje popisa paketa."
@@ -6719,6 +6739,10 @@ msgstr "Python sučelje za /tmp/mmi.socket"
 
 msgid "Python version: "
 msgstr "Python verzija: "
+
+#, fuzzy
+msgid "Pythonscript"
+msgstr "Shell skripta"
 
 msgid "Qatar"
 msgstr "Katar"
@@ -7895,6 +7919,10 @@ msgstr "Servisne informacije - vrijednosti tjunera"
 msgid "Service info - tuner setting values"
 msgstr "Servisne informacije - vrijednosti podešavanja tjunera"
 
+#, fuzzy
+msgid "Service info font size"
+msgstr "Servisne informacije"
+
 msgid ""
 "Service invalid!\n"
 "(Timeout reading PMT)"
@@ -7905,12 +7933,20 @@ msgstr ""
 msgid "Service name"
 msgstr "Naziv usluge"
 
+#, fuzzy
+msgid "Service name font size"
+msgstr "Naziv usluge"
+
 msgid ""
 "Service not found!\n"
 "(SID not found in PAT)"
 msgstr ""
 "Usluga nije pronađena\n"
 "(SID nije pronađen u PAT-u)"
+
+#, fuzzy
+msgid "Service number font size"
+msgstr "Veličina fonta titla"
 
 msgid "Service reference"
 msgstr "Reference usluga"
@@ -8000,7 +8036,8 @@ msgstr "Postavite lozinku OpenWebif sučelja iz rezervnog tjunera"
 msgid "Set the port of the OpenWebif from your fallback tuner"
 msgstr "Postavite port OpenWebif sučelja iz rezervnog tjunera"
 
-msgid "Set the type of the progress indication in the channel selection screen."
+#, fuzzy
+msgid "Set the type of the progress indication in the channel selection screen (right alignment only available in single line mode)."
 msgstr "Postavite vrstu indikatora napretka na zaslonu za odabir kanala."
 
 msgid "Set time window to 1 hour"
@@ -8131,6 +8168,9 @@ msgstr "Prikažite kripto-informacije u info traci"
 
 msgid "Show detailed event info"
 msgstr "Prikažite detaljne informacije o događaju"
+
+msgid "Show disabled timers (local only)"
+msgstr ""
 
 msgid "Show event details"
 msgstr "Prikažite pojedinosti o događaju"
@@ -8374,9 +8414,6 @@ msgstr "Jedan"
 
 msgid "Single EPG"
 msgstr "Jedan EPG"
-
-msgid "Single line mode"
-msgstr "Jednoredni način"
 
 msgid "Single satellite"
 msgstr "Jedan satelit"
@@ -8835,6 +8872,10 @@ msgstr "Spremljena pozicija"
 
 msgid "Stream"
 msgstr "Web prijenos"
+
+#, fuzzy
+msgid "Stream Relay delay"
+msgstr "Odgoda pomicanja"
 
 msgid "Stream request"
 msgstr "Raspoloživi web prijenosi"
@@ -9338,6 +9379,9 @@ msgstr ""
 
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "Ovaj DVD RW medij je već formatiran - ponovno formatiranje će izbrisati sav sadržaj na disku."
+
+msgid "This allows you to change the font size relative to skin size, so 1 increases by 1 point size, and -1 decreases by 1 point size"
+msgstr ""
 
 msgid "This bouquet is protected by a parental control PIN"
 msgstr "Ovaj paket je zaštićen pinom roditeljske kontrole"
@@ -9881,9 +9925,11 @@ msgstr "Tuvalu"
 msgid "Two"
 msgstr "Dva"
 
+#, fuzzy
 msgid "Two lines"
 msgstr "Dvije linije"
 
+#, fuzzy
 msgid "Two lines and next event"
 msgstr "Dvije linije i sljedeći događaj"
 
@@ -10141,6 +10187,10 @@ msgstr "Koristite izvornu poziciju teleteksta"
 
 msgid "Use power measurement"
 msgstr "Koristite mjerenje snage"
+
+#, fuzzy
+msgid "Use skin default"
+msgstr "Postavite zadano"
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "Pomoću vodiča za mrežu konfigurirajte odabrani mrežni prilagodnik"
@@ -11646,6 +11696,10 @@ msgstr "medicina/fiziologija/psihologija"
 msgid "menu"
 msgstr "izbornik"
 
+#, fuzzy
+msgid "min"
+msgstr " min"
+
 msgid "mins"
 msgstr "min"
 
@@ -12212,3 +12266,9 @@ msgstr "prebačeno"
 
 msgid "®"
 msgstr "®"
+
+msgid "°E"
+msgstr ""
+
+msgid "°W"
+msgstr ""

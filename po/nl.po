@@ -2,16 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-08 16:10+0100\n"
+"POT-Creation-Date: 2023-12-17 11:25+0100\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Frenske <voorzitter@openpli.org>\n"
+"Last-Translator: Tech <tech@openpli.org>\n"
 "Language-Team: PLiteam <translators@openpli.org>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.4.2\n"
 
 msgid ""
 "\n"
@@ -1037,9 +1037,6 @@ msgstr "Kunst/Cultuur (zonder muziek)"
 msgid "Aruba"
 msgstr "Aruba"
 
-msgid "As defined by the skin"
-msgstr "Zoals bepaald in de skin"
-
 msgid "Ask user"
 msgstr "Vraag de gebruiker"
 
@@ -1978,7 +1975,8 @@ msgstr ""
 "\n"
 "U kunt kiezen uit automatisch, aan of uit."
 
-msgid "Configure if and how crypto icons will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how crypto icons will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr ""
 "Indien geactiveerd, dan kunt u aangeven of en waar het 'gecodeerd' icoon weergegeven wordt in de zenderlijst.\n"
 "\n"
@@ -1990,13 +1988,15 @@ msgstr ""
 "\n"
 "U kunt kiezen uit 'gedéactiveerd', 'geen timeout' of tussen 1-60 minuten."
 
-msgid "Configure if and how service type icons will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how service type icons will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr ""
 "Indien geactiveerd, dan kunt u in de zenderlijst aangeven of en via welke tuner dit kanaal ontvangen wordt. Dit kan DVB-S, DVB-C of DVB-T zijn.\n"
 "\n"
 "U kunt kiezen uit links of rechts van de zendernaam, of geen weergave."
 
-msgid "Configure if and how the record indicator will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how the record indicator will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr ""
 "Indien geactiveerd kunt u aangeven of, hoe en waar de 'opname indicatie' weergegeven wordt in de zenderlijst.\n"
 "\n"
@@ -2807,6 +2807,9 @@ msgstr "De vertraging in msec voordat de scrollende displaytekst start."
 msgid "Delay in miliseconds between scrolling characters on display."
 msgstr "De onderlinge vertraging in msec tussen de scrollende karakters op het display."
 
+msgid "Delay when closing a stream relay service before reallocating the tuner for another service. Using '0' is only recommended for boxes with multiple satellite tuners."
+msgstr ""
+
 msgid "Delete"
 msgstr "Verwijderen"
 
@@ -3404,6 +3407,13 @@ msgstr "Wilt u de automatische Fastscan activeren"
 #, python-format
 msgid "Enable auto fastscan for %s"
 msgstr "Activeer automatische fastscan voor %s"
+
+msgid "Enable blink functionality for some areas like record icon."
+msgstr ""
+
+#, fuzzy
+msgid "Enable blinking"
+msgstr "Virgin EPG inschakelen"
 
 msgid "Enable bluetooth audio"
 msgstr "Activeer bluetooth audio"
@@ -5209,6 +5219,9 @@ msgstr "Luxemburgs"
 msgid "MB"
 msgstr "MB"
 
+msgid "MENU"
+msgstr ""
+
 msgid "MHz"
 msgstr "MHz"
 
@@ -6136,8 +6149,15 @@ msgstr "PMT PID"
 msgid "PPanel"
 msgstr "PPanel"
 
+msgid "PREVIOUS"
+msgstr ""
+
 msgid "PULSe 4K(mini)"
 msgstr "PULSe 4K (mini)"
+
+#, fuzzy
+msgid "PVR"
+msgstr "OVR"
 
 msgid "Package list update"
 msgstr "Pakketlijst vernieuwen"
@@ -6564,7 +6584,7 @@ msgid "Plugin manager help"
 msgstr "Pluginmanager helpfunctie"
 
 msgid "Plugins"
-msgstr "Applicaties"
+msgstr "Plugins"
 
 msgid "Poland"
 msgstr "Polen"
@@ -6906,6 +6926,10 @@ msgstr "Python frontend voor /tmp/mmi.socket"
 
 msgid "Python version: "
 msgstr "Pythonversie:"
+
+#, fuzzy
+msgid "Pythonscript"
+msgstr "Shellscript"
 
 msgid "Qatar"
 msgstr "Qatar"
@@ -8087,6 +8111,10 @@ msgstr "Service info - actieve tunerwaardes"
 msgid "Service info - tuner setting values"
 msgstr "Service info - tuner setting waardes"
 
+#, fuzzy
+msgid "Service info font size"
+msgstr "Zenderinfo"
+
 msgid ""
 "Service invalid!\n"
 "(Timeout reading PMT)"
@@ -8097,12 +8125,20 @@ msgstr ""
 msgid "Service name"
 msgstr "Zendernaam"
 
+#, fuzzy
+msgid "Service name font size"
+msgstr "Zendernaam"
+
 msgid ""
 "Service not found!\n"
 "(SID not found in PAT)"
 msgstr ""
 "Zender niet gevonden!\n"
 "(SID not found in PAT)"
+
+#, fuzzy
+msgid "Service number font size"
+msgstr "Wijzig de lettergrootte van de ondertitels"
 
 msgid "Service reference"
 msgstr "Zenderreferentie"
@@ -8195,7 +8231,8 @@ msgstr "Stel het wachtwoord van de OpenWebif in vanaf je Fallback tuner"
 msgid "Set the port of the OpenWebif from your fallback tuner"
 msgstr "Stel de poort van de OpenWebif in vanaf de Fallback tuner."
 
-msgid "Set the type of the progress indication in the channel selection screen."
+#, fuzzy
+msgid "Set the type of the progress indication in the channel selection screen (right alignment only available in single line mode)."
 msgstr ""
 "Met deze optie stelt u de weergave in van de programmavoortgangindicatie in de geopende zenderlijst in.\n"
 "\n"
@@ -8329,6 +8366,9 @@ msgstr "Toon coderingsinfo in de informatiebalk"
 
 msgid "Show detailed event info"
 msgstr "Gedetailleerde EPG info weergeven"
+
+msgid "Show disabled timers (local only)"
+msgstr ""
 
 msgid "Show event details"
 msgstr "EPG details weergeven"
@@ -8578,9 +8618,6 @@ msgstr "Enkel"
 
 msgid "Single EPG"
 msgstr "Zender EPG"
-
-msgid "Single line mode"
-msgstr "Enkele regel modus"
 
 msgid "Single satellite"
 msgstr "Eén satelliet"
@@ -9041,6 +9078,10 @@ msgstr "Opgeslagen positie"
 
 msgid "Stream"
 msgstr "Stream"
+
+#, fuzzy
+msgid "Stream Relay delay"
+msgstr "Scroll vertraging"
 
 msgid "Stream request"
 msgstr "Stream verzoek"
@@ -9552,6 +9593,9 @@ msgstr ""
 
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "Dit DVD-RW medium is reeds geformatteerd - herformatteren zal alles wissen op deze disk."
+
+msgid "This allows you to change the font size relative to skin size, so 1 increases by 1 point size, and -1 decreases by 1 point size"
+msgstr ""
 
 msgid "This bouquet is protected by a parental control PIN"
 msgstr "Dit bouquet is beschermd met een pincode t.b.v. het kinderslot."
@@ -10105,9 +10149,11 @@ msgstr "Tuvalu"
 msgid "Two"
 msgstr "Twee"
 
+#, fuzzy
 msgid "Two lines"
 msgstr "Twee lijnen"
 
+#, fuzzy
 msgid "Two lines and next event"
 msgstr "Twee lijnen + volgende programma"
 
@@ -10364,6 +10410,10 @@ msgstr "Originele teletextpositie gebruiken"
 
 msgid "Use power measurement"
 msgstr "Meet stroomopname"
+
+#, fuzzy
+msgid "Use skin default"
+msgstr "Zet als standaard"
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "Gebruik de netwerkwizard om de geselecteerde netwerkadapter te configureren"
@@ -11916,6 +11966,10 @@ msgstr "Geneeskunde/Filosofie/Psychologie"
 msgid "menu"
 msgstr "menu"
 
+#, fuzzy
+msgid "min"
+msgstr " min"
+
 msgid "mins"
 msgstr "min"
 
@@ -12479,3 +12533,9 @@ msgstr "zapte"
 
 msgid "®"
 msgstr "®"
+
+msgid "°E"
+msgstr ""
+
+msgid "°W"
+msgstr ""

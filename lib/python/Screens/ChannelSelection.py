@@ -461,7 +461,7 @@ class ChannelContextMenu(Screen):
 
 	def openSetup(self):
 		from Screens.Setup import Setup
-		self.session.openWithCallback(self.cancelClick, Setup, "userinterface")
+		self.session.openWithCallback(self.cancelClick, Setup, "channelselection")
 
 	def cancelClick(self, dummy=False):
 		self.close(False)

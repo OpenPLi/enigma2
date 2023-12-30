@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-08 16:10+0100\n"
+"POT-Creation-Date: 2023-12-17 11:25+0100\n"
 "PO-Revision-Date: 2014-11-12 00:49+0200\n"
 "Last-Translator: Taapat <taapat@gmail.com>\n"
 "Language-Team: Taapat <taapat@gmail.com>\n"
@@ -1053,9 +1053,6 @@ msgstr "māksla, kultūra"
 msgid "Aruba"
 msgstr "Aruba"
 
-msgid "As defined by the skin"
-msgstr "Kā paredzēts noformējumā"
-
 msgid "Ask user"
 msgstr "Jautāt"
 
@@ -1958,16 +1955,19 @@ msgstr "Uzstāda kā tiek sastādīti ierakstu failu vārdi."
 msgid "Configure how the fan should operate"
 msgstr "Uzstāda kā vadīt ventilatoru"
 
-msgid "Configure if and how crypto icons will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how crypto icons will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Uzstāda vai un kā crypto ikona tiks attēlota kanālu sarakstā."
 
 msgid "Configure if and how long the latest service in Picture in Picture mode will be remembered."
 msgstr "Uzstāda vai un cik ilgi atcerēsies pēdējo attēls attēlā kanālu."
 
-msgid "Configure if and how service type icons will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how service type icons will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Uzstāda vai un kā tiks rādītas kanālu tipu ikonas kanālu sarakstā."
 
-msgid "Configure if and how the record indicator will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how the record indicator will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Uzstāda vai un kā tiks attēlots ieraksta indikators kanālu sarakstā."
 
 msgid "Configure if and how wide columns will be shown in the channel selection list."
@@ -2645,6 +2645,9 @@ msgstr "Aizture milisekundēs pirms teksta ritināšanas displejā."
 msgid "Delay in miliseconds between scrolling characters on display."
 msgstr "Aizture milisekundēs simbolu ritināšanas ātrumam displejā."
 
+msgid "Delay when closing a stream relay service before reallocating the tuner for another service. Using '0' is only recommended for boxes with multiple satellite tuners."
+msgstr ""
+
 msgid "Delete"
 msgstr "Dzēst"
 
@@ -3229,6 +3232,13 @@ msgstr "Lietot ātro auto skenēšanu"
 #, python-format
 msgid "Enable auto fastscan for %s"
 msgstr "Lietot ātro auto skenēšanu priekš %s"
+
+msgid "Enable blink functionality for some areas like record icon."
+msgstr ""
+
+#, fuzzy
+msgid "Enable blinking"
+msgstr "Lietot Virgin EPG"
 
 msgid "Enable bluetooth audio"
 msgstr "Aktivizēt bluetooth audio"
@@ -5021,6 +5031,9 @@ msgstr "Luksemburgiešu"
 msgid "MB"
 msgstr "MB"
 
+msgid "MENU"
+msgstr ""
+
 msgid "MHz"
 msgstr "MHz"
 
@@ -5941,8 +5954,15 @@ msgstr "PMT PID"
 msgid "PPanel"
 msgstr "PPanelis"
 
+msgid "PREVIOUS"
+msgstr ""
+
 msgid "PULSe 4K(mini)"
 msgstr "PULSe 4K(mini)"
+
+#, fuzzy
+msgid "PVR"
+msgstr "OVR"
 
 msgid "Package list update"
 msgstr "Pakotņu saraksta atjaunināšana"
@@ -6683,6 +6703,10 @@ msgstr "Python frontend /tmp/mmi.socket"
 
 msgid "Python version: "
 msgstr "Python versija: "
+
+#, fuzzy
+msgid "Pythonscript"
+msgstr "Skripti"
 
 msgid "Qatar"
 msgstr "Katara"
@@ -7859,6 +7883,10 @@ msgstr "Tekošās vērtības"
 msgid "Service info - tuner setting values"
 msgstr "Iestatītās vērtības"
 
+#, fuzzy
+msgid "Service info font size"
+msgstr "Kanāla info"
+
 msgid ""
 "Service invalid!\n"
 "(Timeout reading PMT)"
@@ -7869,12 +7897,20 @@ msgstr ""
 msgid "Service name"
 msgstr "Kanāla nosaukums"
 
+#, fuzzy
+msgid "Service name font size"
+msgstr "Kanāla nosaukums"
+
 msgid ""
 "Service not found!\n"
 "(SID not found in PAT)"
 msgstr ""
 "Kanāls nav atrasts!\n"
 "(SID nav atrasts iekš PAT)"
+
+#, fuzzy
+msgid "Service number font size"
+msgstr "Subtitru fonta izmērs"
 
 msgid "Service reference"
 msgstr "Kanāla atsauce"
@@ -7964,7 +8000,8 @@ msgstr "OpenWebif parole attālinātā uztvērējā"
 msgid "Set the port of the OpenWebif from your fallback tuner"
 msgstr "OpenWebif ports attālinātā uztvērējā"
 
-msgid "Set the type of the progress indication in the channel selection screen."
+#, fuzzy
+msgid "Set the type of the progress indication in the channel selection screen (right alignment only available in single line mode)."
 msgstr "Iestatīt norises indikatora veidu kanālu pārslēgšanas logā."
 
 msgid "Set time window to 1 hour"
@@ -8095,6 +8132,9 @@ msgstr "Rādīt šifrēšanas info infojoslā"
 
 msgid "Show detailed event info"
 msgstr "Rādīt detalizētu notikumu info"
+
+msgid "Show disabled timers (local only)"
+msgstr ""
 
 msgid "Show event details"
 msgstr "Rādīt pārraides papildus informāciju"
@@ -8338,9 +8378,6 @@ msgstr "Viens"
 
 msgid "Single EPG"
 msgstr "Kanāla EPG"
-
-msgid "Single line mode"
-msgstr "Viena rinda"
 
 msgid "Single satellite"
 msgstr "Viens pavadonis"
@@ -8798,6 +8835,10 @@ msgstr "Saglabātā pozīcija"
 
 msgid "Stream"
 msgstr "Plūsma"
+
+#, fuzzy
+msgid "Stream Relay delay"
+msgstr "Ritināšanas aizture"
 
 msgid "Stream request"
 msgstr "Plūsmas pieprasījums"
@@ -9298,6 +9339,9 @@ msgstr ""
 
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "Šis DVD RW disks jau ir formatēts - atkārtota formatēšana dzēsīs visu diska saturu."
+
+msgid "This allows you to change the font size relative to skin size, so 1 increases by 1 point size, and -1 decreases by 1 point size"
+msgstr ""
 
 msgid "This bouquet is protected by a parental control PIN"
 msgstr "Šī buķete ir aizsargāta ar vecāku aizsardzību"
@@ -9839,9 +9883,11 @@ msgstr "Tuvalu"
 msgid "Two"
 msgstr "Divi"
 
+#, fuzzy
 msgid "Two lines"
 msgstr "Divas rindas"
 
+#, fuzzy
 msgid "Two lines and next event"
 msgstr "Divas rindas un nākamais notikums"
 
@@ -10098,6 +10144,10 @@ msgstr "Lietot oriģinālo teleteksta pozīciju"
 
 msgid "Use power measurement"
 msgstr "Lietot sprieguma mērīšanu"
+
+#, fuzzy
+msgid "Use skin default"
+msgstr "Pēc noklusējuma"
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "Lietot tīkla vedni adaptera uzstādīšanai"
@@ -11600,6 +11650,10 @@ msgstr "medicīna, fizioloģija, psiholoģija"
 msgid "menu"
 msgstr "izvēlne"
 
+#, fuzzy
+msgid "min"
+msgstr " min"
+
 msgid "mins"
 msgstr "min."
 
@@ -12162,4 +12216,10 @@ msgid "zapped"
 msgstr "pārslēgts"
 
 msgid "®"
+msgstr ""
+
+msgid "°E"
+msgstr ""
+
+msgid "°W"
 msgstr ""

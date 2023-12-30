@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-08 16:10+0100\n"
-"PO-Revision-Date: 2023-11-08 16:16+0100\n"
+"POT-Creation-Date: 2023-12-17 11:25+0100\n"
+"PO-Revision-Date: 2023-12-17 11:26+0100\n"
 "Last-Translator: Pr2\n"
 "Language-Team: french\n"
 "Language: fr\n"
@@ -1038,9 +1038,6 @@ msgstr "Arts/Culture (sans musique)"
 msgid "Aruba"
 msgstr "Aruba"
 
-msgid "As defined by the skin"
-msgstr "Comme défini dans le thème/skin"
-
 msgid "Ask user"
 msgstr "Demander à l'utilisateur"
 
@@ -1943,17 +1940,17 @@ msgstr "Configure la façon dont les noms de fichiers d'enregistrement sont cons
 msgid "Configure how the fan should operate"
 msgstr "Configure l'activité du ventilateur"
 
-msgid "Configure if and how crypto icons will be shown in the channel selection list."
-msgstr "Configure si et où les icônes de cryptage seront affichés dans la liste des chaînes."
+msgid "Configure if and how crypto icons will be shown in the channel selection list (left alignment only available in single line mode)."
+msgstr "Configurer si et comment les icônes cryptographiques seront affichées dans la liste de sélection des canaux (alignement à gauche uniquement disponible en mode ligne unique)."
 
 msgid "Configure if and how long the latest service in Picture in Picture mode will be remembered."
 msgstr "Configure si et combien de temps le dernier service en PiP sera mémorisé."
 
-msgid "Configure if and how service type icons will be shown in the channel selection list."
-msgstr "Configure si et où les icônes du type de service seront affichés dans la liste des chaînes."
+msgid "Configure if and how service type icons will be shown in the channel selection list (left alignment only available in single line mode)."
+msgstr "Configurer si et comment les icônes de type de service seront affichées dans la liste de sélection des canaux (alignement à gauche uniquement disponible en mode ligne unique)."
 
-msgid "Configure if and how the record indicator will be shown in the channel selection list."
-msgstr "Configure si et où l'indicateur d'enregistrement sera affiché dans la liste des chaînes."
+msgid "Configure if and how the record indicator will be shown in the channel selection list (left alignment only available in single line mode)."
+msgstr "Configurer si et comment l'indicateur d'enregistrement sera affiché dans la liste de sélection des chaînes (alignement à gauche uniquement disponible en mode ligne unique)."
 
 msgid "Configure if and how wide columns will be shown in the channel selection list."
 msgstr "Configure si et avec quelle largeur les colonnes seront affichées dans la liste de sélection des chaînes."
@@ -2630,6 +2627,9 @@ msgstr "Délai en millisecondes avant le démarrage du défilement sur l'afficha
 msgid "Delay in miliseconds between scrolling characters on display."
 msgstr "Délai en millisecondes entre les caractères qui défilent sur l'affichage."
 
+msgid "Delay when closing a stream relay service before reallocating the tuner for another service. Using '0' is only recommended for boxes with multiple satellite tuners."
+msgstr "Délai de fermeture d'un service de relais de flux avant de réaffecter le tuner à un autre service. L'utilisation de '0' n'est recommandée que pour les boîtiers équipés de plusieurs tuners satellite."
+
 msgid "Delete"
 msgstr "Supprimer"
 
@@ -3211,6 +3211,12 @@ msgstr "Activer le scan rapide automatique"
 #, python-format
 msgid "Enable auto fastscan for %s"
 msgstr "Activer le scan rapide automatique pour %s"
+
+msgid "Enable blink functionality for some areas like record icon."
+msgstr "Activer la fonctionnalité de clignotement pour certaines zones comme l'icône d'enregistrement."
+
+msgid "Enable blinking"
+msgstr "Activer le clignotement"
 
 msgid "Enable bluetooth audio"
 msgstr "Activer l'audio bluetooth"
@@ -5002,6 +5008,9 @@ msgstr "Luxembourgeois"
 msgid "MB"
 msgstr "MB"
 
+msgid "MENU"
+msgstr "MENU"
+
 msgid "MHz"
 msgstr " MHz"
 
@@ -5922,8 +5931,14 @@ msgstr "PID PMT"
 msgid "PPanel"
 msgstr "PPanel"
 
+msgid "PREVIOUS"
+msgstr "PRÉCÉDENT"
+
 msgid "PULSe 4K(mini)"
 msgstr "PULSe 4K(mini)"
+
+msgid "PVR"
+msgstr "PVR"
 
 msgid "Package list update"
 msgstr "Mise à jour de la liste des paquets"
@@ -6664,6 +6679,9 @@ msgstr "\"Frontend\" Python pour /tmp/mmi.socket"
 
 msgid "Python version: "
 msgstr "Version Python: "
+
+msgid "Pythonscript"
+msgstr "Pythonscript"
 
 msgid "Qatar"
 msgstr "Qatar"
@@ -7837,6 +7855,9 @@ msgstr "Info du service - valeurs réelles du tuner"
 msgid "Service info - tuner setting values"
 msgstr "Info du service - valeurs des paramètres du tuner"
 
+msgid "Service info font size"
+msgstr "Taille de la police des informations sur le service"
+
 msgid ""
 "Service invalid!\n"
 "(Timeout reading PMT)"
@@ -7847,12 +7868,18 @@ msgstr ""
 msgid "Service name"
 msgstr "Nom du service"
 
+msgid "Service name font size"
+msgstr "Taille de la police du nom du service"
+
 msgid ""
 "Service not found!\n"
 "(SID not found in PAT)"
 msgstr ""
 "Aucun service trouvé!\n"
 "(aucun SID trouvé dans PAT)"
+
+msgid "Service number font size"
+msgstr "Taille de police du numéro de service"
 
 msgid "Service reference"
 msgstr "Référence service"
@@ -7942,8 +7969,8 @@ msgstr "Définir le mot de passe d’OpenWebif de votre tuner de secours"
 msgid "Set the port of the OpenWebif from your fallback tuner"
 msgstr "Définir le port d’OpenWebif de votre tuner de secours"
 
-msgid "Set the type of the progress indication in the channel selection screen."
-msgstr "Défini le type et la localisation de l'indicateur de progression des événements dans la sélection des chaînes. Soit barre graphe, soit en pourcentage à gauche ou à droite du nom du service."
+msgid "Set the type of the progress indication in the channel selection screen (right alignment only available in single line mode)."
+msgstr "Définir le type d'indication de progression dans l'écran de sélection du canal (alignement à droite uniquement disponible en mode ligne unique)."
 
 msgid "Set time window to 1 hour"
 msgstr "Réglez la fenêtre de temps à 1 heure"
@@ -8073,6 +8100,9 @@ msgstr "Afficher l’info de cryptage dans la barre d'information"
 
 msgid "Show detailed event info"
 msgstr "Afficher les infos détaillées de l'événement"
+
+msgid "Show disabled timers (local only)"
+msgstr "Afficher les minuteries désactivées (local uniquement)"
 
 msgid "Show event details"
 msgstr "Afficher détails de l'événement"
@@ -8316,9 +8346,6 @@ msgstr "Unique"
 
 msgid "Single EPG"
 msgstr "EPG Unique"
-
-msgid "Single line mode"
-msgstr "Mode ligne unique"
 
 msgid "Single satellite"
 msgstr "Satellite unique"
@@ -8777,6 +8804,9 @@ msgstr "Position enregistrée"
 msgid "Stream"
 msgstr "Flux"
 
+msgid "Stream Relay delay"
+msgstr "Délai du Stream Relay"
+
 msgid "Stream request"
 msgstr "Demande de flux"
 
@@ -9007,7 +9037,7 @@ msgstr ""
 "\n"
 "Support: https://www.openpli.org/\n"
 "Traducteur: Pr2\n"
-"Dernière MÀJ: 08-11-2023"
+"Dernière MÀJ: 17-12-2023"
 
 msgid "TS file is too large for ISO9660 level 1!"
 msgstr "Fichier TS trop grand pour le niveau 1 ISO9660!"
@@ -9283,6 +9313,9 @@ msgstr ""
 
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "Ce support DVD RW est déjà formaté - le reformater effacera tout le contenu sur le disque."
+
+msgid "This allows you to change the font size relative to skin size, so 1 increases by 1 point size, and -1 decreases by 1 point size"
+msgstr "Cela vous permet de modifier la taille de la police par rapport à la taille du thème, de sorte que 1 augmente d'une taille de point et -1 diminue d'une taille de point."
 
 msgid "This bouquet is protected by a parental control PIN"
 msgstr "Ce bouquet est protégé par un PIN contrôle parental"
@@ -10086,6 +10119,9 @@ msgstr "Utiliser la position d'origine du télétexte"
 
 msgid "Use power measurement"
 msgstr "Utiliser la mesure de puissance"
+
+msgid "Use skin default"
+msgstr "Utiliser le thème par défaut"
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "Utiliser l'assistant réseau pour configurer l'adaptateur réseau"
@@ -11588,6 +11624,9 @@ msgstr "Médecine/Physiologie/Psychologie"
 msgid "menu"
 msgstr "Menu"
 
+msgid "min"
+msgstr "min"
+
 msgid "mins"
 msgstr "Mins"
 
@@ -12150,3 +12189,9 @@ msgstr "Zappé"
 
 msgid "®"
 msgstr "®"
+
+msgid "°E"
+msgstr "°E"
+
+msgid "°W"
+msgstr "°O"

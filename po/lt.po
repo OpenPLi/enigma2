@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-08 16:10+0100\n"
+"POT-Creation-Date: 2023-12-17 11:25+0100\n"
 "PO-Revision-Date: 2022-10-23 15:37+0300\n"
 "Last-Translator: Audronis <adga45@gmail.com>\n"
 "Language-Team: Adga (C) <adga45@gmail.com>\n"
@@ -1053,9 +1053,6 @@ msgstr "Menas/kultūra (be muzikos, bendras)"
 msgid "Aruba"
 msgstr "Aruba"
 
-msgid "As defined by the skin"
-msgstr "Kaip numatyta temoje"
-
 msgid "Ask user"
 msgstr "Klausti vartotojo"
 
@@ -1959,16 +1956,19 @@ msgstr "Nustatykite, kaip turi būti konstruojami įrašų failų pavadinimai."
 msgid "Configure how the fan should operate"
 msgstr "Nustatykite, kaip turi veikti aušintuvas"
 
-msgid "Configure if and how crypto icons will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how crypto icons will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Nustatykite, ar ir kaip kanalų pasirinkimo sąrašo lange turi būti rodomos kodavimo piktogramos."
 
 msgid "Configure if and how long the latest service in Picture in Picture mode will be remembered."
 msgstr "Konfigūruokite, ar ir kaip ilgai bus įsimenami kanalai PiP režimu."
 
-msgid "Configure if and how service type icons will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how service type icons will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Nustatykite, ar ir kur kanalų pasirinkimo sąrašo lange bus rodomos kanalo tipo (palydovinis/kabelinis/antžeminis) piktogramos."
 
-msgid "Configure if and how the record indicator will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how the record indicator will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Nustatykite, ar ir kaip kanalų pasirinkimo sąrašo lange bus rodomas įrašymo indikatorius."
 
 msgid "Configure if and how wide columns will be shown in the channel selection list."
@@ -2647,6 +2647,9 @@ msgstr "Delsa (msek) prieš teksto slinkimo pradžią."
 msgid "Delay in miliseconds between scrolling characters on display."
 msgstr "Delsa (msek) tarp simbolių slinkimo."
 
+msgid "Delay when closing a stream relay service before reallocating the tuner for another service. Using '0' is only recommended for boxes with multiple satellite tuners."
+msgstr ""
+
 msgid "Delete"
 msgstr "Ištrinti"
 
@@ -3231,6 +3234,13 @@ msgstr "Įjungti automatinę greitą paiešką"
 #, python-format
 msgid "Enable auto fastscan for %s"
 msgstr "Įjungti automatinę greitą paiešką %s"
+
+msgid "Enable blink functionality for some areas like record icon."
+msgstr ""
+
+#, fuzzy
+msgid "Enable blinking"
+msgstr "Įjungti Virgin EPG"
 
 msgid "Enable bluetooth audio"
 msgstr "Įjungti bluetooth garsą"
@@ -5023,6 +5033,9 @@ msgstr "Liuksemburgiečių"
 msgid "MB"
 msgstr "MB"
 
+msgid "MENU"
+msgstr ""
+
 msgid "MHz"
 msgstr "MHz"
 
@@ -5945,8 +5958,15 @@ msgstr "PMT PID"
 msgid "PPanel"
 msgstr "PLi skydelis"
 
+msgid "PREVIOUS"
+msgstr ""
+
 msgid "PULSe 4K(mini)"
 msgstr "PULSe 4K(mini)"
+
+#, fuzzy
+msgid "PVR"
+msgstr "OVR"
 
 msgid "Package list update"
 msgstr "Paketo sąrašo atnaujinimas"
@@ -6683,6 +6703,10 @@ msgstr "Python išorinės sąsajos dėl /tmp/mmi.socket"
 
 msgid "Python version: "
 msgstr "Python versija: "
+
+#, fuzzy
+msgid "Pythonscript"
+msgstr "Grafinės aplinkos scenarijus"
 
 msgid "Qatar"
 msgstr "Kataras"
@@ -7859,6 +7883,10 @@ msgstr "Kanalo informacija - imtuvo tiesioginės reikšmės"
 msgid "Service info - tuner setting values"
 msgstr "Kanalo informacija - imtuvo nustatymų reikšmės"
 
+#, fuzzy
+msgid "Service info font size"
+msgstr "Apie kanalą"
+
 msgid ""
 "Service invalid!\n"
 "(Timeout reading PMT)"
@@ -7869,12 +7897,20 @@ msgstr ""
 msgid "Service name"
 msgstr "Kanalo pavadinimas"
 
+#, fuzzy
+msgid "Service name font size"
+msgstr "Kanalo pavadinimas"
+
 msgid ""
 "Service not found!\n"
 "(SID not found in PAT)"
 msgstr ""
 "Kanalas nerastas!\n"
 "(SID nerastas PAT)"
+
+#, fuzzy
+msgid "Service number font size"
+msgstr "Subtitrų šrifto dydis"
 
 msgid "Service reference"
 msgstr "Kanalo nuoroda"
@@ -7965,7 +8001,8 @@ msgstr "Nustatykite OpenWebif slaptažodį iš atsarginio derintuvo"
 msgid "Set the port of the OpenWebif from your fallback tuner"
 msgstr "Nustatykite OpenWebif jungtį iš savo atsarginio imtuvo"
 
-msgid "Set the type of the progress indication in the channel selection screen."
+#, fuzzy
+msgid "Set the type of the progress indication in the channel selection screen (right alignment only available in single line mode)."
 msgstr "Nustatykite pasirinkto kanalo progreso indikacijos tipą ekrane."
 
 msgid "Set time window to 1 hour"
@@ -8097,6 +8134,9 @@ msgstr "Rodyti kodavimo informaciją info juostoje"
 
 msgid "Show detailed event info"
 msgstr "Rodyti išsamią įvykio informaciją"
+
+msgid "Show disabled timers (local only)"
+msgstr ""
 
 msgid "Show event details"
 msgstr "Rodyti įvykio detales"
@@ -8340,9 +8380,6 @@ msgstr "Vienas"
 
 msgid "Single EPG"
 msgstr "Vieno kanalo EPG"
-
-msgid "Single line mode"
-msgstr "Vienos eilutės režimas"
 
 msgid "Single satellite"
 msgstr "Vienas palydovas"
@@ -8801,6 +8838,10 @@ msgstr "Išsaugota padėtis"
 
 msgid "Stream"
 msgstr "Srautas"
+
+#, fuzzy
+msgid "Stream Relay delay"
+msgstr "Slinkties delsa"
 
 msgid "Stream request"
 msgstr "Srauto užklausa"
@@ -9305,6 +9346,9 @@ msgstr ""
 
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "Šis DVD RW diskas jau yra suformatuotas - formatavimas iš naujo, ištrins visą disko turinį."
+
+msgid "This allows you to change the font size relative to skin size, so 1 increases by 1 point size, and -1 decreases by 1 point size"
+msgstr ""
 
 msgid "This bouquet is protected by a parental control PIN"
 msgstr "šis paketas apsaugotas tėvų kontrolės PIN kodu"
@@ -9846,9 +9890,11 @@ msgstr "Tuvalu"
 msgid "Two"
 msgstr "Du"
 
+#, fuzzy
 msgid "Two lines"
 msgstr "Dvi linijos"
 
+#, fuzzy
 msgid "Two lines and next event"
 msgstr "Dvi eilutės ir kitas įvykis"
 
@@ -10105,6 +10151,10 @@ msgstr "Naudokite originalią teleteksto poziciją"
 
 msgid "Use power measurement"
 msgstr "Naudokite įtampos išmatavimus"
+
+#, fuzzy
+msgid "Use skin default"
+msgstr "Nustatykite numatytuoju"
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "Naudokite tinklo vedlį, kad konfigūruoti pasirinkto tinklo adapterį"
@@ -11609,6 +11659,10 @@ msgstr "medicina, fiziologija, psichologija"
 msgid "menu"
 msgstr "meniu"
 
+#, fuzzy
+msgid "min"
+msgstr " min"
+
 msgid "mins"
 msgstr "min"
 
@@ -12172,3 +12226,9 @@ msgstr "perjungta"
 
 msgid "®"
 msgstr "®"
+
+msgid "°E"
+msgstr ""
+
+msgid "°W"
+msgstr ""

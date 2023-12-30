@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Openpli\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-08 16:10+0100\n"
+"POT-Creation-Date: 2023-12-17 11:25+0100\n"
 "PO-Revision-Date: 2019-04-03 06:49+0300\n"
 "Last-Translator: \n"
 "Language-Team: Raivo, Henkka, eesatfan, rimas, zeros\\n faas, sateks, valgekotkas, tigekala, rootsikunn\\n kain, i70, mustkass, pelmeen, Scott\\n <digi-tv.ee>\n"
@@ -1053,9 +1053,6 @@ msgstr "Kunst/kultuur (välja arvatud muusika)"
 msgid "Aruba"
 msgstr "Aruba"
 
-msgid "As defined by the skin"
-msgstr "Nagu välimuse poolt määratud"
-
 msgid "Ask user"
 msgstr "Küsi kasutajalt"
 
@@ -1961,16 +1958,19 @@ msgstr "Määra, millisel kujul salvestuste nimed luuakse."
 msgid "Configure how the fan should operate"
 msgstr "Määra, kuidas ventilaator peaks toimima"
 
-msgid "Configure if and how crypto icons will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how crypto icons will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Määra, kas ja kuidas salastatuse ikoonid on näha kanalivaliku nimekirjas."
 
 msgid "Configure if and how long the latest service in Picture in Picture mode will be remembered."
 msgstr "Määra, kas ja kui pikalt jääb PiP viimane kasutatud teenus vastuvõtja mällu."
 
-msgid "Configure if and how service type icons will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how service type icons will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Määra, kas ja kuidas näidatakse teenuse tüübi ikooni kanalivaliku nimekirjas."
 
-msgid "Configure if and how the record indicator will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how the record indicator will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Määra, kas ja kuidas näidatakse salvestuse näidikut kanalivaliku nimekirjas."
 
 msgid "Configure if and how wide columns will be shown in the channel selection list."
@@ -2661,6 +2661,9 @@ msgstr "Viide millisekundites enne näidikul liikuva teksti algust."
 msgid "Delay in miliseconds between scrolling characters on display."
 msgstr "Näidikul liikuvate tähtede vaheline viide millisekundites."
 
+msgid "Delay when closing a stream relay service before reallocating the tuner for another service. Using '0' is only recommended for boxes with multiple satellite tuners."
+msgstr ""
+
 msgid "Delete"
 msgstr "Kustuta"
 
@@ -3261,6 +3264,13 @@ msgstr "Luba automaatne kiirotsing"
 #, fuzzy, python-format
 msgid "Enable auto fastscan for %s"
 msgstr "Luba kiire automaatotsing %s jaoks"
+
+msgid "Enable blink functionality for some areas like record icon."
+msgstr ""
+
+#, fuzzy
+msgid "Enable blinking"
+msgstr "Luba Virgin EPG"
 
 #, fuzzy
 msgid "Enable bluetooth audio"
@@ -5081,6 +5091,9 @@ msgstr "Luksemburgi"
 msgid "MB"
 msgstr "B"
 
+msgid "MENU"
+msgstr ""
+
 msgid "MHz"
 msgstr ""
 
@@ -6021,7 +6034,13 @@ msgstr "PMT PID"
 msgid "PPanel"
 msgstr "PPaneel"
 
+msgid "PREVIOUS"
+msgstr ""
+
 msgid "PULSe 4K(mini)"
+msgstr ""
+
+msgid "PVR"
 msgstr ""
 
 msgid "Package list update"
@@ -6769,6 +6788,10 @@ msgstr "Pythoni programm /tmp/mmi.socket jaoks"
 
 msgid "Python version: "
 msgstr "Pythoni versioon: "
+
+#, fuzzy
+msgid "Pythonscript"
+msgstr "Shellscript"
 
 msgid "Qatar"
 msgstr "Katari Riik"
@@ -7967,6 +7990,10 @@ msgstr "Teenuse info - tuuneri tegevasetused"
 msgid "Service info - tuner setting values"
 msgstr "Teenuse info - tuuneri seadeasetused"
 
+#, fuzzy
+msgid "Service info font size"
+msgstr "Kanaliinfo"
+
 msgid ""
 "Service invalid!\n"
 "(Timeout reading PMT)"
@@ -7977,12 +8004,20 @@ msgstr ""
 msgid "Service name"
 msgstr "Kanalinimi"
 
+#, fuzzy
+msgid "Service name font size"
+msgstr "Kanalinimi"
+
 msgid ""
 "Service not found!\n"
 "(SID not found in PAT)"
 msgstr ""
 "Valitud kanalit ei leitud!\n"
 "(SID ei leitud PAT-st)"
+
+#, fuzzy
+msgid "Service number font size"
+msgstr "Subtiitrite tähesuurus"
 
 msgid "Service reference"
 msgstr "Kanali referents"
@@ -8073,7 +8108,8 @@ msgstr ""
 msgid "Set the port of the OpenWebif from your fallback tuner"
 msgstr ""
 
-msgid "Set the type of the progress indication in the channel selection screen."
+#, fuzzy
+msgid "Set the type of the progress indication in the channel selection screen (right alignment only available in single line mode)."
 msgstr "Määra saate edenemise näit kanalivalikus."
 
 msgid "Set time window to 1 hour"
@@ -8205,6 +8241,9 @@ msgstr "Näita salastatust inforibal"
 
 msgid "Show detailed event info"
 msgstr "Näita üksikasjalikku saatetutvustust"
+
+msgid "Show disabled timers (local only)"
+msgstr ""
 
 msgid "Show event details"
 msgstr "Näita saatetutvustust"
@@ -8454,10 +8493,6 @@ msgstr "Üksik"
 
 msgid "Single EPG"
 msgstr "Kanali saatekava"
-
-#, fuzzy
-msgid "Single line mode"
-msgstr "Vali video töörežiim"
 
 msgid "Single satellite"
 msgstr "Üksik satelliit"
@@ -8922,6 +8957,10 @@ msgstr "Salvestatud asukoht"
 
 msgid "Stream"
 msgstr "Voog"
+
+#, fuzzy
+msgid "Stream Relay delay"
+msgstr "Liigutamise viide"
 
 msgid "Stream request"
 msgstr "Striimi päring"
@@ -9439,6 +9478,9 @@ msgstr ""
 
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "DVD RW ketas on formaaditud.Uuesti formaatimisel kustutatakse kõik, mis plaadile kirjutatud."
+
+msgid "This allows you to change the font size relative to skin size, so 1 increases by 1 point size, and -1 decreases by 1 point size"
+msgstr ""
 
 msgid "This bouquet is protected by a parental control PIN"
 msgstr "See kanalivalik on kaitstud lapseluku PIN koodiga"
@@ -10271,6 +10313,10 @@ msgstr "Kasuta algset teleteksti asukohta"
 
 msgid "Use power measurement"
 msgstr "Kasuta võimsuse mõõtmist"
+
+#, fuzzy
+msgid "Use skin default"
+msgstr "Sea vaikeseadesse"
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "Kasuta abilist valitud võrgukaardi seadmiseks"
@@ -11811,6 +11857,10 @@ msgstr "meditsiin/füsioloogia/psühholoogia"
 msgid "menu"
 msgstr "menüü"
 
+#, fuzzy
+msgid "min"
+msgstr "%d min"
+
 msgid "mins"
 msgstr "min"
 
@@ -12389,3 +12439,9 @@ msgstr "vahetatud"
 
 msgid "®"
 msgstr "®"
+
+msgid "°E"
+msgstr ""
+
+msgid "°W"
+msgstr ""

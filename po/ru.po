@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-08 16:10+0100\n"
+"POT-Creation-Date: 2023-12-17 11:25+0100\n"
 "PO-Revision-Date: 2021-05-24 17:48+0300\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: openPLi Dimitrij\n"
@@ -1052,9 +1052,6 @@ msgstr "искусство/культура (без музыки, общее)"
 msgid "Aruba"
 msgstr "Aruba"
 
-msgid "As defined by the skin"
-msgstr "Как определено в скине"
-
 msgid "Ask user"
 msgstr "Спросить пользователя"
 
@@ -1957,16 +1954,19 @@ msgstr "Настройка способа составления названи�
 msgid "Configure how the fan should operate"
 msgstr "Настройка режимов работы вентилятора."
 
-msgid "Configure if and how crypto icons will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how crypto icons will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Настройка иконок для кодированных сервисов в списке выбора каналов."
 
 msgid "Configure if and how long the latest service in Picture in Picture mode will be remembered."
 msgstr "Настройка - запомнить и на какой период времени последний сервис PiP."
 
-msgid "Configure if and how service type icons will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how service type icons will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Настройка для показа иконок типа сервиса в списке выбора каналов."
 
-msgid "Configure if and how the record indicator will be shown in the channel selection list."
+#, fuzzy
+msgid "Configure if and how the record indicator will be shown in the channel selection list (left alignment only available in single line mode)."
 msgstr "Настройка для показа индикатора текущих записываемых сервисов в списке выбора каналов."
 
 msgid "Configure if and how wide columns will be shown in the channel selection list."
@@ -2644,6 +2644,9 @@ msgstr "Задержка текста в миллисекундах перед �
 msgid "Delay in miliseconds between scrolling characters on display."
 msgstr "Задержка прокрутки в миллисекундах между символами на дисплее."
 
+msgid "Delay when closing a stream relay service before reallocating the tuner for another service. Using '0' is only recommended for boxes with multiple satellite tuners."
+msgstr ""
+
 msgid "Delete"
 msgstr "Удалить"
 
@@ -3228,6 +3231,13 @@ msgstr "Включить автосканирование"
 #, python-format
 msgid "Enable auto fastscan for %s"
 msgstr "Вкл. автосканирование для %s"
+
+msgid "Enable blink functionality for some areas like record icon."
+msgstr ""
+
+#, fuzzy
+msgid "Enable blinking"
+msgstr "Включить Virgin EPG"
 
 msgid "Enable bluetooth audio"
 msgstr "Включить блютуз аудио"
@@ -5022,6 +5032,9 @@ msgstr "Люксембургский"
 msgid "MB"
 msgstr "MB"
 
+msgid "MENU"
+msgstr ""
+
 msgid "MHz"
 msgstr "MHz"
 
@@ -5944,8 +5957,15 @@ msgstr "РМТ PID"
 msgid "PPanel"
 msgstr "PPanel (shell скрипты)"
 
+msgid "PREVIOUS"
+msgstr ""
+
 msgid "PULSe 4K(mini)"
 msgstr "PULSe 4K(mini)"
+
+#, fuzzy
+msgid "PVR"
+msgstr "OVR"
 
 msgid "Package list update"
 msgstr "Список пакетов обновления"
@@ -6685,6 +6705,10 @@ msgstr "Python интерфейс для /tmp/mmi.socket"
 
 msgid "Python version: "
 msgstr "Версия python: "
+
+#, fuzzy
+msgid "Pythonscript"
+msgstr "Shell-скрипт"
 
 msgid "Qatar"
 msgstr "Qatar"
@@ -7861,6 +7885,10 @@ msgstr "Информация о сервисе - Live данные тюнера"
 msgid "Service info - tuner setting values"
 msgstr "Информация о сервисе - данные из настроек тюнера"
 
+#, fuzzy
+msgid "Service info font size"
+msgstr "Информация о сервисе"
+
 msgid ""
 "Service invalid!\n"
 "(Timeout reading PMT)"
@@ -7871,12 +7899,20 @@ msgstr ""
 msgid "Service name"
 msgstr "Название сервиса"
 
+#, fuzzy
+msgid "Service name font size"
+msgstr "Название сервиса"
+
 msgid ""
 "Service not found!\n"
 "(SID not found in PAT)"
 msgstr ""
 "Сервис не найден!\n"
 "(SID не найден в PAT)"
+
+#, fuzzy
+msgid "Service number font size"
+msgstr "Размер шрифта субтитров"
 
 msgid "Service reference"
 msgstr "Референс сервиса"
@@ -7966,7 +8002,8 @@ msgstr "Установить пароль OpenWebif из вашего резер
 msgid "Set the port of the OpenWebif from your fallback tuner"
 msgstr "Установить порт OpenWebif из вашего резервного ресивера"
 
-msgid "Set the type of the progress indication in the channel selection screen."
+#, fuzzy
+msgid "Set the type of the progress indication in the channel selection screen (right alignment only available in single line mode)."
 msgstr "Установите тип индикации прогресса текущего события в списке выбора каналов."
 
 msgid "Set time window to 1 hour"
@@ -8097,6 +8134,9 @@ msgstr "Показать крипто данные эмулятора в инф�
 
 msgid "Show detailed event info"
 msgstr "Показать детально инфо события"
+
+msgid "Show disabled timers (local only)"
+msgstr ""
 
 msgid "Show event details"
 msgstr "Показать детали события"
@@ -8340,9 +8380,6 @@ msgstr "Одиночный"
 
 msgid "Single EPG"
 msgstr "Одиночное EPG"
-
-msgid "Single line mode"
-msgstr "Однострочный режим"
 
 msgid "Single satellite"
 msgstr "Одиночный спутник"
@@ -8800,6 +8837,10 @@ msgstr "Сохраненная позиция"
 
 msgid "Stream"
 msgstr "Стрим"
+
+#, fuzzy
+msgid "Stream Relay delay"
+msgstr "Время задержки прокрутки"
 
 msgid "Stream request"
 msgstr "Запрос стрима"
@@ -9300,6 +9341,9 @@ msgstr ""
 
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "Этот DVD RW контент уже отформатирован - переформатирование может стереть все содержимое диска."
+
+msgid "This allows you to change the font size relative to skin size, so 1 increases by 1 point size, and -1 decreases by 1 point size"
+msgstr ""
 
 msgid "This bouquet is protected by a parental control PIN"
 msgstr "Этот букет защищен PIN-кодом родительского контроля"
@@ -9841,9 +9885,11 @@ msgstr "Tuvalu"
 msgid "Two"
 msgstr "Два"
 
+#, fuzzy
 msgid "Two lines"
 msgstr "Две строки"
 
+#, fuzzy
 msgid "Two lines and next event"
 msgstr "Две строки и следующее событие"
 
@@ -10100,6 +10146,10 @@ msgstr "Использовать оригинальную позицию тел�
 
 msgid "Use power measurement"
 msgstr "Использовать измерение питания"
+
+#, fuzzy
+msgid "Use skin default"
+msgstr "Установить по дефолту"
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "Использовать мастер настройки сети для конфигурации выбранного сетевого адаптера"
@@ -11601,6 +11651,10 @@ msgstr "медицина/физиология/психология"
 msgid "menu"
 msgstr "меню"
 
+#, fuzzy
+msgid "min"
+msgstr " мин"
+
 msgid "mins"
 msgstr "мин"
 
@@ -12164,3 +12218,9 @@ msgstr "переключено"
 
 msgid "®"
 msgstr "®"
+
+msgid "°E"
+msgstr ""
+
+msgid "°W"
+msgstr ""
