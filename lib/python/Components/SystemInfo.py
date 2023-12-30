@@ -1,6 +1,7 @@
 import re
 from hashlib import md5
 from types import MappingProxyType
+from ast import literal_eval
 from enigma import Misc_Options, eDVBCIInterfaces, eDVBResourceManager, eGetEnigmaDebugLvl
 from Tools.Directories import SCOPE_PLUGINS, fileCheck, fileExists, fileHas, pathExists, resolveFilename
 
@@ -37,13 +38,10 @@ class BoxInformation:
 		self.boxInfo = MappingProxyType(boxInfoCollector)
 
 	def processValue(self, value):
-		if value and value[0] in ("\"", "'") and value[-1] == value[0]:
-			return value[1:-1]
-		else:
-			try:
-				return eval(value, {"__builtins__": {}}, {})
-			except:
-				return value
+		try:
+			return literal_eval(value)
+		except:
+			return value
 
 	def getEnigmaInfoList(self):
 		return sorted(self.boxInfo.keys())
