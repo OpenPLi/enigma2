@@ -13,7 +13,7 @@ from Tools.Multiboot import getMultibootStartupDevice, getMultibootslots  # This
 
 class BoxInformation:
 	def __init__(self, root=""):
-		boxInfoCollector = {}
+		boxInfoCollector = {"machine": "default"} #add one key to the boxInfoCollector as it always should exist to satisfy the CI test on github
 		self.boxInfoMutable = {}
 		boxInfoCollector["checksum"] = None
 		checksumcollectionstring = ""
@@ -124,7 +124,7 @@ def getBootdevice():
 	return dev
 
 
-model = BoxInfo.getItem("machine", default="unknown")
+model = BoxInfo.getItem("machine")
 
 SystemInfo["InDebugMode"] = eGetEnigmaDebugLvl() >= 4
 SystemInfo["CommonInterface"] = model in ("h9combo", "h9combose", "h10", "pulse4kmini") and 1 or eDVBCIInterfaces.getInstance().getNumOfSlots()
