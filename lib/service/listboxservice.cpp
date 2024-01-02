@@ -930,7 +930,7 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 					painter.clippop();
 				}
 
-				if (m_pixmaps[picRecord] && isRecorded)
+				if (m_pixmaps[picRecord] && isRecorded && ((m_record_indicator_mode == 1) || (m_record_indicator_mode == 2)))
 				{
 					eSize pixmap_size = m_pixmaps[picRecord]->size();
 					xlpos -= 15 + pixmap_size.width();
