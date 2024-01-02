@@ -41,6 +41,13 @@ class BoxInformation:
 		try:
 			return literal_eval(value)
 		except (ValueError, SyntaxError):
+			value_upper = value.upper()
+			if value_upper == "NONE":
+				return None
+			elif value_upper in ("FALSE", "NO", "OFF", "DISABLED"):
+				return False
+			elif value_upper in ("TRUE", "YES", "ON", "ENABLED"):
+				return True
 			return value
 
 	def getEnigmaInfoList(self):
