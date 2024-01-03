@@ -62,7 +62,6 @@ class BoxInformation:
 		return default
 
 	def setItem(self, item, value, immutable=False, forceOverride=False):
-		print('*', item, value, immutable, forceOverride)
 		if item in self.boxInfo and not forceOverride:
 			print("[BoxInfo] Error: Item '%s' is immutable and can not be %s!" % (item, "changed" if item in self.boxInfo else "added"))
 			return False
