@@ -5,11 +5,6 @@ from ast import literal_eval
 from enigma import Misc_Options, eDVBCIInterfaces, eDVBResourceManager, eGetEnigmaDebugLvl
 from Tools.Directories import SCOPE_PLUGINS, fileCheck, fileExists, fileHas, pathExists, resolveFilename
 
-SystemInfo = {}
-
-
-from Tools.Multiboot import getMultibootStartupDevice, getMultibootslots  # This import needs to be here to avoid a SystemInfo load loop!
-
 
 class BoxInformation:
 	def __init__(self, root=""):
@@ -64,8 +59,6 @@ class BoxInformation:
 			return self.boxInfo[item]
 		elif item in self.boxInfoMutable:
 			return self.boxInfoMutable[item]
-		elif item in SystemInfo:
-			return SystemInfo[item]
 		return default
 
 	def setItem(self, item, value, immutable=False, forceOverride=False):
@@ -130,8 +123,13 @@ def getBootdevice():
 		dev = dev[:-1]
 	return dev
 
+#This line makes the new BoxInfo backwards compatible with SystemInfo without duplicating the dictionary.
+#As soon anywhere in enigma2 and all the plugins SystemInfo is not used anymore it can be considered to remove this line
+SystemInfo = BoxInfo.boxInfoMutable
+from Tools.Multiboot import getMultibootStartupDevice, getMultibootslots  # This import needs to be here to avoid a SystemInfo load loop!
 
 model = BoxInfo.getItem("machine")
+
 
 SystemInfo["InDebugMode"] = eGetEnigmaDebugLvl() >= 4
 SystemInfo["CommonInterface"] = model in ("h9combo", "h9combose", "h10", "pulse4kmini") and 1 or eDVBCIInterfaces.getInstance().getNumOfSlots()
