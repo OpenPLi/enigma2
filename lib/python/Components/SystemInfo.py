@@ -69,7 +69,8 @@ class BoxInformation:
 			boxInfoCollector = dict(self.boxInfo)
 			boxInfoCollector[item] = value
 			self.boxInfo = MappingProxyType(boxInfoCollector)
-		self.boxInfoMutable[item] = value
+		else:
+			self.boxInfoMutable[item] = value
 		return True
 
 	def deleteItem(self, item, forceOverride=False):
