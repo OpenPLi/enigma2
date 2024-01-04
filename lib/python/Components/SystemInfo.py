@@ -1,6 +1,5 @@
 import re
 from hashlib import md5
-from types import MappingProxyType
 from ast import literal_eval
 from enigma import Misc_Options, eDVBCIInterfaces, eDVBResourceManager, eGetEnigmaDebugLvl
 from Tools.Directories import SCOPE_PLUGINS, fileCheck, fileExists, fileHas, pathExists, resolveFilename
@@ -8,29 +7,26 @@ from Tools.Directories import SCOPE_PLUGINS, fileCheck, fileExists, fileHas, pat
 
 class BoxInformation:
 	def __init__(self, root=""):
-		boxInfoCollector = {"machine": "default"} #add one key to the boxInfoCollector as it always should exist to satisfy the CI test on github
-		self.boxInfoMutable = {}
-		boxInfoCollector["checksum"] = None
+		self.boxInfo = {"machine": "default", "checksum": None} #add one key to the boxInfoCollector as it always should exist to satisfy the CI test on github and predefine checksum
 		checksumcollectionstring = ""
 		file = root + "/usr/lib/enigma.info"
 		if fileExists(file):
 			for line in open(file, 'r').readlines():
 				if line.startswith("checksum="):
-					boxInfoCollector["checksum"] = md5(bytearray(checksumcollectionstring, "UTF-8", errors="ignore")).hexdigest() == line.strip().split('=')[1]
+					self.boxInfo["checksum"] = md5(bytearray(checksumcollectionstring, "UTF-8", errors="ignore")).hexdigest() == line.strip().split('=')[1]
 					break
 				checksumcollectionstring += line
 				if line.startswith("#") or line.strip() == "":
 					continue
 				if '=' in line:
 					item, value = [x.strip() for x in line.split('=')]
-					boxInfoCollector[item] = self.processValue(value)
-			if boxInfoCollector["checksum"]:
+					self.boxInfo[item] = self.processValue(value)
+			if self.boxInfo["checksum"]:
 				print("[SystemInfo] Enigma information file data loaded into BoxInfo.")
 			else:
 				print("[SystemInfo] Enigma information file data loaded, but checksum failed.")
 		else:
 			print("[SystemInfo] ERROR: %s is not available!  The system is unlikely to boot or operate correctly." % file)
-		self.boxInfo = MappingProxyType(boxInfoCollector)
 
 	def processValue(self, value):
 		try:
@@ -57,34 +53,15 @@ class BoxInformation:
 	def getItem(self, item, default=None):
 		if item in self.boxInfo:
 			return self.boxInfo[item]
-		elif item in self.boxInfoMutable:
-			return self.boxInfoMutable[item]
 		return default
 
-	def setItem(self, item, value, immutable=False, forceOverride=False):
-		if item in self.boxInfo and not forceOverride:
-			print("[BoxInfo] Error: Item '%s' is immutable and can not be %s!" % (item, "changed" if item in self.boxInfo else "added"))
-			return False
-		if immutable:
-			boxInfoCollector = dict(self.boxInfo)
-			boxInfoCollector[item] = value
-			self.boxInfo = MappingProxyType(boxInfoCollector)
-		else:
-			self.boxInfoMutable[item] = value
+	def setItem(self, item, value, *args, **kws):
+		self.boxInfo[item] = value
 		return True
 
-	def deleteItem(self, item, forceOverride=False):
-		if item in self.boxInfo:
-			if forceOverride:
-				boxInfoCollector = dict(self.boxInfo)
-				del boxInfoCollector[item]
-				self.boxInfo = MappingProxyType(boxInfoCollector)
-				return True
-			else:
-				print("[BoxInfo] Error: Item '%s' is immutable and can not be deleted!" % item)
-		if item in self.boxInfoMutable:
-			del self.boxInfoMutable[item]
-			return True
+	def deleteItem(self, item, *args, **kws):
+		del self.boxInfo[item]
+		return True
 
 
 BoxInfo = BoxInformation()
@@ -123,8 +100,7 @@ def getBootdevice():
 	return dev
 
 #This line makes the new BoxInfo backwards compatible with SystemInfo without duplicating the dictionary.
-#As soon anywhere in enigma2 and all the plugins SystemInfo is not used anymore it can be considered to remove this line
-SystemInfo = BoxInfo.boxInfoMutable
+SystemInfo = BoxInfo.boxInfo
 from Tools.Multiboot import getMultibootStartupDevice, getMultibootslots  # This import needs to be here to avoid a SystemInfo load loop!
 
 model = BoxInfo.getItem("machine")
