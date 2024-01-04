@@ -51,9 +51,7 @@ class BoxInformation:
 		return sorted({**self.boxInfo, **self.boxInfoMutable}.keys())
 
 	def getItem(self, item, default=None):
-		if item in self.boxInfo:
-			return self.boxInfo[item]
-		return default
+		return self.boxInfo.get(item, default)
 
 	def setItem(self, item, value, *args, **kws):
 		self.boxInfo[item] = value
