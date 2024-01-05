@@ -19,8 +19,8 @@ class BoxInformation:
 				if line.startswith("#") or line.strip() == "":
 					continue
 				if '=' in line:
-					item, value = [x.strip() for x in line.split('=')]
-					self.boxInfo[item] = self.processValue(value)
+					item, value = line.split('=', 1)
+					self.boxInfo[item.strip()] = self.processValue(value.strip())
 			if self.boxInfo["checksum"]:
 				print("[SystemInfo] Enigma information file data loaded into BoxInfo.")
 			else:
