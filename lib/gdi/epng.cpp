@@ -403,7 +403,6 @@ int loadSVG(ePtr<gPixmap> &result, const char *filename, int cached, int width, 
 	if (width > 0 && height > 0 && keepAspect) {
 		double sourceWidth = image->width;
 		double sourceHeight = image->height;
-		double ratio = sourceWidth / sourceHeight;
 		double widthScale = 0, heightScale = 0;
 		if (sourceWidth > 0)
 			widthScale = (double)width / sourceWidth;
