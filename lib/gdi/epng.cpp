@@ -368,7 +368,7 @@ static int savePNGto(FILE *fp, gPixmap *pixmap)
 	return 0;
 }
 
-int loadSVG(ePtr<gPixmap> &result, const char *filename, int cached, int width, int height, float scale)
+int loadSVG(ePtr<gPixmap> &result, const char *filename, int cached, int width, int height, float scale, int keepAspect)
 {
 	result = nullptr;
 	int size = 0;
@@ -400,34 +400,51 @@ int loadSVG(ePtr<gPixmap> &result, const char *filename, int cached, int width, 
 		return 0;
 	}
 
-	if (height > 0)
-		yscale = ((double) height) / image->height;
+	if (width > 0 && height > 0 && keepAspect) {
+		double sourceWidth = image->width;
+		double sourceHeight = image->height;
+		double ratio = sourceWidth / sourceHeight;
+		double widthScale = 0, heightScale = 0;
+		if (sourceWidth > 0)
+			widthScale = (double)width / sourceWidth;
+		if (sourceHeight > 0)
+			heightScale = (double)height / sourceHeight;                
 
-	if (width > 0)
-	{
-		xscale = ((double) width) / image->width;
-		if (height <= 0)
-		{
-			yscale = xscale;
-			height = (int)(image->height * yscale);
-		}
-	}
-	else if (height > 0)
-	{
-		xscale = yscale;
+		double scale = std::min(widthScale, heightScale);
+		yscale = scale;
+		xscale = scale;
 		width = (int)(image->width * xscale);
-	}
-	else if (scale > 0)
-	{
-		xscale = (double) scale;
-		yscale = (double) scale;
-		width = (int)(image->width * scale);
 		height = (int)(image->height * scale);
-	}
-	else
-	{
-		width = (int)image->width;
-		height = (int)image->height;
+	} else {
+		if (height > 0)
+			yscale = ((double) height) / image->height;
+
+		if (width > 0)
+		{
+			xscale = ((double) width) / image->width;
+			if (height <= 0)
+			{
+				yscale = xscale;
+				height = (int)(image->height * yscale);
+			}
+		}
+		else if (height > 0)
+		{
+			xscale = yscale;
+			width = (int)(image->width * xscale);
+		}
+		else if (scale > 0)
+		{
+			xscale = (double) scale;
+			yscale = (double) scale;
+			width = (int)(image->width * scale);
+			height = (int)(image->height * scale);
+		}
+		else
+		{
+			width = (int)image->width;
+			height = (int)image->height;
+		}
 	}
 
 	result = new gPixmap(width, height, 32, cached ? PixmapCache::PixmapDisposed : NULL, -1);
