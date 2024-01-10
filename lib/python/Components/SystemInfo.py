@@ -80,8 +80,8 @@ class BoxInformation:
 	def getEnigmaInfoList(self):
 		return sorted(self.boxInfo.immutablelist)
 
-	def getEnigmaConfList(self):
-		return sorted([item for item in self.boxInfo.keys() if item not in self.boxInfo.immutablelist])
+	def getEnigmaConfList(self):  # not used by us
+		return []
 
 	def getItemsList(self):
 		return sorted(self.boxInfo.keys())
