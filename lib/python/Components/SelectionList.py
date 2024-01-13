@@ -75,7 +75,7 @@ class SelectionList(MenuList):
 	def applySkin(self, desktop, parent):
 
 		def selectionListDescr(value):
-			self.selectionListDescr = value.split(",")
+			self.selectionListDescr = map(int, value.split(","))
 
 		for (attrib, value) in self.skinAttributes[:]:
 			try:
@@ -84,4 +84,10 @@ class SelectionList(MenuList):
 				pass
 			else:
 				self.skinAttributes.remove((attrib, value))
+		
+		# recreate the list with the new parameters parsed from skin
+		for x in range(len(self.list)):
+			description, value, index, selected = self.list[x][0]
+			self.list[x] = SelectionEntryComponent(description, value, index, selected, self.selectionListDescr)
+		self.setList(self.list)
 		return MenuList.applySkin(self, desktop, parent)
