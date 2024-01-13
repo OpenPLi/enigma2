@@ -75,7 +75,7 @@ class SelectionList(MenuList):
 	def applySkin(self, desktop, parent):
 
 		def selectionListDescr(value):
-			self.selectionListDescr = map(int, value.split(","))
+			self.selectionListDescr = list(map(int, value.split(",")))
 
 		for (attrib, value) in self.skinAttributes[:]:
 			try:
