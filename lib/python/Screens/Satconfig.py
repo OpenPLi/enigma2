@@ -1,6 +1,6 @@
 from enigma import eDVBDB, getLinkedSlotID, eDVBResourceManager
 from Screens.Screen import Screen
-from Components.SystemInfo import SystemInfo
+from Components.SystemInfo import BoxInfo
 from Components.ActionMap import ActionMap
 from Components.ConfigList import ConfigListScreen
 from Components.NimManager import nimmanager
@@ -53,7 +53,7 @@ class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
 		list.append((" ", nim.longitudeOrientation, _("Enter if you are in the east or west hemisphere.")))
 		list.append((self.indent % _("Latitude"), nim.latitude, _("Enter your current latitude. This is the number of degrees you are from the equator as a decimal.")))
 		list.append((" ", nim.latitudeOrientation, _("Enter if you are north or south of the equator.")))
-		if SystemInfo["CanMeasureFrontendInputPower"]:
+		if BoxInfo.getItem("CanMeasureFrontendInputPower"):
 			self.advancedPowerMeasurement = (self.indent % _("Use power measurement"), nim.powerMeasurement, _("Power management. Consult your receiver's manual for more information."))
 			list.append(self.advancedPowerMeasurement)
 			if nim.powerMeasurement.value:
@@ -418,7 +418,7 @@ class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
 					self.list.append((self.indent % "LOF/L", currLnb.lofl, _("Consult your SCR device spec sheet for this information.")))
 					self.list.append((self.indent % "LOF/H", currLnb.lofh, _("Consult your SCR device spec sheet for this information.")))
 					self.list.append((self.indent % _("Threshold"), currLnb.threshold, _("Consult your SCR device spec sheet for this information.")))
-					if not SystemInfo["FbcTunerPowerAlwaysOn"] or not self.nim.isFBCTuner():
+					if not BoxInfo.getItem("FbcTunerPowerAlwaysOn") or not self.nim.isFBCTuner():
 						self.list.append(self.externallyPowered)
 					if not currLnb.powerinserter.value:
 						self.list.append((self.indent % _("Bootup time"), currLnb.bootuptime, _("Consult your SCR device spec sheet for this information.")))
@@ -432,7 +432,7 @@ class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
 					if currLnb.positions.value > 1:
 						self.list.append(self.advancedPosition)
 					self.list.append(self.advancedSCR)
-					if not SystemInfo["FbcTunerPowerAlwaysOn"] or not self.nim.isFBCTuner():
+					if not BoxInfo.getItem("FbcTunerPowerAlwaysOn") or not self.nim.isFBCTuner():
 						self.list.append(self.externallyPowered)
 				choices = []
 				connectable = nimmanager.canConnectTo(self.slotid)
@@ -487,7 +487,7 @@ class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
 						self.list.append((self.indent % _("DiSEqC 1.1 repeats"), currLnb.diseqcRepeats, _("If using multiple uncommitted switches the DiSEqC commands must be sent multiple times. Set to the number of uncommitted switches in the chain minus one.")))
 				self.list.append((self.indent % _("Sequence repeat"), currLnb.sequenceRepeat, _("Set sequence repeats if your aerial system requires this. Normally if the aerial system has been configured correctly sequence repeats will not be necessary. If yours does, recheck you have command order set correctly.")))
 				if currLnb.diseqcMode.value == "1_2":
-					if SystemInfo["CanMeasureFrontendInputPower"]:
+					if BoxInfo.getItem("CanMeasureFrontendInputPower"):
 						self.advancedPowerMeasurement = (self.indent % _("Use power measurement"), currLnb.powerMeasurement, _("Power management. Consult your receiver's manual for more information."))
 						self.list.append(self.advancedPowerMeasurement)
 						if currLnb.powerMeasurement.value:

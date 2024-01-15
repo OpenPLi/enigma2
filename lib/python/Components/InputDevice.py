@@ -1,5 +1,5 @@
 from Components.config import config, ConfigSlider, ConfigSubsection, ConfigYesNo, ConfigText, ConfigInteger
-from Components.SystemInfo import SystemInfo
+from Components.SystemInfo import BoxInfo
 from fcntl import ioctl
 import os
 import struct
@@ -198,7 +198,7 @@ config.plugins.remotecontroltype.rctype = ConfigInteger(default=0)
 
 class RcTypeControl():
 	def __init__(self):
-		if SystemInfo["RcTypeChangable"] and os.path.exists('/proc/stb/info/boxtype'):
+		if BoxInfo.getItem("RcTypeChangable") and os.path.exists('/proc/stb/info/boxtype'):
 			self.isSupported = True
 			self.boxType = open('/proc/stb/info/boxtype', 'r').read().strip()
 			if config.plugins.remotecontroltype.rctype.value != 0:

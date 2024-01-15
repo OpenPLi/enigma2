@@ -5,7 +5,7 @@ from Plugins.SystemPlugins.Videomode.VideoHardware import video_hw
 
 from Components.Pixmap import Pixmap
 from Components.config import config, ConfigBoolean, configfile
-from Components.SystemInfo import SystemInfo
+from Components.SystemInfo import BoxInfo
 
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from Tools.HardwareInfo import HardwareInfo
@@ -136,7 +136,7 @@ class VideoWizard(WizardLanguage, Rc):
 		ratesList = self.listRates(mode)
 		print("[VideoWizard] ratesList:", ratesList)
 		if self.port == "DVI" and mode in ("720p", "1080i", "1080p", "2160p", "2160p30"):
-			if SystemInfo["Has24hz"]:
+			if BoxInfo.getItem("Has24hz"):
 				self.rate = "auto"
 				self.hw.setMode(port=self.port, mode=mode, rate="auto")
 			else:

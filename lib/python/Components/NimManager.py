@@ -1,6 +1,6 @@
 import os
 
-from Components.SystemInfo import SystemInfo
+from Components.SystemInfo import BoxInfo
 from Tools.BoundFunction import boundFunction
 
 from Components.config import config, ConfigSubsection, ConfigSelection, ConfigFloat, ConfigSatlist, ConfigYesNo, ConfigInteger, ConfigSubList, ConfigNothing, ConfigSubDict, ConfigOnOff, ConfigDateTime, ConfigText
@@ -116,7 +116,7 @@ class SecConfigure:
 
 	def linkNIMs(self, sec, nim1, nim2):
 		print("[SecConfigure] link tuner", nim1, "to tuner", nim2)
-		if (nim2 == nim1 - 1) or SystemInfo["NimExceptionVuSolo2"]:
+		if (nim2 == nim1 - 1) or BoxInfo.getItem("NimExceptionVuSolo2"):
 			self.linkInternally(nim1)
 		sec.setTunerLinked(nim1, nim2)
 
@@ -939,16 +939,16 @@ class NimManager:
 			if "i2c" not in entry:
 				entry["i2c"] = None
 			if "has_outputs" not in entry:
-				entry["has_outputs"] = entry["name"] in SystemInfo["HasPhysicalLoopthrough"] # "Has_Outputs: yes" not in /proc/bus/nim_sockets NIM, but the physical loopthrough exist
+				entry["has_outputs"] = entry["name"] in BoxInfo.getItem("HasPhysicalLoopthrough") # "Has_Outputs: yes" not in /proc/bus/nim_sockets NIM, but the physical loopthrough exist
 			entry["internally_connectable"] = None
 			if "frontend_device" in entry: # check if internally connectable
 				if os.path.exists("/proc/stb/frontend/%d/rf_switch" % entry["frontend_device"]) and (not id or entries[id]["name"] == entries[id - 1]["name"]):
-					if SystemInfo["NimExceptionVuSolo2"]:
+					if BoxInfo.getItem("NimExceptionVuSolo2"):
 						if not id:
 							entry["internally_connectable"] = 1
 					elif id:
 						entry["internally_connectable"] = entry["frontend_device"] - 1
-						if SystemInfo["NimExceptionVuDuo2"] and entry["i2c"] != entries[id - 1]["i2c"]:
+						if BoxInfo.getItem("NimExceptionVuDuo2") and entry["i2c"] != entries[id - 1]["i2c"]:
 							entry["internally_connectable"] = None
 			else:
 				entry["frontend_device"] = None
@@ -958,7 +958,7 @@ class NimManager:
 				entry["supports_blind_scan"] = False
 
 			entry["fbc"] = [0, 0, 0] # not fbc
-			if entry["name"] and ("fbc" in entry["name"].lower() or (entry["name"] in SystemInfo["HasFBCtuner"] and entry["frontend_device"] is not None and os.access("/proc/stb/frontend/%d/fbc_id" % entry["frontend_device"], os.F_OK))):
+			if entry["name"] and ("fbc" in entry["name"].lower() or (entry["name"] in BoxInfo.getItem("HasFBCtuner") and entry["frontend_device"] is not None and os.access("/proc/stb/frontend/%d/fbc_id" % entry["frontend_device"], os.F_OK))):
 				fbc_number += 1
 				if fbc_number <= (entry["type"] and "DVB-C" in entry["type"] and 1 or 2):
 					entry["fbc"] = [1, fbc_number, fbc_tuner] # fbc root
@@ -1411,7 +1411,7 @@ def InitNimManager(nimmgr, update_slots=[]):
 					productparameters = [p for p in [m for m in unicable_xml.find(lnb_or_matrix) if m.get("name") == manufacturer][0] if p.get("name") == configEntry.value][0]
 					section.bootuptime = ConfigInteger(default=int(productparameters.get("bootuptime", 1000)), limits=(0, 9999))
 					section.bootuptime.save_forced = True
-					section.powerinserter = ConfigYesNo(default=SystemInfo["FbcTunerPowerAlwaysOn"])
+					section.powerinserter = ConfigYesNo(default=BoxInfo.getItem("FbcTunerPowerAlwaysOn"))
 					section.powerinserter.save_forced = True
 					section.powerinserter.addNotifier(setPowerInserter)
 					srcfrequencylist = productparameters.get("scrs").split(",")
@@ -1448,7 +1448,7 @@ def InitNimManager(nimmgr, update_slots=[]):
 					section.scrList.addNotifier(boundFunction(userScrListChanged, srcfrequencyList))
 					section.bootuptime = ConfigInteger(default=1000, limits=(0, 9999))
 					section.bootuptime.save_forced = True
-					section.powerinserter = ConfigYesNo(default=SystemInfo["FbcTunerPowerAlwaysOn"])
+					section.powerinserter = ConfigYesNo(default=BoxInfo.getItem("FbcTunerPowerAlwaysOn"))
 					section.powerinserter.save_forced = True
 					section.powerinserter.addNotifier(setPowerInserter)
 
@@ -1595,7 +1595,7 @@ def InitNimManager(nimmgr, update_slots=[]):
 		nim.turningspeedH = ConfigFloat(default=[2, 3], limits=[(0, 9), (0, 9)])
 		nim.turningspeedV = ConfigFloat(default=[1, 7], limits=[(0, 9), (0, 9)])
 		nim.powerMeasurement = ConfigYesNo(True)
-		nim.powerThreshold = ConfigInteger(default=15 if SystemInfo["NimExceptionDMM8000"] else 50, limits=(0, 100))
+		nim.powerThreshold = ConfigInteger(default=15 if BoxInfo.getItem("NimExceptionDMM8000") else 50, limits=(0, 100))
 		nim.turningSpeed = ConfigSelection(turning_speed_choices, "fast")
 		btime = datetime(1970, 1, 1, 7, 0)
 		nim.fastTurningBegin = ConfigDateTime(default=mktime(btime.timetuple()), formatstring=_("%H:%M"), increment=900)

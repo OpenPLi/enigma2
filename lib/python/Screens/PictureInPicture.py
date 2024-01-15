@@ -1,7 +1,7 @@
 from Screens.Screen import Screen
 from Screens.Dish import Dishpip
 from enigma import ePoint, eSize, eRect, eServiceCenter, getBestPlayableServiceReference, eServiceReference, eTimer
-from Components.SystemInfo import SystemInfo
+from Components.SystemInfo import BoxInfo
 from Components.VideoWindow import VideoWindow
 from Components.Sources.StreamService import StreamServiceList
 from Components.config import config, ConfigPosition, ConfigSelection
@@ -18,8 +18,8 @@ PipPigModeTimer = eTimer()
 def timedStopPipPigMode():
 	from Screens.InfoBar import InfoBar
 	if InfoBar.instance and InfoBar.instance.session:
-		if SystemInfo["hasPIPVisibleProc"]:
-			open(SystemInfo["hasPIPVisibleProc"], "w").write("1")
+		if BoxInfo.getItem("hasPIPVisibleProc"):
+			open(BoxInfo.getItem("hasPIPVisibleProc"), "w").write("1")
 		elif hasattr(InfoBar.instance.session, "pip"):
 			InfoBar.instance.session.pip.relocate()
 	global PipPigModeEnabled
@@ -36,8 +36,8 @@ def PipPigMode(value):
 			PipPigModeTimer.stop()
 			global PipPigModeEnabled
 			if not PipPigModeEnabled:
-				if SystemInfo["hasPIPVisibleProc"]:
-					open(SystemInfo["hasPIPVisibleProc"], "w").write("0")
+				if BoxInfo.getItem("hasPIPVisibleProc"):
+					open(BoxInfo.getItem("hasPIPVisibleProc"), "w").write("0")
 				else:
 					import skin
 					x, y, w, h = skin.parameters.get("PipHidePosition", (16, 16, 16, 16))
@@ -66,12 +66,12 @@ class PictureInPicture(Screen):
 		self.currentServiceReference = None
 
 		self.choicelist = [("standard", _("Standard"))]
-		if SystemInfo["VideoDestinationConfigurable"]:
+		if BoxInfo.getItem("VideoDestinationConfigurable"):
 			self.choicelist.append(("cascade", _("Cascade PiP")))
 			self.choicelist.append(("split", _("Splitscreen")))
 			self.choicelist.append(("byside", _("Side by side")))
 		self.choicelist.append(("bigpig", _("Big PiP")))
-		if SystemInfo["HasExternalPIP"]:
+		if BoxInfo.getItem("HasExternalPIP"):
 			self.choicelist.append(("external", _("External PiP")))
 
 		if not pip_config_initialized:
@@ -150,12 +150,12 @@ class PictureInPicture(Screen):
 			self.setSizePosMainWindow()
 
 	def setSizePosMainWindow(self, x=0, y=0, w=0, h=0):
-		if SystemInfo["VideoDestinationConfigurable"]:
+		if BoxInfo.getItem("VideoDestinationConfigurable"):
 			self["video"].instance.setFullScreenPosition(eRect(x, y, w, h))
 
 	def setExternalPiP(self, onoff):
-		if SystemInfo["HasExternalPIP"]:
-			open(SystemInfo["HasExternalPIP"], "w").write(onoff and "on" or "off")
+		if BoxInfo.getItem("HasExternalPIP"):
+			open(BoxInfo.getItem("HasExternalPIP"), "w").write(onoff and "on" or "off")
 
 	def active(self):
 		self.pipActive.show()
@@ -191,7 +191,7 @@ class PictureInPicture(Screen):
 		from Screens.InfoBarGenerics import streamrelay
 		ref = streamrelay.streamrelayChecker(self.resolveAlternatePipService(service))
 		if ref:
-			if SystemInfo["CanNotDoSimultaneousTranscodeAndPIP"] and StreamServiceList:
+			if BoxInfo.getItem("CanNotDoSimultaneousTranscodeAndPIP") and StreamServiceList:
 				self.pipservice = None
 				self.currentService = None
 				self.currentServiceReference = None

@@ -7,7 +7,7 @@ from Components.Label import Label
 from Components.ServiceEventTracker import ServiceEventTracker
 from enigma import eDVBSatelliteEquipmentControl, eTimer, iPlayableService, eServiceCenter, iServiceInformation
 from Components.NimManager import nimmanager
-from Components.SystemInfo import SystemInfo
+from Components.SystemInfo import BoxInfo
 from Components.Sources.FrontendStatus import FrontendStatus
 
 INVALID_POSITION = 9999
@@ -126,7 +126,7 @@ class Dish(Screen):
 	def __serviceStarted(self):
 		if self.__state == self.STATE_SHOWN:
 			self.hide()
-		if SystemInfo["isRotorTuner"] and self.showdish:
+		if BoxInfo.getItem("isRotorTuner") and self.showdish:
 			service = self.session.nav.getCurrentService()
 			info = service and service.info()
 			data = info and info.getInfoObject(iServiceInformation.sTransponderData)
@@ -300,7 +300,7 @@ class Dishpip(Dish, Screen):
 			if self.__state == self.STATE_HIDDEN:
 				self.rotorTimer.stop()
 				self.moving_timeout = 0
-				if config.usage.showdish.value and SystemInfo["isRotorTuner"]:
+				if config.usage.showdish.value and BoxInfo.getItem("isRotorTuner"):
 					self.show()
 				if self.cur_orbpos != INVALID_POSITION and self.cur_orbpos != config.misc.lastrotorposition.value:
 					config.misc.lastrotorposition.value = self.cur_orbpos
@@ -327,7 +327,7 @@ class Dishpip(Dish, Screen):
 	def startPiPService(self, ref=None):
 		if self.__state == self.STATE_SHOWN:
 			self.__toHide()
-		if ref and SystemInfo["isRotorTuner"]:
+		if ref and BoxInfo.getItem("isRotorTuner"):
 			info = eServiceCenter.getInstance().info(ref)
 			data = info and info.getInfoObject(ref, iServiceInformation.sTransponderData)
 			if not data or data == -1:

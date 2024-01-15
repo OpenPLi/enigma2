@@ -10,7 +10,7 @@ from Components.config import config, ConfigSubsection, ConfigNothing, ConfigSel
 from Components.Label import Label
 from Components.Sources.List import List
 from Components.Sources.Boolean import Boolean
-from Components.SystemInfo import SystemInfo
+from Components.SystemInfo import BoxInfo
 from Components.VolumeControl import VolumeControl
 from Components.UsageConfig import originalAudioTracks, visuallyImpairedCommentary
 from Components.Converter.ServiceInfo import StdAudioDesc
@@ -99,15 +99,15 @@ class AudioSelection(ConfigListScreen, Screen):
 			service = self.session.nav.getCurrentService()
 			self.audioTracks = audio = service and service.audioTracks()
 			track_num = audio and audio.getNumberOfTracks() or 0
-			if SystemInfo["CanDownmixAC3"] and track_num > 0 and config.usage.setup_level.index >= 1:
+			if BoxInfo.getItem("CanDownmixAC3") and track_num > 0 and config.usage.setup_level.index >= 1:
 				downmix_ac3_value = config.av.downmix_ac3.value
 				if downmix_ac3_value in ("downmix", "passthrough"):
 					self.settings.downmix = ConfigSelection(choices=[("downmix", _("Downmix")), ("passthrough", _("Passthrough"))], default=downmix_ac3_value)
 					self.settings.downmix.addNotifier(self.changeAC3Downmix, initial_call=False)
 					extra_text = " - AC3"
-					if SystemInfo["CanDownmixDTS"]:
+					if BoxInfo.getItem("CanDownmixDTS"):
 						extra_text += ",DTS"
-					if SystemInfo["CanDownmixAAC"]:
+					if BoxInfo.getItem("CanDownmixAAC"):
 						extra_text += ",AAC"
 					conflist.append((_("Multi channel downmix") + extra_text, self.settings.downmix))
 					self["key_red"].setBoolean(True)
@@ -270,10 +270,10 @@ class AudioSelection(ConfigListScreen, Screen):
 	def changeAC3Downmix(self, configElement):
 		config.av.downmix_ac3.value = configElement.value
 		config.av.downmix_ac3.save()
-		if SystemInfo["CanDownmixDTS"]:
+		if BoxInfo.getItem("CanDownmixDTS"):
 			config.av.downmix_dts.value = configElement.value
 			config.av.downmix_dts.save()
-		if SystemInfo["CanDownmixAAC"]:
+		if BoxInfo.getItem("CanDownmixAAC"):
 			config.av.downmix_aac.value = configElement.value
 			config.av.downmix_aac.save()
 

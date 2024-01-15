@@ -7,7 +7,7 @@ from Components.About import GetIPsFromNetworkInterfaces
 from Components.NimManager import nimmanager
 from Components.Renderer.FrontpanelLed import ledPatterns, PATTERN_ON, PATTERN_OFF, PATTERN_BLINK
 from Components.ServiceList import refreshServiceList, redrawServiceList
-from Components.SystemInfo import SystemInfo
+from Components.SystemInfo import BoxInfo
 import os
 import time
 
@@ -336,94 +336,94 @@ def InitUsageConfig():
 	config.usage.show_eit_nownext = ConfigYesNo(default=True)
 	config.usage.show_vcr_scart = ConfigYesNo(default=False)
 	config.usage.show_update_disclaimer = ConfigYesNo(default=True)
-	config.usage.pic_resolution = ConfigSelection(default=None, choices=[(None, _("Same resolution as skin")), ("(720, 576)", "720x576"), ("(1280, 720)", "1280x720"), ("(1920, 1080)", "1920x1080")][:SystemInfo["HasFullHDSkinSupport"] and 4 or 3])
+	config.usage.pic_resolution = ConfigSelection(default=None, choices=[(None, _("Same resolution as skin")), ("(720, 576)", "720x576"), ("(1280, 720)", "1280x720"), ("(1920, 1080)", "1920x1080")][:BoxInfo.getItem("HasFullHDSkinSupport") and 4 or 3])
 
-	if SystemInfo["Fan"]:
+	if BoxInfo.getItem("Fan"):
 		choicelist = [('off', _("Off")), ('on', _("On")), ('auto', _("Auto"))]
 		if os.path.exists("/proc/stb/fp/fan_choices"):
 			choicelist = [x for x in choicelist if x[0] in open("/proc/stb/fp/fan_choices", "r").read().strip().split(" ")]
 		config.usage.fan = ConfigSelection(choicelist)
 
 		def fanChanged(configElement):
-			open(SystemInfo["Fan"], "w").write(configElement.value)
+			open(BoxInfo.getItem("Fan"), "w").write(configElement.value)
 		config.usage.fan.addNotifier(fanChanged)
 
-	if SystemInfo["FanPWM"]:
+	if BoxInfo.getItem("FanPWM"):
 		def fanSpeedChanged(configElement):
-			open(SystemInfo["FanPWM"], "w").write(hex(configElement.value)[2:])
+			open(BoxInfo.getItem("FanPWM"), "w").write(hex(configElement.value)[2:])
 		config.usage.fanspeed = ConfigSlider(default=127, increment=8, limits=(0, 255))
 		config.usage.fanspeed.addNotifier(fanSpeedChanged)
 
-	if SystemInfo["PowerLED"]:
+	if BoxInfo.getItem("PowerLED"):
 		def powerLEDChanged(configElement):
-			if "fp" in SystemInfo["PowerLED"]:
-				open(SystemInfo["PowerLED"], "w").write(configElement.value and "1" or "0")
+			if "fp" in BoxInfo.getItem("PowerLED"):
+				open(BoxInfo.getItem("PowerLED"), "w").write(configElement.value and "1" or "0")
 				patterns = [PATTERN_ON, PATTERN_ON, PATTERN_OFF, PATTERN_ON] if configElement.value else [PATTERN_OFF, PATTERN_OFF, PATTERN_OFF, PATTERN_OFF]
 				ledPatterns.setLedPatterns(1, patterns)
 			else:
-				open(SystemInfo["PowerLED"], "w").write(configElement.value and "on" or "off")
+				open(BoxInfo.getItem("PowerLED"), "w").write(configElement.value and "on" or "off")
 		config.usage.powerLED = ConfigYesNo(default=True)
 		config.usage.powerLED.addNotifier(powerLEDChanged)
 
-	if SystemInfo["StandbyLED"]:
+	if BoxInfo.getItem("StandbyLED"):
 		def standbyLEDChanged(configElement):
-			if "fp" in SystemInfo["StandbyLED"]:
+			if "fp" in BoxInfo.getItem("StandbyLED"):
 				patterns = [PATTERN_OFF, PATTERN_BLINK, PATTERN_ON, PATTERN_BLINK] if configElement.value else [PATTERN_OFF, PATTERN_OFF, PATTERN_OFF, PATTERN_OFF]
 				ledPatterns.setLedPatterns(0, patterns)
 			else:
-				open(SystemInfo["StandbyLED"], "w").write(configElement.value and "on" or "off")
+				open(BoxInfo.getItem("StandbyLED"), "w").write(configElement.value and "on" or "off")
 		config.usage.standbyLED = ConfigYesNo(default=True)
 		config.usage.standbyLED.addNotifier(standbyLEDChanged)
 
-	if SystemInfo["SuspendLED"]:
+	if BoxInfo.getItem("SuspendLED"):
 		def suspendLEDChanged(configElement):
-			if "fp" in SystemInfo["SuspendLED"]:
-				open(SystemInfo["SuspendLED"], "w").write(configElement.value and "1" or "0")
+			if "fp" in BoxInfo.getItem("SuspendLED"):
+				open(BoxInfo.getItem("SuspendLED"), "w").write(configElement.value and "1" or "0")
 			else:
-				open(SystemInfo["SuspendLED"], "w").write(configElement.value and "on" or "off")
+				open(BoxInfo.getItem("SuspendLED"), "w").write(configElement.value and "on" or "off")
 		config.usage.suspendLED = ConfigYesNo(default=True)
 		config.usage.suspendLED.addNotifier(suspendLEDChanged)
 
-	if SystemInfo["PowerOffDisplay"]:
+	if BoxInfo.getItem("PowerOffDisplay"):
 		def powerOffDisplayChanged(configElement):
-			open(SystemInfo["PowerOffDisplay"], "w").write(configElement.value and "1" or "0")
+			open(BoxInfo.getItem("PowerOffDisplay"), "w").write(configElement.value and "1" or "0")
 		config.usage.powerOffDisplay = ConfigYesNo(default=True)
 		config.usage.powerOffDisplay.addNotifier(powerOffDisplayChanged)
 
-	if SystemInfo["LCDshow_symbols"]:
+	if BoxInfo.getItem("LCDshow_symbols"):
 		def lcdShowSymbols(configElement):
-			open(SystemInfo["LCDshow_symbols"], "w").write(configElement.value and "1" or "0")
+			open(BoxInfo.getItem("LCDshow_symbols"), "w").write(configElement.value and "1" or "0")
 		config.usage.lcd_show_symbols = ConfigYesNo(default=True)
 		config.usage.lcd_show_symbols.addNotifier(lcdShowSymbols)
 
-	if SystemInfo["WakeOnLAN"]:
-		f = open(SystemInfo["WakeOnLAN"], "r")
+	if BoxInfo.getItem("WakeOnLAN"):
+		f = open(BoxInfo.getItem("WakeOnLAN"), "r")
 		status = f.read().strip()
 		f.close()
 
 		def wakeOnLANChanged(configElement):
 			if status in ("enable", "disable"):
-				open(SystemInfo["WakeOnLAN"], "w").write(configElement.value and "enable" or "disable")
+				open(BoxInfo.getItem("WakeOnLAN"), "w").write(configElement.value and "enable" or "disable")
 			else:
-				open(SystemInfo["WakeOnLAN"], "w").write(configElement.value and "on" or "off")
+				open(BoxInfo.getItem("WakeOnLAN"), "w").write(configElement.value and "on" or "off")
 		config.usage.wakeOnLAN = ConfigYesNo(default=False)
 		config.usage.wakeOnLAN.addNotifier(wakeOnLANChanged)
 
-	if SystemInfo["hasXcoreVFD"]:
+	if BoxInfo.getItem("hasXcoreVFD"):
 		def set12to8characterVFD(configElement):
-			open(SystemInfo["hasXcoreVFD"], "w").write(not configElement.value and "1" or "0")
+			open(BoxInfo.getItem("hasXcoreVFD"), "w").write(not configElement.value and "1" or "0")
 		config.usage.toggle12to8characterVFD = ConfigYesNo(default=False)
 		config.usage.toggle12to8characterVFD.addNotifier(set12to8characterVFD)
 
-	if SystemInfo["LcdLiveTVMode"]:
+	if BoxInfo.getItem("LcdLiveTVMode"):
 		def setLcdLiveTVMode(configElement):
-			open(SystemInfo["LcdLiveTVMode"], "w").write(configElement.value)
+			open(BoxInfo.getItem("LcdLiveTVMode"), "w").write(configElement.value)
 		config.usage.LcdLiveTVMode = ConfigSelection(default="0", choices=[str(x) for x in range(0, 9)])
 		config.usage.LcdLiveTVMode.addNotifier(setLcdLiveTVMode)
 
-	if SystemInfo["LcdLiveDecoder"]:
+	if BoxInfo.getItem("LcdLiveDecoder"):
 		def setLcdLiveDecoder(configElement):
-			open(SystemInfo["LcdLiveDecoder"], "w").write(configElement.value)
+			open(BoxInfo.getItem("LcdLiveDecoder"), "w").write(configElement.value)
 		config.usage.LcdLiveDecoder = ConfigSelection(default="0", choices=[str(x) for x in range(0, 4)])
 		config.usage.LcdLiveDecoder.addNotifier(setLcdLiveDecoder)
 
@@ -489,7 +489,7 @@ def InitUsageConfig():
 			hdd[1].setIdleTime(int(configElement.value))
 	config.usage.hdd_standby.addNotifier(setHDDStandby, immediate_feedback=False)
 
-	if SystemInfo["12V_Output"]:
+	if BoxInfo.getItem("12V_Output"):
 		def set12VOutput(configElement):
 			Misc_Options.getInstance().set_12V_output(configElement.value == "on" and 1 or 0)
 		config.usage.output_12V.addNotifier(set12VOutput, immediate_feedback=False)
@@ -551,43 +551,43 @@ def InitUsageConfig():
 		("3", _("Everywhere"))])
 	config.misc.erase_flags.addNotifier(updateEraseFlags, immediate_feedback=False)
 
-	if SystemInfo["ZapMode"]:
+	if BoxInfo.getItem("ZapMode"):
 		def setZapmode(el):
-			open(SystemInfo["ZapMode"], "w").write(el.value)
+			open(BoxInfo.getItem("ZapMode"), "w").write(el.value)
 		config.misc.zapmode = ConfigSelection(default="mute", choices=[
 			("mute", _("Black screen")), ("hold", _("Hold screen")), ("mutetilllock", _("Black screen till locked")), ("holdtilllock", _("Hold till locked"))])
 		config.misc.zapmode.addNotifier(setZapmode, immediate_feedback=False)
 
-	if SystemInfo["VFD_scroll_repeats"]:
+	if BoxInfo.getItem("VFD_scroll_repeats"):
 		def scroll_repeats(el):
-			open(SystemInfo["VFD_scroll_repeats"], "w").write(el.value)
+			open(BoxInfo.getItem("VFD_scroll_repeats"), "w").write(el.value)
 		choicelist = []
 		for i in range(1, 11, 1):
 			choicelist.append((str(i)))
 		config.usage.vfd_scroll_repeats = ConfigSelection(default="3", choices=choicelist)
 		config.usage.vfd_scroll_repeats.addNotifier(scroll_repeats, immediate_feedback=False)
 
-	if SystemInfo["VFD_scroll_delay"]:
+	if BoxInfo.getItem("VFD_scroll_delay"):
 		def scroll_delay(el):
-			open(SystemInfo["VFD_scroll_delay"], "w").write(el.value)
+			open(BoxInfo.getItem("VFD_scroll_delay"), "w").write(el.value)
 		choicelist = []
 		for i in range(0, 1001, 50):
 			choicelist.append((str(i)))
 		config.usage.vfd_scroll_delay = ConfigSelection(default="150", choices=choicelist)
 		config.usage.vfd_scroll_delay.addNotifier(scroll_delay, immediate_feedback=False)
 
-	if SystemInfo["VFD_initial_scroll_delay"]:
+	if BoxInfo.getItem("VFD_initial_scroll_delay"):
 		def initial_scroll_delay(el):
-			open(SystemInfo["VFD_initial_scroll_delay"], "w").write(el.value)
+			open(BoxInfo.getItem("VFD_initial_scroll_delay"), "w").write(el.value)
 		choicelist = []
 		for i in range(0, 20001, 500):
 			choicelist.append((str(i)))
 		config.usage.vfd_initial_scroll_delay = ConfigSelection(default="1000", choices=choicelist)
 		config.usage.vfd_initial_scroll_delay.addNotifier(initial_scroll_delay, immediate_feedback=False)
 
-	if SystemInfo["VFD_final_scroll_delay"]:
+	if BoxInfo.getItem("VFD_final_scroll_delay"):
 		def final_scroll_delay(el):
-			open(SystemInfo["VFD_final_scroll_delay"], "w").write(el.value)
+			open(BoxInfo.getItem("VFD_final_scroll_delay"), "w").write(el.value)
 		choicelist = []
 		for i in range(0, 20001, 500):
 			choicelist.append((str(i)))
@@ -868,7 +868,7 @@ def showrotorpositionChoicesUpdate(update=False):
 		config.misc.showrotorposition = ConfigSelection(default="no", choices=choiceslist)
 	else:
 		config.misc.showrotorposition.setChoices(choiceslist, "no")
-	SystemInfo["isRotorTuner"] = count > 0
+	BoxInfo.setItem("isRotorTuner", count > 0)
 
 
 def preferredTunerChoicesUpdate(update=False):
@@ -937,10 +937,10 @@ def preferredTunerChoicesUpdate(update=False):
 	else:
 		config.usage.recording_frontend_priority_atsc.setChoices(atsc_nims, "-2")
 
-	SystemInfo["DVB-S_priority_tuner_available"] = len(dvbs_nims) > 3 and any(len(i) > 2 for i in (dvbt_nims, dvbc_nims, atsc_nims))
-	SystemInfo["DVB-T_priority_tuner_available"] = len(dvbt_nims) > 3 and any(len(i) > 2 for i in (dvbs_nims, dvbc_nims, atsc_nims))
-	SystemInfo["DVB-C_priority_tuner_available"] = len(dvbc_nims) > 3 and any(len(i) > 2 for i in (dvbs_nims, dvbt_nims, atsc_nims))
-	SystemInfo["ATSC_priority_tuner_available"] = len(atsc_nims) > 3 and any(len(i) > 2 for i in (dvbs_nims, dvbc_nims, dvbt_nims))
+	BoxInfo.setItem("DVB-S_priority_tuner_available", len(dvbs_nims) > 3 and any(len(i) > 2 for i in (dvbt_nims, dvbc_nims, atsc_nims)))
+	BoxInfo.setItem("DVB-T_priority_tuner_available", len(dvbt_nims) > 3 and any(len(i) > 2 for i in (dvbs_nims, dvbc_nims, atsc_nims)))
+	BoxInfo.setItem("DVB-C_priority_tuner_available", len(dvbc_nims) > 3 and any(len(i) > 2 for i in (dvbs_nims, dvbt_nims, atsc_nims)))
+	BoxInfo.setItem("ATSC_priority_tuner_available", len(atsc_nims) > 3 and any(len(i) > 2 for i in (dvbs_nims, dvbc_nims, dvbt_nims)))
 
 
 def dropEPGNewLines(text):

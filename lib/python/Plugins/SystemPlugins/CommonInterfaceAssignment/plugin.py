@@ -11,7 +11,7 @@ from Components.ConfigList import ConfigList
 from Components.Label import Label
 from Components.SelectionList import SelectionList
 from Components.MenuList import MenuList
-from Components.SystemInfo import SystemInfo
+from Components.SystemInfo import BoxInfo
 from ServiceReference import ServiceReference
 from Plugins.Plugin import PluginDescriptor
 from xml.etree.ElementTree import parse
@@ -46,7 +46,7 @@ class CIselectMainMenu(Screen):
 				"cancel": self.close
 			}, -1)
 
-		NUM_CI = SystemInfo["CommonInterface"]
+		NUM_CI = BoxInfo.getItem("CommonInterface")
 
 		print("[CI_Wizzard] FOUND %d CI Slots " % NUM_CI)
 
@@ -680,7 +680,7 @@ def find_in_list(list, search, listpos=0):
 
 
 def isModule():
-	NUM_CI = SystemInfo["CommonInterface"]
+	NUM_CI = BoxInfo.getItem("CommonInterface")
 	if NUM_CI and NUM_CI > 0:
 		for slot in range(NUM_CI):
 			state = eDVBCI_UI.getInstance().getState(slot)

@@ -1,13 +1,13 @@
 from Screens.Screen import Screen
 from Components.ActionMap import NumberActionMap
-from Components.SystemInfo import SystemInfo
+from Components.SystemInfo import BoxInfo
 from Components.Label import Label
 from Components.config import config
 
 # this is not so great.
 MAX_X = 720
 MAX_Y = 576
-MAX_W, MAX_H = SystemInfo["MaxPIPSize"]
+MAX_W, MAX_H = BoxInfo.getItem("MaxPIPSize")
 MIN_W = MAX_X // 8
 MIN_H = MAX_Y // 8
 
@@ -37,7 +37,7 @@ class PiPSetup(Screen):
 		self.resize = 100
 
 		self.helptext = _("Please use direction keys to move the PiP window.\nPress Bouquet +/- to resize the window.\nPress OK to go back to the TV mode or EXIT to cancel the moving.")
-		if SystemInfo["VideoDestinationConfigurable"] or SystemInfo["HasExternalPIP"]:
+		if BoxInfo.getItem("VideoDestinationConfigurable") or BoxInfo.getItem("HasExternalPIP"):
 			self.helptext += "\n" + _("Press '0' to toggle PiP mode")
 		self.modetext = _("Current mode: %s \n")
 

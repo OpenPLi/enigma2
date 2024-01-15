@@ -3,7 +3,7 @@ from Screens.ChannelSelection import FLAG_IS_DEDICATED_3D
 from Components.Label import Label
 from Components.ConfigList import ConfigListScreen
 from Components.ServiceEventTracker import ServiceEventTracker
-from Components.SystemInfo import SystemInfo
+from Components.SystemInfo import BoxInfo
 from Components.config import config, ConfigSubsection, ConfigInteger, ConfigSelection, ConfigSlider
 from enigma import iPlayableService, iServiceInformation, eServiceCenter, eServiceReference, eDVBDB
 
@@ -77,11 +77,11 @@ isDedicated3D = False
 def applySettings(mode=config.plugins.OSD3DSetup.mode.value, znorm=int(config.plugins.OSD3DSetup.znorm.value)):
 	global previous, isDedicated3D
 	mode = isDedicated3D and mode == "auto" and "sidebyside" or mode
-	mode == "3dmode" in SystemInfo["3DMode"] and mode or mode == 'sidebyside' and 'sbs' or mode == 'topandbottom' and 'tab' or 'off'
+	mode == "3dmode" in BoxInfo.getItem("3DMode") and mode or mode == 'sidebyside' and 'sbs' or mode == 'topandbottom' and 'tab' or 'off'
 	if previous != (mode, znorm):
 		try:
-			open(SystemInfo["3DMode"], "w").write(mode)
-			open(SystemInfo["3DZNorm"], "w").write('%d' % znorm)
+			open(BoxInfo.getItem("3DMode"), "w").write(mode)
+			open(BoxInfo.getItem("3DZNorm"), "w").write('%d' % znorm)
 			previous = (mode, znorm)
 		except:
 			return
@@ -134,7 +134,7 @@ def autostart(reason, **kwargs):
 
 
 def Plugins(**kwargs):
-	if SystemInfo["3DMode"]:
+	if BoxInfo.getItem("3DMode"):
 		from Plugins.Plugin import PluginDescriptor
 		return [PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=autostart),
 			PluginDescriptor(name=_("OSD 3D setup"), description=_("Adjust 3D settings"), where=PluginDescriptor.WHERE_MENU, fnc=startSetup)]

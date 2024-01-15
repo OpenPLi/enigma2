@@ -20,7 +20,7 @@ from Components.ServiceEventTracker import ServiceEventTracker, InfoBarBase
 from Components.Playlist import PlaylistIOInternal, PlaylistIOM3U, PlaylistIOPLS
 from Components.AVSwitch import AVSwitch
 from Components.config import config
-from Components.SystemInfo import SystemInfo
+from Components.SystemInfo import BoxInfo
 from Tools.Directories import fileExists, resolveFilename, SCOPE_CONFIG, SCOPE_PLAYLIST, SCOPE_CURRENT_SKIN
 from Tools.BoundFunction import boundFunction
 from Plugins.Extensions.MediaPlayer.settings import MediaPlayerSettings
@@ -265,7 +265,7 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 		if InfoBar.instance is not None:
 			self.servicelist = InfoBar.instance.servicelist
 			if self.servicelist and hasattr(self.servicelist, 'dopipzap'):
-				self.pipZapAvailable = SystemInfo.get("NumVideoDecoders", 1) > 1
+				self.pipZapAvailable = BoxInfo.getItem("NumVideoDecoders", 1) > 1
 
 	def prevBouquetHelpText(self):
 		if not self.shown and self.isPiPzap():
