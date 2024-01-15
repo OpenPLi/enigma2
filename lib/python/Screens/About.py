@@ -454,7 +454,12 @@ class Troubleshoot(Screen):
 		self["AboutScrollLabel"].setText("")
 		self.setTitle("%s - %s" % (_("Troubleshoot"), self.titles[self.commandIndex]))
 		command = self.commands[self.commandIndex]
-		if command.startswith("cat "):
+		if command == "boxinfo":
+			text = ""
+			for item in BoxInfo.getItemsList():
+				text += '%s = %s %s%s' % (item, str(BoxInfo.getItem(item)), type(BoxInfo.getItem(item)), " [immutable]\n" if item in BoxInfo.getEnigmaInfoList() else "\n")
+			self["AboutScrollLabel"].setText(text)
+		elif command.startswith("cat "):
 			try:
 				self["AboutScrollLabel"].setText(open(command[4:], "r").read())
 			except:
@@ -481,8 +486,8 @@ class Troubleshoot(Screen):
 		return [x for x in sorted(glob.glob("/mnt/hdd/*.log"), key=lambda x: os.path.isfile(x) and os.path.getmtime(x))] + (os.path.isfile(home_root) and [home_root] or []) + (os.path.isfile(tmp) and [tmp] or [])
 
 	def updateOptions(self):
-		self.titles = ["dmesg", "ifconfig", "df", "top", "ps", "messages", "enigma info"]
-		self.commands = ["dmesg", "ifconfig", "df -h", "top -n 1", "ps -l", "cat /var/volatile/log/messages", "cat /usr/lib/enigma.info"]
+		self.titles = ["dmesg", "ifconfig", "df", "top", "ps", "messages", "enigma info", "BoxInfo"]
+		self.commands = ["dmesg", "ifconfig", "df -h", "top -n 1", "ps -l", "cat /var/volatile/log/messages", "cat /usr/lib/enigma.info", "boxinfo"]
 		install_log = "/home/root/autoinstall.log"
 		if os.path.isfile(install_log):
 				self.titles.append("%s" % install_log)
