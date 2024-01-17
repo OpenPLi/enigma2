@@ -419,10 +419,6 @@ void gPainter::renderText(const eRect &pos, const std::string &string, int flags
 	o.parm.renderText->flags = flags;
 	o.parm.renderText->border = border;
 	o.parm.renderText->bordercolor = bordercolor;
-	o.parm.renderText->markedpos = markedpos;
-	o.parm.renderText->offset = offset;
-	if (markedpos >= 0)
-		o.parm.renderText->scrollpos = eConfigManager::getConfigIntValue("config.usage.cursorscroll");
 	m_rc->submit(o);
 }
 
