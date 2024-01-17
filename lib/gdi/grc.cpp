@@ -419,10 +419,6 @@ void gPainter::renderText(const eRect &pos, const std::string &string, int flags
 	o.parm.renderText->flags = flags;
 	o.parm.renderText->border = border;
 	o.parm.renderText->bordercolor = bordercolor;
-	o.parm.renderText->markedpos = markedpos;
-	o.parm.renderText->offset = offset;
-	if (markedpos >= 0)
-		o.parm.renderText->scrollpos = eConfigManager::getConfigIntValue("config.usage.cursorscroll");
 	m_rc->submit(o);
 }
 
@@ -840,11 +836,6 @@ void gDC::exec(const gOpcode *o)
 	{
 		ePtr<eTextPara> para = new eTextPara(o->parm.renderText->area);
 		int flags = o->parm.renderText->flags;
-		int border = o->parm.renderText->border;
-		int markedpos = o->parm.renderText->markedpos;
-		int scrollpos = o->parm.renderText->scrollpos;
-		if (markedpos != -1)
-			border = 0;
 		ASSERT(m_current_font);
 		para->setFont(m_current_font);
 
