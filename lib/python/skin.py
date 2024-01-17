@@ -544,7 +544,7 @@ class AttributeParser:
 
 	def selectionPixmap(self, value):
 		self.guiObject.setSelectionPicture(loadPixmap(value, self.desktop))
-		
+
 	def selectionPixmapLarge(self, value):
 		self.guiObject.setSelectionPictureLarge(loadPixmap(value, self.desktop))
 
