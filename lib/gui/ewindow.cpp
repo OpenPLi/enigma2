@@ -114,3 +114,9 @@ int eWindow::event(int event, void *data, void *data2)
 	return eWidget::event(event, data, data2);
 }
 
+void eWindow::setCornerRadius(int radius, int edges)
+{
+	/* set corner radius for child, too */
+	eWidget::setCornerRadius(radius, edges);
+	m_child->setCornerRadius(radius, edges);
+}
