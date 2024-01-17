@@ -180,7 +180,7 @@ def InitUsageConfig():
 		config.usage.poweroff_day[i] = ConfigEnableDisable(default=False)
 		config.usage.poweroff_time[i] = ConfigClock(default=((1 * 60 + 0) * 60))
 
-	choicelist = [("0", _("Do nothing"))]
+	choicelist = [("0", _("Do nothing")), ("1800", _("Standby in ") + _("half an hour"))]
 	for i in range(3600, 21601, 3600):
 		h = abs(i / 3600)
 		h = ngettext("%d hour", "%d hours", h) % h
