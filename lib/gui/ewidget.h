@@ -48,6 +48,12 @@ public:
 	void setBackgroundColor(const gRGB &col);
 	void clearBackgroundColor();
 
+	void setBorderWidth(int pixel);
+	void setBorderColor(const gRGB &color);
+
+	void setWidgetBorderWidth(int pixel) { setBorderWidth(pixel); }
+	void setWidgetBorderColor(const gRGB &color) { setBorderColor(color); }
+
 	void setZPosition(int z);
 	void setTransparent(int transp);
 
@@ -97,6 +103,19 @@ private:
 	int m_z_position;
 	int m_lowered;
 	int m_notify_child_on_position_change;
+
+	bool m_gradient_set;
+	bool m_gradient_alphablend;
+	int m_gradient_direction;
+	gRGB m_gradient_startcolor, m_gradient_endcolor;
+
+	bool m_have_border_color;
+	int m_border_width;
+	gRGB m_border_color;
+
+	int m_cornerRadius;
+	int m_cornerRadiusEdges;
+
 protected:
 	void mayKillFocus();
 public:
@@ -132,6 +151,23 @@ public:
 	void setPositionNotifyChild(int n) { m_notify_child_on_position_change = 1; }
 
 	void notifyShowHide();
+
+	void setCornerRadius(int radius, int edges);
+	int getCornerRadiusEdges() {return m_cornerRadiusEdges;}
+	int getCornerRadius();
+
+	enum
+	{
+		RADIUS_TOP_LEFT = 1,
+		RADIUS_TOP_RIGHT = 2,
+		RADIUS_TOP = 3,
+		RADIUS_BOTTOM_LEFT = 4,
+		RADIUS_BOTTOM_RIGHT = 8,
+		RADIUS_BOTTOM = 12,
+		RADIUS_LEFT = 5,
+		RADIUS_RIGHT = 10,
+		RADIUS_ALL = 15,
+	};
 };
 
 extern eWidgetDesktop *getDesktop(int which);
