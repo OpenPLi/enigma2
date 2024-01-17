@@ -516,6 +516,8 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 
 	def movieSelected(self, service):
 		if service is not None:
+			if self.cur_service and self.cur_service != service:
+				setResumePoint(self.session)
 			self.cur_service = service
 			self.is_closing = False
 			self.session.nav.playService(service)

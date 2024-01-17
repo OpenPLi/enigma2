@@ -2,7 +2,7 @@ from Screens.ChannelSelection import ChannelSelection, BouquetSelector, SilentBo
 
 from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.ActionMap import NumberActionMap
-from Components.Harddisk import harddiskmanager
+from Components.Harddisk import harddiskmanager, findMountPoint
 from Components.Input import Input
 from Components.Label import Label
 from Components.MovieList import AUDIO_EXTENSIONS, MOVIE_EXTENSIONS, DVD_EXTENSIONS
@@ -72,18 +72,19 @@ def setResumePoint(session):
 			if not pos[0]:
 				key = ref.toString()
 				lru = int(time())
-				l = seek.getLength()
-				if l:
-					l = l[1]
+				sl = seek.getLength()
+				if sl:
+					sl = sl[1]
 				else:
-					l = None
-				resumePointCache[key] = [lru, pos[1], l]
-				if len(resumePointCache) > 50:
-					candidate = key
-					for k, v in resumePointCache.items():
-						if v[0] < lru:
-							candidate = k
-					del resumePointCache[candidate]
+					sl = None
+				resumePointCache[key] = [lru, pos[1], sl]
+				for k, v in list(resumePointCache.items()):
+					if v[0] < lru:
+						candidate = k
+						filepath = os.path.realpath(candidate.split(':')[-1])
+						mountpoint = findMountPoint(filepath)
+						if os.path.ismount(mountpoint) and not os.path.exists(filepath):
+							del resumePointCache[candidate]
 				if lru - resumePointCacheLast > 3600:
 					saveResumePoints()
 
@@ -116,18 +117,27 @@ def saveResumePoints():
 	try:
 		f = open('/etc/enigma2/resumepoints.pkl', 'wb')
 		pickle.dump(resumePointCache, f, pickle.HIGHEST_PROTOCOL)
+		f.close()
 	except Exception as ex:
-		print("[InfoBar] Failed to write resumepoints:", ex)
+		print("[saveResumePoints] Failed to write resumepoints:", ex)
 	resumePointCacheLast = int(time())
 
 
 def loadResumePoints():
 	import pickle
 	try:
-		return pickle.load(open('/etc/enigma2/resumepoints.pkl', 'rb'))
+		f = open('/etc/enigma2/resumepoints.pkl', 'rb')
+		pickleFile = pickle.load(f)
+		f.close()
+		return pickleFile
 	except Exception as ex:
-		print("[InfoBar] Failed to load resumepoints:", ex)
+		print("[loadResumePoints] Failed to load resumepoints:", ex)
 		return {}
+
+
+def updateResumePointCache():
+	global resumePointCache
+	resumePointCache = loadResumePoints()
 
 
 resumePointCache = loadResumePoints()
