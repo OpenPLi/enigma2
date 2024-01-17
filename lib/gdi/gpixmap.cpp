@@ -3,6 +3,7 @@
 #include <lib/gdi/gpixmap.h>
 #include <lib/gdi/region.h>
 #include <lib/gdi/accel.h>
+#include <lib/gdi/drawing.h>
 #include <byteswap.h>
 
 #ifdef __GLIBC__
@@ -455,18 +456,1192 @@ static void convert_palette(uint32_t* pal, const gPalette& clut)
 
 #define FIX 0x10000
 
-void gPixmap::blit(const gPixmap &src, const eRect &_pos, const gRegion &clip, int flag)
+void gPixmap::drawRectangle(const gRegion &region, const eRect &area, const gRGB &backgroundColor, const gRGB &borderColor, int borderWidth, const std::vector<gRGB> &gradientColors, uint8_t direction, int radius, uint8_t edges, bool alphablend, int gradientFullSize)
+{
+	if (surface->bpp < 32)
+	{
+		eWarning("[gPixmap] couldn't rgbfill %d bpp", surface->bpp);
+		return;
+	}
+
+	const uint8_t GRADIENT_VERTICAL = 1;
+	uint32_t backColor = backgroundColor.argb();
+	backColor ^= 0xFF000000;
+	uint32_t borderCol = borderColor.argb();
+	borderCol ^= 0xFF000000;
+	uint32_t *gradientBuf = nullptr;
+
+	const int gradientSize = (gradientFullSize) ? gradientFullSize : (direction == GRADIENT_VERTICAL) ? area.height() : area.width();
+	
+	if(!direction)
+		gradientBuf = createGradientBuffer2(gradientSize, backgroundColor, backgroundColor);
+	 else if(gradientColors.at(1) == gradientColors.at(2))
+	 	gradientBuf = createGradientBuffer2(gradientSize, gradientColors.at(0), gradientColors.at(1));
+	else
+	 	gradientBuf = createGradientBuffer3(gradientSize, gradientColors);
+
+	CornerData cornerData(radius, edges, area.width(), area.height(), borderWidth, borderCol);
+
+	for (unsigned int i = 0; i < region.rects.size(); ++i)
+	{
+		eRect reg = area;
+		reg &= region.rects[i];
+
+		if (reg.empty())
+			continue;
+
+		int corners = 0;
+		eRect cornerRect;
+
+		if (cornerData.topLeftCornerRadius)
+		{
+			cornerRect = eRect(area.left(), area.top(), cornerData.topLeftCornerRadius, cornerData.topLeftCornerRadius);
+			cornerRect &= region.rects[i];
+			if (!cornerRect.empty())
+			{
+				corners += 1;
+				drawAngleTl(surface, gradientBuf, area, direction, cornerRect, cornerData);
+			}
+		}
+		if (cornerData.topRightCornerRadius)
+		{
+			cornerRect = eRect(area.right() - cornerData.topRightCornerRadius, area.top(), cornerData.topRightCornerRadius, cornerData.topRightCornerRadius);
+			cornerRect &= region.rects[i];
+			if (!cornerRect.empty())
+			{
+				corners += 2;
+				drawAngleTr(surface, gradientBuf, area, direction, cornerRect, cornerData);
+			}
+		}
+		if (cornerData.bottomLeftCornerRadius)
+		{
+			cornerRect = eRect(area.left(), area.bottom() - cornerData.bottomLeftCornerRadius, cornerData.bottomLeftCornerRadius, cornerData.bottomLeftCornerRadius);
+			cornerRect &= region.rects[i];
+			if (!cornerRect.empty())
+			{
+				corners += 4;
+				drawAngleBl(surface, gradientBuf, area, direction, cornerRect, cornerData);
+			}
+		}
+
+		if (cornerData.bottomRightCornerRadius)
+		{
+			cornerRect = eRect(area.right() - cornerData.bottomRightCornerRadius, area.bottom() - cornerData.bottomRightCornerRadius, cornerData.bottomRightCornerRadius, cornerData.bottomRightCornerRadius);
+			cornerRect &= region.rects[i];
+			if (!cornerRect.empty())
+			{
+				corners += 8;
+				drawAngleBr(surface, gradientBuf, area, direction, cornerRect, cornerData);
+			}
+		}
+
+		if (cornerData.isCircle)
+			continue;
+
+		const int bottom = MAX(cornerData.bottomRightCornerRadius, cornerData.bottomLeftCornerRadius);
+		const int top = MAX(cornerData.topRightCornerRadius, cornerData.topLeftCornerRadius);
+
+		int topw = area.width();
+		int topl = area.left();
+		int bottomw = area.width();
+		int bottoml = area.left();
+
+		if (corners & 1)
+		{
+			topw -= cornerData.topLeftCornerRadius;
+			topl += cornerData.topLeftCornerRadius;
+		}
+		if (corners & 2)
+			topw -= cornerData.topRightCornerRadius;
+
+		if (corners & 4)
+		{
+			bottomw -= cornerData.bottomLeftCornerRadius;
+			bottoml += cornerData.bottomLeftCornerRadius;
+		}
+		if (corners & 8)
+			bottomw -= cornerData.bottomRightCornerRadius;
+
+		eRect topRect = eRect(topl, area.top(), topw, top);
+		topRect &= region.rects[i];
+
+		eRect bottomRect = eRect(bottoml, area.bottom() - bottom, bottomw, bottom);
+		bottomRect &= region.rects[i];
+
+		eRect mRect = eRect(area.left(), area.top() + top, area.width(), area.height() - top - bottom);
+		mRect &= region.rects[i];
+		const int blendRatio = 12;
+		if (!mRect.empty())
+			{
+				if (alphablend && !cornerData.radiusSet)
+				{
+					for (int y = mRect.top(); y < mRect.bottom(); y++)
+					{
+						uint32_t *dstptr = (uint32_t *)(((uint8_t *)surface->data) + y * surface->stride + mRect.left() * surface->bypp);
+						uint32_t *gradientBuf2 = gradientBuf + mRect.left() - area.left();
+						int width = mRect.width();
+						gRGB *src = (gRGB *)gradientBuf2;
+						gRGB *dst = (gRGB *)dstptr;
+						while (width >= blendRatio)
+						{
+							for (int i = 0; i < blendRatio; ++i)
+							{
+								dst[i].b += (((src->b - dst[i].b) * src->a) >> 8);
+								dst[i].g += (((src->g - dst[i].g) * src->a) >> 8);
+								dst[i].r += (((src->r - dst[i].r) * src->a) >> 8);
+								dst[i].a += (((0xFF - dst[i].a) * src->a) >> 8);
+							}
+
+							dst += blendRatio;
+							src += blendRatio;
+							width -= blendRatio;
+						}
+
+						while (width > 0)
+						{
+							dst->b += (((src->b - dst->b) * src->a) >> 8);
+							dst->g += (((src->g - dst->g) * src->a) >> 8);
+							dst->r += (((src->r - dst->r) * src->a) >> 8);
+							dst->a += (((0xFF - dst->a) * src->a) >> 8);
+							
+							++dst;
+							++src;
+							--width;
+						}
+					}
+				}
+				else
+				{
+					int linesize = mRect.width() * surface->bypp;
+					for (int y = mRect.top(); y < mRect.bottom(); y++)
+					{
+						uint32_t *dst = (uint32_t *)(((uint8_t *)surface->data) + y * surface->stride + mRect.left() * surface->bypp);
+						uint32_t *gradientBuf2 = gradientBuf + mRect.left() - area.left();
+						std::memcpy(dst, gradientBuf2, linesize);
+					}
+				} // if blitAlphaBlend
+			}	  // if center
+
+			if (top && !topRect.empty())
+			{
+				int linesize = topRect.width() * surface->bypp;
+				for (int y = topRect.top(); y < topRect.bottom(); y++)
+				{
+					uint32_t *dst = (uint32_t *)(((uint8_t *)surface->data) + y * surface->stride + topRect.left() * surface->bypp);
+					uint32_t *gradientBuf2 = gradientBuf + topRect.left() - area.left();
+					std::memcpy(dst, gradientBuf2, linesize);
+				}
+			} // if top
+
+			if (bottom && !bottomRect.empty())
+			{
+				int linesize = bottomRect.width() * surface->bypp;
+				for (int y = bottomRect.top(); y < bottomRect.bottom(); y++)
+				{
+					uint32_t *dst = (uint32_t *)(((uint8_t *)surface->data) + y * surface->stride + bottomRect.left() * surface->bypp);
+					uint32_t *gradientBuf2 = gradientBuf + bottomRect.left() - area.left();
+					std::memcpy(dst, gradientBuf2, linesize);
+				}
+			}
+
+	}		  // for region
+
+	if (gradientBuf)
+		free(gradientBuf);
+}
+
+void gPixmap::blitRounded32Bit(const gPixmap &src, const eRect &pos, const eRect &clip, int cornerRadius, int edges, int flag)
+{
+	CornerData cornerData(cornerRadius, edges, pos.width(), pos.height(), 0, 0xFF000000);
+	int corners = 0;
+	eRect cornerRect;
+	if (cornerData.topLeftCornerRadius)
+	{
+		cornerRect = eRect(pos.left(), pos.top(), cornerData.topLeftCornerRadius, cornerData.topLeftCornerRadius);
+		cornerRect &= clip;
+		if (!cornerRect.empty())
+		{
+			corners += 1;
+			drawAngle32Tl(surface, src, pos, cornerRect, cornerData, flag);
+		}
+	}
+	if (cornerData.topRightCornerRadius)
+	{
+		cornerRect = eRect(pos.right() - cornerData.topRightCornerRadius, pos.top(), cornerData.topRightCornerRadius, cornerData.topRightCornerRadius);
+		cornerRect &= clip;
+		if (!cornerRect.empty())
+		{
+			corners += 2;
+			drawAngle32Tr(surface, src, pos, cornerRect, cornerData, flag);
+		}
+	}
+	if (cornerData.bottomLeftCornerRadius)
+	{
+		cornerRect = eRect(pos.left(), pos.bottom() - cornerData.bottomLeftCornerRadius, cornerData.bottomLeftCornerRadius, cornerData.bottomLeftCornerRadius);
+		cornerRect &= clip;
+		if (!cornerRect.empty())
+		{
+			corners += 4;
+			drawAngle32Bl(surface, src, pos, cornerRect, cornerData, flag);
+		}
+	}
+
+	if (cornerData.bottomRightCornerRadius)
+	{
+		cornerRect = eRect(pos.right() - cornerData.bottomRightCornerRadius, pos.bottom() - cornerData.bottomRightCornerRadius, cornerData.bottomRightCornerRadius, cornerData.bottomRightCornerRadius);
+		cornerRect &= clip;
+		if (!cornerRect.empty())
+		{
+			corners += 8;
+			drawAngle32Br(surface, src, pos, cornerRect, cornerData, flag);
+		}
+	}
+
+	if (cornerData.isCircle)
+		return;
+
+	const int bottom = MAX(cornerData.bottomRightCornerRadius, cornerData.bottomLeftCornerRadius);
+	const int top = MAX(cornerData.topRightCornerRadius, cornerData.topLeftCornerRadius);
+
+	int topw = pos.width();
+	int topl = pos.left();
+	int bottomw = pos.width();
+	int bottoml = pos.left();
+
+	if (corners & 1)
+	{
+		topw -= cornerData.topLeftCornerRadius;
+		topl += cornerData.topLeftCornerRadius;
+	}
+	if (corners & 2)
+		topw -= cornerData.topRightCornerRadius;
+
+	if (corners & 4)
+	{
+		bottomw -= cornerData.bottomLeftCornerRadius;
+		bottoml += cornerData.bottomLeftCornerRadius;
+	}
+	if (corners & 8)
+		bottomw -= cornerData.bottomRightCornerRadius;
+
+	eRect topRect = eRect(topl, pos.top(), topw, top);
+	topRect &= clip;
+
+	eRect bottomRect = eRect(bottoml, pos.bottom() - bottom, bottomw, bottom);
+	bottomRect &= clip;
+
+	eRect mRect = eRect(pos.left(), pos.top() + top, pos.width(), pos.height() - top - bottom);
+	mRect &= clip;
+
+	const int aLeft = pos.left();
+	const int aTop = pos.top();
+
+	if (!mRect.empty())
+	{
+		const int rLeft = mRect.left();
+		const int rTop = mRect.top();
+		const int rBottom = mRect.bottom();
+		const int rWidth = mRect.width();
+		int linesize = rWidth * surface->bypp;
+		uint32_t *srcptr = (uint32_t *)src.surface->data;
+		uint32_t *dstptr = (uint32_t *)surface->data;
+
+		srcptr += (rLeft - aLeft) + (rTop - aTop) * src.surface->stride / 4;
+		dstptr += rLeft + rTop * surface->stride / 4;
+		for (int y = rTop; y < rBottom; y++)
+		{
+			if (flag & blitAlphaTest)
+			{
+				int width = rWidth;
+				uint32_t *src = srcptr;
+				uint32_t *dst = dstptr;
+
+				while (width--)
+				{
+					if (!((*src) & 0xFF000000))
+					{
+						src++;
+						dst++;
+					}
+					else
+						*dst++ = *src++;
+				}
+			}
+			else if (flag & blitAlphaBlend)
+			{
+				int width = rWidth;
+				gRGB *src = (gRGB *)srcptr;
+				gRGB *dst = (gRGB *)dstptr;
+
+				while (width--) {
+					dst->b += (((src->b - dst->b) * src->a) >> 8);
+					dst->g += (((src->g - dst->g) * src->a) >> 8);
+					dst->r += (((src->r - dst->r) * src->a) >> 8);
+					dst->a += (((0xFF - dst->a) * src->a) >> 8);
+					++src;
+					++dst;
+				}
+			}
+			else
+				std::memcpy(dstptr, srcptr, linesize);
+			srcptr = (uint32_t *)((uint8_t *)srcptr + src.surface->stride);
+			dstptr = (uint32_t *)((uint8_t *)dstptr + surface->stride);
+		}
+	}
+	if (top && !topRect.empty())
+	{
+		const int rLeft = topRect.left();
+		const int rTop = topRect.top();
+		const int rBottom = topRect.bottom();
+		const int rWidth = topRect.width();
+		int linesize = rWidth * surface->bypp;
+		uint32_t *srcptr = (uint32_t *)src.surface->data;
+		uint32_t *dstptr = (uint32_t *)surface->data;
+
+		srcptr += (rLeft - aLeft) + (rTop - aTop) * src.surface->stride / 4;
+		dstptr += rLeft + rTop * surface->stride / 4;
+		for (int y = rTop; y < rBottom; y++)
+		{
+			if (flag & blitAlphaTest)
+			{
+				int width = rWidth;
+				uint32_t *src = srcptr;
+				uint32_t *dst = dstptr;
+
+				while (width--)
+				{
+					if (!((*src) & 0xFF000000))
+					{
+						src++;
+						dst++;
+					}
+					else
+						*dst++ = *src++;
+				}
+			}
+			else if (flag & blitAlphaBlend)
+			{
+				int width = rWidth;
+				gRGB *src = (gRGB *)srcptr;
+				gRGB *dst = (gRGB *)dstptr;
+
+				while (width--) {
+					dst->b += (((src->b - dst->b) * src->a) >> 8);
+					dst->g += (((src->g - dst->g) * src->a) >> 8);
+					dst->r += (((src->r - dst->r) * src->a) >> 8);
+					dst->a += (((0xFF - dst->a) * src->a) >> 8);
+					++src;
+					++dst;
+				}
+			}
+			else
+				std::memcpy(dstptr, srcptr, linesize);
+			srcptr = (uint32_t *)((uint8_t *)srcptr + src.surface->stride);
+			dstptr = (uint32_t *)((uint8_t *)dstptr + surface->stride);
+		}
+	}
+
+	if (bottom && !bottomRect.empty())
+	{
+		const int rLeft = bottomRect.left();
+		const int rTop = bottomRect.top();
+		const int rBottom = bottomRect.bottom();
+		const int rWidth = bottomRect.width();
+		int linesize = rWidth * surface->bypp;
+		uint32_t *srcptr = (uint32_t *)src.surface->data;
+		uint32_t *dstptr = (uint32_t *)surface->data;
+
+		srcptr += (rLeft - aLeft) + (rTop - aTop) * src.surface->stride / 4;
+		dstptr += rLeft + rTop * surface->stride / 4;
+		for (int y = rTop; y < rBottom; y++)
+		{
+			if (flag & blitAlphaTest)
+			{
+				int width = rWidth;
+				uint32_t *src = srcptr;
+				uint32_t *dst = dstptr;
+
+				while (width--)
+				{
+					if (!((*src) & 0xFF000000))
+					{
+						src++;
+						dst++;
+					}
+					else
+						*dst++ = *src++;
+				}
+			}
+			else if (flag & blitAlphaBlend)
+			{
+				int width = rWidth;
+				gRGB *src = (gRGB *)srcptr;
+				gRGB *dst = (gRGB *)dstptr;
+
+				while (width--) {
+					dst->b += (((src->b - dst->b) * src->a) >> 8);
+					dst->g += (((src->g - dst->g) * src->a) >> 8);
+					dst->r += (((src->r - dst->r) * src->a) >> 8);
+					dst->a += (((0xFF - dst->a) * src->a) >> 8);
+					++src;
+					++dst;
+				}
+			}
+			else
+				std::memcpy(dstptr, srcptr, linesize);
+			srcptr = (uint32_t *)((uint8_t *)srcptr + src.surface->stride);
+			dstptr = (uint32_t *)((uint8_t *)dstptr + surface->stride);
+		}
+	}
+}
+
+void gPixmap::blitRounded32BitScaled(const gPixmap &src, const eRect &pos, const eRect &clip, int cornerRadius, int edges, int flag)
+{
+	CornerData cornerData(cornerRadius, edges, pos.width(), pos.height(), 0, 0xFF000000);
+	int corners = 0;
+	eRect cornerRect;
+	if (cornerData.topLeftCornerRadius)
+	{
+		cornerRect = eRect(pos.left(), pos.top(), cornerData.topLeftCornerRadius, cornerData.topLeftCornerRadius);
+		cornerRect &= clip;
+		if (!cornerRect.empty())
+		{
+			corners += 1;
+			drawAngle32ScaledTl(surface, src, pos, cornerRect, cornerData, flag);
+		}
+	}
+	if (cornerData.topRightCornerRadius)
+	{
+		cornerRect = eRect(pos.right() - cornerData.topRightCornerRadius, pos.top(), cornerData.topRightCornerRadius, cornerData.topRightCornerRadius);
+		cornerRect &= clip;
+		if (!cornerRect.empty())
+		{
+			corners += 2;
+			drawAngle32ScaledTr(surface, src, pos, cornerRect, cornerData, flag);
+		}
+	}
+	if (cornerData.bottomLeftCornerRadius)
+	{
+		cornerRect = eRect(pos.left(), pos.bottom() - cornerData.bottomLeftCornerRadius, cornerData.bottomLeftCornerRadius, cornerData.bottomLeftCornerRadius);
+		cornerRect &= clip;
+		if (!cornerRect.empty())
+		{
+			corners += 4;
+			drawAngle32ScaledBl(surface, src, pos, cornerRect, cornerData, flag);
+		}
+	}
+
+	if (cornerData.bottomRightCornerRadius)
+	{
+		cornerRect = eRect(pos.right() - cornerData.bottomRightCornerRadius, pos.bottom() - cornerData.bottomRightCornerRadius, cornerData.bottomRightCornerRadius, cornerData.bottomRightCornerRadius);
+		cornerRect &= clip;
+		if (!cornerRect.empty())
+		{
+			corners += 8;
+			drawAngle32ScaledBr(surface, src, pos, cornerRect, cornerData, flag);
+		}
+	}
+
+	if (cornerData.isCircle)
+		return;
+
+	const int bottom = MAX(cornerData.bottomRightCornerRadius, cornerData.bottomLeftCornerRadius);
+	const int top = MAX(cornerData.topRightCornerRadius, cornerData.topLeftCornerRadius);
+
+	int topw = pos.width();
+	int topl = pos.left();
+	int bottomw = pos.width();
+	int bottoml = pos.left();
+
+	if (corners & 1)
+	{
+		topw -= cornerData.topLeftCornerRadius;
+		topl += cornerData.topLeftCornerRadius;
+	}
+	if (corners & 2)
+		topw -= cornerData.topRightCornerRadius;
+
+	if (corners & 4)
+	{
+		bottomw -= cornerData.bottomLeftCornerRadius;
+		bottoml += cornerData.bottomLeftCornerRadius;
+	}
+	if (corners & 8)
+		bottomw -= cornerData.bottomRightCornerRadius;
+
+	eRect topRect = eRect(topl, pos.top(), topw, top);
+	topRect &= clip;
+
+	eRect bottomRect = eRect(bottoml, pos.bottom() - bottom, bottomw, bottom);
+	bottomRect &= clip;
+
+	eRect mRect = eRect(pos.left(), pos.top() + top, pos.width(), pos.height() - top - bottom);
+	mRect &= clip;
+
+	const int src_bypp = src.surface->bypp;
+	const int dst_bypp = surface->bypp;
+	const int src_stride = src.surface->stride;
+	const int dst_stride = surface->stride;
+	const float scaleX = (float)src.size().width() / (float)pos.width();
+	const float scaleY = (float)src.size().height() / (float)pos.height();
+	const int aLeft = pos.left();
+	const int aTop = pos.top();
+
+	if (!mRect.empty())
+	{
+		const int rLeft = mRect.left();
+		const int rRight = mRect.right();
+		const int rTop = mRect.top();
+		const int rBottom = mRect.bottom();
+		uint8_t *dst_row = (uint8_t *)surface->data + rLeft * dst_bypp + rTop * dst_stride;
+		if (flag & blitAlphaTest)
+		{
+			for (int y = rTop; y < rBottom; ++y)
+			{
+				int src_y = (int)((y - aTop) * scaleY);
+				const uint8_t *src_row = (const uint8_t *)src.surface->data + src_y * src_stride;
+				uint32_t *dst = (uint32_t *)dst_row;
+
+				for (int x = rLeft; x < rRight; ++x)
+				{
+					int src_x = (int)((x - aLeft) * scaleX);
+					const uint32_t *src = (const uint32_t *)(src_row + src_x * src_bypp);
+					if (*src & 0x80000000)
+						*dst = *src;
+					dst++;
+				}
+				dst_row += dst_stride;
+			}
+		}
+		else if (flag & blitAlphaBlend)
+		{
+			for (int y = rTop; y < rBottom; ++y)
+			{
+				int src_y = (int)((y - aTop) * scaleY);
+				const uint8_t *src_row = (const uint8_t *)src.surface->data + src_y * src_stride;
+				gRGB *dst = (gRGB *)dst_row;
+
+				for (int x = rLeft; x < rRight; ++x)
+				{
+					int src_x = (int)((x - aLeft) * scaleX);
+					const gRGB *src = (gRGB *)(src_row + src_x * src_bypp);
+					dst->b += (((src->b - dst->b) * src->a) >> 8);
+					dst->g += (((src->g - dst->g) * src->a) >> 8);
+					dst->r += (((src->r - dst->r) * src->a) >> 8);
+					dst->a += (((0xFF - dst->a) * src->a) >> 8);
+					dst++;
+				}
+				dst_row += dst_stride;
+			}
+		}
+		else
+		{
+			for (int y = rTop; y < rBottom; ++y)
+			{
+				int src_y = (int)((y - aTop) * scaleY);
+				const uint8_t *src_row = (const uint8_t *)src.surface->data + src_y * src_stride;
+				uint32_t *dst = (uint32_t *)dst_row;
+
+				for (int x = rLeft; x < rRight; ++x)
+				{
+					int src_x = (int)((x - aLeft) * scaleX);
+					const uint32_t *src = (const uint32_t *)(src_row + src_x * src_bypp);
+					*dst++ = *src;
+				}
+				dst_row += dst_stride;
+			}
+		}
+	}
+	if (top && !topRect.empty())
+	{
+		const int rLeft = topRect.left();
+		const int rRight = topRect.right();
+		const int rTop = topRect.top();
+		const int rBottom = topRect.bottom();
+		uint8_t *dst_row = (uint8_t *)surface->data + rLeft * dst_bypp + rTop * dst_stride;
+
+		if (flag & blitAlphaTest)
+		{
+			for (int y = rTop; y < rBottom; ++y)
+			{
+				int src_y = (int)((y - aTop) * scaleY);
+				const uint8_t *src_row = (const uint8_t *)src.surface->data + src_y * src_stride;
+				uint32_t *dst = (uint32_t *)dst_row;
+
+				for (int x = rLeft; x < rRight; ++x)
+				{
+					int src_x = (int)((x - aLeft) * scaleX);
+					const uint32_t *src = (const uint32_t *)(src_row + src_x * src_bypp);
+					if (*src & 0x80000000)
+						*dst = *src;
+					dst++;
+				}
+				dst_row += dst_stride;
+			}
+		}
+		else if (flag & blitAlphaBlend)
+		{
+			for (int y = rTop; y < rBottom; ++y)
+			{
+				int src_y = (int)((y - aTop) * scaleY);
+				const uint8_t *src_row = (const uint8_t *)src.surface->data + src_y * src_stride;
+				gRGB *dst = (gRGB *)dst_row;
+
+				for (int x = rLeft; x < rRight; ++x)
+				{
+					int src_x = (int)((x - aLeft) * scaleX);
+					const gRGB *src = (gRGB *)(src_row + src_x * src_bypp);
+					dst->b += (((src->b - dst->b) * src->a) >> 8);
+					dst->g += (((src->g - dst->g) * src->a) >> 8);
+					dst->r += (((src->r - dst->r) * src->a) >> 8);
+					dst->a += (((0xFF - dst->a) * src->a) >> 8);
+					dst++;
+				}
+				dst_row += dst_stride;
+			}
+		}
+		else
+		{
+			for (int y = rTop; y < rBottom; ++y)
+			{
+				int src_y = (int)((y - aTop) * scaleY);
+				const uint8_t *src_row = (const uint8_t *)src.surface->data + src_y * src_stride;
+				uint32_t *dst = (uint32_t *)dst_row;
+
+				for (int x = rLeft; x < rRight; ++x)
+				{
+					int src_x = (int)((x - aLeft) * scaleX);
+					const uint32_t *src = (const uint32_t *)(src_row + src_x * src_bypp);
+					*dst = *src;
+					dst++;
+				}
+				dst_row += dst_stride;
+			}
+		}
+	}
+	if (bottom && !bottomRect.empty())
+	{
+		const int rLeft = bottomRect.left();
+		const int rRight = bottomRect.right();
+		const int rTop = bottomRect.top();
+		const int rBottom = bottomRect.bottom();
+		uint8_t *dst_row = (uint8_t *)surface->data + rLeft * dst_bypp + rTop * dst_stride;
+
+		if (flag & blitAlphaTest)
+		{
+			for (int y = rTop; y < rBottom; ++y)
+			{
+				int src_y = (int)((y - aTop) * scaleY);
+				const uint8_t *src_row = (const uint8_t *)src.surface->data + src_y * src_stride;
+				uint32_t *dst = (uint32_t *)dst_row;
+
+				for (int x = rLeft; x < rRight; ++x)
+				{
+					int src_x = (int)((x - aLeft) * scaleX);
+					const uint32_t *src = (const uint32_t *)(src_row + src_x * src_bypp);
+					if (*src & 0x80000000)
+						*dst = *src;
+					dst++;
+				}
+				dst_row += dst_stride;
+			}
+		}
+		else if (flag & blitAlphaBlend)
+		{
+			for (int y = rTop; y < rBottom; ++y)
+			{
+				int src_y = (int)((y - aTop) * scaleY);
+				const uint8_t *src_row = (const uint8_t *)src.surface->data + src_y * src_stride;
+				gRGB *dst = (gRGB *)dst_row;
+
+				for (int x = rLeft; x < rRight; ++x)
+				{
+					int src_x = (int)((x - aLeft) * scaleX);
+					const gRGB *src = (gRGB *)(src_row + src_x * src_bypp);
+					dst->b += (((src->b - dst->b) * src->a) >> 8);
+					dst->g += (((src->g - dst->g) * src->a) >> 8);
+					dst->r += (((src->r - dst->r) * src->a) >> 8);
+					dst->a += (((0xFF - dst->a) * src->a) >> 8);
+					dst++;
+				}
+				dst_row += dst_stride;
+			}
+		}
+		else
+		{
+			for (int y = rTop; y < rBottom; ++y)
+			{
+				int src_y = (int)((y - aTop) * scaleY);
+				const uint8_t *src_row = (const uint8_t *)src.surface->data + src_y * src_stride;
+				uint32_t *dst = (uint32_t *)dst_row;
+
+				for (int x = rLeft; x < rRight; ++x)
+				{
+					int src_x = (int)((x - aLeft) * scaleX);
+					const uint32_t *src = (const uint32_t *)(src_row + src_x * src_bypp);
+					*dst = *src;
+					dst++;
+				}
+				dst_row += dst_stride;
+			}
+		}
+	}
+}
+
+void gPixmap::blitRounded8Bit(const gPixmap &src, const eRect &pos, const eRect &clip, int cornerRadius, int edges, int flag)
+{
+
+	int corners = 0;
+	uint32_t pal[256];
+	convert_palette(pal, src.surface->clut);
+	CornerData cornerData(cornerRadius, edges, pos.width(), pos.height(), 0, 0xFF000000);
+	eRect cornerRect;
+	if (cornerData.topLeftCornerRadius)
+	{
+		cornerRect = eRect(pos.left(), pos.top(), cornerData.topLeftCornerRadius, cornerData.topLeftCornerRadius);
+		cornerRect &= clip;
+		if (!cornerRect.empty())
+		{
+			corners += 1;
+			drawAngle8Tl(surface, src, pal, pos, cornerRect, cornerData, flag);
+		}
+	}
+	if (cornerData.topRightCornerRadius)
+	{
+		cornerRect = eRect(pos.right() - cornerData.topRightCornerRadius, pos.top(), cornerData.topRightCornerRadius, cornerData.topRightCornerRadius);
+		cornerRect &= clip;
+		if (!cornerRect.empty())
+		{
+			corners += 2;
+			drawAngle8Tr(surface, src, pal, pos, cornerRect, cornerData, flag);
+		}
+	}
+	if (cornerData.bottomLeftCornerRadius)
+	{
+		cornerRect = eRect(pos.left(), pos.bottom() - cornerData.bottomLeftCornerRadius, cornerData.bottomLeftCornerRadius, cornerData.bottomLeftCornerRadius);
+		cornerRect &= clip;
+		if (!cornerRect.empty())
+		{
+			corners += 4;
+			drawAngle8Bl(surface, src, pal, pos, cornerRect, cornerData, flag);
+		}
+	}
+
+	if (cornerData.bottomRightCornerRadius)
+	{
+		cornerRect = eRect(pos.right() - cornerData.bottomRightCornerRadius, pos.bottom() - cornerData.bottomRightCornerRadius, cornerData.bottomRightCornerRadius, cornerData.bottomRightCornerRadius);
+		cornerRect &= clip;
+		if (!cornerRect.empty())
+		{
+			corners += 8;
+			drawAngle8Br(surface, src, pal, pos, cornerRect, cornerData, flag);
+		}
+	}
+
+	if (cornerData.isCircle)
+		return;
+
+	const int bottom = MAX(cornerData.bottomRightCornerRadius, cornerData.bottomLeftCornerRadius);
+	const int top = MAX(cornerData.topRightCornerRadius, cornerData.topLeftCornerRadius);
+
+	int topw = pos.width();
+	int topl = pos.left();
+	int bottomw = pos.width();
+	int bottoml = pos.left();
+
+	if (corners & 1)
+	{
+		topw -= cornerData.topLeftCornerRadius;
+		topl += cornerData.topLeftCornerRadius;
+	}
+	if (corners & 2)
+		topw -= cornerData.topRightCornerRadius;
+
+	if (corners & 4)
+	{
+		bottomw -= cornerData.bottomLeftCornerRadius;
+		bottoml += cornerData.bottomLeftCornerRadius;
+	}
+	if (corners & 8)
+		bottomw -= cornerData.bottomRightCornerRadius;
+
+	eRect topRect = eRect(topl, pos.top(), topw, top);
+	topRect &= clip;
+
+	eRect bottomRect = eRect(bottoml, pos.bottom() - bottom, bottomw, bottom);
+	bottomRect &= clip;
+
+	eRect mRect = eRect(pos.left(), pos.top() + top, pos.width(), pos.height() - top - bottom);
+	mRect &= clip;
+
+	if (!mRect.empty())
+	{
+		const uint8_t *srcptr = (uint8_t *)src.surface->data;
+		uint32_t *dstptr = (uint32_t *)surface->data;
+
+		srcptr += (mRect.left() - pos.left()) + (mRect.top() - pos.top()) * src.surface->stride;
+		dstptr += mRect.left() + mRect.top() * surface->stride / 4;
+		for (int y = mRect.bottom(); y > mRect.top(); --y)
+		{
+			if (flag & blitAlphaTest)
+			{
+				blit_8i_to_32_at((uint32_t *)dstptr, srcptr, pal, mRect.width());
+			}
+			else if (flag & blitAlphaBlend)
+			{
+				blit_8i_to_32_ab((gRGB *)dstptr, srcptr, (const gRGB *)pal, mRect.width());
+			}
+			else
+				blit_8i_to_32((uint32_t *)dstptr, srcptr, pal, mRect.width());
+			srcptr += src.surface->stride;
+			dstptr = (uint32_t *)((uint8_t *)dstptr + surface->stride);
+		}
+	}
+	if (top && !topRect.empty())
+	{
+		const uint8_t *srcptr = (uint8_t *)src.surface->data;
+		uint32_t *dstptr = (uint32_t *)surface->data;
+
+		srcptr += (topRect.left() - pos.left()) + (topRect.top() - pos.top()) * src.surface->stride;
+		dstptr += topRect.left() + topRect.top() * surface->stride / 4;
+		for (int y = topRect.top(); y < topRect.bottom(); y++)
+		{
+			if (flag & blitAlphaTest)
+			{
+				blit_8i_to_32_at((uint32_t *)dstptr, srcptr, pal, topRect.width());
+			}
+			else if (flag & blitAlphaBlend)
+			{
+				blit_8i_to_32_ab((gRGB *)dstptr, srcptr, (const gRGB *)pal, topRect.width());
+			}
+			else
+				blit_8i_to_32((uint32_t *)dstptr, srcptr, pal, topRect.width());
+			srcptr += src.surface->stride;
+			dstptr = (uint32_t *)((uint8_t *)dstptr + surface->stride);
+		}
+	}
+
+	if (bottom && !bottomRect.empty())
+	{
+		const uint8_t *srcptr = (uint8_t *)src.surface->data;
+		uint32_t *dstptr = (uint32_t *)surface->data;
+
+		srcptr += (bottomRect.left() - pos.left()) + (bottomRect.top() - pos.top()) * src.surface->stride;
+		dstptr += bottomRect.left() + (bottomRect.top()) * surface->stride / 4;
+		for (int y = (bottomRect.top() - pos.top()); y < (bottomRect.top() - pos.top() + bottom); y++)
+		{
+			if (flag & blitAlphaTest)
+			{
+				blit_8i_to_32_at((uint32_t *)dstptr, srcptr, pal, bottomRect.width());
+			}
+			else if (flag & blitAlphaBlend)
+			{
+				blit_8i_to_32_ab((gRGB *)dstptr, srcptr, (const gRGB *)pal, bottomRect.width());
+			}
+			else
+				blit_8i_to_32((uint32_t *)dstptr, srcptr, pal, bottomRect.width());
+			srcptr += src.surface->stride;
+			dstptr = (uint32_t *)((uint8_t *)dstptr + surface->stride);
+		}
+	}
+}
+
+void gPixmap::blitRounded8BitScaled(const gPixmap &src, const eRect &pos, const eRect &clip, int cornerRadius, int edges, int flag)
+{
+	int corners = 0;
+	uint32_t pal[256];
+	convert_palette(pal, src.surface->clut);
+	CornerData cornerData(cornerRadius, edges, pos.width(), pos.height(), 0, 0xFF000000);
+	eRect cornerRect;
+
+	if (cornerData.topLeftCornerRadius)
+	{
+		cornerRect = eRect(pos.left(), pos.top(), cornerData.topLeftCornerRadius, cornerData.topLeftCornerRadius);
+		cornerRect &= clip;
+		if (!cornerRect.empty())
+		{
+			corners += 1;
+			drawAngle8ScaledTl(surface, src, pal, pos, cornerRect, cornerData, flag);
+		}
+	}
+	if (cornerData.topRightCornerRadius)
+	{
+		cornerRect = eRect(pos.right() - cornerData.topRightCornerRadius, pos.top(), cornerData.topRightCornerRadius, cornerData.topRightCornerRadius);
+		cornerRect &= clip;
+		if (!cornerRect.empty())
+		{
+			corners += 2;
+			drawAngle8ScaledTr(surface, src, pal, pos, cornerRect, cornerData, flag);
+		}
+	}
+	if (cornerData.bottomLeftCornerRadius)
+	{
+		cornerRect = eRect(pos.left(), pos.bottom() - cornerData.bottomLeftCornerRadius, cornerData.bottomLeftCornerRadius, cornerData.bottomLeftCornerRadius);
+		cornerRect &= clip;
+		if (!cornerRect.empty())
+		{
+			corners += 4;
+			drawAngle8ScaledBl(surface, src, pal, pos, cornerRect, cornerData, flag);
+		}
+	}
+
+	if (cornerData.bottomRightCornerRadius)
+	{
+		cornerRect = eRect(pos.right() - cornerData.bottomRightCornerRadius, pos.bottom() - cornerData.bottomRightCornerRadius, cornerData.bottomRightCornerRadius, cornerData.bottomRightCornerRadius);
+		cornerRect &= clip;
+		if (!cornerRect.empty())
+		{
+			corners += 8;
+			drawAngle8ScaledBr(surface, src, pal, pos, cornerRect, cornerData, flag);
+		}
+	}
+
+	if (cornerData.isCircle)
+		return;
+
+	const int bottom = MAX(cornerData.bottomRightCornerRadius, cornerData.bottomLeftCornerRadius);
+	const int top = MAX(cornerData.topRightCornerRadius, cornerData.topLeftCornerRadius);
+
+	int topw = pos.width();
+	int topl = pos.left();
+	int bottomw = pos.width();
+	int bottoml = pos.left();
+
+	if (corners & 1)
+	{
+		topw -= cornerData.topLeftCornerRadius;
+		topl += cornerData.topLeftCornerRadius;
+	}
+	if (corners & 2)
+		topw -= cornerData.topRightCornerRadius;
+
+	if (corners & 4)
+	{
+		bottomw -= cornerData.bottomLeftCornerRadius;
+		bottoml += cornerData.bottomLeftCornerRadius;
+	}
+	if (corners & 8)
+		bottomw -= cornerData.bottomRightCornerRadius;
+
+	eRect topRect = eRect(topl, pos.top(), topw, top);
+	topRect &= clip;
+
+	eRect bottomRect = eRect(bottoml, pos.bottom() - bottom, bottomw, bottom);
+	bottomRect &= clip;
+
+	eRect mRect = eRect(pos.left(), pos.top() + top, pos.width(), pos.height() - top - bottom);
+	mRect &= clip;
+
+	const int src_bypp = src.surface->bypp;
+	const int dst_bypp = surface->bypp;
+	const int src_stride = src.surface->stride;
+	const int dst_stride = surface->stride;
+	const float scaleX = (float)src.size().width() / (float)pos.width();
+	const float scaleY = (float)src.size().height() / (float)pos.height();
+	const int aLeft = pos.left();
+	const int aTop = pos.top();
+
+	if (!mRect.empty())
+	{
+		const int rLeft = mRect.left();
+		const int rRight = mRect.right();
+		const int rTop = mRect.top();
+		const int rBottom = mRect.bottom();
+		uint8_t *dst_row = (uint8_t *)surface->data + rLeft * dst_bypp + rTop * dst_stride;
+		if (flag & blitAlphaTest)
+		{
+			for (int y = rTop; y < rBottom; ++y)
+			{
+				int src_y = (int)((y - aTop) * scaleY);
+				const uint8_t *src_row = (const uint8_t *)src.surface->data + src_y * src_stride;
+				uint32_t *dst = (uint32_t *)dst_row;
+
+				for (int x = rLeft; x < rRight; ++x)
+				{
+					int src_x = (int)((x - aLeft) * scaleX);
+					const uint8_t *src = src_row + src_x * src_bypp;
+					if (pal[*src] & 0x80000000)
+						*dst = pal[*src];
+					dst++;
+				}
+				dst_row += dst_stride;
+			}
+		}
+		else if (flag & blitAlphaBlend)
+		{
+			for (int y = rTop; y < rBottom; ++y)
+			{
+				int src_y = (int)((y - aTop) * scaleY);
+				const uint8_t *src_row = (const uint8_t *)src.surface->data + src_y * src_stride;
+				gRGB *dst = (gRGB *)dst_row;
+
+				for (int x = rLeft; x < rRight; ++x)
+				{
+					int src_x = (int)((x - aLeft) * scaleX);
+					const uint8_t *src = src_row + src_x * src_bypp;
+					dst->alpha_blend(pal[*src]);
+					dst++;
+				}
+				dst_row += dst_stride;
+			}
+		}
+		else
+		{
+			for (int y = rTop; y < rBottom; ++y)
+			{
+				int src_y = (int)((y - aTop) * scaleY);
+				const uint8_t *src_row = (const uint8_t *)src.surface->data + src_y * src_stride;
+				uint32_t *dst = (uint32_t *)dst_row;
+
+				for (int x = rLeft; x < rRight; ++x)
+				{
+					int src_x = (int)((x - aLeft) * scaleX);
+					const uint8_t *src = src_row + src_x * src_bypp;
+					*dst = pal[*src];
+					dst++;
+				}
+				dst_row += dst_stride;
+			}
+		}
+	}
+	if (top && !topRect.empty())
+	{
+		const int rLeft = topRect.left();
+		const int rRight = topRect.right();
+		const int rTop = topRect.top();
+		const int rBottom = topRect.bottom();
+		uint8_t *dst_row = (uint8_t *)surface->data + rLeft * dst_bypp + rTop * dst_stride;
+
+		if (flag & blitAlphaTest)
+		{
+			for (int y = rTop; y < rBottom; ++y)
+			{
+				int src_y = (int)((y - aTop) * scaleY);
+				const uint8_t *src_row = (const uint8_t *)src.surface->data + src_y * src_stride;
+				uint32_t *dst = (uint32_t *)dst_row;
+
+				for (int x = rLeft; x < rRight; ++x)
+				{
+					int src_x = (int)((x - aLeft) * scaleX);
+					const uint8_t *src = src_row + src_x * src_bypp;
+					if (pal[*src] & 0x80000000)
+						*dst = pal[*src];
+					dst++;
+				}
+				dst_row += dst_stride;
+			}
+		}
+		else if (flag & blitAlphaBlend)
+		{
+			for (int y = rTop; y < rBottom; ++y)
+			{
+				int src_y = (int)((y - aTop) * scaleY);
+				const uint8_t *src_row = (const uint8_t *)src.surface->data + src_y * src_stride;
+				gRGB *dst = (gRGB *)dst_row;
+
+				for (int x = rLeft; x < rRight; ++x)
+				{
+					int src_x = (int)((x - aLeft) * scaleX);
+					const uint8_t *src = src_row + src_x * src_bypp;
+					dst->alpha_blend(pal[*src]);
+					dst++;
+				}
+				dst_row += dst_stride;
+			}
+		}
+		else
+		{
+			for (int y = rTop; y < rBottom; ++y)
+			{
+				int src_y = (int)((y - aTop) * scaleY);
+				const uint8_t *src_row = (const uint8_t *)src.surface->data + src_y * src_stride;
+				uint32_t *dst = (uint32_t *)dst_row;
+
+				for (int x = rLeft; x < rRight; ++x)
+				{
+					int src_x = (int)((x - aLeft) * scaleX);
+					const uint8_t *src = src_row + src_x * src_bypp;
+					*dst = pal[*src];
+					dst++;
+				}
+				dst_row += dst_stride;
+			}
+		}
+	}
+	if (bottom && !bottomRect.empty())
+	{
+		const int rLeft = bottomRect.left();
+		const int rRight = bottomRect.right();
+		const int rTop = bottomRect.top();
+		const int rBottom = bottomRect.bottom();
+		uint8_t *dst_row = (uint8_t *)surface->data + rLeft * dst_bypp + rTop * dst_stride;
+
+		if (flag & blitAlphaTest)
+		{
+			for (int y = rTop; y < rBottom; ++y)
+			{
+				int src_y = (int)((y - aTop) * scaleY);
+				const uint8_t *src_row = (const uint8_t *)src.surface->data + src_y * src_stride;
+				uint32_t *dst = (uint32_t *)dst_row;
+
+				for (int x = rLeft; x < rRight; ++x)
+				{
+					int src_x = (int)((x - aLeft) * scaleX);
+					const uint8_t *src = src_row + src_x * src_bypp;
+					if (pal[*src] & 0x80000000)
+						*dst = pal[*src];
+					dst++;
+				}
+				dst_row += dst_stride;
+			}
+		}
+		else if (flag & blitAlphaBlend)
+		{
+			for (int y = rTop; y < rBottom; ++y)
+			{
+				int src_y = (int)((y - aTop) * scaleY);
+				const uint8_t *src_row = (const uint8_t *)src.surface->data + src_y * src_stride;
+				gRGB *dst = (gRGB *)dst_row;
+
+				for (int x = rLeft; x < rRight; ++x)
+				{
+					int src_x = (int)((x - aLeft) * scaleX);
+					const uint8_t *src = src_row + src_x * src_bypp;
+					dst->alpha_blend(pal[*src]);
+					dst++;
+				}
+				dst_row += dst_stride;
+			}
+		}
+		else
+		{
+			for (int y = rTop; y < rBottom; ++y)
+			{
+				int src_y = (int)((y - aTop) * scaleY);
+				const uint8_t *src_row = (const uint8_t *)src.surface->data + src_y * src_stride;
+				uint32_t *dst = (uint32_t *)dst_row;
+
+				for (int x = rLeft; x < rRight; ++x)
+				{
+					int src_x = (int)((x - aLeft) * scaleX);
+					const uint8_t *src = src_row + src_x * src_bypp;
+					*dst = pal[*src];
+					dst++;
+				}
+				dst_row += dst_stride;
+			}
+		}
+	}
+}
+
+void gPixmap::blit(const gPixmap &src, const eRect &_pos, const gRegion &clip, int cornerRadius, int edges, int flag)
 {
 	bool accel = (surface->data_phys && src.surface->data_phys);
 	bool accumulate = accel && (gAccel::getInstance()->accumulate() >= 0);
 	int accelerationthreshold = GFX_SURFACE_BLIT_ACCELERATION_THRESHOLD;
-//	eDebug("[gPixmap] blit: -> %d,%d+%d,%d -> %d,%d+%d,%d, flags=0x%x, accel=%d",
-//		_pos.x(), _pos.y(), _pos.width(), _pos.height(),
-//		clip.extends.x(), clip.extends.y(), clip.extends.width(), clip.extends.height(),
-//		flag, accel);
 	eRect pos = _pos;
 
-//	eDebug("[gPixmap] source size: %d %d", src.size().width(), src.size().height());
+	//	eDebug("[gPixmap] source size: %d %d", src.size().width(), src.size().height());
 
 	int scale_x = FIX, scale_y = FIX;
 
@@ -474,7 +1649,7 @@ void gPixmap::blit(const gPixmap &src, const eRect &_pos, const gRegion &clip, i
 	{
 		// pos' size is ignored if left or top aligning.
 		// if its size isn't set, centre and right/bottom aligning is ignored
-		
+
 		if (_pos.size().isValid())
 		{
 			if (flag & blitHAlignCenter)
@@ -569,15 +1744,33 @@ void gPixmap::blit(const gPixmap &src, const eRect &_pos, const gRegion &clip, i
 		eRect srcarea = area;
 		srcarea.moveBy(-pos.x(), -pos.y());
 
-//		eDebug("[gPixmap] srcarea before scale: %d %d %d %d",
-//			srcarea.x(), srcarea.y(), srcarea.width(), srcarea.height());
+	//		eDebug("[gPixmap] srcarea before scale: %d %d %d %d",
+	//			srcarea.x(), srcarea.y(), srcarea.width(), srcarea.height());
 
 		if (flag & blitScale)
 			srcarea = eRect(srcarea.x() * FIX / scale_x, srcarea.y() * FIX / scale_y, srcarea.width() * FIX / scale_x, srcarea.height() * FIX / scale_y);
 
-//		eDebug("[gPixmap] srcarea after scale: %d %d %d %d",
-//			srcarea.x(), srcarea.y(), srcarea.width(), srcarea.height());
+	//		eDebug("[gPixmap] srcarea after scale: %d %d %d %d",
+	//			srcarea.x(), srcarea.y(), srcarea.width(), srcarea.height());
+	if (cornerRadius && surface->bpp == 32)
+		{
+			if (src.surface->bpp == 32)
+			{
+				if (flag & blitScale)
+					blitRounded32BitScaled(src, pos, clip.rects[i], cornerRadius, edges, flag);
+				else
+					blitRounded32Bit(src, pos, clip.rects[i], cornerRadius, edges, flag);
+			}
+			else
+			{
+				if (flag & blitScale)
+					blitRounded8BitScaled(src, pos, clip.rects[i], cornerRadius, edges, flag);
+				else
+					blitRounded8Bit(src, pos, clip.rects[i], cornerRadius, edges, flag);
+			}
 
+			continue;
+		}
 		if (accel)
 		{
 			if (srcarea.surface() * src.surface->bypp < accelerationthreshold)
@@ -729,7 +1922,8 @@ void gPixmap::blit(const gPixmap &src, const eRect &_pos, const gRegion &clip, i
 						gRGB *dst = (gRGB*)dstptr;
 						for (int x = 0; x < width; ++x)
 						{
-							dst->alpha_blend(src_row_ptr[(x * src_width) / width]);
+							const gRGB &src_pixel = src_row_ptr[(x * src_width) / width];
+							dst->alpha_blend(src_pixel);
 							++dst;
 						}
 						dstptr += surface->stride;
