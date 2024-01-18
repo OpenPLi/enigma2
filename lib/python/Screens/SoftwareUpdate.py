@@ -139,6 +139,8 @@ class UpdatePlugin(Screen, ProtectedScreen):
 
 		# show the user the message first
 		if message is not None:
+			if type(message) == unicode:
+					message = message.encode('utf-8')
 			if abort:
 				self.session.openWithCallback(self.close, MessageBox, message, type=MessageBox.TYPE_MESSAGE, picon=picon)
 			else:
