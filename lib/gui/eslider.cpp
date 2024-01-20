@@ -150,9 +150,11 @@ int eSlider::event(int event, void *data, void *data2)
 				painter.setRadius(cornerRadius, getCornerRadiusEdges());
 				eRect rect = eRect(m_currently_filled.extends);
 				if (m_orientation == orHorizontal)
-					rect.setHeight(size().height()-m_border_width*2);
+					rect.setHeight(size().height()-m_border_width);
 				else
-					rect.setWidth(size().width()-m_border_width*2);
+					rect.setWidth(size().width()-m_border_width);
+				rect.setX(m_border_width);
+				rect.setY(m_border_width);
 				painter.drawRectangle(rect);
 			}
 			else {
