@@ -715,10 +715,18 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 		style.setStyle(painter, selected ? eWindowStyle::styleListboxSelected : eWindowStyle::styleListboxNormal);
 
 	eListboxStyle *local_style = 0;
+	eRect itemRect = eRect(offset, m_itemsize);
+	int radius = 0;
+	int edges = 0;
 
 		/* get local listbox style, if present */
 	if (m_listbox)
 		local_style = m_listbox->getLocalStyle();
+
+	if (local_style) {
+		radius = local_style->cornerRadius(selected ? 1:0);
+		edges = local_style->cornerRadiusEdges(selected ? 1:0);
+	}
 
 	if (marked == 1)  // marked
 	{
@@ -764,13 +772,19 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 		/* blit background picture, if available (otherwise, clear only) */
 		if (local_style && local_style->m_background)
 			painter.blit(local_style->m_background, offset, eRect(), 0);
+		else if (local_style && !local_style->m_background && radius)
+		{
+			if(radius)
+				painter.setRadius(radius, edges);
+			painter.drawRectangle(itemRect);
+		}
 		else
 			painter.clear();
 	} else
 	{
 		if (local_style->m_background)
 			painter.blit(local_style->m_background, offset, eRect(), gPainter::BT_ALPHABLEND);
-		else if (selected && !local_style->m_selection && !local_style->m_selection_large)
+		else if (selected && !local_style->m_selection && !local_style->m_selection_large && !radius)
 			painter.clear();
 	}
 
@@ -784,8 +798,8 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 		}
 
 		// Draw the frame for selected item here so to be under the content
-		if (selected && (!local_style || (!local_style->m_selection && !local_style->m_selection_large)))
-			style.drawFrame(painter, eRect(offset, m_itemsize), eWindowStyle::frameListboxEntry);
+		if (selected && (!local_style || (!local_style->m_selection && !local_style->m_selection_large)) && !radius)
+			style.drawFrame(painter, itemRect, eWindowStyle::frameListboxEntry);
 
 		eServiceReference ref = *m_cursor;
 		std::string orig_ref_str = ref.toString();
