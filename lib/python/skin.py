@@ -534,6 +534,14 @@ class AttributeParser:
 	def itemWidth(self, value):
 		self.guiObject.setItemWidth(parseScale(value))
 
+	def itemCornerRadius(self, value):
+		radius, edgeValue = parseRadius(value)
+		self.guiObject.setItemCornerRadius(radius, edgeValue)
+
+	def itemCornerRadiusSelected(self, value):
+		radius, edgeValue = parseRadius(value)
+		self.guiObject.setItemCornerRadiusSelected(radius, edgeValue)
+
 	def pixmap(self, value):
 		if value.endswith(".svg"): # if graphic is svg force alphatest to "blend"
 			self.guiObject.setAlphatest(BT_ALPHABLEND)
