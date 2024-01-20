@@ -37,7 +37,7 @@ private:
 	ePtr<gPixmap> m_pixmap, m_backgroundpixmap;
 
 	gRegion m_currently_filled;
-	gRGB m_border_color, m_foreground_colorm m_background_color;
+	gRGB m_border_color, m_foreground_color, m_background_color;
 	gRGB m_sliderborder_color, m_sliderforeground_color;
 };
 
