@@ -146,12 +146,16 @@ resumePointCacheLast = int(time())
 
 class whitelist:
 	vbi = []
+	bouquets = []
 
 def reload_whitelist_vbi():
 	whitelist.vbi = [line.strip() for line in open('/etc/enigma2/whitelist_vbi', 'r').readlines()] if os.path.isfile('/etc/enigma2/whitelist_vbi') else []
 
+def reload_whitelist_bouquets():
+	whitelist.bouquets = [line.strip() for line in open('/etc/enigma2/whitelist_bouquets', 'r').readlines()] if os.path.isfile('/etc/enigma2/whitelist_bouquets') else []
 
 reload_whitelist_vbi()
+reload_whitelist_bouquets()
 
 class InfoBarStreamRelay:
 
@@ -512,6 +516,9 @@ class InfoBarShowHide(InfoBarScreenSaver):
 					return ".hidevbi." in servicepath.lower()
 		return service and service.toString() in whitelist.vbi
 
+	def checkBouquets(self, bouquet):
+		return bouquet in whitelist.bouquets
+
 	def checkStreamrelay(self, service):
 		return streamrelay.checkService(service)
 
@@ -531,6 +538,14 @@ class InfoBarShowHide(InfoBarScreenSaver):
 				whitelist.vbi.append(service)
 			open('/etc/enigma2/whitelist_vbi', 'w').write('\n'.join(whitelist.vbi))
 			self.showHideVBI()
+
+	def ToggleBouquet(self, bouquet):
+		if bouquet in whitelist.bouquets:
+			whitelist.bouquets.remove(bouquet)
+		else:
+			whitelist.bouquets.append(bouquet)
+		open('/etc/enigma2/whitelist_bouquets', 'w').write('\n'.join(whitelist.bouquets))
+
 
 class BufferIndicator(Screen):
 	def __init__(self, session):
