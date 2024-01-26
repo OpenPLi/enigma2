@@ -33,14 +33,12 @@ class Pager(GUIAddon):
 	def onContainerShown(self):
 		# disable listboxes default scrollbars
 		if hasattr(self.source, "instance") and hasattr(self.source.instance, "setScrollbarMode"):
-			self.source.instance.setScrollbarMode(2)
+			self.source.instance.setScrollbarMode(eListbox.showNever)
 
-		if hasattr(self.source, "onSelectionChanged"):
-			if self.initPager not in self.source.onSelectionChanged:
-				self.source.onSelectionChanged.append(self.initPager)
-		elif hasattr(self.source, "onSelChanged"):
-			if self.initPager not in self.source.onSelChanged:
-				self.source.onSelChanged.append(self.initPager)
+		onSelectionChanged = x if (x := getattr(self.source, "onSelectionChanged", None)) else getattr(self.source, "onSelChanged", None)
+
+		if isinstance(onSelectionChanged, list) and self.initPager not in onSelectionChanged:
+			onSelectionChanged.append(self.initPager)
 				
 		self.initPager()
 
