@@ -519,7 +519,10 @@ class InfoBarShowHide(InfoBarScreenSaver):
 		return service and service.toString() in whitelist.vbi
 
 	def checkBouquets(self, bouquet):
-		return bouquet in whitelist.bouquets
+		try:
+			return bouquet.toString().split('"')[1] in whitelist.bouquets
+		except:
+			return
 
 	def checkStreamrelay(self, service):
 		return streamrelay.checkService(service)

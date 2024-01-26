@@ -276,10 +276,11 @@ class ChannelContextMenu(Screen):
 				if removed_userbouquets_available():
 					append_when_current_valid(current, menu, (_("Purge deleted user bouquets"), self.purgeDeletedBouquets), level=0)
 					append_when_current_valid(current, menu, (_("Restore deleted user bouquets"), self.restoreDeletedBouquets), level=0)
-				if Screens.InfoBar.InfoBar.instance.checkBouquets(current.toString().split('"')[1]):
-					append_when_current_valid(current, menu, (_("Unpin Userbouquet"), self.toggleBouquet), level=2)
-				else:
-					append_when_current_valid(current, menu, (_("Pin Userbouquet"), self.toggleBouquet), level=2)
+				if('FROM BOUQUET' in current.toString()):
+					if Screens.InfoBar.InfoBar.instance.checkBouquets(current):
+						append_when_current_valid(current, menu, (_("Unpin Userbouquet"), self.toggleBouquet), level=2)
+					else:
+						append_when_current_valid(current, menu, (_("Pin Userbouquet"), self.toggleBouquet), level=2)
 				append_when_current_valid(current, menu, (_("Reload services/bouquets list"), self.reloadServicesBouquets), level=2)
 		if self.inBouquet: # current list is editable?
 			if csel.bouquet_mark_edit == OFF:
