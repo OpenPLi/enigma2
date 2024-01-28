@@ -3,6 +3,7 @@ from enigma import eAVSwitch, eDVBVolumecontrol, getDesktop
 from Components.SystemInfo import BoxInfo
 import os
 
+iAVSwitch = None # will be initialized later, allows to import name 'iAVSwitch' from 'Components.AVSwitch'
 
 class AVSwitch:
 	def setInput(self, input):
