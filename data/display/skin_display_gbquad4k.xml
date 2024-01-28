@@ -42,44 +42,42 @@
 			<convert type="EventTime">Remaining</convert>
 			<convert type="RemainingToText">FOLLOW</convert>
 		</widget>
-		<eLabel text="TUNER:" position="0,185" size="100,55" halign="Left" valign="center" font="LCD_display;25" />
-		<widget source="session.FrontendInfo" render="FixedLabel" position="100,185" size="25,55" text="A" foregroundColor="#04B404" font="LCD_display;25" halign="center" valign="center" >
-			<convert type="FrontendInfo">NUMBER</convert>
-			<convert type="ValueRange">0,0</convert>
-			<convert type="ConditionalShowHide" />
+		<widget source="session.RecordState" render="FixedLabel" text="Recording" position="center,170" size="190,27" font="LCD_display;25" zPosition="2" valign="bottom" halign="center" noWrap="1" foregroundColor="#ff0000" >
+			<convert type="ConditionalShowHide">Blink,5000,2000</convert>
 		</widget>
-		<widget source="session.FrontendInfo" render="FixedLabel" position="100,185" size="25,55" text="B" foregroundColor="#04B404" font="LCD_display;25" halign="center" valign="center" >
-			<convert type="FrontendInfo">NUMBER</convert>
-			<convert type="ValueRange">1,1</convert>
-			<convert type="ConditionalShowHide" />
+		<widget source="session.CurrentService" render="Picon" position="0,0" size="100,60" alphatest="blend" usePicLoad="1" isFrontDisplayPicon="1">
+			<convert type="ServiceName">Reference</convert>
 		</widget>
-		<widget source="session.FrontendInfo" render="FixedLabel" position="100,185" size="25,55" text="C" foregroundColor="#04B404" font="LCD_display;25" halign="center" valign="center" >
-			<convert type="FrontendInfo">NUMBER</convert>
-			<convert type="ValueRange">2,2</convert>
-			<convert type="ConditionalShowHide" />
+		<widget source="session.FrontendInfo" render="Label" position="10,210" size="130,32" halign="left" font="LCD_display;30">
+			<convert type="FrontendInfo">USE_TUNERS_STRING</convert>
 		</widget>
-		<widget source="session.FrontendInfo" render="FixedLabel" position="100,185" size="25,55" text="D" foregroundColor="#04B404" font="LCD_display;25" halign="center" valign="center" >
-			<convert type="FrontendInfo">NUMBER</convert>
-			<convert type="ValueRange">3,3</convert>
-			<convert type="ConditionalShowHide" />
-		</widget>
-		<widget source="session.RecordState" render="FixedLabel" text="Recording" position="128,185" size="130,55" foregroundColor="#ff0000" font="LCD_display;25" halign="center" valign="center" zPosition="1" noWrap="1" >
-			<convert type="ConditionalShowHide">Blink</convert>
+		<widget source="session.CurrentService" render="Pixmap" pixmap="skin_default/icons/stream.png" size="60,50" position="180,200" zPosition="1" alphatest="blend" >
+			<convert type="ClientsStreaming"/>
+			<convert type="ConditionalShowHide"/>
 		</widget>
 		<panel name="SummaryClockPanel" />
 	</screen>
-<!--/* COMMON -->
 
 <!-- standby -->
 	<screen name="StandbySummary" position="0,0" size="400,240">
-		<widget source="global.CurrentTime" render="Label" position="0,0" size="400,24" font="LCD_display;22" halign="left" noWrap="1">
+		<widget source="global.CurrentTime" render="Label" position="0,0" size="400,32" font="LCD_display;30" halign="left" noWrap="1">
 			<convert type="ClockToText">Format:%d.%m.%Y</convert>
 		</widget>
-		<widget source="global.CurrentTime" render="Label" position="center,center" size="225,100" font="LCD_display;85" halign="center" noWrap="1">
-			<convert type="ClockToText">Format:%H:%M</convert>
+		<widget source="global.CurrentTime" render="Label" position="center,center" size="300,110" font="LCD_display;100" halign="center" noWrap="1" foregroundColor="#7fffff">
+			<convert type="ClockToText">Default</convert>
 		</widget>
-		<widget source="session.RecordState" render="FixedLabel" text="Recording" position="center,150" size="190,22" font="LCD_display;22" zPosition="2" valign="bottom" halign="center" noWrap="1" foregroundColor="#ff0000" >
-			<convert type="ConditionalShowHide">Blink</convert>
+		<widget source="global.CurrentTime" render="Label" position="330,80" size="50,55" font="LCD_display;50" halign="left" noWrap="1" foregroundColor="#7fffff">
+			<convert type="ClockToText">Format:%S</convert>
+		</widget>
+		<widget source="session.RecordState" render="FixedLabel" text="Recording" position="center,170" size="190,27" font="LCD_display;25" zPosition="2" valign="bottom" halign="center" noWrap="1" foregroundColor="#ff0000" >
+			<convert type="ConditionalShowHide">Blink,5000,2000</convert>
+		</widget>
+		<widget source="session.FrontendInfo" render="Label" position="10,210" size="130,32" halign="left" font="LCD_display;30">
+			<convert type="FrontendInfo">USE_TUNERS_STRING</convert>
+		</widget>
+			<widget source="session.CurrentService" render="Pixmap" pixmap="skin_default/icons/stream.png" size="60,50" position="180,200" zPosition="1" alphatest="blend" >
+			<convert type="ClientsStreaming"/>
+			<convert type="ConditionalShowHide"/>
 		</widget>
 	</screen>
 
@@ -126,6 +124,9 @@
 		</widget>
 		<widget source="parent.ServiceEvent" render="Progress" position="0,200" size="400,30" borderWidth="3">
 			<convert type="EventTime">Progress</convert>
+		</widget>
+		<widget source="parent.ServiceEvent" render="Picon" position="0,0" size="100,60" alphatest="blend" usePicLoad="1" isFrontDisplayPicon="1">
+			<convert type="ServiceName">Reference</convert>
 		</widget>
 	</screen>
 
