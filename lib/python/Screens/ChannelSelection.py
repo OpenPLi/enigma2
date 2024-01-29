@@ -67,7 +67,7 @@ class InsertService(ConfigListScreen, Screen):
 		self["actions2"] = ActionMap(["SetupActions"],
 		{
 			"ok": self.run,
-			"cancel": self.keyCancel,
+			"cancel": boundFunction(self.close, None),
 			"save": self.run,
 		}, -2)
 
