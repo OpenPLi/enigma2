@@ -35,6 +35,9 @@ class Pager(GUIAddon):
 		if hasattr(self.source, "instance") and hasattr(self.source.instance, "setScrollbarMode"):
 			self.source.instance.setScrollbarMode(eListbox.showNever)
 
+		if self.source:
+			self.source.onVisibilityChange.append(self.onSourceVisibleChanged)
+
 		onSelectionChanged = x if (x := getattr(self.source, "onSelectionChanged", None)) is not None else getattr(self.source, "onSelChanged", None)
 
 		if isinstance(onSelectionChanged, list) and self.initPager not in onSelectionChanged:
@@ -43,6 +46,12 @@ class Pager(GUIAddon):
 		self.initPager()
 
 	GUI_WIDGET = eListbox
+
+	def onSourceVisibleChanged(self, visible):
+		if visible:
+			self.show()
+		else:
+			self.hide()
 
 	def buildEntry(self, currentPage, pageCount):
 		width = self.l.getItemSize().width()
