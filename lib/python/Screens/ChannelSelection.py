@@ -320,7 +320,8 @@ class ChannelContextMenu(Screen):
 					if not inAlternativeList:
 						append_when_current_valid(current, menu, (_("Remove entry"), self.removeEntry), level=0, key="8")
 						self.removeFunction = self.removeCurrentService
-						append_when_current_valid(current, menu, (_("Insert entry"), self.insertEntry), level=0)
+						if config.usage.setup_level.index >= 2:
+							menu.append(ChoiceEntryComponent("dummy", (_("Insert entry"), self.insertEntry)))
 				if current_root and ("flags == %d" % (FLAG_SERVICE_NEW_FOUND)) in current_root.getPath():
 					append_when_current_valid(current, menu, (_("Remove new found flag"), self.removeNewFoundFlag), level=0)
 			else:
@@ -1066,12 +1067,11 @@ class ChannelSelectionEdit:
 		currentIndex = self.servicelist.getCurrentIndex()
 		current = self.servicelist.getCurrent()
 		mutableList = self.getMutableList()
-		if mutableList and current and current.valid():
+		if mutableList:
 			if not mutableList.addService(serviceref, current):
-				self.servicelist.addService(serviceref, True)
 				mutableList.flushChanges()
-				refreshServiceList()
-				self.servicelist.moveToIndex(currentIndex)
+				self.servicelist.addService(serviceref, True)
+				self.servicelist.resetRoot()
 
 	def addMarker(self, name):
 		current = self.servicelist.getCurrent()
