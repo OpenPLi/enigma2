@@ -83,7 +83,7 @@ class InsertService(ConfigListScreen, Screen):
 		self.changedEntry()
 
 	def createConfig(self):
-		choices = []
+		choices = [("Select Service", _("Select Service"))]
 		if BoxInfo.getItem("HasHDMIin"):
 			choices = [("HDMI-in", _("HDMI-In"))]
 		choices.append(("IPTV stream", _("Enter URL")))
@@ -94,12 +94,12 @@ class InsertService(ConfigListScreen, Screen):
 
 	def createSetup(self):
 		self.list = []
-		if BoxInfo.getItem("HasHDMIin"):
-			self.list.append((_("Service Type"), self.servicetype, _("Select service type")))
-		if self.servicetype.value != "HDMI-in":
-			self.list.append((_("Stream Type"), self.streamtype, _("Select stream type")))
-			self.list.append((_("Stream URL"), self.streamurl, _("Select stream URL")))
-		self.list.append((_("Service Name"), self.servicename, _("Select service name")))
+		self.list.append((_("Service Type"), self.servicetype, _("Select service type")))
+		if self.servicetype.value != "Select Service":
+			if self.servicetype.value != "HDMI-in":
+				self.list.append((_("Stream Type"), self.streamtype, _("Select stream type")))
+				self.list.append((_("Stream URL"), self.streamurl, _("Select stream URL")))
+			self.list.append((_("Service Name"), self.servicename, _("Select service name")))
 		self["config"].list = self.list
 
 	def changedEntry(self):
@@ -111,8 +111,14 @@ class InsertService(ConfigListScreen, Screen):
 		self.createSetup()
 
 	def run(self):
-		self.close(eServiceReference(self.servicerefstring))
+		if self.servicetype.value == "Select Service":
+			self.session.openWithCallback(self.channelSelectionCallback, SimpleChannelSelection, _("Select channel"))
+		else:
+			self.close(eServiceReference(self.servicerefstring))
 
+	def channelSelectionCallback(self, *args):
+		if len(args):
+			self.close(args[0])
 
 def getStreamRelayRef(sref):
 	try:
@@ -216,6 +222,7 @@ class ChannelContextMenu(Screen):
 				"1": self.unhideParentalServices,
 				"2": self.renameEntry,
 				"3": self.findCurrentlyPlayed,
+				"4": self.insertEntry,
 				"5": self.addServiceToBouquetOrAlternative,
 				"6": self.toggleMoveModeSelect,
 				"8": self.removeEntry
@@ -229,7 +236,7 @@ class ChannelContextMenu(Screen):
 		current_root = csel.getRoot()
 		current_sel_path = current.getPath()
 		current_sel_flags = current.flags
-		inBouquetRootList = current_root and 'FROM BOUQUET "bouquets.' in current_root.getPath() #FIXME HACK
+		self.inBouquetRootList = current_root and 'FROM BOUQUET "bouquets.' in current_root.getPath() #FIXME HACK
 		inAlternativeList = current_root and 'FROM BOUQUET "alternatives' in current_root.getPath()
 		self.inBouquet = csel.getMutableList() is not None
 		haveBouquets = config.usage.multibouquet.value
@@ -239,7 +246,7 @@ class ChannelContextMenu(Screen):
 		if not (current_sel_path or current_sel_flags & (eServiceReference.isDirectory | eServiceReference.isMarker)) or current_sel_flags & eServiceReference.isGroup:
 			append_when_current_valid(current, menu, (_("Show transponder info"), self.showServiceInformations), level=2)
 		if csel.bouquet_mark_edit == OFF and not csel.entry_marked:
-			if not inBouquetRootList:
+			if not self.inBouquetRootList:
 				isPlayable = not (current_sel_flags & (eServiceReference.isMarker | eServiceReference.isDirectory))
 				if isPlayable:
 					for p in plugins.getPlugins(PluginDescriptor.WHERE_CHANNEL_CONTEXT_MENU):
@@ -321,7 +328,7 @@ class ChannelContextMenu(Screen):
 						append_when_current_valid(current, menu, (_("Remove entry"), self.removeEntry), level=0, key="8")
 						self.removeFunction = self.removeCurrentService
 						if config.usage.setup_level.index >= 2:
-							menu.append(ChoiceEntryComponent("dummy", (_("Insert entry"), self.insertEntry)))
+							menu.append(ChoiceEntryComponent("4", (_("Insert entry"), self.insertService)))
 				if current_root and ("flags == %d" % (FLAG_SERVICE_NEW_FOUND)) in current_root.getPath():
 					append_when_current_valid(current, menu, (_("Remove new found flag"), self.removeNewFoundFlag), level=0)
 			else:
@@ -332,7 +339,7 @@ class ChannelContextMenu(Screen):
 						append_when_current_valid(current, menu, (_("Add bouquet to parental protection"), boundFunction(self.addParentalProtection, current)), level=0)
 					else:
 						append_when_current_valid(current, menu, (_("Remove bouquet from parental protection"), boundFunction(self.removeParentalProtection, current)), level=0)
-				menu.append(ChoiceEntryComponent("dummy", (_("Add bouquet"), self.showBouquetInputBox)))
+				menu.append(ChoiceEntryComponent("4", (_("Add bouquet"), self.showBouquetInputBox)))
 				append_when_current_valid(current, menu, (_("Rename entry"), self.renameEntry), level=0, key="2")
 				append_when_current_valid(current, menu, (_("Remove entry"), self.removeEntry), level=0, key="8")
 				self.removeFunction = self.removeBouquet
@@ -354,7 +361,7 @@ class ChannelContextMenu(Screen):
 				if csel.entry_marked and not inAlternativeList:
 					append_when_current_valid(current, menu, (_("Remove entry"), self.removeEntry), level=0, key="8")
 					self.removeFunction = self.removeCurrentService
-				if not csel.entry_marked and not inBouquetRootList and current_root and not (current_root.flags & eServiceReference.isGroup):
+				if not csel.entry_marked and not self.inBouquetRootList and current_root and not (current_root.flags & eServiceReference.isGroup):
 					if current.type != -1:
 						menu.append(ChoiceEntryComponent("dummy", (_("Add marker"), self.showMarkerInputBox)))
 					if not csel.movemode:
@@ -386,6 +393,12 @@ class ChannelContextMenu(Screen):
 
 		menu.append(ChoiceEntryComponent("menu", (_("Configuration"), self.openSetup)))
 		self["menu"] = ChoiceList(menu)
+
+	def insertEntry(self):
+		if self.inBouquetRootList:
+			self.showBouquetInputBox()
+		else:
+			self.insertService()
 
 	def set3DMode(self, value):
 		playingref = self.session.nav.getCurrentlyPlayingServiceReference()
@@ -456,10 +469,10 @@ class ChannelContextMenu(Screen):
 			return name
 		return ""
 
-	def insertEntry(self):
-		self.session.openWithCallback(self.insertEntryCallback, InsertService)
+	def insertService(self):
+		self.session.openWithCallback(self.insertServiceCallback, InsertService)
 
-	def insertEntryCallback(self, answer):
+	def insertServiceCallback(self, answer):
 		if answer:
 			self.csel.insertService(answer)
 			self.close()
