@@ -63,6 +63,31 @@ def addspace(text):
 		text += " "
 	return text
 
+def getCryptoInfo(info):
+	ecmdata = GetEcmInfo()
+	if info and info.getInfo(iServiceInformation.sIsCrypted) == 1:
+		data = ecmdata.getEcmData()
+		current_source = data[0]
+		current_caid = data[1]
+		current_provid = data[2]
+		current_ecmpid = data[3]
+	else:
+		current_source = ""
+		current_caid = "0"
+		current_provid = "0"
+		current_ecmpid = "0"
+	return current_source, current_caid, current_provid, current_ecmpid
+	
+def createCurrentCaidLabel(info):
+	current_source, current_caid, current_provid, current_ecmpid = getCryptoInfo(info)
+	res = "---"
+	if not pathExists("/tmp/ecm.info"):
+		return "FTA"
+	for caid_entry in caid_data:
+		if int(caid_entry[0], 16) <= int(current_caid, 16) <= int(caid_entry[1], 16):
+			res = caid_entry[4]
+	return res
+
 
 class PliExtraInfo(Poll, Converter):
 	def __init__(self, type):
