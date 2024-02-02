@@ -179,7 +179,8 @@ class InfoBarStreamRelay:
 				self.__srefs.remove(servicestring)
 			else:
 				self.__srefs.append(servicestring)
-			if nav.getCurrentlyPlayingServiceReference() == service:
+			currently_playing_service = nav.getCurrentlyPlayingServiceReference()
+			if currently_playing_service and currently_playing_service == service:
 				nav.restartService()
 			self.__saveToFile()
 
