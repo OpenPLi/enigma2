@@ -27,6 +27,10 @@ class ServiceInfoBar(GUIAddon):
 		GUIAddon.__init__(self)
 		self.nav = NavigationInstance.instance
 		self.nav.record_event.append(self.gotRecordEvent)
+		self.refreshCryptoInfo = eTimer()
+		self.refreshCryptoInfo.callback.append(self.checkCrypto_update)
+		self.refreshAddon = eTimer()
+		self.refreshAddon.callback.append(self.updateAddon)
 		self.elements = []
 		self.l = eListboxPythonMultiContent()  # noqa: E741
 		self.l.setBuildFunc(self.buildEntry)
@@ -45,14 +49,11 @@ class ServiceInfoBar(GUIAddon):
 		self.font = gFont("Regular", 18)
 		self.__event_tracker = None
 		self.current_crypto = "---"
-		self.refreshCryptoInfo = eTimer()
-		self.refreshCryptoInfo.callback.append(self.checkCrypto_update)
-		self.refreshAddon = eTimer()
-		self.refreshAddon.callback.append(self.updateAddon)
 		self.textRenderer = Label("")
 		self.permanentIcons = []
 		self.records_running = 0
 		self.streamServer = eStreamServer.getInstance()
+		self.currentServiceSource = None
 
 	def onContainerShown(self):
 		self.textRenderer.GUIcreate(self.relatedScreen.instance)
@@ -62,14 +63,18 @@ class ServiceInfoBar(GUIAddon):
 		if not self.__event_tracker:
 			self.__event_tracker = ServiceEventTracker(screen=self.relatedScreen,
 				eventmap={
-					iPlayableService.evStart: self.updateAddon,
-					iPlayableService.evEnd: self.updateAddon,
-					iPlayableService.evUpdatedInfo: self.updateAddon,
+					iPlayableService.evStart: self.scheduleAddonUpdate,
+					iPlayableService.evEnd: self.scheduleAddonUpdate,
+					iPlayableService.evUpdatedInfo: self.scheduleAddonUpdate,
 					iPlayableService.evVideoSizeChanged: self.updateAddon,
-					iPlayableService.evHBBTVInfo: self.updateAddon
+					iPlayableService.evHBBTVInfo: self.scheduleAddonUpdate,
+					iPlayableService.evNewProgramInfo: self.scheduleAddonUpdate,
+					iPlayableService.evCuesheetChanged: self.scheduleAddonUpdate,
 				}
 			)
-			
+		self.currentServiceSource = self.source.screen["CurrentService"]
+		if self.currentServiceSource and self.updateAddon not in self.currentServiceSource.onManualNewService:
+			self.currentServiceSource.onManualNewService.append(self.scheduleAddonUpdate)
 	def destroy(self):
 		self.nav.record_event.remove(self.gotRecordEvent)
 		self.refreshCryptoInfo.stop()
@@ -97,8 +102,8 @@ class ServiceInfoBar(GUIAddon):
 	
 	def scheduleAddonUpdate(self):
 		self.refreshAddon.stop()
-		self.refreshAddon.start(1000)
-	
+		self.refreshAddon.start(350)
+
 	def checkCrypto_update(self):
 		if NavigationInstance.instance is not None:
 			service = NavigationInstance.instance.getCurrentService()
@@ -191,8 +196,9 @@ class ServiceInfoBar(GUIAddon):
 					return None
 				if service.streamed() is not None and ((self.streamServer.getConnectedClients() or StreamServiceList) and True or False):
 					return key
-			elif key == "currentCrypto" and not isRef:
-				self.current_crypto = createCurrentCaidLabel(info)
+			elif key == "currentCrypto":
+				if not isRef:
+					self.current_crypto = createCurrentCaidLabel(info)
 				self.refreshCryptoInfo.start(1000)
 				return key
 			elif key == "record":
@@ -226,6 +232,10 @@ class ServiceInfoBar(GUIAddon):
 				if enabledKey in self.pixmaps:
 					pic = LoadPixmap(resolveFilename(SCOPE_GUISKIN, self.pixmaps[enabledKey]))
 			else:
+				if enabledKey == "videoRes":
+					enabledKey = "IS_HD"
+				if enabledKey in self.pixmaps:
+					pic = LoadPixmap(resolveFilename(SCOPE_GUISKIN, self.pixmaps[enabledKey]))
 				if enabledKey in self.pixmapsDisabled:
 					pic = LoadPixmap(resolveFilename(SCOPE_GUISKIN, self.pixmapsDisabled[enabledKey]))
 
