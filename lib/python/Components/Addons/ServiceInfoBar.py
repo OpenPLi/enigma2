@@ -45,7 +45,7 @@ class ServiceInfoBar(GUIAddon):
 		self.separatorLineColor = 0xC0C0C0
 		self.foreColor = 0xFFFFFF
 		self.separatorLineThickness = 0
-		self.autoresizeMode = "auto" # possible values: auto, fixed, condensed 
+		self.autoresizeMode = "auto"  # possible values: auto, fixed, condensed
 		self.font = gFont("Regular", 18)
 		self.__event_tracker = None
 		self.current_crypto = "---"
@@ -75,6 +75,7 @@ class ServiceInfoBar(GUIAddon):
 		self.currentServiceSource = self.source.screen["CurrentService"]
 		if self.currentServiceSource and self.updateAddon not in self.currentServiceSource.onManualNewService:
 			self.currentServiceSource.onManualNewService.append(self.scheduleAddonUpdate)
+
 	def destroy(self):
 		self.nav.record_event.remove(self.gotRecordEvent)
 		self.refreshCryptoInfo.stop()
@@ -89,9 +90,9 @@ class ServiceInfoBar(GUIAddon):
 		duplicate = None
 		for item in a_list:
 			if duplicate != item:
-				duplicate = item 
+				duplicate = item
 				yield item
-	
+
 	def gotRecordEvent(self, service, event):
 		prev_records = self.records_running
 		if event in (iRecordableService.evEnd, iRecordableService.evStart, None):
@@ -99,7 +100,7 @@ class ServiceInfoBar(GUIAddon):
 			self.records_running = len(recs)
 			if self.records_running != prev_records:
 				self.updateAddon()
-	
+
 	def scheduleAddonUpdate(self):
 		self.refreshAddon.stop()
 		self.refreshAddon.start(350)
@@ -116,19 +117,19 @@ class ServiceInfoBar(GUIAddon):
 
 	def updateAddon(self):
 		self.refreshAddon.stop()
-		
+
 		filteredElements = []
-		
+
 		for x in self.elements:
 			enabledKey = self.detectVisible(x) if x != "separator" else "separator"
 			if enabledKey:
 				filteredElements.append(enabledKey)
 			elif self.autoresizeMode in ["auto", "fixed"] or x in self.permanentIcons:
 				filteredElements.append(x + "!")
-				
+
 		filteredElements = list(self.remove_doubles(filteredElements))
-		
-		if filteredElements[-1] == "separator" and len(filteredElements) > 1 and filteredElements[len(filteredElements)-2] != "currentCrypto":
+
+		if filteredElements[-1] == "separator" and len(filteredElements) > 1 and filteredElements[len(filteredElements) - 2] != "currentCrypto":
 			del filteredElements[-1]
 
 		l_list = []
@@ -258,7 +259,7 @@ class ServiceInfoBar(GUIAddon):
 			else:
 				if enabledKey == "separator":
 					res.append(MultiContentEntryText(
-						pos=(xPos-self.separatorLineThickness, yPos), size=(self.separatorLineThickness, self.instance.size().height()),
+						pos=(xPos - self.separatorLineThickness, yPos), size=(self.separatorLineThickness, self.instance.size().height()),
 						font=0, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER,
 						text="",
 						color=self.separatorLineColor, color_sel=self.separatorLineColor,
@@ -270,7 +271,7 @@ class ServiceInfoBar(GUIAddon):
 				else:
 					textWidth = self._calcTextWidth(self.current_crypto, font=self.font, size=eSize(self.getDesktopWith() // 3, 0))
 					res.append(MultiContentEntryText(
-							pos=(xPos-textWidth, yPos-2), size=(textWidth, self.instance.size().height()),
+							pos=(xPos - textWidth, yPos - 2), size=(textWidth, self.instance.size().height()),
 							font=0, flags=RT_HALIGN_CENTER | RT_VALIGN_TOP,
 							text=self.current_crypto,
 							color=self.foreColor, color_sel=self.foreColor,
@@ -280,10 +281,10 @@ class ServiceInfoBar(GUIAddon):
 					else:
 						xPos += textWidth + self.spacing
 		return res
-		
+
 	def getDesktopWith(self):
 		return getDesktop(0).size().width()
-		
+
 	def _calcTextWidth(self, text, font=None, size=None):
 		if size:
 			self.textRenderer.instance.resize(size)
