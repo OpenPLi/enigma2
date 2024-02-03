@@ -1,6 +1,6 @@
 from Components.Addons.GUIAddon import GUIAddon
 
-from enigma import eListbox, eListboxPythonMultiContent, BT_ALIGN_CENTER, iPlayableService, iRecordableService, eServiceReference, iServiceInformation, gFont, RT_HALIGN_LEFT, RT_VALIGN_CENTER, RT_VALIGN_TOP, RT_HALIGN_CENTER, eTimer, getDesktop, eSize
+from enigma import eListbox, eListboxPythonMultiContent, BT_ALIGN_CENTER, iPlayableService, iRecordableService, eServiceReference, iServiceInformation, gFont, RT_HALIGN_LEFT, RT_VALIGN_CENTER, RT_VALIGN_TOP, RT_HALIGN_CENTER, eTimer, getDesktop, eSize, eStreamServer
 
 from skin import parseScale, applySkinFactor, parseColor, parseFont
 
@@ -10,6 +10,7 @@ from Components.Converter.ServiceInfo import getVideoHeight
 from Components.Converter.VAudioInfo import StdAudioDesc
 from Components.Converter.PliExtraInfo import createCurrentCaidLabel
 from Components.Label import Label
+from Components.Sources.StreamService import StreamServiceList
 
 from Components.config import config
 
@@ -49,12 +50,9 @@ class ServiceInfoBar(GUIAddon):
 		self.refreshAddon = eTimer()
 		self.refreshAddon.callback.append(self.updateAddon)
 		self.textRenderer = Label("")
-		self.prevElement = None
-		self.lastElement = None
 		self.permanentIcons = []
 		self.records_running = 0
-		
-		
+		self.streamServer = eStreamServer.getInstance()
 
 	def onContainerShown(self):
 		self.textRenderer.GUIcreate(self.relatedScreen.instance)
@@ -81,6 +79,13 @@ class ServiceInfoBar(GUIAddon):
 		GUIAddon.destroy(self)
 
 	GUI_WIDGET = eListbox
+
+	def remove_doubles(self, a_list):
+		duplicate = None
+		for item in a_list:
+			if duplicate != item:
+				duplicate = item 
+				yield item
 	
 	def gotRecordEvent(self, service, event):
 		prev_records = self.records_running
@@ -106,8 +111,23 @@ class ServiceInfoBar(GUIAddon):
 
 	def updateAddon(self):
 		self.refreshAddon.stop()
+		
+		filteredElements = []
+		
+		for x in self.elements:
+			enabledKey = self.detectVisible(x) if x != "separator" else "separator"
+			if enabledKey:
+				filteredElements.append(enabledKey)
+			elif self.autoresizeMode in ["auto", "fixed"] or x in self.permanentIcons:
+				filteredElements.append(x + "!")
+				
+		filteredElements = list(self.remove_doubles(filteredElements))
+		
+		if filteredElements[-1] == "separator" and len(filteredElements) > 1 and filteredElements[len(filteredElements)-2] != "currentCrypto":
+			del filteredElements[-1]
+
 		l_list = []
-		l_list.append((self.elements,))
+		l_list.append((filteredElements,))
 		self.l.setList(l_list)
 
 	def detectVisible(self, key):
@@ -130,7 +150,7 @@ class ServiceInfoBar(GUIAddon):
 					return "IS_SD"
 			elif key == "txt":
 				tpid = info.getInfo(iServiceInformation.sTXTPID)
-				if tpid > 0:
+				if tpid > 0 and tpid < 100000:
 					return key
 			elif key == "dolby" and not isRef:
 				audio = service.audioTracks()
@@ -167,7 +187,9 @@ class ServiceInfoBar(GUIAddon):
 				if hasActiveSubservicesForCurrentChannel(sRef):
 					return key
 			elif key == "stream" and not isRef:
-				if service.streamed() is not None:
+				if self.streamServer is None:
+					return None
+				if service.streamed() is not None and ((self.streamServer.getConnectedClients() or StreamServiceList) and True or False):
 					return key
 			elif key == "currentCrypto" and not isRef:
 				self.current_crypto = createCurrentCaidLabel(info)
@@ -177,6 +199,13 @@ class ServiceInfoBar(GUIAddon):
 				self.gotRecordEvent(None, None)
 				if self.records_running > 0:
 					return key
+			elif key == "gamma" and not isRef:
+				if info.getInfo(iServiceInformation.sGamma) == 1:
+					return "IS_HDR"
+				if info.getInfo(iServiceInformation.sGamma) == 2:
+					return "IS_HDR10"
+				if info.getInfo(iServiceInformation.sGamma) == 3:
+					return "IS_HLG"
 		return None
 
 	def buildEntry(self, sequence):
@@ -186,69 +215,60 @@ class ServiceInfoBar(GUIAddon):
 		res = [None]
 
 		for x in sequence:
-			enabledKey = self.detectVisible(x) if x != "separator" else "separator"
+			enabledKey = x
+			isOn = True
+			if x[-1] == "!":
+				enabledKey = enabledKey.rstrip("!")
+				isOn = False
+
 			pic = None
-			if enabledKey:
+			if isOn:
 				if enabledKey in self.pixmaps:
 					pic = LoadPixmap(resolveFilename(SCOPE_GUISKIN, self.pixmaps[enabledKey]))
-			elif self.autoresizeMode in ["auto", "fixed"] or x in self.permanentIcons:
-				if x == "videoRes":
-					enabledKey = "IS_SD"
-					if enabledKey in self.pixmaps:
-						pic = LoadPixmap(resolveFilename(SCOPE_GUISKIN, self.pixmaps[enabledKey]))
-				if x in self.pixmapsDisabled:
-					pic = LoadPixmap(resolveFilename(SCOPE_GUISKIN, self.pixmapsDisabled[x]))
+			else:
+				if enabledKey in self.pixmapsDisabled:
+					pic = LoadPixmap(resolveFilename(SCOPE_GUISKIN, self.pixmapsDisabled[enabledKey]))
 
-			if enabledKey or self.autoresizeMode in ["auto", "fixed"] or x in self.permanentIcons:
-				if enabledKey != "separator" and enabledKey != "currentCrypto":
-					if pic:
-						pixd_size = pic.size()
-						pixd_width = pixd_size.width()
-						pixd_height = pixd_size.height()
-						pic_x_pos = (xPos - pixd_width) if self.alignment == "right" else xPos
-						pic_y_pos = yPos + (self.instance.size().height() - pixd_height) // 2
-						res.append(MultiContentEntryPixmapAlphaBlend(
-							pos=(pic_x_pos, pic_y_pos),
-							size=(pixd_width, pixd_height),
-							png=pic,
-							backcolor=None, backcolor_sel=None, flags=BT_ALIGN_CENTER))
-						if self.alignment == "right":
-							xPos -= pixd_width + self.spacing
-						else:
-							xPos += pixd_width + self.spacing
-				else:
-					if enabledKey == "separator":
-						if self.lastElement != "separator":
-							res.append(MultiContentEntryText(
-								pos=(xPos-self.separatorLineThickness, yPos), size=(self.separatorLineThickness, self.instance.size().height()),
-								font=0, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER,
-								text="",
-								color=self.separatorLineColor, color_sel=self.separatorLineColor,
-								backcolor=self.separatorLineColor, backcolor_sel=self.separatorLineColor))
-							if self.alignment == "right":
-								xPos -= self.separatorLineThickness + self.spacing
-							else:
-								xPos += self.separatorLineThickness + self.spacing
+			if enabledKey != "separator" and enabledKey != "currentCrypto":
+				if pic:
+					pixd_size = pic.size()
+					pixd_width = pixd_size.width()
+					pixd_height = pixd_size.height()
+					pic_x_pos = (xPos - pixd_width) if self.alignment == "right" else xPos
+					pic_y_pos = yPos + (self.instance.size().height() - pixd_height) // 2
+					res.append(MultiContentEntryPixmapAlphaBlend(
+						pos=(pic_x_pos, pic_y_pos),
+						size=(pixd_width, pixd_height),
+						png=pic,
+						backcolor=None, backcolor_sel=None, flags=BT_ALIGN_CENTER))
+					if self.alignment == "right":
+						xPos -= pixd_width + self.spacing
 					else:
-						textWidth = self._calcTextWidth(self.current_crypto, font=self.font, size=eSize(self.getDesktopWith() // 3, 0))
-						res.append(MultiContentEntryText(
-								pos=(xPos-textWidth, yPos-2), size=(textWidth, self.instance.size().height()),
-								font=0, flags=RT_HALIGN_CENTER | RT_VALIGN_TOP,
-								text=self.current_crypto,
-								color=self.foreColor, color_sel=self.foreColor,
-								backcolor=None, backcolor_sel=None))
-						if self.alignment == "right":
-							xPos -= textWidth + self.spacing
-						else:
-							xPos += textWidth + self.spacing
-							
-			if enabledKey:
-				self.prevElement = self.lastElement
-				self.lastElement = enabledKey
-		
-		if self.lastElement == "separator" and self.prevElement != "currentCrypto":
-			res.pop()
-
+						xPos += pixd_width + self.spacing
+			else:
+				if enabledKey == "separator":
+					res.append(MultiContentEntryText(
+						pos=(xPos-self.separatorLineThickness, yPos), size=(self.separatorLineThickness, self.instance.size().height()),
+						font=0, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER,
+						text="",
+						color=self.separatorLineColor, color_sel=self.separatorLineColor,
+						backcolor=self.separatorLineColor, backcolor_sel=self.separatorLineColor))
+					if self.alignment == "right":
+						xPos -= self.separatorLineThickness + self.spacing
+					else:
+						xPos += self.separatorLineThickness + self.spacing
+				else:
+					textWidth = self._calcTextWidth(self.current_crypto, font=self.font, size=eSize(self.getDesktopWith() // 3, 0))
+					res.append(MultiContentEntryText(
+							pos=(xPos-textWidth, yPos-2), size=(textWidth, self.instance.size().height()),
+							font=0, flags=RT_HALIGN_CENTER | RT_VALIGN_TOP,
+							text=self.current_crypto,
+							color=self.foreColor, color_sel=self.foreColor,
+							backcolor=None, backcolor_sel=None))
+					if self.alignment == "right":
+						xPos -= textWidth + self.spacing
+					else:
+						xPos += textWidth + self.spacing
 		return res
 		
 	def getDesktopWith(self):
