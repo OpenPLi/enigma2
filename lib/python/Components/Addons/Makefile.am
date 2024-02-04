@@ -5,4 +5,5 @@ install_PYTHON = \
 	Pager.py \
 	ButtonSequence.py \
 	ColorButtonsSequence.py \
-	ScreenHeader.py
+	ScreenHeader.py \
+	ServiceInfoBar.py

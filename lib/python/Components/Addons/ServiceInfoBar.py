@@ -185,12 +185,7 @@ class ServiceInfoBar(GUIAddon):
 				if info.getInfoString(iServiceInformation.sHBBTVUrl) != "":
 					return key
 			elif key == "subservices" and not isRef:
-				sRef = info.getInfoString(iServiceInformation.sServiceref)
-				url = "http://%s:%s/" % (config.misc.softcam_streamrelay_url.getHTML(), config.misc.softcam_streamrelay_port.value)
-				splittedRef = sRef.split(url.replace(":", "%3a"))
-				if len(splittedRef) > 1:
-					sRef = splittedRef[1].split(":")[0].replace("%3a", ":")
-				if hasActiveSubservicesForCurrentChannel(sRef):
+				if hasActiveSubservicesForCurrentChannel(service):
 					return key
 			elif key == "stream" and not isRef:
 				if self.streamServer is None:
