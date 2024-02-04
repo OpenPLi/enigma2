@@ -190,8 +190,12 @@ class ServiceInfoBar(GUIAddon):
 				splittedRef = sRef.split(url.replace(":", "%3a"))
 				if len(splittedRef) > 1:
 					sRef = splittedRef[1].split(":")[0].replace("%3a", ":")
-				if hasActiveSubservicesForCurrentChannel(sRef):
-					return key
+				try:
+					if hasActiveSubservicesForCurrentChannel(sRef):
+						return key
+				except:
+					if hasActiveSubservicesForCurrentChannel(service):
+						return key
 			elif key == "stream" and not isRef:
 				if self.streamServer is None:
 					return None
