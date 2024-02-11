@@ -529,7 +529,7 @@ class MultibootSelection(SelectImage):
 		list = []
 		list12 = []
 		imagesList = getImagelist()
-		mode = getCurrentImageMode() or 0
+		mode = getCurrentImageMode() or 1
 		self.deletedImagesExists = False
 		if imagesList:
 			for index, x in enumerate(imagesList):
@@ -549,16 +549,21 @@ class MultibootSelection(SelectImage):
 			list = sorted(list) if config.usage.multiboot_order.value else list
 
 		if os.path.isfile(os.path.join(self.tmp_dir, "STARTUP_RECOVERY")):
-			recovery_text = _("Boot to Recovery menu")
 			if BoxInfo.getItem("hasKexec"):
-				recovery_text = _("Boot to Recovery image - slot0 %s") % (fileHas("/proc/cmdline", "rootsubdir=linuxrootfs0") and _("(current)") or "")
+				recovery_booted = fileHas("/proc/cmdline", "rootsubdir=linuxrootfs0")
 				self["description"].setText(_("Attention - forced loading recovery image!\nCreate an empty STARTUP_RECOVERY file at the root of your HDD/USB drive and hold the Power button for more than 12 seconds for reboot receiver!"))
-			list.append(ChoiceEntryComponent('', (recovery_text, "Recovery")))
+				list.append(ChoiceEntryComponent('', (_("Boot to Recovery image - slot0 %s") % (recovery_booted and _("(current image)") or ""), "Recovery")))
+			else:
+				list.append(ChoiceEntryComponent('', (_("Boot to Recovery menu"), "Recovery")))
 		if os.path.isfile(os.path.join(self.tmp_dir, "STARTUP_ANDROID")):
 			list.append(ChoiceEntryComponent('', ((_("Boot to Android image")), "Android")))
 		if not list:
 			list.append(ChoiceEntryComponent('', ((_("No images found")), "Waiter")))
 		self["list"].setList(list)
+		for index, slot in enumerate(list):
+			if type(slot[0][1]) is tuple and self.currentimageslot == slot[0][1][0] and mode == slot[0][1][1] or BoxInfo.getItem("hasKexec") and slot[0][1] == "Recovery" and recovery_booted:
+				self["list"].moveToIndex(index)
+				break
 		self.selectionChanged()
 
 	def deleteImage(self):
