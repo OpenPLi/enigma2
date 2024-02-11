@@ -531,7 +531,7 @@ class MultibootSelection(SelectImage):
 		imagesList = getImagelist()
 		mode = getCurrentImageMode() or 0
 		self.deletedImagesExists = False
-		num = idx = 0
+		num = 0
 		if imagesList:
 			for index, x in enumerate(imagesList):
 				if imagesList[x]["imagename"] == _("Deleted image"):
@@ -544,7 +544,7 @@ class MultibootSelection(SelectImage):
 						list.append(ChoiceEntryComponent('', ((_("slot%s - %s (current image)") if x == self.currentimageslot and mode != 12 else _("slot%s - %s")) % (x, imagesList[x]['imagename']), (x, 1))))
 				num += 1
 				if x == self.currentimageslot:
-					idx = index
+					self["list"].selection = index
 
 		if list12:
 			self.blue = True
@@ -559,15 +559,13 @@ class MultibootSelection(SelectImage):
 				recovery_text = _("Boot to Recovery image - slot0 %s") % (recovery_slot and _("(current)") or "")
 				self["description"].setText(_("Attention - forced loading recovery image!\nCreate an empty STARTUP_RECOVERY file at the root of your HDD/USB drive and hold the Power button for more than 12 seconds for reboot receiver!"))
 				if recovery_slot:
-					idx = num + 1
+					self["list"].selection = num + 1
 			list.append(ChoiceEntryComponent('', (recovery_text, "Recovery")))
 		if os.path.isfile(os.path.join(self.tmp_dir, "STARTUP_ANDROID")):
 			list.append(ChoiceEntryComponent('', ((_("Boot to Android image")), "Android")))
 		if not list:
 			list.append(ChoiceEntryComponent('', ((_("No images found")), "Waiter")))
 		self["list"].setList(list)
-		if idx:
-			self["list"].moveToIndex(idx)
 		self.selectionChanged()
 
 	def deleteImage(self):
