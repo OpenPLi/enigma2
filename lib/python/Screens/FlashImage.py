@@ -529,7 +529,7 @@ class MultibootSelection(SelectImage):
 		list = []
 		list12 = []
 		imagesList = getImagelist()
-		mode = getCurrentImageMode() or 1
+		mode = getCurrentImageMode() or 0
 		self.deletedImagesExists = False
 		if imagesList:
 			for index, x in enumerate(imagesList):
@@ -561,7 +561,7 @@ class MultibootSelection(SelectImage):
 			list.append(ChoiceEntryComponent('', ((_("No images found")), "Waiter")))
 		self["list"].setList(list)
 		for index, slot in enumerate(list):
-			if type(slot[0][1]) is tuple and self.currentimageslot == slot[0][1][0] and mode == slot[0][1][1] or BoxInfo.getItem("hasKexec") and slot[0][1] == "Recovery" and recovery_booted:
+			if type(slot[0][1]) is tuple and self.currentimageslot == slot[0][1][0] and (not BoxInfo.getItem("canMode12") or mode == slot[0][1][1]) or BoxInfo.getItem("hasKexec") and slot[0][1] == "Recovery" and recovery_booted:
 				self["list"].moveToIndex(index)
 				break
 		self.selectionChanged()
