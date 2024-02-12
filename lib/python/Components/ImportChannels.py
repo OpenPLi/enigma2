@@ -90,8 +90,6 @@ class ImportChannels:
 	def ImportGetFilelist(self, remote=False, *files):
 		result = []
 		for file in files:
-			# determine the type of bouquet file
-			type = 1 if file.endswith('.tv') else 2
 			# read the contents of the file
 			try:
 				if remote:
@@ -113,12 +111,11 @@ class ImportChannels:
 			# check the contents for more bouquet files
 			for line in content:
 #				print ("[Import Channels] %s" % line)
-				# check if it contains another bouquet reference
-				r = re.match('#SERVICE 1:7:%d:0:0:0:0:0:0:0:FROM BOUQUET "(.*)" ORDER BY bouquet' % type, line)
+				# check if it contains another bouquet reference, first tv type then radio type
+				r = re.match('#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "(.*)" ORDER BY bouquet', line) or re.match('#SERVICE 1:7:2:0:0:0:0:0:0:0:FROM BOUQUET "(.*)" ORDER BY bouquet', line)
 				if r:
 					# recurse
 					result.extend(self.ImportGetFilelist(remote, r.group(1)))
-
 			# add add the file itself
 			result.append(file)
 
