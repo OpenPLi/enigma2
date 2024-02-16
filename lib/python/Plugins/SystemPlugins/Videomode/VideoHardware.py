@@ -301,7 +301,7 @@ class VideoHardware:
 					else:
 						ratelist.append((rate, rate == "multi" and (mode == "2160p30" and "multi (25Hz/30Hz)" or "multi (50Hz/60Hz)") or rate))
 				config.av.videorate[mode] = ConfigSelection(choices=ratelist)
-		config.av.videoport = ConfigSelection(choices=lst)
+		config.av.videoport = ConfigSelection(default="DVI", choices=lst)
 
 	def setConfiguredMode(self):
 		port = config.av.videoport.value
