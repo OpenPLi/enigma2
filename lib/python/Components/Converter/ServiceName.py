@@ -64,14 +64,14 @@ class ServiceName(Converter):
 			return self.getNumber(numservice, info)
 		elif self.type == self.STREAM_URL:
 			srpart = "//%s:%s/" % (config.misc.softcam_streamrelay_url.getHTML(), config.misc.softcam_streamrelay_port.value)
-			if not service:
+			if not ref:
 				refstr = info.getInfoString(iServiceInformation.sServiceref)
 				path = refstr and eServiceReference(refstr).getPath()
 				if not path.startswith("//") and path.find(srpart) == -1:
 					return path
 				else:
 					return ""
-			path = service.getPath()
+			path = ref.getPath()
 			return "" if path.startswith("//") and path.find(srpart) == -1 else path
 		elif self.type == self.FORMAT_STRING:
 			name = self.getName(ref, info)
