@@ -86,7 +86,7 @@ def createCurrentCaidLabel(info, currentCaid=None):
 	if currentCaid:
 		current_caid = currentCaid
 	else:
-		current_source, current_caid, current_provid, current_ecmpid = getCryptoInfo(info)
+		current_caid = getCryptoInfo(info)[1]
 	res = ""
 	decodingCiSlot = -1
 	NUM_CI = SystemInfo["CommonInterface"]
