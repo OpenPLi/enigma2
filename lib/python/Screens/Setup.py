@@ -7,6 +7,7 @@ from Components.ConfigList import ConfigListScreen
 from Components.Pixmap import Pixmap
 from Components.Sources.StaticText import StaticText
 from Components.Sources.Boolean import Boolean
+from skin import parameters
 from enigma import eEnv
 
 import xml.etree.ElementTree
