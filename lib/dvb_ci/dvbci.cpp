@@ -1220,6 +1220,8 @@ void eDVBCISlot::data(int what)
 				eTraceNoNewLine("%02x ",data[i]);
 			eTraceNoNewLine("\n");
 			eDVBCISession::receiveData(this, data, r);
+			// receiving data means probably decoding on this slot is started succesfully. So mark this slot as descrambling
+			/* emit */ eDVBCI_UI::getInstance()->m_messagepump.send(eDVBCIInterfaces::Message(eDVBCIInterfaces::Message::slotDecodingStateChanged, getSlotID(), 2));
 			eDVBCISession::pollAll();
 			return;
 		}
