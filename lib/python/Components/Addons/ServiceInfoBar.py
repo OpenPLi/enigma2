@@ -1,8 +1,7 @@
 from Components.Addons.GUIAddon import GUIAddon
 
 from enigma import eListbox, eListboxPythonMultiContent, BT_ALIGN_CENTER, iPlayableService, iRecordableService, eServiceReference, iServiceInformation, gFont, RT_HALIGN_LEFT, RT_VALIGN_CENTER, RT_VALIGN_TOP, RT_HALIGN_CENTER, eTimer, getDesktop, eSize, eStreamServer
-
-from skin import parseScale, applySkinFactor, parseColor, parseFont
+from skin import parseScale, applySkinFactor, parseColor, parseFont, parameters
 
 from Components.MultiContent import MultiContentEntryPixmapAlphaBlend, MultiContentEntryText
 from Components.ServiceEventTracker import ServiceEventTracker
@@ -11,13 +10,12 @@ from Components.Converter.VAudioInfo import StdAudioDesc
 from Components.Converter.PliExtraInfo import createCurrentCaidLabel
 from Components.Label import Label
 from Components.Sources.StreamService import StreamServiceList
-
+from Components.NimManager import nimmanager
 from Components.config import config
-
 from Screens.InfoBarGenerics import hasActiveSubservicesForCurrentChannel
-
 from Tools.Directories import resolveFilename, SCOPE_GUISKIN
 from Tools.LoadPixmap import LoadPixmap
+from Tools.Hex2strColor import Hex2strColor
 
 import NavigationInstance
 
@@ -44,16 +42,20 @@ class ServiceInfoBar(GUIAddon):
 		self.pixmapsDisabled = {}
 		self.separatorLineColor = 0xC0C0C0
 		self.foreColor = 0xFFFFFF
+		self.textBackColor = None
 		self.separatorLineThickness = 0
 		self.autoresizeMode = "auto"  # possible values: auto, fixed, condensed
 		self.font = gFont("Regular", 18)
 		self.__event_tracker = None
 		self.current_crypto = "---"
+		self.tuner_string = ""
 		self.textRenderer = Label("")
 		self.permanentIcons = []
 		self.records_running = 0
 		self.streamServer = eStreamServer.getInstance()
 		self.currentServiceSource = None
+		self.frontendInfoSource = None
+		self.tuner_colors = parameters.get("FrontendInfoColors", (0x0000FF00, 0x00FFFF00, 0x007F7F7F))  # tuner active, busy, available colors
 
 	def onContainerShown(self):
 		self.textRenderer.GUIcreate(self.relatedScreen.instance)
@@ -70,11 +72,13 @@ class ServiceInfoBar(GUIAddon):
 					iPlayableService.evHBBTVInfo: self.scheduleAddonUpdate,
 					iPlayableService.evNewProgramInfo: self.scheduleAddonUpdate,
 					iPlayableService.evCuesheetChanged: self.scheduleAddonUpdate,
+					iPlayableService.evTunedIn: self.scheduleAddonUpdate,
 				}
 			)
 		self.currentServiceSource = self.source.screen["CurrentService"]
 		if self.currentServiceSource and self.updateAddon not in self.currentServiceSource.onManualNewService:
 			self.currentServiceSource.onManualNewService.append(self.scheduleAddonUpdate)
+		self.frontendInfoSource = self.source.screen["FrontendInfo"]
 
 	def destroy(self):
 		self.nav.record_event.remove(self.gotRecordEvent)
@@ -208,6 +212,23 @@ class ServiceInfoBar(GUIAddon):
 					return "IS_HDR10"
 				if info.getInfo(iServiceInformation.sGamma) == 3:
 					return "IS_HLG"
+			elif key == "tuners":
+				string = ""
+				if self.frontendInfoSource:
+					for n in nimmanager.nim_slots:
+						if n.enabled:
+							if n.slot == self.frontendInfoSource.slot_number:
+								color = Hex2strColor(self.tuner_colors[0])
+							elif self.frontendInfoSource.tuner_mask & 1 << n.slot:
+								color = Hex2strColor(self.tuner_colors[1])
+							else:
+								continue
+							if string:
+								string += " "
+							string += color + chr(ord("A") + n.slot)
+					self.tuner_string = string
+				if string:
+					return key
 		return None
 
 	def buildEntry(self, sequence):
@@ -235,7 +256,7 @@ class ServiceInfoBar(GUIAddon):
 				if enabledKey in self.pixmapsDisabled:
 					pic = LoadPixmap(resolveFilename(SCOPE_GUISKIN, self.pixmapsDisabled[enabledKey]))
 
-			if enabledKey != "separator" and enabledKey != "currentCrypto":
+			if enabledKey != "separator" and enabledKey != "currentCrypto" and enabledKey != "tuners":
 				if pic:
 					pixd_size = pic.size()
 					pixd_width = pixd_size.width()
@@ -264,13 +285,19 @@ class ServiceInfoBar(GUIAddon):
 					else:
 						xPos += self.separatorLineThickness + self.spacing
 				else:
-					textWidth = self._calcTextWidth(self.current_crypto, font=self.font, size=eSize(self.getDesktopWith() // 3, 0))
+					res_string = ""
+					if enabledKey == "tuners":
+						res_string = self.tuner_string
+					else:
+						res_string = self.current_crypto
+					textWidth = self._calcTextWidth(res_string, font=self.font, size=eSize(self.getDesktopWith() // 3, 0))
 					res.append(MultiContentEntryText(
-							pos=(xPos - textWidth, yPos - 2), size=(textWidth, self.instance.size().height()),
-							font=0, flags=RT_HALIGN_CENTER | RT_VALIGN_TOP,
-							text=self.current_crypto,
-							color=self.foreColor, color_sel=self.foreColor,
-							backcolor=None, backcolor_sel=None))
+						pos=(xPos - textWidth - 2, yPos - 2), size=(textWidth + 2, self.instance.size().height()),
+						font=0, flags=RT_HALIGN_CENTER | RT_VALIGN_TOP,
+						text=res_string,
+						color=self.foreColor, color_sel=self.foreColor,
+						textBWidth=1, textBColor=0x000000,
+						backcolor=self.textBackColor, backcolor_sel=self.textBackColor))
 					if self.alignment == "right":
 						xPos -= textWidth + self.spacing
 					else:
@@ -324,6 +351,8 @@ class ServiceInfoBar(GUIAddon):
 				self.font = parseFont(value, ((1, 1), (1, 1)))
 			elif attrib == "foregroundColor":
 				self.foreColor = parseColor(value).argb()
+			elif attrib == "textBackColor":
+				self.textBackColor = parseColor(value).argb()
 			elif attrib == "permanent":
 				self.permanentIcons = value.split(",")
 			else:
