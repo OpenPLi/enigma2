@@ -34,6 +34,9 @@ void eDVBCI_UI::gotMessage(const eDVBCIInterfaces::Message &message)
 		case eDVBCIInterfaces::Message::slotStateChanged:
 			setState(message.m_slotid, message.m_state);
 			break;
+		case eDVBCIInterfaces::Message::slotDecodingStateChanged:
+			setDecodingState(message.m_slotid, message.m_state);
+			break;
 		case eDVBCIInterfaces::Message::mmiSessionDestroyed:
 			mmiSessionDestroyed(message.m_slotid);
 			break;

@@ -94,7 +94,8 @@ def createCurrentCaidLabel(info, currentCaid=None):
 		if dvbCIUI:
 			for slot in range(NUM_CI):
 				stateDecoding = dvbCIUI.getDecodingState(slot)
-				if stateDecoding == 2:
+				stateSlot = dvbCIUI.getState(slot)
+				if stateDecoding == 2 and stateSlot not in (-1, 0, 3):
 					decodingCiSlot = slot
 		
 	if not pathExists("/tmp/ecm.info") and decodingCiSlot == -1:
