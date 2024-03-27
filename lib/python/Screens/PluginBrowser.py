@@ -234,9 +234,14 @@ class PluginBrowser(Screen, ProtectedScreen):
 		self.session.openWithCallback(self.PluginDownloadBrowserClosed, PluginDownloadBrowser, PluginDownloadBrowser.DOWNLOAD, self.firsttime)
 		self.firsttime = False
 
-	def PluginDownloadBrowserClosed(self):
-		self.updateList()
-		self.checkWarnings()
+	def PluginDownloadBrowserClosed(self, returnValue):
+		if returnValue == None:
+			self.updateList()
+			self.checkWarnings()
+		elif returnValue == 0:
+			self.download()
+		else:
+			self.delete()
 
 	def openExtensionmanager(self):
 		if fileExists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/SoftwareManager/plugin.py")):
@@ -276,7 +281,8 @@ class PluginDownloadBrowser(Screen):
 		self.check_settings = False
 		self.install_settings_name = ''
 		self.remove_settings_name = ''
-		self["text"] = Label(self.type == self.DOWNLOAD and _("Downloading plugin information. Please wait...") or _("Getting plugin information. Please wait..."))
+		self["text"] = Label(_("Downloading plugin information. Please wait...") if self.type == self.DOWNLOAD else _("Getting plugin information. Please wait..."))
+		self["key_red" if self.type == self.DOWNLOAD else "key_green"] = Label(_("Remove plugins") if self.type == self.DOWNLOAD else _("Download plugins"))
 		self.run = 0
 		self.remainingdata = ""
 		self["actions"] = ActionMap(["WizardActions"],
@@ -284,6 +290,7 @@ class PluginDownloadBrowser(Screen):
 			"ok": self.go,
 			"back": self.requestClose,
 		})
+		self["PluginDownloadActions"] = ActionMap(["ColorActions"],	{"red": self.delete} if self.type == self.DOWNLOAD else {"green": self.download})
 		if os.path.isfile('/usr/bin/opkg'):
 			self.opkg = '/usr/bin/opkg'
 			self.opkg_install = self.opkg + ' install'
@@ -312,7 +319,13 @@ class PluginDownloadBrowser(Screen):
 			elif self.type == self.REMOVE:
 				self.session.openWithCallback(self.runInstall, MessageBox, _("Do you really want to remove\nthe plugin \"%s\"?") % sel.name)
 
-	def requestClose(self):
+	def delete(self):
+		self.requestClose(1)
+
+	def download(self):
+		self.requestClose(0)
+
+	def requestClose(self, returnValue=None):
 		if self.plugins_changed:
 			plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 		if self.reload_settings:
@@ -327,7 +340,7 @@ class PluginDownloadBrowser(Screen):
 		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 		self.container.appClosed.remove(self.runFinished)
 		self.container.dataAvail.remove(self.dataAvail)
-		self.close()
+		self.close(returnValue)
 
 	def resetPostInstall(self):
 		try:
