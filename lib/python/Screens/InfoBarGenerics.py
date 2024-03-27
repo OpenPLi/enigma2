@@ -361,9 +361,16 @@ class InfoBarShowHide(InfoBarScreenSaver):
 		if isStandardInfoBar(self):
 			self.secondInfoBarScreen = self.session.instantiateDialog(SecondInfoBar, "SecondInfoBar")
 			self.secondInfoBarScreen.show()
+			self.secondInfoBarScreen.onShow.append(self.__SecondInfobarOnShow)
+			self.secondInfoBarScreen.onHide.append(self.__SecondInfobarOnHide)
 			self.secondInfoBarScreenSimple = self.session.instantiateDialog(SecondInfoBar, "SecondInfoBarSimple")
 			self.secondInfoBarScreenSimple.show()
+			self.secondInfoBarScreenSimple.onShow.append(self.__SecondInfobarOnShow)
+			self.secondInfoBarScreenSimple.onHide.append(self.__SecondInfobarOnHide)
 			self.actualSecondInfoBarScreen = config.usage.show_simple_second_infobar.value and self.secondInfoBarScreenSimple.skinAttributes and self.secondInfoBarScreenSimple or self.secondInfoBarScreen
+
+		self.InfobarPluginScreens = [self.session.instantiateDialog(plugin) for plugin in plugins.getPlugins(where=PluginDescriptor.WHERE_INFOBAR_SCREEN)]
+		self.SecondInfobarPluginScreens = [self.session.instantiateDialog(plugin) for plugin in plugins.getPlugins(where=PluginDescriptor.WHERE_SECONDINFOBAR_SCREEN)]
 
 		from Screens.InfoBar import InfoBar
 		InfoBarInstance = InfoBar.instance
@@ -388,6 +395,8 @@ class InfoBarShowHide(InfoBarScreenSaver):
 		self.__state = self.STATE_SHOWN
 		for x in self.onShowHideNotifiers:
 			x(True)
+		for PluginScreen in self.InfobarPluginScreens:
+			PluginScreen.show()
 		self.startHideTimer()
 
 	def __onHide(self):
@@ -396,6 +405,18 @@ class InfoBarShowHide(InfoBarScreenSaver):
 			self.actualSecondInfoBarScreen.hide()
 		for x in self.onShowHideNotifiers:
 			x(False)
+		for PluginScreen in self.InfobarPluginScreens:
+			PluginScreen.hide()
+
+	def __SecondInfobarOnShow(self):
+		for PluginScreen in self.InfobarPluginScreens:
+			PluginScreen.hide()
+		for PluginScreen in self.SecondInfobarPluginScreens:
+			PluginScreen.show()
+
+	def __SecondInfobarOnHide(self):
+		for PluginScreen in self.SecondInfobarPluginScreens:
+			PluginScreen.hide()
 
 	def toggleShowLong(self):
 		if not config.usage.ok_is_channelselection.value:
