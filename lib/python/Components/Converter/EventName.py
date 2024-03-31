@@ -26,7 +26,7 @@ class EventName(Converter):
 
 	def __init__(self, type):
 		Converter.__init__(self, type)
-		self.parts = type.split(",")
+		self.parts = [(arg.strip() if i else arg) for i, arg in enumerate(type.split(","))]
 		if len(self.parts) > 1:
 			self.type = self.FORMAT_STRING
 			self.separator = self.parts[0]
