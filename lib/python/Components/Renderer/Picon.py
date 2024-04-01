@@ -94,16 +94,12 @@ def getPiconName(serviceRef):
 		fields[2] = '1'
 		pngname = findPicon('_'.join(fields))
 	if not pngname: # picon by channel name
-		name = sanitizeFilename(ServiceReference(serviceRef).getServiceName())
-		name = re.sub('[^a-z0-9]', '', name.replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower())
+		utf8_name = sanitizeFilename(ServiceReference(serviceRef).getServiceName()).lower()
+		name = re.sub("[^a-z0-9]", "", utf8_name.replace("&", "and").replace("+", "plus").replace("*", "star"))
 		if name:
-			pngname = findPicon(name)
-			if not pngname:
-				name = re.sub("(fhd|uhd|hd|sd|4k)$", "", name)
-				if name:
-					pngname = findPicon(name)
+			pngname = findPicon(name) or findPicon(re.sub("(fhd|uhd|hd|sd|4k)$", "", name).strip()) or findPicon(utf8_name)
 			if not pngname and len(name) > 6:
-				series = re.sub(r's[0-9]*e[0-9]*$', '', name)
+				series = re.sub(r"s[0-9]*e[0-9]*$", "", name)
 				pngname = findPicon(series)
 	return pngname
 
