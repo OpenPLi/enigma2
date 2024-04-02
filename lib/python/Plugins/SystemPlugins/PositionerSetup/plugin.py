@@ -6,7 +6,7 @@ def getUsableRotorNims(only_first=False):
 	usableRotorNims = []
 	nimList = nimmanager.getNimListOfType("DVB-S")
 	for nim in nimList:
-		if nimmanager.getRotorSatListForNim(nim, only_first=only_first):
+		if not nimmanager.nim_slots[nim].isFBCLink() and nimmanager.getRotorSatListForNim(nim, only_first=only_first):
 			usableRotorNims.append(nim)
 			if only_first:
 				break
