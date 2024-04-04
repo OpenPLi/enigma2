@@ -115,8 +115,6 @@ eDVBCIInterfaces::eDVBCIInterfaces()
 			eDebug("[CI] Streaming CI finish interface not advertised, assuming \"tuner\" method");
 		}
 	}
-	m_ciplus_routing_active = false;
-	m_ciplus_routing_tunernum = -1;
 
 	run();
 }
@@ -626,6 +624,7 @@ void eDVBCIInterfaces::recheckPMTHandlers()
 						ci_it->linked_next->setSource(ci_source.str());
 					}
 					it->cislot = ci_it;
+					it->cislot->setCamMgrRoutingActive(true);
 					eTrace("[CI] assigned!");
 					gotPMT(pmthandler);
 				}
@@ -790,7 +789,7 @@ void eDVBCIInterfaces::gotPMT(eDVBServicePMTHandler *pmthandler)
 			eTrace("[CI] check slot %d %d %d", tmp->getSlotID(), tmp->running_services.empty(), canDescrambleMultipleServices(tmp));
 			if (tmp->running_services.empty() || canDescrambleMultipleServices(tmp))
 			{
-				tmp->setCADemuxID(pmthandler);
+				tmp->setCaParameter(pmthandler);
 				tmp->sendCAPMT(pmthandler);
 			}
 			tmp = tmp->linked_next;
@@ -835,7 +834,7 @@ PyObject *eDVBCIInterfaces::getDescrambleRules(int slotid)
 	{
 		char tmp[255];
 		snprintf(tmp, 255, "eDVBCIInterfaces::getDescrambleRules try to get rules for CI Slot %d... but just %zd slots are available", slotid, m_slots.size());
-		PyErr_SetString(PyExc_Exception, tmp);
+		PyErr_SetString(PyExc_ValueError, tmp);
 		return 0;
 	}
 	ePyObject tuple = PyTuple_New(3);
@@ -888,14 +887,14 @@ RESULT eDVBCIInterfaces::setDescrambleRules(int slotid, SWIG_PYOBJECT(ePyObject)
 	{
 		char tmp[255];
 		snprintf(tmp, 255, "eDVBCIInterfaces::setDescrambleRules try to set rules for CI Slot %d... but just %zd slots are available", slotid, m_slots.size());
-		PyErr_SetString(PyExc_Exception, tmp);
+		PyErr_SetString(PyExc_ValueError, tmp);
 		return -1;
 	}
 	if (!PyTuple_Check(obj))
 	{
 		char tmp[255];
 		snprintf(tmp, 255, "2nd argument of setDescrambleRules is not a tuple.. it is a '%s'!!", PyObject_TypeStr(obj));
-		PyErr_SetString(PyExc_Exception, tmp);
+		PyErr_SetString(PyExc_TypeError, tmp);
 		return -1;
 	}
 	if (PyTuple_Size(obj) != 3)
@@ -904,7 +903,7 @@ RESULT eDVBCIInterfaces::setDescrambleRules(int slotid, SWIG_PYOBJECT(ePyObject)
 			"first argument should be a pythonlist with possible services\n"
 			"second argument should be a pythonlist with possible providers/dvbnamespace tuples\n"
 			"third argument should be a pythonlist with possible caids";
-		PyErr_SetString(PyExc_Exception, errstr);
+		PyErr_SetString(PyExc_TypeError, errstr);
 		return -1;
 	}
 	ePyObject service_list = PyTuple_GET_ITEM(obj, 0);
@@ -918,7 +917,7 @@ RESULT eDVBCIInterfaces::setDescrambleRules(int slotid, SWIG_PYOBJECT(ePyObject)
 			"second argument(%s) should be a pythonlist with possible providers (providername strings)\n"
 			"third argument(%s) should be a pythonlist with possible caids (ints)",
 			PyObject_TypeStr(service_list), PyObject_TypeStr(provider_list), PyObject_TypeStr(caid_list));
-		PyErr_SetString(PyExc_Exception, errstr);
+		PyErr_SetString(PyExc_TypeError, errstr);
 		return -1;
 	}
 	slot->possible_caids.clear();
@@ -933,7 +932,7 @@ RESULT eDVBCIInterfaces::setDescrambleRules(int slotid, SWIG_PYOBJECT(ePyObject)
 		{
 			char buf[255];
 			snprintf(buf, 255, "eDVBCIInterfaces::setDescrambleRules entry in service list is not a string.. it is '%s'!!", PyObject_TypeStr(refstr));
-			PyErr_SetString(PyExc_Exception, buf);
+			PyErr_SetString(PyExc_TypeError, buf);
 			return -1;
 		}
 		const char *tmpstr = PyUnicode_AsUTF8(refstr);
@@ -952,28 +951,28 @@ RESULT eDVBCIInterfaces::setDescrambleRules(int slotid, SWIG_PYOBJECT(ePyObject)
 		{
 			char buf[255];
 			snprintf(buf, 255, "eDVBCIInterfaces::setDescrambleRules entry in provider list is not a tuple it is '%s'!!", PyObject_TypeStr(tuple));
-			PyErr_SetString(PyExc_Exception, buf);
+			PyErr_SetString(PyExc_TypeError, buf);
 			return -1;
 		}
 		if (PyTuple_Size(tuple) != 2)
 		{
 			char buf[255];
 			snprintf(buf, 255, "eDVBCIInterfaces::setDescrambleRules provider tuple has %zd instead of 2 entries!!", PyTuple_Size(tuple));
-			PyErr_SetString(PyExc_Exception, buf);
+			PyErr_SetString(PyExc_TypeError, buf);
 			return -1;
 		}
 		if (!PyUnicode_Check(PyTuple_GET_ITEM(tuple, 0)))
 		{
 			char buf[255];
 			snprintf(buf, 255, "eDVBCIInterfaces::setDescrambleRules 1st entry in provider tuple is not a string it is '%s'", PyObject_TypeStr(PyTuple_GET_ITEM(tuple, 0)));
-			PyErr_SetString(PyExc_Exception, buf);
+			PyErr_SetString(PyExc_TypeError, buf);
 			return -1;
 		}
 		if (!PyLong_Check(PyTuple_GET_ITEM(tuple, 1)))
 		{
 			char buf[255];
 			snprintf(buf, 255, "eDVBCIInterfaces::setDescrambleRules 2nd entry in provider tuple is not a long it is '%s'", PyObject_TypeStr(PyTuple_GET_ITEM(tuple, 1)));
-			PyErr_SetString(PyExc_Exception, buf);
+			PyErr_SetString(PyExc_TypeError, buf);
 			return -1;
 		}
 		const char *tmpstr = PyUnicode_AsUTF8(PyTuple_GET_ITEM(tuple, 0));
@@ -992,7 +991,7 @@ RESULT eDVBCIInterfaces::setDescrambleRules(int slotid, SWIG_PYOBJECT(ePyObject)
 		{
 			char buf[255];
 			snprintf(buf, 255, "eDVBCIInterfaces::setDescrambleRules entry in caid list is not a long it is '%s'!!", PyObject_TypeStr(caid));
-			PyErr_SetString(PyExc_Exception, buf);
+			PyErr_SetString(PyExc_TypeError, buf);
 			return -1;
 		}
 		int tmpcaid = PyLong_AsLong(caid);
@@ -1012,7 +1011,7 @@ PyObject *eDVBCIInterfaces::readCICaIds(int slotid)
 	{
 		char tmp[255];
 		snprintf(tmp, 255, "eDVBCIInterfaces::readCICaIds try to get CAIds for CI Slot %d... but just %zd slots are available", slotid, m_slots.size());
-		PyErr_SetString(PyExc_Exception, tmp);
+		PyErr_SetString(PyExc_ValueError, tmp);
 	}
 	else
 	{
@@ -1052,6 +1051,10 @@ int eDVBCIInterfaces::setCIClockRate(int slotid, int rate)
    (with correct caid) */
 void eDVBCIInterfaces::setCIPlusRouting(int slotid)
 {
+	int ciplus_routing_tunernum;
+	std::string ciplus_routing_input;
+	std::string ciplus_routing_ci_input;
+
 	eDebug("[CI] setCIRouting slotid=%d", slotid);
 	singleLock s(m_pmt_handler_lock);
 	if (m_pmt_handlers.size() == 0)
@@ -1059,12 +1062,14 @@ void eDVBCIInterfaces::setCIPlusRouting(int slotid)
 		eDebug("[CI] setCIRouting no pmt handler available! Unplug/plug again the CI module.");
 		return;
 	}
-	if (m_ciplus_routing_active)
+
+	eDVBCISlot *slot = getSlot(slotid);
+	if (slot->isCamMgrRoutingActive()) // CamMgr has already set up routing. Don't change that.
 	{
-		eDebug("[CI] setCIRouting authentification of other module active. Unplug/plug again the CI module after first authentification was successful.");
+		eDebug("[CI] CamMgrRouting is active -> return");
 		return;
 	}
-	eDVBCISlot *slot = getSlot(slotid);
+
 	PMTHandlerList::iterator it = m_pmt_handlers.begin();
 	while (it != m_pmt_handlers.end())
 	{
@@ -1083,6 +1088,8 @@ void eDVBCIInterfaces::setCIPlusRouting(int slotid)
 		if (tunernum < 0)
 			continue;
 
+		ciplus_routing_tunernum = slot->getCIPlusRoutingTunerNum();
+
 		// read and store old routing config
 		char file_name[64];
 		char tmp[8];
@@ -1095,8 +1102,8 @@ void eDVBCIInterfaces::setCIPlusRouting(int slotid)
 			rd = read(fd, tmp, 8);
 			if (rd > 0)
 			{
-				if (m_ciplus_routing_tunernum != tunernum)
-					m_ciplus_routing_input = std::string(tmp, rd-1);
+				if (ciplus_routing_tunernum != tunernum)
+					ciplus_routing_input = std::string(tmp, rd-1);
 			}
 			else
 				continue;
@@ -1112,8 +1119,8 @@ void eDVBCIInterfaces::setCIPlusRouting(int slotid)
 			rd = read(fd, tmp, 8);
 			if (rd > 0)
 			{
-				if (m_ciplus_routing_tunernum != tunernum)
-					m_ciplus_routing_ci_input = std::string(tmp, rd-1);
+				if (ciplus_routing_tunernum != tunernum)
+					ciplus_routing_ci_input = std::string(tmp, rd-1);
 			}
 			else
 				continue;
@@ -1128,30 +1135,35 @@ void eDVBCIInterfaces::setCIPlusRouting(int slotid)
 		setInputSource(tunernum, new_input_source.str());
 		slot->setSource(eDVBCISlot::getTunerLetter(tunernum));
 
-		m_ciplus_routing_tunernum = tunernum;
-		m_ciplus_routing_active = true;
+		slot->setCIPlusRoutingParameter(tunernum, ciplus_routing_input, ciplus_routing_ci_input);
+		eDebug("[CI] CIRouting active slotid=%d tuner=%d old_input=%s old_ci_input=%s", slotid, tunernum, ciplus_routing_input.c_str(), ciplus_routing_ci_input.c_str());
 		break;
 
 		++it;
 	}
-	eDebug("[CI] setCIRouting slotid=%d tuner=%d old_input=%s old_ci_input=%s", slotid, m_ciplus_routing_tunernum, m_ciplus_routing_input.c_str(), m_ciplus_routing_ci_input.c_str());
 }
 
 void eDVBCIInterfaces::revertCIPlusRouting(int slotid)
 {
 	eDVBCISlot *slot = getSlot(slotid);
 
-	eDebug("[CI] revertCIPlusRouting: active=%d slot=%d tuner=%d input=%s ci_input=%s", m_ciplus_routing_active, slotid, m_ciplus_routing_tunernum, m_ciplus_routing_input.c_str(), m_ciplus_routing_ci_input.c_str());
+	int ciplus_routing_tunernum = slot->getCIPlusRoutingTunerNum();
+	std::string ciplus_routing_input = slot->getCIPlusRoutingInput();
+	std::string ciplus_routing_ci_input = slot->getCIPlusRoutingCIInput();
 
-	if(m_ciplus_routing_active)
+	eDebug("[CI] revertCIPlusRouting: camMgrActive=%d ciRoutingActive=%d slot=%d tuner=%d input=%s ci_input=%s", slot->isCamMgrRoutingActive(), slot->ciplusRoutingDone(), slotid, ciplus_routing_tunernum, ciplus_routing_input.c_str(), ciplus_routing_ci_input.c_str());
+
+	if (slot->isCamMgrRoutingActive() || // CamMgr has set up routing. Don't revert that.
+		slot->ciplusRoutingDone())       // need to only run once during CI initialization
 	{
-		slot->setSource(m_ciplus_routing_ci_input);
-		setInputSource(m_ciplus_routing_tunernum, m_ciplus_routing_input);
+		slot->setCIPlusRoutingDone();
+		return;
 	}
-	m_ciplus_routing_active = false;
-	m_ciplus_routing_tunernum = -1;
-	m_ciplus_routing_input = "";
-	m_ciplus_routing_ci_input = "";
+
+	slot->setSource(ciplus_routing_ci_input);
+	setInputSource(ciplus_routing_tunernum, ciplus_routing_input);
+
+	slot->setCIPlusRoutingDone();
 }
 
 int eDVBCISlot::send(const unsigned char *data, size_t len)
@@ -1159,7 +1171,7 @@ int eDVBCISlot::send(const unsigned char *data, size_t len)
 	singleLock s(eDVBCIInterfaces::m_slot_lock);
 	int res=0;
 	unsigned int i;
-	eTraceNoNewLineStart("< ");
+	eTraceNoNewLineStart("[CI%d] < ", slotid);
 	for(i = 0; i < len; i++)
 		eTraceNoNewLine("%02x ",data[i]);
 	eTraceNoNewLine("\n");
@@ -1181,7 +1193,7 @@ int eDVBCISlot::send(const unsigned char *data, size_t len)
 void eDVBCISlot::data(int what)
 {
 	singleLock s(eDVBCIInterfaces::m_slot_lock);
-	eTrace("[CI] Slot %d what %d\n", getSlotID(), what);
+	eTrace("[CI%d] what %d\n", slotid, what);
 	if(what == eSocketNotifier::Priority) {
 		if(state != stateRemoved) {
 			state = stateRemoved;
@@ -1202,7 +1214,7 @@ void eDVBCISlot::data(int what)
 		reset();
 
 	if(state != stateInserted) {
-		eDebug("[CI] ci inserted in slot %d", getSlotID());
+		eDebug("[CI%d] ci inserted", slotid);
 		state = stateInserted;
 		/* emit */ eDVBCI_UI::getInstance()->m_messagepump.send(eDVBCIInterfaces::Message(eDVBCIInterfaces::Message::slotStateChanged, getSlotID(), 1));
 		notifier->setRequested(eSocketNotifier::Read|eSocketNotifier::Priority);
@@ -1215,7 +1227,7 @@ void eDVBCISlot::data(int what)
 		r = ::read(fd, data, 4096);
 		if(r > 0) {
 			int i;
-			eTraceNoNewLineStart("> ");
+			eTraceNoNewLineStart("[CI%d] > ", slotid);
 			for(i=0;i<r;i++)
 				eTraceNoNewLine("%02x ",data[i]);
 			eTraceNoNewLine("\n");
@@ -1248,14 +1260,17 @@ eDVBCISlot::eDVBCISlot(eMainloop *context, int nr):
 {
 	char configStr[255];
 	slotid = nr;
+	m_isCamMgrRoutingActive = false;
+	m_ciPlusRoutingDone = false;
 	m_ca_demux_id = -1;
 	m_context = context;
+	m_ciplus_routing_tunernum = -1;
 	state = stateDisabled;
 	snprintf(configStr, 255, "config.ci.%d.enabled", slotid);
 	bool enabled = eConfigManager::getConfigBoolValue(configStr, true);
-	int bootDelay = eConfigManager::getConfigIntValue("config.cimisc.bootDelay");
-	if (enabled) 
+	if (enabled)
 	{
+		int bootDelay = eConfigManager::getConfigIntValue("config.cimisc.bootDelay");
 		if (bootDelay) 
 		{
 			CONNECT(startup_timeout->timeout, eDVBCISlot::openDevice);
@@ -1290,7 +1305,7 @@ void eDVBCISlot::openDevice()
 
 	fd = ::open(filename, O_RDWR | O_NONBLOCK | O_CLOEXEC);
 
-	eTrace("[CI] Slot %d has fd %d", getSlotID(), fd);
+	eTrace("[CI%d] has fd %d", slotid, fd);
 	state = stateInvalid;
 
 	if (fd >= 0)
@@ -1358,13 +1373,13 @@ void eDVBCISlot::determineCIVersion()
 	char lv1Info[256] = { 0 };
 
 	if (ioctl(fd, 1, lv1Info) < 0) {
-		eTrace("[CI] Slot %d ioctl not supported: assume CI+ version 1", getSlotID());
+		eTrace("[CI%d] ioctl not supported: assume CI+ version 1", slotid);
 		m_ci_version = versionCIPlus1;
 		return;
 	}
 
 	if (strlen(lv1Info) == 0) {
-		eTrace("[CI] Slot %d no LV1 info: assume CI+ version 1", getSlotID());
+		eTrace("[CI%d] no LV1 info: assume CI+ version 1", slotid);
 		m_ci_version = versionCIPlus1;
 		return;
 	}
@@ -1387,12 +1402,12 @@ void eDVBCISlot::determineCIVersion()
 	}
 
 	if(!compatId) {
-		eTrace("[CI] Slot %d CI CAM detected", getSlotID());
+		eTrace("[CI%d] CI CAM detected", slotid);
 		m_ci_version = versionCI;
 		return;
 	}
 
-	eTrace("[CI] Slot %d CI+ compatibility ID: %s", getSlotID(), compatId);
+	eTrace("[CI%d] CI+ compatibility ID: %s", slotid, compatId);
 
 	char *label, *id, flag = '+';
 	int version = versionCI;
@@ -1409,7 +1424,7 @@ void eDVBCISlot::determineCIVersion()
 					flag = *id++;
 
 				version = strtol(id, 0, 0);
-				eDebug("[CI] Slot %d CI+ %c%d CAM detected", getSlotID(), flag, version);
+				eDebug("[CI%d] CI+ %c%d CAM detected", slotid, flag, version);
 				break;
 			}
 		}
@@ -1424,14 +1439,21 @@ int eDVBCISlot::getNumOfServices()
 	return running_services.size();
 }
 
+void eDVBCISlot::setCIPlusRoutingParameter(int tunernum, std::string ciplus_routing_input, std::string ciplus_routing_ci_input)
+{
+	m_ciplus_routing_tunernum = tunernum;
+	m_ciplus_routing_input = ciplus_routing_input;
+	m_ciplus_routing_ci_input = ciplus_routing_ci_input;
+}
+
 int eDVBCISlot::reset()
 {
-	eDebug("[CI] Slot %d: reset requested", getSlotID());
+	eDebug("[CI%d] reset requested", slotid);
 
 	if (state == stateInvalid)
 	{
 		unsigned char buf[256];
-		eDebug("[CI] flush");
+		eDebug("[CI%d] flush", slotid);
 		while(::read(fd, buf, 256)>0);
 		state = stateResetted;
 	}
@@ -1449,7 +1471,7 @@ int eDVBCISlot::reset()
 
 int eDVBCISlot::startMMI()
 {
-	eDebug("[CI] Slot %d: startMMI()", getSlotID());
+	eDebug("[CI%d] startMMI()", slotid);
 
 	if(application_manager)
 		application_manager->startMMI();
@@ -1459,7 +1481,7 @@ int eDVBCISlot::startMMI()
 
 int eDVBCISlot::stopMMI()
 {
-	eDebug("[CI] Slot %d: stopMMI()", getSlotID());
+	eDebug("[CI%d] stopMMI()", slotid);
 
 	if(mmi_session)
 		mmi_session->stopMMI();
@@ -1469,7 +1491,7 @@ int eDVBCISlot::stopMMI()
 
 int eDVBCISlot::answerText(int answer)
 {
-	eDebug("[CI] Slot %d: answerText(%d)", getSlotID(), answer);
+	eDebug("[CI%d] answerText(%d)", slotid, answer);
 
 	if(mmi_session)
 		mmi_session->answerText(answer);
@@ -1487,7 +1509,7 @@ int eDVBCISlot::getMMIState()
 
 int eDVBCISlot::answerEnq(char *value)
 {
-	eDebug("[CI] Slot %d: answerENQ(%s)", getSlotID(), value);
+	eDebug("[CI%d] answerENQ(%s)", slotid, value);
 
 	if(mmi_session)
 		mmi_session->answerEnq(value);
@@ -1497,7 +1519,7 @@ int eDVBCISlot::answerEnq(char *value)
 
 int eDVBCISlot::cancelEnq()
 {
-	eDebug("[CI] Slot %d: cancelENQ", getSlotID());
+	eDebug("[CI%d] cancelENQ", slotid);
 
 	if(mmi_session)
 		mmi_session->cancelEnq();
@@ -1505,21 +1527,59 @@ int eDVBCISlot::cancelEnq()
 	return 0;
 }
 
-int eDVBCISlot::setCADemuxID(eDVBServicePMTHandler *pmthandler)
+int eDVBCISlot::setCaParameter(eDVBServicePMTHandler *pmthandler)
 {
 	ePtr<iDVBDemux> demux;
+	eDVBServicePMTHandler::program program;
+	eServiceReferenceDVB ref;
 	uint8_t dmx_id;
+	eUsePtr<iDVBChannel> channel;
+	ePtr<iDVBFrontend> frontend;
+
+	eDebug("[CI%d] setCaParameter", slotid);
 
 	if (!pmthandler->getDataDemux(demux))
 	{
 		if (!demux->getCADemuxID(dmx_id))
 		{
 			m_ca_demux_id = dmx_id;
-			eDebug("[CI] Slot %d: CA demux_id = %d", getSlotID(), m_ca_demux_id);
+			eDebug("[CI%d] CA demux_id = %d", slotid, m_ca_demux_id);
 		}
 		else
 			m_ca_demux_id = -1;
 	}
+
+	pmthandler->getServiceReference(ref);
+	m_program_number = ref.getServiceID().get();
+
+	pmthandler->getProgramInfo(program);
+	m_audio_number = program.audioStreams.size();
+
+	if (m_audio_number > 16)
+		m_audio_number = 16;
+	for(int i = 0; i < m_audio_number ; i++)
+	{
+		m_audio_pids[i] = program.audioStreams[i].pid;
+	}
+
+	m_video_pid = program.videoStreams.empty()? 0 : program.videoStreams[0].pid;
+	m_audio_pid = program.audioStreams.empty()? 0 : program.audioStreams[program.defaultAudioStream].pid;
+
+	m_tunernum = -1;
+	if (!pmthandler->getChannel(channel))
+	{
+		if (!channel->getFrontend(frontend))
+		{
+			eDVBFrontend *fe = (eDVBFrontend*) &(*frontend);
+			m_tunernum = fe->getSlotID();
+			if (m_tunernum > 7 && !fe->is_FBCTuner()) // use vu ioctl only for second FBC tuner
+			{
+				m_tunernum = -1;
+			}
+		}
+		eDebug("[CI%d] tunernum = %d", slotid, m_tunernum);
+	}
+
 	return 0;
 }
 
@@ -1527,7 +1587,7 @@ int eDVBCISlot::sendCAPMT(eDVBServicePMTHandler *pmthandler, const std::vector<u
 {
 	if (!ca_manager)
 	{
-		eDebug("[CI] no ca_manager (no CI plugged?)");
+		eDebug("[CI%d] no ca_manager (no CI plugged?)", slotid);
 		return -1;
 	}
 	const std::vector<uint16_t> &caids = ids.empty() ? ca_manager->getCAIDs() : ids;
@@ -1551,7 +1611,7 @@ int eDVBCISlot::sendCAPMT(eDVBServicePMTHandler *pmthandler, const std::vector<u
 			(pmt_version == it->second) &&
 			!sendEmpty )
 		{
-			eDebug("[CI] [eDVBCISlot] dont send self capmt version twice");
+			eDebug("[CI%d] dont send self capmt version twice", slotid);
 			return -1;
 		}
 
@@ -1562,15 +1622,15 @@ int eDVBCISlot::sendCAPMT(eDVBServicePMTHandler *pmthandler, const std::vector<u
 		{
 			unsigned char raw_data[2048];
 
-//			eDebug("[CI] send %s capmt for service %04x to slot %d",
-//				it != running_services.end() ? "UPDATE" : running_services.empty() ? "ONLY" : "ADD",
-//				program_number, slotid);
+//			eDebug("[CI%d] send %s capmt for service %04x",
+//				slotid, it != running_services.end() ? "UPDATE" : running_services.empty() ? "ONLY" : "ADD",
+//				program_number);
 
 			CaProgramMapSection capmt(*i++,
 				it != running_services.end() ? 0x05 /*update*/ : running_services.empty() ? 0x03 /*only*/ : 0x04 /*add*/, 0x01, caids );
 			while( i != ptr->getSections().end() )
 			{
-		//			eDebug("[CI] append");
+		//			eDebug("[CI%d] append", slotid);
 				capmt.append(*i++);
 			}
 			capmt.writeToBuffer(raw_data);
@@ -1598,7 +1658,7 @@ int eDVBCISlot::sendCAPMT(eDVBServicePMTHandler *pmthandler, const std::vector<u
 
 			if (sendEmpty)
 			{
-//				eDebugNoNewLineStart("[CI[ SEND EMPTY CAPMT.. old version is %02x", raw_data[hlen+3]);
+//				eDebugNoNewLineStart("[CI%d[ SEND EMPTY CAPMT.. old version is %02x", slotid, raw_data[hlen+3]);
 				if (sendEmpty && running_services.size() == 1)  // check if this is the capmt for the last running service
 					raw_data[hlen] = 0x03; // send only instead of update... because of strange effects with alphacrypt
 				raw_data[hlen+3] &= ~0x3E;
@@ -1606,7 +1666,7 @@ int eDVBCISlot::sendCAPMT(eDVBServicePMTHandler *pmthandler, const std::vector<u
 //				eDebugNoNewLine(" new version is %02x\n", raw_data[hlen+3]);
 			}
 
-//			eDebugNoNewLineStart("[CI[ ca_manager %p dump capmt:", ca_manager);
+//			eDebugNoNewLineStart("[CI%d[ ca_manager %p dump capmt:", slotid, ca_manager);
 //			for(int i=0;i<wp;i++)
 //				eDebugNoNewLine("%02x ", raw_data[i]);
 //			eDebugNoNewLine("\n");
@@ -1653,11 +1713,11 @@ int eDVBCISlot::setSource(const std::string &source)
 
 	if(CFile::write(buf, source.c_str()) == -1)
 	{
-		eDebug("[CI] Slot: %d setSource: %s failed!", getSlotID(), source.c_str());
+		eDebug("[CI%d] setSource: %s failed!", slotid, source.c_str());
 		return 0;
 	}
 
-	eDebug("[CI] Slot: %d setSource: %s", getSlotID(), source.c_str());
+	eDebug("[CI%d] setSource: %s", slotid, source.c_str());
 	return 0;
 }
 
@@ -1672,7 +1732,7 @@ int eDVBCISlot::setClockRate(int rate)
 
 int eDVBCISlot::setEnabled(bool enabled)
 {
-	eDebug("[CI] Slot: %d Enabled: %d, state %d", getSlotID(), enabled, state);
+	eDebug("[CI%d] Enabled: %d, state %d", slotid, enabled, state);
 	if (enabled && state != stateDisabled)
 		return 0;
 

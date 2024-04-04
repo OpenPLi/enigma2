@@ -5,6 +5,11 @@
 #include <openssl/x509.h>
 #include <lib/dvb_ci/dvbci_session.h>
 
+#include <openssl/dh.h>
+void DH_get0_key(const DH *dh, const BIGNUM **pub_key, const BIGNUM **priv_key);
+int DH_set0_pqg(DH *dh, BIGNUM *p, BIGNUM *q, BIGNUM *g);
+void DH_set_flags(DH *dh, int flags);
+
 class eDVBCICcSessionImpl;
 
 class eDVBCICcSession: public eDVBCISession
@@ -45,7 +50,9 @@ class eDVBCICcSession: public eDVBCISession
 		SRM_DATA = 31,
 		SRM_CONFIRM = 32,
 
-		MAX_ELEMENTS = 33
+		CRITICAL_SEC_UPDATE = 49,
+
+		MAX_ELEMENTS = 50
 	};
 
 	struct ciplus_element
