@@ -102,6 +102,10 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 			self.list.append((_("Enable import timer from fallback tuner"),
 				config.usage.remote_fallback_external_timer,
 				_("When enabled the timer from the fallback tuner is imported")))
+			if config.usage.remote_fallback_external_timer.value:
+				self.list.append((_("Select the timer from the fallback tuner by default"),
+					config.usage.remote_fallback_external_timer_default,
+					_("When enabled the timer from the fallback tuner is the default timer")))
 			self.list.append((_("Fallback remote receiver"),
 				self.avahiselect,
 				_("Destination of fallback remote receiver")))
@@ -267,6 +271,7 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 		config.usage.remote_fallback_nok.save()
 		config.usage.remote_fallback.save()
 		config.usage.remote_fallback_external_timer.save()
+		config.usage.remote_fallback_external_timer_default.save()
 		config.usage.remote_fallback_openwebif_customize.save()
 		config.usage.remote_fallback_openwebif_userid.save()
 		config.usage.remote_fallback_openwebif_password.save()
