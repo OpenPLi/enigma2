@@ -1274,6 +1274,8 @@ def readSkin(screen, skin, names, desktop):
 			raise SkinError("Applet failed to compile: '%s'" % str(err))
 		if widgetType == "onLayoutFinish":
 			screen.onLayoutFinish.append(code)
+		elif widgetType == "onContentChanged":
+			screen.onContentChanged.append(code)
 		else:
 			raise SkinError("Applet type '%s' is unknown" % widgetType)
 

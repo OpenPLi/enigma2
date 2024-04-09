@@ -4,6 +4,7 @@ from Components.GUIComponent import GUIComponent
 class GUIAddon(GUIComponent):
 	def __init__(self):
 		GUIComponent.__init__(self)
+		self.source = None
 		self.sources = {}
 		self.relatedScreen = None
 
