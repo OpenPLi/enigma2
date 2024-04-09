@@ -82,7 +82,7 @@ class MainMenu(GUIAddon):
 	def setMinWidth(self, value):
 		self.minWidth = parseScale(value)
 
-	def setManWidth(self, value):
+	def setMaxWidth(self, value):
 		self.maxWidth = parseScale(value)
 	
 	def setIconSize(self, value):
