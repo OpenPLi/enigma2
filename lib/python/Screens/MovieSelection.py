@@ -37,6 +37,7 @@ from enigma import eServiceReference, eServiceCenter, eTimer, eSize, iPlayableSe
 import os
 import time
 from time import localtime, strftime
+from skin import findSkinScreen
 import pickle
 
 config.movielist = ConfigSubsection()
@@ -276,7 +277,6 @@ class MovieBrowserConfiguration(ConfigListScreen, Screen):
 			(_("Sort"), cfg.moviesort, _("You can set sorting type for items in movielist.")),
 			(_("Show extended description"), cfg.description, _("You can enable if will be displayed extended EPG description for item.")),
 			(_("Type"), cfg.listtype, _("Set movielist type.")),
-			(_("Use alternative skin"), config.movielist.useslim, _("Use the alternative screen")),
 			(_("Use individual settings for each directory"), config.movielist.settings_per_directory, _("Settings can be different for each directory separately (for non removeable devices only).")),
 			(_("Allow quitting movie player with exit"), config.usage.leave_movieplayer_onExit, _("When enabled, it is possible to leave the movie player with exit.")),
 			(_("Behavior when a movie reaches the end"), config.usage.on_movie_eof, _("Set action when movie playback is finished.")),
@@ -290,6 +290,8 @@ class MovieBrowserConfiguration(ConfigListScreen, Screen):
 			(_("Automatic bookmarks"), config.movielist.add_bookmark, _("If enabled, bookmarks will be updated with the new location when you move or copy a recording.")),
 			(_("Show underline characters in filenames"), config.movielist.show_underlines, _("If disabled, underline characters in file and directory names are not shown and are replaced with spaces.")),
 			]
+		if findSkinScreen('MovieSelectionSlim'):
+			configList.insert(3, (_("Use alternative skin"), config.movielist.useslim, _("Use the alternative screen")))
 		for btn in ('red', 'green', 'yellow', 'blue', 'TV', 'Radio', 'Text', 'F1', 'F2', 'F3'):
 			configList.append((_(btn), userDefinedButtons[btn]))
 		ConfigListScreen.__init__(self, configList, session=session, on_change=self.changedEntry)
