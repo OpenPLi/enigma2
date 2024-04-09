@@ -54,6 +54,7 @@ config.movielist.hide_extensions = ConfigYesNo(default=False)
 config.movielist.stop_service = ConfigYesNo(default=True)
 config.movielist.add_bookmark = ConfigYesNo(default=True)
 config.movielist.show_underlines = ConfigYesNo(default=False)
+config.movielist.useslim = ConfigYesNo(default=False)
 
 userDefinedButtons = None
 last_selected_dest = []
@@ -275,6 +276,7 @@ class MovieBrowserConfiguration(ConfigListScreen, Screen):
 			(_("Sort"), cfg.moviesort, _("You can set sorting type for items in movielist.")),
 			(_("Show extended description"), cfg.description, _("You can enable if will be displayed extended EPG description for item.")),
 			(_("Type"), cfg.listtype, _("Set movielist type.")),
+			(_("Use alternative skin"), config.movielist.useslim, _("Use the alternative screen")),
 			(_("Use individual settings for each directory"), config.movielist.settings_per_directory, _("Settings can be different for each directory separately (for non removeable devices only).")),
 			(_("Allow quitting movie player with exit"), config.usage.leave_movieplayer_onExit, _("When enabled, it is possible to leave the movie player with exit.")),
 			(_("Behavior when a movie reaches the end"), config.usage.on_movie_eof, _("Set action when movie playback is finished.")),
@@ -325,6 +327,7 @@ class MovieBrowserConfiguration(ConfigListScreen, Screen):
 			config.movielist.moviesort.save()
 			config.movielist.listtype.save()
 			config.movielist.description.save()
+			config.movielist.useslim.save()
 			config.usage.on_movie_eof.save()
 		self.close(True)
 
@@ -514,6 +517,12 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 
 	def __init__(self, session, selectedmovie=None, timeshiftEnabled=False):
 		Screen.__init__(self, session)
+
+		if config.movielist.useslim.value:
+			self.skinName = ["MovieSelectionSlim", "MovieSelection"]
+		else:
+			self.skinName = "MovieSelection"
+
 		HelpableScreen.__init__(self)
 		if not timeshiftEnabled:
 			InfoBarBase.__init__(self) # For ServiceEventTracker
