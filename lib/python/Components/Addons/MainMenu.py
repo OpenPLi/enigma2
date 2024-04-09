@@ -26,6 +26,7 @@ class MainMenu(GUIAddon):
 		self.textRenderer = Label("")
 		self.longestMenuTextWidth = 0
 		self.minWidth = 100
+		self.maxWidth = 700
 		
 
 	def onContainerShown(self):
@@ -59,10 +60,10 @@ class MainMenu(GUIAddon):
 						size=(self.iconSize, self.iconSize),
 						png=menupng))
 			xPos += self.iconSize + 10
-
+		textWidth = self.longestMenuTextWidth if self.maxWidth >= (self.longestMenuTextWidth + self.iconSize + 40 + 10) else self.maxWidth - self.iconSize - 40 - 10
 		res.append(MultiContentEntryText(
 				pos=(xPos, 0),
-				size=(self.longestMenuTextWidth, self.itemHeight),
+				size=(textWidth, self.itemHeight),
 				font=0, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER,
 				text=item_text,
 				color=self.foregroundColor, color_sel=self.foregroundColorSelected,
@@ -80,6 +81,9 @@ class MainMenu(GUIAddon):
 
 	def setMinWidth(self, value):
 		self.minWidth = parseScale(value)
+
+	def setManWidth(self, value):
+		self.maxWidth = parseScale(value)
 	
 	def setIconSize(self, value):
 		self.iconSize = parseScale(value)
@@ -115,6 +119,8 @@ class MainMenu(GUIAddon):
 		curSize = self.instance.size()
 		dest_width = self.iconSize + 20*2 + 10
 		dest_width += self.longestMenuTextWidth 
+		if dest_width > self.maxWidth:
+			dest_width = self.maxWidth
 		if dest_width > self.minWidth:
 			self.instance.resize(eSize(dest_width, curSize.height()))
 			self.relatedScreen.screenContentChanged()
@@ -135,6 +141,8 @@ class MainMenu(GUIAddon):
 				self.iconSize = parseScale(value)
 			elif attrib == "minWidth":
 				self.minWidth = parseScale(value)
+			elif attrib == "maxWidth":
+				self.maxWidth = parseScale(value)
 			elif attrib == "itemWidth":
 				self.itemWidth = parseScale(value)
 			elif attrib == "itemHeight":
