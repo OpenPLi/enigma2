@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-10 21:56+0100\n"
-"PO-Revision-Date: 2021-05-24 17:48+0300\n"
+"PO-Revision-Date: 2024-04-10 19:08+0300\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: openPLi Dimitrij\n"
 "Language: ru\n"
@@ -381,9 +381,8 @@ msgstr "(Переключить)"
 msgid "(activated +%d min)"
 msgstr "(активирован +%d мин)"
 
-#, fuzzy
 msgid "(current image)"
-msgstr "(текущий)"
+msgstr "(текущий имидж)"
 
 msgid "(empty)"
 msgstr "(пусто)"
@@ -1660,9 +1659,8 @@ msgstr "Канал"
 msgid "Channel Info"
 msgstr "Информация канала"
 
-#, fuzzy
 msgid "Channel Selection"
-msgstr "Выбор каналов"
+msgstr "Селектор каналов"
 
 msgid "Channel context menu"
 msgstr "Контекстное меню селектора каналов"
@@ -1959,20 +1957,17 @@ msgstr "Настройка способа составления названи�
 msgid "Configure how the fan should operate"
 msgstr "Настройка режимов работы вентилятора."
 
-#, fuzzy
 msgid "Configure if and how crypto icons will be shown in the channel selection list (left alignment only available in single line mode)."
-msgstr "Настройка иконок для кодированных сервисов в списке выбора каналов."
+msgstr "Настройка иконок для кодированных сервисов в списке выбора каналов (выравнивание по левому краю доступно только в однострочном режиме)."
 
 msgid "Configure if and how long the latest service in Picture in Picture mode will be remembered."
 msgstr "Настройка - запомнить и на какой период времени последний сервис PiP."
 
-#, fuzzy
 msgid "Configure if and how service type icons will be shown in the channel selection list (left alignment only available in single line mode)."
-msgstr "Настройка для показа иконок типа сервиса в списке выбора каналов."
+msgstr "Настройка для показа иконок типа сервиса в списке выбора каналов (выравнивание по левому краю доступно только в однострочном режиме)."
 
-#, fuzzy
 msgid "Configure if and how the record indicator will be shown in the channel selection list (left alignment only available in single line mode)."
-msgstr "Настройка для показа индикатора текущих записываемых сервисов в списке выбора каналов."
+msgstr "Настройка для показа индикатора текущих записываемых сервисов в списке выбора каналов (выравнивание по левому краю доступно только в однострочном режиме)."
 
 msgid "Configure if and how wide columns will be shown in the channel selection list."
 msgstr "Настройка для показа ширины колонок названий событий в списке выбора каналов."
@@ -2650,7 +2645,7 @@ msgid "Delay in miliseconds between scrolling characters on display."
 msgstr "Задержка прокрутки в миллисекундах между символами на дисплее."
 
 msgid "Delay when closing a stream relay service before reallocating the tuner for another service. Using '0' is only recommended for boxes with multiple satellite tuners."
-msgstr ""
+msgstr "Задержка при закрытии сервиса ретрансляции потока перед перераспределением тюнера для другого сервиса. Использование '0' рекомендуется только для устройств с несколькими спутниковыми тюнерами."
 
 msgid "Delete"
 msgstr "Удалить"
@@ -2709,13 +2704,11 @@ msgstr "Декодировать полученные http стрим поток
 msgid "Descramble sending http streams"
 msgstr "Декодировать отправленные http стрим потоки"
 
-#, fuzzy
 msgid "Descramble service via streamrelay port"
-msgstr "Декодировать полученные http стрим потоки"
+msgstr "Порт декодирования сервиса через ретрансляцию потока"
 
-#, fuzzy
 msgid "Descramble service via streamrelay url"
-msgstr "Декодировать полученные http стрим потоки"
+msgstr "URL декодирования сервиса через ретрансляцию потока"
 
 msgid "Description"
 msgstr "Описание"
@@ -2874,7 +2867,7 @@ msgid "Do a cable service scan now"
 msgstr "Выполнить ручной поиск сервисов сейчас"
 
 msgid "Do a fast service scan now"
-msgstr "Выполнить быстрый поиск (23.5E-19.2E) сервисов сейчас"
+msgstr "Выполнить быстрый поиск сервисов сейчас"
 
 msgid "Do a manual service scan now"
 msgstr "Выполнить ручной поиск сервисов сейчас"
@@ -3362,8 +3355,8 @@ msgstr "Ввод PIN-кода"
 msgid "Enter URL"
 msgstr "Ввод URL"
 
-msgid "Enter an URL where alternative images could be listed for FlashImage. Enter text 'all' for automatic access of many images."
-msgstr "Введите URL для списка альтернативных имиджей. Введите текст 'all' для автоматического доступа ко многим имиджам."
+msgid "Enter an URL where alternative images could be listed for FlashImage."
+msgstr "Введите URL для списка альтернативных имиджей."
 
 msgid "Enter if you are in the east or west hemisphere."
 msgstr "Ввод, где Вы находитесь, в восточном или западном полушарии."
@@ -3791,10 +3784,10 @@ msgid "Fast forward speeds"
 msgstr "Скорость перемотки вперед"
 
 msgid "FastScan"
-msgstr "Быстрый поиск - провайдеры 23.5E-19.2E"
+msgstr "DVB-S 'FastScan' - провайдеры 23.5E/19.2E/0.8W"
 
 msgid "Fastscan"
-msgstr "Быстрый поиск - провайдеры 23.5E-19.2E"
+msgstr "DVB-S 'FastScan' - провайдеры 23.5E/19.2E/0.8W"
 
 msgid "Favourites"
 msgstr "Фавориты"
@@ -4191,9 +4184,8 @@ msgstr "HDMI-CEC адрес"
 msgid "HDMI-CEC setup"
 msgstr "Настройки HDMI-CEC"
 
-#, fuzzy
 msgid "HDMI-In"
-msgstr "HDMI"
+msgstr "HDMI-In"
 
 msgid "HDR10 support"
 msgstr "HDR10 поддержка"
@@ -4602,13 +4594,11 @@ msgstr "Настройки устройства ввода"
 msgid "Input devices"
 msgstr "Настройки пульта"
 
-#, fuzzy
 msgid "Insert Service"
-msgstr "Сервис"
+msgstr "Вставить сервис"
 
-#, fuzzy
 msgid "Insert entry"
-msgstr "Ввод таймера"
+msgstr "Вставить строку сервиса"
 
 msgid "Install"
 msgstr "Инсталлировать"
@@ -5043,7 +5033,7 @@ msgid "MB"
 msgstr "MB"
 
 msgid "MENU"
-msgstr ""
+msgstr "MENU"
 
 msgid "MHz"
 msgstr "MHz"
@@ -5790,9 +5780,8 @@ msgstr "Количество повторов текста на дисплее."
 msgid "Number or SMS style data entry"
 msgstr "Запись данных в виде номера или SMS стиля"
 
-#, fuzzy
 msgid "OE Version: "
-msgstr "Версия энигмы: "
+msgstr "OE версия: "
 
 msgid "OK"
 msgstr "OK"
@@ -5972,14 +5961,13 @@ msgid "PPanel"
 msgstr "PPanel (shell скрипты)"
 
 msgid "PREVIOUS"
-msgstr ""
+msgstr "ПРЕДЫДУЩИЙ"
 
 msgid "PULSe 4K(mini)"
 msgstr "PULSe 4K(mini)"
 
-#, fuzzy
 msgid "PVR"
-msgstr "OVR"
+msgstr "PVR"
 
 msgid "Package list update"
 msgstr "Список пакетов обновления"
@@ -6097,9 +6085,8 @@ msgstr "Pillarbox"
 msgid "Pilot"
 msgstr "Пилот"
 
-#, fuzzy
 msgid "Pin Userbouquet"
-msgstr "Пользователь букеты"
+msgstr "Закрепить пользовательский букет"
 
 msgid "Pitcairn"
 msgstr "Pitcairn"
@@ -6159,10 +6146,10 @@ msgid "Play recorded movies..."
 msgstr "Воспроизвести записанное видео..."
 
 msgid "Play service with streamrelay"
-msgstr ""
+msgstr "Воспроизводить сервис через ретрансляцию потока"
 
 msgid "Play service without streamrelay"
-msgstr ""
+msgstr "Отключить сервис от ретрансляции потока"
 
 msgid "Please add titles to the compilation."
 msgstr "Пожалуйста, добавьте название к компиляции."
@@ -6724,9 +6711,8 @@ msgstr "Python интерфейс для /tmp/mmi.socket"
 msgid "Python version: "
 msgstr "Версия python: "
 
-#, fuzzy
 msgid "Pythonscript"
-msgstr "Shell-скрипт"
+msgstr "Python-скрипт"
 
 msgid "Qatar"
 msgstr "Qatar"
@@ -7577,9 +7563,8 @@ msgstr "Выберите быстрый DiSEqC, если Ваша система
 msgid "Select HDD"
 msgstr "Выбор HDD"
 
-#, fuzzy
 msgid "Select Service"
-msgstr "Выбор видео"
+msgstr "Выбор сервиса"
 
 msgid "Select Softcam"
 msgstr "Выбор эмулятора"
@@ -7696,16 +7681,14 @@ msgstr "Выберите частоту обновления"
 msgid "Select satellites"
 msgstr "Выбор спутников"
 
-#, fuzzy
 msgid "Select service name"
-msgstr "Название сервиса"
+msgstr "Выбор названия сервиса"
 
 msgid "Select service to add..."
 msgstr "Выбор сервиса для добавления..."
 
-#, fuzzy
 msgid "Select service type"
-msgstr "Выбор сервиса для добавления..."
+msgstr "Выбор типа сервиса"
 
 msgid "Select slot"
 msgstr "Выбор слота"
@@ -7713,13 +7696,11 @@ msgstr "Выбор слота"
 msgid "Select sort method:"
 msgstr "Выбор способа сортировки:"
 
-#, fuzzy
 msgid "Select stream URL"
-msgstr "Выбор эмулятора"
+msgstr "Выбор URL стрима"
 
-#, fuzzy
 msgid "Select stream type"
-msgstr "Выбор тюнера"
+msgstr "Выбор типа стрима"
 
 msgid "Select target folder"
 msgstr "Выбрать целевую папку"
@@ -7893,13 +7874,11 @@ msgstr "Сервис & PIDs"
 msgid "Service ID"
 msgstr "ID сервиса"
 
-#, fuzzy
 msgid "Service Name"
 msgstr "Название сервиса"
 
-#, fuzzy
 msgid "Service Type"
-msgstr "Название сервиса"
+msgstr "Тип сервиса"
 
 msgid "Service belongs to a parental protected bouquet"
 msgstr "Сервис находится в букете родительского контроля"
@@ -7931,9 +7910,8 @@ msgstr "Информация о сервисе - Live данные тюнера"
 msgid "Service info - tuner setting values"
 msgstr "Информация о сервисе - данные из настроек тюнера"
 
-#, fuzzy
 msgid "Service info font size"
-msgstr "Информация о сервисе"
+msgstr "Размер шрифта названия события сервиса"
 
 msgid ""
 "Service invalid!\n"
@@ -7945,9 +7923,8 @@ msgstr ""
 msgid "Service name"
 msgstr "Название сервиса"
 
-#, fuzzy
 msgid "Service name font size"
-msgstr "Название сервиса"
+msgstr "Размер шрифта названия сервиса"
 
 msgid ""
 "Service not found!\n"
@@ -7956,9 +7933,8 @@ msgstr ""
 "Сервис не найден!\n"
 "(SID не найден в PAT)"
 
-#, fuzzy
 msgid "Service number font size"
-msgstr "Размер шрифта субтитров"
+msgstr "Размер шрифта номера сервиса"
 
 msgid "Service reference"
 msgstr "Референс сервиса"
@@ -8048,9 +8024,8 @@ msgstr "Установить пароль OpenWebif из вашего резер
 msgid "Set the port of the OpenWebif from your fallback tuner"
 msgstr "Установить порт OpenWebif из вашего резервного ресивера"
 
-#, fuzzy
 msgid "Set the type of the progress indication in the channel selection screen (right alignment only available in single line mode)."
-msgstr "Установите тип индикации прогресса текущего события в списке выбора каналов."
+msgstr "Установите тип индикации прогресса текущего события в списке выбора каналов (выравнивание по правому краю доступно только в однострочном режиме)."
 
 msgid "Set time window to 1 hour"
 msgstr "Установка времени окна на 1 час"
@@ -8182,7 +8157,7 @@ msgid "Show detailed event info"
 msgstr "Показать детально инфо события"
 
 msgid "Show disabled timers (local only)"
-msgstr ""
+msgstr "Показывать отключенные таймеры (только локальные)"
 
 msgid "Show event details"
 msgstr "Показать детали события"
@@ -8884,17 +8859,14 @@ msgstr "Сохраненная позиция"
 msgid "Stream"
 msgstr "Стрим"
 
-#, fuzzy
 msgid "Stream Relay delay"
-msgstr "Время задержки прокрутки"
+msgstr "Время задержки ретрансляции потока"
 
-#, fuzzy
 msgid "Stream Type"
-msgstr "Стрим"
+msgstr "Тип стрима"
 
-#, fuzzy
 msgid "Stream URL"
-msgstr "Стрим"
+msgstr "URL стрима"
 
 msgid "Stream request"
 msgstr "Запрос стрима"
@@ -9121,7 +9093,7 @@ msgstr "TEXT"
 
 #. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
 msgid "TRANSLATOR_INFO"
-msgstr "Dmitrij - 5.04.2023"
+msgstr "Dmitrij - 10.04.2024"
 
 msgid "TS file is too large for ISO9660 level 1!"
 msgstr "TS файл слишком большой для ISO9660 level 1!"
@@ -9220,7 +9192,7 @@ msgid "The DVD standard doesn't support H.264 (HDTV) video streams. Do you want 
 msgstr "DVD стандарт не поддерживает H.264 (HDTV) видео потоков. Вы хотите создать специальный формат DVD (который возможно не будет проигрываться в стационарных DVD проигрывателях)?"
 
 msgid "The IP address from the streamrelay server that is used to descramble services that can only be encrypted via streamrelay"
-msgstr ""
+msgstr "IP адрес сервера декодирования ретрансляции потока."
 
 msgid "The PIN code has been changed successfully."
 msgstr "PIN-код был успешно изменен."
@@ -9257,6 +9229,8 @@ msgid ""
 "The enigma.info file for the boxinformation is not available or the content is invalid.\n"
 "Press any key to continue?"
 msgstr ""
+"Файл enigma.info для информации о ресивере недоступен или его содержимое некорректно.\n"
+"Нажмите любую кнопку для продолжения?"
 
 msgid "The following files were found..."
 msgstr "Следующие файлы были найдены..."
@@ -9317,7 +9291,7 @@ msgid "The path %s already exists."
 msgstr "Этот путь %s уже существует."
 
 msgid "The port from the streamrelay server that is used to descramble services that can only be encrypted via streamrelay"
-msgstr ""
+msgstr "Порт сервера декодирования ретрансляции потока."
 
 #, python-format
 msgid "The results have been written to %s"
@@ -9402,7 +9376,7 @@ msgid "This DVD RW medium is already formatted - reformatting will erase all con
 msgstr "Этот DVD RW контент уже отформатирован - переформатирование может стереть все содержимое диска."
 
 msgid "This allows you to change the font size relative to skin size, so 1 increases by 1 point size, and -1 decreases by 1 point size"
-msgstr ""
+msgstr "Это позволяет вам изменять размер шрифта относительно размера скина, поэтому 1 увеличивается на 1 размер пункта, а -1 уменьшается на 1 размер пункта."
 
 msgid "This bouquet is protected by a parental control PIN"
 msgstr "Этот букет защищен PIN-кодом родительского контроля"
@@ -9944,11 +9918,9 @@ msgstr "Tuvalu"
 msgid "Two"
 msgstr "Два"
 
-#, fuzzy
 msgid "Two lines"
 msgstr "Две строки"
 
-#, fuzzy
 msgid "Two lines and next event"
 msgstr "Две строки и следующее событие"
 
@@ -10069,9 +10041,8 @@ msgstr "Удалить маркировку сервиса как 3D серви�
 msgid "Unmount"
 msgstr "Отмонтировать"
 
-#, fuzzy
 msgid "Unpin Userbouquet"
-msgstr "Пользователь букеты"
+msgstr "Открепить пользовательский букет"
 
 msgid "Unsupported"
 msgstr "Не поддерживается"
@@ -10210,9 +10181,8 @@ msgstr "Использовать оригинальную позицию тел�
 msgid "Use power measurement"
 msgstr "Использовать измерение питания"
 
-#, fuzzy
 msgid "Use skin default"
-msgstr "Установить по дефолту"
+msgstr "Использовать дефолтное значение скина"
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "Использовать мастер настройки сети для конфигурации выбранного сетевого адаптера"
@@ -11598,7 +11568,7 @@ msgid "green"
 msgstr "зеленый"
 
 msgid "half an hour"
-msgstr ""
+msgstr "полчаса"
 
 msgid "handicraft"
 msgstr "ремесло"
@@ -11717,9 +11687,8 @@ msgstr "медицина/физиология/психология"
 msgid "menu"
 msgstr "меню"
 
-#, fuzzy
 msgid "min"
-msgstr " мин"
+msgstr "мин"
 
 msgid "mins"
 msgstr "мин"
@@ -12286,7 +12255,13 @@ msgid "®"
 msgstr "®"
 
 msgid "°E"
-msgstr ""
+msgstr "°E"
 
 msgid "°W"
-msgstr ""
+msgstr "°W"
+
+msgid "Use alternative skin"
+msgstr "Использовать альтернативный скин"
+
+msgid "Use the alternative screen"
+msgstr "Использование альтернативного экрана."
