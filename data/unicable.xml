@@ -15,9 +15,10 @@ bootuptime: integer, delay to allow the device to boot up, in milliseconds (opti
 lofl: integer, alternative LOF/L value (optional, default value is 9750)
 lofh: integer, alternative LOF/H value (optional, defaultvalue is 10600)
 -->
-<unicable version="20230506">
+<unicable version="20240410">
 	<lnb>
 		<manufacturer name="Dura-Sat(DUR-line)">
+			<product name="MB6-UK Mono" positions="2" format="jess" bootuptime="2500" scrs= "1210,1420,1680,2040,1005,1050,1095,1140,1260,1305,1350,1475,1520,1565,1610,1725,1770,1815,1860,1905,1950,1995,2085,2130"/>
 			<product name="UK101" scrs="1210,1420,1680,2040" bootuptime="2500"/>
 			<product name="UK102" scrs="1210,1420,1680,2040"/>
 			<product name="UK104" scrs="1210,1420,1680,2040"/>
@@ -31,6 +32,7 @@ lofh: integer, alternative LOF/H value (optional, defaultvalue is 10600)
 			<product name="SCR-1" scrs="1210,1420,1680,2040"/>
 		</manufacturer>
 		<manufacturer name="Fuba">
+			<product name="DEK 124" format="jess" scrs="975,1025,1075,1125,1175,1225,1275,1325,1375,1425,1475,1525,1575,1625,1675,1730,1775,1825,1875,1925,1975,2025,2075,2125"/>
 			<product name="DEK 342" scrs="1210,1420,1680,2040"/>
 		</manufacturer>
 		<manufacturer name="Fte maximal">
@@ -47,6 +49,7 @@ lofh: integer, alternative LOF/H value (optional, defaultvalue is 10600)
 			<product name="GT-S1-2-3SCR4" scrs="1210,1420,1680,2040"/>
 			<product name="dLNB dHello" format="jess" bootuptime="2700" scrs="0975,1025,1075,1125,1175,1225,1275,1325,1375,1425,1475,1525,1575,1625,1675,1725,1775,1825,1875,1925,1975,2025,2075,2125"/>
 			<product name="GT-dLNB1-T" format="jess" bootuptime="2700" scrs="0975,1025,1075,1125,1175,1225,1275,1325,1375,1425,1475,1525,1575,1625,1675,1725,1775,1825,1875,1925,1975,2025,2075,2125"/>
+			<product name="GT-dLNB1-T - Poland" format="jess" bootuptime="2500" scrs="1210,1420,1680,2040,978,1028,1072,1116,1160,1271,1315,1359,1484,1528,1572,1616,2084,2128,1816,1860,1904,1948,1992,1728"/>
 			<product name="GT-dLNB1-DY" format="jess" bootuptime="2700" scrs="0975,1025,1075,1125,1175,1225,1275,1325,1375,1425,1475,1525,1575,1625,1675,1725,1775,1825,1875,1925,1975,2025,2075,2125"/>
 			<product name="GT-S1dCSS24" format="jess" bootuptime="2500" scrs="0975,1025,1075,1125,1175,1225,1275,1325,1375,1425,1475,1525,1575,1625,1675,1725,1775,1825,1875,1925,1975,2025,2075,2125"/>
 			<product name="GT-S2dCSS24" format="jess" bootuptime="2500" scrs="0975,1025,1075,1125,1175,1225,1275,1325,1375,1425,1475,1525,1575,1625,1675,1725,1775,1825,1875,1925,1975,2025,2075,2125"/>
@@ -66,7 +69,7 @@ lofh: integer, alternative LOF/H value (optional, defaultvalue is 10600)
 			<product name="IDLU-32L412-UNBRR-OPN" positions="4" format="jess" bootuptime="800" scrs="1210,1420,1680,2040,984,1020,1056,1092,1128,1164,1256,1292,1328,1364,1458,1494,1530,1566,1602,1638,1716,1752,1788,1824,1860,1896,1932,1968,2004,2076,2112,2148"/> <!-- Item 5520 -->
 			<product name="IDLU-32UL40-UNBOO-OPP" positions="4" format="jess" bootuptime="800" scrs="1210,1420,1680,2040,984,1020,1056,1092,1128,1164,1256,1292,1328,1364,1458,1494,1530,1566,1602,1638,1716,1752,1788,1824,1860,1896,1932,1968,2004,2076,2112,2148"/>
 			<product name="IDLU-32UL42-UNBOO-OPP" positions="4" format="jess" bootuptime="800" scrs="1210,1420,1680,2040,984,1020,1056,1092,1128,1164,1256,1292,1328,1364,1458,1494,1530,1566,1602,1638,1716,1752,1788,1824,1860,1896,1932,1968,2004,2076,2112,2148"/> <!-- Item 5679 -->
-	    </manufacturer>
+		</manufacturer>
 		<manufacturer name="Kathrein">
 			<product name="UAS481" lofl="10200" lofh="10200" scrs="1400,1516,1632,1748"/>
 		</manufacturer>
@@ -159,6 +162,7 @@ lofh: integer, alternative LOF/H value (optional, defaultvalue is 10600)
 		<manufacturer name="Dura-Sat(Dur-Line)">
 			<product name="Dur-DCR5-1-8(L4/K)" format="jess" scrs="1280,1382,1484,1586,1688,1790,1892,1994"/>
 			<product name="DCR 5-2-4" scrs="1280,1382,1484,1586"/>
+			<product name="DCS 552-16" positions="2" format="jess" bootuptime="2500" scrs ="975,1025,1075,1125,1175,1225,1275,1325,1375,1425,1475,1525,1575,1625,1675,1725"/>
 			<product name="DPC-32 K" positions="2" format="jess" bootuptime="2500" scrs="1210,1420,1680,2040,984,1020,1056,1092,1128,1164,1256,1292,1328,1364,1458,1494,1530,1566,1602,1638,1716,1752,1788,1824,1860,1896,1932,1968,2004,2076,2112,2148"/>
 			<product name="UCP2" scrs="1400,1516"/>
 			<product name="UCP3" scrs="1280,1382,1484"/>
