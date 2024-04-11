@@ -166,7 +166,7 @@ class Pager(GUIAddon):
 
 	def getSourceSize(self):
 		if isinstance(self.source, List):  # Components.Sources.List
-			return self.source.master.master.instance.size()
+			return self.source.connectedGuiElement and self.source.connectedGuiElement.instance.size() or self.source.master.master.instance.size()
 		return self.source.instance.size()
 
 	def getListCount(self):
@@ -180,7 +180,7 @@ class Pager(GUIAddon):
 
 	def getListItemSize(self):
 		if isinstance(self.source, List):  # Components.Sources.List
-			orig_source = self.source.master.master
+			orig_source = self.source.connectedGuiElement or self.source.master.master
 		else:
 			orig_source = self.source
 		if hasattr(orig_source, 'content'):
