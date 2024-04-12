@@ -67,9 +67,7 @@ to generate HTML."""
 		if self.master:
 			if hasattr(self.master, "current"):
 				return self.master.current
-			else:
-				return self.__current
-		return None
+		return self.__current
 
 	current = property(getCurrent)
 
