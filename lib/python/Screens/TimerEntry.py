@@ -23,10 +23,10 @@ from datetime import datetime
 
 
 class TimerEntry(ConfigListScreen, Screen):
-	def __init__(self, session, timer):
+	def __init__(self, session, timer, newEntry=False):
 		Screen.__init__(self, session)
 		self.timer = timer
-
+		self.newEntry = newEntry
 		self.timer.service_ref_prev = self.timer.service_ref
 		self.timer.begin_prev = self.timer.begin
 		self.timer.end_prev = self.timer.end
@@ -104,7 +104,7 @@ class TimerEntry(ConfigListScreen, Screen):
 			repeated = None
 			weekday = int(strftime("%u", localtime(self.timer.begin))) - 1
 			day[weekday] = 1
-		self.timerentry_fallback = ConfigYesNo(default=self.timer.external_prev or config.usage.remote_fallback_external_timer.value and config.usage.remote_fallback.value and config.usage.remote_fallback_external_timer_default.value)
+		self.timerentry_fallback = ConfigYesNo(default=self.timer.external_prev or self.newEntry and config.usage.remote_fallback_external_timer.value and config.usage.remote_fallback.value and config.usage.remote_fallback_external_timer_default.value)
 		self.timerentry_justplay = ConfigSelection(choices=[
 			("zap", _("zap")), ("record", _("record")), ("zap+record", _("zap and record"))],
 			default={0: "record", 1: "zap", 2: "zap+record"}[justplay + 2 * always_zap])

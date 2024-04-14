@@ -429,7 +429,7 @@ class EPGSelection(Screen):
 			newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, dirname=preferredTimerPath(), *parseEvent(event))
 			newEntry.justplay = config.recording.timer_default_type.value == "zap"
 			newEntry.always_zap = config.recording.timer_default_type.value == "zap+record"
-			self.session.openWithCallback(self.finishedAdd, TimerEntry, newEntry)
+			self.session.openWithCallback(self.finishedAdd, TimerEntry, newEntry, newEntry=True)
 
 	def finishedEdit(self, answer):
 		if answer[0]:
