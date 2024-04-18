@@ -42,8 +42,7 @@ def PipPigMode(value):
 					import skin
 					x, y, w, h = skin.parameters.get("PipHidePosition", (16, 16, 16, 16))
 					pip = InfoBar.instance.session.pip
-					pip.move(x, y, doSave=False)
-					pip.resize(w, h, doSave=False)
+					pip.moveAndResizeToHidePosition(x, y, w, h)
 				PipPigModeEnabled = True
 		else:
 			PipPigModeTimer.start(100, True)
@@ -102,11 +101,10 @@ class PictureInPicture(Screen):
 		self.relocate()
 		self.setExternalPiP(config.av.pip_mode.value == "external")
 
-	def move(self, x, y, doSave=True):
-		if doSave:
-			config.av.pip.value[0] = x
-			config.av.pip.value[1] = y
-			config.av.pip.save()
+	def move(self, x, y):
+		config.av.pip.value[0] = x
+		config.av.pip.value[1] = y
+		config.av.pip.save()
 		w = config.av.pip.value[2]
 		h = config.av.pip.value[3]
 		if config.av.pip_mode.value == "cascade":
@@ -123,11 +121,10 @@ class PictureInPicture(Screen):
 			y = 0
 		self.instance.move(ePoint(x, y))
 
-	def resize(self, w, h, doSave=True):
-		if doSave:
-			config.av.pip.value[2] = w
-			config.av.pip.value[3] = h
-			config.av.pip.save()
+	def resize(self, w, h):
+		config.av.pip.value[2] = w
+		config.av.pip.value[3] = h
+		config.av.pip.save()
 		if config.av.pip_mode.value == "standard":
 			self.instance.resize(eSize(*(w, h)))
 			self["video"].instance.resize(eSize(*(w, h)))
@@ -152,6 +149,11 @@ class PictureInPicture(Screen):
 	def setSizePosMainWindow(self, x=0, y=0, w=0, h=0):
 		if BoxInfo.getItem("VideoDestinationConfigurable"):
 			self["video"].instance.setFullScreenPosition(eRect(x, y, w, h))
+
+	def moveAndResizeToHidePosition(self, x, y, w, h):
+		self.instance.move(ePoint(x, y))
+		self.instance.resize(eSize(*(w, h)))
+		self["video"].instance.resize(eSize(*(w, h)))
 
 	def setExternalPiP(self, onoff):
 		if BoxInfo.getItem("HasExternalPIP"):
