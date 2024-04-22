@@ -222,12 +222,12 @@ inline void Impl_Py_XINCREF(const char* file, int line, const ePyObject &obj)
 
 inline ePyObject Impl_PyTuple_New(const char* file, int line, int elements=0)
 {
-	return ePyObject(PyTuple_New(elements), file, line);
+	return ePyObject(PyTuple_New((Py_ssize_t)elements), file, line);
 }
 
 inline ePyObject Impl_PyList_New(const char* file, int line, int elements=0)
 {
-	return ePyObject(PyList_New(elements), file, line);
+	return ePyObject(PyList_New((Py_ssize_t)elements), file, line);
 }
 
 inline ePyObject Impl_PyDict_New(const char* file, int line)
@@ -275,7 +275,7 @@ inline ePyObject Impl_PyLong_FromUnsignedLongLong(const char* file, int line, un
 
 inline ePyObject Impl_PyList_GET_ITEM(const char *file, int line, ePyObject list, unsigned int pos)
 {
-	return ePyObject(PyList_GET_ITEM(list, pos), file, line);
+	return ePyObject(PyList_GET_ITEM(list, (Py_ssize_t)pos), file, line);
 }
 
 inline ePyObject Impl_PyTuple_GET_ITEM(const char *file, int line, ePyObject list, unsigned int pos)
@@ -307,12 +307,12 @@ inline void Impl_Py_XINCREF(const ePyObject &obj)
 
 inline ePyObject Impl_PyTuple_New(int elements=0)
 {
-	return PyTuple_New(elements);
+	return PyTuple_New((Py_ssize_t)elements);
 }
 
 inline ePyObject Impl_PyList_New(int elements=0)
 {
-	return PyList_New(elements);
+	return PyList_New((Py_ssize_t)elements);
 }
 
 inline ePyObject Impl_PyDict_New()
@@ -355,7 +355,7 @@ inline ePyObject Impl_PyList_GET_ITEM(ePyObject list, unsigned int pos)
 
 inline ePyObject Impl_PyTuple_GET_ITEM(ePyObject list, unsigned int pos)
 {
-	return PyTuple_GET_ITEM(list, pos);
+	return PyTuple_GET_ITEM(list, (Py_ssize_t)pos);
 }
 #endif
 
