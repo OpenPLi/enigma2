@@ -1391,9 +1391,10 @@ RESULT ePicLoad::setPara(PyObject *val)
 		return 0;
 	else {
 		ePyObject fast = PySequence_Fast(val, "");
+		ePyObject pas = PySequence_Fast_GET_ITEM(fast, 2);
 		int width = PyLong_AsLong(PySequence_Fast_GET_ITEM(fast, 0));
 		int height = PyLong_AsLong(PySequence_Fast_GET_ITEM(fast, 1));
-		double aspectRatio = PyLong_AsLong(PySequence_Fast_GET_ITEM(fast, 2));
+		double aspectRatio = PyFloat_Check(pas) ? PyFloat_AsDouble(pas) : PyLong_AsDouble(pas);
 		int as = PyLong_AsLong(PySequence_Fast_GET_ITEM(fast, 3));
 		bool useCache = PyLong_AsLong(PySequence_Fast_GET_ITEM(fast, 4));
 		int resizeType = PyLong_AsLong(PySequence_Fast_GET_ITEM(fast, 5));
