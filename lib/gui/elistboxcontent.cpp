@@ -172,7 +172,7 @@ int eListboxPythonStringContent::getMaxItemTextWidth()
 			}
 		}
 	}
-
+	
 	return m_max_text_width + (m_text_offset*2);
 }
 
@@ -290,7 +290,7 @@ void eListboxPythonStringContent::paint(gPainter &painter, eWindowStyle &style, 
 		if (item == Py_None)
 		{
 				/* seperator */
-			if (isverticallb)
+			if (isverticallb) 
 			{
 				int half_height = m_itemsize.height() / 2;
 				painter.fill(eRect(offset.x() + half_height, offset.y() + half_height - 2, m_itemsize.width() - m_itemsize.height(), 4));
@@ -1025,7 +1025,7 @@ int eListboxPythonMultiContent::getMaxItemTextWidth()
 		}
 
 	}
-
+	
 	return m_max_text_width + (m_text_offset*2);
 }
 
@@ -1047,7 +1047,7 @@ void eListboxPythonMultiContent::paint(gPainter &painter, eWindowStyle &style, c
 		local_style = m_listbox->getLocalStyle();
 		isverticallb = m_listbox->getOrientation() == 1;
 	}
-
+	
 	painter.clip(itemregion);
 
 	if(local_style) {
@@ -1225,10 +1225,10 @@ void eListboxPythonMultiContent::paint(gPainter &painter, eWindowStyle &style, c
 					continue;
 
 				const char *string = (PyUnicode_Check(pstring)) ? PyUnicode_AsUTF8(pstring) : "<not-a-string>";
-				int x = (PyFloat_Check(px) ? (int)PyFloat_AsDouble(px) : PyLong_AsLong(px)) + offset.x();
-				int y = (PyFloat_Check(py) ? (int)PyFloat_AsDouble(py) : PyLong_AsLong(py)) + offset.y();
-				int width = PyFloat_Check(pwidth) ? (int)PyFloat_AsDouble(pwidth) : PyLong_AsLong(pwidth);
-				int height = PyFloat_Check(pheight) ? (int)PyFloat_AsDouble(pheight) : PyLong_AsLong(pheight);
+				int x = PyLong_AsLong(px) + offset.x();
+				int y = PyLong_AsLong(py) + offset.y();
+				int width = PyLong_AsLong(pwidth);
+				int height = PyLong_AsLong(pheight);
 				int flags = PyLong_AsLong(pflags);
 				int fnt = PyLong_AsLong(pfnt);
 				int bwidth = pborderWidth ? PyLong_AsLong(pborderWidth) : 0;
@@ -1258,7 +1258,7 @@ void eListboxPythonMultiContent::paint(gPainter &painter, eWindowStyle &style, c
 						painter.setRadius(cornerRadius, cornerEdges);
 						painter.drawRectangle(itemRect);
 					}
-					else
+					else 
 					{
 						gRegion rc(rect);
 						bool mustClear = (selected && pbackColorSelected) || (!selected && pbackColor);
@@ -1365,11 +1365,11 @@ void eListboxPythonMultiContent::paint(gPainter &painter, eWindowStyle &style, c
 						pbackColorSelected=ePyObject();
 				}
 
-				int x = (PyFloat_Check(px) ? (int)PyFloat_AsDouble(px) : PyLong_AsLong(px)) + offset.x();
-				int y = (PyFloat_Check(py) ? (int)PyFloat_AsDouble(py) : PyLong_AsLong(py)) + offset.y();
-				int width = PyFloat_Check(pwidth) ? (int)PyFloat_AsDouble(pwidth) : PyLong_AsLong(pwidth);
-				int height = PyFloat_Check(pheight) ? (int)PyFloat_AsDouble(pheight) : PyLong_AsLong(pheight);
-				int filled = PyFloat_Check(pfilled_perc) ? (int)PyFloat_AsDouble(pfilled_perc) : PyLong_AsLong(pfilled_perc);
+				int x = PyLong_AsLong(px) + offset.x();
+				int y = PyLong_AsLong(py) + offset.y();
+				int width = PyLong_AsLong(pwidth);
+				int height = PyLong_AsLong(pheight);
+				int filled = PyLong_AsLong(pfilled_perc);
 
 				if ((filled < 0) && data) /* if the string is in a negative number, it refers to the 'data' list. */
 					filled = PyLong_AsLong(PyTuple_GetItem(data, -filled));
@@ -1455,10 +1455,10 @@ void eListboxPythonMultiContent::paint(gPainter &painter, eWindowStyle &style, c
 				if (ppixmap == Py_None)
 					continue;
 
-				int x = (PyFloat_Check(px) ? (int)PyFloat_AsDouble(px) : PyLong_AsLong(px)) + offset.x();
-				int y = (PyFloat_Check(py) ? (int)PyFloat_AsDouble(py) : PyLong_AsLong(py)) + offset.y();
-				int width = PyFloat_Check(pwidth) ? (int)PyFloat_AsDouble(pwidth) : PyLong_AsLong(pwidth);
-				int height = PyFloat_Check(pheight) ? (int)PyFloat_AsDouble(pheight) : PyLong_AsLong(pheight);
+				int x = PyLong_AsLong(px) + offset.x();
+				int y = PyLong_AsLong(py) + offset.y();
+				int width = PyLong_AsLong(pwidth);
+				int height = PyLong_AsLong(pheight);
 				int flags = 0;
 				int radius = 0;
 				int edges = 0;
@@ -1506,7 +1506,7 @@ void eListboxPythonMultiContent::paint(gPainter &painter, eWindowStyle &style, c
 		}
 	}
 
-
+	
 
 error_out:
 	if (buildfunc_ret)
