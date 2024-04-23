@@ -1153,7 +1153,7 @@ void eDVBSatelliteEquipmentControl::prepareTurnOffSatCR(iDVBFrontend &frontend)
 
 	sec_sequence.push_back( eSecCommand(eSecCommand::IF_VOLTAGE_GOTO, compare) );
 	sec_sequence.push_back( eSecCommand(eSecCommand::SET_VOLTAGE, iDVBFrontend::voltage13) );
-	sec_sequence.push_back( eSecCommand(eSecCommand::SLEEP, m_params[DELAY_AFTER_ENABLE_VOLTAGE_BEFORE_SWITCH_CMDS]) );
+	sec_sequence.push_back( eSecCommand(eSecCommand::SLEEP,  m_params[DELAY_AFTER_ENABLE_VOLTAGE_BEFORE_SWITCH_CMDS] > m_lnbs[m_lnbidx].boot_up_time ? m_params[DELAY_AFTER_ENABLE_VOLTAGE_BEFORE_SWITCH_CMDS] : m_lnbs[m_lnbidx].boot_up_time ) );
 
 	sec_sequence.push_back( eSecCommand(eSecCommand::SET_VOLTAGE, iDVBFrontend::voltage18_5) );
 	sec_sequence.push_back( eSecCommand(eSecCommand::SET_TONE, iDVBFrontend::toneOff) );
@@ -1171,7 +1171,7 @@ void eDVBSatelliteEquipmentControl::prepareTurnOffSatCR(iDVBFrontend &frontend)
 			//	data[3]		"data1": data[3][7..5]: user band, data[3][4..2]: bank, data[3][1..0]: T[9..8]
 			//	data[4]		"data2": data[4][7..0]: T[7..0]
 
-			unsigned int ub = userband & 0x01;
+			unsigned int ub = userband & 0x07;
 			unsigned int encoded_frequency_T = 0;
 			unsigned int mode = 0;
 			unsigned int position = 0;
