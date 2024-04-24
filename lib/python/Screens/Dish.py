@@ -57,6 +57,8 @@ class Dish(Screen):
 		self.__state = self.STATE_HIDDEN
 		self.onShow.append(self.__onShow)
 		self.onHide.append(self.__onHide)
+		from Screens.InfoBarGenerics import streamrelay
+		self.streamrelay = streamrelay
 		self.__event_tracker = ServiceEventTracker(screen=self,
 			eventmap={
 				iPlayableService.evStart: self.__serviceStarted,
@@ -70,8 +72,11 @@ class Dish(Screen):
 				if sat[0] not in self.available_sat:
 					self.available_sat.append(sat[0])
 
+	def getRotorMovingState(self):
+		return eDVBSatelliteEquipmentControl.getInstance().isRotorMoving()
+
 	def updateRotorMovingState(self):
-		moving = eDVBSatelliteEquipmentControl.getInstance().isRotorMoving()
+		moving = self.getRotorMovingState()
 		if moving:
 			if self.rotor_sat is None:
 				self.rotor_sat = self.isSatRotorMode()
@@ -92,6 +97,8 @@ class Dish(Screen):
 			if self.close_timeout < 0:
 				print("[Dish] timeout!")
 				self.__toHide()
+		elif self.streamrelay.checkService(self.session.nav.getCurrentlyPlayingServiceReference()) and not self.getRotorMovingState():
+			self.__toHide()
 
 	def __onShow(self):
 		self.__state = self.STATE_SHOWN
@@ -148,7 +155,7 @@ class Dish(Screen):
 			self.hide()
 
 	def __serviceTunedIn(self):
-		if self.close_timeout is not None:
+		if self.close_timeout is not None and not self.streamrelay.checkService(self.session.nav.getCurrentlyPlayingServiceReference()):
 			self.pmt_timeout = self.close_timeout
 			self.timeoutTimer.start(500, False)
 
@@ -279,7 +286,7 @@ class Dishpip(Dish, Screen):
 		self.frontend = None
 		self["Frontend"] = FrontendStatus(service_source=lambda: self.frontend, update_interval=1000)
 		self.rotorTimer = eTimer()
-		self.rotorTimer.timeout.get().append(self.updateRotorMovingState)
+		self.rotorTimer.callback.append(self.updateRotorMovingState)
 		self.turnTimer = eTimer()
 		self.turnTimer.callback.append(self.turnTimerLoop)
 		self.timeoutTimer = eTimer()
@@ -290,9 +297,6 @@ class Dishpip(Dish, Screen):
 		self.__state = self.STATE_HIDDEN
 		self.onShow.append(self.__onShow)
 		self.onHide.append(self.__onHide)
-
-	def getRotorMovingState(self):
-		return eDVBSatelliteEquipmentControl.getInstance().isRotorMoving()
 
 	def updateRotorMovingState(self):
 		moving = self.getRotorMovingState()
@@ -338,9 +342,9 @@ class Dishpip(Dish, Screen):
 				if cur_orbpos in self.available_sat:
 					self.cur_orbpos = cur_orbpos
 					self.cur_polar = data.get("polarization", 0)
-					self.moving_timeout = 3
+					self.moving_timeout = 4
 					if not self.rotorTimer.isActive():
-						self.rotorTimer.start(500, True)
+						self.rotorTimer.start(1000, True)
 
 	def __onShow(self):
 		self.__state = self.STATE_SHOWN
