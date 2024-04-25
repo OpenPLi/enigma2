@@ -1,6 +1,6 @@
 from Screens.Screen import Screen
 from Screens.Dish import Dishpip
-from enigma import ePoint, eSize, eRect, eServiceCenter, getBestPlayableServiceReference, eServiceReference, eTimer
+from enigma import ePoint, eSize, eRect, eServiceCenter, getBestPlayableServiceReference, eServiceReference, eTimer, eStreamServer
 from Components.SystemInfo import BoxInfo
 from Components.VideoWindow import VideoWindow
 from Components.Sources.StreamService import StreamServiceList
@@ -61,6 +61,7 @@ class PictureInPicture(Screen):
 		self["video"] = VideoWindow()
 		self.pipActive = session.instantiateDialog(PictureInPictureZapping)
 		self.dishpipActive = session.instantiateDialog(Dishpip)
+		self.pipservice = None
 		self.currentService = None
 		self.currentServiceReference = None
 
@@ -83,6 +84,7 @@ class PictureInPicture(Screen):
 	def __del__(self):
 		if hasattr(self, "pipservice"):
 			del self.pipservice
+		self.pipservice = None
 		self.setExternalPiP(False)
 		self.setSizePosMainWindow()
 		if hasattr(self, "dishpipActive") and self.dishpipActive is not None:
@@ -192,9 +194,16 @@ class PictureInPicture(Screen):
 			return False
 		from Screens.InfoBarGenerics import streamrelay
 		orig_ref = self.resolveAlternatePipService(service)
-		ref = streamrelay.streamrelayChecker(orig_ref)
+		ref = orig_ref and streamrelay.streamrelayChecker(orig_ref)
 		if ref:
-			if BoxInfo.getItem("CanNotDoSimultaneousTranscodeAndPIP") and StreamServiceList:
+			if orig_ref != ref and [stream for stream in eStreamServer.getInstance().getConnectedClients() if stream[0] == '127.0.0.1']:
+				self.pipservice = None
+				self.currentService = None
+				self.currentServiceReference = None
+				if not config.usage.hide_zap_errors.value:
+					AddPopup(text="PiP...\n" + _("'Stream relay' already enabled, limit - no PiP!"), type=MessageBox.TYPE_ERROR, timeout=5, id="ZapPipError")
+				return False
+			elif BoxInfo.getItem("CanNotDoSimultaneousTranscodeAndPIP") and StreamServiceList:
 				self.pipservice = None
 				self.currentService = None
 				self.currentServiceReference = None
