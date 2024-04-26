@@ -50,7 +50,7 @@ class ServiceStopScreen:
 					if hasattr(self.session, 'pip'):
 						del self.session.pip
 					self.session.pipshown = False
-			if eStreamServer.getInstance() and eStreamServer.getInstance().getConnectedClients():
+			if self.session.nav.getClientsStreaming():
 				eStreamServer.getInstance().stopStream()
 
 	def __onClose(self):
