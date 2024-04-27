@@ -496,8 +496,8 @@ void eFastScan::parseResult()
 			if (!westeastflag)
 				orbitalpos = 3600 - orbitalpos;
 
-			if (drop && transponderParameters.orbital_position != orbitalpos &&
-				!eDVBSatelliteEquipmentControl::getInstance()->isOrbitalPositionConfigured(orbitalpos))
+			if ((orbitalpos == 0) || (drop && transponderParameters.orbital_position != orbitalpos &&
+				!eDVBSatelliteEquipmentControl::getInstance()->isOrbitalPositionConfigured(orbitalpos)))
 			{
 				eDebug("[eFastScan] dropping this transponder, it's on another satellite %d not configured.", orbitalpos);
 				continue;
