@@ -441,7 +441,7 @@ class RecordTimerEntry(timer.TimerEntry):
 				self.backoff = 0
 				return True
 			self.log(7, "prepare failed")
-			if eStreamServer.getInstance().getConnectedClients():
+			if NavigationInstance.instance.getClientsStreaming():
 				eStreamServer.getInstance().stopStream()
 				return False
 			if self.first_try_prepare or (self.ts_dialog is not None and not self.checkingTimeshiftRunning()):
