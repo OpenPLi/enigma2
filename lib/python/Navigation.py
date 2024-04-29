@@ -280,4 +280,4 @@ class Navigation:
 		self.stopService()
 
 	def getClientsStreaming(self):
-		return eStreamServer.getInstance() and eStreamServer.getInstance().getConnectedClients()
+		return eStreamServer.getInstance() and [stream for stream in eStreamServer.getInstance().getConnectedClients() if stream[0] != '127.0.0.1']
