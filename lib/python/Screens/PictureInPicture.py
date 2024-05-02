@@ -192,7 +192,7 @@ class PictureInPicture(Screen):
 			return False
 		from Screens.InfoBarGenerics import streamrelay
 		orig_ref = self.resolveAlternatePipService(service)
-		ref = streamrelay.streamrelayChecker(orig_ref)
+		ref = orig_ref and streamrelay.streamrelayChecker(orig_ref)
 		if ref:
 			if BoxInfo.getItem("CanNotDoSimultaneousTranscodeAndPIP") and StreamServiceList:
 				self.pipservice = None
