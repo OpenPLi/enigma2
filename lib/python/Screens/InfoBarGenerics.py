@@ -458,6 +458,7 @@ class InfoBarShowHide(InfoBarScreenSaver):
 	def toggleInfoBarAddon(self):
 		if self.InfoBarAdds and (self.actualSecondInfoBarScreen and not self.actualSecondInfoBarScreen.shown or not self.actualSecondInfoBarScreen):
 			config.usage.show_infobar_adds.value = not config.usage.show_infobar_adds.value
+			config.usage.show_infobar_adds.save()
 			if config.usage.show_infobar_adds.value:
 				self.InfoBarAdds.show()
 			else:
