@@ -994,12 +994,17 @@ RESULT eServiceFactoryDVB::lookupService(ePtr<eDVBService> &service, const eServ
 		eDVBMetaParser parser;
 		int ret=parser.parseFile(ref.path);
 		service = new eDVBService;
+		std::string sref = ref.toString();
+		if (sref.find("%3a//") != std::string::npos && ret) {
+			service->setServiceRef(ref.toString());
+			eDVBDB::getInstance()->parseServiceData(service, "");
+		}
 		if (!ret)
 			eDVBDB::getInstance()->parseServiceData(service, parser.m_service_data);
 	}
 	else
 	{
-			// TODO: handle the listing itself
+		// TODO: handle the listing itself
 		// if (ref.... == -1) .. return "... bouquets ...";
 		// could be also done in another serviceFactory (with seperate ID) to seperate actual services and lists
 			// TODO: cache
@@ -3321,8 +3326,9 @@ RESULT eDVBServicePlay::enableSubtitles(iSubtitleUser *user, SubtitleTrack &trac
 
 		m_subtitle_widget = user;
 		m_subtitle_parser->start(pid, composition_page_id, ancillary_page_id);
-		if (m_dvb_service)
+		if (m_dvb_service){
 			m_dvb_service->setCacheEntry(eDVBService::cSUBTITLE, ((pid&0xFFFF)<<16)|((composition_page_id&0xFF)<<8)|(ancillary_page_id&0xFF));
+		}
 	}
 	else
 		goto error_out;
@@ -3348,8 +3354,9 @@ RESULT eDVBServicePlay::disableSubtitles()
 		m_teletext_parser->setPageAndMagazine(-1, -1, "und");
 		m_subtitle_pages.clear();
 	}
-	if (m_dvb_service)
+	if (m_dvb_service){
 		m_dvb_service->setCacheEntry(eDVBService::cSUBTITLE, 0);
+	}
 	return 0;
 }
 

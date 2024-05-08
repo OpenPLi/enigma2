@@ -303,8 +303,10 @@ public:
 		cDATAPID, cPMTPID, cDRAAPID, cAC4PID, cacheMax
 	};
 
+	std::string m_reference_str;
 	int getCacheEntry(cacheID);
 	void setCacheEntry(cacheID, int);
+	void setServiceRef(std::string sref) { m_reference_str = sref; }
 
 	bool cacheEmpty();
 
