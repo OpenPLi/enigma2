@@ -8,6 +8,34 @@
 #include <set>
 #include <vector>
 class ServiceDescriptionSection;
+
+class eIPTVDBItem
+{
+	public:
+		std::string s_ref;
+		int ampeg_pid;
+		int aac3_pid;
+		int aac4_pid;
+		int addp_pid;
+		int aaach_pid;
+		int aaac_pid;
+		int adra_pid;
+		int subtitle_pid;
+		int v_pid;
+		eIPTVDBItem(const std::string sref, const int ampegpid, const int aac3pid, const int aac4pid, const int addppid, const int aaachpid, 
+					const int aaacpid, const int adrapid, const int subtitlepid, const int vpid) {
+			s_ref = sref;
+			ampeg_pid = ampegpid;
+			aac3_pid = aac3pid;
+			aac4_pid = aac4pid;
+			addp_pid = addppid;
+			aaach_pid = aaachpid;
+			aaac_pid = aaacpid;
+			adra_pid = adrapid;
+			subtitle_pid = subtitlepid;
+			v_pid = vpid;
+		};
+};
 #endif
 
 class eDVBDB: public iDVBChannelList
@@ -29,7 +57,7 @@ class eDVBDB: public iDVBChannelList
 	std::map<eServiceReferenceDVB, ePtr<eDVBService> > m_services;
 
 	std::map<std::string, eBouquet> m_bouquets;
-
+	
 	bool m_numbering_mode, m_load_unlinked_userbouquets;
 #ifdef SWIG
 	eDVBDB();
@@ -38,6 +66,7 @@ class eDVBDB: public iDVBChannelList
 private:
 	void loadServiceListV5(FILE * f);
 public:
+	std::vector<eIPTVDBItem> iptv_services;
 // iDVBChannelList
 	RESULT removeFlags(unsigned int flagmask, int dvb_namespace=-1, int tsid=-1, int onid=-1, unsigned int orb_pos=0xFFFFFFFF);
 	RESULT removeServices(int dvb_namespace=-1, int tsid=-1, int onid=-1, unsigned int orb_pos=0xFFFFFFFF);
@@ -86,6 +115,7 @@ public:
 	static eDVBDB *getInstance() { return instance; }
 	void reloadServicelist();
 	void saveServicelist();
+	void saveIptvServicelist();
 	void saveServicelist(const char *file);
 	void reloadBouquets();
 	void parseServiceData(ePtr<eDVBService> s, std::string str);
