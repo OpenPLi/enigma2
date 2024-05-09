@@ -290,7 +290,7 @@ class AudioSelection(ConfigListScreen, Screen):
 		if isinstance(track, int):
 			service = self.session.nav.getCurrentService()
 			ref = self.session.nav.getCurrentlyPlayingServiceReference()
-			ref = ref and eServiceReference(ref)
+			#ref = ref and eServiceReference(ref.toString())
 			if service.audioTracks().getNumberOfTracks() > track:
 				self.audioTracks.selectTrack(track)
 				if isIPTV(ref):
@@ -397,7 +397,7 @@ class AudioSelection(ConfigListScreen, Screen):
 				self.changeAudio(cur[0])
 				self.__updatedInfo()
 			ref = self.session.nav.getCurrentlyPlayingServiceReference()
-			ref = ref and eServiceReference(ref)
+			#ref = ref and eServiceReference(ref.toString())
 			if self.settings.menupage.getValue() == PAGE_SUBTITLES and cur[0] is not None:
 				if config.subtitles.show.value and self.infobar.selected_subtitle and self.infobar.selected_subtitle[:4] == cur[0][:4]:
 					self.infobar.enableSubtitle(None)
