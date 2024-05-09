@@ -23,17 +23,6 @@ std::string toLower(std::string& data) {
 }
 
 // Next two functions are used for finding correct recording in case of dynamic iptv service url
-void join(const std::vector<std::string>& v, char c, std::string& s) {
-
-   s.clear();
-
-   for (std::vector<std::string>::const_iterator p = v.begin();
-        p != v.end(); ++p) {
-      s += *p;
-      if (p != v.end() - 1)
-        s += c;
-   }
-}
 
 bool compareServices(const eServiceReference &ref1, const eServiceReference &ref2, bool alternativeMatching) {
 	std::vector<std::string> ref_split = split(ref1.toString(), ":");
@@ -45,11 +34,11 @@ bool compareServices(const eServiceReference &ref1, const eServiceReference &ref
 
 	std::vector<std::string> ref_split_r(ref_split.begin(), ref_split.begin() + 10);
 	std::string ref_s;
-	join(ref_split_r, ':', ref_s);
+	join_str(ref_split_r, ':', ref_s);
 
 	std::vector<std::string> s_split_r(s_split.begin(), s_split.begin() + 10);
 	std::string s_s;
-	join(s_split_r, ':', s_s);
+	join_str(s_split_r, ':', s_s);
 
 	if (!alternativeMatching) {
 		if (ref1 == ref2) return true;
