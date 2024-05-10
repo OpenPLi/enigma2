@@ -162,11 +162,9 @@ class VideoSetup(ConfigListScreen, Screen):
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
-		self.createSetup()
 
 	def keyRight(self):
 		ConfigListScreen.keyRight(self)
-		self.createSetup()
 
 	def confirm(self, confirmed):
 		if not confirmed:
