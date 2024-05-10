@@ -120,6 +120,10 @@ class ConfigList(GUIComponent):
 
 		return is_changed
 
+	def getNotifierNeeded(self):
+		current = self.getCurrent()
+		return  current and current[1].getNotifierNeeded()
+
 	def pageUp(self):
 		if self.instance is not None:
 			self.instance.moveSelection(self.instance.pageUp)
@@ -172,10 +176,7 @@ class ConfigListScreen:
 		if "key_pvr" not in self:
 			self["key_pvr"] = StaticText(_("PVR"))
 
-		if on_change is not None:
-			self.__changed = on_change
-		else:
-			self.__changed = lambda: None
+		self.on_change = on_change
 
 		if self.handleInputHelpers not in self["config"].onSelectionChanged:
 			self["config"].onSelectionChanged.append(self.handleInputHelpers)
@@ -234,45 +235,49 @@ class ConfigListScreen:
 
 	def keyLeft(self):
 		self["config"].handleKey(KEY_LEFT)
-		self.__changed()
+		self.changed()
 
 	def keyRight(self):
 		self["config"].handleKey(KEY_RIGHT)
-		self.__changed()
+		self.changed()
 
 	def keyHome(self):
 		self["config"].handleKey(KEY_HOME)
-		self.__changed()
+		self.changed()
 
 	def keyEnd(self):
 		self["config"].handleKey(KEY_END)
-		self.__changed()
+		self.changed()
 
 	def keyDelete(self):
 		self["config"].handleKey(KEY_DELETE)
-		self.__changed()
+		self.changed()
 
 	def keyBackspace(self):
 		self["config"].handleKey(KEY_BACKSPACE)
-		self.__changed()
+		self.changed()
 
 	def keyToggleOW(self):
 		self["config"].handleKey(KEY_TOGGLEOW)
-		self.__changed()
+		self.changed()
 
 	def keyGotAscii(self):
 		self["config"].handleKey(KEY_ASCII)
-		self.__changed()
+		self.changed()
 
 	def keyNumberGlobal(self, number):
 		self["config"].handleKey(KEY_0 + number)
-		self.__changed()
+		self.changed()
 
 	def keyPageDown(self):
 		self["config"].pageDown()
 
 	def keyPageUp(self):
 		self["config"].pageUp()
+
+	def changed(self):
+		if self.on_change and self["config"].getNotifierNeeded():
+			self.on_change()
 
 	def keyFile(self):
 		selection = self["config"].getCurrent()
@@ -288,7 +293,7 @@ class ConfigListScreen:
 		if answer:
 			self["config"].getCurrent()[1].value = answer[1]
 			self["config"].invalidateCurrent()
-			self.__changed()
+			self.changed()
 
 	def saveAll(self):
 		for x in self["config"].list:

@@ -65,6 +65,11 @@ class ConfigElement:
 		self._value = value
 		self.changed()
 
+	def getNotifierNeeded(self):
+		if self.prev_value != self.value:
+			self.prev_value = self.value
+			return True
+
 	def getValue(self):
 		return self._value
 
@@ -329,7 +334,7 @@ class ConfigSelection(ConfigElement):
 			default = self.choices.default()
 
 		self._descr = None
-		self.default = self._value = self.last_value = default
+		self.default = self._value = self.last_value = self.prev_value = default
 		self.graphic = graphic
 
 	def setChoices(self, choices, default=None):
@@ -440,7 +445,7 @@ class ConfigBoolean(ConfigElement):
 	def __init__(self, default=False, descriptions={False: _("false"), True: _("true")}, graphic=True):
 		ConfigElement.__init__(self)
 		self.descriptions = descriptions
-		self.value = self.last_value = self.default = default
+		self.value = self.last_value = self.prev_value = self.default = default
 		self.graphic = graphic
 
 	def handleKey(self, key):
@@ -513,7 +518,7 @@ class ConfigDateTime(ConfigElement):
 		ConfigElement.__init__(self)
 		self.increment = increment
 		self.formatstring = formatstring
-		self.value = self.last_value = self.default = int(default)
+		self.value = self.last_value = self.prev_value = self.default = int(default)
 
 	def handleKey(self, key):
 		if key == KEY_LEFT:
@@ -554,7 +559,7 @@ class ConfigSequence(ConfigElement):
 		self.limits = limits
 		self.censor_char = censor_char
 
-		self.last_value = self.default = default
+		self.last_value = self.prev_value = self.default = default
 		self.value = copy.copy(default)
 		self.endNotifier = None
 
@@ -915,7 +920,7 @@ class ConfigText(ConfigElement, NumericalTextInput):
 		self.offset = 0
 		self.overwrite = fixed_size
 		self.help_window = None
-		self.value = self.last_value = self.default = default
+		self.value = self.last_value = self.prev_value = self.default = default
 
 	def validateMarker(self):
 		textlen = len(self.text)
@@ -1258,7 +1263,7 @@ class ConfigDirectory(ConfigText):
 class ConfigSlider(ConfigElement):
 	def __init__(self, default=0, increment=1, limits=(0, 100)):
 		ConfigElement.__init__(self)
-		self.value = self.last_value = self.default = default
+		self.value = self.last_value = self.prev_value = self.default = default
 		self.min = limits[0]
 		self.max = limits[1]
 		self.increment = increment
@@ -1322,7 +1327,7 @@ class ConfigSet(ConfigElement):
 			default = []
 		self.pos = -1
 		default.sort()
-		self.last_value = self.default = default
+		self.last_value = self.default = self.prev_value = default
 		self.value = default[:]
 
 	def toggleChoice(self, choice):
