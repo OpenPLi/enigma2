@@ -50,13 +50,13 @@ class MainMenu(GUIAddon):
 
 	def buildEntry(self, *args):
 		item_text = args[0]
-		menupng = args[5]
+		menupng = args[5] if len(args) >= 6 else None
 		xPos = 17
 		yPos = 5
 
 		res = [None]
-		
-		if self.iconSize > 0:
+
+		if self.iconSize > 0 and menupng:
 			res.append(MultiContentEntryPixmapAlphaBlend(
 						pos=(xPos, yPos),
 						size=(self.iconSize, self.iconSize),
