@@ -202,8 +202,7 @@ class Screen(dict):
 		self.desktop = desktop
 
 	def setAnimationMode(self, mode):
-		if self.instance:
-			self.instance.setAnimationMode(mode)
+		pass
 
 	def getRelatedScreen(self, name):
 		if name == "session":
