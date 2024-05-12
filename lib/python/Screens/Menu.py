@@ -18,7 +18,7 @@ from enigma import eTimer
 
 import xml.etree.ElementTree
 
-from Screens.Setup import Setup, getSetupTitle
+from Screens.Setup import Setup
 from Components.NimManager import nimmanager  # nimmanager is used in eval(conditional), do not remove this import
 
 
@@ -122,7 +122,7 @@ class Menu(Screen, ProtectedScreen):
 		conditional = node.get("conditional")
 		if conditional and not eval(conditional):
 			return
-		item_text = node.get("text", "")
+		item_text = _(x) if (x := node.get("text")) else "* fix me *"
 		entryID = node.get("entryID", "undefined")
 		weight = node.get("weight", 50)
 		description = node.get("description", "").encode("UTF-8") or None
@@ -147,17 +147,13 @@ class Menu(Screen, ProtectedScreen):
 				args = x.text or ""
 				screen += ", " + args
 
-				destList.append((_(item_text or "??"), boundFunction(self.runScreen, (module, screen)), entryID, weight, description, menupng))
+				destList.append((item_text, boundFunction(self.runScreen, (module, screen)), entryID, weight, description, menupng))
 				return
 			elif x.tag == 'code':
-				destList.append((_(item_text or "??"), boundFunction(self.execText, x.text), entryID, weight, description, menupng))
+				destList.append((item_text, boundFunction(self.execText, x.text), entryID, weight, description, menupng))
 				return
 			elif x.tag == 'setup':
 				id = x.get("id")
-				if item_text == "":
-					item_text = _(getSetupTitle(id))
-				else:
-					item_text = _(item_text)
 				destList.append((item_text, boundFunction(self.openSetup, id), entryID, weight, description, menupng))
 				return
 		destList.append((item_text, self.nothing, entryID, weight, description, menupng))

@@ -37,39 +37,39 @@
 				<id val="system"/>
 				<menu level="0" text="Audio / Video" entryID="video_selection">
 					<id val="video"/>
-					<item level="0" entryID="av_setup"><setup id="avsetup"/></item>
-					<item level="2" entryID="subtitle_setup"><setup id="subtitlesetup"/></item>
-					<item level="0" entryID="autolanguage_setup"><setup id="autolanguagesetup"/></item>
+					<item level="0" text="Video settings" entryID="av_setup"><setup id="avsetup"/></item>
+					<item level="2" text="Subtitles" entryID="subtitle_setup"><setup id="subtitlesetup"/></item>
+					<item level="0" text="Automatic Language" entryID="autolanguage_setup"><setup id="autolanguagesetup"/></item>
 				</menu>
-				<item level="0" entryID="usage_setup"><setup id="usage"/></item>
+				<item level="0" text="Customize" entryID="usage_setup"><setup id="usage"/></item>
 				<menu level="0" text="GUI Settings" entryID="gui_settings">
 					<id val="gui"/>
 					<item level="0" text="Language" entryID="language_setup"><screen module="LanguageSelection"/></item>
-					<item level="0" entryID="timezone_setup"><setup id="timezone"/></item>
-					<item level="0" entryID="user_interface"><setup id="userinterface"/></item>
+					<item level="0" text="Timezone" entryID="timezone_setup"><setup id="timezone"/></item>
+					<item level="0" text="User interface" entryID="user_interface"><setup id="userinterface"/></item>
 					<item level="0" text="GUI Skin" entryID="primary_skin_selector"><screen module="SkinSelector" screen="SkinSelector"/></item>
 					<item level="0" requires="FrontpanelDisplay" text="Display Skin" entryID="display_skin_selector"><screen module="SkinSelector" screen="LcdSkinSelector"/></item>
 				</menu>
 				<menu level="0" text="EPG" entryID="epg_menu">
 					<id val="epg"/>
-					<item level="0" entryID="epg_setup"><setup id="epgsettings"/></item>
+					<item level="0" text="EPG settings" entryID="epg_setup"><setup id="epgsettings"/></item>
 				</menu>
-				<item level="1" entryID="rfmod_setup" requires="RfModulator"><setup id="RFmod"/></item>
+				<item level="1" text="RF output" entryID="rfmod_setup" requires="RfModulator"><setup id="RFmod"/></item>
 				<menu level="0" text="Expert settings" entryID="expert_selection">
 				<id val="expert"/>
-				<item level="0" entryID="accesslevel_setup"><setup id="accesslevel"/></item>
-				<item level="0" entryID="recording_setup"><setup id="recording"/></item>
+				<item level="0" text="User Mode" entryID="accesslevel_setup"><setup id="accesslevel"/></item>
+				<item level="0" text="Record" entryID="recording_setup"><setup id="recording"/></item>
 
 					<menu level="0" text="Harddisk" entryID="hardisk_selection" requires="Harddisk">
 					<id val="harddisk"/>
-					<item level="0" entryID="harddisk_setup"><setup id="harddisk"/></item>
+					<item level="0" text="Hard disk setup" entryID="harddisk_setup"><setup id="harddisk"/></item>
 					<item level="0" text="Initialization" entryID="harddisk_init"><screen module="HarddiskSetup" screen="HarddiskSelection"/></item>
 					<item level="0" text="Filesystem check" entryID="harddisk_check"><screen module="HarddiskSetup" screen="HarddiskFsckSelection"/></item>
 					</menu>
 				<item level="0" text="Network" entryID="network_setup"><screen module="NetworkSetup" screen="NetworkAdapterSelection"/></item>
 				<item level="1" text="Input devices" entryID="input_device_setup"><screen module="InputDeviceSetup" screen="InputDeviceSelection"/></item>
-				<item entryID="lcd_setup" requires="Display"><setup level="1" id="lcd"/></item>
-				<item entryID="keyboard_setup" text="Keyboard"><setup id="keyboard"/></item>
+				<item text="Display setup" entryID="lcd_setup" requires="Display"><setup level="1" id="lcd"/></item>
+				<item text="Keyboard" entryID="keyboard_setup"><setup id="keyboard"/></item>
 				<item level="2" text="Recording paths" entryID="RecordPaths"><screen module="RecordPaths" screen="RecordPathsSettings"/></item>
 				<item level="1" text="Hotkey" entryID="hotkey_setup"><screen module="Hotkey" screen="HotkeySetup"/></item>
 				</menu>
