@@ -78,6 +78,8 @@ class Menu(Screen, ProtectedScreen):
 		self.session.openWithCallback(self.menuClosed, Setup, dialog)
 
 	def addMenu(self, destList, node):
+		if not (key := node.get("key")):
+			return
 		requires = node.get("requires")
 		if requires:
 			if requires[0] == '!':
@@ -89,17 +91,16 @@ class Menu(Screen, ProtectedScreen):
 		if conditional and not eval(conditional):
 			return
 		menu_text = _(x) if (x := node.get("text")) else "* fix me *"
-		entryID = node.get("entryID", "undefined")
 		weight = node.get("weight", 50)
 		description = _(x) if (x := node.get("description", "")) else None
-		menupng = MenuEntryPixmap(entryID, self.png_cache)
+		menupng = MenuEntryPixmap(key, self.png_cache)
 		x = node.get("flushConfigOnClose")
 		if x:
 			a = boundFunction(self.session.openWithCallback, self.menuClosedWithConfigFlush, Menu, node)
 		else:
 			a = boundFunction(self.session.openWithCallback, self.menuClosed, Menu, node)
 		#TODO add check if !empty(node.childNodes)
-		destList.append((menu_text, a, entryID, weight, description, menupng))
+		destList.append((menu_text, a, key, weight, description, menupng))
 
 	def menuClosedWithConfigFlush(self, *res):
 		configfile.save()
@@ -114,6 +115,8 @@ class Menu(Screen, ProtectedScreen):
 			self.createMenuList()
 
 	def addItem(self, destList, node):
+		if not (key := node.get("key")):
+			return
 		requires = node.get("requires")
 		if requires:
 			if requires[0] == '!':
@@ -125,10 +128,9 @@ class Menu(Screen, ProtectedScreen):
 		if conditional and not eval(conditional):
 			return
 		item_text = _(x) if (x := node.get("text")) else "* fix me *"
-		entryID = node.get("entryID", "undefined")
 		weight = node.get("weight", 50)
 		description = _(x) if (x := node.get("description", "")) else None
-		menupng = MenuEntryPixmap(entryID, self.png_cache)
+		menupng = MenuEntryPixmap(key, self.png_cache)
 		for x in node:
 			if x.tag == 'screen':
 				module = x.get("module")
@@ -137,7 +139,6 @@ class Menu(Screen, ProtectedScreen):
 				if screen is None:
 					screen = module
 
-				# print module, screen
 				if module:
 					module = "Screens." + module
 				else:
@@ -148,16 +149,16 @@ class Menu(Screen, ProtectedScreen):
 				args = x.text or ""
 				screen += ", " + args
 
-				destList.append((item_text, boundFunction(self.runScreen, (module, screen)), entryID, weight, description, menupng))
+				destList.append((item_text, boundFunction(self.runScreen, (module, screen)), key, weight, description, menupng))
 				return
 			elif x.tag == 'code':
-				destList.append((item_text, boundFunction(self.execText, x.text), entryID, weight, description, menupng))
+				destList.append((item_text, boundFunction(self.execText, x.text), key, weight, description, menupng))
 				return
 			elif x.tag == 'setup':
 				id = x.get("id")
-				destList.append((item_text, boundFunction(self.openSetup, id), entryID, weight, description, menupng))
+				destList.append((item_text, boundFunction(self.openSetup, id), key, weight, description, menupng))
 				return
-		destList.append((item_text, self.nothing, entryID, weight, description, menupng))
+		destList.append((item_text, self.nothing, key, weight, description, menupng))
 
 	def sortByName(self, listentry):
 		return listentry[0].lower()
@@ -241,23 +242,16 @@ class Menu(Screen, ProtectedScreen):
 	def createMenuList(self, showNumericHelp=False):
 		self["key_blue"].text = _("Edit menu") if config.usage.menu_sort_mode.value == "user" else ""
 		self.list = []
-		self.menuID = None
+		self.menuID = self.parentmenu.get("key")
 		for x in self.parentmenu: #walk through the actual nodelist
 			if not x.tag:
 				continue
 			if x.tag == 'item':
-				item_level = int(x.get("level", 0))
-				if item_level <= config.usage.setup_level.index:
+				if int(x.get("level", 0)) <= config.usage.setup_level.index:
 					self.addItem(self.list, x)
-					count += 1
 			elif x.tag == 'menu':
-				item_level = int(x.get("level", 0))
-				if item_level <= config.usage.setup_level.index:
+				if int(x.get("level", 0)) <= config.usage.setup_level.index:
 					self.addMenu(self.list, x)
-					count += 1
-			elif x.tag == "id":
-				self.menuID = x.get("val")
-				count = 0
 
 		if self.menuID:
 			# plugins
