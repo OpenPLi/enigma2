@@ -85,6 +85,9 @@ class Menu(Screen, ProtectedScreen):
 					return
 			elif not BoxInfo.getItem(requires, False):
 				return
+		conditional = node.get("conditional")
+		if conditional and not eval(conditional):
+			return
 		menu_text = _(x) if (x := node.get("text")) else "* fix me *"
 		entryID = node.get("entryID", "undefined")
 		weight = node.get("weight", 50)
