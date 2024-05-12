@@ -85,7 +85,7 @@ class Menu(Screen, ProtectedScreen):
 					return
 			elif not BoxInfo.getItem(requires, False):
 				return
-		MenuTitle = _(node.get("text", "??"))
+		menu_text = _(x) if (x := node.get("text")) else "* fix me *"
 		entryID = node.get("entryID", "undefined")
 		weight = node.get("weight", 50)
 		description = node.get("description", "").encode("UTF-8") or None
@@ -97,7 +97,7 @@ class Menu(Screen, ProtectedScreen):
 		else:
 			a = boundFunction(self.session.openWithCallback, self.menuClosed, Menu, node)
 		#TODO add check if !empty(node.childNodes)
-		destList.append((MenuTitle, a, entryID, weight, description, menupng))
+		destList.append((menu_text, a, entryID, weight, description, menupng))
 
 	def menuClosedWithConfigFlush(self, *res):
 		configfile.save()
