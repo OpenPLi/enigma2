@@ -164,11 +164,3 @@ class Setup(ConfigListScreen, Screen):
 
 	def run(self):
 		self.keySave()
-
-
-def getSetupTitle(id):
-	xmldata = setupdom.getroot()
-	for x in xmldata.findall("setup"):
-		if x.get("key") == id:
-			return x.get("title", "")
-	raise SetupError("unknown setup id '%s'!" % repr(id))
