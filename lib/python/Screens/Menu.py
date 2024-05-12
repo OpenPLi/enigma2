@@ -91,8 +91,7 @@ class Menu(Screen, ProtectedScreen):
 		menu_text = _(x) if (x := node.get("text")) else "* fix me *"
 		entryID = node.get("entryID", "undefined")
 		weight = node.get("weight", 50)
-		description = node.get("description", "").encode("UTF-8") or None
-		description = description and _(description)
+		description = _(x) if (x := node.get("description", "")) else None
 		menupng = MenuEntryPixmap(entryID, self.png_cache)
 		x = node.get("flushConfigOnClose")
 		if x:
@@ -128,8 +127,7 @@ class Menu(Screen, ProtectedScreen):
 		item_text = _(x) if (x := node.get("text")) else "* fix me *"
 		entryID = node.get("entryID", "undefined")
 		weight = node.get("weight", 50)
-		description = node.get("description", "").encode("UTF-8") or None
-		description = description and _(description)
+		description = _(x) if (x := node.get("description", "")) else None
 		menupng = MenuEntryPixmap(entryID, self.png_cache)
 		for x in node:
 			if x.tag == 'screen':
