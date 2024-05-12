@@ -559,17 +559,7 @@ class PermanentPinEntry(ConfigListScreen, Screen):
 		self.pin2.addEndNotifier(boundFunction(self.valueChanged, 2))
 		self.list.append((_("Enter PIN"), NoSave(self.pin1)))
 		self.list.append((_("Reenter PIN"), NoSave(self.pin2)))
-		ConfigListScreen.__init__(self, self.list)
-
-		self["actions"] = NumberActionMap(["DirectionActions", "ColorActions", "OkCancelActions"],
-		{
-			"cancel": self.cancel,
-			"red": self.cancel,
-			"save": self.keyOK,
-		}, -1)
-
-		self["key_red"] = StaticText(_("Cancel"))
-		self["key_green"] = StaticText(_("OK"))
+		ConfigListScreen.__init__(self, self.list, fullUI=True)
 
 	def valueChanged(self, pin, value):
 		if pin == 1:
@@ -577,7 +567,7 @@ class PermanentPinEntry(ConfigListScreen, Screen):
 		elif pin == 2:
 			self.keyOK()
 
-	def keyOK(self):
+	def keySave(self):
 		if self.pin1.value == self.pin2.value:
 			self.pin.value = self.pin1.value
 			self.pin.save()
@@ -585,5 +575,5 @@ class PermanentPinEntry(ConfigListScreen, Screen):
 		else:
 			self.session.open(MessageBox, _("The PIN codes you entered are different."), MessageBox.TYPE_ERROR)
 
-	def cancel(self):
+	def keyCancel(self):
 		self.close(None)
