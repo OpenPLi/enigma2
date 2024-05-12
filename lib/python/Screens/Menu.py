@@ -77,7 +77,7 @@ class Menu(Screen, ProtectedScreen):
 	def openSetup(self, dialog):
 		self.session.openWithCallback(self.menuClosed, Setup, dialog)
 
-	def addMenu(self, destList, node, parent=None):
+	def addMenu(self, destList, node):
 		requires = node.get("requires")
 		if requires:
 			if requires[0] == '!':
@@ -113,7 +113,7 @@ class Menu(Screen, ProtectedScreen):
 		else:
 			self.createMenuList()
 
-	def addItem(self, destList, node, parent=None):
+	def addItem(self, destList, node):
 		requires = node.get("requires")
 		if requires:
 			if requires[0] == '!':
@@ -242,20 +242,18 @@ class Menu(Screen, ProtectedScreen):
 		self["key_blue"].text = _("Edit menu") if config.usage.menu_sort_mode.value == "user" else ""
 		self.list = []
 		self.menuID = None
-		parentEntryID = None
 		for x in self.parentmenu: #walk through the actual nodelist
 			if not x.tag:
 				continue
-			parentEntryID = self.parentmenu.get("entryID", None)
 			if x.tag == 'item':
 				item_level = int(x.get("level", 0))
 				if item_level <= config.usage.setup_level.index:
-					self.addItem(self.list, x, parentEntryID)
+					self.addItem(self.list, x)
 					count += 1
 			elif x.tag == 'menu':
 				item_level = int(x.get("level", 0))
 				if item_level <= config.usage.setup_level.index:
-					self.addMenu(self.list, x, parentEntryID)
+					self.addMenu(self.list, x)
 					count += 1
 			elif x.tag == "id":
 				self.menuID = x.get("val")
