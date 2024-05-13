@@ -509,16 +509,10 @@ class DiseqcTesterTestTypeSelection(ConfigListScreen, Screen):
 		self.setTitle(_("DiSEqC-tester settings"))
 		self.feid = feid
 
-		self["actions"] = ActionMap(["SetupActions", "MenuActions"],
+		self["actions"] = ActionMap(["SetupActions"],
 			{
-				"cancel": self.keyCancel,
-				"save": self.keyOK,
-				"ok": self.keyOK,
-				"menu": self.closeRecursive,
+				"ok": self.keySave,
 			}, -2)
-
-		self["key_red"] = StaticText(_("Cancel"))
-		self["key_green"] = StaticText(_("OK"))
 
 		self.list = []
 
@@ -538,9 +532,9 @@ class DiseqcTesterTestTypeSelection(ConfigListScreen, Screen):
 		self.logEntry = (_("Log results to /tmp"), self.log)
 		self.list.append(self.logEntry)
 
-		ConfigListScreen.__init__(self, self.list, session)
+		ConfigListScreen.__init__(self, self.list, session, fullUI=True)
 
-	def keyOK(self):
+	def keySave(self):
 		print(self.testtype.getValue())
 		testtype = DiseqcTester.TEST_TYPE_QUICK
 		if self.testtype.getValue() == "quick":
@@ -550,9 +544,6 @@ class DiseqcTesterTestTypeSelection(ConfigListScreen, Screen):
 		elif self.testtype.getValue() == "complete":
 			testtype = DiseqcTester.TEST_TYPE_COMPLETE
 		self.session.open(DiseqcTester, feid=self.feid, test_type=testtype, loopsfailed=int(self.loopsfailed.value), loopssuccessful=int(self.loopssuccessful.value), log=self.log.value)
-
-	def keyCancel(self):
-		self.close()
 
 
 class DiseqcTesterNimSelection(NimSelection):
