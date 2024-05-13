@@ -196,7 +196,6 @@ class ConfigElement:
 	def removeNotifier(self, notifier):
 		notifier in self.notifiers and self.notifiers.remove(notifier)
 		notifier in self.notifiers_final and self.notifiers_final.remove(notifier)
-		self.__removeExtraArgs(notifier)
 		try:
 			del self.__notifiers[str(notifier)]
 		except BaseException:
