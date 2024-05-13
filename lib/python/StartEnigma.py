@@ -389,11 +389,11 @@ class PowerKey:
 				from Screens.Menu import MainMenu, mdom
 				root = mdom.getroot()
 				for x in root.findall("menu"):
-					y = x.find("id")
-					if y is not None:
-						id = y.get("val")
-						if id and id == selected[1]:
-							self.session.open(MainMenu, x)
+					if x.get("key") == "shutdown":
+						self.session.infobar = self
+						menu_screen = self.session.openWithCallback(self.MenuClosed, MainMenu, x)
+						menu_screen.setTitle(_("Standby / restart"))
+						break
 
 	def standby(self):
 		if not Screens.Standby.inStandby and self.session.current_dialog and self.session.current_dialog.ALLOW_SUSPEND and self.session.in_exec:

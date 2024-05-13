@@ -1,6 +1,5 @@
 import six
 
-# DO NOT CHANGE THE ORDER OF THESE IMPORTS OR Harddisk will crash!!
 from enigma import getPrevAsciiCode
 from Tools.NumericalTextInput import NumericalTextInput
 from Tools.Directories import resolveFilename, SCOPE_CONFIG, fileExists
@@ -37,8 +36,6 @@ ACTIONKEY_NEXT = 25
 ACTIONKEY_ERASE = 26
 
 # Deprecated / Legacy action key names...
-#
-# (These should be removed when all Enigma2 uses the new and less confusing names.)
 #
 KEY_LEFT = ACTIONKEY_LEFT
 KEY_RIGHT = ACTIONKEY_RIGHT
@@ -177,7 +174,7 @@ class ConfigElement:
 				else:
 					x(self)
 
-	def addNotifier(self, notifier, initial_call=True, immediate_feedback=True, extra_args=None):
+	def addNotifier(self, notifier, initial_call=True, immediate_feedback=True):
 		# "initial_call=True" triggers the notifier as soon as "addNotifier" is encountered in the code.
 		#
 		# "initial_call=False" skips the above activation of the notifier.
@@ -252,12 +249,6 @@ class ConfigElement:
 		for i in range(len(self.extra_args)):
 			if self.extra_args[i][0] == notifier:
 				del self.extra_args[i]
-
-	def __getExtraArgs(self, notifier):
-		for extra_arg in self.extra_args:
-			if extra_arg[0] == notifier:
-				return extra_arg[1]
-
 
 def getKeyNumber(key):
 	assert key in ACTIONKEY_NUMBERS
@@ -1062,6 +1053,13 @@ clock_limits = [(0, 23), (0, 59)]
 
 class ConfigClock(ConfigSequence):
 	def __init__(self, default):
+		# dafault can either be a timestamp
+		# or an (hours, minutes) tuple.
+		if isinstance(default, tuple):
+			itemList = list(localtime())
+			itemList[3] = default[0]  # hours
+			itemList[4] = default[1]  # minutes
+			default = int(mktime(tuple(itemList)))
 		t = localtime(default)
 		ConfigSequence.__init__(self, seperator=":", limits=clock_limits, default=[t.tm_hour, t.tm_min])
 
@@ -1094,6 +1092,88 @@ class ConfigClock(ConfigSequence):
 			self._value[1] -= 1
 		# Trigger change
 		self.changed()
+
+	def handleKey(self, key, callback=None):
+		prev = str(self.value)
+		if key == ACTIONKEY_DELETE and config.usage.time.wide.value:
+			if self._value[0] < 12:
+				self._value[0] += 12
+				self.validate()
+
+		elif key == ACTIONKEY_BACKSPACE and config.usage.time.wide.value:
+			if self._value[0] >= 12:
+				self._value[0] -= 12
+				self.validate()
+
+		elif key in ACTIONKEY_NUMBERS or key == ACTIONKEY_ASCII:
+			if key == ACTIONKEY_ASCII:
+				code = getPrevAsciiCode()
+				if code < 48 or code > 57:
+					return
+				digit = code - 48
+			else:
+				digit = getKeyNumber(key)
+
+			hour = self._value[0]
+			pmadjust = 0
+			if config.usage.time.wide.value:
+				if hour > 11:  # All the PM times
+					hour -= 12
+					pmadjust = 12
+				if hour == 0:  # 12AM & 12PM map to 12
+					hour = 12
+				if self.marked_pos == 0 and digit >= 2:  # Only 0, 1 allowed (12 hour clock)
+					return
+				if self.marked_pos == 1 and hour > 9 and digit >= 3:  # Only 10, 11, 12 allowed
+					return
+				if self.marked_pos == 1 and hour < 10 and digit == 0:  # Only 01, 02, ..., 09 allowed
+					return
+			else:
+				if self.marked_pos == 0 and digit >= 3:  # Only 0, 1, 2 allowed (24 hour clock)
+					return
+				if self.marked_pos == 1 and hour > 19 and digit >= 4:  # Only 20, 21, 22, 23 allowed
+					return
+			if self.marked_pos == 2 and digit >= 6:  # Only 0, 1, ..., 5 allowed (tens digit of minutes)
+				return
+
+			value = bytearray(b"%02d%02d" % (hour, self._value[1]))  # Must be ASCII!
+			value[self.marked_pos] = digit + ord(b'0')
+			hour = int(value[:2])
+			minute = int(value[2:])
+
+			if config.usage.time.wide.value:
+				if hour == 12:  # 12AM & 12PM map to back to 00
+					hour = 0
+				elif hour > 12:
+					hour = 10
+				hour += pmadjust
+			elif hour > 23:
+				hour = 20
+
+			self._value[0] = hour
+			self._value[1] = minute
+			self.marked_pos += 1
+			self.validate()
+		else:
+			ConfigSequence.handleKey(self, key)
+		if prev != str(self.value):
+			self.changed()
+			if callable(callback):
+				callback()
+
+	def toDisplayString(self, value):
+		newtime = list(localtime())
+		newtime[3] = value[0]
+		newtime[4] = value[1]
+		retval = strftime(config.usage.time.short.value.replace("%-I", "%_I").replace("%-H", "%_H"), tuple(newtime))
+		return retval
+
+	def genText(self):
+		mPos = self.marked_pos
+		if mPos >= 2:
+			mPos += 1  # Skip over the separator
+		value = self.toDisplayString(self._value)
+		return value, mPos
 
 
 date_limits = [(1, 31), (1, 12), (1970, 2050)]
