@@ -56,6 +56,7 @@ class Setup(ConfigListScreen, Screen, HelpableScreen):
 	def changedEntry(self):
 		if isinstance(self["config"].getCurrent()[1], (ConfigBoolean, ConfigSelection)):
 			self.createSetup()
+			self.saveAll()
 		ConfigListScreen.changedEntry(self)  # force summary update immediately, not just on select/deselect
 
 	def createSetup(self, appendItems=None, prependItems=None):
