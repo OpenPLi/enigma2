@@ -273,9 +273,6 @@ class FastScanScreen(ConfigListScreen, Screen):
 				scanPid=pid, keepNumbers=self.scan_keepnumbering.value, keepSettings=self.scan_keepsettings.value, createRadioBouquet=self.scan_create_radio_bouquet.value,
 				providerName=self.scan_provider.getText())
 
-	def keyCancel(self):
-		self.close()
-
 
 class FastScanAutoScreen(FastScanScreen):
 
