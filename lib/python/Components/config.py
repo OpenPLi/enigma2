@@ -74,7 +74,6 @@ KEY_9 = ACTIONKEY_9
 #
 class ConfigElement:
 	def __init__(self):
-		self.extra_args = []
 		self.saved_value = None
 		self.save_forced = False
 		self.last_value = None
@@ -159,27 +158,14 @@ class ConfigElement:
 	def changed(self):
 		if self.__notifiers:
 			for x in self.notifiers:
-				extra_args = self.__getExtraArgs(x)
-				if extra_args is not None:
-					x(self, extra_args)
-				else:
-					x(self)
+				x(self)
 
 	def changedFinal(self):
 		if self.__notifiers_final:
 			for x in self.notifiers_final:
-				extra_args = self.__getExtraArgs(x)
-				if extra_args is not None:
-					x(self, extra_args)
-				else:
-					x(self)
+				x(self)
 
-	def __getExtraArgs(self, notifier):
-		for extra_arg in self.extra_args:
-			if extra_arg[0] == notifier:
-				return extra_arg[1]
-
-	def addNotifier(self, notifier, initial_call=True, immediate_feedback=True, extra_args=None):
+	def addNotifier(self, notifier, initial_call=True, immediate_feedback=True):
 		# "initial_call=True" triggers the notifier as soon as "addNotifier" is encountered in the code.
 		#
 		# "initial_call=False" skips the above activation of the notifier.
@@ -192,8 +178,6 @@ class ConfigElement:
 		# Use of the "self.callNotifiersOnSaveAndCancel" flag serves no purpose in the current code.
 		#
 		assert callable(notifier), "notifiers must be callable"
-		if extra_args is not None:
-			self.__addExtraArgs(notifier, extra_args)
 		if immediate_feedback:
 			self.notifiers.append(notifier)
 		else:
@@ -207,10 +191,7 @@ class ConfigElement:
 		#    (though that's not so easy to detect.
 		#     the entry could just be new.)
 		if initial_call:
-			if extra_args:
-				notifier(self, extra_args)
-			else:
-				notifier(self)
+			notifier(self)
 
 	def removeNotifier(self, notifier):
 		notifier in self.notifiers and self.notifiers.remove(notifier)
@@ -247,13 +228,6 @@ class ConfigElement:
 	def showHelp(self, session):
 		pass
 
-	def __addExtraArgs(self, notifier, extra_args):
-		self.extra_args.append((notifier, extra_args))
-
-	def __removeExtraArgs(self, notifier):
-		for i in range(len(self.extra_args)):
-			if self.extra_args[i][0] == notifier:
-				del self.extra_args[i]
 
 def getKeyNumber(key):
 	assert key in ACTIONKEY_NUMBERS
@@ -2424,7 +2398,7 @@ class ConfigAction(ConfigElement):
 		self.action = action
 		self.actionargs = args
 
-	def handleKey(self, key, callback=None):
+	def handleKey(self, key):
 		if (key == KEY_OK):
 			self.action(*self.actionargs)
 
