@@ -1073,17 +1073,7 @@ class ConfigClock(ConfigSequence):
 
 	def handleKey(self, key, callback=None):
 		prev = str(self.value)
-		if key == ACTIONKEY_DELETE and config.usage.time.wide.value:
-			if self._value[0] < 12:
-				self._value[0] += 12
-				self.validate()
-
-		elif key == ACTIONKEY_BACKSPACE and config.usage.time.wide.value:
-			if self._value[0] >= 12:
-				self._value[0] -= 12
-				self.validate()
-
-		elif key in ACTIONKEY_NUMBERS or key == ACTIONKEY_ASCII:
+		if key in ACTIONKEY_NUMBERS or key == ACTIONKEY_ASCII:
 			if key == ACTIONKEY_ASCII:
 				code = getPrevAsciiCode()
 				if code < 48 or code > 57:
@@ -1094,23 +1084,10 @@ class ConfigClock(ConfigSequence):
 
 			hour = self._value[0]
 			pmadjust = 0
-			if config.usage.time.wide.value:
-				if hour > 11:  # All the PM times
-					hour -= 12
-					pmadjust = 12
-				if hour == 0:  # 12AM & 12PM map to 12
-					hour = 12
-				if self.marked_pos == 0 and digit >= 2:  # Only 0, 1 allowed (12 hour clock)
-					return
-				if self.marked_pos == 1 and hour > 9 and digit >= 3:  # Only 10, 11, 12 allowed
-					return
-				if self.marked_pos == 1 and hour < 10 and digit == 0:  # Only 01, 02, ..., 09 allowed
-					return
-			else:
-				if self.marked_pos == 0 and digit >= 3:  # Only 0, 1, 2 allowed (24 hour clock)
-					return
-				if self.marked_pos == 1 and hour > 19 and digit >= 4:  # Only 20, 21, 22, 23 allowed
-					return
+			if self.marked_pos == 0 and digit >= 3:  # Only 0, 1, 2 allowed (24 hour clock)
+				return
+			if self.marked_pos == 1 and hour > 19 and digit >= 4:  # Only 20, 21, 22, 23 allowed
+				return
 			if self.marked_pos == 2 and digit >= 6:  # Only 0, 1, ..., 5 allowed (tens digit of minutes)
 				return
 
@@ -1119,13 +1096,7 @@ class ConfigClock(ConfigSequence):
 			hour = int(value[:2])
 			minute = int(value[2:])
 
-			if config.usage.time.wide.value:
-				if hour == 12:  # 12AM & 12PM map to back to 00
-					hour = 0
-				elif hour > 12:
-					hour = 10
-				hour += pmadjust
-			elif hour > 23:
+			if hour > 23:
 				hour = 20
 
 			self._value[0] = hour
@@ -1143,7 +1114,7 @@ class ConfigClock(ConfigSequence):
 		newtime = list(localtime())
 		newtime[3] = value[0]
 		newtime[4] = value[1]
-		retval = strftime(config.usage.time.short.value.replace("%-I", "%_I").replace("%-H", "%_H"), tuple(newtime))
+		retval = strftime(_("%R"), tuple(newtime))
 		return retval
 
 	def genText(self):
