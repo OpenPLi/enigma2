@@ -174,7 +174,12 @@ class ConfigElement:
 				else:
 					x(self)
 
-	def addNotifier(self, notifier, initial_call=True, immediate_feedback=True):
+	def __getExtraArgs(self, notifier):
+		for extra_arg in self.extra_args:
+			if extra_arg[0] == notifier:
+				return extra_arg[1]
+
+	def addNotifier(self, notifier, initial_call=True, immediate_feedback=True, extra_args=None):
 		# "initial_call=True" triggers the notifier as soon as "addNotifier" is encountered in the code.
 		#
 		# "initial_call=False" skips the above activation of the notifier.
