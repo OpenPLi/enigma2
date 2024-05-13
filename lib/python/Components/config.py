@@ -2398,7 +2398,7 @@ class ConfigAction(ConfigElement):
 		self.action = action
 		self.actionargs = args
 
-	def handleKey(self, key):
+	def handleKey(self, key, callback=None):
 		if (key == KEY_OK):
 			self.action(*self.actionargs)
 
