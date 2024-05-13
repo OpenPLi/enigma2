@@ -102,11 +102,6 @@ def InitUsageConfig():
 	config.usage.showScreenPath = ConfigSelection(default="small", choices=[("off", _("Disabled")), ("small", _("Small")), ("large", _("Large"))])
 	config.usage.enable_tt_caching = ConfigYesNo(default=True)
 	config.usage.sort_settings = ConfigYesNo(default=False)
-	config.usage.setupShowDefault = ConfigSelection(default="spaces", choices=[
-		("", _("Don't show default")),
-		("spaces", _("Show default after description")),
-		("newline", _("Show default on new line"))
-	])
 	choicelist = []
 	for i in (10, 30):
 		choicelist.append((str(i), ngettext("%d second", "%d seconds", i) % i))
@@ -137,7 +132,6 @@ def InitUsageConfig():
 	config.usage.timeshift_path = ConfigText(default="/media/hdd/")
 	config.usage.allowed_timeshift_paths = ConfigLocations(default=["/media/hdd/"])
 	config.usage.timeshift_skipreturntolive = ConfigYesNo(default=False)
-
 	config.usage.movielist_trashcan = ConfigYesNo(default=True)
 	config.usage.movielist_trashcan_days = ConfigNumber(default=8)
 	config.usage.movielist_trashcan_reserve = ConfigNumber(default=40)
@@ -437,6 +431,12 @@ def InitUsageConfig():
 	config.usage.boolean_graphic = ConfigSelection(default="true", choices={"false": _("no"), "true": _("yes"), "only_bool": _("yes, but not in multi selections")})
 
 	config.usage.multiboot_order = ConfigYesNo(default=True)
+
+	config.usage.setupShowDefault = ConfigSelection(default="spaces", choices=[
+		("", _("Don't show default")),
+		("spaces", _("Show default after description")),
+		("newline", _("Show default on new line"))
+	])
 
 	config.epg = ConfigSubsection()
 	config.epg.eit = ConfigYesNo(default=True)
