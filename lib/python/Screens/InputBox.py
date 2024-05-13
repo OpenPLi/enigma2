@@ -93,6 +93,7 @@ class InputBox(Screen):
 
 class PinInput(InputBox):
 	def __init__(self, session, service="", triesEntry=None, pinList=[], popup=False, simple=True, zap=False, *args, **kwargs):
+		print('   ***   ', triesEntry)
 		InputBox.__init__(self, session=session, text="    ", maxSize=True, type=Input.PIN, *args, **kwargs)
 		self.zap = zap
 		self.waitTime = 15
@@ -191,7 +192,7 @@ class PinInput(InputBox):
 		self.triesEntry.tries.save()
 
 	def showTries(self):
-		self["tries"].setText(self.triesEntry and _("Tries left:") + " " + str(self.getTries() or ""))
+		self["tries"].setText("%s %s" % (_("Tries left:"), str(self.getTries())) if self.triesEntry else "")
 
 	def keyRight(self):
 		if self.zap and self["input"].getText() == "    ":
