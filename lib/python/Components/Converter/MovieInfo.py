@@ -94,6 +94,8 @@ class MovieInfo(Converter):
 				timeCreate = localtime(info.getInfo(service, iServiceInformation.sTimeCreate))
 				duration = info.getLength(service)
 				filesize = info.getInfoObject(service, iServiceInformation.sFileSize)
+				rec_ref_str = info.getInfoString(service, iServiceInformation.sServiceref)
+				rec_service_name = eServiceReference(rec_ref_str).getServiceName()
 				res_str = ""
 				for x in self.parts[1:]:
 					x = x.upper()
@@ -103,6 +105,8 @@ class MovieInfo(Converter):
 						res_str = self.appendToStringWithSeparator(res_str, "%d min" % (duration / 60))
 					if x == "FILESIZE" and filesize:
 						res_str = self.appendToStringWithSeparator(res_str, "%d MB" % (filesize / (1024*1024)))
+					if x == "RECSERVICE" and rec_service_name:
+						res_str = self.appendToStringWithSeparator(res_str, rec_service_name)
 				return res_str
 		return ""
 
