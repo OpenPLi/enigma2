@@ -95,7 +95,7 @@ class MovieInfo(Converter):
 				duration = info.getLength(service)
 				filesize = info.getInfoObject(service, iServiceInformation.sFileSize)
 				rec_ref_str = info.getInfoString(service, iServiceInformation.sServiceref)
-				rec_service_name = eServiceReference(rec_ref_str).getServiceName()
+				rec_service_name = eServiceReference(rec_ref_str).getName()
 				res_str = ""
 				for x in self.parts[1:]:
 					x = x.upper()
