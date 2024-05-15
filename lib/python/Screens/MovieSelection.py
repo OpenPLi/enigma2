@@ -303,7 +303,6 @@ class MovieBrowserConfiguration(ConfigListScreen, Screen):
 			"green": self.save,
 			"save": self.save,
 			"cancel": self.cancel,
-			"ok": self.save,
 			"menu": self.cancel,
 		}, -2)
 
