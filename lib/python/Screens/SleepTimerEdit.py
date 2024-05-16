@@ -138,6 +138,11 @@ class SleepTimerEdit(Setup):
 			self.close(True)
 		self.close()
 
+	def keyMenuCallback(self, answer):
+		Setup.keyMenuCallback(self, answer)
+		if answer and self.getCurrentEntry().startswith(_("Sleeptimer")):
+			self.keySave()
+
 	def currentEventTime(self):
 		remaining = 0
 		ref = self.session.nav.getCurrentlyPlayingServiceReference()
