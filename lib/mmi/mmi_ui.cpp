@@ -1,7 +1,6 @@
 #include <lib/mmi/mmi_ui.h>
 #include <lib/dvb_ci/dvbci_session.h> // for parseLengthField
 
-#include <regex>
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/ioctl.h>
@@ -20,7 +19,6 @@ eMMI_UI::eMMI_UI(int max_slots)
 		slotdata[i].mmiScreenReady=0;
 		slotdata[i].mmiTuplePos=0;
 		slotdata[i].state=-1;
-		slotdata[i].isError10=0;
 	}
 }
 
@@ -89,7 +87,6 @@ int eMMI_UI::processMMIData(int slot_id, const unsigned char *tag, const void *d
 		unsigned char *d=(unsigned char*)data;
 		unsigned char *max=((unsigned char*)d) + len;
 		int pos = 0;
-		bool isError10 = false;
 		eDebug("[eMMI_UI] Tmenu_last");
 		if (d > max)
 			break;
@@ -118,16 +115,10 @@ int eMMI_UI::processMMIData(int slot_id, const unsigned char *tag, const void *d
 			memcpy(str, ((unsigned char*)d), textlen);
 			str[textlen] = '\0';
 			std::string converted_str = convertDVBUTF8(str, textlen, -1, 1, 0);
-			if (std::regex_match(converted_str, std::regex("^[^0-9]*\\s10")))
-				isError10 = true;
 			mmiScreenAddText(slot_id, pos++, (char*)converted_str.c_str());
 			eDebug("[eMMI_UI] %s", converted_str.c_str());
 			d += textlen;
 		}
-		
-		if (isError10) {
-			mmiScreenError10(slot_id);
-		} 
 
 		mmiScreenFinish(slot_id);
 		break;
@@ -194,13 +185,6 @@ int eMMI_UI::availableMMI(int slot)
 	return false;
 }
 
-int eMMI_UI::isError10(int slot)
-{
-	if (slot < m_max_slots)
-		return slotdata[slot].isError10;
-	return false;
-}
-
 int eMMI_UI::mmiScreenClose(int slot, int timeout)
 {
 	if (slot >= m_max_slots)
@@ -220,15 +204,6 @@ int eMMI_UI::mmiScreenClose(int slot, int timeout)
 	PyList_SET_ITEM(data.mmiScreen, 0, tuple);
 	data.mmiScreenReady = 1;
 	stateChanged(slot);
-	return 0;
-}
-
-int eMMI_UI::mmiScreenError10(int slot)
-{
-	if (slot < m_max_slots) {
-		slotdata[slot].isError10 = 1;
-		stateChanged(slot);
-	}
 	return 0;
 }
 
