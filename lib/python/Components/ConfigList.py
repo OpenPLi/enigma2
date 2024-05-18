@@ -401,6 +401,9 @@ class ConfigListScreen:
 				if item[0].endswith("*") and item[1].isChanged():
 					restart = True
 				item[1].save()
+		if hasattr(self, 'hiddenItems'):
+			for item in self.hiddenItems:
+				item.save()
 		configfile.save()
 		return restart
 
@@ -424,7 +427,12 @@ class ConfigListScreen:
 		self.closeConfigList((True,))
 
 	def closeConfigList(self, closeParameters=()):
-		if self["config"].isChanged():
+		def hiddenIsChanged():
+			if hasattr(self, 'hiddenItems'):
+				for item in self.hiddenItems:
+					if item.isChanged():
+						return True
+		if self["config"].isChanged() or hiddenIsChanged():
 			self.closeParameters = closeParameters
 			self.session.openWithCallback(self.cancelConfirm, MessageBox, self.cancelMsg, default=False, type=MessageBox.TYPE_YESNO)
 		else:
@@ -436,6 +444,9 @@ class ConfigListScreen:
 		for item in self["config"].list:
 			if len(item) > 1:
 				item[1].cancel()
+		if hasattr(self, 'hiddenItems'):
+			for item in self.hiddenItems:
+				item.cancel()
 		if not hasattr(self, "closeParameters"):
 			self.closeParameters = ()
 		self.close(*self.closeParameters)

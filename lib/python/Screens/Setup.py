@@ -63,6 +63,7 @@ class Setup(ConfigListScreen, Screen, HelpableScreen):
 		self.showDefaultChanged = False
 		self.graphicSwitchChanged = False
 		self.list = prependItems or []
+		self.hiddenItems = []
 		title = None
 		xmlData = setupDom(self.setup, self.plugin)
 		for setup in xmlData.findall("setup"):
@@ -100,10 +101,11 @@ class Setup(ConfigListScreen, Screen, HelpableScreen):
 			if element.tag == "item":
 				if including and include:
 					self.addItem(element)
-				elif element.text: #when an config is not included, but in between changed we save it.
-					not_included_config_element = eval(element.text)
-					if not_included_config_element.isChanged():
-						not_included_config_element.save()
+				elif element.text:
+					try: #ensure the config element exists
+						self.hiddenItems.append(eval(element.text))
+					except Exception:
+						pass
 			elif element.tag == "if":
 				if including:
 					self.addItems(element, including=include)
