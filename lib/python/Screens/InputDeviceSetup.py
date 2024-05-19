@@ -161,7 +161,7 @@ class InputDeviceSetup(ConfigListScreen, Screen):
 		self.enableConfigEntry = None
 
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry, fullUI=True)
+		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.createSetup, fullUI=True)
 
 		self["introduction"] = StaticText()
 
@@ -236,10 +236,6 @@ class InputDeviceSetup(ConfigListScreen, Screen):
 
 	def apply(self):
 		self.session.openWithCallback(self.confirm, MessageBox, _("Use these input device settings?"), MessageBox.TYPE_YESNO, timeout=20, default=True)
-
-	def changedEntry(self):
-		ConfigListScreen.changedEntry(self)
-		self.selectionChanged() # to update hints text from the slider in real time.
 
 
 class RemoteControlType(ConfigListScreen, Screen):
