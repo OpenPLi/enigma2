@@ -189,7 +189,7 @@ class FastScanScreen(ConfigListScreen, Screen):
 		for provider in providers:
 			self.config_autoproviders[provider[0]] = ConfigYesNo(default=provider[0] in auto_providers)
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, ssession=ession, on_change=self.createSetup, fullUI=True)
+		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.createSetup, fullUI=True)
 		self.createSetup()
 		self.finished_cb = None
 		self["introduction"] = Label(_("Select your provider, and press OK to start the scan"))
