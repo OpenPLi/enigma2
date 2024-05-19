@@ -216,6 +216,7 @@ class ConfigListScreen:
 		self.setRestartMessage(None)
 		self.onChangedEntry = []
 		self.onSave = []
+		self.hiddenItems = []
 		if self.noNativeKeys not in self.onLayoutFinish:
 			self.onLayoutFinish.append(self.noNativeKeys)
 		if self.handleInputHelpers not in self["config"].onSelectionChanged:
@@ -401,9 +402,8 @@ class ConfigListScreen:
 				if item[0].endswith("*") and item[1].isChanged():
 					restart = True
 				item[1].save()
-		if hasattr(self, 'hiddenItems'):
-			for item in self.hiddenItems:
-				item.save()
+		for item in self.hiddenItems:
+			item.save()
 		configfile.save()
 		return restart
 
@@ -428,10 +428,9 @@ class ConfigListScreen:
 
 	def closeConfigList(self, closeParameters=()):
 		def hiddenIsChanged():
-			if hasattr(self, 'hiddenItems'):
-				for item in self.hiddenItems:
-					if item.isChanged():
-						return True
+			for item in self.hiddenItems:
+				if item.isChanged():
+					return True
 		if self["config"].isChanged() or hiddenIsChanged():
 			self.closeParameters = closeParameters
 			self.session.openWithCallback(self.cancelConfirm, MessageBox, self.cancelMsg, default=False, type=MessageBox.TYPE_YESNO)
@@ -444,9 +443,8 @@ class ConfigListScreen:
 		for item in self["config"].list:
 			if len(item) > 1:
 				item[1].cancel()
-		if hasattr(self, 'hiddenItems'):
-			for item in self.hiddenItems:
-				item.cancel()
+		for item in self.hiddenItems:
+			item.cancel()
 		if not hasattr(self, "closeParameters"):
 			self.closeParameters = ()
 		self.close(*self.closeParameters)
