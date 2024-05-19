@@ -159,11 +159,6 @@ class FastScanScreen(ConfigListScreen, Screen):
 
 		self.setTitle(_("FastScan"))
 
-		self["actions"] = ActionMap(["SetupActions", "MenuActions"],
-		{
-			"save": self.keySave,
-		}, -2)
-
 		lastConfiguration = eval(config.misc.fastscan.last_configuration.value)
 
 		def providerChanged(configEntry):
@@ -194,12 +189,10 @@ class FastScanScreen(ConfigListScreen, Screen):
 		for provider in providers:
 			self.config_autoproviders[provider[0]] = ConfigYesNo(default=provider[0] in auto_providers)
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session, self.createSetup)
+		ConfigListScreen.__init__(self, self.list, ssession=ession, on_change=self.createSetup, fullUI=True)
 		self.createSetup()
 		self.finished_cb = None
 		self["introduction"] = Label(_("Select your provider, and press OK to start the scan"))
-		self["key_red"] = Label(_("Cancel"))
-		self["key_green"] = Label(_("Save"))
 
 	def createSetup(self):
 		self.list = []
