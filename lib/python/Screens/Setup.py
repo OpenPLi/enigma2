@@ -54,7 +54,12 @@ class Setup(ConfigListScreen, Screen, HelpableScreen):
 					self["setupimage"] = Pixmap()
 
 	def changedEntry(self):
-		if isinstance(self["config"].getCurrent()[1], (ConfigBoolean, ConfigSelection)):
+		current = self["config"].getCurrent()
+		if current[1].isChanged():
+			self.manipulatedItems.append(current)  # keep track of all manipulated items including ones that have been removed from self["config"].list
+		elif current in self.manipulatedItems:
+			self.manipulatedItems.remove(current)
+		if isinstance(current[1], (ConfigBoolean, ConfigSelection)):
 			self.createSetup()
 		ConfigListScreen.changedEntry(self)  # force summary update immediately, not just on select/deselect
 
@@ -63,7 +68,6 @@ class Setup(ConfigListScreen, Screen, HelpableScreen):
 		self.showDefaultChanged = False
 		self.graphicSwitchChanged = False
 		self.list = prependItems or []
-		self.hiddenItems = []
 		title = None
 		xmlData = setupDom(self.setup, self.plugin)
 		for setup in xmlData.findall("setup"):
@@ -101,11 +105,6 @@ class Setup(ConfigListScreen, Screen, HelpableScreen):
 			if element.tag == "item":
 				if including and include:
 					self.addItem(element)
-				elif element.text:
-					try: #ensure the config element exists
-						self.hiddenItems.append(eval(element.text))
-					except Exception:
-						pass
 			elif element.tag == "if":
 				if including:
 					self.addItems(element, including=include)
