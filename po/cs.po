@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-10 21:56+0100\n"
+"POT-Creation-Date: 2024-05-21 17:44+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: IMS <ims@openpli.org>\n"
 "Language-Team: PLi <ims@openpli.org>\n"
@@ -3209,6 +3209,11 @@ msgid "Disable move mode"
 msgstr "Zakázat přesun"
 
 #
+#, fuzzy
+msgid "Disable operator profiles"
+msgstr "Použitelný formát proměnných"
+
+#
 msgid "Disable timer"
 msgstr "Zakázat časovač"
 
@@ -3565,10 +3570,6 @@ msgstr "EPG:"
 msgid "ERROR - failed to scan (%s)!"
 msgstr "CHYBA - prohledávání selhalo (%s)!"
 
-#, python-format
-msgid "ERROR downloading file %s/%s"
-msgstr "CHYBA stažení souboru %s/%s"
-
 #
 msgid "East"
 msgstr "Východní"
@@ -3849,7 +3850,8 @@ msgstr "Zadejte PIN kód"
 msgid "Enter URL"
 msgstr "Zadejte URL"
 
-msgid "Enter an URL where alternative images could be listed for FlashImage. Enter text 'all' for automatic access of many images."
+#, fuzzy
+msgid "Enter an URL where alternative images could be listed for FlashImage."
 msgstr "Zadejte URL, kde mohou být uvedeny alternativní obrazy pro FlashImage. Zadejte text 'all' pro automatický přístup k vícero obrazům."
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -8926,6 +8928,10 @@ msgstr "Výběr dalšího rozložení znaků jen pro následující znak"
 msgid "Select the time zone within the area or region."
 msgstr "Vyberte časové pásmo v oblasti nebo regionu."
 
+#, fuzzy
+msgid "Select the timer from the fallback tuner by default"
+msgstr "Do přehledu časovačů jsou importovány časovače ze záložního tuneru"
+
 msgid "Select the tuner that controls the motorised dish."
 msgstr "Vyberte tuner který řídí natáčenou parabolu."
 
@@ -9336,6 +9342,10 @@ msgstr "Zobrazovat VCR scart v hlavním menu"
 msgid "Show WLAN status"
 msgstr "Zobrazit stav WLAN"
 
+#, fuzzy
+msgid "Show additional information on infobar"
+msgstr "Zobrazovat informace o kódování v infobaru"
+
 #
 msgid "Show alternatives"
 msgstr "Zobrazit alternativy"
@@ -9518,6 +9528,11 @@ msgstr "Zobrazovat ikony typu kanálu"
 
 msgid "Show servicelist or movies"
 msgstr "Seznam programů nebo nahraných souborů"
+
+#
+#, fuzzy
+msgid "Show simple second infobar"
+msgstr "Zobrazovat druhý infobar"
 
 msgid "Show single service EPG"
 msgstr "Zobrazovat EPG jednoho kanálu"
@@ -11629,6 +11644,11 @@ msgstr "Používat Virgin EPG informace, jestliže jsou dostupné."
 msgid "Use a gateway"
 msgstr "Použít bránu (gateway)"
 
+#
+#, fuzzy
+msgid "Use alternative skin"
+msgstr "Přidat alternativy"
+
 msgid "Use as PiP if possible"
 msgstr "Použít jako PiP"
 
@@ -11669,6 +11689,11 @@ msgstr "Použít měření proudu"
 #
 msgid "Use skin default"
 msgstr "Výchozí dle skinu"
+
+#
+#, fuzzy
+msgid "Use the alternative screen"
+msgstr "Upravit alternativy"
 
 #
 msgid "Use the network wizard to configure selected network adapter"
@@ -12124,8 +12149,14 @@ msgstr "Západní Sahara"
 msgid "What type of service scan do you want?"
 msgstr "Jaký typ vyhledání programů chcete?"
 
+msgid "When enabled a simplified version from the second infobar is shown. This can also be toggled instantly by holding the OK buttin when the second infobar is visible. The infobar will shortly disappear and then shown in the other mode."
+msgstr ""
+
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr "Enigma bude načítat odstraněné uživatelské přehledy. To znamená, že uživatelské přehledy, které jsou k dispozici, ale nejsou zahrnuty v bouquets.tv nebo bouquets.radio, budou načteny. To například umožňuje zachovat vlastní uživatelské přehledy, zatímco instalovaná nastavení jsou aktualizována."
+
+msgid "When enabled extra information is shown on the infobar. This can also be toggled instantly by holding the OK button when the inforbar is not visible."
+msgstr ""
 
 msgid "When enabled the Picture in Picture window can be closed with 'exit' button."
 msgstr "Jestliže je povoleno, pak PiP může být ukončen tlačítkem Exit."
@@ -12146,6 +12177,10 @@ msgid "When enabled the set top box is able to wakeup on LAN"
 msgstr "Jestliže je zapnuto, pak je možné přijímač probouzet v síti LAN pomocí Magic packetu."
 
 msgid "When enabled the timer from the fallback tuner is imported"
+msgstr "Do přehledu časovačů jsou importovány časovače ze záložního tuneru"
+
+#, fuzzy
+msgid "When enabled the timer from the fallback tuner is the default timer"
 msgstr "Do přehledu časovačů jsou importovány časovače ze záložního tuneru"
 
 msgid "When enabled then when you select a new channel in the channel selection the channel selection will not close. It will only close when you select the current playing service. This is a kind of preview mode"

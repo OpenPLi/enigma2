@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-10 21:56+0100\n"
+"POT-Creation-Date: 2024-05-21 17:44+0200\n"
 "PO-Revision-Date: 2022-10-13 18:28+0200\n"
 "Last-Translator: Jose Juan <jzapater@gmail.com>\n"
 "Language-Team: ANGELODOS  angelo2807@hotmail.com\n"
@@ -3118,6 +3118,11 @@ msgstr "Para el evento actual y desactivar los eventos siguientes"
 msgid "Disable move mode"
 msgstr "Quitar modo movimiento"
 
+#
+#, fuzzy
+msgid "Disable operator profiles"
+msgstr "Variables de formato disponibles"
+
 msgid "Disable timer"
 msgstr "Desactivar temporizador"
 
@@ -3456,10 +3461,6 @@ msgstr "EPG"
 msgid "ERROR - failed to scan (%s)!"
 msgstr "ERROR - ¡falló la búsqueda (%s)!"
 
-#, python-format
-msgid "ERROR downloading file %s/%s"
-msgstr "ERROR descargando archivo %s/%s"
-
 #
 msgid "East"
 msgstr "Este"
@@ -3728,7 +3729,7 @@ msgid "Enter URL"
 msgstr "Introduzca URL"
 
 #, fuzzy
-msgid "Enter an URL where alternative images could be listed for FlashImage. Enter text 'all' for automatic access of many images."
+msgid "Enter an URL where alternative images could be listed for FlashImage."
 msgstr "Introduzca una URL donde se puedan listar imágenes alternativas para FlashImage"
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -8667,6 +8668,10 @@ msgstr "Seleccione el conjunto de caracteres desplazados solo para el siguiente 
 msgid "Select the time zone within the area or region."
 msgstr "Seleccione la zona horaria dentro del área o región."
 
+#, fuzzy
+msgid "Select the timer from the fallback tuner by default"
+msgstr "Cuando está habilitado se importa el temporizador del sintonizador alternativo."
+
 msgid "Select the tuner that controls the motorised dish."
 msgstr "Seleccione el sintonizador que controla el plato motorizado."
 
@@ -9077,6 +9082,10 @@ msgstr "Mostrar vídeo VCR en el menú principal"
 msgid "Show WLAN status"
 msgstr "Mostrar estado de WLAN"
 
+#, fuzzy
+msgid "Show additional information on infobar"
+msgstr "Mostrar información de criptograma en infobar"
+
 #
 msgid "Show alternatives"
 msgstr "Mostrar alternativas"
@@ -9251,6 +9260,10 @@ msgstr "Mostrar los iconos del tipo de servicio"
 
 msgid "Show servicelist or movies"
 msgstr "Mostrar servicio único EPG"
+
+#, fuzzy
+msgid "Show simple second infobar"
+msgstr "Mostrar el segundo infobar"
 
 msgid "Show single service EPG"
 msgstr "Mostrar servicio único EPG"
@@ -11328,6 +11341,11 @@ msgstr "Utilice la información de Virgin EPG cuando esté disponible."
 msgid "Use a gateway"
 msgstr "Usar puerta de enlace"
 
+#
+#, fuzzy
+msgid "Use alternative skin"
+msgstr "Añadir alternativas"
+
 msgid "Use as PiP if possible"
 msgstr "Usar como PiP si es posible"
 
@@ -11366,6 +11384,11 @@ msgstr "Usar medida de potencia"
 #, fuzzy
 msgid "Use skin default"
 msgstr "Establecer predeterminado"
+
+#
+#, fuzzy
+msgid "Use the alternative screen"
+msgstr "Editar alternativas"
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "Utilice el asistente de red para configurar el adaptador de red seleccionado"
@@ -11817,8 +11840,14 @@ msgstr "Sahara Occidental"
 msgid "What type of service scan do you want?"
 msgstr "¿Qué tipo de escaneo de servicio quieres?"
 
+msgid "When enabled a simplified version from the second infobar is shown. This can also be toggled instantly by holding the OK buttin when the second infobar is visible. The infobar will shortly disappear and then shown in the other mode."
+msgstr ""
+
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr "Cuando está habilitado, enigma2 cargará los usuarios desvinculados. Esto significa que los userbouquets que están disponibles, pero que no están incluidos en los archivos bouquets.tv o bouquets.radio, seguirán cargándose. Esto le permite, por ejemplo, mantener su propio ramo de usuario mientras se instalan los ajustes instalados"
+
+msgid "When enabled extra information is shown on the infobar. This can also be toggled instantly by holding the OK button when the inforbar is not visible."
+msgstr ""
 
 msgid "When enabled the Picture in Picture window can be closed with 'exit' button."
 msgstr "Cuando está habilitada, la ventana Imagen en imagen se puede cerrar con el botón ‘salir’."
@@ -11839,6 +11868,10 @@ msgid "When enabled the set top box is able to wakeup on LAN"
 msgstr "Cuando está activado, el decodificador puede activarse en LAN"
 
 msgid "When enabled the timer from the fallback tuner is imported"
+msgstr "Cuando está habilitado se importa el temporizador del sintonizador alternativo."
+
+#, fuzzy
+msgid "When enabled the timer from the fallback tuner is the default timer"
 msgstr "Cuando está habilitado se importa el temporizador del sintonizador alternativo."
 
 msgid "When enabled then when you select a new channel in the channel selection the channel selection will not close. It will only close when you select the current playing service. This is a kind of preview mode"

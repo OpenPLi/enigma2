@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OBH enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-10 21:56+0100\n"
+"POT-Creation-Date: 2024-05-21 17:44+0200\n"
 "PO-Revision-Date: 2019-04-12 12:36+0300\n"
 "Last-Translator: mosad - مساعد الجعيد <abo-mishal@hotmail.com>\n"
 "Language-Team: mosad - مساعد الجعيد\n"
@@ -3031,6 +3031,10 @@ msgstr "إيقاف الحدث الحالي فقط وليس الأحداث الق
 msgid "Disable move mode"
 msgstr "تعطيل وضع التحريك"
 
+#, fuzzy
+msgid "Disable operator profiles"
+msgstr "متغيرات التهئية المتاحه"
+
 msgid "Disable timer"
 msgstr "تعطيل المؤقت"
 
@@ -3360,10 +3364,6 @@ msgstr ""
 msgid "ERROR - failed to scan (%s)!"
 msgstr "خطأ - فشل البحث (%s)!"
 
-#, python-format
-msgid "ERROR downloading file %s/%s"
-msgstr ""
-
 msgid "East"
 msgstr "شرق"
 
@@ -3628,7 +3628,7 @@ msgstr "أدخل الرقم السري"
 msgid "Enter URL"
 msgstr "أعاده إدخال الرقم السري"
 
-msgid "Enter an URL where alternative images could be listed for FlashImage. Enter text 'all' for automatic access of many images."
+msgid "Enter an URL where alternative images could be listed for FlashImage."
 msgstr ""
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -8342,6 +8342,10 @@ msgstr ""
 msgid "Select the time zone within the area or region."
 msgstr "تعيين مكان أيقونة التسجيل"
 
+#, fuzzy
+msgid "Select the timer from the fallback tuner by default"
+msgstr "عند تمكين اندفاع اللاقط سيتم فرضه"
+
 msgid "Select the tuner that controls the motorised dish."
 msgstr "حدد المؤالف الذي يتحكم في نظام الطبق المتحرك."
 
@@ -8747,6 +8751,10 @@ msgstr "عرض منفذ سكارت في القائمة الرئيسية"
 msgid "Show WLAN status"
 msgstr "عرض حالة اتصال الشبكة اللاسلكية"
 
+#, fuzzy
+msgid "Show additional information on infobar"
+msgstr "عرض معلومات التشفير في شريط المعومات"
+
 msgid "Show alternatives"
 msgstr "عرض البدائل"
 
@@ -8926,6 +8934,10 @@ msgstr "عرض نوع أيقونة القناة"
 #, fuzzy
 msgid "Show servicelist or movies"
 msgstr "عرض قائمة القنوات أو الافلام"
+
+#, fuzzy
+msgid "Show simple second infobar"
+msgstr "عرض شريط المعلومات الثاني"
 
 #, fuzzy
 msgid "Show single service EPG"
@@ -10921,6 +10933,10 @@ msgstr "إستخدام معلومات دليل البرامج الإلكترون
 msgid "Use a gateway"
 msgstr "إستخدام المدخل"
 
+#, fuzzy
+msgid "Use alternative skin"
+msgstr "إضافة البديل"
+
 msgid "Use as PiP if possible"
 msgstr "أستخدام خاصية قناة داخل قناة إذا كان ذلك ممكنا"
 
@@ -10957,6 +10973,10 @@ msgstr "استخدم قـياس الطاقة"
 #, fuzzy
 msgid "Use skin default"
 msgstr "تعيين افتراضي"
+
+#, fuzzy
+msgid "Use the alternative screen"
+msgstr "تعديل البديل"
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "استخدام معالج شبكه الاتصال لتكوين محول شبكه الاتصال المحدد"
@@ -11370,11 +11390,17 @@ msgstr "الصحراء الغربية"
 msgid "What type of service scan do you want?"
 msgstr ""
 
+msgid "When enabled a simplified version from the second infobar is shown. This can also be toggled instantly by holding the OK buttin when the second infobar is visible. The infobar will shortly disappear and then shown in the other mode."
+msgstr ""
+
 #, fuzzy
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr ""
 "عند تمكين الانجما 2 سيتم تحميل باقات المستخدم غير مرتبطة. وهذا يعني أنه لا يزال سيتم تحميل باقات المستخدم التي تتوفر ، ولكن لم يتم تضمينها في قنوات الباقات. أو ملفات باقات القنوات الإذاعية هذا يسمح لك على سبيل المثال للحفاظ على باقة المستخدم الخاصة بك أثناء التثبيت\n"
 "تتم ترقية الإعدادات"
+
+msgid "When enabled extra information is shown on the infobar. This can also be toggled instantly by holding the OK button when the inforbar is not visible."
+msgstr ""
 
 #, fuzzy
 msgid "When enabled the Picture in Picture window can be closed with 'exit' button."
@@ -11399,6 +11425,10 @@ msgstr ""
 
 #, fuzzy
 msgid "When enabled the timer from the fallback tuner is imported"
+msgstr "عند تمكين اندفاع اللاقط سيتم فرضه"
+
+#, fuzzy
+msgid "When enabled the timer from the fallback tuner is the default timer"
 msgstr "عند تمكين اندفاع اللاقط سيتم فرضه"
 
 msgid "When enabled then when you select a new channel in the channel selection the channel selection will not close. It will only close when you select the current playing service. This is a kind of preview mode"

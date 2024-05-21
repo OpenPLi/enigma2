@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-10 21:56+0100\n"
+"POT-Creation-Date: 2024-05-21 17:44+0200\n"
 "PO-Revision-Date: 2022-10-23 15:37+0300\n"
 "Last-Translator: Audronis <adga45@gmail.com>\n"
 "Language-Team: Adga (C) <adga45@gmail.com>\n"
@@ -2824,6 +2824,10 @@ msgstr "Išjungti dabartinį įvykį, bet ne po jo einančius"
 msgid "Disable move mode"
 msgstr "Išjungti perkėlimą"
 
+#, fuzzy
+msgid "Disable operator profiles"
+msgstr "Galimi kintami formatai"
+
 msgid "Disable timer"
 msgstr "Išjungti laikmatį"
 
@@ -3123,10 +3127,6 @@ msgstr "Elektroninis programų vadovas:"
 msgid "ERROR - failed to scan (%s)!"
 msgstr "KLAIDA - paieška nepavyko (%s)!"
 
-#, python-format
-msgid "ERROR downloading file %s/%s"
-msgstr "Failų %s/%s atsisiuntimo KLAIDA"
-
 msgid "East"
 msgstr "Rytai"
 
@@ -3365,7 +3365,7 @@ msgid "Enter URL"
 msgstr "Įrašykite internetinį adresą"
 
 #, fuzzy
-msgid "Enter an URL where alternative images could be listed for FlashImage. Enter text 'all' for automatic access of many images."
+msgid "Enter an URL where alternative images could be listed for FlashImage."
 msgstr "Įveskite URL, kuriame vidiniame atvaizde gali būti įrašyti alternatyvūs atvaizdai"
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -7775,6 +7775,10 @@ msgstr "Pasirinkite paslinktų simbolių rinkinį tik kitam simboliui"
 msgid "Select the time zone within the area or region."
 msgstr "Pasirinkite laiko juostą, toje teritorijoje arba regione."
 
+#, fuzzy
+msgid "Select the timer from the fallback tuner by default"
+msgstr "Kai įjungta, atsarginio imtuvo laikmatis yra importuojamas"
+
 msgid "Select the tuner that controls the motorised dish."
 msgstr "Pasirinkite imtuvą, kuris kontroliuoja motorizuotą anteną."
 
@@ -8147,6 +8151,10 @@ msgstr "Rodyti VCR SCART pagrindiniame meniu"
 msgid "Show WLAN status"
 msgstr "Rodyti belaidžio tinklo būseną"
 
+#, fuzzy
+msgid "Show additional information on infobar"
+msgstr "Rodyti kodavimo informaciją info juostoje"
+
 msgid "Show alternatives"
 msgstr "Rodyti alternatyvas"
 
@@ -8308,6 +8316,10 @@ msgstr "Rodyti kanalo tipo piktogramas"
 
 msgid "Show servicelist or movies"
 msgstr "Rodyti kanalų sąrašą arba filmus"
+
+#, fuzzy
+msgid "Show simple second infobar"
+msgstr "Rodyti antrą info juostą"
 
 msgid "Show single service EPG"
 msgstr "Rodyti vieno kanalo EPG"
@@ -10181,6 +10193,10 @@ msgstr "Naudokite Virgin EPG informaciją, kai ji yra prieinama."
 msgid "Use a gateway"
 msgstr "Naudoti tinklų sąsają"
 
+#, fuzzy
+msgid "Use alternative skin"
+msgstr "Pridėti alternatyvas"
+
 msgid "Use as PiP if possible"
 msgstr "Jei įmanoma, naudokite kaip PiP"
 
@@ -10217,6 +10233,10 @@ msgstr "Naudokite įtampos išmatavimus"
 #, fuzzy
 msgid "Use skin default"
 msgstr "Nustatykite numatytuoju"
+
+#, fuzzy
+msgid "Use the alternative screen"
+msgstr "Redaguoti alternatyvas"
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "Naudokite tinklo vedlį, kad konfigūruoti pasirinkto tinklo adapterį"
@@ -10613,8 +10633,14 @@ msgstr "Vakarinė Sahara"
 msgid "What type of service scan do you want?"
 msgstr "Kokio tipo kanalų nuskaitymo norite?"
 
+msgid "When enabled a simplified version from the second infobar is shown. This can also be toggled instantly by holding the OK buttin when the second infobar is visible. The infobar will shortly disappear and then shown in the other mode."
+msgstr ""
+
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr "Kai čia įjungta enigma2 bus įkelti atsieti vartotojo paketai. Tai reiškia, kad vartotojo paketai, kurie yra prieinami, tačiau nėra įtraukti į paketai.tv ar paketai.radijas failus, vis tiek bus įkelti. Tai leidžia jums pvz. saugoti savo vartotojo paketus, o įdiegti nustatymai bus atnaujinti"
+
+msgid "When enabled extra information is shown on the infobar. This can also be toggled instantly by holding the OK button when the inforbar is not visible."
+msgstr ""
 
 msgid "When enabled the Picture in Picture window can be closed with 'exit' button."
 msgstr "Įjungus PiP gali būti uždarytas su 'exit' mygtuku."
@@ -10635,6 +10661,10 @@ msgid "When enabled the set top box is able to wakeup on LAN"
 msgstr "Kai čia įjungta, aparatą galima pažadinti nuo tinklo veiklos"
 
 msgid "When enabled the timer from the fallback tuner is imported"
+msgstr "Kai įjungta, atsarginio imtuvo laikmatis yra importuojamas"
+
+#, fuzzy
+msgid "When enabled the timer from the fallback tuner is the default timer"
 msgstr "Kai įjungta, atsarginio imtuvo laikmatis yra importuojamas"
 
 msgid "When enabled then when you select a new channel in the channel selection the channel selection will not close. It will only close when you select the current playing service. This is a kind of preview mode"

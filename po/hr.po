@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-10 21:56+0100\n"
+"POT-Creation-Date: 2024-05-21 17:44+0200\n"
 "PO-Revision-Date: 2022-03-28 16:33+0200\n"
 "Last-Translator: Željko <zdezmar2@gmail.com>\n"
 "Language-Team: Željko\n"
@@ -2839,6 +2839,10 @@ msgstr "Onemogućite trenutni događaj, ali ne i događaje koji dolaze"
 msgid "Disable move mode"
 msgstr "Onemogućite način kretanja"
 
+#, fuzzy
+msgid "Disable operator profiles"
+msgstr "Dostupni formati varijabli"
+
 msgid "Disable timer"
 msgstr "Onemogućite tajmer"
 
@@ -3139,10 +3143,6 @@ msgstr "EPG:"
 msgid "ERROR - failed to scan (%s)!"
 msgstr "GREŠKA - nije uspjelo skeniranje (%s)!"
 
-#, fuzzy, python-format
-msgid "ERROR downloading file %s/%s"
-msgstr "GREŠKA u preuzimanju datoteke /etc/enigma2/%s"
-
 msgid "East"
 msgstr "Istok"
 
@@ -3383,7 +3383,7 @@ msgid "Enter URL"
 msgstr "Unesite URL"
 
 #, fuzzy
-msgid "Enter an URL where alternative images could be listed for FlashImage. Enter text 'all' for automatic access of many images."
+msgid "Enter an URL where alternative images could be listed for FlashImage."
 msgstr "Unesite URL gdje se alternativni image mogu navesti za FlashImage"
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -7810,6 +7810,10 @@ msgstr "Odaberite pomaknuti skup znakova samo za sljedeći znak"
 msgid "Select the time zone within the area or region."
 msgstr "Odaberite vremensku zonu unutar područja ili regije."
 
+#, fuzzy
+msgid "Select the timer from the fallback tuner by default"
+msgstr "Kada je omogućeno, uvozi se tajmer iz rezervnog tjunera"
+
 msgid "Select the tuner that controls the motorised dish."
 msgstr "Odaberite tjuner koji kontrolira motorizirani tanjur."
 
@@ -8180,6 +8184,10 @@ msgstr "Prikažite VCR scart na glavnom izborniku"
 msgid "Show WLAN status"
 msgstr "Prikažite WLAN status"
 
+#, fuzzy
+msgid "Show additional information on infobar"
+msgstr "Prikažite kripto-informacije u info traci"
+
 msgid "Show alternatives"
 msgstr "Prikaži alternative"
 
@@ -8341,6 +8349,10 @@ msgstr "Prikažite ikone vrste usluga"
 
 msgid "Show servicelist or movies"
 msgstr "Prikažite popis usluga ili filmova"
+
+#, fuzzy
+msgid "Show simple second infobar"
+msgstr "Prikažite drugu info traku"
 
 msgid "Show single service EPG"
 msgstr "Prikažite jednostavne EPG usluge"
@@ -10216,6 +10228,10 @@ msgstr "Koristite Virgin EPG informacije kada su dostupne."
 msgid "Use a gateway"
 msgstr "Koristite pristupnik"
 
+#, fuzzy
+msgid "Use alternative skin"
+msgstr "Dodaj alternative"
+
 msgid "Use as PiP if possible"
 msgstr "Kada je to moguće, koristite kao PiP"
 
@@ -10252,6 +10268,10 @@ msgstr "Koristite mjerenje snage"
 #, fuzzy
 msgid "Use skin default"
 msgstr "Postavite zadano"
+
+#, fuzzy
+msgid "Use the alternative screen"
+msgstr "Uredi alternative"
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "Pomoću vodiča za mrežu konfigurirajte odabrani mrežni prilagodnik"
@@ -10649,8 +10669,14 @@ msgstr "Zapadna Sahara"
 msgid "What type of service scan do you want?"
 msgstr "Koju vrstu skeniranja usluga želite?"
 
+msgid "When enabled a simplified version from the second infobar is shown. This can also be toggled instantly by holding the OK buttin when the second infobar is visible. The infobar will shortly disappear and then shown in the other mode."
+msgstr ""
+
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr "Kada je omogućeno enigma2 učitat će nepovezane korisničke pakete. To znači da će korisnički paketi koji su dostupni, ali nisu uključeni u bouquets.tv ili bouquets.radio datoteke i dalje biti učitani. To vam omogućuje, primjerice da zadržite vlastiti korisnički paket dok su instalirane postavke ažurirane."
+
+msgid "When enabled extra information is shown on the infobar. This can also be toggled instantly by holding the OK button when the inforbar is not visible."
+msgstr ""
 
 msgid "When enabled the Picture in Picture window can be closed with 'exit' button."
 msgstr "Kada je omogućeno PiP se može zatvoriti sa 'exit' tipkom."
@@ -10671,6 +10697,10 @@ msgid "When enabled the set top box is able to wakeup on LAN"
 msgstr "Kada je omogućeno, uređaj za podešavanje može se probuditi putem LAN-a"
 
 msgid "When enabled the timer from the fallback tuner is imported"
+msgstr "Kada je omogućeno, uvozi se tajmer iz rezervnog tjunera"
+
+#, fuzzy
+msgid "When enabled the timer from the fallback tuner is the default timer"
 msgstr "Kada je omogućeno, uvozi se tajmer iz rezervnog tjunera"
 
 msgid "When enabled then when you select a new channel in the channel selection the channel selection will not close. It will only close when you select the current playing service. This is a kind of preview mode"

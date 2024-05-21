@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-10 21:56+0100\n"
+"POT-Creation-Date: 2024-05-21 17:44+0200\n"
 "PO-Revision-Date: 2017-03-05 13:24+0100\n"
 "Last-Translator: Magnus Nilsson <mag_nilsson@hotmail.com>\n"
 "Language-Team: \n"
@@ -3186,6 +3186,11 @@ msgstr "Avsluta nuvarande program men inte kommande program"
 msgid "Disable move mode"
 msgstr "Avaktivera flyttläge"
 
+#
+#, fuzzy
+msgid "Disable operator profiles"
+msgstr "Tillgängliga format variabler"
+
 msgid "Disable timer"
 msgstr "Avaktivera timer"
 
@@ -3544,10 +3549,6 @@ msgstr ""
 msgid "ERROR - failed to scan (%s)!"
 msgstr "FEL - misslyckad sökning (%s)!"
 
-#, python-format
-msgid "ERROR downloading file %s/%s"
-msgstr ""
-
 #
 msgid "East"
 msgstr "Öst"
@@ -3826,7 +3827,7 @@ msgstr "Ange PIN-kod"
 msgid "Enter URL"
 msgstr "Ange PIN"
 
-msgid "Enter an URL where alternative images could be listed for FlashImage. Enter text 'all' for automatic access of many images."
+msgid "Enter an URL where alternative images could be listed for FlashImage."
 msgstr ""
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -8909,6 +8910,10 @@ msgstr ""
 msgid "Select the time zone within the area or region."
 msgstr "Välj sorteringsmetod :"
 
+#, fuzzy
+msgid "Select the timer from the fallback tuner by default"
+msgstr "URL för reserv fjärrmottagare"
+
 msgid "Select the tuner that controls the motorised dish."
 msgstr ""
 
@@ -9330,6 +9335,10 @@ msgstr "Visa VCR SCART i huvudmenyn"
 msgid "Show WLAN status"
 msgstr "Visa WLAN Status"
 
+#, fuzzy
+msgid "Show additional information on infobar"
+msgstr "Visa krypteringsinfo i infobalken"
+
 #
 msgid "Show alternatives"
 msgstr "Visa alternativ"
@@ -9505,6 +9514,10 @@ msgstr "Visa typ av kanalikon"
 
 msgid "Show servicelist or movies"
 msgstr "Visa kanallista eller filmer"
+
+#, fuzzy
+msgid "Show simple second infobar"
+msgstr "Visa andra infobalken"
 
 msgid "Show single service EPG"
 msgstr "Visa singel kanal EPG"
@@ -11670,6 +11683,11 @@ msgstr "Använd Virgin EPG information när den är tillgänglig."
 msgid "Use a gateway"
 msgstr "Använd en gateway"
 
+#
+#, fuzzy
+msgid "Use alternative skin"
+msgstr "Lägg till alternativ"
+
 msgid "Use as PiP if possible"
 msgstr ""
 
@@ -11708,6 +11726,11 @@ msgstr "Använd strömmätning"
 #, fuzzy
 msgid "Use skin default"
 msgstr "Ange standard"
+
+#
+#, fuzzy
+msgid "Use the alternative screen"
+msgstr "Ändra alternativ"
 
 #
 msgid "Use the network wizard to configure selected network adapter"
@@ -12168,8 +12191,14 @@ msgstr ""
 msgid "What type of service scan do you want?"
 msgstr ""
 
+msgid "When enabled a simplified version from the second infobar is shown. This can also be toggled instantly by holding the OK buttin when the second infobar is visible. The infobar will shortly disappear and then shown in the other mode."
+msgstr ""
+
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr "Vid aktiverad laddar enigma2 olänkade favoritlistor. Detta innebär att favoritlistor som är tillgängliga men som inte ingår i bouquet.tv eller bouquet.radio filer kommer fortfarande laddas. Detta gör att du till exempel kan behålla dina egna favoritlistor medan installerade inställningar uppdateras."
+
+msgid "When enabled extra information is shown on the infobar. This can also be toggled instantly by holding the OK button when the inforbar is not visible."
+msgstr ""
 
 msgid "When enabled the Picture in Picture window can be closed with 'exit' button."
 msgstr "Vid aktiverad kan BiB stängas med exitknappen."
@@ -12192,6 +12221,9 @@ msgid "When enabled the set top box is able to wakeup on LAN"
 msgstr "Vid aktiverad kan mottagaren väckas upp från LAN (WoL)"
 
 msgid "When enabled the timer from the fallback tuner is imported"
+msgstr ""
+
+msgid "When enabled the timer from the fallback tuner is the default timer"
 msgstr ""
 
 msgid "When enabled then when you select a new channel in the channel selection the channel selection will not close. It will only close when you select the current playing service. This is a kind of preview mode"

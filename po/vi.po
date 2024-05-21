@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-10 21:56+0100\n"
+"POT-Creation-Date: 2024-05-21 17:44+0200\n"
 "PO-Revision-Date: 2021-08-02 09:19+0700\n"
 "Last-Translator: krong\n"
 "Language-Team: none\n"
@@ -2809,6 +2809,10 @@ msgstr "Vô hiệu hóa sự kiện hiện tại nhưng không đến sự kiệ
 msgid "Disable move mode"
 msgstr "Tắt chế độ di chuyển"
 
+#, fuzzy
+msgid "Disable operator profiles"
+msgstr "Biến định dạng có sẵn"
+
 msgid "Disable timer"
 msgstr "Tắt bộ hẹn giờ"
 
@@ -3107,10 +3111,6 @@ msgstr "EPG:"
 msgid "ERROR - failed to scan (%s)!"
 msgstr "LỖI - không quét được (%s)!"
 
-#, fuzzy, python-format
-msgid "ERROR downloading file %s/%s"
-msgstr "LỖI tải xuống tệp%s"
-
 msgid "East"
 msgstr "Đông"
 
@@ -3351,7 +3351,7 @@ msgid "Enter URL"
 msgstr "Nhập URL"
 
 #, fuzzy
-msgid "Enter an URL where alternative images could be listed for FlashImage. Enter text 'all' for automatic access of many images."
+msgid "Enter an URL where alternative images could be listed for FlashImage."
 msgstr "Nhập một URL nơi hình ảnh thay thế có thể được liệt kê cho FlashImage"
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -7778,6 +7778,10 @@ msgstr "Chọn bộ ký tự đã thay đổi chỉ cho ký tự tiếp theo"
 msgid "Select the time zone within the area or region."
 msgstr "Chọn múi giờ trong khu vực hoặc khu vực."
 
+#, fuzzy
+msgid "Select the timer from the fallback tuner by default"
+msgstr "Khi được bật, bộ hẹn giờ từ bộ điều chỉnh dự phòng được nhập"
+
 msgid "Select the tuner that controls the motorised dish."
 msgstr "Chọn bộ chỉnh điều khiển đĩa cơ giới."
 
@@ -8151,6 +8155,10 @@ msgstr "Hiển thị scart VCR trên menu chính"
 msgid "Show WLAN status"
 msgstr "Hiển thị trạng thái mạng WLAN"
 
+#, fuzzy
+msgid "Show additional information on infobar"
+msgstr "Hiển thị thông tin về t điện tử trong infobar"
+
 msgid "Show alternatives"
 msgstr "Hiển thị thay thế"
 
@@ -8312,6 +8320,10 @@ msgstr "Hiển thị biểu tượng loại dịch vụ"
 
 msgid "Show servicelist or movies"
 msgstr "Hiển thị người phục vụ hoặc phim"
+
+#, fuzzy
+msgid "Show simple second infobar"
+msgstr "Hiển thị thông tin thứ hai"
 
 msgid "Show single service EPG"
 msgstr "Hiển thị EPG dịch vụ duy nhất"
@@ -10189,6 +10201,10 @@ msgstr "Sử dụng thông tin Virgin EPG khi có sẵn."
 msgid "Use a gateway"
 msgstr "Sử dụng cổng"
 
+#, fuzzy
+msgid "Use alternative skin"
+msgstr "Thêm lựa chọn thay thế"
+
 msgid "Use as PiP if possible"
 msgstr "Sử dụng như PiP nếu có thể"
 
@@ -10225,6 +10241,10 @@ msgstr "Sử dụng đo năng lượng"
 #, fuzzy
 msgid "Use skin default"
 msgstr "Đặt mặc định"
+
+#, fuzzy
+msgid "Use the alternative screen"
+msgstr "Chỉnh sửa thay thế"
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "Sử dụng trình hướng dẫn mạng để định cấu hình bộ điều hợp mạng đã chọn"
@@ -10622,8 +10642,14 @@ msgstr "Phía tây Sahara"
 msgid "What type of service scan do you want?"
 msgstr "Bạn muốn loại dịch vụ quét nào?"
 
+msgid "When enabled a simplified version from the second infobar is shown. This can also be toggled instantly by holding the OK buttin when the second infobar is visible. The infobar will shortly disappear and then shown in the other mode."
+msgstr ""
+
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr "Khi được bật enigma2 sẽ tải các tập tin người dùng không liên kết. Điều này có nghĩa là các userbouquets có sẵn, nhưng không được bao gồm trong các tập tin bouquets.tv hoặc bouquets.radio, vẫn sẽ được tải. Điều này cho phép bạn lấy ví dụ để giữ bó hoa người dùng của riêng bạn trong khi cài đặt được cài đặt được nâng cấp"
+
+msgid "When enabled extra information is shown on the infobar. This can also be toggled instantly by holding the OK button when the inforbar is not visible."
+msgstr ""
 
 msgid "When enabled the Picture in Picture window can be closed with 'exit' button."
 msgstr "Khi được bật, PiP có thể được đóng bằng nút thoát."
@@ -10644,6 +10670,10 @@ msgid "When enabled the set top box is able to wakeup on LAN"
 msgstr "Khi được bật, hộp trên cùng có thể thức dậy trên mạng LAN"
 
 msgid "When enabled the timer from the fallback tuner is imported"
+msgstr "Khi được bật, bộ hẹn giờ từ bộ điều chỉnh dự phòng được nhập"
+
+#, fuzzy
+msgid "When enabled the timer from the fallback tuner is the default timer"
 msgstr "Khi được bật, bộ hẹn giờ từ bộ điều chỉnh dự phòng được nhập"
 
 msgid "When enabled then when you select a new channel in the channel selection the channel selection will not close. It will only close when you select the current playing service. This is a kind of preview mode"
