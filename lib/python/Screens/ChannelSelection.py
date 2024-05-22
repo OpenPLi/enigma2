@@ -2,11 +2,11 @@
 from Tools.Profile import profile
 
 from Screens.Screen import Screen
+from Screens.Setup import Setup
 import Screens.InfoBar
 from Screens.ScreenSaver import InfoBarScreenSaver
 import Components.ParentalControl
 from Components.Button import Button
-from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.Sources.Boolean import Boolean
 from Components.Pixmap import Pixmap
@@ -58,29 +58,10 @@ FLAG_IS_DEDICATED_3D = 128
 FLAG_CENTER_DVB_SUBS = 2048 #define in lib/dvb/idvb.h as dxNewFound = 64 and dxIsDedicated3D = 128
 
 
-class InsertService(ConfigListScreen, Screen):
+class InsertService(Setup):
 	def __init__(self, session):
-		Screen.__init__(self, session)
-		self.skinName = ["Setup"]
-		ConfigListScreen.__init__(self, [], session=session, on_change=self.changedEntry)
-
-		self["actions2"] = ActionMap(["SetupActions"],
-		{
-			"ok": self.run,
-			"cancel": boundFunction(self.close, None),
-			"save": self.run,
-		}, -2)
-
-		self["key_red"] = StaticText(_("Exit"))
-		self["key_green"] = StaticText(_("Save"))
-
-		self["description"] = Label("")
-		self["VKeyIcon"] = Boolean(False)
-		self["HelpWindow"] = Pixmap()
-		self["HelpWindow"].hide()
-
 		self.createConfig()
-		self.changedEntry()
+		Setup.__init__(self, session, None)
 
 	def createConfig(self):
 		choices = [("Select Service", _("Select Service"))]
@@ -93,6 +74,11 @@ class InsertService(ConfigListScreen, Screen):
 		self.servicename = ConfigText("default_name")
 
 	def createSetup(self):
+		if self.servicetype.value == "HDMI-in":
+			self.servicerefstring = '8192:0:1:0:0:0:0:0:0:0::%s' % self.servicename.value
+		else:
+			self.servicerefstring = '%s:0:1:0:0:0:0:0:0:0:%s:%s' % (self.streamtype.value, self.streamurl.value.replace(':', '%3a'), self.servicename.value)
+		self.title = '%s [%s]' % (_("Insert Service"), self.servicerefstring)
 		self.list = []
 		self.list.append((_("Service Type"), self.servicetype, _("Select service type")))
 		if self.servicetype.value != "Select Service":
@@ -103,18 +89,16 @@ class InsertService(ConfigListScreen, Screen):
 		self["config"].list = self.list
 
 	def changedEntry(self):
-		if self.servicetype.value == "HDMI-in":
-			self.servicerefstring = '8192:0:1:0:0:0:0:0:0:0::%s' % self.servicename.value
-		else:
-			self.servicerefstring = '%s:0:1:0:0:0:0:0:0:0:%s:%s' % (self.streamtype.value, self.streamurl.value.replace(':', '%3a'), self.servicename.value)
-		Screen.setTitle(self, '%s [%s]' % (_("Insert Service"), self.servicerefstring))
 		self.createSetup()
 
-	def run(self):
+	def keySave(self):
 		if self.servicetype.value == "Select Service":
 			self.session.openWithCallback(self.channelSelectionCallback, SimpleChannelSelection, _("Select channel"))
 		else:
 			self.close(eServiceReference(self.servicerefstring))
+
+	def keySelect(self):
+		self.keySave()
 
 	def channelSelectionCallback(self, *args):
 		if len(args):
@@ -472,7 +456,7 @@ class ChannelContextMenu(Screen):
 	def insertService(self):
 		self.session.openWithCallback(self.insertServiceCallback, InsertService)
 
-	def insertServiceCallback(self, answer):
+	def insertServiceCallback(self, answer=None):
 		if answer:
 			self.csel.insertService(answer)
 			self.close()
