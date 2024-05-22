@@ -960,12 +960,10 @@ class SelectSatsEntryScreen(Screen):
 		self["list"] = SelectionList(sat_list, enableWrapAround=True)
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
-			"red": self.cancel,
-			"green": self.save,
 			"yellow": self.sortBy,
 			"blue": self["list"].toggleAllSelection,
 			"save": self.save,
-			"cancel": self.cancel,
+			"cancel": self.close,
 			"ok": self["list"].toggleSelection,
 		}, -2)
 		self.setTitle(_("Select satellites"))
@@ -973,9 +971,6 @@ class SelectSatsEntryScreen(Screen):
 	def save(self):
 		val = [x[0][1] for x in self["list"].list if x[0][3]]
 		self.close(str(val))
-
-	def cancel(self):
-		self.close(None)
 
 	def sortBy(self):
 		lst = self["list"].list
