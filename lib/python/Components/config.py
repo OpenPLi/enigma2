@@ -1,12 +1,11 @@
-import six
-
-from enigma import getPrevAsciiCode
-from Tools.NumericalTextInput import NumericalTextInput
-from Tools.Directories import resolveFilename, SCOPE_CONFIG, fileExists
-from Components.Harddisk import harddiskmanager
 from copy import copy as copy_copy
 from os import fsync, path as os_path, rename, sep
 from time import localtime, strftime, mktime
+
+from enigma import getPrevAsciiCode
+from Tools.Directories import fileExists, resolveFilename, SCOPE_CONFIG
+from Tools.NumericalTextInput import NumericalTextInput
+from Components.Harddisk import harddiskmanager
 
 ACTIONKEY_LEFT = 0
 ACTIONKEY_RIGHT = 1
@@ -54,23 +53,18 @@ KEY_9 = ACTIONKEY_9
 
 # ConfigElement, the base class of all ConfigElements.
 #
-# it stores:
-#   value    the current value, usefully encoded.
-#            usually a property which retrieves _value,
-#            and maybe does some reformatting
-#   _value   the value as it's going to be saved in the configfile,
-#            though still in non-string form.
-#            this is the object which is actually worked on.
-#   default  the initial value. If _value is equal to default,
-#            it will not be stored in the config file
-#   saved_value is a text representation of _value, stored in the config file
+# ConfigElement stores:
+#   value       The current value, usually encoded.
+#               A property which retrieves _value, and maybe does some reformatting.
+#   _value      A value to be saved in the configfile, though still in non-string form.
+#               This is the object which is actually worked on.
+#   default     The initial value. If _value is equal to default, it will not be stored in the config file
+#   saved_value Is a text representation of _value, stored in the config file
 #
-# and has (at least) the following methods:
-#   save()   stores _value into saved_value,
-#            (or stores 'None' if it should not be stored)
-#   load()   loads _value from saved_value, or loads
-#            the default if saved_value is 'None' (default)
-#            or invalid.
+# ConfigElement has (at least) the following methods:
+#   load()   loads _value from saved_value, or 
+#            loads the default if saved_value is 'None' (default) or invalid.
+#   save()   stores _value into saved_value, or stores 'None' if it should not be stored.
 #
 class ConfigElement:
 	def __init__(self):
@@ -963,41 +957,37 @@ class ConfigMacText(ConfigElement, NumericalTextInput):
 		self.changed()
 
 	def getValue(self):
-		try:
-			return six.ensure_str(self.text)
-		except UnicodeDecodeError:
-			print("[Config] Broken UTF8!")
-			return self.text
+		# print(f"[Config][getValue] {self.text}")
+		return str(self.text)
 
 	def setValue(self, val):
-		prev = str(self.text) if hasattr(self, "text") else None
-		try:
-			self.text = six.ensure_text(val)
-		except UnicodeDecodeError:
-			self.text = six.ensure_text(val, errors='ignore')
-			print("[Config] Broken UTF8!")
-		if str(self.text) != prev:
+		# print(f"[Config][setValue] val:{val}")
+		prev = self.text if hasattr(self, "text") else None
+		if val != prev:
+			self.text = val
 			self.changed()
 
 	value = property(getValue, setValue)
 	_value = property(getValue, setValue)
 
 	def getText(self):
-		return six.ensure_str(self.text)
+		# print(f"[Config][getText] {self.text}")
+		return self.text
 
 	def getMulti(self, selected):
+		# print(f"[Config][getMulti] {self.text}")
 		if self.visible_width:
 			if self.allmarked:
 				mark = list(range(0, min(self.visible_width, len(self.text))))
 			else:
 				mark = [self.marked_pos - self.offset]
-			return "mtext"[1 - selected:], six.ensure_str(self.text[self.offset:self.offset + self.visible_width]) + " ", mark
+			return "mtext"[1 - selected:], str(self.text[self.offset:self.offset + self.visible_width]) + " ", mark
 		else:
 			if self.allmarked:
 				mark = list(range(0, len(self.text)))
 			else:
 				mark = [self.marked_pos]
-			return "mtext"[1 - selected:], six.ensure_str(self.text) + " ", mark
+			return "mtext"[1 - selected:], str(self.text) + " ", mark
 
 	def onSelect(self, session):
 		self.allmarked = (self.value != "")
@@ -1302,7 +1292,7 @@ class ConfigText(ConfigElement, NumericalTextInput):
 			self.overwrite = not self.overwrite
 		elif key == ACTIONKEY_ASCII:
 			self.timeout()
-			newChar = six.unichr(getPrevAsciiCode())
+			newChar = chr(getPrevAsciiCode())
 			if not self.useableChars or newChar in self.useableChars:
 				if self.allmarked:
 					self.deleteAllChars()
@@ -1336,42 +1326,36 @@ class ConfigText(ConfigElement, NumericalTextInput):
 		self.changed()
 
 	def getValue(self):
-		try:
-			return six.ensure_str(self.text)
-		except UnicodeDecodeError:
-			print("[Config] Broken UTF8!")
-			return self.text
+		return self.text
 
 	def setValue(self, val):
-		prev = str(self.text) if hasattr(self, "text") else None
-		try:
-			self.text = six.ensure_text(val)
-		except UnicodeDecodeError:
-			self.text = val.decode("utf-8", "ignore")
-			print("[Config] Broken UTF8!")
-		if str(self.text) != prev:
+		prev = self.text if hasattr(self, "text") else None
+		if val != prev:
+			self.text = val
 			self.changed()
 
 	value = property(getValue, setValue)
 	_value = property(getValue, setValue)
 
 	def getText(self):
-		return six.ensure_str(self.text)
+		# print(f"[Config][getText2] {self.text}")
+		return self.text
 
 	def getMulti(self, selected):
+		# print(f"[Config][getMulti2] {self.text}")
 		if self.visible_width:
 			if self.allmarked:
 				mark = list(range(0, min(self.visible_width, len(self.text))))
 			else:
 
 				mark = [self.marked_pos - self.offset]
-			return "mtext"[1 - selected:], six.ensure_str(self.text[self.offset:self.offset + self.visible_width]) + " ", mark
+			return "mtext"[1 - selected:], str(self.text[self.offset:self.offset + self.visible_width]) + " ", mark
 		else:
 			if self.allmarked:
 				mark = list(range(0, len(self.text)))
 			else:
 				mark = [self.marked_pos]
-			return "mtext"[1 - selected:], six.ensure_str(self.text) + " ", mark
+			return "mtext"[1 - selected:], str(self.text) + " ", mark
 
 	def onSelect(self, session):
 		self.allmarked = (self.value != "")
@@ -1501,7 +1485,7 @@ class ConfigNumber(ConfigText):
 					return
 			else:
 				ascii = getKeyNumber(key) + 48
-			newChar = six.unichr(ascii)
+			newChar = chr(ascii)
 			if self.allmarked:
 				self.deleteAllChars()
 				self.allmarked = False
@@ -1956,21 +1940,21 @@ class ConfigSubList(list):
 		list.__init__(self)
 		self.stored_values = {}
 
-	def save(self):
-		for x in self:
-			x.save()
-
 	def load(self):
-		for x in self:
-			x.load()
+		for item in self:
+			item.load()
+
+	def save(self):
+		for item in self:
+			item.save()
 
 	def getSavedValue(self):
-		res = {}
-		for i, val in enumerate(self):
-			sv = val.saved_value
-			if sv is not None:
-				res[str(i)] = sv
-		return res
+		values = {}
+		for index, val in enumerate(self):
+			saved = val.saved_value
+			if saved is not None:
+				values[str(index)] = saved
+		return values
 
 	def setSavedValue(self, values):
 		self.stored_values = dict(values)
@@ -1981,19 +1965,17 @@ class ConfigSubList(list):
 	saved_value = property(getSavedValue, setSavedValue)
 
 	def append(self, item):
-		i = str(len(self))
+		index = str(len(self))
 		list.append(self, item)
-		if i in self.stored_values:
-			item.saved_value = self.stored_values[i]
+		if index in self.stored_values:
+			item.saved_value = self.stored_values[index]
 			item.load()
 
 	def dict(self):
 		return dict([(str(index), value) for index, value in enumerate(self)])
 
-# same as ConfigSubList, just as a dictionary.
-# care must be taken that the 'key' has a proper
-# str() method, because it will be used in the config
-# file.
+# Same as ConfigSubList, just as a dictionary.
+# Care must be taken that the 'key' has a proper str() method, because it will be used in the config file.
 
 
 class ConfigSubDict(dict):
@@ -2001,21 +1983,21 @@ class ConfigSubDict(dict):
 		dict.__init__(self)
 		self.stored_values = {}
 
-	def save(self):
-		for x in self.values():
-			x.save()
-
 	def load(self):
-		for x in self.values():
-			x.load()
+		for item in self.values():
+			item.load()
+
+	def save(self):
+		for item in self.values():
+			item.save()
 
 	def getSavedValue(self):
-		res = {}
+		values = {}
 		for (key, val) in self.items():
-			sv = val.saved_value
-			if sv is not None:
-				res[str(key)] = sv
-		return res
+			saved = val.saved_value
+			if saved is not None:
+				values[str(key)] = saved
+		return values
 
 	def setSavedValue(self, values):
 		self.stored_values = dict(values)
@@ -2059,10 +2041,10 @@ class ConfigSubsection:
 		assert isinstance(value, (ConfigSubsection, ConfigElement, ConfigSubList, ConfigSubDict)), "ConfigSubsections can only store ConfigSubsections, ConfigSubLists, ConfigSubDicts or ConfigElements"
 		content = self.content
 		content.items[name] = value
-		x = content.stored_values.get(name, None)
-		if x is not None:
-			# print "ok, now we have a new item,", name, "and have the following value for it:", x
-			value.saved_value = x
+		val = content.stored_values.get(name, None)
+		if val is not None:
+			# print(f"[Config] Ok, now we have a new item '{name}' and have the following value for it '{str(val)}'.")
+			value.saved_value = val
 			value.load()
 
 	def __getattr__(self, name):
@@ -2071,14 +2053,14 @@ class ConfigSubsection:
 		raise AttributeError(name)
 
 	def getSavedValue(self):
-		res = self.content.stored_values
+		values = self.content.stored_values
 		for (key, val) in self.content.items.items():
-			sv = val.saved_value
-			if sv is not None:
-				res[key] = sv
-			elif key in res:
-				del res[key]
-		return res
+			saved = val.saved_value
+			if saved is not None:
+				values[key] = saved
+			elif key in values:
+				del values[key]
+		return values
 
 	def setSavedValue(self, values):
 		values = dict(values)
@@ -2091,27 +2073,24 @@ class ConfigSubsection:
 	saved_value = property(getSavedValue, setSavedValue)
 
 	def save(self):
-		for x in self.content.items.values():
-			x.save()
+		for item in self.content.items.values():
+			item.save()
 
 	def load(self):
-		for x in self.content.items.values():
-			x.load()
+		for item in self.content.items.values():
+			item.load()
 
 	def cancel(self):
-		for x in self.content.items.values():
-			x.cancel()
+		for item in self.content.items.values():
+			item.cancel()
 
 	def dict(self):
 		return self.content.items
 
-# the root config object, which also can "pickle" (=serialize)
-# down the whole config tree.
+# The root config object, which also can "pickle" (=serialize) down the whole config tree.
 #
-# we try to keep non-existing config entries, to apply them whenever
-# a new config entry is added to a subsection
-# also, non-existing config entries will be saved, so they won't be
-# lost when a config entry disappears.
+# We try to keep non-existing config entries, to apply them whenever a new config entry is added to a subsection
+# Also, non-existing config entries will be saved, so they won't be lost when a config entry disappears.
 
 
 class Config(ConfigSubsection):
@@ -2176,7 +2155,7 @@ class Config(ConfigSubsection):
 				f.flush()
 				fsync(f.fileno())
 			rename(filename + ".writing", filename)
-		except IOError:
+		except OSError:
 			print("[Config] Couldn't write %s" % filename)
 
 	def loadFromFile(self, filename, base_file=True):
@@ -2198,8 +2177,8 @@ class ConfigFile:
 		try:
 			config.loadFromFile(self.CONFIG_FILE, True)
 			print("[Config] Config file loaded ok...")
-		except IOError as e:
-			print("[Config] unable to load config (%s), assuming defaults..." % str(e))
+		except OSError as error:
+			print("[Config] unable to load config (%s), assuming defaults..." % str(error))
 
 	def save(self):
 		# config.save()
