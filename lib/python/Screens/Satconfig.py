@@ -534,7 +534,7 @@ class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
 			self.fillListWithAdvancedSatEntrys(Sat)
 		self["config"].list = self.list
 
-	def keyOk(self):
+	def keySelect(self):
 		if self.isChanged():
 			self.stopService()
 		if self["config"].getCurrent() == self.advancedSelectSatsEntry:
@@ -544,7 +544,7 @@ class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
 			conf = self.nimConfig.userSatellitesList
 			self.session.openWithCallback(boundFunction(self.updateConfUserSatellitesList, conf), SelectSatsEntryScreen, userSatlist=conf.value)
 		else:
-			self.keySave()
+			ConfigListScreen.keySelect(self)
 
 	def updateConfUserSatellitesList(self, conf, val=None):
 		if val is not None:
@@ -600,7 +600,7 @@ class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
 		Screen.__init__(self, session)
 		self.list = []
 		ServiceStopScreen.__init__(self)
-		ConfigListScreen.__init__(self, self.list)
+		ConfigListScreen.__init__(self, self.list, on_change=self.changedEntry)
 
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
@@ -609,7 +609,7 @@ class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
 		self["description"] = Label("")
 		self["actions"] = ActionMap(["SetupActions", "SatlistShortcutAction"],
 		{
-			"ok": self.keyOk,
+			"ok": self.keySelect,
 			"save": self.keySave,
 			"cancel": self.keyCancel,
 			"changetype": self.changeConfigurationMode,
@@ -627,7 +627,7 @@ class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
 			return
 		ConfigListScreen.keyLeft(self)
 		if self["config"].getCurrent() in (self.advancedSelectSatsEntry, self.selectSatsEntry):
-			self.keyOk()
+			self.keySelect()
 		else:
 			self.newConfig()
 
@@ -642,7 +642,7 @@ class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
 			return
 		ConfigListScreen.keyRight(self)
 		if self["config"].getCurrent() in (self.advancedSelectSatsEntry, self.selectSatsEntry):
-			self.keyOk()
+			self.keySelect()
 		else:
 			self.newConfig()
 
@@ -960,12 +960,10 @@ class SelectSatsEntryScreen(Screen):
 		self["list"] = SelectionList(sat_list, enableWrapAround=True)
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
-			"red": self.cancel,
-			"green": self.save,
 			"yellow": self.sortBy,
 			"blue": self["list"].toggleAllSelection,
 			"save": self.save,
-			"cancel": self.cancel,
+			"cancel": self.close,
 			"ok": self["list"].toggleSelection,
 		}, -2)
 		self.setTitle(_("Select satellites"))
@@ -973,9 +971,6 @@ class SelectSatsEntryScreen(Screen):
 	def save(self):
 		val = [x[0][1] for x in self["list"].list if x[0][3]]
 		self.close(str(val))
-
-	def cancel(self):
-		self.close(None)
 
 	def sortBy(self):
 		lst = self["list"].list
