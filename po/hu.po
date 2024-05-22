@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-10 21:56+0100\n"
+"POT-Creation-Date: 2024-05-21 17:44+0200\n"
 "PO-Revision-Date: 2021-11-03 15:10+0100\n"
 "Last-Translator: mcfly82\n"
 "Language-Team: mcfly82 & wysless\n"
@@ -2822,6 +2822,10 @@ msgstr "Csak a jelenlegi műsor letiltása"
 msgid "Disable move mode"
 msgstr "Mozgatási mód letiltása"
 
+#, fuzzy
+msgid "Disable operator profiles"
+msgstr "Lehetséges formátum variációk"
+
 msgid "Disable timer"
 msgstr "Időzítő letiltása"
 
@@ -3121,10 +3125,6 @@ msgstr "EPG:"
 msgid "ERROR - failed to scan (%s)!"
 msgstr "HIBA - nem sikerült a keresés (%s)!"
 
-#, fuzzy, python-format
-msgid "ERROR downloading file %s/%s"
-msgstr "HIBA a %s fájl letöltése során"
-
 msgid "East"
 msgstr "Kelet"
 
@@ -3365,7 +3365,7 @@ msgid "Enter URL"
 msgstr "Adja meg az URL címet"
 
 #, fuzzy
-msgid "Enter an URL where alternative images could be listed for FlashImage. Enter text 'all' for automatic access of many images."
+msgid "Enter an URL where alternative images could be listed for FlashImage."
 msgstr "Adjon meg egy URL-t, ahonnan alternatív image lista lekérése lehetséges"
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -7793,6 +7793,10 @@ msgstr "Váltás a virtuális billentyűzeten a 'shift' karakterkiosztásra csak
 msgid "Select the time zone within the area or region."
 msgstr "Válassza ki az időzónáját a megadott területen vagy régióban."
 
+#, fuzzy
+msgid "Select the timer from the fallback tuner by default"
+msgstr "Ezzel engedélyezheti az időzítők importálását a tartalék tunerből"
+
 msgid "Select the tuner that controls the motorised dish."
 msgstr "Válassza ki azt a tunert, amely vezérli a forgatómotort."
 
@@ -8167,6 +8171,10 @@ msgstr "VCR Scart opció megjelenítése a főmenüben"
 msgid "Show WLAN status"
 msgstr "A vezeték nélküli hálózat állapotának megjelenítése"
 
+#, fuzzy
+msgid "Show additional information on infobar"
+msgstr "Kódolási információ megjelenítése az információs sávon"
+
 msgid "Show alternatives"
 msgstr "Alternatívák megjelenítése"
 
@@ -8328,6 +8336,10 @@ msgstr "Csatorna-típus ikon megjelenítése"
 
 msgid "Show servicelist or movies"
 msgstr "Csatornalista vagy filmek megjelenítése"
+
+#, fuzzy
+msgid "Show simple second infobar"
+msgstr "Második információs sáv megjelenítése"
 
 msgid "Show single service EPG"
 msgstr "Egy csatorna EPG megjelenítése"
@@ -10212,6 +10224,10 @@ msgstr "Virgin EPG információk beolvasása a jelforrásból."
 msgid "Use a gateway"
 msgstr "Átjáró használata"
 
+#, fuzzy
+msgid "Use alternative skin"
+msgstr "Alternatívák hozzáadása"
+
 msgid "Use as PiP if possible"
 msgstr "Kép a képben használata, ha lehetséges"
 
@@ -10248,6 +10264,10 @@ msgstr "Teljesítmény-felvétel mérése"
 #, fuzzy
 msgid "Use skin default"
 msgstr "Alapértelmezett"
+
+#, fuzzy
+msgid "Use the alternative screen"
+msgstr "Alternatívák módosítása"
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "A hálózati Varázsló használata a kijelölt hálózati interfész konfigurálásához"
@@ -10641,8 +10661,14 @@ msgstr "Nyugat-Szahara"
 msgid "What type of service scan do you want?"
 msgstr "Milyen típusú szolgáltatást szeretne keresni?"
 
+msgid "When enabled a simplified version from the second infobar is shown. This can also be toggled instantly by holding the OK buttin when the second infobar is visible. The infobar will shortly disappear and then shown in the other mode."
+msgstr ""
+
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr "Ha engedélyezi, a leválasztott listák is betöltődnek. Ez azt jelenti, hogy az olyan felhasználói listák is betöltődnek, amelyek léteznek, de nincsnek benne a bouquets.tv vagy bouquets.radio fájlban. Ez lehetőséget ad arra, hogy a saját listáit megtartsa, ha a csatornák frissülnek."
+
+msgid "When enabled extra information is shown on the infobar. This can also be toggled instantly by holding the OK button when the inforbar is not visible."
+msgstr ""
 
 msgid "When enabled the Picture in Picture window can be closed with 'exit' button."
 msgstr "Kép-a-Képben bezárása a távírányító 'Exit' gomb megnyomásakor."
@@ -10663,6 +10689,10 @@ msgid "When enabled the set top box is able to wakeup on LAN"
 msgstr "Ha engedélyezi, a készülék képes lesz LAN-on keresztül bekapcsolni."
 
 msgid "When enabled the timer from the fallback tuner is imported"
+msgstr "Ezzel engedélyezheti az időzítők importálását a tartalék tunerből"
+
+#, fuzzy
+msgid "When enabled the timer from the fallback tuner is the default timer"
 msgstr "Ezzel engedélyezheti az időzítők importálását a tartalék tunerből"
 
 msgid "When enabled then when you select a new channel in the channel selection the channel selection will not close. It will only close when you select the current playing service. This is a kind of preview mode"

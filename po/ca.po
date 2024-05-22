@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-10 21:56+0100\n"
+"POT-Creation-Date: 2024-05-21 17:44+0200\n"
 "PO-Revision-Date: 2024-03-09 11:25+0100\n"
 "Last-Translator: Oriol Pellicer <oriol@elsud.org>\n"
 "Language-Team: angelodos angelo2807@hotmail.com\n"
@@ -3097,6 +3097,11 @@ msgstr "Desactivar l’esdeveniment actual però no els esdeveniments que venen"
 msgid "Disable move mode"
 msgstr "Desactivar mode de moviment"
 
+#
+#, fuzzy
+msgid "Disable operator profiles"
+msgstr "Variables de format disponibles"
+
 msgid "Disable timer"
 msgstr "Desactivar programador"
 
@@ -3446,10 +3451,6 @@ msgstr "EPG:"
 msgid "ERROR - failed to scan (%s)!"
 msgstr "ERROR: l'escaneig ha fallat (%s)!"
 
-#, python-format
-msgid "ERROR downloading file %s/%s"
-msgstr "ERROR en baixar el fitxer %s/%s"
-
 #
 msgid "East"
 msgstr "Est"
@@ -3718,7 +3719,8 @@ msgstr "Introduir codi PIN"
 msgid "Enter URL"
 msgstr "Introduir URL"
 
-msgid "Enter an URL where alternative images could be listed for FlashImage. Enter text 'all' for automatic access of many images."
+#, fuzzy
+msgid "Enter an URL where alternative images could be listed for FlashImage."
 msgstr "Introdueix un URL on es puguin mostrar les imatges alternatives per a FlashImage. Introdueix el text 'all' per l'accés automàtic de moltes imatges."
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -8679,6 +8681,10 @@ msgstr "Seleccionar el conjunt de caràcters desplaçat només per al següent c
 msgid "Select the time zone within the area or region."
 msgstr "Seleccionar el fus horari dins de la zona o regió."
 
+#, fuzzy
+msgid "Select the timer from the fallback tuner by default"
+msgstr "Quan estigui activat, s'importarà el programador del sintonitzador de reserva"
+
 msgid "Select the tuner that controls the motorised dish."
 msgstr "Seleccionar el sintonitzador que controla el plat motoritzat."
 
@@ -9088,6 +9094,10 @@ msgstr "Mostra scart VCR al menú principal"
 msgid "Show WLAN status"
 msgstr "Mostrar estat de la xarxa sense fils"
 
+#, fuzzy
+msgid "Show additional information on infobar"
+msgstr "Mostra informació sobre codificació a la barra d'informació"
+
 #
 msgid "Show alternatives"
 msgstr "Mostrar alternatives"
@@ -9257,6 +9267,10 @@ msgstr "Mostrar icones de tipus de servei"
 
 msgid "Show servicelist or movies"
 msgstr "Mostrar llista de serveis o pel·lícules"
+
+#, fuzzy
+msgid "Show simple second infobar"
+msgstr "Mostrar segona barra d'informació"
 
 msgid "Show single service EPG"
 msgstr "Mostrar EPG de servei únic"
@@ -11323,6 +11337,11 @@ msgstr "Utilitzar informació de Virgin EPG quan estigui disponible."
 msgid "Use a gateway"
 msgstr "Utilitzar una porta d'enllaç"
 
+#
+#, fuzzy
+msgid "Use alternative skin"
+msgstr "Afegir alternatives"
+
 msgid "Use as PiP if possible"
 msgstr "Utilitzar com a PiP si és possible"
 
@@ -11360,6 +11379,11 @@ msgstr "Utilitzar mesura d'energia"
 
 msgid "Use skin default"
 msgstr "Utilitzar skin per defecte"
+
+#
+#, fuzzy
+msgid "Use the alternative screen"
+msgstr "Editar alternatives"
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "Utilitzar l’assistent de xarxa per configurar l’adaptador de xarxa seleccionat"
@@ -11806,8 +11830,14 @@ msgstr "Sàhara Occidental"
 msgid "What type of service scan do you want?"
 msgstr "Quin tipus d'escaneig de serveis vols?"
 
+msgid "When enabled a simplified version from the second infobar is shown. This can also be toggled instantly by holding the OK buttin when the second infobar is visible. The infobar will shortly disappear and then shown in the other mode."
+msgstr ""
+
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr "Quan estigui activat, enigma2 carregarà llistes de bouquets d'usuari no enllaçats. Això vol dir que es continuaran carregant els bucs d’usuari disponibles, però que no s'incloguin als fitxers boquets.tv o bouquets.radio. Això et permet, per exemple, mantenir el teu propi bouquet d’usuari mentre s’actualitza la configuració instal·lada"
+
+msgid "When enabled extra information is shown on the infobar. This can also be toggled instantly by holding the OK button when the inforbar is not visible."
+msgstr ""
 
 msgid "When enabled the Picture in Picture window can be closed with 'exit' button."
 msgstr "Quan estigui activat, la finestra de Picture in Picture es podrà tancar amb el botó “Exit”."
@@ -11828,6 +11858,10 @@ msgid "When enabled the set top box is able to wakeup on LAN"
 msgstr "Quan estigui activat, el descodificador és capaç de despertar-se mitjançant la xarxa local"
 
 msgid "When enabled the timer from the fallback tuner is imported"
+msgstr "Quan estigui activat, s'importarà el programador del sintonitzador de reserva"
+
+#, fuzzy
+msgid "When enabled the timer from the fallback tuner is the default timer"
 msgstr "Quan estigui activat, s'importarà el programador del sintonitzador de reserva"
 
 msgid "When enabled then when you select a new channel in the channel selection the channel selection will not close. It will only close when you select the current playing service. This is a kind of preview mode"

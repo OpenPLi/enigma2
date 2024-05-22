@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OPENPLi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-10 21:56+0100\n"
+"POT-Creation-Date: 2024-05-21 17:44+0200\n"
 "PO-Revision-Date: 2015-12-18 21:05+0200\n"
 "Last-Translator: Yetkin AYDIN <yetkina@gmail.com>\n"
 "Language-Team: http://www.hurforum.com <yetkina@gmail.com>\n"
@@ -2863,6 +2863,10 @@ msgstr "Mevcut işlemi devre dışı fakat yeni işlem yapılamıyor."
 msgid "Disable move mode"
 msgstr "Taşıma Kipini Kapat"
 
+#, fuzzy
+msgid "Disable operator profiles"
+msgstr "Kullanılabilir format değişkenleri"
+
 msgid "Disable timer"
 msgstr "Zamanlayıcı Devredışı"
 
@@ -3171,10 +3175,6 @@ msgstr ""
 msgid "ERROR - failed to scan (%s)!"
 msgstr "HATA - Tarama başarısız (%s)!"
 
-#, python-format
-msgid "ERROR downloading file %s/%s"
-msgstr ""
-
 msgid "East"
 msgstr "Doğu"
 
@@ -3423,7 +3423,7 @@ msgstr "Şİfre"
 msgid "Enter URL"
 msgstr ""
 
-msgid "Enter an URL where alternative images could be listed for FlashImage. Enter text 'all' for automatic access of many images."
+msgid "Enter an URL where alternative images could be listed for FlashImage."
 msgstr ""
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -7946,6 +7946,10 @@ msgstr ""
 msgid "Select the time zone within the area or region."
 msgstr "Seçileni sıralama yöntemi:"
 
+#, fuzzy
+msgid "Select the timer from the fallback tuner by default"
+msgstr "Yedek cihaz URL"
+
 msgid "Select the tuner that controls the motorised dish."
 msgstr ""
 
@@ -8329,6 +8333,10 @@ msgstr "Ana menüde VCR scart göster"
 msgid "Show WLAN status"
 msgstr "WLAN durumunu göster"
 
+#, fuzzy
+msgid "Show additional information on infobar"
+msgstr "Bilgi çubuğunda şifreleme bilgisi göster."
+
 msgid "Show alternatives"
 msgstr "Alternatifleri göster"
 
@@ -8493,6 +8501,10 @@ msgstr "Servis Tipi Simgelerini göster"
 
 msgid "Show servicelist or movies"
 msgstr "Servis listesini veya Filmleri göster"
+
+#, fuzzy
+msgid "Show simple second infobar"
+msgstr "İkinci bilgi çubuğunu göster"
 
 msgid "Show single service EPG"
 msgstr "Tek kanal için EPG"
@@ -10418,6 +10430,10 @@ msgstr "Uygun olduğunda Virgin EPG bilgilerini kullan."
 msgid "Use a gateway"
 msgstr "Ağ geçidi kullan"
 
+#, fuzzy
+msgid "Use alternative skin"
+msgstr "Alternatiflere ekle"
+
 msgid "Use as PiP if possible"
 msgstr ""
 
@@ -10454,6 +10470,10 @@ msgstr "Güç kullanımını ölç"
 #, fuzzy
 msgid "Use skin default"
 msgstr "Varsayılan olarak ayarla"
+
+#, fuzzy
+msgid "Use the alternative screen"
+msgstr "Alternatifleri Düzenle"
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "Seçilen ağ bağdaştırıcısını yapılandırmak için ağ sihirbazını kullan"
@@ -10857,8 +10877,14 @@ msgstr ""
 msgid "What type of service scan do you want?"
 msgstr ""
 
+msgid "When enabled a simplified version from the second infobar is shown. This can also be toggled instantly by holding the OK buttin when the second infobar is visible. The infobar will shortly disappear and then shown in the other mode."
+msgstr ""
+
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr "Ne zaman enigma2 etkin bağlantısız buket yükleyecektir. Bu, mevcut değil, fakat bouquets.tv ya bouquets.radio dosyaları dahil değildir userbouquets zaten yüklü olacağı anlamına gelir. Yüklü ayarlar yükseltilmiş ise bu kendi kullanıcı buket tutmak için örneğin yapmanızı sağlar"
+
+msgid "When enabled extra information is shown on the infobar. This can also be toggled instantly by holding the OK button when the inforbar is not visible."
+msgstr ""
 
 msgid "When enabled the Picture in Picture window can be closed with 'exit' button."
 msgstr "Etkin olduğunda RiR çıkış düğmesi ile kapatılabilir."
@@ -10881,6 +10907,9 @@ msgid "When enabled the set top box is able to wakeup on LAN"
 msgstr "Cihazda LAN uyandırma yapabiliyor etkin olduğunda"
 
 msgid "When enabled the timer from the fallback tuner is imported"
+msgstr ""
+
+msgid "When enabled the timer from the fallback tuner is the default timer"
 msgstr ""
 
 msgid "When enabled then when you select a new channel in the channel selection the channel selection will not close. It will only close when you select the current playing service. This is a kind of preview mode"

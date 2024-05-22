@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-10 21:56+0100\n"
+"POT-Creation-Date: 2024-05-21 17:44+0200\n"
 "PO-Revision-Date: 2024-04-10 19:08+0300\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: openPLi Dimitrij\n"
@@ -2815,6 +2815,10 @@ msgstr "Отключить текущее событие, но не отключ
 msgid "Disable move mode"
 msgstr "Выключить режим перемещения"
 
+#, fuzzy
+msgid "Disable operator profiles"
+msgstr "Доступные форматы переменных"
+
 msgid "Disable timer"
 msgstr "Отключить таймер"
 
@@ -3113,10 +3117,6 @@ msgstr "EPG:"
 #, python-format
 msgid "ERROR - failed to scan (%s)!"
 msgstr "ОШИБКА - сканирование не удалось (%s)!"
-
-#, python-format
-msgid "ERROR downloading file %s/%s"
-msgstr "ОШИБКА при загрузке файла %s/%s"
 
 msgid "East"
 msgstr "Восток"
@@ -7759,6 +7759,10 @@ msgstr "Выберите набор символов со сдвигом вир�
 msgid "Select the time zone within the area or region."
 msgstr "Выберите часовой пояс в пределах области или региона."
 
+#, fuzzy
+msgid "Select the timer from the fallback tuner by default"
+msgstr "При включении, таймеры из резервного ресивера будут импортированы"
+
 msgid "Select the tuner that controls the motorised dish."
 msgstr "Выберите тюнер для контроля над мотоподвесом."
 
@@ -8123,6 +8127,10 @@ msgstr "Показать 'Видеомагнитофон' в главном ме
 msgid "Show WLAN status"
 msgstr "Показать статус WLAN"
 
+#, fuzzy
+msgid "Show additional information on infobar"
+msgstr "Показать крипто данные эмулятора в инфобаре"
+
 msgid "Show alternatives"
 msgstr "Показать альтернативу"
 
@@ -8284,6 +8292,10 @@ msgstr "Показать иконки типа сервиса"
 
 msgid "Show servicelist or movies"
 msgstr "ОТкрыть список сервисов или видео"
+
+#, fuzzy
+msgid "Show simple second infobar"
+msgstr "Показать второй инфобар"
 
 msgid "Show single service EPG"
 msgstr "Показать одиночное EPG сервиса"
@@ -10148,6 +10160,9 @@ msgstr "Использовать информацию Virgin(UK DVB-C) EPG, ес
 msgid "Use a gateway"
 msgstr "Использовать шлюз"
 
+msgid "Use alternative skin"
+msgstr "Использовать альтернативный скин"
+
 msgid "Use as PiP if possible"
 msgstr "Использовать как PiP при возможности"
 
@@ -10183,6 +10198,9 @@ msgstr "Использовать измерение питания"
 
 msgid "Use skin default"
 msgstr "Использовать дефолтное значение скина"
+
+msgid "Use the alternative screen"
+msgstr "Использование альтернативного экрана."
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "Использовать мастер настройки сети для конфигурации выбранного сетевого адаптера"
@@ -10579,8 +10597,14 @@ msgstr "Western Sahara"
 msgid "What type of service scan do you want?"
 msgstr "Какой тип сканирования Вы хотите выбрать?"
 
+msgid "When enabled a simplified version from the second infobar is shown. This can also be toggled instantly by holding the OK buttin when the second infobar is visible. The infobar will shortly disappear and then shown in the other mode."
+msgstr ""
+
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr "Если это включено, то при старте энигма2 будут загружены доступные букеты, которые не включены в списки bouquets.tv или bouquets.radio."
+
+msgid "When enabled extra information is shown on the infobar. This can also be toggled instantly by holding the OK button when the inforbar is not visible."
+msgstr ""
 
 msgid "When enabled the Picture in Picture window can be closed with 'exit' button."
 msgstr "Если включено, то можно закрыть экран PiP с помощью кнопки выход."
@@ -10601,6 +10625,10 @@ msgid "When enabled the set top box is able to wakeup on LAN"
 msgstr "Если включено и если спецификация ресивера позволяет, то можно разбудить ресивер из глубокого ожидания по LAN подключению удаленно."
 
 msgid "When enabled the timer from the fallback tuner is imported"
+msgstr "При включении, таймеры из резервного ресивера будут импортированы"
+
+#, fuzzy
+msgid "When enabled the timer from the fallback tuner is the default timer"
 msgstr "При включении, таймеры из резервного ресивера будут импортированы"
 
 msgid "When enabled then when you select a new channel in the channel selection the channel selection will not close. It will only close when you select the current playing service. This is a kind of preview mode"
@@ -12259,12 +12287,3 @@ msgstr "°E"
 
 msgid "°W"
 msgstr "°W"
-
-msgid "Use alternative skin"
-msgstr "Использовать альтернативный скин"
-
-msgid "Use the alternative screen"
-msgstr "Использование альтернативного экрана."
-
-msgid "Hide and confirm invalid key message"
-msgstr "Скрыть и подтвердить неверное(error 10) сообщение"

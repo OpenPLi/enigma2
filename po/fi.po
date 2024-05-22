@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-10 21:56+0100\n"
+"POT-Creation-Date: 2024-05-21 17:44+0200\n"
 "PO-Revision-Date: 2020-05-16 18:41+0200\n"
 "Last-Translator: jamu\n"
 "Language-Team: BoxFreak/jamu\n"
@@ -3123,6 +3123,11 @@ msgid "Disable move mode"
 msgstr "Poistu siirtotilasta"
 
 #
+#, fuzzy
+msgid "Disable operator profiles"
+msgstr "Formaatti-muuttujat"
+
+#
 msgid "Disable timer"
 msgstr "Poista tämä ajastus käytöstä"
 
@@ -3472,10 +3477,6 @@ msgstr ""
 msgid "ERROR - failed to scan (%s)!"
 msgstr "VIRHE - haku epäonnistui (%s)!"
 
-#, python-format
-msgid "ERROR downloading file %s/%s"
-msgstr ""
-
 #
 msgid "East"
 msgstr "Itäistä pituutta"
@@ -3751,7 +3752,7 @@ msgstr "Syötä PIN-koodi"
 msgid "Enter URL"
 msgstr "Syötä URL"
 
-msgid "Enter an URL where alternative images could be listed for FlashImage. Enter text 'all' for automatic access of many images."
+msgid "Enter an URL where alternative images could be listed for FlashImage."
 msgstr ""
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -8780,6 +8781,10 @@ msgstr ""
 msgid "Select the time zone within the area or region."
 msgstr ""
 
+#, fuzzy
+msgid "Select the timer from the fallback tuner by default"
+msgstr "Kun käytössä, ajastukset tuodaan etävastaanottimelta"
+
 msgid "Select the tuner that controls the motorised dish."
 msgstr "Valitse viritin joka ohjaa moottoroitua lautasta."
 
@@ -9194,6 +9199,10 @@ msgstr "Näytä VCR-Scart päävalikossa"
 msgid "Show WLAN status"
 msgstr "Näytä WLAN:in tila"
 
+#, fuzzy
+msgid "Show additional information on infobar"
+msgstr "Näytä salaustyyppi tietopalkissa"
+
 #
 msgid "Show alternatives"
 msgstr "Näytä vaihtoehtoiset kanavat"
@@ -9373,6 +9382,10 @@ msgstr "Näytä kanavatyypin kuvakkeet"
 
 msgid "Show servicelist or movies"
 msgstr "Näytä kanava- tai tallennusluettelo"
+
+#, fuzzy
+msgid "Show simple second infobar"
+msgstr "Näytä laaja tietopalkki"
 
 msgid "Show single service EPG"
 msgstr "Näytä yhden kanavan ohjelmaopas"
@@ -11482,6 +11495,11 @@ msgstr "Käytä Virgin-ohjelmaoppaan tietoja, jos saatavilla."
 msgid "Use a gateway"
 msgstr "Käytä yhdyskäytävää"
 
+#
+#, fuzzy
+msgid "Use alternative skin"
+msgstr "Vaihtoehtoisten kanavien lisäys"
+
 msgid "Use as PiP if possible"
 msgstr "Käytä PiP:nä, jos mahdollista"
 
@@ -11521,6 +11539,11 @@ msgstr "Käytä virranmittausta"
 #, fuzzy
 msgid "Use skin default"
 msgstr "Oletus"
+
+#
+#, fuzzy
+msgid "Use the alternative screen"
+msgstr "Vaihtoehtoisten kanavien lisäys ja poisto"
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "Muokkaa valitun verkkosovittimen asetuksia verkkoavustajan opastamana"
@@ -11973,8 +11996,14 @@ msgstr "Western Sahara"
 msgid "What type of service scan do you want?"
 msgstr ""
 
+msgid "When enabled a simplified version from the second infobar is shown. This can also be toggled instantly by holding the OK buttin when the second infobar is visible. The infobar will shortly disappear and then shown in the other mode."
+msgstr ""
+
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr "Kun päällä, suosikkilistat jotka ovat saatavilla ladataan vaikka ne eivät olisi bouquets.tv tai bouquets.radio tiedostoissa. Tämä antaa sinun pitää omat suosikkilistasi samalla kun asennettuja päivitetään."
+
+msgid "When enabled extra information is shown on the infobar. This can also be toggled instantly by holding the OK button when the inforbar is not visible."
+msgstr ""
 
 msgid "When enabled the Picture in Picture window can be closed with 'exit' button."
 msgstr "Kun päällä, PiP voidaan sulkea exit-napilla."
@@ -11997,6 +12026,10 @@ msgid "When enabled the set top box is able to wakeup on LAN"
 msgstr "Käy käytössä, vastaanotin voi käynnistyä verkkokomennolla"
 
 msgid "When enabled the timer from the fallback tuner is imported"
+msgstr "Kun käytössä, ajastukset tuodaan etävastaanottimelta"
+
+#, fuzzy
+msgid "When enabled the timer from the fallback tuner is the default timer"
 msgstr "Kun käytössä, ajastukset tuodaan etävastaanottimelta"
 
 msgid "When enabled then when you select a new channel in the channel selection the channel selection will not close. It will only close when you select the current playing service. This is a kind of preview mode"

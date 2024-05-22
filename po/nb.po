@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-10 21:56+0100\n"
+"POT-Creation-Date: 2024-05-21 17:44+0200\n"
 "PO-Revision-Date: 2023-01-01 16:49+0100\n"
 "Last-Translator: GeirJ <dummy@dummy.com>\n"
 "Language-Team: GeirJ\n"
@@ -3089,6 +3089,11 @@ msgid "Disable move mode"
 msgstr "Slå av flytte modus"
 
 #
+#, fuzzy
+msgid "Disable operator profiles"
+msgstr "Tilgjengelige formater"
+
+#
 msgid "Disable timer"
 msgstr "Deaktiver timer"
 
@@ -3434,10 +3439,6 @@ msgstr "EPG:"
 msgid "ERROR - failed to scan (%s)!"
 msgstr "FEIL - kunne ikke søke (%s)!"
 
-#, python-format
-msgid "ERROR downloading file %s/%s"
-msgstr "FEIL under nedlasting av filen %s/%s"
-
 #
 msgid "East"
 msgstr "Øst"
@@ -3704,7 +3705,7 @@ msgid "Enter URL"
 msgstr "Tast URL"
 
 #, fuzzy
-msgid "Enter an URL where alternative images could be listed for FlashImage. Enter text 'all' for automatic access of many images."
+msgid "Enter an URL where alternative images could be listed for FlashImage."
 msgstr "Angi en URL-adresse der alternative operativsystem kan være oppført for FlashImage"
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -8630,6 +8631,10 @@ msgstr "Velg shift tegnsettet bare for neste tegn"
 msgid "Select the time zone within the area or region."
 msgstr "Velg tidssone i området eller regionen."
 
+#, fuzzy
+msgid "Select the timer from the fallback tuner by default"
+msgstr "Hvis aktivert, vil timer fra reserve tuner bli importert"
+
 msgid "Select the tuner that controls the motorised dish."
 msgstr "Velg mottakeren som styrer motorisert parabol."
 
@@ -9032,6 +9037,10 @@ msgstr "Vis VCR scart på hovedmenyen"
 msgid "Show WLAN status"
 msgstr "Vis WLAN status"
 
+#, fuzzy
+msgid "Show additional information on infobar"
+msgstr "Vis krypteringsinfo på infobar"
+
 #
 msgid "Show alternatives"
 msgstr "Vis alternativer"
@@ -9217,6 +9226,10 @@ msgstr "Vis tunertype indikator"
 #
 msgid "Show servicelist or movies"
 msgstr "Vis kanalliste eller filmer"
+
+#, fuzzy
+msgid "Show simple second infobar"
+msgstr "Vis ekstra informasjonstekst"
 
 msgid "Show single service EPG"
 msgstr "Vis kanal EPG"
@@ -11288,6 +11301,11 @@ msgstr "Bruk Virgin EPG informasjon når tilgjengelig."
 msgid "Use a gateway"
 msgstr "Bruk gateway"
 
+#
+#, fuzzy
+msgid "Use alternative skin"
+msgstr "Legg til"
+
 msgid "Use as PiP if possible"
 msgstr "Bruk som bilde i bilde hvis mulig"
 
@@ -11327,6 +11345,10 @@ msgstr "Bruk strøm-måling"
 #, fuzzy
 msgid "Use skin default"
 msgstr "Sett standard"
+
+#, fuzzy
+msgid "Use the alternative screen"
+msgstr "Rediger alternativer"
 
 #
 msgid "Use the network wizard to configure selected network adapter"
@@ -11758,8 +11780,14 @@ msgstr "Vest Sahara"
 msgid "What type of service scan do you want?"
 msgstr "Hvilken type kanalsøk vil du bruke?"
 
+msgid "When enabled a simplified version from the second infobar is shown. This can also be toggled instantly by holding the OK buttin when the second infobar is visible. The infobar will shortly disappear and then shown in the other mode."
+msgstr ""
+
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr "Hvis aktivert, vil enigma2 laste kanallister som ikke er tilknyttet mottakeren. Dette betyr at kanallister som er tilgjengelige, men som ikke er tilknyttet radio eller TV filer fortsatt vil bli lastet. Dette gjør at du kan holde egne favorittlister mens installerte innstillinger er oppdatert"
+
+msgid "When enabled extra information is shown on the infobar. This can also be toggled instantly by holding the OK button when the inforbar is not visible."
+msgstr ""
 
 msgid "When enabled the Picture in Picture window can be closed with 'exit' button."
 msgstr "Når aktivert kan bilde i bilde vinduet lukkes med 'exit' knappen."
@@ -11780,6 +11808,10 @@ msgid "When enabled the set top box is able to wakeup on LAN"
 msgstr "Hvis aktivert, vil mottakeren slås på ved ved hjelp av Wake-on-LAN funksjonen"
 
 msgid "When enabled the timer from the fallback tuner is imported"
+msgstr "Hvis aktivert, vil timer fra reserve tuner bli importert"
+
+#, fuzzy
+msgid "When enabled the timer from the fallback tuner is the default timer"
 msgstr "Hvis aktivert, vil timer fra reserve tuner bli importert"
 
 msgid "When enabled then when you select a new channel in the channel selection the channel selection will not close. It will only close when you select the current playing service. This is a kind of preview mode"

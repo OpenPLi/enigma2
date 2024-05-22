@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-10 21:56+0100\n"
+"POT-Creation-Date: 2024-05-21 17:44+0200\n"
 "PO-Revision-Date: 2021-07-31 17:00+0800\n"
 "Last-Translator: 孤独之剑 <haotzyy1970@yahoo.com>\n"
 "Language-Team: 孤独之剑 <haotzyy1970@yahoo.com>\n"
@@ -2828,6 +2828,10 @@ msgstr "停止当前事件但排除即将到来的事件"
 msgid "Disable move mode"
 msgstr "禁用移动模式"
 
+#, fuzzy
+msgid "Disable operator profiles"
+msgstr "可用的格式变量"
+
 msgid "Disable timer"
 msgstr "禁用定时器"
 
@@ -3123,10 +3127,6 @@ msgstr "EPG:"
 msgid "ERROR - failed to scan (%s)!"
 msgstr "错误 - 扫描 (%s)失败!"
 
-#, fuzzy, python-format
-msgid "ERROR downloading file %s/%s"
-msgstr "下载文件 %s 时出错"
-
 msgid "East"
 msgstr "东"
 
@@ -3367,7 +3367,7 @@ msgid "Enter URL"
 msgstr "输入URL地址"
 
 #, fuzzy
-msgid "Enter an URL where alternative images could be listed for FlashImage. Enter text 'all' for automatic access of many images."
+msgid "Enter an URL where alternative images could be listed for FlashImage."
 msgstr "输入一个URL,其中可以列出Flash镜像的可选镜像"
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -7795,6 +7795,10 @@ msgstr "只为下一个字符使用键盘'shift'键选择字符集"
 msgid "Select the time zone within the area or region."
 msgstr "选择相应区域内的时区."
 
+#, fuzzy
+msgid "Select the timer from the fallback tuner by default"
+msgstr "启用后,从备用调谐器导入定时器"
+
 msgid "Select the tuner that controls the motorised dish."
 msgstr "选择控制电动碟的调谐器."
 
@@ -8168,6 +8172,10 @@ msgstr "在主菜单显示VCR scart接口"
 msgid "Show WLAN status"
 msgstr "显示WLAN状态"
 
+#, fuzzy
+msgid "Show additional information on infobar"
+msgstr "在信息栏显示加密信息"
+
 msgid "Show alternatives"
 msgstr "‪显示备选方案"
 
@@ -8329,6 +8337,10 @@ msgstr "显示频道类型图标"
 
 msgid "Show servicelist or movies"
 msgstr "显示频道列表或电影"
+
+#, fuzzy
+msgid "Show simple second infobar"
+msgstr "显示第二信息栏"
 
 msgid "Show single service EPG"
 msgstr "单个EPG"
@@ -10210,6 +10222,10 @@ msgstr "当Virgin EPG信息可用是启用此EPG."
 msgid "Use a gateway"
 msgstr "使用网关"
 
+#, fuzzy
+msgid "Use alternative skin"
+msgstr "增加项目"
+
 msgid "Use as PiP if possible"
 msgstr "如果可能,可用作画中画使用"
 
@@ -10246,6 +10262,10 @@ msgstr "使用功率测量"
 #, fuzzy
 msgid "Use skin default"
 msgstr "设为默认"
+
+#, fuzzy
+msgid "Use the alternative screen"
+msgstr "编辑备选方案"
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "使用网络向导配置所选网络适配器"
@@ -10643,8 +10663,14 @@ msgstr "西撒哈拉"
 msgid "What type of service scan do you want?"
 msgstr "您要什么类型的扫描?"
 
+msgid "When enabled a simplified version from the second infobar is shown. This can also be toggled instantly by holding the OK buttin when the second infobar is visible. The infobar will shortly disappear and then shown in the other mode."
+msgstr ""
+
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr "一旦启用,enigma2将会加载未连接的用户自定义组,也就是说用户自定义组可用,但是不包括自定义的电视和广播节目文件的自定义组仍然会被加载.这将允许保留属于你自己的个人用户自定义组,尤其是升级设置时非常有用"
+
+msgid "When enabled extra information is shown on the infobar. This can also be toggled instantly by holding the OK button when the inforbar is not visible."
+msgstr ""
 
 msgid "When enabled the Picture in Picture window can be closed with 'exit' button."
 msgstr "启用后,可使用'exit'键关闭画中画窗口."
@@ -10665,6 +10691,10 @@ msgid "When enabled the set top box is able to wakeup on LAN"
 msgstr "一旦启用,机顶盒将可以通过LAN唤醒"
 
 msgid "When enabled the timer from the fallback tuner is imported"
+msgstr "启用后,从备用调谐器导入定时器"
+
+#, fuzzy
+msgid "When enabled the timer from the fallback tuner is the default timer"
 msgstr "启用后,从备用调谐器导入定时器"
 
 msgid "When enabled then when you select a new channel in the channel selection the channel selection will not close. It will only close when you select the current playing service. This is a kind of preview mode"

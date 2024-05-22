@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-10 21:56+0100\n"
+"POT-Creation-Date: 2024-05-21 17:44+0200\n"
 "PO-Revision-Date: 2021-03-06\n"
 "Last-Translator: LinuxSTV\n"
 "Language-Team: \n"
@@ -2907,6 +2907,10 @@ msgstr "Matikan acara saat ini tapi tidak acara mendatang"
 msgid "Disable move mode"
 msgstr "Matikan mode pindahkan"
 
+#, fuzzy
+msgid "Disable operator profiles"
+msgstr "Variabel format tersedia"
+
 msgid "Disable timer"
 msgstr "Matikan pewaktu"
 
@@ -3215,10 +3219,6 @@ msgstr "EPG:"
 msgid "ERROR - failed to scan (%s)!"
 msgstr "Kesalahan - gagal melacak (%s)!"
 
-#, fuzzy, python-format
-msgid "ERROR downloading file %s/%s"
-msgstr "Terjadi kesalahan mengunduh berkas %s"
-
 msgid "East"
 msgstr "Timur"
 
@@ -3470,7 +3470,7 @@ msgid "Enter URL"
 msgstr "Masukkan PIN"
 
 #, fuzzy
-msgid "Enter an URL where alternative images could be listed for FlashImage. Enter text 'all' for automatic access of many images."
+msgid "Enter an URL where alternative images could be listed for FlashImage."
 msgstr "Masukkan URL dimana image alternatif bisa didaftar untuk FlashImage"
 
 msgid "Enter if you are in the east or west hemisphere."
@@ -8042,6 +8042,10 @@ msgstr "Pilih set karakter geser pada papankunci virtual"
 msgid "Select the time zone within the area or region."
 msgstr "Pilih resolusi horizontal:"
 
+#, fuzzy
+msgid "Select the timer from the fallback tuner by default"
+msgstr "Ketika diaktifkan, pewaktu dari penala digunakan diimpor"
+
 msgid "Select the tuner that controls the motorised dish."
 msgstr "Pilih penala yang mengatur parabola bergerak."
 
@@ -8425,6 +8429,10 @@ msgstr "Tampilkan scart VCR pada menu utama"
 msgid "Show WLAN status"
 msgstr "Tampilkan status WLAN"
 
+#, fuzzy
+msgid "Show additional information on infobar"
+msgstr "Tampilkan info kripto di infobar"
+
 msgid "Show alternatives"
 msgstr "Tampilkan alternatif"
 
@@ -8588,6 +8596,10 @@ msgstr "Tampilkan ikon jenis layanan"
 
 msgid "Show servicelist or movies"
 msgstr "Tampilkan daftar layanan atau film"
+
+#, fuzzy
+msgid "Show simple second infobar"
+msgstr "Tampilkan bilah info kedua"
 
 msgid "Show single service EPG"
 msgstr "Tampilkan EPG layanan tunggal"
@@ -10524,6 +10536,10 @@ msgstr "Gunakan info EPG Virgin ketika tersedia."
 msgid "Use a gateway"
 msgstr "Gunakan sebuah gateway"
 
+#, fuzzy
+msgid "Use alternative skin"
+msgstr "Tambahkan alternatif"
+
 msgid "Use as PiP if possible"
 msgstr "Gunakan sbg PiP jika memungkinkan"
 
@@ -10560,6 +10576,10 @@ msgstr "Gunakan perhitungan daya"
 #, fuzzy
 msgid "Use skin default"
 msgstr "Atur bawaan"
+
+#, fuzzy
+msgid "Use the alternative screen"
+msgstr "Ubah alternatif"
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "Gunakan wizard jaringan untuk menyetel adapter jaringan yg dipilih"
@@ -10966,8 +10986,14 @@ msgstr "Sahara Barat"
 msgid "What type of service scan do you want?"
 msgstr "Jenis pelacakan layanan apa yg anda inginkan?"
 
+msgid "When enabled a simplified version from the second infobar is shown. This can also be toggled instantly by holding the OK buttin when the second infobar is visible. The infobar will shortly disappear and then shown in the other mode."
+msgstr ""
+
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr "Ketika diaktifkan enigma2 akan memuat buket pengguna yg tak terhubung. Ini berarti bahwa buket pengguna yg tersedia, tapi tidak disertakan dalam file bouquets.tv atau bouquets.radio, akan tetap dimuat. Ini memungkinkan anda misalnya untuk menyimpan buket pengguna anda sendiri sementara pengaturan yg terpasang sedang ditingkatkan"
+
+msgid "When enabled extra information is shown on the infobar. This can also be toggled instantly by holding the OK button when the inforbar is not visible."
+msgstr ""
 
 msgid "When enabled the Picture in Picture window can be closed with 'exit' button."
 msgstr "Ketika diaktifkan, PiP bisa ditutup dengan tombol keluar (exit)."
@@ -10990,6 +11016,10 @@ msgid "When enabled the set top box is able to wakeup on LAN"
 msgstr "Ketika diaktifkan, Rx bisa melakukan 'wakeup on LAN'"
 
 msgid "When enabled the timer from the fallback tuner is imported"
+msgstr "Ketika diaktifkan, pewaktu dari penala digunakan diimpor"
+
+#, fuzzy
+msgid "When enabled the timer from the fallback tuner is the default timer"
 msgstr "Ketika diaktifkan, pewaktu dari penala digunakan diimpor"
 
 msgid "When enabled then when you select a new channel in the channel selection the channel selection will not close. It will only close when you select the current playing service. This is a kind of preview mode"
