@@ -1,46 +1,16 @@
-from Screens.Screen import Screen
-from Components.Label import Label
-from Components.ActionMap import ActionMap
-from Components.Pixmap import Pixmap
-from Components.Sources.Boolean import Boolean
-from Components.Sources.StaticText import StaticText
+from Screens.Setup import Setup
 from Components.config import config, configfile, ConfigSelection, ConfigIP, ConfigInteger, ConfigBoolean
-from Components.ConfigList import ConfigListScreen
 from Components.ImportChannels import ImportChannels
 
 from enigma import getPeerStreamingBoxes
 
 
-class SetupFallbacktuner(ConfigListScreen, Screen):
+class SetupFallbacktuner(Setup):
 	def __init__(self, session):
-		Screen.__init__(self, session)
-		Screen.setTitle(self, _("Fallback tuner setup"))
-		self.skinName = ["FallbackTunerSetup", "Setup"]
-		self.onChangedEntry = []
-		ConfigListScreen.__init__(self, [], session=session, on_change=self.changedEntry)
-
-		self["actions2"] = ActionMap(["SetupActions"],
-		{
-			"ok": self.run,
-			"menu": self.keyCancel,
-			"cancel": self.keyCancel,
-			"save": self.run,
-		}, -2)
-
-		self["key_red"] = StaticText(_("Exit"))
-		self["key_green"] = StaticText(_("Save"))
-
-		self["description"] = Label("")
-		self["VKeyIcon"] = Boolean(False)
-		self["HelpWindow"] = Pixmap()
-		self["HelpWindow"].hide()
-
-		self.force_update_list = False
 		self.createConfig()
-		self.createSetup()
+		Setup.__init__(self, session, None)
+		self.title = _("Fallback tuner setup")
 		self.remote_fallback_prev = config.usage.remote_fallback_import.value
-		self["config"].onSelectionChanged.append(self.selectionChanged)
-		self.selectionChanged()
 
 	def createConfig(self):
 
@@ -213,20 +183,7 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 						_("URL of fallback remote receiver")))
 		self["config"].list = self.list
 
-	def selectionChanged(self):
-		if self.force_update_list:
-			self["config"].onSelectionChanged.remove(self.selectionChanged)
-			self.createSetup()
-			self["config"].onSelectionChanged.append(self.selectionChanged)
-			self.force_update_list = False
-		if not (isinstance(self["config"].getCurrent()[1], ConfigBoolean) or isinstance(self["config"].getCurrent()[1], ConfigSelection)):
-			self.force_update_list = True
-
-	def changedEntry(self):
-		if isinstance(self["config"].getCurrent()[1], ConfigBoolean) or isinstance(self["config"].getCurrent()[1], ConfigSelection):
-			self.createSetup()
-
-	def run(self):
+	def keySave(self):
 		if self.avahiselect.value == "ip":
 			config.usage.remote_fallback.value = "http://%d.%d.%d.%d:%d" % (tuple(self.ip.value) + (self.port.value,))
 		elif self.avahiselect.value != "url":
