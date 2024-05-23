@@ -792,13 +792,13 @@ void eDVBCICcSession::set_descrambler_key()
 	if (m_descrambler_fd != -1 && m_current_ca_demux_id != m_slot->getCADemuxID())
 	{
 		descrambler_deinit(m_descrambler_fd);
-		m_descrambler_fd = descrambler_init(m_slot->getSlotID(), m_slot->getCADemuxID());
+		m_descrambler_fd = descrambler_init(m_slot->getSlotID(), m_slot->getCADemuxID() + (m_slot->getIsCA0Excluded() ? 1 : 0));
 		m_current_ca_demux_id = m_slot->getCADemuxID();
 	}
 
 	if (m_descrambler_fd == -1 && m_slot->getCADemuxID() > -1)
 	{
-		m_descrambler_fd = descrambler_init(m_slot->getSlotID(), m_slot->getCADemuxID());
+		m_descrambler_fd = descrambler_init(m_slot->getSlotID(), m_slot->getCADemuxID() + (m_slot->getIsCA0Excluded() ? 1 : 0));
 		m_current_ca_demux_id = m_slot->getCADemuxID();
 	}
 

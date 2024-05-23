@@ -1279,6 +1279,10 @@ eDVBCISlot::eDVBCISlot(eMainloop *context, int nr):
 	snprintf(config_key_operator_profile, 255, "config.ci.%d.disable_operator_profile", slotid);
 	bool operator_profile_disabled = eConfigManager::getConfigBoolValue(config_key_operator_profile, false);
 	m_operator_profiles_disabled = operator_profile_disabled;
+	char config_key_ca0_excluded[255];
+	snprintf(config_key_ca0_excluded, 255, "config.ci.%d.exclude_ca0_device", slotid);
+	bool ca0_excluded = eConfigManager::getConfigBoolValue(config_key_ca0_excluded, false);
+	m_ca0_excluded = ca0_excluded;
 	snprintf(configStr, 255, "config.ci.%d.enabled", slotid);
 	bool enabled = eConfigManager::getConfigBoolValue(configStr, true);
 	if (enabled)
