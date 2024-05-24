@@ -8,4 +8,4 @@ install_PYTHON =	\
 	GraphMultiEpg.py \
 	GraphMultiEpgSetup.py
 
-
+install_DATA = setup.xml
