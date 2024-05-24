@@ -72,6 +72,7 @@ config.misc.graph_mepg.event_alignment = ConfigSelection(default=possibleAlignme
 config.misc.graph_mepg.show_timelines = ConfigSelection(default="all", choices=[("nothing", _("no")), ("all", _("all")), ("now", _("actual time only"))])
 config.misc.graph_mepg.servicename_alignment = ConfigSelection(default=possibleAlignmentChoices[0][0], choices=possibleAlignmentChoices)
 config.misc.graph_mepg.extension_menu = ConfigYesNo(default=False)
+config.misc.graph_mepg.extension_menu.addNotifier(plugins.reloadPlugins, initial_call=False, immediate_feedback=False)
 config.misc.graph_mepg.show_record_clocks = ConfigYesNo(default=True)
 config.misc.graph_mepg.show_disabled_timers= ConfigYesNo(default=False)
 config.misc.graph_mepg.zap_blind_bouquets = ConfigYesNo(default=False)
