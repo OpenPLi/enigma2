@@ -154,8 +154,6 @@ class InputDeviceSetup(ConfigListScreen, Screen):
 		self.setTitle(_("Input device setup"))
 		self.inputDevice = device
 		iInputDevices.currentDevice = self.inputDevice
-		self.onChangedEntry = []
-		self.isStepSlider = None
 		self.enableEntry = None
 		self.repeatEntry = None
 		self.delayEntry = None
@@ -163,19 +161,8 @@ class InputDeviceSetup(ConfigListScreen, Screen):
 		self.enableConfigEntry = None
 
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
+		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.createSetup, fullUI=True)
 
-		self["actions"] = ActionMap(["SetupActions", "MenuActions"],
-			{
-				"cancel": self.keyCancel,
-				"save": self.apply,
-				"menu": self.closeRecursive,
-			}, -2)
-
-		self["key_red"] = StaticText(_("Cancel"))
-		self["key_green"] = StaticText(_("OK"))
-		self["key_yellow"] = StaticText()
-		self["key_blue"] = StaticText()
 		self["introduction"] = StaticText()
 
 		self.createSetup()
@@ -192,18 +179,10 @@ class InputDeviceSetup(ConfigListScreen, Screen):
 
 	def createSetup(self):
 		self.list = []
-		label = _("Change repeat and delay settings?")
-		cmd = "self.enableEntry = (label, config.inputDevices." + self.inputDevice + ".enabled)"
-		exec(cmd)
-		label = _("Interval between keys when repeating:")
-		cmd = "self.repeatEntry = (label, config.inputDevices." + self.inputDevice + ".repeat)"
-		exec(cmd)
-		label = _("Delay before key repeat starts:")
-		cmd = "self.delayEntry = (label, config.inputDevices." + self.inputDevice + ".delay)"
-		exec(cmd)
-		label = _("Device name:")
-		cmd = "self.nameEntry = (label, config.inputDevices." + self.inputDevice + ".name)"
-		exec(cmd)
+		self.enableEntry = (_("Change repeat and delay settings?"), getattr(config.inputDevices, self.inputDevice).enabled)
+		self.repeatEntry = (_("Interval between keys when repeating:"), getattr(config.inputDevices, self.inputDevice).repeat)
+		self.delayEntry = (_("Delay before key repeat starts:"), getattr(config.inputDevices, self.inputDevice).delay)
+		self.nameEntry = (_("Device name:"), getattr(config.inputDevices, self.inputDevice).name)
 		if self.enableEntry:
 			if isinstance(self.enableEntry[1], ConfigYesNo):
 				self.enableConfigEntry = self.enableEntry[1]
@@ -252,30 +231,11 @@ class InputDeviceSetup(ConfigListScreen, Screen):
 			return
 		else:
 			self.nameEntry[1].setValue(iInputDevices.getDeviceAttribute(self.inputDevice, 'name'))
-			cmd = "config.inputDevices." + self.inputDevice + ".name.save()"
-			exec(cmd)
+			getattr(config.inputDevices, self.inputDevice).name.save()
 			self.keySave()
 
 	def apply(self):
 		self.session.openWithCallback(self.confirm, MessageBox, _("Use these input device settings?"), MessageBox.TYPE_YESNO, timeout=20, default=True)
-
-	def cancelConfirm(self, result):
-		if not result:
-			return
-		for x in self["config"].list:
-			x[1].cancel()
-		self.close()
-
-	def keyCancel(self):
-		if self["config"].isChanged():
-			self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Really close without saving settings?"), MessageBox.TYPE_YESNO, timeout=20, default=True)
-		else:
-			self.close()
-
-	def changedEntry(self):
-		for x in self.onChangedEntry:
-			x()
-		self.selectionChanged()
 
 
 class RemoteControlType(ConfigListScreen, Screen):

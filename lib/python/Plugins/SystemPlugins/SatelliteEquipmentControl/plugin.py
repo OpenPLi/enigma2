@@ -18,14 +18,9 @@ class SecParameterSetup(ConfigListScreen, Screen):
 		self["key_green"] = StaticText(_("OK"))
 		self["key_blue"] = StaticText(_("Restore defaults"))
 
-		self["actions"] = ActionMap(["SetupActions", "MenuActions", "ColorActions"],
+		self["actions"] = ActionMap(["ColorActions"],
 		{
-			"ok": self.keySave,
-			"green": self.keySave,
-			"cancel": self.keyCancel,
-			"red": self.keyCancel,
 			"blue": self.resetDefaults,
-			"menu": self.closeRecursive,
 		}, -2)
 
 		self.secList = [
@@ -50,7 +45,7 @@ class SecParameterSetup(ConfigListScreen, Screen):
 			(_("Unicable delay after enable voltage before switch command"), config.sec.unicable_delay_after_enable_voltage_before_switch_command),
 			(_("Unicable delay after change voltage before switch command"), config.sec.unicable_delay_after_change_voltage_before_switch_command),
 			(_("Unicable delay after last diseqc command"), config.sec.unicable_delay_after_last_diseqc_command)]
-		ConfigListScreen.__init__(self, [])
+		ConfigListScreen.__init__(self, [], fullUI=True)
 		self.createSetup()
 
 	def createSetup(self):

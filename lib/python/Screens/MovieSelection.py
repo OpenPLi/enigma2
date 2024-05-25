@@ -24,6 +24,7 @@ from Screens.ChoiceBox import ChoiceBox
 from Screens.LocationBox import MovieLocationBox
 from Screens.HelpMenu import HelpableScreen
 from Screens.InputBox import PinInput
+from Screens.Setup import Setup
 import Screens.InfoBar
 
 from Tools.NumericalTextInput import NumericalTextInput, MAP_SEARCH_UPCASE
@@ -263,20 +264,24 @@ def buildMovieLocationList(bookmarks):
 		inlist.append(d)
 
 
-class MovieBrowserConfiguration(ConfigListScreen, Screen):
+class MovieBrowserConfiguration(Setup):
 	def __init__(self, session, args=0):
-		Screen.__init__(self, session)
+		self.createConfig()
+		Setup.__init__(self, session, None)
 		self.setTitle(_("Movie list configuration"))
-		self.skinName = ['MovieBrowserConfiguration', 'Setup']
+
+	def createConfig(self):
 		cfg = ConfigSubsection()
 		self.cfg = cfg
 		cfg.moviesort = ConfigSelection(default=str(config.movielist.moviesort.value), choices=l_moviesort)
 		cfg.listtype = ConfigSelection(default=str(config.movielist.listtype.value), choices=l_listtype)
 		cfg.description = ConfigYesNo(default=(config.movielist.description.value != MovieList.HIDE_DESCRIPTION))
+
+	def createSetup(self):
 		configList = [
-			(_("Sort"), cfg.moviesort, _("You can set sorting type for items in movielist.")),
-			(_("Show extended description"), cfg.description, _("You can enable if will be displayed extended EPG description for item.")),
-			(_("Type"), cfg.listtype, _("Set movielist type.")),
+			(_("Sort"), self.cfg.moviesort, _("You can set sorting type for items in movielist.")),
+			(_("Show extended description"), self.cfg.description, _("You can enable if will be displayed extended EPG description for item.")),
+			(_("Type"), self.cfg.listtype, _("Set movielist type.")),
 			(_("Use individual settings for each directory"), config.movielist.settings_per_directory, _("Settings can be different for each directory separately (for non removeable devices only).")),
 			(_("Allow quitting movie player with exit"), config.usage.leave_movieplayer_onExit, _("When enabled, it is possible to leave the movie player with exit.")),
 			(_("Behavior when a movie reaches the end"), config.usage.on_movie_eof, _("Set action when movie playback is finished.")),
@@ -294,29 +299,9 @@ class MovieBrowserConfiguration(ConfigListScreen, Screen):
 			configList.insert(3, (_("Use alternative skin"), config.movielist.useslim, _("Use the alternative screen")))
 		for btn in ('red', 'green', 'yellow', 'blue', 'TV', 'Radio', 'Text', 'F1', 'F2', 'F3'):
 			configList.append((_(btn), userDefinedButtons[btn]))
-		ConfigListScreen.__init__(self, configList, session=session, on_change=self.changedEntry)
-		self["key_red"] = StaticText(_("Cancel"))
-		self["key_green"] = StaticText(_("OK"))
-		self["setupActions"] = ActionMap(["SetupActions", "ColorActions", "MenuActions"],
-		{
-			"red": self.cancel,
-			"green": self.save,
-			"save": self.save,
-			"cancel": self.cancel,
-			"ok": self.save,
-			"menu": self.cancel,
-		}, -2)
+		self["config"].list = configList
 
-		self["description"] = Label()
-
-		# For compatibility with the Setup screen
-		self["HelpWindow"] = Pixmap()
-		self["HelpWindow"].hide()
-		self["VKeyIcon"] = Boolean(False)
-
-		self.onChangedEntry = []
-
-	def save(self):
+	def keySave(self):
 		self.saveAll()
 		cfg = self.cfg
 		config.movielist.moviesort.value = int(cfg.moviesort.value)
@@ -332,18 +317,6 @@ class MovieBrowserConfiguration(ConfigListScreen, Screen):
 			config.movielist.useslim.save()
 			config.usage.on_movie_eof.save()
 		self.close(True)
-
-	def cancel(self):
-		if self["config"].isChanged():
-			self.session.openWithCallback(self.cancelCallback, MessageBox, _("Really close without saving settings?"))
-		else:
-			self.cancelCallback(True)
-
-	def cancelCallback(self, answer):
-		if answer:
-			for x in self["config"].list:
-				x[1].cancel()
-			self.close(False)
 
 
 class MovieContextMenuSummary(Screen):
@@ -1324,7 +1297,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 	def configure(self):
 		self.session.openWithCallback(self.configureDone, MovieBrowserConfiguration)
 
-	def configureDone(self, result):
+	def configureDone(self, result=None):
 		if result:
 			self.applyConfigSettings({
 				"listtype": config.movielist.listtype.value,
