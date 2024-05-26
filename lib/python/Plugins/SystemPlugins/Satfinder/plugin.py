@@ -48,10 +48,9 @@ class Satfinder(ScanSetup):
 		self.setTitle(_("Signal finder"))
 		self["Frontend"] = FrontendStatus(frontend_source=lambda: self.frontend, update_interval=100)
 
-		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
+		self["actions"] = ActionMap(["SetupActions"],
 		{
 			"save": self.keyGoScan,
-			"ok": self.keyGoScan,
 			"cancel": self.keyCancel,
 		}, -3)
 
