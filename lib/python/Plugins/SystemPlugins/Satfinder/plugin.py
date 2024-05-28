@@ -45,6 +45,7 @@ class Satfinder(ScanSetup):
 		self.timer.callback.append(self.updateFrontendStatus)
 
 		ScanSetup.__init__(self, session)
+		self.skinName = ["Satfinder"]
 		self.setTitle(_("Signal finder"))
 		self["Frontend"] = FrontendStatus(frontend_source=lambda: self.frontend, update_interval=100)
 
