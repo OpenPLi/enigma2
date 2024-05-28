@@ -1,13 +1,13 @@
-Adding a menu image that identifies the current menu screen based on menuID
-===========================================================================
+Adding a menu image that identifies the current menu screen based on menu KEY
+=============================================================================
 
-In skin.xml add the list of images to the "menus" section based on menuID.
+In skin.xml add the list of images to the "menus" section based on menu KEY.
 
 	Syntax:
 	
 		<menus>
 			<menu key="default" image="path/myNameForDefault.png" />
-			<menu key="<menuID>" image="path/myNameFor<menuID>.png" />
+			<menu key="<menu KEY>" image="path/myNameFor<menu KEY>.png" />
 		</menus>
 	
 	This element is optional but if defined allows a skin designer to associate 
