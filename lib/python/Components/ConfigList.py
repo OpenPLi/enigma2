@@ -320,7 +320,7 @@ class ConfigListScreen:
 
 	def keyMenu(self):
 		currConfig = self["config"].getCurrent()
-		if currConfig and currConfig[1].enabled and hasattr(currConfig[1], "description"):
+		if currConfig and currConfig[1].enabled and hasattr(currConfig[1], "description") and len(currConfig[1].choices.choices) > 1:
 			self.session.openWithCallback(
 				self.keyMenuCallback, ChoiceBox, title=currConfig[0],
 				list=list(zip(currConfig[1].description, currConfig[1].choices)),
