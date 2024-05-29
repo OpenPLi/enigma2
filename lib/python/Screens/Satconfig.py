@@ -94,7 +94,7 @@ class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
 				config_mode_choices["loopthrough"] = _("Loop through from")
 			self.nimConfig.configMode.setChoices(config_mode_choices, "simple")
 
-	def createSetup(self):
+	def changedEntry(self):
 		self.adaptConfigModeChoices()
 		self.list = []
 
@@ -332,7 +332,7 @@ class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
 			self.advancedUnicable, self.advancedConnected, self.toneburst, self.committedDiseqcCommand, self.uncommittedDiseqcCommand, self.singleSatEntry, self.commandOrder,
 			self.showAdditionalMotorOptions, self.cableScanType, self.multiType, self.cableConfigScanDetails, self.terrestrialCountriesEntry, self.cableCountriesEntry,
 			self.toneamplitude, self.scpc, self.t2mirawmode, self.forcelnbpower, self.forcetoneburst, self.externallyPowered):
-				self.createSetup()
+				self.changedEntry()
 
 	def run(self):
 		if self.nimConfig.configMode.value == "simple" and self.nimConfig.diseqcMode.value in ("single", "diseqc_a_b", "diseqc_a_b_c_d") and (not self.nim.isCombined() or self.nimConfig.configModeDVBS.value):
@@ -376,7 +376,7 @@ class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
 			Wizard.instance.back()
 		else:
 			self.restartPrevService(close=False)
-			self.createSetup()
+			self.changedEntry()
 
 	def fillListWithAdvancedSatEntrys(self, Sat):
 		lnbnum = int(Sat.lnb.value)
@@ -619,7 +619,7 @@ class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
 		self.slotid = slotid
 		self.nim = nimmanager.nim_slots[slotid]
 		self.nimConfig = self.nim.config
-		self.createSetup()
+		self.changedEntry()
 		self.setTitle(_("Setup") + " " + self.nim.friendly_full_description)
 
 	def keyLeft(self):
@@ -727,14 +727,14 @@ class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
 			self.nimConfig.configMode.selectNext()
 			self["config"].invalidate(self.configMode)
 			self.setTextKeyBlue()
-			self.createSetup()
+			self.changedEntry()
 
 	def nothingConnectedShortcut(self):
 		if self.isChanged():
 			for x in self["config"].list:
 				x[1].cancel()
 			self.setTextKeyBlue()
-			self.createSetup()
+			self.changedEntry()
 
 	def countrycodeToCountry(self, cc):
 		if not hasattr(self, 'countrycodes'):
