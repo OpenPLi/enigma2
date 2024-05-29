@@ -9,7 +9,7 @@
 from Components.Converter.Converter import Converter
 from Components.Element import cached
 
-legacyIDs = [
+legacyIDs = {
 	"info_screen": "information",
 	"setup_selection": "setup",
 	"service_searching_selection": "scan",
@@ -21,7 +21,7 @@ legacyIDs = [
 	"hardisk_selection": "harddisk",
 	"cam_setup": "cam",
 	"standby_restart_list": "shutdown",
-]
+}
 
 
 class MenuEntryCompare(Converter):
