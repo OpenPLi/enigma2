@@ -571,7 +571,7 @@ def sanitizeFilename(filename):
 	and make sure we do not exceed Windows filename length limits.
 	Hence a less safe blacklist, rather than a whitelist.
 	"""
-	blacklist = ["\\", "/", ":", "*", "?", "\"", "<", ">", "|", "\0", "(", ")", " "]
+	blacklist = ["\\", "/", ":", "*", "?", "\"", "<", ">", "|", "\0"]
 	reserved = [
 		"CON", "PRN", "AUX", "NUL", "COM1", "COM2", "COM3", "COM4", "COM5",
 		"COM6", "COM7", "COM8", "COM9", "LPT1", "LPT2", "LPT3", "LPT4", "LPT5",
