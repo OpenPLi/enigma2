@@ -94,7 +94,7 @@ class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
 				config_mode_choices["loopthrough"] = _("Loop through from")
 			self.nimConfig.configMode.setChoices(config_mode_choices, "simple")
 
-	def changedEntry(self):
+	def createSetup(self):
 		self.adaptConfigModeChoices()
 		self.list = []
 
@@ -332,7 +332,7 @@ class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
 			self.advancedUnicable, self.advancedConnected, self.toneburst, self.committedDiseqcCommand, self.uncommittedDiseqcCommand, self.singleSatEntry, self.commandOrder,
 			self.showAdditionalMotorOptions, self.cableScanType, self.multiType, self.cableConfigScanDetails, self.terrestrialCountriesEntry, self.cableCountriesEntry,
 			self.toneamplitude, self.scpc, self.t2mirawmode, self.forcelnbpower, self.forcetoneburst, self.externallyPowered):
-				self.changedEntry()
+				self.createSetup()
 
 	def run(self):
 		if self.nimConfig.configMode.value == "simple" and self.nimConfig.diseqcMode.value in ("single", "diseqc_a_b", "diseqc_a_b_c_d") and (not self.nim.isCombined() or self.nimConfig.configModeDVBS.value):
@@ -376,7 +376,7 @@ class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
 			Wizard.instance.back()
 		else:
 			self.restartPrevService(close=False)
-			self.changedEntry()
+			self.createSetup()
 
 	def fillListWithAdvancedSatEntrys(self, Sat):
 		lnbnum = int(Sat.lnb.value)
@@ -619,8 +619,18 @@ class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
 		self.slotid = slotid
 		self.nim = nimmanager.nim_slots[slotid]
 		self.nimConfig = self.nim.config
-		self.changedEntry()
+		self.createSetup()
 		self.setTitle(_("Setup") + " " + self.nim.friendly_full_description)
+
+	def changedEntry(self):
+		current = self["config"].getCurrent()
+		if current[1].isChanged():
+			self.manipulatedItems.append(current)  # keep track of all manipulated items including ones that have been removed from self["config"].list
+		elif current in self.manipulatedItems:
+			self.manipulatedItems.remove(current)
+		if isinstance(current[1], (ConfigBoolean, ConfigSelection)):
+			self.createSetup()
+		ConfigListScreen.changedEntry(self)  # force summary update immediately, not just on select/deselect
 
 	def keyLeft(self):
 		if self.nim.isFBCLink() and self["config"].getCurrent() in (self.advancedLof, self.advancedConnected):
@@ -727,14 +737,14 @@ class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
 			self.nimConfig.configMode.selectNext()
 			self["config"].invalidate(self.configMode)
 			self.setTextKeyBlue()
-			self.changedEntry()
+			self.createSetup()
 
 	def nothingConnectedShortcut(self):
 		if self.isChanged():
 			for x in self["config"].list:
 				x[1].cancel()
 			self.setTextKeyBlue()
-			self.changedEntry()
+			self.createSetup()
 
 	def countrycodeToCountry(self, cc):
 		if not hasattr(self, 'countrycodes'):
