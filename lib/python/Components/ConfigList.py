@@ -144,13 +144,23 @@ class ConfigList(GUIComponent):
 
 
 class ConfigListScreen:
-	def __init__(self, list, session=None, on_change=None, fullUI=False):
+	def __init__(self, list, session=None, on_change=None, fullUI=False, yellow_button={}, blue_button={}):
 		self.entryChanged = on_change if on_change is not None else lambda: None
 		if fullUI:
 			if "key_red" not in self:
 				self["key_red"] = StaticText(_("Cancel"))
 			if "key_green" not in self:
 				self["key_green"] = StaticText(_("Save"))
+			if "key_yellow" not in self and yellow_button:
+				self["key_yellow"] = StaticText(yellow_button.get('text', ''))
+				self["key_yellowActions"] = HelpableActionMap(self, ["ColorActions"], {
+					"yellow": (yellow_button['function'], yellow_button.get('helptext', _("Yellow button function"))),
+				}, prio=1, description=_("Common Setup Actions"))
+			if "key_blue" not in self and blue_button:
+				self["key_blue"] = StaticText(blue_button.get('text', ''))
+				self["key_blueActions"] = HelpableActionMap(self, ["ColorActions"], {
+					"blue": (blue_button['function'], blue_button.get('helptext', _("Blue button function"))),
+				}, prio=1, description=_("Common Setup Actions"))
 			self["fullUIActions"] = HelpableActionMap(self, ["ConfigListActions"], {
 				"cancel": (self.keyCancel, _("Cancel any changed settings and exit")),
 				"close": (self.closeRecursive, _("Cancel any changed settings and exit all menus")),
