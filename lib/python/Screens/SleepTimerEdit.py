@@ -7,7 +7,7 @@ from time import time, localtime, mktime
 
 class SleepTimerEdit(Setup):
 	def __init__(self, session):
-		Setup.__init__(self, session, None)
+		Setup.__init__(self, session, None, blue_button={'function': self.startSleeptimer, 'helptext': _("Start/Stop Sleeptimer")})
 		self.skinName = ["SleepTimerSetup", "Setup"]
 		self.setTitle(_("SleepTimer Configuration"))
 
@@ -110,6 +110,7 @@ class SleepTimerEdit(Setup):
 				config.usage.poweroff_force,
 				_("Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected.")))
 		self["config"].list = conflist
+		self["key_blue"].text = _("Stop Sleeptimer") if config.usage.sleep_timer.value == "0" else _("Start Sleeptimer")
 
 	def keySave(self):
 		if self["config"].isChanged():
@@ -127,21 +128,17 @@ class SleepTimerEdit(Setup):
 				config.usage.poweroff_enabled.value = False
 			for x in self["config"].list:
 				x[1].save()
-		if self.getCurrentEntry().startswith(_("Sleeptimer")):
-			sleepTimer = config.usage.sleep_timer.value
-			if sleepTimer == "event_standby":
-				sleepTimer = self.currentEventTime()
-			else:
-				sleepTimer = int(sleepTimer)
-			if sleepTimer or not self.getCurrentEntry().endswith(_("(not activated)")):
-				InfoBar.instance and InfoBar.instance.setSleepTimer(sleepTimer)
-			self.close(True)
 		self.close()
 
-	def keyMenuCallback(self, answer):
-		Setup.keyMenuCallback(self, answer)
-		if answer and self.getCurrentEntry().startswith(_("Sleeptimer")):
-			self.keySave()
+	def startSleeptimer(self):
+		sleepTimer = config.usage.sleep_timer.value
+		if sleepTimer == "event_standby":
+			sleepTimer = self.currentEventTime()
+		else:
+			sleepTimer = int(sleepTimer)
+		if sleepTimer or not self.getCurrentEntry().endswith(_("(not activated)")):
+			InfoBar.instance and InfoBar.instance.setSleepTimer(sleepTimer)
+		self.close(True)
 
 	def currentEventTime(self):
 		remaining = 0
