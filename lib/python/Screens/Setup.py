@@ -20,7 +20,7 @@ setupModTimes = {}
 
 
 class Setup(ConfigListScreen, Screen, HelpableScreen):
-	def __init__(self, session, setup, plugin=None, PluginLanguageDomain=None, yellow_button={}, blue_button={}):
+	def __init__(self, session, setup, plugin=None, PluginLanguageDomain=None, yellow_button=None, blue_button=None):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 		self.setup = setup

@@ -144,7 +144,7 @@ class ConfigList(GUIComponent):
 
 
 class ConfigListScreen:
-	def __init__(self, list, session=None, on_change=None, fullUI=False, yellow_button={}, blue_button={}):
+	def __init__(self, list, session=None, on_change=None, fullUI=False, yellow_button=None, blue_button=None):
 		self.entryChanged = on_change if on_change is not None else lambda: None
 		if fullUI:
 			if "key_red" not in self:
