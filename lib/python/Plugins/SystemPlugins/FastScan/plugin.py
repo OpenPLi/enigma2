@@ -2,6 +2,7 @@
 from Plugins.Plugin import PluginDescriptor
 
 from Screens.Screen import Screen
+from Screens.Setup import Setup
 from Screens.MessageBox import MessageBox
 from Components.config import config, ConfigSelection, ConfigYesNo, ConfigSubsection, ConfigText
 from Components.ConfigList import ConfigListScreen
@@ -148,7 +149,7 @@ class FastScanStatus(Screen):
 		self.close()
 
 
-class FastScanScreen(ConfigListScreen, Screen):
+class FastScanScreen(Setup):
 	skin = """
 	<screen position="100,115" size="520,290" title="FastScan">
 		<widget name="config" position="10,10" size="500,250" scrollbarMode="showOnDemand" />
@@ -156,9 +157,6 @@ class FastScanScreen(ConfigListScreen, Screen):
 	</screen>"""
 
 	def __init__(self, session):
-		Screen.__init__(self, session)
-
-		self.setTitle(_("FastScan"))
 		lastConfiguration = eval(config.misc.fastscan.last_configuration.value)
 
 		def providerChanged(configEntry):
@@ -188,8 +186,8 @@ class FastScanScreen(ConfigListScreen, Screen):
 		auto_providers = config.misc.fastscan.autoproviders.value.split(",")
 		for provider in providers:
 			self.config_autoproviders[provider[0]] = ConfigYesNo(default=provider[0] in auto_providers)
-		self.list = []
-		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.createSetup, fullUI=True, blue_button={'function': self.startScan, 'helptext': _("Start fastscan")})
+		Setup.__init__(self, session, None, blue_button={'function': self.startScan, 'helptext': _("Start fastscan")})
+		self.setTitle(_("FastScan"))
 		self.createSetup()
 		self.finished_cb = None
 
