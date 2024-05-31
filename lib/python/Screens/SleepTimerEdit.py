@@ -7,7 +7,7 @@ from time import time, localtime, mktime
 
 class SleepTimerEdit(Setup):
 	def __init__(self, session):
-		Setup.__init__(self, session, None, blue_button={'function': self.startSleeptimer, 'helptext': _("Start/Stop Sleeptimer")})
+		Setup.__init__(self, session, blue_button={'function': self.startSleeptimer, 'helptext': _("Start/Stop Sleeptimer")})
 		self.skinName = ["SleepTimerSetup", "Setup"]
 		self.setTitle(_("SleepTimer Configuration"))
 

@@ -186,7 +186,7 @@ class FastScanScreen(Setup):
 		auto_providers = config.misc.fastscan.autoproviders.value.split(",")
 		for provider in providers:
 			self.config_autoproviders[provider[0]] = ConfigYesNo(default=provider[0] in auto_providers)
-		Setup.__init__(self, session, None, blue_button={'function': self.startScan, 'helptext': _("Start fastscan")})
+		Setup.__init__(self, session, blue_button={'function': self.startScan, 'helptext': _("Start fastscan")})
 		self.setTitle(_("FastScan"))
 		self.createSetup()
 		self.finished_cb = None
