@@ -1,5 +1,6 @@
 from enigma import eDVBDB, getLinkedSlotID, eDVBResourceManager
 from Screens.Screen import Screen
+from Screens.Setup import Setup
 from Components.SystemInfo import BoxInfo
 from Components.ActionMap import ActionMap
 from Components.ConfigList import ConfigListScreen
@@ -22,7 +23,18 @@ from time import mktime, localtime, time
 from datetime import datetime
 
 
-class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
+class NimSetup(Setup, ServiceStopScreen):
+	def __init__(self, session, slotid):
+		self.slotid = slotid
+		self.nim = nimmanager.nim_slots[slotid]
+		self.nimConfig = self.nim.config
+		self.list = []
+		Setup.__init__(self, session, None, yellow_button={'function': self.key_yellow, 'helptext': _("Toggle Configuration Mode or AutoDisqc")},
+					   blue_button={'function': self.key_blue, 'helptext': _("Set all the settings back as they were")})
+		ServiceStopScreen.__init__(self)
+		self.createSetup()
+		self.setTitle(_("Setup") + " " + self.nim.friendly_full_description)
+
 	def createSimpleSetup(self, list, mode):
 		nim = self.nimConfig
 
@@ -317,10 +329,10 @@ class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
 			self.list.append((_("Force legacy signal stats"), self.nimConfig.force_legacy_signal_stats, _("If set to 'yes' signal values (SNR, etc) will be calculated from API V3. This is an old API version that has now been superseded.")))
 
 		self["config"].list = self.list
-		self.setTextKeyYellow()
+		self["key_yellow"].setText((self.nimConfig.configMode.value == "simple" and self.nimConfig.diseqcMode.value in ("single", "diseqc_a_b", "diseqc_a_b_c_d") and (not self.nim.isCombined() or self.nimConfig.configModeDVBS.value)) and _("Auto DiSEqC") or self.configMode and _("Configuration mode") or "")
+		self["key_blue"].setText(self.isChanged() and _("Set default") or "")
 
 	def newConfig(self):
-		self.setTextKeyBlue()
 		if self["config"].getCurrent() == self.multiType:
 			update_slots = [self.slotid]
 			from Components.NimManager import InitNimManager
@@ -596,32 +608,6 @@ class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
 		else:
 			self.restartPrevService()
 
-	def __init__(self, session, slotid):
-		Screen.__init__(self, session)
-		self.list = []
-		ServiceStopScreen.__init__(self)
-		ConfigListScreen.__init__(self, self.list, on_change=self.changedEntry)
-
-		self["key_red"] = StaticText(_("Cancel"))
-		self["key_green"] = StaticText(_("Save"))
-		self["key_yellow"] = StaticText("")
-		self["key_blue"] = StaticText("")
-		self["description"] = Label("")
-		self["actions"] = ActionMap(["SetupActions", "SatlistShortcutAction"],
-		{
-			"ok": self.keySelect,
-			"save": self.keySave,
-			"cancel": self.keyCancel,
-			"changetype": self.changeConfigurationMode,
-			"nothingconnected": self.nothingConnectedShortcut
-		}, -2)
-
-		self.slotid = slotid
-		self.nim = nimmanager.nim_slots[slotid]
-		self.nimConfig = self.nim.config
-		self.createSetup()
-		self.setTitle(_("Setup") + " " + self.nim.friendly_full_description)
-
 	def changedEntry(self):
 		current = self["config"].getCurrent()
 		if current[1].isChanged():
@@ -640,12 +626,6 @@ class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
 			self.keySelect()
 		else:
 			self.newConfig()
-
-	def setTextKeyYellow(self):
-		self["key_yellow"].setText((self.nimConfig.configMode.value == "simple" and self.nimConfig.diseqcMode.value in ("single", "diseqc_a_b", "diseqc_a_b_c_d") and (not self.nim.isCombined() or self.nimConfig.configModeDVBS.value)) and _("Auto DiSEqC") or self.configMode and _("Configuration mode") or "")
-
-	def setTextKeyBlue(self):
-		self["key_blue"].setText(self.isChanged() and _("Set default") or "")
 
 	def keyRight(self):
 		if self.nim.isFBCLink() and self["config"].getCurrent() in (self.advancedLof, self.advancedConnected):
@@ -730,20 +710,18 @@ class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
 		self.saveAll()
 		self.restartPrevService()
 
-	def changeConfigurationMode(self):
+	def key_yellow(self):
 		if self.nimConfig.configMode.value == "simple" and self.nimConfig.diseqcMode.value in ("single", "diseqc_a_b", "diseqc_a_b_c_d") and (not self.nim.isCombined() or self.nimConfig.configModeDVBS.value):
 			self.autoDiseqcRun(self.nimConfig.diseqcMode.value == "diseqc_a_b_c_d" and 4 or self.nimConfig.diseqcMode.value == "diseqc_a_b" and 2 or 1)
 		elif self.configMode:
 			self.nimConfig.configMode.selectNext()
 			self["config"].invalidate(self.configMode)
-			self.setTextKeyBlue()
 			self.createSetup()
 
-	def nothingConnectedShortcut(self):
+	def key_blue(self):
 		if self.isChanged():
 			for x in self["config"].list:
 				x[1].cancel()
-			self.setTextKeyBlue()
 			self.createSetup()
 
 	def countrycodeToCountry(self, cc):
