@@ -3,7 +3,6 @@ from Screens.Screen import Screen
 from Screens.Setup import Setup
 from Components.SystemInfo import BoxInfo
 from Components.ActionMap import ActionMap
-from Components.ConfigList import ConfigListScreen
 from Components.NimManager import nimmanager
 from Components.Button import Button
 from Components.Label import Label
@@ -555,7 +554,7 @@ class NimSetup(Setup, ServiceStopScreen):
 			conf = self.nimConfig.userSatellitesList
 			self.session.openWithCallback(boundFunction(self.updateConfUserSatellitesList, conf), SelectSatsEntryScreen, userSatlist=conf.value)
 		else:
-			ConfigListScreen.keySelect(self)
+			Setup.keySelect(self)
 
 	def updateConfUserSatellitesList(self, conf, val=None):
 		if val is not None:
@@ -615,12 +614,12 @@ class NimSetup(Setup, ServiceStopScreen):
 			self.manipulatedItems.remove(current)
 		if isinstance(current[1], (ConfigBoolean, ConfigSelection)):
 			self.createSetup()
-		ConfigListScreen.changedEntry(self)  # force summary update immediately, not just on select/deselect
+		Setup.changedEntry(self)  # force summary update immediately, not just on select/deselect
 
 	def keyLeft(self):
 		if self.nim.isFBCLink() and self["config"].getCurrent() in (self.advancedLof, self.advancedConnected):
 			return
-		ConfigListScreen.keyLeft(self)
+		Setup.keyLeft(self)
 		if self["config"].getCurrent() in (self.advancedSelectSatsEntry, self.selectSatsEntry):
 			self.keySelect()
 		else:
@@ -629,14 +628,14 @@ class NimSetup(Setup, ServiceStopScreen):
 	def keyRight(self):
 		if self.nim.isFBCLink() and self["config"].getCurrent() in (self.advancedLof, self.advancedConnected):
 			return
-		ConfigListScreen.keyRight(self)
+		Setup.keyRight(self)
 		if self["config"].getCurrent() in (self.advancedSelectSatsEntry, self.selectSatsEntry):
 			self.keySelect()
 		else:
 			self.newConfig()
 
 	def handleKeyFileCallback(self, answer):
-		ConfigListScreen.handleKeyFileCallback(self, answer)
+		Setup.handleKeyFileCallback(self, answer)
 		self.newConfig()
 
 	def keyCancel(self):
