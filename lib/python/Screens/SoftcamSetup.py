@@ -129,13 +129,6 @@ class SoftcamSetup(Setup):
 		self.close()
 		self.session.nav.playService(self.oldref, adjust=False)
 
-	def restartCardServer(self):
-		if hasattr(self, 'cardservers'):
-			self.restart("c")
-
-	def restartSoftcam(self):
-		self.restart("s")
-
 	def saveAll(self):
 		what = ''
 		if hasattr(self, 'cardservers') and (self.cardservers.value != self.cardserver.current()):
