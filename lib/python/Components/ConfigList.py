@@ -144,7 +144,7 @@ class ConfigList(GUIComponent):
 
 
 class ConfigListScreen:
-	def __init__(self, list, session=None, on_change=None, fullUI=False, yellow_button=None, blue_button=None):
+	def __init__(self, list, session=None, on_change=None, fullUI=False, yellow_button=None, blue_button=None, menu_button=None):
 		self.entryChanged = on_change if on_change is not None else lambda: None
 		if fullUI:
 			if "key_red" not in self:
@@ -161,13 +161,16 @@ class ConfigListScreen:
 				self["key_blueActions"] = HelpableActionMap(self, ["ColorActions"], {
 					"blue": (blue_button['function'], blue_button.get('helptext', _("Blue button function"))),
 				}, prio=1, description=_("Common Setup Actions"))
+			if "key_menu" not in self and menu_button:
+				self["key_menu"] = StaticText(menu_button.get('text', ''))
+				self["menuConfigActions"] = HelpableActionMap(self, "ConfigListActions", {
+					"menu": (menu_button['function'], menu_button.get('helptext', _("Menu button function"))),
+				}, prio=1, description=_("Common Setup Actions"))
 			self["fullUIActions"] = HelpableActionMap(self, ["ConfigListActions"], {
 				"cancel": (self.keyCancel, _("Cancel any changed settings and exit")),
 				"close": (self.closeRecursive, _("Cancel any changed settings and exit all menus")),
 				"save": (self.keySave, _("Save all changed settings and exit"))
 			}, prio=1, description=_("Common Setup Actions"))
-		if "key_menu" not in self:
-			self["key_menu"] = StaticText(_("MENU"))
 		if "HelpWindow" not in self:
 			self["HelpWindow"] = Pixmap()
 			self["HelpWindow"].hide()
@@ -188,10 +191,6 @@ class ConfigListScreen:
 			"pageDown": (self.keyPageDown, _("Move down a screen")),
 			"bottom": (self.keyBottom, _("Move to last line / screen"))
 		}, prio=1, description=_("Common Setup Actions"))
-		self["menuConfigActions"] = HelpableActionMap(self, "ConfigListActions", {
-			"menu": (self.keyMenu, _("Display selection list as a selection menu")),
-		}, prio=1, description=_("Common Setup Actions"))
-		self["menuConfigActions"].setEnabled(False if fullUI else True)
 		self["editConfigActions"] = HelpableNumberActionMap(self, ["NumberActions", "TextEditActions"], {
 			"backspace": (self.keyBackspace, _("Delete character to left of cursor or select AM times")),
 			"delete": (self.keyDelete, _("Delete character under cursor or select PM times")),
@@ -268,12 +267,6 @@ class ConfigListScreen:
 				self["editConfigActions"].setEnabled(True)
 			else:
 				self["editConfigActions"].setEnabled(False)
-			if isinstance(currConfig[1], ConfigSelection) and not isinstance(currConfig[1], ConfigNothing):
-				self["menuConfigActions"].setEnabled(True)
-				self["key_menu"].setText(_("MENU"))
-			else:
-				self["menuConfigActions"].setEnabled(False)
-				self["key_menu"].setText("")
 			if isinstance(currConfig[1], (ConfigText, ConfigMacText)) and "HelpWindow" in self and currConfig[1].help_window and currConfig[1].help_window.instance is not None:
 				helpwindowpos = self["HelpWindow"].getPosition()
 				currConfig[1].help_window.instance.move(ePoint(helpwindowpos[0], helpwindowpos[1]))
@@ -308,7 +301,7 @@ class ConfigListScreen:
 		if isinstance(self.getCurrentItem(), ConfigBoolean):
 			self.keyToggle()
 		elif isinstance(self.getCurrentItem(), ConfigSelection):
-			self.keyMenu()
+			self.keySelection()
 		elif isinstance(self.getCurrentItem(), ConfigText) and not isinstance(self.getCurrentItem(), ConfigNumber):
 			self.keyText()
 		else:
@@ -328,17 +321,17 @@ class ConfigListScreen:
 			if callback != prev:
 				self.entryChanged()
 
-	def keyMenu(self):
+	def keySelection(self):
 		currConfig = self["config"].getCurrent()
 		if currConfig and currConfig[1].enabled and hasattr(currConfig[1], "description") and len(currConfig[1].choices.choices) > 1:
 			self.session.openWithCallback(
-				self.keyMenuCallback, ChoiceBox, title=currConfig[0],
+				self.keySelectionCallback, ChoiceBox, title=currConfig[0],
 				list=list(zip(currConfig[1].description, currConfig[1].choices)),
 				selection=currConfig[1].getIndex(),
 				keys=[]
 			)
 
-	def keyMenuCallback(self, answer):
+	def keySelectionCallback(self, answer):
 		if answer:
 			self["config"].getCurrent()[1].value = answer[1]
 			self["config"].invalidateCurrent()
