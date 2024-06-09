@@ -314,10 +314,6 @@ class CableTransponderSearchSupport:
 			exe_path = "/usr/bin/%s" % bin_name.split()[0]
 			cmd = "%s --init --scan --verbose --wakeup --inv 2 --bus %d" % (bin_name, bus)
 
-		if not fileExists(exe_path):
-			self.session.open(MessageBox, _("Cable scan executable utility not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)
-			return
-
 		if cableConfig.scan_type.value == "bands":
 			cmd += " --scan-bands "
 			bands = 0
@@ -374,7 +370,10 @@ class CableTransponderSearchSupport:
 		print(exe_path, " CMD is", cmd)
 
 		self.cable_search_container.execute(cmd)
-		tmpstr = _("Looking for active transponders in the cable network. Please wait...")
+		if fileExists(exe_path):
+			tmpstr = _("Looking for active transponders in the cable network. Please wait...")
+		else:
+			tmpstr = _("Cable scan executable utility not found '%s'!") % exe_path
 		tmpstr += "\n\n..."
 		self.cable_search_session = self.session.openWithCallback(self.cableTransponderSearchSessionClosed, MessageBox, tmpstr, MessageBox.TYPE_INFO)
 
