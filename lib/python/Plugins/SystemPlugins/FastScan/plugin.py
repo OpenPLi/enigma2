@@ -186,7 +186,7 @@ class FastScanScreen(Setup):
 		auto_providers = config.misc.fastscan.autoproviders.value.split(",")
 		for provider in providers:
 			self.config_autoproviders[provider[0]] = ConfigYesNo(default=provider[0] in auto_providers)
-		Setup.__init__(self, session, blue_button={'function': self.startScan, 'helptext': _("Start fastscan")})
+		Setup.__init__(self, session, blue_button={'function': self.startScan, 'helptext': _("Start Fastscan")}, menu_button={'function': self.startScan, 'helptext': _("Start Fastscan")})
 		self.setTitle(_("FastScan"))
 		self.createSetup()
 		self.finished_cb = None
@@ -210,7 +210,7 @@ class FastScanScreen(Setup):
 					if nimmanager.getNimListForSat(transponders[provider[1][0]][3]):
 						self.list.append((_("Enable auto fastscan for %s") % provider[0], self.config_autoproviders[provider[0]]))
 		self["config"].list = self.list
-		self["key_blue"].text = _("Scan") if self.scan_provider.value else ""
+		self["key_blue"].text = _("Start Fastscan") if self.scan_provider.value else ""
 
 	def saveConfiguration(self):
 		if self.scan_provider.value:
