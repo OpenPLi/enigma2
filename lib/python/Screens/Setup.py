@@ -64,36 +64,37 @@ class Setup(ConfigListScreen, Screen, HelpableScreen):
 		ConfigListScreen.changedEntry(self)  # force summary update immediately, not just on select/deselect
 
 	def createSetup(self, appendItems=None, prependItems=None):
-		oldList = self.list
-		self.showDefaultChanged = False
-		self.graphicSwitchChanged = False
-		self.list = prependItems or []
-		title = None
-		xmlData = setupDom(self.setup, self.plugin)
-		for setup in xmlData.findall("setup"):
-			if setup.get("key") == self.setup:
-				self.addItems(setup)
-				skin = setup.get("skin", None)
-				if skin and skin != "":
-					self.skinName.insert(0, skin)
-				title = setup.get("title", None)
-				# print("[Setup] [createSetup] %s" % title)
-				# If this break is executed then there can only be one setup tag with this key.
-				# This may not be appropriate if conditional setup blocks become available.
-				break
-		if appendItems:
-			self.list += appendItems
-		if title:
-			title = dgettext(self.pluginLanguageDomain, title) if self.pluginLanguageDomain else _(title)
-		self.setTitle(title if title else _("Setup"))
-		if not self.list:  # This forces the self["config"] list to be cleared if there are no eligible items available to be displayed.
-			self["config"].list = self.list
-		elif self.list != oldList or self.showDefaultChanged or self.graphicSwitchChanged:
-			currentItem = self["config"].getCurrent()
-			self["config"].list = self.list
-			if config.usage.sort_settings.value:
-				self["config"].list.sort(key=lambda x: x[0])
-			self.moveToItem(currentItem)
+		if self.setup:
+			oldList = self.list
+			self.showDefaultChanged = False
+			self.graphicSwitchChanged = False
+			self.list = prependItems or []
+			title = None
+			xmlData = setupDom(self.setup, self.plugin)
+			for setup in xmlData.findall("setup"):
+				if setup.get("key") == self.setup:
+					self.addItems(setup)
+					skin = setup.get("skin", None)
+					if skin and skin != "":
+						self.skinName.insert(0, skin)
+					title = setup.get("title", None)
+					# print("[Setup] [createSetup] %s" % title)
+					# If this break is executed then there can only be one setup tag with this key.
+					# This may not be appropriate if conditional setup blocks become available.
+					break
+			if appendItems:
+				self.list += appendItems
+			if title:
+				title = dgettext(self.pluginLanguageDomain, title) if self.pluginLanguageDomain else _(title)
+			self.setTitle(title if title else _("Setup"))
+			if not self.list:  # This forces the self["config"] list to be cleared if there are no eligible items available to be displayed.
+				self["config"].list = self.list
+			elif self.list != oldList or self.showDefaultChanged or self.graphicSwitchChanged:
+				currentItem = self["config"].getCurrent()
+				self["config"].list = self.list
+				if config.usage.sort_settings.value:
+					self["config"].list.sort(key=lambda x: x[0])
+				self.moveToItem(currentItem)
 
 	def addItems(self, parentNode, including=True):
 		for element in parentNode:
