@@ -119,21 +119,18 @@ config.plugins.CableScan.auto = ConfigYesNo(default=True)
 class CableScanScreen(Setup):
 	def __init__(self, session, nimlist):
 		Setup.__init__(self, session, blue_button={'function': self.startScan, 'text': _("Start CableScan"), 'helptext': _("Start Cablescan")})
-		self.prevservice = None
 		self.setTitle(_("Cable Scan"))
+		self.prevservice = None
 		self.nimlist = nimlist
-		self.createSetup()
-
-	def createSetup(self):
-		configList = []
-		configList.append((_('Frequency'), config.plugins.CableScan.frequency))
-		configList.append((_('Symbol rate'), config.plugins.CableScan.symbolrate))
-		configList.append((_('Modulation'), config.plugins.CableScan.modulation))
-		configList.append((_('Network ID') + _(' (0 - all networks)'), config.plugins.CableScan.networkid))
-		configList.append((_("Use official channel numbering"), config.plugins.CableScan.keepnumbering))
-		configList.append((_("HD list"), config.plugins.CableScan.hdlist))
-		configList.append((_("Enable auto cable scan"), config.plugins.CableScan.auto))
-		self["config"].list = configList
+		self["config"].list = [
+			(_('Frequency'), config.plugins.CableScan.frequency),
+			(_('Symbol rate'), config.plugins.CableScan.symbolrate),
+			(_('Modulation'), config.plugins.CableScan.modulation),
+			(_('Network ID') + _(' (0 - all networks)'), config.plugins.CableScan.networkid),
+			(_("Use official channel numbering"), config.plugins.CableScan.keepnumbering),
+			(_("HD list"), config.plugins.CableScan.hdlist),
+			(_("Enable auto cable scan"), config.plugins.CableScan.auto)
+		]
 
 	def restoreService(self):
 		if self.prevservice:
