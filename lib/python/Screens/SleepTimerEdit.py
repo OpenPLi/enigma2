@@ -132,6 +132,7 @@ class SleepTimerEdit(Setup):
 		self.close()
 
 	def startSleeptimer(self):
+		config.usage.sleep_timer.save()
 		sleepTimer = config.usage.sleep_timer.value
 		if sleepTimer == "event_standby":
 			sleepTimer = self.currentEventTime()
