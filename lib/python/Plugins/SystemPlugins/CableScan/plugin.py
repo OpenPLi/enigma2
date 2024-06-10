@@ -1,4 +1,5 @@
 from Screens.Screen import Screen
+from Screens.Setup import Setup
 from Screens.MessageBox import MessageBox
 from Plugins.Plugin import PluginDescriptor
 
@@ -6,7 +7,6 @@ from Components.Label import Label
 from Components.ActionMap import ActionMap
 from Components.NimManager import nimmanager
 from Components.config import config, ConfigSubsection, ConfigSelection, ConfigYesNo, ConfigInteger, ConfigFloat
-from Components.ConfigList import ConfigListScreen
 from Components.Sources.StaticText import StaticText
 from Components.ProgressBar import ProgressBar
 from Components.Pixmap import Pixmap
@@ -116,46 +116,24 @@ config.plugins.CableScan.modulation = ConfigSelection(
 config.plugins.CableScan.auto = ConfigYesNo(default=True)
 
 
-class CableScanScreen(ConfigListScreen, Screen):
-	skin = """
-	<screen position="center,115" size="520,390" title="Cable Scan">
-		<widget name="config" position="10,10" size="500,250" scrollbarMode="showOnDemand" />
-		<widget name="introduction" position="10,265" size="500,50" font="Regular;20" halign="center" />
-		<ePixmap pixmap="buttons/red.png" position="100,330" size="140,40" alphatest="on"/>
-		<ePixmap pixmap="buttons/green.png" position="270,330" size="140,40" alphatest="on"/>
-		<widget source="key_red" render="Label" position="100,330" zPosition="1" size="135,40" font="Regular;19" halign="center" valign="center" backgroundColor="#9f1313" transparent="1"/>
-		<widget source="key_green" render="Label" position="270,330" zPosition="1" size="135,40" font="Regular;19" halign="center" valign="center" backgroundColor="#1f771f" transparent="1"/>
-	</screen>"""
-
+class CableScanScreen(Setup):
 	def __init__(self, session, nimlist):
-		Screen.__init__(self, session)
-
-		self.setTitle(_("Cable Scan"))
-		self["key_red"] = StaticText(_("Cancel"))
-		self["key_green"] = StaticText(_("Save"))
-
-		self["actions"] = ActionMap(["SetupActions", "MenuActions"],
-		{
-			"ok": self.keyGo,
-			"cancel": self.keyCancel,
-			"save": self.keySave,
-			"menu": self.closeRecursive,
-		}, -2)
-
-		self.nimlist = nimlist
+		Setup.__init__(self, session, blue_button={'function': self.startScan, 'text': _("Start CableScan"), 'helptext': _("Start Cablescan")})
 		self.prevservice = None
+		self.setTitle(_("Cable Scan"))
+		self.nimlist = nimlist
+		self.createSetup()
 
-		self.list = []
-		self.list.append((_('Frequency'), config.plugins.CableScan.frequency))
-		self.list.append((_('Symbol rate'), config.plugins.CableScan.symbolrate))
-		self.list.append((_('Modulation'), config.plugins.CableScan.modulation))
-		self.list.append((_('Network ID') + _(' (0 - all networks)'), config.plugins.CableScan.networkid))
-		self.list.append((_("Use official channel numbering"), config.plugins.CableScan.keepnumbering))
-		self.list.append((_("HD list"), config.plugins.CableScan.hdlist))
-		self.list.append((_("Enable auto cable scan"), config.plugins.CableScan.auto))
-
-		ConfigListScreen.__init__(self, self.list, session)
-		self["introduction"] = Label(_("Configure your network settings and press OK to scan"))
+	def createSetup(self):
+		configList = []
+		configList.append((_('Frequency'), config.plugins.CableScan.frequency))
+		configList.append((_('Symbol rate'), config.plugins.CableScan.symbolrate))
+		configList.append((_('Modulation'), config.plugins.CableScan.modulation))
+		configList.append((_('Network ID') + _(' (0 - all networks)'), config.plugins.CableScan.networkid))
+		configList.append((_("Use official channel numbering"), config.plugins.CableScan.keepnumbering))
+		configList.append((_("HD list"), config.plugins.CableScan.hdlist))
+		configList.append((_("Enable auto cable scan"), config.plugins.CableScan.auto))
+		self["config"].list = configList
 
 	def restoreService(self):
 		if self.prevservice:
@@ -165,10 +143,6 @@ class CableScanScreen(ConfigListScreen, Screen):
 		self.restoreService()
 		config.plugins.CableScan.save()
 		self.close()
-
-	def keyGo(self):
-		config.plugins.CableScan.save()
-		self.startScan()
 
 	def getFreeTuner(self):
 		dvbc_tuners_mask = sum([2**int(x) for x in self.nimlist])
