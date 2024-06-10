@@ -15,8 +15,10 @@ class SleepTimerEdit(Setup):
 		conflist = []
 		if InfoBar.instance and InfoBar.instance.sleepTimer.isActive():
 			statusSleeptimerText = _("(activated +%d min)") % InfoBar.instance.sleepTimerState()
+			self["key_blue"].text = _("Stop Sleeptimer")
 		else:
 			statusSleeptimerText = _("(not activated)")
+			self["key_blue"].text = "" if config.usage.sleep_timer.value == "0" else _("Start Sleeptimer")
 		conflist.append((_("Sleeptimer") + " " + statusSleeptimerText,
 			config.usage.sleep_timer,
 			_("Configure the duration in minutes for the sleeptimer. Select this entry and click OK or green to start/stop the sleeptimer")))
@@ -110,7 +112,6 @@ class SleepTimerEdit(Setup):
 				config.usage.poweroff_force,
 				_("Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected.")))
 		self["config"].list = conflist
-		self["key_blue"].text = _("Stop Sleeptimer") if config.usage.sleep_timer.value == "0" else _("Start Sleeptimer")
 
 	def keySave(self):
 		if self["config"].isChanged():
