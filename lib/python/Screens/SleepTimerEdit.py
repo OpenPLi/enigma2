@@ -21,7 +21,7 @@ class SleepTimerEdit(Setup):
 			self["key_blue"].text = "" if config.usage.sleep_timer.value == "0" else _("Start Sleeptimer")
 		conflist.append((_("Sleeptimer") + " " + statusSleeptimerText,
 			config.usage.sleep_timer,
-			_("Configure the duration in minutes for the sleeptimer. Select this entry and click OK or green to start/stop the sleeptimer")))
+			_("Configure the duration in minutes for the sleeptimer. Select this entry and click blue to start/stop the sleeptimer")))
 		conflist.append((_("Inactivity Sleeptimer"),
 			config.usage.inactivity_timer,
 			_("Configure the duration in hours the receiver should go to standby when the receiver is not controlled.")))
