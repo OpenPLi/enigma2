@@ -188,7 +188,6 @@ class FastScanScreen(Setup):
 			self.config_autoproviders[provider[0]] = ConfigYesNo(default=provider[0] in auto_providers)
 		Setup.__init__(self, session, blue_button={'function': self.startScan, 'helptext': _("Start Fastscan")}, menu_button={'function': self.startScan, 'helptext': _("Start Fastscan")})
 		self.setTitle(_("FastScan"))
-		self.createSetup()
 		self.finished_cb = None
 
 	def createSetup(self):
