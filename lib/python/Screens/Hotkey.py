@@ -229,6 +229,7 @@ def getHotkeyFunctions():
 	for plugin in plugins.getPluginsForMenu("gui"):
 		if plugin[2]:
 			hotkey.functions.append((plugin[0], "MenuPlugin/gui/" + plugin[2], "Setup"))
+	hotkey.functions.append((_("Skin Selection"), "Module/Screens.SkinSelector/SkinSelector", "Setup"))
 	hotkey.functions.append((_("PowerMenu"), "Menu/shutdown", "Power"))
 	hotkey.functions.append((_("Standby"), "Module/Screens.Standby/Standby", "Power"))
 	hotkey.functions.append((_("Restart"), "Module/Screens.Standby/TryQuitMainloop/2", "Power"))
