@@ -367,14 +367,17 @@ class CableTransponderSearchSupport:
 			cmd += " --sr "
 			cmd += str(cableConfig.scan_sr_ext2.value)
 			cmd += "000"
-		print(exe_path, " CMD is", cmd)
 
-		self.cable_search_container.execute(cmd)
 		if fileExists(exe_path):
 			tmpstr = _("Looking for active transponders in the cable network. Please wait...")
 		else:
-			tmpstr = _("Cable scan executable utility not found '%s'!") % exe_path
+			tmpstr = (_("Cable scan executable utility not found '%s'!") % exe_path) + "\n" + _("Please contact the manufacturer for clarification.")
+			cmd = "sleep 5\nexit 0"
 		tmpstr += "\n\n..."
+
+		print("[startCableTransponderSearch] ",exe_path, " CMD is", cmd)
+		self.cable_search_container.execute(cmd)
+
 		self.cable_search_session = self.session.openWithCallback(self.cableTransponderSearchSessionClosed, MessageBox, tmpstr, MessageBox.TYPE_INFO)
 
 
