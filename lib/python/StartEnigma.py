@@ -391,7 +391,7 @@ class PowerKey:
 				for x in root.findall("menu"):
 					if x.get("key") == "shutdown":
 						self.session.infobar = self
-						menu_screen = self.session.openWithCallback(self.MenuClosed, MainMenu, x)
+						menu_screen = self.session.open(MainMenu, x)
 						menu_screen.setTitle(_("Standby / restart"))
 						break
 
