@@ -250,7 +250,7 @@ class Menu(Screen, ProtectedScreen):
 	def layoutFinished(self):
 		self.screenContentChanged()
 		if self.menuImage and "menuimage" in self:
-			self["menuimage"].instance.setPixmap(self.menuImage)
+			self["Image"].instance.setPixmap(self.menuImage)
 
 	def loadMenuImage(self):
 		self.menuImage = None
@@ -259,7 +259,7 @@ class Menu(Screen, ProtectedScreen):
 			if menuImage:
 				self.menuImage = LoadPixmap(resolveFilename(SCOPE_GUISKIN, menuImage))
 				if self.menuImage:
-					self["menuimage"] = Pixmap()
+					self["Image"] = Pixmap()
 
 	def showHelp(self):
 		if config.usage.menu_show_numbers.value not in ("menu&plugins", "menu"):
