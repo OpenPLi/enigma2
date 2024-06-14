@@ -88,7 +88,7 @@ class Setup(ConfigListScreen, Screen, HelpableScreen):
 				title = dgettext(self.pluginLanguageDomain, title) if self.pluginLanguageDomain else _(title)
 			self.setTitle(title if title else _("Setup"))
 			if not self.list:  #If there are no eligible items available to be displayed then show at least one ConfigNothing item indicating this
-				self["config"].list = [(_("No config items available"), ConfigNothing())]
+				self["config"].list = [(_("No config items available"),)]
 			elif self.list != oldList or self.showDefaultChanged or self.graphicSwitchChanged:
 				currentItem = self["config"].getCurrent()
 				self["config"].list = self.list
