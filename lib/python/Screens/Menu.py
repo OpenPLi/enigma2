@@ -10,7 +10,7 @@ from Components.PluginComponent import plugins
 from Components.config import config, ConfigDictionarySet, NoSave
 from Components.SystemInfo import BoxInfo
 from Tools.BoundFunction import boundFunction
-from skin import parameters, menus, menuicons
+from skin import parameters, menuicons
 from Plugins.Plugin import PluginDescriptor
 from Tools.Directories import resolveFilename, SCOPE_SKINS, SCOPE_GUISKIN
 from Tools.LoadPixmap import LoadPixmap
@@ -233,7 +233,7 @@ class Menu(Screen, ProtectedScreen):
 		title = self.__class__.__name__ == "MenuSort" and _("Menusort (%s)") % title or title
 		self["title"] = StaticText(title)
 		self.setTitle(title)
-		self.loadMenuImage()
+		self.setImage(self.menuID, "menu")
 
 		self.number = 0
 		self.nextNumberTimer = eTimer()
@@ -249,17 +249,6 @@ class Menu(Screen, ProtectedScreen):
 
 	def layoutFinished(self):
 		self.screenContentChanged()
-		if self.menuImage and "menuimage" in self:
-			self["Image"].instance.setPixmap(self.menuImage)
-
-	def loadMenuImage(self):
-		self.menuImage = None
-		if menus and self.menuID:
-			menuImage = menus.get(self.menuID, menus.get("default", ""))
-			if menuImage:
-				self.menuImage = LoadPixmap(resolveFilename(SCOPE_GUISKIN, menuImage))
-				if self.menuImage:
-					self["Image"] = Pixmap()
 
 	def showHelp(self):
 		if config.usage.menu_show_numbers.value not in ("menu&plugins", "menu"):
