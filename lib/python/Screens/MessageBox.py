@@ -162,7 +162,7 @@ class MessageBox(Screen):
 		self.stopTimer()
 
 	def __repr__(self):
-		return str(type(self)) + "(" + self.text + ")"
+		return "%s(%s)" % (str(type(self)), self.text if hasattr(self, "text") else "<title>")
 
 	def getListWidth(self):
 		return self["list"].instance.getMaxItemTextWidth()

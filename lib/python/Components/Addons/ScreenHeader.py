@@ -4,8 +4,9 @@ from enigma import eListbox, eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, 
 
 from skin import applySkinFactor, parseFont, parseColor
 
-from Components.MultiContent import MultiContentEntryText
+from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaBlend
 from Components.Sources.StaticText import StaticText
+from Components.Pixmap import Pixmap
 
 
 
@@ -26,7 +27,7 @@ class ScreenHeader(GUIAddon):
 
 	def onContainerShown(self):
 		for x, val in self.sources.items():
-			if self.constructTitleItem not in val.onChanged:
+			if hasattr(val, "onChanged") and self.constructTitleItem not in val.onChanged:
 				val.onChanged.append(self.constructTitleItem)
 		self.l.setItemHeight(self.instance.size().height())
 		self.l.setItemWidth(self.instance.size().width())
@@ -41,24 +42,50 @@ class ScreenHeader(GUIAddon):
 
 	def buildEntry(self, sequence):
 		yPos = 0
+		xPos = 0
+		textItemsCount = 0
+		textItemsOffset = 0
 
 		res = [None]
-		isOneItem = len(sequence) == 1
-
+		
 		for idx, x in enumerate(sequence):
-			foreColor = self.titleForeground if idx == 0 else self.pathForeground
-			if isOneItem:
+			if isinstance(x, StaticText):
+				textItemsCount += 1
+				if idx > 0 and textItemsOffset == 0:
+					textItemsOffset = idx
+		
+		isOneItem = textItemsCount == 1
+		
+		for idx, x in enumerate(sequence):
+			if not isinstance(x, StaticText): # assume it is Pixmap
 				itemHeight = self.instance.size().height()
-			if not isOneItem and idx == 0:
-				itemHeight = self.instance.size().height()*2 // 3
-			elif idx == 1:
-				yPos = self.instance.size().height()*2 // 3 - 3
-				itemHeight = self.instance.size().height() // 3
-			res.append(MultiContentEntryText(
-					pos=(0, yPos),
-					size=(self.instance.size().width(), itemHeight),
-					font=2 if isOneItem and idx == 0 else idx, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER,
-					text=x.text.rstrip(">"),
+				pix_size = x.pixmap.size()
+				pixWidth = pix_size.width()
+				pixHeight = pix_size.height()
+				offset = (itemHeight - pixHeight) // 2
+				res.append(MultiContentEntryPixmapAlphaBlend(
+					pos=(0, offset),
+					size=(pixWidth, pixHeight),
+					png=x.pixmap))
+				xPos += pixWidth + offset
+			else:
+				foreColor = self.titleForeground if idx == 0 else self.pathForeground
+				if isOneItem:
+					itemHeight = self.instance.size().height()
+					yPos = 3
+				if not isOneItem and idx == textItemsOffset:
+					itemHeight = self.instance.size().height() * 2 // 3
+				elif idx == 1 + textItemsOffset:
+					yPos = self.instance.size().height() * 2 // 3 - 5
+					itemHeight = self.instance.size().height() // 3
+					
+				fontIndex = 2 if isOneItem and idx == textItemsOffset else idx - textItemsOffset
+
+				res.append(MultiContentEntryText(
+					pos=(xPos, yPos),
+					size=(self.instance.size().width() - xPos, itemHeight),
+					font=fontIndex, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER,
+					text=x.text,
 					color=foreColor, color_sel=foreColor,
 					backcolor=self.backgroundColor, backcolor_sel=self.backgroundColor))
 		return res
@@ -71,8 +98,11 @@ class ScreenHeader(GUIAddon):
 	def constructTitleItem(self):
 		sequence = []
 		for x, val in self.sources.items():
-			if isinstance(val, StaticText) and val.text:
-				if val not in sequence:
+			if isinstance(val, StaticText):
+				if hasattr(val, "text") and val.text and val not in sequence:
+					sequence.append(val)
+			elif isinstance(val, Pixmap):
+				if val and val not in sequence:
 					sequence.append(val)
 
 		self.updateAddon(sequence)

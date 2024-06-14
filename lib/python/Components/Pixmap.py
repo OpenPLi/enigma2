@@ -11,12 +11,17 @@ from skin import loadPixmap
 class Pixmap(GUIComponent):
 	GUI_WIDGET = ePixmap
 
+	def __init__(self):
+		GUIComponent.__init__(self)
+		self.pixmap = None
+
 	def getSize(self):
 		s = self.instance.size()
 		return (s.width(), s.height())
 	
 	def setPixmap(self, pixmap):
-		self.instance.setPixmap(pixmap)
+		self.pixmap = pixmap
+		self.instance.setPixmap(self.pixmap)
 
 
 class PixmapConditional(ConditionalWidget, Pixmap):
