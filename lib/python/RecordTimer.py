@@ -429,7 +429,11 @@ class RecordTimerEntry(timer.TimerEntry):
 				# i.e. cable / sat.. then the second recording needs an own extension... when we create the file
 				# here than calculateFilename is happy
 				if not self.justplay:
-					open(self.Filename + self.record_service.getFilenameExtension(), "w").close()
+					try:
+						open(self.Filename + self.record_service.getFilenameExtension(), "w").close()
+					except Exception as e:
+						AddNotification(MessageBox, _("Timer recording failed. No space left on device!\n"), type=MessageBox.TYPE_ERROR, timeout=0)
+						print("[TIMER] Error:", e)
 					# Give the Trashcan a chance to clean up
 					try:
 						trashcan_instance.cleanIfIdle(self.Filename)
