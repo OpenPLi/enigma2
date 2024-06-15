@@ -44,30 +44,33 @@ class ScreenHeader(GUIAddon):
 		yPos = 0
 		xPos = 0
 		textItemsCount = 0
-		textItemsOffset = 0
+		textItemsOffset = -1
 
 		res = [None]
 		
 		for idx, x in enumerate(sequence):
 			if isinstance(x, StaticText):
 				textItemsCount += 1
-				if idx > 0 and textItemsOffset == 0:
+				if textItemsOffset == -1:
 					textItemsOffset = idx
 		
 		isOneItem = textItemsCount == 1
 		
+		itemHeight = self.instance.size().height()
+		
 		for idx, x in enumerate(sequence):
 			if not isinstance(x, StaticText): # assume it is Pixmap
-				itemHeight = self.instance.size().height()
-				pix_size = x.pixmap.size()
-				pixWidth = pix_size.width()
-				pixHeight = pix_size.height()
-				offset = (itemHeight - pixHeight) // 2
-				res.append(MultiContentEntryPixmapAlphaBlend(
-					pos=(0, offset),
-					size=(pixWidth, pixHeight),
-					png=x.pixmap))
-				xPos += pixWidth + offset
+				if x.pixmap:
+					itemHeight = self.instance.size().height()
+					pix_size = x.pixmap.size()
+					pixWidth = pix_size.width()
+					pixHeight = pix_size.height()
+					offset = (itemHeight - pixHeight) // 2
+					res.append(MultiContentEntryPixmapAlphaBlend(
+						pos=(0, offset),
+						size=(pixWidth, pixHeight),
+						png=x.pixmap))
+					xPos += pixWidth + offset
 			else:
 				foreColor = self.titleForeground if idx == 0 else self.pathForeground
 				if isOneItem:
